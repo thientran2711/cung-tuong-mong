@@ -3073,3 +3073,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (18:15Z) OWNER BUG BATCH before her flight (OD 24/11 ~18:05Z, 8 items) + Mục lục (OD ~18:15Z) → 5 workers: FLIGHT-DAYQ session_01V1ZZH3gRpyiEtyMHxaDzFg (opus BIG), FLIGHT-SOUND session_01V1ZZH34SdfenLQsuEhLQgx (opus), FLIGHT-TAINGHE session_01V1ZZH2nvEPBnQaH95MZt8N, FLIGHT-UI session_01V1ZZH2AqKTD4pMN7xGBN3C, FLIGHT-MUCLUC session_01V1ZZH1Rzd4b346U9eankkK (sonnet); refs dev/handover/refs/owner-2411-flight/f1–f10. KK21 told: flight bug kit parts first.
 - (18:15Z) ctx 41 % (410k/1M) ≥ roll line 37 % → ROLL. TAKEOVER_MAIN_126.md written.
 ## MAIN CHÍNH 125 → MAIN CHÍNH 126 HANDOVER (24/11 ~18:18Z): dev/handover/TAKEOVER_MAIN_126.md
+- (18:16Z) MAIN CHÍNH 126 = session_01V1ZZH3LU36oJRpijfqgKNb opened (child of 125, depth 1). 125 DISABLED its three scheduled tasks. 125 forwards anything late, then stops.
