@@ -340,6 +340,7 @@ function balOan(n,m){return String(Math.round(Math.abs(n)*BAL.relOan[m]))}
    figxTry = failed reads of img/FIGURES-x.json after which the Thái hậu's face is drawn without it (jfigx r2).
    figVar (art-wiring-1119) = how many colours of the t7/t8 dress a woman may wear (v0 + v1 + v2 painted); 1 = everyone in v0. */
 Object.assign(BAL,{ageMin:18,ageBand:[28,39,51,64],ageArt:["a18","a26","a36","a51","a65"],figVar:3,figxTry:3});
+BAL.ps.consAge[0]=BAL.ageMin;/* LAW 11 (ageband-r r1): consAge[0] = youngest adult = ageMin, not a typed 18 */
 function ageBandIx(a){let i=0;for(const c of BAL.ageBand)if(a>=c)i++;return i}
 /* the band of an art file tag ("a26" → 1; a bare number = that age's band; -1 = not a band tag) and the tag of an age */
 function ageArtIx(t){const s=String(t==null?"":t).toLowerCase().trim();const i=BAL.ageArt.indexOf(s);if(i>=0)return i;return /^\d+$/.test(s)?ageBandIx(+s):-1}
