@@ -4,7 +4,7 @@ PRIORITY #1 CHECK: brief's check (OD 0 | ledger 0 | claims 0 | main 0 | review/*
 
 ## Status: PILOT DONE — WAITING for ROOT-D1 go before the other 48
 - Branch review/kp23-redraw @ ec3f4a5: dev/art/kp23-redraw/ (build_prompts.py → prompts.json + txt/<key>.txt, 52 prompts; make_webp.py; gen_page.py + page.tpl.html; done.json).
-- Page: https://ctm-img.victoria-tntt.workers.dev/img/_review/kp23-redraw.html (old live act-<key>-h | new, whole pictures, tap = original 1536x2024; tick Giữ / Vẽ lại; button copies `KP23RD PICK: giu=… ve-lai=…`). LOOK Playwright Fold 755x1000 + iPad 1180x820: 8/8 images, no h-scroll, 0 errors.
+- Page: https://ctm-img.victoria-tntt.workers.dev/img/_review/kp23-redraw.html?v=1 (old live act-<key>-h | new, whole pictures, tap = original 1536x2024; tick Giữ / Vẽ lại; button copies `KP23RD PICK: giu=… ve-lai=…`). LOOK Playwright Fold 755x1000 + iPad 1180x820: 8/8 images, no h-scroll, 0 errors.
 - Files: img/_review/kp23-redraw/<key>.webp (768x1012 = game ratio 384:506) + <key>-orig.webp.
 
 ## Style lock (one block for all 52)
@@ -22,4 +22,5 @@ structure: new compositions (old ones were faceless close-ups of hands/objects);
 Observation: the consort copies the reference's blue PHI-COLD costume in all 3 consort pictures (same outfit = consistent heroine, but it is her experimental not-approved costume). If unwanted: drop the reference and keep text only, or add "her own robe colours, not the reference costume".
 Not redone (pilot = look + report). Proposed fixes for the batch run: add "a plain folded paper letter, no wax seal" where letters appear; NOEAR/forehead already in the prompt — re-gen once only the 2 faulty ones after go.
 
+## Scope add (ROOT-D1 00:29Z, owner 24/11 ~00:20Z): +55 sweep keys (FAR/BLUR/BACK, sweep.json) → prompts.json now 107 (52 unticked + 55 sweep, no overlap; field group/old per key). Gate: all 107 PASS except M03/M09/M12. tui-ngai: G59 bans sachet words → scene = five-colour festival cord on the child's wrist + mugwort sprig (owner rule wins over the label). Page: no-cache meta, images ?v=<n>, old picture per row from prompts.json "old" (sweep rows = the picture the sweep judged). Gate scripts run from the handover tree (kp23-swap base lacks check_store.py/master_common.py).
 ## Next (after go): 48 in batches of ~10, LOOK each, redo a bad one once, add to page, message ROOT-D1 per batch. Not wired into the game.
