@@ -223,3 +223,16 @@ SSK: SẴN SÀNG KIỂM robot10-e-fix-3 f0a5f92c (BIG: save writers + item ledge
 
 ## 12. R4 cnv_ma (cnv-20261124-1104-R4.md) row 4 — TIMEOUT speed-4, «Bỏ cuộc?» with opts []
 Verdict: HARNESS, already fixed by E-FIX-2 (inpage6.js:19–21, review/robot10-e-fix-2 → inside fix-4-r2m e75c2715, not on main yet). «Bỏ cuộc?» is the kit confirm (j82 kg82Ask → j79 kitConfirm on #modal): its yes button sits in the body ([data-kcf-yes]), so Q opts are always [] by design; the LIVE inpage6 only pressed Q opts and waited. origin/main inpage6 has no kcfYes → R4 ran on the old harness. Lands with fix-2 r3 / fix-4.
+
+## 13. R3 cnv_ban (cnv-20261124-0641-R3.md, OLD harness) — UI rows triage
+| rows | what | verdict | owner |
+|---|---|---|---|
+| 13–16 | [ipad] go tab: button.mspot covered / overlap | owned | MAIN Dư đồ map lane (map-label-overlap b7598e72 is in main; the run's game sha is not in the file — if its base ⊇ b7598e72 the spot overlap is still there → MAIN) |
+| 17–26, 28–31 | [ipad] go tab: span.mmeta / span.mlab / em / em.ok text over text (the map spot labels) | owned | MAIN (same map lane; not a one-line clip, aria-hidden copy or sticky case → the fix-4 r2 harness rules do not clear them) |
+| 27 | [fold] rel tab: #panel > p.past × button.kfoc-next | fixed LIVE | D nc-fix-2 43cf5434 (stage layer leaking over tabs; same family as §3 row) |
+| 2, 5 | soft-lock after load / save→load→save drift | owned | F (skip) |
+| 4 | econ card null.queen | fixed | fix-1 / nc-fix-4 |
+| 6–10 | «Bạc +8» vs bac=20, Sức +6 vs −2, stat range danh/duc/sac | owned | same families as §3 (BIG3 chain / stat clamp / one-core audit) |
+| 1, 11, 12 | memory / lag | owned | D robot10-lag |
+| 3 | no ending within 1800 s cap | harness cap | — |
+No row on the fix-4 r2 harness rules (clip / aria-hidden copy / sticky) in this file; no new real E bug. Only open question → MAIN: Dư đồ go-tab label overlap on iPad (25/50 lives).
