@@ -35,9 +35,12 @@ function pbKyStep(c,A,thAlive){const K=BAL.promoR.ky;if(c.mt!=null&&A<c.mt)retur
 function pbSt(){if(!S.pb||typeof S.pb!=="object")S.pb={};const P=S.pb;if(!P.ky||typeof P.ky!=="object"){const A=pbA();P.ky={last:A-BAL.promoR.ky.gapMin,upto:A-1,at:{}}}return P}
 /* fix the calendar up to this month (stored, so a past kỳ never moves); the Thái hậu's death starts the mourning */
 function pbKyUpdate(){if(!S||!BAL.promoR)return;const P=pbSt(),A=pbA();
- if(S.thDead&&!P.thd){P.thd=1;P.mt=A+BAL.promoR.mourn;try{if(S.thO)delete S.thO.pbK}catch(e){}}else if(!S.thDead&&P.thd)P.thd=0;
+ if(S.thDead&&!P.thd){P.thd=1;P.mt=Math.max(P.mt||0,A+BAL.promoR.mourn);try{if(S.thO)delete S.thO.pbK}catch(e){}}else if(!S.thDead&&P.thd)P.thd=0;
+ {const ek=pbEmpKey();if(P.ek==null)P.ek=ek;else if(P.ek!==ek){const was=P.ek;P.ek=ek;if(was!=="dead")P.mt=Math.max(P.mt||0,A+BAL.promoR.mourn)}}/* promo-build-2: the Emperor's death (or a new Emperor on the throne) = quốc tang too (design §3, OD ~07:00Z real «none during quốc tang») */
  const K=P.ky;if(K.upto>=A)return;const c={last:K.last,mt:P.mt};for(let a=Math.max(K.upto+1,A-24);a<=A;a++){const k=pbKyStep(c,a,!S.thDead);if(k)K.at[a]=k}K.last=c.last;K.upto=A;
  for(const a in K.at)if(+a<A-36)delete K.at[a]}
+/* who reigns: "dead" while the Emperor is dead / a succession runs, else his reign (era + name) */
+function pbEmpKey(){const E=S.emp||{};return S.empDead||E.dead||(S.succ&&S.succ.on)?"dead":`${E.era||""}|${E.name||""}`}
 /* the kỳ of month A (pure: a future month is simulated from the stored calendar with today's world, nothing is written) */
 function pbKyAt(A){const P=S.pb,K=P&&P.ky;if(K&&A<=K.upto)return K.at[A]||null;const c={last:K?K.last:pbA()-BAL.promoR.ky.gapMin,mt:P?P.mt:null};
  for(let a=K?K.upto+1:pbA();a<=A;a++){const k=pbKyStep(c,a,!S.thDead);if(a===A)return k}return null}
@@ -73,11 +76,12 @@ function pbEmpNet(){const tr=[].concat((S.emp&&S.emp.traits)||[]);return tr.map(
 function pbGrant(p,src,o){o=o||{};if(!pbCan(p))return"";const me=p===S;const e=exS(p);
  if(pbOpen(p)){if(o.birth){pbS(p).q.push(src);return me?"Ân thi riêng mừng sinh nở được giữ lại, chờ lần thi riêng đang mở xong. ":""}return""}
  e.grace=e.to;e.gw=src;e.cd=0;e.lapse=0;const A=pbA(),n=pbNextKy(A+BAL.promoR.ky.hold);e.gx=n?n.A:A+BAL.promoR.ky.gapMax;
- const rk=exRk(e.to),nm=me?"ngươi":p.name,cost=pbCost(p,src,o);let why;
+ const rk=exRk(e.to),nm=me?"ngươi":p.name,cost=pbCost(p,src,o);let why;const kn=pbKnown(p);/* promo-build-2 (greeting rule): a stranger's numbers never show */
  if(src==="f")why="Mừng công chúa ra đời";else if(src==="m")why="Mừng hoàng tử ra đời";
- else if(src==="sung")why=`Hoàng thượng sủng ái ${nm} hơn người (Sủng ${Math.round(p.sung||0)}; bệ hạ ${pbEmpNet()}, cần ${o.cut})`;
- else if(src==="th")why=`Thái hậu thương ${nm} (Thái hậu quý ${nm} ${Math.round(p.th||0)}; bà ${(S.thO&&TH_ARCH[S.thO.arch]?TH_ARCH[S.thO.arch].n:"").toLowerCase()}, cần ${o.cut}), bà tâu xin`;
- else why=`Hoàng hậu đề cử ${nm} (Hoàng hậu quý ${nm} ${pbHhOf(p)}; bà ${String(o.t||"").toLowerCase()}, cần ${o.cut})`;
+ else if(src==="sung")why=kn?`Hoàng thượng sủng ái ${nm} hơn người (Sủng ${Math.round(p.sung||0)}; bệ hạ ${pbEmpNet()}, cần ${o.cut})`:`Hoàng thượng sủng ái ${nm} hơn người`;
+ else if(src==="th")why=kn?`Thái hậu thương ${nm} (Thái hậu quý ${nm} ${Math.round(p.th||0)}; bà ${(S.thO&&TH_ARCH[S.thO.arch]?TH_ARCH[S.thO.arch].n:"").toLowerCase()}, cần ${o.cut}), bà tâu xin`:`Thái hậu thương ${nm}, bà tâu xin`;
+ else if(o.me)why=`Hoàng hậu ${S.name} đề cử ${nm}`;/* promo-build-2: SHE is the Hoàng hậu and chose this nominee (pbHhMeDo) */
+ else why=kn?`Hoàng hậu đề cử ${nm} (Hoàng hậu quý ${nm} ${pbHhOf(p)}; bà ${String(o.t||"").toLowerCase()}, cần ${o.cut})`:`Hoàng hậu đề cử ${nm}`;
  const capT=src==="sung"?` Lần ${pbS(p).sung.n} trong ${BAL.promoR.sp.sung.life} lần của đời; lần sau sớm nhất sau ${BAL.promoR.sp.sung.every} tháng.`:src==="th"||src==="hh"?` Mỗi vị chỉ ân một lần trong đời.`:"";
  const t=me?`<b class="g">${why}: ân cho ngươi một lần thi riêng tấn phong ${rk} ngoài kỳ</b>, không cần đủ Sủng, Danh; còn ghế và Hoàng hậu, Thái hậu không chặn mới được thi. Trượt hay lỡ hạn là hết lượt.${capT} ${cost}`
   :`${p.name} được ân thi riêng tấn phong ${rk} (${why.replace(/^Mừng/,"mừng")}). ${cost}`;
@@ -102,9 +106,11 @@ function pbTry(p){if(!pbCan(p))return"";const s=pbS(p),e=exS(p),A=pbA();
  return""}
 /* once a month (after the month turns): her own checks on every seat; the NPCs on solo / the co-op host only */
 function pbMonth(){if(!S||S.dead||!BAL.promoR)return"";pbKyUpdate();const P=pbSt();if(P.m===S.turn)return"";P.m=S.turn;let ev="";
+ try{const A=pbA();if(P.mt!=null&&A<P.mt&&P.mtN!==P.mt){P.mtN=P.mt;ev+=`<b class="g">Quốc tang</b>: trong cung không mở kỳ sắc phong, không có đại lễ cho đến hết hạn tang (còn ${P.mt-A} tháng). `}}catch(x){}
  try{ev+=pbDl()}catch(x){console.error("pbDl",x)}
+ try{ev+=pbDeath(S)}catch(x){console.error("pbDeath",x)}
  try{const t=pbTry(S);if(t)ev+=t}catch(x){console.error("pbMonth",x)}
- if(!pbGuest())for(const v of rivals.slice())try{pbTry(v)}catch(x){console.error("pbMonth",x)}
+ if(!pbGuest()){for(const v of rivals.slice())try{pbDeath(v);pbTry(v)}catch(x){console.error("pbMonth",x)}try{ev+=pbTpNpc()}catch(x){console.error("pbTpNpc",x)}}
  return ev}
 
 /* ---------- ĐẠI LỄ (son weight; BAL.promoR.dl) ---------- */
@@ -121,6 +127,7 @@ function pbDlWhich(){const B=BAL.promoR.dl,D=pbDlSt(),A=pbA(),F=typeof FEST!=="u
  if(!k)return null;{const P=pbSt();if(P.mt!=null&&A<P.mt)return{k,w,tang:1}}/* rv (OD 24/11 ~07:00Z real «none during quốc tang»): the occasion passes uncelebrated */
  if(D.last!=null&&A-D.last<B.minGap)return{k,w,down:1};D.last=A;return{k,w}}
 /* full conditions of a đại lễ for one person (her and every NPC by the same rows) */
+function pbFullRows(p){return pbDlRows(p)}/* promo-build-2: the ONE full condition set of the son-weight / deathbed / posthumous roads (OD ~05:55Z, ~06:30Z) */
 function pbDlRows(p){const B=BAL.promoR.dl,to=rkOf(p)+1;const L=exBase(p).filter(x=>!/^Kỳ sắc phong/.test(x[1]));const d=B.duc[Math.min(B.duc.length-1,to)]||0;
  if(d)L.push([(p.duc||0)>=d,`Đức ${Math.round(p.duc||0)} (cần ${d})`]);return L}
 function pbDlOk(p){return pbCan(p)&&!p.confined&&rkOf(p)+1<7&&pbDlRows(p).every(x=>x[0])}
@@ -170,7 +177,8 @@ function pcWhy(p){const me=p===S,B=BAL.promoR.pc,nm=me?"ngươi":p.name;const hd
  const own=rkOf(p)>=3&&p.pal!=null;const dh=(typeof PLNAME!=="undefined"&&PLNAME.dtd&&PLNAME.dtd[0])||"tẩm điện Hoàng thượng";const h=own?p:hd&&hd!==p?hd:null;const f=pcFav(p);
  const hn=h&&h!==p?(typeof j78who==="function"?j78who(h):`${RANKS[rkOf(h)].n} ${h.name}`):"";
  if(h){const x=pcParts(p,h);
-  if(Math.abs(f.E)>=B.why&&Math.abs(pcStand(h))>=B.why/2&&Math.sign(x.E)>0)/* rv: only when the favour really moved her that way (as the Hoàng hậu / Thái hậu lines) — never «để mắt tới … ở cung xa» */L.push(f.E>0?`Hoàng thượng để mắt tới ${nm} (Sủng ${Math.round(p.sung||0)}): ${own?"được ban":"ở"} cung ${pcStand(h)>0?`gần ${dh}, danh giá`:`xa ${dh}`}`:`Hoàng thượng chưa để mắt tới ${nm} (Sủng ${Math.round(p.sung||0)}): ${own?"được ban":"ở"} cung ${pcStand(h)>0?`gần ${dh}`:`xa ${dh}`}`);
+  if(Math.abs(f.E)>=B.why&&Math.abs(pcStand(h))>=B.why/2&&Math.sign(x.E)>0)/* rv: only when the favour really moved her that way (as the Hoàng hậu / Thái hậu lines) — never «để mắt tới … ở cung xa» */{const sg=pbKnown(p)?` (Sủng ${Math.round(p.sung||0)})`:"";/* promo-build-2 nit: an unknown girl's Sủng never shows (greeting / knowledge rule) */
+   L.push(f.E>0?`Hoàng thượng để mắt tới ${nm}${sg}: ${own?"được ban":"ở"} cung ${pcStand(h)>0?`gần ${dh}, danh giá`:`xa ${dh}`}`:`Hoàng thượng chưa để mắt tới ${nm}${sg}: ${own?"được ban":"ở"} cung ${pcStand(h)>0?`gần ${dh}`:`xa ${dh}`}`)}
   if(!own&&Math.abs(f.H)>=B.why&&pcKind(h)!==0&&Math.sign(x.H)>0)L.push(f.H>0?`được Hoàng hậu thương: xếp ở với ${hn}, người hiền hòa`:`Hoàng hậu không ưa ${nm}: xếp ở với ${hn}, người khó tính`);
   if(!own&&Math.abs(f.T)>=B.why&&Math.abs(pcAlign(h))>=B.why&&Math.sign(x.T)>0)L.push(f.T>0?`Thái hậu thương ${nm}: chủ vị ${hn} là người được Thái hậu tin`:`Thái hậu không ưa ${nm}: chủ vị ${hn} cũng không được lòng Thái hậu`)}
  if(!L.length)L.push(h&&h!==p?`Nội vụ phủ xếp ${nm} vào chỗ còn trống, ở với ${hn}`:`Nội vụ phủ xếp ${nm} vào chỗ còn trống`);return L}
@@ -193,3 +201,70 @@ function pcMark(){const P=pbSt();P.hr=rkOf(S);P.hk=String(houseOf(S))+"|"+(S.pal
  const hk=String(houseOf(S))+"|"+(S.pal==null?"":S.pal)+"|"+(S.resHall||"");if(P.hr==null){pcMark();return r}
  if(rkOf(S)>P.hr&&hk!==P.hk&&!S.palCer&&rkOf(S)<7){Q.push(pcPanel([{p:S}],{head:`Thánh chỉ tấn phong ${RANKS[rkOf(S)].n} kèm lệnh dời chỗ ở.`}))}pcMark()}}catch(e){console.error("pc later",e)}return r};window.palFix=palFix})();
 window.pbKyAt=pbKyAt;window.pbNextKy=pbNextKy;window.pbGrant=pbGrant;window.pbTry=pbTry;window.pbMonth=pbMonth;window.pbKyRow=pbKyRow;window.pbA=pbA;window.pcHostPick=pcHostPick;window.pcWhy=pcWhy;window.pbSungCut=pbSungCut;window.pbThCut=pbThCut;window.pbHhCut=pbHhCut;window.pbCdKy=pbCdKy;window.pbHhOf=pbHhOf;window.pbKyUpdate=pbKyUpdate;
+
+/* ================= promo-build-2 (Foreman D; brief D-promo-build-2; OD 24/11 ~05:55Z, ~06:30Z, ~07:00Z real, ~08:30Z; design rows 8–10) =================
+   (1) LAW 1: when SHE is the Hoàng hậu she nominates («Hoàng hậu đề cử», act card in Hành sự → kit option sheet). The candidates are the ones the
+       NPC Hoàng hậu route would take (pbTry «hh»: Hoàng hậu quý ≥ the cut of the Hoàng hậu's nết — hers here —, target ≤ maxTo, the special-exam
+       rows met, once per life per Hoàng hậu, one special exam at a time). Every nominee option has the same gain (the nominee owes her one ân +
+       thiện cảm) and the same loss (each candidate on the sheet she passed over oán her) — laws 2/3. The nominee gets the special exam (pbGrant
+       «hh»; the NPC sits it in jexam promoteP). The NPC side is unchanged. Co-op: offered on the solo / host seat (NPC state is the host's).
+   (2) DEATHBED (row 9): lâm bệnh nguy kịch (j13 STG 3) → once per life, if the FULL condition set (pbFullRows: every promoReqP row but the kỳ, +
+       Đức) is met, Nội vụ phủ examines her record (exSimC: she is too ill to play); pass + a free seat = decree; full seat = no decree; loss: the
+       Hoàng hậu oán (raised past her hand). Her and every NPC alike (pbMonth). Her result = a kit panel ending with a button.
+   (3) TRUY PHONG (row 10): at death (her: over(); NPC: the month after) the same rows + the record exam → a rank title only (p.pbTp), shown in
+       her «Kiếp này» panel / the news. Never past Hoàng quý phi. */
+function pbKnown(p){if(!p||p===S)return true;try{return (typeof knows!=="function"||knows(p))&&(typeof kitKnownName!=="function"||kitKnownName(p))}catch(e){return true}}
+function pbWho(p){return p===S?"ngươi":typeof j78who==="function"?j78who(p):p.name}
+
+/* ---------- (1) her nomination ---------- */
+function pbHhMeList(){try{if(!S||!pbLive(S)||rkOf(S)<7||!exOn()||pbGuest()||(typeof isSrv==="function"&&isSrv()))return[];const SP=BAL.promoR.sp,ch=pbHhCut(S),qk="hh:"+key(S),A=pbA();
+ return liveRivals(false).filter(v=>!v.coop&&pbCan(v)&&!v.confined&&!pbOpen(v)&&exS(v).to<=SP.hh.maxTo&&(pbS(v).hh[qk]||0)<SP.hh.life&&pbHhOf(v)>=ch&&pbRowsOk(v)&&!(pbRoadDone(v)&&pbKyAt(A)))
+  .sort((a,b)=>pbHhOf(b)-pbHhOf(a)).slice(0,SP.meMax)}catch(e){console.error("pbHhMeList",e);return[]}}
+function pbHhMeOpts(L){const C=BAL.promoR.sp.cost;return L.map(v=>{const n=L.length-1;
+ return{n:`Đề cử ${pbWho(v)} lên ${exRk(exS(v).to)}`,x:`được: ${pbWho(v)} nợ ngươi một ân, thiện cảm với ngươi +${C.meAff}${n?` · mất: ${n} người không được đề cử oán ngươi +${C.mePassOan}`:""}`,go:()=>pbHhMeDo(v,L.filter(o=>o!==v))}}).concat([{n:"Thôi"}])}
+function pbHhMeOpen(){const L=pbHhMeList();if(!L.length){log("Lúc này chưa có phi tần nào đủ điều kiện để ngươi đề cử.");return}const ch=pbHhCut(S);
+ const rows=L.map(v=>[pbWho(v),`lên ${exRk(exS(v).to)} · ${pbKnown(v)?`ngươi quý nàng ${pbHhOf(v)}, cần ${ch}`:`ngươi quý nàng đủ mức`}`]);
+ Q.push({t:"Hoàng hậu đề cử",who:pMe(),h:`<p>Ngươi chủ lục cung, được đề cử một phi tần thi riêng tấn phong ngoài kỳ. Mỗi người chỉ được ngươi đề cử một lần trong đời. Người được chọn nợ ngươi một ân; người có tên mà không được chọn sẽ oán ngươi.</p>${kitRows(rows)}`,opts:pbHhMeOpts(L)});try{showModal()}catch(e){}}
+function pbHhMeDo(v,others){const SP=BAL.promoR.sp,C=SP.cost;if(!pbHhMeList().includes(v)){log(`${pbWho(v)} không còn đủ điều kiện để đề cử.`);return}
+ const s=pbS(v),qk="hh:"+key(S);s.hh[qk]=(s.hh[qk]||0)+1;pbGrant(v,"hh",{cut:pbHhCut(S),q:S,me:1});
+ try{q72DebtAdd(q72A("rv",v.id),C.hhOwe)}catch(x){}affAdd(v,S,C.meAff);for(const o of others)oanAdd(o,S,C.mePassOan);
+ window.__pbN=window.__pbN||{};window.__pbN.hhMe=(window.__pbN.hhMe||0)+1;
+ log(`<b class="g">Ngươi đề cử ${pbWho(v)} lên ${exRk(exS(v).to)}</b>: Nội vụ phủ cho nàng một lần thi riêng ngoài kỳ. ${pbWho(v)} nợ ngươi một ân.${others.length?` ${others.length} người không được đề cử oán ngươi.`:""}`)}
+function pbHhMeCard(L){return{n:"Hoàng hậu đề cử",pbhh:1,t:"Ngươi chủ lục cung: đề cử một phi tần được thi riêng tấn phong ngoài kỳ.",c:{},o:100,k:1,w:{},dom:"Giao thiệp",
+ x:`chọn một trong ${L.length} người đủ điều kiện; người được chọn nợ ngươi một ân, người không được chọn oán ngươi`,go:()=>pbHhMeOpen()}}
+(function(){if(typeof deal!=="function")return;const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(Array.isArray(deck)&&!deck.some(a=>a&&a.pbhh)){const L=pbHhMeList();if(L.length)deck.push(pbHhMeCard(L))}}catch(e){console.error("pbHhMeCard",e)}return r}})();
+
+/* ---------- (2) deathbed ---------- */
+function pbDeath(p){const SP=BAL.promoR.sp,D=SP.death;if(!D||typeof illOf!=="function")return"";const i=illOf(p);if(!i||i.st<3)return"";
+ if(!pbCan(p)||p.confined||rkOf(p)+1>=7)return"";const s=pbS(p);if((s.dth||0)>=D.life||pbOpen(p))return"";const me=p===S;
+ const miss=pbFullRows(p).filter(x=>!x[0]).map(x=>x[1]);
+ if(miss.length){if(me&&!i.pbd){i.pbd=1;return `Ngươi lâm bệnh nguy kịch. Nội vụ phủ xét công đức xưa nay: chưa đủ điều kiện tấn phong (${miss[0]}${miss.length>1?`, còn ${miss.length-1} điều nữa`:""}). `}return""}
+ s.dth=(s.dth||0)+1;const to=rkOf(p)+1,rk=exRk(to);const r=exSimC(p);window.__pbN=window.__pbN||{};window.__pbN.death=(window.__pbN.death||0)+1;
+ let res,dec=false;
+ if(r.pass&&(typeof seatFree!=="function"||seatFree(to))){if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;p.ex={to:rkOf(p)+1};dec=true;window.__pbN.deathUp=(window.__pbN.deathUp||0)+1;
+  const q=typeof queenP==="function"?queenP():null;if(q&&q!==p&&!q.out)oanAdd(q,p,SP.cost.deathHhOan);
+  if(me){try{exDrop()}catch(x){}try{feedback("promote",{t:"Tấn phong"})}catch(x){}}
+  res=me?`Thánh chỉ tấn phong ${S.name} làm ${RANKS[S.rank].n}. Hoàng hậu oán ngươi được nâng vượt mặt bà.`:`${p.name} được tấn phong ${RANKS[p.rank].n} bên giường bệnh.`}
+ else if(r.pass)res=me?`Đỗ, nhưng ghế ${rk} đã đủ người: không có thánh chỉ.`:`${p.name} đỗ xét bên giường bệnh, nhưng ghế ${rk} đã đủ người.`;
+ else res=me?"Chưa đạt: lần xét này đã qua, đời chỉ có một lần.":`${p.name} lâm bệnh nguy kịch, Nội vụ phủ xét tấn phong nhưng chưa đạt.`;
+ if(!me){try{newsAdd(p,"promo",res,true)}catch(x){}return""}
+ Q.push({t:"Xét tấn phong bên giường bệnh",who:pMe(),h:`<p>Ngươi lâm bệnh nguy kịch. Hoàng thượng thương xót, cho Nội vụ phủ xét tấn phong ${rk} ngay bên giường bệnh theo công đức xưa nay.</p>${kitRows([
+  ["Bệnh",typeof illName==="function"?illName(S):"nguy kịch"],["Điều kiện",`đủ cả ${pbFullRows(S).length} điều`],["Nội vụ phủ xét",`${r.total} phần, mức đỗ ${r.P.bar}`],["Kết quả",res]])}`,btn:dec?"Tạ ân":"Đã rõ"});
+ return dec?`<b class="g">${res}</b> `:res+" "}
+
+/* ---------- (3) truy phong ---------- */
+function pbTp(p){const T=BAL.promoR.sp.tp;if(!T||!T.on||!exOn()||!p||p.pbTp!=null)return null;p.pbTp=0;if(p.out||p.coop||rkOf(p)>=6)return null;
+ const miss=pbFullRows(p).filter(x=>!x[0]).map(x=>x[1]);if(miss.length)return{ok:0,miss};const r=exSimC(p);if(!r.pass)return{ok:0,r};
+ p.pbTp=rkOf(p)+1;window.__pbN=window.__pbN||{};window.__pbN.tp=(window.__pbN.tp||0)+1;return{ok:1,rk:RANKS[p.pbTp].n,r}}
+function pbTpLine(p,x){const nm=p===S?"ngươi":"nàng";if(x.ok)return `Nội vụ phủ xét công đức lúc sinh thời, truy tặng ${nm} làm ${x.rk}.`;
+ if(x.miss)return `Nội vụ phủ xét: chưa đủ điều kiện truy phong (${x.miss[0]}${x.miss.length>1?`, còn ${x.miss.length-1} điều nữa`:""}).`;return `Nội vụ phủ xét: công đức chưa đủ để truy phong (${x.r.total} phần, mức ${x.r.P.bar}).`}
+/* NPC deaths (host / solo): the month after; an old save marks the dead it already has as done (no burst of news) */
+function pbTpNpc(){const P=pbSt();let ev="";if(!P.tpV){P.tpV=1;for(const v of rivals)if(v.alive===false&&v.pbTp==null)v.pbTp=0;return""}
+ for(const v of rivals){if(v.alive!==false||v.pbTp!=null||v.coop)continue;const x=pbTp(v);if(x&&x.ok){const t=`Truy phong: ${pbTpLine(v,x).replace("nàng",v.name)}`;try{newsAdd(v,"promo",t,true)}catch(e){}ev+=t+" "}}return ev}
+/* her death: the title (or why not) in the «Kiếp này» panel (kit section + kit rows) */
+(function(){if(typeof over!=="function")return;const o0=over;over=function(h,t,fate,alive){let x=null;
+ try{if(S&&!S.dead&&BAL.promoR&&!S.out&&!(typeof isSrv==="function"&&isSrv())&&!(S.succ&&S.succ.on)&&!(typeof overAlive==="function"&&overAlive(fate,alive)))x=pbTp(S)}catch(e){console.error("pbTp",e)}
+ const r=o0.apply(this,arguments);
+ try{if(x){const m=Q.find(q=>q&&/(^|\s)end(\s|$)/.test(q.cls||""));if(m){m.h+=`<div class="kpsec kend-tp"><h4 class="kpst">Truy phong</h4>${kitRows([["Truy phong",pbTpLine(S,x),"t"]])}</div>`;if(Q[0]===m&&!$("modal").hidden)showModal()}}}catch(e){console.error("pbTp end",e)}
+ return r};window.over=over})();
+window.pbHhMeList=pbHhMeList;window.pbHhMeOpen=pbHhMeOpen;window.pbHhMeDo=pbHhMeDo;window.pbDeath=pbDeath;window.pbTp=pbTp;window.pbTpNpc=pbTpNpc;window.pbFullRows=pbFullRows;window.pbEmpKey=pbEmpKey;window.pbKnown=pbKnown;

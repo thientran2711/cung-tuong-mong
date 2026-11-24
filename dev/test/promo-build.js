@@ -71,6 +71,36 @@ const {chromium}=require('playwright');const D=require('./lib/device');
   ck("đại lễ: seats short → seat contest (NPC parity)",()=>{fresh();S.rank=0;const r=4;const free=SEATCAP[r]-holders(r).length;const L=liveRivals(false).filter(v=>v.rank===r-1).slice(0,free+1);if(L.length<free+1){for(const v of liveRivals(false).filter(v=>v.rank<r-1).slice(0,free+1-L.length)){v.rank=r-1;L.push(v)}}
    for(const v of L){v.sung=v.danh=v.duc=99;v.lastPromo=S.turn-99;v.hh=99;v.th=60;v.confined=0;delete v.ex}pbKyUpdate();const D=S.pb.dl||(S.pb.dl={last:null,seen:{}});D.seen.era="x-old";D.last=null;S.month=+FEST.newyear.m;const t=pbDl();
    return{got:`free ${free} cand ${L.length}`,bad:!/tranh ghế/.test(t)?"no seat contest: "+t.replace(/<[^>]+>/g,"").slice(0,120):L.some(v=>v.rank===r)?"promoted past the seat":!L.every(v=>exS(v).pass)?"not all hold a pass":""}});
+  /* ---------- promo-build-2 ---------- */
+  const simAs=pass=>{const f0=exSimC;exSimC=function(p){const r=f0(p);r.pass=pass;return r};return()=>{exSimC=f0}};
+  const queenMe=()=>{fresh();toMonth(false);const q0=queenP();if(q0&&q0!==S){q0.queen=false;q0.rank=6}S.rank=7;S.lastPromo=S.turn;S.trait=S.trait||"Điềm tĩnh";
+   const v=liveRivals(false).filter(x=>x.rank<3&&!x.confined&&!x.coop).slice(0,3);const ch=pbHhCut(S);v.forEach((x,i)=>{delete x.ex;delete x.pbs;x.hh=ch+5+i;x.th=60;x.sung=0;x.danh=0;x.lastPromo=S.turn;x.confined=0});return v};
+  ck("pb2: she is Hoàng hậu → nominee list + act card",()=>{const v=queenMe();const L=pbHhMeList();deal();const c=deck.find(a=>a&&a.pbhh);
+   return{got:`list ${L.length} card ${!!c}`,bad:!v.length?"no npc":!L.length?"no candidate: "+JSON.stringify(exBase(v[0]).filter(x=>!x[0]).map(x=>x[1])):!c?"no act card":L.some(x=>x===S)?"she in list":""}});
+  ck("pb2: nominate sheet = equal options (same gain + loss)",()=>{const L=pbHhMeList();Q.length=0;pbHhMeOpen();const m=Q[0];if(!m||!m.opts)return{got:"",bad:"no sheet"};
+   const os=m.opts.filter(o=>o.go);const shape=os.map(o=>String(o.x).replace(/^được: .*? nợ ngươi/,"được: N nợ ngươi"));
+   const eq=shape.every(x=>x===shape[0]);return{got:shape[0],bad:os.length!==L.length?"options "+os.length+" vs "+L.length:!eq?"options not equal: "+shape.join(" | "):!/được:/.test(shape[0])?"no gain":L.length>1&&!/mất:/.test(shape[0])?"no loss":!m.opts.some(o=>o.n==="Thôi")?"no Thôi":""}});
+  ck("pb2: nominate → special exam + owe + passed-over oán; once per patron",()=>{const L=pbHhMeList();const m=Q[0];const v=L[0],o=L[1];const oan0=o?(o.oan||0):0;const k=q72Key(q72A("rv",v.id));const d0=(q72().d[k]||0);
+   chooseM(0);/* options follow the list order */Q.length=0;const e=exS(v);const L2=pbHhMeList();
+   return{got:`gw ${e.gw} owe ${(q72().d[k]||0)-d0} oán ${o?(o.oan||0)-oan0:"-"}`,bad:e.gw!=="hh"?"nominee has no hh exam":(q72().d[k]||0)-d0!==BAL.promoR.sp.cost.hhOwe?"no ân owed":o&&(o.oan||0)-oan0<=0?"passed-over did not oán":L2.includes(v)?"listed twice":""}});
+  ck("pb2: NPC queen route unchanged when she is queen",()=>{const v=liveRivals(false).find(x=>x.rank<3&&!x.confined&&!pbOpen(x));if(!v)return{got:"",bad:""};delete v.ex;delete v.pbs;v.hh=99;v.sung=0;v.danh=0;v.th=0;pbTry(v);return{got:exS(v).gw||"none",bad:exS(v).gw==="hh"?"NPC queen route fired with her as queen":""}});
+  ck("pb2: deathbed — full conditions → exam on record → decree + panel",()=>{fresh();toMonth(false);S.rank=1;S.sung=S.danh=S.duc=99;S.lastPromo=S.turn-99;S.hh=60;S.th=60;S.confined=0;delete S.ex;delete S.pbs;S.ill={k:"lao",st:3,known:true};
+   const r0=S.rank;const un=simAs(true);Q.length=0;const t=pbDeath(S);un();const m=Q[0];const t2=pbDeath(S);
+   return{got:t.replace(/<[^>]+>/g,"").slice(0,80),bad:S.rank!==r0+1&&seatFree(r0+1)?"no decree":!m||m.t!=="Xét tấn phong bên giường bệnh"||!m.btn?"no panel with button":(S.pbs||{}).dth!==1?"not counted":t2?"twice in a life":""}});
+  ck("pb2: deathbed — conditions short → no exam, says why",()=>{fresh();toMonth(false);S.rank=1;S.sung=0;S.danh=0;delete S.ex;delete S.pbs;S.ill={k:"lao",st:3,known:true};const r0=S.rank;Q.length=0;const t=pbDeath(S);
+   return{got:t.slice(0,90),bad:S.rank!==r0?"promoted without conditions":Q.length?"panel without exam":!/chưa đủ điều kiện/.test(t)?"no why line":(S.pbs.dth||0)?"chance used":""}});
+  ck("pb2: deathbed — fail uses the life chance",()=>{fresh();toMonth(false);S.rank=1;S.sung=S.danh=S.duc=99;S.lastPromo=S.turn-99;S.hh=60;S.th=60;delete S.ex;delete S.pbs;S.ill={k:"lao",st:3,known:true};const un=simAs(false);Q.length=0;const r0=S.rank;pbDeath(S);un();
+   return{got:Q[0]&&Q[0].btn,bad:S.rank!==r0?"promoted on fail":S.pbs.dth!==1?"not counted":""}});
+  ck("pb2: deathbed — NPC parity",()=>{const v=liveRivals(false).find(x=>x.rank<3&&!x.confined);if(!v)return{got:"",bad:"no npc"};delete v.ex;delete v.pbs;v.sung=v.danh=v.duc=99;v.lastPromo=S.turn-99;v.hh=99;v.th=60;v.ill={k:"lao",st:3,known:true};
+   const r0=v.rank;const un=simAs(true);pbDeath(v);un();v.ill=null;return{got:`rank ${r0}→${v.rank}`,bad:(v.pbs||{}).dth!==1?"NPC deathbed not examined: "+JSON.stringify(pbFullRows(v).filter(x=>!x[0]).map(x=>x[1])):v.rank!==r0+1&&seatFree(r0+1)?"NPC not promoted":""}});
+  ck("pb2: truy phong — her death → title in Kiếp này",()=>{fresh();S.rank=1;S.sung=S.danh=S.duc=99;S.lastPromo=S.turn-99;S.hh=60;S.th=60;S.confined=0;delete S.ex;const un=simAs(true);Q.length=0;die("Lao phổi nguy kịch, không qua khỏi");un();
+   const m=Q.find(x=>x&&/(^|\s)end(\s|$)/.test(x.cls||""));const ok=m&&/Truy phong/.test(m.h)&&/truy tặng ngươi làm/.test(m.h);const r={got:(m&&(m.h.match(/truy tặng[^<]*/)||[""])[0]),bad:!m?"no end panel":!ok?"no truy phong row":""};Q.length=0;return r});
+  ck("pb2: truy phong — NPC death → news, never past Hoàng quý phi",()=>{fresh();pbTpNpc();const v=liveRivals(false).find(x=>x.rank<3);v.sung=v.danh=v.duc=99;v.lastPromo=S.turn-99;v.hh=99;v.th=60;v.alive=false;const un=simAs(true);const t=pbTpNpc();un();
+   const w=liveRivals(false).find(x=>x.rank===6);let hi="";if(w){w.alive=false;delete w.pbTp;pbTpNpc();hi=w.pbTp?"past HQP":""}
+   return{got:t.slice(0,80),bad:!v.pbTp?"no title":!/Truy phong/.test(t)?"no news line":hi}});
+  ck("pb2: quốc tang when the Emperor changes → no kỳ, no đại lễ",()=>{fresh();pbKyUpdate();const P=S.pb;const A=pbA();S.emp.era="Tân"+S.turn;pbKyUpdate();let k=0;for(let a=A;a<A+BAL.promoR.mourn-1;a++)if(pbKyAt(a))k++;
+   S.month=+FEST.newyear.m;const D=P.dl||(P.dl={last:null,seen:{}});D.last=null;const t=pbDl();return{got:`mt +${P.mt-A} kỳ ${k}`,bad:P.mt==null||P.mt-A<BAL.promoR.mourn-1?"no mourning":k?"kỳ during mourning":/ban ân chiếu/.test(t)?"đại lễ during mourning":""}});
+  ck("pb2: unknown girl's Sủng hidden in Phân cung why",()=>{fresh();const v=liveRivals(false).find(x=>!pbKnown(x));if(!v)return{got:"all known",bad:""};v.sung=90;const L=pcWhy(v).join(" ");const g=pbGrant;return{got:L.slice(0,80),bad:/Sủng \d/.test(L)?"Sủng shown for a stranger":""}});
   ck("old save (no S.pb) loads",()=>{fresh();delete S.pb;S.ex={to:S.rank+1,cd:S.turn+2};for(const v of rivals){delete v.pbs}exTick();monthTick();Q.length=0;return{got:!!S.pb,bad:!S.pb||!S.pb.ky?"no calendar":""}});
   return out});
  let n=0;for(const x of R){if(x.bad)n++;console.log(`${x.k.padEnd(44)} ${JSON.stringify(x.got===undefined?"":x.got).slice(0,100).padEnd(100)} ${x.bad?'BAD: '+x.bad:'ok'}`)}
