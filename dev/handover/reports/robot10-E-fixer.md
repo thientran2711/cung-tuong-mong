@@ -5,7 +5,7 @@ START_CTX ≈ 5 % (1 M window); rollover at 30 %, ceiling 60 %.
 Owned elsewhere (skip, mark «owned»): save→load drift (D nc-fix-1/3), stage layers over tabs (D nc-fix-2), stat clamp Danh/Đức (fix-kframe-heir-rv), poisonedFish Sức (typed-stat-bal-rv), soft-lock after load (LIVE 14ba8768), Dư đồ label overlap (MAIN), lag/memory (D robot10-lag), balance numbers (robot10-reco / MAIN). Harness false positives known from D: HUD mid-tween (500 ms hudTween), inpage6 vs kitConfirm «Bỏ cuộc?», Bạc win block read as cost (fixed 521331fc), death names «${…}» (harness catalogue).
 
 ## STATUS
-(24/11 ~03:00Z) on call; waiting for E runner bug files dev/handover/robot/{thd,cnv,bd,pf}-*-R*.md.
+(24/11 ~05:06Z) on call; reports to FOREMAN E session_01DgYSWm2Gu8SUSJpayKmy6E; no runner bug file yet.
 
 ## 1. Triage
 (none yet)
