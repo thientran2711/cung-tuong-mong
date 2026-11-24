@@ -35,8 +35,9 @@ const hudEl=()=>{const h=document.querySelector("header.hud");return h&&h.getCli
 const unread=()=>NT.list.filter(x=>!x.seen);
 /* ---------- entry point ---------- */
 /* owner rule (VANPHONG §3): «???» NEVER prints in prose (news / notices / log / dialog text). An unnamed person is «một vị <phẩm> chưa quen biết» (the k61Mask plain wording); a bare «???» = «một người chưa quen biết». ONE function, used by kitNotice, the log and every dialog text (owner flight bug 24/11) */
-function kitNoUnk(s){if(typeof s!=="string"||s.indexOf("???")<0)return s;return s.replace(/(Hoàng quý phi|Hoàng hậu|Thái hậu|Tổng quản thái giám|Thái giám|Quý phi|Quý nhân|Thường tại|Đáp ứng|Thị vệ|Thái y|Vương gia|Nhạc sư|Sứ thần|Họa sư|Phi|Tần|cung nữ|thái giám|thị nữ|tì nữ|nô tì)\s+\?\?\?/g,(m,r)=>`một vị ${r} chưa quen biết`).replace(/\?\?\?/g,"một người chưa quen biết").replace(/^(<[^>]+>)*một /,m=>m.slice(0,-4)+"Một ")}
+function kitNoUnk(s){if(typeof s!=="string"||s.indexOf("???")<0)return s;return s.replace(/(Hoàng quý phi|Hoàng hậu|Thái hậu|Tổng quản thái giám|Thái giám|Quý phi|Quý nhân|Thường tại|Đáp ứng|Thị vệ|Thái y|Vương gia|Nhạc sư|Sứ thần|Họa sư|Phi|Tần|cung nữ|thái giám|thị nữ|tì nữ|nô tì)\s+\?\?\?/g,(m,r)=>`một vị ${/^(thái giám|cung nữ|thị nữ|tì nữ|nô tì)$/i.test(r)?r.toLowerCase():r} chưa quen biết`).replace(/\?\?\?/g,"một người chưa quen biết").replace(/^(<[^>]+>)*một /,m=>m.slice(0,-4)+"Một ")}
 window.kitNoUnk=kitNoUnk;
+(function(){const st=document.createElement("style");st.id="knt-css";st.textContent=".kntg{display:block;margin:1px 0 0;font-size:.92em}.kntrh{list-style:none;margin-left:-.2em}";document.head.appendChild(st)})();
 /* option / act cards (kaNorm1, j63) + the card detail parser (kitParse, j19): prose text nodes lose «???» too; the stranger NAME chips (.kname / .kti / name tags) keep the j61 mask (owner flight bug 24/11, law 11) */
 window.kitNoUnkDom=function(root){try{if(!root||root.textContent.indexOf("???")<0)return;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const L=[];let n;while(n=w.nextNode()){if(n.nodeValue.indexOf("???")>=0&&!(n.parentElement&&n.parentElement.closest(".kname,.kti,.krname,.kptag,.ktag,.kan,.kpname,.kprank,.kname2")))L.push(n)}L.forEach(t=>{t.nodeValue=kitNoUnk(t.nodeValue)})}catch(e){}};
 function kitNotice(spec){try{if(spec==null)return null;if(typeof spec!=="object")spec={line:String(spec)};if(spec.line)spec.line=kitNoUnk(spec.line);if(spec.text)spec.text=kitNoUnk(spec.text);if(Array.isArray(spec.items))spec.items=spec.items.map(kitNoUnk);
@@ -116,9 +117,11 @@ function watch(){if(NT.w)return;NT.w=setInterval(()=>{try{const el=$("kntchip");
 function picOf(it){return it&&it.pic||""}
 /* ONE NEWS ROW (owner 24/11 ~21:58Z, kỳ-ngộ rumours): «Nghe nói A gặp kỳ ngộ với B: Danh +2; Đức +3; cung nữ ??? thiện cảm +30.» → a row «A gặp kỳ ngộ với B» (when 2+ rumours the «Nghe nói:» head row says it once) + its gains as kit stat chips (kitChip / kpSent: ONE colour scheme for every stat), other clauses stay words; no « · » */
 function ntRow(t,drop){try{const m=/^Nghe nói (.+?) gặp kỳ ngộ(?: với ([^:]+?))?(?:: (.+?))?\.?$/.exec(t);if(!m)return esc(t);
- const chips=[],words=[];if(m[3])m[3].split(/;\s*/).forEach(pt=>{const q=/^(.*?)\s*(Danh|Đức|Sủng|Bạc|Tài|Sắc|Tâm cơ|Sức|thiện cảm|oán|ghen|tin cậy)\s*([+−-])\s?(\d+(?:[.,]\d+)?)$/i.exec(pt.trim());
-  if(q&&typeof kitChip==="function"){const v=(q[3]==="+"?1:-1)*parseFloat(q[4].replace(",","."));chips.push((q[1]?`<small class="kntw">${esc(q[1])}</small> `:"")+kitChip(q[2],v))}else if(pt.trim())words.push(pt.trim())});
- return `${drop?"":"Nghe nói "}${esc(m[1].replace(/^một /,"Một "))} gặp kỳ ngộ${m[2]?" với "+esc(m[2]):""}${words.length?": "+esc(words.join("; ")):""}${chips.length?`<span class="kchips kntch">${chips.join(" ")}</span>`:""}`}catch(e){return esc(t)}}
+ const cap=x=>String(x||"").replace(/^một /,"Một "),G=[],words=[];
+ if(m[3])m[3].split(/;\s*/).forEach(pt=>{const q=/^(.*?)\s*(Danh|Đức|Sủng|Bạc|Tài|Sắc|Tâm cơ|Sức|thiện cảm|oán|ghen|tin cậy)\s*([+−-])\s?(\d+(?:[.,]\d+)?)$/i.exec(pt.trim());
+  if(q&&typeof kitChip==="function"){const v=(q[3]==="+"?1:-1)*parseFloat(q[4].replace(",","."));const who=cap((q[1]||m[1]).trim());let g=G.find(x=>x.w===who);if(!g)G.push(g={w:who,c:[]});g.c.push(kitChip(q[2],v))}else if(pt.trim())words.push(pt.trim())});
+ /* owner 24/11 ~21:57Z (OD): every change = ONE short line «<Tên>: thiện cảm +30»; a stat without its own subject belongs to the one who met (A) */
+ return `${drop?"":"Nghe nói "}${esc(cap(m[1]))} gặp kỳ ngộ${m[2]?" với "+esc(m[2]):""}${words.length?": "+esc(words.join("; ")):""}${G.map(g=>`<span class="kntg">${esc(g.w)}: <span class="kchips kntch">${g.c.join(" ")}</span></span>`).join("")}`}catch(e){return esc(t)}}
 function kitNoticeOpen(id){try{if(typeof kitPanel!=="function")return null;const one=id!=null?NT.list.find(x=>x.id===id):null;
  const U=unread();const L=one?[one]:(U.length?U:NT.list.slice(0,6));if(!L.length)return null;
  const lead=L[0];/* plain kit text rows (kpsec html), not kitFacts: no person figure is guessed from the words — the panel stays SMALL */
