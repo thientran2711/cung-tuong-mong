@@ -64,7 +64,7 @@ function cyLen(p,mi){const L=Array.isArray(B().len)&&B().len.length?B().len:[5,6
    stays in the tuần), so a cycle never crosses into the next month and never changes length mid-cycle. */
 const CY_TD=10; /* days per tuần (jmcal time model: 3 tuần × 10 days) */
 function cyDaysM(p,mi){const b=cyBase(p),l=cyLen(p,mi);const j=(cyH("cyj|"+cyName(p)+"|"+mi)%3)-1;const o=cl_(b.o+j,1,CY_TD+1-l);const d0=b.t*CY_TD+o;const L=[];for(let i=0;i<l;i++)L.push(d0+i);return L}
-function cyAge(p){return p===S?(S.age||18):(p&&p.age)||20}
+function cyAge(p){return p===S?(S.age||BAL.ageMin):(p&&p.age)||20}
 function cyPreg(p){return !!(p&&p.preg&&!p.fake)}
 function cyCur(){return S&&S.turn!=null?S.turn:0}
 /* does she have a cycle in month index mi (relative to now; only now/future are known for pregnancy) */
