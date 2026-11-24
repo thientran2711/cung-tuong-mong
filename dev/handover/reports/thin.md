@@ -434,3 +434,5 @@ Scope as re-scoped by Foreman B: review/thin-p1c 60c49722 = ALL 39 kinds (includ
 **SHOTS (Fold 755x1000@2 + iPad 1180x820@2, 3 items per kind, scratch, not in git, LOOKED 3×):** all 9 kinds of P1 in the real kit frame (hat hoa banh huong ve kim tho le td_cong) + the 14 pooled kinds of P1b/P1c (dan co dauho theu mua doi doden tc xa thq nghe td_hanh kinh may) as boards: every item differs from the next, no empty/cut/overflow board. Known: kim looks the same until the sample is peeked (unit-tested); dauho/ban items differ only by throw sheet (not visible at rest).
 **Not done / for MAIN:** skins are wired but no skin registered (Foreman C keys not delivered; falls back to today's art); 15 kinds have no pool by measured reason (ban chai hoadien co7 + 11 in P1c table) — accepted by the lanes, not mine to re-open.
 **VERDICT: PASS 087e886c** — LAND AFTER thin-p0 (thin-p0-r1 a76ba1e4 already inside) and kit-mgskin 1b91ac14 (inside via p1c).
+
+P6-SEEDS-A validator fix: DONE (see commit below) wseeds_a.md 40 seeds, 4 per kind, validator 0 errors
