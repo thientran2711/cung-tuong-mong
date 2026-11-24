@@ -112,7 +112,7 @@ function succCH(){const E=S.succ,son=succSon(),sn=succSN(son),foe=E.foe!=null?ri
       {n:"Để Hoàng đế tự quyết",e:{hoa:2,q:-1},txt:"Ngươi để Hoàng đế tự quyết chuyện họ ngoại."}]},
   {t:"Chuyện cũ hậu cung",h:`<p>${foe?`${fN}, người từng ghét ngươi nhất, nay là Thái phi ở Thọ Khang cung.`:"Những người từng hại ngươi nay đều là Thái phi ở Thọ Khang cung."} Có kẻ dâng tờ khai cũ lên Từ Ninh cung.</p><p>Tân đế nói: “Mẫu hậu định đoạt.”</p>`,
    o:[{n:`Tha cho ${foe?fN:"họ"}, cho xuất gia`,e:{tam:1,hoa:1},s:{duc:3},txt:`Ngươi tha cho ${foe?fN:"các Thái phi"}, cho xuất gia.`,end:()=>succEndA()},
-      {n:`Ép ${foe?fN:"họ"} tuẫn táng theo tiên đế`,e:{q:1,an:2,hoa:-2},s:{duc:-6},txt:`Ngươi ban lụa trắng cho ${foe?fN:"các Thái phi"}.`,do:()=>{if(foe){foe.alive=false;dieMk(foe,"tuan")}},end:()=>succEndA()},
+      {n:`Ép ${foe?fN:"họ"} tuẫn táng theo tiên đế`,e:{q:1,an:2,hoa:-2},s:{duc:-6},txt:`Ngươi ban lụa trắng cho ${foe?fN:"các Thái phi"}.`,do:()=>{if(foe){foe.alive=false;dieMk(foe,"crime")/* rv r2 law 1: the mirror of j3 «xét lại chuyện cũ … ban lụa trắng, ép ngươi tuẫn táng» (her: crime) */}},end:()=>succEndA()},
       {n:"Giao cho Hoàng đế xét xử",e:{hoa:1},txt:"Ngươi giao chuyện cũ cho Hoàng đế xét.",end:()=>succEndA()},
       {n:"✦ Tự tay dạy hoàng trưởng tôn đọc sách",rare:1,c:{suc:-5},txt:"Ngươi tự tay dạy hoàng trưởng tôn đọc sách.",end:"a_rare"}]}];
  const B=[

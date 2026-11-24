@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"a7cf27ae","t":"2026-11-24T13:25Z","c":"promo-build-2 fix r1: one death-cause mark (dieK) at every death site; truy phong refuses crime / disgrace / unmarked deaths (her + NPCs)","b":"96cf7cae183f","h":[{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"}]};
+window.CTM_BI={"s":"f9cdc020+","t":"2026-11-24T13:26Z","c":"promo-build-2 fix r1: merge LIVE origin/main d521656c (test-only mrfoot), build line","b":"6b3100995238","h":[{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -43911,7 +43911,7 @@ function succCH(){const E=S.succ,son=succSon(),sn=succSN(son),foe=E.foe!=null?ri
       {n:"Để Hoàng đế tự quyết",e:{hoa:2,q:-1},txt:"Ngươi để Hoàng đế tự quyết chuyện họ ngoại."}]},
   {t:"Chuyện cũ hậu cung",h:`<p>${foe?`${fN}, người từng ghét ngươi nhất, nay là Thái phi ở Thọ Khang cung.`:"Những người từng hại ngươi nay đều là Thái phi ở Thọ Khang cung."} Có kẻ dâng tờ khai cũ lên Từ Ninh cung.</p><p>Tân đế nói: “Mẫu hậu định đoạt.”</p>`,
    o:[{n:`Tha cho ${foe?fN:"họ"}, cho xuất gia`,e:{tam:1,hoa:1},s:{duc:3},txt:`Ngươi tha cho ${foe?fN:"các Thái phi"}, cho xuất gia.`,end:()=>succEndA()},
-      {n:`Ép ${foe?fN:"họ"} tuẫn táng theo tiên đế`,e:{q:1,an:2,hoa:-2},s:{duc:-6},txt:`Ngươi ban lụa trắng cho ${foe?fN:"các Thái phi"}.`,do:()=>{if(foe){foe.alive=false;dieMk(foe,"tuan")}},end:()=>succEndA()},
+      {n:`Ép ${foe?fN:"họ"} tuẫn táng theo tiên đế`,e:{q:1,an:2,hoa:-2},s:{duc:-6},txt:`Ngươi ban lụa trắng cho ${foe?fN:"các Thái phi"}.`,do:()=>{if(foe){foe.alive=false;dieMk(foe,"crime")/* rv r2 law 1: the mirror of j3 «xét lại chuyện cũ … ban lụa trắng, ép ngươi tuẫn táng» (her: crime) */}},end:()=>succEndA()},
       {n:"Giao cho Hoàng đế xét xử",e:{hoa:1},txt:"Ngươi giao chuyện cũ cho Hoàng đế xét.",end:()=>succEndA()},
       {n:"✦ Tự tay dạy hoàng trưởng tôn đọc sách",rare:1,c:{suc:-5},txt:"Ngươi tự tay dạy hoàng trưởng tôn đọc sách.",end:"a_rare"}]}];
  const B=[
@@ -98135,7 +98135,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="96cf7cae183f";window.CTM_BUILD=BUILD;
+const BUILD="6b3100995238";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
