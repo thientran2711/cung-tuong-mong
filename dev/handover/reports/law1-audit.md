@@ -135,3 +135,19 @@ MERGED head 18aca389 (LIVE ac4790f0 merged; worktree /home/user/wt/l1m):
 | 10 | Player maid at an away master: «Đấm lưng / Xin thưởng / tiến cử» still shown (NPC maid: home only) | B (small parity follow-up, found in this review) |
 
 **LAND READY law1-audit-r1 18aca38902d8d936c3ce0189e5d1fd1ecf6792f7**
+
+## REVIEW r1 — re-merge 178cac37 (ORDER MAIN 121 10:38Z via Foreman B)
+review/law1-audit-r1 = 18aca389 + merge of LIVE 178cac37 (kit-framefit: jflip / jk2b / jksize / KIT.md / ending-screens test; only index.html / sw.js conflicted, rebuilt with dev/site/build_site.sh). Head **45b4057b25a7dca52405623703b79db457aaea11**, origin/main 178cac37 is its ancestor (FF).
+- `node dev/test/law1-audit.test.js` → `law1-audit: 13/13 PASS` · `… index.html` → `law1-audit: 13/13 PASS`
+- `node dev/test/role-parity.test.js index.html` → `ok open baseline only shrinks (≤ 7 rows, each with its side) 7` … `ALL PASS`
+- `node dev/test/one-core-guard.js` → `PASS: one core …` · `node dev/test/undef-scan.js` → `PASS: no unguarded undefined identifier (301 names checked)`
+- `bash dev/tools/quickcheck.sh` (alone) → `QUICKCHECK PASS · 269 s · open 2124 ms · old save ok · perf (median of 3, new/live): render 291/309 ms, tab 566/625 ms, buổi 1867/2020 ms · core gates PASS`
+- coop-e2e RED on LIVE itself (e2e now 162 checks; LIVE red around the new «Tiền truyện» prequel cards at buổi 0:0 — Q 8 modals, #next disabled). LOAD-COMPARE, same machine, same command:
+
+| run | Fold hosts (`node dev/test/coop-e2e.js`) | iPad hosts (`COOP_SWAP=1 …`) |
+|---|---|---|
+| bare LIVE 178cac37 | 138/162 · FAIL rows: fold #next ×4, ipad #next ×8, buổi 0:0 ×4, buổi 2:0 ×4, week 1 fold/ipad, canonical W wk1, week after rebirth | 138/162 · same rows (fold #next ×8, ipad #next ×4) |
+| branch 45b4057b25a7dca52405623703b79db457aaea11 | 138/162 · **identical rows and counts** | run 1: 137/162 = LIVE rows + «after week 1: same names» with EMPTY lists (onlyA/onlyB/nmA []; weeks 2–3 + rejoin ok) · run 2: 137/162 = LIVE rows + «after week 2: canonical W» (host-lag diffs: S.emp.met, wxDay, staff loyal/suc — no wdPawn / pal / Ban cung field) |
+The one extra row differs run to run and belongs to the coop-host-lag family LIVE also shows (LIVE A also lists staff .duc drift) → LIVE-identical red, not this branch. Owner of the LIVE red: co-op fixer #4 (session_01N1tNP2dfra9gDdChCWdbcB, same rows on 178cac37).
+
+**LAND READY law1-audit-r1 45b4057b25a7dca52405623703b79db457aaea11 FOR MAIN 121 (re-merge on 178cac37)**
