@@ -561,3 +561,6 @@ Worked examples (valid; copy the shape):
 
 ## P8-SEEDS-D
 DONE 3943de4e nc: prem 4, open 15, comp 16, turn 8, clim a5/b5/f4 · bd: prem 4, open 14, comp 17, turn 8, clim a5/b5/f4 · pf: prem 4, open 14, comp 16, turn 8, clim a5/b5/f4 — validator 0 errors (rdseeds_validate.py --min --origins nc,bd,pf on review/thin-p8 d92a4c71, 170 rows). File dev/handover/content/thin/rdseeds_d.md. Premises: nc_men nc_kinh nc_nu nc_the · bd_luuly bd_lua bd_bac bd_su · pf_co pf_guong pf_tra pf_lich.
+
+## P8-SEEDS-A
+DONE c3a5108c tt: prem 4, open 15 (8 win-ok / 8 lose-ok), comp 16, turn 8, clim a5 b5 f4 · dtq: same counts · thd: same counts (171 rows) validator 0 errors (review/thin-p8 d92a4c71, --min --origins tt,dtq,thd). Premises: tt_ruong tt_gia tt_tho tt_thu · dtq_ngua dtq_hang dtq_thuong dtq_ky · thd_dich thd_dien thd_uoc thd_giay.
