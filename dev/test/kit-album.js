@@ -15,7 +15,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
    const R=e=>e.getBoundingClientRect(),cs=[...host.querySelectorAll('.kalb-c')];const sz=new Set(cs.map(c=>Math.round(R(c).width)+'x'+Math.round(R(c).height)));
    const art=cs.map(c=>{const a=c.querySelector('.kalb-art');return Math.abs(R(a).width/R(a).height-.75)}).filter(x=>x>.02).length;
    const clip=cs.filter(c=>[...c.querySelectorAll('b,small')].some(e=>e.scrollHeight>e.clientHeight+1||e.scrollWidth>e.clientWidth+1)).length;
-   const miss=cs.filter(c=>c.classList.contains('miss'));const missBad=miss.filter(c=>!c.querySelector('.kalb-veil')||!c.querySelector('b').textContent.trim()||!c.querySelector('small')||!c.querySelector('small').textContent.trim()).length;
+   const miss=cs.filter(c=>c.classList.contains('miss'));const missBad=miss.filter(c=>/\?/.test(c.textContent)||!c.querySelector('.kalb-seal')||!c.querySelector('.kalb-veil')||!c.querySelector('b').textContent.trim()||!c.querySelector('small')||!c.querySelector('small').textContent.trim()).length;
    const ov=host.scrollWidth>host.clientWidth+1;const n1=cs.length;
    host.querySelector('[data-albt=b]').click();await new Promise(r=>setTimeout(r,100));const n2=host.querySelectorAll('.kalb-c').length,on=host.querySelector('.ksubb.on').dataset.albt;
    host.querySelector('.kalb-c').click();const tap=window.__tap;

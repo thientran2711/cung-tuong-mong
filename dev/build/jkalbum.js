@@ -11,7 +11,7 @@ function kitAlbum(o){o=o||{};if(o.id)KIT_ALBUM[o.id]=o;const tabs=o.tabs&&o.tabs
  const cards=(o.cards||[]).filter(c=>!tabs||!c.tab||c.tab===tab);
  const tb=tabs?`<nav class="ksub kalbt" role="tablist">${tabs.map(t=>`<button type="button" class="ksubb${t.k===tab?" on":""}" data-albt="${esc(t.k)}" role="tab" aria-selected="${t.k===tab}">${esc(t.n)}</button>`).join("")}</nav>`:"";
  const g=cards.map(c=>{const own=!!c.owned,line=own?(c.sub||""):(c.opens||"");const lab=[c.name,line].filter(Boolean).join(" · ");
-  const art=own?kitSceneArt(c.art||"","",{shape:"tall",cap:false,cls:"kalb-art",fb:c.fb}):`<figure class="ksart ksart-tall kalb-art kalb-veil" aria-hidden="true"><span class="kalb-q">?</span></figure>`;
+  const art=own?kitSceneArt(c.art||"","",{shape:"tall",cap:false,cls:"kalb-art",fb:c.fb}):`<figure class="ksart ksart-tall kalb-art kalb-veil" aria-hidden="true"><svg class="kalb-seal" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="24" cy="24" r="15" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3"/><path d="M24 11 37 24 24 37 11 24Z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="24" r="3.2" fill="currentColor"/></svg></figure>`;
   return `<button type="button" class="kalb-c ${own?"own":"miss"}" data-alb-k="${esc(c.k)}" aria-label="${esc(lab)}${own?"":" · chưa có"}">${art}<span class="kalb-t"><b>${esc(c.name||"")}</b>${line?`<small>${esc(line)}</small>`:""}</span></button>`}).join("");
  return `<div class="kpsec kalb" data-alb="${esc(o.id||"")}">${tb}<div class="kalb-grid">${g}</div>${o.note?`<div class="kpnote">${o.note}</div>`:""}</div>`}
 window.kitAlbum=kitAlbum;
@@ -27,7 +27,7 @@ const css=document.createElement("style");css.id="kit-album";css.textContent=`
 .kalb-art{width:100%;margin:0;position:relative}.kalb-art img{width:100%;height:100%;object-fit:cover}
 .kalb-veil{display:flex;align-items:center;justify-content:center;background:repeating-linear-gradient(45deg,#efe3c8,#efe3c8 7px,#e8d9b8 7px,#e8d9b8 14px);border-radius:6px;overflow:hidden}
 .kalb-veil::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 35%,#fffaf0aa,#fffaf000 70%)}
-.kalb-q{position:relative;z-index:1;font-family:var(--display);font-size:2rem;color:#b8892b99}
+.kalb-seal{position:relative;z-index:1;width:46%;max-width:56px;height:auto;color:#b8892bb0}/* a seal, never a «?» (owner: «???» reads as a bug) */
 .kalb-t{display:flex;flex-direction:column;gap:1px;min-width:0}.kalb-t b{font-size:.8rem;line-height:1.2;overflow-wrap:anywhere}.kalb-t small{font-size:.7rem;line-height:1.2;color:var(--dim,#7a6a58);overflow-wrap:anywhere}
 .kalb-c.miss .kalb-t b{color:var(--dim,#7a6a58)}
 .kalb-c:active{filter:brightness(.97)}.kalb-c:focus-visible{outline:2px solid var(--gold,#b8892b);outline-offset:2px}
