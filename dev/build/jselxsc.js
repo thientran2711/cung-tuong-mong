@@ -154,6 +154,8 @@ const SELX_DTV="p:dtv";
     again on return; so a save / co-op rebuild / any driver that reads Q never finds the days without their card */
  const up=()=>{try{const m=Q[0];return !!(m&&m.selxMapUp&&on()&&window.__kpm&&window.__kpm.slot===SELX_DTV)}catch(e){return false}};
  w("showModal",f0=>function(){try{const m=Q[0];if(m&&m.selxMapUp){if(up()){const M=document.getElementById("modal");if(M)M.hidden=true;return}delete m.selxMapUp}}catch(e){}return f0.apply(this,arguments)});
+ /* the stage rail «Về Dư đồ» (jplfs kplBack) on her days map = back to her card too */
+ w("kplBack",f0=>function(){try{if(up())return{t:"Về Dư đồ",go:()=>{window.__kpm=null;selxMapBack()}}}catch(e){}return f0.apply(this,arguments)});
  window.kpmBackHook=()=>{try{if(!up())return false;window.__kpm=null;selxMapBack();return true}catch(e){console.error(e);return false}};
  window.addEventListener("click",e=>{try{if(!on()||(Q.length&&!up()))return;const t=e.target.closest("#tabs [data-tab]");
   if(t&&t.dataset.tab!=="go"){e.preventDefault();e.stopImmediatePropagation();window.__kpm=null;selxMapBack()}}catch(err){console.error(err)}},true)})();
