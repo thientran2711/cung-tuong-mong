@@ -2029,3 +2029,5 @@ BAL.blopt={danhD:4,sungD:4,sup:25,
 BAL.nr={lives:6,w:.5,cap:1500};
 /* ORDER THIN P1 (jmgpool.js): mini-game content pools composed from parts, drawn through jnorep (family mg:<kind>). min = items a pooled test type must hold (test dev/test/mg-pool.js). */
 BAL.mgp={min:40};
+/* ORDER THIN P1c (jmgpool_c.js): pool sizes of the P1c kinds (floor BAL.mgp.min); nghe = every triple of the ten secret words. */
+BAL.mgpc={nghe:120,td_hanh:150,kinh:360,may:350};
