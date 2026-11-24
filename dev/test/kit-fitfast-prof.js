@@ -44,7 +44,15 @@ const CASES=(process.env.ONLY||'many,choice,visit,two,night,fest').split(',');co
     Q.forEach(m=>m.must=1);showModal();await W(900);return document.getElementById('modal').hidden?'hidden':true},k).catch(e=>'ERR '+e.message.slice(0,160));
 
    if(ok!==true){res.push({k,skip:String(ok)});continue}
-   await sleep(2500);const r=await p.evaluate(()=>{const o={ST:window.__ST,T:window.__T,LT:window.__LT.slice()};window.__T={};window.__LT=[];return o});r.k=k;res.push(r);}
+   await sleep(2500);
+   /* EQUIVALENCE: the rects of every box in the dialog after a FULL-loop pick (no hint) must equal those after a hinted pick with each possible hint (S/M/L/XL) */
+   const eq=await p.evaluate(async()=>{const d=document.querySelector('#modal .dlg.kszlive');if(!d||!d.__ksz3)return {skip:1};const snap=()=>[d,...d.querySelectorAll('.k3body,.k3right,.k3ev,.kszfig,.opts,.opts>button,#mb,.kpmain')].filter(e=>e.getClientRects().length).map(e=>{const r=e.getBoundingClientRect();return Math.round(r.left)+','+Math.round(r.top)+','+Math.round(r.width)+','+Math.round(r.height)}).join(';')+'|'+d.dataset.ksz;
+    const w=()=>new Promise(r=>setTimeout(r,120));const full=()=>{for(const k in KSZ_PHINT)delete KSZ_PHINT[k];d.__kszP=undefined;kszLivePick3(d)};
+    full();await w();const ref=snap();const out={ref:d.dataset.ksz,bad:[]};
+    for(const h of ['S','M','L','XL']){d.__kszP=h;for(const k in KSZ_PHINT)KSZ_PHINT[k]=h;kszLivePick3(d);await w();if(snap()!==ref)out.bad.push(h)}
+    full();await w();if(snap()!==ref)out.bad.push('full-again');return out});
+   console.log(k,'EQUIV',JSON.stringify(eq));
+   const r=await p.evaluate(()=>{const o={SZ:(document.querySelector('#modal .dlg')||{dataset:{}}).dataset.ksz,ST:window.__ST,T:window.__T,LT:window.__LT.slice()};window.__T={};window.__LT=[];return o});r.k=k;res.push(r);}
   const sum={};let lt=[];for(const r of res){if(r.skip)continue;lt=lt.concat(r.LT);for(const n in r.T){const T=sum[n]=sum[n]||{n:0,ms:0};T.n+=r.T[n].n;T.ms+=r.T[n].ms}}
   console.log(sz,'rate',RATE,'skipped',await p.evaluate(()=>window.__kszSkip3||0),'longtasks',lt.length,'sumLT',lt.reduce((a,c)=>a+c,0),'max',Math.max(0,...lt),JSON.stringify(Object.fromEntries(Object.entries(sum).map(([k,v])=>[k,v.n+'x '+Math.round(v.ms)+'ms']))));
   await ctx.close()}

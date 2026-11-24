@@ -657,8 +657,15 @@ function kszStaleMark3(dlg,L){const t=performance.now();kszStale3=L.length?{dlg,
  document.addEventListener("pointercancel",()=>{kszRemap3=null},true)})();
 function kszLivePick3(dlg){const SNAP=kszStaleSnap3(dlg);const SC=[];try{const mb=document.getElementById("mb");[...dlg.querySelectorAll(".opts,.k3right,.k3body"),mb].forEach(e=>{if(e&&e.scrollTop>0)SC.push([e,e.scrollTop])})}catch(e){}
  const P=kszLivePick3_0(dlg);SC.forEach(([e,t])=>{if(e.isConnected&&e.scrollTop!==t)e.scrollTop=t});kszStaleMark3(dlg,SNAP);return P}
+const KSZ_PHINT={};
 function kszLivePick3_0(dlg){dlg.__kszFill=0;if(kszNarrow3(dlg)){for(const K of["NL","NM","NS"]){kszLiveLay3(dlg,K);if(K==="NS"||kitFrameFitsLive3(dlg))return K}}
- let P="XL";for(const K of ["S","M","L","XL"]){kszLiveLay3(dlg,K);if(kitFrameFitsLive3(dlg)&&(K==="XL"||!kszListWantsWide3(dlg))){P=K;break}}
+ /* KIT §98.7 (review/kit-fitfast): «fits and does not want wide» only gets truer as the frame grows (a bigger frame never fits less), so the FIRST qualifying size can be found from a HINT (the size this dialog / this dialog kind + viewport got last time)
+   without trying every smaller size: lay the size just BELOW the hint — it must NOT qualify — then walk up from the hint. If it does qualify (the inputs changed: a picture came in) the full loop from S runs exactly as before. Same size, fewer forced layouts. */
+ const ORD=["S","M","L","XL"],ok=K=>{kszLiveLay3(dlg,K);return kitFrameFitsLive3(dlg)&&(K==="XL"||!kszListWantsWide3(dlg))};
+ const hk=dlg.dataset.kind+"|"+innerWidth+"x"+innerHeight+"|"+document.documentElement.className;let hi=ORD.indexOf(dlg.__kszP||KSZ_PHINT[hk]);let from=0;
+ if(hi>0&&!ok(ORD[hi-1]))from=hi;
+ let P="XL";for(let i=from;i<4;i++){const K=ORD[i];if(ok(K)){P=K;break}}
+ dlg.__kszP=P;KSZ_PHINT[hk]=P;
  /* KIT 56.17: the size is picked; now the figure fills the frame body (every later re-apply keeps it) */dlg.__kszFill=1;kitFrameApplyLive3(dlg);return P}
 /* KIT §56.20 (ksz-lost-tap, owner LIVE fault 21/11): a re-pick (late picture, resize) moves the figure and the option block (kszLiveLay3 detaches + re-appends the same nodes), so a tap whose finger
    is DOWN on an option card when the re-pick runs loses its click (the node is detached between touch-down and touch-up). The re-pick therefore never runs while a pointer is down inside the modal:
