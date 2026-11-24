@@ -26,7 +26,7 @@ s16 s7mSSval8e | s17 Sya77u8Ub8 | s18 LwtggCqswO | s33 eI9BBA0dqL | s34 P3HNNsi4
 | s57 | 16 | aFnE1tsfSh | DONE | ok |
 | s58 | 16 | CqWQxCJEEy | DONE | mark on lower cheek lateral to nose-eye, acceptable |
 | s59 | 16 | xS8s4lKjfW | DONE | ok |
-| s60 | 16 | xS8s44SjfW | NEEDS_REVIEW | beauty mark not visible; retry T02 once |
+| s60 | 16 | xS8s44SjfW | NEEDS_REVIEW | T01 beauty mark not visible -> retried T02 (gOvwv58SXO) which is OK |
 | s61 | 16 | fHYuxsoCDY | DONE | ok |
 | s16 | 26 | fHYuLEACDY | DONE | ok, adult look, mark ok |
 | s17 | 26 | N253V2H6D9 | DONE | ok, adult look, mark ok |
@@ -44,7 +44,7 @@ s16 s7mSSval8e | s17 Sya77u8Ub8 | s18 LwtggCqswO | s33 eI9BBA0dqL | s34 P3HNNsi4
 | s57 | 26 | xS8sANrjfW | DONE | ok, adult look, mark ok |
 | s58 | 26 | fHYu7UpCDY | DONE | ok, adult look, mark ok |
 | s59 | 26 | jUIlGnALD0 | DONE | ok, mark small at outer eye corner |
-| s60 | 26 | nVgcCqDYQD | NEEDS_REVIEW | beauty mark not visible (same as age16 s60) |
+| s60 | 26 | nVgcCqDYQD | NEEDS_REVIEW | T01 beauty mark not visible; T02 (MByeyYsDCm) also no mark -> owner review |
 | s61 | 26 | Sya7cBPUb8 | DONE | ok, adult look, mark ok |
 | s16 | 51 | huGfwBPvqL | DONE | ok, mature 51 look, mark ok |
 | s17 | 51 | TdJDbcRVNR | DONE | ok, mature 51 look, mark ok |
@@ -62,7 +62,7 @@ s16 s7mSSval8e | s17 Sya77u8Ub8 | s18 LwtggCqswO | s33 eI9BBA0dqL | s34 P3HNNsi4
 | s57 | 51 | lJhUpZogv9 | DONE | ok, mature 51 look, mark ok |
 | s58 | 51 | gOvwenRSXO | DONE | ok, mature 51 look, mark ok |
 | s59 | 51 | 1lBjcGVr4r | DONE | ok, mark very small/faint under right eye |
-| s60 | 51 | bxpkzAQ5Y2 | NEEDS_REVIEW | beauty mark barely visible (s60 again); otherwise ok |
+| s60 | 51 | bxpkzAQ5Y2 | NEEDS_REVIEW | T01 mark barely visible; T02 (p84X4VGehw) also no mark -> owner review |
 | s61 | 51 | iGkZCQE3uK | DONE | ok, mature 51 look, mark ok |
 | s16 | 63 | ksXxTcJ16B | DONE | ok, clearly older 63 look, mark ok |
 | s17 | 63 | O6Q4haiynm | DONE | ok, mark ok, lines on the deep side but soft |
@@ -82,5 +82,8 @@ s16 s7mSSval8e | s17 Sya77u8Ub8 | s18 LwtggCqswO | s33 eI9BBA0dqL | s34 P3HNNsi4
 | s59 | 63 | gOvwhPiSXO | DONE | ok, clearly older 63 look, mark ok |
 | s60 | 63 | jUIl8yxLD0 | DONE | ok, clearly older 63 look, mark ok |
 | s61 | 63 | Xm68NFRBfo | DONE | ok, mark ok, lines on the heavy side for 63 |
+| s60 | 16 | gOvwv58SXO | DONE | T02 retry: ok, mark below right eye, teen look |
+| s60 | 26 | MByeyYsDCm | NEEDS_REVIEW | T02 retry: otherwise ok but beauty mark still missing |
+| s60 | 51 | p84X4VGehw | NEEDS_REVIEW | T02 retry: otherwise ok but beauty mark still missing; lines a bit heavy |
 
-Progress: 69 DONE / 72, 3 NEEDS_REVIEW, rows logged 72. Credits spent ~9720.
+Progress: 70 DONE / 72, 5 NEEDS_REVIEW, rows logged 75. Credits spent ~10125.
