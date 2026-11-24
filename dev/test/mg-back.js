@@ -3,11 +3,11 @@
    go back để tôi ra tôi chọn cái game lại."
    1 every caller: ONE kit ✕ «Quay lại» (.kit-x[data-kitx=kgback], in the frame header, visible, inside the screen) on the rules screen, during «Hướng dẫn»,
      during play and on the result screen; never two ✕ in the frame
-   2 Thử tay: ✕ on the rules screen → the kind list at once; during play → a kit confirm, then the kind list; between rounds → the kind list; the kind left
+   NO confirm anywhere (owner OD 24/11 ~08:08Z «không có một lời nhắc nào về bất cứ hành động của tôi»): every ✕ acts at once, the loss shows on the result after; window.__kcfN counts kitConfirm calls = 0.
+   2 Thử tay: ✕ on the rules screen → the kind list at once; during play → the kind list at once; between rounds → the kind list; the kind left
      before its last round is NOT in the code; ✕ on the kind list closes it
-   3 other callers, rules screen (before «Sẵn sàng»): ✕ → kit confirm «Bỏ cuộc?» → the caller's own result with 0/10 (or its lose result); «Chơi tiếp» keeps
-     the rules screen; Chải chuốt (nothing spent before the end) goes straight back
-   4 other callers, during play: ✕ → kit confirm → the caller's own 0/10 result screen; ✕ on that result = its «Đã hiểu» (onDone runs once)
+   3 other callers, rules screen (before «Sẵn sàng»): ✕ → straight to the caller's own result with 0/10 (or its lose result), no confirm; Chải chuốt (nothing spent before the end) goes straight back
+   4 other callers, during play: ✕ → the caller's own 0/10 result screen; ✕ on that result = its «Đã hiểu» (onDone runs once)
    5 no page errors. Prints the scan table (caller | screen | ✕ goes to | cost/stake effect). */
 const {chromium}=require('playwright');const path=require('path');
 const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+path.resolve(URL0);
@@ -18,6 +18,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  await p.evaluate(()=>{localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;
   const m=document.getElementById('modal');if(m)m.hidden=true;S.suc=100;S.bac=999;S.ap=9;try{render()}catch(e){}
   const sleep=t=>new Promise(r=>setTimeout(r,t));
+  window.__kcfN=0;{const kc=window.kitConfirm;if(typeof kc==='function')window.kitConfirm=function(){window.__kcfN++;return kc.apply(this,arguments)}}
   window.__x=()=>{document.querySelectorAll('body>*>.kmst').forEach(e=>e.parentElement.remove());document.querySelectorAll('#klife,#kmrew').forEach(e=>e.remove());/* the start-of-game scene / reward layer of the test's fresh game (jload, j93), not the game frame *//* a prize reveal / motion moment (its own full-screen layer, tap to skip) is not the game frame */const d=document.getElementById('kg82');if(!d)return{n:0};const L=[...d.querySelectorAll('.kit-x')].filter(x=>x.offsetParent);const x=d.querySelector('.kit-x[data-kitx=kgback]');
    if(!x||!x.offsetParent)return{n:L.length,vis:false};const r=x.getBoundingClientRect();const top=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);
    return{n:L.length,vis:true,inView:r.left>=0&&r.top>=0&&r.right<=innerWidth&&r.bottom<=innerHeight,onTop:!!top&&(top===x||x.contains(top)),label:x.getAttribute('aria-label'),head:!!x.closest('.kph'),w:Math.round(r.width)}};
@@ -115,9 +116,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* jsgame result ✕ asks first */
   try{__clean();const v=liveRivals(true)[0];let ran=0;sgPlay({G:SG.K.rumor,art:"Mưu kế",v,p0:()=>50,run:()=>{ran++},cost:""});await sleep(900);
    KG82.giveUp=1;document.getElementById('sggo').click();KG82.giveUp=0;await sleep(600);R.sgRes=!!document.getElementById('sgdo');
-   document.querySelector('#kg82 .kit-x[data-kitx=kgback]').click();await sleep(300);R.sgAsk=__cf()&&/Ra tay\?/.test(document.getElementById('modal').textContent);R.sgRan0=ran;
-   __no();await sleep(250);R.sgStay=!!document.getElementById('sgdo')&&ran===0;
-   document.querySelector('#kg82 .kit-x[data-kitx=kgback]').click();await sleep(300);__yes();await sleep(400);R.sgRan=ran;R.sgClosed=!document.getElementById('kg82')}catch(e){R.sgErr=String(e.message||e)}
+   document.querySelector('#kg82 .kit-x[data-kitx=kgback]').click();await sleep(300);R.sgAsk=__cf();await sleep(400);R.sgRan0=0;R.sgStay=true;R.sgRan=ran;R.sgClosed=!document.getElementById('kg82')}catch(e){R.sgErr=String(e.message||e)}
   __clean();return R});
  console.log(JSON.stringify(pre));
  if(SHOT){const fs=require('fs');fs.mkdirSync(SHOT,{recursive:true});const tag=`${VW}x${VH}`;
@@ -140,16 +139,16 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const bad=f=>rows.filter(([l,r])=>!f(l,r)).map(([l,r])=>l+' '+JSON.stringify(r).slice(0,260));
  const XV=x=>x&&x.vis&&x.inView&&x.onTop&&x.n===1&&x.head&&x.label==='Quay lại';
  let B=bad((l,r)=>XV(r.x_rules)&&(!r.x_tut||XV(r.x_tut))&&XV(r.x_play)&&(XV(r.x_res2)||XV(r.x_res)));ok(!B.length,'1 one kit ✕ «Quay lại» in the header on rules / Hướng dẫn / play / result (every caller)',B);
- B=bad((l,r)=>/Chải chuốt|Tu đức/.test(l)?(!r.cf_rules&&!r.after_rules.open):(r.cf_rules&&r.keep&&r.after_rules.open&&r.after_rules.res));ok(!B.length,'3 rules ✕ → confirm («Chơi tiếp» keeps the rules) → the caller\'s own give-up result (Chải chuốt, Tu đức: straight back, nothing spent)',B);
- B=bad((l,r)=>r.cf_play&&r.after_play&&r.after_play.open&&r.after_play.res&&!r.after_play.run);ok(!B.length,'4 play ✕ → confirm → the caller\'s own result screen, board stopped',B);
+ B=bad((l,r)=>/Chải chuốt|Tu đức/.test(l)?(!r.cf_rules&&!r.after_rules.open):(!r.cf_rules&&r.after_rules.open&&r.after_rules.res));ok(!B.length,'3 rules ✕ → NO confirm → the caller\'s own give-up result at once (Chải chuốt, Tu đức: straight back, nothing spent)',B);
+ B=bad((l,r)=>!r.cf_play&&r.after_play&&r.after_play.open&&r.after_play.res&&!r.after_play.run);ok(!B.length,'4 play ✕ → no confirm → the caller\'s own result screen, board stopped',B);
  B=bad((l,r)=>{const a=r.after_res2;return a&&(/khảo hạch/.test(l)?(a.open&&/Môn 2/.test(a.title)):!a.open&&(/(Tu đức|Nghiệm thân|mưu kế|Chải chuốt)/.test(l)||a.done.length===1))});ok(!B.length,'4 ✕ on the give-up result = its «Đã hiểu» (frame closes, onDone once; khảo hạch: the next subject)',B);
  B=rows.filter(([l,r])=>r.after_play&&/\d+\/10/.test(r.after_play.resTxt)&&!/(^|\D|Môn \d)0\/10/.test(r.after_play.resTxt)).map(([l,r])=>l+' '+r.after_play.resTxt);ok(!B.length,'4 the give-up result reads 0/10 where the caller shows a score',B);
- ok(!cal.err&&XV(cal.list_x)&&cal.noThoi&&XV(cal.rules_x)&&cal.rules_back&&XV(cal.tut_x)&&cal.tut_back&&XV(cal.play_x)&&cal.playing&&cal.play_cf&&cal.play_back&&XV(cal.mid_x)&&cal.mid_nx&&cal.mid_back&&!cal.dan0&&!cal.dan1&&cal.list_close,'2 Thử tay: ✕ → kind list from rules / Hướng dẫn / play (confirm) / between rounds; kind not saved; ✕ closes the list',cal);
+ ok(!cal.err&&XV(cal.list_x)&&cal.noThoi&&XV(cal.rules_x)&&cal.rules_back&&XV(cal.tut_x)&&cal.tut_back&&XV(cal.play_x)&&cal.playing&&!cal.play_cf&&cal.play_back&&XV(cal.mid_x)&&cal.mid_nx&&cal.mid_back&&!cal.dan0&&!cal.dan1&&cal.list_close,'2 Thử tay: ✕ → kind list from rules / Hướng dẫn / play (no confirm) / between rounds; kind not saved; ✕ closes the list',cal);
  {const L=Object.keys(pre).filter(k=>typeof pre[k]==='object'&&pre[k]&&'ok' in pre[k]);const B2=L.filter(k=>!pre[k].ok).map(k=>k+' '+JSON.stringify(pre[k]));
   ok(L.length>=9&&!B2.length,'6 before «Sẵn sàng»: ✕ = free back, no confirm, nothing spent (Sức, bạc, phí, khắc, vật liệu identical) — jtd, j83 (dialog + deck card), jrcp, jveil, jsgame pay',B2);
   ok(L.filter(k=>!/jtd|thẻ/.test(k)).every(k=>pre[k].remembered),'6b the charge is only REMEMBERED on the rules screen (nothing spent, spend() never ran, S→rivals refs identical)',L.map(k=>k+':'+pre[k].remembered+'/sp'+pre[k].spends+'/refs'+pre[k].refs));
   ok(pre.goRemember&&pre.goPaid&&pre.sgPaid,'6c «Sẵn sàng» takes the remembered charge (lesson: Sức + 2 khắc join jaudit\'s pending cost; paid scheme: spend now)',{goRemember:pre.goRemember,goPaid:pre.goPaid,goPend:pre.goPend,sgPaid:pre.sgPaid,e:[pre.goErr,pre.sgErr2]});
-  ok(pre.sgRes&&pre.sgAsk&&pre.sgRan0===0&&pre.sgStay&&pre.sgRan===1&&pre.sgClosed,'7 jsgame result: ✕ asks «Ra tay?» first («Ở lại» keeps the card, nothing runs; «Ra tay» runs once)',pre)}
- const hid=await p.evaluate(()=>window.__cfHidden||0);ok(!hid,'3/4 the kit confirm lies on top of the game (its button takes a real tap)',{covered:hid});
+  ok(pre.sgRes&&!pre.sgAsk&&pre.sgRan===1&&pre.sgClosed,'7 jsgame result: ✕ = «Ra tay» at once, no «Ra tay?» confirm (runs once)',pre)}
+ const kcf=await p.evaluate(()=>window.__kcfN||0);ok(kcf===0,'no kitConfirm was opened by any ✕ in the whole run',{kitConfirm:kcf});
  ok(!errs.length,'5 no page errors',errs.slice(0,5));
  await b.close();const f=res.filter(x=>!x).length;console.log(f?`FAIL ${f}/${res.length}`:`PASS ${res.length}/${res.length}`);process.exit(f?1:0)})();

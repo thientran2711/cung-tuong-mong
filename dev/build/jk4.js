@@ -887,7 +887,7 @@ function kitCloseOthers(){let n=0;
  return n}
 function kitDialogStack(){try{const m=typeof Q!=="undefined"?Q[0]:null;if(!m)return 0;return kitDialogWins(m)?kitCloseOthers():0}catch(e){console.error("kitDialogStack",e);return 0}}
 window.kitDialogStack=kitDialogStack;window.kitCloseOthers=kitCloseOthers;window.kitDialogWins=kitDialogWins;
-(function(){const st=document.createElement("style");st.id="kit-dialog-stack";st.textContent=`html body:not(.kg82cf) #modal:not(.kptitle){z-index:42}`;document.head.appendChild(st);
+(function(){const st=document.createElement("style");st.id="kit-dialog-stack";st.textContent=`html body #modal:not(.kptitle){z-index:42}`;document.head.appendChild(st);
  setTimeout(()=>{const s1=showModal;showModal=function(){const r=s1.apply(this,arguments);kitDialogStack();return r}},0)})();
 /* game / lesson results in #ov (kg82 "Đã hiểu", j92 Chải chuốt, the old j5 "Xong"): the result card closes with ✕ / tap outside / Esc,
    which press that button (its own handler applies the result as before); while the game runs there is no ✕ */
