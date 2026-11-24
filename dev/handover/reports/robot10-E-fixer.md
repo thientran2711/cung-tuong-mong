@@ -185,3 +185,13 @@ Technical option with no rule change (for MAIN): the browser slot could hold a c
 Change: dev/measure/robot10.js uiScan «seen» box = text box cut by every clipping ancestor that ends INSIDE the screen (a screen-wide wrapper's clip still counts). No game file.
 Still open (waiting for saves on review/robot10-saves-r5): R8 cautious-3 kmrow×kmtake, R2 rebel-3 kmchip, R8 em.pcs kid tab.
 SSK: SẴN SÀNG KIỂM robot10-e-fix-4 e4022143 (SMALL, test-only; lands after fix-2 r3).
+
+## 9. Step 4 rest — E-FIX-4 r2 review/robot10-e-fix-4 66728c90 (TEST-ONLY, on fix-2 r3; saves review/robot10-saves-r5)
+| row | verdict | cause | proof (robot's own uiScan, old = fix-2 r3 harness) |
+|---|---|---|---|
+| R2 rebel-3 «text over text span.kmchip.kmck × span.kmchip.kmck Thường tại × Thường tại» (every Fold tab) | HARNESS | the demotion card's rank chip cracks in two aria-hidden clip-path halves of the SAME words over a hidden layout copy (j93 kmRankDownHTML kmck-a/b) — by design | dev/test/r10e-uiscan-copy.js (the game's own chip, Fold + iPad): old FAIL 1 → ALL OK; different words and a non-aria-hidden double draw still reported |
+| R8 bd_tuyet cautious-3 «button covered: div.kmrow under button.kbtn.kmtake» (every Fold tab) | HARNESS | long reward list (j93 kitReward .km-done) keeps «Nhận» position:sticky at the bottom of its scrolling list; rows pass under it while she scrolls; the last row scrolls clear | dev/test/r10e-uiscan-sticky.js (game's own list, 14 items, Fold + iPad): old FAIL 1 → ALL OK; a non-sticky button laid on a row still reported |
+| R8 bd_tuyet skilled-2 «em.pcs × kstv Đã mất × Nhiều chuyện» (iPad kid tab) | NOT REPRODUCED | saves-r5 R8-skilled-2.json, iPad kid tab, old harness: 0 rows; page looked: dead prince card fine (bottom rows under the kit scroll fade, scrollable). The Fold twin (#2353, save 081) not tried | open: needs save 081 (Fold) if it comes back in round 2 |
+| R8 bd_hen «real page console.error TypeError: Cannot read properties of undefined (reading '1')» (5/5 skilled lives, 44 hits, Fold + iPad) | NOT REPRODUCED yet | saves-r5 R8-hen-skilled-1.json (earliest autosave) loaded on LIVE 178cac37 + fix-3 build: load, night after load, every tab, act card + «Sang ngày mới» ×3, v5/v4/v3 headers → 0 hits. The robot row had no detail | harness change in r2: every real-page console.error row now carries the Error's top frames + «@ năm … buổi #» + its checkpoint save. A 1-life rerun (bd bd_hen skilled, LAG=0) on fix-4 is running in /home/user/wt/e10c-out/r8 |
+| R3 kgl.kfx off screen | HARNESS (r1 e4022143, §8) | | r10e-offscreen-clip ALL OK on r2 too |
+SSK: SẴN SÀNG KIỂM robot10-e-fix-4 66728c90 (SMALL, test-only; replaces e4022143).
