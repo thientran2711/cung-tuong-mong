@@ -5,12 +5,7 @@ const BLG=["1 súc vải · 1 gói trà","1 súc vải · 1 gói trà · than","
 /* a servant's monthly wage: BAL.wage (jecon) */
 /* pays one consort her month; returns the plain line. jecon (econStipend) is THE stipend; j53/j54 wrap this name for the children's fees, so jecon
    must not reassign it (it did: the fee wrappers were lost) */
-function stipend(p){return typeof econStipend==="function"?econStipend(p):stipend0(p)}
-function stipend0(p){const r=rkOf(p),me=p===S,staff=(p.staff||[]).length;let base=BL[Math.min(7,r)],why=[];
- if(p.out){base=5;why.push("lãnh cung: chỉ 5 bạc")}else{if(p.confined){base=Math.round(base/2);why.push("cấm túc: nửa bổng")}if(p.cutPay>0){base=Math.round(base*.7);why.push(`Nội vụ phủ khất bổng${p.cutBy?" theo ý "+p.cutBy:""}; bớt ${payCutTxt()}`);p.cutPay--;if(!p.cutPay)p.cutBy=""}}
- const wage=p.out?0:staff*BAL.wage,bonus=p.bonusPay||0;p.bonusPay=0;const net=base-wage+bonus;ap(p,{bac:net});
- const line=`Bổng lộc tháng ${S.month} (${rkName(p)}): +${base} bạc${p.out?"":" · "+BLG[Math.min(7,r)]}${wage?` · công ${staff} kẻ hầu -${wage}`:""}${bonus?` · ân thưởng +${bonus}`:""} = ${net>=0?"+":""}${net} bạc${why.length?" ("+why.join("; ")+")":""}.`;
- return me?line:""}
+function stipend(p){return econStipend(p)}/* robot10 nc-fix-5 (nc-fix-4 review nit, LAW 4): the dead legacy stipend0 (typed 5 bạc / half / .7) is gone — jecon econStipend is the ONE stipend road (BAL.payCold / payConfined / payCut) */
 /* a hostile Empress (or her, when Empress, by her own act) may have Nội vụ phủ hold back a consort's pay */
 function payCuts(){const q=queenP();if(!q)return;for(const p of consorts()){if(p===q||p.out)continue;if(q!==S&&rel(q,p)<-30&&!(window.agDOn&&agDOn())&&roll(20)){p.cutPay=Math.max(p.cutPay||0,1);p.cutBy=q.name;if(p===S)log(`<span class="r">Hoàng hậu ${q.name} sai Nội vụ phủ khất bổng lộc của ngươi tháng tới.</span>`)}}}
 /* the NPC Empress rewards her closest ally a little each season (two-way: she, as Empress, has 'Ban thưởng') */
