@@ -730,7 +730,7 @@ BAL.dh={n0:[1,5,10],step:2,artLv:[3,4,5],
          muu = the eyes on her (caughtOdds when she is the TARGET: + schemes against her are caught more, − land easier); kin = caughtOdds when she is the DOER (+ her own schemes caught less).
        Thresholds: stats 0..100, bạc in bạc, months on the calendar (year×12+month). mem = deeds kept per kind. tier b = plate tier (t good, a bad). top = "highest among
        all living consorts in the palace" (her included). night = months of the nights window for chuyensung. */
-BAL.dh.rp={b:{t:4,a:4},mem:8,night:3,
+BAL.dh.rp={b:{t:4,a:4},mem:8,night:3,deg:[4,8]/* additive effect size words: ≤ deg[0] «hơn một chút», ≤ deg[1] «hơn», else «hơn hẳn» */,
  T:{hien:{duc:80,danh:70,offDuc:70,offDanh:60,clean:12,g:["tren",10],l:["danhLoss",2]},
   quocsac:{sac:85,off:80,g:["sung",10],l:["muu",-4]},
   vinhnhu:{tai:80,off:70,g:["thi",2],l:["suc",-1]},

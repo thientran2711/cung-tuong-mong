@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"4903d9ce+","t":"2026-11-24T00:40Z","c":"TITLES2: reputation titles «Danh tiếng» (13 good + 15 bad, gain+loss, lose rules, NPC same rule) + chapter/side-line titles (roads, side ar…","b":"4b7943c25bf8","h":[{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"},{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"}]};
+window.CTM_BI={"s":"52c3fc51+","t":"2026-11-24T00:44Z","c":"TITLES2: bd_hoa/ngua/tuc/hoang road titles, s_ban rename, frameExpose = defended target; law-11 + clash scan, UI check (Fold + iPad)","b":"6a792c6a8645","h":[{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"},{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -36576,7 +36576,7 @@ BAL.dh={n0:[1,5,10],step:2,artLv:[3,4,5],
          muu = the eyes on her (caughtOdds when she is the TARGET: + schemes against her are caught more, − land easier); kin = caughtOdds when she is the DOER (+ her own schemes caught less).
        Thresholds: stats 0..100, bạc in bạc, months on the calendar (year×12+month). mem = deeds kept per kind. tier b = plate tier (t good, a bad). top = "highest among
        all living consorts in the palace" (her included). night = months of the nights window for chuyensung. */
-BAL.dh.rp={b:{t:4,a:4},mem:8,night:3,
+BAL.dh.rp={b:{t:4,a:4},mem:8,night:3,deg:[4,8]/* additive effect size words: ≤ deg[0] «hơn một chút», ≤ deg[1] «hơn», else «hơn hẳn» */,
  T:{hien:{duc:80,danh:70,offDuc:70,offDanh:60,clean:12,g:["tren",10],l:["danhLoss",2]},
   quocsac:{sac:85,off:80,g:["sung",10],l:["muu",-4]},
   vinhnhu:{tai:80,off:70,g:["thi",2],l:["suc",-1]},
@@ -70035,7 +70035,7 @@ const RP={
  bacmenh:["Hồng nhan bạc mệnh","a","nhan sắc đẹp mà vừa mất con","sinh được con, hoặc lâu ngày nguôi ngoai"]};
 /* the effect words (kinds: see the BAL.dh.rp note) */
 const SHL={sung:"Sủng",danh:"Danh",bac:"Bạc thu vào",tren:"Thái hậu, Hoàng hậu quý mến",trung:"Thiện cảm của cung nữ",hau:"Phi tần quý mến"};
-const deg=v=>{v=Math.abs(v);return v<=4?"hơn một chút":v<=8?"hơn":"hơn hẳn"};
+const deg=v=>{v=Math.abs(v);const D=RB().deg;return v<=D[0]?"hơn một chút":v<=D[1]?"hơn":"hơn hẳn"};/* the size words of the additive kinds (BAL.dh.rp.deg) */
 function fxW(k,v){if(!v)return "";if(SHL[k])return v>0?`${SHL[k]} được thêm ${ph(v)}`:`${SHL[k]} bớt đi ${ph(-v)}`;
  switch(k){case"danhLoss":return `Mất Danh nặng thêm ${ph(v)}`;case"phuc":return v>0?"Phúc khí thêm: việc may rủi dễ thành hơn":"Phúc khí kém: việc may rủi khó thành hơn";
   case"thi":return v>0?"Hội thi: thêm chút tài nghệ":"Hội thi: kém chút tài nghệ";case"suc":return v>0?"Ngủ dậy lại Sức thêm":"Ngủ dậy lại Sức kém hơn";
@@ -95337,7 +95337,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="4b7943c25bf8";window.CTM_BUILD=BUILD;
+const BUILD="6a792c6a8645";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

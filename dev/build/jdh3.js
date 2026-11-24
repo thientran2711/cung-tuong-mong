@@ -58,7 +58,7 @@ const RP={
  bacmenh:["Hồng nhan bạc mệnh","a","nhan sắc đẹp mà vừa mất con","sinh được con, hoặc lâu ngày nguôi ngoai"]};
 /* the effect words (kinds: see the BAL.dh.rp note) */
 const SHL={sung:"Sủng",danh:"Danh",bac:"Bạc thu vào",tren:"Thái hậu, Hoàng hậu quý mến",trung:"Thiện cảm của cung nữ",hau:"Phi tần quý mến"};
-const deg=v=>{v=Math.abs(v);return v<=4?"hơn một chút":v<=8?"hơn":"hơn hẳn"};
+const deg=v=>{v=Math.abs(v);const D=RB().deg;return v<=D[0]?"hơn một chút":v<=D[1]?"hơn":"hơn hẳn"};/* the size words of the additive kinds (BAL.dh.rp.deg) */
 function fxW(k,v){if(!v)return "";if(SHL[k])return v>0?`${SHL[k]} được thêm ${ph(v)}`:`${SHL[k]} bớt đi ${ph(-v)}`;
  switch(k){case"danhLoss":return `Mất Danh nặng thêm ${ph(v)}`;case"phuc":return v>0?"Phúc khí thêm: việc may rủi dễ thành hơn":"Phúc khí kém: việc may rủi khó thành hơn";
   case"thi":return v>0?"Hội thi: thêm chút tài nghệ":"Hội thi: kém chút tài nghệ";case"suc":return v>0?"Ngủ dậy lại Sức thêm":"Ngủ dậy lại Sức kém hơn";
