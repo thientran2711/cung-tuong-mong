@@ -101,12 +101,12 @@ window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
 (function(){const st=document.createElement("style");st.id="kit-ph-wait";st.textContent=`
 img[data-kwait]{background:radial-gradient(ellipse at 50% 42%,#fbf4e4 0,#f3e7cf 55%,#eadbbd 100%);animation:kphBreath calc(1.6s*var(--pace,1)) ease-in-out infinite}
 img[data-kwait="s"],img[data-kwait="fs"],img[data-kwait="ms"],img[data-kwait="pfs"],img[data-kwait="pms"]{animation:none}
-img[data-kwait^="f"],img[data-kwait^="m"]{background:url("img/kit/unknown-fig-f.webp") center bottom/contain no-repeat;opacity:.55}
+img[data-kwait^="f"],img[data-kwait^="m"]{background:url("img/kit/unknown-fig-f.webp") center bottom/contain no-repeat;opacity:.92}/* owner OD 24/11 ~07:27Z «2 đi»: the grey stand-in must clearly read as a person standing there (same strength as the .j59sil stranger) */
 img[data-kwait^="m"]{background-image:url("img/kit/unknown-fig-m.webp")}
 img[data-kwait^="f"]{aspect-ratio:730/1350}img[data-kwait^="m"]{aspect-ratio:616/1350}
 /* entry-blank-r3 (review item 6): a PORTRAIT on its way (por-*) waits as the kit soft portrait silhouette (img/kit/unknown-f|m.webp, the stranger / empty-seat portrait), never as bare paper — small slots carry no line, so paper alone read as an empty frame */
 img[data-kwait^="p"]{background:url("img/kit/unknown-f.webp") center top/cover no-repeat,radial-gradient(ellipse at 50% 42%,#fbf4e4 0,#f3e7cf 55%,#eadbbd 100%)}img[data-kwait^="pm"]{background-image:url("img/kit/unknown-m.webp"),radial-gradient(ellipse at 50% 42%,#fbf4e4 0,#f3e7cf 55%,#eadbbd 100%)}
-@keyframes kphBreathF{50%{opacity:.3}}
+@keyframes kphBreathF{50%{opacity:.7}}
 img[data-kwait="f"],img[data-kwait="m"]{animation-name:kphBreathF}
 @keyframes kphBreath{50%{opacity:.62}}
 [data-kwaitp]::after{content:attr(data-kwaitp);position:absolute;left:4px;right:4px;top:50%;transform:translateY(-50%);text-align:center;font:600 .72rem/1.25 var(--display,serif);color:#8a6a40;letter-spacing:.02em;pointer-events:none;z-index:2;text-shadow:0 1px 0 #fff8}
