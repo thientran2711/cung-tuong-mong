@@ -73,7 +73,7 @@ let fail=0,pass=0;const ok=(c,m,x)=>{if(!c){fail++;console.log('FAIL '+m+(x!==un
  ok(roads.length>0,'at least one composed road registered',want);
  const seen={};
  for(const rd of roads){const k=await p.evaluate(rd=>ARC67[rd].o,rd);
-  for(let L=0;L<NLIV;L++){let R;for(let t=0;t<3;t++){R=await p.evaluate(([k,rd,pk])=>window.__run(k,rd,pk),[k,rd,L===0?0:'rand']);if(R&&R.err==='boot'){await p.waitForTimeout(3000);continue}break}
+  for(let L=0;L<NLIV;L++){let R;for(let t=0;t<3;t++){try{R=await p.evaluate(([k,rd,pk])=>window.__run(k,rd,pk),[k,rd,L===0?0:'rand'])}catch(e){console.log(rd,'page lost:',e.message.slice(0,80),'→ new page, retry');R={err:'boot'};await boot()}if(R&&R.err==='boot'){await p.waitForTimeout(3000);continue}break}
    if(!R||!R.seq){ok(false,`${rd} L${L+1}: ran`,R);continue}
    console.log(rd,'life',L+1,R.n,R.all?'ALL':'',R.months+'m','fin='+R.fin,'|',R.seq.join(' '),R.err||'');
    const ns=R.seq.map(x=>+x.split(':')[0]);

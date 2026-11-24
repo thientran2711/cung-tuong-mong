@@ -170,6 +170,7 @@ def validate(rows, origins=None, do_min=False):
                 if not r.get(k): v.e(rid, f'{k} missing')
                 else: text_scan(v, rid, o, k, r[k])
             if words(r.get('title')) > 8: v.e(rid, 'title longer than 8 words')
+            if '{' in str(r.get('title', '')): v.e(rid, 'title must not hold a placeholder (titles are shown unfilled in lists)')
             if r.get('w', 'me') not in SPEAK: v.e(rid, f'w «{r.get("w")}» not a speaker')
             roles = []
             for s, n in (('s', 2), ('c', 3), ('t', 1), ('x', 1)):
@@ -199,6 +200,7 @@ def validate(rows, origins=None, do_min=False):
                     if not r.get(k): v.e(rid, f'{k} missing')
                     else: text_scan(v, rid, o, k, r[k])
                 if words(r.get('title')) > 8: v.e(rid, 'title longer than 8 words')
+                if '{' in str(r.get('title', '')): v.e(rid, 'title must not hold a placeholder (titles are shown unfilled in lists)')
                 rd = r.get('rd')
                 if rd is not None and (not isinstance(rd, list) or not all(isinstance(x, str) and x.startswith(o + '_') for x in rd)):
                     v.e(rid, f'rd must be a list of {o}_ premise ids')
