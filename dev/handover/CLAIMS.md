@@ -1442,3 +1442,4 @@ REVIEW palace-distance 9e655c3e (opus BIG; briefs/D-palace-distance-review.md) |
 | DLG WRITER W1p+W3 (polish j72_a, then j72_old; sonnet; lead 5NjXSPTa) | review/sideline-dlg content | B | session_01N1tNP3Qa628fJpUw9rPCnS | RUNNING | 24/11 07:27Z |
 | SELSCENE-7 (opus; successor of SELSCENE-6; merge selscene-dramas + top up 60+/60+ + polish + OWNER MOCK + SSK) | review/selection-scene; reports/selection-scene.md | MAIN 119 | session_01V1ZZH4RpHLXeiVt1a4nctc | RUNNING | 24/11 07:37Z |
 | RING-DESIGN «Vòng người» mock (sonnet UI design; OD 24/11 ~07:32Z/~07:35Z real) | review/ring-design (mock only); reports/ring-design.md | MAIN 119 | session_01V1ZZH3CcWmndHofFV5TX3K | RUNNING | 24/11 07:37Z |
+| MOTION-DESIGN game-feel / event animation study (sonnet UI design; OD 24/11 ~07:48Z real) | review/motion-design (mock only); reports/motion-design.md | MAIN 119 | (opening) | RUNNING | 24/11 07:50Z |
