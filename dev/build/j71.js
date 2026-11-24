@@ -173,6 +173,8 @@ function qsTok7(b,n){const T=qs7();if(!T)return"";const nm=b==="kho"?"Kho lúa":
 function qsDo7(b,n){const T=qs7();if(!T)return;T[b]=cl(T[b]+n,0,100)}
 /* the extra tokens + callback for a successful merit: {dai, pd, back:[house,n], qs:[[bar,n]]} */
 function bonus7(o){const t=[];if(o.dai&&daiOk7(S))t.push(G7(DAI7));if(o.pd&&pdOk7())t.push(G7("+1 Phúc duyên"));if(o.back){const x=backTok7(o.back[0],o.back[1]);if(x)t.push(x)}(o.qs||[]).forEach(([b,n])=>{const x=qsTok7(b,n);if(x)t.push(x)});return t}
+/* TITLES2 (jdh3): the two merit families with no bonusDo7 (conbenh, hoagiai) mark their «ok» here → the lập công title */
+function cpm7(k){try{if(typeof window.cpMerit7==="function")window.cpMerit7(k)}catch(e){}}
 function bonusDo7(o,why){const j=j7s();j.cong++;let s="";if(o.dai&&daiDo7(S))s+=" Được ghi công: lần sắc phong tới sớm hơn 1 tháng.";if(o.pd&&pdOk7()){j.pd++;pdAdd(1,`lập công (${why})`,"merit")}if(o.back)backDo7(o.back[0],o.back[1]);(o.qs||[]).forEach(([b,n])=>qsDo7(b,n));return s}
 function hurt7(n){return -Math.max(0,Math.min(n,(S.suc||0)-25))}
 /* ---------- merit families: v = text variants ({A} {B} {K} filled), pp() -> params or null, o(X) -> evChoice list ---------- */
@@ -215,12 +217,12 @@ MF("conbenh",{t:"Lập công · Trông con bệnh",cd:24,w:()=>allKids().some(([
  pre:X=>{const e=allKids().find(([k,v])=>k.name===X.p.kn&&k.alive&&(X.p.m==null?!v:(v&&v.id===X.p.m)));if(!e)return false;X.kid=e[0];X.mom=e[1];return true},
  fill:(s,X)=>s.replace(/\{K\}/g,X.kid.name).replace(/\{A\}/g,X.mom?X.mom.name:"ngươi"),
  o:X=>{const k=X.kid,m=X.mom,p=od(BAL.odb.j71.odP_6+aw7(S,"y")*9);
-  if(!m)return [CH7("Thức trắng trông con",{c:{suc:-15},p,w:{duc:1},wt:[G7(`${k.name} khỏe ${balSg(BAL.eff.j71.hpOk)}`),G7(`${k.name} quyến luyến ${balSg(BAL.eff.j71.fondOk)}`)],l:{},lt:["con chưa đỡ"],ok:()=>{k.hp=Math.min(100,k.hp+BAL.eff.j71.hpOk);k.fond=cl((k.fond||0)+BAL.eff.j71.fondOk,0,100);return `${k.name} hạ sốt, nắm tay ngươi không rời.`},ll:"Con vẫn chưa đỡ, phải chờ thêm."}),
-   CH7("Mời viện phán giỏi nhất",{c:{bac:-40},p:od(BAL.odb.j71.odP_7),wt:[G7(`${k.name} khỏe ${balSg(BAL.eff.j71.hpOk_2)}`)],lt:["thuốc chưa thấy hiệu quả"],ok:()=>{k.hp=Math.min(100,k.hp+BAL.eff.j71.hpOk_2);return `Viện phán bốc thuốc, ${k.name} đỡ hẳn.`}}),
+  if(!m)return [CH7("Thức trắng trông con",{c:{suc:-15},p,w:{duc:1},wt:[G7(`${k.name} khỏe ${balSg(BAL.eff.j71.hpOk)}`),G7(`${k.name} quyến luyến ${balSg(BAL.eff.j71.fondOk)}`)],l:{},lt:["con chưa đỡ"],ok:()=>{cpm7("conbenh");k.hp=Math.min(100,k.hp+BAL.eff.j71.hpOk);k.fond=cl((k.fond||0)+BAL.eff.j71.fondOk,0,100);return `${k.name} hạ sốt, nắm tay ngươi không rời.`},ll:"Con vẫn chưa đỡ, phải chờ thêm."}),
+   CH7("Mời viện phán giỏi nhất",{c:{bac:-40},p:od(BAL.odb.j71.odP_7),wt:[G7(`${k.name} khỏe ${balSg(BAL.eff.j71.hpOk_2)}`)],lt:["thuốc chưa thấy hiệu quả"],ok:()=>{cpm7("conbenh");k.hp=Math.min(100,k.hp+BAL.eff.j71.hpOk_2);return `Viện phán bốc thuốc, ${k.name} đỡ hẳn.`}}),
    CH7("Giao cho nhũ mẫu",{wt:["không tốn sức"],k:[`${k.name} quyến luyến -${balAb(BAL.eff.j71.fondOk_2)}`],ok:()=>{k.fond=cl((k.fond||0)-BAL.eff.j71.fondOk_2,0,100);return `Ngươi giao ${k.name} cho nhũ mẫu trông.`}})];
   const Am=evActor("rv",m.id);const B={dai:0};
-  return [CH7(`Sang trông, đưa thuốc của mình`,{c:{suc:-10},p,w:{danh:3,duc:2},r:[[Am,10]],wt:[G7(`${k.name} khỏe ${balSg(BAL.eff.j71.hpOk_3)}`)],lr:[[Am,-8]],lt:[`${m.name} trách ngươi làm con nàng thêm mệt`],ok:()=>{k.hp=Math.min(100,k.hp+BAL.eff.j71.hpOk_3);return `${k.name} đỡ hẳn; ${m.name} cảm kích ngươi.`},ll:`Thuốc của ngươi không đỡ; ${m.name} trách ngươi xen vào.`}),
-   CH7("Tâu xin Hoàng thượng cử viện phán",{r:[[Am,4]],wt:[G7(`${k.name} khỏe ${balSg(BAL.eff.j71.hpOk_4)}`)],ok:()=>{k.hp=Math.min(100,k.hp+BAL.eff.j71.hpOk_4);return `Viện phán được cử sang trông ${k.name}.`}}),
+  return [CH7(`Sang trông, đưa thuốc của mình`,{c:{suc:-10},p,w:{danh:3,duc:2},r:[[Am,10]],wt:[G7(`${k.name} khỏe ${balSg(BAL.eff.j71.hpOk_3)}`)],lr:[[Am,-8]],lt:[`${m.name} trách ngươi làm con nàng thêm mệt`],ok:()=>{cpm7("conbenh");k.hp=Math.min(100,k.hp+BAL.eff.j71.hpOk_3);return `${k.name} đỡ hẳn; ${m.name} cảm kích ngươi.`},ll:`Thuốc của ngươi không đỡ; ${m.name} trách ngươi xen vào.`}),
+   CH7("Tâu xin Hoàng thượng cử viện phán",{r:[[Am,4]],wt:[G7(`${k.name} khỏe ${balSg(BAL.eff.j71.hpOk_4)}`)],ok:()=>{cpm7("conbenh");k.hp=Math.min(100,k.hp+BAL.eff.j71.hpOk_4);return `Viện phán được cử sang trông ${k.name}.`}}),
    CH7("Không dính vào",{w:{suc:BAL.cv.rest}/* decline family: she keeps her strength */,wl:"Ngươi không dính vào chuyện con người khác."})]},
  npc:v=>{const L=allKids().filter(([k,m])=>k.alive&&k.age<16&&m!==v&&m);if(!L.length||(v.suc||0)<40)return"";const [k,m]=pick(L);ap(v,{suc:-10,danh:3,duc:2});k.hp=Math.min(100,k.hp+BAL.eff.j71.hpNpc);relAdd(v,m,BAL.eff.j71.npc);return `${v.name} sang trông ${k.name} lúc bệnh, ${m===S?"ngươi":m.name} cảm kích nàng.`}});
 /* a real j70 plot she has seen tells of (NPC against NPC), and she holds evidence on the plotter */
@@ -279,7 +281,7 @@ MF("hoagiai",{t:"Lập công · Hòa giải",cd:24,w:()=>{const L=liveRivals(tru
  pp:()=>{const L=liveRivals(true).filter(present7);const P=[];for(const a of L)for(const b of L)if(a.id<b.id&&(aff(a,b)+aff(b,a))<0)P.push([a,b]);if(!P.length)return null;const [a,b]=npwPick(P,([a,b])=>-(aff(a,b)+aff(b,a))+oan(a,b)+oan(b,a));/* npc-purpose G2: the worst real feud */return{a0:a.id,a1:b.id}},
  pre:X=>{X.A=evActor("rv",X.p.a0);X.B=evActor("rv",X.p.a1);return !!(X.A&&X.B)},
  o:X=>{const A=X.A,B=X.B;
-  return [CH7("Đứng ra giảng hòa",{p:od(BAL.odb.j71.odP_16+S.danh/3+(S.duc||0)/4+(S.tamco||0)/5),w:{danh:2,duc:2},r:[[A,5],[B,5]],wt:[G7("hai nàng bớt giận nhau")],lr:[[A,-4],[B,-4]],ok:()=>{relAdd(A.o,B.o,BAL.eff.j71.ok_2);return `${A.n} và ${B.n} nghe ngươi, làm lành với nhau.`},ll:"Hai bên đều cho rằng ngươi thiên vị bên kia."}),
+  return [CH7("Đứng ra giảng hòa",{p:od(BAL.odb.j71.odP_16+S.danh/3+(S.duc||0)/4+(S.tamco||0)/5),w:{danh:2,duc:2},r:[[A,5],[B,5]],wt:[G7("hai nàng bớt giận nhau")],lr:[[A,-4],[B,-4]],ok:()=>{cpm7("hoagiai");relAdd(A.o,B.o,BAL.eff.j71.ok_2);return `${A.n} và ${B.n} nghe ngươi, làm lành với nhau.`},ll:"Hai bên đều cho rằng ngươi thiên vị bên kia."}),
    CH7(`Bênh ${A.n}`,{r:[[A,8],[B,-8]],wl:`Ngươi bênh ${A.n}.`}),
    CH7(`Bênh ${B.n}`,{r:[[B,8],[A,-8]],wl:`Ngươi bênh ${B.n}.`}),
    CH7("Mặc kệ",{w:{suc:BAL.cv.rest}/* decline family: she keeps her strength */,wl:"Ngươi không dính vào."})]},

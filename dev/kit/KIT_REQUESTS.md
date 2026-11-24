@@ -246,3 +246,8 @@ K-FOCUS-1b SPEC (append to kitFocus; pure display, no numbers of its own, knobs 
 - Status: OPEN.
 
 - MG-SKIN (MAIN 113 22:39Z; owner OD 23/11 ~23:05Z real): «skin» slot on the kg82 frame {bg picture, board/piece art keys, button palette}, ≥4 palettes from the kit palette, Fold + iPad readable → DONE by KIT KEEPER #14 on review/kit-mgskin (KIT.md §MG-SKIN, test dev/test/kit-mgskin.js). Art: Foreman C paints img/mg/<kind>-<id>.webp (+ img/mg/<sprite>-<id>.webp); wiring: THIN P1 (kitMgSkinAdd + KG82.preSkin).
+
+## 24/11 E55 (worker session_01DgYSWmSsW6T7nM2qDQXJhD for FOREMAN E ROOT-1, review/titles2) — KIT REQUEST «K-DH-CAPFIT: title plate on the event picture clips long names»
+- KIT §82 + OD 21/11 ~04:14Z (#54): `kitDhCap` (jdh.js) moves the `.kt3` plate of every title dialog (Danh hiệu mới / lên bậc / đeo, and now the TITLES2 «Tiếng thơm / Tiếng xấu» notice) onto the event picture. On Fold 755x1000 and iPad 1180x820 the picture column is narrower than a 4-word plate (e.g. «Hiền lương thục đức», «Khuynh quốc khuynh thành»): the plate text is cut at both sides (`.kdh` scrollWidth > clientWidth). Detected by `dev/test/titles2-ui.js` (WARN line K-DH-CAPFIT).
+- Ask: kit keeper gives the caption plate a fit rule for long names (shrink the plate font to fit, or wrap to two lines, or fall back to the band under the picture), same rule for every title of that width. E55 did not restyle the plate.
+- Status: OPEN.
