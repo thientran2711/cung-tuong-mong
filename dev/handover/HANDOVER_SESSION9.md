@@ -2872,3 +2872,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (05:56Z) OD 09:00Z: kept = «ban hương nang» (sachet), home = «ban hoa»; per-girl tray animation; her big moment on own bg → SELSCENE-4, INTRO-DESIGN, C (rename thẻ bài bg → hương nang).
 - (05:57Z) OD 09:05Z Day 3 stay approved → SELSCENE-4. LC9: thin-p4-r1 4243006e NOT landed (j68c-play 27 FAIL + kyc-play 1 FAIL on bare head) → back to B (details in B STATUS). LIVE = 68799300.
 - (05:59Z) KIT READY kit-dialogue-vn 8e12fbc5 → B review; SELSCENE-4 told to wire it. KK17 at ~40 % ctx → told to write handover + stop; KK18 next. INTRO-DESIGN: 10 clips + F1 room-assignment, page ETA ~15 min.
+- (06:00Z) OD 09:10Z: patron promo routes «Thái hậu ân điển» + «Hoàng hậu đề cử» (daughter weight = one special exam outside the kỳ; threshold by patron's nết; NPCs too) → D promo-redesign table (09:11Z).
