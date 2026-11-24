@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"6676d59b+","t":"2026-11-24T08:08Z","c":"sideline-dlg: all 9 writer slices folded in (W1p j72_a, W2 j72_b, W3 j72_old, W4–W6 j68_a/b/c, W7 j68_d_ky, W8 j7_wc, W9 j70_j71) — 1233/12…","b":"8920ffe1557e","h":[{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"}]};
+window.CTM_BI={"s":"b271b221+","t":"2026-11-24T08:11Z","c":"sideline-dlg: all 9 writer slices folded in (W1p j72_a, W2 j72_b, W3 j72_old, W4–W6 j68_a/b/c, W7 j68_d_ky, W8 j7_wc, W9 j70_j71) — 1233/12…","b":"d977cc5b2f04","h":[{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -96616,11 +96616,13 @@ function dlgsActor(a,nm){if(!a)return null;if(a===S)return dlgsMe();
  /* Thái hậu / Hoàng thượng: figFor picks their painting by kind (figRole), their actor object carries none → pass the kind (law 11: every th/emp scene) */
  if(a.k==="th"||a.k==="emp"){const o=a.k==="emp"?(S.emp||a.o):(S.thO||a.o);return dlgsPer({kind:a.k,ref:o||{},name:a.n},nm||a.n)}
  /* her grown child (j72 req ak): the kid painting set (kidFig), never figFor */
- if(a.k==="ak"&&a.o){try{const src=typeof kidFigSrc==="function"?kidFigSrc(a.o):"";return src?{src,n:nm||a.n||a.o.name||""}:null}catch(e){return null}}
+ if((a.k==="ak"||a.k==="kid")&&a.o){try{const src=typeof kidFigSrc==="function"?kidFigSrc(a.o):"";return src?{src,n:nm||a.n||a.o.name||""}:null}catch(e){return null}}
  return dlgsPer(a.f&&a.f.ref?a.f.ref:a.o,nm||a.n)}
 function dlgsVoice(a){if(!a)return null;if(a===S)return S;try{return kSpk(a)||{srv:"f",name:a.n}}catch(e){return null}}
 function dlgsCtx(act,fill,at){const maid=S.maid?{k:"maid",o:S.maid,n:S.maid.name}:null;const get=r=>r==="me"?S:r==="M"||r==="maid"?maid:act[r]||null;
- return{who:r=>dlgsActor(get(r)),txt:(t,a,b)=>{const v=dlgsVoice(get(a)),l=dlgsVoice(get(b));if(v&&l)t=kSay(v,l,t);return fill(t)},at}}
+ return{who:r=>dlgsActor(get(r)),txt:(t,a,b)=>{const v=dlgsVoice(get(a)),l=dlgsVoice(get(b));if(v&&l)t=kSay(v,l,t);return dlgsGen(fill(t))},at}}
+/* the placeholders every family may use (validator GEN): {S} season, {E} Hoàng thượng, {M} her cung nữ — filled the same way for every family (law 11: a family fill that lacks one made the scene silently drop) */
+function dlgsGen(t){try{const sea=SEASON[S.month-1];return String(t).replace(/\{S\}/g,sea.toLowerCase()).replace(/\{E\}/g,"Hoàng thượng").replace(/\{M\}/g,S.maid?S.maid.name:"cung nữ")}catch(e){return t}}
 /* j72 việc nhờ (110 old templates + THIN P3 composed seeds): the offer card (pid q72o, pp.x). Unit id "j72:<seed id>" / "j72:<old tid>".
    Roles A requester · B second person · M her cung nữ. Place: A comes to where she is / she asked around (A's place). Default background = the place she stands (S.place). A family letter: L = M. */
 function dlgsJ72Id(tid){return"j72:"+String(tid).replace(/^c:/,"")}
@@ -99147,7 +99149,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="8920ffe1557e";window.CTM_BUILD=BUILD;
+const BUILD="d977cc5b2f04";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

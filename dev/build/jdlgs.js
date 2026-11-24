@@ -48,11 +48,13 @@ function dlgsActor(a,nm){if(!a)return null;if(a===S)return dlgsMe();
  /* Thái hậu / Hoàng thượng: figFor picks their painting by kind (figRole), their actor object carries none → pass the kind (law 11: every th/emp scene) */
  if(a.k==="th"||a.k==="emp"){const o=a.k==="emp"?(S.emp||a.o):(S.thO||a.o);return dlgsPer({kind:a.k,ref:o||{},name:a.n},nm||a.n)}
  /* her grown child (j72 req ak): the kid painting set (kidFig), never figFor */
- if(a.k==="ak"&&a.o){try{const src=typeof kidFigSrc==="function"?kidFigSrc(a.o):"";return src?{src,n:nm||a.n||a.o.name||""}:null}catch(e){return null}}
+ if((a.k==="ak"||a.k==="kid")&&a.o){try{const src=typeof kidFigSrc==="function"?kidFigSrc(a.o):"";return src?{src,n:nm||a.n||a.o.name||""}:null}catch(e){return null}}
  return dlgsPer(a.f&&a.f.ref?a.f.ref:a.o,nm||a.n)}
 function dlgsVoice(a){if(!a)return null;if(a===S)return S;try{return kSpk(a)||{srv:"f",name:a.n}}catch(e){return null}}
 function dlgsCtx(act,fill,at){const maid=S.maid?{k:"maid",o:S.maid,n:S.maid.name}:null;const get=r=>r==="me"?S:r==="M"||r==="maid"?maid:act[r]||null;
- return{who:r=>dlgsActor(get(r)),txt:(t,a,b)=>{const v=dlgsVoice(get(a)),l=dlgsVoice(get(b));if(v&&l)t=kSay(v,l,t);return fill(t)},at}}
+ return{who:r=>dlgsActor(get(r)),txt:(t,a,b)=>{const v=dlgsVoice(get(a)),l=dlgsVoice(get(b));if(v&&l)t=kSay(v,l,t);return dlgsGen(fill(t))},at}}
+/* the placeholders every family may use (validator GEN): {S} season, {E} Hoàng thượng, {M} her cung nữ — filled the same way for every family (law 11: a family fill that lacks one made the scene silently drop) */
+function dlgsGen(t){try{const sea=SEASON[S.month-1];return String(t).replace(/\{S\}/g,sea.toLowerCase()).replace(/\{E\}/g,"Hoàng thượng").replace(/\{M\}/g,S.maid?S.maid.name:"cung nữ")}catch(e){return t}}
 /* j72 việc nhờ (110 old templates + THIN P3 composed seeds): the offer card (pid q72o, pp.x). Unit id "j72:<seed id>" / "j72:<old tid>".
    Roles A requester · B second person · M her cung nữ. Place: A comes to where she is / she asked around (A's place). Default background = the place she stands (S.place). A family letter: L = M. */
 function dlgsJ72Id(tid){return"j72:"+String(tid).replace(/^c:/,"")}
