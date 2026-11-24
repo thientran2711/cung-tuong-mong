@@ -39,7 +39,7 @@ Real positions: Forbidden City inner court (research doc dev/research/palace-res
 
 Summary: axis (Emperor, Empress, garden, study), Dowager west and apart, lãnh cung remote, servants/offices outer — all match. The consort palaces are 8 east + 2 west (history 6 + 6), so four "west" names sit east (Trường Xuân, Khải Tường, Hàm An, and the 2 real west ones are not the nearest).
 ### Small map-move PROPOSALS (law 16 — nothing moved; for MAIN 117 → sếp)
-- P1 (clearly off, it matters in play now): Vĩnh Thọ + Dực Khôn (standing 3, "nearest the Emperor" in history and in bcWhy's words «Cung bậc nhất lục cung») are mid/far on the plan, while Diên Huy (standing 2) is the nearest. Proposal: move PAL_WEST anchors from y .262 down to y ≈ .40 (x .40/.44 → beside Dưỡng Hòa điện, west side), making them the two nearest (far ≈ 0–.1). Effect: the top palaces get the most visits (matches history), Diên Huy becomes mid.
+- P1 (clearly off) — DONE in r2 (see R2): Vĩnh Thọ + Dực Khôn (standing 3, "nearest the Emperor" in history and in bcWhy's words «Cung bậc nhất lục cung») are mid/far on the plan, while Diên Huy (standing 2) is the nearest. Proposal: move PAL_WEST anchors from y .262 down to y ≈ .40 (x .40/.44 → beside Dưỡng Hòa điện, west side), making them the two nearest (far ≈ 0–.1). Effect: the top palaces get the most visits (matches history), Diên Huy becomes mid.
 - P2 (optional): Trường Xuân / Khải Tường / Hàm An are west palaces in history; moving them west needs 3 new west slots + Dư đồ art (Foreman C) — bigger than "small"; recommend NOT now.
 - P3: no move for Diên Huy: its far-SE "cold" history is already played by Hàm An (far 1.00, standing 0).
 - P4 (tiny): Phật đường is east; the real Buddhist halls are west (Anh Hoa điện). Non-consort, no effect on play; leave unless the map is redrawn.
@@ -75,3 +75,24 @@ Branch review/palace-distance from origin/main 68799300. Final sha: see SSK line
 SSK review/palace-distance 9e655c3ed013a179ec66e392e9a77e24a425d0b4 (TIER BIG; base origin/main 68799300; diff = jpdist.js new, jbancung.js (card text + hint), jvisit.js 1 line, assemble.py 1 entry, tests: palace-distance.js + palace-distance-shots.js new, rules-one-source.js / emperor-visit.js / coop-ban-cung.js adjusted; rebuilt index.html + sw.js).
 REVIEWER NOTES: (1) BAL numbers are ours (tablet .3, visit .5, +2 night, far bonus 4/3) — tune if the robot says so. (2) P1 map move (Vĩnh Thọ / Dực Khôn nearer the hall) NOT done (law 16) — awaiting sếp via MAIN 117. (3) emperor-visit.js fails on main too (pre-existing).
 Worker on call for the reviewer. Worktrees: /home/user/wt/pdist (kept for review fixes), /home/user/wt/pd-main (to delete).
+
+## R2 — P1 DONE (Foreman D order 24/11 ~07:00Z: «P1 IS ALREADY RULED … DO IT now»)
+SẴN SÀNG KIỂM r2 review/palace-distance ed777943b4575794e6c32b50efc74e4f564cf47a (on 9e655c3e; base main 68799300).
+- jpal.js PAL_PLAN: the Dư đồ art's Tây lục cung courtyards (2 columns × 3 rows west of the axis) now hold the palaces that were WEST in history. Inner column (nearest Dưỡng Hòa điện): Vĩnh Thọ (south, far .01) and Dực Khôn (middle, .04); the north courtyard is empty (Trữ Tú, dropped 18/11). Outer column: Khải Tường (= Thái Cực, south, .41), Trường Xuân (middle, .44), Hàm An (= Hàm Phúc, north, .88). Count correction: 3 west names were east, not 4 (Trường Xuân, Khải Tường, Hàm An); the 3 east courtyards they left keep their painted buildings with no label.
+  Names keep their slot INDEX, so every save's S.pal / v.pal is unchanged; only plan coordinates move. Travel cost (mapPos grid) does not read slot coordinates. Farthest palace is now Chung Tú (1.00); nearest is Diên Huy (0), then Vĩnh Thọ / Dực Khôn.
+- palace-distance.js 27/27: nearest/farthest are now computed, not fixed names. New checks: Vĩnh Thọ / Dực Khôn far ≤ .1; all 5 Tây lục cung names sit west of the axis.
+- ROBOT visits table (dev/measure/palace-distance-bot.js, 4000 tuần per palace, real nightCh / visCh rolls, Sủng 60, rank Phi, her vs NPC at the same palace):
+    palace | far | HER nights/100t · visits/100t · Sủng(nights) · Sủng(visits) · Danh(visits) | NPC same
+    Diên Huy cung | 0 | 16.3 · 5.7 · 65 · 39.9 · 17.1 | 23.8 · 5.35 · 95.3 · 37.4 · 16
+    Vĩnh Thọ cung | 0.01 | 17.9 · 5.25 · 71.6 · 36.8 · 15.8 | 23.3 · 5.33 · 93.3 · 37.3 · 16
+    Dực Khôn cung | 0.04 | 15.8 · 4.22 · 63.2 · 29.6 · 12.7 | 23.7 · 5.55 · 94.7 · 38.9 · 16.6
+    Thừa Minh cung | 0.11 | 17.8 · 4.4 · 71.1 · 30.8 · 13.2 | 23.1 · 5.17 · 92.2 · 36.2 · 15.5
+    Khải Tường cung | 0.41 | 16.1 · 4.28 · 80.6 · 34.2 · 12.8 | 22.1 · 4.03 · 110.5 · 32.2 · 12.1
+    Trường Xuân cung | 0.44 | 14.8 · 3.77 · 74.1 · 30.2 · 11.3 | 20.2 · 4.05 · 100.9 · 32.4 · 12.1
+    Cảnh Phúc cung | 0.48 | 13.9 · 4.1 · 69.6 · 32.8 · 12.3 | 20.2 · 4.22 · 100.9 · 33.8 · 12.7
+    Vĩnh Hòa cung | 0.74 | 13.9 · 3.33 · 69.8 · 36.6 · 16.6 | 19.4 · 3.13 · 97 · 34.4 · 15.6
+    Hàm An cung | 0.88 | 13.8 · 2.3 · 82.9 · 29.9 · 13.8 | 17.4 · 2.88 · 104.6 · 37.4 · 17.3
+    Chung Tú cung | 1 | 12.5 · 2.73 · 74.8 · 35.4 · 16.4 | 18.1 · 2.23 · 108.9 · 28.9 · 13.4
+  Read: near palaces get more nights (her 16–18 vs 12.5 per 100 tuần at Chung Tú) and more visits (5.7 vs 2.7). Far palaces gain more per night and visit, so total Sủng stays even (her Diên Huy 65+40 = 105 vs Chung Tú 75+35 = 110). Near also means more chances of a child and more Ân tình, so neither side is strictly better (laws 2/3). Same rule for her and the NPC (law 1): both drop by the same ratio near → far (her nights 16.3 → 12.5, NPC 23.8 → 18.1). The NPC's level is higher only because her Sắc / arts are higher in this run (the bot equalises Sủng and rank only).
+- GATES r2 (ed777943): quickcheck PASS (core gates PASS, old save ok, perf render 252/283 ms); one-core ×3 PASS; ban-cung 33/33; coop-e2e 142/142; coop-ban-cung 26/26 (an earlier run was 22/26 because the host had not merged the friend yet (A.fr null), the same flake the ban-cung half shows; re-run 26/26).
+- Shots (CDN img/_review/palace-distance/, 8 jpg): pd-map-fold + pd-map-ipad (Dư đồ with the west column), pd-bancung (Fold/iPad), pd-log (Fold/iPad). Looked at all.
