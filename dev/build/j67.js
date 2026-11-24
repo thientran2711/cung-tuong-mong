@@ -1453,7 +1453,7 @@ ARC67.s_su=arcFx("s_su",{o:"*",ok:nsrv67,t:"Sứ thần phương Tây",w:"emp",s
   {n:"Giữ lễ Đại Hy",wx:"Thái hậu hài lòng",lx:"sứ thần ngượng",rt:"Lễ nghi đúng phép."}]},
  s2:{h:"Món quà kỳ lạ",w:"emp",t:"Sứ thần tặng ngươi một chiếc gương soi rõ từng sợi tóc.",o:[
   {n:"Dâng lên Thái hậu",wx:"Thái hậu thích",lx:"không giữ được quà",rt:"Thái hậu soi mãi không chán."},
-  {n:"Giữ làm của riêng",gi:["guong","emp"],wx:"Gương Tây dương vào rương (dùng: Sắc +3)",rt:"Ngươi cất gương vào rương."}]},
+  {n:"Giữ làm của riêng",gi:["guong","emp"],wx:`Gương Tây dương vào rương (dùng: Sắc ${balSg(BAL.rl.jstip.sacUse)})`,rt:"Ngươi cất gương vào rương."}]},
  c1:{h:"Thông dịch bịa lời",w:"maid",t:"Ngươi nhận ra người thông dịch dịch sai, như cố gây hiểu lầm.",o:[
   {n:"Vạch ngay giữa yến",f:"truth",wx:"cứu buổi yến",lx:"bị cho là xen vào",rt:"Thông dịch tái mặt, bị thay.",rf:"Không ai tin ngươi hiểu tiếng Tây."},
   {n:"Lặng lẽ báo Lễ bộ",lx:"buổi yến vẫn có hiểu lầm",wx:"Lễ bộ đề phòng",rt:"Lễ bộ cho người theo dõi thông dịch."}]},
