@@ -2027,3 +2027,13 @@ BAL.blopt={danhD:4,sungD:4,sup:25,
 /* ORDER THIN P0 (jnorep.js, owner OD 23/11 ~22:50Z): ONE shared cross-life no-repeat memory. lives = lives kept (this one + 5 past, as the old
    ctm-e68h), w = weight factor per past life that saw a key (×0.5, as j68), cap = keys kept per life (the store is shared by every family). */
 BAL.nr={lives:6,w:.5,cap:1500};
+/* ORDER THIN P4 (j68c.js composed j68 openings): on = composed seeds live; w[fam] = draw weight of ONE composed seed in e68Cands (old templates weigh ~1–2;
+   def for families not listed); seen = extra factor when any past life met the seed (fresh-first; e68Cands' ×nr.w per life still applies);
+   cd = per-life cooldown tuần of one seed (999 = once per life); fx[tier] = what ONE gain/loss step is worth per key (laws 2/3/4: seeds count
+   steps, numbers live here; rel = thiện cảm / lòng trung / quyến luyến of that person); need = live-state thresholds; obKeep = object traces kept;
+   rumorTag = the hearsay label every composed rumour carries (j68h grounding rule, as the old rumours). */
+BAL.j68c={on:true,w:{def:.35},seen:.15,cd:999,obKeep:60,rumorTag:" <i>(Lời đồn.)</i>",
+ fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:1,th:2,hh:2,duc:2,tamco:1,an:1,rel:4},
+     m:{sung:3,danh:3,bac:40,suc:8,mat:1,th:4,hh:4,duc:3,tamco:2,an:2,rel:6},
+     l:{sung:5,danh:5,bac:60,suc:12,mat:2,th:6,hh:6,duc:5,tamco:3,an:3,rel:9}},
+ need:{friend:10,feud:-10,poor:30}};

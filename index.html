@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"e4670806+","t":"2026-11-23T23:58Z","c":"thin-p0-r1 review fixes: co-op thin guest (host running the friend's turn) never writes/rotates/reads the host's no-repeat store; BAL.nr th…","b":"0e785a18da79","h":[{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"},{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"}]};
+window.CTM_BI={"s":"a76ba1e4+","t":"2026-11-24T00:18Z","c":"thin-p0-r1 review fixes: co-op thin guest (host running the friend's turn) never writes/rotates/reads the host's no-repeat store; BAL.nr th…","b":"7d28ccac6080","h":[{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -37918,6 +37918,102 @@ BAL.blopt={danhD:4,sungD:4,sup:25,
 /* ORDER THIN P0 (jnorep.js, owner OD 23/11 ~22:50Z): ONE shared cross-life no-repeat memory. lives = lives kept (this one + 5 past, as the old
    ctm-e68h), w = weight factor per past life that saw a key (×0.5, as j68), cap = keys kept per life (the store is shared by every family). */
 BAL.nr={lives:6,w:.5,cap:1500};
+/* ORDER THIN P4 (j68c.js composed j68 openings): on = composed seeds live; w[fam] = draw weight of ONE composed seed in e68Cands (old templates weigh ~1–2;
+   def for families not listed); seen = extra factor when any past life met the seed (fresh-first; e68Cands' ×nr.w per life still applies);
+   cd = per-life cooldown tuần of one seed (999 = once per life); fx[tier] = what ONE gain/loss step is worth per key (laws 2/3/4: seeds count
+   steps, numbers live here; rel = thiện cảm / lòng trung / quyến luyến of that person); need = live-state thresholds; obKeep = object traces kept;
+   rumorTag = the hearsay label every composed rumour carries (j68h grounding rule, as the old rumours). */
+BAL.j68c={on:true,w:{def:.35},seen:.15,cd:999,obKeep:60,rumorTag:" <i>(Lời đồn.)</i>",
+ fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:1,th:2,hh:2,duc:2,tamco:1,an:1,rel:4},
+     m:{sung:3,danh:3,bac:40,suc:8,mat:1,th:4,hh:4,duc:3,tamco:2,an:2,rel:6},
+     l:{sung:5,danh:5,bac:60,suc:12,mat:2,th:6,hh:6,duc:5,tamco:3,an:3,rel:9}},
+ need:{friend:10,feud:-10,poor:30}};
+/* j68sd: ORDER THIN P4 composed j68 seeds (DATA ONLY). Built by dev/build/j68sd_build.py from dev/handover/content/thin/j68seeds*.md;
+   schema dev/handover/reports/thin.md «## API P4»; validator dev/test/j68seeds_validate.py; engine j68c.js. Do not hand-edit. */
+const J68SEEDS=[
+];
+/* ================= j68c: COMPOSED j68 OPENINGS (ORDER THIN P4, owner OD 23/11 ~22:50Z; EVCAT §3 P4) =================
+   Seeds (data J68SEEDS in j68sd.js, built from dev/handover/content/thin/j68seeds*.md by dev/build/j68sd_build.py; schema reports/thin.md «## API P4»):
+   `comp` = a new decision (complication × real people by nết × real object × 4 equal-value stances); `open` = an opener line of the same family.
+   At load every comp becomes ONE more EV6 template "c:"+id whose wordings are (fitting opener + comp text), so the whole j68 runtime plays it unchanged:
+   cadence, scheduler, per-life cooldown, variant memory (e.vu) and the shared no-repeat memory jnorep (family "j68", keys "c:<id>:<wording>").
+   The 90 old decisions / 370 wordings are untouched; e68Count() keeps reporting them only, e68cCount() reports the composed ones.
+   Numbers (law 4): one gain/loss step = BAL.j68c.fx[tier][key]; weights / cooldown / thresholds in BAL.j68c; nothing typed here.
+   Choices (laws 2/3): every stance Σgain == Σloss == tier steps (validator dev/test/j68seeds_validate.py); outcomes are certain.
+   GROUNDING (j68h rule): a seed is made only when every role is a living real person with the wanted nết and need on the live world, every
+   {placeholder} has a person, and the object owner is cast. Objects stay traceable (law 6c): S.e68c.ob {sid,name,owner,trace,turn}.
+   Personal per seat (S.e68c): never a co-op world key. */
+const J68C_STAT=["sung","danh","bac","suc","mat","th","hh","duc","tamco","an"];
+const J68C_NET=new Set(["rv","sv"]);
+const J68C_SEEDS={};
+function e68c(){if(!S)return null;const j=S.e68c=S.e68c||{};j.ob=j.ob||[];return j}
+function j68cK(r){const k=(r&&r.kind)||"rv";return k.indexOf("man:")===0?"man":k}
+/* nết filter: any-of per list, lists AND-ed (yard.md rule) */
+function j68cFit(o,r){if(!r||!J68C_NET.has(j68cK(r)))return true;let T=[];try{T=tr6(o)||[]}catch(e){T=[]}
+ const any=L=>!L||!L.length||L.some(n=>T.includes(n));return any(r["nết"])&&any(r["lòng"])}
+/* needs: real state on the live world (thresholds BAL.j68c.need) */
+function j68cNeed(nd,o,oB){if(!nd)return true;const N=BAL.j68c.need;try{
+ if(nd==="ill")return !!(o&&illOf(o));
+ if(nd==="preg")return !!(o&&o.preg>0&&!o.hidden);
+ if(nd==="friend")return !!o&&aff(o,S)>=N.friend;
+ if(nd==="feud")return !!(o&&oB&&(aff(o,oB)<=N.feud||aff(oB,o)<=N.feud));
+ if(nd==="kids")return !!o&&(o.kids||[]).some(k=>k.alive);
+ if(nd==="poor")return !!o&&o.bac!=null&&o.bac<N.poor;
+ if(nd==="thIll")return !S.thDead&&!!S.thIll;
+ if(nd==="empIll")return !!illOf(S.emp);
+ if(nd==="fest")return !!(typeof festToday==="function"&&festToday());
+ if(nd==="rain")return !!(S.wx&&/rain|storm/.test(S.wx.k||""));
+ if(nd==="snow")return !!(S.wx&&/snow/.test(S.wx.k||""));
+}catch(e){return false}return false}
+function j68cNeeds(n){n=n||{};
+ if(n.rank_min!=null&&(S.rank||0)<n.rank_min)return false;if(n.rank_max!=null&&(S.rank||0)>n.rank_max)return false;
+ if(n.nights_min!=null&&(S.nights||0)<n.nights_min)return false;if(n.month&&n.month.length&&!n.month.includes(S.month))return false;
+ if(n.not_confined&&S.confined)return false;if(n.kids_min!=null&&(S.kids||[]).filter(k=>k.alive).length<n.kids_min)return false;return true}
+/* cast one role from the live roster (npc-purpose pickers of j68: rv6/sv6/kid6/man6; fixed people through A6) */
+function j68cOne(r,nm,P){const k=j68cK(r);const oA=P.oA;
+ const ok=o=>j68cFit(o,r)&&(r.need==="feud"||j68cNeed(r.need,o));
+ if(k==="rv"){const id=rv6(v=>ok(v)&&(!oA||v!==oA));return id==null?null:id}
+ if(k==="sv"){const id=sv6(s=>ok(s)&&(!oA||s!==oA));return id==null?null:id}
+ if(k==="kid"){const n=kid6(x=>ok(x)&&(!oA||x!==oA));return n==null?null:n}
+ if(k==="man"){const L=(S.men||[]).filter(m=>m.alive!==false&&m.rw===r.kind.slice(4)&&ok(m)&&m!==oA);return L.length?pick(L).id:null}
+ const a=A6(k);if(!a||!j68cNeed(r.need,a.o))return null;return 0}
+function j68cCast(sd){const R=sd.roles||{};const p={};const P={};
+ if(R.A){const a=j68cOne(R.A,"A",P);if(a==null)return null;p.a0=a;const X=A6(j68cK(R.A),a);if(!X)return null;P.oA=X.o}
+ if(R.B){const b=j68cOne(R.B,"B",P);if(b==null)return null;p.a1=b;const Y=A6(j68cK(R.B),b);if(!Y||Y.o===P.oA)return null;P.oB=Y.o}
+ for(const[nm,o,ob]of[["A",P.oA,P.oB],["B",P.oB,P.oA]])if(R[nm]&&R[nm].need==="feud"&&!j68cNeed("feud",o,ob))return null;
+ return p}
+function j68cStep(tier,k){const F=BAL.j68c.fx[tier]||BAL.j68c.fx.m;return F[k]||0}
+/* gain/loss step map → {fx (signed stats), A, B relation} */
+function j68cVal(m,tier,sign){const fx={};let A=0,B=0;for(const[k,n]of Object.entries(m||{})){
+ if(J68C_STAT.includes(k)){fx[k]=(fx[k]||0)+n*j68cStep(tier,k)*sign}else if(k==="rel.A")A+=n*j68cStep(tier,"rel")*sign;else if(k==="rel.B")B+=n*j68cStep(tier,"rel")*sign}return{fx,A,B}}
+function j68cO(t,sd){const o=sd.object;return String(t||"").replace(/\{O\}/g,o&&o.name?o.name:"")}
+/* where the object ends (law 6c) */
+function j68cTrace(sd,X,st){const o=sd.object;if(!o)return"";const j=e68c();const tr=e68Fill(j68cO(st.trace||o.trace,sd),X),nm=e68Fill(j68cO(o.name,sd),X);
+ const own=o.owner==="me"?(S.name||"ngươi"):o.owner==="kho"?"Nội vụ phủ":o.owner==="B"?(X.B?X.B.n:""):(X.A?X.A.n:"");
+ j.ob.push({sid:sd.id,name:nm,owner:own,trace:tr,turn:S.turn});if(j.ob.length>BAL.j68c.obKeep)j.ob.splice(0,j.ob.length-BAL.j68c.obKeep);return `${nm}: ${tr}.`}
+function j68cOpts(sd,X){const tier=sd.tier||"m";return Object.entries(sd.stances||{}).map(([id,st])=>{
+ const g=j68cVal(st.gain,tier,1),l=j68cVal(st.loss,tier,-1);const r=[];
+ if(X.A&&(g.A+l.A))r.push([X.A,g.A+l.A]);if(X.B&&(g.B+l.B))r.push([X.B,g.B+l.B]);
+ const spec={c:l.fx,w:g.fx,r,ok:()=>{const t=e68Fill(j68cO((sd.outcomes||{})[id],sd),X);const tr=j68cTrace(sd,X,st);return [t,tr].filter(Boolean).join(" ")}};
+ return c6(e68Fill(j68cO(st.text,sd),X),spec)})}
+/* the wordings: every opener of the family whose person A fits, then the comp text (the comp alone if none fits) */
+function j68cV(sd,OP){const ak=sd.roles&&sd.roles.A?j68cK(sd.roles.A):null;const tag=sd.fam==="rumor"?BAL.j68c.rumorTag:"";
+ const L=OP.filter(o=>o.a==="any"||(ak&&o.a===ak));const body=j68cO(sd.text,sd)+tag;
+ return{v:L.length?L.map(o=>o.text+" "+body):[body],ops:L}}
+function j68cReg(sd,OP){if(!sd||!sd.id||E68I["c:"+sd.id]||!FAM6[sd.fam])return null;const R=sd.roles||{};
+ const a=[];if(R.A)a.push(j68cK(R.A));if(R.B)a.push(j68cK(R.B));const W=j68cV(sd,OP);J68C_SEEDS[sd.id]=sd;
+ EV6("c:"+sd.id,sd.fam,{a,cs:sd.id,cd:BAL.j68c.cd,v:W.v,
+  w:C=>{if(!BAL.j68c.on||!j68cNeeds(sd.needs))return 0;let w=BAL.j68c.w[sd.fam]!=null?BAL.j68c.w[sd.fam]:BAL.j68c.w.def;if(nrSeen("j68","c:"+sd.id,true)>0)w*=BAL.j68c.seen;return w},
+  pp:()=>j68cCast(sd),
+  vf:()=>W.ops.length?W.ops.map((o,i)=>(!o.needs||!o.needs.month||o.needs.month.includes(S.month))?i:-1).filter(i=>i>=0):null,
+  o:X=>j68cOpts(sd,X)});return E68I["c:"+sd.id]}
+(function(){try{const L=(typeof J68SEEDS!=="undefined"&&Array.isArray(J68SEEDS))?J68SEEDS:[];const OP={};
+ for(const r of L)if(r&&r.type==="open")(OP[r.fam]=OP[r.fam]||[]).push(r);
+ for(const r of L)if(r&&r.type==="comp")j68cReg(r,OP[r.fam]||[])}catch(e){console.error("j68c",e)}})();
+/* the old counter keeps counting the 90 hand-written decisions only (gate «j68 counts unchanged»); composed ones apart */
+(function(){const c0=window.e68Count;if(typeof c0!=="function")return;window.e68Count=function(){const cs=E68.filter(s=>s.cs);const r=c0.apply(this,arguments);
+ r.templates-=cs.length;r.variants-=cs.reduce((a,s)=>a+(s.v||[""]).length,0);return r}})();
+window.e68cCount=function(){const by={},wd={};for(const s of E68)if(s.cs){by[s.fam]=(by[s.fam]||0)+1;wd[s.fam]=(wd[s.fam]||0)+(s.v||[""]).length}return{seeds:by,wordings:wd}};
 /* jbalkc3: ONE CORE (law 4) for the home chapters (jkc3 / jkc3a / jkc3b): every arc's option / ending numbers, BAL.arc.fx format
    (c cost · w gain · l loss · o [base odds, [kind, stat, divisor]...] · sc Lợi thế · g numbers its go() uses; E: fx / sc / ending odds).
    Moved out of the content files (E25b r2, review fail item 3a). Read by kc3Reg (arcBeats / arcOpt). */
@@ -95089,7 +95185,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="0e785a18da79";window.CTM_BUILD=BUILD;
+const BUILD="7d28ccac6080";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
