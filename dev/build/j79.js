@@ -213,15 +213,15 @@ function kitActMini(a){const line=[a.odds||"",a.ton&&`tốn: ${a.ton}`,a.duoc&&`
  return `<button class="opt kmini"${a.attrs?" "+a.attrs:""}${a.dis?" disabled":""}>${a.n}<small>${kitParse(line)}</small></button>`}
 
 /* ---------- odds meter: 7 steps, red → amber → green, word beside, tap = whole ladder ---------- */
-const KIT_ODDS=["Liều","Khó","Năm ăn năm thua","Khá chắc","Chắc","Rất chắc","Nắm chắc"];
-const KIT_ODDS_TXT=["thường hỏng","hỏng nhiều hơn thành","nửa thành nửa hỏng","thành nhiều hơn hỏng","thường thành","hiếm khi hỏng","gần như chắc thành"];
+/* KIT_ODDS lives in j0.js (ONE SOURCE) */
+const KIT_ODDS_TXT=["rất dễ hỏng","dễ hỏng hơn là ổn","hơi nghiêng về hỏng","hên xui, tùy duyên","hơi nghiêng về ổn","thường ổn, ít khi hỏng","rất vững vàng, ít khi hỏng"];/* owner 23/11 ~21:40Z: no ladder meaning reads as a promise (no «thành», no «chắc», no numbers) */
 const KIT_ODDS_COL=["#b8321f","#d0662a","#c99a1e","#a3a52a","#6f9a34","#3f8a43","#2d7a52"];
-function kitOddsLv(w){if(typeof w==="number")return w<=0?-1:oddsLv(w);const i=KIT_ODDS.indexOf(String(w).trim());return i}
+function kitOddsLv(w){if(typeof w==="number")return w<=0?-1:oddsLv(w);const i=KIT_ODDS.indexOf(kitOddsCanon(String(w).trim()));return i}
 function kitOdds(w,o){o=o||{};const lv=kitOddsLv(w);const word=lv<0?(o.none||"Không có"):KIT_ODDS[lv];
- return `<span class="kodm" data-kodds="${lv}" role="button" tabindex="0" title="${o.label?o.label+": ":""}${word}${lv>=0?` — bậc ${lv+1}/7`:""}" style="--oc:${lv<0?"#9a8f80":KIT_ODDS_COL[lv]}"><span class="kseg">${KIT_ODDS.map((x,i)=>`<i${i<=lv?` style="background:${KIT_ODDS_COL[i]}"`:""}></i>`).join("")}</span><b>${word}</b></span>`}
-function kitOddsLadder(lv){return `<div class="kpopt">Thang cơ hội · 7 bậc</div>`+KIT_ODDS.map((x,i)=>`<div class="kpopr${i===lv?" on":""}"><span class="kseg">${KIT_ODDS.map((y,j)=>`<i${j<=i?` style="background:${KIT_ODDS_COL[j]}"`:""}></i>`).join("")}</span><b style="color:${KIT_ODDS_COL[i]}">${x}</b><small>${KIT_ODDS_TXT[i]}</small></div>`).reverse().join("")}
+ return `<span class="kodm" data-kodds="${lv}" role="button" tabindex="0" title="${o.label?o.label+": ":""}${word}" style="--oc:${lv<0?"#9a8f80":KIT_ODDS_COL[lv]}"><span class="kseg">${KIT_ODDS.map((x,i)=>`<i${i<=lv?` style="background:${KIT_ODDS_COL[i]}"`:""}></i>`).join("")}</span><b>${word}</b></span>`}
+function kitOddsLadder(lv){return `<div class="kpopt">Thang cơ hội</div>`+KIT_ODDS.map((x,i)=>`<div class="kpopr${i===lv?" on":""}"><span class="kseg">${KIT_ODDS.map((y,j)=>`<i${j<=i?` style="background:${KIT_ODDS_COL[j]}"`:""}></i>`).join("")}</span><b style="color:${KIT_ODDS_COL[i]}">${x}</b><small>${KIT_ODDS_TXT[i]}</small></div>`).reverse().join("")}
 /* the existing odds chip (j19 oddsChip) now draws the meter, keeping .oc for old selectors */
-(function(){if(typeof oddsChip!=="function")return;const o0=oddsChip;oddsChip=function(w){const s=String(w==null?"":w);if(!s)return"";const k=KIT_ODDS.find(x=>s===x||s.startsWith(x+" "))||KIT_ODDS.slice().sort((a,b)=>b.length-a.length).find(x=>s.includes(x));
+(function(){if(typeof oddsChip!=="function")return;const o0=oddsChip;oddsChip=function(w){const s=kitOddsNorm(w==null?"":w);if(!s)return"";const k=KIT_ODDS.find(x=>s===x||s.startsWith(x+" "))||KIT_ODDS.slice().sort((a,b)=>b.length-a.length).find(x=>s.includes(x));
  if(!k)return o0.apply(this,arguments);const rest=s.replace(k,"").replace(/^\s*·\s*/,"").trim();return kitOdds(k).replace('class="kodm"','class="kodm oc"')+(rest?` <span class="ef n">${rest}</span>`:"")}})();
 
 /* ---------- glossary: plain-word meaning of every game term, tap to read ---------- */
@@ -262,7 +262,7 @@ const KIT_GLOSS={
  "Nội vụ phủ":"Nơi lo đồ dùng, kẻ hầu và việc vặt của hậu cung.",
  "Tân Giả khố":"Nơi đày cung nữ, thái giám có tội làm việc nặng.",
  "Thai":"Khả năng có thai mỗi lần thị tẩm.",
- "Cơ hội":"Thang 7 bậc: Liều < Khó < Năm ăn năm thua < Khá chắc < Chắc < Rất chắc < Nắm chắc."};
+ "Cơ hội":"Thang cơ hội, từ thấp lên cao: "+KIT_ODDS.join(", ")+"."};
 /* jreg: built on first use, so glossary words of later modules are in it (was built at load: 27 later words missed) */
 let KP_GLRE0=null,KP_GLN=-1;const KP_GLREf=()=>{const n=Object.keys(KIT_GLOSS).length;if(!KP_GLRE0||n!==KP_GLN){KP_GLN=n;KP_GLRE0=new RegExp("^("+Object.keys(KIT_GLOSS).sort((a,b)=>b.length-a.length).map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|")+")$")}return KP_GLRE0};
 /* kitGloss("Tâm cơ") -> the term with a dotted underline; tap shows its meaning. Unknown terms come back as plain text. */
@@ -300,7 +300,9 @@ window.kitHxRoad=kitHxRoad;
 function kpPop(anchor,html,o){o=o||{};let p=document.getElementById("kpop");if(!p){p=document.createElement("div");p.id="kpop";p.className="kpop";document.body.appendChild(p)}
  p.innerHTML=html;p.hidden=false;const r=anchor.getBoundingClientRect();
  /* o.inside (act-dedupe UI): the pop-up sits ON the tapped card (never below it), so it cannot cover the next card in the list/grid */
- const W=o.inside?Math.max(120,Math.min(300,r.width-8,innerWidth-24)):Math.min(300,innerWidth-24);p.style.width=W+"px";
+ let W=o.inside?Math.max(120,Math.min(300,r.width-8,innerWidth-24)):Math.min(300,innerWidth-24);p.style.width=W+"px";
+ /* LINE BREAKS AT THE RIGHT PLACE (KIT §5): the ladder's rows (bar · word · meaning) never wrap while the screen has room — the pop-up widens to its longest row (owner 23/11) */
+ if(p.querySelector(".kpopr")){p.style.width="max-content";p.style.maxWidth=(innerWidth-24)+"px";const nw=Math.ceil(p.offsetWidth)+2;p.style.maxWidth="";W=Math.min(innerWidth-24,Math.max(W,nw));p.style.width=W+"px"}
  let x=Math.max(o.inside?4:12,Math.min(innerWidth-W-(o.inside?4:12),r.left+r.width/2-W/2));p.style.left=x+"px";p.style.top="0px";const h=p.offsetHeight;
  if(o.inside){const vt=Math.max(r.top,8),vb=Math.min(r.bottom,innerHeight-8);/* the visible part of the card */let y=vt+Math.max(4,(vb-vt-h)/2);if(h>r.height-8)y=r.top+4;p.style.top=Math.max(4,y)+"px";return}
  let y=r.bottom+6;if(y+h>innerHeight-8)y=Math.max(8,r.top-h-6);p.style.top=y+"px"}
@@ -635,7 +637,10 @@ window.kitQuick=kitQuick;window.kitQuickSub=kitQuickSub;window.kitQuickRoll=kitQ
 /* seal: optional word for the header seal (default KP_SEAL.game "TÀI NGHỆ"; scheme games pass "MƯU") — one kit parameter for every caller
    kitGameFrame({art:"Cầm", title:"Tấu khúc", how:"Chạm đúng dây khi nốt chạm vạch đỏ.", hud:[["score","Điểm",0],["time","Thời gian","30 giây"]], id:"kgbox"})
    -> HTML of the frame; the game draws into #<id> (.kgbox). Update a HUD cell with kitGameSet("score", 12). */
-function kitBoardBg(kind){try{if(!kind||typeof KG82_BOARDBG==="undefined"||!KG82_BOARDBG.has(kind))return"";const s=`img/kit/mg-${kind}-bg.webp`;if(typeof kitPhOnCdn==="function"&&!kitPhOnCdn(s))return"";return typeof IMG_U==="function"?IMG_U(s):s}catch(e){return""}}
+function kitBoardBg(kind){try{if(!kind||typeof KG82_BOARDBG==="undefined"||!KG82_BOARDBG.has(kind))return"";let s=`img/kit/mg-${kind}-bg.webp`;if(typeof kitPhOnCdn==="function"&&!kitPhOnCdn(s))return"";
+ /* KIT MG-SKIN: the live skin's board painting (img/mg/<kind>-<id>.webp) when the CDN index lists it (a DOM backdrop has no load fallback, so an unknown index = default art) */
+ {const id=typeof KG82!=="undefined"&&KG82.skin&&KG82.skin.id;if(id&&typeof kg82SkinSrc==="function"&&typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE)s=kg82SkinSrc(kind+"-bg",id)}
+ return typeof IMG_U==="function"?IMG_U(s):s}catch(e){return""}}
 window.kitBoardBg=kitBoardBg;
 function kitGameFrame(g){g=g||{};const fg=g.fig?kitGameFig(g):"";const bgb=kitBoardBg(g.kind);return `<div class="kgame">${kpHeader("game",`${g.art?g.art+": ":""}${g.title||""}`,"",g.seal).replace(/<\/div>$/,'<span class="kgmk" hidden></span><span class="kgclk" hidden></span></div>')}`+
  `<div class="kgbody${fg?" kgfig-on":g.pic?" kgpic-on":""}">`+(fg||(g.pic?`<div class="kgpic"><img src="${g.pic}" alt="" draggable="false" onerror="this.parentNode.parentNode.classList.remove('kgpic-on');this.parentNode.remove()"></div>`:""))+`<div class="kginfo">`+
@@ -715,7 +720,18 @@ function kitGameResult(r){r=r||{};const rows=[];
 /* KIT-MGBG r2 (review FAIL): on a painted board every progress/state part sits on a CREAM PLATE and has a darker ring, so empty pips and buttons never vanish on the picture (one place, all four boards) */
 .kgbox.kgbox-bg .nwb-pool{background:rgba(255,250,240,.88);border:1px solid var(--k-hair,#b59a6a);border-radius:999px;padding:5px 12px;width:max-content;max-width:100%;margin:6px auto;box-sizing:border-box}
 .kgbox.kgbox-bg .nwb-pip{border-color:#6b4f1d;border-width:2px;background:rgba(255,250,240,.6)}.kgbox.kgbox-bg .nwb-pip.on{background:var(--gold,#d99a1e);border-color:#7a4f0a}.kgbox.kgbox-bg .nwb-pip.band{border-color:#1f6b38}
-.kgbox.kgbox-bg .btn,.kgbox.kgbox-bg .kgbtn{background:rgba(255,250,240,.94);border:2px solid #6b4f1d;box-shadow:0 1px 4px #2a1a1255}.kgres{padding:0 14px 10px}
+.kgbox.kgbox-bg .btn,.kgbox.kgbox-bg .kgbtn{background:rgba(255,250,240,.94);border:2px solid #6b4f1d;box-shadow:0 1px 4px #2a1a1255}
+/* KIT MG-SKIN BUTTON PALETTES (KIT.md §MG-SKIN; owner OD 23/11 ~23:05Z real): the open mini-game frame carries data-mgpal (kg82SkinOn) = ONE of 5 palettes, built ONLY from kit
+   tokens (theme §1.1 + the seal lacquer of .kbtn; the lower stop is the same token shaded toward --ink): son (default = today's lacquer, unchanged) · ngoc (--good) · kim (--gold) ·
+   mac (--dim/--ink) · dao (--peony, dark ink text). Main buttons (.kbtn) take the ground; the cream buttons (.kgbtn, .btn, .kbtn.alt, quick buttons .kquick) keep the cream card and take the
+   palette rim. Canvas engines read the same colours with kitMgPal(). Contrast is tested (dev/test/kit-mgskin.js: text ≥ 4.5:1 on both stops, rim ≥ 3:1 on the card). */
+#kg82[data-mgpal]{--mgp-a:#b0402c;--mgp-b:#8a2a1e;--mgp-ink:#fff8e6;--mgp-rim:#6e1d12}
+#kg82[data-mgpal="ngoc"]{--mgp-a:var(--good,#2d7a52);--mgp-b:color-mix(in srgb,var(--good,#2d7a52) 72%,var(--ink,#2a1a12));--mgp-ink:#fff8e6;--mgp-rim:color-mix(in srgb,var(--good,#2d7a52) 60%,var(--ink,#2a1a12))}
+#kg82[data-mgpal="kim"]{--mgp-a:var(--gold,#8f5f0c);--mgp-b:color-mix(in srgb,var(--gold,#8f5f0c) 72%,var(--ink,#2a1a12));--mgp-ink:#fff8e6;--mgp-rim:color-mix(in srgb,var(--gold,#8f5f0c) 60%,var(--ink,#2a1a12))}
+#kg82[data-mgpal="mac"]{--mgp-a:var(--dim,#6b5643);--mgp-b:var(--ink,#2a1a12);--mgp-ink:#fff8e6;--mgp-rim:var(--ink,#2a1a12)}
+#kg82[data-mgpal="dao"]{--mgp-a:var(--peony,#e48aa4);--mgp-b:color-mix(in srgb,var(--peony,#e48aa4) 82%,var(--k-seal,#9a2c1c));--mgp-ink:var(--ink,#2a1a12);--mgp-rim:var(--k-seal,#9a2c1c)}
+#kg82[data-mgpal]:not([data-mgpal="son"]) .kbtn:not(.alt):not(.kdanger):not(.kquick){background:var(--mgp-a);background:linear-gradient(var(--mgp-a),var(--mgp-b));color:var(--mgp-ink);border-color:var(--mgp-rim)}
+#kg82[data-mgpal]:not([data-mgpal="son"]) .kbtn.alt,#kg82[data-mgpal]:not([data-mgpal="son"]) button.kquick,#kg82[data-mgpal]:not([data-mgpal="son"]) .kgbtn,#kg82[data-mgpal]:not([data-mgpal="son"]) .kgbox .btn{border-color:var(--mgp-rim)}.kgres{padding:0 14px 10px}
 .kgrow{display:flex;justify-content:space-between;gap:8px;align-items:center}.kgrow>b{flex:none;white-space:nowrap}.kgr .kpkb .krl{white-space:normal;max-width:9rem}
 /* K-GE-3 (review/kit-ge): a row whose LABEL is a title plate (.kdh, a wide nowrap pill) puts the plate on its own line above the value, at every width (same rule as the kt3 plate block of the title popups) */
 .kpkb .kr:has(>.krl>.kdh)>.krl{grid-column:1/-1;max-width:none;padding:.3rem 0 0;text-transform:none;letter-spacing:normal}
@@ -907,28 +923,26 @@ if(typeof when==="function"){when=function(){return `${kitDate(S.month,S.year,S.
 /* KIT §6.2b-1 TITLE ROOM BESIDE THE ODDS METER (review/kit-opt-title-wrap, MAIN 94 21/11; owner OD 18/11 ~09:02Z «title never squeezed by the odds chip» + OD 21/11 ~04:00Z #49a
    «the odds sit ON THE TITLE ROW»). ONE rule for EVERY button.ka whose title row (.kat) carries the meter (.kodds): dialog option cards (.kopt), act cards (.kart), compact pane cards.
    The choice reads the TITLE ROOM (title row width − meter − gap), never the card width: when the title does not fit on one line beside the meter in a row (bar + word) AND that room is
-   under KIT_ODFIT.room em, the card gets .kodstk = the meter stacks (bar over word; a long word «Năm ăn năm thua» wraps under the bar at KIT_ODFIT.word em) so the title keeps its width
+   under KIT_ODFIT.room em, (23/11 review/kit-odds-row: the stacked form kodstk is REMOVED — bar + word are ONE row, KIT §5) the title keeps the rest of the row
    and the odds stay on the title row; only a title row too narrow even for that (< stacked meter + KIT_ODFIT.min em, e.g. a person card pane on a 390 px phone) puts the meter under the title (.kodrow). Measured with the fonts (canvas), so the result does not depend on the current state; ResizeObserver (on the title row) re-runs it when the row changes width, web fonts arriving re-run every card, and every fit is VERIFIED on the real layout (a meter still under the title → stack, then .kodrow),
    kaNorm when its title / odds change. The title is flex 1 1 0 (kp-kat-css): the meter drops under it only when even 9 em + meter do not fit (was: whenever the title did not fit on ONE line, #49a). (Was: kitOptTier stacked under a 430 px CARD and only in dialogs, and the stack never showed: `.oc` (inline-block) won over `.kodm` (inline-flex).) */
-const KIT_ODFIT={room:12,word:5.4,gap:5,min:7.5,pad:4};window.KIT_ODFIT=KIT_ODFIT;
+const KIT_ODFIT={room:12,word:5.4,gap:5,min:5.5,pad:4};window.KIT_ODFIT=KIT_ODFIT;
 let kitOdCv=null;function kitOdTextW(el,t){try{kitOdCv=kitOdCv||document.createElement("canvas").getContext("2d");const c=getComputedStyle(el);kitOdCv.font=c.fontStyle+" "+c.fontWeight+" "+c.fontSize+" "+c.fontFamily;return kitOdCv.measureText(t).width}catch(e){return 0}}
-function kitOdFit1(b){try{const od=b.querySelector(".kat>.kodds");if(!od||!b.isConnected)return;const kat=od.parentElement,kan=kat.querySelector(":scope>.kan");const m=od.querySelector(".kodm");
+function kitOdFit1(b){try{const od=b.querySelector(".kat>.kodds");if(!od||!b.isConnected)return;if(!b.classList.contains("kodw"))b.classList.add("kodw");/* carries a meter: its title may shrink to KIT_ODFIT.min em before the whole meter goes under it */const kat=od.parentElement,kan=kat.querySelector(":scope>.kan");const m=od.querySelector(".kodm");
  if(!kan||!m||!od.textContent.trim()){b.classList.remove("kodstk");return}const cw=kat.clientWidth;if(!cw)return;const kc=getComputedStyle(kat);const cbw=cw-parseFloat(kc.paddingLeft)-parseFloat(kc.paddingRight);kat.__kodW=Math.round(cbw);/* the width this choice was made for (= the observer's contentRect): a fit made inside kitOptTier's trial layouts is redone when the row ends at another width (rv round 1: kodrow stuck from a 180 px trial on a 204 px row) */const room0=cbw-(parseFloat(kc.columnGap)||6);
  const seg=m.querySelector(".kseg"),w=m.querySelector("b");const segW=seg?seg.offsetWidth:0,wordW=w?kitOdTextW(w,w.textContent.trim()):0;
  let rest=0;for(const c of od.children)if(c!==m&&c.getClientRects().length)rest+=c.offsetWidth+4;/* a note beside the meter («· 2 khắc») */
  const rowW=segW+(w?KIT_ODFIT.gap+wordW:0)+rest;const fs=parseFloat(getComputedStyle(kan).fontSize)||13;const natW=kitOdTextW(kan,kan.textContent.replace(/\s+/g," ").trim());
- const room=room0-rowW;let stk=room<natW+KIT_ODFIT.pad&&room<KIT_ODFIT.room*fs;/* pad: canvas vs DOM text widths differ by sub-pixels / hinting (rv round 1) */
- const wfs=w?parseFloat(getComputedStyle(w).fontSize)||11:11;const sroom=room0-Math.max(segW,Math.min(wordW,KIT_ODFIT.word*wfs))-rest;
- /* a title row too narrow even for the stacked meter + KIT_ODFIT.min em (a person card pane on a phone): the meter goes under the title at the right (.kodrow) — never a 2-letter title */
- let row=stk&&sroom<Math.min(natW,KIT_ODFIT.min*fs);
- b.__kodRoom=(stk?sroom:room)/fs;/* the title's room in em beside the meter (kitOptTier: a layout whose title room < KIT_ODFIT.min does not fit) */b.__kodTxt=kan.textContent+"|"+od.textContent;
- if(b.classList.contains("kodstk")!==stk)b.classList.toggle("kodstk",stk);/* kodrow keeps the stacked meter: it fits a tiny row */if(b.classList.contains("kodrow")!==row)b.classList.toggle("kodrow",row);
- /* VERIFY against the real layout (rv round 1): a meter that still drops under the title without .kodrow (a title min-width, a font that differs from the canvas) → next step: stack, then under the title */
+ const room=room0-rowW;/* ONE ROW (owner 23/11 ~20:30Z, review/kit-odds-row): the meter is ALWAYS bar + word on one line — never stacked (kodstk is gone). The title takes the rest and may wrap to two lines; only a title row that leaves the title less than min(its one-line width, KIT_ODFIT.min em) puts the whole meter (still bar + word on one row) under the title at the right (.kodrow). */
+ let row=room<Math.min(natW+KIT_ODFIT.pad,KIT_ODFIT.min*fs);
+ {/* kitOptTier reads the room the OLD stacked meter left the title (so no dialog changes its column count / tier because the word moved up beside the bar — owner 23/11: layout stays as approved) */const wfs=w?parseFloat(getComputedStyle(w).fontSize)||11:11;const sroom=room0-Math.max(segW,Math.min(wordW,KIT_ODFIT.word*wfs))-rest;const lstk=room<natW+KIT_ODFIT.pad&&room<KIT_ODFIT.room*fs;b.__kodRoom=(lstk?sroom:room)/fs}/* the title's room in em beside the meter (a kodrow card: the title has the whole row)  (kitOptTier: a layout whose title room < KIT_ODFIT.min does not fit) */b.__kodTxt=kan.textContent+"|"+od.textContent;
+ if(b.classList.contains("kodstk"))b.classList.remove("kodstk");if(b.classList.contains("kodrow")!==row)b.classList.toggle("kodrow",row);
+ /* VERIFY against the real layout: a meter that still drops under the title without .kodrow (a title min-width, a font that differs from the canvas) → under the title on purpose */
  const own=()=>{const K=kan.getBoundingClientRect(),O=od.getBoundingClientRect();return O.height>0&&(O.top>=K.bottom-2||O.bottom<=K.top+2)};
- if(!row&&own()){if(!stk){stk=true;b.classList.add("kodstk");b.__kodRoom=sroom/fs}if(own()){row=true;b.classList.add("kodrow")}
+ if(!row&&own()){row=true;b.classList.add("kodrow");
   /* the layout seen may be a passing one (kitOptTier trying 2 columns, a picture not in yet): fit again from scratch a moment later, so a step taken for a passing layout never sticks */
   if((b.__kodN=(b.__kodN||0)+1)<=3)setTimeout(()=>kitOdFit1(b),120)}else b.__kodN=0
- if(window.__kotwDbg)(b.__kodHist=b.__kodHist||[]).push(Math.round(performance.now())+":cw"+cw+" r"+Math.round(room)+" n"+Math.round(natW)+" s"+Math.round(sroom)+(stk?" S":"")+(row?" R":"")+" N"+b.__kodN+" "+(b.className.includes("kart")?"kart":"-"))}catch(e){console.error("kitOdFit1",e)}}
+ if(window.__kotwDbg)(b.__kodHist=b.__kodHist||[]).push(Math.round(performance.now())+":cw"+cw+" r"+Math.round(room)+" n"+Math.round(natW)+(row?" R":"")+" N"+b.__kodN+" "+(b.className.includes("kart")?"kart":"-"))}catch(e){console.error("kitOdFit1",e)}}
 let kitOdRO=null,kitOdQ=new Set(),kitOdRaf=0;
 /* no layout read on the kaNorm path (it runs on every DOM change): a new card is only observed (the ResizeObserver's first call fits it); a card whose title / odds TEXT changed is fitted in the next frame */
 function kitOdFlush(){kitOdRaf=0;const q=[...kitOdQ];kitOdQ.clear();for(const b of q)kitOdFit1(b)}
@@ -946,9 +960,10 @@ try{if(document.fonts){document.fonts.ready.then(kitOdAll);if(document.fonts.add
 (function(){if(typeof kaNorm!=="function")return;const k0=kaNorm;kaNorm=function(root){const r=k0.apply(this,arguments);kitOdFit(root);return r};window.kaNorm=kaNorm})();
 (function(){const st=document.createElement("style");st.id="kit-odfit";st.textContent=`
 .kodm.oc.oc{display:inline-flex}/* the meter is a flex box (bar + word, gap) — .oc (inline-block, p1) made it a plain box, so the stack below never applied */
-button.ka.kodstk .kat>.kodds .kodm.kodm{flex-direction:column!important;align-items:flex-end!important;gap:1px!important}
-button.ka.kodstk .kat>.kodds .kodm>b{white-space:normal!important;max-width:${KIT_ODFIT.word}em;text-align:right;line-height:1.1}
+/* LINE BREAKS AT THE RIGHT PLACE (KIT §5, owner 23/11): bar and word are ONE row, in every host (card, popover, person card, hud) — nothing may wrap them */
+.kodm.kodm,.kodm.kodm>b,.kodm.kodm>.kseg{white-space:nowrap!important;flex-wrap:nowrap!important;flex-direction:row!important}.kodm.kodm>b{flex:none}
 /* id-weighted :is() (3 ids, matches the same elements) so the fallback beats the dialog card's own nowrap (kitOptFinal, 2 ids) and the compact card rules */
+button.ka.kodw .kat>.kan:is(#kodw1,.kan):is(#kodw2,.kan){min-width:min(${KIT_ODFIT.min}em,100%)!important}
 button.ka.kodrow .kat:is(#kodrow1,.kat):is(#kodrow2,.kat):is(#kodrow3,.kat){flex-wrap:wrap!important}
 button.ka.kodrow .kat>.kan:is(#kodrow1,.kan):is(#kodrow2,.kan):is(#kodrow3,.kan){flex:1 0 100%!important}
 button.ka.kodrow .kat>.kodds.kodds{margin-left:auto!important}`;document.head.appendChild(st)})();
@@ -1232,8 +1247,8 @@ function kitTgt(){try{if(typeof J78==="object"&&J78.cardV)return J78.cardV}catch
  D("poison",v=>v?[`nàng trúng độc · ${kpDeathWord(kpDeathP("poison",v),"nàng")}`,fail("poison")]:null);
  D("kpoison",v=>{const p=v&&kpDeathP("kpoison",v);return p==null?null:[`con nàng trúng độc · ${kpDeathWord(p,"con nàng")}`,fail("kpoison")]});
  D("pond",v=>v?[`con nàng rơi xuống hồ · ${kpDeathWord(kpDeathP("pond",v),"con nàng")}`,fail("pond")]:null);
- D("kframe",v=>{if(!v||typeof sonsOf!=="function")return null;const k=sonsOf(v).filter(k=>k.age>=6).sort((x,y)=>(+y.heir)-(+x.heir))[0];if(!k)return null;
-  return[`Hoàng thượng thương ${k.name} -35, Danh nàng -10, nàng bị phạt${k.heir?`, ${k.name} bị phế ngôi Thái tử`:""}`,fail("kframe")]});
+ D("kframe",v=>{if(!v||typeof sonsOf!=="function")return null;const k=sonsOf(v).filter(k=>k.age>=BAL.eff.j8.kframeAge).sort((x,y)=>(+y.heir)-(+x.heir))[0];if(!k)return null;
+  return[`Hoàng thượng thương ${k.name} ${balSg(-BAL.eff.j8.fondF)}, Danh nàng ${balSg(BAL.eff.j8.kframeDanh)}, nàng bị phạt${k.heir?`, ${k.name} bị phế ngôi Thái tử (Danh nàng thêm ${balSg(-BAL.kid.heirDanh)})`:""}`,fail("kframe")]});
  D("trip",v=>[`nàng vấp ngã: Danh nàng -3${v&&v.preg&&!v.hidden?` · nàng động thai: ${chanceW(25)}`:""}`,fail("trip")]);
  D("pushp",v=>[`nàng rơi xuống hồ sen: Sức nàng -25${v&&v.preg&&!v.hidden?` · nàng sảy thai: ${chanceW(60)}`:""}`,fail("pushp")]);
  if(typeof actLineRaw==="function"){const a0=actLineRaw;actLineRaw=function(k,w,c){let r=a0.apply(this,arguments);try{const CW=typeof caughtW==="function"?caughtW():null;if(CW&&String(r).includes(CW)){/* previews: caught */const v=kitTgt();const t=v&&kaCaughtTxt(v,k);r=String(r).split(CW).join(t||`kèm: bị người của nàng phát giác, nàng nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ`)}}catch(e){}return r}}})();

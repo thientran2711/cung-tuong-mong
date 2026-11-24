@@ -4,6 +4,7 @@
    Checks: page errors, the right plaque column (court chips + Ân sủng) inside the stage, no overlap with figures / name tags, no clipped label,
    no ladder word (Liều…) in the chips, the sheet cannot open (top-bar Tư chất / plaque taps), collapsed "Ân sủng ›" chip opens its kit card. */
 const {chromium}=require('./lib/pw-roulette');const fs=require('fs');
+const OW=require('./odds-words.js');/* ladder words from the ONE source j0 */
 const [,,BASE,PAGE,OUT,TAG]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 async function skipLoader(p){for(let i=0;i<300;i++){const s=await p.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]');if(b){b.click();return 'skip'}
@@ -39,5 +40,5 @@ const VPS=(process.env.VPS||'755x1000x2,820x1180x2,1180x820x2,1366x1024x2,412x10
   /* collapsed chip -> its card */
   r.card=await p.evaluate(async()=>{const c=document.querySelector('#kshR .kas-one');if(!c)return null;c.click();await new Promise(r=>setTimeout(r,600));const m=document.querySelector('.kascard');return m&&m.offsetParent?m.innerText.replace(/\n+/g,' | '):'(no card)'});
   if(r.card)await p.screenshot({path:`${OUT}/${TAG}-an-sung-card-${W}x${H}.png`,animations:'disabled',timeout:120000});
-  r.ladder=/Liều|Khó|Năm ăn năm thua|Khá chắc|Rất chắc|Nắm chắc/.test(r.state.text+(r.card||''));r.errs=errs;await ctx.close()}
+  r.ladder=OW.RE.test(r.state.text+(r.card||''));r.errs=errs;await ctx.close()}
  fs.writeFileSync(`${OUT}/${TAG}-an-sung.json`,JSON.stringify(R,null,1));for(const k in R)console.log(k,JSON.stringify(R[k]));await b.close()})();

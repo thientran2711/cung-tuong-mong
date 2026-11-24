@@ -108,7 +108,8 @@ const DIL_PP={vase:X=>({y:X.why}),coldletter:X=>{const v=liveRivals(false).filte
 function makeDil(){if(!npwOn())return null;const D=BAL.ag.why.dil,O=[];
   for(const id in DIL_P)for(const o of npwAsk(DIL_P[id],{id}))O.push({id,o,s:o.s});
   if(!S.thDead)O.push({id:"thbenh",s:D.world});
-  for(const e of freshEvents()){const k=DIL_K[e.id];if(!k){O.push({id:e.id,s:D.world});continue}for(const o of npwAsk(k[0],{id:e.id,h:k[1]}))O.push({id:e.id,o,s:o.s})}
+  {const c=typeof j7cDil==="function"&&j7cDil();if(c)O.push(c)}  /* ORDER THIN P2: the composed intrigue family (j7c.js) */
+  for(const e of freshEvents()){const k=DIL_K[e.id],nw=typeof nrW==="function"?nrW("j7",e.id):1;/* ORDER THIN P0: cross-life no-repeat (jnorep, family j7) */if(!k){O.push({id:e.id,s:D.world*nw});continue}for(const o of npwAsk(k[0],{id:e.id,h:k[1]}))O.push({id:e.id,o,s:o.s*nw})}
   const x=npwPick(O,y=>y.s);if(!x)return null;if(x.o){npwStamp(x.o.kind,x.o.who);npwSt(x.o.kind,"fire")}
   DILX=x.o||null;try{return EVI[x.id]?mkEv(x.id):mkP(x.id,x.o?DIL_PP[x.id](x.o):{})}finally{DILX=null}}
 

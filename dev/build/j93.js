@@ -171,7 +171,7 @@ function kmFrameSwap(p,from,to){let h=kmFace(p,"big");const re=/(frame|bg)-conso
 function kitEdict(o){o=o||{};const p=o.who||S,to=o.to!=null?o.to:S.rank,from=o.from!=null?o.from:Math.max(0,to-1);const nm=p===S?S.name:p.name;const col=(typeof kitRankCol==="function"?kitRankCol(to):(window.RCOL||[])[to])||"#c9952a";
  const line=to>=7?`Lập ${kmEsc(nm)} làm Hoàng hậu, chủ lục cung.`:`Tấn phong ${kmEsc(nm)} làm ${kmRankName(to)}.`;
  const html=`<div class="kmedict" style="--rc:${col}"><div class="kmscroll"><img class="kmsc-c" src="${KM_DIR}mo-edict-closed.webp" alt="" draggable="false"><div class="kmsc-o"><img src="${KM_DIR}mo-edict-open.webp" alt="" draggable="false"><div class="kmsc-t"><b>Thánh chỉ</b><span>${line}</span><small>Khâm thử</small></div></div></div>
-  <div class="kmpromo">${kmFrameSwap(p,from,to)}<div class="kmchip-row"><span class="kmchip kmchip-old">${from<0?"Cung nữ":kmRankName(from)}</span><span class="kmarrow">→</span><span class="kmchip kmchip-new">${kmRankName(to)}</span></div></div></div>`;
+  <div class="kmpromo">${kmFrameSwap(p,from,to)}<div class="kmchip-row"><span class="kmchip kmchip-old">${o.fromWord?kmEsc(o.fromWord):from<0?"Cung nữ":kmRankName(from)}</span><span class="kmarrow">→</span><span class="kmchip kmchip-new">${kmRankName(to)}</span></div></div></div>`;
  kmPush(done=>{const st=kmStage("km-edict",html,{dur:2000,hold:2200,onEnd:done});
   /* §66.1 the light gold glow on the new frame = KIT §68 painted art: the gold glow still (kitFxBurst "glowburst") + the painted gold light clip (screen blend on the dark stage) */
   st.later(1450,()=>{try{const f=st.ov.querySelector(".kmpromo .kmfr");if(!f)return;if(typeof kitFxBurst==="function")kitFxBurst("glowburst",f,1,{scale:.8,a0:.85});

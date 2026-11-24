@@ -201,7 +201,7 @@ function ktBtns(k){if(!k.alive)return[];ktSync(k);const B=[],t2=whyTime(2),t1=wh
  return B}
 function ktAct(a,name,t){const k=S&&S.kids.find(x=>x.name===name&&x.alive);if(!k||S.dead||Q.length)return;ktSync(k);const b=rsnap();let title="Việc học của con",ok="sure";
  if(a==="tv"||a==="td"){if(!can(BAL.kidTeach.k)||k.age<BAL.kidTeach.age||S.suc<BAL.kidTeach.suc||k[a==="tv"?"mtv":"mtd"]===ktSea())return;spend(BAL.kidTeach.k);apply({suc:-BAL.kidTeach.suc});const g=ktTeach(k,S,a);title=a==="tv"?"Dạy chữ":"Dạy lễ nghi";
-  log(`Tự tay ${a==="tv"?"dạy":"dạy lễ nghi cho"} ${k.name}${a==="tv"?" học chữ":""}: ${a==="tv"?"Văn":"Đức"} con +${ktG(g)}. ${roll(25)?ktReveal(k,"Dạy con, ngươi thấy"):""}`)}
+  log(`Tự tay ${a==="tv"?"dạy":"dạy lễ nghi cho"} ${k.name}${a==="tv"?" học chữ":""}: ${a==="tv"?"Văn":"Đức"} con +${ktG(g)}. ${roll(25)?(()=>{const r=ktReveal(k,"Dạy con, ngươi thấy");if(r)try{kitKnow({key:"kid:"+k.name,text:r.replace(/<[^>]+>/g,"")})}catch(e){}return r})():""}`)}
  else if(a==="tut"){t=+t;if(k.age<6||!can(1)||(t&&S.bac<KT.fee[t]*2)||(k.tut===t&&(t<3||!k.fav)))return;if(t)spend(1);k.tut=t;k.fav=0;title=t?`Mời ${TUT[t]}`:"Cho con học chung";
   log(t?`Mời ${TUTD[t]} dạy ${k.name}: học phí Bạc ${KT.fee[t]} mỗi tháng, trả cùng bổng lộc.`:`${k.name} về học lớp chung của Thượng thư phòng, không tốn học phí.`)}
  else if(a==="fav"){if(k.age<6||!can(2)||S.out||(k.tut===3&&k.fav))return;const fo=od(KT.favO+S.sung/2);/* the odds on the card, read before the spend and the Sủng cost (shown-odds r2-rv) */spend(2);apply({sung:BAL.eff.j53.sungFav});title="Xin Hoàng thượng cử Đại học sĩ";

@@ -31,7 +31,7 @@ const {chromium}=require('playwright');const fs=require('fs');const path=require
   life();let ix=arm("hacdinh");S.sung=60;S.an=40;let d=mkP("pgpick",{ix});let rows=d.o.filter(o=>/dâng (Hoàng thượng|Thái hậu)/.test(o.n));
   ok("picker: 2 royal rows (one per target)",rows.length===2,rows.map(o=>o.n).join(" | "));ok("picker: closed rows say why",rows.every(o=>o.off&&o.off.why),rows.map(o=>o.off&&o.off.why).join(" | "));
   hate();d=mkP("pgpick",{ix});rows=d.o.filter(o=>/dâng Hoàng thượng/.test(o.n));ok("picker: hate opens the Emperor row",rows.length&&!rows[0].off,rows[0]&&rows[0].x);
-  ok("picker: odds word, no %",rows[0]&&!/%/.test(rows[0].x)&&/Liều|Khó|Năm ăn năm thua|Khá chắc/.test(rows[0].x),rows[0]&&rows[0].x);
+  ok("picker: odds word, no %",rows[0]&&!/%/.test(rows[0].x)&&new RegExp(KIT_ODDS_ALT).test(rows[0].x),rows[0]&&rows[0].x);
   ok("picker: Vì sao lists the 3 royal checks",(()=>{const F=rows[0].why().map(x=>x[0]).join("|");return /nếm thử/.test(F)&&/hai lượt/.test(F)&&/Đũa bạc/.test(F)})());
   ok("picker: intro text says royal needs a cause",/có nguyên cớ/.test(d.t),d.t);
   /* 3. Emperor · hate · caught → Ban chết + house */
