@@ -2807,3 +2807,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (03:53Z) sếp: videos too slow, wants play-speed option → sent 2× copies (selscene + m3-flow) + mock-stage page link (browser player has speed). RULE for main: every video to sếp = also a 2× copy, or the CDN page link.
 - (03:55Z) LANDED kit-dhcapfit → LIVE 2a9125bf (LC9). KIT READY kit-framefit 055baec6 (KK16; ~12 old requests closed as already built) → SMALL kit review ORDERED to B.
 - (03:57Z) KIT READY kit-mgboardof d4f0217d (KK16) → added to B's SMALL kit review order.
+- (04:08Z) sếp angry after the 8 videos (OD row 24/11 ~04:00Z). Old selscene mock predated her rows 23:05–23:47Z. SELSCENE-2 = session_01V1ZZH2yEMKrrAz7jmCWzee (opus) — checklist first, new mock + 2× copies + page; MAIN checks each row before sending.
