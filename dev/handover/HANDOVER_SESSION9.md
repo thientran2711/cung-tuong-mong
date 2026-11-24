@@ -2926,3 +2926,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (07:25Z) sếp answered «1»: late figure hidden until decoded (OD row) → VEIL-1 told to build it into review/kit-screenveil (KIT §97 + §59.1 in place) and re-hand SSK to B reviewer.
 - (07:27Z) sếp changed to «2 đi»: late figure = §59.1 grey stand-in (OD row overwritten in place) → VEIL-1 + KK18 told.
 - (07:37Z) SELSCENE-6 rolled (4240dca5; SELX-WRITER DONE 4e77e12 dorm 43/kept 43) → opening SELSCENE-7. OWNER idea «Vòng người» (OD ~07:32Z/~07:35Z): mock first → opening RING-DESIGN (sonnet). Worklist +1 → 24.
+- (07:39Z) SELSCENE-7 = session_01V1ZZH4RpHLXeiVt1a4nctc (opus, child of 119): merge dramas + top up 60+/60+ + polish + Tiền sảnh no-gain card fix + OWNER MOCK + SSK. RING-DESIGN = session_01V1ZZH3CcWmndHofFV5TX3K (sonnet, child of 119): «Vòng người» 3 options + drama signals, Fold+iPad mocks + 2× + mp4 by 12:00Z → MAIN checks → sếp at her 08:00. SELSCENE-6 archived.
