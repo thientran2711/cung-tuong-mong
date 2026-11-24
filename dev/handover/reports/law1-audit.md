@@ -151,3 +151,13 @@ review/law1-audit-r1 = 18aca389 + merge of LIVE 178cac37 (kit-framefit: jflip / 
 The one extra row differs run to run and belongs to the coop-host-lag family LIVE also shows (LIVE A also lists staff .duc drift) → LIVE-identical red, not this branch. Owner of the LIVE red: co-op fixer #4 (session_01N1tNP2dfra9gDdChCWdbcB, same rows on 178cac37).
 
 **LAND READY law1-audit-r1 45b4057b25a7dca52405623703b79db457aaea11 FOR MAIN 121 (re-merge on 178cac37)**
+
+## REVIEW r1 — re-merge d521656c (ORDER MAIN 122 12:05Z via Foreman B)
+review/law1-audit-r1 = 45b4057b + merge of review/test-mrfoot d521656c (tests only: 59 co-op / dialog drivers + mrfoot-scan; no conflict) + site build. Head **ca1ddcf93151831c098ba3d94367cba50a8b0ce7**; d521656c (and LIVE 178cac37) are its ancestors.
+- `node dev/test/law1-audit.test.js` → `law1-audit: 13/13 PASS` · `… index.html` → `law1-audit: 13/13 PASS`
+- `node dev/test/role-parity.test.js index.html` → `ok open baseline only shrinks (≤ 7 rows, each with its side) 7` … `ALL PASS`
+- `node dev/test/one-core-guard.js` → `PASS: one core …` · `node dev/test/undef-scan.js` → `PASS: no unguarded undefined identifier (301 names checked)`
+- `node dev/test/coop-e2e.js <out>` (Fold hosts) → `142/142 passed` · `COOP_SWAP=1 node dev/test/coop-e2e.js <out>` (iPad hosts) → `142/142 passed` — GREEN with the fixed drivers (the 178cac37 red was the drivers, as the LOAD-COMPARE showed)
+- `bash dev/tools/quickcheck.sh` (alone) → `QUICKCHECK PASS · 262 s · open 2281 ms · old save ok · perf (median of 3, new/live): render 302/270 ms, tab 571/534 ms, buổi 3617/3671 ms · core gates PASS`
+
+**LAND READY law1-audit-r1 ca1ddcf93151831c098ba3d94367cba50a8b0ce7 FOR MAIN 122 (re-merge on test-mrfoot d521656c)**
