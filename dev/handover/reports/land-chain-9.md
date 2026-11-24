@@ -7,3 +7,4 @@ Roll at ctx >= ~28 %, ceiling 60 %.
 
 ## Log
 - 24/11 ~03:25Z LIVE = 24883e24. Queue: map-label-overlap-r, kit-dhcapfit-r1, thin-p3-r1, robot10-nc-fix-2-rv, robot10-nc-fix-1-rv, coop-thin-g (after B), D's 3 BIG, TITLES2.
+- 24/11 ~03:35Z LANDED map-label-overlap b7598e72 (FF, head == READY sha; map-label-overlap.js Fold+iPad 40 cases 0 overlap; QUICKCHECK PASS 728 s first try; coop-e2e 141/141). LIVE = b7598e72. kit-dhcapfit 1st try: assets.json conflict (generated) → sland now takes theirs + rebuilds, rerunning.
