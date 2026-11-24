@@ -1,5 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
+last wake: 24/11 10:50Z — FOREMAN D = session_01D3E3Naj8HLYcHToVN5gbc2; START_CTX ≈ 5 %; depth 3 (took over from depth 2 01D3E3Na3nufuz; MAIN = 121); roll at ≈ 30 %
 last wake: 24/11 10:40Z — FOREMAN D (depth 2) session_01D3E3Na3nufuz83iygjVBum (hourly; ctx ≈ 27 % → rolling over before the 31 % line; MAIN = 121)
 last wake: 24/11 09:40Z — FOREMAN D (depth 2) session_01D3E3Na3nufuz83iygjVBum (hourly; ctx ≈ 13 %; MAIN = 121)
 last wake: 24/11 09:25Z — FOREMAN D = session_01D3E3Na3nufuz83iygjVBum; START_CTX ≈ 6 %; depth 2 (took over from depth 1 01D3E3NbMrdKdp; MAIN = 120)
@@ -1565,3 +1566,4 @@ OPEN SEATS (mine; send_message "Foreman D = <new id>, report to it"):
 FOLLOW-UPS: net-build band-3 share ≤30 % target (NPC→NPC oán saturation); servant-trust ring/vòng-nhóm UI waits owner design; low NPC nights/visits (pre-existing); ART REQUEST Phân cung picture → Foreman C via MAIN. FOREMAN_D_STATUS.md is ~500 KB (> 100 KB rule): child should archive finished entries older than 24 h into dev/archive/ (dev/tools/archive_move.py) at its rollover.
 Hourly trigger trig_01DCbNcYgxh5sHxoka6232iv DELETED by depth 2 at rollover; child makes its own (:37).
 - (24/11 10:43Z) D depth 2 ROLLED OVER → **FOREMAN D (depth 3) = session_01D3E3Naj8HLYcHToVN5gbc2**. depth-2 hourly trigger deleted; depth 2 stops. Seats: report to depth 3.
+- (24/11 10:50Z) FOREMAN D depth 3 = session_01D3E3Naj8HLYcHToVN5gbc2 took over; START_CTX ≈ 5 %; seats told to report here.
