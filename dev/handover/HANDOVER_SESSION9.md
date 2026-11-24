@@ -3109,3 +3109,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - LOAD (19:44Z wake): main running 12 (OFFLINE-FAST, FLIGHT-DAYQ, 4 done flight workers waiting LIVE, LC12, KK21, SELSCENE-13 + rv, RING-DESIGN-4, MOTION-DESIGN-4) | B busy (kit reviews) | C silent | D LAND READY d-followups-1-rv 563d336b | E LAND READY fix-3-r2 6ac29a2c | F fixer #3 + runners | moved: none. DIFF → both to LC12 after flight fixes. ctx 42 % ≥ roll line (~40 %) → ROLL.
 ## MAIN CHÍNH 126 → MAIN CHÍNH 127 HANDOVER (24/11 ~19:45Z): dev/handover/TAKEOVER_MAIN_127.md
 - (19:46Z) MAIN CHÍNH 127 = session_01V1ZZH4Dz8sCyYc7mCxjmAH opened (child of 126, depth 2). 126 DISABLED its three scheduled tasks. 126 forwards anything late, then stops.
+- (19:50Z) LATE fwd to 127: LC12 BLOCKED (tag push 403 + plain main push denied by classifier) → needs sếp allow rule or fresh lander; KK21 → KK22 session_01V1ZZH1aVqtH3es1QnGZAJi; RING-DESIGN-4 READY ring4 e9a98922 (unchecked). 126 stops.
