@@ -21,6 +21,9 @@ function kitLineToast(text){try{if(!text)return null;try{const md=document.getEl
  try{if(typeof kitToastWatch==="function")kitToastWatch()}catch(e){}
  el.addEventListener("click",()=>el.remove());clearTimeout(kitLineToast.t);kitLineToast.t=setTimeout(()=>{el.classList.add("out");setTimeout(()=>{if(el.classList.contains("out"))el.remove()},500)},window.__toastKeep?60000:BAL.entryToastMs);return el}catch(e){return null}}
 window.kitLineToast=window.kitLineToast||kitLineToast;
+/* the left rail's real right edge in stage px → --krw (the title's max-width follows it; a long title wraps instead of running under the chip); no rail → the old 80 px */
+function railW(st){try{const rl=$("krail"),R=st.getBoundingClientRect();let w=80;if(rl&&rl.getClientRects().length){const q=rl.getBoundingClientRect();if(q.width>0)w=Math.max(80,Math.ceil(q.right-R.left)+8)}
+ if(railW.v!==w){railW.v=w;st.style.setProperty("--krw",w+"px")}}catch(e){}}
 function lay(){try{const st=$("stage");if(!st)return;let nm=$("kpname"),en=$("kpent");
  const t=$("sc-t"),live=!!t&&!!S&&!S.dead&&onStage()&&st.getBoundingClientRect().height>40;
  const name=live?((t.querySelector(".rt1")||{}).textContent||"").trim():"";
@@ -34,6 +37,7 @@ function lay(){try{const st=$("stage");if(!st)return;let nm=$("kpname"),en=$("kp
  if(name){if(!nm){nm=document.createElement("div");nm.id="kpname";nm.className="kpname";st.appendChild(nm)}
   /* owner 18/11 ~20:55Z: plain TEXT on the scene picture, no plaque / frame, not fixed-width; (owner 21/11 overwrites this: the big PALACE on line 1 (top), her smaller HALL on line 2 below) */
   const parts=name.split(/\s*·\s*/).filter(Boolean).slice(0,2),hh=parts.map(x=>`<span>${esc(x)}</span>`).join("");if(nm.__h!==hh){nm.innerHTML=hh;nm.__h=hh}nm.hidden=false;
+  railW(st);/* KIT §98.2: the title never reaches the left rail (head-count chip): its room = stage width − the rail's real right edge */
   const h=Math.ceil(nm.getBoundingClientRect().height)+6;st.style.setProperty("--kpnh",h+"px");st.classList.add("kpn")}
  else{if(nm)nm.hidden=true;st.style.setProperty("--kpnh","0px");st.classList.remove("kpn")}
  /* (3) entry line chip, top of the stage */
@@ -42,7 +46,7 @@ function lay(){try{const st=$("stage");if(!st)return;let nm=$("kpname"),en=$("kp
  else if(en)en.hidden=true;
  }catch(e){console.error("jplst",e)}}
 /* the chip never covers her marker (the flower above her head): if they meet, the chip starts to the right of the marker */
-function placeEnt(){try{const en=$("kpent"),st=$("stage");if(!en||en.hidden||!st)return;en.style.left="";const ch=en.querySelector(".kchip");if(!ch)return;const mk=document.querySelector(".kmemark");
+function placeEnt(){try{const en=$("kpent"),st=$("stage");if(st&&$("kpname")&&!$("kpname").hidden){railW(st);const nm=$("kpname"),h=Math.ceil(nm.getBoundingClientRect().height)+6;if(st.style.getPropertyValue("--kpnh")!==h+"px")st.style.setProperty("--kpnh",h+"px")}if(!en||en.hidden||!st)return;en.style.left="";const ch=en.querySelector(".kchip");if(!ch)return;const mk=document.querySelector(".kmemark");
  if(mk&&mk.getClientRects().length){const R=st.getBoundingClientRect(),q=mk.getBoundingClientRect(),c=ch.getBoundingClientRect();
   if(q.right>c.left-4&&q.left<c.right+4&&q.top<c.bottom+2&&q.bottom>c.top-2)en.style.left=Math.round(q.right-R.left+8)+"px"}}catch(e){}}
 function lay2(){lay();placeEnt();clearTimeout(lay2.a);clearTimeout(lay2.b);lay2.a=setTimeout(placeEnt,400);lay2.b=setTimeout(placeEnt,1300)}
@@ -57,8 +61,10 @@ try{if(window.kitStageRail)kitStageRail.add({id:"here",order:0,chip:()=>{const n
 const css=document.createElement("style");css.id="kit-plst";css.textContent=`
 :root{--kts:0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 9px #fff8eecc}
 html body .stage #sc-t{display:none!important}
-.kpname{position:absolute;top:8px;right:10px;z-index:3;box-sizing:border-box;display:flex;flex-direction:column;align-items:flex-end;max-width:calc(100% - 80px);pointer-events:none;text-align:right;font-weight:800;font-size:1.1rem;line-height:1.2;color:#2a1a12;text-shadow:var(--kts)}
-.kpname>span{white-space:nowrap}
+.kpname{position:absolute;top:8px;right:10px;z-index:3;box-sizing:border-box;display:flex;flex-direction:column;align-items:flex-end;max-width:calc(100% - var(--krw,80px) - 10px);pointer-events:none;text-align:right;font-weight:800;font-size:1.1rem;line-height:1.2;color:#2a1a12;text-shadow:var(--kts)}
+.kpname>span{white-space:normal;overflow-wrap:break-word;text-wrap:balance}/* a long title wraps inside its room (KIT §98.2), never under the rail chip */
+/* the «tạm» stand-in tag never sits on the title: on a place stage it goes to the bottom-left corner (KIT §98.2) */
+html body .stage.kpn>.ktam{top:auto;right:auto;left:8px;bottom:8px}
 html body .stage.kpn .kshR{top:calc(8px + var(--kpnh,0px))}
 html body .stage.kpn .kshR.kasx{max-height:calc(100% - 16px - var(--kpnh,0px) - var(--kgrb,0px))}
 html body .stage .kmnote.kmslot{position:absolute!important;top:6px!important;bottom:auto!important;left:62px;right:calc(var(--kgrw,150px) + 16px);translate:none!important;max-width:none;animation:none;display:flex;justify-content:center;z-index:6;pointer-events:none}
