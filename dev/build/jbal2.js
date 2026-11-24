@@ -2031,3 +2031,5 @@ BAL.nr={lives:6,w:.5,cap:1500};
 BAL.mgp={min:40};
 /* ORDER THIN P1c (jmgpool_c.js): pool sizes of the P1c kinds (floor BAL.mgp.min); nghe = every triple of the ten secret words. */
 BAL.mgpc={nghe:120,td_hanh:150,kinh:360,may:350};
+/* ORDER THIN P1b (jmgpool_b.js): items per pooled test type of lane P1b (co and doi/doden: per group size / rows / round type) */
+BAL.mgpb={dan:64,co:90,dauho:60,theu:64,mua:64,doi:80,doden:44,tc:100,xa:200,thq:130};
