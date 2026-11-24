@@ -5,7 +5,7 @@
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path'),cp=require('child_process');
 const WT=process.argv[2],OUT=process.argv[3],SCALE=+(process.argv[4]||1);const ROOT=path.join(WT,'dev');fs.mkdirSync(OUT,{recursive:true});
 const DEV0={fold:{width:755,height:1000},ipad:{width:1180,height:820}};const DEV=Object.fromEntries(Object.entries(DEV0).filter(([k])=>!process.argv[5]||process.argv[5].split(',').includes(k)));
-(async()=>{const b=await chromium.launch();
+const TXL=new Set();(async()=>{const b=await chromium.launch();
  for(const [dn,vp] of Object.entries(DEV)){const vd=path.join(OUT,'_v_'+dn);fs.mkdirSync(vd,{recursive:true});
   const ctx=await b.newContext({viewport:vp,deviceScaleFactor:SCALE,serviceWorkers:'block',recordVideo:{dir:vd,size:vp}});
   await ctx.route('http://localhost:8813/**',r=>{const u=new URL(r.request().url());const f=path.join(ROOT,decodeURIComponent(u.pathname));
@@ -27,6 +27,9 @@ const DEV0={fold:{width:755,height:1000},ipad:{width:1180,height:820}};const DEV
     const res=document.querySelector('#rtoast.on');return{done:!Z||Z.done||S.dead||!S.selx2,days:Z&&Z.days,sc:!!sc,line:box?box.textContent.slice(0,40):'',t:m&&m.t||'',pid:m&&m.pid||'',
      nm:m&&m.opts?m.opts.map(o=>o.n):[],modal:!!document.querySelector('#modal:not([hidden]) button[data-m]'),res:res?res.textContent.slice(0,60):''}});
    if(st.done)break;
+   /* SELSCENE-11 text audit (law 6/7/11): every visible card / scene / stage word before the edict — no future rank of a tú nữ, no «???» name mask, no raw ${…} */
+   {const tx=await p.evaluate(()=>{const g=e=>e&&e.offsetParent!==null?e.innerText:'';return [g(document.getElementById('modal')),g(document.querySelector('.kscn')),g(document.getElementById('stage')),g(document.getElementById('panel'))].join(' | ')});
+    const RK=/(Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng)\s+(?=[A-ZĐ])|\?\?\?|\$\{/g;let m;while((m=RK.exec(tx))){const k=m[0]+'|'+tx.slice(Math.max(0,m.index-30),m.index+40).replace(/\s+/g,' ');if(!TXL.has(k)){TXL.add(k);console.log('TEXT',dn,'day',st.days,JSON.stringify(k))}}}
    /* RV-SELX: the contest podium (kit §26 #kpodov) waits for its «Tiếp» like a player would; before, the driver clicked the cards UNDER it and Day 3 was filmed behind the podium */
    if(await p.evaluate(()=>!!document.getElementById('kpodov'))){if(last!=='podium'){last='podium';await p.waitForTimeout(1500);await shot('vinh-danh')}await p.evaluate(()=>{const o=document.getElementById('kpodov');const b=o&&[...o.querySelectorAll('button')].find(x=>/Tiếp/.test(x.textContent));if(b)b.click()});await p.waitForTimeout(900);continue}
    if(st.sc){const key='sc:'+st.line.slice(0,12);if(key!==last&&st.line){last=key;await p.waitForTimeout(900);await shot('canh-'+slug(st.line))}
@@ -44,7 +47,7 @@ const DEV0={fold:{width:755,height:1000},ipad:{width:1180,height:820}};const DEV
     await p.evaluate(()=>document.querySelectorAll('.kmov,#kprevov,#kg82').forEach(x=>x.remove()));await p.waitForTimeout(700);continue}
    await p.evaluate(()=>{try{closeModal()}catch(e){}});await p.waitForTimeout(300)}
   await p.waitForTimeout(1200);await shot('sau-chieu');
-  console.log(dn,'shots',n,'errors',errs.length,errs.slice(0,3));const vpath=await p.video().path();await ctx.close();
+  console.log(dn,'shots',n,'errors',errs.length,errs.slice(0,3),'text leaks',TXL.size);const vpath=await p.video().path();await ctx.close();
   const webm=path.join(OUT,dn+'.webm');fs.renameSync(vpath,webm);fs.rmSync(vd,{recursive:true,force:true});
   try{cp.execFileSync('ffmpeg',['-y','-loglevel','error','-i',webm,'-c:v','libx264','-pix_fmt','yuv420p','-movflags','+faststart',path.join(OUT,dn+'.mp4')]);
    cp.execFileSync('ffmpeg',['-y','-loglevel','error','-i',webm,'-filter:v','setpts=0.5*PTS','-an','-c:v','libx264','-pix_fmt','yuv420p','-movflags','+faststart',path.join(OUT,dn+'-2x.mp4')]);fs.rmSync(webm)}catch(e){console.log('ffmpeg',e.message.slice(0,200))}}
