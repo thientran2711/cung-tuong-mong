@@ -21,9 +21,9 @@ const TARGET={
  hhCnv:{lo:20,hi:25,mid:22.5,src:'OD:L43 (cnv ~20–25 %)'},
  early:{lo:40,hi:45,mid:42.5,src:'OD:L19 (early death ~40–45 %)'},
  birth:{lo:8,hi:12,mid:10,src:'OD:L19 (childbirth death 8–12 % per birth)'},
- kiepMin:{hi:120,src:'PROVISIONAL — OD 23/11 ~23:25Z «a kiếp must not drag» has no number; MAIN to set'},
+ kiepMin:{hi:null,key:'kiepCap.realMin',src:'BAL.kiepCap.realMin, PROVISIONAL (jbal.js) — OD 23/11 ~23:25Z «a kiếp must not drag» has no number; MAIN to set'},
  endShare:{hi:50,src:'order #6 (4): one ending > half of all endings = too common'},
- kyMax:{hi:6,src:'PROVISIONAL — no OD number for kỳ ngộ per kiếp; MAIN to set'},
+ kyMax:{hi:null,key:'kiepCap.kyngo',src:'BAL.kiepCap.kyngo, PROVISIONAL (jbal.js) — no OD number for kỳ ngộ per kiếp; MAIN to set'},
  evRep:{hi:25,src:'order #5/#6 (4): > 25 % of a kiếp\'s cards seen again in the same kiếp = repetitive'}};
 const MIN_N=20,CLAMP=[.5,2];
 const REPO=path.join(__dirname,'..','..');
@@ -68,7 +68,7 @@ const show=v=>v===undefined?'(absent)':typeof v==='object'?JSON.stringify(v):Str
 const r2=x=>Math.round(x*100)/100,clamp=k=>Math.max(CLAMP[0],Math.min(CLAMP[1],k));
 const scaleV=(v,k)=>typeof v!=='number'?null:(Math.abs(v)>=10?Math.round(v*k):r2(v*k));
 /* ---------- the table ---------- */
-function recommend(c){const {L,BALX,pct,f1,mean,by,M,lifeMin,ended}=c;const rankN=i=>{const n=c.rankN(i);return /^rank /.test(n)&&BALX&&BALX.ranks&&BALX.ranks[i]?BALX.ranks[i].n:n};const B=BALX&&BALX.bal;const rows=[],notes=[];
+function recommend(c){const {L,BALX,pct,f1,mean,by,M,lifeMin,ended}=c;const rankN=i=>{const n=c.rankN(i);return /^rank /.test(n)&&BALX&&BALX.ranks&&BALX.ranks[i]?BALX.ranks[i].n:n};const B=BALX&&BALX.bal;/* law 4: the PROVISIONAL caps are read from the game page's BAL (bal.json), never typed here */for(const t of [TARGET.kiepMin,TARGET.kyMax]){const v=B?get(B,t.key):undefined;t.hi=typeof v==='number'?v:null}const rows=[],notes=[];
  const P=(a,b)=>b?100*a/b:null;const low=n=>n<MIN_N?` · low n (${n})`:` · n ${n}`;
  const K=kp=>`BAL.${kp} ${keyLoc(kp)}`;
  const add=(area,finding,keys,cur,prop,effect)=>rows.push([area,finding,keys,cur,prop,effect]);
@@ -136,16 +136,16 @@ function recommend(c){const {L,BALX,pct,f1,mean,by,M,lifeMin,ended}=c;const rank
    step.push({i,pass:A.length?P(Bq.length,A.length):null,nA:A.length,nB:Bq.length,yrs:mean(at.map(x=>x.yrs)),min:mean(at.map(x=>x.min))})}
   const top=step.filter(s=>s.i>=4);
   top.forEach(s=>add('(3) reach speed',`${rankN(s.i)}: reached by ${s.nB}/${L.length} · ${s.nB?`after ${f1(s.yrs)} game years · ${f1(s.min)} real min (pace model)`:'nobody reached it'} · passes the step from ${rankN(s.i-1)}: ${s.pass==null?'—':f1(s.pass)+' %'}${low(s.nA)}`,
-   `RANKS[${s.i}].s/.d ${codeLoc(/const RANKS\s*=/)} (not in BAL: law 4 flag) · promoGap ${codeLoc(/function promoGap/)}`,BALX.ranks?`Sủng ${BALX.ranks[s.i].s} · Danh ${BALX.ranks[s.i].d} · gap ${BALX.promoGap?BALX.promoGap[s.i-1]:'?'} tháng`:'?','see bottleneck row','—'));
+   K('promo.s')+' · '+K('promo.d')+' · '+K('promo.gap')+` (index ${s.i})`,BALX.ranks?`Sủng ${BALX.ranks[s.i].s} · Danh ${BALX.ranks[s.i].d} · gap ${BALX.promoGap?BALX.promoGap[s.i-1]:'?'} tháng`:'?','see bottleneck row','—'));
   const real=step.filter(s=>s.nA>=3&&s.pass!=null);if(real.length){const bn=real.reduce((a,s)=>s.pass<a.pass?s:a);const hh=hhOf(L);
    if(hh<TARGET.hh.lo&&BALX.ranks){const rk=BALX.ranks[bn.i],pv=BALX.ranks[bn.i-1];const k=clamp((bn.pass||1)/Math.max(bn.pass||1,60));const ns=Math.round(pv.s+(rk.s-pv.s)*Math.max(.5,k)),nd=Math.round(pv.d+(rk.d-pv.d)*Math.max(.5,k));
     add('(3) bottleneck',`HH ${f1(hh)} % < ${TARGET.hh.lo} %: the hardest step is ${rankN(bn.i-1)} → ${rankN(bn.i)} (only ${f1(bn.pass)} % of those at ${rankN(bn.i-1)} pass)${low(bn.nA)}`,
-     `RANKS[${bn.i}] ${codeLoc(/const RANKS\s*=/)} (move to BAL first, law 4)`,`Sủng ${rk.s} · Danh ${rk.d}`,`Sủng ${ns} · Danh ${nd} (the step from ${rankN(bn.i-1)} cut to ×${r2(Math.max(.5,k))})`,'more lives pass the bottleneck step → HH reach up; re-run confirms')}}
+     K('promo.s')+' · '+K('promo.d')+` (index ${bn.i})`,`Sủng ${rk.s} · Danh ${rk.d}`,`Sủng ${ns} · Danh ${nd} (the step from ${rankN(bn.i-1)} cut to ×${r2(Math.max(.5,k))})`,'more lives pass the bottleneck step → HH reach up; re-run confirms')}}
   /* pace model calibration (part-2 gap): the reading term's share of the minutes; until calibrated, judge speed by game years */
   if(c.PACE&&c.P){const rd=L.map(r=>{const p=c.P(r),m=lifeMin(r);return p&&m?((p.chars||0)/c.PACE.READ_CPS/60)/m:null}).filter(x=>x!=null);const sh=mean(rd);
    if(sh!=null)add('(3) pace model',`reading = ${f1(100*sh)} % of the modelled real minutes; PACE is NOT calibrated against human-paced play (part-2 gap)`,'robot10-agg.js PACE (READ_CPS '+c.PACE.READ_CPS+', CLICK_S '+c.PACE.CLICK_S+', CHOICE_S '+c.PACE.CHOICE_S+')','—','calibrate READ_CPS with one human-paced kiếp before any minutes-based tuning; until then use the game-year column','real-minute rows become trustworthy')}
   const km=mean(L.map(lifeMin)),kd=mean(L.filter(ended).map(lifeMin));
-  add('(3) kiếp length',`mean kiếp ${f1(km)} real min (ended lives ${f1(kd)}) vs cap ${TARGET.kiepMin.hi} min (${TARGET.kiepMin.src})`,'pace: robot10-agg.js PACE + the rank steps above','—',(km||0)>TARGET.kiepMin.hi?'lower the slowest step (bottleneck row) or BAL.entry.cap start rank':'keep','—')}
+  add('(3) kiếp length',`mean kiếp ${f1(km)} real min (ended lives ${f1(kd)}) vs cap ${TARGET.kiepMin.hi==null?'n/a (BAL.kiepCap missing on that page)':TARGET.kiepMin.hi} min (${TARGET.kiepMin.src})`,'pace: robot10-agg.js PACE + the rank steps above','—',TARGET.kiepMin.hi!=null&&(km||0)>TARGET.kiepMin.hi?'lower the slowest step (bottleneck row) or BAL.entry.cap start rank':'keep','—')}
  /* (4) endings / rare endings / kỳ ngộ / event variety */
  {const E=L.filter(r=>r._end);const T=by(E,r=>r._end).map(([k,G])=>[k,G.length,G]).sort((a,b)=>b[1]-a[1]);
   if(E.length>=5&&T.length){const [k,n,G]=T[0];const s=P(n,E.length);if(s>TARGET.endShare.hi)add('(4) ending too common',`«${k.slice(0,60)}» = ${f1(s)} % of ${E.length} endings (${TARGET.endShare.src})${low(E.length)}`,
@@ -158,7 +158,7 @@ function recommend(c){const {L,BALX,pct,f1,mean,by,M,lifeMin,ended}=c;const rank
   /* kỳ ngộ */
   const ky=L.map(r=>(M(r).ky||[]).length),z=P(ky.filter(x=>!x).length,L.length),p0=get(B,'kyngo.p0');
   if(z>50)add('(4) kỳ ngộ too rare',`${f1(z)} % of lives met no kỳ ngộ (mean ${f1(mean(ky))} per life)${low(L.length)}`,K('kyngo.p0')+' · '+K('kyngo.festP'),`p0 ${show(p0)} · festP ${show(get(B,'kyngo.festP'))}`,`festP ${scaleV(get(B,'kyngo.festP'),1.5)} (p0 already ${p0})`,'more lives meet at least one kỳ ngộ');
-  else if(mean(ky)>TARGET.kyMax.hi)add('(4) kỳ ngộ too common',`mean ${f1(mean(ky))} kỳ ngộ per life vs ≤ ${TARGET.kyMax.hi} (${TARGET.kyMax.src})`,K('kyngo.p0'),show(p0),String(scaleV(p0,.8)),'kỳ ngộ feels special again');
+  else if(TARGET.kyMax.hi!=null&&mean(ky)>TARGET.kyMax.hi)add('(4) kỳ ngộ too common',`mean ${f1(mean(ky))} kỳ ngộ per life vs ≤ ${TARGET.kyMax.hi} (${TARGET.kyMax.src})`,K('kyngo.p0'),show(p0),String(scaleV(p0,.8)),'kỳ ngộ feels special again');
   else notes.push(`kỳ ngộ: mean ${f1(mean(ky))} per life, ${f1(z)} % of lives with none — no change`);
   /* event variety (metric 12) */
   const ds=mean(L.map(r=>M(r).evDistinct)),rp=mean(L.map(r=>M(r).evRep));if(ds){const x=P(rp||0,ds);

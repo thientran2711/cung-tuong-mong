@@ -35,7 +35,7 @@ G6set("maidQuarrel",{pp:()=>{const L=(S.staff||[]).filter(s=>s.sid!=null);const 
 G6set("brokenHeirloom",{pp:()=>{const a=sv6(s=>netIs(s,"timid")||(s.loyal||50)<BAL.loy.bad);return a==null?null:{a0:a,it:R(4)}},v:E68I.brokenHeirloom.v.map(t=>t.replace("{A}","{A}, vốn hay run tay sợ sệt,"))});
 G6set("servGamble",{pp:()=>{const a=sv6(s=>netIs(s,"greed"));return a==null?null:{a0:a}}});
 G6set("spoiledFood",{w:C=>(S.rank<=2||S.sung<20)?(C.sea==="Hạ"?2:1.2):0,v:E68I.spoiledFood.v.map(t=>t+" (Cung ít được sủng thì bên dưới hay khinh nhờn.)")});
-G6set("eunuchSqueeze",{w:C=>C.rank<=2?2:0});
+G6set("eunuchSqueeze",{w:C=>balRk("eunSqH",C.rank)});
 /* --- visitors with motives --- */
 G6set("slyVisit",{pp:()=>{const a=rv6(v=>band6(v)>=1);return a==null?null:{a0:a}},
  o:X=>[c6("Tiếp, nhưng cho người canh chừng",{c:{suc:-4},w:{tamco:1},wt:[G6("không lọt chuyện gì ra")],r:[[X.A,2]]}),

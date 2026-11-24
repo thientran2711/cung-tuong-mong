@@ -3,6 +3,19 @@ const BAL={entryToastMs:5000,/* owner 18/11 ~03:4xZ: ms the place-entry line sta
  /* night-balance-bundle (D #15/#16 ruling 21/11): the Hoàng hậu gate keeps LIVE values (hhThNoSon 80 / Hiếu 70, outQ 60, RANKS HH Danh 78). balance-2 had lowered them while Danh was scarce; with the §7 Danh re-tune Danh m36 is at LIVE level and HH reach was already above LIVE (knobbot k3/k4 vs LIVE 94cbe0cd). */
  /* outQ = % an empty Hoàng hậu seat goes to an outsider girl (one-core: was 85 here and 60 in jbal2; 60 is the measured v12 value) */outQ:60,hz:3.2,/* home road hazards (OUTSIDE_PLAN §12, GAP OR11; Vừa values; jdiff Dễ/Khó scale them like hz): kcSch = weight (100 = as shipped) of the hostile-kin schemes at home (stepmother, rival sister, assassin, the pestering suitor); kcRumFade = how much the city gossip about her (S.kld) fades each month; kcMatch = % of the monthly push toward a forced match (S.kap; 100 = as shipped; the sensible bot never loses to a forced match, so Vừa keeps it, GAP OR12) */kcSch:100,kcRumFade:2,kcMatch:100,/* kcRareX = the hidden roll (×100) of an outside rare ending once its gate is met (× its own weight and R97CFG.p; was a typed .12 in kcRare; value as shipped: the sensible bot meets no rare gate, so a bigger roll moved nothing, GAP OR12) */kcRareX:12,/* kcSelMax = the best chance (%) the court keeps a girl at Điện tuyển (was KC.selMax 80 in jkc; value as shipped, bot-checked for OUTSIDE_PLAN §12, GAP OR12) */kcSelMax:80,conc:.5,/* conception per night × (D57 owner 16/11: doubled from .25 for everyone; the cycle peak/low is BAL.cyc.fert in jcycle.js) */trystC:[5,60],/* a tryst / affair conception = trystCh(p) = conceiveCh(p) kept within [lo,hi] (her Hẹn gặp riêng j22, Tư thông jroute, an NPC consort's affair month j22) */later:6,hhTh:60,/* diff-remeasure 16/11: 55 → 60 (Vừa HH 45 % → ~32 % with the fixed bot; 65 measured 26 %) */birthAdd:2,
  /* ONE SOURCE for every promotion threshold the player sees (checks in promoReqP/candOK and every text read these) */
+ /* LAW 4 rank numbers (review/bal-ranks-law4): promo.s / promo.d = Sủng / Danh needed for rank index 0..7 (RANKS[i].s/.d read these; was typed in j1.js);
+    promo.gap[r] = months a consort at rank r must wait since her last decree (promoGap, j8; was the formula r<3?3:3+(r-2)*2).
+    jpromo.js adds the rest of BAL.promo (cap, extra, srv…) into this same object. */
+ promo:{s:[0,15,25,38,52,66,78,85],d:[0,10,20,30,42,55,68,78],gap:[3,3,3,5,7,9,11,13]},
+ /* rkW = every per-rank weight that a formula multiplies by the rank (was typed at the site; values unchanged). [base, per rank] where the base belongs to
+    the same rank rule. rkT = per-rank tables (index = rank 0..7) that replace typed rank ternaries; read with balRk(key, rank). Scan: dev/tools/rank-num-scan.py */
+ rkW:{rivalSung:[20,9],startDanh:[8,8],startBac:[40,20],kcSung:[8,5],kcEnterPd:{at:2,hi:10,lo:5},feast:[40,8],accAsk:{mid:4,w:8},pkQueen:15,
+  facStr:10,ordOdds:3,h54Pull:5,pkPull:5,giftO:3,takeaway:4,gJoin:3,lostCct:3,routeRival:10,j68e_6:8,j68e_7:9,j68e_9:8,j68f_9:7,j68f_12:8,j71odP:4,j71odP2:5,j71odP_15:3},
+ rkT:{srvRise:[1,2,2,3,3,3,3,3],eunSqH:[2,2,2,0,0,0,0,0],eunSqE:[2,2,2,2,.4,.4,.4,.4],lowRival:[0,0,1.4,1.4,1.4,1.4,1.4,1.4],riteDanh:[2,2,2,6,6,6,6,6],
+  soke:[0,0,0,1,1,1,1,1],favQueen:[0,0,0,0,0,0,0,5],accuseQueen:[0,0,0,0,0,0,0,30],seat:[0,0,0,0,0,0,10,10],petMax:[1,1,2,2,3,3,4,4]},
+ /* PROVISIONAL (robot10-reco, no OD number yet — MAIN / sếp to set): kiepCap.realMin = real minutes one kiếp should not exceed; kiepCap.kyngo = kỳ ngộ per kiếp ceiling.
+    Read by dev/measure/robot10-reco.js from the game page (bal.json), never typed there. */
+ kiepCap:{realMin:120,kyngo:6},
  hhThNoSon:80,hhThNoSonHieu:70,hhDuc:50,hhDucHeir:40,qBlockHh:-40,qBlockTh:50,hiOppHh:-30,hiOppTh:30,hiOppFac:180,
  /* handmade works (j83), by material 0 thường / 1 tốt / 2 quý: matQ = phần added to the score; cap = highest tier it can reach (only quý makes a
     Tuyệt phẩm); val = gift value added (Sủng / Thái hậu / thiện cảm); sell = share of the material's silver paid back when sold (1: a sale never loses the material's price); tinh = extra
@@ -437,3 +450,8 @@ BAL.srvRk={tam:1,nhi:2,dai:3,cs:4,nq:5,mama:6,tier:[0,1,1,2,3,4]};
 BAL.srvWage=[1,3,4,5,8,12];
 /* r2 sg-card: the monthly thơ (j3 artMonth, applied as is, not through sg) — was typed in j3 + 3 rule texts (j1 ARTS.u, j23, j85) */
 BAL.tho={lv:3,sung:1,lv5:5,sung5:2};
+
+/* RANKS[i].s / .d come from BAL.promo (law 4, review/bal-ranks-law4) */
+RANKS.forEach((o,i)=>Object.defineProperties(o,{s:{get(){return BAL.promo.s[i]},enumerable:true,configurable:true},d:{get(){return BAL.promo.d[i]},enumerable:true,configurable:true}}));
+/* one per-rank table read (BAL.rkT): rank clamped to the table */
+function balRk(k,r){const T=BAL.rkT[k];return T[Math.max(0,Math.min(T.length-1,r|0))]}

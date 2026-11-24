@@ -47,7 +47,7 @@ function ccStep(a){a.cc=(a.cc||0)+1;a.ccT=S.turn;if(!roll(ccRisk(a)))return"";a.
  punish(a,"hậu cung can chính",1);const ns=typeof minNsName==="function"?minNsName("Ngự sử"):"Ngự sử";const r=`<span class="r">${ns} dâng sớ hặc ${tdName(a)} can dự chính sự: Thái hậu, Hoàng hậu không vui.</span> `;tdNews(`${ns} hặc ${tdName(a)} can chính; ${a===S?"ngươi":"nàng"} bị cấm túc.`);return r}
 
 /* ---------- the four court acts (one function per act, for her and for every NPC) ---------- */
-function giftO(a,h){return odA(a,45+(nv(h,"giftO"))+rkOf(a)*3+(tdHouse(a)===h.c?15:0)+(h.af[key(a)]||0)/5)}
+function giftO(a,h){return odA(a,45+(nv(h,"giftO"))+rkOf(a)*BAL.rkW.giftO+(tdHouse(a)===h.c?15:0)+(h.af[key(a)]||0)/5)}
 function askO(a){return odA(a,30+tdPow(tdHouse(a))/2+mm()/2)}
 function probeO(a){return odA(a,35+eyes(a)*6+(a.tamco||0)/5)}
 function leakO(a,t){return odA(a,30+deG(a,t)*15+(tdPow(tdHouse(a))-tdPow(tdHouse(t)))/4+(S.emp.mood>=2?8:0))}

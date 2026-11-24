@@ -41,7 +41,7 @@ function h54Face(s){let src="";try{if(typeof FIGIX!=="undefined"&&FIGIX.man){if(
  return{rk:"off",rw:"Công tử",src,hue:0,ini:String(s.name).split(" ").pop()[0],col:"#6a8aa0"}}
 function h54SonLine(s){return `${s.name} · ${s.age} tuổi · con trai ${s.off} · phe ${s.house} · Sắc ${s.sac} · Tài ${s.tai}`}
 /* how high a match the family can reach: title, mother's rank, the Emperor's love, her arts and virtue */
-function h54Pull(p,k){const L=H54A.reduce((a,[x])=>a+h54Lv(k,x),0);return 20+(k.hT||0)*15+rkOf(p)*5+k.fond/4+L*2+(k.td!=null?k.td/10:0)}
+function h54Pull(p,k){const L=H54A.reduce((a,[x])=>a+h54Lv(k,x),0);return 20+(k.hT||0)*15+rkOf(p)*BAL.rkW.h54Pull+k.fond/4+L*2+(k.td!=null?k.td/10:0)}
 function h54Cands(p,k){const pl=h54Pull(p,k);const F=h54Pool().filter(s=>!s.taken).sort((a,b)=>h54Q(b)-h54Q(a));let C=F.filter(s=>h54Q(s)<=pl+15).slice(0,3);if(!C.length&&F.length)C=[F[F.length-1]];return C}
 function h54Dow(k,s){return H54.dow[k.hT||0]+(s.tier===0?20:0)}
 function h54Back(k,s){return H54.back[s.tier]+2*(k.hT||0)}

@@ -44,12 +44,12 @@ EV6("brokenHeirloom","day",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{
   c6("Giấu chuyện, tự chắp lại",{c:{suc:-5},p:od(BAL.odb.j68e.odP_5+artO(S,"hoa")),w:{tai:1},r:[[X.A,6]],lt:[R6("vết nứt lộ rõ; nếu người ban hỏi đến thì khó ăn nói")],l:{danh:-1}})]});
 EV6("spoiledFood","day",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a}},w:C=>C.sea==="Hạ"?2:.8,
  v:["Ngự thiện phòng gửi sang mâm cơm đã ôi; {A} ngửi thấy mùi chua, không dám dọn lên.","Phần yến sào tháng này của cung ngươi bị bớt mất một nửa; {A} nói thái giám Ngự thiện phòng ăn chặn.","Canh gà đưa sang nguội ngắt, váng mỡ đông lại; {A} bất bình thay ngươi.","Nội vụ phủ cấp than {S} toàn than ẩm khói mù, {A} ho sặc sụa."],
- o:X=>[c6("Sai người đi hỏi tội",{p:od(BAL.odb.j68e.odP_6+S.rank*8+S.danh/4),w:{danh:2},wt:[G6("từ nay phần của cung ngươi đủ")],l:{danh:-2},lt:[R6("bị đồn là khó tính")],r:[[X.A,4]]}),
+ o:X=>[c6("Sai người đi hỏi tội",{p:od(BAL.odb.j68e.odP_6+S.rank*BAL.rkW.j68e_6+S.danh/4),w:{danh:2},wt:[G6("từ nay phần của cung ngươi đủ")],l:{danh:-2},lt:[R6("bị đồn là khó tính")],r:[[X.A,4]]}),
   c6("Bỏ tiền mua bù",{c:{bac:-15},w:{suc:3},r:[[X.A,3]]}),
   c6("Nhịn cho êm",{w:{duc:1},k:[R6(`Sức ${balSg(BAL.eff.j68e.sucOk)}`),R6("bên dưới dễ lấn lướt")],ok:()=>{apply({suc:BAL.eff.j68e.sucOk});return "Ngươi nhịn, ăn tạm cho qua."}})]});
 EV6("leakRoof","sea",{a:[],pp:()=>({}),w:C=>(C.wx.f===1||C.wx.f===3||C.wx.f===4)?3:0,
  v:["Mưa {W} suốt đêm, mái ngói tẩm cung dột, nước nhỏ tong tong xuống án thư.","Tuyết dày đè gãy một cành mai cổ trước sân, mái hiên phía tây sụt một góc.","Gió giông thổi bật cánh cửa sổ, tranh chữ trên vách ướt nhòe.","Sân sau ngập nước, hũ gạo và than trong kho ẩm hết."],
- o:X=>[c6("Xin Nội vụ phủ sửa gấp",{p:od(BAL.odb.j68e.odP_7+S.rank*9),w:{suc:3},wt:[G6("sửa xong trong tuần")],l:{suc:-4},lt:[R6("bị hẹn lần lữa")]}),
+ o:X=>[c6("Xin Nội vụ phủ sửa gấp",{p:od(BAL.odb.j68e.odP_7+S.rank*BAL.rkW.j68e_7),w:{suc:3},wt:[G6("sửa xong trong tuần")],l:{suc:-4},lt:[R6("bị hẹn lần lữa")]}),
   c6("Bỏ bạc thuê thợ ngay",{c:{bac:-30},w:{suc:4,danh:1}}),
   c6("Cùng cung nhân tự che chắn",{c:{suc:-6},w:{maid:5,duc:1}})]});
 EV6("letterHome","day",{a:[],pp:()=>({}),w:C=>1,
@@ -57,10 +57,10 @@ EV6("letterHome","day",{a:[],pp:()=>({}),w:C=>1,
  o:X=>[c6("Gửi bạc về nhà",{c:{bac:-30},w:{duc:3},wt:[G6("nhà yên lòng")]}),
   c6("Viết thư an ủi",{c:{suc:-2},w:{duc:1,tai:1}}),
   c6("Xin Hoàng thượng ân điển",{p:od(BAL.odb.j68e.odP_8+S.sung/2),w:{an:2,danh:1},wt:[G6("ngài ban thuốc quý về nhà")],l:{sung:-3},lt:[R6("ngài cho là ngươi cậy sủng")]})]});
-EV6("eunuchSqueeze","day",{a:["eun"],pp:()=>({a0:0}),w:C=>C.rank<=3?2:.4,
+EV6("eunuchSqueeze","day",{a:["eun"],pp:()=>({a0:0}),w:C=>balRk("eunSqE",C.rank),
  v:["Thái giám phát bổng lộc tháng này đưa thiếu, cười nhạt: 'Lệ ở đây phải có chút trà nước.'","Người của {A} úp mở: muốn thẻ tên ngươi nằm trên cùng mâm thẻ bài thì nên biết điều.","Thái giám coi kho cố tình đưa vải cũ thay vải mới, chờ ngươi nhét bạc.","Tiểu thái giám truyền chỉ đứng mãi không đi, rõ ràng chờ tiền thưởng."],
  o:X=>[c6("Đưa bạc cho xong",{c:{bac:-15},w:{suc:2},wt:[G6("được việc, hắn nể mặt")]}),
-  c6("Mắng thẳng mặt",{p:od(BAL.odb.j68e.odP_9+S.rank*8+S.danh/3),w:{danh:2},l:{danh:-1,sung:-1},lt:[R6("hắn thù, rỉ tai bên trên")]}),
+  c6("Mắng thẳng mặt",{p:od(BAL.odb.j68e.odP_9+S.rank*BAL.rkW.j68e_9+S.danh/3),w:{danh:2},l:{danh:-1,sung:-1},lt:[R6("hắn thù, rỉ tai bên trên")]}),
   c6("Ghi lại, mách Tổng quản",{c:{suc:-2},p:od(BAL.odb.j68e.odP_10+eyes(S)*5),w:{mat:1},wt:[G6("hắn bị đổi đi")],lt:[R6("Tổng quản bao che")],l:{danh:-1}})]});
 EV6("embroidery","day",{a:["rv"],pp:()=>{const a=rv6();return a==null?null:{a0:a}},w:C=>1,
  v:["Cục Thượng y nhờ các cung thêu góp một vạt cho bức bình phong mừng thọ; {A} đã thêu xong phần mình, đẹp lạ.","{A} khoe chiếc túi thơm thêu uyên ương, hỏi ngươi có muốn đổi mẫu thêu không.","Cung nữ đồn {A} thêu áo tặng Hoàng thượng; ngươi có nên thêu một chiếc khác?","Ngươi được giao thêu đôi gối mừng một vị thân vương; {A} cùng được giao, ai nhanh hơn sẽ được khen."],
@@ -114,7 +114,7 @@ EV6("musician","visit",{a:["man"],pp:()=>{const a=man6("nhạc sư");return a==n
  o:X=>[c6("Học một khúc mới",{c:{suc:-6,bac:-10},w:{tai:1},k:[R6("tốn sức")],ok:()=>{addArt("cam",1);return "Ngươi thuộc thêm một khúc. Cầm tiến bộ."}}),
   c6("Nhờ phổ nhạc bài thơ dâng Hoàng thượng",{c:{bac:-20},p:od(BAL.odb.j68e.odP_19+S.tai/2),w:{sung:3,danh:1},l:{danh:-1},lt:[R6("khúc nhạc không hợp ý ngài")]}),
   c6("Mời về sớm",{w:{duc:1},k:[R6("lỡ dịp học")],ok:()=>"Ngươi giữ lễ, mời nhạc sư về sớm."})]});
-EV6("newGirlAdvice","visit",{a:["rv"],pp:()=>{const a=rv6(v=>v.rank<S.rank&&v.rank<=2);return a==null?null:{a0:a}},w:C=>S.rank>=2?1.4:0,
+EV6("newGirlAdvice","visit",{a:["rv"],pp:()=>{const a=rv6(v=>v.rank<S.rank&&v.rank<=2);return a==null?null:{a0:a}},w:C=>balRk("lowRival",S.rank),
  v:["{A} mới vào cung chưa lâu, rụt rè xin ngươi chỉ bảo lễ nghi hầu Thái hậu.","{A} khóc vì bị cung nhân bắt nạt, tìm đến ngươi vì nghe nói ngươi tốt bụng.","{A} xin theo ngươi sang thỉnh an Hoàng hậu cho đỡ sợ.","{A} hỏi ngươi nên mặc gì cho yến tiệc tháng tới."],
  o:X=>[c6("Tận tình chỉ bảo",{c:{suc:-4},r:[[X.A,12]],w:{duc:2}}),
   c6("Nhận làm người dưới trướng",{c:{bac:-15},r:[[X.A,15]],w:{danh:1},k:[R6(`người khác thấy ngươi kéo bè: phi tần ghen +${ghenN(BAL.ghen.follower)}`)],ok:()=>{ghenAll(BAL.ghen.follower,"ngươi kéo bè kết phái");return `${X.A.n} từ nay đi theo ngươi.`}}),

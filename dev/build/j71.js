@@ -124,7 +124,7 @@ PEND.j71f=pp=>{if(!S)return null;const k=pp.k,V=(FV7[k]||[])[pp.vi];if(!V)return
  else if(t==="B"){if(pp.host!=null){const H=RV(pp.host);if(!H||!H.alive||H.out)return null;who=pv(H);h=`<p class="past">${fn}</p><p>${H.name} bày tiệc mừng ${fn} ở cung mình, sai người sang mời ngươi.</p>`;
    o.push({n:"Mang lễ sang dự",fx:{bac:-10},x:`${G7(`${H.name} thiện cảm ${balSg(BAL.eff.j71.go_3)}`)}, Danh ${balSg(BAL.eff.j71.danhGo)}`,go:()=>{relAdd(S,H,BAL.eff.j71.go_3);apply({danh:BAL.eff.j71.danhGo});log(`${fn}: ngươi sang dự tiệc của ${H.name}.`)}});
    o.push({n:"Cáo mệt, không đi",fx:{},x:`Sức ${balSg(BAL.eff.j71.sucGo)} · kèm: ${H.name} mất thiện cảm ${balSg(BAL.eff.j71.go_4)}`,go:()=>{apply({suc:BAL.eff.j71.sucGo});relAdd(S,H,BAL.eff.j71.go_4);log(`${fn}: ngươi không sang dự tiệc của ${H.name}.`)}})}
-  else{const G=(pp.g||[]).map(RV).filter(v=>v&&v.alive&&!v.out);const cost=40+S.rank*8,po=cl(Math.round(40+help7(S)*3+(S.tamco||0)/4),15,92);
+  else{const G=(pp.g||[]).map(RV).filter(v=>v&&v.alive&&!v.out);const cost=BAL.rkW.feast[0]+S.rank*BAL.rkW.feast[1],po=cl(Math.round(40+help7(S)*3+(S.tamco||0)/4),15,92);
    const gt=G.map(v=>G7(`${v.name} thiện cảm ${balSg(BAL.eff.j71.go_5)}`)).join(", ");
    o.push({n:"Bày tiệc lớn",fx:{bac:-cost},x:`${word(po)} · thành: Danh ${balSg(BAL.eff.j71.danhGo_2)}, Sủng ${balSg(BAL.eff.j71.sungGo)}${gt?", "+gt:""} · hỏng: món ăn hỏng, khách chê: Danh ${balSg(BAL.eff.j71.danhGo_3)}`,go:()=>{if(roll(po)){apply({danh:BAL.eff.j71.danhGo_2,sung:BAL.eff.j71.sungGo});G.forEach(v=>relAdd(S,v,BAL.eff.j71.go_5));log(`${fn}: tiệc của ngươi được khen, Hoàng thượng ghé qua.`)}else{apply({danh:BAL.eff.j71.danhGo_3});log(`${R7("Không thành:")} ${fn}: tiệc của ngươi trục trặc, món ăn hỏng, khách chê.`)}}});
    if(G[0])o.push({n:`Tiệc trà nhỏ mời ${G[0].name}`,fx:{bac:-15},x:`${G7(`${G[0].name} thiện cảm ${balSg(BAL.eff.j71.go_6)}`)}, Danh ${balSg(BAL.eff.j71.danhGo_4)}`,go:()=>{relAdd(S,G[0],BAL.eff.j71.go_6);apply({danh:BAL.eff.j71.danhGo_4});log(`${fn}: ngươi mời ${G[0].name} uống trà.`)}});
@@ -152,7 +152,7 @@ function fPP7(k,vi){const V=FV7[k][vi];const pp={k,vi,sd:1+R(1e6)};const NP=live
  if(V[0]==="C"||V[0]==="P"){const E=npcWhyAll("f7Enter",{NP}).sort((a,b)=>b.s-a.s).slice(0,V[0]==="C"?5:4);pp.e=E.map(o=>o.who.id);if(V[0]==="C")pp.pr=E.filter(o=>(o.who.bac||0)>=BAL.ag.why.f7.prepBac&&o.s>=BAL.ag.why.f7.prep).map(o=>o.who.id)}
  if(V[0]==="W"){pp.s=f7Marks()}
  if(V[0]==="G"){const L=NP.filter(v=>(v.bac||0)>=25);const g=L.length?npcWhy("f7Gamble",{L}):null;if(!g)return null;pp.a=g.who.id}
- if(V[0]==="B"){const H=NP.filter(v=>(v.bac||0)>=80);const ho=H.length?npcWhy("f7Host",{H}):null;if(ho){const hv=ho.who;pp.host=hv.id;ap(hv,{bac:-(40+rkOf(hv)*8)})}else{pp.g=NP.slice().sort((a,b)=>(aff(S,b)||0)-(aff(S,a)||0)).slice(0,2).map(v=>v.id)}}
+ if(V[0]==="B"){const H=NP.filter(v=>(v.bac||0)>=80);const ho=H.length?npcWhy("f7Host",{H}):null;if(ho){const hv=ho.who;pp.host=hv.id;ap(hv,{bac:-(BAL.rkW.feast[0]+rkOf(hv)*BAL.rkW.feast[1])})}else{pp.g=NP.slice().sort((a,b)=>(aff(S,b)||0)-(aff(S,a)||0)).slice(0,2).map(v=>v.id)}}
  return pp}
 function fMark7(k,vi){const j=j7s();(j.vu["f:"+k]=j.vu["f:"+k]||[]).push(vi);try{evHistMark(`j71:f:${k}:${vi}`)}catch(e){}}
 /* a festival modal on the day (non-contest kinds; contests go through the invitation the tuần before) */
@@ -185,9 +185,9 @@ MF("cuute",{t:"Lập công · Cứu tế",cd:9,w:()=>{const d=j7s().dis;return d
  pp:()=>{const A=evPickActor({kind:"rv",w:v=>(v.bac||0)+1});return{a0:A?A.id:null}},
  o:X=>{const A=X.p.a0!=null?evActor("rv",X.p.a0):null;const O=[];
   O.push(CH7("Quyên 60 bạc cứu dân",{c:{bac:-60},w:{danh:3,duc:3},wt:bonus7({qs:[["kho",3]]}),ok:()=>`Ngươi quyên 60 bạc cứu dân.${bonusDo7({qs:[["kho",3]]},"cứu tế")}`}));
-  const p=od(BAL.odb.j71.odP+S.danh/3+S.rank*4+(S.tamco||0)/5),B={dai:1,pd:1,back:["Hộ bộ",6],qs:[["kho",6]]};
+  const p=od(BAL.odb.j71.odP+S.danh/3+S.rank*BAL.rkW.j71odP+(S.tamco||0)/5),B={dai:1,pd:1,back:["Hộ bộ",6],qs:[["kho",6]]};
   O.push(CH7("Đứng ra kêu gọi lục cung quyên góp",{c:{suc:-10},p,w:{danh:5,sung:3},wt:bonus7(B),l:{danh:-2},lr:A?[[A,-3]]:[],ok:()=>`Lục cung theo ngươi quyên góp, Hoàng thượng khen ngươi biết lo cho dân.${bonusDo7(B,"cứu tế")}`,ll:"Các cung góp chẳng bao nhiêu, người ta chê ngươi khoe mẽ."}));
-  const p2=od(BAL.odb.j71.odP2+S.danh/4+S.rank*5);O.push(CH7("Tâu xin cắt bớt chi tiêu hậu cung",{p:p2,w:{danh:4,sung:2},wt:bonus7({qs:[["kho",4]]}),l:{sung:-3},k:[`các phi tần bị cắt bớt lệ: mỗi người mất thiện cảm ${balSg(BAL.eff.j71.ok)}`],ok:()=>{liveRivals(true).forEach(v=>relAdd(S,v,BAL.eff.j71.ok));return `Hoàng thượng chuẩn tấu, cắt bớt chi tiêu hậu cung.${bonusDo7({qs:[["kho",4]]},"cứu tế")}`},no:()=>{liveRivals(true).forEach(v=>relAdd(S,v,BAL.eff.j71.no));return "Hoàng thượng không vui vì ngươi bàn chuyện tiền bạc; các cung cũng ghét ngươi."}}));
+  const p2=od(BAL.odb.j71.odP2+S.danh/4+S.rank*BAL.rkW.j71odP2);O.push(CH7("Tâu xin cắt bớt chi tiêu hậu cung",{p:p2,w:{danh:4,sung:2},wt:bonus7({qs:[["kho",4]]}),l:{sung:-3},k:[`các phi tần bị cắt bớt lệ: mỗi người mất thiện cảm ${balSg(BAL.eff.j71.ok)}`],ok:()=>{liveRivals(true).forEach(v=>relAdd(S,v,BAL.eff.j71.ok));return `Hoàng thượng chuẩn tấu, cắt bớt chi tiêu hậu cung.${bonusDo7({qs:[["kho",4]]},"cứu tế")}`},no:()=>{liveRivals(true).forEach(v=>relAdd(S,v,BAL.eff.j71.no));return "Hoàng thượng không vui vì ngươi bàn chuyện tiền bạc; các cung cũng ghét ngươi."}}));
   O.push(CH7("Không can dự",{w:{suc:BAL.cv.rest}/* decline family: she keeps her strength */,wl:"Ngươi không dính vào chuyện cứu tế."}));return O},
  npc:v=>{if((v.bac||0)<80)return"";ap(v,{bac:-60,danh:BAL.eff.j71.danhNpc,duc:BAL.eff.j71.ducNpc});qsDo7("kho",3);return `${v.name} quyên 60 bạc cứu dân, được khen: Danh ${balSg(BAL.eff.j71.danhNpc)}, Đức ${balSg(BAL.eff.j71.ducNpc)}.`}});
 MF("cuuhoang",{t:"Lập công · Cứu giá",cd:60,w:()=>.6,who:()=>pEmp(),
@@ -266,11 +266,11 @@ MF("chepkinh",{t:"Lập công · Chép kinh",cd:24,w:()=>S.thDead?0:1,who:()=>pT
   CH7("Chép một quyển",{c:{suc:-6},w:{th:3,duc:1},wl:"Ngươi chép một quyển dâng Thái hậu."}),
   CH7("Nhờ cung nữ chép thay",{p:od(BAL.odb.j71.odP_5),w:{th:3},l:{th:-4},lt:["Thái hậu nhận ra nét chữ người khác"],wl:"Thái hậu nhận kinh, không nhận ra gì.",ll:"Thái hậu nhận ra nét chữ không phải của ngươi."})],
  npc:v=>{if(S.thDead||(v.suc||0)<40)return"";const ok=roll(oddsCl(40+(v.tai||0)/3+aw7(v,"thi")*6));ap(v,ok?{suc:-15,th:8,duc:2,danh:2}:{suc:-15,th:3});if(ok)daiDo7(v);return ok?`${v.name} chép trọn bộ kinh dâng Thái hậu, được khen (Thái hậu với nàng +8).`:""}});
-MF("soke",{t:"Lập công · Soát sổ sách",cd:36,w:()=>S.rank>=3?1:0,who:()=>pEunCourt("tq"),
+MF("soke",{t:"Lập công · Soát sổ sách",cd:36,w:()=>balRk("soke",S.rank),who:()=>pEunCourt("tq"),
  v:["Sổ chi tiêu Nội vụ phủ năm nay lệch hơn năm trước cả ngàn lượng mà không ai giải thích nổi.","Bạc may áo mùa đông cho cung nhân đã chi mà áo chưa thấy đâu.","Sổ hương đèn các chùa trong cung ghi gấp đôi số thật.","Tiền thuốc men Ngự dược phòng tăng vọt trong khi ít người bệnh.","Sổ lương cung nữ có tên mấy người đã xuất cung từ lâu.","Chi phí sửa ngự uyển ghi ba lần cho cùng một hòn non bộ."],
  pp:()=>S.rank>=3?{}:null,
  o:X=>{const E0=evActor("eun"),E=E0&&E0.o?E0:null;const B={dai:1,pd:1,back:["Hộ bộ",5]};
-  return [CH7("Đứng ra soát lại sổ",{c:{suc:-10},p:od(BAL.odb.j71.odP_15+(S.tai||0)/3+(S.tamco||0)/3+S.rank*3),w:{danh:5,sung:2},wt:bonus7(B),l:{danh:-3},lr:E?[[E,-8]]:[],ok:()=>`Ngươi lần ra chỗ thất thoát; Hoàng thượng giao ngươi giữ một phần sổ sách.${bonusDo7(B,"soát sổ sách")}`,ll:"Sổ sách rối rắm, ngươi không lần ra; Tổng quản cười thầm."}),
+  return [CH7("Đứng ra soát lại sổ",{c:{suc:-10},p:od(BAL.odb.j71.odP_15+(S.tai||0)/3+(S.tamco||0)/3+S.rank*BAL.rkW.j71odP_15),w:{danh:5,sung:2},wt:bonus7(B),l:{danh:-3},lr:E?[[E,-8]]:[],ok:()=>`Ngươi lần ra chỗ thất thoát; Hoàng thượng giao ngươi giữ một phần sổ sách.${bonusDo7(B,"soát sổ sách")}`,ll:"Sổ sách rối rắm, ngươi không lần ra; Tổng quản cười thầm."}),
    CH7(S.thDead?"Tâu xin Hoàng thượng cho người soát":"Tâu Thái hậu cho người soát",{w:S.thDead?{sung:1}:{th:2},wl:"Việc soát sổ được giao cho người khác."}),
    CH7("Bỏ qua",{w:{suc:BAL.cv.rest}/* decline family: she keeps her strength */,wl:"Ngươi để yên sổ sách."})]}});
 MF("hoagiai",{t:"Lập công · Hòa giải",cd:24,w:()=>{const L=liveRivals(true).filter(present7);return L.some(a=>L.some(b=>a!==b&&aff(a,b)+aff(b,a)<0))?1:0},

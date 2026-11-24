@@ -424,8 +424,8 @@ function kc2EnterSrv(tier,sc,raw){const K=S.kc;const age=S.age,sac=S.sac,tai=S.t
    ["Chủ tin",S.tin,"t"],["Mang theo",kitChip("Bạc",S.bac,"n"),"t"]].concat(xdS?[["Xuân Đào",`vào cung cùng đợt, hầu ${kc2RkN(ownerOf(xdS))}`,"t"]]:[]).concat(K.angia?[["Nhà",`đã nhận tiền an gia, trả nửa nợ`,"t"]]:[]))});
  log(`<b class="g">Qua kỳ tuyển cung nữ (${KC2SW[tier]}): ${tier===0?"Tân Giả khố, rồi ":""}hầu ${kc2RkN(m)}.</b>`)}
 function kc2EnterNc(tier,sc,raw){const K=S.kc;const top=(S.origin&&S.origin.r)||0;const rank=Math.max(0,top-(2-tier));
- S.rank=rank;S.sung=8+rank*5;S.lastPromo=S.turn;S.danh=Math.min(30,Math.max(S.danh,6+Math.round(S.kgt/5)));S.bac=Math.min(400,S.bac+S.khm);
- S.staff=K.staff0||[];S.place="home";if(S.maid)S.maid.loyal=cl(S.maid.loyal+BAL.eff.jkc2.loyalKc2EnterNc,0,100);try{kcPd(rank>=top?10:5,`hòa thân, phong ${RANKS[rank].n}`)}catch(e){}
+ S.rank=rank;S.sung=BAL.rkW.kcSung[0]+rank*BAL.rkW.kcSung[1];S.lastPromo=S.turn;S.danh=Math.min(30,Math.max(S.danh,6+Math.round(S.kgt/5)));S.bac=Math.min(400,S.bac+S.khm);
+ S.staff=K.staff0||[];S.place="home";if(S.maid)S.maid.loyal=cl(S.maid.loyal+BAL.eff.jkc2.loyalKc2EnterNc,0,100);try{kcPd(rank>=top?BAL.rkW.kcEnterPd.hi:BAL.rkW.kcEnterPd.lo,`hòa thân, phong ${RANKS[rank].n}`)}catch(e){}
  try{palFix()}catch(e){}deal();const L=kc2L();
  Q.push({t:"Nhập cung",who:pMe(),art:"img/ev-nhap-cung.webp",h:`<p>Lễ ra mắt xong. Hoàng thượng ban chiếu: công chúa ${L.land} vào cung, phong <b>${RANKS[rank].n}</b>${rank<top?` (hòa ước cho tới ${RANKS[top].n}; lễ ra mắt chưa đủ)`:""}.</p>`+
   kitRows([["Màn chơi",`${raw}/10`,"t"],["Phẩm vị",`${RANKS[rank].n} · cao nhất ${RANKS[top].n}`,rank<top?"r":"t"],[NAMES.kgt,S.kgt,"t"],["Mang theo",[kitChip("Bạc",S.bac,"n")+" (có hồi môn)",`Danh ${S.danh}`],"t"],

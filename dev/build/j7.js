@@ -130,7 +130,7 @@ ev("vulan",()=>mon(7),null,()=>({
  {n:"Mượn lễ dò hỏi cung nhân",fx:{tamco:1},x:statTxt("mat",BAL.eff.j7.matGo_2),go:()=>apply({mat:BAL.eff.j7.matGo_2})}]}));
 ev("dongchi",()=>mon(11)||mon(12),null,()=>({
  t:"Đông chí, Hoàng thượng ra đàn Nam Giao tế trời. Tuyết phủ trắng mái ngói lưu ly.",o:[
- {n:"Xin theo hầu lễ tế",fx:{suc:-20,danh:S.rank>=3?6:2}},
+ {n:"Xin theo hầu lễ tế",fx:{suc:-20,danh:balRk("riteDanh",S.rank)}},
  {n:"Nấu chè mừng cả cung",fx:{bac:-25,maid:10,duc:2}},
  {n:"Ở cung giữ ấm",fx:{suc:15}}]}));
 ev("thbirthday",()=>!S.thDead&&mon(10),()=>({o:od(BAL.odb.j7.odO_11+S.tai/3+artOE(S,"hoa"))}),p=>({who:pTH(),

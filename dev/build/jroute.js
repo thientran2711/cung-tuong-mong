@@ -203,7 +203,7 @@ function rtAdCards(){const T=rtS(),A=[],ad=T.ad;
    x:`không còn thị tẩm · phi tần bớt ghen và bớt nhắm vào ngươi · Đức +${BAL.route.adMonth.duc} mỗi tháng`,kem:"Sủng nhạt dần · đường tấn phong chậm lại",go:()=>{T.ad={on:1,since:S.turn,harm:0};rtStat("ad_start");rtEmo("binh",0,"");log("Ngươi xin cất thẻ bài. Cửa cung khép lại; ngoài kia ai tranh gì thì tranh.")}}));return A}
  const yrs=Math.floor((S.turn-ad.since)/12);
  A.push(rtCard({id:"ad_kinh",r:4,n:"Chép kinh cầu phúc",t:"Chép kinh Kim Cương, dâng lên Phật đường.",art:RT_ART.an,c:{...BAL.route.kinh},k:BAL.route.k.ad_kinh,w:{...BAL.route.kinhW},x:"lòng an",go:()=>{rtEmo("vui",15,"lòng an")}}));
- const weak=liveRivals(false).filter(v=>v!==S&&!v.out).sort((a,b)=>(a.sung+a.rank*10)-(b.sung+b.rank*10))[0];
+ const weak=liveRivals(false).filter(v=>v!==S&&!v.out).sort((a,b)=>(a.sung+a.rank*BAL.rkW.routeRival)-(b.sung+b.rank*BAL.rkW.routeRival))[0];
  if(weak)A.push(rtCard({id:"ad_che",r:4,n:`Che chở ${rtVn(weak)}`,t:"Người yếu nhất trong cung; ngươi đỡ cho nàng một tay.",art:RT_ART.ta,c:{...BAL.route.che},k:BAL.route.k.ad_che,w:{...BAL.route.cheW},x:`${weak.name} thiện cảm +${BAL.route.cheRel}`,go:()=>{relAdd(S,weak,BAL.route.cheRel)}}));
  A.push(rtCard({id:"ad_off",r:4,n:"Mở lại thẻ bài",t:"Trở lại đường tranh sủng.",art:RT_ART.an,k:BAL.route.k.ad_off,x:`thôi ẩn dật (đã ${yrs} năm)`,go:()=>{T.ad.on=0;log("Ngươi xin Kính sự phòng bày lại thẻ bài.")}}));
  return A}

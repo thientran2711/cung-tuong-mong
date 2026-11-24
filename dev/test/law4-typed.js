@@ -39,6 +39,8 @@ function law4Typed(dir){const D=dir||path.join(__dirname,'../build');const rd=f=
   for(const m of codeNums(L))if(!/^(0|1|100|-1)$/.test(m.v))rows.push({at:`j8 A ${k}`,t:m.ctx})}
  {const i=j17.indexOf('kframe:');const L=j17.slice(i,j17.indexOf('),',i)+2);if(!/kframeDanh/.test(L))rows.push({at:'j17 AOUT kframe',t:'mother Danh not printed'})}
  for(const h of ['function tScore(','function dScore(','function fScore(']){const b=fnBody(j34,h);if(!b)continue;for(const m of codeNums(b))if(!/^(0|1)$/.test(m.v))rows.push({at:`j34 ${h.slice(9,-1)}`,t:m.ctx})}
+ // rank / promotion numbers (review/bal-ranks-law4): RANKS s/d, promoGap, rank weights, rank tables, rank thresholds in text — all from BAL
+ for(const r of require('../tools/rank-num-scan.js').rankNumScan(dir))rows.push({at:`rank ${r.fam} ${r.at}`,t:r.t});
  return rows}
 /* code numbers: drop comments, strings, template text (keep ${…} code) and regex literals; return [{v, ctx}] */
 function codeOnly(src){let o='',i=0;const n=src.length;const st=[];

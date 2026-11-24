@@ -141,7 +141,7 @@ function facRoll(f){return f.m.map(byKey).filter(p=>p&&(p===S?!S.dead:p.alive))}
 function facCold(f){return facRoll(f).filter(p=>!facIn(p))}
 function facMembers(f){return f.m.map(byKey).filter(p=>p&&facIn(p))}
 function facLeader(f){return facMembers(f).sort((a,b)=>rkOf(b)-rkOf(a))[0]||null}
-function facStr(f){return Math.round(facMembers(f).reduce((s,p)=>s+rkOf(p)*10+p.danh/2+(p.dad||40)/2,0))}
+function facStr(f){return Math.round(facMembers(f).reduce((s,p)=>s+rkOf(p)*BAL.rkW.facStr+p.danh/2+(p.dad||40)/2,0))}
 function facName(lead){if(lead===S)return `phe ${S.name.split(" ")[0]} gia`;if(lead.queen)return "phe Càn Ninh";return `phe ${lead.name.split(" ")[0]} gia`}
 function facN(a){const f=facOf(a);return f?facMembers(f).length:1}
 function found(a,b){if(facOf(a)||facOf(b))return"";S.facs=S.facs||[];const f={id:Date.now()%1e7+R(999),m:[key(a),key(b)],name:""};S.facs.push(f);f.name=facName(facLeader(f));relAdd(a,b,5);return `${NMc(a)} và ${NM(b)} kết thành ${f.name}. `}

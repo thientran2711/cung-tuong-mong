@@ -150,7 +150,7 @@ function loQuietHear(c,a,h){const nm=loNm(c.k);const x=loEntry(c);if(x){lostUnwe
 /* ---------- the four tra xét acts: one function each for everyone, same odds ---------- */
 function loWatch(p){return [p.maid].concat(p.staff||[]).some(s=>s&&(s.loyal||0)>=BAL.loy.close)}
 function loOdds(kind,p){if(kind==="ask")return oddsCl(Math.round(35+eyes(p)*6+(p.tamco||0)/5+(loWatch(p)?10:0)));
- if(kind==="cct")return oddsCl(Math.round(50+(p.danh||0)/8+rkOf(p)*3));if(kind==="book")return oddsCl(Math.round(55+(p.tai||0)/5+eyes(p)*3));return oSee(p,true)}
+ if(kind==="cct")return oddsCl(Math.round(50+(p.danh||0)/8+rkOf(p)*BAL.rkW.lostCct));if(kind==="book")return oddsCl(Math.round(55+(p.tai||0)/5+eyes(p)*3));return oSee(p,true)}
 function loEvAdd(c,p,why){if(c.cause==="riv"&&c.by&&loP(c.by)&&p!==loP(c.by)){evA(p,loP(c.by),BAL.eff.jlost.evLoEvAdd);return `${why}, dấu vết dẫn về ${wdNm(loP(c.by))} (chứng cứ ${balSg(BAL.eff.jlost.evLoEvAdd)})`}c.cev=(c.cev||0)+BAL.eff.jlost.evLoEvAdd;return `${why} (chứng cứ tra xét ${balSg(BAL.eff.jlost.evLoEvAdd)})`}
 function loDo(kind,p,c){const C=LO.cost[kind]||{};if(C.bac)ap(p,{bac:-C.bac});const o=loOdds(kind,p);const nm=loNm(c.k);
  if(kind==="soat"){const f=inspect(p);return f.length?`Soát rương, tìm thấy: ${f.join("; ")}.`:"Soát rương: không thấy gì lạ."}

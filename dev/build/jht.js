@@ -66,7 +66,7 @@ function qnPoolUp(){const P=qnPool();for(let i=P.length-1;i>=0;i--){const q=P[i]
 function pkSons(){return allKids().filter(([k])=>k.alive&&k.sex==="m").map(([k,v])=>[k,v||S])}
 function pkHome(k){return k&&k.alive&&k.sex==="m"&&!k.pW}
 function pkMomN(p){return p===S?"ngươi":p.name}
-function pkPull(p,k){return 20+rkOf(p)*5+k.fond/4+(k.tal||40)/5+(k.heir?30:0)+(p===queenP()||p===S&&S.rank>=7?15:0)}
+function pkPull(p,k){return 20+rkOf(p)*BAL.rkW.pkPull+k.fond/4+(k.tal||40)/5+(k.heir?30:0)+(p===queenP()||p===S&&S.rank>=7?BAL.rkW.pkQueen:0)}
 function pkCands(p,k){const pl=pkPull(p,k);const F=qnPool().filter(q=>!q.taken).sort((a,b)=>qnQ(b)-qnQ(a));let C=F.filter(q=>qnQ(q)<=pl+15).slice(0,3);if(!C.length&&F.length)C=[F[F.length-1]];return C}
 function pkBack(k,q){return HT.back[q.tier]+(k.heir?HT.heirB:0)}
 function pkRivals(p,k){return pkSons().filter(([s,m])=>m!==p&&s!==k&&pkHome(s)&&!s.pB&&s.age>=BAL.age.betroth&&s.age<=BAL.age.matchMax&&h54Live(m)).map(([,m])=>m).filter((m,i,a)=>a.indexOf(m)===i)}

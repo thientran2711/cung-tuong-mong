@@ -50,7 +50,7 @@ function petLux(k){const T=PET[petK(k)]||PET.meomuop;return PET_LUX[T.tr]+Math.r
 function petSrc(k,big,sfx){k=petK(k);sfx=sfx||"";return big?`img/pet512/pet-${k}${sfx}.webp`:`img/pet-${k}${sfx}.webp`}
 /* the picture of HER pet at its growth stage (jpetcare: -non / -tn / grown / -lt, all on the CDN); a newly got pet is Non */
 function petPSrc(P,big){try{if(P&&typeof petcStageSrc==="function"){if(typeof petcInit==="function")petcInit(P);return petcStageSrc(P,big).src}}catch(e){}return petSrc(P&&P.t,big)}
-function petMax(p){return [1,1,2,2,3,3,4,4][Math.max(0,Math.min(7,rkOf(p)|0))]}
+function petMax(p){return balRk("petMax",rkOf(p))}
 function tsbPets(p){const L=(p&&p.pets)||[];for(const P of L)if(P&&!PET[P.t]&&PET_OLD[P.t])P.t=PET_OLD[P.t];return L}
 function tsbPetOn(p){const L=tsbPets(p);const i=p?p.petOn:-1;return i!=null&&i>=0&&L[i]?L[i]:null}
 function petOk(P){return !!P&&(P.care||0)>=30}

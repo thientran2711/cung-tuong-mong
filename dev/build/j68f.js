@@ -51,7 +51,7 @@ EV6("kidSick","kid",{a:["kid","doc"],pp:()=>{const a=kid6(k=>k.age<=12);return a
 EV6("kidFight","kid",{a:["kid","rv"],pp:()=>{const a=kid6(k=>k.age>=4&&k.age<=15);const b=rv6(v=>(v.kids||[]).some(k=>k.alive));return a==null||b==null?null:{a0:a,a1:b}},w:C=>1.2,
  v:["{A} đánh nhau với con của {B} ở thư phòng, cả hai đều bầm mặt.","Con của {B} giật đồ chơi của {A}, {A} cắn tay nó chảy máu.","{A} bị con của {B} chê là đứa ngốc trước mặt thầy dạy.","{A} và con của {B} trốn học ra hồ câu cá, suýt ngã xuống nước."],
  o:X=>[c6("Dẫn con sang xin lỗi",{c:{suc:-3},r:[[X.B,8],[X.A,-3]],w:{duc:2}}),
-  c6("Bênh con, đòi lẽ phải",{p:od(BAL.odb.j68f.odP_9+S.rank*7),r:[[X.A,6]],w:{danh:1},lr:[[X.B,-10]],lt:[R6("hai cung xích mích")],l:{danh:-1}}),
+  c6("Bênh con, đòi lẽ phải",{p:od(BAL.odb.j68f.odP_9+S.rank*BAL.rkW.j68f_9),r:[[X.A,6]],w:{danh:1},lr:[[X.B,-10]],lt:[R6("hai cung xích mích")],l:{danh:-1}}),
   c6("Phạt con, dạy lễ",{r:[[X.A,-6]],w:{duc:1},ok:()=>{X.A.o.tal=cl((X.A.o.tal||40)+BAL.eff.j68f.talOk,0,100);return `${X.A.n} chép phạt trăm chữ, ngoan hơn.`}})]});
 EV6("kidGift","kid",{a:["kid"],pp:()=>{const a=kid6(k=>k.age>=5);return a==null?null:{a0:a}},w:C=>1,
  v:["{A} chạy sang khoe bức tranh vẽ mẹ, nét non nớt mà giống lạ.","{A} học thuộc bài thơ, muốn đọc cho mẹ nghe trước khi đọc cho phụ hoàng.","{A} nhặt được tổ chim non, xin mẹ cho nuôi.","{A} xin mẹ cho học cưỡi ngựa như các anh."],
@@ -72,7 +72,7 @@ EV6("servRomance","serv",{a:["sv"],pp:()=>{const a=sv6(s=>s.role==="maid"&&(s.ag
 EV6("servLeave","serv",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a}},w:C=>1,
  v:["{A} quỳ khóc: mẹ ở quê ốm nặng, xin về thăm một chuyến, chỉ sợ không kịp.","{A} xin ngươi cho nghỉ để chịu tang cha.","{A} xin ra cung trước hạn để lo cho em nhỏ mồ côi.","{A} xin ngươi chút bạc chuộc em gái bị bán làm nô tì."],
  o:X=>[c6("Cho về, kèm bạc",{c:{bac:-20},r:[[X.A,18]],w:{duc:2},k:[R6("cung thiếu người một tháng")]}),
-  c6("Xin Nội vụ phủ cho phép",{p:od(BAL.odb.j68f.odP_12+S.rank*8),r:[[X.A,10]],w:{danh:1},lr:[[X.A,-4]],lt:[R6("bị bác, nàng buồn")]}),
+  c6("Xin Nội vụ phủ cho phép",{p:od(BAL.odb.j68f.odP_12+S.rank*BAL.rkW.j68f_12),r:[[X.A,10]],w:{danh:1},lr:[[X.A,-4]],lt:[R6("bị bác, nàng buồn")]}),
   c6("Không cho",{w:{suc:1},r:[[X.A,-12]]})]});
 EV6("newServSus","serv",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a}},w:C=>1,
  v:["{A} dạo này hay ra vào cửa sau lúc nửa đêm.","Cung nhân bảo {A} có nhiều bạc lạ, mua cả son phấn đắt tiền.","{A} lật xem thư từ trên án của ngươi khi tưởng không ai thấy.","{A} biết những chuyện trong cung ngươi mà lẽ ra không ai kể."],
