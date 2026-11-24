@@ -87,3 +87,46 @@ Nits (non-blocking): map-tap-go + map-portrait failures exist on LIVE — ticket
 - map-perf r1 = PASS (MAIN 118), LC10 lands d6c2b4d4. Nothing open on map-perf.
 - NEXT JOB (from MAIN CHÍNH 118, not started): the map-perf reviewer found PRE-EXISTING fails on LIVE: `dev/test/map-tap-go.js` 3 FAIL and `dev/test/map-portrait.js` FAIL on Fold 755x1000 + phone 390x844. Root-cause on the newest LIVE (stale test vs real bug). Real bug → fix on `review/map-fix-2` (law 11: every map tap / portrait case); stale test → fix the test and write the reason. End with «SẴN SÀNG KIỂM <sha>» to MAIN 118 (session_01V1ZZH21QY1yjJ4RPZUHNC6).
 - Useful from this job: serve a local http.server from /home/user/wt (background, timeout 7200000); played save = dev/handover/robot/saves/20261123-2308-004.json.gz (gunzip); load it through the title slot (see robot10.js loadSave). Map code = dev/build/j38.js (mapFit / solveTags / kmChain); `mapFit(true)` = the in-render reuse-only fit, the real fit runs in the next frame — tests that read layout synchronously right after render() must wait one frame (check this first for the tap/portrait fails if LIVE already has d6c2b4d4).
+
+## MAP-FIX-2 (worker session_01V1ZZH1VfNwzBQ4xJTkMJxY, for MAIN 118) — map-tap-go + map-portrait fails on LIVE
+PRIORITY #1 CHECK: OD 18/11 ~19:45Z (4) entourage picker, OD 18/11 ~22:10Z one notice system, OD:L1921 phone map rail buttons, OD 17/11 04:08Z her side hall | main j27.js mapHTML, j38.js mapFit, jres.js resMeHoused, j95s.js j95sEntNeed, jnotice.js, jk3.js kgfRail | review/map-perf d6c2b4d4 (not landed → base) | claims MAP-FIX-2 = this session.
+START: depth 2, START_CTX ~3 %.
+
+Branch `review/map-fix-2` @ **c87a40e1** = review/map-perf d6c2b4d4 + merge LIVE 0c0877a2 (1079a6d8, only index.html / sw.js conflicted, rebuilt) + the fix. Game code touched: `dev/build/j27.js`, `dev/build/jres.js`, `dev/build/j38.js` (one line) + rebuilt index.html / sw.js / assets.json. No kit part, no CSS, no wording, no BAL number.
+
+### Root cause (identical on LIVE 0c0877a2 and LIVE + map-perf)
+| test | fail | cause | verdict |
+|---|---|---|---|
+| map-tap-go «went at once, no card» ×2 | modal «Chọn người theo hầu» | owner OD 18/11 ~19:45Z (4): her FIRST departure of a day asks who follows (j95s, once a day; nobody free → no card). Test written before it. | STALE TEST |
+| map-tap-go «blocked: reason toast» | toast «» | owner OD 18/11 ~22:10Z: every toast goes to kitNotice (top «!» box + #kntchip); srvToast is re-routed (jnotice). The game says «Đức Thọ cung: hết khắc trong ngày (đi 2 khắc)»; the test read the old #rtoast. | STALE TEST |
+| map-portrait Fold / phone: cards 0, fitH | no 4 people cards above the map | owner OD:L1921 (18/11 ~21:40Z): on the phone/Fold map the cards / group bars are gone → two small rail buttons «Cung nhân» / «Chí tôn» + drop-down list (jk3 kgfRail/kgfDrop). The fitH formula also mixed page and map coordinates. | STALE TEST |
+| map-portrait Fold / phone: hereIn false | her place not in the open view | **REAL BUG**: below Tần she lives in a chủ vị's phối điện (jres, OD 17/11 04:08Z) and the plan has no own spot for her (jres mapSpots drops «home»), but the plan marked her place only by `S.place===spot` → at home NO spot had `.here`, NO «ta ở đây» marker, no «Ta + N bóng» row, and mapFit could not centre on her (it left the map at its left end). | FIXED |
+| (found while fixing) phone, random | her place off-screen 1 in 4 runs | mapFit's scroll key was `S.place|zoom|size` = «home|…» for every housed life → a re-fit restored the stored scroll of ANOTHER palace. | FIXED |
+
+### Fix (whole group = every plan view of her place)
+- `jres.js` `mapHereK()`: her place on the plan = the chủ vị's palace spot when she is at home and housed, else `S.place` (ONE key).
+- `j27.js` mapHTML reads it for the `.here` class, the «ta ở đây» marker (kitMeMapMark) and her «Ta + N bóng · còn K khắc» row (N = people in her own room); that spot is never greyed as «đang ở đây». Tap on that spot is unchanged (walks into the chủ vị's main hall, 1 khắc, as before).
+- `j38.js` mapFit: the scroll key holds mapHereK (a new palace = a new open view). Centring / tag solver already read `.mspot.here` → now work for housed ranks.
+- Courtyard level (jpm kpmMine) and the list view (mapHTMLgrid «Tẩm cung» tile) already marked her room — unchanged. jkcg home-road map is a separate map — unchanged.
+- Tests brought to the owner rules (reasons written in each test header): map-tap-go (picker case + «Đi một mình» goes at once; picker skipped when nobody of hers is free; «no card» = no place/confirm/picker card, a buổi-turn event after the last walk is allowed; toasts read kitNoticeList / #kntchip; the place-entry line is not an arrival toast); map-portrait (no cards row / no group bars, the two rail buttons when their lists are non-empty, map bottom 6 px above the Ân sủng row, her `.here` = mapHereK in view).
+- New scan `dev/test/map-here-scan.js` (law 11): every rank × {home, Ngự hoa viên} × size.
+
+### Before / after (map-here-scan, ranks 0–7 × home/away)
+| size | LIVE 0c0877a2 | branch c87a40e1 |
+|---|---|---|
+| Fold 755x1000 | **3 FAIL** (Đáp ứng / Thường tại / Quý nhân at home: no .here, 0 markers, map at left end) | 16/16 PASS |
+| iPad 1180x820 | (same 3 by code path) | 16/16 PASS |
+| iPad Pro 1366x1024 | — | 16/16 PASS |
+| phone 390x844 | — | 16/16 PASS |
+
+### Tests (branch c87a40e1)
+- map-tap-go: fold / ipadAir / iphone14 **ALL OK** (LIVE: 3 FAIL each); stable on 2 more runs fold + ipadAir.
+- map-portrait 755x1000, 412x1058, 390x844, 1180x820, 1366x1024: **5/5 PASS** (LIVE: Fold, Fold cover, phone FAIL); phone 6/6 runs PASS after the key fix.
+- map-label-overlap Fold + iPad, ranks 0,2,3,5 × day/night × zoom 0–4 + courtyards: **100 cases, 0 overlaps**, max settle 1.5 s, 0 unsettled.
+- map-labels-scan Fold + iPad ranks 2,3,5: PASS (+ courtyards); map-frame-kit Fold + iPad PASS; map-place-mask clean; map-labels-2 Fold + iPad: tap A ca sở → place card, 27 spots, 0 errors.
+- **QUICKCHECK PASS** (eeaca5d0 = same game code as c87a40e1; 686 s: open 2.1 s, old save from LIVE loads + plays, render 239/247, tab 485/537, buổi 1749/1463 ms, core gates PASS).
+- Looked at Fold 755x1000 + iPad 1180x820 (Thường tại at home, scratch shots not in git): Dực Khôn carries her marker + «Ta + 4 bóng · còn 4 khắc», every tag readable, no overlap, rail «2 Cung nhân / 3 Chí tôn» on Fold, column on iPad.
+Note: do not run quickcheck and the browser tests at the same time on one box (quickcheck rebuilds the site in the worktree: the parallel run gave false fails, a clean re-run passed).
+
+SẴN SÀNG KIỂM c87a40e16ddb2acef43d3a5f2619abe57fdd547b → MAIN 118.
+~100% xong / ~95% chơi được cho lỗi này.
