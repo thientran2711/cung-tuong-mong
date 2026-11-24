@@ -163,3 +163,21 @@ Target a1712058 merged onto newest origin/main 2899d1f2 (index.html/sw.js confli
 4. Gates (on merged sha): r10-stip-noqueen 6/6 ok; bongloc-options 14/14; one-core-guard / one-core-text / one-core-bind PASS (re-run after final merge); quickcheck PASS (old save ok; render 212/231, tab 450/491, buổi 1039/1386 ms; core gates PASS) on 4d3de17e (merge of main 43cf5434; the final merge 2899d1f2 only adds nc-fix-1 sources, one-core ×3 + stip-noqueen re-run PASS).
 5. Scope: SMALL (one null guard + one BAL text helper); no rule or number changed (text prints the same «3 phần 10»). No kit part touched.
 REVIEW PASS — LAND READY review/robot10-nc-fix-4-rv 32b6bbdc544c5ce29efedb1fdcad78701fd19239
+
+## 7. Phase-2 runner files nc-20261124-0057.md (A, nc_gian, 61 rows) + nc-20261124-0057-tuc.md (B, nc_tuc, 36 rows) — triage 05:20Z
+Both runs served a local build of main from ~00:57Z: BEFORE nc-fix-1/-2/-3, the BIG3 chain (kframe-heir, typed-stat-bal, hadoc) and map-label-overlap landed. Re-checked on main 2899d1f2 (has nc-fix-1 + nc-fix-2) with the repro saves ncA/saves 030 033 035 057 059 061: no game text-over-text left (only modal-over-panel and scroll-under-the-bottom-bar pairs, which the robot's layer rule already skips).
+| rows (A / B) | verdict |
+|---|---|
+| mem, lag | owned: robot10-lag (SSK 9001e14c) |
+| soft-lock after load (nfX open) | fix-evening-softlock LANDED 14ba8768 (after these runs) |
+| wall cap / inpage6 TIMEOUT | harness |
+| save→load→save | nc-fix-1 LANDED + nc-fix-3-rv e6b841fd LAND READY |
+| stat 101 danh/duc/sac/tai/tamco | fix-kframe-heir-rv fffb7bfb LAND READY (statSet clamp covers all 7) |
+| «Sức +6» vs suc −2 (poisonedFish) | typed-stat-bal-rv 7aa2ca7f LAND READY |
+| econ card TypeError null.queen | **nc-fix-4 a1712058 SSK** |
+| go tab mspot covered / overlap (Fold + iPad) | MAIN map lane (map-label-overlap LANDED b7598e72 after these runs; map-perf running) |
+| ui-cut span.j59t (iPad act) | kit stage name-tag part → MAIN stage lane / kit keeper |
+| rel p.past × kfoc-next / × p, story kchkt × kfoc-sayn / p / b.kname / span.kti, kbtn.alt × p | stage-layer family = nc-fix-2 (LANDED, after these runs); not reproducible on main 2899d1f2 |
+| A 33-56: kbk-ts / kbk-ls × ef.n / kbk-rh × kbk-rh on EVERY tab | **harness false positive**: the Tuần lục book (j87 .kbk) is a 3D page-turn: .kbk-face front + .kbk-back (rotateY 180°) stacked with backface-visibility:hidden — the scan reads the hidden back face as text over text. Harness: skip text whose .kbk-face ancestor is turned away (or scan only the open face). |
+| B 5 CORS ctm-rank /hello from 127.0.0.1 | harness (local origin) |
+No new fixer branch from these two files. Next: nc_su / nc_vuong files, then the BAL moves after the 80 lives (MAIN 115 01:40Z).
