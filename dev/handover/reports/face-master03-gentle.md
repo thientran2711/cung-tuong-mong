@@ -8,5 +8,6 @@ NOTE: every MCP call needs the full ~9.6k-char prompt pasted inline (~3k tokens/
 | job_id | source | age | identity upload | output creation | status | QC |
 |---|---|---|---|---|---|---|
 | FACE-GENTLE-M02-A16-MASTER-SKIN03-T01 | m02 | 16 | ksXxxbS16B | 8aRmhWuIrU | DONE | no text, bare face, ivory robe, soft smile, looks ~18-20 (slightly older than 16) |
-| FACE-GENTLE-M08-A16-MASTER-SKIN03-T01 | m08 | 16 | Sya77l1Ub8 | rgoLlKgxtc | QUEUED | |
-| FACE-GENTLE-M14-A16-MASTER-SKIN03-T01 | m14 | 16 | EbcFFETuuO | tC2vft3mZJ | QUEUED | |
+| FACE-GENTLE-M08-A16-MASTER-SKIN03-T01 | m08 | 16 | Sya77l1Ub8 | rgoLlKgxtc | DONE | no text, bare face, ivory robe, smile, ok |
+| FACE-GENTLE-M14-A16-MASTER-SKIN03-T01 | m14 | 16 | EbcFFETuuO | tC2vft3mZJ | DONE | no text, bare face, ivory robe, smile, ok |
+| FACE-GENTLE-M18-A16-MASTER-SKIN03-T01 | m18 | 16 | gOvw7wcSXO | 9Zbi26kNYZ | QUEUED (unchecked) | |
