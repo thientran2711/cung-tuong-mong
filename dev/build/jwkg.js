@@ -22,7 +22,9 @@ const KWK_MAY=[["Viền cổ áo",[kwkQ(.22,.3,.5,.66,.78,.3)]],
  ["Viền thêu lượn",[t=>[.12+.76*t,.5+.1*Math.sin(t*Math.PI*4)]]],
  ["Đai lưng",[kwkL(.18,.42,.82,.42),kwkL(.82,.56,.18,.56)]]];
 let kwkMode=null;
-function kwkTrace(F,mode){return(box,env)=>{const keep=K91_SH.splice(0,K91_SH.length,...F);kwkMode=mode;let stop;
+/* ORDER THIN P1c: a pooled figure (jmgpool_c kinh / may: parameters L / Q / W) → [name, strokes as curves t => [u, v]] */
+function kwkFig(it){const fn=f=>f[0]==="L"?kwkL(f[1],f[2],f[3],f[4]):f[0]==="Q"?kwkQ(f[1],f[2],f[3],f[4],f[5],f[6]):(t=>[f[1]+(f[2]-f[1])*t,f[3]+f[4]*Math.sin(t*Math.PI*f[5])]);return[it.id,it.S.map(fn)]}
+function kwkTrace(F,mode){return(box,env)=>{const P=mgpcMany(mode,4);/* four pooled figures per game (none twice); the old rows when no pool */const F2=P?P.map(kwkFig):F;const keep=K91_SH.splice(0,K91_SH.length,...F2);kwkMode=mode;let stop;
  try{stop=k91Trace(box,env)}finally{K91_SH.splice(0,K91_SH.length,...keep)}return()=>{kwkMode=null;if(stop)stop()}}}
 try{Object.assign(KG82_ENG,{kinh:kwkTrace(KWK_KINH,"kinh"),may:kwkTrace(KWK_MAY,"may")});
  Object.assign(KG82_KIND,{kinh:{e:"kinh",n:"Chép kinh",t:"Chép kinh theo bản mẫu",how:"Đặt ngón tay ở chấm xanh rồi đưa bút theo nét mờ của bản kinh mẫu, từng nét theo số thứ tự, cho kín và đều tay. 4 hàng kinh."},
