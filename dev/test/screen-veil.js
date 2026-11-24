@@ -1,4 +1,4 @@
-/* screen-veil (owner bug OD 24/11 ~10:20Z «frames first, pictures later»; KIT §94 kitScreenVeil, review/kit-screenveil).
+/* screen-veil (owner bug OD 24/11 ~10:20Z «frames first, pictures later»; KIT §97 kitScreenVeil, review/kit-screenveil).
    Plays every kind of screen change on Fold 755x1000 + iPad 1180x820, COLD (picture CDN throttled: 1.5 Mbps + 300 ms per picture, fresh browser)
    then WARM (same browser, every change again), and samples EVERY animation frame of the new view:
      bad frame = a visible picture of the view (<img> >= 24 px, or a CSS background picture) that is not loaded yet and is NOT under the veil (#kveil)

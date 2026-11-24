@@ -443,6 +443,9 @@ Object.assign(BAL.cv,{glance:{warm:10,cold:-5}/* j24 «Một ánh mắt» (fired
 BAL.srvRk={tam:1,nhi:2,dai:3,cs:4,nq:5,mama:6,tier:[0,1,1,2,3,4]};
 BAL.srvWage=[1,3,4,5,8,12];
 /* r2 sg-card: the monthly thơ (j3 artMonth, applied as is, not through sg) — was typed in j3 + 3 rule texts (j1 ARTS.u, j23, j85) */
+/* KIT §97 kitScreenVeil (jscrv.js, owner bug OD 24/11 ~10:20Z): cap = safety ms before the view shows anyway (MAIN 118: 10 s, a half-painted
+   reveal is what she hates); word = ms of plain veil before the line fades in; fade = reveal ms; pre = room pictures prefetched on idle */
+BAL.kscrv={cap:10000,word:220,fade:160,pre:6};
 BAL.tho={lv:3,sung:1,lv5:5,sung5:2};
 /* typed-stat-bal (law 4 ONE CORE, OD:L1267): the item effects of the j8 IT table — w = worn bonus (wearBonus), use = one use (useItem), dr = the Sắc of
    a dress sewn from the fabric (3 months). IT reads them from here (linked below: j8 loads before BAL); the item texts print them ({n:itFx.k.w.sac}).

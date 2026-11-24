@@ -68,7 +68,7 @@ window.CTM_WAIT=window.CTM_WAIT||{
  newOpened:"Đã mở bản mới",
  newOpenedRoom:"Đã mở bản mới · vào lại phòng",
  newTogether:"Hai người cùng mở bản mới, đang vào lại phòng",
- /* screen-change veil (jscrv.js, KIT §94; owner OD 24/11 ~10:20Z): the whole view stays covered until its pictures are in */
+ /* screen-change veil (jscrv.js, KIT §97; owner OD 24/11 ~10:20Z): the whole view stays covered until its pictures are in */
  veilHome:"Đang về cung…",
  veilDien:"Đang vào điện…",
  veilCung:"Đang sang cung…",

@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"2308b425+","t":"2026-11-24T06:07Z","c":"SELF-MERGE LAND typed-stat-bal: merge LIVE 35647d5e (index.html/sw.js rebuilt)","b":"1163c4932920","h":[{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"}]};
+window.CTM_BI={"s":"acc1caff+","t":"2026-11-24T06:49Z","c":"kit-screenveil: KIT §94 kitScreenVeil — one screen-change veil for the whole game (owner bug OD 24/11 ~10:20Z)","b":"8da018036fc3","h":[{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -81,7 +81,7 @@ window.CTM_WAIT=window.CTM_WAIT||{
  newOpened:"Đã mở bản mới",
  newOpenedRoom:"Đã mở bản mới · vào lại phòng",
  newTogether:"Hai người cùng mở bản mới, đang vào lại phòng",
- /* screen-change veil (jscrv.js, KIT §94; owner OD 24/11 ~10:20Z): the whole view stays covered until its pictures are in */
+ /* screen-change veil (jscrv.js, KIT §97; owner OD 24/11 ~10:20Z): the whole view stays covered until its pictures are in */
  veilHome:"Đang về cung…",
  veilDien:"Đang vào điện…",
  veilCung:"Đang sang cung…",
@@ -864,7 +864,7 @@ window.CTM_WAIT=window.CTM_WAIT||{
  newOpened:"Đã mở bản mới",
  newOpenedRoom:"Đã mở bản mới · vào lại phòng",
  newTogether:"Hai người cùng mở bản mới, đang vào lại phòng",
- /* screen-change veil (jscrv.js, KIT §94; owner OD 24/11 ~10:20Z): the whole view stays covered until its pictures are in */
+ /* screen-change veil (jscrv.js, KIT §97; owner OD 24/11 ~10:20Z): the whole view stays covered until its pictures are in */
  veilHome:"Đang về cung…",
  veilDien:"Đang vào điện…",
  veilCung:"Đang sang cung…",
@@ -6761,6 +6761,9 @@ Object.assign(BAL.cv,{glance:{warm:10,cold:-5}/* j24 «Một ánh mắt» (fired
 BAL.srvRk={tam:1,nhi:2,dai:3,cs:4,nq:5,mama:6,tier:[0,1,1,2,3,4]};
 BAL.srvWage=[1,3,4,5,8,12];
 /* r2 sg-card: the monthly thơ (j3 artMonth, applied as is, not through sg) — was typed in j3 + 3 rule texts (j1 ARTS.u, j23, j85) */
+/* KIT §97 kitScreenVeil (jscrv.js, owner bug OD 24/11 ~10:20Z): cap = safety ms before the view shows anyway (MAIN 118: 10 s, a half-painted
+   reveal is what she hates); word = ms of plain veil before the line fades in; fade = reveal ms; pre = room pictures prefetched on idle */
+BAL.kscrv={cap:10000,word:220,fade:160,pre:6};
 BAL.tho={lv:3,sung:1,lv5:5,sung5:2};
 /* typed-stat-bal (law 4 ONE CORE, OD:L1267): the item effects of the j8 IT table — w = worn bonus (wearBonus), use = one use (useItem), dr = the Sắc of
    a dress sewn from the fabric (3 months). IT reads them from here (linked below: j8 loads before BAL); the item texts print them ({n:itFx.k.w.sac}).
@@ -94276,7 +94279,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§91",title:"kitEn
 window.kesSample=function(t){try{const T=KE.types[t]?t:"death";const tone=KE.types[T].tone;Q.unshift({t:T==="grand"?"Đại kết cục":"Kiếp này",cls:`kes-t-${T}`,who:typeof pMe==="function"?pMe():null,
   h:`<h3>${T==="grand"?"Đại kết cục · Hiền tướng hậu cung":"Hồng nhan bạc mệnh"}</h3><p>${tone==="fest"?"Thiên hạ truyền tai: ngươi đã thành “Hiền tướng hậu cung”.":"Kiếp này khép lại."}</p>`,btn:"Đóng"});showModal()}catch(e){console.error(e)}};
 })();
-/* ===== §94 kitScreenVeil · SCREEN-CHANGE VEIL (owner OD 24/11 ~10:20Z, owner bug; review/kit-screenveil) — dev/build/jscrv.js (LAST module) =====
+/* ===== §97 kitScreenVeil · SCREEN-CHANGE VEIL (owner OD 24/11 ~10:20Z, owner bug; review/kit-screenveil) — dev/build/jscrv.js (LAST module) =====
    Owner (verbatim, short): "nó chỉ xuất hiện những cái khung của cái màn đó trước, còn hình nhân vật hay là hình cái phòng nó hiện sau á. Tôi cực kỳ ghét
    cái đó nha. Thà là cho nguyên cái màn hình nó màu trắng rồi hiện cái dòng chữ ... đang vào phòng, hay là đang vào điện, hay là đang về cung".
    ROOT CAUSE (report dev/handover/reports/screenveil.md): every view is built by innerHTML / style.backgroundImage in ONE task and painted on the next
@@ -94296,7 +94299,8 @@ window.kesSample=function(t){try{const T=KE.types[t]?t:"death";const tone=KE.typ
    So every screen change (Dư đồ → room / điện / cung, tab switch, event picture, mini-game board, motion stages, scenes, save load, co-op join) uses
    this ONE part; code that needs a veil before its own work calls kitScreenVeil(dest). Off while the boot cover / life gate / title is up.
    Test hook: KIT_SCRV.stat {n, veiled, ms[], last}; test: dev/test/screen-veil.js (fails when a frame shows an undecoded picture uncovered). */
-const KIT_SCRV={on:true,cap:10000,word:220,fade:160,stat:{n:0,veiled:0,ms:[],last:null}};
+const KIT_SCRV={on:true,cap:0,word:0,fade:0,pre:0,stat:{n:0,veiled:0,ms:[],last:null}};
+try{Object.assign(KIT_SCRV,BAL.kscrv)}catch(e){}/* the numbers live in BAL.kscrv (law 4) */
 const SCRV_OK=new Set(),SCRV_P=new Map();
 function scrvAbs(u){try{return new URL(u,document.baseURI).href}catch(e){return u}}
 /* the line for a destination (CTM_WAIT, dev/site/kwait.js; VANPHONG: no "tải") */
@@ -94326,7 +94330,7 @@ function scrvPend(root){const P=[];const inV=scrvInView;
    SCRV_BG.lastIndex=0;let m,us=[];while((m=SCRV_BG.exec(bg)))if(!/^(data|blob):/.test(m[1]))us.push(scrvAbs(m[1]));us=us.filter(u=>!seen.has(u)&&!scrvReadyUrl(u));if(!us.length||!inV(el))continue;
    us.forEach(u=>{seen.add(u);P.push(scrvWaitUrl(u))})}}catch(e){console.error("kitScreenVeil",e)}return P}
 /* the veil element (kit: --k-card paper, --k-lab ink, display font) */
-function scrvEl(dest){let v=document.getElementById("kveil");if(!v){v=document.createElement("div");v.id="kveil";v.className="kscrv";v.setAttribute("role","status");v.setAttribute("aria-live","polite");
+function scrvEl(dest){let v=document.getElementById("kveil");if(!v){v=document.createElement("div");v.hidden=true;v.id="kveil";v.className="kscrv";v.setAttribute("role","status");v.setAttribute("aria-live","polite");
   v.innerHTML=`<div class="kscrv-l"></div>`;v.addEventListener("click",e=>{e.stopPropagation();e.preventDefault()},true);document.body.appendChild(v)}
  /* a veil already up keeps its line (the place line stays when the event of that place comes in under it) */
  if(v.hidden||v.classList.contains("out")){v.style.setProperty("--kscrv-word",KIT_SCRV.word+"ms");const l=v.querySelector(".kscrv-l");l.textContent=kitScrvWord(dest);l.style.animation="none";void l.offsetWidth;l.style.animation=""}
@@ -94338,9 +94342,17 @@ async function scrvWaitAll(root,t0,P){const raf=()=>new Promise(r=>requestAnimat
  for(let k=0;k<12;k++){const left=KIT_SCRV.cap-(performance.now()-t0);if(left<=0)return "cap";
   await Promise.race([Promise.all(P),new Promise(r=>setTimeout(r,left))]);await raf();P=scrvPend(root);if(!P.length)return "ok"}return "loop"}
 function kitScreenVeilUntil(root,dest){root=root||document.body;KIT_SCRV.stat.n++;const P=scrvPend(root);
- if(!P.length){if(!SCRV_RUN)scrvReveal();return Promise.resolve(false)}
+ if(!P.length){if(!SCRV_RUN)scrvReveal();scrvPrefetch();return Promise.resolve(false)}
  const t0=performance.now();scrvEl(dest);KIT_SCRV.stat.veiled++;(KIT_SCRV.stat.log=KIT_SCRV.stat.log||[]).push(dest);if(KIT_SCRV.stat.log.length>40)KIT_SCRV.stat.log.shift();const run={t0};SCRV_RUN=run;
- return scrvWaitAll(root,t0,P).then(why=>{if(SCRV_RUN!==run)return true;SCRV_RUN=null;const ms=Math.round(performance.now()-t0);KIT_SCRV.stat.ms.push(ms);KIT_SCRV.stat.last={dest,word:kitScrvWord(dest),ms,why,n:P.length};scrvReveal();return true})}
+ return scrvWaitAll(root,t0,P).then(why=>{if(SCRV_RUN!==run)return true;SCRV_RUN=null;const ms=Math.round(performance.now()-t0);KIT_SCRV.stat.ms.push(ms);KIT_SCRV.stat.last={dest,word:kitScrvWord(dest),ms,why,n:P.length};scrvReveal();scrvPrefetch();return true})}
+/* 97.7 IDLE PREFETCH (MAIN 118, 24/11): once a view is settled, the room pictures of the places one walk away (nearest KIT_SCRV.pre,
+   by travel time, reachable now) are fetched + decoded one at a time when the device is idle, so most moves find them ready (no veil). */
+let SCRV_PRE_T=0;
+function scrvPrefetch(){clearTimeout(SCRV_PRE_T);SCRV_PRE_T=setTimeout(()=>{try{if(!KIT_SCRV.pre||typeof S==="undefined"||!S||S.dead||typeof places!=="function"||typeof SCIMG!=="object")return;
+  const here=S.place;const L=places().map(p=>p.k).concat(["home"]).filter(k=>k&&k!==here).map(k=>{let t=99;try{t=travel(here,k)}catch(e){}return [k,t]})
+   .filter(([k,t])=>{try{return typeof walkOk!=="function"||walkOk(t)}catch(e){return true}}).sort((a,b)=>a[1]-b[1]).slice(0,KIT_SCRV.pre);
+  const U=[...new Set(L.map(([k])=>{try{const f=SCIMG[placeOf(k).sc];return f?scrvAbs(IMG_BASE+"https://ctm-img.victoria-tntt.workers.dev/img/"+f+".webp"):""}catch(e){return ""}}).filter(u=>u&&!SCRV_OK.has(u)))];
+  const idle=window.requestIdleCallback||(f=>setTimeout(f,200));const next=()=>{if(SCRV_RUN||!U.length)return;const u=U.shift();idle(()=>scrvWaitUrl(u).then(next),{timeout:4000})};next();KIT_SCRV.stat.pre=(KIT_SCRV.stat.pre||0)+U.length}catch(e){}},1500)}
 /* veil at once (before building a new view); kitScreenVeilDone() = reveal as soon as the built view's pictures are decoded */
 function kitScreenVeil(dest){SCRV_HOLD=1;scrvEl(dest);SCRV_RUN={t0:performance.now(),hold:1}}
 function kitScreenVeilDone(root,dest){SCRV_HOLD=0;SCRV_RUN=null;scrvKeyNow();return kitScreenVeilUntil(root||document.body,dest).then(v=>{if(!v)scrvReveal();return v})}
@@ -94372,8 +94384,8 @@ function scrvCheck(){if(SCRV_HOLD)return;const k=scrvKey();if(k===SCRV_KEY)retur
 @media (prefers-reduced-motion:reduce){.kscrv{transition:none}.kscrv-l{animation-duration:.01s}}`;document.head.appendChild(st)}catch(e){console.error("kit-scrv",e)}
  try{const mo=new MutationObserver(scrvCheck);const go=()=>{mo.observe(document.body,{childList:true,subtree:true});const M=document.getElementById("modal");if(M)mo.observe(M,{attributes:true,attributeFilter:["hidden"]})};
   if(document.body)go();else document.addEventListener("DOMContentLoaded",go)}catch(e){console.error("kit-scrv mo",e)}})();
-/* kit sample page §94 */
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§94",title:"Màn che đổi cảnh: che cả màn, một dòng ngắn, mở ra một lần khi tranh đã đủ",html:()=>
+/* kit sample page §97 */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§97",title:"Màn che đổi cảnh: che cả màn, một dòng ngắn, mở ra một lần khi tranh đã đủ",html:()=>
  `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px">`+["home","thu","tn","tyv","vuon","event","board","book","scene"].map(d=>
  `<div class="kscrv" style="position:relative;inset:auto;z-index:auto;height:110px;border:1px solid var(--k-hair,#e6d3ac);border-radius:8px"><div class="kscrv-l" style="opacity:1;animation:none">${kitScrvWord(d)}</div></div>`).join("")+`</div>`})}catch(e){}
 
@@ -96289,7 +96301,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="1163c4932920";window.CTM_BUILD=BUILD;
+const BUILD="8da018036fc3";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

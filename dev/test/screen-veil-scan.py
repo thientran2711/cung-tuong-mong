@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""screen-veil-scan (law 11, owner OD 24/11 ~10:20Z; KIT §94): list EVERY screen change of the game and say whether the ONE veil watcher
+"""screen-veil-scan (law 11, owner OD 24/11 ~10:20Z; KIT §97): list EVERY screen change of the game and say whether the ONE veil watcher
 (dev/build/jscrv.js, view key = life · place · tab · event at head of Q · mini-game · full-screen body layers) covers it.
 usage: python3 dev/test/screen-veil-scan.py [--md]   (exit 1 when a full-screen layer on <body> is not in the watcher's layer list)"""
 import re,os,sys,glob

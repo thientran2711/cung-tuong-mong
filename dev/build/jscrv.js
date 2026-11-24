@@ -1,4 +1,4 @@
-/* ===== §94 kitScreenVeil · SCREEN-CHANGE VEIL (owner OD 24/11 ~10:20Z, owner bug; review/kit-screenveil) — dev/build/jscrv.js (LAST module) =====
+/* ===== §97 kitScreenVeil · SCREEN-CHANGE VEIL (owner OD 24/11 ~10:20Z, owner bug; review/kit-screenveil) — dev/build/jscrv.js (LAST module) =====
    Owner (verbatim, short): "nó chỉ xuất hiện những cái khung của cái màn đó trước, còn hình nhân vật hay là hình cái phòng nó hiện sau á. Tôi cực kỳ ghét
    cái đó nha. Thà là cho nguyên cái màn hình nó màu trắng rồi hiện cái dòng chữ ... đang vào phòng, hay là đang vào điện, hay là đang về cung".
    ROOT CAUSE (report dev/handover/reports/screenveil.md): every view is built by innerHTML / style.backgroundImage in ONE task and painted on the next
@@ -18,7 +18,8 @@
    So every screen change (Dư đồ → room / điện / cung, tab switch, event picture, mini-game board, motion stages, scenes, save load, co-op join) uses
    this ONE part; code that needs a veil before its own work calls kitScreenVeil(dest). Off while the boot cover / life gate / title is up.
    Test hook: KIT_SCRV.stat {n, veiled, ms[], last}; test: dev/test/screen-veil.js (fails when a frame shows an undecoded picture uncovered). */
-const KIT_SCRV={on:true,cap:10000,word:220,fade:160,stat:{n:0,veiled:0,ms:[],last:null}};
+const KIT_SCRV={on:true,cap:0,word:0,fade:0,pre:0,stat:{n:0,veiled:0,ms:[],last:null}};
+try{Object.assign(KIT_SCRV,BAL.kscrv)}catch(e){}/* the numbers live in BAL.kscrv (law 4) */
 const SCRV_OK=new Set(),SCRV_P=new Map();
 function scrvAbs(u){try{return new URL(u,document.baseURI).href}catch(e){return u}}
 /* the line for a destination (CTM_WAIT, dev/site/kwait.js; VANPHONG: no "tải") */
@@ -48,7 +49,7 @@ function scrvPend(root){const P=[];const inV=scrvInView;
    SCRV_BG.lastIndex=0;let m,us=[];while((m=SCRV_BG.exec(bg)))if(!/^(data|blob):/.test(m[1]))us.push(scrvAbs(m[1]));us=us.filter(u=>!seen.has(u)&&!scrvReadyUrl(u));if(!us.length||!inV(el))continue;
    us.forEach(u=>{seen.add(u);P.push(scrvWaitUrl(u))})}}catch(e){console.error("kitScreenVeil",e)}return P}
 /* the veil element (kit: --k-card paper, --k-lab ink, display font) */
-function scrvEl(dest){let v=document.getElementById("kveil");if(!v){v=document.createElement("div");v.id="kveil";v.className="kscrv";v.setAttribute("role","status");v.setAttribute("aria-live","polite");
+function scrvEl(dest){let v=document.getElementById("kveil");if(!v){v=document.createElement("div");v.hidden=true;v.id="kveil";v.className="kscrv";v.setAttribute("role","status");v.setAttribute("aria-live","polite");
   v.innerHTML=`<div class="kscrv-l"></div>`;v.addEventListener("click",e=>{e.stopPropagation();e.preventDefault()},true);document.body.appendChild(v)}
  /* a veil already up keeps its line (the place line stays when the event of that place comes in under it) */
  if(v.hidden||v.classList.contains("out")){v.style.setProperty("--kscrv-word",KIT_SCRV.word+"ms");const l=v.querySelector(".kscrv-l");l.textContent=kitScrvWord(dest);l.style.animation="none";void l.offsetWidth;l.style.animation=""}
@@ -60,9 +61,17 @@ async function scrvWaitAll(root,t0,P){const raf=()=>new Promise(r=>requestAnimat
  for(let k=0;k<12;k++){const left=KIT_SCRV.cap-(performance.now()-t0);if(left<=0)return "cap";
   await Promise.race([Promise.all(P),new Promise(r=>setTimeout(r,left))]);await raf();P=scrvPend(root);if(!P.length)return "ok"}return "loop"}
 function kitScreenVeilUntil(root,dest){root=root||document.body;KIT_SCRV.stat.n++;const P=scrvPend(root);
- if(!P.length){if(!SCRV_RUN)scrvReveal();return Promise.resolve(false)}
+ if(!P.length){if(!SCRV_RUN)scrvReveal();scrvPrefetch();return Promise.resolve(false)}
  const t0=performance.now();scrvEl(dest);KIT_SCRV.stat.veiled++;(KIT_SCRV.stat.log=KIT_SCRV.stat.log||[]).push(dest);if(KIT_SCRV.stat.log.length>40)KIT_SCRV.stat.log.shift();const run={t0};SCRV_RUN=run;
- return scrvWaitAll(root,t0,P).then(why=>{if(SCRV_RUN!==run)return true;SCRV_RUN=null;const ms=Math.round(performance.now()-t0);KIT_SCRV.stat.ms.push(ms);KIT_SCRV.stat.last={dest,word:kitScrvWord(dest),ms,why,n:P.length};scrvReveal();return true})}
+ return scrvWaitAll(root,t0,P).then(why=>{if(SCRV_RUN!==run)return true;SCRV_RUN=null;const ms=Math.round(performance.now()-t0);KIT_SCRV.stat.ms.push(ms);KIT_SCRV.stat.last={dest,word:kitScrvWord(dest),ms,why,n:P.length};scrvReveal();scrvPrefetch();return true})}
+/* 97.7 IDLE PREFETCH (MAIN 118, 24/11): once a view is settled, the room pictures of the places one walk away (nearest KIT_SCRV.pre,
+   by travel time, reachable now) are fetched + decoded one at a time when the device is idle, so most moves find them ready (no veil). */
+let SCRV_PRE_T=0;
+function scrvPrefetch(){clearTimeout(SCRV_PRE_T);SCRV_PRE_T=setTimeout(()=>{try{if(!KIT_SCRV.pre||typeof S==="undefined"||!S||S.dead||typeof places!=="function"||typeof SCIMG!=="object")return;
+  const here=S.place;const L=places().map(p=>p.k).concat(["home"]).filter(k=>k&&k!==here).map(k=>{let t=99;try{t=travel(here,k)}catch(e){}return [k,t]})
+   .filter(([k,t])=>{try{return typeof walkOk!=="function"||walkOk(t)}catch(e){return true}}).sort((a,b)=>a[1]-b[1]).slice(0,KIT_SCRV.pre);
+  const U=[...new Set(L.map(([k])=>{try{const f=SCIMG[placeOf(k).sc];return f?scrvAbs(IMG_BASE+"img/"+f+".webp"):""}catch(e){return ""}}).filter(u=>u&&!SCRV_OK.has(u)))];
+  const idle=window.requestIdleCallback||(f=>setTimeout(f,200));const next=()=>{if(SCRV_RUN||!U.length)return;const u=U.shift();idle(()=>scrvWaitUrl(u).then(next),{timeout:4000})};next();KIT_SCRV.stat.pre=(KIT_SCRV.stat.pre||0)+U.length}catch(e){}},1500)}
 /* veil at once (before building a new view); kitScreenVeilDone() = reveal as soon as the built view's pictures are decoded */
 function kitScreenVeil(dest){SCRV_HOLD=1;scrvEl(dest);SCRV_RUN={t0:performance.now(),hold:1}}
 function kitScreenVeilDone(root,dest){SCRV_HOLD=0;SCRV_RUN=null;scrvKeyNow();return kitScreenVeilUntil(root||document.body,dest).then(v=>{if(!v)scrvReveal();return v})}
@@ -94,7 +103,7 @@ function scrvCheck(){if(SCRV_HOLD)return;const k=scrvKey();if(k===SCRV_KEY)retur
 @media (prefers-reduced-motion:reduce){.kscrv{transition:none}.kscrv-l{animation-duration:.01s}}`;document.head.appendChild(st)}catch(e){console.error("kit-scrv",e)}
  try{const mo=new MutationObserver(scrvCheck);const go=()=>{mo.observe(document.body,{childList:true,subtree:true});const M=document.getElementById("modal");if(M)mo.observe(M,{attributes:true,attributeFilter:["hidden"]})};
   if(document.body)go();else document.addEventListener("DOMContentLoaded",go)}catch(e){console.error("kit-scrv mo",e)}})();
-/* kit sample page §94 */
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§94",title:"Màn che đổi cảnh: che cả màn, một dòng ngắn, mở ra một lần khi tranh đã đủ",html:()=>
+/* kit sample page §97 */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§97",title:"Màn che đổi cảnh: che cả màn, một dòng ngắn, mở ra một lần khi tranh đã đủ",html:()=>
  `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px">`+["home","thu","tn","tyv","vuon","event","board","book","scene"].map(d=>
  `<div class="kscrv" style="position:relative;inset:auto;z-index:auto;height:110px;border:1px solid var(--k-hair,#e6d3ac);border-radius:8px"><div class="kscrv-l" style="opacity:1;animation:none">${kitScrvWord(d)}</div></div>`).join("")+`</div>`})}catch(e){}
