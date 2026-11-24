@@ -36,6 +36,15 @@ const DEVS=A.filter(a=>D.DEVICES[a]);const NET=!A.includes('--no-net');let bad=0
    try{kitView&&kitView("story")}catch(e){}try{const b=[...document.querySelectorAll('#tabs button,[data-tab]')].find(x=>/Mệnh/.test(x.textContent));if(b)b.click()}catch(e){}});await pg.waitForTimeout(1200);
   await shot('ky-log');
   console.log('LOG',JSON.stringify(await g.evaluate(()=>(S.logs||[]).slice(0,6).map(x=>String(x.t||x).replace(/<[^>]+>/g,'').slice(0,260)))));
+  /* 4. promo-build-2: SHE is the Hoàng hậu → «Hoàng hậu đề cử» option sheet (kit Q options) */
+  await g.evaluate(()=>{Q.length=0;const q0=queenP();if(q0&&q0!==S){q0.queen=false;q0.rank=6}S.rank=7;S.lastPromo=S.turn;for(let i=0;i<14&&pbKyAt(pbA());i++){monthTick();Q.length=0}
+   const ch=pbHhCut(S);liveRivals(false).filter(x=>x.rank<3&&!x.confined&&!x.coop).slice(0,3).forEach((x,i)=>{delete x.ex;delete x.pbs;x.hh=ch+5+i;x.th=60;x.sung=0;x.danh=0;x.lastPromo=S.turn;x.confined=0;try{k61Meet&&k61Meet(x)}catch(e){}});
+   pbHhMeOpen();render();showModal()});await pg.waitForTimeout(1500);
+  await shot('hh-decu');
+  /* 5. promo-build-2: deathbed exam panel (lâm bệnh nguy kịch) */
+  await g.evaluate(()=>{Q.length=0;S.rank=2;S.sung=S.danh=S.duc=99;S.lastPromo=S.turn-99;S.hh=60;S.th=60;S.confined=0;delete S.ex;delete S.pbs;S.ill={k:"lao",st:3,known:true};
+   const f0=exSimC;exSimC=function(p){const r=f0(p);r.pass=true;r.total=Math.max(r.total,r.P.bar);return r};try{const t=pbDeath(S);if(t)log(t)}finally{exSimC=f0}render();showModal()});await pg.waitForTimeout(1500);
+  await shot('deathbed');
   if(errs.length){bad++;console.log(`FAIL ${tag}: ${errs.length} page errors: ${errs[0]}`)}
-  console.log(`${tag}: 4 shots -> ${OUT}`);await ctx.close()}
+  console.log(`${tag}: 6 shots -> ${OUT}`);await ctx.close()}
  await b.close();srv.close();console.log(bad?`SHOTS FAIL ${bad}`:'SHOTS OK');process.exit(bad?1:0)})().catch(e=>{console.error(e);process.exit(1)});

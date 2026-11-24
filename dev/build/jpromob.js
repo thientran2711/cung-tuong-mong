@@ -230,7 +230,7 @@ function pbHhMeDo(v,others){const SP=BAL.promoR.sp,C=SP.cost;if(!pbHhMeList().in
  try{q72DebtAdd(q72A("rv",v.id),C.hhOwe)}catch(x){}affAdd(v,S,C.meAff);for(const o of others)oanAdd(o,S,C.mePassOan);
  window.__pbN=window.__pbN||{};window.__pbN.hhMe=(window.__pbN.hhMe||0)+1;
  log(`<b class="g">Ngươi đề cử ${pbWho(v)} lên ${exRk(exS(v).to)}</b>: Nội vụ phủ cho nàng một lần thi riêng ngoài kỳ. ${pbWho(v)} nợ ngươi một ân.${others.length?` ${others.length} người không được đề cử oán ngươi.`:""}`)}
-function pbHhMeCard(L){return{n:"Hoàng hậu đề cử",pbhh:1,t:"Ngươi chủ lục cung: đề cử một phi tần được thi riêng tấn phong ngoài kỳ.",c:{},o:100,k:1,w:{},dom:"Giao thiệp",
+function pbHhMeCard(L){return{n:"Hoàng hậu đề cử",pbhh:1,t:"Ngươi chủ lục cung: đề cử một phi tần được thi riêng tấn phong ngoài kỳ.",c:{},o:100,k:BAL.promoR.sp.meK,w:{},dom:"Giao thiệp",
  x:`chọn một trong ${L.length} người đủ điều kiện; người được chọn nợ ngươi một ân, người không được chọn oán ngươi`,go:()=>pbHhMeOpen()}}
 (function(){if(typeof deal!=="function")return;const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(Array.isArray(deck)&&!deck.some(a=>a&&a.pbhh)){const L=pbHhMeList();if(L.length)deck.push(pbHhMeCard(L))}}catch(e){console.error("pbHhMeCard",e)}return r}})();
 

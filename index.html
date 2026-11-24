@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"1cab34e1+","t":"2026-11-24T08:29Z","c":"rv promo-build: test setup — reset the NPC's last decree after the months run to the kỳ (a favour exam may raise her on the way)","b":"15bf418f8bb8","h":[{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"}]};
+window.CTM_BI={"s":"e69225ae+","t":"2026-11-24T08:50Z","c":"promo-build-2: Hoàng hậu đề cử act when she is the Hoàng hậu (equal options), deathbed special exam + truy phong (full conditions), quốc ta…","b":"d98054b810f1","h":[{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -36967,7 +36967,7 @@ Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{s
      months with no kỳ the next festival is forced. thanhtho only while the Thái hậu lives. hold = months a special exam stays open at least (then it
      lapses at the next kỳ if never sat).
    mourn = months of quốc tang after the Thái hậu dies OR the Emperor dies / a new Emperor takes the throne (promo-build-2): no kỳ, no đại lễ.
-   promo-build-2 (Foreman D): meMax = how many nominees her «Hoàng hậu đề cử» sheet shows (the highest Hoàng hậu quý first); cost.meAff = the
+   promo-build-2 (Foreman D): meK = khắc of her «Hoàng hậu đề cử» act card; meMax = how many nominees her «Hoàng hậu đề cử» sheet shows (the highest Hoàng hậu quý first); cost.meAff = the
      nominee's thiện cảm with her, cost.hhOwe = the nominee then owes her one ân (the mirror of the NPC route), cost.mePassOan = the oán of each
      candidate on the sheet she passed over (law 2: every nominee option has the same gain and the same loss). death = the deathbed special exam
      (lâm bệnh nguy kịch; design row 9; full condition set but the kỳ, + Đức, then Nội vụ phủ's exam on her record; once per life; a full seat = no
@@ -36994,7 +36994,7 @@ Object.assign(BAL,{promoR:{ky:{p:{newyear:85,doanngo:20,vantho:75,thanhtho:55,do
  sp:{sung:{add:{datinh:4,mesac:6,nongnay:6,nhantu:8,trongtai:8,hieuthao:10,danghi:12,chamchinh:14,lanhlung:16},def:8,every:24,life:2},
   th:{cut:{tuai:40,phat:45,nghiem:60,quyen:62,danghi:68},def:55,life:1},
   hh:{cut:{"Ân cần":40,"Khiêm nhường":45,"Điềm tĩnh":50,"Nhiều chuyện":50,"Nóng nảy":55,"Kín đáo":60,"Lạnh lùng":65,"Tham vọng":62,"Xảo quyệt":66,"Kiêu ngạo":70},def:55,maxTo:4,life:1},
-  birth:1,cost:{sungGhen:10,sungOan:6,thSung:4,hhOwe:1,hhOan:4,deathHhOan:10,meAff:5,mePassOan:4},meMax:4,death:{life:1},tp:{on:1}},
+  birth:1,cost:{sungGhen:10,sungOan:6,thSung:4,hhOwe:1,hhOan:4,deathHhOan:10,meAff:5,mePassOan:4},meMax:4,meK:1,death:{life:1},tp:{on:1}},
  dl:{on:1,minGap:24,bacM:1,ghen:6,oan:3,thTho:[50,60,70,80],empTho:[30,40,50,60],duc:[0,0,10,15,20,30,40,50]},
  pc:{wE:1,wH:1,wT:1,load:.6,why:.25,mid:{sung:30,hh:0,th:0},span:{sung:40,hh:40,th:40},
   kind:{"Ân cần":2,"Khiêm nhường":1,"Điềm tĩnh":1,"Rộng lượng":2,"Nhiều chuyện":0,"Kín đáo":0,"Lạnh lùng":-1,"Tham vọng":-1,"Xảo quyệt":-2,"Nóng nảy":-2,"Kiêu ngạo":-2}}}});
@@ -56883,7 +56883,7 @@ function pbHhMeDo(v,others){const SP=BAL.promoR.sp,C=SP.cost;if(!pbHhMeList().in
  try{q72DebtAdd(q72A("rv",v.id),C.hhOwe)}catch(x){}affAdd(v,S,C.meAff);for(const o of others)oanAdd(o,S,C.mePassOan);
  window.__pbN=window.__pbN||{};window.__pbN.hhMe=(window.__pbN.hhMe||0)+1;
  log(`<b class="g">Ngươi đề cử ${pbWho(v)} lên ${exRk(exS(v).to)}</b>: Nội vụ phủ cho nàng một lần thi riêng ngoài kỳ. ${pbWho(v)} nợ ngươi một ân.${others.length?` ${others.length} người không được đề cử oán ngươi.`:""}`)}
-function pbHhMeCard(L){return{n:"Hoàng hậu đề cử",pbhh:1,t:"Ngươi chủ lục cung: đề cử một phi tần được thi riêng tấn phong ngoài kỳ.",c:{},o:100,k:1,w:{},dom:"Giao thiệp",
+function pbHhMeCard(L){return{n:"Hoàng hậu đề cử",pbhh:1,t:"Ngươi chủ lục cung: đề cử một phi tần được thi riêng tấn phong ngoài kỳ.",c:{},o:100,k:BAL.promoR.sp.meK,w:{},dom:"Giao thiệp",
  x:`chọn một trong ${L.length} người đủ điều kiện; người được chọn nợ ngươi một ân, người không được chọn oán ngươi`,go:()=>pbHhMeOpen()}}
 (function(){if(typeof deal!=="function")return;const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(Array.isArray(deck)&&!deck.some(a=>a&&a.pbhh)){const L=pbHhMeList();if(L.length)deck.push(pbHhMeCard(L))}}catch(e){console.error("pbHhMeCard",e)}return r}})();
 
@@ -98103,7 +98103,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="15bf418f8bb8";window.CTM_BUILD=BUILD;
+const BUILD="d98054b810f1";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
