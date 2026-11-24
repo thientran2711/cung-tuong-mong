@@ -1,0 +1,10 @@
+1. **stuck** — co-op room stuck: no room week step in 240 s
+   - pairs 2/2 (coop-p01s-S1, coop-p02s-S1) · hits 14 (0 since this process started, harness 5a65a561)
+   - first: host {"buoi":3,"week":35,"bend":false,"pendBuoi":null,"pend":false,"sent":34,"Q":0,"Qt":[],"mh":true,"mg":false,"dead":false,"next":true,"title":false,"st":"open","peer":true} || guest {"buoi":3,"week":35,"bend":false,"pendBuoi":null,"pend":false,"sent":34,"Q":0,"Qt":[],"mh":true,"mg":false,"dead":false,"next":true,"title":false,"st":"open","peer":true}
+   - last: host {"buoi":0,"week":32,"bend":false,"pendBuoi":null,"pend":true,"sent":31,"Q":6,"Qt":["Bổng lộc tháng giêng","Thỉnh bình an mạch","Phụ tuyến · Tân quân lập uy · Chương 3 ·","Tỉnh thân","Hạn hán, mất mùa","Đại xá thiên hạ"],"mh":false,"mg":false,"dead":false,"next":true,"title":false,"st":"open","peer":true} || guest {"buoi":0,"week":32,"bend":false,"pendBuoi":null,"pend":true,"sent":31,"Q":6,"Qt
+   - screenshots: shots/coop-p01s-S1-r1-host-stuck.png, shots/coop-p01s-S1-r1-guest-stuck.png (not in git)
+2. **stuck** — co-op room stuck: no room week step in 600 s
+   - pairs 1/2 (coop-p02s-S1) · hits 2 (1 since this process started, harness 5a65a561)
+   - first: host {"buoi":3,"week":31,"bend":false,"pendBuoi":null,"pend":false,"sent":30,"Q":0,"Qt":[],"mh":true,"mg":false,"dead":false,"next":true,"title":false,"st":"open","peer":true} || guest {"buoi":3,"week":31,"bend":false,"pendBuoi":null,"pend":false,"sent":30,"Q":0,"Qt":[],"mh":true,"mg":false,"dead":false,"next":true,"title":false,"st":"open","peer":true}
+   - last: host {"buoi":3,"week":1,"bend":false,"pendBuoi":null,"pend":false,"sent":0,"Q":0,"Qt":[],"mh":true,"mg":false,"dead":false,"next":true,"title":false,"st":"open","peer":true} || guest {"buoi":3,"week":1,"bend":false,"pendBuoi":null,"pend":false,"sent":0,"Q":0,"Qt":[],"mh":true,"mg":false,"dead":false,"next":true,"title":false,"st":"open","peer":true}
+   - screenshots: shots/coop-p02s-S1-r7-host-stuck.png, shots/coop-p02s-S1-r7-guest-stuck.png (not in git)
