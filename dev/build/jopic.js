@@ -332,7 +332,7 @@ window.kitOptTier=kitOptTier;window.kitOptCards=kitOptCards;
 function kitOptInfo(b){try{let z=document.getElementById("kpinfo");if(!z){z=document.createElement("div");z.id="kpinfo";z.setAttribute("role","dialog");z.addEventListener("click",e=>{e.stopPropagation();z.hidden=true});document.body.appendChild(z)}
  const c=b.cloneNode(true);c.removeAttribute("id");c.querySelectorAll("[id]").forEach(e=>e.removeAttribute("id"));c.querySelectorAll(".kaart,.kobang,.kfill,.kdup,.kdup0").forEach(e=>e.remove());c.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
  c.querySelectorAll(".kr-ton,.kr-duoc").forEach(r=>{if(!r.querySelector(".krv > *"))r.remove()});
- c.classList.remove("kopt","kart");c.classList.add("kopinfo");c.disabled=true;c.style.removeProperty("min-height");c.type="button";z.innerHTML="";z.appendChild(c);z.hidden=false}catch(e){console.error(e)}}
+ c.classList.remove("kopt","kart");c.classList.add("kopinfo");/* read-only copy: NOT :disabled (j63 `button.ka:disabled .kr-mat/.kr-kem/.kr-bai{display:none}` hid Mất / Kèm / Bại in EVERY card's «!» view game-wide, E75 KIT REQUEST); a card that is really dead keeps its disabled look and its hidden rows */if(b.disabled||b.classList.contains("kdis"))c.disabled=true;else{c.setAttribute("aria-disabled","true");c.tabIndex=-1}c.style.removeProperty("min-height");c.type="button";z.innerHTML="";z.appendChild(c);z.hidden=false}catch(e){console.error(e)}}
 window.kitOptInfo=kitOptInfo;
 document.addEventListener("click",e=>{try{const m=e.target&&e.target.closest&&e.target.closest("button.ka.kopt > .kobang");if(!m)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();kitOptInfo(m.parentElement)}catch(x){}},true);
 
