@@ -814,3 +814,19 @@ START_CTX ~6 % (own estimate); finished well under +25 %.
   - j7c-play (LIVE P2 test, no j7 file touched here): the first no-arg run above printed «J7C PLAY: 6 FAIL»; detail not kept; 9 reruns ALL PASS (1 of 10). Flaky, not reproduced; flag for the P2 owner.
 - LIVE moved to 35647d5e (kframe-heir) after these gates: source merge is clean (only built index.html/sw.js conflict = rebuild). I re-merge on request.
 - **VERDICT r2: PASS 7429bfa3**
+
+## REVIEW thin-p8 r1
+PRIORITY #1 CHECK: reused review/thin-p8 @ce252c43 + LIVE origin/main 68799300; tools dev/test/rdc-play.js / rdseeds_validate.py / rdc-oldsave.js / rdc-shots.js from the branch; no duplicate work found in OWNER_DECISIONS / HANDOVER / PROGRESS / origin/review/*.
+IN PROGRESS (full report follows). Branch review/thin-p8-r1 @4d9f748c (contains LIVE 68799300).
+
+### Road play split (Foreman B 07:07Z: one helper runner takes the second half)
+Reviewer cannot send_message the new foreman / helper (permission denied) — this section is the hand-off.
+- Build: `git checkout 4d9f748c` (review/thin-p8-r1), `bash dev/site/build_site.sh`.
+- Rows file: `cat dev/handover/content/thin/rdseeds_{a,b,c,d}.md > /tmp/all.md` (rows already in the build; the file only names the roads).
+- Command (max 2 at once, renderer ~5–7.6 GB): `RDC_STOP12=1 node dev/test/rdc-play.js /tmp/all.md 1 <roads>`
+- PASS line per road: `<road> life 1 12 … | 4:<road> 5:<road>_5 … 11:<road>_11`; any `FAIL` line = fault. A `page lost … Target crashed` retry is OOM; 3× → `FAIL … boot`.
+- HELPER roads (20): `td_daixa,td_monsinh,ch_tuyentu,ch_diensan,nc_men,nc_nu,bd_luuly,bd_bac,pf_co,pf_tra` and `td_tichbien,td_honuoc,ch_lenhbai,ch_honngoai,nc_kinh,nc_the,bd_lua,bd_su,pf_guong,pf_lich`. Append results below under «#### helper».
+- REVIEWER roads (24): PASS so far tt_ruong, tt_tho, dtq_ngua, dtq_thuong, thd_dich, thd_uoc, muoi_gia, tt_gia, tt_thu; running muoi_thi, dtq_ky; then cn_chuoi, cn_chuviet, cnv_kho, cnv_hach, thd_dien, thd_giay, muoi_tien, muoi_hoi, cn_tiec, cn_theo, cnv_thu, cnv_tieu; dtq_hang re-run alone (renderer crash ×3 at ch9).
+- Gates already PASS on bare ce252c43 AND merged 4d9f748c: `python3 dev/test/rdseeds_validate.py` (no args) and `--min` + rdseeds_a..d → `RDSEEDS: 627 rows, 0 errors, 0 warnings`; `node dev/test/undef-scan.js` → PASS (299 names); `node dev/test/one-core-guard.js` → PASS; `node dev/test/one-core-text.js` → PASS.
+
+#### helper
