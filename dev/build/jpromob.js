@@ -221,9 +221,9 @@ function pbHhMeList(){try{if(!S||!pbLive(S)||rkOf(S)<7||!exOn()||pbGuest()||(typ
  return liveRivals(false).filter(v=>!v.coop&&pbCan(v)&&!v.confined&&!pbOpen(v)&&exS(v).to<=SP.hh.maxTo&&(pbS(v).hh[qk]||0)<SP.hh.life&&pbHhOf(v)>=ch&&pbRowsOk(v)&&!(pbRoadDone(v)&&pbKyAt(A)))
   .sort((a,b)=>pbHhOf(b)-pbHhOf(a)).slice(0,SP.meMax)}catch(e){console.error("pbHhMeList",e);return[]}}
 function pbHhMeOpts(L){const C=BAL.promoR.sp.cost;return L.map(v=>{const n=L.length-1;
- return{n:`Đề cử ${pbWho(v)} lên ${exRk(exS(v).to)}`,x:`được: ${pbWho(v)} nợ ngươi một ân, thiện cảm với ngươi +${C.meAff}${n?` · mất: ${n} người không được đề cử oán ngươi +${C.mePassOan}`:""}`,go:()=>pbHhMeDo(v,L.filter(o=>o!==v))}}).concat([{n:"Thôi"}])}
+ return{n:`Đề cử ${pbWho(v)} lên ${exRk(exS(v).to)}`,x:`được: ${pbWho(v)} nợ ngươi một ân, nàng quý ngươi hơn (+${C.meAff})${n?` · mất: ${n} người không được đề cử oán ngươi +${C.mePassOan}`:""}`,go:()=>pbHhMeDo(v,L.filter(o=>o!==v))}}).concat([{n:"Thôi"}])}
 function pbHhMeOpen(){const L=pbHhMeList();if(!L.length){log("Lúc này chưa có phi tần nào đủ điều kiện để ngươi đề cử.");return}const ch=pbHhCut(S);
- const rows=L.map(v=>[pbWho(v),`lên ${exRk(exS(v).to)} · ${pbKnown(v)?`ngươi quý nàng ${pbHhOf(v)}, cần ${ch}`:`ngươi quý nàng đủ mức`}`]);
+ const rows=L.map(v=>[pbWho(v),`lên ${exRk(exS(v).to)} · ${pbKnown(v)?`được lòng Hoàng hậu ${pbHhOf(v)}, cần ${ch}`:`được lòng Hoàng hậu đủ mức`}`]);
  Q.push({t:"Hoàng hậu đề cử",who:pMe(),h:`<p>Ngươi chủ lục cung, được đề cử một phi tần thi riêng tấn phong ngoài kỳ. Mỗi người chỉ được ngươi đề cử một lần trong đời. Người được chọn nợ ngươi một ân; người có tên mà không được chọn sẽ oán ngươi.</p>${kitRows(rows)}`,opts:pbHhMeOpts(L)});try{showModal()}catch(e){}}
 function pbHhMeDo(v,others){const SP=BAL.promoR.sp,C=SP.cost;if(!pbHhMeList().includes(v)){log(`${pbWho(v)} không còn đủ điều kiện để đề cử.`);return}
  const s=pbS(v),qk="hh:"+key(S);s.hh[qk]=(s.hh[qk]||0)+1;pbGrant(v,"hh",{cut:pbHhCut(S),q:S,me:1});
@@ -244,12 +244,12 @@ function pbDeath(p){const SP=BAL.promoR.sp,D=SP.death;if(!D||typeof illOf!=="fun
  if(r.pass&&(typeof seatFree!=="function"||seatFree(to))){if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;p.ex={to:rkOf(p)+1};dec=true;window.__pbN.deathUp=(window.__pbN.deathUp||0)+1;
   const q=typeof queenP==="function"?queenP():null;if(q&&q!==p&&!q.out)oanAdd(q,p,SP.cost.deathHhOan);
   if(me){try{exDrop()}catch(x){}try{feedback("promote",{t:"Tấn phong"})}catch(x){}}
-  res=me?`Thánh chỉ tấn phong ${S.name} làm ${RANKS[S.rank].n}. Hoàng hậu oán ngươi được nâng vượt mặt bà.`:`${p.name} được tấn phong ${RANKS[p.rank].n} bên giường bệnh.`}
+  res=me?`Thánh chỉ tấn phong ${S.name} làm ${RANKS[S.rank].n}. Hoàng hậu thấy ngươi được nâng vượt mặt bà, oán ngươi.`:`${p.name} được tấn phong ${RANKS[p.rank].n} bên giường bệnh.`}
  else if(r.pass)res=me?`Đỗ, nhưng ghế ${rk} đã đủ người: không có thánh chỉ.`:`${p.name} đỗ xét bên giường bệnh, nhưng ghế ${rk} đã đủ người.`;
  else res=me?"Chưa đạt: lần xét này đã qua, đời chỉ có một lần.":`${p.name} lâm bệnh nguy kịch, Nội vụ phủ xét tấn phong nhưng chưa đạt.`;
  if(!me){try{newsAdd(p,"promo",res,true)}catch(x){}return""}
  Q.push({t:"Xét tấn phong bên giường bệnh",who:pMe(),h:`<p>Ngươi lâm bệnh nguy kịch. Hoàng thượng thương xót, cho Nội vụ phủ xét tấn phong ${rk} ngay bên giường bệnh theo công đức xưa nay.</p>${kitRows([
-  ["Bệnh",typeof illName==="function"?illName(S):"nguy kịch"],["Điều kiện",`đủ cả ${pbFullRows(S).length} điều`],["Nội vụ phủ xét",`${r.total} phần, mức đỗ ${r.P.bar}`],["Kết quả",res]])}`,btn:dec?"Tạ ân":"Đã rõ"});
+  ["Bệnh",typeof illName==="function"?illName(S):"nguy kịch"],["Điều kiện",`đủ cả ${pbFullRows(S).length} điều`],["Nội vụ phủ xét",`${r.total} phần, mức đỗ ${r.P.bar}`],["Kết quả",res]])}`,btn:"Tạ ân"});/* a word the kit keeps as the closing button (it turns «Đã rõ» into the ✕) */
  return dec?`<b class="g">${res}</b> `:res+" "}
 
 /* ---------- (3) truy phong ---------- */

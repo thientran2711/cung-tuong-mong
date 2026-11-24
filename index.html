@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"e69225ae+","t":"2026-11-24T08:50Z","c":"promo-build-2: Hoàng hậu đề cử act when she is the Hoàng hậu (equal options), deathbed special exam + truy phong (full conditions), quốc ta…","b":"d98054b810f1","h":[{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"}]};
+window.CTM_BI={"s":"e1d4cdb2+","t":"2026-11-24T08:58Z","c":"promo-build-2: card khắc from BAL (meK); shots of the nominate sheet + deathbed panel; index.html/sw.js rebuilt","b":"b0bf156745c9","h":[{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -56874,9 +56874,9 @@ function pbHhMeList(){try{if(!S||!pbLive(S)||rkOf(S)<7||!exOn()||pbGuest()||(typ
  return liveRivals(false).filter(v=>!v.coop&&pbCan(v)&&!v.confined&&!pbOpen(v)&&exS(v).to<=SP.hh.maxTo&&(pbS(v).hh[qk]||0)<SP.hh.life&&pbHhOf(v)>=ch&&pbRowsOk(v)&&!(pbRoadDone(v)&&pbKyAt(A)))
   .sort((a,b)=>pbHhOf(b)-pbHhOf(a)).slice(0,SP.meMax)}catch(e){console.error("pbHhMeList",e);return[]}}
 function pbHhMeOpts(L){const C=BAL.promoR.sp.cost;return L.map(v=>{const n=L.length-1;
- return{n:`Đề cử ${pbWho(v)} lên ${exRk(exS(v).to)}`,x:`được: ${pbWho(v)} nợ ngươi một ân, thiện cảm với ngươi +${C.meAff}${n?` · mất: ${n} người không được đề cử oán ngươi +${C.mePassOan}`:""}`,go:()=>pbHhMeDo(v,L.filter(o=>o!==v))}}).concat([{n:"Thôi"}])}
+ return{n:`Đề cử ${pbWho(v)} lên ${exRk(exS(v).to)}`,x:`được: ${pbWho(v)} nợ ngươi một ân, nàng quý ngươi hơn (+${C.meAff})${n?` · mất: ${n} người không được đề cử oán ngươi +${C.mePassOan}`:""}`,go:()=>pbHhMeDo(v,L.filter(o=>o!==v))}}).concat([{n:"Thôi"}])}
 function pbHhMeOpen(){const L=pbHhMeList();if(!L.length){log("Lúc này chưa có phi tần nào đủ điều kiện để ngươi đề cử.");return}const ch=pbHhCut(S);
- const rows=L.map(v=>[pbWho(v),`lên ${exRk(exS(v).to)} · ${pbKnown(v)?`ngươi quý nàng ${pbHhOf(v)}, cần ${ch}`:`ngươi quý nàng đủ mức`}`]);
+ const rows=L.map(v=>[pbWho(v),`lên ${exRk(exS(v).to)} · ${pbKnown(v)?`được lòng Hoàng hậu ${pbHhOf(v)}, cần ${ch}`:`được lòng Hoàng hậu đủ mức`}`]);
  Q.push({t:"Hoàng hậu đề cử",who:pMe(),h:`<p>Ngươi chủ lục cung, được đề cử một phi tần thi riêng tấn phong ngoài kỳ. Mỗi người chỉ được ngươi đề cử một lần trong đời. Người được chọn nợ ngươi một ân; người có tên mà không được chọn sẽ oán ngươi.</p>${kitRows(rows)}`,opts:pbHhMeOpts(L)});try{showModal()}catch(e){}}
 function pbHhMeDo(v,others){const SP=BAL.promoR.sp,C=SP.cost;if(!pbHhMeList().includes(v)){log(`${pbWho(v)} không còn đủ điều kiện để đề cử.`);return}
  const s=pbS(v),qk="hh:"+key(S);s.hh[qk]=(s.hh[qk]||0)+1;pbGrant(v,"hh",{cut:pbHhCut(S),q:S,me:1});
@@ -56897,12 +56897,12 @@ function pbDeath(p){const SP=BAL.promoR.sp,D=SP.death;if(!D||typeof illOf!=="fun
  if(r.pass&&(typeof seatFree!=="function"||seatFree(to))){if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;p.ex={to:rkOf(p)+1};dec=true;window.__pbN.deathUp=(window.__pbN.deathUp||0)+1;
   const q=typeof queenP==="function"?queenP():null;if(q&&q!==p&&!q.out)oanAdd(q,p,SP.cost.deathHhOan);
   if(me){try{exDrop()}catch(x){}try{feedback("promote",{t:"Tấn phong"})}catch(x){}}
-  res=me?`Thánh chỉ tấn phong ${S.name} làm ${RANKS[S.rank].n}. Hoàng hậu oán ngươi được nâng vượt mặt bà.`:`${p.name} được tấn phong ${RANKS[p.rank].n} bên giường bệnh.`}
+  res=me?`Thánh chỉ tấn phong ${S.name} làm ${RANKS[S.rank].n}. Hoàng hậu thấy ngươi được nâng vượt mặt bà, oán ngươi.`:`${p.name} được tấn phong ${RANKS[p.rank].n} bên giường bệnh.`}
  else if(r.pass)res=me?`Đỗ, nhưng ghế ${rk} đã đủ người: không có thánh chỉ.`:`${p.name} đỗ xét bên giường bệnh, nhưng ghế ${rk} đã đủ người.`;
  else res=me?"Chưa đạt: lần xét này đã qua, đời chỉ có một lần.":`${p.name} lâm bệnh nguy kịch, Nội vụ phủ xét tấn phong nhưng chưa đạt.`;
  if(!me){try{newsAdd(p,"promo",res,true)}catch(x){}return""}
  Q.push({t:"Xét tấn phong bên giường bệnh",who:pMe(),h:`<p>Ngươi lâm bệnh nguy kịch. Hoàng thượng thương xót, cho Nội vụ phủ xét tấn phong ${rk} ngay bên giường bệnh theo công đức xưa nay.</p>${kitRows([
-  ["Bệnh",typeof illName==="function"?illName(S):"nguy kịch"],["Điều kiện",`đủ cả ${pbFullRows(S).length} điều`],["Nội vụ phủ xét",`${r.total} phần, mức đỗ ${r.P.bar}`],["Kết quả",res]])}`,btn:dec?"Tạ ân":"Đã rõ"});
+  ["Bệnh",typeof illName==="function"?illName(S):"nguy kịch"],["Điều kiện",`đủ cả ${pbFullRows(S).length} điều`],["Nội vụ phủ xét",`${r.total} phần, mức đỗ ${r.P.bar}`],["Kết quả",res]])}`,btn:"Tạ ân"});/* a word the kit keeps as the closing button (it turns «Đã rõ» into the ✕) */
  return dec?`<b class="g">${res}</b> `:res+" "}
 
 /* ---------- (3) truy phong ---------- */
@@ -98103,7 +98103,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d98054b810f1";window.CTM_BUILD=BUILD;
+const BUILD="b0bf156745c9";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
