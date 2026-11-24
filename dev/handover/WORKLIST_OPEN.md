@@ -25,3 +25,4 @@ Written by MAIN CHÍNH 116, 24/11 ~10:10Z after sếp's new rulings (OD 24/11 ~0
 | 21 | Parking lot rows still not built | E | audit + build |
 | 22 | THIN P4/P6/P8 roads content landing | B / LC9 | landing |
 | 23 | Screen-change veil: no half-painted screens (owner bug) | VEIL-1 + KK18 | building |
+| 24 | «Vòng người» figure ring + drama signals — DESIGN MOCK for sếp (no build until she picks) | RING-DESIGN | mock by her 08:00 ET |

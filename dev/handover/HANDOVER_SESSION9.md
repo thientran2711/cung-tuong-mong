@@ -2925,3 +2925,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - FROM LC10 (07:22Z): LANDED map-perf 056c2402 (Dư đồ settle ≤1.4 s Fold+iPad, quickcheck PASS, coop 142/142). LIVE = 056c2402. thin-p6-r2 running gates.
 - (07:25Z) sếp answered «1»: late figure hidden until decoded (OD row) → VEIL-1 told to build it into review/kit-screenveil (KIT §97 + §59.1 in place) and re-hand SSK to B reviewer.
 - (07:27Z) sếp changed to «2 đi»: late figure = §59.1 grey stand-in (OD row overwritten in place) → VEIL-1 + KK18 told.
+- (07:37Z) SELSCENE-6 rolled (4240dca5; SELX-WRITER DONE 4e77e12 dorm 43/kept 43) → opening SELSCENE-7. OWNER idea «Vòng người» (OD ~07:32Z/~07:35Z): mock first → opening RING-DESIGN (sonnet). Worklist +1 → 24.
