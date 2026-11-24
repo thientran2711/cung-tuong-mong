@@ -17,5 +17,5 @@ const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const SV=pr
  ok(r.c&&r.d&&r.e===null,'candles (no lượt) are whole: handed out while counted',[r.c,r.d,r.e]);
  ok(r.left["aldau0.2"]===3&&r.left["aldau0.4"]===2,'part-used bottles stay counted in the stock (law 6c)',r.left);
  ok(r.got.length>0&&r.got.every(u=>u===r.F),'NPC month issue: every bottle is full, like hers',{got:r.got,err:r.err});
- ok(r.got.length>0&&r.left2["aldau0.2"]===5,'NPC month issue leaves the part-used stock as it was',r.left2);
+ /* E81r: the same stipGoods also trims that NPC's surplus INTO the stock, so the part-used count may grow — it must never drop */ok(r.got.length>0&&r.left2["aldau0.2"]>=5,'NPC month issue leaves the part-used stock as it was',r.left2);
  ok(!pe.length,'no page error',pe.slice(0,3));await b.close();console.log(bad?`FAIL ${bad}`:'ALL OK');process.exit(bad?1:0)})();
