@@ -102,15 +102,17 @@ function recommend(c){const {L,BALX,pct,f1,mean,by,M,lifeMin,ended}=c;const rank
  /* (2) death by cause */
  {const dead=L.filter(r=>r.life.death),oldAge=get(B,'mort.oldAge');const early=dead.filter(r=>oldAge==null||r.life.age<oldAge);const e=P(early.length,L.length);
   const CK={'fate (lifespan)':['mort.life.dice.adult.mean','mort.dieAge'],illness:['mort.illAge','mort.sudden'],childbirth:['mort.birth.hardDie','mort.birth.hardX'],
-   accident:['mort.acc.me'],exhaustion:['mort.tired.per'],execution:['mort.fate.tuanP','accused'],'NPC / scheme':['frame','accused'],poison:['mort.acc.npc']};
+   accident:['mort.acc.me'],exhaustion:['mort.tired.per'],execution:['mort.fate.tuanP'],poison:['mort.acc.npc']};
   const t=TARGET.early;const off=e>t.hi?'TOO HIGH':e<t.lo?'TOO LOW':'in target';
   add('(2) early death',`death before old age (${oldAge}, BAL.mort.oldAge) ${f1(e)} % of lives (${early.length}/${L.length}) vs ${t.lo}–${t.hi} % → ${off}${low(L.length)}`,K('mort.oldAge'),show(oldAge),off==='in target'?'keep':'per cause below',off==='in target'?'—':`early death → ~${t.mid} %`);
   if(off!=='in target'){const kAll=t.mid/(e||1);by(early,r=>r._who||'other').sort((a,b)=>b[1].length-a[1].length).forEach(([w,G])=>{const keys=CK[w];const share=P(G.length,early.length);
     const k=clamp(kAll);if(!keys){add('(2) death cause',`${w}: ${G.length} early deaths (${f1(share)} % of them) — sites: ${[...new Set(G.map(r=>r._csrc).filter(Boolean))].join(', ')||'?'}`,'no BAL key mapped for this cause (law 4 gap?)','—','—','—');return}
-    keys.forEach(kp=>{const v=get(B,kp);const lifespan=/mean|dieAge|illAge/.test(kp);let pv;
+    keys.filter(kp=>get(B,kp)!==undefined).forEach(kp=>{const v=get(B,kp);const lifespan=/mean|dieAge|illAge/.test(kp);let pv;
      if(Array.isArray(v))pv=lifespan?JSON.stringify([Math.round(v[0]/k)].concat(v.slice(1))):JSON.stringify(v.map(x=>scaleV(x,k)));else pv=lifespan?(typeof v==='number'?String(Math.round(v/k)):'?'):String(scaleV(v,k));
      add('(2) death cause',`${w}: ${G.length} early deaths = ${f1(P(G.length,L.length))} % of lives (${f1(share)} % of early deaths) · mean age ${f1(mean(G.map(r=>r.life.age)))}`,K(kp),show(v),pv,
       `${w} deaths × ~${r2(k)} (${lifespan?'later death age':'odds scaled'})`)})})}
+  /* deaths whose text is not in the catalogue (harness gap, e.g. «giả mang thai … khi quân»): listed so no cause is lost */
+  {const nc=dead.filter(r=>/^\(not in catalogue\)/.test(r._cause||''));if(nc.length)add('(2) cause not catalogued',`${nc.length} death(s) with a text the code scan did not catch: ${[...new Set(nc.map(r=>r._cause.replace(/^\(not in catalogue\) /,'').slice(0,60)))].join(' / ')}`,'robot10-cat.js staticScan (harness, not BAL)','—','add the site to the catalogue (built at run time); counted under «'+[...new Set(nc.map(r=>r._who))].join('/')+'» meanwhile','by-cause rows complete')}
   /* one cause dominating the deaths (by cause, order #6 (2)): ≥ half of ≥ 3 deaths */
   {const T=by(dead,r=>r._who||'other').sort((a,b)=>b[1].length-a[1].length);if(T.length&&dead.length>=3){const [w,G]=T[0];const sh=P(G.length,dead.length);const keys=CK[w];
    if(sh>=50)(keys||[null]).slice(0,1).forEach(kp=>{const v=kp?get(B,kp):null;const lifespan=kp&&/mean|dieAge|illAge/.test(kp);
@@ -121,7 +123,8 @@ function recommend(c){const {L,BALX,pct,f1,mean,by,M,lifeMin,ended}=c;const rank
   if(dice&&fate.some(r=>r.life.age<dice.mean-dice.sd)){const n=fate.filter(r=>r.life.age<dice.mean-dice.sd).length;
    add('(2) lifespan floor',`${n} death(s) «Tuổi trời đã tận» before age ${dice.mean-dice.sd} (= mean − sd of her lifespan dice; youngest ${Math.min(...fate.map(r=>r.life.age))})`,K('mort.life.dice.adult.lo'),show(dice.lo),String(dice.mean-dice.sd),'no lifespan death before mean − sd; illness / schemes still kill young')}
   /* childbirth per birth */
-  const births=L.reduce((a,r)=>a+((M(r).sons||0)+(M(r).daus||0)),0),cb=dead.filter(r=>r._who==='childbirth').length,tb=TARGET.birth;
+  /* births = her pregnancies (M.sons/M.daus over-count: a kid without an id is re-counted after every save round-trip — harness bug, part-2 counter) */
+  const births=L.reduce((a,r)=>a+(M(r).preg||0),0),cb=dead.filter(r=>r._who==='childbirth').length,tb=TARGET.birth;
   if(births){const x=P(cb,births+cb);const o2=x>tb.hi?'TOO HIGH':x<tb.lo?'TOO LOW':'in target';const v=get(B,'mort.birth.hardDie');
    add('(2) childbirth',`death in childbirth ${f1(x)} % per birth (${cb} of ${births+cb}) vs ${tb.lo}–${tb.hi} % → ${o2}${low(births+cb)}`,K('mort.birth.hardDie'),show(v),o2==='in target'?'keep':String(scaleV(v,clamp(x>0?tb.mid/x:CLAMP[1]))),o2==='in target'?'—':`→ ~${tb.mid} % per birth`)}
   else add('(2) childbirth','no birth in this round: childbirth death per birth not measurable','BAL.mort.birth '+keyLoc('mort.birth'),'—','—','needs lives that reach pregnancy')}
@@ -137,6 +140,9 @@ function recommend(c){const {L,BALX,pct,f1,mean,by,M,lifeMin,ended}=c;const rank
    if(hh<TARGET.hh.lo&&BALX.ranks){const rk=BALX.ranks[bn.i],pv=BALX.ranks[bn.i-1];const k=clamp((bn.pass||1)/Math.max(bn.pass||1,60));const ns=Math.round(pv.s+(rk.s-pv.s)*Math.max(.5,k)),nd=Math.round(pv.d+(rk.d-pv.d)*Math.max(.5,k));
     add('(3) bottleneck',`HH ${f1(hh)} % < ${TARGET.hh.lo} %: the hardest step is ${rankN(bn.i-1)} → ${rankN(bn.i)} (only ${f1(bn.pass)} % of those at ${rankN(bn.i-1)} pass)${low(bn.nA)}`,
      `RANKS[${bn.i}] ${codeLoc(/const RANKS\s*=/)} (move to BAL first, law 4)`,`Sủng ${rk.s} · Danh ${rk.d}`,`Sủng ${ns} · Danh ${nd} (the step from ${rankN(bn.i-1)} cut to ×${r2(Math.max(.5,k))})`,'more lives pass the bottleneck step → HH reach up; re-run confirms')}}
+  /* pace model calibration (part-2 gap): the reading term's share of the minutes; until calibrated, judge speed by game years */
+  if(c.PACE&&c.P){const rd=L.map(r=>{const p=c.P(r),m=lifeMin(r);return p&&m?((p.chars||0)/c.PACE.READ_CPS/60)/m:null}).filter(x=>x!=null);const sh=mean(rd);
+   if(sh!=null)add('(3) pace model',`reading = ${f1(100*sh)} % of the modelled real minutes; PACE is NOT calibrated against human-paced play (part-2 gap)`,'robot10-agg.js PACE (READ_CPS '+c.PACE.READ_CPS+', CLICK_S '+c.PACE.CLICK_S+', CHOICE_S '+c.PACE.CHOICE_S+')','—','calibrate READ_CPS with one human-paced kiếp before any minutes-based tuning; until then use the game-year column','real-minute rows become trustworthy')}
   const km=mean(L.map(lifeMin)),kd=mean(L.filter(ended).map(lifeMin));
   add('(3) kiếp length',`mean kiếp ${f1(km)} real min (ended lives ${f1(kd)}) vs cap ${TARGET.kiepMin.hi} min (${TARGET.kiepMin.src})`,'pace: robot10-agg.js PACE + the rank steps above','—',(km||0)>TARGET.kiepMin.hi?'lower the slowest step (bottleneck row) or BAL.entry.cap start rank':'keep','—')}
  /* (4) endings / rare endings / kỳ ngộ / event variety */

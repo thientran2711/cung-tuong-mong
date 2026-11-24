@@ -153,7 +153,7 @@ md.push('## Per thân phận · nhánh · bot','',tbl(HEAD0,[...by(L,r=>r.job.or
  const tryF=f=>{try{return JSON.parse(fs.readFileSync(f,'utf8'))}catch(e){return null}};
  if(bals.length)BALX=tryF(bals[0][0]);if(!BALX&&fs.existsSync(path.join(out,'bal.json')))BALX=tryF(path.join(out,'bal.json'));
  if(!BALX)try{const s=require('child_process').execFileSync(process.execPath,[path.join(__dirname,'robot10-reco.js'),'bal',process.env.GAME||''],{maxBuffer:64e6,timeout:300000});BALX=JSON.parse(s.toString())}catch(e){console.error('bal: '+e.message.split('\n')[0])}
- md.push(...RECO.recommend({L,BALX,pct,f1,mean,by,M,lifeMin,ended,rankN,mins,tbl}))}
+ md.push(...RECO.recommend({L,BALX,pct,f1,mean,by,M,P,PACE,lifeMin,ended,rankN,mins,tbl}))}
 /* ---------- write ---------- */
 fs.mkdirSync(out,{recursive:true});const base=path.join(out,`rates-${stamp}`);fs.writeFileSync(base+'.md',md.join('\n'));
 const csvq=v=>{v=v==null?'':String(v);return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v};
