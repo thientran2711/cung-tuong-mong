@@ -73,3 +73,12 @@ Fold 755x1000 + iPad 1180x820, played save, before and after (scratch shots, not
 - Scratch tools used (not committed): saved-call dumper + node chain simulator + fake-clock equivalence check; can be added to dev/measure on request.
 
 ~100% xong / ~95% chơi được cho lỗi này (mở lại tức thì; mở lần đầu một buổi mới ~1–1,5 s).
+
+## REVIEW r1 (SMALL tier, reviewer session for MAIN 118)
+Verdict: **PASS** — LAND READY map-perf d6c2b4d41f8063fcf7a41a0ed917262ad5beef0b FOR LC9.
+PRIORITY #1 CHECK: OD Dư đồ slow-open | main j38.js | review/map-perf d6c2b4d4 | claims MAP-PERF.
+1. Merge-check vs origin/main 35647d5e: j38.js and every source file merge clean; only generated index.html / sw.js / assets.json conflict (rebuilt, as for any land). assemble.py + build_site.sh OK on the merge.
+2. Re-measure, played save robot 004, Dư đồ tap → 2nd frame, CPU ×1 (this box), LIVE → branch: Fold 755x1000 open 14 044 / 14 820 ms → **1 291 / 1 133**, re-open 12 092 / 6 307 → **247 / 223**; iPad 1180x820 open 11 565 / 11 421 → **1 520 / 1 578**, re-open 249 / 254 → **225 / 212**. Claimed numbers confirmed. (CPU ×4 not re-run.) 0 page errors.
+3. Looked at (side-by-side LIVE vs branch, Fold + iPad, modal closed, after 20 s): same places, same labels, same picture; tag positions differ slightly (solver) with the same readable result on both (played save = last-resort stage on both). map-label-overlap.js Fold + iPad, ranks 0,3,5, day/night, zoom 0–4 + courtyards: **80 cases, 0 overlaps, max settle 1.6 s, 0 unsettled**. map-frame-kit PASS both; map-place-mask clean; map-labels-2 (tap A ca sở → place card, travel cost shown) 0 errors, 27 spots. map-tap-go (3 FAIL) and map-portrait (Fold/phone FAIL, iPad PASS) fail **identically on LIVE** → pre-existing, not caused by this branch. Old save loads (quickcheck).
+4. dev/tools/quickcheck.sh on the merge: **QUICKCHECK PASS** (open 1.99 s, old save ok, render 300/299, tab 558/502, buổi 1637/1535 ms, core gates PASS).
+Nits (non-blocking): map-tap-go + map-portrait failures exist on LIVE — ticket for whoever owns them; first open of a new buổi stays ~1.1–1.6 s (known, in worker notes).
