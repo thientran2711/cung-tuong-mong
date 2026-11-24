@@ -7,7 +7,7 @@
      roommates stay «Người lạ» until greeted); ~05:10Z ROYALS' REVEAL (Hoàng thượng first: bust big, then full body shrinking to his place, then Thái hậu, Hoàng hậu,
      the background blurred) + ~04:25Z s14 / ~04:45Z / ~04:50Z TỔNG QUẢN (he is big, the scene blurred; the roll-call types out and each girl lights + her name
      appears under her feet WHEN the typing reaches her line, never all at once); ~04:45Z SPOTLIGHT (two other girls quarrel: the speaker lit, the other dimmed,
-     both full body left / right, lines swap under whoever speaks); ~09:30Z RESULT per girl (the called girl zooms up + lights from her row; hương nang → she steps
+     both full body left / right, the line box sits UNDER whoever speaks, OD ~04:10Z s9); ~09:30Z RESULT per girl (the called girl zooms up + lights from her row; hương nang → she steps
      aside; ban hoa → she backs out of the screen; next; HER turn on her own background, big) + ~04:40Z (kept / ban hoa have their OWN background).
    Off for bots / tests (window.__bot, window.__selxNoSc) and outside the 3 days. Calm / reduced motion = the kit shows lines at once (cues still fire). */
 /* ONE placeholder table (CREDIT HOLD 24/11: no art generation here; Foreman C paints the keys on the right, then only this table changes) */
@@ -41,11 +41,18 @@ function selxFigP(p){if(p==="emp")return{kind:"emp"};if(p==="th")return{kind:"th
 /* LAW 11 (whole group): a tú nữ of the selection is not in `rivals` yet, so the figure core (j39 figRoles) gave her no figure anywhere (scene, stage, podium);
    she takes the consort figure set like every other woman of her age (tier: none until the edict) */
 (function(){if(typeof figRoles!=="function")return;const r0=figRoles;figRoles=function(who){const r=r0.apply(this,arguments);return !r.length&&who&&who.tuNu?["consort"]:r};window.figRoles=figRoles})();
-async function selxFig(Sc,p,cx,o){o=o||{};const g=Sc.L.g,fh=o.fh||selxFh(g);const f=await Sc.fig(selxFigP(p),{cx,top:g.H-fh,fh,z:o.z||3});f.__p=p;if(o.hide)f.style.opacity=0;return f}
+/* LAW 11 (whole group): during the 3 days she is a TÚ NỮ, not rank 0 — the HUD rank chip (#me-r, as the maid / kc modes already do) and her rank word in the one face core rkOfFace (j59 name tags,
+   stage portrait pMe, podium) said «Quý nhân» (RANKS[0]) before any edict */
+(function(){const T=()=>{try{return selxDaysOn()}catch(e){return false}};
+ if(typeof rkOfFace==="function"){const f0=rkOfFace;rkOfFace=function(kind,o){const g=f0.apply(this,arguments);return o===S&&kind==="consort"&&T()?[g[0],"Tú nữ"]:g};window.rkOfFace=rkOfFace}
+ if(typeof renderHUD==="function"){const h0=renderHUD;renderHUD=function(){const r=h0.apply(this,arguments);try{if(T()){const m=document.getElementById("me-r");if(m&&m.textContent!=="Tú nữ")m.textContent="Tú nữ"}}catch(e){}return r};window.renderHUD=renderHUD}})();
+async function selxFig(Sc,p,cx,o){o=o||{};const g=Sc.L.g,fh=o.fh||selxFh(g);const f=await Sc.fig(selxFigP(p),{cx,top:g.H-fh,fh,z:o.z||3});f.__p=p;if(o.hide){/* the kit slide-in (fill both) would hold it visible */try{f.getAnimations().forEach(a=>a.cancel())}catch(e){}f.style.opacity=0}return f}
 /* the j59 name tag under the feet (kitNameTagBox: «Người lạ» / face known / name), kept on the layer */
 function selxTag(Sc,f,p,o){try{const w=document.createElement("div");w.innerHTML=kitNameTagBox(p,o||{});const t=w.firstElementChild;const r=f.getBoundingClientRect(),lr=Sc.L.getBoundingClientRect();
  t.style.cssText+=`;position:absolute;z-index:9;left:${Math.round(r.left-lr.left+r.width/2)}px;top:${Math.round(Math.min(r.bottom,lr.bottom)-lr.top-38)}px;transform:translateX(-50%)`;Sc.L.appendChild(t);return t}catch(e){return null}}
-function selxLabel(Sc,x,y,txt){const t=document.createElement("div");t.className="kscn-tag";t.textContent=txt;t.style.cssText=`position:absolute;z-index:9;left:${Math.round(x)}px;top:${Math.round(y)}px;transform:translateX(-50%)`;Sc.L.appendChild(t);return t}
+function selxLabel(Sc,x,y,txt){const t=document.createElement("div");t.className="kscn-tag";t.dataset.selxSo="1";t.textContent=txt;t.style.cssText=`position:absolute;z-index:9;left:${Math.round(x)}px;top:${Math.round(y)}px;transform:translateX(-50%)`;Sc.L.appendChild(t);return t}
+/* a focus shot shows ONE figure (kit §95: the others hidden) → the sở labels hide with them (iPad: a top group's label sat over the next focused girl) */
+function selxLblSync(L){const on=L.classList.contains("kscn-focus");L.querySelectorAll("[data-selx-so]").forEach(t=>{t.style.visibility=on?"hidden":""})}
 /* move a figure to a new box (left/top/height) — the size lives in its style, so the kit focus / light (transform + classes) never undoes it */
 function selxMove(f,x,y,h,ms){const r={l:parseFloat(f.style.left)||0,t:parseFloat(f.style.top)||0,h:parseFloat(f.style.height)||0,w:parseFloat(f.style.width)||0};const w=r.w*h/Math.max(1,r.h);
  f.style.left=Math.round(x-w/2)+"px";f.style.top=Math.round(y)+"px";f.style.height=Math.round(h)+"px";f.style.width=Math.round(w)+"px";
@@ -59,35 +66,35 @@ async function selxScRooms(){const Z=S.selx2;const rooms=(Z.rooms||[]).slice();i
   for(let ri=0;ri<rooms.length&&!me.dead;ri++){const R=rooms[ri];const ppl=R.ids.map(selxBy).filter(Boolean);const base=L.figs.length,n=ppl.length;
    for(let i=0;i<n;i++)await selxFig(Sc,ppl[i],g.w*(i+.5)/n,{hide:1});
    const lines=ppl.map((p,i)=>({fig:base+i,who:"Giáo tập ma ma",focus:true,text:`${selxNmS(p)}.`}));lines.push({fig:null,who:"Giáo tập ma ma",text:`${selxCap(selxNumW(n))} người này ở ${selxSo(R.so)}.`});
-   await selxPlay(Sc,me,{box:selxBoxB(g),lines,onLine:i=>{const f=L.figs[base+i];if(f)f.style.opacity=1}});
-   /* the group stands aside as one group (top-left, top-right, then the front), its sở name above it */
-   const [sx,row]=spots[ri%spots.length];const h=row?fh*.62:fh*side,top=row?g.H-h:Math.round(g.H*.04);const gw=g.w*(row?.6:.4);
+   await selxPlay(Sc,me,{box:selxBoxB(g),lines,onLine:i=>{const f=L.figs[base+i];if(f)f.style.opacity="";selxLblSync(L)}});selxLblSync(L);
+   /* the group stands aside as one group, its sở name above the heads: HER sở (called first) = the front group (her room view: the roommates' tags stay clear of the box), the others top-left / top-right */
+   const [sx,row]=spots[ri===0?2:ri===1?0:1];const bb=selxBoxB(g).y-8;const h=row?Math.min(fh*.55,bb*.62):fh*side,top=row?bb-h:Math.round(g.H*.04)+30;const gw=g.w*(row?.5:.4);
    for(let i=0;i<n;i++){const f=L.figs[base+i];selxMove(f,g.w*sx-gw/2+gw*(i+.5)/n,top,h)}
-   await selxWait(me,BAL.selx.sc.ms);selxLabel(Sc,g.w*sx,row?Math.max(4,top-30):top+h+4,selxSo(R.so));
+   await selxWait(me,BAL.selx.sc.ms);selxLabel(Sc,g.w*sx,Math.max(4,top-30),selxSo(R.so));
    for(let i=0;i<n;i++){const f=L.figs[base+i];if(ppl[i]!==S&&!selxMet(ppl[i]))f.classList.add("kscn-dim")}}
   /* her room: four people, the three roommates still strangers (grey «Người lạ» until she greets them) */
   const mine=rooms[0];const ix=L.figs.map((f,i)=>i).filter(i=>L.figs[i].__p&&mine.ids.includes(L.figs[i].__p===S?"me":L.figs[i].__p.id));
-  await selxPlay(Sc,me,{box:selxBoxB(g),lines:[{fig:null,who:"Giáo tập ma ma",text:"Ai về sở nấy. Cất đồ rồi ra Tiền sảnh."}],onLine:()=>{ix.forEach(i=>{const f=L.figs[i];const p=f.__p;if(p!==S)selxTag(Sc,f,p)})}})})}
+  await selxPlay(Sc,me,{box:selxBoxB(g),lines:[{fig:null,who:"Giáo tập ma ma",text:"Ai về sở nấy. Cất đồ rồi ra Tiền sảnh."}],onLine:()=>{ix.forEach(i=>{const f=L.figs[i];const p=f.__p;if(p!==S&&!selxMet(p))selxTag(Sc,f,p,{stage:0})})}})})}
 /* ================= DAY 2 · THE HALL: royals' reveal + Tổng quản roll-call (OD ~05:10Z, ~04:25Z s14, ~04:50Z) ================= */
 function selxRound(){const Z=S.selx2;if(!Z.round){const L=selxAll();Z.round=L.slice(0,Math.max(0,BAL.selx.yard.perRound-1)).map(v=>v.id)}return Z.round.map(selxBy).filter(Boolean)}
 async function selxScHall(){const RY=selxRoyals();await selxScene("hall",async(Sc,me)=>{const L=Sc.L,g=L.g;const order=["E","T","H"].map(k=>RY.find(x=>x[0]===k)).filter(Boolean);
   /* shot A — her eyes go to the throne first: each royal bust-big (focus), then back to the place, smaller, the background blurred */
   Sc.show();const cx={E:.5,T:.2,H:.8};for(const [k,nm,tok] of order)await selxFig(Sc,k==="E"?"emp":k==="T"?"th":tok,g.w*cx[k],{hide:1,z:k==="E"?3:2});
   const think={E:"Người ngồi giữa, áo vàng thêu rồng… hẳn là Hoàng thượng.",T:"Bên trái, một vị phu nhân tóc đã điểm sương, ánh mắt nghiêm: Thái hậu.",H:"Bên phải, một vị nương nương đoan trang, mũ phượng: hẳn là Hoàng hậu."};
-  await selxPlay(Sc,me,{box:selxBoxB(g),lines:order.map(([k],i)=>({fig:i,who:"Ngươi nghĩ",focus:true,text:think[k]})),onLine:i=>{const f=L.figs[i];if(f)f.style.opacity=1}});
+  await selxPlay(Sc,me,{box:selxBoxB(g),lines:order.map(([k],i)=>({fig:i,who:"Ngươi nghĩ",focus:true,text:think[k]})),onLine:i=>{const f=L.figs[i];if(f)f.style.opacity=""}});
   L.figs.forEach(f=>f.style.display="none");
   /* shot B — Tổng quản big (the scene blurred), then the roll-call: each girl of her round lights + her name under her feet when the typing reaches her */
   const tq=L.figs.length;await selxFig(Sc,"tq",g.w*.5);const ppl=[S,...selxRound()];const base=L.figs.length;
   for(let i=0;i<ppl.length;i++)await selxFig(Sc,ppl[i],g.w*(i+.5)/ppl.length,{hide:1});
   const lines=[{fig:tq,who:"Tổng quản",focus:true,text:"Tú nữ lượt này vào điện, nghe xướng danh!"}].concat(ppl.map((p,i)=>({fig:base+i,who:"Tổng quản",text:`${selxNmS(p)}${p===S?"":" — "+(p.r0?"con nhà quan":"con nhà lành")}.`})));
-  await selxPlay(Sc,me,{box:selxBoxT(g),lines,onLine:i=>{if(i===1)L.figs[tq].style.display="none";if(i>=1){const f=L.figs[base+i-1];if(f){f.style.opacity=1;selxTag(Sc,f,ppl[i-1],{stage:2})}}}})})}
+  await selxPlay(Sc,me,{box:selxBoxT(g),lines,onLine:i=>{if(i===1)L.figs[tq].style.display="none";if(i>=1){const f=L.figs[base+i-1];if(f){f.style.opacity="";selxTag(Sc,f,ppl[i-1],{stage:2})}}}})})}
 /* ================= DRAMA SPOTLIGHT: two other girls, no choice yet (OD ~04:10Z s9, ~04:45Z) ================= */
 function selxSplit(t){const out=[];String(t||"").replace(/«([^»]*)»|([^«»]+)/g,(m,q,n)=>{if(q)out.push({q:q.trim()});else if(n.trim())out.push({n:n.trim()});return m});return out}
 async function selxScDrama(){const Z=S.selx2,C=SELX_CUR;if(!C||!C.c)return;const {c,her,type}=C;const A=c.bully&&c.bully!==S?c.bully:null,B=c.victim&&c.victim!==S?c.victim:null;if(!A)return;
  const bg=type==="yard"?"yard":type==="kept"?(Z.home||"sanh"):(Z.at===BAL.selx.lodge.sanh[0]?"sanh":Z.at||"sanh");
  await selxScene(bg,async(Sc,me)=>{const g=Sc.L.g;await selxFig(Sc,A,g.w*.27);if(B)await selxFig(Sc,B,g.w*.73);Sc.show();let turn=0;
   const lines=selxSplit(C.intro).map(x=>{if(!x.q)return{fig:null,who:"",text:x.n};const fig=B?(turn++%2):0;return{fig,who:selxCap(selxNm(fig===0?A:B)),text:`«${x.q}»`}});
-  await selxPlay(Sc,me,{box:ln=>ln.fig===1?{x:Math.round(g.w*.04),y:Math.max(8,g.H-176),w:Math.round(g.w*.6)}:ln.fig===0?{x:Math.round(g.w*.36),y:Math.max(8,g.H-176),w:Math.round(g.w*.6)}:selxBoxB(g),lines})})}
+  await selxPlay(Sc,me,{box:ln=>ln.fig===0?{x:Math.round(g.w*.04),y:Math.max(8,g.H-176),w:Math.round(g.w*.6)}:ln.fig===1?{x:Math.round(g.w*.36),y:Math.max(8,g.H-176),w:Math.round(g.w*.6)}:selxBoxB(g),lines})})}
 /* ================= DAY 2 · RESULT per girl (OD ~09:30Z / ~09:00Z / ~04:40Z) ================= */
 async function selxScResult(L){SELX_RQ=SELX_RQ||[];try{await selxScResult0(L)}finally{selxModal(false);try{showModal();render()}catch(e){}selxRqRun()}}
 async function selxScResult0(L){const mine=L.find(x=>x.v===S);const others=L.filter(x=>x.v!==S);const per=Math.max(1,BAL.selx.yard.perRound);

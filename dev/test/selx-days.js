@@ -20,12 +20,12 @@ const ROOT=path.resolve(__dirname,'..');const PAGE=process.argv[2]||'index.html'
   const OR=ORIGINS.map(o=>o.k).filter(k=>k!=="cnv"&&k!=="cn"&&!selxHoaThan(k));
   for(const og of OR)for(const mode of ["keep","ban"]){if(!life(og))continue;close();const Z=S.selx2;const o={og,mode,days:[],titles:[],kmin:99,kstart:[],digits:[],seen:[],met0:0,met:0,lessonAll:false,err:""};
    if(!Z||!Z.days){o.err="no days";out.push(o);continue}const r0=S.origin.r||0;const relBefore=JSON.stringify(Z.girls.map(v=>v.rel||0));let lastDay=0,lastKh=null;
-   if(mode==="ban"){S.sac=0;S.duc=0;S.tai=0}
+   if(mode==="ban"){S.sac=0;S.duc=0;S.tai=0}else{S.sac=S.duc=S.tai=100}/* keep: a sure top-4 (since the first impression + the 12-girl contest a plain bot could fall to 5th) */
    for(let n=0;n<400&&Q.length&&!S.dead;n++){const m=Q[0];if(Z.days&&Z.days!==lastDay){lastDay=Z.days;o.days.push(Z.days);o.kstart.push(Z.kh);o.titles.push(kitDayName(Z.days))}
     if(Z.kh!=null)o.kmin=Math.min(o.kmin,Z.kh);if(m.pid==="selxD"||m.t==="Tin sắc phong"){const t=plain(m.h).replace(/còn [^·]* khắc/,'');if(/\d/.test(t))o.digits.push(t.slice(0,120))}
     if(m.pid==="kc2Sel"){Q.shift();S.selx.done=1;S.selx.art="";selxSelDo(mode==="ban"?0:10);close();continue}
     if(m.pid==="selxD"&&m.opts){let i=0;const nm=m.opts.map(x=>x.n);
-     if(mode==="ban"&&(m.t==="Thái hậu"||m.t==="Hoàng hậu")){const tok=m.t==="Thái hậu"?"th":(liveRivals(false).find(v=>v.queen)||"th");const e=SELX_TESTS.find(x=>x.id===Z.tests[m.t==="Thái hậu"?"doidap":"hanhxu"].id);i=e.options.findIndex(x=>selxReactR(x,tok)!=="+");if(i<0)i=0}
+     if(m.t==="Thái hậu"||m.t==="Hoàng hậu"){const tok=m.t==="Thái hậu"?"th":(liveRivals(false).find(v=>v.queen)||"th");const e=SELX_TESTS.find(x=>x.id===Z.tests[m.t==="Thái hậu"?"doidap":"hanhxu"].id);i=e.options.findIndex(x=>mode==="ban"?selxReactR(x,tok)!=="+":selxReactR(x,tok)==="+");if(i<0)i=0}
      else{const g=nm.findIndex(s=>/^Làm quen/.test(s));if(g>=0&&Z.days!==2)i=g;else{const c=nm.findIndex(s=>/chờ tới tối|Theo|Cất đồ|Quỳ|Ngủ|Về|Nghe/.test(s));i=c>=0?c:0}}
      if(nm.some(s=>/^Tập thật kỹ/.test(s))){const k0=Z.kh;chooseM(0);o.lessonK=k0-Z.kh;o.lessonAll=(Z.girls||[]).every(v=>v.__ma!=null);close();continue}
      chooseM(i);close();continue}
