@@ -12,10 +12,14 @@
                                                                                                           (coop-thin-g-f1 c40d175b; OPEN A of coop-host-lag-r2)
      5. the steal mini-game window kg82 (jsmg, night bundle): «Thôi, không chơi» #kg82skip / the result frame's kit ✕ — was pasted in coop-e2e,
         cn-force, coop-night only; the other bots sat on its intro for ever (x.st "mg": pool-face / room-faces / emo-seat / guest-names r3)
+     0. (first) a SIDE-LINE DIALOGUE SCENE (jdlgs.js, KIT §95 kitDialogue) plays before a side-line card and hides it until read: a player taps
+        the scene (one tap finishes the typing line, the next moves on; after the last line the card shows). While its figures load
+        (DLGS.playing, no DLGS.cur yet) the bot waits. Count: window.__dlgsTapN.                       (review/sideline-dlg 24/11: coop-e2e 129/143 before)
    tap(o)  → 'x' when it tapped something, '' otherwise (page closed / navigating = '').
    first(o, fn [, arg]) → 'x' after a tap, else the bot's own step o.p.evaluate(fn, arg).
    Count: window.__kfocN = taps of 3 + 4 (coop-room-faces prints it). */
 const TAP=()=>{const vis=x=>!!x&&x.offsetParent!==null&&!x.disabled;
+ if(typeof DLGS!=='undefined'&&DLGS&&DLGS.playing){window.__dlgsTapN=(window.__dlgsTapN||0)+1;try{if(DLGS.cur)DLGS.cur.skip()}catch(e){}return'x'}
  const rs=document.querySelector('#kroul .krskip');if(rs&&rs.offsetParent!==null){rs.click();return'x'}
  if(!window.__noclose){const kc=[...document.querySelectorAll('.kmov [data-km-close],.kmov .krevok')].find(x=>vis(x)&&x.getClientRects().length);if(kc){kc.click();return'x'}}
  const kf=[...document.querySelectorAll('.kfoc-next')].find(x=>x.offsetParent!==null);if(kf){window.__kfocN=(window.__kfocN||0)+1;kf.click();return'x'}
