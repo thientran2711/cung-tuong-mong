@@ -2829,3 +2829,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (04:46Z) OD 06:05Z: every leave-the-palace choice = ending (epilogue by partner's nết: age/cause/children); 40-road audit → E ORDER (by 116 06:07Z). MAIN 117 owes sếp the answer «hiện có những lựa chọn này chưa?» when E's audit table lands. SELSCENE-3 started (START_CTX 3 %, depth 2).
 - (04:47Z) OD 06:10Z: ALL 107 KP23 redraws back to old faceless style (keep-picks void); C order fixed by 116 06:11Z; MAIN 117 C line points to it.
 - (04:48Z) OD 06:15Z: selection = real contest (12 tú nữ, same formula, visible ranking via contest kit, top 4 kept, rest ban hoa incl. her) → SELSCENE-3 + whole-checklist law 1 scan table.
+- (04:49Z) OD 06:20Z: score = ONLY the 3 tests (HT/TH/HH); yard/lodging events → relations only → SELSCENE-3 (overwrites 05:50Z «events move it»).
