@@ -1,82 +1,93 @@
 # ROBOT-10 CO-OP run coop-20261124-1356-p4-4 (UTC)
 
-Game: dev/index.html of this checkout (assemble.py) · Worker https://ctm-coop.victoria-tntt.workers.dev · 1 pairs (1 planned) × 10 kiếp per seat · X (Fold 755x1000) hosts, Y (iPad 1180x820) joins · 1 parallel · wall 119.8 min
-Runner: node dev/measure/robot10-coop.js 4 4 10 /home/user/wt/u3b-out · harness 6576e086 (RESUMED: «since this process started» counts only hits of this harness) (SEED=1) · repro: a save from saves/ into localStorage "hclh-save-v2-1", «Tiếp tục kiếp này» (Ô 1) for the seat's own state; co-op bugs reproduce with the same pair + SEED
+Game: dev/index.html of this checkout (assemble.py) · Worker https://ctm-coop.victoria-tntt.workers.dev · 1 pairs (1 planned) × 10 kiếp per seat · X (Fold 755x1000) hosts, Y (iPad 1180x820) joins · 1 parallel · wall 58.4 min
+Runner: node dev/measure/robot10-coop.js 4 4 10 /home/user/wt/u3b-out · harness d4b4408d (RESUMED: «since this process started» counts only hits of this harness) (SEED=1) · repro: a save from saves/ into localStorage "hclh-save-v2-1", «Tiếp tục kiếp này» (Ô 1) for the seat's own state; co-op bugs reproduce with the same pair + SEED
 
-## Bugs (14 distinct; one row per bug, pairs = how many pairs hit it)
+## Bugs (16 distinct; one row per bug, pairs = how many pairs hit it)
 
 1. **stuck** — co-op room stuck: no room week step in 240 s
-   - pairs 1/1 (coop-p04-S1) · hits 5 (0 since this process started, harness 6576e086)
+   - pairs 1/1 (coop-p04-S1) · hits 5 (0 since this process started, harness d4b4408d)
    - first: host {"buoi":3,"week":10,"bend":false,"pendBuoi":null,"pend":false,"sent":9,"Q":0,"Qt":[],"mh":true,"mg":false,"dead":false,"next":true,"title":false,"st":"open","peer":true} || guest {"buoi":3,"week":10,"bend":false,"pendBuoi":null,"pend":false,"sent":9,"Q":0,"Qt":[],"mh":true,"mg":false,"dead":false,"next":true,"title":false,"st":"open","peer":true}
    - last: host {"buoi":3,"week":14,"bend":false,"pendBuoi":null,"pend":false,"sent":13,"Q":0,"Qt":[],"mh":true,"mg":false,"dead":false,"next":true,"title":false,"st":"open","peer":true} || guest {"buoi":3,"week":14,"bend":false,"pendBuoi":null,"pend":false,"sent":13,"Q":0,"Qt":[],"mh":true,"mg":false,"dead":false,"next":true,"title":false,"st":"open","peer":true}
    - screenshots: shots/coop-p04-S1-r1-host-stuck.png, shots/coop-p04-S1-r1-guest-stuck.png (not in git)
 
 2. **stuck** — co-op room stuck: no room week step in 600 s
-   - pairs 1/1 (coop-p04-S1) · hits 3 (0 since this process started, harness 6576e086)
+   - pairs 1/1 (coop-p04-S1) · hits 3 (0 since this process started, harness d4b4408d)
    - first: host {"buoi":3,"week":20,"bend":false,"pendBuoi":null,"pend":false,"sent":19,"Q":0,"Qt":[],"mh":true,"mg":false,"dead":false,"next":true,"title":false,"st":"open","peer":true} || guest {"buoi":3,"week":20,"bend":false,"pendBuoi":null,"pend":false,"sent":19,"Q":0,"Qt":[],"mh":true,"mg":false,"dead":false,"next":true,"title":false,"st":"open","peer":true}
    - last: host {"buoi":3,"week":9,"bend":false,"pendBuoi":null,"pend":false,"sent":8,"Q":0,"Qt":[],"mh":true,"mg":false,"dead":false,"next":true,"title":false,"st":"open","peer":true} || guest {"buoi":3,"week":9,"bend":false,"pendBuoi":null,"pend":false,"sent":8,"Q":0,"Qt":[],"mh":true,"mg":false,"dead":false,"next":true,"title":false,"st":"open","peer":true}
    - screenshots: shots/coop-p04-S1-r8-host-stuck.png, shots/coop-p04-S1-r8-guest-stuck.png (not in git)
 
 3. **coop-world** — world differs between the two screens: consorts differ (id/name/rank/alive/out/kids)
-   - pairs 1/1 (coop-p04-S1) · hits 2 (0 since this process started, harness 6576e086)
+   - pairs 1/1 (coop-p04-S1) · hits 2 (0 since this process started, harness d4b4408d)
    - first: week 27 · host-only [] guest-only [1001:Tiêu Hàm Yên:0:1:0:] · origins td/dtq
    - last: week 29 · host-only [3:Cố Như Ý:3:1:0:] guest-only [3:Cố Như Ý:2:1:0:] · origins td/dtq
 
 4. **save** — save→load→save changes the state (host)
-   - pairs 1/1 (coop-p04-S1) · hits 137 (9 since this process started, harness 6576e086)
+   - pairs 1/1 (coop-p04-S1) · hits 137 (0 since this process started, harness d4b4408d)
    - first: save.R.0.rl.2: 14 → 9
    - last: save.S.logs.0 (text differs at char 39): «…ss="ld">T1/3 trung tuần</span><b>Tết Nguyên tiêu · Lễ</b>: Xin đứng hầ» → «…ss="ld">T1/3 trung tuần</span>Thường tại Phú Sát Lục Hoán Bích dời san»
 
-5. **number** — stat out of range: bac
-   - pairs 1/1 (coop-p04-S1) · hits 31 (2 since this process started, harness 6576e086)
-   - first: bac=-13 · ipad guest week 7
-   - last: bac=-4 · ipad guest week 19
+5. **save** — save→load→save changes R[].rl[] (host)
+   - pairs 1/1 (coop-p04-S1) · hits 23 (23 since this process started, harness d4b4408d)
+   - first: save.R.0.rl.3: 7 → 8
+   - last: save.R.0.rl.5: 12 → 9
+   - repro save: saves/coop-20261124-1356-p4-4-106byi2.json
 
-6. **number** — stat out of range: sung
-   - pairs 1/1 (coop-p04-S1) · hits 18 (0 since this process started, harness 6576e086)
+6. **save** — save→load→save changes S.logs[] (guest)
+   - pairs 1/1 (coop-p04-S1) · hits 1 (1 since this process started, harness d4b4408d)
+   - first: save.S.logs.0 (text differs at char 39): «…ss="ld">T8/1 trung tuần</span>Đọc sách giải khuây.» → «…ss="ld">T8/1 trung tuần</span>Quý nhân Giang Nhu Gia dời sang Minh Hòa»
+   - repro save: saves/coop-20261124-1356-p4-4-1fxd3ju.json
+
+7. **number** — stat out of range: bac
+   - pairs 1/1 (coop-p04-S1) · hits 48 (17 since this process started, harness d4b4408d)
+   - first: bac=-13 · ipad guest week 7
+   - last: bac=-16 · ipad guest week 49
+
+8. **number** — stat out of range: sung
+   - pairs 1/1 (coop-p04-S1) · hits 18 (0 since this process started, harness d4b4408d)
    - first: sung=-1 · ipad guest week 19
    - last: sung=-2 · ipad guest week 23
 
-7. **number** — option text «Bạc +8» but the effect applies bac=20
-   - pairs 1/1 (coop-p04-S1) · hits 1 (0 since this process started, harness 6576e086)
+9. **number** — option text «Bạc +8» but the effect applies bac=20
+   - pairs 1/1 (coop-p04-S1) · hits 1 (0 since this process started, harness d4b4408d)
    - first: «Nhận bạc, làm tai mắt | mỗi tháng Bạc +8 · kèm: mỗi tháng chủ phát hiện: khả năng thấp; khi ấy bị đánh chết: không có khả năng, không thì Tân Giả khố 10 tuần» in «Bạc lạ» fx={"bac":20} @ năm 2 th12 t0 b0 (buổi #268) · guest ipad
 
-8. **coop-pos** — where one sees the friend ≠ where the friend is
-   - pairs 1/1 (coop-p04-S1) · hits 140 (19 since this process started, harness 6576e086)
+10. **coop-pos** — where one sees the friend ≠ where the friend is
+   - pairs 1/1 (coop-p04-S1) · hits 157 (17 since this process started, harness d4b4408d)
    - first: buổi 1.3 host sees guest at P:b, guest is at r5 · {"host":{"fpos":"1.3 home life1 Ôn Thuần Nguyên","me":"1.3 r902","life":0,"f":"902 Ôn Thuần Nguyên pal r902 where r902","thl":0,"h7":null},"guest":{"fpos":"1.3 r902 life0 Nhâm Thải Vi","me":"1.3 home","life":1,"f":"901 Nhâm Thải Vi pal r2 where home","thl":0,"h7":null}}
-   - last: buổi 70.1 guest sees host at P:a, host is at r3 · {"host":{"fpos":"70.1 home life4 Viên Nghi Tu","me":"70.1 home","life":2,"f":"902 Viên Nghi Tu pal r10 where r10","thl":0,"h7":null},"guest":{"fpos":"70.1 home life2 Tần Tâm Duyệt","me":"70.1 home","life":4,"f":"901 Tần Tâm Duyệt pal r3 where r901","thl":0,"h7":null}}
+   - last: buổi 51.3 host sees guest at r10, guest is at r6 · {"host":{"fpos":"51.3 home life2 Hách Hải Lan","me":"51.3 home","life":0,"f":"902 Hách Hải Lan pal r10 where r10","thl":0,"h7":null},"guest":{"fpos":"51.3 home life0 Tư Mã Ngữ Yên","me":"51.3 home","life":2,"f":"901 Tư Mã Ngữ Yên pal r4 where r4","thl":0,"h7":null}}
 
-9. **coop-stat** — the friend's Sủng/Danh/Sức shown ≠ her own (one buổi late or wrong)
-   - pairs 1/1 (coop-p04-S1) · hits 20 (2 since this process started, harness 6576e086)
+11. **coop-stat** — the friend's Sủng/Danh/Sức shown ≠ her own (one buổi late or wrong)
+   - pairs 1/1 (coop-p04-S1) · hits 25 (5 since this process started, harness d4b4408d)
    - first: buổi 2.3: host sees guest 25/19/99 (guest 25/19/100) · guest sees host 19/0/96 (host 19/0/96)
-   - last: buổi 70.1: host sees guest 33/4/95 (guest 33/4/95) · guest sees host 0/6/95 (host 8/8/80)
+   - last: buổi 38.3: host sees guest 39/14/91 (guest 39/6/91) · guest sees host 76/87/91 (host 76/87/91)
 
-10. **lag** — co-op LAG budget miss: coopTurnP95
-   - pairs 1/1 (coop-p04-S1) · hits 25 (3 since this process started, harness 6576e086)
+12. **lag** — co-op LAG budget miss: coopTurnP95
+   - pairs 1/1 (coop-p04-S1) · hits 27 (2 since this process started, harness d4b4408d)
    - first: coopTurnP95 32062 > 10000 · game year 1 · room BXUK · per device {"fold":{"seat":"host","kbPerMin":901.7,"upKB":1851,"dnKB":718,"posFlip":null,"resend":9,"resendBy":{"act":8,"where":1},"longTasksPerMin":253.1,"longTaskMax":1471,"errs":0},"ipad":{"seat":"guest","kbPerMin":778.1,"upKB":1189,"dnKB":1028,"posFlip":null,"resend":24,"resendBy":{"act":23,"pos":1},"longTasksPerMin":280.8,"longTaskMax":256
-   - last: coopTurnP95 132447 > 10000 · game year 2 · room 6372 · per device {"fold":{"seat":"host","kbPerMin":709.4,"upKB":42902,"dnKB":6755,"posFlip":null,"resend":258,"resendBy":{"act":237,"pos":10,"where":10,"thin":1},"longTasksPerMin":253.8,"longTaskMax":1625,"errs":0},"ipad":{"seat":"guest","kbPerMin":596.7,"upKB":24458,"dnKB":17314,"posFlip":null,"resend":272,"resendBy":{"act":223,"pos":49},"longTasks
+   - last: coopTurnP95 41304 > 10000 · game year 1 · room RSKR · per device {"fold":{"seat":"host","kbPerMin":1332.9,"upKB":15048,"dnKB":3747,"posFlip":null,"resend":54,"resendBy":{"act":43,"where":10,"pos":1},"longTasksPerMin":220.7,"longTaskMax":1383,"errs":0},"ipad":{"seat":"guest","kbPerMin":1067.7,"upKB":10753,"dnKB":4303,"posFlip":null,"resend":103,"resendBy":{"act":99,"pos":4},"longTasksPerMin":240.1,
 
-11. **lag** — co-op LAG budget miss: coopSyncKBMax
-   - pairs 1/1 (coop-p04-S1) · hits 19 (2 since this process started, harness 6576e086)
+13. **lag** — co-op LAG budget miss: coopSyncKBMax
+   - pairs 1/1 (coop-p04-S1) · hits 20 (1 since this process started, harness d4b4408d)
    - first: coopSyncKBMax 168.1 > 100 · game year 1 · room BXUK · per device {"fold":{"seat":"host","kbPerMin":901.7,"upKB":1851,"dnKB":718,"posFlip":null,"resend":9,"resendBy":{"act":8,"where":1},"longTasksPerMin":253.1,"longTaskMax":1471,"errs":0},"ipad":{"seat":"guest","kbPerMin":778.1,"upKB":1189,"dnKB":1028,"posFlip":null,"resend":24,"resendBy":{"act":23,"pos":1},"longTasksPerMin":280.8,"longTaskMax":256
-   - last: coopSyncKBMax 241.9 > 100 · game year 2 · room 6372 · per device {"fold":{"seat":"host","kbPerMin":709.4,"upKB":42902,"dnKB":6755,"posFlip":null,"resend":258,"resendBy":{"act":237,"pos":10,"where":10,"thin":1},"longTasksPerMin":253.8,"longTaskMax":1625,"errs":0},"ipad":{"seat":"guest","kbPerMin":596.7,"upKB":24458,"dnKB":17314,"posFlip":null,"resend":272,"resendBy":{"act":223,"pos":49},"longTasksP
+   - last: coopSyncKBMax 194.3 > 100 · game year 1 · room RSKR · per device {"fold":{"seat":"host","kbPerMin":1332.9,"upKB":15048,"dnKB":3747,"posFlip":null,"resend":54,"resendBy":{"act":43,"where":10,"pos":1},"longTasksPerMin":220.7,"longTaskMax":1383,"errs":0},"ipad":{"seat":"guest","kbPerMin":1067.7,"upKB":10753,"dnKB":4303,"posFlip":null,"resend":103,"resendBy":{"act":99,"pos":4},"longTasksPerMin":240.1,
 
-12. **lag** — co-op buổi stall (both ready, the room took > 30 s or never stepped)
-   - pairs 1/1 (coop-p04-S1) · hits 24 (2 since this process started, harness 6576e086)
+14. **lag** — co-op buổi stall (both ready, the room took > 30 s or never stepped)
+   - pairs 1/1 (coop-p04-S1) · hits 26 (2 since this process started, harness d4b4408d)
    - first: 2 of 23 buổi in game year 1
-   - last: 67 of 139 buổi in game year 2
+   - last: 18 of 91 buổi in game year 1
 
-13. **lag** — co-op LAG budget miss: coopResendPerMin
-   - pairs 1/1 (coop-p04-S1) · hits 1 (0 since this process started, harness 6576e086)
+15. **lag** — co-op LAG budget miss: coopResendPerMin
+   - pairs 1/1 (coop-p04-S1) · hits 1 (0 since this process started, harness d4b4408d)
    - first: coopResendPerMin 16.7 > 12 · game year 1 · room 5GV5 · per device {"fold":{"seat":"host","kbPerMin":897,"upKB":2039,"dnKB":832,"posFlip":null,"resend":38,"resendBy":{"act":35,"bend":1,"where":2},"longTasksPerMin":269.9,"longTaskMax":1362,"errs":0},"ipad":{"seat":"guest","kbPerMin":870.6,"upKB":1473,"dnKB":1313,"posFlip":null,"resend":69,"resendBy":{"act":63,"pos":6},"longTasksPerMin":273.7,"longTa
 
-14. **lag** — co-op LAG budget miss: coopActionP95
-   - pairs 1/1 (coop-p04-S1) · hits 8 (2 since this process started, harness 6576e086)
+16. **lag** — co-op LAG budget miss: coopActionP95
+   - pairs 1/1 (coop-p04-S1) · hits 9 (1 since this process started, harness d4b4408d)
    - first: coopActionP95 9566 > 8000 · game year 1 · room UM4N · per device {"fold":{"seat":"host","kbPerMin":661.7,"upKB":17363,"dnKB":2791,"posFlip":null,"resend":66,"resendBy":{"act":57,"where":5,"pos":4},"longTasksPerMin":271.7,"longTaskMax":1648,"errs":0},"ipad":{"seat":"guest","kbPerMin":590.1,"upKB":11089,"dnKB":6886,"posFlip":null,"resend":113,"resendBy":{"act":98,"pos":14,"bend":1},"longTasksPerMin"
-   - last: coopActionP95 11530 > 8000 · game year 2 · room 6372 · per device {"fold":{"seat":"host","kbPerMin":709.4,"upKB":42902,"dnKB":6755,"posFlip":null,"resend":258,"resendBy":{"act":237,"pos":10,"where":10,"thin":1},"longTasksPerMin":253.8,"longTaskMax":1625,"errs":0},"ipad":{"seat":"guest","kbPerMin":596.7,"upKB":24458,"dnKB":17314,"posFlip":null,"resend":272,"resendBy":{"act":223,"pos":49},"longTasks
+   - last: coopActionP95 16160 > 8000 · game year 1 · room RSKR · per device {"fold":{"seat":"host","kbPerMin":1332.9,"upKB":15048,"dnKB":3747,"posFlip":null,"resend":54,"resendBy":{"act":43,"where":10,"pos":1},"longTasksPerMin":220.7,"longTaskMax":1383,"errs":0},"ipad":{"seat":"guest","kbPerMin":1067.7,"upKB":10753,"dnKB":4303,"posFlip":null,"resend":103,"resendBy":{"act":99,"pos":4},"longTasksPerMin":240.1
 
 
-## Lives (19; 0 ended by the wall cap = not a game ending)
+## Lives (20; 0 ended by the wall cap = not a game ending)
 
 | pair | player | seat | device | kiếp | thân phận | ending | max rank | years | wall min | room |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -99,6 +110,7 @@ Runner: node dev/measure/robot10-coop.js 4 4 10 /home/user/wt/u3b-out · harness
 | coop-p04-S1 | Y | guest | ipad | 12 (extra) | ch/ch_benh | Phế làm thứ dân [thường: Phế làm thứ dân, xuất cung] | Thường tại | 1.08 | 48.4 | 6372 |
 | coop-p04-S1 | Y | guest | ipad | 13 (extra) | pf/pt_tang | Phế làm thứ dân [thường: Phế làm thứ dân, xuất cung] | Thường tại | 1.42 | 21.2 | 6372 |
 | coop-p04-S1 | X | host | fold | 6 | muoi/muoi_lau | Xuất gia [thường: Xuất gia] | Quý nhân | 2 | 81.0 | 6372 |
+| coop-p04-S1 | Y | guest | ipad | 14 (extra) | dtq/dtq_huynh | Phế làm thứ dân [thường: Phế làm thứ dân, xuất cung] | Đáp ứng | 0.58 | 8.6 | RSKR |
 
 ## LAG set (per pair room and game year; coop-lag-hooks keys; fold = X, ipad = Y)
 
@@ -129,6 +141,8 @@ Runner: node dev/measure/robot10-coop.js 4 4 10 /home/user/wt/u3b-out · harness
 | coop-p04-S1 | 6372 | 1 | 2.49 | 23 | 28375 | 2083 | 59.8 | 791.6 | 10.3 | 298.9 | 2056 | 838.9 · 273.4 | 759.3 · 324.5 |
 | coop-p04-S1 | 6372 | 1 | 36.1 | 92 | 119079 | 8970 | 172.6 | 641.4 | 5.3 | 336.3 | 2155 | 675.8 · 304.5 | 608.8 · 368 |
 | coop-p04-S1 | 6372 | 2 | 70 | 139 | 132447 | 11530 | 241.9 | 653 | 3.8 | 266.5 | 2662 | 709.4 · 253.8 | 596.7 · 279.2 |
+| coop-p04-S1 | RSKR | 1 | 3.58 | 21 | 36872 | 4496 | 66.8 | 674.7 | 8 | 249.5 | 1788 | 738.5 · 228.2 | 616.3 · 270.8 |
+| coop-p04-S1 | RSKR | 1 | 14.1 | 91 | 41304 | 16160 | 194.3 | 1200.3 | 5.6 | 230.4 | 2297 | 1332.9 · 220.7 | 1067.7 · 240.1 |
 
 ## Rooms
 
@@ -146,3 +160,4 @@ Runner: node dev/measure/robot10-coop.js 4 4 10 /home/user/wt/u3b-out · harness
 | coop-p04-S1 | HHMS | X | 9 | 41 | 18.2 | 89201 | 0 | 0 | 0 | 7308 |
 | coop-p04-S1 | B6AN | X | 4 | 0 | undefined | undefined | 0 | 0 | 0 |  |
 | coop-p04-S1 | 6372 | X | 71 | 271 | undefined | undefined | 0 | 19 | 2 | 5706 |
+| coop-p04-S1 | RSKR | X | 52 | 122 | undefined | undefined | 0 | 17 | 5 | 6095 |
