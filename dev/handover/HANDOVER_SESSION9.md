@@ -2850,3 +2850,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (05:15Z) OD 07:40Z lodging NAME on hold (sếp picks Dưỡng Tú viện / alt) → SELSCENE-3 one-table name, C brief marked; OD 07:45Z DAY TITLE CARD → KK16 KIT REQUEST #3 (on j79 dawn panel), E chapter-name hook, SELSCENE-3 day names.
 - (05:17Z) KIT READY kit-batch2 1ba60626 (KIT.md markers fixed, podium {unknown}, promo chip) → B SMALL review (5 kit branches); D wires kitPromoHook; SELSCENE-3 sets kitPodiumUnknown.
 - (05:20Z) KK16 rolled at 36 % (handover MOCK-STAGE.md «HANDOVER KK16 → KK17» 50a8a99a) → KK17 = session_01V1ZZH3FnWQVvT2tLprXB7H (sonnet, child of 117): shoot toilette v3.5 (upload via C), square-picture option, DAY TITLE CARD, kit-dialogue-vn, MOCK-STAGE relayout. KK16 archived. Kit fixes for B FAILs → KK17.
+- (05:22Z) Media-in-git route blocked (OD:L203) → toilette v3.5 shoot + CDN upload moved to Foreman C (has key) from review/mock-stage 92e8f54f. KK17 = START_CTX 0 %, depth 2.
