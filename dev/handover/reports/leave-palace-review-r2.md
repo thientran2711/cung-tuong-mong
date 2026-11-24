@@ -100,3 +100,13 @@ LIVE moved again to 8eceeef9 (kit-titleplate) at ~17:15Z after these gates: E85r
 | 0f9e59bc | 7a3541fd + LIVE 8eceeef9 (kit-titleplate) | index/sw only, rebuilt | 20/20 same | 135/135 | Fold 24 + iPad 24, overflow 0 | 1/1 | 1/2 (1× iPad console CORS on ctm-rank workers.dev /hello = external network, no game error; rerun 142/142) | PASS (render 210/190, tab 445/397, buổi 1071/1161 ms) |
 | a5b9244b | + LIVE 284e0d08 (kit-noprewarn: j82/jk4/jmgcal/jsgame/jtoil — no file shared with the branch) | index/sw only, rebuilt | 20/20 same | 135/135 | 24 + 24, overflow 0 | 1/1 | 1/1 | PASS (render 219/180, tab 425/392, buổi 1379/929 ms, tasks 23/17 — within limits) |
 **PASS a5b9244b4ec5cea8225143e31f77fa982f92858f** (review/leave-palace-r5; FF from LIVE 284e0d08). LIVE moved again to 502c48c9 at ~18:05Z; every re-merge so far = index.html/sw.js rebuild only with the same 20-file delta — E85r re-merges on request (≈15 min with gates).
+
+### RE-MERGE r5 for ORDER MAIN 126 (E85r, 24/11 19:20Z) — **PASS 44115c0caa4e12a68e467385f8eafde5b89c8019 FF from LIVE 502c48c9** (supersedes a5b9244b)
+44115c0c = a5b9244b + LIVE 502c48c9 (kit-mapgo; no file shared with the branch); index.html/sw.js only, rebuilt; dev/build delta = reviewed 8d93c027 vs 178cac37, 20/20 files. robot10-onecore 5d4f722f not on LIVE at start.
+| gate | result |
+|---|---|
+| leave-palace.test | 135/135 |
+| leave-palace-fit | Fold 24 + iPad 24, overflow 0 |
+| COOP_SWAP=1 | 2/2 142/142 |
+| coop-e2e Fold host | run 1 140/154: the iPad guest's socket got «WebSocket handshake 502» from ctm-coop workers.dev (relay down, seat b offline) → week stuck «Hảo hữu đang vắng»; rerun 142/142 |
+| quickcheck | PASS (render 177/173, tab 370/383, buổi 1141/1077 ms; core gates, old save ok) |

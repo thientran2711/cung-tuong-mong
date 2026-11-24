@@ -1514,7 +1514,7 @@ REMERGE servant-trust onto net-build c6c3ca76 (opus BIG; briefs/D-servant-trust-
 rv promo-build-2 r2 (opus BIG; briefs/D-promo-build-2-review-r2.md; target f9cdc020) | review/promo-build-2-rv | session_01D3E3NZnFXh5e2NqrPJTpg8 | DONE PASS 70571e8a | 24/11 13:55Z (Foreman D depth 4)
 co-op runner U3b (pair 4 SWAP=0, split from U3) | review/robot10-coop 5a65a561 | session_01N1tNP4zcW21pE4pFvZ47QP | RUNNING | 2026-11-24T13:55Z (FOREMAN B)
 law1-audit-r1 re-merge c6c3ca76 | review/law1-audit-r1 | session_01N1tNP3tqT3TXv982ieVGqU | RUNNING | 2026-11-24T14:43Z (FOREMAN B)
-| REVIEW E85r LEAVE-PALACE re-merge on LIVE c6c3ca76 BIG (opus; briefs/E85r-remerge-leave-palace.md; ORDER MAIN 123 14:45Z) | review/leave-palace-r5; reports/leave-palace-review-r2.md | FOREMAN E (child4) | session_01DgYSWmzS4RRsmqyV6HEwXr | DONE PASS a5b9244b (FF from LIVE 284e0d08; supersedes 7a3541fd) | 24/11 18:10Z |
+| REVIEW E85r LEAVE-PALACE re-merge on LIVE c6c3ca76 BIG (opus; briefs/E85r-remerge-leave-palace.md; ORDER MAIN 123 14:45Z) | review/leave-palace-r5; reports/leave-palace-review-r2.md | FOREMAN E (child4) | session_01DgYSWmzS4RRsmqyV6HEwXr | DONE PASS 44115c0c (FF from LIVE 502c48c9; ORDER MAIN 126; supersedes a5b9244b) | 24/11 19:20Z |
 D FOLLOW-UPS 1 (guest-queen nominate co-op, NPC servant greet, typed khắc, tìm gặp wording; opus BIG; briefs/D-followups-1.md) | review/d-followups-1 | session_01D3E3Na18fpnoePCSKA3zqi | RUNNING | 24/11 15:45Z (Foreman D depth 4)
 robot-coop-fix-2-r2 BIG review | review/robot-coop-fix-2-r2 | session_01N1tNP35VdFJ3CXbPW1oNRa | RUNNING | 2026-11-24T16:06Z (FOREMAN B)
 ROBOT-COOP FIXER #5 | review/robot-coop-fix-3, robot10-onecore, … | session_01N1tNP4vn55dxGBWKu7brhf | RUNNING | 2026-11-24T16:08Z (FOREMAN B)
