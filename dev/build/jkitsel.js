@@ -74,6 +74,47 @@ function kitDlgBox(L,title,nodes,pos,tail,ho){ho=ho||{};pos=pos||{};const b=docu
  const c=document.createElement("div");c.className="kscn-col";(nodes||[]).forEach(n=>{if(n==null)return;if(typeof n==="string"){const t=document.createElement("div");t.innerHTML=n;while(t.firstChild)c.appendChild(t.firstChild)}else c.appendChild(n)});b.appendChild(c);
  b.style.cssText=`left:${pos.x||0}px;top:${pos.y||0}px;width:${pos.w||300}px;height:${pos.h?pos.h+"px":"auto"}`;if(tail)b.style.setProperty("--kty",(tail.y||40)+"px");
  (L||document.body).appendChild(b);if(L&&L.boxes)L.boxes.push(b);return b}
+
+/* ===== KIT §95 kitDialogue · SPOTLIGHT + TYPEWRITER + PER-LINE CUE HOOK + FOCUS SHOT (KIT KEEPER #17, review/kit-dialogue-vn; owner OD 24/11 ~04:45Z / ~04:50Z / ~05:10Z) =====
+   Uses the §93 scene layer (kitScene). Numbers from BAL.kdlg (law 4).
+   kitTypeLine(el,text,{cues,onWord,onDone,now}) → {finish(),done} : the line appears WORD BY WORD (every word is a span, hidden until typed → the box never reflows); cues=[{w,fn}] fire when word index w is typed
+     (finish() fires the remaining cues at once, so a tap-through never loses a cue); calm / reduced motion = the whole line at once (cues still fire).
+   kitScene.light(L,idx|null) : SPOTLIGHT — the speaker's figure (L.figs[idx]) stays lit, the others dim (brightness .5·saturation, NOT black); null = all lit. Switches with a 260 ms fade.
+   kitScene.focus(L,{fig,box}) / kitScene.unfocus(L) : FOCUS SHOT — ONE figure big (BAL.kdlg.focusScale about its head/bust), the scene blurred behind (BAL.kdlg.focusBlur), the other figures hidden; the box wherever the caller puts it.
+   kitDialogue.play(Sc,{lines,box,onLine,onDone}) : lines=[{fig:<index into Sc.L.figs>|null, who:"name", text, cues:[{w,fn}], focus:true?}], box={x,y,w,h?} (or fn(line,i)→pos), the ONE speech box (kitDlgBox, title = the speaker).
+     Tap / Enter on the scene = finish the line being typed; the NEXT tap = next line; after the last line onDone(). onLine(i,line) fires when line i starts (before its first word): the Tổng quản roll-call lights girl N
+     (onLine or line.cues) when the typing reaches her line, name under her feet. Returns {skip(),stop()}. */
+function kdlgMs(){try{return (window.BAL&&BAL.kdlg&&BAL.kdlg.msWord)||110}catch(e){return 110}}
+function kitTypeLine(el,text,o){o=o||{};const toks=String(text==null?"":text).match(/\S+\s*/g)||[];el.textContent="";const sp=toks.map(t=>{const x=document.createElement("span");x.className="kdw";x.textContent=t;el.appendChild(x);return x});
+ const cues=(o.cues||[]).slice().sort((a,b)=>a.w-b.w);let k=0,done=false,T=null;const step=()=>{if(done)return;if(k<sp.length){sp[k].classList.add("on");}
+  while(cues.length&&cues[0].w<=k){const c=cues.shift();try{c.fn&&c.fn(k)}catch(e){console.error(e)}}try{o.onWord&&o.onWord(k)}catch(e){}k++;if(k>=sp.length)return fin();T=setTimeout(step,kdlgMs())};
+ const fin=()=>{if(done)return;done=true;clearTimeout(T);sp.forEach(x=>x.classList.add("on"));while(cues.length){const c=cues.shift();try{c.fn&&c.fn(c.w)}catch(e){console.error(e)}}try{o.onDone&&o.onDone()}catch(e){console.error(e)}};
+ const R={get done(){return done},finish:fin,stop(){done=true;clearTimeout(T)}};if(!sp.length||o.now||kscnCalm())fin();else step();return R}
+kitScene.light=function(L,idx){if(!L||!L.figs)return;L.figs.forEach((f,i)=>{f.classList.toggle("kscn-dim",idx!=null&&i!==idx);f.classList.toggle("kscn-lit",idx!=null&&i===idx)});L.dataset.klit=idx==null?"":String(idx)};
+kitScene.focus=function(L,o){if(!L||!L.figs)return;o=o||{};const i=o.fig||0,f=L.figs[i];if(!f)return;L.classList.add("kscn-focus");L.figs.forEach((g,j)=>{try{g.getAnimations().forEach(x=>x.cancel())}catch(e){}/* the intro fill:both would hold opacity / transform over the classes */g.classList.toggle("kscn-fhide",j!==i)});
+ const K=(window.BAL&&BAL.kdlg)||{},sc=K.focusScale||1.5,g=L.g,r=f.getBoundingClientRect(),lr=L.getBoundingClientRect();const cx=(r.left+r.width/2)-lr.left,tx=(o.cx!=null?o.cx:g.w*.32)-cx;
+ f.classList.add("kscn-fbig");f.style.transformOrigin="50% 18%";f.style.transform=`translateX(${Math.round(tx)}px) scale(${sc})`;const bg=L.querySelector(".kscn-bg");if(bg)bg.style.filter=`blur(${K.focusBlur||14}px) brightness(.8)`;L.__kfi=i};
+kitScene.unfocus=function(L){if(!L||!L.figs)return;L.figs.forEach(g=>{try{g.getAnimations().forEach(x=>x.cancel())}catch(e){}});L.classList.remove("kscn-focus");L.figs.forEach(g=>{g.classList.remove("kscn-fhide","kscn-fbig");g.style.transform="";g.style.transformOrigin=""});const bg=L.querySelector(".kscn-bg");if(bg)bg.style.filter="";L.__kfi=null};
+const kitDialogue={play(Sc,o){o=o||{};const L=Sc.L,lines=(o.lines||[]).slice();let i=-1,cur=null,box=null,lineEl=null,ended=false;
+  const pos=(ln,n)=>typeof o.box==="function"?o.box(ln,n):(o.box||{x:Math.round(L.g.w*.46),y:L.g.H-190,w:Math.round(L.g.w*.5)});
+  const mk=ln=>{if(box){box.remove();L.boxes=L.boxes.filter(b=>b!==box)}lineEl=document.createElement("div");lineEl.className="kdv-line";const hint=document.createElement("div");hint.className="kdv-next";hint.textContent="Chạm để tiếp ▸";
+   box=Sc.box(ln.who||"",[lineEl,hint],pos(ln,i),{y:36});box.classList.add("kdv-box");return box};
+  const next=()=>{if(ended)return;i++;if(i>=lines.length)return stop(true);const ln=lines[i];if(ln.focus&&ln.fig!=null)kitScene.focus(L,{fig:ln.fig,cx:ln.cx});else kitScene.unfocus(L);kitScene.light(L,ln.fig==null?null:ln.fig);mk(ln);box.classList.remove("kdv-done");
+   try{o.onLine&&o.onLine(i,ln)}catch(e){console.error(e)}cur=kitTypeLine(lineEl,ln.text,{cues:ln.cues,onDone:()=>{if(box)box.classList.add("kdv-done")}})};
+  const tap=e=>{if(ended)return;if(e&&e.type==="keydown"&&!/^(Enter| )$/.test(e.key))return;if(e&&e.target&&e.target.closest&&e.target.closest(".kmend,button"))return;if(cur&&!cur.done)cur.finish();else next()};
+  const stop=fin=>{if(ended)return;ended=true;L.removeEventListener("click",tap);document.removeEventListener("keydown",tap);if(cur)cur.stop();kitScene.light(L,null);kitScene.unfocus(L);if(box){box.remove();L.boxes=L.boxes.filter(b=>b!==box)}if(fin)try{o.onDone&&o.onDone()}catch(e){console.error(e)}};
+  L.addEventListener("click",tap);document.addEventListener("keydown",tap);next();return{skip:()=>tap(),stop:()=>stop(false),get index(){return i}}}};
+window.kitTypeLine=kitTypeLine;window.kitDialogue=kitDialogue;
+(function(){const st=document.createElement("style");st.id="kdv-css";st.textContent=`
+.kdw{visibility:hidden}.kdw.on{visibility:visible}
+.kscn-fig{transition:filter .26s ease,opacity .26s ease,transform .5s cubic-bezier(.3,.7,.3,1)}
+.kscn-fig.kscn-dim{filter:brightness(${(window.BAL&&BAL.kdlg&&BAL.kdlg.dim)||.5}) saturate(${(window.BAL&&BAL.kdlg&&BAL.kdlg.dimSat)||.75})}
+.kscn-fig.kscn-fhide{opacity:0}
+.kscn.kscn-focus .kscn-bg{transition:filter .5s ease}
+.kdv-box .kdv-line{font-size:1.02rem;line-height:1.5;min-height:3em}.kdv-box .kdv-next{align-self:flex-end;font-size:.78rem;opacity:0;transition:opacity .2s;color:var(--gold,#8f5f0c)}
+.kdv-box.kdv-done .kdv-next{opacity:.85}
+`;document.head.appendChild(st)})();
+
 /* 93.5 name tag + text name for a person known by face only / by family only */
 function kitUnkName(p,o){o=o||{};try{const named=typeof kitKnownName==="function"?kitKnownName(p):true;return named&&p&&p.name?p.name:(o.ph||"một tú nữ")}catch(e){return o.ph||"một tú nữ"}}
 function kitNameTag(p,o){o=o||{};let st=o.stage;try{if(st==null)st=!(typeof j59known==="function"?j59known(p):true)?0:(typeof kitKnownName==="function"&&!kitKnownName(p))?1:2}catch(e){st=2}
@@ -114,10 +155,18 @@ try{if(typeof KIT_SAMPLES!=="undefined"){
   return kitNewsRankList(L.map((v,i)=>kitNewsRankRow(v,{rank:Math.max(0,(v.rank||1)),how:i?"quen ở sân chờ":"cùng lượt"})))}});
 KIT_SAMPLES.push({id:"§93.1-4",title:"kitScene · Sc.fig · kitDlgBox · Sc.pair · cảnh bố cục A (nền rõ → mờ, hai nhân vật toàn thân, hai khung đối thoại)",where:"cảnh tuyển tú (SELSCENE); mọi cảnh không phải #modal. Nút mở cảnh thật, chạm một thẻ để về trang mẫu",html:()=>{const ok=typeof S!=="undefined"&&S&&typeof liveRivals==="function";return `<div class="kitpg-row"><button type="button" class="kbtn alt" data-kselsc="pair"${ok?"":" disabled"}>Mở cảnh: sứ giả + ta</button><button type="button" class="kbtn alt" data-kselsc="solo"${ok?"":" disabled"}>Mở cảnh: một mình</button></div>`+(ok?"":kitFacts(["Vào một kiếp rồi mở lại trang mẫu để xem cảnh."],{group:false}))}});
  KIT_SAMPLES.push({id:"§93.8",title:"kitResultCard · thẻ kết quả với hàng cho sẵn (Được / Mất / Ghi chú)",where:"cảnh tuyển tú (SELSCENE), mọi kết quả không phải chỉ số thuần",html:()=>`<div class="kitpg-row"><button type="button" class="kbtn alt" data-kselsc="result">Hiện thẻ kết quả</button></div>`});
+ KIT_SAMPLES.push({id:"§95",title:"kitDialogue · tâm điểm (sáng / mờ) + chữ chạy từng chữ (chạm = xong câu) + móc theo câu (điểm danh) + cận cảnh",where:"cảnh sự kiện không có lựa chọn của người khác (tú nữ cãi nhau ở sân chờ), cảnh Tổng quản điểm danh, mọi hội thoại 1-1",html:()=>`<div class="kitpg-row"><button type="button" class="kbtn alt" data-kselsc="dialogue">Mở: cãi nhau (sáng/mờ + chữ chạy + cận cảnh)</button><button type="button" class="kbtn alt" data-kselsc="rollcall">Mở: Tổng quản điểm danh (móc theo câu)</button></div>`});
  KIT_SAMPLES.push({id:"§93.7",title:"kitBareOpt · thẻ lựa chọn trần (chỉ cảnh tuyển tú: không độ chắc, không Được/Mất)",where:"cảnh tuyển tú (SELSCENE) — ngoại lệ duy nhất của §88",html:()=>`<div style="max-width:420px">${kitBareOpts([{n:"Cúi đầu đáp lời, giữ lễ"},{n:"Ngẩng lên thưa rõ ràng"}]).outerHTML}</div>`});
 }}catch(e){}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kitpage [data-kselsc]");if(!b)return;e.stopPropagation();e.preventDefault();(async()=>{try{const k=b.dataset.kselsc;
  if(k==="result"){const pg0=document.getElementById("kitpage");if(pg0)pg0.hidden=true;/* the kit page covers the result card (z): hide it while the card shows */const t0=kitResultCard({title:"Thái hậu hỏi chuyện",ok:true,rows:[{k:"duoc",label:"Được",items:["Thái hậu: có thiện cảm với ta hơn","Phần tuyển: Khá"]},{k:"mat",label:"Mất",items:["Khắc −1"]}]});const cl=t0.onclick;t0.onclick=()=>{cl();if(pg0)pg0.hidden=false};setTimeout(()=>{if(pg0)pg0.hidden=false},9100);return}
+ if(k==="dialogue"||k==="rollcall"){const pg0=document.getElementById("kitpage");if(pg0)pg0.hidden=true;const Rv=liveRivals(true).filter(x=>x.alive&&!x.out).slice(0,3);while(Rv.length<3)Rv.push(S);
+  const Sc=kitScene.open({bg:typeof IMG_U==="function"?IMG_U("img/ev-te-le.webp"):"img/ev-te-le.webp",intro:0}),g=Sc.L.g,fh=Math.round(g.H*.8),back=()=>{Sc.close();if(pg0)pg0.hidden=false};
+  const cx=[.2,.5,.8];for(let i=0;i<3;i++)await Sc.fig(Rv[i],{cx:g.w*cx[i],top:g.H-fh,fh,z:2+i});Sc.show();
+  if(k==="rollcall"){/* the cue hook: girl N lights + her name under her feet WHEN the typing reaches her line (never all at once) */Sc.L.figs.forEach(f=>f.style.opacity=0);
+   kitDialogue.play(Sc,{box:{x:Math.round(g.w*.04),y:Math.round(g.H*.03),w:Math.round(g.w*.92)},onDone:back,onLine:(i)=>{const f=Sc.L.figs[i];if(!f)return;f.style.opacity=1;const t=document.createElement("div");t.className="kscn-tag";t.textContent=Rv[i].name||"Tú nữ";const r=f.getBoundingClientRect(),lr=Sc.L.getBoundingClientRect();t.style.cssText=`position:absolute;z-index:9;left:${Math.round(r.left-lr.left+r.width/2)}px;top:${Math.round(r.bottom-lr.top-34)}px;transform:translateX(-50%)`;Sc.L.appendChild(t)},
+    lines:Rv.map((v,i)=>({fig:i,who:"Tổng quản",text:`Vị thứ ${["nhất","hai","ba"][i]} là ${v.name||"một tú nữ"}, con nhà quan, nhập cung lượt này.`}))});return}
+  kitDialogue.play(Sc,{box:ln=>({x:Math.round(g.w*(ln.fig===0?.4:.05)),y:g.H-190,w:Math.round(g.w*.55)}),onDone:back,lines:[{fig:0,who:Rv[0].name||"Tú nữ A",text:"Ngươi là con nhà ai mà dám đứng trước ta, lại còn không biết hành lễ cho phải phép?"},{fig:1,who:Rv[1].name||"Tú nữ B",text:"Thưa tỷ, muội mới vào cung, chưa quen quy củ, xin tỷ chỉ giáo."},{fig:2,who:Rv[2].name||"Tú nữ C",text:"Hai vị đừng cãi nhau nữa, Tổng quản sắp tới rồi.",focus:true}]});return}
  const pg=document.getElementById("kitpage"),v=liveRivals(true).find(x=>x.alive&&!x.out),solo=k==="solo"||!v;if(pg)pg.hidden=true;
  const Sc=kitScene.open({bg:typeof IMG_U==="function"?IMG_U("img/ev-te-le.webp"):"img/ev-te-le.webp",intro:900});
  const back=()=>{Sc.close();if(pg)pg.hidden=false};const opts=kitBareOpts([{n:"Cúi đầu đáp lời, giữ lễ"},{n:"Ngẩng lên thưa rõ ràng"}],back);
