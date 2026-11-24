@@ -59,7 +59,7 @@ function scrvReveal(){const v=document.getElementById("kveil");if(!v||v.hidden||
 /* wait (scan again after each wait: pictures set a frame later are caught) until all decoded or the cap */
 async function scrvWaitAll(root,t0,P){const raf=()=>new Promise(r=>requestAnimationFrame(()=>r()));
  for(let k=0;k<12;k++){const left=KIT_SCRV.cap-(performance.now()-t0);if(left<=0)return "cap";
-  await Promise.race([Promise.all(P),new Promise(r=>setTimeout(r,left))]);await raf();P=scrvPend(root);if(!P.length)return "ok"}return "loop"}
+  await Promise.race([Promise.all(P),new Promise(r=>setTimeout(r,left))]);await raf();P=scrvPend(root);if(!P.length){/* settle: portraits / figures some views set a few frames later */await new Promise(r=>setTimeout(r,90));P=scrvPend(root);if(!P.length)return "ok"}}return "loop"}
 function kitScreenVeilUntil(root,dest){root=root||document.body;KIT_SCRV.stat.n++;const P=scrvPend(root);
  if(!P.length){if(!SCRV_RUN)scrvReveal();scrvPrefetch();return Promise.resolve(false)}
  const t0=performance.now();scrvEl(dest);KIT_SCRV.stat.veiled++;(KIT_SCRV.stat.log=KIT_SCRV.stat.log||[]).push(dest);if(KIT_SCRV.stat.log.length>40)KIT_SCRV.stat.log.shift();const run={t0};SCRV_RUN=run;
