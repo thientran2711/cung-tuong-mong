@@ -10,9 +10,26 @@ Identity uploads: s10 p84XX01ehw, s11 fHYuQqoCDY, s12 1lBjLUar4r, s19 Xm68ICQBfo
 | S19-A16 | s19 | 16 | ksXxsIu16B | DONE | viewed ok: bare face, no text, master skin/painting match |
 | S20-A16 | s20 | 16 | p84XIolehw | DONE | viewed ok: bare face, no text, master skin/painting match |
 | S21-A16 | s21 | 16 | bxpkj3J5Y2 | DONE | viewed ok: bare face, no text, master skin/painting match |
-| S22-A16 | s22 | 16 | UPfJ92qwny | GENERATED (not yet viewed) | |
+| S22-A16 | s22 | 16 | UPfJ92qwny | DONE | viewed ok |
 
-## HANDOVER (rollover, worker 1)
+| S23-A16 | s23 | 16 | fHYu5xICDY | DONE | viewed ok |
+| S24-A16 | s24 | 16 | Xm68aJwBfo | DONE | viewed ok |
+| S25-A16 | s25 | 16 | bxpksfd5Y2 | DONE | viewed ok |
+| S51-A16 | s51 | 16 | UPfJ6Ruwny | DONE | viewed ok |
+| S52-A16 | s52 | 16 | xS8sJVWjfW | DONE | viewed ok |
+| S53-A16 | s53 | 16 | CqWQk8gEEy | DONE | viewed ok |
+| S54-A16 | s54 | 16 | iGkZcVE3uK | NEEDS_REVIEW | soft smile on mouth (prompt wants restrained), otherwise ok |
+| S55-A16 | s55 | 16 | ksXxwVc16B | GENERATED (to view) | |
+| S10-A26 | s10 | 26 | 0e7MIIZTfW | GENERATED (to view) | |
+| S11-A26 | s11 | 26 | O6Q4AhXynm | GENERATED (to view) | |
+| S12-A26 | s12 | 26 | yiF9GgMPW9 | GENERATED (to view) | |
+| S19-A26 | s19 | 26 | Lwtg9NyswO | GENERATED (to view) | |
+| S20-A26 | s20 | 26 | huGfKNLvqL | GENERATED (to view) | |
+| S21-A26 | s21 | 26 | JNuPAx7Oq4 | GENERATED (to view) | |
+
+## NOTE
+Worker 1 resumed (window is 1M tokens; early rollover was a mistake). Template quirk kept unchanged: age26 prompt still says 'At16 this is youthful self-assurance'.
+## OLD HANDOVER (superseded)
 Done/viewed: s10,s11,s12,s19,s20,s21 @16 (6/60). s22@16 generated, needs a look. Remaining: age16 s23,s24,s25,s51,s52,s53,s54,s55 (8) + ages 26,51,63 x 15 = 45. Each call must carry the full ~9.6k-char prompt, so ~3k tokens per job: suggest successors split by age (one per age). Identity upload ids above are reusable.
 ## Resume note
 Next: age16 s22,s23,s24,s25,s51..s55; then ages 26,51,63 for all 15. Pre-cut prompt files were built in session scratchpad (re-create: delete the operator sentence from Prompts/*.txt).
