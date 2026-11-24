@@ -68,7 +68,27 @@ Identity uploads: s10 p84XX01ehw, s11 fHYuQqoCDY, s12 1lBjLUar4r, s19 Xm68ICQBfo
 
 ## NOTE
 Worker 1 resumed (window is 1M tokens; early rollover was a mistake). Template quirk kept unchanged: age26 prompt still says 'At16 this is youthful self-assurance'.
-## SUMMARY (final, worker 1)
+## AGE 39 (owner unblocked 24/11 ~21:45Z; prompt NOTEXT-04 pasted whole, unchanged)
+| job | source | age | output id | status | QC |
+|---|---|---|---|---|---|
+| S10-A39 | s10 | 39 | u50H35YQLD | DONE | viewed ok: bare, no text, zero wrinkles |
+| S11-A39 | s11 | 39 | dtNogsaXSL | DONE | viewed ok |
+| S12-A39 | s12 | 39 | fHYuNDqCDY | DONE | viewed ok |
+| S19-A39 | s19 | 39 | O6Q4I4Eynm | DONE | viewed ok |
+| S20-A39 | s20 | 39 | tC2vys9mZJ | DONE | viewed ok |
+| S21-A39 | s21 | 39 | gOvwehkSXO | DONE | viewed ok |
+| S22-A39 | s22 | 39 | rgoL051xtc | DONE | viewed ok |
+| S23-A39 | s23 | 39 | UPfJBzDwny | DONE | viewed ok |
+| S24-A39 | s24 | 39 | LwtgD8MswO | DONE | viewed ok |
+| S25-A39 | s25 | 39 | lJhUesDgv9 | NEEDS_REVIEW | taller 452x800 crop, dark eyeliner-like lines, slight smile |
+| S51-A39 | s51 | 39 | jUIlD26LD0 | DONE | viewed ok |
+| S52-A39 | s52 | 39 | jUIlD8eLD0 | DONE | viewed ok |
+| S53-A39 | s53 | 39 | CqWQRfuEEy | DONE | viewed ok |
+| S54-A39 | s54 | 39 | fHYuRg2CDY | NEEDS_REVIEW | soft smile (prompt wants restrained mouth) |
+| S55-A39 | s55 | 39 | s7mSdtBl8e | DONE | viewed ok |
+Age 39: 13 DONE, 2 NEEDS_REVIEW (s25, s54). Cost 15 x 135 = 2 025 cr. Overall Proud: 75 jobs generated, 68 DONE, 7 NEEDS_REVIEW.
+
+## SUMMARY (final, worker 1; ages 16/26/51/63)
 - 60/60 jobs generated (ages 16/26/51/63 x 15 people), each viewed once. DONE 55, NEEDS_REVIEW 5 (soft smile/smirk on a restrained-mouth prompt): s54@16 iGkZcVE3uK, s52@26 iGkZDYo3uK, s54@26 ov3tbGc829, s52@51 79Ey0LUJAL, s52@63 mEAa7lwhJQ, No text, no makeup look, skin/painting consistent with master in all viewed. No retries used. Age 39 not run (on hold).
 - Minor notes: s20@26 (huGfKNLvqL) has a long loose ribbon beside the hair; s25@16 (bxpksfd5Y2) reads slightly older than 16.
 - NOT DONE: contact sheets (original | result) per age and CDN upload img/_review/face-master03/proud/ — outputs stay on Magnific; open any via https://www.magnific.com/app/creation/<output id>. Foreman can order a follow-up worker for sheets.
