@@ -51,7 +51,7 @@ async function closePk(){if(!st||!st.pk)return;const p=st.pk;st.pk=null;p.close(
 async function picker(i){const {L,figs,acts}=st;const f=figs[i];
  const avoid=figs.filter((x,k)=>k!==i).map(anchorOf);
  const P=kitPick.open({host:L,anchor:anchorOf(f),avoid,acts,dismiss:false,onPick:(id,act)=>{pickAct(act)}});st.pk=P;
- await wait(KIT_PICK.dropMs+KIT_PICK.stagger*acts.length+200);return P}
+ await wait(KIT_PLAQUE.dropMs+KIT_PLAQUE.stagger*acts.length+200);return P}
 function tapPlaque(k){const b=st.pk&&st.pk.el.querySelectorAll('.kfoc-b')[k];if(b)b.click();return wait(30)}
 async function pickAct(a){if(st.busy)return;st.busy=1;await wait(120);st.busy=0;
  if(/^Biếu/.test(a.n))return openRing();await closePk();st.lastAct=a.n}
