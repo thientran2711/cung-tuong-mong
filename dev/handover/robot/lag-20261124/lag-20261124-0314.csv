@@ -1,0 +1,20 @@
+kind,device,key,n,p50,p95,max
+tap,fold,tab switch,99,1050,20259,51306
+tap,fold,act card,9,2232,3068,3068
+tap,fold,Sang ngày mới,11,2309,4189,4189
+tap,fold,ALL,119,1290,10635,51306
+tap,ipad,tab switch,99,1115,31838,52146
+tap,ipad,act card,11,2359,4014,4014
+tap,ipad,Sang ngày mới,11,2767,5112,5112
+tap,ipad,ALL,121,1502,22102,52146
+tap-by-year,fold,year 0-2,108,1269,4293,51306
+tap-by-year,fold,year 3-5,11,2042,46441,46441
+tap-by-year,ipad,year 0-2,110,1250,22102,52146
+tap-by-year,ipad,year 3-5,11,1763,43001,43001
+longtask-real,fold,probe,638,,,41472
+longtask-real,ipad,probe,672,,,27226
+longtask-bot,bot,all,91,,,11963
+turn,bot,ALL,733,68,198,541
+turn,bot,year 0-2,702,68,197,541
+turn,bot,year 3-5,31,72,373,400
+heap-per-hour,bot,median,1,261.7728531855956,261.7728531855956,261.7728531855956
