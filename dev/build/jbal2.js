@@ -2038,3 +2038,9 @@ BAL.wc={on:true,npcMax:8,rankHi:3,seen:.15,obKeep:60,npcCant:.1,
 /* ORDER THIN P6 (j70c.js composed j70 routes): on = composed routes live; vis/need/bac = the route tiers (tell visibility, prep weeks, price — the same
    ranges as the 51 hand-written routes); law 2 (validator): vis lo0/mid1/hi2 + need s0/m1/l2 + bac 0:0/s0/m1/l2 + acc 1 = 2..3 cost points. */
 BAL.j70c={on:true,vis:{lo:2,mid:5,hi:8},need:{s:2,m:3,l:4},bac:{"0":0,s:20,m:40,l:60}};
+/* ORDER THIN P7 (j71c.js composed festivals): on = composed stages / complications / prizes live; fx[tier] = what ONE gain/loss step of a
+   complication stance is worth (laws 2/3/4: seeds count steps; rel = the rival's thiện cảm); obKeep = object traces kept. */
+BAL.j71c={on:true,obKeep:60,
+ fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:1,th:2,hh:2,duc:2,tamco:1,an:1,rel:4},
+     m:{sung:3,danh:3,bac:40,suc:8,mat:1,th:4,hh:4,duc:3,tamco:2,an:2,rel:6},
+     l:{sung:5,danh:5,bac:60,suc:12,mat:2,th:6,hh:6,duc:5,tamco:3,an:3,rel:9}}};

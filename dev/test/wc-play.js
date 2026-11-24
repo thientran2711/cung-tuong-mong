@@ -1,6 +1,6 @@
 /* ORDER THIN P6a browser test: composed WORLD reactions (jworldc) on the real game. node dev/test/wc-play.js [seeds.jsonl]  (after dev/site/build_site.sh)
    For each seed: opens a REAL window of its kind (worldStart, the seed's own real cause tag), with only that seed in the kind's pool, and checks:
-   the seed is drawn (w.x.c) and marked in P0 (wc:<k>), its people are living real people inside the scope with the wanted nết (a seed whose
+   the seed is drawn (w.x.wc) and marked in P0 (wc:<k>), its people are living real people inside the scope with the wanted nết (a seed whose
    nết / scope no person has in this one test world is FORCED by giving the roster that nết / place / rank / child, reported as forced), the NPC
    round records only the 4 stance ids for people of the scope (≤ BAL.wc.npcMax) and moves their stats the way of the stance, her card comes
    after the kind's card with 4 options, every placeholder filled, choosing (the real chooseM path, stance i%4) is built from exactly
@@ -32,7 +32,7 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;if(!c||process.env.V)console.log((c?'ok
    if(k==="hau"){x.to=v.id;x.from=null}if(k==="ngoai")x.c="Lý";return{cause,x}};
   const open1=(sd,sub)=>{S.wwin={L:[],last:{},n:{},seq:(S.wwin&&S.wwin.seq)||0};const {cause,x}=setup(sd,sub);WW.inTick=1;let w=null;try{w=worldStart(sd.k,cause,{force:1,len:3,x})}finally{WW.inTick=0}return w};
   const force=(sd)=>{let f=1;tr6=v=>ALLN.slice();const Lv=L();const sc=sd.scope;
-   if(sc==="near"){let pl=null;try{pl=E[sd.k].place({k:sd.k,x:{},cause:""})}catch(e){}if(pl){const ids=new Set(Lv.slice(0,4).map(v=>v.id));const wo=whereOf;window.__wo=wo;whereOf=function(q){return q&&ids.has(q.id)?pl:wo.apply(this,arguments)}}}
+   if(sc==="near"){let pl=null;try{pl=E[sd.k].place({k:sd.k,x:{},cause:""})}catch(e){}if(pl){const ids=new Set(Lv.map(v=>v.id));const wo=whereOf;window.__wo=wo;whereOf=function(q){return q&&ids.has(q.id)?pl:wo.apply(this,arguments)}}}
    if(sc==="kids")Lv.forEach(v=>{v.kids=v.kids||[];if(!v.kids.some(k=>k.alive))v.kids.push(mkKid("m",3))});
    if(sc==="hi")Lv.slice(0,3).forEach(v=>v.rank=Math.max(v.rank,BAL.wc.rankHi));if(sc==="lo")Lv.slice(0,3).forEach(v=>v.rank=Math.min(v.rank,BAL.wc.rankHi-1));
    if(sc==="house"){const v=Lv[0];try{const pal=palaceOf(v);}catch(e){}}
@@ -43,9 +43,9 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;if(!c||process.env.V)console.log((c?'ok
    const sub=(sd.sub||[])[i%((sd.sub||[]).length||1)];
    try{nrStore&&0}catch(e){}
    let w=open1(sd,sub);r.open=!!w;if(!w){X_.WC[sd.k]=keep;continue}
-   if(!w.x.c){r.forced=force(sd);if(r.forced===2){r.skip='no such person in this world';X_.WC[sd.k]=keep;tr6=tr0;continue}w=open1(sd,sub)}
-   if(r.forced)out.forced++;r.drawn=!!(w&&w.x.c&&w.x.c.id===sd.id);if(!r.drawn){try{r.dbg=JSON.stringify({w:!!w,sl:w&&(X_.wcScope(sd,w)||[]).length,cast:w&&X_.wcCast(sd,w),fresh:nrNow('wc:'+sd.k,sd.id)})}catch(e){r.dbg=String(e)}X_.WC[sd.k]=keep;tr6=tr0;continue}
-   const c=w.x.c;r.mark=nrNow("wc:"+sd.k,sd.id);
+   if(!w.x.wc){r.forced=force(sd);if(r.forced===2){r.skip='no such person in this world';X_.WC[sd.k]=keep;tr6=tr0;continue}w=open1(sd,sub)}
+   if(r.forced)out.forced++;r.drawn=!!(w&&w.x.wc&&w.x.wc.id===sd.id);if(!r.drawn){try{r.dbg=JSON.stringify({w:!!w,sl:w&&(X_.wcScope(sd,w)||[]).length,cast:w&&X_.wcCast(sd,w),fresh:nrNow('wc:'+sd.k,sd.id)})}catch(e){r.dbg=String(e)}X_.WC[sd.k]=keep;tr6=tr0;continue}
+   const c=w.x.wc;r.mark=nrNow("wc:"+sd.k,sd.id);
    const XX=X_.wcActors(sd,w,c);const A=XX&&XX.A,B=XX&&XX.B;r.who=[A&&A.n,B&&B.n].filter(Boolean).join(' / ')||'-';
    const SL=X_.wcScope(sd,w)||[];
    r.alive=(!A||A.k!=="rv"||A.o.alive)&&(!B||B.k!=="rv"||B.o.alive)&&(!B||!A||A.o!==B.o);
@@ -62,15 +62,15 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;if(!c||process.env.V)console.log((c?'ok
    const k=i++%4;const sid=ids[k],st=sd.stances[sid];const tier=sd.tier||"m",F=BAL.wc.fx[tier];
    S.an=50;for(const a of [A,B])if(a&&a.o&&typeof a.o==='object'){if(a.k==='sv'||a.k==='maid')a.o.loyal=50;if(a.k==='kid')a.o.fond=50}
    const s0=snap(),ra=relV(A),rb=relV(B);const rec={};const ap0=apply;apply=function(o){for(const[kk,v]of Object.entries(o||{}))if(typeof v==='number')rec[kk]=(rec[kk]||0)+v;return ap0.apply(this,arguments)};
-   const obN=(S.wc.ob||[]).length;Q.length=0;Q.push(m);showModal();try{chooseM(k)}finally{apply=ap0}
+   const obN=(S.wc.ob||[]).length;const RL=[];const ra0=relAdd;relAdd=function(x,y,n){for(const a of [A,B])if(a&&a.o&&(x===a.o||y===a.o))RL.push([a,n]);return ra0.apply(this,arguments)};Q.length=0;Q.push(m);showModal();try{chooseM(k)}finally{apply=ap0;relAdd=ra0}
    const exp={};for(const[kk,n]of Object.entries(st.gain))exp[kk]=(exp[kk]||0)+n*F[kk==="rel.A"||kk==="rel.B"?"rel":kk];for(const[kk,n]of Object.entries(st.loss))exp[kk]=(exp[kk]||0)-n*F[kk==="rel.A"||kk==="rel.B"?"rel":kk];
    r.num=[];const gv=X_.val(st.gain,tier,1),lv=X_.val(st.loss,tier,-1);for(const kk of SK){const want=exp[kk]||0,got=(gv.fx[kk]||0)+(lv.fx[kk]||0);if(want!==got)r.num.push(`${kk} ${got}≠${want}`);const asked=kk==="an"?(S.an||0)-s0.an:(rec[kk]||0);if(want&&Math.sign(asked)!==Math.sign(want))r.num.push(`${kk} applied ${asked}, wanted the way of ${want}`)}
-   const relOk=(a,kk,v0)=>{const want=exp[kk]||0;if(!a||!want)return true;const got=relV(a)-v0;return Math.sign(got)===Math.sign(want)||got===0&&Math.abs(relV(a))>=100};
+   const relOk=(a,kk,v0)=>{const want=exp[kk]||0;if(!a||!want)return true;if(a.k==='rv'){/* the engine's call (the person's own rules then size it): sign of what was asked */const s=RL.filter(x=>x[0]===a).reduce((q,x)=>q+x[1],0);return Math.sign(s)===Math.sign(want)}const got=relV(a)-v0;return Math.sign(got)===Math.sign(want)||got===0&&Math.abs(relV(a))>=100};
    if(!relOk(A,"rel.A",ra))r.num.push(`rel.A ${relV(A)-ra}≠${exp["rel.A"]}`);if(!relOk(B,"rel.B",rb))r.num.push(`rel.B ${relV(B)-rb}≠${exp["rel.B"]}`);
    const OB=S.wc.ob||[];r.trace=OB.length>obN?OB[OB.length-1].trace:null;r.objOk=sd.object?OB.length===obN+1&&!!r.trace&&!/\{/.test(r.trace+OB[OB.length-1].name):OB.length===obN;
    r.endTxt=X_.wcEnd(w);r.endOk=nN===0||/Trong cung khi ấy/.test(r.endTxt);
    /* the same seed is not drawn again in this life */
-   const w2=open1(sd,sub);r.rest=!!w2&&!w2.x.c;
+   const w2=open1(sd,sub);r.rest=w2?!(w2.x.wc&&w2.x.wc.id===sd.id):nrNow("wc:"+sd.k,sd.id);/* a kind that cannot reopen at once: the memory says it rests */
    if(window.__wo){whereOf=window.__wo;window.__wo=null}X_.WC[sd.k]=keep;tr6=tr0;S.wwin={L:[],last:{},n:{},seq:(S.wwin&&S.wwin.seq)||0};Q.length=0;
   }catch(e){r.err=String(e&&e.stack||e).slice(0,300);tr6=tr0}}
   out.count=wcCount();return out},FIX);

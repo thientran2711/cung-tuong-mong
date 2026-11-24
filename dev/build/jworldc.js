@@ -7,7 +7,7 @@
    same step effects on her own stats), and she gets the scene as a second CENTER card of that window (after the kind's own card; one per player).
    The end card adds who chose what. Numbers (law 4): one step = BAL.wc.fx[tier][key]; nothing typed here. Laws 2/3: Σgain == Σloss == tier steps
    per stance (validator dev/test/wseeds_validate.py). Objects stay traceable (law 6c): S.wc.ob {sid,name,owner,trace,turn}.
-   The draw (w.x.c) lives in the shared window record S.wwin (host rolls, as every window field); her choice and traces are personal (S.wc). */
+   The draw (w.x.wc) lives in the shared window record S.wwin (host rolls, as every window field); her choice and traces are personal (S.wc). */
 (function(){
 const WX=window.WORLD_X;if(!WX)return;
 const {now,wErr,EVD,liveR,npcPick,mW,pid,byPid,wPresent}=WX;
@@ -85,22 +85,22 @@ function wcTrace(sd,X,st){const o=sd.object;if(!o)return"";const j=wc();const tr
 function wcOpts(sd,w,X){const tier=sd.tier||"m";return Object.entries(sd.stances||{}).map(([id,st])=>{
  const g=val(st.gain,tier,1),l=val(st.loss,tier,-1);const rr=[];if(X.A&&(g.A+l.A))rr.push([X.A,g.A+l.A]);if(X.B&&(g.B+l.B))rr.push([X.B,g.B+l.B]);
  return c6(fill(st.text,sd,X),{c:l.fx,w:g.fx,r:rr,ok:()=>{try{wc().ch[w.id]=id}catch(e){}return [fill((sd.outcomes||{})[id],sd,X),wcTrace(sd,X,st)].filter(Boolean).join(" ")}})})}
-function wcCard(w){const c=w.x&&w.x.c;if(!c)return null;const sd=WCI[c.id];if(!sd)return null;
+function wcCard(w){const c=w.x&&w.x.wc;if(!c)return null;const sd=WCI[c.id];if(!sd)return null;
  if(typeof isSrv==="function"&&isSrv())return null;if(S.out||S.dead)return null;const X=wcActors(sd,w,c);if(!X)return null;
  let nm="";try{nm=window.worldName(w)}catch(e){}
  return{t:nm||"Thế sự trong cung",who:X.A?X.A.f:pEmp(),wwin:1,h:`<p>${fill(sd.news,sd,X)}</p><p>${fill(sd.text,sd,X)}</p>`,opts:wcOpts(sd,w,X)}}
-function wcEnd(w){const c=w.x&&w.x.c;if(!c||!c.r)return"";const sd=WCI[c.id];if(!sd)return"";const X=wcActors(sd,w,c)||{};
+function wcEnd(w){const c=w.x&&w.x.wc;if(!c||!c.r)return"";const sd=WCI[c.id];if(!sd)return"";const X=wcActors(sd,w,c)||{};
  const P=[];for(const[k,L]of Object.entries(c.r)){const st=sd.stances[k];if(!st||!L||!L.length)continue;
   const N=L.map(x=>sd.scope==="srv"?x:(()=>{const p=byPid(x);return p&&p!==S?p.name:null})()).filter(Boolean);if(N.length)P.push(`${N.join(", ")}: «${fill(st.text,sd,X)}»`)}
  return P.length?` Trong cung khi ấy — ${P.join("; ")}.`:""}
 /* wire every kind (EVD is the ONE registry of jworld/jworld2) */
 const PEND=[];
 function wcWrap(k){const E=EVD[k];if(!E||E.__wc)return;E.__wc=1;
- const s0=E.start;E.start=function(w){let t="",er=null;try{t=s0?s0.apply(this,arguments):""}catch(e){er=e}try{if(BAL.wc&&Bc().on&&host()){const c=wcDraw(w);if(c){w.x.c=c;wcRound(WCI[c.id],w,c);WCS.draw++}}}catch(e){wErr("wc start "+k,e)}if(er)throw er;return t};
+ const s0=E.start;E.start=function(w){let t="",er=null;try{t=s0?s0.apply(this,arguments):""}catch(e){er=e}try{if(BAL.wc&&Bc().on&&host()){const c=wcDraw(w);if(c){w.x.wc=c;wcRound(WCI[c.id],w,c);WCS.draw++}}}catch(e){wErr("wc start "+k,e)}if(er)throw er;return t};
  const e0=E.end;E.end=function(w){const t=e0?e0.apply(this,arguments):"";let x="";try{x=wcEnd(w)}catch(e){wErr("wc end "+k,e)}return (t||"")+x};
- const c0=E.card;E.card=function(w){const m=c0?c0.apply(this,arguments):null;try{if(w&&w.x&&w.x.c)PEND.push(w)}catch(e){}return m}}
+ const c0=E.card;E.card=function(w){const m=c0?c0.apply(this,arguments):null;try{if(w&&w.x&&w.x.wc)PEND.push(w)}catch(e){}return m}}
 function flush(){if(!PEND.length||!S||S.dead)return;const j=wc();let n=0;for(const w of PEND.splice(0)){if(j.sh[w.id])continue;j.sh[w.id]=1;
- let m=null;try{m=wcCard(w)}catch(e){wErr("wc card",e)}if(m){Q.push(m);n++;WCS.show++;try{nrMark("wc:"+w.k,w.x.c.id)}catch(e){}}}
+ let m=null;try{m=wcCard(w)}catch(e){wErr("wc card",e)}if(m){Q.push(m);n++;WCS.show++;try{nrMark("wc:"+w.k,w.x.wc.id)}catch(e){}}}
  try{const lo=((S.wwin&&S.wwin.seq)||0)-20;for(const i in j.sh)if(+i<lo)delete j.sh[i];for(const i in j.ch)if(+i<lo)delete j.ch[i]}catch(e){}
  if(n&&$("modal").hidden)showModal()}
 const WCS={draw:0,show:0};window.WCS=WCS;
