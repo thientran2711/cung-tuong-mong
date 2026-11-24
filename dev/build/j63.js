@@ -245,7 +245,7 @@ function kaWhyStat(C,nm,d,title,key){const re=new RegExp("(^|[^\\p{L}])"+nm.repl
 function kaWhyWho(C,v,named,title){try{const nm=v&&v.name;const subj=named&&nm?nm:null;
  const vs=subj&&C.find(x=>/^Vì sao:/i.test(x)&&x.includes(subj));if(vs){const m=vs.replace(/^Vì sao:\s*/i,"").replace(subj,"").replace(/^[^:]*?:\s*/,"").replace(/\s*→.*$/,"");if(m.trim().length>3)return kaWhyClip(m)}
  const hit=C.find(x=>!/^Vì sao:/i.test(x)&&!/→/.test(x)&&(subj?x.includes(subj):/chưa quen biết/.test(x)));
- if(hit){let t=hit;if(subj)t=t.replace(new RegExp("^.*?"+subj.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\s*"),"");else t=t.replace(/^.*?chưa quen biết\s*/,"");t=t.replace(/\s*\(.*$/,"");if(t.length>3){const c=kaWhyClip(t);if(c&&!KA_WHYBAD.test(c))return c}}
+ if(hit){let t=hit;if(subj)t=t.replace(new RegExp("^.*?"+subj.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\s*"),"");else t=t.replace(/^.*?chưa quen biết\s*/,"").replace(/^[Mm]ột vị (Hoàng quý phi|Hoàng hậu|Quý phi|Quý nhân|Thường tại|Đáp ứng|Phi|Tần|phi tần|cung nữ|thái giám|Thị vệ|Thái y)\s*/,"");t=t.replace(/\s*\(.*$/,"");if(t.length>3){const c=kaWhyClip(t);if(c&&!KA_WHYBAD.test(c))return c}}
  }catch(e){}
  return kaWhyClip(title&&!/^Trong cung vừa qua$/.test(title)?title:KA_WHYM)}
 function kaWhyHtml(r){return r?`<span class="kwy"> · ${r}</span>`:""}
