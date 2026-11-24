@@ -2033,6 +2033,12 @@ BAL.blopt={danhD:4,sungD:4,sup:25,
 /* ORDER THIN P0 (jnorep.js, owner OD 23/11 ~22:50Z): ONE shared cross-life no-repeat memory. lives = lives kept (this one + 5 past, as the old
    ctm-e68h), w = weight factor per past life that saw a key (×0.5, as j68), cap = keys kept per life (the store is shared by every family). */
 BAL.nr={lives:6,w:.5,cap:1500};
+/* ORDER THIN P1 (jmgpool.js): mini-game content pools composed from parts, drawn through jnorep (family mg:<kind>). min = items a pooled test type must hold (test dev/test/mg-pool.js). */
+BAL.mgp={min:40};
+/* ORDER THIN P1c (jmgpool_c.js): pool sizes of the P1c kinds (floor BAL.mgp.min); nghe = every triple of the ten secret words. */
+BAL.mgpc={nghe:120,td_hanh:150,kinh:360,may:350};
+/* ORDER THIN P1b (jmgpool_b.js): items per pooled test type of lane P1b (co and doi/doden: per group size / rows / round type) */
+BAL.mgpb={dan:64,co:90,dauho:60,theu:64,mua:64,doi:80,doden:44,tc:100,xa:200,thq:130};
 /* ORDER THIN P2 (j7c.js composed intrigue): on = the family is live; share = its weekly-card weight as a multiple of one world card
    (BAL.ag.why.dil.world); rest = months before the same seed may return in one life (as the old j7 cards, S.seen ≥ 12);
    fx[tier] = what ONE gain/loss step of a seed is worth per key (laws 2/3/4: seeds count steps, the numbers live here; rel = thiện cảm

@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"96e00be1+","t":"2026-11-24T02:02Z","c":"coop-thin-g F2: Danh drift #2 root — her «Sẵn sàng» press (nextBuoi outside a real step) counted as her own step (jcoopthinf WKD wraps next…","b":"6ffe7c0f6541","h":[{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"}]};
+window.CTM_BI={"s":"a84a9336+","t":"2026-11-24T02:43Z","c":"coop-thin-g r3: her held part-D card can no longer vanish for good — gSync belt (5 s) re-reads the last host view so a card that left her Q…","b":"fcb9464def82","h":[{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -6057,7 +6057,7 @@ function silChip(n){return"";if(!n)return"";const k=Math.min(n,3);return `<span 
 /* KIT §85.7 TAG SOLVER (map-labels-missing r2c; owner 18/11 "Tên của những cung khác đâu", OD L1032 + L1416): every place keeps ONE readable tag, never hidden. Pure geometry (screen px rects, no DOM). items [{bv:[[l,t,r,b] union box of the tag (.mlab + .mmeta) at home, same with the name on ONE line (variant 1)], pv:[[parts of v0],[parts of v1]] (the real slip + info-row rects), sr:[l,t,r,b] building rect, rk rank, prot}] -> offsets.
    A tag that still covers its own building (its box meets the middle 60% of the building) needs no leader. Otherwise it keeps a LEADER: the dot sits on the building at the point nearest the tag, the line ends on the REAL slip / info-row rect nearest the dot (never on an empty corner of the union box). HARD rules (counted per pair, one cost function): tag boxes keep a 2 px gap; a leader is at most LMAX long (90 px: move the tag, never a long line); a leader dot keeps DC (40 px, relaxed only if no layout exists) from every other tag and no other tag's dot is that close to this tag; a leader never runs through another tag or crosses another leader. SOFT: a tag does not sit on another place's building; nearer is better; wrapped name preferred over one-line.
    vp (visible map box, after the default scroll): a tag whose building centre is in view lies WHOLE inside it; a building mostly cut by the edge (< etol px) may have its tag WHOLE outside - then NO dot/leader is drawn (the tag shows when she pans); never a tag cut by the edge. 1 constructive (highest rank first) -> 2 repair -> 3 seeded local search over ALL tags, time-boxed. Deterministic. */
-function kmSolve(it,K,wr,budget,vp,etol,DCp){etol=etol||60;const DC=(DCp||40)*K,LMAX=90*K,n=it.length,T=it.map(()=>[0,0]),V=it.map(()=>0),VIS=it.map(x=>!!vp&&(x.sr[0]+x.sr[2])/2>vp[0]&&(x.sr[0]+x.sr[2])/2<vp[2]);
+function kmSolve(it,K,wr,budget,vp,etol,DCp,RX){etol=etol||60;const DC=(DCp||40)*K,LMAX=(RX>2?1e4:RX>1?200:90)*K,n=it.length,T=it.map(()=>[0,0]),V=it.map(()=>0),VIS=it.map(x=>!!vp&&(x.sr[0]+x.sr[2])/2>vp[0]&&(x.sr[0]+x.sr[2])/2<vp[2]);
  const B=it.map(x=>x.bv[0].slice()),P=it.map(x=>x.pv[0]),A=it.map(x=>[(x.sr[0]+x.sr[2])/2,(x.sr[1]+x.sr[3])/2]),E=A.map(a=>a.slice()),LD=it.map(()=>false);
  const RI=it.map(x=>{const w=x.sr[2]-x.sr[0],h=x.sr[3]-x.sr[1];return[x.sr[0]+w*.2,x.sr[1]+h*.2,x.sr[2]-w*.2,x.sr[3]-h*.2]});
  const ovP=(a,b,p)=>Math.min(a[2]+p,b[2])-Math.max(a[0]-p,b[0])>0&&Math.min(a[3]+p,b[3])-Math.max(a[1]-p,b[1])>0,inP=(r,q,p)=>q[0]>=r[0]-p&&q[0]<=r[2]+p&&q[1]>=r[1]-p&&q[1]<=r[3]+p;
@@ -6071,35 +6071,35 @@ function kmSolve(it,K,wr,budget,vp,etol,DCp){etol=etol||60;const DC=(DCp||40)*K,
   return{bi,a,e,ld,len,out}};
  const upd=i=>{const g=geo(i,T[i],V[i]);B[i]=g.bi;P[i]=it[i].pv[V[i]].map(p=>[p[0]+T[i][0],p[1]+T[i][1],p[2]+T[i][0],p[3]+T[i][1]]);LD[i]=g.ld;A[i]=g.a||A[i];E[i]=g.e||A[i]};
  for(let i=0;i<n;i++)upd(i);
- const hardAt=(i,g,M)=>{let v=0;const bi=g.bi,a=g.a,ei=g.e,li=g.ld;if(li&&g.len>LMAX)v++;for(let j=0;j<n;j++){if(j===i||(M&&!M[j]))continue;const bj=B[j];if(ovP(bi,bj,2))v++;if(LD[j]&&inP(bi,A[j],DC))v++;if(li){if(inP(bj,a,DC))v++;if(segR(a,ei,bj,3))v++}if(LD[j]){if(segR(A[j],E[j],bi,3))v++;if(li&&segX(a,ei,A[j],E[j]))v++}}return v};
+ const hardAt=(i,g,M)=>{let v=0,w=0;const bi=g.bi,a=g.a,ei=g.e,li=g.ld;if(li&&g.len>LMAX)v++;for(let j=0;j<n;j++){if(j===i||(M&&!M[j]))continue;const bj=B[j];if(ovP(bi,bj,2))v++;if(LD[j]&&inP(bi,A[j],DC))w++;if(li){if(inP(bj,a,DC))w++;if(segR(a,ei,bj,3))w++}if(LD[j]){if(segR(A[j],E[j],bi,3))w++;if(li&&segX(a,ei,A[j],E[j]))w++}}return RX>2?v:RX?v+w*.08:v+w};
  const SR=it.map(x=>{const w=x.sr[2]-x.sr[0],h=x.sr[3]-x.sr[1];return[x.sr[0]+w*.2,x.sr[1]+h*.2,x.sr[2]-w*.2,x.sr[3]-h*.2]});
  const costAt=(i,t,M,v)=>{v=v===undefined?V[i]:v;const g=geo(i,t,v),bi=g.bi;const out=bi[0]<wr[0]+1||bi[2]>wr[2]-1||bi[1]<wr[1]+1||bi[3]>wr[3]-1;let sf=0;const cx=(bi[0]+bi[2])/2,cy=(bi[1]+bi[3])/2,o=it[i].sr;if(!(cx>=o[0]&&cx<=o[2]&&cy>=o[1]&&cy<=o[3]))for(let j=0;j<n;j++){if(j!==i&&cx>=SR[j][0]&&cx<=SR[j][2]&&cy>=SR[j][1]&&cy<=SR[j][3])sf++}
-  let vpP=0;if(vp){if(VIS[i]){if(!(bi[0]>=vp[0]+3&&bi[2]<=vp[2]-3))vpP=g.out&&((it[i].sr[0]+it[i].sr[2])/2<vp[0]+etol*K||(it[i].sr[0]+it[i].sr[2])/2>vp[2]-etol*K)?60:1e5}else if(bi[2]>vp[0]-1&&bi[0]<vp[2]+1)vpP=1e5}
+  let vpP=0;if(vp){if(VIS[i]){if(!(bi[0]>=vp[0]+3&&bi[2]<=vp[2]-3))vpP=g.out&&((it[i].sr[0]+it[i].sr[2])/2<vp[0]+etol*K||(it[i].sr[0]+it[i].sr[2])/2>vp[2]-etol*K)?60:RX>1?400:1e5}else if(bi[2]>vp[0]-1&&bi[0]<vp[2]+1)vpP=RX>1?400:1e5}
   return 1000*hardAt(i,g,M)+40*sf+Math.hypot(t[0],t[1])/K+(out?1e6:0)+(v?15:0)+vpP};
  const hardI=i=>{const g={bi:B[i],a:LD[i]?A[i]:null,e:E[i],ld:LD[i],len:LD[i]?Math.hypot(E[i][0]-A[i][0],E[i][1]-A[i][1]):0};return hardAt(i,g,null)};
- const NV=it.map(x=>x.bv[1]!==x.bv[0]?2:1);
- const search=(i,M)=>{let bt=[0,0],bv=0,bc=costAt(i,bt,M,0);for(let v=0;v<NV[i];v++){const c0=costAt(i,[0,0],M,v);if(c0<bc){bc=c0;bv=v;bt=[0,0]}}for(let r=4*K;r<=300*K&&r/K<bc;r+=4*K){const m=Math.max(12,Math.round(r/K/3));for(let k=0;k<m;k++){const a=k*2*Math.PI/m,t=[Math.round(r*Math.cos(a)),Math.round(r*Math.sin(a))];for(let v=0;v<NV[i];v++){const c=costAt(i,t,M,v);if(c<bc){bc=c;bt=t;bv=v}}}}return[bt,bv]};
+ const RM=RX>2?600:300;const NV=it.map(x=>x.bv[1]!==x.bv[0]?2:1);
+ const search=(i,M)=>{let bt=[0,0],bv=0,bc=costAt(i,bt,M,0);for(let v=0;v<NV[i];v++){const c0=costAt(i,[0,0],M,v);if(c0<bc){bc=c0;bv=v;bt=[0,0]}}for(let r=4*K;r<=RM*K&&r/K<bc;r+=4*K){const m=Math.max(12,Math.round(r/K/3));for(let k=0;k<m;k++){const a=k*2*Math.PI/m,t=[Math.round(r*Math.cos(a)),Math.round(r*Math.sin(a))];for(let v=0;v<NV[i];v++){const c=costAt(i,t,M,v);if(c<bc){bc=c;bt=t;bv=v}}}}return[bt,bv]};
  const ord=it.map((x,i)=>i).sort((a,b)=>it[b].rk-it[a].rk);
  const M=new Uint8Array(n);for(const i of ord){const s=search(i,M);T[i]=s[0];V[i]=s[1];upd(i);M[i]=1}
  const asc=ord.slice().reverse();
  for(let pass=0;pass<6;pass++){let ch=0;for(const i of asc){if(!hardI(i))continue;const s=search(i,null);if(costAt(i,s[0],null,s[1])<costAt(i,T[i],null)){T[i]=s[0];V[i]=s[1];upd(i);ch++}}if(!ch)break}
  let hv=it.map((x,i)=>hardI(i));const tot=()=>hv.reduce((a,b)=>a+b,0);
  if(tot()){const t0=performance.now();let best=T.map(t=>t.slice()),bestV=V.slice(),bh=tot(),sd=(n*2654435761)>>>0;const rnd=()=>{sd=(sd+0x6D2B79F5)>>>0;let z=sd;z=Math.imul(z^z>>>15,z|1);z^=z+Math.imul(z^z>>>7,z|61);return((z^z>>>14)>>>0)/4294967296};
-  const mvOK=it.map((x,i)=>!x.prot||hv[i]>0&&it.some((p,j)=>j!==i&&p.prot&&ovP(B[i],B[j],2)));
+  const mvOK=it.map((x,i)=>!x.prot||hv[i]>0&&(RX||it.some((p,j)=>j!==i&&p.prot&&ovP(B[i],B[j],2))));
   for(let rs=0;rs<400&&bh>0&&performance.now()-t0<(budget||350);rs++){let Tm=60;for(let k=0;k<6000&&tot();k++){const VL=[];for(let m=0;m<n;m++)if(hv[m])VL.push(m);const vn=VL[Math.floor(rnd()*VL.length)];let i=vn;
     if(rnd()<.45){const nb=[];for(let m=0;m<n;m++){const ca=(it[m].sr[0]+it[m].sr[2])/2,cb=(it[m].sr[1]+it[m].sr[3])/2,va=(it[vn].sr[0]+it[vn].sr[2])/2,vb=(it[vn].sr[1]+it[vn].sr[3])/2;if(m!==vn&&mvOK[m]&&Math.hypot(ca-va,cb-vb)<260*K)nb.push(m)}if(nb.length)i=nb[Math.floor(rnd()*nb.length)]}
     if(!mvOK[i]){i=vn;if(!mvOK[i])continue}
-    const r=rnd()<.2?0:Math.pow(rnd(),1.3)*300*K,a=rnd()*2*Math.PI,t=r?[Math.round(r*Math.cos(a)),Math.round(r*Math.sin(a))]:[0,0],nv=NV[i]>1&&rnd()<.3?1-V[i]:V[i],d=costAt(i,t,null,nv)-costAt(i,T[i],null);
+    const r=rnd()<.2?0:Math.pow(rnd(),1.3)*RM*K,a=rnd()*2*Math.PI,t=r?[Math.round(r*Math.cos(a)),Math.round(r*Math.sin(a))]:[0,0],nv=NV[i]>1&&rnd()<.3?1-V[i]:V[i],d=costAt(i,t,null,nv)-costAt(i,T[i],null);
     if(d<=0||rnd()<Math.exp(-d/Tm)){T[i]=t;V[i]=nv;upd(i);for(let m=0;m<n;m++)hv[m]=hardI(m)}Tm=Math.max(4,Tm*.9993);if(performance.now()-t0>(budget||350))break}
    if(tot()<bh){bh=tot();best=T.map(t=>t.slice());bestV=V.slice()}}
   for(let i=0;i<n;i++){T[i]=best[i];V[i]=bestV[i];upd(i)}hv=it.map((x,i)=>hardI(i));
   for(let pass=0;pass<3;pass++){let ch=0;for(const i of asc){if(T[i][0]===0&&T[i][1]===0||hardI(i))continue;const s=search(i,null);if(costAt(i,s[0],null,s[1])<costAt(i,T[i],null)-.5){T[i]=s[0];V[i]=s[1];upd(i);ch++}}if(!ch)break}}
- return{t:T,v:V,A,E,lead:LD,hard:it.reduce((a,x,i)=>a+hardI(i),0)/2,bad:it.map((x,i)=>hardI(i)?i:-1).filter(i=>i>=0)}}
+ /* RX (last resort, only when no clean layout exists): 1 = leader dots / lines near a tag cost a little instead of forbidding (leaders stay <= 90 px, protected tags may move); 2 = leaders up to 200 px and a tag cut by the visible edge costs a little (she pans) instead of being forbidden; 3 = only tag boxes touching each other count (any leader length / crossing allowed); hard = tag boxes that still touch (plus too-long leaders) */const hd=i=>Math.floor(hardI(i));return{t:T,v:V,A,E,lead:LD,hard:it.reduce((a,x,i)=>a+hd(i),0)/2,bad:it.map((x,i)=>hd(i)?i:-1).filter(i=>i>=0)}}
 /* the plan always covers the screen: the smallest zoom fills the height as well as the width */
 function mapFit(){try{const sc=document.querySelector(".game.maptab .mapsc");if(!sc)return;const w=sc.querySelector(".mapw"),img=sc.querySelector(".mapimg");if(!w)return;
  const asp=img&&img.naturalWidth?img.naturalWidth/img.naturalHeight:sc.closest(".kpmv")?1.76:1.792;/* dudo-blank: the same box the CSS gives the frame before the picture has loaded */
  /* KIT §85.7 (owner 17/11 "Dư đồ zoom gần quá"): the default zoom shows the WHOLE palace map inside the free area (screen minus the left rail / right card column / tools row, read from the .mapw margins); +/- zoom from there */
- const kp=!!sc.closest(".kpmv");
+ const kp=!!sc.closest(".kpmv");if(!kp)window.__mapVerOK=false;/* true again when a settle look agrees with the solution (read by dev/test/map-label-overlap.js) */
  /* KIT §85.8 (owner 17/11 ~13:12Z "dư đồ nhỏ xíu"): PORTRAIT (kv1) = people cards row above, Ân sủng + Nguy hiểm row below (jmapc grid on #kshR); the map spans the full width between them: the margins come from the REAL row heights, the zoom FITS THE FREE HEIGHT (pan sideways), the open view is centred on her place + the "!" places */
  const one=!kp&&kitView().pages===1;
  const rowsM=()=>{const mv=sc.closest(".mapv"),R=document.getElementById("kshR");if(!mv||!R||R.hidden)return null;const mr=mv.getBoundingClientRect(),tc=R.querySelector(".k3cs"),tb=tc?tc.getBoundingClientRect():null,bt=[...R.querySelectorAll(".k3p:not(.kgf)")].map(e=>e.getBoundingClientRect()).filter(r=>r.height>0);return[mv,Math.round(tb&&tb.height>0?tb.bottom-mr.top+6:46),Math.round(bt.length?mr.bottom-Math.min(...bt.map(r=>r.top))+6:0)]};
@@ -6121,9 +6121,9 @@ function mapFit(){try{const sc=document.querySelector(".game.maptab .mapsc");if(
   /* variant 1 = the same tag with its name on ONE line (kit class kmnw): measured for every tag in one pass, chosen by the solver only where the wrapped shape does not fit */
   its.forEach(i=>i.s.classList.add("kmnw"));its.forEach(i=>{const b=box(i.s);i.bv.push(b?[b.left,b.top,b.right,b.bottom]:i.bv[0]);i.pv.push(b?parts(i.s):i.pv[0])});its.forEach(i=>i.s.classList.remove("kmnw"));
   const K=its.length&&its[0].s.offsetWidth?((its[0].sr[2]-its[0].sr[0])/its[0].s.offsetWidth)||1:1;const ck=(vp?vp.map(Math.round):"")+"|"+K.toFixed(3)+"|"+[wr.left,wr.top,wr.right,wr.bottom].map(Math.round)+"|"+its.map(i=>i.bv[0].map(Math.round)+","+i.bv[1].map(Math.round)+","+i.sr.map(Math.round)+","+i.rk+i.prot).join(";");
-  let sol;try{sol=(window.__mapSolC&&window.__mapSolC[0]===ck)?window.__mapSolC[1]:(()=>{const W=[wr.left,wr.top,wr.right,wr.bottom];let q=kmSolve(its,K,W,undefined,vp);for(const [et,dc] of [[60,28],[60,16],[120,16],[200,16]])if(q.hard>0){const q2=kmSolve(its,K,W,150,vp,et,dc);if(q2.hard<q.hard)q=q2}return q})();window.__mapSolC=[ck,sol];window.__mapErr=""}catch(e){window.__mapErr=String(e&&e.stack||e).slice(0,300);console.error(e);sol={t:its.map(()=>[0,0]),v:its.map(()=>0),A:its.map(i=>i.A),E:its.map(i=>i.A),lead:its.map(()=>false),hard:-1,bad:[]}}
+  let sol;try{const SC=window.__mapSolC2||(window.__mapSolC2={});sol=SC[ck]||(()=>{const W=[wr.left,wr.top,wr.right,wr.bottom];let q=kmSolve(its,K,W,undefined,vp);for(const [et,dc,rx] of [[60,28],[60,16],[120,16],[200,16],[200,16,1],[200,16,2],[200,16,3]])if(q.hard>0&&(vp||!rx)){const q2=kmSolve(its,K,W,rx?500:150,vp,et,dc,rx);if(q2.hard<q.hard)q=q2}return q})();{const ks=Object.keys(SC);if(ks.length>7)delete SC[ks[0]];SC[ck]=sol}window.__mapErr=""}catch(e){window.__mapErr=String(e&&e.stack||e).slice(0,300);console.error(e);sol={t:its.map(()=>[0,0]),v:its.map(()=>0),A:its.map(i=>i.A),E:its.map(i=>i.A),lead:its.map(()=>false),hard:-1,bad:[]}}
   its.forEach((i,n)=>{const t=sol.t[n];i.s.classList.toggle("kmnw",!!sol.v[n]);i.s.style.translate=t[0]||t[1]?(t[0]/K)+"px "+(t[1]/K)+"px":"";if(!sol.lead[n])return;const A=sol.A[n],e=sol.E[n],ax=(A[0]-i.sr[0]-t[0])/K,ay=(A[1]-i.sr[1]-t[1])/K,lx=(e[0]-i.sr[0]-t[0])/K,ly=(e[1]-i.sr[1]-t[1])/K,d=Math.hypot(lx-ax,ly-ay);const el=document.createElement("i");el.className="mlead";el.setAttribute("aria-hidden","true");el.style.cssText="left:"+ax+"px;top:"+ay+"px;width:"+d+"px;transform:rotate("+Math.atan2(ly-ay,lx-ax)+"rad)";i.s.insertBefore(el,i.s.firstChild)});
-  window.__mapIts=its.map(i=>({bv:i.bv,pv:i.pv,sr:i.sr,A:i.A,rk:i.rk,prot:i.prot,n:i.s.dataset.go||i.s.dataset.ak||i.s.textContent.slice(0,8)}));window.__mapK=[K,[wr.left,wr.top,wr.right,wr.bottom],vp];window.__mapSolve={hard:sol.hard,bad:sol.bad.map(n=>its[n].s.dataset.go||its[n].s.dataset.ak||its[n].s.textContent.slice(0,10)),moved:sol.t.filter(t=>t[0]||t[1]).length,oneLine:sol.v.filter(v=>v).length};
+  window.__mapVer=its.map((i,n)=>{const t=sol.t[n],b=i.bv[sol.v[n]||0];return{s:i.s,e:[b[0]+t[0],b[1]+t[1],b[2]+t[0],b[3]+t[1]]}});window.__mapIts=its.map(i=>({bv:i.bv,pv:i.pv,sr:i.sr,A:i.A,rk:i.rk,prot:i.prot,n:i.s.dataset.go||i.s.dataset.ak||i.s.textContent.slice(0,8)}));window.__mapK=[K,[wr.left,wr.top,wr.right,wr.bottom],vp];window.__mapSolve={t:sol.t,v:sol.v,hard:sol.hard,bad:sol.bad.map(n=>its[n].s.dataset.go||its[n].s.dataset.ak||its[n].s.textContent.slice(0,10)),moved:sol.t.filter(t=>t[0]||t[1]).length,oneLine:sol.v.filter(v=>v).length};
  };
  const place=zz=>{const __t0=performance.now();w.style.width=(zz*100)+"%";if(kp)return;labs().forEach(e=>{e.classList.remove("kmhide","kmnw");e.style.translate="";const o=e.querySelector(":scope>.mlead");if(o)o.remove()});const flo=one?KMAP_MLS_ONE[0]:KMAP_MLS;let m=one?KMAP_MLS_ONE[1]:1;w.style.setProperty("--mls",m);while(pairs().length&&m>flo+.001){m=Math.max(flo,+(m-.04).toFixed(2));w.style.setProperty("--mls",m)}
   solveTags(null);
@@ -6135,9 +6135,14 @@ function mapFit(){try{const sc=document.querySelector(".game.maptab .mapsc");if(
   if(one){const hs=[...w.querySelectorAll(".mspot")].filter(s=>s.classList.contains("here")||(s.querySelector(".khap")&&!s.classList.contains("kmhide"))),rs=hs.map(s=>s.getBoundingClientRect()),sr=sc.getBoundingClientRect();if(rs.length>1){const l=Math.min(...rs.map(r=>r.left)),r=Math.max(...rs.map(r=>r.right));if(r-l<=sr.width-24)sc.scrollLeft+=(l+r)/2-(sr.left+sr.width/2)}}
   window.__mapKey2=key}
  if(!kp){const sr=sc.getBoundingClientRect();solveTags([sr.left+mL,sr.top,sr.right-(port?0:mR),sr.bottom])}/* default view: no tag cut by the visible edge (map-labels r2b) */
- if(!sc.dataset.sv){sc.dataset.sv=1;try{if(window.ResizeObserver){let t=0,sz=sc.clientWidth+"x"+sc.clientHeight;new ResizeObserver(()=>{const n=sc.clientWidth+"x"+sc.clientHeight;if(n===sz)return;sz=n;clearTimeout(t);t=setTimeout(()=>{try{if(sc.isConnected&&!window.__mapList)mapFit()}catch(e){}},60)}).observe(sc)}}catch(e){}sc.addEventListener("scroll",()=>{window.__mapPos2=[sc.scrollLeft,sc.scrollTop]},{passive:true})}}catch(e){}}
+ {const r=w.getBoundingClientRect();sc.__lw=Math.round(r.width)+"x"+Math.round(r.height)}
+ {const L=window.__mapFitLog||(window.__mapFitLog=[]);L.push([Math.round(performance.now()),+z.toFixed(3),sc.__lw,(window.__mapSolve||{}).hard,sc.clientWidth+"x"+sc.clientHeight]);if(L.length>40)L.shift()}/* last fits (time, zoom, map size, solver hard, scroll box): read by dev/test/map-label-overlap.js when a case fails */
+ /* map-label-overlap SETTLE CHECK: whatever moves things after the solve (a painter, the left / right columns filling in, the picture, a font) leaves the tags where the solver put them for a different layout. after a fit, every tag is compared with where the solver expects it at 250, 850, 2050 and 4450 ms (a plain scroll shifts all of them alike and is ignored: the median shift is removed); if one is off by more than 3 px the map is fitted again and the 4 looks restart from that fit (max 6 re-fits per map; the loop stops after 4 agreeing looks, so the fit converges on first open however late the layout settles) */
+ if(!kp){clearTimeout(window.__mapVerT);const VD=[250,600,1200,2400],vf=k=>{window.__mapVerT=setTimeout(()=>{try{const V=window.__mapVer;if(!V||!sc.isConnected||window.__mapList||tab!=="go")return;const D=V.filter(x=>x.s.isConnected).map(x=>{const b=box(x.s);return b?[b.left-x.e[0],b.top-x.e[1]]:null}).filter(Boolean);if(D.length<3)return;const med=a=>a.slice().sort((p,q)=>p-q)[a.length>>1],mx=med(D.map(d=>d[0])),my=med(D.map(d=>d[1]));if(D.some(d=>Math.abs(d[0]-mx)>3||Math.abs(d[1]-my)>3)){if((sc.__vN=(sc.__vN||0)+1)<7)mapFit();return}window.__mapVerOK=true;if(k<VD.length-1)vf(k+1)}catch(e){}},VD[k])};vf(0)}
+ if(!sc.dataset.sv){sc.dataset.sv=1;/* map-label-overlap: the painters that wrap rank titles / marks inside a place name (kitRankPaint, kitMarkPaint, k61 scrub: MutationObserver passes that run AFTER the render) change the width of a tag the solver already measured, so two tags the solver cleared could touch again: any text/child change inside a tag re-fits once (own edits - class, translate, .mlead - are outside .mlab/.mmeta and never loop; max 6 per map) */try{if(!kp&&window.MutationObserver){let t=0,cnt=0;new MutationObserver(ms=>{if(!ms.some(m=>{const x=m.target.nodeType===1?m.target:m.target.parentElement;return x&&x.closest&&x.closest('.mlab,.mmeta')}))return;clearTimeout(t);t=setTimeout(()=>{try{if(sc.isConnected&&!window.__mapList&&tab==='go'&&cnt++<6)mapFit()}catch(e){}},40)}).observe(w,{childList:true,subtree:true,characterData:true})}/* the map frame itself can change size with no change of the scroll box (left rail / right card column fill in after the fit, picture aspect): re-fit when .mapw is not the size the last fit measured */if(!kp&&window.ResizeObserver){let t2=0;new ResizeObserver(()=>{const r=w.getBoundingClientRect(),n=Math.round(r.width)+"x"+Math.round(r.height);if(n===sc.__lw)return;clearTimeout(t2);t2=setTimeout(()=>{try{if(sc.isConnected&&!window.__mapList&&tab==="go"&&(sc.__lwN=(sc.__lwN||0)+1)<8)mapFit()}catch(e){}},40)}).observe(w)}}catch(e){}try{if(window.ResizeObserver){let t=0,sz=sc.clientWidth+"x"+sc.clientHeight;new ResizeObserver(()=>{const n=sc.clientWidth+"x"+sc.clientHeight;if(n===sz)return;sz=n;clearTimeout(t);t=setTimeout(()=>{try{if(sc.isConnected&&!window.__mapList)mapFit()}catch(e){}},60)}).observe(sc)}}catch(e){}sc.addEventListener("scroll",()=>{window.__mapPos2=[sc.scrollLeft,sc.scrollTop]},{passive:true})}}catch(e){}}
 (function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(tab==="go"&&!window.__mapList){mapFit();requestAnimationFrame(()=>{try{if(tab==="go"&&!window.__mapList)mapFit()}catch(e){}});const img=document.querySelector(".mapsc .mapimg");if(img&&!img.complete)img.addEventListener("load",mapFit,{once:true})}}catch(e){}return r}})();
 addEventListener("resize",()=>{try{if(S&&tab==="go")mapFit()}catch(e){}});
+/* first open: the page "load" (late pictures / styles) re-fits once as well */try{if(document.readyState!=="complete")addEventListener("load",()=>{try{if(S&&tab==="go"&&!window.__mapList)mapFit()}catch(e){}},{once:true})}catch(e){}
 try{if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{try{if(S&&tab==="go"&&!window.__mapList)mapFit()}catch(e){}});if(document.fonts)document.fonts.addEventListener("loadingdone",()=>{try{if(S&&tab==="go"&&!window.__mapList)mapFit()}catch(e){}})}catch(e){}
 /* zoom buttons: the floor is the fitted size, not 1 */
 document.addEventListener("click",e=>{const z=e.target.closest(".game.maptab [data-mapz]");if(!z)return;e.stopImmediatePropagation();e.preventDefault();const f=window.__mapFit||1;window.__mapZ=cl((window.__mapZ||f)+(+z.dataset.mapz)*.5*Math.max(.6,f),f,f+2.5);render()},true);
@@ -25444,6 +25449,180 @@ function nrPick(fam,list,idf,wf){list=list||[];if(!list.length)return null;idf=i
  if(!(T>0))return list[Math.floor(Math.random()*list.length)];let r=Math.random()*T;for(let i=0;i<list.length;i++){r-=W[i];if(r<0)return list[i]}return list[list.length-1]}
 function nrDraw(fam,list,idf,wf){const x=nrPick(fam,list,idf,wf);if(x!=null)nrMark(fam,(idf||(y=>y))(x));return x}
 function nrFresh(fam,list,idf){idf=idf||(x=>x);const f=(list||[]).filter(x=>!nrSeen(fam,idf(x)));return f.length?f:(list||[])}
+/* ================= jmgpool: MINI-GAME CONTENT POOLS composed from parts (ORDER THIN P1, owner OD 23/11 ~22:50Z; EVCAT §3 P1) =================
+   One pool per test type, >= BAL.mgp.min (40) items, each built from parts (hat: theme × omitted line × melody contour; hoa: season × tray;
+   banh: dish type × main × two extras; huong: essence triple × target mix; ve: layout × motif set; kim: shape set × layout seed) and drawn
+   through the ONE shared cross-life no-repeat memory (jnorep, family `mg:<kind>`, key = item id: last BAL.nr.lives lives, weight BAL.nr.w per life seen).
+   Rules, board sizes and difficulty-by-rank stay in the engines (BAL.mgTier*); a pool item only decides WHICH content the board shows.
+   API: mgpItems(kind) -> the composed pool · mgpOne(kind,used?,filter?) -> one item drawn through P0 (used = ids already shown this game, pushed on)
+        mgpRng(seedString) -> deterministic () => 0..1 · mgpSkin(kind) -> skin id or "" (mgskin:<kind>, today's art when no skin is registered).
+   Player-visible words (song lines, dish names) are cổ trang, no digits, no %, per dev/kit/VANPHONG.md. ONE CORE: counts/limits read BAL.mgp (jbal2.js). */
+const MGP_C={};
+function mgpRng(s){s=String(s);let h=1779033703^s.length;for(let i=0;i<s.length;i++){h=Math.imul(h^s.charCodeAt(i),3432918353);h=h<<13|h>>>19}
+ let a=(h=Math.imul(h^h>>>16,2246822507)^Math.imul(h^h>>>13,3266489909))^h>>>16;return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+/* hat: eight themes × five lục bát lines; a song = one theme with one line left out (5) × three melody contours = 120 songs */
+const MGP_HAT={
+ "Tây Hồ":["Gió đưa cành trúc la đà","Tiếng chuông Trấn Vũ canh gà Thọ Xương","Mịt mù khói tỏa ngàn sương","Nhịp chày Yên Thái mặt gương Tây Hồ","Sen vừa hé nụ bên bờ"],
+ "Xuân":["Xuân về én liệng trước hiên","Đào hồng thắm nụ bên thềm sớm mai","Mưa phùn thấm ướt tóc mây","Cành mai rụng cánh vương đầy lối đi","Nắng non vàng cả mái ngói"],
+ "Hạ":["Sen hồng thơm ngát mặt hồ","Ve ngân khúc hạ giữa trưa vắng người","Bóng đa che mát sân đình","Thuyền ai chở nắng ngang dòng sông xanh","Gió nồm thổi mát lầu son"],
+ "Thu":["Thu sang lá rụng đầy sân","Cúc vàng khoe sắc bên hàng giậu thưa","Trăng thu soi bóng song đào","Nhạn bay về phía chân mây xa xôi","Hương cốm thoảng ngõ chiều thu"],
+ "Đông":["Đông sang gió buốt lầu cao","Lò than ấm áp bên bàn trà thơm","Mai vàng nở rộ trong sương","Tuyết rơi phủ trắng mái hiên thâm cung","Đèn khuya soi bóng thêu hoa"],
+ "Trăng":["Đêm rằm trăng tỏ giữa trời","Bóng nga thấp thoáng bên thềm hoa lê","Ngân hà vắt ngang đỉnh trời","Gió đưa tiếng sáo vọng về canh khuya","Vầng trăng soi tỏ lòng ai"],
+ "Hội":["Đèn hoa rực rỡ khắp thành","Tiếng trống hội vọng quanh đình sớm hôm","Áo là phấp phới ngoài sân","Pháo hồng nổ rộn khắp vùng xuân tươi","Người đi trảy hội chen chân"],
+ "Thuyền":["Thuyền ai neo bến sông trăng","Mái chèo khua nhẹ nước trong lững lờ","Sương giăng mờ mịt bờ đê","Tiếng ca vọng lại bên hồ xa xa","Cánh buồm no gió về xuôi"]};
+function mgpGenHat(){const out=[],CT=[[1.05,2.2,3.5,.19,.08,.035],[.9,2,3.2,.19,.085,.03],[1,1.8,3.4,.18,.09,.03]];/* contours never steeper than today's (sum of amplitude × frequency <= .498) */
+ for(const th of Object.keys(MGP_HAT)){const L=MGP_HAT[th];for(let o=0;o<L.length;o++)for(let c=0;c<CT.length;c++){const id=`hat-${th}-${o}-${c}`,R=mgpRng(id);
+  out.push({id,theme:th,lines:L.filter((_,i)=>i!==o),f:CT[c].slice(0,3),a:CT[c].slice(3),ph:[R()*6,R()*6,R()*6]})}}return out}
+/* hoa: four seasons × six look-alike orders × twenty-one pairs of other flowers = 504 trays */
+function mgpGenHoa(){const out=[],NS=4,NL=3,NO=7,PR=[];for(let a=0;a<NO;a++)for(let b=a+1;b<NO;b++)PR.push([a,b]);
+ const ROT=[[0,1,2],[1,2,0],[2,0,1],[0,2,1],[2,1,0],[1,0,2]];
+ for(let si=0;si<NS;si++)for(let t=0;t<ROT.length*PR.length;t++)out.push({id:`hoa-${si}-${t}`,si,like:ROT[t%ROT.length],oth:PR[Math.floor(t/ROT.length)]});return out}
+/* banh: dish type × main × two extras (only ingredients that have a painting on the CDN; fire zone 2 big / 1 middle / 0 small, as K91_RC) */
+function mgpGenBanh(){const out=[],seen=new Set(),lc=s=>s.charAt(0).toLowerCase()+s.slice(1);
+ const add=(nm,st)=>{const n=st.map(x=>x[0]);if(new Set(n).size!==n.length)return;const id="banh-"+n.join("|");if(seen.has(id))return;seen.add(id);out.push({id,nm,steps:st})};
+ add("Chè hạt sen long nhãn",[["Nước giếng",2],["Hạt sen",1],["Long nhãn",0],["Đường phèn",0]]);add("Gà ác tần thuốc bắc",[["Gà ác",2],["Thuốc bắc",1],["Táo đỏ",1],["Kỷ tử",0]]);
+ add("Cháo yến sào",[["Gạo tám",2],["Nước dùng",1],["Yến sào",0],["Đường phèn",0]]);add("Canh hạt sen hầm xương",[["Xương ống",2],["Hạt sen",1],["Củ sen",1],["Hành ngò",0]]);
+ const SW=["Hạt sen","Long nhãn","Táo đỏ","Kỷ tử","Củ sen"];
+ for(const m of SW)for(const a of ["Long nhãn","Đường phèn","Kỷ tử","Táo đỏ"])for(const b of ["Đường phèn","Kỷ tử"])add(`Chè ${lc(m)} ${lc(a)}${b===a?"":" "+lc(b)}`,[["Nước giếng",2],[m,1],[a,0],[b,0]]);
+ for(const m of ["Yến sào","Hạt sen","Gà ác","Kỷ tử","Táo đỏ"])for(const f of ["Đường phèn","Hành ngò","Kỷ tử"])add(`Cháo ${lc(m)} ${lc(f)}`,[["Gạo tám",2],["Nước dùng",1],[m,0],[f,0]]);
+ for(const m of ["Hạt sen","Củ sen","Táo đỏ"])for(const s of ["Củ sen","Hạt sen","Táo đỏ","Thuốc bắc"])for(const f of ["Hành ngò","Kỷ tử"])add(`Canh ${lc(m)} ${lc(s)} hầm xương`,[["Xương ống",2],[m,1],[s,1],[f,0]]);
+ for(const m of ["Thuốc bắc","Hạt sen","Củ sen"])for(const s of ["Táo đỏ","Kỷ tử","Long nhãn"])for(const f of ["Kỷ tử","Hành ngò","Đường phèn"])add(`Gà ác tần ${lc(m)} ${lc(s)}`,[["Gà ác",2],[m,1],[s,1],[f,0]]);
+ return out}
+/* huong: three essences (colour apart) × a target mix (three weights 1..6, spread >= 2) */
+const MGP_ES=[[122,74,42],[236,230,170],[200,80,30],[224,122,154],[79,176,160],[176,136,80],[160,120,200]];
+function mgpGenHuong(){const out=[],TV=[[1,3,5],[5,2,3],[2,5,1],[4,1,5],[3,6,1],[6,2,4],[2,4,6],[6,3,1],[1,4,2],[3,1,5],[5,5,2],[4,6,2]],D=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1],a[2]-b[2]);
+ for(let a=0;a<7;a++)for(let b=a+1;b<7;b++)for(let c=b+1;c<7;c++){const E=[a,b,c];if(!(D(MGP_ES[a],MGP_ES[b])>90&&D(MGP_ES[a],MGP_ES[c])>90&&D(MGP_ES[b],MGP_ES[c])>90))continue;
+  for(let t=0;t<TV.length;t++)out.push({id:`huong-${a}${b}${c}-${t}`,E,tv:TV[t]})}return out}
+/* ve: six layouts (the three masters' scrolls and their mirror images) × forty motif sets (far = núi khách / hạc, middle = núi chủ / tùng / hạc, near = thuyền / tùng) */
+function mgpGenVe(){const out=[],LAY=[[[.30,.46],[.74,.28],[.62,.80],[.12,.74],[.88,.58],[.50,.22]],[[.22,.26],[.62,.42],[.26,.78],[.78,.82],[.84,.18],[.46,.84]],[[.74,.38],[.26,.24],[.44,.58],[.16,.76],[.62,.84],[.92,.62]]];
+ const far=["sonkhach","hac"],mid=["sonchu","tung","hac"],near=["thuyen","tung"],ROLE=v=>v<.36?far:v<.66?mid:near;
+ for(let l=0;l<6;l++){const S=LAY[l%3].map(([u,v])=>[l<3?u:+(1-u).toFixed(2),v]);
+  for(let k=0;k<40;k++){const m=S.map(([u,v],i)=>{const R=ROLE(v);return[R[(k+i*(1+(k>>1)))%R.length],u,v]});
+   /* the first motifs (a game shows 3–4 of them) must hold two kinds at least */
+   if(new Set(m.slice(0,3).map(x=>x[0])).size<2){const R=ROLE(m[1][2]),a=R.find(t=>t!==m[0][0]);if(a)m[1][0]=a}
+   out.push({id:`ve-${l}-${k}`,m})}}return out}
+/* kim: a fold set × a layout seed (hole places are drawn from the seed: the same item = the same paper) */
+function mgpGenKim(){const out=[],SH=[["moon","tri"],["moon","drop"],["tri","drop"],["moon","tri","drop"]];/* never a single shape: the board keeps its choice */
+ for(let s=0;s<SH.length;s++)for(let q=0;q<80;q++)out.push({id:`kim-${s}-${q}`,sh:SH[s],seed:`kim${s}-${q}`});return out}
+/* tho: every calligraphy glyph (jnwp NW_GLYPH, the one table) × six brush manners (upright · narrow · leaning right · leaning left · slight lean · narrow lean); a manner only reshapes the unit square, strokes and order stay */
+function mgpGenTho(){const out=[],G=typeof NW_GLYPH!=="undefined"?NW_GLYPH:null;if(!G)return out;const MAN=[[1,0],[.88,0],[1,.08],[.9,-.08],[.94,.04],[.84,-.05]],cl=v=>Math.max(.06,Math.min(.94,+v.toFixed(3)));
+ for(const n of Object.keys(G))for(const [nm,S] of G[n])for(let m=0;m<MAN.length;m++){const [k,sk]=MAN[m];out.push({id:`tho-${n}-${nm}-${m}`,n:+n,g:[nm,S.map(st=>st.map(([x,y])=>[cl(.5+(x-.5)*k+sk*(.5-y)),y]))]})}return out}
+/* le: object set (N of the eight altar pieces, jnwq NWQ_LE) × a layout of the sample table (three per N) */
+const MGP_LAYLE={3:[[[.5,.28],[.24,.72],[.76,.72]],[[.24,.28],[.76,.28],[.5,.72]],[[.5,.5],[.2,.3],[.8,.7]]],
+ 4:[[[.24,.28],[.76,.28],[.24,.72],[.76,.72]],[[.5,.2],[.22,.5],[.78,.5],[.5,.8]],[[.2,.3],[.5,.24],[.8,.3],[.5,.74]]],
+ 5:[[[.17,.28],[.5,.22],[.83,.28],[.33,.74],[.67,.74]],[[.2,.26],[.8,.26],[.5,.5],[.2,.76],[.8,.76]],[[.5,.2],[.2,.46],[.8,.46],[.33,.76],[.67,.76]]]};
+function mgpGenLe(){const out=[],O=typeof NWQ_LE!=="undefined"?NWQ_LE:[];if(!O.length)return out;
+ for(const N of [3,4,5])for(let l=0;l<MGP_LAYLE[N].length;l++){const comb=(st,k)=>k===0?[[]]:O.slice(st).flatMap((x,i)=>comb(st+i+1,k-1).map(r=>[x].concat(r)));
+  comb(0,N).forEach((set,i)=>{const r=(i+l)%N;out.push({id:`le-${N}-${l}-${i}`,n:N,lay:MGP_LAYLE[N][l],objs:set.slice(r).concat(set.slice(0,r))})})}return out}
+/* td_cong: slot (the three pieces of a game, band count by slot as today) × petal count × palette (ten dark/light pairs) */
+const MGP_PAL=[[[150,28,58],[255,214,224]],[[128,18,40],[255,206,206]],[[150,78,8],[255,234,170]],[[18,92,110],[200,238,240]],[[84,40,120],[226,210,246]],[[38,102,58],[212,238,208]],[[30,50,110],[208,218,246]],[[170,70,20],[255,222,190]],[[150,28,36],[255,208,196]],[[120,96,12],[250,238,176]]];
+function mgpGenTdCong(){const out=[];for(let sl=0;sl<3;sl++)for(const pet of [5,6,7,8,9,10])MGP_PAL.forEach((p,i)=>out.push({id:`tdc-${sl}-${pet}-${i}`,slot:sl,pet,dk:p[0],lt:p[1]}));return out}
+const MGP_GEN={hat:mgpGenHat,hoa:mgpGenHoa,banh:mgpGenBanh,huong:mgpGenHuong,ve:mgpGenVe,kim:mgpGenKim,tho:mgpGenTho,le:mgpGenLe,td_cong:mgpGenTdCong};
+function mgpItems(kind){if(MGP_C[kind])return MGP_C[kind];const L=MGP_GEN[kind]?MGP_GEN[kind]():[];if(L.length)MGP_C[kind]=L;return L}
+function mgpOne(kind,used,filt){let L=mgpItems(kind);if(!L.length)return null;if(filt){const f=L.filter(filt);if(f.length)L=f}
+ if(used&&used.length){const f=L.filter(x=>used.indexOf(x.id)<0);if(f.length)L=f}
+ const F0=typeof nrFresh==="function"?nrFresh("mg:"+kind,L,x=>x.id):L,F1=typeof nrNow==="function"?F0.filter(x=>!nrNow("mg:"+kind,x.id)):F0,F=F1.length?F1:F0;/* fresh-first (reports/thin.md «## API» advice): items no past life saw and not yet shown this life; the weights of nrDraw take over when none is left */
+ const it=(typeof nrDraw==="function"?nrDraw("mg:"+kind,F,x=>x.id):null)||F[Math.floor(Math.random()*F.length)];if(used&&it)used.push(it.id);return it}
+/* skins (mgskin:<kind>:<skin>): the painted skins per kind arrive from Foreman C («FOR MAIN 113 MGSKIN <kind> keys») as plain ids in MGP_SKIN; no skin = "" = today's art */
+const MGP_SKIN={};
+/* ORDER THIN P1b (skin lane, kit part MG-SKIN review/kit-mgskin): the choice = today's art ("default") + every skin registered for the kind (kitMgSkinAdd) + ids listed in MGP_SKIN; fresh-first through the memory; "" = today's art */
+function mgpSkin(kind){const reg=typeof kitMgSkinList==="function"?kitMgSkinList(kind).map(s=>s.id).filter(Boolean):[],L=(MGP_SKIN[kind]||[]).concat(reg.filter(x=>(MGP_SKIN[kind]||[]).indexOf(x)<0));if(!L.length)return"";
+ try{const A=["default"].concat(L),p=typeof nrDraw==="function"?nrDraw("mgskin:"+kind,typeof nrFresh==="function"?nrFresh("mgskin:"+kind,A):A):A[0];return p&&p!=="default"?p:""}catch(e){return""}}
+Object.assign(window,{mgpItems,mgpOne,mgpRng,mgpSkin,MGP_SKIN});
+/* ================= jmgpool_b: MINI-GAME CONTENT POOLS, lane P1b (ORDER THIN P1, owner OD 23/11 ~22:50Z; EVCAT §3 P1) =================
+   Same contract as jmgpool.js (read it first): a pool item = one board recipe, drawn through mgpOne(kind,used,filter) = fresh-first + the shared no-repeat memory (jnorep, family `mg:<kind>`).
+   Lane P1b kinds: dan co dauho theu mua doi doden tc xa thq. Rules, sizes and difficulty-by-rank stay in the engines; an item only decides WHICH board is shown.
+     dan    tune = five four-note phrases (eight contours × a shift of the four strings) + the gaps between notes, never three equal strings in a row
+     co     capture position = group size (1..3 stones) × seed; the same generator as before (kg82GoGen) runs on the item's seed, so the same item = the same position
+     dauho  throw sheet = six vase places × six winds (a wind of each side at least twice)
+     theu   stitch sheet = five rounds of a shuffled sixteen cells (a round shows the first n of them)
+     mua    dance sheet = five rounds of nine steps, never three equal steps in a row (a round shows the first n of them)
+     doi    pair-of-scrolls round = rows (3 / 4 / 5) × seed        doden  lamp round = round type (0 copy · 1 pattern · 2 order) × seed
+     tc     storeroom round = seed       xa  evidence case = seed       thq  seating round = seed
+   (seed items: mgpWith(item, fn) runs the engine's own generator with Math.random = the item's seeded stream, then puts the real one back.)
+   No pool (written, not invented): ban (one painted target, a fixed sway: pure timing) · chai (one mark gauge: pure timing) · hoadien (her own portrait is the board, nothing is drawn from a list) · co7 (Cờ năm quân against the AI: a skill board, the AI noise is not content).
+   ONE CORE: counts read BAL.mgpb (jbal2.js). No player-visible word is made here. */
+function mgpWith(it,fn){if(!it||!it.seed)return fn();const o=Math.random;Math.random=mgpRng(it.seed);try{return fn()}finally{Math.random=o}}
+function mgpPerm(n,R){const a=[...Array(n).keys()];for(let i=n-1;i>0;i--){const j=Math.floor(R()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+const MGP_NB=()=>BAL.mgpb;
+/* dan: eight phrase contours (the four strings Cung Thương Giốc Chủy = 0..3) */
+const MGP_DAN_PH=[[0,1,2,3],[3,2,1,0],[0,2,1,3],[1,3,0,2],[0,0,1,2],[2,1,1,3],[3,1,2,0],[1,0,3,2]];
+function mgpGenDan(){const out=[];for(let t=0;t<MGP_NB().dan;t++){const id=`dan-${t}`,R=mgpRng(id),l=[];let prev=-1;
+  for(let p=0;p<5;p++){let h;do h=Math.floor(R()*MGP_DAN_PH.length);while(h===prev);prev=h;const sh=Math.floor(R()*4);MGP_DAN_PH[h].forEach(x=>l.push((x+sh)%4))}
+  for(let i=2;i<l.length;i++)if(l[i]===l[i-1]&&l[i]===l[i-2])l[i]=(l[i]+1+Math.floor(R()*3))%4;
+  out.push({id,l,g:l.map(()=>880+Math.floor(R()*260))})}return out}
+/* co: group size 1..3 (the rounds of the engine are 1 2 2 3 3) × seed */
+function mgpGenCo(){const out=[];for(let sz=1;sz<=3;sz++)for(let q=0;q<MGP_NB().co;q++)out.push({id:`co-${sz}-${q}`,sz,seed:`co${sz}-${q}`});return out}
+/* dauho: six throws, each a vase place (share of the width, as before .6–.82) and a wind (-1..1; the engine scales it by the throw number) */
+function mgpGenDauho(){const out=[];for(let t=0;t<MGP_NB().dauho;t++){const id=`dauho-${t}`,R=mgpRng(id),u=[],w=[];
+  for(let k=0;k<6;k++){u.push(+(.6+R()*.22).toFixed(3));w.push(+(R()*2-1).toFixed(3))}
+  const neg=w.slice(1).filter(x=>x<0).length;if(neg<2)for(let k=1;k<6&&w.slice(1).filter(x=>x<0).length<2;k++)if(w[k]>0)w[k]=-w[k];
+  const pos=w.slice(1).filter(x=>x>0).length;if(pos<2)for(let k=1;k<6&&w.slice(1).filter(x=>x>0).length<2;k++)if(w[k]<0)w[k]=-w[k];
+  out.push({id,u,w})}return out}
+function mgpGenTheu(){const out=[];for(let t=0;t<MGP_NB().theu;t++){const id=`theu-${t}`,R=mgpRng(id);out.push({id,ord:[0,1,2,3,4].map(()=>mgpPerm(16,R))})}return out}
+function mgpGenMua(){const out=[];for(let t=0;t<MGP_NB().mua;t++){const id=`mua-${t}`,R=mgpRng(id);out.push({id,seqs:[0,1,2,3,4].map(()=>{const s=[];for(let i=0;i<9;i++){let v=Math.floor(R()*4);if(i>=2&&s[i-1]===v&&s[i-2]===v)v=(v+1+Math.floor(R()*3))%4;s.push(v)}return s})})}return out}
+function mgpGenDoi(){const out=[];for(const n of [3,4,5])for(let q=0;q<MGP_NB().doi;q++)out.push({id:`doi-${n}-${q}`,n,seed:`doi${n}-${q}`});return out}
+function mgpGenDoden(){const out=[];for(let ty=0;ty<3;ty++)for(let q=0;q<MGP_NB().doden;q++)out.push({id:`doden-${ty}-${q}`,type:ty,seed:`doden${ty}-${q}`});return out}
+const mgpGenSeeds=(kind,n)=>()=>Array.from({length:MGP_NB()[n||kind]},(_,q)=>({id:`${kind}-${q}`,seed:`${kind}-s${q}`}));
+Object.assign(MGP_GEN,{dan:mgpGenDan,co:mgpGenCo,dauho:mgpGenDauho,theu:mgpGenTheu,mua:mgpGenMua,doi:mgpGenDoi,doden:mgpGenDoden,tc:mgpGenSeeds("tc"),xa:mgpGenSeeds("xa"),thq:mgpGenSeeds("thq")});
+Object.assign(window,{mgpWith});
+/* ================= jmgpool_c: MINI-GAME CONTENT POOLS, lane P1c (ORDER THIN P1, owner OD 23/11 ~22:50Z; EVCAT §3 P1; OD:L1237 split) =================
+   Same API and same draw as jmgpool.js (lane P1 #2): mgpItems(kind) · mgpOne(kind,used,filter) (fresh-first through jnorep, family `mg:<kind>`).
+   This file only ADDS generators to MGP_GEN for the kinds of lane P1c; jmgpool.js is untouched. Sizes = BAL.mgpc.<kind> (jbal2.js, own line), floor BAL.mgp.min.
+   A pool item only decides WHICH content the board shows (words, figures, people, layout of a scripted run); rules, board sizes, timings and difficulty-by-rank
+   stay in the engines (BAL.mgTier*). Every item is built from parts with a seeded rng (id = seed): the same item = the same board, any device.
+   POOLED here: nghe (secret words × decoys × lines) · td_hanh (three alms rounds) · kinh (sutra rows) · may (robe seams).
+   NO POOL (reason per kind in reports/thin.md «## P1c»): td_ngon (already 11 speakers × 4 moods = 44 boards) · truyen · duho · den · td_dung (their random layout is already unique every play: a pool would ADD repeats, measured) ·
+                mac · thoico · tat · ne · thu_tam · thu_choi · tuoi (no content a player can tell apart).
+   Player-visible words (td_hanh people) are cổ trang, no digits, no %, per dev/kit/VANPHONG.md. */
+const mgpcN=k=>{try{return (BAL.mgpc&&BAL.mgpc[k])||BAL.mgp.min}catch(e){return 40}};
+const mgpcPick=(R,a)=>a[Math.floor(R()*a.length)];
+function mgpcShuf(R,a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(R()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+/* a game draws its items through P0 with a fresh `used` list (reset per game); null when the pool is empty (the engine then keeps its old random path) */
+function mgpc1(kind){try{return typeof mgpOne==="function"?mgpOne(kind,[]):null}catch(e){return null}}
+function mgpcMany(kind,n){try{if(typeof mgpOne!=="function")return null;const used=[],o=[];for(let i=0;i<n;i++){const it=mgpOne(kind,used);if(!it)return null;o.push(it)}return o}catch(e){return null}}
+/* nghe: the i-th three of the ten secret words (all 120 triples are used once) × a shuffle of the other seven (decoys) × the order of the speech lines */
+function mgpGenNghe(){const out=[],NK=10,tri=[];for(let a=0;a<NK;a++)for(let b=a+1;b<NK;b++)for(let c=b+1;c<NK;c++)tri.push([a,b,c]);
+ const N=Math.min(mgpcN("nghe"),tri.length);
+ for(let i=0;i<N;i++){const id=`nghe-${i}`,R=mgpRng(id),t=tri[i],rest=mgpcShuf(R,[...Array(NK).keys()].filter(x=>t.indexOf(x)<0));
+  const kinds=mgpcShuf(R,["i","i","i","i","i","i","i","d","d","d","f","f","f","f"]).concat(["f","f"]);/* the last two lines are always small talk, as the engine */
+  out.push({id,kw:mgpcShuf(R,t).concat(rest),kinds,imp:mgpcShuf(R,[0,1,2,3,4,5]),fil:mgpcShuf(R,[0,1,2,3,4,5,6,7,8,9])})}return out}
+/* td_hanh: three alms rounds. Each round keeps the old shape (number of people, their needs 1 2 3, the pool) so the sum of needs and the difficulty stay;
+   WHO stands there comes from the people parts (need tiers), in a shuffled order */
+const MGP_ALMS={1:[["Tiểu cung nữ","mới vào cung"],["Tiểu thái giám","làm việc nặng"],["Tiểu cung nhân","còn nhỏ"],["Bé giữ đèn","mới vào cung"],["Bé quét lá","còn nhỏ"],["Tiểu đồng hầu trà","mới tới"],["Bé hầu mực","mới vào cung"],["Tiểu cung nữ giặt áo","tuổi còn nhỏ"]],
+ 2:[["Cung nhân ốm","vừa khỏi bệnh"],["Cung nhân góa","tuổi cao"],["Lão cung nhân","già yếu, lưng còng"],["Cung nữ giặt áo","tay nứt nẻ"],["Hai mẹ con nghèo","xin ăn ở cổng"],["Thợ vá áo","mắt mờ"],["Người gánh củi","mỏi vai"],["Ma ma quét sân","gió lạnh buốt"],["Cung nữ khâu vá","tay run"],["Phu kiệu lưng đau","làm việc nặng"],["Bà hàng nước","nghèo khó"],["Cung nữ canh đèn","thức đêm"],["Người nhặt lá","gầy yếu"],["Cung nhân thêu","mắt kém"]],
+ 3:[["Lão ma ma","đói lả"],["Lão thái giám","ốm yếu"],["Cụ bà xin ăn","đói rét"],["Cung nhân bệnh nặng","sốt chưa lui"],["Lão phu kiệu","đói lả"],["Bà góa nghèo","ba ngày chưa ăn"]]};
+const MGP_ALMS_SHAPE=[{pool:5,need:[2,1,2]},{pool:8,need:[3,2,1,2]},{pool:7,need:[2,3,2]}];/* = TD_ALMS (jtd.js) */
+function mgpGenTdHanh(){const out=[];
+ for(let i=0;i<mgpcN("td_hanh");i++){const id=`td_hanh-${i}`,R=mgpRng(id),taken=new Set(),rounds=MGP_ALMS_SHAPE.map(sh=>({pool:sh.pool,list:mgpcShuf(R,sh.need).map(nd=>{let p,g=0;do{p=mgpcPick(R,MGP_ALMS[nd]);g++}while(taken.has(p[0])&&g<30);taken.add(p[0]);return[p[0],p[1],nd]})}));
+  out.push({id,rounds})}return out}
+/* kinh / may: figures are written as parameters (L = line, Q = bend, W = wave) and turned into curves by the engine (jwkg.js kwkFig) */
+const MGP_LEN=f=>{let s=0,p=null;for(let k=0;k<=24;k++){const q=mgpFigPt(f,k/24);if(p)s+=Math.hypot(q[0]-p[0],q[1]-p[1]);p=q}return s};
+function mgpFigPt(f,t){if(f[0]==="L")return[f[1]+(f[3]-f[1])*t,f[2]+(f[4]-f[2])*t];if(f[0]==="Q"){const u=1-t;return[u*u*f[1]+2*u*t*f[3]+t*t*f[5],u*u*f[2]+2*u*t*f[4]+t*t*f[6]]}return[f[1]+(f[2]-f[1])*t,f[3]+f[4]*Math.sin(t*Math.PI*f[5])]}
+const r2=v=>+v.toFixed(2);
+function mgpGenKinh(){const out=[];/* a sutra column holds 3 or 4 brush moves, in bands from top to bottom: ngang · sổ · phẩy · mác · chấm · móc */
+ const MV={ngang:(R,y0,h)=>{const xa=.26+R()*.22,y=y0+h*(.3+R()*.4);return["L",r2(xa),r2(y),r2(Math.min(.78,xa+.28+R()*.16)),r2(y+(R()-.5)*.06)]},
+  so:(R,y0,h)=>{const x=.36+R()*.28;return["L",r2(x),r2(y0+h*.05),r2(x+(R()-.5)*.08),r2(y0+h*.92)]},
+  phay:(R,y0,h)=>{const x=.5+R()*.2;return["Q",r2(x),r2(y0+h*.05),r2(x-.04),r2(y0+h*.5),r2(x-.16-R()*.06),r2(y0+h*.92)]},
+  mac:(R,y0,h)=>{const x=.3+R()*.2;return["Q",r2(x),r2(y0+h*.05),r2(x+.03),r2(y0+h*.5),r2(x+.16+R()*.08),r2(y0+h*.92)]},
+  cham:(R,y0,h)=>{const x=.4+R()*.24;return["L",r2(x),r2(y0+h*.2),r2(x+.14),r2(y0+h*.62)]},
+  moc:(R,y0,h)=>{const x=.36+R()*.24;return["Q",r2(x),r2(y0+h*.05),r2(x+.02),r2(y0+h*.92),r2(x+.15+R()*.05),r2(y0+h*.84)]}};
+ const K=Object.keys(MV);
+ for(let i=0;i<mgpcN("kinh");i++){const id=`kinh-${i}`,R=mgpRng(id);let S;
+  for(let g=0;g<20;g++){const n=3+(R()<.5?1:0),h=.74/n;const ty=mgpcShuf(R,K).slice(0,n);S=ty.map((t,j)=>MV[t](R,.12+j*h,h));if(S.every(f=>MGP_LEN(f)>=.14&&f.slice(1).every(v=>v>=.08&&v<=.92)))break}
+  out.push({id,S})}return out}
+function mgpGenMay(){const out=[];/* a robe seam: seven kinds × variants. Collar curve · sleeve · skirt panel · scalloped hem · wave border · belt · placket */
+ const FM=[R=>{const x0=.18+R()*.1,y0=.24+R()*.1;return[["Q",r2(x0),r2(y0),.5,r2(.6+R()*.14),r2(1-x0),r2(y0)]]},
+  R=>{const x=.2+R()*.06,xe=.52+R()*.1;return[["L",r2(x),r2(.22+R()*.05),r2(x-.02+R()*.04),r2(.76+R()*.04)],["Q",r2(x),.78,r2((x+xe)/2),r2(.9+R()*.04),r2(xe),.78]]},
+  R=>{const x=.28+R()*.08;return[["Q",r2(x),.15,r2(x-.08+R()*.06),r2(.5),r2(x),.86],["L",r2(x),.86,r2(.7+R()*.08),.86]]},
+  R=>{const a=.04+R()*.04;return[["W",.1,.9,r2(.74+R()*.06),r2(a),r2(5+Math.floor(R()*3))]]},
+  R=>{const a=.05+R()*.08;return[["W",r2(.1+R()*.06),r2(.84+R()*.06),r2(.42+R()*.14),r2(a),r2(3+Math.floor(R()*3))]]},
+  R=>{const y=.38+R()*.08,d=.12+R()*.06;return[["L",.18,r2(y),.82,r2(y)],["L",.82,r2(y+d),.18,r2(y+d)]]},
+  R=>{const x=.46+R()*.08;return[["L",r2(x),.18,r2(x),.84],["Q",r2(x),.84,r2(x+.12),r2(.9),r2(x+.22),.82]]}];
+ const per=Math.ceil(mgpcN("may")/FM.length);
+ for(let f=0;f<FM.length;f++)for(let v=0;v<per;v++){const id=`may-${f}-${v}`;out.push({id,S:FM[f](mgpRng(id))})}return out}
+Object.assign(MGP_GEN,{nghe:mgpGenNghe,td_hanh:mgpGenTdHanh,kinh:mgpGenKinh,may:mgpGenMay});
+Object.assign(window,{mgpc1,mgpcMany});
 
 /* ================= j68 ĐỜI SỐNG TRONG CUNG: common daily/situational events as composable templates =================
    Engine + shared helpers here; content in j68e. Wraps only; edits no other module. (Chains = j70, merit/festivals = j71, quests = j72.)
@@ -32675,7 +32854,7 @@ function kg82Set(k,v){if(k==="round"&&typeof v==="string"){let lab=null;const m=
  kg82Set0(k,v)}
 function kg82Set0(k,v){if(typeof kitGameSet==="function")kitGameSet(k,v);else document.querySelectorAll(`[data-kg="${k}"]`).forEach(e=>e.innerHTML=v)}
 function kg82Open(o){const pb=KG82.preBack,pp=KG82.prePay||(typeof S!=='undefined'&&S&&S.mg&&S.mg.pay)||null;KG82.preBack=null;KG82.prePay=null;kg82Close(true);KG82.setup=0;KG82.phase="";KG82.ready=null;KG82.idNote=null;const ov=$("ov");if(!ov)return null;[...ov.children].forEach(c=>{if(c.id!=="kg82"){c.dataset.kg82h=c.hidden?"1":"0";c.hidden=true}});
- const d=document.createElement("div");d.id="kg82";d.className="mg kpanel kgame kg82 kg-idle";d.setAttribute("role","dialog");d.setAttribute("aria-modal","true");{const ps=KG82.preSkin;KG82.preSkin=null;kg82SkinOn(d,o.kind||KG82.picKind,o.skin!=null?o.skin:ps)}d.innerHTML=kg82Frame(o);ov.appendChild(d);ov.hidden=false;d.scrollTop=0;kg82BackX(d);
+ const d=document.createElement("div");d.id="kg82";d.className="mg kpanel kgame kg82 kg-idle";d.setAttribute("role","dialog");d.setAttribute("aria-modal","true");{const ps=KG82.preSkin;KG82.preSkin=null;kg82SkinOn(d,o.kind||KG82.picKind,o.skin!=null?o.skin:ps!=null?ps:typeof mgpSkin==="function"?mgpSkin(o.kind||KG82.picKind):null)/* ORDER THIN P1b: no skin asked = one drawn through the no-repeat memory (mgskin:<kind>); none registered = today's art */}d.innerHTML=kg82Frame(o);ov.appendChild(d);ov.hidden=false;d.scrollTop=0;kg82BackX(d);
  /* §13.9: a charge the caller only REMEMBERS (kgDefer) is taken on «Sẵn sàng» / the quick option / any outcome (kgPay); a lesson keeps it in S.mg.pay (a reload reopens the
     same unpaid lesson, never a free one). Until then the ✕ is a free back: nothing was spent, nothing to undo. */
  if(pp){KG82.payOnGo=pp;try{if(typeof pp==="object"&&S.mg&&S.mg.pay!==pp){S.mg.pay=pp;save()}}catch(e){}KG82.backPre=()=>{KG82.payOnGo=null;try{if(typeof pb==="function")pb()}catch(e){console.error(e)}try{if(S.mg)S.mg=null}catch(e){}}}
@@ -32826,8 +33005,8 @@ function kg82DrawPops(g,list,now){for(let i=list.length-1;i>=0;i--){const p=list
 /* =============== ENGINES: eng(box, env) -> stop(); env.end(raw0to10) once; env.hud({score,round,time}); KG82.peek for tests =============== */
 /* 1. RHYTHM (đàn, hát): plum blossoms fall along four strings, tap the string at the vermilion line */
 function kg82Rhythm(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const L=env.kind==="hat"?["Cung","Thương","Giốc","Chủy"]:["Cung","Thương","Giốc","Chủy"];
- const N=20,fall=2100+(env.lv||0)*80,HIT=H*.8,lw=W/4,WIN=(220+(env.lv||0)*14)*mgTol(env);const notes=[];let t=1700,last=-1,rep=0;
- for(let i=0;i<N;i++){let l=Math.floor(Math.random()*4);if(l===last&&++rep>=2){l=(l+1+Math.floor(Math.random()*3))%4;rep=0}else if(l!==last)rep=0;last=l;notes.push({l,t,st:0});t+=880+Math.floor(Math.random()*260)}
+ const N=20,fall=2100+(env.lv||0)*80,HIT=H*.8,lw=W/4,WIN=(220+(env.lv||0)*14)*mgTol(env);const notes=[];let t=1700,last=-1,rep=0;const TU=env.kind==="dan"&&typeof mgpOne==="function"?mgpOne("dan"):null;/* ORDER THIN P1b: one composed tune (phrases × string shift + the gaps), drawn through the no-repeat memory */
+ for(let i=0;i<N;i++){let l=Math.floor(Math.random()*4);if(l===last&&++rep>=2){l=(l+1+Math.floor(Math.random()*3))%4;rep=0}else if(l!==last)rep=0;if(TU)l=TU.l[i];last=l;notes.push({l,t,st:0});t+=TU?TU.g[i]:880+Math.floor(Math.random()*260)}
  const end=notes[N-1].t+700;let credit=0,miss=0,stop=false,raf=0;const pops=[],flash=[0,0,0,0];const t0=performance.now();
  const pc=kg82Col("--peony","#e48aa4"),red=kg82Col("--red","#c23b22"),gold=kg82Col("--gold","#8f5f0c");
  const sc=()=>10*Math.max(0,credit)/N;/* mg-balance: float; kg82Play grades + rounds */
@@ -32870,14 +33049,14 @@ function kg82GoGen(n,sz,more){const idx=(r,c)=>r*n+c,nb=i=>{const r=Math.floor(i
   const tgt=G.find(x=>x.c===2&&x.lib.has(L)&&x.lib.size===1);return{B,L,cap:tgt.s,wg:G.filter(x=>x.c===2).length}}
  return null}
 function kg82Go(box,env){const n=7,C=kg82Canvas(box,1,460),{g,W,H}=C;const S0=Math.min(W,H),ox=(W-S0)/2,s=S0/(n+.4),m=s*.7;
- const px=i=>ox+m+(i%n)*s,py=i=>(H-S0)/2+m+Math.floor(i/n)*s;const R0=[1,2,2,3,3];let round=0,pts=0,P=null,phase="",t0=0,stop=false,raf=0,mark=null,fade=null;const pops=[];
+ const px=i=>ox+m+(i%n)*s,py=i=>(H-S0)/2+m+Math.floor(i/n)*s;const R0=[1,2,2,3,3],CU=[];let round=0,pts=0,P=null,phase="",t0=0,stop=false,raf=0,mark=null,fade=null;const pops=[];
  /* mg-easy: tier 0/1 draw a gold ring round the white group in danger (it has ONE empty neighbour left); a quiet glow shows that last empty spot when she stalls or presses Gợi ý (a little score) */
  const tier=kg82Tier(env.lv),IDLE=[6000,10000,0][tier];
  /* mg-balance-2: time per position, the time a capture still earns full marks, extra stones: BAL.mgTier.lev.co by ease */
  const LIM=Math.round(mgLev(env,"co","lim")),MORE=Math.round(mgLev(env,"co","extra"));let hintAt=0,hinted=false,tAct=0;
  const hb=document.createElement("div");hb.className="kg82act";hb.innerHTML=`<button class="kgbtn" id="kg82gohint" title="Gợi ý: chỉ chỗ ăn, bớt một ít phần" aria-label="Gợi ý">?</button>`;box.appendChild(hb);
  const doHint=()=>{if(phase!=="play"||stop||!P)return;if(!hinted){hinted=true;kg82Pop(pops,px(P.L),py(P.L)-s*.6,"Quân trắng chỉ còn một khí ở đây",kg82Col("--gold","#8f5f0c"))}hintAt=performance.now()};hb.querySelector("button").onclick=doHint;
- function next(){if(stop)return;if(round>=R0.length){stop=true;return setTimeout(()=>env.end((pts)),300)}P=kg82GoGen(n,R0[round],MORE)||kg82GoGen(n,R0[round])||kg82GoGen(n,1);mark=null;fade=null;phase="play";t0=tAct=performance.now();hintAt=0;hinted=false}
+ function next(){if(stop)return;if(round>=R0.length){stop=true;return setTimeout(()=>env.end((pts)),300)}const sz=R0[round],GI=typeof mgpOne==="function"?mgpOne("co",CU,x=>x.sz===sz):null;/* ORDER THIN P1b: one position of the pool (group size × seed), the same generator on the item's seed */P=(GI?mgpWith(GI,()=>kg82GoGen(n,sz,MORE)):null)||kg82GoGen(n,sz,MORE)||kg82GoGen(n,sz)||kg82GoGen(n,1);mark=null;fade=null;phase="play";t0=tAct=performance.now();hintAt=0;hinted=false}
  function stone(x,y,c,a,z){z=z||1;if(kg82Spr(g,c===1?"co-black":"co-white",x,y,s*.92*z,s*.92*z,{alpha:a==null?1:a}))return;g.save();g.globalAlpha=a==null?1:a;const r=s*.44;const gr=g.createRadialGradient(x-r*.35,y-r*.35,r*.1,x,y,r);
   if(c===1){gr.addColorStop(0,"#666");gr.addColorStop(1,"#111")}else{gr.addColorStop(0,"#fff");gr.addColorStop(1,"#cfc8bc")}g.fillStyle=gr;g.shadowColor="#0006";g.shadowBlur=3;g.shadowOffsetY=1.5;g.beginPath();g.arc(x,y,r,0,Math.PI*2);g.fill();g.restore()}
  function draw(now){kg82Bg(g,W,H,"co",0,1);const bx=ox+m-s*.55,by=(H-S0)/2+m-s*.55,bs=(n-1)*s+s*1.1;
@@ -32903,7 +33082,7 @@ function kg82Go(box,env){const n=7,C=kg82Canvas(box,1,460),{g,W,H}=C;const S0=Ma
 /* 4. PATTERN (Thêu «Nhớ mẫu thêu»; once also vẽ / cắm hoa / khéo tay): remember which cells were painted. review/mg-craft removed it; the owner kept it
    (21/11 ~01:05Z "Cái trò đó hay nha, không bỏ nha"): Thêu plays it everywhere (Tài nghệ, contests, Thử tay); the craft stitch board went to Công «Thêu theo nét» (jtd). */
 function kg82Pattern(box,env){const n=4,C=kg82Canvas(box,1,440),{g,W,H}=C;const S0=Math.min(W,H)-8,ox=(W-S0)/2,oy=(H-S0)/2,c=S0/n;const mot=KG82_KIND[env.kind].m;
- const R0=[3,4,4,5,6].map(n=>n+mgMore(env));let round=0,pts=0,pat=[],tapped=[],phase="",t0=0,stop=false,raf=0;const pops=[],press={};const LIM=9000,SHOW=2300+(env.lv||0)*160;
+ const TI=typeof mgpOne==="function"?mgpOne("theu"):null;/* ORDER THIN P1b: one stitch sheet (five shuffled rounds), drawn through the no-repeat memory */const R0=[3,4,4,5,6].map(n=>n+mgMore(env));let round=0,pts=0,pat=[],tapped=[],phase="",t0=0,stop=false,raf=0;const pops=[],press={};const LIM=9000,SHOW=2300+(env.lv||0)*160;
  const cx=i=>ox+(i%n+.5)*c,cy=i=>oy+(Math.floor(i/n)+.5)*c;
  function motif(i,a,ghost){g.save();g.globalAlpha=a;const x=cx(i),y=cy(i),r=c*.34*(ghost?1:kg82FxPop(press[i],performance.now()));if(!ghost&&press[i])kg82FxRing(g,x,y,c*.4,press[i],performance.now());
   if(ghost){g.strokeStyle=kg82Col("--good","#2d7a52");g.setLineDash([5,4]);g.lineWidth=2;g.strokeRect(x-r,y-r,r*2,r*2);g.restore();return}
@@ -32917,7 +33096,7 @@ function kg82Pattern(box,env){const n=4,C=kg82Canvas(box,1,440),{g,W,H}=C;const 
   else if(mot==="flower"){kg82Blossom(g,x,y,r*.95,kg82Col("--peony","#e48aa4"),false);g.strokeStyle="#5fa58c";g.lineWidth=3;g.beginPath();g.moveTo(x,y+r*.5);g.quadraticCurveTo(x+r*.4,y+r,x+r*.1,y+r*1.2);g.stroke()}
   else{g.strokeStyle="#c23b22";g.lineWidth=r*.16;g.lineCap="round";for(const d of[-.5,0,.5]){g.beginPath();g.moveTo(x-r*.7+d*r,y-r*.7);g.lineTo(x+r*.7+d*r,y+r*.7);g.stroke()}g.strokeStyle="#c9a03a";for(const d of[-.5,0,.5]){g.beginPath();g.moveTo(x+r*.7+d*r,y-r*.7);g.lineTo(x-r*.7+d*r,y+r*.7);g.stroke()}}
   g.restore()}
- function next(){if(stop)return;if(round>=R0.length){stop=true;return setTimeout(()=>env.end((pts)),300)}pat=kg82Shuf([...Array(n*n).keys()]).slice(0,R0[round]);tapped=[];phase="show";t0=performance.now()}
+ function next(){if(stop)return;if(round>=R0.length){stop=true;return setTimeout(()=>env.end((pts)),300)}pat=(TI?TI.ord[round]:kg82Shuf([...Array(n*n).keys()])).slice(0,R0[round]);tapped=[];phase="show";t0=performance.now()}
  function judge(){phase="judge";const ok=tapped.filter(i=>pat.includes(i)).length;const got=2*ok/pat.length;pts+=got;
   kg82Pop(pops,W/2,oy+18,ok===pat.length?"Đúng cả!":`Đúng ${ok}/${pat.length}`,ok===pat.length?kg82Col("--good","#2d7a52"):kg82Col("--gold","#8f5f0c"));round++;setTimeout(next,1100)}
  function draw(now){kg82Bg(g,W,H,env.kind,0,1);
@@ -32938,9 +33117,9 @@ function kg82Pattern(box,env){const n=4,C=kg82Canvas(box,1,440),{g,W,H}=C;const 
 /* 5. STEPS (múa): watch the steps light up, then repeat them */
 function kg82Steps(box,env){const C=kg82Canvas(box,1,440),{g,W,H}=C;const V=[["↑","Giơ tay áo"],["←","Xoay trái"],["→","Xoay phải"],["↓","Cúi mình"]];
  const mx=W/2,my=H/2,D=Math.min(W,H)*.31,pr=Math.min(W,H)*.15;const pos=[[mx,my-D],[mx-D,my],[mx+D,my],[mx,my+D]];
- const R0=[3,3,4,4,5].map(n=>n+mgMore(env));let round=0,pts=0,seq=[],inp=0,phase="",t0=0,stop=false,raf=0,lit=-1,litUntil=0,lastTap=0;const pops=[];/* mg-balance-2: show speed and the beat window of each step (miss the beat = the round stops there): BAL.mgTier.lev.mua by ease */const SP=Math.round(mgLev(env,"mua","sp")),IDLE=Math.round(mgLev(env,"mua","beat")),RT=Math.floor(mgLev(env,"mua","retry"));let rtl=0;/* cal-p2b: dark gap between shown steps + each shown step pops from its own start (a repeat reads as two) */const DARK=Math.min(SP*mgLev(env,"mua","darkCap"),mgLev(env,"mua","dark"));let showAt=0;/* easy boards forgive RT wrong steps per round */
+ const MI=typeof mgpOne==="function"?mgpOne("mua"):null;/* ORDER THIN P1b: one dance sheet (five rounds of steps), drawn through the no-repeat memory */const R0=[3,3,4,4,5].map(n=>n+mgMore(env));let round=0,pts=0,seq=[],inp=0,phase="",t0=0,stop=false,raf=0,lit=-1,litUntil=0,lastTap=0;const pops=[];/* mg-balance-2: show speed and the beat window of each step (miss the beat = the round stops there): BAL.mgTier.lev.mua by ease */const SP=Math.round(mgLev(env,"mua","sp")),IDLE=Math.round(mgLev(env,"mua","beat")),RT=Math.floor(mgLev(env,"mua","retry"));let rtl=0;/* cal-p2b: dark gap between shown steps + each shown step pops from its own start (a repeat reads as two) */const DARK=Math.min(SP*mgLev(env,"mua","darkCap"),mgLev(env,"mua","dark"));let showAt=0;/* easy boards forgive RT wrong steps per round */
  const pc=kg82Col("--peony","#e48aa4"),gold=kg82Col("--gold","#8f5f0c");
- function next(){if(stop)return;if(round>=R0.length){stop=true;return setTimeout(()=>env.end((pts)),300)}seq=Array.from({length:R0[round]},()=>Math.floor(Math.random()*4));inp=0;rtl=RT;phase="show";t0=performance.now()+500}
+ function next(){if(stop)return;if(round>=R0.length){stop=true;return setTimeout(()=>env.end((pts)),300)}seq=MI?MI.seqs[round].slice(0,R0[round]):Array.from({length:R0[round]},()=>Math.floor(Math.random()*4));inp=0;rtl=RT;phase="show";t0=performance.now()+500}
  function endRound(ok){phase="judge";const got=2*ok/seq.length;pts+=got;kg82Pop(pops,mx,my-8,ok===seq.length?"Đẹp lắm!":`Đúng ${ok}/${seq.length} bước`,ok===seq.length?kg82Col("--good","#2d7a52"):kg82Col("--red","#c23b22"));round++;setTimeout(next,1100)}
  function draw(now){kg82Bg(g,W,H,"mua",0,.55);kg82Spr(g,"mua-fan",mx,my-D*.06,D*.5,null,{alpha:.95});
   let showI=-1;if(phase==="show"){const k=now-t0;if(k>=0){const i=Math.floor(k/SP);if(i>=seq.length){phase="play";lastTap=now}else if(k-i*SP<SP-DARK){showI=seq[i];showAt=t0+i*SP}}}
@@ -33338,8 +33517,8 @@ function k91SegX(a,b,c,d){const o=(p,q,r)=>Math.sign((q[0]-p[0])*(r[1]-p[1])-(q[
 /* =============== 1. HOLD (Hát): keep a finger down to raise the voice, lift to lower; follow the melody ribbon =============== */
 const K91_CA=["Gió đưa cành trúc la đà","Tiếng chuông Trấn Vũ canh gà Thọ Xương","Mịt mù khói tỏa ngàn sương","Nhịp chày Yên Thái mặt gương Tây Hồ"];
 function k91Hold(box,env){const C=kg82Canvas(box,.9,430),{g,W,H}=C;const lv=env.lv||0;const DUR=20000,SPD=W*.2/1000,MX=W*.24,band=H*(.075+.007*lv)*mgTol(env),V=H*.72/1000;
- const ph=[Math.random()*6,Math.random()*6,Math.random()*6];const cy=t=>H*.5+H*.19*Math.sin(t/1000*1.05+ph[0])+H*.08*Math.sin(t/1000*2.2+ph[1])+H*.035*Math.sin(t/1000*3.5+ph[2]);
- const words=[];K91_CA.forEach((l,i)=>{const w=l.split(" ");w.forEach((x,j)=>words.push({x,t:i*5000+300+j*(4400/w.length),c:i}))});
+ const SG=typeof mgpOne==="function"?mgpOne("hat"):null;/* ORDER THIN P1: one composed song (theme · lines · melody contour), drawn through the no-repeat memory */const ph=SG?SG.ph:[Math.random()*6,Math.random()*6,Math.random()*6],FQ=SG?SG.f:[1.05,2.2,3.5],AM=SG?SG.a:[.19,.08,.035];const cy=t=>H*.5+H*AM[0]*Math.sin(t/1000*FQ[0]+ph[0])+H*AM[1]*Math.sin(t/1000*FQ[1]+ph[1])+H*AM[2]*Math.sin(t/1000*FQ[2]+ph[2]);
+ const words=[];(SG?SG.lines:K91_CA).forEach((l,i)=>{const w=l.split(" ");w.forEach((x,j)=>words.push({x,t:i*5000+300+j*(4400/w.length),c:i}))});
  let y=H*.5,vy=0,held=new Set(),t0=performance.now()+1600,last=performance.now(),inb=0,tot=0,done=false;const pops=[];
  const ratio=()=>tot?Math.min(1,inb/tot/mgFull(env,.82)):0;
  const stop=k91Loop(now=>{const dt=Math.min(50,now-last);last=now;const t=now-t0;const tgt=held.size?-V:V;vy+=(tgt-vy)*Math.min(1,dt/80);y=cl(y+vy*dt,H*.06,H*.94);
@@ -33366,11 +33545,11 @@ function k91Hold(box,env){const C=kg82Canvas(box,.9,430),{g,W,H}=C;const lv=env.
    ear tubes at THEIR painted place (lower than the mouth). An arrow crossing the mouth plane inside the opening counts; on the outer lip it bounces
    (miss); into the painted neck below the lip = miss; beside the vase it flies on and may still drop into an ear tube. A counted arrow is drawn standing IN its hole (the part below the near lip
    is hidden by a clip), never beside the vase. */
-function k91Fling(box,env){const C=kg82Canvas(box,.85,430),{g,W,H}=C;const N=6,U=Math.min(W,H);const A=BAL.mgArt.dauho,M=A.mouth,E=A.ear;
+function k91Fling(box,env){const C=kg82Canvas(box,.85,430),{g,W,H}=C;const N=6,U=Math.min(W,H);const A=BAL.mgArt.dauho,M=A.mouth,E=A.ear;const DI=typeof mgpOne==="function"?mgpOne("dauho"):null;/* ORDER THIN P1b: one throw sheet (six vase places × six winds), drawn through the no-repeat memory */
  const AIDT=mgLev(env,"dauho","aid");/* seconds of flight shown by the aim dots */const PULL=mgLev(env,"dauho","pull")||1;/* cal-p2: drag gain by ease (BAL.mgTier.lev.dauho.pull); the cap grows by the same factor so the strongest throw stays K·MAXD */const X0=W*.13,Y0=H*.8,GR=H*1.9,K=5.4*PULL,MAXD=U*.45/PULL,MY=H*.5;let px=0,R=0,Ws=0,wd=0,k=0,pts=0,phase="aim",aim=null,fly=null,sol=null,landed=[],done=false;const pops=[];
  /* the painted holes at this throw's vase size: R = mouth half-width (BAL.mgTier.lev.dauho.mouth by ease), Ws = picture width, ears below the mouth */
  const G=()=>({ry:M.ry*Ws,rim:A.rim*Ws,ey:MY+(E.cy-M.cy)*Ws,ex:E.dx*Ws,er:E.rx*Ws,ery:E.ry*Ws});
- const setThrow=()=>{px=W*(.6+Math.random()*.22);R=U*.05*mgLev(env,"dauho","mouth");/* mg-balance-2: mouth size by ease (BAL.mgTier.lev.dauho) */Ws=R/M.rx;wd=(Math.random()*2-1)*H*.55*(k/N);aim=null;fly=null;sol=null;phase="aim"};setThrow();
+ const setThrow=()=>{px=W*(DI?DI.u[k%N]:.6+Math.random()*.22);R=U*.05*mgLev(env,"dauho","mouth");/* mg-balance-2: mouth size by ease (BAL.mgTier.lev.dauho) */Ws=R/M.rx;wd=(DI?DI.w[k%N]:Math.random()*2-1)*H*.55*(k/N);aim=null;fly=null;sol=null;phase="aim"};setThrow();
  const vOf=(ax,ay,cx,cy)=>{let dx=cx-ax,dy=cy-ay;const L=Math.hypot(dx,dy);if(L>MAXD){dx*=MAXD/L;dy*=MAXD/L}return[-dx*K,-dy*K]};
  /* ONE judge for the aim sim, the solver and the real flight: a step from (·,py) to (x,y) going down through a hole plane */
  function judge(py,y,x){const g0=G();if(py<MY&&y>=MY){const d=Math.abs(x-px);if(d<=R)return{q:d<R*A.q.c?A.q.m[0]:A.q.m[1],at:0,x};if(d<=g0.rim)return{q:0,at:-9,x}}
@@ -33519,7 +33698,7 @@ const K91_RX=["Ớt hiểm","Giấm chua","Mắm tôm","Rượu nặng","Muối 
 const K91_ING={"Nước giếng":"nuoc","Hạt sen":"sen","Long nhãn":"nhan","Đường phèn":"duong","Gà ác":"ga","Thuốc bắc":"thuoc","Táo đỏ":"tao","Kỷ tử":"kytu","Gạo tám":"gao","Nước dùng":"dung",
  "Yến sào":"yen","Xương ống":"xuong","Củ sen":"cusen","Hành ngò":"hanh","Ớt hiểm":"ot","Giấm chua":"giam","Mắm tôm":"mam","Rượu nặng":"ruou","Muối hột":"muoi"};
 function k91Ing(g,t,x,y,w,h,st,fs){k91Tile(g,x,y,w,h,"",st,fs,"tho-slip");const ic=h*1.02;kg82Spr(g,"banh-"+K91_ING[t.n],x+w/2,y+h/2,ic,ic)}/* picture only: no ingredient name in play */
-function k91Cook(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.25:.95,470),{g,W,H}=C;const lv=env.lv||0;const [nm,steps]=kg82Shuf(K91_RC)[0];const Z=[[.14,.36],[.42,.62],[.68,.88]].map(([a,b])=>{const c=(a+b)/2,h=((b-a)/2+.015*lv)*mgTol(env);return[c-h,c+h]});const ZN=["lửa nhỏ","lửa vừa","lửa lớn"];
+function k91Cook(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.25:.95,470),{g,W,H}=C;const lv=env.lv||0;const RCP=K91_RC.length<4||typeof mgpOne!=="function"?kg82Shuf(K91_RC)[0]:(r=>[r.nm,r.steps])(mgpOne("banh"));/* ORDER THIN P1: K91_RC shorter than 4 = a handmade recipe (jwkr) keeps its own; else one of the composed recipes */const [nm,steps]=RCP;const Z=[[.14,.36],[.42,.62],[.68,.88]].map(([a,b])=>{const c=(a+b)/2,h=((b-a)/2+.015*lv)*mgTol(env);return[c-h,c+h]});const ZN=["lửa nhỏ","lửa vừa","lửa lớn"];
  /* mg-balance-2: the fire answers the fan with a LAG and draughts of wind (gusts) push it up or down; both grow as the ease falls (BAL.mgTier.lev.banh) */
  const LAG=Math.max(.02,mgLev(env,"banh","lag")),GUA=mgLev(env,"banh","gust"),GAP=mgLev(env,"banh","gap"),REACH=mgLev(env,"banh","reach"),FAN=.34,COOL=.1;/* her hand: fan heats up to FAN/s, no fan cools COOL/s (one place; the gust cap reads the same two) */let rr=-.1,gu=0,guEnd=0,guNext=GAP*(.6+.8*Math.random());
  const DUR=55000,SIM=3200;let heat=.3,fan=new Set(),si=0,simAt=0,inz=0,qual=[],miss=0,t0=performance.now()+1200,last=performance.now(),drag=null,done=false,msg="";const pops=[];
@@ -33579,12 +33758,12 @@ function k91Cook(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.25
 
 /* =============== 10. BLEND (Điều hương): move three sliders until your smoke matches the sample's colour; then "Dâng hương" =============== */
 const K91_ES=[["Trầm",[122,74,42],"tram"],["Hoa nhài",[236,230,170],"nhai"],["Quế",[200,80,30],"que"],["Hoa hồng",[224,122,154],"hong"],["Bạc hà",[79,176,160],"bacha"],["Đàn hương",[176,136,80],"dan"],["Mộc lan",[160,120,200],"moclan"]];
-function k91Blend(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const lv=env.lv||0;const NR=3,LIM=22000+lv*2000;let r=-1,sum=0,P=null,phase="",t0=0,drag=-1,done=false;const pops=[];
+function k91Blend(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const lv=env.lv||0;const NR=3,LIM=22000+lv*2000;let r=-1,sum=0,P=null,phase="",t0=0,drag=-1,done=false;const pops=[];const HU=[];
  const bt=k91Btns(box,[["k91done","✓","","Dâng hương: chấm độ khớp"]]);const bd=bt.querySelector("#k91done");
- const pick3=()=>{for(let t=0;t<50;t++){const E=kg82Shuf(K91_ES).slice(0,3);const ok=E.every((a,i)=>E.every((b,j)=>i===j||Math.hypot(a[1][0]-b[1][0],a[1][1]-b[1][1],a[1][2]-b[1][2])>90));if(ok)return E}return K91_ES.slice(0,3)};
+ let HI=null;const pick3=()=>{HI=typeof mgpOne==="function"?mgpOne("huong",HU):null;if(HI)return HI.E.map(i=>K91_ES[i]);for(let t=0;t<50;t++){const E=kg82Shuf(K91_ES).slice(0,3);const ok=E.every((a,i)=>E.every((b,j)=>i===j||Math.hypot(a[1][0]-b[1][0],a[1][1]-b[1][1],a[1][2]-b[1][2])>90));if(ok)return E}return K91_ES.slice(0,3)};
  const ratio=v=>{const s=v.reduce((a,b)=>a+b,0);return s>0?v.map(x=>x/s):v.map(()=>1/v.length)};const mix=(E,v)=>{const q=ratio(v);return[0,1,2].map(c=>Math.round(E.reduce((a,e,i)=>a+e[1][c]*q[i],0)))};
  const dist=(a,b)=>{const p=ratio(a),q=ratio(b);return p.reduce((s,x,i)=>s+Math.abs(x-q[i]),0)/2};
- function next(){r++;if(r>=NR){done=true;bd.disabled=true;return setTimeout(()=>env.end((10*sum/NR)),300)}const E=pick3();let tv;do tv=[0,1,2].map(()=>1+Math.floor(Math.random()*6));while(Math.max(...tv)-Math.min(...tv)<2);
+ function next(){r++;if(r>=NR){done=true;bd.disabled=true;return setTimeout(()=>env.end((10*sum/NR)),300)}const E=pick3();let tv;if(HI)tv=HI.tv.slice();else do tv=[0,1,2].map(()=>1+Math.floor(Math.random()*6));while(Math.max(...tv)-Math.min(...tv)<2);
   P={E,tv,v:[.5,.5,.5]};phase="play";t0=performance.now();bd.disabled=false}
  /* cal-p2b: ONE round score for the live hint, the verdict and the grade (BAL.mgTier.blend) */const rs=d=>cl(1-d/(BAL.mgTier.blend.w*mgTol(env)),0,1);
  const SL=()=>{const top=H*.47,bot=H*.93,cw=W/3;return[0,1,2].map(i=>({x:cw*(i+.5),top,bot}))};
@@ -33859,10 +34038,10 @@ function crtStitch(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.
  const NP=CRT_PCS.length,BEAT=L("beat"),WIN=L("win"),NEAR=L("near"),ALIKE=Math.round(L("alike")),SWAY=L("sway"),PEEK=L("peek"),ST=Math.max(1,Math.round(L("st"))),LIM=L("lim"),wC=L("wC"),wS=L("wS");
  /* the hoop above, the spool rows below it (two rows when crowded), never overlapping */
  const R0=Math.min(W*.34,H*.27),HX=W*.5,HY=H*.36,SY=H*.85;const pops=[];
- let pi=-1,P=null,phase="",pts=0,done=false,t0=0,stop=null;
+ let pi=-1,P=null,phase="",pts=0,done=false,t0=0,stop=null;const TDU=[];
  const hx=now=>HX+SWAY*W*Math.sin(now/1100);
  function piece(){if(done)return;pi++;if(pi>=NP){done=true;phase="end";return crLater(()=>env.end(pts),300)}
-  const [pet,b0,dk,lt]=CRT_PCS[pi];const n=b0+mgMore(env);const col=i=>crMix(dk,lt,n>1?i/(n-1):0);
+  const PC=CRT_PCS[pi],TI=typeof mgpOne==="function"?mgpOne("td_cong",TDU,x=>x.slot===pi):null;/* ORDER THIN P1: one composed piece (petals × palette; band count stays the slot's), drawn through the no-repeat memory */const [pet,b0,dk,lt]=TI?[TI.pet,PC[1],TI.dk,TI.lt]:PC;const n=b0+mgMore(env);const col=i=>crMix(dk,lt,n>1?i/(n-1):0);
   /* spools: every band's shade + decoys half a step off (the hardest look-alikes: next to the darkest bands) */
   const sp=[...Array(n).keys()].map(i=>({c:col(i),b:i}));for(let k=0;k<Math.min(ALIKE,n-1);k++)sp.push({c:crMix(col(k),col(k+1),.5),b:-1});
   P={pet,n,col,sp:kg82Shuf(sp),band:0,ph:"pick",cols:[],q:[],k:0,used:-1,ok:0,start:crNow(),pk:null,dip0:0};phase="play";t0=P.start;layout()}
@@ -33958,7 +34137,7 @@ function crkPaper(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.1
  const side=W>=H*1.05;/* sample left / wedge right (wide); sample above / wedge below (narrow) */
  const SX=side?W*.2:W*.5,SY=side?H*.42:H*.2,RS=side?Math.min(W*.17,H*.34):Math.min(W*.3,H*.17);
  const AX=side?W*.7:W*.5,AY=side?H*.72:H*.74,R=side?Math.min(W*.27,H*.55):Math.min(W*.42,H*.4);
- const TY=H*.92,RED="#c0282d",PAPER="#fbf1dc";const pops=[];let r=-1,P=null,phase="",pts=0,done=false,drag=null,stop=null;
+ const TY=H*.92,RED="#c0282d",PAPER="#fbf1dc";const pops=[];const KU=[];let r=-1,P=null,phase="",pts=0,done=false,drag=null,stop=null;
  const bt=k91Btns(box,[["crkok","✓","","Mở giấy: xem hoa cắt"]]);const okb=bt.querySelector("#crkok");
  /* wedge-plane point (rr share of R, ph radians from the wedge's left fold) → board px */
  const wA0=a=>-Math.PI/2-a/2;
@@ -33969,8 +34148,9 @@ function crkPaper(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.1
  const dist=(c,t)=>{const a=pl(c.r,c.ph),b=pl(t.r,t.ph);return Math.hypot(a[0]-b[0],a[1]-b[1])};
  function next(){if(done)return;r++;if(r>=NR){done=true;okb.disabled=true;phase="end";return crLater(()=>env.end(pts),300)}
   const f=FOLDS[r],a=Math.PI*2/f,shapes=CRK_SH.concat(CRK_ALIKE.slice(0,ALIKE));const z=SIZE;const T=[];
-  for(let k=0;k<HOLES;k++){for(let tr=0;tr<80;tr++){const rr=.3+Math.random()*.55,edge=Math.random()<.2?(Math.random()<.5?0:a):null;
-    const ph=edge!=null?edge:a*(.18+Math.random()*.64);const t={sh:shapes[Math.floor(Math.random()*shapes.length)],r:rr,ph};
+  const KI=typeof mgpOne==="function"?mgpOne("kim",KU):null,RN=KI?mgpRng(KI.seed):Math.random,hs=KI?KI.sh.concat(CRK_ALIKE.slice(0,ALIKE)):shapes;/* ORDER THIN P1: one composed paper (hole shapes × layout seed), drawn through the no-repeat memory; the tray keeps every cutter */
+  for(let k=0;k<HOLES;k++){for(let tr=0;tr<80;tr++){const rr=.3+RN()*.55,edge=RN()<.2?(RN()<.5?0:a):null;
+    const ph=edge!=null?edge:a*(.18+RN()*.64);const t={sh:hs[Math.floor(RN()*hs.length)],r:rr,ph};
     /* holes apart from each other (and from their own mirror images across the folds) */
     if(T.every(o=>dist(o,t)>z*3.2)&&(edge!=null||(rr*Math.sin(Math.min(ph,a-ph))>z*1.6))){T.push(t);break}}}
   const tray=shapes.map((sh,i)=>({sh,x:(side?W*.42:W*.1)+(i+.5)*((side?W*.56:W*.8)/shapes.length),y:TY}));
@@ -34057,13 +34237,13 @@ function k91Ve(box,env){const C=kg82Canvas(box,1.12,520),{g,W,H}=C;const NR=3;
  const TW=W*.38,TH=TW*SH/SW,TX=W*.04,TY=H*.03;/* the master's sample pinned top-left, same shape as the scroll */
  const ST={x:W*.57,y:H*.04,w:W*.38,h:H*.15};/* the inkstone */
  const OFF=UN*.9;/* a dragged stamp rides above the finger */
- let r=-1,pts=0,P=null,phase="",t0=0,LIM=0,drag=null,done=false,peekAt=0,fl=null,act=null;/* act = the one finger (pointer id) being followed */const pops=[];
+ let r=-1,pts=0,P=null,phase="",t0=0,LIM=0,drag=null,done=false,peekAt=0,fl=null,act=null;const VU=[];/* act = the one finger (pointer id) being followed */const pops=[];
  const btn=k91Btns(box,[["k91vdone","✓","","Bố cục xong: bắt đầu tô mực"]]);const bd=btn.querySelector("#k91vdone");
  const sc=cy=>Z.far+(1-Z.far)*cl((cy-SY)/SH,0,1),pa=cy=>Z.pale+(1-Z.pale)*cl((cy-SY)/SH,0,1);
  const toneF=v=>cl((v-Z.near[0])/(Z.near[1]-Z.near[0]),0,1),toneOf=v=>Math.round(toneF(v)*(T-1));
  const tgPt=t=>[SX+t.u*SW,SY+t.v*SH];
  function next(){r++;if(r>=NR){done=true;bd.disabled=true;return crLater(()=>env.end(Math.min(10,pts)),300)}
-  const n=Math.min(K91VE_PAINT[r].length,K91VE_BASE[r]+mgMore(env));const M=K91VE_PAINT[r].slice(0,n).map(([type,u,v])=>({type,u,v,tone:toneOf(v)}));
+  const VI=typeof mgpOne==="function"?mgpOne("ve",VU):null,PT=VI?VI.m:K91VE_PAINT[r];/* ORDER THIN P1: one composed painting (layout × motif set), drawn through the no-repeat memory */const n=Math.min(PT.length,K91VE_BASE[r]+mgMore(env));const M=PT.slice(0,n).map(([type,u,v])=>({type,u,v,tone:toneOf(v)}));
   const S=kg82Shuf(M.map((m,i)=>({ti:i,type:m.type,placed:false,x:0,y:0})));const tw=(W-12)/n;S.forEach((s,i)=>{s.hx=6+tw*(i+.5);s.hy=H*.915});
   P={M,S,tw,order:null,tp:[],ts:[],blots:[],bl:0};LIM=n*Lv("lim")+Lv("limBase");phase="place";t0=crNow();peekAt=t0;drag=null;fl=null;bd.disabled=true}
  /* the best way to name which stamp stands for which motif (same type only; ≤ 6! tries) */
@@ -34181,7 +34361,7 @@ function kcHoa(box,env){const C=kg82Canvas(box,1.08,480),{g,W,H}=C;C.cv.dataset.
  const ghost=L("ghost"),cutTol=L("cutTol"),angTol=L("angTol"),sway=L("sway"),nAlike=Math.round(L("alike"));
  /* a handmade-work recipe (j83 «Cắm hoa», jwkr WKR_FL) with one of this board's four flowers arranges only that flower: every vase takes its season (orchid / peony / mixed recipes keep the shuffle) */
  const wk=(typeof wkrNow==="function"&&wkrNow())||null,rf=wk&&wk.kind==="bhoa"&&typeof WKR_FL!=="undefined"?KCH_RCP[WKR_FL[wk.r]]:null,ri=rf?KCH_SEAS.findIndex(x=>x.k===rf):-1;
- const seas=ri>=0?[ri,ri,ri,ri]:kg82Shuf([0,1,2,3]);let r=-1,sum=0,P=null,phase="",done=false,gest=null,pops=[],falls=[],slash=null,tEnd=0;
+ const seas=ri>=0?[ri,ri,ri,ri]:kg82Shuf([0,1,2,3]);const HU=[],HS=[];let r=-1,sum=0,P=null,phase="",done=false,gest=null,pops=[],falls=[],slash=null,tEnd=0;
  const btn=k91Btns(box,[["k91done","✓","","Cắm xong: chấm thế hoa"]]);const bd=btn.querySelector("#k91done");
  const rad=d=>d*Math.PI/180,dg=a=>a*180/Math.PI,wob=now=>rad(sway*180)*Math.sin(now/110);
  /* target of stem i: length in px (chain Thiên → Nhân → Địa; guests hang off Nhân / Địa alternately) and the lean in degrees */
@@ -34190,8 +34370,9 @@ function kcHoa(box,env){const C=kg82Canvas(box,1.08,480),{g,W,H}=C;C.cv.dataset.
  const pickPos=i=>({x:W*(.2+.3*(i%3)),y:H*(.5+.2*Math.floor(i/3))});
  const tipOf=(s,a)=>({x:MX+s.L*Math.sin(a),y:MY-s.L*Math.cos(a)});
  function next(){r++;if(r>=NR){done=true;bd.disabled=true;phase="end";return setTimeout(()=>env.end(Math.max(0,Math.min(10,sum))),300)}
-  const si=seas[r],SE=KCH_SEAS[si],n=B.n[r]+more;const like=kg82Shuf(SE.like).slice(0,Math.max(0,Math.min(3,nAlike)));
-  const oth=kg82Shuf(KCH_SEAS.filter((_,i)=>i!==si).map(s=>s.fl).concat(KCH_OTHER));const fl=[{F:SE.fl,main:true}].concat(like.map(F=>({F,main:false})),oth.map(F=>({F,main:false}))).slice(0,6);
+  const IT=typeof mgpOne==="function"?mgpOne("hoa",HU,x=>ri>=0?x.si===ri:HS.indexOf(x.si)<0):null;/* ORDER THIN P1: one composed tray (season × look-alike order × two other flowers), drawn through the no-repeat memory */if(IT)HS.push(IT.si);
+  const si=IT?IT.si:seas[r],SE=KCH_SEAS[si],n=B.n[r]+more;const like=(IT?IT.like.map(i=>SE.like[i]):kg82Shuf(SE.like)).slice(0,Math.max(0,Math.min(3,nAlike)));
+  const oAll=KCH_SEAS.filter((_,i)=>i!==si).map(s=>s.fl).concat(KCH_OTHER);const oth=IT?IT.oth.map(i=>oAll[i]).concat(kg82Shuf(oAll.filter((_,i)=>IT.oth.indexOf(i)<0))):kg82Shuf(oAll);const fl=[{F:SE.fl,main:true}].concat(like.map(F=>({F,main:false})),oth.map(F=>({F,main:false}))).slice(0,6);
   P={si,SE,fl:kg82Shuf(fl).map(f=>Object.assign(f,{wilt:false})),wrong:0,picked:false,cur:0,last:null,t0:performance.now(),lim:n*L("limStem"),
    st:Array.from({length:n},(_,i)=>({i,Lt:lenT(i),at:angT(i),cut:false,L:0,seated:false,a:0,leaned:false}))};phase="pick";bd.disabled=true}
  function score(){const S=P.st,n=S.length;const z=B.zero-1;let ln=0,an=0;
@@ -34304,15 +34485,21 @@ function nwHintBtn(box){const d=document.createElement("div");d.className="kg82a
 /* ================= 1. CALLI (Thơ → thư pháp): trace numbered brush strokes in order ================= */
 /* glyph = [name, strokes]; stroke = 2 points (straight) or 3 points (quadratic curve); unit square */
 const NW_GLYPH={
- 2:[["Chữ Thập",[[[.15,.5],[.85,.5]],[[.5,.14],[.5,.88]]]],["Chữ Nhân",[[[.54,.14],[.4,.5],[.16,.86]],[[.46,.46],[.64,.66],[.88,.86]]]],["Chữ Bát",[[[.46,.2],[.38,.55],[.2,.86]],[[.54,.3],[.66,.6],[.84,.86]]]]],
- 3:[["Chữ Đại",[[[.12,.38],[.88,.38]],[[.52,.12],[.4,.5],[.14,.88]],[[.5,.45],[.66,.66],[.88,.88]]]],["Chữ Tam",[[[.28,.2],[.72,.2]],[[.2,.5],[.8,.5]],[[.12,.8],[.88,.8]]]],
+ 2:[["Chữ Nhị",[[[.22,.34],[.78,.34]],[[.12,.7],[.88,.7]]]],["Chữ Thập",[[[.15,.5],[.85,.5]],[[.5,.14],[.5,.88]]]],["Chữ Nhân",[[[.54,.14],[.4,.5],[.16,.86]],[[.46,.46],[.64,.66],[.88,.86]]]],["Chữ Bát",[[[.46,.2],[.38,.55],[.2,.86]],[[.54,.3],[.66,.6],[.84,.86]]]],["Chữ Đinh",[[[.14,.3],[.86,.3]],[[.5,.3],[.5,.88]]]],["Chữ Bốc",[[[.44,.12],[.44,.88]],[[.44,.4],[.58,.48],[.76,.56]]]],["Chữ Thất",[[[.14,.4],[.86,.4]],[[.44,.12],[.48,.72],[.84,.84]]]]],
+ 3:[["Chữ Thổ",[[[.28,.34],[.72,.34]],[[.5,.12],[.5,.8]],[[.14,.84],[.86,.84]]]],["Chữ Công",[[[.2,.2],[.8,.2]],[[.5,.2],[.5,.84]],[[.12,.84],[.88,.84]]]],["Chữ Thượng",[[[.5,.12],[.5,.8]],[[.5,.44],[.76,.44]],[[.14,.84],[.86,.84]]]],["Chữ Hạ",[[[.14,.16],[.86,.16]],[[.5,.16],[.5,.86]],[[.5,.48],[.74,.64]]]],["Chữ Đại",[[[.12,.38],[.88,.38]],[[.52,.12],[.4,.5],[.14,.88]],[[.5,.45],[.66,.66],[.88,.88]]]],["Chữ Tam",[[[.28,.2],[.72,.2]],[[.2,.5],[.8,.5]],[[.12,.8],[.88,.8]]]],
   ["Chữ Xuyên",[[[.22,.14],[.2,.52],[.14,.88]],[[.5,.12],[.5,.88]],[[.78,.14],[.8,.52],[.86,.88]]]],["Chữ Tiểu",[[[.5,.12],[.5,.88]],[[.32,.38],[.24,.6],[.12,.82]],[[.68,.38],[.76,.6],[.88,.82]]]]],
  4:[["Chữ Vương",[[[.2,.2],[.8,.2]],[[.28,.5],[.72,.5]],[[.5,.2],[.5,.82]],[[.14,.82],[.86,.82]]]],["Chữ Sơn",[[[.5,.14],[.5,.8]],[[.2,.42],[.2,.84]],[[.8,.18],[.8,.84]],[[.1,.84],[.9,.84]]]],
-  ["Chữ Thiên",[[[.22,.2],[.78,.2]],[[.12,.46],[.88,.46]],[[.52,.46],[.4,.7],[.14,.9]],[[.5,.62],[.66,.76],[.88,.9]]]],["Chữ Mộc",[[[.14,.34],[.86,.34]],[[.5,.1],[.5,.9]],[[.45,.42],[.32,.66],[.12,.86]],[[.55,.42],[.68,.66],[.88,.86]]]]],
+  ["Chữ Thiên",[[[.22,.2],[.78,.2]],[[.12,.46],[.88,.46]],[[.52,.46],[.4,.7],[.14,.9]],[[.5,.62],[.66,.76],[.88,.9]]]],["Chữ Mộc",[[[.14,.34],[.86,.34]],[[.5,.1],[.5,.9]],[[.45,.42],[.32,.66],[.12,.86]],[[.55,.42],[.68,.66],[.88,.86]]]],
+  ["Chữ Tỉnh",[[[.14,.36],[.86,.36]],[[.14,.66],[.86,.66]],[[.36,.14],[.36,.88]],[[.64,.14],[.64,.88]]]],["Chữ Phong",[[[.2,.2],[.8,.2]],[[.14,.46],[.86,.46]],[[.2,.72],[.8,.72]],[[.5,.1],[.5,.9]]]],
+  ["Chữ Thủy",[[[.5,.1],[.5,.9]],[[.14,.44],[.3,.5],[.44,.46]],[[.42,.3],[.3,.6],[.12,.82]],[[.58,.3],[.7,.6],[.88,.82]]]],["Chữ Hỏa",[[[.3,.18],[.26,.34],[.18,.46]],[[.7,.18],[.74,.34],[.82,.46]],[[.5,.12],[.4,.5],[.14,.88]],[[.5,.45],[.66,.66],[.88,.88]]]]],
  5:[["Chữ Hòa",[[[.42,.1],[.28,.18],[.14,.24]],[[.12,.36],[.88,.36]],[[.5,.12],[.5,.9]],[[.45,.42],[.32,.66],[.12,.86]],[[.55,.42],[.68,.66],[.88,.86]]]],
-  ["Chữ Vị",[[[.3,.2],[.7,.2]],[[.14,.44],[.86,.44]],[[.5,.1],[.5,.9]],[[.45,.52],[.32,.7],[.12,.88]],[[.55,.52],[.68,.7],[.88,.88]]]]]};
-function nwPick(n){const L=NW_GLYPH[n]||NW_GLYPH[3];return L[Math.floor(Math.random()*L.length)]}
-function nwCalli(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const T=BAL.nw.calli,tier=nwTier("tho",env),lv=env.lv||0;
+  ["Chữ Vị",[[[.3,.2],[.7,.2]],[[.14,.44],[.86,.44]],[[.5,.1],[.5,.9]],[[.45,.52],[.32,.7],[.12,.88]],[[.55,.52],[.68,.7],[.88,.88]]]],
+  ["Chữ Chính",[[[.14,.16],[.86,.16]],[[.5,.16],[.5,.84]],[[.5,.46],[.74,.46]],[[.28,.46],[.28,.84]],[[.12,.86],[.88,.86]]]],["Chữ Sinh",[[[.46,.12],[.34,.24],[.2,.34]],[[.22,.4],[.78,.4]],[[.5,.2],[.5,.86]],[[.3,.62],[.7,.62]],[[.12,.86],[.88,.86]]]],
+  ["Chữ Bản",[[[.14,.34],[.86,.34]],[[.5,.1],[.5,.9]],[[.45,.42],[.32,.66],[.12,.86]],[[.55,.42],[.68,.66],[.88,.86]],[[.3,.72],[.7,.72]]]],["Chữ Ngọc",[[[.2,.2],[.8,.2]],[[.3,.46],[.7,.46]],[[.5,.2],[.5,.86]],[[.14,.86],[.86,.86]],[[.64,.58],[.76,.7]]]],
+  ["Chữ Điền",[[[.2,.2],[.2,.84]],[[.2,.2],[.8,.2],[.8,.84]],[[.2,.52],[.8,.52]],[[.5,.2],[.5,.84]],[[.2,.84],[.8,.84]]]]]};
+const NWU=[];/* glyph ids shown in this game */
+function nwPick(n){const it=typeof mgpOne==="function"?mgpOne("tho",NWU,x=>x.n===n):null;/* ORDER THIN P1: glyph × brush manner, drawn through the no-repeat memory */if(it)return it.g;const L=NW_GLYPH[n]||NW_GLYPH[3];return L[Math.floor(Math.random()*L.length)]}
+function nwCalli(box,env){NWU.length=0;const C=kg82Canvas(box,1,460),{g,W,H}=C;const T=BAL.nw.calli,tier=nwTier("tho",env),lv=env.lv||0;
  const FULL=typeof mgFull==="function"?mgFull(env,T.full):T.full,NR=T.rounds[0].length,S0=Math.min(W,H)-34,ox=(W-S0)/2,oy=(H-S0)/2+14,tol=S0*nwP(T.tol,tier);
  let r=-1,sum=0,F=null,si=0,ink=null,inks=[],sc=[],phase="",t0=0,LIM=0,done=false,tAct=0,glow=0,cost=0,tip=null;const pops=[];
  const toC=([u,v])=>[ox+u*S0,oy+v*S0];
@@ -34373,7 +34560,7 @@ function nwMark(g,type,cx,cy,s,mir,col,alpha){const P=nwDense(type).map(([x,y,w]
  for(let i=R.length-1;i>=0;i--)g.lineTo(R[i][0],R[i][1]);g.closePath();g.fill();[P[0],P[P.length-1]].forEach(p=>{g.beginPath();g.arc(p[0],p[1],p[2],0,Math.PI*2);g.fill()});g.restore()}
 function nwDoi(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const T=BAL.nw.doi,tier=nwTier("doi",env);
  const wide=W>=H*1.45,WL=wide?W*.6:W;const R=T.rows[Math.min(tier,T.rows.length-1)];const ND=nwP(T.decoy,tier);
- let r=-1,pts=0,tot=0,okT=0,msT=0,P=null,phase="",t0=0,drag=null,sel=null,done=false,tAct=0,tip=null;const pops=[];
+ const DOU=[];let r=-1,pts=0,tot=0,okT=0,msT=0,P=null,phase="",t0=0,drag=null,sel=null,done=false,tAct=0,tip=null;const pops=[];
  const hb=nwHintBtn(box);
  const dm=k91DemoCard(box,"nwdoi",{title:"CÁCH CHƠI: ĐỐI NÉT BÚT",done:()=>{hb.hidden=false;t0=tAct=performance.now()},
   lines:["Hai bức liễn treo đối nhau: bức trái có nét bút, bức phải phải là hình lật gương của nét ấy, cùng hàng.","Kéo nét trong khay vào ô bên phải (hoặc chạm nét rồi chạm ô). Nét lật gương đúng thì ở lại, sai thì tự quay về.","Chưa thấy nét nào thì chạm Gợi ý, chỉ tốn một ít phần."],
@@ -34385,12 +34572,12 @@ function nwDoi(box,env){const C=kg82Canvas(box,1.05,480),{g,W,H}=C;const T=BAL.n
   P.slots=P.rows.map((_,i)=>({x:P.rx,y:top+i*rh+(rh-sz)/2,w:sz,h:sz}));P.left=P.rows.map((_,i)=>({x:P.lx,y:top+i*rh+(rh-sz)/2,w:sz,h:sz}));
   const ty0=wide?top:top+P.n*rh+34,perRow=wide?Math.max(2,Math.floor((W-WL-10)/(sz+8))):Math.max(2,Math.floor((W-12)/(sz+8)));
   P.tiles.forEach((t,i)=>{const row=Math.floor(i/perRow),col=i%perRow;const n=Math.min(perRow,P.tiles.length-row*perRow);const rw=n*(sz+8)-8;const x0=wide?WL+(W-WL-rw)/2:(W-rw)/2;t.hx=x0+col*(sz+8);t.hy=ty0+row*(sz+8);t.w0=sz;t.h0=sz;if(t.at==null){t.x=t.hx;t.y=t.hy}});P.trayY=ty0}
- function next(){r++;if(r>=R.length){done=true;KG82.why=`Nét lật gương đặt đúng ${okT}/${tot} · đặt sai ${msT} lần`;return setTimeout(()=>env.end(10*pts/Math.max(1,tot)),300)}const n=R[r];
-  const rows=[];for(let i=0;i<n;i++){let t;do t=NW_TYPES[Math.floor(Math.random()*NW_TYPES.length)];while(i&&t===rows[i-1]&&Math.random()<.8);rows.push(t)}
+ function next(){r++;if(r>=R.length){done=true;KG82.why=`Nét lật gương đặt đúng ${okT}/${tot} · đặt sai ${msT} lần`;return setTimeout(()=>env.end(10*pts/Math.max(1,tot)),300)}const n=R[r];const DIT=typeof mgpOne==="function"?mgpOne("doi",DOU,x=>x.n===n):null;/* ORDER THIN P1b: one round of scrolls (rows × seed), the same generator on the item's seed */
+  const bld=()=>{const rows=[];for(let i=0;i<n;i++){let t;do t=NW_TYPES[Math.floor(Math.random()*NW_TYPES.length)];while(i&&t===rows[i-1]&&Math.random()<.8);rows.push(t)}
   const good=rows.map(t=>({type:t,mir:true}));const used=[...new Set(rows)];const dec=[];
   for(let i=0;i<ND;i++){let d;const pool=NW_TYPES.filter(t=>!used.includes(t));
    if(tier>=2||(tier===1&&i%2===0)||!pool.length)d={type:used[i%used.length],mir:false,decoy:1};else d={type:pool[Math.floor(Math.random()*pool.length)],mir:Math.random()<.5,decoy:1};dec.push(d)}
-  P={n,rows,tiles:kg82Shuf(good.concat(dec)),fill:{},miss:0,cost:0,glow:null};lay();phase="play";t0=tAct=performance.now();sel=null;drag=null;tip=null}
+  return{n,rows,tiles:kg82Shuf(good.concat(dec)),fill:{},miss:0,cost:0,glow:null}};P=DIT?mgpWith(DIT,bld):bld();lay();phase="play";t0=tAct=performance.now();sel=null;drag=null;tip=null}
  const tileAt=(x,y)=>{for(let i=P.tiles.length-1;i>=0;i--){const t=P.tiles[i];if(t.locked)continue;if(x>=t.x&&x<=t.x+t.w0&&y>=t.y&&y<=t.y+t.h0)return t}return null};
  const slotAt=(x,y)=>{let bi=-1,bd=1e9;P.slots.forEach((s,i)=>{if(P.fill[i])return;const d=k91Dist(x,y,s.x+s.w/2,s.y+s.h/2);if(d<bd){bd=d;bi=i}});const s=bi>=0?P.slots[bi]:null;return s&&bd<s.w*.9?bi:-1};
  function bounce(t){t.bk={x:t.x,y:t.y,a:performance.now()};t.at=null;t.x=t.hx;t.y=t.hy}
@@ -35287,7 +35474,8 @@ function tdAlmsBest(need,pool){let best=0;const give=need.map(()=>0);(function r
 function kgTdAlms(box,env){const lv=tdEase(env.lv);const wrap=document.createElement("div");wrap.className="kg82quiz";box.appendChild(wrap);
  /* mg-balance-2: at low ease the portions run short in more rounds and each round has a time (the people cannot wait): BAL.mgTier.lev.td_hanh */
  const SH=Math.round(mgLev(env,"td_hanh","short")),LIM=Math.round(mgLev(env,"td_hanh","lim"));
- const rounds=TD_ALMS.map((q,k)=>({list:q.list,need:q.list.map(x=>x[2]),pool:q.pool-(k===2&&lv<3?1:0)-(k<2?Math.min(SH,k+1):0)}));let r=0,pts=0,stop=false,give=[],lock=false,t0=performance.now(),tm=0;
+ const MP=mgpc1("td_hanh");/* ORDER THIN P1c: the people of the three rounds come from a pooled item (jmgpool_c td_hanh): same number of people, same needs, same pools */
+ const rounds=(MP?MP.rounds:TD_ALMS).map((q,k)=>({list:q.list,need:q.list.map(x=>x[2]),pool:q.pool-(k===2&&lv<3?1:0)-(k<2?Math.min(SH,k+1):0)}));let r=0,pts=0,stop=false,give=[],lock=false,t0=performance.now(),tm=0;
  function left(){return rounds[r].pool-give.reduce((a,b)=>a+b,0)}
  function render(){if(stop)return;const R=rounds[r];
   wrap.innerHTML=`<div class="nwb-pool">${NWB.ic("bowl")}${NWB.pips(R.pool,left())}<span class="nwb-cap">còn ${left()} phần để chia</span></div>`+
@@ -38141,6 +38329,12 @@ BAL.blopt={danhD:4,sungD:4,sup:25,
 /* ORDER THIN P0 (jnorep.js, owner OD 23/11 ~22:50Z): ONE shared cross-life no-repeat memory. lives = lives kept (this one + 5 past, as the old
    ctm-e68h), w = weight factor per past life that saw a key (×0.5, as j68), cap = keys kept per life (the store is shared by every family). */
 BAL.nr={lives:6,w:.5,cap:1500};
+/* ORDER THIN P1 (jmgpool.js): mini-game content pools composed from parts, drawn through jnorep (family mg:<kind>). min = items a pooled test type must hold (test dev/test/mg-pool.js). */
+BAL.mgp={min:40};
+/* ORDER THIN P1c (jmgpool_c.js): pool sizes of the P1c kinds (floor BAL.mgp.min); nghe = every triple of the ten secret words. */
+BAL.mgpc={nghe:120,td_hanh:150,kinh:360,may:350};
+/* ORDER THIN P1b (jmgpool_b.js): items per pooled test type of lane P1b (co and doi/doden: per group size / rows / round type) */
+BAL.mgpb={dan:64,co:90,dauho:60,theu:64,mua:64,doi:80,doden:44,tc:100,xa:200,thq:130};
 /* ORDER THIN P2 (j7c.js composed intrigue): on = the family is live; share = its weekly-card weight as a multiple of one world card
    (BAL.ag.why.dil.world); rest = months before the same seed may return in one life (as the old j7 cards, S.seen ≥ 12);
    fx[tier] = what ONE gain/loss step of a seed is worth per key (laws 2/3/4: seeds count steps, the numbers live here; rel = thiện cảm
@@ -38466,7 +38660,9 @@ const nwqKey=a=>"nwq-"+a;
    cfg.build(r,tier,W,H) → P{items:[{x,y(centre),hx,hy(home),size,paint(g,it,cx,cy,s,st)}], slots:[{x,y,w,h,multi,ok(it),paint(g,s,st,now),ax,ay,aw,ah}], tipY}
    tier < BAL.nwq.free: a drop is checked at once (right = stays, wrong = bounces back with a soft tip, a little score);
    tier ≥ free: pieces can be placed freely and are judged on «Xong». Gợi ý glows the next piece and its place. */
-function nwqPlace(box,env,cfg){const kind=env.kind,B=BAL.nwq,tier=nwqTier(env),imm=tier<B.free;const C=kg82Canvas(box,cfg.ratio,cfg.hMax),{g,W,H}=C;
+/* ORDER THIN P1b: tc and thq boards come from a seeded recipe pool (jmgpool_b.js, family mg:tc / mg:thq); the engine's own build runs on the item's seed. used = ids shown in this game */
+function nwqBuild(cfg,kind,r,tier,W,H,used){const IT=(kind==="tc"||kind==="thq")&&typeof mgpOne==="function"?mgpOne(kind,used):null;return IT?mgpWith(IT,()=>cfg.build(r,tier,W,H)):cfg.build(r,tier,W,H)}
+function nwqPlace(box,env,cfg){const MU=[],kind=env.kind,B=BAL.nwq,tier=nwqTier(env),imm=tier<B.free;const C=kg82Canvas(box,cfg.ratio,cfg.hMax),{g,W,H}=C;
  const NR=B.rounds[kind],LIM=B.lim[kind][tier]*1000,IDLE=imm&&B.idle[tier]?B.idle[tier]*1000:0;
  let r=-1,pts=0,tot=0,P=null,phase="",t0=0,tAct=0,drag=null,done=false;const pops=[];
  const hb=document.createElement("div");hb.className="kg82act";hb.innerHTML=NWB.btn("nwqhint","hint",{cls:"kgbtn",label:"Gợi ý: "+cfg.hintSub})+(imm?"":NWB.btn("nwqdone","check",{cls:"kgbtn",label:"Xong: chấm điểm"}));box.appendChild(hb);/* mg-noword-b: icon buttons, no word in play */
@@ -38480,7 +38676,7 @@ function nwqPlace(box,env,cfg){const kind=env.kind,B=BAL.nwq,tier=nwqTier(env),i
  function home(it,fly){if(fly)it.bk={x:it.x,y:it.y,a:performance.now()};unseat(it);it.x=it.hx;it.y=it.hy;it.sc=1}
  function seat(it,s){unseat(it);if(!s.multi)s.list.slice().forEach(o=>home(o,true));s.list.push(it);it.slot=P.slots.indexOf(s);relayout(s)}
  function next(){r++;if(r>=NR){done=true;return setTimeout(()=>env.end(10*pts/Math.max(1,tot)),300)}/* float: graded once by kg82 mgGrade */
-  P=cfg.build(r,tier,W,H);P.miss=0;P.cost=0;P.glow=null;P.tip=null;P.say=null;P.items.forEach(it=>{it.x=it.hx;it.y=it.hy;it.slot=-1;it.locked=false;it.sc=1;it.res=null});P.slots.forEach(s=>{s.list=[]});
+  P=nwqBuild(cfg,kind,r,tier,W,H,MU);P.miss=0;P.cost=0;P.glow=null;P.tip=null;P.say=null;P.items.forEach(it=>{it.x=it.hx;it.y=it.hy;it.slot=-1;it.locked=false;it.sc=1;it.res=null});P.slots.forEach(s=>{s.list=[]});
   phase="play";t0=tAct=performance.now();drag=null;const d=hb.querySelector("#nwqdone");if(d)d.disabled=false;hb.querySelector("#nwqhint").disabled=false}
  const itemAt=(x,y)=>{for(let i=P.items.length-1;i>=0;i--){const it=P.items[i];if(it.locked)continue;const h=it.size*it.sc/2+4;if(Math.abs(x-it.x)<=h&&Math.abs(y-it.y)<=h)return it}return null};
  const slotAtPt=(x,y)=>{let bi=-1,bd=1e9;P.slots.forEach((s,i)=>{const inside=Math.abs(x-s.x)<=s.w/2*1.12&&Math.abs(y-s.y)<=s.h/2*1.12;const d=inside?0:k91Dist(x,y,s.x,s.y)-Math.max(s.w,s.h)*.6;if(d<bd){bd=d;bi=i}});return bd<=0?bi:-1};
@@ -38531,13 +38727,14 @@ function nwqSprItem(name){return(g,it,x,y,s,st)=>{g.save();if(st==="on"){g.shado
 
 /* =============== 1. LAY (Lễ nghi): the model altar is shown; drag every object to its place on the table =============== */
 const NWQ_LE=["huong-censer","hoa-vase","nghiem-bowl","doden-lantern","mua-fan","ve-inkstone","mua-bell","banh-pot"];
+const LEU=[];/* altar ids shown in this game */
 const NWQ_LAY={3:[[.5,.28],[.24,.72],[.76,.72]],4:[[.24,.28],[.76,.28],[.24,.72],[.76,.72]],5:[[.17,.28],[.5,.22],[.83,.28],[.33,.74],[.67,.74]]};
 function nwqLay(box,env){return nwqPlace(box,env,{ratio:1.25,hMax:560,veil:.18,ay:.85,hintSub:"chỉ chỗ đúng, bớt một ít phần",wrongT:"Chưa đúng chỗ, xem tờ mẫu.",hintT:"Vật sáng đặt vào chỗ sáng.",perfect:"Bàn lễ đúng mẫu!",fine:"Bàn lễ xong!",
  demo:{title:"CÁCH CHƠI: BÀY LỄ",lines:["Tờ mẫu ở trên cho thấy mỗi vật đặt ở đâu trên bàn lễ.","Kéo từng vật ở khay dưới đến đúng chỗ của nó trên bàn.","Đặt sai thì vật tự quay về khay. Chưa rõ thì chạm Gợi ý, chỉ tốn một ít phần."],
   art:(g,W,H,now)=>{const cx=W/2;nwqPanel(g,cx-92,42,184,58,"MẪU",10);const m=[[cx-48,74],[cx+48,74]],nm=["huong-censer","hoa-vase"];m.forEach(([x,y],i)=>nwqFit(g,nm[i],x,y,34));
    nwqPanel(g,cx-92,110,184,58,"BÀN LỄ",10);const sx=[cx-48,cx+48],sy=142;sx.forEach(x=>{nwqSlotRing(g,{x,y:sy,w:40,h:40},"n")});
    const k=(now%3200)/3200,e=k<.25?0:k<.65?(k-.25)/.4:1,hx=cx,hy=196,tx=hx+(sx[1]-hx)*e,ty=hy+(sy-hy)*e;nwqFit(g,"hoa-vase",tx,ty,36);nwqFit(g,"huong-censer",sx[0],sy,34,{alpha:.9});return 236}},
- build(r,tier,W,H0){const B=BAL.nwq,N=B.n.le[tier],L=NWQ_LAY[N],objs=kg82Shuf(NWQ_LE).slice(0,N);
+ build(r,tier,W,H0){if(!r)LEU.length=0;const B=BAL.nwq,N=B.n.le[tier],IT=typeof mgpOne==="function"?mgpOne("le",LEU,x=>x.n===N):null,L=IT?IT.lay:NWQ_LAY[N],objs=IT?IT.objs.slice():kg82Shuf(NWQ_LE).slice(0,N);/* ORDER THIN P1: one composed altar (object set × table layout), drawn through the no-repeat memory */
   const H=H0*Math.min(1,Math.max(.7,((typeof innerHeight==='number'?innerHeight:800)-185)/H0));/* short landscape: keep tray + altar above the sticky hint bar */
   const mx=W*.18,mw=W*.64,my=H*.03,mh=H*.29,ax=W*.05,aw=W*.9,ay=H*.36,ah=H*.4;const mS=Math.min(mh*.44,mw/(N>3?3.1:2.7)),aS=Math.min(ah*.44,aw/(N>3?3.7:3));
   const slots=L.map((p,j)=>({x:ax+p[0]*aw,y:ay+p[1]*ah,w:aS*1.1,h:aS*1.1,ok:it=>it.k===j,paint:(g,s,st)=>nwqSlotRing(g,s,st)}));
@@ -38608,7 +38805,7 @@ function nwqRobe(g,x,y,w,h,col,emb){const cx=x+w/2,hr=h*.12;g.save();
 function nwqScrap(g,cx,cy,s,col,emb){g.save();g.translate(cx,cy);g.fillStyle=col;g.strokeStyle="#00000044";g.lineWidth=1.2;g.beginPath();const p=[[-.5,-.4],[-.18,-.5],[.1,-.38],[.5,-.5],[.42,-.05],[.52,.4],[.12,.5],[-.12,.36],[-.5,.46],[-.4,0]];p.forEach(([a,b],i)=>i?g.lineTo(a*s,b*s):g.moveTo(a*s,b*s));g.closePath();g.fill();g.stroke();
  g.globalAlpha=.2;g.strokeStyle="#fff";g.lineWidth=1;for(let i=-3;i<=3;i++){g.beginPath();g.moveTo(-s*.5,i*s*.12);g.lineTo(s*.5,i*s*.12);g.stroke()}g.globalAlpha=1;if(emb)nwqFit(g,emb,0,0,s*.55);g.restore()}
 function nwqClue(box,env){const B=BAL.nwq,tier=nwqTier(env),C=kg82Canvas(box,1.2,540),{g,W,H}=C;const NS=B.n.xa[tier],NC=B.clues[tier],NR=B.rounds.xa,LIM=B.lim.xa[tier]*1000,IDLE=B.idle[tier]?B.idle[tier]*1000:0;
- let r=-1,pts=0,P=null,phase="",t0=0,tAct=0,done=false;const pops=[];
+ const XAU=[];let r=-1,pts=0,P=null,phase="",t0=0,tAct=0,done=false;const pops=[];
  const hb=document.createElement("div");hb.className="kg82act";hb.innerHTML=NWB.btn("nwqhint","hint",{cls:"kgbtn",label:"Gợi ý: gạch một người không khớp"});box.appendChild(hb);
  const dm=k91DemoCard(box,nwqKey("xa"),{title:"CÁCH CHƠI: KHÁM VẬT CHỨNG",done:()=>{hb.hidden=false;t0=tAct=performance.now()},
   lines:["Vụ án có vật chứng bày ở trên: mảnh áo, đồ rơi lại. Mỗi người bị nghi mặc áo nào, mang theo thứ gì thì hiện ở dưới.","Chạm vào người có áo và vật mang theo khớp cả hai vật chứng.","Chọn sai thì người ấy bị gạch, mất một ít phần. Chưa rõ thì chạm Gợi ý."],
@@ -38617,11 +38814,12 @@ function nwqClue(box,env){const B=BAL.nwq,tier=nwqTier(env),C=kg82Canvas(box,1.2
    if(on){g.save();g.strokeStyle=K91C.good();g.lineWidth=3;k91RR(g,cx-92,106,64,76,8);g.stroke();g.restore()}return 204}});
  if(dm)hb.hidden=true;
  function next(){r++;if(r>=NR){done=true;return setTimeout(()=>env.end(cl(pts,0,10)),300)}
-  const cols=kg82Shuf(NWQ_COL),thg=kg82Shuf(NWQ_THG),emb=kg82Shuf(NWQ_EMB);const att=["c","t","e"].slice(0,NC);
+  const att=["c","t","e"].slice(0,NC);const XI=typeof mgpOne==="function"?mgpOne("xa",XAU):null;/* ORDER THIN P1b: one case (culprit + decoys + the shuffled row, seeded) */
+  const gen=()=>{const cols=kg82Shuf(NWQ_COL),thg=kg82Shuf(NWQ_THG),emb=kg82Shuf(NWQ_EMB);
   const cul={c:cols[0],t:thg[0],e:emb[0]};const S=[{cul:true,c:cols[0],t:thg[0],e:emb[0]}];
   for(let i=1;i<NS;i++){const m=Math.floor(Math.random()*(NC));const keep=kg82Shuf(att).slice(0,Math.min(m,NC-1));const q={cul:false};
    q.c=keep.includes("c")?cul.c:cols.filter(x=>x!==cul.c)[Math.floor(Math.random()*(cols.length-1))];q.t=keep.includes("t")?cul.t:thg.filter(x=>x!==cul.t)[Math.floor(Math.random()*(thg.length-1))];q.e=keep.includes("e")?cul.e:emb.filter(x=>x!==cul.e)[Math.floor(Math.random()*(emb.length-1))];S.push(q)}
-  const L=kg82Shuf(S);const cs=NS<=3?NS:Math.min(NS,Math.max(2,Math.floor((W-8)/104)));const rows=Math.ceil(NS/cs),cw=(W-12)/cs-6,top=H*.4,ch=Math.min((H*.58-4)/rows-6,cw*1.12);
+  return{cul,L:kg82Shuf(S)}};const{cul,L}=XI?mgpWith(XI,gen):gen();const cs=NS<=3?NS:Math.min(NS,Math.max(2,Math.floor((W-8)/104)));const rows=Math.ceil(NS/cs),cw=(W-12)/cs-6,top=H*.4,ch=Math.min((H*.58-4)/rows-6,cw*1.12);
   L.forEach((q,i)=>{const row=Math.floor(i/cs),col=i%cs,n=Math.min(cs,L.length-row*cs);q.x=(W-n*(cw+6)+6)/2+col*(cw+6);q.y=top+row*(ch+6);q.w=cw;q.h=ch;q.gone=false;q.res=null});
   P={S:L,att,cul,cost:0,miss:0,glow:null,tip:null,say:null,title:NWQ_CASE[r%NWQ_CASE.length],cw,ch};phase="play";t0=tAct=performance.now();hb.querySelector("#nwqhint").disabled=false}
  const live=()=>P.S.filter(q=>!q.gone);
@@ -38732,7 +38930,7 @@ function lmDraw(g,cx,cy,w,h,shape,col,lit,st,sway){const C=LM_COL[col];g.save();
  g.strokeStyle=C[0];g.lineWidth=2;g.beginPath();g.moveTo(0,by+bh*.97+5);g.lineTo(0,by+bh*.97+h*.16);g.stroke();g.restore()}
 function lmShuf(a){return kg82Shuf(a.slice())}
 function k92Lamp(box,env){const C=kg82Canvas(box,1.25,560,innerHeight<BAL.lantern.short.h?BAL.lantern.short.min:0),{g,W,H}=C;const tier=lmTier(env),B=BAL.lantern,LIM=B.lim[tier],IDLE=B.idle[tier];
- let rd=-1,pts=0,R=null,t0=0,tAct=0,done=false,wait=0;const pops=[];const hb=k91Btns(box,[["k92hint","?","","Gợi ý: bớt một ít phần"]]);
+ const LDU=[];let rd=-1,pts=0,R=null,t0=0,tAct=0,done=false,wait=0;const pops=[];const hb=k91Btns(box,[["k92hint","?","","Gợi ý: bớt một ít phần"]]);
  const dm=k91DemoCard(box,"doden2",{title:"CÁCH CHƠI: THẮP ĐÈN",done:()=>{hb.hidden=false;t0=tAct=performance.now();setTimeout(fit,50)},
   lines:["Ba hồi, hồi nào cũng làm theo cái đang hiện sẵn trên màn.","Hồi 1: chạm mọi chiếc đèn giống đèn mẫu (cùng dáng, cùng màu). Hồi 2: chạm để thắp đèn cho giống hình mẫu. Hồi 3: chạm đèn theo đúng thứ tự dải mẫu.","Chạm nhầm thì đèn tối đi, chạm lại. Chưa rõ thì chạm Gợi ý, chỉ tốn một ít phần."]});
  if(dm)hb.hidden=true;
@@ -38749,7 +38947,7 @@ function k92Lamp(box,env){const C=kg82Canvas(box,1.25,560,innerHeight<BAL.lanter
    o.T=Array(n).fill(0);idx.forEach(i=>o.T[i]=1);o.P=Array(n).fill(0);o.cols=cols;o.rows=rows;o.need=lit;o.sc=lmShuf([0,1,2,3]).slice(0,1)[0]}
   else{const m=B.seq[tier];const pairs=lmShuf([0,1,2,3].flatMap(s=>[0,1,2].map(c=>({s,c})))).slice(0,m);o.S=pairs;o.tray=lmShuf(pairs.map((p,i)=>({...p,i,used:0,bad:0})));o.k=0;o.need=m}
   return o}
- function next(){rd++;if(rd>=3){done=true;return setTimeout(()=>env.end(cl(pts,0,10)),400)}R=mk(rd);t0=tAct=performance.now()}
+ function next(){rd++;if(rd>=3){done=true;return setTimeout(()=>env.end(cl(pts,0,10)),400)}{const LI=typeof mgpOne==="function"?mgpOne("doden",LDU,x=>x.type===rd):null;/* ORDER THIN P1b: one lamp round (type × seed), the same generator on the item's seed */R=LI?mgpWith(LI,()=>mk(rd)):mk(rd)}t0=tAct=performance.now()}
  function fin(timeout){if(R.fin)return;const now=performance.now(),sp=mgPace(env,"doden",now-t0,LIM)/* review/mg-tune: the ONE time part (was its own speed share) */,base=B.pts[R.type];let p;
   const frac=R.type===0?R.found/R.need:R.type===1?R.P.filter((v,i)=>v===R.T[i]).length/R.P.length:R.k/R.need;
   p=timeout?base*frac*B.timeout:base*sp;p=Math.max(0,p-R.miss*base*B.miss-R.cost);if(timeout)p=Math.min(p,base*frac*B.timeout);pts+=p;R.fin=now;
@@ -65817,10 +66015,11 @@ const SG_FILL=["Trà hôm nay hơi đắng.","Hoa đào nở sớm quá.","Mai t
 function sgPh(t,k){return t.replace("{k}",k).replace("{K}",k[0].toUpperCase()+k.slice(1))}
 function sgNghe(box,env){const R=sgRM();const C=kg82Canvas(box,.86,400),{g,W,H}=C;
  k91Btns(box,[["sgnep","Nép sau bình phong","giữ bóng trong dải xanh"]]);let glow=null,gUntil=0;
- const KW=sgShuf(SG_KW),key=KW.slice(0,3),oth=KW.slice(3);const T=30000,N=16,GAP=1700,CROSS=mgLev(env,"nghe","cross"),SHOW=2600;/* MG11: the crossing time follows the board ease (BAL.mgTier.lev.nghe, law 5) */
+ const MP=mgpc1("nghe");/* ORDER THIN P1c: the secret words, decoys and lines come from a pooled item (jmgpool_c nghe), the old shuffle when no pool */
+ const KW=MP?MP.kw.map(i=>SG_KW[i]):sgShuf(SG_KW),key=KW.slice(0,3),oth=KW.slice(3);const T=30000,N=16,GAP=1700,CROSS=mgLev(env,"nghe","cross"),SHOW=2600;/* MG11: the crossing time follows the board ease (BAL.mgTier.lev.nghe, law 5) */
  /* 16 lines: 7 with a word to listen for, 3 decoys (another secret word), 6 small talk; the last two are always small talk */
- const kinds=sgShuf(["i","i","i","i","i","i","i","d","d","d","f","f","f","f"]).concat(["f","f"]);
- const imp=sgShuf(SG_IMP),fil=sgShuf(SG_FILL);let ii=0,fi=0;
+ const kinds=MP?MP.kinds:sgShuf(["i","i","i","i","i","i","i","d","d","d","f","f","f","f"]).concat(["f","f"]);
+ const imp=MP?MP.imp.map(i=>SG_IMP[i]):sgShuf(SG_IMP),fil=MP?MP.fil.map(i=>SG_FILL[i]):sgShuf(SG_FILL);let ii=0,fi=0;
  const ph=kinds.map((c,n)=>({s:c==="i"?sgPh(imp[ii++%imp.length],key[n%3]):c==="d"?sgPh(imp[ii++%imp.length],oth[n%oth.length]):fil[fi++%fil.length],imp:c==="i",at:600+n*GAP,lane:n%3,done:0}));
  const NI=ph.filter(p=>p.imp).length;const MX=26,y0=H*.16,y1=H*.88,LO=.3,HI=.7;const lanes=[H*.34,H*.55,H*.76];const sw=Math.min(W*.6,300),sh=34;
  let e=.5,band=0,tot=0,hits=0,wrong=0,last=0,t0=0,stop=false,gust=0,warn=0;const pops=[];
@@ -66548,7 +66747,9 @@ const KWK_MAY=[["Viền cổ áo",[kwkQ(.22,.3,.5,.66,.78,.3)]],
  ["Viền thêu lượn",[t=>[.12+.76*t,.5+.1*Math.sin(t*Math.PI*4)]]],
  ["Đai lưng",[kwkL(.18,.42,.82,.42),kwkL(.82,.56,.18,.56)]]];
 let kwkMode=null;
-function kwkTrace(F,mode){return(box,env)=>{const keep=K91_SH.splice(0,K91_SH.length,...F);kwkMode=mode;let stop;
+/* ORDER THIN P1c: a pooled figure (jmgpool_c kinh / may: parameters L / Q / W) → [name, strokes as curves t => [u, v]] */
+function kwkFig(it){const fn=f=>f[0]==="L"?kwkL(f[1],f[2],f[3],f[4]):f[0]==="Q"?kwkQ(f[1],f[2],f[3],f[4],f[5],f[6]):(t=>[f[1]+(f[2]-f[1])*t,f[3]+f[4]*Math.sin(t*Math.PI*f[5])]);return[it.id,it.S.map(fn)]}
+function kwkTrace(F,mode){return(box,env)=>{const P=mgpcMany(mode,4);/* four pooled figures per game (none twice); the old rows when no pool */const F2=P?P.map(kwkFig):F;const keep=K91_SH.splice(0,K91_SH.length,...F2);kwkMode=mode;let stop;
  try{stop=k91Trace(box,env)}finally{K91_SH.splice(0,K91_SH.length,...keep)}return()=>{kwkMode=null;if(stop)stop()}}}
 try{Object.assign(KG82_ENG,{kinh:kwkTrace(KWK_KINH,"kinh"),may:kwkTrace(KWK_MAY,"may")});
  Object.assign(KG82_KIND,{kinh:{e:"kinh",n:"Chép kinh",t:"Chép kinh theo bản mẫu",how:"Đặt ngón tay ở chấm xanh rồi đưa bút theo nét mờ của bản kinh mẫu, từng nét theo số thứ tự, cho kín và đều tay. 4 hàng kinh."},
@@ -81282,7 +81483,7 @@ let WT=null;
 let FLIPQ=new WeakSet();
 function wake(){step();if(!WT&&!window.__bot)WT=setInterval(step,250)}
 function sleep(){if(WT){clearInterval(WT);WT=null}}
-function step(){try{if(!S||S.dead||!nfOn()){sleep();return}const x=X();if(guest()&&S.nfW===day()&&S.nfFin!==day())finLate();if(!x||x.st==="done"){if(!(guest()&&S.nfW===day()&&S.nfFin!==day()))sleep();return}
+function step(){try{if(!S||S.dead||!nfOn()){sleep();return}heal();const x=X();if(guest()&&S.nfW===day()&&S.nfFin!==day())finLate();if(!x||x.st==="done"){if(!(guest()&&S.nfW===day()&&S.nfFin!==day()))sleep();return}
  if(x.st==="wait"){if(Q.some(m=>m&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="nfch"&&(m.pid==="nfsum"||FLIPQ.has(m))))return;
   /* co-op host: the draw is held for the friend's Kỳ nguyệt answer (jcoopworld CW.cyHold; cyFree turns the card when it comes): the choice
      waits for that card, at most BAL.coop.cyWaitMs (she never answers: the night goes on without a card, as the live night did) */
@@ -81395,8 +81596,17 @@ const rd0=render;render=function(){try{nfActs()}catch(e){}const r=rd0.apply(this
 function hold(){S.buoi=B4();RR=day();try{if(used>=4)used=3}catch(e){}/* no j6 auto "Sang ngày mới" while the choice / a dialog is open */try{render()}catch(e){}showSoon()}
 function herNight(){S.buoi=B4();if(CO())RR=day();try{if(used>=4)used=3}catch(e){}/* no auto "Sang ngày mới" (j6 used>=4) between her night dialogs; jnight spends the day after nightFx */try{if(S.ntk&&S.ntk.w===day()&&S.ntk.who==="me")S.ntk=null}catch(e){}
  IN=1;try{nightScene()}finally{IN=0}try{render()}catch(e){}showSoon()}
+/* SOFT-LOCK GUARD (review/fix-evening-softlock, ROBOT-10 bug A): S.nfX is SAVED but what releases it is not — the choice card (Q pid "nfch",
+   no PEND builder: deserQ drops it on reload) and her steal game (jsmg BUSY, the j82 #kg82 layer). After a reload (or a game layer closed without
+   its onDone) S.nfX stayed {st:"open",dlg:1} or {st:"mg"} for ever: every «Sang ngày mới» went to hold() and the day never turned (Q 0, no modal).
+   heal(): a choice whose card is gone is shown again (dlg cleared → step → showChoice, her 10 s clock anew); a steal game that is no longer on
+   screen counts as over without a rung (st back to "open"; her pick x.me is kept, the one resolve runs). Runs at each press and each step tick. */
+function heal(){try{const x=X();if(!x)return;
+ if(x.st==="mg"&&!(typeof window.stealMgBusy==="function"&&window.stealMgBusy()))x.st="open";
+ if(x.st==="open"&&x.me===undefined&&x.dlg&&!Q.some(m=>m&&m.pid==="nfch"))x.dlg=0}catch(e){console.error(e)}}
+window.nfHeal=heal;
 const et0=endTurn;endTurn=function(){if(!S||S.dead||Q.length||S.mg||!nfOn())return et0.apply(this,arguments);
- const d=day();
+ const d=day();heal();
  if(S.nfC!==d){S.nfC=d;
   if(!guest()){S.nfX={d,st:S.nfN===d?"done":"wait",at:Date.now()};FLIPQ=new WeakSet();if(S.nfN!==d&&!flippedToday()){const q0=new Set(Q);realFlip();FLIPQ=new WeakSet(Q.filter(m=>m&&typeof m==="object"&&!q0.has(m)))}}   /* her night already played today (his visit, a summons): no flip, no choice */
   else ask()}
@@ -91132,6 +91342,9 @@ function herGame(mode,o,cb){const B=M();const kind=B.art&&B.art[mode];const nm=m
  /* jaudit's playArt hook marks a paid game (window.__aaL); this game is free: keep its mark as it was */
  const L=window.__aaL;try{pa()}catch(e){console.error(e);BUSY=0;try{cb(0,null,true)}catch(e2){}}finally{window.__aaL=L}}
 window.stealMgPlay=herGame;window.stealIsCard=a=>isStealCard(a);window.stealO0=(p,m)=>o0(p,m);
+/* is her steal game really running? (jnf heal, review/fix-evening-softlock): BUSY with no game layer on screen (#kg82 closed without its onDone,
+   or a reload: BUSY is not saved) is no game — BUSY drops so the next try can play */
+window.stealMgBusy=function(){if(BUSY&&typeof window.__smgFake!=="function"&&!document.getElementById("kg82"))BUSY=0;return !!(BUSY||PEND)/* PEND: her pick is being recorded inside chooseM, the game opens right after */};
 
 /* her Hành sự deck cards (j2 deal; j75 marks them __steal where its buổi check matches): the game first, then the card as before with that try's odds */
 const isStealCard=a=>!!(a&&a.o!=null&&(a.__steal||((a.n==="Tranh sủng"||a.n==="Chặn ngự giá")&&a.b===(typeof B4L==="number"?B4L:2))));
@@ -96210,7 +96423,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="6ffe7c0f6541";window.CTM_BUILD=BUILD;
+const BUILD="fcb9464def82";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
