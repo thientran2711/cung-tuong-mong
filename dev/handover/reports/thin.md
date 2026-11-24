@@ -826,6 +826,13 @@ Reviewer cannot send_message the new foreman / helper (permission denied) — th
 - Command (max 2 at once, renderer ~5–7.6 GB): `RDC_STOP12=1 node dev/test/rdc-play.js /tmp/all.md 1 <roads>`
 - PASS line per road: `<road> life 1 12 … | 4:<road> 5:<road>_5 … 11:<road>_11`; any `FAIL` line = fault. A `page lost … Target crashed` retry is OOM; 3× → `FAIL … boot`.
 - HELPER roads (20): `td_daixa,td_monsinh,ch_tuyentu,ch_diensan,nc_men,nc_nu,bd_luuly,bd_bac,pf_co,pf_tra` and `td_tichbien,td_honuoc,ch_lenhbai,ch_honngoai,nc_kinh,nc_the,bd_lua,bd_su,pf_guong,pf_lich`. Append results below under «#### helper».
+
+Batch 1 (helper, 07:54Z; build 4d9f748c, `RDC_STOP12=1 node dev/test/rdc-play.js all.md 1 <roads>`, 2 renderers; `Target crashed` retries = OOM, recovered by the runner):
+- PASS td_daixa life 1 12 | 4:td_daixa 5..11 (fin=Chiếu đọc, không có tên)
+- PASS td_tichbien life 1 12 | 4..11 (fin=Sổ kho bị khép)
+- PASS td_honuoc life 1 12 | 4..11 (fin=Nàng tự quyết)
+- PASS ch_lenhbai life 1 12 | 4..11 (fin=Lệnh bài giả bị nấu chảy)
+- No FAIL so far. Remaining 16 roads still running.
 - REVIEWER roads (24): PASS so far tt_ruong, tt_tho, dtq_ngua, dtq_thuong, thd_dich, thd_uoc, muoi_gia, tt_gia, tt_thu; running muoi_thi, dtq_ky; then cn_chuoi, cn_chuviet, cnv_kho, cnv_hach, thd_dien, thd_giay, muoi_tien, muoi_hoi, cn_tiec, cn_theo, cnv_thu, cnv_tieu; dtq_hang re-run alone (renderer crash ×3 at ch9).
 - Gates already PASS on bare ce252c43 AND merged 4d9f748c: `python3 dev/test/rdseeds_validate.py` (no args) and `--min` + rdseeds_a..d → `RDSEEDS: 627 rows, 0 errors, 0 warnings`; `node dev/test/undef-scan.js` → PASS (299 names); `node dev/test/one-core-guard.js` → PASS; `node dev/test/one-core-text.js` → PASS.
 
