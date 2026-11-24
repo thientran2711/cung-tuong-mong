@@ -118,3 +118,46 @@ async function selxScResult0(L){const mine=L.find(x=>x.v===S);const others=L.fil
  const p0=selxPodShow;selxPodShow=function(L){if(!selxScOk())return p0.apply(this,arguments);const a=arguments;selxScResult(L);SELX_RQ.push(()=>p0.apply(this,a));return null};
 })();
 try{Object.assign(window,{SELX_ART,SELX_ART_TODO,selxScRooms,selxScHall,selxScDrama,selxScResult,selxScOk})}catch(e){}
+/* ================= DƯỠNG TÚ VIỆN ON THE DƯ ĐỒ (owner OD 24/11 ~05:35Z «đi ra khỏi phòng … tương tác với cái dư đồ … nó sẽ hiện ra cái tầng thứ 2 của dư đồ»,
+   ~08:20Z: 3 sở + Tiền sảnh) — the EXISTING Dư đồ level 2 (jpm kitPalaceMap: courtyard picture + hall hotspots + kit hall rows + «‹ Dư đồ» back), fed with the
+   lodging as one more place: slot "p:dtv", parts Đông / Tây / Bắc sở + Tiền sảnh, people per part from the one day plan (selxWhere), «tạm» chip while the courtyard
+   painting is the placeholder (SELX_ART.rooms). Replaces the in-card «Sang …» menu (days 1–2; day 3 the map shows where everyone is, but the kept stay in her sở). During the 3 days the map opens on this
+   level (the rest of the palace is shut to a tú nữ, OD ~05:35Z) and «‹ Dư đồ» / any other tab goes back to her free-khắc card. «Sang buổi» stays shut (the day runs on khắc). */
+const SELX_DTV="p:dtv";
+(function(){if(typeof kitPalaceMap!=="function"||typeof KPM_DATA!=="object")return;const on=()=>{try{return selxDaysOn()}catch(e){return false}};
+ const P=()=>BAL.selx.lodge;const parts=()=>[...P().so,P().sanh].map(x=>[x[0],x[1]]);
+ KPM_HALLS["selx-dtv"]=parts().map(x=>x[0]);
+ /* hotspots on the courtyard picture (fractions): Tây sở left, Đông sở right, Bắc sở at the back, Tiền sảnh in front */
+ (KPM_DATA.spots=KPM_DATA.spots||{})["selx-dtv"]={tay:{x:.02,y:.3,w:.24,h:.4},dong:{x:.74,y:.3,w:.24,h:.4},bac:{x:.32,y:.05,w:.36,h:.32},sanh:{x:.32,y:.55,w:.36,h:.32}};
+ const w=(n,f)=>{const o=window[n];if(typeof o!=="function")return;window[n]=f(o)};
+ w("kpmKeyOf",f0=>function(i){return i===SELX_DTV?(on()?"dtv":null):f0.apply(this,arguments)});
+ w("kpmName",f0=>function(s){return s===SELX_DTV?P().n:f0.apply(this,arguments)});
+ w("kpmParts",f0=>function(s){return s===SELX_DTV?parts():f0.apply(this,arguments)});
+ w("kpmArt",f0=>function(s){return s===SELX_DTV?{src:selxArt("rooms"),dir:"selx-dtv",tam:true}:f0.apply(this,arguments)});
+ w("kpmSplit",f0=>function(k){if(k!=="dtv")return f0.apply(this,arguments);const O={};parts().forEach(([h])=>O[h]={ppl:[],n:0,res:[]});
+  const Z=S.selx2;[S,...selxAll()].forEach(v=>{const at=v===S?Z.at:selxWhere(v);if(O[at]){O[at].ppl.push(v);O[at].n++}});return O});
+ w("kpmTapPart",f0=>function(part){const o=window.__kpm;if(!o||o.slot!==SELX_DTV)return f0.apply(this,arguments);selxMapGo(part)});
+ /* during the 3 days the Dư đồ opens on the lodging; «‹ Dư đồ» = back to her card */
+ w("mapHTML",f0=>function(){if(on()){window.__kpm={slot:SELX_DTV,k:"dtv"};const Z=S.selx2;
+   try{const h=kitPalaceMap({slot:SELX_DTV,k:"dtv",why:`ngươi đang ở ${selxSo(Z.at)} · còn ${selxNumW(Math.max(0,Z.kh))} khắc`});
+   /* the part she stands in = the kit «here» state (row .sel, hotspot .here, no walk price), as jpm marks her current hall */
+   const d=document.createElement("div");d.innerHTML=h;const r=d.querySelector(`[data-kpmpart="${Z.at}"]`);if(r){r.classList.add("sel");[...r.querySelectorAll(".kpm-rs")].filter(x=>/^tốn:/.test(x.textContent)).forEach(x=>x.remove())}
+   /* the walk price printed = the price selxMapGo takes (BAL.walk.near, law 4), in words (law 7) */
+   d.querySelectorAll(".kpm-row .kpm-rs").forEach(x=>{if(/^tốn:/.test(x.textContent))x.textContent=`tốn: ${selxNumW(BAL.walk.near)} khắc`});
+   const sp=d.querySelector(`[data-go="kpm:${Z.at}"]`);if(sp)sp.classList.add("here");return d.innerHTML}catch(e){console.error(e)}}return f0.apply(this,arguments)});
+ w("render",f0=>function(){const r=f0.apply(this,arguments);try{if(on()){const n=document.getElementById("next");if(n)n.disabled=true}}catch(e){}return r});
+ window.addEventListener("click",e=>{try{if(!on()||Q.length)return;const b=e.target.closest("#panel [data-kpmback]");const t=e.target.closest("#tabs [data-tab]");
+  if(b||(t&&t.dataset.tab!=="go")){e.preventDefault();e.stopImmediatePropagation();window.__kpm=null;selxMapBack()}}catch(err){console.error(err)}},true)})();
+function selxMapBack(){try{tab="act"}catch(e){}const Z=S.selx2;if(Z&&Z.qHold){Q.push(...Z.qHold);Z.qHold=null}selxFree();try{showModal();render()}catch(e){}}
+/* walk to a part: the walk price of the old menu (BAL.walk.near), then her free card there */
+function selxMapGo(part){const Z=S.selx2;if(!Z||!selxDaysOn())return;window.__kpm=null;if(part!==Z.at&&Z.days!==3){selxSpend(BAL.walk.near);Z.at=part}selxMapBack()}
+/* the free card: «Ra Dư đồ» in place of the «Sang …» rows (days 1–2) */
+(function(){if(typeof selxFree!=="function")return;const f0=selxFree;selxFree=function(){const r=f0.apply(this,arguments);try{const m=Q[0];const Z=S.selx2;
+  if(m&&m.pid==="selxD"&&m.opts&&Z.days!==3&&!window.__bot){const nm=[...BAL.selx.lodge.so,BAL.selx.lodge.sanh].map(x=>`Sang ${x[1]}`);const i=m.opts.findIndex(o=>nm.includes(o.n));
+   m.opts=m.opts.filter(o=>!nm.includes(o.n));if(i>=0)m.opts.splice(i,0,selxO("Ra Dư đồ",()=>selxMapOpen(),{selxMap:1}))}}catch(e){console.error(e)}return r}})();
+/* «Ra Dư đồ» is a way out of the card, not a deed: no result card, no log line (the chooseM path would show «Ra Dư đồ — không đổi gì») */
+function selxMapOpen(){const Z=S.selx2;/* the cards waiting for after the edict («Mệnh truyện», «Nhập cung») step aside while she walks the map */
+ Z.qHold=(Z.qHold||[]).concat(Q.splice(0));try{tab="go"}catch(e){}window.__kpm={slot:SELX_DTV,k:"dtv"};try{showModal();render()}catch(e){}}
+document.addEventListener("click",e=>{try{const b=e.target.closest("#modal button[data-m]");if(!b)return;const c=Q[0]&&Q[0].opts&&Q[0].opts[+b.dataset.m];if(!c||!c.selxMap)return;
+ e.preventDefault();e.stopImmediatePropagation();selxMapOpen()}catch(err){console.error(err)}},true);
+try{Object.assign(window,{selxMapGo,selxMapBack})}catch(e){}

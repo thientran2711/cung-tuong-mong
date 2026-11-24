@@ -249,3 +249,6 @@ K-FOCUS-1b SPEC (append to kitFocus; pure display, no numbers of its own, knobs 
 
 ## 24/11 KIT KEEPER #15 — K-DH-CAPFIT «title plate on the event picture clips long names» (filed by E55 on review/titles2 537091a1)
 - DONE on review/kit-dhcapfit: KIT §82.2 (plate wraps between words when its box is narrower than the name; kitDhCap caption ≤ 2 lines with font step .74/.66/.6 rem; .ksart-tag same wrap). Test dev/test/kit-dhcapfit.js 26/26. Status: KIT READY (small kit review pending).
+
+## 24/11 SELSCENE-6 — LAW 7 GROUP ITEM «digits in kit info rows» (MAIN 118 answer (b): the selection shows no digits, the jtoil-wide digits go to the kit keeper)
+- OPEN (kit keeper): player-visible DIGITS still printed by kit parts the selection reuses — jtoil mirror result rows (toilette «Sắc +3», reaction numbers), the Dư đồ level-2 hall rows `.kpm-row` / map `.mmeta` («4 bóng người», «tốn: 2 khắc», KIT §85.2 «N bóng · K khắc»), the right column «Ân sủng» card (Tai mắt 0, Ân tình 0, Xét phẩm: thiếu 3). VANPHONG law 7 / owner: words, not digits. One fix in the kit part (word formatter, e.g. a shared kitNumW like jselx `selxNumW`), so every place changes together (law 9/11). The selection layer already prints words on its own lines (selxNumW) and overrides the walk price on the Dưỡng Tú viện rows (`tốn: một khắc`); the counts «N bóng người» stay kit.
