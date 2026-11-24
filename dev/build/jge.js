@@ -134,7 +134,7 @@ function geApply(s,res){const id=s.b+"_"+(res.i+1);const out=[];
   geBook(s,res);log(`<b class="r">Kết cục · ${res.fail}.</b>${res.quiet?" Cuộc đời ngươi vẫn tiếp tục như thế.":""}`)}
  res.ex=out}
 /* ---------- the result event (kit dialog; serialisable) ---------- */
-function geExit(s,res){const A=GB().after;if(!res.ok)return false;if(A==="close")return true;if(A==="stay")return false;return GB().exitSum.includes(C(s).e[res.i][5])}
+function geExit(s,res){const A=GB().after;if(!res.ok)return false;if(A==="close")return true;if(A==="stay")return false;return GB().exitSum.includes(C(s).e[res.i][5])||(GB().exitFork||[]).includes(C(s).e[res.i][3])}/* leave-palace (OD 24/11 ~06:05Z): a summit whose Ngã rẽ 1 leaves the palace closes the life */
 /* bang-words: ending texts carry the road's land tokens ({kha} {land} {quan} {dien} …) — filled by the one filler (j67 fill67), never shown raw */
 function geF(x){try{return typeof fill67==="function"&&/\{\w+\}/.test(x||"")?fill67(x,(S&&S.st&&S.st.M)||{}):x}catch(e){return x}}
 window.geF=geF;
@@ -145,7 +145,7 @@ PEND.geR=()=>{const s=S&&S.ge;if(!s||!s.res)return null;const res=s.res,e=D(s).e
  const R=rows.length&&typeof kitRows==="function"?`<div class="kpsec">${kitRows(rows)}</div>`:"";
  if(res.ok){const ex=geExit(s,res);
   return {who:pMe(),mustChoose:1,art:geArt(s,res),t:`<b>Đại kết cục · ${esc(res.ti)}</b><br>${geF(res.sh==="t"?e.t:e.a)}<br><span class="past">Thiên hạ truyền tai: ${esc(S.name)} đã thành “${esc(res.ti)}”.</span>${R}`,
-   o:[{n:"Tạ ơn",fx:{},x:ex?"kết thúc kiếp này":"",go:()=>{if(ex&&!S.dead&&typeof kitEndNext==="function")kitEndNext("grand");if(ex&&!S.dead)over(`Đại kết cục · ${res.ti}`,geF(res.sh==="t"?e.t:e.a),`Đại kết cục: ${res.ti}`,true)}}]}}
+   o:[{n:"Tạ ơn",fx:{},x:ex?"kết thúc kiếp này":"",go:()=>{if(ex&&!S.dead&&typeof kitEndNext==="function")kitEndNext("grand");if(ex&&!S.dead&&typeof lvGe==="function")lvGe(C(s).e[res.i],geBond());if(ex&&!S.dead)over(`Đại kết cục · ${res.ti}`,geF(res.sh==="t"?e.t:e.a),`Đại kết cục: ${res.ti}`,true)}}]}}
  return {who:pMe(),mustChoose:1,art:geArt(s,res),t:`<b>Kết cục · ${esc(res.fail)}</b><br>${res.quiet?"Cuộc đời ngươi vẫn tiếp tục như thế.":geF(e.ft)}${R}`,o:[{n:"Tiếp tục",fx:{},x:"",go:()=>{}}]}};
 /* ---------- the collection (ctm-ge, across lives; knowledge only) ---------- */
 const geKey=(b,i,sh)=>`ge_${b}_${i+1}${sh}`;

@@ -10,6 +10,7 @@
    The passage is drawn once per life and kept on S.lvEp (saved), so a reload or a co-op re-render shows the same lines; two lives with the same
    partner class read differently (several lines per slot, cause and numbers drawn). No new screen, no new kit part: j32 prints it with kitRows. ===== */
 const LV_KIND=[/* first match wins; tested on "h · fate · text" */
+ ["phu",/theo con ra phủ/i],
  ["tron",/Cao chạy xa bay|Trốn khỏi cung cùng|rời cung cùng|Giả chết, rời cung/i],
  ["tron1",/Trốn khỏi cung|bỏ trốn khỏi cung/i],
  ["vuong",/nữ vương/i],
@@ -21,13 +22,16 @@ const LV_KIND=[/* first match wins; tested on "h · fate · text" */
  ["que",/Xuất cung|về quê|Ma ma|dưỡng già|an hưởng tuổi già|mở tiệm/i],
  ["other",/ra khỏi cung|rời cung|ẩn cư|sống đời áo vải|tự do/i]];
 /* inside-the-palace endings that must never get a «Về sau» (they match no leave word, listed so a later wording change cannot slip in) */
-const LV_STAY=/lãnh cung|trong cung|Thái phi|Thái hậu|Mẫu hậu|Tân đế|đăng cơ|Ở lại/i;
+const LV_STAY=/lãnh cung|trong cung|^Thái phi$|Thành Thái phi|Thái hậu|Mẫu hậu|Tân đế|đăng cơ|Ở lại/i;
 let LV_NEXT=null;
 function lvNext(k,m){LV_NEXT={k:LV_KIND.some(x=>x[0]===k)?k:"",m:m||null}}
 window.lvNext=lvNext;
-function lvKindOf(h,fate,t,live){if(!live)return"";const s=`${h||""} · ${fate||""}`;const all=`${s} · ${String(t||"").replace(/<[^>]+>/g,"")}`;
+function lvKindOf(h,fate,t,live){if(!live)return"";
+ /* the Tiểu thư ngoài cung home road (jkc, before she ever entered) has its own story endings: not a leaving of the palace */
+ if(typeof S!=="undefined"&&S&&S.kc&&!S.kc.inPal)return"";const s=`${h||""} · ${fate||""}`;const all=`${s} · ${String(t||"").replace(/<[^>]+>/g,"")}`;
+ for(const [k,re] of LV_KIND)if(k!=="other"&&re.test(s))return k;
  if(LV_STAY.test(s)&&!/ra khỏi cung|rời cung|xuất cung/i.test(all))return"";
- for(const [k,re] of LV_KIND)if(re.test(s))return k;
+ if(LV_KIND[LV_KIND.length-1][1].test(s))return"other";
  /* a grand / rare ending whose text says she leaves (jge «cùng người thị vệ năm xưa ra khỏi cung») */
  for(const [k,re] of LV_KIND)if(k!=="que"&&re.test(all))return k;
  return""}
@@ -59,6 +63,7 @@ const LV_OPEN={
  tu:["Ngươi cạo tóc, ở một gian thiền phòng nhìn ra rừng trúc.","Ngươi khoác áo nâu, sớm quét sân chùa, tối chép kinh dưới ngọn đèn dầu.","Tiếng mõ sớm chiều thay tiếng trống canh trong cung; ngươi học quên tên mình."],
  dan:["Ngươi ra khỏi cung với một tay nải nhỏ, thuê một gian nhà tranh ngoài thành.","Không tước, không bổng, ngươi sống bằng nghề thêu học được trong cung.","Người làng bàn tán về người đàn bà từng là phi tần; ngươi cúi đầu mà sống."],
  duoi:["Ngươi bị đuổi ra cửa cung không một đồng, nương nhờ một am nhỏ ngoài thành.","Nhà không dám nhận ngươi; ngươi đi giặt thuê bên bến sông.","Ngươi về quê trong tiếng xì xào; cha mẹ khóa cửa, chỉ bà vú cũ lén mang cơm."],
+ phu:["Ngươi theo con về vương phủ; sáng sáng cháu nhỏ chạy sang thỉnh an tổ mẫu.","Vương phủ của con không lớn, nhưng không ai còn bắt ngươi quỳ.","Ngươi rời cung trong kiệu của con trai, không ngoái lại nhìn bức tường son."],
  vuong:["Ngươi trị vì cố quốc, giữ hòa ước với Đại Hy suốt đời.","Ngươi lên ngôi nơi cố quốc; mỗi mùa xuân vẫn sai sứ mang trà sang biếu Hoàng thượng."],
  other:["Ngươi rời bức tường son, bắt đầu một cuộc đời không ai ghi vào sổ cung.","Ngoài cung, ngày dài hơn và đêm yên hơn; ngươi sống phần đời còn lại như người thường."]};
 const LV_MID={
@@ -69,7 +74,7 @@ const LV_MID={
  lanh:["{m} đối với ngươi trọn lễ mà không trọn tình; hai người ăn chung mâm, nói với nhau dăm câu.","{m} vùi mình vào sách vở và việc quan; ngươi giữ nhà, giữ một sự yên ổn lạnh lẽo.","Chàng chưa từng phụ ngươi, cũng chưa từng nói một lời thương."],
  /* no partner: her own road */
  none:["Mấy năm sau, bà mối đến; ngươi lấy một người thợ hiền lành trong vùng.","Ngươi không lấy ai; cửa nhà quạnh quẽ mà yên.","Ngươi dạy chữ, dạy thêu cho con gái trong vùng; người ta gọi ngươi là cô giáo trong cung ra."]};
-const LV_MID_K={tu:["Ngươi giữ giới suốt đời; có năm trụ trì cho ngươi giảng kinh cho tín nữ.","Sư bà dạy ngươi bốc thuốc; dân quanh chùa nhớ ơn một ni cô ít lời.","Có đêm ngươi nghe tiếng trống từ kinh thành vọng về, rồi lại cúi đầu niệm Phật."],
+const LV_MID_K={phu:["Con dâu hiếu thuận, giữ lễ thần hôn định tỉnh với ngươi đến cuối đời.","Con trai ngươi làm một vị vương nhàn tản, không tranh với tân đế; nhà ấy yên.","Có năm tân đế nghi kỵ các vương, phủ con ngươi đóng cửa cả mùa đông; rồi mọi chuyện cũng qua."],tu:["Ngươi giữ giới suốt đời; có năm trụ trì cho ngươi giảng kinh cho tín nữ.","Sư bà dạy ngươi bốc thuốc; dân quanh chùa nhớ ơn một ni cô ít lời.","Có đêm ngươi nghe tiếng trống từ kinh thành vọng về, rồi lại cúi đầu niệm Phật."],
  vuong:["Triều thần cố quốc nể ngươi vì ngươi hiểu lòng Đại Hy.","Ngươi mở trường dạy chữ Hán, cho con gái quan lại được học như con trai."]};
 const LV_KIDS0=["Ngươi không có thêm con.","Cả đời ngươi không sinh nở thêm lần nào.","Nhà vắng tiếng trẻ."];
 const LV_KIDS=["Ngươi sinh thêm {n} người con.","Ngươi có thêm {n} người con; đứa lớn biết chữ từ năm lên bốn.","Ngươi nuôi lớn {n} người con; đứa út theo ngươi đến cuối đời."];
@@ -82,7 +87,7 @@ const LV_DIE={gia:["Năm {a} tuổi, ngươi mất trong giấc ngủ, tuổi gi
  loan:["Năm {a} tuổi, giặc cướp tràn qua trấn; ngươi không kịp chạy.","Năm {a} tuổi, binh lửa lan đến vùng ngươi ở; ngươi mất giữa đường lánh nạn."],
  dich:["Năm {a} tuổi, dịch bệnh tràn về, ngươi mất giữa mùa hạ.","Năm {a} tuổi, ôn dịch qua làng; ngươi đi sau mấy người hàng xóm."]};
 const LV_CAUSE={gia:"Tuổi già",benh:"Bệnh nặng",sinh:"Khó sinh",sau:"U uất thành bệnh",hai:"Bị người trong nhà hãm hại",loan:"Loạn lạc",dich:"Dịch bệnh"};
-const LV_TITLE={tron:"Theo người ra đi",tron1:"Trốn đi một mình",hon:"Làm vợ ngoài cung",thiep:"Làm thiếp trong phủ",que:"Về quê",tu:"Vào cửa Phật",dan:"Làm thứ dân",duoi:"Bị đuổi khỏi cung",vuong:"Về cố quốc",other:"Rời cung"};
+const LV_TITLE={phu:"Theo con ra phủ",tron:"Theo người ra đi",tron1:"Trốn đi một mình",hon:"Làm vợ ngoài cung",thiep:"Làm thiếp trong phủ",que:"Về quê",tu:"Vào cửa Phật",dan:"Làm thứ dân",duoi:"Bị đuổi khỏi cung",vuong:"Về cố quốc",other:"Rời cung"};
 const LV_CLS={chung:"một lòng một dạ",datinh:"đa tình",quyen:"nặng công danh",bao:"nóng nảy, thù dai",lanh:"lạnh nhạt",none:""};
 function lvFill(s,o){return String(s).replace(/\{m\}/g,o.ms||"người ấy").replace(/\{me\}/g,o.me||"").replace(/\{n\}/g,o.n).replace(/\{a\}/g,o.a)}
 /* the whole «Về sau» for this life (drawn once, kept on S.lvEp) */
@@ -97,7 +102,7 @@ function lvEpiFor(h,t,fate,live){if(!S)return null;if(S.lvEp&&S.lvEp.f===fate)re
  const left=(typeof mySons==="function"?mySons().length:0)+(typeof myDaus==="function"?myDaus().length:0);
  const P=[pick(LV_OPEN[k]||LV_OPEN.other)];
  if(LV_MID_K[k])P.push(pick(LV_MID_K[k]));else if(m&&LV_MID[cls])P.push(pick(LV_MID[cls]));else P.push(pick(LV_MID.none));
- if(left)P.push(pick(LV_LEFT));P.push(k==="tu"?"":n?pick(LV_KIDS):pick(LV_KIDS0));P.push(pick(LV_DIE[cause]));
+ if(left&&k!=="phu")P.push(pick(LV_LEFT));P.push(k==="tu"?"":n?pick(LV_KIDS):pick(LV_KIDS0));P.push(pick(LV_DIE[cause]));
  const ep={f:fate,k,ti:LV_TITLE[k],m:m?m.name:"",net,cls,kids:n,age:a,cause,cl:LV_CAUSE[cause],txt:P.filter(Boolean).map(x=>lvFill(x,o)).join(" ")};
  S.lvEp=ep;return ep}
 window.lvEpiFor=lvEpiFor;
@@ -105,3 +110,9 @@ window.lvEpiFor=lvEpiFor;
 function lvRows(ep){const R=[];if(ep.m)R.push(["Người ấy",`${ep.m}${ep.net.length?` · ${ep.net.join(", ")}`:""}${LV_CLS[ep.cls]?` (${LV_CLS[ep.cls]})`:""}`,"t"]);
  R.push(["Con về sau",ep.kids?`${ep.kids} người con`:"không có thêm con","t"]);R.push(["Mất năm",`${ep.age} tuổi`,"t"]);R.push(["Vì",ep.cl,"t"]);return R}
 window.lvRows=lvRows;
+/* Đại kết cục (jge) that leaves the palace: the summit says how (GE_CAT e[5]), Ngã rẽ 1 (e[3]) says she left; «theo người» = the real man of her bond */
+const LV_GE={NUN:"tu",NV:"vuong",FOLLOW:"tron",REUNION:"que",FREE:"other"};
+function lvGe(e,bond){try{const fork=e[3],sum=e[5];let k=LV_GE[sum]||((BAL.ge.exitFork||[]).includes(fork)?"other":"");if(!k)return;
+ let m=null;if(k==="tron"||fork===3){const n=bond;m=n?(S.men||[]).find(x=>x&&x.name===n)||null:null;if(!m)k=k==="tron"?"other":k;else if(k==="other")k="tron"}
+ lvNext(k,m)}catch(e){console.error("lvGe",e)}}
+window.lvGe=lvGe;
