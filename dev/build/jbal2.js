@@ -2046,4 +2046,4 @@ BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's nแบ
      l:{sung:6,danh:6,bac:60,suc:15,mat:6,th:6,hh:6,duc:6,maid:9,rel:12,proof:2}}};
 
 /* KIT ยง95 kitDialogue (owner OD 24/11 ~04:45Z/~04:50Z): typewriter speed + spotlight dimming. LAW 4: the kit reads these, it types no number of its own. */
-BAL.kdlg={msWord:110,dim:.5,dimSat:.75,focusScale:1.5,focusBlur:14};
+BAL.kdlg={msWord:110,dim:.8,dimSat:.9,focusScale:1.5,focusBlur:14};

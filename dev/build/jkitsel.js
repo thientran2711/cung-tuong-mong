@@ -79,7 +79,7 @@ function kitDlgBox(L,title,nodes,pos,tail,ho){ho=ho||{};pos=pos||{};const b=docu
    Uses the §93 scene layer (kitScene). Numbers from BAL.kdlg (law 4).
    kitTypeLine(el,text,{cues,onWord,onDone,now}) → {finish(),done} : the line appears WORD BY WORD (every word is a span, hidden until typed → the box never reflows); cues=[{w,fn}] fire when word index w is typed
      (finish() fires the remaining cues at once, so a tap-through never loses a cue); calm / reduced motion = the whole line at once (cues still fire).
-   kitScene.light(L,idx|null) : SPOTLIGHT — the speaker's figure (L.figs[idx]) stays lit, the others dim (brightness .5·saturation, NOT black); null = all lit. Switches with a 260 ms fade.
+   kitScene.light(L,idx|null) : SPOTLIGHT — the speaker's figure (L.figs[idx]) stays lit, the others get SLIGHTLY softer (BAL.kdlg.dim .8 · dimSat .9: still clearly the real person, never a grey stand-in, NOT black); null = all lit. Switches with a 260 ms fade.
    kitScene.focus(L,{fig,box}) / kitScene.unfocus(L) : FOCUS SHOT — ONE figure big (BAL.kdlg.focusScale about its head/bust), the scene blurred behind (BAL.kdlg.focusBlur), the other figures hidden; the box wherever the caller puts it.
    kitDialogue.play(Sc,{lines,box,onLine,onDone}) : lines=[{fig:<index into Sc.L.figs>|null, who:"name", text, cues:[{w,fn}], focus:true?}], box={x,y,w,h?} (or fn(line,i)→pos), the ONE speech box (kitDlgBox, title = the speaker).
      Tap / Enter on the scene = finish the line being typed; the NEXT tap = next line; after the last line onDone(). onLine(i,line) fires when line i starts (before its first word): the Tổng quản roll-call lights girl N
@@ -108,7 +108,7 @@ window.kitTypeLine=kitTypeLine;window.kitDialogue=kitDialogue;
 (function(){const st=document.createElement("style");st.id="kdv-css";st.textContent=`
 .kdw{visibility:hidden}.kdw.on{visibility:visible}
 .kscn-fig{transition:filter .26s ease,opacity .26s ease,transform .5s cubic-bezier(.3,.7,.3,1)}
-.kscn-fig.kscn-dim{filter:brightness(${(window.BAL&&BAL.kdlg&&BAL.kdlg.dim)||.5}) saturate(${(window.BAL&&BAL.kdlg&&BAL.kdlg.dimSat)||.75})}
+.kscn-fig.kscn-dim{filter:brightness(${(window.BAL&&BAL.kdlg&&BAL.kdlg.dim)||.8}) saturate(${(window.BAL&&BAL.kdlg&&BAL.kdlg.dimSat)||.9})}
 .kscn-fig.kscn-fhide{opacity:0}
 .kscn.kscn-focus .kscn-bg{transition:filter .5s ease}
 .kdv-box .kdv-line{font-size:1.02rem;line-height:1.5;min-height:3em}.kdv-box .kdv-next{align-self:flex-end;font-size:.78rem;opacity:0;transition:opacity .2s;color:var(--gold,#8f5f0c)}
