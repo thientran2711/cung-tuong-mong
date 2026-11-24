@@ -2838,3 +2838,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (04:56Z) OD 06:45Z: voluntary leaving = ending; FORCED removal (framed/exiled/temple) = return window ~3 game years (BAL) in one small exile place (Võ Tắc Thiên model), then ending if no return (E updated by 116 06:46Z). Folded into the 06:05Z E audit answer MAIN 117 owes sếp.
 - (04:58Z) OWNER OD 06:55Z: RESTORE Trữ Tú cung on Dư đồ (old spot jpal.js:12 .303,.338) as tú nữ lodging ONLY (not a consort cung, not in seat/PAL count), Đông/Tây viện inside → overwrites MAIN 117's «Dưỡng Tú viện / Đông sở-Tây sở». C brief + SELSCENE-3 updated. KP23 full redraw PAUSED by 116 06:50Z: sếp asked a/b/c (116 recommended b = redraw only the far-shot old ones) — answer may come here.
 - (04:59Z) OD 07:00Z: 4 kept tú nữ = 2 in Đông viện + 2 in Tây viện, each room 2 beds, ONE girl per bed → C brief + SELSCENE-3 updated.
+- FROM LC9 (04:57Z 24/11): LANDED robot10-nc-fix-1 2899d1f2141cb04f211dd4162f20d07a0f7169d7. LIVE = 2899d1f2.
