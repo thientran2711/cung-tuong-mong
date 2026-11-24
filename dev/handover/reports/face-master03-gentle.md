@@ -21,5 +21,19 @@ NOTE: every MCP call needs the full ~9.6k-char prompt pasted inline (~3k tokens/
 | FACE-GENTLE-S62-A16-MASTER-SKIN03-T01 | s62 | 16 | tC2varXmZJ | xS8sOTnjfW | DONE | no text, bare face, ivory robe, ok; long braid |
 | FACE-GENTLE-S63-A16-MASTER-SKIN03-T01 | s63 | 16 | P3HN6Ma42C | cpwVoLf0eP | DONE | no text, bare face, ivory robe, ok |
 | FACE-GENTLE-S64-A16-MASTER-SKIN03-T01 | s64 | 16 | s7mSUzul8e | dtNof49XSL | DONE | no text, bare face, ivory robe, ok |
+| FACE-GENTLE-M02-A26-MASTER-SKIN03-T01 | m02 | 26 | ksXxxbS16B | O6Q4zbaynm | DONE | no text, bare face, ivory robe, ok |
+| FACE-GENTLE-M08-A26-MASTER-SKIN03-T01 | m08 | 26 | Sya77l1Ub8 | vQzC1Mua47 | DONE | no text, bare face, ivory robe, ok |
+| FACE-GENTLE-M14-A26-MASTER-SKIN03-T01 | m14 | 26 | EbcFFETuuO | TdJDhZAVNR | DONE | no text, bare face, ivory robe, ok |
+| FACE-GENTLE-M18-A26-MASTER-SKIN03-T01 | m18 | 26 | gOvw7wcSXO | vQzC18ka47 | DONE | no text, bare face, ivory robe, ok |
+| FACE-GENTLE-M19-A26-MASTER-SKIN03-T01 | m19 | 26 | dtNo8IEXSL | MByeaVpDCm | DONE | no text, bare face, ivory robe, ok |
+| FACE-GENTLE-M20-A26-MASTER-SKIN03-T01 | m20 | 26 | fHYuQHBCDY | huGf1fVvqL | DONE | no text, bare face, ivory robe, ok |
+| FACE-GENTLE-C02-A26-MASTER-SKIN03-T01 | c02 | 26 | Sya7J9wUb8 | gOvw2dsSXO | DONE | no text, bare face, ivory robe, ok |
+| FACE-GENTLE-C08-A26-MASTER-SKIN03-T01 | c08 | 26 | 9Zbi3zwNYZ | 8aRmK9zIrU | DONE | no text, bare face, ivory robe, ok |
+| FACE-GENTLE-C20-A26-MASTER-SKIN03-T01 | c20 | 26 | BhiItudoQR | huGfxGSvqL | DONE | no text, bare face, ivory robe, ok |
+| FACE-GENTLE-C26-A26-MASTER-SKIN03-T01 | c26 | 26 | 0e7MDhVTfW | IfZhkGRtvE | DONE | no text, bare face, ivory robe, ok |
+| FACE-GENTLE-C32-A26-MASTER-SKIN03-T01 | c32 | 26 | Sya7JAyUb8 | 1lBj9vSr4r | DONE | no text, bare face, ivory robe, ok |
+| FACE-GENTLE-S62-A26-MASTER-SKIN03-T01 | s62 | 26 | tC2varXmZJ | bxpkOhn5Y2 | DONE | no text, bare face, ivory robe, ok |
+| FACE-GENTLE-S63-A26-MASTER-SKIN03-T01 | s63 | 26 | P3HN6Ma42C | BhiIbVgoQR | DONE | no text, bare face, ivory robe, ok |
+| FACE-GENTLE-S64-A26-MASTER-SKIN03-T01 | s64 | 26 | s7mSUzul8e | lJhUZjDgv9 | DONE | no text, bare face, ivory robe, ok |
 
-## STATUS 24/11 ~22:05Z: age 16 COMPLETE (14/14). Next: age 26 (14), 51, 63. Rollover cancelled; original worker continues.
+## STATUS 24/11 ~22:20Z: ages 16 + 26 COMPLETE (28/56). Next: age 51 (14), age 63 (14). Rollover cancelled; original worker continues.
