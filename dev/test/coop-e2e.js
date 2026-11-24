@@ -63,7 +63,9 @@ async function clear(o,n=25){for(let i=0;i<n;i++){const st=await require('./lib/
   if(st==='mg'){await o.p.evaluate(()=>{try{S.mg=null;render()}catch(e){}});continue}
   if(st!=='x')return st;await sleep(200)}return'many'}
 /* press "Qua buổi"/"Qua đêm" when it is enabled (waits up to 20 s: after the friend's dialogs, the host's NPC places, …) */
-async function press(o,k0){for(let t=0;t<80;t++){await clear(o);const r=await o.p.evaluate(k0=>{
+/* SELSCENE-15: a tú nữ life plays her 3 selection days (≈45 cards + scenes) before her first buổi: the bot plays them through first (cap 6 min), then the 80-try press budget starts */
+async function daysThrough(o){const t0=Date.now();while(Date.now()-t0<360000){const on=await o.p.evaluate(()=>{try{return typeof selxDaysOn==='function'&&selxDaysOn()}catch(e){return false}}).catch(()=>false);if(!on)return;await clear(o);await sleep(200)}}
+async function press(o,k0){await daysThrough(o);for(let t=0;t<80;t++){await clear(o);const r=await o.p.evaluate(k0=>{
    /* a night with the Emperor (jnight) spends the rest of her day: her buổi is already ended through the co-op path (bend / week end) */
    if(k0&&(COOPW.bend||COOPW.pend||__co().waiting||COOPW.nrdy===__co().week))return true;/* … or the room clock already ended her tối (jcooptimer dueTick → nightReady: a slow machine reaches the room's time limit) */
    const b=document.getElementById('next');if(!b||b.disabled)return false;b.click();return true},k0||null);if(r&&!k0)return true;
@@ -128,6 +130,8 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
    const g=sig();if(g!==last){const b=(()=>{try{return COOPW.base.W.R.filter(v=>!v.coop).map(v=>v.id+':'+(v.staff||[]).filter(x=>!x.coop).map(x=>x.sid+x.name).join(',')).join(';')}catch(e){return null}})();
     if(last!=null){const A0=last.split(';'),A1=g.split(';');window.__sl.push({chg:A1.filter(x=>!A0.includes(x)),was:A0.filter(x=>!A1.includes(x)),eqBase:g===b,wk:__co().week,d:[S.month,S.tuan,S.buoi||0],tr:COOPW.tr.slice(-4)})}last=g}}catch(e){}},120)});
  for(const [o,k] of [[A,process.env.COOP_A_ORIGIN],[B,process.env.COOP_B_ORIGIN]])if(k)await o.ctx.addInitScript(k=>{window.__forceOrigin=k},k);
+ /* COOP_B_BANHOA=1 (SELSCENE-15, RV a1 stall): the guest's own selection ends in ban hoa (her contest row is not kept) — with COOP_B_ORIGIN=<a tú nữ origin, e.g. tt> */
+ if(+process.env.COOP_B_BANHOA)await B.ctx.addInitScript(()=>{/* click trace of the guest's selection: every chooseM with the card + option, every kc2SelPlay */const w=setInterval(()=>{if(typeof chooseM!=='function'||typeof kc2SelPlay!=='function')return;clearInterval(w);const L=window.__selxClk=[];const c0=chooseM;chooseM=function(i){try{L.push(['m',i,Q[0]&&Q[0].t,Q[0]&&Q[0].pid]);if(L.length>30)L.shift()}catch(e){}return c0.apply(this,arguments)};const k0=kc2SelPlay;kc2SelPlay=function(a){try{L.push(['k',a,S.selx&&S.selx.done|0])}catch(e){}return k0.apply(this,arguments)}},20);const t=setInterval(()=>{if(typeof selxContest!=='function')return;clearInterval(t);const f0=selxContest;selxContest=function(){const L=f0.apply(this,arguments);if(window.__banForced)return L;/* the FIRST life only: the reborn life draws freely (the a1 case) */try{L.forEach(x=>{if(x.v===S){x.kept=false;window.__banForced=(window.__banForced|0)+1;window.__forceOrigin=null}})}catch(e){}return L}},20)});
  /* COOP_A_KC / COOP_B_KC=nha (coop-night0-r1, LAW 1): that seat takes the home route (jkc window.__kcO; origin must be in KC.ok, e.g. tt) */
  for(const [o,k] of [[A,process.env.COOP_A_KC],[B,process.env.COOP_B_KC]])if(k)await o.ctx.addInitScript(k=>{window.__kcO=k},k);
  /* 1 host makes a room */

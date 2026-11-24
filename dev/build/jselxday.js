@@ -102,7 +102,7 @@ function selxWhere(v){const Z=S.selx2;if(Z.days===3)return v===S?Z.at:Z.home;con
 function selxHere(){const Z=S.selx2;return selxAll().filter(v=>selxWhere(v)===Z.at)}
 /* ---- free khắc (days 1 and 3): greet, talk, walk, rest; at tối the evening drama ---- */
 function selxFree(){const Z=S.selx2;if(selxEvening())return selxEve();const H=selxHere();const o=[];const T=BAL.time.cost.talk;
- H.filter(v=>!selxMet(v)).slice(0,BAL.selx.menuN).forEach(v=>o.push(selxO(`Làm quen với ${selxNm(v)}`,()=>{selxSpend(T);selxGreet(v);selxFree()},{x:selxX(T,"biết mặt nàng; nàng chịu thì biết cả tên")})));
+ H.filter(v=>!selxMet(v)).slice(0,BAL.selx.menuNew)/* SELSCENE-15 (law 11): strangers are not told apart (no name, no face yet) → ONE «Làm quen» option for the next stranger, not N identical buttons */.forEach(v=>o.push(selxO(`Làm quen với ${selxNm(v)}`,()=>{selxSpend(T);selxGreet(v);selxFree()},{x:selxX(T,"biết mặt nàng; nàng chịu thì biết cả tên")})));
  H.filter(v=>selxMet(v)).slice(0,BAL.selx.menuN).forEach(v=>o.push(selxO(`Trò chuyện với ${v.name}`,()=>{const b=rsnap();selxSpend(T);relAdd(S,v,BAL.selx.fx.s);selxRes("Trò chuyện",b,`Ngươi ngồi nói chuyện với ${v.name} một lúc; hai người thân hơn.`);selxFree()},{x:selxX(T,`${v.name} thân với ngươi hơn`)})));
  if(Z.days!==3)[...BAL.selx.lodge.so.map(s=>s[0]),BAL.selx.lodge.sanh[0]].filter(p=>p!==Z.at).forEach(p=>o.push(selxO(`Sang ${selxSo(p)}`,()=>{selxSpend(BAL.walk.near);Z.at=p;selxFree()},{x:selxX(BAL.walk.near,`tới ${selxSo(p)}, gặp người ở đó`)})));
  if(Z.days===1)selxAskOpts(o,()=>selxFree());
@@ -224,7 +224,7 @@ function selxAskNpc(){const A=BAL.selx.ask;const RY=selxRoyals();if(!RY.length)r
   const T=BAL.time.cost.talk,K=mode==="please"?A.pleaseK:T;if(mode==="bac")v.bac=Math.max(0,(+v.bac||0)-A.bac);v.suc=Math.max(0,(+v.suc||0)-Math.floor(K/T)*BAL.selx.rest)}}
 function selxYard(){const Z=S.selx2;if(Z.yk<=0)return selxHall();const T=BAL.time.cost.talk;const step=n=>{selxSpend(n);Z.yk-=n};
  if(!Z.yd&&Z.yk<=BAL.selx.beat.yard-BAL.selx.beat.yardDrama){Z.yd=1;return selxDrama("yard",selxAll(),t=>{Z.yk=Math.max(0,Z.yk-(t==null?BAL.selx.drama.k:t));selxYard()})}/* RV-SELX13 2 (law 2/3): the stance's khắc come out of the yard */
- const o=[];selxAll().filter(v=>!selxMet(v)).slice(0,BAL.selx.menuN).forEach(v=>o.push(selxO(`Làm quen với ${selxNm(v)}`,()=>{step(T);selxGreet(v);selxYard()},{x:selxX(T,"biết mặt nàng; nàng chịu thì biết cả tên")})));
+ const o=[];selxAll().filter(v=>!selxMet(v)).slice(0,BAL.selx.menuNew).forEach(v=>o.push(selxO(`Làm quen với ${selxNm(v)}`,()=>{step(T);selxGreet(v);selxYard()},{x:selxX(T,"biết mặt nàng; nàng chịu thì biết cả tên")})));
  const unk=selxRoyals().filter(x=>!(Z.know||{})[x[0]]);if(unk.length)o.push(selxO("Dò hỏi thái giám về các vị chí tôn",()=>{const b=rsnap();step(T);const [k,nm,tok]=unk[0];Z.know=Z.know||{};Z.know[k]=1;const tr=selxTrong(tok);
   selxRes("Dò hỏi",b,"",tr.length?[`Thái giám nói nhỏ: ${nm} trọng chữ ${tr[0]}.`]:[]);selxYard()},{x:selxX(T,"biết một vị chí tôn trọng chữ gì")}));
  o.push(selxO("Đứng yên giữ sức",()=>{const b=rsnap();step(T);S.suc=cl((S.suc||0)+BAL.selx.rest,0,sucCap(S));selxRes("Giữ sức",b,"Ngươi đứng yên dưới bóng hòe, sức hồi lại.");selxYard()},{x:selxX(T,`Sức +${BAL.selx.rest}`)}));

@@ -679,7 +679,7 @@ Object.assign(BAL,{selx:{intake:{min:3,max:5},yard:{n:12,perRound:4,kept:4},coop
     target when the seed allows, mem = no-repeat memory across lives, extra = girls of other sở in the day-1 evening pool, two = chance in a hundred of a SECOND day-3 drama (OD ~09:50Z «1-2 chuyện không lặp lại»)}; roam = [own sở, Tiền sảnh] weights of a girl's
     place each buổi (days 1–2); menuN = names listed per menu; rest = Sức of «Nghỉ một lát»; conf = virtue pairs that clash (SELW-TESTS2 README, CONF) */
  beat:{gate:2,rooms:1,dress:2,yard:4,yardDrama:1,test:1,teach:2},lesson:{k:[3,2,1],base:3,duc:.05,eff:2,r:1,mid:6,hint:[6,8],fx:[{},{duc:1},{suc:5}],maMin:1},maStep:1,ducStep:1,faceStep:1,
- fx:{s:2,m:3,l:5},drama:{k:1,victim:25,mem:40,extra:2,two:50},roam:[3,1],menuN:4,rest:5,conf:[["Hiếu","Trung"],["Tín","Nhân"],["Lễ","Nghĩa"],["Nghĩa","Liêm"],["Sỉ","Khiêm"]],
+ fx:{s:2,m:3,l:5},drama:{k:1,victim:25,mem:40,extra:2,two:50},roam:[3,1],menuN:4,menuNew:1/* «Làm quen với một tú nữ lạ mặt» options per menu: strangers look alike to her, one button (SELSCENE-15) */,rest:5,conf:[["Hiếu","Trung"],["Tín","Nhân"],["Lễ","Nghĩa"],["Nghĩa","Liêm"],["Sỉ","Khiêm"]],
  /* SELSCENE-5 (OD 24/11 ~08:55Z / ~09:25Z / ~09:40Z / ~09:20Z; MAIN 118 answers a–e):
     imp = the FIRST IMPRESSION on Day 2 (the toilette look judged by each of the 3 royals by HIS / HER own taste, the one jtoil rule toilHostKind + BAL.toil.react):
       a royal's reaction aff (BAL.toil.cap) → a mark mid + k·aff (0..10); the score adds w.imp × the mean of the three marks (≈ 13 % of the test part: ONLY the royals' look
