@@ -1,0 +1,51 @@
+kiep_no,origin,road,bot,life,seed,real_min,cum_min,years,age,max_rank,ending,ending_type,group,death_cause,cause_src,who,framed_before,buoi,preg,sons,daughters,kid_deaths,heir_made,nights,sung_peak,bac_peak,bac_end,het_bac,mini_games,ky_ngo,events_distinct,bugs,bot_min
+1,pf,pt_hai,cautious,1,496088404,1978.1,1978.1,6.67,26,Hoàng hậu,Hồng nhan bạc mệnh,death,death,"Tuổi trời đã tận, «ILL[ageOf(p)>=M.oldAge?""laobenh"":""trongbenh""].n.toLowerCase()» không qua khỏi, thọ «S.age» tuổi",jmort.js:106,fate (lifespan),0,1174,0,0,0,0,0,37,100,282,2,1,713,13,291,14,9.2
+2,pf,pt_hai,cautious,2,1119247561,1895.2,3873.3,,18,Phi,TIMEOUT,stuck,no ending,,,,,768,0,0,0,0,0,0,100,196,8,1,840,3,214,15,5.57
+3,pf,pt_hai,cautious,3,3343073034,3823.6,7696.9,,32,Hoàng quý phi,CAP,cap,no ending,,,,,2112,1,0,1,0,0,68,100,221,2,1,1120,14,327,20,30.45
+4,pf,pt_hai,cautious,4,3966232191,3565.8,11262.7,12.5,30,Quý phi,Xuất gia,leave,thường,,,,,2156,1,1,0,1,0,81,100,201,1,1,1182,14,329,25,21.32
+5,pf,pt_hai,cautious,5,1625368536,4664.6,15927.4,,35,Hoàng hậu,CAP,cap,no ending,,,,,2748,1,1,0,1,0,109,100,460,2,1,1182,15,373,23,31.33
+1,pf,pt_hai,greedy,1,3113021953,5196,5196,,34,Phi,CAP,cap,no ending,,,,,2562,2,1,1,1,0,68,100,175,7,1,1016,15,392,21,30.06
+2,pf,pt_hai,greedy,2,4100514220,2135.4,7331.4,9.42,27,Quý phi,Hồng nhan bạc mệnh,death,death,"«pre»Tân Thái hậu «v.name» xét lại chuyện cũ (khả năng: «chanceLo(o)»), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",j3.js:164,execution,0,1660,0,0,0,0,0,13,100,234,2,1,386,13,284,13,13.27
+3,pf,pt_hai,greedy,3,4270494435,4287.4,11618.7,,35,Hoàng hậu,CAP,cap,no ending,,,,,2704,1,0,1,1,0,43,100,373,10,1,773,16,370,31,30.17
+4,pf,pt_hai,greedy,4,3802600038,4662.6,16281.3,,34,Hoàng quý phi,CAP,cap,no ending,,,,,2528,0,0,0,0,0,59,100,175,0,1,935,16,382,25,30.33
+5,pf,pt_hai,greedy,5,4263090437,2040.2,18321.6,6.75,26,Hoàng quý phi,Hồng nhan bạc mệnh,death,death,"Tuổi trời đã tận, «ILL[ageOf(p)>=M.oldAge?""laobenh"":""trongbenh""].n.toLowerCase()» không qua khỏi, thọ «S.age» tuổi",jmort.js:106,fate (lifespan),0,1161,1,0,0,0,0,5,100,243,9,1,434,16,262,12,9.75
+1,pf,pt_hai,lazy,1,737671019,1077.7,1077.7,,20,Quý phi,TIMEOUT,stuck,no ending,,,,,1651,0,0,0,0,0,0,100,175,40,1,26,1,318,16,12.68
+2,pf,pt_hai,lazy,2,1246455018,114.1,1191.8,1.5,21,Quý nhân,Hồng nhan bạc mệnh,death,death,"Tuổi trời đã tận, «ILL[ageOf(p)>=M.oldAge?""laobenh"":""trongbenh""].n.toLowerCase()» không qua khỏi, thọ «S.age» tuổi",jmort.js:106,fate (lifespan),0,264,0,0,0,0,0,1,100,175,0,1,5,8,102,7,1.85
+3,pf,pt_hai,lazy,3,1170061609,1584.6,2776.4,,37,Tần,CAP,cap,no ending,,,,,3166,0,0,0,0,0,40,100,175,18,1,11,14,362,23,30.59
+4,pf,pt_hai,lazy,4,3844506168,182.2,2958.6,5.42,25,Quý nhân,Lãnh cung,death,death,Lãnh cung,j14.js:40,other,,932,0,0,0,0,0,0,100,175,0,1,3,7,124,12,5.26
+5,pf,pt_hai,lazy,5,4037834591,531.6,3490.2,,19,Quý phi,TIMEOUT,stuck,no ending,,,,,1098,0,0,0,0,0,1,100,175,23,1,21,6,212,12,7.03
+1,pf,pt_hai,lover,1,232866395,3550.8,3550.8,12.83,31,Phi,Hồng nhan bạc mệnh,death,death,Bị ban chết vì tư thông với «m.name»,j22.js:22,execution,0,2280,2,1,0,0,0,44,100,521,7,1,599,16,367,19,25.95
+2,pf,pt_hai,lover,2,741650394,5006.6,8557.4,,34,Hoàng quý phi,CAP,cap,no ending,,,,,2669,2,1,0,1,0,108,100,175,0,1,944,16,448,17,30.88
+3,pf,pt_hai,lover,3,665256985,356.6,8914,1.08,20,Thường tại,Xuất cung,leave,thường,,,,,199,0,0,0,0,0,0,100,175,0,1,77,8,96,8,2.22
+4,pf,pt_hai,lover,4,3339701544,3733.4,12647.4,14.33,34,Hoàng quý phi,Hồng nhan bạc mệnh,death,death,"«pre»Tân Thái hậu «v.name» xét lại chuyện cũ (khả năng: «chanceLo(o)»), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",j3.js:164,execution,0,2530,3,2,2,1,0,79,100,213,5,1,648,18,425,13,29.69
+5,pf,pt_hai,lover,5,3512241615,4482.5,17130,13.25,33,Quý phi,Hồng nhan bạc mệnh,death,death,Bị ban chết vì tư thông với «m.name»,j22.js:22,execution,0,2395,0,0,0,0,0,74,100,206,3,1,818,16,400,20,28.33
+1,pf,pt_hai,random,1,1347038790,43.5,43.5,0.33,18,Thường tại,Xuất gia,leave,thường,,,,,50,0,0,0,0,0,1,15,83,4,1,14,2,38,7,0.88
+2,pf,pt_hai,random,2,3525233687,111.9,155.5,0.75,20,Thường tại,Xuất gia,leave,thường,,,,,138,0,0,0,0,0,2,7,65,2,1,23,4,69,3,0.95
+3,pf,pt_hai,random,3,2795021456,7,162.4,,19,Thường tại,TIMEOUT,stuck,no ending,,,,,4,0,0,0,0,0,0,3,97,58,0,2,0,7,2,0.31
+4,pf,pt_hai,random,4,657460705,89.4,251.8,0.42,20,Đáp ứng,Xuất gia,leave,thường,,,,,88,0,0,0,0,0,2,8,92,2,0,15,5,53,2,0.84
+5,pf,pt_hai,random,5,217758658,71.8,323.6,0.33,20,Thường tại,Xuất gia,leave,thường,,,,,85,0,0,0,0,0,1,12,91,58,0,7,3,48,2,0.79
+1,pf,pt_hai,rebel,1,1859221133,3850.5,3850.5,,34,Tần,CAP,cap,no ending,,,,,2804,7,0,4,0,0,146,100,175,0,1,1023,14,401,22,31.12
+2,pf,pt_hai,rebel,2,2846713400,1268.9,5119.4,6.08,24,Hoàng quý phi,Hồng nhan bạc mệnh,death,death,"Tráo con bị bắt quả tang, tội khi quân",j8.js:381,execution,0,1041,6,2,2,0,0,9,100,183,2,1,367,11,244,10,7.77
+3,pf,pt_hai,rebel,3,3040041823,1713.9,6833.2,6.83,26,Phi,Hồng nhan bạc mệnh,death,death,Hồng nhan bạc mệnh,j3.js:167,childbirth,0,1178,3,0,2,1,0,17,100,175,0,1,593,13,256,15,9.05
+4,pf,pt_hai,rebel,4,248662250,2212.2,9045.4,8.42,28,Quý nhân,Hồng nhan bạc mệnh,death,death,Hồng nhan bạc mệnh,j3.js:167,childbirth,1,1457,2,1,0,0,0,44,100,175,1,1,765,9,277,14,12.51
+5,pf,pt_hai,rebel,5,172268841,4101.3,13146.7,,34,Quý phi,CAP,cap,no ending,,,,,2829,14,0,4,1,0,166,100,175,77,1,1026,17,451,23,31.08
+1,pf,pt_hai,schemer,1,99760202,169,169,0.92,19,Thường tại,Hồng nhan bạc mệnh,death,death,Bị ban chết vì đầu độc «k.name»,j8.js:146,poison,0,155,0,0,0,0,0,0,37,175,15,1,0,7,77,7,1.37
+2,pf,pt_hai,schemer,2,1717723083,387.6,556.6,5.75,23,Thường tại,Hồng nhan bạc mệnh,death,death,Bị ban chết vì đầu độc «k.name»,j8.js:146,poison,0,920,0,0,0,0,0,0,44,175,16,1,0,6,98,13,6.09
+3,pf,pt_hai,schemer,3,1547742868,352.9,909.5,2.58,20,Quý nhân,Hồng nhan bạc mệnh,death,death,Bị ban chết vì vu «k.name» trù ẻo thánh thượng,j8.js:152,execution,0,418,0,0,0,0,0,0,34,175,20,1,0,7,97,11,2.78
+4,pf,pt_hai,schemer,4,3857854317,668,1577.4,1.83,19,Thường tại,Hồng nhan bạc mệnh,death,death,Bị ban chết vì đầu độc «k.name»,j8.js:146,poison,1,327,0,0,0,0,0,0,58,175,17,1,0,8,119,8,2.99
+5,pf,pt_hai,schemer,5,3397363918,4489.5,6066.9,6.92,24,Thường tại,Hồng nhan bạc mệnh,death,death,"«d.n» nguy kịch, không qua khỏi",j13.js:21,illness,0,1162,0,0,0,0,0,1,100,175,8,1,0,7,191,12,11.24
+1,pf,pt_hai,scholar,1,2805362047,3276.1,3276.1,11.67,30,Hoàng quý phi,Hồng nhan bạc mệnh,death,death,"«pre»Tân Thái hậu «v.name» xét lại chuyện cũ (khả năng: «chanceLo(o)»), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",j3.js:164,execution,0,2056,1,0,0,0,0,62,100,179,0,1,656,14,323,20,22.68
+2,pf,pt_hai,scholar,2,1184839310,2392.5,5668.6,7.33,27,Phi,Xuất gia,leave,thường,,,,,1320,0,0,0,0,0,65,100,175,1,1,461,15,330,14,13.29
+3,pf,pt_hai,scholar,3,1645329709,1114.3,6782.9,3.33,23,Quý nhân,Hồng nhan bạc mệnh,death,death,"«pre»Tân Thái hậu «v.name» xét lại chuyện cũ (khả năng: «chanceLo(o)»), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",j3.js:164,execution,0,606,0,0,0,0,0,6,100,679,542,1,234,9,226,9,5.24
+4,pf,pt_hai,scholar,4,3630185556,4053,10835.9,,34,Hoàng hậu,CAP,cap,no ending,,,,,2464,1,0,1,1,0,34,100,321,1,1,734,17,390,23,30
+5,pf,pt_hai,scholar,5,3800165771,2269.5,13105.4,6.92,25,Hoàng quý phi,Thái phi,death,death,Thái phi,j3.js:157,other,,1227,0,0,0,0,0,42,100,478,2,1,394,17,341,17,15.42
+1,pf,pt_hai,skilled,1,3114640601,4355.5,4355.5,,34,Hoàng hậu,CAP,cap,no ending,,,,,2566,0,0,0,0,0,53,100,452,3,1,801,16,374,25,30.48
+2,pf,pt_hai,skilled,2,2491481444,3964.4,8319.9,,35,Hoàng hậu,CAP,cap,no ending,,,,,2748,0,0,0,0,0,34,100,445,8,1,647,15,348,25,30.34
+3,pf,pt_hai,skilled,3,2682250011,4402.1,12722,,33,Hoàng hậu,CAP,cap,no ending,,,,,2585,0,0,0,0,0,58,100,304,125,1,829,16,420,26,30.4
+4,pf,pt_hai,skilled,4,46135198,1062.6,13784.6,4.42,22,Phi,Thái phi,death,death,Thái phi,j3.js:157,other,,790,0,0,0,0,0,4,100,175,4,1,206,11,211,14,6.33
+5,pf,pt_hai,skilled,5,506625597,1831.8,15616.3,5.58,23,Phi,Xuất cung,leave,thường,,,,,1019,0,0,0,0,0,37,100,150,0,1,352,15,293,13,9.27
+1,pf,pt_hai,speed,1,2194154990,106.4,106.4,0.58,19,Thường tại,Xuất gia,leave,thường,,,,,96,0,0,0,0,0,0,14,95,12,1,18,5,53,7,1.07
+2,pf,pt_hai,speed,2,3835466079,55.1,161.5,0.33,20,Đáp ứng,Xuất gia,leave,thường,,,,,96,0,0,0,0,0,4,9,77,2,1,8,4,42,3,0.84
+3,pf,pt_hai,speed,3,3642137656,420.9,582.3,,20,Thường tại,TIMEOUT,stuck,no ending,,,,,4,0,0,0,0,0,0,15,115,81,0,2,2,7,4,1.37
+4,pf,pt_hai,speed,4,967693097,351.3,933.6,,19,Thường tại,TIMEOUT,stuck,no ending,,,,,26,0,0,0,0,0,1,3,102,31,1,14,2,28,4,1.24
+5,pf,pt_hai,speed,5,1044086506,32.3,965.9,,18,Thường tại,TIMEOUT,stuck,no ending,,,,,18,0,0,0,0,0,0,17,101,11,1,1,0,24,9,1.01
