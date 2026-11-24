@@ -782,7 +782,7 @@
 "status": "LIVE-OFF",
 "group": "G2",
 "event": "\"Hoàng thượng để mắt\"; maidLoveMonth",
-"fp": "On()&&S.srv.rk>=BAL.srvRk.dai&&S.age>=18&&roll(BAL.odb.j42.rbSrvMonth+S.nt/25))/* "
+"fp": "On()&&S.srv.rk>=BAL.srvRk.dai&&S.age>=BAL.ageMin&&roll(BAL.odb.j42.rbSrvMonth+S.nt/25))/* "
 },
 {
 "f": "j42.js",
@@ -1157,7 +1157,7 @@
 "group": "G1",
 "event": "favour asked of her; debt collected",
 "fp": " if(!roll(Q72CFG.p*100))return;",
-"done": "const z=npwPick(L,y=>y[1]);if(!z)break;L.splice(L.indexOf(z),1);const x=q72Make(z[0],rq,place)"
+"done": "const z=npwPick(P,y=>y[1]);if(!z)break;P.splice(P.indexOf(z),1);const x=q72Make(z[0],rq,place)"
 },
 {
 "f": "j72.js",
@@ -1166,7 +1166,7 @@
 "group": "G1",
 "event": "favour asked of her; debt collected",
 "fp": " let x=null;if(S.tuan===1&&roll(40))x=q72Collect();if(!x)x=q72Choos",
-"done": "const z=npwPick(L,y=>y[1]);if(!z)break;L.splice(L.indexOf(z),1);const x=q72Make(z[0],rq,place)"
+"done": "const z=npwPick(P,y=>y[1]);if(!z)break;P.splice(P.indexOf(z),1);const x=q72Make(z[0],rq,place)"
 },
 {
 "f": "j75.js",
