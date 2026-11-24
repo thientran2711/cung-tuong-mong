@@ -200,16 +200,21 @@ const AGL={L:[],t:0,run:0,stat:{run:0,drop:0,drain:0}};
 function agBk(){try{return S?wk()+"-"+(S.buoi||0):""}catch(e){return""}}
 function agLater(k,fn,o){const w=typeof S!=="undefined"?S:null,b=agBk(),i=AGL.L.findIndex(x=>x.k===k);if(i>=0){if(AGL.L[i].w===w&&AGL.L[i].b===b)return;AGL.L.splice(i,1);AGL.stat.drop++}/* review ag-later: a stale twin (other world / buổi, its timer not fired yet) is dropped, never blocks the new job */AGL.L.push({k,fn,sl:!!(o&&o.slice),w,b});if(!AGL.t)AGL.t=setTimeout(agLaterRun,0)}
 function agLaterRun(cut){if(AGL.t){clearTimeout(AGL.t);AGL.t=0}if(AGL.run)return;AGL.run=1;
- const keep=[];try{for(const x of AGL.L.splice(0)){if(x.w!==S||x.b!==agBk()){AGL.stat.drop++;continue}if(cut&&x.sl){keep.push(x);continue}AGL.stat.run++;try{x.fn()}catch(e){agErr("later:"+x.k,e)}}}finally{AGL.run=0}
+ const keep=[];try{for(const x of AGL.L.splice(0)){if(x.w!==S||x.b!==agBk()){AGL.stat.drop++;continue}if(cut&&x.sl){keep.push(x);continue}AGL.stat.run++;AGL.ran=1;try{x.fn()}catch(e){agErr("later:"+x.k,e)}}}finally{AGL.run=0}
  /* review ag-later: the drain does NOT drop a slice — the press may be refused (a dialog it showed, a co-op seat waiting for the friend) and her buổi goes on;
     the slice keeps running in later frames and dies by its buổi pin once the step really happened (the consorts / staff not reached keep their schedule) */
- if(keep.length){AGL.L.unshift(...keep);if(!AGL.t)AGL.t=setTimeout(agLaterRun,0)}agQShow()}
+ if(keep.length){AGL.L.unshift(...keep);if(!AGL.t)AGL.t=setTimeout(agLaterRun,0)}agQShow();agSettleSave()}
+/* robot-fix-cnv-3 R7 (save = the SETTLED state): the deferred jobs (staff slices, the khắc view resync, the news scan) change the record, the
+   rivals' plan book (S.ag.*) and the room list AFTER the press's render() wrote the file; nothing wrote it again, so a reload before her next tap
+   lost the staff picks (the slice queue dies with the page) and re-made the rest at load (r10-play-rt render on: S.ag.log/pend/did, S.visit
+   people srv→npc, roster labels). When the queue is empty again the file is written once more (the same save() render ends with). */
+function agSettleSave(){if(AGL.L.length||!AGL.ran)return;AGL.ran=0;try{if(typeof save==="function"&&S&&!S.dead)save()}catch(e){agErr("settleSave",e)}}
 function agDrain(){if(AGL.run||!AGL.L.some(x=>!x.sl))return;AGL.stat.drain++;let n=0;while(AGL.L.some(x=>!x.sl)&&n++<20)agLaterRun(1)}
 function agQShow(){try{if(!Q.length||!S||S.dead||S.mg||window.__bot)return;const M=$("modal");if(M&&M.hidden&&!document.querySelector(".kbk-bar"))showModal()}catch(e){}}
 /* outermost: installed after every module's own nextBuoi / endTurn wrapper (the same load-time pattern as jagday W1) */
 setTimeout(()=>{try{const n0=nextBuoi;nextBuoi=function(){try{agDrain()}catch(e){agErr("drain",e)}return n0.apply(this,arguments)};window.nextBuoi=nextBuoi;
  const e0=endTurn;endTurn=function(){try{agDrain()}catch(e){agErr("drain",e)}return e0.apply(this,arguments)};window.endTurn=endTurn}catch(e){agErr("drainWrap",e)}},0);
-function agSyncNow(){AG.syQ=0;const ts=performance.now();try{j95sync()}catch(e){}const ms=performance.now()-ts;AG.tm.sync+=ms;AG.sms=AG.sms||[];AG.sms.push(ms);if(AG.sms.length>BAL.ag.perf.n)AG.sms.shift()}
+function agSyncNow(){AG.syQ=0;const ts=performance.now();try{j95sync()}catch(e){}/* R7: the stage follows the record after a deferred resync too (the same j95final → renderStage rule goTo / talk / nextBuoi use) */try{if(typeof j95final==="function"&&j95final()&&typeof renderStage==="function"){window.__rdefer=(window.__rdefer||0)+1;try{renderStage()}finally{window.__rdefer--}}}catch(e){agErr("syncStage",e)}const ms=performance.now()-ts;AG.tm.sync+=ms;AG.sms=AG.sms||[];AG.sms.push(ms);if(AG.sms.length>BAL.ag.perf.n)AG.sms.shift()}
 /* finish the buổi's deciders now (tests / bot that need every decision before they read the record) */
 function agFlush(){if(AG.q){AG.q.all=1;agSlice()}}
 function agPerf(){const L=AG.ms.slice().sort((a,b)=>a-b);if(!L.length)return{n:0};const q=f=>L[Math.min(L.length-1,Math.floor(f*L.length))];return{n:L.length,p50:+q(.5).toFixed(3),p95:+q(.95).toFixed(3),max:+L[L.length-1].toFixed(3),budget:BAL.ag.perf.p95,buoi:(()=>{const M=AG.bt.slice().sort((a,b)=>a-b);return M.length?{n:M.length,p50:+M[Math.floor(.5*M.length)].toFixed(2),p95:+M[Math.min(M.length-1,Math.floor(.95*M.length))].toFixed(2)}:null})(),sync:(()=>{const M=(AG.sms||[]).slice().sort((a,b)=>a-b);return M.length?{n:M.length,p95:+M[Math.min(M.length-1,Math.floor(.95*M.length))].toFixed(2),max:+M[M.length-1].toFixed(2)}:null})()}}

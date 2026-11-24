@@ -91,7 +91,7 @@ function visRelink(){try{const P=S&&S.visit&&S.visit.people;if(!Array.isArray(P)
    old face key and a reload re-picked a random face; (2) a name clash made mid-month (a new servant / consort sharing a short form with someone,
    e.g. «Trình Tố Huyên» beside her «Kiều Tố Huyên») was settled only at load and at the month tick (jnamefix nmFix) → a reload renamed a living
    person (≈3 ms; the load renames the same way with cards open). The robot's in-place round trip calls this too (it saves the way save() does). */
-function saveSettle(){if(!S||S.dead)return;try{faceInit()}catch(e){}try{if(typeof nmFix==="function")nmFix("save")}catch(e){}}
+function saveSettle(){if(!S||S.dead)return;try{faceInit()}catch(e){}try{if(typeof nmFix==="function")nmFix("save")}catch(e){}/* robot-fix-cnv-3 R7: (3) who she has seen on the stage (jemo emoSee ran only at the START of render, before the stage took its newcomers) */try{if(typeof emoSee==="function")emoSee()}catch(e){}}
 function save(){if(!S||quiet)return;saveSettle();try{if(S.dead)localStorage.removeItem(SK(SLOT));else localStorage.setItem(SK(SLOT),JSON.stringify(ser()));localStorage.setItem("hclh-slot",String(SLOT))}catch(e){}}
 function loadSlot(n){try{const d=JSON.parse(localStorage.getItem(SK(n))||"null");if(d&&d.v===2)d.P=[];/* v2: no pending choices; v2/v3 get items, stat blocks, records via normAll */
  return d&&d.v>=2&&d.v<=6?d:null}catch(e){return null}}
