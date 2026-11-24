@@ -1,0 +1,14 @@
+# Brief — REVIEW palace-distance (Foreman D depth 1; opus BIG: Emperor visit odds / Sủng / ban cung rules)
+PRIORITY #1 CHECK ('palDist'): OD 24/11 ~08:45Z (keep names; distance matters in play) | ledger 0 | claims worker NYCMYjjA | main jbancung «near», bcGrantIx, jpal | review/* review/palace-distance 9e655c3e | none other
+Read handover branch claude/cung-tuong-mong-handover-hj0h8w (sparse detached worktree under /home/user/wt; fetch --depth=30 with explicit refspec under flock /home/user/wt/fetch.lock; never full-clone): dev/rules/START_CORE.md (THE 18 LAWS) + START_WORKER.md + START_REVIEWER.md in full; worker brief briefs/D-palace-distance.md; OD row 24/11 ~08:45Z verbatim (dev/OWNER_DECISIONS.md); report dev/handover/reports/palace-audit.md; its SSK line in dev/handover/FOREMAN_D_STATUS.md.
+Target review/palace-distance 9e655c3ed013a179ec66e392e9a77e24a425d0b4 (base main 68799300). Push merges/small fixes only to review/palace-distance-rv. Never push to main, no pull requests. Big faults → FAIL list to worker session_01D3E3NYCMYjjACU3pnjjM84 (send_message).
+Check:
+1. OD ~08:45Z met: names kept (no renames anywhere); distance from his hall changes visit/thị tẩm odds and Sủng gain; far visit = strong favour signal (extra Sủng/Danh + news line «… dù ở xa vẫn được ngự giá»). P1 map move NOT done (law 16) — confirm nothing moved.
+2. Laws 1–5: same rule for her and NPCs (law 1); being near vs far are equal-value trade-offs with gain+loss each (laws 2/3 — far must have its upside); every number in BAL.palDist, nothing typed (law 4, one-core ×3); law 6b NPC schedules unaffected except as intended.
+3. Balance: robot/sim before vs after — visits per consort per year by distance band, Sủng spread; no consort starved to zero visits; Hoàng hậu / standing order still sensible.
+4. Ban cung card «ngự giá <word>: …» via the kit hint channel (law 9, no new part), odds in cổ trang words, no % (law 7, VANPHONG); Fold 755x1000 + iPad 1180x820 shots looked at 3×.
+5. Co-op pure (host/guest same result), old-save load, perf on par.
+6. Gates: palace-distance, ban-cung, coop-ban-cung, coop-e2e, quickcheck; emperor-visit.js fails must equal main's.
+7. Final-merge newest origin/main (LIVE ≈ 2308b425+) + rebuild before verdict.
+REPORT: append «## REVIEW» to dev/handover/reports/palace-audit.md (rebase-retry; md conflicts keep both) with 'REVIEW PASS — LAND READY review/palace-distance-rv <full sha>' or FAIL list; append "FOR D (rv palace-distance): <verdict + full sha>" to dev/handover/FOREMAN_D_STATUS.md; send_message Foreman D session_01D3E3NbMrdKdp4hAx8gfMUq.
+ROLLOVER (copied verbatim): Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
