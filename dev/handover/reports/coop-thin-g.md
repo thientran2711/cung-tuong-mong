@@ -932,3 +932,22 @@ Branch **review/coop-thin-g-r3**: a0529076→8438de28 = d0e55df1 + merge LIVE 22
 FOR MAIN (unchanged, LIVE-identical): hn H2 k61PortEnt p.kk · rkOfFace {$r} · dialog-fixed #54 · thin d / f1 / as9s / cyc / lost-scan · coop-thin-trip.js meter fix reaches every TRIP lane on main at landing · **Worker THINMAX 13 deploy at landing** (LIVE Worker caps 9).
 
 LAND READY: coop-thin-g **70dc7244 (70dc72446a4436d2a3ac045fa7360fd77033a067)** (review/coop-thin-g-r3; contains origin/main 3e8981e1) — gates above; CO-OP GATE: coop-e2e THIN 13 PASS both seat orders (+ Fold 755x1000@2) + both-seat LOOK done. Deploy coop Worker (THINMAX 13) with the landing.
+
+### REVIEW r3 — RE-MERGE after LC8 conflict (ORDER MAIN 114; session_01N1tNP3bRx51vs6Simxpejf, 11/24/2026) — VERDICT: PASS 51efef1c
+Branch **review/coop-thin-g-r3**: 70dc7244 → 2b8f04ab merge LIVE **bba42773** (REAL conflicts: jcoopthin UICAP = LIVE `kitKnow` (know-notice) + branch `kpmPlay/cfShow/krvFlip` and its NOOP loop that skips kpmPlay; jcoopworld lost-case = LIVE E44i T3 `loLoseE` block first, then branch laydo `__inv0` mirror mark inside `if(c)`) → 96e00be1 merge LIVE 4a8c627b (thin-p0/p2) → **a84a9336 FIX** → 3bd3f09c merge LIVE b7598e72 (jsmg conflict: branch `stealIsCard/stealO0` + LIVE `stealMgBusy`) → **51efef1c** merge LIVE 27240ccb (thin-p3 + kit-dhcapfit). Every merge: index.html / sw.js = LIVE + rebuilt, assets.json = LIVE, pages_stage 144.
+
+#### New stall door found + fixed (a84a9336, branch-made area: part D gHold)
+trip1 @2b8f04ab wk 28: host gHold on her part-D card «Tin đồn» (e68rumorEvidence, seen), her phone Q EMPTY, no pick in host D.log, #modal up, no scene (km 0). Code: jcoopthin gSync re-adds a held card missing from her Q only on a `thinview` — and the host sends no view while it waits → a card that leaves her Q without a landed pick (lost send / Q cleared by another path) = permanent stall. **Fix** (jcoopthin, after `COOP.on("room")`): a 5 s belt `gSync(TH.view)` on her phone (idempotent; SENT keeps an answered card out 15 s; a second pick of an applied card = host `pick-stale`). No number, word or UI. **Test G6b** (coop-thin-g.js, after G6): her held world card spliced from Q with no send must come back: before (belt off) **FAIL** back:false in 10 s, after **PASS** (2–4.5 s). Whole family: every part-D card the host holds goes through the same gSync (one path). Also **G0b test data**: stage Danh ≥ 5 on the host (Danh floors at 0: a life starting at 0 gave a false red, seen 1× @96e00be1).
+
+#### Gates
+| gate | head | result |
+|---|---|---|
+| trip1 DANHP | 2b8f04ab | 1 run: wk 28 stall (above) → door |
+| trip1 DANHP ×2 + PICKP ×1 | 96e00be1 (before fix) | 87/87, 85/85, 87/88 (G0b data red only); 0 stall |
+| trip1 DANHP ×2 | **a84a9336** | **88/88 ×2** (G0b, G6b, G9, G9b ok; 0 stall, 0 Danh diff) |
+| quickcheck `--runs 5` | 2b8f04ab / a84a9336 / 3bd3f09c / 51efef1c | PASS / PASS / PASS / __QC__ |
+| undef · famops-unit | a84a9336 | PASS 306 names · 58/58 |
+| coop-e2e THIN 13 both seat orders | a84a9336 / 3bd3f09c / 51efef1c | 141/141 ×2 / 141/141 ×2 / __E2__ |
+| thin lanes | a84a9336 | g4 24/24, g4s 25/25, a b bs e f6 f6s f6b f6bs PASS, night 111/111, timer 43/43; **c**: 'no page errors' = rkOfFace TypeError 'n' (the known LIVE root #9, FOR MAIN) 3 of 4 with the belt, **1 of 2 with the belt OFF** → not made by the fix; LIVE-identical root (guest raw {$r} in S.visit.people) → FOR MAIN / Foreman B's queued rkOfFace follow-up job |
+| g4s | 51efef1c | __G4S__ |
+FOR MAIN (unchanged + c): rkOfFace {$r} (now also red in thin-c 'no page errors' after the LIVE thin-p merges) · hn H2 k61PortEnt p.kk · dialog-fixed #54 · thin d / f1 / as9s / cyc / lost-scan · Worker THINMAX 13 deploy after LANDED.
