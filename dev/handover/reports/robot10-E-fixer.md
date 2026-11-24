@@ -388,3 +388,12 @@ No new real game family in R5.
 | «lesson» ×400 | R1, R4, R8 c1 | j2 lesson() refuses at 100 points below level 5 | HARNESS | E-FIX-2 r3 (in fix-5-r) | r10e-lesson.js ok |
 | «Bỏ cuộc?» opts [] over a MƯU game | R2 5, R3/R4/R5/R6, R8 4 | kit confirm yes button in the body, the old harness never pressed it | HARNESS | E-FIX-2 kcfYes (in fix-5-r) | r10e-kcf.js (E-FIX-2) |
 No TIMEOUT shape is left that is a real game bug on LIVE.
+| bd bd_hen lazy ×2 | lazy-1 CAP rank 6 (2 572 buổi), lazy-2 CAP rank 7 (2 637 buổi) | **0** (R8: c3 lazy-2 / lazy-5 TIMEOUT) | spyQueen ×34 (lazy-1) | known owned families; 0 «reading '1'» (fix-5) |
+
+### Tests on 4424f9dd (review/robot10-e-fix-6)
+- quickcheck **PASS** 518 s (core gates PASS, old save ok; perf new/live render 215/196, tab 331/381, buổi 1084/921 ms). Run 1 before it: core gate G4 manifest-guard-selftest 15/16 once (box/CDN flake: the same selftest alone = 16/16 on this branch AND on bare main 8eceeef9; this branch touches no dev/site / manifest file); all other gates + perf PASS.
+- coop-e2e Fold host **142/142** (no co-op / save file touched → no COOP_SWAP needed).
+- r10e-selfloop (before FAIL TIMEOUT / after ok) · r10e-lesson ok · r10e-schemeloop ok (3/3) · r10e-optlabel-scan 0 open (before 1).
+- dev/build vs fix-5-r: identical (TEST-ONLY: dev/measure/inpage6.js, dev/measure/robot10.js, 3 new dev/test files). Lands with / after fix-5-r 7876bf70 (it is its base).
+SSK: SẴN SÀNG KIỂM robot10-e-fix-6 4424f9dd (SMALL, test-only harness).
+FOR MAIN (via Foreman E): KIT REQUEST j59t at the 9 px floor (dev/kit/KIT_REQUESTS.md 24/11 robot10 E FIXER #5); robot10-e-fix-1 8f97171e still not on main (null.queen still in jstip:133 on 8eceeef9); robot-fix-cnv(-2) (F) owns the «Sang ngày mới after load» row every E file shows.
