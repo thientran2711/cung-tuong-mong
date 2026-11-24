@@ -845,7 +845,7 @@ Object.assign(BAL,{ag:{on:1,
    hit      × on a consort's spite when she weighs hitting another palace's maid (jmline mlHit as a choice) */
 /* BAL.srvGate — the player maid's gates read by SRVA (j42) and the NPC staff: Chủ tin for "Xin chủ ban thưởng" (rew) / "Xin chủ tiến cử" (rec);
    frameLoy = the framed colleague's lòng after "Tố lỗi với chủ"; bully = Sức lost when bullied at Nội vụ phủ (Lĩnh đồ) */
-BAL.srvGate={rew:60,rec:50,get frameLoy(){return -BAL.eff.j42.loyalSrvStaffAct},get bully(){return -BAL.eff.j42.sucSrvMeet}};/* frameLoy: one number with BAL.eff.j42 */
+BAL.srvGate={rew:60,rec:50,get frameLoy(){return -BAL.eff.j42.loyalSrvStaffAct},get bully(){return -BAL.rl.j42.sucSrvMeet}};/* frameLoy: one number with BAL.eff.j42 */
 /* one table for every maid / eunuch, player or NPC (AG-ALL r1 F2 ONE CORE): srvRiskOf place risk (base by place, def elsewhere, -fr per friend,
    -tamco/tc, clamp min..max); srvGrant = the Ban gả trigger (Chủ tin >= tin, roll(base + bond if a sworn man), loyalty -stayLoy if she asks to stay);
    srvMp = công lao per bậc (need (bậc+1)*srvMp); srvLoyal = a new servant's loyalty base+R(r) */
@@ -2024,6 +2024,41 @@ BAL.blopt={danhD:4,sungD:4,sup:25,
     Tố lên: Hoàng hậu|Thái hậu regard / repStatD, Danh / repDanhD, + repEv per proof found, repRisky when the one she reports to is the one behind it;
     Ghi nhớ: Tai mắt × memEyes. selfKhac = khắc her own trip to Nội vụ phủ costs (the maid's trip is parallel time). */
  loyD:3,repStatD:2,repDanhD:5,repEv:15,repRisky:5,memEyes:10,selfKhac:1};
+
+/* typed-stat-bal GROUP A block (law 4): arts / virtues / works numbers (j85, j23, j83) — new keys only, never a key set twice */
+Object.assign(BAL,{
+ virB:{cong:{5:{danh:4}},dung:{1:{sac:2},3:{sac:2},5:{sac:2,danh:4}},ngon:{3:{tamco:1},5:{danh:4}},hanh:{1:{duc:3},2:{duc:3,th:3},3:{duc:3},4:{duc:3,th:3,hh:5},5:{duc:3,danh:4}}},
+   /* Tứ đức one-time gains when a course reaches bậc l (courses have no base stat gain); j85 addVir applies VIRB (linked below), j85 virtueBonus dung.sac sums it, VIRFX texts print it */
+ artB:{ky:{1:{tamco:1},2:{tamco:1},4:{tamco:2},5:{tamco:2}},hoa:{2:{th:3},4:{th:5},5:{th:5}},vu:{4:{sac:2}},theu:{2:{th:2},4:{th:3}}},
+   /* art one-time gains at bậc l beyond BAL.art.stUp / BAL.art.danh: her = j23 addArt (theu: j85 addArt), NPC = j85 addArtP via ARTB85 (linked below); ARTFX texts print it */
+ ducF:{mid:50,odds:5,shield:6,danger:5,betray:4}
+   /* j85 Đức formulas: ducOdds (Đức − mid) ÷ odds, ducShield ÷ shield, ducDanger (mid − Đức) ÷ danger, ducBetray ÷ betray; the Đức panel and the danger card print them */
+});
+Object.assign(BAL.eff.j85,{
+ thiDanhSeason:1,  /* Thi bậc 2: Danh each season (j85 v85Month, ARTFX.thi) */
+ hoaDanhSeason:1,  /* Họa bậc 2: Danh each season (j85 v85Month, ARTFX.hoa) */
+ hoaDanhSeason4:2, /* Họa bậc 4: Danh each season instead (j85 v85Month, ARTFX.hoa) */
+ theuBac:5,        /* Thêu bậc 3: Bạc each month (j85 v85Month, ARTFX.theu, ARTS.u) */
+ theuBac5:10,      /* Thêu bậc 5: Bạc each month instead */
+ nauSuc:2,         /* Nấu bậc 2: Sức each month (j85 v85Month, ARTFX.nau) */
+ nauSuc4:4,        /* Nấu bậc 4: Sức each month instead */
+ nauAn:1,          /* Nấu bậc 3: Ân tình each month (j85 v85Month, ARTFX.nau, ARTS.u) */
+ nauAn5:2,         /* Nấu bậc 5: Ân tình each month instead */
+    /* Hạnh bậc 3: Đức each month up to BAL.virx.hanhCap (j85 v85Month, VIRFX.hanh, Đức panel) */
+           /* Đức ≥ ducLv.up / < ducLv.down: Thái hậu, Hoàng hậu regard ± each month (j85 v85Month, Đức panel) */
+        /* Đức ≥ ducLv.staffUp / < staffDown: servants' Thiện cảm ± each month (j85 v85Month, Đức panel) */
+ caughtDanh:-5     /* a scheme caught (j85 caught wrap): the schemer's Danh */
+});
+Object.assign(BAL.eff.j23,{
+ camSucMonth:1     /* Cầm bậc 1: her Sức each month (j23 artMonth, ARTFX.cam) */
+});
+Object.assign(BAL.eff.j83,{
+ danhIllThaiy:-6,  /* đồ cấm via Thái y viện caught: buyer's Danh (j83 illBuy, IROUTE.thaiy.fail) */
+ danhIllCho:-8,    /* đồ cấm at the black market caught: buyer's Danh (j83 illBuy, IROUTE.cho.fail) */
+       /* buying đồ cấm: buyer's Đức (j83 illBuy and its cards) */
+});
+if(typeof VIRB!=="undefined")Object.assign(VIRB,BAL.virB);/* j85 tables load before this file: link the BAL objects into them */
+if(typeof ARTB85!=="undefined")Object.assign(ARTB85,BAL.artB);
 /* ORDER THIN P0 (jnorep.js, owner OD 23/11 ~22:50Z): ONE shared cross-life no-repeat memory. lives = lives kept (this one + 5 past, as the old
    ctm-e68h), w = weight factor per past life that saw a key (×0.5, as j68), cap = keys kept per life (the store is shared by every family). */
 BAL.nr={lives:6,w:.5,cap:1500};
@@ -2044,6 +2079,16 @@ BAL.j71c={on:true,obKeep:60,
  fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:1,th:2,hh:2,duc:2,tamco:1,an:1,rel:4},
      m:{sung:3,danh:3,bac:40,suc:8,mat:1,th:4,hh:4,duc:3,tamco:2,an:2,rel:6},
      l:{sung:5,danh:5,bac:60,suc:12,mat:2,th:6,hh:6,duc:5,tamco:3,an:3,rel:9}}};
+/* ORDER THIN P4 (j68c.js composed j68 openings): on = composed seeds live; w[fam] = draw weight of ONE composed seed in e68Cands (old templates weigh ~1–2;
+   def for families not listed); seen = extra factor when any past life met the seed (fresh-first; e68Cands' ×nr.w per life still applies);
+   cd = per-life cooldown tuần of one seed (999 = once per life); fx[tier] = what ONE gain/loss step is worth per key (laws 2/3/4: seeds count
+   steps, numbers live here; rel = thiện cảm / lòng trung / quyến luyến of that person); need = live-state thresholds; obKeep = object traces kept;
+   rumorTag = the hearsay label every composed rumour carries (j68h grounding rule, as the old rumours). */
+BAL.j68c={on:true,w:{def:.35},seen:.15,cd:999,obKeep:60,rumorTag:" <i>(Lời đồn.)</i>",
+ fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:1,th:2,hh:2,duc:2,tamco:1,an:1,rel:4},
+     m:{sung:3,danh:3,bac:40,suc:8,mat:1,th:4,hh:4,duc:3,tamco:2,an:2,rel:6},
+     l:{sung:5,danh:5,bac:60,suc:12,mat:2,th:6,hh:6,duc:5,tamco:3,an:3,rel:9}},
+ need:{friend:10,feud:-10,poor:30}};
 /* ORDER THIN P3 (j72c.js composed việc nhờ): on = composed favours live; share = draw weight of one composed seed vs one of the 110 old T7 (1);
    fx[tier] = what ONE gain/loss step of a seed is worth per key (laws 2/3/4: seeds count steps, numbers live here; rel/relb = thiện cảm of A/B,
    an = ân tình); odds = base of a do-step on the j72 ladder (q72Odds adds her skill); khac = khắc of a do-step; wait = tuần of a wait step;
