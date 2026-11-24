@@ -49,7 +49,4 @@ Format: [source:Lnn] = line in the source file (OD = dev/OWNER_DECISIONS.md on t
 [OD:L171] - (05:25Z) Owner: stage name labels = rank on top line, name below, text coloured by rank (kit rule, all stages).
 ### OD:L335 15/11 ~05:45Z (owner, annoyed that workers don't follow the kit)
 [OD:L523] - (~18:30Z, owner) LANGUAGE: from now on every repo work file is written in ENGLISH to save credits (this log included). Player-visible text stays Vietnamese.
-<<<<<<< HEAD
 [OD 24/11 ~22:14Z] - UNNAMED PERSON IN PROSE: «một vị cung nữ» / «một vị phi tần» / «một vị thái giám» (or the visible rank title), never «chưa quen biết» (owner: "không có tên thì chỉ cần đơn giản gọi đó là một vị cung nữ đó, hoặc là một vị phi tần vậy thôi, chứ chưa quen biết làm chi dài dòng"). Whole kitNoUnk family.
-=======
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)

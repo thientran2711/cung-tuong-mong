@@ -958,7 +958,6 @@ PRIORITY #1 CHECK ('law1-maid-away / robot-coop-tail / save round-trip'): OD 220
 | coop-e2e COOP_SWAP=0 (Fold hosts) | 142/142 |
 | coop-e2e COOP_SWAP=1 (iPad hosts) | 142/142 |
 SẴN SÀNG KIỂM review/law1-maid-away 63d726941059afd8e134f692609e30eed30b2d24
-<<<<<<< HEAD
 #### review/robot-coop-tail 08dc8031 (test-only N1–N3; branch unchanged)
 | gate | tail 08dc8031 | main 502c48c9 (same game; main's test files) |
 |---|---|---|
@@ -969,8 +968,6 @@ SẴN SÀNG KIỂM review/law1-maid-away 63d726941059afd8e134f692609e30eed30b2d2
 | rejoin (both sides) | ok:false ×2 | ok:false |
 Read: N3 behaves as designed (early step = 0 ms, a key that moves is not «stuck»; a real long stall still FAILs through coopTurnP95). The budget FAIL and rejoin ok:false are the GAME (LIVE 502c48c9 on both sides, not this test-only branch): the 20-min week-end stall belongs to the week-end STUCK family (FIXER #6b); rejoin ok:false on main too → flagged to Foreman B. Harness note (not fixed here): coop-lag cannot use a local Worker (missing the coop-e2e localhost launch args).
 SẴN SÀNG KIỂM review/robot-coop-tail 08dc80311255b60ea30cc821c466d5e0b62a1668
-=======
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)
 
 ## MGSKIN-WIRE
 PRIORITY #1 CHECK: OD 0 | ledger 0 | claims 8 | main kitMgSkinAdd/mgpSkin/kg82SkinSrc (j82, jmgpool; reused, no new mechanism) | review/* review/kit-mgboardof-r1 c46a17f2 (merged, not LIVE yet) | reports F-MGSKIN-A..H, kit-mgskin.
@@ -1312,7 +1309,6 @@ Lives/hour is the same (CAP 300 ends every life: wall-cap bound, not a speed mea
 | quickcheck alone | PASS 112 s (render 237, tab 538, buổi 1168 ms, median of 3) |
 Not done: U2 «buổi 0 pend:true Q 6 dialogs» rows (review/robot10-coop-saves u2) are state lines only, no dump → not classed; looks like cause 3? (dialogs held) — needs a dump with the probe.
 Logs (container-local): /home/user/wt/s6out/{ab-a-main,ab-a-fix,p5-fix-1,p5-fix-2,g}.
-<<<<<<< HEAD
 
 ## REVIEW law1-maid-away r1 (BIG, opus; session_01N1tNP3WS5HsPkPew92KGwF; START_CTX ≈5 % (own estimate); Foreman B = session_01N1tNP3HSiyh7FYx9Ezn8vr) — PASS 854c1fc1 (with one reviewer fix)
 PRIORITY #1 CHECK ('law1-maid-away'): OD 0 | ledger 0 | claims 3 | main 0 (j42 srvTalk on 502c48c9) | review/* law1-maid-away 63d72694 | archive 0 → law1-audit row 10 + role-parity open «maid:beside N-ONLY»; reuse: fixer #7 head 63d72694 as base, nothing rebuilt.
@@ -1340,5 +1336,3 @@ Head reviewed: review/law1-maid-away 63d72694 (FF on LIVE 502c48c9; LIVE unchang
 ### Shots (scratch only, not in git; Fold 755x1000 + iPad 1180x820, looked at each)
 fold-qhome / ipad-qhome (master = Hoàng hậu, at home): talk menu tabs Hầu hạ 2/2 · Ban thưởng 0/1 (locked «Cần Chủ tin 60») · Giao thiệp 1/2 — the four acts + «Xin chủ cho đi», kit act cards, odds words, nothing cut. fold-away / ipad-away (master at Ngự hoa viên): only «Hầu bên cạnh chủ» + «Xin chủ cho đi hầu cung khác», kit cards, nothing cut, no page errors.
 **PASS → LAND READY law1-maid-away-r1 854c1fc1fdaf8dbd0699e50f1d7d3020054bbf64.**
-=======
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)

@@ -10,7 +10,6 @@ Identity uploads: c04 EbcFFhnuuO, c10 ksXxxbr16B, c16 cpwVVY30eP, c22 rgoLLr0xtc
 |---|---|---|---|
 | m04 A16 | 1lBjL83r4r | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, smile as spec; identity vs source not pixel-compared |
 | c04 A16 | MByeXxyDCm | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg; identity not pixel-compared |
-<<<<<<< HEAD
 | c10 A16 | xS8swCZjfW | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared |
 | c16 A16 | lJhUPp4gv9 | DONE (looked) | same QC; background slightly pinkish-ivory |
 | c22 A16 | 0e7MoFDTfW | DONE (looked) | same QC; background slightly pinkish-ivory |
@@ -84,12 +83,3 @@ Remaining: AGE 39 only — 12 Dignified jobs: m04 m10 m16 m22 m28 m29 c04 c10 c1
 Identity uploads (reuse, never re-upload): c04 EbcFFhnuuO, c10 ksXxxbr16B, c16 cpwVVY30eP, c22 rgoLLr0xtc, c28 VXOpeD2MMU, m04 N253RRL6D9, m10 LwtgSwWswO, m16 rgoLsU6xtc, m22 TdJDp8FVNR, m28 aFnEukWfSh, m29 ksXxjO216B, s65 s7mSU3hl8e.
 Still not done: contact sheets/CDN (separate gallery worker per the order), final DONE to Foreman D after age 39.
 Push recipe: fetch --depth=30 under flock, checkout -B work FETCH_HEAD, append, push HEAD to the handover branch (never rebase the old detached shallow worktree).
-=======
-
-Prompt texts at /home/user/wt/dig-out/p{16,26,51,63}.txt may be wiped: regenerate with the cut sentence script (delete exactly the one operator sentence).
-
-## HANDOVER (rollover)
-Cost finding: every images_generate call needs the FULL ~9.8k-char prompt typed into the call (~3.5k tokens of context each), so one worker can only do ~15-20 jobs before the 60% ceiling. 2 of 48 done; 46 remain.
-Remaining: ages 16 (10: c10 c16 c22 c28 m10 m16 m22 m28 m29 s65), 26 (12), 51 (12), 63 (12). Recommend 4 successor workers, one per age (12 jobs each; age 16 has 10).
-Successor steps: fetch handover branch (sparse dev/handover), rebuild prompt = Prompts/FACE-REUSE-DIGNIFIED-AGE<age>-...-03.txt minus the one operator sentence, reuse identity uploads above (already uploaded, hashes verified) + ref UPf76Ptwny, gpt-2-6 2k auto count 1; creations_wait + creations_read each; log in this file (append rows; rebase-retry push). Do not re-run m04/c04 A16.
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)

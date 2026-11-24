@@ -73810,7 +73810,6 @@
      "room": "85W4",
      "ms": 4731059,
      "week": 167
-<<<<<<< HEAD
     },
     {
      "seat": "host",
@@ -82628,8 +82627,6 @@
      "room": "4X4T",
      "ms": 1278766,
      "week": 185
-=======
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)
     }
    ],
    "lag": {
@@ -83951,7 +83948,6 @@
         "errs": 0
        }
       }
-<<<<<<< HEAD
      },
      {
       "year": 1,
@@ -84725,8 +84721,6 @@
         "errs": 0
        }
       }
-=======
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)
      }
     ],
     "rooms": [
@@ -92152,7 +92146,6 @@
       "posDiff": 0,
       "statLag": 0,
       "cmp": 262
-<<<<<<< HEAD
      },
      {
       "code": "2WAM",
@@ -99806,8 +99799,6 @@
       "posDiff": 0,
       "statLag": 0,
       "cmp": 458
-=======
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)
      }
     ],
     "rejoin": [
@@ -99850,7 +99841,6 @@
       "room": "C3DR",
       "week": 6,
       "ms": 4468
-<<<<<<< HEAD
      },
      {
       "room": "2WAM",
@@ -99872,14 +99862,6 @@
    "rooms": 14,
    "t": {
     "total": 27215285
-=======
-     }
-    ]
-   },
-   "rooms": 11,
-   "t": {
-    "total": 20017312
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)
    },
    "partial": true,
    "bugs": [
@@ -99890,11 +99872,7 @@
      "n": 5,
      "nNew": 0,
      "sha": "5a65a561",
-<<<<<<< HEAD
      "shaNew": "6576e086",
-=======
-     "shaNew": "5a65a561",
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)
      "at": "coop-p02s-S1",
      "shots": [
       "shots/coop-p02s-S1-r1-host-stuck.png",
@@ -99906,121 +99884,67 @@
      "type": "lag",
      "msg": "co-op LAG budget miss: coopTurnP95",
      "detail": "coopTurnP95 117492 > 10000 · game year 1 · room WSDN · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":370.5,\"upKB\":2694,\"dnKB\":532,\"posFlip\":null,\"resend\":24,\"resendBy\":{\"act\":24},\"longTasksPerMin\":337.7,\"longTaskMax\":1694,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":359.8,\"upKB\":1184,\"dnKB\":1949,\"posFlip\":null,\"resend\":69,\"resendBy\":{\"act\":53,\"bend\":1,\"pos\":15},\"longTasksPerMin\":325.3,\"longTaskMax\":1990,\"errs\":0}}",
-<<<<<<< HEAD
      "n": 33,
      "nNew": 8,
      "sha": "5a65a561",
      "shaNew": "6576e086",
      "at": "coop-p02s-S1",
      "lastDetail": "coopTurnP95 28059 > 10000 · game year 3 · room JBB7 · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":3401.6,\"upKB\":41481,\"dnKB\":7855,\"posFlip\":null,\"resend\":35,\"resendBy\":{\"where\":3,\"act\":30,\"pos\":2},\"longTasksPerMin\":236.3,\"longTaskMax\":2154,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":3177.2,\"upKB\":34347,\"dnKB\":11736,\"posFlip\":null,\"resend\":13,\"resendBy\":{\"act\":13},\"longTasksPerMin\":154.9,\"longTaskMax\":1295,\"errs\":0}}"
-=======
-     "n": 25,
-     "nNew": 9,
-     "sha": "5a65a561",
-     "shaNew": "5a65a561",
-     "at": "coop-p02s-S1",
-     "lastDetail": "coopTurnP95 20123 > 10000 · game year 1 · room C3DR · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":1698.4,\"upKB\":9448,\"dnKB\":2174,\"posFlip\":null,\"resend\":70,\"resendBy\":{\"act\":67,\"where\":3},\"longTasksPerMin\":254.1,\"longTaskMax\":1717,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":1475.9,\"upKB\":6716,\"dnKB\":3384,\"posFlip\":null,\"resend\":68,\"resendBy\":{\"act\":68},\"longTasksPerMin\":83.1,\"longTaskMax\":839,\"errs\":0}}"
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)
     },
     {
      "type": "lag",
      "msg": "co-op LAG budget miss: coopSyncKBMax",
      "detail": "coopSyncKBMax 178.4 > 100 · game year 1 · room WSDN · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":370.5,\"upKB\":2694,\"dnKB\":532,\"posFlip\":null,\"resend\":24,\"resendBy\":{\"act\":24},\"longTasksPerMin\":337.7,\"longTaskMax\":1694,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":359.8,\"upKB\":1184,\"dnKB\":1949,\"posFlip\":null,\"resend\":69,\"resendBy\":{\"act\":53,\"bend\":1,\"pos\":15},\"longTasksPerMin\":325.3,\"longTaskMax\":1990,\"errs\":0}}",
-<<<<<<< HEAD
      "n": 34,
      "nNew": 12,
      "sha": "5a65a561",
      "shaNew": "6576e086",
      "at": "coop-p02s-S1",
      "lastDetail": "coopSyncKBMax 231.2 > 100 · game year 3 · room JBB7 · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":3401.6,\"upKB\":41481,\"dnKB\":7855,\"posFlip\":null,\"resend\":35,\"resendBy\":{\"where\":3,\"act\":30,\"pos\":2},\"longTasksPerMin\":236.3,\"longTaskMax\":2154,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":3177.2,\"upKB\":34347,\"dnKB\":11736,\"posFlip\":null,\"resend\":13,\"resendBy\":{\"act\":13},\"longTasksPerMin\":154.9,\"longTaskMax\":1295,\"errs\":0}}"
-=======
-     "n": 22,
-     "nNew": 6,
-     "sha": "5a65a561",
-     "shaNew": "5a65a561",
-     "at": "coop-p02s-S1",
-     "lastDetail": "coopSyncKBMax 103.7 > 100 · game year 1 · room C3DR · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":1698.4,\"upKB\":9448,\"dnKB\":2174,\"posFlip\":null,\"resend\":70,\"resendBy\":{\"act\":67,\"where\":3},\"longTasksPerMin\":254.1,\"longTaskMax\":1717,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":1475.9,\"upKB\":6716,\"dnKB\":3384,\"posFlip\":null,\"resend\":68,\"resendBy\":{\"act\":68},\"longTasksPerMin\":83.1,\"longTaskMax\":839,\"errs\":0}}"
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)
     },
     {
      "type": "lag",
      "msg": "co-op buổi stall (both ready, the room took > 30 s or never stepped)",
      "detail": "5 of 14 buổi in game year 1",
-<<<<<<< HEAD
      "n": 27,
      "nNew": 4,
      "sha": "5a65a561",
      "shaNew": "6576e086",
      "at": "coop-p02s-S1",
      "lastDetail": "5 of 142 buổi in game year 3"
-=======
-     "n": 23,
-     "nNew": 7,
-     "sha": "5a65a561",
-     "shaNew": "5a65a561",
-     "at": "coop-p02s-S1",
-     "lastDetail": "5 of 112 buổi in game year 5"
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)
     },
     {
      "type": "save",
      "msg": "save→load→save changes the state (host)",
      "detail": "save.R.0.rl.3: 8 → 4",
-<<<<<<< HEAD
      "n": 193,
      "nNew": 98,
      "sha": "5a65a561",
      "shaNew": "6576e086",
      "at": "coop-p02s-S1",
      "lastDetail": "save.R.0.rl.3: 10 → 8"
-=======
-     "n": 95,
-     "nNew": 57,
-     "sha": "5a65a561",
-     "shaNew": "5a65a561",
-     "at": "coop-p02s-S1",
-     "lastDetail": "save.R.0.rl.2: 1 → 2"
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)
     },
     {
      "type": "save",
      "msg": "save→load→save changes the state (guest)",
      "detail": "save.R.0.rl.2: -4 → 2",
-<<<<<<< HEAD
      "n": 180,
      "nNew": 98,
      "sha": "5a65a561",
      "shaNew": "6576e086",
      "at": "coop-p02s-S1",
      "lastDetail": "save.R.0.rl.5: 0 → -2"
-=======
-     "n": 82,
-     "nNew": 41,
-     "sha": "5a65a561",
-     "shaNew": "5a65a561",
-     "at": "coop-p02s-S1",
-     "lastDetail": "save.R.0.rl.3: 9 → 10"
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)
     },
     {
      "type": "lag",
      "msg": "co-op LAG budget miss: coopResendPerMin",
      "detail": "coopResendPerMin 13.5 > 12 · game year 1 · room 9Z7U · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":922.5,\"upKB\":2021,\"dnKB\":746,\"posFlip\":null,\"resend\":31,\"resendBy\":{\"act\":29,\"where\":2},\"longTasksPerMin\":248.1,\"longTaskMax\":1364,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":856.9,\"upKB\":1350,\"dnKB\":1220,\"posFlip\":null,\"resend\":50,\"resendBy\":{\"act\":39,\"pos\":11},\"longTasksPerMin\":290.1,\"longTaskMax\":2050,\"errs\":0}}",
-<<<<<<< HEAD
      "n": 10,
      "nNew": 7,
      "sha": "5a65a561",
      "shaNew": "6576e086",
      "at": "coop-p02s-S1",
      "lastDetail": "coopResendPerMin 27.1 > 12 · game year 5 · room 4X4T · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":7461.3,\"upKB\":24299,\"dnKB\":8206,\"posFlip\":null,\"resend\":73,\"resendBy\":{\"act\":71,\"where\":2},\"longTasksPerMin\":222,\"longTaskMax\":1473,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":6606.1,\"upKB\":18826,\"dnKB\":9952,\"posFlip\":null,\"resend\":163,\"resendBy\":{\"act\":163},\"longTasksPerMin\":204.1,\"longTaskMax\":1376,\"errs\":0}}"
-=======
-     "n": 3,
-     "nNew": 1,
-     "sha": "5a65a561",
-     "shaNew": "5a65a561",
-     "at": "coop-p02s-S1",
-     "lastDetail": "coopResendPerMin 13 > 12 · game year 1 · room C3DR · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":902.6,\"upKB\":1174,\"dnKB\":318,\"posFlip\":null,\"resend\":26,\"resendBy\":{\"act\":23,\"where\":3},\"longTasksPerMin\":266.8,\"longTaskMax\":1118,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":813.7,\"upKB\":803,\"dnKB\":542,\"posFlip\":null,\"resend\":17,\"resendBy\":{\"act\":17},\"longTasksPerMin\":86.5,\"longTaskMax\":892,\"errs\":0}}"
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)
     },
     {
      "type": "coop-pos",
@@ -100029,11 +99953,7 @@
      "n": 98,
      "nNew": 0,
      "sha": "5a65a561",
-<<<<<<< HEAD
      "shaNew": "6576e086",
-=======
-     "shaNew": "5a65a561",
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)
      "at": "coop-p02s-S1",
      "lastDetail": "buổi 73.3 guest sees host at P:a, host is at r10 · {\"host\":{\"fpos\":\"73.3 r901 life8 Vân Sơ Ảnh\",\"me\":\"73.3 home\",\"life\":0,\"f\":\"902 Vân Sơ Ảnh pal r902 where home\",\"thl\":0,\"h7\":null},\"guest\":{\"fpos\":\"73.3 home life0 Mộ Dung Uyển Nhi\",\"me\":\"73.3 r901\",\"life\":8,\"f\":\"901 Mộ Dung Uyển Nhi pal r901 where r901\",\"thl\":0,\"h7\":null}}"
     },
@@ -100044,11 +99964,7 @@
      "n": 6,
      "nNew": 0,
      "sha": "5a65a561",
-<<<<<<< HEAD
      "shaNew": "6576e086",
-=======
-     "shaNew": "5a65a561",
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)
      "at": "coop-p02s-S1",
      "lastDetail": "buổi 70.3: host sees guest 0/0/94 (guest 0/0/94) · guest sees host 100/72/71 (host 92/57/71)"
     },
@@ -100057,15 +99973,9 @@
      "msg": "stat out of range: bac",
      "detail": "bac=-9 · fold guest week 7",
      "n": 9,
-<<<<<<< HEAD
      "nNew": 0,
      "sha": "5a65a561",
      "shaNew": "6576e086",
-=======
-     "nNew": 4,
-     "sha": "5a65a561",
-     "shaNew": "5a65a561",
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)
      "at": "coop-p02s-S1",
      "lastDetail": "bac=-23 · fold guest week 19"
     },
@@ -100074,15 +99984,9 @@
      "msg": "world differs between the two screens: consorts differ (id/name/rank/alive/out/kids)",
      "detail": "week 14 · host-only [10:Tiết Thuần Nguyên:1:1:0:] guest-only [10:Tiết Thuần Nguyên:0:1:0:] · origins nc/dtq",
      "n": 2,
-<<<<<<< HEAD
      "nNew": 0,
      "sha": "5a65a561",
      "shaNew": "6576e086",
-=======
-     "nNew": 1,
-     "sha": "5a65a561",
-     "shaNew": "5a65a561",
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)
      "at": "coop-p02s-S1",
      "lastDetail": "week 163 · host-only [10:Hách Thi Hàm:1:1:0:Hoàng tử Vĩnh Bích/Công chúa Hòa Mục] guest-only [10:Hách Thi Hàm:2:1:0:Hoàng tử Vĩnh Bích/Công chúa Hòa Mục] · origins nc/cnv"
     },
@@ -100090,48 +99994,28 @@
      "type": "lag",
      "msg": "co-op LAG budget miss: coopActionP95",
      "detail": "coopActionP95 10771 > 8000 · game year 1 · room 8FUU · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":932.9,\"upKB\":17630,\"dnKB\":3274,\"posFlip\":null,\"resend\":91,\"resendBy\":{\"act\":85,\"thin\":1,\"bend\":1,\"where\":2,\"pos\":2},\"longTasksPerMin\":276.4,\"longTaskMax\":2249,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":816.3,\"upKB\":12132,\"dnKB\":6159,\"posFlip\":null,\"resend\":84,\"resendBy\":{\"act\":75,\"pos\":9},\"longTasksPerMin\":324.1,\"longTaskMax\":2370,\"errs\":0}}",
-<<<<<<< HEAD
      "n": 11,
      "nNew": 3,
      "sha": "5a65a561",
      "shaNew": "6576e086",
      "at": "coop-p02s-S1",
      "lastDetail": "coopActionP95 17700 > 8000 · game year 3 · room JBB7 · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":3401.6,\"upKB\":41481,\"dnKB\":7855,\"posFlip\":null,\"resend\":35,\"resendBy\":{\"where\":3,\"act\":30,\"pos\":2},\"longTasksPerMin\":236.3,\"longTaskMax\":2154,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":3177.2,\"upKB\":34347,\"dnKB\":11736,\"posFlip\":null,\"resend\":13,\"resendBy\":{\"act\":13},\"longTasksPerMin\":154.9,\"longTaskMax\":1295,\"errs\":0}}"
-=======
-     "n": 8,
-     "nNew": 5,
-     "sha": "5a65a561",
-     "shaNew": "5a65a561",
-     "at": "coop-p02s-S1",
-     "lastDetail": "coopActionP95 16546 > 8000 · game year 5 · room 85W4 · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":2810.3,\"upKB\":50170,\"dnKB\":10046,\"posFlip\":null,\"resend\":94,\"resendBy\":{\"act\":91,\"pos\":3},\"longTasksPerMin\":139.7,\"longTaskMax\":2512,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":2644.7,\"upKB\":43213,\"dnKB\":13455,\"posFlip\":null,\"resend\":101,\"resendBy\":{\"act\":101},\"longTasksPerMin\":69.8,\"longTaskMax\":1234,\"errs\":0}}"
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)
     },
     {
      "type": "stuck",
      "msg": "co-op room stuck: no room week step in 600 s",
      "detail": "host {\"buoi\":3,\"week\":31,\"bend\":false,\"pendBuoi\":null,\"pend\":false,\"sent\":30,\"Q\":0,\"Qt\":[],\"mh\":true,\"mg\":false,\"dead\":false,\"next\":true,\"title\":false,\"st\":\"open\",\"peer\":true} || guest {\"buoi\":3,\"week\":31,\"bend\":false,\"pendBuoi\":null,\"pend\":false,\"sent\":30,\"Q\":0,\"Qt\":[],\"mh\":true,\"mg\":false,\"dead\":false,\"next\":true,\"title\":false,\"st\":\"open\",\"peer\":true}",
-<<<<<<< HEAD
      "n": 5,
      "nNew": 2,
      "sha": "5a65a561",
      "shaNew": "6576e086",
-=======
-     "n": 3,
-     "nNew": 2,
-     "sha": "5a65a561",
-     "shaNew": "5a65a561",
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)
      "at": "coop-p02s-S1",
      "shots": [
       "shots/coop-p02s-S1-r7-host-stuck.png",
       "shots/coop-p02s-S1-r7-guest-stuck.png"
      ],
      "saveFile": "saves/coop-20261124-0723-p1-2-s-1v7zrt6.json",
-<<<<<<< HEAD
      "lastDetail": "host {\"buoi\":3,\"week\":185,\"bend\":false,\"pendBuoi\":null,\"pend\":false,\"sent\":184,\"Q\":0,\"Qt\":[],\"mh\":true,\"mg\":false,\"dead\":false,\"next\":true,\"title\":false,\"st\":\"open\",\"peer\":true} || guest {\"buoi\":0,\"week\":185,\"bend\":false,\"pendBuoi\":null,\"pend\":false,\"sent\":185,\"Q\":1,\"Qt\":[\"Hảo hữu vào cung\"],\"mh\":false,\"mg\":false,\"dead\":false,\"next\":true,\"title\":false,\"st\":\"open\",\"peer\":true}"
-=======
-     "lastDetail": "host {\"buoi\":3,\"week\":167,\"bend\":false,\"pendBuoi\":null,\"pend\":false,\"sent\":166,\"Q\":0,\"Qt\":[],\"mh\":true,\"mg\":false,\"dead\":false,\"next\":true,\"title\":false,\"st\":\"open\",\"peer\":true} || guest {\"buoi\":0,\"week\":167,\"bend\":false,\"pendBuoi\":null,\"pend\":false,\"sent\":167,\"Q\":1,\"Qt\":[\"Hảo hữu vào cung\"],\"mh\":false,\"mg\":false,\"dead\":false,\"next\":true,\"title\":false,\"st\":\"open\",\"peer\":true}"
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)
     },
     {
      "type": "coop-where",
@@ -100140,31 +100024,19 @@
      "n": 1,
      "nNew": 0,
      "sha": "5a65a561",
-<<<<<<< HEAD
      "shaNew": "6576e086",
-=======
-     "shaNew": "5a65a561",
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)
      "at": "coop-p02s-S1"
     },
     {
      "type": "number",
      "msg": "option text «Bạc +8» but the effect applies bac=20",
      "detail": "«Nhận bạc, làm tai mắt | mỗi tháng Bạc +8 · kèm: mỗi tháng chủ phát hiện: khả năng thấp; khi ấy bị đánh chết: không có khả năng, không thì Tân Giả khố 10 tuần» in «Bạc lạ» fx={\"bac\":20} @ năm 2 th1 t1 b0 (buổi #122) · guest fold",
-<<<<<<< HEAD
      "n": 3,
      "nNew": 1,
      "sha": "5a65a561",
      "shaNew": "6576e086",
      "at": "coop-p02s-S1",
      "lastDetail": "«Nhận bạc, làm tai mắt | mỗi tháng Bạc +8 · kèm: mỗi tháng chủ phát hiện: khả năng thấp; khi ấy bị đánh chết: khả năng cao, không thì Tân Giả khố 10 tuần» in «Bạc lạ» fx={\"bac\":20} @ năm 2 th2 t2 b0 (buổi #116) · guest fold"
-=======
-     "n": 2,
-     "nNew": 1,
-     "sha": "5a65a561",
-     "shaNew": "5a65a561",
-     "at": "coop-p02s-S1"
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)
     }
    ]
   }

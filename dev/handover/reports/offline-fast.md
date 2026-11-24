@@ -61,7 +61,6 @@ PRIORITY #1 CHECK: same as above; sw.tpl.js fetch fallbacks + jload assets.json 
 Offline boot early-boot SW waits (2–3 s, before jload runs) are the same on main — not from this branch.
 **Gates on 053503ec:** quickcheck PASS (render 241/297, tab 536/533, buổi 1 526/1 623 ms, tasks>200 26/26, core gates PASS, old save ok); offline-all ALL PASS 34; kit-progress-run 36/36; lazy-offline --offline Fold: 20 pictures fail offline — IDENTICAL list on main 502c48c9 (face-man-1..8, face-consort-41..45, face-maid-31..33, face-mama-7/8, nvp-ha-sang, tu-ninh-cung-ngu-ha-sang: 404/never fetched online = pre-existing CDN gap, flag for MAIN). sfx.js / result-sfx not re-run here: this branch does not touch j11/jsfx; the lander merged it on sfx-instant.
 **Shots (looked at):** CDN img/_review/offline-fast/fold-panel-1s-after-tap.png + ipadAir-panel-1s-after-tap.png — panel 0.9 s after «Bắt đầu tải»: running (Tạm ngưng), «đang đếm…», Cất sẵn 1.223 / 1.181 of 32.443 (~300 files already in). Panel opened in 59/66 ms.
-<<<<<<< HEAD
 LAND READY review/offline-fast 053503ec (r2; superseded by R3 below)
 ~100% xong / ~90% chơi được
 
@@ -78,7 +77,3 @@ No upload needed (nothing missing on the CDN that the game should show). When Fo
 **Gates on 74204649:** lazy-offline --offline Fold 1138/1138 offline OK, 0 online fails, exit 0; iPad (--ios-app) 1147/1147, 0 fails, exit 0 (main: 20 fails). ref-offline ALL PASS. offline-all 34/34. kit-progress-run 36/36. quickcheck PASS (render 302/247, tab 530/531, buổi 1 466/1 492 ms, tasks>200 20/25, core gates PASS, old save ok).
 LAND READY review/offline-fast 74204649
 ~100% xong / ~92% chơi được
-=======
-LAND READY review/offline-fast 053503ec
-~100% xong / ~90% chơi được
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)

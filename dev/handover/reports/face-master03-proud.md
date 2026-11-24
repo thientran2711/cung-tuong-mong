@@ -7,7 +7,6 @@ Identity uploads: s10 p84XX01ehw, s11 fHYuQqoCDY, s12 1lBjLUar4r, s19 Xm68ICQBfo
 | FACE-PROUD-S10-A16-...T01 | s10 | 16 | LwtgSkLswO | DONE | viewed: bare face, no text, master skin ok |
 | S11-A16 | s11 | 16 | LwtgUK9swO | DONE | viewed ok |
 | S12-A16 | s12 | 16 | MByeXTtDCm | DONE | viewed ok |
-<<<<<<< HEAD
 | S19-A16 | s19 | 16 | ksXxsIu16B | DONE | viewed ok: bare face, no text, master skin/painting match |
 | S20-A16 | s20 | 16 | p84XIolehw | DONE | viewed ok: bare face, no text, master skin/painting match |
 | S21-A16 | s21 | 16 | bxpkj3J5Y2 | DONE | viewed ok: bare face, no text, master skin/painting match |
@@ -95,11 +94,3 @@ Age 39: 13 DONE, 2 NEEDS_REVIEW (s25, s54). Cost 15 x 135 = 2 025 cr. Overall Pr
 - NOT DONE: contact sheets (original | result) per age and CDN upload img/_review/face-master03/proud/ — outputs stay on Magnific; open any via https://www.magnific.com/app/creation/<output id>. Foreman can order a follow-up worker for sheets.
 - Cost: 60 x 135 = 8 100 credits (balance was 2 639 842 at start).
 - Template quirk kept unchanged: the age 26/51/63 prompts still end the personality block with 'At16 this is youthful self-assurance'.
-=======
-| S19-A16 | s19 | 16 | ksXxsIu16B | GENERATED (not yet viewed) | |
-| S20-A16 | s20 | 16 | p84XIolehw | GENERATED (not yet viewed) | |
-| S21-A16 | s21 | 16 | bxpkj3J5Y2 | GENERATED (not yet viewed) | |
-
-## Resume note
-Next: age16 s22,s23,s24,s25,s51..s55; then ages 26,51,63 for all 15. Pre-cut prompt files were built in session scratchpad (re-create: delete the operator sentence from Prompts/*.txt).
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)

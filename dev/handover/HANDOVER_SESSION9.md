@@ -3145,7 +3145,6 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22:35Z) FLIGHT-MUCLUC LAND READY SMALL review/flight-mucluc-cnv af4e19b7 (on kit r2 bd394cd): cung nữ Mục lục chip + kitTocOpen, typed fallbacks removed (ARC67/MS67 names, 0 fallbacks on 9 origins). Shots checked = GO → LC12 step 2 (after B KIT OK r2). KK23b: note kitTocOpen + chip in §99.
 - (22:40Z) OFFLINE-FAST LAND READY 053503ec (sw not-listed → shell/network; boot SW wait ≤0.7 s) → LC12 step 6 swap. NEW flight item to same worker: 20 pictures fail offline (pre-existing on LIVE: face-man/consort/maid/mama, nvp-ha-sang, tu-ninh) → fix whole group + check every referenced picture is in the offline set.
 - (22:50Z) KK23b fitfast r2 PARTIAL (review/kit-fitfast-r2: kitOptTier memo, 11→4–8 ms per dialog) — not proven on SELSCENE day card (190–260 ms). Reordered: measure on selection-scene first, reuse B r1 seeded rect diff. Not for landing yet.
-<<<<<<< HEAD
 - LOAD (21:40Z wake): main running 14 (OFFLINE-FAST, 5 done flight workers + RV dayq waiting LIVE, LC12, KK23b, SELSCENE-14 + rv, RD5 + MD5 idle on sếp picks) | B kit reviews + fixer #7 | C silent | D train done | E/F round 2 pending stuckcap | moved: none. ctx 40 % = roll line → ROLL.
 ## MAIN CHÍNH 127 → MAIN CHÍNH 128 HANDOVER (24/11 ~21:40Z): dev/handover/TAKEOVER_MAIN_128.md
 - (21:45Z) MAIN CHÍNH 128 = session_01V1ZZH2eoaTpGJXoPfwK5DT opened (child of 127, depth 3). 127 DISABLED its three scheduled tasks. 127 forwards anything late, then stops.
@@ -3174,5 +3173,3 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22:22Z) KK23b: both fitfast memos → tasks>200ms 72 vs 78 (ceiling 40); quickcheck's own render (~280 ms) + tab (~480 ms) are long tasks → fitfast alone cannot meet 40. Ordered: attribution by function + same run on bare LIVE 502c48c9 baseline (if LIVE ~70, gate = no regression vs LIVE) → report to MAIN + SELSCENE-15 + BIG rv. KIT.md §98.15 unnamed-person rule done.
 - (22:24Z) FLIGHT-UI FINAL 1810ad98 (display-time MutationObserver cleans stored «chưa quen biết»; old-save Tuần lục 0 on screen) → GO LC12 step 5; LC12 to compare quickcheck perf step 5 vs step 4 (observer cost). FLIGHT-UI waits LIVE then archive (child of 126/127).
 - (22:26Z) MINIGAME-FIX LAND READY 7d21d04f (7 jdfv games intro + skip wording; kg82Veil decode-first) → NOT GO: no shots (CDN art blocked in its browser) + family only 7 jdfv games → asked CDN-proxied Fold+iPad pairs + table of EVERY mini-game.
-=======
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)

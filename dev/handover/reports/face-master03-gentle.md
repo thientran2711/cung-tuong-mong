@@ -10,7 +10,6 @@ NOTE: every MCP call needs the full ~9.6k-char prompt pasted inline (~3k tokens/
 | FACE-GENTLE-M02-A16-MASTER-SKIN03-T01 | m02 | 16 | ksXxxbS16B | 8aRmhWuIrU | DONE | no text, bare face, ivory robe, soft smile, looks ~18-20 (slightly older than 16) |
 | FACE-GENTLE-M08-A16-MASTER-SKIN03-T01 | m08 | 16 | Sya77l1Ub8 | rgoLlKgxtc | DONE | no text, bare face, ivory robe, smile, ok |
 | FACE-GENTLE-M14-A16-MASTER-SKIN03-T01 | m14 | 16 | EbcFFETuuO | tC2vft3mZJ | DONE | no text, bare face, ivory robe, smile, ok |
-<<<<<<< HEAD
 | FACE-GENTLE-M18-A16-MASTER-SKIN03-T01 | m18 | 16 | gOvw7wcSXO | 9Zbi26kNYZ | DONE | no text, bare face, ivory robe, ok |
 | FACE-GENTLE-M19-A16-MASTER-SKIN03-T01 | m19 | 16 | dtNo8IEXSL | cpwVeju0eP | DONE | no text, bare face, ivory robe, braid, ok |
 | FACE-GENTLE-M20-A16-MASTER-SKIN03-T01 | m20 | 16 | fHYuQHBCDY | 5je1lOPKxe | DONE | no text, bare face, ivory robe, ok |
@@ -91,6 +90,3 @@ Prompt: age39-fix04 file FACE-REUSE-GENTLE-AGE39-DUAL-MASTER-SKIN-BAREFACE-NOTEX
 | FACE-GENTLE-S64-A39-MASTER-SKIN39LIMIT04-T01 | s64 | 39 | s7mSUzul8e | KLdrTHIkqp | DONE | no text, bare face, zero wrinkles, youthful visual 35-36, ivory robe, ok |
 
 ## GRAND TOTAL Gentle: 70/70 DONE (ages 16, 26, 39, 51, 63 x 14). Contact sheets + CDN upload still NOT done (await Foreman D).
-=======
-| FACE-GENTLE-M18-A16-MASTER-SKIN03-T01 | m18 | 16 | gOvw7wcSXO | 9Zbi26kNYZ | QUEUED (unchecked) | |
->>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)
