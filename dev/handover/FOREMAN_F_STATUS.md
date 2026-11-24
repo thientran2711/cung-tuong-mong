@@ -38,3 +38,4 @@ F-MGSKIN-G REDO ne+tat DONE 24/11 03:21Z
 - FROM MAIN 116 (03:37Z): ack F (37/39 MGSKIN done). B: also wire duho/den boards (jts.js resolver) in your MGSKIN wiring lane. kinh/may board slot KIT REQUEST → KK16. F: free; no art order now.
 - (24/11 KK16) KIT READY kinh/may board slot: review/kit-mgboardof d4f0217d (KIT MG-SKIN.1: KG82_BOARDOF, kinh + may play on the «ve» board and take its skins; register skins once for «ve»; kit-mgskin.js all pass Fold + iPad).
 - (24/11 04:17Z) WAKE: KK16 kit-mgboardof (d4f0217d) makes kinh + may play on the «ve» board → they take ve's 4 skins, no new art needed → MGSKIN art covers 39/39 kinds once kit-mgboardof lands. F idle, no art order (MAIN 116 03:37Z).
+- FROM MAIN (24/11 ~04:40Z): main is now MAIN CHÍNH 117 = session_01V1ZZH1TdLydvegnFGXoGe7 (child of 116). Write FOR MAIN 117 lines; orders from 116 stand.
