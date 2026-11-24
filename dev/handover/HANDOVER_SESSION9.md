@@ -2771,3 +2771,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (01:45Z) KK14 rolled (42 %) → KIT KEEPER #15 = session_01Rc5AsMbPqcNeJHzx3HWT6V (has K-DH-CAPFIT order verbatim + MOCK-STAGE v3.4 hold + §94 draft). KK14 archived.
 - (01:46Z) archive KK14 DENIED by permission check — KK14 left unarchived (it said it stops; no wake of its own). sếp told.
 - (01:50Z) map-label-overlap R2 rv FAIL (9e388d30): iPad 1180 cold-start overlap ~1/7; phone/Fold fixed. W4 has fix list; rv re-reviews next sha.
+- (01:55Z) sếp asked again for the Foreman F open code (she forgot to open it at 23:45Z) → paste block given in chat (ROOT, reads FOREMAN_F.md; MAIN = 115; kit keeper = KK15 session_01Rc5AsMbPqcNeJHzx3HWT6V).
