@@ -44,7 +44,8 @@ function choose67(k,ids){const r=hist67()[k]||[];const w=ids.map(id=>{const i=r.
 /* ---------- actors ---------- */
 function rvOk67(v){return !!(v&&v.alive&&!v.out)}
 function rv67(A,k){const v=A.act&&A.act[k]!=null?RV(A.act[k]):null;return rvOk67(v)?v:null}
-function castRv67(A,k,f){const used=Object.values(A.act||{});const L=liveRivals(false).filter(v=>!used.includes(v.id)&&(!f||f(v)));if(!L.length)return false;A.act[k]=pk67(L).id;return true}
+/* the co-op friend (rival entry v.coop, jcoopworld) is a real player: never cast as a scripted role of a story (OD:L94 no AI stand-in; thin-p8 r1) */
+function castRv67(A,k,f){const used=Object.values(A.act||{});const L=liveRivals(false).filter(v=>!v.coop&&!used.includes(v.id)&&(!f||f(v)));if(!L.length)return false;A.act[k]=pk67(L).id;return true}
 function son67(){return mySons().slice().sort((a,b)=>(b.fond||0)-(a.fond||0))[0]||null}
 function dau67(){return myDaus()[0]||null}
 function man67(A){try{menInit()}catch(e){}const L=(S.men||[]).filter(m=>m.alive&&(m.age||0)>=18);let m=L.find(x=>x.id===A.act.m);if(!m&&L.length){m=pk67(L);A.act.m=m.id}return m||null}

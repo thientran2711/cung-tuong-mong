@@ -29,9 +29,13 @@ function rdcOpt(o,clim,band){const C=rdcB(),c={},w={},rel=[];let sc=0;
  if(clim){const t=C.xs[o.stat]||C.xs.danh;const q=[C.xo[o.risk==="lo"?"lo":"hi"][band]||50,[t[0],o.stat,t[1]]];X.o=A=>rdOdds(q,A);X.l={};
   X.e=o.risk==="lo"?["win","mid"]:["win","lose"]}
  return X}
-/* one hồi row → a j67 beat */
+/* the real people a hồi names by title (law 6b, thin-p8 r1): Thái hậu / Hoàng hậu speak or appear → the hồi needs her alive (j67 need th / hh);
+   writers tagged only some of them (109 of 142 Thái hậu hồi, 79 of 86 Hoàng hậu hồi had no need) */
+function rdcPeople(h){const s=rdcTexts(h).join(" "),R=[];if(h.w==="th"||s.includes("Thái hậu"))R.push("th");if(h.w==="hh"||s.includes("{hh}")||s.includes("Hoàng hậu"))R.push("hh");return R}
+function rdcPeopleOk(h){try{for(const k of rdcPeople(h)){if(k==="th"&&S.thDead)return false;if(k==="hh"&&!qOn())return false}}catch(e){}return true}
+/* one hồi row → a j67 beat (a climax is never skipped — j67 would end the chapter without one — so its people are checked when the road is composed) */
 function rdcBeat(h,clim,band){const B={h:h.h,w:h.w||"me",t:h.t,o:(h.opts||[]).map(o=>rdcOpt(o,clim,band))};
- const need=(h.need||[]).slice();for(const k of rdcRoles(...rdcTexts(h)))if(!need.includes(k))need.push(k);if(need.length)B.need=need;
+ const need=(h.need||[]).slice();for(const k of rdcRoles(...rdcTexts(h)).concat(clim?[]:rdcPeople(h)))if(!need.includes(k))need.push(k);if(need.length)B.need=need;
  if(h.after==="win")B.if=RDW(1);else if(h.after==="lose")B.if=RDW(0);return B}
 /* the 3 endings (steps × Efx; win +, lose −, mid by its sign) */
 function rdcEnds(E){const C=rdcB(),R={},K={win:1,mid:0,lose:-1};
@@ -58,7 +62,8 @@ function rdcPick(o,L,road,det){if(!L.length)return null;if(det)return L.slice().
  const T=W.reduce((a,b)=>a+b,0);let x=rnd67()*T;for(let i=0;i<F.length;i++){x-=W[i];if(x<0)return F[i]}return F[F.length-1]}
 /* one road's 7 chapters → {n:{s,c,t,x}} or null when the pools cannot fill it without a repeat */
 function rdcCompose(road,det){const o=RDC.road[road],P=RDC.P[o];if(!P)return null;const used=new Set(),R={};
- const take=(L,f)=>{const x=rdcPick(o,L.filter(r=>!used.has(r.id)&&(!f||f(r))),road,det);if(x)used.add(x.id);return x};
+ const take=(L,f)=>{let C=L.filter(r=>!used.has(r.id)&&(!f||f(r)));if(!det){const P=C.filter(rdcPeopleOk);if(P.length)C=P}/* life roads: parts whose named people are alive now first */
+  const x=rdcPick(o,C,road,det);if(x)used.add(x.id);return x};
  for(let n=BAL.road.first;n<=BAL.road.last;n++){const band=rdcBand(n);
   const x=take(P.clim[band]||[],r=>band!=="f"||!(r.rd&&r.rd.length)||r.rd.includes(road));
   const ow=take(P.open,r=>r.after!=="lose"),ol=take(P.open,r=>r.after!=="win");
