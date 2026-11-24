@@ -1,3 +1,14 @@
+# E81r — robot10-e-fix-3 **r3 f0a5f92c** — verdict: **FAIL f0a5f92c (1 item)**
+Merge with LIVE: review/robot10-e-fix-3-r **183fb7e9** = f0a5f92c + origin/main 178cac37 (4593b922, index.html/sw.js rebuilt) + 1 reviewer test fix. Carries over everything checked on r2 below (r1 faults gone, old-save no-loss 11 724 → 11 724 usable / 6 440 → 6 440 lasting, save-size, allotment, ration = LIVE, role-parity ×2).
+## Remaining item
+1. **Law 1 — r2 item 2 is NOT addressed in r3.** S.il.stock re-issue is still NPC-only (jstip stipGoods `p!==S`), and a re-issued bottle can be part-used (stock keys aldau*.2/.4), so an NPC's monthly oil can hold fewer lượt than hers. One rule for all: her issue also draws from the stock (host-side, fullest first), or the stock re-issues only full bottles (part bottles leave another traceable way).
+## r3 delta — PASS
+- r2 item 1 (silent save writers) FIXED: one saveBlocked() in j6 used by j6 save, jcloud writeSlot (LS.set false → told), jcoopworld snapSave (refused local write told, seatPush now always runs), jcoopthine guest copy. My grep agrees with r10e-savewrite-scan: save writers 5 · silent 0 (all other setItem keys are settings / caches / co-op timers).
+- r10e-saveblocked: on f0a5f92c AND on the merge it FAILED «the notice is on screen» here 3/3 — the loaded year-14 life opens a «Bộ sưu tập» dialog and the kit holds the chip in the bell (red dot, kitNoticeList has saveBlocked) while a dialog is up; after closing it the chip shows (looked, Fold 755x1000: «Không ghi được sổ (chỗ cất trong máy bị chặn hoặc đã đầy).» in the HUD bar). Reviewer fix 183fb7e9: the test closes that dialog before looking → ALL OK.
+- quickcheck on the merge: PASS (core gates PASS, old save ok; perf new/live render 204/185, tab 420/358, buổi 1269/1274).
+- coop-e2e: not re-run on the merge — LIVE 178cac37 itself fails at week 0 (see r2 note); FIXER #3's 142/142 ×2 is on its base.
+
+---
 # E81r — BIG REVIEW robot10-e-fix-3 **r2 434a4a30** — verdict: **FAIL 434a4a30 (2 items)** (r1 faults 1+2 are gone)
 PRIORITY #1 CHECK ('ilUsedUp saveBlocked save size ilStock'): OD 0 | ledger 0 | claims FIXER #3 only | main 0 | review/* only review/robot10-e-fix-3 | archive 0.
 Merge with LIVE: review/robot10-e-fix-3-r **a9dbd78b** = 434a4a30 + origin/main 178cac37 (index.html/sw.js rebuilt; replaces the r1 merge 75ef5d60). Reviewer E81r session_01DgYSWnaebLfT2YjJ9ZWjc8.
