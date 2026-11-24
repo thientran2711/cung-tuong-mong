@@ -1503,7 +1503,7 @@ FIX promo-build-2 r1 (opus BIG; briefs/D-promo-build-2-fix.md; from de24c1ae) | 
 | ROBOT-COOP RUNNER U17 pairs 17-18 SWAP=0 | dev/handover/robot/coop-U17-* | FOREMAN E (child4) | session_01DgYSWoqhFR6eEQzbDDKqY6 | RUNNING | 24/11 11:58Z |
 | ROBOT-COOP RUNNER U18 pairs 17-18 SWAP=1 | dev/handover/robot/coop-U18-* | FOREMAN E (child4) | session_01DgYSWmpKLyR9tiAbos763w | RUNNING | 24/11 11:58Z |
 | ROBOT-COOP RUNNER U19 pair 19 only (pair 20 → U21; stopping 19:10Z after stuck repro) SWAP=0 | dev/handover/robot/coop-U19-* | FOREMAN E (child4) | session_01DgYSWohtCk2AGS5VzQrrH1 | DONE 24/11 19:20Z (box kept for B repro) | 24/11 11:58Z |
-| ROBOT-COOP RUNNER U20 pairs 19-20 SWAP=1 | dev/handover/robot/coop-U20-* | FOREMAN E (child4) | session_01DgYSWof6mK27r2oWrXX22S | RUNNING | 24/11 11:58Z |
+| ROBOT-COOP RUNNER U20 pairs 19-20 SWAP=1 | dev/handover/robot/coop-U20-* | FOREMAN E (child4) | session_01DgYSWof6mK27r2oWrXX22S | DONE 24/11 19:47Z (box kept for B repro) | 24/11 11:58Z |
 rv net-build r2 (opus BIG; briefs/D-net-build-review-r2.md; target e41f4f79) | review/net-build-rv | session_01D3E3NaeN3VTQuhYDqui8cJ | RUNNING | 24/11 12:00Z (Foreman D depth 3)
 | REVIEW robot-fix-cnv 1f046fb7 (opus BIG; briefs/F-robot-fix-cnv-review.md) | review/robot-fix-cnv(-r1); reports/robot-fix-cnv.md | F | session_01UV1Szm25UYRL53kk7urYNo | DONE PASS LAND READY 98040f4c (rolled over; -2 = fresh reviewer) | 24/11 12:24Z |
 | ROBOT FIXER cnv #2 (opus; successor; residuals R1-R3, review/robot-fix-cnv-2 on 1f046fb7) | review/robot-fix-cnv-2; reports/robot-fix-cnv.md | F | session_01UV1Szktd1kHeRCPadpEMyu | f78c695c pushed (r1+LIVE) + HANDOVER (R5-R7; successor by F) | 24/11 12:24Z |
@@ -1548,3 +1548,4 @@ ROBOT-COOP FIXER #6b (week-end stuck, fix-4) | review/robot-coop-fix-4 | session
 | SELSCENE-13 BIG REVIEW | review/selection-scene-rv | MAIN 126 | session_01V1ZZH4LZXJs8bzNZfAqCUD | RUNNING | 2026-11-24T19:41Z |
 | BIG CO-OP REVIEW robot-coop-fix-2 r3 71076b61 (opus) | review/robot-coop-fix-2-r3 | B | session_01N1tNP5GQ2J9RoWGbzfVreX | RUNNING | 24/11 19:35Z |
 | BIG CO-OP REVIEW robot-coop-fix-3 32121242 (opus) | review/robot-coop-fix-3 | B | session_01N1tNP59azvSi4P3tJ9EkLK | RUNNING | 24/11 19:35Z |
+robot10 E harness: co-op stuck-room capture (shot + dialog title + covered-button flag per seat) | review/robot10-coop-stuckcap | session_01DgYSWkYxbaSjuykrs5JW4Q (FIXER #5) | RUNNING | 24/11 19:47Z | owner FOREMAN E (child6)
