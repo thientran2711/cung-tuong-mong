@@ -50,3 +50,12 @@ Rules (to verify on a real device): pause every loop off screen (IntersectionObs
 
 ## HANDOVER
 Nothing pending except the SSK review. Files: dev/measure/robot10-lag.js, robot10-anim.js, robot10.js (3 small hooks), robot10-in.js (nbY), robot10-agg.js (1 block), dev/test/coop-lag.js, lib/coop-lag-hooks.js, lib/anim-stress.js, lib/anim-gen.py.
+
+## REVIEW (reviewer robot10-lag, 24/11)
+1. Diff vs origin/main: only dev/measure, dev/test (+ dev/handover data) and the build stamp of index.html/sw.js (rebuilt; assets.json = LIVE). No game file (dev/build/j*.js) touched. PASS.
+2. Runner contract: headers of robot10-lag.js / robot10-anim.js state inputs/outputs. Re-ran anim solo (fold css 2, 8 s): fps 6-9 at full fx, baselines 4-14, same box-bound band; robot10 nc spread (LAG=1, 48 buổi): tab p50 768 ms, act card 2.1 s, Sang ngày mới 1.8 s, Dư đồ tab 3.1-5 s (cliff), same band as the report tables. CLI report writes lag-*.md/.csv. PASS.
+3. coop-lag.js --buoi 2: PASS (turn p95 3.5 s, 0 page errors). coop-lag-hooks.js exports WSLOG/CO/latencies/resend/collect/verdict, no side effects on require. LAG=0 run: no probe data (0 acts), default path untouched. PASS.
+4. quickcheck PASS on branch merged with newest main (27240ccb): perf new/live render 255/254, tab 428/444, buổi 1285/1352, core gates PASS.
+5. Final merge of origin/main 27240ccb done (sw.js conflict: LIVE + rebuild).
+Notes (not FAIL): coop pair with figures and the real-device pause rules remain unmeasured, as the worker states.
+REVIEW PASS — LAND READY review/robot10-lag-rv 9d144cda69ed064481aa837a84729746565b5f95
