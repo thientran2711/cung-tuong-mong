@@ -79,7 +79,9 @@ function capFor(g){if(!g.cap)return;if(!g.capEl||!g.capEl.isConnected){g.capEl=d
 /* MOCK-ONLY (KIT REQUEST 24/11 RING-DESIGN-4 #7b): the live kit rail (jrail paint) keeps the inline left/flex-direction that hudSlot() wrote while the stage was hidden
    (Dư đồ tab on Fold), so back on the stage it stands on the RIGHT over the place title («N 17 viên»). The kit's own slot is left:8px (jrail CSS) — the mock clears the
    stale inline values (= the kit default slot) and the people chip counts THIS area (kitArea feed, request #7). */
-function railFix(){try{const kr=document.getElementById('krail');if(kr&&kr.parentNode===st()){kr.style.left='';kr.style.flexDirection=''}
+/* keep it so while the mock is on: the live rail re-paints on every render (MutationObserver = before the next paint, no one-frame jump) */
+let railMO=null;function railWatch(){if(railMO)return;railMO=new MutationObserver(()=>{if(window.__karOn)railFix()});railMO.observe(document.getElementById('game')||document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['style'],characterData:true})}
+function railFix(){try{railWatch();const kr=document.getElementById('krail');if(kr&&kr.parentNode===st()){kr.style.left='';kr.style.flexDirection=''}
  const a=AREAS[cur],c=document.querySelector('#krail .krailc .j59n');const tn=document.querySelector('#stage #kpname>span');if(a&&tn&&document.getElementById('kar')&&tn.textContent!=='Ngự hoa viên · '+a.n)tn.textContent='Ngự hoa viên · '+a.n;if(a&&c&&c.textContent!==String(count(a)))c.textContent=String(count(a))}catch(e){}}
 function tagsFix(){railFix();try{const a=AREAS[cur];if(!a)return;const F=figsOf(a).filter(m=>m.tg.style.display!=='none'&&m.el.style.display!=='none');
  const pr=m=>(m===selM?0:sel&&m.g===sel?1:2)*100-(m.z||0);F.sort((x,y)=>pr(x)-pr(y));const keep=[];
@@ -107,11 +109,16 @@ function mount(){css();const old=document.getElementById('kar');if(old)old.remov
  L=document.createElement('div');L.id='kar';L.className=kv();st().appendChild(L);document.documentElement.classList.add('karon');
  BG=document.createElement('div');BG.className='kar-bg';BG.style.backgroundImage=`url("${BGSRC}")`;L.appendChild(BG);D=geo();
  G.forEach(g=>{g.capEl=null;g.P.forEach(p=>mkFig(p.m))});L.addEventListener('click',()=>{if(!window.__karAuto)unsel()})}
-async function enter(i){window.__karMapOn=0;{window.__k3quiet=1;tab='act';render();try{j77Tap('vuon')}catch(e){}await wait(160);try{j77Tap('vuon')}catch(e){}await wait(60)}/* phone shell: the here-tap = the game's own «show my place» (jk3 k3ShowPlace) */railFix();if(!document.querySelector('#stage #kar'))mount();else D=geo()
+/* map → area: the area painting covers the body (between the top bar and the tabs) while the game switches tabs underneath, so no list / loading
+   picture ever flashes; it lifts away once the area stands (painting only — the people are never faded) */
+function swCover(a){const hud=document.querySelector('header.hud'),tb=document.getElementById('tabs');const t=hud?hud.getBoundingClientRect().bottom:0,b=tb?tb.getBoundingClientRect().top:innerHeight;
+ const ov=document.createElement('div');ov.id='kar-sw';ov.style.cssText=`position:fixed;left:0;right:0;top:${t}px;height:${b-t}px;z-index:9000;background:url("${BGSRC}") ${(a.x||0)*100}% 100%/cover no-repeat;pointer-events:none`;document.body.appendChild(ov);return ov}
+async function enter(i){const fromMap=!!window.__karMapOn||!document.querySelector('#stage #kar');let ov=null;if(fromMap){ov=swCover(AREAS[i]);await an(ov,[{opacity:0,transform:'scale(1.05)'},{opacity:1,transform:'none'}],{duration:240,easing:'cubic-bezier(.2,.7,.2,1)'}).finished}
+ window.__karMapOn=0;{window.__k3quiet=1;tab='act';render();try{j77Tap('vuon')}catch(e){}await wait(160);try{j77Tap('vuon')}catch(e){}await wait(60)}/* phone shell: the here-tap = the game's own «show my place» (jk3 k3ShowPlace) */railFix();if(!document.querySelector('#stage #kar'))mount();else D=geo()
  const a=AREAS[i];cur=i;stageTitle('Ngự hoa viên · '+a.n);G.forEach(g=>{g.P.forEach(p=>p.m.el.style.display='none');if(g.capEl)g.capEl.style.display='none'});bgSet(a.x);
  place(a);tagsFix();/* RING-DESIGN-4: no see-through people — the camera settles on the whole layer (painting + people together, all opaque) */
  L.style.transformOrigin='50% 92%';an(L,[{transform:'scale(1.07)'},{transform:'none'}],{duration:560,easing:'cubic-bezier(.2,.7,.2,1)'});
- a.g.forEach(g=>{if(g.capEl)an(g.capEl,[{opacity:0},{opacity:1}],{duration:260,delay:420})});await wait(700)}
+ a.g.forEach(g=>{if(g.capEl)an(g.capEl,[{opacity:0},{opacity:1}],{duration:260,delay:420})});if(ov)an(ov,[{opacity:1},{opacity:0}],{duration:300,easing:'ease-out'}).finished.then(()=>ov.remove());await wait(700)}
 async function back(){await unsel();const a=AREAS[cur];if(a){a.g.forEach(g=>g.capEl&&an(g.capEl,[{opacity:1},{opacity:0}],{duration:200}));await an(L,[{transform:'none'},{transform:'scale(1.05)'}],{duration:240,easing:'ease-in'}).finished;figsOf(a).forEach(m=>m.el.style.display='none')}return showMap()}
 /* focus: lit group / dim the rest (figures only; the painting keeps its brightness, owner 09:05Z) */
 function dimSet(m,on,ms){const to=on?0:1;const from=+getComputedStyle(m.lit).opacity;an(m.lit,[{opacity:from},{opacity:to}],{duration:ms||280,easing:'ease-out'})}
@@ -144,7 +151,7 @@ async function picker(m,kind){await closePk();const gs=pkData(m),acts=gs[0].acts
  let tx=0,ty=0;const Q2=[];const an=(el,kf,o)=>{const t=kf[kf.length-1].transform;if(t)el.style.transform=t;Q2.push([el,kf,o])};
  if(kind==='hang'){const cols=B.length>3?2:1,gx=8,cw=cols===2?Math.min((free-gx)/2,K==='kv2'?200:168):Math.min(col,K==='kv2'?240:200);const x0=f.x+f.w+6;const rows=Math.ceil(B.length/cols);const y0=Math.max(64,Math.min(f.y+f.h*(A.pkY||.44),f.y+f.h*.97-rows*(58+12)));
   B.forEach((b,i)=>{b.classList.add('kar-min');b.style.width=cw+'px';b.style.transformOrigin='50% -60px';const c=i%cols,r=(i/cols)|0;const bx=x0+c*(cw+gx),by=y0+r*(58+12);b.__x=bx;b.__y=by;
-   an(b,[{transform:`translate(${bx}px,${by-D.H*.45}px) rotate(8deg)`,opacity:0},{transform:`translate(${bx}px,${by+5}px) rotate(-5deg)`,opacity:1,offset:.55},{transform:`translate(${bx}px,${by}px) rotate(2.5deg)`,offset:.8},{transform:`translate(${bx}px,${by}px) rotate(0deg)`,opacity:1}],{duration:880,delay:i*80,easing:'ease-out'})});
+   /* unrolls DOWN from its hook (never passes over a face above it), then sways to rest */b.style.transformOrigin='50% 0';an(b,[{transform:`translate(${bx}px,${by}px) rotate(7deg) scaleY(.08)`,opacity:0},{transform:`translate(${bx}px,${by}px) rotate(-5deg) scaleY(1.03)`,opacity:1,offset:.5},{transform:`translate(${bx}px,${by}px) rotate(2.5deg) scaleY(1)`,offset:.78},{transform:`translate(${bx}px,${by}px) rotate(0deg) scaleY(1)`,opacity:1}],{duration:880,delay:i*80,easing:'ease-out'})});
   tx=x0;ty=y0-44}
  else if(kind==='fan'){const n=B.length,R=Math.min(f.h*.42,(n*bh*1.02)/1.75),top=Math.max(64,Math.min(f.y+f.h*(A.pkY||.44)-bh*.2,f.y+f.h*.97-f.h*.52-bh));const hipX=f.x+f.w*.72,hipY=f.y+f.h*.50;
   B.forEach((b,i)=>{b.style.width=col+'px';const t=n>1?i/(n-1):.5,ang=(-50+100*t)*Math.PI/180;const bx=f.x+f.w*.62+Math.cos(ang)*R*.55,by=top+(f.h*.52)*t-bh/2;b.__x=bx;b.__y=by;
@@ -174,7 +181,7 @@ async function talk(m,text){await closePk();const me=document.createElement('div
  me.__t=`translate(${x}px,${y}px)`;me.__y=y;an(me,[{transform:`translate(${D.W+20}px,${y}px)`},{transform:me.__t}],{duration:650});await wait(700);tagsFix();
  if(typeof kitMoodSay==='function'){try{const b=kitMoodSay(m.el.querySelector('img.l'),text,{hold:6000});const e=b&&b.classList?b:[...document.querySelectorAll('.kfoc-mood')].pop();if(e)e.classList.add('kar-say')}catch(e){}}return me}
 function onTap(m){if(window.__karAuto)return;if(!sel||sel!==m.g)pickGroup(m.g);else stepOut(m).then(()=>picker(m,window.__karPk||'hang'))}
-function init(o){css();cur=-1;sel=selM=null;G=o.groups;BGSRC=o.bg;fh=o.fh;AREAS=o.areas.map(a=>Object.assign({},a));G.forEach(g=>{g.masters.concat(g.fol).forEach(m=>{m.g=g})});
+function init(o){css();window.__karOn=1;railWatch();cur=-1;sel=selM=null;G=o.groups;BGSRC=o.bg;fh=o.fh;AREAS=o.areas.map(a=>Object.assign({},a));G.forEach(g=>{g.masters.concat(g.fol).forEach(m=>{m.g=g})});
  G.forEach(gw);mount();assign();
  return {D:[D.x0,D.x1,D.W,D.H].map(Math.round),fh:Math.round(fh),areas:AREAS.map(a=>({k:a.k,n:a.n,want:G.filter(g=>g.want===a.k).length,groups:a.g.map(g=>g.masters.map(m=>m.name).join('+')+(g.fol.length?' (+'+g.fol.length+')':'')+' ['+g.act+']'),people:count(a)}))}}
 return {init,showMap,enter,back,pickGroup,stepOut,picker,lift,talk,unsel,closePk,get areas(){return AREAS},get groups(){return G},get cur(){return cur},get D(){return D}}})();

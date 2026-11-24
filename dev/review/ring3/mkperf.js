@@ -1,4 +1,4 @@
-/* node mkperf.js → img/_review/ring3/kperf.html : the smoothness probe for the owner's REAL Fold / iPad (?kperf=1 runs it).
+/* node mkperf.js → img/_review/ring4/kperf.html : the smoothness probe for the owner's REAL Fold / iPad (?kperf=1 runs it).
    Same engine (area.js), same pictures (CDN), same kit button CSS (copied from jfocus/jkitsel/j9 at build time) — the game shell is not loaded,
    so it measures the area + picker MOTION itself: rAF frame time p95 per step, verdict «Mượt» when p95 ≤ 20 ms (BAL gate of the report). */
 const fs=require('fs');const B=__dirname+'/../../build/';const rd=f=>fs.readFileSync(B+f,'utf8');
@@ -28,4 +28,4 @@ async function run(){document.getElementById('go').disabled=true;const R=[];cons
 function show(R){const nm={hang:'Thẻ gỗ treo',fan:'Quạt nút',rib:'Nan quạt giấy'};document.getElementById('res').innerHTML='<table><tr><th>bước</th><th>khung chậm nhất (95%)</th><th></th></tr>'+R.map(([n,r])=>'<tr><td>'+n.replace(/^(hang|fan|rib)/,m=>nm[m])+'</td><td>'+r.p95.toFixed(1)+' ms</td><td>'+(r.p95<=20?'Mượt':r.p95<=34?'Hơi khựng':'Giật')+'</td></tr>').join('')+'</table><p>'+navigator.userAgent.replace(/[<>]/g,'')+' · '+innerWidth+'x'+innerHeight+' @'+devicePixelRatio+'</p>'}
 document.getElementById('go').onclick=run;if(/kperf=1/.test(location.search))setTimeout(run,800);
 </script></body></html>`;
-fs.mkdirSync(__dirname+'/../../../img/_review/ring3',{recursive:true});fs.writeFileSync(__dirname+'/../../../img/_review/ring3/kperf.html',html);console.log('kperf.html',html.length);
+fs.mkdirSync(__dirname+'/../../../img/_review/ring4',{recursive:true});fs.writeFileSync(__dirname+'/../../../img/_review/ring4/kperf.html',html);console.log('kperf.html',html.length);
