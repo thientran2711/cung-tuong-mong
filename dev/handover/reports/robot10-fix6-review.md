@@ -14,3 +14,9 @@ Sha verdicted: origin/review/robot10-e-fix-6 **4424f9dd** (on b69b0da6 = fix-5-r
 | (5) §17 spot-check | «Sủng ±N»: fix-2 r2 145a1f54 (robot10-in reads sgNow) + r3 0673d1a1 are in this tree → false positive, fixed. TIMEOUT shapes: (a) spyQueen lazy = this fix (proof above); (a') lesson ring = fix-2 r3 gate artPts<100 present in inpage6; (a'') Bày mưu ↔ Hạ độc/Hủy dung = fix-hadoc-loop a8004db6 is an ancestor of LIVE; r10e-schemeloop on this build: every scheme ends within ≤ 2 cards, clock moves, 0 FAIL; (a''') «Bỏ cuộc?» = kcfYes present in inpage6. None is a real game bug on LIVE. |
 
 Verdict: **PASS 4424f9dd** (rides with fix-5-r; re-merge on the newest LIVE before landing).
+
+## RE-MERGE on LIVE 502c48c9 (ORDER MAIN 126 18:22Z) — E84r, tests one at a time
+| branch | merge sha (FF from 502c48c9) | game delta vs LIVE | own suite | quickcheck | coop-e2e Fold host | COOP_SWAP=1 | verdict |
+|---|---|---|---|---|---|---|---|
+| review/robot10-e-fix-6-r (4424f9dd + LIVE; **supersedes review/robot10-e-fix-5-r**: contains 7876bf70) | **6b97260a234e8f222aef9462a667d774566afde4** | = fix-5 (j9/jhc/jkrel) | r10e-roadman ALL OK · r10e-selfloop ok · r10e-schemeloop 0 FAIL · optlabel-scan 0 open | PASS 663 s (render 224/226, tab 406/374, buổi 1086/1107) | run A 140/142 (CORS console errors from ctm-img/ctm-rank workers + 1 rejoin host-lag diff n=2) · rerun 1 **142/142** · rerun 2 141/143 (one «buổi 1:3 / week 2 advanced» timing miss) | run A 141/142 (CORS) · rerun 1 **142/142** · rerun 2 **142/142** | **PASS 6b97260a** — the misses differ every run and touch no fix-5/fix-6 path (fix-6 = harness only; coop-e2e does not load inpage6); network/timing noise, logged |
+| review/robot10-e-fix-3-r2 | **6ac29a2c2fd8155cf18d6a9f682d9412826011e4** | = reviewed | stock-full / saveblocked / oldsave-noloss ALL OK · monthly-allotment ALL PASS | PASS 635 s | 142/142 | 142/142 | **PASS 6ac29a2c** |
