@@ -670,7 +670,7 @@ Object.assign(BAL.mgTier.occ,{tuyen:[1,0]});
    lodge = the tú nữ lodging (OD 24/11 ~08:20Z FINAL: «Dưỡng Tú viện», a viện not a cung — selection-time lodging ONLY, not in PAL / seats, PAL_GONE untouched;
    x/y = its Dư đồ spot; so = its 3 sở (level 2), one room each of room.perRoom girls on beds of room.perBed; sanh = the shared Tiền sảnh where the ma ma teaches). */
 Object.assign(BAL,{selx:{intake:{min:3,max:5},yard:{n:12,perRound:4,kept:4},room:{perRoom:4,perBed:2},
- w:{sac:.15,duc:.15,tai:.1,mini:1.5,dd:.75,hx:.75,imp:.45,base:20},noise:3,placeStep:[1,0,0,-1],cap:3,npcRank:[[0,60],[1,40]],npcAge:[18,3],npcMini:{base:3,lv:1.4,r:1},hoaThan:["nc","bd","pf"],hoaThanCap:4,hoaThanSac:70,
+ w:{sac:.15,duc:.15,tai:.1,mini:1.5,dd:.75,hx:.75,imp:.45,base:20},noise:3,placeStep:[1,0,0,-1],cap:3,npcRank:[[0,60],[1,40]],npcAge:[BAL.ageMin,3],npcMini:{base:3,lv:1.4,r:1},hoaThan:["nc","bd","pf"],hoaThanCap:4,hoaThanSac:70,
  fav:{plus:3,minus:-3,mini:[[8,4],[5,2],[0,-2]]},days:3,lodge:{n:"Dưỡng Tú viện",x:.303,y:.338,so:[["dong","Đông sở"],["tay","Tây sở"],["bac","Bắc sở"]],sanh:["sanh","Tiền sảnh"]},npcMatch:{hit:8,miss:3,none:5},
  /* THE 3 DAYS (SELSCENE-4, jselxday; OD 24/11 ~07:05Z / ~08:20Z): beat = khắc of each fixed beat (gate + roll-call, rooms, dress, the yard buổi, each test, day-3 teaching;
     yardDrama = yard khắc spent before the yard drama); lesson = the Tiền sảnh drill (k = khắc of effort kỹ / vừa / qua loa; mark 0..10 = base + duc·Đức + eff·effort ± r,
