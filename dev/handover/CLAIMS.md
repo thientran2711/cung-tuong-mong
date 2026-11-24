@@ -1258,7 +1258,7 @@ robot10 PHASE 2 nc FIXER (opus; families from nc-*.md bug files; briefs/D-robot1
 | THIN P4-SEEDS-A (sonnet writer): j68 day + visit | content/thin/j68seeds_a.md | B | session_01N1tNP66J5Qrh8mxtU2pYYe | RUNNING | 24/11 01:00Z |
 | THIN P4-SEEDS-B (sonnet writer): j68 serv + emp | content/thin/j68seeds_b.md | B | session_01N1tNP3HcduKsVYM4N4fvCv | RUNNING | 24/11 01:00Z |
 | THIN P4-SEEDS-C (sonnet writer): j68 sea + court + kid | content/thin/j68seeds_c.md | B | session_01N1tNP3EtvkNhaM33ivECj2 | RUNNING | 24/11 01:00Z |
-| THIN P4-SEEDS-D (sonnet writer): j68 rumor + myst | content/thin/j68seeds_d.md | B | session_01N1tNP5Vz5mY8AXT9jcziti | RUNNING | 24/11 01:00Z |
+| THIN P4-SEEDS-D (sonnet writer): j68 rumor + myst | content/thin/j68seeds_d.md | B | session_01N1tNP5Vz5mY8AXT9jcziti | DONE 1460ea35 (rumor 42c/15o, myst 42c/14o; archived) | 24/11 01:00Z |
 REVIEW robot10-reco ORDER #6 (sonnet SMALL test-only; briefs/D-robot10-reco-review.md; also fixes harness robot10-in.js:130 child recount) of 0f00f9dc | review/robot10-reco-rv | session_01964izF7TXbcLZ2oQU5cxKC | PASS 0ced27c5 LAND READY (archived 24/11 01:10Z) | 24/11 01:01Z (Foreman D depth 3)
 | REVIEW thin-p3 r1 (opus BIG reviewer-lander; folds j72seeds_a 3a83f629 + _b fbf5d052, finishes gates) of review/thin-p3 a2242d97 | review/thin-p3-r1; reports/thin.md «## REVIEW thin-p3 r1» | B | session_01N1tNP4ot5ZwPVzESSYVbWx | RUNNING | 24/11 01:02Z |
 | THIN P5-SEEDS-A (sonnet writer): Kỳ ngộ ma+de+th ≥30 | content/thin/kyseeds_a.md | B | session_01N1tNP2b1P3uEeNeePGeDLt | RUNNING | 24/11 01:08Z |
