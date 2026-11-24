@@ -154,7 +154,7 @@ function kaNorm1(b){if(b.classList.contains("kquick"))return;/* KIT §13.6: the 
  const kinfo="";
  b.classList.add("ka");b.classList.toggle("kdis",dis);
  b.innerHTML=`<span class="kat"><span class="kan">${titleH||"&nbsp;"}</span>${odds?`<span class="kodds">${odds}</span>`:""}</span>`+(leadH?`<span class="klead">${leadH}</span>`:"")+kaBody(R,dis)+kinfo}
-function kaNorm(root){try{(root||document).querySelectorAll(KA_SEL).forEach(b=>{try{kaNorm1(b)}catch(e){console.error("kaNorm",e)}})}catch(e){}}
+function kaNorm(root){try{(root||document).querySelectorAll(KA_SEL).forEach(b=>{try{kaNorm1(b);if(typeof kitNoUnkDom==="function")kitNoUnkDom(b)}catch(e){console.error("kaNorm",e)}})}catch(e){}}
 /* disabled state can change after build: keep the class honest */
 let kaQ=false;const kaMO=new MutationObserver(ms=>{if(kaQ)return;let hit=false;for(const m of ms){if(m.type==="attributes"){const b=m.target;if(b.classList&&b.classList.contains("ka"))b.classList.toggle("kdis",b.disabled);continue}if(m.addedNodes.length){hit=true}}if(hit){kaQ=true;queueMicrotask(()=>{kaQ=false;kaNorm(document)})}});
 kaMO.observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:["disabled"]});

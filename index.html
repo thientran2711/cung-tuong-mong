@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"465d05a1+","t":"2026-11-24T19:01Z","c":"flight-ui v2: no seal above any overlay (reward/gain/scene: CSS + lean blocked), Tin báo header count = rows","b":"b0e1440f2b94","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
+window.CTM_BI={"s":"82100d6f+","t":"2026-11-24T19:08Z","c":"flight-ui v3: no ??? in prose (kitNoUnk: notice/log/dialog), one overlay at a time under an item reveal","b":"bf6ea071264d","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -4963,7 +4963,7 @@ function effList(x,def){const parts=[].concat(x).filter(Boolean).join(" · ");if
 function oddsChip(w){if(!w)return"";w=kitOddsNorm(w);/* no odds word = no roll (ODDS CAP: the ladder has no "sure" word) */const m=String(w).match(ODDW);const k=m?m[1]:w;const lv=KIT_ODDS.indexOf(kitOddsCanon(k))<0?undefined:KIT_ODDS.indexOf(kitOddsCanon(k));const rest=String(w).replace(k,"").replace(/^\s*·\s*/,"");
  return `<span class="oc oc${lv==null?2:lv}">${k}</span>${rest?`<span class="ef ${/khó hơn/.test(rest)?"r":/dễ hơn/.test(rest)?"g":"n"}">${rest}</span>`:""}`}
 /* parse a 'word · tốn: … · thành: … · hỏng: … · note' line into kit HTML */
-function kitParse(str){str=String(str||"").trim();if(!str)return"";const segs=str.split(/ · (?![^<]*>)/);let odds="",out=[];let cur=null;
+function kitParse(str){str=String(str||"").trim();if(typeof kitNoUnk==="function")str=kitNoUnk(str);if(!str)return"";const segs=str.split(/ · (?![^<]*>)/);let odds="",out=[];let cur=null;
  for(let s of segs){const plain=s.replace(/<[^>]+>/g,"").trim();const mo=plain.match(new RegExp("^("+KIT_ODDS_ALT+")(?=$|\\s|·)"));
   if(!odds&&mo&&plain.length<=mo[1].length+2){odds=mo[1];continue}
   if(/^Quẻ: /.test(plain)&&odds){odds+=" · "+plain;continue}
@@ -29033,7 +29033,7 @@ function kaNorm1(b){if(b.classList.contains("kquick"))return;/* KIT §13.6: the 
  const kinfo="";
  b.classList.add("ka");b.classList.toggle("kdis",dis);
  b.innerHTML=`<span class="kat"><span class="kan">${titleH||"&nbsp;"}</span>${odds?`<span class="kodds">${odds}</span>`:""}</span>`+(leadH?`<span class="klead">${leadH}</span>`:"")+kaBody(R,dis)+kinfo}
-function kaNorm(root){try{(root||document).querySelectorAll(KA_SEL).forEach(b=>{try{kaNorm1(b)}catch(e){console.error("kaNorm",e)}})}catch(e){}}
+function kaNorm(root){try{(root||document).querySelectorAll(KA_SEL).forEach(b=>{try{kaNorm1(b);if(typeof kitNoUnkDom==="function")kitNoUnkDom(b)}catch(e){console.error("kaNorm",e)}})}catch(e){}}
 /* disabled state can change after build: keep the class honest */
 let kaQ=false;const kaMO=new MutationObserver(ms=>{if(kaQ)return;let hit=false;for(const m of ms){if(m.type==="attributes"){const b=m.target;if(b.classList&&b.classList.contains("ka"))b.classList.toggle("kdis",b.disabled);continue}if(m.addedNodes.length){hit=true}}if(hit){kaQ=true;queueMicrotask(()=>{kaQ=false;kaNorm(document)})}});
 kaMO.observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:["disabled"]});
@@ -30193,7 +30193,7 @@ function kitGameResult(r){r=r||{};const rows=[];
 `;document.head.appendChild(st)})();
 
 /* a "; " inside a price line joins two different values (a gain and a risk): split them so each lands in its own row and colour */
-(function(){if(typeof kitParse!=="function")return;const k0=kitParse;kitParse=function(str){let s=String(str==null?"":str);if(!/class="kb/.test(s))s=s.split(/(<[^>]+>)/).map(x=>x&&x[0]==="<"?x:x.replace(/;\s+/g," · ")).join("");return k0.call(this,s)}})();
+(function(){if(typeof kitParse!=="function")return;const k0=kitParse;kitParse=function(str){let s=String(str==null?"":str);if(typeof kitNoUnk==="function")s=kitNoUnk(s);if(!/class="kb/.test(s))s=s.split(/(<[^>]+>)/).map(x=>x&&x[0]==="<"?x:x.replace(/;\s+/g," · ")).join("");return k0.call(this,s)}})();
 /* words that read as a gain / a risk for her even without a number */
 (function(){if(typeof kcls!=="function")return;const k0=kcls;kcls=function(t){const s=String(t==null?"":t).replace(/<[^>]+>/g,"").trim();
  if(/(có thể |dễ )?(bị )?(lật tẩy|phát giác|bị lộ|bị bắt|bị phạt|bị nghi)/i.test(s)&&!/\+\s?\d/.test(s))return"r";if(/^(dễ được|được (thăm|ban|thưởng|sủng|để ý|gặp|mời))/i.test(s))return"g";return k0.apply(this,arguments)}})();
@@ -93049,8 +93049,10 @@ const hudEl=()=>{const h=document.querySelector("header.hud");return h&&h.getCli
 const unread=()=>NT.list.filter(x=>!x.seen);
 /* ---------- entry point ---------- */
 /* owner rule (VANPHONG §3): «???» NEVER prints in prose (news / notices / log / dialog text). An unnamed person is «một vị <phẩm> chưa quen biết» (the k61Mask plain wording); a bare «???» = «một người chưa quen biết». ONE function, used by kitNotice, the log and every dialog text (owner flight bug 24/11) */
-function kitNoUnk(s){if(typeof s!=="string"||s.indexOf("???")<0)return s;return s.replace(/(Hoàng quý phi|Hoàng hậu|Thái hậu|Tổng quản thái giám|Thái giám|Quý phi|Quý nhân|Thường tại|Đáp ứng|Thị vệ|Thái y|Vương gia|Nhạc sư|Sứ thần|Họa sư|Phi|Tần)\s+\?\?\?/g,(m,r)=>`một vị ${r} chưa quen biết`).replace(/\?\?\?/g,"một người chưa quen biết").replace(/^(<[^>]+>)*một /,m=>m.slice(0,-4)+"Một ")}
+function kitNoUnk(s){if(typeof s!=="string"||s.indexOf("???")<0)return s;return s.replace(/(Hoàng quý phi|Hoàng hậu|Thái hậu|Tổng quản thái giám|Thái giám|Quý phi|Quý nhân|Thường tại|Đáp ứng|Thị vệ|Thái y|Vương gia|Nhạc sư|Sứ thần|Họa sư|Phi|Tần|cung nữ|thái giám|thị nữ|tì nữ|nô tì)\s+\?\?\?/g,(m,r)=>`một vị ${r} chưa quen biết`).replace(/\?\?\?/g,"một người chưa quen biết").replace(/^(<[^>]+>)*một /,m=>m.slice(0,-4)+"Một ")}
 window.kitNoUnk=kitNoUnk;
+/* option / act cards (kaNorm1, j63) + the card detail parser (kitParse, j19): prose text nodes lose «???» too; the stranger NAME chips (.kname / .kti / name tags) keep the j61 mask (owner flight bug 24/11, law 11) */
+window.kitNoUnkDom=function(root){try{if(!root||root.textContent.indexOf("???")<0)return;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const L=[];let n;while(n=w.nextNode()){if(n.nodeValue.indexOf("???")>=0&&!(n.parentElement&&n.parentElement.closest(".kname,.kti,.krname,.kptag,.ktag,.kan,.kpname,.kprank,.kname2")))L.push(n)}L.forEach(t=>{t.nodeValue=kitNoUnk(t.nodeValue)})}catch(e){}};
 function kitNotice(spec){try{if(spec==null)return null;if(typeof spec!=="object")spec={line:String(spec)};if(spec.line)spec.line=kitNoUnk(spec.line);if(spec.text)spec.text=kitNoUnk(spec.text);if(Array.isArray(spec.items))spec.items=spec.items.map(kitNoUnk);
  let line=plain(spec.line||spec.text||"");if(!line)return null;try{if(typeof kShort==="function")line=kShort(line)}catch(e){}
  const id=String(spec.id||line);const text=plain(spec.text||line);NT.log.push(line);
@@ -97910,7 +97912,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b0e1440f2b94";window.CTM_BUILD=BUILD;
+const BUILD="bf6ea071264d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
