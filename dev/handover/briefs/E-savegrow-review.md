@@ -1,0 +1,9 @@
+PRIORITY #1 CHECK ('save-growth review'): OD 0 | ledger 0 | claims 0 | main 0 | review/* review/save-growth e573b9b8 (the branch under review) | claims save-growth worker session_01DgYSWn2jD6dN6G4v5qkFaf (DONE). Decision source: FOREMAN_E_STATUS.md «ORDER FROM MAIN 125 (17:35Z 24/11) … ANSWERS: save growth → adopt (d) compressed slot + (b) BAL tune».
+# SAVE-GROWTH BIG REVIEW (opus) — FOREMAN E session_01DgYSWpTu6tW58mKfdGvGQB (child7; or the newest Foreman E in the FOREMAN_E_STATUS.md tail)
+Read first: dev/rules/START_CORE.md (★ 18 LAWS) + START_WORKER.md + START_REVIEWER.md + dev/handover/briefs/E-common.md + the worker brief briefs/E-savegrow.md + its report reports/save-growth.md (handover branch claude/cung-tuong-mong-handover-hj0h8w).
+REVIEW review/save-growth e573b9b8 (base review/robot10-e-fix-3-r2 6ac29a2c, which is FF from LIVE 502c48c9). BIG tier (save format + BAL):
+1. Codec j6 slotEnc/slotDec «CTMZ»: sync-safe; every reader of the big stores goes through it (git grep every localStorage/slot read & write — none bypasses); old plain-JSON saves load; corrupt / truncated slot fails safe (no data wipe); cloud/export/hash stay plain JSON as claimed; co-op week + guest copies.
+2. Re-run yourself: quickcheck, savegrow-codec/slot tests, old-save load (≥3 old saves incl. y14), cloud-save (compare 53/55 against base 6ac29a2c — the 2 FAIL must be pre-existing), coop-e2e Fold host + COOP_SWAP=1.
+3. BAL.ration.npc.use 3→4: one core (no typed number elsewhere), law 2/3 not broken, stock table believable.
+4. Nothing capped/dropped (law 6c). OPEN items (a)/(c)/husk boxes stay listed as OPEN.
+VERDICT: PASS/FAIL e573b9b8 in reports/save-growth-review.md + STATUS line + send_message to Foreman E. On PASS: merge with the newest LIVE only when Foreman E / LC12 orders «RE-MERGE save-growth ON <sha>» (branch holds fix-3-r2, which must land first or together). ROLLOVER at START_CTX + 25 % (ceiling 60 %): handover in report, tell Foreman E, stop.
