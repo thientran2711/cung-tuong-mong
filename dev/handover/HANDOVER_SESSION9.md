@@ -2944,3 +2944,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - FROM LC10 (07:42Z): LANDED thin-p6 fd85907a (all play + quickcheck + coop PASS). LIVE = fd85907a. Next: kit chain framefit → … → dialogue-vn, robot10-coop, parking-rank, coop-thin-g.
 - (08:20Z) OWNER ~08:40Z real: no-prewarn scope = only post-tap «choose again» confirms (KK18 part A only; part B/system/world warnings KEEP; OD ~08:08Z row overwritten in place). Never ask character-image matters until she orders character art. AI key: none found on either environment or repo → told her.
 - (08:25Z) KIT READY kit-noprewarn 1d4fc04d → B SMALL review. RING-DESIGN r1 READY (img/_review/ring/ring.html: selection ring A/B/C drama signals; MAIN looked at A-alert + C-open both devices: clean, readable) → r2 (G/S/Ngự Hoa Viên/followers/auto-turn) ordered; show sếp r1+r2 together.
+- (08:30Z) OWNER: AI API key → tomorrow 25/11; offer secure form in the morning.
