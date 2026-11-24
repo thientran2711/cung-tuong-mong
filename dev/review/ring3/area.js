@@ -23,7 +23,7 @@ html.karon .kfoc-mood:not(.kar-say){display:none!important}
 #kar .kar-bg{position:absolute;left:0;top:0;background-size:100% 100%;will-change:transform;z-index:0}
 #kar .kar-f{position:absolute;left:0;top:0;transform-origin:50% 100%;will-change:transform,opacity;cursor:pointer;contain:layout}
 #kar .kar-f img{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
-#kar .kar-f img.d{filter:brightness(.52) saturate(.55)}#kar .kar-f img.l{will-change:opacity}
+
 #kar .kar-tag{position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:2px;z-index:2}
 #kar .kar-cap{position:absolute;transform:translate(-50%,-100%);white-space:nowrap;z-index:40;pointer-events:none}
 #kar .kar-cap .kchip{font-size:14px;padding:4px 11px;box-shadow:0 2px 8px #0005}
@@ -41,7 +41,7 @@ html body .game .mapv.kpmv.kside.kleather.kar-map>.mapsc>.mapw,html body .game .
 function btn(a){const sub=[a.word,a.ton?('Tốn '+a.ton):''].filter(Boolean);const pic=a.pic&&/^(https?:|img\/|data:)/.test(a.pic)?`<img class="kfoc-pic" alt="" src="${esc(a.pic)}" draggable="false">`:`<span class="kfoc-pic kfoc-ph"></span>`;
  return `<button type="button" class="kfoc-b${a.off?' kfoc-off kitoff':''}" data-id="${esc(a.id)}">${pic}<span class="kfoc-t"><b>${esc(a.n)}</b>${sub.length?`<small>${sub.map(x=>`<span>${esc(x)}</span>`).join(' · ')}</small>`:''}</span></button>`}
 function mkFig(m){const e=document.createElement('div');e.className='kar-f tok fig';const src=m.src;
- e.innerHTML=`<img class="d" alt="" src="${esc(src)}"><img class="l" alt="" src="${esc(src)}"><span class="kar-tag kscn-tag">${m.tag||''}</span>`;
+ e.innerHTML=`<img class="l" alt="" src="${esc(src)}"><span class="kar-tag kscn-tag">${m.tag||''}</span>`;
  m.el=e;m.lit=e.querySelector('img.l');m.tg=e.querySelector('.kar-tag');m.tg.style.setProperty('--tc',m.tc||'');m.tg.style.display='none';e.style.display='none';
  e.addEventListener('click',ev=>{ev.stopPropagation();onTap(m)});L.appendChild(e);return e}
 /* group shapes, in figure-width units: master(s) front, followers behind both shoulders (owner ~07:58Z) */
@@ -121,30 +121,35 @@ async function enter(i){const fromMap=!!window.__karMapOn||!document.querySelect
  a.g.forEach(g=>{if(g.capEl)an(g.capEl,[{opacity:0},{opacity:1}],{duration:260,delay:420})});if(ov)an(ov,[{opacity:1},{opacity:0}],{duration:300,easing:'ease-out'}).finished.then(()=>ov.remove());await wait(700)}
 async function back(){await unsel();const a=AREAS[cur];if(a){a.g.forEach(g=>g.capEl&&an(g.capEl,[{opacity:1},{opacity:0}],{duration:200}));await an(L,[{transform:'none'},{transform:'scale(1.05)'}],{duration:240,easing:'ease-in'}).finished;figsOf(a).forEach(m=>m.el.style.display='none')}return showMap()}
 /* focus: lit group / dim the rest (figures only; the painting keeps its brightness, owner 09:05Z) */
-function dimSet(m,on,ms){const to=on?0:1;const from=+getComputedStyle(m.lit).opacity;an(m.lit,[{opacity:from},{opacity:to}],{duration:ms||280,easing:'ease-out'})}
+/* focus = the ONE kit dim (KIT §98.3 kitDim: opaque figure-only copy with a static filter, BAL.kdim) on every figure outside the chosen group */
+function dimOthers(g){const a=AREAS[cur];if(!a||typeof kitDim==='undefined')return;kitDim.on(a.g.filter(x=>x!==g).flatMap(x=>x.P.map(p=>p.m.el)))}
 async function pickGroup(g){if(sel===g)return;await unsel(true);sel=g;const a=AREAS[cur];
- a.g.forEach(x=>{x.P.forEach(p=>{dimSet(p.m,x!==g);p.m.tg.style.display=p.z===3?'block':'none'});if(x.capEl)an(x.capEl,[{opacity:+getComputedStyle(x.capEl).opacity},{opacity:x===g?1:.35}],{duration:280})});
+ dimOthers(g);a.g.forEach(x=>{x.P.forEach(p=>{p.m.tg.style.display=p.z===3?'block':'none'});if(x.capEl)an(x.capEl,[{opacity:+getComputedStyle(x.capEl).opacity},{opacity:x===g?1:.35}],{duration:280})});
  g.P.forEach(p=>an(p.m.tg,[{opacity:0,transform:'translate(-50%,6px)'},{opacity:1,transform:'translate(-50%,0)'}],{duration:260}));tagsFix()}
 async function unsel(keepGroup){await closePk();if(window.__karMeEl){const me=window.__karMeEl;window.__karMeEl=null;an(me,[{transform:me.__t},{transform:`translate(${D.W+20}px,${me.__y}px)`}],{duration:260,easing:'ease-in'});setTimeout(()=>me.remove(),280)}
  document.querySelectorAll('.kmsay,.kfoc-say,.kfoc-mood,[class*=moodsay]').forEach(e=>e.remove());const a=AREAS[cur];if(!a)return;
  if(selM){const m=selM;selM=null;an(m.el,[{transform:m.el.__t2||m.el.__t},{transform:m.el.__t}],{duration:420});sel&&sel.P.forEach(p=>{if(p.m!==m)an(p.m.el,[{transform:p.m.el.__t3||p.m.el.__t},{transform:p.m.el.__t}],{duration:360})});m.el.style.zIndex=10+m.z;await wait(430)}
- if(!keepGroup&&sel){a.g.forEach(x=>{x.P.forEach(p=>{dimSet(p.m,false);p.m.tg.style.display=p.z===3?'block':'none'});if(x.capEl)an(x.capEl,[{opacity:+getComputedStyle(x.capEl).opacity},{opacity:1}],{duration:250})});sel=null}}
+ if(!keepGroup&&sel){try{kitDim.off()}catch(e){}a.g.forEach(x=>{x.P.forEach(p=>{p.m.tg.style.display=p.z===3?'block':'none'});if(x.capEl)an(x.capEl,[{opacity:+getComputedStyle(x.capEl).opacity},{opacity:1}],{duration:250})});sel=null}}
 /* step out: she walks toward the player to the talk spot on the LEFT (speaker-left rule, owner 04:35Z); her group steps back */
 async function stepOut(m){const g=m.g;if(sel!==g)await pickGroup(g);if(selM===m)return;if(selM)await unsel(true);selM=m;
  const k=A.stepK||1.12;const tcx=D.x0+(D.x1-D.x0)*(kv()==='kv2'?(A.spot&&A.spot.kv2||.30):(A.spot&&A.spot.kv1||.24));const tx=Math.max(D.x0+4,tcx-m.w*k/2),ty=Math.min(D.H-m.h*k-52,m.y+(A.stepY||.045)*D.H);
  const to=`translate(${tx+(m.w*(k-1))/2}px,${ty+m.h*(k-1)}px) scale(${k})`;m.el.__t2=to;m.el.style.zIndex=30;
- dimSet(m,false,200);AREAS[cur].g.forEach(x=>x.capEl&&an(x.capEl,[{opacity:+getComputedStyle(x.capEl).opacity},{opacity:0}],{duration:200}));AREAS[cur].g.forEach(x=>{if(x!==g)x.P.forEach(p=>{dimSet(p.m,true,300);p.m.tg.style.display='none'})});g.P.forEach(p=>{if(p.m!==m)p.m.tg.style.display='none'});
+ AREAS[cur].g.forEach(x=>x.capEl&&an(x.capEl,[{opacity:+getComputedStyle(x.capEl).opacity},{opacity:0}],{duration:200}));AREAS[cur].g.forEach(x=>{if(x!==g)x.P.forEach(p=>{p.m.tg.style.display='none'})});g.P.forEach(p=>{if(p.m!==m)p.m.tg.style.display='none'});
  const mid=`translate(${(m.x+tx)/2}px,${(m.y+ty)/2-8}px) scale(${(1+k)/2})`;an(m.el,[{transform:m.el.__t},{transform:mid,offset:.5},{transform:to}],{duration:A.walkMs||700});
- g.P.forEach(p=>{if(p.m===m)return;const q=p.m,t3=`translate(${q.x}px,${q.y-.02*D.H}px) scale(.95)`;q.el.__t3=t3;an(q.el,[{transform:q.el.__t},{transform:t3}],{duration:520});dimSet(q,true,420)});
+ g.P.forEach((p,j)=>{if(p.m===m)return;const q=p.m;/* her followers / companions follow her and stand behind her LEFT shoulder (owner ~07:58Z: behind the master), so her free right side stays empty for the plaques */const bx=Math.max(D.x0-q.w*.25,tx+(m.w*k)*.5-q.w*(.95+.18*j)),by=ty+m.h*k-q.h*.95-.02*D.H;const t3=`translate(${bx}px,${by}px) scale(.95)`;q.el.style.zIndex=29;q.el.__t3=t3;an(q.el,[{transform:q.el.__t},{transform:t3}],{duration:520})});
  await wait((A.walkMs||700)+40);m.fx={x:tx,y:ty,w:m.w*k,h:m.h*k};m.tg.style.display='block';tagsFix()}
 /* ===== the person-interaction picker — the 3 the owner named (15:40Z); all = kit .kfoc-b buttons + kit .pctabs; no frame, no card, never over a face =====
    'hang' THẺ GỖ TREO (her favourite): compact plaques drop from above beside her and sway to rest; tap = it lifts + its line shows; tap again = choose.
    'fan'  QUẠT NÚT: full kit buttons slide out from her hip along an arc, upright, all info at once.
    'rib'  NAN QUẠT GIẤY: the buttons are the ribs of a paper fan pinned at her hand: closed (stacked) → the fan OPENS (each rib turns about the pin);
           tap = that rib swings level and slides out with its line; tap again = choose. */
-async function closePk(){if(!PK)return;const p=PK;PK=null;const B=[...p.querySelectorAll('.kfoc-b,.pctabs')];B.forEach(b=>an(b,[{opacity:1},{opacity:0}],{duration:160}));await wait(170);p.remove()}
+async function closePk(){if(KP){const k=KP;KP=null;try{k.close()}catch(e){}await wait(190)}if(!PK)return;const p=PK;PK=null;const B=[...p.querySelectorAll('.kfoc-b,.pctabs')];B.forEach(b=>an(b,[{opacity:1},{opacity:0}],{duration:160}));await wait(170);p.remove()}
 function pkData(m){const q=a=>!/\?\?\?/.test((a.n||'')+' '+(a.word||''));const g=(m.acts&&m.acts.length?m.acts:[{k:'gt',n:'Giao thiệp',acts:[{id:'a',n:'Chào hỏi'},{id:'b',n:'Trò chuyện'}]}]);return g.map(x=>Object.assign({},x,{acts:(x.acts||[]).filter(q)})).filter(x=>x.acts.length)}
-async function picker(m,kind){await closePk();const gs=pkData(m),acts=gs[0].acts.slice(0,A.pkMax||6),f=m.fx,K=kv();const bh=K==='kv2'?72:64,free=D.x1-(f.x+f.w)-10,col=Math.min(K==='kv2'?300:236,free);
+/* 'hang' THẺ GỖ TREO = the kit part itself (KIT §98.1 kitPick, wood skin; KK21 review/kit-woodskin) — no mock copy */
+let KP=null;
+async function picker(m,kind){await closePk();if(kind==='hang'&&window.kitPick){const gs=pkData(m);const others=[...L.querySelectorAll('.kar-f')].filter(e=>e!==m.el&&e.style.display!=='none').map(e=>kitPick.rect(e,L));
+  KP=kitPick.open({host:L,anchor:kitPick.rect(m.el,L),avoid:others,side:'r'/* she stepped out to the left talk spot (speaker-left rule): her free side is the right */,groups:gs,dismiss:false,onPick:id=>{L.dispatchEvent(new CustomEvent('karpick',{detail:id}))}});await wait(900+Math.min(6,(gs[0]||{acts:[]}).acts.length)*80);return [...L.querySelectorAll('.kpk .kfoc-b')]}
+ const gs=pkData(m),acts=gs[0].acts.slice(0,A.pkMax||6),f=m.fx,K=kv();const bh=K==='kv2'?72:64,free=D.x1-(f.x+f.w)-10,col=Math.min(K==='kv2'?300:236,free);
  const p=document.createElement('div');p.className='kar-pk';p.style.cssText='left:0;top:0;width:100%;height:100%;pointer-events:none';L.appendChild(p);PK=p;p.dataset.kind=kind;
  const tb=document.createElement('div');tb.className='pctabs';tb.innerHTML=gs.slice(0,3).map((g,i)=>`<button type="button" class="pct${i?'':' on sel'}">${esc(g.n)}</button>`).join('');tb.style.pointerEvents='auto';p.appendChild(tb);
  const ease='cubic-bezier(.2,.8,.25,1.15)';const B=[];acts.forEach(a=>{const w=document.createElement('div');w.innerHTML=btn(a);const b=w.firstChild;b.style.pointerEvents='auto';p.appendChild(b);B.push(b)});
@@ -170,7 +175,7 @@ async function picker(m,kind){await closePk();const gs=pkData(m),acts=gs[0].acts
   const maxB=Math.max(...pr.map(q=>q.bottom));dy=Math.min(dy,Math.max(0,sr.bottom-6-maxB));if(dy>0)p.style.transform=`translateY(${dy.toFixed(1)}px)`}
  Q2.forEach(x=>window.__karAn(...x));
  B.forEach(b=>b.addEventListener('click',ev=>{ev.stopPropagation();lift(b,kind)}));await wait(kind==='hang'?900+B.length*80:800);return B}
-function lift(b,kind){const p=PK;if(!p)return;if(b.classList.contains('kar-up')){b.dispatchEvent(new CustomEvent('karpick',{bubbles:true}));return}
+function lift(b,kind){if(KP){const n=b.closest('.kpk-n');const id=n?n.dataset.id:b.dataset.id;KP.lift(id);return}const p=PK;if(!p)return;if(b.classList.contains('kar-up')){b.dispatchEvent(new CustomEvent('karpick',{bubbles:true}));return}
  p.querySelectorAll('.kar-up').forEach(x=>{x.classList.remove('kar-up');if(kind==='rib'){x.style.zIndex=x.__z||'';an(x,[{transform:`translate(${x.__x}px,${x.__y}px) rotate(${x.__ang}deg)`}],{duration:220})}else if(kind==='hang')an(x,[{transform:`translate(${x.__x}px,${x.__y}px)`}],{duration:200})});
  b.classList.add('kar-up');
  if(kind==='hang')an(b,[{transform:`translate(${b.__x}px,${b.__y}px)`},{transform:`translate(${b.__x}px,${b.__y-10}px) scale(1.04)`}],{duration:220});
