@@ -90,7 +90,10 @@ const SCRX=()=>{const W=window.COOPW||{},n=document.getElementById('next')||{},f
   waiting:f(()=>W.isWaiting&&W.isWaiting()),frozen:f(()=>W.isFrozen&&W.isFrozen()),hold:W.hold,base:!!W.base,inLife:W.inLife,lvWas:W.lvWas,
   nrdy:W.nrdy,ngo:W.ngo,ngoW:W.ngoW,nfr:W.nfr,nforce:W.nforce,wantB:W.wantB,whereKey:W.whereKey,rweek:W.rweek,rbuoi:W.rbuoi,wkIn:W.wkIn,
   coop:f(()=>({week:COOP.state.week,buoi:COOP.state.buoi,ended:COOP.state.ended,bended:COOP.state.bended,seats:COOP.state.seats,status:COOP.state.status,seat:COOP.seat})),
-  modal:f(()=>{const m=document.getElementById('modal');return m&&!m.hidden?m.innerText.slice(0,300):''}),tr:(W.tr||[]).slice(-150)}};
+  modal:f(()=>{const m=document.getElementById('modal');return m&&!m.hidden?m.innerText.slice(0,300):''}),tr:(W.tr||[]).slice(-150),
+  /* the night choice (jnf, cause-3 lead FIXER #7: a solo load of the stuck save ends the week, the room does not): S.nfX + its day keys, the flip scene, a steal game busy */
+  nf:f(()=>({x:S.nfX?JSON.parse(JSON.stringify(S.nfX)):null,day:typeof day==='function'?day():null,nfC:S.nfC,nfN:S.nfN,nfFin:S.nfFin,nfW:S.nfW,tonight:S.tonight==='me'?'me':(S.tonight&&(S.tonight.id!=null?S.tonight.id:S.tonight.name))||null,
+   scene:!!document.querySelector('.kmov.kcf:not(.km-out)'),mgBusy:typeof window.stealMgBusy==='function'?!!window.stealMgBusy():null,nfch:Q.some(m=>m&&m.pid==='nfch'),fr:(rivals||[]).some(v=>v&&v.coop)}))}};
 /* save round-trip in a solo scratch page: load her save (deser), save again, the two must match (fields the load only fills in are fine) */
 const RT=s=>{const J=x=>String(JSON.stringify(x));function dp(a,b,p){if(a===b||a===undefined)return null;
   if(typeof a==='string'&&typeof b==='string'){let i=0;while(i<a.length&&a[i]===b[i])i++;return p+' (text differs at char '+i+'): «…'+a.slice(Math.max(0,i-30),i+40)+'» → «…'+b.slice(Math.max(0,i-30),i+40)+'»'}
