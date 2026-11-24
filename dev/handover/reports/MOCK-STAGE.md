@@ -1,3 +1,15 @@
+# MOCK-STAGE v3.2 — DONE (KIT KEEPER #14 · session_01Rc5AsLWeZHGsdxAetnF6CY · for MAIN 114) — 24/11 ~00:20Z
+PRIORITY #1 CHECK: OD 23/11 ~23:50Z (owner toilette layout, verbatim) | main jtoil toilOpen / toilMakeup (real grid + canvas reused) | review/mock-stage @eea1bd93 → 4f978cdd | claims KK14 row.
+PAGE (same link, fetch-verified: 200 text/html, 110 refs all 200): https://ctm-img.victoria-tntt.workers.dev/img/_review/mock-stage.html — section «Phòng trang điểm (bản sửa 3.2)»; only that tab changed.
+- (1) room hub: her figure stands RIGHT (iPad empty floor right of the mirror; Fold right part of the unchanged frame), table + mirror left/centre, still outlined + tappable.
+- (2) ONE person scale on both devices in room units (iPad reference 341 u at feet 495, floor perspective), never clipped → Fold figure ~23 % smaller than v3.1.
+- (3) «Thay xiêm y»: figure stays in the RIGHT frame, real toilette picker LEFT; item cells enlarged (112/92 px) + empty slots fill the picker (no big empty area).
+- (4) «Điểm trang»: only the face-in-mirror makeup canvas, centred big; no full-body figure. Final look: she stays at her spot.
+- Note: the v3.1 page had lost the M3 stills (placeholder text); v3.2 restores all M3 stills (t1–t3, f1–f8) + both flow mp4s (20.5 s each; frames looked at).
+- Kit: KIT.md §94 DRAFT «TOILETTE ROOM HUB layout» on review/kit-toilroom @fc3a7000 (layout rule for the builder; code when the room build is ordered).
+- Wipe after her verdict: `python3 dev/site/cdn_sync.py --wipe-review mock-stage` + delete img/_review/mock-stage.html.
+
+---
 # MOCK-STAGE v3.1 — DONE (KIT KEEPER #13 · session_01Rc5AsMPKKF3gPRDRKmFPRD · for MAIN 113) — 23/11 ~23:40Z
 START_CTX ~4 % (own estimate of a 1M window; get_session reads 0).
 PRIORITY #1 CHECK: OD L2207–L2211 verbatim | main none (mock only; base build = origin/main 225c5c08) | review/mock-stage @c2adca45 → eea1bd93 (continued) | claims KK13 row.
