@@ -515,3 +515,6 @@ DONE 8eda1fbb j70seeds_b.md 38 routes: frame 5 plant 5 bribe 4 block 4 rumor 4 a
 
 ## P6-SEEDS-B
 - DONE c3e1d23 wseeds_b.md: 51 seeds = 3 per kind x 17 kinds (day lap hau thb thi vuong ret trung vuco cam trom phong hon ngoai phat benh tinh); 36 with object, tiers s17 m25 l9, tag D35 K16; self-check (stance sums, words, placeholders, scopes) 0 errors; validator pending (not on remote yet).
+
+## P6-SEEDS-A
+DONE 82e8aa4e wseeds_a.md 40 seeds: tang 4 away 4 tuyen 4 hoa 4 dis 4 dich 4 su 4 tho 4 sao 4 xa 4 (25 with real object; K 10 / D 30; tiers s/m/l mixed) validator pending (own check: sums, no digits/odds/modern words, >=2 scopes per kind)
