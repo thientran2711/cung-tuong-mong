@@ -80,6 +80,11 @@ const isOpen={A1:`__T.ovOpen()`,A2:`__T.ovOpen()`,A3:`!!document.querySelector('
    if(OUT&&Sx==='S1'&&(A==='A1'||A==='A4'))await p.screenshot({path:`${OUT}/${tag}-${A}-after.png`});
    await p.evaluate(()=>__T.answer());await sleep(400);
    if(r.bad.length)fail++;rows.push(r)}
+  /* R (DAYQ-3, quickcheck dialog-fixed 3-dai-ket-cuc): a card held under a kit scene, then kmReset() removes the scene (new life / loaded slot /
+     a harness settle) -> the held card is painted (the reset used to kill the repaint tick: card hidden in Q for ever, the turn never came) */
+  {const r={vp:tag,A:'A3',S:'S4+kmReset',bad:[]};await p.evaluate(()=>__T.clean());await sleep(500);r.act=await p.evaluate(OPEN.A3);await sleep(500);r.src=await p.evaluate(()=>__T.src('S4'));
+   await sleep(600);if(await p.evaluate(()=>__T.card()))r.bad.push('card painted under the scene');await p.evaluate(()=>{kmReset();document.querySelectorAll('.kmov,#kmrew').forEach(e=>e.remove())});
+   await sleep(1500);if(!await p.evaluate(()=>__T.card()))r.bad.push('held card not shown after kmReset');await p.evaluate(()=>__T.answer());if(r.bad.length)fail++;rows.push(r)}
   if(pe.length){fail++;rows.push({vp:tag,pageErrors:pe})}
   await c.close()}
  for(const r of rows)console.log(r.pageErrors?`${r.vp} PAGE ERRORS ${JSON.stringify(r.pageErrors)}`:`${r.vp} ${r.A}×${r.S} ${r.skip?'SKIP '+r.skip:(r.bad.length?'FAIL '+r.bad.join('; '):'ok')}  [${r.act||''} · ${r.src||''}]`);
