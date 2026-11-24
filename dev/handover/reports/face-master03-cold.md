@@ -89,3 +89,10 @@ QC notes: all 60 outputs generated once (no retries) and each viewed at 512px. N
 
 ## STATUS
 DONE 60/60 jobs (ages 16/26/51/63, 15 people). 57 DONE, 3 NEEDS_REVIEW. Cost 60 x 135 = 8,100 cr. Contact sheets: see section below if present.
+
+## Contact sheets (original | result, 3 pairs per row; original = head band of the source figure, result = centre crop)
+- age 16: https://ctm-img.victoria-tntt.workers.dev/img/_review/face-master03/cold/cold-age16.jpg
+- age 26: https://ctm-img.victoria-tntt.workers.dev/img/_review/face-master03/cold/cold-age26.jpg
+- age 51: https://ctm-img.victoria-tntt.workers.dev/img/_review/face-master03/cold/cold-age51.jpg
+- age 63: https://ctm-img.victoria-tntt.workers.dev/img/_review/face-master03/cold/cold-age63.jpg
+Uploaded with dev/site/cdn_sync.py (review folder; verdict giver wipes with --wipe-review face-master03/cold... topic path). Looked at the age-26 sheet: hairstyles and faces track the sources.
