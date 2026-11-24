@@ -1309,3 +1309,30 @@ Lives/hour is the same (CAP 300 ends every life: wall-cap bound, not a speed mea
 | quickcheck alone | PASS 112 s (render 237, tab 538, buổi 1168 ms, median of 3) |
 Not done: U2 «buổi 0 pend:true Q 6 dialogs» rows (review/robot10-coop-saves u2) are state lines only, no dump → not classed; looks like cause 3? (dialogs held) — needs a dump with the probe.
 Logs (container-local): /home/user/wt/s6out/{ab-a-main,ab-a-fix,p5-fix-1,p5-fix-2,g}.
+
+## REVIEW law1-maid-away r1 (BIG, opus; session_01N1tNP3WS5HsPkPew92KGwF; START_CTX ≈5 % (own estimate); Foreman B = session_01N1tNP3HSiyh7FYx9Ezn8vr) — PASS 854c1fc1 (with one reviewer fix)
+PRIORITY #1 CHECK ('law1-maid-away'): OD 0 | ledger 0 | claims 3 | main 0 (j42 srvTalk on 502c48c9) | review/* law1-maid-away 63d72694 | archive 0 → law1-audit row 10 + role-parity open «maid:beside N-ONLY»; reuse: fixer #7 head 63d72694 as base, nothing rebuilt.
+Head reviewed: review/law1-maid-away 63d72694 (FF on LIVE 502c48c9; LIVE unchanged at the end, re-fetched) → **review/law1-maid-away-r1 854c1fc1fdaf8dbd0699e50f1d7d3020054bbf64** (= 63d72694 + reviewer fix below; FF on LIVE 502c48c9, so «bare head» = «head on newest LIVE»).
+### Law 1 two-way (family scan)
+- NPC maid (jagstaff asOpts + jagacts3 par3 + jagstf2): master home (asMisHome) → massage / askRew (loyal ≥ tin) / tellMis (intel) / askRec (rank < max), tea; away → beside (at the master's place) + follow; leave = no home gate (jagstf2, loyal < BAL.sp.leaveLoyal).
+- Player maid on 63d72694: srvTalk «mis» home → the four acts (locks = the same gates), away → «Hầu bên cạnh chủ»; srvCards tea locked away (srvMisHome), «Theo hầu chủ» away; «Xin chủ cho đi hầu cung khác» no home gate (same as NPC). Matches.
+- **FOUND (law 1 + law 11, pre-existing on main, same family):** the stage card builders (j42 srvVisitOf rvP, j95 j95srvStage + j95 record card) tag the master «hh» when she is the **Hoàng hậu** (`v.queen?"hh":v===m?"mis":"rv"`), so srvTalk never reached «mis»: at home the player maid of a Hoàng hậu had ONLY «Hầu bên cạnh chủ» (no four acts, no «Xin chủ cho đi»), while an NPC maid of a Hoàng hậu (asOpts, asMisHome true) has the four acts. Reachable: srvReassign after «Tố cáo … trước Hoàng hậu» puts her under the Hoàng hậu; a master can also become Hoàng hậu. maid-mis-away.js missed it because it fed srvTalk a hand-made «mis» card.
+- **Reviewer fix (854c1fc1, small):** srvTalk reads her own master as «mis» whatever her title (`p.sk==="hh"&&RV(p.ref.id)===m` → «mis»); the dead `else if(v===m) beside` in the rv/hh branch is removed (one rule). One point covers all three builders. maid-mis-away.js now also drives the REAL stage card (srvVisitOf) at home/away and with a Hoàng hậu master: 63d72694 → FAIL «master is the Hoàng hậu, at home (card «hh»): ["Hầu bên cạnh chủ"]»; 854c1fc1 → PASS.
+- Co-op: no jcoop* / Worker code calls srvTalk or tags «mis» (grep 0); coop/worker identical to main (git diff empty) → mirrored by construction; coop-e2e below.
+### Other checks
+- role-parity-open.json row removed honestly: role-parity.test ALONE reports no NEW gap, OPEN 12 rows ≤ OPEN_MAX 12; the OPEN_MAX line rewritten in place with its reason (law 14); no other row touched (diff = 1 line).
+- Wording (law 7 / VANPHONG): no new player text; existing «Hầu bên cạnh chủ»; odds as words (Tùy duyên / Có cơ / Rất vững), no %. Law 4: odds/gains read SRVA/BAL (SRVA.beside.o, BAL.odb.j42), no typed number added.
+- Pre-existing, NOT this branch (note for B's queue, not blocking): «Đấm lưng» card shows «công lao +0.25» (BAL.eff.j42.meritMis .25 printed raw) — a decimal on a player card; same on main.
+### Gates (854c1fc1 build; local Worker = wrangler dev :8798 on coop/worker == main)
+| gate | result |
+|---|---|
+| `node dev/test/maid-mis-away.js` (no args) / `… dev/index.html` | MAID-MIS-AWAY PASS (8/8) / PASS · no page errors |
+| `node dev/test/role-parity.test.js` ALONE (no args) | ALL PASS · exit 0 · 10 m 51 s |
+| `node dev/test/role-parity.test.js dev/index.html` ALONE | ALL PASS · exit 0 |
+| `bash dev/tools/quickcheck.sh` ALONE | QUICKCHECK PASS · core gates PASS · old save ok (load + buổi, 0 errors) · perf median new/live render 230/219 · tab 442/441 · buổi 1232/1025 · tasks>200 23/22 |
+| `COOP_SWAP=0 node dev/test/coop-e2e.js <out> http://127.0.0.1:8798` | 142/142 passed |
+| `COOP_SWAP=1 node dev/test/coop-e2e.js <out> http://127.0.0.1:8798` | 142/142 passed |
+| `npm test` in coop/worker | merge / vault / seat / stale / thin ALL OK · exit 0 |
+### Shots (scratch only, not in git; Fold 755x1000 + iPad 1180x820, looked at each)
+fold-qhome / ipad-qhome (master = Hoàng hậu, at home): talk menu tabs Hầu hạ 2/2 · Ban thưởng 0/1 (locked «Cần Chủ tin 60») · Giao thiệp 1/2 — the four acts + «Xin chủ cho đi», kit act cards, odds words, nothing cut. fold-away / ipad-away (master at Ngự hoa viên): only «Hầu bên cạnh chủ» + «Xin chủ cho đi hầu cung khác», kit cards, nothing cut, no page errors.
+**PASS → LAND READY law1-maid-away-r1 854c1fc1fdaf8dbd0699e50f1d7d3020054bbf64.**
