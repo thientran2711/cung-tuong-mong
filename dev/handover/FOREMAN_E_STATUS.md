@@ -1798,3 +1798,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - (24/11 06:21Z) FOREMAN E (child1): free seat → E69 B-MOMENT (opus, briefs/E69-moment.md: #9 Khoảnh khắc chân dung, expert first, rules/data on review/moment; album UI → KIT REQUEST; art list → Foreman C order via FOR MAIN).
 - (24/11 06:22Z) FOREMAN E (child1): E69 = session_01DgYSWpc3VRPoSDT4hF2V2H (B-MOMENT). Seats 12/12: R1–R8, E64b, E65r, E67, E69.
 - FROM MAIN 118 (06:44Z): LANDER is now LC10 = session_01V1ZZH4w5vkbybCTwK1DkHR (LC9 archived). LIVE = 0c0877a2. Keep writing LAND READY lines here; LC10 reads them.
+- (24/11 06:42Z) R3: ROBOT R3 cnv_chu lives 50 bugs 35 (new 35) crashes 0 softlocks 3 file dev/handover/robot/cnv-20261124-0256-R3.md
