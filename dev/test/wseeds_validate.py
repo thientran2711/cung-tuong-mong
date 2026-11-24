@@ -28,7 +28,7 @@ KIND={"rv","sv","maid","emp","th","doc","eun","kid"};MANRW={"sứ thần","họa
 STAT={"sung","danh","bac","suc","mat","th","hh","duc","tamco","an"};TIER={"s":1,"m":2,"l":3}
 NEEDS={"rank_min","rank_max","nights_min","month","not_confined","kids_min"}
 PH={"A","B","X","M","O","S"}
-BAD=re.compile(r"%|\d|\b(OK|game|turn|round|slot|lượt|ván|level|quest|item)\b|Chắc chắn|Nắm chắc|Rất chắc|Khó lường|Mong manh|Tùy duyên|Có cơ|Rất vững",re.I)
+BAD=re.compile(r"%|\d|\b(OK|game|turn|round|slot|lượt|(?<!tấm )ván(?! gỗ| cầu| thuyền)|level|quest|item)\b|Chắc chắn|Nắm chắc|Rất chắc|Khó lường|Mong manh|Tùy duyên|Có cơ|Rất vững",re.I)
 A=sys.argv[1:];args=[a for n,a in enumerate(A) if not a.startswith('--') and not (n and A[n-1]=='--kinds')]
 MIN='--min' in A;CHK=set(A[A.index('--kinds')+1].split(',')) if '--kinds' in A else set(KMIN)
 if not args:args=sorted(glob.glob(os.path.join(ROOT,'dev/handover/content/thin/wseeds*.md')))

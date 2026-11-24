@@ -16,7 +16,7 @@ for mm in re.finditer(r'(?:^ |M70\.)([a-z0-9]+)(?::|=)\{k:"[a-z0-9]+",band:\d,n:
 OLDL=[o.lower() for o in OLD]
 PL={"tyv","vuon","ksp","nvp","thu","dtd","tn","kn","lc"}
 PTS={"vis":{"lo":0,"mid":1,"hi":2},"need":{"s":0,"m":1,"l":2},"bac":{"0":0,"s":0,"m":1,"l":2}}
-BAD=re.compile(r"%|\d|\b(OK|game|turn|round|slot|lượt|ván|level|quest|item)\b|Chắc chắn|Nắm chắc|Rất chắc|Khó lường|Mong manh|Tùy duyên|Có cơ|Rất vững",re.I)
+BAD=re.compile(r"%|\d|\b(OK|game|turn|round|slot|lượt|(?<!tấm )ván(?! gỗ| cầu| thuyền)|level|quest|item)\b|Chắc chắn|Nắm chắc|Rất chắc|Khó lường|Mong manh|Tùy duyên|Có cơ|Rất vững",re.I)
 A=sys.argv[1:];args=[a for n,a in enumerate(A) if not a.startswith('--') and not (n and A[n-1]=='--meths')]
 MIN='--min' in A;CHK=set(A[A.index('--meths')+1].split(',')) if '--meths' in A else set(METH)
 if not args:args=sorted(glob.glob(os.path.join(ROOT,'dev/handover/content/thin/j70seeds*.md')))
