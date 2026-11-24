@@ -2946,3 +2946,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (08:25Z) KIT READY kit-noprewarn 1d4fc04d → B SMALL review. RING-DESIGN r1 READY (img/_review/ring/ring.html: selection ring A/B/C drama signals; MAIN looked at A-alert + C-open both devices: clean, readable) → r2 (G/S/Ngự Hoa Viên/followers/auto-turn) ordered; show sếp r1+r2 together.
 - (08:30Z) OWNER: AI API key → tomorrow 25/11; offer secure form in the morning.
 - (07:48Z) MAP-FIX-2 SSK c87a40e1 (3 stale tests per owner rules + 1 real bug: no «ta ở đây» marker/centring below Tần in a host's phối điện; map-here-scan 3 FAIL → 64/64) → RV map-fix-2 = session_01V1ZZH2u9H72DTLghtdArxu (sonnet SMALL, child of 119; B full). MAP-FIX-2 archived.
+- (08:40Z) OWNER angry: ring mock r1 used private buttons/round avatars (law 9) — MAIN missed it when checking frames. Both designers told: kit parts only + stranger silhouettes.
