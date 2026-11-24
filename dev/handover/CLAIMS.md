@@ -1527,3 +1527,4 @@ kit-chain repair A (veil harness + dialogue-vn/daytitle/evframe-r2) | review/kit
 kit-chain repair B (mgskin-wire + kit-nochip whole group) | review/mgskin-wire, kit-nochip | session_01N1tNP5rqTp7pi3ind2iTWD | RUNNING | 2026-11-24T17:45Z (FOREMAN B)
 kit-rewardplate r3 SMALL review | review/kit-rewardplate | session_01N1tNP5XkWFhxvDgVqESJvw | RUNNING | 2026-11-24T17:45Z (FOREMAN B)
 | OFFLINE-FAST owner bug (offline-all slow start) | review/offline-fast; reports/offline-fast.md | MAIN 125 | session_01V1ZZH4kPEoVSax9ycpSYqp | RUNNING | 2026-11-24T17:57Z |
+figload-keep (live bug split from sideline-dlg 3fb17db4) | review/figload-keep | session_01N1tNP3uvSYvemdLirWv32k | RUNNING | 2026-11-24T18:02Z (FOREMAN B)
