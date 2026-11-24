@@ -12,10 +12,10 @@
    lines reach the guest in the week's news (COOPW.news); each seat's own roll is personal (her S, like exTick).
    Result lines say WHY (OD 24/11 ~04:20Z): the occasion, why she was chosen (Sủng / illness), and the loss. Output = the month news + log + newsAdd
    (existing kit outputs, no new UI). State: S.ph {t, q, rg, oc}, p.phT (month of her last PROMO-HIST grant), p.phS (favour cd), p.phD (deathbed done). */
-const PROMO_GW={vantho:"nhân tiết Vạn thọ",thanhtho:"mừng Thánh thọ Thái hậu",laphau:"mừng lập Hoàng hậu",reign:"nhân tân đế cải nguyên",sung:"được Hoàng thượng sủng ái"};
+const PROMO_GW={vantho:"nhân tiết Vạn thọ",thanhtho:"mừng Thánh thọ Thái hậu",laphau:"mừng lập Hoàng hậu",reign:"nhân tân đế cải nguyên",sung:"được sủng ái hơn người"};
 function phB(){return BAL.promoH}
-/* world draw 0..99 for an occasion of a year: the same on every seat of a co-op room (no Math.random) */
-function phH(k){const s=`${k}:${S.year}:${(S.emp&&S.emp.era)||""}`;let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0)%100}
+/* world draw 0..99 for an occasion of a year: the same on every seat of a co-op room (no Math.random), different for every Emperor */
+function phH(k){const E=S.emp||{},lk=E.likes||{};const s=`${k}:${S.year}:${E.era||""}:${lk.flower||""}:${lk.music||""}:${lk.dish||""}:${[].concat(E.traits||[]).join()}`;/* the Emperor of THIS world (era + his likes + traits: drawn per life, shared by the co-op seats via the world S.emp) */let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0)%100}
 function phQK(){const q=typeof queenP==="function"?queenP():null;return q?(q===S?"S":String(q.id!=null?q.id:q.name)):""}
 function phGuest(){return !!(window.COOPW&&COOPW.on&&COOPW.seat&&COOPW.seat!=="a")}
 function phSt(){if(!S.ph||typeof S.ph!=="object")S.ph={t:S.turn,q:phQK(),rg:0};return S.ph}
@@ -50,12 +50,12 @@ function phTry(p,occ){const H=phB(),me=p===S;let t="";
 /* the WHY clause (who chose her and for what) */
 function phLine(p,src,t,o){const me=p===S,nm=me?"ngươi":p.name,sg=`Sủng ${p.sung||0}`;let why="";
  if(src==="fest")why=`${phWhyOcc(o.k)}; bệ hạ chọn ${nm} vì đang được để mắt (${sg})`;
- else if(src==="sung")why=`Hoàng thượng sủng ái ${nm} hơn người (${sg}, đã quá mức cần cho ${RANKS[Math.min(RANKS.length-1,rkOf(p)+phB().sung.over)].n}) dù đường sắc phong thường chưa đủ`;
+ else if(src==="sung")why=`${sg} đã quá mức cần cho ${RANKS[Math.min(RANKS.length-1,rkOf(p)+phB().sung.over)].n}, bệ hạ muốn nâng ${nm} dù đường sắc phong thường chưa đủ`;
  else why=`${nm} lâm ${o.ill.toLowerCase()} ${STG[STG.length-1]}, Hoàng thượng thương xót ban ân lần cuối (${sg})`;
  const line=`${t}Lý do: ${why}. `;
  if(!me)try{newsAdd(p,"promo",line,true)}catch(e){}
  window.__phN=window.__phN||{fest:0,sung:0,death:0,me:0,npc:0};window.__phN[src]++;window.__phN[me?"me":"npc"]++;
- return me&&src!=="death"?`<b class="g">Ân chiếu</b>: ${line}`:line}
+ const c=line.indexOf(":")+1;return me&&src!=="death"&&c>0?`<b class="g">${line.slice(0,c)}</b>${line.slice(c)}`:line}/* her grace line: the occasion in gold, as the decree lines */
 /* the loss of each road (jexam promoCost → here); NPC by the same rule */
 function phCost(p,src,o){const B=BAL.psk,me=p===S;let t="";
  if(src==="fest"){const n=Math.max(0,Math.min(p.bac||0,Math.round(B.fest.bacM*(BAL.pay[Math.min(BAL.pay.length-1,rkOf(p))]||0))));if(n)ap(p,{bac:-n});

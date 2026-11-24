@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"9b7e6ef3+","t":"2026-11-24T04:41Z","c":"review bal-ranks-law4: LAW 11 second pass — 9 more typed rank amounts to BAL (srvMerit, srvRew, dutySkip, rivalAge, thRite, mulberry, accHo…","b":"4bf739e9e13f","h":[{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"}]};
+window.CTM_BI={"s":"96de475b+","t":"2026-11-24T04:51Z","c":"PROMO-HIST roads: grand-occasion batch grace, favour grace, deathbed decree (her + every NPC, BAL.promoH + BAL.psk.fest/sung/death, result …","b":"7866370ea50d","h":[{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -55615,10 +55615,10 @@ window.exPlan=exPlan;window.exChance=exChance;window.exSim=exSim;window.exElig=e
    lines reach the guest in the week's news (COOPW.news); each seat's own roll is personal (her S, like exTick).
    Result lines say WHY (OD 24/11 ~04:20Z): the occasion, why she was chosen (Sủng / illness), and the loss. Output = the month news + log + newsAdd
    (existing kit outputs, no new UI). State: S.ph {t, q, rg, oc}, p.phT (month of her last PROMO-HIST grant), p.phS (favour cd), p.phD (deathbed done). */
-const PROMO_GW={vantho:"nhân tiết Vạn thọ",thanhtho:"mừng Thánh thọ Thái hậu",laphau:"mừng lập Hoàng hậu",reign:"nhân tân đế cải nguyên",sung:"được Hoàng thượng sủng ái"};
+const PROMO_GW={vantho:"nhân tiết Vạn thọ",thanhtho:"mừng Thánh thọ Thái hậu",laphau:"mừng lập Hoàng hậu",reign:"nhân tân đế cải nguyên",sung:"được sủng ái hơn người"};
 function phB(){return BAL.promoH}
-/* world draw 0..99 for an occasion of a year: the same on every seat of a co-op room (no Math.random) */
-function phH(k){const s=`${k}:${S.year}:${(S.emp&&S.emp.era)||""}`;let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0)%100}
+/* world draw 0..99 for an occasion of a year: the same on every seat of a co-op room (no Math.random), different for every Emperor */
+function phH(k){const E=S.emp||{},lk=E.likes||{};const s=`${k}:${S.year}:${E.era||""}:${lk.flower||""}:${lk.music||""}:${lk.dish||""}:${[].concat(E.traits||[]).join()}`;/* the Emperor of THIS world (era + his likes + traits: drawn per life, shared by the co-op seats via the world S.emp) */let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0)%100}
 function phQK(){const q=typeof queenP==="function"?queenP():null;return q?(q===S?"S":String(q.id!=null?q.id:q.name)):""}
 function phGuest(){return !!(window.COOPW&&COOPW.on&&COOPW.seat&&COOPW.seat!=="a")}
 function phSt(){if(!S.ph||typeof S.ph!=="object")S.ph={t:S.turn,q:phQK(),rg:0};return S.ph}
@@ -55653,12 +55653,12 @@ function phTry(p,occ){const H=phB(),me=p===S;let t="";
 /* the WHY clause (who chose her and for what) */
 function phLine(p,src,t,o){const me=p===S,nm=me?"ngươi":p.name,sg=`Sủng ${p.sung||0}`;let why="";
  if(src==="fest")why=`${phWhyOcc(o.k)}; bệ hạ chọn ${nm} vì đang được để mắt (${sg})`;
- else if(src==="sung")why=`Hoàng thượng sủng ái ${nm} hơn người (${sg}, đã quá mức cần cho ${RANKS[Math.min(RANKS.length-1,rkOf(p)+phB().sung.over)].n}) dù đường sắc phong thường chưa đủ`;
+ else if(src==="sung")why=`${sg} đã quá mức cần cho ${RANKS[Math.min(RANKS.length-1,rkOf(p)+phB().sung.over)].n}, bệ hạ muốn nâng ${nm} dù đường sắc phong thường chưa đủ`;
  else why=`${nm} lâm ${o.ill.toLowerCase()} ${STG[STG.length-1]}, Hoàng thượng thương xót ban ân lần cuối (${sg})`;
  const line=`${t}Lý do: ${why}. `;
  if(!me)try{newsAdd(p,"promo",line,true)}catch(e){}
  window.__phN=window.__phN||{fest:0,sung:0,death:0,me:0,npc:0};window.__phN[src]++;window.__phN[me?"me":"npc"]++;
- return me&&src!=="death"?`<b class="g">Ân chiếu</b>: ${line}`:line}
+ const c=line.indexOf(":")+1;return me&&src!=="death"&&c>0?`<b class="g">${line.slice(0,c)}</b>${line.slice(c)}`:line}/* her grace line: the occasion in gold, as the decree lines */
 /* the loss of each road (jexam promoCost → here); NPC by the same rule */
 function phCost(p,src,o){const B=BAL.psk,me=p===S;let t="";
  if(src==="fest"){const n=Math.max(0,Math.min(p.bac||0,Math.round(B.fest.bacM*(BAL.pay[Math.min(BAL.pay.length-1,rkOf(p))]||0))));if(n)ap(p,{bac:-n});
@@ -96141,7 +96141,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="4bf739e9e13f";window.CTM_BUILD=BUILD;
+const BUILD="7866370ea50d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

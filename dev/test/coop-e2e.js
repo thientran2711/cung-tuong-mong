@@ -263,6 +263,14 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
      /* (e) feeling history: a world person's feeling cause written by the HOST in the merge path (a deser hook): reaches her the same week */
      if(h)window.__hlF.emo='hl force: bị tranh phần';if(COOPW.seat==='a'&&h){const v2=rivals.find(x=>x.id===h.id);if(v2&&typeof emoSet==='function')emoSet(v2,'gian',40,'hl force: bị tranh phần')}
      return r}}catch(e){console.error('hl force',e)}return r0?r0(fn,m):fn()}})}
+ /* COOP_PH=1 (review/promo-hist): the PROMO-HIST occasion is one world draw (both seats agree), NPC rolls happen on the host only, and a world
+    consort's grand-occasion grace forced on the host reaches the guest with the merged week (host and guest see the same promotion) */
+ const PH=+process.env.COOP_PH||0;let PHF=null;
+ if(PH){const hh=o=>o.p.evaluate(()=>({v:phH('vantho'),t:phH('thanhtho'),l:phH('laphau'),g:typeof phGuest==='function'?phGuest():null}));const ha=await hh(A),hb=await hh(B);
+  ok(ha.v===hb.v&&ha.t===hb.t&&ha.l===hb.l,'promo-hist: the occasion draw is the same world draw on both seats',[ha,hb]);ok(ha.g===false&&hb.g===true,'promo-hist: NPC rolls on the host only (guest = no NPC roll)',[ha.g,hb.g]);
+  PHF=await A.p.evaluate(()=>{const v=rivals.find(x=>!x.coop&&x.alive!==false&&!x.out&&!x.queen&&x.rank<5);if(!v)return null;v.ex={to:v.rank+1};v.lastPromo=S.turn-99;v.phT=null;v.confined=0;
+   const mr=Math.random;Math.random=()=>0;let t='';try{t=phTry(v,['vantho'])}finally{Math.random=mr}COOPW.news=(COOPW.news||'')+t;return{id:v.id,name:v.name,to:v.ex.to,grace:v.ex.grace,gw:v.ex.gw,t:String(t).replace(/<[^>]+>/g,'')}});
+  ok(PHF&&PHF.grace===PHF.to&&PHF.gw==='vantho'&&/Lý do:/.test(PHF.t),'promo-hist: host forces a world consort\'s Vạn thọ grace (line says why)',PHF)}
  /* 3 three weeks */
  const agB0=await B.p.evaluate(()=>window.AG?AG.stat.tick:-1);
  /* COOP_WEEKS=n (coop-staff-split probe): play n weeks here instead of 3 (more month ends) */
@@ -293,6 +301,8 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
    ok(same1(x,y)&&!!x.name&&x.name!=='Nguyễn Thị Hoa'&&x.name===y.name,'hl force (b): the host\'s renamed world servant reaches the guest in the same merged week',[x.name,y.name]);
    ok(!!y.txt&&y.txt.includes(y.name)&&!y.txt.includes('Nguyễn Thị Hoa'),'hl force (b): the guest\'s own text names the new name',[y.txt,x.hl,y.hl])}
   }
+ if(PH&&PHF){const g=o=>o.p.evaluate(id=>{const v=rivals.find(x=>x.id===id);return v?{grace:v.ex&&v.ex.grace,gw:v.ex&&v.ex.gw,rank:v.rank,pass:!!(v.ex&&v.ex.pass)}:null},PHF.id);const a=await g(A),b=await g(B);
+  ok(a&&b&&a.rank===b.rank&&a.gw===b.gw&&a.grace===b.grace&&(a.gw==='vantho'||a.rank===PHF.to),'promo-hist: host and guest see the same world consort grace / promotion after the merged weeks',[a,b,PHF.name])}
  if(GE)await geP('ge rank after 3 merged weeks',null,null);
  /* COOP_GE (review/ge-phutang, E35b): a Phù Tang seat (origin pf, road pt_*) opens ITS OWN grand-ending branch (geOrig identity) and gets the Hồi kết nhánh
     dialog; the other seat's branch / S.ge is untouched (S is personal) — then the seats swap (two-way). Each seat's life is restored after the probe. */
