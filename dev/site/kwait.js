@@ -40,7 +40,6 @@ window.CTM_WAIT=window.CTM_WAIT||{
  lifeNote:"Đang thỉnh dung nhan những người ngươi sắp gặp, cảnh phòng và tranh việc đầu tiên. Xong là vào cung ngay.",
  lifeSlow:"Đường xa chậm. Có thể vào cung ngay; tranh nào chưa về sẽ tới sau.",
  lifeGo:"Vào cung ngay",
- picWait:"Đang thỉnh tranh…",
  spin:"Đang chờ…",
  /* Sổ mây (jcloud.js) */
  cloudNet:"Chưa với tới mây; đường xa thông là tự gửi lại.",

@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"e13e0a81+","t":"2026-11-24T06:51Z","c":"kit-screenveil r1: KK18 shape fixes — numbers in BAL.kscrv (cap 10 s, word, fade, pre), renumber §94 → §97, status out of KIT.md heading; f…","b":"5d4f1e018d3e","h":[{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"}]};
+window.CTM_BI={"s":"fe8f6e3d+","t":"2026-11-24T06:56Z","c":"kit-screenveil r2: settle re-scan (90 ms) before the reveal catches portraits set a few frames late (Fold cold: Cung nhân tab 1 frame); sit…","b":"24baac62b77a","h":[{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -53,7 +53,6 @@ window.CTM_WAIT=window.CTM_WAIT||{
  lifeNote:"Đang thỉnh dung nhan những người ngươi sắp gặp, cảnh phòng và tranh việc đầu tiên. Xong là vào cung ngay.",
  lifeSlow:"Đường xa chậm. Có thể vào cung ngay; tranh nào chưa về sẽ tới sau.",
  lifeGo:"Vào cung ngay",
- picWait:"Đang thỉnh tranh…",
  spin:"Đang chờ…",
  /* Sổ mây (jcloud.js) */
  cloudNet:"Chưa với tới mây; đường xa thông là tự gửi lại.",
@@ -836,7 +835,6 @@ window.CTM_WAIT=window.CTM_WAIT||{
  lifeNote:"Đang thỉnh dung nhan những người ngươi sắp gặp, cảnh phòng và tranh việc đầu tiên. Xong là vào cung ngay.",
  lifeSlow:"Đường xa chậm. Có thể vào cung ngay; tranh nào chưa về sẽ tới sau.",
  lifeGo:"Vào cung ngay",
- picWait:"Đang thỉnh tranh…",
  spin:"Đang chờ…",
  /* Sổ mây (jcloud.js) */
  cloudNet:"Chưa với tới mây; đường xa thông là tự gửi lại.",
@@ -67485,32 +67483,18 @@ window.kitPhFit=kitPhFit;
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§59",title:"Tranh tạm (chưa có tranh riêng): một bộ cho mỗi hướng và cỡ — dọc PS·PM·PL, ngang LS·LM·LL, dài, vuông 56·64·72; sáng · tối",html:()=>{const box=(w,h,tone)=>{const f=kitPhPick(w,h,tone);return `<div style="width:${w}px;max-width:100%;text-align:center"><div style="width:${w}px;height:${h}px;max-width:100%">${kitSceneArt(f,"",{shape:w<h?"tall":"wide",cap:false}).replace('class="ksart','style="height:100%;aspect-ratio:auto" class="ksart')}</div><small>${f.replace(/^img\/ph-|\.webp$/g,"")}</small></div>`};
  return ["light","dark"].map(t=>`<div class="kitpg-row" style="align-items:flex-end;gap:8px;margin-bottom:6px">${[[84,112],[120,160],[162,216],[192,96],[300,140],[56,56],[64,64],[72,72]].map(([w,h])=>box(w,h,t)).join("")}</div><div class="kitpg-row" style="margin-bottom:6px">${box(520,120,t)}</div>`).join("")}})}catch(e){}
 window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
-/* ================= §59.1 LOADING STATE — a picture that is on its way (owner OD 18/11 ~01:50Z + 02:06Z "phải có một cái dòng chữ ... đang tải hình";
-   review/life-preload, kit-keeper delegate of MAIN s41). §59 above = "this has NO picture yet" (still-life); §59.1 = "the picture is coming":
-   every <img> slot (portrait chips, figures, frames, event / act picture boxes, Hậu cung rows, servant rows, Dư đồ markers, Luân hồi cards…) whose
-   picture has not arrived shows a soft parchment ground that breathes (opacity only; still under reduced motion / Hiệu ứng Gọn) — never the dark
-   ground of the slot, never empty — and, when the slot is at least 72 px tall and its box is positioned, the line CTM_WAIT.picWait in the middle.
+/* ================= §59.1 LOADING STATE — a picture that is on its way (owner OD 24/11 ~07:25Z «1», canon overwrite of OD 18/11 ~01:50Z/02:06Z;
+   review/kit-screenveil, KIT §97.8). A picture that has not arrived yet is HIDDEN (visibility, its box keeps its size: the stage and the cards do not
+   jump) and appears whole only once it is loaded AND decoded — no parchment ground, no silhouette, no «Đang thỉnh tranh…» line. A NEW view waits under
+   the screen-change veil (§97); this rule covers a picture that arrives after the view is shown (a person walking in, a card drawn later).
    ONE rule for the whole game, no per-place code: a MutationObserver (added <img>, changed src) + one capture load/error listener.
-   Marks: img[data-kwait="1"|"s"], slot [data-kwaitp="Đang thỉnh tranh…"]. Test: dev/test/life-preload.js (no empty box), kit sample §59.1. ===== */
+   Mark: img[data-kwait="1"|"f"|"m"|"pf"|"pm"(+"s")] (the kind still drives the layout box, j59 / jkit). Test: dev/test/screen-veil.js, dev/test/life-preload.js. ===== */
 (function(){const st=document.createElement("style");st.id="kit-ph-wait";st.textContent=`
-img[data-kwait]{background:radial-gradient(ellipse at 50% 42%,#fbf4e4 0,#f3e7cf 55%,#eadbbd 100%);animation:kphBreath calc(1.6s*var(--pace,1)) ease-in-out infinite}
-img[data-kwait="s"],img[data-kwait="fs"],img[data-kwait="ms"],img[data-kwait="pfs"],img[data-kwait="pms"]{animation:none}
-img[data-kwait^="f"],img[data-kwait^="m"]{background:url("https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-fig-f.webp") center bottom/contain no-repeat;opacity:.55}
-img[data-kwait^="m"]{background-image:url("https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-fig-m.webp")}
+img[data-kwait]{visibility:hidden}
 img[data-kwait^="f"]{aspect-ratio:730/1350}img[data-kwait^="m"]{aspect-ratio:616/1350}
-/* entry-blank-r3 (review item 6): a PORTRAIT on its way (por-*) waits as the kit soft portrait silhouette (https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-f|m.webp, the stranger / empty-seat portrait), never as bare paper — small slots carry no line, so paper alone read as an empty frame */
-img[data-kwait^="p"]{background:url("https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-f.webp") center top/cover no-repeat,radial-gradient(ellipse at 50% 42%,#fbf4e4 0,#f3e7cf 55%,#eadbbd 100%)}img[data-kwait^="pm"]{background-image:url("https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-m.webp"),radial-gradient(ellipse at 50% 42%,#fbf4e4 0,#f3e7cf 55%,#eadbbd 100%)}
-@keyframes kphBreathF{50%{opacity:.3}}
-img[data-kwait="f"],img[data-kwait="m"]{animation-name:kphBreathF}
-@keyframes kphBreath{50%{opacity:.62}}
-[data-kwaitp]::after{content:attr(data-kwaitp);position:absolute;left:4px;right:4px;top:50%;transform:translateY(-50%);text-align:center;font:600 .72rem/1.25 var(--display,serif);color:#8a6a40;letter-spacing:.02em;pointer-events:none;z-index:2;text-shadow:0 1px 0 #fff8}
-/* entry-blank-r3: a slot whose box already draws its own ::after (act-card art frames: corners / pins) gets the line as one small child instead (same look), so the frame keeps its own decoration */
-.kwaitl{position:absolute;left:4px;right:4px;top:50%;transform:translateY(-50%);text-align:center;font:600 .72rem/1.25 var(--display,serif);color:#8a6a40;letter-spacing:.02em;pointer-events:none;z-index:4;text-shadow:0 1px 0 #fff8}
 `;document.head.appendChild(st)})();
-const KPHW_TXT=()=>(typeof CTM_WAIT!=="undefined"&&CTM_WAIT.picWait)||"Đang thỉnh tranh…";
 function kitPhWaitClear(im){try{if(!im.hasAttribute("data-kwait"))return;im.removeAttribute("data-kwait");const p=im.parentElement;if(p&&p.hasAttribute("data-kwaitp")&&!p.querySelector(":scope>img[data-kwait]"))p.removeAttribute("data-kwaitp");
  if(p&&p.hasAttribute("data-kwaitq")&&!p.querySelector(":scope>img[data-kwait]")){p.removeAttribute("data-kwaitq");p.querySelectorAll(":scope>.kwaitl").forEach(x=>x.remove())}}catch(e){}}
-let KPHW_Q=[],KPHW_T=0;
 /* the kit silhouette for a full-body cut-out that is still loading: "m" (men: Emperor, eunuch, official, physician…) | "f" | "" (not a figure). ONE rule: the picture slot (here) and the stage layout (j59 wait) read it. */
 function kitPhFigG(s){return/\/fig-/.test(s)?(/\/fig-(emp|eun|off|man|men|ty|phys|ksp|prince|vuong|guard|thaigiam|king)/.test(s)?"m":"f"):""}
 window.kitPhFigG=kitPhFigG;
@@ -67523,17 +67507,7 @@ function kitPhWaitMark(im){try{if(!im||im.tagName!=="IMG"||im.hasAttribute("data
  /* a full-body cut-out (fig-*) waits as the kit's faint unknown silhouette (j59 / j61 unknown-fig-f|m), never as a paper box; no line */
  const fm=kitPhFigG(s);
  const pg=fm?"":kitPhPorG(s);
- im.setAttribute("data-kwait",fm?fm+(still?"s":""):pg?"p"+pg+(still?"s":""):still?"s":"1");if(fm)return;KPHW_Q.push(im);
- if(!KPHW_T)KPHW_T=requestAnimationFrame(()=>{KPHW_T=0;const L=KPHW_Q;KPHW_Q=[];/* the line: one layout read per frame for the whole batch */
-  /* one line per picture area: a slot whose centre lies inside an area that already carries the line (layered art bands) gets none */
-  const has=[...document.querySelectorAll("[data-kwaitp],[data-kwaitq]")].map(e=>e.getBoundingClientRect());
-  for(const x of L){if(!x.hasAttribute("data-kwait"))continue;const p=x.parentElement;if(!p||p.hasAttribute("data-kwaitp")||p.hasAttribute("data-kwaitq"))continue;const r=x.getBoundingClientRect();
-   /* entry-blank-r3: a slot not laid out yet when it was marked (a tab / card drawn hidden, opened later) is looked at again (≤ 20 × 0.5 s) instead of never getting its line */
-   if(!r.width||!r.height){const n=+(x.dataset.kwr||0);if(n<20){x.dataset.kwr=n+1;setTimeout(()=>{if(x.isConnected&&x.hasAttribute("data-kwait")){x.removeAttribute("data-kwait");kitPhWaitMark(x)}},500)}continue}
-   if(r.height<72||r.width<64||getComputedStyle(p).position==="static")continue;const cx=r.left+r.width/2,cy=r.top+r.height/2;
-   if(has.some(q=>cx>=q.left&&cx<=q.right&&cy>=q.top&&cy<=q.bottom))continue;
-   {const own=getComputedStyle(p,"::after").content;if(own&&own!=="none"&&own!=="normal"){const sp=document.createElement("span");sp.className="kwaitl";sp.textContent=KPHW_TXT();p.appendChild(sp);p.setAttribute("data-kwaitq","1");has.push(p.getBoundingClientRect());continue}}
-   p.setAttribute("data-kwaitp",KPHW_TXT());has.push(p.getBoundingClientRect())}})}catch(e){}}
+ im.setAttribute("data-kwait",fm?fm+(still?"s":""):pg?"p"+pg+(still?"s":""):still?"s":"1")}catch(e){}}
 window.kitPhWaitMark=kitPhWaitMark;
 /* KP16 (review/kit-modal-spin, life-preload part b; KIT §59.2) kitSpin(o) = the ONE small loading spinner: a gold ring on the parchment hair-line, turns at the game pace; still (a gentle breath) under reduced motion / «Hiệu ứng: Gọn».
    kitSpin({s:true}) = 18 px for a button / chip, default 28 px; o.label = the spoken label (CTM_WAIT.spin). The dialog wait of the life gate (#modal.klifewait, jload.js) draws the SAME ring with a pseudo-element: one look. */
@@ -67546,7 +67520,7 @@ window.kitSpin=kitSpin;
 @keyframes kspinb{50%{opacity:.35}}
 .kspin.kspin-still{animation:kspinb 1.6s ease-in-out infinite;border-top-color:var(--k-hair,#e6d3ac);border-right-color:var(--gold,#8f5f0c)}
 @media(prefers-reduced-motion:reduce){.kspin,#modal.klifewait::after{animation:kspinb 1.6s ease-in-out infinite}}`;document.head.appendChild(st)})();
-document.addEventListener("load",e=>{if(e.target&&e.target.tagName==="IMG")kitPhWaitClear(e.target)},true);
+document.addEventListener("load",e=>{const im=e.target;if(im&&im.tagName==="IMG"){if(im.hasAttribute("data-kwait")&&im.decode)im.decode().then(()=>kitPhWaitClear(im),()=>kitPhWaitClear(im));else kitPhWaitClear(im)}},true);/* shown only once decoded: it appears whole */
 document.addEventListener("error",e=>{if(e.target&&e.target.tagName==="IMG")kitPhWaitClear(e.target)},true);
 /* review life-preload-fu r2v: kitFigHD (jfighd) gives a figure srcset/sizes; the browser may then drop the picture it was loading/showing and fetch the
    HD twin (currentSrc empty, naturalWidth 0) — on a slow line the slot stood EMPTY with no §59.1 mark (Fold 1.5 Mbps, 6 of 9 runs, ~10 s). A srcset/sizes
@@ -67556,9 +67530,8 @@ function kitPhSetChk(im){const c=()=>{try{if(im.isConnected&&!im.hasAttribute("d
  try{new MutationObserver(ms=>{for(const m of ms){if(m.type==="attributes"){if(m.attributeName==="src")kitPhWaitMark(m.target);else if(m.target.tagName==="IMG")kitPhSetChk(m.target)}else m.addedNodes.forEach(one)}}).observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:["src","srcset","sizes"]});
   document.querySelectorAll("img").forEach(kitPhWaitMark)}catch(e){}})();
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§59.2",title:"kitSpin · vòng chờ nhỏ",where:"chỗ nào cần dấu hiệu chờ ngắn: nút, chip, ô; hộp thoại chờ tranh (≤ 3 s) vẽ cùng một vòng",html:()=>{try{return `<div style="display:flex;gap:14px;align-items:center">${kitSpin()}${kitSpin({s:true})}<span>vòng 28 px · vòng 18 px</span></div>`}catch(e){return ""}}})}catch(e){}
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§59.1",title:"Tranh đang về (đang thỉnh): nền giấy dịu thở nhẹ + dòng chữ ở ô từ 72 px; ô nhỏ chỉ có nền; chân dung đang về hiện bóng người mờ của kit",html:()=>{
- const box=(w,h,mv)=>`<div style="position:relative;width:${w}px;height:${h}px;border-radius:6px;overflow:hidden;border:1px solid var(--line)"${h>=72?` data-kwaitp="${KPHW_TXT()}"`:""}><img data-kph-sample data-kwait="${mv}" alt="" style="width:100%;height:100%;display:block"></div>`;
- return `<div class="kitpg-row" style="align-items:flex-end;gap:8px">${[[44,44],[84,112],[120,160],[162,216],[300,140]].map(([w,h])=>box(w,h,"1")).join("")}${box(120,160,"s")}${box(44,58,"pf")}${box(44,58,"pm")}${box(120,160,"pf")}</div>`}})}catch(e){}
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§59.1",title:"Tranh đang về: ô giữ nguyên chỗ, tranh ẩn cho tới khi về đủ rồi hiện trọn một lần (không nền giấy, không bóng người, không dòng chữ)",html:()=>
+ `<div class="kitpg-row" style="align-items:flex-end;gap:8px">${[[44,44],[84,112],[120,160],[300,140]].map(([w,h])=>`<div style="position:relative;width:${w}px;height:${h}px;border-radius:6px;overflow:hidden;border:1px solid var(--line)"><img data-kph-sample data-kwait="1" alt="" style="width:100%;height:100%;display:block"></div>`).join("")}</div>`})}catch(e){}
 /* ================= jopic: OPTION CARD = COMPACT ACT CARD WITH ITS PICTURE LEFT — KIT §6.2 (owner 15/11, review/opt-pics) =================
    Owner (verbatim, repeated): "Hình minh họa cho từng hành động bên trái. Bên phải là thông tin. Tôi nói hoài vậy."
    Markup dev/handover/refs/owner-option-picture-left.jpg (docs branch). Coordinator: ONE act-card form = the COMPACT card of Hậu cung (KIT §43):
@@ -96301,7 +96274,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5d4f1e018d3e";window.CTM_BUILD=BUILD;
+const BUILD="24baac62b77a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
