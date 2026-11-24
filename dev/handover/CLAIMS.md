@@ -1423,3 +1423,4 @@ REVIEW law1-gifts (opus BIG; briefs/D-law1-gifts-review.md) of 0a5fc0af | review
 | PARKING AUDIT E63 | reports/parking-audit.md 7f85225b | FOREMAN E (child1) | session_01DgYSWnS8t83k8g5g1at6Hy | DONE, ARCHIVED | 24/11 06:05Z |
 | VEIL-1 screen-change veil (opus; owner bug OD 24/11 ~10:20Z) | review/kit-screenveil; reports/screenveil.md | MAIN 118 | session_01V1ZZH1kjVkiTZ88EUdo1U6 | RUNNING | 24/11 07:12Z |
 | SELSCENE-6 opening 3 days (opus; successor of SELSCENE-5) | review/selection-scene | MAIN 118 | session_01V1ZZH3MNrUmsbyK2EQz7Wt | RUNNING | 24/11 07:22Z |
+| E69 B-MOMENT #9 Khoảnh khắc chân dung (opus; briefs/E69-moment.md) | review/moment; reports/moment.md | FOREMAN E | session_01DgYSWpc3VRPoSDT4hF2V2H | RUNNING | 24/11 06:40Z |
