@@ -1488,3 +1488,4 @@ rv servant-trust | review/servant-trust-rv | session_01D3E3NZh6xm1S3xPV8XpuMW | 
 fix net-build r1 | review/net-build-rv | session_01D3E3NXVfZy3ocFNYujBsPy | RUNNING | 24/11 10:08Z (Foreman D depth 2)
 rv promo-build-2 | review/promo-build-2-rv | session_01D3E3NXxkVhTabMxB4z4ood | RUNNING | 24/11 10:09Z (Foreman D depth 2)
 | REVIEW E82r robot10-e-fix-4 SMALL (sonnet; briefs/E82r-review-robot-fix4.md) of e4022143 | review/robot10-e-fix-4-m; reports/robot10-fix4-review.md | FOREMAN E (child3) | session_01DgYSWp59NxP8TgSeAhoWEd | PASS c1e7d3d355774b4ebbfda3c6d3200cf4e0bbb44d | 24/11 10:48Z |
+| REVIEW E83r robot10-e-fix-4 r2 SMALL (sonnet; briefs/E83r-review-robot-fix4-r2.md) of 66728c90 | review/robot10-e-fix-4-r2m; reports/robot10-fix4-review.md | FOREMAN E (child3) | (opening E83r) | RUNNING | 24/11 10:58Z |
