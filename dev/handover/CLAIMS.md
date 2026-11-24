@@ -1429,7 +1429,7 @@ NET THRESHOLDS research + audit + proposal (opus, no build; ORDER MAIN 116 06:02
 | LANDER LC10 (opus; successor of LC9) | reports/land-chain-10.md | MAIN 118 | session_01V1ZZH4w5vkbybCTwK1DkHR | RUNNING | 24/11 06:44Z |
 | SIDE-LINE DIALOGUE SCENES LEAD (opus; ORDER MAIN 118 06:42Z, OD 24/11 ~10:05Z; briefs/b-sideline-dialogue.md; schema agreed once with Foreman E) | review/sideline-dlg; reports/sideline-dialogue.md | B | session_01N1tNP4b3uXPGSvnVmsC51b | RUNNING | 24/11 06:43Z |
 | REVIEW robot-coop-fix-1 889803dc + harness robot10-coop 2bf6094f (opus BIG co-op; briefs/b-robot-coop-fix-1-review.md) | review/robot-coop-fix-1-r1 + review/robot10-coop-r2 | B | session_01N1tNP2DcFcegtmGUCGYXHH | RUNNING | 24/11 06:44Z |
-| MAP-FIX-2 map-tap-go + map-portrait LIVE fails (opus) | review/map-fix-2; reports/map-perf.md | MAIN 118 | session_01V1ZZH1VfNwzBQ4xJTkMJxY | RUNNING | 24/11 07:48Z |
+| MAP-FIX-2 map-tap-go + map-portrait LIVE fails (opus) | review/map-fix-2; reports/map-perf.md | MAIN 118 | session_01V1ZZH1VfNwzBQ4xJTkMJxY | SSK c87a40e1, ARCHIVED | 24/11 07:48Z |
 FACE90 PUBLIC no-login CDN page (sonnet; owner ask 24/11 ~06:40Z via D ROOT; briefs/D-face90-public.md) | CDN share/face90/; reports/face90-public.md | session_01D3E3NbZsh6G3yT2daRJV3R | CANCELLED (ROOT does it; archived) | 24/11 07:00Z (Foreman D depth 1)
 REVIEW palace-distance 9e655c3e (opus BIG; briefs/D-palace-distance-review.md) | review/palace-distance-rv | session_01D3E3NZ7GVBNYBajYppZbwY | RUNNING | 24/11 07:02Z (Foreman D depth 1)
 | DLG WRITER W1 j72_a (sonnet; briefs/b-dlg-writer.md; lead 4b3uXPGS) | review/sideline-dlg content | B | session_01N1tNP5mzkoWcc7PLve47hJ | RUNNING | 24/11 07:01Z |
@@ -1449,3 +1449,4 @@ NET BUILD step0 heat/range fix + one BAL relation levels + per-nết thresholds 
 NET BUILD step0 heat/range fix + one BAL relation levels + per-nết thresholds (opus BIG; FROM MAIN 119 07:40Z; briefs/D-net-build.md) | review/net-build | session_01D3E3NYsFNUq9PXUiPGzBEH | RUNNING | 24/11 07:40Z (Foreman D depth 1)
 REVIEW promo-build 7c4116de (opus BIG; briefs/D-promo-build-review.md) | review/promo-build-rv | session_01D3E3NZ3GPT7U4Pw6sW2FKR | RUNNING | 24/11 07:45Z (Foreman D depth 1)
 | DLG WRITER W7+W8+W9 (j68_d_ky, j7_wc, j70_j71; sonnet; lead 5NjXSPTa) | review/sideline-dlg content | B | session_01N1tNP3N2JkydSHBdWnPP2o | RUNNING | 24/11 07:58Z |
+| RV map-fix-2 SMALL (sonnet; c87a40e1) | review/map-fix-2-r1; reports/map-perf.md | MAIN 119 | session_01V1ZZH2u9H72DTLghtdArxu | RUNNING | 24/11 07:48Z |
