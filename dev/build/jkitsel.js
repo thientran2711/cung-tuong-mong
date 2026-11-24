@@ -14,7 +14,7 @@
    (93.6) kitNewsRankRow(p,{rank,how,ph}) / kitNewsRankList(rows) → the sắc phong news row: kit face + name (or placeholder) + new rank chip + how known.
    kitEdict({fromWord}) (j93) prints the given «from» word on the old-rank chip (a tú nữ: «Tú nữ»). */
 const KIT_SCN={z:57,edge:4,blur:6,veil:"rgba(20,12,8,.45)",veilNight:"rgba(10,16,48,.45)",night:"brightness(.62) saturate(.85)",intro:1300,toBlur:700,
- fold:{fh:.80,msgrX:.19,meX:.30,boxX:.43,boxW:.555,soloFh:.97,soloX:.22},ipad:{fh:.86,msgrX:.115,meX:.27,boxX:.41,boxW:.575,soloFh:.97,soloX:.20},gap:8,tail:13};
+ fold:{fh:.80,mfh:.94,hfh:.78,msgrX:.22,meX:.82,cX:.02,cW:.60,cTop:.42,nmX:.2,nbW:.42,boxX:.43,boxW:.555,soloFh:.97,soloX:.22},ipad:{fh:.86,mfh:.98,hfh:.84,msgrX:.17,meX:.84,cX:.02,cW:.64,cTop:.40,nmX:.15,nbW:.40,boxX:.41,boxW:.575,soloFh:.97,soloX:.20},gap:8,tail:13};
 (function(){try{const st=document.createElement("style");st.id="kscn-css";st.textContent=`
 .kscn{position:fixed;z-index:${KIT_SCN.z};overflow:hidden;border-radius:var(--k-rad,12px);background:#2a1a12}
 .kscn-bg{position:absolute;inset:-14px;background-size:cover;background-position:center;filter:blur(${KIT_SCN.blur}px)}
@@ -32,6 +32,9 @@ const KIT_SCN={z:57,edge:4,blur:6,veil:"rgba(20,12,8,.45)",veilNight:"rgba(10,16
 .kscn-box.kscn-tl:before,.kscn-box.kscn-tl:after{content:"";position:absolute;width:0;height:0;border-style:solid;border-color:transparent}
 .kscn-box.kscn-tl:before{left:-${KIT_SCN.tail}px;top:var(--kty,40px);border-width:11px ${KIT_SCN.tail}px 11px 0;border-right-color:var(--gold,#b8901f)}
 .kscn-box.kscn-tl:after{left:-${KIT_SCN.tail-2}px;top:calc(var(--kty,40px) + 1px);border-width:10px ${KIT_SCN.tail-1}px 10px 0;border-right-color:#fbf1e6}
+.kscn-box.kscn-tr:before,.kscn-box.kscn-tr:after{content:"";position:absolute;width:0;height:0;border-style:solid;border-color:transparent}
+.kscn-box.kscn-tr:before{right:-${KIT_SCN.tail}px;top:var(--kty,40px);border-width:11px 0 11px ${KIT_SCN.tail}px;border-left-color:var(--gold,#b8901f)}
+.kscn-box.kscn-tr:after{right:-${KIT_SCN.tail-2}px;top:calc(var(--kty,40px) + 1px);border-width:10px 0 10px ${KIT_SCN.tail-1}px;border-left-color:#fbf1e6}
 .kpl .kplt .kscn-rk{margin-left:6px}
 body.kscn-on .kemo-big{visibility:hidden!important}
 button.ka.kbare .kat{margin:auto 0}button.ka.kbare .kabody{display:flex;flex-direction:column;justify-content:center}
@@ -62,14 +65,21 @@ const kitScene={
  async pair(L,o){const ip=document.documentElement.classList.contains("kv2"),K=ip?KIT_SCN.ipad:KIT_SCN.fold,w=L.g.w,H=L.g.H,gap=KIT_SCN.gap,X=Math.round(w*K.boxX),BW=Math.round(w*K.boxW);
   if(!o.msgr){const fh=Math.round(H*K.soloFh);await kitScene.fig(L,o.me,{cx:w*K.soloX,top:H-fh,fh,z:3});
    return{box:kitDlgBox(L,o.choiceTitle||o.storyTitle,[...(o.story||[]),...(o.choice||[])],{x:X,y:gap,w:BW,h:H-2*gap},{y:Math.round(H*.20)},{kind:o.kind,seal:o.seal})}}
-  const fh=Math.round(H*K.fh);await kitScene.fig(L,o.msgr,{cx:w*K.msgrX,top:0,fh,z:2});await kitScene.fig(L,o.me,{cx:w*K.meX,top:H-fh,fh,z:3});
-  const sb=kitDlgBox(L,o.storyTitle,o.story||[],{x:X,y:gap,w:BW},{y:ip?52:62},{kind:o.kind,seal:o.seal});const sh=Math.ceil(sb.getBoundingClientRect().height),top=gap+sh+12;
-  const cb=kitDlgBox(L,o.choiceTitle,o.choice||[],{x:X,y:top,w:BW,h:H-top-gap},{y:Math.max(26,Math.round(H*(ip?.30:.36))-top)},{kind:o.kind,seal:o.seal,noSeal:true});return{story:sb,choice:cb}},
+  /* LAYOUT A (owner OD 24/11 ~04:35Z, restating ~20:20Z/~20:22Z/~20:27Z): the speaker stands LEFT, FULL BODY, big; his story box on the RIGHT; the choice box BELOW lies over the left figure; THEN her own figure on the
+     RIGHT, HALF BODY (small, cut by the layer's bottom edge on purpose); never two figures stacked on the left. NO choice (two others talking): both FULL BODY, one on each side, the box between. */
+  const msg=o.msgr,hasCh=(o.choice||[]).length>0;
+  if(!hasCh){const fh=Math.round(H*K.fh);await kitScene.fig(L,msg,{cx:w*K.nmX,top:H-fh,fh,z:2});const f2=await kitScene.fig(L,o.me,{cx:w*(1-K.nmX),top:H-fh,fh,z:2});
+   const bw=Math.round(w*K.nbW),sb=kitDlgBox(L,o.storyTitle,o.story||[],{x:Math.round((w-bw)/2),y:gap,w:bw},null,{kind:o.kind,seal:o.seal});return{story:sb}}
+  const mfh=Math.round(H*K.mfh);await kitScene.fig(L,msg,{cx:w*K.msgrX,top:H-mfh,fh:mfh,z:2});
+  const sb=kitDlgBox(L,o.storyTitle,o.story||[],{x:X,y:gap,w:BW},{y:ip?52:62},{kind:o.kind,seal:o.seal});const sh=Math.ceil(sb.getBoundingClientRect().height);
+  const hfh=Math.round(H*K.hfh),f2=await kitScene.fig(L,o.me,{cx:w*K.meX,top:gap+sh+10,fh:hfh,z:3});f2.dataset.half="1";f2.__half=1;/* half body: cut by the bottom edge, not clipped by a box */
+  const cy=Math.max(gap+sh+12,Math.round(H*K.cTop)),cw=Math.round(w*K.cW);
+  const cb=kitDlgBox(L,o.choiceTitle,o.choice||[],{x:Math.round(w*K.cX),y:cy,w:cw,h:H-cy-gap},{y:26,side:"r"},{kind:o.kind,seal:o.seal,noSeal:true});return{story:sb,choice:cb}},
  close(now,cb){const C=kitScene.cur;kitScene.cur=null;if(!C){cb&&cb();return}const L=C.L;const off=()=>document.body.classList.remove("kscn-on");if(now||kscnCalm()){L.remove();off();cb&&cb();return}
   L.boxes.forEach(b=>b.animate([{opacity:1},{opacity:0,transform:"translateX(30px)"}],{duration:260,fill:"both"}));L.figs.forEach(f=>f.animate([{opacity:1},{opacity:0,transform:"translateX(-50px)"}],{duration:380,delay:120,fill:"both"}));
   L.animate([{opacity:1},{opacity:0}],{duration:420,delay:260,fill:"both"}).onfinish=()=>{L.remove();off();cb&&cb()}}};
 /* 93.3 the layout A dialogue box. nodes = DOM nodes or html strings; the node with class «opts» (or a list of kit option buttons wrapped by the caller) is the ONLY scroller */
-function kitDlgBox(L,title,nodes,pos,tail,ho){ho=ho||{};pos=pos||{};const b=document.createElement("div");b.className="dlg kpanel kscn-box"+(tail?" kscn-tl":"");
+function kitDlgBox(L,title,nodes,pos,tail,ho){ho=ho||{};pos=pos||{};const b=document.createElement("div");b.className="dlg kpanel kscn-box"+(tail?(tail.side==="r"?" kscn-tr":" kscn-tl"):"");
  b.innerHTML=typeof kpHeader==="function"?kpHeader(ho.kind||"choice",title||"","",ho.seal):`<div class="kph"><span class="kpht"><span class="kptitle">${title||""}</span></span></div>`;if(ho.noSeal)b.querySelectorAll(".kpseal").forEach(e=>e.remove());
  const c=document.createElement("div");c.className="kscn-col";(nodes||[]).forEach(n=>{if(n==null)return;if(typeof n==="string"){const t=document.createElement("div");t.innerHTML=n;while(t.firstChild)c.appendChild(t.firstChild)}else c.appendChild(n)});b.appendChild(c);
  b.style.cssText=`left:${pos.x||0}px;top:${pos.y||0}px;width:${pos.w||300}px;height:${pos.h?pos.h+"px":"auto"}`;if(tail)b.style.setProperty("--kty",(tail.y||40)+"px");

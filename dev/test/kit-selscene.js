@@ -35,7 +35,7 @@ const ROOT=path.resolve(__dirname,'../..');const MT={'.html':'text/html; charset
    const ck=await p.evaluate(()=>{const L=window.__SC.L,g=L.getBoundingClientRect();const res={};const hud=document.querySelector('header.hud').getBoundingClientRect(),bar=document.querySelector('nav.bar').getBoundingClientRect();
     res.between=g.top>=hud.bottom-1&&g.bottom<=bar.top+1;res.clearGone=!L.classList.contains('kscn-clear');
     res.noClip=L.figs.map(f=>{const r=f.getBoundingClientRect(),o=f.ob;return [Math.round(r.left+o.l*r.width-g.left),Math.round(g.right-(r.left+o.r*r.width)),Math.round(r.top+o.t*r.height-g.top),Math.round(g.bottom-(r.top+o.b*r.height))]});
-    res.noClipOk=res.noClip.every(a=>a[0]>=3&&a[1]>=3&&a[2]>=0&&a[3]>=-1);
+    res.noClipOk=res.noClip.every((a,i)=>a[0]>=3&&a[1]>=3&&a[2]>=0&&(L.figs[i].__half||a[3]>=-1));/* the HALF-BODY figure (her, right) is cut by the layer's bottom edge on purpose (owner 24/11 ~04:35Z) */
     res.boxIn=L.boxes.every(b=>{const r=b.getBoundingClientRect();return r.top>=g.top-1&&r.bottom<=g.bottom+1&&r.right<=g.right+1&&r.left>=g.left-1});
     res.onTop=L.boxes.every(b=>{const r=b.getBoundingClientRect();const e=document.elementFromPoint(r.left+r.width/2,r.top+Math.min(60,r.height/2));return !!e&&b.contains(e)});
     const all=[...L.querySelectorAll('*')];const sc=all.filter(e=>e.scrollHeight>e.clientHeight+2&&/(auto|scroll)/.test(getComputedStyle(e).overflowY));res.scrollers=sc.map(e=>e.className.split(' ')[0]);res.onlyOpts=sc.every(e=>e.classList.contains('opts'));
