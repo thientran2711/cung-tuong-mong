@@ -34,7 +34,8 @@ const kim=A.mgpItems('kim');ok(kim.every(x=>x.sh.length>=2&&x.seed),'kim: >= 2 h
 // tho: glyph x manner, strokes keep their order/count, points inside the square
 const tho=A.mgpItems('tho');ok(tho.every(x=>x.g[1].length===x.n&&x.g[1].every(st=>(st.length===2||st.length===3)&&st.every(([u,v])=>u>=.05&&u<=.95&&v>=0&&v<=1))),'tho: stroke count = n, 2-3 points per stroke, inside the square');
 ok(Object.keys(c.NWG).every(n=>tho.filter(x=>x.n==+n).length>=c.NWG[n].length*6),'tho: every tier length keeps all its glyphs (6 manners each)');
-ok(tho.every(x=>/^Chữ /.test(x.g[0])),'tho: glyph names unchanged (no new words in play)');
+ok(Object.keys(c.NWG).every(n=>tho.filter(x=>x.n==+n).length>=MIN),'tho: every stroke-count tier (n=2..5, the tier a rank draws from) holds >= BAL.mgp.min items');
+ok(tho.every(x=>/^Chữ /.test(x.g[0])),'tho: glyph names all "Chữ ..." (Hán-Việt, no digits)');
 // le: N distinct altar pieces from the eight, a layout of N slots
 const le=A.mgpItems('le');ok(le.every(x=>x.objs.length===x.n&&x.lay.length===x.n&&new Set(x.objs).size===x.n&&x.objs.every(o=>c.LEO.includes(o))),'le: n distinct real altar pieces, n slots');
 ok([3,4,5].every(n=>le.filter(x=>x.n===n).length>=MIN),'le: every table size holds >= '+MIN);
