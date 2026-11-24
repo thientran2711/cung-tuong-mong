@@ -70,8 +70,8 @@ function agOrgName(o){try{const x=ORIGINS.find(z=>z.k===o);return x?x.n[0].toLow
 /* ---------------- NEEDS (from stats she already has) ---------------- */
 function agNeeds(v){const G=BAL.ag.goal,W=BAL.ag.road[agOrg(v)]||BAL.ag.road._;const gap=(g,x)=>cl((g-(x||0))/g,0,1);
  const O=others(v).filter(x=>x&&x!==v);let fr=0,sp=0,sf=0;
- for(const x of O){if(aff(v,x)>=G.friend)fr++;sp=Math.max(sp,agSpite(v,x))}
- for(const x of liveRivals(true))if(x!==v)sf=Math.max(sf,bandOf(danger(x,v)));
+ for(const x of O){if(aff(v,x)>=netTh(v,"than"))fr++;sp=Math.max(sp,agSpite(v,x))}
+ for(const x of liveRivals(true))if(x!==v)sf=Math.max(sf,bandVT(x,v));
  let q=null;try{q=queenP()}catch(e){}
  return{sung:gap(G.sung,v.sung)*W.sung,th:S.thDead?0:gap(G.th,v.th)*W.th,hh:q&&q!==v&&!v.queen?gap(G.hh,v.hh)*W.hh:0,danh:gap(G.danh,v.danh)*W.danh,duc:gap(G.duc,v.duc)*W.duc,
   kid:!sonsOf(v).length&&!v.preg&&(v.age||20)<G.kidAge?W.kid:0,ally:gap(G.ally,fr)*W.ally,spite:agSpN(sp)*W.spite,safe:cl(sf/Math.max(1,BANDS.length-1),0,1)*W.safe,
