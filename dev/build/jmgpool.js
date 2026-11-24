@@ -74,5 +74,7 @@ function mgpOne(kind,used,filt){let L=mgpItems(kind);if(!L.length)return null;if
  const it=(typeof nrDraw==="function"?nrDraw("mg:"+kind,F,x=>x.id):null)||F[Math.floor(Math.random()*F.length)];if(used&&it)used.push(it.id);return it}
 /* skins (mgskin:<kind>:<skin>): the painted skins per kind arrive from Foreman C («FOR MAIN 113 MGSKIN <kind> keys») as plain ids in MGP_SKIN; no skin = "" = today's art */
 const MGP_SKIN={};
-function mgpSkin(kind){const L=MGP_SKIN[kind]||[];if(!L.length)return"";try{return(typeof nrDraw==="function"?nrDraw("mgskin:"+kind,L):L[0])||""}catch(e){return""}}
+/* ORDER THIN P1b (skin lane, kit part MG-SKIN review/kit-mgskin): the choice = today's art ("default") + every skin registered for the kind (kitMgSkinAdd) + ids listed in MGP_SKIN; fresh-first through the memory; "" = today's art */
+function mgpSkin(kind){const reg=typeof kitMgSkinList==="function"?kitMgSkinList(kind).map(s=>s.id).filter(Boolean):[],L=(MGP_SKIN[kind]||[]).concat(reg.filter(x=>(MGP_SKIN[kind]||[]).indexOf(x)<0));if(!L.length)return"";
+ try{const A=["default"].concat(L),p=typeof nrDraw==="function"?nrDraw("mgskin:"+kind,typeof nrFresh==="function"?nrFresh("mgskin:"+kind,A):A):A[0];return p&&p!=="default"?p:""}catch(e){return""}}
 Object.assign(window,{mgpItems,mgpOne,mgpRng,mgpSkin,MGP_SKIN});

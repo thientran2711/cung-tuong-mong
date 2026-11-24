@@ -244,3 +244,5 @@ K-FOCUS-1b SPEC (append to kitFocus; pure display, no numbers of its own, knobs 
 - These four boards (Chải lông thú, Chơi với thú, Tưới cây, Cờ năm quân; engines petc*/shelfWaterGame/kgGomoku) are DOM / plain cream with no `kg82Bg` call, so the painted backdrops are on the CDN but nothing reads them: `img/kit/mg-thu_tam-bg.webp`, `mg-thu_choi-bg.webp`, `mg-tuoi-bg.webp`, `mg-co7-bg.webp` (1024x768, ≤ 257 KB).
 - Ask: kit keeper gives these boards the same backdrop part as canvas boards (cover-fit picture + soft veil behind the play area, kg82Bg look), keyed `mg-<kind>-bg`. MG10A did not style it by hand.
 - Status: OPEN.
+
+- MG-SKIN (MAIN 113 22:39Z; owner OD 23/11 ~23:05Z real): «skin» slot on the kg82 frame {bg picture, board/piece art keys, button palette}, ≥4 palettes from the kit palette, Fold + iPad readable → DONE by KIT KEEPER #14 on review/kit-mgskin (KIT.md §MG-SKIN, test dev/test/kit-mgskin.js). Art: Foreman C paints img/mg/<kind>-<id>.webp (+ img/mg/<sprite>-<id>.webp); wiring: THIN P1 (kitMgSkinAdd + KG82.preSkin).

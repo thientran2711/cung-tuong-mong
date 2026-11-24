@@ -25,7 +25,9 @@ const nwqKey=a=>"nwq-"+a;
    cfg.build(r,tier,W,H) → P{items:[{x,y(centre),hx,hy(home),size,paint(g,it,cx,cy,s,st)}], slots:[{x,y,w,h,multi,ok(it),paint(g,s,st,now),ax,ay,aw,ah}], tipY}
    tier < BAL.nwq.free: a drop is checked at once (right = stays, wrong = bounces back with a soft tip, a little score);
    tier ≥ free: pieces can be placed freely and are judged on «Xong». Gợi ý glows the next piece and its place. */
-function nwqPlace(box,env,cfg){const kind=env.kind,B=BAL.nwq,tier=nwqTier(env),imm=tier<B.free;const C=kg82Canvas(box,cfg.ratio,cfg.hMax),{g,W,H}=C;
+/* ORDER THIN P1b: tc and thq boards come from a seeded recipe pool (jmgpool_b.js, family mg:tc / mg:thq); the engine's own build runs on the item's seed. used = ids shown in this game */
+function nwqBuild(cfg,kind,r,tier,W,H,used){const IT=(kind==="tc"||kind==="thq")&&typeof mgpOne==="function"?mgpOne(kind,used):null;return IT?mgpWith(IT,()=>cfg.build(r,tier,W,H)):cfg.build(r,tier,W,H)}
+function nwqPlace(box,env,cfg){const MU=[],kind=env.kind,B=BAL.nwq,tier=nwqTier(env),imm=tier<B.free;const C=kg82Canvas(box,cfg.ratio,cfg.hMax),{g,W,H}=C;
  const NR=B.rounds[kind],LIM=B.lim[kind][tier]*1000,IDLE=imm&&B.idle[tier]?B.idle[tier]*1000:0;
  let r=-1,pts=0,tot=0,P=null,phase="",t0=0,tAct=0,drag=null,done=false;const pops=[];
  const hb=document.createElement("div");hb.className="kg82act";hb.innerHTML=NWB.btn("nwqhint","hint",{cls:"kgbtn",label:"Gợi ý: "+cfg.hintSub})+(imm?"":NWB.btn("nwqdone","check",{cls:"kgbtn",label:"Xong: chấm điểm"}));box.appendChild(hb);/* mg-noword-b: icon buttons, no word in play */
@@ -39,7 +41,7 @@ function nwqPlace(box,env,cfg){const kind=env.kind,B=BAL.nwq,tier=nwqTier(env),i
  function home(it,fly){if(fly)it.bk={x:it.x,y:it.y,a:performance.now()};unseat(it);it.x=it.hx;it.y=it.hy;it.sc=1}
  function seat(it,s){unseat(it);if(!s.multi)s.list.slice().forEach(o=>home(o,true));s.list.push(it);it.slot=P.slots.indexOf(s);relayout(s)}
  function next(){r++;if(r>=NR){done=true;return setTimeout(()=>env.end(10*pts/Math.max(1,tot)),300)}/* float: graded once by kg82 mgGrade */
-  P=cfg.build(r,tier,W,H);P.miss=0;P.cost=0;P.glow=null;P.tip=null;P.say=null;P.items.forEach(it=>{it.x=it.hx;it.y=it.hy;it.slot=-1;it.locked=false;it.sc=1;it.res=null});P.slots.forEach(s=>{s.list=[]});
+  P=nwqBuild(cfg,kind,r,tier,W,H,MU);P.miss=0;P.cost=0;P.glow=null;P.tip=null;P.say=null;P.items.forEach(it=>{it.x=it.hx;it.y=it.hy;it.slot=-1;it.locked=false;it.sc=1;it.res=null});P.slots.forEach(s=>{s.list=[]});
   phase="play";t0=tAct=performance.now();drag=null;const d=hb.querySelector("#nwqdone");if(d)d.disabled=false;hb.querySelector("#nwqhint").disabled=false}
  const itemAt=(x,y)=>{for(let i=P.items.length-1;i>=0;i--){const it=P.items[i];if(it.locked)continue;const h=it.size*it.sc/2+4;if(Math.abs(x-it.x)<=h&&Math.abs(y-it.y)<=h)return it}return null};
  const slotAtPt=(x,y)=>{let bi=-1,bd=1e9;P.slots.forEach((s,i)=>{const inside=Math.abs(x-s.x)<=s.w/2*1.12&&Math.abs(y-s.y)<=s.h/2*1.12;const d=inside?0:k91Dist(x,y,s.x,s.y)-Math.max(s.w,s.h)*.6;if(d<bd){bd=d;bi=i}});return bd<=0?bi:-1};
@@ -168,7 +170,7 @@ function nwqRobe(g,x,y,w,h,col,emb){const cx=x+w/2,hr=h*.12;g.save();
 function nwqScrap(g,cx,cy,s,col,emb){g.save();g.translate(cx,cy);g.fillStyle=col;g.strokeStyle="#00000044";g.lineWidth=1.2;g.beginPath();const p=[[-.5,-.4],[-.18,-.5],[.1,-.38],[.5,-.5],[.42,-.05],[.52,.4],[.12,.5],[-.12,.36],[-.5,.46],[-.4,0]];p.forEach(([a,b],i)=>i?g.lineTo(a*s,b*s):g.moveTo(a*s,b*s));g.closePath();g.fill();g.stroke();
  g.globalAlpha=.2;g.strokeStyle="#fff";g.lineWidth=1;for(let i=-3;i<=3;i++){g.beginPath();g.moveTo(-s*.5,i*s*.12);g.lineTo(s*.5,i*s*.12);g.stroke()}g.globalAlpha=1;if(emb)nwqFit(g,emb,0,0,s*.55);g.restore()}
 function nwqClue(box,env){const B=BAL.nwq,tier=nwqTier(env),C=kg82Canvas(box,1.2,540),{g,W,H}=C;const NS=B.n.xa[tier],NC=B.clues[tier],NR=B.rounds.xa,LIM=B.lim.xa[tier]*1000,IDLE=B.idle[tier]?B.idle[tier]*1000:0;
- let r=-1,pts=0,P=null,phase="",t0=0,tAct=0,done=false;const pops=[];
+ const XAU=[];let r=-1,pts=0,P=null,phase="",t0=0,tAct=0,done=false;const pops=[];
  const hb=document.createElement("div");hb.className="kg82act";hb.innerHTML=NWB.btn("nwqhint","hint",{cls:"kgbtn",label:"Gợi ý: gạch một người không khớp"});box.appendChild(hb);
  const dm=k91DemoCard(box,nwqKey("xa"),{title:"CÁCH CHƠI: KHÁM VẬT CHỨNG",done:()=>{hb.hidden=false;t0=tAct=performance.now()},
   lines:["Vụ án có vật chứng bày ở trên: mảnh áo, đồ rơi lại. Mỗi người bị nghi mặc áo nào, mang theo thứ gì thì hiện ở dưới.","Chạm vào người có áo và vật mang theo khớp cả hai vật chứng.","Chọn sai thì người ấy bị gạch, mất một ít phần. Chưa rõ thì chạm Gợi ý."],
@@ -177,11 +179,12 @@ function nwqClue(box,env){const B=BAL.nwq,tier=nwqTier(env),C=kg82Canvas(box,1.2
    if(on){g.save();g.strokeStyle=K91C.good();g.lineWidth=3;k91RR(g,cx-92,106,64,76,8);g.stroke();g.restore()}return 204}});
  if(dm)hb.hidden=true;
  function next(){r++;if(r>=NR){done=true;return setTimeout(()=>env.end(cl(pts,0,10)),300)}
-  const cols=kg82Shuf(NWQ_COL),thg=kg82Shuf(NWQ_THG),emb=kg82Shuf(NWQ_EMB);const att=["c","t","e"].slice(0,NC);
+  const att=["c","t","e"].slice(0,NC);const XI=typeof mgpOne==="function"?mgpOne("xa",XAU):null;/* ORDER THIN P1b: one case (culprit + decoys + the shuffled row, seeded) */
+  const gen=()=>{const cols=kg82Shuf(NWQ_COL),thg=kg82Shuf(NWQ_THG),emb=kg82Shuf(NWQ_EMB);
   const cul={c:cols[0],t:thg[0],e:emb[0]};const S=[{cul:true,c:cols[0],t:thg[0],e:emb[0]}];
   for(let i=1;i<NS;i++){const m=Math.floor(Math.random()*(NC));const keep=kg82Shuf(att).slice(0,Math.min(m,NC-1));const q={cul:false};
    q.c=keep.includes("c")?cul.c:cols.filter(x=>x!==cul.c)[Math.floor(Math.random()*(cols.length-1))];q.t=keep.includes("t")?cul.t:thg.filter(x=>x!==cul.t)[Math.floor(Math.random()*(thg.length-1))];q.e=keep.includes("e")?cul.e:emb.filter(x=>x!==cul.e)[Math.floor(Math.random()*(emb.length-1))];S.push(q)}
-  const L=kg82Shuf(S);const cs=NS<=3?NS:Math.min(NS,Math.max(2,Math.floor((W-8)/104)));const rows=Math.ceil(NS/cs),cw=(W-12)/cs-6,top=H*.4,ch=Math.min((H*.58-4)/rows-6,cw*1.12);
+  return{cul,L:kg82Shuf(S)}};const{cul,L}=XI?mgpWith(XI,gen):gen();const cs=NS<=3?NS:Math.min(NS,Math.max(2,Math.floor((W-8)/104)));const rows=Math.ceil(NS/cs),cw=(W-12)/cs-6,top=H*.4,ch=Math.min((H*.58-4)/rows-6,cw*1.12);
   L.forEach((q,i)=>{const row=Math.floor(i/cs),col=i%cs,n=Math.min(cs,L.length-row*cs);q.x=(W-n*(cw+6)+6)/2+col*(cw+6);q.y=top+row*(ch+6);q.w=cw;q.h=ch;q.gone=false;q.res=null});
   P={S:L,att,cul,cost:0,miss:0,glow:null,tip:null,say:null,title:NWQ_CASE[r%NWQ_CASE.length],cw,ch};phase="play";t0=tAct=performance.now();hb.querySelector("#nwqhint").disabled=false}
  const live=()=>P.S.filter(q=>!q.gone);

@@ -73,11 +73,11 @@ function k91Hold(box,env){const C=kg82Canvas(box,.9,430),{g,W,H}=C;const lv=env.
    ear tubes at THEIR painted place (lower than the mouth). An arrow crossing the mouth plane inside the opening counts; on the outer lip it bounces
    (miss); into the painted neck below the lip = miss; beside the vase it flies on and may still drop into an ear tube. A counted arrow is drawn standing IN its hole (the part below the near lip
    is hidden by a clip), never beside the vase. */
-function k91Fling(box,env){const C=kg82Canvas(box,.85,430),{g,W,H}=C;const N=6,U=Math.min(W,H);const A=BAL.mgArt.dauho,M=A.mouth,E=A.ear;
+function k91Fling(box,env){const C=kg82Canvas(box,.85,430),{g,W,H}=C;const N=6,U=Math.min(W,H);const A=BAL.mgArt.dauho,M=A.mouth,E=A.ear;const DI=typeof mgpOne==="function"?mgpOne("dauho"):null;/* ORDER THIN P1b: one throw sheet (six vase places × six winds), drawn through the no-repeat memory */
  const AIDT=mgLev(env,"dauho","aid");/* seconds of flight shown by the aim dots */const PULL=mgLev(env,"dauho","pull")||1;/* cal-p2: drag gain by ease (BAL.mgTier.lev.dauho.pull); the cap grows by the same factor so the strongest throw stays K·MAXD */const X0=W*.13,Y0=H*.8,GR=H*1.9,K=5.4*PULL,MAXD=U*.45/PULL,MY=H*.5;let px=0,R=0,Ws=0,wd=0,k=0,pts=0,phase="aim",aim=null,fly=null,sol=null,landed=[],done=false;const pops=[];
  /* the painted holes at this throw's vase size: R = mouth half-width (BAL.mgTier.lev.dauho.mouth by ease), Ws = picture width, ears below the mouth */
  const G=()=>({ry:M.ry*Ws,rim:A.rim*Ws,ey:MY+(E.cy-M.cy)*Ws,ex:E.dx*Ws,er:E.rx*Ws,ery:E.ry*Ws});
- const setThrow=()=>{px=W*(.6+Math.random()*.22);R=U*.05*mgLev(env,"dauho","mouth");/* mg-balance-2: mouth size by ease (BAL.mgTier.lev.dauho) */Ws=R/M.rx;wd=(Math.random()*2-1)*H*.55*(k/N);aim=null;fly=null;sol=null;phase="aim"};setThrow();
+ const setThrow=()=>{px=W*(DI?DI.u[k%N]:.6+Math.random()*.22);R=U*.05*mgLev(env,"dauho","mouth");/* mg-balance-2: mouth size by ease (BAL.mgTier.lev.dauho) */Ws=R/M.rx;wd=(DI?DI.w[k%N]:Math.random()*2-1)*H*.55*(k/N);aim=null;fly=null;sol=null;phase="aim"};setThrow();
  const vOf=(ax,ay,cx,cy)=>{let dx=cx-ax,dy=cy-ay;const L=Math.hypot(dx,dy);if(L>MAXD){dx*=MAXD/L;dy*=MAXD/L}return[-dx*K,-dy*K]};
  /* ONE judge for the aim sim, the solver and the real flight: a step from (·,py) to (x,y) going down through a hole plane */
  function judge(py,y,x){const g0=G();if(py<MY&&y>=MY){const d=Math.abs(x-px);if(d<=R)return{q:d<R*A.q.c?A.q.m[0]:A.q.m[1],at:0,x};if(d<=g0.rim)return{q:0,at:-9,x}}
