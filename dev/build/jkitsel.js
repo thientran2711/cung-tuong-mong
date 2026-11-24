@@ -1,3 +1,4 @@
+const KIT_SQOPT={pic:64,narrow:56};/* KIT §6.2c: the ONE square option picture size (px); narrow = html.kpnarrow */
 /* ================= jkitsel: KIT §93 — scene layer «layout A» + name tag for a half-known person + sắc phong news row (KIT KEEPER #13, review/kit-selscene) =================
    Kit requests of SELSCENE (dev/kit/KIT_REQUESTS.md «23/11 SELSCENE» 1–4) and the event layout A the owner chose (OD 23/11 ~20:20Z/~20:22Z/~20:25Z/~20:27Z/~20:30Z,
    mock review/mock-stage m13 v3.1). PURE DISPLAY: no game logic, no numbers of its own; every knob in KIT_SCN.
@@ -35,6 +36,10 @@ const KIT_SCN={z:57,edge:4,blur:6,veil:"rgba(20,12,8,.45)",veilNight:"rgba(10,16
 .kpl .kplt .kscn-rk{margin-left:6px}
 body.kscn-on .kemo-big{visibility:hidden!important}
 button.ka.kbare .kat{margin:auto 0}button.ka.kbare .kabody{display:flex;flex-direction:column;justify-content:center}
+/* KIT §6.2c SQUARE OPTION (owner OD:L2076 + L1867, 24/11 SELSCENE-2): a frame with a PERSON on the left → its option buttons on the right take the SQUARE picture (ONE fixed size KIT_SQOPT.pic), height = content, never a tall empty card */
+button.ka.kbare.kbare{--kasq:${KIT_SQOPT.pic}px;--kaw:var(--kasq)!important;--kah:var(--kasq)!important;min-height:0!important;height:auto!important;padding:6px 10px 6px 6px!important;align-items:center!important}
+button.ka.kbare.kbare>.kaart{flex:0 0 var(--kasq)!important;width:var(--kasq)!important;height:var(--kasq)!important;min-height:0!important;aspect-ratio:1/1;align-self:center!important;margin-block:0!important}
+html.kpnarrow button.ka.kbare.kbare{--kasq:${KIT_SQOPT.narrow}px}
 .kscn-tag{display:inline-block;width:max-content;max-width:12em;text-align:center;font-size:.82rem;line-height:1.2;color:var(--ink,#3a2a1c);padding:2px 6px;border-radius:8px;background:#fffaf0e8;border:1px solid color-mix(in srgb,var(--tc,#5a6878) 70%,#fff);box-shadow:0 2px 6px #0003}`;document.head.appendChild(st)}catch(e){}})();
 function kscnGeo(){const h=document.querySelector("header.hud"),b=document.querySelector("nav.bar");const hr=h?h.getBoundingClientRect():{bottom:0,left:0,right:innerWidth},br=b?b.getBoundingClientRect():{top:innerHeight};
  const t=Math.round(hr.bottom+4),bt=Math.round(br.top-4),L=Math.round(hr.left),R=Math.round(innerWidth-hr.right);return{t,H:bt-t,L,R,w:innerWidth-L-R}}
