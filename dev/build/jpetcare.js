@@ -15,7 +15,7 @@
    4. NPCs: same stages and stats (data only, they feed when they have the bạc). Old saves: stage from the time already owned, stats from khí lực. */
 Object.assign(BAL,{pet:{freeHiSung:3,/* Sủng lost when she sends back a pet the Emperor gave (jpet free) */stages:["Non","Thiếu niên","Trưởng thành","Linh thú"],ageW:[0,8,20,40],affNeed:[0,25,50,80],mul:[0,.6,1,1.4],
  decay:{full:14,clean:9,joy:11,aff:2},khac:1,gain:{feed:[12,40],bath:[10,40],play:[8,36]},affGain:[2,6],maidEff:.5,maidW:4,sad:30,sick:15,neglectW:3,
- helpRel:6,helpGain:25,stealO:[55,38,22,8],stealBite:[6,10,16,24],stealSuc:8,stealCaughtDanh:6,stolenAff:5,npcCare:.8,/* role-parity-bundle-fix (law 1 + law 4): who an NPC CHOOSES to help — p3PetFr (jagacts3, AG plan) asks rel ≥ helpFr, the mind menu (below) rel ≥ helpMind; the act gate ACT.petcare.ok is ONE gate for her and an NPC */helpFr:10,helpMind:20}});
+ helpRel:6,helpGain:25,stealO:[55,38,22,8],stealBite:[6,10,16,24],stealSuc:8,stealCaughtDanh:6,stolenAff:5,npcCare:.8,/* role-parity-bundle-fix (law 1 + law 4): who an NPC CHOOSES to help — p3PetFr (jagacts3, AG plan) asks rel ≥ helpFr, the mind menu (below) rel ≥ helpMind; the act gate ACT.petcare.ok is ONE gate for her and an NPC */}});
 const PETC_FOOD={meo:"cá",cho:"xương",chim:"hạt kê",tho:"cà rốt",ca:"mồi bánh",ho:"thịt",lan:"quả linh",phuong:"hạt ngô đồng",long:"ngọc châu",loc:"cỏ linh chi",hac:"cá nhỏ"};
 function petcKind(k){k=String(k||"");return /meo|mieu/.test(k)?"meo":/cho|sutu/.test(k)?"cho":/hoami|sao|vet|uyen|camke|ke/.test(k)?"chim":/tho/.test(k)?"tho":/cavang|cachep|lyngu|ly/.test(k)?"ca":/cuuvi|ho/.test(k)?"ho":/kylan|lan/.test(k)?"lan":/phuong/.test(k)?"phuong":/thanhlong|long/.test(k)?"long":/loc|thienma|ma/.test(k)?"loc":/quy|hac/.test(k)?"hac":"meo"}
 const PETC_FOODS=Object.values(PETC_FOOD).filter((x,i,a)=>a.indexOf(x)===i);
@@ -207,7 +207,7 @@ try{const add=(g,k)=>{const x=RVGRP.find(r=>r[0]===g);if(x&&!x[1].includes(k))x[
  LACK.petsteal=t=>!tsbPets(t).length?"nàng không nuôi thú":!petHasFree(S)?"hết ô thú nuôi":"";LACK.petcare=t=>!tsbPets(t).length?"nàng không nuôi thú":""}catch(e){console.error("petcare acts",e)}
 /* NPC minds: friendly ones help (with her too), greedy / hostile ones steal (higher stages less tempting: harder) */
 (function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(Array.isArray(O)&&v!==S&&tsbPets(t).length){
-  if(rel(v,t)>=BAL.pet.helpMind&&ACT.petcare.ok(v,t))O.push(["petcare",.4]);const tr=traitsOf(v);if((tr.includes("Tham vọng")||tr.includes("Xảo quyệt"))&&hostility(v,t)>=40&&ACT.petsteal.ok(v,t))O.push(["petsteal",.25*(1+petT(tsbPets(t)[petTarget(t)]).tr*.3)])}}catch(e){}return O}})();
+  if(rel(v,t)>=netTh(v,"than")&&ACT.petcare.ok(v,t))O.push(["petcare",.4]);const tr=traitsOf(v);if((tr.includes("Tham vọng")||tr.includes("Xảo quyệt"))&&hostility(v,t)>=netTh(v,"host")&&ACT.petsteal.ok(v,t))O.push(["petsteal",.25*(1+petT(tsbPets(t)[petTarget(t)]).tr*.3)])}}catch(e){}return O}})();
 /* co-op (review/coop-pets): the friend's entry carries her live pets, so the act tabs offer petcare / thaopet / petsteal on her exactly as on an
    NPC; jcoopworld's runAct wrapper sends what happened to her pets (res.pet) and her client applies it to her own pets.
    coopPetAct(kind) = the same act from code/tests: kind "care"|"harm"|"steal" (or the act key) on the friend entry; returns the result text. */
