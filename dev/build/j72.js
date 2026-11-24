@@ -126,7 +126,7 @@ function q72Make(T,rq,place){const q=q72();let A=rq||null;const not=[];
 function q72Cands(place){const q=q72(),C=q72Ctx(),out=[];const act=new Set(q.a.map(x=>x.tid));
  for(const T of T72){if(T.fu||act.has(T.id))continue;if(q.cd[T.id]!=null)continue;let w=1;try{w=T.w?T.w(C):1}catch(e){w=0}if(!(w>0))continue;
   if(T.or&&!T.or.includes(C.or))continue;if(T.rk&&(S.rank<T.rk[0]||S.rank>T.rk[1]))continue;if(T.sea&&!T.sea.includes(C.sea))continue;
-  const seen=evHistSeen("j72:"+T.id);w*=Math.pow(.12,seen);out.push([T,w,seen])}
+  const seen=evHistSeen(T.hk||("j72:"+T.id))/* j72c composed seeds: family j72:<kind> */;w*=Math.pow(.12,seen);out.push([T,w,seen])}
  const fresh=out.filter(z=>!z[2]);return fresh.length>=3?fresh:out}
 function q72Choose(L,place,rq){L=L.slice();for(let t=0;t<30&&L.length;t++){const z=npwPick(L,y=>y[1]);if(!z)break;L.splice(L.indexOf(z),1);const x=q72Make(z[0],rq,place);if(x)return x}return null}
 
@@ -136,7 +136,7 @@ const Q72_TONED=["rv","hh","fallen","rsv"];
 function q72Tone(X,pool,key){try{if(!X||!X.A||Q72_TONED.indexOf(X.A.k)<0||!window.TONE_POOL||!TONE_POOL[pool])return"";const sp=kSpk(X.A);return kLine(key,TONE_POOL[pool],{about:sp||X.A.o})||""}catch(e){return""}}
 function q72Lead(X,txt){try{if(typeof txt!=="string"||!/^[“"]/.test(txt))return txt;const l=q72Tone(X,"askLead","q72:ask");return l?`${X.A.n} ${l} ${txt}`:txt}catch(e){return txt}}
 /* ---------- the offer (a person comes to her, or she asked around) ---------- */
-function q72Offer(x,how){const q=q72();q.mo[S.turn]=(q.mo[S.turn]||0)+1;q.n.off++;q.cd[x.tid]=wk();evHistMark("j72:"+x.tid);const d=mkP("q72o",{x,how:how||""});if(!d)return false;
+function q72Offer(x,how){const q=q72();q.mo[S.turn]=(q.mo[S.turn]||0)+1;q.n.off++;q.cd[x.tid]=wk();evHistMark((T72I[x.tid]&&T72I[x.tid].hk)||("j72:"+x.tid));const d=mkP("q72o",{x,how:how||""});if(!d)return false;
  {const X=q72X(x);Q.push({t:"Việc nhờ",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,qtags:X?[KIND72[X.T.kind],`Hạn ${X.T.dl||6} tuần`]:null})}return true}
 PEND.q72o=pp=>{try{const x=pp.x;const X=q72X(x);if(!X)return null;const T=X.T;const ok=q72OutTok(q72OkDef(X),X,"ok"),no=q72OutTok(q72NoDef(X),X,"no"),bad=T.bad?q72OutTok(T.bad,X,"bad"):[];
   const owe=q72Debt(X.A)<0;const dec=Math.min(-2,-(T.dec||3)*(owe?2:1));const est=q72Est(X);
@@ -179,7 +179,7 @@ function q72Why(x,X,st,o){if(S.dead)return"đã hết kiếp";if(Q.length)return
  if(!can(k))return (typeof whyTime==="function"&&whyTime(k))||(used+k>BAL.time.khac?"hết khắc":"Sức dưới "+(BAL.time.sucMin)+", cần nghỉ");if(c&&c.bac&&S.bac+c.bac<0)return `thiếu bạc (cần ${-c.bac})`;if(c&&c.suc&&S.suc+c.suc<5)return"Sức quá yếu";
  if(o&&o.t){try{if(!o.t(X))return q72Txt(o.tw||"không làm được",X)}catch(e){return"không làm được"}}return""}
 function q72Line(x,X,st,o){const s=o||st;const k=o?(o.k==null?1:o.k):st.k;const rolled=s.p!=null||(!o&&s.b<100);const od=rolled?q72Odds(o?o.p:st.b,s.sk,X):100;
- const cost=q72Fx(s.c).map(t=>t);cost.unshift(`${k} khắc`);
+ const cost=q72Fx(s.c).map(t=>t);cost.unshift(`${k} khắc`);if(s.cr)cost.push(q72Tok(X.A,-s.cr));if(s.crb&&X.B)cost.push(q72Tok(X.B,-s.crb))/* j72c: thiện cảm paid as the cost of an option */;
  const w=q72Fx(s.w);if(s.r)w.push(q72Tok(X.A,s.r));if(s.rb&&X.B)w.push(q72Tok(X.B,s.rb));if(s.x)w.push(G72(q72Txt(s.x,X)));
  const nxt=o?(o.to==="ok"||(o.to==null&&x.st===X.T.s.length-1)?"xong việc":o.to==="fail"?"bỏ dở việc":"sang bước sau"):(x.st===X.T.s.length-1?"xong việc":"sang bước sau");w.push(G72(nxt));
  const l=q72Fx(s.l);if(s.lr)l.push(q72Tok(X.A,s.lr));if(s.lrb&&X.B)l.push(q72Tok(X.B,s.lrb));if(s.lx)l.push(R72(q72Txt(s.lx,X)));
@@ -188,7 +188,7 @@ function q72Line(x,X,st,o){const s=o||st;const k=o?(o.k==null?1:o.k):st.k;const 
  return `${od<100?word(od)+" · ":""}tốn: ${cost.join(", ")} · thành: ${w.join(", ")}${od<100?` · hỏng: ${l.join(", ")}`:""}${bad.length?` · kèm: bại lộ thì ${bad.join(", ")}`:""}`}
 function q72Do(u,oi){const q=q72();const x=q.a.find(z=>z.u===u);if(!x)return;const X=q72X(x);if(!X){q72End(x,"gone");render();return}
  const st=X.T.s[x.st];if(!st||st.w)return;const o=st.ch?st.ch[oi]:null;if(st.ch&&!o)return;if(q72Why(x,X,st,o))return;
- const b=rsnap();const s=o||st;const k=o?(o.k==null?1:o.k):st.k;const rolled=o?o.p!=null:st.b<100;const od=rolled?q72Odds(o?o.p:st.b,s.sk,X):100;/* odds read before the spend (shown-odds r2) */spend(k);q72Ap(s.c);const ok=!rolled||roll(od);
+ const b=rsnap();const s=o||st;const k=o?(o.k==null?1:o.k):st.k;const rolled=o?o.p!=null:st.b<100;const od=rolled?q72Odds(o?o.p:st.b,s.sk,X):100;/* odds read before the spend (shown-odds r2) */spend(k);q72Ap(s.c);if(s.cr)q72Rel(X.A,-s.cr);if(s.crb&&X.B)q72Rel(X.B,-s.crb);const ok=!rolled||roll(od);
  const nm=q72Txt(s.n,X);let txt="";
  if(ok){q72Ap(s.w);if(s.r)q72Rel(X.A,s.r);if(s.rb&&X.B)q72Rel(X.B,s.rb);let e="";if(s.fn)try{e=s.fn(X,x,true)||""}catch(er){console.error(er)}txt=`${nm}: ${q72Txt(s.ok||"được việc",X)}. ${e}`.trim();log(`${q72Title(X)} · ${txt}`);q72Go(x,X,o?o.to:null,txt)}
  else{q72Ap(s.l);if(s.lr)q72Rel(X.A,s.lr);if(s.lrb&&X.B)q72Rel(X.B,s.lrb);let e="";if(s.fn)try{e=s.fn(X,x,false)||""}catch(er){}const fm=o?(o.lto||"fail"):st.f;txt=`${nm}: không thành, ${q72Txt(s.no||(fm==="r"?"phải làm lại":"hỏng việc"),X)}. ${e}`.trim();log(`${q72Title(X)} · ${txt}`);
