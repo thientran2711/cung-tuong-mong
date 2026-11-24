@@ -64,7 +64,7 @@ function srvLad6(){if(!S||S.lad6)return 0;const up=r=>typeof r==="number"&&r>=2?
  S.lad6=1;return n}
 function srkMax(o,s){const r=rkOf(o);const K=BAL.srvRk;if(s.role==="maid")return r>=7?K.nq:r>=4?K.cs:K.dai;return r>=5?3:r>=3?2:1}
 function servMerit(s,n){s.mp=(s.mp||0)+n}
-function servRanks(){let ev="";for(const p of consorts()){/* co-op guest: NPC staff merit / rises / sales roll on the host (review/servant-mline-r2) */if(p!==S&&typeof mlGuest==="function"&&mlGuest())continue;const L=p.staff||[];for(const s of L.slice()){const o=p;servMerit(s,1+Math.floor(rkOf(o)/3));
+function servRanks(){let ev="";for(const p of consorts()){/* co-op guest: NPC staff merit / rises / sales roll on the host (review/servant-mline-r2) */if(p!==S&&typeof mlGuest==="function"&&mlGuest())continue;const L=p.staff||[];for(const s of L.slice()){const o=p;servMerit(s,balRk("srvMerit",rkOf(o)));
   if((s.mp||0)>=srvMpNeed(srk(s))&&srk(s)<srkMax(o,s)&&(typeof exSrvNpc!=="function"||exSrvNpc(s))){s.rk++;s.mp=0;s.loyal=cl(s.loyal+BAL.eff.j14.loyalServRanks,0,100);if(p===S)ev+=`${s.name} được thăng ${srkName(s)}. `}
   {const t=srkTier(srk(s),s.role);if(t>=2)ap(p,{bac:-Math.floor(t/2)})}
   /* the Emperor's eye: any maid rank, chance by rank / her seeking / the master's favour (jmline mlEye, BAL.mline; was srk>=2 at 1.2 %) */

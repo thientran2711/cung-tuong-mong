@@ -25,10 +25,11 @@ const PROBE=()=>{const o={};const P=r=>({rank:r,danh:40,th:20,dad:50,kids:[{sex:
  const O=await po.evaluate(PROBE),N=await pn.evaluate(PROBE);
  for(const k of Object.keys(O))ok(JSON.stringify(O[k])===JSON.stringify(N[k]),`old = new: ${k}`,JSON.stringify(N[k]));
  const R=await pn.evaluate(()=>{const old={srvRise:r=>r>=3?3:r>=1?2:1,eunSqH:r=>r<=2?2:0,eunSqE:r=>r<=3?2:.4,lowRival:r=>r>=2?1.4:0,riteDanh:r=>r>=3?6:2,soke:r=>r>=3?1:0,
-   favQueen:r=>r>=7?5:0,accuseQueen:r=>r>=7?30:0,seat:r=>r>=6?10:0,petMax:r=>[1,1,2,2,3,3,4,4][r]};const bad=[];
+   favQueen:r=>r>=7?5:0,accuseQueen:r=>r>=7?30:0,seat:r=>r>=6?10:0,petMax:r=>[1,1,2,2,3,3,4,4][r],
+   /* reviewer adds (forms the first scan missed) */srvMerit:r=>1+Math.floor(r/3),srvRew:r=>3+r,dutySkip:r=>Math.floor(Math.min(7,r)/2),rivalAge:r=>r>=5?23:18,thRite:r=>r>=4?50:35,mulberry:r=>r>=5?45:30};const bad=[];
   for(const k in old)for(let r=0;r<8;r++)if(balRk(k,r)!==old[k](r))bad.push(`${k}[${r}] ${balRk(k,r)} vs ${old[k](r)}`);
   const W={rivalSung:[20,9],startDanh:[8,8],startBac:[40,20],kcSung:[8,5],kcEnterPd:{at:2,hi:10,lo:5},feast:[40,8],accAsk:{mid:4,w:8},pkQueen:15,facStr:10,ordOdds:3,h54Pull:5,pkPull:5,
-   giftO:3,takeaway:4,gJoin:3,lostCct:3,routeRival:10,j68e_6:8,j68e_7:9,j68e_9:8,j68f_9:7,j68f_12:8,j71odP:4,j71odP2:5,j71odP_15:3};
+   giftO:3,takeaway:4,gJoin:3,lostCct:3,routeRival:10,j68e_6:8,j68e_7:9,j68e_9:8,j68f_9:7,j68f_12:8,j71odP:4,j71odP2:5,j71odP_15:3,accHostGap:8,tsbBul:7,tsbTc:8,tsbMock:3};
   for(const k in W)if(JSON.stringify(BAL.rkW[k])!==JSON.stringify(W[k]))bad.push(`rkW.${k} ${JSON.stringify(BAL.rkW[k])} vs ${JSON.stringify(W[k])}`);
   const extra=Object.keys(BAL.rkT).filter(k=>!(k in old)).concat(Object.keys(BAL.rkW).filter(k=>!(k in W)));
   const gapOld=[0,1,2,3,4,5,6,7].map(r=>r<3?3:3+(r-2)*2);if(JSON.stringify(gapOld)!==JSON.stringify(BAL.promo.gap))bad.push('promo.gap');

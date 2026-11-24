@@ -8,11 +8,12 @@ const BAL={entryToastMs:5000,/* owner 18/11 ~03:4xZ: ms the place-entry line sta
     jpromo.js adds the rest of BAL.promo (cap, extra, srv…) into this same object. */
  promo:{s:[0,15,25,38,52,66,78,85],d:[0,10,20,30,42,55,68,78],gap:[3,3,3,5,7,9,11,13]},
  /* rkW = every per-rank weight that a formula multiplies by the rank (was typed at the site; values unchanged). [base, per rank] where the base belongs to
-    the same rank rule. rkT = per-rank tables (index = rank 0..7) that replace typed rank ternaries; read with balRk(key, rank). Scan: dev/tools/rank-num-scan.py */
- rkW:{rivalSung:[20,9],startDanh:[8,8],startBac:[40,20],kcSung:[8,5],kcEnterPd:{at:2,hi:10,lo:5},feast:[40,8],accAsk:{mid:4,w:8},pkQueen:15,
+    the same rank rule. rkT = per-rank tables (index = rank 0..7) that replace typed rank ternaries; read with balRk(key, rank). Scan: dev/tools/rank-num-scan.js */
+ rkW:{rivalSung:[20,9],startDanh:[8,8],startBac:[40,20],kcSung:[8,5],kcEnterPd:{at:2,hi:10,lo:5},feast:[40,8],accAsk:{mid:4,w:8},pkQueen:15,accHostGap:8,tsbBul:7,tsbTc:8,tsbMock:3,
   facStr:10,ordOdds:3,h54Pull:5,pkPull:5,giftO:3,takeaway:4,gJoin:3,lostCct:3,routeRival:10,j68e_6:8,j68e_7:9,j68e_9:8,j68f_9:7,j68f_12:8,j71odP:4,j71odP2:5,j71odP_15:3},
  rkT:{srvRise:[1,2,2,3,3,3,3,3],eunSqH:[2,2,2,0,0,0,0,0],eunSqE:[2,2,2,2,.4,.4,.4,.4],lowRival:[0,0,1.4,1.4,1.4,1.4,1.4,1.4],riteDanh:[2,2,2,6,6,6,6,6],
-  soke:[0,0,0,1,1,1,1,1],favQueen:[0,0,0,0,0,0,0,5],accuseQueen:[0,0,0,0,0,0,0,30],seat:[0,0,0,0,0,0,10,10],petMax:[1,1,2,2,3,3,4,4]},
+  soke:[0,0,0,1,1,1,1,1],favQueen:[0,0,0,0,0,0,0,5],accuseQueen:[0,0,0,0,0,0,0,30],seat:[0,0,0,0,0,0,10,10],petMax:[1,1,2,2,3,3,4,4],
+  srvMerit:[1,1,1,2,2,2,3,3],srvRew:[3,4,5,6,7,8,9,10],dutySkip:[0,0,1,1,2,2,3,3],rivalAge:[18,18,18,18,18,23,23,23],thRite:[35,35,35,35,50,50,50,50],mulberry:[30,30,30,30,30,45,45,45]},
  /* PROVISIONAL (robot10-reco, no OD number yet — MAIN / sếp to set): kiepCap.realMin = real minutes one kiếp should not exceed; kiepCap.kyngo = kỳ ngộ per kiếp ceiling.
     Read by dev/measure/robot10-reco.js from the game page (bal.json), never typed there. */
  kiepCap:{realMin:120,kyngo:6},

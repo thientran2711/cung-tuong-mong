@@ -86,7 +86,7 @@ function tsbWant(a,t){/* the most valuable thing t really owns that a would want
  const L=(t.inv||[]).map((e,i)=>[e,i]).filter(([e])=>{if(!e||e.h||e.wk&&!e.wk.n)return false;const it=IT[e.k];if(!it&&!e.wk)return false;if(it&&(it.keep||it.il||it.evi||it.pr<30))return false;if(e.nt||e.g===4)return false;return true})
   .map(([e,i])=>{const it=IT[e.k];let v=e.wk?[20,30,45,70][e.wk.ti||0]:it.pr;if(it&&it.rk>rkOf(a)+1)v*=.4;if(vain&&it&&it.kd==="Trang sức")v*=1.4;if(e.w)v*=1.1;return [e,i,v]}).sort((x,y)=>y[2]-x[2]);return L[0]||null}
 function tsbBulPay(a,t){return Math.min(50,Math.max(0,Math.floor((t===S?S.bac:(t.bac||0))*.4)))}
-function tsbBulO(a,t,ev){return oddsCl(Math.min(Math.round(odA(a,42+(rkOf(a)-rkOf(t))*7+(a.tamco||0)/6+(a.danh||0)/10+(ev?evG(a,t)*6:0)-(typeof witOf==="function"?witOf(t)/6:0)-(t===S&&S.shield?12:0))),92))}
+function tsbBulO(a,t,ev){return oddsCl(Math.min(Math.round(odA(a,42+(rkOf(a)-rkOf(t))*BAL.rkW.tsbBul+(a.tamco||0)/6+(a.danh||0)/10+(ev?evG(a,t)*6:0)-(typeof witOf==="function"?witOf(t)/6:0)-(t===S&&S.shield?12:0))),92))}
 function tsbBulOK(a,t){return rkOf(a)>rkOf(t)&&!t.out&&(tsbBulPay(a,t)>=10||!!tsbWant(a,t))}
 A("batnat","Ép nộp của",{c:{},ok:(a,t)=>tsbBulOK(a,t),o:(a,t)=>tsbBulO(a,t),x:"cậy phẩm cao đòi bạc hoặc một món quý nàng đang có",
  f:(a,t)=>tsbBulNpc(a,t,"batnat")});
@@ -165,7 +165,7 @@ function tsbFirstOK(v){return v&&v!==S&&(rivals||[]).includes(v)&&v.alive&&!v.ou
 PEND.tsbFirst=pp=>{if(!S)return null;const v=RV(pp.v);if(!v||!v.alive)return null;const G=tsbGrudge(v);if(!G.length)return null;const hi=rkOf(v)>rkOf(S);const nm=tsbNm(v);
  const say=hasT(v,"Kiêu ngạo")?`Nàng liếc ngươi từ đầu đến chân, nói đủ to cho cả đám cung nhân nghe rằng trông ngươi cũng thường thôi.`:hasT(v,"Xảo quyệt")?`Nàng cười nhẹ, hỏi han rất ân cần, nhưng ánh nhìn lướt qua ngươi lạnh như nước giếng.`:hasT(v,"Khiêm nhường")||hasT(v,"Ân cần")?`Nàng đáp lễ rất khẽ rồi quay đi, không muốn nói thêm câu nào.`:`Nàng bảo nghe danh ngươi đã lâu, nhưng giọng chẳng có chút vui nào.`;
  const act=hi?`Nàng không đợi ngươi hành lễ xong đã bảo người dẫn đường đi trước, để ngươi đứng lại giữa lối.`:`Nàng chỉ khẽ nghiêng mình, không gọi ngươi một tiếng tỷ muội.`;
- const td=od(BAL.odb.jtsb.odTd+(S.tamco||0)/4+(S.tai||0)/6),tc=od(BAL.odb.jtsb.odTc+(S.danh||0)/4+(rkOf(S)-rkOf(v))*8);const O=[];const near={t:"đang cùng chỗ với nàng",ok:true};
+ const td=od(BAL.odb.jtsb.odTd+(S.tamco||0)/4+(S.tai||0)/6),tc=od(BAL.odb.jtsb.odTc+(S.danh||0)/4+(rkOf(S)-rkOf(v))*BAL.rkW.tsbTc);const O=[];const near={t:"đang cùng chỗ với nàng",ok:true};
  O.push({n:"Nhún nhường đáp lễ",fx:{},x:`thành: nàng bớt ghen 6 · Đức ${balSg(BAL.eff.jtsb.ducGo)}${hi?` · kèm: Danh ${balSg(BAL.eff.jtsb.danhGo_5)} (người xung quanh thấy ngươi nhún)`:""}`,need:[near],go:()=>{v.ghen=cl((v.ghen||0)-6,0,100);apply({duc:BAL.eff.jtsb.ducGo});if(hi)apply({danh:BAL.eff.jtsb.danhGo_5});log(`Ngươi nhún nhường đáp lễ ${nm}.`)}});
  O.push({n:"Khéo lời hóa giải",fx:{},x:`${word(td)} · thành: nàng bớt ghen 10 · nàng với ngươi ${balSg(BAL.eff.jtsb.go_4)} · Danh ${balSg(BAL.eff.jtsb.danhGo_6)} · hỏng: nàng cho là ngươi giả vờ, nàng oán ngươi ${balSg(BAL.eff.jtsb.go_5)}`,need:[near],go:()=>{if(roll(td)){v.ghen=cl((v.ghen||0)-10,0,100);affAdd(v,S,BAL.eff.jtsb.go_4);apply({danh:BAL.eff.jtsb.danhGo_6});log(`<span class="g">Ngươi khéo lời; ${nm} dịu lại đôi chút.</span>`)}else{oanAdd(v,S,BAL.eff.jtsb.go_5);log(`${tsbCap(nm)} nghe xong chỉ cười nhạt.`)}}});
  O.push({n:"Đáp trả thẳng thắn",fx:{},x:`${word(tc)} · thành: người xung quanh nể ngươi, Danh ${balSg(BAL.eff.jtsb.danhGo_7)} · hỏng: bị cho là hỗn, Danh ${balSg(BAL.eff.jtsb.danhGo_8)} · kèm: nàng oán ngươi ${balSg(BAL.eff.jtsb.go_6)}`,need:[near],go:()=>{oanAdd(v,S,BAL.eff.jtsb.go_6);if(roll(tc)){apply({danh:BAL.eff.jtsb.danhGo_7});log(`<span class="g">Ngươi đáp lời ${nm} không kém một câu; cung nhân xung quanh đều thấy.</span>`)}else{apply({danh:BAL.eff.jtsb.danhGo_8});log(`<span class="r">Ngươi cãi lại ${nm}, bị cho là không biết phép.</span>`)}}});
@@ -222,7 +222,7 @@ try{if(typeof LACK==="object")Object.assign(LACK,{
    Được / Mất / Kèm + cơ may như thẻ việc (sếp 07:15Z), không phải thẻ sự kiện chỉ hiện giá. */
 function tsbLoyal(d){try{if(S.maid)S.maid.loyal=cl((S.maid.loyal||0)+d,0,100);(S.staff||[]).forEach(s=>s.loyal=cl((s.loyal||0)+d,0,100))}catch(e){}}
 function tsbEasy(v){return !!v&&(v.tsbEasy||0)>tsbWk()}
-function tsbMockO(v){const hi=rkOf(v)>rkOf(S);return od(BAL.odb.jtsb.odTsbMockO+(S.tamco||0)/3+(S.tai||0)/8-(hi?(rkOf(v)-rkOf(S))*3:0))}
+function tsbMockO(v){const hi=rkOf(v)>rkOf(S);return od(BAL.odb.jtsb.odTsbMockO+(S.tamco||0)/3+(S.tai||0)/8-(hi?(rkOf(v)-rkOf(S))*BAL.rkW.tsbMock:0))}
 function tsbMockOpts(v){const hi=rkOf(v)>rkOf(S);const o=tsbMockO(v);
  return[{n:"Nhịn",fx:{},x:`thành: Đức +2 · nàng không có cớ gây thêm · Mất: Danh -1 (mất mặt trước cung nhân) · kẻ hầu Thiện cảm -${balAb(BAL.eff.jtsb.loyalNhin)} · kèm: nàng cho ngươi dễ bắt nạt, ba tháng tới dễ bị nàng làm khó lần nữa`,
    go:()=>{apply({duc:2,danh:-1});tsbLoyal(-BAL.eff.jtsb.loyalNhin);v.tsbEasy=tsbWk()+9;log(`Ngươi nhịn lời mỉa mai của ${v.name}.`)}},

@@ -54,7 +54,7 @@ const SRVA={
  errand:{k:1,o:()=>100,fix:1,w:{},get offer(){return BAL.errand.offer}},/* law 1 + 4: the ONE chance a master sends her servant on an errand this buổi — her card here and every NPC servant (j95plan) read BAL.errand.offer */
  spy:{k:1,o:a=>BAL.odb.j42.odO_7+a.tamco/5,w:{bac:8},l:{tin:-15},get ev(){return BAL.eff.j42.evGo},out:40},
  massage:{k:1,o:(a,m)=>BAL.odb.j42.odSrvTalk+a.sac/10+a.tai/10+misAdj(m,a),w:{tin:3},l:{tin:-1},get mp(){return BAL.eff.j42.meritMis}},
- askRew:{k:1,o:a=>BAL.odb.j42.odSrvTalk_2+srvTin(a)/2,w:(a,m)=>({bac:3+rkOf(m)}),l:{tin:-4},get tin(){return BAL.srvGate.rew}},
+ askRew:{k:1,o:a=>BAL.odb.j42.odSrvTalk_2+srvTin(a)/2,w:(a,m)=>({bac:balRk("srvRew",rkOf(m))}),l:{tin:-4},get tin(){return BAL.srvGate.rew}},
  tellMis:{k:1,o:()=>100,w:{tin:5},ev:1},
  askRec:{k:1,o:a=>BAL.odb.j42.odSrvTalk_3+srvTin(a)/2,w:{},l:{tin:-3},get mpOk(){return BAL.eff.j42.meritRec},get tin(){return BAL.srvGate.rec}},
  beside:{k:1,o:(a,m)=>BAL.odb.j42.odSrvTalk_5+misAdj(m,a),w:{tin:2},l:{tin:-1}},
@@ -284,7 +284,7 @@ function srvPunW(m,k){const B=BAL.ag.why.srv.pun;return k==="kill"?(m.malice||40
 function srvMonth(){let ev="";S.turn++;const rk=S.srv.rk;apply({bac:CNV_WAGE[rk]});log(`Lĩnh lương tháng: Bạc +${CNV_WAGE[rk]}.`)/* log-sync r1: the Sổ ghi reads "Bạc +N" */;
  ev+=srvW(()=>{let e="";for(const v of liveRivals(true))stipend(v);e+=rivalsMonth()||"";e+=servRanks()||"";e+=servMonth()||"";oanMonth();restock();e+=heirMonth()||"";e+=moodMonth()||"";e+=srvIllWorld();return e})||"";
  if(S.dead)return ev;srvMisCheck();const m=srvM();
- if(isSrv()&&S.srv.lau<=0&&m){S.srv.mp+=1+Math.floor(rkOf(m)/3);const need=srvMpNeed(S.srv.rk),mx=srvMax();
+ if(isSrv()&&S.srv.lau<=0&&m){S.srv.mp+=balRk("srvMerit",rkOf(m));const need=srvMpNeed(S.srv.rk),mx=srvMax();
   if(S.srv.mp>=need&&S.srv.rk<mx&&S.tin>=BAL.srvx.tinUp&&typeof exSrvGate==="function"&&exSrvGate(S.srv.rk+1)){S.srv.mp=need}
   else if(S.srv.mp>=need&&S.srv.rk<mx&&S.tin>=BAL.srvx.tinUp){S.srv.rk++;S.srv.mp=0;S.tin=cl(S.tin+BAL.eff.j42.tinSrvMonth,0,100);log(`<b class="g">Được thăng ${SRK.maid[S.srv.rk]}.</b>`);Q.push({t:"Thăng bậc",who:pMe(),h:`<p>Nội vụ phủ ghi công: ngươi được thăng <b>${SRK.maid[S.srv.rk]}</b> trong cung ${m.name}.</p><p class="past">Lương tháng ${CNV_WAGE[S.srv.rk]} bạc.</p>`})}
   else if(S.srv.mp>need)S.srv.mp=need;
@@ -317,7 +317,7 @@ function srvLaundry(why,weeks){if(!isSrv())return;if(S.srv.lau<=0)S.srv.rk0=Math
  Q.push({t:"Tân Giả khố",cls:"end",who:pMe(),h:`<p>${why}</p><p>Ngươi bị đày xuống <b>Tân Giả khố</b> giặt đồ ${weeks} tuần. Việc nặng, cơm hẩm; Sức cạn thì nguy đến tính mạng.</p>`,btn:"Cúi đầu"});if(!quiet)deal()}
 function srvFromLaundry(){S.srv.lau=0;S.srv.rk=Math.max(1,(S.srv.rk0||1)-1);srvReassign("Hết hạn phạt ở Tân Giả khố.")}
 function srvMoodEvent(){const m=srvM();const good=(S.tin-20)/100+(nv(m,"srvGood"))-(nv(m,"srvBad"));
- const k=npwPick(["rew","angry"],x=>x==="rew"?good*100:(1-good)*100,{all:1});/* npc-purpose G2a: reward or anger by her trust and nết (both are her real mood: weighted, the old odds — rates review: near-best made reward vanish) */if(k==="rew"){const g=3+rkOf(m);apply({bac:g,tin:BAL.eff.j42.tinSrvMoodEvent});log(`${m.name} vui lòng, thưởng ngươi ${g} lạng bạc.`);Q.push({t:"Chủ thưởng",who:pv(m),h:`<p>${m.name} vui lòng, thưởng ngươi ${g} lạng bạc.</p><p class="g">Bạc +${g} · Chủ tin ${balSg(BAL.eff.j42.tinSrvMoodEvent)}</p>`});return}
+ const k=npwPick(["rew","angry"],x=>x==="rew"?good*100:(1-good)*100,{all:1});/* npc-purpose G2a: reward or anger by her trust and nết (both are her real mood: weighted, the old odds — rates review: near-best made reward vanish) */if(k==="rew"){const g=balRk("srvRew",rkOf(m));apply({bac:g,tin:BAL.eff.j42.tinSrvMoodEvent});log(`${m.name} vui lòng, thưởng ngươi ${g} lạng bạc.`);Q.push({t:"Chủ thưởng",who:pv(m),h:`<p>${m.name} vui lòng, thưởng ngươi ${g} lạng bạc.</p><p class="g">Bạc +${g} · Chủ tin ${balSg(BAL.eff.j42.tinSrvMoodEvent)}</p>`});return}
  const how=npwPick(["out","beat","scold"],x=>srvAngryW(m,x)),BL=BAL.ag.why.srv.lau;if(how==="out"){srvLaundry(`${m.name} chán ghét ngươi, sai người giải xuống Nội vụ phủ.`,BL.base+Math.min(BL.max,Math.max(0,Math.round((BAL.srvx.tinOut-S.tin)/BL.div))));return}
  if(how==="beat"){const d=20+R(15);apply({suc:-d});log(`<span class="r">${m.name} sai thái giám đánh ngươi hai mươi trượng.</span> Sức -${d}.`);
   Q.push({t:"Bị đánh đòn",cls:"end",who:pv(m),h:`<p>${m.name} nổi giận, sai thái giám đánh ngươi hai mươi trượng.</p><p class="r">Sức -${d}</p>`});if(S.suc<=0)die(`Bị ${m.name} sai đánh trượng đến chết`);return}

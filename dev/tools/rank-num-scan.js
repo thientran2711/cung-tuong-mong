@@ -12,13 +12,15 @@ const PAT={
  C:new RegExp(`\\(?${RK}\\s*(?:-\\s*\\d+\\s*\\))?\\s*\\*\\s*\\d[\\d.]*|\\b\\d[\\d.]*\\s*\\*\\s*${RK}`,'g'),
  D:new RegExp(`${RK}\\s*[<>]=?\\s*\\d+\\s*\\?\\s*-?[\\d.]+\\s*:\\s*-?[\\d.]+(?![\\d.]*\\s*\\?)`,'g'),
  E:new RegExp(`\\[(?:\\s*-?[\\d.]+\\s*,){7}\\s*-?[\\d.]+\\s*\\]\\s*\\[[^\\]]*${RK}`,'g'),
+ /* C2 (reviewer add): rank/N, N+rank, (rankA-rankB)*N, rank>=k||x?N:M — forms the first pass missed */
+ G:new RegExp(`Math\\.floor\\(\\s*(?:Math\\.min\\(\\d+,\\s*)?${RK}\\)?\\s*\\/\\s*\\d|(?<![\\w.\\]\\/])\\d+\\s*\\+\\s*${RK}(?!\\s*[<>=!*])|\\(${RK}\\s*-\\s*${RK}\\)\\s*\\*\\s*\\d|${RK}\\s*[<>]=?\\s*\\d+\\s*\\|\\|[^?]{0,15}\\?\\s*\\d+\\s*:\\s*\\d+`,'g'),
  F:/(?:Sủng|Danh) [^`"$]{0,12}(?:cần |\/)\d+|cần \d+ (?:Sủng|Danh)|(?:Sủng|Danh) \$\{[^}]*\}\/\d+|(?:Sủng|Danh) \d+`/g};
 /* allowed with why (file + match text start) */
 const OK=[[/^j25\.js$/,/rank>=1\?1:0/,'CSS tier class rp0..3 (look), not a rule number'],[/^jsl\.js$/,/rank>=1\?1:0/,'CSS tier class (look)'],
  [/^jcui\.js$/,/Danh hiệu 1\/8/,'kit sample data (KBM_SAMPLE ending-book count), not a rank number']];
 function scanSrc(file,src){const rows=[];/* comments blanked (newlines kept, so line numbers stay) */src=src.replace(/\/\*[\s\S]*?\*\//g,c=>c.replace(/[^\n]/g,' '));const lines=src.split('\n');
  lines.forEach((L,i)=>{const code=L.replace(/\/\*.*?\*\//g,'').replace(/^\s*\/\/.*$/,'');
-  for(const k of 'CDEF'){if(k==='F'&&!/[`"]/.test(code))continue;const re=new RegExp(PAT[k].source,'g');let m;
+  for(const k of 'CDEFG'){if(k==='F'&&!/[`"]/.test(code))continue;const re=new RegExp(PAT[k].source,'g');let m;
    while((m=re.exec(code))){const t=m[0];if(OK.some(([f,r])=>f.test(file)&&r.test(t)))continue;rows.push({fam:k,at:`${file}:${i+1}`,t})}}
   if(/const RANKS\s*=/.test(code)&&/\bs:\s*\d/.test(lines.slice(i,i+4).join('')))rows.push({fam:'A',at:`${file}:${i+1}`,t:'RANKS s/d typed'});
   if(/function promoGap\(/.test(code)&&!/BAL\./.test(code))rows.push({fam:'B',at:`${file}:${i+1}`,t:code.trim().slice(0,80)})});
