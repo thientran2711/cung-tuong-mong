@@ -34,11 +34,10 @@ if(typeof kidPor==="function"){const k0=kidPor;kidPor=function(k,fb){const r=k0.
 /* review/small-bugs-2 (owner: blank header portrait on the cung nữ road at 1180x820): HER portrait never waits for the manifests. Her
    identity (S.fid "player:lookN") is kept for life and her por depends only on look + age band (one dress for every life type: cung nữ,
    lãnh cung, every origin), so before FIGURES*.json arrive the header, cards and dialogs still show her own face, never the initials. */
-const MEBANDS=[18,26,36,51];
 /* review r6 (player-dress on main: every life now has a consort identity S.pid, por-consort-*, which needs the manifests): her last
    resolved portrait is kept in S.porMe (saved) and shown until the manifests arrive — a reload never shows an empty frame */
-function mePor(){try{const m=/^player:(.+)$/.exec(S&&S.fid||"");if(!m)return S&&typeof S.porMe==="string"&&!(typeof PORK!=="undefined"&&PORK[S.porMe]===0)?S.porMe:"";const a=S.age||18;const b=MEBANDS.reduce((x,y)=>Math.abs(y-a)<Math.abs(x-a)?y:x);
- const src=`img/por-player-${m[1]}-t1-a${b}.webp`;return typeof PORK!=="undefined"&&PORK[src]===0?"":src}catch(e){return""}}
+function mePor(){try{const m=/^player:(.+)$/.exec(S&&S.fid||"");if(!m)return S&&typeof S.porMe==="string"&&!(typeof PORK!=="undefined"&&PORK[S.porMe]===0)?S.porMe:"";const a=S.age||BAL.ageMin;const b=BAL.ageArt[Math.min(3,ageBandIx(a))];/* the player set: bands 0–3 */
+ const src=`img/por-player-${m[1]}-t1-${b}.webp`;return typeof PORK!=="undefined"&&PORK[src]===0?"":src}catch(e){return""}}
 window.kitMePor=mePor;
 if(typeof porOf==="function"){const p1=porOf;porOf=function(who,fb){const r=p1.apply(this,arguments);try{if(who===S&&S&&typeof r==="string"&&/(^|\/)por-[^/]*\.webp/.test(r)&&!oldFace(r))S.porMe=r;if(who===S&&S&&(!r||(oldFace(r)&&!figReady()))){const m=mePor();if(m)return m}}catch(e){}return r}}
 /* a por that fails to load falls back to the old face in place (never a broken frame) */
