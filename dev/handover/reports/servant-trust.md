@@ -69,3 +69,46 @@ Reviewed the stacked diff ed1be95a..42db050c. Branch **review/servant-trust-rv c
 - The «8 weeks played» loops in servant-trust.js / net-build.js call endTurn without clearing Q, so the turn does not advance (same harness weakness as before); my direct 24-month servMonth sim covers the monthly path.
 - Lands after net-build: re-merge onto the fixed net-build-rv before landing.
 Shots: scratch only (not uploaded); the worker's CDN folder img/_review/servant-trust/ stays until the final verdict.
+
+## FIX r1 (opus worker, child of Foreman D, 24/11) — both FAIL items fixed, whole family (law 11)
+PRIORITY #1 CHECK ('servant-trust svTouch' / 'srvStaffAct' / 'asPeers' / 'newsAdd witness' / 'svtPeer'): OD 24/11 07:58Z / 08:08Z / 08:12Z + 08:40Z scope row read verbatim | ledger 0 | claims: servant-trust NYMzUyzf (worker, done) + rv NZh6xm1S (FAIL) → this fix | main 178cac37: no jsvt (not live) | review/*: review/servant-trust 42db050c, review/servant-trust-rv c8d35899 (base), review/net-build-rv (NOT merged, per brief) | archive 0. REUSED: svTouch / svtEtq / svtWrap (jsvt), the witness sources of newsAdd (j28.js:80: being there, eyes(), netIs "talk", npcTell), npcTell / npcWit (jagwhy), srvAf / S.srv.intel (j42), asPeers / AS_DO (jagstaff), msAffAdd / msOanAdd (j9: one relation store for servants), pushDil / mkP (j3: the ONE dilemma card), tinAdd / tinOf (jtin).
+
+Branch **review/servant-trust-rv** (base c8d35899). Commits: 971f4c1a (fix) · 2c1c2bfc (merge) (merge newest origin/main 178cac37 + rebuild). **Final sha 2c1c2bfc3cf85d022c881e4c38d04031ff537dba.**
+
+### FAIL 1 — servant ↔ servant across houses (law 11 + law 1 + OD ~07:58Z) — FIXED
+One new entry **`svtPeer(actor, colleague, kind, ok, at)`** (jsvt): if the colleague belongs to another house → the greeting rule for the open act (`svtEtq`, always, whatever the outcome; a servant is below every master, so ungreeted = × up), then, when the colleague engaged, `svTouch` (her master may come to know through a real witness). A chat is two-way: `svTouch` both directions (each servant's master may hear of it). `svTouch` now knows a servant actor (`svtId` "s<sid>", `svtHouse`: servant → her master; she on the cung-nữ road → srvM()) and also lowers the master's thiện cảm toward the servant who went behind her (j9 msAffAdd, same store).
+| site | before (c8d35899) | after |
+|---|---|---|
+| j42 srvStaffAct «Trò chuyện» / «Biếu quà» / «Nhờ dò tin» on a colleague of another house (her cung-nữ road) | no effect for the colleague's master, no greeting | svtPeer (chat / gift / ask): bất kính if that master stands there ungreeted; seen → Chủ tin in the colleague −, master's thiện cảm toward her −; chat also → HER master's Chủ tin in her (S.tin) − |
+| j42 place card «sv» Trò chuyện / Biếu quà nhỏ | same gap | svtPeer (same) |
+| j42 srvFriendTip (a friend of another house comes and tells / shares) | none | svTouch(S, friend, "friend") (covert, no second chứng cứ) |
+| jagstaff AS_DO chat / gift / ask (NPC servants, asPeers f / fr of another house) | none (and under asOn the old j10 friend-talk svTouch never ran) | svtPeer (chat two-way / gift / ask with a real leak) |
+| law 1: «Hỏi chuyện» on HER on the cung-nữ road | never (svtMonth picked from t.staff only) | svtMonth: when the NPC's target is her master, she is one of that household's servants (1 in staff+1); the NPC comes herself or sends a servant (BAL.svt.npc.srvAsk) → kit dilemma `PEND.svtAsk` «Trò chuyện» (gain: the asker's thiện cảm + news of that palace for her master; risks only after) / «Cúi đầu từ chối» (nothing changes, OD ~08:12Z). No pre-warning (OD 08:08Z / 08:40Z scope). |
+| same-house frame (j42 frame, jagstaff P.foe), Nội vụ phủ chance meetings, seeding, jnroad rivalry outcome, her eavesdropping (listen / scout / watch) | — | exempt with reason in the scan (no servant of ANOTHER house is approached) |
+**svt-scan widened** (dev/measure/svt-scan.py): family = «any act whose target is a servant whose owner ≠ the actor's house»: every srvAf / stfLike / nrAf / `<x>.af[<y>.sid]=` / `S.srv.intel` / `s.intel=` write must reach svtPeer/svTouch in the same act or be exempt with a reason. `--legacy` = the old 31-site scan.
+| scan | sites | UNWIRED |
+|---|---|---|
+| old scan on c8d35899 (`--legacy`) | 31 | 0 |
+| widened scan on c8d35899 (before) | 67 (31 + 36 servant↔servant) | **11** (j42:189/190/341/524/525/526, jagstaff:124×2/127×2/+ask) |
+| widened scan on the fix (after) | 67 | **0** |
+**Churn** (new dev/measure/svt-churn.js, 14 game months = 42 tuần, staff decide every buổi through jagstaff asTick, Q cleared weekly):
+| life | peer acts (svtPeer) | touches chat / gift / ask / talk / tm / bribe | known (near / eyes / talk / tell) | bất kính | Chủ tin avg (start→end) | servants under BAL.svt.tin.out | returned to Nội vụ phủ | «Hỏi chuyện» on her |
+|---|---|---|---|---|---|---|---|---|
+| consort | 147 | 78 / 55 / 14 / 14 / 8 / 3 | 53 (8 / 5 / 17 / 23) | 8 | 48 → 76 | 0 | 0 | — |
+| cung nữ | 189 | 110 / 72 / 26 / 6 / 19 / 2 | 77 (26 / 9 / 4 / 38) | 7 | 49 → 64 | 1 | 0 | 1 |
+No churn: Chủ tin drops (chat 5, gift 4, ask 8) are smaller than the monthly trust gains, nobody was mass-returned; ~1 peer act per household-week, ~1 in 3 known.
+
+### FAIL 2 — the master came to know from nobody (law 6) — FIXED
+`svtSeen(a,m,kind,at,s)` replaces the base roll: the master knows ONLY through a real witness, the same sources as newsAdd (j28.js:80, npc-purpose G2): **near** (she stands at the place of the act: BAL.svt.seen.near), **eyes** (her informants, eyes(m) ≥ 1: eyeB + eyes × eye), **talk** (a talkative servant of her household, nết «talk», not the one involved), **tell** (a witness at the place who chooses to tell her: npcTell grudge vs the doer / liking for her). Covert kinds take BAL.svt.seen.covert off every source. **No base** — no witness → never. The after-line names the «kẻ»: «Chính mắt ngươi thấy / Tai mắt của ngươi bẩm / <tên> miệng mồm lanh lẹ, kể lại / <tên> có mặt ở đó, đến mách: …». BAL.svt.seen = {near 60, eyeB 10, eye 8, talk 30, tell 100, covert 20} (law 4).
+| check | before | after |
+|---|---|---|
+| eyes 0, not at the place, no talkative servant, nobody tells, luckiest roll (Math.random 0), 20 tries | known 30 % (covert 10 %) | **0 / 20** |
+| each source alone (near / eyes / talk / tell) | — | known, counted per source (SVT.stat.how), line names the witness |
+
+### Bất kính size (reviewer note) — trimmed, direction kept
+Before: oán 8 × 1.5 (higher rank) = 12, then her nết (persF «slight» up to ×1.5 × 1.4) → **+25 oán** and −15 thiện cảm in ONE talk; other single slights in BAL sit at 5–10, serious ones 15–20. After: BAL.svt.greet = {oán 5, aff 4, up 1.4, dn .5} → 7 before nết, worst nết ≈ 15 (= a serious single slight), test line «bất kính worst case ≈ 15 oán (was 25)». Same rule for a servant who skips greeting a master (svtRk: a servant is below every master).
+
+### Gates (on 2c1c2bfc3cf85d022c881e4c38d04031ff537dba)
+servant-trust **70/70** (was 48; new: witness ×5, servant↔servant ×7, bất kính size, cung-nữ road ×7) ×3 · svt-scan 67 / **0 UNWIRED** · svt-churn 14 months consort + cung nữ, 0 page errors · npcmind-check ERRS [] · one-core-guard / bind / text / text-rule PASS · two-way-oldsave ok, errs [] · coop-e2e **142/142** · quickcheck PASS (open 1978 ms, old save ok, perf median new/live render 242/264 ms, tab 421/395, buổi 1181/1398, tasks>200ms 22/23, core gates PASS).
+Kit (laws 9/10): «Hỏi chuyện» on her = the ONE dilemma card (pushDil, kit option cards); after = kit KẾT QUẢ card; no new part. Laws 2/3/7: talk = gain (thiện cảm + news) with after-only risk; refuse = nothing; no %, no digit in the option text, no re-ask prompt. Shots Fold 755x1000 + iPad 1180x820 (the card + the KẾT QUẢ after it; scratch only, not in git), looked at 3×: no overflow, no page error.
+Note (not changed): the old harness weakness (endTurn with a Q item does not advance) is avoided in svt-churn by the bot pattern of ea-npc-rate (start() + nfParked); servant-trust.js keeps its 8-week smoke as before.
