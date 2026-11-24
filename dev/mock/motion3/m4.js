@@ -8,7 +8,7 @@ async function settleStage(max){const t0=performance.now();max=max||12000;
  /* settled = no stage picture is still «on its way» (the kit marks it img[data-kwait]; it draws a see-through breathing silhouette) and every stage <img> is complete */
  const busy=()=>{const st=document.getElementById('stage')||document.body;return [...st.querySelectorAll('img')].some(i=>{const b=i.getBoundingClientRect();return b.height>60&&(i.hasAttribute('data-kwait')||!i.complete||!i.naturalWidth)})};
  let ok=0;while(performance.now()-t0<max){if(!busy()){if(++ok>=4)break}else ok=0;await wait(100)}return !busy()}
-async function prep(){try{S.met=S.met||{};const K=k61S();(homePeople()||[]).concat(liveRivals(true)||[]).forEach(v=>{if(v&&v.id!=null&&S.met[v.id]==null)S.met[v.id]=0;if(K&&v)try{K[kOf61(v)]=Math.max(+K[kOf61(v)]||0,2)}catch(e){}});render()}catch(e){}return settleStage(20000)}
+async function prep(){MD3.meetAll();try{S.met=S.met||{};const K=k61S();(homePeople()||[]).concat(liveRivals(true)||[]).forEach(v=>{if(v&&v.id!=null&&S.met[v.id]==null)S.met[v.id]=0;if(K&&v)try{K[kOf61(v)]=Math.max(+K[kOf61(v)]||0,2)}catch(e){}});render()}catch(e){}return settleStage(20000)}
 async function run(o){o=o||{};MD3.ensureCss();const P=MD3.pace();const RV=BAL.reveal;const FLY=o.fly||Math.round(300*P),GAP=o.gap!=null?o.gap:Math.round(RV.list/8),PRE=o.pre!=null?o.pre:Math.round(RV.pause*.6);
  const V=e=>e.querySelector('.kstv');const old={};document.querySelectorAll('.kst').forEach(e=>{if(e.id&&V(e)&&R(e).width>0)old[e.id]=V(e).textContent});
  /* today three systems fire AT ONCE (jstatfx .ksfl HUD floats, j93 .kmfls card floats, jfx/jkrev kfhit cell flashes) — kitFlyTo replaces them (law 11 group). Muted with ONE style tag (no MutationObserver, no per-mutation work). */

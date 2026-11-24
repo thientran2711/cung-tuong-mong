@@ -21,7 +21,7 @@ async function setup(o){o=o||{};MD3.ensureCss();if(!document.getElementById('md3
  const P=liveRivals(true).filter(v=>v.alive&&!v.out).slice(0,np);const bg=IMG_U('img/ngu-hoa-vien.webp');
  /* fixture: the cast on the stage has MET her (so every kit name tag shows a real name, no «???»; the kit's stranger rule itself is untouched) */
  try{S.met=S.met||{};const K=k61S();P.forEach(v=>{if(S.met[v.id]==null)S.met[v.id]=0;if(K)K[kOf61(v)]=Math.max(+K[kOf61(v)]||0,2)})}catch(e){}
- const acts=realActs().slice(0,ip?5:4);await MD3.preload([bg,...list.map(x=>x.src),...acts.map(a=>a.pic).filter(Boolean)]);
+ MD3.meetAll();const acts=realActs().slice(0,ip?5:4);await MD3.preload([bg,...list.map(x=>x.src),...acts.map(a=>a.pic).filter(Boolean)]);
  const Sc=kitScene.open({bg,intro:0});const L=Sc.L;L.id='md3sc';MD3.sceneBright(L);L.style.opacity='0';const g=L.g,w=g.w,H=g.H;
  const fh=Math.round(H*(ip?.68:.58)),feet=H*.925;const figs=[],tags=[];
  for(let i=0;i<P.length;i++){const cx=w*(i+.5)/P.length;const f=await Sc.fig(P[i],{cx,top:Math.round(feet-fh),fh,z:2});figs.push(f);

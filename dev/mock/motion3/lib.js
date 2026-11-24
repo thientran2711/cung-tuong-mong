@@ -39,7 +39,9 @@ function probeStop(){const P=window.__md3p;if(!P)return null;P.on=0;const d=P.d.
  const dropped=P.d.reduce((s,x)=>s+Math.max(0,Math.round(x/16.67)-1),0);return {n:d.length,p50:+q(.5).toFixed(1),p95:+q(.95).toFixed(1),max:+(d[d.length-1]||0).toFixed(1),dropped}}
 /* REAL game acts (law 4 / 6c): the Hành sự tab's own act cards — names, pictures and the Cần/Tốn/Được/Kèm rows + odds meters are the game's own (numbers come from BAL through the game's act engine, nothing typed here).
    Returns detached clones; the tab is restored. odds:true = only acts that carry an odds meter (.kodm); odds:false = only acts without one («plain» cards). */
-function acts(n,odds){const old=window.tab;try{window.tab='act';render()}catch(e){}
+/* fixture: the whole cast has MET her, so no kit name / act text shows «???» (the kit stranger rule itself is untouched; FLIGHT-UI's kitNoUnk will cover it in the build) */
+function meetAll(){try{S.met=S.met||{};const K=k61S();(rivals||[]).forEach(v=>{if(v&&v.id!=null&&S.met[v.id]==null)S.met[v.id]=0});if(K)(k61All()||[]).forEach(e=>{try{K[kOf61(e)]=Math.max(+K[kOf61(e)]||0,2)}catch(x){}})}catch(e){}}
+function acts(n,odds){meetAll();const old=window.tab;try{window.tab='act';render()}catch(e){}
  const all=[...document.querySelectorAll('#panel .ka.kart')].filter(c=>c.querySelector('.kan'));
  const pick=all.filter(c=>odds==null?true:odds?!!c.querySelector('.kodm'):!c.querySelector('.kodm'));const out=pick.slice(0,n).map(c=>c.cloneNode(true));
  if(out.length<n){all.forEach(c=>{if(out.length<n&&!out.some(o=>o.dataset.kart===c.dataset.kart&&o.querySelector('.kan').textContent===c.querySelector('.kan').textContent))out.push(c.cloneNode(true))})}
@@ -47,4 +49,4 @@ function acts(n,odds){const old=window.tab;try{window.tab='act';render()}catch(e
 /* decode every picture of a node list BEFORE it is dealt (pre-decode: no decode work while the deal animates) */
 function decodeAll(nodes){const ims=[];nodes.forEach(n=>n.querySelectorAll('img').forEach(i=>{i.loading='eager';i.decoding='sync';ims.push(i)}));return Promise.all(ims.map(i=>new Promise(r=>{if(i.complete&&i.naturalWidth){(i.decode?i.decode():Promise.resolve()).then(r,r);return}const t=setTimeout(r,6000);i.onload=()=>{clearTimeout(t);(i.decode?i.decode():Promise.resolve()).then(r,r)};i.onerror=()=>{clearTimeout(t);r()};const s=i.src;i.src='';i.src=s}))).then(()=>ims.length)}
 async function preload(urls){await Promise.all(urls.map(u=>new Promise(r=>{const i=new Image();i.onload=i.onerror=r;i.src=u;if(i.decode)i.decode().then(r,r)})))}
-return {acts,decodeAll,CDN,wait,pace,R,ensureCss,sceneBright,faceBoxes,faceCheck,probeStart,probeStop,preload}})();
+return {meetAll,acts,decodeAll,CDN,wait,pace,R,ensureCss,sceneBright,faceBoxes,faceCheck,probeStart,probeStop,preload}})();
