@@ -337,7 +337,7 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
  const wkF=(await C(A)).week;
  await B.page();await B.p.goto(BASE+'?room='+code,DCL);await booted(B);await tapText(B,/^Vào phòng|^Tiếp tục/,3000);
  ok(await until(B,x=>__co().seat==='b'&&__co().week===x&&!__co().frozen,wkF,40000),'B back in same seat and week');
- ok(await until(A,()=>!__co().frozen,null,20000),'A resumes');await clear(A);await clear(B);await same('after rejoin');
+ ok(await until(A,()=>!__co().frozen,null,20000),'A resumes');await clear(A);await clear(B);await same('after rejoin');{const pr=o=>o.p.evaluate(()=>{const q=typeof queenP==='function'?queenP():null;return rivals.filter(v=>!v.coop).map(v=>v.id+':'+(v.maid&&v.maid.name)+':'+(q&&q!==v&&!q.coop?aff(q,v):'-')).join(',')});const ra=await pr(A),rb=await pr(B);console.log('R10RV host  '+ra);console.log('R10RV guest '+rb);ok(ra===rb,'R10RV after rejoin: maid names + Hoàng hậu với X same on both seats',ra===rb?undefined:{onlyA:ra.split(',').filter(x=>!rb.split(',').includes(x)),onlyB:rb.split(',').filter(x=>!ra.split(',').includes(x))})}
  /* review/suc-khoe-fix (owner CO-OP FIRST OD:L1447): NPC health is host-computed; the guest shows the host's value (Sức khỏe, Sức tối đa, scars) */
  {const hv=async o=>o.p.evaluate(()=>typeof khOf!=="function"?null:rivals.filter(v=>!v.coop&&v.alive).map(v=>[v.name,khOf(v),sucCap(v),v.khScar||0]).sort().join("|"));
   await clear(A);await clear(B);const ha=await hv(A),hb=await hv(B);ok(ha!=null&&ha===hb,'NPC Sức khỏe / Sức tối đa: guest = host',ha===hb?undefined:[ha&&ha.slice(0,200),hb&&hb.slice(0,200)])}await shot(B,'09-rejoined');

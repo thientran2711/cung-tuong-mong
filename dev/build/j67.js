@@ -48,7 +48,7 @@ function rv67(A,k){const v=A.act&&A.act[k]!=null?RV(A.act[k]):null;return rvOk67
 function castRv67(A,k,f){const used=Object.values(A.act||{});const L=liveRivals(false).filter(v=>!v.coop&&!used.includes(v.id)&&(!f||f(v)));if(!L.length)return false;A.act[k]=pk67(L).id;return true}
 function son67(){return mySons().slice().sort((a,b)=>(b.fond||0)-(a.fond||0))[0]||null}
 function dau67(){return myDaus()[0]||null}
-function man67(A){try{menInit()}catch(e){}const L=(S.men||[]).filter(m=>m.alive&&(m.age||0)>=18);let m=L.find(x=>x.id===A.act.m);if(!m&&L.length){m=pk67(L);A.act.m=m.id}return m||null}
+function man67(A){try{menInit()}catch(e){}const L=(S.men||[]).filter(m=>m.alive&&(m.age||0)>=BAL.ageMin);let m=L.find(x=>x.id===A.act.m);if(!m&&L.length){m=pk67(L);A.act.m=m.id}return m||null}
 function dad67(){try{const c=S.origin.k==="tt"?"Tể tướng":S.origin.k==="dtq"?"Đại tướng quân":null;return c?tdHead(c):null}catch(e){return null}}
 function eun67(){return S.court&&S.court.tq?S.court.tq.name:"Tổng quản thái giám"}
 function srvMis67(){try{return typeof srvM==="function"?srvM():null}catch(e){return null}}
@@ -1501,7 +1501,7 @@ ARC67.s_dich=arcFx("s_dich",{o:"*",ok:nsrv67,t:"Mùa dịch đậu mùa",w:"doc"
  E:{win:{tag:"Người cứu cả kinh thành",w:"emp",t:"Phương chủng đậu cứu vạn người. Hoàng thượng và Thái hậu đều ghi công ngươi."},
   mid:{tag:"Qua mùa dịch",t:"Mùa dịch qua. Ngươi còn sống, người của ngươi bình an."},
   lose:{tag:"Công bị cướp",t:"Thái y viện cướp công, còn bảo ngươi làm liều."}}});
-ARC67.s_tinh=arcFx("s_tinh",{o:"*",ok:()=>nsrv67()&&(function(){try{menInit()}catch(e){}return (S.men||[]).some(m=>m.alive&&(m.age||0)>=18)})(),t:"Cám dỗ",w:"man",sj:"ánh mắt của {man}",g:"{man}, một {manr} trong cung, nhìn ngươi bằng ánh mắt không nên có. Trái tim cô đơn của ngươi rung lên. Cám dỗ thì ngọt, nhưng cái giá phải trả là thật.",
+ARC67.s_tinh=arcFx("s_tinh",{o:"*",ok:()=>nsrv67()&&(function(){try{menInit()}catch(e){}return (S.men||[]).some(m=>m.alive&&(m.age||0)>=BAL.ageMin)})(),t:"Cám dỗ",w:"man",sj:"ánh mắt của {man}",g:"{man}, một {manr} trong cung, nhìn ngươi bằng ánh mắt không nên có. Trái tim cô đơn của ngươi rung lên. Cám dỗ thì ngọt, nhưng cái giá phải trả là thật.",
  cast(A){return !!man67(A)},
  p:[["s1","s2"],["c1","c2","c3","G.spy","G.ill"],["t1"],["x1"]],
  B:{
