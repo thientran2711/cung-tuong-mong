@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"948d1fcc+","t":"2026-11-24T08:14Z","c":"net-build: index.html/sw.js rebuilt","b":"06749bc45c06","h":[{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"}]};
+window.CTM_BI={"s":"ed1be95a+","t":"2026-11-24T08:59Z","c":"net-build: nt-norm.js (per-nết rates per 100 holder-weeks) + runner guards","b":"f3a25816bc4a","h":[{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -4095,7 +4095,7 @@ function servMonth(){let ev="";capSweep();for(const p of consorts()){if(!p.staff
   const d=(p.schemes||0)-(p.schLast||0);p.schLast=p.schemes||0;
   for(const s of p.staff.slice()){if(!netIs(s,"loyal")&&!G)s.loyal=cl(s.loyal-BAL.eff.j10.loyalServMonth,0,100);
    if(s.spyFor&&!(G&&byKey(s.spyFor)!==S)){const m=byKey(s.spyFor);if(m&&(m===S||m.alive)){if(d>0&&!(typeof asSelfOn==="function"&&asSelfOn(p))&&roll(60)){/* AG-ALL B: the spy's own "Lén báo tin" (jagstaff) *//*evok: her schemes counter rose this week*/evA(m,p,BAL.ag.ev.one);if(m===S)ev+=`Tai mắt ${s.name} trong cung ${p.name} báo: nàng đang bày mưu. ${evSg(BAL.ag.ev.one,1)}. `}}else s.spyFor=null}
-   if(d>0&&!(typeof asSelfOn==="function"&&asSelfOn(p)))for(const fid in s.af){/* AG-ALL B: told in her chosen "Trò chuyện" */if(s.af[fid]<20)continue;const f=servById(+fid),o=f&&ownerOf(f);if(o&&o!==p&&(!G||o===S)&&roll((nv(s,"tellRoll"))+srk(s)*5)){/*evok: same (d>0)*/evA(o,p,BAL.ag.ev.one);if(o===S)ev+=`${f.name} nghe bạn là ${s.name} kể chuyện cung ${NM(p)}: ${evSg(BAL.ag.ev.one)}. `}}}
+   if(d>0&&!(typeof asSelfOn==="function"&&asSelfOn(p)))for(const fid in s.af){/* AG-ALL B: told in her chosen "Trò chuyện" */if(s.af[fid]<20)continue;const f=servById(+fid),o=f&&ownerOf(f);if(o&&o!==p&&(!G||o===S)&&roll((nv(s,"tellRoll"))+srk(s)*5)){/*evok: same (d>0)*/evA(o,p,BAL.ag.ev.one);try{if(typeof svTouch==="function"){const x=svTouch(f,s,"friend");if(p===S&&x)ev+=x}}catch(e){}/* servant-trust: her own master may come to know who she befriends */if(o===S)ev+=`${f.name} nghe bạn là ${s.name} kể chuyện cung ${NM(p)}: ${evSg(BAL.ag.ev.one)}. `}}}
   const AGP=window.agDOn&&agDOn();/* AG-ALL-2: Mua chuộc / Cài người are her day-plan options (jagacts2) */
   if(p!==S&&!AGP&&roll(10)){const t=pickTarget(p);if(t&&t.staff&&t.staff.length&&p.bac>=60){const s=pick(t.staff);const r=bribeServ(p,s);if(t===S&&r&&s.spyFor===key(p)&&eyes(S)>=3)ev+=`Có tin: ${r}`}}
   if(p!==S&&!AGP&&roll(2)){const t=pickTarget(p);if(t)plantServ(p,t)}
@@ -4107,7 +4107,7 @@ function traO(s,m){m=m||S;const T=BAL.house.tra;return oddsCl(Math.round(T.base+
 function cheO(m){m=m||S;const C=BAL.house.che;return oddsCl(Math.round(C.base+(m.danh||0)/C.danhDiv+rkOf(m)*C.rank))}
 function servAct(a,id){const s=servById(id);if(!s||S.dead||Q.length)return;const o=ownerOf(s);let r="";window.__servOk=true;
  if(o===S){if(a==="thuong"&&S.bac<BAL.house.thuongBac)return;if(a==="hoi"){if(!can(2))return;const fz=nv(s,"askTalk");/* the odds on the card, read before the spend (shown-odds r2) */spend(2);r=fzRun(fz,null,()=>servDo(S,a,s))}else r=servDo(S,a,s)}
- else if(o){if(!can(2))return;if(a==="mua"){const fz=sgServOdds(s);/* odds read before the spend (shown-odds r2; one formula with the jsgame card) */spend(2);r=fzRun(fz,null,()=>bribeServ(S,s))}else if(a==="doa"){spend(2);r=threatServ(S,s)}}
+ else if(o){if(!can(2))return;if(a==="mua"){const fz=sgServOdds(s);/* odds read before the spend (shown-odds r2; one formula with the jsgame card) */spend(2);r=fzRun(fz,null,()=>bribeServ(S,s))}else if(a==="doa"){spend(2);r=threatServ(S,s)}else if(a==="hoi2"&&typeof svTalk==="function"){spend(2);r=svTalk(S,s)/* servant-trust: the open talk with another house's servant (jsvt) */}}
  if(r)log(r);render()}
 /* ONE function for her own-staff buttons (Thưởng / Phạt / Hỏi chuyện / Đổi người / Che chở) and an NPC master's choice (AG-ALL-2e cx3:staff, jagacts3); m = the master */
 function servDo(m,a,s){const me=m===S,P=BAL.ag.par3.staff;let r="";if(!m||!s||!(m.staff||[]).includes(s))return"";const pay=x=>me?apply(x):ap(m,x);
@@ -4136,7 +4136,7 @@ function staffHTML(){const row=(s,btns)=>`<div class="srow2">${mdH(pServ(s),"sm"
  h+=S.staff.map(s=>row(s,`<span class="past">thiện cảm ${s.loyal}</span><button data-sv="thuong" data-sid="${s.sid}" ${S.bac<BAL.house.thuongBac?"disabled":""}>Thưởng<small>Bạc -${BAL.house.thuongBac}</small></button><button data-sv="phat" data-sid="${s.sid}">Phạt<small>thiện cảm -${balAb(BAL.eff.j10.loyalServAct_2)}</small></button><button data-sv="hoi" data-sid="${s.sid}" ${!can(2)?"disabled":""}>Hỏi chuyện<small>2 khắc</small></button><button data-sv="che" data-sid="${s.sid}">Che chở<small>Danh ${balSg(BAL.eff.j10.danhServAct)}</small></button><button data-sv="doi" data-sid="${s.sid}">Đổi người</button><button data-rec="${s.sid}" ${S.bac<BAL.house.upBac?"disabled":""}>Tiến cử<small>Bạc -${BAL.house.upBac} · Danh -${BAL.house.upDanh}</small></button>`)).join("")+(S.staff.some(s=>s.role==="maid"&&srk(s)>=BAL.srvRk.cs)?`<div class="rbtn"><button data-smaid="1" ${!can(2)?"disabled":""}>Chưởng sự tra xét cung nữ<small>2 khắc · tìm tai mắt, đối thực</small></button></div>`:"");
  h+=`<div class="rbtn" style="margin:4px 0"><button data-hire="maid" ${nm>=cm||S.bac<BAL.house.hireBac?"disabled":""}>Nội vụ phủ: thêm cung nữ<small>Bạc -${BAL.house.hireBac}</small></button><button data-hire="eunuch" ${ne>=ce||S.bac<BAL.house.hireBac?"disabled":""}>Thêm thái giám<small>Bạc -${BAL.house.hireBac}</small></button><button data-plantsv="1" ${!can(2)||S.bac<BAL.house.plantBac||!bestSent(S)?"disabled":""}>Cài người vào cung khác<small>Bạc -${BAL.house.plantBac} · 2 khắc</small></button></div>`;
  h+=`<h3>Người trong cung</h3>`+Object.entries(S.court).map(([k,c])=>`<div class="srow2">${mdH(k==="ty"?pDoc():{src:`https://ctm-img.victoria-tntt.workers.dev/img/face-eunuch-${["tq","ksp","ped"].indexOf(k)%4+1}.webp`,ini:"Hoạn",col:"#8a8aa0"},"sm")}<div class="sinfo"><b>${c.name}</b><span>${c.n} · quý ngươi ${c.af.me||0}</span></div><div class="rbtn"><button data-cv="thuong" data-ck="${k}" ${S.bac<BAL.bacFee.court?"disabled":""}>Biếu<small>Bạc -${BAL.bacFee.court}</small></button><button data-cv="hoi" data-ck="${k}" ${!can(2)?"disabled":""}>Hỏi chuyện<small>2 khắc</small></button></div></div>`).join("");
- h+=`<h3>Kẻ hầu cung khác</h3>`+liveRivals(true).map(v=>`<div class="past" style="margin-top:4px"><b>${v.name}</b></div>`+(v.staff||[]).map(s=>row(s,s.spyFor==="me"?"":`<button data-sv="mua" data-sid="${s.sid}" ${!can(2)||S.bac<nv(s,"bribeCost")?"disabled":""}>Mua chuộc<small>thành: Bạc -${nv(s,"bribeCost")} · ${word(bribeOdds(S,s))}</small></button>${s.lover&&(S.knowDT||[]).includes(s.sid)?`<button data-sv="doa" data-sid="${s.sid}" ${!can(2)?"disabled":""}>Dọa tố đối thực<small>2 khắc</small></button>`:""}`)).join("")).join("");
+ h+=`<h3>Kẻ hầu cung khác</h3>`+liveRivals(true).map(v=>`<div class="past" style="margin-top:4px"><b>${v.name}</b></div>`+(v.staff||[]).map(s=>row(s,`<button data-sv="hoi2" data-sid="${s.sid}" ${!can(2)?"disabled":""}>Hỏi chuyện<small>2 khắc</small></button>`+(s.spyFor==="me"?"":`<button data-sv="mua" data-sid="${s.sid}" ${!can(2)||S.bac<nv(s,"bribeCost")?"disabled":""}>Mua chuộc<small>thành: Bạc -${nv(s,"bribeCost")} · ${word(bribeOdds(S,s))}</small></button>${s.lover&&(S.knowDT||[]).includes(s.sid)?`<button data-sv="doa" data-sid="${s.sid}" ${!can(2)?"disabled":""}>Dọa tố đối thực<small>2 khắc</small></button>`:""}`))).join("")).join("");
  return h}
 PEND.plantsv=()=>({t:"<p>Cài người hầu của ngươi vào cung ai?</p>",o:liveRivals(true).filter(v=>!sameHouse(S,v)).map(v=>({kgt:v,n:v.name,fx:{},x:`${word(plantOdds(S))} · thành: người của ngươi vào cung ${v.name} làm tai mắt, Bạc -${BAL.house.plantBac} · hỏng: không mất bạc, nàng nắm ${balAb(BAL.eff.j10.evPlantServ)} chứng cứ`,go:()=>{spend(2);log(plantServ(S,v))}})).concat([{n:"Thôi",fx:{}}])});
 
@@ -4726,7 +4726,7 @@ function staffTabHTML(){const [cm,ce]=capOf(S),[nm,ne]=hhHas(S);
   if(e.t==="thh"){const s=e.s;return pcard({f:e.f,name:s.name,rank:`${srkName(s)} · Thái hậu`,lines:sinfo(s),chips:schip(s),groups:typeof elderGroups==="function"?elderGroups(s):[]})}
   const s=e.s,v=e.v;const known=s.lover&&(S.knowDT||[]).includes(s.sid);
   return pcard({f:e.f,name:s.name,rank:`${s.role==="maid"?"Cung nữ":"Thái giám"} · cung ${v.name}`,lines:sinfo(s),chips:schip(s),note:s.spyFor==="me"?"Người này đã là tai mắt của ngươi.":"",
-   groups:(s.eid&&typeof elderGroups==="function"?elderGroups(s):[]).concat(s.spyFor==="me"?[]:[["Mưu kế",[pbtn(`data-sv="mua" data-sid="${s.sid}"`,"Mua chuộc",`thành: Bạc -${nv(s,"bribeCost")} · ${word(bribeOdds(S,s))}`,t2||(S.bac<nv(s,"bribeCost")?`cần ${nv(s,"bribeCost")} bạc`:"")),known?pbtn(`data-sv="doa" data-sid="${s.sid}"`,"Dọa tố đối thực","2 khắc",t2):""].concat(typeof mlHitBtns==="function"?mlHitBtns(s,v,t2):[])]])})};
+   groups:(s.eid&&typeof elderGroups==="function"?elderGroups(s):[]).concat(typeof svTalk==="function"?[["Giao thiệp",[pbtn(`data-sv="hoi2" data-sid="${s.sid}"`,"Hỏi chuyện","2 khắc",t2)]]]:[]/* servant-trust (jsvt): the open talk; what follows shows only after (OD 24/11 ~08:08Z) */).concat(s.spyFor==="me"?[]:[["Mưu kế",[pbtn(`data-sv="mua" data-sid="${s.sid}"`,"Mua chuộc",`thành: Bạc -${nv(s,"bribeCost")} · ${word(bribeOdds(S,s))}`,t2||(S.bac<nv(s,"bribeCost")?`cần ${nv(s,"bribeCost")} bạc`:"")),known?pbtn(`data-sv="doa" data-sid="${s.sid}"`,"Dọa tố đối thực","2 khắc",t2):""].concat(typeof mlHitBtns==="function"?mlHitBtns(s,v,t2):[])]])})};
  return `<div class="pgwrap">`+pager("staff",L,mk)+`</div>`}
 
 /* ---- people met in a place (stage pop) ---- */
@@ -5302,7 +5302,7 @@ const AP_MK={
  svAsk:o=>{const sv=o.who;return{ev:1,t:"Kẻ hầu xin",who:pServ(sv),h:`<p>${sv.name} quỳ xin: mẹ ở quê ốm nặng, xin chút bạc thuốc thang.</p>`,opts:[{n:`Cho ${BAL.cv.servAsk} lượng`,fx:{bac:-BAL.cv.servAsk},x:`thiện cảm ${balSg(BAL.eff.j24.loyalGo)}`,go:()=>{sv.loyal=cl(sv.loyal+BAL.eff.j24.loyalGo,0,100)}},{n:"Từ chối",fx:{},x:`thành: giữ lại ${BAL.cv.servAsk} lượng bạc · thiện cảm -${balAb(BAL.eff.j24.loyalGo_2)}`,go:()=>{sv.loyal=cl(sv.loyal-BAL.eff.j24.loyalGo_2,0,100)}}]}},
  maidWarn:o=>{const v=o.tgt;kn();S.dKnown=S.dKnown||{};S.dKnown[v.id]=wk();noteAdd(v.id,`${S.maid.name} báo: nàng có ý hại ngươi (mức ${BANDS[bandVT(v,S)][1]})`,1);return{ev:1,t:"Lời cảnh báo",who:pMaid(),h:`<p>${S.maid.name} thì thầm: “Người bên cung ${v.name} dò hỏi giờ giấc của ${kSay({srv:"f"},S,"{goi}")}. E là có ý không lành.”</p><p>${kitParse(`thành: biết ${v.name} có ý hại ngươi, mức ${BANDS[bandVT(v,S)][1]}`)}</p>`}},
  manPoem:o=>{const m=o.who;return{ev:1,t:"Một ánh mắt",who:pMan(m),h:`<p>${m.name} đem lòng thương ngươi, lén gửi qua cung nữ một bài thơ chép tay.</p>`,opts:[{n:"Giữ bài thơ, đáp lại",fx:{},x:`hắn tình ý ${balSg(BAL.cv.glance.warm)} · bài thơ là tang vật nếu bị lục`,go:()=>{m.tinh+=BAL.cv.glance.warm;m.letters++}},{n:"Đốt đi, làm ngơ",fx:{duc:BAL.cv.duc},x:`không để lại tang vật · hắn tình ý ${balSg(BAL.cv.glance.cold)}`,go:()=>{m.tinh=Math.max(0,m.tinh+BAL.cv.glance.cold)}}]}},
- svDefect:o=>{const s=o.who,v=o.tgt;return{ev:1,t:"Có người đến",who:pServ(s),h:`<p>${s.name}, cung nữ bên cung ${v.name}, bất mãn với chủ, lén tìm đến xin theo ngươi.</p>`,opts:[{n:"Thu làm tai mắt",fx:{bac:-20},x:"có tai mắt trong cung nàng",go:()=>{s.spyFor="me"}},{n:"Đuổi về",fx:{},x:"không dính líu"}]}}};
+ svDefect:o=>{const s=o.who,v=o.tgt;return{ev:1,t:"Có người đến",who:pServ(s),h:`<p>${s.name}, cung nữ bên cung ${v.name}, bất mãn với chủ, lén tìm đến xin theo ngươi.</p>`,opts:[{n:"Thu làm tai mắt",fx:{bac:-20},x:"có tai mắt trong cung nàng",go:()=>{s.spyFor="me";try{if(typeof svTouch==="function"){const x=svTouch(S,s,"tm");if(x)log(x)}}catch(e){}/* servant-trust (jsvt) */}},{n:"Đuổi về",fx:{},x:"không dính líu"}]}}};
 /* night-ledger-coop r4: every visitor card is carried as data (j3 rcpReg: kind + o with people as ids) and made again in the world it lands in */
 for(const k of AP_K)AP_MK[k]=rcpReg("ap."+k,AP_MK[k]);
 /* rates review 18/11: the visitor's KIND first (the old card spread: every kind with a reason gets its turn, the one that has not come longest first;
@@ -7889,7 +7889,7 @@ function cnvSpyX(m,noPay){return `${noPay?"":`mỗi tháng Bạc +${BAL.ag.why.s
 PEND.cnvBribe=pp=>{const m=srvM(),v=RV(pp.r);if(!isSrv()||!m||!v||!v.alive)return null;
  return{t:`<p>Một thái giám của ${v.name} chặn ngươi ở hành lang, dúi vào tay ngươi một túi bạc: “Chủ tử nhà ta muốn biết chuyện trong cung ${m.name}.”</p>`,who:pv(v),o:cnvPend(S,cnvBribeOpts(S,v,m,BAL.coopBribe.pay))}};
 function cnvBribeOpts(a,v,m,pay){return [
-  {id:"take",n:"Nhận bạc, làm tai mắt",tag:"bribe",fx:{bac:pay},x:a===S?cnvSpyX(m):"",go:()=>{if(a===S){ap(v,{bac:-pay});deedAdd(v,"sbribe",null,1,`mua chuộc người hầu của ${m.name}`);S.srv.spyFor=v.id}else a.spyFor=key(v);affAdd(a,v,BAL.relMS.bribe);return""}},
+  {id:"take",n:"Nhận bạc, làm tai mắt",tag:"bribe",fx:{bac:pay},x:a===S?cnvSpyX(m):"",go:()=>{if(a===S){ap(v,{bac:-pay});deedAdd(v,"sbribe",null,1,`mua chuộc người hầu của ${m.name}`);S.srv.spyFor=v.id;try{if(typeof svTouch==="function"){const x=svTouch(v,S,"bribe");if(x)log(x)}}catch(e){}/* servant-trust: her own master may come to know (law 1) */}else a.spyFor=key(v);affAdd(a,v,BAL.relMS.bribe);return""}},
   {id:"tell",n:"Từ chối, bẩm chủ",tag:"help",fx:{tin:BAL.coopBribe.tin},x:`${m.name} nắm ${balAb(BAL.ag.ev.one)} chứng cứ của ${v.name} · kèm: ${v.name} ghi hận ngươi, thiện cảm ${balSg(-BAL.coopBribe.grudge)}`,go:()=>{cnvBribeAff(v,a,-1);if(a===S)deedAdd(v,"sbribe",null,1,`mua chuộc người hầu của ${m.name}`);/*evok: bribe deed written just before (bribeServ: jtruth)*/evA(m,v,BAL.ag.ev.one);relAdd(m,v,-BAL.ag.ev.rel);return""}},
   {id:"quiet",n:"Từ chối, im lặng",tag:"work",fx:{},x:`thành: trả lại bạc, giữ hòa khí với ${v.name}, thiện cảm ${balSg(BAL.coopBribe.grudge)}`,go:()=>{cnvBribeAff(v,a,1);return""}}]}
 /* law 2 «Bạc lạ» (D #7 19/11): the briber's thiện cảm for the servant who refused — ONE constant BAL.coopBribe.grudge, sign by the answer (an NPC servant without an id: no regard row) */
@@ -32442,7 +32442,7 @@ function newPlot70(a,t,m,rid,mo,opt){const z=j70();const M=M70[m];if(!M)return n
    if(!aok){p.end="refused";p.sv=s.sid;evA(t,a,BAL.eff.j70.evNewPlot70);s.loyal=cl(s.loyal+BAL.eff.j70.loyalNewPlot70,0,100);try{mindLog(a,"_abandon")}catch(e){}
     if(t===S){p.kn=1;p.kt.push(tellOf70(p,0));p.pend="serv"}else if(a===S){p.pend="ownfail"}
     if(a!==S&&a.plan&&a.plan.j70===p.id)a.plan=null;return p}
-   s.spyFor=s.spyFor||p.a;p.bonus=(p.bonus||0)+8;if(r.bac)ap(a,{bac:-Math.min(r.bac,Math.max(0,a.bac||0))})/* she took it: now the bạc is paid */}}
+   s.spyFor=s.spyFor||p.a;try{if(typeof svTouch==="function")svTouch(a,s,"plot")/* servant-trust: the approached servant took it — her mistress may come to know (jsvt) */}catch(e){}p.bonus=(p.bonus||0)+8;if(r.bac)ap(a,{bac:-Math.min(r.bac,Math.max(0,a.bac||0))})/* she took it: now the bạc is paid */}}
  return p}
 
 /* ---------- motive -> plot ---------- */
@@ -32645,7 +32645,7 @@ function title70(p){if(!p||p===S)return"ngươi";try{const t=(typeof kitTitle===
   else if(t&&t!==S&&t.ord70&&t.ord70.length&&!window.__j70off){for(const o of ords70Of(t)){if(traitor70(sv70(o.sid,t)))continue;if(o.k==="canh")r+=canhB70(o,t);if(o.k==="thudoc"&&p)r+=20;if(o.k==="theodoi"&&window.__j70A&&o.tgt===tid70(window.__j70A))r+=12}r=oddsCl(Math.round(r))}}catch(e){}return r}})();
 (function(){const c0=caught;caught=function(a){const p0=window.__j70A;window.__j70A=a;try{return c0.apply(this,arguments)}finally{window.__j70A=p0}}})();
 /* her ordered servants are busy: she cannot send them on her own errands */
-(function(){const b0=bestSent;bestSent=function(p){if(p&&p!==S&&p.ord70&&p.ord70.length&&!window.__j70off){const r=b0.apply(this,arguments);const busy=p.ord70.map(o=>o.sid);if(!r||!busy.includes(r.sid))return r;const L=(p.staff||[]).filter(s=>!s.spyFor&&!busy.includes(s.sid));if(!L.length)return null;return L.slice().sort((a,b)=>(b.loyal+nq(b,"sharp",BAL.net.k.spySharp))-(a.loyal+nq(a,"sharp",BAL.net.k.spySharp)))[0]}if(p===S&&S&&!window.__j70off){const busy=ords70().map(o=>o.sid);const L=(S.staff||[]).filter(s=>!s.spyFor&&!busy.includes(s.sid));if(!L.length)return null;return L.slice().sort((a,b)=>(b.loyal+nq(b,"sharp",BAL.net.k.spySharp))-(a.loyal+nq(a,"sharp",BAL.net.k.spySharp)))[0]}return b0.apply(this,arguments)}})();
+(function(){const b0=bestSent;bestSent=function(p){if(p&&p!==S&&p.ord70&&p.ord70.length&&!window.__j70off){const r=b0.apply(this,arguments);const busy=p.ord70.map(o=>o.sid);if(!r||!busy.includes(r.sid))return r;const L=(p.staff||[]).filter(s=>!s.spyFor&&!busy.includes(s.sid)&&(typeof tinOf!=="function"||tinOf(s)>=BAL.tinLv.send));if(!L.length)return null;return L.slice().sort((a,b)=>(b.loyal+nq(b,"sharp",BAL.net.k.spySharp))-(a.loyal+nq(a,"sharp",BAL.net.k.spySharp)))[0]}if(p===S&&S&&!window.__j70off){const busy=ords70().map(o=>o.sid);const L=(S.staff||[]).filter(s=>!s.spyFor&&!busy.includes(s.sid)&&(typeof tinOf!=="function"||tinOf(s)>=BAL.tinLv.send)/* servant-trust: the Chủ tin gate (jtin) holds for her too */);if(!L.length)return null;return L.slice().sort((a,b)=>(b.loyal+nq(b,"sharp",BAL.net.k.spySharp))-(a.loyal+nq(a,"sharp",BAL.net.k.spySharp)))[0]}return b0.apply(this,arguments)}})();
 /* plots by someone she has a watcher on, or with a guard posted, are seen earlier; a traitor watcher feeds the plotter instead */
 (function(){const s0=seeP70;seeP70=function(p,step){let c=s0.apply(this,arguments);try{const a=pa70(p);if(a&&a!==S){if(S.maid&&S.maid.loyal>=BAL.loy.trust&&p.t==="me"){c-=10;if(roll(selfP70maid()))c+=10}for(const o of ords70()){if(o.k==="theodoi"&&o.tgt===a.id&&!traitor70(sv70(o.sid)))c+=30;if(o.k==="canh"&&p.t==="me")c+=canhB70(o)}
   const z=j70();if(z.allyW&&z.allyW.until>=wk()&&p.t==="me"&&z.allyW.id!==a.id)c+=15}
@@ -38559,6 +38559,27 @@ BAL.net.heat={ghenK:.45,affK:.6};
  "Vì gia tộc":{act:5},
  "Vì mình":{quen:3,than:8,act:-3,tell:-5,repay:1}};
  for(const t in BAL.net.T)BAL.net.T[t].th=O[t]||{}})();
+
+/* SERVANT TRUST (owner OD 24/11 ~08:12Z real + ~07:58Z etiquette + ~08:08Z no pre-warning; brief D-servant-trust; jsvt.js): every act toward
+   ANOTHER person's servant has a relationship effect, the same numbers for her, the NPC and NPC↔NPC (law 1, law 4).
+   ref   = the odds the servant REFUSES an open talk with someone of another house (then nothing changes): base + (lòng − mid) × loyK + (Chủ tin − mid) × tinK
+           + her nết (loyal / timid make her refuse, talk / greed make her talk), clamped [min,max].
+   seen  = the odds her master comes to know of it: base + master's eyes × eye + near (the master is at the same place) − covert (bribe / threat / tai mắt / plot).
+   tin   = Chủ tin lost by the master in that servant, per kind (talk / bribe / threat / tm / plot / friend); rel = thiện cảm the master loses toward the one who
+           went behind her (per kind); out = an NPC master sends a servant she trusts under this back to Nội vụ phủ, outRoll a month (her own she decides herself).
+   leak  = the odds the servant lets slip a REAL secret of her master (only when the master has schemed since the last slip, or keeps a tư tình): base
+           + (100 − lòng) × loyK + talk / greed − loyal; ev = chứng cứ the asker gains (law 6a real evidence).
+   greet = bất kính: speaking straight to a master's servant while that master stands at the same place and was not greeted this buổi: oán + thiện cảm −,
+           × up when the master outranks the speaker, × dn when below.
+   npc   = the odds a month that an NPC mistress has someone of another house talked to (her target's servant). */
+Object.assign(BAL,{svt:{on:1,
+ ref:{base:35,mid:50,loyK:.6,tinK:.2,loyal:20,timid:12,talk:-18,greed:-12,min:5,max:90},
+ seen:{base:30,eye:6,near:30,covert:20},
+ tin:{talk:8,bribe:15,threat:12,tm:15,plot:15,friend:6,out:20,outRoll:35},
+ rel:{talk:6,bribe:12,threat:10,tm:12,plot:12,friend:3},
+ leak:{base:5,loyK:.3,talk:20,greed:10,loyal:-20,ev:1},
+ greet:{oan:8,aff:6,up:1.5,dn:.5},
+ npc:{talk:25}}});
 /* j68sd: ORDER THIN P4 composed j68 seeds (DATA ONLY). Built by dev/build/j68sd_build.py from dev/handover/content/thin/j68seeds*.md;
    schema dev/handover/reports/thin.md «## API P4»; validator dev/test/j68seeds_validate.py; engine j68c.js. Do not hand-edit. */
 const J68SEEDS=[
@@ -53272,7 +53293,7 @@ function tsbMockOpts(v){const hi=rkOf(v)>rkOf(S);const o=tsbMockO(v);
   }catch(e){console.error("tsb approach",e)}return m}})();
 (function(){if(typeof approachOne!=="function")return;const a0=approachOne;approachOne=function(){const m=a0.apply(this,arguments);try{if(m&&m.opts&&m.t==="Thái hậu triệu"){m.opts=[{n:"Đến ngay",fx:{},x:`tốn: 2 khắc · Sức ${balSg(BAL.eff.jtsb.sucGo_3)} · thành: Thái hậu với ngươi ${balSg(BAL.eff.jtsb.thCall)}`,go:()=>{apply({th:BAL.eff.jtsb.thCall,suc:BAL.eff.jtsb.sucGo_3});tsbKh(2)}},{n:"Cáo bệnh",fx:{},x:`thành: giữ trọn khắc và Sức buổi này · Mất: Thái hậu với ngươi ${balSg(BAL.eff.jtsb.thCall_2)}`,go:()=>apply({th:BAL.eff.jtsb.thCall_2})}];m.optLayout="rows"}
   else if(m&&m.opts&&/xin theo ngươi/.test(String(m.h||""))){const H=String(m.h);const vic=liveRivals(true).find(v=>(v.staff||[]).some(s=>s.name&&H.includes(s.name)&&H.includes(v.name)));const s=vic&&(vic.staff||[]).find(x=>x.name&&H.includes(x.name));if(s&&vic){
-   m.opts=[{n:"Thu làm tai mắt",fx:{bac:BAL.eff.jtsb.bacFx},x:`tốn: Bạc ${balSg(BAL.eff.jtsb.bacFx)} · thành: có tai mắt trong cung ${vic.name} · kèm: kẻ đã phản chủ cũ cũng bán tin ngươi, ${vic.name} nắm ${balAb(BAL.eff.jtsb.evGo_4)} chứng cứ của ngươi: ${chanceW(BAL.odb.jtsb.leakO)}`,go:()=>{deedAdd(S,"sbribe",null,1,`mua chuộc người hầu của ${vic.name}`);s.spyFor="me";if(roll(BAL.odb.jtsb.leakO))/*evok: servant bribe deed*/evA(vic,S,BAL.eff.jtsb.evGo_4)}},{n:"Đuổi về",fx:{},x:`thành: không dính líu, không lộ gì`}];m.optLayout="rows"}}}catch(e){console.error("tsb approach2",e)}return m}})();
+   m.opts=[{n:"Thu làm tai mắt",fx:{bac:BAL.eff.jtsb.bacFx},x:`tốn: Bạc ${balSg(BAL.eff.jtsb.bacFx)} · thành: có tai mắt trong cung ${vic.name} · kèm: kẻ đã phản chủ cũ cũng bán tin ngươi, ${vic.name} nắm ${balAb(BAL.eff.jtsb.evGo_4)} chứng cứ của ngươi: ${chanceW(BAL.odb.jtsb.leakO)}`,go:()=>{deedAdd(S,"sbribe",null,1,`mua chuộc người hầu của ${vic.name}`);s.spyFor="me";try{if(typeof svTouch==="function"){const x=svTouch(S,s,"bribe");if(x)log(x)}}catch(e){}/* servant-trust (jsvt) */if(roll(BAL.odb.jtsb.leakO))/*evok: servant bribe deed*/evA(vic,S,BAL.eff.jtsb.evGo_4)}},{n:"Đuổi về",fx:{},x:`thành: không dính líu, không lộ gì`}];m.optLayout="rows"}}}catch(e){console.error("tsb approach2",e)}return m}})();
 /* the cold-palace letter: helping a deposed consort is kind, but the court notices who sides with her (Hoàng hậu) */
 (function(){const p0=PEND.coldletter;if(!p0)return;PEND.coldletter=p=>{const d=p0(p);try{if(d&&d.o&&d.o[0]&&queenP()&&queenP()!==S){const g=d.o[0];g.fx=Object.assign({},g.fx,{hh:-3});g.x=(g.x?g.x+" · ":"")+"Hoàng hậu không vui vì ngươi dính dáng người lãnh cung"}}catch(e){}return d}})();
 /* the mocker's flag: an easy target draws more bullying from her (same rule for everyone through mindMenu) */
@@ -85044,7 +85065,7 @@ function tmRefuse(p,s){const o=ownerOf(s);if(!o||!npcWhy("tmTell",{s,o},()=>roll
  if(o===S&&p!==S)knBao(s,S,`${p.name} vừa sai người tới mua chuộc {xung} làm tai mắt, {xung} không nhận`,knPal(p));return"tell"}
 /* one try: the recruiter turns to the most promising person (by the same odds); that person decides */
 function tmTry(p,why){const C=tmCands(p);if(!C.length)return null;let best=null,bo=-1;for(const s of C){const o=tmOdds(p,s);if(o>bo){bo=o;best=s}}
- KN.stat.tmTry=(KN.stat.tmTry||0)+1;if(agTry(bo)){best.spyFor=key(p);affAdd(best,p,BAL.relMS.bribe);KN.stat.tmOk=(KN.stat.tmOk||0)+1;if(p===S&&!quiet)try{log(`${best.name} (người hầu cung ${NM(ownerOf(best))}) nhận lời làm tai mắt cho ngươi.`)}catch(e){}return best}
+ KN.stat.tmTry=(KN.stat.tmTry||0)+1;if(agTry(bo)){best.spyFor=key(p);try{if(typeof svTouch==="function"){const x=svTouch(p,best,"tm");if(x&&(p===S||ownerOf(best)===S))log(x)}}catch(e){}/* servant-trust (jsvt) */affAdd(best,p,BAL.relMS.bribe);KN.stat.tmOk=(KN.stat.tmOk||0)+1;if(p===S&&!quiet)try{log(`${best.name} (người hầu cung ${NM(ownerOf(best))}) nhận lời làm tai mắt cho ngươi.`)}catch(e){}return best}
  if(agSoft(bo)){if(p===S&&!quiet)try{agSoftTxt(S,"Cài tai mắt")}catch(e){}return null}
  const t=tmRefuse(p,best);if(p===S&&!quiet)try{log(`Ngỏ ý với ${best.name} (người hầu cung ${NM(ownerOf(best))}), nàng không nhận${t?" và còn bẩm lại với chủ":""}.`)}catch(e){}return null}
 function tmLose(p,n){const L=taiMatRaw(p).sort((a,b)=>tmOdds(p,a)-tmOdds(p,b));for(let i=0;i<n&&i<L.length;i++)L[i].spyFor=null}
@@ -86975,7 +86996,7 @@ function ptRunner(){try{const b=bestSent(S);if(b&&ptFree(b))return b}catch(e){}i
 function ptNoRunner(){return"không còn ai rảnh để sai (người hầu đang đi việc)"}
 /* ---- busy servants are never picked to be sent (her runner, NPC mistresses too: two-way) ---- */
 (function(){try{if(typeof bestSent!=="function")return;const b0=bestSent;bestSent=function(p){const r=b0.apply(this,arguments);try{if(!ptOn()||!r||!p)return r;if(!ptBusy(ptPid(r,p)))return r;
-  const L=(p.staff||[]).filter(s=>s&&s!==r&&!s.spyFor&&!ptBusy(ptPid(s,p)));if(!L.length)return null;return L.sort((a,b)=>(b.loyal||0)-(a.loyal||0))[0]}catch(e){return r}}}catch(e){ptErr("bestSent",e)}})();
+  const L=(p.staff||[]).filter(s=>s&&s!==r&&!s.spyFor&&!ptBusy(ptPid(s,p))&&(typeof tinOf!=="function"||tinOf(s)>=BAL.tinLv.send)/* servant-trust: the Chủ tin gate */);if(!L.length)return null;return L.sort((a,b)=>(b.loyal||0)-(a.loyal||0))[0]}catch(e){return r}}}catch(e){ptErr("bestSent",e)}})();
 /* ---- 1. Sai đi dò la (her maid / any servant of her household; Hành sự card, maid pop-up, Cung nhân) ---- */
 (function(){try{if(typeof spyMaidRun!=="function")return;const s0=spyMaidRun;spyMaidRun=function(t,ag){if(!ptOn()||PT.landing||!t)return s0.apply(this,arguments);
   const m=ag||S.maid;const id=ptPid(m);const fz=typeof ACTFZ!=="undefined"&&ACTFZ?ACTFZ.o:null;
@@ -87898,6 +87919,75 @@ npwReg("exposeMe",{grp:"consort",who:c=>[c.x],why(x){return npw1Mot(x,S,"expose"
 npwReg("lieMe",{grp:"consort",who:c=>[c.x],why(x){const o=npw1Mot(x,S,"rumor");if(!o)return null;o.s+=nv(x,"rumorP")+(x.malice||0)/npwB().div.lieMal;return o}});
 npwReg("blameMe",{grp:"consort",who:c=>[c.a],why(a){return npw1Mot(a,S,"rumor",npw1B("lie").blame)}});
 npwReg("frameMe",{grp:"consort",who:c=>[c.a],why(a){return npw1Mot(a,S,"frame",npw1B("lie").frame)}});
+/* ================= jsvt SERVANT TRUST — every act toward ANOTHER person's servant has a relationship effect =================
+   Owner OD 24/11 ~08:12Z real (verbatim in dev/OWNER_DECISIONS.md): when a master of another palace talks to HER servant, the servant may REFUSE
+   (her nết + lòng) → nothing changes; or TALK → the servant's master grows suspicious: Chủ tin in that servant drops (jtin tinAdd, the ONE trust store)
+   and her thiện cảm toward the other master drops; the servant may let slip a REAL secret (law 6a: chứng cứ only when the master truly schemed / keeps
+   a tư tình). The same for her toward others' servants and NPC ↔ NPC (law 1). Etiquette OD ~07:58Z: an OPEN talk with a servant while her master
+   stands at the same place and was not greeted this buổi = BẤT KÍNH toward that master (covert acts — Mua chuộc, Dọa tố, Cài tai mắt, j70 plots — skip
+   the greeting but are seen less). OD ~08:08Z: no warning before; the consequence shows only after (words only, no number shown, law 7).
+   ONE function svTouch(actor, servant, kind) for the whole family (law 11): bribeServ (j29, stf2Bribe inside), threatServ (j10 + par3 cnvBlack),
+   tmTake (jagknow «Cài tai mắt»), j70 plot accomplice (inline call), servant ↔ servant friend talk (j10 servMonth inline), and the open talk svTalk
+   («Hỏi chuyện» on another house's servant, her card j15 + staff list j10; NPC mistresses monthly). Numbers: BAL.svt (jbal2.js, law 4).
+   Real effect of a low Chủ tin: bestSent / watcher (jtin) skip the suspected; an NPC master returns a servant under BAL.svt.tin.out to Nội vụ phủ.
+   =============================================================================================================================================== */
+const SVT={stat:{talk:0,refuse:0,seen:0,leak:0,greet:0,out:0,touch:{}},on:()=>{try{return !!(BAL.svt&&BAL.svt.on)&&!window.__svtOff}catch(e){return false}}};
+function svtIsSv(x){return !!x&&typeof x==="object"&&x.sid!=null&&typeof x.loyal==="number"&&!x.alive&&x.role!=null}
+/* the person the relation belongs to: a servant who acts does it for her own master */
+function svtWho(a){if(svtIsSv(a)){try{return ownerOf(a)||null}catch(e){return null}}return a||null}
+function svtId(p){return p===S?"me":p&&p.id!=null?"v"+p.id:null}
+function svtGuest(a,m){try{return typeof mlGuest==="function"&&mlGuest()&&a!==S&&m!==S}catch(e){return false}}
+/* the odds the servant refuses an open talk (law 4: BAL.svt.ref; her nết by netQ, the same table as every servant act) */
+function svtRefO(s){const B=BAL.svt.ref;let tin=B.mid;try{tin=tinOf(s)}catch(e){}
+ const v=B.base+((s.loyal||0)-B.mid)*B.loyK+(tin-B.mid)*B.tinK+nq(s,"loyal",B.loyal)+nq(s,"timid",B.timid)+nq(s,"talk",B.talk)+nq(s,"greed",B.greed);
+ return Math.round(Math.max(B.min,Math.min(B.max,v)))}
+function svtNear(a,m){try{const kh=j95kh(),ia=svtId(a),im=svtId(m);if(!ia||!im||typeof knAt!=="function")return false;const x=knAt(ia,kh),y=knAt(im,kh);return !!x&&x===y}catch(e){return false}}
+const SVT_COVERT={bribe:1,threat:1,tm:1,plot:1,friend:1};
+function svtSeenO(a,m,kind){const B=BAL.svt.seen;return Math.round(Math.max(0,Math.min(100,B.base+eyes(m)*B.eye+(svtNear(a,m)?B.near:0)-(SVT_COVERT[kind]?B.covert:0))))}
+function svtLeakO(s){const B=BAL.svt.leak;return Math.round(Math.max(0,Math.min(100,B.base+(100-(s.loyal||0))*B.loyK+nq(s,"talk",B.talk)+nq(s,"greed",B.greed)+nq(s,"loyal",B.loyal))))}
+/* a REAL secret to let slip (law 6a): schemes since this servant's last slip, or a tư tình */
+function svtHasSecret(m,s,A){const nw=(m.schemes||0)>(s.svtL||0)||(m.dw||0)>(s.svtD||0)||!!m.affair;if(!nw)return false;try{if(typeof deedCap==="function"&&deedCap(m)<=evG(A,m))return false/* jtruth: proof only up to the real deeds */}catch(e){}return true}
+/* greetings of this buổi (jgreet greetName is the ONE greeting function: wrapped below) */
+function svtGz(){const k=j95key();if(!S.svtG||S.svtG.k!==k)S.svtG={k,g:{}};return S.svtG.g}
+function svtGreeted(a,m){try{return !!svtGz()[svtId(a)+">"+svtId(m)]}catch(e){return true}}
+/* BẤT KÍNH (OD ~07:58Z): speaking straight to the servant of a master who stands right there, without greeting her first */
+function svtEtq(a,m,s){if(!svtNear(a,m)||svtGreeted(a,m))return"";const B=BAL.svt.greet;const d=rkOf(m)-rkOf(a),k=d>0?B.up:d<0?B.dn:1;
+ oanAdd(m,a,Math.round(B.oan*k));affAdd(m,a,-Math.round(B.aff*k));SVT.stat.greet++;
+ if(a===S)return `${m.name} đứng ngay đó mà ngươi không chào, lại gọi thẳng ${s.name} — ${m.name} cho là ngươi bất kính. `;
+ if(m===S)return `${a.name} chẳng chào ngươi một tiếng mà gọi thẳng ${s.name} — thật là bất kính. `;return""}
+/* svTouch: the servant DID engage (talked / took the bạc / took the threat / became eyes): her master may come to know; the servant may let slip */
+function svTouch(a,s,kind){if(!SVT.on()||!a||!s)return"";let m=null;try{m=s===S?(typeof isSrv==="function"&&isSrv()?srvM():null)/* law 1: she herself, on the cung-nữ road, is another's servant */:ownerOf(s)}catch(e){}const A=svtWho(a);if(!m||!A||m===A)return"";
+ try{if(typeof sameHouse==="function"&&sameHouse(A,m))return""}catch(e){}if(svtGuest(A,m))return"";
+ const k=svtId(A)+"|"+(typeof j95key==="function"?j95key():"");if(s.svtK===k+"|"+kind)return"";s.svtK=k+"|"+kind;/* one effect per asker, servant, kind and buổi (wrappers never stack) */
+ SVT.stat.touch[kind]=(SVT.stat.touch[kind]||0)+1;const B=BAL.svt;let r="";
+ let leak=false;if(kind!=="friend"/* the friend talk already carries its own chứng cứ (j10 servMonth) */&&s!==S/* her own tongue is her own choice */&&svtHasSecret(m,s,A)&&roll(svtLeakO(s))){leak=true;s.svtL=m.schemes||0;s.svtD=m.dw||0;SVT.stat.leak++;evA(A,m,B.leak.ev);
+  if(A===S)r+=`${s.name} buột miệng kể chuyện trong cung ${m.name}: ${evSg(B.leak.ev)}. `}
+ if(roll(svtSeenO(A,m,kind))){SVT.stat.seen++;tinAdd(s,-(B.tin[kind]||B.tin.talk));affAdd(m,A,-(B.rel[kind]||B.rel.talk));
+  if(s===S)r+=`${m.name} hay tin ${A.name} lén tìm gặp ngươi; từ đó chủ tử sinh nghi ngươi. `;
+  else if(m===S)r+=`Có kẻ bẩm: ${A.name} ${kind==="friend"?"cho người hầu kết thân với":kind==="talk"?"kéo riêng":"lén tìm gặp"} ${s.name}${kind==="talk"?" ra nói chuyện":""}, ${s.name} không từ chối${leak?", nghe đâu còn lỡ miệng chuyện trong cung ngươi":""}. Từ đó ngươi bắt đầu nghi ${s.name}. `;
+  else if(A===S)r+=`${m.name} hay tin ngươi tìm gặp ${s.name}; từ đó nàng sinh nghi cả ngươi lẫn ${s.name}. `}
+ return r}
+/* svTalk: the OPEN talk («Hỏi chuyện» with a servant of another house) — her button and the NPC's monthly deed are this one function */
+function svTalk(a,s){if(!SVT.on()||!a||!s)return"";let m=null;try{m=ownerOf(s)}catch(e){}if(!m||m===a)return"";if(svtGuest(a,m))return"";SVT.stat.talk++;
+ let r=svtEtq(a,m,s);
+ if(roll(svtRefO(s))){SVT.stat.refuse++;/* refused: nothing changes (OD ~08:12Z «nếu như mà họ từ chối thì mình ok, không có gì hết») */
+  return r+(a===S?`${s.name} cúi đầu thưa: phận tôi tớ cung ${m.name}, không dám nói chuyện riêng với người cung khác. `:"")}
+ if(a===S){let t="";try{t=learnTrait(m,`${s.name} kể`,1)}catch(e){}r+=t?`${s.name} chịu nói chuyện, kể rằng chủ tử ${m.name} là người ${t}. `:`${s.name} chịu nói chuyện, nhưng chỉ kể những chuyện ai cũng biết. `}
+ return r+svTouch(a,s,"talk")}
+/* the wrappers: the whole family reaches svTouch only when the servant really engaged (spyFor set by THIS act) */
+function svtWrap(f,kind){return function(a,s){const b=s&&s.spyFor;const r=f.apply(this,arguments);
+  try{if(s&&a&&s.spyFor===key(a)&&b!==key(a)){const x=svTouch(a,s,kind);if(x)return (r||"")+x}}catch(e){}return r}}
+if(typeof bribeServ==="function")bribeServ=svtWrap(bribeServ,"bribe");if(typeof threatServ==="function")threatServ=svtWrap(threatServ,"threat");if(typeof tmTake==="function")tmTake=svtWrap(tmTake,"tm");
+/* greetName (jgreet: every greeting site): a greeting of this buổi is remembered both ways */
+(function(){if(typeof greetName!=="function")return;const g0=greetName;greetName=function(a,b){const r=g0.apply(this,arguments);try{const G=svtGz();G[svtId(a)+">"+svtId(b)]=1;G[svtId(b)+">"+svtId(a)]=1}catch(e){}return r}})();
+/* the month: NPC mistresses have someone of another house talked to (law 1: her, the NPCs, NPC ↔ NPC); an NPC master returns the servant she no longer trusts */
+function svtMonth(){if(!SVT.on())return"";let ev="";const B=BAL.svt;let G=false;try{G=typeof mlGuest==="function"&&mlGuest()}catch(e){}
+ for(const p of liveRivals(true)){if(!p||!p.alive||p.out)continue;
+  if(roll(B.npc.talk)){const t=pickTarget(p);if(t&&t!==p&&(t===S||!G)&&t.staff&&t.staff.length){const s=pick(t.staff);if(s&&s.spyFor!==key(p)){const x=svTalk(p,s);if(t===S&&x)ev+=x}}}
+  if(G)continue;for(const s of (p.staff||[]).slice()){let t=100;try{t=tinOf(s)}catch(e){}if(t<B.tin.out&&!s.spyFor&&roll(B.tin.outRoll)){try{servDo(p,"doi",s);SVT.stat.out++}catch(e){}}}}
+ return ev}
+(function(){if(typeof servMonth!=="function")return;const m0=servMonth;servMonth=function(){let ev=m0.apply(this,arguments)||"";try{ev+=svtMonth()}catch(e){}return ev}})();
+Object.assign(window,{SVT,svTouch,svTalk,svtWrap,svtRefO,svtSeenO,svtLeakO,svtEtq,svtMonth,svtNear});
 /* ================= jkidlife — CHILDREN LIVING RULES (KP03; owner OD:L87 14/11 21:50Z + dev/PLACES_PLAN.md §5 "Móc lối chơi" on review/places;
    follow-up named in dev/PROGRESS_places-port.md:25) =================
    Where the children live is jplx (plxKidPlace) + j95 (the people ledger); this file adds the RULES around it, the same for her and every consort (law 1):
@@ -93558,7 +93648,7 @@ const SPEC=KY.SPEC={
   if(F===S){const f=intelLearn(v,KB().intelN,{by:wName(c.W),how:"Kỳ ngộ"});return `biết thêm chuyện của ${v.name}${f?": "+String(f).replace(/<[^>]+>/g,""):""}`}evA(F,v,KB().evStep);return""},
  ev:c=>{const F=c.F;if(c.X.pl){const n=evA(F,c.X.pl.a,KB().evStep);return `chứng cứ về ${nm(c.X.pl.a)} +${n||KB().evStep}`}
   if(c.X.lc){const L=c.X.lc;const x=kyLc(L);if(x)lostReturn(x,"kyngo");{const lc=kyLive(L)||L;lc.cev=(lc.cev||0)+KB().evStep}return x?`${loNm(L.k)} về lại rương, thêm một manh mối`:"thêm một manh mối"}return""},
- spy:c=>{const s=c.W.ref;s.spyFor=key(c.F);return `${s.name} thành tai mắt của ${nm(c.F)} trong cung ${nm(c.W.own)}`},
+ spy:c=>{const s=c.W.ref;s.spyFor=key(c.F);try{if(typeof svTouch==="function"){const x=svTouch(c.F,s,"tm");if(x&&(c.F===S||ownerOf(s)===S))log(x)}}catch(e){}/* servant-trust (jsvt) */return `${s.name} thành tai mắt của ${nm(c.F)} trong cung ${nm(c.W.own)}`},
  cure:c=>{const F=c.F;const i=typeof illOf==="function"?illOf(F):null;if(i){F.ill=null;return "bệnh cũ dứt hẳn"}ap(F,{suc:Math.round(KB().sucRest)});return `bồi bổ, Sức +${Math.round(KB().sucRest)}`},
  rk:c=>{try{if(S.srv&&!S.srv.risen){const old=S.srv.rk||0;S.srv.rk=Math.max(old,Math.min(BAL.srvRk.nq,old+KB().rkStep));if(S.srv.rk>old)return `được thăng ${SRK.maid[S.srv.rk]}`}}catch(e){}return""}
 };
@@ -97204,7 +97294,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="06749bc45c06";window.CTM_BUILD=BUILD;
+const BUILD="f3a25816bc4a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
