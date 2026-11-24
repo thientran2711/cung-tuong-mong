@@ -57,7 +57,7 @@ function ktArtHTML(){try{vNormAll()}catch(e){}const SK=ktArtSkills();const G=[["
  const L=SK.filter(s=>s.g===sub.cur).map(s=>Object.assign(s,{can:s.acts.some(a=>!/\sdisabled[\s>]/.test(a.slice(0,a.indexOf(">")+1)))}));
  L.sort((a,b)=>(b.can-a.can)||((a.level>=5)-(b.level>=5)));
  return h+`<div class="kskills ktn-grid">${L.map(s=>ktTnTile(s,sub.cur)).join("")}</div>`}
-function ktTnTile(s,g){const o=Object.assign({},s,{acts:[],tile:true,stepsAttr:""});return `<div class="ktn-tile${s.can===false?" kdone":""}" role="button" tabindex="0" data-tnmon="${g}:${s.kind}:${s.k}">${kitSkillCard(o)}</div>`}
+function ktTnTile(s,g){return kitSkillTile(s,`${g}:${s.kind}:${s.k}`)}/* the tile = KIT §21e kitSkillTile (j79) */
 function ktTnFind(key){const [g,kind,k]=String(key).split(":");if(g==="wk")return ktWorksList().find(s=>s.k===k);return ktArtSkills().find(s=>s.kind===kind&&s.k===k)}
 function ktTnPop(key){const s=ktTnFind(key);if(!s)return;s.can=undefined;
  kitModal({kind:"notice",title:s.name,sub:s.kicker||"",sections:[{h:"",html:`<div data-tnpop="1" class="ktn-pop">${kitSkillCard(Object.assign({},s,{stepsAttr:""}))}</div>`}],btn:"Thôi"})}
@@ -67,15 +67,7 @@ document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest
  const a=e.target.closest&&e.target.closest("#modal .ktn-pop button[data-learn],#modal .ktn-pop button[data-vlearn],#modal .ktn-pop button[data-wk],#modal .ktn-pop button[data-wkprac],#modal .ktn-pop button[data-charity]");
  if(a&&!a.disabled)setTimeout(()=>{try{const m=document.getElementById("modal");if(m&&m.querySelector("[data-tnpop]"))kitModalClose()}catch(x){}},0)},true);
 document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.matches&&e.target.matches(".ktn-tile")){e.preventDefault();ktTnPop(e.target.dataset.tnmon)}});
-(function(){const st=document.createElement("style");st.id="kit2-tntile";st.textContent=`
-.kskills.ktn-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:10px;align-items:stretch}
-.ktn-tile .kskdo,.ktn-tile .kskx{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
-.ktn-tile{display:flex;cursor:pointer;min-width:0;container-type:inline-size}
-@container (max-width:330px){.ktn-tile .kskh2{grid-template-columns:minmax(0,1fr)!important;justify-items:start}.ktn-tile .kskdo{display:none}}.ktn-tile>.kskill{flex:1;margin:0;min-width:0}
-.ktn-tile .kskh{flex-wrap:wrap;gap:4px 8px}.ktn-tile .kskinfo{min-width:0}
-.dlg:has(.ktn-pop) .k3body>.k3main,.dlg:has(.ktn-pop) .k3body>.kpsubj,.dlg .kpb:has(.ktn-pop)>.kpsubj,.dlg .kpb:has(.ktn-pop)>.kpiart{display:none!important}.dlg:has(.ktn-pop) .k3right{flex:1 1 100%;width:100%}.dlg .kpb.kphas:has(.ktn-pop){grid-template-columns:minmax(0,1fr)!important}
-.ktn-tile:active>.kskill{filter:brightness(.97)}
-`;document.head.appendChild(st)})();
+
 /* Tác phẩm (j83 works): one skill head per art that makes works = picture, bậc, what it makes as chips, the quality ladder;
    "Tự học, làm tác phẩm" (mastered only) as a compact act. Rules behind the ⓘ "Tác phẩm" gloss (was a paragraph + bare divs). */
 function ktWorksList(){if(typeof wkKindsOf!=="function"||typeof WK!=="object")return[];const why=whyTime(2)||(S.suc<BAL.sucNeed.wk?"Sức dưới "+BAL.sucNeed.wk:"");
