@@ -1445,3 +1445,4 @@ REVIEW palace-distance 9e655c3e (opus BIG; briefs/D-palace-distance-review.md) |
 | MOTION-DESIGN game-feel / event animation study (sonnet UI design; OD 24/11 ~07:48Z real) | review/motion-design (mock only); reports/motion-design.md | MAIN 119 | session_01V1ZZH1Vs2r1yMeb37RPjRJ | RUNNING | 24/11 07:50Z |
 NET BUILD step0 heat/range fix + one BAL relation levels + per-nết thresholds (opus BIG; FROM MAIN 119 07:40Z; briefs/D-net-build.md) | review/net-build | (opening) | RUNNING | 24/11 07:40Z (Foreman D depth 1)
 | DLG WRITER W4+W5+W6 (j68_a/b/c; sonnet; lead 5NjXSPTa) | review/sideline-dlg content | B | session_01N1tNP5omudWA4gV7MX7j4j | RUNNING | 24/11 07:40Z |
+| REVIEW E73r MOMENT BIG (opus; briefs/E73r-review-moment.md) of 5a504f92 | review/moment(-r); reports/moment-review.md | FOREMAN E (child2) | (opening) | RUNNING | 24/11 07:40Z |
