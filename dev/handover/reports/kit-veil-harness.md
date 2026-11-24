@@ -9,7 +9,7 @@ PRIORITY #1 CHECK ('kit-dialogue-vn'): OD 0 | ledger 0 | claims 8 | main 0 (no l
 ## Shared helper: dev/test/lib/veil.js
 `V.guard(page|ctx)` (init script: CSS-hides + removes #kroulw), `V.waitOut(page)` (waits veil + #kroul gone), `V.fxFull(page)` (keeps OPT.fxon true). Scan: `python3 dev/test/veil-scan.py` (exit 1 if any start()+tap test unguarded). Apply: `dev/test/veil-apply.py`.
 ## Family scan (before/after), main 284e0d08
-start()+tap tests: before = guarded-by-veil 0 | kroul-handled 168 | UNGUARDED 138 ; after = guarded 251 | kroul-handled 168 | UNGUARDED 0 (133 auto-inserted after `x=await ..newPage(..);`, 5 by hand). Note: dev/test/placeholder-pics.js already has a SyntaxError on main (a `*/` inside its header comment) — guard line added, file still not runnable, NOT fixed here.
+start()+tap tests: before = guarded (already hid #kroulw) 113 | kroul-handled 168 | UNGUARDED 138 ; after = guarded 251 | kroul-handled 168 | UNGUARDED 0 (133 auto-inserted after `x=await ..newPage(..);`, 5 by hand). Note: dev/test/placeholder-pics.js already has a SyntaxError on main (a `*/` inside its header comment) — guard line added, file still not runnable, NOT fixed here.
 ## Per branch (merged NEWEST origin/main 284e0d08; KIT.md + jbal2.js conflicts = kept both sides; index.html/sw.js rebuilt by assemble.py + build_site.sh)
 | branch | pushed as | sha | own test no args / Fold+iPad args | quickcheck |
 |---|---|---|---|---|
