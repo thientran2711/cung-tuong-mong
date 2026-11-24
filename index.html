@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"b2c249f0","t":"2026-11-24T12:27Z","c":"SELSCENE-10: coop-e2e «A sees the reborn friend» follows B's current life (logs renames / ended lives); report FIX r1 SELSCENE-10 + handove…","b":"4ca369dacf18","h":[{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"}]};
+window.CTM_BI={"s":"96de159b","t":"2026-11-24T13:18Z","c":"SELSCENE-11: selx-flow text audit — every visible card / scene / stage / panel word of the 3 days is scanned: a tú nữ's future rank before …","b":"0f941257e4b2","h":[{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -82528,7 +82528,7 @@ function selxFree(){const Z=S.selx2;if(selxEvening())return selxEve();const H=se
  o.push(selxO("Ngồi yên chờ tới tối",()=>{Z.kh=Math.min(Z.kh,BAL.time.khac);selxFree()},{x:selxX(0,"tới ngay buổi tối, không phải chờ")}));
  selxCard(selxSo(Z.at),`<p>${H.length?`Ở ${selxSo(Z.at)} lúc này có ${selxNmL(H)}.`:`${selxSo(Z.at)} vắng người.`}</p>`,o,selxMaMa())}
 /* greeting = the existing two-way rule (jgreet greetName: a face always, a name only if her nết and birth let her give it) */
-function selxGreet(v){const Z=S.selx2;Z.met=Z.met||{};Z.met[v.id]=1;let line="";try{const G=greetName(S,v);line=G&&G.line||""}catch(e){}try{k61Know(v,"Làm quen ở "+BAL.selx.lodge.n,true,1)}catch(e){}
+function selxGreet(v){const Z=S.selx2;Z.met=Z.met||{};Z.met[v.id]=1;let line="";try{const G=greetName(S,v);line=G&&G.line||""}catch(e){}try{k61Know(v,"Làm quen ở "+BAL.selx.lodge.n,true,2)}catch(e){}/* she learnt the name (selxNm prints it from here on): j61 stage 2, else its prose mask turned the printed name into «<rank> ???» */
  try{kitKnow({text:`Ngươi biết mặt ${k61Named(v)?v.name:"một tú nữ"}`,key:"selx:met:"+v.id})}catch(e){}if(line)try{log(line)}catch(e){}}
 let SELX_CUR=null;
 /* ================= DRAMA ENGINE (yard.md Format B: SELX_SEEDS.yard / .dorm / .kept) ================= */
@@ -82573,7 +82573,7 @@ function selxStX(st,c,her){const D=BAL.selx;const nm=r=>r==="ma"?"Giáo tập ma
 function selxEve(){const Z=S.selx2;const d=Z.days;const pool=d===3?selxAll():selxAll().filter(v=>selxHomeOf(v)===Z.home).concat(selxAll().filter(v=>selxHomeOf(v)!==Z.home).slice(0,BAL.selx.drama.extra));
  selxDrama(d===3?"kept":"dorm",pool,()=>d===3&&!S.selx2.two&&R(100)<BAL.selx.drama.two?(S.selx2.two=1,selxDrama("kept",pool,()=>selxNight())):selxNight())}
 function selxNight(){const Z=S.selx2;const d=Z.days;if(d===3)return selxEdict();
- selxCard("Đêm",`<p>${d===1?"Đèn tắt. Ngươi nằm nghe tiếng thở của người nằm cạnh, nghĩ tới ngày mai ra điện.":"Đèn tắt. Trong viện chỉ còn ${selxNumW(BAL.selx.yard.kept)} người được ban hương nang."}</p>`,[selxO("Ngủ",()=>selxDay(d+1))])}
+ selxCard("Đêm",`<p>${d===1?"Đèn tắt. Ngươi nằm nghe tiếng thở của người nằm cạnh, nghĩ tới ngày mai ra điện.":`Đèn tắt. Trong viện chỉ còn ${selxNumW(BAL.selx.yard.kept)} người được ban hương nang.`}</p>`,[selxO("Ngủ",()=>selxDay(d+1))])}
 /* ================= DAY 2 «Điện tuyển» ================= */
 /* ---- DAY 2 morning: the TOILETTE (OD 24/11 ~08:55Z; the existing jtoil mirror, the occasion «Điện tuyển»), or dress as given with a bare face ---- */
 function selxD2Dress(){const Z=S.selx2;const I=BAL.selx.imp;const o=[];
@@ -82754,7 +82754,7 @@ function selxRmT(R){const tok=k=>(selxRoyals().find(x=>x[0]===k)||[])[2];const T
 (function(){const d0=selxDay1;selxDay1=function(){if(!selxCo())return d0.apply(this,arguments);const Z=S.selx2;if(!Z||Z.girls&&Z.girls.length)return;
  let R=selxRmOpen();
  if(R)Z.girls=R.g.map(selxJ);
- else if(worldOn()){Z.girls=selxGirls();R=S.selxRm={g:null,t:{},art:"",res:[],in:0};
+ else if(worldOn()){Z.girls=selxGirls();R=S.selxRm={g:null,t:{},art:"",res:[],in:0,c0:[S.turn||0,S.tuan||0]};/* c0: the room clock at the draw (an array: it rides the live diff) */
   try{const p=(type,k)=>{const e=selxTestPick(type,k);if(e)R.t[type]={id:e.id,k}};p("doidap","T");p("hanhxu","H")}catch(e){console.error("selx room tests",e)}
   try{R.art=(kc2SelArts()[0]||[""])[0]||""}catch(e){}
   try{selxAskNpc()}catch(e){}/* the girls ask the ma ma on day 1 (law 1) — here, before their answers are fixed */
@@ -82774,19 +82774,28 @@ function selxRmT(R){const tok=k=>(selxRoyals().find(x=>x[0]===k)||[])[2];const T
 function selxRoomIn(mine){const R=S&&S.selxRm;if(!R||R.in||!worldOn())return;R.in=1;const own=new Map((mine||[]).map(v=>[v.id,v]));
  /* one order on both seats: the guest's live diff (jcoophl "a" ops) adds new world people in id order (Object.keys of the id map), so the host adds the kept girls in that same id order (not by score) */
  for(const r of (R.res||[]).slice().sort((x,y)=>(+x.id||0)-(+y.id||0))){if(!r.kept||rivals.some(v=>v.id===r.id))continue;const g=(R.g||[]).find(v=>v.id===r.id);const v=own.get(r.id)||(g?selxJ(g):null);if(!v)continue;
-  v.rank=selxRank(v,r.step,{k:"_",r0:v.r0});v.__done=1;if(typeof roomFor!=="function"||roomFor("consort"))rivals.push(v)}
+  v.rank=selxRank(v,r.step,{k:"_",r0:v.r0});v.__done=1;/* her maid comes WITH her (law 6b, written once on the host): else each seat made its own maid lazily (j8 consorts) under its own j61 key */try{if(!v.maid)v.maid=maidMk(v);if(!v.staff)v.staff=[]}catch(e){}
+  if(typeof roomFor!=="function"||roomFor("consort"))rivals.push(v)}
  try{palFix()}catch(e){}
- const n=BAL.selx.tuan;S.tuan=(S.tuan||0)+BAL.selx.days;while(S.tuan>=n){S.tuan-=n;S.turn=(S.turn||0)+1}/* the room clock: the days, once */
- R.ck="c"+Date.now().toString(36)+Math.floor(Math.random()*1e4);R.clk=[S.turn||0,S.tuan||0];S.selxClk=R.ck;/* ONE SHARED CLOCK (OD L1641): the guest moves hers at the same moment (selxClkSync) */
+ /* the room clock: the days, ONCE, as an ABSOLUTE target (the clock at the draw + the days): a second run (a merged week that brings back an
+    older cohort copy, a solo selxClock while COOPW was off for a moment) sets the same clock again, never +days twice (coop-e2e brA3: host +6) */
+ const n=BAL.selx.tuan,c0=Array.isArray(R.c0)?R.c0:[S.turn||0,S.tuan||0],t=(c0[0]||0)*n+(c0[1]||0)+BAL.selx.days;
+ R.clk=[Math.floor(t/n),t%n];selxClkTo(R.clk);/* ONE SHARED CLOCK (OD L1641): the guest goes to the same clock (selxClkSync) */
  R.g=[];/* the cohort is closed; the girls live on as world people (kept) or in each seat's record (ban hoa) */}
 /* ONE SHARED CLOCK (OD L1641) on the guest: her clock (j8 wk = turn·3+tuần, the key of the night handshake jnf day()) is not in the live diff
    (jcoophl CLOCK: it rides the week merge only), so when the host's selxRoomIn moves the room clock by the days, the guest sat days behind
    until the week end → nights keyed apart, both seats «Chờ hảo hữu…» (coop-e2e «buổi 0:3 advanced for both», both seat orders). The cohort
-   (S.selxRm, live diff) carries the move's key + the clock after it: the guest moves hers by the same days ONCE (seat-own flag S.selxClk,
-   kept in her blob); after a full rebuild her clock already IS the host's (≥ R.clk) → only the flag is set, never a second move. */
-function selxClkSync(){try{if(typeof selxCo!=="function"||!selxCo()||worldOn())return;const R=S&&S.selxRm;if(!R||!R.in||!R.ck||!R.clk||S.selxClk===R.ck)return;S.selxClk=R.ck;
- const n=BAL.selx.tuan,d=x=>(x[0]||0)*n+(x[1]||0);if(d([S.turn,S.tuan])>=d(R.clk))return;S.tuan=(S.tuan||0)+BAL.selx.days;while(S.tuan>=n){S.tuan-=n;S.turn=(S.turn||0)+1}}catch(e){console.error("selxClkSync",e)}}
+   (S.selxRm, live diff) carries the clock after the days (R.clk): the guest goes to that clock (never relative, never twice). */
+function selxClkTo(c){const n=BAL.selx.tuan,d=x=>(x[0]||0)*n+(x[1]||0);if(!Array.isArray(c)||d([S.turn,S.tuan])>=d(c))return false;S.turn=c[0]||0;S.tuan=c[1]||0;return true}
+/* the guest: R.clk is an array, so the live diff carries it (R.in is a number: the diff never sends a number whose base is a number — it waited for the
+   merged week, so the guest never moved, coop-e2e brA3 host wk 6 / guest wk 1); absolute and idempotent: after a full rebuild she already holds it */
+function selxClkSync(){try{if(typeof selxCo!=="function"||!selxCo()||worldOn())return;const R=S&&S.selxRm;if(!R||!Array.isArray(R.clk))return;selxClkTo(R.clk)}catch(e){console.error("selxClkSync",e)}}
 window.selxClkSync=selxClkSync;
+/* ONE j61 KEY PER GIRL (coop-e2e «one j61 key = one person», seat order A): a girl of the days is not in rivals and has no sid, so j61 kOf61 gave her an
+   «x<n>» key from THIS seat's counter (S.kseq) the moment she was greeted — the two seats' counters drifted apart (LIVE never spends them here) and later
+   keys of different people met. Her id is the same on both seats (the room draw) and is her key once she enters rivals («r<id>»): she keeps that key
+   from the first day, so what she learnt of her name carries over to the world person, and no counter is spent. */
+(function(){if(typeof kOf61!=="function")return;const k0=kOf61;kOf61=function(e){try{if(e&&e.tuNu&&e.id!=null&&S&&!(rivals||[]).includes(e)){const k="r"+e.id;if(!(rivals||[]).some(v=>v&&v.id===e.id))KREG[k]=e;return k}}catch(x){}return k0.apply(this,arguments)};window.kOf61=kOf61})();
 (function(){if(typeof render!=="function")return;const r0=render;render=function(){selxClkSync();return r0.apply(this,arguments)};window.render=render})();
 /* in a room the clock of the days moves once, in selxRoomIn (never once per seat: two seats' +3 would merge to +6) */
 (function(){const k0=selxClock;selxClock=function(){if(selxCo()){const Z=S.selx2;Z.clock=1;return}return k0.apply(this,arguments)};window.selxClock=selxClock})();
@@ -95955,6 +95964,10 @@ function selxFigP(p){if(p==="emp")return{kind:"emp"};if(p==="th")return{kind:"th
  if(typeof rkName==="function"){const n0=rkName;rkName=function(p){return (p===S||p&&p.tuNu)&&T()?"Tú nữ":n0.apply(this,arguments)};window.rkName=rkName}
  /* RV-SELX (same group): kitName(S,{named:true}) prints RANKS[S.rank] itself (podium «Quý nhân» over her name during the contest) → «Tú nữ» too */
  if(typeof kitName==="function"){const k0=kitName;kitName=function(p,o){const h=k0.apply(this,arguments);try{if(p===S&&o&&o.named&&T()&&!S.out&&RANKS[S.rank])return h.replace(`>${RANKS[S.rank].n}</span>`,">Tú nữ</span>")}catch(e){}return h};window.kitName=kitName}
+ /* SELSCENE-11 (same group): the j61 mask title of a girl whose name she has not learnt read RANKS[e.rank] itself («Đáp ứng ???» on the Ban hương nang card, before the edict) */
+ if(typeof k61MaskT==="function"){const m0=k61MaskT;k61MaskT=function(e){return e&&e.tuNu&&T()?"Tú nữ":m0.apply(this,arguments)};window.k61MaskT=k61MaskT}
+ /* SELSCENE-11 (same group): the kit dialog's person plate (jksize kszRankName: card «Đêm» / «Ban hương nang», her own plate «Quý nhân · … (ta)») read RANKS[S.rank] / RANKS[p.rank] itself */
+ if(typeof kszRankName==="function"){const z0=kszRankName;kszRankName=function(p){const g=z0.apply(this,arguments);try{if(p&&(p===S||p.tuNu)&&T()&&!(p===S&&S.out)&&g[0]&&g[0]!=="Tú nữ"&&(RANKS||[]).some(x=>x&&x.n===g[0])){let n=p===S?S.name:(p.name||"");try{if(p!==S&&typeof kitKnownName==="function"&&!kitKnownName(p))n="???"}catch(e){}return["Tú nữ",n]}}catch(e){}return g};window.kszRankName=kszRankName}
  if(typeof renderHUD==="function"){const h0=renderHUD;renderHUD=function(){const r=h0.apply(this,arguments);try{if(T()){const m=document.getElementById("me-r");if(m&&m.textContent!=="Tú nữ")m.textContent="Tú nữ"}}catch(e){}return r};window.renderHUD=renderHUD}})();
 async function selxFig(Sc,p,cx,o){o=o||{};const g=Sc.L.g,fh=o.fh||selxFh(g);const f=await Sc.fig(selxFigP(p),{cx,top:g.H-fh,fh,z:o.z||3});f.__p=p;if(o.hide){/* the kit slide-in (fill both) would hold it visible */try{f.getAnimations().forEach(a=>a.cancel())}catch(e){}f.style.opacity=0}return f}
 /* the j59 name tag under the feet (kitNameTagBox: «Người lạ» / face known / name), kept on the layer */
@@ -98609,7 +98622,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="4ca369dacf18";window.CTM_BUILD=BUILD;
+const BUILD="0f941257e4b2";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
