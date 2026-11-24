@@ -55,7 +55,7 @@ const H=require(path.join(T,'lib','coop-lag-hooks.js'));const PP=require(path.jo
 const BUDGET=JSON.parse(fs.readFileSync(path.join(T,'play-perf-budget.json'),'utf8'));
 const [PF,PT,KA,OUT0]=process.argv.slice(2);
 const OUT=path.resolve(OUT0||path.join(REPO,'dev','handover','robot'));
-const E=process.env;const SEED=+E.SEED||1,SWAP=E.SWAP==='1',PAR=+E.PAR||1,WURL=E.WORKER||CB.WURL,CAP=(+E.CAP||10800)*1e3,PCAP=(+E.PCAP||0)*1e3,
+const E=process.env;const HSHA=(()=>{try{return require('child_process').execSync('git rev-parse --short=8 HEAD',{cwd:__dirname,stdio:['ignore','pipe','ignore']}).toString().trim()+(require('child_process').execSync('git status --porcelain dev/measure dev/test',{cwd:__dirname,stdio:['ignore','pipe','ignore']}).toString().trim()?'+dirty':'')}catch(e){return '?'}})();/* fixer #3: harness sha per hit range */const SEED=+E.SEED||1,SWAP=E.SWAP==='1',PAR=+E.PAR||1,WURL=E.WORKER||CB.WURL,CAP=(+E.CAP||10800)*1e3,PCAP=(+E.PCAP||0)*1e3,
  STUCK=(+E.STUCK||240)*1e3,FL=E.FLUSH==null?4:+E.FLUSH,RTW=E.RTW==null?4:+E.RTW,REJ=E.REJOIN==null?6:+E.REJOIN;
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));const rd=f=>fs.readFileSync(path.join(M,f),'utf8');
 const NOISE=/Failed to load resource|net::ERR_|favicon|navigator\.vibrate/;
@@ -95,9 +95,9 @@ const RT=s=>{const J=x=>String(JSON.stringify(x));function dp(a,b,p){if(a===b||a
    finished pairs kept, a partial pair goes on from its kiếp count (lives, LAG rows, bugs carried over; the kiếp in play when it died is replayed). */
 const LIVE=new Map();let FLUSHF=()=>{};
 async function pair(job,TP,prev){const t0=Date.now();const bugs=new Map();const out={job,lives:[],lag:{years:[],rooms:[],rejoin:[]},rooms:0,t:{}};
- if(prev){out.lives=prev.lives||[];out.lag=prev.lag||out.lag;out.rooms=prev.rooms||0;out.t.prev=(prev.t&&prev.t.total)||0;for(const b of prev.bugs||[])bugs.set(b.type+'|'+String(b.msg).slice(0,160),Object.assign({},b))}
+ if(prev){out.lives=prev.lives||[];out.lag=prev.lag||out.lag;out.rooms=prev.rooms||0;out.t.prev=(prev.t&&prev.t.total)||0;for(const b of prev.bugs||[])bugs.set(b.type+'|'+String(b.msg).slice(0,160),Object.assign({},b,{nNew:0,shaNew:HSHA}))}/* fixer #3: hits since THIS process started (RESUME) counted apart */
  out._bugs=bugs;out._t0=t0;LIVE.set(job.id,out);
- const bug=(type,msg,detail,extra)=>{const k=type+'|'+String(msg).slice(0,160);const x=bugs.get(k);if(x){x.n++;return x}const y=Object.assign({type,msg:String(msg).slice(0,300),detail:String(detail||'').slice(0,600),n:1,at:job.id},extra||{});bugs.set(k,y);return y};
+ const bug=(type,msg,detail,extra)=>{const k=type+'|'+String(msg).slice(0,160);const x=bugs.get(k);const d=String(detail||'').slice(0,600);if(x){x.n++;x.nNew=(x.nNew||0)+1;x.shaNew=HSHA;x.lastDetail=d;return x}const y=Object.assign({type,msg:String(msg).slice(0,300),detail:d,n:1,nNew:1,sha:HSHA,shaNew:HSHA,at:job.id},extra||{});bugs.set(k,y);return y};/* fixer #3: lastDetail = the newest hit; nNew = hits by THIS process (since its start / RESUME) on harness shaNew */
  const P={X:{name:'X',dev:'fold',n:0,need:job.kiep},Y:{name:'Y',dev:'ipad',n:0,need:job.kiep}};for(const l of out.lives)if(P[l.player])P[l.player].n=Math.max(P[l.player].n,l.kiep|0);
  const tpNext=who=>tpOf(TP.R,TP.O,job.pair,Math.min(P[who].n+1,99),who);
  while((P.X.n<job.kiep||P.Y.n<job.kiep)&&!(PCAP&&Date.now()-t0>PCAP)){out.rooms++;const r=await room(job,TP,P,tpNext,bug,out).catch(e=>{bug('harness','room error: '+String(e.message).split('\n')[0],String(e.stack).slice(0,400));return 'err'});
@@ -239,7 +239,7 @@ async function room(job,TP,P,tpNext,bug,out){const b=await chromium.launch(/127\
  report(done,{length:planned,0:{kiep:K}},tag,Date.now()-T0)})().catch(e=>{console.error(e);process.exit(1)});
 
 function report(done,jobs,tag,ms,quiet){done.sort((a,b)=>a.job.pair-b.job.pair);
- const all=new Map();for(const r of done)for(const b of r.bugs){const k=b.type+'|'+b.msg.replace(/\((host|guest)\)|\[(host|guest) (fold|ipad)\] /g,'');const x=all.get(k)||{type:b.type,msg:b.msg,pairs:[],n:0,ex:b};if(!x.pairs.includes(r.job.id))x.pairs.push(r.job.id);x.n+=b.n;all.set(k,x)}
+ const all=new Map();for(const r of done)for(const b of r.bugs){const k=b.type+'|'+b.msg.replace(/\((host|guest)\)|\[(host|guest) (fold|ipad)\] /g,'');const x=all.get(k)||{type:b.type,msg:b.msg,pairs:[],n:0,nNew:0,ex:b};if(!x.pairs.includes(r.job.id))x.pairs.push(r.job.id);x.n+=b.n;x.nNew+=b.nNew||0;if(b.lastDetail)x.last=b.lastDetail;if(b.shaNew)x.shaNew=b.shaNew;all.set(k,x)}
  const ORDER=['crash','stuck','js','coop-world','coop-room','coop-rejoin','save','number','word','coop-where','coop-pos','coop-stat','lag','harness'];
  const bl=[...all.values()].sort((a,b)=>(ORDER.indexOf(a.type)+1||99)-(ORDER.indexOf(b.type)+1||99)||b.pairs.length-a.pairs.length);
  const saveOf=x=>{if(!x.ex.save)return x.ex.saveFile||'';const f=path.join('saves',`${tag}-${hash(x.type+'|'+x.msg).toString(36)}.json`);if(!fs.existsSync(path.join(OUT,f)))fs.writeFileSync(path.join(OUT,f),typeof x.ex.save==='string'?x.ex.save:JSON.stringify(x.ex.save));x.ex.saveFile=f;return f};/* stable name per bug: a flush rewrites the same file */
@@ -248,9 +248,9 @@ function report(done,jobs,tag,ms,quiet){done.sort((a,b)=>a.job.pair-b.job.pair);
  const yrs=done.flatMap(r=>r.lag.years.map(y=>Object.assign({pair:r.job.id},y)));
  const md=[`# ROBOT-10 CO-OP run ${tag} (UTC)`,'',
   `Game: dev/index.html of this checkout (assemble.py) · Worker ${WURL} · ${done.length} pairs (${jobs.length} planned) × ${jobs[0]&&jobs[0].kiep} kiếp per seat · ${SWAP?'Y (iPad 1180x820) hosts, X (Fold 755x1000) joins':'X (Fold 755x1000) hosts, Y (iPad 1180x820) joins'} · ${PAR} parallel · wall ${(ms/6e4).toFixed(1)} min`,
-  `Runner: node dev/measure/robot10-coop.js ${process.argv.slice(2).join(' ')} (SEED=${SEED}${SWAP?' SWAP=1':''}${E.ORIGINS?' ORIGINS='+E.ORIGINS:''}) · repro: a save from saves/ into localStorage "hclh-save-v2-1", «Tiếp tục kiếp này» (Ô 1) for the seat's own state; co-op bugs reproduce with the same pair + SEED`,'',
+  `Runner: node dev/measure/robot10-coop.js ${process.argv.slice(2).join(' ')} · harness ${HSHA}${E.RESUME?' (RESUMED: «since this process started» counts only hits of this harness)':''} (SEED=${SEED}${SWAP?' SWAP=1':''}${E.ORIGINS?' ORIGINS='+E.ORIGINS:''}) · repro: a save from saves/ into localStorage "hclh-save-v2-1", «Tiếp tục kiếp này» (Ô 1) for the seat's own state; co-op bugs reproduce with the same pair + SEED`,'',
   `## Bugs (${bl.length} distinct; one row per bug, pairs = how many pairs hit it)`,'',
-  bl.length?bl.map((x,j)=>`${j+1}. **${x.type}** — ${x.msg}\n   - pairs ${x.pairs.length}/${done.length} (${x.pairs.slice(0,4).join(', ')}${x.pairs.length>4?' …':''}) · hits ${x.n}\n   - ${(x.ex.detail||'').replace(/\n/g,' ').slice(0,400)}\n`+(x.ex.save?`   - repro save: ${saveOf(x)}\n`:'')+(x.ex.shots?`   - screenshots: ${x.ex.shots.join(', ')} (not in git)\n`:'')).join('\n'):'None.','',
+  bl.length?bl.map((x,j)=>`${j+1}. **${x.type}** — ${x.msg}\n   - pairs ${x.pairs.length}/${done.length} (${x.pairs.slice(0,4).join(', ')}${x.pairs.length>4?' …':''}) · hits ${x.n} (${x.nNew} since this process started, harness ${x.shaNew||'earlier run'})\n   - first: ${(x.ex.detail||'').replace(/\n/g,' ').slice(0,400)}\n`+(x.last&&x.last!==x.ex.detail?`   - last: ${x.last.replace(/\n/g,' ').slice(0,400)}\n`:'')+(x.ex.save?`   - repro save: ${saveOf(x)}\n`:'')+(x.ex.shots?`   - screenshots: ${x.ex.shots.join(', ')} (not in git)\n`:'')).join('\n'):'None.','',
   `## Lives (${lives.length}; ${caps.length} ended by the wall cap = not a game ending)`,'',
   '| pair | player | seat | device | kiếp | thân phận | ending | max rank | years | wall min | room |','|---|---|---|---|---|---|---|---|---|---|---|',
   ...lives.map(l=>`| ${l.pair} | ${l.player} | ${l.seat} | ${l.dev} | ${l.kiep}${l.extra?' (extra)':''} | ${l.tp.origin}/${l.tp.road||'?'} | ${l.life?l.life.id+' ['+l.life.group+(l.life.cause?': '+String(l.life.cause).slice(0,50):'')+']':'?'} | ${l.life?(l.life.maxRankN||l.life.maxRank):''} | ${l.life&&l.life.years!=null?l.life.years:''} | ${(l.ms/6e4).toFixed(1)} | ${l.room} |`),'',
