@@ -928,7 +928,11 @@ function nCheck(){if(!CW.on||!S)return;const w=wk();
  if(host()&&CW.ngo!==w&&nAtNight()&&((CW.nrdy===w&&(CW.nfr===w||nOtherGone()))||CW.nforce===w||nOtherEnded()))nGoNow();
  if(!host()&&CW.ngoW!==w&&nAtNight()&&nOtherEnded()&&COOP.state.week===w)CW.ngoW=w;   /* the host's end is out: it committed */
  if(CW.ngoW!==w||CW.pend||CW.sent===w||!nAtNight()||S.dead||Q.length||S.mg||frozen()||!CW.base||needWhere()||CW.inLife)return;
- T("night "+w);CW.allowN=true;try{nextBuoi()}finally{CW.allowN=false}}
+ T("night "+w);CW.allowN=true;try{nextBuoi()}finally{CW.allowN=false}
+ /* robot-coop-fix-4 (trace only, no behaviour change): the committed night ran nextBuoi and the week did not end (stuck dumps fix-2 r3 / A/B p05:
+    «night w» repeating with ngo=ngoW=nfr=w): say once per week which wrapper state held it, so the next stuck dump names the cause */
+ try{if(!CW.pend&&CW.sent!==w&&nAtNight()&&CW.nHeld!==w){CW.nHeld=w;const g=(n,f)=>{try{return f()?n:""}catch(e){return n+"!"}};
+  T("night held "+w+" b"+(S.buoi||0)+"/"+LASTB()+" "+[g("Q"+Q.length,()=>Q.length),g("mg",()=>S.mg),g("wait",waiting),g("frz",frozen),g("eW",eW),g("kc",()=>typeof isKc==="function"&&isKc()),g("srv",()=>typeof isSrv==="function"&&isSrv()),g("succ",()=>S.succ&&S.succ.on),g("modal",()=>!$("modal").hidden)].filter(Boolean).join(","))}}catch(e){}}
 CW.nCheck=()=>nCheck();CW.nightReady=()=>nightReady();CW.mapPlace=mapPlace;CW.refreshHere=()=>refreshHere();
 CW.forceNight=()=>{if(!CW.on||!host()||!nAtNight()||CW.ngo===wk())return false;CW.nforce=wk();nCheck();return true};
 CW.nReady=nReady;
