@@ -67,7 +67,7 @@ function kesHit(a,b,pad){return a.left-pad<b.right&&a.right+pad>b.left&&a.top-pa
 function kesYield(rect){const el=kesCur;if(!el||!el.__big||!el.classList.contains("kemo-lean"))return false;const cr=el.__big.getBoundingClientRect();if(rect&&!kesHit(cr,rect,KIT_EMOSEAL.lean.bubblePad))return false;kesLeanEnd(el);kesSchedule(el);return true}
 function kesPartsUrl(el,k){const L=KIT_EMOSEAL.lean,ak=KIT_EMOSEAL.animKey[k]||k,set=kesSet(el,k),T=KIT_EMOSEAL.three[set+ak]||KIT_EMOSEAL.three[ak];if(!T)return null;const A=KIT_EMOSEAL.anim+set+ak,P=L.parts;return{T,ak,out:A+P.out+".webp",loop:A+".webp",back:A+P.back+".webp"}}
 function kesPartsState(U){if(!U)return"no";const h=[U.out,U.loop,U.back].map(u=>KES_HAVE[u]);if(h.some(x=>x===false))return"no";if(h.every(x=>x===true))return"yes";return"wait"}
-function kesLean(el,force){el.__ln=0;if(!el.isConnected||!el.classList.contains("kemo-live"))return;
+function kesLean(el,force){el.__ln=0;if(!el.isConnected||!el.classList.contains("kemo-live"))return;if(document.querySelector(".ksht")){el.__ln=setTimeout(()=>kesLean(el,force),600);return}/* owner 24/11 flight: no big seal clone starts while a page is turning (the clone of the old page stayed over the next one) */
  const L=KIT_EMOSEAL.lean,now=performance.now();
  if(kesBlocked(el)){el.__ln=setTimeout(()=>kesLean(el),1500);return}
  {const U=kesPartsUrl(el,kesKey(el));if(kesPartsState(U)==="wait"){if(el.__pre)return;el.__pre=1;let n=0;[U.out,U.loop,U.back].forEach(u=>kesProbe(u,()=>{if(++n===3){el.__pre=0;kesLean(el,force)}}));return}}

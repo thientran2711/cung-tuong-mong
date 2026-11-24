@@ -139,7 +139,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  function slideMode(){return mode==="single"&&typeof kitIsPortrait==="function"&&kitIsPortrait()}
  function turnMs(){return slideMode()?KIT_SLIDE_MS:KIT_TURN_MS}
  function setTurn(el,p){const c=el&&el.__curl;if(c)c.set(p)}
- function beginTurn(i,dir){const els=sheetEls();const el=els[i];if(!el)return null;
+ function beginTurn(i,dir){const els=sheetEls();const el=els[i];if(!el)return null;try{document.querySelectorAll("img.kemo.kemo-lean").forEach(e=>kesLeanEnd(e))}catch(e){}/* a running seal lean ends when a page starts to turn: its big clone never rides over the other person's page (owner 24/11 flight) */
   for(let k=i-2;k<=i+2;k++)if(els[k])els[k].style.visibility="visible";if(mode==="single"&&els[i+1]&&i===cur)els[i+1].style.visibility="visible";
   if(mode==="spread")book.classList.remove("closed","atend");
   if(el.__curl){el.style.visibility="hidden";return el}el.__dir=dir||1;
@@ -466,13 +466,15 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
 (function(){if(typeof dawn!=="function")return;const old=dawn;
  dawn=function(){let built;try{built=wkBookPages()}catch(e){console.error(e);return old.apply(this,arguments)}
   S.wkSnap=wkSnap();try{const rt=$("rtoast");if(rt){rt.classList.remove("on");clearTimeout(window.__rtT)}document.body.classList.add("kbk-open")}catch(e){}let w=$("dawn");if(!w){w=document.createElement("div");w.id="dawn";w.className="dawn";document.body.appendChild(w)}
-  w.classList.add("kbkdawn");w.onclick=null;w.innerHTML=`<div class="dsky"><i class="lan l1"></i><i class="lan l2"></i><i class="lan l3"></i><i class="sun"></i></div>`;
+  w.classList.add("kbkdawn");w.onclick=null;w.innerHTML=`<div class="dsky"><i class="lan l1"></i><i class="lan l2"></i><i class="lan l3"></i><i class="sun"></i></div>`;w.classList.remove("kbkskyd");{const sk=w.querySelector(".dsky"),fz=()=>w.classList.add("kbkskyd");if(sk)sk.addEventListener("animationend",fz,{once:true});setTimeout(fz,3600)}
   w.hidden=false;w.classList.toggle("rm",reducedMotion());void w.offsetWidth;w.classList.add("on");
   const tok=w.__kbkTok={};const bk=kitBook({pages:built.pages,head:built.head,host:w,label:"Tuần lục",onClose:()=>{if(w.__kbkTok!==tok)return;document.body.classList.remove("kbk-open");w.classList.remove("on");setTimeout(()=>{if(w.__kbkTok!==tok)return;w.hidden=true;w.innerHTML=""},reducedMotion()?0:350)}});
   window.__kbk=bk;setTimeout(bell,reducedMotion()?0:1400);try{w.querySelector(".kbk-next").focus({preventScroll:true})}catch(e){}}})();
 
 (function(){const st=document.createElement("style");st.id="kbk-css";st.textContent=`
 .dawn.kbkdawn{padding:0;overflow:hidden;align-items:stretch;justify-content:stretch}
+/* owner 24/11 flight: the sky behind the book is STATIC once the book is open (its sunrise keyframe animation could restart on a page turn = a dark navy flash); same final colours as the end of @keyframes dsky */
+.dawn.kbkdawn.kbkskyd .dsky{animation:none!important;background:linear-gradient(#f7e2c0,#f3c98f 55%,#e9a96a)!important;filter:none!important}
 .kbk{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:10px 10px max(8px,env(safe-area-inset-bottom));box-sizing:border-box;
  --paper:#f3e5c4;--paper2:#ead6ac;--rule:var(--k-seal,#9a2c1c);--cloth:#27324d;--cloth2:#1c2439;font-size:var(--fs,15px);animation:kbkin .9s ease both .5s}
 @keyframes kbkin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
