@@ -42,5 +42,24 @@ Gate in the script (SW at tap <800, SW after <1000, stall after <700, numbers <2
 - A file in the known list is trusted (not re-checked); it can only vanish by whole-origin eviction (list goes too).
 - Boot ~5 s cache stall before the title (above) remains — separate issue.
 ## Handover: none pending (push + report done).
-LAND READY review/offline-fast edbce2d1
+LAND READY review/offline-fast edbce2d1 (r1; superseded by R2 below)
+~100% xong / ~90% chơi được
+
+## R2 — the "~5 s cache stall before the title" (MAIN 127 order 24/11 ~20:09Z) — review/offline-fast @ 053503ec
+PRIORITY #1 CHECK: same as above; sw.tpl.js fetch fallbacks + jload assets.json fallbacks (no other branch touches them; sfx-instant touches j11/jsfx only).
+**Finding:** the 5 s stall was an ARTEFACT of my synthetic test manifest (paths img/t/…): the game's real boot pictures (img/title-key.webp, maps…) were then "not in assets.json", and sw.js answered such files with `caches.match(q,{ignoreSearch:true})` over EVERY cache — ignoreSearch cannot use the key index, so it walks all ~11 000 'ctm-assets' entries (~5 s at 4×) and every other cache read (the music too) waits. With the REAL manifest (OF_REAL=1) main has NO such stall (worst SW wait in boot 0.62–0.72 s, Fold + iPad).
+**Still fixed (whole group of ignoreSearch walks):** (a) sw.js: a file not in assets.json → shell lookup, then network; the full walk only when the network fails; (b) offline data copies (assets.json + JSON data, sw.js anyCopy / jload shellCopy) look in the small ctm-shell-* caches first, the whole-storage walk only if no shell has it. Any future file missing from the manifest (CDN ahead of the build) can no longer freeze boot.
+
+| 4× CPU | scenario | title s (before → after) | worst SW wait in boot ms | numbers ms | 1st download after tap ms |
+|---|---|---|---|---|---|
+| Fold | synthetic half (not-listed files) | 23.5 → 19.7 | ~5 000 → 671 | 10 776 → 147 | never → 104 |
+| iPad | synthetic half | 23.9 → 19.1 | 5 319 → 622 | 9 287 → 205 | never → 119 |
+| Fold | REAL manifest half | 19.1 → 19.8 | 723 → 688 | 8 344 → 210 | never → 117 |
+| iPad | REAL manifest half | 19.0 → 18.4 | 661 → 615 | 9 323 → 142 | never → 115 |
+| Fold | REAL, offline boot | 7.8 → 7.5–8.8 (3 runs) | 650 → 871–2 935 (early-boot noise, 3 runs) | 7 094 → 158–206 | — |
+| iPad | REAL, offline boot | 8.1 → 7.8 | 2 878 → 2 695 | 10 219 → 188 | — |
+Offline boot early-boot SW waits (2–3 s, before jload runs) are the same on main — not from this branch.
+**Gates on 053503ec:** quickcheck PASS (render 241/297, tab 536/533, buổi 1 526/1 623 ms, tasks>200 26/26, core gates PASS, old save ok); offline-all ALL PASS 34; kit-progress-run 36/36; lazy-offline --offline Fold: 20 pictures fail offline — IDENTICAL list on main 502c48c9 (face-man-1..8, face-consort-41..45, face-maid-31..33, face-mama-7/8, nvp-ha-sang, tu-ninh-cung-ngu-ha-sang: 404/never fetched online = pre-existing CDN gap, flag for MAIN). sfx.js / result-sfx not re-run here: this branch does not touch j11/jsfx; the lander merged it on sfx-instant.
+**Shots (looked at):** CDN img/_review/offline-fast/fold-panel-1s-after-tap.png + ipadAir-panel-1s-after-tap.png — panel 0.9 s after «Bắt đầu tải»: running (Tạm ngưng), «đang đếm…», Cất sẵn 1.223 / 1.181 of 32.443 (~300 files already in). Panel opened in 59/66 ms.
+LAND READY review/offline-fast 053503ec
 ~100% xong / ~90% chơi được
