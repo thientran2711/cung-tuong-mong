@@ -3,7 +3,7 @@ Written by MAIN CHÍNH 116, 24/11 ~10:10Z after sếp's new rulings (OD 24/11 ~0
 | # | Job | Owner | State |
 |---|-----|-------|-------|
 | 1 | Opening 3 days (Dưỡng Tú viện, Nhập cung / Điện tuyển / Chờ chiếu, contest 12→top 4, ban hoa ending, dramas, ma ma, phân cung) | SELSCENE-6 | polish + rich pools + owner mock (145205be+) |
-| 2 | Character intro shots + royal reveal (intro kit) | INTRO-DESIGN → KK | storyboard pending |
+| 2 | Character intro shots + royal reveal (intro kit) | INTRO-DESIGN → KK | MOCK READY for sếp (r4 PASS 24/11 11:35Z) |
 | 3 | Dialogue kit: speaker spotlight + typewriter + cue hook + focus shot + square option buttons | KK | building |
 | 4 | Story DIALOGUE SCENES for every main road chapter / side line / quest | B (side lines) + C (roads, E70 moved) + KK18 (UI) | ordered 06:42Z |
 | 5 | Day title card «Ngày … · Chương N — tên» | KK + E | ordered |
@@ -24,7 +24,7 @@ Written by MAIN CHÍNH 116, 24/11 ~10:10Z after sếp's new rulings (OD 24/11 ~0
 | 20 | TITLES2 (per-chapter titles) | E | fix r3 |
 | 21 | Parking lot rows still not built | E | audit + build |
 | 22 | THIN P4/P6/P8 roads content landing | B / LC9 | landing |
-| 23 | Screen-change veil: no half-painted screens (owner bug) | VEIL-1 + KK18 | building |
-| 24 | «Vòng người» figure ring + drama signals — DESIGN MOCK for sếp (no build until she picks) | RING-DESIGN | mock by her 08:00 ET |
-| 25 | GAME FEEL / event animation design study (card draw, rings for items/events, entrances) — mocks for sếp | MOTION-DESIGN | mock by her 08:00 ET |
+| 23 | Screen-change veil: no half-painted screens (owner bug) | KK19 (dim pair ready for sếp) | waits her GO |
+| 24 | «Vòng người» figure ring + drama signals — DESIGN MOCK for sếp (no build until she picks) | RING-DESIGN | MOCK READY for sếp |
+| 25 | GAME FEEL / event animation design study (card draw, rings for items/events, entrances) — mocks for sếp | MOTION-DESIGN | MOCK READY for sếp |
 | 26 | Relationship effects of talking to others' people (servant refuses / talks → suspicion, trust, leaks) + greeting etiquette | D | ordered 07:58Z |
