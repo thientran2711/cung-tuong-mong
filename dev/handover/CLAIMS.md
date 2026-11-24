@@ -1470,3 +1470,4 @@ PROMO-BUILD 2 follow-ups: her HH nomination (law 1) + deathbed/truy phong exams 
 | ROBOT-COOP FIXER #3 (opus) | review/robot-coop-fix-1 r2 + review/robot-coop-fix-2 | B | session_01N1tNP3zZjxpPAGUUKwUTEY | RUNNING | 24/11 08:35Z |
 | SIDE-LINE DLG LEAD #3 (opus) | review/sideline-dlg (+ -2 second wave) | B | session_01N1tNP6z16eEuagFdH5WCZE | RUNNING | 24/11 08:15Z |
 kit-optfit SMALL review | review/kit-optfit-r1 | session_01N1tNP2kA3NCKySUjhemX3g (owner B) | RUNNING | 24/11 08:46Z
+| REVIEW E76r robot10-e-fix-1 8f97171e + fix-2 19183dca SMALL (sonnet; briefs/E76r-review-robot-fix12.md) | reports/robot10-fix12-review.md | FOREMAN E (child2) | session_01DgYSWnLbFuTTs6v74xqDYm | RUNNING | 24/11 08:50Z |
