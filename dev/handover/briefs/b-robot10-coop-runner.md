@@ -29,7 +29,7 @@ Rollover: at START_CTX % + 25 % of the window (ceiling 60 %) write a HANDOVER bl
 | U3 | 3-4 | 0 | session_01N1tNP2fZxefqCF5gDf8nSK | RUNNING |
 | U4 | 3-4 | 1 | — | → FOREMAN F (ORDER MAIN 119 07:58Z) |
 | U5 | 5-6 | 0 | — | → FOREMAN F (ORDER MAIN 119 07:58Z) |
-| U6 | 5-6 | 1 | — | → FOREMAN F (ORDER MAIN 119 07:58Z) |
+| U6 | 5-6 | 1 | session_01UV1SziPWFp447pcaYdp9tB | RUNNING (started 24/11 ~08:25Z) |
 | U7 | 7-8 | 0 | — | → FOREMAN F (ORDER MAIN 119 07:58Z) |
 | U8 | 7-8 | 1 | session_01UV1SzjsZzQJA37FcMaTxYH | RUNNING (F) |
 | U9 | 9-10 | 0 | — | → FOREMAN F (ORDER MAIN 119 07:58Z) |
