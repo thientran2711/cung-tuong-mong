@@ -10,6 +10,10 @@ s16 s7mSSval8e | s17 Sya77u8Ub8 | s18 LwtggCqswO | s33 eI9BBA0dqL | s34 P3HNNsi4
 ## Run log (job = FACE-ALLURING-<SRC>-A<age>-MASTER-SKIN03-T01 unless noted; QC = looked at result vs master; DONE = no text, ivory robe+pin, bare face, one beauty mark, right age, skin on master)
 | source | age | output creation id | status | QC |
 |---|---|---|---|---|
+| s16 | 16 | lJhUwmWgv9 | DONE | ok, mark below right eye |
+| s17 | 16 | 6AKR2HtiJO | DONE | ok |
+| s18 | 16 | gOvwJxoSXO | DONE | ok |
+| s33 | 16 | iGkZGyp3uK | DONE | ok |
 | s34 | 16 | cpwVdgH0eP | DONE | mark outer-right below eye, ok |
 | s35 | 16 | LwtgJtmswO | DONE | mark slightly low on cheek (still lateral to eye), ok |
 | s36 | 16 | rgoLUtCxtc | DONE | mark below outer eye, ok |
@@ -37,7 +41,28 @@ s16 s7mSSval8e | s17 Sya77u8Ub8 | s18 LwtggCqswO | s33 eI9BBA0dqL | s34 P3HNNsi4
 | s44 | 26 | iGkZXqL3uK | DONE | ok, adult look, mark ok |
 | s45 | 26 | p84Xq4Yehw | DONE | ok, adult look, mark ok |
 | s56 | 26 | Lwtg2auswO | DONE | ok, adult look, mark ok |
+| s57 | 26 | xS8sANrjfW | DONE | ok, adult look, mark ok |
+| s58 | 26 | fHYu7UpCDY | DONE | ok, adult look, mark ok |
+| s59 | 26 | jUIlGnALD0 | DONE | ok, mark small at outer eye corner |
+| s60 | 26 | nVgcCqDYQD | NEEDS_REVIEW | beauty mark not visible (same as age16 s60) |
+| s61 | 26 | Sya7cBPUb8 | DONE | ok, adult look, mark ok |
+| s16 | 51 | huGfwBPvqL | DONE | ok, mature 51 look, mark ok |
+| s17 | 51 | TdJDbcRVNR | DONE | ok, mature 51 look, mark ok |
+| s18 | 51 | YMS0FMsWeC | DONE | ok, mature 51 look, mark ok |
+| s33 | 51 | JNuPeRNOq4 | DONE | ok, mature 51 look, mark ok |
+| s34 | 51 | IfZhSqItvE | DONE | ok, mature 51 look, mark ok |
+| s35 | 51 | DoPd1uWpcl | DONE | ok, slightly gaunt face lines, mark faint near eye |
+| s36 | 51 | rgoLYXmxtc | DONE | ok, mature 51 look, mark ok |
+| s37 | 51 | dtNos3sXSL | DONE | ok, mature 51 look, mark ok |
+| s38 | 51 | 5je1AtnKxe | DONE | ok, mark ok, reads slightly older than 51 (deep-ish lines) |
+| s43 | 51 | huGfOpSvqL | DONE | ok, mature 51 look, mark ok |
+| s44 | 51 | 5je1AuDKxe | DONE | ok, mature 51 look, mark ok |
+| s45 | 51 | nVgcHAkYQD | DONE | ok, mature 51 look, mark ok |
+| s56 | 51 | iGkZCV03uK | DONE | ok, mature 51 look, mark ok |
+| s57 | 51 | lJhUpZogv9 | DONE | ok, mature 51 look, mark ok |
+| s58 | 51 | gOvwenRSXO | DONE | ok, mature 51 look, mark ok |
+| s59 | 51 | 1lBjcGVr4r | DONE | ok, mark very small/faint under right eye |
+| s60 | 51 | bxpkzAQ5Y2 | NEEDS_REVIEW | beauty mark barely visible (s60 again); otherwise ok |
+| s61 | 51 | iGkZCQE3uK | DONE | ok, mature 51 look, mark ok |
 
-Progress: 26 DONE / 72, 1 NEEDS_REVIEW, rows logged 27. Credits spent ~3645.
-
-STATUS (supersedes the earlier rollover note): worker RESUMED after Foreman D said the window is 1M tokens; no successor needed. Remaining: age16 s60 retry (T02), age26 s57-s61, ages 51 and 63 for all 18. Contact sheets per age still to do at the end.
+Progress: 51 DONE / 72, 3 NEEDS_REVIEW, rows logged 54. Credits spent ~7290.
