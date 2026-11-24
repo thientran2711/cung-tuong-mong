@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"1f046fb7+","t":"2026-11-24T11:39Z","c":"robot-fix-cnv: eunuch «Lão» rename at the new year too (was load-only), S.where view in the harness repair filter; site build","b":"b604b02bf8f5","h":[{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"}]};
+window.CTM_BI={"s":"832cbc0f+","t":"2026-11-24T13:20Z","c":"robot-fix-cnv-2 R3 scan: dev/test/r10-sung-audit.js (her Sủng on the card vs sg(effect) under each Hoàng thượng temper)","b":"3bb08ad96186","h":[{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -4291,7 +4291,13 @@ function deser(d){trMigrate(d);rivals=d.R;rid=d.rid;S=d.S;S.origin=originByKey(d
    servant (sid) to the live servant object (servById); a sid nobody holds any more stays as saved. */
 function visRelink(){try{const P=S&&S.visit&&S.visit.people;if(!Array.isArray(P)||typeof servById!=="function")return;
  for(const p of P){const o=p&&p.ref;if(!o||typeof o!=="object"||o.sid==null||(rivals||[]).includes(o))continue;const s=servById(o.sid);if(s&&s!==o)p.ref=s}}catch(e){console.error(e)}}
-function save(){if(!S||quiet)return;/* robot-fix-cnv-2 R2: settle lazy faces (band change, jmort fc reset, new hire) BEFORE writing — save() runs before render() everywhere, so the file held the old face key and a reload re-picked a random new face */try{if(!S.dead)faceInit()}catch(e){}try{if(S.dead)localStorage.removeItem(SK(SLOT));else localStorage.setItem(SK(SLOT),JSON.stringify(ser()));localStorage.setItem("hclh-slot",String(SLOT))}catch(e){}}
+/* robot-fix-cnv-2 R2: what the file must hold is the SETTLED state — rules that ran only at render / load / month are settled here, before writing
+   (save() runs at the end of render() and before it everywhere): (1) lazy faces (an age-band change, a jmort fc reset, a new hire) — the file held the
+   old face key and a reload re-picked a random face; (2) a name clash made mid-month (a new servant / consort sharing a short form with someone,
+   e.g. «Trình Tố Huyên» beside her «Kiều Tố Huyên») was settled only at load and at the month tick (jnamefix nmFix) → a reload renamed a living
+   person (≈3 ms; the load renames the same way with cards open). The robot's in-place round trip calls this too (it saves the way save() does). */
+function saveSettle(){if(!S||S.dead)return;try{faceInit()}catch(e){}try{if(typeof nmFix==="function")nmFix("save")}catch(e){}}
+function save(){if(!S||quiet)return;saveSettle();try{if(S.dead)localStorage.removeItem(SK(SLOT));else localStorage.setItem(SK(SLOT),JSON.stringify(ser()));localStorage.setItem("hclh-slot",String(SLOT))}catch(e){}}
 function loadSlot(n){try{const d=JSON.parse(localStorage.getItem(SK(n))||"null");if(d&&d.v===2)d.P=[];/* v2: no pending choices; v2/v3 get items, stat blocks, records via normAll */
  return d&&d.v>=2&&d.v<=6?d:null}catch(e){return null}}
 function showTitle(){const T=$("title");const L=[1,2,3].map(n=>{const d=loadSlot(n);
@@ -97798,7 +97804,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b604b02bf8f5";window.CTM_BUILD=BUILD;
+const BUILD="3bb08ad96186";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

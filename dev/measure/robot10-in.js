@@ -162,10 +162,16 @@ const VOL=new Set(["at"]);
    saved → .iu / il.seq), the face-keep once-flag (fcKeep), the day roster labels of who-is-where (S.roster: j95c re-syncs it at load). Any OTHER path = a bug */
 /* + S.where / S.menW: the who-is-where VIEW of that roster (j95view), rebuilt from it at load (j95c j95sync); in the render-off bot page it is only refreshed by
    render, so a deser refreshes it early (0 drift in render-on play, dev/test/r10-play-rt.js) */
-const RT_REP=/^save\.(S|R\.\d+)\.inv\.\d+\.iu$|^save\.S\.il\.seq$|\.fcKeep$|^save\.S\.roster\.|^save\.S\.(where|menW)\./;
+/* + S.ag.pend (robot-fix-cnv-2): the rivals' planned deeds placed in that roster — re-placed by the same render-time sync (j95c render → j95sync →
+   placeWhere → jagent agTick / agReapply: khắc kh moves to the current one, a deed whose slot is gone is dropped); 0 drift with render on
+   (dev/test/r10-play-rt.js, which does NOT filter it: cnv_mat / cnv_chu 150 buổi) */
+const RT_REP=/^save\.(S|R\.\d+)\.inv\.\d+\.iu$|^save\.S\.il\.seq$|\.fcKeep$|^save\.S\.roster\.|^save\.S\.(where|menW)\.|^save\.S\.ag\.pend\./;
 function diffAll(a,b,p,out){if(out.length>60)return;if(a===b||a===undefined)return;if(JSON.stringify(a)===JSON.stringify(b))return;
  if(a&&b&&typeof a==="object"&&typeof b==="object"){new Set(Object.keys(a).concat(Object.keys(b))).forEach(k=>diffAll(a[k],b[k],p+"."+k,out));return}out.push(p)}
 function roundTrip(){if(!S||S.dead||S.mg)return;const t0=performance.now();let s1;
+ /* robot-fix-cnv-2: the file holds what save() writes — save() settles first (j6 saveSettle: lazy faces, mid-month name clashes); the render-off bot page
+    never calls save() (it runs at the end of render), so the round trip settles the same way before reading */
+ try{if(typeof saveSettle==="function")saveSettle()}catch(e){}
  try{const d1=ser();VOL.forEach(k=>delete d1[k]);s1=JSON.stringify(d1)}catch(e){bug("save","ser() throws",e.message);return}
  R.lastSave=s1;if(!R.firstSave)R.firstSave=s1;
  /* in-place load only at a quiet moment (no card waiting, no night flip pending): loading the bot's own game under a pending night flip

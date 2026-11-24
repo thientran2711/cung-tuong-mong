@@ -80,7 +80,13 @@ function deser(d){trMigrate(d);rivals=d.R;rid=d.rid;S=d.S;S.origin=originByKey(d
    servant (sid) to the live servant object (servById); a sid nobody holds any more stays as saved. */
 function visRelink(){try{const P=S&&S.visit&&S.visit.people;if(!Array.isArray(P)||typeof servById!=="function")return;
  for(const p of P){const o=p&&p.ref;if(!o||typeof o!=="object"||o.sid==null||(rivals||[]).includes(o))continue;const s=servById(o.sid);if(s&&s!==o)p.ref=s}}catch(e){console.error(e)}}
-function save(){if(!S||quiet)return;/* robot-fix-cnv-2 R2: settle lazy faces (band change, jmort fc reset, new hire) BEFORE writing — save() runs before render() everywhere, so the file held the old face key and a reload re-picked a random new face */try{if(!S.dead)faceInit()}catch(e){}try{if(S.dead)localStorage.removeItem(SK(SLOT));else localStorage.setItem(SK(SLOT),JSON.stringify(ser()));localStorage.setItem("hclh-slot",String(SLOT))}catch(e){}}
+/* robot-fix-cnv-2 R2: what the file must hold is the SETTLED state — rules that ran only at render / load / month are settled here, before writing
+   (save() runs at the end of render() and before it everywhere): (1) lazy faces (an age-band change, a jmort fc reset, a new hire) — the file held the
+   old face key and a reload re-picked a random face; (2) a name clash made mid-month (a new servant / consort sharing a short form with someone,
+   e.g. «Trình Tố Huyên» beside her «Kiều Tố Huyên») was settled only at load and at the month tick (jnamefix nmFix) → a reload renamed a living
+   person (≈3 ms; the load renames the same way with cards open). The robot's in-place round trip calls this too (it saves the way save() does). */
+function saveSettle(){if(!S||S.dead)return;try{faceInit()}catch(e){}try{if(typeof nmFix==="function")nmFix("save")}catch(e){}}
+function save(){if(!S||quiet)return;saveSettle();try{if(S.dead)localStorage.removeItem(SK(SLOT));else localStorage.setItem(SK(SLOT),JSON.stringify(ser()));localStorage.setItem("hclh-slot",String(SLOT))}catch(e){}}
 function loadSlot(n){try{const d=JSON.parse(localStorage.getItem(SK(n))||"null");if(d&&d.v===2)d.P=[];/* v2: no pending choices; v2/v3 get items, stat blocks, records via normAll */
  return d&&d.v>=2&&d.v<=6?d:null}catch(e){return null}}
 function showTitle(){const T=$("title");const L=[1,2,3].map(n=>{const d=loadSlot(n);
