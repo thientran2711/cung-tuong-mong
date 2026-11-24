@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """SIDE-LINE DIALOGUE SCENES validator (schema: dev/handover/reports/sideline-dialogue.md «## SCHEMA»).
-usage: python3 dev/test/dlgs_validate.py [files…] [--fam j72,j7] [--cover]
+usage: python3 dev/test/dlgs_validate.py [files…] [--fam j72,j7] [--cover] [--strict]
   files default = every dev/handover/content/dlg/*.md (+ nothing else). One JSON object per line: {"id":"<fam>:<unit id>","dlg":{L,R,watch,at,lines}}.
   Checks: unit exists in the game data; roles are cast keys of THAT unit (law 6b); 3..8 lines (BAL.dlgs); who ∈ {L, R, nar}; L speaks; her ("me") speaks
   unless watch; placeholders known to the family; VANPHONG (law 7): no digit, no %, no odds-ladder word; ≤ maxCh characters; no duplicate id.
@@ -74,6 +74,8 @@ def check(r,where):
             if re.search(r'(?<!\w)'+re.escape(w2)+r'(?!\w)',lo):E.append(f'{uid} line {i+1}: typed address «{w2}» — use {{goi}}/{{xung}} (the address core picks it by rank)')
         for w2 in MODERN:
             if re.search(r'(?<!\w)'+re.escape(w2)+r'(?!\w)',lo):E.append(f'{uid} line {i+1}: modern word «{w2}» (VANPHONG)')
+        if re.match(r'(Được|Vâng|Ừ|Ừm)\s*[.!]',t):E.append(f'FLAT {uid} line {i+1}: stock reply «{t.split()[0]}» — say the thing itself (quality bar, lead #2)')
+        if wh=='me' and L!='M' and re.search(r'(?<!\w)ngài(?!\s+ấy)(?!\w)',lo):E.append(f'FLAT {uid} line {i+1}: «ngài» to the person she speaks to — use {{goi}}')
         if x.get('focus') and wh=='nar':E.append(f'{uid} line {i+1}: focus on narration')
         if set(x)-{'who','text','focus'}:E.append(f'{uid} line {i+1}: unknown keys {sorted(set(x)-{"who","text","focus"})}')
     if L not in who:E.append(f'{uid}: L never speaks')
@@ -96,8 +98,12 @@ def main(a):
             if fams and uid.split(':')[0] not in fams:continue
             if uid in seen:err.append(f'{os.path.basename(f)}:{i+1}: duplicate id {uid} (first in {seen[uid]})')
             seen[uid]=f'{os.path.basename(f)}:{i+1}';n+=1;err+=check(r,f'{os.path.basename(f)}:{i+1}')
+    strict='--strict' in a;flat=[e for e in err if e.startswith('FLAT ')]
+    if not strict:err=[e for e in err if not e.startswith('FLAT ')]
     for e in err:print('ERR',e)
-    print(f'{n} scenes, {len(err)} errors')
+    if not strict:
+        for e in flat:print('WARN',e)
+    print(f'{n} scenes, {len(err)} errors, {len(flat)} flat-line warnings (--strict makes them errors; writers run --strict)')
     if cover:
         allf=set(seen)
         for f in sorted(glob.glob(R+'/handover/content/dlg/*.md')):
