@@ -5,6 +5,8 @@ PRIORITY #1 CHECK ('kitDialogue|dialogue scene|dlg'): OD 24/11 ~10:05Z (STORY = 
 - (24/11 ~07:00Z) LEAD #1 session_01N1tNP4b3uXPGSvnVmsC51b (opus). START_CTX ~4 % (used_tokens reads 0 → own estimate); roll at ~29 %, ceiling 60 %.
 - Branch **review/sideline-dlg** = origin/main 0c0877a2 + kit-dialogue-vn-r1 214c6b2c + thin-p4-r2 7429bfa3 + thin-p6-r2 aea1baec (both LAND READY, merged so their seeds can carry scenes; drop the merges once they are LIVE).
 
+- (24/11 ~07:55Z) LEAD #2 session_01N1tNP5NjXSPTa5bEfwmqcY (opus). START_CTX ~5 % (estimate; 1M window) → roll at ~30 %, ceiling 60 %. Worktrees /home/user/wt/sdlg (code) + /home/user/wt/sdlg-ho (handover).
+
 ## SCHEMA
 ONE data shape for every dialogue scene, side lines (this file) AND main roads (Foreman E). It is the KIT §95 `kitDialogue.play` line format with a ROLE in `who` instead of a name; the shared engine turns it into the real call.
 ```
@@ -45,6 +47,10 @@ ONE data shape for every dialogue scene, side lines (this file) AND main roads (
 ## LOG
 - 07:2xZ c5aba2a7: all 7 adapters live; `node dev/test/dlgs-play.js <out> fold,ipadAir 9` ALL PASS 506 (every scene of DLGS_DATA cast in a real life and played: scene before card, 2 painted figures, title = speaker, spotlight, tap-finish, card after with choices, never twice, 0 page errors). Shots looked at (Fold + iPad): j72 thường tại / cung nữ letter / rsv servant, j68 Quý phi, ky ma ma, j70 cung nữ report.
 - NOT YET: the 33 old j7 ev() cards, 90 old j68 decisions, 25 old kỳ ngộ, 51 old j70 routes (old composed text: second wave after W1–W9), festival STAGES (no person speaks), coop-e2e, old saves.
+
+- (24/11 08:05Z, lead #2) 9ac0922a: lead.md dropped its j72c-fam-001 (W2 owns it; was a duplicate id) → validator 0; jdlgsd.js + site rebuilt (262 scenes). 14d7cf3b: validator FLAT check (stock «Được./Vâng./Ừ.» replies; «ngài» spoken TO the listener → {goi}); `--strict` makes them errors (writer brief updated: QUALITY BAR + --strict). Law 11 scan «ngài» in all files: 20 lines in j72_b court → {goi} (+1 third person → «Hoàng thượng»); j72_a 0. FLAT now: j72_b 0, j72_a 48 (stock «Được.» in 48 of 127 scenes, no scene-setting line, avg 4.1 lines) → POLISH slice W1p requested from Foreman B (rewrite j72_a to the W2 bar).
+- Read 10 random of j72_b + 8 of j72_a: W2 good (nar opener, real facts, feeling); W1 correct but flat.
+- dlgs-play DLGS_STEP=5 sample: j72 units whose seed needs her CHILD (req ak) or Thái hậu (req th) FAIL «cannot cast» / «no scene resolved» in the test life — checking whether th scenes resolve in a real life (figure of Thái hậu) or only the harness lacks the person.
 
 ## KIT REQUEST (for KK18, not blocking)
 - §95 kitDialogue: the speech tail always points LEFT (kitDlgBox tail on the left edge); when the RIGHT figure (her) speaks it should point right. Ask: a `tail:"r"` side (or auto from the lit figure's side). Until then the box sits bottom-centre over both figures.
