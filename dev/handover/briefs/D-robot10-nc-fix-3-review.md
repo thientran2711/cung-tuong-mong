@@ -1,0 +1,12 @@
+PRIORITY #1 CHECK ('hhBind|emoSeen|duodo-focus|r10-rt'): OD 0 | ledger 0 | claims 4 | main 15 | review/* 2 | archive 0 — reuse: dev/handover/reports/robot10-nc-fixer.md §4 (fixer session_01964izEqyr78GaoHgYUcT4p on call); stacked on review/robot10-nc-fix-1-rv ad3fa9be (LAND READY).
+
+# REVIEW robot10-nc-fix-3 (opus BIG: save/load + randomness) — Foreman D depth 3 session_01964izCEg2Mg4ff3dvoeMWK
+Read first: dev/rules/START_CORE.md (18 LAWS) + START_WORKER.md + START_REVIEWER.md, branch claude/cung-tuong-mong-handover-hj0h8w. Sparse worktree under /home/user/wt, fetch --depth=30 under flock /home/user/wt/fetch.lock.
+Target: review/robot10-nc-fix-3 449cbe0848953be0f9f935bc8dffe2b4ef2c8e4b. Family: same save loaded twice gives a different game (main: 13/14 robot saves differ, 1–26 paths: lifespans, faces, names given at load, S.mspy.id, roster acts, S.ag.rq). Fix: (1) jmort initAll before ser, old saves roll once then saved; (2) NEW dev/build/jldseed.js = outermost deser wrapper (assemble.py): every die during a load (deser + title-click deal + first render) from a PRNG seeded by the save; Math.random native right after.
+CHECK HARD (this is a core-system change):
+ a) Math.random really restored on every exit path (exceptions in deser, co-op guest deser, old-save migrate, rollback build, offline page) — prove with a test that throws mid-deser.
+ b) Design side effects: does seeding the «title-click deal» make a once-random outcome fixed per save (e.g. reload-to-reroll used to change something the player sees at load)? Is any player-facing random choice now frozen that the owner's rules expect to vary (laws 2/6)? If yes, narrow the seeded window to the pieces that must be stable and report it.
+ c) Co-op: host and guest deser the same snapshot → same seed → same results? coop-e2e full + rejoin; no desync.
+ d) Old saves v3/v4/v5 load; r10-load-twice 14/14, r10-rt 0; mortality, save-slots, quickcheck + core gates; perf of load unchanged (quickcheck perf numbers).
+ e) Whole family (law 11): any load-time random draw outside the seeded window (lazy inits on first tab open) listed.
+Reviewer fixes small itself; big FAIL → list to fixer EqyR78Ga + tell D. On PASS: final-merge newest origin/main into review/robot10-nc-fix-3-rv (rebuild index.html/sw.js with dev/site/build_site.sh, assets.json = LIVE), re-run quickcheck + r10-load-twice on the merge, push, § REVIEW in reports/robot10-nc-fixer.md, send Foreman D «REVIEW PASS — LAND READY review/robot10-nc-fix-3-rv <full sha>» (say it carries nc-fix-1-rv). Never push main; no PR.
