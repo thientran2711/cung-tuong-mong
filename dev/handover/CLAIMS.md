@@ -1370,3 +1370,4 @@ PROMO-HIST BUILD (opus BIG; ORDER MAIN 116 05:22Z; briefs/D-promo-hist-build.md;
 | PARKING LOT AUDIT E63 (sonnet; ORDER MAIN 116 05:22Z «cứ lôi ra làm tiếp»; briefs/E63-parking-audit.md) | reports/parking-audit.md | FOREMAN E (child1) | session_01DgYSWnS8t83k8g5g1at6Hy | RUNNING | 24/11 04:58Z |
 | LEAVE-THE-PALACE = ENDING E64 (opus BIG; ORDER MAIN 116 06:07Z, OD 24/11 ~06:05Z; briefs/E64-leave-palace.md) | review/leave-palace; reports/leave-palace.md | FOREMAN E (child1) | session_01DgYSWo8YEvuna16R4PLfiY | RUNNING | 24/11 04:58Z |
 | LAW-1 WHOLE-GAME AUDIT (opus BIG; ORDER MAIN 116 08:36Z, OD 24/11 ~08:35Z; briefs/b-law1-audit.md) | review/law1-audit; reports/law1-audit.md | B | (opening) | RUNNING | 24/11 05:32Z |
+| LEAVE-THE-PALACE r2 E64b (opus BIG; successor of E64 @0279cde1; reports/leave-palace.md HANDOVER) | review/leave-palace | FOREMAN E (child1) | session_01DgYSWmXngQ6Z8pWqtbAjJM | RUNNING | 24/11 05:31Z |
