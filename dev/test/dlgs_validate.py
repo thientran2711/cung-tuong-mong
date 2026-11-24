@@ -24,8 +24,9 @@ for s in sd('j72sd.js','J72SEEDS'):
     ro={'A','M'}|({'B'} if s.get('other') else set());add('j72',s['id'],ro,{'A','O'}|({'B'} if s.get('other') else set()),famL if s['kind']=='fam' else None)
 src=open(R+'/build/j72.js',encoding='utf8').read();parts=re.split(r'(?=T7\(")',src)
 for p in parts:
-    mm=re.match(r'T7\("([A-Za-z0-9_]+)","([a-z]+)",\{r:"([^"]*)"',p)
-    if not mm:continue
+    mm=re.match(r'T7\("([A-Za-z0-9_]+)","([a-z]+)",\{',p);rr=re.search(r'\br:"([^"]*)"',p[:500])
+    if not mm or not rr:continue
+    mm=(mm.group(1),mm.group(2),rr.group(1));mm=type('M',(),{'group':lambda self,i,_m=mm:_m[i-1]})()
     hasb=bool(re.search(r'\bb:"',p[:600]));ro={'A','M'}|({'B'} if hasb else set())
     add('j72',mm.group(1),ro,{'A','O'}|({'B'} if hasb else set()),famL if mm.group(3)=='fam' else None)
 # other THIN families (adapters land family by family; their units are listed now so the cover table shows the whole job)
