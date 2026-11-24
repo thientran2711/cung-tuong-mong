@@ -35,9 +35,9 @@ function q72Pick(sp,not,ff){not=not||[];const nk0=a=>a&&!not.includes(q72Key(a))
   if(sp==="fallen")L=L.filter(v=>v.out);else L=L.filter(v=>!v.out);
   if(sp==="hh")L=L.filter(v=>v.queen);else if(sp!=="fallen")L=L.filter(v=>!v.queen);
   if(sp!=="rvc"&&sp!=="fallen")L=L.filter(v=>!v.confined);
-  if(sp==="rv+")L=L.filter(v=>aff(v,S)>=10);if(sp==="rvk")L=L.filter(v=>tr(v).some(t=>t==="Ân cần"||t==="Khiêm nhường"));if(sp==="rva")L=L.filter(v=>tr(v).some(t=>t==="Tham vọng"||t==="Kiêu ngạo"));
+  if(sp==="rv+")L=L.filter(v=>aff(v,S)>=netTh(v,"quen"));if(sp==="rvk")L=L.filter(v=>tr(v).some(t=>t==="Ân cần"||t==="Khiêm nhường"));if(sp==="rva")L=L.filter(v=>tr(v).some(t=>t==="Tham vọng"||t==="Kiêu ngạo"));
   if(sp==="rvp")L=L.filter(v=>v.preg);if(sp==="rvc")L=L.filter(v=>v.confined);
-  L=L.filter(v=>aff(v,S)>-30&&!(typeof sameHouse==="function"&&sameHouse(S,v)&&sp!=="rv"&&sp!=="rv+"));
+  L=L.filter(v=>aff(v,S)>netTh(v,"ghet")&&!(typeof sameHouse==="function"&&sameHouse(S,v)&&sp!=="rv"&&sp!=="rv+"));
   const v=wpick(L.filter(v=>nk({k:sp==="hh"?"hh":sp==="fallen"?"fallen":"rv",id:v.id})),v=>1+Math.max(0,aff(v,S))/15);return v?q72A(sp==="hh"?"hh":sp==="fallen"?"fallen":"rv",v.id):null}
  if(sp==="sv"||sp==="svm"||sp==="sve"){const L=(S.staff||[]).filter(s=>s&&s.sid!=null&&(s.age||BAL.ageMin)>=BAL.ageMin&&(sp==="sv"||(sp==="svm"?s.role==="maid":s.role!=="maid"))&&nk({k:"sv",id:s.sid}));const s=wpick(L,s=>1+(s.loyal||0)/30);return s?q72A("sv",s.sid):null}
  if(sp.indexOf("man:")===0){const rw=sp.slice(4);const L=(S.men||[]).filter(m=>m.alive!==false&&m.rw===rw&&nk({k:"man",id:m.id}));const m=wpick(L);return m?q72A("man",m.id):null}
@@ -317,7 +317,7 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
  const easeTH=()=>{const i=S.thIll;if(!i)return"";if(i.st>1){i.st--;return "Bệnh Thái hậu nhẹ đi một bậc."}S.thIll=null;return "Thái hậu khỏi bệnh."};
  const easeEmp=()=>{const i=S.emp.ill;if(!i)return"";if(i.st>1){i.st--;return "Long thể nhẹ đi một bậc."}S.emp.ill=null;return "Long thể đã an."};
  const moodUp=()=>{if(S.emp.mood>0){S.emp.mood--;return `Tâm trạng Hoàng thượng khá lên (${MOODS[S.emp.mood][0].toLowerCase()}).`}return""};
- const feud=(a,b)=>aff(a,b)<=-10||aff(b,a)<=-10;
+ const feud=(a,b)=>aff(a,b)<=netTh(a,"ky")||aff(b,a)<=netTh(b,"ky");
  const relAB=n=>X=>{if(X.A&&X.B&&X.A.o&&X.B.o&&X.A.o.id!=null&&X.B.o.id!=null){relAdd(X.A.o,X.B.o,n);return `${X.A.n} và ${X.B.n} ${n>0?"bớt hiềm khích, thân hơn":"thêm hiềm khích"} (${n>0?"+":""}${n}).`}return""};
  const relQB=n=>X=>{const q=queenP();if(q&&q!==S&&X.B){relAdd(q,X.B.o,n);return `Hoàng hậu và ${X.B.n} ${n>0?"bớt căng thẳng":"thêm căng thẳng"} (${n>0?"+":""}${n}).`}return""};
  const art=(k,g)=>()=>{addArt(k,g||1);const a=ARTS.find(z=>z.k===k);return `${a?a.n:k}: luyện thêm +${g||1}.`};
@@ -370,16 +370,16 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
   s:[G("B","Mang thư sang cung {B}","tamco",60,1),C("{B} đọc thư rồi hỏi ý ngươi",O("Nói giúp vài lời cho {A}",{p:55,sk:"tai",fn:(X,x,ok)=>ok?relAB(15)(X):relAB(5)(X),lto:"ok"}),O("Chỉ đưa thư, không xen vào",{fn:relAB(6)}))],ok:{r:10},no:{r:-5}});
  T7("hoa_giai","social",{r:"th",b:"rv",bf:o=>!!qn()&&feud(qn(),o),t:"Hòa giải {B} với Hoàng hậu",h:"“Hoàng hậu với {B} cứ gặp là gai mắt nhau. Hậu cung không yên thì ai gia không yên. {Goi} khéo miệng, thử khuyên xem.”",dl:6,
   s:[G("B","Khuyên {B}","tai",50,2),G("kn","Thưa chuyện với Hoàng hậu","tai",50,2)],ok:{fx:{duc:3},r:8,fn:relQB(15),x:"Hoàng hậu và {B} bớt căng thẳng (+15)"},no:{r:-4}});
- T7("hh_kieu","social",{r:"hh",b:"rv",bf:(o,z,A)=>aff(o,A.o)<=-10,t:"Khuyên {B} thôi chống đối Hoàng hậu",h:"“{B} hễ gặp bổn cung là nói lời khó nghe. Bổn cung không muốn phạt nặng, {goi} sang khuyên nàng tự đến nhận lỗi.”",dl:5,
+ T7("hh_kieu","social",{r:"hh",b:"rv",bf:(o,z,A)=>aff(o,A.o)<=netTh(o,"ky"),t:"Khuyên {B} thôi chống đối Hoàng hậu",h:"“{B} hễ gặp bổn cung là nói lời khó nghe. Bổn cung không muốn phạt nặng, {goi} sang khuyên nàng tự đến nhận lỗi.”",dl:5,
   s:[G("B","Gặp {B}","tamco",45,2),C("{B} còn ấm ức",O("Lấy lời mềm mỏng khuyên",{p:55,sk:"tai",rb:4,lto:"fail"}),O("Nhắc khéo hậu quả nếu Hoàng hậu trách phạt",{p:65,sk:"tamco",rb:-6,lto:"fail"}))],ok:{r:10,fn:relQB(10),x:"Hoàng hậu và {B} bớt căng thẳng (+10)"},no:{r:-5}});
- T7("rv_di_cung","pro",{r:"rvk",b:"rv",bf:(o,z,A)=>aff(o,A.o)<=-15,t:"Đi cùng {A} khi bị {B} gọi sang",h:"“{B} ghét {xung} ra mặt, giờ lại cho gọi {xung} sang uống trà. {Xung} sợ lắm. {Goi} đi cùng {xung} được không?”",dl:2,
+ T7("rv_di_cung","pro",{r:"rvk",b:"rv",bf:(o,z,A)=>aff(o,A.o)<=netTh(o,"ky"),t:"Đi cùng {A} khi bị {B} gọi sang",h:"“{B} ghét {xung} ra mặt, giờ lại cho gọi {xung} sang uống trà. {Xung} sợ lắm. {Goi} đi cùng {xung} được không?”",dl:2,
   s:[G("B","Cùng {A} sang cung {B}","tamco",60,1)],ok:{r:14,rb:-4,fn:relAB(6)},no:{r:-6}});
  T7("bo_chung","pro",{r:"rv",b:"rv",bf:(o,z,A)=>(o.evm&&o.evm[key(A.o)]||0)>0,t:"Thuyết phục {B} buông tha {A}",h:"“{B} nắm được chút sơ hở của {xung}, cứ đem ra dọa. {Goi} có mặt mũi, nói với nàng giúp {xung}.”",dl:4,
   tr:"{B} quả đang nắm Chứng cứ về nàng.",s:[G("B","Nói chuyện với {B}","tai",45,2),C("{B} ra điều kiện",O("Đổi bằng 30 bạc",{c:{bac:-30}}),O("Lấy tình cảm thuyết phục",{p:50,sk:"relb",lto:"fail"}))],
   ok:{r:15,d:2,fn:X=>{const k=key(X.A.o);if(X.B.o.evm&&X.B.o.evm[k]){X.B.o.evm[k]=Math.max(0,X.B.o.evm[k]-1)}return `${X.B.n} bỏ đi một Chứng cứ về ${X.A.n}.`},x:"{B} bỏ một Chứng cứ về nàng"},no:{r:-5}});
- T7("loi_thoi","social",{r:"rvk",b:"rvk",bf:(o,z,A)=>Math.abs(aff(A.o,o))<10,rf:v=>liveRivals(true).every(u=>u===v||aff(v,u)<15),t:"Mời {B} cùng {A} uống trà",h:"“{Xung} vào cung chưa có ai thân. {Xung} nghe {B} cũng hiền lành. {Goi} mời giúp một buổi trà ba người được không?”",dl:4,
+ T7("loi_thoi","social",{r:"rvk",b:"rvk",bf:(o,z,A)=>Math.abs(aff(A.o,o))<10,rf:v=>liveRivals(true).every(u=>u===v||aff(v,u)<netTh(v,"quen")),t:"Mời {B} cùng {A} uống trà",h:"“{Xung} vào cung chưa có ai thân. {Xung} nghe {B} cũng hiền lành. {Goi} mời giúp một buổi trà ba người được không?”",dl:4,
   s:[G("B","Mời {B}","relb",65,1),G("home","Bày trà, chuyện trò","tai",65,1,{bac:-10})],ok:{r:8,rb:5,fn:relAB(12)},no:{r:-3}});
- T7("don_ta","inv",{r:"hh",b:"rv",p:X=>{const q=qn();return{tru:!!(q&&aff(X.B.o,q)<-10)}},rf:()=>!!qn(),bf:o=>aff(o,S)>-40,t:"Xác minh: {B} có oán Hoàng hậu không",h:"“Có người thưa với bổn cung rằng {B} oán bổn cung. {Goi} hỏi dò xem thật hay giả.”",dl:4,
+ T7("don_ta","inv",{r:"hh",b:"rv",p:X=>{const q=qn();return{tru:!!(q&&aff(X.B.o,q)<netTh(X.B.o,"ky"))}},rf:()=>!!qn(),bf:o=>aff(o,S)>netTh(o,"ghet"),t:"Xác minh: {B} có oán Hoàng hậu không",h:"“Có người thưa với bổn cung rằng {B} oán bổn cung. {Goi} hỏi dò xem thật hay giả.”",dl:4,
   s:[G("B","Dò chuyện {B}","mat",45,2),C(X=>X.p.tru?"Ngươi biết sự thật: {B} quả có oán Hoàng hậu":"Ngươi biết sự thật: {B} không oán Hoàng hậu; lời đồn là bịa",
    O("Thưa thật với Hoàng hậu",{fn:X=>{const q=qn();if(!q)return"";if(X.p.tru){relAdd(q,X.B.o,BAL.eff.j72.fn_2);return `Hoàng hậu lạnh nhạt với ${X.B.n} (${balSg(BAL.eff.j72.fn_2)}).`}relAdd(q,X.B.o,BAL.eff.j72.fn_3);return `Hoàng hậu bớt nghi ${X.B.n} (${balSg(BAL.eff.j72.fn_3)}).`}}),O("Chỉ thưa “chưa nghe thấy gì”",{r:-2,fn:X=>{relAdd(S,X.B.o,BAL.eff.j72.fn_4);return `${X.B.n} biết ngươi không đưa chuyện (${balSg(BAL.eff.j72.fn_4)}).`}}))],ok:{r:8},no:{r:-5}});
  T7("off_hoa","court",{r:"off",rf:o=>typeof tdRel==="function"&&CLANS.some(c=>c!==o.c&&tdRel(o.c,c)<=-25),t:"Hòa giải nhà {A} với nhà đối đầu",
@@ -484,7 +484,7 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
   s:[G("home","Phối hương","y",50,2,{bac:-10}),G("A","Mang sang cung {A}","",100,1)],ok:{r:12,fn:X=>{ap(X.A.o,{suc:BAL.eff.j72.sucFn_2});return `${X.A.n} Sức ${balSg(BAL.eff.j72.sucFn_2)}.`},x:`nàng Sức ${balSg(BAL.eff.j72.sucFn_2)}`},no:{r:-5}});
  T7("canh_thai","pro",{r:"rvp",t:"Canh chừng quanh cung {A} đang mang thai",h:"“{Xung} mang thai, đêm nào cũng nằm mơ thấy chuyện chẳng lành. {Goi} có người tin cẩn, để mắt giúp {xung}.”",dl:6,
   s:[G("home","Sai người canh chừng","mat",55,1,{bac:-15}),W("Canh chừng hai tuần",2),G("A","Báo lại cho {A}","",100,1)],
-  ok:{r:15,d:2,fn:X=>{const h=liveRivals(true).filter(v=>v!==X.A.o&&aff(v,X.A.o)<-20);if(h.length){evA(S,h[0],BAL.eff.j72.evFn_2);return `Người canh thấy ${h[0].name} cho người lảng vảng quanh cung ${X.A.n}: Chứng cứ về ${h[0].name} ${balSg(BAL.eff.j72.evFn_2)}.`}return "Hai tuần yên ổn, không ai lảng vảng."}},no:{r:-6},tr:"Nếu có kẻ thù thật của nàng rình rập, người canh sẽ thấy."});
+  ok:{r:15,d:2,fn:X=>{const h=liveRivals(true).filter(v=>v!==X.A.o&&aff(v,X.A.o)<netTh(v,"ky"));if(h.length){evA(S,h[0],BAL.eff.j72.evFn_2);return `Người canh thấy ${h[0].name} cho người lảng vảng quanh cung ${X.A.n}: Chứng cứ về ${h[0].name} ${balSg(BAL.eff.j72.evFn_2)}.`}return "Hai tuần yên ổn, không ai lảng vảng."}},no:{r:-6},tr:"Nếu có kẻ thù thật của nàng rình rập, người canh sẽ thấy."});
  T7("giu_thu","pro",{r:"rv+",rf:v=>liveRivals(true).some(u=>u!==v&&(u.evm&&u.evm[key(v)]||0)>0),t:"Giữ hộ hộp thư riêng của {A}",h:"“Có người đang nắm sơ hở của {xung}, {xung} sợ bị lục soát. Trong hộp chỉ là thư nhà, nhưng người ta bới móc chữ nghĩa. {Goi} giữ hộ {xung} ít lâu.”",dl:4,tr:"Quả có người đang nắm Chứng cứ về nàng.",
   s:[W("Cất giữ hộp thư",2),C("Trả hộp thư",O("Trả lại nguyên vẹn",{p:85,lto:"bad"}))],ok:{r:14},no:{r:-6},bad:{fx:{danh:-4},r:-4},badT:"Người lục soát thấy hộp thư lạ trong cung ngươi."});
  T7("lc_ao","pro",{r:"fallen",w:c=>["Thu","Đông"].includes(c.sea)?2:0,t:"Mang áo ấm vào lãnh cung cho {A}",h:"“Gió lạnh lùa qua song cửa Trường Môn viện. Nếu còn chút tình xưa, xin gửi cho ta tấm áo bông.”",dl:4,
@@ -590,7 +590,7 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
   s:[G("","Tâu xin Hoàng thượng","sung",45,1,{},"r",{emp:1})],ok:{r:12,fx:{...BAL.m72.pfOk},cc:1},no:{r:-4,cc:1}});
  T7("fam_cn","fam",{r:"rsv",rf:(s,z)=>S.origin.k==="cn"&&(s.loyal||50)<BAL.loy.mid,t:"Đồng liêu cũ ở Càn Thanh cung nhờ giúp",h:X=>`“{Goi} còn nhớ nô tỳ không? Ngày trước hai ta cùng bưng trà ở Càn Thanh cung. Giờ nô tỳ hầu ${X.A.own.name}, bị mắng suốt; {goi} nể tình cũ, xin Tổng quản thưởng cho nô tỳ chút ít.”`,dl:4,
   s:[G("ksp","Xin Tổng quản","danh",55,1,{bac:-15})],ok:{r:18,fx:{mat:1}},no:{r:-6}});
- T7("fam_ch","fam",{r:"th",rf:()=>S.origin.k==="ch",b:"rvk",bf:o=>liveRivals(true).some(u=>u!==o&&aff(u,o)<-15),t:"Thái hậu (cô ngươi) nhờ che chở {B}",h:"“{B} là con nhà thế giao với họ nhà ai gia. Nó hiền quá, bị người ta bắt nạt. Con là cháu ai gia, để mắt giúp nó.”",dl:5,
+ T7("fam_ch","fam",{r:"th",rf:()=>S.origin.k==="ch",b:"rvk",bf:o=>liveRivals(true).some(u=>u!==o&&aff(u,o)<netTh(u,"ky")),t:"Thái hậu (cô ngươi) nhờ che chở {B}",h:"“{B} là con nhà thế giao với họ nhà ai gia. Nó hiền quá, bị người ta bắt nạt. Con là cháu ai gia, để mắt giúp nó.”",dl:5,
   s:[G("B","Sang thăm {B}","",90,1),G("home","Mời {B} sang chơi, dạy nàng phòng thân","tamco",65,1)],ok:{r:8,rb:12,fn:X=>{ap(X.B.o,{tamco:BAL.eff.j72.tamcoFn});return `${X.B.n} Tâm cơ ${balSg(BAL.eff.j72.tamcoFn)}.`}},no:{r:-5}});
  T7("fam_thd","fam",{r:"fam",rf:()=>S.origin.k==="thd",t:"Thư cha: xin sách cho trường làng",h:"“Con ơi, trường làng ta thiếu sách đã lâu. Cha nghe nói trong cung có kho sách thừa. Con xin giúp cha mấy bộ.”",dl:5,
   s:[G("","Xin Hoàng thượng ban sách","tai",55,1,{},"r",{emp:1})],ok:{fx:{duc:3,danh:3}},no:{}});
