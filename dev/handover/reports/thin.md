@@ -830,3 +830,41 @@ Reviewer cannot send_message the new foreman / helper (permission denied) — th
 - Gates already PASS on bare ce252c43 AND merged 4d9f748c: `python3 dev/test/rdseeds_validate.py` (no args) and `--min` + rdseeds_a..d → `RDSEEDS: 627 rows, 0 errors, 0 warnings`; `node dev/test/undef-scan.js` → PASS (299 names); `node dev/test/one-core-guard.js` → PASS; `node dev/test/one-core-text.js` → PASS.
 
 #### helper
+
+## REVIEW robot-coop-fix-1 (BIG, opus; session_01N1tNP2…; START_CTX ≈6 %) — A FAIL · B FAIL
+PRIORITY #1 CHECK ('coop sync KB / gzip BIG / coop-pos harness'): OD 2204–2205 | main coop/worker/src/index.js (BIG 200000), dev/build/jcoop.js (rxQ + gunz, GZ 8000), dev/test/coop-lag.js | review/* robot-coop-fix-1 889803dc, robot10-coop 2bf6094f, robot10-coop-r1 6a6413db, coop-host-lag-r3 (landed) | claims B (fixer #2 session_01N1tNP3va8MrNMqi1MZLTgt).
+Heads: A bare 889803dc, A merged bb220d9e (= 889803dc + LIVE 0c0877a2, local, not pushed). B bare 2bf6094f, B merged 367b7a36 (= robot10-coop-r1 6a6413db + 2bf6094f + LIVE 0c0877a2, local, not pushed). Game build identical on both merged heads (assemble 15077030). Workers: fix = local `wrangler dev` of 889803dc on :8799, main = local `wrangler dev` of origin/main on :8798.
+Laws touched: 4/7/9/10/12 not touched (no game, UI or wording change). 11 (fix the whole group): FAIL for A and B, below.
+
+### A) review/robot-coop-fix-1 889803dc — FAIL
+| check | command | result |
+|---|---|---|
+| Worker unit tests (mock DO) | `node test/{merge,vault,seat,stale,thin}.test.mjs` (coop/worker, merged head) | merge ok · vault ok 48 · seat ALL OK · stale ALL OK · thin ALL OK |
+| Worker protocol, live socket | `node test/ws.test.mjs http://127.0.0.1:8799` + `chat.test.mjs`; same on :8798 | ALL OK / ALL OK on both Workers |
+| frame order + decode (probe, ordered reader like rxQ) | scratch probe: host init 20 KB state, guest joins | fix: state=bin, room=bin, order room→presence kept; main: all text. An UNORDERED reader (no rxQ) sees presence BEFORE room on the fix Worker = the old "late room snapshot" race; the game client has rxQ (jcoop.js:58) on every path (one connect()/rx() for host, guest, rejoin), so OK; only a pre-rxQ build still open in a tab would see it (rare, reload fixes) |
+| coop-e2e merged, seat order 0 / SWAP=1 | `node dev/test/coop-e2e.js <out> http://127.0.0.1:8799` (+ COOP_SWAP=1) | 142/142 · 142/142 |
+| coop-e2e bare, 0 / SWAP=1 | same on 889803dc | 142/142 · 142/142 |
+| coop-lag before/after (merged, 5 buổi, CPU 4, --no-rejoin, both runs in parallel = box loaded) | `PP_ARGS=… node dev/test/coop-lag.js --buoi 5 --worker http://127.0.0.1:879{8,9} --out …` | coopSyncKBMax 129.6 → 26.5 · coopKBPerMin 103.1 → 81.1 · coopResendPerMin 2.4 → 3.2 (noise) · coopTurnP95 53.7 s → 62.6 s (both far over 10 s; client CPU, pre-existing, fixer's triage stands) · exit FAIL on both (turn/action/long-task budget, pre-existing) |
+| deaf-thin family (law 11) | `OUT=… node dev/test/coop-thin-f2.js http://127.0.0.1:879{9,8} 7 0` | **fix Worker 26/27 FAIL · main Worker 27/27** |
+FAIL list for the fixer:
+1. coop-thin-f2 L7 P10 «net loss (the host's answer lost)» FAILS on the fix Worker (PASS on main): g1 = {pend:false, place:"vuon", lostV:1} — the test's "deaf" filter drops only STRING delta/snap frames (`typeof ev.data==='string'&&/"t":"(delta|snap)"/`); with BIG 8000 the host's snap/delta above 8 KB now arrive as gzip binary, slip through the filter and deliver the answer, so the simulated loss is not a loss. The game is fine (a dead socket drops every frame); the TEST FAMILY is blinded by this branch.
+2. Same family, fix all of it (law 11, scan script + before/after table): every test with the string-only `__deafThin` filter — coop-thin-f2, coop-thin-f3, coop-thin-f4, coop-relms-both, coop-arrive-see, coop-places, coop-palace-life, coop-hl-faces, coop-thancan, coop-ge-npc — and every string-only rx spy that counts types (`__rxT`: coop-thin-a «no snap/delta on the wire» now a false PASS, coop-thin-d, coop-thin-d-probe, pm-coop-d). The deaf filter must stop binary frames too (it cannot gunzip synchronously: e.g. while deaf, hold every binary frame and re-deliver the non-delta/snap ones after an async gunzip, or drop binary frames while deaf and prove the test still means what it says); the spies must gunzip binary frames before counting. Run each changed test on the fix Worker AND on main's Worker.
+3. Keep the rest as is (Worker line, coop-lag --trace/--prof): green.
+Not run (FAIL already): quickcheck / old save (no game file in the diff; fixer's run stands), trip1 (not present).
+Deploy note for the next LAND READY: the Worker auto-deploys on land (.github/workflows/coop-worker.yml).
+
+### B) harness review/robot10-coop 2bf6094f → robot10-coop-r2 — FAIL
+| check | command | result |
+|---|---|---|
+| diff scope | `git diff 48d1d7e1 2bf6094f --stat` | dev/measure/robot10-coop.js, dev/test/coop-bot.js, dev/test/coop-bot-x.js only (no game / Worker file) — OK |
+| merge r2 | robot10-coop-r1 6a6413db + 2bf6094f + LIVE 0c0877a2 | clean, 367b7a36 (local) |
+| coop-e2e merged 0 / SWAP=1 | `node dev/test/coop-e2e.js <out> http://127.0.0.1:8798` (+ COOP_SWAP=1) | 142/142 · 142/142 |
+| coop-bot.js with args, bare / merged | `node dev/test/coop-bot.js 4 <out> http://127.0.0.1:8798` | bare 4/4 weeks, pos mismatch 0 (no visit happened) · merged 4/4, **pos mismatch 1: «3.1 A sees B at r2, B is at H:a»** |
+| coop-bot-x.js with args, bare / merged | `node dev/test/coop-bot-x.js 4 <out> http://127.0.0.1:8798` | 4/4, 0 mismatches · 4/4, 0 mismatches |
+| coop-bot.js NO args (52 weeks, LIVE Worker), bare / merged | `node dev/test/coop-bot.js` | bare: stuck week 7 (both «Chờ hảo hữu… (off)», A Q=2 dialogs), **pos 1: «0.0 A sees B at H:a, B is at H:b»** · merged: stuck week 20 (A pend, Q=6 chapter dialogs; B Q=0), 84 buổi compared, **pos 2: «18.3 / 19.3 B sees A at H:a, A is at H:b»** |
+| coop-bot-x NO args, robot10-coop.js | — | not run (FAIL already; a 52-week LIVE run ≈ 1 h each) |
+FAIL list for the fixer:
+1. Law 11: the place-name family is not closed. 2bf6094f maps only `'home'` and `palaceOf(friend)`; a player who lives in a house head's palace (houseOf ≠ self: low rank → resHead) is `'home'` on her page but `r<head id>` on the friend's page (j9 palaceOf), and a player living in the FRIEND's palace is `'home'` on her page and `'home'`/H:<friend> on the other. Seen: «3.1 A sees B at r2, B is at H:a» (B visiting A's house, A not house head), «0.0 A sees B at H:a, B is at H:b» (first buổi, B resident in A's palace?). Name every place by its physical palace on both pages (house head key via houseOf/resHead, players' own palaces H:<seat>) and re-run.
+2. «18.3 / 19.3 B sees A at H:a, A is at H:b» (merged LIVE run, after B's two rebirths): two buổi in a row, so not the 5 s relay race. Triage game vs harness (A visiting B's palace while B's page keeps A at home: maybe the pos relay / mapPlace after a rebirth) before the next "SẴN SÀNG KIỂM".
+3. Pre-existing (NOT this diff, report only): coop-bot STEP stalls with open dialogs (bare week 7 Q=2 «Lời cảnh báo, Việc nhờ»; merged week 20 Q=6 chapter dialogs) on the LIVE Worker — same on bare (old game 27240ccb) and merged; the robot10-coop runner will hit it too (stuck → bug + fresh room).
+Worktrees (this box): /home/user/wt/{fix1r1,bfix,rc2,bharn}; logs in the reviewer's scratchpad (e2e/, thin/, bot/, lag/).
