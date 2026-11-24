@@ -3074,3 +3074,8 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (18:15Z) ctx 41 % (410k/1M) ≥ roll line 37 % → ROLL. TAKEOVER_MAIN_126.md written.
 ## MAIN CHÍNH 125 → MAIN CHÍNH 126 HANDOVER (24/11 ~18:18Z): dev/handover/TAKEOVER_MAIN_126.md
 - (18:16Z) MAIN CHÍNH 126 = session_01V1ZZH3LU36oJRpijfqgKNb opened (child of 125, depth 1). 125 DISABLED its three scheduled tasks. 125 forwards anything late, then stops.
+## MAIN CHÍNH 126 (took over 24/11 ~18:20Z from 125, child)
+- HANDOVER: MAIN CHÍNH 126 = session_01V1ZZH3LU36oJRpijfqgKNb; depth 1 (limit 8); START_CTX ~9 % (get_session 0, own estimate) → roll line ~34 %, ceiling 60 %. Worktree /home/user/wt/h126, push /home/user/wt/hpush126.sh. Next main = MAIN CHÍNH 127 (child, depth 2). No MAIN ROOT STANDBY registered.
+- (18:19Z) Scheduled tasks into 126: hourly trig_01QVhXotNVzxaSw958p58Vu9 (min 32); progress 08:00 trig_01EQ92SQCyBZW8LsyfhC2WaB + 20:00 trig_01Pi2VevigGFwxcQxszuqn2o (CRON_TZ=America/New_York).
+- (18:20Z) «main is now 126» sent to OFFLINE-FAST, FLIGHT-DAYQ/SOUND/TAINGHE/UI/MUCLUC, LC12, KK21, RING-DESIGN-4, MOTION-DESIGN-3, SELSCENE-13.
+- LOAD (18:22Z): main running 11 (6 owner flight bugs + LC12 + KK21 + RING-DESIGN-4 + MOTION-DESIGN-3 + SELSCENE-13; owner bugs/UI/go-live only) | B 11/12 | C silent (NHV art order waiting) | D 2 seats (rv d-followups-1, remerge) | E 11/12 | F 11/12 | moved: none. LIVE 502c48c9 (LC12 landing robot10-onecore 5d4f722f). DIFF: E leave-palace-r5 a5b9244b (supersedes 7a3541fd) needs re-merge → ordered E + LC12 told.
