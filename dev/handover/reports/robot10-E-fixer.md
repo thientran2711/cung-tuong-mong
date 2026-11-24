@@ -236,3 +236,34 @@ Verdict: HARNESS, already fixed by E-FIX-2 (inpage6.js:19–21, review/robot10-e
 | 1, 11, 12 | memory / lag | owned | D robot10-lag |
 | 3 | no ending within 1800 s cap | harness cap | — |
 No row on the fix-4 r2 harness rules (clip / aria-hidden copy / sticky) in this file; no new real E bug. Only open question → MAIN: Dư đồ go-tab label overlap on iPad (25/50 lives).
+
+## 14. E-FIX-3 r4 — review/robot10-e-fix-3 b76ccc59 (on r3 f0a5f92c; E81r r2 + r3 verdict item: law 1, one stock rule)
+Rule chosen (the simpler one that keeps law 6c + law 1): **the Nội vụ phủ counted stock hands out only FULL pieces** — a whole candle, a hair-oil bottle with all its lượt (BAL.allot.oil.uses) — i.e. exactly the piece her own monthly issue mints. Part-used bottles stay COUNTED in S.il.stock (real, findable; one number per kind × lượt, so the save stays small). Her issue and every NPC's issue now give the same piece.
+Run-on fix (same family, found by the new test): the NPC trim put an EMPTY bottle (0 lượt) into the stock («aldau0.0»). ilStock(e,n,p) now counts a 0-lượt bottle as used up for its holder (S.il.used), never as stock. Both trim sites pass the holder (jstip:104 NPC, jallot:110 staff).
+Issue-path scan (every place a month's al*/lx* piece is handed out):
+| site | who | piece |
+|---|---|---|
+| jallot alInit | her / NPC first set | minted full (alFix) |
+| jallot :102 monthly issue | her | minted full |
+| jallot :110 alStaffGive | her staff | minted full |
+| jstip :103 stipGoods | every NPC | stock FULL piece first (r4), else minted full |
+| jstip :126 stipRestore | skim given back | minted full (k0) |
+| jration lxInit / lx issue | her + NPCs | minted full box |
+| trims jstip :104 / jallot :110 | NPC / staff surplus | uses left → stock (counted); empty → used up (r4) |
+dev/test/r10e-stock-full.js (saves-r5 R3-018):
+| check | r3 f0a5f92c | r4 |
+|---|---|---|
+| stock {oil 2 lượt ×3, 4 lượt ×2, full ×1, candles ×2} → takes | 6, 4, … (fullest first, part-used handed out) | 6 then mint; candles ×2 |
+| NPC month issue with only 2-lượt oil in stock | NPCs got 6 / 4 / 2 lượt | 6 / 6 / 6 |
+| empty bottle at the trim | «aldau0.0» into the stock | used up (S.il.used) |
+| result | FAIL 4 | ALL OK |
+Also taken: E81r's r10e-saveblocked fix (close the loaded life's dialog before looking for the chip; review/robot10-e-fix-3-r 183fb7e9) → ALL OK.
+Tests on b76ccc59: quickcheck **PASS** 525 s (core gates, old save ok; perf new/live render 199/194, tab 403/392, buổi 1750/1236 ms) · coop-e2e Fold host **142/142** · COOP_SWAP=1 **142/142** · monthly-allotment ALL PASS (42) · r10e-oldsave-noloss (R3-018, 2.40 M → 1.64 M chars) ALL OK, lasting 2 807 = 2 807, 0 mismatches · r10e-consume-scan 0 unmarked · r10e-saveblocked ALL OK · r10e-stock-full ALL OK.
+LOAD-COMPARE (coop-e2e, same box, one after another; branch test file = 142 checks, LIVE's = 162):
+| run | start → end (UTC) | load avg 1/5/15 at start | result |
+|---|---|---|---|
+| r4 b76ccc59 Fold host | 11:39:49 → 11:42:21 | 2.78 2.12 2.21 (a robot life running) | 142/142 |
+| LIVE 178cac37 game (fix-4-r2m checkout) Fold host | 11:42:21 → 11:55:48 | 6.72 3.94 2.88 | **134/162, 28 FAIL from week 0** (#next stays «Sẵn sàng», Q 8 dialogs queued) = the LIVE regression, not this branch |
+| r4 COOP_SWAP | 11:55:48 → 11:57:51 | 0.34 1.05 1.85 | 142/142 |
+No UI / kit / wording / BAL number change in r4 (BAL.allot.oil.uses read, not typed).
+SSK: SẴN SÀNG KIỂM robot10-e-fix-3 b76ccc59 (BIG; = r3 + one full-piece stock rule).
