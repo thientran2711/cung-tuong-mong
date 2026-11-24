@@ -1390,6 +1390,6 @@ LAW-1 likes/dislikes/gifts scan + fix (opus; MAIN 116 07:57Z (e); briefs/D-law1-
 | REVIEW E65r TITLES2 r3 BIG (opus; briefs/E65r-review-titles2-r3.md) of 86e0fcf1 | review/titles2-r2; reports/titles2-review-r3.md | FOREMAN E (child1) | session_01DgYSWkTHXKFwZRgoxgzfwZ | RUNNING | 24/11 05:58Z |
 | ROBOT-COOP RUNNER U4 pairs 3-4 SWAP=1 SEED=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p3-4-s.md | B | session_01N1tNP2J2RWyqmnHnG8Run7 | RUNNING | 24/11 05:56Z |
 | ROBOT-COOP RUNNER U5 pairs 5-6 SWAP=0 SEED=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p5-6.md | B | session_01N1tNP6DDKAsMUF9TiY87qJ | RUNNING | 24/11 05:58Z |
-| PARKING VERIFY E66 (sonnet; B-RANK anti-cheat + MG14 state; briefs/E66-parking-verify.md) | reports/parking-verify.md; review/parking-rank if a small fix | FOREMAN E (child1) | session_01DgYSWknBqBqY7X45rUVDaj | RUNNING | 24/11 06:05Z |
+| PARKING VERIFY E66 (sonnet; B-RANK anti-cheat + MG14 state; briefs/E66-parking-verify.md) | reports/parking-verify.md; review/parking-rank if a small fix | FOREMAN E (child1) | session_01DgYSWknBqBqY7X45rUVDaj | READY parking-rank f3c7ce80 (report parking-verify.md) | 24/11 |
 | PARKING #10 HƯƠNG RIÊNG E67 (opus BIG; expert first; briefs/E67-scent.md) | review/scent; reports/scent.md | FOREMAN E (child1) | session_01DgYSWoizfjLqnTfD3oCWz3 | RUNNING | 24/11 06:05Z |
 | PARKING AUDIT E63 | reports/parking-audit.md 7f85225b | FOREMAN E (child1) | session_01DgYSWnS8t83k8g5g1at6Hy | DONE, ARCHIVED | 24/11 06:05Z |
