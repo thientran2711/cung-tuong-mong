@@ -238,3 +238,24 @@ PRIORITY #1 CHECK: OD 24/11 ~04:00Z … ~10:20Z (verbatim, handover branch) | ma
 2. THE OWNER MOCK (job 4): Fold + iPad full screen at scale 2 (`node dev/test/selx-mock.js <wt> <out> 2`) + 2× copies + mp4 of the 3 days' key beats (Playwright recordVideo on the same plans, ffmpeg setpts=0.5 for the 2× copy); local paths in the report → MAIN 118 checks every frame. Media never in git.
 3. SẴN SÀNG KIỂM <sha> + all selx tests → MAIN 118.
 4. Seen, not mine: scene background paints before the figures when the CDN is slow (OD ~10:20Z veil family, owner-bug lane); the Tiền sảnh lesson leaves a «… không đổi gì» result card behind (its effect is on the selection clock / ma ma regard, not on S stats) — small, check with the result-card owner.
+
+## SELSCENE-7 (session_01V1ZZH4RpHLXeiVt1a4nctc, 24/11 ~07:30Z real; depth 4; START_CTX ≈ 4 % → rollover at ≈ 29 %)
+PRIORITY #1 CHECK: OD 24/11 ~04:00Z…~10:20Z + ~07:27Z/~07:32Z/~07:35Z real (handover branch) | main jtoil/j39/jkitsel §93/§95 (kitResultCard §93.8 reused)/jpm | review/selection-scene 4240dca5 + review/selscene-dramas 4e77e122 | claims SELSCENE-7 (MAIN 119); child SELX-WRITER-2 session_01V1ZZGzRGBNJpqrpQMifLSC (sonnet) on review/selscene-dramas2.
+### Done
+- Merged review/selscene-dramas (dorm 43 / kept 43) → e9a142df; jselxd regenerated (no diff). Old writer SELX-WRITER session_01V1ZZH3gakzNmpNJTSMxL2s ARCHIVED.
+- TIỀN SẢNH LESSON «không đổi chỉ số» (law 3) — root cause: the lesson's real effect is the ma ma's regard (S.selx2.ma, not a stat); the generic option wrapper (j19 wrapR «chooseM») then showed a SECOND card titled by the option with only stat rows → «không đổi chỉ số», covering the selx card. Fix: (1) each effort has a sure gain (BAL.selx.lesson.fx / maMin: kỹ = ma ma regard ≥ one step + chance of a royal's chữ trọng · vừa = Đức +1 · qua loa = Sức +5 with «ma ma không vừa ý» as its kèm); (2) selxRes shows the ma ma regard IN WORDS («Giáo tập ma ma: để ý tới ngươi hơn / không vừa ý ngươi») through the kit §93.8 kitResultCard beside the kaResultRows stat rows; (3) ONE card per selx deed: after selxRes the generic chooseM card is held back for that click (resultShow wrap, same pattern as jts __tsNoRes).
+- LAW 11 GROUP (every selx option card read «Tốn: không · Được: chọn rồi xem kết quả ở bước sau» although it costs khắc). Scan = every selxO( call in jselxday.js (26). Before → after:
+  | option | before | after |
+  |---|---|---|
+  | Theo thái giám vào cửa viện / Cất đồ, ra Tiền sảnh / Quỳ xuống thỉnh an / Nghe ma ma dạy | Tốn không | N khắc · thành: what the step gives |
+  | Tập kỹ / vừa / qua loa | Tốn không, no gain | 3/2/1 khắc · ma ma regard / Đức +1 / Sức +5 (+ kèm ma ma không vừa ý) |
+  | Làm quen (viện + sân chờ) / Trò chuyện / Sang … / Nghỉ | Tốn không | 1 khắc · biết mặt (tên nếu nàng chịu) / thân hơn / tới nơi / Sức +5 |
+  | Ngồi yên chờ tới tối | không | thành: tới ngay buổi tối |
+  | Điểm trang / để mặt mộc | Tốn không | khắc · tự chọn phấn son / còn khắc ở sân chờ |
+  | Dúi bạc / Giúp ma ma / Cứ hỏi thẳng | words only, no khắc | khắc (+ Bạc) · what she answers |
+  | Dò hỏi thái giám | Tốn không | 1 khắc · biết một vị trọng chữ gì |
+  | Đứng yên giữ sức (sân chờ) | cost-only (law 3 break) | 1 khắc · Sức +5 (result card) |
+  | drama stances (dorm/yard/kept, 4 each) | Tốn không | khắc (drama.k ± seed time) · thành: who likes her more / Đức · kèm: who resents her / Danh − (selxStX from the seed) |
+  Left as is (by design): the royals' test answers (hidden reaction), menu openers (Dò hỏi ma ma / Hỏi về … / Thôi), Ngủ, Về viện.
+- Found: dm-008 stance «…chết khiếp» trips the life-quit gate jkiep kpGate («Kiếp này chưa trọn», regex /chết/) — writer told to remove death-words from all stance texts. The kpGate regex itself also catches idioms anywhere in the game (owner-bug lane, not mine) → MAIN.
+- NEW dev/test/selx-flow.js: plays the 3 days through the REAL UI (scene taps + #modal buttons), key-beat shots per new card / scene / result card + recordVideo → mp4 + 2× mp4 (ffmpeg setpts=0.5). Shots/videos outside git.
