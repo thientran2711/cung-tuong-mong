@@ -86,7 +86,7 @@ function nrPlay(v){const N=v.nr,A=nrCh(N.r,N.n);if(!A){N.n=nrNext(N.r,N.n+1);ret
  return {n:n0,t:nrFill(plain(nrS(A.t,A)),v),tag,k,me,rc,riv}}
 /* motive to ask the player (real reasons only): bond, a shared side, or the player is her rival (never asks her rival) */
 function nrAsk(v){try{if(isSrv()||S.out||nrLearn())return false;const N=v.nr;if(N.c==="me")return false;
- if(aff(v,S)>=nrB().askRel)return true;const f=facOf(v);if(f&&f===facOf(S))return true;
+ if(aff(v,S)>=netTh(v,"than"))return true;const f=facOf(v);if(f&&f===facOf(S))return true;
  const a=typeof rgSideOf==="function"?rgSideOf(v):null;return !!(a&&a===rgSideOf(S))}catch(e){return false}}
 /* the help kind of a chapter from its main cast key (w) */
 const NRHK={emp:"emp",th:"th",hh:"hh",dad:"thu",bro:"thu",off:"thu",man:"thu",envoy:"thu",mom:"thu",v:"do",foe:"do",foed:"do",v2:"do",eun:"do",gd:"do",doc:"y",maid:"che",mis:"che",kid:"che",mama:"che"};
@@ -284,7 +284,7 @@ function nrMPlay(s){const N=s.nr,A=nrCh(N.r,N.n);if(!A){N.n=nrNext(N.r,N.n+1);if
 /* motive to ask the player: her own maid asks when her loyalty is high; another house's maid only when the player is close to her
    mistress (bond or a shared side) — never for a maid whose mistress is cold to the player */
 function nrMAsk(s){try{if(isSrv()||S.out||nrLearn())return false;const ms=nrMis(s);if(!ms)return false;if(ms===S)return (s.loyal||0)>=nrB().m.askLoy;
- if(aff(ms,S)>=nrB().askRel)return true;const f=facOf(ms);return !!(f&&f===facOf(S))}catch(e){return false}}
+ if(aff(ms,S)>=netTh(ms,"than"))return true;const f=facOf(ms);return !!(f&&f===facOf(S))}catch(e){return false}}
 function nrMOffer(s){const N=s.nr,A=nrCh(N.r,N.n);if(!A||typeof q72!=="function")return false;const q=q72();if(!q)return false;
  const [rk,ri]=nrMK(s);if(q.ch.concat(q.a).some(c=>nrSameA(c,rk,ri)&&/^nr_/.test(c.tid)))return false;
  const riv=nrMRival(s);const bb=riv?nrMK(riv):[null,null];
