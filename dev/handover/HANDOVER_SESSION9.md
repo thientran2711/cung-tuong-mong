@@ -2941,3 +2941,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (08:10Z) sếp asked where she said the stand-in was too faint — she did NOT; VEIL-1 changed §59.1 opacity on its own reading of her reason and MAIN relayed it as hers (MAIN mistake). Law 16 → VEIL-1 told to REVERT r4 opacity (branch back to fe8f6e3d behaviour); old vs stronger shots kept as an option only.
 - (08:12Z) VEIL-1 reverted → SSK 469d7985 (= fe8f6e3d tree, §59.1 .55/.3). B reviewer told.
 - (08:15Z) OWNER ~08:30Z real: C works on as soon as art ends → E70 road dialogue scenes moved E → C (whole job).
+- FROM LC10 (07:42Z): LANDED thin-p6 fd85907a (all play + quickcheck + coop PASS). LIVE = fd85907a. Next: kit chain framefit → … → dialogue-vn, robot10-coop, parking-rank, coop-thin-g.
