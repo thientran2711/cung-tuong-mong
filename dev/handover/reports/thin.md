@@ -512,6 +512,7 @@ DONE 8eda1fbb j70seeds_b.md 38 routes: frame 5 plant 5 bribe 4 block 4 rumor 4 a
 
 ## P6-SEEDS-C
 - DONE 9a55dcf6 40 routes (poison 5, poison2 5, musk 5, catswap 5, kpoison 5, pond 5, pushp 5, kframe 5; 40/40 with object) validator pending (own cost-point/word/banned-word check passed)
+- DONE 3c105486 validator 0 errors (40 routes, 5 per method)
 
 ## P6-SEEDS-B
 - DONE c3e1d23 wseeds_b.md: 51 seeds = 3 per kind x 17 kinds (day lap hau thb thi vuong ret trung vuco cam trom phong hon ngoai phat benh tinh); 36 with object, tiers s17 m25 l9, tag D35 K16; self-check (stance sums, words, placeholders, scopes) 0 errors; validator pending (not on remote yet).
