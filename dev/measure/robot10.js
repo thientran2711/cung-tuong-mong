@@ -80,10 +80,15 @@ function uiScan(opt){const W=innerWidth,H=innerHeight,out=[];const strip=s=>Stri
  const els=[...root.querySelectorAll('*')].filter(e=>!/^(svg|path|g|img|canvas|video|picture|source|use|defs|clippath|lineargradient|stop|filter)$/i.test(e.tagName));
  const scrollAnc=e=>{for(let x=e.parentElement;x&&x!==document.documentElement;x=x.parentElement){const s=cs(x);if(/(auto|scroll)/.test(s.overflowY+s.overflowX)&&(x.scrollHeight>x.clientHeight+1||x.scrollWidth>x.clientWidth+1))return x}return null};
  const pageScrollsY=document.documentElement.scrollHeight>H+2;
+ /* E-FIX-4 (R3 kgl.kfx «text off screen» x 318..1007): the part of a text she can SEE = its box cut by every clipping ancestor (overflow hidden / clip,
+    e.g. the kit one-line person row KIT §6.3h: cut with «…» + a «!» that opens the full text). Text clipped by a box that ends INSIDE the screen is not
+    off screen; a clip at the screen edge (a screen-wide wrapper) still counts: there the screen cuts her text. */
+ const seen=e=>{const r=e.getBoundingClientRect();let L=-1e9,R=1e9;for(let x=e.parentElement;x&&x!==document.documentElement;x=x.parentElement){const s=cs(x);if(/(hidden|clip)/.test(s.overflowX)&&!/(auto|scroll)/.test(s.overflowX)){const q=x.getBoundingClientRect();L=Math.max(L,q.left);R=Math.min(R,q.right)}}
+  return {left:L>2?Math.max(r.left,L):r.left,right:R<W-2?Math.min(r.right,R):r.right}};
  for(const e of els){if(!vis(e))continue;const own=[...e.childNodes].some(n=>n.nodeType===3&&n.textContent.trim());
   if(own){const s=cs(e);const clip=/(hidden|clip)/.test(s.overflowX+s.overflowY)||s.textOverflow==='ellipsis'||s.webkitLineClamp!=='none';
    if(clip&&!/(auto|scroll)/.test(s.overflowX+s.overflowY)&&(e.scrollWidth>e.clientWidth+2||e.scrollHeight>e.clientHeight+3))out.push({k:'cut',msg:'text cut: '+name(e),ex:strip(e.textContent).slice(0,80)});
-   const r=e.getBoundingClientRect();if((r.right>W+2||r.left<-2)&&!scrollAnc(e))out.push({k:'offscreen-text',msg:'text off screen: '+name(e),ex:strip(e.textContent).slice(0,60)+' x '+Math.round(r.left)+'..'+Math.round(r.right)})}}
+   const r=seen(e);if((r.right>W+2||r.left<-2)&&!scrollAnc(e))out.push({k:'offscreen-text',msg:'text off screen: '+name(e),ex:strip(e.textContent).slice(0,60)+' x '+Math.round(r.left)+'..'+Math.round(r.right)})}}
  const label=e=>strip([...e.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join(' ')||e.innerText||'');
  const layer=e=>{for(let x=e.parentElement;x&&x!==document.body;x=x.parentElement){const p=cs(x).position;if(p==='absolute'||p==='fixed'||p==='sticky')return x}return document.body};
  /* labelled buttons only (a figure / portrait / icon with role=button is art, not a control label) */
