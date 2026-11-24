@@ -1243,3 +1243,5 @@ kit-mgskin review | review/kit-mgskin-r | session_01Rc5AsLG8CETU5oT3t3s98h | RUN
 | THIN P1c (sonnet): every other remaining mini-game kind (sg_/thu_/tuoi/exam…; full 39-kind list first) | review/thin-p1c; reports/thin.md «## P1c» | B | session_01N1tNP43Y5prdNW2dvC5otW | RUNNING | 24/11 00:14Z |
 | REVIEW thin-p1 r1 (sonnet, BIG checklist) of review/thin-p1 b43fe174 (9 kinds; land after thin-p0) | review/thin-p1-r1; reports/thin.md «## REVIEW thin-p1 r1» | B | session_01N1tNP5XaLHAQvcsGkVxdj6 | RUNNING | 24/11 00:14Z |
 AGEBAND (owner 24/11 age bands 18/28/39/51/64) | review/ageband | Foreman E | ORDERED | 24/11 00:18Z (MAIN 114)
+| D1-KP23RD: redraw the 52 unticked KP23 event pictures, one style, main character close + face (owner 24/11 ~00:20Z GO; briefs/D1-kp23-redraw.md) | review/kp23-redraw; reports/D1-KP23RD.md | FOREMAN C ROOT-D1 | session_01D3E3NXcWpjZec1ydJ3btYV | RUNNING | 24/11 00:25Z |
+| D1-KP23SWEEP: check 142 live KP23 pictures for far/blurry/back figures → redraw list (owner 24/11 ~00:20Z; briefs/D1-kp23-sweep.md) | review/kp23-redraw; reports/D1-KP23SWEEP.md | FOREMAN C ROOT-D1 | session_01D3E3NYMeuCFZYovxNL99Hh | RUNNING | 24/11 00:25Z |
