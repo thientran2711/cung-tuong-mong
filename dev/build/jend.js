@@ -151,3 +151,6 @@ window.kesSample=function(t){try{const T=KE.types[t]?t:"death";const tone=KE.typ
 
 /* KIT §94b: the day title card shows on EVERY day change (jend.js is the LAST module: this `dawn` is the outermost wrapper, over kitNewDay / the Tuần lục book / the j79 panel) */
 try{if(typeof dawn==="function"&&typeof kitDayTitleShow==="function"){const d0=dawn;dawn=function(){const r=d0.apply(this,arguments);try{kitDayTitleShow()}catch(e){}return r}}}catch(e){}
+
+/* KIT §94b: game start = «Ngày 1 — <tên> · Chương 1 — <tên>» (owner OD 24/11 ~07:45Z; MAIN 117 OK): after a NEW life begins (week 0) the same card shows once; not for bots / sims */
+try{if(typeof start==="function"&&typeof kitDayTitleShow==="function"){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(!window.__bot&&typeof S!=="undefined"&&S&&!S.dead&&typeof wk==="function"&&wk()===0)setTimeout(()=>{try{if(S&&!S.dead&&wk()===0)kitDayTitleShow()}catch(e){}},600)}catch(e){}return r}}}catch(e){}
