@@ -30,6 +30,9 @@ const TXL=new Set();(async()=>{const b=await chromium.launch();
    /* SELSCENE-11 text audit (law 6/7/11): every visible card / scene / stage word before the edict — no future rank of a tú nữ, no «???» name mask, no raw ${…} */
    {const tx=await p.evaluate(()=>{const g=e=>e&&e.offsetParent!==null?e.innerText:'';return [g(document.getElementById('modal')),g(document.querySelector('.kscn')),g(document.getElementById('stage')),g(document.getElementById('panel'))].join(' | ')});
     const RK=/(Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng)\s+(?=[A-ZĐ])|\?\?\?|\$\{/g;let m;while((m=RK.exec(tx))){const k=m[0]+'|'+tx.slice(Math.max(0,m.index-30),m.index+40).replace(/\s+/g,' ');if(!TXL.has(k)){TXL.add(k);console.log('TEXT',dn,'day',st.days,JSON.stringify(k))}}}
+   /* one knowledge: what the days print (selxMet → name / «một tú nữ lạ mặt») = what the kit plates read (j61 kitKnownName → name / «???») */
+   {const kd=await p.evaluate(()=>{try{const Z=S.selx2;const L=(Z.girls||[]).concat(Z.keptV||[]);return L.filter(v=>v&&kitKnownName(v)!==selxMet(v)).map(v=>v.name+':'+kitKnownName(v)+'/'+selxMet(v))}catch(e){return []}});
+    for(const x of kd){const k='KNOW|'+x;if(!TXL.has(k)){TXL.add(k);console.log('TEXT',dn,'day',st.days,'plate≠text',x)}}}
    /* RV-SELX: the contest podium (kit §26 #kpodov) waits for its «Tiếp» like a player would; before, the driver clicked the cards UNDER it and Day 3 was filmed behind the podium */
    if(await p.evaluate(()=>!!document.getElementById('kpodov'))){if(last!=='podium'){last='podium';await p.waitForTimeout(1500);await shot('vinh-danh')}await p.evaluate(()=>{const o=document.getElementById('kpodov');const b=o&&[...o.querySelectorAll('button')].find(x=>/Tiếp/.test(x.textContent));if(b)b.click()});await p.waitForTimeout(900);continue}
    if(st.sc){const key='sc:'+st.line.slice(0,12);if(key!==last&&st.line){last=key;await p.waitForTimeout(900);await shot('canh-'+slug(st.line))}

@@ -369,7 +369,9 @@ window.selxClkSync=selxClkSync;
    «x<n>» key from THIS seat's counter (S.kseq) the moment she was greeted — the two seats' counters drifted apart (LIVE never spends them here) and later
    keys of different people met. Her id is the same on both seats (the room draw) and is her key once she enters rivals («r<id>»): she keeps that key
    from the first day, so what she learnt of her name carries over to the world person, and no counter is spent. */
-(function(){if(typeof kOf61!=="function")return;const k0=kOf61;kOf61=function(e){try{if(e&&e.tuNu&&e.id!=null&&S&&!(rivals||[]).includes(e)){const k="r"+e.id;if(!(rivals||[]).some(v=>v&&v.id===e.id))KREG[k]=e;return k}}catch(x){}return k0.apply(this,arguments)};window.kOf61=kOf61})();
+(function(){if(typeof kOf61!=="function")return;const k0=kOf61;kOf61=function(e){try{if(e&&e.tuNu&&e.id!=null&&S&&!(rivals||[]).includes(e)){const k="r"+e.id;e.kk=k;/* j61 k61PortEnt finds a person out of rivals only by .kk (else «known»: a stranger's plate showed her name) */if(!(rivals||[]).some(v=>v&&v.id===e.id))KREG[k]=e;return k}}catch(x){}return k0.apply(this,arguments)};window.kOf61=kOf61})();
+/* same group: a kit plate (j61 k61PortEnt → kitKnownName) of a girl not keyed yet read «known» (her name on a stranger) until something else keyed her */
+(function(){if(typeof k61PortEnt!=="function")return;const p0=k61PortEnt;k61PortEnt=function(p){try{if(p&&p.tuNu&&p.id!=null&&!p.kk&&S&&!(rivals||[]).includes(p))kOf61(p)}catch(e){}return p0.apply(this,arguments)};window.k61PortEnt=k61PortEnt})();
 (function(){if(typeof render!=="function")return;const r0=render;render=function(){selxClkSync();return r0.apply(this,arguments)};window.render=render})();
 /* in a room the clock of the days moves once, in selxRoomIn (never once per seat: two seats' +3 would merge to +6) */
 (function(){const k0=selxClock;selxClock=function(){if(selxCo()){const Z=S.selx2;Z.clock=1;return}return k0.apply(this,arguments)};window.selxClock=selxClock})();
