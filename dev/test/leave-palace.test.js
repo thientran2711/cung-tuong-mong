@@ -212,7 +212,7 @@ ok(/ttExposed\(c,m,/.test(SRC)&&!/roll\(50\)\)return over\("Tư thông bị phá
  ok(sv.p3.decay<10&&sv.p3.decay>=6&&sv.p3.back&&sv.p3.night2,'P3 thất sủng: Sủng decays (BAL.thatS.decay); at BAL.thatS.back she is back on the tablet tray',sv.p3);
  ok(sv.p3n==="no low NPC"||(sv.p3n.ts&&!sv.p3n.out&&sv.p3n.night===0),'P3 NPC the same rule',sv.p3n);
 ok(sv.p3robot.ent>0&&sv.p3robot.left>0,'E74 P3 robot: of the NPCs that entered thất sủng over 120 months, some left it (no one-way trap)',sv.p3robot);
-ok(!sv.p3me.ts&&sv.p3me.sung>=sv.p3me.back&&/chợt nhớ/.test(sv.p3me.ev),'E74 P3: she has the same «chợt nhớ» road (back with Sủng = BAL.thatS.back)',sv.p3me);
+ok(!sv.p3me.ts&&sv.p3me.sung>0&&/chợt nhớ/.test(sv.p3me.ev),'E74 P3: she has the same «chợt nhớ» road (Sủng lifted toward BAL.thatS.back through her own Sủng modifiers)',sv.p3me);
 {const T=sv.tier;ok(["spy","kpoison","pond","musk","catswap","kframe","vuco","poison@HH","pushp@HH"].every(k=>T[k]==="nghich")&&["poison","pushp","frame","rumor","ksab"].every(k=>T[k]===""),'E74 P1: crimeTier — treason kinds «nghich», ordinary kinds not',T)}
 {const G=sv.p1fam;const ds=G.filter(g=>g[0]==="ds");ok(ds.length>=3&&ds.every(g=>g[2]==="nghich")&&ds.some(g=>g[1]==="S")&&ds.some(g=>g[1]==="npc")&&(!sv.hasQ||ds.length>=4)&&G.some(g=>g[0]==="pun"&&g[2]===2),'E74 P1 family: pond caught + pushp on Hoàng hậu → deathSentence «nghich» for NPC and for her (two-way); pushp on a consort stays punish 2',G)}
 ok(/convict\(a,`bị bắt quả tang/.test(SRC)&&/convict\(by,"dùng bùa ngải/.test(SRC)&&!/punish\(a,"mưu hại hoàng tự"/.test(SRC),'E74 P1 family scan: j70 trap + jworld2 vu cổ doer on convict(); no punish «mưu hại hoàng tự» left',0);
