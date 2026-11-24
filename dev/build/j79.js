@@ -1358,6 +1358,10 @@ function kitEmptyTab(title,lines,o,acts){return kitEmpty(title,lines,o)+(acts?`<
 .dlg:has(.ktn-pop) .k3body>.k3main,.dlg:has(.ktn-pop) .k3body>.kpsubj,.dlg .kpb:has(.ktn-pop)>.kpsubj,.dlg .kpb:has(.ktn-pop)>.kpiart{display:none!important}.dlg:has(.ktn-pop) .k3right{flex:1 1 100%;width:100%}.dlg .kpb.kphas:has(.ktn-pop){grid-template-columns:minmax(0,1fr)!important}
 /* a môn's act list is a TALL frame (law 10: tall frames grow to the screen ratio): the pop-up takes the screen height so 3 acts show without scrolling on iPad, as few scrolls as possible on Fold */
 html body #modal:has(.ktn-pop){--kph:min(calc(100dvh - 24px),920px)}
+/* iPad landscape: the pop-up is wider (frame XL) and its act cards lie in 2 columns with a smaller picture; phone / Fold portrait stay 1 column */
+html.kv2 body #modal:has(.ktn-pop){--kpw:min(900px,calc(100vw - 28px))}
+.ktn-pop{container-type:inline-size;--kpa-d:64px}
+@container (min-width:600px){.ktn-pop .kskacts.pcb{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 .ktn-tile:active>.kskill{filter:brightness(.97)}/* KIT §6.3g: one act card per line (was an auto-fit 2-column grid: cards of different heights, tiny pictures) */
 `;document.head.appendChild(st)})();
 /* ---- PERSON STATS (owner 11/14): every consort shows the SAME stat set as the player, as kit tiles: Sủng · Đức · Danh · Sắc · Tài · Tâm cơ.
