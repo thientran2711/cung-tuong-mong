@@ -280,3 +280,49 @@ Gates: table in FOREMAN_F_STATUS.md «FOR MAIN 127 / LC12 … LAND READY robot-f
 New note for FIXER #4 (pre-existing, same on LIVE, not a blocker): r10-rt on the LIVE-written quickcheck save — at the first load the home room holds «Lão Minh Tử» (kind serv, sid 1) while servById(1) = null (a copy with no live servant, law 6b family); the next load drops her (room 2 → 1 người).
 Laws: 1–3, 5 untouched · 4 harness reads only · 6b as at the PASS (shared-ref 0 person splits) · 7/9/10/12 no UI / wording / kit change in r1 (LIVE kit changes were reviewed on their own branches) · 11 scans re-run · 13 check line · 14–18 no rule changed.
 **VERDICT: PASS — LAND READY robot-fix-cnv-r1 e50af91a (FF from LIVE 502c48c9).** Done; this reviewer stops.
+
+## ROBOT FIXER cnv #4 (opus, session_01UV1SzhnKuNkgn4n6LmAkh3, depth 3, START_CTX ≈ 4 %) — true reload, R7 closed, cards / timers / shared ref
+PRIORITY #1 CHECK ('robot-fix-cnv'): OD 0 | ledger 0 | claims 8 | main 0 | review/* 3 | archive 0 → continued review/robot-fix-cnv-2 80f49094 + this report; extended existing mechanisms (j68 deser wrapper, j1 life registry / j93 kmGen, r10-play-rt), no second mechanism.
+Branch review/robot-fix-cnv-2: ca07ca57 (probe) → 219f122d (game fixes) → 9e7df19a (merge LIVE origin/main 502c48c9, index/sw rebuilt) → **e47c61b7** (shared-ref fix, rebuild). NOT merged with r1 e50af91a (F #3: re-land after it goes LIVE).
+
+### 1. TRUE-RELOAD probe (dev/test/r10-play-rt.js, `RELOAD=1`)
+A second browser context gets the bot page's whole localStorage, reloads (fresh JS world), opens slot 1 by the title button (real path kmReset → deser → deal → showModal → render), waits for the AGL deferred jobs, diffs its file vs s1. The bot page itself never loads in place. Two harness traps found and fixed on the way: (a) the reload page's OLD world saves itself on unload → storage is written again inside the fresh page; (b) ~55 modules switch on `window.__bot` (jchat stage grouping reordered S.visit.people, jagent, j72 cards…) → the reload page carries the same flag as the bot page. Default (no RELOAD) = #3's in-place file probe, unchanged.
+### 2. A/B with the true-reload probe (40 round trips each, render on; families / «repairs by design»)
+| road · seed | f78c695c (before #3) | 80f49094 (#3) | 219f122d (#4) |
+|---|---|---|---|
+| cnv_mat s3 | 9 / 272 | 5 / 38 | 1 / 26 |
+| cnv_mat s5 | 7 / 282 | 2 / 77 | 2 / 41 |
+| cnv_mat s7 | 69 / 263 | 7 / 38 | 1 / 37 |
+| cnv_chu s3 | 52 / 312 | 19 / 33 | 0 / 21 |
+| cnv_chu s7 | 7 / 240 | 1 / 29 | 4 / 21 |
+| **mean ± spread** | **28.8 (7–69) / 274** | **6.8 (1–19) / 43** | **1.6 (0–4) / 29** |
+(cnv_chu s5: bot made 0 round trips on all three builds, dropped.) Before: S.tb.b/Cb/d in every run (12×/6×), e68.sch, emoSeen, where, P. #3 build: S.tb gone; left = P cards dropped. #4 build: left = ONLY `kyngo` (by design, see 5) + 1× S.ag.rq.N (one request done by the deferred queue in the reload page before the bot page ran it — timing).
+→ **R7 verdict: KEEP #3's jagent agSettleSave + deferred resync → j95final → renderStage, and the saveSettle emoSee / loEntry lines** (their families are 0 under the true reload). S.tb.b/Cb/d (step 3) = closed by the same change (knTb is settled by the file written after the queue empties).
+### 3. Game fixes (law 11 families)
+| family | root | fix | before → after |
+|---|---|---|---|
+| an open card vanishes on reload (e.g. «Cao Tố Tuyết quở mắng») | j68 evGate keeps «which card is on screen» in page memory (EVLAST); after a load the head card looked like a NEW optional card in a buổi that already had its one (sc.bk) → moved to EVHOLD (not saved) = gone | the existing j68 deser wrapper: the loaded head card is EVLAST + __seen (it passed the gate when it was opened) | true reload P-card drops 4-5 per run (#3 build) → 0 except kyngo |
+| old-world timer acts on a game loaded in place | setTimeout callbacks set by the old world (j77 «Đi» goTo, nextBuoi auto-advance 350/2600 ms, …) fire into the loaded world; a real reload kills them | j1 `lifeGen()` (= j93 kmGen, +1 on every kmReset: slot load, new life, title) + `lifeTimeout(f,ms)`; timers that also free a lock (advLock, SOON) check lifeGen inline and always free the lock | scan below |
+| one object in two saved places (r10-shared-ref split S.empWhy.cust = S.nightWhy.emp.cust) | j75 nightWhy.emp = Object.assign({},S.empWhy) shallow copy | whole snapshot (JSON copy) | shared-ref 1 split family → 0 (30 loads) |
+Timer scan (/home/user/wt/rfx4-tools/timerscan.py over dev/build/j*.js): setTimeout 663 · callback acts on the game 47 · guarded before 6. Guarded now (14): j6:10, j25:39, j77:55/76/82, jclose:23, jfe:33, jkcco:58/60, jledger:114, jmen:239, jnf:309, jpoison:107, jthaiy:56, jty:65. Left by reason: boot-time wrapper installers (j59:393, j95:579/658, jplx:97/100, jroad:115); render/showModal only on the loaded world (jcol:34, jnf:303, jload:346, jst14:133, jstagehere:84, jsfx:140, j11:110 pixi); co-op timers live inside one co-op life (jcoopthinc/jcoopthinf/jcoopworld ×5); mini-game internals (jhd:163, jtd:185 — the menu is closed during a mini-game); jkiep:48 already identity-guarded (Q[0]===m); jnight:43 re-checks ready() on the loaded world; jne:187 warm, jerr:123 visual (jerr has kmOnReset). Callbacks passed by name (setTimeout(fn,ms)) are not classified by the scan.
+### 4. Gates on 9e7df19a / e47c61b7
+| gate | result |
+|---|---|
+| quickcheck (e47c61b7, alone on the box) | **PASS** · old save ok · render 250/249, tab 442/391, buổi 1120/1404 ms (new/live) · core gates PASS (9e7df19a also PASS: buổi 1506/1144; a run beside 3 other tests read 3717 — CPU contention) |
+| coop-e2e Fold-host / COOP_SWAP=1 | 142/142 · 142/142 |
+| r10-shared-ref cnv_mat 30 loads | 1 split (S.empWhy.cust) → fixed → **0** |
+| r10-weak-dead cnv_mat 150 | 0 dead stamps (kav 873 · kfs 63 · kfp 114 · emo 965) |
+| r10-face-band cnv_mat s5 / cnv_chu s3 300 | 0 / 0 |
+| r10-play-rt TRUE reload cnv_mat s5 / cnv_chu s3 60 | 2 families (kyngo ×2, ag.pend.gone ×1) / 1 (kyngo) |
+| r10-play-rt file (in-place) cnv_mat s5 60 | 1 family (kyngo ×2) |
+| save-slots · night-softlock | ALL OK · 8/8 PASS |
+| newlife-leak | every leak check ok (ALLOW __kitLastEvArt holds); FAIL 1 = its own 2-year driver («old life played ~2 years», wk 3: 3000× endTurn() with Q cleared advances 3 weeks) = harness, same on main (#2) — not analysed further |
+### 5. Open (for F / reviewer)
+- `kyngo`: a save made with a kỳ ngộ card open drops the card on load BY DESIGN (jky `PEND.kyngo=()=>null`, «the encounter stays used») — the only remaining true-reload family; owner/F to judge (law 6c-like: the encounter is lost).
+- S.ag.pend.N.gone 1× (derived flag set in agWatch after a sync; #3 saw it too) and S.ag.rq 1× — timing of the deferred queue, not a lost thing.
+- F #3 extra (old-save home rebuild puts eunuch copy «Lão Minh Tử» sid 1, servById null, in the room): NOT done — needs the reviewer's old save to reproduce (jhouse homePeople builds from S.staff only; the copy is probably a stale serv entry serialized as a full object in S.visit.people). Next fixer: get the save from the r1 reviewer.
+- R1 (Fold night stall): not touched (not reproduced by #2/#3; night-softlock 8/8).
+- After r1 e50af91a lands: merge the new LIVE into -2, rebuild, re-run quickcheck + coop-e2e + r10-play-rt RELOAD=1.
+Laws: 1–3, 5 untouched · 4 no typed number · 6b/6c an open card and the stage keep their people across a reload · 7/9/10/12 no UI / wording / kit change · 11 three families + timer scan + tables above · 13 check line · 14–18 no rule changed.
+
+READY robot-fix-cnv-2 e47c61b782b0cf205fbe9b7d366ac0d2e48b5d83 (merged LIVE 502c48c9; not yet r1 e50af91a).
