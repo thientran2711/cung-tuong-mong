@@ -1,5 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
+last wake: 24/11 09:25Z — FOREMAN D = session_01D3E3Na3nufuz83iygjVBum; START_CTX ≈ 6 %; depth 2 (took over from depth 1 01D3E3NbMrdKdp; MAIN = 120)
 last wake: 24/11 08:40Z — FOREMAN D (depth 1) session_01D3E3NbMrdKdp4hAx8gfMUq (hourly; ctx ≈ 22 %; MAIN = 120)
 last wake: 24/11 07:40Z — FOREMAN D (depth 1) session_01D3E3NbMrdKdp4hAx8gfMUq (hourly; ctx ≈ 18 %)
 last wake: 24/11 06:38Z — FOREMAN D (depth 1) session_01D3E3NbMrdKdp4hAx8gfMUq (hourly; no new lines; 6 seats running/on call; ctx ≈ 13 %)
