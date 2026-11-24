@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"502c48c9+","t":"2026-11-24T17:38Z","c":"SELF-MERGE LAND kit-mapgo: merge LIVE 284e0d08 (index.html/sw.js rebuilt)","b":"41aaca837531","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
+window.CTM_BI={"s":"f3f67928+","t":"2026-11-24T18:52Z","c":"offline-fast: «Tải hết» plan without 32k cache lookups (known list in ctm-offmeta), gentle background count, «Bắt đầu tải» starts at once; …","b":"2fea2b08b4c5","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -53100,12 +53100,14 @@ const META="ctm-offmeta",MKEY="have.json";
 let SEEN=null,seenLoad=null,seenDirty=0,seenSaveT=0;const SEEN0=[],NEED=new Set();let cntOn=false;
 function oaSeen(f){const k=deadKey(f);if(!SEEN){SEEN0.push(k);return}if(!SEEN.has(k)){SEEN.add(k);seenDirty++;seenSoon()}}
 function seenGet(){if(SEEN)return Promise.resolve(SEEN);if(seenLoad)return seenLoad;
- seenLoad=(async()=>{let a={};try{const r=await (await caches.open(META)).match(MKEY);if(r)a=await r.json()}catch(e){}const S1=new Set(Array.isArray(a&&a.have)?a.have:[]);
-  if(a&&Array.isArray(a.need))a.need.forEach(k=>{if(!S1.has(k))NEED.add(k)});/* known missing last time: not counted again (the download loop still looks each one up just before fetching it) */
+ seenLoad=(async()=>{let a={};try{const r=await (await caches.open(META)).match(MKEY);if(r)a=await r.json()}catch(e){}let hv=Array.isArray(a&&a.have)?a.have:[],nd=Array.isArray(a&&a.need)?a.need:[];
+  /* a new build: keep only keys still in the manifest (once per build; the save itself never filters) */
+  if(MAN&&a.v!==MAN.v&&(hv.length||nd.length)){const k=new Set(MAN.files.map(deadKey));hv=hv.filter(x=>k.has(x));nd=nd.filter(x=>k.has(x))}
+  const S1=new Set(hv);nd.forEach(k=>{if(!S1.has(k))NEED.add(k)});/* known missing last time: not counted again (the download loop still looks each one up just before fetching it) */
   SEEN0.splice(0).forEach(k=>S1.add(k));if(HAVE&&MAN)for(const f of MAN.files)if((f[3]==="core"||f[3]==="fig")&&HAVE.has(keyOf(f)))S1.add(deadKey(f));SEEN=S1;seenDirty++;return SEEN})();return seenLoad}
-async function seenSave(){if(!SEEN||!seenDirty||!MAN)return;seenDirty=0;try{const k=new Set(MAN.files.map(deadKey));const a=[],b=[];SEEN.forEach(x=>{if(k.has(x))a.push(x)});NEED.forEach(x=>{if(k.has(x)&&!SEEN.has(x))b.push(x)});
- await (await caches.open(META)).put(MKEY,new Response(JSON.stringify({have:a,need:b}),{headers:{"Content-Type":"application/json"}}))}catch(e){}}
-function seenSoon(){if(!seenSaveT)seenSaveT=setTimeout(()=>{seenSaveT=0;seenSave()},20000)}
+async function seenSave(){if(!SEEN||!seenDirty||!MAN)return;seenDirty=0;try{const b=[];NEED.forEach(x=>{if(!SEEN.has(x))b.push(x)});
+ await (await caches.open(META)).put(MKEY,new Response(JSON.stringify({v:MAN.v,have:[...SEEN],need:b}),{headers:{"Content-Type":"application/json"}}))}catch(e){}}
+function seenSoon(){if(!seenSaveT)seenSaveT=setTimeout(()=>{(window.requestIdleCallback||(f=>setTimeout(f,0)))(()=>{seenSaveT=0;if(LIFE.on){seenSoon();return}seenSave()},{timeout:10000})},20000)}
 addEventListener("visibilitychange",()=>{if(document.hidden)seenSave()});addEventListener("pagehide",()=>{seenSave()});
 /* one file found in the cache / found missing (by the counter or by the download loop): the numbers move once, never twice */
 function oaHit(f){const k=deadKey(f);if(SEEN.has(k))return;const u=!NEED.has(k);NEED.delete(k);oaSeen(f);ALL.have+=f[2];ALL.files++;ALL.left--;if(u)oaU()}
@@ -97931,7 +97933,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="41aaca837531";window.CTM_BUILD=BUILD;
+const BUILD="2fea2b08b4c5";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

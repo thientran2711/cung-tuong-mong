@@ -398,12 +398,14 @@ const META="ctm-offmeta",MKEY="have.json";
 let SEEN=null,seenLoad=null,seenDirty=0,seenSaveT=0;const SEEN0=[],NEED=new Set();let cntOn=false;
 function oaSeen(f){const k=deadKey(f);if(!SEEN){SEEN0.push(k);return}if(!SEEN.has(k)){SEEN.add(k);seenDirty++;seenSoon()}}
 function seenGet(){if(SEEN)return Promise.resolve(SEEN);if(seenLoad)return seenLoad;
- seenLoad=(async()=>{let a={};try{const r=await (await caches.open(META)).match(MKEY);if(r)a=await r.json()}catch(e){}const S1=new Set(Array.isArray(a&&a.have)?a.have:[]);
-  if(a&&Array.isArray(a.need))a.need.forEach(k=>{if(!S1.has(k))NEED.add(k)});/* known missing last time: not counted again (the download loop still looks each one up just before fetching it) */
+ seenLoad=(async()=>{let a={};try{const r=await (await caches.open(META)).match(MKEY);if(r)a=await r.json()}catch(e){}let hv=Array.isArray(a&&a.have)?a.have:[],nd=Array.isArray(a&&a.need)?a.need:[];
+  /* a new build: keep only keys still in the manifest (once per build; the save itself never filters) */
+  if(MAN&&a.v!==MAN.v&&(hv.length||nd.length)){const k=new Set(MAN.files.map(deadKey));hv=hv.filter(x=>k.has(x));nd=nd.filter(x=>k.has(x))}
+  const S1=new Set(hv);nd.forEach(k=>{if(!S1.has(k))NEED.add(k)});/* known missing last time: not counted again (the download loop still looks each one up just before fetching it) */
   SEEN0.splice(0).forEach(k=>S1.add(k));if(HAVE&&MAN)for(const f of MAN.files)if((f[3]==="core"||f[3]==="fig")&&HAVE.has(keyOf(f)))S1.add(deadKey(f));SEEN=S1;seenDirty++;return SEEN})();return seenLoad}
-async function seenSave(){if(!SEEN||!seenDirty||!MAN)return;seenDirty=0;try{const k=new Set(MAN.files.map(deadKey));const a=[],b=[];SEEN.forEach(x=>{if(k.has(x))a.push(x)});NEED.forEach(x=>{if(k.has(x)&&!SEEN.has(x))b.push(x)});
- await (await caches.open(META)).put(MKEY,new Response(JSON.stringify({have:a,need:b}),{headers:{"Content-Type":"application/json"}}))}catch(e){}}
-function seenSoon(){if(!seenSaveT)seenSaveT=setTimeout(()=>{seenSaveT=0;seenSave()},20000)}
+async function seenSave(){if(!SEEN||!seenDirty||!MAN)return;seenDirty=0;try{const b=[];NEED.forEach(x=>{if(!SEEN.has(x))b.push(x)});
+ await (await caches.open(META)).put(MKEY,new Response(JSON.stringify({v:MAN.v,have:[...SEEN],need:b}),{headers:{"Content-Type":"application/json"}}))}catch(e){}}
+function seenSoon(){if(!seenSaveT)seenSaveT=setTimeout(()=>{(window.requestIdleCallback||(f=>setTimeout(f,0)))(()=>{seenSaveT=0;if(LIFE.on){seenSoon();return}seenSave()},{timeout:10000})},20000)}
 addEventListener("visibilitychange",()=>{if(document.hidden)seenSave()});addEventListener("pagehide",()=>{seenSave()});
 /* one file found in the cache / found missing (by the counter or by the download loop): the numbers move once, never twice */
 function oaHit(f){const k=deadKey(f);if(SEEN.has(k))return;const u=!NEED.has(k);NEED.delete(k);oaSeen(f);ALL.have+=f[2];ALL.files++;ALL.left--;if(u)oaU()}
