@@ -20,6 +20,32 @@ one JSON object per line: `{"id":"j7-001","type":"j7","tag":"K|D","src":"…","t
 - every stance: Σgain steps == Σloss steps, ≥1 each (laws 2/3); 4 stances; `object.owner` = a role id or `me`; `trace` = where it is afterwards (law 6c). `needs` (all optional): `rank_min`, `rank_max`, `nights_min`, `month` [list], `not_confined`:true, `kids_min`.
 P2-SEEDS file path: keep writing `dev/handover/content/thin/j7seeds.md` (one JSON object per line, yard.md Format B fields as in b-thin.md). The ENGINE converts it into the game file on review/thin-p2 and pushes the validator path here when ready.
 
+## API P3
+PRIORITY #1 CHECK ('j72|việc nhờ|favour'): OD 23/11 ~22:50Z (ORDER THIN) | main dev/build/j72.js (110 T7 templates, once per life + last 5 lives) | review/thin-p0-r1 a76ba1e4 (jnorep) · review/thin-p2 3f4e1fcd (j7c pattern, not merged: P3 has its own engine j72c.js) | claims ENGINE #2 — reuse: the whole j72 quest runtime (offer / steps / tab / nợ ân / ticks); a composed seed becomes one more T72 template at load.
+ENGINE #2 (opus, session_01N1tNP5YG1W5gC9UKfSfGwY) on **review/thin-p3** (from thin-p0-r1). Engine = `dev/build/j72c.js` + data `dev/build/j72sd.js` (built by `python3 dev/build/j72sd_build.py <file>`); validator `python3 dev/test/j72seeds_validate.py <file> [--min 60]` (checks ≥60 per kind craft/social/court/fam with --min).
+**WRITER FILE: `dev/handover/content/thin/j72seeds.md`** — one JSON object per line (lines not starting with `{` are ignored). Target ≥60 seeds for EACH of craft, social, court, fam (≥240). Keep the 110 old templates untouched (no seed may copy one of their titles/asks).
+```
+{"id":"j72c-craft-001","type":"j72","kind":"craft|social|court|fam","tag":"K|D","src":"…","tone":"tense|sad|petty|funny|tender|warm","tier":"s|m|l",
+ "req":{"kind":"<who>","nết":[any-of],"lòng":[any-of],"need":"<need>"},          // the requester A (real roster person)
+ "other":{…same fields…},                                                           // optional second real person B (never the same as A)
+ "title":"…","ask":"“…”",                                                           // title ≤ 8 words; ask = A's own words, in “ ”
+ "object":{"name":"…","owner":"A|B|me|kho","clue":"…","trace_ok":"…","trace_no":"…","it":"<IT key, optional>"} | null,
+ "steps":[ 1–3 steps ],
+ "ok":{"text":"…","gain":{…}}, "no":{"text":"…","loss":{…}},
+ "twist":{"text":"…","gain":{…},"loss":{…}} | null,
+ "needs":{"rank_min":n,"rank_max":n,"month":[…],"not_confined":true,"kids_min":n}}   // all optional
+```
+- **who** (req.kind / other.kind): `rv` living consort · `hh` Hoàng hậu · `fallen` consort in lãnh cung · `sv` her own servant · `rsv` another consort's servant · `man:<rw>` (rw = sứ thần|họa sư|nhạc sư|thái y) · `ak` adult child · `off` a court house head · `fam` her own family (letter) · fixed people `emp th doc eun maid`. nết/lòng (any-of, lists AND-ed, names from BAL.net.F/M) only for `rv fallen sv rsv man`; fixed people take none. Kind `fam` seeds: req.kind `fam` (or `maid` carrying the letter is automatic).
+- **need** (real state that MOTIVATES the ask; optional): `ill` (A is really ill) · `preg` (A pregnant) · `friend` (A likes her, thiện cảm ≥ BAL) · `feud` (A and B really at odds) · `thIll` (Thái hậu ill) · `empIll` · `bienLo` (border weak) · `khoLo` (granary low) · `kids` (A has a living child) · `poor` (A short of bạc) · `fest` (a festival this month). The engine checks it on the live world (grounding gate); a seed whose need is false is never offered.
+- **steps** (1–3), each one of:
+  - `{"t":"go","n":"…","at":"A|B|home|vuon|thu|dtd|tn|kn|tyv|ksp|lc","sk":"<skill>","odds":"de|vua|kho","fail":"retry|end|bad"}` — a do-step at a real place (A/B = where that person is). skill = `tai tamco sac danh duc mat sung an thi cam ky hoa vu y rel relb` or `""`. Odds/khắc from BAL (never typed).
+  - `{"t":"wait","n":"…"}` — wait tuần (length from BAL by tier).
+  - `{"t":"pick","n":"…","opts":[ 2–3 × {"n":"…","at":…,"sk":…,"odds":…|null,"gain":{…},"loss":{…}} ]}` — a choice: **every option Σgain steps == Σloss steps ≥1, and the same total for all options (laws 2/3)**; loss is paid when she does it, gain lands on success.
+- **gain/loss keys** (STEP counts; each step = `BAL.j72c.fx[tier][key]`, never a typed number): `sung danh bac suc mat th hh duc an` (her stats) · `rel` (A's thiện cảm) · `relb` (B's thiện cảm). ok.gain ≥1 step (law 3: the favour is worth doing); no.loss ≥1 step; twist may be gain-only or loss-only (it is a fact, not a choice).
+- **object** (law 6c, real objects): owner `A|B|me|kho` (kho = Nội vụ phủ store); `trace_ok`/`trace_no` = where it ends after success/failure (always a real place/person, never «mất»). `it` (optional) = a real IT key (dev/build/j8.js `IT`) — when trace_ok gives it to her, the engine puts that real item in her chest. `null` only for a pure errand (message, word, watch).
+- **text placeholders**: `{A}` `{B}` requester / second person's name · `{M}` her cung nữ · `{O}` object name · `{S}` season · `{goi}` `{Goi}` how A addresses her · `{xung}` `{Xung}` how A calls herself. No digits, no %, no odds words (VANPHONG law 7; the engine prints the ladder). Basis in `src` (K documented / D drama; law 8).
+- Draw: P0 family **`j72:<kind>`** (seed = id), once per life, avoided if seen in the last 5 lives (fresh-first), like the 110.
+
 ## ENGINE
 - 23:5xZ 23/11 START_CTX ~5 % (used_tokens reads 0 → own estimate; budget to 30 %, ceiling 60 %); depth 3. Worker session_01N1tNP4Dsh2FQd5z5vKP2qy.
 - P0 pushed review/thin-p0 84dd0a59: jnorep.js + j68 switched (e68H/e68Mark/e68Past/evHistSeen/evHistMark → jnorep; identical numbers: 6 lives, ×0.5, previous 5 lives counted). Test `node dev/test/norep-unit.js` ALL PASS (19 checks incl. old-vs-new j68 counts on a migrated ctm-e68h store, old-save life adoption, rotation, cap, weight). quickcheck: open OK, old save OK, perf same as live; core gates rerun pending (first run failed only because my sparse worktree lacked dev/art/mkfit).
