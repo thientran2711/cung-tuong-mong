@@ -15,7 +15,7 @@ STAT={"sung","danh","bac","suc","mat","th","hh","duc","maid"}
 NEEDS={"rank_min","rank_max","nights_min","month","not_confined","kids_min"}
 TONES={"tense","cruel","sad","petty","funny","tender"}
 BAD=re.compile(r"%|\d|\b(OK|game|turn|round|slot|lượt|ván)\b|Chắc chắn|Nắm chắc|Rất chắc|Khó lường",re.I)
-args=[a for a in sys.argv[1:] if not a.startswith('--')];MIN=int(sys.argv[sys.argv.index('--min')+1]) if '--min' in sys.argv else 0
+A=sys.argv[1:];args=[a for n,a in enumerate(A) if not a.startswith('--') and not (n and A[n-1]=='--min')];MIN=int(sys.argv[sys.argv.index('--min')+1]) if '--min' in sys.argv else 0
 bad=0
 def err(m):
     global bad;bad+=1;print("ERR",m)

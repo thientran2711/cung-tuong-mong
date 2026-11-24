@@ -12,19 +12,20 @@ function j7cSeeds(){const L=(typeof J7SEEDS!=="undefined"&&Array.isArray(J7SEEDS
 function j7c(){if(!S)return null;const j=S.j7c=S.j7c||{};j.seen=j.seen||{};j.ob=j.ob||[];j.n=j.n||0;return j}
 const J7C_FIX={maid:1,emp:1,th:1,doc:1,eun:1};
 /* nết filter: any-of per list, lists AND-ed (yard.md rule); fixed people take no filter */
-function j7cFit(o,r){if(!r)return true;let T=[];try{T=tr6(o)||[]}catch(e){T=[]}
- const any=L=>!L||!L.length||L.some(n=>T.includes(n));return any(r["nết"])&&any(r["lòng"])}
-function j7cPool(kind,r){try{
- if(kind==="rv")return liveRivals(false).filter(v=>v&&v.alive!==false&&!v.confined&&j7cFit(v,r)).map(v=>v.id);
- if(kind==="sv")return (S.staff||[]).filter(s=>s&&s.sid!=null&&j7cFit(s,r)).map(s=>s.sid);
- if(kind==="man")return (S.men||[]).filter(m=>m&&m.alive!==false&&j7cFit(m,r)).map(m=>m.id);
- if(kind==="kid")return (S.kids||[]).filter(k=>k&&k.alive&&j7cFit(k,r)).map(k=>k.name);
+/* loose = the seed's nết and lòng lists read as ONE any-of list (used only when no one in the roster fits both: the actor still has a wanted nết) */
+function j7cFit(o,r,loose){if(!r)return true;let T=[];try{T=tr6(o)||[]}catch(e){T=[]}
+ const any=L=>!L||!L.length||L.some(n=>T.includes(n));if(loose)return any([].concat(r["nết"]||[],r["lòng"]||[]));return any(r["nết"])&&any(r["lòng"])}
+function j7cPool(kind,r,loose){try{
+ if(kind==="rv")return liveRivals(false).filter(v=>v&&v.alive!==false&&!v.confined&&j7cFit(v,r,loose)).map(v=>v.id);
+ if(kind==="sv")return (S.staff||[]).filter(s=>s&&s.sid!=null&&j7cFit(s,r,loose)).map(s=>s.sid);
+ if(kind==="man")return (S.men||[]).filter(m=>m&&m.alive!==false&&j7cFit(m,r,loose)).map(m=>m.id);
+ if(kind==="kid")return (S.kids||[]).filter(k=>k&&k.alive&&j7cFit(k,r,loose)).map(k=>k.name);
 }catch(e){}return[]}
 /* cast every role with a distinct real person; null = the roster cannot play this seed now */
 function j7cCast(sd){const C={},used=new Set();
  for(const role in (sd.roles||{})){const r=sd.roles[role]||{},kind=r.kind||"rv";
   if(J7C_FIX[kind]){if(!A6(kind))return null;C[role]={k:kind,id:null};continue}
-  const L=j7cPool(kind,r).filter(id=>!used.has(kind+":"+id));if(!L.length)return null;const id=pick(L);used.add(kind+":"+id);C[role]={k:kind,id}}
+  let L=j7cPool(kind,r).filter(id=>!used.has(kind+":"+id));if(!L.length&&BAL.j7c.loose)L=j7cPool(kind,r,true).filter(id=>!used.has(kind+":"+id));if(!L.length)return null;const id=pick(L);used.add(kind+":"+id);C[role]={k:kind,id}}
  return C}
 function j7cActors(sd,C){const X={};for(const role in C){const c=C[role];const a=J7C_FIX[c.k]?A6(c.k):A6(c.k,c.id);if(!a)return null;if(c.k==="rv"&&(a.o.alive===false))return null;X[role]=a}return X}
 function j7cNeeds(sd){const n=sd.needs||{};try{
