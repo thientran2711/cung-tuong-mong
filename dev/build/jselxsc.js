@@ -37,14 +37,16 @@ function selxView(){const V=BAL.selx.sc.view;return selxIp()?V.ipad:V.fold}
 function selxBoxB(g){return{x:Math.round(g.w*.04),y:Math.max(8,g.H-176),w:Math.round(g.w*.92)}}
 function selxBoxT(g){return{x:Math.round(g.w*.04),y:8,w:Math.round(g.w*.92)}}
 function selxFigP(p){if(p==="emp")return{kind:"emp"};if(p==="th")return{kind:"th"};if(p==="tq")return{kind:"maid",ref:{role:"eunuch",id:"tq",name:"Tổng quản"}};
- if(p==="ma"){let m=null;try{m=elderBy("gt")}catch(e){}const ok=m&&typeof figRoles==="function"&&figRoles(m).length;return{kind:"maid",ref:ok?m:{role:"maid",old:1,age:50,id:"selx-gt",name:"Giáo tập ma ma"}}}return p}
+ if(p==="ma"){let m=null;try{m=elderBy("gt")}catch(e){}const ok=m&&typeof figRoles==="function"&&figRoles(m).length;return{kind:"maid",ref:ok?m:{role:"maid",old:1,age:BAL.ageBand[1]/* an elder of the 39–50 band (law 4, RV-SELX) */,id:"selx-gt",name:"Giáo tập ma ma"}}}return p}
 /* LAW 11 (whole group): a tú nữ of the selection is not in `rivals` yet, so the figure core (j39 figRoles) gave her no figure anywhere (scene, stage, podium);
    she takes the consort figure set like every other woman of her age (tier: none until the edict) */
 (function(){if(typeof figRoles!=="function")return;const r0=figRoles;figRoles=function(who){const r=r0.apply(this,arguments);return !r.length&&who&&who.tuNu?["consort"]:r};window.figRoles=figRoles})();
 /* LAW 11 (whole group): during the 3 days she is a TÚ NỮ, not rank 0 — the HUD rank chip (#me-r, as the maid / kc modes already do) and her rank word in the one face core rkOfFace (j59 name tags,
    stage portrait pMe, podium) said «Quý nhân» (RANKS[0]) before any edict */
 (function(){const T=()=>{try{return selxDaysOn()}catch(e){return false}};
- if(typeof rkOfFace==="function"){const f0=rkOfFace;rkOfFace=function(kind,o){const g=f0.apply(this,arguments);return o===S&&kind==="consort"&&T()?[g[0],"Tú nữ"]:g};window.rkOfFace=rkOfFace}
+ if(typeof rkOfFace==="function"){const f0=rkOfFace;rkOfFace=function(kind,o){const g=f0.apply(this,arguments);return (o===S||o&&o.tuNu)&&kind==="consort"&&T()?[g[0],"Tú nữ"]:g};window.rkOfFace=rkOfFace}
+ /* RV-SELX (same group): the other tú nữ too (day-3 «Thường tại Bạch Nghi Tu» before the edict; OD 23/11 ~22:53Z the rank is known only at the sắc phong), and rkName (j8: k61 name masks, Sổ ghi, news) as jkc / jkc2 do */
+ if(typeof rkName==="function"){const n0=rkName;rkName=function(p){return (p===S||p&&p.tuNu)&&T()?"Tú nữ":n0.apply(this,arguments)};window.rkName=rkName}
  /* RV-SELX (same group): kitName(S,{named:true}) prints RANKS[S.rank] itself (podium «Quý nhân» over her name during the contest) → «Tú nữ» too */
  if(typeof kitName==="function"){const k0=kitName;kitName=function(p,o){const h=k0.apply(this,arguments);try{if(p===S&&o&&o.named&&T()&&!S.out&&RANKS[S.rank])return h.replace(`>${RANKS[S.rank].n}</span>`,">Tú nữ</span>")}catch(e){}return h};window.kitName=kitName}
  if(typeof renderHUD==="function"){const h0=renderHUD;renderHUD=function(){const r=h0.apply(this,arguments);try{if(T()){const m=document.getElementById("me-r");if(m&&m.textContent!=="Tú nữ")m.textContent="Tú nữ"}}catch(e){}return r};window.renderHUD=renderHUD}})();

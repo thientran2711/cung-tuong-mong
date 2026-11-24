@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"532239e2+","t":"2026-11-24T08:47Z","c":"RV-SELX: BAL.selx.npcAge starts at BAL.ageMin (law 4/11: main's ageband group fix moved every typed 18 to BAL.ageMin); rebuild index.html/s…","b":"224648948ae5","h":[{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"}]};
+window.CTM_BI={"s":"f66124e4+","t":"2026-11-24T08:52Z","c":"RV-SELX review fixes (law 2/3, 7, 11): yard «fav» loss now real (royals' thiện cảm, hint «bề trên kém để mắt»; was an unread Z.fav0); kp-00…","b":"57870332af67","h":[{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -37263,7 +37263,9 @@ Object.assign(BAL,{selx:{intake:{min:3,max:5},yard:{n:12,perRound:4,kept:4},room
  carry:{E:1,T:1,H:1},tuan:3,
  /* the scene layer of the 3 days (jselxsc on KIT §93 kitScene + §95 kitDialogue): fh = figure height / layer height (the stage size), view = figures per view
     (Fold: the waiting-yard exception, OD ~05:00Z: 4; iPad 6), side = scale of a called group standing aside, ms = move time of a figure (ms) */
- sc:{fh:.8,view:{fold:4,ipad:6},side:.42,ms:520}}});
+ sc:{fh:.8,view:{fold:4,ipad:6},side:.42,ms:520},
+ /* vst = her four stances when SHE is the drama victim (jselxday SELX_VST words): gain / loss in drama steps (each step × ducStep / faceStep / maStep / fx tier), law 2/3: one gain + one loss each */
+ vst:{benh:{gain:{duc:1},loss:{"grudge.bully":1}},hua:{gain:{"friend.bully":1},loss:{face:1}},hoagiai:{gain:{"friend.ma":1},loss:{time:1}},ngoai:{gain:{time:1},loss:{"grudge.bystander":1}}}}});
 Object.assign(BAL,{entry:{word:["tho","doi","doden","le","tc","xa","thq"],noise:4,cut:[37,53],stepSung:5,
  w:{dir:{sac:.15,duc:.15,tai:.1,raw:3,art:1.5,th:1/6,base:8},
   dan:{sac:.15,duc:.15,suc:.05,raw:3,art:0,kim:[3.5,1.5],le:2.5,kgt:1/8,kld:-1/3,ly:3,self:-3,base:0},
@@ -82530,8 +82532,8 @@ function selxPick(type,pool){const P=SELX_SEEDS[type]||[];const seen=new Set([..
  for(const s of C){const c=selxCast(s,pool);if(c)return{s,c}}return null}
 function selxFill(t,c,her){return String(t||"").replace(/\{(\w+)\}/g,(m,r)=>{if(r==="bystander")return c.bystanders&&c.bystanders[0]?selxNm(c.bystanders[0]):"một tú nữ";const v=c[r];return v===S||her&&r==="victim"?"ngươi":v?selxNm(v):"một tú nữ"}).replace(/(^|[.!?…]\s+|«\s*)(\p{Ll})/gu,(m,a,b)=>a+b.toUpperCase())/* RV-SELX: a filled name at a sentence start is capitalised */}
 /* her own stances when SHE is the victim (law 1: the girls can target her); equal steps, like every seed stance */
-const SELX_VST={benh:{text:"Ta đáp thẳng, không để ai đổ oan.",gain:{duc:1},loss:{"grudge.bully":1}},hua:{text:"Ta nhịn, cúi đầu cho qua chuyện.",gain:{"friend.bully":1},loss:{face:1}},
- hoagiai:{text:"Ta xin ma ma phân xử.",gain:{"friend.ma":1},loss:{time:1}},ngoai:{text:"Ta cười xòa, coi như chuyện đùa.",gain:{time:1},loss:{"grudge.bystander":1}}};
+/* her own stances when SHE is the victim: words here, the steps in BAL.selx.vst (law 4, RV-SELX: one-core-guard) */
+const SELX_VST=(()=>{const W={benh:"Ta đáp thẳng, không để ai đổ oan.",hua:"Ta nhịn, cúi đầu cho qua chuyện.",hoagiai:"Ta xin ma ma phân xử.",ngoai:"Ta cười xòa, coi như chuyện đùa."};const o={};for(const k in W)o[k]=Object.assign({text:W[k]},BAL.selx.vst[k]);return o})();
 const SELX_VOUT={benh:"{bully} sững lại; người xung quanh nhìn ngươi khác đi.",hua:"Chuyện qua, nhưng lời bàn tán còn theo ngươi.",hoagiai:"Ma ma nghe cả hai bên, rồi dặn mọi người giữ miệng.",ngoai:"Không ai cười theo; {bully} cũng mất hứng."};
 function selxApply(side,c,f,sign){const D=BAL.selx;const Z=S.selx2;const who=k=>k==="bystander"?(c.bystanders||[]):c[k]?[c[k]]:[];let t=0;
  for(const [key,n] of Object.entries(side||{})){const [a,r]=key.split(".");if(a==="friend"||a==="grudge"){if(r==="ma"){Z.ma=(Z.ma||0)+(a==="friend"?1:-1)*n*D.maStep;continue}
@@ -95835,14 +95837,16 @@ function selxView(){const V=BAL.selx.sc.view;return selxIp()?V.ipad:V.fold}
 function selxBoxB(g){return{x:Math.round(g.w*.04),y:Math.max(8,g.H-176),w:Math.round(g.w*.92)}}
 function selxBoxT(g){return{x:Math.round(g.w*.04),y:8,w:Math.round(g.w*.92)}}
 function selxFigP(p){if(p==="emp")return{kind:"emp"};if(p==="th")return{kind:"th"};if(p==="tq")return{kind:"maid",ref:{role:"eunuch",id:"tq",name:"Tổng quản"}};
- if(p==="ma"){let m=null;try{m=elderBy("gt")}catch(e){}const ok=m&&typeof figRoles==="function"&&figRoles(m).length;return{kind:"maid",ref:ok?m:{role:"maid",old:1,age:50,id:"selx-gt",name:"Giáo tập ma ma"}}}return p}
+ if(p==="ma"){let m=null;try{m=elderBy("gt")}catch(e){}const ok=m&&typeof figRoles==="function"&&figRoles(m).length;return{kind:"maid",ref:ok?m:{role:"maid",old:1,age:BAL.ageBand[1]/* an elder of the 39–50 band (law 4, RV-SELX) */,id:"selx-gt",name:"Giáo tập ma ma"}}}return p}
 /* LAW 11 (whole group): a tú nữ of the selection is not in `rivals` yet, so the figure core (j39 figRoles) gave her no figure anywhere (scene, stage, podium);
    she takes the consort figure set like every other woman of her age (tier: none until the edict) */
 (function(){if(typeof figRoles!=="function")return;const r0=figRoles;figRoles=function(who){const r=r0.apply(this,arguments);return !r.length&&who&&who.tuNu?["consort"]:r};window.figRoles=figRoles})();
 /* LAW 11 (whole group): during the 3 days she is a TÚ NỮ, not rank 0 — the HUD rank chip (#me-r, as the maid / kc modes already do) and her rank word in the one face core rkOfFace (j59 name tags,
    stage portrait pMe, podium) said «Quý nhân» (RANKS[0]) before any edict */
 (function(){const T=()=>{try{return selxDaysOn()}catch(e){return false}};
- if(typeof rkOfFace==="function"){const f0=rkOfFace;rkOfFace=function(kind,o){const g=f0.apply(this,arguments);return o===S&&kind==="consort"&&T()?[g[0],"Tú nữ"]:g};window.rkOfFace=rkOfFace}
+ if(typeof rkOfFace==="function"){const f0=rkOfFace;rkOfFace=function(kind,o){const g=f0.apply(this,arguments);return (o===S||o&&o.tuNu)&&kind==="consort"&&T()?[g[0],"Tú nữ"]:g};window.rkOfFace=rkOfFace}
+ /* RV-SELX (same group): the other tú nữ too (day-3 «Thường tại Bạch Nghi Tu» before the edict; OD 23/11 ~22:53Z the rank is known only at the sắc phong), and rkName (j8: k61 name masks, Sổ ghi, news) as jkc / jkc2 do */
+ if(typeof rkName==="function"){const n0=rkName;rkName=function(p){return (p===S||p&&p.tuNu)&&T()?"Tú nữ":n0.apply(this,arguments)};window.rkName=rkName}
  /* RV-SELX (same group): kitName(S,{named:true}) prints RANKS[S.rank] itself (podium «Quý nhân» over her name during the contest) → «Tú nữ» too */
  if(typeof kitName==="function"){const k0=kitName;kitName=function(p,o){const h=k0.apply(this,arguments);try{if(p===S&&o&&o.named&&T()&&!S.out&&RANKS[S.rank])return h.replace(`>${RANKS[S.rank].n}</span>`,">Tú nữ</span>")}catch(e){}return h};window.kitName=kitName}
  if(typeof renderHUD==="function"){const h0=renderHUD;renderHUD=function(){const r=h0.apply(this,arguments);try{if(T()){const m=document.getElementById("me-r");if(m&&m.textContent!=="Tú nữ")m.textContent="Tú nữ"}}catch(e){}return r};window.renderHUD=renderHUD}})();
@@ -98468,7 +98472,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="224648948ae5";window.CTM_BUILD=BUILD;
+const BUILD="57870332af67";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

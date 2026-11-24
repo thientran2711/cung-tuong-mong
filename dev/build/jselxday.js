@@ -119,8 +119,8 @@ function selxPick(type,pool){const P=SELX_SEEDS[type]||[];const seen=new Set([..
  for(const s of C){const c=selxCast(s,pool);if(c)return{s,c}}return null}
 function selxFill(t,c,her){return String(t||"").replace(/\{(\w+)\}/g,(m,r)=>{if(r==="bystander")return c.bystanders&&c.bystanders[0]?selxNm(c.bystanders[0]):"một tú nữ";const v=c[r];return v===S||her&&r==="victim"?"ngươi":v?selxNm(v):"một tú nữ"}).replace(/(^|[.!?…]\s+|«\s*)(\p{Ll})/gu,(m,a,b)=>a+b.toUpperCase())/* RV-SELX: a filled name at a sentence start is capitalised */}
 /* her own stances when SHE is the victim (law 1: the girls can target her); equal steps, like every seed stance */
-const SELX_VST={benh:{text:"Ta đáp thẳng, không để ai đổ oan.",gain:{duc:1},loss:{"grudge.bully":1}},hua:{text:"Ta nhịn, cúi đầu cho qua chuyện.",gain:{"friend.bully":1},loss:{face:1}},
- hoagiai:{text:"Ta xin ma ma phân xử.",gain:{"friend.ma":1},loss:{time:1}},ngoai:{text:"Ta cười xòa, coi như chuyện đùa.",gain:{time:1},loss:{"grudge.bystander":1}}};
+/* her own stances when SHE is the victim: words here, the steps in BAL.selx.vst (law 4, RV-SELX: one-core-guard) */
+const SELX_VST=(()=>{const W={benh:"Ta đáp thẳng, không để ai đổ oan.",hua:"Ta nhịn, cúi đầu cho qua chuyện.",hoagiai:"Ta xin ma ma phân xử.",ngoai:"Ta cười xòa, coi như chuyện đùa."};const o={};for(const k in W)o[k]=Object.assign({text:W[k]},BAL.selx.vst[k]);return o})();
 const SELX_VOUT={benh:"{bully} sững lại; người xung quanh nhìn ngươi khác đi.",hua:"Chuyện qua, nhưng lời bàn tán còn theo ngươi.",hoagiai:"Ma ma nghe cả hai bên, rồi dặn mọi người giữ miệng.",ngoai:"Không ai cười theo; {bully} cũng mất hứng."};
 function selxApply(side,c,f,sign){const D=BAL.selx;const Z=S.selx2;const who=k=>k==="bystander"?(c.bystanders||[]):c[k]?[c[k]]:[];let t=0;
  for(const [key,n] of Object.entries(side||{})){const [a,r]=key.split(".");if(a==="friend"||a==="grudge"){if(r==="ma"){Z.ma=(Z.ma||0)+(a==="friend"?1:-1)*n*D.maStep;continue}

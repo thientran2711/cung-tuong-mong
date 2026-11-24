@@ -697,7 +697,9 @@ Object.assign(BAL,{selx:{intake:{min:3,max:5},yard:{n:12,perRound:4,kept:4},room
  carry:{E:1,T:1,H:1},tuan:3,
  /* the scene layer of the 3 days (jselxsc on KIT §93 kitScene + §95 kitDialogue): fh = figure height / layer height (the stage size), view = figures per view
     (Fold: the waiting-yard exception, OD ~05:00Z: 4; iPad 6), side = scale of a called group standing aside, ms = move time of a figure (ms) */
- sc:{fh:.8,view:{fold:4,ipad:6},side:.42,ms:520}}});
+ sc:{fh:.8,view:{fold:4,ipad:6},side:.42,ms:520},
+ /* vst = her four stances when SHE is the drama victim (jselxday SELX_VST words): gain / loss in drama steps (each step × ducStep / faceStep / maStep / fx tier), law 2/3: one gain + one loss each */
+ vst:{benh:{gain:{duc:1},loss:{"grudge.bully":1}},hua:{gain:{"friend.bully":1},loss:{face:1}},hoagiai:{gain:{"friend.ma":1},loss:{time:1}},ngoai:{gain:{time:1},loss:{"grudge.bystander":1}}}}});
 Object.assign(BAL,{entry:{word:["tho","doi","doden","le","tc","xa","thq"],noise:4,cut:[37,53],stepSung:5,
  w:{dir:{sac:.15,duc:.15,tai:.1,raw:3,art:1.5,th:1/6,base:8},
   dan:{sac:.15,duc:.15,suc:.05,raw:3,art:0,kim:[3.5,1.5],le:2.5,kgt:1/8,kld:-1/3,ly:3,self:-3,base:0},
