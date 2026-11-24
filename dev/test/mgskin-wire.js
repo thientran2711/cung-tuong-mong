@@ -46,7 +46,10 @@ const SEA=['xuan','ha','thu','dong'];const SHOT=['dan','duho','den','kinh','may'
   for(const [i,k] of SHOT.entries()){const sk=SEA[i%4];
    const E=await p.evaluate(async([k,sk])=>{const sleep=t=>new Promise(r=>setTimeout(r,t));try{kg82Close()}catch(e){}KG82.preSkin=sk;mgCalRun(k);await sleep(900);const d=document.getElementById('kg82');
     const btn=[...document.querySelectorAll('#kg82 button')].find(b=>/Sẵn sàng/.test(b.textContent));if(btn)btn.click();await sleep(2200);
-    const n=KG82_IMG?Object.keys(KG82_IMG).filter(x=>x.endsWith('@'+sk)&&KG82_IMG[x].complete&&KG82_IMG[x].naturalWidth>0&&/img\/mg\//.test(KG82_IMG[x].src)):[];
+    const skinned=()=>KG82_IMG?Object.keys(KG82_IMG).filter(x=>x.endsWith('@'+sk)&&KG82_IMG[x].complete&&KG82_IMG[x].naturalWidth>0&&/img\/mg\//.test(KG82_IMG[x].src)):[];
+    /* the skinned picture comes over the network (≈200 KB each, slow behind a proxy / a busy LIVE): wait for it, ≤ 15 s, instead of a fixed 2.2 s; never-loads still FAILs */
+    for(let t=0;t<60&&!skinned().length&&!document.querySelector('#kg82 .kgbox-bg');t++)await sleep(250);
+    const n=skinned();
     const bgDom=[...document.querySelectorAll('#kg82 .kgbox-bg,#kg82 [style*="img/mg/"]')].map(e=>e.getAttribute('style')||'').filter(s=>s.indexOf('img/mg/')>=0&&s.indexOf('-'+sk+'.webp')>=0);
     return{skin:KG82.skin.id,ds:d&&d.dataset.mgskin,pal:d&&d.dataset.mgpal,imgs:n,dom:bgDom.length,over:d?d.scrollWidth>d.clientWidth+2:null}},[k,sk]);
     ok(E.skin===sk&&E.ds===sk,`${tag} (e) ${k} opens with skin ${sk}`,[E.skin,E.ds,E.pal]);
