@@ -40,7 +40,7 @@ async function tapPerson(i){if(st.busy||st.sel===i)return;st.busy=1;await closeP
  /* the others: kitDim (KIT §98.3, opaque figure-only dim, BAL.kdim); she steps OUT toward her free side (forward + apart from the group) */
  kitDim.off();kitDim.on(figs,{keep:f});
  figs.forEach((x,k)=>{[x,halos[k],tags[k]].forEach(e=>e.getAnimations().forEach(a=>a.cancel()));
-  if(k!==i){const dx=(x.__cx<f.__cx?-1:1)*w*.07,kf=[{transform:'none'},{transform:`translateX(${dx}px)`}],o={duration:560,easing:E,fill:'both'};/* the others also draw APART from her (clear floor for the plaques); the dim copy travels with its figure */
+  if(k!==i){const sg=x.__cx<f.__cx?-1:1,lr0=R(st.L),tr=R(tags[k]),room=Math.max(0,sg<0?tr.left-lr0.left-4:lr0.right-tr.right-4),dx=sg*Math.min(w*.07,room),kf=[{transform:'none'},{transform:`translateX(${dx}px)`}],o={duration:560,easing:E,fill:'both'};/* the others also draw APART from her (clear floor for the plaques); the dim copy travels with its figure */
    x.animate(kf,o);if(x.__kdc)x.__kdc.animate(kf,o);tags[k].animate([{opacity:1,transform:'translateX(-50%)'},{opacity:.4,transform:`translateX(calc(-50% + ${dx}px))`}],o);halos[k].animate([{opacity:0}],{duration:10,fill:'both'})}
   else{const tx=right?w*.07:-w*.07;const to=`translateX(${tx}px) translateY(10px) scale(1.07)`;x.__t=to;x.animate([{transform:'none'},{transform:`translateX(${tx}px) translateY(14px) scale(1.09)`,offset:.6},{transform:to}],{duration:640,easing:E,fill:'both'});
    halos[k].animate([{opacity:0,transform:'scale(.85)'},{opacity:1,transform:`translateX(${tx}px) scale(1.07)`}],{duration:640,easing:E,fill:'both'});tags[k].animate([{transform:'translateX(-50%)'},{transform:`translateX(calc(-50% + ${tx}px))`}],{duration:640,easing:E,fill:'both'})}});
