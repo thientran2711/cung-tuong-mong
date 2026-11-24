@@ -106,6 +106,7 @@ def check(r,where):
             if re.search(r'(?<!\w)'+re.escape(w2)+r'(?!\w)',lo):E.append(f'{uid} line {i+1}: modern word «{w2}» (VANPHONG)')
         if re.match(r'(Được|Vâng|Ừ|Ừm)\s*[.!]',t):E.append(f'FLAT {uid} line {i+1}: stock reply «{t.split()[0]}» — say the thing itself (quality bar, lead #2)')
         if wh=='me' and L!='M' and re.search(r'(?<!\w)ngài(?!\s+ấy)(?!\w)',lo):E.append(f'FLAT {uid} line {i+1}: «ngài» to the person she speaks to — use {{goi}}')
+        if re.search(r'(^|[.!?…»:]\s+|«)\{(xung|goi)\}',t):E.append(f'{uid} line {i+1}: lowercase {{xung}}/{{goi}} opens a sentence — write {{Xung}}/{{Goi}} (lead #4 law-11 scan: 13 lines)')
         if x.get('focus') and wh=='nar':E.append(f'{uid} line {i+1}: focus on narration')
         if set(x)-{'who','text','focus'}:E.append(f'{uid} line {i+1}: unknown keys {sorted(set(x)-{"who","text","focus"})}')
     if L not in who:E.append(f'{uid}: L never speaks')
