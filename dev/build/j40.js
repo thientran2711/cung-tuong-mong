@@ -14,7 +14,7 @@ const BIG=["poison","kpoison","pond","pushp","musk","catswap","kframe","frame","
 const TELLS={musk:"lén mua xạ hương ở chợ ngoài cung",poison:"vào Thái y viện hỏi mua thạch tín, nói là để trừ chuột",kpoison:"hỏi mua thạch tín, nói là để trừ chuột",pond:"hay dẫn người ra hồ sen dò lối, hỏi giờ các hoàng tự đi chơi",
  pushp:"dò giờ người ta đi qua bậc đá trơn sau mưa",catswap:"cho một bà đỡ lạ ra vào cung mình",kframe:"mua vải vàng và kim bạc, đóng cửa may vá ban đêm",frame:"mua vải vàng và kim bạc, đóng cửa may vá ban đêm",plant:"lảng vảng quanh cung người khác lúc vắng người"};
 /* the choice: the band's menu weighted by traits; Tâm cơ tilts toward what works and away from what failed; low Tâm cơ repeats failed tricks */
-function mindMenu(v,t){const b=bandOf(danger(v,t));if(!b)return[];const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);const O=[];const tc=witOf(v);v.fails=v.fails||{};
+function mindMenu(v,t){const b=bandVT(v,t);if(!b)return[];const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);const O=[];const tc=witOf(v);v.fails=v.fails||{};
  const add=(k,w)=>{const a=ACT[k];if(!a||!allow.includes(k))return;let ok=false;try{ok=a.ok(v,t)}catch(e){}if(!ok)return;w*=persW(v,k);if(w<=0)return;
   let o=null;try{o=a.o?a.o(v,t):null}catch(e){}if(o!=null&&tc>=BAL.wit.lo)w*=Math.pow(oddsCl(o)/50,(tc-BAL.wit.lo)/BAL.wit.mid);/* wit: weigh the odds, more so the cleverer */
   const f=v.fails[k]||0;if(f)w*=tc<BAL.wit.mid?1+.6*f:Math.pow(.5,f);/* the foolish repeat, the clever learn */
@@ -40,9 +40,9 @@ npcAct=function(v,t){try{if(!v||!t||v.coop/* E44j (c) T9 family (law 1 + 6c): a 
   /* Nhu mì hesitates */
   if(T.includes("Khiêm nhường")&&roll(35)){mindLog(v,"_hesitate");return""}
   /* Đa nghi wastes effort on a false suspicion */
-  if(T.includes("Kín đáo")&&roll(22)){const L=others(v).filter(x=>x!==t&&(x===S||x.alive&&!x.out)&&danger(x,v)<30);if(L.length){const u=pick(L);mindLog(v,"_wrongBelief");mindLog(v,"_mistake");evA(v,u,0);newsAdd(v,"spy",`Người của ${v.name} dò xét ${NM(u)} vì một mối ngờ không có thật`,u===S);return""}}
+  if(T.includes("Kín đáo")&&roll(22)){const L=others(v).filter(x=>x!==t&&(x===S||x.alive&&!x.out)&&danger(x,v)<netTh(x,"act"));if(L.length){const u=pick(L);mindLog(v,"_wrongBelief");mindLog(v,"_mistake");evA(v,u,0);newsAdd(v,"spy",`Người của ${v.name} dò xét ${NM(u)} vì một mối ngờ không có thật`,u===S);return""}}
   /* Tham vọng overreaches: aims at the highest seat */
-  let err=0;if(T.includes("Tham vọng")&&roll(20)){const L=others(v).filter(x=>(x===S||x.alive&&!x.out));const hi=mindPickBy(L,x=>BAL.mind.pick.j40.base+rkOf(x)*rkOf(x)+Math.max(0,hostility(v,x))/BAL.mind.pick.j40.host,v);/* npc-mind: was ARGMAX rank */if(hi&&hi!==t&&bandOf(danger(v,hi))>=1){t=hi;err+=10;mindLog(v,"_overreach");mindLog(v,"_mistake")}}
+  let err=0;if(T.includes("Tham vọng")&&roll(20)){const L=others(v).filter(x=>(x===S||x.alive&&!x.out));const hi=mindPickBy(L,x=>BAL.mind.pick.j40.base+rkOf(x)*rkOf(x)+Math.max(0,hostility(v,x))/BAL.mind.pick.j40.host,v);/* npc-mind: was ARGMAX rank */if(hi&&hi!==t&&bandVT(v,hi)>=1){t=hi;err+=10;mindLog(v,"_overreach");mindLog(v,"_mistake")}}
   /* rash: slighted Kiêu ngạo, or a bad week for anyone */
   const rash=rashOf(v);if(rash){err+=10;mindLog(v,"_rash");mindLog(v,"_mistake")}
   /* low wit: clumsy */

@@ -55,13 +55,13 @@ function loc96(){const m=man96();if(!m)return"vuon";try{if(typeof rosterWhere===
  S.menW=S.menW||{};if(!S.menW[m.id]){S.menW[m.id]=m.haunts[0]||"vuon"}return S.menW[m.id]}
 /* motive gate: the shared gate when present (j95), else the real relation must give a reason */
 function gate96(v,act){try{if(typeof motiveGate==="function")return motiveGate(v,S,act)!==false;if(typeof motiveOk==="function")return motiveOk(v,S,act)!==false}catch(e){}
- return !!(v&&(rel(v,S)<0||(v.ghen||0)>=55||oan(v,S)>=15))}
+ return !!(v&&(rel(v,S)<0||(v.ghen||0)>=55||oan(v,S)>=netTh(v,"oan")))}
 function foe96(A){const t=T96();if(t&&t.foe!=null){const v=RV(t.foe);if(rvOk67(v)&&gate96(v,"accuse")){A.act.v=v.id;return v}}const v=rv67(A,"v");if(v&&gate96(v,"accuse"))return v;
  const used=Object.values(A.act||{});const L=liveRivals(false).filter(x=>!used.includes(x.id)&&gate96(x,"accuse"));if(!L.length)return null;const w=mindPickBy(L,x=>Math.max(BAL.mind.pick.j96.floor,BAL.mind.pick.j96.base+(x.ghen||0)/BAL.mind.pick.j96.ghen-rel(x,S))*mindW(x,"frame"),null);/* npc-mind: was ARGMIN */A.act.v=w.id;if(t)t.foe=w.id;return w}
 /* ---------- the man: a real NPC of S.men ---------- */
 function mkMan96(k){try{menInit()}catch(e){}if(!S.men)return null;const V=TM96V[k];const used=new Set(S.men.map(m=>m.name.split(" ").slice(-2).join(" ")));
  const nm=nmNew("m",V.sur?{sur:pick(V.sur)}:{});
- const age=Math.max(19,Math.min(30,(S.age||18)+2+R(6)));const tr=k==="td"||k==="thd"?pick(["trung hậu","cẩn trọng"]):pick(MTR.filter(x=>x!=="phong lưu"));
+ const age=Math.max(19,Math.min(30,(S.age||BAL.ageMin)+2+R(6)));const tr=k==="td"||k==="thd"?pick(["trung hậu","cẩn trọng"]):pick(MTR.filter(x=>x!=="phong lưu"));
  const m={id:"m96",role:V.role,rw:V.role.toLowerCase(),haunts:V.haunts.slice(),age,name:nm,trait:tr,loyal:70+R(25),af:20,tinh:62+R(14),letters:0,trysts:0,alive:true,knowsMe:[],tm96:k,known:1};
  S.men=S.men.filter(x=>x.id!=="m96");S.men.push(m);return m}
 function tmRoll96(k){if(!window.TM96_ON)return false;let f=null;try{f=localStorage.getItem("ctm-tm96")}catch(e){}if(f==="0")return false;if(!TM96V[k])return false;if(f==="1")return true;

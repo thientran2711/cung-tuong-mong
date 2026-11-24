@@ -35,12 +35,15 @@ function kitTitleOpen(t){t=kitTitleDef(t);if(!t||typeof kitModal!=="function")re
  kitModal({kind:"info",title:t.name,sub:"Danh hiệu · bậc "+KIT_TIER_NAME[Math.max(0,Math.min(7,(t.tier|0)))],sections:[{h:"",rows:[["Đạt được",t.when||"—",""],["Cách có",t.how||"—",""],["Khi đeo",t.fx||"chỉ để làm đẹp",""],["Đang",worn?"đang đeo":"chưa đeo",""]]}],btn:"Đã hiểu"})}
 window.kitTitleOpen=kitTitleOpen;window.kitTitleTag3=kitTitleTag3;
 document.addEventListener("click",e=>{const x=e.target&&e.target.closest&&e.target.closest(".kdh[data-kdh]");if(x&&!x.closest(".stage"))kitTitleOpen(x.dataset.kdh)},true);
+/* K-DH-CAPFIT (KIT §82.2, 24/11): the plate NEVER cuts its name. One line while the name fits its box; a box narrower than the one-line name (kitDhCap caption on a
+   narrow event picture, a stage tag, a frame tag .kt3, a kit row) wraps the name between words into balanced lines (text-wrap:balance), same font, same plate.
+   Rule lives here in the ONE plate, so every place that shows a title plate gets it; no per-screen variant. Test dev/test/kit-dhcapfit.js. */
 (function(){const st=document.createElement("style");st.id="kit-dh";
  const m=(a,p,b)=>`color-mix(in srgb,${a} ${p}%,${b})`;
  st.textContent=`
-.kdh{position:relative;display:inline-flex;align-items:center;justify-content:center;max-width:100%;box-sizing:border-box;padding:1px 12px 2px;border-radius:999px;font-family:var(--display,"Noto Serif",Georgia,serif);font-weight:700;font-size:.74rem;letter-spacing:.03em;line-height:1.25;white-space:nowrap;color:#fffdf4;
+.kdh{position:relative;display:inline-flex;align-items:center;justify-content:center;max-width:100%;box-sizing:border-box;padding:1px 12px 2px;border-radius:999px;font-family:var(--display,"Noto Serif",Georgia,serif);font-weight:700;font-size:.74rem;letter-spacing:.03em;line-height:1.25;white-space:normal;text-wrap:balance;text-align:center;color:#fffdf4;
  background:linear-gradient(135deg,${m("var(--dh)",55,"#fff")},var(--dh) 45%,${m("var(--dh)",70,"#000")});border:1.5px solid ${m("var(--dh)",55,"#fff")};box-shadow:0 0 0 1px #00000033,0 1px 4px #0006;overflow:visible;isolation:isolate}
-.kdh>b{position:relative;z-index:1;font-weight:700;text-shadow:0 1px 1.5px #000a,0 0 3px #0008}
+.kdh>b{position:relative;z-index:1;min-width:0;overflow-wrap:normal;word-break:keep-all;font-weight:700;text-shadow:0 1px 1.5px #000a,0 0 3px #0008}
 .kdh.kdh-art{background:var(--kdh-art,none) center/100% 100% no-repeat;border:0;box-shadow:none;padding:4px 18px}
 .kdh-s{position:absolute;inset:-2px;border-radius:inherit;pointer-events:none;z-index:0}
 .kdh-t3,.kdh-t4{box-shadow:0 0 0 1px #00000033,0 0 6px ${m("var(--dh)",70,"transparent")}}

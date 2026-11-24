@@ -93,15 +93,15 @@ Monthly, also run automatically: allowance (tiền tháng 5–25 bạc by Gia t�
 | Role | Who (per origin) | Face source | What they do |
 |---|---|---|---|
 | Phụ thân | tt Tể tướng · dtq Đại tướng quân · muoi đại thương muối · thd thầy đồ · ch quốc cữu (anh/em Thái hậu) · td quan Thị lang sắp bị vu án | officials/men pool (FIGURES-others), 51+ | career moves monthly (j55 pow); uses her as a pawn; wants a match or the palace |
-| Mẫu thân (chính thất) | alive (60%) or died → kế mẫu | new portrait (36–50) | protects her, Hồi môn, warns of di nương |
-| Kế mẫu / Di nương (1–2) | traits from TRAITS (Xảo quyệt / Tham vọng / Hiền lành…) | new portraits (26–35, 36–50) | schemes for her own daughter: gossip, tamper outfit, poison in rare cases, push a bad match |
+| Mẫu thân (chính thất) | alive (60%) or died → kế mẫu | new portrait (39–50) | protects her, Hồi môn, warns of di nương |
+| Kế mẫu / Di nương (1–2) | traits from TRAITS (Xảo quyệt / Tham vọng / Hiền lành…) | new portraits (28–38, 39–50) | schemes for her own daughter: gossip, tamper outfit, poison in rare cases, push a bad match |
 | Tổ mẫu (lão phu nhân) | head of the inner house | new portrait (51+) | judge of family disputes, Gia thanh guardian |
-| Huynh trưởng (đích/thứ) | thi cử / quân ngũ / buôn bán by origin | men pool 18–25/26–35 | career events (đỗ đạt, thua bạc, đánh nhau); ally or burden; can carry letters |
+| Huynh trưởng (đích/thứ) | thi cử / quân ngũ / buôn bán by origin | men pool 18–27/28–38 | career events (đỗ đạt, thua bạc, đánh nhau); ally or burden; can carry letters |
 | Thứ muội (cùng năm, 18) | di nương's daughter | **consort pool face (c01–c32)** so she has consort art if selected | rival for tuyển tú and suitors; enters palace as rival or ally |
 | Tỳ nữ thân cận | Lòng/Chủ tin bond | **maid pool face** | carries letters, keeps watch; becomes her hồi môn maid in the palace |
 | Nhũ mẫu | old nurse | mama pool | comfort, secrets, tells childhood history |
 | Thầy dạy (5) | cầm sư (nữ), nữ phu tử, họa sư (reuse man họa sư), vũ sư (nữ), ma ma xuất cung (reuse mama) | mixed | lessons; teacher favour opens higher tiers |
-| Bà mối | city matchmaker | new portrait (36–50, nicely dressed) | brings suitors |
+| Bà mối | city matchmaker | new portrait (39–50, nicely dressed) | brings suitors |
 | Nhà cầu thân (3–5 rolled) | Thế tử hầu phủ, con Thượng thư, Thám hoa trẻ, đại thương, lão quan góa vợ (pressure) | men/officials pool | the marriage endings |
 | Bạn khuê phòng (2–3) | daughters of other clans (j55) | **consort pool faces** | friends or rivals; also join tuyển tú |
 | Người ấy (TM96) | per TM96V: môn sinh / phó tướng / con nhà tơ lụa / học trò nghèo / biểu ca (ch) / thế giao (td) | as j96 (men/officials) | the love arc, before his rise |
@@ -187,7 +187,7 @@ Rare (j97 "✦ Cơ duyên hiếm", hidden conditions + roll 5–15%; each regist
 ## 14. Art list (Magnific gpt-2-6 ONLY, folder ba4aecfe…, after owner approval; new scenes = gpt-2-6 EDITS of approved game scenes (inherit palette/texture, painterly, no glossy floors, no dead symmetry); side-by-side with an existing scene before variants; landscape AND portrait composition for full-screen backdrops; every location × 4 seasons × buổi)
 - **Scenes (16):** khuê phòng (edit from the player's tẩm cung) · chính sảnh (from the Thọ Khang/hall scene) · thư phòng của cha (from Ngự thư phòng) · viện mẫu thân · viện di nương · hoa viên nhà (from Ngự hoa viên, smaller, a house wall visible) · từ đường (from the Phật đường pilot when approved) · phòng học (from the lesson room minigame bg) · chùa Hộ Quốc · phố chợ · trà lâu · thư viện · phủ thông gia · bến sông/thuyền hoa · ngoại ô · Thần Võ môn/tuyển tú hall. Plus the **kinh thành map** (4 seasons × buổi; same painted map style as the palace map) and the **Tuyển tú** podium/court bg.
 - **Family portraits** (full-body + portrait, 3:4 kit frames; each role gets its own rank/role top ornament): mẫu thân ×2, kế mẫu/di nương ×3, tổ mẫu ×2, bà mối ×1, female teachers (cầm sư, vũ sư, nữ phu tử, nữ y) ×4. Fathers: reuse officials/men where they fit; new only for the đại thương muối and the thầy đồ. All 4 age bands where the person can age (route ≈2 years, so one band each plus aged bands for the later palace letters). **Reuse:** thứ muội and friends use consort pool faces; tỳ nữ uses the maid pool; brothers, suitors and TM96 use the men/officials pools (no pink/purple). Nobody looks poor (the thầy đồ house in plain good silk).
-- **Player outside outfits:** "khuê các" dress for the 4 player looks, 18–25 band only (thường phục + lễ phục tuyển tú). No huadian, no moles, calm standing poses, hands with props.
+- **Player outside outfits:** "khuê các" dress for the 4 player looks, 18–27 band only (thường phục + lễ phục tuyển tú). No huadian, no moles, calm standing poses, hands with props.
 - **Act pictures** for the new acts (~30, matching time of day) and **event pictures** (~30), simple frame without tassel; story chapter art follows the Mệnh truyện batch rule (with owner OK).
 
 ## 15. Build plan (after approval)

@@ -206,7 +206,7 @@ function vlNpcMonth(v){if(!v||v===S||!v.alive||v.out||!vlNeed(v)){if(v&&v!==S)vl
  if(i>=0){vlWear(v,i);try{if(typeof knows!=="function"||knows(v))log(`${rkName(v)} ${v.name} đeo mạng che mặt.`)}catch(e){}}}
 /* friends send one to whoever is scarred and unveiled (her too: the gift arrives as the usual gift card) */
 function vlFriendGift(t){if(!t||!vlNeed(t)||t.vl||vlChest(t).length)return;const P=Math.min(8,wdPOf(t));const k=vlKey(P,0);
- const F=liveRivals(true).filter(v=>v!==t&&v.alive&&!v.out&&aff(v,t)>=50&&(v.bac||0)>=itm(k).pr+20);if(!F.length)return;
+ const F=liveRivals(true).filter(v=>v!==t&&v.alive&&!v.out&&aff(v,t)>=netTh(v,"than2")&&(v.bac||0)>=itm(k).pr+20);if(!F.length)return;
  const o=npcWhy("vlGift",{t,F},()=>roll(VL.giftP));if(!o)return;const v=o.who;/* npc-purpose G2: the friend who cares most sends it (giftP = the success) */
  ap(v,{bac:-itm(k).pr});v.inv=v.inv||[];v.inv.push({k,from:"nvp"});const r=giveTo(v,t,v.inv.length-1);if(r&&t!==S&&(typeof knows!=="function"||knows(t)))try{log(r)}catch(e){}}
 (function(){const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{if(S&&!S.dead){vlSync(S);for(const v of rivals)if(v)vlNpcMonth(v);vlFriendGift(S);for(const v of liveRivals(true))vlFriendGift(v)}}catch(e){console.error(e)}return r}})();
