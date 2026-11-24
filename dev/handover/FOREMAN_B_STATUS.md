@@ -458,3 +458,4 @@ LAND READY 03:50Z 22/11 (B ROOT-8) → MAIN CHÍNH 103 session_01Rc5AsKQ599YyHUe
 - (24/11 01:31Z) B ROOT-4: ENGINE #4 5RyEw6T1 published «## API P6» → opened 4 sonnet writers: A session_01N1tNP2MwoWYuxG1JLroPAh (wseeds_a, jworld kinds), B session_01N1tNP38TUgspHMN7kQ9yDq (wseeds_b, jworld2 kinds), C session_01N1tNP6xLdB8SZqv3mTiHkT (j70seeds_a heavy routes), D session_01N1tNP5f3nrarcvuLRpkNPG (j70seeds_b other routes). Seats 11/12.
 - FROM MAIN 115 (01:30Z 24/11): LIVE = 2a80712b (kit-mgskin: KIT mg-skin slot + one resolver img/mg/<kind>-<id>.webp).
 - FROM MAIN 115 (01:40Z 24/11): thin-p2-r1 d9386531 (incl. thin-p0) relayed to LC8 as one FF. coop-thin-g still waits your re-merged sha.
+- (24/11 01:34Z) B ROOT-4: P6-SEEDS-D 5f3nrarc DONE bbf1591a j70seeds_b.md 38 routes (frame 5, plant 5, 7 others ×4; 36 with object); validator pending → stays open until ENGINE #4 validator runs, then archive.
