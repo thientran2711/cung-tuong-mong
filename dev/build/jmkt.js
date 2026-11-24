@@ -59,7 +59,7 @@ function toilTasteOf(host){try{const B=BAL.toil.taste;
 function toilTasteKnown(host,who){try{who=who||S;const K=who.mkKnow||{};const k=host==="emp"?"emp":toilTasteKey(host);if(k&&K.p&&K.p[k])return true;
   return who===S&&host==="emp"&&!!(S.emp&&S.emp.known&&S.emp.known.mk)}catch(e){return false}}
 function toilTasteLearn(host){try{if(toilTasteKnown(host))return;const t=toilTasteOf(host);if(!t)return;if(host==="emp"){S.emp.known=S.emp.known||{};S.emp.known.mk=true}mktKnow().p[host==="emp"?"emp":toilTasteKey(host)]=1;
-  log(`<span class="g">Ngươi biết được: ${toilWho(host)} ưa son phấn ${TOIL_TONE[t]}.</span>`)}catch(e){}}
+  log(`<span class="g">Ngươi biết được: ${toilWho(host)} ưa son phấn ${TOIL_TONE[t]}.</span>`);kitKnow({key:"mkp:"+host,text:`Ngươi biết được: ${toilWho(host)} ưa son phấn ${TOIL_TONE[t]}.`})}catch(e){}}
 /* the tone part of one host's judgement of person p's look today (0 = none): only a made face that shows its colours (not vụng / diêm dúa) */
 function toilTasteN(p,host){if(!host||host===p)return 0;const rec=p===S?toilToday(S):toilFriendRec(p)||toilNpc(p);if(!rec||!rec.makeup)return 0;const mk=toilMk(rec);if(mk==="vung")return 0;
  const tone=toilToneOf(rec.col),like=toilTasteOf(host);if(!like||(tone!=="w"&&tone!=="c"))return 0;return tone===like?BAL.toil.taste.react[0]:BAL.toil.taste.react[1]}
@@ -78,7 +78,7 @@ function toilLvTasteOf(host){try{const B=BAL.toil.taste;
 function toilLvTasteKnown(host,who){try{who=who||S;const K=who.mkKnow||{};const k=host==="emp"?"emp":toilTasteKey(host);if(k&&K.lv&&K.lv[k])return true;
   return who===S&&host==="emp"&&!!(S.emp&&S.emp.known&&S.emp.known.mkLv)}catch(e){return false}}
 function toilLvTasteLearn(host){try{if(toilLvTasteKnown(host))return;const t=toilLvTasteOf(host);if(!t)return;if(host==="emp"){S.emp.known=S.emp.known||{};S.emp.known.mkLv=true}const K=mktKnow();K.lv=K.lv||{};K.lv[host==="emp"?"emp":toilTasteKey(host)]=1;
-  log(`<span class="g">Ngươi biết được: ${toilWho(host)} ưa dung nhan ${toilMkW(t)}.</span>`)}catch(e){}}
+  log(`<span class="g">Ngươi biết được: ${toilWho(host)} ưa dung nhan ${toilMkW(t)}.</span>`);kitKnow({key:"mkl:"+host,text:`Ngươi biết được: ${toilWho(host)} ưa dung nhan ${toilMkW(t)}.`})}catch(e){}}
 /* the level part of one host's judgement of p's look today (0 = none): a made face only; Vụng về sits below Đoan trang */
 function toilLvTasteN(p,host){if(!host||host===p)return 0;const rec=p===S?toilToday(S):toilFriendRec(p)||toilNpc(p);if(!rec||!rec.makeup)return 0;const mk=toilMk(rec);
  const like=toilLvTasteOf(host);if(!like)return 0;const B=BAL.toil.taste;const d=Math.abs(TOIL_LVS.indexOf(mk)-TOIL_LVS.indexOf(like));return d===0?B.lvReact[0]:d>=2?B.lvReact[1]:0}
@@ -126,7 +126,7 @@ const TOIL_TONE_SAY={like:{th:"“Sắc son hôm nay hợp mắt ai gia.”",hh:
 function tsMkSeason(m){return SEASON[(((m|0)||1)-1)%12]}/* the game's season of month m (j1 SEASON; reviewer r1: the old 4–9 "xuân" split contradicted the calendar) */
 function tsMkWant(th,m){const T=BAL.toil.taste.theme[th]||BAL.toil.taste.theme.thanh;const tone=T.tone==="mua"?BAL.toil.taste.season[tsMkSeason(m)]:T.tone;return{tone,bold:!!T.bold,key:th+":"+tone}}
 function tsMkKnown(w){return mktKnow().th[w.key]||{}}
-function tsMkLearn(w,what){const K=mktKnow().th;K[w.key]=Object.assign({},K[w.key]||{},what);return K[w.key]}
+function tsMkLearn(w,what){const K=mktKnow().th;K[w.key]=Object.assign({},K[w.key]||{},what);try{kitKnow({key:"mkt:"+w.key,text:`Ngươi biết được: đề thi ${w.th&&typeof TS_THEME!=="undefined"&&TS_THEME[w.th]?TS_THEME[w.th].n+" ":""}chuộng ${tsMkWantTxt(w,K[w.key])}.`})}catch(e){}/* KNOW-NOTICE */return K[w.key]}
 function tsMkWantTxt(w,k){k=k||{tone:1,bold:1};const L=[];if(k.tone)L.push(`son phấn ${TOIL_TONE[w.tone]}`);if(k.bold)L.push(w.bold?`${TOIL_STY.diem}, dung nhan ${toilMkW("dep")} trở lên`:TOIL_STY.dep);return L.join(", ")}
 /* the notice row: what she knows of the want, and the roads to learn it */
 function tsMkRow(th,m){const w=tsMkWant(th,m),k=tsMkKnown(w);return["Son phấn",k.tone&&k.bold?`đề chuộng ${tsMkWantTxt(w,k)}`:k.tone||k.bold?`đề chuộng ${tsMkWantTxt(w,k)}; còn lại chưa rõ`:`chưa rõ: hỏi ma ma, sai tai mắt, hỏi người từng dự, hay đoán theo sắc của đề và mùa ${tsMkSeason(m).toLowerCase()}`,k.tone&&k.bold?"g":"n"]}

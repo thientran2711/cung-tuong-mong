@@ -25,10 +25,11 @@ const SG_FILL=["Trà hôm nay hơi đắng.","Hoa đào nở sớm quá.","Mai t
 function sgPh(t,k){return t.replace("{k}",k).replace("{K}",k[0].toUpperCase()+k.slice(1))}
 function sgNghe(box,env){const R=sgRM();const C=kg82Canvas(box,.86,400),{g,W,H}=C;
  k91Btns(box,[["sgnep","Nép sau bình phong","giữ bóng trong dải xanh"]]);let glow=null,gUntil=0;
- const KW=sgShuf(SG_KW),key=KW.slice(0,3),oth=KW.slice(3);const T=30000,N=16,GAP=1700,CROSS=mgLev(env,"nghe","cross"),SHOW=2600;/* MG11: the crossing time follows the board ease (BAL.mgTier.lev.nghe, law 5) */
+ const MP=mgpc1("nghe");/* ORDER THIN P1c: the secret words, decoys and lines come from a pooled item (jmgpool_c nghe), the old shuffle when no pool */
+ const KW=MP?MP.kw.map(i=>SG_KW[i]):sgShuf(SG_KW),key=KW.slice(0,3),oth=KW.slice(3);const T=30000,N=16,GAP=1700,CROSS=mgLev(env,"nghe","cross"),SHOW=2600;/* MG11: the crossing time follows the board ease (BAL.mgTier.lev.nghe, law 5) */
  /* 16 lines: 7 with a word to listen for, 3 decoys (another secret word), 6 small talk; the last two are always small talk */
- const kinds=sgShuf(["i","i","i","i","i","i","i","d","d","d","f","f","f","f"]).concat(["f","f"]);
- const imp=sgShuf(SG_IMP),fil=sgShuf(SG_FILL);let ii=0,fi=0;
+ const kinds=MP?MP.kinds:sgShuf(["i","i","i","i","i","i","i","d","d","d","f","f","f","f"]).concat(["f","f"]);
+ const imp=MP?MP.imp.map(i=>SG_IMP[i]):sgShuf(SG_IMP),fil=MP?MP.fil.map(i=>SG_FILL[i]):sgShuf(SG_FILL);let ii=0,fi=0;
  const ph=kinds.map((c,n)=>({s:c==="i"?sgPh(imp[ii++%imp.length],key[n%3]):c==="d"?sgPh(imp[ii++%imp.length],oth[n%oth.length]):fil[fi++%fil.length],imp:c==="i",at:600+n*GAP,lane:n%3,done:0}));
  const NI=ph.filter(p=>p.imp).length;const MX=26,y0=H*.16,y1=H*.88,LO=.3,HI=.7;const lanes=[H*.34,H*.55,H*.76];const sw=Math.min(W*.6,300),sh=34;
  let e=.5,band=0,tot=0,hits=0,wrong=0,last=0,t0=0,stop=false,gust=0,warn=0;const pops=[];
@@ -191,7 +192,7 @@ function sgThoiCo(box,env){const R=sgRM();const C=kg82Canvas(box,.6,300),{g,W,H}
  KG82.peekBad=()=>{if(phase!=="play"||stop)return null;return att(performance.now())>.75?{sel:"#sgtap"}:null};
  return()=>{stop=true;stopL()}}
 
-/* ---------- odds ladder: a game moves the odds by ONE step of Liều / Khó / Năm ăn năm thua / Khá chắc / Chắc / Rất chắc / Nắm chắc ----------
+/* ---------- odds ladder: a game moves the odds by ONE step of Mong manh / Hiểm / Khó lường / Tùy duyên / Có cơ / Vững / Rất vững ----------
    raw 7–10 = up one step, 4–6 = unchanged, 0–3 = down one step. The number keeps its place inside the new step (word() boundaries). */
 const SG_LO=[BAL.odds.lo,...BAL.odds.cut],SG_HI=[...BAL.odds.cut.map(c=>c-1),BAL.odds.hi];
 function sgLv(o){return oddsLv(o)}

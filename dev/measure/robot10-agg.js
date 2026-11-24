@@ -9,7 +9,8 @@
          2 ENDINGS (every ending, rate + mean real minutes; 0 hits = «chưa ai gặp») · 3 RANK (highest rank, minutes + years to each step, demotions, lãnh cung)
          4 FAMILY · 5 FAVOR + SCHEMES · 6 ECONOMY · 7 MINI-GAMES (win rate per game per rank: law 5, must fall as she climbs) · 8 KỲ NGỘ
          9 BALANCE FLAGS (option taken ≥ 90 % or ≤ 2 % of the times offered, law 2; roads never reached) · 10 HEALTH · 11 TIME (pace model, per kiếp +
-         cumulative over the kiếp series) · 12 EVENT VARIETY · per thân phận × nhánh × bot · locked roads.
+         cumulative over the kiếp series) · 12 EVENT VARIETY · per thân phận × nhánh × bot · locked roads · RECOMMENDATIONS (order #6, LAST: finding → BAL key file:line →
+         current (read from the game page: bal.json next to the run JSON, else robot10-reco.js reads GAME now) → proposed → expected effect).
  PACE MODEL (orders #2/#3; constants in PACE below, one place): real minutes = (characters she reads / READ_CPS + clicks × CLICK_S + choices × CHOICE_S
          + mini-games played × MG_S + mini-games left to luck × MGSKIP_S) / 60. Counters come from robot10-in.js (R.m.pace; per rank step R.m.rankAt).
          Calibration against human-paced runs is still open (report gap); change the constants here only. */
@@ -19,8 +20,8 @@ const mins=p=>p?((p.chars||0)/PACE.READ_CPS+(p.clicks||0)*PACE.CLICK_S+(p.choice
 const args=process.argv.slice(2);let out=path.join(__dirname,'..','handover','robot');const ins=[];
 for(let i=0;i<args.length;i++){if(args[i]==='--out')out=args[++i];else ins.push(args[i])}
 if(!ins.length){console.log('usage: node dev/measure/robot10-agg.js <run.json|folder> [...] [--out folder]');process.exit(2)}
-const files=[],cats=[];const walk=f=>{const st=fs.statSync(f);if(st.isDirectory()){for(const x of fs.readdirSync(f))if(x!=='saves'&&x!=='shots')walk(path.join(f,x))}
- else if(/^catalog.*\.json$/.test(path.basename(f)))cats.push([f,st.mtimeMs]);else if(/\.json$/.test(f)&&!/\.ext\.json$/.test(f))files.push([f,st.mtimeMs])};
+const files=[],cats=[],bals=[];const walk=f=>{const st=fs.statSync(f);if(st.isDirectory()){for(const x of fs.readdirSync(f))if(x!=='saves'&&x!=='shots')walk(path.join(f,x))}
+ else if(/^catalog.*\.json$/.test(path.basename(f)))cats.push([f,st.mtimeMs]);else if(/(^|[\\/])bal\.json$/.test(f))bals.push([f,st.mtimeMs]);else if(/\.json$/.test(f)&&!/\.ext\.json$/.test(f))files.push([f,st.mtimeMs])};
 ins.forEach(walk);files.sort((a,b)=>a[1]-b[1]);cats.sort((a,b)=>b[1]-a[1]);
 const lives=new Map();
 for(const [f] of files){let d;try{d=JSON.parse(fs.readFileSync(f,'utf8'))}catch(e){continue}if(!Array.isArray(d))continue;
@@ -54,7 +55,7 @@ const whoOf=t=>{for(const [k,re] of WHO)if(re.test(t||''))return k;return 'other
 const causeText=r=>(M(r).die&&M(r).die.why)||r.life.cause||r.life.fate||r.life.id||'';
 const dead=L.filter(r=>r.life.death);
 const causeList=r=>[M(r).die&&M(r).die.why,r.life.cause,r.life.fate,r.life.chain0].filter(Boolean);
-dead.forEach(r=>{const cl=causeList(r);let e=null,t=cl[0]||r.life.id||'';for(const x of cl){e=CATM.match(CAT.deaths,x);if(e){t=x;break}}e=e||CATM.match(CAT.endings,r.life.id);r._cause=e?e.text:'(not in catalogue) '+t.slice(0,80);r._csrc=e?e.src:'';r._who=whoOf(t+' '+(r.life.id||''))});
+dead.forEach(r=>{const cl=causeList(r);let e=null,t=cl[0]||r.life.id||'';for(const x of cl){e=CATM.match(CAT.deaths,x);if(e){t=x;break}}e=e||CATM.match(CAT.endings,r.life.id);r._cause=e?e.text.replace(/\$\{([^}]*)\}/g,'«$1»'):'(not in catalogue) '+t.slice(0,80);r._csrc=e?e.src:'';r._who=whoOf(t+' '+(r.life.id||''))});
 L.forEach(r=>{const e=CATM.match(CAT.endings,r.life.id);r._end=ended(r)?(e?e.text:'(not in catalogue) '+r.life.id):null;r._esrc=e?e.src:''});
 /* ---------- the kiếp series: kiếp no. within (origin, road, bot) by life number (each life = a new seed) ---------- */
 const series=by(L,r=>r.job.origin+' · '+r.job.road+' · '+r.job.bot);
@@ -149,6 +150,12 @@ md.push('## Per thân phận · nhánh · bot','',tbl(HEAD0,[...by(L,r=>r.job.or
  tbl(HEAD0,by(L,r=>r.job.origin+' · '+r.job.road+' · '+r.job.bot).map(([k,G])=>row0(k,stats(G)))),'');
 /* ---------- locked roads ---------- */
 {const locks=L.filter(r=>r.lock);md.push('## Locked roads (arcOk67 false at start; never open in 5 kiếp = bug)','',locks.length?by(locks,r=>r.lock.road).map(([k,G])=>{const op=G.filter(r=>r.lock.openAt),pl=G.filter(r=>r.lock.playAt);return `- ${k}: ${G.length} lives · opened in ${op.length} · played in ${pl.length}${G.length>=5&&!op.length?' · **BUG: never opened in '+G.length+' kiếp**':''}`}).join('\n'):'None in these runs.','')}
+/* ---------- RECOMMENDATIONS (OWNER ORDER #6; the LAST section; robot10-reco.js) — BAL read from the game page (bal.json of the run, else read now from GAME) ---------- */
+{const RECO=require('./robot10-reco.js');let BALX=null;bals.sort((a,b)=>b[1]-a[1]);
+ const tryF=f=>{try{return JSON.parse(fs.readFileSync(f,'utf8'))}catch(e){return null}};
+ if(bals.length)BALX=tryF(bals[0][0]);if(!BALX&&fs.existsSync(path.join(out,'bal.json')))BALX=tryF(path.join(out,'bal.json'));
+ if(!BALX)try{const s=require('child_process').execFileSync(process.execPath,[path.join(__dirname,'robot10-reco.js'),'bal',process.env.GAME||''],{maxBuffer:64e6,timeout:300000});BALX=JSON.parse(s.toString())}catch(e){console.error('bal: '+e.message.split('\n')[0])}
+ md.push(...RECO.recommend({L,BALX,pct,f1,mean,by,M,P,PACE,lifeMin,ended,rankN,mins,tbl}))}
 /* ---------- write ---------- */
 fs.mkdirSync(out,{recursive:true});const base=path.join(out,`rates-${stamp}`);fs.writeFileSync(base+'.md',md.join('\n'));
 const csvq=v=>{v=v==null?'':String(v);return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v};

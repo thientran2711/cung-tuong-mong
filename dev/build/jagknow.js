@@ -466,7 +466,7 @@ function knSellNeed(s){try{const G=asB().goal;return (s.bac||0)<G.bac?((G.bac-(s
 function knSellGive(x,s,n){if(window.J78MEMO)window.J78MEMO.clear();KN.stat.bought=(KN.stat.bought||0)+1;const o=n.about;
  if(n.kind==="hap"){KN.bk=KN.bk&&KN.bk.k===agKey()?KN.bk:{k:agKey(),m:{}};KN.bk.m[knId(x)+"|"+n.hid]={by:"buy",how:"buy",e:s};try{KN.m&&(KN.m.x={})}catch(e){}
   if(x===S)try{adHapNow()}catch(e){}return n.txt}
- if(x===S){let extra="";try{if(n.f.go)extra=n.f.go()||""}catch(e){}try{intelAdd(o,n.f,{by:s.name,how:"Mua tin"});noteAdd(o.id,`${s.name} bán tin: ${n.txt}`)}catch(e){}knSellItem(s,n.txt,palaceOf(o));return n.txt+extra}
+ if(x===S){let extra="";try{if(n.f.go)extra=n.f.go()||""}catch(e){}try{intelAdd(o,n.f,{by:s.name,how:"Mua tin"});noteAdd(o.id,`${s.name} bán tin: ${n.txt}`,1)}catch(e){}knSellItem(s,n.txt,palaceOf(o));return n.txt+extra}
  x.knB=x.knB||{};x.knB[n.k]={t:n.txt,w:wk()};if(/^(plan|affair|items|deed)/.test(n.k))evA(x,o,BAL.ag.ev.one);return""}
 /* her TIN BÁO row for a bought fact: the seller named (inf = the seller; informerInfo kind "seller") */
 function knSellItem(s,what,place){const T=knTb();const it={id:"buy:"+wk()+":"+(S.buoi||0)+":s"+s.sid+":"+T.R.length,k:"bao",place:place||palaceOf(S),b:S.buoi||0,k0:agKh(),k1:agKh(),who:["s"+s.sid],
