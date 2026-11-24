@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"726a633d+","t":"2026-11-24T11:01Z","c":"SELSCENE-9: FIX r1 gates (coop-e2e LIVE 142/142 both orders vs branch 140/142 + 140/143) and handover to the successor","b":"8687d981bb08","h":[{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"}]};
+window.CTM_BI={"s":"b2c249f0","t":"2026-11-24T12:27Z","c":"SELSCENE-10: coop-e2e «A sees the reborn friend» follows B's current life (logs renames / ended lives); report FIX r1 SELSCENE-10 + handove…","b":"4ca369dacf18","h":[{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -82772,15 +82772,26 @@ function selxRmT(R){const tok=k=>(selxRoyals().find(x=>x[0]===k)||[])[2];const T
  for(const x of L){if(x.v===S||x.v.__done)continue;x.v.__done=1;if(x.kept)x.v.rank=selxRank(x.v,x.step,{k:"_",r0:x.v.r0});else Z.out.push({id:x.v.id,name:x.v.name,face:x.v.face,hue:x.v.hue,sc:x.sc,ban:1})}
  Z.girls=[];if(worldOn())selxRoomIn(Z.keptV)};window.selxNpcOut=selxNpcOut})();
 function selxRoomIn(mine){const R=S&&S.selxRm;if(!R||R.in||!worldOn())return;R.in=1;const own=new Map((mine||[]).map(v=>[v.id,v]));
- for(const r of R.res||[]){if(!r.kept||rivals.some(v=>v.id===r.id))continue;const g=(R.g||[]).find(v=>v.id===r.id);const v=own.get(r.id)||(g?selxJ(g):null);if(!v)continue;
+ /* one order on both seats: the guest's live diff (jcoophl "a" ops) adds new world people in id order (Object.keys of the id map), so the host adds the kept girls in that same id order (not by score) */
+ for(const r of (R.res||[]).slice().sort((x,y)=>(+x.id||0)-(+y.id||0))){if(!r.kept||rivals.some(v=>v.id===r.id))continue;const g=(R.g||[]).find(v=>v.id===r.id);const v=own.get(r.id)||(g?selxJ(g):null);if(!v)continue;
   v.rank=selxRank(v,r.step,{k:"_",r0:v.r0});v.__done=1;if(typeof roomFor!=="function"||roomFor("consort"))rivals.push(v)}
  try{palFix()}catch(e){}
  const n=BAL.selx.tuan;S.tuan=(S.tuan||0)+BAL.selx.days;while(S.tuan>=n){S.tuan-=n;S.turn=(S.turn||0)+1}/* the room clock: the days, once */
+ R.ck="c"+Date.now().toString(36)+Math.floor(Math.random()*1e4);R.clk=[S.turn||0,S.tuan||0];S.selxClk=R.ck;/* ONE SHARED CLOCK (OD L1641): the guest moves hers at the same moment (selxClkSync) */
  R.g=[];/* the cohort is closed; the girls live on as world people (kept) or in each seat's record (ban hoa) */}
+/* ONE SHARED CLOCK (OD L1641) on the guest: her clock (j8 wk = turn·3+tuần, the key of the night handshake jnf day()) is not in the live diff
+   (jcoophl CLOCK: it rides the week merge only), so when the host's selxRoomIn moves the room clock by the days, the guest sat days behind
+   until the week end → nights keyed apart, both seats «Chờ hảo hữu…» (coop-e2e «buổi 0:3 advanced for both», both seat orders). The cohort
+   (S.selxRm, live diff) carries the move's key + the clock after it: the guest moves hers by the same days ONCE (seat-own flag S.selxClk,
+   kept in her blob); after a full rebuild her clock already IS the host's (≥ R.clk) → only the flag is set, never a second move. */
+function selxClkSync(){try{if(typeof selxCo!=="function"||!selxCo()||worldOn())return;const R=S&&S.selxRm;if(!R||!R.in||!R.ck||!R.clk||S.selxClk===R.ck)return;S.selxClk=R.ck;
+ const n=BAL.selx.tuan,d=x=>(x[0]||0)*n+(x[1]||0);if(d([S.turn,S.tuan])>=d(R.clk))return;S.tuan=(S.tuan||0)+BAL.selx.days;while(S.tuan>=n){S.tuan-=n;S.turn=(S.turn||0)+1}}catch(e){console.error("selxClkSync",e)}}
+window.selxClkSync=selxClkSync;
+(function(){if(typeof render!=="function")return;const r0=render;render=function(){selxClkSync();return r0.apply(this,arguments)};window.render=render})();
 /* in a room the clock of the days moves once, in selxRoomIn (never once per seat: two seats' +3 would merge to +6) */
 (function(){const k0=selxClock;selxClock=function(){if(selxCo()){const Z=S.selx2;Z.clock=1;return}return k0.apply(this,arguments)};window.selxClock=selxClock})();
 /* the room's buổi first moves after the days (both seats ready): a cohort whose host has no tú nữ of its own still enters the world */
-(function(){if(typeof nextBuoi!=="function")return;const n0=nextBuoi;nextBuoi=function(){try{if(selxCo()&&worldOn()&&!(COOPW&&COOPW.ctx)&&S&&S.selxRm&&!S.selxRm.in&&!selxDaysOn())selxRoomIn()}catch(e){console.error(e)}return n0.apply(this,arguments)};window.nextBuoi=nextBuoi})();
+(function(){if(typeof nextBuoi!=="function")return;const n0=nextBuoi;nextBuoi=function(){selxClkSync();try{if(selxCo()&&worldOn()&&!(COOPW&&COOPW.ctx)&&S&&S.selxRm&&!S.selxRm.in&&!selxDaysOn())selxRoomIn()}catch(e){console.error(e)}return n0.apply(this,arguments)};window.nextBuoi=nextBuoi})();
 /* ================= ONE SEAT RULE (review/seatcap, owner OD:L1224 + OD:L1228 + OD:L1267 ONE CORE) =================
    The seat counts are j30 SEATCAP = BAL.seat (copied by jbal; the numbers live only there; Quý nhân and below have no cap). Every road that puts a consort on a rank goes through these three helpers, for her and for every NPC alike:
    - seatHas(p,r): may p sit at rank r (the seat counts everyone else who holds r);
@@ -98598,7 +98609,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="8687d981bb08";window.CTM_BUILD=BUILD;
+const BUILD="4ca369dacf18";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
