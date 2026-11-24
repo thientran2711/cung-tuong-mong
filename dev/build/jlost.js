@@ -225,7 +225,7 @@ function loActs(c){const B=[];const me=c.own==="me",h=c.at?loP(c.at):null,atMe=c
   if(c.hear)tra();
   else{B.push(loBtn(c,"book","Đối chiếu sổ Nội vụ phủ",`${word(loOdds("book",S))} · ${loCostTxt("book")} · thành: biết món đồ của ai, thêm ${balAb(BAL.eff.jlost.evLoEvAdd)} chứng cứ · hỏng: sổ sách không rõ`,loWhy("book")));
    B.push(loBtn(c,"giveback","Trả về chủ",`tốn: 1 khắc · thành: món đồ về tay chủ, thân ${balSg(BAL.eff.jlost.loUI_2)}`,ownK?whyTime(1):"chưa biết của ai: đối chiếu sổ trước"));
-   B.push(loBtn(c,"handin","Nộp Nội vụ phủ",`tốn: 1 khắc · thành: Nội vụ phủ trả về chủ, Danh +1`,whyTime(1)))}
+   B.push(loBtn(c,"handin","Nộp Nội vụ phủ",`tốn: 1 khắc · thành: Nội vụ phủ trả về chủ, Danh ${balSg(BAL.eff.jlost.danhLoUI)}`,whyTime(1)))}
   return B}
  if(!me&&c.kn.me&&!atMe&&!c.told&&c.at){B.push(loBtn(c,"tell",`Báo cho ${loP(c.own)?loP(c.own).name:"chủ món đồ"}`,`tốn: 1 khắc · thành: nàng biết đồ của mình ở đâu, thân với nàng ${balSg(BAL.eff.jlost.loUI_3)} · kèm: ${h?h.name:"người giữ đồ"} thù ${balSg(BAL.eff.jlost.loUI_4)}`,whyTime(1)))}
  return B}
