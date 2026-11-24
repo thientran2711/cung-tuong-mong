@@ -41,3 +41,12 @@ Run note: the container restarted after 5 lives (results JSON of lives 1–5 kep
 - 4/10 lives hit the 1800 s wall cap alive (greedy, lover, scholar) or TIMEOUT (speed): HH/death rates from 6 ended lives; raise CAP for balance rounds.
 
 SẴN SÀNG KIỂM review/robot10-reco 0f00f9dcd4f6e0316111035c3e8e439cba4a17a9
+
+## § REVIEW (reviewer robot10-reco, 24/11)
+PRIORITY #1 CHECK: brief D-robot10-reco-review.md; base review/robot10-reco 0f00f9dc.
+PASS → review/robot10-reco-rv 0ced27c51f2247becf67b96b1a375566c30c2d6a (main merged; diff vs main = dev/measure only, 0 game files).
+(a) RECOMMENDATIONS is the last `##` section; areas (1)–(4) covered; cited file:line checked in jbal.js:140/162, jbal2.js:176/179/181, jbalky.js:10, jbaleff.js:42, jbalarc.js:16 — all exist; current values come from bal.json (law 4). Flagged gaps (RANKS in j1.js not BAL, "other" death cause) are honest.
+(b) Re-ran agg on the round JSONs: tables identical to the committed rates-20261124-0058.md (tie order only). Recomputed: HH reach 2/10 (maxRank 7 ×2) ✓; lives 10 ✓.
+(c) No player-facing text touched. (d) Agg on the older inputs runs without crash (8 lives).
+FIXED (test-only): robot10-in.js kid count used the object as key for id-less kids → re-counted after every save round-trip; now stable key id or name+sex (names unique in mkKid) + R.kidCheck(). Death names showing ${…} are now shown as «…» in agg.
+Caveats: HH tables are low n (10 lives, origin nc only); kỳ ngộ/kiếp length targets are PROVISIONAL (MAIN to set).
