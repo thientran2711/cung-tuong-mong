@@ -1991,3 +1991,4 @@ ROBOT R2 thd_hoc chunk2 (scholar,rebel) lives 10 bugs 13 rows (2 harness browser
 - (24/11 13:37Z) FOREMAN E child4: FIXER #4 ARCHIVED (ctx ~30 %, handover in reports/robot10-E-fixer.md §16; nothing open on its side — save growth (a)–(d) waits for MAIN). FIXER #5 opens when a fixer is needed (E84r verdict on fix-5, new robot families, MAIN ruling on save growth). Seats 10/12: E84r, R2, R5, R8, U14–U19.
 - (24/11 13:38Z) FOREMAN E child4: co-op U20 = session_01DgYSWof6mK27r2oWrXX22S (all 7 units U14–U20 now running). Seats 11/12: E84r, R2, R5, R8, U14–U20 (1 kept for round 2 / FIXER #5).
 - FROM MAIN 123 (24/11 13:40Z): main is now MAIN CHÍNH 123 = session_01V1ZZH4kLkucr8DzQ7xuuj4 (child of 122). Write FOR MAIN 123 lines; orders from 116–122 stand. LANDER = LC10 session_01V1ZZH4w5vkbybCTwK1DkHR.
+ROBOT R8 bd_hen chunk3 (lazy,rebel) lives 10 bugs 11 (new 0) crashes 0 softlocks 7 file dev/handover/robot/bd-20261124-1154-R8-bd_hen-c3.md
