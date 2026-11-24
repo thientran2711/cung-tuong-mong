@@ -22,7 +22,7 @@ Magnific images_generate, mode gpt-2-6, resolution 2k, aspect auto, count 1, fol
 - s50: LwtgSmCswO
 
 ## Run log (60 planned jobs; one attempt each, no retries so far)
-| job | src | age | identity | output creation | status |
+| job | src | age | identity upload | output creation (webUrl: https://www.magnific.com/app/creation/<id>) | status |
 |---|---|---|---|---|---|
 | FACE-COLD-S13-A16 | s13 | 16 | IfZhvvqtvE | EbcFqQTuuO | DONE |
 | FACE-COLD-S14-A16 | s14 | 16 | eI9BoIfdqL | rgoLgWextc | DONE |
@@ -54,8 +54,38 @@ Magnific images_generate, mode gpt-2-6, resolution 2k, aspect auto, count 1, fol
 | FACE-COLD-S48-A26 | s48 | 26 | jUIlgdFLD0 | 5je14wxKxe | DONE |
 | FACE-COLD-S49-A26 | s49 | 26 | P3HN6Ql42C | 9ZbiDTrNYZ | DONE |
 | FACE-COLD-S50-A26 | s50 | 26 | LwtgSmCswO | 3z12XBKREY | DONE |
+| FACE-COLD-S13-A51 | s13 | 51 | IfZhvvqtvE | LwtgAcVswO | DONE |
+| FACE-COLD-S14-A51 | s14 | 51 | eI9BoIfdqL | w4COcBd7EI | DONE |
+| FACE-COLD-S15-A51 | s15 | 51 | VXOpeBYMMU | 6AKRXQziJO | DONE |
+| FACE-COLD-S26-A51 | s26 | 51 | yiF9NZ5PW9 | vQzCg2Ma47 | DONE |
+| FACE-COLD-S27-A51 | s27 | 51 | BhiItCpoQR | 3z12orNREY | DONE |
+| FACE-COLD-S28-A51 | s28 | 51 | jUIlgAaLD0 | ksXxRd216B | DONE |
+| FACE-COLD-S29-A51 | s29 | 51 | ov3tmL3829 | VXOpq4hMMU | DONE |
+| FACE-COLD-S30-A51 | s30 | 51 | YMS0THvWeC | 3z12Il3REY | DONE |
+| FACE-COLD-S31-A51 | s31 | 51 | yiF9N89PW9 | 6AKRoUoiJO | DONE |
+| FACE-COLD-S32-A51 | s32 | 51 | UPfJOXPwny | O6Q4Dlfynm | DONE |
+| FACE-COLD-S46-A51 | s46 | 51 | 0e7MDjETfW | 3z12myzREY | DONE |
+| FACE-COLD-S47-A51 | s47 | 51 | xS8slpOjfW | 1lBjAK9r4r | DONE |
+| FACE-COLD-S48-A51 | s48 | 51 | jUIlgdFLD0 | P3HNB9U42C | DONE |
+| FACE-COLD-S49-A51 | s49 | 51 | P3HN6Ql42C | w4COD4U7EI | DONE |
+| FACE-COLD-S50-A51 | s50 | 51 | LwtgSmCswO | Sya7VNhUb8 | DONE |
+| FACE-COLD-S13-A63 | s13 | 63 | IfZhvvqtvE | yiF9oYBPW9 | DONE |
+| FACE-COLD-S14-A63 | s14 | 63 | eI9BoIfdqL | Xm68lbpBfo | DONE |
+| FACE-COLD-S15-A63 | s15 | 63 | VXOpeBYMMU | bxpk2Nf5Y2 | DONE |
+| FACE-COLD-S26-A63 | s26 | 63 | yiF9NZ5PW9 | DoPdxrepcl | DONE |
+| FACE-COLD-S27-A63 | s27 | 63 | BhiItCpoQR | cpwV5kn0eP | DONE |
+| FACE-COLD-S28-A63 | s28 | 63 | jUIlgAaLD0 | nVgcbK0YQD | DONE |
+| FACE-COLD-S29-A63 | s29 | 63 | ov3tmL3829 | CqWQ6AcEEy | DONE |
+| FACE-COLD-S30-A63 | s30 | 63 | YMS0THvWeC | fHYuNzvCDY | DONE |
+| FACE-COLD-S31-A63 | s31 | 63 | yiF9N89PW9 | p84XsN3ehw | DONE |
+| FACE-COLD-S32-A63 | s32 | 63 | UPfJOXPwny | jUIlTCaLD0 | DONE |
+| FACE-COLD-S46-A63 | s46 | 63 | 0e7MDjETfW | KLdrWmpkqp | DONE |
+| FACE-COLD-S47-A63 | s47 | 63 | xS8slpOjfW | LwtgDHvswO | DONE |
+| FACE-COLD-S48-A63 | s48 | 63 | jUIlgdFLD0 | vQzCNooa47 | DONE |
+| FACE-COLD-S49-A63 | s49 | 63 | P3HN6Ql42C | IfZhyoZtvE | DONE |
+| FACE-COLD-S50-A63 | s50 | 63 | LwtgSmCswO | DoPdgdUpcl | NEEDS_REVIEW (background and skin read warmer/yellower than master) |
 
-QC notes: s13/s14/s15/s26/s27/s28/s29 age16 (7 jobs; all marked DONE after viewing; s27 has a pale-lavender hair ribbon, within robe/pin vocabulary) looked at: no text, ivory robe+pin, skin matches master tone, teen-appropriate, no makeup look. (QC of identity vs source not pixel-compared; subjective.)
+QC notes: all 60 outputs generated once (no retries) and each viewed at 512px. No printed text, no captions, ivory robe + pin on every image, no moles, ages read 16/26/51/63 in order, skin close to the master. Flagged NEEDS_REVIEW for the owner: s26-A26 (lips rosy), s46-A26 (pink eyelid shading), s50-A63 (background/skin warmer than master). Identity vs source was judged by eye only, not pixel-compared. Age 39 NOT run (owner hold).
 
-## HANDOVER
-Worker continues itself (rollover cancelled by Foreman D). Ages 16 and 26 done (30/60); 51 and 63 next. Contact sheets at the end.
+## STATUS
+DONE 60/60 jobs (ages 16/26/51/63, 15 people). 57 DONE, 3 NEEDS_REVIEW. Cost 60 x 135 = 8,100 cr. Contact sheets: see section below if present.
