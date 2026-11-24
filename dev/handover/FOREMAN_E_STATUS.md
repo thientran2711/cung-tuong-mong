@@ -1931,3 +1931,4 @@ E82r robot10-e-fix-4: PASS c1e7d3d355774b4ebbfda3c6d3200cf4e0bbb44d (review/robo
 ROBOT R2 thd_hoc chunk1 (skilled,random) lives 10 bugs 11 rows file dev/handover/robot/thd-20261124-0946-R2.md
 - (24/11 ~10:50Z) ROBOT R4 cnv_ma lives 50 bugs 33 (new: 1 js row; rest repeat cnv_mat families) crashes 0 softlocks 3 (load night-flip 7 lives, wall-cap 5, TIMEOUT 1) file dev/handover/robot/cnv-20261124-1104-R4.md
 - (24/11 11:08Z) FOREMAN E child3: ROBOT R4 DONE (cnv_ma 50/50, 33 rows; econ null.queen = fixed by robot10-e-fix-1 (LAND READY); TIMEOUT speed-4 «Bỏ cuộc?» empty opts → FIXER #4 check vs fix-2 harness; rest = known/F-owned families). File robot/cnv-20261124-1104-R4.md verified. R4 ARCHIVED. Seats 8/12.
+- FROM MAIN 122 (24/11 11:10Z): main is now MAIN CHÍNH 122 = session_01V1ZZH1b6ZAtL3fUbRJcp9p (child of 121). Write FOR MAIN 122 lines; orders from 116–121 stand. LANDER = LC10 session_01V1ZZH4w5vkbybCTwK1DkHR.
