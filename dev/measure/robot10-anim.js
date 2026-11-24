@@ -4,7 +4,7 @@
      css (transform layers) · sprite (a sheet generated in the page, steps()) · webm (alpha VP9 loop made from the same picture by dev/test/lib/anim-gen.py)
  USAGE
    node dev/measure/robot10-anim.js solo [--devs fold,ipad] [--formats css,sprite,webm] [--figs 1,2,4,6,12] [--secs 20] [--cpu 4] [--out dir]
-   node dev/measure/robot10-anim.js coop [--formats css,sprite,webm] [--figs 2,6,12] [--buoi 6] [--cpu 4] [--out dir]     (two clients on the LIVE co-op Worker, both animating;
+   node dev/measure/robot10-anim.js coop [--fx full|lite] [--formats css,sprite,webm] [--figs 2,6,12] [--buoi 6] [--cpu 4] [--out dir]     (two clients on the LIVE co-op Worker, both animating;
         runs dev/test/coop-lag.js --anim <fmt>:<n> --no-rejoin once WITHOUT anim (baseline) and once per cell → coopTurnP95 / coopActionP95 delta vs no-anim)
    node dev/measure/robot10-anim.js soak <format> <figs> [--devs fold,ipad] [--soak 1800]     30-min soak of one config: heap / DOM / GPU-process growth per 30 s
    --fx full|lite   full (default) = the game as she plays it; lite = «Hiệu ứng: Gọn» (isolates the figures' marginal cost; the software-GL test box runs the full game at only ~15 fps at CPU ×1)
@@ -52,8 +52,9 @@ async function solo(){const pre=await AS.prep({dir:process.env.ANIM_CACHE,format
     heapAdd:R1(m1.heap-m0.heap),heapD:R1(m2.heap-m1.heap),nodesAdd:m1.nodes-m0.nodes,gpuAdd:g1.gpuMB-g0.gpuMB,gpuD:g2.gpuMB-g1.gpuMB,rendererAdd:g1.rendererMB-g0.rendererMB,acts:stat.acts||0,errors:errs.length};
    cells.push(c);L(dev,format,n,dialogue?'dialogue':'','fps p5/p50',c.fps5,c.fps50,'lt/min',c.ltPerMin,'heap+',c.heapAdd,'gpu+',c.gpuAdd);
    if(dialogue)await p.evaluate(PP.CLEAR);await AS.remove(p).catch(()=>{})};
-  await cell('none',0,false);
+  await cell('none',0,false);await cell('none',0,true);/* the game alone, without and with an open dialogue */
   for(const fm of FORMATS){for(const n of FIGS)await cell(fm,n,false);await cell(fm,2,true)}
+  await cell('none',0,false);await cell('none',0,true);/* second baseline at the end: the spread between the two = the noise floor of the box */
   await ctx.close()}
  await b.close();return{cells,sizes:pre.sizes}}
 
@@ -71,7 +72,7 @@ async function soak(){const format=A[1]||'css',n=+(A[2]||6),SOAK=+opt('soak',180
 
 /* ---------- coop: coop-lag.js --anim, baseline first ---------- */
 async function coop(){const cp=require('child_process');const NB=opt('buoi',6);const cells=[];const dir=fs.mkdtempSync(path.join(require('os').tmpdir(),'r10anim-'));
- const run=(tag,extra)=>{const out=path.join(dir,tag+'.json');L('coop-lag',tag);const r=cp.spawnSync('node',[path.join(REPO,'dev','test','coop-lag.js'),'--buoi',String(NB),'--cpu',String(CPU),'--no-rejoin','--out',out,...extra],{cwd:REPO,encoding:'utf8',stdio:['ignore','pipe','inherit']});
+ const run=(tag,extra)=>{const out=path.join(dir,tag+'.json');L('coop-lag',tag);const r=cp.spawnSync('node',[path.join(REPO,'dev','test','coop-lag.js'),'--buoi',String(NB),'--cpu',String(CPU),'--no-rejoin','--fx',FX,'--out',out,...extra],{cwd:REPO,encoding:'utf8',stdio:['ignore','pipe','inherit']});
   try{return JSON.parse(fs.readFileSync(out,'utf8'))}catch(e){L('coop-lag produced no JSON for',tag,'exit',r.status);return null}};
  const base=run('base',[]);if(!base)throw new Error('coop baseline failed (needs bash dev/site/build_site.sh → dev/index.html, and the LIVE co-op Worker)');
  const bm=base.metrics;cells.push({mode:'coop',dev:'fold+ipad',format:'none',figs:0,coopTurnP95:bm.coopTurnP95,coopActionP95:bm.coopActionP95,coopKBPerMin:bm.coopKBPerMin});

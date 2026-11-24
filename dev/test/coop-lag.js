@@ -17,6 +17,7 @@ const {chromium}=require('playwright');const fs=require('fs'),path=require('path
 const {serve,BASE}=require('./coop-serve.js');const PP=require('./lib/playperf');
 const A_=process.argv.slice(2);const opt=(k,d)=>{const i=A_.indexOf('--'+k);return i<0?d:(A_[i+1]===undefined||A_[i+1].startsWith('--')?true:A_[i+1])};
 const ANIM=opt('anim',null),NOREJ=!!opt('no-rejoin',false);const AS=ANIM?require('./lib/anim-stress.js'):null;
+const FXLITE=opt('fx','full')==='lite';/* --fx lite = «Hiệu ứng: Gọn» on both clients (isolates the figures / sync from the game's own effects) */
 const NB=+opt('buoi',8),CPU=+opt('cpu',4),WURL=opt('worker','https://ctm-coop.victoria-tntt.workers.dev'),OUT=opt('out',null);
 const BUDGET=JSON.parse(fs.readFileSync(opt('budget',path.join(__dirname,'play-perf-budget.json')),'utf8'));
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));const L=(...a)=>console.error(new Date().toISOString().slice(11,19),...a);
@@ -50,6 +51,7 @@ async function press(o,k0){for(let t=0;t<80;t++){await clear(o);const r=await o.
  await B.p.waitForFunction(()=>__co2().seat==='b'&&!__co2().frozen,null,{timeout:60000});
  {const t0=Date.now();while(Date.now()-t0<90000){await clear(A);await clear(B);if(await A.p.evaluate(()=>__co2().world)&&await B.p.evaluate(()=>__co2().world))break;await sleep(500)}}
  L('both in the world');for(const o of [A,B]){await o.cdp.send('Emulation.setCPUThrottlingRate',{rate:CPU});await o.p.evaluate(PP.RESET);await o.p.evaluate(()=>{window.__wsl.length=0})}
+ if(FXLITE)for(const o of [A,B])await o.p.evaluate(()=>{try{OPT.fxon=false;OPT.fxpick=true;saveOpt()}catch(e){}});
  if(AS){const [fm,n]=ANIM.split(':');for(const o of [A,B]){await AS.inject(o.p,{format:fm,n:+n||6,seed:o===A?7:11});await sleep(3000);await o.p.evaluate(()=>{window.__r10fps.t.length=0;window.__r10fps.lt.length=0;window.__r10fps.on=true})}L('anim',ANIM,'on both clients')}
  const tPlay=Date.now();
  /* play NB buổi: each seat taps one act card (own state changes -> sync message), then both press Sang buổi */
