@@ -19,7 +19,9 @@ const css=`#md3sc .md3-halo{position:absolute;pointer-events:none;z-index:1;back
 async function setup(o){o=o||{};MD3.ensureCss();if(!document.getElementById('md3-css2')){const s=document.createElement('style');s.id='md3-css2';s.textContent=css;document.head.appendChild(s)}
  const ip=document.documentElement.classList.contains('kv2');const np=o.people||(ip?4:3);const list=items(o.n||12);
  const P=liveRivals(true).filter(v=>v.alive&&!v.out).slice(0,np);const bg=IMG_U('img/ngu-hoa-vien.webp');
- const acts=realActs();await MD3.preload([bg,...list.map(x=>x.src),...acts.map(a=>a.pic).filter(Boolean)]);
+ /* fixture: the cast on the stage has MET her (so every kit name tag shows a real name, no «???»; the kit's stranger rule itself is untouched) */
+ try{S.met=S.met||{};const K=k61S();P.forEach(v=>{if(S.met[v.id]==null)S.met[v.id]=0;if(K)K[kOf61(v)]=Math.max(+K[kOf61(v)]||0,2)})}catch(e){}
+ const acts=realActs().slice(0,ip?5:4);await MD3.preload([bg,...list.map(x=>x.src),...acts.map(a=>a.pic).filter(Boolean)]);
  const Sc=kitScene.open({bg,intro:0});const L=Sc.L;L.id='md3sc';MD3.sceneBright(L);L.style.opacity='0';const g=L.g,w=g.w,H=g.H;
  const fh=Math.round(H*(ip?.68:.58)),feet=H*.925;const figs=[],tags=[];
  for(let i=0;i<P.length;i++){const cx=w*(i+.5)/P.length;const f=await Sc.fig(P[i],{cx,top:Math.round(feet-fh),fh,z:2});figs.push(f);
@@ -38,7 +40,8 @@ async function tapPerson(i){if(st.busy||st.sel===i)return;st.busy=1;await closeP
  /* the others: kitDim (KIT §98.3, opaque figure-only dim, BAL.kdim); she steps OUT toward her free side (forward + apart from the group) */
  kitDim.off();kitDim.on(figs,{keep:f});
  figs.forEach((x,k)=>{[x,halos[k],tags[k]].forEach(e=>e.getAnimations().forEach(a=>a.cancel()));
-  if(k!==i){tags[k].animate([{opacity:1},{opacity:.4}],{duration:300,fill:'both'});halos[k].animate([{opacity:0}],{duration:10,fill:'both'})}
+  if(k!==i){const dx=(x.__cx<f.__cx?-1:1)*w*.07,kf=[{transform:'none'},{transform:`translateX(${dx}px)`}],o={duration:560,easing:E,fill:'both'};/* the others also draw APART from her (clear floor for the plaques); the dim copy travels with its figure */
+   x.animate(kf,o);if(x.__kdc)x.__kdc.animate(kf,o);tags[k].animate([{opacity:1,transform:'translateX(-50%)'},{opacity:.4,transform:`translateX(calc(-50% + ${dx}px))`}],o);halos[k].animate([{opacity:0}],{duration:10,fill:'both'})}
   else{const tx=right?w*.07:-w*.07;const to=`translateX(${tx}px) translateY(10px) scale(1.07)`;x.__t=to;x.animate([{transform:'none'},{transform:`translateX(${tx}px) translateY(14px) scale(1.09)`,offset:.6},{transform:to}],{duration:640,easing:E,fill:'both'});
    halos[k].animate([{opacity:0,transform:'scale(.85)'},{opacity:1,transform:`translateX(${tx}px) scale(1.07)`}],{duration:640,easing:E,fill:'both'});tags[k].animate([{transform:'translateX(-50%)'},{transform:`translateX(calc(-50% + ${tx}px))`}],{duration:640,easing:E,fill:'both'})}});
  await wait(680);st.busy=0;return picker(i)}
