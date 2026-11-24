@@ -24,7 +24,7 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
     const pl0=Dd.pl,wh0=Dd.when,wo0=Dd.who,b0=B.E[sid].b,p0=[B.p0,B.step,B.pMax];Dd.pl=["zz"];Dd.when=null;Dd.who=(F,L,X)=>wo0(F,PPL,X);B.E[sid].b="0123";B.p0=100;B.step=0;B.pMax=100;
     S.ky={m:0,cd:-1,seen:{},got:[],last:-1};for(const i in KY.DEF)if(i!==sid)S.ky.seen[i]=0;S.out=false;try{KY.arrive(S,"zz","t")}finally{Dd.pl=pl0;Dd.when=wh0;Dd.who=wo0;B.E[sid].b=b0;[B.p0,B.step,B.pMax]=p0}
     if(!Q.length)return 'not fired';showModal();return 'ok'},[kind,sid]);
-   await sleep(1500);const f=path.join(OUT,`${dev}-${kind}-${sid}.png`);await p.screenshot({path:f});
+   await sleep(+process.env.SHOT_WAIT||5000);const f=path.join(OUT,`${dev}-${kind}-${sid}.png`);await p.screenshot({path:f});
    const m=await p.evaluate(()=>{const M=document.getElementById('modal');const o=[...document.querySelectorAll('#modal .opt')].map(x=>x.getBoundingClientRect()).filter(x=>x.width);const mr=M&&M.querySelector('.box,.mbox,div')?M.querySelector('.box,.mbox,div').getBoundingClientRect():null;
     return {open:!!M&&!M.hidden,ovx:document.documentElement.scrollWidth>innerWidth+1,optsIn:o.every(x=>x.right<=innerWidth+1)&&(!mr||mr.bottom<=innerHeight+1),n:o.length,scroll:o.some(x=>x.bottom>innerHeight+1)}});
    const good=ok==='ok'&&m.open&&!m.ovx&&m.optsIn;if(!good)fail++;console.log((good?'ok   ':'FAIL ')+dev+' '+id+' '+ok+' '+JSON.stringify(m)+' '+f)}
