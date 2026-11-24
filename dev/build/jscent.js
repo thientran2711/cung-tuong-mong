@@ -65,7 +65,7 @@ function scTell(p,k,mod){const B=BAL.scent.tell,nm=scName(k);let toMe=0,frameMe=
   if(frameMe)log(`Tai mắt báo: long bào vương ${nm}, có người lại tưởng đêm qua ngài ở chỗ ngươi; ánh mắt nhìn ngươi ghen tức hơn.`)}
  S.scLastTell=out.map(([x,y])=>[key(x),key(y)]);return out}
 /* poison (j70 poison2): a servant of the target taints the target's own scent box */
-function scTaint(a,t){if(!t||!t.sc)return null;const i=(t.inv||[]).findIndex(e=>e&&!e.h&&!e.t&&e.k===scBox(t.sc));if(i<0)return null;const e=t.inv[i];e.t="doc";e.by=key(a);return e}
+function scTaint(a,t){if(!t||!t.sc)return null;const i=(t.inv||[]).findIndex(e=>e&&!e.h&&!e.t&&e.k===scBox(t.sc));if(i<0)return null;const e=t.inv[i];e.t="doc";e.by=key(a);if(a)a.schemes=(a.schemes||0)+1;/* a real deed (jtruth deedCap): the trail can become evidence */return e}
 try{if(typeof M70==="object"&&M70.poison2){const P=BAL.scent.poison;M70.poison2.R.push({id:"lohuong",n:"Mua chuộc cung nữ coi lò hương",tl:["gặp riêng cung nữ coi lò hương của nạn nhân ở góc tường sau","cung nữ ấy dạo này hay lén mở hộp hương lúc vắng người"],pl:null,vis:P.vis,need:P.need,bac:P.bac,acc:"tsv",gd:"Tự tay coi lò hương, khóa hộp hương",st:"Gọi riêng cung nữ coi lò hương ra hỏi chuyện"})}}catch(e){console.error("jscent j70",e)}
 (function(){
  if(typeof pickRoute70==="function"){const r0=pickRoute70;pickRoute70=function(a,t,M){if(M&&M.R&&M.R.some(r=>r.id==="lohuong")&&!scOf(t)){const M2=Object.assign({},M,{R:M.R.filter(r=>r.id!=="lohuong")});return r0.call(this,a,t,M2)}return r0.apply(this,arguments)}}
