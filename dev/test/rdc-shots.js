@@ -1,5 +1,5 @@
 /* ORDER THIN P8 shots: composed road chapter cards (j67 story card, kit event frame) on Fold 755x1000@2 + iPad 1180x820@2.
-   node dev/test/rdc-shots.js <outdir> [chapter:slot,…]   slot = s (opening) | c (complication) | x (climax). Shots go OUTSIDE git.
+   [RDC_ORIGIN=<origin>] node dev/test/rdc-shots.js <outdir> [chapter:slot,…]   slot = s (opening) | c (complication) | x (climax). Shots go OUTSIDE git.
    Same entry flow as j7c-shots.js (a real saved life, reloaded); each chapter is opened as a side thread and its hồi card is shown. */
 const {chromium}=require('playwright');const D=require('./lib/device');const RL=require('./lib/roulette');const http=require('http'),fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const OUT=path.resolve(process.argv[2]||'/tmp/j7c-shots');fs.mkdirSync(OUT,{recursive:true});
@@ -23,7 +23,7 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
   let g=await D.openHost(p,'http://127.0.0.1:'+srv.address().port+'/',{timeout:120000});await g.waitForFunction(()=>window.__ctmBuilt===1&&typeof start==='function',null,{timeout:120000});
   /* review thin-p2 r1: the new-life entry flow ends inside the selection / reward scenes, which hide the card. So, as dev/tools/quickcheck.js
      step 2: start a life, play one buổi, save it into sổ 3 the game's own way (ser), reload, load sổ 3 (loadSlot + deser) and show the card there. */
-  await g.evaluate(()=>{for(const b of document.querySelectorAll('button'))if(/Vào cung ngay/.test(b.textContent))b.click()}).catch(()=>{});await p.waitForTimeout(500);await g.evaluate(QC.NEWLIFE);await g.waitForFunction(QC.SETTLE,null,{polling:150,timeout:60000}).catch(()=>{});await g.evaluate(QC.BUOI).catch(()=>{});
+  await g.evaluate(()=>{for(const b of document.querySelectorAll('button'))if(/Vào cung ngay/.test(b.textContent))b.click()}).catch(()=>{});await p.waitForTimeout(500);await g.evaluate(o=>{if(o)window.__forceOrigin=o},process.env.RDC_ORIGIN||'');/* review r1: RDC_ORIGIN=<origin> plays the life of the shot road's origin, so {land}/{dad}/{mis}… are that origin's */await g.evaluate(QC.NEWLIFE);await g.waitForFunction(QC.SETTLE,null,{polling:150,timeout:60000}).catch(()=>{});await g.evaluate(QC.BUOI).catch(()=>{});
   await g.evaluate(()=>localStorage.setItem(SK(3),JSON.stringify(ser())));
   await p.reload();const g2=await D.openHost(p,'http://127.0.0.1:'+srv.address().port+'/',{timeout:120000});await g2.waitForFunction(()=>window.__ctmBuilt===1&&typeof start==='function',null,{timeout:120000});
   g=g2;await g.evaluate(()=>{for(const b of document.querySelectorAll('button'))if(/Vào cung ngay/.test(b.textContent))b.click()}).catch(()=>{});await p.waitForTimeout(500);await g.evaluate(X=>{const d=loadSlot(3);SLOT=3;document.getElementById('title').hidden=true;deser(d);try{deal()}catch(e){}

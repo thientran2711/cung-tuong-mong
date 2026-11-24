@@ -9,13 +9,13 @@
    - the road's rival is the same person while alive; each opened chapter marks its parts in P0 (family rdc:<origin>);
    - reload: the composition survives a JSON round trip of S and rebuilds the same chapters; validator numbers = BAL.road.c; 0 page errors. */
 const {chromium}=require('playwright');const http=require('http'),fs=require('fs'),path=require('path');
-const ROOT=path.resolve(__dirname,'../..');const [,,FILE,NL,ONLY]=process.argv;const NLIV=+NL||2;
+const ROOT=path.resolve(__dirname,'../..');const [,,FILE,NL,ONLY]=process.argv;const NLIV=+NL||2;const STOP12=!!process.env.RDC_STOP12;/* review r1: RDC_STOP12=1 stops each life once the road (.4–.11) is told and chapter 12 opened — the shared 12–14 endgame is not P8 and its long tail runs the renderer out of memory (OOM at ~7.6 GB) */
 const ROWS=fs.readFileSync(FILE||path.join(__dirname,'rdc-fixture.jsonl'),'utf8').split('\n').filter(l=>l.trim().startsWith('{')).map(l=>JSON.parse(l));
 const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http://x').pathname);if(p==='/')p='/index.html';const f=path.join(ROOT,p);if(!fs.existsSync(f)||fs.statSync(f).isDirectory()){r.statusCode=404;return r.end()}fs.createReadStream(f).pipe(r)});
 let fail=0,pass=0;const ok=(c,m,x)=>{if(!c){fail++;console.log('FAIL '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,700):''))}else pass++};
 (async()=>{await new Promise(r=>srv.listen(0,'127.0.0.1',r));const URL='http://127.0.0.1:'+srv.address().port+'/';const b=await chromium.launch();const errs=[];let p;
  const boot=async()=>{if(p)await p.context().close();const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});
-  await ctx.route(u=>!/^http:\/\/127\.0\.0\.1[:/]/.test(u.href)&&/^https?:/.test(u.href),r=>r.abort());p=await ctx.newPage();p.setDefaultTimeout(0);
+  await ctx.route(u=>!/^http:\/\/127\.0\.0\.1[:/]/.test(u.href)&&/^https?:/.test(u.href),r=>r.abort());p=await ctx.newPage();if(STOP12)await p.addInitScript(()=>{window.__stop12=1});p.setDefaultTimeout(0);
   p.on('pageerror',e=>errs.push(e.message.slice(0,300)));p.on('console',m=>{const t=m.text();if(t.startsWith('[rdc]'))console.log(t)});await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});
   await p.waitForFunction(()=>typeof start==='function'&&typeof ROAD14==='object'&&typeof rdcLoad==='function',null,{timeout:0});await p.waitForTimeout(1500);
   await p.evaluate(ROWS=>{document.getElementById('title').hidden=true;
@@ -33,7 +33,7 @@ let fail=0,pass=0;const ok=(c,m,x)=>{if(!c){fail++;console.log('FAIL '+m+(x!==un
     const rc0=JSON.parse(JSON.stringify(S.st.f14.rc||null));
     const exp=(row,o,clim)=>{const c={},w={};for(const [s,n] of Object.entries(o.loss||{}))if(!s.startsWith('rel.'))c[s]=-n*C.fx[s];if(c.bac&&typeof price67==='function')c.bac=price67(c.bac);/* bạc goes through the game's one story price rule (as every chapter) */for(const [s,n] of Object.entries(o.gain||{}))if(s!=='sc'&&!s.startsWith('rel.'))w[s]=n*C.fx[s];return{c,w,sc:(o.gain&&o.gain.sc||0)*C.fx.sc}};
     const same=(a,b)=>JSON.stringify(Object.entries(a||{}).filter(([,v])=>v).sort())===JSON.stringify(Object.entries(b||{}).filter(([,v])=>v).sort());
-    for(;mon<400&&!S.st.ch.all;mon++){const c=S.st.ch;if(mon%25===0)console.log('[rdc] month',mon,'chapter',c.n,S.st.M&&S.st.M.a);if(c.n!==lastN){seq.push(c.n+':'+(S.st.ms?S.st.ms.id:S.st.M?S.st.M.a:'?'));lastN=c.n;stuck=0}
+    for(;mon<400&&!S.st.ch.all&&!(window.__stop12&&S.st.ch.n>BAL.road.last&&S.st.ch.fin);mon++){const c=S.st.ch;if(mon%25===0)console.log('[rdc] month',mon,'chapter',c.n,S.st.M&&S.st.M.a);if(c.n!==lastN){seq.push(c.n+':'+(S.st.ms?S.st.ms.id:S.st.M?S.st.M.a:'?'));lastN=c.n;stuck=0}
      if(S.dead||S.out){S.dead=false;S.out=0;S.suc=60}
      const A=S.st.M;try{if(A&&A.act&&A.act.v!=null){const v=RV(A.act.v);vs.push({a:A.a,v:A.act.v,alive:!!(v&&v.alive&&!v.out)})}
       if(A&&!A.done&&!A.cur&&A.nb){A.due=0;fireBeat67(A)}
@@ -79,7 +79,7 @@ let fail=0,pass=0;const ok=(c,m,x)=>{if(!c){fail++;console.log('FAIL '+m+(x!==un
    const ns=R.seq.map(x=>+x.split(':')[0]);
    ok(!R.err,`${rd} L${L+1}: no error`,R.err);
    ok(R.road===rd&&R.rd===rd&&R.rc0,`${rd} L${L+1}: road kept + composed at life start`,[R.road,R.rd,R.rc0]);
-   ok(R.all&&R.n===14&&ns.every((n,i)=>n===i+4),`${rd} L${L+1}: chapters 4..14 in order (1..3 fast-forwarded)`,R.seq);
+   ok((STOP12?R.n>=12:(R.all&&R.n===14))&&ns.every((n,i)=>n===i+4),`${rd} L${L+1}: chapters 4..${STOP12?'12 (RDC_STOP12: stop after the road)':'14'} in order (1..3 fast-forwarded)`,R.seq);
    const got=R.seq.filter(x=>{const n=+x.split(':')[0];return n>=4&&n<=11}).map(x=>x.split(':')[1]);const w=[rd].concat([5,6,7,8,9,10,11].map(n=>rd+'_'+n));
    ok(JSON.stringify(got)===JSON.stringify(w),`${rd} L${L+1}: chapters 4..11 are the road in order`,{got,w});
    ok(!!R.fin&&R.ends.some(e=>e.startsWith(rd+'_11=')),`${rd} L${L+1}: origin ending told by the road finale`,[R.fin,R.ends.slice(-2)]);
