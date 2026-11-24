@@ -1290,3 +1290,5 @@ robot10 PHASE 2 nc RUNNER A (sonnet; nc_gian + nc_su, 10 bots × 2 kiếp; brief
 robot10 PHASE 2 nc RUNNER B (sonnet; nc_tuc + nc_vuong, 10 bots × 2 kiếp; briefs/D-robot10-nc-runner.md) | dev/handover/robot (handover branch) | session_01964izFhfpAxfqBdvuCY4hx | RUNNING | 24/11 00:55Z (Foreman D depth 3)
 robot10 PHASE 2 nc FIXER (opus; families from nc-*.md bug files; briefs/D-robot10-nc-fixer.md) | review/robot10-nc-fix-<n> | session_01964izEqyr78GaoHgYUcT4p | RUNNING | 24/11 00:55Z (Foreman D depth 3)
 | THIN ENGINE #3 (opus): P4 j68 openings ≥60 × 4 families + ≥40 × 5 (API P4 first → writers), then P5 Kỳ ngộ | review/thin-p4; reports/thin.md | B (ORDER MAIN 113 22:36Z) | session_01N1tNP4i3MEbbZxyD92bKmn | RUNNING | 24/11 00:55Z |
+REVIEW robot10-nc-fix-1 (opus BIG save drift family; briefs/D-robot10-nc-fix-1-review.md) of 2e5d3da0 | review/robot10-nc-fix-1-rv | session_01964izBqmsSifomtfYUK96U | RUNNING | 24/11 01:39Z (Foreman D depth 3)
+REVIEW robot10-nc-fix-2 (sonnet SMALL Dư đồ layer over tabs; briefs/D-robot10-nc-fix-2-review.md) of a08f8cd9 | review/robot10-nc-fix-2-rv | session_01964izGDoYZVYJKEoMpDwU1 | RUNNING | 24/11 01:39Z (Foreman D depth 3)
