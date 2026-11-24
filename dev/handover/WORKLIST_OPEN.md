@@ -19,7 +19,7 @@ Written by MAIN CHÍNH 116, 24/11 ~10:10Z after sếp's new rulings (OD 24/11 ~0
 | 15 | Event backgrounds (hương nang / ban hoa, major events) + Dưỡng Tú viện 3 sở + Tiền sảnh | C | drawing |
 | 16 | Old far-shot illustration redraws (option B) | C | drawing |
 | 17 | Art style unification audit | C | audit |
-| 18 | Dư đồ slow open (map-perf) | MAP-FIX-2 | map-perf LIVE 056c2402; map-fix-2 (tap-go/portrait) fixing |
+| 18 | ~~Dư đồ slow open (map-perf) + map-fix-2~~ | LC10 | LIVE ac4790f0 (24/11 09:09Z) |
 | 19 | coop-thin-g (co-op world sync) | B | re-merge |
 | 20 | TITLES2 (per-chapter titles) | E | fix r3 |
 | 21 | Parking lot rows still not built | E | audit + build |
