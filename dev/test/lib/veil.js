@@ -4,8 +4,9 @@
    API:  await V.guard(pageOrContext)   addInitScript: removes #kroulw the moment it is inserted (call BEFORE page.goto; every later navigation too)
          await V.waitOut(page,{max})    after start(): lets the 150 ms veil timer pass, then removes any #kroulw and waits until neither the veil nor the real roulette #kroul exists (max 9 s)
    usage: const V=require('./lib/veil'); await V.guard(p); ... await p.evaluate(()=>start()); await V.waitOut(p); await p.mouse.click(x,y) */
-const INIT=()=>{const kill=()=>{const w=document.getElementById('kroulw');if(w)w.remove()};
- const arm=()=>{try{new MutationObserver(kill).observe(document.documentElement,{childList:true,subtree:true})}catch(e){}kill()};
+const INIT=()=>{const arm0=()=>{try{const st=document.createElement('style');st.textContent='#kroulw{display:none!important;pointer-events:none!important}';(document.head||document.documentElement).appendChild(st)}catch(e){}};
+ const kill=()=>{const w=document.getElementById('kroulw');if(w)w.remove()};
+ const arm=()=>{arm0();try{new MutationObserver(kill).observe(document.documentElement,{childList:true,subtree:true})}catch(e){}kill()};
  if(document.documentElement)arm();else document.addEventListener('DOMContentLoaded',arm)};
 async function guard(t){await t.addInitScript(INIT)}
 async function waitOut(p,o){const max=(o&&o.max)||9000;await p.waitForTimeout(250);
