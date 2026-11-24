@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"68e04187+","t":"2026-11-24T11:38Z","c":"robot-coop-fix-3: index.html/sw.js rebuilt (build_site.sh)","b":"b1cf6d45e5df","h":[{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"}]};
+window.CTM_BI={"s":"21d7caa1+","t":"2026-11-24T14:58Z","c":"robot-coop-fix-3: index.html/sw.js rebuilt (build_site.sh)","b":"1a583d6e67d3","h":[{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -50700,13 +50700,19 @@ function herPl7(){try{if(!host()||!(CW.thin&&CW.thin.on&&CW.thin.on(7)))return n
 CW.herPl7=herPl7;
 function onPos(m){if(!CW.on||m.from===CW.seat||!S)return;CW.fpos=m;const pl=mapPlace(herPl7()||m.place);const f=friendEntry();if(!f)return;
  let sc=liveStats(m);if(typeof m.fh==="string"){if(famTake())sc=true;if(CW.famGotH!==m.fh)famAsk(m.fh)}S.where=S.where||{};const was=S.where[f.id];S.where[f.id]=pl||palaceOf(f);rosterFriend(f);if(was!==S.where[f.id]||sc){refreshHere();presAll(true);if(!Q.length)render()}}
-function keepFriendPos(){if(!CW.on||!S||!S.where)return;const f=friendEntry();if(!f)return;if(CW.ctx){/* part E: her step on the host: the host's own place */const o=CW.thin&&CW.thin.outerS;S.where[f.id]=o&&o.place&&o.place!=="home"?mapPlace(o.place):palaceOf(f);rosterFriend(f);return}const h7=herPl7();const pl=h7?mapPlace(h7):CW.fpos&&CW.fpos.week===wk()&&CW.fpos.buoi===(S.buoi||0)?mapPlace(CW.fpos.place):null;S.where[f.id]=pl||palaceOf(f);rosterFriend(f)}
+function keepFriendPos(){if(!CW.on||!S||!S.where)return;const f=friendEntry();if(!f)return;/* part E (CW.ctx: her step on the host = the host's own place) and her relayed place: ONE rule, friendPl */S.where[f.id]=friendPl(f);rosterFriend(f)}
 /* robot-coop-fix-3 (robot10-coop coop-pos «host sees guest at r4, guest is at ksp»; law 6b real people): the friend is a PLAYER, not an NPC, but the
    palace roster (j95: S.roster.P["v"+id], one plan row per khắc) planned her like any consort. j95's whereOf, the people-at-a-place lists, «who sees
    whom», catches and approaches read that plan, so her screen place (S.where, from her pos relay) and the roster disagreed. ONE source: from this
    khắc on her roster rows say where she really is (her own palace = "rest", anywhere else = "visit"); the next relay writes them again. */
 function rosterFriend(f){try{const R=S.roster;if(!R||!R.P||typeof j95kh!=="function")return;const e=R.P["v"+f.id];if(!Array.isArray(e))return;const w=S.where[f.id];if(!w)return;
  const a=w===palaceOf(f)?"rest":"visit";for(let i=j95kh();i<e.length;i++)if(Array.isArray(e[i])&&(e[i][0]!==w||e[i][1]!==a))e[i]=[w,a,null,""]}catch(e){}}
+/* robot-coop-fix-3 r2 (A/B run 5 «host sees guest at r5, guest is at ksp» at buổi 0.1, her S.where = ksp): at a new buổi j95 PLANS the roster again
+   (j95planRival, wrapped by jagday's NPC day agenda) — after her pos relay had already arrived, so her rows went back to an NPC plan until the
+   next relay. Her rows come from her real place from the moment they are planned: the OUTERMOST wrap of j95planRival (installed once every
+   module has loaded) fills the friend's rows with S.where (her place this buổi) or her palace. */
+function friendPl(f){if(CW.ctx){const o=CW.thin&&CW.thin.outerS;return o&&o.place&&o.place!=="home"?mapPlace(o.place):palaceOf(f)}const h7=herPl7();const pl=h7?mapPlace(h7):CW.fpos&&CW.fpos.week===wk()&&CW.fpos.buoi===(S.buoi||0)?mapPlace(CW.fpos.place):null;return pl||palaceOf(f)}
+setTimeout(()=>{try{if(typeof j95planRival!=="function"||j95planRival.__cwF)return;const f0=j95planRival;j95planRival=function(v,c){const P=f0.apply(this,arguments);try{if(CW.on&&S&&isF(v)&&Array.isArray(P)){const w=friendPl(v),a=w===palaceOf(v)?"rest":"visit";for(let i=0;i<P.length;i++)P[i]=[w,a,null,""]}}catch(e){}return P};j95planRival.__cwF=1}catch(e){console.error("j95planRival coop wrap",e)}},0);
 CW.keepFriendPos=keepFriendPos;CW.refreshHere=()=>refreshHere();
 function onBuoi(m){T("onBuoi "+m.week+"."+m.buoi+" me "+wk()+"."+(S&&S.buoi)+" Q"+Q.length+(S&&S.mg?" mg":""));if(!CW.on||!S||eW())return;CW.bend=false;CW.wantB=null;drainAg();
  /* the room moved on: if a dialog is still open, step as soon as it is closed */
@@ -97903,7 +97909,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b1cf6d45e5df";window.CTM_BUILD=BUILD;
+const BUILD="1a583d6e67d3";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

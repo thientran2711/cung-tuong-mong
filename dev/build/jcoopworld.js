@@ -428,13 +428,19 @@ function herPl7(){try{if(!host()||!(CW.thin&&CW.thin.on&&CW.thin.on(7)))return n
 CW.herPl7=herPl7;
 function onPos(m){if(!CW.on||m.from===CW.seat||!S)return;CW.fpos=m;const pl=mapPlace(herPl7()||m.place);const f=friendEntry();if(!f)return;
  let sc=liveStats(m);if(typeof m.fh==="string"){if(famTake())sc=true;if(CW.famGotH!==m.fh)famAsk(m.fh)}S.where=S.where||{};const was=S.where[f.id];S.where[f.id]=pl||palaceOf(f);rosterFriend(f);if(was!==S.where[f.id]||sc){refreshHere();presAll(true);if(!Q.length)render()}}
-function keepFriendPos(){if(!CW.on||!S||!S.where)return;const f=friendEntry();if(!f)return;if(CW.ctx){/* part E: her step on the host: the host's own place */const o=CW.thin&&CW.thin.outerS;S.where[f.id]=o&&o.place&&o.place!=="home"?mapPlace(o.place):palaceOf(f);rosterFriend(f);return}const h7=herPl7();const pl=h7?mapPlace(h7):CW.fpos&&CW.fpos.week===wk()&&CW.fpos.buoi===(S.buoi||0)?mapPlace(CW.fpos.place):null;S.where[f.id]=pl||palaceOf(f);rosterFriend(f)}
+function keepFriendPos(){if(!CW.on||!S||!S.where)return;const f=friendEntry();if(!f)return;/* part E (CW.ctx: her step on the host = the host's own place) and her relayed place: ONE rule, friendPl */S.where[f.id]=friendPl(f);rosterFriend(f)}
 /* robot-coop-fix-3 (robot10-coop coop-pos «host sees guest at r4, guest is at ksp»; law 6b real people): the friend is a PLAYER, not an NPC, but the
    palace roster (j95: S.roster.P["v"+id], one plan row per khắc) planned her like any consort. j95's whereOf, the people-at-a-place lists, «who sees
    whom», catches and approaches read that plan, so her screen place (S.where, from her pos relay) and the roster disagreed. ONE source: from this
    khắc on her roster rows say where she really is (her own palace = "rest", anywhere else = "visit"); the next relay writes them again. */
 function rosterFriend(f){try{const R=S.roster;if(!R||!R.P||typeof j95kh!=="function")return;const e=R.P["v"+f.id];if(!Array.isArray(e))return;const w=S.where[f.id];if(!w)return;
  const a=w===palaceOf(f)?"rest":"visit";for(let i=j95kh();i<e.length;i++)if(Array.isArray(e[i])&&(e[i][0]!==w||e[i][1]!==a))e[i]=[w,a,null,""]}catch(e){}}
+/* robot-coop-fix-3 r2 (A/B run 5 «host sees guest at r5, guest is at ksp» at buổi 0.1, her S.where = ksp): at a new buổi j95 PLANS the roster again
+   (j95planRival, wrapped by jagday's NPC day agenda) — after her pos relay had already arrived, so her rows went back to an NPC plan until the
+   next relay. Her rows come from her real place from the moment they are planned: the OUTERMOST wrap of j95planRival (installed once every
+   module has loaded) fills the friend's rows with S.where (her place this buổi) or her palace. */
+function friendPl(f){if(CW.ctx){const o=CW.thin&&CW.thin.outerS;return o&&o.place&&o.place!=="home"?mapPlace(o.place):palaceOf(f)}const h7=herPl7();const pl=h7?mapPlace(h7):CW.fpos&&CW.fpos.week===wk()&&CW.fpos.buoi===(S.buoi||0)?mapPlace(CW.fpos.place):null;return pl||palaceOf(f)}
+setTimeout(()=>{try{if(typeof j95planRival!=="function"||j95planRival.__cwF)return;const f0=j95planRival;j95planRival=function(v,c){const P=f0.apply(this,arguments);try{if(CW.on&&S&&isF(v)&&Array.isArray(P)){const w=friendPl(v),a=w===palaceOf(v)?"rest":"visit";for(let i=0;i<P.length;i++)P[i]=[w,a,null,""]}}catch(e){}return P};j95planRival.__cwF=1}catch(e){console.error("j95planRival coop wrap",e)}},0);
 CW.keepFriendPos=keepFriendPos;CW.refreshHere=()=>refreshHere();
 function onBuoi(m){T("onBuoi "+m.week+"."+m.buoi+" me "+wk()+"."+(S&&S.buoi)+" Q"+Q.length+(S&&S.mg?" mg":""));if(!CW.on||!S||eW())return;CW.bend=false;CW.wantB=null;drainAg();
  /* the room moved on: if a dialog is still open, step as soon as it is closed */
