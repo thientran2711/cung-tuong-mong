@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)","b":"33e2e0b2d177","h":[{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"}]};
+window.CTM_BI={"s":"3c011eef","t":"2026-11-24T09:56Z","c":"robot-fix-cnv: save round-trip, load leak, harness night/number/mem fixes (WIP)","b":"fe64444e5723","h":[{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1102,7 +1102,10 @@ window.nmNew=nmNew;window.nmPers=nmPers;window.nmBare=nmBare;window.nmBad=nmBad;
    life (module-level lets, window.* holding people, timers, scenes) registers itself here: lifeStore(name, reset). j93 kmReset runs every reset on
    start() (new game, Luân hồi rebirth, co-op new life), on a slot load and on the title screen. LIFE_STORES = the names (dev/test/newlife-leak.js
    checks no store outside this list still holds the old life). Static caches of art / words (KAK_C, KIT_TONE_CACHE, PETC_CACHE…) need no entry. */
-const LIFE_REG=[],LIFE_STORES=window.LIFE_STORES=[];function lifeStore(n,f){LIFE_REG.push([n,f]);LIFE_STORES.push(n)}lifeStore("__kitLastEvArt",()=>{window.__kitLastEvArt=null});
+const LIFE_REG=[],LIFE_STORES=window.LIFE_STORES=[];function lifeStore(n,f){LIFE_REG.push([n,f]);LIFE_STORES.push(n)}
+/* robot-fix-cnv F4: a per-render stamp map (id → person) holds the person WEAKLY, so an old life / a loaded-over game is never kept alive by it (jk2b KIT_AV, j79 kfpReg) */
+function kitWeak(p){return p&&typeof p==="object"&&typeof WeakRef==="function"?new WeakRef(p):{deref:()=>p}}
+function kitDeref(w){return w&&typeof w.deref==="function"?w.deref()||null:null}lifeStore("__kitLastEvArt",()=>{window.__kitLastEvArt=null});
 const RANKS=[
  {n:"Đáp ứng",s:0,d:0},{n:"Thường tại",s:15,d:10},{n:"Quý nhân",s:25,d:20},{n:"Tần",s:38,d:30},
  {n:"Phi",s:52,d:42},{n:"Quý phi",s:66,d:55},{n:"Hoàng quý phi",s:78,d:68},{n:"Hoàng hậu",s:85,d:78}];
@@ -1585,9 +1588,9 @@ function stealKem(v,mode){const B=BAL.steal,M=(B.m&&B.m[mode==="road"?"road":"fe
 
 /* portraits */
 const AV=window.AVATARS||{women:[],emperor:[],maids:[]};
-function drawFace(){const n=(AV.women||[]).length;if(!n)return{face:-1,hue:0};S.usedFaces=S.usedFaces||[];
+function drawFace(){const n=(AV.women||[]).length;if(!n)return{face:-1};S.usedFaces=S.usedFaces||[];
   let free=[...Array(n).keys()].filter(i=>!S.usedFaces.includes(i));let hue=0;
-  if(!free.length)return{face:-1,hue:0};const f=pick(free);S.usedFaces.push(f);return{face:f,hue:0}}
+  if(!free.length)return{face:-1};const f=pick(free);S.usedFaces.push(f);return{face:f}}/* robot-fix-cnv F1: no hue (dead field, ageInit deletes it at load = a save→load drift) */
 function srcW(o){return o&&o.face>=0&&AV.women&&AV.women[o.face]?AV.women[o.face]:""}
 function pv(v){const g=rkOfFace("consort",v);return{rk:g[0],rw:g[1],w:["r",v.id],src:fsrc(v.fc,srcW(v)),hue:0,ini:v.name.split(" ").pop()[0],col:RCOL[v.queen?7:v.rank]}}
 function pEmp(){return{rk:"emp",rw:"Hoàng thượng",w:["e"],src:fsrc(S.emp.fc,(AV.emperor||[])[S.emp.face]||""),hue:0,ini:"Đế",col:"#f0d070"}}
@@ -4024,7 +4027,7 @@ function capOf(p){const B=BAL.promo,C=B.cap;if(S&&p&&p===S.thO)return B.capTh.sl
    vanished) and every month the fill (her pulled) and the trim (her back) made and dropped one more — on the host only, so the two seats split. */
 function hhHas(p){const L=((p&&p.staff)||[]).filter(s=>s&&!s.coop);return[L.filter(s=>s.role==="maid").length+1,L.filter(s=>s.role==="eunuch").length]}
 function mkServ(role){const n=role==="maid"?(AV.maids||[]).length:0;
- const sa=servAge(role);return{fc:drawF(role==="maid"?"maid":"eunuch",sa.age),fk:bandKeys(role==="maid"?"maid":"eunuch",sa.age)[0],sid:++sidN,name:nmNew(role==="maid"?"maid":"eun"),role,face:allServ().filter(x=>x.role===role).length,hue:0,...sa,loyal:BAL.srvLoyal.base+R(BAL.srvLoyal.r),spyFor:null,lover:null,af:{}}}
+ const sa=servAge(role);return{fc:drawF(role==="maid"?"maid":"eunuch",sa.age),fk:bandKeys(role==="maid"?"maid":"eunuch",sa.age)[0],sid:++sidN,name:nmNew(role==="maid"?"maid":"eun"),role,face:allServ().filter(x=>x.role===role).length,...sa,loyal:BAL.srvLoyal.base+R(BAL.srvLoyal.r),spyFor:null,lover:null,af:{}}}
 function allServ(){const L=[];for(const p of [S].concat(rivals))if(p&&p.staff)L.push(...p.staff);return L}
 /* perf (review ag-all-2 r2 B5): the last owner found is checked first (one includes on one list); a moved servant falls through to the full scan */
 const OWN_C=new WeakMap();
@@ -4279,8 +4282,15 @@ function deser(d){trMigrate(d);rivals=d.R;rid=d.rid;S=d.S;S.origin=originByKey(d
   for(const k in o)o[k]=fix(o[k]);return o};
  for(const k in S)if(k!=="kids")S[k]=fix(S[k]);
  tab=d.tab||"act";used=d.used||0;popIdx=null;popMsg="";
- const vk=S.visit&&S.visit.k;if(d.v<3||!vk||vk==="home"||placeOf(vk).k!==vk||!Array.isArray(S.visit.people)){S.visit={k:"home",people:homePeople(),talked:false};S.place="home"}else S.place=vk;
- if(d.v<3)S.mg=null;if(d.v<5){used=0;S.buoi=0}try{srvLad6()}catch(e){console.error(e)}/* maid-ladder-6: 5-rung save → 6 rungs (j14) */normAll();Q=deserQ(d.P||[])}
+ const vk=S.visit&&S.visit.k;/* robot-fix-cnv F1: the room she stands in is loaded AS SAVED, her own home too (was: home rebuilt from homePeople → who stood
+   there, her «đã trò chuyện» marks tk/talked and the line were lost on every reload = a reload let her talk to everyone again) */
+ if(d.v<3||!vk||(vk!=="home"&&placeOf(vk).k!==vk)||!Array.isArray(S.visit.people)){S.visit={k:"home",people:homePeople(),talked:false};S.place="home"}else S.place=vk;
+ if(d.v<3)S.mg=null;if(d.v<5){used=0;S.buoi=0}try{srvLad6()}catch(e){console.error(e)}/* maid-ladder-6: 5-rung save → 6 rungs (j14) */normAll();visRelink();Q=deserQ(d.P||[])}
+/* robot-fix-cnv F1 (law 6b, one person = one object): ser() keeps rivals ($r) and children ($k) by reference but a servant / ma ma in the room list
+   by VALUE, so after a load S.visit held a copy: talking to her changed the copy, not the real servant. Relink every visitor whose ref is a
+   servant (sid) to the live servant object (servById); a sid nobody holds any more stays as saved. */
+function visRelink(){try{const P=S&&S.visit&&S.visit.people;if(!Array.isArray(P)||typeof servById!=="function")return;
+ for(const p of P){const o=p&&p.ref;if(!o||typeof o!=="object"||o.sid==null||(rivals||[]).includes(o))continue;const s=servById(o.sid);if(s&&s!==o)p.ref=s}}catch(e){console.error(e)}}
 function save(){if(!S||quiet)return;try{if(S.dead)localStorage.removeItem(SK(SLOT));else localStorage.setItem(SK(SLOT),JSON.stringify(ser()));localStorage.setItem("hclh-slot",String(SLOT))}catch(e){}}
 function loadSlot(n){try{const d=JSON.parse(localStorage.getItem(SK(n))||"null");if(d&&d.v===2)d.P=[];/* v2: no pending choices; v2/v3 get items, stat blocks, records via normAll */
  return d&&d.v>=2&&d.v<=6?d:null}catch(e){return null}}
@@ -7624,7 +7634,10 @@ function srvInit(){const L=liveRivals(true);if(!L.length)return;const m=pick(L.f
   ${kitRows([["Tính chủ",`${netTxt(m)}`,"t"],["Chủ tin ngươi",S.tin,"t"],["Lương tháng",`${CNV_WAGE[1]} bạc`,"t"],
    ["Đường lên","được Hoàng thượng để mắt mà phong Đáp ứng; lên Chưởng sự cô cô; được ban gả","t"],["Đường xuống","bị phạt, đày Tân Giả khố, chết trong mưu của người khác","t"]])}
   <p class="past">Mỗi buổi ${BAL.time.khac} khắc. Mục Hành sự: việc nặng và việc chủ sai. Dư đồ: chỉ nơi cung nữ được đến. Hậu cung › Đồng liêu: kết bạn, đề phòng kẻ vu cáo.</p>`}];
- log(`Ngươi vào cung làm cung nữ, hầu ${rkName(m)} ${m.name}.`)}
+ log(`Ngươi vào cung làm cung nữ, hầu ${rkName(m)} ${m.name}.`);
+ /* robot-fix-cnv F1: she leaves the consort housing (rank 0, no palace, no host) AFTER start()'s palFix → the houses are re-settled now, not by
+    the next load / render (a reload used to move a consort and write «… dời sang …» in her journal) */
+ try{palFix()}catch(e){console.error(e)}}
 (function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S&&S.origin&&S.origin.k==="cnv"&&!S.srv){quiet=true;srvInit();quiet=false;deal();showModal();render()}}catch(e){console.error(e)}return r}})();
 
 /* ---------- she is not a consort while she serves ---------- */
@@ -29621,7 +29634,7 @@ function kitNoChange(h){try{return kpMapText(String(h||""),s=>{KIT_NOCH.lastInde
 window.kitNoChange=kitNoChange;
 /* a row that starts in lower case after a clause was dropped gets a capital first letter */
 function kitCapFirst(h){let done=false;try{return kpMapText(String(h||""),s=>{if(done)return s;const i=s.search(/\S/);if(i<0)return s;done=true;return s.slice(0,i)+s[i].toLocaleUpperCase("vi")+s.slice(i+1)})}catch(e){return h}}
-const KFP_MAP=new Map();let KFP_N=0;function kfpReg(p){const id=++KFP_N;KFP_MAP.set(id,p);if(KFP_MAP.size>800){const k=KFP_MAP.keys().next().value;KFP_MAP.delete(k)}return id}function kfpGet(id){return KFP_MAP.get(+id)||null}
+const KFP_MAP=new Map();let KFP_N=0;lifeStore("KFP_MAP figure id -> person",()=>KFP_MAP.clear());function kfpReg(p){const id=++KFP_N;KFP_MAP.set(id,kitWeak(p));if(KFP_MAP.size>800){const k=KFP_MAP.keys().next().value;KFP_MAP.delete(k)}return id}function kfpGet(id){return kitDeref(KFP_MAP.get(+id))}
 window.kfpGet=kfpGet;window.kitIsFaceObj=kitIsFaceObj;
 function kpFactRow(f,people){const SKIP=window.__kpSkip;if(typeof f==="string")f={text:f};let text=kitCapFirst(kitNoChange(kitDedupTitle(f.text||""))),who=f.who?[].concat(f.who):null;
  if(f.auto!==false){let w;[text,w]=kpPeopleIn(text,people);if(!who)who=w;text=kpChipify(kitRankText(text)).replace(/(<b>[^<]*<\/b><\/span>)\s*\.\s*$/,"$1").replace(/(<b>[^<]*<\/b><\/span>)\s*[,;·]\s*(?=<span class="kchip)/g,"$1 ")/* review r6: no lone "." after a row-end chip */}
@@ -42864,14 +42877,16 @@ const kitFile=src=>String(src||"").split("?")[0].split("/").pop();
 /* KIT_AV: the avatar hook. pcPort / mdH stamp the portrait <img> with data-kav="<n>" (n -> the person); kitAvSweep then lays the SAME kitFxLayers stack over it through kitFxPut
    (one .kfxf box, kfxGeom follows the picture: object-fit, clip, transform), so every avatar frame (top bar md, kmini / kfc side cards, tab + list rows, tall pcPort, mdH everywhere) shows the
    marks + scratch + veil + makeup incl. Khuynh thành sparkle exactly like the mirror: same CSS, tone, keep-out mask (lkKeepCss), LOD step 0 (toilStageEl). A person / picture without fit data gets nothing. */
+/* robot-fix-cnv F4 (memory): the stamp maps hold the person WEAKLY — a strong Map of 900 people kept every OLD game alive after a load (KIT_AV.P → the old
+   S and its whole world, 2.8 MB per load, 30/30 loads retained; dev/test/r10-load-leak.js). Same rule for kfpReg (j79). Cleared per life (lifeStore). kitWeak / kitDeref live in j1 beside lifeStore. */
 const KIT_AV={n:0,P:new Map(),max:900,
- stamp:function(p){const n=++this.n;this.P.set(n,p);if(this.P.size>this.max)this.P.delete(this.P.keys().next().value);return n},
- sweep:function(root){try{(root||document).querySelectorAll("img[data-kav]").forEach(im=>{const p=KIT_AV.P.get(+im.dataset.kav);const file=kitFile(im.currentSrc||im.getAttribute("src")||im.src);const o=im.__kav;
+ stamp:function(p){const n=++this.n;this.P.set(n,kitWeak(p));if(this.P.size>this.max)this.P.delete(this.P.keys().next().value);return n},
+ sweep:function(root){try{(root||document).querySelectorAll("img[data-kav]").forEach(im=>{const p=kitDeref(KIT_AV.P.get(+im.dataset.kav));const file=kitFile(im.currentSrc||im.getAttribute("src")||im.src);const o=im.__kav;
    if(!p||!file||/face-|unknown/.test(file)||!im.isConnected){if(o)KIT_AV.drop(im);return}
    if(im.__kavf===file&&im.__kavp===p&&(!o||o.isConnected))return;if(o)KIT_AV.drop(im);im.__kavf=file;im.__kavp=p;
    const host=im.parentElement;if(!host)return;kitFxPut(im,p,host);const s=host.lastElementChild;if(s&&s.__img===im){s.setAttribute("data-kav","1");s.__file=file;im.__kav=s}else im.__kav=null})}catch(e){}},
  drop:function(im){const o=im.__kav;if(o){KFX_L.delete(o);o.remove()}im.__kav=null;im.classList.remove("kfxon")}};
-window.KIT_AV=KIT_AV;
+window.KIT_AV=KIT_AV;lifeStore("KIT_AV.P avatar stamp -> person",()=>{KIT_AV.P.clear()});
 (function(){const p0=pcPort;pcPort=function(f){let h=p0.apply(this,arguments);try{const p=f&&f.__kp;if(!p||!/class="kpor"/.test(h))return h;const m=/<img class="kpor" src="([^"]+)"/.exec(h);if(!m||/face-|unknown/.test(m[1]))return h;
   h=h.replace(m[0],`<img class="kpor" data-kav="${KIT_AV.stamp(p)}" src="${m[1]}"`);kitAvKick()}catch(e){}return h}})();
 (function(){const m0=mdH;mdH=function(p){let h=m0.apply(this,arguments);try{const q=p&&p.__kp;if(!q)return h;const m=/<img([^>]*?)src="([^"]*por-[^"]+)"/.exec(h);if(!m)return h;
@@ -50310,7 +50325,7 @@ function buildFriend(P,mine){if(!P||!P.S||P.dead||P.S.dead||friendHome(P))return
  mapMe(v,false,mp);v.id=fp();
  v.__b=J(Object.assign({},...STAT.map(k=>({[k]:k==="hh"?hhSafe(v):v[k]})),{rel:v.rel,oan:v.oan,rl:v.rl,ro:v.ro,em:v.evm.me,out:v.out,rank:v.rank,ill:v.ill||null,fx:fxSnap(v)}));
  return v}
-function buildFriendSrv(P){const s=P.S;return {sid:fp(),coop:true,name:P.name||s.name,role:"maid",fc:s.fc,fk:s.fk,face:0,hue:0,age:s.age||BAL.ageMin,loyal:60,
+function buildFriendSrv(P){const s=P.S;return {sid:fp(),coop:true,name:P.name||s.name,role:"maid",fc:s.fc,fk:s.fk,face:0,age:s.age||BAL.ageMin,loyal:60,
  spyFor:s.srv&&s.srv.spyFor!=null?(s.srv.spyFor===me()?"me":s.srv.spyFor):null/* p2 B1: whom she spies for (me = bought by me) */,lover:null,af:{},kn:1,imp:"hảo hữu chơi cùng",org:"hảo hữu chơi cùng"}}
 function pullFriend(){T("pull");const out=[];for(let i=rivals.length-1;i>=0;i--)if(isF(rivals[i]))out.push([i,rivals.splice(i,1)[0]]);
  for(const v of rivals)if(v.staff)for(let i=v.staff.length-1;i>=0;i--)if(isF(v.staff[i]))out.push([-1,v.staff.splice(i,1)[0],v]);return out}
@@ -73287,7 +73302,7 @@ function elderName(post,i){const nm=post.names[i%post.names.length];let T=null;t
  const nb=nmNew("f");return[nb,nmSurOf(nb)+" "+nm[1].split(" ").slice(-2).join(" ")]}
 function mk(post,i,age){const nm=elderName(post,i);if(typeof sidN!=="undefined")sidN=Math.max(sidN,...allServ().map(s=>s.sid||0),0);
  return{sid:typeof sidN!=="undefined"?++sidN:Date.now(),eid:post.id,n:i,name:nm[0],call:nm[1],role:"maid",rk:post.rk,age,retire:rint(...(B().retire||[63,68])),
-  tr:post.tr||"trung",loyal:70+R(16),spyFor:null,lover:null,af:{},hue:0,face:-1,fc:"",fk:"",fid:"",elder:1,since:S?S.year:1}}
+  tr:post.tr||"trung",loyal:70+R(16),spyFor:null,lover:null,af:{},face:-1,fc:"",fk:"",fid:"",elder:1,since:S?S.year:1}}
 const elderCallOf=m=>{const st=(m.staff||[]).find(s=>s.eid);return st?st.call:"ma ma"};
 /* keep the household rule: a master over her cap sends ordinary servants back to Nội vụ phủ (never a named one) — the ONE trim (j10 capTrim,
    review/staff-cap-fix): same order, and she is told of every removal */
@@ -73460,7 +73475,7 @@ function evTruthSweep(){if(!S||!rivals)return 0;let moved=0;const P=[S].concat(r
  for(const t of P){if(t!==S&&!t.alive&&!t.out)continue;const cap=deedCap(t);
   for(const h of P){if(h===t)continue;const g=evG(h,t);if(g>cap){const x=g-cap;if(h===/*evok: sweep*/S)t.ev=cap;else h.evm[key(t)]=cap;rumA(h,t,x);moved+=x}}}
  if(moved)try{window.__evSwept=(window.__evSwept||0)+moved}catch(e){}return moved}
-(function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{if(S&&rivals&&!S.dead){if(!S.truthV){/* first load of an old save */for(const p of [S].concat(rivals))deedSync(p);S.truthV=1}evTruthSweep()}}catch(e){console.error("truth load",e)}return r}})();
+(function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{if(S&&rivals&&!S.dead){if(!S.truthV){/* first load of an old save */for(const p of [S].concat(rivals))deedSync(p);S.truthV=1;evTruthSweep()}/* robot-fix-cnv F1: a load no longer sweeps a game already swept at its last turn end (endTurn below): the sweep at load recorded deeds made since that turn end early (p.dw +w) = a reload changed the ledger */}}catch(e){console.error("truth load",e)}return r}})();
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead){S.truthV=1;evTruthSweep()}}catch(e){}return r}})();
 /* new lives start already "swept" */
 (function(){if(typeof start!=="function")return;const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S)S.truthV=1}catch(e){}return r}})();
@@ -97774,7 +97789,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="33e2e0b2d177";window.CTM_BUILD=BUILD;
+const BUILD="fe64444e5723";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
