@@ -67,7 +67,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   ok(D.fb,`${tag} (d) kg82Img of an unpainted skin loads the default picture`);
   /* (e) close resets; kitMgPal */
   const E=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));KG82.preSkin='dao';playArt({art:'Đàn',onDone:()=>{}});await sleep(500);const pal=kitMgPal();kg82Close();const after=KG82.skin.id+'|'+KG82.skin.pal;
-   playArt({art:'Đàn',onDone:()=>{}});await sleep(500);const again=document.getElementById('kg82').dataset.mgpal;kg82Close();return{pal,after,again}});
+   KG82_SKINS.dan=[];/* THIN P1b: an open with no skin asked now draws one of the REGISTERED skins (mgskin:<kind> via mgpSkin); none registered = today's art, which is what this step checks */playArt({art:'Đàn',onDone:()=>{}});await sleep(500);const again=document.getElementById('kg82').dataset.mgpal;kg82Close();return{pal,after,again}});
   ok(E.pal.pal==='dao'&&E.pal.ink&&E.pal.a,`${tag} (e) kitMgPal() = the open palette`,E.pal);ok(E.after==='|son'&&E.again==='son',`${tag} (e) close resets to default`,E);
   /* shot: 5 palettes side by side (rules screen of Đàn) */
   if(OUT){const shots=[];for(const pal of await p.evaluate(()=>KG82_PAL)){await p.evaluate(async pal=>{try{kg82Close()}catch(e){}KG82.preSkin=pal;playArt({art:'Đàn',onDone:()=>{}});await new Promise(r=>setTimeout(r,900))},pal);
