@@ -68,7 +68,8 @@ function netTh(p,key){const N=BAL.net,b=N.th[key];if(b==null)return 0;let o=0;tr
 function netThK(p,key,k){return Math.round(netTh(p,key)*BAL.net.thK[k])}
 /* harm band of danger d for holder v: band 1 starts at BANDS[1][0] + v's act shift, bands 2 / 3 at bandHi of it (T[t].th.act3 = her own band-3 shift) */
 function bandCut(v,d){const sh=netTh(v,"act")-BAL.net.th.act;let s3=null;try{for(const t of traitsOf(v)){const R=BAL.net.T[t];if(R&&R.th&&R.th.act3!=null)s3=(s3||0)+R.th.act3}}catch(e){}
- let b=0;for(let i=1;i<BANDS.length;i++){const c=BANDS[i][0]+(i===1?sh:i===3&&s3!=null?s3:Math.round(sh*BAL.net.bandHi));if(d>=c)b=i}return b}
+ /* rv: cuts never fall below the band under them (a gentle Xảo quyệt went 1 → 3 at 72 while her band 2 began at 75) */
+ let b=0,lc=-1e9;for(let i=1;i<BANDS.length;i++){const c=Math.max(lc,BANDS[i][0]+(i===1?sh:i===3&&s3!=null?s3:Math.round(sh*BAL.net.bandHi)));lc=c;if(d>=c)b=i}return b}
 function bandVT(v,t){return bandCut(v,danger(v,t))}
 /* RANGE (step 0, LAW 11): thiện cảm −100..100 and oán 0..100 (BAL.linkRange) hold for every writer — 55 modules write .rel / .rl / .oan / .ro straight;
    aff()/oan() clamp on read and netClampAll() puts every stored value back in range each week and on load (old saves with out-of-range values load clean). */
@@ -83,7 +84,7 @@ function netClampAll(){if(!S)return 0;const A=BAL.linkRange.rl,O=BAL.linkRange.r
    (told to the player); when it falls under her «ghet» level toward anyone, the hatred shows (news by the witness rule, newsAdd). Once per crossing. */
 const NET_TH_LINE={than:{"Lạnh lùng":"vốn ít khi mở lòng, nay lại coi ngươi là chỗ thân tình","Kiêu ngạo":"vốn kiêu kỳ, nay chịu nhận ngươi là người thân",
  "Ân cần":"nắm tay ngươi, nói từ nay coi nhau như chị em ruột","Kín đáo":"kể ngươi nghe một chuyện riêng chưa nói với ai","Nóng nảy":"nói ai động đến ngươi là động đến nàng",
- "Cương trực":"nói thẳng: từ nay chuyện của ngươi là chuyện của y","Xu nịnh":"nói từ nay xin được theo hầu bên ngươi",_:"nay coi ngươi là chỗ thân tình"}};
+ "Cương trực":"nói thẳng: từ nay chuyện của ngươi là chuyện của nàng","Xu nịnh":"nói từ nay xin được theo hầu bên ngươi",_:"nay coi ngươi là chỗ thân tình"}};
 function netCross(x,y,b,a){if(!S||!x||!y||x===y||x===S||typeof x!=="object"||typeof y!=="object"||!rivals.includes(x))return;S.netX=S.netX||{};
  const k=x.id+">"+(y===S?"me":y.id),th=netTh(x,"than"),gh=netTh(x,"ghet"),st=a>=th?1:a<=gh?-1:0,o=S.netX[k]||0;if(st===o)return;S.netX[k]=st;
  if(st===1&&y===S&&b<th){const L=NET_TH_LINE.than;newsAdd(x,"netThan",`${x.name} ${tv(L,x,L._)}`,true)}

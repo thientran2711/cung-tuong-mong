@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"ed1be95a+","t":"2026-11-24T08:59Z","c":"net-build: nt-norm.js (per-nết rates per 100 holder-weeks) + runner guards","b":"8b1df05d3d9a","h":[{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"}]};
+window.CTM_BI={"s":"f9c725a8+","t":"2026-11-24T09:15Z","c":"net-build: nt-norm.js (per-nết rates per 100 holder-weeks) + runner guards","b":"66bc2cde62b4","h":[{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -55437,7 +55437,8 @@ function netTh(p,key){const N=BAL.net,b=N.th[key];if(b==null)return 0;let o=0;tr
 function netThK(p,key,k){return Math.round(netTh(p,key)*BAL.net.thK[k])}
 /* harm band of danger d for holder v: band 1 starts at BANDS[1][0] + v's act shift, bands 2 / 3 at bandHi of it (T[t].th.act3 = her own band-3 shift) */
 function bandCut(v,d){const sh=netTh(v,"act")-BAL.net.th.act;let s3=null;try{for(const t of traitsOf(v)){const R=BAL.net.T[t];if(R&&R.th&&R.th.act3!=null)s3=(s3||0)+R.th.act3}}catch(e){}
- let b=0;for(let i=1;i<BANDS.length;i++){const c=BANDS[i][0]+(i===1?sh:i===3&&s3!=null?s3:Math.round(sh*BAL.net.bandHi));if(d>=c)b=i}return b}
+ /* rv: cuts never fall below the band under them (a gentle Xảo quyệt went 1 → 3 at 72 while her band 2 began at 75) */
+ let b=0,lc=-1e9;for(let i=1;i<BANDS.length;i++){const c=Math.max(lc,BANDS[i][0]+(i===1?sh:i===3&&s3!=null?s3:Math.round(sh*BAL.net.bandHi)));lc=c;if(d>=c)b=i}return b}
 function bandVT(v,t){return bandCut(v,danger(v,t))}
 /* RANGE (step 0, LAW 11): thiện cảm −100..100 and oán 0..100 (BAL.linkRange) hold for every writer — 55 modules write .rel / .rl / .oan / .ro straight;
    aff()/oan() clamp on read and netClampAll() puts every stored value back in range each week and on load (old saves with out-of-range values load clean). */
@@ -55452,7 +55453,7 @@ function netClampAll(){if(!S)return 0;const A=BAL.linkRange.rl,O=BAL.linkRange.r
    (told to the player); when it falls under her «ghet» level toward anyone, the hatred shows (news by the witness rule, newsAdd). Once per crossing. */
 const NET_TH_LINE={than:{"Lạnh lùng":"vốn ít khi mở lòng, nay lại coi ngươi là chỗ thân tình","Kiêu ngạo":"vốn kiêu kỳ, nay chịu nhận ngươi là người thân",
  "Ân cần":"nắm tay ngươi, nói từ nay coi nhau như chị em ruột","Kín đáo":"kể ngươi nghe một chuyện riêng chưa nói với ai","Nóng nảy":"nói ai động đến ngươi là động đến nàng",
- "Cương trực":"nói thẳng: từ nay chuyện của ngươi là chuyện của y","Xu nịnh":"nói từ nay xin được theo hầu bên ngươi",_:"nay coi ngươi là chỗ thân tình"}};
+ "Cương trực":"nói thẳng: từ nay chuyện của ngươi là chuyện của nàng","Xu nịnh":"nói từ nay xin được theo hầu bên ngươi",_:"nay coi ngươi là chỗ thân tình"}};
 function netCross(x,y,b,a){if(!S||!x||!y||x===y||x===S||typeof x!=="object"||typeof y!=="object"||!rivals.includes(x))return;S.netX=S.netX||{};
  const k=x.id+">"+(y===S?"me":y.id),th=netTh(x,"than"),gh=netTh(x,"ghet"),st=a>=th?1:a<=gh?-1:0,o=S.netX[k]||0;if(st===o)return;S.netX[k]=st;
  if(st===1&&y===S&&b<th){const L=NET_TH_LINE.than;newsAdd(x,"netThan",`${x.name} ${tv(L,x,L._)}`,true)}
@@ -97861,7 +97862,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="8b1df05d3d9a";window.CTM_BUILD=BUILD;
+const BUILD="66bc2cde62b4";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
