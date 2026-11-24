@@ -1510,3 +1510,4 @@ rv net-build r2 (opus BIG; briefs/D-net-build-review-r2.md; target e41f4f79) | r
 | SELSCENE-11 (opus; successor of SELSCENE-10; brief M121-selscene-fix.md + reports/selection-scene.md «FIX r1 — SELSCENE-10») | review/selection-scene (from c269fce4) | MAIN 122 | session_01V1ZZH1An4rTF5a1b9G4kJw | RUNNING | 24/11 12:29Z |
 | RV test-mrfoot SMALL (sonnet) of d521656c | review/test-mrfoot; reports/test-mrfoot.md | MAIN 122 | session_01V1ZZH3jimhL3hVZTZNqAJb | RUNNING | 24/11 12:33Z |
 | REVIEW E84r robot10-e-fix-5 BIG (opus; briefs/E84r-review-robot-fix5.md) of 6b96055a | review/robot10-e-fix-5-r; reports/robot10-fix5-review.md | FOREMAN E (child4) | session_01DgYSWoVjheqq11nzo7HMWF | RUNNING | 24/11 12:45Z |
+REMERGE servant-trust onto net-build c6c3ca76 (opus BIG; briefs/D-servant-trust-remerge.md) | review/servant-trust-rv | (opening) | RUNNING | 24/11 13:35Z (Foreman D depth 4)
