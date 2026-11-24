@@ -1403,7 +1403,7 @@ LAW-1 likes/dislikes/gifts scan + fix (opus; MAIN 116 07:57Z (e); briefs/D-law1-
 | PARKING AUDIT E63 | reports/parking-audit.md 7f85225b | FOREMAN E (child1) | session_01DgYSWnS8t83k8g5g1at6Hy | DONE, ARCHIVED | 24/11 06:05Z |
 | REVIEW E68r parking-rank SMALL (test-only) of f3c7ce80 | review/parking-rank; reports/parking-rank-review.md | FOREMAN E (child1) | session_01DgYSWp7114rbXtgpPug6pw | RUNNING | 24/11 06:08Z |
 REVIEW kit-promo-hook (sonnet SMALL; briefs/D-kit-promo-hook-review.md) of 287a6adf | review/kit-promo-hook-rv | session_01D3E3NY3oMUMV2oP3CrJ2wL | PASS LAND READY 73c692ca (archived) | 24/11 06:08Z (Foreman D ROOT)
-| ROBOT-COOP RUNNER U6 pairs 5-6 SWAP=1 SEED=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p5-6-s.md | B | session_01N1tNP5XrCevHuEb54HPjLr | RUNNING | 24/11 06:13Z |
+| ROBOT-COOP RUNNER U6 pairs 5-6 SWAP=1 SEED=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p5-6-s.md | B | session_01N1tNP5XrCevHuEb54HPjLr | PAUSED (archived 06:44Z; U6 back to QUEUED) | 24/11 06:13Z |
 | REVIEW map-perf r1 (sonnet SMALL) of review/map-perf d6c2b4d4 | reports/map-perf.md «REVIEW r1» | MAIN 118 | session_01V1ZZH2sAiTzNB7k2oGMcY3 | RUNNING | 24/11 07:05Z |
 | REVIEW law1-audit r1 (opus BIG reviewer-lander; briefs/b-law1-audit-review.md) of review/law1-audit 0cf18eda | review/law1-audit-r1; reports/law1-audit.md «## REVIEW r1» | B | session_01N1tNP2ZbYMtMYdedMue4Fk | RUNNING | 24/11 06:17Z |
 | F-MUSIC-M1: music audit + wiring spec + core music groups (OD 24/11 ~09:45/09:55/10:00Z; briefs/F-music.md) | CDN audio/; reports/F-music.md | FOREMAN F | session_01UV1SziyNTe6TSaKqnKz9zF | RUNNING | 24/11 06:19Z |
@@ -1428,3 +1428,4 @@ PROMO BUILD part A kỳ sắc phong + special-exam/patron routes + PHÂN CUNG ph
 NET THRESHOLDS research + audit + proposal (opus, no build; ORDER MAIN 116 06:02Z/06:41Z; briefs/D-net-thresholds.md) | reports/net-thresholds.md | session_01D3E3NZ3P5j3cm5nr2pybFY | RUNNING | 24/11 06:55Z (Foreman D depth 1)
 | LANDER LC10 (opus; successor of LC9) | reports/land-chain-10.md | MAIN 118 | session_01V1ZZH4w5vkbybCTwK1DkHR | RUNNING | 24/11 06:44Z |
 | SIDE-LINE DIALOGUE SCENES LEAD (opus; ORDER MAIN 118 06:42Z, OD 24/11 ~10:05Z; briefs/b-sideline-dialogue.md; schema agreed once with Foreman E) | review/sideline-dlg; reports/sideline-dialogue.md | B | session_01N1tNP4b3uXPGSvnVmsC51b | RUNNING | 24/11 06:43Z |
+| REVIEW robot-coop-fix-1 889803dc + harness robot10-coop 2bf6094f (opus BIG co-op; briefs/b-robot-coop-fix-1-review.md) | review/robot-coop-fix-1-r1 + review/robot10-coop-r2 | B | session_01N1tNP2DcFcegtmGUCGYXHH | RUNNING | 24/11 06:44Z |
