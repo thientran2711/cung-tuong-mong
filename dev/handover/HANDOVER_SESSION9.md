@@ -3167,3 +3167,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22:10Z) FLIGHT-UI a6d953fb (v5-pair-rumor Fold+iPad looked: one line per subject «<Tên>: chips», role nouns lowercase, illustration shows; first rumour has no numeric effects in data) → GO → LC12 stack step 5.
 - (22:12Z) FLIGHT-DAYQ rolled (~41 %) before the khắc-level hold → DAYQ-2 = session_01V1ZZH4qKPudWMUYiixskpu (opus, child of 128) on 7c819a37 → review/day-queue-2 (owner 22:02Z item 1). FLIGHT-DAYQ (child of 127) waits LIVE then archive.
 - (22:15Z) OWNER RULE recorded (OD 24/11 ~22:14Z): unnamed person = «một vị cung nữ / phi tần / thái giám» (or visible rank), never «chưa quen biết» → FLIGHT-UI (kitNoUnk, stack step 5 changes again), KK23b (kit wording), VIECNHO/VISITOR/MINIGAME told.
+- (22:16Z) 127 relay: owner 22:08Z canon overwrite of visitor item (any visitor face+name; arrival lines by rank «… giá đáo!» / «Tần thiếp … xin cầu kiến») → briefs/visitor-fix.md ADD 2 + VISITOR-FIX told.

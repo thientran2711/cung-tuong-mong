@@ -11,3 +11,6 @@ NOT YOURS: item (1) visitor timing hold → FLIGHT-DAYQ (review/day-queue); do n
 
 ## ADD (MAIN 128, 22:15Z) — owner rule OD «24/11 ~22:14Z real»
 An unnamed person in any text = «một vị cung nữ / phi tần / thái giám» (or the visible rank title, e.g. «một vị Quý nhân»), NEVER «chưa quen biết». Read the OD row verbatim.
+
+## ADD 2 (MAIN 128, 22:16Z) — CANON OVERWRITE of item (3)/(4): owner OD «24/11 ~22:08Z real» (read VERBATIM)
+ANY visitor who comes to find her is shown with face + name at standard size (not only the Quý phi). ARRIVAL LINES = cổ trang stage lines by rank: a high rank is announced at the door («Quý phi nương nương giá đáo!»); a lower rank announces herself («Tần thiếp … xin cầu kiến»); never flat «X tới thăm ta» / «khẽ cúi chào ta». Every visitor / greeting / encounter text reads like a story scene / dialogue (VANPHONG). Run prio1 «giá đáo» first and reuse existing lines.
