@@ -55,7 +55,7 @@ palFix=function(){if(!S||!rivals)return;rivals.forEach(ensureT2);const all=[S].c
  for(const p of rivals)if(!palLive(p)&&!p.coop&&(p.resHead!=null||p.resHall!=null)){p.resHead=null;p.resHall=null}
  /* a house over the cap (old saves had 3, a promotion placed someone first): the newest NPC extras leave and are housed again below */
  for(const h of hs){const M=mates(h);if(M.length<=cap)continue;const N=M.filter(y=>y!==S);for(const y of N.slice(-(M.length-cap))){y.resHead=null;y.resHall=null}}
- const pickHost=p=>{const c=hs.filter(x=>x!==p&&cnt(x)<cap);if(!c.length)return null;const m=Math.min(...c.map(cnt));return pick(c.filter(x=>cnt(x)===m))};
+ const pickHost=p=>{const c=hs.filter(x=>x!==p&&cnt(x)<cap);if(!c.length)return null;if(typeof pcHostPick==="function"){const h=pcHostPick(p,c,cnt);if(h)return h}/* promo-build PHÂN CUNG: the host by the royals' thiện cảm (jpromob), one rule for her and every NPC */const m=Math.min(...c.map(cnt));return pick(c.filter(x=>cnt(x)===m))};
  for(const p of all){if(!palLive(p)||p.queen)continue;const r=rkOf(p);
   if(r>=3&&p.pal!=null){p.resHead=null;p.resHall=null;if(p!==S)p.palWait=0;continue}
   if(p===S&&sv){S.resHead=null;continue}

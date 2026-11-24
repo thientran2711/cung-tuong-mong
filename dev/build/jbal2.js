@@ -423,6 +423,34 @@ Object.assign(BAL,{mem:{cap:5,fadeMo:2,keepFloor:.35,modDiv:8,modMax:10,recallMi
    psk.ghen = the jealousy of the other consorts when she is raised by a direct decree or a passed grace exam (jexam exDirectUp / exGraceUp). */
 Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{sung:6,errN:2,errAt:3,errGap:6},
  quyen:{danh:6,after:24,p:6,max:1,hitSung:10,hitDanh:6},seat:{bacM:4,hieuBac:120,danh:6,gifts:2,pow:8,dad:5,ghen:10,oan:6}}});
+/* BAL.promoR = PROMOTION BUILD part A + special routes + PHÂN CUNG (owner 24/11 ~07:55Z/~08:30Z/~09:15Z/~09:20Z/~09:35Z/~09:50Z; design
+   dev/handover/reports/promo-redesign.md §3–§5 on the handover branch; code jpromob.js).
+   ky = KỲ SẮC PHONG: the ordinary promotion is only looked at in a kỳ month. Each year a WORLD draw (era + the Emperor, same for both co-op seats) picks
+     which festival of p (FEST key → chance 0..99 it is a kỳ that year) is a kỳ; a kỳ closer than gapMin months to the last one is dropped; after gapMax
+     months with no kỳ the next festival is forced. thanhtho only while the Thái hậu lives. hold = months a special exam stays open at least (then it
+     lapses at the next kỳ if never sat).
+   mourn = months with no kỳ after the Thái hậu dies (quốc tang).
+   sp = SPECIAL EXAMS at daughter weight (one exam outside the kỳ; Sủng, Danh, the months since the last decree and the kỳ are waived; the seat, the
+     Hoàng hậu / Thái hậu block rows, cấm túc, lãnh cung still apply). A FAILED or missed special exam USES UP that chance (OD ~09:50Z).
+     sung (Hoàng thượng sủng ái): Sủng ≥ RANKS[next].s + the mean add of THIS Emperor's traits (def when a trait is not listed); ≤ 1 per every months,
+       ≤ life per life (OD ~09:15Z).
+     th (Thái hậu ân điển): Thái hậu quý ≥ cut[her archetype TH_ARCH] (def), once per life per Thái hậu (life), a new Thái hậu = a new chance.
+     hh (Hoàng hậu đề cử): Hoàng hậu quý ≥ cut[the Hoàng hậu's tính tình: her trait, else the first listed of her nết] (def), target rank ≤ maxTo, once per life per Hoàng hậu.
+     birth = special exams per birth (later sons and every daughter; the FIRST son = direct, PROMO_SRC.son1).
+     cost (law 3): sungGhen = palace ghen at her favour exam (NPC: the others oán sungOan); thSung = Sủng − (Bệ hạ sees a Thái hậu person);
+       hhOwe = nợ ân to the Hoàng hậu (j72 ledger; NPC: the others oán hhOan).
+   dl = ĐẠI LỄ (direct mass conferral, design §4b): NOT BUILT — waits for sếp's answer (direct only for those who meet Sủng + Danh?). on:0 keeps it off.
+   pc = PHÂN CUNG (jpal palFix host pick + the scene): score of a host h for a consort p = wE·sung'·standing' + wH·hh'·kind[h's tính tình] +
+     wT·th'·(h's Thái hậu favour) − load × h's co-residents; x' = (x − mid) / span clamped to ±1; standing' = (palace standing / 3 + nearness to the
+     Emperor's hall) − 1 (−1..1); kind = −2..2 per tính tình (÷2); a reason line names a royal when |x'| ≥ why. */
+Object.assign(BAL,{promoR:{ky:{p:{newyear:85,doanngo:20,vantho:75,thanhtho:55,dongchi:20},gapMin:3,gapMax:8,hold:2},mourn:27,
+ sp:{sung:{add:{datinh:4,mesac:6,nongnay:6,nhantu:8,trongtai:8,hieuthao:10,danghi:12,chamchinh:14,lanhlung:16},def:8,every:24,life:2},
+  th:{cut:{tuai:40,phat:45,nghiem:60,quyen:62,danghi:68},def:55,life:1},
+  hh:{cut:{"Ân cần":40,"Khiêm nhường":45,"Điềm tĩnh":50,"Nhiều chuyện":50,"Nóng nảy":55,"Kín đáo":60,"Lạnh lùng":65,"Tham vọng":62,"Xảo quyệt":66,"Kiêu ngạo":70},def:55,maxTo:4,life:1},
+  birth:1,cost:{sungGhen:10,sungOan:6,thSung:4,hhOwe:1,hhOan:4}},
+ dl:{on:0,minGap:24,bacM:1,ghen:6},
+ pc:{wE:1,wH:1,wT:1,load:.6,why:.25,mid:{sung:30,hh:0,th:0},span:{sung:40,hh:40,th:40},
+  kind:{"Ân cần":2,"Khiêm nhường":1,"Điềm tĩnh":1,"Rộng lượng":2,"Nhiều chuyện":0,"Kín đáo":0,"Lạnh lùng":-1,"Tham vọng":-1,"Xảo quyệt":-2,"Nóng nảy":-2,"Kiêu ngạo":-2}}}});
 /* BAL.il — ITEM LEDGER + ITEM CONSERVATION (owner 16/11 13:30Z (3) + 13:40Z ONE LEDGER; jil.js reads only these):
    no item ever vanishes. Sold → the market ("mkt"): each week it may show up in her Nội vụ phủ tray (shopP), and at the latest by the ceiling
    (retW weeks after the sale) someone brings it to her for ransom (ransomPct of its price); refused or unpaid → it comes again againW weeks later.
