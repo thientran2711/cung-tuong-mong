@@ -172,6 +172,9 @@ function apply(o){const pops=[];
   for(const k of ["sung","danh","suc","sac","tai","tamco","duc"])S[k]=cl(S[k],0,100);S.suc=Math.min(S.suc,sucCap(S));
   S.th=cl(S.th,-100,100);S.hh=cl(S.hh,-100,100);S.bac=Math.max(0,S.bac);/* 2f2: mat = the real list (jagknow tmInstall), no clamp */
   if(!quiet)pops.forEach(([k,v],i)=>popNum(k,v,i))}
+/* fix-kframe-heir (LAW 11, robot10 «Danh 101»): a direct write to a person's 0..100 stat outside apply / ap goes through the SAME clamp they use
+   (0..100, Sức also under sucCap; Thân / Hận −100..100); returns the value really set. dev/test/scan-stat-clamp.py lists every write. */
+function statSet(p,k,v){if(["sung","danh","suc","sac","tai","tamco","duc","ghen","an"].includes(k))v=cl(v,0,100);else if(k==="th"||k==="hh")v=cl(v,-100,100);p[k]=v;if(k==="suc"&&typeof sucCap==="function")p.suc=Math.min(p.suc,sucCap(p));return p[k]}
 /* the screen of THIS phone (effects, scenes, sounds, floaters): off for bots, quiet code paths, and while a co-op host runs the other seat's
    turn (COOPW.ctx). coop-thin F2 r2: her intents run on the host with quiet off (her cards reach her through her Q, her floaters / effects are
    captured and play on HER phone, jcoopthin uiCap); every screen gate reads this ONE rule, so nothing of hers draws on the host's screen */
@@ -208,7 +211,10 @@ function liveRivals(q){return rivals.filter(v=>v.alive&&!v.out&&(q||!v.queen))}
 function qOn(){const q=rivals[0];return q.alive&&!q.out&&q.queen}
 function momRank(v){return v?(v.alive&&!v.out?(v.queen?7:v.rank):0):S.rank}
 function setHeir(k,v){allKids().forEach(([x])=>x.heir=false);k.heir=true;S.heir={k,v}}/* KP03: the mother's Danh (her and an NPC mother, BAL.kid.heirDanh) is jkidlife's setHeir wrap */
-function kidDie(k,why,mine){k.alive=false;const wasH=k.heir;if(wasH){k.heir=false;S.heir=null}if(mine)apply({suc:-15});
+/* fix-kframe-heir: the ONE road that puts a living Thái tử aside with no new one named (j8 kframe). m = his mother (S = her, or an NPC / co-op entry).
+   S.heir is cleared only when it is that son. Her / an NPC mother's Danh loss (BAL.kid.heirDanh, two-way) is jkidlife's deposeHeir wrap, as setHeir. */
+function deposeHeir(k,m){if(!k||!k.heir)return false;k.heir=false;if(S.heir&&S.heir.k===k)S.heir=null;return true}
+function kidDie(k,why,mine){k.alive=false;const wasH=k.heir;if(wasH){k.heir=false;if(S.heir&&S.heir.k===k)S.heir=null}/* fix-kframe-heir: only when it is that son */if(mine)apply({suc:-15});
   return `<span class="r">${k.name} ${why}.</span>${mine?" Ngươi đau đớn khôn nguôi.":""}${wasH?" Ngôi Đông cung bỏ trống.":""} `}
 /* ghenN(n) = the jealousy one "every consort ghen +n" really adds (Hoàng thượng đa tình ×BAL.ghen.datinh). ONE CORE (OD:L1267): ghenAll applies it and every text that shows that gain prints ghenN(n). */
 function ghenN(n){let k=1;try{if(has("datinh"))k=BAL.ghen.datinh}catch(e){}return Math.round(n*k)}
