@@ -49,5 +49,23 @@ NOTE: every MCP call needs the full ~9.6k-char prompt pasted inline (~3k tokens/
 | FACE-GENTLE-S62-A51-MASTER-SKIN03-T01 | s62 | 51 | tC2varXmZJ | aFnEwc8fSh | DONE | no text, bare face, ivory robe, light lines + sparse silver, ok |
 | FACE-GENTLE-S63-A51-MASTER-SKIN03-T01 | s63 | 51 | P3HN6Ma42C | lJhUYQ0gv9 | DONE | no text, bare face, ivory robe, light lines + sparse silver, ok |
 | FACE-GENTLE-S64-A51-MASTER-SKIN03-T01 | s64 | 51 | s7mSUzul8e | u50Hy8iQLD | DONE | no text, bare face, ivory robe, light lines + sparse silver, ok |
+| FACE-GENTLE-M02-A63-MASTER-SKIN03-T01 | m02 | 63 | ksXxxbS16B | UPfJMoqwny | DONE | no text, bare face, ivory robe, clearly older than 51 (soft lines, silver hair), ok |
+| FACE-GENTLE-M08-A63-MASTER-SKIN03-T01 | m08 | 63 | Sya77l1Ub8 | LwtgWXeswO | DONE | no text, bare face, ivory robe, clearly older than 51 (soft lines, silver hair), ok |
+| FACE-GENTLE-M14-A63-MASTER-SKIN03-T01 | m14 | 63 | EbcFFETuuO | MByekJjDCm | DONE | no text, bare face, ivory robe, clearly older than 51 (soft lines, silver hair), ok |
+| FACE-GENTLE-M18-A63-MASTER-SKIN03-T01 | m18 | 63 | gOvw7wcSXO | w4CODEt7EI | DONE | no text, bare face, ivory robe, clearly older than 51 (soft lines, silver hair), ok |
+| FACE-GENTLE-M19-A63-MASTER-SKIN03-T01 | m19 | 63 | dtNo8IEXSL | O6Q4dbpynm | DONE | no text, bare face, ivory robe, clearly older than 51 (soft lines, silver hair), ok |
+| FACE-GENTLE-M20-A63-MASTER-SKIN03-T01 | m20 | 63 | fHYuQHBCDY | rgoLzapxtc | DONE | no text, bare face, ivory robe, clearly older than 51 (soft lines, silver hair), ok |
+| FACE-GENTLE-C02-A63-MASTER-SKIN03-T01 | c02 | 63 | Sya7J9wUb8 | s7mScqMl8e | DONE | no text, bare face, ivory robe, clearly older than 51 (soft lines, silver hair), ok |
+| FACE-GENTLE-C08-A63-MASTER-SKIN03-T01 | c08 | 63 | 9Zbi3zwNYZ | 0e7MkEyTfW | DONE | no text, bare face, ivory robe, clearly older than 51 (soft lines, silver hair), ok |
+| FACE-GENTLE-C20-A63-MASTER-SKIN03-T01 | c20 | 63 | BhiItudoQR | MByex5hDCm | DONE | no text, bare face, ivory robe, clearly older than 51 (soft lines, silver hair), ok |
+| FACE-GENTLE-C26-A63-MASTER-SKIN03-T01 | c26 | 63 | 0e7MDhVTfW | YMS0bHZWeC | DONE | no text, bare face, ivory robe, clearly older than 51 (soft lines, silver hair), ok |
+| FACE-GENTLE-C32-A63-MASTER-SKIN03-T01 | c32 | 63 | Sya7JAyUb8 | 8aRmwO7IrU | DONE | no text, bare face, ivory robe, clearly older than 51 (soft lines, silver hair), ok |
+| FACE-GENTLE-S62-A63-MASTER-SKIN03-T01 | s62 | 63 | tC2varXmZJ | cpwVKsT0eP | DONE | no text, bare face, ivory robe, clearly older than 51 (soft lines, silver hair), ok |
+| FACE-GENTLE-S63-A63-MASTER-SKIN03-T01 | s63 | 63 | P3HN6Ma42C | mEAaOZAhJQ | DONE | no text, bare face, ivory robe, clearly older than 51 (soft lines, silver hair), ok |
+| FACE-GENTLE-S64-A63-MASTER-SKIN03-T01 | s64 | 63 | s7mSUzul8e | IfZh7AUtvE | DONE | no text, bare face, ivory robe, clearly older than 51 (soft lines, silver hair), ok |
 
-## STATUS 24/11 ~22:35Z: ages 16, 26, 51 COMPLETE (42/56). Next: age 63 (14), then contact sheets + CDN + final report. Rollover cancelled; original worker continues.
+## FINAL STATUS 24/11 ~22:55Z — 56/56 DONE (ages 16, 26, 51, 63 x 14 identities); age 39 NOT run (owner hold)
+PRIORITY #1 CHECK: OD 0 | main none | review/* none | claims FOREMAN D row (this session).
+Settings (all jobs identical): Magnific MCP images_generate, mode gpt-2-6, resolution 2k, aspect auto, count 1, no extraSettings, references [identity upload, UPf76Ptwny]; prompt = file text minus the one operator sentence (len <= 9714). 135 cr each = 7,560 cr. No retries needed; 0 NEEDS_REVIEW, 0 BLOCKED.
+Per-job QC (each result looked at, 512px preview): single portrait, no text/caption anywhere, warm-ivory background, ivory embroidered robe + light-gold hairpin, no makeup look, same painting finish/skin tone as master, age direction correct (16 youthful, 26 young adult, 51 light lines + sparse silver, 63 clearly older with silver). Minor notes: c32 has a lavender hair ribbon at 16/51 (accessory only); m02/age16 reads slightly older than 16 (soft adolescent cues weak) — owner may judge. Identity likeness was judged by hairstyle/face bearing only, not side-by-side with originals (no contact sheet yet).
+NOT DONE: contact sheets (original | result, 2 columns) + CDN upload under img/_review/face-master03/gentle/ — needs output image downloads (private pikaso URLs) + cdn_sync; Foreman D to decide who builds sheets (one pass for all six families is cheaper). Results stay on Magnific; output creation ids are in the table above (webUrl pattern https://www.magnific.com/app/creation/<id>).
