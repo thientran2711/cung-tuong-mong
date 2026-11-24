@@ -32,3 +32,11 @@ Heads: bare 09c4386c; merged = origin/main 502c48c9 is already its parent, so me
 4. kitPick and kitDim have zero call sites; list of old pickers above. (Kit-part delivery may be fine, but tell the owner it is not visible in the game yet.)
 5. 390x844: 6 acts overflow by one plaque (known gap, noted only). kit-focus 412/390 failing is pre-existing.
 6. dev/test/kit-pick.js shots on iPad are taken while the dawn cover is up (pick-a/pick-b = cover picture): clear #dawn before each screenshot (I did locally, not committed). Add a check that the screenshot has the stage.
+
+## KK22 r2 (24/11 ~20:15Z) review/kit-woodskin ba0e069 (on 66bf8bb5)
+1. FIXED: band chosen by cost, stage kit parts HARD (right column, rail, title, chips, name tags) — Fold: right, compact tier, below Ân sủng/Nguy hiểm; iPad: left of her. overObst 0 both; kit-pick.js ×3 runs ALL PASS Fold + iPad.
+2. FIXED: name tags are obstacles; iPad now covers the OTHER person's body/skirt (soft), never a tag/panel; Fold 0.
+3. FIXED: Fold plaque 6 no longer meets the corner «+N» chip.
+4. NOT DONE (needs MAIN order): kitPick/kitDim call sites (kitFocus acts jdfv.js, #popw j6.js, jfocus) = game wiring, users RING-DESIGN-4 / MOTION-DESIGN-4. Not visible in the game yet.
+5. 412x1058: 1 kit part covered; 390x844: 3 + 1 plaque out — phone shells, reported not asserted.
+6. FIXED: test clears #dawn before shots + fails if dawn up; DIM fallback removed (BAL.kdim only). KIT §98.9.
