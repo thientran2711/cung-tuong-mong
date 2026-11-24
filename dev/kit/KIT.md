@@ -4695,3 +4695,6 @@ An unnamed person in prose reads «một vị cung nữ / phi tần / thái giá
 
 ## §98.16 BARE CARDS CARRY NO «GỢI Ý» ROW (review/kit-fitfast-r2; K-BARE-HINT, owner OD 23/11 ~23:40Z/~23:43Z no guidance on selection answers)
 `kitHideOut` (jk2b.js) returns early on a `.kbare` card (KIT §93.7), like `kitOptOdds` and `kitOptFinal`, so `kitHintRow` never appends «Gợi ý: …» to a bare card.
+
+## §98.17 BARE CARD TITLE ROOM (review/kit-fitfast-r2; K-BARE-GRID)
+A §93.7 bare card has no odds meter, so the title-room test of §6.2b-1 never applied to it and 2 columns put its title in a column so narrow it broke one word per line («Làm quen với một tú nữ lạ mặt», Fold + iPad day-2 «Sân chờ»). `kitOptTier`'s fit test now also requires `kitBareNarrow(b)` false: the bare card's `.kat` is at least `KIT_ODFIT.bare` (9 em) wide, else 2 columns do not fit and the picker uses 1 column (tier M/L as before).
