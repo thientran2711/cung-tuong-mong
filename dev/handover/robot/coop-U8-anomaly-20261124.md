@@ -13,3 +13,6 @@ BUG FAMILY «guest life never ends» (seat X guest Fold, pair 7, SEED=1 SWAP=1, 
 - Not captured by this harness version: guest's week/year/rank at the cut and the last 20 actions (harness logs only per-life summary + stuck snapshots). Closest evidence: stuck row (6–9 hits) host/guest both buoi 3 week 11, next:true, pend:false, Q:0, peer:true, repro save saves/coop-20261124-0823-p7-8-s-yr97b6.json (same file dir); guest JS error «Cannot read properties of undefined (reading 'off')».
 - Suspect: guest page not detecting its own life end / ending screen in the room flow, or guest stuck in a non-ending loop while host rooms rotate. Fixer: reproduce with the repro save and SWAP=1, watch the guest page after host kiếp 2.
 - Pair 7 closed here: host 10 kiếp (+4 extra, stopped), guest 1 kiếp.
+
+## Update 16:30Z pair 8 (coop-p08s-S1, fu8-out8, file coop-20261124-1426-p8-8-s.*)
+Same family, opposite seat: after 2 h guest X (Fold) has 3 kiếp, host Y (iPad) only 1 (bd/bd_tuyet) and its kiếp 2 not ending. So «one seat's life never ends while the other seat cycles» hits either seat; room keeps stepping weeks (room NUQH 34 weeks, turn p95 66 s, stuck). Pair 8 resumed (2nd job).
