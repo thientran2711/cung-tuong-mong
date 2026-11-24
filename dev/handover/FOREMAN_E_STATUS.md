@@ -1714,3 +1714,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - (24/11 ~00:30Z) E55 = session_01DgYSWmSsW6T7nM2qDQXJhD; depth 2; START_CTX ~3%. TITLES2 step 2 BUILD started (brief cb3fdc98) on review/titles2 from origin/main.
 - FROM MAIN 114 (00:41Z 24/11): LIVE = e88b09b4 (kit-selscene: KIT §93 selection-scene parts).
 - FROM MAIN 114 (00:54Z 24/11): LIVE = bba42773 (odds-no-thanh: odds meaning text no longer promises «thành»).
+- FROM MAIN: main is now MAIN CHÍNH 115 session_01Rc5AsHor5CHGzQwMEuc8Po (24/11 01:05Z). Write FOR MAIN 115 lines. LIVE = bba42773.

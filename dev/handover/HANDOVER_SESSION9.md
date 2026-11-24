@@ -2756,3 +2756,8 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - Wake: trig_01S84CUDctuYXpDp6YD5mCqf (min 32) → 115 creates its own and disables this one. Push script pattern: /home/user/wt/hpush114.sh (copy of dev/tools/main-hpush.sh with explicit-refspec fetch).
 - (00:56Z) Opened MAIN CHÍNH 115 = session_01Rc5AsHor5CHGzQwMEuc8Po (depth 8, last). 114 stops; 115 disables trig_01S84CUDctuYXpDp6YD5mCqf.
 - (00:55Z) LC8: coop-thin-g CONFLICT (jcoopthin.js, jcoopworld.js) → B re-merge ordered; LC8 moved on to kit-mgskin.
+
+## MAIN CHÍNH 115 (took over 24/11 ~00:57Z)
+- MAIN CHÍNH 115 = session_01Rc5AsHor5CHGzQwMEuc8Po; START_CTX ~4 % (get_session reads 0; own estimate ~40k/1M) → roll line ~29 %, ceiling 60 %; depth 8 of 8 (LAST: at roll, try create_session MAIN CHÍNH 116; if refused → handover + FOR MAIN line, sếp opens ROOT with dev/handover/TAKEOVER_MAIN_ROOT.md).
+- LOAD: main running 4 (owner bugs/UI/go-live only: W4 map-label + rv, KK14, SELSCENE) | B free 0 (THIN P1c/P2 rv/P3 engine+2 writers, p1 rv) | C free 0 (ROOT-D2: KP23RD, ROOMNC, SELART, KP10) | D free 0 (robot10 phase 2 runners A/B + fixer) | E busy (TITLES2 E55; AGEBAND ordered) | F silent (no first line) | moved: none.
+- (01:05Z) New LAND READY found → LC8: thin-p0 a76ba1e4 (B, BIG PASS, land FIRST of THIN set) and robot10-harness-rv 811cb1a6 (D, SMALL test-only). LC8 queue: coop-thin-g 70dc7244 → kit-mgskin 1b91ac14 → thin-p0 → robot10-harness-rv.
