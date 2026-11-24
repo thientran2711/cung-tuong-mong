@@ -126,3 +126,29 @@ Fixes (same functions both ways, numbers from BAL only — BAL.mind.like, BAL.di
 - A gift TO her is refused by her own choice card (PEND.giftin «Trả lại quà»), a gift to an NPC by rcvGiftIn + the dislike roll — paired as SAME.
 - Bestowals (Emperor / Thái hậu) come from the treasury as before (traceable from:"emp"/"th"); only consort gifts were pieces from nothing.
 - Repro: `node dev/tools/law1-gift-scan.js dev/index.html --md out.md`; before: `LAW1_BUILD=<main tree>/dev/build node dev/tools/law1-gift-scan.js <main tree>/dev/index.html`.
+
+## REVIEW (24/11, rv session_01D3E3NYXqaYZUGg6S5GLu3s, opus BIG)
+PRIORITY #1 CHECK ('like dislike gift two-way law 1 scan'): OD 24/11 ~07:55Z (e) | ledger 0 | claims worker Nb2AhxBQ | main giveTo j8:267, jmind/jdis hooks, jagacts cx:gift, jrcv rcvGiftIn | review/* review/law1-gifts 0a5fc0af (target), review/law1-gifts-rv (this) | none
+
+**REVIEW PASS — LAND READY review/law1-gifts-rv e3e3382b38e8be4fb3c1ae13e4d7a0b6ac13c1b6** (fast-forward of LIVE 056c2402).
+
+Branch: 0a5fc0af + final-merge LIVE 35647d5e (c2043b94) + reviewer fix (837f98e6) + final-merge LIVE 056c2402 (e3e3382b). Every merge: only index.html / sw.js / assets.json conflicted = rebuilt; gift code and LIVE's changes (item table text, typed-stat-bal, map-perf, thin-p4, hadoc-loop) disjoint.
+
+### Reviewer fix (small, pushed on -rv)
+- The scan probed only the `giveTo` DEFINITION, not its callers: two NPC gift paths in `npcMonthly` (j8.js:454 NPC→emp/th, j8.js:459 NPC→S/rv; run when the agent day plan is off) were invisible and still took the first giftable piece (no pick by knowledge). Fixed: both use `giftPickIx` (RNG order kept: target roll only when a piece exists, as before); the scan now probes EVERY `giveTo(` call and classifies all 12 callers (rows added). Scan before (origin/main, wider probe): 24 gaps, 3 unclassified sites (j24.js:26, j8.js:454, j8.js:459); after: 58 sites, 0 unclassified, 0 gaps.
+
+### Law check
+1. LAW 1 (two-way): scan re-run on main = 23 gaps (worker's probe) / 24 (wider probe); branch 0. I read 12 sites myself (j8 giveTo/bestow/454/459, jmind giftTaste/giftTastePre/giftPickIx/giftHand/chatMark, jdis giveTo hook, jagacts cx:gift + th:gift, jagacts3 maidSpy, jration tribute, jts tsLeGifts + guest option, j24 apFriend): no site wrongly classed SAME; ONE taste rule giftTaste(a,r,e) for every giver (her / consort / "emp" / "th") and receiver (her included). Nit (not blocking): scan row "DIRECTION her→emp (gift) vs emp→her (bestowal)" is hard-coded true (both paths do exist: bestow sites are in the static list).
+2. NPC taste memory v.gk: filled by gift result (jdis hook lrn → giftLearn), talk (chatMark, BAL.dis.talk), maidSpy success (giftSpyLearn); keys only real tastes of that receiver (L.includes check) → bounded by roster × tastes; saved with the person (plain JSON in ser()); old saves without gk load (law1-gifts old-save check + npcmind-check old main save → branch, ERRS []); co-op: coop-e2e 142/142 (see gates).
+3. LAW 6c: j24 visit gift = giftHand (a real piece leaves the giver's chest, or one bought at Nội vụ phủ with her own bạc, from:key(giver)); none → the visit is a chat (o.sub gossip; no recursion). jts rite gifts = tsLeGifts through giveTo (her host: choice card; NPC host: rcvGiftIn). No piece-from-nothing left in gift paths (scan OBJECT row SAME; grep of inv.push from:v.id gone). Shot: her rite «Quà mừng» row lists two guests' real pieces.
+4. LAW 9 / VANPHONG: «Gửi quà mừng» is a tsOpt (same kit act-card as «Đến chúc mừng» / «Gửi lễ mừng» / «Không đến»: frame, TỐN «món quà -1», ĐƯỢC «thiện cảm theo món quà, nàng ta ưa thì thêm»); opens the existing gift picker (PEND.giftpick v + jgpick giftEval hints + jptime carrier). No %, cổ trang. NPC lines «… không nhận X của A: nàng không ưa Y», «Món quà vẫn còn trong rương của A» fine.
+5. LAW 4: no new BAL key, no new typed number (tsLeGifts keeps the old aff 30 / 2 guests limits); one-core-guard ×3 PASS on e3e3382b (inlineNow 3545 ≤ baseline 3592, fails 0). LAW 3: rite gift costs the piece, visit gift costs the giver's piece or bạc.
+
+### Gates (on e3e3382b unless said)
+- law1-gifts.js PASS; scan 0 gaps / 58 sites / 0 unclassified / 0 page errors.
+- npcmind-check (old main build save → branch): ERRS [] (exit 0).
+- coop-e2e: 142/142 on e3e3382b; on 837f98e6 142/142 ×2 serial. Earlier PARALLEL runs (4–6 at once, kernel OOM-killed processes) gave scattered coop-host-lag FAILs (R#2.inv.0.iu, trieu af, fidUsed, week advance) on branch AND are load noise; main ran 5× clean in the same load. Serial runs all clean.
+- quickcheck: PASS · open 1872 ms · old save ok · perf new/live render 254/254 ms, tab 456/417 ms, buổi 1550/1592 ms, tasks>200ms 20/23 · core gates PASS (perf on par; giftPickIx is O(chest) per monthly gift).
+- pcard-dislikes (6 viewports): the same 3 card-row FAILs per viewport on main and branch («consort card shows 'Nàng ghét'», «Emperor card shows 'Ngài ghét'», «no overflow» — pre-existing card drift); the remaining FAILs are life-random on both trees (branch 1000x755: the drawn dislike had no test item → its gift checks cascade; main: «no overlap with likes» / «deterministic per life» twice). Gift data checks pass on the other viewports (refused 27–28 / penalised 32–33 of 60, Emperor refuses).
+- Shots (Fold 755x1000 + iPad 1180x820, looked at, scratch only, not uploaded): NPC rite with «Gửi quà mừng»; gift picker «Quà mừng» (servant carrier line); result line + toast «… mang quà sang cung Quý phi …»; her rite «Quà mừng» row. 0 page errors, no horizontal overflow.
+- Pre-existing, not this branch (for later): the picker's result card title prints the dialog prompt in brackets «Túi thơm thêu (Chọn món đồ để tặng)» (same for «Tặng quà»); on Fold the tall rite panel's title sits under the header during the open animation.
