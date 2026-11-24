@@ -1,0 +1,56 @@
+ASSIGNED SLOT: Dignified
+SOURCE IDS: M04, M10, M16, M22, M28, M29, C04, C10, C16, C22, C28, S65
+AGES:16,26,39,51,63
+PLANNED JOBS:60
+JOB LIST:Assignments/Dignified_Jobs.json
+Use only current MASTER-SKIN03complete sources. Run only this assignment.
+
+CLAUDE HANDOFF — EXACT FACE PROMPTS FOR MAGNIFIC
+Date: 11/24/2026
+
+SCOPE
+Use the supplied complete prompts to generate the assigned people and ages on Magnific. This is a face-portrait task, not wardrobe redesign. The package contains 30 reusable templates: six families x ages 16, 26, 39, 51 and 63. A family/age template applies unchanged to each original person in that family. No Magnific jobs were executed in preparing this export.
+
+ORIGINAL FACE COLLECTION IS ALREADY PROVIDED SEPARATELY
+Victoria explicitly says NOT to package the original identity images again. There are NO original identity PNGs in this package. Locate them in the original face collection she has already supplied to you, matching the source_id and exact image_1 filename in Job_Manifest.json. Do not request another copy if it is already accessible. The Source_Manifest.json also records the historical source URL and SHA256 for disambiguation. If a required original is genuinely inaccessible, report that specific source as BLOCKED rather than guessing a face or substituting an age render. No local path to Victoria's existing collection is assumed.
+
+ATTACH TWO ACTUAL IMAGES IN THIS ORDER FOR EACH JOB
+IMAGE 1: the particular person's ORIGINAL PNG from Victoria's existing face collection; for example s23.png for source S23. This supplies individual identity only; do not inherit its rendering style, skin color, exposure, color cast, palette or lighting. It changes for each person and remains the original for all five target ages. Do not use a screenshot, another woman, a generated age portrait or an average family face.
+IMAGE 2: References/Style/Face_Style_Master_No_Text.png, included in this package and also embedded in the HTML with a Download Image 2 button. This is the identical shared painting reference for everyone. It is the authoritative master for the COMPLETE painting style, SKIN COLOR, color rendering and lighting. Match its actual visual treatment directly across all people and ages. It does not supply face geometry, mood, age, hairstyle, outfit design or applied cosmetics.
+Upload IMAGE 1 first and IMAGE 2 second as actual reference inputs. Do not combine them into a collage or merely paste their filenames into the generation prompt. If separate identity/style reference roles are supported, assign those roles while maintaining the correspondence in the prompt.
+
+EXACT SOURCES
+Read the full UTF-8 file in Prompts/ named by each job's prompt_file, or use the appropriate Copy prompt button in the HTML. Paste the COMPLETE source unchanged. Do not shorten, translate, assemble blocks, rewrite the ID, append metadata to the generation prompt or enable prompt enhancement. The shared template ID is not the character's unique code. Job records and output filenames distinguish people.
+
+SLOT ASSIGNMENT
+Assignments contains six family job lists and six self-contained instruction files. Run ONLY the assigned family/job subset. Do not auto-run other slots or rebalance the cast. Historical group sizes are unequal. M05 is explicitly excluded by Victoria and has no runnable job. The other 89 historical identities produce 445 planned jobs if all five ages are requested; this is an inventory, not evidence of completed images or approval of all classifications. Historical assistant notes for M16/M22/M28 are not user exclusions. Do not invent replacement people.
+
+MAGNIFIC CAPABILITY CHECK
+Inspect the current model and controls. Use an image-generation model that accepts at least two reference images and the complete prompt. Official Magnific documentation describes multiple references, but model support differs. Do not assume the Upscaler or every model supports this workflow. If references cannot both be supplied, their roles/order cannot be kept, the prompt is truncated, or access is blocked, record the exact issue and stop that affected job. Do not silently remove an input, shorten the prompt, train a character, change plans or claim an output. Use existing settings unless Victoria assigns new ones, and record the actual model, aspect ratio, resolution and reference settings. Disable automatic prompt enhancement/rewrite if available. Start with one result per listed job.
+
+RUN LOG AND OUTPUTS
+For each assigned job, verify source_id, family, age, exact prompt file, image_1 filename and the common image_2. Generate one image, observe the actual result and save the downloaded output under output_basename plus its actual extension. Never overwrite an earlier attempt or an accepted portrait. Later authorized attempts increment T01 to T02, etc.; keep the prompt template unchanged.
+Record job_id, source_id, family, age, prompt_id, prompt_sha256, both input hashes, actual model/settings, actual generation ID, output file and status. Use NOT_STARTED, RUNNING, DONE, NEEDS_REVIEW, BLOCKED or FAILED honestly. DONE requires an observed and saved output. Resume from the log without duplicate runs. Do not write a success report for jobs that did not run.
+Review actual outputs for identity, target age direction, feminine softness, family expression, painting/skin, crop, restrained ivory robe/hairpin and no makeup. Give subjective /10 scores per criterion with brief concrete findings. Scores are not user approval. Flag issues for review; do not rewrite sources or launch unlimited retries automatically.
+
+LOCKED FACE RULES
+No applied makeup: no foundation, blush, contour/highlighter, lipstick/tint/gloss, eyeshadow/eyeliner/mascara, drawn brows or false lashes. Retain the common master’s intrinsic skin, natural lip/cheek color treatment and real anatomical eye margins/lashes. Makeup is a later game feature.
+Age39 has zero wrinkles or etched age lines and retains soft feminine face geometry. Gentle/Dignified game-age39 use the approved visual target of approximately35-36. All other age/family source wording stays unchanged. Never manufacture age or strength through square jaws, heavy brow bones, carved cheekbones or a long lower face. Preserve individual identity and expression.
+Only Alluring has its assigned eye-area beauty mark; never near nose, mouth or ear. Age16 remains adolescent and age appropriate. Keep the complete prompt's restrained embroidered ivory portrait robe and hairpin, complete hairstyle to upper-chest crop and no hand-held props. Chat B's wardrobe changes do not redesign this neutral face-study outfit.
+
+APPROVAL BOUNDARY
+The older accepted30-portrait baseline and separate newer6/6accepted set remain preserved. New set: ProudS23,SharpC11,ColdS29,AlluringS34DUAL01;GentleC08andDignifiedC16LOOK36-R05. Their actual historical sources and PNGs are distinct from these current reusable bare-face recipes. The current30recipes have not all been rendered after the no-makeup and strict common-master additions. No unseen Magnific output is pre-approved; no old image is certified makeup-free merely from appearance.
+
+READING THE PACKAGE
+The HTML is a local file, not a published website. If it displays as text or scripts cannot run, read Complete_Prompts.json or Prompts/*.txt, the assigned JSON job list and this instruction file directly. The identity images are intentionally absent because they already exist in your separate collection. The only included PNG is the fixed Image2 painting master.
+
+OFFICIAL REFERENCES — CHECKED11/24/2026
+https://www.magnific.com/ai/docs/your-first-ai-image
+https://www.magnific.com/ai/docs/image-models-and-modes
+
+GAME ARTWORK — NO VISIBLE TEXT
+The previous sources incorrectly commanded a printed family/age CAPTION. All current sources replace that block with an explicit no-text game-asset instruction. Never print a name, family, age, ID, label, signature, logo or watermark on the artwork. Keep metadata only in the unique output filename and run log. Output one portrait alone, without an input thumbnail, comparison layout, caption/footer strip or application UI. In visual QC, check the entire image for text and label the result NEEDS_REVIEW if any appears. Do not mark such a result as game-ready. These updated sources have not been render-tested here; no automatic visual success is claimed.
+
+CURRENT MASTER-SKIN03 — IDENTICAL VISUAL STANDARD
+Use the current MASTER-SKIN-BAREFACE-NOTEXT-03 sources, not an earlier style-only version. IMAGE2 sets the complete painting finish, line/edge quality, brushwork, color rendering, skin undertone/lightness/saturation, skin highlights/midtones/shadow colors, exposure, white balance, contrast and lighting. IMAGE1 supplies facial identity only. Copy the actual IMAGE2 colors and rendering rather than substitute a verbal beige/peach/pink approximation. Age and personality do not recolor skin. Keep the same unchanged master file in every job and check the hash if possible. Do not add a third reference or replace the master with a generated result. No makeup and no visible text remain mandatory.
+Keep the same actual model and configured rendering/reference/color settings across the assigned batch. Record them; do not invent numeric values or silently change presets per person. Use reference controls compatible with the two actual inputs; report an unsupported workflow rather than dropping an input. Compare every output directly with IMAGE2 for painting style and skin/color/light consistency in addition to source identity. Mark visual mismatches NEEDS_REVIEW. Never claim a prompt proves the output matches, or approve a mismatched result because it looks attractive. The current revision has not been render-tested here.

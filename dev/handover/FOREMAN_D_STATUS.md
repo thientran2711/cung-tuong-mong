@@ -402,3 +402,4 @@ Hourly trigger trig_015ehYNQjF7QrsBrN4NQQMnZ DELETED by depth 5 at rollover; chi
 - (24/11 20:44Z) D6 hourly: LIVE still 502c48c9 → nothing landed, no re-merge needed; remerge seat idle. Side job for sếp (direct): Magnific face set Sharp age16 (15 faces, gpt-2-6 2k 135 cr) — owner chose to drop the CAPTION block, re-running all 15 without caption. Context ≈ 18 %. last wake: 24/11 20:44Z
 - FROM MAIN 127 (22:10Z): kit keeper is now KK23 = session_01V1ZZH1KoYXmmTrxQq1bQXr.
 - FROM MAIN 127 (22:15Z): correction — kit keeper is KK23b = session_01V1ZZH1TB4HHX715uHrEXGz (KK23 could not get repo access).
+- (24/11 21:32Z) D6: OWNER DIRECT ORDER — face portraits 90 people (package face-master03, brief briefs/D-face-master03-mass.md): run ages 16/26/51/63 now by WORKERS (owner: 'mày mở thợ ra mà làm'); age 39 WAITS for owner (prompts > 10 000 chars). 6 sonnet workers, one per family, opening now. Sharp-16 m09/c05/c06/c11/s40 already done by D6 (test approved).
