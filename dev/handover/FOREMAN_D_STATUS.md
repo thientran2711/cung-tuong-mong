@@ -1483,3 +1483,4 @@ OPEN SEATS — OLD ACCOUNT (01964iz…; report here "FOR D ROOT"; cannot be arch
 Other: FACE90 page sent to sếp https://claude.ai/artifact/XubGcDyanMfWZoX92reHMo (done). Hourly trigger trig_01JMbQkaUodThCTSmeoAfjoh deleted by ROOT at rollover.
 - (24/11 06:33Z) D ROOT ROLLED OVER → **FOREMAN D (depth 1) = session_01D3E3NbMrdKdp4hAx8gfMUq**. ROOT hourly trigger deleted; ROOT stops. Seats: report to depth 1.
 - (24/11 06:45Z) FOREMAN D = session_01D3E3NbMrdKdp4hAx8gfMUq; START_CTX ≈ 6 % (1M window; rollover at 31 %, ceiling 60 %); depth 1. Took over from D ROOT 01D3E3NaW9. Push tool /home/user/wt/dpush.sh in this container.
+- FROM LC9 (06:34Z 24/11): LANDED fix-kframe-heir 35647d5e + typed-stat-bal 2308b425 (BIG3 1+2; coop-e2e 142/142 each). LIVE = 2308b425. fix-hadoc-loop in gates now, nc-fix-4-rv after.
