@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"971f4c1a+","t":"2026-11-24T11:23Z","c":"servant-trust fix r1: witness rule (svtSeen: near / eyes / talkative servant / npcTell, no base) + servant↔servant across houses (svtPeer: …","b":"c955232cdaff","h":[{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"}]};
+window.CTM_BI={"s":"fc17b8cc","t":"2026-11-24T12:07Z","c":"servant-trust-rv review r2: a face-to-face talk with the master this buổi (chatMark / p3ChatMark, her and NPC\u003c->NPC) counts as greeting her…","b":"67e82b1dfc8b","h":[{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -88110,6 +88110,12 @@ function svtWrap(f,kind){return function(a,s){const b=s&&s.spyFor;const r=f.appl
 if(typeof bribeServ==="function")bribeServ=svtWrap(bribeServ,"bribe");if(typeof threatServ==="function")threatServ=svtWrap(threatServ,"threat");if(typeof tmTake==="function")tmTake=svtWrap(tmTake,"tm");
 /* greetName (jgreet: every greeting site): a greeting of this buổi is remembered both ways */
 (function(){if(typeof greetName!=="function")return;const g0=greetName;greetName=function(a,b){const r=g0.apply(this,arguments);try{const G=svtGz();G[svtId(a)+">"+svtId(b)]=1;G[svtId(b)+">"+svtId(a)]=1}catch(e){}return r}})();
+/* review r2 (OD ~07:58Z «mình là chủ tử thì mình muốn hỏi điều một vị cung nữ nào đó thì ít nhất mình cũng phải hỏi chuyện cái người chủ tử»): a face-to-face
+   talk with the master this buổi (j9 chatMark: her talk acts, a visitor's acts on her; jagacts3 p3ChatMark: the talk topics, NPC ↔ NPC too) counts as having greeted her, both ways — before, only greetName did,
+   so a master she already knew could never be greeted again and the open talk with her servant was always bất kính */
+function svtMet(a,b){try{if(!a||!b||a===b)return;const G=svtGz(),x=svtId(a),y=svtId(b);if(x&&y){G[x+">"+y]=1;G[y+">"+x]=1}}catch(e){}}
+(function(){if(typeof chatMark==="function"){const c0=chatMark;chatMark=function(v){const r=c0.apply(this,arguments);svtMet(S,v);return r}}
+ if(typeof p3ChatMark==="function"){const p0=p3ChatMark;p3ChatMark=function(p,v){const r=p0.apply(this,arguments);svtMet(p,v);return r}}/* the four talk topics (jagacts3 P3T: her ↔ NPC and NPC ↔ NPC, law 1) */})();
 /* the month: NPC mistresses have someone of another house talked to (law 1: her, the NPCs, NPC ↔ NPC); an NPC master returns the servant she no longer trusts */
 function svtMonth(){if(!SVT.on())return"";let ev="";const B=BAL.svt;let G=false;try{G=typeof mlGuest==="function"&&mlGuest()}catch(e){}
  for(const p of liveRivals(true)){if(!p||!p.alive||p.out)continue;
@@ -97946,7 +97952,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c955232cdaff";window.CTM_BUILD=BUILD;
+const BUILD="67e82b1dfc8b";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
