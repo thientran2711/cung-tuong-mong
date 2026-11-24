@@ -1,15 +1,15 @@
 /* ================= AGES: every person has an age, ageing yearly; faces by role and age band, fixed for life ================= */
 function courtSrc(k,c){if(k==="ty")return fsrc(c&&c.fc,"img/face-physician.webp");return fsrc(c&&c.fc,`img/face-eunuch-${(c&&c.fe>=0?c.fe:eunBand(c&&c.age||40))+1}.webp`)}
 function ageInit(){if(!S)return;[S].concat(rivals||[]).forEach(o=>{if(o)delete o.hue});if(typeof allServ==="function")allServ().forEach(s=>delete s.hue);if(!S.wkSnap&&typeof wkSnap==="function"){S.wkSnap=wkSnap();S.lastWk=wkKey()}const m=S.maid;if(m){if(!(m.age>=16))m.age=16+R(7);delete m.face;delete m.hue}
- /* Thái hậu = the Emperor's mother (owner 11/15): 51–62 at the start (51+ = the a51 art band, band4), and ≥ Emperor + 18;
+ /* Thái hậu = the Emperor's mother (owner 11/15): BAL.ageBand[2]–62 at the start (the a51 art band, band4), and ≥ Emperor + BAL.ageMin;
     an old save with a younger mother (live showed 43) is brought up to that floor. Her age is also kept on S.thO.age so every
     portrait / figure picker that reads who.age gets her real age band. */
- {const ea=S.emp&&S.emp.age>0?S.emp.age:30,lo=Math.max(51,ea+18),hi=Math.max(lo,62);if(!(S.thAge>0))S.thAge=lo+R(hi-lo+1);else if(S.thAge<lo&&!S.thDead)S.thAge=lo+R(Math.min(4,hi-lo+1))}
+ {const ea=S.emp&&S.emp.age>0?S.emp.age:30,lo=Math.max(BAL.ageBand[2],ea+BAL.ageMin),hi=Math.max(lo,62);if(!(S.thAge>0))S.thAge=lo+R(hi-lo+1);else if(S.thAge<lo&&!S.thDead)S.thAge=lo+R(Math.min(4,hi-lo+1))}
  S.thO=S.thO||{};S.thO.age=S.thAge;
- (rivals||[]).forEach(v=>{if(!(v.age>=18))v.age=18+R(8)});
+ (rivals||[]).forEach(v=>{if(!(v.age>=BAL.ageMin))v.age=BAL.ageMin+R(8)});
  const C=S.court||{};const base={tq:56,ksp:40,ped:20,ty:50};for(const k in C){const c=C[k];if(!(c.age>0))c.age=(base[k]||35)+R(6);if(k!=="ty"&&!(c.fe>=0))c.fe=eunBand(c.age)}
  if(typeof allServ==="function")allServ().forEach(s=>{if(!(s.age>0))Object.assign(s,servAge(s.role));if(s.role!=="maid"&&!(s.fe>=0))s.fe=eunBand(s.age)});faceInit()}
-function ageYear(){(S.men||[]).forEach(m=>m.age++);if(S.maid)S.maid.age=(S.maid.age||18)+1;S.thAge=(S.thAge||51)+1;if(S.thO)S.thO.age=S.thAge;(rivals||[]).forEach(v=>{if(v.alive)v.age=(v.age||20)+1});
+function ageYear(){(S.men||[]).forEach(m=>m.age++);if(S.maid)S.maid.age=(S.maid.age||BAL.ageMin)+1;S.thAge=(S.thAge||51)+1;if(S.thO)S.thO.age=S.thAge;(rivals||[]).forEach(v=>{if(v.alive)v.age=(v.age||20)+1});
  for(const k in (S.court||{}))S.court[k].age=(S.court[k].age||40)+1;if(typeof allServ==="function")allServ().forEach(s=>s.age=(s.age||20)+1)}
 /* children: a variant at birth, the face band follows the age (initials if the file is missing) */
 function kidBand(a){return a<=2?"baby":a<=6?"small":a<=12?"child":"teen"}
@@ -29,13 +29,13 @@ const FPOOL={consort:rng(1,40,i=>"face-consort-"+pad(i)),maid:rng(1,6,i=>"face-m
  off0:[2].map(OF),off1:[4,5,6].map(OF),off2:[1,3].map(OF).concat(["face-physician"]),manold:rng(1,4,i=>"face-man-old-"+i),
  eun0:["1","2","05","08","09","11","14","15","17","19"].map(EU),eun1:["12","16","20"].map(EU),eun2:["06","10","18","4"].map(EU),eun3:["3","07","13"].map(EU)};
 /* pool keys for a person, preferred band first, then the nearest bands */
-function bandKeys(kind,age){if(kind==="consort")return age<=35?["consort","womid","mama"]:age<=50?["womid","consort","mama"]:["mama","womid","consort"];
- if(kind==="maid")return age<=35?["maid","womid","mama"]:age<=44?["womid","maid","mama"]:["mama","womid","maid"];
+function bandKeys(kind,age){const B=BAL.ageBand;if(kind==="consort")return age<B[1]?["consort","womid","mama"]:age<B[2]?["womid","consort","mama"]:["mama","womid","consort"];
+ if(kind==="maid")return age<B[1]?["maid","womid","mama"]:age<=44?["womid","maid","mama"]:["mama","womid","maid"];
  if(kind==="eunuch"){const b=eunBand(age||30);return [0,1,2,3].sort((x,y)=>Math.abs(x-b)-Math.abs(y-b)||x-y).map(x=>"eun"+x)}
  const near=(pre,b,n)=>[...Array(n).keys()].sort((x,y)=>Math.abs(x-b)-Math.abs(y-b)||x-y).map(x=>pre+x);
- if(kind==="emperor"||kind==="royal")return near("emp",age<=25?0:age<=35?1:age<=50?2:3,4);
+ if(kind==="emperor"||kind==="royal")return near("emp",Math.min(3,ageBandIx(age)),4);
  if(kind==="thaihau")return near("th",age<=55?0:1,2);
- if(kind==="official"||kind==="man")return age>50&&kind==="man"?["manold","off2","off1","off0"]:near("off",age<=35?0:age<=50?1:2,3);
+ if(kind==="official"||kind==="man")return age>=B[2]&&kind==="man"?["manold","off2","off1","off0"]:near("off",age<B[1]?0:age<B[2]?1:2,3);
  return [kind]}
 const FAV={};
 /* jreg: pools added by later modules (man, ct1–5…) are probed too */
@@ -63,7 +63,7 @@ function roomFor(role){if(!S)return true;
   const km=K("maid"),kk=K("mama");const own=new Set(km.concat(kk));
   const worn=new Set();[S].concat((rivals||[]).filter(v=>v&&v.alive!==false)).forEach(v=>{if(!v)return;for(const f of [v.fid,v===S?S.pid:null])if(f&&own.has(f))worn.add(f)});
   const wm=[...worn].filter(f=>/^maid:/.test(f)).length;
-  const W=SV.filter(s=>s&&s.role==="maid");const all=1+W.length,young=1+W.filter(s=>(s.age||18)<36&&!s.old).length;
+  const W=SV.filter(s=>s&&s.role==="maid");const all=1+W.length,young=1+W.filter(s=>(s.age||BAL.ageMin)<BAL.ageBand[1]&&!s.old).length;
   if(!km.length)return all<(poolOf("maid").length+poolOf("mama").length);
   return all<own.size-worn.size&&young<km.length-wm}
  const n=poolOf(role).filter(f=>FAV[f]!==0).length;const cap=role==="consort"?Math.max(n,(AV.women||[]).length):n;
@@ -72,7 +72,7 @@ function roomFor(role){if(!S)return true;
 function kidVar(k){const used=new Set(allKids().map(([x])=>x).filter(x=>x!==k&&x.alive&&x.sex===k.sex&&x.fv).map(x=>x.fv));const c=[1,2,3,4].filter(v=>!used.has(v));return c.length?pick(c):0}
 /* give every present person a face once; old saves get theirs here too */
 function faceInit(){if(!S)return;faceFor(S,"consort",S.age);(rivals||[]).forEach(v=>faceFor(v,"consort",v.age||20));
- if(S.maid)faceFor(S.maid,S.maid.old?"mama":"maid",S.maid.age||18);if(S.emp)faceFor(S.emp,"emperor",S.emp.age);S.thO=S.thO||{};faceFor(S.thO,"thaihau",S.thAge||55);S.thF=S.thO.fc;
+ if(S.maid)faceFor(S.maid,S.maid.old?"mama":"maid",S.maid.age||BAL.ageMin);if(S.emp)faceFor(S.emp,"emperor",S.emp.age);S.thO=S.thO||{};faceFor(S.thO,"thaihau",S.thAge||55);S.thF=S.thO.fc;
  for(const k in (S.court||{})){const c=S.court[k];faceFor(c,k==="ty"?"official":"eunuch",c.age||40)}
  if(typeof allServ==="function")allServ().forEach(s=>faceFor(s,s.role==="maid"?"maid":"eunuch",s.age||20))}
 /* under cấm túc a consort's palace is watched: no crimes can be set in motion (every consort alike) */
