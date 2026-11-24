@@ -2810,3 +2810,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (04:08Z) sếp angry after the 8 videos (OD row 24/11 ~04:00Z). Old selscene mock predated her rows 23:05–23:47Z. SELSCENE-2 = session_01V1ZZH2yEMKrrAz7jmCWzee (opus) — checklist first, new mock + 2× copies + page; MAIN checks each row before sending.
 - FROM LC9 (04:11Z 24/11): LANDED thin-p3 27240ccb45ea305abdb17b18460253026581652f. LIVE = 27240ccb.
 - (04:30Z) sếp review part 2 (OD 24/11 ~04:25Z): relayed to SELSCENE-2 (hold), KK16 (toilette v3.5 standard figure size + KIT no odds word on can't-fail options = her answer to the no-roll question), Foreman C (art style audit + Japanese low-table room redraw).
+- (05:12Z) sếp designed the royals' reveal herself and asked for recommendations (OD 24/11 ~05:10Z). INTRO-DESIGN expert = session_01V1ZZH2dFpGeqzMkADMnfJw (research + intro kit + storyboard mock page, letters to pick). SELSCENE-2 told.
