@@ -1,0 +1,221 @@
+/* INTRO-DESIGN storyboard mock (prototype only; the final parts are built by the kit keeper KK16).
+   Deterministic timeline: IM.load(clipId, device) builds the overlay on top of the REAL game page, IM.seek(ms) draws the exact frame at time ms.
+   Figures and backgrounds are the game's own files (CDN img/…); nothing new is drawn. All positions are fractions of the overlay. */
+window.IM=(function(){
+const ASSET='http://127.0.0.1:8766/assets/';
+const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+const EASE={lin:t=>t,io:t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2,out:t=>1-Math.pow(1-t,3),in:t=>t*t*t,back:t=>{const c=1.5;return 1+(c+1)*Math.pow(t-1,3)+c*Math.pow(t-1,2)},soft:t=>t*t*(3-2*t)};
+function kv(kf,t){if(!kf)return undefined;if(t<=kf[0][0])return kf[0][1];for(let i=1;i<kf.length;i++){if(t<=kf[i][0]){const a=kf[i-1],b=kf[i];const e=EASE[b[2]||'io'];return a[1]+(b[1]-a[1])*e((t-a[0])/Math.max(1,b[0]-a[0]))}}return kf[kf.length-1][1]}
+let ov,W,H,dev,tracks,texts,cues,dur,imgs={};
+const FONT='"Be Vietnam Pro",system-ui,sans-serif',SERIF='"Noto Serif","Noto Serif SC","Songti SC",Georgia,serif';
+function el(tag,css,parent,html){const e=document.createElement(tag);if(css)e.style.cssText=css;if(html!=null)e.innerHTML=html;(parent||ov).appendChild(e);return e}
+/* track an element: props x,y (px), s, o, blur, br(ightness), sat, clipB / clipT (fraction of its height hidden at bottom/top), rot */
+function T(e,p,origin){e.style.transformOrigin=origin||'50% 100%';e.style.willChange='transform,opacity,filter';tracks.push({e,p});return e}
+function applyTracks(t){for(const {e,p} of tracks){const x=kv(p.x,t)||0,y=kv(p.y,t)||0,s=p.s?kv(p.s,t):1,r=p.r?kv(p.r,t):0;e.style.transform=`translate(${x}px,${y}px) scale(${s}) rotate(${r}deg)`;
+ if(p.o)e.style.opacity=kv(p.o,t);const f=[];if(p.blur){const b=kv(p.blur,t);if(b>.05)f.push(`blur(${b.toFixed(2)}px)`)}if(p.br){const b=kv(p.br,t);if(Math.abs(b-1)>.01)f.push(`brightness(${b.toFixed(3)})`)}if(p.sat){const b=kv(p.sat,t);if(Math.abs(b-1)>.01)f.push(`saturate(${b.toFixed(3)})`)}
+ if(p.sil){const b=kv(p.sil,t);if(b>0.01)f.push(`brightness(${(1-b).toFixed(3)}) sepia(${(b*.35).toFixed(2)})`)}
+ if(f.length)e.style.filter=f.join(' ');else e.style.filter='none';
+ if(p.clipB||p.clipT){const cb=p.clipB?kv(p.clipB,t):0,ct=p.clipT?kv(p.clipT,t):0;{const m=`linear-gradient(#000 ${((1-cb)*100-14).toFixed(1)}%,transparent ${((1-cb)*100).toFixed(1)}%)`;e.style.webkitMaskImage=cb>0.001?m:'none';e.style.maskImage=cb>0.001?m:'none'}}}}
+/* typewriter: str typed from t0 at ms per char (pause after , ; — … . !) */
+function typer(box,t0,str,cps){cps=cps||34;const times=[];let t=t0;for(const ch of str){times.push(t);t+=cps+(',;'.includes(ch)?110:'—…'.includes(ch)?160:'.!?'.includes(ch)?260:0)}return {box,t0,str,times,end:t}}
+function typeAt(tp,sub){const i=tp.str.indexOf(sub);return i<0?tp.t0:tp.times[i]}
+function updTexts(t){for(const tp of texts){let n=0;while(n<tp.times.length&&tp.times[n]<=t)n++;const s=tp.str.slice(0,n);const cur=n<tp.str.length&&t>=tp.t0?'<i class=cur></i>':'';tp.box.innerHTML=t<tp.t0?'':s+cur}}
+function load(clipId,device){return new Promise(async res=>{dev=device;const g=document.getElementById('game').getBoundingClientRect();
+ const st=document.getElementById('stage').getBoundingClientRect();
+ let r=dev==='ipad'?{x:0,y:0,w:g.width,h:g.height}:{x:st.x,y:st.y,w:st.width,h:st.height};W=r.w;H=r.h;
+ const old=document.getElementById('intro-ov');if(old)old.remove();
+ ov=el('div',`position:fixed;left:${r.x}px;top:${r.y}px;width:${W}px;height:${H}px;overflow:hidden;z-index:99999;background:#1b0f0c;font-family:${FONT};color:#3a2410`,document.body);ov.id='intro-ov';
+ tracks=[];texts=[];cues=[];
+ const css=el('style','',ov,`#intro-ov i.cur{display:inline-block;width:2px;height:1em;background:#8f5f0c;margin-left:2px;vertical-align:-2px;animation:none}#intro-ov *{box-sizing:border-box}`);
+ const need=['end-bg-throne.webp','ngu-hoa-vien-xuan-sang.webp','fig-emperor-a26-1.webp','fig-thaihau-h1-a51.webp','fig-consort-c03-t8-a36.webp','fig-eunuch-u01-a51.webp','fig-player-look1-t1-a18.webp','fig-consort-c01-t1-a18.webp','fig-consort-c02-t1-a18.webp','fig-consort-c04-t1-a18.webp','fig-consort-c05-t1-a18.webp','fig-consort-c06-t1-a18.webp','fig-consort-c07-t1-a18.webp','fig-consort-c02-t3-a26.webp'];
+ await Promise.all(need.map(n=>new Promise(ok=>{const im=new Image();im.onload=()=>{imgs[n]=im;ok()};im.onerror=ok;im.src=ASSET+n})));
+ dur=CLIPS[clipId]();seek(0);res({dur,W,H})})}
+function seek(t){applyTracks(t);updTexts(t)}
+/* ---------- building blocks ---------- */
+const asp=n=>{const i=imgs[n];return i?i.naturalWidth/i.naturalHeight:.4};
+/* figure: cx = centre x (fraction of W), feet = feet y (fraction of H), h = height (fraction of H) */
+function fig(name,cx,feet,h,parent,z){const hh=h*H,ww=hh*asp(name);const d=el('div',`position:absolute;left:${cx*W-ww/2}px;top:${feet*H-hh}px;width:${ww}px;height:${hh}px;z-index:${z||5}`,parent);el('img',`width:100%;height:100%;display:block;pointer-events:none`,d).src=ASSET+name;d._w=ww;d._h=hh;d._cx=cx*W;d._feet=feet*H;return d}
+function bg(name,parent,focusX,focusY){const d=el('div',`position:absolute;inset:-4%;z-index:1;background:url(${ASSET}${name}) ${focusX||50}% ${focusY||50}%/cover`,parent);return d}
+function shade(parent,color,z){return el('div',`position:absolute;inset:0;background:${color||'#24100c'};z-index:${z||20};pointer-events:none`,parent)}
+function vignette(z){return el('div',`position:absolute;inset:0;z-index:${z||30};pointer-events:none;background:radial-gradient(ellipse at 50% 46%,rgba(0,0,0,0) 48%,rgba(30,8,6,.55) 100%)`)}
+/* bottom text box in the kit's cream-paper look (placeholder for kitDialogue box): speaker tab + typed line */
+function textBox(speaker,pos,extra){const w=Math.min(W-28,dev==='ipad'?640:W-28);const x=pos==='right'?W-w-16:pos==='left'?16:(W-w)/2;const y=pos==='mid'?H*.58:H-14;
+ const b=el('div',`position:absolute;left:${x}px;${pos==='mid'?`top:${y}px`:`bottom:14px`};width:${w}px;z-index:60;padding:12px 16px 14px;border-radius:14px;background:linear-gradient(#fffaf0,#f7e9cf);border:1.5px solid #c99a3b;box-shadow:0 6px 18px rgba(40,10,0,.45),inset 0 0 0 3px rgba(255,255,255,.55);min-height:78px`);
+ el('div',`font:700 12.5px ${FONT};color:#8f2b1d;letter-spacing:.2px;margin-bottom:5px;display:flex;align-items:center;gap:7px`,b,`<span style="background:#a8321f;color:#fff6e0;border-radius:5px;padding:1px 6px;font-size:11px">${extra||'LỜI'}</span><span>${speaker}</span>`);
+ const tx=el('div',`font:500 15px/1.5 ${FONT};color:#3a2410;min-height:46px`,b);const hint=el('div',`position:absolute;right:12px;bottom:6px;font:600 11px ${FONT};color:#a98a52`,b,'chạm ▸');b._tx=tx;b._hint=hint;return b}
+/* name plaque: calligraphy-like title + origin line; kind h = horizontal plaque, v = vertical strip */
+function plate(title,sub,o){o=o||{};const d=el('div',`position:absolute;z-index:55;${o.css||''}`);
+ if(o.v){d.style.cssText+=`display:flex;flex-direction:row;align-items:flex-start;gap:6px;`;
+  el('div',`writing-mode:vertical-rl;font:800 ${o.fs||34}px ${SERIF};letter-spacing:.18em;color:#fff3cf;text-shadow:0 2px 0 #7a1d12,0 0 14px rgba(255,200,80,.75),0 3px 12px rgba(0,0,0,.6);padding:14px 6px;background:linear-gradient(rgba(140,30,20,.82),rgba(110,22,14,.82));border:1.5px solid #e3b04b;border-radius:6px`,d,title);
+  el('div',`writing-mode:vertical-rl;font:600 ${o.sfs||14}px ${SERIF};letter-spacing:.2em;color:#fff0cc;text-shadow:0 1px 6px rgba(0,0,0,.8);padding-top:20px`,d,sub||'')}
+ else{d.style.cssText+=`text-align:center;transform-origin:50% 0`;
+  const inner=el('div',`display:inline-block;padding:5px 18px 6px;border-radius:9px;background:linear-gradient(#fff8e6,#f4e0b4);border:1.5px solid #c99a3b;box-shadow:0 3px 12px rgba(40,10,0,.5),inset 0 0 0 2px rgba(255,255,255,.55)`,d);
+  el('div',`font:800 ${o.fs||19}px ${SERIF};color:#7a1d12;letter-spacing:.06em;line-height:1.25`,inner,title);
+  if(sub)el('div',`font:600 ${o.sfs||12}px ${FONT};color:#8f5f0c;margin-top:1px`,inner,sub)}
+ return d}
+const seal=(txt,css)=>el('div',`position:absolute;z-index:56;width:44px;height:44px;border-radius:8px;background:#b3261a;color:#ffe9b8;font:800 20px/44px ${SERIF};text-align:center;border:2px solid #e3b04b;box-shadow:0 2px 8px rgba(0,0,0,.5);${css||''}`,null,txt);
+function skipChip(){return el('div',`position:absolute;right:10px;top:10px;z-index:70;font:700 12px ${FONT};color:#fff3d6;background:rgba(40,12,8,.6);border:1px solid rgba(227,176,75,.7);border-radius:12px;padding:3px 10px`,null,'Chạm: xem tiếp · Giữ: bỏ qua ⏭')}
+const fade=(a,b,c,d)=>[[a,0],[b,1,'out'],[c,1],[d,0,'io']];
+/* geometry by device */
+const G=()=>dev==='ipad'?{sp:.2,gs:.085,royY:.48,royH:.34,girlH:.5,girlFeet:.78,faceH:1.5}:{sp:.3,gs:.15,royY:.47,royH:.34,girlH:.46,girlFeet:.77,faceH:1.5};
+/* ===== A: ROYAL REVEAL ===== */
+function royalScene(){const g=G(),root=el('div','position:absolute;inset:0;overflow:hidden;z-index:0;isolation:isolate');
+ const cam=el('div','position:absolute;inset:0;transform-origin:0 0;z-index:1',root);
+ const bgl=bg('end-bg-throne.webp',cam,50,40);
+ const names=['fig-consort-c01-t1-a18.webp','fig-consort-c04-t1-a18.webp','fig-consort-c05-t1-a18.webp','fig-player-look1-t1-a18.webp'];
+ const gx=[-1.5,-.5,.5,1.5].map(k=>.5+k*g.gs);const girls=names.map((n,i)=>fig(n,gx[i],g.girlFeet,g.girlH,cam,10+i));
+ const seats={e:[.5,g.royY,g.royH],t:[.5-g.sp,g.royY+.03,g.royH-.03],h:[.5+g.sp,g.royY+.03,g.royH-.03]};
+ const roy={e:fig('fig-emperor-a26-1.webp',seats.e[0],seats.e[1],seats.e[2],cam,8),t:fig('fig-thaihau-h1-a51.webp',seats.t[0],seats.t[1],seats.t[2],cam,8),h:fig('fig-consort-c03-t8-a36.webp',seats.h[0],seats.h[1],seats.h[2],cam,8)};
+ return {root,cam,bgl,girls,roy,seats,gx}}
+const THINK={e:'Người ngồi giữa, long bào vàng rực… hẳn là Hoàng thượng.',t:'Bên trái, phu nhân tóc đã điểm bạc, dáng uy nghi — ắt là Thái hậu.',h:'Bên phải, vị nương nương đoan trang, phượng quán trên đầu — chính là Hoàng hậu.'};
+const CUE={e:'Hoàng thượng',t:'Thái hậu',h:'Hoàng hậu'};
+const PL={e:['Hoàng thượng','Chí tôn thiên hạ'],t:['Thái hậu','Mẫu nghi thiên hạ'],h:['Hoàng hậu','Chủ lục cung']};
+/* NOTE: A1/A2 are implemented by the generic builder below (A) to keep timing readable */
+function buildA(mode){const S=royalScene();const g=G();const ids=['e','t','h'];const sh=shade(S.root,'#1c0c0a',20);
+ const box=textBox('Ta nghĩ thầm',null,'TÂM NIỆM');
+ const girlIn=2300;S.girls.forEach((f,i)=>T(f,{y:[[200+i*300,H*.4],[1700+i*300,0,'out']],o:[[200+i*300,0],[900+i*300,1,'out']]}));
+ T(box,{o:[[girlIn,0],[girlIn+450,1,'out']]});
+ const shK=[[0,0],[1000,.4,'io']];let t=girlIn+500;const hold=[];
+ const blurK=[[0,0],[1000,3]];
+ const seatO={};const clones=[];
+ const skip=skipChip();T(skip,{o:[[girlIn,0],[girlIn+500,1,'out']]});
+ ids.forEach((id,i)=>{const f=S.roy[id];const topY=f._feet-f._h;const src=id==='e'?'fig-emperor-a26-1.webp':id==='t'?'fig-thaihau-h1-a51.webp':'fig-consort-c03-t8-a36.webp';
+  const th=typer(box._tx,t,THINK[id],34);texts.push(th);const cue=typeAt(th,CUE[id])+100;
+  const bigS=(g.faceH*H)/f._h,openAt=1500,ld=cue+700+openAt+900;
+  const cp=fig(src,f._cx/W,f._feet/H,f._h/H,S.root,40);cp.style.left=(f._cx-f._w/2)+'px';cp.style.top=topY+'px';
+  if(mode==='A1'){
+   T(cp,{x:[[cue,0],[cue+700,W/2-f._cx,'out'],[cue+700+openAt,W/2-f._cx,'lin'],[ld,0,'io']],y:[[cue,0],[cue+700,H*.035-topY,'out'],[cue+700+openAt,H*.035-topY,'lin'],[ld,0,'io']],s:[[cue,1],[cue+700,bigS,'out'],[cue+700+openAt,bigS,'lin'],[ld,1,'io']],o:[[cue,0],[cue+380,1,'out'],[ld+40,1],[ld+120,0]],clipB:[[cue,0],[cue+700,.48,'out'],[cue+700+openAt-200,.48,'lin'],[cue+700+openAt+500,0,'io']]},'50% 0%');
+   const pl=plate(PL[id][0],PL[id][1],{v:true,css:`${id==='h'?'left':'right'}:${dev==='ipad'?W*.17:16}px;top:${H*.1}px`,fs:dev==='ipad'?40:32});T(pl,{o:[[cue+250,0],[cue+800,1,'out'],[cue+700+openAt+300,1],[cue+700+openAt+800,0]],y:[[cue+250,-14],[cue+800,0,'out']]},'50% 0%')
+  }else{ /* A2: the camera itself pushes in on the seat, then pulls back; figure stays on its seat; plaque under feet */
+   const ft=f._cx,tp=topY;const camS=g.faceH*H/f._h*0.9;
+   T(S.cam,{s:[[cue-100,1],[cue+800,camS,'out'],[cue+800+openAt,camS,'lin'],[ld,1,'io']],x:[[cue-100,0],[cue+800,W/2-ft*camS,'out'],[cue+800+openAt,W/2-ft*camS,'lin'],[ld,0,'io']],y:[[cue-100,0],[cue+800,H*.04-tp*camS,'out'],[cue+800+openAt,H*.04-tp*camS,'lin'],[ld,0,'io']]},'0 0');
+   const pl=plate(PL[id][0]+'  ·  '+PL[id][1],'',{css:`left:${W*.5-170}px;bottom:${H*.2}px;width:340px`,fs:18});T(pl,{o:[[cue+500,0],[cue+1100,1,'out'],[cue+800+openAt,1],[ld-100,0]],y:[[cue+500,10],[cue+1100,0,'out']]},'50% 0%')
+  }
+  /* seat copy: A1 hidden until clone lands; A2 emerges with a soft rise at cue */
+  if(mode==='A1')T(f,{o:[[0,0],[ld,0],[ld+60,1,'lin']]});
+  else T(f,{o:[[0,0],[cue,0],[cue+500,1,'out']],y:[[cue,14],[cue+500,0,'out']],br:[[cue,.5],[cue+900,1,'out']]});
+  if(mode==='A1')cp.style.display='';else cp.style.display='none';
+  hold.push([cue,ld]);t=Math.max(th.end+300,ld+500);
+  /* fade the previous thought text before the next */
+  texts.push({box:null})});
+ texts=texts.filter(x=>x.box);texts.forEach((tp,i)=>{tp.win=[tp.t0,i<texts.length-1?texts[i+1].t0:1e9]});
+ /* dim / blur schedule: on during each close-up, relaxed between */
+ const so=[[0,0],[900,.34,'io']],bl=[[0,0],[900,2.5,'io']];hold.forEach(([c,l])=>{so.push([c-50,.34],[c+500,mode==='A1'?.7:.55,'io'],[l-300,mode==='A1'?.7:.55],[l+500,.34,'io']);bl.push([c-50,2.5],[c+500,mode==='A1'?9:5,'io'],[l-300,mode==='A1'?9:5],[l+500,2.5,'io'])});
+ T(sh,{o:so});T(S.bgl,{blur:bl},'50% 50%');
+ /* girls are dimmed during a close-up so the eye goes to the royal */
+ const gb=[[0,1]];hold.forEach(([c,l])=>gb.push([c-50,1],[c+500,.42,'io'],[l-200,.42],[l+500,1,'io']));S.girls.forEach(f=>T(f,{br:gb,blur:bl}));
+ const lt=hold[hold.length-1][1]+3000;
+ /* final hint */
+ T(box,{o:[[girlIn,0],[girlIn+450,1,'out'],[lt-900,1],[lt-300,0]]});
+ vignette();return lt}
+/* ===== B: SELF-INTRODUCTION in the yard ===== */
+function buildB(mode){const g=G();const root=el('div','position:absolute;inset:0;overflow:hidden;z-index:0;isolation:isolate');const bgl=bg('ngu-hoa-vien-xuan-sang.webp',root,50,50);
+ const nm=['fig-consort-c01-t1-a18.webp','fig-consort-c04-t1-a18.webp','fig-consort-c02-t1-a18.webp','fig-consort-c05-t1-a18.webp'];const cx=[-1.5,-.5,.5,1.5].map(k=>.5+k*(dev==='ipad'?.16:.2));
+ const ph=dev==='ipad'?.6:.66,feet=.77;
+ const F=nm.map((n,i)=>fig(n,cx[i],feet,ph,root,10+i));const sp=F[1];const sh=shade(root,'#1c0c0a',20);
+ const sk=skipChip();
+ const line='Tiểu nữ họ Khổng, tên Lan, người Giang Nam. Nhà làm quan nhỏ, nay may mắn vào cung ra mắt các tỷ muội.';
+ const t0=2600;const box=textBox('Khổng Thị Lan',null,'TỰ BẨM');const tp=typer(box._tx,t0+1900,line,34);texts.push(tp);
+ T(box,{o:[[t0,0],[t0+500,1,'out'],[tp.end+1800,1],[tp.end+2300,0]]});
+ const end=tp.end+2900;
+ /* idle: the girls sway slightly (breath) */
+ F.forEach((f,i)=>T(f,{y:[[0,0],[1500,-2,'io'],[3000,0,'io'],[4500,-2,'io'],[6000,0,'io'],[7500,-2,'io'],[9000,0,'io']]}));
+ if(mode==='B1'){ /* she steps to the centre and grows; others dim + blur; caption under her feet */
+  const bigS=1.13,dx=W/2-sp._cx;
+  T(sp,{x:[[t0,0],[t0+1500,dx,'io'],[end-1200,dx,'lin'],[end-200,0,'io']],y:[[t0,0],[t0+1500,H*.0,'io'],[end-1200,0],[end-200,0]],s:[[t0,1],[t0+1500,bigS,'io'],[end-1200,bigS,'lin'],[end-200,1,'io']]},'50% 100%');
+  sp.style.zIndex=30;
+  F.forEach((f,i)=>{if(f!==sp)T(f,{br:[[t0-200,1],[t0+900,.4,'io'],[end-1200,.4],[end-300,1,'io']],blur:[[t0-200,0],[t0+900,3,'io'],[end-1200,3],[end-300,0,'io']],y:[[0,0],[1500,-2,'io'],[3000,0,'io'],[4500,-2,'io'],[6000,0,'io'],[7500,-2,'io'],[9000,0,'io']]})});
+  T(bgl,{blur:[[t0-200,0],[t0+900,5,'io'],[end-1200,5],[end-300,0,'io']]},'50% 50%');
+  T(sh,{o:[[t0-200,0],[t0+900,.42,'io'],[end-1200,.42],[end-300,0,'io']]});
+  const pl=plate('Khổng Thị Lan','Nữ nhi Khổng gia · Giang Nam',{css:`left:${W/2-130}px;top:${feet*H+5}px;width:260px;z-index:58`,fs:dev==='ipad'?20:19});
+  T(pl,{o:[[t0+1300,0],[t0+1900,1,'out'],[end-1500,1],[end-800,0]],y:[[t0+1300,-8],[t0+1900,0,'out']]},'50% 0%');
+  /* her line box sits under the caption on Fold: move the box down is not possible → box on top region */
+  
+ }else{ /* B2: half-body card from the right edge, ink strip name; the yard stays visible but dimmed */
+  const card=fig('fig-consort-c04-t1-a18.webp',.5,0,1.5,root,40);const topY=0;card.style.left=(W*(dev==='ipad'?.62:.55)-card._w/2)+'px';card.style.top=(H*.03)+'px';
+  card.style.clipPath='inset(0 -50% 58% -50%)';
+  T(card,{x:[[t0,W*.5],[t0+900,0,'out'],[end-1100,0],[end-300,W*.5,'in']],o:[[t0,0],[t0+500,1,'out'],[end-900,1],[end-300,0]]},'50% 0%');
+  T(sh,{o:[[t0-200,0],[t0+700,.55,'io'],[end-1000,.55],[end-200,0,'io']]});
+  T(bgl,{blur:[[t0-200,0],[t0+700,6,'io'],[end-1000,6],[end-200,0,'io']]},'50% 50%');
+  F.forEach(f=>{T(f,{br:[[t0-200,1],[t0+700,.55,'io'],[end-1000,.55],[end-200,1,'io']],blur:[[t0-200,0],[t0+700,3,'io'],[end-1000,3],[end-200,0,'io']]})});
+  const pl=plate('Khổng Thị Lan','Nữ nhi Khổng gia · Giang Nam',{v:true,css:`left:${dev==='ipad'?W*.16:W*.07}px;top:${H*.08}px`,fs:dev==='ipad'?40:34});T(pl,{o:[[t0+500,0],[t0+1200,1,'out'],[end-1100,1],[end-400,0]],y:[[t0+500,-14],[t0+1200,0,'out']]},'50% 0%');
+  box.style.bottom='14px'}
+ T(sk,{o:[[t0,0],[t0+500,1,'out']]});vignette();return end}
+/* ===== C: NARRATOR (Tổng quản) focus ===== */
+function buildC(mode){const root=el('div','position:absolute;inset:0;overflow:hidden;z-index:0;isolation:isolate');const bgl=bg('end-bg-throne.webp',root,50,40);const g=G();
+ const sh=shade(root,'#1c0c0a',20);
+ const names=['fig-consort-c01-t1-a18.webp','fig-consort-c04-t1-a18.webp','fig-consort-c05-t1-a18.webp','fig-player-look1-t1-a18.webp'];const gx=[-1.5,-.5,.5,1.5].map(k=>.5+k*g.gs);
+ const girls=names.map((n,i)=>fig(n,gx[i],g.girlFeet,g.girlH,root,10+i));
+ const eu=fig('fig-eunuch-u01-a51.webp',mode==='C1'?.5:.3,.5,.34,root,25);
+ const line='Chư vị tú nữ nghe cho rõ: vào điện phải cúi đầu, chưa được hỏi thì không được ngẩng mặt, không được nói.';
+ const t0=600;const box=textBox('Tổng quản thái giám',mode==='C1'?null:'right','LỜI');
+ const bigH=.72,bigS=bigH/.34;const tp=typer(box._tx,t0+1600,line,34);texts.push(tp);const end=tp.end+1800;
+ /* he steps forward from his place and grows; the hall blurs + dims; the box may sit anywhere */
+ const cxTo=mode==='C1'?W*.5:W*(dev==='ipad'?.3:.3);
+ const upTo=(.92-bigH*0+0)*H;
+ T(eu,{s:[[t0,1],[t0+1500,bigS*.0+bigS*.0+bigS,'out'],[end-900,bigS,'lin'],[end,1,'io']],y:[[t0,0],[t0+1500,(.76-.5)*H,'out'],[end-900,(.76-.5)*H],[end,0,'io']],x:[[t0,0],[t0+1500,mode==='C1'?0:0,'out']]},'50% 100%');
+ T(bgl,{blur:[[t0,0],[t0+1200,10,'io'],[end-900,10],[end,0,'io']]},'50% 50%');
+ T(sh,{o:[[t0,0],[t0+1200,.6,'io'],[end-900,.6],[end,0,'io']]});
+ girls.forEach(f=>T(f,{blur:[[t0,0],[t0+1200,6,'io'],[end-900,6],[end,0,'io']],br:[[t0,1],[t0+1200,.45,'io'],[end-900,.45],[end,1,'io']]}));
+ const pl=plate('Lý Tổng quản','Đại tổng quản Nội đình',{css:`left:${mode==='C1'?W/2-110:W*(dev==='ipad'?.3:.3)-110}px;top:${H*.76+H*.012}px;width:220px`,fs:18});T(pl,{o:[[t0+1200,0],[t0+1800,1,'out'],[end-1100,1],[end-500,0]]});
+ /* box placement: C1 = under him, centred, bottom; C2 = right of him (event-frame family) */
+ if(mode==='C2'){box.style.width=(dev==='ipad'?W*.44:W*.5)+'px';box.style.left='auto';box.style.right='14px';box.style.bottom='auto';box.style.top=(H*.3)+'px'}
+ T(box,{o:[[t0+1000,0],[t0+1500,1,'out'],[end-1000,1],[end-400,0]]});
+ const sk=skipChip();T(sk,{o:[[t0+1000,0],[t0+1500,1,'out']]});
+ /* he enters with a small side-step so the scale-up reads as coming forward */
+ vignette();return end}
+/* ===== D: ROLL-CALL synced to the typewriter ===== */
+function buildD(mode){const g=G();const root=el('div','position:absolute;inset:0;overflow:hidden;z-index:0;isolation:isolate');const bgl=bg('end-bg-throne.webp',root,50,40);const sh=shade(root,'#12070a',20);
+ const names=['fig-consort-c01-t1-a18.webp','fig-consort-c04-t1-a18.webp','fig-consort-c05-t1-a18.webp','fig-player-look1-t1-a18.webp'];const gx=[-1.5,-.5,.5,1.5].map(k=>.5+k*(dev==='ipad'?.12:.205));
+ const girls=names.map((n,i)=>fig(n,gx[i],.77,dev==='ipad'?.52:.5,root,10+i));
+ const eu=fig('fig-eunuch-u01-a51.webp',dev==='ipad'?.1:.11,.42,.3,root,12);
+ const LINES=[['Tú nữ thứ nhất — Tần thị Nhã, con gái Thị lang bộ Lễ, quê Giang Nam.','Tần Nhã','Giang Nam'],['Tú nữ thứ hai — Khổng thị Lan, con gái quan Tri huyện Giang Châu.','Khổng Lan','Giang Châu'],['Tú nữ thứ ba — Lục thị Thanh, con gái nhà buôn lụa đất Tô.','Lục Thanh','Tô Châu'],['Tú nữ thứ tư — Tân thị Như Ý, quê Hạ Hà.','Tân Như Ý','Hạ Hà']];
+ const box=textBox('Tổng quản thái giám',null,'XƯỚNG TÊN');box._tx.style.minHeight='46px';
+ const sk=skipChip();
+ T(sh,{o:[[0,0],[700,.62,'io']]});T(bgl,{blur:[[0,0],[700,4]]},'50% 50%');
+ T(eu,{br:[[0,1]],blur:[[0,0]]});
+ T(box,{o:[[500,0],[900,1,'out']]});T(sk,{o:[[800,0],[1300,1,'out']]});
+ /* all girls start dim */
+ let t=1300;const lit=[];
+ /* 4 lines typed one after another in the SAME box: line i replaces line i-1 */
+ const tps=[];LINES.forEach((L,i)=>{const tp=typer(box._tx,t,L[0],30);tp.until=null;tps.push(tp);texts.push(tp);const cue=typeAt(tp,'—')+0;lit.push(cue);t=tp.end+900;});
+ /* each typer must hide when the next starts: store window */
+ tps.forEach((tp,i)=>{tp.win=[tp.t0,i<tps.length-1?tps[i+1].t0:1e9]});
+ girls.forEach((f,i)=>{const c=lit[i];
+  T(f,{br:[[0,1],[700,.4,'io'],[c-100,.4],[c+450,1,'out']],s:[[c-100,1],[c+350,1.045,'back'],[c+900,1.0,'io']],blur:[[0,0],[700,0]],sat:[[c-100,.7],[c+450,1.08,'out']]});
+  const pl=plate(LINES[i][1],LINES[i][2],{css:`left:${gx[i]*W-70}px;top:${.77*H+5}px;width:140px;z-index:58`,fs:dev==='ipad'?18:16,sfs:11});
+  if(mode==='D2'){pl.querySelector('div').style.paddingRight='22px';const sl=el('div',`position:absolute;right:-12px;top:-10px;width:30px;height:30px;border-radius:6px;background:#b3261a;color:#ffe9b8;font:800 14px/30px ${SERIF};text-align:center;border:1.5px solid #e3b04b;box-shadow:0 2px 6px rgba(0,0,0,.5);transform:rotate(8deg)`,pl,['壹','貳','參','肆'][i]);}
+  T(pl,{o:[[c+150,0],[c+700,1,'out']],y:[[c+150,-6],[c+700,0,'out']]},'50% 0%');
+  if(mode==='D2'){const cone=el('div',`position:absolute;left:${gx[i]*W-W*.12}px;top:0;width:${W*.24}px;height:${H}px;z-index:9;pointer-events:none;background:linear-gradient(rgba(255,226,150,.0),rgba(255,226,150,.34) 55%,rgba(255,226,150,.0));clip-path:polygon(40% 0,60% 0,100% 100%,0 100%);mix-blend-mode:screen`);T(cone,{o:[[c-100,0],[c+500,1,'out'],[c+2300,.0,'io']]},'50% 0%')}
+  else{const ring=el('div',`position:absolute;left:${gx[i]*W-W*.1}px;top:${.77*H-8}px;width:${W*.2}px;height:16px;border-radius:50%;background:radial-gradient(ellipse,rgba(255,225,150,.9),rgba(255,225,150,0) 70%);z-index:9`);T(ring,{o:[[c-100,0],[c+450,1,'out']]},'50% 50%')}});
+ const end=t+800;
+ T(box,{o:[[500,0],[900,1,'out'],[end-900,1],[end-300,0]]});
+ return end}
+/* ===== E: other first meetings ===== */
+function buildE(mode){const root=el('div','position:absolute;inset:0;overflow:hidden;z-index:0;isolation:isolate');const g=G();
+ if(mode==='E1'){ /* a new NPC (visiting consort) is met for the first time: lower-third + walk-in; the garden stays visible */
+  const bgl=bg('ngu-hoa-vien-xuan-sang.webp',root,50,50);const sh=shade(root,'#1c0c0a',20);
+  const me=fig('fig-player-look1-t1-a18.webp',.78,.78,dev==='ipad'?.56:.58,root,12);
+  const v=fig('fig-consort-c02-t3-a26.webp',dev==='ipad'?.38:.34,.78,dev==='ipad'?.6:.66,root,14);
+  T(v,{x:[[300,-W*.5],[2300,0,'out']],o:[[300,0],[1000,1,'out']],br:[[300,1]]});T(me,{o:[[0,1]],br:[[1500,1],[2600,.62,'io'],[6300,.62],[7000,1,'io']]});
+  T(bgl,{blur:[[1500,0],[2600,4,'io'],[6300,4],[7000,0,'io']]},'50% 50%');T(sh,{o:[[1500,0],[2600,.3,'io'],[6300,.3],[7000,0,'io']]});
+  /* lower-third caption bar */
+  const lt=el('div',`position:absolute;left:0;right:0;top:${H*.04}px;z-index:60;height:64px`);
+  const bar=el('div',`position:absolute;left:0;top:0;height:64px;width:${W*.82}px;background:linear-gradient(90deg,rgba(143,43,29,.95),rgba(143,43,29,.88) 70%,rgba(143,43,29,0));border-top:1.5px solid #e3b04b;border-bottom:1.5px solid #e3b04b`,lt);
+  el('div',`position:absolute;left:18px;top:6px;font:700 11px ${FONT};color:#ffe9b8;letter-spacing:.14em`,lt,'LẦN ĐẦU GẶP');el('div',`position:absolute;left:18px;top:20px;font:800 24px ${SERIF};color:#fff6e0;letter-spacing:.05em;text-shadow:0 2px 6px rgba(0,0,0,.5)`,lt,'Mục Tài nhân');el('div',`position:absolute;left:18px;top:46px;font:600 11.5px ${FONT};color:#ffe3b0`,lt,'Ngọc Thanh các · hậu cung');
+  T(lt,{x:[[1600,-W],[2400,0,'out'],[6000,0],[6800,-W*.6,'in']],o:[[1600,0],[2000,1,'lin'],[6500,1],[6900,0]]},'0 0');
+  const box=textBox('Mục Tài nhân',dev==='ipad'?'left':null,'LỜI');const tp=typer(box._tx,2800,'Muội muội vừa vào cung phải không? Ta ở Ngọc Thanh các, bên kia hồ sen — khi rảnh cứ sang chơi.',34);texts.push(tp);
+  T(box,{o:[[2600,0],[3000,1,'out'],[tp.end+1300,1],[tp.end+1800,0]]});vignette();return tp.end+2400}
+ /* E2: the Emperor's first visit to her palace — the REAL stage (her room) behind; door light, silhouette, colour fills in, plaque */
+ ov.style.background='transparent';const sh=shade(root,'#1c0c0a',2);T(sh,{o:[[0,0],[900,.58,'io'],[8000,.58],[9000,0,'io']]});
+ const door=el('div',`position:absolute;left:${W*.5-W*.17}px;bottom:0;width:${W*.34}px;height:${H*.8}px;z-index:4;background:linear-gradient(rgba(255,222,150,.0),rgba(255,222,150,.65) 40%,rgba(255,230,170,.95));clip-path:polygon(30% 0,70% 0,100% 100%,0 100%);mix-blend-mode:screen`);T(door,{o:[[300,0],[1400,1,'out'],[4200,1],[5200,.0,'io']]},'50% 100%');
+ const em=fig('fig-emperor-a26-1.webp',.5,.78,.72,root,12);
+ T(em,{sil:[[0,1],[2200,1],[3600,0,'io']],o:[[600,0],[1500,1,'out']],s:[[600,.55],[3600,1.0,'out']],y:[[600,H*.03],[3600,0,'out']]},'50% 100%');
+ const pl=plate('Hoàng thượng giá lâm','Lần đầu ngự giá Trường Xuân cung',{css:`left:${W*(dev==='ipad'?.62:.58)}px;top:${H*.14}px;width:${dev==='ipad'?300:230}px`,fs:20});T(pl,{o:[[3800,0],[4500,1,'out'],[7600,1],[8200,0]],y:[[3800,-10],[4500,0,'out']]},'50% 0%');
+ const box=textBox('Ta nghĩ thầm',null,'TÂM NIỆM');const tp=typer(box._tx,4300,'Người ấy… là Hoàng thượng. Ta phải giữ nét mặt thật bình thản.',34);texts.push(tp);T(box,{o:[[4200,0],[4600,1,'out'],[8300,1],[8900,0]]});
+ return 9400}
+const CLIPS={A1:()=>buildA('A1'),A2:()=>buildA('A2'),B1:()=>buildB('B1'),B2:()=>buildB('B2'),C1:()=>buildC('C1'),C2:()=>buildC('C2'),D1:()=>buildD('D1'),D2:()=>buildD('D2'),E1:()=>buildE('E1'),E2:()=>buildE('E2')};
+/* texts windows (roll-call lines replace each other) */
+updTexts=function(t){const m=new Map();for(const tp of texts){if(!tp.box)continue;if(!m.has(tp.box))m.set(tp.box,'');let n=0;while(n<tp.times.length&&tp.times[n]<=t)n++;let show=t>=tp.t0;if(tp.win&&t>=tp.win[1])show=false;if(show)m.set(tp.box,tp.str.slice(0,n)+(n<tp.str.length?'<i class=cur></i>':''))}for(const [b,h] of m)b.innerHTML=h};
+return {load,seek,CLIPS,_d:()=>JSON.stringify(texts.map(t=>({t0:t.t0,win:t.win,n:t.times.length,box:!!t.box,end:t.end})))};
+})();
