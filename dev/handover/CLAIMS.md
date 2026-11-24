@@ -1505,7 +1505,7 @@ FIX promo-build-2 r1 (opus BIG; briefs/D-promo-build-2-fix.md; from de24c1ae) | 
 | ROBOT-COOP RUNNER U19 pairs 19-20 SWAP=0 | dev/handover/robot/coop-U19-* | FOREMAN E (child4) | session_01DgYSWohtCk2AGS5VzQrrH1 | RUNNING | 24/11 11:58Z |
 | ROBOT-COOP RUNNER U20 pairs 19-20 SWAP=1 | dev/handover/robot/coop-U20-* | FOREMAN E (child4) | session_01DgYSWof6mK27r2oWrXX22S | RUNNING | 24/11 11:58Z |
 rv net-build r2 (opus BIG; briefs/D-net-build-review-r2.md; target e41f4f79) | review/net-build-rv | session_01D3E3NaeN3VTQuhYDqui8cJ | RUNNING | 24/11 12:00Z (Foreman D depth 3)
-| REVIEW robot-fix-cnv 1f046fb7 (opus BIG; briefs/F-robot-fix-cnv-review.md) | review/robot-fix-cnv(-r1); reports/robot-fix-cnv.md | F | session_01UV1Szm25UYRL53kk7urYNo | RUNNING | 24/11 12:24Z |
+| REVIEW robot-fix-cnv 1f046fb7 (opus BIG; briefs/F-robot-fix-cnv-review.md) | review/robot-fix-cnv(-r1); reports/robot-fix-cnv.md | F | session_01UV1Szm25UYRL53kk7urYNo | DONE PASS LAND READY 98040f4c (rolled over; -2 = fresh reviewer) | 24/11 12:24Z |
 | ROBOT FIXER cnv #2 (opus; successor; residuals R1-R3, review/robot-fix-cnv-2 on 1f046fb7) | review/robot-fix-cnv-2; reports/robot-fix-cnv.md | F | session_01UV1Szktd1kHeRCPadpEMyu | SSK 7aa243a3 (on call for FAILs) | 24/11 12:24Z |
 | SELSCENE-11 (opus; successor of SELSCENE-10; brief M121-selscene-fix.md + reports/selection-scene.md «FIX r1 — SELSCENE-10») | review/selection-scene (from c269fce4) | MAIN 122 | session_01V1ZZH1An4rTF5a1b9G4kJw | RUNNING | 24/11 12:29Z |
 | RV test-mrfoot SMALL (sonnet) of d521656c | review/test-mrfoot; reports/test-mrfoot.md | MAIN 122 | session_01V1ZZH3jimhL3hVZTZNqAJb | RUNNING | 24/11 12:33Z |

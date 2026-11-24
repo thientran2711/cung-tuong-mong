@@ -169,3 +169,42 @@ Code read: jnf step() leaves «wait» only when no flip dialog (nfsum / FLIPQ) i
 Laws: 1–3, 5 untouched · 4 no typed number (elder band reads BAL.ageBand[2]; Sủng audit only) · 6b a person keeps her face and name across a reload · 7/9/10/12 no UI, wording or kit change · 11 whole families + 2 scans + tables · 13 check line · 14–18 no rule changed.
 
 SẴN SÀNG KIỂM review/robot-fix-cnv-2 7aa243a3aaeac569d89618d947dfa25b503c9842 (on top of 1f046fb7) · quickcheck PASS · core gates PASS · coop-e2e both seats 142/142.
+## BIG REVIEW (opus, session_01UV1Szm25UYRL53kk7urYNo, depth 2, START_CTX ≈ 3 %) — review/robot-fix-cnv-r1 98040f4c
+PRIORITY #1 CHECK ('visRelink|lifeStore|r10-play-rt|r10-load-leak|newlife-leak|AGD.oc|DF.p'): OD 2 (ROBOT PLAYTEST 23/11, MAIN 119 07:40Z) | ledger 0 | claims: REVIEW row (this session), ROBOT FIXER cnv #2 (review/robot-fix-cnv-2, residuals R1-R3) | main: lifeStore registry j1, r10-rt.js filter, newlife-leak.js | review/*: robot-fix-cnv-2 (no overlap with the r1 edits below).
+Branch: review/robot-fix-cnv-r1 = 1f046fb7 + merge LIVE 178cac37 + r1 fixes (e2f4eb12) + merge LIVE c6c3ca76 + merge LIVE 15b5e1ff → **98040f4c** (FF from origin/main 15b5e1ff).
+
+### Code read (all 15 game files of the diff)
+OK: deser loads the room as saved (home too; v<3 / bad place still rebuilt) · visRelink (sid → live servant) · srvInit palFix · hue removal (no reader of a servant/consort .hue left; pv/pEmp use the constant 0) · jtruth sweep only on the first load of an old save (endTurn keeps sweeping) · srvOldName on ageYear (j17 ageYear ages allServ, j3 calls it by name → the j25 wrapper runs; j17 is before j25) · KIT_AV / KFP_MAP / EMOX / KFS_REG weak + lifeStore · AG / HA / NT lifeStore. Harness: auditOpt reads the line she sees (law 4: the harness reads game text, computes no game number), nightAfterLoad presses with the page running, memSample after forced GC.
+
+### Found and fixed here (review/robot-fix-cnv-r1 e2f4eb12)
+| # | law / family | finding (scan) | fix |
+|---|---|---|---|
+| 1 | 6b one person = one object | NEW scan dev/test/r10-shared-ref.js (every object reached by 2 paths before a load must still be ONE object after deser(ser())): «S.visit.people.N.ref = S.men.N» (Nhạc sư Kiều Bá Ước in HER HOME room) split into a copy. visRelink relinked only servants (sid); with the home room now kept as saved this hit the home room too | visRelink also relinks a man of S.men (id+name) and the one-of persons (Hoàng thượng, Thái hậu, her maid, court officials, by name+role+kind). After: 0 person splits (cnv 40 loads, td 40 loads); only S.empWhy = S.nightWhy.emp (a data record, no person) left |
+| 2 | F4 per-life store (newlife-leak on the merge FAILed 10, not 1) | DF (jdfv stage encounter: DF.p visitor, DF.F kitFocus) kept the old life's visitor («DF.3.3.0», g.DF old names) | lifeStore «DF stage encounter»: closes it on new life / load / title |
+| 3 | F4 | AGD.lz (jagday day-plan queue) holds its old world | lifeStore «AGD.lz» (it already dropped itself on another world). NOT reset: AGD.oc — resetting it at load re-plans the day and rewrote S.ag.log on reload (r10-play-rt thd: 9 drift families → reverted, 0) → residual R5 |
+| 4 | F4 weak maps | NEW scan dev/test/r10-weak-dead.js (forced GC, every live stamp on screen on 4 tabs must still resolve) | no fix needed: cnv kav 325/0 · kfs 16/0 · kfp 32/0 · emo 404/0; td 169/0 · 12/0 · 72/0 · 167/0 (seen/dead) |
+| 5 | test | newlife-leak ALLOW KES_HAVE (seal picture url probe cache, static) | — |
+
+### Gates (re-run by me)
+| gate | result |
+|---|---|
+| quickcheck b3853e5e (merge 178cac37) · 659d2f09 (merge c6c3ca76) · 98040f4c | PASS · PASS (render 230/226, tab 476/426, buổi 994/1407 ms; old save ok; core gates PASS) · see last line |
+| coop-e2e both seat orders on 659d2f09 | 142/142 · COOP_SWAP=1 142/142 (on the 178cac37 merge both orders read 137-138/162 — the same on bare main 178cac37 (135/162): the stale «#mr button» driver, fixed on main by test-mrfoot d521656c) |
+| r10-play-rt render on | cnv_mat 120 → 0 · cnv_chu 100 → 0 · pf 80 → 0 · thd 80 → 0 (after r1 #3) · td 80 → 1 family: S.lost.N.at «me» → 11 (jil census at load runs loEntry, which self-heals a stale holder; jil/jlost untouched by this branch) → residual R6 |
+| r10-load-leak (own save, 30 loads) | 0.13-0.17 MB per load (main: 2.80), old S reachable 2-3/30 |
+| r10-night-after-load cnv_chu 3 lives | 8 saves at a pending flip: REAL stuck 0 (old SYNC loop 1) |
+| newlife-leak | person refs of the old life: start / rebirth / load clean after r1 #2 except AGD.oc (R5); remaining FAILs = its own 2-year driver (same on main) + «store bigger» size noise of the new life's own refill (KFP_MAP, KPM_LOG, __rcvN; no person) |
+| night-softlock · save-slots | 8/8 PASS · ALL OK (final-build save-slots run cut by my batch time limit after all 1180x820 + 844x390 rows ok) |
+| robot10 cnv spread 5 bots × 1 life (UIEVERY 100, CAP 700, on e2f4eb12) | mem 0/5 · «Bạc +8» / number rows 0/5 · night stall 1/5 (2 hits, nfX done, residual R1) · save rows 5/5, 118 hits (R3/R4 main: 31133 on 50 lives) first paths: S.logs.N ma ma name «Khổng ma ma» → «Lâm ma ma» (2 lives, NEW residual R4), S.thO.staff.N.fk mama→womid + R.N.staff.N.fk eun1→eun2 (R2), S.ag.did.N «0-0»→«0-1» (R5 family) · ui-text-overlap rows (Tuần lục kbk on Fold, go-tab mspot on iPad) = owned elsewhere |
+
+### Harness filter spot-check (3 rows by hand)
+(1) save.S.il.seq / inv.N.iu: item census ledger ids (S.il.at not saved → census at load); internal ids, nothing she sees. (2) save.S.where / S.menW: render-on play (play-rt REP has NO where/menW) gives 0 drift on cnv/pf/thd → only the render-off bot page sees it; not hiding a game bug. (3) save.S.roster.*: unfiltered run (cnv_chu 40) shows load re-sync of the roster labels («Tư Mã Nhu Gia sang Ngự hoa viên: … chọn 1 người theo hầu» → «theo hầu Tư Mã Nhu Gia ở Ngự hoa viên (đi cùng từ đầu)») and roster.m r4/r6 7→6 — a by-design re-sync reviewed in nc-fix-1, unchanged here; noted for F (wording of the who-is-where line can change on a reload).
+
+### Residuals for ROBOT FIXER cnv #2 (review/robot-fix-cnv-2) — added to its R1-R3
+- R4 save drift: a journal line S.logs.N changes the ma ma name on reload («Khổng ma ma (Quản sự ma ma Càn Ninh cung)» → «Lâm ma ma …», repro: robot cnv-20261124-1412 life cnv_ma/cnv_mat @ buổi #86) — an elder ma ma re-made (new name) at load and a log line following it = the «rule runs only at load» family (jstaff elderName / staffInit at load).
+- R5 AGD.oc (jagday, id+week keyed day plans) is not saved: a load keeps the cache in place, a real page reload re-plans (S.ag.did / S.ag.log differ); a new life can hit the old life's entry (newlife-leak «AGD.3.N…»). Save it or derive it, then lifeStore it.
+- R6 S.lost.N.at stale holder corrected only when loEntry runs (census at load) → keep c.at in step when the piece moves.
+Laws: 1-3 untouched · 4 harness reads only · 5 untouched · 6b fixed + scanned (r10-shared-ref) · 6c untouched · 7/9/10/12 no UI / wording / kit change (no shots needed) · 11 whole families + 2 new scans + tables · 13 check lines · 14-18 no rule changed.
+Final build 98040f4c (merge LIVE 15b5e1ff: tests + coop worker only, game code = 659d2f09): quickcheck PASS (render 243/212, tab 504/471, buổi 1491/1337 ms, old save ok, core gates PASS) · coop-e2e 142/142 Fold-host and 142/142 COOP_SWAP=1.
+**VERDICT: PASS — LAND READY robot-fix-cnv 98040f4c** (review/robot-fix-cnv-r1, FF from origin/main 15b5e1ff). Families 3 («Bạc +8») and 4 (memory) gone; families 1 (save drift, 31133 → 118 hits) and 2 (night stall 1/5) much smaller, their rest = residuals R1-R6, owned by ROBOT FIXER cnv #2.
+HANDOVER (context 28 % = START_CTX 3 % + 25 %): this reviewer stops here. The review of review/robot-fix-cnv-2 goes to a FRESH reviewer (Foreman F opens it). Note for it: -2 is built on 1f046fb7 and edits j6.js (saveSettle) — merge it onto review/robot-fix-cnv-r1 98040f4c (this r1 also edits j6 visRelink + jdfv + jagday), re-run r10-shared-ref + r10-play-rt + newlife-leak + coop-e2e both seats on that merge. Box files (not in git): /home/user/wt/rvout (logs, robot run cnv-20261124-1412 + saves).
