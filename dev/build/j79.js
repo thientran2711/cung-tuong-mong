@@ -1297,7 +1297,10 @@ function kitSkillArt(kind,k,name){const key=`${kind}-${k}`;const have=(KIT_INFOM
 function kitSteps(l,max,attr,word){max=max||5;word=word||"Bậc";const seg=Array.from({length:max},(_,i)=>`<i class="${i<l?"on":""}"></i>`).join("");
  return `<${attr?"button type=\"button\"":"span"} class="ksteps" ${attr||""} aria-label="${word} ${l} trên ${max}"><span class="kstepd">${seg}</span><b>${word} ${l}/${max}</b></${attr?"button":"span"}>`}
 function kitBar(label,cur,need){return `<div class="kskp"><span>${label}</span><span class="kskb"><u style="width:${need?Math.min(100,Math.round(cur/need*100)):0}%"></u></span><b>${cur}/${need}</b></div>`}
-function kitSkillCard(o){o=o||{};const l=o.level||0,max=o.max!=null?o.max:((o.levels||[]).length||5);
+/* KIT §21e (KK21, flight bug TAINGHE; owner 24/11): kitSkillCard({tile:true}) = the head card as an equal-size OVERVIEW TILE (no acts, no steps button); kitSkillTile(o,key) = the tappable tile (role=button, data-tnmon=key) for a `.kskills.ktn-grid` (2 equal columns).
+   The acts of the môn open in a kit pop-up (.ktn-pop) the caller builds with kitSkillCard(o) (its act cards are ONE height per list, see .kskacts below). */
+function kitSkillTile(o,key){o=Object.assign({},o,{acts:[],tile:true,stepsAttr:""});return `<div class="ktn-tile${o.can===false?" kdone":""}" role="button" tabindex="0" data-tnmon="${key}">${kitSkillCard(o)}</div>`}
+function kitSkillCard(o){o=o||{};if(o.tile)o=Object.assign({},o,{acts:[],stepsAttr:""});const l=o.level||0,max=o.max!=null?o.max:((o.levels||[]).length||5);
  const pr=Array.isArray(o.prog)?o.prog:[o.prog||0,o.need||0];const [cur,need]=pr;
  const img=o.img!=null?o.img:(o.k?kitSkillArt(o.kind||"art",o.k,o.name):"");
  const next=o.next!=null?o.next:((o.levels||[])[l]||"");
@@ -1341,7 +1344,26 @@ function kitEmptyTab(title,lines,o,acts){return kitEmpty(title,lines,o)+(acts?`<
 .ksteps{display:inline-flex;align-items:center;gap:6px;border:0;background:none;padding:0;font:inherit;color:inherit;cursor:default}button.ksteps{cursor:pointer}
 .kstepd{display:inline-flex;gap:3px}.kstepd i{width:14px;height:8px;border-radius:4px;background:var(--k-hair,#e6d3ac);box-shadow:inset 0 0 0 1px #5a3a2018}.kstepd i.on{background:var(--gold,#b8862b)}
 .ksteps b{font-size:.78rem;color:var(--dim);font-weight:600;white-space:nowrap}
-.kskacts.pcb{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:8px}/* KIT §6.3g: one act card per line (was an auto-fit 2-column grid: cards of different heights, tiny pictures) */
+.kskacts.pcb{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:1fr;gap:8px}
+/* KIT §21e: every act card of ONE list (.kskacts: Tài nghệ pop-up, Tác phẩm, Mệnh truyện heads) is ONE height = the tallest of the list, the card fills its row (no short card with a gap under it) */
+.kskacts>.kpanec{display:flex;min-width:0}.kskacts>.kpanec>button.ka{flex:1 1 auto;height:auto;align-self:stretch}
+/* the overview tile (kitSkillTile): 2 equal columns, picture left of the text; under 330 px the picture stacks over the text and the one-line desc hides (container query) */
+.kskills.ktn-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:10px;align-items:stretch}
+.ktn-tile .kskdo,.ktn-tile .kskx{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}/* the tile shows ALL its info on every device (chips + line + bar + next); only the picture stacks when narrow */
+/* the pop-up head repeats the tile: no picture, no next-step line, so the acts fit (iPad: without scrolling) */
+.ktn-pop .kskh2>.ksart,.ktn-pop .kskx,.ktn-pop .kskk,.ktn-pop .kskh>b{display:none}.ktn-pop .kskh{justify-content:flex-start}/* the dialog header already names the môn */.ktn-pop .kskh2{grid-template-columns:minmax(0,1fr)!important}
+.ktn-tile{display:flex;cursor:pointer;min-width:0;container-type:inline-size}
+@container (max-width:330px){.ktn-tile .kskh2{grid-template-columns:minmax(0,1fr)!important;justify-items:start}.ktn-tile .kskh2{gap:6px}}.ktn-tile>.kskill{flex:1;margin:0;min-width:0}
+.ktn-tile .kskh{flex-wrap:wrap;gap:4px 8px}.ktn-tile .kskinfo{min-width:0}
+.dlg:has(.ktn-pop) .k3body>.k3main,.dlg:has(.ktn-pop) .k3body>.kpsubj,.dlg .kpb:has(.ktn-pop)>.kpsubj,.dlg .kpb:has(.ktn-pop)>.kpiart{display:none!important}.dlg:has(.ktn-pop) .k3right{flex:1 1 100%;width:100%}.dlg .kpb.kphas:has(.ktn-pop){grid-template-columns:minmax(0,1fr)!important}
+/* a môn's act list is a TALL frame (law 10: tall frames grow to the screen ratio): the pop-up takes the screen height so 3 acts show without scrolling on iPad, as few scrolls as possible on Fold */
+html body #modal:has(.ktn-pop){--kph:min(calc(100dvh - 24px),920px)}
+/* iPad landscape: the pop-up is wider (frame XL) and its act cards lie in 2 columns with a smaller picture; phone / Fold portrait stay 1 column */
+html.kv2 body #modal:has(.ktn-pop){--kpw:min(900px,calc(100vw - 28px))}
+.ktn-pop{container-type:inline-size;--kpa-d:64px}
+@container (min-width:600px){.ktn-pop .kskacts.pcb{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+.ktn-pop .kskacts.pcb{grid-auto-rows:auto!important}/* pop-up: a card is as tall as its own content (the two cards of one row match); no list-wide tallest height = no empty block (B review r1 row 4) */
+.ktn-tile:active>.kskill{filter:brightness(.97)}/* KIT §6.3g: one act card per line (was an auto-fit 2-column grid: cards of different heights, tiny pictures) */
 `;document.head.appendChild(st)})();
 /* ---- PERSON STATS (owner 11/14): every consort shows the SAME stat set as the player, as kit tiles: Sủng · Đức · Danh · Sắc · Tài · Tâm cơ.
    A value shows only once known, else "chưa rõ". Hook for the reveal stages (j61/j85 Đức, tai mắt/intel): window.kitStatKnown(v, key) -> true|false.
