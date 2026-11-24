@@ -117,6 +117,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
   /* no flash on turning (owner 15:45Z): every picture of the book decoded once, painted decoded from then on (kitImgSync, jbook) */
   try{if(typeof kitImgSync==="function")kitImgSync(book)}catch(e){}
   restore();
+  try{if(typeof kitNoUnkDom==="function")kitNoUnkDom(root)}catch(e){}
   paint()}
  const sheetEls=()=>book.querySelectorAll(".kbk-sheet");
  function paint(){const els=sheetEls();const n=els.length;els.forEach(el=>{if(el.__curl){el.__curl.destroy();el.__curl=null}});
