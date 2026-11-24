@@ -437,3 +437,4 @@ Push recipe /home/user/wt/dpush2.sh (per container; text in HANDOVER D depth 3 b
 - (24/11 22:11Z) D7: SHARP FULLY DONE 75/75 (age 39 reads young ~late-20s/30s — flag; age 16 reads late-teen) → archived. Done: Proud, Gentle, Sharp. Running: Alluring, Cold (age 39), Dignified succ2.
 - (24/11 22:19Z) D7: Dignified succ2 done 48/48 (ages 16/26/51/63, 0 NEEDS_REVIEW) → archived; succ3 session_01D3E3NXoPvSgYJ7NXsa2qmd for 12 age-39 jobs.
 - (24/11 22:22Z) D7: COLD FULLY DONE 75/75 (3 NEEDS_REVIEW; age-39 sheet .../cold/cold-age39.jpg) → archived. Alluring: 72/72 done, age 39 6/18 in progress. Dignified succ3 on age 39 ×12. Done: Proud, Gentle, Sharp, Cold.
+- (24/11 22:29Z) D7: ALLURING FULLY DONE 90/90 (12 555 cr; 5 NEEDS_REVIEW beauty-mark only: s60@26, s60@51, s60@39, s61@39, s60@16-T01; sheets .../alluring/alluring-age{16,26,39,51,63}.jpg) → archived. Only Dignified age 39 ×12 left (succ3 XoPvSgYJ). Then gallery worker.
