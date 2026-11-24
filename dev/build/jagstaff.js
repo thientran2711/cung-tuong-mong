@@ -39,7 +39,7 @@ function asNeeds(s){asSt(s);const G=asB().goal,W=asB().nw,m=ownerOf(s);const N={
  N.self=(asGap(G.sac,s.sac)+asGap(G.tai,s.tai)+asGap(G.duc,s.duc))/3*W.self;
  N.ally=asGap(G.friend,asFriends(s))*W.ally;
  N.sung=s.role==="maid"&&mlAgeOk(s)?amNeed(s)*W.sung:0;
- N.love=(s.role==="maid"||s.role==="eunuch")&&(s.age||20)>=18&&!s.wed?W.love:0;
+ N.love=(s.role==="maid"||s.role==="eunuch")&&(s.age||20)>=BAL.ageMin&&!s.wed?W.love:0;
  let sp=0;for(const k in s.af||{})if(s.af[k]<0)sp=Math.max(sp,-s.af[k]/100);N.spite=sp*W.spite;
  return N}
 /* the value of an effect vector for her: Chủ tin, Sức, Bạc, công lao, self (Sắc/Tài/Đức/Danh), ally (thiện cảm), love (tình ý), his regard */
@@ -177,7 +177,7 @@ function asMonth0(mine){let ev="";const B=asB();
    if(sch&&roll(B.secSee))s.sec=(s.sec||0)+1;/* she sees her master's schemes at home (the player maid's "Biết chuyện của chủ") */
    if(s.betray&&roll(agCap(nv(p,"betrayFind")))){s.betray=null;if(npwPick(["kill","lau"],k=>srvPunW(p,k))==="kill"){/* law 1 (r1): the same kill-vs-Tân Giả khố pick as the player maid (j42 srvMonth) */asOut(s,"dead");if(asSee(p))ev+=`${p===S?"Ngươi":p.name} biết ${s.name} mật báo chuyện trong cung, sai đánh chết. `}else{asOut(s,"tgk");if(asSee(p))ev+=`${p===S?"Ngươi":p.name} biết ${s.name} mật báo, đày xuống Tân Giả khố. `}continue}
    /* Ban gả (j42 cnvGrant: the same trigger as the player maid's), then her own choice: Tạ ơn, xuất giá / Xin ở lại */
-   if(s.role==="maid"&&(s.age||20)>=18&&(s.loyal>=BAL.srvGrant.tin)&&srk(s)>=1&&roll(BAL.srvGrant.base+(s.vow?BAL.srvGrant.bond:0))){const N=asNeeds(s);const c=mindPick([["stay",BAL.ag.routine/BAL.ag.unit],["wed",(N.love+(s.vow?B.vowW:0))*BAL.ag.needW]],s);asC(s,c==="wed"?"grantWed":"grantStay");
+   if(s.role==="maid"&&(s.age||20)>=BAL.ageMin&&(s.loyal>=BAL.srvGrant.tin)&&srk(s)>=1&&roll(BAL.srvGrant.base+(s.vow?BAL.srvGrant.bond:0))){const N=asNeeds(s);const c=mindPick([["stay",BAL.ag.routine/BAL.ag.unit],["wed",(N.love+(s.vow?B.vowW:0))*BAL.ag.needW]],s);asC(s,c==="wed"?"grantWed":"grantStay");
     if(c==="wed"){s.wed=1;asOut(s,"wed");const man=s.vow&&manById(s.vow);if(asSee(p))ev+=`${s.name}, cung nữ của ${NM(p)}, được chủ ban gả${man?" cho "+man.name:""}. `;continue}else s.loyal=cl(s.loyal-BAL.srvGrant.stayLoy,0,100)}
    /* Tuổi (j42 cnvAge, BAL.srvAge): Xuất cung / Ở lại làm ma ma (chưởng sự) / Xin chủ giữ lại */
    if(s.role==="maid"&&(s.age||0)>=BAL.srvAge.ask&&!s.ageDone){s.ageDone=1;const N=asNeeds(s);const O=[["out",(N.love+(s.vow?B.vowW:0)+B.outW)*BAL.ag.needW],["keep",s.loyal/100*BAL.ag.routine/BAL.ag.unit]];if(srk(s)>=BAL.srvRk.cs)O.push(["mama",(N.mp+N.bac+B.outW)*BAL.ag.needW]);
