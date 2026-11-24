@@ -18,6 +18,7 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;if(!c||process.env.V)console.log((c?'ok
   window.__bot=1;window.quiet=1;S.srv=null;S.rank=Math.max(S.rank||0,3);if(!S.maid)S.maid=newMaid(nmNew('maid'),50);if((S.staff||[]).length<4)fillStaff(S,true);
   S.kids=S.kids||[];while(S.kids.filter(k=>k.alive).length<2)S.kids.push(mkKid(S.kids.length?'f':'m',5));
   const out={seeds:[],forced:0,built:0,builtN:-1};try{out.builtN=(typeof JWSEEDS!=='undefined'?JWSEEDS:[]).length;out.built=Object.keys(WC_SEEDS).filter(id=>JWSEEDS.some(s=>s.id===id)).length}catch(e){}
+  const __ss=o=>JSON.stringify(o,(k,v)=>v&&typeof v==="object"&&!Array.isArray(v)?Object.keys(v).sort().reduce((a,x)=>(a[x]=v[x],a),{}):v);out.shadow=FIX.filter(r=>{const s=(typeof JWSEEDS!=="undefined"?JWSEEDS:[]).find(x=>x.id===r.id);return s&&__ss(s)!==__ss(r)}).map(r=>r.id);
   const X_=WC_X,E=WORLD_EVD;const plain=t=>String(t||'').replace(/<[^>]+>/g,' ');
   const ALLN=[].concat(...Object.values(BAL.net.F),...Object.values(BAL.net.M));const tr0=tr6;
   const SK=["sung","danh","bac","suc","mat","th","hh","duc","tamco","an"];const snap=()=>{const o={};for(const k of SK)o[k]=k==="an"?(S.an||0):(S[k]||0);return o};
@@ -81,5 +82,6 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;if(!c||process.env.V)console.log((c?'ok
   ok(r.roundOk&&r.roundAny,t+` NPC round: ${r.nN} people of the scope chose one of the 4 stances`);ok(r.card,t+' her card after the kind card');if(!r.card)continue;
   ok(!r.unfilled,t+' 4 options, placeholders filled: '+r.text);ok(!r.num.length,t+' numbers = steps × BAL.wc.fx '+r.num.join(', '));
   ok(r.objOk,t+' object traced: '+r.trace);ok(r.endOk,t+' end text says who chose what:'+r.endTxt);ok(r.rest,t+' not drawn again this life')}
+ ok(!(R.shadow||[]).length,`fixture rows not shadowed by a different built seed of the same id (law 11 / thin-p6 r2): ${(R.shadow||[]).join(", ")||"none"}`);
  ok(R.builtN<0||R.built>=R.builtN,`built JWSEEDS register (${R.built}/${R.builtN})`);ok(errs.length===0,'0 page errors '+(errs[0]||''));
  console.log(fail?`WC PLAY: ${fail} FAIL (${R.seeds.length} seeds, ${R.forced} forced)`:`WC PLAY: ALL PASS (${R.seeds.length} seeds, ${R.forced} forced, ${R.builtN} built; count ${JSON.stringify(R.count)})`);await b.close();srv.close();process.exit(fail?1:0)})().catch(e=>{console.log('FAIL',e.message);process.exit(1)});

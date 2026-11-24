@@ -16,6 +16,7 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;if(!c||process.env.V)console.log((c?'ok
   window.__bot=1;window.quiet=1;S.srv=null;S.rank=Math.max(S.rank||0,3);if(!S.maid)S.maid=newMaid(nmNew('maid'),50);if((S.staff||[]).length<4)fillStaff(S,true);
   S.kids=S.kids||[];while(S.kids.filter(k=>k.alive).length<2)S.kids.push(mkKid(S.kids.length?'f':'m',5));S.preg=0;
   const out={seeds:[],built:0,builtN:-1};try{out.builtN=(typeof J70SEEDS!=='undefined'?J70SEEDS:[]).length;out.built=Object.keys(J70C_SEEDS).filter(id=>J70SEEDS.some(s=>s.id===id)).length}catch(e){}
+  const __ss=o=>JSON.stringify(o,(k,v)=>v&&typeof v==="object"&&!Array.isArray(v)?Object.keys(v).sort().reduce((a,x)=>(a[x]=v[x],a),{}):v);out.shadow=FIX.filter(r=>{const s=(typeof J70SEEDS!=="undefined"?J70SEEDS:[]).find(x=>x.id===r.id);return s&&__ss(s)!==__ss(r)}).map(r=>r.id);
   out.old=j70Count().types;const L=()=>liveRivals(true).filter(v=>!v.confined&&!v.out);
   for(const sd of FIX){const r={id:sd.id,m:sd.m};out.seeds.push(r);try{
    j70cReg(sd);const M=M70[sd.m];const R0=M.R.find(x=>x.id===sd.id);r.reg=!!R0;if(!R0)continue;
@@ -41,5 +42,6 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;if(!c||process.env.V)console.log((c?'ok
    ok(x.own&&x.named,`${t} ${who} tells are the seed's own, target named: «${x.t0}» / «${x.t1}»`);ok(x.mk,`${t} ${who} P0 marks j70:${r.m}:${r.id}`);ok(x.pair,`${t} ${who} tell pair drawn + marked (j70t)`);
    ok(x.obj,`${t} ${who} real object recorded (law 6c)`);ok(x.ex===true,`${t} ${who} carried out (${x.end}); object trace told: ${x.ex}`)}
   ok(r.pick,t+' pickRoute70 returns a route of the method')}
+ ok(!(R.shadow||[]).length,`fixture rows not shadowed by a different built seed of the same id (law 11 / thin-p6 r2): ${(R.shadow||[]).join(", ")||"none"}`);
  ok(R.old===51&&R.old2===51,`old j70 count unchanged (${R.old} / ${R.old2})`);ok(R.builtN<0||R.built>=R.builtN,`built J70SEEDS register (${R.built}/${R.builtN})`);ok(errs.length===0,'0 page errors '+(errs[0]||''));
  console.log(fail?`J70C PLAY: ${fail} FAIL (${R.seeds.length} routes)`:`J70C PLAY: ALL PASS (${R.seeds.length} routes, ${R.builtN} built; count ${JSON.stringify(R.count)})`);await b.close();srv.close();process.exit(fail?1:0)})().catch(e=>{console.log('FAIL',e.message);process.exit(1)});

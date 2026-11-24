@@ -18,6 +18,7 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;if(!c||process.env.V)console.log((c?'ok
   window.__bot=1;window.quiet=1;S.srv=null;S.rank=Math.max(S.rank||0,3);if(!S.maid)S.maid=newMaid(nmNew('maid'),50);if((S.staff||[]).length<4)fillStaff(S,true);
   const X_=J71C_X;const plain=t=>String(t||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();const out={st:[],pz:[],co:[],day:null,forced:0,built:0,builtN:-1};
   try{out.builtN=(typeof J71SEEDS!=='undefined'?J71SEEDS:[]).length;const C=J71C_SEEDS;out.built=J71SEEDS.filter(s=>C.SI[s.id]||C.CI[s.id]||C.PI[s.id]).length}catch(e){}
+  const __ss=o=>JSON.stringify(o,(k,v)=>v&&typeof v==="object"&&!Array.isArray(v)?Object.keys(v).sort().reduce((a,x)=>(a[x]=v[x],a),{}):v);out.shadow=FIX.filter(r=>{const s=(typeof J71SEEDS!=="undefined"?J71SEEDS:[]).find(x=>x.id===r.id);return s&&__ss(s)!==__ss(r)}).map(r=>r.id);
   const old0=Object.assign({},X_.OLDN);
   for(const sd of FIX)j71cReg(sd);
   const L=()=>liveRivals(true).filter(v=>v.alive&&!v.out&&!v.confined);L().forEach(v=>v.bac=Math.max(v.bac||0,200));
@@ -68,5 +69,6 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;if(!c||process.env.V)console.log((c?'ok
   ok(r.reg,t+' registers');ok(r.drawn,t+' drawn for a fitting stage kind'+(r.dbg?' '+r.dbg:''));if(!r.drawn)continue;ok(r.mark,t+' P0 marks j71c:c');ok(r.card&&r.fit,t+' 4 options, real rival with the wanted nết');
   ok(!r.unfilled,t+' placeholders filled: '+r.text);ok(!r.num.length,t+' numbers = steps × BAL.j71c.fx '+r.num.join(', '));ok(r.objOk,t+' object trace');ok(r.rest,t+' not drawn again this life')}
  if(R.day){if(R.day.err)ok(false,'festival day threw '+R.day.err);else{ok(R.day.card,'festival day card: '+R.day.t);ok(R.day.q,`complication queued after the day's card (${R.day.pend})`);if(R.day.prize)ok(R.day.ob,'the day\'s prize went to the real winner')}}
+ ok(!(R.shadow||[]).length,`fixture rows not shadowed by a different built seed of the same id (law 11 / thin-p6 r2): ${(R.shadow||[]).join(", ")||"none"}`);
  ok(R.builtN<0||R.built>=R.builtN,`built J71SEEDS register (${R.built}/${R.builtN})`);ok(errs.length===0,'0 page errors '+(errs[0]||''));
  console.log(fail?`J71C PLAY: ${fail} FAIL`:`J71C PLAY: ALL PASS (${R.st.length} stages, ${R.co.length} comps, ${R.pz.length} prizes, ${R.forced} forced; count ${JSON.stringify(R.count.stages)} ${JSON.stringify(R.count.comps)})`);await b.close();srv.close();process.exit(fail?1:0)})().catch(e=>{console.log('FAIL',e.message);process.exit(1)});
