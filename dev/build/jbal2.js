@@ -423,6 +423,21 @@ Object.assign(BAL,{mem:{cap:5,fadeMo:2,keepFloor:.35,modDiv:8,modMax:10,recallMi
    psk.ghen = the jealousy of the other consorts when she is raised by a direct decree or a passed grace exam (jexam exDirectUp / exGraceUp). */
 Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{sung:6,errN:2,errAt:3,errGap:6},
  quyen:{danh:6,after:24,p:6,max:1,hitSung:10,hitDanh:6},seat:{bacM:4,hieuBac:120,danh:6,gifts:2,pow:8,dad:5,ghen:10,oan:6}}});
+/* BAL.promoH — PROMO-HIST roads (owner 24/11 ~05:20Z; reports/PROMO-HIST.md §3; jpromoh.js reads only these + BAL.psk.fest/sung/death).
+   One rule for her and every living NPC consort (law 1); a person gets at most ONE decree / grace a month and one step (rank+1, never past
+   Hoàng quý phi, seats still apply: a grace exam passed waits for a free seat; the deathbed decree needs a free seat).
+   fest = batch grace on grand occasions: vantho (the Đại xá month of Tiết Vạn thọ, FEST.vantho.m), thanhtho (FEST.thanhtho.m, Thái hậu alive),
+     laphau (the month after a new Hoàng hậu is crowned), reign (the first Tết after a new reign began, a new game whose reign started within reignWin
+     months). occ[k].p = chance that occasion brings an ân chiếu that year (same world draw for every seat). Each eligible consort (gap months since
+     her last decree, exam not cooling, not already graced) is chosen by o[rank] + Sủng × sungK (harder as she climbs, law 5) → an exam at once with the
+     conditions waived (PROMO_SRC.fest "grace"); loss psk.fest: the thank-offering (lễ tạ ân) Bạc = bacM × her monthly stipend BAL.pay[rank] (at most what she has).
+   sung = favour road: Sủng at the band top (≥ the Sủng of rank+over, BAL.promo.s) while the ordinary road is not complete and the exam is open; monthly
+     chance p[rank] (falls with rank), once per cd months → grace exam; loss psk.sung: every other consort ghen +ghen (an NPC: the others oán +oan).
+   death = deathbed decree: on the last illness stage (STG nguy kịch) of an illness that can kill, once a life; chance o[rank] + Sủng × sungK → one rank
+     by direct decree (PROMO_SRC.death); loss psk.death: Hoàng hậu oán +hhOan (a seat raised past her hand), the palace ghen = psk.ghen (exDirectUp fx; an NPC: others oán +oan). */
+Object.assign(BAL.psk,{fest:{bacM:1},sung:{ghen:10,oan:6},death:{hhOan:10,oan:4}});
+Object.assign(BAL,{promoH:{fest:{occ:{vantho:{p:35},thanhtho:{p:25},laphau:{p:100},reign:{p:100}},gap:6,o:[30,26,22,18,14,10],sungK:.3,reignWin:14},
+ sung:{over:2,p:[6,5,4,3,2,1],cd:12},death:{o:[40,35,30,25,20,15],sungK:.3}}});
 /* BAL.il — ITEM LEDGER + ITEM CONSERVATION (owner 16/11 13:30Z (3) + 13:40Z ONE LEDGER; jil.js reads only these):
    no item ever vanishes. Sold → the market ("mkt"): each week it may show up in her Nội vụ phủ tray (shopP), and at the latest by the ceiling
    (retW weeks after the sale) someone brings it to her for ransom (ransomPct of its price); refused or unpaid → it comes again againW weeks later.

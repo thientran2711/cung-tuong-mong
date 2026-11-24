@@ -39,7 +39,8 @@ function exArt(p,k){try{return typeof artLv==="function"?artLv(p,k):((p.arts||{}
 function exVirN(k){const v=(typeof VIR!=="undefined"?VIR:[]).find(x=>x.k===k);return v?v.n:k}
 function exS(p){if(!p)return{};const to=rkOf(p)+1;let e=p.ex;if(!e||typeof e!=="object"||e.to!==to){const g=e&&e.grace===to?to:null,gw=e&&e.gw;e=p.ex={to};if(g){e.grace=g;if(gw)e.gw=gw}}return e}
 /* why the exam was granted without the conditions: a daughter's birth ("f"); old saves (son grace before 20:05Z) read as "m" */
-function exGw(e){return e&&e.gw==="f"?"mừng công chúa":"mừng hoàng tử"}
+/* the grace reason: f = a princess, m (or none, old saves) = a prince; any other key = a PROMO-HIST road (jpromoh PROMO_GW: grand occasions, favour) */
+function exGw(e){const g=e&&e.gw;return g==="f"?"mừng công chúa":!g||g==="m"?"mừng hoàng tử":(typeof PROMO_GW!=="undefined"&&PROMO_GW[g])||"ân điển"}
 /* the rounds for the target rank */
 function exRounds(p,tier){if(tier===0)return["le",exArt(p,"nau")>exArt(p,"theu")?"banh":"theu"];
  if(tier===1){let b=EX_CKTT[0];for(const x of EX_CKTT)if(exArt(p,x[0])>exArt(p,b[0]))b=x;return[b[1],"doi"]}return["tc","xa","thq"]}
@@ -103,14 +104,14 @@ function promoRuleTxt(){const d=k=>PROMO_SRC[k]==="direct";return `Sinh hoàng t
    an exam at once with the conditions waived, "none" = no rank. son1 = that mother's FIRST prince; later sons and every princess = grace.
    Faction road: every winning side = direct (07:15Z). Seats (j30 SEATCAP) still apply: a direct reward that meets a full seat becomes
    a large one-off compensation (promoFullSeat, owner 07:20Z). EVERY reward has a gain AND a loss (owner 07:15Z): the loss per source is promoCost, numbers BAL.psk (jbal2). */
-const PROMO_SRC={son1:"direct",son:"grace",dau:"grace",emp:"direct",th:"direct",quyen:"direct"};
-const PROMO_WHY={son1:"mừng hoàng tử",emp:"phò tá có công",th:"Thái hậu tâu xin",quyen:"triều thần dâng sớ tiến cử"};
+const PROMO_SRC={son1:"direct",son:"grace",dau:"grace",emp:"direct",th:"direct",quyen:"direct",fest:"grace",sung:"grace",death:"direct"};/* fest / sung / death = PROMO-HIST roads (jpromoh): grand-occasion batch, favour, deathbed */
+const PROMO_WHY={son1:"mừng hoàng tử",emp:"phò tá có công",th:"Thái hậu tâu xin",quyen:"triều thần dâng sớ tiến cử",death:"Hoàng thượng thương xót lúc lâm bệnh nguy kịch"};
 function promoReward(p,src,o){o=o||{};const m=PROMO_SRC[src]||"none";if(m==="none"||!p||rkOf(p)>=6||p.out)return"";
- if(m==="grace")return typeof exGrace==="function"?exGrace(p,src==="dau"?"f":"m"):"";
+ if(m==="grace"){if(typeof exGrace!=="function")return"";const t=exGrace(p,src==="dau"?"f":src==="son"?"m":(o.gw||src));return t?t+promoCost(p,src,o):""}
  const nx=rkOf(p)+1;const r=(typeof seatFree==="function"&&!seatFree(nx))?promoFullSeat(p,src,o):exDirectUp(p,o.why||PROMO_WHY[src]||"ân điển",o);
- return r?r+promoCost(p,src):""}
+ return r?r+promoCost(p,src,o):""}
 /* the loss that comes with each reward (owner 07:15Z); same rule for an NPC (her rivals feel it the same way) */
-function promoCost(p,src){const B=BAL.psk,me=p===S;let t="";try{
+function promoCost(p,src,o){const B=BAL.psk,me=p===S;let t="";try{
  if(src==="son1"){const q=typeof queenP==="function"?queenP():null;if(q&&q!==p)oanAdd(q,p,B.son1.hhOan);
   let n=0;for(const v of liveRivals(true))if(v!==p&&v!==q&&!v.out&&typeof sonsOf==="function"&&sonsOf(v).length){oanAdd(v,p,B.son1.momOan);n++}
   if(p!==S&&S!==q&&!S.out&&typeof sonsOf==="function"&&sonsOf(S).length)oanAdd(S,p,B.son1.momOan);
@@ -120,6 +121,7 @@ function promoCost(p,src){const B=BAL.psk,me=p===S;let t="";try{
   if(me)t=`Thái hậu lạnh nhạt (Thái hậu quý ngươi −${B.emp.th}); ${n?`${n} phi tần phe thua`:"phe thua"} để bụng ngươi (oán +${B.emp.oan}). `}
  else if(src==="th"){if(me){apply({sung:-B.th.sung});S.psErr={n:B.th.errN,at:wk()+B.th.errAt};
   t=`Bệ hạ coi ngươi là người của Thái hậu (${sgStat(-B.th.sung)}); Thái hậu sẽ còn sai ngươi làm việc (${B.th.errN} việc nhờ). `}}
+ else if(src==="fest"||src==="sung"||src==="death"){if(typeof phCost==="function")t=phCost(p,src,o||{})}/* PROMO-HIST losses (jpromoh, BAL.psk.fest/sung/death) */
  else if(src==="quyen"){if(me){apply({danh:-B.quyen.danh});S.psStrike={at:S.turn+B.quyen.after,p:B.quyen.p,n:0};
   t=`Thiên hạ chê ngươi dựa thế nhà quyền thần (Danh −${B.quyen.danh}); bệ hạ lớn lên rồi, e có ngày tính sổ. `}}
  }catch(e){console.error("promoCost",e)}return t}
@@ -148,7 +150,7 @@ function promoMonth(){let ev="";try{const B=BAL.psk;
   apply({sung:-B.quyen.hitSung,danh:-B.quyen.hitDanh});log(`<span class="r">Bệ hạ đã lớn, nhớ chuyện cũ nhà quyền thần tiến cử ngươi</span>: ${sgStat(-B.quyen.hitSung)}, Danh −${B.quyen.hitDanh}.`)}}
  }catch(e){console.error("promoMonth",e)}return ev}
 (function(){if(typeof rivalsMonth!=="function")return;const r0=rivalsMonth;rivalsMonth=function(){const a=promoMonth();return a+(r0.apply(this,arguments)||"")}})();
-function exGrace(p,sex){const e=exS(p);e.grace=e.to;e.gw=sex==="f"?"f":"m";e.cd=0;e.lapse=0;const me=p===S;const why=exGw(e);
+function exGrace(p,sex){const e=exS(p);e.grace=e.to;e.gw=sex==="f"?"f":!sex||sex==="m"?"m":sex;e.cd=0;e.lapse=0;const me=p===S;const why=exGw(e);
  return me?`${why[0].toUpperCase()+why.slice(1)}: Hoàng thượng ân cho ngươi dự khảo hạch tấn phong ${exRk(e.to)} ngay, không cần đủ điều kiện. `:`${p.name} được ân dự khảo hạch tấn phong ${exRk(e.to)} (${why}). `}
 function exGraceUp(p){const me=p===S;const why=exGw(p.ex);if(me)S.rank++;else p.rank++;p.lastPromo=S.turn;if(me){try{ghenAll(BAL.psk.ghen,"ngươi được tấn phong")}catch(e){}try{feedback("promote",{t:"Tấn phong"})}catch(e){}}
  const t=me?`<b class="g">Thánh chỉ: tấn phong ${S.name} làm ${RANKS[S.rank].n}.</b> Lý do: ân điển ${why}, đã đỗ khảo hạch. `:`${p.name} được tấn phong ${RANKS[p.rank].n}. Lý do: ân điển ${why}, đã đỗ khảo hạch. `;
