@@ -28,7 +28,7 @@ const MEAS=`(()=>{const M=document.getElementById('modal');if(!M||M.hidden)retur
   const grab=async(name)=>{await settle();const m=await p.evaluate(MEAS);if(!m){chk(`${tag} ${name}: dialog open`,false,null);return}m.name=name;R.push(m);await p.screenshot({path:`${OUT}/${tag}-${name}.png`});
    /* (a)(b)(c) option cards */
    if(m.oc.length){chk(`${tag} ${name}: odds on the title row (${m.oc.filter(c=>c.hasOdd).length}/${m.oc.length} cards have odds)`,m.oc.every(c=>!c.hasOdd||c.odd||c.kodrow),m.oc.map(c=>c.odd));
-    chk(`${tag} ${name}: option picture fills the card`,m.oc.every(c=>!c.pic||c.pic.h>=c.B.h-8),m.oc.map(c=>[c.pic&&c.pic.h,c.B.h]));
+    chk(`${tag} ${name}: option picture is the SQUARE tier picture (KIT §6.2c, never stretched to the card)`,m.oc.every(c=>!c.pic||(Math.abs(c.pic.w-c.pic.h)<=1&&c.pic.h<=c.B.h)),m.oc.map(c=>[c.pic&&c.pic.w,c.pic&&c.pic.h,c.B.h]));
     if(z.w>=1100&&m.oc.length>=3)chk(`${tag} ${name}: iPad option cards in 2 columns (layout ${m.kol})`,m.kol[0]==='2',m.kol);
     if(z.w<800)chk(`${tag} ${name}: phone option cards in 1 column (layout ${m.kol})`,m.kol[0]==='1',m.kol)}
    /* (e) seal */

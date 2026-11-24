@@ -162,16 +162,20 @@ function dhNotice(key){const o=dhObj(S,key);if(!o||typeof kitPanel!=="function")
   opts:worn?[{n:"Đã hiểu",fx:{},x:"",go:()=>dhApplyFx(S)}]:[{n:"Đeo ngay",fx:{},x:chTxt(key,S.dh[key].i)||o.fx||"tấm danh hiệu trên đầu",go:()=>dhPick(key)},{n:"Để sau",fx:{},x:"",go:()=>{}}]})}
 /* OD 21/11 ~04:14Z (#54): the new-title plate sits ON the event picture (caption at its bottom centre, like the chapter slide title), not as its own band under it.
    Applies to every title dialog (Danh hiệu mới / lên bậc / đeo): the .kt3 plate of the info column moves into the picture (.k3ev). The drawn title art is parked. */
-function kitDhCap(){try{const d=document.querySelector("#modal:not([hidden]) .dlg");if(!d)return;const ev=d.querySelector(".k3right>.k3ev,.k3body>.k3mpic"),src=d.querySelector(".k3right .kt3:not(.kdhcap)");if(!ev||!src||!src.querySelector(".kdh,.kdh-cap,.j59t"))return;
- if(!ev.querySelector(":scope>.kdhcap")){const c=src.cloneNode(true);c.classList.add("kdhcap");c.style.display="";ev.appendChild(c)}src.style.display="none"}catch(e){}}
-window.kitDhCap=kitDhCap;
-(function(){const st=document.createElement("style");st.id="kdh-cap-css";st.textContent=`.ksz3 :is(.k3ev,.k3mpic)>.kt3.kdhcap{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);z-index:3;margin:0!important;width:max-content;max-width:calc(100% - 16px);text-align:center;filter:drop-shadow(0 2px 4px #2a1a1288)}`;document.head.appendChild(st);
+function kitDhCap(){try{const d=document.querySelector("#modal:not([hidden]) .dlg");if(!d)return;const ev=d.querySelector(".k3right>.k3ev,.k3body>.k3mpic,.k3ev,.k3mpic"),src=[...d.querySelectorAll(".kt3:not(.kdhcap)")].find(e=>!e.closest(".k3ev,.k3mpic")&&e.querySelector(".kdh,.kdh-cap,.j59t"));if(!ev||!src)return;/* kit-titleplate (MAIN 124 G4 #54): the dialog is laid out in TWO shapes depending on timing / device load: picture in .k3right>.k3ev (plate in .k3right) or picture .k3body>.k3mpic (plate in a .kpsec section, no .k3right column). The old selector only knew the first, so on a busy device the plate stayed a band under the picture. Now any plate of the dialog that is not already in the picture moves into the picture. */
+ if(!ev.querySelector(":scope>.kdhcap")){const c=src.cloneNode(true);c.classList.add("kdhcap");c.style.display="";ev.appendChild(c)}src.style.display="none";kdhCapFit(ev.querySelector(":scope>.kdhcap"))}catch(e){}}
+/* K-DH-CAPFIT (KIT §82.2): the caption plate on the picture never cuts its name. The plate wraps between words (jtitle .kdh rule); here, on the narrow event
+   picture (Fold / iPad 120 px column), it keeps to TWO lines: font steps .74 → .66 → .6 rem until the name takes ≤ 2 lines (KDH_CAP_FS); never smaller, never cut. */
+const KDH_CAP_FS=["",".66rem",".6rem"];
+function kdhCapFit(c){try{const k=c&&c.querySelector(".kdh"),b=k&&k.querySelector("b");if(!b)return;for(const f of KDH_CAP_FS){k.style.fontSize=f;const lh=parseFloat(getComputedStyle(b).lineHeight)||12;if(b.getBoundingClientRect().height<=lh*2.4)break}}catch(e){}}
+window.kitDhCap=kitDhCap;window.kdhCapFit=kdhCapFit;
+(function(){const st=document.createElement("style");st.id="kdh-cap-css";st.textContent=`.ksz3 :is(.k3ev,.k3mpic)>.kt3.kdhcap{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);z-index:3;margin:0!important;width:max-content;max-width:calc(100% - 8px);text-align:center;filter:drop-shadow(0 2px 4px #2a1a1288)}.ksz3 :is(.k3ev,.k3mpic)>.kt3.kdhcap .kdh{padding-left:8px;padding-right:8px}`;document.head.appendChild(st);
  if(typeof showModal==="function"){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{requestAnimationFrame(kitDhCap);setTimeout(kitDhCap,300);setTimeout(kitDhCap,900)}catch(e){}return r}}})();
 /* K-G4-PLATE (LIVE G4 80-dialog-fixed #54 flaky on a busy device): the fixed 300 / 900 ms calls miss a dialog that is (re)built later (kit sizing / life
    loader / a modal opened without showModal), and the plate then stays a band under the picture. ONE observer on #modal re-runs the idempotent kitDhCap
    on the next frame after any change, for EVERY title dialog (new / up / wear: any .k3ev picture with a .kt3 plate). */
 (function(){let q=0;const run=()=>{q=0;kitDhCap()};const go=()=>{const m=document.getElementById("modal");if(!m)return setTimeout(go,500);
- try{new MutationObserver(()=>{if(q||m.hidden)return;if(!m.querySelector(".k3ev"))return;q=requestAnimationFrame(run)}).observe(m,{childList:true,subtree:true,attributes:true,attributeFilter:["hidden"]})}catch(e){}};go()})();
+ try{new MutationObserver(()=>{if(q||m.hidden)return;if(!m.querySelector(".k3ev,.k3mpic"))return;q=requestAnimationFrame(run)}).observe(m,{childList:true,subtree:true,attributes:true,attributeFilter:["hidden"]})}catch(e){}};go()})();
 /* ---------- the bonus picker: wear a title and choose its ONE bonus (kit info panel + option cards) ---------- */
 function dhPick(key,back){const o=dhObj(S,key);if(!o)return;const e=S.dh[key],L=choices(key,e.i);
  if(L.length<2){if(L.length)e.pick=L[0];dhWear(S,key);if(back)dhPanel();return}
@@ -181,7 +185,7 @@ function dhPick(key,back){const o=dhObj(S,key);if(!o)return;const e=S.dh[key],L=
  opts.push({n:back?"Quay lại":"Để sau",fx:{},x:"",go:()=>{if(back)dhPanel()}});
  kitPanel({kind:"info",title:`Đeo «${o.name}»`,sub:"Mỗi lần chỉ đeo một danh hiệu, lấy một phần thưởng",dh:1,
   sections:[{h:"",html:`<div class="kt3">${kitTitlePlate(o)}</div>`},{h:"",rows:[["Cách có",esc(o.how)],["Khi đeo","chọn một phần thưởng bên dưới; tháo ra thì mất"]]}],opts},true);showModal()}
-window.dhPick=dhPick;
+window.dhPick=dhPick;window.dhNotice=dhNotice;window.DHKEYS=()=>Object.keys(DH);/* test hooks (dev/test/kit-titleplate.js) */
 /* ---------- NHIỆM VỤ › Danh hiệu ---------- */
 let DHTAB="goal";
 function tabsHTML(cur){const n=earned(S).length;const L=[];if(typeof kitGoalNow==="function"&&kitGoalNow())L.push({k:"goal",label:"Mục tiêu"});

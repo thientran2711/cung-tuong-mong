@@ -11,7 +11,7 @@
       c. one of her servants knows it — the servant stood there (her row), or roams on her own errand "Nghe ngóng cho chủ" (SRVA.listen odds), or keeps
          watch at home ("Canh chừng cung chủ", a happening at her master's palace) — AND chooses to tell her: mindPick tell / keep / sell by lòng and
          nết (BAL.ag.know.tell); a bought servant (spyFor) may sell it to the one who bought her instead (that one knows it); never a lie (j43 rule 5);
-      d. a consort who likes her (aff ≥ BAL.ag.know.friend) and meets her this khắc (or is close, aff ≥ BAL.ag.know.close, and sends word) knows it
+      d. a consort who likes her (aff ≥ netTh(her,"than"), BAL.net.th) and meets her this khắc (or is close, aff ≥ netTh(her,"than2"), and sends word) knows it
          by a–c and chooses to pass it on (tell / keep by her liking; one hop).
       The informer is that person: "s<sid>" (servant), "v<id>" (friend), "mat" (her own eyes and ears), "here", "le" (calendar).
    2. G2 the Dư đồ '!' shows only the happenings she knows (+ where she stands). G1: adHapArrive fires every happening of that place (jact.js).
@@ -95,7 +95,7 @@ function knFor(x,h,noFriend){if(!x)return null;const hid=knHid(h);const M=knMemo
    /* the confidant maid walks with her mistress (one khắc to step aside and tell); any other servant walks from where she saw / heard it */
    const at=q+(s.sid==null&&!knwMid(s,x)?Math.min(1,D):knWalkTo(knSrvFrom(s,how,h),id,q,s&&s.sid!=null?s:null));if(at>now){KN.stat.wait=(KN.stat.wait||0)+1;continue}/* still on her way to tell */if(knTell(s,x,hid)==="tell"){r={by:"s"+knSid(s,x),how,s,at};break}}}
  if(!r){let o=0;try{o=oSee(x,false)*knB().eye/100}catch(e){}if(knHit("e"+id+"|"+hid,o)){const at=w[0]+knWalkTo(h.k,id,w[0]);/* her Tai mắt / a passer-by walks from the place to her */if(at<=now){r=knEye(x,h,hid);if(r)r.at=at}}}
- if(!r&&!noFriend){const F=knB().friend;for(const v of liveRivals(true)){if(v===x||!v.alive||v.out)continue;const a=aff(v,x);if(a<F)continue;/* the news travels when they meet (same place this khắc), or a close friend sends word (aff ≥ close) */const meet=(()=>{const nw=agKh();return knAt(id,nw)!=null&&knAt("v"+v.id,nw)===knAt(id,nw)})();if(a<knB().close&&!meet)continue;const k=knFor(v,h,true);if(!k||k.by==="le"||k.how==="self")continue;
+ if(!r&&!noFriend){for(const v of liveRivals(true)){if(v===x||!v.alive||v.out)continue;const a=aff(v,x);if(a<netTh(v,"than"))continue;/* the news travels when they meet (same place this khắc), or a close friend sends word (aff ≥ close) */const meet=(()=>{const nw=agKh();return knAt(id,nw)!=null&&knAt("v"+v.id,nw)===knAt(id,nw)})();if(a<netTh(v,"than2")&&!meet)continue;const k=knFor(v,h,true);if(!k||k.by==="le"||k.how==="self")continue;
    let fa=now;if(!meet&&D>0){const ka=M.at["v"+v.id+"|"+hid+"|n"];if(ka==null)continue;fa=ka+knWalkTo(knAt("v"+v.id,ka),id,ka);if(fa>now)continue}/* sending word: her messenger's real walk from where she was when she knew to x (AG-ALL-2d4) */
    /* she passes it on or keeps it to herself: her choice by how much she likes x (the servant's rule, thiện cảm for lòng) */
    const kk="f"+v.id+">"+id+"|"+hid;if(M.t[kk]==null){const T=knB().tell,lo=cl(a,0,100)/100;let c="keep";try{c=mindPick([["tell",Math.max(.01,lo*T.tell)],["keep",Math.max(.01,(1-lo)*T.keep)]],v)||"keep"}catch(e){}M.t[kk]=c}

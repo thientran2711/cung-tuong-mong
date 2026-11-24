@@ -33,7 +33,7 @@ if(typeof BAL==="object")BAL.cyc={
  hideO:80,hideDuc:4,hideMaid:2,hideMaidO:35, /* her road: Đức lost; odds = hideMaidO + ma ma's loyalty / hideMaid (review r1: base 25 → 35, a loyal ma ma beats the bribe) */
  backDuc:6,backO:35,backTc:3,      /* "Khai lùi ngày nguyệt sự" (non-bạc twin of j22's 80-bạc bribe): Đức, odds base + Tâm cơ / backTc + loyalty/5 */
  backDanh:3,                       /* its failure: Danh lost (and the Tổng quản knows: S.ksKnows) */
- foeHost:50,npcRead:12,npcForge:4,forgeBac:30, /* NPC: hostility that makes a foe; monthly % she reads the book / forges a "không báo"; bạc it costs */
+ npcRead:12,npcForge:4,forgeBac:30, /* NPC: hostility that makes a foe; monthly % she reads the book / forges a "không báo"; bạc it costs */
  rumSung:3,rumDanh:2,              /* uncorrected false "không báo": Sủng / Danh lost next month (mừng hụt) */
  fixAf:20,rvRead:6, /* correction names the forger when the Tổng quản's thiện cảm ≥ fixAf; rival-vs-rival monthly % (an NPC hides by her own forgery card, cyHideCards) */
  /* MONTHLY REPORT pop-up (owner 16/11, review/cycle-r2): her maid asks how to report the cycle to Kính sự phòng.
@@ -64,7 +64,7 @@ function cyLen(p,mi){const L=Array.isArray(B().len)&&B().len.length?B().len:[5,6
    stays in the tuần), so a cycle never crosses into the next month and never changes length mid-cycle. */
 const CY_TD=10; /* days per tuần (jmcal time model: 3 tuần × 10 days) */
 function cyDaysM(p,mi){const b=cyBase(p),l=cyLen(p,mi);const j=(cyH("cyj|"+cyName(p)+"|"+mi)%3)-1;const o=cl_(b.o+j,1,CY_TD+1-l);const d0=b.t*CY_TD+o;const L=[];for(let i=0;i<l;i++)L.push(d0+i);return L}
-function cyAge(p){return p===S?(S.age||18):(p&&p.age)||20}
+function cyAge(p){return p===S?(S.age||BAL.ageMin):(p&&p.age)||20}
 function cyPreg(p){return !!(p&&p.preg&&!p.fake)}
 function cyCur(){return S&&S.turn!=null?S.turn:0}
 /* does she have a cycle in month index mi (relative to now; only now/future are known for pregnancy) */
@@ -264,7 +264,7 @@ function cyKnows(a,t){if(!a||!t||t.pregWk==null)return false;if(a===S)return !!(
 if(typeof ACT==="object"&&ACT.musk){const ok0=ACT.musk.ok;ACT.musk.ok=function(a,t){if(ok0.apply(this,arguments))return true;try{return !!(t&&cyPreg(t)&&t.hidden&&a&&(a.bac||0)>=30&&cyKnows(a,t))}catch(e){return false}}}
 
 /* ---------- 5. NPCs ---------- */
-function foes(){return liveRivals(true).filter(v=>v.alive&&!v.out&&!v.coop&&hostility(v,S)>=B().foeHost)}
+function foes(){return liveRivals(true).filter(v=>v.alive&&!v.out&&!v.coop&&hostility(v,S)>=netTh(v,"host"))}
 const mp0=monthPay;monthPay=function(){let ev=mp0.apply(this,arguments)||"";try{if(!S||S.dead||S.out||(typeof isSrv==="function"&&isSrv()))return ev;const c=cyb(),mi=cyCur();
   /* last month's uncorrected false "không báo": mừng hụt */
   if(c.rum&&c.rum.m===mi-1&&!c.rum.fixed&&!c.rum.done){c.rum.done=1;if(!cyPreg(S)){const b=S.sung,d=S.danh;apply({sung:-B().rumSung,danh:-B().rumDanh});
