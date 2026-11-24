@@ -43,6 +43,10 @@ let fails=0;const ok=(c,m)=>{if(!c){fails++;console.log('FAIL',m)}else console.l
  /* (3) Vì sao wording: every source of whyText, known / unknown name + nết */
  const p=await b.newPage({viewport:{width:755,height:1000}});await p.route(u=>/^https?:/.test(u.href)&&!/cdn|r2.dev|workers.dev|pages.dev/.test(u.host),r=>r.abort());await p.goto('file://'+path.join(ROOT,'index.html'));await p.waitForTimeout(2500);
  await p.evaluate(()=>{window.__bot=1;localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<60&&isSrv();i++)start();window.__nlInner=0;Q.length=0;try{$("modal").hidden=true}catch(e){}});
+ /* the stamp sits on the card edge, never on words */
+ const stamp=await p.evaluate(async()=>{window.__bot=0;Q.length=0;const bf=rsnap();affAdd(rivals.filter(r=>!r.queen)[0],S,8);resultShow("Vá lại quạt tròn bị mối cắn: Cắt viền",bf,true);await new Promise(r=>setTimeout(r,1500));const t=document.getElementById('rtoast');const s=t&&t.querySelector('.kmseal');if(!s)return{none:1};const r=s.getBoundingClientRect();
+  const hit=[...t.querySelectorAll('.kan,.ksen,.kitem,.krl,.seal,.kat')].filter(e=>{const q=e.getBoundingClientRect();return q.width&&q.height&&!(q.right<=r.left+4||q.left>=r.right-4||q.bottom<=r.top+4||q.top>=r.bottom-4)}).map(e=>e.className);return{hit}});
+ ok(stamp.none||stamp.hit.length===0,'result stamp covers no text ('+JSON.stringify(stamp)+')');
  const lines=await p.evaluate(()=>{const out=[];const V=rivals.slice(0,4);const nets=Object.keys(BAL.net.T).slice(0,3);window.trKnown=()=>[nets[0]];window.trongKnown=()=>true;
   for(const v of V)for(const known of [0,1])for(const st of ["aff","oan"])for(const d of [12,-6]){const sv=typeof k61Named==="function"?k61Named:null;try{if(sv)window.k61Named=()=>!!known;const F=[{k:"net",t:nets[0],s:1},{k:"trong",v:"Lễ",s:1,j:v}];out.push(whyText({who:v,stat:st,d,F},d))}finally{if(sv)window.k61Named=sv}}
   out.push(whyText({who:"th",stat:"th",d:4,F:[{k:"mood",t:"lòng ngươi đang vui",s:1}]},4));out.push(whyText({who:"emp",stat:"sung",d:5,F:[{k:"talk",t:"đêm vui"}]},5));
@@ -57,6 +61,6 @@ let fails=0;const ok=(c,m)=>{if(!c){fails++;console.log('FAIL',m)}else console.l
   const t2=(()=>{const bf=rsnap();window.k61Named=x=>x!==u;affAdd(u,S,6);oanAdd(u,S,12);resultShow("Việc nhờ",bf,true);const t=document.getElementById('rtoast');return t?t.textContent:''})();return{t1,t2,name:v.name}});
  ok(/thiện cảm \+\d+/.test(pop.t1)&&pop.t1.includes(pop.name),'result popup: «'+pop.name+': thiện cảm +8» in one short line');
  ok(!/hơn|\(\d+|chưa rõ/.test(pop.t1.replace(/Xem đầy đủ.*/,'')),'result popup: no «hơn», no (a→b), no repeated action text ('+pop.t1.replace(/\s+/g,' ').slice(0,200)+')');
- ok(!/chưa quen/.test(pop.t2)&&/một vị/i.test(pop.t2),'result popup: unnamed person = «một vị <tước>», never «chưa quen biết» ('+pop.t2.replace(/\s+/g,' ').slice(0,200)+')');
+ ok(!/chưa quen/.test(pop.t2)&&/một vị phi tần|một vị [A-Z]/i.test(pop.t2)&&/oán \+\d+/.test(pop.t2)&&!/phi tần oán thêm|người oán thêm/.test(pop.t2),'result popup: Kèm = one line per person «<Tên / một vị …>: oán +N», no group summary, never «chưa quen biết» ('+pop.t2.replace(/\s+/g,' ').slice(0,200)+')');
  console.log(lines.slice(0,6).join('\n'));
  await b.close();console.log(fails?`FAILED ${fails}`:'ALL OK');process.exit(fails?1:0)})().catch(e=>{console.log('ERR',e.message);process.exit(1)});

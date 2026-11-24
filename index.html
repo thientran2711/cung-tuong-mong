@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"0d951e9e+","t":"2026-11-24T22:38Z","c":"viecnho-fix: text under the portrait starts below the tassel (no overlap with the label)","b":"d52042d11697","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
+window.CTM_BI={"s":"d445cc9e+","t":"2026-11-24T22:54Z","c":"viecnho-fix: Kèm line no longer repeats the title as its cause","b":"f3cd6e48cfaa","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -29152,12 +29152,11 @@ function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Se
 /* the reason of a KÈM line (ghen / oán of the others): a Sổ ghi clause naming that feeling, else the act title, else the fixed cause */
 const KA_WHYK={ghen:{"+":"lời đồn về ngươi lan ra","-":"lòng ghen nguôi dần theo ngày"},"oán":{"+":"chuyện cũ chưa nguôi","-":"oán nguôi dần theo ngày"}};
 function kaWhyKem(K,k,up){try{const C=K.why||[];const c=C.find(x=>new RegExp("(^|[^\\p{L}])"+k+"\\s*(?:[+−-]\\s*\\d)","u").test(x));const r=c&&kaWhyLead(c);if(r)return kaWhyClip(r);void up;return""/* the cause is the card title, said once (owner 24/11 ~21:57Z): no title copy, no filler after the Kèm number */}catch(e){return""}}
-function kitKemRow(K){if(!K||!K.length)return"";const grp={};for(const x of K){const key=x.k+(x.d>0?"+":"-");(grp[key]=grp[key]||[]).push(x)}
- const parts=Object.entries(grp).map(([key,L])=>{const up=key.endsWith("+"),k=key.slice(0,-1);const ds=L.map(x=>Math.abs(x.d));const lo=Math.min(...ds),hi=Math.max(...ds);
-  const amt=lo===hi?`${lo}`:`${lo}–${hi}`;const verb=up?`${k} thêm ${amt}`:`bớt ${k} ${amt}`;
-  const names=L.map(x=>`${kaNamed(x.v)?kaWho(x.v):typeof whyWho==="function"?whyWho(x.v):"Một vị phi tần"} ${up?"+":"−"}${Math.abs(x.d)}`);
-  const wy=kaWhyHtml(kaWhyKem(K,k,up));return `<span class="kkem" role="button" tabindex="0" aria-expanded="false"><span class="kkems">${L.length} ${L.length>1?"phi tần":"người"} ${verb}</span>${wy}<span class="kkeml">${names.join(" · ")}</span></span>`});
- return `<span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv">${parts.join('<span class="ksep">·</span>')}</span></span>`}
+function kitKemRow(K){if(!K||!K.length)return"";/* owner 24/11 ~21:57Z + MAIN 129: ONE line per person, exact signed number: «<Tên>: oán +12» (unnamed: «một vị phi tần: oán +12»); no group summary, no cause copy */
+ const L=K.filter(x=>Math.round(x.d)).slice(0,8).map(x=>{const d=Math.round(x.d),named=kaNamed(x.v);const nm=named?kaWho(x.v):String(typeof whyWho==="function"?whyWho(x.v):"Một vị phi tần").replace(/^M/,"m");
+  return `<span class="kitem"><span class="ef t">${nm}:</span> <span class="ef ${d>0?"r":"g"}">${x.k} ${kaN(d)}</span></span>`});
+ if(K.filter(x=>Math.round(x.d)).length>8)L.push(`<span class="kitem"><span class="ef n">… và ${K.filter(x=>Math.round(x.d)).length-8} người khác</span></span>`);
+ return L.length?`<span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv">${L.join("")}</span></span>`:""}
 const kaKemHTML=kitKemRow;
 /* KIT PART oddsSoft(n,c) — the ONE soft failure of a formerly-sure act (ODDS CAP, owner 17/11 ~17:35Z "việc chắc ăn mà hỏng thì chỉ hỏng nhẹ"):
    the act rolled at the cap (BAL.odds.hi) and failed: of its cost only the effort (BAL.odds.softFail.spend: Sức) is spent, never the bạc
@@ -42299,7 +42298,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 @keyframes kmStick{0%{opacity:0;transform:translate(-50%,30px) rotate(0)}45%{opacity:1;transform:translate(-50%,-46px) rotate(8deg)}100%{opacity:1;transform:translate(10px,6px) rotate(64deg)}}
 /* 3 result card: seal, floating numbers, bars */
 .rtoast.karesult{overflow:visible}
-.kmseal{position:absolute;right:6px;top:-18px;width:78px;height:auto;z-index:3;pointer-events:none;transform:rotate(-12deg);mix-blend-mode:multiply;animation:kmStamp calc(.5s*var(--pace)) cubic-bezier(.3,1.4,.5,1) calc(.1s*var(--pace)) both}
+.kmseal{position:absolute;right:6px;top:auto;bottom:calc(100% - 2px);/* KIT stamp placement (owner 24/11, MAIN 129): the stamp sits on the card's TOP EDGE, above the text, never on words */width:78px;height:auto;z-index:3;pointer-events:none;transform:rotate(-12deg);mix-blend-mode:multiply;animation:kmStamp calc(.5s*var(--pace)) cubic-bezier(.3,1.4,.5,1) calc(.1s*var(--pace)) both}
 .km-thump{animation:kmThump calc(.35s*var(--pace)) ease calc(.45s*var(--pace)) both!important}
 .kmfls{position:fixed;z-index:9050;pointer-events:none;transform:translateX(-50%);display:flex;flex-wrap:wrap;justify-content:center;gap:6px;width:max-content}
 .kmfl{position:relative;font-weight:800;font-size:1rem;white-space:nowrap;background:var(--k-card,#fffaf0);border:1.5px solid currentColor;border-radius:12px;padding:1px 9px;box-shadow:0 4px 12px #5a3a2050;animation:kmFloat calc(1.5s*var(--pace)) var(--km-out) both}
@@ -56332,7 +56331,7 @@ function ktQ72HTML(){const q=q72();const mo=q.mo[S.turn]||0;const D=q72Debtors()
  if(sub.cur==="find")h+=kitEmptyTab("Hỏi han xem ai cần giúp",["Ta đến nơi mình đang ở mà hỏi han: ai có việc sẽ ngỏ lời nhờ, ta nhận hay từ chối tùy ý.","Việc ta nhận sẽ hiện ở «Đang làm»."],{topic:"Việc nhờ"},ask);
  else if(sub.cur==="now"){
   const items=q.a.map((x,i)=>{const X=q72X(x);return{f:X?X.A.f:{ini:"?",col:"#888"},name:X?q72PgN(X.A):"",sep:i===0?"Đang làm":""}}).concat(q.h.slice(0,8).map((z,i)=>({f:z.f||{ini:"?",col:"#888"},name:z.pn||shortN(z.n||"?"),dim:true,sep:i===0?"Đã qua":""})));
-  h+=items.length?`<div class="pgwrap">`+pager("q72",items,i=>i<q.a.length?q72Card(q.a[i]):q72HCard(q.h[i-q.a.length]))+`</div>`:kitEmpty("Chưa ai nhờ ta việc gì",["Người trong cung sẽ tìm đến khi cần.","Muốn nghe ai cần giúp, ta sang «Tìm việc» mà hỏi han."],{topic:"Việc nhờ"})}
+  h+=items.length?`<div class="pgwrap">`+(items.length===1?(PG.q72=0,q.a.length?q72Card(q.a[0]):q72HCard(q.h[0])):pager("q72",items,i=>i<q.a.length?q72Card(q.a[i]):q72HCard(q.h[i-q.a.length])))+`</div>`:kitEmpty("Chưa ai nhờ ta việc gì",["Người trong cung sẽ tìm đến khi cần.","Muốn nghe ai cần giúp, ta sang «Tìm việc» mà hỏi han."],{topic:"Việc nhờ"})}
  else if(sub.cur==="debt"){
   if(calls.length)h+=`<h4 class="kpst">Họ nợ ngươi</h4><div class="ktpeople">${calls.map(x=>`<div class="ktprow">${ktPerson(x.a,`nợ ngươi ${x.n} ân`)}<div class="pcb kpanec">${x.btn}</div></div>`).join("")}</div>`;
   if(owe.length)h+=`<h4 class="kpst">Ngươi nợ họ</h4><div class="ktpeople">${owe.map(([k,v])=>`<div class="ktprow">${ktPersonK(k,(q.dn&&q.dn[k])||k,`ngươi nợ ${-v} ân · họ có thể nhờ lại`)}</div>`).join("")}</div>`;
@@ -56799,7 +56798,7 @@ KIT_SAMPLES.push(
  {id:"§53",title:"kitChip tones · option odds meter (kitOdds, 7 steps)",html:()=>`<p>${kitChip("Sủng",3)}${kitChip("Danh",-2)}${kitChip("Thường","n")}${kitChip("cẩn thận","w")}${kitChip("đủ Sức","ok")}${kitChip("thiếu bạc","no")}</p><p>${KIT_ODDS.map(w=>kitOdds(w)).join(" ")}</p>`},
  {id:"§53",title:"Event option in cost mode: odds meter + Tốn + kitHintRow (no Tốn when free; certain = Nắm chắc)",html:kitPgEvOpts},
  {id:"§53",title:"kitResultSeal: THÀNH · BẠI · KẾT QUẢ",html:kitPgSeals},
- {id:"§53",title:"kitKemRow (tap for names)",html:kitPgKem});
+ {id:"§53",title:"kitKemRow (one line per person)",html:kitPgKem});
 /* §27.1 the Tuần lục cover title picture (review/book-title): the real cover label slot of kitBook, at a fixed small size */
 KIT_SAMPLES.push({id:"§27.1",title:"KBK_TITLE_IMG: tên sổ viết tay trên nhãn bìa (ấn Trân nữ)",html:()=>typeof KBK_TITLE_IMG==="undefined"?"":
  `<div class="kitpg-row">${Object.entries(KBK_TITLE_IMG).map(([t,u])=>`<div class="kitpg-bkl"><img src="${u}" alt="${t}"></div>`).join("")}</div>`});
@@ -97928,7 +97927,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d52042d11697";window.CTM_BUILD=BUILD;
+const BUILD="f3cd6e48cfaa";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

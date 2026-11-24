@@ -122,7 +122,7 @@ function ktQ72HTML(){const q=q72();const mo=q.mo[S.turn]||0;const D=q72Debtors()
  if(sub.cur==="find")h+=kitEmptyTab("Hỏi han xem ai cần giúp",["Ta đến nơi mình đang ở mà hỏi han: ai có việc sẽ ngỏ lời nhờ, ta nhận hay từ chối tùy ý.","Việc ta nhận sẽ hiện ở «Đang làm»."],{topic:"Việc nhờ"},ask);
  else if(sub.cur==="now"){
   const items=q.a.map((x,i)=>{const X=q72X(x);return{f:X?X.A.f:{ini:"?",col:"#888"},name:X?q72PgN(X.A):"",sep:i===0?"Đang làm":""}}).concat(q.h.slice(0,8).map((z,i)=>({f:z.f||{ini:"?",col:"#888"},name:z.pn||shortN(z.n||"?"),dim:true,sep:i===0?"Đã qua":""})));
-  h+=items.length?`<div class="pgwrap">`+pager("q72",items,i=>i<q.a.length?q72Card(q.a[i]):q72HCard(q.h[i-q.a.length]))+`</div>`:kitEmpty("Chưa ai nhờ ta việc gì",["Người trong cung sẽ tìm đến khi cần.","Muốn nghe ai cần giúp, ta sang «Tìm việc» mà hỏi han."],{topic:"Việc nhờ"})}
+  h+=items.length?`<div class="pgwrap">`+(items.length===1?(PG.q72=0,q.a.length?q72Card(q.a[0]):q72HCard(q.h[0])):pager("q72",items,i=>i<q.a.length?q72Card(q.a[i]):q72HCard(q.h[i-q.a.length])))+`</div>`:kitEmpty("Chưa ai nhờ ta việc gì",["Người trong cung sẽ tìm đến khi cần.","Muốn nghe ai cần giúp, ta sang «Tìm việc» mà hỏi han."],{topic:"Việc nhờ"})}
  else if(sub.cur==="debt"){
   if(calls.length)h+=`<h4 class="kpst">Họ nợ ngươi</h4><div class="ktpeople">${calls.map(x=>`<div class="ktprow">${ktPerson(x.a,`nợ ngươi ${x.n} ân`)}<div class="pcb kpanec">${x.btn}</div></div>`).join("")}</div>`;
   if(owe.length)h+=`<h4 class="kpst">Ngươi nợ họ</h4><div class="ktpeople">${owe.map(([k,v])=>`<div class="ktprow">${ktPersonK(k,(q.dn&&q.dn[k])||k,`ngươi nợ ${-v} ân · họ có thể nhờ lại`)}</div>`).join("")}</div>`;
