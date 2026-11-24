@@ -246,3 +246,6 @@ K-FOCUS-1b SPEC (append to kitFocus; pure display, no numbers of its own, knobs 
 - Status: OPEN.
 
 - MG-SKIN (MAIN 113 22:39Z; owner OD 23/11 ~23:05Z real): «skin» slot on the kg82 frame {bg picture, board/piece art keys, button palette}, ≥4 palettes from the kit palette, Fold + iPad readable → DONE by KIT KEEPER #14 on review/kit-mgskin (KIT.md §MG-SKIN, test dev/test/kit-mgskin.js). Art: Foreman C paints img/mg/<kind>-<id>.webp (+ img/mg/<sprite>-<id>.webp); wiring: THIN P1 (kitMgSkinAdd + KG82.preSkin).
+
+## 24/11 KIT KEEPER #15 — K-DH-CAPFIT «title plate on the event picture clips long names» (filed by E55 on review/titles2 537091a1)
+- DONE on review/kit-dhcapfit: KIT §82.2 (plate wraps between words when its box is narrower than the name; kitDhCap caption ≤ 2 lines with font step .74/.66/.6 rem; .ksart-tag same wrap). Test dev/test/kit-dhcapfit.js 26/26. Status: KIT READY (small kit review pending).
