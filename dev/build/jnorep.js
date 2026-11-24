@@ -13,7 +13,10 @@
 const NR_KEY="ctm-nr",NR_OLD="ctm-e68h";
 let NR_C=null;   /* in-memory copy of the store (+ Sets per life); dropped when another tab writes */
 try{window.addEventListener("storage",ev=>{if(!ev||ev.key===NR_KEY||ev.key==null)NR_C=null})}catch(e){}
-function nrCfg(){const b=(typeof BAL==="object"&&BAL&&BAL.nr)||{};return{lives:b.lives||6,w:b.w==null?.5:b.w,cap:b.cap||1500}}
+function nrCfg(){return BAL.nr}   /* law 4: the numbers live only in BAL.nr (jbal2.js) */
+/* co-op thin guest: the HOST runs the friend's turn inside COOPW.thin.withSeat (COOPW.ctx = her seat). Her draws are hers: never marked in,
+   and never rotating, the host phone's store, and the host's history does not weigh her picks (memory is personal per seat; her own phone keeps her own store). */
+function nrAway(){try{const C=window.COOPW;return !!(C&&C.on&&C.ctx&&C.ctx!==C.seat)}catch(e){return false}}
 /* one-time copy of the j68 history: same lives, same order, same current life */
 function nrMigrate(){let O={};try{O=JSON.parse(localStorage.getItem(NR_OLD)||"{}")||{}}catch(e){O={}}
  const fam=k=>{const t=String(k).split(":")[0];return /^(j\d+|p|t)$/.test(t)?k:"j68:"+k};
@@ -26,15 +29,15 @@ function nrSave(){const C=NR_C;if(!C)return;try{localStorage.setItem(NR_KEY,JSON
 function nrRotate(id){const C=nrStore(),n=nrCfg().lives;C.H.L=[[]].concat(C.H.L).slice(0,n);C.sets=[new Set()].concat(C.sets).slice(0,n);C.H.cur=id;nrSave()}
 function nrLife(){if(typeof S==="undefined"||!S)return null;
  if(!S.nrl){S.nrl=(S.e68&&S.e68.lid)||(Date.now().toString(36)+Math.floor(Math.random()*1000))}
- const C=nrStore();if(C.H.cur!==S.nrl)nrRotate(S.nrl);return S.nrl}
+ if(nrAway())return S.nrl;const C=nrStore();if(C.H.cur!==S.nrl)nrRotate(S.nrl);return S.nrl}
 function nrK(fam,seed){return seed==null||seed===""?String(fam):fam+":"+seed}
-function nrMarkK(key){if(!nrLife())return;const C=nrStore();key=String(key);if(!C.H.L.length){C.H.L=[[]];C.sets=[new Set()]}
+function nrMarkK(key){if(!nrLife()||nrAway())return;const C=nrStore();key=String(key);if(!C.H.L.length){C.H.L=[[]];C.sets=[new Set()]}
  if(C.sets[0].has(key))return;C.H.L[0].push(key);C.sets[0].add(key);const cap=nrCfg().cap;
  if(C.H.L[0].length>cap){C.H.L[0]=C.H.L[0].slice(-cap);C.sets[0]=new Set(C.H.L[0])}nrSave()}
-function nrSeenK(key,pre){const C=nrStore(),n=nrCfg().lives;key=String(key);let c=0;const P=key+":";
+function nrSeenK(key,pre){if(nrAway())return 0;const C=nrStore(),n=nrCfg().lives;key=String(key);let c=0;const P=key+":";
  for(let i=1;i<Math.min(n,C.H.L.length);i++){if(C.sets[i].has(key)){c++;continue}if(pre&&C.H.L[i].some(k=>k.indexOf(P)===0))c++}return c}
 function nrSeen(fam,seed,pre){return nrSeenK(nrK(fam,seed),pre)}
-function nrNow(fam,seed){if(!nrLife())return false;const C=nrStore();return !!(C.sets[0]&&C.sets[0].has(nrK(fam,seed)))}
+function nrNow(fam,seed){if(!nrLife()||nrAway())return false;const C=nrStore();return !!(C.sets[0]&&C.sets[0].has(nrK(fam,seed)))}
 function nrW(fam,seed,pre){return Math.pow(nrCfg().w,nrSeen(fam,seed,pre))}
 function nrMark(fam,seed){nrMarkK(nrK(fam,seed))}
 function nrPick(fam,list,idf,wf){list=list||[];if(!list.length)return null;idf=idf||(x=>x);let T=0;const W=list.map(x=>{const w=Math.max(0,(wf?wf(x):1))*nrW(fam,idf(x));T+=w;return w});
