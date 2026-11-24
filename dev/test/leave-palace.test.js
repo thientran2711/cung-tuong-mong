@@ -143,5 +143,36 @@ const T=[
   const h=by("✦ hòa thân");ok(h.dead&&h.after&&h.ep&&h.ep.k==="hoa"&&!h.pal,'Trả thẻ bài · ✦ hòa thân: ending + «Về sau» hoa',h);
   const o=by("old save: gả");ok(o.dead&&!o.ep&&!o.after,'Trả thẻ bài · OLD save (no S.kc.lv): today\'s card, no «Về sau»',o);
   const n=by("no tablet returned (home road ending before Điện tuyển)");ok(n.dead&&!n.ep,'home-road ending before any returned tablet: unchanged (no «Về sau»)',n)}
+ /* 6. FORCED-REMOVAL SEVERITY (MAIN 118 06:16Z P1/P2/P3; table «STEP 1b» in reports/leave-palace.md) */
+ await fresh();
+ const sv=await p.evaluate(()=>{const snap=JSON.stringify(ser());const R={};const H0=has,W0=npcWhy,DS0=deathSentence,F0=fall,rl0=roll;
+  const reset=()=>{deser(JSON.parse(snap));Q.length=0;S.dead=false;S.lvEp=null;has=H0;npcWhy=W0;deathSentence=DS0;fall=F0;roll=rl0;if(S.kc)S.kc.inPal=1};
+  const mercyOn=()=>{has=t=>t==="nhantu"?true:H0(t);npcWhy=(k,o)=>k==="empMercy"?true:W0(k,o)};
+  /* P1 treason tier: no first-year mercy (turn 1); nhân từ → phế làm thứ dân (life ends, «Về sau» dan); thường keeps the old mercies */
+  reset();S.turn=1;S.mercy=0;deathSentence("Mật thư bị chặn, tra ra ngươi làm gián điệp cho Cao Ly","nghich");R.p1a={dead:!!S.dead,fate:S.fate,mercy:S.mercy};
+  reset();S.turn=1;S.mercy=0;deathSentence("Bị ban chết vì đầu độc Hoàng tử");R.p1ctl={dead:!!S.dead,mercy:S.mercy};
+  reset();S.turn=40;mercyOn();deathSentence("Bị ban chết vì vu Hoàng tử trù ẻo thánh thượng","nghich");R.p1b={dead:!!S.dead,out:S.out,fate:S.fate,k:S.lvEp&&S.lvEp.k};
+  reset();S.turn=40;mercyOn();deathSentence("Bị ban chết vì đầu độc phi tần");R.p1bctl={dead:!!S.dead,out:S.out};
+  reset();S.turn=40;mercyOn();{const v=rivals.find(x=>x&&x.alive&&!x.out&&!x.queen);deathSentence(v,"Bị ban chết vì đầu độc Hoàng tử","nghich");R.p1n={alive:v.alive,dan:v.dan,out:!!v.out}}
+  reset();S.turn=40;mercyOn();{const v=rivals.find(x=>x&&x.alive&&!x.out&&!x.queen);deathSentence(v,"tư thông");R.p1nctl={alive:v.alive,out:!!v.out}}
+  /* P2 a proven thư tư tình (PEND.loveletter «Trình lên») → the ONE tư thông rule (deathSentence), never fall() */
+  reset();{const v=rivals.find(x=>x&&x.alive&&!x.out);const calls=[],falls=[];deathSentence=function(){calls.push([...arguments].slice(1).join("|"));return DS0.apply(this,arguments)};fall=function(){falls.push(1);return F0.apply(this,arguments)};roll=()=>true;
+   const d=PEND.loveletter({v:v.id});d.o[0].go();R.p2={calls,falls:falls.length,x:d.o[0].x}}
+  /* P3 «bị bỏ quên» = thất sủng, not lãnh cung: he stops turning her tablet, Sủng decays, she wins him back; NPC the same */
+  reset();S.out=0;S.sung=0;S.danh=0;S.rank=0;let ev=tsMonthAll();R.p3={out:S.out,ts:!!S.thatS,night:nightCh(S),ev:ev.replace(/<[^>]+>/g,"")};
+  S.sung=10;tsMonthAll();R.p3.decay=S.sung;S.sung=BAL.thatS.back;ev=tsMonthAll();R.p3.back=!S.thatS;R.p3.night2=nightCh(S)>0||!!(S.preg||S.confined);
+  {const v=rivals.find(x=>x&&x.alive&&!x.out&&!x.queen&&rkOf(x)<=BAL.thatS.rank);if(v){v.sung=0;v.danh=0;tsMonthAll();R.p3n={ts:!!v.thatS,out:!!v.out,night:nightCh(v)}}else R.p3n="no low NPC"}
+  reset();return R});
+ ok(sv.p1a.dead&&!sv.p1a.mercy,'P1 treason tier: no first-year mercy (gián điệp at month 1 dies)',sv.p1a);
+ ok(!sv.p1ctl.dead&&sv.p1ctl.mercy===1,'P1 control: an ordinary death sentence keeps the first-year mercy',sv.p1ctl);
+ ok(sv.p1b.dead&&!sv.p1b.out&&/^Phế làm thứ dân/.test(sv.p1b.fate)&&sv.p1b.k==="dan",'P1 treason + nhân từ Emperor → phế làm thứ dân: life ends, «Về sau» dan (not lãnh cung)',sv.p1b);
+ ok(!sv.p1bctl.dead&&sv.p1bctl.out===1,'P1 control: ordinary crime + nhân từ → lãnh cung (kept)',sv.p1bctl);
+ ok(sv.p1n.alive===false&&sv.p1n.dan===1&&!sv.p1n.out,'P1 NPC the same: treason + nhân từ → phế làm thứ dân, leaves the roster',sv.p1n);
+ ok(sv.p1nctl.alive&&sv.p1nctl.out,'P1 NPC control: ordinary + nhân từ → lãnh cung',sv.p1nctl);
+ ok(sv.p2.falls===0&&sv.p2.calls.some(c=>/tư thông/.test(c))&&/tư thông/.test(sv.p2.x),'P2 proven thư tư tình → the one tư thông rule (deathSentence), no fall()',sv.p2);
+ ok(sv.p3.out===0&&sv.p3.ts&&sv.p3.night===0&&/thất sủng/.test(sv.p3.ev),'P3 bị bỏ quên → thất sủng: stays out of lãnh cung, tablet set aside, a line',sv.p3);
+ ok(sv.p3.decay===10-2&&sv.p3.back&&sv.p3.night2,'P3 thất sủng: Sủng decays (BAL.thatS.decay); at BAL.thatS.back she is back on the tablet tray',sv.p3);
+ ok(sv.p3n==="no low NPC"||(sv.p3n.ts&&!sv.p3n.out&&sv.p3n.night===0),'P3 NPC the same rule',sv.p3n);
+ ok(!/Bị bỏ quên, đưa vào lãnh cung/.test(SRC)&&/ttNpcExposed\(t,/.test(SRC),'P2/P3 family scan: no «Bị bỏ quên → lãnh cung» left; j30 «Bóc chuyện tư tình» NPC branch on the same rule',0);
  ok(!errs.length,'no page errors',errs.slice(0,3));
  await b.close();const f=res.filter(x=>!x).length;console.log(`leave-palace: ${res.length-f}/${res.length} ok`);process.exit(f?1:0)})();

@@ -41,6 +41,8 @@ function tryst(m,risk,p){p=p||S;if(p!==S)return trystNpc(m,risk,p);if(roll(risk)
  return r}
 /* the same night for an NPC consort: caught = he dies and she faces the same sentence; kept = v.affair (the world's affair record: the book,
    a conception by him, spies — affairMonth), Sức, a pregnancy by trystCh with the same book check */
+/* ONE tư thông rule for an NPC consort (MAIN 118 P2, law 11): the man (if known) is xử trảm, she faces deathSentence (its mercies) — never fall() */
+function ttNpcExposed(v,m,lead){if(m){m.alive=false;log(`<span class="r">${lead?lead+" ":""}${m.name} bị xử trảm.</span>`)}else if(lead)log(`<span class="r">${lead}</span>`);v.affair=null;try{deathSentence(v,`tư thông${m?" với "+m.name:" với thị vệ"}`)}catch(e){console.error(e)}}
 function trystNpc(m,risk,v){if(roll(risk)){m.alive=false;v.affair=null;log(`<span class="r">Đêm ${v.name} hẹn ${m.name} bị bắt gặp. ${m.name} bị xử trảm.</span>`);try{deathSentence(v,`tư thông với ${m.name}`)}catch(e){}return `${v.name} hẹn gặp ${m.name} bị bắt gặp`}
  m.trysts++;mTinhAdd(m,v,10);v.affair=m.id;v.lastTryst=wk();ap(v,{suc:BAL.eff.j22.sucTryst});
  if(!v.preg&&roll(trystCh(v))){v.preg=1;v.hidden=true;v.pregWk=wk();v.trueFather=m.id;const ok=(v.nightLog||[]).some(w=>Math.abs(w-wk())<=1);v.pregMismatch=!ok}
