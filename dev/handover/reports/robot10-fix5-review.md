@@ -63,3 +63,10 @@ The earlier week-0 coop red was the old driver fault fixed by test-mrfoot. Final
 | review/robot10-e-fix-5-r | 24f8c761 (= 6b96055a code) | **a50db75ae32fc6ab79d780550091d4fac6c530ee** | index.html / sw.js only (rebuilt) | identical (j9 / jhc / jkrel) | r10e-roadman ALL OK | run 1 FAIL time-spill guard (1 runtime court walk, box busy: I was building fix-3 in parallel); guard alone 3/3 PASS on the merge and 3/3 on bare LIVE; rerun alone **PASS** 663 s (core gates, old save ok; render 224/178, tab 371/409, buổi 1350/1112 ms) | **142/142** | **142/142** | **PASS a50db75a** |
 | review/robot10-e-fix-3-r2 | 2e7e489b | **e4597adf533403027682540783baa27f2d68289f** | index.html / sw.js only (rebuilt) | identical (8 files) | r10e-stock-full ALL OK · r10e-saveblocked ALL OK · r10e-oldsave-noloss ALL OK (saves-r5 R3-018) · monthly-allotment ALL PASS | **PASS** 667 s (render 199/220, tab 420/439, buổi 1081/1063 ms) | **142/142** | **142/142** | **PASS e4597adf** |
 Note: LIVE moved to 15b5e1ff (robot-coop-fix-1 r2) while the tests ran — both merges are on c6c3ca76 as ordered; a new re-merge is needed before landing on 15b5e1ff.
+
+## RE-MERGE on LIVE d0ed42e4 (FROM MAIN 124 15:23Z) — E84r (tests run one at a time)
+| branch | merge sha (ff from d0ed42e4) | delta vs LIVE | own suite | quickcheck --runs 5 | coop-e2e Fold host | COOP_SWAP=1 | verdict |
+|---|---|---|---|---|---|---|---|
+| review/robot10-e-fix-5-r | **7876bf70ad2864c66ec292baf755a5e1fab32112** | identical to reviewed (index.html/sw.js conflicts only, rebuilt) | r10e-roadman ALL OK | PASS 700 s (render 230/243, tab 415/456, buổi 1099/1318 ms) | 142/142 | 142/142 | **PASS 7876bf70** |
+| review/robot10-e-fix-3-r2 | **0ed69a97b3aa2b4b0da92250635fd5a7d9e97654** | identical to reviewed | stock-full / saveblocked / oldsave-noloss ALL OK · monthly-allotment ALL PASS | PASS 678 s (render 229/240, tab 456/425, buổi 1276/1556 ms) | 142/142 | 142/142 | **PASS 0ed69a97** |
+Note: LIVE moved to eae255e2 (kit-mgboardof self-merge) during the runs.
