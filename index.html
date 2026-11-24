@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place","b":"bc15a44a5a6a","h":[{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"}]};
+window.CTM_BI={"s":"ed328dab","t":"2026-11-24T18:42Z","c":"FLIGHT-DAYQ: dawn releases only morning cards; kit day title card counts as new-day host","b":"793c66ac0274","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -25881,7 +25881,7 @@ function evGate(dry){if(!S||S.dead||window.__e68off||!Q.length)return;const sc=e
   const K=evKeys(m);const tl=sc.tpl[K.tpl],kl=sc.key[K.key];
   if((tl!=null&&now-tl<E68S.tpl)||(kl!=null&&now-kl<E68S.key)){Q.splice(i,1);i--;evDropInfo(m);continue}
   const ak=evActorKey(m);
-  const atDayStart=(S.buoi||0)===0&&!m.__held&&(hasMust||roll(50));
+  const atDayStart=(S.buoi||0)===0&&!m.__held&&(hasMust||BAL.spread.dawnOpt>=100||roll(BAL.spread.dawnOpt));/* FLIGHT-DAYQ: BAL odds (was roll(50)); roll() caps at BAL.odds.hi, so 100 = always */
   const block=keepOpt||sc.bk===b||sc.dn>=E68S.day||(ak&&ak===sc.last)||atDayStart;
   if(block){Q.splice(i,1);i--;if(EVHOLD.length<E68S.hold&&sc.dn<E68S.day+1)EVHOLD.push({m,at:now,K});else evDropInfo(m);continue}
   keepOpt=true}
@@ -37085,6 +37085,10 @@ Object.assign(BAL,{led:{court:2,cnt:"now"}});
 /* D13 spread events across buổi (jspread, owner 15/11 23:20Z): world cards shown per buổi at most cap; a card waits at most maxWait buổi
    (then shown even in a full buổi); a card whose options run code (cannot be saved; autosave held while it waits) at most codeWait buổi. */
 Object.assign(BAL,{spread:{cap:2,maxWait:4,codeWait:2}});
+/* FLIGHT-DAYQ (owner 24/11 ~18:05Z (5): "Mới sáng sớm là có sự kiện tới tìm liền ngay lập tức"): the FIRST buổi of a day (right after the title card + Tuần lục + Tin trong cung)
+   brings no event that has no fitting morning slot: dawnSlot = the buổi an unslotted world card moves to (1 = trưa); dawnOpt = odds (0..100) that an optional
+   j68 event is held at day start (was a hard-coded roll(50) in j68 evGate: half of them came at dawn). jdayq: poll = ms between looks while a turn / card is held; stale = ms a busy motion queue with no scene on screen may hold the turn. */
+Object.assign(BAL.spread,{dawnSlot:1,dawnOpt:100});Object.assign(BAL,{dayq:{poll:300,stale:10000}});
 /* NIGHT STEALING (Tranh sủng / Chặn ngự giá) — ONE CORE for the act (her and every NPC alike) and for the NPC agent's choice (jsteal.js).
    act: cost = what one try costs (feign: Đức, road: Sức); failSung = Sủng lost on a failed try; rel = thiện cảm lost both ways on a win
    (relAdd: the robbed one also gains oán rel×BAL.relOan.hurt); ghen = jealousy of the robbed consort.
@@ -74982,7 +74986,9 @@ const SP13={vo:0,L:[],stat:{plan:0,moved:0,carried:0,released:0,forced:0,void:0,
  reset(){SP13.L=[];SP13.held=0;try{if(S)S.sp13={q:[],k:-1,n:0}}catch(e){}}};
 function sp13Cap(){return BAL.spread.cap}
 /* the fitting slot of a card, or null (no preference: now if there is room) */
-function sp13Slot(m){const t=String(m.t||m.title||"").replace(/<[^>]+>/g,""),p=m.pid||"";for(const [s,rt,rp] of SP13SLOT)if(rt.test(t)||(p&&rp&&rp.test(p)))return s;return null}
+function sp13Slot(m){const t=String(m.t||m.title||"").replace(/<[^>]+>/g,""),p=m.pid||"";for(const [s,rt,rp] of SP13SLOT)if(rt.test(t)||(p&&rp&&rp.test(p)))return s;
+ /* FLIGHT-DAYQ (owner 24/11 (5)): at the first buổi of a day an unslotted world card goes to BAL.spread.dawnSlot (not at dawn, never over the book) */
+ return (S&&(S.buoi||0)===0&&BAL.spread.dawnSlot!=null)?BAL.spread.dawnSlot:null}
 function sp13Movable(m){if(!m||typeof m!=="object"||m.nl||m.mg||m.__held||m.kind==="news"||m.kind==="end")return false;
  if(/end|pcm|nlcard|death|tut/.test(m.cls||""))return false;
  /* OPTIONAL cards (j68 evOptional: visits, j68 events, merit, rewards …) are paced by the j68 scheduler (one at a time, 1 per buổi, 2 per day,
@@ -75006,6 +75012,8 @@ function sp13Release(){if(SP13.off()||!SP13.L.length)return 0;const now=SP13.now
  for(const x of SP13.L){if(x.due>now){keep.push(x);continue}
   if(!sp13Alive(x.m)){x.m.__sp13r="void";SP13.stat.void++;try{if(typeof evDropInfo==="function")evDropInfo(x.m)}catch(e){}continue}
   const lim=x.code?B.codeWait:B.maxWait;const force=now-x.b0>=lim||(x.end!=null&&now>=x.end);
+  /* FLIGHT-DAYQ: the first buổi of a day releases only cards that fit the morning (slot 0); the rest wait one more buổi unless forced */
+  if(!force&&(S.buoi||0)===0&&BAL.spread.dawnSlot!=null&&sp13Slot(x.m)!==0){x.due=now+1;keep.push(x);continue}
   if(z.n<cap||force){if(force&&z.n>=cap)SP13.stat.forced++;if(now>x.slotDue)SP13.stat.carried++;x.m.__sp13c=now;x.m.__sp13r="rel"+now;z.n++;Q.push(x.m);SP13.stat.released++;n++}
   else{x.due=now+1;keep.push(x)}}
  SP13.L=keep;sp13Sync();return n}
@@ -95980,6 +95988,72 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§91",title:"kitEn
 window.kesSample=function(t){try{const T=KE.types[t]?t:"death";const tone=KE.types[T].tone;Q.unshift({t:T==="grand"?"Đại kết cục":"Kiếp này",cls:`kes-t-${T}`,who:typeof pMe==="function"?pMe():null,
   h:`<h3>${T==="grand"?"Đại kết cục · Hiền tướng hậu cung":"Hồng nhan bạc mệnh"}</h3><p>${tone==="fest"?"Thiên hạ truyền tai: ngươi đã thành “Hiền tướng hậu cung”.":"Kiếp này khép lại."}</p>`,btn:"Đóng"});showModal()}catch(e){console.error(e)}};
 })();
+/* ================= jdayq: ONE NEW-DAY ORDER (owner 24/11 ~18:05Z flight bug (5); her standing rule OD 15/11 ~23:20Z "spread events across buổi") =================
+   Owner (f4–f6): after the Múa mini-game the «Tác phẩm tự tay · Nhận» reveal was on screen and the game jumped to the new day BEFORE she tapped «Nhận»;
+   the new day then piled everything at once: the old reward, «Tin trong cung», the Tuần lục book (already open UNDER the other popups), a «Phụ tuyến»
+   event at the first morning.
+   (a) OLD DAY FIRST: the buổi / day never turns while a big moment of the old buổi is pending — a kit motion scene (kmPush queue: kitGain «Nhận»,
+       kitReward chest/tray, edict, bloom, night card …) open or waiting. The turn is HELD (not lost): it runs by itself once the last scene is closed.
+       Forced co-op steps (COOPW.allow / allowN: the friend's world moved) are never held (one shared world). Bots: never held (no UI).
+   (b) ONE ORDER for the new day: day title card (jne kitNewDay) → Tuần lục book (j87) → only after she CLOSES the book: «Tin trong cung» first →
+       then the day's events, spread across the buổi by D13 (jspread, BAL.spread.cap per buổi) with the FIRST buổi of a new day capped at
+       BAL.spread.dawnCap world events (owner: "Mới sáng sớm là có sự kiện tới tìm liền ngay lập tức") — never on top of the book.
+       While the #dawn host (title card / book) is up, no queued card (#modal) is painted and no kit motion scene starts (j93 kmFree already waits on
+       #dawn); when it closes, the news card is moved to the front and shown; motion scenes of the new day wait until the news card is closed.
+   ONE queue for the whole family: every card that arrives at a buổi / day turn goes through Q + showModal (held here), every big moment through
+   kmPush (held by kmFree); both gates are here, in one place. Installed LAST (outermost wrappers, after every module's own). No save data, no UI,
+   no player-visible text. Numbers: BAL.dayq + BAL.spread.dawnCap (jbal2.js). Test: dev/test/dayq-order.js. Report: dev/handover/reports/day-queue.md
+   ===================================================================================================================================== */
+const DQ={want:null,t:0,mt:0,newsHold:0,stat:{held:0,ran:0,dropped:0,modalHeld:0,newsFirst:0,kmHeld:0}};
+function dqUi(){try{return !window.__bot&&typeof S!=="undefined"&&!!S&&!S.dead}catch(e){return false}}
+function dqForced(){const c=window.COOPW;return !!(c&&(c.allow||c.allowN))}
+/* the REAL hidden state of an element (jspread lets game code read #modal as open during a buổi change) */
+const DQ_HID=Object.getOwnPropertyDescriptor(HTMLElement.prototype,"hidden");
+function dqHidden(el){try{return DQ_HID&&DQ_HID.get?DQ_HID.get.call(el):el.hidden}catch(e){return true}}
+/* (a) a big moment of the old buổi still pending: a kit motion scene open (kmBusy) or queued (KMQ), a mini-game screen, the podium, the roulette */
+function dqOldPending(){try{
+  /* a scene being prepared (kitNightEnd preloads its picture before kmStage) counts too; a busy flag with no scene in the page for longer than
+     BAL.dayq.stale ms is stale (never blocks the day) */
+  if(typeof kmBusy!=="undefined"&&kmBusy){if(document.querySelector(".kmov:not(.km-out),#kmrew")){DQ.bz=0;return true}const n=Date.now();if(!DQ.bz)DQ.bz=n;if(n-DQ.bz<((BAL.dayq&&BAL.dayq.stale)||10000))return true}else DQ.bz=0;
+  if(typeof KMQ!=="undefined"&&KMQ.length)return true;
+  /* the other old-buổi screens of the family: a mini-game screen / its result (#ov), the podium (j90), the roulette */
+  const ov=document.getElementById("ov");if(ov&&!dqHidden(ov))return true;
+  if(document.getElementById("kpodov")||document.querySelector('[id^="kroul"],.kroul-ov'))return true}catch(e){}return false}
+/* (b) the new-day host (#dawn: kitNewDay title card, then the Tuần lục book) is on screen */
+function dqDawn(){try{const d=document.getElementById("dawn");if(d&&!dqHidden(d)&&(d.classList.contains("on")||d.classList.contains("kne-day")))return true;
+  /* the kit day title card (#kdaytc, review/kit-daytitle, not on main yet) counts as part of the new-day host */
+  const k=document.getElementById("kdaytc");if(k&&!dqHidden(k)&&k.getBoundingClientRect().width>0)return true;
+  return document.body.classList.contains("kbk-open")}catch(e){return false}}
+function dqIsNews(m){return !!(m&&typeof m==="object"&&(m.kind==="news"||/^Tin trong cung/.test(String(m.t||""))))}
+function dqIsEnd(m){return !!(m&&typeof m==="object"&&(m.kind==="end"||/end|death|pcm|nlcard/.test(m.cls||"")))}
+/* «Tin trong cung» first after the book (an ending / death card keeps its place) */
+function dqNewsFirst(){try{const M=$("modal");if(!Q.length||(M&&!dqHidden(M)))return;const N=Q.filter(dqIsNews);if(!N.length||Q[0]===N[0]&&Q.slice(0,N.length).every(dqIsNews))return;
+  const i=Q.findIndex(dqIsNews);if(Q.slice(0,i).some(dqIsEnd))return;Q=N.concat(Q.filter(m=>!N.includes(m)));DQ.stat.newsFirst++}catch(e){console.error("dayq news",e)}}
+function dqPoll(){return (typeof BAL==="object"&&BAL.dayq&&BAL.dayq.poll)||300}
+/* (a) the held turn runs by itself once the old buổi is finished (same buổi, nothing else open) */
+function dqWait(){if(DQ.t)return;const tick=()=>{DQ.t=0;try{const w=DQ.want;if(!w)return;if(!dqUi()||bkey()!==w){DQ.want=null;DQ.stat.dropped++;return}
+  if(dqOldPending()){DQ.t=setTimeout(tick,dqPoll());return}DQ.want=null;if(Q.length||S.mg){DQ.stat.dropped++;try{render()}catch(e){}return}DQ.stat.ran++;nextBuoi()}catch(e){console.error("dayq wait",e)}};
+ DQ.t=setTimeout(tick,dqPoll())}
+/* (b) a card held while the new-day host is up is painted once it closes */
+function dqArmModal(){if(DQ.mt)return;const tick=()=>{DQ.mt=0;try{if(!dqUi())return;if(dqDawn()){DQ.mt=setTimeout(tick,dqPoll());return}
+  dqNewsFirst();const M=$("modal");if(Q.length&&M&&dqHidden(M))showModal()}catch(e){console.error("dayq modal",e)}};DQ.mt=setTimeout(tick,dqPoll())}
+function dqInstall(){
+ /* (a) outermost nextBuoi: hold the turn while the old buổi's big moment is pending */
+ const nb=nextBuoi;nextBuoi=function(){if(dqUi()&&!dqForced()&&dqOldPending()){if(!DQ.want)DQ.stat.held++;DQ.want=bkey();dqWait();return}return nb.apply(this,arguments)};window.nextBuoi=nextBuoi;
+ /* (b) outermost showModal: nothing painted over the title card / book */
+ const sm=showModal;showModal=function(){if(dqUi()&&Q.length&&dqDawn()&&!DQ.user){DQ.stat.modalHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}return sm.apply(this,arguments)};window.showModal=showModal;
+ /* an info panel she opens herself (kitModal inside a tap / key event: a person / item / term, e.g. inside the book) is shown at once, over the book;
+    a kitModal posted by the game (no user event) waits like any card */
+ if(typeof kitModal==="function"){const km=kitModal;kitModal=function(){let u=0;try{const ev=window.event;u=ev&&/click|pointer|touch|key|mouse/.test(ev.type)?1:0}catch(e){}if(!u)return km.apply(this,arguments);DQ.user=(DQ.user||0)+1;try{return km.apply(this,arguments)}finally{DQ.user--}};window.kitModal=kitModal}}
+/* (b) the new day's motion scenes (stipend chest, rewards …) wait until «Tin trong cung» is closed */
+(function(){if(typeof kmFree!=="function")return;const kf=kmFree;kmFree=function(){if(!kf.apply(this,arguments))return false;
+ try{if(DQ.newsHold){if(dqUi()&&Q.some(dqIsNews)){DQ.stat.kmHeld++;return false}DQ.newsHold=0}}catch(e){}return true}})();
+(function(){if(typeof dawn!=="function")return;const d0=dawn;dawn=function(){try{if(dqUi())DQ.newsHold=1}catch(e){}return d0.apply(this,arguments)}})();
+/* a new life / a loaded slot drops what the old one held */
+(function(){if(typeof kmOnReset==="function")kmOnReset(()=>{DQ.want=null;DQ.newsHold=0;clearTimeout(DQ.t);clearTimeout(DQ.mt);DQ.t=DQ.mt=0})})();
+/* installed after every load-time wrapper and after the setTimeout(0) ones (jagent, jk4, jksize …): the outermost layer */
+setTimeout(()=>setTimeout(()=>{try{dqInstall()}catch(e){console.error("dayq install",e)}},0),0);
+window.DQ=DQ;
 
 /* jcoopthin: CO-OP THIN GUEST, part A = foundations (review/coop-thin-a; audit dev/handover/reports/coop-thin-guest-audit.md §2-3;
    owner GO 17/11: host-authoritative thin guest, part by part, end state = the guest only displays the host's state).
@@ -97893,7 +97967,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="bc15a44a5a6a";window.CTM_BUILD=BUILD;
+const BUILD="793c66ac0274";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
