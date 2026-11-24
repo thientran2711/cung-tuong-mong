@@ -3042,3 +3042,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (15:48Z) LC11 LANDED kit-sqopt d0ed42e4. LIVE = d0ed42e4. dialogue-vn in progress. law1 3d450d3d stale (on c6c3ca76) → B re-merge.
 - (15:50Z) kit-dialogue-vn 214c6b2c NOT landed (harness: picture-wait veil blocks taps) → order to B. LC11 moved on to kit-daytitle 3424b927.
 - (15:58Z) kit-daytitle 3424b927 NOT landed (same veil harness family) → B order extended. LC11 continues mgboardof → mgskin-wire → nochip → toilring.
+- (16:25Z) KK19 dim2 r2 + review/kit-evframe-r2 e067900f. MAIN checked every AFTER frame: rows 2/2b/3 OK (her whole + smaller, box over speaker, bg normal). NOT shown to sếp: row 1 #modal event still old layout (no evframe), row 6 §95 non-speaker too grey (OD 09:05Z «slightly softer»), row 4 reward title unreadable → KK19 fixes (kit title plate), re-shoots. evframe still HELD from LC11 until final sha.
