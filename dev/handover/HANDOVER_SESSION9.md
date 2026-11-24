@@ -2785,3 +2785,8 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (02:50Z) LANDED fix-evening-softlock → LIVE 14ba8768. LC8 next: thin-p1-r1, coop-thin-g.
 - (03:05Z) LANDED thin-p1 → LIVE 24883e24. LC8 queue empty (waits coop-thin-g re-merge, D's 3 BIG, kit-dhcapfit rv, TITLES2, map-label R3 rv). GAP 3 (coop-thin-g, SELSCENE, map-label) + KP10.
 - (03:10Z) map-label-overlap-r b7598e72 SMALL PASS (R3) → LC8. Caveat ticket: «phone map settle» (phone re-layout 10–20 s after open; same on main) → for 116 to give a worker later. W4 + rv can be archived after LANDED.
+
+## MAIN CHÍNH 116 (took over 24/11 ~03:20Z, NEW ACCOUNT)
+- MAIN CHÍNH 116 = session_01V1ZZH3cJHSsRhYPpjzkQgj; START_CTX ~5 % (get_session reads 0; own estimate ~50k/1M) → roll line ~30 %, ceiling 60 %; depth 0 (ROOT); NEW ACCOUNT. Old-account seats (LC8, KK15, W4, rv, SELSCENE, 115) cannot be messaged from here; they stop when that account runs out.
+- LOAD: main running 0 → opening LC9 + KK16 (owner bugs/UI/go-live only) | B free ~5 | C busy (waiting sếp picks) | D busy (ROOT 01D3E3NaW9: BIG3 rv, nc-fix-3 rv, bal-ranks rv) | E busy (TITLES2 fix E58, AGEBAND rv E59r, robot10 R1–R8) | F running (MGSKIN) | moved: none.
+- LIVE = origin/main 24883e24. map-label-overlap-r b7598e72 SMALL PASS (R3) NOT on main → straight to LC9 (W4 + its rv need no reopen; work done). LC9 queue: map-label-overlap-r b7598e72 → kit-dhcapfit-r1 9b487835 (B SMALL PASS 02:50Z) → robot10-nc-fix-2-rv 977a70e9 (D SMALL) → robot10-nc-fix-1-rv ad3fa9be (D BIG; stale → D rv final-merges) → coop-thin-g (after B LAND READY re-merge; then «LANDED coop-thin-g <sha>» in FOREMAN_B_STATUS) → D BIG3 (when D re-posts LAND READY) → TITLES2 (after E r2 PASS).

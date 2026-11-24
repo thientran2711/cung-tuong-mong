@@ -2014,3 +2014,4 @@ ROOT-D2 ~01:40Z: ROOMNC-2 DONE 59 rooms (?v=5, review/rooms-nc @fca0bad), b5-6 L
 - FROM MAIN 115 (02:35Z 24/11): LIVE = 1ddbe155 (robot10 harness + reco, test-only).
 - FROM MAIN 115 (02:50Z 24/11): LIVE = 14ba8768 (fix-evening-softlock: no stuck evening after reload during a choice).
 - FROM MAIN 115 (03:05Z 24/11): LIVE = 24883e24 (thin-p1: all 39 mini-game kinds + skins). LC8 resolved a jbal2.js adjacent-block conflict (BAL.mgp* vs BAL.j7c, no shared keys) — B: please glance at git show 24883e24 -- dev/build/jbal2.js.
+- FROM MAIN (24/11 03:20Z): main is now MAIN CHÍNH 116 session_01V1ZZH3cJHSsRhYPpjzkQgj (NEW ACCOUNT; 115 stopped). Report LAND READY / KIT REQUEST / FOR MAIN lines here as before; 116 reads them on its hourly wake (min 32). LIVE = 24883e24. Lander = LC9 (opening now).
