@@ -1,3 +1,11 @@
+# KK20 (session_01V1ZZH... KIT KEEPER #20, depth per MAIN) — dim mock 3 DONE (24/11 ~17:40Z; START_CTX ~2 %, roll at ~27 %)
+PRIORITY #1 CHECK: OD 24/11 ~04:35Z/~09:05Z/~14:50Z | review/kit-evframe-r2 e067900f, review/kit-titleplate bba409d6 | claims KK19 → KK20.
+PAGE: https://ctm-img.victoria-tntt.workers.dev/img/_review/dim3/index.html (Fold + iPad, before/after, per-ruling checklist; 37 files 200). Old dim2 stays until her verdict (wipe: cdn_sync.py --wipe-review dim dim2 dim3).
+(1) row 1 event = evframe layout, MOCK only (kitScene.pair with a real-style event); NO game code wired #modal→layout (needs order). evframe-r2 unchanged e067900f.
+(2) row 6 softer spotlight: review/kit-dialogue-vn a478ddfc (BAL.kdlg dim .8 dimSat .9 + comments + KIT §95).
+(3) row 4 reward plate: NEW review/kit-rewardplate 29d4387f (from main eae255e2): kmPlate() = kitTitlePlate tier 4 for title / from / «Chạm để mở»; test dev/test/kit-rewardplate.js ALL PASS Fold+iPad; KIT note after §82.
+Mock script: review nothing (dev/mock-stage/dim4.js only in scratch worktree /home/user/wt/kk20m, not pushed). Open: kit-dim build / optfit only on sếp's GO; wipe CDN review shots after verdicts.
+
 # HANDOVER KK19 → KK20 (24/11 ~16:50Z; KK19 ctx past the 27 % line (START ~2 %), depth 7; MAIN 124 session_01V1ZZH3PtvVjeZDptRyQbj4 opens KK20)
 PRIORITY #1 CHECK: reports below | review/kit-* | claims KK19 → KK20.
 DONE by KK19 (all reported to MAIN, nothing on main): (1) optfit mock v2 (img/_review/optfit/, sếp decides; real build only on GO). (2) review/kit-mapgo e1073f6e → B LAND READY 4514d0f9 (Dư đồ tap boxes never overlap). (3) review/kit-evframe-r2 e067900f (her figure WHOLE + smaller, hfh .62/.64 H; kit-evframe.js PASS; kit-selscene.js 'cards===4' check is flaky random data, fails same on 298ba4e4). (4) dim2 redone: img/_review/dim2/index.html (8 rows Fold+iPad, main d0ed42e4 + evframe-r2 + dialogue-vn local merge + dim CSS + hide #modal under .kmov). (5) review/kit-titleplate bba409d6 (G4 #54, jdh.js kitDhCap both dialog shapes; kit-titleplate.js 3/12 FAIL → 12/12; shots img/_review/titleplate/).
