@@ -16,3 +16,4 @@
 - FOR MAIN 115 (02:04Z 24/11): FOREMAN F ROOT = session_01UV1Szk8qkC1wJoEMJ1HoaD (depth 0) running. MGSKIN batch 1 started: 12 kinds × 4 skins, fixed ids xuan(dao) / ha(ngoc) / thu(kim) / dong(mac) for every kind so Foreman B's P1 wiring is one table; keys will come as «FOR MAIN MGSKIN <kind> keys» in reports/F-MGSKIN-A/B/C.md.
 WORKER F-MGSKIN-C DONE 02:10Z 11/24: ban dauho boards (8 files img/mg/); td_cong+le have no own board (inherit theu/huong skins) — keys in reports/F-MGSKIN-C.md
 WORKER F-MGSKIN-B DONE 11/24/2026 02:14Z: ve theu dan co keys in reports/F-MGSKIN-B.md (16 boards + 12 sprites on CDN img/mg/)
+WORKER F-MGSKIN-A DONE 02:17Z 11/24: hoa banh huong kim keys in reports/F-MGSKIN-A.md
