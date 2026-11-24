@@ -350,3 +350,41 @@ Proof dev/test/r10e-selfloop.js (R8-cautious-3, rank 6, lazy persona, 450 sensib
 | selfLoop | — | spyQueen ×40 buổi |
 | test | FAIL | ok |
 r10e-lesson.js (fix-2 r3 proof) on this branch: ok.
+
+### §17 add — R5 pf (pt_hai + pt_su, game 14ba8768; harness 19183dca = fix-2 r1 for skilled+random, 9e89619a = fix-2 r3m for the rest) — Foreman E 17:55Z
+| family (R5 rows) | verdict | owner / branch | proof |
+|---|---|---|---|
+| «Sủng ±N» shown vs sung=M applied (pt_su skilled-2/3/4/5: «Theo ngài lên núi» +4/+7 vs 5, «Khóc kể» +2 vs 3, «Báo tin» +4 vs 6, «Đóng cửa giữ mình» −3 vs −2) | HARNESS false positive, fixed | E-FIX-2 r2 145a1f54 (inside fix-2 r3 / fix-5-r) | the card shows HER Sủng through sgNow (the scaled amount that is applied); the r1 auditor compared it with the raw fx. Every Sủng row is from the skilled chunk on 19183dca (r1); 0 rows in the 3 chunks on r3m, 0 in R8 c3–c5 on r3m. Same option shows +4 and +7 for one fx 5 = scaling by her state, not two numbers. Co-op «Bạc +8» vs bac=20 (U16/U17/U20) = the E-FIX-2 «mỗi tháng» monthly-pay rule (§1 row) — if U* ran a harness without fix-2, same false positive; one core holds (the card's +20 = BAL.coopBribe.pay, +8 = BAL.ag.why.srv.pun.spyPay per month) |
+| speed TIMEOUT at buổi 0–12, «Bày mưu» opts (pt_su speed-2/3/4/5) | REAL, fixed LIVE | fix-hadoc-loop a8004db6 (= §17 a'') | game 14ba8768 predates it |
+| stat 101 danh/sac/duc/tai | fixed LIVE | kframe-heir 35647d5 | game 14ba8768 |
+| econ null.queen (1 life) | fixed on branch | robot10-e-fix-1 8f97171e (LAND READY) | — |
+| forced road pt_su not played (1 life) | HARNESS | E-FIX-6 row text / browser closed | — |
+| runner «Target page … closed» (6–7 lives) | harness (box) | — | browser closed mid-life |
+| Sang ngày mới after load / wall cap / save drift / mem / lag / overlaps | owned | as §17 | — |
+No new real game family in R5.
+
+### E-FIX-6 robot rerun (this branch, PAR 2, CAP 900, UIEVERY 200, Fold)
+| run | lives | TIMEOUT | new harness row | other rows |
+|---|---|---|---|---|
+| bd bd_tuyet lazy ×2 | lazy-1 CAP at year 18 rank 4 (2 948 buổi), lazy-2 death at 8.4 y (max Phi) | **0** (R8: lazy-5 TIMEOUT) | «bot re-chose an act … dropped» spyQueen ×58 (lazy-1) | known owned families only (mem, night after load, save drift, lag, mspot) |
+
+### §17 add — R2 thd (thd_tro + thd_hoc, game 14ba8768; harness main for the first 31 thd_tro lives, then fix-2 / r3m) — Foreman E 18:03Z
+| family (R2 rows) | verdict | owner / branch |
+|---|---|---|
+| speed TIMEOUT «Bày mưu ↔ Hạ độc / Hủy dung / Rút thẻ bài» (thd_tro speed-1/4, thd_hoc speed-1/2/4) | REAL, fixed LIVE (fix-hadoc-loop a8004db6) | proof below |
+| lazy TIMEOUT «Dò la: Thôi» (thd_tro lazy-3) | HARNESS | E-FIX-6 |
+| TIMEOUT «Bỏ cuộc?» opts [] (thd_tro random-1/3/4/5, speed-3) | HARNESS, fixed | E-FIX-2 kcfYes (in fix-5-r) |
+| stat 101 danh/duc/sac/tai | fixed LIVE | kframe-heir 35647d5 |
+| «Sức +6» vs suc −2 «Thay hết nước, đồ ăn» | fixed LIVE | typed-stat-bal 2308b42 |
+| browser tab crashed (renderer out of memory) thd_tro scholar-3/4/5 · runner «Target page closed» | owned (memory) / harness box | D robot10-lag |
+| ipad console.error «Access to fetch at ctm-rank…» (thd_hoc speed-4) | harness (no rank server on the box; CORS) | — |
+| Sang ngày mới / wall cap / save drift / lag / overlaps | owned | as §17 |
+
+### ONE TIMEOUT family (R2 + R5 + R8, Foreman E 18:03Z) — every «inpage6 TIMEOUT: no progress in one buổi» row
+| shape (ring / q0) | lives | cause | verdict | where fixed | proof on this branch |
+|---|---|---|---|---|---|
+| «Bày mưu» ↔ road card (speed: first option «Ra tay ngay» → «Làm như thường» → «Bày mưu» …) | R2 5, R5 4, R8 2 (all on game 14ba8768) | the two cards called each other (j70 / jtamco) | **REAL, fixed LIVE** | fix-hadoc-loop a8004db6 (j70Wants + __j70inst) | dev/test/r10e-schemeloop.js (R8-cautious-3): Hạ độc / Hủy dung / Rút thẻ bài each end after 2 cards (Bày mưu, road card) — ok |
+| «Dò la» road card → «Thôi» (lazy takes the last option) ×400 | R2 1, R8 3 | the bot re-chose its own declined act (option without L) | HARNESS | **E-FIX-6** | r10e-selfloop.js before TIMEOUT / after ok; robot rerun 0 TIMEOUT |
+| «lesson» ×400 | R1, R4, R8 c1 | j2 lesson() refuses at 100 points below level 5 | HARNESS | E-FIX-2 r3 (in fix-5-r) | r10e-lesson.js ok |
+| «Bỏ cuộc?» opts [] over a MƯU game | R2 5, R3/R4/R5/R6, R8 4 | kit confirm yes button in the body, the old harness never pressed it | HARNESS | E-FIX-2 kcfYes (in fix-5-r) | r10e-kcf.js (E-FIX-2) |
+No TIMEOUT shape is left that is a real game bug on LIVE.
