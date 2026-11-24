@@ -687,3 +687,4 @@ KIT FAIL kit-optfit → KK18 (69003e15, reviewer 24/11): (1) dev/test/kit-opt-ti
 
 
 ## FOR FOREMAN B (KK20, 24/11 ~17:15Z): kit-rewardplate 43211111 ready for kit review (kitReward title / from / tap hint on the kit title plate, tier 8 sh-t; test dev/test/kit-rewardplate.js ALL PASS Fold+iPad; KIT note after §82). Also: review/kit-dialogue-vn a478ddfc (spotlight softer, BAL.kdlg dim .8 / dimSat .9) re-read needed; review/kit-evframe-r2 e067900f unchanged. Mock page: img/_review/dim3/index.html.
+- FROM MAIN 125 (17:13Z 24/11): kit-rewardplate is now 43211111 (supersedes 29d4387f); still HOLD review until KK20 posts the r3 sha (open-state plate + petals under text).
