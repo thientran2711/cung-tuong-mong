@@ -2,10 +2,10 @@
 
 PRIORITY #1 CHECK: OD 22 (person-panel #86 option A 21/11, L1867 18/11, 23/11 ~20:20Z, 24/11 ~18:19Z) | ledger 3 | claims 5 | main 15 | review/* 0 | archive 0 → reused the kit card (`pcard`/`kitPcFix`, jk2b/jk4), `kitSubTabs`, `resultShow`/`kaResultRows`/`whyText`; nothing rebuilt.
 
-LAND READY: review/viecnho-fix d445cc9e3e5b4cd7bbb7a030d0fc459232f865bb (base 502c48c9, HEAD includes built index.html/sw.js; source commits ad4884b6, 070e249f, 0d951e9e, d445cc9e + 2 build commits)
+LAND READY: review/viecnho-fix b986538188499f79fb00dcbf1259aa6f65800734 (2nd LAND READY, supersedes d445cc9e; base 502c48c9; includes built index.html/sw.js)
 TIER (dev/tools/tier.js, run honestly): **BIG by script** — 4 "logic change (unsure)" hunks, all in player-visible TEXT builders (jwhyn.js whyWho/whyText, j63.js kaResultRows/kaWhyWho/kaWhyKem, j61.js kitNameList/k61Mask, j72.js one __kaSenOvr line). No BAL / number / save / co-op / time change. Worker's own reading: UI + text only; decision to the lander.
 KIT: KK23b «KIT OK viecnho ad4884b6» (items 1–2 kit part). Later kit edits (7.1, 85.8, tassel clear) are in KIT.md §6.4 / §6.5 / §7.1 / §85.8 — please re-confirm if required.
-QUICKCHECK PASS d445cc9e: 280 s · open 2385 ms · old save ok · perf (new/live 502c48c9, median of 3): render 294/297 ms, tab 696/652 ms, buổi 1752/1798 ms, tasks>200ms 30/27 · core gates PASS.
+QUICKCHECK PASS b9865381: 259 s · open 2134 ms · old save ok · perf (new/live, median of 3): render 276/302 ms, tab 629/611 ms, buổi 1580/3387 ms, tasks>200ms 29/25 · core gates PASS.
 Old-save: dev/test/j72c-oldsave.js ALL PASS (3 LIVE saves with open việc nhờ).
 
 ## Items
@@ -24,3 +24,9 @@ base https://ctm-img.victoria-tntt.workers.dev/img/_review/viecnho-fix/ + `{fold
 - Per-person row of the «Kèm» line stays aggregated («2 phi tần oán thêm 12–18») — unchanged kit behaviour.
 - Item 2's old scroll cue (`kpmore` fade) no longer shows on the new fixed card (thin scrollbars only); narrow `.kpnar` dialog cards keep the old flow.
 - ~85 % done / ~80 % playable (owner re-test on her Fold needed).
+
+## 2nd round (MAIN 129 feedback 23:11Z) — all fixed in b9865381
+- Kèm = ONE line per person «Tên: oán +12» / «một vị phi tần: oán +12» (kitKemRow, max 8 + «… và N người khác»); no group summary, no title copy.
+- THÀNH/BẠI stamp on the card top edge, never on words (j93 .kmseal; test asserts no overlap).
+- Đang làm with one job: no picker strip (jtabs); panel starts right under the chip row.
+- Reshot shots without popups + mid-scroll left/right (CDN img/_review/viecnho-fix/).
