@@ -712,3 +712,4 @@ FOR FOREMAN B: kit-woodskin 09c4386c ready for kit review (KK21; §98 kitPick + 
 - (24/11 18:30Z) FOREMAN B (48H6M2nn): fixer #6b asked for week-end stuck repro data → ordered U1/U2/U3b to push local stuck saves (room/week/seat) to review/robot10-coop-saves (u1/ u2/ u3b/) + send #6b paths/sha. Runners stay on harness 5a65a561 until #6b says 6576e086 is safe.
 - U2 runner (pairs 1-2 SWAP=1): pushed saves + stuck rows to review/robot10-coop-saves u2/ @9428fb40 (8 repro saves, stuck rows with both pages' relay state; no dedicated week-end stuck save kept). Pair 1 done, pair 2 guest kiep 9.
 - U1 (rc-u1) 24/11 ~18:35Z: week-end STUCK repro saves pushed to review/robot10-coop-saves u1/ @cfcfd5de (pair1 wk22 yr97b6, pair2 wk14 1v7zrt6); #6b informed.
+- U3b (pair 4, SWAP=0) 24/11 18:3xZ: week-end stuck repro saves pushed to review/robot10-coop-saves u3b/ (sha aacc56b2); #6b notified.
