@@ -1,6 +1,6 @@
 # BRIEF — ROBOT-10 CO-OP RUNNER (Foreman B, sonnet)
 PRIORITY #1 CHECK ('robot10 coop'): OD 2204–2205 | ledger 0 | claims CLAIMS «ROBOT-COOP RUNNER» rows | main dev/measure/robot10.js (solo only) | review/robot10-coop 48d1d7e1 (runner, test-only) | archive 0 — reuse the lead's runner, build nothing.
-Coordinator = Foreman B session_01N1tNP5QAMJMb8uPDHpuXza (send_message). Fixer = ROBOT-COOP lead (see reports/thin.md «## ROBOT-COOP»).
+Coordinator = Foreman B session_01N1tNP5midhoJEMbTX9TfXy (units handed to Foreman F report to Foreman F) (send_message). Fixer = ROBOT-COOP lead (see reports/thin.md «## ROBOT-COOP»).
 
 ## Read first: dev/rules/START_CORE.md (18 LAWS first) + START_WORKER.md (handover branch claude/cung-tuong-mong-handover-hj0h8w). Then reports/thin.md «## ROBOT-COOP» (usage + runtime) in full.
 
@@ -15,7 +15,7 @@ Coordinator = Foreman B session_01N1tNP5QAMJMb8uPDHpuXza (send_message). Fixer =
 
 ## Your job
 1. Own sparse worktree /home/user/wt/<your-name> from origin/review/robot10-coop (or origin/main once robot10-coop is LIVE); fetch --depth=30 under flock /home/user/wt/fetch.lock; never full-clone. python3 dev/build/assemble.py.
-2. Run ONLY your unit from the table below (your session prompt names it): setsid nohup env SWAP=<s> node dev/measure/robot10-coop.js <pFrom> <pTo> 10 /home/user/wt/<name>-out > /home/user/wt/<name>-out/run.log 2>&1 < /dev/null &   (PAR=1; the two pairs run one after the other; defaults for CAP/STUCK/RTW/REJOIN/WORKER = LIVE).
+2. Run ONLY your unit from the table below (your session prompt names it) on harness review/robot10-coop 0a9d1252 or newer, as a HARNESS-TRACKED background job (Bash run_in_background, timeout 7200000; NEVER setsid/nohup — idle containers are recycled and kill detached jobs): env SWAP=<s> SEED=1 FLUSH=2 node dev/measure/robot10-coop.js <pFrom> <pTo> 10 /home/user/wt/<name>-out > /home/user/wt/<name>-out/run.log 2>&1   (PAR=1; the two pairs run one after the other; defaults for CAP/STUCK/RTW/REJOIN/WORKER = LIVE). When it stops (2 h limit, death, restart): add RESUME=<the run .json in your out dir> to the same command (finished pairs kept, partial pair continues). Self-check every ~20 min with send_later.
 3. Every ~2 h and at the end: copy the bug file coop-*.md (+ .json) into dev/handover/robot/ on the handover branch (append-only; never edit another runner's file), push (fetch+rebase under flock; grep -rn '^<<<<<<< ' dev must be empty), and send_message Foreman B one line: unit, kiếp done, bugs (new families). Never fix game code yourself — the fixer does.
 4. A crash of the harness itself (not the game): re-run the same pair/kiếp alone once; if it repeats, report to Foreman B with the log tail.
 5. Done = all 10 kiếp of both pairs of your unit → final push + «RUNNER DONE <unit>» to Foreman B (B archives you).
@@ -27,23 +27,20 @@ Rollover: at START_CTX % + 25 % of the window (ceiling 60 %) write a HANDOVER bl
 | U1 | 1-2 | 0 | session_01N1tNP3yvoJnQ8TgBpcq5Be | RUNNING |
 | U2 | 1-2 | 1 | session_01N1tNP2VQmoYutPcH2wVYLj | RUNNING |
 | U3 | 3-4 | 0 | session_01N1tNP2fZxefqCF5gDf8nSK | RUNNING |
-| U4 | 3-4 | 1 | session_01N1tNP2J2RWyqmnHnG8Run7 | RUNNING |
-| U5 | 5-6 | 0 | session_01N1tNP6DDKAsMUF9TiY87qJ | RUNNING |
-| U6 | 5-6 | 1 | — | QUEUED (paused 06:44Z for a review seat; restart from 0) |
-| U4 | 3-4 | 1 | — | QUEUED |
-| U5 | 5-6 | 0 | — | QUEUED |
-| U6 | 5-6 | 1 | — | QUEUED |
-| U7 | 7-8 | 0 | — | QUEUED |
-| U8 | 7-8 | 1 | — | QUEUED |
-| U9 | 9-10 | 0 | — | QUEUED |
-| U10 | 9-10 | 1 | — | QUEUED |
-| U11 | 11-12 | 0 | — | QUEUED |
-| U12 | 11-12 | 1 | — | QUEUED |
-| U13 | 13-14 | 0 | — | QUEUED |
-| U14 | 13-14 | 1 | — | QUEUED |
-| U15 | 15-16 | 0 | — | QUEUED |
-| U16 | 15-16 | 1 | — | QUEUED |
-| U17 | 17-18 | 0 | — | QUEUED |
-| U18 | 17-18 | 1 | — | QUEUED |
-| U19 | 19-20 | 0 | — | QUEUED |
-| U20 | 19-20 | 1 | — | QUEUED |
+| U4 | 3-4 | 1 | — | → FOREMAN F (ORDER MAIN 119 07:58Z) |
+| U5 | 5-6 | 0 | — | → FOREMAN F (ORDER MAIN 119 07:58Z) |
+| U6 | 5-6 | 1 | — | → FOREMAN F (ORDER MAIN 119 07:58Z) |
+| U7 | 7-8 | 0 | — | → FOREMAN F (ORDER MAIN 119 07:58Z) |
+| U8 | 7-8 | 1 | — | → FOREMAN F (ORDER MAIN 119 07:58Z) |
+| U9 | 9-10 | 0 | — | → FOREMAN F (ORDER MAIN 119 07:58Z) |
+| U10 | 9-10 | 1 | — | → FOREMAN F (ORDER MAIN 119 07:58Z) |
+| U11 | 11-12 | 0 | — | → FOREMAN F (ORDER MAIN 119 07:58Z) |
+| U12 | 11-12 | 1 | — | → FOREMAN F (ORDER MAIN 119 07:58Z) |
+| U13 | 13-14 | 0 | — | → FOREMAN F (ORDER MAIN 119 07:58Z) |
+| U14 | 13-14 | 1 | — | → FOREMAN F (ORDER MAIN 119 07:58Z) |
+| U15 | 15-16 | 0 | — | → FOREMAN F (ORDER MAIN 119 07:58Z) |
+| U16 | 15-16 | 1 | — | → FOREMAN F (ORDER MAIN 119 07:58Z) |
+| U17 | 17-18 | 0 | — | → FOREMAN F (ORDER MAIN 119 07:58Z) |
+| U18 | 17-18 | 1 | — | → FOREMAN F (ORDER MAIN 119 07:58Z) |
+| U19 | 19-20 | 0 | — | → FOREMAN F (ORDER MAIN 119 07:58Z) |
+| U20 | 19-20 | 1 | — | → FOREMAN F (ORDER MAIN 119 07:58Z) |
