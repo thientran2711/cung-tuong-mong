@@ -16,3 +16,5 @@ BUG FAMILY «guest life never ends» (seat X guest Fold, pair 7, SEED=1 SWAP=1, 
 
 ## Update 16:30Z pair 8 (coop-p08s-S1, fu8-out8, file coop-20261124-1426-p8-8-s.*)
 Same family, opposite seat: after 2 h guest X (Fold) has 3 kiếp, host Y (iPad) only 1 (bd/bd_tuyet) and its kiếp 2 not ending. So «one seat's life never ends while the other seat cycles» hits either seat; room keeps stepping weeks (room NUQH 34 weeks, turn p95 66 s, stuck). Pair 8 resumed (2nd job).
+
+## Check 18:27Z (pair 8, 4 h in): guest 7 kiếp (weeks 6,16,26,9,24,28,39), host 3 kiếp (weeks 25, 152, 152). Host kiếp 2 ran to week 152 (76 min) before ending; host kiếp 3 ended at week 152 in 0 min (suspicious: same week count, looks like the previous life's counter). The never-ending host life = host kiếp 2, reached week 152.
