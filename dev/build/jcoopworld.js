@@ -441,6 +441,14 @@ function rosterFriend(f){try{const R=S.roster;if(!R||!R.P||typeof j95kh!=="funct
    module has loaded) fills the friend's rows with S.where (her place this buổi) or her palace. */
 function friendPl(f){if(CW.ctx){const o=CW.thin&&CW.thin.outerS;return o&&o.place&&o.place!=="home"?mapPlace(o.place):palaceOf(f)}const h7=herPl7();const pl=h7?mapPlace(h7):CW.fpos&&CW.fpos.week===wk()&&CW.fpos.buoi===(S.buoi||0)?mapPlace(CW.fpos.place):null;return pl||palaceOf(f)}
 setTimeout(()=>{try{if(typeof j95planRival!=="function"||j95planRival.__cwF)return;const f0=j95planRival;j95planRival=function(v,c){const P=f0.apply(this,arguments);try{if(CW.on&&S&&isF(v)&&Array.isArray(P)){const w=friendPl(v),a=w===palaceOf(v)?"rest":"visit";for(let i=0;i<P.length;i++)P[i]=[w,a,null,""]}}catch(e){}return P};j95planRival.__cwF=1}catch(e){console.error("j95planRival coop wrap",e)}},0);
+/* robot-coop-fix-3 r3 (A/B round 5 «guest sees host at r5, host is at r3» at buổi 6.0 with her S.where = r3): her roster rows are planned / written
+   by NPC code after her relay (a new week's plan before her first relay of the week, j95 approach, jagknow ag_see, jagday rq), and whereOf reads
+   the roster first (j95 wrap) — so the place the game showed for her was an NPC plan again. Where she IS comes from ONE rule on every reader:
+   the OUTERMOST whereOf (installed after every module) answers for the friend with her relayed place S.where (onPos / keepFriendPos), else friendPl. */
+setTimeout(()=>{try{if(typeof whereOf!=="function"||whereOf.__cwF)return;const w0=whereOf;whereOf=function(p){try{if(CW.on&&S&&p&&p!==S&&isF(p)&&!(typeof HA==="object"&&HA&&HA.here&&HA.here[p.id]!=null)/* jagharm: a harm landing on her right now keeps its own spot */){const w=(S.where||{})[p.id];return w||friendPl(p)}}catch(e){}return w0.apply(this,arguments)};whereOf.__cwF=1}catch(e){console.error("whereOf coop wrap",e)}
+ /* the rows too (j95 at(), «who sees whom», catches, jagent / jagday read R.P rows directly): j95sync is the hub every roster planner and writer
+    calls (new plan, approach, ag_see …); after it her rows say S.where again (rosterFriend: from this khắc on) */
+ try{if(typeof j95sync==="function"&&!j95sync.__cwF){const s0=j95sync;j95sync=function(){const r=s0.apply(this,arguments);try{if(CW.on&&S&&S.where){const f=friendEntry();if(f&&S.where[f.id])rosterFriend(f)}}catch(e){}return r};j95sync.__cwF=1}}catch(e){console.error("j95sync coop wrap",e)}},0);
 CW.keepFriendPos=keepFriendPos;CW.refreshHere=()=>refreshHere();
 function onBuoi(m){T("onBuoi "+m.week+"."+m.buoi+" me "+wk()+"."+(S&&S.buoi)+" Q"+Q.length+(S&&S.mg?" mg":""));if(!CW.on||!S||eW())return;CW.bend=false;CW.wantB=null;drainAg();
  /* the room moved on: if a dialog is still open, step as soon as it is closed */
