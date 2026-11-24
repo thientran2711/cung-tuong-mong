@@ -1567,3 +1567,4 @@ face-master03 Gentle (ages 16/26/51/63; sonnet) | Magnific only, report reports/
 face-master03 Proud (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-proud.md | session_01D3E3NZBMJvJ42NGMXAhPWA | RUNNING | 24/11 21:29Z | FOREMAN D
 face-master03 Sharp (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-sharp.md | session_01D3E3NaxuWFpancQEoeisKM | RUNNING | 24/11 21:29Z | FOREMAN D
 | face-master03 ALLURING (sonnet; brief briefs/D-face-master03-mass.md; ages 16/26/51/63, 72 jobs, age 39 HOLD) | reports/face-master03-alluring.md (Magnific only, no code branch) | D | session_01D3E3NZd7bPaP9p5vL5dyKi | RUNNING | 24/11 21:30Z |
+| FACE-MASTER03 PROUD (sonnet worker; ages 16/26/51/63, 15 people=60 jobs) | handover: dev/handover/reports/face-master03-proud.md | D | session_01D3E3NZBMJvJ42NGMXAhPWA | RUNNING | 24/11 21:31Z |
