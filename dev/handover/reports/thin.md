@@ -55,3 +55,32 @@ Not drawn in play (kept in data only): the story-line part of the banh recipe (n
 **SKINS:** `mgpSkin(kind)` + `MGP_SKIN` registry ready (family `mgskin:<kind>`); kg82 «skin» slot NOT on main → KIT_REQUESTS.md «MINI-GAME SKIN SLOT» filed. No MGSKIN keys from Foreman C yet. FOR MAIN: kit keeper needs the slot; C's keys img/mg/<kind>-<skin>.webp.
 **REMAINING (30 kinds):** dan co dauho ban doi doden theu mua chai hoadien co7 tc xa thq doi and the sg_/thu_/tuoi kinds, exam kinds — most are random seeds of a fixed mechanic; need an engine-by-engine pass (each: pool ≥40, draw via mgpOne). Not started.
 **HANDOVER (if rolled):** next worker continues from review/thin-p1 b43fe174, re-merges review/thin-p0 on each ENGINE push, adds `mgpGen<Kind>` + `MGP_GEN[kind]` in jmgpool.js, wires the engine's random pick to `mgpOne(kind,used,filter)` (reset `used` per game), extends dev/test/mg-pool.js + mg-pool-play.js KINDS.
+
+## P1c
+PRIORITY #1 CHECK ('no-repeat|e68h|mgskin|thin-'): OD 8 | ledger 0 | claims 8 | main 15 | review/* 10 | archive 0 — reused jnorep (P0) + jmgpool.js API (mgpOne/mgpRng); nothing rebuilt. Worker sonnet P1c = session_01N1tNP43Y5prdNW2dvC5otW, START_CTX ~5 % (est.). Branch **review/thin-p1c** from review/thin-p1 b43fe174. My files: `dev/build/jmgpool_c.js` (after jmgpool.js in assemble.py), `dev/test/mg-pool-c.js` + `mg-pool-c-play.js`, BAL block `BAL.mgpc` (jbal2.js, own line). jmgpool.js untouched (I only add `MGP_GEN.<kind>` from my own file).
+**39 KIND LIST (KG82_KIND of the built page, 39 keys) with owner lane:**
+| lane | kinds |
+|---|---|
+| P1 #2 (DONE, b43fe174) 9 | hat hoa banh huong ve kim tho le td_cong |
+| P1b 14 | dan co dauho ban doi doden theu mua chai hoadien co7 tc xa thq |
+| **P1c (me) 16** | td_dung td_ngon td_hanh duho den tat ne kinh may nghe truyen mac thoico thu_tam thu_choi tuoi |
+Check: 9+14+16 = 39, no kind twice. (The sg_* kinds are nghe/truyen/mac/thoico; thu_* = thu_tam/thu_choi; exam kinds le/tc/xa/thq are in lanes above.)
+**P1c PLAN per kind** — POOL = board shows different content/layout to the player → ≥40 composed items drawn via mgpOne; NO POOL = the board has no content a player can tell apart.
+| kind | verdict |
+|---|---|
+| nghe | POOL: secret-word triple × decoys × line templates × small talk (all from SG_KW/SG_IMP/SG_FILL parts) |
+| truyen | POOL: seeded courtier graph (role order × trust edges), same generator as sgGraph |
+| td_ngon | POOL: 5-turn sitting (speaker by class × mood × talk length) |
+| td_hanh | POOL: 3 alms rounds (people × need × pool) composed from people parts |
+| kinh | POOL: sutra rows (stroke-move library × layout), 4 drawn per game |
+| may | POOL: seams (cut library × layout), 4 drawn per game |
+| duho | POOL: lotus lake script (lane, size, gap sequence) |
+| den | POOL: lotus-pad script on the river (position, size, gap) |
+| td_dung | POOL: sway script (kick side/strength order) |
+| mac | no pool: her price threshold comes from the REAL maid (loyalty + temper by name, law 6); the board shows no authored content |
+| thoico | no pool: one attention wave (two frequencies + phase), no content; pure timing |
+| tat / ne | no pool: one needle on a ruler (phase only); pure timing |
+| thu_tam | no pool: strokes on HER pet's own picture; no authored content |
+| thu_choi | no pool: three identical buttons, a lit one at random; no content |
+| tuoi | no pool: water level on HER plant; no authored content |
+(Rows/choices may change as I read each engine; the final verdict per kind is in «P1c RESULT» below.)
