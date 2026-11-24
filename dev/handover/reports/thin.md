@@ -65,22 +65,31 @@ PRIORITY #1 CHECK ('no-repeat|e68h|mgskin|thin-'): OD 8 | ledger 0 | claims 8 | 
 | P1b 14 | dan co dauho ban doi doden theu mua chai hoadien co7 tc xa thq |
 | **P1c (me) 16** | td_dung td_ngon td_hanh duho den tat ne kinh may nghe truyen mac thoico thu_tam thu_choi tuoi |
 Check: 9+14+16 = 39, no kind twice. (The sg_* kinds are nghe/truyen/mac/thoico; thu_* = thu_tam/thu_choi; exam kinds le/tc/xa/thq are in lanes above.)
-**P1c PLAN per kind** — POOL = board shows different content/layout to the player → ≥40 composed items drawn via mgpOne; NO POOL = the board has no content a player can tell apart.
-| kind | verdict |
-|---|---|
-| nghe | POOL: secret-word triple × decoys × line templates × small talk (all from SG_KW/SG_IMP/SG_FILL parts) |
-| truyen | POOL: seeded courtier graph (role order × trust edges), same generator as sgGraph |
-| td_ngon | POOL: 5-turn sitting (speaker by class × mood × talk length) |
-| td_hanh | POOL: 3 alms rounds (people × need × pool) composed from people parts |
-| kinh | POOL: sutra rows (stroke-move library × layout), 4 drawn per game |
-| may | POOL: seams (cut library × layout), 4 drawn per game |
-| duho | POOL: lotus lake script (lane, size, gap sequence) |
-| den | POOL: lotus-pad script on the river (position, size, gap) |
-| td_dung | POOL: sway script (kick side/strength order) |
-| mac | no pool: her price threshold comes from the REAL maid (loyalty + temper by name, law 6); the board shows no authored content |
-| thoico | no pool: one attention wave (two frequencies + phase), no content; pure timing |
-| tat / ne | no pool: one needle on a ruler (phase only); pure timing |
-| thu_tam | no pool: strokes on HER pet's own picture; no authored content |
-| thu_choi | no pool: three identical buttons, a lit one at random; no content |
-| tuoi | no pool: water level on HER plant; no authored content |
-(Rows/choices may change as I read each engine; the final verdict per kind is in «P1c RESULT» below.)
+**P1c RESULT (review/thin-p1c, code pushed; sha in the DONE line below).** New `dev/build/jmgpool_c.js` (assemble.py after jmgpool.js), `BAL.mgpc` (jbal2.js, own line), tests `dev/test/mg-pool-c.js` + `mg-pool-c-play.js`. jmgpool.js untouched. P0 merged (00b3a4ec).
+| kind | verdict | pool | what a player sees differ |
+|---|---|---|---|
+| nghe | POOL | 120 (every triple of the 10 secret words once × shuffled decoys / line templates / small talk) | «Cần nghe: …» words, the lines |
+| td_hanh | POOL | 150 (three alms rounds: people from need-tier parts, same people count / needs / pool as today = same difficulty) | who stands in the line |
+| kinh | POOL | 360 sutra rows (3–4 brush moves from a 6-move library × band layout), 4 drawn per game | the strokes to copy |
+| may | POOL | 350 seams (7 seam families × 50 variants), 4 drawn per game | the seam lines to sew |
+| td_ngon | no pool: already 11 speakers × 4 moods = 44 boards, order random per sitting; a pool of whole sittings only adds repeats |
+| truyen | no pool: the courtier web is generated fresh each round (roles × threads), effectively never the same twice; a 60-web pool measured 44 % repeats at 6 games/life (before 0 %) |
+| duho / den / td_dung | no pool: lotus run / lotus pads / sway order are continuous random layouts, unique every play; a 60-item pool measured 8 / 11 / 11 % repeats where today is 0 % → pooling would make it worse |
+| mac | no pool: her price threshold comes from the REAL maid (loyalty + temper by name, law 6) |
+| thoico | no pool: one attention wave (two frequencies + phase), pure timing |
+| tat / ne | no pool: one needle on a ruler (phase only), pure timing |
+| thu_tam | no pool: strokes on HER pet's own picture |
+| thu_choi | no pool: three identical buttons, one lit at random |
+| tuoi | no pool: water level on HER plant |
+Engines edited (each: draw once per game via `mgpc1/mgpcMany` = mgpOne with a fresh `used`, old random path kept when the pool is empty): jsgame sgNghe · jtd kgTdAlms · jwkg kwkTrace (+kwkFig: parameters → curves).
+**NO-REPEAT MEASURE** `GAMES=6 node dev/test/mg-pool-c.js --measure` (6 lives × 6 games, draws per game as the engine; repeat % = shown before this life or the 5 lives before; before = uniform over today's boards: nghe 120 triples, td_hanh 1 fixed set, kinh/may 5 rows):
+| kind | boards before | pool after | repeat % before | repeat % after |
+|---|---|---|---|---|
+| nghe | 120 | 120 | 8 | 0 |
+| td_hanh | 1 | 150 | 97 | 0 |
+| kinh | 5 | 360 | 97 | 0 |
+| may | 5 | 350 | 97 | 0 |
+At 12 games/life: nghe 28→0 · td_hanh 99→0 · kinh 98→0 · may 98→0. (Note: P1 #2's measure calls nrLife twice per life, so its «after» numbers are slightly high; mine does not.)
+**GATES:** mg-pool-c ALL PASS (size ≥ BAL.mgp.min, ids unique, nghe triples all different + line mix as engine, td_hanh shape = TD_ALMS, no digits/%, kinh/may strokes inside the square and long enough, 4 draws per game all different) · mg-pool-c-play 4/4 (each engine opens 10×, no throw, draws marked in ctm-nr; kinh/may 4 figures per game) · mg-pool-play 9/9 (lane P1 #2 unchanged) · mg-allkinds 13/13 · undef-scan PASS · norep-unit ALL PASS.
+**SHOTS** Fold 755x1000 + iPad 1180x820, 3 items per pooled kind (nghe td_hanh kinh may), contact sheets LOOKED: nghe different words/lines, td_hanh different people, kinh/may different strokes. Scratch only (not on CDN, not in git).
+**FOR P1b:** my pooled engines touch jsgame.js / jtd.js / jwkg.js only (no overlap with your kinds' engines except none); built index.html/sw.js must be rebuilt after merging (`bash dev/site/build_site.sh`).
