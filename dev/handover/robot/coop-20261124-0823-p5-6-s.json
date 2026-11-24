@@ -5689,6 +5689,7 @@
      "room": "UVK2",
      "ms": 550419,
      "week": 27
+<<<<<<< HEAD
     },
     {
      "seat": "host",
@@ -13115,6 +13116,8 @@
      "room": "N74W",
      "ms": 1170663,
      "week": 49
+=======
+>>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
     }
    ],
    "lag": {
@@ -13852,6 +13855,7 @@
         "errs": 0
        }
       }
+<<<<<<< HEAD
      },
      {
       "year": 3,
@@ -14058,6 +14062,8 @@
         "errs": 0
        }
       }
+=======
+>>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
      }
     ],
     "rooms": [
@@ -16343,8 +16349,13 @@
       "code": "UVK2",
       "host": "Y",
       "t0": 1795515847449,
+<<<<<<< HEAD
       "weeks": 128,
       "buoi": 520,
+=======
+      "weeks": 68,
+      "buoi": 267,
+>>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
       "turns": [
        {
         "k0": "0:1",
@@ -17645,6 +17656,7 @@
         "k0": "65:0",
         "k1": "66:0",
         "ms": 34645
+<<<<<<< HEAD
        },
        {
         "k0": "65:0",
@@ -18906,10 +18918,19 @@
        "t": 1795519463444,
        "turns": [],
        "year": null
+=======
+       }
+      ],
+      "yr": {
+       "t": 1795517638499,
+       "turns": [],
+       "year": 3
+>>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
       },
       "whereDiff": 0,
       "posDiff": 0,
       "statLag": 0,
+<<<<<<< HEAD
       "cmp": 536,
       "min": 60.3,
       "turnP95": 34266
@@ -19501,6 +19522,9 @@
       "posDiff": 0,
       "statLag": 0,
       "cmp": 268
+=======
+      "cmp": 283
+>>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
      }
     ],
     "rejoin": [
@@ -19533,6 +19557,7 @@
       "room": "UVK2",
       "week": 6,
       "ms": 6500
+<<<<<<< HEAD
      },
      {
       "room": "N74W",
@@ -19544,6 +19569,14 @@
    "rooms": 8,
    "t": {
     "total": 12463669
+=======
+     }
+    ]
+   },
+   "rooms": 7,
+   "t": {
+    "total": 9078117
+>>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
    },
    "partial": true,
    "bugs": [
@@ -19551,7 +19584,11 @@
      "type": "save",
      "msg": "save→load→save changes the state (host)",
      "detail": "save.S.visit.people.0.__feelMig: 1 → undefined",
+<<<<<<< HEAD
      "n": 80,
+=======
+     "n": 48,
+>>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
      "at": "coop-p05s-S1",
      "saveFile": "saves/coop-20261124-0823-p5-6-s-ta5rfc.json"
     },
@@ -19559,7 +19596,11 @@
      "type": "save",
      "msg": "save→load→save changes the state (guest)",
      "detail": "save.S.visit.people.1.kind (text differs at char 0): «…rival» → «…elder»",
+<<<<<<< HEAD
      "n": 80,
+=======
+     "n": 48,
+>>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
      "at": "coop-p05s-S1"
     },
     {
@@ -19588,21 +19629,33 @@
      "type": "lag",
      "msg": "co-op LAG budget miss: coopTurnP95",
      "detail": "coopTurnP95 42106 > 10000 · game year 1 · room NUDK · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":795.9,\"upKB\":2396,\"dnKB\":694,\"posFlip\":null,\"resend\":43,\"resendBy\":{\"act\":41,\"pos\":1,\"where\":1},\"longTasksPerMin\":221.8,\"longTaskMax\":1741,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":771.4,\"upKB\":1707,\"dnKB\":1288,\"posFlip\":null,\"resend\":39,\"resendBy\":{\"act\":35,\"pos\":4},\"longTasksPerMin\":275.6,\"longTaskMax\":2006,\"errs\":0}}",
+<<<<<<< HEAD
      "n": 18,
+=======
+     "n": 14,
+>>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
      "at": "coop-p05s-S1"
     },
     {
      "type": "lag",
      "msg": "co-op LAG budget miss: coopSyncKBMax",
      "detail": "coopSyncKBMax 179.2 > 100 · game year 1 · room NUDK · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":795.9,\"upKB\":2396,\"dnKB\":694,\"posFlip\":null,\"resend\":43,\"resendBy\":{\"act\":41,\"pos\":1,\"where\":1},\"longTasksPerMin\":221.8,\"longTaskMax\":1741,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":771.4,\"upKB\":1707,\"dnKB\":1288,\"posFlip\":null,\"resend\":39,\"resendBy\":{\"act\":35,\"pos\":4},\"longTasksPerMin\":275.6,\"longTaskMax\":2006,\"errs\":0}}",
+<<<<<<< HEAD
      "n": 16,
+=======
+     "n": 12,
+>>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
      "at": "coop-p05s-S1"
     },
     {
      "type": "lag",
      "msg": "co-op buổi stall (both ready, the room took > 30 s or never stepped)",
      "detail": "4 of 21 buổi in game year 1",
+<<<<<<< HEAD
      "n": 16,
+=======
+     "n": 13,
+>>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
      "at": "coop-p05s-S1"
     },
     {
@@ -19617,7 +19670,11 @@
      "type": "stuck",
      "msg": "co-op room stuck: no room week step in 240 s",
      "detail": "host {\"buoi\":3,\"week\":23,\"bend\":false,\"pendBuoi\":null,\"pend\":false,\"sent\":22,\"Q\":0,\"Qt\":[],\"mh\":true,\"mg\":false,\"dead\":false,\"next\":true,\"title\":false,\"st\":\"open\",\"peer\":true} || guest {\"buoi\":3,\"week\":23,\"bend\":false,\"pendBuoi\":null,\"pend\":false,\"sent\":22,\"Q\":0,\"Qt\":[],\"mh\":true,\"mg\":false,\"dead\":false,\"next\":true,\"title\":false,\"st\":\"open\",\"peer\":true}",
+<<<<<<< HEAD
      "n": 6,
+=======
+     "n": 5,
+>>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
      "at": "coop-p05s-S1",
      "shots": [
       "shots/coop-p05s-S1-r1-host-stuck.png",
@@ -19629,7 +19686,11 @@
      "type": "lag",
      "msg": "one buổi change took over 3 s (bot page, render off)",
      "detail": "3219 ms @ năm 1 th8 t1 b0 (buổi #45) @ năm 1 th8 t1 b0 (buổi #45) · guest fold",
+<<<<<<< HEAD
      "n": 2,
+=======
+     "n": 1,
+>>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
      "at": "coop-p05s-S1",
      "saveFile": "saves/coop-20261124-0823-p5-6-s-1bo6v9z.json"
     },
@@ -19653,6 +19714,7 @@
      "detail": "room 37P6",
      "n": 1,
      "at": "coop-p05s-S1"
+<<<<<<< HEAD
     },
     {
      "type": "number",
@@ -19661,6 +19723,8 @@
      "n": 2,
      "at": "coop-p05s-S1",
      "saveFile": "saves/coop-20261124-0823-p5-6-s-1amynil.json"
+=======
+>>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
     }
    ]
   }

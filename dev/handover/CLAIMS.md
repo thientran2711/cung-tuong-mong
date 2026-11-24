@@ -1451,7 +1451,7 @@ REVIEW promo-build 7c4116de (opus BIG; briefs/D-promo-build-review.md) | review/
 | DLG WRITER W7+W8+W9 (j68_d_ky, j7_wc, j70_j71; sonnet; lead 5NjXSPTa) | review/sideline-dlg content | B | session_01N1tNP3N2JkydSHBdWnPP2o | RUNNING | 24/11 07:58Z |
 | RV map-fix-2 SMALL (sonnet; c87a40e1) | review/map-fix-2-r1; reports/map-perf.md | MAIN 119 | session_01V1ZZH2u9H72DTLghtdArxu | PASS ac4790f0, LAND READY → LC10, ARCHIVED | 24/11 07:48Z |
 | LEAVE-PALACE FIX r1 E74 (opus BIG; E72r FAIL 37a862be 3 items; briefs/E74-leave-palace-fix.md) | review/leave-palace-r ea730f77; reports/leave-palace.md «FIX r1» + kpGate addendum | FOREMAN E (child3) | session_01DgYSWoQonzS3XKxd5Bc8WS | DONE: SẴN SÀNG KIỂM ea730f77 | 24/11 08:16Z |
-| ROBOT FIXER cnv families (opus; ORDER MAIN 119 07:40Z; briefs/F-robot-fixer.md) | review/robot-fix-cnv; reports/robot-fix-cnv.md | F | session_01UV1SzhQegCd1j7H5GHPzMo | RUNNING | 24/11 08:20Z |
+| ROBOT FIXER cnv families (opus; ORDER MAIN 119 07:40Z; briefs/F-robot-fixer.md) | review/robot-fix-cnv; reports/robot-fix-cnv.md | F | session_01UV1SzhQegCd1j7H5GHPzMo | SSK 1f046fb7 + HANDOVER (successor by F) | 24/11 08:20Z |
 | ROBOT-COOP RUNNER U4 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U4-* | F | session_01UV1Szh9vtuLGWyG8DpJArr | RUNNING | 24/11 08:20Z |
 | ROBOT-COOP RUNNER U5 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U5-* | F | session_01UV1SzjjFvKxvNJDS3Tom9F | RUNNING | 24/11 08:20Z |
 | ROBOT-COOP RUNNER U6 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U6-* | F | session_01UV1SziPWFp447pcaYdp9tB (depth 2) | RUNNING | 24/11 08:20Z |
@@ -1477,13 +1477,21 @@ SERVANT TRUST — acts toward another person's people (opus BIG; MAIN 119 07:58Z
 | REVIEW E77r MOMENT r1 BIG (opus; briefs/E77r-review-moment-r1.md) of 1d2189f3 | review/moment-r2; reports/moment-review-r2.md | FOREMAN E (child3) | session_01DgYSWopEScRoLUDyxAoR6m | DONE: PASS 8792f09a (LAND READY) | 24/11 09:51Z |
 | SELSCENE-8 fix RV-SELX FAIL (opus; briefs/M121-selscene-fix.md) | review/selection-scene; reports/selection-scene.md | MAIN 121 | session_01V1ZZH42fkgxtS3ig7ApDFE | ROLLED 2d7e55da → SELSCENE-9 | 24/11 09:30Z |
 | REVIEW E78r robot10-e-fix-2 r2 SMALL (sonnet; briefs/E78r-review-robot-fix2-r2.md) of 145a1f54 | reports/robot10-fix12-review.md | FOREMAN E (child3) | session_01DgYSWoMwdxE3vbLg9RaC8a | DONE PASS 145a1f54 | 24/11 09:35Z |
+<<<<<<< HEAD
 | REVIEW E79r LEAVE-PALACE r1 BIG (opus; briefs/E79r-review-leave-palace-r1.md) of ea730f77 | review/leave-palace-r2; reports/leave-palace-review-r2.md | FOREMAN E (child3) | session_01DgYSWmgnAggZbjFVCTvkKj | DONE PASS 87f6480b; r3 PASS 8d93c027 (on LIVE 178cac37) | 24/11 09:40Z |
+=======
+| REVIEW E79r LEAVE-PALACE r1 BIG (opus; briefs/E79r-review-leave-palace-r1.md) of ea730f77 | review/leave-palace-r2; reports/leave-palace-review-r2.md | FOREMAN E (child3) | session_01DgYSWmgnAggZbjFVCTvkKj | DONE PASS 87f6480b | 24/11 09:40Z |
+>>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
 kit-optinfo SMALL review | review/kit-optinfo-r1 | session_01N1tNP3WNbdFEbb19kfqAVR (owner B) | RUNNING | 24/11 09:44Z
 robot-coop-fix-1 r2 BIG review | review/robot-coop-fix-1-r2 | session_01N1tNP2xZQymfgL6TKgMEcP (owner B) | RUNNING | 24/11 09:45Z
 | SELSCENE-9 (opus; successor of SELSCENE-8; briefs/M121-selscene-fix.md + SUCCESSOR NOTE) | review/selection-scene (from 2d7e55da); reports/selection-scene.md | MAIN 121 | session_01V1ZZH4SR1QdLaT7aXu5hUu | RUNNING | 24/11 09:56Z |
 rv servant-trust | review/servant-trust-rv | session_01D3E3NZh6xm1S3xPV8XpuMW | RUNNING | 24/11 09:57Z (Foreman D depth 2)
 | REVIEW E80r robot10-e-fix-2 r3 SMALL (sonnet; briefs/E80r-review-robot-fix2-r3.md) of 0673d1a1 | review/robot10-e-fix-2-r3m; reports/robot10-fix12-review.md | FOREMAN E (child3) | session_01DgYSWkoafyYG9Rp7ZDWTCf | DONE PASS 9e89619a92f29091bc1e40a5221d75cce768916a | 24/11 10:06Z |
+<<<<<<< HEAD
 | REVIEW E81r robot10-e-fix-3 BIG (opus; briefs/E81r-review-robot-fix3.md) of e1ee6041 | review/robot10-e-fix-3-r; reports/robot10-fix3-review.md | FOREMAN E (child3) | session_01DgYSWnaebLfT2YjJ9ZWjc8 | DONE: r1 FAIL e1ee6041 (3); r2 FAIL 434a4a30 (2); r3 FAIL f0a5f92c (1: law-1 stock), merge review/robot10-e-fix-3-r 183fb7e9 | 24/11 10:06Z |
+=======
+| REVIEW E81r robot10-e-fix-3 BIG (opus; briefs/E81r-review-robot-fix3.md) of e1ee6041 | review/robot10-e-fix-3-r; reports/robot10-fix3-review.md | FOREMAN E (child3) | session_01DgYSWnaebLfT2YjJ9ZWjc8 | DONE: FAIL e1ee6041 (3 items), merge review/robot10-e-fix-3-r 75ef5d60 | 24/11 10:06Z |
+>>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
 | robot10 E FIXER #3 successor (opus BIG; briefs/E-robot10-fixer.md + reports/robot10-E-fixer.md HANDOVER + ADDENDUM) | review/robot10-e-fix-3 (+ -4…); reports/robot10-E-fixer.md | FOREMAN E (child3) | session_01DgYSWogKvvnwna26yqXVT5 | ROLLED (handover §10) | 24/11 10:58Z |
 fix net-build r1 | review/net-build-rv | session_01D3E3NXVfZy3ocFNYujBsPy | RUNNING | 24/11 10:08Z (Foreman D depth 2)
 rv promo-build-2 | review/promo-build-2-rv | session_01D3E3NXxkVhTabMxB4z4ood | RUNNING | 24/11 10:09Z (Foreman D depth 2)
@@ -1494,6 +1502,7 @@ FIX servant-trust r1 (opus BIG; briefs/D-servant-trust-fix.md; from c8d35899) | 
 robot-coop-fix-2 BIG review | review/robot-coop-fix-2-r1 | session_01N1tNP53Ngf1bGuVAWcQEy5 (owner B) | RUNNING | 24/11 10:57Z
 ROBOT-COOP fixer #4 (fix-3, onecore) | review/robot-coop-fix-3, review/robot10-onecore | session_01N1tNP2dfra9gDdChCWdbcB (owner B) | RUNNING | 24/11 10:57Z
 | SELSCENE-10 (opus; successor of SELSCENE-9; briefs/M121-selscene-fix.md + SUCCESSOR NOTE 2) | review/selection-scene (from 726a633d); reports/selection-scene.md | MAIN 121 | session_01V1ZZH1JJGHVDhysWHZsvWq | RUNNING | 24/11 11:05Z |
+<<<<<<< HEAD
 | KK19 kit keeper (sonnet; successor of KK18; HANDOVER top of reports/MOCK-STAGE.md) | review/kit-* | MAIN 122 | session_01V1ZZH551R5eFMgZWLvawik | RUNNING | 24/11 11:17Z |
 rv servant-trust r2 (opus BIG; briefs/D-servant-trust-review-r2.md; target 2c1c2bfc) | review/servant-trust-rv | session_01D3E3NbdduX9tP1Nv41ptUk | RUNNING | 24/11 11:41Z (Foreman D depth 3)
 FIX promo-build-2 r1 (opus BIG; briefs/D-promo-build-2-fix.md; from de24c1ae) | review/promo-build-2-rv | session_01D3E3NYmiFCzMBQ7S9iptKN | RUNNING | 24/11 11:51Z (Foreman D depth 3)
@@ -1505,3 +1514,5 @@ FIX promo-build-2 r1 (opus BIG; briefs/D-promo-build-2-fix.md; from de24c1ae) | 
 | ROBOT-COOP RUNNER U19 pairs 19-20 SWAP=0 | dev/handover/robot/coop-U19-* | FOREMAN E (child3) | (queued) | QUEUED | 24/11 11:58Z |
 | ROBOT-COOP RUNNER U20 pairs 19-20 SWAP=1 | dev/handover/robot/coop-U20-* | FOREMAN E (child3) | (queued) | QUEUED | 24/11 11:58Z |
 rv net-build r2 (opus BIG; briefs/D-net-build-review-r2.md; target e41f4f79) | review/net-build-rv | session_01D3E3NaeN3VTQuhYDqui8cJ | RUNNING | 24/11 12:00Z (Foreman D depth 3)
+=======
+>>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)

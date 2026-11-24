@@ -83,7 +83,28 @@ Harness: robot10.js memSample forces GC (HeapProfiler.collectGarbage) before rea
 | mem | 28/50 | 0 |
 | still listed (owned elsewhere): wall cap (harness), lag (robot10-lag owner), go-tab mspot overlap (MAIN map lane) | | |
 
-## 7. Gates
-(filled below at SSK)
+Final robot rerun (this branch 1f046fb7, cnv spread 5 bots × 1 life, UIEVERY 100, CAP 700 s): mem 0/5 · «Bạc +8» 0/5 · night stall 1/5 (4 hits, nfX wait — residual R1) · save rows 5/5 but 27 hits (was 31133 on 50 lives; first path R.N.staff.N.fk eun1→eun2 — residual R2) · 2 NEW number rows (residual R3).
+Co-op path (F 10:24Z, coop-20261124-0823-p7-8-s): the co-op runner rows come from the same auditor (robot10-in.js auditOpt) → covered by §4; not re-run on co-op here.
+
+## 7. Gates (on 1f046fb7)
+| gate | result |
+|---|---|
+| quickcheck | PASS · old save ok · render 269/266, tab 580/657, buổi 1561/4387 ms (new/live) · core gates PASS |
+| coop-e2e seat order Fold-host / iPad-guest | 142/142 |
+| coop-e2e COOP_SWAP=1 (iPad-host / Fold-guest) | 142/142 |
+| save-slots.js · night-softlock.js | ALL OK · 8/8 PASS |
+| newlife-leak.js | FAIL 10 (main) → FAIL 1 (its own 2-year driver, same on main) |
+| r10-play-rt (render on) cnv_mat / cnv_chu / td / pf / thd | 0 / 0 / 0 / 0 / 0 drift (main: 99 / 112 on cnv) |
+| r10-load-leak save 005 | 2.80 → 0.21 MB per load, old S 30/30 → 1/80 |
+
+SẴN SÀNG KIỂM review/robot-fix-cnv 1f046fb79152dbd09c1dc268775ab4a4aa9e45ea (BIG: save/load + memory + harness) · base origin/main fd85907a · quickcheck PASS · core gates PASS · coop-e2e both seats 142/142.
+
+## HANDOVER (rollover: context ≈ 41 % > START_CTX 5 % + 25 %; Foreman F opens the successor)
+State: branch review/robot-fix-cnv 1f046fb7 = SSK above (families 1-4 main causes fixed). Box files (not in git): repro saves /home/user/wt/rfx-out*/saves, robot bug files /home/user/wt/rfx-out{2,3,4}/cnv-*.md, stuck save /home/user/wt/rfx-out3/saves/20261124-1100-001.json.
+Residuals for the successor (same four families, smaller; do them on review/robot-fix-cnv-2 on top of 1f046fb7, or on this branch if the BIG reviewer has not started):
+- R1 night stall 1/5 (cnv_chu skilled, nfX wait, 4 hits). Probe: EVEONLY=1 / OPENONLY=1 node dev/test/r10-night-after-load.js cnv cnv_chu 3 <seed>, DUMP=<path> keeps a stuck save; watch it with the nfplay pattern (state every press: nfX, Q, #modal, .kmov, .kfoc, #dawn, cfBusy/cfAge, KMQ). Every case traced so far was a screen waiting for her tap (flip scene, km-reward, kitFocus encounter, #dawn); check the robot's answer() selector covers the one left, else it is real.
+- R2 save drift R.N.staff.N.fk eun1→eun2 (servant face key by age band, re-picked at load = the same «rule runs only at load» pattern as «Lão»): find the fk refresh (bandKeys / giveFace / staffFace) and run it where the age changes (ageYear), like srvOldName in j25.
+- R3 «Sủng +4» shown vs fx sung 5 («Theo ngài lên núi», Tết Trùng cửu) and «Sủng +2» vs 3 («Khóc kể với Hoàng thượng», Việc khó xử): the kit hint shows Sủng through sgTxt (jk2b kitOptModel «SG-CARD: the hint reads the same Sủng the card draws»): decide whether apply() scales Sủng the same way (then the auditor must read through sgTxt too) or the card shows a different number than applied (then a real law-4 fault in sgTxt / apply).
+- FOREMAN_E_STATUS.md line «F takes the whole shown≠applied family» appended 12:25Z.
 
 Laws: 1–3 untouched · 4 no number typed (only harness reads) · 5 untouched · 6b one person = one object after a load (visRelink), 6c untouched · 7/9/10/12 no UI, no wording, no kit part changed (no shots) · 11 whole families + scans + tables above · 13 check line · 14–18 no rule changed.

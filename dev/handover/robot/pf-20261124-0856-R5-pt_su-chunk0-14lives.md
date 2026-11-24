@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 game sha 14ba876800413622b83814e8a8cdd848ac0ed241
+=======
+>>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
 # ROBOT-10 interim pf · pt_su (R5) · 14 lives done (partial, run still going)
 
 ## Bugs (22 distinct)

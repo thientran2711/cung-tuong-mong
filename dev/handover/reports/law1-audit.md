@@ -135,6 +135,7 @@ MERGED head 18aca389 (LIVE ac4790f0 merged; worktree /home/user/wt/l1m):
 | 10 | Player maid at an away master: «Đấm lưng / Xin thưởng / tiến cử» still shown (NPC maid: home only) | B (small parity follow-up, found in this review) |
 
 **LAND READY law1-audit-r1 18aca38902d8d936c3ce0189e5d1fd1ecf6792f7**
+<<<<<<< HEAD
 
 ## REVIEW r1 — re-merge 178cac37 (ORDER MAIN 121 10:38Z via Foreman B)
 review/law1-audit-r1 = 18aca389 + merge of LIVE 178cac37 (kit-framefit: jflip / jk2b / jksize / KIT.md / ending-screens test; only index.html / sw.js conflicted, rebuilt with dev/site/build_site.sh). Head **45b4057b25a7dca52405623703b79db457aaea11**, origin/main 178cac37 is its ancestor (FF).
@@ -151,3 +152,5 @@ review/law1-audit-r1 = 18aca389 + merge of LIVE 178cac37 (kit-framefit: jflip / 
 The one extra row differs run to run and belongs to the coop-host-lag family LIVE also shows (LIVE A also lists staff .duc drift) → LIVE-identical red, not this branch. Owner of the LIVE red: co-op fixer #4 (session_01N1tNP2dfra9gDdChCWdbcB, same rows on 178cac37).
 
 **LAND READY law1-audit-r1 45b4057b25a7dca52405623703b79db457aaea11 FOR MAIN 121 (re-merge on 178cac37)**
+=======
+>>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)

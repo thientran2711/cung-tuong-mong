@@ -47,6 +47,7 @@ Fixed after looking: (a) «ngươi quý nàng 52» was auto-linked into «Ta →
 Done; nothing half-built. Worktree /home/user/wt/pb2 (delete after review). Shots outside git (/home/user/wt/pb2-shots).
 
 ~95% xong / ~90% chơi được
+<<<<<<< HEAD
 
 ## REVIEW (reviewer session_01D3E3NXxkVhTabMxB4z4ood, opus BIG, 24/11)
 PRIORITY #1 CHECK ('truy phong' / 'Hoàng hậu đề cử' / 'lâm bệnh nguy kịch' / 'quốc tang'): OD 24/11 ~05:55Z, ~06:30Z, ~07:00Z real, ~07:15Z, ~07:55Z (truy phong «cũng phải thi»), ~08:30Z, ~09:35Z, ~09:50Z read verbatim | ledger 0 | claims promo-build-2 NYnT9a58 (archived) | main ac4790f0: jexam PROMO_SRC / exDirectUp, j13 illness STG 3, j32 over() | review/*: promo-build-rv 1cab34e1 (base, PASS, not yet live), promo-build-2 7accb31a (target) | design promo-redesign rows 9–10 + §3 + kỳ table L72/L96.
@@ -70,3 +71,5 @@ PRIORITY #1 CHECK ('truy phong' / 'Hoàng hậu đề cử' / 'lâm bệnh nguy 
 8. **Shots** (Fold 755x1000 + iPad 1180x820, looked at 3×, kept outside git, not uploaded): nominate sheet — kit sheet, three equal option cards, rows «lên Tần · được lòng Hoàng hậu 67, cần 60», iPad scrolls inside with «Kéo xuống», no overflow/cut text; deathbed — kit «Báo» panel, rows Bệnh / Điều kiện / Nội vụ phủ xét / Kết quả, closes on «Tạ ân», cổ trang, no %. Picture = default decree art (ART REQUEST already filed by the worker).
 
 ~95% xong / ~85% chơi được
+=======
+>>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)

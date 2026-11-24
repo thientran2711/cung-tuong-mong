@@ -69,6 +69,7 @@ Reviewed the stacked diff ed1be95a..42db050c. Branch **review/servant-trust-rv c
 - The «8 weeks played» loops in servant-trust.js / net-build.js call endTurn without clearing Q, so the turn does not advance (same harness weakness as before); my direct 24-month servMonth sim covers the monthly path.
 - Lands after net-build: re-merge onto the fixed net-build-rv before landing.
 Shots: scratch only (not uploaded); the worker's CDN folder img/_review/servant-trust/ stays until the final verdict.
+<<<<<<< HEAD
 
 ## FIX r1 (opus worker, child of Foreman D, 24/11) — both FAIL items fixed, whole family (law 11)
 PRIORITY #1 CHECK ('servant-trust svTouch' / 'srvStaffAct' / 'asPeers' / 'newsAdd witness' / 'svtPeer'): OD 24/11 07:58Z / 08:08Z / 08:12Z + 08:40Z scope row read verbatim | ledger 0 | claims: servant-trust NYMzUyzf (worker, done) + rv NZh6xm1S (FAIL) → this fix | main 178cac37: no jsvt (not live) | review/*: review/servant-trust 42db050c, review/servant-trust-rv c8d35899 (base), review/net-build-rv (NOT merged, per brief) | archive 0. REUSED: svTouch / svtEtq / svtWrap (jsvt), the witness sources of newsAdd (j28.js:80: being there, eyes(), netIs "talk", npcTell), npcTell / npcWit (jagwhy), srvAf / S.srv.intel (j42), asPeers / AS_DO (jagstaff), msAffAdd / msOanAdd (j9: one relation store for servants), pushDil / mkP (j3: the ONE dilemma card), tinAdd / tinOf (jtin).
@@ -112,3 +113,5 @@ Before: oán 8 × 1.5 (higher rank) = 12, then her nết (persF «slight» up to
 servant-trust **70/70** (was 48; new: witness ×5, servant↔servant ×7, bất kính size, cung-nữ road ×7) ×3 · svt-scan 67 / **0 UNWIRED** · svt-churn 14 months consort + cung nữ, 0 page errors · npcmind-check ERRS [] · one-core-guard / bind / text / text-rule PASS · two-way-oldsave ok, errs [] · coop-e2e **142/142** · quickcheck PASS (open 1978 ms, old save ok, perf median new/live render 242/264 ms, tab 421/395, buổi 1181/1398, tasks>200ms 22/23, core gates PASS).
 Kit (laws 9/10): «Hỏi chuyện» on her = the ONE dilemma card (pushDil, kit option cards); after = kit KẾT QUẢ card; no new part. Laws 2/3/7: talk = gain (thiện cảm + news) with after-only risk; refuse = nothing; no %, no digit in the option text, no re-ask prompt. Shots Fold 755x1000 + iPad 1180x820 (the card + the KẾT QUẢ after it; scratch only, not in git), looked at 3×: no overflow, no page error.
 Note (not changed): the old harness weakness (endTurn with a Q item does not advance) is avoided in svt-churn by the bot pattern of ea-npc-rate (start() + nfParked); servant-trust.js keeps its 8-week smoke as before.
+=======
+>>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)

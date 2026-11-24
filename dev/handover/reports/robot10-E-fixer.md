@@ -223,6 +223,7 @@ SSK: SẴN SÀNG KIỂM robot10-e-fix-3 f0a5f92c (BIG: save writers + item ledge
 
 ## 12. R4 cnv_ma (cnv-20261124-1104-R4.md) row 4 — TIMEOUT speed-4, «Bỏ cuộc?» with opts []
 Verdict: HARNESS, already fixed by E-FIX-2 (inpage6.js:19–21, review/robot10-e-fix-2 → inside fix-4-r2m e75c2715, not on main yet). «Bỏ cuộc?» is the kit confirm (j82 kg82Ask → j79 kitConfirm on #modal): its yes button sits in the body ([data-kcf-yes]), so Q opts are always [] by design; the LIVE inpage6 only pressed Q opts and waited. origin/main inpage6 has no kcfYes → R4 ran on the old harness. Lands with fix-2 r3 / fix-4.
+<<<<<<< HEAD
 
 ## 13. R3 cnv_ban (cnv-20261124-0641-R3.md, OLD harness) — UI rows triage
 | rows | what | verdict | owner |
@@ -267,3 +268,5 @@ LOAD-COMPARE (coop-e2e, same box, one after another; branch test file = 142 chec
 | r4 COOP_SWAP | 11:55:48 → 11:57:51 | 0.34 1.05 1.85 | 142/142 |
 No UI / kit / wording / BAL number change in r4 (BAL.allot.oil.uses read, not typed).
 SSK: SẴN SÀNG KIỂM robot10-e-fix-3 b76ccc59 (BIG; = r3 + one full-piece stock rule).
+=======
+>>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)

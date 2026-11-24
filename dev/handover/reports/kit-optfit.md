@@ -21,6 +21,7 @@ Goal: keep the meter on the title row at its right end (L2134), but let the titl
 
 ## Open questions for MAIN
 (a) Leave the squeeze as is (approved layout), or (b) ask sếp for the wrapper-based «title wraps beside the meter on line 1 only» change (affects every option / act card)? I build (b) only on her GO.
+<<<<<<< HEAD
 
 ## MOCK PAIR (order MAIN 121/122, mock only, nothing built) — in-row fix vs LIVE, Fold 755x1000 + iPad 1180x820 @2
 Files (scratch, NOT in git; Foreman C uploads): /home/user/wt/kk-shots/optfit/optfit-before-<WxH>.png (LIVE origin/main) and optfit-after-<WxH>.png (mock). Same dialog, 3 worst cards (long titles: «Cúi đầu đáp lời Hoàng thượng, giữ lễ và thưa rõ từng chữ» [Hiểm], «Ngẩng lên nhìn thẳng, nói khéo nhưng không hạ thấp mình trước mặt cả điện» [Tùy duyên], «Im lặng, chờ người khác lên tiếng trước rồi mới đáp» [Rất vững]).
@@ -35,3 +36,5 @@ Change vs v1: (1) meter stays absolute at the title row's right end but now at `
 CDN (200): https://ctm-img.victoria-tntt.workers.dev/img/_review/optfit/optfit-{before,after}-{755x1000,1180x820}.png — wipe with `python3 dev/site/cdn_sync.py --wipe-review optfit` after her verdict.
 Real build still needs the ONE chip wrapper in j63/kaNorm + JS-measured spacer width (and a lone-first-word guard); only on sếp's GO.
 Prototype (scratch, not in git): CSS `.kat{display:block;position:relative}` `.kodds{position:absolute;top:0;right:24px}` `.kan::before{content:'';float:right;width:<meterW+3>px;height:0.8·line}`.
+=======
+>>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)

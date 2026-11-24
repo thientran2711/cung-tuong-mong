@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # E81r — robot10-e-fix-3 **r3 f0a5f92c** — verdict: **FAIL f0a5f92c (1 item)**
 Merge with LIVE: review/robot10-e-fix-3-r **183fb7e9** = f0a5f92c + origin/main 178cac37 (4593b922, index.html/sw.js rebuilt) + 1 reviewer test fix. Carries over everything checked on r2 below (r1 faults gone, old-save no-loss 11 724 → 11 724 usable / 6 440 → 6 440 lasting, save-size, allotment, ration = LIVE, role-parity ×2).
 ## Remaining item
@@ -36,6 +37,8 @@ Merge with LIVE: review/robot10-e-fix-3-r **a9dbd78b** = 434a4a30 + origin/main 
 | law 4 / 9 / 7 | no BAL number typed, no kit part, no new player words |
 
 ---
+=======
+>>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
 # E81r — BIG REVIEW robot10-e-fix-3 e1ee6041 — verdict: **FAIL e1ee6041 (3 items)**
 PRIORITY #1 CHECK ('ilUsedUp saveBlocked save size'): OD 0 | ledger 0 | claims 0 (FIXER #2 session_01DgYSWmqVHbtQnrFEo7E9r6 only) | main 0 | review/* only review/robot10-e-fix-3 | archive 0. Owner rows read verbatim: OD 18/11 ~16:20Z (law 6, real objects «không được tự nhiên biến mất, không thể tìm thấy»); no OD row on «monthly allotment» / «ration» wording beyond that.
 Reviewer: E81r session_01DgYSWnaebLfT2YjJ9ZWjc8 (opus). Merge with LIVE: review/robot10-e-fix-3-r **75ef5d60** = e1ee6041 + origin/main ac4790f0 (only index.html/sw.js conflicted → rebuilt). Not land-ready (FAIL).
