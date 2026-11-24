@@ -1396,3 +1396,4 @@ LAW-1 likes/dislikes/gifts scan + fix (opus; MAIN 116 07:57Z (e); briefs/D-law1-
 | REVIEW E68r parking-rank SMALL (test-only) of f3c7ce80 | review/parking-rank; reports/parking-rank-review.md | FOREMAN E (child1) | session_01DgYSWp7114rbXtgpPug6pw | RUNNING | 24/11 06:08Z |
 REVIEW kit-promo-hook (sonnet SMALL; briefs/D-kit-promo-hook-review.md) of 287a6adf | review/kit-promo-hook-rv | session_01D3E3NY3oMUMV2oP3CrJ2wL | RUNNING | 24/11 06:08Z (Foreman D ROOT)
 | ROBOT-COOP RUNNER U6 pairs 5-6 SWAP=1 SEED=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p5-6-s.md | B | session_01N1tNP5XrCevHuEb54HPjLr | RUNNING | 24/11 06:13Z |
+| REVIEW map-perf r1 (sonnet SMALL) of review/map-perf d6c2b4d4 | reports/map-perf.md «REVIEW r1» | MAIN 118 | session_01V1ZZH2sAiTzNB7k2oGMcY3 | RUNNING | 24/11 07:05Z |

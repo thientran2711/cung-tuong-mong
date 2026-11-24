@@ -2897,3 +2897,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (06:48Z) MAIN ROOT STANDBY = session_01V1ZZGzMTVHzyPyJN9e5Qzp (registered; send it «TAKE OVER NOW» only if create_session is refused at rollover).
 - (06:50Z) OD 10:15Z: sếp lives in Atlanta → both progress reports re-set to CRON_TZ=America/New_York 08:00 / 20:00 (same trigger ids).
 - (24/11 ~06:14Z) MAP-PERF worker session_01V1ZZH1LjcZxsUARKRyfdN1: Dư đồ played save 11–21 s → 1.0–1.5 s at ×1 (re-open 0.2–0.3 s), ×4 35–69 s → 2.3–3.5 s; phone map settle 18.6 s → 1.6 s (same root cause: re-solve on every re-fit, screen-px cache key); overlap 0/280 + cold 30/30, scan 3×14/14, QUICKCHECK PASS. Report dev/handover/reports/map-perf.md. SẴN SÀNG KIỂM review/map-perf d6c2b4d4
+- (07:05Z) MAP-PERF SẴN SÀNG KIỂM review/map-perf d6c2b4d4 (Dư đồ Fold 21.6→1.3 s) → SMALL reviewer RV map-perf r1 = session_01V1ZZH2sAiTzNB7k2oGMcY3 (sonnet, child of 118; PASS → LAND READY to LC9). B full (12/12) so main runs it.
