@@ -27,7 +27,7 @@ html.kv1.karon .kshR{display:none!important}
 #kar .kar-cap{position:absolute;transform:translate(-50%,-100%);white-space:nowrap;z-index:40;pointer-events:none}
 #kar .kar-cap .kchip{font-size:14px;padding:4px 11px;box-shadow:0 2px 8px #0005}
 #kar .kar-pk{position:absolute;z-index:60;--kfh:64px}#kar.kv2 .kar-pk{--kfh:72px}
-#kar .kar-pk .kfoc-b{position:absolute;left:0;top:0;will-change:transform,opacity}
+#kar .kar-pk .kfoc-b{position:absolute;left:0;top:0;will-change:transform,opacity;contain:layout style}/* a lift re-lays out ONE plaque only */
 #kar .kar-pk .kfoc-b.kar-min{--kfp:44px;height:52px;min-height:52px}
 #kar .kar-pk .kfoc-b.kar-min .kfoc-t small{display:none}
 #kar .kar-pk .kfoc-b.kar-up .kfoc-t small{display:block}
@@ -107,7 +107,7 @@ async function pickGroup(g){if(sel===g)return;await unsel(true);sel=g;const a=AR
  a.g.forEach(x=>{x.P.forEach(p=>{dimSet(p.m,x!==g);p.m.tg.style.display=p.z===3?'block':'none'});if(x.capEl)an(x.capEl,[{opacity:+getComputedStyle(x.capEl).opacity},{opacity:x===g?1:.35}],{duration:280})});
  g.P.forEach(p=>an(p.m.tg,[{opacity:0,transform:'translate(-50%,6px)'},{opacity:1,transform:'translate(-50%,0)'}],{duration:260}))}
 async function unsel(keepGroup){await closePk();if(window.__karMeEl){const me=window.__karMeEl;window.__karMeEl=null;an(me,[{opacity:1},{opacity:0}],{duration:200});setTimeout(()=>me.remove(),220)}
- document.querySelectorAll('.kmsay,.kfoc-say,[class*=moodsay]').forEach(e=>e.remove());const a=AREAS[cur];if(!a)return;
+ document.querySelectorAll('.kmsay,.kfoc-say,.kfoc-mood,[class*=moodsay]').forEach(e=>e.remove());const a=AREAS[cur];if(!a)return;
  if(selM){const m=selM;selM=null;an(m.el,[{transform:m.el.__t2||m.el.__t},{transform:m.el.__t}],{duration:420});sel&&sel.P.forEach(p=>{if(p.m!==m)an(p.m.el,[{transform:p.m.el.__t3||p.m.el.__t},{transform:p.m.el.__t}],{duration:360})});m.el.style.zIndex=10+m.z;await wait(430)}
  a.g.forEach(x=>{if(x!==sel)x.P.forEach(p=>{if(+getComputedStyle(p.m.el).opacity<1)an(p.m.el,[{opacity:+getComputedStyle(p.m.el).opacity},{opacity:1}],{duration:300})})});
  if(!keepGroup&&sel){a.g.forEach(x=>{x.P.forEach(p=>{dimSet(p.m,false);p.m.tg.style.display=p.z===3?'block':'none'});if(x.capEl)an(x.capEl,[{opacity:+getComputedStyle(x.capEl).opacity},{opacity:1}],{duration:250})});sel=null}}

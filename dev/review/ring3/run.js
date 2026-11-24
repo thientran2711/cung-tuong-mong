@@ -18,6 +18,8 @@ const DEV={fold:'fold',ipad:'ipadAir'}[dev];
   const eg=groups.find(g=>g.masters.some(m=>m.kind==='emp'));if(eg){for(let i=groups.length-1;i>=0;i--){const g=groups[i];if(g!==eg&&/^ag_maid:emp/.test(g.act)){eg.fol.push(...g.masters,...g.fol);groups.splice(i,1)}}}
   const me=document.querySelector('#mefig img,#mefig .figimg');window.__karMe=me&&(me.currentSrc||me.src)||figFor(S);window.__karMeAsp=me&&me.naturalWidth?me.naturalWidth/me.naturalHeight:.32;window.__karKh=CR.best.kh||0;
   window.__C={fh:CR.fh,groups,bg};return {bg,life:S.name,buoi:S.buoi,liveN:window.__liveN,crowdN:CR.groups.reduce((t,g)=>t+g.masters.length+g.fol.length,0)}},CR);
+ /* mock only: the world's own news popups (Q) are held while the mock runs, so they never cover the frames */
+ await g.evaluate(()=>{Q.length=0;showModal=function(){Q.length=0;const M=document.getElementById('modal');if(M)M.hidden=true};const M=document.getElementById('modal');if(M)M.hidden=true});
  console.log(JSON.stringify(info));
  let cdp=null;if(mode==='perf')cdp=await pg.context().newCDPSession(pg);
  const shot=async n=>{if(mode==='shots')await pg.screenshot({path:OUT+n+'.png'})};
@@ -32,7 +34,7 @@ const DEV={fold:'fold',ipad:'ipadAir'}[dev];
  const TA=await g.evaluate(()=>{let best=0,bi=0;KAR.areas.forEach((a,i)=>{const s=a.g.filter(g=>g.masters[0]&&!g.masters[0].sil&&g.masters[0].kind==='rival').length*2+a.g.length;if(s>best){best=s;bi=i}});return bi});
  const pickJS=`(()=>{const a=KAR.areas[KAR.cur];const g=a.g.filter(g=>g.masters[0]&&!g.masters[0].sil&&g.masters[0].kind==='rival').sort((x,y)=>((x.masters[0].tag||'').indexOf('???')>=0)-((y.masters[0].tag||'').indexOf('???')>=0)||(y.fol.length-x.fol.length))[0]||a.g[0];window.__G=g;KAR.pickGroup(g)})()`;
  async function seq(pk,rate,first){
-  if(first){await step('idle-live',`0`,1200,rate);await g.evaluate(()=>{tab='go';window.__mapList=false;render()});await T(1500);await shot('d0');
+  if(first){if(mode==='video')console.log('CUT',((Date.now()-global.__T0)/1000+1.2).toFixed(2));await step('idle-live',`0`,1200,rate);await g.evaluate(()=>{tab='go';window.__mapList=false;render()});await T(1500);await shot('d0');
    await step('map',`KAR.showMap()`,1300,rate);await shot('m1');
    if(mode==='shots'){const n=await g.evaluate(()=>KAR.areas.length);for(let i=0;i<n;i++){if(i===TA)continue;await g.evaluate(i=>KAR.enter(i),i);await T(1300);await shot('a'+i);await g.evaluate(()=>KAR.back());await T(900)}}
    else if(mode==='video'){const other=await g.evaluate(TA=>KAR.areas.findIndex((a,i)=>i!==TA&&a.g.length),TA);if(other>=0){await g.evaluate(i=>KAR.enter(i),other);await T(1800);await g.evaluate(()=>KAR.back());await T(1300)}}
