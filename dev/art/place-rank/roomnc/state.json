@@ -376,5 +376,159 @@
   "look": "sạch rèm cửa sổ, tường trái sạch",
   "structure": "giữ nguyên (rèm cửa đi không còn)",
   "v": 4
+ },
+ {
+  "id": "ph49",
+  "key": "truong-xuan-cung-dong-phoi-ngu",
+  "label": "Trường Xuân cung · Đông phối · phòng ngủ",
+  "gen": "s7tIEFOl8e",
+  "look": "sạch rèm cửa sổ (rèm giường giữ)",
+  "structure": "giữ nguyên",
+  "v": 5
+ },
+ {
+  "id": "ph50",
+  "key": "truong-xuan-cung-phi",
+  "label": "Trường Xuân cung · Phi · tiếp khách",
+  "gen": "3zkKlNmREY",
+  "look": "sạch rèm cửa sổ",
+  "structure": "giữ nguyên",
+  "v": 5
+ },
+ {
+  "id": "ph51",
+  "key": "truong-xuan-cung-phi-ngu",
+  "label": "Trường Xuân cung · Phi · phòng ngủ",
+  "gen": "jU8oCJ3LD0",
+  "look": "sạch rèm cửa sổ (rèm giường giữ), tường phải sạch",
+  "structure": "giữ nguyên (giá áo sang phải)",
+  "v": 5
+ },
+ {
+  "id": "ph52",
+  "key": "truong-xuan-cung-quyphi",
+  "label": "Trường Xuân cung · Quý phi · tiếp khách",
+  "gen": "YMglPvTWeC",
+  "look": "sạch rèm cửa sổ",
+  "structure": "gần như giữ (cửa đi dịch vào giữa-phải, có mành; tủ đồ cổ sau ghế không còn)",
+  "v": 5
+ },
+ {
+  "id": "ph53",
+  "key": "truong-xuan-cung-quyphi-ngu",
+  "label": "Trường Xuân cung · Quý phi · phòng ngủ",
+  "gen": "gOhmFMgSXO",
+  "look": "sạch rèm cửa sổ (rèm giường giữ), tường trái sạch",
+  "structure": "giữ nguyên",
+  "v": 5
+ },
+ {
+  "id": "ph54",
+  "key": "truong-xuan-cung-tan",
+  "label": "Trường Xuân cung · Tần · tiếp khách",
+  "gen": "xSoBfBwjfW",
+  "look": "sạch rèm cửa sổ, mép phải sạch",
+  "structure": "giữ nguyên",
+  "v": 5
+ },
+ {
+  "id": "ph55",
+  "key": "truong-xuan-cung-tan-ngu",
+  "label": "Trường Xuân cung · Tần · phòng ngủ",
+  "gen": "KLepmh5kqp",
+  "look": "sạch rèm cửa sổ (rèm giường giữ), tường trái sạch",
+  "structure": "giữ nguyên",
+  "v": 5
+ },
+ {
+  "id": "ph56",
+  "key": "truong-xuan-cung-tay-phoi",
+  "label": "Trường Xuân cung · Tây phối · tiếp khách",
+  "gen": "vQGAVtLa47",
+  "look": "sạch rèm cửa sổ",
+  "structure": "giữ nguyên (cửa đi có mành tre)",
+  "v": 5
+ },
+ {
+  "id": "ph57",
+  "key": "truong-xuan-cung-tay-phoi-ngu",
+  "label": "Trường Xuân cung · Tây phối · phòng ngủ",
+  "gen": "Bh6NnvGoQR",
+  "look": "sạch rèm cửa sổ (rèm giường giữ), tường phải sạch",
+  "structure": "giữ nguyên",
+  "v": 5
+ },
+ {
+  "id": "ph58",
+  "key": "vinh-hoa-cung-dong-phoi",
+  "label": "Vĩnh Hòa cung · Đông phối · tiếp khách",
+  "gen": "5jpDmPyKxe",
+  "look": "sạch rèm cửa sổ (rèm cửa đi giữ)",
+  "structure": "giữ nguyên",
+  "v": 5
+ },
+ {
+  "id": "ph60",
+  "key": "vinh-hoa-cung-phi",
+  "label": "Vĩnh Hòa cung · Phi · tiếp khách",
+  "gen": "ksdevnc16B",
+  "look": "sạch rèm cửa sổ",
+  "structure": "gần như giữ (cửa đi dịch sang phải, kệ chen giữa sập và cửa)",
+  "v": 5
+ },
+ {
+  "id": "ph61",
+  "key": "vinh-hoa-cung-phi-ngu",
+  "label": "Vĩnh Hòa cung · Phi · phòng ngủ",
+  "gen": "aFzGDnCfSh",
+  "look": "cửa sổ sạch NHƯNG còn rèm tím treo khoen tường trái sau kệ → ĐANG VẼ LẠI 1 lần",
+  "structure": "giữ nguyên (thêm bình phong)",
+  "v": 5
+ },
+ {
+  "id": "ph62",
+  "key": "vinh-hoa-cung-quyphi",
+  "label": "Vĩnh Hòa cung · Quý phi · tiếp khách",
+  "gen": "rgBXfEJxtc",
+  "look": "sạch rèm cửa sổ",
+  "structure": "giữ nguyên",
+  "v": 5
+ },
+ {
+  "id": "ph63",
+  "key": "vinh-hoa-cung-quyphi-ngu",
+  "label": "Vĩnh Hòa cung · Quý phi · phòng ngủ",
+  "gen": "LwI8ujPswO",
+  "look": "sạch rèm cửa sổ (rèm giường giữ), tường trái sạch",
+  "structure": "giữ nguyên",
+  "v": 5
+ },
+ {
+  "id": "ph64",
+  "key": "vinh-hoa-cung-tay-phoi",
+  "label": "Vĩnh Hòa cung · Tây phối · tiếp khách",
+  "gen": "JNEC1RcOq4",
+  "look": "sạch rèm cửa sổ",
+  "structure": "giữ nguyên (rèm cửa đi không còn)",
+  "v": 5
+ },
+ {
+  "id": "ph65",
+  "key": "vinh-hoa-cung-tay-phoi-ngu",
+  "label": "Vĩnh Hòa cung · Tây phối · phòng ngủ",
+  "gen": "LwI8QA3swO",
+  "look": "sạch rèm cửa sổ (rèm giường giữ), tường phải sạch",
+  "structure": "giữ nguyên",
+  "v": 5
+ },
+ {
+  "id": "nc12",
+  "key": "nvp",
+  "label": "Nội vụ phủ",
+  "gen": "WDSgNK0cXe",
+  "look": "sạch rèm cửa sổ (cửa sổ trái)",
+  "structure": "giữ nguyên (bàn lớn sang phải, kệ thẳng hàng)",
+  "v": 5,
+  "src": "places-l2370"
  }
 ]
