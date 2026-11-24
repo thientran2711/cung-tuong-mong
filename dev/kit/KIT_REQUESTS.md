@@ -249,3 +249,4 @@ K-FOCUS-1b SPEC (append to kitFocus; pure display, no numbers of its own, knobs 
 
 ## 24/11 KIT KEEPER #15 — K-DH-CAPFIT «title plate on the event picture clips long names» (filed by E55 on review/titles2 537091a1)
 - DONE on review/kit-dhcapfit: KIT §82.2 (plate wraps between words when its box is narrower than the name; kitDhCap caption ≤ 2 lines with font step .74/.66/.6 rem; .ksart-tag same wrap). Test dev/test/kit-dhcapfit.js 26/26. Status: KIT READY (small kit review pending).
+- (24/11 Foreman F via MAIN 116) KIT REQUEST «kinh / may have no painted board slot» → DONE KK16 review/kit-mgboardof (KIT MG-SKIN.1 KG82_BOARDOF: they take the «ve» board + its skins).
