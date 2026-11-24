@@ -123,7 +123,7 @@ A("frame","Vu oan",{c:{get duc(){return BAL.eff.j8.frameCost}},ok:()=>true,o:a=>
   ap(a,{danh:BAL.eff.j8.frameFailDanh,sung:BAL.eff.j8.frameFailSung});relAdd(a,t,BAL.eff.j8.f_5);evA(t,a,BAL.eff.j8.evF_2);punish(a,"vu oan phi tần",BAL.eff.j8.frameSev);return `<span class="r">${NMc(a)} vu oan ${NM(t)} bị lộ.</span> `}});
 A("poison","Hạ độc",{c:{duc:-10},ok:()=>true,o:a=>oPoison(a),x:"lộ: ban chết",f:(a,t)=>{a.schemes=(a.schemes||0)+1;ap(a,{duc:-10});const c=caught(a,t,true,"bỏ độc vào điểm tâm của "+NM(t));if(c)return c;
   if(aRoll(oPoison(a),a)){const strong=takeItem(a,"hacdinh");if(useAnti(t)){ap(t,{suc:BAL.eff.j8.sucF});return `${NMc(t)} trúng độc, may có thuốc giải trong rương. Sức ${balSg(BAL.eff.j8.sucF)}. `}
-   const H=BAL.eff.j8.hit,d=strong?H.strong:H.lo+R(H.r);if(t===S){apply({suc:-d});return `<span class="r">Ngươi trúng độc, nôn ra máu.</span> Sức -${d}. `}ap(t,{suc:-d});return dieIf(t,"chết sau một bát yến sào")||`<span class="r">${t.name} trúng độc, thập tử nhất sinh.</span> `}
+   const H=BAL.rl.j8.hit,d=strong?H.strong:H.lo+R(H.r);if(t===S){apply({suc:-d});return `<span class="r">Ngươi trúng độc, nôn ra máu.</span> Sức -${d}. `}ap(t,{suc:-d});return dieIf(t,"chết sau một bát yến sào")||`<span class="r">${t.name} trúng độc, thập tử nhất sinh.</span> `}
   const r=`<span class="r">Thuốc độc nhắm vào ${NM(t)} bị phát hiện, tra ra người của ${NM(a)}.</span> `;deathSentence(a,`Bị ban rượu độc vì mưu hại ${NM(t)}`);return r}});
 A("accuse","Tố giác",{c:{},ok:(a,t)=>accOK(a,t),o:(a,t)=>oAccuse(a,t),get x(){return `cần ${BAL.accNeedEv[0]} chứng cứ (Hoàng hậu: ${BAL.accNeedEv[1]} chứng cứ và phẩm Tần trở lên; tố hụt Hoàng hậu là phạm thượng)`},f:(a,t)=>{const o=oAccuse(a,t);evA(a,t,BAL.ag.ev.all);
   if(aRoll(o,a)){econPayWin(a,"accuse",t,0);/* marks the win (j70 Mua lời khai pays now) */const r=`${NMc(a)} tố giác ${NM(t)} trước ${judgeName(t)}: <span class="${t===S?"r":"g"}">thành</span>. `;ap(a,{danh:BAL.eff.j8.accuseDanh});if(empGive(a,BAL.tw.accBestow,"accuse"))bestow(a,"accuse");if(rkOf(t)>=7)a.seatBan=S.turn+12;fall(t,"bị tố giác, chứng cứ rành rành");return r}
@@ -181,25 +181,25 @@ function vpAccuse(a,t){const L=vpItems(t);if(!L.length)return"";const n=L.map(e=
 
 /* ================= ITEMS ================= */
 const IT={
- tramngoc:{n:"Trâm ngọc bích",kd:"Trang sức",d:"Cài tóc: Sắc +2",pr:30,rk:0,sl:"hair",w:{sac:2},tg:["hh","rv"]},
- boodieu:{n:"Bộ diêu vàng",kd:"Trang sức",d:"Cài tóc: Sắc +5, Danh +2 · từ bậc Phi",pr:140,rk:4,sl:"hair",w:{sac:5,danh:2},tg:["hh","rv"]},
- tramphuong:{n:"Trâm phượng cửu vĩ",kd:"Trang sức",d:"Cài tóc: Sắc +8, Danh +4 · chỉ Hoàng hậu",pr:360,rk:7,sl:"hair",w:{sac:8,danh:4},tg:["rv"]},
- vongngoc:{n:"Vòng ngọc Hòa Điền",kd:"Trang sức",d:"Đeo tay: Sắc +2, Danh +1",pr:50,rk:0,sl:"wrist",w:{sac:2,danh:1},tg:["th","hh","rv"]},
- vongvang:{n:"Vòng vàng chạm phượng",kd:"Trang sức",d:"Đeo tay: Sắc +4, Danh +3 · từ Quý phi",pr:180,rk:5,sl:"wrist",w:{sac:4,danh:3},tg:["rv"]},
- sonphan:{n:"Son phấn Dương Châu",kd:"Trang sức",d:"Dùng: Sắc +2",pr:8,use:{sac:2},tg:["rv"]},
- luahang:{n:"Lụa Hàng Châu",kd:"Vải vóc",d:"May áo: Sắc +3 trong 3 tháng",pr:30,rk:0,dr:3,tg:["th","rv"]},
- gamto:{n:"Gấm Tô Châu",kd:"Vải vóc",d:"May áo: Sắc +6 trong 3 tháng · từ Quý phi",pr:120,rk:5,dr:6,tg:["th","hh","rv"]},
- gamvang:{n:"Gấm minh hoàng",kd:"Vải vóc",d:"Áo vàng: Sắc +9 trong 3 tháng · chỉ Hoàng hậu",pr:300,rk:7,dr:9,tg:[]},
- nhansam:{n:"Nhân sâm trăm năm",kd:"Thuốc bổ",d:"Dùng: Sức +25; có thai thì an thai",pr:60,use:{suc:25},ant:1,tg:["th"]},
- yensao:{n:"Yến sào",kd:"Thuốc bổ",d:"Dùng: Sức +15, Sắc +1",pr:25,use:{suc:15,sac:1},tg:["th","rv"]},
- agiao:{n:"A giao",kd:"Thuốc bổ",d:"Dùng: Sức +10; 2 tháng dễ thụ thai",pr:35,use:{suc:10},fert:2,tg:["rv"]},
+ tramngoc:{n:"Trâm ngọc bích",kd:"Trang sức",d:"Cài tóc: Sắc {n:itFx.tramngoc.w.sac}",pr:30,rk:0,sl:"hair",tg:["hh","rv"]},
+ boodieu:{n:"Bộ diêu vàng",kd:"Trang sức",d:"Cài tóc: Sắc {n:itFx.boodieu.w.sac}, Danh {n:itFx.boodieu.w.danh} · từ bậc Phi",pr:140,rk:4,sl:"hair",tg:["hh","rv"]},
+ tramphuong:{n:"Trâm phượng cửu vĩ",kd:"Trang sức",d:"Cài tóc: Sắc {n:itFx.tramphuong.w.sac}, Danh {n:itFx.tramphuong.w.danh} · chỉ Hoàng hậu",pr:360,rk:7,sl:"hair",tg:["rv"]},
+ vongngoc:{n:"Vòng ngọc Hòa Điền",kd:"Trang sức",d:"Đeo tay: Sắc {n:itFx.vongngoc.w.sac}, Danh {n:itFx.vongngoc.w.danh}",pr:50,rk:0,sl:"wrist",tg:["th","hh","rv"]},
+ vongvang:{n:"Vòng vàng chạm phượng",kd:"Trang sức",d:"Đeo tay: Sắc {n:itFx.vongvang.w.sac}, Danh {n:itFx.vongvang.w.danh} · từ Quý phi",pr:180,rk:5,sl:"wrist",tg:["rv"]},
+ sonphan:{n:"Son phấn Dương Châu",kd:"Trang sức",d:"Dùng: Sắc {n:itFx.sonphan.use.sac}",pr:8,tg:["rv"]},
+ luahang:{n:"Lụa Hàng Châu",kd:"Vải vóc",d:"May áo: Sắc {n:itFx.luahang.dr} trong 3 tháng",pr:30,rk:0,tg:["th","rv"]},
+ gamto:{n:"Gấm Tô Châu",kd:"Vải vóc",d:"May áo: Sắc {n:itFx.gamto.dr} trong 3 tháng · từ Quý phi",pr:120,rk:5,tg:["th","hh","rv"]},
+ gamvang:{n:"Gấm minh hoàng",kd:"Vải vóc",d:"Áo vàng: Sắc {n:itFx.gamvang.dr} trong 3 tháng · chỉ Hoàng hậu",pr:300,rk:7,tg:[]},
+ nhansam:{n:"Nhân sâm trăm năm",kd:"Thuốc bổ",d:"Dùng: Sức {n:itFx.nhansam.use.suc}; có thai thì an thai",pr:60,ant:1,tg:["th"]},
+ yensao:{n:"Yến sào",kd:"Thuốc bổ",d:"Dùng: Sức {n:itFx.yensao.use.suc}, Sắc {n:itFx.yensao.use.sac}",pr:25,tg:["th","rv"]},
+ agiao:{n:"A giao",kd:"Thuốc bổ",d:"Dùng: Sức {n:itFx.agiao.use.suc}; 2 tháng dễ thụ thai",pr:35,fert:2,tg:["rv"]},
  giaidoc:{n:"Thuốc giải độc",kd:"Thuốc",d:"Để trong rương: cứu một lần trúng độc",pr:60,anti:1,tg:[]},
  thuocanthai:{n:"Thuốc an thai",kd:"Thuốc",d:"Dùng khi có thai: nguy cơ sảy giảm nửa",pr:15,ant:1,tg:["rv"]},
- huongtram:{n:"Hương trầm",kd:"Hương liệu",d:"Dùng: Đức +1, Sức +5",pr:10,use:{duc:1,suc:5},tg:["th","emp"]},
- tuithom:{n:"Túi thơm thêu",kd:"Hương liệu",d:"Dùng: Sức +3",pr:6,use:{suc:3},tg:["rv","hh"]},
+ huongtram:{n:"Hương trầm",kd:"Hương liệu",d:"Dùng: Đức {n:itFx.huongtram.use.duc}, Sức {n:itFx.huongtram.use.suc}",pr:10,tg:["th","emp"]},
+ tuithom:{n:"Túi thơm thêu",kd:"Hương liệu",d:"Dùng: Sức {n:itFx.tuithom.use.suc}",pr:6,tg:["rv","hh"]},
  xahuong:{n:"Xạ hương",kd:"Hương liệu",d:"Trộn vào túi thơm, hương trầm: hại thai",pr:50,mat:"xa",tg:[]},
  hacdinh:{n:"Hạc đỉnh hồng",kd:"Độc dược",d:"Hạ độc chắc chết · bị khám ra là có tội",pr:150,il:1,tg:[]},
- botngua:{n:"Bột ngứa",kd:"Độc dược",d:"Dùng với phi tần: nàng Danh -5 · bị khám ra là có tội",pr:30,il:1,tg:[]},
+ botngua:{n:"Bột ngứa",kd:"Độc dược",d:"Dùng với phi tần: nàng Danh {n:eff.j8.danhUseItem} · bị khám ra là có tội",pr:30,il:1,tg:[]},
  tranhco:{n:"Tranh cổ",kd:"Lễ vật",d:"Tặng Hoàng thượng, Thái hậu: rất hợp ý",pr:150,gv:10,tg:["emp","th"]},
  nghien:{n:"Nghiên mực Đoan Khê",kd:"Lễ vật",d:"Tặng Hoàng thượng: hợp ý",pr:60,gv:8,tg:["emp"]},
  dancoc:{n:"Đàn cổ Tiêu Vĩ",kd:"Lễ vật",d:"Tặng Hoàng thượng, phi tần mê nhạc",pr:200,gv:12,tg:["emp","rv"]},
@@ -207,10 +207,12 @@ const IT={
  ngocboi:{n:"Ngọc bội ngự ban",kd:"Kỷ vật",get d(){return this._d!=null?this._d:`Còn giữ: Sủng không dưới ${BAL.ngocboiSung} · mất là đại họa`},set d(v){this._d=v},pr:0,keep:1,tg:[]},
  sacphong:{n:"Sắc phong",kd:"Kỷ vật",d:"Chiếu sắc phong hiệu của Hoàng thượng · không bán, không tặng · mất là bị trách",pr:0,keep:1,tg:[]},
  ngocan:{n:"Ngọc ấn",kd:"Kỷ vật",d:"Ấn ngọc khắc hiệu được ban · không bán, không tặng · mất là bị trách",pr:0,keep:1,tg:[]},
- thunha:{n:"Thư nhà",kd:"Thư từ",d:"Đọc: Sức +10, Đức +2",pr:0,use:{suc:10,duc:2},tg:[]},
+ thunha:{n:"Thư nhà",kd:"Thư từ",d:"Đọc: Sức {n:itFx.thunha.use.suc}, Đức {n:itFx.thunha.use.duc}",pr:0,tg:[]},
  chungcu:{n:"Tập chứng cứ",kd:"Thư từ",get d(){return "Dùng với một phi tần: chứng cứ +"+this.evi}/* prints its own evi (the amount the item gives) */,pr:0,evi:2,tg:[]}};
 /* ngự tứ mark of the two title keepsakes (a yes/no flag, not the "Hoàng thượng để ý" stat nt; j92/j97 set it the same way for ngocboi/bienngu) */
 for(const k of ["sacphong","ngocan"])IT[k].nt=1;
+/* typed-stat-bal (law 4): every item d holding a {n:BAL path} token reads BAL when shown; the numbers (w / use / dr) are BAL.itFx (jbal.js links them in) */
+for(const k in IT)sgRuleObj(IT[k],"d");
 /* ONE ITEM LOOKUP (review/it-key-guard, family fix of the npcMonthly "reading 'tg'" crash). An inventory entry can name a key this
    build's IT does not hold: a save from an older/newer build, a co-op world or friend bag written by the other seat's build (the room
    keeps the world across updates), a malformed piece. Every read of an item's fields goes through itm(k): the real entry, else ONE
@@ -322,11 +324,11 @@ PEND.ksp=()=>({who:pEmp(),t:"<p>Tối nay Hoàng thượng lật thẻ bài củ
  {n:"Cáo bệnh",fx:{sung:-BAL.cv.decl.sung,suc:BAL.cv.decl.suc},x:`thành: nghỉ trọn một đêm cho lại sức · kèm: nhường đêm, Ân tình -${BAL.cv.decl.an}`,go:()=>{S.an=cl(S.an-BAL.cv.decl.an,0,100);S.tonight=null}}]});
 PEND.prep=()=>{const wb=wearBonus(S),vp=vpItems(S).length>0,b=bestArt();return{who:pMe(),t:"<p>Kính sự phòng đã báo tin. Còn hai canh giờ trước khi kiệu đến.</p>",o:[
  {n:"Tắm cánh hoa, xông hương",fx:{bac:-10},x:"đêm nay được ưa hơn",go:()=>pushFront(mkP("night1",{q:2,vp:0}),"Đêm thị tẩm")},
- {n:"Điểm trang lộng lẫy",fx:{},x:`trang sức đang đeo: Sắc +${wb.sac-(wb.shSac||0)}${vp?` · kèm: đồ vượt phẩm bị Hoàng thượng thu, Danh -4: ${chanceW(BAL.rk.vpTake)}`:""}`,go:()=>pushFront(mkP("night1",{q:1+Math.round((wb.sac-(wb.shSac||0))/3)/* worn only, as j75 night prep: the shelf set Sắc is not jewellery */,vp:vp?1:0}),"Đêm thị tẩm")},
+ {n:"Điểm trang lộng lẫy",fx:{},x:`trang sức đang đeo: Sắc +${wb.sac-(wb.shSac||0)}${vp?` · kèm: đồ vượt phẩm bị Hoàng thượng thu, Danh ${balSg(BAL.rl.j8.danhGo_2)}: ${chanceW(BAL.rk.vpTake)}`:""}`,go:()=>pushFront(mkP("night1",{q:1+Math.round((wb.sac-(wb.shSac||0))/3)/* worn only, as j75 night prep: the shelf set Sắc is not jewellery */,vp:vp?1:0}),"Đêm thị tẩm")},
  {n:`Tập trước ${b.n}`,fx:{suc:-5},x:`bậc ${b.l}`,go:()=>pushFront(mkP("night1",{q:1+b.l,vp:0}),"Đêm thị tẩm")},
  {n:"Để mộc, tự nhiên",fx:{},go:()=>pushFront(mkP("night1",{q:1,vp:0}),"Đêm thị tẩm")}]}};
 PEND.night1=p=>{const E=S.emp,mood=BAL.night.mood[E.mood],go=b=>()=>{let s=p.q+b+mood+R(3),ex="";
-  if(p.vp&&roll(BAL.rk.vpTake)){const n=vpItems(S).map(e=>(IT[e.k]||{}).n).join(", ");ilFilter(S,e=>!(e.w&&(IT[e.k]||{}).rk>S.rank),"conf");if(vpItems(S).length)S.dress=null;apply({danh:BAL.eff.j8.danhGo_2});s-=2;ex=`Hoàng thượng nhíu mày nhìn ${n}: “Phẩm vị gì mà dám dùng thứ này?” Đồ bị thu lại. Danh ${balSg(BAL.eff.j8.danhGo_2)}.`;log(ex)}
+  if(p.vp&&roll(BAL.rk.vpTake)){const n=vpItems(S).map(e=>(IT[e.k]||{}).n).join(", ");ilFilter(S,e=>!(e.w&&(IT[e.k]||{}).rk>S.rank),"conf");if(vpItems(S).length)S.dress=null;apply({danh:BAL.rl.j8.danhGo_2});s-=2;ex=`Hoàng thượng nhíu mày nhìn ${n}: “Phẩm vị gì mà dám dùng thứ này?” Đồ bị thu lại. Danh ${balSg(BAL.rl.j8.danhGo_2)}.`;log(ex)}
   pushFront(mkP("night2",{s,ex}),"Đêm thị tẩm")};
  return{who:pEmp(),t:`<p>Canh một, thái giám Kính sự phòng cởi xiêm ngoài, cuộn ngươi trong tấm chăn gấm thêu phượng, khiêng vào Dưỡng Hòa điện theo lệ cũ.</p><p>Màn vàng rủ thấp. Hoàng thượng đặt quyển sách xuống${E.mood>=2?", vẻ mệt mỏi":""}, nhìn ngươi.</p>`,o:[
  {n:"Bàn thơ văn, cầm kỳ",fx:{},od:(has("trongtai")?3:S.tai>=60?1:0),x:nx(has("trongtai")?3:S.tai>=60?1:0,has("trongtai")?"ngài trọng tài, rất hợp":"",p),go:go(has("trongtai")?3:S.tai>=60?1:0)},
@@ -343,7 +345,7 @@ function nightGain(s){const BN=BAL.night;return{sung:BN.sung+Math.max(0,Math.rou
 function nightG(s){return nightGain(s).sung}
 function nightA(s){return nightGain(s).an}
 function nx(b,note,p){const m=BAL.night.mood[S.emp.mood];const v=b+m;const VO=BAL.night.vO;const w=word(VO[cl(Math.floor(v),-1,VO.length-2)+1]);const q=p&&p.q!=null?p.q:1;
- const hi=nightGain(q+v+2),lo=nightGain(q+v-(p&&p.vp?2:0));return `${w} · thành: đêm vui, ${sgStat(hi.sung)}, Ân tình +${hi.an} · hỏng: đêm nhạt, ${sgStat(lo.sung)}, Ân tình +${lo.an}${note?" · "+note:""}${vpItems(S).length?` · kèm: đồ vượt phẩm bị thu, Danh -4 (nếu đang đeo): ${chanceW(BAL.rk.vpTake)}`:""}`}
+ const hi=nightGain(q+v+2),lo=nightGain(q+v-(p&&p.vp?2:0));return `${w} · thành: đêm vui, ${sgStat(hi.sung)}, Ân tình +${hi.an} · hỏng: đêm nhạt, ${sgStat(lo.sung)}, Ân tình +${lo.an}${note?" · "+note:""}${vpItems(S).length?` · kèm: đồ vượt phẩm bị thu, Danh ${balSg(BAL.rl.j8.danhGo_2)} (nếu đang đeo): ${chanceW(BAL.rk.vpTake)}`:""}`}
 function nightFx(s){const BN=BAL.night;S.tablet=0;S.nights++;S.nightLog.push(wk());const NG=nightGain(s),g=NG.sung;apply({sung:g});S.an=cl(S.an+NG.an,0,100);ghenAll(BN.ghen,"ngươi được thị tẩm");
  if(giuBlocked(S))pushFront(mkP("giu"),"Giữ hay không giữ");else night(S);
  if(empGive(S,BN.bestow+s*BN.bestowS,"night"))bestow(S,"night");log(`Thị tẩm. ${sgStat(g)} · Ân tình +${NG.an}.`)}
@@ -351,10 +353,10 @@ PEND.night2=p=>{const s=p.s,v=liveRivals(false).slice().sort((a,b)=>a.rel-b.rel)
  const txt=s>=BAL.nightEnd.warm?"Ngài khẽ cười, kéo ngươi lại gần. Tấm rèm thêu uyên ương buông xuống; ngọn nến đỏ chập chờn rồi lụi, chỉ còn tiếng mưa xuân trên mái ngói.":s>=BAL.nightEnd.normal?"Hương trầm vấn vít. Ngài nắm tay ngươi rất lâu, rồi màn the khép lại.":"Ngài có vẻ xa cách. Đêm trôi qua lặng lẽ sau tấm màn vàng.";
  const go=f=>()=>{nightFx(s);f()};
  const O=[{n:"Xin ân cho gia đình",fx:{},x:`${word(o1)} · thành: Danh ${balSg(BAL.eff.j8.danhGo)}, Bạc ${balSg(BAL.eff.j8.bacGo)} · hỏng: Sủng ${balSg(BAL.eff.j8.sungGo)}`,go:go(()=>apply(roll(o1)?{danh:BAL.eff.j8.danhGo,bac:BAL.eff.j8.bacGo}:{sung:BAL.eff.j8.sungGo}))},
-  {n:"Xin tha cho cung nữ bị phạt",fx:{},x:`Đức ${balSg(BAL.eff.j8.ducGo)}, Ân tình +1`,go:go(()=>{apply({duc:BAL.eff.j8.ducGo});S.an=cl(S.an+1,0,100)})}];
+  {n:"Xin tha cho cung nữ bị phạt",fx:{},x:`Đức ${balSg(BAL.rl.j8.ducGo)}, Ân tình ${balSg(BAL.eff.j8.anGoMaid)}`,go:go(()=>{apply({duc:BAL.rl.j8.ducGo});S.an=cl(S.an+BAL.eff.j8.anGoMaid,0,100)})}];
  {const G=BAL.tw.g.pillow;if(v)O.push({n:`Thì thầm nói xấu ${v.name}`,fx:{},x:`${word(o2)} · thành: nàng Sủng -${G.hit}, nàng quý ngươi -${G.rel} · hỏng: ${DG()?`ngài đa nghi, quay ra nghi ngươi: Sủng -${G.dg[0]}, Danh -${G.dg[1]}`:`Sủng -${G.fail}`}`,go:go(()=>pillowDo(S,v,o2))})}
  if(son)O.push({n:`Xin cho ${son.name}`,fx:{},x:`${word(o3)} · thành: ngài thương con ${balSg(BAL.eff.j8.fondGo)}`,go:go(()=>{if(roll(o3))son.fond=cl(son.fond+BAL.eff.j8.fondGo,0,100);else S.an=cl(S.an-2,0,100)})});
- O.push({n:"Im lặng, tựa vai ngài",fx:{},x:"Ân tình +2",go:go(()=>{S.an=cl(S.an+2,0,100)})});
+ O.push({n:"Im lặng, tựa vai ngài",fx:{},x:`Ân tình ${balSg(BAL.eff.j8.anLean)}`,go:go(()=>{S.an=cl(S.an+BAL.eff.j8.anLean,0,100)})});
  return{cls:"night",who:pEmp(),t:`${p.ex?`<p class="past">${p.ex}</p>`:""}<p>${txt}</p><p class="past">Gối đầu, nửa đêm. Ngươi muốn nói gì?</p>`,o:O}};
 PEND.giu=()=>{const o1=od(BAL.odb.j8.odO1_2+S.tamco/3),o2=od(BAL.odb.j8.odO2+S.an/2);return{who:pTH(),t:"<p>Sáng sớm, tổng quản Kính sự phòng quỳ ngoài điện hỏi theo lệ: “Giữ hay không giữ?”</p><p>Lời Thái hậu truyền xuống: phẩm vị thấp, không được giữ long thai.</p>",o:[
  {n:"Cúi đầu tuân lệnh",fx:{th:5},x:"lần này không thể có thai"},
@@ -514,7 +516,7 @@ function empAct(i,k){const v=rivals[i];if(!v||S.rank<7||!can(2)||S.dead||Q.lengt
  if(k==="judge"){if(evG(S,v)<2)return;r=judge(S,v)}
  else if(k==="conf"){const j=v.inv.findIndex(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h);if(j<0)return;if(evG(S,v)<1&&!vpItems(v).length){apply(BAL.tw.confNo);log(`Tịch thu vô cớ: Danh ${BAL.tw.confNo.danh}, Thái hậu ${BAL.tw.confNo.th}.`)}const n=iname(v.inv[j]);v.inv.splice(j,1);relAdd(S,v,-BAL.tw.g.conf[0]);v.hh-=BAL.tw.g.conf[1];r=`Ngươi tịch thu ${n} của ${v.name}.`}
  else if(k==="reward"){if(S.bac<-BAL.tw.reward.bac)return;apply(BAL.tw.reward);relAdd(S,v,BAL.tw.g.reward[0]);v.hh+=BAL.tw.g.reward[1];ap(v,{danh:BAL.tw.g.reward[2]});r=`Ngươi ban thưởng cho ${v.name}.`}
- else if(k==="pardon"){if(!v.confined&&!v.out)return;if(v.out&&!roomFor("consort"))return;if(v.out){v.out=false;v.rank=0}v.confined=0;relAdd(S,v,BAL.eff.j8.empAct_2);apply({duc:2});r=`Ngươi ân xá cho ${v.name}.`}
+ else if(k==="pardon"){if(!v.confined&&!v.out)return;if(v.out&&!roomFor("consort"))return;if(v.out){v.out=false;v.rank=0}v.confined=0;relAdd(S,v,BAL.eff.j8.empAct_2);apply({duc:BAL.ag.hh.pardonDuc});r=`Ngươi ân xá cho ${v.name}.`}
  else return;spend(2);log(r);render()}
 function giftTargets(){const L=[["emp","Hoàng thượng"]];if(!S.thDead)L.push(["th","Thái hậu"]);liveRivals(true).forEach(v=>L.push([v.id,(v.queen?"Hoàng hậu ":"")+v.name]));return L}
 PEND.giftpick=p=>{const e=S.inv[p.ix!=null?p.ix:-1];const L=p.v!=null?[[p.v,(RV(p.v)||{}).name]]:giftTargets();
