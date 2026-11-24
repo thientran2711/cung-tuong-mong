@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"c9d0187a+","t":"2026-11-24T02:10Z","c":"thin-p7: fold P7 festival seeds (fseeds_a/b: 91 stages, 80 complications, 49 prizes; validator 0 errors; ≥208 composed variants per festiva…","b":"b4ee2b072c4f","h":[{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"}]};
+window.CTM_BI={"s":"2d0821f8+","t":"2026-11-24T02:26Z","c":"thin-p6 r1: KIT_REQUESTS K-EF-REL (relation chip clipped on Fold, whole group); p6-shots takes a festival jsonl","b":"ee581bc3ce31","h":[{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -88319,7 +88319,7 @@ if(typeof cFin7==="function"){const c1=cFin7;cFin7=function(k,kind,L){const r=c1
 function stepV(tier,k){const F=Bf().fx[tier]||Bf().fx.m;return F[k]||0}
 function val(m,tier,sign){const fx={};let B=0;for(const[k,n]of Object.entries(m||{})){if(STAT.includes(k))fx[k]=(fx[k]||0)+n*stepV(tier,k)*sign;else if(k==="rel.B")B+=n*stepV(tier,"rel")*sign}return{fx,B}}
 function drawComp(k,kind,ents){if(!on())return null;const fam="j71c:c";const L=(CF[k]||[]).concat(CF["*"]||[]).filter(sd=>(sd.kinds||[]).includes(kind)&&needsOk(sd.needs)&&!nrNow(fam,sd.id));if(!L.length)return null;
- const pres=liveRivals(true).filter(v=>{try{return present7(v)}catch(e){return v.alive&&!v.out&&!v.confined}});const pool=kind==="C"?ents:pres;
+ const pres=liveRivals(true).filter(v=>{try{return present7(v)}catch(e){return v.alive&&!v.out&&!v.confined}});const pool=(kind==="C"?ents:pres).filter(v=>v&&!v.coop);/* co-op: the friend is a real player, never cast as the scripted rival {B} (OD:L94 no AI stand-in) */
  const tries=nrFresh(fam,L,x=>x.id).slice();while(tries.length){const sd=nrPick(fam,tries,x=>x.id);if(!sd)break;tries.splice(tries.indexOf(sd),1);
   let b=null;const R=(sd.roles||{}).B;if(R){const set=new Set(pool);const id=rv6(v=>set.has(v)&&fit(v,R));if(id==null)continue;b=id}
   nrMark(fam,sd.id);return{id:sd.id,b}}return null}
@@ -96072,7 +96072,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b4ee2b072c4f";window.CTM_BUILD=BUILD;
+const BUILD="ee581bc3ce31";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

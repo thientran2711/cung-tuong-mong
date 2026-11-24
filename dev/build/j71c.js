@@ -49,7 +49,7 @@ if(typeof cFin7==="function"){const c1=cFin7;cFin7=function(k,kind,L){const r=c1
 function stepV(tier,k){const F=Bf().fx[tier]||Bf().fx.m;return F[k]||0}
 function val(m,tier,sign){const fx={};let B=0;for(const[k,n]of Object.entries(m||{})){if(STAT.includes(k))fx[k]=(fx[k]||0)+n*stepV(tier,k)*sign;else if(k==="rel.B")B+=n*stepV(tier,"rel")*sign}return{fx,B}}
 function drawComp(k,kind,ents){if(!on())return null;const fam="j71c:c";const L=(CF[k]||[]).concat(CF["*"]||[]).filter(sd=>(sd.kinds||[]).includes(kind)&&needsOk(sd.needs)&&!nrNow(fam,sd.id));if(!L.length)return null;
- const pres=liveRivals(true).filter(v=>{try{return present7(v)}catch(e){return v.alive&&!v.out&&!v.confined}});const pool=kind==="C"?ents:pres;
+ const pres=liveRivals(true).filter(v=>{try{return present7(v)}catch(e){return v.alive&&!v.out&&!v.confined}});const pool=(kind==="C"?ents:pres).filter(v=>v&&!v.coop);/* co-op: the friend is a real player, never cast as the scripted rival {B} (OD:L94 no AI stand-in) */
  const tries=nrFresh(fam,L,x=>x.id).slice();while(tries.length){const sd=nrPick(fam,tries,x=>x.id);if(!sd)break;tries.splice(tries.indexOf(sd),1);
   let b=null;const R=(sd.roles||{}).B;if(R){const set=new Set(pool);const id=rv6(v=>set.has(v)&&fit(v,R));if(id==null)continue;b=id}
   nrMark(fam,sd.id);return{id:sd.id,b}}return null}
