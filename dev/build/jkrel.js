@@ -40,7 +40,7 @@ function kitRelRows(p,snap){const R=[];if(!p)return R;const sj=kitRelSubj(p),ob=
      Thiện cảm + Oán; HER OWN servants (S.maid, ownerOf(p)===S) also «Ta tin cậy» (kit-relrows-ms1word, OD:L352 «only ONE word Thiện cảm; drop Lòng»: no «Lòng» row — p.loyal is not shown beside Thiện cảm); not met yet → «chưa rõ».
      Guarded: on a build without relMS / relMSAll (before rel-men-servants lands) the old loyal branch below still runs. */
   const isMS=typeof relMS==="function"&&typeof relMSAll==="function"&&relMS(p)&&((typeof relMan==="function"&&relMan(p))||relMSAll().includes(p));
-  if(isMS){const man=typeof relMan==="function"&&relMan(p);
+  if(isMS){const man=typeof relManP==="function"?relManP(p):typeof relMan==="function"&&relMan(p);
    const met=typeof relMSMet!=="function"||relMSMet(p);
    if(!met){R.push({dir:"them",label:`${sj} → ta: thiện cảm`,w:"Thiện cảm",sj,ob,now:null,d:null,kind:"good",unk:"chưa rõ"});return R}
    const o=s.ms&&s.ms[kitRelMsKey(p)]||null;

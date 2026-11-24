@@ -67,7 +67,7 @@ function rel3(face,rank,name,col,mid,right,extra){
 window.kitRel3=rel3;
 const fcol=f=>(f&&f.col)||"#7a5530";
 /* who is who in a relation label: the player "ta", the Empress by title, the Emperor / Thái hậu by title, others by their short name */
-const whoL=p=>p===S?"ta":p==="emp"?"Hoàng thượng":p==="th"?"Thái hậu":p&&p.queen?"Hoàng hậu":p&&relMS(p)&&relMSName(p)?relMSName(p):relMan(p)?p.name.split(" ").slice(-2).join(" "):shortN(p.name);
+const whoL=p=>p===S?"ta":p==="emp"?"Hoàng thượng":p==="th"?"Thái hậu":p&&p.queen?"Hoàng hậu":p&&relMS(p)&&relMSName(p)?relMSName(p):relManP(p)?p.name.split(" ").slice(-2).join(" "):shortN(p.name);
 const capL=s=>s==="ta"?"Ta":s;
 /* KIT §49.3 relPerson(k): ONE helper — the person object, the face drawn from THAT object, the name, the rank, the colour. Strangers
    (not met: knows(v) false — the same test that writes "Ta chưa gặp …") get the shared grey silhouette (kitStrangerOf, j61), the name stays. */
@@ -76,7 +76,7 @@ function relPerson(k){
  if(k==="emp"){const f=pEmp();return{k,p:"emp",f,name:"Hoàng thượng",rank:"",col:fcol(f),pid:"emp"}}
  if(k==="th"){const f=pTH();return{k,p:"th",f,name:"Thái hậu",rank:"",col:fcol(f),pid:"th"}}
  if(typeof k==="string"){const o=relMSOf(k);if(!o)return null;const f=relMSFace(o),pid=typeof kOf61==="function"?kOf61(o):k;
-  const nm=relMSName(o);return relMan(o)?{k,p:o,f,name:nm||o.name.split(" ").slice(-2).join(" "),rank:o.role,col:f.col||"#6a8aa0",met:relMSMet(o),pid}:{k,p:o,f,name:nm||shortN(o.name),rank:relSrvRank(o),col:fcol(f),met:relMSMet(o),pid}}
+  const nm=relMSName(o);return relManP(o)?{k,p:o,f,name:nm||o.name.split(" ").slice(-2).join(" "),rank:o.role,col:f.col||"#6a8aa0",met:relMSMet(o),pid}:{k,p:o,f,name:nm||shortN(o.name),rank:relSrvRank(o),col:fcol(f),met:relMSMet(o),pid}}
  const v=(rivals||[]).find(x=>String(x.id)===String(k));if(!v)return null;const met=typeof isKnown61==="function"?isKnown61(v):knows(v);const f=met?pv(v):kitStrangerOf(v);
  return{k:v.id,p:v,f,name:v.name,rank:rkName(v),col:met?fcol(f):"#8a8a8a",met,pid:typeof kOf61==="function"?kOf61(v):String(v.id)}}
 window.relPerson=relPerson;
@@ -91,7 +91,7 @@ function relMSName(o){try{if(S.known&&typeof k61Named==="function"&&!k61Named(o)
 function relMSMet(o){try{if(S.known&&typeof k61St==="function")return k61St(o)>=1}catch(e){}return true}
 window.relMSMet=relMSMet;
 function relCourtK(o){for(const c in (S.court||{}))if(S.court[c]===o)return c;return null}
-function relMSFace(o){if(relMan(o))return pMan(o);if(o===S.maid)return pMaid();const c=relCourtK(o);if(c)return c==="ty"?pDoc():{src:courtSrc(c,o),ini:"Hoạn",col:"#8a8aa0"};return pServ(o)}
+function relMSFace(o){if(relManP(o))return pMan(o);if(o===S.maid)return pMaid();const c=relCourtK(o);if(c)return c==="ty"?pDoc():{src:courtSrc(c,o),ini:"Hoạn",col:"#8a8aa0"};return pServ(o)}
 function relSrvRank(o){if(o===S.maid)return kitMaidTitle();if(relCourtK(o))return o.n||"";const w=ownerOf(o);const r=o.role==="maid"?"Cung nữ":"Thái giám";
  return w===S?r:S.thO&&w===S.thO?`${typeof srkName==="function"?srkName(o):r} · Thái hậu`:w?`${r} · cung ${w.name}`:r}
 function relMenL(){try{menInit()}catch(e){}return (S.men||[]).filter(m=>m.alive&&menMet(m))}
@@ -101,7 +101,7 @@ function relSrvL(){const L=[];const add=o=>{if(o&&!L.includes(o))L.push(o)};add(
    N/M, selected highlight), grouped Ta · Chí tôn · Phi tần, labels = the name only. The panel shows ONE pair under the heading
    "Quan hệ giữa X và Y": X | the rows both ways | Y, then "Đã biết về X". Y defaults to Ta (her own relation with X); when X = Ta, Y
    defaults to the first person of strip 2. Never a hidden counterpart. PG.rel ↔ relSel (an outside link that sets relSel still works). */
-const relGrp=k=>k==="me"?"Ta":k==="emp"||k==="th"?"Chí tôn":typeof k!=="string"?"Phi tần":/^m\d+$/.test(k)?"Nam nhân":"Cung nhân";
+const relGrp=k=>k==="me"?"Ta":k==="emp"||k==="th"?"Chí tôn":typeof k!=="string"?"Phi tần":/^m\d+$/.test(k)||relManP(relMSOf(k))/* E-FIX-5: a road man (jrd_bd/jrd_pt sứ thần) is a man */?"Nam nhân":"Cung nhân";
 const relSeps=L=>L.map((x,i)=>Object.assign({},x,{sep:i&&relGrp(L[i-1].k)===relGrp(x.k)?"":relGrp(x.k)}));
 function relItems(){const ms=(typeof isSrv==="function"&&isSrv())?[]:relMenL().concat(relSrvL()).map(o=>({k:relKey(o)})).filter(x=>x.k);
  return relSeps([{k:"me"},{k:"emp"}].concat(S.thDead?[]:[{k:"th"}],liveRivals(true).map(v=>({k:v.id})),ms))}

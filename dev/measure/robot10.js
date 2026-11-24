@@ -185,7 +185,7 @@ async function life(job){const t0=Date.now();const R={job,bugs:[],cps:0,ui:{scan
  while(true){if(Date.now()-memT>MEMEVERY){memT=Date.now();await memSample()}
   const n=await p.evaluate(([m])=>window.__bot.step(m,300),[mode]);
   const cps=await p.evaluate(()=>window.__r10.cps.splice(0));
-  for(const cp of cps){R.cps++;if(RECYCLE&&R.cps>1)for(const d of DEV){(R.uiErrs=R.uiErrs||[]).push(...ui[d].__errs.map(m=>[d,m]));await ui[d].context().close().catch(()=>{});ui[d]=await boot(b,DEVS[d])}
+  for(const cp of cps){R.cps++;if(RECYCLE&&R.cps>1)for(const d of DEV){(R.uiErrs=R.uiErrs||[]).push(...ui[d].__errs.map((m,i)=>[d,m,(ui[d].__eAt||{})[i]]))/* E-FIX-5: keep the stack / buổi / save of a recycled page's error */;await ui[d].context().close().catch(()=>{});ui[d]=await boot(b,DEVS[d])}
    for(const d of DEV)await uiCheck(ui[d],d,cp,job,bug,R);
    if(!oldDone){oldDone=true;const first=await p.evaluate(()=>window.__r10.firstSave);for(const d of DEV.slice(0,1))await oldSaves(ui[d],d,cp.save,first,bug)}}
   if(n>=1||await p.evaluate(()=>!!window.__r10.halt))break;if(Date.now()-t1>CAP){cap=true;break}}
@@ -208,7 +208,7 @@ async function life(job){const t0=Date.now();const R={job,bugs:[],cps:0,ui:{scan
  for(const s of (st.x.saveFail||[]))bug('save','inpage6 save round-trip failed',s);
  for(const [k,m,s] of errs)bug('js',k+': '+m.split('\n')[0].slice(0,200),s,{save:st.r.lastSave});
  for(const d of DEV)ui[d].__errs.forEach((m,i)=>{const w=(ui[d].__eAt||{})[i]||{};bug('js','['+d+' real page] '+m.split('\n')[0].slice(0,200),[w.stk,w.at?'@ '+w.at:''].filter(Boolean).join(' '),w.save?{save:w.save}:undefined)});
- for(const [d,m] of (R.uiErrs||[]))bug('js','['+d+' real page] '+m.split('\n')[0].slice(0,200),'');delete R.uiErrs;await memSample().catch(()=>{});
+ for(const [d,m,w0] of (R.uiErrs||[])){const w=w0||{};bug('js','['+d+' real page] '+m.split('\n')[0].slice(0,200),[w.stk,w.at?'@ '+w.at:''].filter(Boolean).join(' '),w.save?{save:w.save}:undefined)}delete R.uiErrs;await memSample().catch(()=>{});
  /* a page whose JS heap or DOM keeps growing over the life (last samples ≥ 2× the early ones and +150 MB heap / +20000 nodes) = a leak finding */
  const grow=(S0,lab)=>{if(!S0||S0.length<6)return;const a=S0.slice(1,4),z=S0.slice(-3);const av=(x,i)=>x.reduce((s,r)=>s+r[i],0)/x.length;
   const h0=av(a,1),h1=av(z,1),n0=av(a,2),n1=av(z,2);if((h1>2*h0&&h1-h0>150)||(n1>2*n0&&n1-n0>20000))bug('mem',lab+' memory keeps growing over the life (leak)','JS heap '+Math.round(h0)+' → '+Math.round(h1)+' MB · DOM nodes '+Math.round(n0)+' → '+Math.round(n1)+' · listeners '+Math.round(av(a,3))+' → '+Math.round(av(z,3))+' over '+z[z.length-1][0]+' s'+(/bot page/.test(lab)&&R.mem.census&&R.mem.census.length?(()=>{const c0=R.mem.census[0],c1=R.mem.census[R.mem.census.length-1];return ' · in the document '+c0[1]+' → '+c1[1]+' nodes (rest = detached, held by JS) · biggest holder '+JSON.stringify(c1[3][0])+' · S.logs '+c0[4]+' → '+c1[4]})():''),{save:st.r.lastSave})};
