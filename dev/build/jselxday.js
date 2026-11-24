@@ -102,7 +102,7 @@ function selxFree(){const Z=S.selx2;if(selxEvening())return selxEve();const H=se
  o.push(selxO("Ngồi yên chờ tới tối",()=>{Z.kh=Math.min(Z.kh,BAL.time.khac);selxFree()},{x:selxX(0,"tới ngay buổi tối, không phải chờ")}));
  selxCard(selxSo(Z.at),`<p>${H.length?`Ở ${selxSo(Z.at)} lúc này có ${selxNmL(H)}.`:`${selxSo(Z.at)} vắng người.`}</p>`,o,selxMaMa())}
 /* greeting = the existing two-way rule (jgreet greetName: a face always, a name only if her nết and birth let her give it) */
-function selxGreet(v){const Z=S.selx2;Z.met=Z.met||{};Z.met[v.id]=1;let line="";try{const G=greetName(S,v);line=G&&G.line||""}catch(e){}try{k61Know(v,"Làm quen ở "+BAL.selx.lodge.n,true,1)}catch(e){}
+function selxGreet(v){const Z=S.selx2;Z.met=Z.met||{};Z.met[v.id]=1;let line="";try{const G=greetName(S,v);line=G&&G.line||""}catch(e){}try{k61Know(v,"Làm quen ở "+BAL.selx.lodge.n,true,2)}catch(e){}/* she learnt the name (selxNm prints it from here on): j61 stage 2, else its prose mask turned the printed name into «<rank> ???» */
  try{kitKnow({text:`Ngươi biết mặt ${k61Named(v)?v.name:"một tú nữ"}`,key:"selx:met:"+v.id})}catch(e){}if(line)try{log(line)}catch(e){}}
 let SELX_CUR=null;
 /* ================= DRAMA ENGINE (yard.md Format B: SELX_SEEDS.yard / .dorm / .kept) ================= */
@@ -147,7 +147,7 @@ function selxStX(st,c,her){const D=BAL.selx;const nm=r=>r==="ma"?"Giáo tập ma
 function selxEve(){const Z=S.selx2;const d=Z.days;const pool=d===3?selxAll():selxAll().filter(v=>selxHomeOf(v)===Z.home).concat(selxAll().filter(v=>selxHomeOf(v)!==Z.home).slice(0,BAL.selx.drama.extra));
  selxDrama(d===3?"kept":"dorm",pool,()=>d===3&&!S.selx2.two&&R(100)<BAL.selx.drama.two?(S.selx2.two=1,selxDrama("kept",pool,()=>selxNight())):selxNight())}
 function selxNight(){const Z=S.selx2;const d=Z.days;if(d===3)return selxEdict();
- selxCard("Đêm",`<p>${d===1?"Đèn tắt. Ngươi nằm nghe tiếng thở của người nằm cạnh, nghĩ tới ngày mai ra điện.":"Đèn tắt. Trong viện chỉ còn ${selxNumW(BAL.selx.yard.kept)} người được ban hương nang."}</p>`,[selxO("Ngủ",()=>selxDay(d+1))])}
+ selxCard("Đêm",`<p>${d===1?"Đèn tắt. Ngươi nằm nghe tiếng thở của người nằm cạnh, nghĩ tới ngày mai ra điện.":`Đèn tắt. Trong viện chỉ còn ${selxNumW(BAL.selx.yard.kept)} người được ban hương nang.`}</p>`,[selxO("Ngủ",()=>selxDay(d+1))])}
 /* ================= DAY 2 «Điện tuyển» ================= */
 /* ---- DAY 2 morning: the TOILETTE (OD 24/11 ~08:55Z; the existing jtoil mirror, the occasion «Điện tuyển»), or dress as given with a bare face ---- */
 function selxD2Dress(){const Z=S.selx2;const I=BAL.selx.imp;const o=[];
@@ -348,7 +348,8 @@ function selxRmT(R){const tok=k=>(selxRoyals().find(x=>x[0]===k)||[])[2];const T
 function selxRoomIn(mine){const R=S&&S.selxRm;if(!R||R.in||!worldOn())return;R.in=1;const own=new Map((mine||[]).map(v=>[v.id,v]));
  /* one order on both seats: the guest's live diff (jcoophl "a" ops) adds new world people in id order (Object.keys of the id map), so the host adds the kept girls in that same id order (not by score) */
  for(const r of (R.res||[]).slice().sort((x,y)=>(+x.id||0)-(+y.id||0))){if(!r.kept||rivals.some(v=>v.id===r.id))continue;const g=(R.g||[]).find(v=>v.id===r.id);const v=own.get(r.id)||(g?selxJ(g):null);if(!v)continue;
-  v.rank=selxRank(v,r.step,{k:"_",r0:v.r0});v.__done=1;if(typeof roomFor!=="function"||roomFor("consort"))rivals.push(v)}
+  v.rank=selxRank(v,r.step,{k:"_",r0:v.r0});v.__done=1;/* her maid comes WITH her (law 6b, written once on the host): else each seat made its own maid lazily (j8 consorts) under its own j61 key */try{if(!v.maid)v.maid=maidMk(v);if(!v.staff)v.staff=[]}catch(e){}
+  if(typeof roomFor!=="function"||roomFor("consort"))rivals.push(v)}
  try{palFix()}catch(e){}
  /* the room clock: the days, ONCE, as an ABSOLUTE target (the clock at the draw + the days): a second run (a merged week that brings back an
     older cohort copy, a solo selxClock while COOPW was off for a moment) sets the same clock again, never +days twice (coop-e2e brA3: host +6) */
@@ -364,6 +365,11 @@ function selxClkTo(c){const n=BAL.selx.tuan,d=x=>(x[0]||0)*n+(x[1]||0);if(!Array
    merged week, so the guest never moved, coop-e2e brA3 host wk 6 / guest wk 1); absolute and idempotent: after a full rebuild she already holds it */
 function selxClkSync(){try{if(typeof selxCo!=="function"||!selxCo()||worldOn())return;const R=S&&S.selxRm;if(!R||!Array.isArray(R.clk))return;selxClkTo(R.clk)}catch(e){console.error("selxClkSync",e)}}
 window.selxClkSync=selxClkSync;
+/* ONE j61 KEY PER GIRL (coop-e2e «one j61 key = one person», seat order A): a girl of the days is not in rivals and has no sid, so j61 kOf61 gave her an
+   «x<n>» key from THIS seat's counter (S.kseq) the moment she was greeted — the two seats' counters drifted apart (LIVE never spends them here) and later
+   keys of different people met. Her id is the same on both seats (the room draw) and is her key once she enters rivals («r<id>»): she keeps that key
+   from the first day, so what she learnt of her name carries over to the world person, and no counter is spent. */
+(function(){if(typeof kOf61!=="function")return;const k0=kOf61;kOf61=function(e){try{if(e&&e.tuNu&&e.id!=null&&S&&!(rivals||[]).includes(e)){const k="r"+e.id;if(!(rivals||[]).some(v=>v&&v.id===e.id))KREG[k]=e;return k}}catch(x){}return k0.apply(this,arguments)};window.kOf61=kOf61})();
 (function(){if(typeof render!=="function")return;const r0=render;render=function(){selxClkSync();return r0.apply(this,arguments)};window.render=render})();
 /* in a room the clock of the days moves once, in selxRoomIn (never once per seat: two seats' +3 would merge to +6) */
 (function(){const k0=selxClock;selxClock=function(){if(selxCo()){const Z=S.selx2;Z.clock=1;return}return k0.apply(this,arguments)};window.selxClock=selxClock})();
