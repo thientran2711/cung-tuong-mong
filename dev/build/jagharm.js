@@ -98,7 +98,7 @@ function haOpts0(v,N,need){const O=[];if(!haOn()||v===S||v.coop||v.confined)retu
    if(typeof pgHeld==="function"&&pgHeld(v).length&&!(v.inv||[]).some(e=>typeof pgFood==="function"&&pgFood(e))){const u=agU(v,N2,100,{g:{spite:H.prep.cook}},{},"scheme");
     if(u>0)O.push({k:"harm:cook",ak:"cook",t,u,tag:"scheme",act:"tự tay nấu một món",at:(kh,vv)=>palaceOf(vv||v)})}}}
  /* Trả chứng cứ lấy lòng (j78 tieuhuy): she hands back what she holds on someone she fears, to buy peace (need safe / ally) */
- if((!need||need==="safe"||need==="ally")&&ACT.tieuhuy){const E=haTargets(v).filter(x=>{try{return evG(v,x)>=netTh(v,"repay")&&ACT.tieuhuy.ok(v,x)}catch(e){return false}});
+ if((!need||need==="safe"||need==="ally")&&ACT.tieuhuy){const E=haTargets(v).filter(x=>{try{return evG(v,x)>=1&&ACT.tieuhuy.ok(v,x)}catch(e){return false}});
   const x=E.length?mindPickBy(E,y=>BAL.mind.pick.ag.base+danger(y,v),v):null;
   if(x&&motiveOK(v,x,"tieuhuy").ok){const gn=haGain("tieuhuy");const N3=Object.assign({},N);N3.safe=Math.max(N.safe||0,cl(danger(x,v)/100,0,1)*road.safe);
    const u=agU(v,N3,100,{g:gn.g,l:gn.l||{}},{},"help");if(u>0&&(!need||gn.g[need]!=null))O.push({k:"harm:tieuhuy",ak:"tieuhuy",t:x,u,tag:"help",act:haVerb("tieuhuy",x),at:(kh,vv,tt)=>haPlace("tieuhuy",vv||v,tt||x,kh,false)})}}

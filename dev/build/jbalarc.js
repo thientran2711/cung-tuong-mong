@@ -173,7 +173,7 @@ Object.assign(BAL,{arc:{
    (j9 hostility / her oán) that counts as a reason, its score = min × grudge / gr; debtK = score per nợ ân above min; fac / facAlly = score
    (× min) of an opposed / own jreign side; goal = that person's own road names her as rival; evK = she / they did a HOSTILE deed to the other within the
    last ev entries of the people ledger (S.roster.acts); evF = the same for a friendly deed (gift / visit / kết giao) or a cleared misunderstanding (r2). */
-BAL.arc.trig={on:1,fb:[2,3],fr:[2,2],st:[3,1,3,3],min:1,early:2,gr:30,debtK:.5,fac:1,facAlly:1,goal:1.2,evK:1.5,evF:1,ev:12};
+BAL.arc.trig={on:1,fb:[2,3],fr:[2,2],st:[3,1,3,3],min:1,early:2,debtK:.5,fac:1,facAlly:1,goal:1.2,evK:1.5,evF:1,ev:12};
 
 /* typed-stat-bal GROUP C block (law 4): new amounts of group-C modules — Object.assign(BAL.eff.<module>,{…}) or new keys, never a key set twice */
 Object.assign(BAL.eff.jpetcare,{babySuc:1/* Sức a week at least from a Non-stage pet (petcStageT X.suc + its text) */,playSuc:1/* Sức from the «Chơi» care game (petcBody text + petc result) */});

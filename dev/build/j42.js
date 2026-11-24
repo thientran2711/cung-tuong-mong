@@ -531,8 +531,8 @@ function srvStaffAct(k,s){if(!can(1))return null;const m=srvM();
   srvAf(s,SRVA.frame.afL);apply(SRVA.frame.l);log(`Ngươi tố ${s.name} nhưng ${m.name} không tin, còn trách ngươi gây chuyện.`);return false}
  if(k==="poison"){const t=ownerOf(s);if(!stfPoisonOk(S,m,s))return null;const oP=od(SRVA.poison.o(S,m));/* odds read before the spend (shown-odds r2-rv) */spend(SRVA.poison.k);apply(srvCa("poison",S,m));const ok=roll(oP);const r=typeof mlPoisonDo==="function"?mlPoisonDo(m,S,t,s,!ok,1):"";if(r)log(r);return ok}
  return null}
-/* AG-ALL-2 G5: Bỏ độc — a maid of a palace hostile to her master (BAL.mline.feudHost), the poison bought (SRVA.poison.c); the same gate for an NPC staff */
-function stfPoisonOk(a,m,x){try{const t=ownerOf(x);const bac=a===S?S.bac:(a.bac||0);return !!(m&&t&&t!==m&&x.role==="maid"&&x!==a&&hostility(m,t)>=BAL.mline.feudHost&&bac>=-srvCa("poison",a,m).bac&&!(a===S&&S.srv.lau>0))}catch(e){return false}}
+/* AG-ALL-2 G5: Bỏ độc — a maid of a palace hostile to her master (netThK host·hostLo), the poison bought (SRVA.poison.c); the same gate for an NPC staff */
+function stfPoisonOk(a,m,x){try{const t=ownerOf(x);const bac=a===S?S.bac:(a.bac||0);return !!(m&&t&&t!==m&&x.role==="maid"&&x!==a&&hostility(m,t)>=netThK(m,"host","hostLo")&&bac>=-srvCa("poison",a,m).bac&&!(a===S&&S.srv.lau>0))}catch(e){return false}}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-cnv]");if(!b)return;e.stopPropagation();e.preventDefault();if(b.disabled||!isSrv()||S.dead||Q.length)return;
  const s=servById(+b.dataset.sid);if(!s)return;const bf=rsnap();const r=srvStaffAct(b.dataset.cnv,s);if(r!=null)resultShow(b.firstChild.textContent,bf,r);render()},true);
 (function(){const s0=selfCardHTML;selfCardHTML=function(){if(!isSrv())return s0.apply(this,arguments);const m=srvM();

@@ -40,7 +40,7 @@ agReg("consort","par4",(v,N,need)=>{const O=[];if(!p4On()||v===S||v.out||!v.aliv
  try{
   /* kid care / guard (j25) */
   if(nd(X.kidCare.g)){const k=p4SickKid(v);if(k)P(p4O(v,"kidCare",{n:AGC4BTN.kidCare,c:{bac:-BAL.bacFee.kidCare},o:100,k:BAL.btn.kidCare.k},N,X.kidCare.g,"help"))}
-  if(nd(X.kidGuard.g)&&kidGuardOk(v)&&others(v).some(t=>t&&t!==v&&hostility(t,v)>=X.kidGuard.host))P(p4O(v,"kidGuard",{n:AGC4BTN.kidGuard,c:{bac:-BAL.bacFee.kidGuard},o:100,k:BAL.btn.kidGuard.k},N,X.kidGuard.g,"safe"));
+  if(nd(X.kidGuard.g)&&kidGuardOk(v)&&others(v).some(t=>t&&t!==v&&hostility(t,v)>=netTh(t,"host")))P(p4O(v,"kidGuard",{n:AGC4BTN.kidGuard,c:{bac:-BAL.bacFee.kidGuard},o:100,k:BAL.btn.kidGuard.k},N,X.kidGuard.g,"safe"));
   /* cycle forgeries (jcycle) */
   if(nd(X.cyc.g)&&!v.confined){const L=cyHideCards(v);if(L[0])P(p4O(v,"cycFix",L[0],N,X.cyc.g,"scheme",()=>"ksp"));if(L[1])P(p4O(v,"cycMama",L[1],N,X.cyc.g,"scheme"))}
   /* rouge (jration) */
