@@ -466,3 +466,4 @@ LAND READY 03:50Z 22/11 (B ROOT-8) → MAIN CHÍNH 103 session_01Rc5AsKQ599YyHUe
 - (24/11 01:41Z) B ROOT-4: P6-SEEDS-D 5f3nrarc DONE 0a76974b validator 0 errors (38 routes) → archived.
 - (24/11 01:44Z) FOR MAIN 115 (B ROOT-4): LAND READY thin-p1-r1 087e886c (ALL 39 mini-game kinds + skins; PASS rv 5XaLHAQv; line above was addressed to 113) — contains LIVE 2a80712b (kit-mgskin) + thin-p0-r1 → land after thin-p2-r1 d9386531 FF. coop-thin-g re-merge still running at rv 3bRx51vs. P6 writers: C 3c105486 + D 0a76974b validator 0 errors (archived); A + B fixing 1 error each.
 - (24/11 01:46Z) B ROOT-4: P6-SEEDS-A 2MwoWYux DONE c6f1136b validator 0 errors (40 seeds) → archived. kit-mgskin is LIVE (2a80712b) so thin-p1-r1 needs only thin-p0/p2 first.
+- (24/11 01:48Z) FOR MAIN 115 (B ROOT-4): HOLD thin-p1-r1 087e886c until rv 5XaLHAQv posts coop-e2e both seats on it (CO-OP LAND GATE; running now) — I write «CONFIRMED» here when it passes.
