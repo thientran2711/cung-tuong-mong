@@ -1178,7 +1178,7 @@ const KIT_PFO={gap:10,dflt:762,band:{cold:762,"consort-0":749,"consort-1":749,"c
 window.KIT_PFO=KIT_PFO;
 /* the ONE person-info component: every person card / sheet on every device goes through kitPcFix → kitPersonChips */
 window.kitPersonChips=kitPcGrid;
-(function(){const f0=kitPcFix;kitPcFix=function(pc){const r=f0.apply(this,arguments);try{kitPcKey(pc)}catch(e){console.error("kitPcKey",e)}try{kitPcGrid(pc)}catch(e){}try{KIT_PFO.fit(pc)}catch(e){}try{kitPcSize()}catch(e){}return r}})();
+(function(){const f0=kitPcFix;kitPcFix=function(pc){const r=f0.apply(this,arguments);try{kitPcKey(pc)}catch(e){console.error("kitPcKey",e)}try{kitPcGrid(pc)}catch(e){}try{KIT_PFO.fit(pc)}catch(e){}try{if(typeof kitPcScroll==="function")kitPcScroll(pc)}catch(e){console.error("kitPcScroll",e)}try{kitPcSize()}catch(e){}return r}})();
 document.addEventListener("click",e=>{const c=e.target.closest&&e.target.closest(".kpgrid .kst-chip");if(!c||e.target.closest("button"))return;try{if(typeof kpPop==="function"){kpPop(c,`<div class="kpopt">${c.title}</div>`);e.stopPropagation()}}catch(x){}},true);
 (function(){const st=document.createElement("style");st.id="k2b-pcgrid";st.textContent=`
 /* KIT 20a person card key block (left column): sits right under the portrait, before the wear slots and stat chips */

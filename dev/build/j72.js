@@ -199,7 +199,9 @@ function q72Do(u,oi){const q=q72();const x=q.a.find(z=>z.u===u);if(!x)return;con
  if(ok){q72Ap(s.w);if(s.r)q72Rel(X.A,s.r);if(s.rb&&X.B)q72Rel(X.B,s.rb);let e="";if(s.fn)try{e=s.fn(X,x,true)||""}catch(er){console.error(er)}txt=`${nm}: ${q72Txt(s.ok||"được việc",X)}. ${e}`.trim();log(`${q72Title(X)} · ${txt}`);q72Go(x,X,o?o.to:null,txt)}
  else{q72Ap(s.l);if(s.lr)q72Rel(X.A,s.lr);if(s.lrb&&X.B)q72Rel(X.B,s.lrb);let e="";if(s.fn)try{e=s.fn(X,x,false)||""}catch(er){}const fm=o?(o.lto||"fail"):st.f;txt=`${nm}: không thành, ${q72Txt(s.no||(fm==="r"?"phải làm lại":"hỏng việc"),X)}. ${e}`.trim();log(`${q72Title(X)} · ${txt}`);
   q72Go(x,X,fm==="r"?"stay":fm==="e"?"fail":fm==="b"?"bad":fm,txt)}
- resultShow(`${q72Title(X)}: ${nm}`,b,ok);render()}
+ /* owner 24/11 ~21:50Z real (v5): the card's first line is ONE plain sentence of what happened to HER; the title is the job, not a copy of the sentence */
+ window.__kaSenOvr=ok?`Ta làm xong bước «${nm}» trong việc của ${q72Short(X.A)}.`:`Bước «${nm}» trong việc của ${q72Short(X.A)} không thành.`;
+ try{resultShow(q72Title(X),b,ok)}finally{window.__kaSenOvr=null}render()}
 function q72Drop(u){const q=q72();const x=q.a.find(z=>z.u===u);if(!x||Q.length)return;const b=rsnap();const X=q72X(x);q72End(x,"fail",X);resultShow("Bỏ việc",b,false);render()}
 
 /* ---------- she calls a favour in (two-way: they owe her) ---------- */

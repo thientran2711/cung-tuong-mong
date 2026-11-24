@@ -61,29 +61,34 @@ let WHY_NIGHT=null;
   if(W.mood)F.push({k:"mood",t:`Hoàng thượng đang ${W.mood>0?"vui":W.mood===-1?"buồn":"giận"}`,s:W.mood>0?1:-1});
   F.push({k:"talk",t:s>=BAL.nightEnd.warm?"đêm vui":s>=BAL.nightEnd.normal?"đêm êm":"đêm nhạt"});whyT();whyNote("emp","sung",d,F,q0)}}catch(e){}return r}})();
 /* ---------- the one sentence ---------- */
-function whyWho(p){if(p==="th")return"Thái hậu";if(p==="emp")return"Đêm thị tẩm";try{if(p&&p.queen&&typeof kaWho!=="function")return"Hoàng hậu";if(typeof kaNamed==="function"&&!kaNamed(p))return"người chưa quen";return typeof kaWho==="function"?kaWho(p):p.name||""}catch(e){return p&&p.name||""}}
+/* KIT §7 result "Vì sao" (owner 24/11 ~21:50Z real, Fold shot v5: «người chưa quen: theo tính nết → oán +12» = unreadable): ONE plain line per person = WHO (her name, or «Vị <bậc> chưa rõ tên» when the name is not yet known to her — never the bare «người chưa quen»)
+   + the REAL cause in plain words (nết/trọng named when she knows them, else «ta chưa rõ tính nết nàng») → what it did to HER («oán ta +12», «thiện cảm với ta +6», «Sủng thêm 5»). One colon after the WHO, no %, no vague «theo tính nết». Identical lines of one result merge («… (2 người)»). */
+function whyWho(p){if(p==="th")return"Thái hậu";if(p==="emp")return"Hoàng thượng";try{if(p&&p.queen&&typeof kaWho!=="function")return"Hoàng hậu";if(typeof kaNamed==="function"&&!kaNamed(p)){const r=p&&RANKS[p.rank];return r&&p!==S?`Vị ${r.n} chưa rõ tên`:"Một người chưa rõ tên"}return typeof kaWho==="function"?kaWho(p):p.name||""}catch(e){return p&&p.name||""}}
 function whyPron(p){if(p==="th")return"Thái hậu";if(p==="emp")return"Hoàng thượng";try{return typeof netSex==="function"&&netSex(p)==="m"?"người":"nàng"}catch(e){return"nàng"}}
-const WHY_STAT={aff:"thiện cảm",oan:"oán",th:"thiện cảm",hh:"thiện cảm",sung:"Sủng"};
+const WHY_STAT={aff:"thiện cảm với ta",oan:"oán ta",th:"thiện cảm với ta",hh:"thiện cảm với ta",sung:"Sủng"};
 /* her own stats are said in words ("Sủng thêm 5"): the Sổ ghi replay (jlogsync) reads "Sủng +5" as a second change */
 const WHY_OWN=new Set(["sung"]);
+function whyUnnamed(p){try{return p!=="th"&&p!=="emp"&&typeof kaNamed==="function"&&!kaNamed(p)}catch(e){return false}}
 function whyText(e,d){const p=e.who;let kn=[],tk=false;try{kn=p==="th"||p==="emp"?[]:trKnown(p)||[]}catch(x){}try{tk=p!=="emp"&&trongKnown(p)}catch(x){}
  /* a person she has not met (name masked) is never described by her nết or trọng either */
- if(whyWho(p)==="người chưa quen"){kn=[];tk=false}
- const parts=[],U=[];
- for(const f of e.F){if(f.k==="net"){if(kn.includes(f.t)){const s=`tính ${f.t}${f.x?` (${f.x})`:""}`;if(!parts.includes(s))parts.push(s)}else if(!U.includes("tính nết"))U.push("tính nết")}
-  else if(f.k==="trong"){if(tk){const s=`trọng ${f.v}: ${f.s>0?"hợp ý":"trái ý"}`;if(!parts.includes(s))parts.push(s)}else{const s=`điều ${whyPron(p)} trọng`;if(!U.includes(s))U.push(s)}}
+ if(whyUnnamed(p)){kn=[];tk=false}
+ const parts=[];let unkNet=false,unkTr=false;
+ for(const f of e.F){if(f.k==="net"){if(kn.includes(f.t)){const s=`tính ${f.t}${f.x?` (${f.x})`:""}`;if(!parts.includes(s))parts.push(s)}else unkNet=true}
+  else if(f.k==="trong"){if(tk){const s=`trọng ${f.v}, ${f.s>0?"hợp ý":"trái ý"}`;if(!parts.includes(s))parts.push(s)}else unkTr=true}
   else if(f.t&&!parts.includes(f.t))parts.push(f.t)}
  {const Ns=parts.filter(x=>/^tính /.test(x));if(Ns.length>1){const i=parts.indexOf(Ns[0]);for(const x of Ns.slice(1))parts.splice(parts.indexOf(x),1);parts[i]="tính "+Ns.map(x=>x.slice(5)).join(", ")}}
- if(U.length){if(parts.some(x=>/^tính /.test(x)))U[U.indexOf("tính nết")]="nết khác chưa rõ";parts.push("theo "+U.filter(Boolean).join(" và "))}
+ if(unkNet||unkTr){const pr=whyPron(p);parts.push(unkNet&&unkTr?`ta chưa rõ tính nết và điều ${pr} trọng`:unkNet?(parts.some(x=>/^tính /.test(x))?"còn nết khác ta chưa rõ":`ta chưa rõ tính nết ${pr}`):`ta chưa rõ điều ${pr} trọng`)}
  if(!parts.length)return"";const n=d!=null?d:e.d;if(!n)return"";
- return `${whyWho(p)}: ${parts.join(", ")} → ${WHY_STAT[e.stat]||e.stat} ${WHY_OWN.has(e.stat)?(n>0?"thêm ":"bớt "):(n>0?"+":"−")}${Math.abs(n)}`}
+ return `${p==="emp"?"Đêm thị tẩm":whyWho(p)}: ${parts.join(", ")} → ${WHY_STAT[e.stat]||e.stat} ${WHY_OWN.has(e.stat)?(n>0?"thêm ":"bớt "):(n>0?"+":"−")}${Math.abs(n)}`}
+/* identical lines of one result (two strangers of the same bậc) say it once with the count */
+function whyUniq(T){const c=new Map();for(const t of T)c.set(t,(c.get(t)||0)+1);return[...c].map(([t,k])=>k>1?`${t} (${k} người)`:t)}
 /* entries of one act merged per person + stat */
 function whyMerge(L){const M=[];for(const e of L){const m=M.find(x=>whyKey(x.who)===whyKey(e.who)&&x.stat===e.stat);if(m){m.d+=e.d;for(const f of e.F)if(!m.F.some(g=>whyFEq(g,f)))m.F.push(f)}else M.push({who:e.who,stat:e.stat,d:e.d,F:e.F.slice()})}return M}
 /* ---------- Sổ ghi: the line that shows the number carries the why ---------- */
 const WHY_LRX=/\d/;
 /* a line carries the why of a change only when it names that person (her name, or Thái hậu / Hoàng hậu) — never an unrelated line */
 function whyNames(h,e){const t=String(h).replace(/<[^>]+>/g,"");const p=e.who;if(p==="th")return /Thái hậu/.test(t);if(p==="emp")return /Thị tẩm|thị tẩm|Hoàng thượng/.test(t);if(!p||!p.name)return false;return t.includes(p.name)||(!!p.queen&&/Hoàng hậu/.test(t))}
-function whyLogTail(L){const T=whyMerge(L).map(e=>whyText(e)).filter(Boolean);return T.length?` <span class="past kwl">Vì sao: ${T.join("; ")}.</span>`:""}
+function whyLogTail(L){const T=whyUniq(whyMerge(L).map(e=>whyText(e)).filter(Boolean));return T.length?` <span class="past kwl">Vì sao: ${T.join("; ")}.</span>`:""}
 (function(){const l0=log;log=function(h){try{if(S&&typeof h==="string"&&WHY_LRX.test(h.replace(/<[^>]+>/g,""))&&!/class="past kwl"/.test(h)){const L=WHYL.filter(e=>!e.fl&&e.tk===WHYN_T&&whyNames(h,e));if(L.length){const t=whyLogTail(L);if(t){L.forEach(e=>e.fl=true);h=h.replace(/\s*$/,"")+t}}}}catch(e){}return l0.apply(this,arguments)}})();
 /* a change whose line was written AFTER it without a number, or in the same act: the newest line of this act that names the person */
 function whyFlushLate(){if(!S||!Array.isArray(S.logs))return;const L=WHYL.filter(e=>!e.fl);if(!L.length)return;L.forEach(e=>e.fl=true);const seq=S.logSeq||0;
@@ -92,7 +97,7 @@ function whyFlushLate(){if(!S||!Array.isArray(S.logs))return;const L=WHYL.filter
 /* ---------- the result card: one more row of the kit grid ---------- */
 (function(){const r0=rsnap;rsnap=function(){const o=r0.apply(this,arguments);if(o)o.whyAt=WHYN;return o}})();
 function whyRows(before){if(!before)return[];const k=before.whyAt!=null?WHYN-before.whyAt:0;const L=k>0?WHYL.slice(-Math.min(k,WHYL.length)):WHYL.filter(e=>e.tk===WHYN_T);
- return whyMerge(L).map(e=>{let d=e.d;if((e.stat==="th"||e.stat==="hh")&&before[e.stat]!=null){const m=(S[e.stat]||0)-before[e.stat];if(m)d=m}return whyText(e,d)}).filter(Boolean)}
+ return whyUniq(whyMerge(L).map(e=>{let d=e.d;if((e.stat==="th"||e.stat==="hh")&&before[e.stat]!=null){const m=(S[e.stat]||0)-before[e.stat];if(m)d=m}return whyText(e,d)}).filter(Boolean))}
 function kitWhyRowHTML(T){return T&&T.length?`<span class="kr kr-note kr-vi"><span class="krl">Vì sao</span><span class="krv">${T.map(x=>`<span class="kitem"><span class="ef n">${x}</span></span>`).join("")}</span></span>`:""}
 (function(){const s0=resultShow;resultShow=function(title,before){const r=s0.apply(this,arguments);try{const T=whyRows(before);if(!T.length||window.__bot)return r;const t=document.getElementById("rtoast");
  if(t&&t.classList.contains("on")){const kb=t.querySelector(".kb");if(kb&&!kb.querySelector(".kr-vi")){const kem=kb.querySelector(".kr-kem");const tmp=document.createElement("span");tmp.innerHTML=kitWhyRowHTML(T);const row=tmp.firstChild;if(kem)kb.insertBefore(row,kem);else kb.appendChild(row)}}
