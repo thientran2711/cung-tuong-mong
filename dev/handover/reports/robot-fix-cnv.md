@@ -108,3 +108,64 @@ Residuals for the successor (same four families, smaller; do them on review/robo
 - FOREMAN_E_STATUS.md line «F takes the whole shown≠applied family» appended 12:25Z.
 
 Laws: 1–3 untouched · 4 no number typed (only harness reads) · 5 untouched · 6b one person = one object after a load (visRelink), 6c untouched · 7/9/10/12 no UI, no wording, no kit part changed (no shots) · 11 whole families + scans + tables above · 13 check line · 14–18 no rule changed.
+
+---
+# ROBOT FIXER cnv #2 (session_01UV1Szktd1kHeRCPadpEMyu, Foreman F #2, depth 2) — START_CTX ≈ 3 % — residuals R1–R3
+PRIORITY #1 CHECK ('faceFor|bandKeys|fk|nmFix|sgTxt|saveSettle|ag.pend'): OD 0 new | ledger 0 | claims this row | main: j17 faceFor/bandKeys, jnamefix nmFix (load/start/month), j1 sgTxt SG-CARD | review/*: robot-fix-cnv 1f046fb7 (base, under BIG review, not moved) | reused: r10-play-rt.js, r10-night-after-load.js, robot10.js, the predecessor's RT_REP filter.
+Branch **review/robot-fix-cnv-2** on top of 1f046fb7 (1f046fb7 untouched). Box files (not in git): /home/user/wt/rfx2-out/ (robot runs robot/ + robot2/, probe outputs).
+
+## R2 save drift — GAME (family «a rule settled only at render / load / month, not where the state changes»)
+Root: save() runs at the END of render() and BEFORE render() after most actions (j6:12, j23/j82/j83/j85 «save();render()»). Two rules were settled only at render (renderPanel0 → faceInit), at load (ageInit, deser → nmFix) or at the month tick (nmFix):
+| cause | where | effect for her | fix |
+|---|---|---|---|
+| lazy face pick: a new age band (eun0→eun1, ct1→ct2, th0→th1, emp0→emp1), a jmort fc reset, a new hire got its face only at the next render / load | j17 faceFor | the file held the old face key; a reload re-picked a RANDOM face → a person's face changed on reload | j6 **saveSettle()** (faceInit before every write) + faceInit at ageYear (j25, beside srvOldName) |
+| palace elders (jstaff giveFace) stored fk «mama» for every age while faceInit asked for the maid band key (womid at 28–50) | jstaff / j17 | every render / load re-picked the elder's face (mama pool → maid pools: also not the elder pool) | one band rule: bandKeys «elder» = womid/mama by BAL.ageBand[2]; giveFace and faceInit both use it |
+| mid-month name clash: a new servant / consort sharing a short form with someone (seen: «Trình Tố Huyên» beside HER «Kiều Tố Huyên»; consort «Tiêu Chỉ Nhược») was renamed only at load / month (jnamefix nmFix, why "like") | jnamefix | a reload renamed a living person and rewrote her journal (robot row «S.logs … Phú Sát ma ma → Trưởng Tôn ma ma») | saveSettle() runs nmFix("save") before writing (≈2.6 ms measured; the load renames the same way with cards open) |
+Harness (render-time, 0 with render on): the bot page never calls save() (it is in render) → robot10-in.js roundTrip calls saveSettle() before reading s1 (= what the file holds); the rivals' plan bookkeeping S.ag.pend / did / log (j95c render → j95sync → placeWhere → jagent agTick/agReapply) joins the reviewed repair filter (RT_REP) — dev/test/r10-play-rt.js (render on, does NOT filter them) = 0.
+Scan (law 11): **dev/test/r10-face-band.js** (robot bot page, ser → load → ser every buổi; FILTER=<path regex>, OP=<js> instead of the load, DUMP=<file>).
+| scan (400 buổi unless noted) | 1f046fb7 | this branch |
+|---|---|---|
+| face paths on reload, cnv_chu s3 300 buổi | 2 (R.0.staff.0.fk eun0→eun1) | 0 |
+| face paths on reload, cnv_mat s5 300 buổi | 12 (consort ct1→ct2, staff eun1→eun2, thO th0→th1, emp emp0→emp1) | 0 |
+| unsettled name clash (OP nmFix) cnv_chu s3 | 5 paths (s121 «Cố Lạc Anh» renamed) | 0 |
+| unsettled name clash cnv_mat s5 / cnv_ban s5 | 16 (consort «Tiêu Chỉ Nhược»), 5 (staff) on the first build without saveSettle | 0 / 0 |
+| every load drift except reviewed repairs, cnv_chu s3 | 7 (ag.did 4, fk 3) | fk 0 · rest = render-time ag.* (filtered, 0 render-on) |
+| r10-play-rt render on cnv_mat s5 / cnv_chu s3, 150 buổi | — | 0 / 0 |
+
+## R3 «Sủng +4» vs fx 5, «Sủng +2» vs 3 — HARNESS (law 4 holds)
+sg() (j1): Hoàng thượng lạnh lùng ×.7 on gains → sg(5)=4, sg(3)=2; apply() adds sg(fx.sung); the kit draws HER literal Sủng through sgTxt (kitParse j63, kitOptModel jk2b). Card = applied. The auditor read the raw line and raw fx. Fix (robot10-in.js auditOpt): reads the line through sgTxt and compares Sủng with sg(effect) (a no-break-space-marked number may also equal the raw effect: sgFix).
+Scan: **dev/test/r10-sung-audit.js** (bot, Hoàng thượng temper forced none / lạnh lùng / nồng nàn; checks every option with one Sủng change: sgTxt number vs sg(o.fx.sung), plus the robot's own Sủng rows).
+| run (cnv_mat 700 buổi) | old auditor (1f046fb7) | new auditor |
+|---|---|---|
+| lạnh lùng, seed 5 | 28 options checked · card≠applied 0 · robot rows **2** («Sủng +4» vs 5, «Sủng +2» vs 3 = R3 exactly) | — |
+| lạnh lùng, seeds 9 / 13 | — | 40 + 22 checked · card≠applied 0 · rows 0 |
+| nồng nàn, seeds 3 / 9 / 13 | — | 35 + 7 + 28 checked · 0 · 0 |
+| none, seed 5 | — | 40 checked · 0 · 0 |
+
+## R1 night stall after load (1/5 before) — NOT REPRODUCED
+| probe | saves | REAL (she plays) stuck | robot loop stuck |
+|---|---|---|---|
+| r10-night-after-load cnv cnv_chu, seeds 3 / 11 / 23 (wait + open) | 18 | 0 | 0 |
+| same, EVEONLY, seed 109338969 (the R1 life's seed) | 9 | 0 | 0 |
+| robot rerun ×2 (cnv spread 5 bots, UIEVERY 100, CAP 700) | 10 lives | night row 0/5 · 0/5 | |
+Code read: jnf step() leaves «wait» only when no flip dialog (nfsum / FLIPQ) is queued; after a reload FLIPQ is empty, so a «wait» save opens the choice on the first step tick; every case the predecessor traced was a screen waiting for her tap. No game change; if the row comes back, the robot attaches the save (saves/), replay with r10-night-after-load.js DUMP.
+
+## Robot rerun (this branch, cnv spread 5 bots × 1 life, UIEVERY 100, CAP 700)
+| row | 1f046fb7 (predecessor final) | rerun 1 (adc0c3cd) | rerun 2 (173d3dfa) |
+|---|---|---|---|
+| night stall after load | 1/5 (4 hits) | 0/5 | 0/5 |
+| save→load→save | 5/5 · 27 hits (fk) | 5/5 · 15 (ag.pend, logs rename) | 1/5 · 1 (S.ag.log, render-time → filtered 7aa243a3) |
+| number rows (Sủng) | 2 | 0 | 0 |
+| mem / «Bạc +8» | 0 / 0 | 0 / 0 | 0 / 0 |
+| still listed, owned elsewhere | wall cap (harness), lag [fold] tab 402–515 ms (robot10-lag owner) | same | same |
+
+## Gates (on 173d3dfa = last game change; 7aa243a3 adds harness filter only)
+| gate | result |
+|---|---|
+| quickcheck | PASS · old save ok · render 264/285, tab 648/683, buổi 1787/2277 ms (new/live) · core gates PASS · time-spill PASS |
+| coop-e2e Fold-host / iPad-guest · COOP_SWAP=1 | 142/142 · 142/142 |
+| save-slots.js · night-softlock.js | ALL OK · 8/8 PASS |
+| r10-play-rt render on cnv_mat / cnv_chu 150 buổi | 0 / 0 drift |
+Laws: 1–3, 5 untouched · 4 no typed number (elder band reads BAL.ageBand[2]; Sủng audit only) · 6b a person keeps her face and name across a reload · 7/9/10/12 no UI, wording or kit change · 11 whole families + 2 scans + tables · 13 check line · 14–18 no rule changed.
+
+SẴN SÀNG KIỂM review/robot-fix-cnv-2 7aa243a3aaeac569d89618d947dfa25b503c9842 (on top of 1f046fb7) · quickcheck PASS · core gates PASS · coop-e2e both seats 142/142.
