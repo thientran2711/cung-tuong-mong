@@ -16,10 +16,17 @@ function dlgsOn(){try{return !!(BAL.dlgs&&BAL.dlgs.on)&&typeof kitDialogue!=="un
 /* a person → {src,n}; her = S (figFor knows her dress / rank) */
 function dlgsPer(o,n){try{if(!o)return null;const src=figFor(o)||"";if(!src)return null;return{src,n:n||o.name||""}}catch(e){return null}}
 function dlgsMe(){return dlgsPer(S,S&&S.name)}
+/* the screen-word pass (j84 VP) on a WHOLE line (fix, every family): the §95 box types a line word by word (one span a word), so the page-wide pass
+   saw lone words — «nàng» became «nàng ta» (and «nàng ta» «nàng ta ta»), «ngươi» became «ta», a split item name kept its capital. A spoken line is
+   speech (the pass keeps «nàng» / «ngươi» inside “…”), a narration line is narration; the layer is then skipped by the page pass (data-vp-skip). */
+function dlgsVp(t,speech){try{if(typeof VP!=="object"||!VP.fix)return dlgsVeil(t);let x=speech?VP.fix("“"+t+"”"):VP.fix(t);if(speech&&/^“[\s\S]*”$/.test(x))x=x.slice(1,-1);else if(speech)return dlgsVeil(t);if(VP.itemLow)x=VP.itemLow(x,"");return dlgsVeil(x)}catch(e){return t}}
+/* the name veil (j61) the same way: a person she has not met by name reads «Phi ???» in the line as on the card (the page pass saw «Phú » «Sát » … one word a span and
+   never matched, so the scene printed the full name the card hides); the box title is one text node and stays under the page pass */
+function dlgsVeil(t){try{return typeof k61Scrub==="function"&&S&&S.known?k61Scrub(t,true,"",t):t}catch(e){return t}}
 function dlgsResolve(spec,c){try{if(!spec||!dlgsOn()||!Array.isArray(spec.lines))return null;const B=BAL.dlgs;if(spec.lines.length<B.min||spec.lines.length>B.max)return null;
  const L=spec.L,R=spec.R||"me";if(!L||L===R)return null;const who=r=>r==="me"?dlgsMe():c.who(r);const pL=who(L),pR=who(R);if(!pL||!pR)return null;
  const lines=[];for(const ln of spec.lines){const f=ln.who==="nar"?null:ln.who===L?0:ln.who===R?1:-1;if(f<0)return null;
-  const sp=f==null?null:[L,R][f],ls=f==null?null:[R,L][f];const t=String(c.txt?c.txt(ln.text,sp,ls):ln.text||"").trim();if(!t||/\{[^}]*\}/.test(t))return null;lines.push({fig:f,who:f==null?"":[pL.n,pR.n][f],text:t,focus:!!ln.focus&&f!=null})}
+  const sp=f==null?null:[L,R][f],ls=f==null?null:[R,L][f];const t=String(c.txt?c.txt(ln.text,sp,ls):ln.text||"").trim();if(!t||/\{[^}]*\}/.test(t))return null;lines.push({fig:f,who:f==null?"":[pL.n,pR.n][f],text:dlgsVp(t,f!=null),focus:!!ln.focus&&f!=null})}
  let bg="";try{const a=typeof kitPlaceArt==="function"?kitPlaceArt(spec.at||c.at||(S&&S.place)||"home"):null;bg=a&&a.src||""}catch(e){}
  return{bg,figs:[pL.src,pR.src],names:[pL.n,pR.n],lines,watch:!!spec.watch}}catch(e){console.error(e);return null}}
 /* attach to the card the family just pushed (the last Q item pushed since n0, matched by test) */
@@ -27,7 +34,7 @@ function dlgsAttach(n0,d,test){if(!d)return false;for(let i=Q.length-1;i>=Math.m
 /* the player: one kit scene, two full figures (her right), the KIT §95 dialogue; cb when the last line is read */
 async function dlgsPlay(d,cb){let done=false;const fin=()=>{if(done)return;done=true;DLGS.playing=false;document.body.classList.remove("kdlgs-on");try{cb&&cb()}catch(e){console.error(e)}};
  DLGS.playing=true;document.body.classList.add("kdlgs-on");
- try{const B=BAL.dlgs,U=typeof IMG_U==="function"?IMG_U:(x=>x);const Sc=kitScene.open({bg:U(d.bg),intro:B.intro});const g=Sc.L.g,ip=document.documentElement.classList.contains("kv2"),K=ip?B.ipad:B.fold,fh=Math.round(g.H*K.fh);
+ try{const B=BAL.dlgs,U=typeof IMG_U==="function"?IMG_U:(x=>x);const Sc=kitScene.open({bg:U(d.bg),intro:B.intro});try{Sc.L.setAttribute("data-vp-skip","")}catch(e){}const g=Sc.L.g,ip=document.documentElement.classList.contains("kv2"),K=ip?B.ipad:B.fold,fh=Math.round(g.H*K.fh);
   await Sc.fig(d.figs[0],{cx:g.w*K.lx,top:g.H-fh,fh,z:2});await Sc.fig(d.figs[1],{cx:g.w*K.rx,top:g.H-fh,fh,z:3});
   Sc.show();const bh=Math.round(g.H*K.boxH),bw=Math.round(g.w*K.boxW);
   DLGS.cur=kitDialogue.play(Sc,{lines:d.lines,box:()=>({x:Math.round((g.w-bw)/2),y:g.H-bh,w:bw}),onDone:()=>{DLGS.cur=null;Sc.close(fin)}});

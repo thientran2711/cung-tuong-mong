@@ -1,6 +1,6 @@
 /* SIDE-LINE DIALOGUE SCENES browser test (review/sideline-dlg; schema reports/sideline-dialogue.md «## SCHEMA»). After dev/site/build_site.sh:
    [DLGS_STEP=k: every k-th scene only] [DLGS_ONLY=id,id: these units only] node dev/test/dlgs-play.js [outdir] [fold,ipadAir] [N]   (outdir default: a temp folder OUTSIDE git; shots dlgs-<i>-<step>-<dev>.png; N = scenes with shots, default 3)
-   For EVERY scene in DLGS_DATA whose family adapter is live (j72, j68, j7): casts the unit in a fresh life (needs relaxed: the test only checks the scene),
+   For EVERY scene in DLGS_DATA whose family adapter is live (j72, j68, j7, j70, ky, j71, wc, nr = NRASK road asks + the stock j72:nr_<kind> cards): casts the unit in a fresh life (needs relaxed: the test only checks the scene),
    offers it, and checks: the scene plays BEFORE the card (modal hidden, kit layer + 2 figures + the §95 box), every role resolved to a real cast
    person (box title = that person's name), no {placeholder} left, the speaker lit / the other dimmed, tap = finish, next tap = next line, the right
    number of lines, then the card (the one carrying the scene) shows with its choices; the scene never plays twice; calm (reduced motion) plays it too; 0 page errors. */
@@ -17,14 +17,43 @@ let fail=0,pass=0;const ok=(c,m)=>{if(c)pass++;else fail++;if(!c||process.env.V)
   const life0=()=>g.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;/* a consort's life: a new life can open as a palace maid (S.srv) or at rank 0 (no household); start again until it is a ranked consort's */for(let i=0;i<30;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(typeof S!=='undefined'&&S&&!(typeof isSrv==='function'&&isSrv())&&(S.rank|0)>=1)break}/* a grown child for j72 units whose requester is her child (req ak; same as j72c-play) */if(!allKids().some(([k])=>k.alive&&(k.age||0)>=18)){S.kids=S.kids||[];S.kids.push({name:'Thử Nhi',alive:true,age:20,sex:'f',dad:'emp'})}/* and a grown son: an ak seed that calls the child «hoàng tử» casts only a son (j72cKidOk) */if(!allKids().some(([k])=>k.alive&&(k.age||0)>=18&&k.sex==='m')){S.kids=S.kids||[];S.kids.push({name:'Thử Lang',alive:true,age:19,sex:'m',dad:'emp'})}/* a mid-life household as dev/test/j68c-play.js (servants, a young child) so every cast kind exists */try{if(!S.maid)S.maid=newMaid(nmNew('maid'),50);if((S.staff||[]).length<4)fillStaff(S,true);if(!S.kids.some(k=>k.alive&&(k.age|0)<12))S.kids.push(mkKid('m',6))}catch(e){}window.kitBloom=()=>{};/* the test child would raise the «Hạ sinh» bloom over the scenes */['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});Q.length=0;showModal();tab='act';render()});
   await life();
   await g.waitForTimeout(1500);await g.addStyleTag({content:'#kload,#klife,.modal.kload,#dawn,.kne,#kneov,#kroul,#kroulw,#kcourt,.kroul{display:none!important}'});
-  const ids=(await g.evaluate(()=>DLGS_DATA.map(r=>r.id).filter(id=>/^(j72|j68|j7|j70|ky|j71|wc):/.test(id)))).filter((id,i,A)=>!process.env.DLGS_STEP||i%(+process.env.DLGS_STEP)===0).filter(id=>!process.env.DLGS_ONLY||process.env.DLGS_ONLY.split(',').includes(id));ok(ids.length>0,`${dev} DLGS_DATA has scenes of live families (${ids.length})`);
+  const ids=(await g.evaluate(()=>DLGS_DATA.map(r=>r.id).filter(id=>/^(j72|j68|j7|j70|ky|j71|wc|nr):/.test(id)))).filter((id,i,A)=>!process.env.DLGS_STEP||i%(+process.env.DLGS_STEP)===0).filter(id=>!process.env.DLGS_ONLY||process.env.DLGS_ONLY.split(',').includes(id));ok(ids.length>0,`${dev} DLGS_DATA has scenes of live families (${ids.length})`);
   let k=0,fam0=null,nu=0;for(const id of ids){
    {const f=id.split(':')[0];if((f!==fam0||++nu>=15)&&fam0!==null){await life();nu=0}fam0=f}
    /* cast + offer the unit's real card (needs / nết / step places relaxed for the test: it checks the scene; each family's own play test checks casting) */
    /* casting is random (each life has its own household, nết, kin): a unit that cannot be cast gets up to 3 fresh lives before it fails */
    const cast=()=>g.evaluate(id=>{Q.length=0;const M=$("modal");M.hidden=true;/* each unit is its own test: clear the event pacing (evGate: one optional card per buổi / per day / same actor in a row) left by the unit before, mid-day (no day-start hold) */try{e68().sch=null;EVHOLD.length=0;EVLAST=null;S.buoi=Math.max(1,S.buoi||0)}catch(e){}const fam=id.split(":")[0],sid=id.slice(fam.length+1);const sp=dlgsGet(id);
     const keep=(names,fn)=>{const sv=names.map(n=>window[n]);names.forEach(n=>{window[n]=()=>true});try{return fn()}finally{names.forEach((n,i)=>{window[n]=sv[i]})}};
-    if(fam==="j72"){const T=T72I["c:"+sid]||T72I[sid];if(!T)return{err:"no template"};const sv={need:T.need,rf:T.rf,bf:T.bf,p:T.p};T.need=null;T.rf=null;T.bf=null;if(sv.p)T.p=X=>{try{return sv.p(X)}catch(e){return{}}};let x=null;
+    if(fam==="nr"||(fam==="j72"&&/^nr_/.test(sid))){/* NRASK road asks: unit "nr:<ask key>#<i>" (or the stock card "j72:nr_<kind>", no ask drawn): a REAL road NPC of the road's kind
+     (consort / her cung nữ road cnv / eunuch servant road eun / a man or court man of NRM kind) is put at that chapter of that road, her rival cast the way her
+     offer site casts it (nrRival / nrMRival / nrMenRival), and the help card is pushed as nrOffer / nrMOffer / nrMenOffer push it (q.ch follow-up → q72Make → x.p={nr,nn,av} → q72Offer "fu") */
+     const stock=fam==="j72";const hi=sid.lastIndexOf("#");const key=stock?null:sid.slice(0,hi),av=stock?-1:+sid.slice(hi+1);let r=null,n=null;
+     if(!stock){for(const rr in NRM)for(const nn in NRM[rr].c)if(r==null&&nrAskId(rr,+nn)===key){r=rr;n=+nn}
+      if(r==null&&typeof ROAD14==="object")for(const rr in ROAD14){if(r==null&&ARC67[rr]&&nrAskId(rr,BAL.road.first-1)===key){r=rr;n=BAL.road.first-1}for(const nn in ROAD14[rr])if(r==null&&nrAskId(rr,+nn)===key&&nrCh(rr,+nn)){r=rr;n=+nn}}
+      if(r==null)return{err:"no road chapter for "+key}}
+     const ask=stock?null:nrAskL(r,n)[av];if(!stock&&!ask)return{err:"no ask "+sid};const hk=stock?sid.slice(3):ask.k,T=T72I["nr_"+hk];if(!T)return{err:"no template nr_"+hk};
+     const needB=stock?hk==="do":/\{B\}/.test(nrAskTxt(ask));
+     const kind=r==null?"rv":NRM[r]?NRM[r].k:(ARC67[r]&&ARC67[r].o)||"rv";
+     const live=()=>liveRivals(true).filter(v=>v.alive&&!v.out&&!v.coop);const setN=(o,c)=>{o.nr=Object.assign(o.nr||{},{o:(o.nr&&o.nr.o)||kind,r,n,t:0,k:0,h:n,hs:1,hb:0,x:0,c:c==null?null:c,e:"",l:(o.nr&&o.nr.l)||[]})};
+     let rk,ri,bk=null,bi=null;
+     if(kind==="cnv"||kind==="eun"){/* a servant's road (nrMOffer): a maid / eunuch of her household (her own cung nữ S.maid only when no other) */const role=kind==="cnv"?"maid":"eunuch";
+      if(nrServL(role).filter(x=>x!==S.maid).length<2){const r0=S.rank;S.rank=Math.max(S.rank||0,5);try{fillStaff(S,true)}catch(e){}S.rank=r0;for(const v of live().slice(0,2)){try{fillStaff(v,true)}catch(e){}}}
+      const L=nrServL(role);const s=L.find(x=>x!==S.maid&&nrMis(x)===S)||L.find(x=>x!==S.maid&&nrMis(x))||(role==="maid"?S.maid:null);if(!s)return{err:"cannot cast: no "+role};
+      if(r==null){r=s.nr&&s.nr.r;n=s.nr&&s.nr.n}setN(s,null);[rk,ri]=nrMK(s);const riv=nrMRival(s);if(riv){[bk,bi]=nrMK(riv)}}
+     else if(NRM[r]){/* a man's road (nrMenOffer): a man of S.men / S.court of that kind (a man of the life given that role when none, as nrask-m-shots) */
+      let L=nrMenL().filter(e=>e.a&&e.k===kind);if(!L.length){const role=Object.keys(NRMR).find(x=>NRMR[x]===kind);const o=(S.men||[]).find(x=>x.alive!==false&&x.id!=="m96");if(o&&role){o.role=role;L=nrMenL().filter(e=>e.a&&e.k===kind)}}
+      const e=L[0];if(!e)return{err:"cannot cast: no man of kind "+kind};e.p.nr=Object.assign(e.p.nr||{},{r,n,t:0,x:0,hs:1,l:(e.p.nr&&e.p.nr.l)||[]});[rk,ri]=e.a;
+      if(needB&&e.g==="men"&&!(S.men||[]).some(m=>m!==e.p&&m.alive!==false&&m.id!=="m96")&&S.men&&S.men[0])S.men.push(Object.assign({},e.p,{id:"tm"+S.men.length,nr:null,name:(e.p.name||"")+" Nhị"}));
+      const riv=nrMenRival(e);if(e.g==="men"&&riv){bk="man";bi=riv.id}else if(e.g==="off"&&riv){bk="off";bi=riv}else if(e.g==="court"&&riv&&riv!==S){bk=riv.queen?"hh":"rv";bi=riv.id}
+      if(needB&&!bk){const w=live()[0];if(w){bk=w.queen?"hh":"rv";bi=w.id}}}
+     else{/* a consort's road (nrOffer): a peer consort (not the Hoàng hậu: her asks may name the queen), her rival another consort */
+      const L=live().filter(v=>!v.queen);const v=L[0];if(!v)return{err:"cannot cast: no consort"};if(r==null){nrInit(v);if(!v.nr||!v.nr.r)return{err:"cannot cast: no road"};r=v.nr.r;n=v.nr.n||nrNext(r,BAL.road.first)}
+      const w=live().find(x=>x!==v&&!x.queen)||live().find(x=>x!==v);setN(v,w?w.id:null);rk="rv";ri=v.id;const riv=nrRival(v);if(riv&&riv!==S){bk=riv.queen?"hh":"rv";bi=riv.id}}
+     if(needB&&!bk)return{err:"cannot cast: no rival for {B}"};
+     const A=q72A(rk,ri);if(!A)return{err:"cannot cast: q72A "+rk+" "+ri};let x=null;x=keep(["q72PlOk"],()=>q72Make(T,A));if(!x)return{err:"cannot cast: q72Make nr_"+hk};
+     x.bk=bk;x.bi=bi;x.p=Object.assign({},{nr:r,nn:n,av},x.p);if(!q72X(x))return{err:"cannot cast: q72X"};
+     if(!stock&&dlgsNrId(x)!==id)return{err:"dlgsNrId "+dlgsNrId(x)+" != "+id};q72Offer(x,"fu")}
+    else if(fam==="j72"){const T=T72I["c:"+sid]||T72I[sid];if(!T)return{err:"no template"};const sv={need:T.need,rf:T.rf,bf:T.bf,p:T.p};T.need=null;T.rf=null;T.bf=null;if(sv.p)T.p=X=>{try{return sv.p(X)}catch(e){return{}}};let x=null;
      /* world facts an old template's requester needs (a confined / pregnant consort, a eunuch servant): set them on a real person, as j72c-play's forced cast */
      {const R1=rivals.filter(v=>v.alive&&!v.out&&!v.queen);if(T.r==="rvc"&&!R1.some(v=>v.confined)&&R1[0])R1[0].confined=3;if(T.r==="rvp"&&!R1.some(v=>v.preg)&&R1[1])R1[1].preg=1;if(T.r==="rv+"&&!R1.some(v=>aff(v,S)>=10)&&R1[2])R1[2].rel=20;{const tr=v=>{try{return traitsOf(v)}catch(e){return[v.trait]}};const gv=(v,t)=>{v.trait=t;if(Array.isArray(v.traits))v.traits[0]=t};const kn=R1.filter(v=>tr(v).some(t=>t==="Ân cần"||t==="Khiêm nhường"));if((T.r==="rvk"||T.b==="rvk")&&kn.length<2)R1.slice(3,5).forEach(v=>gv(v,"Ân cần"));if(T.r==="rva"&&!R1.some(v=>tr(v).some(t=>t==="Tham vọng")))R1.slice(-1).forEach(v=>gv(v,"Tham vọng"))}
       if(T.r==="sve"||T.r==="sv"||T.r==="svm"||T.b==="sve"){const r0=S.rank;S.rank=Math.max(S.rank||0,5);try{fillStaff(S,true)}catch(e){}S.rank=r0}}
@@ -70,8 +99,9 @@ let fail=0,pass=0;const ok=(c,m)=>{if(c)pass++;else fail++;if(!c||process.env.V)
      KY.cur={id:sid,W:w,wn:w.kind==="emp"?"Hoàng thượng":w.kind==="th"?"Thái hậu":(w.ref&&w.ref.name)||""};Q.unshift({t:"Kỳ ngộ",h:"<p>…</p>",opts:[{n:"A",fx:{}},{n:"B",fx:{}}],pid:"kyngo",pp:{id:sid},evId:"kyngo:"+sid,ky:1,ev:1})}}
     else if(fam==="j71"||fam==="wc"){/* their card is built inside the family closure: the same call they make (dlgsMk) with a real cast */const v=liveRivals(true).find(x=>x.alive&&!x.out);const a=A6("rv",v.id);
      const v2=liveRivals(true).find(x=>x.alive&&!x.out&&x!==v);const b=v2?A6("rv",v2.id):a;/* wc watch scenes (R = B): two real consorts */const d=dlgsMk(id,fam==="j71"?{B:a}:{A:a,B:b},t=>e68Fill(String(t).replace(/\{O\}/g,"vật ấy").replace(/\{F\}/g,"hội"),{A:a,B:b}),null);if(!d)return{err:"dlgsMk null"};Q.unshift({t:"x",h:"<p>…</p>",opts:[{n:"A",fx:{}},{n:"B",fx:{}}],dlg:d})}
-    showModal();const m=Q[0];if(!m||!m.dlg){let dbg="";try{if(fam==="ky"&&KY.cur&&KY.cur.W){const w=KY.cur.W,o=w.ref||{};dbg=" "+JSON.stringify({k:w.kind,n:o.name,age:o.age,sex:o.sex,kid:o.kid,img:w.kind==="kid"?!!kidFigSrc(o):null,kidix:Object.keys(KIDIX.prince).length+Object.keys(KIDIX.princess).length,dl:!!KY.cur.__dlg})}}catch(e){dbg=" dbg "+e.message}return{err:"no scene resolved"+dbg,pid:m&&m.pid,q:Q.length,k:m&&m.__dlgk,on:dlgsOn(),hid:$("modal").hidden,dead:!!S.dead}}
-    return{n:sp.lines.length,L:m.dlg.names[0],R:m.dlg.names[1],who:m.dlg.lines.map(l=>l.fig),modal:!M.hidden,scene:!!document.querySelector('.kscn'),dlg:true}},id);
+    showModal();const m=Q[0];if(!m||!m.dlg){let dbg="";try{if(fam==="ky"&&KY.cur&&KY.cur.W){const w=KY.cur.W,o=w.ref||{};dbg=" "+JSON.stringify({k:w.kind,n:o.name,age:o.age,sex:o.sex,kid:o.kid,img:w.kind==="kid"?!!kidFigSrc(o):null,kidix:Object.keys(KIDIX.prince).length+Object.keys(KIDIX.princess).length,dl:!!KY.cur.__dlg})}}catch(e){dbg=" dbg "+e.message}/* a road ask whose card a page gate kept back (card never shown, no scene, the box loaded): a fresh life casts it again (≤3, the outer retry) */const nrHeld=(fam==="nr"||/^nr_/.test(sid))&&$("modal").hidden&&!(m&&m.__dlgk);
+     return{err:(nrHeld?"cannot cast (card held) · ":"")+"no scene resolved"+dbg,pid:m&&m.pid,q:Q.length,k:m&&m.__dlgk,on:dlgsOn(),hid:$("modal").hidden,dead:!!S.dead,play:DLGS.playing,scn:!!document.querySelector('.kscn'),hold:typeof EVHOLD!=="undefined"?EVHOLD.length:null}}
+    return{n:sp.lines.length,L:m.dlg.names[0],R:m.dlg.names[1],who:m.dlg.lines.map(l=>l.fig),txt:m.dlg.lines.map(l=>l.text),modal:!M.hidden,scene:!!document.querySelector('.kscn'),dlg:true}},id);
    let o=await cast();for(let t=0;t<3&&o.err&&/cannot cast/.test(o.err);t++){await life();nu=0;o=await cast()}
    if(o.err){ok(false,`${dev} ${id}: ${o.err} ${JSON.stringify(Object.assign({},o,{err:undefined})).slice(0,300)}`);continue}
    ok(o.dlg&&o.scene&&!o.modal,`${dev} ${id}: scene plays before the card (card hidden)`);
@@ -81,17 +111,22 @@ let fail=0,pass=0;const ok=(c,m)=>{if(c)pass++;else fail++;if(!c||process.env.V)
    for(let i=0;i<o.n;i++){
     const s=await g.evaluate(()=>{const L=document.querySelector('.kscn'),bx=document.querySelector('.kdv-box');const t=bx&&bx.querySelector('.kptitle');const r=bx&&bx.getBoundingClientRect(),lr=L.getBoundingClientRect();
      return{title:t?t.textContent.trim():"",text:bx?bx.querySelector('.kdv-line').textContent:"",lit:L.dataset.klit,dim:[...L.querySelectorAll('.kscn-fig')].map(f=>f.classList.contains('kscn-dim')),inside:!!r&&r.top>=lr.top-1&&r.bottom<=lr.bottom+1&&r.left>=lr.left-1&&r.right<=lr.right+1,
-      over:!!bx&&bx.scrollHeight<=bx.clientHeight+2}});
+      over:!!bx&&bx.scrollHeight<=bx.clientHeight+2,veil:(()=>{try{const x=bx.querySelector('.kdv-line').textContent;return typeof k61Scrub!=="function"||!S.known||k61Scrub(x,true,"",x)===x}catch(e){return true}})()}});
     const w=o.who[i];const want=w==null?"":w===0?o.L:o.R;
     ok(s.title===want||(!!want&&s.title.endsWith(" "+want))||(w!=null&&/\?\?\?/.test(s.title)),`${dev} ${id} line ${i+1}: box title = the speaker «${s.title}» want «${want}»`);
     ok(!/\{[^}]*\}/.test(s.text)&&s.text.length>3,`${dev} ${id} line ${i+1}: text resolved «${s.text.slice(0,50)}»`);
+    /* the box shows the resolved line as it is (the page-wide screen-word pass once rewrote lone typed words: «nàng ta ta», «ngươi»→«ta») */
+    {const nz=x=>String(x).replace(/\s+/g," ").trim();ok(nz(s.text)===nz(o.txt[i]),`${dev} ${id} line ${i+1}: box text = the resolved line «${nz(s.text).slice(0,60)}» vs «${nz(o.txt[i]).slice(0,60)}»`)}
     ok(w==null?s.lit==="":s.lit===String(w)&&s.dim.join()===(w===0?"false,true":"true,false"),`${dev} ${id} line ${i+1}: spotlight ${JSON.stringify({lit:s.lit,dim:s.dim})}`);
+    ok(s.veil,`${dev} ${id} line ${i+1}: no name she has not met shows in the line (j61 name veil)`);
     ok(s.inside&&s.over,`${dev} ${id} line ${i+1}: box inside the layer, no overflow`);
     if(k<NSHOT&&(i===0||i===1))await p.screenshot({path:path.join(OUT,`dlgs-${k}-l${i+1}-${dev}.png`)});
     /* finish the line (a short line may already be typed out by now: then a tap would move on, so tap only while it is still typing) */
     await g.evaluate(()=>{if(![...document.querySelectorAll('.kdv-line .kdw')].every(x=>x.classList.contains('on')))document.querySelector('.kscn').click()});await g.waitForTimeout(80);
     const fin=await g.evaluate(()=>[...document.querySelectorAll('.kdv-line .kdw')].every(x=>x.classList.contains('on')));ok(fin,`${dev} ${id} line ${i+1}: tap finishes the line`);
     await g.evaluate(()=>document.querySelector('.kscn').click());await g.waitForTimeout(i===o.n-1?900:350)}
+   /* a loaded box (4 shared cores) may take longer than the wait above to fade the layer out: wait for it (≤6 s) before checking the card */
+   await g.waitForFunction(()=>!DLGS.playing&&!document.querySelector('.kscn'),null,{timeout:6000}).catch(()=>{});
    const e=await g.evaluate(()=>{const M=$("modal");return{q:Q.map(x=>x.pid||x.t).slice(0,4),scene:!!document.querySelector('.kscn'),modal:!M.hidden,t:Q[0]&&Q[0].t,dlg:!!(Q[0]&&Q[0].dlg&&Q[0].dlg.done),opts:M.querySelectorAll('.opt').length,playing:DLGS.playing}});
    ok(!e.scene&&e.modal&&e.dlg&&e.opts>=2&&!e.playing,`${dev} ${id}: after the last line the card shows with its choices ${JSON.stringify(e)}`);
    if(k<NSHOT)await p.screenshot({path:path.join(OUT,`dlgs-${k}-card-${dev}.png`)});
