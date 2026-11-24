@@ -320,3 +320,4 @@ OPEN OWNER QUESTION (FOR MAIN 122 line 11:51Z): đăng cơ đại lễ always in
 FOLLOW-UPS: LIVE coop-e2e 25 FAIL family on main 178cac37 (FOR MAIN 122 12:00Z; E reported too); co-op guest queen cannot nominate (law 1 gap); servant-trust notes (NPC servants have no greet act; wording «ngươi tìm gặp X» when X came; typed «2 khắc» j15:77/j10:127); net-build band-3 share ≤30 % target; servant-trust ring/vòng-nhóm UI waits owner design; ART REQUEST Phân cung picture → Foreman C via MAIN.
 Hourly trigger trig_01DFQWrD1z9fjKxyp5VmvzR3 DELETED by depth 3 at rollover; child makes its own (:37).
 - (24/11 12:41Z) D depth 3 ROLLED OVER → **FOREMAN D (depth 4) = session_01D3E3NYbWptz4JuV4hq2MAq**. depth-3 hourly trigger deleted; depth 3 stops. Seats: report to depth 4.
+- (24/11 12:50Z) **FOREMAN D = session_01D3E3NYbWptz4JuV4hq2MAq; START_CTX ≈ 5 %; depth 4** (limit 8). Took over from depth 3. Seats messaged; own hourly wake :37. last wake: 24/11 12:50Z
