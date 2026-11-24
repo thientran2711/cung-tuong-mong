@@ -30,6 +30,8 @@ Identity uploads: c04 EbcFFhnuuO, c10 ksXxxbr16B, c16 cpwVVY30eP, c22 rgoLLr0xtc
 | m16 A26 | aFnE7uxfSh | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared |
 | m22 A26 | MBye53yDCm | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared; pink braid ribbon from source hair |
 | m28 A26 | KLdrZdpkqp | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared |
+| m29 A26 | dtNoj6sXSL | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared |
+| s65 A26 | MBye1g5DCm | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared |
 
 Prompt texts at /home/user/wt/dig-out/p{16,26,51,63}.txt may be wiped: regenerate with the cut sentence script (delete exactly the one operator sentence).
 
