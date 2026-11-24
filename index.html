@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place","b":"bc15a44a5a6a","h":[{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"}]};
+window.CTM_BI={"s":"502c48c9+","t":"2026-11-24T17:38Z","c":"SELF-MERGE LAND kit-mapgo: merge LIVE 284e0d08 (index.html/sw.js rebuilt)","b":"8e1568e70aac","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -4324,15 +4324,17 @@ function mkAudio(n,loop,route){try{const a=new Audio(`audio/${n}.mp3`);a.loop=!!
    AudioBuffers (jsfx sfx()) through a GainNode too. Everything falls back to plain HTMLAudio when WebAudio is missing. */
 function auRoute(a){try{if(!AU.ctx||AU.ctx.state==="closed"||a.__gain)return;const src=AU.ctx.createMediaElementSource(a),g=AU.ctx.createGain();src.connect(g);g.connect(AU.ctx.destination);let v=1;a.__gain=g;
  Object.defineProperty(a,"volume",{configurable:true,get:()=>v,set:x=>{v=Math.max(0,Math.min(1,+x||0));g.gain.value=v}})}catch(e){}}
-function auBuf(n){if(!AU.ctx)return null;const c=AU.bufs||(AU.bufs={});const e=c[n];if(e)return e.buf||null;const o=c[n]={buf:null,fail:0};
- try{fetch(`audio/${n}.mp3`).then(r=>r.ok?r.arrayBuffer():Promise.reject(new Error(r.status))).then(ab=>new Promise((ok,no)=>{const p=AU.ctx.decodeAudioData(ab,ok,no);if(p&&p.catch)p.catch(no)})).then(b=>{o.buf=b}).catch(()=>{o.fail=1})}catch(e){o.fail=1}return null}
+function auBuf(n){if(!AU.ctx)return null;const c=AU.bufs||(AU.bufs={});const e=c[n];if(e&&!(e.fail&&performance.now()-e.ft>4000))return e.buf||null;const o=c[n]={buf:null,fail:0,ft:0};
+ try{fetch(`audio/${n}.mp3`).then(r=>r.ok?r.arrayBuffer():Promise.reject(new Error(r.status))).then(ab=>new Promise((ok,no)=>{const p=AU.ctx.decodeAudioData(ab,ok,no);if(p&&p.catch)p.catch(no)})).then(b=>{o.buf=b}).catch(()=>{o.fail=1;o.ft=performance.now()})}catch(e){o.fail=1;o.ft=performance.now()}return null}
 const AU_PRELOAD=["sfx-win","sfx-fail","sfx-learn-good","sfx-learn-bad","sfx-seal-stamp","sfx-tap","sfx-expose","sfx-scheme","sfx-rank-new","sfx-podium","sfx-buy","sfx-coin"];
 function auUnlock(){try{const C=window.AudioContext||window.webkitAudioContext;
  if(C&&!AU.ctx){try{AU.ctx=new C({latencyHint:"interactive"})}catch(e){try{AU.ctx=new C()}catch(x){}}}
  try{if(navigator.audioSession&&navigator.audioSession.type!=="playback")navigator.audioSession.type="playback"}catch(e){}
  const c=AU.ctx;if(c&&c.state!=="running"){const p=c.resume();if(p&&p.catch)p.catch(()=>{})}
  if(c&&!AU.silent){AU.silent=1;try{const s=c.createBufferSource();s.buffer=c.createBuffer(1,1,22050);s.connect(c.destination);s.start(0)}catch(e){}if(!AU.pre){AU.pre=1;AU_PRELOAD.forEach(auBuf)}}
- if(!AU.unlocked){AU.unlocked=true;auTick()}}catch(e){if(!AU.unlocked)AU.unlocked=true}}
+ /* review/sfx-instant (OD 24/11 item 2): ONE context for every synth sound too (bell, kg82Pluck fallback, Sổ tuần knock) — a lazily made second context starts suspended outside a gesture = a silent first sound */
+ if(c){if(!window.__bellCtx)window.__bellCtx=c;else if(window.__bellCtx!==c&&window.__bellCtx.state!=="running"){try{const p=window.__bellCtx.resume();if(p&&p.catch)p.catch(()=>{})}catch(e){}}}
+ if(!AU.unlocked){AU.unlocked=true;auTick()}if(AU.onUnlock)AU.onUnlock()}catch(e){if(!AU.unlocked)AU.unlocked=true}}
 window.auUnlock=auUnlock;
 function musVol(){return OPT.mute||!OPT.snd?0:OPT.mus*AU.duck}
 function fadeTo(a,v,ms,done){if(!a)return;const v0=a.volume,t0=performance.now();const st=()=>{const f=Math.min(1,(performance.now()-t0)/ms);try{a.volume=Math.max(0,Math.min(1,v0+(v-v0)*f))}catch(e){}if(f<1)setTimeout(st,60);else if(done)done()};st()}
@@ -4346,7 +4348,10 @@ function musicCtx(){if(!S)return"bgm-day";if(S.dead)return"bgm-sorrow";if(S.plac
 function auTick(){if(!AU.unlocked)return;const m0=Q[0];if(!(m0&&m0.pid&&musicCtx()==="bgm-tension"))heartLoop(false);if(!OPT.snd||OPT.mute){if(AU.cur)try{AU.cur.volume=0}catch(e){}return}setMusic(musicCtx());if(AU.cur){try{AU.cur.volume=musVol();if(AU.cur.paused&&!document.hidden){const p=AU.cur.play();if(p&&p.catch)p.catch(()=>{})}}catch(e){}}}
 /* real gestures only: touchend / click / pointerup / keydown unlock iOS; pointerdown counts for a mouse (or when WebAudio is missing), a touch pointerdown is not a gesture there */
 for(const ev of ["touchend","click","pointerup","keydown"])document.addEventListener(ev,auUnlock,{capture:true,passive:true});
-document.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse"||!(window.AudioContext||window.webkitAudioContext))auUnlock()},{capture:true,passive:true});
+/* a touch pointerdown once the page already had a real gesture (sticky activation): wake the existing context right at the finger-down, so the tap sound
+   (mini-game strokes play on pointerdown) is not lost to a context that is still resuming at touchend (review/sfx-instant) */
+document.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse"||!(window.AudioContext||window.webkitAudioContext))auUnlock();
+ else if(AU.ctx&&AU.ctx.state!=="running"&&AU.ctx.state!=="closed"){try{const p=AU.ctx.resume();if(p&&p.catch)p.catch(()=>{})}catch(x){}}},{capture:true,passive:true});
 window.addEventListener("pageshow",()=>{AU.silent=0});
 document.addEventListener("visibilitychange",()=>{try{if(document.hidden){if(AU.cur)AU.cur.pause()}else{AU.silent=0;if(AU.ctx&&AU.ctx.state!=="running"){const p=AU.ctx.resume();if(p&&p.catch)p.catch(()=>{})}auTick()}}catch(e){}if(PX.app){try{document.hidden?PX.app.ticker.stop():PX.app.ticker.start()}catch(e){}}});
 /* ---- feedback(kind): sound + haptics + visual, one helper ---- */
@@ -65679,8 +65684,11 @@ if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push(
    kitSfx(moment, {rate, g, at}) plays a moment; every older call (sfx(file), feedback(kind)) still works and goes through the same mixer:
      - the "Tiếng" switch (OPT.snd / OPT.mute) and the "Tiếng động" slider (OPT.sfx) — nothing plays while sound is off or the tab is hidden;
      - UI sounds at ×0.5 of the slider, events at ×1 (files are normalised to the same loudness: max momentary −16 LUFS, peak −1.5 dBFS);
-     - at most 3 sounds at once (voices of j36 count): a 4th UI sound is dropped, a 4th event sound stops the oldest UI sound, else the oldest event sound that has played > 0.5 s (the new moment wins), else it is dropped;
-     - the same file twice within 90 ms plays once (wrappers that meet on one moment never double it);
+     - at most 3 sounds at once (voices of j36 count): a 4th event sound stops the oldest UI sound, else the oldest event sound that has played > 0.5 s (the new moment wins), else it is dropped;
+       a TAP sound (UI layer) is NEVER dropped (owner 24/11 ~18:05Z: every tap sounds at once): it stops the oldest UI voice, or plays over the cap when only events play;
+     - the same file twice within 90 ms (UI layer: 35 ms) plays once (wrappers that meet on one moment never double it; two quick taps both sound);
+     - INSTANT TAPS (review/sfx-instant): every UI + mini-game file is decoded into a WebAudio buffer on the first gesture (AU_PRELOAD), the buffer path also runs
+       while the context is still resuming (the source starts the moment it runs), and a tap sound asked before the very first unlock waits for it (≤ 350 ms);
      - bots (window.__bot) and quiet code paths: silent. Music ducks only under event sounds.
    Wiring (all by wrapping shared functions; no caller changes): motion pieces (j93 kmStage / kitXamPlay / kitResultFx / kitCalendar /
    kitDayShift / kitFlyItem / kitFlipNote / kitAlarm), the reward box steps (shake, lid, items, coins, Nhận), shop (buy, sellItem, wkSell,
@@ -65739,18 +65747,26 @@ for(const k of Object.keys(SFXN))if(/^sfx-pet-/.test(SFXN[k]))SFXL[SFXN[k]]={g:.
 /* ---- the mixer (replaces j11 sfx; same name, every caller keeps working) ---- */
 function ksfxBusy(){const now=performance.now();KSFX.live=KSFX.live.filter(v=>!v.a.ended&&!v.a.paused&&now<v.until);let n=KSFX.live.length;
  try{if(typeof VO!=="undefined"&&VO.cur&&!VO.cur.paused&&!VO.cur.ended)n++}catch(e){}return n}
-sfx=function(n,o){o=o||{};if(!n)return false;n=ksfxFile(n);if(!auOk())return ksfxDrop(n,"off");if(ksfxMgOnce()&&!o.m&&(n==="sfx-learn-good"||n==="sfx-learn-bad"))return ksfxDrop(n,"result-once");if(screenOff())return ksfxDrop(n,"quiet");
- const L=SFXL[n]||{},ui=!!L.ui,now=performance.now();if(now-(KSFX.last[n]||-1e9)<90)return ksfxDrop(n,"twice");
- if(ksfxBusy()>=3){if(ui)return ksfxDrop(n,"full");const v=KSFX.live.find(x=>x.ui)||KSFX.live.find(x=>now-x.t0>500);if(!v)return ksfxDrop(n,"full");try{v.a.pause()}catch(e){}KSFX.live.splice(KSFX.live.indexOf(v),1)}
+/* review/sfx-instant: decode every tap / mini-game sound on the first gesture (j11 auUnlock runs AU_PRELOAD), not on its first play */
+(()=>{const add=f=>{if(f&&!AU_PRELOAD.includes(f))AU_PRELOAD.push(f)};Object.keys(SFXL).forEach(f=>{if(SFXL[f].ui)add(f)});
+ Object.keys(SFXN).forEach(k=>{if(/^mg/.test(k))add(SFXN[k])});["sfx-item-pop","sfx-open","sfx-close","sfx-lock","sfx-page"].forEach(add)})();
+/* a tap sound asked before the very first unlock (the finger-down comes before the touchend that unlocks): play it right after the unlock */
+AU.onUnlock=function(){try{const q=AU.pend||[];AU.pend=[];const now=performance.now();q.forEach(x=>{if(now-x.t<350)sfx(x.n,x.o)})}catch(e){}};
+sfx=function(n,o){o=o||{};if(!n)return false;n=ksfxFile(n);
+ if(!auOk()){if(!AU.unlocked&&OPT.snd&&!OPT.mute&&!document.hidden&&(SFXL[n]||{}).ui&&!window.__bot){const q=AU.pend||(AU.pend=[]);if(q.length<4)q.push({n,o,t:performance.now()});return ksfxDrop(n,"wait")}return ksfxDrop(n,"off")}if(ksfxMgOnce()&&!o.m&&(n==="sfx-learn-good"||n==="sfx-learn-bad"))return ksfxDrop(n,"result-once");if(screenOff())return ksfxDrop(n,"quiet");
+ const L=SFXL[n]||{},ui=!!L.ui,now=performance.now();if(now-(KSFX.last[n]||-1e9)<(ui?35:90))return ksfxDrop(n,"twice");
+ if(ksfxBusy()>=3){const v=KSFX.live.find(x=>x.ui)||(ui?null:KSFX.live.find(x=>now-x.t0>500));if(v){try{v.a.pause()}catch(e){}KSFX.live.splice(KSFX.live.indexOf(v),1)}else if(!ui)return ksfxDrop(n,"full")}
  try{const vol=Math.max(0,Math.min(1,OPT.sfx*(ui?.5:1)*(L.g||1)*(o.g||1)));let b=null,dur=0,web=0;
   /* WebAudio first (iPhone ignores element.volume): a decoded buffer through a GainNode; until it is decoded the HTMLAudio clone plays */
-  const cx=AU.ctx,buf=cx&&cx.state==="running"?auBuf(n):null;
+  /* a context that ran before and is only suspended / interrupted (phone paused it): wake it and start the buffer now — it sounds the moment the context runs */
+  const cx=AU.ctx;if(cx&&cx.state==="running")AU.ran=1;const wake=cx&&AU.ran&&cx.state!=="running"&&cx.state!=="closed";if(wake){try{const p=cx.resume();if(p&&p.catch)p.catch(()=>{})}catch(e){}}
+  const buf=cx&&(cx.state==="running"||wake)?auBuf(n):null;
   if(buf){try{const src=cx.createBufferSource(),g=cx.createGain();src.buffer=buf;g.gain.value=vol;if(o.rate&&o.rate!==1)src.playbackRate.value=o.rate;src.connect(g);g.connect(cx.destination);
    b={ended:false,paused:false,pause(){this.paused=true;try{src.stop()}catch(e){}}};src.onended=()=>{b.ended=true};src.start();web=1;dur=buf.duration*1000/(o.rate||1)+80}catch(e){b=null}}
   if(!b){let a=AU.cache[n];if(a&&a.dead&&now-(a.deadT||(a.deadT=now))>4000){a=null}if(!a){a=AU.cache[n]=mkAudio(n,false)}if(!a||a.dead)return ksfxDrop(n,"dead");b=a.cloneNode();
    b.volume=vol;
    if(o.rate&&o.rate!==1){try{b.preservesPitch=false;b.mozPreservesPitch=false;b.webkitPreservesPitch=false}catch(e){}b.playbackRate=o.rate}
-   dur=(a.duration&&isFinite(a.duration)?a.duration*1000/(o.rate||1):2200)+80}
+   dur=(a.duration&&isFinite(a.duration)?a.duration*1000/(o.rate||1):(ui?600:2200))+80}
   KSFX.last[n]=now;KSFX.live.push({a:b,ui,t0:now,until:now+dur});
   KSFX.log.push({n,m:o.m||"",ui:ui?1:0,t:Math.round(now),w:web});if(KSFX.log.length>400)KSFX.log.splice(0,100);
   if(!web){const p=b.play();if(p&&p.catch)p.catch(()=>{})}
@@ -97893,7 +97909,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="bc15a44a5a6a";window.CTM_BUILD=BUILD;
+const BUILD="8e1568e70aac";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
