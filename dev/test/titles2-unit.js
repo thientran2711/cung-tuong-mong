@@ -75,6 +75,13 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   const x2={tid:'rv_con_om',id:999002};q.a.push(x2);try{q72End(x2,'fail')}catch(e){}ck(S.dh.vn_rv_con_om_a&&S.dh.vn_rv_con_om_a.i>=0,'B3 việc nhờ fail → bad (per chain)');
   const x3={tid:'canh_thai',id:999003};q.a.push(x3);try{q72End(x3,'ok')}catch(e){}ck(S.dh.vn_canh_thai_t&&C.vn_canh_thai_t.n!==C.vn_rv_con_om_t.n,'F2 two chains of one kind (pro) → two different titles');
   ck(Object.keys(T72I).every(k=>C[`vn_${k}_t`]&&C[`vn_${k}_a`]&&BAL.dh.T[`vn_${k}_t`].n.length===1),`F2 every T7 chain (${Object.keys(T72I).length}) has its own pair, once`);
+  /* F6 (E62, E61r FAIL r2): every COMPOSED việc nhờ seed (j72c "c:<id>", J72SEEDS) has its own good + bad pair from its seed field dh, given once by q72End */
+  {const L=(typeof J72SEEDS!=='undefined'&&Array.isArray(J72SEEDS))?J72SEEDS:[];const bad=L.filter(sd=>{const t='c:'+sd.id;return !T72I[t]||!C[`vn_${t}_t`]||!C[`vn_${t}_a`]||C[`vn_${t}_t`].n===C[`vn_${t}_a`].n||sd.dh.split('/')[0].trim()!==C[`vn_${t}_t`].n});
+   ck(L.length>=256&&!bad.length,`F6 every composed seed (${L.length}) has its own pair from its dh field ${bad.slice(0,5).map(s=>s.id).join(',')}`);
+   const t='c:'+(L[0]&&L[0].id);S.dh={};const y1={tid:t,id:999101};q.a.push(y1);try{q72End(y1,'ok')}catch(e){F.push('q72End c: threw '+e.message)}
+   const y2={tid:t,id:999102};q.a.push(y2);try{q72End(y2,'bad')}catch(e){}
+   ck(S.dh[`vn_${t}_t`]&&S.dh[`vn_${t}_t`].i>=0&&S.dh[`vn_${t}_a`]&&S.dh[`vn_${t}_a`].i>=0,'F6 a composed chain: ok → its good title, bad (bại lộ) → its bad title');
+   const h=C[`vn_${t}_t`]?C[`vn_${t}_t`].how(1):'';ck(h&&!/[{}]/.test(h)&&/^Việc nhờ «/.test(h),`F6 composed chain how text names the seed, no placeholder («${h}»)`)}
   /* B4 j70 */
   S.dh={};v.dh={};abandon70({a:v.id,t:'me',m:'poison',id:'t1',kt:[]},'exposed');ck(S.dh.mh_vach&&S.dh.mh_vach.i>=0,'B4 exposer → Vạch rõ gian tay');ck(v.dh.mh_doc_lo&&v.dh.mh_doc_lo.i>=0,'B4 exposed schemer → Bàn tay lộ dấu');
   v.dh={};abandon70({a:v.id,t:'me',m:'rumor',id:'t2',kt:[]},'exposed');ck(v.dh.mh_don_lo&&!/độc/.test(C.mh_don_lo.n),'F3 exposed rumour → a rumour name, never a poison word');

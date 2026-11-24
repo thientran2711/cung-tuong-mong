@@ -224,10 +224,13 @@ const KIND=k=>{try{return (typeof KIND72==="object"&&KIND72[k]&&(KIND72[k].n||KI
 /* the jnroad NPC-road asks (T7 nr_*: their heading is spoken, so the how text names the deed) */
 const NRV={nr_emp:"Nói giúp trước mặt Hoàng thượng",nr_th:"Đỡ lời trước Thái hậu",nr_hh:"Đỡ lời trước Hoàng hậu",nr_thu:"Đưa lá thư kín đến tay người nhà",
  nr_do:"Dò xem kẻ kia đang tính gì",nr_y:"Mời thái y chữa bệnh kín",nr_che:"Che chở người cùng đường",nr_bac:"Giúp bạc lúc túng gấp"};
-const vnName=t=>{try{const T=typeof T72I==="object"&&T72I[t];const s=T&&(typeof T.t==="function"?"":T.t);return s?plainT(s):(NRV[t]||t)}catch(e){return t}};
+const vnName=t=>{try{const T=typeof T72I==="object"&&T72I[t];const s=T&&(typeof T.t==="function"?"":T.t);return s?plainT(s).replace(/\{A\}/g,"người nhờ").replace(/\{B\}/g,"người kia"):(NRV[t]||t)}catch(e){return t}};
 /* DH3N (jdh3n.js) → ROADC[road][n] = [good, bad] for n = BAL.road.first − 1 (the premise .4) … BAL.road.last (.11); VNC[tid] = [good, bad] */
 const ROADC={},VNC={};
 try{for(const r in DH3N.cp)DH3N.cp[r].split(";").forEach((x,i)=>{(ROADC[r]=ROADC[r]||{})[i+4]=x.split("/").map(s=>s.trim())});for(const t in DH3N.vn)VNC[t]=DH3N.vn[t].split("/").map(s=>s.trim())}catch(e){console.error("jdh3n",e)}
+/* E62 (E61r FAIL r2): every COMPOSED việc nhờ seed (j72c, T7 id "c:<seed id>") carries its own pair in the seed itself (field dh "good/bad", J72SEEDS);
+   j72seeds_validate.py and titles2-scan.js fail any seed without one, so a new seed can never ship title-less */
+try{if(typeof J72SEEDS!=="undefined"&&Array.isArray(J72SEEDS))for(const sd of J72SEEDS)if(sd&&sd.id&&typeof sd.dh==="string"){const P=sd.dh.split("/").map(s=>s.trim());if(P.length===2&&P[0]&&P[1])VNC["c:"+sd.id]=P}}catch(e){console.error("jdh3 seeds",e)}
 const SIDE=i=>i?"bằng thủ đoạn, phụ người hay trái lẽ":"mà giữ được nghĩa với người, lẽ với đời";
 const chName=(r,n)=>{try{return n===4?arcName(r):plainT(ARC67[ROAD14[r][n]].t)}catch(e){return ""}};
 function cpCat(){if(typeof DH_CAT!=="object")return;const T=BAL.dh.T=BAL.dh.T||{},C=CB();

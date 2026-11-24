@@ -29,6 +29,8 @@ const PLAIN={"thbenh:Hỏi thăm cho phải phép":"a courtesy visit, no merit a
   for(const k in ARC67){const d=ARC67[k];if(d.o==="rd"||(typeof ROAD14==="object"&&ROAD14[k]))continue;const K=cpKeyOf(k),P=K?pair(K[0]):null;
    rows.push(["arc",k,`o:${d.o} «${d.t||""}»`,K?K[0]+"_t|a":"—",P||"— (no title)"]);if(!P)miss.push("arc "+k);else{addHow(K[0]+"_t");addHow(K[0]+"_a")}}
   for(const t in T72I){const K="vn_"+t,P=pair(K);rows.push(["việc nhờ",t,`${KIND72[T72I[t].kind]||T72I[t].kind} · «${typeof T72I[t].t==="string"?T72I[t].t:"(lời người nhờ)"}»`,K+"_t|a",P||"—"]);if(!P)miss.push("vn "+t);else{addHow(K+"_t");addHow(K+"_a")}}
+  /* E62: every composed seed (J72SEEDS) must carry its own pair (seed field dh → VNC "c:<id>"), even one the engine did not register */
+  for(const sd of (typeof J72SEEDS!=="undefined"&&Array.isArray(J72SEEDS)?J72SEEDS:[])){const t="c:"+sd.id;if(!T2.VNC[t]||!pair("vn_"+t))miss.push("seed "+sd.id+" (no dh pair)");if(!T72I[t])miss.push("seed "+sd.id+" not registered by j72c")}
   const M=typeof M70==="object"?M70:{};for(const m in M){const g=T2.MG70[m];const ks=g?["thoat","lo","nap"].map(r=>`mh_${g}_${r}`):[];const ok=g&&ks.every(k=>C[k]);
    const poison=ok&&g!=="doc"&&ks.some(k=>/độc/.test(C[k].n+" "+C[k].how(1)));rows.push(["mưu hại",m,`${(M[m]&&M[m].n)||m} → group ${g||"—"}`,ks.join(" / ")||"—",ok?ks.map(k=>C[k].n).join(" · "):"—"]);
    if(!ok)miss.push("mh "+m);if(poison)miss.push("mh poison word outside the poison group: "+m)}
