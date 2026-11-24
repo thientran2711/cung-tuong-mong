@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"565c6828+","t":"2026-11-24T22:11Z","c":"robot-fix-cnv-4: S.nightWhy.emp is a whole snapshot of S.empWhy (shallow copy shared .cust: r10-shared-ref split); rebuild","b":"df1af4035036","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
+window.CTM_BI={"s":"8c802ce3+","t":"2026-11-24T22:23Z","c":"review robot-fix-cnv-2: old-world timer family completed (law 11): j77 walkSpillGo x2, jclose cbGreetGo (sibling «Thôi» was guarded), jchat…","b":"55b577ba2251","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -73551,10 +73551,13 @@ function tx(s){if(!s||typeof s!=="string"||!S)return s;const tn=elderBy("tn"),gt
  if(gt)o=o.replace(/[Tt]heo ma ma giáo tập học/g,`Theo ${gt.call}, giáo tập ma ma Nội vụ phủ, học`);
  return o}
 window.elderTx=tx;
-function eventLines(m){try{if(!m||m.__el||typeof m.h!=="string")return;m.__el=1;m.h=tx(m.h);const gt=elderBy("gt"),tn=elderBy("tn"),kn=elderBy("kn");
- if(m.t==="Tuyển tú"&&gt)m.h+=`<p>${gt.call}, giáo tập ma ma Nội vụ phủ, phụng chỉ Thái hậu dạy quy củ cho tú nữ mới: đi, đứng, quỳ, thưa, từng bước một.</p>`;
- if(m.t==="Tân Giả khố"&&tn)m.h+=`<p>${tn.call}, chưởng sự cô cô Đức Thọ cung, đọc lệnh phạt: “Cung quy không tha ai. Giặt cho sạch, đủ hạn thì ra.”</p>`;
- if(m.t==="Đổi chủ"&&kn)m.h+=`<p>${kn.call}, quản sự ma ma Càn Ninh cung, ghi tên ngươi vào sổ cung nữ của cung mới.</p>`}catch(e){}}
+/* review robot-fix-cnv-2 (save→load family «a show-time rule guarded only by page memory»): m.__el is not saved, so a card loaded with its elder line
+   already in m.h got the line AGAIN at the next showModal (every reload of an open «Tân Giả khố» card = one more «đọc lệnh phạt» paragraph).
+   The line is added only when the card does not hold it yet (tx() is idempotent: its patterns no longer match after it ran) */
+function eventLines(m){try{if(!m||m.__el||typeof m.h!=="string")return;m.__el=1;m.h=tx(m.h);const gt=elderBy("gt"),tn=elderBy("tn"),kn=elderBy("kn");const add=l=>{if(!m.h.includes(l))m.h+=l};
+ if(m.t==="Tuyển tú"&&gt)add(`<p>${gt.call}, giáo tập ma ma Nội vụ phủ, phụng chỉ Thái hậu dạy quy củ cho tú nữ mới: đi, đứng, quỳ, thưa, từng bước một.</p>`);
+ if(m.t==="Tân Giả khố"&&tn)add(`<p>${tn.call}, chưởng sự cô cô Đức Thọ cung, đọc lệnh phạt: “Cung quy không tha ai. Giặt cho sạch, đủ hạn thì ra.”</p>`);
+ if(m.t==="Đổi chủ"&&kn)add(`<p>${kn.call}, quản sự ma ma Càn Ninh cung, ghi tên ngươi vào sổ cung nữ của cung mới.</p>`)}catch(e){}}
 if(typeof showModal==="function"){const s0=showModal;showModal=function(){try{if(Q&&Q[0])eventLines(Q[0])}catch(e){}return s0.apply(this,arguments)}}
 if(typeof log==="function"){const l0=log;log=function(h){return l0.call(this,tx(h))}}
 })();
@@ -97952,7 +97955,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="df1af4035036";window.CTM_BUILD=BUILD;
+const BUILD="55b577ba2251";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

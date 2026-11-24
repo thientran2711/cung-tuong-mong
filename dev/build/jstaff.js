@@ -156,10 +156,13 @@ function tx(s){if(!s||typeof s!=="string"||!S)return s;const tn=elderBy("tn"),gt
  if(gt)o=o.replace(/[Tt]heo ma ma giáo tập học/g,`Theo ${gt.call}, giáo tập ma ma Nội vụ phủ, học`);
  return o}
 window.elderTx=tx;
-function eventLines(m){try{if(!m||m.__el||typeof m.h!=="string")return;m.__el=1;m.h=tx(m.h);const gt=elderBy("gt"),tn=elderBy("tn"),kn=elderBy("kn");
- if(m.t==="Tuyển tú"&&gt)m.h+=`<p>${gt.call}, giáo tập ma ma Nội vụ phủ, phụng chỉ Thái hậu dạy quy củ cho tú nữ mới: đi, đứng, quỳ, thưa, từng bước một.</p>`;
- if(m.t==="Tân Giả khố"&&tn)m.h+=`<p>${tn.call}, chưởng sự cô cô Đức Thọ cung, đọc lệnh phạt: “Cung quy không tha ai. Giặt cho sạch, đủ hạn thì ra.”</p>`;
- if(m.t==="Đổi chủ"&&kn)m.h+=`<p>${kn.call}, quản sự ma ma Càn Ninh cung, ghi tên ngươi vào sổ cung nữ của cung mới.</p>`}catch(e){}}
+/* review robot-fix-cnv-2 (save→load family «a show-time rule guarded only by page memory»): m.__el is not saved, so a card loaded with its elder line
+   already in m.h got the line AGAIN at the next showModal (every reload of an open «Tân Giả khố» card = one more «đọc lệnh phạt» paragraph).
+   The line is added only when the card does not hold it yet (tx() is idempotent: its patterns no longer match after it ran) */
+function eventLines(m){try{if(!m||m.__el||typeof m.h!=="string")return;m.__el=1;m.h=tx(m.h);const gt=elderBy("gt"),tn=elderBy("tn"),kn=elderBy("kn");const add=l=>{if(!m.h.includes(l))m.h+=l};
+ if(m.t==="Tuyển tú"&&gt)add(`<p>${gt.call}, giáo tập ma ma Nội vụ phủ, phụng chỉ Thái hậu dạy quy củ cho tú nữ mới: đi, đứng, quỳ, thưa, từng bước một.</p>`);
+ if(m.t==="Tân Giả khố"&&tn)add(`<p>${tn.call}, chưởng sự cô cô Đức Thọ cung, đọc lệnh phạt: “Cung quy không tha ai. Giặt cho sạch, đủ hạn thì ra.”</p>`);
+ if(m.t==="Đổi chủ"&&kn)add(`<p>${kn.call}, quản sự ma ma Càn Ninh cung, ghi tên ngươi vào sổ cung nữ của cung mới.</p>`)}catch(e){}}
 if(typeof showModal==="function"){const s0=showModal;showModal=function(){try{if(Q&&Q[0])eventLines(Q[0])}catch(e){}return s0.apply(this,arguments)}}
 if(typeof log==="function"){const l0=log;log=function(h){return l0.call(this,tx(h))}}
 })();
