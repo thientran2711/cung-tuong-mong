@@ -61,14 +61,14 @@ function alSkimmed(p){try{return !!p&&p.stip&&p.stip.skT===S.turn}catch(e){retur
 /* NPC consort month: spend the past month's hair oil BEFORE the issue (as lxNpcSpend), then her staff's lệ; her own and her staff's after jstip */
 (function(){if(typeof stipGoods!=="function")return;const g0=stipGoods;stipGoods=function(p,SK){try{if(alOn()&&p&&p!==S&&!p.coop)alNpcSpend(p)}catch(e){console.error("al spend",e)}
   const G=g0.apply(this,arguments);try{if(alOn()&&p){alFix(p);alStaffGive(p,!!SK)}}catch(e){console.error("al goods",e)}return G};window.stipGoods=stipGoods})();
-function alNpcSpend(v){if(!v||!v.inv||v.out)return;let left=BAL.allot.oil.npcUse;for(const e of alOil(v).sort((a,b)=>a.u-b.u)){const n=Math.min(left,e.u);e.u-=n;left-=n;if(e.u<=0){typeof ilUsedUp==="function"&&ilUsedUp(e);v.inv.splice(v.inv.indexOf(e),1)}if(!left)break}}
+function alNpcSpend(v){if(!v||!v.inv||v.out)return;let left=BAL.allot.oil.npcUse;for(const e of alOil(v).sort((a,b)=>a.u-b.u)){const n=Math.min(left,e.u);e.u-=n;left-=n;if(e.u<=0){typeof ilUsedUp==="function"&&ilUsedUp(e,v);v.inv.splice(v.inv.indexOf(e),1)}if(!left)break}}
 /* first sight (new life / old save): one month's oil + candles so Kiểu cầu kỳ is not shut on day one */
 function alInit(p){if(!p||!alOn()||p.alInit)return;p.alInit=1;p.inv=p.inv||[];for(const [k,n] of alLines(alRk(p),!!p.out))for(let i=0;i<n;i++)p.inv.push({k,from:"noivu",d:S.turn});alFix(p)}
 function alInitAll(){try{if(!S||S.dead||!alOn())return;if(typeof isSrv==="function"&&isSrv()){S.alInit=1;return}alInit(S);if(typeof mlGuest==="function"&&mlGuest())return;for(const v of consorts())if(v!==S&&v.alive!==false)alInit(v)}catch(e){console.error("alInit",e)}}
 /* ---------- 1. hair oil at the sitting: Kiểu cầu kỳ needs it (her, NPC faces) and spends it ---------- */
 (function(){if(typeof lxCapRec!=="function")return;const c0=lxCapRec;lxCapRec=function(p,rec){const r=c0.apply(this,arguments);try{if(alOn()&&rec&&rec.makeup&&rec.col&&rec.col.want==="diem"&&!alHasOil(p)){delete rec.col.want;rec.noOil=1}}catch(e){}return r};window.lxCapRec=lxCapRec})();
 (function(){if(typeof lxSpend!=="function")return;const s0=lxSpend;lxSpend=function(p,rec,col){const wantB=!!(col&&col.want==="diem");const R=s0.apply(this,arguments);
-  try{if(alOn()&&wantB&&rec&&rec.makeup&&p){const L=alOil(p);if(L.length){const e=L.slice().sort((a,b)=>a.u-b.u)[0];e.u-=Math.min(e.u,BAL.allot.oil.use);R.oil=e;if(e.u<=0){typeof ilUsedUp==="function"&&ilUsedUp(e);p.inv.splice(p.inv.indexOf(e),1);(R.gone=R.gone||[]).push(e)}}}}catch(e){console.error("al oil",e)}return R};window.lxSpend=lxSpend})();
+  try{if(alOn()&&wantB&&rec&&rec.makeup&&p){const L=alOil(p);if(L.length){const e=L.slice().sort((a,b)=>a.u-b.u)[0];e.u-=Math.min(e.u,BAL.allot.oil.use);R.oil=e;if(e.u<=0){typeof ilUsedUp==="function"&&ilUsedUp(e,p);p.inv.splice(p.inv.indexOf(e),1);(R.gone=R.gone||[]).push(e)}}}}catch(e){console.error("al oil",e)}return R};window.lxSpend=lxSpend})();
 /* her mirror: without oil the Kiểu cầu kỳ presets are not offered, the pick falls back, the note says why */
 (function(){if(typeof lxColRows!=="function")return;const r0=lxColRows;lxColRows=function(rows){const R=r0.apply(this,arguments);try{if(alOn()&&!alHasOil(S))return R.filter(r=>!(r&&/^pre-/.test(r.k)&&(r.items||[]).every(i=>{const x=TOIL_PRE.find(y=>y[0]===i.k);return x&&x[2]==="diem"})))}catch(e){}return R};window.lxColRows=lxColRows})();
 (function(){if(typeof lxColPick!=="function")return;const p0=lxColPick;lxColPick=function(col){const c=p0.apply(this,arguments);try{if(alOn()&&c&&c.want==="diem"&&!alHasOil(S))delete c.want}catch(e){}return c};window.lxColPick=lxColPick})();
@@ -79,7 +79,7 @@ function alInitAll(){try{if(!S||S.dead||!alOn())return;if(typeof isSrv==="functi
 function alEvening(){try{return (S.buoi||0)===(typeof B4L!=="undefined"?B4L:3)}catch(e){return false}}
 /* p studied (act key k of BAL.ag.cx) — in the evening with a candle: burn it, add light.add to each stat the act gains */
 function alLight(p,k){try{const L=BAL.allot.light;if(!alOn()||!p||!L.acts.includes(k)||!alEvening())return 0;const C=alCandle(p);if(!C.length)return 0;
- const e=C.slice().sort((a,b)=>a.k<b.k?-1:1)[0];typeof ilUsedUp==="function"&&ilUsedUp(e);p.inv.splice(p.inv.indexOf(e),1);const D=BAL.ag.cx[k];const fx={};for(const s in D.w)if(s!=="maid"&&D.w[s]>0)fx[s]=L.add;
+ const e=C.slice().sort((a,b)=>a.k<b.k?-1:1)[0];typeof ilUsedUp==="function"&&ilUsedUp(e,p);p.inv.splice(p.inv.indexOf(e),1);const D=BAL.ag.cx[k];const fx={};for(const s in D.w)if(s!=="maid"&&D.w[s]>0)fx[s]=L.add;
  if(p===S)apply(fx);else ap(p,fx);return {e,fx}}catch(x){console.error("al light",x);return 0}}
 /* her deck: the two study cards of j2 carry cx:"arts"/"book"; the card says what a candle adds (text = effect) */
 (function(){if(typeof runOpt!=="function")return;const r0=runOpt;runOpt=function(a){const r=r0.apply(this,arguments);try{if(r===true&&a&&a.cx&&p0ok()){const R=alLight(S,a.cx);
@@ -107,7 +107,7 @@ function alSrvMonth(){try{if(!alOn()||!S||S.dead||!(typeof isSrv==="function"&&i
 /* NPC staff (and her own staff): the same list by their bậc, into their own small bag (kept to BAL.allot.srv.keep, older pieces used up) */
 function alStaffGive(p,skim){if(!p||!Array.isArray(p.staff)||p.out)return;const B=BAL.allot.srv;
  for(const s of p.staff){if(!s||s.sid==null||s.out||s.dead)continue;const rk=typeof srk==="function"?srk(s):0;let L=alSrvList(rk,false);if(skim)L=alSrvSkim(L).L;
-  s.inv=Array.isArray(s.inv)?s.inv:[];for(const [k,n] of L)if(IT[k])for(let i=0;i<n;i++)s.inv.push({k,from:"noivu",d:S.turn});alFix(s);if(s.inv.length>B.keep)s.inv.splice(0,s.inv.length-B.keep).forEach(e=>{if(alOf(e.k)||(typeof lxOf==="function"&&lxOf(e.k)))typeof ilUsedUp==="function"&&ilUsedUp(e)})}}
+  s.inv=Array.isArray(s.inv)?s.inv:[];for(const [k,n] of L)if(IT[k])for(let i=0;i<n;i++)s.inv.push({k,from:"noivu",d:S.turn});alFix(s);if(s.inv.length>B.keep)s.inv.splice(0,s.inv.length-B.keep).forEach(e=>{/* E-FIX-3: older hair oil (lượt left) goes back to the Nội vụ phủ counted stock, issued again first (law 6c) */if(alOf(e.k)&&typeof ilStock==="function")ilStock(e)})}}
 /* the maid's help line (kit help popup of j42 "Lương tháng") names the lệ goods too */
 (function(){try{if(typeof HX==="object"){const w0=HX.wage;Object.defineProperty(HX,"wage",{get(){try{return alOn()&&S&&S.srv?`${w0} Kèm lệ tháng của bậc ngươi: ${alSrvTxt(S.srv.rk)}. Chủ nhân bị Nội vụ phủ cắt xén thì lệ kẻ hầu cũng bị bớt.`:w0}catch(e){return w0}},configurable:true,enumerable:true})}}catch(e){}})();
 /* ---------- item detail: lượt left of a bottle (kit detail rows' own note line) ---------- */
