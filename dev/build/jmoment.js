@@ -22,12 +22,15 @@
 Object.assign(BAL,{mo:{on:1,
  /* the moments: k → n name · sea season (SEASON word) · pl place key · b buổi list (0 sáng 1 trưa 2 chiều 3 tối; omitted = any) · fest FEST key · ev event */
  /* fest moments: b = the ONE buổi of the festival tuần the Họa sư paints the feast (a lawful work order in jmen menSched, wrapped below) */
+ /* season moments: ord = [month, tuần, buổi] of the ONE yearly Nội vụ phủ order for the season's 行乐图 leisure painting (a lawful work order, same
+    wrap): his random-free roster alone never brings him to the garden at night (hasen) or in a Hạ afternoon (haquat) — E73r item 1; every season
+    moment gets one so each of the 11 place moments is reachable every year (moment.test walks the real schedule). Tuần chosen off the FEST tuần. */
  list:{
-  xuandao:{n:"Dạo bước dưới hoa đào",sea:"Xuân",pl:"vuon",b:[0,1,2],d:"Hoa đào xuân rụng trên vai áo, nàng đứng bên lối đá."},
-  hasen:{n:"Hồ sen đêm trăng",sea:"Hạ",pl:"vuon",b:[3],d:"Trăng lên trên hồ sen, nàng tựa lan can đình thủy tạ."},
-  haquat:{n:"Hóng mát bên thủy tạ",sea:"Hạ",pl:"vuon",b:[1,2],d:"Trưa hè, nàng cầm quạt lụa ngồi bên hiên nước."},
-  thucuc:{n:"Thưởng cúc trời thu",sea:"Thu",pl:"vuon",b:[0,1,2],d:"Giữa vườn cúc vàng, nàng cài một nhánh lên tóc."},
-  dongmai:{n:"Dưới tuyết mai",sea:"Đông",pl:"vuon",b:[0,1,2],d:"Tuyết phủ cành mai, nàng khoác áo choàng lông đứng ngắm."},
+  xuandao:{n:"Dạo bước dưới hoa đào",sea:"Xuân",pl:"vuon",b:[0,1,2],ord:[2,1,1],d:"Hoa đào xuân rụng trên vai áo, nàng đứng bên lối đá."},
+  hasen:{n:"Hồ sen đêm trăng",sea:"Hạ",pl:"vuon",b:[3],ord:[5,1,3],d:"Trăng lên trên hồ sen, nàng tựa lan can đình thủy tạ."},
+  haquat:{n:"Hóng mát bên thủy tạ",sea:"Hạ",pl:"vuon",b:[1,2],ord:[4,1,2],d:"Trưa hè, nàng cầm quạt lụa ngồi bên hiên nước."},
+  thucuc:{n:"Thưởng cúc trời thu",sea:"Thu",pl:"vuon",b:[0,1,2],ord:[8,2,1],d:"Giữa vườn cúc vàng, nàng cài một nhánh lên tóc."},
+  dongmai:{n:"Dưới tuyết mai",sea:"Đông",pl:"vuon",b:[0,1,2],ord:[10,1,1],d:"Tuyết phủ cành mai, nàng khoác áo choàng lông đứng ngắm."},
   newyear:{n:"Đón xuân ngày Tết",fest:"newyear",pl:"vuon",b:[0],d:"Đầu năm, nàng treo câu đối đỏ bên cửa cung."},
   nguyentieu:{n:"Cầm lồng đèn Thượng Nguyên",fest:"nguyentieu",pl:"vuon",b:[3],d:"Đêm rằm tháng giêng, nàng cầm lồng đèn hoa sen đi dưới dãy đèn."},
   doanngo:{n:"Xem đua thuyền Đoan ngọ",fest:"doanngo",pl:"vuon",b:[0],d:"Bên hồ, nàng đeo túi thơm ngải, xem thuyền rồng."},
@@ -38,9 +41,13 @@ Object.assign(BAL,{mo:{on:1,
  bar:[40,44,48,52,56,60,64,68],/* the Sắc a sitter needs for an even sitting, by rank 0 Đáp ứng … 7 Hoàng hậu (rises: law 5) */
  base:50,sacK:.8,taiK:.2,empB:12,lo:8,hi:90,/* moOdds = base + (Sắc − bar)·sacK + (Tài − bar)·taiK + empB when Hoàng thượng is there, clamped lo..hi */
  kh:1,                /* khắc the sitting costs (Ngồi cho vẽ) */
- bribe:[20,25,30,40,50,60,70,80],bribeB:15,rumor:30,rumorDanh:-1,/* Lót tay họa sư: bạc by rank, + odds, rumour roll → Danh */
+ bribeB:15,rumor:30,rumorDanh:-1,/* Lót tay họa sư: + odds (clamped at hi), no khắc, rumour roll → Danh; its bạc = moBribe from the ONE value table
+   BAL.pm.val (khacBac, danhBac) so both roads are worth the same at every rank and odds, incl. the clamp (law 2 / 3, E73r item 2) */
  danh:1,sungEmp:1,    /* a finished portrait: Danh + (seen at court); Hoàng thượng there: Sủng + */
  capY:2,              /* most portraits one person may get in one year */
+ gr:2,                /* kit grade of a painting (Trân phẩm) — bag tile, reveal, shelf */
+ shelfRk:0,           /* lowest rank that may show it on the Đa bảo các shelf */
+ seeMat:2,            /* Tai mắt she needs to hear of an NPC's sitting / bribe away from the garden */
  npcSit:60,           /* an NPC who stands where the painter is, with a moment open, chooses to sit (agent choice, then the same moOdds) */
  promoP:35,           /* promotion: chance of the investiture portrait (her and NPCs, one rule) */
  pr:120,gv:8,         /* item price (theft / gift worth, jlost LO.minPr 30) and gift worth */
@@ -48,13 +55,19 @@ Object.assign(BAL,{mo:{on:1,
  album:0}});          /* 1 when the KIT album part is READY (KIT_REQUESTS «moment album»); until then: bag + Sổ luân hồi rows only */
 
 /*CORE{*/
-function moRk(p){try{return typeof rkOf==="function"?rkOf(p):(p&&p.queen?7:(p&&p.rank)|0)}catch(e){return 0}}
+function moTop(){return BAL.mo.bar.length-1}
+function moRk(p){try{return Math.max(0,Math.min(moTop(),typeof rkOf==="function"?rkOf(p):(p&&p.queen?moTop():(p&&p.rank)|0)))}catch(e){return 0}}
 /* the ONE odds of a sitting (her and NPCs) */
-function moOdds(p,emp){const B=BAL.mo,r=Math.max(0,Math.min(7,moRk(p))),bar=B.bar[r];
+function moOdds(p,emp){const B=BAL.mo,r=moRk(p),bar=B.bar[r];
  const x=B.base+((p&&p.sac||0)-bar)*B.sacK+((p&&p.tai||0)-bar)*B.taiK+(emp?B.empB:0);return Math.round(Math.max(B.lo,Math.min(B.hi,x)))}
 /* the moments open now for place k (season + buổi, or the festival of this tuần); events are not here */
 function moOpen(k,sea,b,fk){const out=[];const L=BAL.mo.list;for(const m in L){const M=L[m];if(M.ev||M.pl!==k)continue;
 if(M.fest){if(M.fest===fk&&(!M.b||M.b.indexOf(b)>=0))out.push(m);continue}if(M.sea&&M.sea!==sea)continue;if(M.b&&M.b.indexOf(b)<0)continue;out.push(m)}return out}
+/* the ONE value table (BAL.pm.val, bạc): a painting = its price + the Danh it brings; a khắc; the rumour = its chance × Danh lost */
+function moVal(){const B=BAL.mo,V=(BAL.pm&&BAL.pm.val)||{};return{W:B.pr+B.danh*(V.danhBac||0),kh:B.kh*(V.khacBac||0),rum:B.rumor/100*Math.abs(B.rumorDanh)*(V.danhBac||0)}}
+/* the two roads for odds p0 (sit) — the SAME for her and NPCs: bribe odds p1, its bạc br, and the value of each road (law 2: equal within eqTol) */
+function moRoads(p0){const B=BAL.mo,v=moVal(),p1=Math.min(B.hi,p0+B.bribeB),br=Math.max(1,Math.round((p1-p0)/100*v.W+v.kh-v.rum));
+ return{p0,p1,br,sit:p0/100*v.W-v.kh,bribe:p1/100*v.W-br-v.rum}}
 /* may p still get moment m this year? */
 function moFree(p,m,y){const H=p&&p.moY||{};if(H[m]===y)return false;let n=0;for(const k in H)if(H[k]===y)n++;return n<BAL.mo.capY}
 /*}CORE*/
@@ -69,7 +82,10 @@ function painterAt(k,pt){return !!pt&&!!S.menW&&S.menW[pt.id]===k}
 /* festival tuần: the feast painting is a lawful work order (jmen menSched): at the moment's buổi the Họa sư stands at the feast, seen by everyone */
 if(typeof menSched==="function"){const s0=menSched;menSched=function(){const r=s0.apply(this,arguments);try{const pt=painter(),f=fk(),b=S.buoi||0;
  if(B.on&&pt&&f&&S.menW&&!(typeof menBanned==="function"&&menBanned(pt)))for(const m in B.list){const M=B.list[m];if(M.fest!==f||(M.b&&M.b.indexOf(b)<0))continue;
-  if(typeof menLawful==="function"&&!menLawful(pt,M.pl,"order"))continue;S.menW[pt.id]=M.pl;(S.menWhy=S.menWhy||{})[pt.id]={w:"order",k:M.pl};break}}catch(e){console.error("moment fest order",e)}return r}}
+  if(typeof menLawful==="function"&&!menLawful(pt,M.pl,"order"))continue;S.menW[pt.id]=M.pl;(S.menWhy=S.menWhy||{})[pt.id]={w:"order",k:M.pl};return r}
+ /* the season's leisure painting: one lawful work order a year per season moment (ord), when no feast holds him */
+ if(B.on&&pt&&S.menW&&!(typeof menBanned==="function"&&menBanned(pt)))for(const m in B.list){const o=B.list[m].ord;if(!o||o[0]!==S.month||o[1]!==S.tuan||o[2]!==b)continue;
+  const M=B.list[m];if(typeof menLawful==="function"&&!menLawful(pt,M.pl,"order"))continue;S.menW[pt.id]=M.pl;(S.menWhy=S.menWhy||{})[pt.id]={w:"order",k:M.pl};break}}catch(e){console.error("moment order",e)}return r}}
 function busyKey(){return `${S.year}|${S.month}|${S.tuan}|${S.buoi||0}`}
 function busy(){return S.moBusy&&S.moBusy.k===busyKey()?S.moBusy:null}
 function empAt(k){try{return !!S.where&&S.where.emp===k}catch(e){return false}}
@@ -85,14 +101,14 @@ function grant(p,m,how){const M=B.list[m];if(!M)return null;const pt=painter();
  try{if(B.danh)p.danh=(p.danh||0)+B.danh}catch(x){}return e}
 /* the SAME piece keeps what it is: j8 giveTo / gift paths copy only {k, from, iu}; the ledger id restores moment, sitter, year, painter */
 function moFix(e){try{if(e&&e.k==="chandung"&&!e.mo&&e.iu&&S&&S.moIu&&S.moIu[e.iu])Object.assign(e,S.moIu[e.iu])}catch(x){}return e}
-function moFixAll(){try{for(const p of [S].concat(rivals||[]))for(const e of (p&&p.inv)||[])moFix(e)}catch(x){}}
-window.moFix=moFix;window.moGrant=grant;window.moOdds=moOdds;window.moOpen=moOpen;window.moFree=moFree;window.moPainter=painter;
+function moFixAll(){if(!S||!S.moIu)return;try{for(const p of [S].concat(rivals||[]))for(const e of (p&&p.inv)||[])moFix(e)}catch(x){}}
+window.moRoads=moRoads;window.moVal=moVal;window.moFix=moFix;window.moGrant=grant;window.moOdds=moOdds;window.moOpen=moOpen;window.moFree=moFree;window.moPainter=painter;
 /* the item */
 try{IT.chandung={n:"Tranh chân dung",kd:"Kỷ vật",d:"Bức họa của họa sư cung đình vẽ một khoảnh khắc · tặng được, bày được trên kệ Thư họa",pr:B.pr,gv:B.gv,tg:["emp"]};
  if(typeof ITIMG==="object"&&ITIMG)ITIMG.chandung=ITIMG.tranhco||"tranh-co";
  const n0=iname;iname=function(e){const r=n0.apply(this,arguments);try{moFix(e);if(e&&e.k==="chandung"&&e.mo&&B.list[e.mo])return `Tranh «${B.list[e.mo].n}»${e.ofN?` · ${e.ofN}`:""}`}catch(x){}return r}}catch(e){console.error("chandung",e)}
 /* displayable on the Đa bảo các shelf, group Thư họa (kit grade 2, the item price) */
-try{if(BAL.shelf&&BAL.shelf.it)BAL.shelf.it.chandung={g:"thuhoa",rk:0,gr:2,pr:B.pr,src:""}}catch(e){}
+try{if(BAL.shelf&&BAL.shelf.it)BAL.shelf.it.chandung={g:"thuhoa",rk:B.shelfRk,gr:B.gr,pr:B.pr,src:""}}catch(e){}
 /* «chưa vẽ» guard: the moment painting, else the sitter's portrait (snapshot, then live), else the kit painting — never blank */
 function moPic(e){try{const a=e&&B.art[e.mo];if(a)return a}catch(x){}
  if(e&&e.src)return e.src;
@@ -101,7 +117,7 @@ function moPic(e){try{const a=e&&B.art[e.mo];if(a)return a}catch(x){}
 function moDrawn(e){return !!(e&&B.art[e.mo])}
 window.moPic=moPic;window.moDrawn=moDrawn;
 if(typeof kitItemInfo==="function"){const k0=kitItemInfo;kitItemInfo=function(x){const r=k0.apply(this,arguments);try{const e=x&&typeof x==="object"?x:null;
- if(e&&e.k==="chandung"){moFix(e);r.src=moPic(e);r.src512=r.src;r.grade=2;if(e.mo&&B.list[e.mo])r.name=iname(e);r.sub=moDrawn(e)?"Tranh chân dung":"Tranh chân dung · chưa vẽ cảnh"}}catch(err){}return r};window.kitItemInfo=kitItemInfo}
+ if(e&&e.k==="chandung"){moFix(e);r.src=moPic(e);r.src512=r.src;r.grade=B.gr;if(e.mo&&B.list[e.mo])r.name=iname(e);r.sub=moDrawn(e)?"Tranh chân dung":"Tranh chân dung · chưa vẽ cảnh"}}catch(err){}return r};window.kitItemInfo=kitItemInfo}
 
 /* the bag (jinv kitInvGrid, no new part): every painting is its own piece (own tile, picture, name, grade), never stacked ×N like plain goods */
 if(typeof kinvGroups==="function"){const g0=kinvGroups;kinvGroups=function(){moFixAll();const G=g0.apply(this,arguments);try{if(!G.some(g=>g.k==="chandung"))return G;
@@ -111,8 +127,9 @@ if(typeof kinvItems==="function"){const i0=kinvItems;kinvItems=function(){const 
 /* ---- HER: arriving where the painter works ---- */
 function offer(k){if(!B.on||!S||S.dead||S.out||Q.length)return;const pt=painter();if(!painterAt(k,pt))return;const bz=busy();
  const open=moOpen(k,sea(),S.buoi||0,fk()).filter(m=>moFree(S,m,S.year));if(!open.length)return;
- if(bz){if(bz.who!=="me"&&!bz.told){bz.told=1;log(`${pt.name} đang vẽ cho ${bz.n}; hôm nay không vẽ thêm ai.`)}return}
- const m=open[0],M=B.list[m],emp=empAt(k),p0=moOdds(S,emp),r=Math.max(0,Math.min(7,moRk(S))),br=B.bribe[r],p1=Math.min(B.hi,p0+B.bribeB);
+ if(bz){/* «asked» (card open / closed) and «none» (Thôi) hold no sitter: say nothing (E73r item 4: «… vẽ cho undefined») */
+  if(bz.n&&bz.who!=="me"&&bz.who!=="asked"&&bz.who!=="none"&&!bz.told){bz.told=1;log(`${pt.name} đang vẽ cho ${bz.n}; hôm nay không vẽ thêm ai.`)}return}
+ const m=open[0],M=B.list[m],emp=empAt(k),RD=moRoads(moOdds(S,emp)),p0=RD.p0,p1=RD.p1,br=RD.br;
  S.moBusy={k:busyKey(),who:"asked"};
  const done=(ok,how)=>{S.moBusy={k:busyKey(),who:"me",n:S.name};if(!ok){log(`${pt.name} phác mấy nét rồi lắc đầu: dáng hôm nay chưa ra hồn, để dịp khác.`);return}
   const e=grant(S,m,how);if(emp&&B.sungEmp)S.sung=(S.sung||0)+B.sungEmp;
@@ -120,7 +137,8 @@ function offer(k){if(!B.on||!S||S.dead||S.out||Q.length)return;const pt=painter(
  Q.push({t:"Họa sư đang vẽ",who:typeof pMan==="function"?pMan(pt):null,
   h:`<p>${pt.name} bày giá vẽ ${M.fest?"giữa ngày hội":"giữa cảnh"} «${M.n}», ngỏ ý mời ngươi ngồi cho vẽ.${emp?" Hoàng thượng đang ở gần, ngài cũng dừng chân xem.":""}</p>`,
   opts:[{n:"Ngồi cho họa sư vẽ",p:p0,x:`tốn: ${B.kh} khắc · được: tranh «${M.n}»`,off:typeof can==="function"&&!can(B.kh),go:()=>{spend(B.kh);done(roll(p0),"ngồi cho vẽ")}},
-   {n:"Lót tay họa sư",p:p1,fx:{bac:-br},x:`được: tranh «${M.n}» · có thể bị đồn đút lót`,go:()=>{const ok=roll(p1);if(roll(B.rumor)){S.danh=(S.danh||0)+B.rumorDanh;log(`Có người đồn ngươi đút lót họa sư. Danh ${B.rumorDanh}.`)}done(ok,"lót tay họa sư")}},
+   {n:"Lót tay họa sư",p:p1,fx:{bac:-br},x:`không mất khắc · được: tranh «${M.n}» · kèm: bị đồn đút lót họa sư, Danh ${balSg(B.rumorDanh)}: ${chanceW(B.rumor)}`,
+    go:()=>{const ok=roll(p1);if(roll(B.rumor)){S.danh=(S.danh||0)+B.rumorDanh;log(`Có người đồn ngươi đút lót họa sư. Danh ${balSg(B.rumorDanh)}.`)}done(ok,"lót tay họa sư")}},
    {n:"Thôi, để dịp khác",go:()=>{S.moBusy={k:busyKey(),who:"none"}}}]});
  setTimeout(()=>{try{const Md=$("modal");if(Md&&Md.hidden&&Q.length)showModal()}catch(e){}},0)}
 if(typeof goTo==="function"){const g0=goTo;goTo=function(k){const r=g0.apply(this,arguments);try{if(S&&S.place===k)offer(k)}catch(e){console.error("moment offer",e)}return r}}
@@ -130,8 +148,12 @@ function npcPass(){if(!B.on||!S||S.dead||!host())return;const pt=painter();if(!p
  const L=liveRivals(true).filter(v=>v&&!v.coop&&v.alive&&!v.out);for(let i=L.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[L[i],L[j]]=[L[j],L[i]]}
  for(const v of L){const k=W[v.id];if(!k||!painterAt(k,pt))continue;const open=moOpen(k,sea(),S.buoi||0,fk()).filter(m=>moFree(v,m,S.year));if(!open.length)continue;
   if(!roll(B.npcSit))continue;const emp=W.emp===k;S.moBusy={k:busyKey(),who:String(v.id),n:v.name};
-  if(roll(moOdds(v,emp))){grant(v,open[0],"họa sư vẽ");if(emp&&B.sungEmp)v.sung=(v.sung||0)+B.sungEmp;
-   try{if((S.mat||0)>=2||k===S.place)log(`${NM(v)}: ${pt.name} vẽ nàng trong cảnh «${B.list[open[0]].n}».`)}catch(e){}}
+  /* the SAME two roads as hers (law 1): the agent picks by the same value (equal, so either), the bribe only with the bạc in hand */
+  const RD=moRoads(moOdds(v,emp)),seen=(S.mat||0)>=B.seeMat||k===S.place;
+  const road=(v.bac||0)>=RD.br&&typeof npwPick==="function"?npwPick(["sit","bribe"],x=>RD[x])||"sit":"sit";(S.moRoad=S.moRoad||{})[road]=(S.moRoad[road]||0)+1;
+  if(road==="bribe"){v.bac=Math.max(0,(v.bac||0)-RD.br);if(roll(B.rumor)){v.danh=(v.danh||0)+B.rumorDanh;try{if(seen)log(`Có người đồn ${NM(v)} đút lót ${pt.name}. Danh nàng ${balSg(B.rumorDanh)}.`)}catch(e){}}}
+  if(roll(road==="bribe"?RD.p1:RD.p0)){grant(v,open[0],road==="bribe"?"lót tay họa sư":"họa sư vẽ");if(emp&&B.sungEmp)v.sung=(v.sung||0)+B.sungEmp;
+   try{if(seen)log(`${NM(v)}: ${pt.name} vẽ nàng trong cảnh «${B.list[open[0]].n}».`)}catch(e){}}
   return}}
 if(typeof placeWhere==="function"){const w0=placeWhere;placeWhere=function(){const r=w0.apply(this,arguments);try{moFixAll();if(S&&S.place&&S.place!=="home")offer(S.place);npcPass()}catch(e){console.error("moment npc",e)}return r}}
 
