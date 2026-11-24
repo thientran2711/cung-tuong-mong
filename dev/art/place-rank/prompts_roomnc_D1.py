@@ -38,6 +38,7 @@ PICK = {'khai-tuong-cung-tan': 'prompts_pr19_room32b.json', 'truong-xuan-cung-ta
 # room-specific line (ROOT-D1 24/11 ~00:41Z: inside her order "nhắc kỹ trong prompt là cửa sổ không rèm") naming a spot where the OLD
 # picture (or a first redo) had fabric at a window in an odd place. Appended after NC. Only such lines; nothing else changes.
 EXTRA = {
+ 'thua-minh-cung-quyphi-ngu': " No fabric hangs anywhere on the left side wall: no white curtain on rings, no drape behind or above the tall shelf; the left wall shows bare wooden panels and bare carved lattice only.",
  'vinh-hoa-cung-quyphi-ngu': " No fabric hangs anywhere on the left side wall: no white curtain on rings, no drape behind or above the tall shelf; the left wall shows bare wooden panels and bare carved lattice only.",
  'vinh-hoa-cung-tay-phoi-ngu': " No fabric hangs anywhere on the right side wall: no white curtain on rings, no drape behind or above the tall cabinet; the right wall shows bare wooden panels and bare carved lattice only.",
  'truong-xuan-cung-phi-ngu': " No fabric hangs anywhere on the right side wall: no white curtain on rings, no drape behind or above the tall shelf; the right wall shows bare wooden panels and bare carved lattice only.",

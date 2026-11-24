@@ -1,32 +1,5 @@
 [
  {
-  "id": "ph32",
-  "key": "khai-tuong-cung-phi",
-  "label": "Khải Tường cung · Phi · tiếp khách",
-  "gen": "0ewUbsgTfW",
-  "look": "sạch rèm cửa sổ",
-  "structure": "giữ nguyên (2 tường, cửa sổ tường phải, sập trái, cửa bình hoa phải)",
-  "v": 1
- },
- {
-  "id": "ph33",
-  "key": "khai-tuong-cung-phi-ngu",
-  "label": "Khải Tường cung · Phi · phòng ngủ",
-  "gen": "aFzGOp3fSh",
-  "look": "sạch rèm cửa sổ (rèm giường giữ)",
-  "structure": "giữ nguyên (3 tường, cửa sổ tường trái, giường phải)",
-  "v": 1
- },
- {
-  "id": "ph30",
-  "key": "khai-tuong-cung-dong-phoi",
-  "label": "Khải Tường cung · Đông phối · tiếp khách",
-  "gen": "gOhmdifSXO",
-  "look": "sạch (lần 2, thêm 1 câu cho ô cửa sổ nhỏ tường trái)",
-  "structure": "giữ nguyên; tranh treo trên sập thành tranh ngang",
-  "v": 2
- },
- {
   "id": "ph01",
   "key": "canh-phuc-cung-dong-phoi",
   "label": "Cảnh Phúc cung · Đông phối · tiếp khách",
@@ -196,5 +169,212 @@
   "look": "sạch rèm cửa sổ (rèm giường giữ)",
   "structure": "giữ nguyên",
   "v": 3
+ },
+ {
+  "id": "ph23",
+  "key": "ham-an-cung-phi",
+  "label": "Hàm Ân cung · Phi · tiếp khách",
+  "gen": "Bh6N3HBoQR",
+  "look": "sạch rèm cửa sổ",
+  "structure": "giữ nguyên (cặp ghế to hơn, lên trước; thêm đôn trước sập)",
+  "v": 4
+ },
+ {
+  "id": "ph24",
+  "key": "ham-an-cung-phi-ngu",
+  "label": "Hàm Ân cung · Phi · phòng ngủ",
+  "gen": "4RHFb0x9Aa",
+  "look": "sạch rèm cửa sổ (rèm giường giữ)",
+  "structure": "giữ nguyên",
+  "v": 4
+ },
+ {
+  "id": "ph25",
+  "key": "ham-an-cung-quyphi",
+  "label": "Hàm Ân cung · Quý phi · tiếp khách",
+  "gen": "Bh6N36LoQR",
+  "look": "sạch rèm cửa sổ",
+  "structure": "giữ nguyên",
+  "v": 4
+ },
+ {
+  "id": "ph28",
+  "key": "ham-an-cung-tay-phoi",
+  "label": "Hàm Ân cung · Tây phối · tiếp khách",
+  "gen": "8a3iApqIrU",
+  "look": "sạch rèm cửa sổ (rèm cửa đi giữ); lần 1 còn rèm trắng treo khoen ở tường trái sau kệ → câu riêng mạnh hơn, vẽ lại 1 lần: sạch",
+  "structure": "giữ nguyên",
+  "v": 4
+ },
+ {
+  "id": "ph29",
+  "key": "ham-an-cung-tay-phoi-ngu",
+  "label": "Hàm Ân cung · Tây phối · phòng ngủ",
+  "gen": "jU8otmgLD0",
+  "look": "sạch rèm cửa sổ (rèm giường giữ)",
+  "structure": "giữ nguyên (cửa vòm phải → giá áo)",
+  "v": 4
+ },
+ {
+  "id": "ph30",
+  "key": "khai-tuong-cung-dong-phoi",
+  "label": "Khải Tường cung · Đông phối · tiếp khách",
+  "gen": "gOhmdifSXO",
+  "look": "sạch (lần 2, thêm 1 câu cho ô cửa sổ nhỏ tường trái)",
+  "structure": "giữ nguyên; tranh treo trên sập thành tranh ngang",
+  "v": 2
+ },
+ {
+  "id": "ph31",
+  "key": "khai-tuong-cung-dong-phoi-ngu",
+  "label": "Khải Tường cung · Đông phối · phòng ngủ",
+  "gen": "gOhmfJCSXO",
+  "look": "sạch rèm cửa sổ (rèm giường giữ)",
+  "structure": "giữ nguyên",
+  "v": 4
+ },
+ {
+  "id": "ph32",
+  "key": "khai-tuong-cung-phi",
+  "label": "Khải Tường cung · Phi · tiếp khách",
+  "gen": "0ewUbsgTfW",
+  "look": "sạch rèm cửa sổ",
+  "structure": "giữ nguyên (2 tường, cửa sổ tường phải, sập trái, cửa bình hoa phải)",
+  "v": 1
+ },
+ {
+  "id": "ph33",
+  "key": "khai-tuong-cung-phi-ngu",
+  "label": "Khải Tường cung · Phi · phòng ngủ",
+  "gen": "aFzGOp3fSh",
+  "look": "sạch rèm cửa sổ (rèm giường giữ)",
+  "structure": "giữ nguyên (3 tường, cửa sổ tường trái, giường phải)",
+  "v": 1
+ },
+ {
+  "id": "ph34",
+  "key": "khai-tuong-cung-quyphi",
+  "label": "Khải Tường cung · Quý phi · tiếp khách",
+  "gen": "eI4P6tadqL",
+  "look": "sạch rèm cửa sổ",
+  "structure": "giữ nguyên",
+  "v": 4
+ },
+ {
+  "id": "ph35",
+  "key": "khai-tuong-cung-quyphi-ngu",
+  "label": "Khải Tường cung · Quý phi · phòng ngủ",
+  "gen": "UPavQ3Qwny",
+  "look": "sạch rèm cửa sổ (rèm giường giữ); lần 1 còn rèm trắng treo khoen ở tường trái sau kệ → câu riêng mạnh hơn, vẽ lại 1 lần: sạch",
+  "structure": "giữ nguyên (sau giường thấy ô cửa song)",
+  "v": 4
+ },
+ {
+  "id": "ph36",
+  "key": "khai-tuong-cung-tan",
+  "label": "Khải Tường cung · Tần · tiếp khách",
+  "gen": "DoyO95Hpcl",
+  "look": "sạch rèm cửa sổ (cả mép trái)",
+  "structure": "gần như giữ (cửa đi cong nay giống hốc kệ)",
+  "v": 4
+ },
+ {
+  "id": "ph38",
+  "key": "khai-tuong-cung-tay-phoi",
+  "label": "Khải Tường cung · Tây phối · tiếp khách",
+  "gen": "eI4P61LdqL",
+  "look": "sạch rèm cửa sổ (rèm cửa đi giữ)",
+  "structure": "giữ nguyên",
+  "v": 4
+ },
+ {
+  "id": "ph39",
+  "key": "khai-tuong-cung-tay-phoi-ngu",
+  "label": "Khải Tường cung · Tây phối · phòng ngủ",
+  "gen": "rgBXmyXxtc",
+  "look": "sạch rèm cửa sổ (rèm giường giữ), tường phải sạch",
+  "structure": "giữ nguyên",
+  "v": 4
+ },
+ {
+  "id": "ph40",
+  "key": "thua-minh-cung-phi",
+  "label": "Thừa Minh cung · Phi · tiếp khách",
+  "gen": "UPavQHzwny",
+  "look": "sạch rèm cửa sổ",
+  "structure": "giữ nguyên",
+  "v": 4
+ },
+ {
+  "id": "ph41",
+  "key": "thua-minh-cung-phi-ngu",
+  "label": "Thừa Minh cung · Phi · phòng ngủ",
+  "gen": "rgBXmaFxtc",
+  "look": "sạch rèm cửa sổ (rèm giường giữ) (rèm cửa đi phải giữ)",
+  "structure": "giữ nguyên",
+  "v": 4
+ },
+ {
+  "id": "ph42",
+  "key": "thua-minh-cung-quyphi",
+  "label": "Thừa Minh cung · Quý phi · tiếp khách",
+  "gen": "tCZRnTlmZJ",
+  "look": "sạch rèm cửa sổ",
+  "structure": "giữ nguyên",
+  "v": 4
+ },
+ {
+  "id": "ph43",
+  "key": "thua-minh-cung-quyphi-ngu",
+  "label": "Thừa Minh cung · Quý phi · phòng ngủ",
+  "gen": "P3FQKLy42C",
+  "look": "cửa sổ sạch NHƯNG còn rèm trắng tường trái trên kệ → ĐANG VẼ LẠI 1 lần",
+  "structure": "giữ nguyên (thêm bình phong)",
+  "v": 4
+ },
+ {
+  "id": "ph44",
+  "key": "thua-minh-cung-tan",
+  "label": "Thừa Minh cung · Tần · tiếp khách",
+  "gen": "79CfqeFJAL",
+  "look": "sạch rèm cửa sổ",
+  "structure": "giữ nguyên (cửa đi vòm → cửa tròn, không rèm)",
+  "v": 4
+ },
+ {
+  "id": "ph45",
+  "key": "thua-minh-cung-tan-ngu",
+  "label": "Thừa Minh cung · Tần · phòng ngủ",
+  "gen": "UPavFpgwny",
+  "look": "sạch rèm cửa sổ (rèm giường giữ), tường trái sạch",
+  "structure": "giữ nguyên",
+  "v": 4
+ },
+ {
+  "id": "ph46",
+  "key": "thua-minh-cung-tay-phoi",
+  "label": "Thừa Minh cung · Tây phối · tiếp khách",
+  "gen": "tCZRYOhmZJ",
+  "look": "sạch rèm cửa sổ (rèm cửa đi giữ)",
+  "structure": "giữ nguyên",
+  "v": 4
+ },
+ {
+  "id": "ph47",
+  "key": "thua-minh-cung-tay-phoi-ngu",
+  "label": "Thừa Minh cung · Tây phối · phòng ngủ",
+  "gen": "dt94ZS7XSL",
+  "look": "sạch rèm cửa sổ (rèm giường giữ)",
+  "structure": "giữ nguyên",
+  "v": 4
+ },
+ {
+  "id": "ph48",
+  "key": "truong-xuan-cung-dong-phoi",
+  "label": "Trường Xuân cung · Đông phối · tiếp khách",
+  "gen": "s7tICpbl8e",
+  "look": "sạch rèm cửa sổ, tường trái sạch",
+  "structure": "giữ nguyên (rèm cửa đi không còn)",
+  "v": 4
  }
 ]
