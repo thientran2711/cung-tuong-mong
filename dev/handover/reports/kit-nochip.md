@@ -13,4 +13,5 @@ Branch review/kit-nochip-r1 = 15ecbf0c + merge LIVE c0dff1b3 (conflicts only gen
 | Old save | quickcheck old-save case: loads, plays a buổi, 0 errors |
 | Shots Fold 755x1000 + iPad 1180x820 full screen, each looked 3× (law 12) | Hồi kết nhánh (4 cards), Kết cục («Tiếp tục»), Đại kết cục («Tạ ơn»), certain cards show Tốn/Được rows and NO meter; rolled cards keep the meter; nothing cut, no overflow |
 | Wording (law 7) | no new player text |
+Bare branch head 15ecbf0c (`node dev/test/odds-meter-back.js file://$PWD/index.html out.json`): 755x1000 dialogs 34 · options 100 · meter 21 · certain (no meter) 79 · certain with a meter 0 · errors 0 → PASS; 1180x820 dialogs 32 · options 94 · meter 21 · certain (no meter) 73 · certain with a meter 0 · errors 0 → PASS (law 11 rule MAIN 117 06:02Z: test run on bare head AND merged head).
 Verdict: **PASS** 6b8325895a8cc3c744809cebfaceb419f3b067fd. Shots scratch only.
