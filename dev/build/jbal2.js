@@ -290,6 +290,7 @@ Object.assign(BAL.mgTier.lev,{nghe:{cross:[5600,7850]},truyen:{lim:[10000,15000]
 /* mg-visual (owner 20/11 ~05:10Z): ONE look for «this cue is lit» and «this target was pressed» on EVERY mini-game board (kg82Spr glow + kg82Cue in j82):
    pop = scale of the lit / pressed target (was 1.08 / 1.14: hard to see) · ms = how long the pop + lit ring stay · glow/ring = colours · blur = glow size px ·
    pass = glow passes (shadow stacks) · ringW = ring width as a share of the target's width · dim = darkening of the UNLIT painting under a lit cue (contrast) */
+BAL.mgVeilMs=1500;/* owner 24/11 ~22:02Z: a mini-game frame stays veiled until its pictures (her face, the board) are decoded, at most this long */
 BAL.mgFx={pop:1.24,ms:300,glow:"#fff0a0",ring:"#ffffff",blur:44,pass:3,ringW:.07,dim:.18};
 /* dauho-lv5 (owner 21/11, Fold, «Thử tay: Đầu hồ · hồi 5/5», verbatim: "để cái mức độ mà cho mọi người chơi á, là ở cái level 5, cái hồi 5 mà bạn đang test tôi á,
    thấy nó hợp lý hơn á. Với lại là cái vòng ... của cái mũi tên này nó vô cái bình nó to quá, cho nên có một cái mũi tên nó nằm ở ngoài nhìn nó bị giả đó. Mình thu
