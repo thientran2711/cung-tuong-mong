@@ -15,7 +15,7 @@
      (kitReward chest). NPCs: the same rule as data (Danh, rumours in Tin trong cung, robbery, Nội vụ phủ issue).
    Old saves: nothing to convert (a worn robe stays worn). */
 const TYF={ix:null,ld:0};
-function tyLoad(){if(TYF.ld)return;TYF.ld=1;try{fetch("img/FIGURES-ty.json",{cache:"no-cache"}).then(r=>r.ok?r.json():[]).then(j=>{const L=Array.isArray(j)?j:(j&&j.figures)||[];const ix={};
+function tyLoad(){if(TYF.ld)return;TYF.ld=1;try{fetch("img/FIGURES-ty.json",{cache:"no-cache"}).then(r=>r.ok?r.json():[]).then(j=>{const L=Array.isArray(j)?j:(j&&j.figures)||[];if(!L.length&&TYF.ix)return;/* a failed / empty refetch never wipes the last good list (law 11: every timed figure loader) */const ix={};
   for(const f of L){if(!f||!f.file||!f.role||!f.identity)continue;const k=norm(f.role)+":"+f.identity;((ix[k]=ix[k]||{})[f.ty|0]=ix[k][f.ty|0]||[]).push(f)}
   TYF.ix=ix;try{if(S&&!S.dead)render()}catch(e){}}).catch(()=>{TYF.ld=0})}catch(e){TYF.ld=0}}
 try{tyLoad();setInterval(()=>{TYF.ld=0;tyLoad()},300000)}catch(e){}

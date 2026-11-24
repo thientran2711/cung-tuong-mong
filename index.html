@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place","b":"bc15a44a5a6a","h":[{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"}]};
+window.CTM_BI={"s":"b896e622+","t":"2026-11-24T18:01Z","c":"figure loaders: a failed / empty 5-minute refetch never wipes the last good list (law 11: j39 loadFigs, j73 kidLoad, jfigx, jht, jkc; jkcg …","b":"913983392ce3","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -6196,7 +6196,7 @@ function figKey(f){const r=norm(f.role);if(f.identity!=null&&f.identity!=="")ret
 function figIndex(all){const ix={};for(const f of all){if(/(^|\/)por-/.test(f.file||f.src))continue;const r=norm(f.role);const k=figKey(f);(ix[r]=ix[r]||{});(ix[r][k]=ix[r][k]||[]).push(f)}return ix}
 function loadFigs(){try{Promise.all(FIGF.map(u=>fetch(u,{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]))).then(([a,b,c])=>{a=figList(a);b=figList(b);c=figList(c);
  const old=f=>/(^|\/)_old\//.test(String(f.file||f.src))||(f.por&&/(^|\/)_old\//.test(String(f.por)));a=a.filter(f=>!["thaihau","official","physician"].includes(norm(f.role)));a=a.filter(f=>!old(f));b=b.filter(f=>!old(f));c=c.filter(f=>!old(f));
- const all=a.concat(b,c);const sig=all.length+"|"+all.map(f=>f.file||f.src).join(",").length;if(sig===FIGSIG)return;FIGSIG=sig;FIGS=all;FIGIX=figIndex(all);try{if(S&&!S.dead)render()}catch(e){}}).catch(()=>{})}catch(e){}}
+ if(!a.length||!b.length||!c.length)return;/* a failed / empty refetch never wipes the last good lists (law 11: every timed figure loader) */const all=a.concat(b,c);const sig=all.length+"|"+all.map(f=>f.file||f.src).join(",").length;if(sig===FIGSIG)return;FIGSIG=sig;FIGS=all;FIGIX=figIndex(all);try{if(S&&!S.dead)render()}catch(e){}}).catch(()=>{})}catch(e){}}
 loadFigs();setInterval(loadFigs,300000);
 /* which art group a person belongs to, preferred first */
 const MANSUB={"thị vệ":["guard","thive","thi ve","vesi"],"thái y":["physician","doctor","thaiy"],"vương gia":["prince","royal","vuonggia","wang"],"nhạc sư":["musician","nhacsu","music"],"sứ thần":["envoy","suthan","ambassador"],"họa sư":["painter","hoasu"]};
@@ -9689,7 +9689,7 @@ const KIDF="https://ctm-img.victoria-tntt.workers.dev/img/FIGURES-kids.json";
 let KIDIX={prince:{},princess:{}},KIDSIG="";
 const KIDBANDS=[4,9,14,20];
 function kidBandOf(a){a=+a||0;return a<=6?4:a<=11?9:a<=16?14:20}
-function kidLoad(){try{fetch(KIDF,{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]).then(j=>{const L=figList(j).filter(f=>!/(^|\/)_old\//.test(String(f.file||f.src)));
+function kidLoad(){try{fetch(KIDF,{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]).then(j=>{const L=figList(j).filter(f=>!/(^|\/)_old\//.test(String(f.file||f.src)));/* a failed / empty refetch (offline, CDN hiccup) never wipes the last good list (law 11: every timed figure loader) */if(!L.length)return;
  const sig=L.length+"|"+L.map(f=>f.file||f.src).join(",").length;if(sig===KIDSIG)return;KIDSIG=sig;
  const ix={prince:{},princess:{}};for(const f of L){const r=norm(f.role);if(!ix[r]||f.identity==null)continue;const b=parseInt(f.ageBand,10);if(isNaN(b))continue;(ix[r][f.identity]=ix[r][f.identity]||{})[b]=f}
  KIDIX=ix;try{if(S&&!S.dead){kidAssignAll();render()}}catch(e){}}).catch(()=>{})}catch(e){}}
@@ -49716,7 +49716,7 @@ function rtNgScene(shown,kn,cb){if(!rtMgOn()){cb();return}
      (kitReward chest). NPCs: the same rule as data (Danh, rumours in Tin trong cung, robbery, Nội vụ phủ issue).
    Old saves: nothing to convert (a worn robe stays worn). */
 const TYF={ix:null,ld:0};
-function tyLoad(){if(TYF.ld)return;TYF.ld=1;try{fetch("https://ctm-img.victoria-tntt.workers.dev/img/FIGURES-ty.json",{cache:"no-cache"}).then(r=>r.ok?r.json():[]).then(j=>{const L=Array.isArray(j)?j:(j&&j.figures)||[];const ix={};
+function tyLoad(){if(TYF.ld)return;TYF.ld=1;try{fetch("https://ctm-img.victoria-tntt.workers.dev/img/FIGURES-ty.json",{cache:"no-cache"}).then(r=>r.ok?r.json():[]).then(j=>{const L=Array.isArray(j)?j:(j&&j.figures)||[];if(!L.length&&TYF.ix)return;/* a failed / empty refetch never wipes the last good list (law 11: every timed figure loader) */const ix={};
   for(const f of L){if(!f||!f.file||!f.role||!f.identity)continue;const k=norm(f.role)+":"+f.identity;((ix[k]=ix[k]||{})[f.ty|0]=ix[k][f.ty|0]||[]).push(f)}
   TYF.ix=ix;try{if(S&&!S.dead)render()}catch(e){}}).catch(()=>{TYF.ld=0})}catch(e){TYF.ld=0}}
 try{tyLoad();setInterval(()=>{TYF.ld=0;tyLoad()},300000)}catch(e){}
@@ -52420,7 +52420,7 @@ const gl=(k,l)=>typeof kitGloss==="function"?kitGloss(k,l):l;
 const HT={dow:[30,20,12],back:[14,9,5],heirB:4,clanRel:8,envy:-6,rivalO:10,fail:{sung:-3},cd:3,trac:3,tracB:3};
 /* ---------- faces: công tử (own manifest) and quý nữ (khuê các) ---------- */
 let CTIX={},KCIX={};
-function ld(u,cb){try{fetch(u,{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]).then(j=>{try{cb(typeof figList==="function"?figList(j):(j||[]));if(S&&!S.dead&&typeof tab!=="undefined"&&HTK.includes(tab))render()}catch(e){}})}catch(e){}}
+function ld(u,cb){try{fetch(u,{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]).then(j=>{try{const L=typeof figList==="function"?figList(j):(j||[]);/* a failed / empty refetch never wipes the last good list (law 11: every timed figure loader) */if(!L.length)return;cb(L);if(S&&!S.dead&&typeof tab!=="undefined"&&HTK.includes(tab))render()}catch(e){}})}catch(e){}}
 function htLoad(){ld("https://ctm-img.victoria-tntt.workers.dev/img/FIGURES-congtu.json",L=>{const ix={};L.forEach(f=>{if(f.identity)(ix[f.identity]=ix[f.identity]||[]).push(f)});CTIX=ix});
  ld("https://ctm-img.victoria-tntt.workers.dev/img/FIGURES-kc.json",L=>{const ix={};L.filter(f=>String(f.tier)==="kc").forEach(f=>{const k=`${f.role}:${f.identity}`;(ix[k]=ix[k]||[]).push(f)});KCIX=ix})}
 htLoad();setInterval(htLoad,300000);
@@ -76754,7 +76754,7 @@ window.kcHook=kcHook;
 let KCFX={};
 function kcFigLoad(){try{fetch("https://ctm-img.victoria-tntt.workers.dev/img/FIGURES-kc.json",{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]).then(j=>{const X={};
  for(const f of figList(j)){const t=String(f.tier||""),r=norm(f.role);if(!(t==="kc"||t==="ngheo")||!f.identity)continue;const k=r+":"+f.identity;const T=(X[k]=X[k]||{});(T[t]=T[t]||[]).push(f)}/* r2: the CDN list now also has a26/a36/a51 khuê các dresses for some faces: keep every band */
- const n=Object.keys(X).length;const was=Object.keys(KCFX).length;KCFX=X;if(n!==was)try{if(isKc())render()}catch(e){}}).catch(()=>{})}catch(e){}}
+ const n=Object.keys(X).length;if(!n)return;/* a failed / empty refetch never wipes the last good list (law 11: every timed figure loader) */const was=Object.keys(KCFX).length;KCFX=X;if(n!==was)try{if(isKc())render()}catch(e){}}).catch(()=>{})}catch(e){}}
 kcFigLoad();setInterval(kcFigLoad,300000);
 function kcDress(){return S&&S.origin&&(S.origin.k==="thd"||(S.origin.k==="td"&&!kcLore()))?"ngheo":"kc"}/* KC LORE: td is a Thị lang's daughter until the day she leaves home: khuê các dress; only thd is poor */
 function kcBand(age){return ageBandIx(age)}
@@ -93928,7 +93928,7 @@ let FIGXR=[],FIGXT={};
 function figxKey(f){return norm(f.role)+":"+f.identity}
 /* r2 (review FAIL #1): figxLoad.ok = the rows are in. The Thái hậu's face is for life, so she is not drawn before they are (a draw before
    would not see which faces have a painted Thái hậu robe). After BAL.figxTry failed reads (offline / missing file) she is drawn anyway. */
-function figxLoad(){try{fetch("https://ctm-img.victoria-tntt.workers.dev/img/FIGURES-x.json",{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]).then(j=>{const L=figList(j);if(!L.length)figxLoad.fail=(figxLoad.fail||0)+1;
+function figxLoad(){try{fetch("https://ctm-img.victoria-tntt.workers.dev/img/FIGURES-x.json",{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]).then(j=>{const L=figList(j);if(!L.length){figxLoad.fail=(figxLoad.fail||0)+1;/* keep the last good list (law 11: every timed figure loader) */if(figxLoad.ok)return}
   const sig=L.length+"|"+L.map(f=>f.file).join(",").length;if(sig===figxLoad.sig)return;figxLoad.sig=sig;
   const T={},A=[];for(const f of L){const t=String(f.tier);if(t==="th"||f.v){const k=figxKey(f);const X=T[k]=T[k]||{th:[],v:[]};(t==="th"?X.th:X.v).push(f)}else A.push(f)}
   FIGXR=A;FIGXT=T;if(L.length)figxLoad.ok=1;if(typeof FIGS!=="undefined"&&FIGS.length){FIGIX=figIndex(FIGS);try{if(S&&!S.dead)kitRenderSoon(250)}catch(e){}}}).catch(()=>{})}catch(e){}}
@@ -97893,7 +97893,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="bc15a44a5a6a";window.CTM_BUILD=BUILD;
+const BUILD="913983392ce3";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
