@@ -17,7 +17,7 @@ const SELX_V=1;
 function selxW(){return BAL.selx.w}
 function selxBase(p){const W=selxW();p=p||S;return (W.base||0)+(W.sac||0)*(+p.sac||0)+(W.duc||0)*(+p.duc||0)+(W.tai||0)*(+p.tai||0)}
 /* marks: {mini, dd, hx} each 0..10 (a missing test counts as the middle mark 5); luck: false = no noise (for the odds/preview and tests) */
-function selxScore(p,m,luck){const W=selxW();m=m||{};const mk=k=>m[k]==null?5:Math.max(0,Math.min(10,+m[k]||0));const n=BAL.selx.noise||0;
+function selxScore(p,m,luck){const W=selxW();m=m||{};const MK=BAL.selx.mark;const mk=k=>m[k]==null?MK.mid:Math.max(MK.lo,Math.min(MK.hi,+m[k]||0));/* law 4 (RV-SELX13 8): the mark scale from BAL */const n=BAL.selx.noise||0;
  return selxBase(p)+W.mini*mk("mini")+W.dd*mk("dd")+W.hx*mk("hx")+(W.imp||0)*mk("imp")/* first impression (SELSCENE-5, OD ~08:55Z): the royals' look, the same default for all */+(luck===false||!n?0:R(2*n+1)-n)}
 function selxResult(place){const B=BAL.selx;if(!(place>=1&&place<=B.yard.kept))return{kept:false,step:null};return{kept:true,step:B.placeStep[place-1]}}
 function selxHoaThan(k){return (BAL.selx.hoaThan||[]).includes(k||(S&&S.origin&&S.origin.k))}
@@ -32,7 +32,7 @@ function selxMiniFav(mark){for(const [t,f] of BAL.selx.fav.mini)if(mark>=t)retur
 function selxMark(react){const M=BAL.selx.npcMatch;return react==="+"?M.hit:react==="−"?M.miss:M.none}
 /* a tú nữ's own marks (law 1: the same tests, her own skill and nết): mini = her art level mark; dd/hx = how her nết's way of answering fits the royal */
 function selxNpcMarks(v,t){t=t||{};const lv=(()=>{try{return t.art&&typeof kg82LvFor==="function"?kg82LvFor(v,t.art):0}catch(e){return 0}})();
- const NM=BAL.selx.npcMini;const mini=Math.max(0,Math.min(10,Math.round(NM.base+lv*NM.lv+R(2*NM.r+1)-NM.r)));/* law 4: numbers from BAL */const pickBy=(e,rf)=>{if(!e||!e.options)return"";const net=(()=>{try{return netOf(v)||[]}catch(x){return[]}})().join(" ");
+ const NM=BAL.selx.npcMini;const MK=BAL.selx.mark;const mini=Math.max(MK.lo,Math.min(MK.hi,Math.round(NM.base+lv*NM.lv+R(2*NM.r+1)-NM.r)));/* law 4: numbers from BAL */const pickBy=(e,rf)=>{if(!e||!e.options)return"";const net=(()=>{try{return netOf(v)||[]}catch(x){return[]}})().join(" ");
   const ST={khiem:/Khiêm nhường|Kín đáo|An phận|Điềm tĩnh/,manh:/Kiêu ngạo|Nóng nảy|Tham vọng/,dido:/Nhiều chuyện|Ham vui|Xảo quyệt/,that:/Thật thà|Thanh liêm|Trọng nghĩa/,
    giuyen:/Điềm tĩnh|Kín đáo|Lạnh lùng/,tuxu:/Nóng nảy|Ân cần|Rộng lượng/,caunguoi:/Khiêm nhường|An phận/,nhan:/Thật thà|Thanh liêm/};
   const kn=rf&&e.__k&&(v.__kn||{})[e.__k]>=1?e.options.find(x=>rf(x)==="+"):null;/* SELSCENE-5: she asked the ma ma (law 1, the same road as her) */
@@ -46,6 +46,13 @@ function selxGirls(n){const B=BAL.selx;n=n==null?B.yard.n-1:n;const L=[];for(let
 function selxContest(girls,her){const B=BAL.selx;const L=(girls||[]).map(v=>{const marks=v.__marks||Object.assign(selxNpcMarks(v,her&&her.t||{}),v.__impMk!=null?{imp:v.__impMk}:{});return{v,marks,sc:v.__sc!=null?v.__sc:Math.round(selxScore(v,marks))}});
  if(her)L.push({v:S,marks:her.marks||{},sc:her.sc!=null?her.sc:Math.round(selxScore(S,her.marks||{}))});
  L.sort((a,b)=>b.sc-a.sc||(+b.v.sac||0)-(+a.v.sac||0));L.forEach((x,i)=>{x.place=i+1;const r=selxResult(i+1);x.kept=r.kept;x.step=r.step});return L}
+/* RV-SELX13 5 (law 6b, LIVE j27 tuyenTu rule): the palace takes a girl only while roomFor("consort") (the one room rule); a kept girl beyond the free rooms is
+   not kept (ban hoa), so no girl is ever announced (podium, «Ban hương nang», «Tin sắc phong», phân cung) who does not enter. selxRoomsFree(max) counts
+   the free rooms with the one rule (placeholders pushed for the count only, removed at once). Her own place is never touched (she already lives). */
+function selxRoomsFree(max){if(typeof roomFor!=="function")return max;let n=0;const P=[];try{while(n<max&&roomFor("consort")){const d={alive:true,__ph:1};P.push(d);rivals.push(d);n++}}finally{for(const d of P){const i=rivals.indexOf(d);if(i>=0)rivals.splice(i,1)}}return n}
+function selxRoomCap(L){let F=selxRoomsFree(BAL.selx.yard.kept);for(const x of L){if(x.v===S||!x.kept)continue;if(F>0){F--;continue}x.kept=false;x.step=null;x.noRoom=1}return L}
+/* the hương nang (RV-SELX13 10, law 6c): a real item (BAL.selx.huong) in the kept girl's chest, her included — once */
+function selxHuong(p){try{p.inv=p.inv||[];if(!p.inv.some(e=>e&&e.from==="selx"))p.inv.push({k:BAL.selx.huong,from:"selx"})}catch(e){}}
 function selxIntake(){const I=BAL.selx.intake;return I.min+R(I.max-I.min+1)}
 /* lodging plan: rooms of perRoom girls (her room first), beds of perBed (OD 24/11 ~05:35Z: 1 room, 2 beds, 2 girls per bed) */
 function selxRoomPlan(girls){const P=BAL.selx.room,L=[S,...(girls||[]).filter(v=>v!==S)],rooms=[];for(let i=0;i<L.length;i+=P.perRoom){const g=L.slice(i,i+P.perRoom);const beds=[];for(let j=0;j<g.length;j+=P.perBed)beds.push(g.slice(j,j+P.perBed));const V=(BAL.selx.lodge&&BAL.selx.lodge.so)||[];const vi=V[rooms.length];rooms.push({girls:g,beds,so:vi?vi[0]:"",soN:vi?vi[1]:""})}return rooms}
@@ -76,7 +83,7 @@ const SELX_SELW="buổi hôm nay định ngươi được phong cao hơn, đúng
 /* every other tú nữ's own result (law 1): kept → her own origin standing ±1 (cap Tần) and she enters the palace as a real consort; ban hoa → she goes home,
    kept as a record of a real person (law 6b: name, face, house — never vanishes) */
 function selxNpcOut(L){const Z=S.selx2;Z.out=Z.out||[];for(const x of L){if(x.v===S||x.v.__done)continue;x.v.__done=1;
-  if(x.kept){x.v.rank=selxRank(x.v,x.step,{k:"_",r0:x.v.r0});if(typeof roomFor!=="function"||roomFor("consort")){rivals.push(x.v);try{palFix()}catch(e){}}else Z.out.push({id:x.v.id,name:x.v.name,face:x.v.face,hue:x.v.hue,kept:1})}
+  if(x.kept){x.v.rank=selxRank(x.v,x.step,{k:"_",r0:x.v.r0});selxHuong(x.v);rivals.push(x.v);try{palFix()}catch(e){}}/* RV-SELX13 5 (law 6b): selxRoomCap already kept only the girls the palace can take */
   else Z.out.push({id:x.v.id,name:x.v.name,face:x.v.face,hue:x.v.hue,sc:x.sc,ban:1})}Z.girls=[]}
 /* DAY 1 (OD 24/11 ~07:05Z): the other tú nữ exist from the start of the selection — the same girls she lodges with, meets in the yard and competes with;
    rooms in BAL.selx.lodge (Dưỡng Tú viện, one sở per room, OD ~08:20Z) by selxRoomPlan; stored as ids so a save holds one copy of each girl */
@@ -86,11 +93,11 @@ function selxPodShow(L){if(typeof kitPodiumShow!=="function"||window.__bot||type
  return kitPodiumShow(L.map(x=>({who:x.v,place:x.place,score:`${x.sc} phần`,sub:x.kept?"ban hương nang":"ban hoa",you:x.v===S?"Ngươi":undefined})),{title:"Điện tuyển",sub:`Giữ ${typeof selxNumW==="function"?selxNumW(BAL.selx.yard.kept):BAL.selx.yard.kept} người điểm cao nhất`,next:"Tiếp",unknown:v=>!(typeof selxMet==="function"?selxMet(v):true)/* KIT 26.4 (kit-batch2 1ba60626, MAIN 117 Q5): NAMED is not MET — a girl not greeted stands as the grey silhouette with her name, no cuMeet */})}
 const SELX_WHY={up:"Được ban hương nang; được phong cao hơn thân phận",eq:"Được ban hương nang; được phong đúng thân phận",dn:"Được ban hương nang, nhưng phong thấp hơn thân phận một bậc"};
 function selxSelDo(raw){if(S.selx2&&S.selx2.days&&typeof selxMiniDone==="function")return selxMiniDone(raw);/* SELSCENE-4: the 3 days — the mini-game is Hoàng thượng's test of DAY 2 (jselxday) */const X=S.selx;const Z=S.selx2=S.selx2||{v:SELX_V};const t={art:X.art||(()=>{try{return entKind(entBest())}catch(e){return""}})()};/* a skipped round: everyone on her own best board kind, the same board for all */
- const girls=Z.girls&&Z.girls.length?Z.girls:(Z.girls=selxGirls());const L=selxContest(girls,{marks:{mini:raw},t});const me=L.find(x=>x.v===S);
+ const girls=Z.girls&&Z.girls.length?Z.girls:(Z.girls=selxGirls());const L=selxRoomCap(selxContest(girls,{marks:{mini:raw},t}));const me=L.find(x=>x.v===S);
  const res={kept:me.kept,step:me.step};const sc=me.sc;X.sc=sc;X.kept=res.kept;X.step=res.step;X.place=me.place;
  Z.pod=L.map(x=>({id:x.v===S?"me":x.v.id,sc:x.sc,place:x.place,kept:x.kept}));selxNpcOut(L);try{selxPodShow(L)}catch(e){console.error("selx pod",e)}
  if(!res.kept){X.tier=0;X.fx=1;X.why="Bị ban hoa";log("Tuyển chọn: bị ban hoa, xuất cung.");try{kcSnapReset()}catch(e){}selxBanHoa();return}
- X.tier=res.step+1;const r0=(S.origin&&S.origin.r)||0;const rank=selxRank(S,res.step);const was=S.rank;S.rank=rank;
+ selxHuong(S);X.tier=res.step+1;const r0=(S.origin&&S.origin.r)||0;const rank=selxRank(S,res.step);const was=S.rank;S.rank=rank;
  if(rank<was)S.sung=Math.max(0,(S.sung||0)-(was-rank)*BAL.entry.stepSung);S.lastPromo=S.turn;try{palFix()}catch(e){}try{kc2R0()}catch(e){}
  X.why=rank>r0?SELX_WHY.up:rank<r0?SELX_WHY.dn:SELX_WHY.eq;
  const c=Q.find(m=>m.t==="Nhập cung");if(c){const h0=String(c.h),nw=`${RANKS[rank].n} (kỳ tuyển chọn: ${KC2SW[X.tier]})`;

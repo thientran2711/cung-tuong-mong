@@ -695,6 +695,9 @@ Object.assign(BAL,{selx:{intake:{min:3,max:5},yard:{n:12,perRound:4,kept:4},coop
  ask:{bac:40,pleaseK:3,maPlease:2,maHi:3,maLo:-2,net:{full:["Nhiều chuyện","Ân cần","Nóng nảy","Rộng lượng"],one:["Điềm tĩnh","Kín đáo","Khiêm nhường","Thật thà"],no:["Lạnh lùng","Kiêu ngạo"]},lure:["Ham lợi"],
   npcBuyR0:1,npcPlease:["Ân cần","Khiêm nhường","Xu nịnh","Thực dụng"]},
  carry:{E:1,T:1,H:1},tuan:3,
+ /* SELSCENE-14 (RV-SELX13 8/9/10, law 4 / 1 / 6c): mark = one test mark scale {lo, hi, mid = a missing mark}; byDef = chance in a hundred that a bystander whose nết
+    the seed does not list defends (else stays silent); huong = the item key of the hương nang (the túi thơm item, IT.tuithom) given to each kept girl, her included */
+ mark:{lo:0,hi:10,mid:5},byDef:50,huong:"tuithom",
  /* the scene layer of the 3 days (jselxsc on KIT §93 kitScene + §95 kitDialogue): fh = figure height / layer height (the stage size), view = figures per view
     (Fold: the waiting-yard exception, OD ~05:00Z: 4; iPad 6), side = scale of a called group standing aside, ms = move time of a figure (ms) */
  sc:{fh:.8,view:{fold:4,ipad:6},side:.42,ms:520},
