@@ -15,8 +15,13 @@ SRC = {}
 for f in ['prompts_pr13.json', 'prompts_roompf1_M2294.json', 'prompts_roompf1_M2299.json', 'prompts_roompf1_M2300.json',
           'prompts_pr19_batch1.json', 'prompts_pr18_room30.json', 'prompts_pr19_room30.json', 'prompts_pr19_room32b.json']:
     for k, v in json.load(open(os.path.join(D, f))).items(): SRC.setdefault(k, []).append((f, v))
+# places on the rooms page (img/_review/place-rank/places-l2370/<key>-ha-sang.webp) that still show window fabric when LOOKED (24/11): only nvp
+SRC['nvp'] = [('prompts_places_L2370.json', json.load(open(os.path.join(D, 'prompts_places_L2370.json')))['nvp'])]
+PLACE_KIND = {'nvp': 'tiep-khach'}
 # window-curtain wording -> replacement (applied in order, each must hit where listed in CUTS[key])
 RX = [
+ ('(the sheer window curtains tied back, ', '('),
+ ('(the window curtains, the lantern tassels)', '(the lantern tassels)'),
  (', the sheer window curtains tied back,', ','),          # "...soft blue like #X: the sheer window curtains tied back, the curtain of the doorway,"
  (': the sheer window curtains tied back, ', ': '),
  (', the window curtains and the lantern tassels', ' and the lantern tassels'),
@@ -27,26 +32,44 @@ GEN = {  # generic "curtains" in the colour sentence: bedroom -> bed curtains (a
  'ngu': ('the main colour of the silks, curtains and cushions', 'the main colour of the silks, bed curtains and cushions'),
  'tiep-khach': ('the main colour of the silks, curtains and cushions', 'the main colour of the silks and cushions'),
 }
-PICK = {}   # base -> source json key when several exist (the one that made the pr13 picture); filled per batch after the ledger check
+# base -> source json file when several hold the key (ledger: KT Tần = room 32 redo VX7s33bMMU from prompts_pr19_room32b;
+# TX Tây phối = room 30 redo DoOgSWcpcl from prompts_pr19_room30); one source otherwise.
+PICK = {'khai-tuong-cung-tan': 'prompts_pr19_room32b.json', 'truong-xuan-cung-tay-phoi': 'prompts_pr19_room30.json'}
+# room-specific line (ROOT-D1 24/11 ~00:41Z: inside her order "nhắc kỹ trong prompt là cửa sổ không rèm") naming a spot where the OLD
+# picture (or a first redo) had fabric at a window in an odd place. Appended after NC. Only such lines; nothing else changes.
+EXTRA = {
+ 'nvp': " The lattice windows in the LEFT side wall are bare carved lattice with window paper: no white lace, no sheer curtain hangs at them.",
+ 'chung-tu-cung-tay-phoi': " On the left side wall behind the tall shelf cabinet, any lattice window is bare carved lattice with window paper: no curtain, no fabric hangs there.",
+ 'canh-phuc-cung-tay-phoi-ngu': " On the right side wall behind the tall shelf cabinet, any lattice window is bare carved lattice with window paper: no curtain, no fabric hangs there.",
+ 'dien-huy-cung-dong-phoi': " On the left side wall above and behind the tall shelf, any lattice window is bare carved lattice with window paper: no curtain, no fabric hangs there.",
+ 'ham-an-cung-tay-phoi': " On the left side wall between the tall shelf and the chairs, any lattice window is bare carved lattice with window paper: no green curtain, no fabric hangs there.",
+ 'ham-an-cung-phi-ngu': " On the right side wall behind the tall shelf, any lattice window is bare carved lattice with window paper: no curtain, no fabric hangs there.",
+ 'khai-tuong-cung-tan': " At the far left edge of the back wall, beside the vase of lotus, no curtain and no fabric hangs: bare wall or bare carved lattice.",
+ 'khai-tuong-cung-dong-phoi': " The small high lattice window on the left side wall, behind the tall cabinet, is bare carved lattice with window paper: no curtain, no sheer white fabric hanging there.",
+}
 def build(base, kind, src_key=None):
-    f, v = [(f, v) for f, v in SRC[src_key or base]][-1]
+    c = [(f, v) for f, v in SRC[base] if PICK.get(base) in (None, f)]; assert len(c) == 1 or base not in PICK, base
+    f, v = c[-1]
     p0 = v['prompt']; p = p0; cut = []
     assert p.count(STY[0]) == 1, base; p = p.replace(*STY); cut.append('curtains and objects arranged through the room')
     for a, b in RX:
         if a in p: p = p.replace(a, b); cut.append(a.strip(' ,:;'))
+    if '(the window curtains, the lantern tassels)' in p0:   # no bed/door curtain left in that room: the generic word follows
+        for a, b in [('ALL the curtains of the room are', 'ALL the hangings of the room are'), (' (curtains) and', ' (hangings) and')]:
+            if a in p: p = p.replace(a, b); cut.append(a.strip(' (),'))
     g = GEN[kind]
     if g[0] in p: p = p.replace(*g); cut.append(g[0])
-    p = p + WIN + NC
+    p = p + WIN + NC + EXTRA.get(base, '')
     assert len(p) < 10000, (base, len(p))
-    left = [p[max(0, m.start() - 70):m.end() + 40] for m in re.finditer(r'window curtain|curtains? at (the )?window|sheer .{0,20}curtain', p[:len(p) - len(WIN + NC)])]
-    return dict(v, prompt=p, src=f, src_key=src_key or base), p0, cut, left
+    left = [p[max(0, m.start() - 70):m.end() + 40] for m in re.finditer(r'window curtain|curtains? at (the )?window|sheer .{0,20}curtain', p[:len(p) - len(WIN + NC + EXTRA.get(base, ''))])]
+    return dict(v, prompt=p, src=f), p0, cut, left
 if __name__ == '__main__':
     keys = sys.argv[1:]
     rows = {r['base']: r for r in json.load(open(os.path.join(D, 'rank_rooms.json')))}
     OUT = json.load(open(os.path.join(OUTD, 'prompts_roomnc.json'))) if os.path.exists(os.path.join(OUTD, 'prompts_roomnc.json')) else {}
     import room_gate
     for b in keys:
-        o, p0, cut, left = build(b, rows[b]['kind'], PICK.get(b))
+        o, p0, cut, left = build(b, rows[b]['kind'] if b in rows else PLACE_KIND[b])
         assert not left, (b, left)
         OUT[b] = o
         open(os.path.join(BASED, b + '.txt'), 'w').write(p0)

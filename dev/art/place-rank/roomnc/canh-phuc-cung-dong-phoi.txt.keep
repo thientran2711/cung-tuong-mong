@@ -1,0 +1,3 @@
+base: dev/art/place-rank/roomnc/base/canh-phuc-cung-dong-phoi.txt
+allow: curtains and objects arranged through the room  # owner 24/11 ~00:29Z "ghi là sửa là cái cửa sổ không rèm" + rule L30
+allow: (the sheer window curtains tied back  # owner 24/11 ~00:29Z "ghi là sửa là cái cửa sổ không rèm" + rule L30

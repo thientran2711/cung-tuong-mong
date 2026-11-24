@@ -1,0 +1,4 @@
+base: dev/art/place-rank/roomnc/base/thua-minh-cung-phi.txt
+allow: curtains and objects arranged through the room  # owner 24/11 ~00:29Z "ghi là sửa là cái cửa sổ không rèm" + rule L30
+allow: the window curtains and the lantern tassels  # owner 24/11 ~00:29Z "ghi là sửa là cái cửa sổ không rèm" + rule L30
+allow: the main colour of the silks, curtains and cushions  # owner 24/11 ~00:29Z "ghi là sửa là cái cửa sổ không rèm" + rule L30
