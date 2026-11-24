@@ -2061,8 +2061,8 @@ BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's n�
    (BAL.net words; the highest score wins, ties keep the order of clsOrd); mod[cls] = y (years ×), k (children ±), w (cause weights ×).
    suc: her Sức shifts the years (y × (sucA + Sức/sucD)); maxAge caps the age at death; old = from this age a death is «tuổi già». */
 BAL.leave={maxAge:84,old:62,sucA:.7,sucD:200,birthAge:42,
- yrs:{tron:[6,38],tron1:[4,34],hon:[10,46],thiep:[8,44],que:[12,50],tu:[16,54],dan:[5,36],duoi:[4,32],vuong:[14,44],other:[8,42]},
- kids:{tron:[0,4],tron1:[0,2],hon:[1,5],thiep:[0,3],que:[0,3],tu:[0,0],dan:[0,3],duoi:[0,2],vuong:[1,4],other:[0,3]},
+ yrs:{tron:[6,38],tron1:[4,34],hon:[10,46],thiep:[8,44],que:[12,50],tu:[16,54],dan:[5,36],duoi:[4,32],vuong:[14,44],phu:[10,34],other:[8,42]},
+ kids:{tron:[0,4],tron1:[0,2],hon:[1,5],thiep:[0,3],que:[0,3],tu:[0,0],dan:[0,3],duoi:[0,2],vuong:[1,4],phu:[0,0],other:[0,3]},
  clsOrd:["chung","datinh","quyen","bao","lanh"],
  cls:{chung:{"Ân cần":2,"Thật thà":2,"Trọng nghĩa":3,"Rộng lượng":1,"An phận":2,"Điềm tĩnh":1,"Thanh liêm":1},
       datinh:{"Ham vui":3,"Vì mình":2,"Xu nịnh":1,"Nhiều chuyện":1,"Thực dụng":1,"Xảo quyệt":1},
