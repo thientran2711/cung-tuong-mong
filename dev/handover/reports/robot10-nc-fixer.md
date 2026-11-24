@@ -152,3 +152,14 @@ LAW 4 + 11 on the same row: «bớt 3 phần 10» typed at 5 sites (j15, j20, je
 | dev/test/r10-stip-noqueen.js | 2 FAIL (the exact TypeError; typed share) | 6/6 ok |
 Tests: bongloc-options 14/14; econ-items 2 FAIL identical on main (pilfer dialog ovf 6 at Fold, no «Xin cấp lại» button) = pre-existing, for the econ owner.
 SẴN SÀNG KIỂM review/robot10-nc-fix-4 a171205829989539dedf7f9ddd88c818cff144d7 (SMALL: one null guard + one BAL text helper) · base LIVE origin/main · quickcheck PASS · core gates PASS.
+
+## REVIEW nc-fix-4
+PRIORITY #1 CHECK ('stipend noqueen payCut'): OD 0 | ledger 0 | claims fixer EqyR78Ga | main 0 | review/* review/robot10-nc-fix-4 a1712058 (only hit; reused).
+Target a1712058 merged onto newest origin/main 2899d1f2 (index.html/sw.js conflicts → took main, rebuilt with build_site.sh).
+1. jstip no-queen guard: stipEvent row = «theo ý X» if a Hoàng hậu exists else «Nội vụ phủ khất»; no rkName(null). OK. Family: other rkName/rkOf args fed by queenP() fallback — j20 payCuts/queenRewards guard `!q`; jstip stipReportTo guards `q&&`; none left. OK.
+2. LAW 4: «bớt 3 phần 10» at j15, j20 ×2 (why-line + blCard), jecon ×2, jstip → payCutTxt() (reads BAL.payCut=.7 in jecon.js:16). Scan 3 phần 10 / .7 / payCut in dev/build: 0 typed player text left (jworld/jworld2 print Math.round(b.payCut*10) from BAL = fine; jrd_thd «ba phần mười» is a different story rule, not the pay cut).
+   NIT (not FAIL): j20.js stipend0 (legacy fallback, dead once jecon is assembled; stipend() delegates to econStipend) still types base*.7 / 5 / /2; payCutTxt lives in jecon so that fallback would ReferenceError if jecon were ever absent. Remove stipend0 in a later cleanup.
+3. Text prints BAL value, cổ trang, no %: card shows «bớt 3 phần 10 bạc». OK.
+4. Gates (on merged sha): r10-stip-noqueen 6/6 ok; bongloc-options 14/14; one-core-guard / one-core-text / one-core-bind PASS (re-run after final merge); quickcheck PASS (old save ok; render 212/231, tab 450/491, buổi 1039/1386 ms; core gates PASS) on 4d3de17e (merge of main 43cf5434; the final merge 2899d1f2 only adds nc-fix-1 sources, one-core ×3 + stip-noqueen re-run PASS).
+5. Scope: SMALL (one null guard + one BAL text helper); no rule or number changed (text prints the same «3 phần 10»). No kit part touched.
+REVIEW PASS — LAND READY review/robot10-nc-fix-4-rv 32b6bbdc544c5ce29efedb1fdcad78701fd19239
