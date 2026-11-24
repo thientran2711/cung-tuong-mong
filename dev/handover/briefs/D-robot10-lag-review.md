@@ -1,0 +1,12 @@
+# Brief — REVIEW robot10-lag (Foreman D ROOT; sonnet SMALL, test-only infra)
+PRIORITY #1 CHECK ('robot10-lag review'): OD 0 | ledger 0 | claims worker EXA2WNV5 (review/robot10-lag) | main 0 | review/* review/robot10-lag 9001e14c | MAP-PERF bug already taken by MAIN 116 (session_01V1ZZH1, review/map-perf) — not yours.
+Read handover branch claude/cung-tuong-mong-handover-hj0h8w (sparse detached worktree under /home/user/wt; fetch --depth=30 under flock /home/user/wt/fetch.lock; never full-clone): dev/rules/START_CORE.md (THE 18 LAWS) + START_WORKER.md + START_REVIEWER.md in full; worker brief briefs/D-robot10-lag-anim.md; report dev/handover/reports/robot10-lag.md; data dev/handover/robot/lag-20261124/; worker's SSK line in dev/handover/FOREMAN_D_STATUS.md «FOR D ROOT (24/11 03:25Z, worker robot10-lag EXA2WNV5)».
+Target review/robot10-lag 9001e14c898c4c3c87563ddbb617ab0b7fdccced. Push fixes/merges only to review/robot10-lag-rv. Never push to main, no pull requests.
+Check:
+1. Diff vs origin/main touches ONLY dev/measure, dev/test (+ dev/handover data). Any game file → FAIL.
+2. Runner contract: headers of robot10-lag.js and robot10-anim.js state inputs/outputs; outputs match the report tables (re-run one short case each; numbers in the same band).
+3. coop-lag.js still passes its own run; dev/test/lib/coop-lag-hooks.js exports collect() and is harmless when not called; LAG=0 switches the probe off (default-off, no cost in the normal game/tests).
+4. quickcheck PASS on the branch merged with newest origin/main.
+5. Final-merge newest origin/main (test-only: take LIVE for built files + rebuild) before verdict.
+REPORT: append «## REVIEW» to dev/handover/reports/robot10-lag.md on the handover branch (commit, rebase-retry; md conflicts keep both sides) with 'REVIEW PASS — LAND READY review/robot10-lag-rv <full 40-char sha>' or a FAIL list; then append one line to dev/handover/FOREMAN_D_STATUS.md: "FOR D ROOT (rv robot10-lag): <verdict + full sha>". Also send_message Foreman D ROOT session_01D3E3NaW9BDNtzvKyD2mU3R. FAIL items go to worker EXA2WNV5 via that STATUS line (other account).
+ROLLOVER (copied verbatim): Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
