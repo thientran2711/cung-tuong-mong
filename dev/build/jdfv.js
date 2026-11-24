@@ -30,13 +30,6 @@ const DF_RULE={
  ear:["Giữ","Giữ ngón tay ở bên tai nàng; buông khi người bên cạnh liếc sang (thanh đỏ), giữ lại khi họ quay đi.","Giữ đủ lâu mà không bị bắt gặp thì thành."],
  words:["Chạm dấu","Dấu trôi lên: chạm dấu ✓ xanh (lời hợp ý), tránh dấu ✗ đỏ (lời hỏng).","Chạm đúng nhiều dấu ✓ thì thành; chạm nhầm dấu ✗ thì mất điểm."],
  stare:["Giữ ngón tay","Giữ ngón tay để thanh áp lực nằm trong dải xanh; nàng đẩy lại nên buông và giữ cho khéo.","Ở trong dải xanh càng lâu càng thành."]};
-/* owner 24/11 MAIN 128: the rules card + skip sit ABOVE every particle / weather / fx layer (they are fixed, z 9440-9470): hide them while a mini-game intro or play layer is up; the title never wraps */
-(function(){const st=document.createElement("style");st.id="dfintro-css";st.textContent=`body:has(.kfoc-play:not([hidden]) *) #kfxcv,body:has(.kfoc-play:not([hidden]) *) .kfx-fl,body:has(.kfoc-play:not([hidden]) *) .kfxk,body:has(.kfoc-play:not([hidden]) *) .kfrip{visibility:hidden!important}.dfintro .kpst{white-space:nowrap}`;document.head.appendChild(st)})();
-function dfIntro(layer,a,onGo){try{const R=DF_RULE[a.eng]||DF_RULE.words;const nm=String(a.n||"").replace(/<[^>]+>/g,"");
- const rows=[["Việc",nm,"t"],["Chạm",R[1],"t"],["Được",R[2],"t"]];
- const el=document.createElement("div");el.className="kgr dfintro";el.style.cssText="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(88%,460px);max-height:90%;display:flex;flex-direction:column;align-items:center;gap:10px;padding:14px;z-index:3;overflow:auto;box-sizing:border-box;background:var(--paper,#f6eedc);color:var(--ink,#3b2a1c);border:1px solid var(--gold,#c99a1e);border-radius:14px;box-shadow:0 6px 24px rgba(0,0,0,.35)";
- el.innerHTML=`<h4 class="kpst">Luật chơi · ${R[0]}</h4>${kg82Rows(rows)}<button type="button" class="${kg82Btn(false)} kgr-go dfgo">Sẵn sàng<small>bắt đầu chơi</small></button>`;
- layer.appendChild(el);const b=el.querySelector(".dfgo");b.onclick=e=>{e.stopPropagation();el.remove();onGo()};return el}catch(e){return null}}
 function dfUnplay(F){try{if(F.playing)F.endPlay()}catch(e){}}
 function dfLast(){try{const t=document.getElementById("rtoast");return t&&t.classList.contains("on")?t.innerText.trim().split("\n")[0]:""}catch(e){return""}}
 /* the focus holds the PERSON (DF.p), never a frozen index: S.visit.people can shift while it is up (co-op refreshHere unshifts the Emperor,
@@ -61,7 +54,8 @@ function dfTap(id){const F=DF.F;if(!F||S.dead||Q.length||DF.play)return;const i=
   if(!DF.play){dfUnplay(F);run()}};
  /* intro first: DF.play is a stub (skip = the quick result) until «Sẵn sàng» */
  DF.play={skip(){DF.play=null;dfUnplay(F);run({raw:null,skipped:true})},destroy(){}};
- if(!dfIntro(layer,a,()=>{DF.play=null;go()})){DF.play=null;go()}}
+ const R=DF_RULE[a.eng]||DF_RULE.words,nm=String(a.n||"").replace(/<[^>]+>/g,"");/* KIT §92.4: the kit rules card (kitFocus F.intro); nothing drawn here */
+ if(!F.intro({title:R[0],rows:[["Việc",nm,"t"],["Chạm",R[1],"t"],["Được",R[2],"t"]],go:"Sẵn sàng",sub:"bắt đầu chơi",onGo:()=>{DF.play=null;go()}})){DF.play=null;go()}}
 function dfAfter(a,res){const F=DF.F;if(!F)return;const i=dfIdx();if(i<0){dfGone();return}try{const ln=dfLast();F.react({line:ln?ln.slice(0,BAL.df.reactChars):"",seal:true})}catch(e){}dfSetGroups(F,dfData(i))}
 /* the old pop-up stays hidden under the focus view (the global [hidden] rule; no CSS of its own) */
 (function(){const r0=renderStage;renderStage=function(){if(DF.p&&DF.F&&!DF.play){const k=dfIdx();if(k<0){setTimeout(()=>{if(DF.p&&dfIdx()<0)dfGone()},0)}else{DF.i=k;popIdx=k}}
