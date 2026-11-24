@@ -1415,3 +1415,4 @@ REVIEW law1-gifts (opus BIG; briefs/D-law1-gifts-review.md) of 0a5fc0af | review
 | KIT KEEPER KK18 (sonnet; successor of KK17; reports/MOCK-STAGE.md «HANDOVER KK17 → KK18») | review/kit-* | MAIN 118 | session_01V1ZZH4iZc3Go1VBS7nJnuD | RUNNING | 24/11 06:18Z |
 | ROBOT-COOP RUNNER U3 (re-opened) pairs 3-4 SWAP=0 SEED=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p3-4.md | B | session_01N1tNP2fZxefqCF5gDf8nSK | RUNNING | 24/11 05:44Z |
 | SELSCENE-5 opening 3 days (opus; successor of SELSCENE-4; reports/selection-scene.md) | review/selection-scene | MAIN 118 | session_01V1ZZH1P6EXpzNXqeuKYD38 | RUNNING | 24/11 06:34Z |
+| REVIEW E65r TITLES2 r3 BIG (opus; briefs/E65r-review-titles2-r3.md) of 86e0fcf1 | review/titles2-r2; reports/titles2-review-r3.md | FOREMAN E (child1) | session_01DgYSWkTHXKFwZRgoxgzfwZ | RUNNING | 24/11 05:58Z |
