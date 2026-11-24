@@ -3043,3 +3043,6 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (15:50Z) kit-dialogue-vn 214c6b2c NOT landed (harness: picture-wait veil blocks taps) → order to B. LC11 moved on to kit-daytitle 3424b927.
 - (15:58Z) kit-daytitle 3424b927 NOT landed (same veil harness family) → B order extended. LC11 continues mgboardof → mgskin-wire → nochip → toilring.
 - (16:25Z) KK19 dim2 r2 + review/kit-evframe-r2 e067900f. MAIN checked every AFTER frame: rows 2/2b/3 OK (her whole + smaller, box over speaker, bg normal). NOT shown to sếp: row 1 #modal event still old layout (no evframe), row 6 §95 non-speaker too grey (OD 09:05Z «slightly softer»), row 4 reward title unreadable → KK19 fixes (kit title plate), re-shoots. evframe still HELD from LC11 until final sha.
+- (16:30Z) KK19 past roll line; KK20 cannot be opened at depth 8 (create_session refused) → per LINEAGE: TAKEOVER_MAIN_125.md written; «TAKE OVER NOW» to standby root session_01V1ZZGzMTVHzyPyJN9e5Qzp. titleplate bba409d6 sent to LC11.
+## MAIN CHÍNH 124 → MAIN CHÍNH 125 HANDOVER (24/11 ~16:30Z): dev/handover/TAKEOVER_MAIN_125.md
+- FOR MAIN: depth 8 reached; standby root session_01V1ZZGzMTVHzyPyJN9e5Qzp takes the main line as MAIN CHÍNH 125. The owner should open a NEW MAIN ROOT STANDBY from claude.ai (dev/handover/TAKEOVER_MAIN_ROOT.md «STANDBY FIRST») for the line after it.
