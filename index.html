@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"ea3cf4ac+","t":"2026-11-24T14:54Z","c":"SELSCENE-11: report FIX r1 — clock fixed (10/10 runs), j61 key family partly (B 133/142 once on 87124c16), quickcheck PASS, owner mock selx…","b":"177c126ade40","h":[{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"}]};
+window.CTM_BI={"s":"a127f6c5","t":"2026-11-24T16:00Z","c":"SELSCENE-12: one face per girl of the days, one world face list (coop-e2e «the same world» S.fidUsed.83 B-only consort:c20) — root: the gir…","b":"8cd9a463ec6d","h":[{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -28545,8 +28545,19 @@ function k61S(){if(!S)return null;if(!S.known){if(K61NEW)return null;S.known={};
    undefined = not a descriptor; null = descriptor with no known person (treated as known, as before); else the person. */
 function k61StageDesc(e){return e&&typeof e==="object"&&e.kind&&e.ini!=null&&e.info!=null&&e.id==null?(e.ref||(e.kind==="maid"&&S&&S.maid)||null):undefined}
 function kOf61(e){if(!e||!S)return"";{const d=k61StageDesc(e);if(d===null)return"";if(d)e=d}if(e===S)return"me";if(e===S.emp)return"emp";if(S.thO&&e===S.thO)return"th";let k;
- if((rivals||[]).includes(e))k="r"+e.id;else if(e.coop&&e.id!=null)k="r"+e.id/* coop-guest-names: the friend's stand-in while her entry is out of rivals (k61CoopFr) = her rivals key */;else if(e.sid!=null)k="s"+e.sid;else{if(!e.kk)e.kk="x"+(S.kseq=(S.kseq||0)+1);k=e.kk}
+ if((rivals||[]).includes(e))k="r"+e.id;else if(e.coop&&e.id!=null)k="r"+e.id/* coop-guest-names: the friend's stand-in while her entry is out of rivals (k61CoopFr) = her rivals key */;else if(e.sid!=null)k="s"+e.sid;else{if(!e.kk)e.kk=k61NewKey();k=e.kk}
  if(k61GuestOwn(e))k="g"+k;else if(k61HostCopy(e))k="h"+k;KREG[k]=e;return k}
+/* ONE j61 KEY = ONE PERSON (SELSCENE-12, law 11 — the whole «x<n>» family): a person with no id / sid keeps the key she was given on herself (.kk)
+   for life, but the counter that issued it lives on HER (S.kseq): (1) a new life in the same world (rebirth, a life ended at the selection — ban hoa,
+   a new co-op player) starts S.kseq at 0 while every world maid / official / child still holds the old life's keys → x34 given twice (coop-e2e a3:
+   «Bích Đào» maid of #15 and «Vân Nhi» maid of #23); (2) the two co-op seats each run a counter, and the merged world carries the host's keys to
+   the guest → her next key = a key the host already gave. Rule: the first key of a life starts above every key any person still holds; a key a
+   registered person holds is never issued again; the guest seat issues its own namespace («x<n>b»; /^x\d/ readers unchanged). Old saves keep
+   every key they hold; solo and the host issue «x<n>» as before. */
+const K61SQ=new WeakSet();
+function k61NewKey(){let sx="";try{const W=window.COOPW;if(W&&W.on&&W.seat&&W.seat!=="a")sx=String(W.seat)}catch(x){}
+ if(!K61SQ.has(S)){K61SQ.add(S);let m=+S.kseq||0;try{for(const p of k61All()){const r=/^x(\d+)/.exec(p&&typeof p.kk==="string"?p.kk:"");if(r)m=Math.max(m,+r[1])}}catch(x){}S.kseq=m}
+ let k;do{S.kseq=(+S.kseq||0)+1;k="x"+S.kseq+sx}while(KREG[k]);return k}
 /* coop-guest-names (law 6b, OD:L165 per PERSON): the two seats issue their own "x<n>" keys (S.kseq) and servant ids (sidN), so a person of the
    GUEST player (her maid, servants, children, home family — on her seat, and their copies on the friend entry of the host's seat) could share a
    key with a world / host person ("x1" = both players' maids): one S.known slot, one KREG slot → the mask read the other person's title over a
@@ -82852,7 +82863,7 @@ function selxRmT(R){const tok=k=>(selxRoyals().find(x=>x[0]===k)||[])[2];const T
 (function(){const d0=selxDay1;selxDay1=function(){if(!selxCo())return d0.apply(this,arguments);const Z=S.selx2;if(!Z||Z.girls&&Z.girls.length)return;
  let R=selxRmOpen();
  if(R)Z.girls=R.g.map(selxJ);
- else if(worldOn()){Z.girls=selxGirls();R=S.selxRm={g:null,t:{},art:"",res:[],in:0,c0:[S.turn||0,S.tuan||0]};/* c0: the room clock at the draw (an array: it rides the live diff) */
+ else if(worldOn()){Z.girls=selxGirls();try{if(typeof figPick==="function"&&(typeof figxReady!=="function"||figxReady()))Z.girls.forEach(v=>figPick(v))}catch(e){console.error("selx faces",e)}/* each girl's face is the host's, given at the draw: it rides R.g (one person, one face on both seats) */R=S.selxRm={g:null,t:{},art:"",res:[],in:0,c0:[S.turn||0,S.tuan||0]};/* c0: the room clock at the draw (an array: it rides the live diff) */
   try{const p=(type,k)=>{const e=selxTestPick(type,k);if(e)R.t[type]={id:e.id,k}};p("doidap","T");p("hanhxu","H")}catch(e){console.error("selx room tests",e)}
   try{R.art=(kc2SelArts()[0]||[""])[0]||""}catch(e){}
   try{selxAskNpc()}catch(e){}/* the girls ask the ma ma on day 1 (law 1) — here, before their answers are fixed */
@@ -82894,6 +82905,17 @@ window.selxClkSync=selxClkSync;
    keys of different people met. Her id is the same on both seats (the room draw) and is her key once she enters rivals («r<id>»): she keeps that key
    from the first day, so what she learnt of her name carries over to the world person, and no counter is spent. */
 (function(){if(typeof kOf61!=="function")return;const k0=kOf61;kOf61=function(e){try{if(e&&e.tuNu&&e.id!=null&&S&&!(rivals||[]).includes(e)){const k="r"+e.id;e.kk=k;/* j61 k61PortEnt finds a person out of rivals only by .kk (else «known»: a stranger's plate showed her name) */if(!(rivals||[]).some(v=>v&&v.id===e.id))KREG[k]=e;return k}}catch(x){}return k0.apply(this,arguments)};window.kOf61=kOf61})();
+/* ONE FACE PER GIRL, ONE WORLD FACE LIST (SELSCENE-12, coop-e2e «the same world» S.fidUsed.83 A=undefined B="consort:c20"): the girls of the days were drawn
+   with no face id, so each seat picked one at render (j39 figPick), and on the guest (thin room level 3, where jcoophl's guard is off) the pick went
+   into HER S.fidUsed — a world list the host never had (a6 trace: consort:c29 / c12 / c30 added on the guest, week 0), and the same girl could
+   wear another face on the other seat. Rule (host owns faces, law 6b): the host gives each girl her face at the draw (selxDay1) or at its first pick,
+   written into the room cohort (S.selxRm.g, live diff); the guest wears that face, and a pick for a girl of the days never grows her world list. */
+(function(){if(typeof figPick!=="function")return;const p0=figPick;figPick=function(who){try{if(who&&who.tuNu&&who.id!=null&&S&&selxCo()&&!(rivals||[]).includes(who)){
+  const R=S.selxRm,g=R&&Array.isArray(R.g)?R.g.find(x=>x&&x.id===who.id):null;
+  if(worldOn()){const k=p0.apply(this,arguments);if(k&&g&&g.fid!==k)g.fid=k;return k}
+  if(g&&typeof g.fid==="string"&&g.fid&&who.fid!==g.fid)who.fid=g.fid;
+  const U=typeof figUsed==="function"?figUsed():null,n=U?U.length:0;const k=p0.apply(this,arguments);
+  if(U&&k&&U.length>n){const i=U.lastIndexOf(k);if(i>=n)U.splice(i,1)}return k}}catch(e){console.error("selx fig",e)}return p0.apply(this,arguments)};window.figPick=figPick})();
 /* same group: a kit plate (j61 k61PortEnt → kitKnownName) of a girl not keyed yet read «known» (her name on a stranger) until something else keyed her */
 (function(){if(typeof k61PortEnt!=="function")return;const p0=k61PortEnt;k61PortEnt=function(p){try{if(p&&p.tuNu&&p.id!=null&&!p.kk&&S&&!(rivals||[]).includes(p))kOf61(p)}catch(e){}return p0.apply(this,arguments)};window.k61PortEnt=k61PortEnt})();
 (function(){if(typeof render!=="function")return;const r0=render;render=function(){selxClkSync();return r0.apply(this,arguments)};window.render=render})();
@@ -98724,7 +98746,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="177c126ade40";window.CTM_BUILD=BUILD;
+const BUILD="8cd9a463ec6d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
