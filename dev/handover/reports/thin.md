@@ -885,6 +885,17 @@ Batch 2 (helper, 08:52Z; same build/command; every line = life 1 12 | 4:<road> 5
 - PASS nc_kinh (fin=Hội kinh gây phiền)
 - PASS nc_the (fin=Em bị trả về)
 - Total helper PASS 12/20, FAIL 0. Running: bd_luuly, bd_lua; then bd_bac,pf_co,pf_tra / bd_su,pf_guong,pf_lich.
+
+Batch 3 (helper, 09:55Z; FINAL; same build 4d9f748c / command; the first two runners hit the harness 2 h cap, which killed them (2× `FAIL browser.newContext … closed` at the end of those logs = the kill, not a road fault); the last 5 roads were re-run in fresh runners: `ALL PASS (45)` and `ALL PASS (31)`):
+- PASS bd_luuly (fin=Thợ bị từ chối)
+- PASS bd_lua (fin=Lò được giữ)
+- PASS bd_su (fin=Thú được giữ)
+- PASS bd_bac (fin=Nợ bị siết)
+- PASS pf_co (fin=Y ở lại kinh thành)
+- PASS pf_guong (fin=Gương về đền Thần)
+- PASS pf_lich (fin=Lịch và áo ngang hàng)
+- PASS pf_tra (fin=Hộ bộ nghi cung ngươi)
+- HELPER TOTAL: 20/20 roads PASS (life 1, chapters 4..11 all present), 0 road FAIL. OOM `Target crashed` retries were recovered by the runner each time.
 - REVIEWER roads (24): PASS so far tt_ruong, tt_tho, dtq_ngua, dtq_thuong, thd_dich, thd_uoc, muoi_gia, tt_gia, tt_thu; running muoi_thi, dtq_ky; then cn_chuoi, cn_chuviet, cnv_kho, cnv_hach, thd_dien, thd_giay, muoi_tien, muoi_hoi, cn_tiec, cn_theo, cnv_thu, cnv_tieu; dtq_hang re-run alone (renderer crash ×3 at ch9).
 - Gates already PASS on bare ce252c43 AND merged 4d9f748c: `python3 dev/test/rdseeds_validate.py` (no args) and `--min` + rdseeds_a..d → `RDSEEDS: 627 rows, 0 errors, 0 warnings`; `node dev/test/undef-scan.js` → PASS (299 names); `node dev/test/one-core-guard.js` → PASS; `node dev/test/one-core-text.js` → PASS.
 
