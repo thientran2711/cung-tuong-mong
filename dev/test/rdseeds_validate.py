@@ -63,7 +63,7 @@ class V:
 
 def text_scan(v, rid, o, label, t):
     t = str(t or '')
-    if re.search(r'[0-9]', t): v.e(rid, f'{label}: digit in player text (law 7)')
+    if re.search(r'[0-9]', re.sub(r'\{[A-Za-z0-9]+\}', '', t)): v.e(rid, f'{label}: digit in player text (law 7)')
     if '%' in t: v.e(rid, f'{label}: % in player text (law 7)')
     low = t.lower()
     for x in ODDS:
