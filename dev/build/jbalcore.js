@@ -56,7 +56,7 @@ function empArtMonth(){if(!S||S.dead||!S.emp)return"";const E=S.emp;if(E.ea&&E.e
 function empArt(){const E=S&&S.emp;return E&&E.ea&&E.ea.m===S.turn?E.ea:null}
 function eaKnows(p){return !!(p&&p.eaK===S.turn&&empArt())}
 function eaTell(p,why){if(!p||!empArt()||p.eaK===S.turn)return false;p.eaK=S.turn;
- if(p===S&&!quiet){const ea=empArt(),n=k=>(ARTS.find(a=>a.k===k)||{}).n||k;log(`<span class="g">Ngươi biết được${why?" ("+why+")":""}: tháng này Hoàng thượng chuộng ${n(ea.f)}, không ưa ${n(ea.d)}.</span>`)}return true}
+ if(p===S&&!quiet){const ea=empArt(),n=k=>(ARTS.find(a=>a.k===k)||{}).n||k;log(`<span class="g">Ngươi biết được${why?" ("+why+")":""}: tháng này Hoàng thượng chuộng ${n(ea.f)}, không ưa ${n(ea.d)}.</span>`)}if(p===S){try{const ea=empArt(),n=k=>(ARTS.find(a=>a.k===k)||{}).n||k;kitKnow({key:"ea",text:`Ngươi biết được${why?" ("+why+")":""}: tháng này Hoàng thượng chuộng ${n(ea.f)}, không ưa ${n(ea.d)}.`})}catch(e){}}/* KNOW-NOTICE: one notice, also when the line is quiet */return true}
 function eaText(p){const ea=empArt();if(!ea)return"";if(!eaKnows(p))return"Tháng này Hoàng thượng chuộng môn gì: chưa rõ";const n=k=>(ARTS.find(a=>a.k===k)||{}).n||k;return `Tháng này Hoàng thượng chuộng ${n(ea.f)}, không ưa ${n(ea.d)}`}
 /* who learns it: at the month start Tai mắt ≥ ea.mat; each week a rumour (r0 + Tai mắt × rMat %); the same for her and every NPC */
 function eaLearn(start){if(!S||S.dead||!empArt())return"";const E=BAL.steal.ea;const P=[S].concat(typeof liveRivals==="function"?liveRivals(true):[]);

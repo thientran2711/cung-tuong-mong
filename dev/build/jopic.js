@@ -250,7 +250,7 @@ window.kitOptCompactRows=kitOptCompactRows;
 /* a picture-less option gets the §59 placeholder in the same slot when a sibling has a picture (one form per dialog) */
 let KIT_OPT_UNI=0;function kitOptUnify(b){if(KIT_OPT_UNI)return;try{KIT_OPT_UNI=1;const c=b.parentElement;if(!c)return;const sib=[...c.children].filter(x=>x.matches&&x.matches("button.ka")&&x.matches(KIT_OPT_SEL));if(!sib.some(x=>x.querySelector(":scope > .kaart")))return;
  sib.forEach(x=>{if(x.querySelector(":scope > .kaart")||x.classList.contains("kcard"))return;x.__koph=1;delete x.dataset.kopt;kpOptArt(x);kitOptCompactRows(x);kitOptFinal(x)})}catch(e){}finally{KIT_OPT_UNI=0}}
-function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.classList.contains("kcard")||b.closest(".pc"))return;
+function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.classList.contains("kcard")||b.closest(".pc")||b.classList.contains("kbare"))return;/* KIT §93.7 bare selection card: no rows */
  {const k1=b.querySelector("small.kb");if(b.__kofSig&&k1&&b.__kofSig===kitOptSig(b,k1))return}/* idempotent: our own DOM edits must not re-trigger the observers that call us */
  b.querySelectorAll(".kfill,.kobang,.kdup").forEach(e=>e.remove());b.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
  const body=b.querySelector(":scope > .kabody")||b;let kb=body.querySelector(":scope > small.kb, :scope > .kb");if(!kb){kb=document.createElement("small");kb.className="kb";body.appendChild(kb)}

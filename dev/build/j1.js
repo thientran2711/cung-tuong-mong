@@ -236,7 +236,7 @@ function empEra(){return S.emp.era}
 function empNm(){return "Hoàng thượng"}
 function empName(){return `Hoàng thượng niên hiệu ${S.emp.era}`}
 function discover(){const u=Object.keys(LIKES).filter(k=>!S.emp.known[k]);if(!u.length)return false;const k=pick(u);S.emp.known[k]=true;
-  log(`<span class="g">Ngươi biết được: Hoàng thượng thích ${S.emp.likes[k]}.</span>`);return true}
+  log(`<span class="g">Ngươi biết được: Hoàng thượng thích ${S.emp.likes[k]}.</span>`);try{kitKnow({key:"like:"+k,pri:1,text:`Ngươi biết được: Hoàng thượng thích ${S.emp.likes[k]}.`})}catch(e){}return true}
 function artW(k,l){return l*(((["cam","ky","thi","hoa"].includes(k)&&has("trongtai"))||(k==="vu"&&has("mesac")))?2:1)}
 function bestArt(){let b={k:null,n:"giọng hát",l:0,w:0};for(const a of ARTS){const l=S.arts[a.k],w=artW(a.k,l);if(w>b.w)b={k:a.k,n:a.n,l,w}}return b}
 function needDuc(){return S.heir&&!S.heir.v?30:40}
