@@ -73,7 +73,11 @@ function deser(d){trMigrate(d);rivals=d.R;rid=d.rid;S=d.S;S.origin=originByKey(d
  tab=d.tab||"act";used=d.used||0;popIdx=null;popMsg="";
  const vk=S.visit&&S.visit.k;if(d.v<3||!vk||vk==="home"||placeOf(vk).k!==vk||!Array.isArray(S.visit.people)){S.visit={k:"home",people:homePeople(),talked:false};S.place="home"}else S.place=vk;
  if(d.v<3)S.mg=null;if(d.v<5){used=0;S.buoi=0}try{srvLad6()}catch(e){console.error(e)}/* maid-ladder-6: 5-rung save → 6 rungs (j14) */normAll();Q=deserQ(d.P||[])}
-function save(){if(!S||quiet)return;try{if(S.dead)localStorage.removeItem(SK(SLOT));else localStorage.setItem(SK(SLOT),JSON.stringify(ser()));localStorage.setItem("hclh-slot",String(SLOT))}catch(e){/* robot10 E-FIX-3: a save the browser refuses (storage full / blocked) was dropped silently — her progress stopped being kept. Tell her once (the kit notice, the same words as Sổ › Ghi vào ô) */try{if(!S.dead&&typeof kitNotice==="function"&&typeof CTM_WAIT==="object"&&CTM_WAIT.saveBlocked)kitNotice({id:"saveBlocked",line:CTM_WAIT.saveBlocked,sticky:true})}catch(z){}}}
+function save(){if(!S||quiet)return;try{if(S.dead)localStorage.removeItem(SK(SLOT));else localStorage.setItem(SK(SLOT),JSON.stringify(ser()));localStorage.setItem("hclh-slot",String(SLOT))}catch(e){if(!S.dead)saveBlocked()}}
+/* robot10 E-FIX-3: a save the browser refuses (storage full / blocked) was dropped silently — her progress stopped being kept. ONE notice for
+   EVERY save writer (j6 save, jcloud writeSlot, co-op jcoopworld snapSave, jcoopthine guest copy; j16 Sổ › Ghi vào ô prints the same words): the kit notice, once */
+function saveBlocked(){try{if(typeof window.kitNotice==="function"&&typeof CTM_WAIT==="object"&&CTM_WAIT.saveBlocked)window.kitNotice({id:"saveBlocked",line:CTM_WAIT.saveBlocked,sticky:true})}catch(z){}}
+window.saveBlocked=saveBlocked;
 function loadSlot(n){try{const d=JSON.parse(localStorage.getItem(SK(n))||"null");if(d&&d.v===2)d.P=[];/* v2: no pending choices; v2/v3 get items, stat blocks, records via normAll */
  return d&&d.v>=2&&d.v<=6?d:null}catch(e){return null}}
 function showTitle(){const T=$("title");const L=[1,2,3].map(n=>{const d=loadSlot(n);
