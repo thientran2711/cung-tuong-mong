@@ -88,6 +88,26 @@ Existing art only (credit hold): figures fig-*, backgrounds end-bg-throne / ngu-
 
 Known limits of the mock (for KK16 / foremen): tableau positions are placeholders (the real hall needs a painted dais line); half-body crops reuse the 900 px full figures; the iPad mock covers the whole spread; the game's own name-guard rewrites unmet names in any DOM text («Tân Như Ý» became «Tân Phi ???» in the first take) — the real parts must pass the names through the kit name rules.
 
+## 8. r2 (24/11 after MAIN 119: her rulings OD ~09:05Z real + ~09:15Z real) — what changed and which KIT part every element is
+
+1. NO whole-scene dark / blur overlay: backgrounds stay at normal brightness (all dark shades, vignettes and background blur removed). Focus is on the FIGURES only: the lit one in full colour, the others `brightness .84 + saturate .75` (soft), no blur. (KK16 spotlight part should do exactly this.)
+2. Strangers (not met) = the kit grey silhouette `img/kit/unknown-fig-f.webp` (KIT §59.1 / `kitSilFig`), never black figures: yard others (B), girls waiting behind Tổng quản (C), not-yet-called girls (D roll-call: grey -> colour at the cue), the 12 row girls (F), the 3 roommates in her room (F). Ma ma in F = the REAL ma ma figure `fig-mama-k01-a51` (no more stand-in).
+3. KIT FIRST — every element of the mock, with its kit part:
+| Element | Kit part used in the mock |
+|---|---|
+| overlay layer | `.kscn` (KIT §93.1 scene layer class), mounted inside `#stage`; no veil, no blur (kitScene.open NOT used because of the veil) |
+| speech / thought box + speaker name | `kitDlgBox` (§93.3, `.dlg.kpanel.kscn-box` + `kpHeader`) — the typewriter inside it is the KK16 part (kit-dialogue-vn); the mock types into the box's text node |
+| name under feet, group labels («Tây sở»), result labels («Ở lại», «Ban hoa»), «Người lạ» | the stage tag: `.tok .tag` + `.j59t` (title/origin line) + `.j59n` (name line) = KIT §28 stage tag / `kitNameTag` §93.5; NO private plate |
+| tap hint | `kitChip` (§9 chip) |
+| figures | raw `fig-*` pictures at stage height (build must use `kitStageFig` / `S.fig`) |
+| item pictures (sachet, flower) | raw item art (build must use `kitItem`) |
+| grey strangers | `unknown-fig-f` (§59.1) |
+KIT REQUESTS (nothing private kept): **IC-1** large intro tag = the j59 tag at 1.45–1.6x scale (royal reveal caption, «giá lâm», first-meeting caption, room caption) — mock scales the kit tag; ask KK16 to give the tag a `big` size. **IC-2** half-body close-up = figure part option `crop:'half'` with a soft bottom mask. **IC-3** camera push (scene scale) for A2. **IC-4** typewriter beat per name (`|` pause) in the cue hook.
+4. G1 «Ban hoa» label no longer a faded plate on her feet: the label is the kit tag, shown while she receives the flower (spotlit girl keeps full colour).
+5. iPad mock = the stage page only (582x601), same layout as Fold — removes the "whole spread" question; everything uses the stage standard.
+6. Law 11 check (whole-screen darkening in existing kit parts): `kitScene` §93.1 (`.kscn-veil` rgba(20,12,8,.45) + `.kscn-bg` blur 6 px; night veil) and any part built on it darken the whole scene — REPORT ONLY, not changed (needs her word); KK16/§95 spotlight must dim figures only.
+7. Names used in the mock avoid the game's name-guard (it masks names of unmet persons as «cung nữ ???»).
+
 ## 7. Questions for the owner (to MAIN)
 
 1. A1 or A2 for the royals? 2. iPad: whole spread or the stage page only? 3. First-meeting shots: play once per person per save, short form afterwards — OK? 4. Roll-call: D1 or D2.
