@@ -146,6 +146,26 @@ Worked example (valid):
 - P5 ENGINE READY review/thin-p4 **d193f687**: `dev/build/jkyc.js` (seed → KY.DEF + BAL.kyngo.E row; cross-life P0 family `ky` for old 25 + composed, × BAL.kyc.seen), `jkysd.js` + `jbalkyc.js` (empty until kyseeds land) by `jkysd_build.py`, validator `python3 dev/test/kyseeds_validate.py <file> [--min N]` (kyngo-eq value rule per band), fixture `dev/test/kyc-fixture.jsonl` (4 valid seeds: el, emp, sv plain, plot), `node dev/test/kyc-play.js [file]` ALL PASS (fires through jky's gate, real who never the finder, chooseM result, once per life + P0 mark); kyngo-eq PASS (now also reads jbalkyc.js), kyngo-unit PASS.
 - (01:5xZ) ENGINE note (touching writer D's file, D is DONE): j68seeds_d.md j68c-rumor-028 → role B removed (text never used it; A and B were both her one cung nữ = never cast), j68c-rumor-037 → A = a servant (sv) telling about her cung nữ B. Validator now rejects A/B as the same fixed person.
 - (02:3xZ) ENGINE note: j68seeds_c.md j68c-kid-029 role B need feud → ["foe","kids"] (new need `foe` = that consort is at odds with HER; `feud` = A and B at odds, both consorts; need may be a list). API P4 rule updated in the engine/validator.
+- **SẴN SÀNG KIỂM review/thin-p4 db47f4af** (P4 + P5 on ONE branch: both engines + seeds; reviewer may land them together or ask me to split). Folded: j68 composed = **460 decisions + 152 openers** (day 63/16 · visit 64/16 · serv 60/16 · emp 60/16 · sea 44/21 · court 43/20 · rumor 42/15 · kid 42/18 · myst 42/14) → wordings ≈ openers × comps; **Kỳ ngộ composed 77** (ma 16 · de 10 · th 14 · vat 14 · sv 23) → 25 + 77 = 102. Writer files copied into the branch (dev/handover/content/thin/j68seeds_[a-d].md, kyseeds_[ab].md = builder default path). Fold fixes: rumor-028/037 (A/B same cung nữ), kid-029 need → ["foe","kids"] (engine: need may be a list; new need `foe` = at odds with her).
+- GATES on db47f4af: quickcheck PASS (open 2055 ms, old save ok, perf new/live render 284/278, tab 544/566, buổi 1348/1246; core gates PASS) · undef-scan PASS (298) · one-core-guard PASS · norep-oldsave ALL PASS (3 live saves + ctm-e68h history) · norep-unit ALL PASS · **j68 counts on old decisions unchanged: e68Count 90 / 370** · `node dev/test/j68c-play.js <all 4 files>` ALL PASS (460; 147 «forced» = that one test world lacked the wanted nết / need, then it is given) · `node dev/test/kyc-play.js <both files>` ALL PASS (74 played, 3 skipped: no real plot/rare piece / no elder consort in that world) · kyngo-eq PASS (now reads jbalkyc.js) · kyngo-unit PASS (test 15: composed rare/dead pieces join vat_ngu's group, gated by 14) · ky-keeper-f2 PASS · coop-e2e 141/141 (S.e68c / S.ky personal; ctm-nr per phone) · shots `node dev/test/thin-p4-shots.js <out> j68:… ky:…` Fold 755x1000 + iPad 1180x820 @2, 3 j68 + 3 Kỳ ngộ each (j68c-visit-010, emp-007, court-006, kyc-th-003, sv-005, ma-005): kit frame, no overflow, 4 / 2 options, cổ trang words, odds ladder — LOOKED 3×.
+- Play-test flake (writers' reports) fixed before fold: the test world is a mid-life consort (cung nữ, servants, children, favour); obKeep cap no longer reads as «no trace»; relation checked by way (cap aware); extra options other modules add (tea item) allowed after the 4 stances.
+- No-repeat measure (`node dev/test/j68c-measure.js 130 3`, REAL engine, 6 lives × 130 situations per kiếp, each life a new game):
+
+| Family | before: decision repeats | before: wording repeats | after: decision repeats | after: wording repeats | shown per kiếp after |
+|---|---|---|---|---|---|
+| day | 99 % | 90 % | 75 % | 35 % | 17 |
+| visit | 99 % | 88 % | 69 % | 26 % | 19 |
+| serv | 100 % | 87 % | 67 % | 18 % | 10 |
+| emp | 97 % | 83 % | 67 % | 13 % | 26 |
+| sea | 100 % | 98 % | 75 % | 38 % | 4 |
+| court | 98 % | 80 % | 62 % | 20 % | 14 |
+| rumor | 95 % | 93 % | 62 % | 22 % | 9 |
+| kid | 99 % | 91 % | 61 % | 14 % | 17 |
+| myst | 100 % | 95 % | 60 % | 10 % | 8 |
+| all | 98 % | 88 % | 66 % | 20 % | 123 |
+| composed only | – | – | 55 % | 6 % | 77 |
+  Reading: an exact wording seen in an earlier life drops from ~9 in 10 to ~1 in 5; a decision met before from ~all to ~2 in 3 (composed ~1 in 2 by life 6: ~77 composed shown per kiếp vs 460 seeds, part not castable in a given roster). Tunable in BAL.j68c (w, seen) without code.
+- **HANDOVER (ENGINE #3 rolls after this report; context near START+25 %)**: P4 + P5 DONE and in review. Next in the brief's order: P6 world + j70, P7 festivals ≥40/festival, P8 origin roads 4→8 — not started by me. Reuse pattern: seed file → builder → `j??sd.js` data → engine registers each seed into the EXISTING runtime (EV6 / T7 / KY.DEF) + P0 family; validator + play test + real-engine measure + shots script (copy dev/test/thin-p4-shots.js).
 - Writers: `python3 dev/test/j68seeds_validate.py dev/handover/content/thin/j68seeds_<x>.md --min --fams <yours>` → 0 errors (warnings = advice); `node dev/test/j68c-play.js <your file>` in a worktree of review/thin-p4 after `sh dev/site/build_site.sh` (optional; the engine runs it on fold).
 
 ## P2-SEEDS
