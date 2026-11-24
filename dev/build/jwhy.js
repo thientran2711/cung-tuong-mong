@@ -79,7 +79,7 @@ function spyPick(refund,ag){const m=ag||whyMaidInit(S.maid),L=spyList();const cu
 function spyNewsW(v,m){return 1+Math.max(0,danger(v,S))/15+(whyKnows(m,v)?3:0)+((v.sung||0)>=50?1:0)+(v.preg?1:0)+((S.met&&S.met[v.id]!=null)?0:.5)}
 function spyNews(m){const L=spyList();if(!L.length)return`${m.name} đi một vòng, trong cung yên ắng.`;const W=L.map(v=>spyNewsW(v,m));let r=Math.random()*W.reduce((a,b)=>a+b,0),i=0;while(r>W[i]&&i<L.length-1){r-=W[i];i++}
  const v=L[i];const n=eyes(S)>=3?2:1;let f="";try{f=typeof intelLearn==="function"?intelLearn(v,n,{by:m.name,how:"Nghe ngóng"}):""}catch(e){}
- const why=whyKnows(m,v)?`${m.name} quen người ${whyPal(v)}`:danger(v,S)>=30?"nàng đang có chuyện với ngươi":(v.sung||0)>=50?"nàng đang được sủng, ai cũng bàn":"chuyện nghe được ngoài hành lang";
+ const why=whyKnows(m,v)?`${m.name} quen người ${whyPal(v)}`:danger(v,S)>=netTh(v,"act")?"nàng đang có chuyện với ngươi":(v.sung||0)>=50?"nàng đang được sủng, ai cũng bàn":"chuyện nghe được ngoài hành lang";
  const t=`${m.name} nghe ngóng được về ${spyWho(v)} (${why}): ${f||"nàng dạo này ít ra ngoài, chưa có gì mới."}`;return t}
 /* servant start (j42): the mistress's order "dò la" weighs the target too */
 (function(){if(typeof ordOdds!=="function")return;const o0=ordOdds;ordOdds=function(k,t){if(k!=="spy"||!t)return o0.apply(this,arguments);return oddsCl(Math.round(o0.apply(this,arguments)+BAL.spyCnv+cnvSpyF(t).reduce((s,x)=>s+x[1],0)))}})();

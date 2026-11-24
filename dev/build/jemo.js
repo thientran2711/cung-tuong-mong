@@ -75,15 +75,15 @@ function emoWeek(){if(!emoOn())return;const W=emoW();S.emoSnap=S.emoSnap||{};con
  emoFromLegacy();
  const others=p=>P.filter(x=>x!==p);
  for(const p of P.concat((rivals||[]).filter(v=>!v.alive))){const k=emoKey(p),o=S.emoSnap[k],n=emoSnap(p);S.emoSnap[k]=n;if(!o)continue;const nm=emoName(p);
-  if(!n.alive&&o.alive){for(const x of others(p)){const a=aff(x,p),oa=oan(x,p);if(a>=EJ().wk.friend)emoEv(x,"friendDie",`${nm} qua đời`);else if(oa>=EJ().wk.foeOan||a<=EJ().wk.foeAff)emoEv(x,"foeDie",`${nm} qua đời`)}continue}
+  if(!n.alive&&o.alive){for(const x of others(p)){const a=aff(x,p),oa=oan(x,p);if(a>=netTh(x,"than"))emoEv(x,"friendDie",`${nm} qua đời`);else if(oa>=netTh(x,"act")||a<=netTh(x,"ghet"))emoEv(x,"foeDie",`${nm} qua đời`)}continue}
   if(!n.alive)continue;
-  if(n.r>o.r){emoEv(p,"selfUp",`được tấn phong ${typeof rkName==="function"?rkName(p):""}`.trim());for(const x of others(p)){const a=aff(x,p);if(a>=EJ().wk.upFriend)emoEv(x,"friendUp",`${nm} được tấn phong`);else if(a<EJ().wk.upRival)emoEv(x,"rivalUp",`${nm} được tấn phong`,emoKey(p))}}
-  if(n.r<o.r&&!n.out){emoEv(p,"selfDown","bị giáng phẩm");for(const x of others(p))if(oan(x,p)>=EJ().wk.downOan||aff(x,p)<=EJ().wk.downAff)emoEv(x,"foeDown",`${nm} bị giáng`)}
-  if(n.out&&!o.out){emoEv(p,"cold","bị đày vào lãnh cung");for(const x of others(p))if(oan(x,p)>=EJ().wk.downOan||aff(x,p)<=EJ().wk.downAff)emoEv(x,"foeDown",`${nm} vào lãnh cung`)}
+  if(n.r>o.r){emoEv(p,"selfUp",`được tấn phong ${typeof rkName==="function"?rkName(p):""}`.trim());for(const x of others(p)){const a=aff(x,p);if(a>=netTh(x,"than"))emoEv(x,"friendUp",`${nm} được tấn phong`);else if(a<netTh(x,"quen"))emoEv(x,"rivalUp",`${nm} được tấn phong`,emoKey(p))}}
+  if(n.r<o.r&&!n.out){emoEv(p,"selfDown","bị giáng phẩm");for(const x of others(p))if(oan(x,p)>=netTh(x,"oan")||aff(x,p)<=netTh(x,"ky"))emoEv(x,"foeDown",`${nm} bị giáng`)}
+  if(n.out&&!o.out){emoEv(p,"cold","bị đày vào lãnh cung");for(const x of others(p))if(oan(x,p)>=netTh(x,"oan")||aff(x,p)<=netTh(x,"ky"))emoEv(x,"foeDown",`${nm} vào lãnh cung`)}
   if(n.conf&&!o.conf)emoEv(p,"punished","bị cấm túc");
-  if(n.kidsAll>o.kidsAll){emoEv(p,"kidBorn","mẹ tròn con vuông");for(const x of others(p))if(aff(x,p)<EJ().wk.kidAff)emoEv(x,"otherKid",`${nm} sinh hạ hoàng tự`,emoKey(p))}
+  if(n.kidsAll>o.kidsAll){emoEv(p,"kidBorn","mẹ tròn con vuông");for(const x of others(p))if(aff(x,p)<netTh(x,"quen"))emoEv(x,"otherKid",`${nm} sinh hạ hoàng tự`,emoKey(p))}
   if(n.kids<o.kids-(n.kidsAll-o.kidsAll)||(n.kids<o.kids&&n.kidsAll===o.kidsAll))emoEv(p,"kidDie","mất con");
-  if(n.n>o.n&&!(n.kidsAll>o.kidsAll)){emoEv(p,"night","được Hoàng thượng lật thẻ");if(S.emp&&((p===S?S.lastNightS:p.lastNightS)||0)>=EJ().wk.fondN)S.emp.emoFond={k:emoKey(p),w:W};for(const x of others(p))if(aff(x,p)<EJ().wk.nightAff&&emoTraits(x).includes("Nóng nảy"))emoEv(x,"rivalUp",`${nm} được thị tẩm`,emoKey(p),EJ().wk.nightK)}
+  if(n.n>o.n&&!(n.kidsAll>o.kidsAll)){emoEv(p,"night","được Hoàng thượng lật thẻ");if(S.emp&&((p===S?S.lastNightS:p.lastNightS)||0)>=EJ().wk.fondN)S.emp.emoFond={k:emoKey(p),w:W};for(const x of others(p))if(aff(x,p)<netTh(x,"quen")&&emoTraits(x).includes("Nóng nảy"))emoEv(x,"rivalUp",`${nm} được thị tẩm`,emoKey(p),EJ().wk.nightK)}
   if(n.sung<=o.sung-EJ().wk.neglect)emoEv(p,"neglect","Hoàng thượng lạnh nhạt");
   if(n.suc<EJ().wk.ill&&o.suc>=EJ().wk.ill)emoEv(p,"ill","sức khỏe sa sút")}
  /* servants: by their mistress and by their own Lòng */
@@ -109,11 +109,11 @@ function emoWeek(){if(!emoOn())return;const W=emoW();S.emoSnap=S.emoSnap||{};con
 /* ---------- effects ---------- */
 /* Đức + personality brake (owner 11/14): anger/jealousy only raise the WISH to harm; how much of it becomes harm depends on Đức and traits.
    f = share of the emotional harm boost that turns into harm acts. High Đức: 0 (anger turns into withdrawing / confronting words), mid: ½, low: 1,
-   low Đức + Xảo quyệt / Tham vọng: 1.5. A severe grudge (oán ≥ 60 toward the target) keeps at least ½ even at high Đức. Same rule for everyone. */
+   low Đức + Xảo quyệt / Tham vọng: 1.5. A severe grudge (oán ≥ her netTh «thu» toward the target) keeps at least ½ even at high Đức. Same rule for everyone. */
 const EMO_BRAKE=BAL.eff.jemo.brake;/* jemo-bal: BAL.eff.jemo.brake */
 function emoDuc(p){if(!p)return EMO_BRAKE.ducDef;if(p===S)return S.duc||0;let d=p.duc;if(d==null)d=nv(p,"ducDef");for(const t of emoTraits(p))d+=EMO_BRAKE.soft[t]||0;return d}
 function emoBrake(p,t){const d=emoDuc(p),B=EMO_BRAKE;let f=d>=B.hi?B.fHi:d>=B.mid?B.fMid:B.fLo;const T=emoTraits(p);if(d<B.mid&&(T.includes("Xảo quyệt")||T.includes("Tham vọng")))f=B.fBad;
- if(t&&f<B.grudgeF){try{if(oan(p,t)>=B.grudge)f=B.grudgeF}catch(e){}}return f}
+ if(t&&f<B.grudgeF){try{if(oan(p,t)>=netTh(p,"thu"))f=B.grudgeF}catch(e){}}return f}
 function emoMul(p,act){const e=emoGet(p);if(e.k==="binh")return 1;const T=EMO_W[e.k];if(!T)return 1;const harm=EMO_HARM.includes(act);let m=T[act];if(m==null)m=harm?T.harm:EMO_KIND.includes(act)?T.kind:null;if(m==null)return 1;
  if(harm&&m>1){const f=emoBrake(p);m=f>0?1+(m-1)*f:EMO_BRAKE.zero}
  if(act==="idle"&&(e.k==="gian"||e.k==="ghen")&&emoBrake(p)===0)m=BAL.feel.wd;/* high Đức: anger makes her withdraw instead */
@@ -148,7 +148,7 @@ function emoGateWrap(){if(window.__emoGate||typeof motiveOK!=="function")return;
   if(H&&at&&(e.k==="gian"||e.k==="ghen")){const w=`vì đang ${e.k==="gian"?"giận":"ghen với"} ${emoName(t)} (${e.why})`;
    if(!g.ok&&/động cơ yếu/.test(g.why||"")&&e.v>=EJ().mot.anger&&emoBrake(a,t)>=1){EMO_N.motive++;return{ok:true,why:w,emo:1}}if(g.ok){EMO_N.motive++;return Object.assign({},g,{why:(g.why?g.why+", ":"")+w})}}
   if(H&&g.ok&&(e.k==="so"||(e.k==="buon"&&typeof feelLv==="function"&&feelLv(a,"buon")>=EJ().mot.lv))&&e.v>=EJ().mot.strong){EMO_N.motiveGate++;return{ok:false,why:`đang ${(typeof feelName==="function"?feelName(e.k,feelLv(a,e.k)):EMO[e.k]).toLowerCase()} (${e.why}), không còn lòng dạ nào`}}
-  if(F&&!g.ok&&e.k==="vui"&&e.v>=EJ().mot.strong&&aff(a,t)>EJ().mot.aff){EMO_N.motive++;return{ok:true,why:`vì đang vui (${e.why})`,emo:1}}
+  if(F&&!g.ok&&e.k==="vui"&&e.v>=EJ().mot.strong&&aff(a,t)>netTh(a,"ghet")){EMO_N.motive++;return{ok:true,why:`vì đang vui (${e.why})`,emo:1}}
   if(F&&g.ok&&e.k==="buon"&&e.v>=EJ().mot.strong&&emoHalf(a,t,kind)){EMO_N.motiveGate++;return{ok:false,why:`đang ${(typeof feelName==="function"?feelName(e.k,feelLv(a,e.k)):EMO[e.k]).toLowerCase()}, muốn ở một mình`}}}catch(x){}return g}}
 (function(){const r0=render;render=function(){try{emoGateWrap();emoSee()}catch(e){}return r0.apply(this,arguments)}})();
 try{emoGateWrap()}catch(e){}

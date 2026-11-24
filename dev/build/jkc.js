@@ -543,7 +543,7 @@ function kcPhucMark(m){const P=BAL.entry.phuc;if(m.praw==null){const r=(Math.ran
  if(m.pduc==null)m.pduc=P.duc[0]+R(P.duc[1]);if(m.ppow==null)m.ppow=m.r==="muoi"?null:P.pow[0]+R(P.pow[1]);return m.praw}
 /* law 1 two-way: a thứ muội who holds a grudge does to her what she can do to the thứ muội (Ngáng chân) — once, in the Phúc tuyển week */
 function kcFoulBack(){const F=BAL.entry.phuc.foul;const mu=kcRivalsTT().find(x=>x.r==="muoi");if(!mu||S.kc.tt.foul!=null)return null;S.kc.tt.foul=0;
- if((mu.oan||0)<F.oan||!roll(F.od+(mu.oan||0)/F.oanDiv))return null;S.kc.tt.foul=1;S.sac=Math.max(0,S.sac-F.sac);S.danh=Math.max(0,S.danh-F.danh);
+ if((mu.oan||0)<netTh(mu,"oan")||!roll(F.od+(mu.oan||0)/F.oanDiv))return null;S.kc.tt.foul=1;S.sac=Math.max(0,S.sac-F.sac);S.danh=Math.max(0,S.danh-F.danh);
  log(`Phúc tuyển: ${mu.name} lén đổi hộp phấn, giấu trâm của ngươi. Sắc -${F.sac} · Danh -${F.danh}.`);return mu}
 /* the ONE podium result: her mark + each girl's mark, places by mark (tie: higher Sắc, then her) — stored in S.kc.tt.pod, read by every place */
 function kcPhucPod(){const T=S.kc.tt;if(T.pod)return T.pod;const L=[{id:"me",raw:T.raw,sac:S.sac}].concat(kcRivalsTT().map(m=>({id:m.id,raw:kcPhucMark(m),sac:m.sac||0})));
