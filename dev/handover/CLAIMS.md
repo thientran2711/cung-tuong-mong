@@ -1540,4 +1540,4 @@ figload-keep (live bug split from sideline-dlg 3fb17db4) | review/figload-keep |
 | LC12 lander | main FF | MAIN 125 | session_01V1ZZH2p2x7oNCrRuTq7RjF | RUNNING | 2026-11-24T18:15Z |
 ROBOT-COOP FIXER #6 (fix-2 r3, fix-3 r3) | review/robot-coop-fix-2-r3, robot-coop-fix-3 | session_01N1tNP4TkcdjyymdxPqwSj5 | RUNNING | 2026-11-24T18:24Z (FOREMAN B)
 ROBOT-COOP FIXER #6b (week-end stuck, fix-4) | review/robot-coop-fix-4 | session_01N1tNP4p4FFUjuVntyfWTNy | RUNNING | 2026-11-24T18:24Z (FOREMAN B)
-| ROBOT-COOP RUNNER U4b pair 4 only SWAP=1 SEED=1 ×10 kiếp (sonnet; briefs/b-robot10-coop-runner.md) | dev/handover/robot/coop-U4b-*-p4-4-s.md | F | (opening) | RUNNING | 24/11 18:26Z |
+| ROBOT-COOP RUNNER U4b pair 4 only SWAP=1 SEED=1 ×10 kiếp (sonnet; briefs/b-robot10-coop-runner.md) | dev/handover/robot/coop-U4b-*-p4-4-s.md | F | session_01UV1SzkJdrUu6E17XxGEXCs | RUNNING | 24/11 18:26Z |
