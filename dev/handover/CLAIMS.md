@@ -1543,3 +1543,4 @@ ROBOT-COOP FIXER #6b (week-end stuck, fix-4) | review/robot-coop-fix-4 | session
 | ROBOT-COOP RUNNER U4b pair 4 only SWAP=1 SEED=1 ×10 kiếp (sonnet; briefs/b-robot10-coop-runner.md) | dev/handover/robot/coop-U4b-*-p4-4-s.md | F | session_01UV1SzkJdrUu6E17XxGEXCs | RUNNING | 24/11 18:26Z |
 | KIT REVIEW kit-woodskin 09c4386c (sonnet) | review/kit-woodskin-r1 | B | session_01N1tNP6zFURqiCMvwK3meUK | RUNNING | 24/11 18:45Z |
 | ROBOT-COOP RUNNER U3 pair 3 | dev/handover/robot/coop-20261124-0723-p3-4.md | B | session_01N1tNP2fZxefqCF5gDf8nSK | DONE (archived) | 24/11 18:25Z |
+| MOTION-DESIGN-4 (successor of -3) | review/motion-design-4 | MAIN 126 | session_01V1ZZH2DixEc1m1eoLXdFKF | RUNNING | 2026-11-24T18:34Z |
