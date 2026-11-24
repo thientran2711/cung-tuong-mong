@@ -20,4 +20,19 @@ assert.equal(merge3({emp:{mood:1}},{emp:{mood:3}},{emp:{mood:0}}).emp.mood,3); /
   assert.deepEqual(merge3({ S: { kidUsed: [1, 2] } }, { S: { kidUsed: [1, 2, 3] } }, { S: { kidUsed: [1, 2, 4] } }).S.kidUsed, [1, 2, 3, 4]);
   assert.deepEqual(merge3({ S: { nmOrd: ["a"] } }, { S: { nmOrd: ["a", "b"] } }, { S: { nmOrd: ["a", "c"] } }).S.nmOrd, ["a", "b"]); // other lists: host whole, unchanged
 }
+/* robot-coop-fix-2: both seats spend her bạc in one week → never below 0 (was 5 + (4 − 20) = −11); stats stay 0–100; effect objects untouched */
+{
+  const b = { P: { b: { S: { name: "Y", rank: 2, sung: 50, bac: 20, th: 90 } } }, W: { R: [{ id: 3, name: "N", alive: true, suc: 10, bac: 4 }] }, Q: [{ fx: { bac: -5 } }] };
+  const a = { P: { b: { S: { name: "Y", rank: 2, sung: 95, bac: 5, th: 95 } } }, W: { R: [{ id: 3, name: "N", alive: true, suc: 2, bac: 1 }] }, Q: [{ fx: { bac: -5 } }] };
+  const g = { P: { b: { S: { name: "Y", rank: 2, sung: 70, bac: 4, th: 99 } } }, W: { R: [{ id: 3, name: "N", alive: true, suc: 1, bac: 0 }] }, Q: [{ fx: { bac: -9 } }] };
+  const m = merge3(b, a, g);
+  assert.equal(m.P.b.S.bac, 0);          // 5 + (4 − 20) = −11 → 0
+  assert.equal(m.P.b.S.sung, 100);       // 95 + (70 − 50) = 115 → 100
+  assert.equal(m.P.b.S.th, 100);         // 95 + 9 = 104 → 100
+  assert.equal(m.W.R[0].suc, 0);         // 2 + (1 − 10) = −7 → 0
+  assert.equal(m.W.R[0].bac, 0);         // 1 + (0 − 4) = −3 → 0
+  assert.equal(m.Q[0].fx.bac, -9);       // not a person: −5 + (−9 + 5) = −9, kept
+  const ok = merge3(b, a, { P: { b: { S: { name: "Y", rank: 2, sung: 50, bac: 30, th: 90 } } } , W: b.W, Q: b.Q });
+  assert.equal(ok.P.b.S.bac, 15);        // in range: plain additive merge unchanged (5 + 10)
+}
 console.log("merge ok");

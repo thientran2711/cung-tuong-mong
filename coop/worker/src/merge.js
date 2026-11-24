@@ -26,6 +26,15 @@ function union3(base, a, b) {
   for (const e of b) if (!bs.has(k(e)) && !seen.has(k(e))) { seen.add(k(e)); out.push(e); }
   return out;
 }
+/* robot-coop-fix-2: a PERSON's amounts may not leave the game's own range after the additive merge. Both seats can spend from one pot in one
+   week (each side valid on its own): base 20, host copy 5, guest copy 4 → 5 + (4 − 20) = −11 bạc on both screens (robot10-coop: guest bạc −7 / −11
+   "arrived" in the merged week). Ranges = the game's clamps (dev/build/j8.js ap() for persons, j1.js apply() for her own S): stats 0–100, th/hh
+   −100…100, bạc ≥ 0. Only on objects that ARE a person (name + rank + a stat), never on stored effect objects like {bac:-5}. Clamped here, on the
+   Worker, so the stored state (next week's merge base) and both screens hold the same value. */
+const PCL = { sung: [0, 100], danh: [0, 100], suc: [0, 100], sac: [0, 100], tai: [0, 100], tamco: [0, 100], duc: [0, 100], ghen: [0, 100], an: [0, 100],
+  th: [-100, 100], hh: [-100, 100], bac: [0, Infinity] };
+const isPerson = o => isObj(o) && typeof o.name === "string" && ("rank" in o || "role" in o || "alive" in o) && ("sung" in o || "danh" in o || "suc" in o || "bac" in o);
+function clampP(o) { for (const k in PCL) { const v = o[k]; if (isNum(v)) { const [lo, hi] = PCL[k]; if (v < lo) o[k] = lo; else if (v > hi) o[k] = hi; } } return o; }
 const idArr = x => Array.isArray(x) && x.length > 0 && x.every(e => isObj(e) && e.id != null);
 function m3(base, a, b, inP, key) {
   if (UNION.has(key) && prim(a) && prim(b) && (base === undefined || base === null || prim(base))) return union3(base, a, b);
@@ -40,7 +49,7 @@ function m3(base, a, b, inP, key) {
       const v = m3(bs[k], a[k], b[k], inP || k === "P", k);
       if (v !== undefined) out[k] = v;
     }
-    return out;
+    return isPerson(out) ? clampP(out) : out;
   }
   if ((idArr(a) || (Array.isArray(a) && !a.length)) && (idArr(b) || (Array.isArray(b) && !b.length)) && (idArr(a) || idArr(b))) {
     const bm = new Map((Array.isArray(base) ? base : []).filter(isObj).map(e => [String(e.id), e]));
