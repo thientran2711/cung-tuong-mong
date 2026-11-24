@@ -1526,3 +1526,4 @@ D REMERGE + LAND READY train (opus BIG; ORDER MAIN 125 16:31Z; servant-trust →
 kit-chain repair A (veil harness + dialogue-vn/daytitle/evframe-r2) | review/kit-dialogue-vn, kit-daytitle, kit-evframe | session_01N1tNP2vPgig2hQXhhcVq5J | RUNNING | 2026-11-24T17:45Z (FOREMAN B)
 kit-chain repair B (mgskin-wire + kit-nochip whole group) | review/mgskin-wire, kit-nochip | session_01N1tNP5rqTp7pi3ind2iTWD | RUNNING | 2026-11-24T17:45Z (FOREMAN B)
 kit-rewardplate r3 SMALL review | review/kit-rewardplate | session_01N1tNP5XkWFhxvDgVqESJvw | RUNNING | 2026-11-24T17:45Z (FOREMAN B)
+| OFFLINE-FAST owner bug (offline-all slow start) | review/offline-fast; reports/offline-fast.md | MAIN 125 | session_01V1ZZH4kPEoVSax9ycpSYqp | RUNNING | 2026-11-24T17:57Z |
