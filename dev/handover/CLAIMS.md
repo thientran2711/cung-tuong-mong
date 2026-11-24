@@ -1496,3 +1496,4 @@ ROBOT-COOP fixer #4 (fix-3, onecore) | review/robot-coop-fix-3, review/robot10-o
 | SELSCENE-10 (opus; successor of SELSCENE-9; briefs/M121-selscene-fix.md + SUCCESSOR NOTE 2) | review/selection-scene (from 726a633d); reports/selection-scene.md | MAIN 121 | session_01V1ZZH1JJGHVDhysWHZsvWq | RUNNING | 24/11 11:05Z |
 | KK19 kit keeper (sonnet; successor of KK18; HANDOVER top of reports/MOCK-STAGE.md) | review/kit-* | MAIN 122 | session_01V1ZZH551R5eFMgZWLvawik | RUNNING | 24/11 11:17Z |
 rv servant-trust r2 (opus BIG; briefs/D-servant-trust-review-r2.md; target 2c1c2bfc) | review/servant-trust-rv | session_01D3E3NbdduX9tP1Nv41ptUk | RUNNING | 24/11 11:41Z (Foreman D depth 3)
+FIX promo-build-2 r1 (opus BIG; briefs/D-promo-build-2-fix.md; from de24c1ae) | review/promo-build-2-rv | session_01D3E3NYmiFCzMBQ7S9iptKN | RUNNING | 24/11 11:51Z (Foreman D depth 3)
