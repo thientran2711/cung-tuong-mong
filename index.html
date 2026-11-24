@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)","b":"33e2e0b2d177","h":[{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"}]};
+window.CTM_BI={"s":"fd85907a+","t":"2026-11-24T07:22Z","c":"SELF-MERGE LAND thin-p6: merge LIVE 056c2402 (jbal2 independent BAL.wc/j70c/j71c + BAL.j68c blocks kept both; index.html/sw.js rebuilt)","b":"52af0a4dcd92","h":[{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -4281,7 +4281,7 @@ function deser(d){trMigrate(d);rivals=d.R;rid=d.rid;S=d.S;S.origin=originByKey(d
  tab=d.tab||"act";used=d.used||0;popIdx=null;popMsg="";
  const vk=S.visit&&S.visit.k;if(d.v<3||!vk||vk==="home"||placeOf(vk).k!==vk||!Array.isArray(S.visit.people)){S.visit={k:"home",people:homePeople(),talked:false};S.place="home"}else S.place=vk;
  if(d.v<3)S.mg=null;if(d.v<5){used=0;S.buoi=0}try{srvLad6()}catch(e){console.error(e)}/* maid-ladder-6: 5-rung save → 6 rungs (j14) */normAll();Q=deserQ(d.P||[])}
-function save(){if(!S||quiet)return;try{if(S.dead)localStorage.removeItem(SK(SLOT));else localStorage.setItem(SK(SLOT),JSON.stringify(ser()));localStorage.setItem("hclh-slot",String(SLOT))}catch(e){}}
+function save(){if(!S||quiet)return;try{if(S.dead)localStorage.removeItem(SK(SLOT));else localStorage.setItem(SK(SLOT),JSON.stringify(ser()));localStorage.setItem("hclh-slot",String(SLOT))}catch(e){/* robot10 E-FIX-3: a save the browser refuses (storage full / blocked) was dropped silently — her progress stopped being kept. Tell her once (the kit notice, the same words as Sổ › Ghi vào ô) */try{if(!S.dead&&typeof kitNotice==="function"&&typeof CTM_WAIT==="object"&&CTM_WAIT.saveBlocked)kitNotice({id:"saveBlocked",line:CTM_WAIT.saveBlocked,sticky:true})}catch(z){}}}
 function loadSlot(n){try{const d=JSON.parse(localStorage.getItem(SK(n))||"null");if(d&&d.v===2)d.P=[];/* v2: no pending choices; v2/v3 get items, stat blocks, records via normAll */
  return d&&d.v>=2&&d.v<=6?d:null}catch(e){return null}}
 function showTitle(){const T=$("title");const L=[1,2,3].map(n=>{const d=loadSlot(n);
@@ -46968,7 +46968,7 @@ function stipGoods(p,SK){const G=[];try{if(!p||p.dead||(p===S&&typeof isSrv==="f
  for(const [k0,n0] of L){let k=k0,n=n0,kem=false,lost=false;
   if(hit.has(L.findIndex(x=>x[0]===k0))){kem=true;k=D[k0];if(k0==="thanbac"||k0==="bangda")n=Math.max(1,n0-1);if(!k){lost=true}}
   const g={k0,n0,k,n,kem,lost,E:[]};if(!lost&&IT[k])for(let i=0;i<n;i++){const e={k,from:"noivu",d:S.turn};p.inv.push(e);g.E.push(e)}G.push(g)}
- if(p!==S){const nv=p.inv.filter(e=>e&&e.from==="noivu"&&!e.w&&!(typeof lxOf==="function"&&lxOf(e.k)));/* son phấn boxes are spent, never trimmed (jration) */const over=nv.length-BAL.stip.npcKeep*3;if(over>0)nv.slice(0,over).forEach(e=>{const i=p.inv.indexOf(e);if(i>=0)p.inv.splice(i,1)})}
+ if(p!==S){const nv=p.inv.filter(e=>e&&e.from==="noivu"&&!e.w&&!(typeof lxOf==="function"&&lxOf(e.k)));/* son phấn boxes are spent, never trimmed (jration) */const over=nv.length-BAL.stip.npcKeep*3;if(over>0)nv.slice(0,over).forEach(e=>{const i=p.inv.indexOf(e);if(i>=0){/* robot10 E-FIX-3: the older pieces are used up (jallot: candles burnt, hair oil spent; the only lasting goods of the allotment), never returned to the store */if(typeof alOf==="function"&&alOf(e.k))typeof ilUsedUp==="function"&&ilUsedUp(e);p.inv.splice(i,1)}})}
  }catch(e){console.error("stipGoods",e)}return G}
 function stipGoodsTxt(G){return (G||[]).map(g=>g.lost?`thiếu ${stipNm(g.k0,g.n0).replace(/^\d+ \S+ /,"")}`:stipNm(g.k,g.n)).join(" · ")}
 /* Nội vụ phủ buys its own issue back cheaply */
@@ -60587,7 +60587,7 @@ function lxCapRec(p,rec){if(!lxOn()||!rec||!rec.makeup)return rec;const n=lxCoun
 function lxSpend(p,rec,col){const B=BAL.ration,out={used:[],gone:[],taint:null};if(!lxOn()||!rec||!rec.makeup)return out;const mk=toilMk(rec);
  const u0=B.use[mk]||0;if(!u0)return out;const per=u0+(col&&col.want==="diem"?B.bold:0);
  for(const part of B.parts){const L=lxBoxes(p,part);if(!L.length)continue;const c=col&&col[part];const e=L.find(x=>x.c===c)||L.slice().sort((a,b)=>a.u-b.u)[0];
-  const fresh=e.u>=B.uses[lxOf(e.k).t];const n=Math.min(per,e.u);e.u-=n;out.used.push({part,e,n});if(e.t==="ngua"||e.t==="chi")out.taint=e;else if(fresh&&!out.cos&&typeof RASH==="object"&&roll(RASH.cos))out.cos=e;if(e.u<=0){p.inv.splice(p.inv.indexOf(e),1);out.gone.push(e)}}
+  const fresh=e.u>=B.uses[lxOf(e.k).t];const n=Math.min(per,e.u);e.u-=n;out.used.push({part,e,n});if(e.t==="ngua"||e.t==="chi")out.taint=e;else if(fresh&&!out.cos&&typeof RASH==="object"&&roll(RASH.cos))out.cos=e;if(e.u<=0){typeof ilUsedUp==="function"&&ilUsedUp(e);p.inv.splice(p.inv.indexOf(e),1);out.gone.push(e)}}
  if(out.taint||out.cos)out.rash=lxAllergy(p,out.taint||out.cos,!out.taint);return out}
 /* review fix 3: ONE allergy system — the rash of jrash (rashGive: timed, its picture, Thái y / thảo mộc card, Sắc by severity). A pha chì box also hurts its user
    through taintHit (j8, the same as every lead-tainted item); bột ngứa only through the rash; an ordinary new box: RASH.cos, severity 1 ("son phấn không hợp") */
@@ -60621,7 +60621,7 @@ function lxRush(){const c=lxRushCost();if(!lxOn()||(S.bac||0)<c)return;const M=l
 function lxLend(v,part){const L=lxBoxes(v,part);if(!L.length)return null;const tot=L.reduce((a,e)=>a+e.u,0);return tot>=BAL.ration.borrow.spare?L.slice().sort((a,b)=>b.u-a.u)[0]:null}
 function lxBorrowOdds(v,p){p=p||S;const B=BAL.ration.borrow;let o=B.base+Math.round(aff(v,p)/B.aff)-Math.round((v.ghen||0)/B.ghen);for(const t of traitsOf(v))o+=B.trait[t]||0;
  o+=Math.round((lxHash(`${v.id}:${toilWk()}`)%(2*B.whim+1))-B.whim);return cl(o,5,95)}
-function lxGive(from,to,e,how){const r=lxOf(e.k);const n=typeof how==="number"?Math.max(1,Math.min(e.u,how)):how==="half"?Math.max(1,Math.ceil(e.u/2)):e.u;e.u-=n;if(e.u<=0)from.inv.splice(from.inv.indexOf(e),1);
+function lxGive(from,to,e,how){const r=lxOf(e.k);const n=typeof how==="number"?Math.max(1,Math.min(e.u,how)):how==="half"?Math.max(1,Math.ceil(e.u/2)):e.u;e.u-=n;if(e.u<=0){/* E-FIX-3: the whole rest went to the other one (g below): this box is empty, used up */typeof ilUsedUp==="function"&&ilUsedUp(e);from.inv.splice(from.inv.indexOf(e),1)}
  const g={k:e.k,c:e.c,u:n,from:how==="steal"?"steal":"borrow",d:S.turn};if(from!==S)g.giver=from.name;if(e.t){g.t=e.t;g.by=e.by}to.inv=to.inv||[];to.inv.push(g);return g}
 /* ONE builder per road (role-parity part 2, law 1 + law 4): her talk cards (rival visit / Hoàng hậu, Thái hậu / a rival's chest) and an NPC
    consort's day-plan options cx4:rougeBorrow / rougeBeg / rougeSteal (jagacts4) — the SAME odds function of the doer, the same gain and loss.
@@ -60658,7 +60658,7 @@ function lxCaught(a,v){const ST=BAL.ration.steal;ap(a,{danh:ST.danh});if(typeof 
 function lxNpcOk(v){return !!v&&v!==S&&!v.coop&&v.alive!==false&&!v.out&&!(typeof mlGuest==="function"&&mlGuest())}
 /* the past month's sittings (BAL.ration.npc.use lượt per part), spent before the new issue */
 function lxNpcSpend(v){if(!lxNpcOk(v))return;const N=BAL.ration.npc;
- for(const part of BAL.ration.parts){let left=N.use;for(const e of lxBoxes(v,part).sort((a,b)=>a.u-b.u)){const n=Math.min(left,e.u);e.u-=n;left-=n;if(e.u<=0)v.inv.splice(v.inv.indexOf(e),1);if(!left)break}}}
+ for(const part of BAL.ration.parts){let left=N.use;for(const e of lxBoxes(v,part).sort((a,b)=>a.u-b.u)){const n=Math.min(left,e.u);e.u-=n;left-=n;if(e.u<=0){typeof ilUsedUp==="function"&&ilUsedUp(e);v.inv.splice(v.inv.indexOf(e),1)}if(!left)break}}}
 /* after the issue: a part still missing → buy at her own rank's price (law C). Borrow / ask her / beg / steal are no longer monthly dice:
    they are the NPC's own day-plan choices with the player's odds (jagacts4 cx4:rouge*, role-parity part 2, canon overwrite). */
 function lxNpcMonth(v){if(!lxNpcOk(v))return;const N=BAL.ration.npc;
@@ -60743,14 +60743,14 @@ function alSkimmed(p){try{return !!p&&p.stip&&p.stip.skT===S.turn}catch(e){retur
 /* NPC consort month: spend the past month's hair oil BEFORE the issue (as lxNpcSpend), then her staff's lệ; her own and her staff's after jstip */
 (function(){if(typeof stipGoods!=="function")return;const g0=stipGoods;stipGoods=function(p,SK){try{if(alOn()&&p&&p!==S&&!p.coop)alNpcSpend(p)}catch(e){console.error("al spend",e)}
   const G=g0.apply(this,arguments);try{if(alOn()&&p){alFix(p);alStaffGive(p,!!SK)}}catch(e){console.error("al goods",e)}return G};window.stipGoods=stipGoods})();
-function alNpcSpend(v){if(!v||!v.inv||v.out)return;let left=BAL.allot.oil.npcUse;for(const e of alOil(v).sort((a,b)=>a.u-b.u)){const n=Math.min(left,e.u);e.u-=n;left-=n;if(e.u<=0)v.inv.splice(v.inv.indexOf(e),1);if(!left)break}}
+function alNpcSpend(v){if(!v||!v.inv||v.out)return;let left=BAL.allot.oil.npcUse;for(const e of alOil(v).sort((a,b)=>a.u-b.u)){const n=Math.min(left,e.u);e.u-=n;left-=n;if(e.u<=0){typeof ilUsedUp==="function"&&ilUsedUp(e);v.inv.splice(v.inv.indexOf(e),1)}if(!left)break}}
 /* first sight (new life / old save): one month's oil + candles so Kiểu cầu kỳ is not shut on day one */
 function alInit(p){if(!p||!alOn()||p.alInit)return;p.alInit=1;p.inv=p.inv||[];for(const [k,n] of alLines(alRk(p),!!p.out))for(let i=0;i<n;i++)p.inv.push({k,from:"noivu",d:S.turn});alFix(p)}
 function alInitAll(){try{if(!S||S.dead||!alOn())return;if(typeof isSrv==="function"&&isSrv()){S.alInit=1;return}alInit(S);if(typeof mlGuest==="function"&&mlGuest())return;for(const v of consorts())if(v!==S&&v.alive!==false)alInit(v)}catch(e){console.error("alInit",e)}}
 /* ---------- 1. hair oil at the sitting: Kiểu cầu kỳ needs it (her, NPC faces) and spends it ---------- */
 (function(){if(typeof lxCapRec!=="function")return;const c0=lxCapRec;lxCapRec=function(p,rec){const r=c0.apply(this,arguments);try{if(alOn()&&rec&&rec.makeup&&rec.col&&rec.col.want==="diem"&&!alHasOil(p)){delete rec.col.want;rec.noOil=1}}catch(e){}return r};window.lxCapRec=lxCapRec})();
 (function(){if(typeof lxSpend!=="function")return;const s0=lxSpend;lxSpend=function(p,rec,col){const wantB=!!(col&&col.want==="diem");const R=s0.apply(this,arguments);
-  try{if(alOn()&&wantB&&rec&&rec.makeup&&p){const L=alOil(p);if(L.length){const e=L.slice().sort((a,b)=>a.u-b.u)[0];e.u-=Math.min(e.u,BAL.allot.oil.use);R.oil=e;if(e.u<=0){p.inv.splice(p.inv.indexOf(e),1);(R.gone=R.gone||[]).push(e)}}}}catch(e){console.error("al oil",e)}return R};window.lxSpend=lxSpend})();
+  try{if(alOn()&&wantB&&rec&&rec.makeup&&p){const L=alOil(p);if(L.length){const e=L.slice().sort((a,b)=>a.u-b.u)[0];e.u-=Math.min(e.u,BAL.allot.oil.use);R.oil=e;if(e.u<=0){typeof ilUsedUp==="function"&&ilUsedUp(e);p.inv.splice(p.inv.indexOf(e),1);(R.gone=R.gone||[]).push(e)}}}}catch(e){console.error("al oil",e)}return R};window.lxSpend=lxSpend})();
 /* her mirror: without oil the Kiểu cầu kỳ presets are not offered, the pick falls back, the note says why */
 (function(){if(typeof lxColRows!=="function")return;const r0=lxColRows;lxColRows=function(rows){const R=r0.apply(this,arguments);try{if(alOn()&&!alHasOil(S))return R.filter(r=>!(r&&/^pre-/.test(r.k)&&(r.items||[]).every(i=>{const x=TOIL_PRE.find(y=>y[0]===i.k);return x&&x[2]==="diem"})))}catch(e){}return R};window.lxColRows=lxColRows})();
 (function(){if(typeof lxColPick!=="function")return;const p0=lxColPick;lxColPick=function(col){const c=p0.apply(this,arguments);try{if(alOn()&&c&&c.want==="diem"&&!alHasOil(S))delete c.want}catch(e){}return c};window.lxColPick=lxColPick})();
@@ -60761,7 +60761,7 @@ function alInitAll(){try{if(!S||S.dead||!alOn())return;if(typeof isSrv==="functi
 function alEvening(){try{return (S.buoi||0)===(typeof B4L!=="undefined"?B4L:3)}catch(e){return false}}
 /* p studied (act key k of BAL.ag.cx) — in the evening with a candle: burn it, add light.add to each stat the act gains */
 function alLight(p,k){try{const L=BAL.allot.light;if(!alOn()||!p||!L.acts.includes(k)||!alEvening())return 0;const C=alCandle(p);if(!C.length)return 0;
- const e=C.slice().sort((a,b)=>a.k<b.k?-1:1)[0];p.inv.splice(p.inv.indexOf(e),1);const D=BAL.ag.cx[k];const fx={};for(const s in D.w)if(s!=="maid"&&D.w[s]>0)fx[s]=L.add;
+ const e=C.slice().sort((a,b)=>a.k<b.k?-1:1)[0];typeof ilUsedUp==="function"&&ilUsedUp(e);p.inv.splice(p.inv.indexOf(e),1);const D=BAL.ag.cx[k];const fx={};for(const s in D.w)if(s!=="maid"&&D.w[s]>0)fx[s]=L.add;
  if(p===S)apply(fx);else ap(p,fx);return {e,fx}}catch(x){console.error("al light",x);return 0}}
 /* her deck: the two study cards of j2 carry cx:"arts"/"book"; the card says what a candle adds (text = effect) */
 (function(){if(typeof runOpt!=="function")return;const r0=runOpt;runOpt=function(a){const r=r0.apply(this,arguments);try{if(r===true&&a&&a.cx&&p0ok()){const R=alLight(S,a.cx);
@@ -60789,7 +60789,7 @@ function alSrvMonth(){try{if(!alOn()||!S||S.dead||!(typeof isSrv==="function"&&i
 /* NPC staff (and her own staff): the same list by their bậc, into their own small bag (kept to BAL.allot.srv.keep, older pieces used up) */
 function alStaffGive(p,skim){if(!p||!Array.isArray(p.staff)||p.out)return;const B=BAL.allot.srv;
  for(const s of p.staff){if(!s||s.sid==null||s.out||s.dead)continue;const rk=typeof srk==="function"?srk(s):0;let L=alSrvList(rk,false);if(skim)L=alSrvSkim(L).L;
-  s.inv=Array.isArray(s.inv)?s.inv:[];for(const [k,n] of L)if(IT[k])for(let i=0;i<n;i++)s.inv.push({k,from:"noivu",d:S.turn});alFix(s);if(s.inv.length>B.keep)s.inv.splice(0,s.inv.length-B.keep)}}
+  s.inv=Array.isArray(s.inv)?s.inv:[];for(const [k,n] of L)if(IT[k])for(let i=0;i<n;i++)s.inv.push({k,from:"noivu",d:S.turn});alFix(s);if(s.inv.length>B.keep)s.inv.splice(0,s.inv.length-B.keep).forEach(e=>{if(alOf(e.k)||(typeof lxOf==="function"&&lxOf(e.k)))typeof ilUsedUp==="function"&&ilUsedUp(e)})}}
 /* the maid's help line (kit help popup of j42 "Lương tháng") names the lệ goods too */
 (function(){try{if(typeof HX==="object"){const w0=HX.wage;Object.defineProperty(HX,"wage",{get(){try{return alOn()&&S&&S.srv?`${w0} Kèm lệ tháng của bậc ngươi: ${alSrvTxt(S.srv.rk)}. Chủ nhân bị Nội vụ phủ cắt xén thì lệ kẻ hầu cũng bị bớt.`:w0}catch(e){return w0}},configurable:true,enumerable:true})}}catch(e){}})();
 /* ---------- item detail: lượt left of a bottle (kit detail rows' own note line) ---------- */
@@ -78272,6 +78272,18 @@ window.eitPilfer=eitPilfer;window.eitReOpts=eitReOpts;window.eitReDialog=eitReDi
 /* S.il.at (the last census) is NOT saved (non-enumerable: ser() and the co-op canon skip it); a loaded save takes a fresh census — save size bounded (reviewer r1) */
 function ilS(){if(!S.il||typeof S.il!=="object")S.il={};const I=S.il;I.seq=I.seq||0;I.log=I.log||[];I.box=I.box||[];I.net=I.net||0;
  const d=Object.getOwnPropertyDescriptor(I,"at");if(!d||d.enumerable)Object.defineProperty(I,"at",{value:(d&&d.value)||null,writable:true,enumerable:false,configurable:true});return I}
+/* robot10 E-FIX-3 (E round 1 R1 «save exceeded the quota» at year 17; nc-B save = 4.97 M chars at year 14, S.il.box 2.08 M = 15 808 «kho» pieces):
+   a CONSUMABLE that is used up (a candle burnt, hair oil or a son phấn box spent to the last use, an NPC's older allotment used up) is not «lost»
+   (law 6c, like tea / medicine / charcoal): the code that spends it marks it ilUsedUp(e) before taking it out, so a guard never routes it to the
+   Nội vụ phủ store and the census never «nets» it. Before: every NPC's monthly spend inside the guarded stipGoods went to the store as «kho»
+   stock, the store grew ~35 pieces a week and the save outgrew the browser's storage (j6 save() then failed silently). */
+const IL_USED=new Set();
+function ilUsedUp(e){if(!e||typeof e!=="object")return;try{Object.defineProperty(e,"used",{value:1,writable:true,enumerable:false,configurable:true})}catch(z){e.used=1}if(e.iu)IL_USED.add(e.iu)}
+window.ilUsedUp=ilUsedUp;
+/* a spent piece already sitting in the store (old saves): an allotment consumable (candles, hair oil, son phấn boxes) the store took as «kho» / «net»
+   stock is the used-up remains of an NPC's month — taken out once per load (the box keeps only real, lasting pieces) */
+function ilUsedStock(x){try{const e=x&&x.e;if(!e||x.at!=="nvp"||(x.why!=="kho"&&x.why!=="net")||x.dh)return false;/* hers too: her spent boxes were «netted» the same way (she saw them as «Ở Nội vụ phủ») */
+ const al=typeof alOf==="function"&&alOf(e.k),lx=typeof lxOf==="function"&&lxOf(e.k);return !!(al||(lx&&!(e.u>0)))}catch(z){return false}}
 function ilKey(p){return p===S?"me":(p&&p.id)||""}
 function ilP(k){if(k==="me")return S;try{return typeof RV==="function"?RV(k):null}catch(e){return null}}
 function ilAlive(p){return !!p&&(p===S?!S.dead:p.alive!==false)}
@@ -78320,7 +78332,7 @@ function ilLog(e,f,t,how){const I=ilS();I.log.push([typeof wk==="function"?wk():
 function ilRng(a){return a[0]+R(a[1]-a[0]+1)}
 /* ---- the ONE rule: where a piece goes when it leaves p's hands ---- */
 const IL_HOW={sell:"bán",pawn:"cầm cố quá hạn",conf:"bị tịch thu",evid:"tang vật",fix:"đem sửa",burn:"cháy, đem sửa",pil:"kẻ hầu bớt xén",lost:"thất lạc",maid:"tặng cung nữ",emp:"dâng Hoàng thượng",th:"dâng Thái hậu",dead:"di vật",kho:"trả Nội vụ phủ",net:"Nội vụ phủ nhặt được",demote:"thu khi giáng phẩm"};
-function ilGone(p,e,how,o){if(!e||typeof e!=="object"||!e.k)return null;if(ilAt(e))return null;{const f=ilToFriend(e);if(f){/* E44g T6: an NPC's piece that landed in her entry (a gift outside the host's diffed calls) goes to her seat (jcoopworld npcToFriend), logged from THAT giver */if(p&&p!==S&&typeof COOPW==="object"&&COOPW.npcToFriend)try{COOPW.npcToFriend(p,e,f)}catch(z){console.error(z)}ilSent(e,f,p);return null}}o=o||{};const I=ilS();const B=BAL.il;const own=o.own||ilKey(p);
+function ilGone(p,e,how,o){if(!e||typeof e!=="object"||!e.k)return null;if(e.used)return null;/* E-FIX-3: used up, not lost */if(ilAt(e))return null;{const f=ilToFriend(e);if(f){/* E44g T6: an NPC's piece that landed in her entry (a gift outside the host's diffed calls) goes to her seat (jcoopworld npcToFriend), logged from THAT giver */if(p&&p!==S&&typeof COOPW==="object"&&COOPW.npcToFriend)try{COOPW.npcToFriend(p,e,f)}catch(z){console.error(z)}ilSent(e,f,p);return null}}o=o||{};const I=ilS();const B=BAL.il;const own=o.own||ilKey(p);
  if(how!=="sell"&&how!=="pawn"&&!ilDur(e))return null;if((how==="sell"||how==="pawn")&&e.wk&&e.wk.p!=null)return null;
  if(how==="lost"&&p&&ilAlive(p)&&typeof loLoseE==="function"){const c=loLoseE(p,e,o.cause);if(c){ilUid(e);ilLog(e,own,"lo"+c.id,"thất lạc");return c}}
  for(const f of ["w","h","lo","gh","by"])if(how!=="lost")delete e[f];
@@ -78360,16 +78372,17 @@ function ilCensus(){if(!S)return;const I=ilS();const now={};const seen=new Set()
  for(const c of ilCases()){ilUid(c.e);seen.add(c.e.iu);now[c.e.iu]=[c.e.k,"lo"+c.id,0]}
  /* a gift on its way (a dialog still waiting for her answer) */
  try{for(const m of (typeof Q!=="undefined"?Q:[])){const e=m&&m.pp&&m.pp.e;if(e&&typeof e==="object"&&e.k&&e.iu){seen.add(e.iu);now[e.iu]=[e.k,"dlg",0]}}}catch(z){}
- if(I.at)for(const id in I.at){if(seen.has(+id))continue;const [k,h,wkf]=I.at[id];const e0={k,iu:+id};if(wkf||!ilDur(e0))continue;if(IL_DH.includes(k))continue;/* jdh2 census keeps one book + one seal per hiệu (drops copies, recreates a missing one) */if(ilCoop()&&h!=="me"&&!IL_BOXES.includes(h)&&!/^lo/.test(h))continue;
+ if(I.at)for(const id in I.at){if(seen.has(+id))continue;if(IL_USED.has(+id))continue;/* E-FIX-3: used up */const [k,h,wkf]=I.at[id];const e0={k,iu:+id};if(wkf||!ilDur(e0))continue;if(IL_DH.includes(k))continue;/* jdh2 census keeps one book + one seal per hiệu (drops copies, recreates a missing one) */if(ilCoop()&&h!=="me"&&!IL_BOXES.includes(h)&&!/^lo/.test(h))continue;
   /* vanished without a route: the piece is still in the game (Nội vụ phủ found it); ilAudit counts these (bot audit target 0) */
   I.net++;I.box.push({e:e0,at:"nvp",why:"net",own:h,w:wk()});ilLog(e0,h,"nvp","net");now[id]=[k,"nvp",0]}
- I.at=now}
+ I.at=now;IL_USED.clear()}
 function ilOut(p,e){const i=(p.inv||[]).indexOf(e);if(i>=0){p.inv.splice(i,1);return}const w=p.wd;if(w)for(const sl of ["tram","y"])if(w[sl]===e){w[sl]=null;return}if(p.vl===e){p.vl=null;return}
  if(p.wdPawn){const j=p.wdPawn.findIndex(P=>P&&P.e===e);if(j>=0)p.wdPawn.splice(j,1)}}
 /* ---- weekly: the box moves on (returns, ransom, atonement, mending, resale) ---- */
 function ilWant(v,x,o,pr){const W=BAL.ag.why.g2il;if(!v||v===o||(v.bac||0)<(pr!=null?pr:x.pr)+W.spare)return 0;const has=(v.inv||[]).some(e=>e&&e.k===x.e.k);
  return (has?0:W.lack)+(o&&o!==v?Math.max(0,hostility(v,o))*W.hostW:0)}
 function ilWeek(){if(!S||S.dead)return;const I=ilS(),B=BAL.il;let ask=false,askF=false;
+ /* E-FIX-3: once per loaded ledger, the used-up allotment remains an old save keeps in the store are taken out (ilUsedStock) */if(ilWeek.m!==I){ilWeek.m=I;I.box=I.box.filter(x=>{if(!ilUsedStock(x))return true;if(x.e.iu){IL_USED.add(x.e.iu);if(I.at)delete I.at[x.e.iu]}return false})}
  for(const x of I.box.slice()){const o=ilP(x.own);const live=o&&ilAlive(o)&&!(o!==S&&o.out);
   if(x.at==="mkt"){
    if(live&&o===S){if(!x.shop&&roll(B.shopP)){x.shop=1;log(`Thái giám Nội vụ phủ báo: khay đồ mua ngoài cung có ${ilNm(x.e)}, giống đồ cũ của ngươi.`)}
@@ -97774,7 +97787,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="33e2e0b2d177";window.CTM_BUILD=BUILD;
+const BUILD="52af0a4dcd92";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

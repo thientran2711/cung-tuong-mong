@@ -101,7 +101,7 @@ function stipGoods(p,SK){const G=[];try{if(!p||p.dead||(p===S&&typeof isSrv==="f
  for(const [k0,n0] of L){let k=k0,n=n0,kem=false,lost=false;
   if(hit.has(L.findIndex(x=>x[0]===k0))){kem=true;k=D[k0];if(k0==="thanbac"||k0==="bangda")n=Math.max(1,n0-1);if(!k){lost=true}}
   const g={k0,n0,k,n,kem,lost,E:[]};if(!lost&&IT[k])for(let i=0;i<n;i++){const e={k,from:"noivu",d:S.turn};p.inv.push(e);g.E.push(e)}G.push(g)}
- if(p!==S){const nv=p.inv.filter(e=>e&&e.from==="noivu"&&!e.w&&!(typeof lxOf==="function"&&lxOf(e.k)));/* son phấn boxes are spent, never trimmed (jration) */const over=nv.length-BAL.stip.npcKeep*3;if(over>0)nv.slice(0,over).forEach(e=>{const i=p.inv.indexOf(e);if(i>=0)p.inv.splice(i,1)})}
+ if(p!==S){const nv=p.inv.filter(e=>e&&e.from==="noivu"&&!e.w&&!(typeof lxOf==="function"&&lxOf(e.k)));/* son phấn boxes are spent, never trimmed (jration) */const over=nv.length-BAL.stip.npcKeep*3;if(over>0)nv.slice(0,over).forEach(e=>{const i=p.inv.indexOf(e);if(i>=0){/* robot10 E-FIX-3: the older pieces are used up (jallot: candles burnt, hair oil spent; the only lasting goods of the allotment), never returned to the store */if(typeof alOf==="function"&&alOf(e.k))typeof ilUsedUp==="function"&&ilUsedUp(e);p.inv.splice(i,1)}})}
  }catch(e){console.error("stipGoods",e)}return G}
 function stipGoodsTxt(G){return (G||[]).map(g=>g.lost?`thiếu ${stipNm(g.k0,g.n0).replace(/^\d+ \S+ /,"")}`:stipNm(g.k,g.n)).join(" · ")}
 /* Nội vụ phủ buys its own issue back cheaply */

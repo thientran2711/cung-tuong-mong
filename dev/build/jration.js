@@ -99,7 +99,7 @@ function lxCapRec(p,rec){if(!lxOn()||!rec||!rec.makeup)return rec;const n=lxCoun
 function lxSpend(p,rec,col){const B=BAL.ration,out={used:[],gone:[],taint:null};if(!lxOn()||!rec||!rec.makeup)return out;const mk=toilMk(rec);
  const u0=B.use[mk]||0;if(!u0)return out;const per=u0+(col&&col.want==="diem"?B.bold:0);
  for(const part of B.parts){const L=lxBoxes(p,part);if(!L.length)continue;const c=col&&col[part];const e=L.find(x=>x.c===c)||L.slice().sort((a,b)=>a.u-b.u)[0];
-  const fresh=e.u>=B.uses[lxOf(e.k).t];const n=Math.min(per,e.u);e.u-=n;out.used.push({part,e,n});if(e.t==="ngua"||e.t==="chi")out.taint=e;else if(fresh&&!out.cos&&typeof RASH==="object"&&roll(RASH.cos))out.cos=e;if(e.u<=0){p.inv.splice(p.inv.indexOf(e),1);out.gone.push(e)}}
+  const fresh=e.u>=B.uses[lxOf(e.k).t];const n=Math.min(per,e.u);e.u-=n;out.used.push({part,e,n});if(e.t==="ngua"||e.t==="chi")out.taint=e;else if(fresh&&!out.cos&&typeof RASH==="object"&&roll(RASH.cos))out.cos=e;if(e.u<=0){typeof ilUsedUp==="function"&&ilUsedUp(e);p.inv.splice(p.inv.indexOf(e),1);out.gone.push(e)}}
  if(out.taint||out.cos)out.rash=lxAllergy(p,out.taint||out.cos,!out.taint);return out}
 /* review fix 3: ONE allergy system — the rash of jrash (rashGive: timed, its picture, Thái y / thảo mộc card, Sắc by severity). A pha chì box also hurts its user
    through taintHit (j8, the same as every lead-tainted item); bột ngứa only through the rash; an ordinary new box: RASH.cos, severity 1 ("son phấn không hợp") */
@@ -133,7 +133,7 @@ function lxRush(){const c=lxRushCost();if(!lxOn()||(S.bac||0)<c)return;const M=l
 function lxLend(v,part){const L=lxBoxes(v,part);if(!L.length)return null;const tot=L.reduce((a,e)=>a+e.u,0);return tot>=BAL.ration.borrow.spare?L.slice().sort((a,b)=>b.u-a.u)[0]:null}
 function lxBorrowOdds(v,p){p=p||S;const B=BAL.ration.borrow;let o=B.base+Math.round(aff(v,p)/B.aff)-Math.round((v.ghen||0)/B.ghen);for(const t of traitsOf(v))o+=B.trait[t]||0;
  o+=Math.round((lxHash(`${v.id}:${toilWk()}`)%(2*B.whim+1))-B.whim);return cl(o,5,95)}
-function lxGive(from,to,e,how){const r=lxOf(e.k);const n=typeof how==="number"?Math.max(1,Math.min(e.u,how)):how==="half"?Math.max(1,Math.ceil(e.u/2)):e.u;e.u-=n;if(e.u<=0)from.inv.splice(from.inv.indexOf(e),1);
+function lxGive(from,to,e,how){const r=lxOf(e.k);const n=typeof how==="number"?Math.max(1,Math.min(e.u,how)):how==="half"?Math.max(1,Math.ceil(e.u/2)):e.u;e.u-=n;if(e.u<=0){/* E-FIX-3: the whole rest went to the other one (g below): this box is empty, used up */typeof ilUsedUp==="function"&&ilUsedUp(e);from.inv.splice(from.inv.indexOf(e),1)}
  const g={k:e.k,c:e.c,u:n,from:how==="steal"?"steal":"borrow",d:S.turn};if(from!==S)g.giver=from.name;if(e.t){g.t=e.t;g.by=e.by}to.inv=to.inv||[];to.inv.push(g);return g}
 /* ONE builder per road (role-parity part 2, law 1 + law 4): her talk cards (rival visit / Hoàng hậu, Thái hậu / a rival's chest) and an NPC
    consort's day-plan options cx4:rougeBorrow / rougeBeg / rougeSteal (jagacts4) — the SAME odds function of the doer, the same gain and loss.
@@ -170,7 +170,7 @@ function lxCaught(a,v){const ST=BAL.ration.steal;ap(a,{danh:ST.danh});if(typeof 
 function lxNpcOk(v){return !!v&&v!==S&&!v.coop&&v.alive!==false&&!v.out&&!(typeof mlGuest==="function"&&mlGuest())}
 /* the past month's sittings (BAL.ration.npc.use lượt per part), spent before the new issue */
 function lxNpcSpend(v){if(!lxNpcOk(v))return;const N=BAL.ration.npc;
- for(const part of BAL.ration.parts){let left=N.use;for(const e of lxBoxes(v,part).sort((a,b)=>a.u-b.u)){const n=Math.min(left,e.u);e.u-=n;left-=n;if(e.u<=0)v.inv.splice(v.inv.indexOf(e),1);if(!left)break}}}
+ for(const part of BAL.ration.parts){let left=N.use;for(const e of lxBoxes(v,part).sort((a,b)=>a.u-b.u)){const n=Math.min(left,e.u);e.u-=n;left-=n;if(e.u<=0){typeof ilUsedUp==="function"&&ilUsedUp(e);v.inv.splice(v.inv.indexOf(e),1)}if(!left)break}}}
 /* after the issue: a part still missing → buy at her own rank's price (law C). Borrow / ask her / beg / steal are no longer monthly dice:
    they are the NPC's own day-plan choices with the player's odds (jagacts4 cx4:rouge*, role-parity part 2, canon overwrite). */
 function lxNpcMonth(v){if(!lxNpcOk(v))return;const N=BAL.ration.npc;
