@@ -30,7 +30,7 @@ const ORIGINS_S=["con nhà nông ở Giang Nam","gia đình bao y kỳ tịch","
 const IMPR={trung:["ít nói, cúi đầu","chăm chỉ, ít cười"],tham:["mắt hay liếc đồ quý","khéo nói, nhanh tay"],nhat:["rụt rè, nói lí nhí","ít nói, cúi đầu"],lanh:["mắt sáng, nhanh nhẹn","khéo nói, nhanh tay"],chuyen:["hay cười, nói nhiều","mắt sáng, nhanh nhẹn"]};
 function servMeta(s){if(!s.org)s.org=pick(ORIGINS_S);if(!s.imp)s.imp=pick(qv(IMPR,s)||["bình thường"]);return s}
 function strShow(s){servMeta(s);const mine=ownerOf(s)===S;const known=s.kn||(!mine&&s.spyFor==="me");return known?netTxt(s):`nết chưa rõ · trông ${s.imp}`}
-function servLearn(s,why){if(!s||s.kn)return;s.kn=1;log(`${why}: biết ${s.name} là người ${netTxt(s)}.`)}
+function servLearn(s,why){if(!s||s.kn)return;s.kn=1;log(`${why}: biết ${s.name} là người ${netTxt(s)}.`);try{kitKnow({key:"srv:"+(s.sid!=null?s.sid:s.name),text:`${why}: biết ${s.name} là người ${netTxt(s)}.`})}catch(e){}}
 /* the household she starts with: known after the first weeks only by watching; new hires are strangers */
 (function(){const m0=mkServ;mkServ=function(){const s=m0.apply(this,arguments);servMeta(s);s.kn=0;return s}})();
 /* the monthly pool from Nội vụ phủ: 2-3 of each kind; rivals (higher rank first) take from it too */
@@ -50,7 +50,7 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-hire]");if
 document.addEventListener("click",e=>{const b=e.target.closest("[data-svlook]");if(!b||b.disabled)return;e.stopPropagation();const s=servById(+b.dataset.svlook);if(!s||S.bac<BAL.house.lookBac||!can(1)||Q.length)return;apply({bac:-BAL.house.lookBac});spend(1);servLearn(s,"Cho người dò xét lai lịch");render()},true);
 /* FIRING: Nội vụ phủ must agree (Chắc), Bạc -20, Danh -1 (more if she fires often), a random replacement from the pool; he knows her secrets */
 function servSellO(p,s,harsh){if(harsh==null)harsh=((p.fired||[]).filter(w=>wk()-w<18).length+1)>=2;return oddsCl(Math.min(qv({tham:55,chuyen:40,lanh:30,nhat:12,trung:4},s,25)+(harsh?15:0)-Math.round(s.loyal/3)+((p.schemes||0)>0?10:0),90))}
-function fireServ(p,s,quietly){const me=p===S;const cost=BAL.house.swapBac;if(p.bac<cost)return"";ap(p,{bac:-cost});p.fired=(p.fired||[]).filter(w=>wk()-w<18);p.fired.push(wk());const harsh=p.fired.length>=2;ap(p,{danh:harsh?-3:-1});
+function fireServ(p,s,quietly){const me=p===S;const cost=BAL.house.swapBac;if(p.bac<cost)return"";ap(p,{bac:-cost});p.fired=(p.fired||[]).filter(w=>wk()-w<18);p.fired.push(wk());const harsh=p.fired.length>=2;ap(p,{danh:harsh?-BAL.house.swapTwiceDanh:-BAL.house.swapDanh});
  if(!roll(80)){return me?`Nội vụ phủ chưa duyệt việc trả ${s.name} về. Bạc -${cost}. `:""}
  p.staff.splice(p.staff.indexOf(s),1);const n=takeFromPool(s.role);if(n)p.staff.push(n);
  /* he may sell what he knows: by trait, loyalty and how he was treated */

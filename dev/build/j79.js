@@ -214,12 +214,12 @@ function kitActMini(a){const line=[a.odds||"",a.ton&&`tốn: ${a.ton}`,a.duoc&&`
 
 /* ---------- odds meter: 7 steps, red → amber → green, word beside, tap = whole ladder ---------- */
 /* KIT_ODDS lives in j0.js (ONE SOURCE) */
-const KIT_ODDS_TXT=["thường hỏng","hỏng nhiều hơn thành","hỏng nhỉnh hơn thành","nửa thành nửa hỏng","thành nhiều hơn hỏng","thường thành","gần như chắc thành"];
+const KIT_ODDS_TXT=["rất dễ hỏng","dễ hỏng hơn là ổn","hơi nghiêng về hỏng","hên xui, tùy duyên","hơi nghiêng về ổn","thường ổn, ít khi hỏng","rất vững vàng, ít khi hỏng"];/* owner 23/11 ~21:40Z: no ladder meaning reads as a promise (no «thành», no «chắc», no numbers) */
 const KIT_ODDS_COL=["#b8321f","#d0662a","#c99a1e","#a3a52a","#6f9a34","#3f8a43","#2d7a52"];
 function kitOddsLv(w){if(typeof w==="number")return w<=0?-1:oddsLv(w);const i=KIT_ODDS.indexOf(kitOddsCanon(String(w).trim()));return i}
 function kitOdds(w,o){o=o||{};const lv=kitOddsLv(w);const word=lv<0?(o.none||"Không có"):KIT_ODDS[lv];
- return `<span class="kodm" data-kodds="${lv}" role="button" tabindex="0" title="${o.label?o.label+": ":""}${word}${lv>=0?` — bậc ${lv+1}/7`:""}" style="--oc:${lv<0?"#9a8f80":KIT_ODDS_COL[lv]}"><span class="kseg">${KIT_ODDS.map((x,i)=>`<i${i<=lv?` style="background:${KIT_ODDS_COL[i]}"`:""}></i>`).join("")}</span><b>${word}</b></span>`}
-function kitOddsLadder(lv){return `<div class="kpopt">Thang cơ hội · 7 bậc</div>`+KIT_ODDS.map((x,i)=>`<div class="kpopr${i===lv?" on":""}"><span class="kseg">${KIT_ODDS.map((y,j)=>`<i${j<=i?` style="background:${KIT_ODDS_COL[j]}"`:""}></i>`).join("")}</span><b style="color:${KIT_ODDS_COL[i]}">${x}</b><small>${KIT_ODDS_TXT[i]}</small></div>`).reverse().join("")}
+ return `<span class="kodm" data-kodds="${lv}" role="button" tabindex="0" title="${o.label?o.label+": ":""}${word}" style="--oc:${lv<0?"#9a8f80":KIT_ODDS_COL[lv]}"><span class="kseg">${KIT_ODDS.map((x,i)=>`<i${i<=lv?` style="background:${KIT_ODDS_COL[i]}"`:""}></i>`).join("")}</span><b>${word}</b></span>`}
+function kitOddsLadder(lv){return `<div class="kpopt">Thang cơ hội</div>`+KIT_ODDS.map((x,i)=>`<div class="kpopr${i===lv?" on":""}"><span class="kseg">${KIT_ODDS.map((y,j)=>`<i${j<=i?` style="background:${KIT_ODDS_COL[j]}"`:""}></i>`).join("")}</span><b style="color:${KIT_ODDS_COL[i]}">${x}</b><small>${KIT_ODDS_TXT[i]}</small></div>`).reverse().join("")}
 /* the existing odds chip (j19 oddsChip) now draws the meter, keeping .oc for old selectors */
 (function(){if(typeof oddsChip!=="function")return;const o0=oddsChip;oddsChip=function(w){const s=kitOddsNorm(w==null?"":w);if(!s)return"";const k=KIT_ODDS.find(x=>s===x||s.startsWith(x+" "))||KIT_ODDS.slice().sort((a,b)=>b.length-a.length).find(x=>s.includes(x));
  if(!k)return o0.apply(this,arguments);const rest=s.replace(k,"").replace(/^\s*·\s*/,"").trim();return kitOdds(k).replace('class="kodm"','class="kodm oc"')+(rest?` <span class="ef n">${rest}</span>`:"")}})();
@@ -262,7 +262,7 @@ const KIT_GLOSS={
  "Nội vụ phủ":"Nơi lo đồ dùng, kẻ hầu và việc vặt của hậu cung.",
  "Tân Giả khố":"Nơi đày cung nữ, thái giám có tội làm việc nặng.",
  "Thai":"Khả năng có thai mỗi lần thị tẩm.",
- "Cơ hội":"Thang 7 bậc: "+KIT_ODDS.join(" < ")+"."};
+ "Cơ hội":"Thang cơ hội, từ thấp lên cao: "+KIT_ODDS.join(", ")+"."};
 /* jreg: built on first use, so glossary words of later modules are in it (was built at load: 27 later words missed) */
 let KP_GLRE0=null,KP_GLN=-1;const KP_GLREf=()=>{const n=Object.keys(KIT_GLOSS).length;if(!KP_GLRE0||n!==KP_GLN){KP_GLN=n;KP_GLRE0=new RegExp("^("+Object.keys(KIT_GLOSS).sort((a,b)=>b.length-a.length).map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|")+")$")}return KP_GLRE0};
 /* kitGloss("Tâm cơ") -> the term with a dotted underline; tap shows its meaning. Unknown terms come back as plain text. */
@@ -637,7 +637,10 @@ window.kitQuick=kitQuick;window.kitQuickSub=kitQuickSub;window.kitQuickRoll=kitQ
 /* seal: optional word for the header seal (default KP_SEAL.game "TÀI NGHỆ"; scheme games pass "MƯU") — one kit parameter for every caller
    kitGameFrame({art:"Cầm", title:"Tấu khúc", how:"Chạm đúng dây khi nốt chạm vạch đỏ.", hud:[["score","Điểm",0],["time","Thời gian","30 giây"]], id:"kgbox"})
    -> HTML of the frame; the game draws into #<id> (.kgbox). Update a HUD cell with kitGameSet("score", 12). */
-function kitBoardBg(kind){try{if(!kind||typeof KG82_BOARDBG==="undefined"||!KG82_BOARDBG.has(kind))return"";const s=`img/kit/mg-${kind}-bg.webp`;if(typeof kitPhOnCdn==="function"&&!kitPhOnCdn(s))return"";return typeof IMG_U==="function"?IMG_U(s):s}catch(e){return""}}
+function kitBoardBg(kind){try{if(!kind||typeof KG82_BOARDBG==="undefined"||!KG82_BOARDBG.has(kind))return"";let s=`img/kit/mg-${kind}-bg.webp`;if(typeof kitPhOnCdn==="function"&&!kitPhOnCdn(s))return"";
+ /* KIT MG-SKIN: the live skin's board painting (img/mg/<kind>-<id>.webp) when the CDN index lists it (a DOM backdrop has no load fallback, so an unknown index = default art) */
+ {const id=typeof KG82!=="undefined"&&KG82.skin&&KG82.skin.id;if(id&&typeof kg82SkinSrc==="function"&&typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE)s=kg82SkinSrc(kind+"-bg",id)}
+ return typeof IMG_U==="function"?IMG_U(s):s}catch(e){return""}}
 window.kitBoardBg=kitBoardBg;
 function kitGameFrame(g){g=g||{};const fg=g.fig?kitGameFig(g):"";const bgb=kitBoardBg(g.kind);return `<div class="kgame">${kpHeader("game",`${g.art?g.art+": ":""}${g.title||""}`,"",g.seal).replace(/<\/div>$/,'<span class="kgmk" hidden></span><span class="kgclk" hidden></span></div>')}`+
  `<div class="kgbody${fg?" kgfig-on":g.pic?" kgpic-on":""}">`+(fg||(g.pic?`<div class="kgpic"><img src="${g.pic}" alt="" draggable="false" onerror="this.parentNode.parentNode.classList.remove('kgpic-on');this.parentNode.remove()"></div>`:""))+`<div class="kginfo">`+
@@ -717,7 +720,18 @@ function kitGameResult(r){r=r||{};const rows=[];
 /* KIT-MGBG r2 (review FAIL): on a painted board every progress/state part sits on a CREAM PLATE and has a darker ring, so empty pips and buttons never vanish on the picture (one place, all four boards) */
 .kgbox.kgbox-bg .nwb-pool{background:rgba(255,250,240,.88);border:1px solid var(--k-hair,#b59a6a);border-radius:999px;padding:5px 12px;width:max-content;max-width:100%;margin:6px auto;box-sizing:border-box}
 .kgbox.kgbox-bg .nwb-pip{border-color:#6b4f1d;border-width:2px;background:rgba(255,250,240,.6)}.kgbox.kgbox-bg .nwb-pip.on{background:var(--gold,#d99a1e);border-color:#7a4f0a}.kgbox.kgbox-bg .nwb-pip.band{border-color:#1f6b38}
-.kgbox.kgbox-bg .btn,.kgbox.kgbox-bg .kgbtn{background:rgba(255,250,240,.94);border:2px solid #6b4f1d;box-shadow:0 1px 4px #2a1a1255}.kgres{padding:0 14px 10px}
+.kgbox.kgbox-bg .btn,.kgbox.kgbox-bg .kgbtn{background:rgba(255,250,240,.94);border:2px solid #6b4f1d;box-shadow:0 1px 4px #2a1a1255}
+/* KIT MG-SKIN BUTTON PALETTES (KIT.md §MG-SKIN; owner OD 23/11 ~23:05Z real): the open mini-game frame carries data-mgpal (kg82SkinOn) = ONE of 5 palettes, built ONLY from kit
+   tokens (theme §1.1 + the seal lacquer of .kbtn; the lower stop is the same token shaded toward --ink): son (default = today's lacquer, unchanged) · ngoc (--good) · kim (--gold) ·
+   mac (--dim/--ink) · dao (--peony, dark ink text). Main buttons (.kbtn) take the ground; the cream buttons (.kgbtn, .btn, .kbtn.alt, quick buttons .kquick) keep the cream card and take the
+   palette rim. Canvas engines read the same colours with kitMgPal(). Contrast is tested (dev/test/kit-mgskin.js: text ≥ 4.5:1 on both stops, rim ≥ 3:1 on the card). */
+#kg82[data-mgpal]{--mgp-a:#b0402c;--mgp-b:#8a2a1e;--mgp-ink:#fff8e6;--mgp-rim:#6e1d12}
+#kg82[data-mgpal="ngoc"]{--mgp-a:var(--good,#2d7a52);--mgp-b:color-mix(in srgb,var(--good,#2d7a52) 72%,var(--ink,#2a1a12));--mgp-ink:#fff8e6;--mgp-rim:color-mix(in srgb,var(--good,#2d7a52) 60%,var(--ink,#2a1a12))}
+#kg82[data-mgpal="kim"]{--mgp-a:var(--gold,#8f5f0c);--mgp-b:color-mix(in srgb,var(--gold,#8f5f0c) 72%,var(--ink,#2a1a12));--mgp-ink:#fff8e6;--mgp-rim:color-mix(in srgb,var(--gold,#8f5f0c) 60%,var(--ink,#2a1a12))}
+#kg82[data-mgpal="mac"]{--mgp-a:var(--dim,#6b5643);--mgp-b:var(--ink,#2a1a12);--mgp-ink:#fff8e6;--mgp-rim:var(--ink,#2a1a12)}
+#kg82[data-mgpal="dao"]{--mgp-a:var(--peony,#e48aa4);--mgp-b:color-mix(in srgb,var(--peony,#e48aa4) 82%,var(--k-seal,#9a2c1c));--mgp-ink:var(--ink,#2a1a12);--mgp-rim:var(--k-seal,#9a2c1c)}
+#kg82[data-mgpal]:not([data-mgpal="son"]) .kbtn:not(.alt):not(.kdanger):not(.kquick){background:var(--mgp-a);background:linear-gradient(var(--mgp-a),var(--mgp-b));color:var(--mgp-ink);border-color:var(--mgp-rim)}
+#kg82[data-mgpal]:not([data-mgpal="son"]) .kbtn.alt,#kg82[data-mgpal]:not([data-mgpal="son"]) button.kquick,#kg82[data-mgpal]:not([data-mgpal="son"]) .kgbtn,#kg82[data-mgpal]:not([data-mgpal="son"]) .kgbox .btn{border-color:var(--mgp-rim)}.kgres{padding:0 14px 10px}
 .kgrow{display:flex;justify-content:space-between;gap:8px;align-items:center}.kgrow>b{flex:none;white-space:nowrap}.kgr .kpkb .krl{white-space:normal;max-width:9rem}
 /* K-GE-3 (review/kit-ge): a row whose LABEL is a title plate (.kdh, a wide nowrap pill) puts the plate on its own line above the value, at every width (same rule as the kt3 plate block of the title popups) */
 .kpkb .kr:has(>.krl>.kdh)>.krl{grid-column:1/-1;max-width:none;padding:.3rem 0 0;text-transform:none;letter-spacing:normal}
@@ -794,7 +808,7 @@ if(typeof kaTimeNeeds==="function"){kaTimeNeeds=function(c,bacCost,sucCost){cons
 /* "có thể gặp người" (Lĩnh đồ, j42 srvMeet: 25 % bị bắt nạt Sức -5, else quen một người mới if anyone is left) -> real ladder words */
 (function(){if(typeof srvCards!=="function")return;const c0=srvCards;srvCards=function(){const D=c0.apply(this,arguments);try{for(const a of D||[]){if(!a||!/có thể gặp người/.test(a.x||""))continue;
  let left=0;try{const m=srvM();left=allServ().filter(s=>ownerOf(s)!==m&&!S.srv.met.includes(s.sid)).length}catch(e){}
- a.x=a.x.replace(/có thể gặp người/,left?`quen một người mới: ${chanceW(75)}`:"không còn ai mới để quen")+` · kèm: bị bắt nạt, Sức -5: ${chanceW(25)}`}}catch(e){}return D}})();
+ a.x=a.x.replace(/có thể gặp người/,left?`quen một người mới: ${chanceW(100-SRVA.nvp.bully)}`:"không còn ai mới để quen")+` · kèm: bị bắt nạt, Sức ${balSg(BAL.rl.j42.sucSrvMeet)}: ${chanceW(SRVA.nvp.bully)}`}}catch(e){}return D}})();
 
 /* ---------- ACT ART SLOT (kit 6.1): square illustration left of every act card, rows right ----------
    Manifest img/ACTS.json {acts:{"<card title>|<slug>":"<key>"}, have:["act-cat-hoc-tap", ...]} -> img/act-<key>.webp;
@@ -1233,8 +1247,8 @@ function kitTgt(){try{if(typeof J78==="object"&&J78.cardV)return J78.cardV}catch
  D("poison",v=>v?[`nàng trúng độc · ${kpDeathWord(kpDeathP("poison",v),"nàng")}`,fail("poison")]:null);
  D("kpoison",v=>{const p=v&&kpDeathP("kpoison",v);return p==null?null:[`con nàng trúng độc · ${kpDeathWord(p,"con nàng")}`,fail("kpoison")]});
  D("pond",v=>v?[`con nàng rơi xuống hồ · ${kpDeathWord(kpDeathP("pond",v),"con nàng")}`,fail("pond")]:null);
- D("kframe",v=>{if(!v||typeof sonsOf!=="function")return null;const k=sonsOf(v).filter(k=>k.age>=6).sort((x,y)=>(+y.heir)-(+x.heir))[0];if(!k)return null;
-  return[`Hoàng thượng thương ${k.name} -35, Danh nàng -10, nàng bị phạt${k.heir?`, ${k.name} bị phế ngôi Thái tử`:""}`,fail("kframe")]});
+ D("kframe",v=>{if(!v||typeof sonsOf!=="function")return null;const k=sonsOf(v).filter(k=>k.age>=BAL.eff.j8.kframeAge).sort((x,y)=>(+y.heir)-(+x.heir))[0];if(!k)return null;
+  return[`Hoàng thượng thương ${k.name} ${balSg(-BAL.eff.j8.fondF)}, Danh nàng ${balSg(BAL.eff.j8.kframeDanh)}, nàng bị phạt${k.heir?`, ${k.name} bị phế ngôi Thái tử (Danh nàng thêm ${balSg(-BAL.kid.heirDanh)})`:""}`,fail("kframe")]});
  D("trip",v=>[`nàng vấp ngã: Danh nàng -3${v&&v.preg&&!v.hidden?` · nàng động thai: ${chanceW(25)}`:""}`,fail("trip")]);
  D("pushp",v=>[`nàng rơi xuống hồ sen: Sức nàng -25${v&&v.preg&&!v.hidden?` · nàng sảy thai: ${chanceW(60)}`:""}`,fail("pushp")]);
  if(typeof actLineRaw==="function"){const a0=actLineRaw;actLineRaw=function(k,w,c){let r=a0.apply(this,arguments);try{const CW=typeof caughtW==="function"?caughtW():null;if(CW&&String(r).includes(CW)){/* previews: caught */const v=kitTgt();const t=v&&kaCaughtTxt(v,k);r=String(r).split(CW).join(t||`kèm: bị người của nàng phát giác, nàng nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ`)}}catch(e){}return r}}})();

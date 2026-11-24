@@ -1,7 +1,7 @@
 /* palace-intrigue events: each is {id, ok (gate), pp (params, saved), b (builder from params)}; registered in PEND so a pending one survives reload */
 const EV=[];const EVI={};
 function ev(id,ok,pp,b){const e={id,ok,pp,b};EV.push(e);EVI[id]=e;PEND[id]=b}
-function mkEv(id){const e=EVI[id];if(!e)return null;const pp=e.pp?e.pp():{};if(pp===null)return null;S.seen=S.seen||{};S.seen[id]=S.turn;return mkP(id,pp)}
+function mkEv(id){const e=EVI[id];if(!e)return null;const pp=e.pp?e.pp():{};if(pp===null)return null;S.seen=S.seen||{};S.seen[id]=S.turn;const d=mkP(id,pp);if(d&&typeof nrMark==="function")nrMark("j7",id);/* ORDER THIN: cross-life memory */return d}
 function evFresh(e){const s=S.seen&&S.seen[e.id];return s==null||S.turn-s>=12}
 function freshEvents(){return EV.filter(e=>{try{return evFresh(e)&&e.ok()}catch(x){return false}})}
 const KID=n=>S.kids.find(k=>k.name===n&&k.alive)||null;
@@ -104,8 +104,8 @@ ev("comet",()=>S.year>=2,()=>{const X=rvWhy("omen");if(!X||!X.tgt)return null;co
  if(p.me)return{t:"Sao chổi quét ngang trời tây. Khâm Thiên giám tâu: âm khí xung từ cung của ngươi."+rvOmen(p),o:[
   {n:"Trai giới cầu đảo",fx:{suc:-15,duc:4,danh:2}},{n:"Mua chuộc Khâm Thiên giám",fx:{bac:-80},x:"lời tâu đổi hướng"},{n:"Cắn răng chịu tiếng",fx:{danh:-8,sung:-5}}]};
  return{who:pv(v),t:`Sao chổi hiện. Khâm Thiên giám tâu: ${v.name} mệnh khắc với long thể.<br>Nàng quỳ ngoài Dưỡng Hòa điện cả đêm.${rvOmen(p)}`,o:[
-  {n:"Đứng ra nói đỡ",fx:{duc:3,danh:-2},x:`${v.name} thiện cảm +25`,go:()=>{v.rel+=25}},
-  {n:"Đổ thêm dầu vào lửa",fx:{duc:-5},x:`${v.name} Sủng -15, thù -20`,go:()=>{v.sung=cl(v.sung-15,0,100);v.rel-=20}},
+  {n:"Đứng ra nói đỡ",fx:{duc:3,danh:-2},x:`${v.name} thiện cảm ${balSg(BAL.eff.j7.comet.rel)}`,go:()=>{v.rel+=BAL.eff.j7.comet.rel}},
+  {n:"Đổ thêm dầu vào lửa",fx:{duc:-5},x:`${v.name} Sủng ${balSg(BAL.eff.j7.comet.sung)}, thù ${balSg(BAL.eff.j7.comet.thu)}`,go:()=>{v.sung=cl(v.sung+BAL.eff.j7.comet.sung,0,100);v.rel+=BAL.eff.j7.comet.thu}},
   {n:"Im lặng",fx:{}}]}});
 ev("phoenix",()=>S.rank>=3&&S.rank<7,null,()=>({
  t:"Thầy tướng ở chùa Bảo Hoa phán: trong hậu cung có một người mệnh phượng hoàng, và chỉ vào cung ngươi.",o:[
@@ -141,9 +141,9 @@ ev("thbirthday",()=>!S.thDead&&mon(10),()=>({o:od(BAL.odb.j7.odO_11+S.tai/3+artO
 /* punishments */
 ev("caning",()=>qOn()&&liveRivals(false).length,()=>{const X=rvWhy("hhCane");return X&&X.tgt?{v:X.tgt.id,y:X.why}:null},p=>{const v=RV(p.v);if(!v)return null;return{who:pv(v),
  t:`Trước Càn Ninh cung, ${v.name} bị lột trâm, đánh hai mươi trượng vì tội bất kính. Hoàng hậu bắt các phi tần đứng xem.${p.y?`<br>Ai cũng biết Hoàng hậu ${p.y}.`:""}`,o:[
- {n:"Quỳ xin tha cho nàng",fx:{hh:-6,duc:3},x:`${v.name} thiện cảm +30`,go:()=>{v.rel+=30}},
+ {n:"Quỳ xin tha cho nàng",fx:{hh:-6,duc:3},x:`${v.name} thiện cảm ${balSg(BAL.eff.j7.cane.rel)}`,go:()=>{v.rel+=BAL.eff.j7.cane.rel}},
  {n:"Đứng xem, mặt không đổi sắc",fx:{tamco:2,duc:-2}},
- {n:"Thêm một lời buộc tội",fx:{hh:5,duc:-4},x:`${v.name} Sủng -10, thù -30`,go:()=>{v.sung=cl(v.sung-10,0,100);v.rel-=30}}]}});
+ {n:"Thêm một lời buộc tội",fx:{hh:5,duc:-4},x:`${v.name} Sủng ${balSg(BAL.eff.j7.cane.sung)}, thù ${balSg(BAL.eff.j7.cane.thu)}`,go:()=>{v.sung=cl(v.sung+BAL.eff.j7.cane.sung,0,100);v.rel+=BAL.eff.j7.cane.thu}}]}});
 ev("condemnedmaid",()=>true,()=>({o:od(BAL.odb.j7.odO_12+S.duc/2+(has("nhantu")?20:0))}),p=>({
  t:"Một cung nữ cung khác bị khép tội trộm, sắp bị đánh chết. Nàng gào tên ngươi khi bị lôi qua cửa.",o:[
  {n:"Quỳ xin tha",fx:{},x:`${word(p.o)} · thành: Đức ${balSg(BAL.eff.j7.ducGo)}, ${statTxt("mat",BAL.eff.j7.matGo_3)} · bại: Sủng ${balSg(BAL.eff.j7.sungGo_8)}`,go:()=>apply(roll(p.o)?{duc:BAL.eff.j7.ducGo,danh:2,mat:BAL.eff.j7.matGo_3}:{sung:BAL.eff.j7.sungGo_8})},
