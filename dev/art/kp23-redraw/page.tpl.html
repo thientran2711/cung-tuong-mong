@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="vi"><head><meta charset="utf-8"><meta http-equiv="Cache-Control" content="no-cache"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Vẽ lại tranh KP23</title><!-- D1-KP23RD -->
 <style>
 :root{--bg:#1d1613;--card:#2b211c;--tx:#f3e6d3;--mut:#b9a58c;--gold:#e0b25a;--ok:#4caf6a;--no:#c0563f}
@@ -24,17 +24,17 @@ button.s{background:#4a382c;color:var(--tx)}
 <span>Đã chọn: <span id="cnt">0</span>/{N}</span><button id="send">Gửi lựa chọn</button><button class="s" id="clr">Xoá hết</button></header>
 <main id="m"></main><div id="msg"></div>
 <script>
-const B='https://ctm-img.victoria-tntt.workers.dev/img/',ROWS=/*ROWS*/[],LS='kp23-redraw-picks';
+const V='{V}',B='https://ctm-img.victoria-tntt.workers.dev/img/',ROWS=/*ROWS*/[],LS='kp23-redraw-picks';
 let P={};try{P=JSON.parse(localStorage.getItem(LS)||'{}')}catch(e){}
 const save=()=>{try{localStorage.setItem(LS,JSON.stringify(P))}catch(e){}};
 const m=document.getElementById('m');
 function pic(cap,src,orig){const f=document.createElement('figure');f.className='pic';f.innerHTML='<figcaption></figcaption><img loading="lazy" decoding="async" alt="">';
  f.firstChild.textContent=cap;const i=f.querySelector('img');i.src=src;i.onclick=()=>window.open(orig,'_blank');return f}
-ROWS.forEach(([k,n,note])=>{const r=document.createElement('div');r.className='row';
+ROWS.forEach(([k,n,note,old])=>{const r=document.createElement('div');r.className='row';
  const t=document.createElement('div');t.className='nm';t.textContent=n;const sm=document.createElement('small');sm.textContent=k;t.append(sm);r.append(t);
  if(note){const x=document.createElement('div');x.className='nt';x.textContent=note;r.append(x)}
  const p=document.createElement('div');p.className='pair';
- p.append(pic('Cũ',B+'act-'+k+'-h.webp',B+'act-'+k+'-h.webp'),pic('Mới',B+'_review/kp23-redraw/'+k+'.webp',B+'_review/kp23-redraw/'+k+'-orig.webp'));r.append(p);
+ p.append(pic('Cũ',B+old,B+old),pic('Mới',B+'_review/kp23-redraw/'+k+'.webp?v='+V,B+'_review/kp23-redraw/'+k+'-orig.webp?v='+V));r.append(p);
  const c=document.createElement('div');c.className='ch';
  [['giu','Giữ','k'],['ve-lai','Vẽ lại','r']].forEach(([v,lab,cl])=>{const l=document.createElement('label');l.className=cl;l.innerHTML='<input type="checkbox"><span></span>';
   l.querySelector('span').textContent=lab;const i=l.querySelector('input');i.checked=P[k]===v;l.classList.toggle('on',i.checked);

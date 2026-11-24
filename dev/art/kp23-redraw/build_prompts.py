@@ -37,6 +37,17 @@ CAST = {
  "guard": "THE GUARDS = palace guards in light lamellar armour with helmets.",
  "doc": "THE IMPERIAL PHYSICIAN = a middle-aged man with a short neat beard in a muted teal official robe and black official hat.",
 }
+CAST.update({
+ "mama": "THE HEAD MATRON (ma ma) = a stern middle-aged woman in a neat brown palace robe, hair in a tidy bun.",
+ "prince": "THE PRINCE (vương gia) = a handsome adult man in a royal-yellow prince's robe with wide sleeves and a small gold crown on his topknot.",
+ "child": "THE CHILD = her small child of about five, sweet round face, in a little embroidered silk robe.",
+ "midwife": "THE MIDWIFE = a kind capable woman of about forty in a plain neat indigo robe, carrying a wooden medicine chest.",
+ "tutor": "THE TUTOR = a middle-aged scholar in a plain blue-green scholar's robe and soft black cap.",
+ "pri": "SHE (the main character) = a foreign princess from a southern kingdom, beautiful young adult, in an elegant silk robe of her homeland with silver ornaments in her hair.",
+ "cook": "THE COOK = a stout imperial cook in a white apron over a brown robe.",
+ "rider": "THE OFFICIAL = a dignified middle-aged military official in a dark travelling robe and wide-brimmed hat.",
+ "plain": "SHE (the main character) = a young adult deposed consort in a plain undyed pale robe, hair simply pinned with one wooden hairpin, still beautiful.",
+})
 # key: (main, [cast], scene)
 S = {
 "bao-cho": ("phi",["phi"],"In a covered palace corridor, she leans close to another consort and whispers a secret, one hand pointing discreetly off to the side; both faces close and visible, hers serious and urgent, the other consort surprised and listening."),
@@ -92,15 +103,78 @@ S = {
 "xin-ht-tra-xet": ("phi",["phi","emp","guard"],"In the hall the consort kneels close to the viewer, asking the Emperor to investigate, face determined; the Emperor, seated on the throne FACING THE VIEWER, listens gravely; guards stand on both sides."),
 "xin-th-do-loi": ("phi",["phi","th"],"The consort kneels at the feet of the Empress Dowager, who holds her hand kindly; both close to the viewer, the consort's face tearful and pleading, the Empress Dowager's compassionate."),
 }
+
+S2 = {
+"an-cu-duoc-lat": ("phi",["phi","eun"],"Before her family ancestral altar with incense smoke, a eunuch reads aloud a golden imperial edict scroll (blank, no writing visible); she kneels close to the viewer, face lifted, tears of relief and joy in her eyes as her old case is overturned."),
+"ban-hon-con": ("phi",["phi","eun"],"A eunuch reads an imperial marriage edict (scroll, no visible writing); she stands close to the viewer beside her grown daughter of about eighteen in a pink robe, both bowing their heads respectfully, the mother's face proud and moved."),
+"bi-bat-buon-lau": ("maid",["maid","guard"],"At a palace gate a guard holds up a bundle of smuggled silk; the palace maid stands close to the viewer with head bowed, face pale and frightened, eyes darting up to the guard."),
+"bi-day-xuong-ho": ("phi",["phi","eun","maid"],"At the edge of a lotus pond, a eunuch and palace maids pull her out of the water onto the stone bank; she is close to the viewer, soaked hair and robe clinging, coughing slightly, face shocked and pale; maids anxious beside her."),
+"bi-giang": ("phi",["phi","eun"],"A eunuch reads a demotion edict; she stands close to the viewer, sadly removing a gold hairpin from her hair and laying it on a tray he holds, face composed but hurt."),
+"bi-quan-su-bat-gap": ("maid",["maid","mama"],"Behind a stack of wooden washbasins, the palace maid sitting to rest jumps up startled, close to the viewer; the head matron stands over her, hands on hips, frowning."),
+"bo-bac-chuoc": ("phi",["phi","eun","maid"],"At the gate of the palace punishment office, she hands a pouch of silver to a eunuch official, close to the viewer, face determined; beside her a released palace maid in rumpled clothes looks at her with grateful tears."),
+"bo-mac": ("phi",["phi"],"She closes a lattice window with one hand, close to the viewer, turning her face away from what is outside with a cold, hurt expression."),
+"cach-chuc-bien-ai": ("rider",["rider"],"A dismissed official in a wide-brimmed hat, close to the viewer, mounts his horse at the frontier pass gate, looking back toward the capital with a bitter, resigned face; dusty frontier wall behind."),
+"cai-ba-do": ("midwife",["midwife","maid"],"The middle-aged midwife carrying her wooden chest steps through the gate of the pregnant consort's palace, close to the viewer, face calm and capable; a palace maid greets and guides her in."),
+"cat-giu-con-tin": ("phi",["phi"],"At her dressing table she places a folded love letter into a small locked jewellery box, close to the viewer, face secretive and tender, glancing aside to check no one is watching."),
+"chai-chuot-nhan-sac": ("phi",["phi","maid"],"Before a bronze mirror, the palace maid combs her mistress's long hair with a jade comb; the consort sits close to the viewer, face serene and beautiful, her reflection in the mirror; the maid smiles behind her, face visible."),
+"chep-kinh": ("plain",["plain"],"In the cold palace by a small oil lamp, she copies sutras with a brush, close to the viewer, face calm and sorrowful; paper on the desk with blurred illegible strokes, no readable characters."),
+"chi-huy-dap-lua": ("phi",["phi","eun"],"At night, she stands close to the viewer pointing and commanding, face urgent and brave; behind her eunuchs and maids carry water buckets toward a palace roof with orange fire glow."),
+"chung-cu-bi-huy": ("eun",["eun"],"A eunuch stands close to the viewer watching a bundle of documents burn in a bronze brazier, firelight on his face, sly and satisfied."),
+"gai-ngua-yen-tiec": ("phi",["phi"],"At a banquet she rises from her seat, close to the viewer, pulling her sleeve down over her wrist with an uncomfortable, embarrassed face; guests at the tables behind glance at her."),
+"giau-trong-ruong": ("maid",["maid"],"The palace maid kneels at an open clothes chest, close to the viewer, secretly pushing a small wrapped bundle under the folded robes, glancing nervously back toward the door."),
+"gui-bac-chua-benh": ("maid",["maid"],"The palace maid wraps silver pieces in a handkerchief to send home for her sick mother, close to the viewer, face worried and tender, eyes moist."),
+"hau-benh-ca-thang": ("phi",["phi","th"],"She sits at the bedside of the ill Empress Dowager, close to the viewer, feeding her medicine with a porcelain spoon, face gentle and attentive; the Empress Dowager, propped on pillows, looks at her gratefully."),
+"hop-muu-lo": ("hh",["hh","phi"],"The Empress, seated close to the viewer, looks down coldly at a tray of evidence; three consorts kneel before her in three-quarter view, faces frightened and pale."),
+"ke-la-vao-phong": ("maid",["maid"],"Night: the palace maid hides behind a pillar, close to the viewer, hand over her chest, wide alarmed eyes, watching a man in a dark robe (face visible in the lantern light) sneak open the door of her mistress's room."),
+"ke-toi": ("phi",["phi","th"],"She speaks to the Empress Dowager, close to the viewer, listing someone's wrongdoings with an earnest, indignant face; the Empress Dowager, seated, listens with a stern frown."),
+"khong-chiu-dua-bac": ("phi",["phi"],"She tears a threatening letter in two, close to the viewer, face defiant and angry, refusing to pay."),
+"kiem-tra-ruong": ("maid",["maid","phi"],"The palace maid lifts a strange object (a small cloth packet) from the bottom of a clothes chest, close to the viewer, face puzzled and alarmed; her mistress beside her stares at it suspiciously."),
+"lam-ngo": ("phi",["phi"],"She walks along a garden path holding a round silk fan, close to the viewer, face cool and composed, eyes deliberately straight ahead, ignoring a quarrel happening softly in the background."),
+"lao-vao-cuu": ("phi",["phi","maid"],"She supports a coughing palace maid out of a smoky burning hall, both close to the viewer and facing us, soot on their sleeves, her face brave and determined, the maid's face weak and grateful. No injuries."),
+"loi-don-khong-ai-tin": ("maid",["maid"],"A palace maid who spread a rumour stands alone, close to the viewer, embarrassed and flustered; behind her two other maids shake their heads, laughing, and walk off sideways, faces visible."),
+"mach": ("phi",["phi"],"She whispers to another consort behind a raised hand, close to the viewer, about the scheme of a third person, face knowing and serious; the other consort listens, eyes widening."),
+"mach-hh": ("phi",["phi","hh"],"She whispers to the Empress, close to the viewer, pointing discreetly at two consorts quarrelling in the background; the Empress listens with a raised eyebrow."),
+"nho-tra-an": ("phi",["phi","maid"],"She sits in her chamber, close to the viewer, face warm and gracious; a former palace maid she once helped bows her head and curtsies before her, promising to repay the kindness, face sincere."),
+"o-yen-nghi": ("phi",["phi"],"New Year: she sits beside a brazier in her warm chamber reading a book, close to the viewer, face peaceful and content; red couplet banners by the door outside (plain red, no writing)."),
+"pha-hoc-lo": ("tutor",["tutor","eun"],"At a back door, the tutor accepts a pouch of silver from a eunuch, close to the viewer, face guilty and greedy; a schoolbook falls from his sleeve."),
+"quy-xin-tha-cho-nang": ("phi",["phi","hh"],"She kneels before the Empress, close to the viewer, hands joined, pleading for another consort being punished, face anxious and sincere; the Empress, seated, considers coldly."),
+"tha-den-cau-con": ("phi",["phi"],"At a lake at dusk, she kneels close to the viewer and gently sets a red paper lantern on the water, praying for a child, face hopeful and tender, lantern light on her face."),
+"tha-den-cau-sieu": ("phi",["phi"],"On a river bank at night during the Vu Lan festival, she releases a lotus-shaped lantern onto the water, close to the viewer, face sorrowful and prayerful, soft candlelight."),
+"thai-hau-quo-trach": ("th",["th","phi"],"The Empress Dowager, seated close to the viewer, scolds sternly with a severe face, one hand raised; the consort kneels before her with head bowed, face ashamed, still visible."),
+"thai-y-khong-thay-la": ("doc",["doc","phi"],"The imperial physician shakes his head and hands back an open box with an object, close to the viewer, face calm and reassuring; the consort receives it, relieved but doubtful."),
+"them-loi-buoc-toi": ("phi",["phi","hh"],"She points and adds accusations before the Empress, close to the viewer, face sharp and cold; the Empress, seated, listens; an accused woman kneels in the middle ground, face pale."),
+"theo-cha-muu": ("phi",["phi"],"By a candle, she reads a secret letter from her father, close to the viewer, then holds its corner to the flame, face grave and resolved."),
+"theu-khan-ban-lc": ("plain",["plain"],"In the cold palace by a lattice window, she embroiders a handkerchief, close to the viewer, face quiet and patient, soft daylight on her face."),
+"tich-thu-co-co": ("phi",["phi","eun"],"The Empress's eunuch takes away her jewellery box, close to the viewer; she stands watching, face suppressing anger and humiliation."),
+"tich-thu-vo-co": ("maid",["maid","eun"],"A eunuch wrenches a jewellery box from the palace maid's hands; she is close to the viewer, holding on, face indignant and frightened."),
+"tim-chung-cu-cha": ("phi",["phi"],"In an archive of shelves and old document boxes, she searches through old files, close to the viewer, holding up a yellowed letter from her father, face intent and hopeful."),
+"tim-chung-cu-minh-oan": ("plain",["plain"],"In the cold palace she kneels at an old chest searching through handwritten letters, close to the viewer, face determined and hopeful."),
+"tim-thay-hinh-nhan": ("eun",["eun","phi","maid"],"A eunuch pulls a cloth voodoo doll from under a bed, close to the viewer, face triumphant; the consort and maids beside him recoil in shock, faces visible."),
+"to-giac-truoc-hh": ("phi",["phi","hh"],"She kneels close to the viewer presenting evidence on a tray to the Empress, who sits on her phoenix chair close behind, leaning forward, face attentive and stern."),
+"to-loi-voi-chu": ("maid",["maid","phi"],"The palace maid reports to her mistress, close to the viewer, pointing toward another maid dozing in the corner, face eager; the mistress looks over with a raised eyebrow."),
+"tra-ke-phong-hoa": ("eun",["eun"],"A eunuch investigator crouches close to the viewer, holding a lantern over a scorched oil stain on a wooden floor, face sharp and suspicious, turned three-quarter toward us."),
+"trai-gioi": ("phi",["phi"],"She kneels in white robes before an altar with an incense burner, praying for rain, close to the viewer, eyes closed gently in devotion, face serene, cloudy sky behind."),
+"trinh-len-ht": ("phi",["phi","emp"],"She kneels close to the viewer and raises a sealed letter with both hands toward the Emperor; the Emperor, seated on the throne FACING THE VIEWER, reaches for it with a serious face."),
+"trung-co-quoc": ("pri",["pri"],"She stands at a window looking south, close to the viewer, holding a jade pendant from her homeland, face homesick and wistful, turned three-quarter toward us."),
+"tui-ngai": ("phi",["phi","child"],"Dragon Boat Festival: she kneels close to the viewer, tying a festive five-colour silk cord around her small child's wrist, a sprig of mugwort on the table beside them, face loving; the child smiles up at her."),
+"vao-lanh-cung": ("plain",["plain","eun"],"At the old gate of the cold palace, she steps in carrying a small cloth bundle, close to the viewer, face numb and sorrowful; a eunuch holds the creaking gate open."),
+"vuong-gia-quo-trach": ("emp",["emp","prince"],"The Emperor, standing close to the viewer in a courtyard, rebukes a prince who bows his head before him; the Emperor's face stern and angry, the prince's chastened, both visible."),
+"khap-cung-don": ("maid",["maid"],"In a palace corridor, palace maids huddle together whispering, close to the viewer, faces curious and gossipy, glancing sideways toward another palace."),
+}
 U = json.load(open(os.path.join(H, "unticked.json")))
-assert sorted(U) == sorted(S), set(U) ^ set(S)
+SW = json.load(open(os.path.join(H, "sweep.json")))
+SWK = [k for k, v in SW.items() if v.get("verdict") in ("FAR", "BLUR", "BACK")]
+assert sorted(SWK) == sorted(S2), set(SWK) ^ set(S2)
+OLD = {k: "act-" + k + "-h.webp" for k in U}; OLD.update({k: SW[k]["pic"] for k in SWK})
+S.update(S2)
+assert not set(U) & set(SWK)
 out = {"style_block": STYLE, "camera_block": CAMERA, "negative_block": NEG, "cast": CAST, "settings": "Magnific gpt-2-6, 2k, aspect 3:4, folder KP23-redraw-L2424", "prompts": {}}
 os.makedirs(os.path.join(H, "txt"), exist_ok=True)
-for k in U:
+for k in U + SWK:
     main, cast, scene = S[k]
     castlines = " ".join(CAST[c] for c in cast)
     p = f"{MASTER}\n{EXTRA}\n{STYLE}\n{CAMERA}\nCAST: {castlines}\nSCENE ({k}): {scene}\n{NEG}"
-    out["prompts"][k] = {"main": main, "cast": cast, "scene": scene, "prompt": p}
+    out["prompts"][k] = {"group": "unticked52" if k in U else "sweep55", "old": OLD[k], "main": main, "cast": cast, "scene": scene, "prompt": p}
     open(os.path.join(H, "txt", k + ".txt"), "w").write(p)
 json.dump(out, open(os.path.join(H, "prompts.json"), "w"), ensure_ascii=False, indent=1)
 print(len(out["prompts"]), "prompts; max chars", max(len(v["prompt"]) for v in out["prompts"].values()))
