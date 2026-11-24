@@ -49,10 +49,17 @@ const {chromium}=require('playwright');const D=require('./lib/device');
   const we=wn[wn.length-1];F(we&&we.mo==="dongmai"&&ilWhere(we)!=null,"NPC portrait not traced");out.T.npc=we?{who:w.name,mo:we.mo,where:ilWhere(we)}:null;
   /* 8 CAP: once per moment a year, at most capY a year */
   F(!moFree(S,"dongmai",S.year),"same moment twice a year");const H={moY:{a:S.year,b:S.year}};F(!moFree(H,"c",S.year)===(B.capY<=2),"cap not enforced");F(moFree(S,"dongmai",S.year+1),"next year blocked");
+  /* 10 FESTIVAL WORK ORDER: Thượng Nguyên tuần, tối → the schedule (jmen) puts the Họa sư at the feast; other buổi it does not */
+  {const m0=S.month,t0=S.tuan,b0=S.buoi;S.month=1;S.tuan=1;Q.length=0;S.place="home";const fo={};for(const bb of [0,3]){S.buoi=bb;placeWhere();fo["b"+bb]=(S.menW||{})[pt.id]||"";}
+   out.T.festOrder=Object.assign(fo,{why:(S.menWhy||{})[pt.id],open:moOpen("vuon",SEASON[0],3,"nguyentieu")});F(fo.b3==="vuon"&&out.T.festOrder.open.includes("nguyentieu"),"no festival work order at the feast");
+   F(!moOpen("vuon",SEASON[0],0,"nguyentieu").includes("nguyentieu"),"festival moment open at the wrong buổi");S.month=m0;S.tuan=t0;S.buoi=b0;Q.length=0}
   /* 7 PROMOTION (her + NPC) */
   const pr={};for(const who of [S,w]){who.moY={};const k0=who===S?S.rank:w.rank;const old=promoReqP;window.promoReqP=()=>[[true]];promoReqP=window.promoReqP;lo();try{promoteP(who)}catch(x){out.fail.push("promoteP threw "+x.message)}back();promoReqP=old;window.promoReqP=old;
    pr[who===S?"me":"npc"]=(who.inv||[]).some(x=>x.k==="chandung"&&x.mo==="sacphong")}
   out.T.promo=pr;F(pr.me&&pr.npc,"promotion portrait missing "+JSON.stringify(pr));
+  /* bag tiles: each painting its own tile with a picture (no ×N stack) */
+  {const a1=moGrant(S,"thucuc","test"),a2=moGrant(S,"xuandao","test");const T=kinvItems().filter(x=>x.g&&x.g.k==="chandung");
+   out.T.bag=T.map(x=>[x.name,x.grade,x.qty,!!x.src]);F(T.length>=2&&T.every(x=>x.qty===1&&x.src&&/Tranh «/.test(x.name)),"bag tiles stacked or blank")}
   /* gallery rows */
   const gb=moBookHTML();F(/Khoảnh khắc chân dung/.test(gb)&&/class="/.test(gb),"no gallery rows");
   /* 9 OLD SAVE: a life without moY / moBusy */
