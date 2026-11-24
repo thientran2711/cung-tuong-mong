@@ -1560,3 +1560,9 @@ selection-scene faults 2-11 + perf | review/selection-scene | session_01V1ZZH1gd
 | ROBOT-COOP FIXER #7 (opus; law1-maid-away gate, coop-tail N1–N3, save round-trip family) | review/law1-maid-away, review/robot-coop-tail, review/robot10-coop | B | session_01N1tNP3fqMhAjzz59xaXXqg | RUNNING | 24/11 20:28Z |
 save-growth (d)+(b) | review/save-growth | session_01DgYSWn2jD6dN6G4v5qkFaf | RUNNING | 24/11 20:58Z | FOREMAN E (child7)
 | KIT REVIEW kit-woodskin r4 35d57ca + kit-album 716310c (sonnet) | review/kit-woodskin-r3, review/kit-album-r1 | B | session_01N1tNP5YUQmH9jDHwiUYY7g | RUNNING | 24/11 20:43Z |
+face-master03 Alluring (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-alluring.md | session_01D3E3NZd7bPaP9p5vL5dyKi | RUNNING | 24/11 21:29Z | FOREMAN D
+face-master03 Cold (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-cold.md | session_01D3E3NYEF9kwi8NEyWrcbuf | RUNNING | 24/11 21:29Z | FOREMAN D
+face-master03 Dignified (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-dignified.md | session_01D3E3NaHn3EfaM7zRmQbD31 | RUNNING | 24/11 21:29Z | FOREMAN D
+face-master03 Gentle (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-gentle.md | session_01D3E3NZzg95uS8CmypjuBFk | RUNNING | 24/11 21:29Z | FOREMAN D
+face-master03 Proud (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-proud.md | session_01D3E3NZBMJvJ42NGMXAhPWA | RUNNING | 24/11 21:29Z | FOREMAN D
+face-master03 Sharp (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-sharp.md | session_01D3E3NaxuWFpancQEoeisKM | RUNNING | 24/11 21:29Z | FOREMAN D

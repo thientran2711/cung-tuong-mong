@@ -403,3 +403,15 @@ Hourly trigger trig_015ehYNQjF7QrsBrN4NQQMnZ DELETED by depth 5 at rollover; chi
 - FROM MAIN 127 (22:10Z): kit keeper is now KK23 = session_01V1ZZH1KoYXmmTrxQq1bQXr.
 - FROM MAIN 127 (22:15Z): correction — kit keeper is KK23b = session_01V1ZZH1TB4HHX715uHrEXGz (KK23 could not get repo access).
 - (24/11 21:32Z) D6: OWNER DIRECT ORDER — face portraits 90 people (package face-master03, brief briefs/D-face-master03-mass.md): run ages 16/26/51/63 now by WORKERS (owner: 'mày mở thợ ra mà làm'); age 39 WAITS for owner (prompts > 10 000 chars). 6 sonnet workers, one per family, opening now. Sharp-16 m09/c05/c06/c11/s40 already done by D6 (test approved).
+## HANDOVER D depth 6 (01D3E3NbTM2Si5jCqsafGv2S) → D child (depth 7) (24/11 21:35Z; START_CTX ≈ 8 %, context 41.7 % → over roll line; rolling over)
+MAIN = CHÍNH 127 session_01V1ZZH4Dz8sCyYc7mCxjmAH · LANDER = LC12 session_01V1ZZH2p2x7oNCrRuTq7RjF (other account → write «FOR MAIN 127 / LC12» lines here). LIVE main 502c48c9 (last checked 20:44Z).
+OPEN SEATS:
+| session | job | next |
+|---|---|---|
+| session_01D3E3Na1itJyTLYhXYvK1Zr | REMERGE seat, TRAIN DONE, idle (no polling) | when LIVE moves off 502c48c9 → send_message «LIVE moved to <sha>, re-merge the rest» of: d-followups-1-rv 563d336b · law1-gifts-rv 68f9fb63 · palace-distance-rv 93be6058 · robot10-nc-fix-4-rv 5fbd683d (rebuild-only merges); all landed → archive |
+| face-master03 ×6 (sonnet): Alluring 01D3E3NZd7bPaP9p5vL5dyKi · Cold 01D3E3NYEF9kwi8NEyWrcbuf · Dignified 01D3E3NaHn3EfaM7zRmQbD31 · Gentle 01D3E3NZzg95uS8CmypjuBFk · Proud 01D3E3NZBMJvJ42NGMXAhPWA · Sharp 01D3E3NaxuWFpancQEoeisKM | OWNER DIRECT ORDER: face portraits, brief briefs/D-face-master03-mass.md, ages 16/26/51/63 (≈351 gens × 135 cr ≈ 47 400 cr) | each reports via reports/face-master03-<family>.md + send_message; check NEEDS_REVIEW lists; show the owner the contact sheets (both families' CDN sheet links) in short Vietnamese; worker rolls over → D opens successor from its report handover; archive when done |
+OWNER RULINGS today (face job, record verbatim if asked): no caption on art; 135 cr = gpt-2-6 2K; MASTER-SKIN03 package approved after 5-face test; only the INPUT operator sentence may be cut (10 000-char Magnific limit); AGE 39 = WAIT ("khoan làm, không làm gì hết") — all six age-39 prompts are 10 308–10 644 chars after the cut: ask her (cut more text vs ChatGPT re-export) only when the four ages are done. Lesson (owner angry 21:30Z): ASK before doing, and big jobs go to WORKERS, never the foreman itself.
+Local files from D6 (container-only, lost on reset): face_sharp16/ test images; Magnific keeps all creations.
+OPEN OWNER QUESTION (still unanswered): đăng cơ đại lễ inside 27-month quốc tang → D recommends defer to the first month after mourning; B skip.
+FOLLOW-UPS (no seat): net-build band-3 harm share ≤30 %; servant-trust ring UI waits owner design; ART REQUEST Phân cung picture → Foreman C via MAIN.
+Push recipe /home/user/wt/dpush2.sh (per container; text in HANDOVER D depth 3 block). Hourly trigger trig_01KLKH1LbFcyuvwsr57xX7Fi DELETED at rollover; child makes its own (:37).
