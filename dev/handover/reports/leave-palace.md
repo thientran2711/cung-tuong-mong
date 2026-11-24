@@ -194,3 +194,12 @@ Old saves: a life already in lãnh cung for «Bị bỏ quên» keeps its releas
 - End card of a life that ended at home before entry (jkc, old saves too): rows «Sống trong cung / Phẩm cao nhất / Con cái» were wrong (she never entered) → j32 shows only Thân phận + Kết cục (+ «Về sau» rows). This also makes the iPad card fit (the XL info column is overflow:clip, law 10; it clipped «Kết cục / Người ấy / Về sau»).
 - Fit test dev/test/leave-palace-fit.js: 24 Trả thẻ bài endings × Fold 755x1000 + iPad 1180x820, .k3right and #mb never overflow.
 - dsDan fate line lower-cases the crime after «vì».
+
+## CHECKS (E64b, final sha 5ae10d0a on review/leave-palace; build = 6ec939d1, 5ae10d0a only fixes a test check)
+- leave-palace.test.js 125/125 ok (5ae10d0a) — table, real paths, all Đại kết cục summits, variety, no-confirm family, Trả thẻ bài (new/old save), P1/P2/P3.
+- leave-palace-fit.js: 24 Trả thẻ bài endings × Fold + iPad, 0 overflow.
+- quickcheck PASS (6ec939d1): core gates PASS, old save ok, perf ok. (An earlier run FAILED G4 npc-purpose-scan: the j8 nhân từ row's done-text — updated in dev/test/npc-purpose-rows.json, c7704762.)
+- role-parity ×2 ALL PASS (6ec939d1).
+- coop-e2e: not run — no co-op file touched (j32 over() wrappers in jcoopworld unchanged; S.thatS / S.kc.lv are per-life state).
+- Shots (looked at all 8): dev/handover/shots/leave-palace/e64b-{fold,ipad}-{kc_ga,kc_tu,dan,lc_xg}.webp — Trả thẻ bài gả + xuất gia, treason → phế làm thứ dân, lãnh cung xuất gia with no confirm. Text whole, no clip, both devices.
+- OPEN for MAIN (not built): the kc end card still says «Tiểu thư ngoài cung» in its own line; j70 «lúc nàng thất sủng» word reads Sủng < 25 (not S.thatS) — left as is.
