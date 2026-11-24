@@ -37,3 +37,25 @@ Fold 755x1000 night r3 and iPad 1180x820 night r3 screenshots after the fix: Tr�
 - Not touched: OD 93 sizes, kit, VANPHONG words.
 
 ~100% xong / ~100% chơi được cho lỗi này.
+
+## R2 — fix of REVIEW FAIL (branch `review/map-label-overlap` @ a7bf3e01, on top of reviewer merge 6e2bb041)
+
+PRIORITY #1 CHECK: unchanged (same shared solver `kmSolve`/`mapFit`, dev/build/j38.js; no new feature; review/map-label-overlap-r read).
+
+### Findings answered
+1. **DOM overlap while `__mapSolve.hard=0` (solver/DOM mismatch) — ACCEPTED, 3 causes found and fixed in the shared fit, not per place.** The solver measures every tag once; things that change a tag's size/position AFTER that measure leave the DOM different from the solution:
+   - the rank-title painter (`kitRankPaint`, j79, a rAF MutationObserver) wraps a title inside a place name («Thượng thư» phòng → `b.kname>.kti`); inside the column-flex `.mlab` that turns one line into 3 (117×41 → 74×54), 9 ms after the fit;
+   - the map frame (`.mapw`) changing size with no change of the scroll box (columns/picture/fonts settling);
+   - any other late layout shift (found at 1180x820 night rank 0, first case after boot: every tag 3–42 px off its solved place, solver `hard=0`).
+   Fix: (a) MutationObserver on text/children inside `.mlab/.mmeta` → one debounced re-fit; (b) ResizeObserver on `.mapw` → re-fit when its size is not the size the last fit measured; (c) **settle check** 250 ms after every fit: each tag is compared with where the solver expects it (`window.__mapVer`), the median shift (plain scroll) removed; any tag off by > 3 px → fit again (max 4 in a row per map). Caps stop loops; own edits (class, translate, `.mlead`) are outside the observers.
+2. **`Trường Môn viện | Hàm An` still once on the phone — ACCEPTED, fixed.** On the phone (map zoom 2.6, tags 130–227 px wide over 36–70 px buildings) with the TRUE (painted) geometry the normal stages fail in ~23 of 24 cases; RX alone was not enough (its limits: leaders ≤ 90, tags may not touch the visible edge, 300 px radius). Stages now: RX1 leader dot/line near a tag = small cost, leaders ≤ 90 px, protected tags movable; RX2 leaders ≤ 200 px, a tag cut by the visible edge costs a little (she pans); RX3 only tag boxes count, search radius 600 px, any leader. Budget 800 ms per RX stage, run only in the final (viewport) pass.
+3. **Rerun 3× at all 4 sizes → 0 each time — DONE**: 3 runs × 4 sizes (755x1000, 1180x820, 1366x1024, 390x844) × (5 ranks × day/night × 5 zoom steps + 10 courtyards) = **720 cases, 0 overlaps, 0 page errors** (4 browsers in parallel = harsher timing than one). Test now waits 800 ms for the map to settle before measuring and has `DUMP=file` (failing layouts incl. solver items + DOM boxes), `DUMPALL`, `REP=n`.
+
+### Cost / performance
+- Solution cache keeps 8 layouts (was 1: every fit solved twice); the interim no-viewport pass skips the RX stages. Phone first-open solve: ms 1.7–2.0 s (baseline 2.2 s), iPad rank ≥3 0.7–1.7 s (RX stage), Fold 30–370 ms.
+
+### Side effect to know (honest)
+- On the PHONE night rank 3 the older `map-labels-scan.js` quality rules (leader through another tag / dot within 16 px / leader > 92 px) can now FAIL (e.g. `home>r5` one leader through a tag, 94 px): the old solver "passed" there only because it measured the layout before the painter changed the tag widths. Zero tag-box overlap is guaranteed; leader polish on the phone in the last-resort case is the cost. Phone is not a priority device (law 12). Fold 755x1000 and iPad 1180x820: existing scan rank 2,3,5 day/night + courtyards **12/12 PASS** after the change; iPad Pro: PASS earlier in R1, no change in kind.
+- Screenshots looked (Fold + iPad night rank 3): all tags separate, same size, readable.
+
+~100% xong / ~100% chơi được cho lỗi này (chờ reviewer).
