@@ -13,4 +13,7 @@ async function waitOut(p,o){const max=(o&&o.max)||9000;await p.waitForTimeout(25
  await p.evaluate(()=>{const w=document.getElementById('kroulw');if(w)w.remove()}).catch(()=>{});
  /* the veil is followed by the REAL origin roulette (#kroul, skipped by the test's .krskip clicker): wait for both to be gone */
  await p.waitForFunction(()=>!document.getElementById('kroulw')&&!document.getElementById('kroul'),null,{timeout:max}).catch(()=>{});await p.waitForTimeout(150)}
-module.exports={guard,waitOut,INIT};
+/* the game auto-switches to «Hiệu ứng: Gọn» (OPT.fxon=false) on a weak/slow device (headless Chromium under load): kitTypeLine / kscnCalm then finish at once and tap counts change.
+   fxFull(page) keeps OPT.fxon true (re-asserted every 200 ms) so a test that needs the full effects never races the auto-Gọn switch. */
+async function fxFull(p){await p.evaluate(()=>{const f=()=>{try{if(typeof OPT!=='undefined')OPT.fxon=true}catch(e){}};f();if(!window.__fxFull)window.__fxFull=setInterval(f,200)})}
+module.exports={guard,waitOut,fxFull,INIT};
