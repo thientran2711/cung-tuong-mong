@@ -6,3 +6,10 @@ Harness 1e85205d, SEED=1 SWAP=1, run file coop-20261124-0823-p7-8-s.json (same d
 - Guest lives are not ending or not being detected as ended (game bug or harness bug — undecided). Related rows in the main file: stuck (no room week step in 240 s, 6 hits), js «[guest fold] Cannot read properties of undefined (reading 'off')».
 - Effect: pair 7 cannot reach 10 guest kiếp; pair 8 not started.
 - Waiting for Foreman F #3 (session_01UV1Szh65j3XesUF1y6Hq5g) to decide cap/skip; runner keeps resuming meanwhile.
+
+## Update 14:40Z (Foreman F #3 decision: stop host extras, close pair 7 as 10 host / 1 guest + this family; pair 8 started alone, out dir fu8-out8)
+BUG FAMILY «guest life never ends» (seat X guest Fold, pair 7, SEED=1 SWAP=1, room family coop-p07s-S1):
+- Guest completed only kiếp 1 (ch/ch_co, week 9, 2 min). After that the host finished kiếp 2..14 (lengths min: 10,20,2,11,10,11,34,25,12,40,9,1,61 after the first 15) while the guest's second life never produced an ending in ~6 h wall; rooms kept stepping weeks (host kiếp end → fresh room each time), so turns DO advance for the room, the guest life just never reports an ending.
+- Not captured by this harness version: guest's week/year/rank at the cut and the last 20 actions (harness logs only per-life summary + stuck snapshots). Closest evidence: stuck row (6–9 hits) host/guest both buoi 3 week 11, next:true, pend:false, Q:0, peer:true, repro save saves/coop-20261124-0823-p7-8-s-yr97b6.json (same file dir); guest JS error «Cannot read properties of undefined (reading 'off')».
+- Suspect: guest page not detecting its own life end / ending screen in the room flow, or guest stuck in a non-ending loop while host rooms rotate. Fixer: reproduce with the repro save and SWAP=1, watch the guest page after host kiếp 2.
+- Pair 7 closed here: host 10 kiếp (+4 extra, stopped), guest 1 kiếp.
