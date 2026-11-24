@@ -51022,6 +51022,1038 @@
      "room": "2729",
      "ms": 2484181,
      "week": 60
+    },
+    {
+     "seat": "guest",
+     "player": "X",
+     "dev": "fold",
+     "tp": {
+      "origin": "muoi",
+      "road": "muoi_tuoc"
+     },
+     "kiep": 9,
+     "extra": false,
+     "life": {
+      "id": "Phế làm thứ dân",
+      "type": "exile",
+      "group": "thường",
+      "fate": "Phế làm thứ dân, xuất cung",
+      "death": false,
+      "cause": "Phế làm thứ dân, xuất cung",
+      "chain0": "",
+      "age": 18,
+      "year": 1,
+      "years": 0.25,
+      "chapter": 1,
+      "part": 0,
+      "rank": 0,
+      "rankN": "Đáp ứng",
+      "maxRank": 0,
+      "maxRankN": "Đáp ứng",
+      "top": {
+       "hoangHau": false,
+       "nuDe": false,
+       "hoangThaiHau": false
+      },
+      "steps": [
+       {
+        "r": 0,
+        "n": "Đáp ứng",
+        "buoi": 1,
+        "age": 18,
+        "year": 1
+       }
+      ],
+      "kids": 0,
+      "m": {
+       "die": null,
+       "exec": 0,
+       "framed": [],
+       "cold": 1,
+       "demote": 0,
+       "preg": 0,
+       "sons": 0,
+       "daus": 0,
+       "kidDead": 0,
+       "heirMade": 0,
+       "heirLost": 0,
+       "nights": 1,
+       "sungPk": 16,
+       "bacPk": 28,
+       "bacEnd": 22,
+       "bacZero": 0,
+       "schemes": {},
+       "schemeCaught": 0,
+       "mg": [],
+       "ky": [
+        "Hoàng tử lạc đường",
+        "Phương thuốc gia truyền",
+        "Sổ tay giáo tập",
+        "Kỳ ngộ"
+       ],
+       "opt": {
+        "|Vĩnh Hòa cung": {
+         "Đi (đến nơi vào buổi sau)": [
+          1,
+          1
+         ],
+         "Thôi": [
+          2,
+          0
+         ],
+         "Vào thẳng, không bái kiến": [
+          1,
+          1
+         ]
+        },
+        "nfch|Kính sự phòng": {
+         "Giữ chân Hoàng thượng": [
+          1,
+          1
+         ],
+         "Thôi": [
+          1,
+          0
+         ]
+        },
+        "|Sai Bão Cầm đi dò la": {
+         "Hoàng hậu Tôn Mạn Nhu": [
+          1,
+          0
+         ],
+         "Người lạ Quý phi ở một thiên điện (chưa ": [
+          1,
+          0
+         ],
+         "Phi Phi Lâm Thuần Nguyên": [
+          1,
+          0
+         ],
+         "Người lạ Tần ở một thiên điện (chưa quen": [
+          1,
+          0
+         ],
+         "Người lạ Quý nhân ở một thiên điện (chưa": [
+          1,
+          1
+         ],
+         "Người lạ Thường tại ở một thiên điện (ch": [
+          2,
+          0
+         ],
+         "Đáp ứng Trương Vân Yên": [
+          1,
+          0
+         ],
+         "Người lạ Đáp ứng ở một thiên điện (chưa ": [
+          1,
+          0
+         ],
+         "Đáp ứng Đáp ứng Mã Lưu Ly": [
+          1,
+          0
+         ],
+         "Thôi, để sau": [
+          1,
+          0
+         ]
+        },
+        "ksp|Kính sự phòng báo tin": {
+         "Tắm gội chờ giá": [
+          1,
+          0
+         ],
+         "Tiến cử Bão Cầm hầu thay": [
+          1,
+          1
+         ],
+         "Cáo bệnh": [
+          1,
+          0
+         ]
+        },
+        "e68rumorFavor|Tin đồn": {
+         "Mua tin Kính sự phòng": [
+          1,
+          0
+         ],
+         "Làm như không nghe": [
+          1,
+          1
+         ],
+         "Tìm kẻ tung tin": [
+          1,
+          0
+         ]
+        },
+        "cyrep|Kỳ nguyệt sự": {
+         "Báo đúng ngày": [
+          1,
+          0
+         ],
+         "Báo lùi vài hôm": [
+          1,
+          0
+         ],
+         "Báo sớm, nói đã sạch kỳ": [
+          1,
+          1
+         ],
+         "Giấu, không báo": [
+          1,
+          0
+         ]
+        },
+        "q72o|Phụ tuyến · Thư tỷ tỷ: xin chiếc khăn kỷ niệm · ": {
+         "Nhận lời": [
+          1,
+          0
+         ],
+         "Khéo từ chối": [
+          1,
+          1
+         ]
+        },
+        "|Một ánh mắt": {
+         "Giữ bài thơ, đáp lại": [
+          1,
+          1
+         ],
+         "Đốt đi, làm ngơ": [
+          1,
+          0
+         ]
+        },
+        "rvframe|Việc khó xử": {
+         "Báo cho Đổng Nghi Tu": [
+          1,
+          1
+         ],
+         "Giúp Nhan Thanh Uyển một tay": [
+          1,
+          0
+         ],
+         "Ghi nhớ làm chứng cứ": [
+          1,
+          0
+         ]
+        }
+       },
+       "ev": {
+        "|Vĩnh Hòa cung": {
+         "f": "card",
+         "n": 2
+        },
+        "nfch|Kính sự phòng": {
+         "f": "nfch",
+         "n": 1
+        },
+        "|Sai Bão Cầm đi dò la": {
+         "f": "card",
+         "n": 1
+        },
+        "ksp|Kính sự phòng báo tin": {
+         "f": "ksp",
+         "n": 1
+        },
+        "e68rumorFavor|Tin đồn": {
+         "f": "e",
+         "n": 1
+        },
+        "kyngo|Kỳ ngộ": {
+         "f": "kyngo",
+         "n": 1
+        },
+        "cyrep|Kỳ nguyệt sự": {
+         "f": "cyrep",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Thư tỷ tỷ: xin chiếc khăn kỷ niệm · ": {
+         "f": "q",
+         "n": 1
+        },
+        "|Một ánh mắt": {
+         "f": "ev",
+         "n": 1
+        },
+        "|Trốn trong phòng": {
+         "f": "card",
+         "n": 1
+        },
+        "rvframe|Việc khó xử": {
+         "f": "rvframe",
+         "n": 1
+        }
+       },
+       "evN": 12,
+       "pace": {
+        "clicks": 83,
+        "choices": 12,
+        "chars": 6515,
+        "mgPlay": 0,
+        "mgSkip": 0,
+        "buoi": 19
+       },
+       "rankAt": {
+        "0": {
+         "buoi": 1,
+         "age": 18,
+         "year": 1,
+         "clicks": 6,
+         "choices": 0,
+         "chars": 0,
+         "mg": 0,
+         "mgs": 0
+        }
+       },
+       "evDistinct": 11,
+       "evRep": 1
+      }
+     },
+     "room": "RC79",
+     "ms": 169200,
+     "week": 10
+    },
+    {
+     "seat": "guest",
+     "player": "X",
+     "dev": "fold",
+     "tp": {
+      "origin": "nc",
+      "road": "nc_su"
+     },
+     "kiep": 10,
+     "extra": false,
+     "life": {
+      "id": "Phế làm thứ dân",
+      "type": "exile",
+      "group": "thường",
+      "fate": "Phế làm thứ dân, xuất cung",
+      "death": false,
+      "cause": "Phế làm thứ dân, xuất cung",
+      "chain0": "",
+      "age": 18,
+      "year": 1,
+      "years": 0.5,
+      "chapter": 2,
+      "part": 0,
+      "rank": 0,
+      "rankN": "Đáp ứng",
+      "maxRank": 0,
+      "maxRankN": "Đáp ứng",
+      "top": {
+       "hoangHau": false,
+       "nuDe": false,
+       "hoangThaiHau": false
+      },
+      "steps": [
+       {
+        "r": 0,
+        "n": "Đáp ứng",
+        "buoi": 20,
+        "age": 18,
+        "year": 1
+       }
+      ],
+      "kids": 0,
+      "m": {
+       "die": null,
+       "exec": 0,
+       "framed": [],
+       "cold": 1,
+       "demote": 0,
+       "preg": 0,
+       "sons": 0,
+       "daus": 0,
+       "kidDead": 0,
+       "heirMade": 0,
+       "heirLost": 0,
+       "nights": 0,
+       "sungPk": 12,
+       "bacPk": 395,
+       "bacEnd": 4,
+       "bacZero": 0,
+       "schemes": {},
+       "schemeCaught": 0,
+       "mg": [
+        {
+         "k": "hoc:mua",
+         "r": 0,
+         "how": "skip",
+         "win": true,
+         "sc": 5
+        }
+       ],
+       "ky": [
+        "Sớm mai Phật đường",
+        "Hoàng tử lạc đường",
+        "Của mình tìm lại",
+        "Kỳ ngộ"
+       ],
+       "opt": {
+        "|Vĩnh Hòa cung": {
+         "Đi (đến nơi vào buổi sau)": [
+          null,
+          null
+         ],
+         "Thôi": [
+          null
+         ],
+         "Vào thẳng, không bái kiến": []
+        },
+        "nfch|Kính sự phòng": {
+         "Giữ chân Hoàng thượng": [],
+         "Thôi": [
+          null
+         ],
+         "Tranh sủng": [
+          1,
+          0
+         ],
+         "Chặn ngự giá": [
+          1,
+          1
+         ]
+        },
+        "|Sai Bão Cầm đi dò la": {
+         "Hoàng hậu Tôn Mạn Nhu": [],
+         "Người lạ Quý phi ở một thiên điện (chưa ": [],
+         "Phi Phi Lâm Thuần Nguyên": [],
+         "Người lạ Tần ở một thiên điện (chưa quen": [],
+         "Người lạ Quý nhân ở một thiên điện (chưa": [],
+         "Người lạ Thường tại ở một thiên điện (ch": [],
+         "Đáp ứng Trương Vân Yên": [],
+         "Người lạ Đáp ứng ở một thiên điện (chưa ": [],
+         "Đáp ứng Đáp ứng Mã Lưu Ly": [],
+         "Thôi, để sau": []
+        },
+        "ksp|Kính sự phòng báo tin": {
+         "Tắm gội chờ giá": [],
+         "Tiến cử Bão Cầm hầu thay": [],
+         "Cáo bệnh": []
+        },
+        "e68rumorFavor|Tin đồn": {
+         "Mua tin Kính sự phòng": [],
+         "Làm như không nghe": [],
+         "Tìm kẻ tung tin": []
+        },
+        "cyrep|Kỳ nguyệt sự": {
+         "Báo đúng ngày": [
+          null,
+          null
+         ],
+         "Báo lùi vài hôm": [
+          null,
+          null
+         ],
+         "Báo sớm, nói đã sạch kỳ": [
+          null
+         ],
+         "Giấu, không báo": [
+          null
+         ]
+        },
+        "q72o|Phụ tuyến · Thư tỷ tỷ: xin chiếc khăn kỷ niệm · ": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "|Một ánh mắt": {
+         "Giữ bài thơ, đáp lại": [
+          null,
+          null
+         ],
+         "Đốt đi, làm ngơ": [
+          null
+         ]
+        },
+        "rvframe|Việc khó xử": {
+         "Báo cho Đổng Nghi Tu": [],
+         "Giúp Nhan Thanh Uyển một tay": [],
+         "Ghi nhớ làm chứng cứ": []
+        },
+        "kc2Sel|Tuyển chọn": {
+         "Dâng Cầm": [
+          1,
+          0
+         ],
+         "Dâng Kỳ": [
+          1,
+          1
+         ],
+         "Cúi đầu chờ xét": [
+          1,
+          0
+         ]
+        },
+        "kyngo|Kỳ ngộ": {
+         "Ở lại chép kinh cùng người": [
+          1,
+          0
+         ],
+         "Xin người dạy lễ nghi": [
+          1,
+          1
+         ]
+        },
+        "e68doubtVisit|Có người đến": {
+         "Thề thốt minh oan": [
+          1,
+          0
+         ],
+         "Mời nàng tự đến khám xét": [
+          1,
+          0
+         ],
+         "Mặc kệ nàng": [
+          1,
+          1
+         ]
+        },
+        "q72o|Phụ tuyến · Xin ma ma hoãn kỳ soát phòng · Lời n": {
+         "Nhận lời": [
+          1,
+          0
+         ],
+         "Khéo từ chối": [
+          1,
+          1
+         ]
+        },
+        "rvquarrel|Việc khó xử": {
+         "Đứng ra can ngăn": [
+          1,
+          0
+         ],
+         "Đứng về phía Lâm Thuần Nguyên": [
+          1,
+          0
+         ],
+         "Mách Hoàng hậu": [
+          1,
+          1
+         ]
+        },
+        "|Sai Nhan Châu Nhi đi dò la": {
+         "Hoàng hậu Hoàng hậu Tôn Mạn Nhu": [
+          1,
+          0
+         ],
+         "Quý nhân Lâm Thuần Nguyên": [
+          5,
+          2
+         ],
+         "Người lạ Tần ở một thiên điện (chưa quen": [
+          11,
+          1
+         ],
+         "Người lạ Quý nhân ở một thiên điện (chưa": [
+          5,
+          0
+         ],
+         "Người lạ Thường tại ở một thiên điện (ch": [
+          12,
+          0
+         ],
+         "Người lạ Đáp ứng ở một thiên điện (chưa ": [
+          2,
+          0
+         ],
+         "Thôi, để sau": [
+          5,
+          0
+         ],
+         "Hoàng hậu Hoàng hậu Tôn Mạn Nhu · đang n": [
+          4,
+          0
+         ],
+         "Thường tại Trương Vân Yên": [
+          4,
+          1
+         ],
+         "Thường tại Thường tại Nam Cung Trân Châu": [
+          4,
+          0
+         ],
+         "Thường tại Thường tại Phùng Tố Trân": [
+          4,
+          0
+         ],
+         "Phi Phi Đổng Nghi Tu": [
+          2,
+          1
+         ],
+         "Phi Nhan Thanh Uyển": [
+          2,
+          0
+         ]
+        },
+        "|Bổng lộc tháng sáu": {
+         "Nhịn": [
+          1,
+          0
+         ],
+         "Lót tay thái giám Nội vụ phủ": [
+          1,
+          0
+         ],
+         "Sai Nhan Châu Nhi đòi lại phần bị cắt xé": [
+          1,
+          0
+         ],
+         "Tố lên Hoàng hậu": [
+          1,
+          1
+         ],
+         "Ghi nhớ để trả thù sau": [
+          1,
+          0
+         ]
+        },
+        "rg|Phụ tuyến · Tân quân lập uy · Chương # · Hồi #/#": {
+         "Khuyên ngài nhẫn nại chờ thời": [
+          1,
+          1
+         ],
+         "Khuyên ngài dựa vào lớp quan trẻ ở Hàn l": [
+          1,
+          0
+         ],
+         "Chỉ lặng lẽ mài mực hầu ngài": [
+          1,
+          0
+         ],
+         "Cúi đầu vâng dạ": [
+          1,
+          0
+         ],
+         "Thưa rằng thần thiếp chỉ lo hầu hạ bệ hạ": [
+          1,
+          1
+         ],
+         "Nhắc khéo rằng bệ hạ cũng cần người tin ": [
+          1,
+          0
+         ]
+        },
+        "j71f|Tết Thất tịch · Yến tiệc": {
+         "Mang lễ sang dự": [
+          1,
+          1
+         ],
+         "Cáo mệt, không đi": [
+          1,
+          0
+         ]
+        },
+        "|Thái hậu chê dung nhan": {
+         "Xin lỗi": [
+          1,
+          0
+         ],
+         "Cười trừ": [
+          1,
+          0
+         ],
+         "Đáp lại": [
+          1,
+          1
+         ]
+        },
+        "e68rumorTH|Tin đồn": {
+         "Hỏi ma ma thân tín của Thái hậu": [
+          1,
+          0
+         ],
+         "Sang thỉnh an ngay": [
+          1,
+          1
+         ],
+         "Bỏ ngoài tai": [
+          1,
+          0
+         ]
+        },
+        "j71f|Lễ Vu Lan · Lễ": {
+         "Xin đứng hầu gần hương án": [
+          1,
+          0
+         ],
+         "Cúng dường bạc dầu đèn": [
+          1,
+          1
+         ],
+         "Lặng lẽ cầu cho gia đình": [
+          1,
+          0
+         ]
+        },
+        "|Danh hiệu mới": {
+         "Đeo ngay": [
+          2,
+          0
+         ],
+         "Để sau": [
+          2,
+          2
+         ]
+        },
+        "|Bị giật y phục giữa đường": {
+         "Lót tay Nội vụ phủ cấp ngay": [
+          1,
+          0
+         ],
+         "Sai Nhan Châu Nhi đến Nội vụ phủ xin": [
+          1,
+          1
+         ],
+         "Viết thư xin nhà gửi áo": [
+          1,
+          0
+         ],
+         "Đợi Nội vụ phủ": [
+          1,
+          0
+         ]
+        },
+        "|Ra ngoài khi mặc trung y?": {
+         "Vẫn đi": [
+          1,
+          0
+         ],
+         "Ở lại": [
+          1,
+          1
+         ]
+        },
+        "e68strayCat|Chuyện trong cung": {
+         "Giữ lại nuôi": [
+          1,
+          0
+         ],
+         "Cho người mang đi xa": [
+          1,
+          0
+         ],
+         "Dò xem mèo của ai": [
+          1,
+          1
+         ]
+        },
+        "q72o|Phụ tuyến · Lo áo bông cho quân biên ải · Lời nh": {
+         "Nhận lời": [
+          1,
+          1
+         ],
+         "Khéo từ chối": [
+          1,
+          0
+         ]
+        },
+        "|Thái hậu triệu": {
+         "Đến ngay": [
+          1,
+          0
+         ],
+         "Cáo bệnh": [
+          1,
+          1
+         ]
+        },
+        "|Bổng lộc tháng bảy": {
+         "Nhịn": [
+          1,
+          0
+         ],
+         "Lót tay thái giám Nội vụ phủ": [
+          1,
+          0
+         ],
+         "Sai Nhan Châu Nhi đòi lại phần bị cắt xé": [
+          1,
+          0
+         ],
+         "Tố lên Hoàng hậu": [
+          1,
+          0
+         ],
+         "Ghi nhớ để trả thù sau": [
+          1,
+          1
+         ]
+        },
+        "j71i|Tết Trung thu · Lời mời: Thi thơ “Vọng nguyệt”": {
+         "Ghi tên dự thi thơ": [
+          1,
+          0
+         ],
+         "Không dự": [
+          1,
+          1
+         ]
+        },
+        "rvmusk|Việc khó xử": {
+         "Cảnh báo Nhan Thanh Uyển": [
+          1,
+          0
+         ],
+         "Tố lên Hoàng thượng": [
+          1,
+          0
+         ],
+         "Làm ngơ": [
+          1,
+          1
+         ]
+        },
+        "q72o|Phụ tuyến · Đổi ơn: trâm của Thái hậu, đôi mắt n": {
+         "Nhận lời": [
+          1,
+          0
+         ],
+         "Khéo từ chối": [
+          1,
+          1
+         ]
+        },
+        "e68borrowDress|Có người đến": {
+         "Cho mượn vui vẻ": [
+          1,
+          0
+         ],
+         "Cho mượn, đòi đáp lễ": [
+          1,
+          0
+         ],
+         "Từ chối khéo": [
+          1,
+          1
+         ]
+        },
+        "j71m|Lập công · Trông con bệnh": {
+         "Sang trông, đưa thuốc của mình": [
+          1,
+          1
+         ],
+         "Tâu xin Hoàng thượng cử viện phán": [
+          1,
+          0
+         ],
+         "Không dính vào": [
+          1,
+          0
+         ]
+        },
+        "|Bổng lộc tháng tám": {
+         "Nhịn": [
+          1,
+          1
+         ],
+         "Lót tay thái giám Nội vụ phủ": [
+          1,
+          0
+         ],
+         "Sai Nhan Châu Nhi đòi lại phần bị cắt xé": [
+          1,
+          0
+         ],
+         "Tố lên Hoàng hậu": [
+          1,
+          0
+         ],
+         "Ghi nhớ để trả thù sau": [
+          1,
+          0
+         ]
+        },
+        "|Xuất gia?": {
+         "Xuất gia, kết thúc kiếp này": [
+          1,
+          0
+         ],
+         "Thôi, ở lại": [
+          1,
+          1
+         ]
+        }
+       },
+       "ev": {
+        "|Vĩnh Hòa cung": {
+         "f": "card",
+         "n": 1
+        },
+        "nfch|Kính sự phòng": {
+         "f": "nfch",
+         "n": 1
+        },
+        "|Sai Bão Cầm đi dò la": {
+         "f": "card",
+         "n": 0
+        },
+        "ksp|Kính sự phòng báo tin": {
+         "f": "ksp",
+         "n": 0
+        },
+        "e68rumorFavor|Tin đồn": {
+         "f": "e",
+         "n": 0
+        },
+        "kyngo|Kỳ ngộ": {
+         "f": "kyngo",
+         "n": 1
+        },
+        "cyrep|Kỳ nguyệt sự": {
+         "f": "cyrep",
+         "n": 2
+        },
+        "q72o|Phụ tuyến · Thư tỷ tỷ: xin chiếc khăn kỷ niệm · ": {
+         "f": "q",
+         "n": 0
+        },
+        "|Một ánh mắt": {
+         "f": "ev",
+         "n": 1
+        },
+        "|Trốn trong phòng": {
+         "f": "card",
+         "n": 0
+        },
+        "rvframe|Việc khó xử": {
+         "f": "rvframe",
+         "n": 0
+        },
+        "kc2Sel|Tuyển chọn": {
+         "f": "kc",
+         "n": 1
+        },
+        "e68doubtVisit|Có người đến": {
+         "f": "e",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Xin ma ma hoãn kỳ soát phòng · Lời n": {
+         "f": "q",
+         "n": 1
+        },
+        "rvquarrel|Việc khó xử": {
+         "f": "rvquarrel",
+         "n": 1
+        },
+        "|Sai Nhan Châu Nhi đi dò la": {
+         "f": "card",
+         "n": 5
+        },
+        "|Bổng lộc tháng sáu": {
+         "f": "ev",
+         "n": 1
+        },
+        "rg|Phụ tuyến · Tân quân lập uy · Chương # · Hồi #/#": {
+         "f": "rg",
+         "n": 2
+        },
+        "j71f|Tết Thất tịch · Yến tiệc": {
+         "f": "j",
+         "n": 1
+        },
+        "|Thái hậu chê dung nhan": {
+         "f": "card",
+         "n": 1
+        },
+        "e68rumorTH|Tin đồn": {
+         "f": "e",
+         "n": 1
+        },
+        "j71f|Lễ Vu Lan · Lễ": {
+         "f": "j",
+         "n": 1
+        },
+        "|Danh hiệu mới": {
+         "f": "card",
+         "n": 2
+        },
+        "|Bị giật y phục giữa đường": {
+         "f": "card",
+         "n": 1
+        },
+        "|Ra ngoài khi mặc trung y?": {
+         "f": "card",
+         "n": 1
+        },
+        "e68strayCat|Chuyện trong cung": {
+         "f": "e",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Lo áo bông cho quân biên ải · Lời nh": {
+         "f": "q",
+         "n": 1
+        },
+        "|Thái hậu triệu": {
+         "f": "ev",
+         "n": 1
+        },
+        "|Bổng lộc tháng bảy": {
+         "f": "ev",
+         "n": 1
+        },
+        "j71i|Tết Trung thu · Lời mời: Thi thơ “Vọng nguyệt”": {
+         "f": "j",
+         "n": 1
+        },
+        "rvmusk|Việc khó xử": {
+         "f": "rvmusk",
+         "n": 1
+        },
+        "|Có người đến": {
+         "f": "ev",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Đổi ơn: trâm của Thái hậu, đôi mắt n": {
+         "f": "q",
+         "n": 1
+        },
+        "e68borrowDress|Có người đến": {
+         "f": "e",
+         "n": 1
+        },
+        "j71m|Lập công · Trông con bệnh": {
+         "f": "j",
+         "n": 1
+        },
+        "|Bổng lộc tháng tám": {
+         "f": "ev",
+         "n": 1
+        },
+        "|Xuất gia?": {
+         "f": "card",
+         "n": 1
+        }
+       },
+       "evN": 38,
+       "pace": {
+        "clicks": 168,
+        "choices": 38,
+        "chars": 26077,
+        "mgPlay": 0,
+        "mgSkip": 1,
+        "buoi": 47
+       },
+       "rankAt": {
+        "0": {
+         "buoi": 0,
+         "age": 0,
+         "year": 0,
+         "clicks": 0,
+         "choices": 0,
+         "chars": 0,
+         "mg": 0,
+         "mgs": 0
+        }
+       },
+       "evDistinct": 37,
+       "evRep": 4
+      }
+     },
+     "room": "RC79",
+     "ms": 370013,
+     "week": 19
     }
    ],
    "lag": {
@@ -52853,6 +53885,113 @@
         },
         "longTasksPerMin": 208.4,
         "longTaskMax": 2719,
+        "errs": 0
+       }
+      }
+     },
+     {
+      "year": 1,
+      "room": "RC79",
+      "final": false,
+      "min": 3.38,
+      "turns": 20,
+      "metrics": {
+       "coopTurnP95": 36393,
+       "coopTurnsOk": "20/20",
+       "coopActionP95": 2168,
+       "coopActionMax": 19665,
+       "coopSyncKBMax": 61.5,
+       "coopKBPerMin": 655.7,
+       "coopResendPerMin": 11.8,
+       "coopRejoinMs": -1,
+       "coopLongTasksPerMin": 260.7,
+       "coopLongTaskMax": 2200,
+       "pageErrors": 0
+      },
+      "dev": {
+       "ipad": {
+        "seat": "host",
+        "kbPerMin": 717.1,
+        "upKB": 2016,
+        "dnKB": 410,
+        "posFlip": null,
+        "resend": 29,
+        "resendBy": {
+         "act": 26,
+         "where": 1,
+         "pos": 2
+        },
+        "longTasksPerMin": 235.3,
+        "longTaskMax": 1611,
+        "errs": 0
+       },
+       "fold": {
+        "seat": "guest",
+        "kbPerMin": 618.9,
+        "upKB": 1358,
+        "dnKB": 735,
+        "posFlip": null,
+        "resend": 51,
+        "resendBy": {
+         "act": 46,
+         "pos": 5
+        },
+        "longTasksPerMin": 286.1,
+        "longTaskMax": 2200,
+        "errs": 0
+       }
+      }
+     },
+     {
+      "year": 1,
+      "room": "RC79",
+      "final": true,
+      "min": 9.01,
+      "turns": 52,
+      "metrics": {
+       "coopTurnP95": 47651,
+       "coopTurnsOk": "52/52",
+       "coopActionP95": 7002,
+       "coopActionMax": 19944,
+       "coopSyncKBMax": 103.4,
+       "coopKBPerMin": 1000.7,
+       "coopResendPerMin": 7.3,
+       "coopRejoinMs": -1,
+       "coopLongTasksPerMin": 230.7,
+       "coopLongTaskMax": 2454,
+       "pageErrors": 0
+      },
+      "dev": {
+       "ipad": {
+        "seat": "host",
+        "kbPerMin": 1070.5,
+        "upKB": 8227,
+        "dnKB": 1414,
+        "posFlip": null,
+        "resend": 69,
+        "resendBy": {
+         "act": 66,
+         "pos": 1,
+         "where": 2
+        },
+        "longTasksPerMin": 228.8,
+        "longTaskMax": 1979,
+        "errs": 0
+       },
+       "fold": {
+        "seat": "guest",
+        "kbPerMin": 934.9,
+        "upKB": 6098,
+        "dnKB": 2321,
+        "posFlip": null,
+        "resend": 63,
+        "resendBy": {
+         "act": 52,
+         "pos": 10,
+         "bend": 1
+        },
+        "longTasksPerMin": 232.6,
+        "longTaskMax": 2454,
         "errs": 0
        }
       }
@@ -69587,18 +70726,381 @@
       "code": "RC79",
       "host": "Y",
       "t0": 1795536329873,
-      "weeks": 6,
-      "buoi": 0,
-      "turns": [],
+      "weeks": 19,
+      "buoi": 80,
+      "turns": [
+       {
+        "k0": "0:1",
+        "k1": "0:2",
+        "ms": 1152
+       },
+       {
+        "k0": "0:0",
+        "k1": "1:1",
+        "ms": 27776
+       },
+       {
+        "k0": "1:2",
+        "k1": "1:3",
+        "ms": 1863
+       },
+       {
+        "k0": "1:3",
+        "k1": "1:0",
+        "ms": 9681
+       },
+       {
+        "k0": "1:0",
+        "k1": "2:1",
+        "ms": 35517
+       },
+       {
+        "k0": "2:1",
+        "k1": "2:2",
+        "ms": 1311
+       },
+       {
+        "k0": "2:2",
+        "k1": "2:3",
+        "ms": 1077
+       },
+       {
+        "k0": "2:3",
+        "k1": "2:0",
+        "ms": 11557
+       },
+       {
+        "k0": "2:0",
+        "k1": "3:1",
+        "ms": 36393
+       },
+       {
+        "k0": "3:1",
+        "k1": "3:2",
+        "ms": 1385
+       },
+       {
+        "k0": "3:2",
+        "k1": "3:3",
+        "ms": 2067
+       },
+       {
+        "k0": "3:0",
+        "k1": "4:1",
+        "ms": 34519
+       },
+       {
+        "k0": "4:1",
+        "k1": "4:2",
+        "ms": 1643
+       },
+       {
+        "k0": "4:2",
+        "k1": "4:3",
+        "ms": 1793
+       },
+       {
+        "k0": "4:3",
+        "k1": "4:0",
+        "ms": 7301
+       },
+       {
+        "k0": "4:0",
+        "k1": "5:1",
+        "ms": 38229
+       },
+       {
+        "k0": "5:1",
+        "k1": "5:2",
+        "ms": 1490
+       },
+       {
+        "k0": "5:2",
+        "k1": "5:3",
+        "ms": 1694
+       },
+       {
+        "k0": "5:3",
+        "k1": "5:0",
+        "ms": 4872
+       },
+       {
+        "k0": "5:0",
+        "k1": "6:0",
+        "ms": 29826
+       },
+       {
+        "k0": "6:1",
+        "k1": "6:2",
+        "ms": 2115
+       },
+       {
+        "k0": "6:0",
+        "k1": "7:1",
+        "ms": 47651
+       },
+       {
+        "k0": "7:1",
+        "k1": "7:2",
+        "ms": 1485
+       },
+       {
+        "k0": "7:2",
+        "k1": "7:3",
+        "ms": 2061
+       },
+       {
+        "k0": "7:3",
+        "k1": "7:0",
+        "ms": 13124
+       },
+       {
+        "k0": "7:0",
+        "k1": "8:1",
+        "ms": 43300
+       },
+       {
+        "k0": "8:1",
+        "k1": "8:2",
+        "ms": 2605
+       },
+       {
+        "k0": "8:2",
+        "k1": "8:3",
+        "ms": 2289
+       },
+       {
+        "k0": "8:3",
+        "k1": "8:0",
+        "ms": 6751
+       },
+       {
+        "k0": "8:0",
+        "k1": "9:1",
+        "ms": 45489
+       },
+       {
+        "k0": "9:1",
+        "k1": "9:2",
+        "ms": 1608
+       },
+       {
+        "k0": "9:2",
+        "k1": "9:3",
+        "ms": 1168
+       },
+       {
+        "k0": "9:3",
+        "k1": "9:0",
+        "ms": 6306
+       },
+       {
+        "k0": "9:0",
+        "k1": "10:1",
+        "ms": 34608
+       },
+       {
+        "k0": "10:1",
+        "k1": "10:2",
+        "ms": 3036
+       },
+       {
+        "k0": "10:2",
+        "k1": "10:3",
+        "ms": 3736
+       },
+       {
+        "k0": "10:3",
+        "k1": "10:0",
+        "ms": 4604
+       },
+       {
+        "k0": "10:0",
+        "k1": "11:1",
+        "ms": 48019
+       },
+       {
+        "k0": "11:1",
+        "k1": "11:2",
+        "ms": 923
+       },
+       {
+        "k0": "11:2",
+        "k1": "11:3",
+        "ms": 1624
+       },
+       {
+        "k0": "11:3",
+        "k1": "11:0",
+        "ms": 7010
+       },
+       {
+        "k0": "11:0",
+        "k1": "12:1",
+        "ms": 45919
+       },
+       {
+        "k0": "12:1",
+        "k1": "12:2",
+        "ms": 2192
+       },
+       {
+        "k0": "12:2",
+        "k1": "12:3",
+        "ms": 1407
+       },
+       {
+        "k0": "12:3",
+        "k1": "12:0",
+        "ms": 13139
+       },
+       {
+        "k0": "12:0",
+        "k1": "13:1",
+        "ms": 42277
+       },
+       {
+        "k0": "13:1",
+        "k1": "13:2",
+        "ms": 1877
+       },
+       {
+        "k0": "13:2",
+        "k1": "13:3",
+        "ms": 3122
+       },
+       {
+        "k0": "13:3",
+        "k1": "13:0",
+        "ms": 5802
+       },
+       {
+        "k0": "13:0",
+        "k1": "14:1",
+        "ms": 44197
+       },
+       {
+        "k0": "14:1",
+        "k1": "14:2",
+        "ms": 2973
+       },
+       {
+        "k0": "14:2",
+        "k1": "14:3",
+        "ms": 878
+       },
+       {
+        "k0": "14:3",
+        "k1": "14:0",
+        "ms": 12449
+       },
+       {
+        "k0": "14:0",
+        "k1": "15:1",
+        "ms": 53007
+       },
+       {
+        "k0": "15:1",
+        "k1": "15:2",
+        "ms": 1947
+       },
+       {
+        "k0": "15:2",
+        "k1": "15:3",
+        "ms": 1527
+       },
+       {
+        "k0": "15:3",
+        "k1": "15:0",
+        "ms": 10841
+       },
+       {
+        "k0": "15:0",
+        "k1": "16:1",
+        "ms": 42558
+       },
+       {
+        "k0": "16:1",
+        "k1": "16:2",
+        "ms": 2797
+       },
+       {
+        "k0": "16:2",
+        "k1": "16:3",
+        "ms": 1466
+       },
+       {
+        "k0": "16:3",
+        "k1": "16:0",
+        "ms": 6514
+       },
+       {
+        "k0": "16:0",
+        "k1": "17:1",
+        "ms": 34267
+       },
+       {
+        "k0": "17:1",
+        "k1": "17:2",
+        "ms": 2241
+       },
+       {
+        "k0": "17:2",
+        "k1": "17:3",
+        "ms": 1055
+       },
+       {
+        "k0": "17:3",
+        "k1": "17:0",
+        "ms": 5067
+       },
+       {
+        "k0": "17:0",
+        "k1": "18:1",
+        "ms": 37128
+       },
+       {
+        "k0": "18:1",
+        "k1": "18:2",
+        "ms": 2991
+       },
+       {
+        "k0": "18:2",
+        "k1": "18:3",
+        "ms": 1512
+       },
+       {
+        "k0": "18:3",
+        "k1": "18:0",
+        "ms": 8685
+       },
+       {
+        "k0": "18:0",
+        "k1": "19:0",
+        "ms": 26528
+       },
+       {
+        "k0": "19:0",
+        "k1": "19:1",
+        "ms": 1903
+       },
+       {
+        "k0": "19:1",
+        "k1": "19:2",
+        "ms": 3291
+       }
+      ],
       "yr": {
-       "t": 1795536329873,
+       "t": 1795537076807,
        "turns": [],
-       "year": 1
+       "year": null
       },
       "whereDiff": 0,
-      "posDiff": 2,
+      "posDiff": 4,
       "statLag": 0,
-      "cmp": 25
+      "cmp": 79,
+      "min": 12.4,
+      "turnP95": 45919
      }
     ],
     "rejoin": [
@@ -69641,20 +71143,25 @@
       "room": "2729",
       "week": 6,
       "ms": 6863
+     },
+     {
+      "room": "RC79",
+      "week": 6,
+      "ms": 6357
      }
     ]
    },
    "rooms": 9,
    "t": {
-    "total": 27774211
+    "prev": 21592020,
+    "total": 28318764
    },
-   "partial": true,
    "bugs": [
     {
      "type": "save",
      "msg": "save→load→save changes the state (host)",
      "detail": "save.S.visit.people.0.__feelMig: 1 → undefined",
-     "n": 212,
+     "n": 215,
      "at": "coop-p09s-S1",
      "saveFile": "saves/coop-20261124-0825-p9-10-s-ta5rfc.json"
     },
@@ -69662,28 +71169,28 @@
      "type": "save",
      "msg": "save→load→save changes the state (guest)",
      "detail": "save.S.visit.people.0.kind (text differs at char 0): «…srv» → «…elder»",
-     "n": 213,
+     "n": 216,
      "at": "coop-p09s-S1"
     },
     {
      "type": "lag",
      "msg": "co-op LAG budget miss: coopTurnP95",
      "detail": "coopTurnP95 25569 > 10000 · game year 1 · room KTQR · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":1003.5,\"upKB\":1519,\"dnKB\":933,\"posFlip\":null,\"resend\":21,\"resendBy\":{\"act\":18,\"pos\":1,\"where\":2},\"longTasksPerMin\":219.4,\"longTaskMax\":1352,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":991,\"upKB\":1055,\"dnKB\":1366,\"posFlip\":null,\"resend\":15,\"resendBy\":{\"act\":15},\"longTasksPerMin\":188.7,\"longTaskMax\":1037,\"errs\":0}}",
-     "n": 35,
+     "n": 37,
      "at": "coop-p09s-S1"
     },
     {
      "type": "lag",
      "msg": "co-op LAG budget miss: coopSyncKBMax",
      "detail": "coopSyncKBMax 205.5 > 100 · game year 1 · room KTQR · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":1003.5,\"upKB\":1519,\"dnKB\":933,\"posFlip\":null,\"resend\":21,\"resendBy\":{\"act\":18,\"pos\":1,\"where\":2},\"longTasksPerMin\":219.4,\"longTaskMax\":1352,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":991,\"upKB\":1055,\"dnKB\":1366,\"posFlip\":null,\"resend\":15,\"resendBy\":{\"act\":15},\"longTasksPerMin\":188.7,\"longTaskMax\":1037,\"errs\":0}}",
-     "n": 33,
+     "n": 34,
      "at": "coop-p09s-S1"
     },
     {
      "type": "lag",
      "msg": "co-op buổi stall (both ready, the room took > 30 s or never stepped)",
      "detail": "3 of 94 buổi in game year 1",
-     "n": 30,
+     "n": 32,
      "at": "coop-p09s-S1"
     },
     {
@@ -69709,7 +71216,7 @@
      "type": "number",
      "msg": "stat out of range: sung",
      "detail": "sung=101 · ipad host week 201",
-     "n": 20,
+     "n": 26,
      "at": "coop-p09s-S1",
      "saveFile": "saves/coop-20261124-0825-p9-10-s-310db3.json"
     },
@@ -69725,7 +71232,7 @@
      "type": "coop-pos",
      "msg": "where one sees the friend ≠ where the friend is",
      "detail": "buổi 2.3 host sees guest at r2, guest is at H:a",
-     "n": 27,
+     "n": 29,
      "at": "coop-p09s-S1"
     },
     {
@@ -69763,6 +71270,3696 @@
      "detail": "buổi 48.1: host sees guest 15/19/88 (guest 15/19/83) · guest sees host 11/0/84 (host 11/0/84)",
      "n": 1,
      "at": "coop-p09s-S1"
+    }
+   ]
+  },
+  {
+   "job": {
+    "pair": 10,
+    "kiep": 10,
+    "swap": true,
+    "seed": 1,
+    "id": "coop-p10s-S1"
+   },
+   "lives": [
+    {
+     "seat": "guest",
+     "player": "X",
+     "dev": "fold",
+     "tp": {
+      "origin": "pf",
+      "road": "pt_hai"
+     },
+     "kiep": 1,
+     "extra": false,
+     "life": {
+      "id": "Xuất gia",
+      "type": "leave",
+      "group": "thường",
+      "fate": "Xuất gia",
+      "death": false,
+      "cause": "Xuất gia",
+      "chain0": "",
+      "age": 19,
+      "year": 1,
+      "years": 0.25,
+      "chapter": 1,
+      "part": 0,
+      "rank": 0,
+      "rankN": "Đáp ứng",
+      "maxRank": 0,
+      "maxRankN": "Đáp ứng",
+      "top": {
+       "hoangHau": false,
+       "nuDe": false,
+       "hoangThaiHau": false
+      },
+      "steps": [
+       {
+        "r": 0,
+        "n": "Đáp ứng",
+        "buoi": 1,
+        "age": 19,
+        "year": 1
+       }
+      ],
+      "kids": 0,
+      "m": {
+       "die": null,
+       "exec": 0,
+       "framed": [],
+       "cold": 1,
+       "demote": 0,
+       "preg": 0,
+       "sons": 0,
+       "daus": 0,
+       "kidDead": 0,
+       "heirMade": 0,
+       "heirLost": 0,
+       "nights": 0,
+       "sungPk": 4,
+       "bacPk": 38,
+       "bacEnd": 7,
+       "bacZero": 0,
+       "schemes": {},
+       "schemeCaught": 0,
+       "mg": [],
+       "ky": [],
+       "opt": {
+        "|Sai Tiễn Thu đi dò la": {
+         "Hoàng hậu Độc Cô Thanh Ca": [
+          3,
+          0
+         ],
+         "Tần Thẩm Tinh Diêu": [
+          2,
+          0
+         ],
+         "Người lạ Tần ở một thiên điện (chưa quen": [
+          3,
+          0
+         ],
+         "Người lạ Thường tại ở một thiên điện (ch": [
+          6,
+          1
+         ],
+         "Thường tại Thường tại Hách Dung Âm": [
+          1,
+          0
+         ],
+         "Đáp ứng Thiệu Hân Duyệt": [
+          3,
+          0
+         ],
+         "Đáp ứng Dư Tử Yên · đang nhắm": [
+          2,
+          2
+         ],
+         "Thôi, để sau": [
+          3,
+          0
+         ],
+         "Tần Thẩm Tinh Diêu · đang nhắm": [
+          1,
+          0
+         ],
+         "Đáp ứng Dư Tử Yên": [
+          1,
+          0
+         ]
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Thái y (#/#): Sách thuốc ": {
+         "Nhận lời": [
+          1,
+          0
+         ],
+         "Khéo từ chối": [
+          1,
+          1
+         ]
+        },
+        "e68eunuchSqueeze|Chuyện trong cung": {
+         "Đưa bạc cho xong": [
+          1,
+          0
+         ],
+         "Mắng thẳng mặt": [
+          1,
+          0
+         ],
+         "Ghi lại, mách Tổng quản": [
+          1,
+          1
+         ]
+        },
+        "cyrep|Kỳ nguyệt sự": {
+         "Báo đúng ngày": [
+          1,
+          0
+         ],
+         "Báo lùi vài hôm": [
+          1,
+          1
+         ],
+         "Báo sớm, nói đã sạch kỳ": [
+          1,
+          0
+         ],
+         "Giấu, không báo": [
+          1,
+          0
+         ]
+        },
+        "q72o|Phụ tuyến · Thư đệ: xin chuyện cung cho đỡ buồn ": {
+         "Nhận lời": [
+          1,
+          1
+         ],
+         "Khéo từ chối": [
+          1,
+          0
+         ]
+        },
+        "|Bổng lộc tháng năm": {
+         "Nhịn": [
+          1,
+          0
+         ],
+         "Lót tay thái giám Nội vụ phủ": [
+          1,
+          1
+         ],
+         "Sai Tiễn Thu đòi lại phần bị cắt xén": [
+          1,
+          0
+         ],
+         "Tố lên Hoàng hậu": [
+          1,
+          0
+         ],
+         "Ghi nhớ để trả thù sau": [
+          1,
+          0
+         ]
+        },
+        "|Xuất gia?": {
+         "Xuất gia, kết thúc kiếp này": [
+          1,
+          1
+         ],
+         "Thôi, ở lại": [
+          1,
+          0
+         ]
+        }
+       },
+       "ev": {
+        "|Sai Tiễn Thu đi dò la": {
+         "f": "card",
+         "n": 3
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Thái y (#/#): Sách thuốc ": {
+         "f": "q",
+         "n": 1
+        },
+        "e68eunuchSqueeze|Chuyện trong cung": {
+         "f": "e",
+         "n": 1
+        },
+        "cyrep|Kỳ nguyệt sự": {
+         "f": "cyrep",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Thư đệ: xin chuyện cung cho đỡ buồn ": {
+         "f": "q",
+         "n": 1
+        },
+        "|Bổng lộc tháng năm": {
+         "f": "ev",
+         "n": 1
+        },
+        "|Xuất gia?": {
+         "f": "card",
+         "n": 1
+        }
+       },
+       "evN": 9,
+       "pace": {
+        "clicks": 62,
+        "choices": 9,
+        "chars": 7567,
+        "mgPlay": 0,
+        "mgSkip": 0,
+        "buoi": 17
+       },
+       "rankAt": {
+        "0": {
+         "buoi": 1,
+         "age": 19,
+         "year": 1,
+         "clicks": 3,
+         "choices": 0,
+         "chars": 0,
+         "mg": 0,
+         "mgs": 0
+        }
+       },
+       "evDistinct": 7,
+       "evRep": 1
+      }
+     },
+     "room": "SG77",
+     "ms": 188559,
+     "week": 9
+    },
+    {
+     "seat": "guest",
+     "player": "X",
+     "dev": "fold",
+     "tp": {
+      "origin": "tt",
+      "road": "tt_oan"
+     },
+     "kiep": 2,
+     "extra": false,
+     "life": {
+      "id": "Phế làm thứ dân",
+      "type": "exile",
+      "group": "thường",
+      "fate": "Phế làm thứ dân, xuất cung",
+      "death": false,
+      "cause": "Phế làm thứ dân, xuất cung",
+      "chain0": "",
+      "age": 20,
+      "year": 1,
+      "years": 0.75,
+      "chapter": 2,
+      "part": 0,
+      "rank": 0,
+      "rankN": "Đáp ứng",
+      "maxRank": 0,
+      "maxRankN": "Đáp ứng",
+      "top": {
+       "hoangHau": false,
+       "nuDe": false,
+       "hoangThaiHau": false
+      },
+      "steps": [
+       {
+        "r": 0,
+        "n": "Đáp ứng",
+        "buoi": 18,
+        "age": 20,
+        "year": 1
+       }
+      ],
+      "kids": 0,
+      "m": {
+       "die": null,
+       "exec": 0,
+       "framed": [],
+       "cold": 1,
+       "demote": 0,
+       "preg": 0,
+       "sons": 0,
+       "daus": 0,
+       "kidDead": 0,
+       "heirMade": 0,
+       "heirLost": 0,
+       "nights": 0,
+       "sungPk": 25,
+       "bacPk": 179,
+       "bacEnd": 8,
+       "bacZero": 24,
+       "schemes": {},
+       "schemeCaught": 0,
+       "mg": [],
+       "ky": [
+        "Hoàng tử lạc đường",
+        "Của mình tìm lại",
+        "Phương thuốc gia truyền",
+        "Kỳ ngộ"
+       ],
+       "opt": {
+        "|Sai Tiễn Thu đi dò la": {
+         "Hoàng hậu Độc Cô Thanh Ca": [],
+         "Tần Thẩm Tinh Diêu": [],
+         "Người lạ Tần ở một thiên điện (chưa quen": [],
+         "Người lạ Thường tại ở một thiên điện (ch": [],
+         "Thường tại Thường tại Hách Dung Âm": [],
+         "Đáp ứng Thiệu Hân Duyệt": [],
+         "Đáp ứng Dư Tử Yên · đang nhắm": [],
+         "Thôi, để sau": [],
+         "Tần Thẩm Tinh Diêu · đang nhắm": [],
+         "Đáp ứng Dư Tử Yên": []
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Thái y (#/#): Sách thuốc ": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "e68eunuchSqueeze|Chuyện trong cung": {
+         "Đưa bạc cho xong": [],
+         "Mắng thẳng mặt": [
+          null,
+          null
+         ],
+         "Ghi lại, mách Tổng quản": [
+          null
+         ]
+        },
+        "cyrep|Kỳ nguyệt sự": {
+         "Báo đúng ngày": [
+          null
+         ],
+         "Báo lùi vài hôm": [
+          null,
+          null
+         ],
+         "Báo sớm, nói đã sạch kỳ": [
+          null,
+          null
+         ],
+         "Giấu, không báo": [
+          null,
+          null
+         ]
+        },
+        "q72o|Phụ tuyến · Thư đệ: xin chuyện cung cho đỡ buồn ": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "|Bổng lộc tháng năm": {
+         "Nhịn": [],
+         "Lót tay thái giám Nội vụ phủ": [],
+         "Sai Tiễn Thu đòi lại phần bị cắt xén": [],
+         "Tố lên Hoàng hậu": [],
+         "Ghi nhớ để trả thù sau": []
+        },
+        "|Xuất gia?": {
+         "Xuất gia, kết thúc kiếp này": [],
+         "Thôi, ở lại": []
+        },
+        "kc2Sel|Lễ ra mắt": {
+         "Dâng Cầm": [
+          1,
+          0
+         ],
+         "Dâng Kỳ": [
+          1,
+          0
+         ],
+         "Cúi đầu chờ xét": [
+          1,
+          1
+         ]
+        },
+        "|Chung Tú cung": {
+         "Bái kiến Tần rồi vào": [
+          1,
+          1
+         ],
+         "Vào thẳng, không bái kiến": [
+          1,
+          0
+         ],
+         "Thôi": [
+          1,
+          0
+         ]
+        },
+        "|Bị giật y phục giữa đường": {
+         "Lót tay Nội vụ phủ cấp ngay": [
+          1,
+          0
+         ],
+         "Sai Tống Trân Châu đến Nội vụ phủ xin": [
+          1,
+          1
+         ],
+         "Viết thư xin nhà gửi áo": [
+          1,
+          0
+         ],
+         "Đợi Nội vụ phủ": [
+          1,
+          0
+         ]
+        },
+        "|Ra ngoài khi mặc trung y?": {
+         "Vẫn đi": [
+          1,
+          1
+         ],
+         "Ở lại": [
+          1,
+          0
+         ]
+        },
+        "nfch|Kính sự phòng": {
+         "Giữ chân Hoàng thượng": [
+          1,
+          1
+         ],
+         "Thôi": [
+          1,
+          0
+         ]
+        },
+        "ksp|Kính sự phòng báo tin": {
+         "Tắm gội chờ giá": [
+          1,
+          0
+         ],
+         "Tiến cử Tống Trân Châu hầu thay": [
+          1,
+          0
+         ],
+         "Cáo bệnh": [
+          1,
+          1
+         ]
+        },
+        "j71f|Hội Phượng · Trò vui": {
+         "Chơi ván nhỏ (# bạc)": [
+          1,
+          0
+         ],
+         "Chơi ván lớn (# bạc)": [
+          1,
+          0
+         ],
+         "Từ chối khéo": [
+          1,
+          1
+         ]
+        },
+        "j71i|Hội Phượng · Lời mời: Thi bắn bia ở sân tàu ngựa": {
+         "Ghi tên dự thi bắn cung": [
+          1,
+          0
+         ],
+         "Ghi tên, bỏ bạc mời thầy kèm trước": [
+          1,
+          0
+         ],
+         "Không dự": [
+          1,
+          1
+         ]
+        },
+        "rvmusk|Việc khó xử": {
+         "Cảnh báo Thẩm Tinh Diêu": [
+          1,
+          0
+         ],
+         "Tố lên Hoàng thượng": [
+          1,
+          1
+         ],
+         "Làm ngơ": [
+          1,
+          0
+         ]
+        },
+        "|Có người đến": {
+         "Thu làm tai mắt": [
+          1,
+          0
+         ],
+         "Đuổi về": [
+          1,
+          1
+         ]
+        },
+        "|Một ánh mắt": {
+         "Giữ bài thơ, đáp lại": [
+          3,
+          2
+         ],
+         "Đốt đi, làm ngơ": [
+          3,
+          1
+         ]
+        },
+        "q72o|Phụ tuyến · Thua một cuộc cờ cho ngài vui · Lời ": {
+         "Nhận lời": [
+          1,
+          0
+         ],
+         "Khéo từ chối": [
+          1,
+          1
+         ]
+        },
+        "e68painter|Có người đến": {
+         "Bỏ bạc nhờ vẽ cho đẹp": [
+          1,
+          1
+         ],
+         "Ngồi cho vẽ đúng thật": [
+          1,
+          0
+         ],
+         "Hỏi học vài nét bút": [
+          1,
+          0
+         ]
+        },
+        "e68rumorFavor|Tin đồn": {
+         "Mua tin Kính sự phòng": [
+          1,
+          0
+         ],
+         "Làm như không nghe": [
+          1,
+          0
+         ],
+         "Tìm kẻ tung tin": [
+          1,
+          1
+         ]
+        },
+        "e68strayCat|Chuyện trong cung": {
+         "Giữ lại nuôi": [
+          1,
+          1
+         ],
+         "Cho người mang đi xa": [
+          1,
+          0
+         ],
+         "Dò xem mèo của ai": [
+          1,
+          0
+         ]
+        },
+        "rvquarrel|Việc khó xử": {
+         "Đứng ra can ngăn": [
+          1,
+          1
+         ],
+         "Đứng về phía Thẩm Tinh Diêu": [
+          1,
+          0
+         ],
+         "Mách Hoàng hậu": [
+          1,
+          0
+         ]
+        },
+        "|Sai Tống Trân Châu đi dò la": {
+         "Hoàng hậu Độc Cô Thanh Ca": [
+          5,
+          0
+         ],
+         "Người lạ Quý phi ở một thiên điện (chưa ": [
+          5,
+          0
+         ],
+         "Tần Thẩm Tinh Diêu": [
+          1,
+          0
+         ],
+         "Người lạ Tần ở một thiên điện (chưa quen": [
+          1,
+          0
+         ],
+         "Người lạ Thường tại ở một thiên điện (ch": [
+          9,
+          0
+         ],
+         "Quý nhân Quý nhân Hách Dung Âm · đang nh": [
+          1,
+          0
+         ],
+         "Thôi, để sau": [
+          5,
+          3
+         ],
+         "Phi Thẩm Tinh Diêu": [
+          4,
+          0
+         ],
+         "Phi Phi Lương Tịnh Dung · đang nhắm": [
+          1,
+          0
+         ],
+         "Quý nhân Quý nhân Hứa Kính Nghi": [
+          4,
+          1
+         ],
+         "Quý nhân Quý nhân Hách Dung Âm": [
+          1,
+          0
+         ],
+         "Tần Tần Lương Tịnh Dung": [
+          1,
+          1
+         ],
+         "Tần Tần Hách Dung Âm · đang nhắm": [
+          1,
+          0
+         ],
+         "Người lạ Đáp ứng ở một thiên điện (chưa ": [
+          1,
+          0
+         ],
+         "Tần Tần Lương Tịnh Dung · đang nhắm": [
+          1,
+          0
+         ],
+         "Tần Tần Hách Dung Âm": [
+          2,
+          0
+         ],
+         "Thường tại Thường tại Hứa Tố Nguyệt": [
+          2,
+          0
+         ],
+         "Tần Lương Tịnh Dung · đang nhắm": [
+          1,
+          0
+         ],
+         "Thường tại Thiệu Hân Duyệt": [
+          1,
+          0
+         ],
+         "Thường tại Thôi Kinh Hồng": [
+          1,
+          0
+         ]
+        },
+        "|Danh hiệu mới": {
+         "Đeo ngay": [
+          1,
+          0
+         ],
+         "Để sau": [
+          1,
+          1
+         ]
+        },
+        "|Bổng lộc tháng bảy": {
+         "Nhịn": [
+          1,
+          0
+         ],
+         "Lót tay thái giám Nội vụ phủ": [
+          1,
+          0
+         ],
+         "Sai Tống Trân Châu đòi lại phần bị cắt x": [
+          1,
+          0
+         ],
+         "Tố lên Hoàng hậu": [
+          1,
+          0
+         ],
+         "Ghi nhớ để trả thù sau": [
+          1,
+          1
+         ]
+        },
+        "rg|Phụ tuyến · Tân quân lập uy · Chương # · Hồi #/#": {
+         "Khuyên ngài nhẫn nại chờ thời": [
+          1,
+          1
+         ],
+         "Khuyên ngài dựa vào lớp quan trẻ ở Hàn l": [
+          1,
+          0
+         ],
+         "Chỉ lặng lẽ mài mực hầu ngài": [
+          1,
+          0
+         ],
+         "Cúi đầu vâng dạ": [
+          1,
+          0
+         ],
+         "Thưa rằng thần thiếp chỉ lo hầu hạ bệ hạ": [
+          1,
+          1
+         ],
+         "Nhắc khéo rằng bệ hạ cũng cần người tin ": [
+          1,
+          0
+         ],
+         "Theo Hoàng thượng": [
+          1,
+          0
+         ],
+         "Theo Thái hậu": [
+          1,
+          0
+         ],
+         "Theo Tể tướng Tề Bác Văn": [
+          1,
+          0
+         ],
+         "Đứng ngoài, giữ mình": [
+          1,
+          1
+         ]
+        },
+        "j71m|Lập công · Chép kinh": {
+         "Chép trọn bộ bằng chữ khải": [
+          1,
+          1
+         ],
+         "Chép một quyển": [
+          1,
+          0
+         ],
+         "Nhờ cung nữ chép thay": [
+          1,
+          0
+         ]
+        },
+        "q72o|Phụ tuyến · Mang áo ấm vào lãnh cung cho Doãn Tố": {
+         "Nhận lời": [
+          1,
+          1
+         ],
+         "Khéo từ chối": [
+          1,
+          0
+         ]
+        },
+        "|Hạn hán, mất mùa": {
+         "Bớt chi dùng trong cung": [
+          1,
+          0
+         ],
+         "Làm như không biết": [
+          1,
+          1
+         ]
+        },
+        "e68kindVisit|Có người đến": {
+         "Tiếp chuyện cả buổi": [
+          1,
+          0
+         ],
+         "Nhận lời giúp hết lòng": [
+          1,
+          0
+         ],
+         "Hẹn hôm khác": [
+          1,
+          1
+         ],
+         "Pha Trà Long Tĩnh mời khách": [
+          1,
+          0
+         ]
+        },
+        "q72o|Phụ tuyến · Giữ hộ hộp thư riêng của Uông Dao Qu": {
+         "Nhận lời": [
+          1,
+          0
+         ],
+         "Khéo từ chối": [
+          1,
+          1
+         ]
+        },
+        "|Hội phối đồ: báo đề": {
+         "Mượn Áo lụa thêu hoa nhỏ của Dư Tử Yên": [
+          1,
+          1
+         ],
+         "Sai tai mắt dò bên chủ hội": [
+          1,
+          0
+         ],
+         "Hỏi Dư Tử Yên (từng dự hội)": [
+          1,
+          0
+         ],
+         "Đã hiểu, sẽ chuẩn bị": [
+          1,
+          0
+         ]
+        },
+        "rvbribe|Việc khó xử": {
+         "Mách Thẩm Tinh Diêu": [
+          1,
+          1
+         ],
+         "Không dính vào": [
+          1,
+          0
+         ]
+        },
+        "e68musician|Có người đến": {
+         "Học một khúc mới": [
+          1,
+          1
+         ],
+         "Mời về sớm": [
+          1,
+          0
+         ]
+        },
+        "|Bổng lộc tháng chín": {
+         "Nhịn": [
+          1,
+          0
+         ],
+         "Lót tay thái giám Nội vụ phủ": [
+          1,
+          0
+         ],
+         "Sai Tống Trân Châu đòi lại phần bị cắt x": [
+          1,
+          0
+         ],
+         "Tố lên Hoàng hậu": [
+          1,
+          0
+         ],
+         "Ghi nhớ để trả thù sau": [
+          1,
+          1
+         ]
+        },
+        "e68docCheck|Có người đến": {
+         "Hỏi thăm dò chuyện các cung": [
+          1,
+          0
+         ],
+         "Cảm ơn, không cần": [
+          1,
+          1
+         ]
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Thái hậu (#/#): Kinh giỗ ": {
+         "Nhận lời": [
+          1,
+          1
+         ],
+         "Khéo từ chối": [
+          1,
+          0
+         ]
+        },
+        "|Cả hậu cung để ý": {
+         "Cười cho qua": [
+          1,
+          0
+         ],
+         "Đáp lại khéo": [
+          1,
+          0
+         ],
+         "Đáp trả gay gắt": [
+          1,
+          0
+         ],
+         "Im lặng lui đi": [
+          1,
+          0
+         ],
+         "Ghi hận": [
+          1,
+          1
+         ],
+         "Mách Hoàng hậu": [
+          1,
+          0
+         ],
+         "Hỏi bí quyết": [
+          1,
+          0
+         ]
+        },
+        "|Hoàng hậu chê dung nhan": {
+         "Xin lỗi": [
+          1,
+          0
+         ],
+         "Cười trừ": [
+          1,
+          0
+         ],
+         "Đáp lại": [
+          1,
+          0
+         ],
+         "Ghi hận": [
+          1,
+          1
+         ]
+        },
+        "j71m|Lập công · Cứu giá": {
+         "Lao vào cứu ngài": [
+          1,
+          0
+         ],
+         "Hô thị vệ, sai người chạy gọi": [
+          1,
+          1
+         ],
+         "Hoảng sợ đứng nhìn": [
+          1,
+          0
+         ]
+        },
+        "|Danh hiệu lên bậc": {
+         "Đeo ngay": [
+          1,
+          0
+         ],
+         "Để sau": [
+          1,
+          1
+         ]
+        },
+        "caning|Việc khó xử": {
+         "Quỳ xin tha cho nàng": [
+          1,
+          0
+         ],
+         "Đứng xem, mặt không đổi sắc": [
+          1,
+          0
+         ],
+         "Thêm một lời buộc tội": [
+          1,
+          1
+         ]
+        },
+        "q72o|Phụ tuyến · May áo bông cho cung nhân già · Lời ": {
+         "Nhận lời": [
+          1,
+          0
+         ],
+         "Khéo từ chối": [
+          1,
+          1
+         ]
+        },
+        "|Bổng lộc tháng mười": {
+         "Nhịn": [
+          1,
+          0
+         ],
+         "Lót tay thái giám Nội vụ phủ": [
+          1,
+          0
+         ],
+         "Sai Tống Trân Châu đòi lại phần bị cắt x": [
+          1,
+          0
+         ],
+         "Tố lên Hoàng hậu": [
+          1,
+          0
+         ],
+         "Ghi nhớ để trả thù sau": [
+          1,
+          1
+         ]
+        },
+        "e68leakRoof|Thời tiết": {
+         "Xin Nội vụ phủ sửa gấp": [
+          1,
+          1
+         ],
+         "Bỏ bạc thuê thợ ngay": [
+          1,
+          0
+         ],
+         "Cùng cung nhân tự che chắn": [
+          1,
+          0
+         ]
+        },
+        "e68silkAllot|Chuyện trong cung": {
+         "Nhường Dư Tử Yên phần đẹp": [
+          1,
+          0
+         ],
+         "Giữ phần mình, mặc trước": [
+          1,
+          1
+         ]
+        },
+        "q72o|Phụ tuyến · Tìm vị thuốc quý gửi về thăm nhà · L": {
+         "Nhận lời": [
+          1,
+          0
+         ],
+         "Khéo từ chối": [
+          1,
+          1
+         ]
+        }
+       },
+       "ev": {
+        "|Sai Tiễn Thu đi dò la": {
+         "f": "card",
+         "n": 0
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Thái y (#/#): Sách thuốc ": {
+         "f": "q",
+         "n": 0
+        },
+        "e68eunuchSqueeze|Chuyện trong cung": {
+         "f": "e",
+         "n": 1
+        },
+        "cyrep|Kỳ nguyệt sự": {
+         "f": "cyrep",
+         "n": 6
+        },
+        "q72o|Phụ tuyến · Thư đệ: xin chuyện cung cho đỡ buồn ": {
+         "f": "q",
+         "n": 0
+        },
+        "|Bổng lộc tháng năm": {
+         "f": "ev",
+         "n": 0
+        },
+        "|Xuất gia?": {
+         "f": "card",
+         "n": 0
+        },
+        "kc2Sel|Lễ ra mắt": {
+         "f": "kc",
+         "n": 1
+        },
+        "|Chung Tú cung": {
+         "f": "card",
+         "n": 1
+        },
+        "|Bị giật y phục giữa đường": {
+         "f": "card",
+         "n": 1
+        },
+        "|Ra ngoài khi mặc trung y?": {
+         "f": "card",
+         "n": 1
+        },
+        "nfch|Kính sự phòng": {
+         "f": "nfch",
+         "n": 1
+        },
+        "|Cần Chính điện": {
+         "f": "card",
+         "n": 1
+        },
+        "ksp|Kính sự phòng báo tin": {
+         "f": "ksp",
+         "n": 1
+        },
+        "j71f|Hội Phượng · Trò vui": {
+         "f": "j",
+         "n": 1
+        },
+        "j71i|Hội Phượng · Lời mời: Thi bắn bia ở sân tàu ngựa": {
+         "f": "j",
+         "n": 1
+        },
+        "rvmusk|Việc khó xử": {
+         "f": "rvmusk",
+         "n": 1
+        },
+        "|Có người đến": {
+         "f": "ev",
+         "n": 2
+        },
+        "|Một ánh mắt": {
+         "f": "ev",
+         "n": 3
+        },
+        "q72o|Phụ tuyến · Thua một cuộc cờ cho ngài vui · Lời ": {
+         "f": "q",
+         "n": 1
+        },
+        "e68painter|Có người đến": {
+         "f": "e",
+         "n": 1
+        },
+        "e68rumorFavor|Tin đồn": {
+         "f": "e",
+         "n": 1
+        },
+        "kyngo|Kỳ ngộ": {
+         "f": "kyngo",
+         "n": 1
+        },
+        "e68strayCat|Chuyện trong cung": {
+         "f": "e",
+         "n": 1
+        },
+        "rvquarrel|Việc khó xử": {
+         "f": "rvquarrel",
+         "n": 1
+        },
+        "|Sai Tống Trân Châu đi dò la": {
+         "f": "card",
+         "n": 5
+        },
+        "|Danh hiệu mới": {
+         "f": "card",
+         "n": 1
+        },
+        "|Bổng lộc tháng bảy": {
+         "f": "ev",
+         "n": 1
+        },
+        "rg|Phụ tuyến · Tân quân lập uy · Chương # · Hồi #/#": {
+         "f": "rg",
+         "n": 3
+        },
+        "j71m|Lập công · Chép kinh": {
+         "f": "j",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Mang áo ấm vào lãnh cung cho Doãn Tố": {
+         "f": "q",
+         "n": 1
+        },
+        "|Hạn hán, mất mùa": {
+         "f": "card",
+         "n": 1
+        },
+        "e68kindVisit|Có người đến": {
+         "f": "e",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Giữ hộ hộp thư riêng của Uông Dao Qu": {
+         "f": "q",
+         "n": 1
+        },
+        "|Hội phối đồ: báo đề": {
+         "f": "card",
+         "n": 1
+        },
+        "rvbribe|Việc khó xử": {
+         "f": "rvbribe",
+         "n": 1
+        },
+        "e68musician|Có người đến": {
+         "f": "e",
+         "n": 1
+        },
+        "|Bổng lộc tháng chín": {
+         "f": "ev",
+         "n": 1
+        },
+        "|Sứ đoàn vào triều": {
+         "f": "card",
+         "n": 1
+        },
+        "e68docCheck|Có người đến": {
+         "f": "e",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Thái hậu (#/#): Kinh giỗ ": {
+         "f": "q",
+         "n": 1
+        },
+        "|Cả hậu cung để ý": {
+         "f": "card",
+         "n": 1
+        },
+        "|Hoàng hậu chê dung nhan": {
+         "f": "card",
+         "n": 1
+        },
+        "j71m|Lập công · Cứu giá": {
+         "f": "j",
+         "n": 1
+        },
+        "|Danh hiệu lên bậc": {
+         "f": "card",
+         "n": 1
+        },
+        "caning|Việc khó xử": {
+         "f": "caning",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · May áo bông cho cung nhân già · Lời ": {
+         "f": "q",
+         "n": 1
+        },
+        "e68fortuneNun|Chuyện trong cung": {
+         "f": "e",
+         "n": 1
+        },
+        "|Bổng lộc tháng mười": {
+         "f": "ev",
+         "n": 1
+        },
+        "e68leakRoof|Thời tiết": {
+         "f": "e",
+         "n": 1
+        },
+        "e68silkAllot|Chuyện trong cung": {
+         "f": "e",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Tìm vị thuốc quý gửi về thăm nhà · L": {
+         "f": "q",
+         "n": 1
+        }
+       },
+       "evN": 61,
+       "pace": {
+        "clicks": 303,
+        "choices": 61,
+        "chars": 35513,
+        "mgPlay": 0,
+        "mgSkip": 0,
+        "buoi": 88
+       },
+       "rankAt": {
+        "0": {
+         "buoi": 0,
+         "age": 0,
+         "year": 0,
+         "clicks": 0,
+         "choices": 0,
+         "chars": 0,
+         "mg": 0,
+         "mgs": 0
+        }
+       },
+       "evDistinct": 52,
+       "evRep": 5
+      }
+     },
+     "room": "SG77",
+     "ms": 615790,
+     "week": 27
+    },
+    {
+     "seat": "guest",
+     "player": "X",
+     "dev": "fold",
+     "tp": {
+      "origin": "muoi",
+      "road": "muoi_doi"
+     },
+     "kiep": 3,
+     "extra": false,
+     "life": {
+      "id": "Xuất gia",
+      "type": "leave",
+      "group": "thường",
+      "fate": "Xuất gia",
+      "death": false,
+      "cause": "Xuất gia",
+      "chain0": "",
+      "age": 18,
+      "year": 2,
+      "years": 0.83,
+      "chapter": 2,
+      "part": 0,
+      "rank": 0,
+      "rankN": "Đáp ứng",
+      "maxRank": 0,
+      "maxRankN": "Đáp ứng",
+      "top": {
+       "hoangHau": false,
+       "nuDe": false,
+       "hoangThaiHau": false
+      },
+      "steps": [
+       {
+        "r": 0,
+        "n": "Đáp ứng",
+        "buoi": 106,
+        "age": 18,
+        "year": 1
+       }
+      ],
+      "kids": 0,
+      "m": {
+       "die": null,
+       "exec": 0,
+       "framed": [],
+       "cold": 1,
+       "demote": 0,
+       "preg": 0,
+       "sons": 0,
+       "daus": 0,
+       "kidDead": 0,
+       "heirMade": 0,
+       "heirLost": 0,
+       "nights": 0,
+       "sungPk": 7,
+       "bacPk": 410,
+       "bacEnd": 11,
+       "bacZero": 0,
+       "schemes": {},
+       "schemeCaught": 0,
+       "mg": [
+        {
+         "k": "hoc:hat",
+         "r": 0,
+         "how": "skip",
+         "win": true,
+         "sc": 5
+        }
+       ],
+       "ky": [
+        "Hoàng tử lạc đường"
+       ],
+       "opt": {
+        "|Sai Tiễn Thu đi dò la": {
+         "Hoàng hậu Độc Cô Thanh Ca": [],
+         "Tần Thẩm Tinh Diêu": [],
+         "Người lạ Tần ở một thiên điện (chưa quen": [],
+         "Người lạ Thường tại ở một thiên điện (ch": [],
+         "Thường tại Thường tại Hách Dung Âm": [],
+         "Đáp ứng Thiệu Hân Duyệt": [],
+         "Đáp ứng Dư Tử Yên · đang nhắm": [],
+         "Thôi, để sau": [],
+         "Tần Thẩm Tinh Diêu · đang nhắm": [],
+         "Đáp ứng Dư Tử Yên": []
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Thái y (#/#): Sách thuốc ": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "e68eunuchSqueeze|Chuyện trong cung": {
+         "Đưa bạc cho xong": [],
+         "Mắng thẳng mặt": [],
+         "Ghi lại, mách Tổng quản": []
+        },
+        "cyrep|Kỳ nguyệt sự": {
+         "Báo đúng ngày": [
+          null
+         ],
+         "Báo lùi vài hôm": [
+          null
+         ],
+         "Báo sớm, nói đã sạch kỳ": [
+          null,
+          null
+         ],
+         "Giấu, không báo": [
+          null
+         ]
+        },
+        "q72o|Phụ tuyến · Thư đệ: xin chuyện cung cho đỡ buồn ": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "|Bổng lộc tháng năm": {
+         "Nhịn": [],
+         "Lót tay thái giám Nội vụ phủ": [],
+         "Sai Tiễn Thu đòi lại phần bị cắt xén": [],
+         "Tố lên Hoàng hậu": [],
+         "Ghi nhớ để trả thù sau": []
+        },
+        "|Xuất gia?": {
+         "Xuất gia, kết thúc kiếp này": [
+          null,
+          null
+         ],
+         "Thôi, ở lại": [
+          null,
+          null
+         ]
+        },
+        "kc2Sel|Lễ ra mắt": {
+         "Dâng Cầm": [],
+         "Dâng Kỳ": [],
+         "Cúi đầu chờ xét": []
+        },
+        "|Chung Tú cung": {
+         "Bái kiến Tần rồi vào": [],
+         "Vào thẳng, không bái kiến": [],
+         "Thôi": []
+        },
+        "|Bị giật y phục giữa đường": {
+         "Lót tay Nội vụ phủ cấp ngay": [],
+         "Sai Tống Trân Châu đến Nội vụ phủ xin": [],
+         "Viết thư xin nhà gửi áo": [],
+         "Đợi Nội vụ phủ": []
+        },
+        "|Ra ngoài khi mặc trung y?": {
+         "Vẫn đi": [],
+         "Ở lại": []
+        },
+        "nfch|Kính sự phòng": {
+         "Giữ chân Hoàng thượng": [],
+         "Thôi": [
+          null
+         ],
+         "Tranh sủng": [
+          1,
+          1
+         ],
+         "Chặn ngự giá": [
+          1,
+          0
+         ]
+        },
+        "ksp|Kính sự phòng báo tin": {
+         "Tắm gội chờ giá": [],
+         "Tiến cử Tống Trân Châu hầu thay": [],
+         "Cáo bệnh": []
+        },
+        "j71f|Hội Phượng · Trò vui": {
+         "Chơi ván nhỏ (# bạc)": [],
+         "Chơi ván lớn (# bạc)": [],
+         "Từ chối khéo": []
+        },
+        "j71i|Hội Phượng · Lời mời: Thi bắn bia ở sân tàu ngựa": {
+         "Ghi tên dự thi bắn cung": [],
+         "Ghi tên, bỏ bạc mời thầy kèm trước": [],
+         "Không dự": []
+        },
+        "rvmusk|Việc khó xử": {
+         "Cảnh báo Thẩm Tinh Diêu": [],
+         "Tố lên Hoàng thượng": [
+          null,
+          null
+         ],
+         "Làm ngơ": [
+          null
+         ],
+         "Cảnh báo Lương Tịnh Dung": [
+          1,
+          0
+         ]
+        },
+        "|Có người đến": {
+         "Thu làm tai mắt": [],
+         "Đuổi về": []
+        },
+        "|Một ánh mắt": {
+         "Giữ bài thơ, đáp lại": [
+          null
+         ],
+         "Đốt đi, làm ngơ": [
+          null,
+          null
+         ]
+        },
+        "q72o|Phụ tuyến · Thua một cuộc cờ cho ngài vui · Lời ": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "e68painter|Có người đến": {
+         "Bỏ bạc nhờ vẽ cho đẹp": [],
+         "Ngồi cho vẽ đúng thật": [],
+         "Hỏi học vài nét bút": []
+        },
+        "e68rumorFavor|Tin đồn": {
+         "Mua tin Kính sự phòng": [],
+         "Làm như không nghe": [],
+         "Tìm kẻ tung tin": []
+        },
+        "e68strayCat|Chuyện trong cung": {
+         "Giữ lại nuôi": [],
+         "Cho người mang đi xa": [],
+         "Dò xem mèo của ai": []
+        },
+        "rvquarrel|Việc khó xử": {
+         "Đứng ra can ngăn": [
+          null
+         ],
+         "Đứng về phía Thẩm Tinh Diêu": [],
+         "Mách Hoàng hậu": [
+          null
+         ],
+         "Đứng về phía Lương Tịnh Dung": [
+          1,
+          1
+         ]
+        },
+        "|Sai Tống Trân Châu đi dò la": {
+         "Hoàng hậu Độc Cô Thanh Ca": [],
+         "Người lạ Quý phi ở một thiên điện (chưa ": [],
+         "Tần Thẩm Tinh Diêu": [],
+         "Người lạ Tần ở một thiên điện (chưa quen": [],
+         "Người lạ Thường tại ở một thiên điện (ch": [],
+         "Quý nhân Quý nhân Hách Dung Âm · đang nh": [],
+         "Thôi, để sau": [],
+         "Phi Thẩm Tinh Diêu": [],
+         "Phi Phi Lương Tịnh Dung · đang nhắm": [],
+         "Quý nhân Quý nhân Hứa Kính Nghi": [],
+         "Quý nhân Quý nhân Hách Dung Âm": [],
+         "Tần Tần Lương Tịnh Dung": [],
+         "Tần Tần Hách Dung Âm · đang nhắm": [],
+         "Người lạ Đáp ứng ở một thiên điện (chưa ": [],
+         "Tần Tần Lương Tịnh Dung · đang nhắm": [],
+         "Tần Tần Hách Dung Âm": [],
+         "Thường tại Thường tại Hứa Tố Nguyệt": [],
+         "Tần Lương Tịnh Dung · đang nhắm": [],
+         "Thường tại Thiệu Hân Duyệt": [],
+         "Thường tại Thôi Kinh Hồng": []
+        },
+        "|Danh hiệu mới": {
+         "Đeo ngay": [],
+         "Để sau": []
+        },
+        "|Bổng lộc tháng bảy": {
+         "Nhịn": [],
+         "Lót tay thái giám Nội vụ phủ": [],
+         "Sai Tống Trân Châu đòi lại phần bị cắt x": [],
+         "Tố lên Hoàng hậu": [],
+         "Ghi nhớ để trả thù sau": []
+        },
+        "rg|Phụ tuyến · Tân quân lập uy · Chương # · Hồi #/#": {
+         "Khuyên ngài nhẫn nại chờ thời": [],
+         "Khuyên ngài dựa vào lớp quan trẻ ở Hàn l": [],
+         "Chỉ lặng lẽ mài mực hầu ngài": [],
+         "Cúi đầu vâng dạ": [],
+         "Thưa rằng thần thiếp chỉ lo hầu hạ bệ hạ": [],
+         "Nhắc khéo rằng bệ hạ cũng cần người tin ": [],
+         "Theo Hoàng thượng": [],
+         "Theo Thái hậu": [],
+         "Theo Tể tướng Tề Bác Văn": [],
+         "Đứng ngoài, giữ mình": []
+        },
+        "j71m|Lập công · Chép kinh": {
+         "Chép trọn bộ bằng chữ khải": [],
+         "Chép một quyển": [],
+         "Nhờ cung nữ chép thay": []
+        },
+        "q72o|Phụ tuyến · Mang áo ấm vào lãnh cung cho Doãn Tố": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "|Hạn hán, mất mùa": {
+         "Bớt chi dùng trong cung": [],
+         "Làm như không biết": []
+        },
+        "e68kindVisit|Có người đến": {
+         "Tiếp chuyện cả buổi": [],
+         "Nhận lời giúp hết lòng": [],
+         "Hẹn hôm khác": [],
+         "Pha Trà Long Tĩnh mời khách": []
+        },
+        "q72o|Phụ tuyến · Giữ hộ hộp thư riêng của Uông Dao Qu": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "|Hội phối đồ: báo đề": {
+         "Mượn Áo lụa thêu hoa nhỏ của Dư Tử Yên": [],
+         "Sai tai mắt dò bên chủ hội": [],
+         "Hỏi Dư Tử Yên (từng dự hội)": [],
+         "Đã hiểu, sẽ chuẩn bị": []
+        },
+        "rvbribe|Việc khó xử": {
+         "Mách Thẩm Tinh Diêu": [],
+         "Không dính vào": []
+        },
+        "e68musician|Có người đến": {
+         "Học một khúc mới": [],
+         "Mời về sớm": []
+        },
+        "|Bổng lộc tháng chín": {
+         "Nhịn": [],
+         "Lót tay thái giám Nội vụ phủ": [],
+         "Sai Tống Trân Châu đòi lại phần bị cắt x": [],
+         "Tố lên Hoàng hậu": [],
+         "Ghi nhớ để trả thù sau": []
+        },
+        "e68docCheck|Có người đến": {
+         "Hỏi thăm dò chuyện các cung": [],
+         "Cảm ơn, không cần": []
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Thái hậu (#/#): Kinh giỗ ": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "|Cả hậu cung để ý": {
+         "Cười cho qua": [],
+         "Đáp lại khéo": [],
+         "Đáp trả gay gắt": [],
+         "Im lặng lui đi": [],
+         "Ghi hận": [],
+         "Mách Hoàng hậu": [],
+         "Hỏi bí quyết": []
+        },
+        "|Hoàng hậu chê dung nhan": {
+         "Xin lỗi": [
+          null,
+          null
+         ],
+         "Cười trừ": [
+          null,
+          null
+         ],
+         "Đáp lại": [
+          null
+         ],
+         "Ghi hận": [
+          null
+         ]
+        },
+        "j71m|Lập công · Cứu giá": {
+         "Lao vào cứu ngài": [],
+         "Hô thị vệ, sai người chạy gọi": [],
+         "Hoảng sợ đứng nhìn": []
+        },
+        "|Danh hiệu lên bậc": {
+         "Đeo ngay": [],
+         "Để sau": []
+        },
+        "caning|Việc khó xử": {
+         "Quỳ xin tha cho nàng": [],
+         "Đứng xem, mặt không đổi sắc": [],
+         "Thêm một lời buộc tội": []
+        },
+        "q72o|Phụ tuyến · May áo bông cho cung nhân già · Lời ": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "|Bổng lộc tháng mười": {
+         "Nhịn": [],
+         "Lót tay thái giám Nội vụ phủ": [],
+         "Sai Tống Trân Châu đòi lại phần bị cắt x": [],
+         "Tố lên Hoàng hậu": [],
+         "Ghi nhớ để trả thù sau": []
+        },
+        "e68leakRoof|Thời tiết": {
+         "Xin Nội vụ phủ sửa gấp": [],
+         "Bỏ bạc thuê thợ ngay": [],
+         "Cùng cung nhân tự che chắn": []
+        },
+        "e68silkAllot|Chuyện trong cung": {
+         "Nhường Dư Tử Yên phần đẹp": [],
+         "Giữ phần mình, mặc trước": []
+        },
+        "q72o|Phụ tuyến · Tìm vị thuốc quý gửi về thăm nhà · L": {
+         "Nhận lời": [],
+         "Khéo từ chối": []
+        },
+        "kc2Sel|Tuyển chọn": {
+         "Dâng Nấu nướng": [
+          1,
+          0
+         ],
+         "Dâng Cầm": [
+          1,
+          0
+         ],
+         "Cúi đầu chờ xét": [
+          1,
+          1
+         ]
+        },
+        "j71i|Đêm Giao thừa · Lời mời: Thi đàn khúc tiễn năm": {
+         "Ghi tên dự thi đàn": [
+          1,
+          0
+         ],
+         "Ghi tên, bỏ bạc mời thầy kèm trước": [
+          1,
+          0
+         ],
+         "Không dự": [
+          1,
+          1
+         ]
+        },
+        "|Đại hàn, tuyết lớn": {
+         "Bỏ bạc mua thêm than": [
+          1,
+          0
+         ],
+         "Chịu rét cho qua": [
+          1,
+          1
+         ]
+        },
+        "q72o|Phụ tuyến · Thư mẫu thân: xin tranh chim sẻ · Lờ": {
+         "Nhận lời": [
+          1,
+          0
+         ],
+         "Khéo từ chối": [
+          1,
+          1
+         ]
+        },
+        "e68proudVisit|Có người đến": {
+         "Nhún nhường tiếp đãi": [
+          1,
+          1
+         ],
+         "Đáp lời sắc sảo": [
+          1,
+          0
+         ],
+         "Cáo bệnh không tiếp": [
+          1,
+          0
+         ]
+        },
+        "e68doubtVisit|Có người đến": {
+         "Thề thốt minh oan": [
+          1,
+          1
+         ],
+         "Mời nàng tự đến khám xét": [
+          1,
+          0
+         ],
+         "Mặc kệ nàng": [
+          1,
+          0
+         ]
+        },
+        "|Bổng lộc tháng chạp": {
+         "Nhịn": [
+          1,
+          1
+         ],
+         "Lót tay thái giám Nội vụ phủ": [
+          1,
+          0
+         ],
+         "Sai Lương Lan Tâm đòi lại phần bị cắt xé": [
+          1,
+          0
+         ],
+         "Tố lên Hoàng hậu": [
+          1,
+          0
+         ],
+         "Ghi nhớ để trả thù sau": [
+          1,
+          0
+         ]
+        },
+        "e68q6coldRice|Chuyện trong cung": {
+         "Dúi bạc cho người của Từ Thọ Khang": [
+          1,
+          1
+         ],
+         "Chia phần ít ỏi cho người hầu": [
+          1,
+          0
+         ],
+         "Nhịn đói, chép kinh qua ngày": [
+          1,
+          0
+         ]
+        }
+       },
+       "ev": {
+        "|Sai Tiễn Thu đi dò la": {
+         "f": "card",
+         "n": 0
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Thái y (#/#): Sách thuốc ": {
+         "f": "q",
+         "n": 0
+        },
+        "e68eunuchSqueeze|Chuyện trong cung": {
+         "f": "e",
+         "n": 0
+        },
+        "cyrep|Kỳ nguyệt sự": {
+         "f": "cyrep",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Thư đệ: xin chuyện cung cho đỡ buồn ": {
+         "f": "q",
+         "n": 0
+        },
+        "|Bổng lộc tháng năm": {
+         "f": "ev",
+         "n": 0
+        },
+        "|Xuất gia?": {
+         "f": "card",
+         "n": 2
+        },
+        "kc2Sel|Lễ ra mắt": {
+         "f": "kc",
+         "n": 0
+        },
+        "|Chung Tú cung": {
+         "f": "card",
+         "n": 1
+        },
+        "|Bị giật y phục giữa đường": {
+         "f": "card",
+         "n": 0
+        },
+        "|Ra ngoài khi mặc trung y?": {
+         "f": "card",
+         "n": 0
+        },
+        "nfch|Kính sự phòng": {
+         "f": "nfch",
+         "n": 1
+        },
+        "|Cần Chính điện": {
+         "f": "card",
+         "n": 0
+        },
+        "ksp|Kính sự phòng báo tin": {
+         "f": "ksp",
+         "n": 0
+        },
+        "j71f|Hội Phượng · Trò vui": {
+         "f": "j",
+         "n": 0
+        },
+        "j71i|Hội Phượng · Lời mời: Thi bắn bia ở sân tàu ngựa": {
+         "f": "j",
+         "n": 0
+        },
+        "rvmusk|Việc khó xử": {
+         "f": "rvmusk",
+         "n": 1
+        },
+        "|Có người đến": {
+         "f": "ev",
+         "n": 0
+        },
+        "|Một ánh mắt": {
+         "f": "ev",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Thua một cuộc cờ cho ngài vui · Lời ": {
+         "f": "q",
+         "n": 0
+        },
+        "e68painter|Có người đến": {
+         "f": "e",
+         "n": 0
+        },
+        "e68rumorFavor|Tin đồn": {
+         "f": "e",
+         "n": 0
+        },
+        "kyngo|Kỳ ngộ": {
+         "f": "kyngo",
+         "n": 0
+        },
+        "e68strayCat|Chuyện trong cung": {
+         "f": "e",
+         "n": 0
+        },
+        "rvquarrel|Việc khó xử": {
+         "f": "rvquarrel",
+         "n": 1
+        },
+        "|Sai Tống Trân Châu đi dò la": {
+         "f": "card",
+         "n": 0
+        },
+        "|Danh hiệu mới": {
+         "f": "card",
+         "n": 0
+        },
+        "|Bổng lộc tháng bảy": {
+         "f": "ev",
+         "n": 0
+        },
+        "rg|Phụ tuyến · Tân quân lập uy · Chương # · Hồi #/#": {
+         "f": "rg",
+         "n": 0
+        },
+        "j71m|Lập công · Chép kinh": {
+         "f": "j",
+         "n": 0
+        },
+        "q72o|Phụ tuyến · Mang áo ấm vào lãnh cung cho Doãn Tố": {
+         "f": "q",
+         "n": 0
+        },
+        "|Hạn hán, mất mùa": {
+         "f": "card",
+         "n": 0
+        },
+        "e68kindVisit|Có người đến": {
+         "f": "e",
+         "n": 0
+        },
+        "q72o|Phụ tuyến · Giữ hộ hộp thư riêng của Uông Dao Qu": {
+         "f": "q",
+         "n": 0
+        },
+        "|Hội phối đồ: báo đề": {
+         "f": "card",
+         "n": 0
+        },
+        "rvbribe|Việc khó xử": {
+         "f": "rvbribe",
+         "n": 0
+        },
+        "e68musician|Có người đến": {
+         "f": "e",
+         "n": 0
+        },
+        "|Bổng lộc tháng chín": {
+         "f": "ev",
+         "n": 0
+        },
+        "|Sứ đoàn vào triều": {
+         "f": "card",
+         "n": 0
+        },
+        "e68docCheck|Có người đến": {
+         "f": "e",
+         "n": 0
+        },
+        "q72o|Phụ tuyến · Tâm nguyện Thái hậu (#/#): Kinh giỗ ": {
+         "f": "q",
+         "n": 0
+        },
+        "|Cả hậu cung để ý": {
+         "f": "card",
+         "n": 0
+        },
+        "|Hoàng hậu chê dung nhan": {
+         "f": "card",
+         "n": 2
+        },
+        "j71m|Lập công · Cứu giá": {
+         "f": "j",
+         "n": 0
+        },
+        "|Danh hiệu lên bậc": {
+         "f": "card",
+         "n": 0
+        },
+        "caning|Việc khó xử": {
+         "f": "caning",
+         "n": 0
+        },
+        "q72o|Phụ tuyến · May áo bông cho cung nhân già · Lời ": {
+         "f": "q",
+         "n": 0
+        },
+        "e68fortuneNun|Chuyện trong cung": {
+         "f": "e",
+         "n": 0
+        },
+        "|Bổng lộc tháng mười": {
+         "f": "ev",
+         "n": 0
+        },
+        "e68leakRoof|Thời tiết": {
+         "f": "e",
+         "n": 0
+        },
+        "e68silkAllot|Chuyện trong cung": {
+         "f": "e",
+         "n": 0
+        },
+        "q72o|Phụ tuyến · Tìm vị thuốc quý gửi về thăm nhà · L": {
+         "f": "q",
+         "n": 0
+        },
+        "kc2Sel|Tuyển chọn": {
+         "f": "kc",
+         "n": 1
+        },
+        "j71i|Đêm Giao thừa · Lời mời: Thi đàn khúc tiễn năm": {
+         "f": "j",
+         "n": 1
+        },
+        "|Đại hàn, tuyết lớn": {
+         "f": "card",
+         "n": 1
+        },
+        "q72o|Phụ tuyến · Thư mẫu thân: xin tranh chim sẻ · Lờ": {
+         "f": "q",
+         "n": 1
+        },
+        "e68proudVisit|Có người đến": {
+         "f": "e",
+         "n": 1
+        },
+        "e68doubtVisit|Có người đến": {
+         "f": "e",
+         "n": 1
+        },
+        "|Bổng lộc tháng chạp": {
+         "f": "ev",
+         "n": 1
+        },
+        "e68q6coldRice|Chuyện trong cung": {
+         "f": "e",
+         "n": 1
+        }
+       },
+       "evN": 18,
+       "pace": {
+        "clicks": 87,
+        "choices": 18,
+        "chars": 7949,
+        "mgPlay": 0,
+        "mgSkip": 1,
+        "buoi": 25
+       },
+       "rankAt": {
+        "0": {
+         "buoi": 0,
+         "age": 0,
+         "year": 0,
+         "clicks": 0,
+         "choices": 0,
+         "chars": 0,
+         "mg": 0,
+         "mgs": 0
+        }
+       },
+       "evDistinct": 60,
+       "evRep": 2
+      }
+     },
+     "room": "SG77",
+     "ms": 170723,
+     "week": 32
+    }
+   ],
+   "lag": {
+    "years": [
+     {
+      "year": 1,
+      "room": "8MBP",
+      "final": false,
+      "min": 3.51,
+      "turns": 23,
+      "metrics": {
+       "coopTurnP95": 39716,
+       "coopTurnsOk": "23/23",
+       "coopActionP95": 2686,
+       "coopActionMax": 19980,
+       "coopSyncKBMax": 61.2,
+       "coopKBPerMin": 661.3,
+       "coopResendPerMin": 6.8,
+       "coopRejoinMs": -1,
+       "coopLongTasksPerMin": 243.6,
+       "coopLongTaskMax": 2730,
+       "pageErrors": 0
+      },
+      "dev": {
+       "ipad": {
+        "seat": "host",
+        "kbPerMin": 691.5,
+        "upKB": 2017,
+        "dnKB": 408,
+        "posFlip": null,
+        "resend": 21,
+        "resendBy": {
+         "act": 21
+        },
+        "longTasksPerMin": 224.6,
+        "longTaskMax": 1721,
+        "errs": 0
+       },
+       "fold": {
+        "seat": "guest",
+        "kbPerMin": 631.1,
+        "upKB": 1473,
+        "dnKB": 740,
+        "posFlip": null,
+        "resend": 27,
+        "resendBy": {
+         "act": 26,
+         "pos": 1
+        },
+        "longTasksPerMin": 262.6,
+        "longTaskMax": 2730,
+        "errs": 0
+       }
+      }
+     },
+     {
+      "year": 1,
+      "room": "SG77",
+      "final": false,
+      "min": 8.93,
+      "turns": 23,
+      "metrics": {
+       "coopTurnP95": 105397,
+       "coopTurnsOk": "23/23",
+       "coopActionP95": 5143,
+       "coopActionMax": 18425,
+       "coopSyncKBMax": 209.3,
+       "coopKBPerMin": 440.8,
+       "coopResendPerMin": 4.5,
+       "coopRejoinMs": -1,
+       "coopLongTasksPerMin": 280.5,
+       "coopLongTaskMax": 2596,
+       "pageErrors": 0
+      },
+      "dev": {
+       "ipad": {
+        "seat": "host",
+        "kbPerMin": 482.5,
+        "upKB": 3749,
+        "dnKB": 562,
+        "posFlip": null,
+        "resend": 25,
+        "resendBy": {
+         "act": 22,
+         "where": 2,
+         "pos": 1
+        },
+        "longTasksPerMin": 213.2,
+        "longTaskMax": 2596,
+        "errs": 0
+       },
+       "fold": {
+        "seat": "guest",
+        "kbPerMin": 399.1,
+        "upKB": 1565,
+        "dnKB": 2000,
+        "posFlip": null,
+        "resend": 56,
+        "resendBy": {
+         "act": 40,
+         "pos": 16
+        },
+        "longTasksPerMin": 347.8,
+        "longTaskMax": 2238,
+        "errs": 0
+       }
+      }
+     },
+     {
+      "year": 1,
+      "room": "SG77",
+      "final": false,
+      "min": 15.06,
+      "turns": 95,
+      "metrics": {
+       "coopTurnP95": 45323,
+       "coopTurnsOk": "95/95",
+       "coopActionP95": 15072,
+       "coopActionMax": 19996,
+       "coopSyncKBMax": 183,
+       "coopKBPerMin": 1013.2,
+       "coopResendPerMin": 4.2,
+       "coopRejoinMs": -1,
+       "coopLongTasksPerMin": 236.7,
+       "coopLongTaskMax": 2804,
+       "pageErrors": 0
+      },
+      "dev": {
+       "ipad": {
+        "seat": "host",
+        "kbPerMin": 1114.5,
+        "upKB": 13923,
+        "dnKB": 2858,
+        "posFlip": null,
+        "resend": 34,
+        "resendBy": {
+         "act": 28,
+         "where": 6
+        },
+        "longTasksPerMin": 211.3,
+        "longTaskMax": 1994,
+        "errs": 0
+       },
+       "fold": {
+        "seat": "guest",
+        "kbPerMin": 921.7,
+        "upKB": 9661,
+        "dnKB": 4216,
+        "posFlip": null,
+        "resend": 92,
+        "resendBy": {
+         "act": 87,
+         "pos": 5
+        },
+        "longTasksPerMin": 262.1,
+        "longTaskMax": 2804,
+        "errs": 0
+       }
+      }
+     },
+     {
+      "year": 2,
+      "room": "SG77",
+      "final": true,
+      "min": 9.5,
+      "turns": 40,
+      "metrics": {
+       "coopTurnP95": 44364,
+       "coopTurnsOk": "40/40",
+       "coopActionP95": 2444,
+       "coopActionMax": 19995,
+       "coopSyncKBMax": 122.8,
+       "coopKBPerMin": 926.2,
+       "coopResendPerMin": 3.1,
+       "coopRejoinMs": -1,
+       "coopLongTasksPerMin": 266.2,
+       "coopLongTaskMax": 2335,
+       "pageErrors": 0
+      },
+      "dev": {
+       "ipad": {
+        "seat": "host",
+        "kbPerMin": 1000.7,
+        "upKB": 8211,
+        "dnKB": 1294,
+        "posFlip": null,
+        "resend": 18,
+        "resendBy": {
+         "act": 15,
+         "where": 3
+        },
+        "longTasksPerMin": 254.1,
+        "longTaskMax": 1365,
+        "errs": 0
+       },
+       "fold": {
+        "seat": "guest",
+        "kbPerMin": 855.4,
+        "upKB": 5440,
+        "dnKB": 2686,
+        "posFlip": null,
+        "resend": 41,
+        "resendBy": {
+         "act": 37,
+         "bend": 1,
+         "pos": 3
+        },
+        "longTasksPerMin": 278.3,
+        "longTaskMax": 2335,
+        "errs": 0
+       }
+      }
+     },
+     {
+      "year": 1,
+      "room": "MDPN",
+      "final": false,
+      "min": 6.55,
+      "turns": 21,
+      "metrics": {
+       "coopTurnP95": 94191,
+       "coopTurnsOk": "21/21",
+       "coopActionP95": 6505,
+       "coopActionMax": 19728,
+       "coopSyncKBMax": 64.8,
+       "coopKBPerMin": 500.6,
+       "coopResendPerMin": 8.6,
+       "coopRejoinMs": -1,
+       "coopLongTasksPerMin": 300,
+       "coopLongTaskMax": 2488,
+       "pageErrors": 0
+      },
+      "dev": {
+       "ipad": {
+        "seat": "host",
+        "kbPerMin": 528.2,
+        "upKB": 2914,
+        "dnKB": 547,
+        "posFlip": null,
+        "resend": 43,
+        "resendBy": {
+         "act": 41,
+         "pos": 1,
+         "where": 1
+        },
+        "longTasksPerMin": 242.3,
+        "longTaskMax": 2488,
+        "errs": 0
+       },
+       "fold": {
+        "seat": "guest",
+        "kbPerMin": 479,
+        "upKB": 1643,
+        "dnKB": 1497,
+        "posFlip": null,
+        "resend": 70,
+        "resendBy": {
+         "act": 61,
+         "pos": 9
+        },
+        "longTasksPerMin": 357.6,
+        "longTaskMax": 1856,
+        "errs": 0
+       }
+      }
+     },
+     {
+      "year": 1,
+      "room": "MDPN",
+      "final": true,
+      "min": 12.42,
+      "turns": 19,
+      "metrics": {
+       "coopTurnP95": 118245,
+       "coopTurnsOk": "19/19",
+       "coopActionP95": 6448,
+       "coopActionMax": 18813,
+       "coopSyncKBMax": 125.5,
+       "coopKBPerMin": 457.8,
+       "coopResendPerMin": 4.8,
+       "coopRejoinMs": -1,
+       "coopLongTasksPerMin": 323.3,
+       "coopLongTaskMax": 2282,
+       "pageErrors": 0
+      },
+      "dev": {
+       "ipad": {
+        "seat": "host",
+        "kbPerMin": 472.3,
+        "upKB": 5245,
+        "dnKB": 623,
+        "posFlip": null,
+        "resend": 42,
+        "resendBy": {
+         "act": 40,
+         "pos": 2
+        },
+        "longTasksPerMin": 244.7,
+        "longTaskMax": 2109,
+        "errs": 0
+       },
+       "fold": {
+        "seat": "guest",
+        "kbPerMin": 445.7,
+        "upKB": 2353,
+        "dnKB": 3184,
+        "posFlip": null,
+        "resend": 78,
+        "resendBy": {
+         "act": 68,
+         "pos": 10
+        },
+        "longTasksPerMin": 402,
+        "longTaskMax": 2282,
+        "errs": 0
+       }
+      }
+     }
+    ],
+    "rooms": [
+     {
+      "code": "8MBP",
+      "host": "Y",
+      "t0": 1795537097465,
+      "weeks": 11,
+      "buoi": 25,
+      "turns": [
+       {
+        "k0": "0:1",
+        "k1": "0:2",
+        "ms": 947
+       },
+       {
+        "k0": "0:2",
+        "k1": "0:3",
+        "ms": 1341
+       },
+       {
+        "k0": "0:3",
+        "k1": "0:0",
+        "ms": 12217
+       },
+       {
+        "k0": "0:0",
+        "k1": "1:1",
+        "ms": 47076
+       },
+       {
+        "k0": "1:1",
+        "k1": "1:2",
+        "ms": 2326
+       },
+       {
+        "k0": "1:2",
+        "k1": "1:3",
+        "ms": 2019
+       },
+       {
+        "k0": "1:3",
+        "k1": "1:0",
+        "ms": 7951
+       },
+       {
+        "k0": "1:0",
+        "k1": "2:1",
+        "ms": 34168
+       },
+       {
+        "k0": "2:2",
+        "k1": "2:3",
+        "ms": 809
+       },
+       {
+        "k0": "2:3",
+        "k1": "2:0",
+        "ms": 7032
+       },
+       {
+        "k0": "2:0",
+        "k1": "3:1",
+        "ms": 39716
+       },
+       {
+        "k0": "3:1",
+        "k1": "3:2",
+        "ms": 1354
+       },
+       {
+        "k0": "3:2",
+        "k1": "3:3",
+        "ms": 2233
+       },
+       {
+        "k0": "3:3",
+        "k1": "3:0",
+        "ms": 6334
+       },
+       {
+        "k0": "3:0",
+        "k1": "4:1",
+        "ms": 33334
+       },
+       {
+        "k0": "4:1",
+        "k1": "4:2",
+        "ms": 1495
+       },
+       {
+        "k0": "4:2",
+        "k1": "4:3",
+        "ms": 2520
+       },
+       {
+        "k0": "4:3",
+        "k1": "4:0",
+        "ms": 3628
+       },
+       {
+        "k0": "4:0",
+        "k1": "5:1",
+        "ms": 30104
+       },
+       {
+        "k0": "5:1",
+        "k1": "5:2",
+        "ms": 1838
+       },
+       {
+        "k0": "5:2",
+        "k1": "5:3",
+        "ms": 908
+       },
+       {
+        "k0": "5:3",
+        "k1": "5:0",
+        "ms": 2955
+       },
+       {
+        "k0": "5:0",
+        "k1": "6:0",
+        "ms": 23408
+       }
+      ],
+      "yr": {
+       "t": 1795537308682,
+       "turns": [],
+       "year": 1
+      },
+      "whereDiff": 0,
+      "posDiff": 4,
+      "statLag": 0,
+      "cmp": 42
+     },
+     {
+      "code": "SG77",
+      "host": "Y",
+      "t0": 1795537574181,
+      "weeks": 39,
+      "buoi": 162,
+      "turns": [
+       {
+        "k0": "0:1",
+        "k1": "0:2",
+        "ms": 1446
+       },
+       {
+        "k0": "0:2",
+        "k1": "0:3",
+        "ms": 1215
+       },
+       {
+        "k0": "0:3",
+        "k1": "0:0",
+        "ms": 17887
+       },
+       {
+        "k0": "0:0",
+        "k1": "1:1",
+        "ms": 46382
+       },
+       {
+        "k0": "1:1",
+        "k1": "1:2",
+        "ms": 2401
+       },
+       {
+        "k0": "1:2",
+        "k1": "1:3",
+        "ms": 1819
+       },
+       {
+        "k0": "1:3",
+        "k1": "1:0",
+        "ms": 84305
+       },
+       {
+        "k0": "2:1",
+        "k1": "2:2",
+        "ms": 1864
+       },
+       {
+        "k0": "2:2",
+        "k1": "2:3",
+        "ms": 2737
+       },
+       {
+        "k0": "2:3",
+        "k1": "2:0",
+        "ms": 55581
+       },
+       {
+        "k0": "2:0",
+        "k1": "3:1",
+        "ms": 84511
+       },
+       {
+        "k0": "3:1",
+        "k1": "3:2",
+        "ms": 1606
+       },
+       {
+        "k0": "3:2",
+        "k1": "3:3",
+        "ms": 2327
+       },
+       {
+        "k0": "3:3",
+        "k1": "3:0",
+        "ms": 56228
+       },
+       {
+        "k0": "3:0",
+        "k1": "4:1",
+        "ms": 80831
+       },
+       {
+        "k0": "4:1",
+        "k1": "4:2",
+        "ms": 2079
+       },
+       {
+        "k0": "4:2",
+        "k1": "4:3",
+        "ms": 1025
+       },
+       {
+        "k0": "4:3",
+        "k1": "4:0",
+        "ms": 87158
+       },
+       {
+        "k0": "4:0",
+        "k1": "5:1",
+        "ms": 109938
+       },
+       {
+        "k0": "5:1",
+        "k1": "5:2",
+        "ms": 1352
+       },
+       {
+        "k0": "5:2",
+        "k1": "5:3",
+        "ms": 1533
+       },
+       {
+        "k0": "5:3",
+        "k1": "5:0",
+        "ms": 84645
+       },
+       {
+        "k0": "5:0",
+        "k1": "6:0",
+        "ms": 105397
+       },
+       {
+        "k0": "6:1",
+        "k1": "6:2",
+        "ms": 2065
+       },
+       {
+        "k0": "6:2",
+        "k1": "6:3",
+        "ms": 2429
+       },
+       {
+        "k0": "6:3",
+        "k1": "6:0",
+        "ms": 83880
+       },
+       {
+        "k0": "6:0",
+        "k1": "7:1",
+        "ms": 106307
+       },
+       {
+        "k0": "7:1",
+        "k1": "7:2",
+        "ms": 1091
+       },
+       {
+        "k0": "7:2",
+        "k1": "7:3",
+        "ms": 2200
+       },
+       {
+        "k0": "7:3",
+        "k1": "7:0",
+        "ms": 6887
+       },
+       {
+        "k0": "7:0",
+        "k1": "8:1",
+        "ms": 30825
+       },
+       {
+        "k0": "8:1",
+        "k1": "8:2",
+        "ms": 725
+       },
+       {
+        "k0": "8:2",
+        "k1": "8:3",
+        "ms": 1899
+       },
+       {
+        "k0": "8:3",
+        "k1": "8:0",
+        "ms": 9610
+       },
+       {
+        "k0": "8:0",
+        "k1": "9:1",
+        "ms": 39289
+       },
+       {
+        "k0": "9:1",
+        "k1": "9:2",
+        "ms": 6531
+       },
+       {
+        "k0": "9:2",
+        "k1": "9:3",
+        "ms": 1803
+       },
+       {
+        "k0": "9:0",
+        "k1": "10:1",
+        "ms": 45323
+       },
+       {
+        "k0": "10:1",
+        "k1": "10:2",
+        "ms": 3361
+       },
+       {
+        "k0": "10:2",
+        "k1": "10:3",
+        "ms": 4064
+       },
+       {
+        "k0": "10:3",
+        "k1": "10:0",
+        "ms": 8367
+       },
+       {
+        "k0": "10:0",
+        "k1": "11:1",
+        "ms": 43335
+       },
+       {
+        "k0": "11:1",
+        "k1": "11:2",
+        "ms": 1743
+       },
+       {
+        "k0": "11:2",
+        "k1": "11:3",
+        "ms": 1551
+       },
+       {
+        "k0": "11:3",
+        "k1": "11:0",
+        "ms": 7961
+       },
+       {
+        "k0": "11:0",
+        "k1": "12:1",
+        "ms": 37639
+       },
+       {
+        "k0": "12:1",
+        "k1": "12:2",
+        "ms": 1965
+       },
+       {
+        "k0": "12:2",
+        "k1": "12:3",
+        "ms": 1024
+       },
+       {
+        "k0": "12:3",
+        "k1": "12:0",
+        "ms": 6816
+       },
+       {
+        "k0": "12:0",
+        "k1": "13:1",
+        "ms": 28629
+       },
+       {
+        "k0": "13:1",
+        "k1": "13:2",
+        "ms": 1578
+       },
+       {
+        "k0": "13:2",
+        "k1": "13:3",
+        "ms": 1094
+       },
+       {
+        "k0": "13:3",
+        "k1": "13:0",
+        "ms": 8808
+       },
+       {
+        "k0": "13:0",
+        "k1": "14:1",
+        "ms": 35750
+       },
+       {
+        "k0": "14:1",
+        "k1": "14:2",
+        "ms": 2074
+       },
+       {
+        "k0": "14:2",
+        "k1": "14:3",
+        "ms": 1702
+       },
+       {
+        "k0": "14:3",
+        "k1": "14:0",
+        "ms": 7887
+       },
+       {
+        "k0": "14:0",
+        "k1": "15:1",
+        "ms": 37865
+       },
+       {
+        "k0": "15:1",
+        "k1": "15:2",
+        "ms": 1182
+       },
+       {
+        "k0": "15:2",
+        "k1": "15:3",
+        "ms": 1392
+       },
+       {
+        "k0": "15:3",
+        "k1": "15:0",
+        "ms": 7173
+       },
+       {
+        "k0": "15:0",
+        "k1": "16:1",
+        "ms": 30699
+       },
+       {
+        "k0": "16:1",
+        "k1": "16:2",
+        "ms": 1838
+       },
+       {
+        "k0": "16:2",
+        "k1": "16:3",
+        "ms": 1331
+       },
+       {
+        "k0": "16:3",
+        "k1": "16:0",
+        "ms": 6110
+       },
+       {
+        "k0": "16:0",
+        "k1": "17:1",
+        "ms": 26502
+       },
+       {
+        "k0": "17:1",
+        "k1": "17:2",
+        "ms": 2340
+       },
+       {
+        "k0": "17:2",
+        "k1": "17:3",
+        "ms": 587
+       },
+       {
+        "k0": "17:3",
+        "k1": "17:0",
+        "ms": 9095
+       },
+       {
+        "k0": "17:0",
+        "k1": "18:1",
+        "ms": 38353
+       },
+       {
+        "k0": "18:1",
+        "k1": "18:2",
+        "ms": 2031
+       },
+       {
+        "k0": "18:2",
+        "k1": "18:3",
+        "ms": 1958
+       },
+       {
+        "k0": "18:3",
+        "k1": "18:0",
+        "ms": 10989
+       },
+       {
+        "k0": "18:0",
+        "k1": "19:1",
+        "ms": 43820
+       },
+       {
+        "k0": "19:1",
+        "k1": "19:2",
+        "ms": 3878
+       },
+       {
+        "k0": "19:2",
+        "k1": "19:3",
+        "ms": 1770
+       },
+       {
+        "k0": "19:3",
+        "k1": "19:0",
+        "ms": 2723
+       },
+       {
+        "k0": "19:0",
+        "k1": "20:1",
+        "ms": 25337
+       },
+       {
+        "k0": "20:1",
+        "k1": "20:2",
+        "ms": 3466
+       },
+       {
+        "k0": "20:2",
+        "k1": "20:3",
+        "ms": 2260
+       },
+       {
+        "k0": "20:3",
+        "k1": "20:0",
+        "ms": 12208
+       },
+       {
+        "k0": "20:0",
+        "k1": "21:1",
+        "ms": 46635
+       },
+       {
+        "k0": "21:1",
+        "k1": "21:2",
+        "ms": 2400
+       },
+       {
+        "k0": "21:2",
+        "k1": "21:3",
+        "ms": 1475
+       },
+       {
+        "k0": "21:3",
+        "k1": "21:0",
+        "ms": 7049
+       },
+       {
+        "k0": "21:0",
+        "k1": "22:1",
+        "ms": 34693
+       },
+       {
+        "k0": "22:1",
+        "k1": "22:2",
+        "ms": 2162
+       },
+       {
+        "k0": "22:2",
+        "k1": "22:3",
+        "ms": 990
+       },
+       {
+        "k0": "22:3",
+        "k1": "22:0",
+        "ms": 4974
+       },
+       {
+        "k0": "22:0",
+        "k1": "23:1",
+        "ms": 25477
+       },
+       {
+        "k0": "23:1",
+        "k1": "23:2",
+        "ms": 1994
+       },
+       {
+        "k0": "23:2",
+        "k1": "23:3",
+        "ms": 1597
+       },
+       {
+        "k0": "23:3",
+        "k1": "23:0",
+        "ms": 8358
+       },
+       {
+        "k0": "23:0",
+        "k1": "24:1",
+        "ms": 39505
+       },
+       {
+        "k0": "24:1",
+        "k1": "24:2",
+        "ms": 1079
+       },
+       {
+        "k0": "24:2",
+        "k1": "24:3",
+        "ms": 1767
+       },
+       {
+        "k0": "24:3",
+        "k1": "24:0",
+        "ms": 10739
+       },
+       {
+        "k0": "24:0",
+        "k1": "25:1",
+        "ms": 33906
+       },
+       {
+        "k0": "25:1",
+        "k1": "25:2",
+        "ms": 3304
+       },
+       {
+        "k0": "25:2",
+        "k1": "25:3",
+        "ms": 1969
+       },
+       {
+        "k0": "25:3",
+        "k1": "25:0",
+        "ms": 9621
+       },
+       {
+        "k0": "25:0",
+        "k1": "26:1",
+        "ms": 36791
+       },
+       {
+        "k0": "26:1",
+        "k1": "26:2",
+        "ms": 1566
+       },
+       {
+        "k0": "26:2",
+        "k1": "26:3",
+        "ms": 840
+       },
+       {
+        "k0": "26:3",
+        "k1": "26:0",
+        "ms": 11280
+       },
+       {
+        "k0": "26:0",
+        "k1": "27:1",
+        "ms": 44137
+       },
+       {
+        "k0": "27:1",
+        "k1": "27:2",
+        "ms": 700
+       },
+       {
+        "k0": "27:2",
+        "k1": "27:3",
+        "ms": 6572
+       },
+       {
+        "k0": "27:3",
+        "k1": "27:0",
+        "ms": 8078
+       },
+       {
+        "k0": "27:0",
+        "k1": "28:1",
+        "ms": 46749
+       },
+       {
+        "k0": "28:1",
+        "k1": "28:2",
+        "ms": 3871
+       },
+       {
+        "k0": "28:2",
+        "k1": "28:3",
+        "ms": 1273
+       },
+       {
+        "k0": "28:3",
+        "k1": "28:0",
+        "ms": 4319
+       },
+       {
+        "k0": "28:0",
+        "k1": "29:1",
+        "ms": 40408
+       },
+       {
+        "k0": "29:1",
+        "k1": "29:2",
+        "ms": 1784
+       },
+       {
+        "k0": "29:2",
+        "k1": "29:3",
+        "ms": 634
+       },
+       {
+        "k0": "29:3",
+        "k1": "29:0",
+        "ms": 8251
+       },
+       {
+        "k0": "29:0",
+        "k1": "30:0",
+        "ms": 29110
+       },
+       {
+        "k0": "29:0",
+        "k1": "30:1",
+        "ms": 38236
+       },
+       {
+        "k0": "30:1",
+        "k1": "30:2",
+        "ms": 1015
+       },
+       {
+        "k0": "30:2",
+        "k1": "30:3",
+        "ms": 1765
+       },
+       {
+        "k0": "30:3",
+        "k1": "30:0",
+        "ms": 4724
+       },
+       {
+        "k0": "30:0",
+        "k1": "31:1",
+        "ms": 24606
+       },
+       {
+        "k0": "31:1",
+        "k1": "31:2",
+        "ms": 5165
+       },
+       {
+        "k0": "31:2",
+        "k1": "31:3",
+        "ms": 974
+       },
+       {
+        "k0": "31:3",
+        "k1": "31:0",
+        "ms": 6546
+       },
+       {
+        "k0": "31:0",
+        "k1": "32:1",
+        "ms": 30475
+       },
+       {
+        "k0": "32:1",
+        "k1": "32:2",
+        "ms": 1280
+       },
+       {
+        "k0": "32:2",
+        "k1": "32:3",
+        "ms": 5852
+       },
+       {
+        "k0": "32:3",
+        "k1": "32:0",
+        "ms": 8760
+       },
+       {
+        "k0": "32:0",
+        "k1": "33:1",
+        "ms": 46855
+       },
+       {
+        "k0": "33:1",
+        "k1": "33:2",
+        "ms": 2134
+       },
+       {
+        "k0": "33:2",
+        "k1": "33:3",
+        "ms": 748
+       },
+       {
+        "k0": "33:3",
+        "k1": "33:0",
+        "ms": 11564
+       },
+       {
+        "k0": "33:0",
+        "k1": "34:1",
+        "ms": 44758
+       },
+       {
+        "k0": "34:1",
+        "k1": "34:2",
+        "ms": 2663
+       },
+       {
+        "k0": "34:2",
+        "k1": "34:3",
+        "ms": 2659
+       },
+       {
+        "k0": "34:3",
+        "k1": "34:0",
+        "ms": 18033
+       },
+       {
+        "k0": "34:0",
+        "k1": "35:1",
+        "ms": 44364
+       },
+       {
+        "k0": "35:1",
+        "k1": "35:2",
+        "ms": 1754
+       },
+       {
+        "k0": "35:2",
+        "k1": "35:3",
+        "ms": 1153
+       },
+       {
+        "k0": "35:3",
+        "k1": "35:0",
+        "ms": 9592
+       },
+       {
+        "k0": "35:0",
+        "k1": "36:1",
+        "ms": 38273
+       },
+       {
+        "k0": "36:1",
+        "k1": "36:2",
+        "ms": 811
+       },
+       {
+        "k0": "36:2",
+        "k1": "36:3",
+        "ms": 1471
+       },
+       {
+        "k0": "36:3",
+        "k1": "36:0",
+        "ms": 7759
+       },
+       {
+        "k0": "36:0",
+        "k1": "37:1",
+        "ms": 34956
+       },
+       {
+        "k0": "37:1",
+        "k1": "37:2",
+        "ms": 884
+       },
+       {
+        "k0": "37:2",
+        "k1": "37:3",
+        "ms": 2774
+       },
+       {
+        "k0": "37:3",
+        "k1": "37:0",
+        "ms": 6704
+       },
+       {
+        "k0": "37:0",
+        "k1": "38:1",
+        "ms": 32073
+       },
+       {
+        "k0": "38:1",
+        "k1": "38:2",
+        "ms": 996
+       },
+       {
+        "k0": "38:2",
+        "k1": "38:3",
+        "ms": 1813
+       },
+       {
+        "k0": "38:3",
+        "k1": "38:0",
+        "ms": 9823
+       },
+       {
+        "k0": "38:0",
+        "k1": "39:0",
+        "ms": 34474
+       },
+       {
+        "k0": "39:0",
+        "k1": "39:1",
+        "ms": 1329
+       },
+       {
+        "k0": "39:1",
+        "k1": "39:2",
+        "ms": 3834
+       },
+       {
+        "k0": "39:2",
+        "k1": "39:3",
+        "ms": 2021
+       }
+      ],
+      "yr": {
+       "t": 1795539596822,
+       "turns": [],
+       "year": null
+      },
+      "whereDiff": 0,
+      "posDiff": 1,
+      "statLag": 0,
+      "cmp": 163,
+      "min": 33.7,
+      "turnP95": 83880
+     },
+     {
+      "code": "MDPN",
+      "host": "Y",
+      "t0": 1795539618063,
+      "weeks": 11,
+      "buoi": 49,
+      "turns": [
+       {
+        "k0": "0:2",
+        "k1": "0:3",
+        "ms": 2119
+       },
+       {
+        "k0": "0:3",
+        "k1": "0:0",
+        "ms": 14810
+       },
+       {
+        "k0": "0:0",
+        "k1": "1:1",
+        "ms": 39079
+       },
+       {
+        "k0": "1:2",
+        "k1": "1:3",
+        "ms": 904
+       },
+       {
+        "k0": "1:3",
+        "k1": "1:0",
+        "ms": 94191
+       },
+       {
+        "k0": "1:0",
+        "k1": "2:1",
+        "ms": 119245
+       },
+       {
+        "k0": "2:1",
+        "k1": "2:2",
+        "ms": 1602
+       },
+       {
+        "k0": "2:2",
+        "k1": "2:3",
+        "ms": 1298
+       },
+       {
+        "k0": "2:3",
+        "k1": "2:0",
+        "ms": 6589
+       },
+       {
+        "k0": "2:0",
+        "k1": "3:1",
+        "ms": 29976
+       },
+       {
+        "k0": "3:1",
+        "k1": "3:2",
+        "ms": 3505
+       },
+       {
+        "k0": "3:2",
+        "k1": "3:3",
+        "ms": 1301
+       },
+       {
+        "k0": "3:3",
+        "k1": "3:0",
+        "ms": 12869
+       },
+       {
+        "k0": "3:0",
+        "k1": "4:1",
+        "ms": 58554
+       },
+       {
+        "k0": "4:1",
+        "k1": "4:2",
+        "ms": 881
+       },
+       {
+        "k0": "4:2",
+        "k1": "4:3",
+        "ms": 2098
+       },
+       {
+        "k0": "4:3",
+        "k1": "4:0",
+        "ms": 10444
+       },
+       {
+        "k0": "4:0",
+        "k1": "5:1",
+        "ms": 46213
+       },
+       {
+        "k0": "5:1",
+        "k1": "5:2",
+        "ms": 1301
+       },
+       {
+        "k0": "5:2",
+        "k1": "5:3",
+        "ms": 801
+       },
+       {
+        "k0": "5:3",
+        "k1": "5:0",
+        "ms": 82827
+       },
+       {
+        "k0": "6:1",
+        "k1": "6:2",
+        "ms": 2293
+       },
+       {
+        "k0": "6:2",
+        "k1": "6:3",
+        "ms": 1679
+       },
+       {
+        "k0": "6:3",
+        "k1": "6:0",
+        "ms": 85941
+       },
+       {
+        "k0": "6:0",
+        "k1": "7:1",
+        "ms": 109824
+       },
+       {
+        "k0": "7:1",
+        "k1": "7:2",
+        "ms": 2426
+       },
+       {
+        "k0": "7:3",
+        "k1": "7:0",
+        "ms": 51537
+       },
+       {
+        "k0": "7:0",
+        "k1": "8:1",
+        "ms": 82328
+       },
+       {
+        "k0": "8:1",
+        "k1": "8:2",
+        "ms": 886
+       },
+       {
+        "k0": "8:2",
+        "k1": "8:3",
+        "ms": 2056
+       },
+       {
+        "k0": "8:0",
+        "k1": "9:1",
+        "ms": 118245
+       },
+       {
+        "k0": "9:1",
+        "k1": "9:2",
+        "ms": 2295
+       },
+       {
+        "k0": "9:2",
+        "k1": "9:3",
+        "ms": 1923
+       },
+       {
+        "k0": "9:0",
+        "k1": "10:1",
+        "ms": 115482
+       },
+       {
+        "k0": "10:2",
+        "k1": "10:3",
+        "ms": 3856
+       },
+       {
+        "k0": "10:3",
+        "k1": "10:0",
+        "ms": 51514
+       },
+       {
+        "k0": "10:0",
+        "k1": "11:0",
+        "ms": 80178
+       },
+       {
+        "k0": "11:0",
+        "k1": "11:1",
+        "ms": 4851
+       },
+       {
+        "k0": "11:1",
+        "k1": "11:2",
+        "ms": 5109
+       },
+       {
+        "k0": "11:2",
+        "k1": "11:3",
+        "ms": 1181
+       }
+      ],
+      "yr": {
+       "t": 1795540766505,
+       "turns": [],
+       "year": null
+      },
+      "whereDiff": 0,
+      "posDiff": 2,
+      "statLag": 2,
+      "cmp": 43,
+      "min": 19.1,
+      "turnP95": 115482
+     },
+     {
+      "code": "7Z98",
+      "host": "Y",
+      "t0": 1795540786141,
+      "weeks": 4,
+      "buoi": 0,
+      "turns": [],
+      "yr": {
+       "t": 1795540786141,
+       "turns": [],
+       "year": 1
+      },
+      "whereDiff": 0,
+      "posDiff": 2,
+      "statLag": 0,
+      "cmp": 14
+     }
+    ],
+    "rejoin": [
+     {
+      "room": "8MBP",
+      "week": 6,
+      "ms": 6924
+     },
+     {
+      "room": "SG77",
+      "week": 6,
+      "ms": 6678
+     },
+     {
+      "room": "MDPN",
+      "week": 6,
+      "ms": 6752
+     }
+    ]
+   },
+   "rooms": 4,
+   "t": {
+    "total": 3945949
+   },
+   "partial": true,
+   "bugs": [
+    {
+     "type": "coop-pos",
+     "msg": "where one sees the friend ≠ where the friend is",
+     "detail": "buổi 0.3 host sees guest at r3, guest is at H:a",
+     "n": 9,
+     "at": "coop-p10s-S1"
+    },
+    {
+     "type": "save",
+     "msg": "save→load→save changes the state (host)",
+     "detail": "save.S.visit.people.0.__feelMig: 1 → undefined",
+     "n": 13,
+     "at": "coop-p10s-S1"
+    },
+    {
+     "type": "save",
+     "msg": "save→load→save changes the state (guest)",
+     "detail": "save.S.visit.__chg: 1 → undefined",
+     "n": 13,
+     "at": "coop-p10s-S1"
+    },
+    {
+     "type": "lag",
+     "msg": "co-op LAG budget miss: coopTurnP95",
+     "detail": "coopTurnP95 39716 > 10000 · game year 1 · room 8MBP · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":691.5,\"upKB\":2017,\"dnKB\":408,\"posFlip\":null,\"resend\":21,\"resendBy\":{\"act\":21},\"longTasksPerMin\":224.6,\"longTaskMax\":1721,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":631.1,\"upKB\":1473,\"dnKB\":740,\"posFlip\":null,\"resend\":27,\"resendBy\":{\"act\":26,\"pos\":1},\"longTasksPerMin\":262.6,\"longTaskMax\":2730,\"errs\":0}}",
+     "n": 6,
+     "at": "coop-p10s-S1"
+    },
+    {
+     "type": "lag",
+     "msg": "co-op buổi stall (both ready, the room took > 30 s or never stepped)",
+     "detail": "5 of 23 buổi in game year 1",
+     "n": 6,
+     "at": "coop-p10s-S1"
+    },
+    {
+     "type": "lag",
+     "msg": "co-op LAG budget miss: coopSyncKBMax",
+     "detail": "coopSyncKBMax 209.3 > 100 · game year 1 · room SG77 · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":482.5,\"upKB\":3749,\"dnKB\":562,\"posFlip\":null,\"resend\":25,\"resendBy\":{\"act\":22,\"where\":2,\"pos\":1},\"longTasksPerMin\":213.2,\"longTaskMax\":2596,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":399.1,\"upKB\":1565,\"dnKB\":2000,\"posFlip\":null,\"resend\":56,\"resendBy\":{\"act\":40,\"pos\":16},\"longTasksPerMin\":347.8,\"longTaskMax\":2238,\"errs\":0}}",
+     "n": 4,
+     "at": "coop-p10s-S1"
+    },
+    {
+     "type": "number",
+     "msg": "stat out of range: bac",
+     "detail": "bac=-25 · fold guest week 16",
+     "n": 7,
+     "at": "coop-p10s-S1"
+    },
+    {
+     "type": "lag",
+     "msg": "co-op LAG budget miss: coopActionP95",
+     "detail": "coopActionP95 15072 > 8000 · game year 1 · room SG77 · per device {\"ipad\":{\"seat\":\"host\",\"kbPerMin\":1114.5,\"upKB\":13923,\"dnKB\":2858,\"posFlip\":null,\"resend\":34,\"resendBy\":{\"act\":28,\"where\":6},\"longTasksPerMin\":211.3,\"longTaskMax\":1994,\"errs\":0},\"fold\":{\"seat\":\"guest\",\"kbPerMin\":921.7,\"upKB\":9661,\"dnKB\":4216,\"posFlip\":null,\"resend\":92,\"resendBy\":{\"act\":87,\"pos\":5},\"longTasksPerMin\":262.1,\"longTaskMax\":2804,\"errs\":0}}",
+     "n": 1,
+     "at": "coop-p10s-S1"
+    },
+    {
+     "type": "coop-world",
+     "msg": "world differs between the two screens: consorts differ (id/name/rank/alive/out/kids)",
+     "detail": "week 35 · host-only [] guest-only [1001:Nghiêm Linh Lung:0:1:0:] · origins dtq/nc",
+     "n": 1,
+     "at": "coop-p10s-S1"
+    },
+    {
+     "type": "stuck",
+     "msg": "co-op room stuck: no room week step in 240 s",
+     "detail": "host {\"buoi\":3,\"week\":39,\"bend\":false,\"pendBuoi\":null,\"pend\":false,\"sent\":38,\"Q\":0,\"Qt\":[],\"mh\":true,\"mg\":false,\"dead\":false,\"next\":true,\"title\":false,\"st\":\"open\",\"peer\":true} || guest {\"buoi\":3,\"week\":39,\"bend\":false,\"pendBuoi\":null,\"pend\":false,\"sent\":38,\"Q\":0,\"Qt\":[],\"mh\":true,\"mg\":false,\"dead\":false,\"next\":true,\"title\":false,\"st\":\"open\",\"peer\":true}",
+     "n": 2,
+     "at": "coop-p10s-S1",
+     "shots": [
+      "shots/coop-p10s-S1-r2-host-stuck.png",
+      "shots/coop-p10s-S1-r2-guest-stuck.png"
+     ]
+    },
+    {
+     "type": "number",
+     "msg": "option text «Sức +6» but the effect applies suc=-2",
+     "detail": "«Thay hết nước, đồ ăn | Sức +6 · kèm: không biết nguyên do» in «Chuyện lạ cần tra» fx={\"bac\":-5,\"suc\":-2} @ năm 1 th6 t2 b1 (buổi #58) · host ipad",
+     "n": 1,
+     "at": "coop-p10s-S1",
+     "saveFile": "saves/coop-20261124-0825-p9-10-s-1mrju2c.json"
+    },
+    {
+     "type": "coop-stat",
+     "msg": "the friend's Sủng/Danh/Sức shown ≠ her own (one buổi late or wrong)",
+     "detail": "buổi 1.3: host sees guest 2/38/87 (guest 2/38/89) · guest sees host 0/5/81 (host 0/5/81)",
+     "n": 2,
+     "at": "coop-p10s-S1"
+    },
+    {
+     "type": "number",
+     "msg": "stat out of range: danh",
+     "detail": "danh=-1 · fold guest week 4",
+     "n": 1,
+     "at": "coop-p10s-S1",
+     "saveFile": "saves/coop-20261124-0825-p9-10-s-1cfa5o5.json"
     }
    ]
   }
