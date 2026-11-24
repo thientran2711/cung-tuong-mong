@@ -6,10 +6,5 @@
 {"role":"up","key":"cx3:staffHoi","side":"P-ONLY"},
 {"role":"up","key":"cx4:rougeBorrow","side":"N-ONLY"},
 {"role":"maid","key":"maid:beside","side":"N-ONLY"},
-{"role":"up","key":"cx:buy","side":"P-ONLY","note":"up column, one-world promotion probe (B4 move): no gift-worthy shop item for the risen NPC in the maid-page world — probe world (B4)"},
-{"role":"t4","key":"label:Cầm cố","side":"P-ONLY","note":"REAL gap: her wardrobe «Cầm cố» (j92 wdPawn) — an NPC never pawns (no AG option; an NPC quiet sale is a flat monthly roll) — for C-AG (B3)"},
-{"role":"t5","key":"label:Cầm cố","side":"P-ONLY","note":"REAL gap: her wardrobe «Cầm cố» (j92 wdPawn) — an NPC never pawns (no AG option; an NPC quiet sale is a flat monthly roll) — for C-AG (B3)"},
-{"role":"t6","key":"label:Cầm cố","side":"P-ONLY","note":"REAL gap: her wardrobe «Cầm cố» (j92 wdPawn) — an NPC never pawns (no AG option; an NPC quiet sale is a flat monthly roll) — for C-AG (B3)"},
-{"role":"t7","key":"label:Cầm cố","side":"P-ONLY","note":"REAL gap: her wardrobe «Cầm cố» (j92 wdPawn) — an NPC never pawns (no AG option; an NPC quiet sale is a flat monthly roll) — for C-AG (B3)"},
-{"role":"hh","key":"label:Cầm cố","side":"P-ONLY","note":"REAL gap: her wardrobe «Cầm cố» (j92 wdPawn) — an NPC never pawns (no AG option; an NPC quiet sale is a flat monthly roll) — for C-AG (B3)"}
+{"role":"up","key":"cx:buy","side":"P-ONLY","note":"up column, one-world promotion probe (B4 move): no gift-worthy shop item for the risen NPC in the maid-page world — probe world (B4)"}
 ]

@@ -9,10 +9,16 @@ const path=require('path');const fs=require('fs');const {scan}=require('../tools
 const HTML=process.argv[2]||'dev/index.html';const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{
  const R=await scan(HTML);
+ /* law1-audit (OD 24/11 ~08:35Z): the rule FAMILIES (dev/tools/role-parity-fam.js) — a GAP row not in FAM_OPEN = FAIL; FAM_OPEN only shrinks.
+    Open now: the 3 gift rows ordered to Foreman D (07:21Z) and the co-op ration row (parked: cross-seat item move, item-ledger protocol). */
+ const FAM_OPEN=["Quà tặng/Có sở thích / sở ghét","Quà tặng/Quà trúng sở ghét → mất thiện cảm","Quà tặng/Biết sở thích người khác","Co-op/Vay / lấy trộm khẩu phần"];
+ {const F=await require('../tools/role-parity-fam.js').famScan(HTML);const fg=F.gaps.map(g=>g.fam+"/"+g.item);const fresh=fg.filter(x=>!FAM_OPEN.includes(x));
+  ok(!fresh.length,'law-1 families: no new GAP row',fresh);const shut=FAM_OPEN.filter(x=>!fg.includes(x));if(shut.length)console.log('note: family rows now closed (trim FAM_OPEN): '+shut.join(", "));
+  ok(!F.pageErr.length,'law-1 families: no page error',F.pageErr.slice(0,3))}
  const OPEN=JSON.parse(fs.readFileSync(path.join(__dirname,'../tools/role-parity-open.json'),'utf8'));
  /* reviewer role-parity r2/r3 (part-1 fix (c), cap = merged baseline): the baseline is keyed role|key|SIDE (a P-ONLY row that turns N-ONLY is a new gap, not the same one) and may only
     SHRINK: OPEN_MAX = the count it was frozen at; lower it when rows close, never raise it without a reviewer */
- const OPEN_MAX=13;/* b-nameclash-rp 21/11: 15 → 13 — the scan asks every other consort's chest directly (owner away), so «up cx2:chest» / «up cx4:rougeSteal» are held by both sides (hh ones already trimmed by coop-name-clash r1) *//* person-minigame-acts round B 20/11: 18 → 17 — «maid P-ONLY maid:errand» held by both sides once the m-meet maid world exists (stable ×2) *//* role-parity-drift-2 19/11: 20 → 18 — with the 98f9f0f1 drift fixed (dev/handover/reports/role-parity-drift-2.md) «up cx3:tell» and «up cx:maidR» are held by both sides (the staff world now also sets her confidant maid's lòng) */const gk=g=>g.role+"|"+g.key+"|"+g.side;const okOpen=new Set(OPEN.map(gk));
+ const OPEN_MAX=8;/* law1-audit 24/11: 13 → 8 — «Cầm cố» t4–t7 + hh closed: the NPC pawns / redeems with her wdPawn / wdRedeem (j92 wdNpcPawn / wdNpcRedeem, exempt row with the reason) *//* b-nameclash-rp 21/11: 15 → 13 — the scan asks every other consort's chest directly (owner away), so «up cx2:chest» / «up cx4:rougeSteal» are held by both sides (hh ones already trimmed by coop-name-clash r1) *//* person-minigame-acts round B 20/11: 18 → 17 — «maid P-ONLY maid:errand» held by both sides once the m-meet maid world exists (stable ×2) *//* role-parity-drift-2 19/11: 20 → 18 — with the 98f9f0f1 drift fixed (dev/handover/reports/role-parity-drift-2.md) «up cx3:tell» and «up cx:maidR» are held by both sides (the staff world now also sets her confidant maid's lòng) */const gk=g=>g.role+"|"+g.key+"|"+g.side;const okOpen=new Set(OPEN.map(gk));
  ok(OPEN.length<=OPEN_MAX&&OPEN.every(g=>g.side),'open baseline only shrinks (≤ '+OPEN_MAX+' rows, each with its side)',OPEN.length);
  const fresh=R.gaps.filter(g=>!okOpen.has(gk(g)));const seen=new Set(R.gaps.map(gk));const gone=OPEN.filter(g=>!seen.has(gk(g)));
  ok(fresh.length===0,'no NEW role-parity gap (every role × act cell is held by both sides, exempt, or a listed open gap)',fresh.slice(0,25).map(g=>g.role+":"+g.side+":"+g.key));

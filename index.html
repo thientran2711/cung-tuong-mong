@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)","b":"dd3a8a4d4b48","h":[{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"}]};
+window.CTM_BI={"s":"7bf4f2b1","t":"2026-11-24T05:43Z","c":"law1-audit: rule-family law-1 scan + close B gaps (Ban cung NPC accept/humble, NPC pawn/redeem)","b":"9f2533eec4a9","h":[{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -36260,10 +36260,17 @@ palCeremony=function(){if(!S||!S.palCer||S.dead)return;S.palCer=0;const from=S.p
   opts.push({n:`Xin ${PALN[i]}`,fx:{},x:`${word(c.odds)} · thành: dời sang ${PALN[i]}${gain} · hỏng: ${loss}`,go:()=>{bcAsk(S,i,from)}})}
  Q.push({ev:1,t:"Ban cung",who:pEmp(),h:`<p>Thánh chỉ: ${RANKS[S.rank].n} ${S.name} được ban <b>${PALN[from]}</b>, làm chủ vị một cung. Cung nhân dọn từ ${HOMEN} sang trong ngày.</p><p>Cung càng gần ngự tẩm, càng danh giá, càng nhiều người muốn; tâu xin quá phận thì khó được chuẩn.</p>`,opts});
  log(`Được ban ${PALN[from]}.`)};
-/* NPC parity (law 1): a consort newly made chủ vị may petition the same way (host only in co-op: one roll for the world) */
+/* NPC parity (law 1): a consort newly made chủ vị holds HER card (host only in co-op: one roll for the world).
+   law1-audit (OD 24/11 ~08:35Z): the NPC used to have only the «ask UP» road; her card also has «Nhận <cung>» (Đức +ok.ducTake) and the humble ask
+   (a palace of lower / same standing, not nearer: Đức +ok.ducHumble on success). Now the NPC picks among the SAME three roads by her nết:
+   a humble nết (BAL.net.n.bcHumble) asks the humble palace when its odds word reaches npcLv; any other nết asks UP when its odds word reaches npcLv;
+   otherwise she takes the decree (Đức +ok.ducTake, the gain her «Nhận» gives). Same odds, gains and losses (bcAsk / bcGain), one rule. */
 function bcNpcAsk(v){const B=BAL.banCung,from=v.pal;if(from==null)return;
- const C=bcChoices(v,from).filter(c=>!c.locked&&bcDanh(c.i)>bcDanh(from)&&oddsLv(c.odds)>=B.npcLv);if(!C.length)return;
- bcAsk(v,C[0].i,from)}
+ const C=bcChoices(v,from).filter(c=>!c.locked&&oddsLv(c.odds)>=B.npcLv);
+ const gOf=c=>bcGain(c.i,from),humble=C.filter(c=>gOf(c).duc!=null),up=C.filter(c=>gOf(c).danh!=null);/* up = a higher palace or the same standing nearer the Emperor (her card's Danh roads) */
+ let hum=0;try{hum=nv(v,"bcHumble")}catch(e){}
+ const pickC=hum?humble[0]:up[0];if(pickC)return bcAsk(v,pickC.i,from);
+ v.duc=cl((v.duc||0)+B.ok.ducTake,0,100);return false}
 (function(){const f0=palFix;palFix=function(){const pre={};try{for(const v of rivals||[])pre[v.id]=v.pal}catch(e){}const r=f0.apply(this,arguments);
  try{const cw=!!(window.COOPW&&COOPW.on),hostOK=!cw||COOPW.seat==="a";if(hostOK&&S&&rivals)for(const v of rivals)if(!v.coop&&pre[v.id]==null&&v.pal!=null&&!v.palLone&&palHeadOK(v))bcNpcAsk(v)}catch(e){console.error(e)}
  return r}})();
@@ -37368,6 +37375,10 @@ BAL.greet={ann:{emp:1,th:1},rank:{top:100,th:99,cons:10,out:9,man:8,srv:1,tq:5,m
  meet:{on:1,stay:.35,spite:.6,base:1,affK:20,oanK:20,max:3,
   opt:{greet:"visit",health:"visit",praise:"help",secret:"ally",gossip:"gossip",warn:"warn",provoke:"provoke"}}};
 BAL.net.n.greetName={"Kiêu ngạo":0,"Lạnh lùng":0,"_":1};
+/* law1-audit (Ban cung, jbancung bcNpcAsk): 1 = a newly made chủ vị of this nết asks the HUMBLE palace on her card (Đức road) instead of asking up */
+BAL.net.n.bcHumble={"Khiêm nhường":1,"Ân cần":1,"_":0};
+/* law1-audit (wardrobe, j92 wdNpcPawn): 1 = an NPC short of silver of this nết PAWNS a piece (wants it back), else she sells it quietly (her two roads) */
+BAL.net.n.wdPawn={"Kín đáo":1,"Khiêm nhường":1,"Ân cần":1,"_":0};
 BAL.net.n.meetW={"Ân cần":1.6,"Nhiều chuyện":1.8,"Xu nịnh":1.4,"Nóng nảy":1.2,"Lạnh lùng":.4,"Kín đáo":.6,"Kiêu ngạo":.8,"_":1};
 /* the person-dialog chat options (j9 topicOpts, j2 Khiêu khích): ONE table read by her options AND by the same options an NPC uses on her (AG-MEET, jgreet:
    mirrored, she is the judge). Gains are × chatF (fewer each repeat). praise odds = od(o + the speaker's Tài / div); foe = oán a third must hold to warn. */
@@ -40018,8 +40029,15 @@ function wdSell(p,ix){const e=p.inv[ix];if(!e||e.h||!wdItem(e))return"";if(wdIsN
 function wdPawn(p,ix){const e=p.inv[ix];if(!e||e.h||!wdItem(e))return"";if(wdIsNt(e))return"";const ag=wdAgent(p);if(!ag)return"";
  p.inv.splice(ix,1);const pr=wdPrice(e),g=Math.max(1,Math.round(pr*WD.pawnPct/100)),back=Math.round(pr*WD.redeemPct/100);p.wdPawn=p.wdPawn||[];p.wdPawn.push({e,g,back,due:wk()+WD.pawnWeeks,ag:ag.name});ap(p,{bac:g});
  let r=`${wdNmC(p)} sai ${ag.name} mang ${wdItem(e).n} đi cầm: Bạc +${g}; chuộc lại ${back} bạc trong ${WD.pawnWeeks} tuần. `;
- if(roll(wdLeak(p,ag,true))){ap(p,{danh:-WD.sellDanh});r+=`<span class="r">Chuyện lộ ra: ${wdNm(p)} túng thiếu phải cầm đồ.</span> Danh -${WD.sellDanh}. `}return r}
+ if(roll(wdLeak(p,ag,true))){ap(p,{danh:-WD.sellDanh});r+=`<span class="r">Chuyện lộ ra: ${wdNm(p)} túng thiếu phải cầm đồ.</span> Danh -${WD.sellDanh}. `;if(p!==S)try{newsAdd(p,"wd",`${wdNmC(p)} túng thiếu, sai người mang đồ đi cầm.`)}catch(x){}}return r}
 function wdRedeem(p,i){const P=(p.wdPawn||[])[i];if(!P||p.bac<P.back)return"";ap(p,{bac:-P.back});p.wdPawn.splice(i,1);p.inv.push(P.e);return `${wdNmC(p)} chuộc lại ${wdItem(P.e).n}: Bạc -${P.back}. `}
+/* law1-audit (OD 24/11 ~08:35Z): an NPC short of silver holds HER two roads — «Bán lén» or «Cầm cố» (same wdSell / wdPawn, same prices, same
+   leak) — and picks by nết (BAL.net.n.wdPawn: a nết that wants the piece back pawns); she redeems when her silver stays above the «poor» line
+   after paying (BAL.ag.why.wd.poor, the line that made her pawn); an unredeemed piece is lost at the due tuần for everyone (wdPawnMonth). */
+function wdNpcPawn(v,ix){let pw=0;try{pw=nv(v,"wdPawn")}catch(e){}return pw?wdPawn(v,ix):wdSell(v,ix)}
+function wdNpcRedeem(v){if(!v||v===S||v.coop||!(v.wdPawn||[]).length)return"";if(typeof worldOn==="function"&&!worldOn())return"";/* co-op: NPCs are the host's */
+ let r="";const poor=BAL.ag.why.wd.poor;
+ for(let i=v.wdPawn.length-1;i>=0;i--){const P=v.wdPawn[i];if(P&&wk()<=P.due&&(v.bac||0)-P.back>=poor)r+=wdRedeem(v,i)}return r}
 function wdPawnMonth(p){if(!p.wdPawn||!p.wdPawn.length)return"";let r="";p.wdPawn=p.wdPawn.filter(P=>{if(wk()<=P.due)return true;if(p===S)r+=`${wdItem(P.e).n} cầm cố đã quá hạn, mất hẳn. `;return false});return r}
 
 /* ---------- ngự tứ lost or broken = bất kính (the same risk for everyone holding one) ---------- */
@@ -40058,9 +40076,10 @@ function wdMonth(pre){let ev="";S.wdk=S.wdk||{};
  for(const p of consorts()){if(p!==S){wdNpcInit(p);wdNpcDress(p)}const st=wdStatus(p);
   if(st==="over"){if(npcWhy("wdNotice",{p})){ap(p,{sung:WD.overSung});if(p===S)log(`Hoàng thượng để mắt tới y phục rực rỡ của ngươi. ${sgStat(WD.overSung)}.`)}/* rivals' jealousy: the approved luxury law (jinv luxMonth) */}
   if(!p.confined)ev+=wdRemark(p,st)} /* npc-purpose: wdRemark asks npcWhy("wdRemark") — a remark only from one with a reason */
- ev+=wdTaimat();ev+=wdPawnMonth(S);for(const p of consorts())wdNtMonth(p);
- /* NPCs short of silver sell quietly too */
- for(const o of npcWhyAll("wdPawn")){const v=o.who;const i=(v.inv||[]).findIndex(e=>e&&!e.h&&wdItem(e)&&!wdIsNt(e));if(i>=0)wdSell(v,i)}
+ ev+=wdTaimat();for(const p of consorts())if(!p.coop)ev+=wdPawnMonth(p);for(const p of consorts())wdNtMonth(p);
+ /* NPCs: redeem what they can afford, then the ones short of silver sell or pawn (law1-audit: her two roads, by nết) */
+ for(const v of liveRivals(true))wdNpcRedeem(v);
+ for(const o of npcWhyAll("wdPawn")){const v=o.who;const i=(v.inv||[]).findIndex(e=>e&&!e.h&&wdItem(e)&&!wdIsNt(e));if(i>=0)wdNpcPawn(v,i)}
  return ev}
 (function(){const m0=monthTick;monthTick=function(){let pre=null;try{const q=queenP();pre={th:!!S.thDead,q:q&&q!==S?q.id:null,P:wdPOf(S)}}catch(e){}
  const r=m0.apply(this,arguments);let add="";try{if(pre&&S&&!S.dead)add=wdMonth(pre)}catch(e){console.error(e)}return (r||"")+add}})();
@@ -40136,7 +40155,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest("[data-wd]");if
 (function(){if(typeof pcard!=="function")return;const p0=pcard;pcard=function(o){try{if(S&&o&&o.name){const nm=String(o.name).replace(/<[^>]*>/g,"");const p=nm===S.name?S:rivals.find(v=>v.name===nm);
   if(p&&(p===S||(typeof knows!=="function"||knows(p)))){const sl=wdSlots(p);const C=sl.map(x=>chip(`${x.slot==="tram"?"Trâm":"Y phục"}: ${x.name}${x.empty?"":" · "+x.gradeName}`,x.nt?"ok":""));
    if(sl[0].label)C.push(chip(sl[0].label,sl[0].labelKey==="ok"?"ok":"hot"));o=Object.assign({},o,{chips:(o.chips||[]).concat(C)})}}}catch(e){}return p0.call(this,o)}})();
-window.wdAutoUI=wdAutoUI;window.wdGroomUI=wdGroomUI;window.wdSell=wdSell;window.wdPawn=wdPawn;window.wdRedeem=wdRedeem;window.wdWear=wdWear;window.wdTakeOff=wdTakeOff;
+window.wdAutoUI=wdAutoUI;window.wdGroomUI=wdGroomUI;window.wdSell=wdSell;window.wdPawn=wdPawn;window.wdRedeem=wdRedeem;window.wdNpcPawn=wdNpcPawn;window.wdNpcRedeem=wdNpcRedeem;window.wdWear=wdWear;window.wdTakeOff=wdTakeOff;
 /* ================= jwd92b: NPCs really use the wardrobe moves (balance pass, two-way rules) =================
    Measured with the bot: before this, NPCs never impeached (ACT.vp was not in any NPC menu) and the giá họa only came from
    the scheme menu at danger band 2+, so "định giá họa" talk was seen but a plant almost never landed.
@@ -96032,7 +96051,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="dd3a8a4d4b48";window.CTM_BUILD=BUILD;
+const BUILD="9f2533eec4a9";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
