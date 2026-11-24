@@ -5,13 +5,13 @@ const LIB=fs.readFileSync(__dirname+'/mklib.js','utf8');
 const M3=fs.readFileSync(__dirname+'/m3.js','utf8');const ROOMJS=/const ROOMJS=`([\s\S]*?)`;/.exec(M3)[1].replace(/\$\{ROOM\}/g,'https://ctm-img.victoria-tntt.workers.dev/img/toil-room-c1-dapung.webp');
 const VJS=`window.MKV={
  tap(el,dx=.5,dy=.5){const r=(typeof el==='string'?document.querySelector(el):el).getBoundingClientRect();const x=r.left+r.width*dx,y=r.top+r.height*dy;
-  const t=document.createElement('div');t.style.cssText='position:fixed;z-index:9999;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;border:3px solid #ffd54a;background:rgba(255,213,74,.25);box-shadow:0 0 14px rgba(255,190,40,.9);pointer-events:none;left:'+x+'px;top:'+y+'px';document.body.appendChild(t);
+  const t=document.createElement('div');t.style.cssText='position:fixed;z-index:9999;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;border:3px solid rgba(255,255,255,.95);background:rgba(255,255,255,.35);box-shadow:0 0 6px rgba(0,0,0,.45);pointer-events:none;left:'+x+'px;top:'+y+'px';document.body.appendChild(t);
   t.animate([{transform:'scale(.4)',opacity:0},{transform:'scale(1)',opacity:1,offset:.35},{transform:'scale(1.5)',opacity:0}],{duration:650,easing:'ease-out'}).onfinish=()=>t.remove()},
  ty(){const sv=S.wd.y;S.wd.y=null;const f=figFor(S);S.wd.y=sv;return f},
  hub(o){const L=MKX.layer('',{noveil:1});const ipad=innerWidth>1000;MKR.put(L,{fx:0,fy:ipad?.07:0});MKR.glow(L);
   const l1=MKR.lbl(L,'Thay xiêm y',473,ipad?72:30),l2=MKR.lbl(L,'Điểm trang',118,262);
   const fig=o.fig==='ty'?MKV.ty():figFor(S);const {F,pl}=MKR.hubFig(L,fig,o.mk);if(o.btn!==false)MKR.btns(L,'Đã chỉnh tề');
-  const svg=L.querySelector('svg');svg.animate([{opacity:.75},{opacity:1},{opacity:.75}],{duration:1600,iterations:Infinity});return {L,F,pl,svg,l1,l2}},
+  const svg=L.querySelector('svg');return {L,F,pl,svg,l1,l2}},
  ward(o){const L=MKX.layer('',{noveil:1});return MKR.ward(L,o.fig==='ty'?MKV.ty():figFor(S))},
  items(pan){return [...pan.querySelectorAll('.kitem,.kinv button,.kitm,[data-ix]')].filter(e=>e.getBoundingClientRect().width>20)},
  swap(F,src,mk){const n=document.createElement('div');n.style.cssText='position:absolute;inset:0;opacity:0';let mkh='';if(mk){try{const u=toilMakeupSvg(src.split('/').pop(),mk);if(u)mkh='<img src="'+u+'">'}catch(e){}}
@@ -35,14 +35,14 @@ const VJS=`window.MKV={
   const nItems=await p.evaluate(()=>window.__grid?window.__grid.querySelectorAll('.kitem,.kinv button,.kitm,[data-ix]').length:-1);console.log('grid items',nItems,'canvas',await p.evaluate(()=>!!window.__cv));
   await mark(p);await p.waitForTimeout(300);const s=(Date.now()-T0)/1000;const W8=ms=>p.waitForTimeout(ms);
   // 0 entry: tap Trang điểm on the act card
-  await p.evaluate(()=>{const c=document.querySelector('[data-k3="toil"]');if(c){c.style.outline='3px solid #e0a800';c.style.outlineOffset='3px'}});await W8(900);
+  await p.evaluate(()=>{const c=document.querySelector('[data-k3="toil"]');});await W8(900);
   await p.evaluate(()=>{const c=document.querySelector('[data-k3="toil"]');if(c)MKV.tap(c)});await W8(500);
   // 1 zoom into the room
   await p.evaluate(()=>{const c=document.querySelector('[data-k3="toil"]');if(c)c.style.outline='';const si=document.getElementById('scimg');const mm=/url\(["']?([^"')]+)["']?\)/.exec(si.style.backgroundImage||'');const L=MKX.layer(mm?mm[1]:MKX.stageSrc(0),{sharp:1,noveil:1});const bg=L.querySelector('.mkbg');const im=MKR.put(L,{});im.style.opacity=0;
    bg.animate([{transform:'scale(1)'},{transform:'scale(1.35)'}],{duration:750,easing:'ease-in',fill:'forwards'});im.animate([{opacity:0,transform:'scale(1.12)'},{opacity:1,transform:'scale(1)'}],{duration:750,delay:150,easing:'ease-out',fill:'forwards'})});await W8(950);
   // 2 hub: glowing mirror + table, «Đã chỉnh tề», back
   await p.evaluate(()=>{window.__h=MKV.hub({fig:'ty'});MKV.fadeIn(window.__h.F,350);MKV.fadeIn(window.__h.l1,350);MKV.fadeIn(window.__h.l2,350)});await W8(2000);
-  await p.evaluate(()=>MKV.tap(window.__h.l1));await W8(450);
+  await p.evaluate(()=>MKV.tap(window.__h.svg.querySelectorAll('path')[0],.5,.55));await W8(450);
   // 3 wardrobe: tap items → figure changes
   await p.evaluate(()=>{window.__w=MKV.ward({fig:'ty'});MKV.fadeIn(window.__w.L,300)});await W8(1100);
   for(const [i,f] of [[1,'y'],[3,'ty'],[2,'y']]){await p.evaluate(({i,f})=>{const it=MKV.items(window.__w.pan);const t=it[i]||it[0];if(!t)return;it.forEach(e=>e.style.outline='');t.style.outline='3px solid #e0a800';t.style.outlineOffset='2px';MKV.tap(t);
@@ -50,7 +50,7 @@ const VJS=`window.MKV={
   await p.evaluate(()=>MKV.tap(window.__w.bk));await W8(400);
   // 4 back to hub (now dressed) → tap Điểm trang → makeup game over the blurred room
   await p.evaluate(()=>{window.__h=MKV.hub({fig:'y'});MKV.fadeIn(window.__h.L,280)});await W8(1100);
-  await p.evaluate(()=>MKV.tap(window.__h.l2));await W8(400);
+  await p.evaluate(()=>MKV.tap(window.__h.svg.querySelectorAll('path')[1],.45,.35));await W8(400);
   await p.evaluate(()=>{window.__m=MKV.makeup();MKV.fadeIn(window.__m.L,300)});await W8(2000);
   await W8(900);await p.evaluate(()=>MKV.tap(window.__m.bk));await W8(400);
   // 5 hub (dressed + made up) → «Đã chỉnh tề» → final look: she walks to the middle, outlines fade

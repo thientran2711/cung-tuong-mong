@@ -8,8 +8,8 @@ const ROOMJS=`window.MKR={
   let left=Math.min(0,Math.max(w-dw,w/2-fx*dw));if(fx===0)left=0;let top=Math.min(0,Math.max(H-dh,-fy*dh));
   const im=document.createElement('img');im.src='${ROOM}';im.style.cssText='max-width:none;max-height:none;position:absolute;left:'+left+'px;top:'+top+'px;width:'+dw+'px;height:'+dh+'px;z-index:1;opacity:'+op+(blur?';filter:blur('+blur+'px) brightness(.7)':'');L.appendChild(im);
   const k=dw/900;L.map=(x,y)=>[left+x*k,top+y*k];L.k=k;return im},
- glow(L){const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('style','position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none;overflow:visible');
-  const P=(d)=>{const p=document.createElementNS('http://www.w3.org/2000/svg','path');p.setAttribute('d',d);p.setAttribute('fill','rgba(255,214,100,.06)');p.setAttribute('stroke','#ffdc73');p.setAttribute('stroke-width','3');p.setAttribute('stroke-linejoin','round');p.setAttribute('style','filter:drop-shadow(0 0 4px #ffd24a) drop-shadow(0 0 10px rgba(255,190,40,.9))');svg.appendChild(p)};
+ glow(L){const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('style','position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none;overflow:visible;-webkit-tap-highlight-color:transparent;outline:none');
+  const P=(d)=>{const p=document.createElementNS('http://www.w3.org/2000/svg','path');p.setAttribute('d',d);/* v3.3 (owner 23/11 ~23:55Z): NO visible outline — the traced area is an INVISIBLE tap zone; nothing shows on tap / press / focus */p.setAttribute('fill','transparent');p.setAttribute('stroke','none');p.setAttribute('class','mkzone');p.setAttribute('tabindex','-1');p.setAttribute('style','pointer-events:all;cursor:pointer;outline:none;-webkit-tap-highlight-color:transparent');svg.appendChild(p)};
   const m=(x,y)=>L.map(x,y).map(v=>v.toFixed(1)).join(',');const k=L.k;
   P('M'+m(381,182)+' A'+(92*k)+','+(140*k)+' 0 1 1 '+m(565,182)+' L'+m(566,300)+' L'+m(572,370)+' L'+m(374,370)+' L'+m(380,300)+' Z');
   P('M'+m(0,292)+' L'+m(238,286)+' L'+m(240,384)+' L'+m(249,390)+' L'+m(249,500)+' L'+m(232,503)+' L'+m(229,470)+' L'+m(150,470)+' L'+m(147,503)+' L'+m(136,505)+' L'+m(133,550)+' L'+m(0,553)+' Z');
@@ -45,7 +45,7 @@ const ROOMJS=`window.MKR={
   const shot=async(n)=>{await p.evaluate((n)=>{const vo=document.getElementById('ov');if(vo)vo.style.display=/^m3-f/.test(n)?'none':'';Q.length=0;const M=document.getElementById('modal');M.hidden=true;document.documentElement.classList.add('mkhide')},n);await settle(p);await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true});await p.waitForTimeout(600);await hideToast();await p.screenshot({path:`${OUT}/${n}-${name}.png`});console.log('shot',n,name)};
   await p.evaluate(()=>{try{nightScene=function(){};S.tonight=null}catch(e){}});
   // T1 today: the entry (top-bar chip «Chưa điểm trang» + the Điểm trang act card)
-  await p.evaluate(()=>{const c=document.querySelector('[data-k3="toil"]');if(c){c.style.outline='3px solid #e0a800';c.style.outlineOffset='3px';c.style.borderRadius='6px'}});await shot('m3-t1');
+  await p.evaluate(()=>{const c=document.querySelector('[data-k3="toil"]');if(c){c.style.borderRadius='6px'}});await shot('m3-t1');
   await p.evaluate(()=>{const c=document.querySelector('[data-k3="toil"]');if(c)c.style.outline=''});
   // T2 today: existing Hồi 1 (choose clothes) of the toilette game
   await p.evaluate(()=>toilOpen());await p.waitForTimeout(1500);await p.evaluate(()=>{const g=document.querySelector('#kg82 .kgr-go');if(g)g.click()});await p.waitForTimeout(2000);await shot('m3-t2');
