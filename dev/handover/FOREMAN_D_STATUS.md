@@ -440,3 +440,18 @@ Push recipe /home/user/wt/dpush2.sh (per container; text in HANDOVER D depth 3 b
 - (24/11 22:29Z) D7: ALLURING FULLY DONE 90/90 (12 555 cr; 5 NEEDS_REVIEW beauty-mark only: s60@26, s60@51, s60@39, s61@39, s60@16-T01; sheets .../alluring/alluring-age{16,26,39,51,63}.jpg) → archived. Only Dignified age 39 ×12 left (succ3 XoPvSgYJ). Then gallery worker.
 - (24/11 22:30Z) D7: ALL SIX FAMILIES DONE (Dignified 60/60 incl. age 39; succ3 archived). Total 440 + 5 Sharp tests. Opening GALLERY worker (brief D-face-master03-gallery.md).
 - (24/11 22:31Z) D7: GALLERY worker = session_01D3E3NaFMSB4w1CvymaLeea (sonnet).
+- (24/11 22:39Z) D7 WAKE: LIVE 502c48c9 (unchanged → remerge seat idle). ctx 34 % ≥ roll line 33 % → ROLLING OVER.
+
+## HANDOVER D depth 7 (01D3E3NXc34LyTqacBtXB6sj) → D child (depth 8) (24/11 22:40Z; START_CTX ≈ 8 %, context 34 % → over roll line; rolling over)
+MAIN = CHÍNH 127/128 (other account → write «FOR MAIN 128 / LC12» lines here). LIVE main 502c48c9 (22:39Z).
+OPEN SEATS:
+| session | job | next |
+|---|---|---|
+| session_01D3E3NaFMSB4w1CvymaLeea | face-master03 GALLERY (sonnet; briefs/D-face-master03-gallery.md; CDN img/_review/face-master03/gallery/index.html) | on its report (reports/face-master03-gallery.md + send_message): open the link yourself, check both devices, then give sếp the link in short Vietnamese with the NEEDS_REVIEW list; archive the seat |
+| session_01D3E3Na1itJyTLYhXYvK1Zr | REMERGE seat, idle (no polling) | when LIVE moves off 502c48c9 → send_message «LIVE moved to <sha>, re-merge the rest» of: d-followups-1-rv 563d336b · law1-gifts-rv 68f9fb63 · palace-distance-rv 93be6058 · robot10-nc-fix-4-rv 5fbd683d; all landed → archive |
+FACE-MASTER03 RUN = DONE (all 6 family workers + successors archived): Alluring 90 (5 NR beauty-mark), Cold 75 (3 NR), Dignified 60 (0 NR), Gentle 70 (0 NR), Proud 75 (7 NR), Sharp 75 (0 NR; age 16 reads late-teen, age 39 reads young) = 445 incl. 5 Sharp-16 tests. Reports: reports/face-master03-<family>.md. Per-family sheets already on CDN for Cold + Alluring (img/_review/face-master03/<family>/<family>-age<N>.jpg).
+OWNER RULINGS today (verbatim in lines above): gallery link by family × age; square 1520x1520 crop when wired into game; set REPLACES thân phận base faces (wiring = later, only after owner approves gallery; Gate Zero brief, kit-first, reuse face picker) — FOR MAIN 128 to record in OD.
+LESSON: face workers misread the 1M window as near 60 % → tell every worker "% = used_tokens / max_tokens (1 000 000)".
+OPEN OWNER QUESTION (still unanswered): đăng cơ đại lễ inside 27-month quốc tang → D recommends defer to the first month after mourning; B skip.
+FOLLOW-UPS (no seat): net-build band-3 harm share ≤30 %; servant-trust ring UI waits owner design; ART REQUEST Phân cung picture → Foreman C via MAIN.
+Push recipe /home/user/wt/dpush2.sh (per container; text in HANDOVER D depth 3 block). Hourly trigger trig_015Hp9pBz79zzvRxtvSuQji5 DELETED at rollover; child makes its own (:37).
