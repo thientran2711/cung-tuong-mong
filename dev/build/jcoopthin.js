@@ -525,6 +525,12 @@ function gSync(V){if(host()||!TH.dOn()||!V||!V.o||!S)return;
  if(ch||got){try{showModal();render()}catch(e){console.error(e)}}}
 COOP.on("thinview",gSync);TH.gSync=gSync;
 COOP.on("room",()=>SENT.clear());
+/* coop-thin-g r3 (one world, no stall): a card the host holds for her (gHold) must come back to her if it left her Q without a pick
+   that landed (a lost send, a Q cleared by another path). gSync re-adds it only on a thinview, and the host sends none while it waits
+   (trip1 wk 28: host gHold on «Tin đồn», her Q empty, no pick, no traffic → the week never merged). Belt: every 5 s her phone re-reads
+   the last host view (TH.view) — the same gSync, idempotent: a card she answered stays out for 15 s (SENT), then is asked again;
+   a second pick of a card already applied is «pick-stale» on the host (dropped there). No number, no word, no UI. */
+TH.gBelt=0;setInterval(()=>{try{if(host()||!CW.on||!TH.view||!TH.view.o||!TH.dOn())return;TH.gBelt++;gSync(TH.view)}catch(e){console.error("thin gSync belt",e)}},5000);
 /* her tap on a card: never applied here; the host runs it */
 if(typeof chooseM==="function"){const f=chooseM;chooseM=function(i){const m=Q[0];if(m&&m.thin&&!host()){const c=m.opts&&m.opts[i];if(!c||c.off||c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)return;
   if(typeof window.kpGate==="function"&&window.kpGate(i))return;/* her "Kiếp này chưa trọn" warning is asked on her phone; the host never asks it */

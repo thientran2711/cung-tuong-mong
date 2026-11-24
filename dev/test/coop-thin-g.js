@@ -78,6 +78,8 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   const unstub=()=>{if(window.__ty0){window.tyOn=window.__ty0.on;window.curPeople=window.__ty0.cp;window.__ty0=null}};
   const vid=await H.p.evaluate(()=>{const L=(rivals||[]).filter(v=>v&&!v.coop&&v.alive!==false&&!v.out);return L.length?L[L.length-1].id:null});
   await H.p.evaluate(`(${stub})(${JSON.stringify(vid)})`);await G.p.evaluate(`(${stub})(${JSON.stringify(vid)})`);
+  /* r3 (test data): a new life can start at Danh 0, where the store cannot drop (Danh floors at 0) → stage Danh ≥ 5 on the host (her store, host-authoritative) and let the patch reach her phone first */
+  await H.p.evaluate(()=>{COOPW.thin.withSeat('b',()=>{if((S.danh|0)<5)S.danh=5})});for(let t=0;t<25;t++){await sleep(300);if(await G.p.evaluate(()=>S.danh)===await H.p.evaluate(()=>COOPW.thin.seatOf('b').S.danh))break}
   const d0=await G.p.evaluate(()=>S.danh),s0=await H.p.evaluate(()=>COOPW.thin.seatOf('b').S.danh);
   await G.p.evaluate(()=>{try{render()}catch(e){}try{render()}catch(e){}});await sleep(600);const d1=await G.p.evaluate(()=>S.danh);
   await H.p.evaluate(()=>{COOPW.thin.withSeat('b',()=>{S.place='home';S.tyPaid=null})});
@@ -104,6 +106,11 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   await G.p.evaluate(()=>{S.bac=Math.max(S.bac||0,200)});await H.p.evaluate(()=>{const B=COOPW.thin.seatOf('b');if(B&&B.S){B.S.bac=Math.max(B.S.bac||0,200);B.S.thDead=0}worldQueue('phat','Thử lễ Phật',{len:2});worldTick();Q.length=0;render()});
   const got=await until(G,()=>Q.some(q=>q.thin&&/Lễ Phật|trai đàn/i.test(q.t||'')&&q.opts&&q.opts.length),null,30000);
   const loc=await G.p.evaluate(()=>Q.filter(q=>!q.thin&&/Lễ Phật|trai đàn/i.test(q.t||'')).length);
+  /* G6b (r3, trip1 wk 28 stall door): a card the host holds for her that leaves her Q WITHOUT a pick (no send) comes back on its own
+     within the belt (5 s), with no host traffic needed; before the belt it came back only on the next host view (none while the host waits) */
+  if(got){const r6=await G.p.evaluate(async()=>{const i=Q.findIndex(q=>q.thin&&/Lễ Phật|trai đàn/i.test(q.t||''));if(i<0)return {i};const id=Q[i].thin,b0=COOPW.thin.gBelt|0;Q.splice(i,1);
+    for(let k=0;k<40;k++){await new Promise(r=>setTimeout(r,250));if(Q.some(q=>q.thin===id))return {back:true,belt:(COOPW.thin.gBelt|0)-b0,ms:(k+1)*250}}return {back:false,belt:(COOPW.thin.gBelt|0)-b0}});
+   ok(r6.back,'G6b her held card that left her Q without a pick comes back by itself (gSync belt)',r6)}
   ok(got&&loc===0,'G6 world card: built on the host in her context, arrives as a part-D card with its options; her phone built none',{got,loc,Q:await G.p.evaluate(()=>Q.map(q=>[q.t,!!q.thin,q.opts&&q.opts.length])),host:await H.p.evaluate(()=>{const s=COOPW.thin.seatOf('b').S;return {ww:COOPW.thin.G.stat.ww,win:worldWin().map(w=>[w.id,w.k]),seen:s.wwSeen,thq:(s.thq||[]).map(c=>[c.pid,c.t]),bad:COOPW.thin.D.bad.slice(-3),log:COOPW.thin.D.log.slice(-4),mc:(function(){try{return COOPW.thin.withSeat?null:null}catch(e){}})()}})});
   if(got){const b0=await H.p.evaluate(()=>{const s=COOPW.thin.seatOf('b').S;return {bac:s.bac,th:s.th||0}});
    await G.p.evaluate(()=>{const i=Q.findIndex(q=>q.thin&&/Lễ Phật|trai đàn/i.test(q.t||''));const m=Q.splice(i,1)[0];Q.unshift(m);showModal()});await sleep(400);
