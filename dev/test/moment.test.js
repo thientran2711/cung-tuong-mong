@@ -64,9 +64,9 @@ const {chromium}=require('playwright');const D=require('./lib/device');
    const rd={};for(const k in (S.moRoad||{}))rd[k]=(S.moRoad[k]||0)-(road0[k]||0);out.T.reach2y=Object.assign({},H,{"(painter alive buổi)":alive,"(NPC roads taken)":rd});
    for(const m in H)F(H[m]>0,"moment never reachable in 2 years: "+m)}
   /* 12 NPC BRIBE ROAD (E73r item 3, law 1): same roads, same price, bạc spent, rumour → her Danh, item traced */
-  {S.buoi=2;S.moBusy=null;w.moY={};w.bac=500;const d0=w.danh||0,b0=w.bac;S.where={emp:"thu",[w.id]:"vuon"};S.menW={[pt.id]:"vuon"};for(const x of liveRivals(true))if(x!==w)S.where[x.id]="tyv";
+  {S.buoi=2;S.moBusy=null;w.moY={};w.bac=500;const d0=w.danh||0,b0=w.bac;const had=new Set((w.inv||[]).filter(x=>x&&x.k==="chandung"));S.where={emp:"thu",[w.id]:"vuon"};S.menW={[pt.id]:"vuon"};for(const x of liveRivals(true))if(x!==w)S.where[x.id]="tyv";
    const np=window.npwPick;window.npwPick=npwPick=(L)=>L.includes("bribe")?"bribe":np(L);const RD=moRoads(moOdds(w,false));lo();window.moNpcPass();back();window.npwPick=npwPick=np;
-   const got=(w.inv||[]).filter(x=>x.k==="chandung"&&x.mo==="dongmai"&&x.y===S.year);out.T.npcBribe={price:RD.br,bacPaid:b0-w.bac,danh:(w.danh||0)-d0,got:got.length,where:got[0]?ilWhere(got[0]):null};
+   const got=(w.inv||[]).filter(x=>x.k==="chandung"&&x.mo==="dongmai"&&x.y===S.year&&!had.has(x));out.T.npcBribe={price:RD.br,bacPaid:b0-w.bac,danh:(w.danh||0)-d0,got:got.length,where:got[0]?ilWhere(got[0]):null};
    F(b0-w.bac===RD.br,"NPC bribe: bạc not spent at the same price");F((w.danh||0)-d0===B.rumorDanh+B.danh,"NPC bribe: rumour did not hit her Danh");F(got.length===1&&ilWhere(got[0])!=null,"NPC bribe: no traced painting")}
   /* 13 EQUAL VALUE (E73r item 2, law 2/3): sit vs bribe within BAL.pm.eqTol at every rank and Sắc, incl. the clamp at hi; each road has a gain and a cost */
   {const tol=BAL.pm.eqTol;const tab=[];const s1={sac:S.sac,tai:S.tai,rank:S.rank};for(const sc of [20,60,100])for(let r=0;r<B.bar.length;r++){S.rank=r;S.sac=sc;S.tai=sc;const RD=moRoads(moOdds(S,false)),RE=moRoads(moOdds(S,true));
