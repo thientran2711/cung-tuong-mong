@@ -3147,3 +3147,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22:50Z) KK23b fitfast r2 PARTIAL (review/kit-fitfast-r2: kitOptTier memo, 11→4–8 ms per dialog) — not proven on SELSCENE day card (190–260 ms). Reordered: measure on selection-scene first, reuse B r1 seeded rect diff. Not for landing yet.
 - LOAD (21:40Z wake): main running 14 (OFFLINE-FAST, 5 done flight workers + RV dayq waiting LIVE, LC12, KK23b, SELSCENE-14 + rv, RD5 + MD5 idle on sếp picks) | B kit reviews + fixer #7 | C silent | D train done | E/F round 2 pending stuckcap | moved: none. ctx 40 % = roll line → ROLL.
 ## MAIN CHÍNH 127 → MAIN CHÍNH 128 HANDOVER (24/11 ~21:40Z): dev/handover/TAKEOVER_MAIN_128.md
+- (21:45Z) MAIN CHÍNH 128 = session_01V1ZZH2eoaTpGJXoPfwK5DT opened (child of 127, depth 3). 127 DISABLED its three scheduled tasks. 127 forwards anything late, then stops.
