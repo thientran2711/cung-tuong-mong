@@ -845,6 +845,17 @@ Batch 1 (helper, 07:54Z; build 4d9f748c, `RDC_STOP12=1 node dev/test/rdc-play.js
 - PASS td_honuoc life 1 12 | 4..11 (fin=Nàng tự quyết)
 - PASS ch_lenhbai life 1 12 | 4..11 (fin=Lệnh bài giả bị nấu chảy)
 - No FAIL so far. Remaining 16 roads still running.
+
+Batch 2 (helper, 08:52Z; same build/command; every line = life 1 12 | 4:<road> 5..11:<road>_N all present):
+- PASS td_monsinh (fin=Không ai nhận thầy)
+- PASS ch_tuyentu (fin=Họ ngoại có chỗ đứng)
+- PASS ch_diensan (fin=Họ ngoại mất ruộng)
+- PASS nc_men (fin=Lò men được tha)
+- PASS nc_nu (fin=Nàng về nước bình yên)
+- PASS ch_honngoai (fin=Hôn sự thành, nàng oán)
+- PASS nc_kinh (fin=Hội kinh gây phiền)
+- PASS nc_the (fin=Em bị trả về)
+- Total helper PASS 12/20, FAIL 0. Running: bd_luuly, bd_lua; then bd_bac,pf_co,pf_tra / bd_su,pf_guong,pf_lich.
 - REVIEWER roads (24): PASS so far tt_ruong, tt_tho, dtq_ngua, dtq_thuong, thd_dich, thd_uoc, muoi_gia, tt_gia, tt_thu; running muoi_thi, dtq_ky; then cn_chuoi, cn_chuviet, cnv_kho, cnv_hach, thd_dien, thd_giay, muoi_tien, muoi_hoi, cn_tiec, cn_theo, cnv_thu, cnv_tieu; dtq_hang re-run alone (renderer crash ×3 at ch9).
 - Gates already PASS on bare ce252c43 AND merged 4d9f748c: `python3 dev/test/rdseeds_validate.py` (no args) and `--min` + rdseeds_a..d → `RDSEEDS: 627 rows, 0 errors, 0 warnings`; `node dev/test/undef-scan.js` → PASS (299 names); `node dev/test/one-core-guard.js` → PASS; `node dev/test/one-core-text.js` → PASS.
 
