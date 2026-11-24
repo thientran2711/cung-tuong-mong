@@ -45,6 +45,8 @@ function selxFigP(p){if(p==="emp")return{kind:"emp"};if(p==="th")return{kind:"th
    stage portrait pMe, podium) said «Quý nhân» (RANKS[0]) before any edict */
 (function(){const T=()=>{try{return selxDaysOn()}catch(e){return false}};
  if(typeof rkOfFace==="function"){const f0=rkOfFace;rkOfFace=function(kind,o){const g=f0.apply(this,arguments);return o===S&&kind==="consort"&&T()?[g[0],"Tú nữ"]:g};window.rkOfFace=rkOfFace}
+ /* RV-SELX (same group): kitName(S,{named:true}) prints RANKS[S.rank] itself (podium «Quý nhân» over her name during the contest) → «Tú nữ» too */
+ if(typeof kitName==="function"){const k0=kitName;kitName=function(p,o){const h=k0.apply(this,arguments);try{if(p===S&&o&&o.named&&T()&&!S.out&&RANKS[S.rank])return h.replace(`>${RANKS[S.rank].n}</span>`,">Tú nữ</span>")}catch(e){}return h};window.kitName=kitName}
  if(typeof renderHUD==="function"){const h0=renderHUD;renderHUD=function(){const r=h0.apply(this,arguments);try{if(T()){const m=document.getElementById("me-r");if(m&&m.textContent!=="Tú nữ")m.textContent="Tú nữ"}}catch(e){}return r};window.renderHUD=renderHUD}})();
 async function selxFig(Sc,p,cx,o){o=o||{};const g=Sc.L.g,fh=o.fh||selxFh(g);const f=await Sc.fig(selxFigP(p),{cx,top:g.H-fh,fh,z:o.z||3});f.__p=p;if(o.hide){/* the kit slide-in (fill both) would hold it visible */try{f.getAnimations().forEach(a=>a.cancel())}catch(e){}f.style.opacity=0}return f}
 /* the j59 name tag under the feet (kitNameTagBox: «Người lạ» / face known / name), kept on the layer */

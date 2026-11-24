@@ -27,6 +27,8 @@ const DEV0={fold:{width:755,height:1000},ipad:{width:1180,height:820}};const DEV
     const res=document.querySelector('#rtoast.on');return{done:!Z||Z.done||S.dead||!S.selx2,days:Z&&Z.days,sc:!!sc,line:box?box.textContent.slice(0,40):'',t:m&&m.t||'',pid:m&&m.pid||'',
      nm:m&&m.opts?m.opts.map(o=>o.n):[],modal:!!document.querySelector('#modal:not([hidden]) button[data-m]'),res:res?res.textContent.slice(0,60):''}});
    if(st.done)break;
+   /* RV-SELX: the contest podium (kit §26 #kpodov) waits for its «Tiếp» like a player would; before, the driver clicked the cards UNDER it and Day 3 was filmed behind the podium */
+   if(await p.evaluate(()=>!!document.getElementById('kpodov'))){if(last!=='podium'){last='podium';await p.waitForTimeout(1500);await shot('vinh-danh')}await p.evaluate(()=>{const o=document.getElementById('kpodov');const b=o&&[...o.querySelectorAll('button')].find(x=>/Tiếp/.test(x.textContent));if(b)b.click()});await p.waitForTimeout(900);continue}
    if(st.sc){const key='sc:'+st.line.slice(0,12);if(key!==last&&st.line){last=key;await p.waitForTimeout(900);await shot('canh-'+slug(st.line))}
     await p.waitForTimeout(450);await p.evaluate(()=>{const L=document.querySelector('.kscn');if(L)L.click()});continue}
    if(st.pid==='kc2Sel'){await p.evaluate(()=>{Q.shift();S.selx.done=1;S.selx.art="";selxSelDo(10);document.querySelectorAll('.kmov,#kprevov,#kg82').forEach(x=>x.remove());render()});await p.waitForTimeout(1500);continue}

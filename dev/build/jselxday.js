@@ -32,6 +32,8 @@ function selxBy(id){if(id==="me")return S;const Z=S.selx2;return (Z.girls||[]).f
 function selxAll(){const Z=S.selx2;return (Z.girls&&Z.girls.length?Z.girls:(Z.keptV||[])).filter(Boolean)}
 function selxMet(v){try{return v===S||!!(S.selx2.met||{})[v.id]||k61Named(v)}catch(e){return false}}
 function selxNm(v){return v===S?"ngươi":selxMet(v)?v.name:"một tú nữ lạ mặt"}
+/* RV-SELX (law 7/11): a LIST of girls names the met ones, then counts the strangers in words (was «một tú nữ lạ mặt, một tú nữ lạ mặt, …») */
+function selxNmL(L){const k=L.filter(v=>v===S||selxMet(v)).map(selxNm),n=L.length-k.length;if(n===1)k.push("một tú nữ lạ mặt");else if(n>1)k.push(`${selxNumW(n)} tú nữ lạ mặt`);return k.join(", ")}
 function selxMaMa(){try{const m=elderBy("gt");return m?staffFace(m):null}catch(e){return null}}
 function selxWho(v){try{return v===S?pMe():pv(v)}catch(e){return null}}
 function selxSo(id){const L=(BAL.selx.lodge.so||[]);const x=L.find(s=>s[0]===id);return x?x[1]:id===BAL.selx.lodge.sanh[0]?BAL.selx.lodge.sanh[1]:""}
@@ -98,7 +100,7 @@ function selxFree(){const Z=S.selx2;if(selxEvening())return selxEve();const H=se
  if(Z.days===1)selxAskOpts(o,()=>selxFree());
  o.push(selxO("Nghỉ một lát",()=>{const b=rsnap();selxSpend(T);S.suc=cl((S.suc||0)+BAL.selx.rest,0,sucCap(S));selxRes("Nghỉ",b,"Ngươi ngả lưng một lát, sức hồi lại.");selxFree()},{x:selxX(T,`Sức +${BAL.selx.rest}`)}));
  o.push(selxO("Ngồi yên chờ tới tối",()=>{Z.kh=Math.min(Z.kh,BAL.time.khac);selxFree()},{x:selxX(0,"tới ngay buổi tối, không phải chờ")}));
- selxCard(selxSo(Z.at),`<p>${H.length?`Ở ${selxSo(Z.at)} lúc này có ${H.map(selxNm).join(", ")}.`:`${selxSo(Z.at)} vắng người.`}</p>`,o,selxMaMa())}
+ selxCard(selxSo(Z.at),`<p>${H.length?`Ở ${selxSo(Z.at)} lúc này có ${selxNmL(H)}.`:`${selxSo(Z.at)} vắng người.`}</p>`,o,selxMaMa())}
 /* greeting = the existing two-way rule (jgreet greetName: a face always, a name only if her nết and birth let her give it) */
 function selxGreet(v){const Z=S.selx2;Z.met=Z.met||{};Z.met[v.id]=1;let line="";try{const G=greetName(S,v);line=G&&G.line||""}catch(e){}try{k61Know(v,"Làm quen ở "+BAL.selx.lodge.n,true,1)}catch(e){}
  try{kitKnow({text:`Ngươi biết mặt ${k61Named(v)?v.name:"một tú nữ"}`,key:"selx:met:"+v.id})}catch(e){}if(line)try{log(line)}catch(e){}}
@@ -115,7 +117,7 @@ function selxCast(seed,pool){const used=new Set();const cast={};const roles=Obje
 function selxPick(type,pool){const P=SELX_SEEDS[type]||[];const seen=new Set([...selxSeen(),...(S.selx2.seen||[])]);const L=P.filter(x=>pool.length>=(x.needs&&x.needs.min_girls||2));
  const F=L.filter(x=>!seen.has(x.id));const C=(F.length?F:L).slice();for(let i=C.length-1;i>0;i--){const j=R(i+1);[C[i],C[j]]=[C[j],C[i]]}
  for(const s of C){const c=selxCast(s,pool);if(c)return{s,c}}return null}
-function selxFill(t,c,her){return String(t||"").replace(/\{(\w+)\}/g,(m,r)=>{if(r==="bystander")return c.bystanders&&c.bystanders[0]?selxNm(c.bystanders[0]):"một tú nữ";const v=c[r];return v===S||her&&r==="victim"?"ngươi":v?selxNm(v):"một tú nữ"})}
+function selxFill(t,c,her){return String(t||"").replace(/\{(\w+)\}/g,(m,r)=>{if(r==="bystander")return c.bystanders&&c.bystanders[0]?selxNm(c.bystanders[0]):"một tú nữ";const v=c[r];return v===S||her&&r==="victim"?"ngươi":v?selxNm(v):"một tú nữ"}).replace(/(^|[.!?…]\s+|«\s*)(\p{Ll})/gu,(m,a,b)=>a+b.toUpperCase())/* RV-SELX: a filled name at a sentence start is capitalised */}
 /* her own stances when SHE is the victim (law 1: the girls can target her); equal steps, like every seed stance */
 const SELX_VST={benh:{text:"Ta đáp thẳng, không để ai đổ oan.",gain:{duc:1},loss:{"grudge.bully":1}},hua:{text:"Ta nhịn, cúi đầu cho qua chuyện.",gain:{"friend.bully":1},loss:{face:1}},
  hoagiai:{text:"Ta xin ma ma phân xử.",gain:{"friend.ma":1},loss:{time:1}},ngoai:{text:"Ta cười xòa, coi như chuyện đùa.",gain:{time:1},loss:{"grudge.bystander":1}}};
@@ -123,7 +125,7 @@ const SELX_VOUT={benh:"{bully} sững lại; người xung quanh nhìn ngươi k
 function selxApply(side,c,f,sign){const D=BAL.selx;const Z=S.selx2;const who=k=>k==="bystander"?(c.bystanders||[]):c[k]?[c[k]]:[];let t=0;
  for(const [key,n] of Object.entries(side||{})){const [a,r]=key.split(".");if(a==="friend"||a==="grudge"){if(r==="ma"){Z.ma=(Z.ma||0)+(a==="friend"?1:-1)*n*D.maStep;continue}
    const s=a==="friend"?1:-1;who(r).forEach(v=>{if(v&&v!==S)relAdd(S,v,s*n*f)})}
-  else if(a==="duc")S.duc=cl((S.duc||0)+sign*n*D.ducStep,0,100);else if(a==="face")S.danh=cl((S.danh||0)+sign*n*D.faceStep,0,100);/* face in gain = she keeps face (Danh +), in loss = loses face (Danh −); before it always lowered Danh, so a «face» gain was a hidden loss (law 2/3) */else if(a==="time")t+=sign*n;else if(a==="fav")Z.fav0=(Z.fav0||0)+sign*n}return t}
+  else if(a==="duc")S.duc=cl((S.duc||0)+sign*n*D.ducStep,0,100);else if(a==="face")S.danh=cl((S.danh||0)+sign*n*D.faceStep,0,100);/* face in gain = she keeps face (Danh +), in loss = loses face (Danh −); before it always lowered Danh, so a «face» gain was a hidden loss (law 2/3) */else if(a==="time")t+=sign*n;else if(a==="fav"){/* RV-SELX (law 2/3): «fav» = how the three royals (E / T / H) hear of her from the yard; was written to an unread Z.fav0 (a loss that did nothing) */Z.fav=Z.fav||{};["E","T","H"].forEach(x=>{Z.fav[x]=(Z.fav[x]||0)+sign*n*D.fav.plus})}}return t}
 /* bystanders act by their nết (the seed's bystander table): defend → closer to the victim, cold to the bully; join → the reverse (law 1, NPC↔NPC) */
 function selxBystand(seed,c,f){const T=seed.bystander||{};for(const v of c.bystanders||[]){const N=selxNet(v);const act=["defend","join","silent","ma"].find(k=>(T[k]||[]).some(x=>N.includes(x)))||(R(2)?"silent":"defend");
   if(act==="defend"){if(c.victim&&c.victim!==v)relAdd(v,c.victim,f);if(c.bully&&c.bully!==v)relAdd(v,c.bully,-f)}else if(act==="join"){if(c.bully&&c.bully!==v)relAdd(v,c.bully,f);if(c.victim&&c.victim!==v)relAdd(v,c.victim,-f)}}}
@@ -137,7 +139,7 @@ function selxDrama(type,pool,then){const Z=S.selx2;const P=selxPick(type,pool);i
 /* a stance's option hint: its khắc (drama.k ± the seed's time steps) + its gains / what comes with it, in words with the cast's names (law 2: every stance shows what it is worth) */
 function selxStX(st,c,her){const D=BAL.selx;const nm=r=>r==="ma"?"Giáo tập ma ma":r==="bystander"?"người đứng xem":c[r]===S||her&&r==="victim"?"":c[r]?selxNm(c[r]):"";
  const w=(key,n,gain)=>{const [a,r]=key.split(".");if(a==="friend"||a==="grudge"){const who=nm(r);if(!who)return"";return `${who} ${a==="friend"?"quý ngươi hơn":"ghét ngươi hơn"}`}
-  if(a==="duc")return `Đức ${gain?"+":"-"}${n*D.ducStep}`;if(a==="face")return `Danh ${gain?"+":"-"}${n*D.faceStep}`;if(a==="fav")return gain?"được để mắt tới":"";return""};
+  if(a==="duc")return `Đức ${gain?"+":"-"}${n*D.ducStep}`;if(a==="face")return `Danh ${gain?"+":"-"}${n*D.faceStep}`;if(a==="fav")return gain?"bề trên để mắt tới":"bề trên kém để mắt";return""};
  let t=D.drama.k;const G=[],K=[];for(const [key,n] of Object.entries(st.gain||{})){if(key==="time"){t-=n;continue}const x=w(key,n,true);if(x)(/ghét|^Danh -|^Đức -/.test(x)?K:G).push(x)}
  for(const [key,n] of Object.entries(st.loss||{})){if(key==="time"){t+=n;continue}const x=w(key,n,false);if(x)(/quý ngươi/.test(x)?G:K).push(x)}
  if(!G.length&&t<D.drama.k)G.push("đỡ tốn khắc");return selxX(Math.max(0,t),G.join("; "),K.join("; "))}
@@ -236,7 +238,7 @@ function selxContestRun(){const Z=S.selx2;const X=S.selx;const T=k=>SELX_TESTS.f
  Z.favG={};L.forEach(x=>{if(x.v!==S&&x.kept)Z.favG[x.v.id]=Object.assign({},x.v.__fav)});
  selxNpcOut(L);try{selxPodShow(L)}catch(e){console.error("selx pod",e)}
  if(!me.kept){X.tier=0;X.fx=1;X.why="Bị ban hoa";log("Tuyển chọn: bị ban hoa, xuất cung.");try{kcSnapReset()}catch(e){}selxBanHoa();return}
- selxCard("Ban hương nang",`<p>Thái giám bưng khay tới trước mặt ngươi: một chiếc hương nang thêu chỉ vàng. Hắn xướng to tên ngươi cho cả điện nghe: «Ban hương nang!»</p><p>Ngươi cùng ${Z.keptV.map(selxNm).join(", ")} được ở lại ${BAL.selx.lodge.n} chờ chiếu chỉ.</p>`,
+ selxCard("Ban hương nang",`<p>Thái giám bưng khay tới trước mặt ngươi: một chiếc hương nang thêu chỉ vàng. Hắn xướng to tên ngươi cho cả điện nghe: «Ban hương nang!»</p><p>Ngươi cùng ${selxNmL(Z.keptV)} được ở lại ${BAL.selx.lodge.n} chờ chiếu chỉ.</p>`,
   [selxO(`Về ${BAL.selx.lodge.n}`,()=>{Z.kh=Math.min(Z.kh,0);selxNight()})],pMe())}
 /* ================= DAY 3 «Chờ chiếu» ================= */
 function selxD3Teach(){const Z=S.selx2;Z.at=Z.home;
