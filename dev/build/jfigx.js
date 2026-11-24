@@ -20,7 +20,7 @@ let FIGXR=[],FIGXT={};
 function figxKey(f){return norm(f.role)+":"+f.identity}
 /* r2 (review FAIL #1): figxLoad.ok = the rows are in. The Thái hậu's face is for life, so she is not drawn before they are (a draw before
    would not see which faces have a painted Thái hậu robe). After BAL.figxTry failed reads (offline / missing file) she is drawn anyway. */
-function figxLoad(){try{fetch("img/FIGURES-x.json",{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]).then(j=>{const L=figList(j);if(!L.length)figxLoad.fail=(figxLoad.fail||0)+1;
+function figxLoad(){try{fetch("img/FIGURES-x.json",{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]).then(j=>{const L=figList(j);if(!L.length){figxLoad.fail=(figxLoad.fail||0)+1;/* keep the last good list (law 11: every timed figure loader) */if(figxLoad.ok)return}
   const sig=L.length+"|"+L.map(f=>f.file).join(",").length;if(sig===figxLoad.sig)return;figxLoad.sig=sig;
   const T={},A=[];for(const f of L){const t=String(f.tier);if(t==="th"||f.v){const k=figxKey(f);const X=T[k]=T[k]||{th:[],v:[]};(t==="th"?X.th:X.v).push(f)}else A.push(f)}
   FIGXR=A;FIGXT=T;if(L.length)figxLoad.ok=1;if(typeof FIGS!=="undefined"&&FIGS.length){FIGIX=figIndex(FIGS);try{if(S&&!S.dead)kitRenderSoon(250)}catch(e){}}}).catch(()=>{})}catch(e){}}

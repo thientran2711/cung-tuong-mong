@@ -689,7 +689,7 @@ window.kcHook=kcHook;
 let KCFX={};
 function kcFigLoad(){try{fetch("img/FIGURES-kc.json",{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]).then(j=>{const X={};
  for(const f of figList(j)){const t=String(f.tier||""),r=norm(f.role);if(!(t==="kc"||t==="ngheo")||!f.identity)continue;const k=r+":"+f.identity;const T=(X[k]=X[k]||{});(T[t]=T[t]||[]).push(f)}/* r2: the CDN list now also has a26/a36/a51 khuê các dresses for some faces: keep every band */
- const n=Object.keys(X).length;const was=Object.keys(KCFX).length;KCFX=X;if(n!==was)try{if(isKc())render()}catch(e){}}).catch(()=>{})}catch(e){}}
+ const n=Object.keys(X).length;if(!n)return;/* a failed / empty refetch never wipes the last good list (law 11: every timed figure loader) */const was=Object.keys(KCFX).length;KCFX=X;if(n!==was)try{if(isKc())render()}catch(e){}}).catch(()=>{})}catch(e){}}
 kcFigLoad();setInterval(kcFigLoad,300000);
 function kcDress(){return S&&S.origin&&(S.origin.k==="thd"||(S.origin.k==="td"&&!kcLore()))?"ngheo":"kc"}/* KC LORE: td is a Thị lang's daughter until the day she leaves home: khuê các dress; only thd is poor */
 function kcBand(age){return ageBandIx(age)}
