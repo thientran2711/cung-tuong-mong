@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"f95c4246+","t":"2026-11-24T06:45Z","c":"review r1: add dev/test/kit-dialogue.js (kit §95 typing, tap-finish, cues, spotlight, focus, cleanup; Fold + iPad)","b":"7e709e9388ad","h":[{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"}]};
+window.CTM_BI={"s":"348f130b+","t":"2026-11-24T06:46Z","c":"review r1: add dev/test/kit-dialogue.js (kit §95 typing, tap-finish, cues, spotlight, focus, cleanup; Fold + iPad)","b":"7e5a89e0df29","h":[{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -38637,6 +38637,11 @@ BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's n�
 
 /* KIT §95 kitDialogue (owner OD 24/11 ~04:45Z/~04:50Z): typewriter speed + spotlight dimming. LAW 4: the kit reads these, it types no number of its own. */
 BAL.kdlg={msWord:110,dim:.5,dimSat:.75,focusScale:1.5,focusBlur:14};
+/* SIDE-LINE DIALOGUE SCENES (jdlgs.js, owner OD 24/11 ~10:05Z): on = scenes play before side-line cards; min/max = lines per scene (owner: few lines, each full of meaning);
+   maxCh = characters per line (the box never scrolls); intro = ms the place painting shows clear; per device: fh = figure height / layer, lx/rx = figure centres
+   (speaker left, her right), boxH/boxW = the one speech box (bottom, centred, lying over the figures). LAW 4: jdlgs types no number of its own. */
+BAL.dlgs={on:true,min:3,max:8,maxCh:170,intro:600,
+ fold:{fh:.86,lx:.25,rx:.75,boxH:.27,boxW:.94},ipad:{fh:.92,lx:.22,rx:.78,boxH:.30,boxW:.70}};
 /* j68sd: ORDER THIN P4 composed j68 seeds (DATA ONLY). Built by dev/build/j68sd_build.py from dev/handover/content/thin/j68seeds*.md;
    schema dev/handover/reports/thin.md «## API P4»; validator dev/test/j68seeds_validate.py; engine j68c.js. Do not hand-edit. */
 const J68SEEDS=[
@@ -95307,6 +95312,64 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  const story=['<div class="kpmain"><p>Tú nữ đứng thành hàng trước điện. Chạm một thẻ để về trang mẫu.</p></div>'];
  await Sc.pair(solo?{me:S,storyTitle:"Tuyển tú",story,choice:[opts]}:{msgr:v,me:S,storyTitle:v.name,story,choiceTitle:S.name,choice:[opts]});Sc.show()}catch(x){console.error("kselsc",x)}})()},true);
 try{window.kitScene=kitScene;window.kitDlgBox=kitDlgBox;window.kitBareOpt=kitBareOpt;window.kitResultCard=kitResultCard}catch(e){}
+/* jdlgsd: SIDE-LINE DIALOGUE SCENES (DATA ONLY). Built by dev/build/jdlgsd_build.py from every dev/handover/content/dlg/*.md;
+   schema dev/handover/reports/sideline-dialogue.md «## SCHEMA»; validator dev/test/dlgs_validate.py; engine jdlgs.js. Do not hand-edit. */
+const DLGS_DATA=[
+{"id":"j72:j72c-craft-001","dlg":{"L":"A","R":"me","lines":[{"who":"A","text":"{Goi} thứ lỗi, {xung} đường đột tìm đến giờ này. Sáng nay hóng gió bên hồ sen, {xung} sơ ý làm rơi cây trâm ngọc xuống nước."},{"who":"me","text":"Trâm ấy hẳn là vật quý, nên {goi} mới hớt hải đến vậy?"},{"who":"A","text":"Là vật mẫu thân để lại trước ngày {xung} nhập cung. Giữa chốn thâm cung này, {xung} chỉ còn chút hơi ấm ấy của nhà."},{"who":"A","text":"Trâm rơi gần bờ đá, chỗ nước cạn sau Ngự hoa viên. {Xung} không dám nói với ai, sợ người ta cười kẻ vụng về."},{"who":"me","text":"Nước cạn thì chưa trôi xa được. {Goi} đừng lo, để {xung} tính cách tìm cho."}]}},
+{"id":"j72:j72c-fam-001","dlg":{"L":"M","R":"me","lines":[{"who":"nar","text":"Chiều muộn, {M} bưng vào một phong thư còn vương mùi mực quê nhà."},{"who":"M","text":"{Goi}, thư lão phu nhân gửi vào, người đưa thư dặn phải trao tận tay."},{"who":"me","text":"Mẫu thân viết gì? Ngươi đọc cho ta nghe."},{"who":"M","text":"Lão phu nhân viết: «Con gái, mẹ già vụng tay, mấy cô hàng xóm cứ đòi xem mẫu thêu trong cung.»"},{"who":"M","text":"«Con vẽ cho mẹ một mẫu gửi về, để mẹ được nở mày nở mặt với người ta.»"},{"who":"me","text":"Cả đời mẹ chưa từng nhờ ta điều gì. Mẫu này, ta phải tự tay vẽ."}]}},
+{"id":"j72:j72c-craft-007","dlg":{"L":"A","R":"me","lines":[{"who":"A","text":"{Goi} thứ tội, {xung} là người hầu bên cung {B}, liều mạng sang đây cầu {goi} một việc."},{"who":"me","text":"Đứng lên mà nói. Chủ ngươi có chuyện gì?"},{"who":"A","text":"Chậu lan vân chủ {xung} quý nhất bị sâu đục lá, mấy hôm nay vàng úa từng đốm."},{"who":"A","text":"Chủ {xung} sĩ diện, nhất định không chịu nhờ ai. Lan mà chết, kẻ coi sóc như {xung} khó giữ nổi mình."},{"who":"me","text":"Thì ra ngươi lén chủ mà đến. Được, để ta xem lá lan trước đã."}]}}
+];
+/* ================= jdlgs: SIDE-LINE DIALOGUE SCENES (owner OD 24/11 ~10:05Z «STORY = DIALOGUE SCENES»; Foreman B, review/sideline-dlg) =================
+   Every side-line quest that involves a person opens with a short visual-novel scene before its card: the person who comes stands LEFT, she
+   stands RIGHT, the speaker is lit and the other dimmed, the line types word by word, tap = finish / next (KIT §95 kitDialogue.play — the ONLY UI,
+   law 9; this file draws nothing of its own). Schema: dev/handover/reports/sideline-dialogue.md «## SCHEMA» (one shape for side lines AND roads).
+   DATA: DLGS_DATA (jdlgsd.js, built by dev/build/jdlgsd_build.py from dev/handover/content/dlg/*.md) = [{id:"<fam>:<unit id>", dlg:{L,R,watch,at,lines}}].
+   RESOLVE: dlgsResolve(spec,{who,txt,at}) (txt(text, speakerRole, listenerRole): {goi}/{xung} are said BY the line's speaker TO the other figure, jvoice kSay) → the KIT §95 call data {bg, figs:[srcL,srcR], names, lines:[{fig,who,text,focus}]} (strings only: a saved
+     card keeps it). Every role must be a REAL living person the family's own engine cast (law 6b); a role or placeholder that does not resolve =
+     no scene (the card shows as before, never a scene with a wrong person).
+   PLAY: a family adapter puts it on its card (m.dlg); the showModal wrapper below plays it ONCE before the card, then the card (the choice) shows.
+     Co-op: the card is in this seat's own Q → the scene shows on the seat whose quest it is; nothing is sent (host computes the world only).
+   Numbers (law 4): BAL.dlgs (jbal2.js). Off: BAL.dlgs.on=false. */
+const DLGS={idx:null,playing:false,n:0,log:[]};
+function dlgsData(){if(!DLGS.idx){DLGS.idx={};try{(typeof DLGS_DATA!=="undefined"&&Array.isArray(DLGS_DATA)?DLGS_DATA:[]).forEach(r=>{if(r&&r.id&&r.dlg)DLGS.idx[r.id]=r.dlg})}catch(e){}}return DLGS.idx}
+function dlgsGet(id){return dlgsData()[id]||null}
+function dlgsOn(){try{return !!(BAL.dlgs&&BAL.dlgs.on)&&typeof kitDialogue!=="undefined"&&typeof kitScene!=="undefined"}catch(e){return false}}
+/* a person → {src,n}; her = S (figFor knows her dress / rank) */
+function dlgsPer(o,n){try{if(!o)return null;const src=figFor(o)||"";if(!src)return null;return{src,n:n||o.name||""}}catch(e){return null}}
+function dlgsMe(){return dlgsPer(S,S&&S.name)}
+function dlgsResolve(spec,c){try{if(!spec||!dlgsOn()||!Array.isArray(spec.lines))return null;const B=BAL.dlgs;if(spec.lines.length<B.min||spec.lines.length>B.max)return null;
+ const L=spec.L,R=spec.R||"me";if(!L||L===R)return null;const who=r=>r==="me"?dlgsMe():c.who(r);const pL=who(L),pR=who(R);if(!pL||!pR)return null;
+ const lines=[];for(const ln of spec.lines){const f=ln.who==="nar"?null:ln.who===L?0:ln.who===R?1:-1;if(f<0)return null;
+  const sp=f==null?null:[L,R][f],ls=f==null?null:[R,L][f];const t=String(c.txt?c.txt(ln.text,sp,ls):ln.text||"").trim();if(!t||/\{[^}]*\}/.test(t))return null;lines.push({fig:f,who:f==null?"":[pL.n,pR.n][f],text:t,focus:!!ln.focus&&f!=null})}
+ let bg="";try{const a=typeof kitPlaceArt==="function"?kitPlaceArt(spec.at||c.at||"home"):null;bg=a&&a.src||""}catch(e){}
+ return{bg,figs:[pL.src,pR.src],names:[pL.n,pR.n],lines,watch:!!spec.watch}}catch(e){console.error(e);return null}}
+/* attach to the card the family just pushed (the last Q item pushed since n0, matched by test) */
+function dlgsAttach(n0,d,test){if(!d)return false;for(let i=Q.length-1;i>=Math.max(0,n0);i--){const m=Q[i];if(m&&!m.dlg&&(!test||test(m))){m.dlg=d;DLGS.n++;return true}}return false}
+/* the player: one kit scene, two full figures (her right), the KIT §95 dialogue; cb when the last line is read */
+async function dlgsPlay(d,cb){let done=false;const fin=()=>{if(done)return;done=true;DLGS.playing=false;document.body.classList.remove("kdlgs-on");try{cb&&cb()}catch(e){console.error(e)}};
+ DLGS.playing=true;document.body.classList.add("kdlgs-on");
+ try{const B=BAL.dlgs,U=typeof IMG_U==="function"?IMG_U:(x=>x);const Sc=kitScene.open({bg:U(d.bg),intro:B.intro});const g=Sc.L.g,ip=document.documentElement.classList.contains("kv2"),K=ip?B.ipad:B.fold,fh=Math.round(g.H*K.fh);
+  await Sc.fig(d.figs[0],{cx:g.w*K.lx,top:g.H-fh,fh,z:2});await Sc.fig(d.figs[1],{cx:g.w*K.rx,top:g.H-fh,fh,z:3});
+  Sc.show();const bh=Math.round(g.H*K.boxH),bw=Math.round(g.w*K.boxW);
+  DLGS.cur=kitDialogue.play(Sc,{lines:d.lines,box:()=>({x:Math.round((g.w-bw)/2),y:g.H-bh,w:bw}),onDone:()=>{DLGS.cur=null;Sc.close(fin)}});
+  DLGS.log.unshift({t:Date.now(),n:d.lines.length,who:d.names.join(" · ")});DLGS.log.length=Math.min(DLGS.log.length,20)}catch(e){console.error(e);try{kitScene.close(true)}catch(x){}fin()}}
+/* the card waits under the scene: showModal plays a card's scene first (once), keeps the modal hidden while it plays */
+(function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){try{const M=$("modal");
+  if(DLGS.playing){if(M)M.hidden=true;return}const m=Q[0];
+  if(m&&m.dlg&&!m.dlg.done&&dlgsOn()&&S&&!S.dead){m.dlg.done=1;if(M)M.hidden=true;dlgsPlay(m.dlg,()=>{if(Q.length)showModal()});return}}catch(e){console.error(e)}
+ return s0.apply(this,arguments)};window.showModal=showModal})();
+
+/* ---------- family adapters (each resolves its OWN cast: law 6b) ---------- */
+/* j72 việc nhờ (110 old templates + THIN P3 composed seeds): the offer card. Unit id = "j72:<seed id>" for a composed seed (tid "c:<id>"), "j72:<tid>" for an old one.
+   Roles: A requester · B second person · M her cung nữ · me. Place: A comes to her palace (offer) / she asked around (A's place). */
+function dlgsJ72Id(tid){return"j72:"+String(tid).replace(/^c:/,"")}
+function dlgsJ72(x,how){try{const sp=dlgsGet(dlgsJ72Id(x.tid));if(!sp)return null;const X=q72X(x);if(!X)return null;
+ const per=a=>a?dlgsPer(a.k==="fam"?S.maid:a.o,a.k==="fam"&&S.maid?S.maid.name:a.n):null;
+ const mai=S.maid?{srv:"f",name:S.maid.name}:null,vo=r=>r==="me"?S:r==="A"?(X.A.k==="fam"?mai:kSpk(X.A)||{srv:"f"}):r==="B"?(X.B&&kSpk(X.B)):r==="M"?mai:null;
+ return dlgsResolve(sp,{who:r=>r==="A"?per(X.A):r==="B"?per(X.B):r==="M"?(S.maid?dlgsPer(S.maid,S.maid.name):null):null,
+  txt:(t,a,b)=>{const v=vo(a),l=vo(b);if(v&&l)t=kSay(v,l,t);return q72Txt(t,X)},at:how==="ask"?q72Home(X.A):"home"})}catch(e){console.error(e);return null}}
+if(typeof q72Offer==="function"){const f0=q72Offer;q72Offer=function(x,how){const n0=Q.length;const r=f0.apply(this,arguments);try{if(r)dlgsAttach(n0,dlgsJ72(x,how),m=>m.t==="Việc nhờ")}catch(e){console.error(e)}return r};window.q72Offer=q72Offer}
+try{window.DLGS=DLGS;window.dlgsResolve=dlgsResolve;window.dlgsPlay=dlgsPlay;window.dlgsGet=dlgsGet}catch(e){}
 /* ================= jwalk — WALK COST, ONE RULE FOR EVERYONE (review/walk-cost, ORDER MAIN ROOT-76 20/11; owner OD 19/11 ~22:00Z
    «tôi đang ở Ngự Hoa Viên khắc ba nè, tôi bấm về nhà là tốn một khắc, tức là khắc thứ tư là tôi đã ở nhà rồi»; law 1 two-way, law 4 one core).
    Her: j2 goTo("home") / j42 srvGoTo home pay travel(place,home) like every other walk (j9 travel, BAL.walk.near / far), spill included (j9).
@@ -97808,7 +97871,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="7e709e9388ad";window.CTM_BUILD=BUILD;
+const BUILD="7e5a89e0df29";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

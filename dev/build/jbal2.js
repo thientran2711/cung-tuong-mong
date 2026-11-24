@@ -2119,3 +2119,8 @@ BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's nแบ
 
 /* KIT ยง95 kitDialogue (owner OD 24/11 ~04:45Z/~04:50Z): typewriter speed + spotlight dimming. LAW 4: the kit reads these, it types no number of its own. */
 BAL.kdlg={msWord:110,dim:.5,dimSat:.75,focusScale:1.5,focusBlur:14};
+/* SIDE-LINE DIALOGUE SCENES (jdlgs.js, owner OD 24/11 ~10:05Z): on = scenes play before side-line cards; min/max = lines per scene (owner: few lines, each full of meaning);
+   maxCh = characters per line (the box never scrolls); intro = ms the place painting shows clear; per device: fh = figure height / layer, lx/rx = figure centres
+   (speaker left, her right), boxH/boxW = the one speech box (bottom, centred, lying over the figures). LAW 4: jdlgs types no number of its own. */
+BAL.dlgs={on:true,min:3,max:8,maxCh:170,intro:600,
+ fold:{fh:.86,lx:.25,rx:.75,boxH:.27,boxW:.94},ipad:{fh:.92,lx:.22,rx:.78,boxH:.30,boxW:.70}};
