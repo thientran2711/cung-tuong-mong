@@ -3,6 +3,7 @@
    usage: python3 dev/build/assemble.py && node dev/test/pm-coop-d.js [workerURL] [level=1] [swap=0]   (harness = dev/test/coop-thin-d.js setup, copied)
    Both seats set the test-only flag localStorage ctm-thin-part-4=1 (contract C1: part B not on main yet). */
 const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');
+const OW=require('./odds-words.js');/* ladder words from the ONE source j0 */
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||0);const SWAP=+(process.argv[4]||0);
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+(c?JSON.stringify(x).slice(0,400):JSON.stringify(x.paths?{paths:x.paths,dels:x.dels,err:x.err}:x).slice(0,3000)):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
@@ -71,7 +72,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const ra=await H.p.evaluate(x=>String(runAct(S,rivals.find(v=>v.coop),'pmduel',x)),pa.x);ok(/đợi nàng trả lời/.test(ra),'duel host→guest: an offer',ra);
  ok(await until(G,()=>Q.some(q=>q.thin&&q.t==='Hảo hữu tìm đến'),null,20000),'guest: the card arrives (part D)',await gQ());
  const ca=await G.p.evaluate(()=>{const q=Q.find(q=>q.thin&&q.t==='Hảo hữu tìm đến');return {h:String(q.h||""),o:(q.opts||[]).map(o=>[o.n,String(o.x||"")])}});
- const LAD=/^(Liều|Khó|Năm ăn năm thua|Khá chắc|Chắc|Rất chắc|Nắm chắc) ·/;
+ const LAD=new RegExp('^(?:'+OW.ALT+') ·');
  ok(ca.h.includes(pa.x.n)&&/Cược:/.test(ca.h),'guest card names the game and the stake (the NPC card line)',ca);
  ok(ca.o.length>=2&&ca.o[0][0]==='Nhận lời thách đấu'&&LAD.test(ca.o[0][1])&&/thành:/.test(ca.o[0][1])&&/hỏng:/.test(ca.o[0][1])&&ca.o.some(o=>o[0]==='Từ chối'&&/được:/.test(o[1])&&/mất:/.test(o[1])),'guest card answers = the NPC card answers (ladder word, thành / hỏng, được / mất)',ca.o);
  await H.p.evaluate(()=>{for(const k in COOPW.acts)delete COOPW.acts[k]});/* the host's memory is gone (reload) */

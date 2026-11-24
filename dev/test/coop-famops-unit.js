@@ -181,6 +181,146 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
    try{NPW.reg.__t25={grp:"t",who:()=>liveRivals(true),why:()=>({s:9999})};a25=npwAsk("__t25",{}).map(o=>o.who);const v=rivals.find(x=>x&&!x.coop&&x.alive!==false);l25=npwAsk("loTake",{p:v}).map(o=>o.who)}catch(z){er25=z.message}
    finally{delete NPW.reg.__t25;rivals.splice(rivals.indexOf(f),1)}
    ck("25 the npc-purpose roll never picks her entry as the NPC actor (any kind; loTake)",!er25&&a25&&a25.length>0&&!a25.includes(f)&&l25&&!l25.includes(f),{er25,n:a25&&a25.length,hasF:a25&&a25.includes(f),lo:l25&&l25.includes(f)})}
+  /* E44i T3 (coop-lost-scan LIVE SWAP 10000013: laydo w1, «ret» w4, her seat had no case): the host's «rm lost» takes a durable piece of hers that
+     her own seat's loLose filter refuses (here: marked keep): before, the piece left with NO case (untraceable on her seat; the host's «ret» found
+     nothing to close). Now her case is opened and held by the thief; the «ret» closes it with one piece home. */
+  {reset();const t3=pc(P);t3.keep=1;S.inv.push(t3);const ok0=loOk(t3);FA([{op:"rm",ci:0,k:P,iu:t3.iu,how:"lost"}]);const c26=(S.lost||[]).find(c=>c.e&&c.e.iu===t3.iu);
+   ck("26 rm lost of her durable piece her loLose refuses: her case opens, held by the thief (was: no case)",!ok0&&cnt(t3.iu)===0&&c26&&c26.st==="held"&&c26.own==="me"&&c26.at,{ok0,st:c26&&c26.st,at:c26&&c26.at,n:cnt(t3.iu)});
+   const r26=FA([{op:"ret",k:P,iu:t3.iu,e:{k:P,iu:t3.iu}}]);ck("26b the host's «ret» closes that case, ONE piece home, no famMiss «no case»",c26&&c26.st==="done"&&cnt(t3.iu)===1&&!CW.famMiss.some(m=>/no case/.test(m.why)),{st:c26&&c26.st,n:cnt(t3.iu),miss:CW.famMiss});
+   reset();const t3b={k:P,iu:++n,lo:4242};S.inv.push(t3b);FA([{op:"rm",ci:0,k:P,iu:t3b.iu,how:"lost"}]);ck("26c a piece marked lo (someone else's case piece) opens no case of hers",!(S.lost||[]).some(c=>c.e&&c.e.iu===t3b.iu),(S.lost||[]).length)}
+  /* E44i T9 probe (coop-lost-scan-traced SWAP: a host case of an NPC's piece «held» by her entry): the month's maid sale (j8 maidMonthP, run by
+     rivalsMonth WITH her entry in the harem) picks the buyer over others(p) = every consort: her entry (a player seat) could be the NPC buyer
+     → maidTheft → loKeepBy(c, her entry): the NPC's piece lands on the host's copy of her entry, her silver paid by an NPC roll. */
+  {reset();const on27=CW.on,se27=CW.seat,nw=window.npcWhy;const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[],rank:3,fav:50,bac:99999};rivals.push(f);let er27="",c27=null,bk=null,fb27=null,iv27=null;
+   const v=rivals.find(x=>x&&!x.coop&&x.alive!==false&&!x.out&&x!==f);const sv=consorts().map(x=>[x,x.bac]);const e27=pc(P);
+   try{CW.on=true;CW.seat="a";for(const x of consorts())if(x!==f)x.bac=0;iv27=v.inv;v.inv=[e27];/* E53r: e27 is the only piece the maid can take (the case of it is the one checked) */v.schemes=0;v.loCd=0;if(!v.maid)v.maid=maidMk(v);v.maid.loyal=0;
+    window.npcWhy=(k,c,d)=>k==="maidSell"?{who:v,s:1}:nw(k,c,d);(S.lost||[]).forEach(c=>{if(c.own===key(v))c.st="done"});
+    maidMonthP(v);c27=(S.lost||[]).find(c=>c.e&&c.e.iu===e27.iu);bk=c27&&c27.at;fb27=f.bac/* E53r: read before finally puts every silver back */}catch(z){er27=z.message}
+   finally{window.npcWhy=nw;CW.on=on27;CW.seat=se27;for(const [x,b] of sv)x.bac=b;rivals.splice(rivals.indexOf(f),1);v.inv=(iv27||[]).filter(e=>e.iu!==e27.iu&&!(e.lo&&c27&&e.lo===c27.id));if(c27)c27.st="done"}
+   ck("27 the month's maid sale never makes her entry the NPC buyer (no NPC piece held by her entry, her silver untouched)",!er27&&String(bk)!==String(key(f))&&fb27===99999,{er27,at:bk,bac:fb27,st:c27&&c27.st})}
+  /* E44i T2 (coop-lost-scan LIVE 35f5b5ab 10000045: the host «Lấy đồ» her piece 3×, the 3rd case «held at me» with no copy in his hands): the host's own
+     road, three thefts with a «Cài đồ vào rương» return between them: after each theft ONE copy marked lo=case in his chest and ONE «rm lost» of that id
+     to her seat; after each return the case closes, his copy leaves, ONE «ret». */
+  {reset();const on28=CW.on,se28=CW.seat,sd28=COOP.send,cg=window.caught,ar=window.aRoll,kp=window.loKeepPick;const sn=[];const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[],rank:3,fav:50,bac:9999,maid:{name:"Cung nữ",loyal:50}};rivals.push(f);
+   const R28=[];let er28="";const b0=S.bac,inv0=S.inv,so=window.stf2Ord;
+   try{CW.on=true;CW.seat="a";COOP.send=m=>{sn.push(m);return true};caught=()=>null;aRoll=()=>true;window.stf2Ord=()=>"obey";const x=pc(P);f.inv=[Object.assign({},x,{ci:0})];S.inv=[];
+    for(let i=0;i<3;i++){S.bac=9999;try{used=0}catch(z){}Q.length=0;const n0=sn.length;const rv=runAct(S,f,"laydo");const c=(S.lost||[]).find(c=>c.own===key(f)&&c.st!=="done");
+     const cp=c?S.inv.filter(e=>e.lo===c.id).length:-1;const rm=sn.slice(n0).flatMap(m=>m.fam||[]).filter(o=>o.op==="rm"&&o.how==="lost"&&o.iu===x.iu).length;
+     let back=-1,ret=-1;if(c){const hx=S.inv.findIndex(e=>e.lo===c.id);const n1=sn.length;Q.length=0;var pv=runAct(S,f,"plant",hx);back=S.inv.filter(e=>e.lo===c.id).length;ret=sn.slice(n1).flatMap(m=>m.fam||[]).filter(o=>o.op==="ret"&&o.iu===x.iu).length;
+      f.inv=f.inv.filter(e=>e&&e.iu===x.iu).slice(0,1).map(e=>Object.assign({},loClean(e),{ci:0}))}
+     R28.push({i,rv:String(rv).slice(0,90),pv:typeof pv==="undefined"?"":String(pv).slice(0,120),st:c&&c.st,at:c&&c.at,cp,rm,cst:c&&c.st,back,ret,fin:f.inv.length})}}catch(z){er28=z.message+" "+String(z.stack).split("\n")[1]}
+   finally{window.stf2Ord=so;CW.on=on28;CW.seat=se28;COOP.send=sd28;caught=cg;aRoll=ar;loKeepPick=kp;S.bac=b0;S.inv=inv0;rivals.splice(rivals.indexOf(f),1);Q.length=0}
+   ck("28 the host's Lấy đồ ×3 with a return between: each time ONE marked copy in his chest + ONE «rm lost»; each return closes the case, copy gone, ONE «ret»",!er28&&R28.length===3&&R28.every(r=>r.at==="me"&&r.cp===1&&r.rm===1&&r.back===0&&r.ret===1&&r.fin===1),{er28,R28})}
+  /* E44j (a) (E52r finding a, law 6c): jil ilGuard wraps rivalsMonth OUTSIDE b4Wrap (jil is assembled after jcoopworld): an NPC gift to her entry
+     inside the month was sent by b4Ops («add»), then ilGuard's after-check saw the piece leave the NPC → ilGone → npcToFriend sent a 2nd «add»
+     (her seat dropped it by iu: «add: already hers»). Same layering here: ilGuard ⊃ b4Wrap ⊃ the gift. Exactly ONE «add»; a later gift of
+     another piece outside any diffed call still sends its own. */
+  {reset();const on29=CW.on,se29=CW.seat,sd29=COOP.send;const sn=[];const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[],rank:3,fav:50};rivals.push(f);
+   const v=rivals.find(x=>x&&!x.coop&&x.alive!==false);v.inv=v.inv||[];let er29="",n29=-1,n29b=-1,L=null,bx29=-1,inF29=-1;const pullFriend=()=>{const o=[];for(let i=rivals.length-1;i>=0;i--)if(rivals[i]&&rivals[i].coop)o.push([i,rivals.splice(i,1)[0]]);return o},pushFriend=L=>{for(const [i,x] of L.slice().reverse())if(!rivals.includes(x))rivals.splice(Math.min(i,rivals.length),0,x)};
+   try{CW.on=true;CW.seat="a";COOP.send=m=>{sn.push(m);return true};const e=pc(P);v.inv.push(e);L=pullFriend();CW.pulled=L;
+    window.__t29=CW.b4Wrap("rivalsMonth",()=>{pushFriend(L.slice());try{giveTo(v,f,v.inv.indexOf(e))}finally{pullFriend()}});ilGuard("__t29",x=>x.t?"evid":"conf",()=>ilPeople());
+    window.__t29();CW.pulled=null;pushFriend(L);L=null;bx29=ilS().box.filter(x=>x.e&&x.e.iu===e.iu).length;inF29=f.inv.filter(x=>x.iu===e.iu).length;n29=sn.flatMap(m=>m.fam||[]).filter(o=>o&&o.op==="add"&&o.e&&o.e.iu===e.iu).length;
+    const e2=pc(P);v.inv.push(e2);giveTo(v,f,v.inv.indexOf(e2));n29b=sn.flatMap(m=>m.fam||[]).filter(o=>o&&o.op==="add"&&o.e&&o.e.iu===e2.iu).length}catch(z){er29=z.message}
+   finally{if(L){CW.pulled=null;pushFriend(L)}delete window.__t29;CW.on=on29;CW.seat=se29;COOP.send=sd29;rivals.splice(rivals.indexOf(f),1);v.inv=v.inv.filter(e=>!(e.iu>9e6))}
+   ck("29 an NPC gift to her entry inside the month (ilGuard outside b4Wrap): ONE «add» (was: 2), the piece in her entry only (never also in the host box), a later gift outside still ONE",!er29&&n29===1&&n29b===1&&bx29===0&&inF29===1,{er29,n29,n29b,bx29,inF29})}
+  /* E44j (b) (E52r finding b, law 1 + 6c): HER piece in the HOST's box (tịch thu from her entry / sold out of it) had no road back: the NPC
+     owner's road (ilConf / ilBack) never picks a player seat. Host: at the due week ilWeek asks her seat («ilask», the same dialog); her answer
+     («iltake») hands it to her entry = ONE «add»; a piece gone meanwhile refunds her silver. Guest: the ask opens «Đồ bị tịch thu» / «Đồ cũ trở về»,
+     her choice sends «iltake». */
+  {reset();const on30=CW.on,se30=CW.seat,sd30=COOP.send;const sn=[];const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[],rank:3,fav:50,bac:9999};rivals.push(f);
+   let er30="",R30={};const I=ilS();
+   try{CW.on=true;CW.seat="a";COOP.send=m=>{sn.push(m);return true};const p2=()=>sn.filter(m=>m.k==="ctm-p2");
+    const ec=pc(P),xc={e:ec,at:"nvp",why:"conf",own:key(f),w:wk()-9,rel:wk()-1,by:""};I.box.push(xc);ilWeek();
+    const ac=p2().filter(m=>m.mode==="ilask"&&m.u===ec.iu&&m.kind==="conf");R30.askConf=ac.length;
+    const em=pc(P),xm={e:em,at:"mkt",why:"sell",own:key(f),w:wk()-9,ret:wk()-1,pr:7,by:""};I.box.push(xm);ilWeek();
+    R30.askBack=p2().filter(m=>m.mode==="ilask"&&m.u===em.iu&&m.kind==="back"&&m.pr===7).length;
+    const n0=sn.length;CW.P2H.iltake({u:ec.iu,how:"sám hối xin lại"});R30.addC=sn.slice(n0).flatMap(m=>m.fam||[]).filter(o=>o&&o.op==="add"&&o.e&&o.e.iu===ec.iu).length;
+    R30.boxC=I.box.filter(x=>x.e&&x.e.iu===ec.iu).length;R30.inF=f.inv.filter(e=>e.iu===ec.iu).length;
+    const n1=sn.length;CW.P2H.iltake({u:424242,k:P,how:"chuộc về",pay:{bac:7}});R30.ref=sn.slice(n1).filter(m=>m.mode==="ilrefund"&&m.bac===7).length;
+    CW.seat="b";Q.length=0;const bac30=S.bac;S.bac=9999;const n2=sn.length;CW.P2H.ilask({kind:"back",u:em.iu,e:{k:P,iu:em.iu},pr:7});const d=Q.find(q=>q&&q.t==="Đồ cũ trở về");R30.dlg=!!d;
+    if(d&&d.opts&&d.opts[0])d.opts[0].go();R30.want=sn.slice(n2).filter(m=>m.mode==="iltake"&&m.u===em.iu&&m.pay&&m.pay.bac===7).length;
+    Q.length=0;CW.P2H.ilask({kind:"conf",u:ec.iu,e:{k:P,iu:ec.iu},pr:0});R30.dlgC=!!Q.find(q=>q&&q.t==="Đồ bị tịch thu");Q.length=0;S.bac=bac30}catch(z){er30=z.message+" "+String(z.stack).split("\n")[1]}
+   finally{CW.on=on30;CW.seat=se30;COOP.send=sd30;rivals.splice(rivals.indexOf(f),1);I.box=I.box.filter(x=>!(x.e&&x.e.iu>9e6));Q.length=0}
+   ck("30 her piece in the host's box: the due week asks her seat (tịch thu + ransom), her answer → ONE «add» to her entry, out of the box; a gone piece refunds; her seat shows the same dialogs",
+    !er30&&R30.askConf===1&&R30.askBack===1&&R30.addC===1&&R30.boxC===0&&R30.inF===1&&R30.ref===1&&R30.dlg&&R30.want===1&&R30.dlgC,{er30,R30})}
+  /* E44j (c) (E52r finding c, T9 family, law 6c + 1): actor picks outside npwAsk with her entry in the pool / as the chooser. Today they sit behind
+     the day plan (BAL.ag.day.on: j20 queenRewards, j8 the queen's monthly judgment) or behind jthaiy's bribers (j13 fallback): forced on here
+     (stubs) so a switch can never reopen them. A target pick stays (NPCs may act on her: law 1). */
+  {const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[],rank:6,fav:50,bac:9999,queen:true,evm:{},ro:{},arts:{}};rivals.unshift(f);const W=window;
+   const sv={agDOn:W.agDOn,thy:W.thyBribedBy,qp:W.queenP,npcWhy:W.npcWhy,judge:W.judge,evG:W.evG,rel:W.rel,roll:W.roll,hos:W.hostility,mpb:W.mindPickBy,ml:W.mindLog};let er31="",R31={};const mo=S.month,ct=S.court;
+   try{W.agDOn=()=>false;
+    /* j13 treat: the bribed physician's payer */
+    W.thyBribedBy=undefined;S.court=S.court||{ty:{af:{}}};const af0=JSON.stringify(S.court.ty&&S.court.ty.af||{});S.court.ty=S.court.ty||{af:{}};S.court.ty.af=Object.assign({},S.court.ty.af,{[f.id]:99});
+    W.hostility=(a,b)=>a===f?99:sv.hos(a,b);let got=null;W.npcWhy=(k,c,d)=>{if(k==="thyHarm"){got=c.b;return null}return sv.npcWhy(k,c,d)};
+    const v=rivals.find(x=>x&&!x.coop&&x.alive!==false&&!x.out);const ill0=v.ill;v.ill={k:Object.keys(ILL)[0],st:1};try{treat(v,"ty")}finally{v.ill=ill0;S.court.ty.af=JSON.parse(af0)}R31.briber=got===f?"her":got?"npc":"none";
+    W.npcWhy=sv.npcWhy;W.hostility=sv.hos;W.thyBribedBy=sv.thy;
+    /* j20 queenRewards with her entry as Hoàng hậu */
+    W.queenP=()=>f;S.month=3;const b0=consorts().map(x=>[x,x.bac]);W.rel=(a,b)=>a===f?50:sv.rel(a,b);try{queenRewards()}finally{W.rel=sv.rel}R31.reward=consorts().filter(x=>x!==f&&b0.find(y=>y[0]===x)[1]!==x.bac).length;for(const [x,b] of b0)x.bac=b;W.queenP=sv.qp;S.month=mo;
+    /* j8 rivalsTurn (her entry is in the harem on the host): the Empress's weekly judgment chosen by her entry's NPC mind */
+    let ch=0;W.mindPickBy=(L,sc,p)=>{if(p===f)ch++;return null};W.evG=(h,t)=>h===f?999:sv.evG(h,t);W.rel=(a,b)=>a===f?-50:sv.rel(a,b);
+    try{rivalsTurn()}catch(z){R31.rt=z.message}finally{W.mindPickBy=sv.mpb;W.evG=sv.evG;W.rel=sv.rel}R31.judgeBy=ch;
+    /* j8 rivalsMonth: her entry's NPC month (npcMonthly: study, buy, useItem / wear of HER pieces, gifts, deeds) */
+    let nm=0;const nm0=W.npcMonthly;W.npcMonthly=v=>{if(v===f)nm++;return ""};try{rivalsMonth()}catch(z){R31.rm=z.message}finally{W.npcMonthly=nm0}R31.month=nm;
+    /* npcAct (the old NPC harm menu; muted today by AG-ALL harm jagharm haOn) never decides for her entry */
+    let dec=0;const ho=W.__haOff;W.__haOff=true;W.mindLog=(v,k)=>{if(v===f&&k==="_decide"){dec++;throw new Error("stop")}return sv.ml(v,k)};try{npcAct(f,v)}catch(z){}finally{W.mindLog=sv.ml;W.__haOff=ho}R31.act=dec}
+   catch(z){er31=z.message+" "+String(z.stack).split("\n")[1]}
+   finally{Object.assign(W,{agDOn:sv.agDOn,thyBribedBy:sv.thy,queenP:sv.qp,npcWhy:sv.npcWhy,judge:sv.judge,evG:sv.evG,rel:sv.rel,roll:sv.roll,hostility:sv.hos,mindPickBy:sv.mpb,mindLog:sv.ml});S.month=mo;S.court=ct;rivals.splice(rivals.indexOf(f),1);Q.length=0}
+   ck("31 actor picks outside npwAsk never make her entry the NPC actor (j13 physician briber, j20 the Empress's reward, j8 the Empress's judgment, j8 her NPC month, npcAct)",!er31&&R31.briber!=="her"&&R31.reward===0&&R31.judgeBy===0&&R31.act===0&&R31.month===0,{er31,R31})}
+  /* E44j T4 (coop-lost-scan dup 117 / id 10: her laydo «rm lost» of a host piece that sat in his box «cct» tang vật since w1): rooms run the
+     relay path (thin level 0) by default, so her act ran on her seat's copy of the host, a step behind; the host found the piece only in his box
+     (famMiss «not hers») and her seat kept her gain = 2 places. Now the seat whose box holds it answers «rm gone» by id (either seat): the actor's
+     phantom copy leaves (her famApply «rm» by id, the existing «… không còn nữa» line), the box keeps the one piece. */
+  {reset();const on32=CW.on,se32=CW.seat,sd32=COOP.send;const sn=[];const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[],rank:3,fav:50};rivals.push(f);let er32="",R32={};const I=ilS();
+   try{CW.on=true;CW.seat="a";COOP.send=m=>{sn.push(m);return true};const e=pc(P),x={e,at:"cct",why:"evid",own:"me",w:wk()};I.box.push(x);
+    FA([{op:"rm",ci:0,k:P,iu:e.iu,how:"lost"}]);const back=sn.flatMap(m=>m.fam||[]).filter(o=>o&&o.op==="rm"&&o.how==="gone"&&o.iu===e.iu);R32.back=back.length;R32.box=I.box.filter(y=>y.e&&y.e.iu===e.iu).length;
+    const n0=sn.length;const e2=pc(P);FA([{op:"rm",ci:0,k:P,iu:e2.iu,how:"lost"}]);R32.none=sn.slice(n0).length;/* a piece in no box of mine: nothing to answer */
+    CW.seat="b";S.loSeq=(S.loSeq||0)+1;const hc={id:S.loSeq,k:P,e:Object.assign({},e),own:901,w:wk(),due:wk()+9,st:"held",by:"me",at:"me",keep:1,cause:"riv",kn:{},open:0,cev:0,hear:0};loL().push(hc);const g=Object.assign({},e,{lo:hc.id});S.inv=[g];FA(back);R32.her=cnt(e.iu);R32.hc=hc.st;loL().splice(loL().indexOf(hc),1)}catch(z){er32=z.message+" "+String(z.stack).split("\n")[1]}
+   finally{CW.on=on32;CW.seat=se32;COOP.send=sd32;rivals.splice(rivals.indexOf(f),1);I.box=I.box.filter(y=>!(y.e&&y.e.iu>9e6))}
+   ck("32 T4 her act took a piece that is only in my box: ONE «rm gone» back by id, the box keeps it, her phantom copy leaves and her case of it closes; a piece in no box: no answer",!er32&&R32.back===1&&R32.box===1&&R32.none===0&&R32.her===0&&R32.hc==="done",{er32,R32})}
+  /* E44j (coop-lost-scan-traced 9001 vanish 10000001 y_saxanh, w71 rivalsMonth b4Ops «rm gone» + «add y_vanthuy»): the j92 month re-dressed her entry
+     by NPC roll (wdNpcDress → wdAutoFor; also Quốc tang, jlux luxCalm, jworld tang) and gave it NPC starting pieces (wdNpcInit): the garment put on
+     left her bag = «rm gone» → her seat lost it. Her outfit is her seat's choice: wdAutoFor / wdNpcInit leave her entry as it is. */
+  {const f={id:902,coop:1,name:"Hảo hữu",alive:true,inv:[],kids:[],rank:5,fav:50,bac:0};rivals.push(f);let er33="",R33={};
+   try{const P5=wdPOf(f);const ky=wdPickAt(P5,"y",1)||Object.keys(WD_ITEMS).find(k=>WD_ITEMS[k].sl==="y");const kb=Object.keys(WD_ITEMS).find(k=>WD_ITEMS[k].sl==="y"&&k!==ky);
+    f.wd={tram:null,y:{k:kb,iu:++n}};f.inv=[{k:ky,iu:++n}];const s0=JSON.stringify([f.wd,f.inv]);wdAutoFor(f,0);R33.auto=JSON.stringify([f.wd,f.inv])===s0;
+    const L0=f.inv.length;delete f.wdI;wdNpcInit(f);R33.init=f.inv.length===L0;R33.ky=ky;R33.kb=kb}catch(z){er33=z.message+" "+String(z.stack).split("\n")[1]}
+   finally{rivals.splice(rivals.indexOf(f),1)}
+   ck("33 NPC dressing never touches her entry (wdAutoFor: j92 month / Quốc tang / jlux / jworld; wdNpcInit starting pieces)",!er33&&R33.auto&&R33.init,{er33,R33})}
+  /* E44k F1 (coop-lost-scan-traced 9001 dup 2576 «quatcong»: her «Lấy đồ» on the host's entry w68 → her seat kept the piece + case 27, the host never
+     received the «res» (tA.rcv empty) and kept the piece = 2 places): a «res» went out ONCE; a socket down / a peer offline lost it. Now an outbox keeps
+     it until the ack (resent on peer back / reconnect / timer), the receiver applies an id once (seenIds + S.coopRs: a reload never applies it twice)
+     and acks every copy. */
+  {const on34=CW.on,se34=CW.seat,sd34=COOP.send;const sn=[];let up=false,er34="",R34={};
+   try{CW.on=true;CW.seat="b";COOP.send=m=>{sn.push(JSON.parse(JSON.stringify(m)));return up};
+    R34.hook=typeof CW.resOut==="function"&&typeof CW.rqFlush==="function";
+    /* (a) an act result («res» with fam ops) while the socket is down: sent again (same id) once it is up, never after the ack */
+    const id="t34a"+Date.now();CW.resOut({t:"res",id,k:"laydo",fam:[{op:"rm",ci:0,k:P,iu:777,how:"lost"}],fx:{},flags:{},seen:"effect"});
+    R34.first=sn.filter(m=>m.id===id).length;up=true;CW.rqFlush(true);R34.again=sn.filter(m=>m.id===id).length;
+    CW.onActrT({t:"actr",id,ack:1,from:"a"});const n0=sn.length;CW.rqFlush(true);R34.afterAck=sn.slice(n0).filter(m=>m.id===id).length;
+    /* (b) the receiver: the same id twice → applied once, both copies acked */
+    reset();const g=pc(P);S.inv.push(g);const h=pc(P);S.inv.push(h);const n1=sn.length;const rm={t:"res",id:"t34b"+Date.now(),from:"a",k:"npc",fx:{},flags:{},seen:"",fam:[{op:"rm",ci:0,k:P,iu:g.iu,how:"gone"}]};
+    CW.onResT(rm);const ad=Object.assign({},rm,{fam:[{op:"add",e:{k:P,iu:h.iu+1000}}]});CW.onResT(ad);
+    R34.once=cnt(g.iu)===0&&cnt(h.iu+1000)===0&&cnt(h.iu)===1;R34.acks=sn.slice(n1).filter(m=>m.t==="actr"&&m.ack&&m.id===rm.id).length;
+    /* (c) after a reload (seenIds empty): an id her save already holds (S.coopRs) is not applied again, still acked */
+    const id3="t34c"+Date.now();S.coopRs=(S.coopRs||[]).concat([id3]);const n2=sn.length;const nk=++n;CW.onResT({t:"res",id:id3,from:"a",k:"npc",fx:{},flags:{},seen:"",fam:[{op:"add",e:{k:P,iu:nk}}]});
+    R34.reload=cnt(nk)===0&&sn.slice(n2).filter(m=>m.t==="actr"&&m.ack&&m.id===id3).length===1;
+    /* (d) law-11 family: the P2 item answer «iltake» (her choice for her piece in the host's box) rides the same outbox; the host runs one id once and acks */
+    up=false;const n3=sn.length;CW.ilWant({u:4242,e:{k:P}},"về",null);const it=sn.slice(n3).find(m=>m.mode==="iltake");up=true;CW.rqFlush(true);R34.p2again=it?sn.filter(m=>m.id===it.id).length:0;
+    CW.p2InT({t:"act",k:"ctm-p2",mode:"ack",ack:it&&it.id,from:"a"});const n4=sn.length;CW.rqFlush(true);R34.p2acked=sn.slice(n4).filter(m=>it&&m.id===it.id).length===0;
+    CW.seat="a";const n5=sn.length;const tk={t:"act",k:"ctm-p2",mode:"iltake",id:"t34d"+Date.now(),u:4243,k2:P,from:"b",pay:{bac:7}};CW.p2InT(tk);CW.p2InT(tk);
+    R34.p2once=sn.slice(n5).filter(m=>m.mode==="ilrefund").length===1&&sn.slice(n5).filter(m=>m.mode==="ack"&&m.ack===tk.id).length===2}catch(z){er34=z.message+" "+String(z.stack).split("\n")[1]}
+   finally{CW.on=on34;CW.seat=se34;COOP.send=sd34;if(CW.rq)CW.rq.length=0;Q.length=0}
+   ck("34 F1 a res (and a P2 item answer) lost on a down socket is sent again (same id) until acked; the receiver applies an id once (also after a reload) and acks every copy",!er34&&R34.hook&&R34.first===1&&R34.again===2&&R34.afterAck===0&&R34.once&&R34.acks===2&&R34.reload&&R34.p2again===2&&R34.p2acked&&R34.p2once,{er34,R34})}
+  /* E53r (review of -t2, law 6c + 11): the outbox belongs to ONE room + seat. leave() → join() of another room keeps the page (no reload): an
+     unacked «res» of the old room must never be sent into the new room (its «add» = a piece from nowhere in another friend's world), and it is
+     not lost: back in the old room it goes out again. */
+  {const on35=CW.on,se35=CW.seat,sd35=COOP.send,rm35=COOP.state.room;const sn=[];let er35="",R35={};
+   try{CW.on=true;CW.seat="b";COOP.send=m=>{sn.push(JSON.parse(JSON.stringify(m)));return false};if(CW.rq)CW.rq.length=0;
+    COOP.state.room="T35A";const id="t35a"+Date.now();CW.resOut({t:"res",id,k:"npc",fam:[{op:"add",e:{k:P,iu:8835}}],fx:{},flags:{},seen:""});
+    COOP.state.room="T35B";CW.rqLoadT();const n0=sn.length;CW.rqFlush(true);R35.leak=sn.slice(n0).filter(m=>m.id===id).length;
+    COOP.state.room="T35A";CW.rqLoadT();const n1=sn.length;CW.rqFlush(true);R35.back=sn.slice(n1).filter(m=>m.id===id).length}catch(z){er35=z.message}
+   finally{CW.on=on35;CW.seat=se35;COOP.send=sd35;COOP.state.room=rm35;if(CW.rq)CW.rq.length=0;try{localStorage.removeItem("ctm-resq:T35A:b");localStorage.removeItem("ctm-resq:T35B:b")}catch(z){}}
+   ck("35 the res outbox never sends an old room's unacked res into another room (leave → join, same page), and sends it again back in its own room",!er35&&R35.leak===0&&R35.back===1,{er35,R35})}
   const fr2=CW.famRet({k:P,iu:5,hiu:6});ck("14b famRet sends the piece's hiu as alt",Array.isArray(fr2.alt)&&fr2.alt.includes(6),fr2);
   return out});
  let bad=0;for(const [n,ok,i] of R){if(!ok)bad++;console.log((ok?'ok  ':'FAIL')+' '+n+(ok?'':' '+i))}if(errs.length){bad++;console.log('FAIL page errors',errs.slice(0,3))}
