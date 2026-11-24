@@ -32,7 +32,7 @@ function kitGradeChip(g,o){o=o||{};g=Math.max(0,Math.min(4,g|0));const G=(typeof
 function kitRevealHTML(I,o){o=o||{};const R=(typeof BAL==="object"&&BAL.reveal)||{};
  return `<div class="krev" style="--gc:${I.col};--krise:${(R.rise||550)}ms">`+`<i class="krevl" aria-hidden="true"></i>`+
   kitItem({src:I.src512||I.src,name:"",grade:I.grade,gname:I.gname,size:"xl",tip:I.name}).replace('<span class="kitn"></span>','')+
-  `<b class="krevn">${krEsc(I.name)}</b>${!o.noSub&&I.sub?`<small class="krevs">${krEsc(I.sub)}</small>`:""}${o.from?`<small class="krevf">${krEsc(o.from)}</small>`:""}</div>`}
+  `<b class="krevn">${typeof kitTitlePlate==="function"?kitTitlePlate({name:I.name,tier:8,sh:"t"},{id:false,cls:"krev-pl kdh-still"}):krEsc(I.name)}</b>${!o.noSub&&I.sub?`<small class="krevs">${krEsc(I.sub)}</small>`:""}${o.from?`<small class="krevf">${krEsc(o.from)}</small>`:""}</div>`}
 window.kitItemInfo=kitItemInfo;window.kitGradeChip=kitGradeChip;window.kitRevealHTML=kitRevealHTML;
 
 /* ---------- §54.2 kitLose ---------- */
@@ -85,6 +85,7 @@ window.kitLose=kitLose;window.kitCoins=kitCoins;
 .krev>.kitem{position:relative;animation:krevRise var(--krise) cubic-bezier(.2,.9,.3,1.2) both}
 .krev>.kitem>.kitb{filter:drop-shadow(0 0 14px var(--gc)) drop-shadow(0 4px 8px #0006)}
 .krevn{position:relative;font-family:var(--display,serif);font-size:1.18rem;line-height:1.25;text-shadow:0 2px 6px #000a;animation:krevUp calc(0.4s*var(--pace,1)) calc(var(--krise)*.6) ease-out both}
+.krevn .krev-pl{font-size:1.05rem;padding:3px 16px 4px;text-shadow:none}.krevn .krev-pl>b{text-shadow:0 1px 0 #fffbe8}
 .krevs{position:relative;font-size:.8rem;color:#f6ead6e0;animation:krevUp calc(0.4s*var(--pace,1)) calc(var(--krise)*.8) ease-out both}
 .krevf{position:relative;font-size:.76rem;color:#f6ead6c0}
 .krevok{position:relative;margin-top:6px;min-width:120px;animation:krevUp calc(.4s*var(--pace)) var(--kok,calc(900ms*var(--pace))) ease-out both}

@@ -497,7 +497,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 /* 7 reward */
 .km-reward{background:radial-gradient(ellipse at 50% 42%,#4a2a14e0,#140a06f2 70%)}
 .kmrew{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;max-width:560px}
-.kmrew-h{display:flex;flex-direction:column;align-items:center;text-align:center;animation:kmFade calc(.4s*var(--pace)) ease both}
+.kmrew-h{display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;z-index:8;animation:kmFade calc(.4s*var(--pace)) ease both}
 .kmrew-h>b{font-family:var(--display);font-size:1.25rem;color:#f6e3b4;letter-spacing:.05em}.kmrew-h .kmrew-pl{font-size:1.15rem;padding:3px 20px 4px;margin-bottom:2px}.kmtap .kmrew-pl-s{font-size:.9rem;letter-spacing:.08em}.kmrew-h small .kmrew-pl-s{font-size:.82rem;margin-top:4px}.kmrew-h small{color:#e9d6b0;font-size:.82rem}
 .kmbox{position:relative;width:min(70vw,340px);aspect-ratio:520/420;display:flex;align-items:flex-end;justify-content:center}
 .kmbox-c,.kmbox-o{position:absolute;left:0;right:0;bottom:0;margin:auto;width:100%;height:auto;max-height:100%;object-fit:contain;filter:drop-shadow(0 10px 14px #000a)}

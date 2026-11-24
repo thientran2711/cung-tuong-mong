@@ -251,7 +251,7 @@ function kfWxPreview(id){if(id==="bolt"){kfBolt(true);return}
  const c=id==="sun"?kfSeCfg():Object.assign({lay:"se"},KF_WX[id]);if(id==="sun"){c.lay="se";c.id="sun";c.k=["orb","ember"];c.tint=0xffe08a}if(!c||!c.k)return;
  const L=id==="sun"?[c,KF_RAYS]:[c];kfApp().then(()=>kfkLoad(L.flatMap(x=>x.k))).then(()=>{for(const q of L){const n=Math.round(kfWxCap(q)*.8);for(let i=0;i<n;i++)kfWxSpawn(Object.assign({},q,{lay:q.lay,float:q.float}),true)}kfWake()}).catch(()=>{})}
 function kfWxClear(lay,ms){for(const s of KFX.parts)if(s.v&&s.v.amb&&(!lay||s.v.lay===lay)){s.v.fade="out";s.v.max=ms||40;s.v.life=Math.min(s.v.life,ms||40)}}
-function kfAmbWant(){try{return !!(KFX.ambOK&&typeof S!=="undefined"&&S&&!S.dead&&!kfStill()&&!document.hidden&&kfOn()&&!document.querySelector(".kmov,#dawn:not([hidden]),#kroul,#kpodov,#title:not([hidden]),#kload"))}catch(e){return false}}
+function kfAmbWant(){try{return !!(KFX.ambOK&&typeof S!=="undefined"&&S&&!S.dead&&!kfStill()&&!document.hidden&&kfOn()&&!document.querySelector(".kmov,.kscn,#modal:not([hidden]),#dawn:not([hidden]),#kroul,#kpodov,#title:not([hidden]),#kload"))}catch(e){return false}}
 let kfAmbT=0;
 function kfAmbLive(lay){let n=0;for(const s of KFX.parts)if(s.v&&s.v.amb&&s.v.lay===lay&&s.v.fade!=="out")n++;return n}
 /* night decoration on the stage (moved from j11's code-drawn dots): warm lantern glows + stars, PAINTED orb / spark sprites */
