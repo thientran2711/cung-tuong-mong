@@ -21621,7 +21621,6 @@
      "room": "DY98",
      "ms": 129931,
      "week": 15
-<<<<<<< HEAD
     },
     {
      "seat": "guest",
@@ -23424,8 +23423,6 @@
      "room": "FJHK",
      "ms": 812015,
      "week": 30
-=======
->>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
     }
    ],
    "lag": {
@@ -23953,7 +23950,6 @@
         "errs": 0
        }
       }
-<<<<<<< HEAD
      },
      {
       "year": 1,
@@ -24581,8 +24577,6 @@
         "errs": 0
        }
       }
-=======
->>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
      }
     ],
     "rooms": [
@@ -27448,11 +27442,7 @@
       "code": "DY98",
       "host": "X",
       "t0": 1795512265467,
-<<<<<<< HEAD
       "weeks": 26,
-=======
-      "weeks": 20,
->>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
       "buoi": 25,
       "turns": [
        {
@@ -27577,7 +27567,6 @@
        "year": 1
       },
       "whereDiff": 0,
-<<<<<<< HEAD
       "posDiff": 17,
       "statLag": 1,
       "cmp": 81
@@ -30223,11 +30212,6 @@
       "posDiff": 3,
       "statLag": 0,
       "cmp": 18
-=======
-      "posDiff": 13,
-      "statLag": 1,
-      "cmp": 59
->>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
      }
     ],
     "rejoin": [
@@ -30250,7 +30234,6 @@
       "room": "DY98",
       "week": 6,
       "ms": 6293
-<<<<<<< HEAD
      },
      {
       "room": "88MB",
@@ -30277,14 +30260,6 @@
    "rooms": 12,
    "t": {
     "total": 16132544
-=======
-     }
-    ]
-   },
-   "rooms": 5,
-   "t": {
-    "total": 8467385
->>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
    },
    "partial": true,
    "bugs": [
@@ -30292,22 +30267,14 @@
      "type": "coop-pos",
      "msg": "where one sees the friend ≠ where the friend is",
      "detail": "buổi 1.3 guest sees host at r2, host is at H:b",
-<<<<<<< HEAD
      "n": 117,
-=======
-     "n": 19,
->>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
      "at": "coop-p01-S1"
     },
     {
      "type": "save",
      "msg": "save→load→save changes the state (host)",
      "detail": "save.S.visit.people.0.__feelMig: 1 → undefined",
-<<<<<<< HEAD
      "n": 72,
-=======
-     "n": 40,
->>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
      "at": "coop-p01-S1",
      "saveFile": "saves/coop-20261124-0723-p1-2-ta5rfc.json"
     },
@@ -30315,66 +30282,42 @@
      "type": "save",
      "msg": "save→load→save changes the state (guest)",
      "detail": "save.S.visit.__chg: 1 → undefined",
-<<<<<<< HEAD
      "n": 72,
-=======
-     "n": 40,
->>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
      "at": "coop-p01-S1"
     },
     {
      "type": "lag",
      "msg": "co-op LAG budget miss: coopTurnP95",
      "detail": "coopTurnP95 104134 > 10000 · game year 1 · room ZDG8 · per device {\"fold\":{\"seat\":\"host\",\"kbPerMin\":464.4,\"upKB\":3832,\"dnKB\":742,\"resend\":238,\"resendBy\":{\"pos\":116,\"act\":87,\"bin\":28,\"where\":7},\"longTasksPerMin\":327.4,\"longTaskMax\":2406,\"errs\":0},\"ipad\":{\"seat\":\"guest\",\"kbPerMin\":463.9,\"upKB\":1584,\"dnKB\":2985,\"resend\":182,\"resendBy\":{\"act\":68,\"pos\":88,\"bin\":26},\"longTasksPerMin\":452.8,\"longTaskMax\":2784,\"errs\":0}}",
-<<<<<<< HEAD
      "n": 22,
-=======
-     "n": 10,
->>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
      "at": "coop-p01-S1"
     },
     {
      "type": "lag",
      "msg": "co-op LAG budget miss: coopSyncKBMax",
      "detail": "coopSyncKBMax 172.3 > 100 · game year 1 · room ZDG8 · per device {\"fold\":{\"seat\":\"host\",\"kbPerMin\":464.4,\"upKB\":3832,\"dnKB\":742,\"resend\":238,\"resendBy\":{\"pos\":116,\"act\":87,\"bin\":28,\"where\":7},\"longTasksPerMin\":327.4,\"longTaskMax\":2406,\"errs\":0},\"ipad\":{\"seat\":\"guest\",\"kbPerMin\":463.9,\"upKB\":1584,\"dnKB\":2985,\"resend\":182,\"resendBy\":{\"act\":68,\"pos\":88,\"bin\":26},\"longTasksPerMin\":452.8,\"longTaskMax\":2784,\"errs\":0}}",
-<<<<<<< HEAD
      "n": 21,
-=======
-     "n": 10,
->>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
      "at": "coop-p01-S1"
     },
     {
      "type": "lag",
      "msg": "co-op LAG budget miss: coopResendPerMin",
      "detail": "coopResendPerMin 21.3 > 12 · game year 1 · room ZDG8 · per device {\"fold\":{\"seat\":\"host\",\"kbPerMin\":464.4,\"upKB\":3832,\"dnKB\":742,\"resend\":238,\"resendBy\":{\"pos\":116,\"act\":87,\"bin\":28,\"where\":7},\"longTasksPerMin\":327.4,\"longTaskMax\":2406,\"errs\":0},\"ipad\":{\"seat\":\"guest\",\"kbPerMin\":463.9,\"upKB\":1584,\"dnKB\":2985,\"resend\":182,\"resendBy\":{\"act\":68,\"pos\":88,\"bin\":26},\"longTasksPerMin\":452.8,\"longTaskMax\":2784,\"errs\":0}}",
-<<<<<<< HEAD
      "n": 9,
-=======
-     "n": 6,
->>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
      "at": "coop-p01-S1"
     },
     {
      "type": "lag",
      "msg": "co-op buổi stall (both ready, the room took > 30 s or never stepped)",
      "detail": "11 of 22 buổi in game year 1",
-<<<<<<< HEAD
      "n": 16,
-=======
-     "n": 7,
->>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
      "at": "coop-p01-S1"
     },
     {
      "type": "number",
      "msg": "stat out of range: bac",
      "detail": "bac=-9 · ipad guest week 13",
-<<<<<<< HEAD
      "n": 17,
-=======
-     "n": 4,
->>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
      "at": "coop-p01-S1",
      "saveFile": "saves/coop-20261124-0723-p1-2-14hifwm.json"
     },
@@ -30389,11 +30332,7 @@
      "type": "number",
      "msg": "stat out of range: sung",
      "detail": "sung=-1 · ipad guest week 87",
-<<<<<<< HEAD
      "n": 19,
-=======
-     "n": 3,
->>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
      "at": "coop-p01-S1",
      "saveFile": "saves/coop-20261124-0723-p1-2-310db3.json"
     },
@@ -30401,11 +30340,7 @@
      "type": "stuck",
      "msg": "co-op room stuck: no room week step in 240 s",
      "detail": "host {\"buoi\":3,\"week\":1,\"bend\":false,\"pendBuoi\":null,\"pend\":false,\"sent\":0,\"Q\":0,\"Qt\":[],\"mh\":true,\"mg\":false,\"dead\":false,\"next\":true,\"title\":false,\"st\":\"open\",\"peer\":true} || guest {\"buoi\":3,\"week\":1,\"bend\":false,\"pendBuoi\":null,\"pend\":false,\"sent\":0,\"Q\":0,\"Qt\":[],\"mh\":true,\"mg\":false,\"dead\":false,\"next\":true,\"title\":false,\"st\":\"open\",\"peer\":true}",
-<<<<<<< HEAD
      "n": 9,
-=======
-     "n": 3,
->>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
      "at": "coop-p01-S1",
      "shots": [
       "shots/coop-p01-S1-r2-host-stuck.png",
@@ -30433,11 +30368,7 @@
      "type": "coop-stat",
      "msg": "the friend's Sủng/Danh/Sức shown ≠ her own (one buổi late or wrong)",
      "detail": "buổi 14.3: host sees guest 1/0/77 (guest 1/0/83) · guest sees host 0/0/86 (host 0/0/86)",
-<<<<<<< HEAD
      "n": 4,
-=======
-     "n": 1,
->>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
      "at": "coop-p01-S1"
     }
    ]

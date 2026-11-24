@@ -115,7 +115,6 @@ PRIORITY #1 CHECK ('netTh' / 'evG' / relation levels): OD 24/11 ~06:00Z / ~06:35
 3. Step 2: BAL.net.th / thFrom / thClamp / thK / bandHi + T[t].th for all 26 nết ✓ (Mê tín {} by design); one netTh for her / NPCs / servants / men ✓; laws 2/3: every offset row trades a gain for a cost (Kiêu ngạo acts sooner but befriends later and forgives less; Rộng lượng forgives but…); no nết strictly better ✓. News lines via newsAdd (law 9) ✓, cổ trang, no number / % (law 7) ✓ after the pronoun fix. Law 1 ✗ (FAIL 2), law 6a ✗ (FAIL 1).
 4. Robot (this branch before my fixes, same runner, CPU shared by 5 runs): sens 101 weeks / 3 runs: NPC→her danger p50 **35**, ≥60 **10 %**, proud ÷ gentle harm **×2.97**, harm max ÷ min ×14.9; npcAct band at call {0:41, 1:74, 2:14, 3:21}. rand 36 weeks / 2 runs: danger p50 20, ≥60 11 %, proud ÷ gentle ×2.41. Report's direction reproduced (×2.6 / p50 37). Band-3 target ≤ 30 % (NPC→NPC oán saturation) stays a FOLLOW-UP, not a fail.
 5. Gates: net-build 170/170 ✓ · npcmind-check ERRS [] ✓ · one-core-guard PASS (3112 < 3592) · one-core-text PASS · one-core-bind PASS (1590 / 0) ✓ · two-way-oldsave ok, errs [] ✓ · coop-e2e: 1st run 138/142 («same world» S.fidUsed maid face ids A=undefined / B=maid:mXX, weeks 1–3 + rejoin), re-run **142/142**; LIVE ac4790f0 142/142 → one flake in 2 runs, watch it on the fixer's run · quickcheck PASS ×2 (core gates PASS, old save ok) but perf ✗ (FAIL 4).
-<<<<<<< HEAD
 
 ## FIX r1 (fixer session_01D3E3NXVfZy3ocFNYujBsPy, opus, 24/11)
 PRIORITY #1 CHECK ('evG netTh'): OD 24/11 ~06:00Z / ~06:35Z / ~06:40Z read verbatim | ledger 0 | claims net-build NYsFNUq9 (archived) + rv NaqgB7na (FAIL) | main 178cac37: jnet.js BAL.net.T, BAL.mem.fadeT, no netTh | review/*: net-build ed1be95a, net-build-rv b029879a (start), servant-trust 42db050c (stacked; merged in a scratch tree, not pushed) | real ân store found and reused: the j72 nợ ân book (q72Debt / jrtrig rtDebt).
@@ -174,5 +173,3 @@ Scan = `python3 dev/measure/net-scan-rv.py dev/build`, widened for the whole fam
 
 ### Handover
 Done; only review remains. Worktrees: /home/user/wt/nbfix (review/net-build-rv), /home/user/wt/nbst (scratch merge, delete), /home/user/wt/nbho (this report) — removed after push.
-=======
->>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)

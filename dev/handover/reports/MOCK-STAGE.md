@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # HANDOVER KK18 → KK19 (24/11 ~11:20Z; KK18 ctx 60 % = hard ceiling, START ~2 %; depth 3; MAIN 122 opens the successor)
 KK19 = session_01V1ZZH551R5eFMgZWLvawik; START_CTX ~0 % (get_session reads 0 of 1M; estimate ~2 %) → roll at ~27 %, ceiling 60 %; depth 7 (limit 8); MAIN = 122 session_01V1ZZH1b6ZAtL3fUbRJcp9p. PRIORITY #1 CHECK: OD L1103/L491/L1090, dim rule 24/11, optfit L2134/L2211/L2212 | main KIT.md §95-97 | review/kit-* (9+) | claims KK18 → KK19. Read handover; waiting for Foreman B FAIL lists; dim + optfit builds only on sếp's GO via MAIN.
 
@@ -20,8 +19,6 @@ ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
 LINEAGE (owner 17/11, every foreman and main): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
 
-=======
->>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
 KK18 = session_01V1ZZH4iZc3Go1VBS7nJnuD; START_CTX ~2 % (get_session reads 0; estimate) → roll at ~27 %, ceiling 60 %; depth 3 (limit 8); MAIN = 118 session_01V1ZZH21QY1yjJ4RPZUHNC6. PRIORITY #1 CHECK: KIT.md + review/kit-* (KK17 list) | claims KK17 → KK18. Waiting for Foreman B FAILs on the 9 kit branches; re-auditing KIT_REQUESTS.
 
 KK16 = session_01V1ZZH2FeJCmKLv4wdzCWk1; START_CTX ~0% (context_usage 0 of 1M); depth 1 (parent MAIN 116). Holding: MOCK-STAGE v3.4 WAITING her A1/A2 + toilette OK; kit-toilroom §94 waits same; kit-dhcapfit-r1 9b487835 PASS at LC9. Open KIT REQUESTs seen: K-DH-CAPFIT (=dhcapfit, PASS), MG10A backdrop slot (unclear if done), K-BADGE-HAOHUU, kitColDot, KR home-stat rows, quý nhau hint words, v3 frame phone-width, tassel/nametag, timed-choice pin, one figure slot per frame size — not built, awaiting MAIN order.
@@ -203,7 +200,6 @@ ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 
 - Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
 LINEAGE (owner 17/11, every foreman and main): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
-<<<<<<< HEAD
 
 ---
 # KIT-MAPGO — KIT READY (KK19 · for MAIN 122) — 24/11 ~12:30Z
@@ -212,5 +208,3 @@ Cause (LIVE 178cac37): mapFit applied the solver offset to the whole spot BUTTON
 Fix review/kit-mapgo e1073f6e (from main 178cac37): only .mlab/.mmeta translate (--kmx/--kmy on the spot, .kmmv, zoom-compensated in jmapc.js); button never moves; leader drawn from the building to the moved tag; moved tag keeps pointer events (opens its own place). KIT.md §85.7 updated in place. dev/test/map-label-overlap.js: BOX pairs counted next to label pairs; map-labels-scan.js reads --kmx/--kmy.
 BEFORE/AFTER (map-label-overlap, 755x1000 + 1180x820, ranks 0,3,7, zoom 0-3): LIVE 13/68 cases (17 BOX pairs) → fix 0/68, labels 0, all settled. Earlier run 80 cases (zoom 0-4) PASS. map-here-scan ALL OK, map-labels-scan PASS (Fold + iPad ranks -,3), boxov 64 cases x2 devices 0 box overlaps. Tap check on moved tags: tag centre → own place 15/15, building centre → own place 16/16, no wrong hits.
 Shots looked at (Fold panned right to A ca sở / Phật đường, iPad whole map; CDN 200): https://ctm-img.victoria-tntt.workers.dev/img/_review/mapgo/mapgo-{before,after}-{755x1000,1180x820}.png (wipe: `python3 dev/site/cdn_sync.py --wipe-review mapgo`). Not run: 390x844/412x1058/1366x1024, rank 1-2/4-6 in map-label-overlap. No kit sample page (the map is a screen, not a sample part).
-=======
->>>>>>> 01958043 (MAIN 122: test-mrfoot ruling + B order)
