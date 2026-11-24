@@ -295,3 +295,12 @@ if(typeof KIT_GLOSS!=="undefined")KIT_GLOSS["Khảo hạch tấn phong"]="";
  if(typeof renderPanel0==="function"){const r0=renderPanel0;renderPanel0=function(){t();return r0.apply(this,arguments)}}})();
 window.exSrvPlan=exSrvPlan;window.exSrvGate=exSrvGate;window.exSrvNpc=exSrvNpc;window.exSrvS=exSrvS;window.exSrvStart=exSrvStart;window.exSrvMama=exSrvMama;window.exSonUp=exSonUp;window.exDirectUp=exDirectUp;window.promoRuleTxt=promoRuleTxt;window.promoReward=promoReward;window.promoFullSeat=promoFullSeat;window.PROMO_SRC=PROMO_SRC;window.exGrace=exGrace;
 window.exPlan=exPlan;window.exChance=exChance;window.exSim=exSim;window.exElig=exElig;window.exS=exS;window.exTick=exTick;window.exStart=exStart;
+/* kitPromoHook (MAIN 117 05:17Z, KIT §77c kitPromoChip; split from review/promo-hist ed47e570): READ-ONLY, her next promotion round under
+   TODAY's rules = {months, rank, miss, ready} or null (null = no chip: dead / out / Hoàng hậu / servant). months = the longest of the waits the ordinary
+   road checks in time (promoGap since the last decree, the exam cooldown); 0 = no time wait left. ready = she may sit now (exCanSit: exElig + no cooldown + not yet passed). miss = the other unmet promoReqP rows
+   (Sủng / Danh / Hoàng hậu / Thái hậu / seat…), so the chip never promises a round the rules would refuse. Writes nothing to S. */
+window.kitPromoHook=function(){if(!S||S.dead||S.out||rkOf(S)>=7||exSrv(S))return null;const had="ex" in S,ex0=S.ex,ej=JSON.stringify(ex0);
+ try{const r=rkOf(S),e=exS(S);const gap=Math.max(0,promoGap(r)-(S.turn-(S.lastPromo||0))),cd=e.cd>S.turn?e.cd-S.turn:0;
+ const now=exCanSit(S);const L=now?[]:promoReqP(S).filter(x=>!x[0]&&!/Cách lần|Khảo hạch/.test(x[1])).map(x=>x[1]);
+ return{months:now?0:Math.max(gap,cd),rank:RANKS[r+1]?RANKS[r+1].n:"Hoàng hậu",miss:L,ready:!!now}}catch(e){return null}
+ finally{if(!had)delete S.ex;else if(S.ex!==ex0||JSON.stringify(S.ex)!==ej)S.ex=ex0==null?ex0:JSON.parse(ej)}};
