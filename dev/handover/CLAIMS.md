@@ -1434,3 +1434,4 @@ FACE90 PUBLIC no-login CDN page (sonnet; owner ask 24/11 ~06:40Z via D ROOT; bri
 REVIEW palace-distance 9e655c3e (opus BIG; briefs/D-palace-distance-review.md) | review/palace-distance-rv | session_01D3E3NZ7GVBNYBajYppZbwY | RUNNING | 24/11 07:02Z (Foreman D depth 1)
 | DLG WRITER W1 j72_a (sonnet; briefs/b-dlg-writer.md; lead 4b3uXPGS) | review/sideline-dlg content | B | session_01N1tNP5mzkoWcc7PLve47hJ | RUNNING | 24/11 07:01Z |
 | REVIEW kit-music (sonnet SMALL; briefs/b-kit-music-review.md; ORDER MAIN 118 06:40Z) of review/kit-music 0ff57cb0 | review/kit-music-r1; reports/kit-music.md | B | session_01N1tNP3f5iMADfxhzg5aFWT | RUNNING | 24/11 07:02Z |
+| REVIEW kit-screenveil (sonnet SMALL whole-game; briefs/b-kit-screenveil-review.md; ORDER MAIN 118 07:06Z) of review/kit-screenveil fe8f6e3d | review/kit-screenveil-r1; reports/screenveil.md | B | session_01N1tNP5NC2cVvb6hDSKPiu9 | RUNNING | 24/11 07:10Z |
