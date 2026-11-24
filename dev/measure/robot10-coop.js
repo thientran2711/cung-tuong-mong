@@ -55,7 +55,7 @@ const H=require(path.join(T,'lib','coop-lag-hooks.js'));const PP=require(path.jo
 const BUDGET=JSON.parse(fs.readFileSync(path.join(T,'play-perf-budget.json'),'utf8'));
 const [PF,PT,KA,OUT0]=process.argv.slice(2);
 const OUT=path.resolve(OUT0||path.join(REPO,'dev','handover','robot'));
-const E=process.env;const HSHA=(()=>{try{return require('child_process').execSync('git rev-parse --short=8 HEAD',{cwd:__dirname,stdio:['ignore','pipe','ignore']}).toString().trim()+(require('child_process').execSync('git status --porcelain dev/measure dev/test',{cwd:__dirname,stdio:['ignore','pipe','ignore']}).toString().trim()?'+dirty':'')}catch(e){return '?'}})();/* fixer #3: harness sha per hit range */const SEED=+E.SEED||1,SWAP=E.SWAP==='1',PAR=+E.PAR||1,WURL=E.WORKER||CB.WURL,CAP=(+E.CAP||10800)*1e3,PCAP=(+E.PCAP||0)*1e3,
+const E=process.env;const HSHA=(()=>{try{return require('child_process').execSync('git rev-parse --short=8 HEAD',{cwd:__dirname,stdio:['ignore','pipe','ignore']}).toString().trim()+(require('child_process').execSync('git status --porcelain -- :/dev/measure :/dev/test',{cwd:__dirname,stdio:['ignore','pipe','ignore']}).toString().trim()?'+dirty':'')}catch(e){return '?'}})();/* fixer #3: harness sha per hit range */const SEED=+E.SEED||1,SWAP=E.SWAP==='1',PAR=+E.PAR||1,WURL=E.WORKER||CB.WURL,CAP=(+E.CAP||10800)*1e3,PCAP=(+E.PCAP||0)*1e3,
  STUCK=(+E.STUCK||240)*1e3,FL=E.FLUSH==null?4:+E.FLUSH,RTW=E.RTW==null?4:+E.RTW,REJ=E.REJOIN==null?6:+E.REJOIN;
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));const rd=f=>fs.readFileSync(path.join(M,f),'utf8');
 const NOISE=/Failed to load resource|net::ERR_|favicon|navigator\.vibrate/;
