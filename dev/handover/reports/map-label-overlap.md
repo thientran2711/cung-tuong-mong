@@ -22,3 +22,14 @@ PRIORITY #1 CHECK ('map label overlap'): OD D-find 23/11 21:17Z | main kmSolve j
 - Screenshots looked at (Fold 755x1000 day/night, iPad 1180x820 day/night, 3 frames each): sharp, tags separate, same text size.
 - Whole group: same kmSolve (RX1-3 are stages of the one loop), no per-place variant, no CSS/kit change; owner layouts unchanged.
 For W4: the settle check does not catch a first-open drift (probably fonts/rank-title painter/first image load after the 250 ms check; max 4 re-fits may be spent before the final shift). Make the fit converge: after the last observed mutation/resize re-measure until two consecutive measurements agree (or re-run on `document.fonts.ready` + image `load`), and add a cold-start loop to the test (N fresh launches of the first case) — 0/30 required. Then rerun the 280-case test 3×.
+
+## REVIEW R3 (small-tier reviewer-lander, 24/11, review/map-label-overlap-r = 2284d0b3 + LIVE main 1ddbe155 merged, site rebuilt)
+PRIORITY #1 CHECK ('map label overlap'): OD D-find 23/11 21:17Z | main kmSolve j38.js | review/* review/map-label-overlap | claims REVIEW map-label-overlap (mine).
+**Verdict: PASS** (with one caveat, below).
+- iPad 1180x820 cold start (COLD=30 fresh launches, first map open, rank kept, day, fit): 30/30 clean, max settle 2.8 s (R2: 2/14 failed).
+- dev/test/map-label-overlap.js 280 cases × 3 runs: run1 0, run2 0, run3 1 pair (`390x844 night r3 fit: Trường Môn viện|Hàm An`, measured while the phone layout was still unsettled, settle=18.7 s). Fold 755x1000, iPad 1180x820, iPad Pro 1366x1024: 0 overlaps in all 3 runs. No page errors.
+- Old-save (main build → this build; Dư đồ day+night, Fold + iPad): loads, 0 errors, 0 overlaps, solver hard 0.
+- map-labels-scan.js (rank 3, Fold + iPad, day/night + 10 courtyards): all PASS.
+- Screenshots looked at (Fold 755x1000 + iPad 1180x820, day + night, 3 frames each): tags separate, readable, same size.
+- Whole group: one kmSolve for every label kind; RX1-3 are stages of the same loop; no per-place variant, no CSS/kit change; owner layouts unchanged.
+- Caveat (not blocking, suggest a ticket «phone map settle»): in this headless run the phone map keeps re-laying out for 10–20 s after opening on main as well as on this branch (jitter probe at 390x844, layout changes at 12–23 s on main, 14–22 s here; slow CDN picture loads + portrait row heights). While it is still drifting a phone can show a transient overlap (1 case in 840 phone/other cases over 3 runs; main baseline: 6 in 4 phone runs). Settled phone layouts are clean. Fold/iPad (law 12 devices) are clean in every run.
