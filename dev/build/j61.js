@@ -94,7 +94,7 @@ function k61PortEnt(p){if(!p)return null;{const d=k61StageDesc(p);if(d!==undefin
 function k61Kind(e){if(!S||!e)return"";if((rivals||[]).includes(e))return"consort";if(e===S.emp)return"emp";if(S.thO&&e===S.thO)return"th";
  for(const c in (S.court||{}))if(S.court[c]===e)return c==="ty"?"phys":c==="tq"?"tq":"eun";
  if((S.men||[]).includes(e))return"man";if(e.isMin)return"off";if(allKids().some(([k])=>k===e))return"kid";
- if(e.role==="maid"||(rivals||[]).some(v=>v.maid===e)||e===S.maid)return(e.age||18)>=36||e.old?"mama":"maid";if(e.role==="eunuch"||e.role==="eun")return"eun";return"other"}
+ if(e.role==="maid"||(rivals||[]).some(v=>v.maid===e)||e===S.maid)return(e.age||BAL.ageMin)>=BAL.ageBand[1]||e.old?"mama":"maid";if(e.role==="eunuch"||e.role==="eun")return"eun";return"other"}
 function k61Desc(e){const k=k61Kind(e);
  if(k==="consort"){if(e.out)return"một phế phi";if(e.queen)return"Hoàng hậu";return`một phi tần áo bậc ${RANKS[e.rank].n}`}
  if(k==="emp")return"một nam nhân áo vàng";if(k==="th")return"một quý phụ mặc phượng bào";if(k==="tq")return"một thái giám áo bậc Tổng quản";
@@ -138,7 +138,7 @@ function k61InitNew(){if(!S)return;S.known={me:3};k61SeedChiTon();S.nkn={me:{}};
  if(o==="cn"){K(S.emp);for(const c in (S.court||{}))if(c!=="ty")K(S.court[c]);rivals.forEach(v=>{K(v.maid);(v.staff||[]).forEach(K)})}
  if(o==="cnv"&&S.srv){const m=RV(S.srv.mid);if(m){K(m);npcLearn(m,S);K(m.maid);(m.staff||[]).forEach(K)}(S.srv.met||[]).forEach(id=>K(servById(id)))}
  rivals.forEach(v=>{if(v.oldmis){K(v);npcLearn(v,S)}});
- if(S.ally){const v=liveRivals(false).filter(x=>!sameHouse(S,x)).sort((a,b)=>aff(S,b)-aff(S,a))[0];if(v&&aff(S,v)>=25){K(v);npcLearn(v,S)}}
+ if(S.ally){const v=liveRivals(false).filter(x=>!sameHouse(S,x)).sort((a,b)=>aff(S,b)-aff(S,a))[0];if(v&&aff(S,v)>=netTh(S,"than")){K(v);npcLearn(v,S)}}
  K61VER++}
 (function(){const s0=start;start=function(){K61NEW=true;let r;try{r=s0.apply(this,arguments)}finally{K61NEW=false}try{k61InitNew();if(Q.length)showModal();render()}catch(e){console.error(e)}return r}})();
 (function(){const n0=normAll;normAll=function(){const r=n0.apply(this,arguments);try{if(K61NEW&&S&&!S.known)k61InitNew();k61SeedChiTon()}catch(e){}return r}})();

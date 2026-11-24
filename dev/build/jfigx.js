@@ -12,7 +12,7 @@
        save's S.thO.fid "thaihau:hN" is dropped and she draws a pool face). Co-op: the host draws (thO + fidUsed are world keys).
        Whoever IS Thái hậu (S.thO; her, after the succession roads a / b) wears her own face's Thái hậu robe at her age band; a face without
        that robe wears her own highest consort dress (t8) at her age, else any picture of the same person (law 6c: never blank).
-   (3) a65: BAL.ageBand gains the 65 step (jbal.js) for every woman, every rank/role; a missing a65 file = the nearest age of the same person.
+   (3) a65: the top band (BAL.ageBand[3]+, art tag BAL.ageArt[4]) for every woman, every rank/role; a missing a65 file = the nearest age of the same person.
    (4) COLOUR: each woman wears one colour of her t7/t8 dress for the life (v0 / v1 / v2 = BAL.figVar colours, stable per face and per reign,
        the same on both co-op seats); who.figV (0..n-1) overrides it. Where a colour is not painted she wears v0. */
 const FIG_TH=9;/* tier code of the Thái hậu robe (an art slot code, not a game number) */

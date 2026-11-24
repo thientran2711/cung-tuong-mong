@@ -47,7 +47,7 @@ function rv67(A,k){const v=A.act&&A.act[k]!=null?RV(A.act[k]):null;return rvOk67
 function castRv67(A,k,f){const used=Object.values(A.act||{});const L=liveRivals(false).filter(v=>!used.includes(v.id)&&(!f||f(v)));if(!L.length)return false;A.act[k]=pk67(L).id;return true}
 function son67(){return mySons().slice().sort((a,b)=>(b.fond||0)-(a.fond||0))[0]||null}
 function dau67(){return myDaus()[0]||null}
-function man67(A){try{menInit()}catch(e){}const L=(S.men||[]).filter(m=>m.alive&&(m.age||0)>=18);let m=L.find(x=>x.id===A.act.m);if(!m&&L.length){m=pk67(L);A.act.m=m.id}return m||null}
+function man67(A){try{menInit()}catch(e){}const L=(S.men||[]).filter(m=>m.alive&&(m.age||0)>=BAL.ageMin);let m=L.find(x=>x.id===A.act.m);if(!m&&L.length){m=pk67(L);A.act.m=m.id}return m||null}
 function dad67(){try{const c=S.origin.k==="tt"?"Tể tướng":S.origin.k==="dtq"?"Đại tướng quân":null;return c?tdHead(c):null}catch(e){return null}}
 function eun67(){return S.court&&S.court.tq?S.court.tq.name:"Tổng quản thái giám"}
 function srvMis67(){try{return typeof srvM==="function"?srvM():null}catch(e){return null}}
@@ -1452,7 +1452,7 @@ ARC67.s_su=arcFx("s_su",{o:"*",ok:nsrv67,t:"Sứ thần phương Tây",w:"emp",s
   {n:"Giữ lễ Đại Hy",wx:"Thái hậu hài lòng",lx:"sứ thần ngượng",rt:"Lễ nghi đúng phép."}]},
  s2:{h:"Món quà kỳ lạ",w:"emp",t:"Sứ thần tặng ngươi một chiếc gương soi rõ từng sợi tóc.",o:[
   {n:"Dâng lên Thái hậu",wx:"Thái hậu thích",lx:"không giữ được quà",rt:"Thái hậu soi mãi không chán."},
-  {n:"Giữ làm của riêng",gi:["guong","emp"],wx:"Gương Tây dương vào rương (dùng: Sắc +3)",rt:"Ngươi cất gương vào rương."}]},
+  {n:"Giữ làm của riêng",gi:["guong","emp"],wx:`Gương Tây dương vào rương (dùng: Sắc ${balSg(BAL.rl.jstip.sacUse)})`,rt:"Ngươi cất gương vào rương."}]},
  c1:{h:"Thông dịch bịa lời",w:"maid",t:"Ngươi nhận ra người thông dịch dịch sai, như cố gây hiểu lầm.",o:[
   {n:"Vạch ngay giữa yến",f:"truth",wx:"cứu buổi yến",lx:"bị cho là xen vào",rt:"Thông dịch tái mặt, bị thay.",rf:"Không ai tin ngươi hiểu tiếng Tây."},
   {n:"Lặng lẽ báo Lễ bộ",lx:"buổi yến vẫn có hiểu lầm",wx:"Lễ bộ đề phòng",rt:"Lễ bộ cho người theo dõi thông dịch."}]},
@@ -1500,7 +1500,7 @@ ARC67.s_dich=arcFx("s_dich",{o:"*",ok:nsrv67,t:"Mùa dịch đậu mùa",w:"doc"
  E:{win:{tag:"Người cứu cả kinh thành",w:"emp",t:"Phương chủng đậu cứu vạn người. Hoàng thượng và Thái hậu đều ghi công ngươi."},
   mid:{tag:"Qua mùa dịch",t:"Mùa dịch qua. Ngươi còn sống, người của ngươi bình an."},
   lose:{tag:"Công bị cướp",t:"Thái y viện cướp công, còn bảo ngươi làm liều."}}});
-ARC67.s_tinh=arcFx("s_tinh",{o:"*",ok:()=>nsrv67()&&(function(){try{menInit()}catch(e){}return (S.men||[]).some(m=>m.alive&&(m.age||0)>=18)})(),t:"Cám dỗ",w:"man",sj:"ánh mắt của {man}",g:"{man}, một {manr} trong cung, nhìn ngươi bằng ánh mắt không nên có. Trái tim cô đơn của ngươi rung lên. Cám dỗ thì ngọt, nhưng cái giá phải trả là thật.",
+ARC67.s_tinh=arcFx("s_tinh",{o:"*",ok:()=>nsrv67()&&(function(){try{menInit()}catch(e){}return (S.men||[]).some(m=>m.alive&&(m.age||0)>=BAL.ageMin)})(),t:"Cám dỗ",w:"man",sj:"ánh mắt của {man}",g:"{man}, một {manr} trong cung, nhìn ngươi bằng ánh mắt không nên có. Trái tim cô đơn của ngươi rung lên. Cám dỗ thì ngọt, nhưng cái giá phải trả là thật.",
  cast(A){return !!man67(A)},
  p:[["s1","s2"],["c1","c2","c3","G.spy","G.ill"],["t1"],["x1"]],
  B:{
