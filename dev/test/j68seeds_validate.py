@@ -23,7 +23,7 @@ FAMS={"day":60,"visit":60,"serv":60,"emp":60,"sea":40,"court":40,"rumor":40,"kid
 TONES={"tense","sad","petty","funny","tender","warm","cruel"}
 KIND={"rv","sv","maid","emp","th","doc","eun","ksp","kid"};MANRW={"sứ thần","họa sư","nhạc sư","thái y"};NETK={"rv","sv"}
 OPA=KIND|{"man","any"}
-NEEDS_ID={"ill","preg","friend","feud","kids","poor","thIll","empIll","fest","rain","snow"};RVONLY={"ill","preg","friend","feud","kids","poor"}
+NEEDS_ID={"ill","preg","friend","feud","foe","kids","poor","thIll","empIll","fest","rain","snow"};RVONLY={"ill","preg","friend","feud","foe","kids","poor"}
 STAT={"sung","danh","bac","suc","mat","th","hh","duc","tamco","an"};TIER={"s":1,"m":2,"l":3}
 NEEDS={"rank_min","rank_max","nights_min","month","not_confined","kids_min"}
 PH={"A","B","M","O","S","W","P"};OPH={"A","M","S","W","P"}
@@ -50,7 +50,7 @@ def phs(i,t,allowed,where):
     for p in P-allowed:err(f"{i} {where} placeholder {{{p}}} not allowed here")
     if BAD.search(re.sub(r'\{[^}]*\}','',t)):err(f"{i} {where} VANPHONG: '{BAD.search(re.sub(r'{[^}]*}','',t)).group(0)}' (no %, digits, odds words, modern words)")
     return P
-def role(i,tag,r):
+def role(i,tag,r,R0={}):
     if not isinstance(r,dict):err(f"{i} roles.{tag} must be an object");return
     k=r.get("kind","rv")
     if k.startswith("man:"):
@@ -61,10 +61,10 @@ def role(i,tag,r):
         if L and kof(r) not in NETK:err(f"{i} {tag}: kind {k} takes no {g} filter")
         for n in L:
             if n not in NET:err(f"{i} {tag} {g} '{n}' not in BAL.net")
-    nd=r.get("need")
-    if nd:
+    for nd in ([r["need"]] if isinstance(r.get("need"),str) else r.get("need") or []):
         if nd not in NEEDS_ID:err(f"{i} {tag} need '{nd}' unknown")
         elif nd in RVONLY and kof(r)!="rv":err(f"{i} {tag} need {nd} only for kind rv")
+        elif nd=="feud" and kof(R0.get("B" if tag=="A" else "A") or {})!="rv":err(f"{i} {tag} need feud = at odds with the OTHER role, which must be a consort (rv); use foe for «at odds with her»")
     for x in r:
         if x not in("kind","nết","lòng","need"):err(f"{i} {tag} unknown field {x}")
 def steps(i,where,d,R,side):
@@ -114,7 +114,7 @@ for r in rows:
         if k not in("A","B"):err(f"{i} roles: only A and B")
     if "B" in R and "A" not in R:err(i+" role B without A")
     if not R and f not in("sea","myst","court"):err(f"{i} fam {f} needs a role A (a real person)")
-    for k,v in R.items():role(i,k,v)
+    for k,v in R.items():role(i,k,v,R)
     if "A" in R and "B" in R and kof(R["A"])==kof(R["B"]) and kof(R["A"]) in("maid","emp","th","doc","eun","ksp"):err(f"{i} roles A and B are the same fixed person ({kof(R['A'])}) → never cast")
     if "A" in R:NEEDK[f].add(kof(R["A"]))
     else:NEEDK[f].add("-")

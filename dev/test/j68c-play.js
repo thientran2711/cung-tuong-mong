@@ -25,11 +25,11 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;if(!c||process.env.V)console.log((c?'ok
    if(n.not_confined&&S.confined){S.confined=0;f=1}if(n.kids_min!=null){while((S.kids||[]).filter(k=>k.alive).length<n.kids_min){(S.kids=S.kids||[]).push(mkKid("m",6));f=1}}
    for(const r of Object.values(R)){const k=(r.kind||"rv").split(":")[0];if(k==="kid"&&!(S.kids||[]).some(x=>x.alive)){(S.kids=S.kids||[]).push(mkKid("f",7));f=1}
     if(k==="man"&&!(S.men||[]).some(m=>m.alive!==false&&m.rw===r.kind.slice(4)))f=2;
-    const nd=r.need;if(!nd)continue;const L=liveRivals(true);f=1;
+    for(const nd of [].concat(r.need||[])){const L=liveRivals(true);f=1;if(nd==='foe')L.forEach(v=>{relAdd(v,S,-40);relAdd(S,v,-40)});
     if(nd==="ill")L.forEach(v=>v.ill={k:Object.keys(ILL)[0],st:1});if(nd==="preg")L.forEach(v=>{v.preg=3;v.hidden=0});if(nd==="friend")L.forEach(v=>relAdd(S,v,30));
     if(nd==="feud")L.forEach(v=>L.forEach(w=>{if(v!==w)relAdd(v,w,-40)}));if(nd==="kids")L.forEach(v=>{v.kids=v.kids||[];if(!v.kids.some(k=>k.alive))v.kids.push(mkKid("m",3))});
     if(nd==="poor")L.forEach(v=>v.bac=0);if(nd==="thIll")S.thIll={k:Object.keys(ILL)[0],st:1};if(nd==="empIll")S.emp.ill={k:Object.keys(ILL)[0],st:1,known:true};
-    if(nd==="rain")S.wx={n:"mưa rào",k:"rain",f:1};if(nd==="snow")S.wx={n:"tuyết rơi",k:"snow",f:1};if(nd==="fest"){const F=Object.values(FEST)[0];S.month=F.m}}
+    if(nd==="rain")S.wx={n:"mưa rào",k:"rain",f:1};if(nd==="snow")S.wx={n:"tuyết rơi",k:"snow",f:1};if(nd==="fest"){const F=Object.values(FEST)[0];S.month=F.m}}}
    return f};
   let i=0;for(const sd of FIX){if(sd.type!=='comp')continue;const r={id:sd.id};out.seeds.push(r);try{
    if(!E68I["c:"+sd.id])j68cReg(sd,OP[sd.fam]||[]);const s=E68I["c:"+sd.id];r.reg=!!s;if(!s)continue;

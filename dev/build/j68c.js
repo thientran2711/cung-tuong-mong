@@ -18,7 +18,8 @@ function j68cK(r){const k=(r&&r.kind)||"rv";return k.indexOf("man:")===0?"man":k
 function j68cFit(o,r){if(!r||!J68C_NET.has(j68cK(r)))return true;let T=[];try{T=tr6(o)||[]}catch(e){T=[]}
  const any=L=>!L||!L.length||L.some(n=>T.includes(n));return any(r["nết"])&&any(r["lòng"])}
 /* needs: real state on the live world (thresholds BAL.j68c.need) */
-function j68cNeed(nd,o,oB){if(!nd)return true;const N=BAL.j68c.need;try{
+function j68cNeed(nd,o,oB){if(!nd)return true;if(Array.isArray(nd))return nd.every(x=>j68cNeed(x,o,oB));const N=BAL.j68c.need;try{
+ if(nd==="foe")return !!o&&aff(o,S)<=N.feud;
  if(nd==="ill")return !!(o&&illOf(o));
  if(nd==="preg")return !!(o&&o.preg>0&&!o.hidden);
  if(nd==="friend")return !!o&&aff(o,S)>=N.friend;
@@ -37,7 +38,7 @@ function j68cNeeds(n){n=n||{};
  if(n.not_confined&&S.confined)return false;if(n.kids_min!=null&&(S.kids||[]).filter(k=>k.alive).length<n.kids_min)return false;return true}
 /* cast one role from the live roster (npc-purpose pickers of j68: rv6/sv6/kid6/man6; fixed people through A6) */
 function j68cOne(r,nm,P){const k=j68cK(r);const oA=P.oA;
- const ok=o=>j68cFit(o,r)&&(r.need==="feud"||j68cNeed(r.need,o));
+ const ok=o=>j68cFit(o,r)&&j68cNeed([].concat(r.need||[]).filter(x=>x!=="feud"),o);
  if(k==="rv"){const id=rv6(v=>ok(v)&&(!oA||v!==oA));return id==null?null:id}
  if(k==="sv"){const id=sv6(s=>ok(s)&&(!oA||s!==oA));return id==null?null:id}
  if(k==="kid"){const n=kid6(x=>ok(x)&&(!oA||x!==oA));return n==null?null:n}
@@ -46,7 +47,7 @@ function j68cOne(r,nm,P){const k=j68cK(r);const oA=P.oA;
 function j68cCast(sd){const R=sd.roles||{};const p={};const P={};
  if(R.A){const a=j68cOne(R.A,"A",P);if(a==null)return null;p.a0=a;const X=A6(j68cK(R.A),a);if(!X)return null;P.oA=X.o}
  if(R.B){const b=j68cOne(R.B,"B",P);if(b==null)return null;p.a1=b;const Y=A6(j68cK(R.B),b);if(!Y||Y.o===P.oA)return null;P.oB=Y.o}
- for(const[nm,o,ob]of[["A",P.oA,P.oB],["B",P.oB,P.oA]])if(R[nm]&&R[nm].need==="feud"&&!j68cNeed("feud",o,ob))return null;
+ for(const[nm,o,ob]of[["A",P.oA,P.oB],["B",P.oB,P.oA]])if(R[nm]&&[].concat(R[nm].need||[]).includes("feud")&&!j68cNeed("feud",o,ob))return null;
  return p}
 function j68cStep(tier,k){const F=BAL.j68c.fx[tier]||BAL.j68c.fx.m;return F[k]||0}
 /* gain/loss step map → {fx (signed stats), A, B relation} */
