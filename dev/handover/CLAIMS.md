@@ -1493,3 +1493,4 @@ FIX servant-trust r1 (opus BIG; briefs/D-servant-trust-fix.md; from c8d35899) | 
 | robot10 E FIXER #4 successor (opus BIG; briefs/E-robot10-fixer.md + reports/robot10-E-fixer.md §10 HANDOVER) | review/robot10-e-fix-3 r3 (+ -5…); reports/robot10-E-fixer.md | FOREMAN E (child3) | session_01DgYSWoKmRE1ddnzL3kKLN7 | RUNNING | 24/11 11:00Z |
 robot-coop-fix-2 BIG review | review/robot-coop-fix-2-r1 | session_01N1tNP53Ngf1bGuVAWcQEy5 (owner B) | RUNNING | 24/11 10:57Z
 ROBOT-COOP fixer #4 (fix-3, onecore) | review/robot-coop-fix-3, review/robot10-onecore | session_01N1tNP2dfra9gDdChCWdbcB (owner B) | RUNNING | 24/11 10:57Z
+| SELSCENE-10 (opus; successor of SELSCENE-9; briefs/M121-selscene-fix.md + SUCCESSOR NOTE 2) | review/selection-scene (from 726a633d); reports/selection-scene.md | MAIN 121 | (opening) | RUNNING | 24/11 11:05Z |
