@@ -1336,3 +1336,38 @@ Head reviewed: review/law1-maid-away 63d72694 (FF on LIVE 502c48c9; LIVE unchang
 ### Shots (scratch only, not in git; Fold 755x1000 + iPad 1180x820, looked at each)
 fold-qhome / ipad-qhome (master = Hoàng hậu, at home): talk menu tabs Hầu hạ 2/2 · Ban thưởng 0/1 (locked «Cần Chủ tin 60») · Giao thiệp 1/2 — the four acts + «Xin chủ cho đi», kit act cards, odds words, nothing cut. fold-away / ipad-away (master at Ngự hoa viên): only «Hầu bên cạnh chủ» + «Xin chủ cho đi hầu cung khác», kit cards, nothing cut, no page errors.
 **PASS → LAND READY law1-maid-away-r1 854c1fc1fdaf8dbd0699e50f1d7d3020054bbf64.**
+
+## REVIEW robot-coop-tail r1 (BIG, opus; session_01N1tNP2G5LPxnqD86NfuKDm; depth 7; START_CTX ≈4 %) — PASS
+PRIORITY #1 CHECK ('robot-coop-tail'): OD 0 | ledger 0 | claims 3 (fixer #6 → #7) | main 0 | review/* robot-coop-tail 08dc8031 + harness robot10-coop (already clamps turn ms at 0, line 157) | archive 0.
+HEAD 08dc80311255b60ea30cc821c466d5e0b62a1668 = LIVE 502c48c9 + 1 commit; LIVE unchanged at end of review (ls-remote 502c48c9) → bare head = merged head; review/robot-coop-tail-r1 pushed = same sha (FF from main).
+### (1) test-only
+`git diff origin/main..08dc8031 --stat`: dev/test/coop-lag.js, coop-thin-e-net.js, coop-wire-scan.js, lib/coop-wire.js only (41+/11−). No game, no Worker, no build file. coop/worker = main.
+### (2) each N item measures the real thing (plants in scratch worktree /home/user/wt/rvplant, reverted)
+| item | plant | old (main test files) | branch |
+|---|---|---|---|
+| N1 typeSpy wire order | probe: fake socket, send gzip `act` (>8000) then string `seat`, `do` | __tx ["seat","do","act"] | __tx ["act","seat","do"] (= wire order) |
+| N2 hostNet, stress | game jcoop GZ=0,BIG=0 + Worker BIG=0 (EVERY frame gzip binary), local Worker :8797 | 18/21: FAIL N1 (dropped []), N6 (lost []), N10 (thin not held, lvl 6) — the old string-only filter injects no fault at all on gzip frames | 21/21 (dropped/lost lists hold the gzip `erd`+`ready`) |
+| N2 hostNet, real regression | + jcoopthine reNet() never resends (`rr=0;return`) | — | CAUGHT: 10/21, FAIL N2 ×2, N3, N4, N7, N8, N9, N11 … |
+| N2 scan | main's coop-thin-e-net.js put back in the branch tree | — | coop-wire-scan: «host deaf on "do"/"thin" STRING frames only — use coop-wire hostNet», left 1, exit 1 |
+| N3 real stall | jcoopworld bend(): seat b stops sending `bend` after its 3rd (`--buoi 5 --no-rejoin`) | — | CAUGHT: turn 4 = 693 208 ms (budget), turn 5 moved:false → «buổi stuck: 1 of 5», exit 1 |
+| N3 old false stuck | — | fixer #7: main 7/8, «0:0 → 1:0 = −3177 ms» counted stuck | this run: two turns landed before the 2nd press() returned → 0 ms, moved:true, not stuck (8/8) |
+### (3) law 11 siblings
+typeSpy users (coop-thin-a/-d/-d-probe, pm-coop-d) only filter/includes `__tx` — no order assert broken. Host-side string-only filters: coop-wire-scan 0 left (tx spy string-only rows in coop-thin-b* stay notes, as before: own sends < 8000). Turn-ms shape: only coop-lag.js computes `max(ca,cb)-t2`; harness robot10-coop.js already `Math.max(0,…)`; coop-lag-hooks/robot10-lag read `ms>=0` (consistent). No other sibling.
+### (4) no test weakened (every assert diffed)
+coop-thin-e-net: asserts unchanged (only the init script moved to lib hostNet; same flags __mute/__deaf/__holdThin, same __drop/__lost/__thq; now also binary). coop-wire-scan: stricter (host string filter now counts as bad). coop-lag: thresholds/budget unchanged; stuck = key did not move (was ms<0). NOTE (not blocking): a turn that moved but has no timing (t2=0 or a missed __kch key → ms −1) was «stuck» before and is now neither stuck nor in coopTurnP95 (coopTurnsOk still shows n/N). Suggest for the next coop-lag touch: also FAIL «buổi untimed» for moved && ms<0.
+### Ran (worktree /home/user/wt/rvtail = 08dc8031, assemble.py built; local Worker wrangler dev :8798 = main coop/worker)
+| command | result |
+|---|---|
+| `node dev/test/coop-wire-scan.js` | string-only deaf filters / rx spies left: 0 (exit 0) |
+| `node dev/test/coop-thin-e-net.js` (no args: LIVE Worker, lvl 6, swap 0) | RESULT 21 / 21 |
+| `node dev/test/coop-thin-e-net.js http://127.0.0.1:8798 6 0` | RESULT 21 / 21 |
+| `node dev/test/coop-thin-e-net.js http://127.0.0.1:8798 6 1` | RESULT 21 / 21 |
+| `node dev/test/coop-lag.js --out …` (LIVE Worker) branch | 8/8 moved, turns 8482/3174/2702/44700/5114/2117/0/0 ms; FAIL budget coopTurnP95 44 700, actionP95 13 012; rejoin ok:false |
+| same, main's coop-lag.js (parallel) | 8/8, FAIL budget coopTurnP95 83 586; rejoin ok:false |
+| `node dev/test/coop-lag.js --buoi 5 --no-rejoin --out …` on the stall plant | FAIL «buổi stuck: 1 of 5» (see table) |
+| `COOP_SWAP=0 node dev/test/coop-e2e.js <out> http://127.0.0.1:8798` | 142/142 passed |
+| `COOP_SWAP=1 node dev/test/coop-e2e.js <out> http://127.0.0.1:8798` | 142/142 passed |
+| `bash dev/tools/quickcheck.sh` ALONE | QUICKCHECK PASS · old save ok · render 204/203 · tab 448/417 · buổi 1087/1017 · tasks>200 19/21 · core gates PASS |
+Known, NOT this branch (same on main, as the brief says): coop-lag budget FAIL (week-end stall family → fix-4) and rejoin ok:false (LIVE; flag for MAIN).
+Laws touched: 11 (family scan above) · 13 (check line) — no game/UI/wording/number change, laws 1–10/12 n/a.
+VERDICT: PASS — LAND READY robot-coop-tail-r1 08dc80311255b60ea30cc821c466d5e0b62a1668 (test-only).
