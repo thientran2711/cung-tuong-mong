@@ -2885,3 +2885,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (06:18Z) One line sent to LC9, SELSCENE-4 (+ OD 09:25Z dò hỏi ma ma), INTRO-DESIGN, MAP-PERF, MAIN 116. KK17 inactive → archived. KK18 = session_01V1ZZH4iZc3Go1VBS7nJnuD (sonnet, child of 118) from «HANDOVER KK17 → KK18»: B FAIL fixes on the 9 kit branches + KIT_REQUESTS re-audit. Hourly wake = trig_014KAbKUuooEPr6ZiDtppA9s (min 32, into 118).
 - (06:22Z) From 117/116: OD 09:20Z Phân cung → SELSCENE-4 told to hook it at the Day-3 edict (D builds the rule, coordinate in FOREMAN_D_STATUS); OD 09:30Z per-girl result animation → SELSCENE-4 + INTRO-DESIGN. kit-daytitle now 762eae8c (KK18 knows).
 - (06:24Z) via 116: OD 09:35Z patron routes BUILD NOW (D ordered by 116 09:36Z); Day-3 drama seeds a–e → SELSCENE-4.
+- (06:26Z) KK18 started (depth 3, START 2 %; no B FAIL yet; KIT_REQUESTS 2 open rows already built → DONE). via 116: OD 09:40Z dò hỏi ma ma 3 options → SELSCENE-4.
