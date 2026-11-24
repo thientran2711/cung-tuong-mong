@@ -742,6 +742,28 @@ Pair plan: pairs 1–20 × 10 kiếp, run once with SWAP=0 and once with SWAP=1 
 - Next (STEP 2, co-op FIXER): (1) when the foreman asks, hand review/robot10-coop to a SMALL reviewer; (2) read every runner bug file dev/handover/robot/coop-*.md; fix each as a WHOLE family (law 11: scan script + before/after table) on review/robot-coop-fix-<n> from newest origin/main; gates coop-e2e both seat orders (`node dev/test/coop-e2e.js <out> https://ctm-coop.victoria-tntt.workers.dev`), `bash dev/tools/quickcheck.sh`, old saves; «SẴN SÀNG KIỂM» → foreman for a BIG reviewer. First triage list from the smoke: coop-pos (BUOI fpl r3 vs her r902: check first whether it is coop-bot's hm() mapping of 'home' — a harness fault — before calling it a game bug), coop-stat (friend Sủng/Sức one buổi late), LAG coopTurnP95 ≈22 s, coopSyncKBMax 146 KB, coopResendPerMin 16.8.
 - Harness notes: DBG=1 prints per-week step histograms; never seed Math.random in co-op (SEEDED=1 stalls rooms); the scratch page must stay network-less; rejoin = coop-rejoin-stats backOn path.
 
+### FIXER #2 (session_01N1tNP3va8MrNMqi1MZLTgt, opus; START_CTX ≈3 %)
+PRIORITY #1 CHECK ('coop sync KB / turn / coop-pos'): OD 2204–2205 | main coop/worker/src/index.js BIG, dev/test/coop-lag.js | review/* coop-host-lag-r3 (PASS, landed), robot10-lag (finding 5 = same KB family, report only) | claims none on coop sync KB / render perf.
+- Smoke re-run (container restarted, predecessor's run lost): `DBG=1 node dev/measure/robot10-coop.js 1 1 1 /home/user/wt/rcoop-out/smoke` started 05:38Z on 48d1d7e1 (OLD harness), ~25–60 s per game week; result appended here when it ends.
+- Triage (evidence: coop-lag.js runs, 5 buổi, CPU ×4, crossing one week; files in /home/user/wt/rcoop-out):
+| finding | verdict | fix |
+|---|---|---|
+| coop-pos «host sees guest at r3, guest is at r902» every buổi | HARNESS: coop-bot BUOI mapped each page's own 'home' to r901/r902, but the host names her palace palaceOf(f)=r3 (the game maps her 'home' there, jcoopworld mapPlace) | review/robot10-coop 2bf6094f: one place name on both pages (H:<seat>); same family fixed in coop-bot.js + coop-bot-x.js |
+| coop-stat friend Sủng/Sức one buổi late | HARNESS race: stats ride the pos relay (sent on every render, sendPos/liveStats); the compare ran the instant places agreed | 2bf6094f: stats must also settle (5 s window) before a buổi is compared; only a stat still wrong after 5 s counts |
+| coopSyncKBMax 146 KB > 100 | GAME/Worker: the biggest frame is dn:week (127–170 KB) sent PLAIN by the Worker (gzip only above 200 000 chars); the client already gzips above 8 000 and gunzips any binary frame in order (rxQ) | review/robot-coop-fix-1 889803dc: Worker BIG 200000 → 8000. Before/after table below. Deploys on land (coop-worker.yml) |
+| coopResendPerMin 16.8 > 12 | NOT reproduced in coop-lag (2.1–3.3/min); needs the smoke's frame table | open: read the smoke JSON when it ends |
+| coopTurnP95 ≈22 s > 10 s | NOT a sync bug: the week turn is client CPU. --trace: 68–80 s week window = continuous long tasks on both pages; --prof 0:3: nCheck → nextBuoi (night) → endTurn → render = 8 s (Fold) / 15 s (iPad) incl. profiler; renders ≥ 50 ms sum 5.8 / 9.4 s; hot self time = kit layout fitting (getBoundingClientRect / clientWidth / band+set kit layout j-line 67449, kitDialogOpen, kitOptFit). Box saturated (4 throttled pages: smoke + test). Same family as robot10-lag finding 4 (Sang ngày mới render) | NOT fixed here: needs a separate render-perf order (render only the changed panel; batch kit fit reads before writes). For Foreman B |
+Before/after (coop-lag --buoi 5, LIVE Worker vs local `wrangler dev` of the fix branch):
+| frame | before max KB | after max KB |
+|---|---|---|
+| dn:week | 126.9 | 0 (now dn:bin) |
+| dn:bin (gzip) | 0 | 28.5 |
+| up:bin (client gzip) | 25.4 | 25.3 |
+| every other type | ≤ 6.6 | ≤ 7.9 |
+coopSyncKBMax 126.9 → 28.5 · coopKBPerMin 101.4 → 84.7 · coopResendPerMin 2.7 → 2.1.
+- Gates on review/robot-coop-fix-1 (main 68799300 + Worker BIG + coop-lag flags): Worker tests merge/vault/seat/stale/thin/ws/chat all OK; coop-e2e 142/142 BOTH seat orders against the fixed Worker (local wrangler dev); quickcheck: old save loads (0 errors), time-spill PASS, core gates FAIL only G4 dialog-fixed #54 «new-title plate sits ON the event picture» — SAME FAIL on clean main 68799300 (pre-existing, flips between 755x1000 / 1180x820), not this branch.
+- Tools for the next fixer: local Worker = `npm i wrangler@4` in a scratch dir, `wrangler dev --local --port 8799 --ip 127.0.0.1` in coop/worker; coop-lag needs PP_ARGS with `--disable-features=PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults,BlockInsecurePrivateNetworkRequests,LocalNetworkAccessChecks` for a localhost Worker (coop-e2e already handles it).
+
 ## MGSKIN-WIRE
 PRIORITY #1 CHECK: OD 0 | ledger 0 | claims 8 | main kitMgSkinAdd/mgpSkin/kg82SkinSrc (j82, jmgpool; reused, no new mechanism) | review/* review/kit-mgboardof-r1 c46a17f2 (merged, not LIVE yet) | reports F-MGSKIN-A..H, kit-mgskin.
 START_CTX ~6 % (own estimate); finished well under +25 %.
