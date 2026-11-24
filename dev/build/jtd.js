@@ -169,7 +169,8 @@ function tdAlmsBest(need,pool){let best=0;const give=need.map(()=>0);(function r
 function kgTdAlms(box,env){const lv=tdEase(env.lv);const wrap=document.createElement("div");wrap.className="kg82quiz";box.appendChild(wrap);
  /* mg-balance-2: at low ease the portions run short in more rounds and each round has a time (the people cannot wait): BAL.mgTier.lev.td_hanh */
  const SH=Math.round(mgLev(env,"td_hanh","short")),LIM=Math.round(mgLev(env,"td_hanh","lim"));
- const rounds=TD_ALMS.map((q,k)=>({list:q.list,need:q.list.map(x=>x[2]),pool:q.pool-(k===2&&lv<3?1:0)-(k<2?Math.min(SH,k+1):0)}));let r=0,pts=0,stop=false,give=[],lock=false,t0=performance.now(),tm=0;
+ const MP=mgpc1("td_hanh");/* ORDER THIN P1c: the people of the three rounds come from a pooled item (jmgpool_c td_hanh): same number of people, same needs, same pools */
+ const rounds=(MP?MP.rounds:TD_ALMS).map((q,k)=>({list:q.list,need:q.list.map(x=>x[2]),pool:q.pool-(k===2&&lv<3?1:0)-(k<2?Math.min(SH,k+1):0)}));let r=0,pts=0,stop=false,give=[],lock=false,t0=performance.now(),tm=0;
  function left(){return rounds[r].pool-give.reduce((a,b)=>a+b,0)}
  function render(){if(stop)return;const R=rounds[r];
   wrap.innerHTML=`<div class="nwb-pool">${NWB.ic("bowl")}${NWB.pips(R.pool,left())}<span class="nwb-cap">còn ${left()} phần để chia</span></div>`+
