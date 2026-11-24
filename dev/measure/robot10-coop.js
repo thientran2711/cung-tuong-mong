@@ -91,6 +91,27 @@ const SCRX=()=>{const W=window.COOPW||{},n=document.getElementById('next')||{},f
   nrdy:W.nrdy,ngo:W.ngo,ngoW:W.ngoW,nfr:W.nfr,nforce:W.nforce,wantB:W.wantB,whereKey:W.whereKey,rweek:W.rweek,rbuoi:W.rbuoi,wkIn:W.wkIn,
   coop:f(()=>({week:COOP.state.week,buoi:COOP.state.buoi,ended:COOP.state.ended,bended:COOP.state.bended,seats:COOP.state.seats,status:COOP.state.status,seat:COOP.seat})),
   modal:f(()=>{const m=document.getElementById('modal');return m&&!m.hidden?m.innerText.slice(0,300):''}),tr:(W.tr||[]).slice(-150)}};
+/* STUCKCAP (Foreman E child6 19:39Z; U19/U20 «STUCK REPRO / CHECK»): what blocks THIS seat when its room is declared stuck.
+   Every open layer (#modal, #ov, a kit motion scene .kmov — e.g. kitNightEnd «kne-ov», kitFocus .kfoc, the week panel #dawn, any [role=dialog]):
+   its title; every visible button in it with its label and whether a tap at its centre reaches it (elementFromPoint ≠ the button ⇒ covered,
+   and by what); whether an event picture / scene overlay is up. Data only (the screenshot path is added by the runner). */
+const STUCKCAP=()=>{const vis=e=>{if(!e||e.hidden)return false;const r=e.getBoundingClientRect(),c=getComputedStyle(e);return r.width>2&&r.height>2&&c.display!=='none'&&c.visibility!=='hidden'&&+c.opacity!==0};
+ const nm=e=>{if(!e||!e.tagName)return String(e);let n=e.tagName.toLowerCase();if(e.id)n+='#'+e.id;const c=String(e.className&&e.className.baseVal!==undefined?e.className.baseVal:e.className||'').trim().split(/\s+/).filter(Boolean).slice(0,3);if(c.length)n+='.'+c.join('.');return n};
+ const LAY='#modal,#ov,.kmov,.kfoc,#dawn,#klife,.kpscene,[role=dialog],dialog[open]';const layOf=e=>{let x=e&&e.closest?e.closest(LAY):null;while(x&&x.parentElement&&x.parentElement.closest(LAY))x=x.parentElement.closest(LAY);return x};
+ const topOf=e=>{let x=e;while(x&&x.parentElement&&x.parentElement!==document.body)x=x.parentElement;return x&&x!==e?x:null};/* a cover outside the known layers: name its top-level holder */
+ const txt=e=>String(e&&(e.innerText||e.textContent)||'').replace(/\s+/g,' ').trim();
+ const ttl=L=>{const lb=L.matches('[aria-labelledby]')?L:L.querySelector('[aria-labelledby]');const te=lb&&document.getElementById(lb.getAttribute('aria-labelledby'));const tl=te&&String(te.textContent||'').replace(/\s+/g,' ').trim();if(tl)return tl.slice(0,80);
+  const h=L.querySelector('.kptitle,h1,h2,h3,.k3t,.kti,.kttl,.kne-t,.ktitle,[class*="title"],[class*="Title"]');const t=txt(h)||txt(L);return t.slice(0,80)};
+ const lays=[...document.querySelectorAll(LAY)].filter(vis).filter((L,i,a)=>!a.some(o=>o!==L&&o.contains(L)));
+ const z=e=>{const c=getComputedStyle(e);return c.zIndex};
+ const layers=lays.map(L=>{const B=[...L.querySelectorAll('button,[role=button],a.kbtn,.kbtn')].filter(vis).filter((b,i,a)=>!a.some(o=>o!==b&&o.contains(b))).slice(0,20).map(b=>{const r=b.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2;
+   const inView=x>=0&&y>=0&&x<innerWidth&&y<innerHeight;const h=inView?document.elementFromPoint(x,y):null;const ok=!!h&&(h===b||b.contains(h));const cl=!ok&&h?(layOf(h)||topOf(h)):null;
+   return {label:txt(b).slice(0,40)||b.getAttribute('aria-label')||nm(b),dis:!!b.disabled,ok,inView,by:ok?null:(h?nm(h)+(cl&&cl!==L?' in '+nm(cl):''):'off screen')}});
+  const pic=[...L.querySelectorAll('img')].filter(vis).map(i=>String(i.currentSrc||i.src||'').split('/').pop().split('?')[0]).filter(Boolean).slice(0,3);
+  return {layer:nm(L),z:z(L),title:ttl(L),pic,buttons:B}});
+ const kmov=[...document.querySelectorAll('.kmov')].filter(vis).map(e=>nm(e)+' z'+z(e));
+ const night=[...document.querySelectorAll('.kmov.kne-ov,.kne-ov,.dawn.kne-day')].filter(vis).map(e=>txt(e.querySelector('.kne-t,h2,h3,b')||e).slice(0,40));
+ return {layers,scene:kmov,nightPic:night,modalHidden:!!(document.getElementById('modal')||{}).hidden,ovHidden:!!(document.getElementById('ov')||{}).hidden,vw:innerWidth,vh:innerHeight}};
 /* save round-trip in a solo scratch page: load her save (deser), save again, the two must match (fields the load only fills in are fine) */
 const RT=s=>{const J=x=>String(JSON.stringify(x));function dp(a,b,p){if(a===b||a===undefined)return null;
   if(typeof a==='string'&&typeof b==='string'){let i=0;while(i<a.length&&a[i]===b[i])i++;return p+' (text differs at char '+i+'): «…'+a.slice(Math.max(0,i-30),i+40)+'» → «…'+b.slice(Math.max(0,i-30),i+40)+'»'}
@@ -215,6 +236,12 @@ async function room(job,TP,P,tpNext,bug,out){const b=await chromium.launch(/127\
    if(Date.now()-lastStep>STUCK){const tr=[];for(const o of [A,B])tr.push((o===A?'host ':'guest ')+await o.p.evaluate(SCR).catch(e=>e.message));
     const x=bug('stuck','co-op room stuck: no room week step in '+STUCK/1e3+' s',tr.join(' || '));if(x.n===1){x.save=await A.p.evaluate(()=>window.__r10&&window.__r10.lastSave).catch(()=>null);const d=path.join(OUT,'shots');fs.mkdirSync(d,{recursive:true});
      for(const o of [A,B]){const f=path.join(d,`${job.id}-r${out.rooms}-${o===A?'host':'guest'}-stuck.png`);await o.p.screenshot({path:f}).catch(()=>{});(x.shots=x.shots||[]).push(path.relative(OUT,f))}}
+    /* STUCKCAP: EVERY stuck room (not only the bug row's first) keeps, per seat, a screenshot (path only, never in git) + the open layers / titles /
+       buttons with a covered-or-clickable flag + the scene picture up → out.stuck (one row per room in the bug file, «## Stuck rooms») */
+    {const row={room:code,n:out.rooms,week:rm.weeks,at:new Date().toISOString().slice(11,19),seats:[]};const d=path.join(OUT,'shots');fs.mkdirSync(d,{recursive:true});
+     for(const o of [A,B]){const sn=o===A?'host':'guest';const c=await o.p.evaluate(STUCKCAP).catch(e=>({err:String(e.message).slice(0,120)}));const f=path.join(d,`${job.id}-r${out.rooms}-w${rm.weeks}-${sn}-stuck.png`);
+      const okShot=await o.p.screenshot({path:f}).then(()=>true).catch(()=>false);row.seats.push(Object.assign({seat:sn,dev:o.pl&&o.pl.dev,shot:okShot?path.relative(OUT,f):''},c))}
+     (out.stuck=out.stuck||[]).push(row)}
     /* fixer #5 (week-end stuck family): every stuck room dumps WHY #next is locked on each seat (SCR's `next` = #next.disabled) + the COOPW trace tail */
     for(const o of [A,B]){const sd=path.join(OUT,'stuck');fs.mkdirSync(sd,{recursive:true});const j=await o.p.evaluate(SCRX).catch(e=>({err:e.message}));j.scr=await o.p.evaluate(SCR).catch(e=>e.message);
      fs.writeFileSync(path.join(sd,`${job.id}-r${out.rooms}-w${rm.weeks}-${o===A?'host':'guest'}.json`),JSON.stringify(j,null,1))}
@@ -262,6 +289,11 @@ function report(done,jobs,tag,ms,quiet){done.sort((a,b)=>a.job.pair-b.job.pair);
   `Runner: node dev/measure/robot10-coop.js ${process.argv.slice(2).join(' ')} · harness ${HSHA}${E.RESUME?' (RESUMED: «since this process started» counts only hits of this harness)':''} (SEED=${SEED}${SWAP?' SWAP=1':''}${E.ORIGINS?' ORIGINS='+E.ORIGINS:''}) · repro: a save from saves/ into localStorage "hclh-save-v2-1", «Tiếp tục kiếp này» (Ô 1) for the seat's own state; co-op bugs reproduce with the same pair + SEED`,'',
   `## Bugs (${bl.length} distinct; one row per bug, pairs = how many pairs hit it)`,'',
   bl.length?bl.map((x,j)=>`${j+1}. **${x.type}** — ${x.msg}\n   - pairs ${x.pairs.length}/${done.length} (${x.pairs.slice(0,4).join(', ')}${x.pairs.length>4?' …':''}) · hits ${x.n} (${x.nNew} since this process started, harness ${x.shaNew||'earlier run'})\n   - first: ${(x.ex.detail||'').replace(/\n/g,' ').slice(0,400)}\n`+(x.last&&x.last!==x.ex.detail?`   - last: ${x.last.replace(/\n/g,' ').slice(0,400)}\n`:'')+(x.ex.save?`   - repro save: ${saveOf(x)}\n`:'')+(x.ex.shots?`   - screenshots: ${x.ex.shots.join(', ')} (not in git)\n`:'')).join('\n'):'None.','',
+  ...(()=>{const R=done.flatMap(r=>(r.stuck||[]).map(x=>Object.assign({pair:r.job.id},x)));if(!R.length)return[];
+   const bt=c=>(c.layers||[]).map(L=>`${L.layer}${L.z&&L.z!=='auto'?' z'+L.z:''} «${String(L.title||'').replace(/\|/g,'/')}»${L.pic&&L.pic.length?' pic '+L.pic.join(','):''}: `+((L.buttons||[]).map(b=>`${String(b.label).replace(/\|/g,'/')}${b.dis?' (disabled)':''} ${b.ok?'ok':'**COVERED** by '+b.by}`).join(' · ')||'no button')).join(' ; ')||(c.err?'capture failed: '+c.err:'no open layer');
+   return [`## Stuck rooms (${R.length}; one row per room per seat — STUCKCAP: open layers, «title», every visible button: ok = a tap at its centre reaches it, COVERED = another element is on top)`,'',
+    '| pair | room | week | seat | device | scene / night picture up | #modal / #ov | open layers · buttons | shot |','|---|---|---|---|---|---|---|---|---|',
+    ...R.flatMap(x=>x.seats.map(c=>`| ${x.pair} | ${x.room} (r${x.n}) | ${x.week} | ${c.seat} | ${c.dev||''} | ${(c.nightPic&&c.nightPic.length?'NIGHT «'+c.nightPic.join('», «')+'» ':'')+((c.scene||[]).join(', ')||'—')} | ${c.modalHidden?'hidden':'open'} / ${c.ovHidden?'hidden':'open'} | ${bt(c)} | ${c.shot||''} |`)),'']})(),
   `## Lives (${lives.length}; ${caps.length} ended by the wall cap = not a game ending)`,'',
   '| pair | player | seat | device | kiếp | thân phận | ending | max rank | years | wall min | room |','|---|---|---|---|---|---|---|---|---|---|---|',
   ...lives.map(l=>`| ${l.pair} | ${l.player} | ${l.seat} | ${l.dev} | ${l.kiep}${l.extra?' (extra)':''} | ${l.tp.origin}/${l.tp.road||'?'} | ${l.life?l.life.id+' ['+l.life.group+(l.life.cause?': '+String(l.life.cause).slice(0,50):'')+']':'?'} | ${l.life?(l.life.maxRankN||l.life.maxRank):''} | ${l.life&&l.life.years!=null?l.life.years:''} | ${(l.ms/6e4).toFixed(1)} | ${l.room} |`),'',
