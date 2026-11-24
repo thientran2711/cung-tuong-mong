@@ -131,3 +131,24 @@ Code read: jldseed is the LAST `deser=` in the built index.html (outermost, text
 - (art tab S.rcpK/pmL, men S.disK/likK/mindK, kvo .net = knowledge fills, not dice.)
 Suggest (fixer / Foreman D, not blocking): give portrait/face/kid identity when the person is made (or in initAll-style pass inside the seeded load), so a person's look exists before anyone sees her (law 6b/6c). Faces nobody has seen yet → nothing she can notice today.
 Laws: 1-3 untouched · 4 no number made at load · 5 untouched · 6 reload re-rolls nothing; lifespans exist from the save on · 7/9/10/12 no UI/wording change (no shots) · 11 family listed above · 13 check line · 14-18 no rule changed.
+
+## 5. Round-nc-20261124 bug files (part2 / 2b / 2c / 2d, reco round on LIVE) — triage 04:05Z
+| rows | verdict |
+|---|---|
+| mem, lag | owned: robot10-lag worker |
+| stuck after load | fix-evening-softlock LANDED 14ba8768 (these runs were on the build before it) |
+| wall cap / inpage6 TIMEOUT | harness |
+| save→load→save | fixed by nc-fix-1 (+ nc-fix-3); runs were on LIVE before them |
+| stat out of range duc / tai / danh / sac | owned: review/fix-kframe-heir-rv (its statSet clamp + scan-stat-clamp cover all 7 stats; not on main yet) |
+| go-tab text overlap / button overlap | owned: MAIN (Dư đồ labels) |
+| ui-cut span.j59t (iPad act tab, «Cung nữ thân tín tam đẳng», 1 hit) | stage name-tag subtitle = kit stage part (j59 tag) → MAIN stage lane / kit keeper; no fix here (no repro save in git) |
+| **js «econ card TypeError: reading 'queen' of null»** | **REAL → FIX-4** |
+
+## 6. FIX-4 «stipend card lost when a khất bổng outlives the Hoàng hậu» — review/robot10-nc-fix-4
+Cause: jstip.js stipEvent row «theo ý ${rkName(SK.sup||queenP())}» — the cut (S.cutPay, ordered by the Hoàng hậu in j20 payCuts) runs for months; with no Hoàng hậu any more queenP() is null → rkOf(null).queen throws inside the econ card try → her whole month stipend card is lost. Fix: no Hoàng hậu → «Nội vụ phủ khất». Family scan: every rkName/rkOf argument fed by a `||` / find / queenP() fallback — this was the only one.
+LAW 4 + 11 on the same row: «bớt 3 phần 10» typed at 5 sites (j15, j20, jecon ×2, jstip) → payCutTxt() reads BAL.payCut.
+| | main | fix-4 |
+|---|---|---|
+| dev/test/r10-stip-noqueen.js | 2 FAIL (the exact TypeError; typed share) | 6/6 ok |
+Tests: bongloc-options 14/14; econ-items 2 FAIL identical on main (pilfer dialog ovf 6 at Fold, no «Xin cấp lại» button) = pre-existing, for the econ owner.
+SẴN SÀNG KIỂM review/robot10-nc-fix-4 a171205829989539dedf7f9ddd88c818cff144d7 (SMALL: one null guard + one BAL text helper) · base LIVE origin/main · quickcheck PASS · core gates PASS.
