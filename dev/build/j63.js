@@ -270,7 +270,7 @@ function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Se
    direction ("12 phi tần ghen thêm 8" / "3 phi tần bớt oán 2–5"), the names behind a tap (.kkem.on); K = [{v, k:"ghen"|"oán", d}] */
 /* the reason of a KÈM line (ghen / oán of the others): a Sổ ghi clause naming that feeling, else the act title, else the fixed cause */
 const KA_WHYK={ghen:{"+":"lời đồn về ngươi lan ra","-":"lòng ghen nguôi dần theo ngày"},"oán":{"+":"chuyện cũ chưa nguôi","-":"oán nguôi dần theo ngày"}};
-function kaWhyKem(K,k,up){try{const C=K.why||[];const c=C.find(x=>new RegExp("(^|[^\\p{L}])"+k+"\\s*(?:[+−-]\\s*\\d)","u").test(x));const r=c&&kaWhyLead(c);if(r)return kaWhyClip(r);const t=K.ttl;if(t&&!/^Trong cung vừa qua$/.test(t))return kaWhyClip(t);return KA_WHYK[k][up?"+":"-"]}catch(e){return""}}
+function kaWhyKem(K,k,up){try{const C=K.why||[];const c=C.find(x=>new RegExp("(^|[^\\p{L}])"+k+"\\s*(?:[+−-]\\s*\\d)","u").test(x));const r=c&&kaWhyLead(c);if(r)return kaWhyClip(r);void up;return""/* the cause is the card title, said once (owner 24/11 ~21:57Z): no title copy, no filler after the Kèm number */}catch(e){return""}}
 function kitKemRow(K){if(!K||!K.length)return"";const grp={};for(const x of K){const key=x.k+(x.d>0?"+":"-");(grp[key]=grp[key]||[]).push(x)}
  const parts=Object.entries(grp).map(([key,L])=>{const up=key.endsWith("+"),k=key.slice(0,-1);const ds=L.map(x=>Math.abs(x.d));const lo=Math.min(...ds),hi=Math.max(...ds);
   const amt=lo===hi?`${lo}`:`${lo}–${hi}`;const verb=up?`${k} thêm ${amt}`:`bớt ${k} ${amt}`;
