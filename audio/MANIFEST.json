@@ -808,5 +808,189 @@
   "seconds": 1.99,
   "bytes": 16553,
   "loudness": "Mmax -17.4 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
+ },
+ "bgm-day-xuan": {
+  "kind": "music",
+  "file": "bgm-day-xuan.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSoIh8IjfW",
+  "seconds": 76.04,
+  "bytes": 1065004,
+  "model": "google-lyria-3-pro"
+ },
+ "bgm-day-ha": {
+  "kind": "music",
+  "file": "bgm-day-ha.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/cpU7PNg0eP",
+  "seconds": 76.04,
+  "bytes": 1065004,
+  "model": "google-lyria-3-pro"
+ },
+ "bgm-day-thu": {
+  "kind": "music",
+  "file": "bgm-day-thu.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/cpU7PiU0eP",
+  "seconds": 76.04,
+  "bytes": 1065004,
+  "model": "google-lyria-3-pro"
+ },
+ "bgm-day-dong": {
+  "kind": "music",
+  "file": "bgm-day-dong.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/u5cTpIeQLD",
+  "seconds": 76.04,
+  "bytes": 1065004,
+  "model": "google-lyria-3-pro"
+ },
+ "bgm-day-sang": {
+  "kind": "music",
+  "file": "bgm-day-sang.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/huAzcXTvqL",
+  "seconds": 76.04,
+  "bytes": 1065004,
+  "model": "google-lyria-3-pro"
+ },
+ "bgm-day-chieu": {
+  "kind": "music",
+  "file": "bgm-day-chieu.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/u5cTpvoQLD",
+  "seconds": 76.04,
+  "bytes": 1065004,
+  "model": "google-lyria-3-pro"
+ },
+ "bgm-night-2": {
+  "kind": "music",
+  "file": "bgm-night-2.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/1lXom5Mr4r",
+  "seconds": 76.04,
+  "bytes": 1065004,
+  "model": "google-lyria-3-pro"
+ },
+ "bgm-tension-2": {
+  "kind": "music",
+  "file": "bgm-tension-2.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/Doy4iM0pcl",
+  "seconds": 76.04,
+  "bytes": 1065004,
+  "model": "google-lyria-3-pro"
+ },
+ "bgm-joy": {
+  "kind": "music",
+  "file": "bgm-joy.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/aFzYVENfSh",
+  "seconds": 76.04,
+  "bytes": 1065004,
+  "model": "google-lyria-3-pro"
+ },
+ "bgm-sad": {
+  "kind": "music",
+  "file": "bgm-sad.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/nVlSOeTYQD",
+  "seconds": 76.04,
+  "bytes": 1065004,
+  "model": "google-lyria-3-pro"
+ },
+ "bgm-mourning": {
+  "kind": "music",
+  "file": "bgm-mourning.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/gOhaQ3dSXO",
+  "seconds": 76.04,
+  "bytes": 1065004,
+  "model": "google-lyria-3-pro"
+ },
+ "bgm-romance": {
+  "kind": "music",
+  "file": "bgm-romance.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/rgB8v92xtc",
+  "seconds": 76.04,
+  "bytes": 1065004,
+  "model": "google-lyria-3-pro"
+ },
+ "bgm-thitam": {
+  "kind": "music",
+  "file": "bgm-thitam.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/LwImCR2swO",
+  "seconds": 76.04,
+  "bytes": 1065004,
+  "model": "google-lyria-3-pro"
+ },
+ "bgm-contest": {
+  "kind": "music",
+  "file": "bgm-contest.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/YMgUyfdWeC",
+  "seconds": 76.04,
+  "bytes": 1065004,
+  "model": "google-lyria-3-pro"
+ },
+ "bgm-banquet": {
+  "kind": "music",
+  "file": "bgm-banquet.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/0ewJ9FdTfW",
+  "seconds": 76.04,
+  "bytes": 1065004,
+  "model": "google-lyria-3-pro"
+ },
+ "bgm-conferral": {
+  "kind": "music",
+  "file": "bgm-conferral.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/N2bKj8R6D9",
+  "seconds": 76.04,
+  "bytes": 1065004,
+  "model": "google-lyria-3-pro"
+ },
+ "bgm-daile": {
+  "kind": "music",
+  "file": "bgm-daile.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/eI4NZjldqL",
+  "seconds": 76.04,
+  "bytes": 1065004,
+  "model": "google-lyria-3-pro"
+ },
+ "bgm-sel-nhapcung": {
+  "kind": "music",
+  "file": "bgm-sel-nhapcung.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/LwImCpdswO",
+  "seconds": 76.04,
+  "bytes": 1065004,
+  "model": "google-lyria-3-pro"
+ },
+ "bgm-sel-dientuyen": {
+  "kind": "music",
+  "file": "bgm-sel-dientuyen.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/w4fEqvK7EI",
+  "seconds": 76.04,
+  "bytes": 1065004,
+  "model": "google-lyria-3-pro"
+ },
+ "bgm-sel-chochieu": {
+  "kind": "music",
+  "file": "bgm-sel-chochieu.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/O6uFKuCynm",
+  "seconds": 76.04,
+  "bytes": 1065004,
+  "model": "google-lyria-3-pro"
+ },
+ "bgm-end": {
+  "kind": "music",
+  "file": "bgm-end.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/s7thEhIl8e",
+  "seconds": 76.04,
+  "bytes": 1065004,
+  "model": "google-lyria-3-pro"
+ },
+ "bgm-end-grand": {
+  "kind": "music",
+  "file": "bgm-end-grand.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/P3Fq15S42C",
+  "seconds": 76.04,
+  "bytes": 1065004,
+  "model": "google-lyria-3-pro"
+ },
+ "bgm-end-kyngo": {
+  "kind": "music",
+  "file": "bgm-end-kyngo.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/Doy43i4pcl",
+  "seconds": 76.04,
+  "bytes": 1065004,
+  "model": "google-lyria-3-pro"
  }
 }
