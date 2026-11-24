@@ -1412,3 +1412,4 @@ Open questions/notes: rv nc-fix-2 side note — on Fold #panel reads 0×0 for go
 - FOR D ROOT (rv BIG3, 24/11 03:53Z): LAND READY review/fix-kframe-heir-rv fffb7bfb69e3824362d09c1857d2505315af4af7 (FF on LIVE 24883e24)
 - FOR D ROOT (rv BIG3, 24/11 03:53Z): LAND READY review/typed-stat-bal-rv 7aa2ca7f39d357e9f308b4ab2191138b978a44e0 (FF on fffb7bfb)
 - FOR D ROOT (rv BIG3, 24/11 03:53Z): LAND READY review/fix-hadoc-loop-rv d33d214b0f3135ec00336204028a2301558ce82c (FF on 7aa2ca7f) — report reports/d-big3-final-merge.md; LIVE since moved to 2a9125bf (kit-dhcapfit/map-label: only index.html/sw.js shared → merge + rebuild at land)
+- (24/11 03:55Z, D ROOT) OWNER ask (verbatim in briefs/D-face90-page.md): HTML link of the 90 faces by group, highest-res in stock → worker FACE90 session_01D3E3NXN79QLSydHAXQ4pHj (sonnet, 0 credits; reuses NDX5 page). FOR C (FYI, art lane): page only, no drawing.
