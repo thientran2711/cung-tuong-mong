@@ -21,3 +21,10 @@ Goal: keep the meter on the title row at its right end (L2134), but let the titl
 
 ## Open questions for MAIN
 (a) Leave the squeeze as is (approved layout), or (b) ask sếp for the wrapper-based «title wraps beside the meter on line 1 only» change (affects every option / act card)? I build (b) only on her GO.
+
+## MOCK PAIR (order MAIN 121/122, mock only, nothing built) — in-row fix vs LIVE, Fold 755x1000 + iPad 1180x820 @2
+Files (scratch, NOT in git; Foreman C uploads): /home/user/wt/kk-shots/optfit/optfit-before-<WxH>.png (LIVE origin/main) and optfit-after-<WxH>.png (mock). Same dialog, 3 worst cards (long titles: «Cúi đầu đáp lời Hoàng thượng, giữ lễ và thưa rõ từng chữ» [Hiểm], «Ngẩng lên nhìn thẳng, nói khéo nhưng không hạ thấp mình trước mặt cả điện» [Tùy duyên], «Im lặng, chờ người khác lên tiếng trước rồi mới đáp» [Rất vững]).
+Mock = in the live page: all chips (meter) of each .kat wrapped in ONE span, absolutely positioned at the title row's right end (left of the «!»); the title gets a float spacer the width of meter + «!» so only line 1 is narrower, lines 2+ use the full card-body width.
+Fold: LIVE title column 78-107 px, 4-6 lines (3rd card 5 lines); MOCK title 189 px, 3-4 lines; card height 144 px in both (the Tốn/Được rows decide). iPad 1180x820 (card 480 px wide): LIVE and MOCK titles both fit in 1-2 lines (no squeeze there; the mock changes nothing visible).
+LOOKED (Fold after): the meter stays on the title row at the right (L2134 kept), bar + word one row (L2211), «!» and the rows unchanged, approved layout otherwise unchanged.
+HONEST DRAWBACK seen in the mock: line 1 of the title is narrower than the rest, so a long first word makes a ragged first line («Cúi đầu / đáp lời Hoàng thượng…», and the 3rd card breaks «Im / lặng, chờ…»). Tuning (a one-word first line must not happen) would be part of the real build. The real build needs the chip wrapper in the card builder (j63 / kaNorm) for every button.ka with .kat>.kodds.
