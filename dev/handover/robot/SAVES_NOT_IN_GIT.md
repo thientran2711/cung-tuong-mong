@@ -1,0 +1,1 @@
+Robot save files (saves/, ~5 MB each) stay in the runner box (/home/user/wt/<name>-out/saves) — never push them: every sparse checkout of dev/handover/ downloads them (348 MB removed 24/11 07:50Z by Foreman B). Push only coop-*.md + coop-*.json. A fixer who needs one save asks the runner for its path or a single file on a review/ branch.
