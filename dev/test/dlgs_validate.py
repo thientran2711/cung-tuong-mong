@@ -70,6 +70,78 @@ src=rd('j70.js')
 for mm in re.finditer(r'(?:^\s*(\w+):\{k:"\w+"|M70\.(\w+)=\{k:"\w+")[^\n]*?R:\[(.*?)\]\}',src,re.S|re.M):
     m70=mm.group(1) or mm.group(2)
     for r in re.findall(r'\{id:"([^"]+)"',mm.group(3)):add('j70',f'{m70}:{r}',{'M'},set());UNITS[f'j70:{m70}:{r}']['old']=1;UNITS[f'j70:{m70}:{r}']['src']=f'j70.js:{src[:src.index(chr(123)+"id:"+chr(34)+r+chr(34),mm.start())].count(chr(10))+1} M70.{m70} route {r}'
+# KINDS (review r1 F1, law 7 xưng hô): the kind of every cast role, so a typed «ta»/«ngươi» can be checked against WHO speaks to WHOM.
+# The address core (jvoice kAddr) decides xưng hô by rank and kind; a typed pronoun is only safe from her (or a consort) DOWN to a servant / child / official.
+HIGH={'emp','th','hh'}
+LOW={'sv','rsv','serv','maid','eun','ksp','fam','mama','el','court','off','doc','kid','ak','akf','tool','man','M','sve','svm','ly'}
+def kcat(k):
+    k=(k or '').split(':')[0]
+    if k in HIGH:return 'high'
+    if k in LOW or k.startswith('sv') or k.startswith('ak'):return 'low'
+    return 'peer'   # consorts (rv*, fallen, plotter/target) and anything unknown: rank decides → never a typed pronoun
+def setk(uid,**k):
+    u=UNITS.get(uid)
+    if u:u.setdefault('kinds',{}).update({r:v for r,v in k.items() if v})
+for s in sd('j72sd.js','J72SEEDS'):setk('j72:'+s['id'],A=('maid' if s['kind']=='fam' else (s.get('req') or {}).get('kind')),B=(s.get('other') or {}).get('kind'))
+for p in parts:
+    mm=re.match(r'T7\("([A-Za-z0-9_]+)","([a-z]+)",\{',p);rr=re.search(r'\br:"([^"]*)"',p[:500]);bb=re.search(r'\bb:"([^"]*)"',p[:600])
+    if mm and rr:setk('j72:'+mm.group(1),A=('maid' if rr.group(1)=='fam' else rr.group(1)),B=bb.group(1) if bb else None)
+for s in sd('j7sd.js','J7SEEDS'):setk('j7:'+s['id'],**{r:v.get('kind') for r,v in (s.get('roles') or {}).items()})
+for mm in re.finditer(r'(\w+):\{([^{}]*)\}',t7):setk('j7:'+mm.group(1),**{r:k for r,k in re.findall(r'(\w+):\["(\w+)"',mm.group(2))})
+for s in sd('j68sd.js','J68SEEDS'):
+    if s.get('type')=='comp':setk('j68:'+s['id'],**{r:(v or {}).get('kind') for r,v in (s.get('roles') or {}).items()})
+for f in ['j68e.js','j68f.js','j68g.js','j68q.js']:
+    src=rd(f);ms=list(re.finditer(r'EV6\("([^"]+)","([a-z]+)",\{',src))
+    for i,mm in enumerate(ms):
+        seg=src[mm.start():ms[i+1].start() if i+1<len(ms) else len(src)];a=re.search(r'\ba:\[([^\]]*)\]',seg)
+        ks=[x.strip().strip('"\'') for x in (a.group(1).split(',') if a else []) if x.strip()];setk('j68:'+mm.group(1),**dict(zip('ABC',ks)))
+for s in sd('jkysd.js','KYSEEDS'):setk('ky:'+s['id'],W=(s.get('who') or {}).get('kind'))
+src=rd('jky.js');d=src[src.index('const DEF={'):]
+for mm in re.finditer(r'^\s*([a-z]+_[a-z]+):\{(.*?)(?=^\s*[a-z]+_[a-z]+:\{|\Z)',d,re.M|re.S):
+    k=re.search(r'w\.kind==="(\w+)"',mm.group(2));setk('ky:'+mm.group(1),W=k.group(1) if k else None)
+for s in sd('j71sd.js','J71SEEDS'):
+    if s.get('type')=='comp':setk('j71:'+s['id'],**{r:(v or {}).get('kind') for r,v in (s.get('roles') or {}).items()})
+for s in sd('jwsd.js','JWSEEDS'):setk('wc:'+s['id'],**{r:(v or {}).get('kind') for r,v in (s.get('roles') or {}).items()})
+for u in UNITS.values():u.setdefault('kinds',{});u['kinds']['M']='maid';u['kinds'].setdefault('maid','maid')
+# typed first / second person: «ta» (not nàng ta / hắn ta / chúng ta / người ta …), «ngươi» (not các / chúng ngươi = a group)
+NOT3={'nàng','hắn','chúng','người','cô','lão','mụ','bà','ông','gã','thị','chàng','bọn','đám','y','hai','các','kẻ'}   # «nàng ta», «chúng ta», «hai ta», «các ngươi» … = not a typed I / you
+PRON=re.compile(r'(?<![\wÀ-ỹ])(ta|Ta|ngươi|Ngươi)(?![\wÀ-ỹ])')
+def typed(t):
+    out=[]
+    for m in PRON.finditer(t):
+        pw=re.search(r'([\wÀ-ỹ]+)\s+$',t[:m.start()])
+        if pw and pw.group(1).lower() in NOT3:continue
+        out.append(m)
+    return out
+TITLE3={'th':r'Thái hậu','hh':r'Hoàng hậu','emp':r'Hoàng thượng|\{E\}'}
+def who_err(u,d):
+    """review r1 F2 (law 6b): the lit figure must be the one talking — a speaker never names HIMSELF by placeholder, and the Hoàng thượng / Thái hậu /
+    Hoàng hậu figure never speaks of that title in the third person (a messenger's line put in the master's mouth)"""
+    K=u.get('kinds',{});out=[]
+    for i,x in enumerate(d.get('lines',[])):
+        w=x.get('who');t=x.get('text','')
+        if w in (None,'nar','me'):continue
+        if re.search(r'\{'+re.escape(w)+r'\}',t):out.append((i,f'«{w}» names himself ({{{w}}})'))
+        k=(K.get(w) or '').split(':')[0]
+        if k in TITLE3 and re.search(r'(?<![\wÀ-ỹ])(?<!là )('+TITLE3[k]+r')(?![\wÀ-ỹ])',t):out.append((i,f'the {k} figure speaks of «{re.search(TITLE3[k],t).group(0)}» in the third person (a messenger\'s line? then L = that messenger)'))
+    return out
+TOK=re.compile(r'\{(xung|goi|Xung|Goi)\}')
+def pron_err(u,d):
+    """lines whose typed ta/ngươi breaks xưng hô: allowed ONLY from her / a consort DOWN to a low listener, and never next to {xung}/{goi} of the same speaker"""
+    L,R=d.get('L'),d.get('R','me');K=u.get('kinds',{});cat=lambda r:'me' if r=='me' else kcat(K.get(r))
+    tok={x['who'] for x in d.get('lines',[]) if x.get('who')!='nar' and TOK.search(x.get('text',''))}
+    out=[]
+    for i,x in enumerate(d.get('lines',[])):
+        w=x.get('who')
+        if w=='nar' or not typed(x.get('text','')):continue
+        ls=R if w==L else L;sc,lc=cat(w),cat(ls)
+        why=None
+        if w in tok:why='the same speaker uses {xung}/{goi} in this scene'
+        elif sc=='high' or lc=='high':why='Hoàng thượng / Thái hậu / Hoàng hậu in the pair'
+        elif sc=='low':why='a servant / child / official speaks up'
+        elif lc!='low':why='consort to consort (rank decides)'
+        if why:out.append((i,why))
+    return out
 LIVE={'j72','j68','j7','ky','j70','j71','wc'}   # families whose adapter plays the scene in the game now
 
 def check(r,where):
@@ -109,6 +181,8 @@ def check(r,where):
         if re.search(r'(^|[.!?…»:]\s+|«)\{(xung|goi)\}',t):E.append(f'{uid} line {i+1}: lowercase {{xung}}/{{goi}} opens a sentence — write {{Xung}}/{{Goi}} (lead #4 law-11 scan: 13 lines)')
         if x.get('focus') and wh=='nar':E.append(f'{uid} line {i+1}: focus on narration')
         if set(x)-{'who','text','focus'}:E.append(f'{uid} line {i+1}: unknown keys {sorted(set(x)-{"who","text","focus"})}')
+    for i,why in pron_err(u,d):E.append(f'{uid} line {i+1}: typed «ta»/«ngươi» — {why}: write {{xung}}/{{goi}} (review r1 F1, the address core decides)')
+    for i,why in who_err(u,d):E.append(f'{uid} line {i+1}: wrong speaker — {why} (review r1 F2)')
     if L not in who:E.append(f'{uid}: L never speaks')
     if not w and 'me' not in who:E.append(f'{uid}: she never speaks')
     if w and 'me' in who:E.append(f'{uid}: watch scene: she does not speak')
