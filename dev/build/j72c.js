@@ -1,5 +1,5 @@
 /* ================= j72c: COMPOSED VIỆC NHỜ (ORDER THIN P3, owner OD 23/11 ~22:50Z; EVCAT §3 P3) =================
-   A seed (data J72SEEDS in j72sd.js, built from dev/handover/content/thin/j72seeds.md by dev/build/j72sd_build.py) = requester by nết/need from the
+   A seed (data J72SEEDS in j72sd.js, built from every dev/handover/content/thin/j72seeds*.md by dev/build/j72sd_build.py) = requester by nết/need from the
    REAL roster × a real object × obstacle steps (1–3) × an optional hidden twist. At load every seed becomes ONE more T72 template ("c:"+id), so the whole
    j72 runtime (offer, steps, tab, nợ ân, ticks, saves) plays it unchanged; the 110 old templates stay as they are.
    Numbers (law 4): every gain/loss step = BAL.j72c.fx[tier][key]; odds/khắc/wait/deadline from BAL.j72c; nothing typed here.
@@ -38,7 +38,7 @@ function j72cTxt(t,sd){const o=sd.object;return String(t||"").replace(/\{O\}/g,o
 /* the object's trace after the favour ends (law 6c) + the real item she receives */
 function j72cTrace(sd,X,res){const o=sd.object;if(!o)return"";const j=q72c();const nm=q72Txt(j72cTxt(o.name,sd),X);
  const own=o.owner==="me"?(S.name||"ngươi"):o.owner==="kho"?"Nội vụ phủ":o.owner==="B"?(X.B?X.B.n:""):(X.A?X.A.n:"");
- const tr=q72Txt(j72cTxt(res==="ok"?o.trace_ok:o.trace_no,sd),X);j.ob.push({sid:sd.id,name:nm,owner:own,trace:tr,turn:S.turn});if(j.ob.length>60)j.ob.splice(0,j.ob.length-60);
+ const tr=q72Txt(j72cTxt(res==="ok"?o.trace_ok:o.trace_no,sd),X);j.ob.push({sid:sd.id,name:nm,owner:own,trace:tr,turn:S.turn});if(j.ob.length>BAL.j72c.obKeep)j.ob.splice(0,j.ob.length-BAL.j72c.obKeep);
  let g="";if(res==="ok"&&o.it&&typeof IT!=="undefined"&&IT[o.it]&&typeof goodsGive==="function"){try{g=goodsGive(S,o.it,{from:"story",who:X.A?X.A.n:""})}catch(e){g=""}}
  return `${nm}: ${tr}.${g?` Ngươi nhận ${g}.`:""}`}
 function j72cTwist(sd,X,x){const w=sd.twist;if(!w||!(x&&x.p&&x.p.tw))return"";const tier=sd.tier||"m";const g=j72cVal(w.gain,tier,1),l=j72cVal(w.loss,tier,-1);
@@ -51,7 +51,7 @@ function j72cGo(st,tier){const k=BAL.j72c.khac[tier];const g=q72G(j72cPl(st.at)|
 function j72cOpt(o,tier){const g=j72cVal(o.gain,tier,1),l=j72cVal(o.loss,tier,-1);const pl=j72cPl(o.at);
  const op={c:l.fx,w:g.fx,r:g.r||0,rb:g.rb||0,cr:-l.r||0,crb:-l.rb||0,lto:o.fail==="end"?"fail":o.fail==="bad"?"bad":"stay",k:BAL.j72c.khac[tier]};
  if(o.odds!=null){op.p=j72cOdds(o.odds);op.sk=o.sk||""}
- if(pl&&pl!=="home"){op.t=X=>S.place===q72StepPl({pl},X);op.tw=X=>`phải đến ${q72PlN(q72StepPl({pl},X))}`}
+ if(pl)op.opl=pl/* where this option is done (q72Bot walks there) */;if(pl&&pl!=="home"){op.t=X=>S.place===q72StepPl({pl},X);op.tw=X=>`phải đến ${q72PlN(q72StepPl({pl},X))}`}
  else if(pl==="home"){op.t=()=>S.place==="home";op.tw="phải về tẩm cung"}
  return q72O(o.n,op)}
 function j72cSteps(sd){const tier=sd.tier||"m";return (sd.steps||[]).map(st=>{

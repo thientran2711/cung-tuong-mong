@@ -127,8 +127,14 @@ function q72Cands(place){const q=q72(),C=q72Ctx(),out=[];const act=new Set(q.a.m
  for(const T of T72){if(T.fu||act.has(T.id))continue;if(q.cd[T.id]!=null)continue;let w=1;try{w=T.w?T.w(C):1}catch(e){w=0}if(!(w>0))continue;
   if(T.or&&!T.or.includes(C.or))continue;if(T.rk&&(S.rank<T.rk[0]||S.rank>T.rk[1]))continue;if(T.sea&&!T.sea.includes(C.sea))continue;
   const seen=evHistSeen(T.hk||("j72:"+T.id))/* j72c composed seeds: family j72:<kind> */;w*=Math.pow(.12,seen);out.push([T,w,seen])}
- const fresh=out.filter(z=>!z[2]);return fresh.length>=3?fresh:out}
-function q72Choose(L,place,rq){L=L.slice();for(let t=0;t<30&&L.length;t++){const z=npwPick(L,y=>y[1]);if(!z)break;L.splice(L.indexOf(z),1);const x=q72Make(z[0],rq,place);if(x)return x}return null}
+ return out}/* fresh-first lives in q72Choose (review thin-p3 r1) */
+/* review thin-p3 r1: npwPick keeps the best-weighted (top 3, stable sort), so equal weights fell back to T72's array order — the same first
+   templates every life, the composed seeds (registered last) almost never, and 30 unmakeable heads in a row ended the offers of a life (~10).
+   Shuffle first: ties are broken fairly, the purpose order (weight) is unchanged. */
+function q72Choose(L,place,rq){L=L.slice();for(let i=L.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const t=L[i];L[i]=L[j];L[j]=t}
+ /* fresh-first (no past life saw it): every fresh one is tried before a seen one — the old cut (fresh only when ≥3 fresh) starved a life once its
+    fresh templates all waited on a state (an ill consort, a festival…): offers fell from ~80 to ~20 a kiếp by the third life */
+ const F=L.filter(z=>!z[2]),O=L.filter(z=>z[2]);for(const [P,n] of [[F,F.length],[O,30]]){for(let t=0;t<n&&P.length;t++){const z=npwPick(P,y=>y[1]);if(!z)break;P.splice(P.indexOf(z),1);const x=q72Make(z[0],rq,place);if(x)return x}}return null}
 
 /* VOICE BY TÍNH TÌNH (W-C): the asker's own tone — a lead-in ("‹A› hấp tấp kéo ngươi lại, nói liền một hơi:") before her quoted request, and her reaction when a
    quest of hers ends with no line of its own written. Pools in jtone_c.js (TONE_POOL.askLead / askOk / askNo); only for a named woman who speaks (rv / hh / fallen / rsv) */
@@ -294,7 +300,10 @@ window.q72Test=function(id,force){const T=T72I[id];if(!T)return false;const q=q7
 window.q72Count=function(){const by={};for(const T of T72)by[T.kind]=(by[T.kind]||0)+1;return{templates:T72.length,followUps:T72.filter(t=>t.fu).length,byKind:by,steps:T72.reduce((a,t)=>a+t.s.length,0)/T72.length}};
 window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=q72();for(const x of q.a){const X=q72X(x);if(!X)continue;const st=X.T.s[x.st];if(!st||st.w)continue;const pl=q72StepPl(st,X);
   if(pl&&S.place!==pl){if(pl==="home"){walkGo("home");if(S.place!=="home")continue}else if(can(travel(S.place,pl)+1)&&!S.confined&&(q72Host(pl,X)||typeof accessOf!=="function"||accessOf(S,pl).ok)){q72Pass(pl);goTo(pl)}else continue}
-  if(st.ch){let bi=-1,bv=-1;st.ch.forEach((o,i)=>{if(q72Why(x,X,st,o))return;const v=(o.p==null?100:q72Odds(o.p,o.sk,X))-(o.c&&o.c.bac?-o.c.bac/4:0)-((o.lto==="bad")?20:0);if(v>bv){bv=v;bi=i}});if(bi>=0){q72Do(x.u,bi);return true}}
+  if(st.ch){let bi=-1,bv=-1;st.ch.forEach((o,i)=>{if(q72Why(x,X,st,o))return;const v=(o.p==null?100:q72Odds(o.p,o.sk,X))-(o.c&&o.c.bac?-o.c.bac/4:0)-((o.lto==="bad")?20:0);if(v>bv){bv=v;bi=i}});if(bi>=0){q72Do(x.u,bi);return true}
+   /* j72c: an option done at another place (o.opl) — walk to the first one she could reach, then do it next call */
+   for(const o of st.ch){if(!o.opl)continue;const p2=q72StepPl({pl:o.opl},X);if(!p2||S.place===p2)continue;if(p2==="home"){walkGo("home");if(S.place==="home")return true;continue}
+    if(can(travel(S.place,p2)+1)&&!S.confined&&(q72Host(p2,X)||typeof accessOf!=="function"||accessOf(S,p2).ok)){q72Pass(p2);goTo(p2);if(S.place===p2)return true}}}
   else if(!q72Why(x,X,st,null)){q72Do(x.u,null);return true}}return false};
 
 /* =============== CONTENT: every request is motivated by the requester's real current state (a real illness, a real feud, a real thief in her staff,
