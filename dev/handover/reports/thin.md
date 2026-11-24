@@ -509,3 +509,6 @@ DONE b6d494b0 fseeds_a.md 117 rows: stage 49 (C 28 / W 5 / G 5 / B 2 / P 4 / R 5
 
 ## P6-SEEDS-D
 DONE 8eda1fbb j70seeds_b.md 38 routes: frame 5 plant 5 bribe 4 block 4 rumor 4 accuse 4 ksab 4 joint 4 huydung 4 (36 with real object) validator pending (own script: cost 2-3, tell length, no digits/odds words all pass)
+
+## P6-SEEDS-C
+- DONE 9a55dcf6 40 routes (poison 5, poison2 5, musk 5, catswap 5, kpoison 5, pond 5, pushp 5, kframe 5; 40/40 with object) validator pending (own cost-point/word/banned-word check passed)
