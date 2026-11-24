@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#8a2a1e">
+<meta name="theme-color" content="#f6efe2">
 <meta name="robots" content="noindex,nofollow,noarchive,noai,noimageai">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place","b":"bc15a44a5a6a","h":[{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"}]};
+window.CTM_BI={"s":"e92984b3","t":"2026-11-24T18:42Z","c":"flight-ui: page turn — static sky behind the book (no navy flash), seal lean ends / never starts during a turn","b":"0db4d3523d42","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -31767,7 +31767,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  function slideMode(){return mode==="single"&&typeof kitIsPortrait==="function"&&kitIsPortrait()}
  function turnMs(){return slideMode()?KIT_SLIDE_MS:KIT_TURN_MS}
  function setTurn(el,p){const c=el&&el.__curl;if(c)c.set(p)}
- function beginTurn(i,dir){const els=sheetEls();const el=els[i];if(!el)return null;
+ function beginTurn(i,dir){const els=sheetEls();const el=els[i];if(!el)return null;try{document.querySelectorAll("img.kemo.kemo-lean").forEach(e=>kesLeanEnd(e))}catch(e){}/* a running seal lean ends when a page starts to turn: its big clone never rides over the other person's page (owner 24/11 flight) */
   for(let k=i-2;k<=i+2;k++)if(els[k])els[k].style.visibility="visible";if(mode==="single"&&els[i+1]&&i===cur)els[i+1].style.visibility="visible";
   if(mode==="spread")book.classList.remove("closed","atend");
   if(el.__curl){el.style.visibility="hidden";return el}el.__dir=dir||1;
@@ -32094,13 +32094,15 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
 (function(){if(typeof dawn!=="function")return;const old=dawn;
  dawn=function(){let built;try{built=wkBookPages()}catch(e){console.error(e);return old.apply(this,arguments)}
   S.wkSnap=wkSnap();try{const rt=$("rtoast");if(rt){rt.classList.remove("on");clearTimeout(window.__rtT)}document.body.classList.add("kbk-open")}catch(e){}let w=$("dawn");if(!w){w=document.createElement("div");w.id="dawn";w.className="dawn";document.body.appendChild(w)}
-  w.classList.add("kbkdawn");w.onclick=null;w.innerHTML=`<div class="dsky"><i class="lan l1"></i><i class="lan l2"></i><i class="lan l3"></i><i class="sun"></i></div>`;
+  w.classList.add("kbkdawn");w.onclick=null;w.innerHTML=`<div class="dsky"><i class="lan l1"></i><i class="lan l2"></i><i class="lan l3"></i><i class="sun"></i></div>`;w.classList.remove("kbkskyd");{const sk=w.querySelector(".dsky"),fz=()=>w.classList.add("kbkskyd");if(sk)sk.addEventListener("animationend",fz,{once:true});setTimeout(fz,3600)}
   w.hidden=false;w.classList.toggle("rm",reducedMotion());void w.offsetWidth;w.classList.add("on");
   const tok=w.__kbkTok={};const bk=kitBook({pages:built.pages,head:built.head,host:w,label:"Tuần lục",onClose:()=>{if(w.__kbkTok!==tok)return;document.body.classList.remove("kbk-open");w.classList.remove("on");setTimeout(()=>{if(w.__kbkTok!==tok)return;w.hidden=true;w.innerHTML=""},reducedMotion()?0:350)}});
   window.__kbk=bk;setTimeout(bell,reducedMotion()?0:1400);try{w.querySelector(".kbk-next").focus({preventScroll:true})}catch(e){}}})();
 
 (function(){const st=document.createElement("style");st.id="kbk-css";st.textContent=`
 .dawn.kbkdawn{padding:0;overflow:hidden;align-items:stretch;justify-content:stretch}
+/* owner 24/11 flight: the sky behind the book is STATIC once the book is open (its sunrise keyframe animation could restart on a page turn = a dark navy flash); same final colours as the end of @keyframes dsky */
+.dawn.kbkdawn.kbkskyd .dsky{animation:none!important;background:linear-gradient(#f7e2c0,#f3c98f 55%,#e9a96a)!important;filter:none!important}
 .kbk{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:10px 10px max(8px,env(safe-area-inset-bottom));box-sizing:border-box;
  --paper:#f3e5c4;--paper2:#ead6ac;--rule:var(--k-seal,#9a2c1c);--cloth:#27324d;--cloth2:#1c2439;font-size:var(--fs,15px);animation:kbkin .9s ease both .5s}
 @keyframes kbkin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
@@ -57625,11 +57627,15 @@ window.kitLose=kitLose;window.kitCoins=kitCoins;
 .krev{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;color:#fff3dc}
 .krevl{position:absolute;left:50%;top:75px;width:300px;height:300px;margin:-150px 0 0 -150px;border-radius:50%;pointer-events:none;
  background:radial-gradient(circle,color-mix(in srgb,var(--gc) 80%,#fff) 0,color-mix(in srgb,var(--gc) 45%,transparent) 32%,transparent 68%);animation:krevBurst calc(var(--krise)*2) ease-out both,krevBreath 2.4s ease-in-out calc(var(--krise)*2) infinite}
+/* owner 24/11 flight bug #4 «to hơn nữa»: the item picture and its words of EVERY reveal (kitGain, each item of kitReward) are bigger: picture up to 340 px / 46 % of the page height (was 260 / 36 %), name 1.5rem, line under it 1rem; one size for all of them */
+.krev>.kitem-xl:not(.kitem-fr){--isz:min(340px,calc(46*var(--kvh,1dvh)))}
+.krevl{top:calc(var(--krevh,340px)*.5);width:min(460px,92vw);height:min(460px,92vw);margin:calc(min(460px,92vw)/-2) 0 0 calc(min(460px,92vw)/-2)}
+.krev{--krevh:min(340px,calc(46*var(--kvh,1dvh)))}
 .krev>.kitem{position:relative;animation:krevRise var(--krise) cubic-bezier(.2,.9,.3,1.2) both}
 .krev>.kitem>.kitb{filter:drop-shadow(0 0 14px var(--gc)) drop-shadow(0 4px 8px #0006)}
-.krevn{position:relative;font-family:var(--display,serif);font-size:1.18rem;line-height:1.25;text-shadow:0 2px 6px #000a;animation:krevUp calc(0.4s*var(--pace,1)) calc(var(--krise)*.6) ease-out both}
-.krevs{position:relative;font-size:.8rem;color:#f6ead6e0;animation:krevUp calc(0.4s*var(--pace,1)) calc(var(--krise)*.8) ease-out both}
-.krevf{position:relative;font-size:.76rem;color:#f6ead6c0}
+.krevn{position:relative;font-family:var(--display,serif);font-size:1.5rem;line-height:1.25;text-shadow:0 2px 6px #000a;animation:krevUp calc(0.4s*var(--pace,1)) calc(var(--krise)*.6) ease-out both}
+.krevs{position:relative;font-size:1rem;color:#f6ead6e0;animation:krevUp calc(0.4s*var(--pace,1)) calc(var(--krise)*.8) ease-out both}
+.krevf{position:relative;font-size:.9rem;color:#f6ead6c0}
 .krevok{position:relative;margin-top:6px;min-width:120px;animation:krevUp calc(.4s*var(--pace)) var(--kok,calc(900ms*var(--pace))) ease-out both}
 .krev.krev-out{animation:krevOut var(--kshelf,calc(380ms*var(--pace))) ease-in forwards}
 @keyframes krevBurst{0%{transform:scale(.2);opacity:0}35%{transform:scale(1.15);opacity:1}100%{transform:scale(1);opacity:.85}}
@@ -90190,6 +90196,8 @@ try{new MutationObserver(ms=>{if(ms.every(m=>m.target.closest&&m.target.closest(
 img.kemo.kfseal{position:absolute!important;z-index:7;display:block;box-sizing:border-box;object-fit:contain;border-radius:50%;pointer-events:auto;cursor:pointer;-webkit-tap-highlight-color:transparent;filter:drop-shadow(0 1px 2px #000a);transform:none;margin:0;max-width:none;max-height:none;animation:none}
 img.kemo.kfseal.kemo-an{opacity:.85}
 img.kemo.kfseal.kfseal-old{pointer-events:none;z-index:6}/* the previous still, kept under the new one until it is decoded */
+body.kbk-open .kbk-pg{isolation:isolate}/* each page is its own stacking context: the head seal (z 7) of the page BESIDE it in the stack must never paint over this page (the other person's face on a page) */
+body.kbk-open img.kemo.kfseal:not(.kbk-person>img.kfseal){visibility:hidden!important;pointer-events:none!important}/* owner 24/11 flight bug #6: the ROOM figure's seal (her own, or the one beside the person on the stage) floated over the open Tuần lục book (it sits in the game shell, z 7) = "the wrong person's face" on every page; under the book only the seal of the page's own person shows (host .kbk-person) */
 `;document.head.appendChild(st)})();
 /* ================= jemoseal: kitEmoSeal — EVERY mood seal moves, everywhere it shows (KIT 38.4; owner 17/11 ~18:00Z + ~18:30Z (D)) =================
    ONE kit part for every img.kemo (pcPort frames, person cards, lists, mood box, the figure-head seal of jfigseal): no seal draws its own motion.
@@ -90260,7 +90268,7 @@ function kesHit(a,b,pad){return a.left-pad<b.right&&a.right+pad>b.left&&a.top-pa
 function kesYield(rect){const el=kesCur;if(!el||!el.__big||!el.classList.contains("kemo-lean"))return false;const cr=el.__big.getBoundingClientRect();if(rect&&!kesHit(cr,rect,KIT_EMOSEAL.lean.bubblePad))return false;kesLeanEnd(el);kesSchedule(el);return true}
 function kesPartsUrl(el,k){const L=KIT_EMOSEAL.lean,ak=KIT_EMOSEAL.animKey[k]||k,set=kesSet(el,k),T=KIT_EMOSEAL.three[set+ak]||KIT_EMOSEAL.three[ak];if(!T)return null;const A=KIT_EMOSEAL.anim+set+ak,P=L.parts;return{T,ak,out:A+P.out+".webp",loop:A+".webp",back:A+P.back+".webp"}}
 function kesPartsState(U){if(!U)return"no";const h=[U.out,U.loop,U.back].map(u=>KES_HAVE[u]);if(h.some(x=>x===false))return"no";if(h.every(x=>x===true))return"yes";return"wait"}
-function kesLean(el,force){el.__ln=0;if(!el.isConnected||!el.classList.contains("kemo-live"))return;
+function kesLean(el,force){el.__ln=0;if(!el.isConnected||!el.classList.contains("kemo-live"))return;if(document.querySelector(".ksht")){el.__ln=setTimeout(()=>kesLean(el,force),600);return}/* owner 24/11 flight: no big seal clone starts while a page is turning (the clone of the old page stayed over the next one) */
  const L=KIT_EMOSEAL.lean,now=performance.now();
  if(kesBlocked(el)){el.__ln=setTimeout(()=>kesLean(el),1500);return}
  {const U=kesPartsUrl(el,kesKey(el));if(kesPartsState(U)==="wait"){if(el.__pre)return;el.__pre=1;let n=0;[U.out,U.loop,U.back].forEach(u=>kesProbe(u,()=>{if(++n===3){el.__pre=0;kesLean(el,force)}}));return}}
@@ -93043,7 +93051,7 @@ function kitNotice(spec){try{if(spec==null)return null;if(typeof spec!=="object"
  const id=String(spec.id||line);const text=plain(spec.text||line);NT.log.push(line);
  let it=NT.list.find(x=>x.id===id);const again=!it||it.line!==line||!!spec.again;
  if(!it){it={id};NT.list.unshift(it)}else if(again){NT.list.splice(NT.list.indexOf(it),1);NT.list.unshift(it)}
- Object.assign(it,{line,text,pic:spec.pic||it.pic||"",kind:spec.kind||it.kind||"",sticky:!!spec.sticky,go:spec.go||null,goLabel:spec.goLabel||"",t:Date.now()});
+ Object.assign(it,{items:Array.isArray(spec.items)?spec.items.map(x=>plain(x)).filter(Boolean):null,line,text,pic:spec.pic||it.pic||"",kind:spec.kind||it.kind||"",sticky:!!spec.sticky,go:spec.go||null,goLabel:spec.goLabel||"",t:Date.now()});
  if(again)it.seen=false;
  while(NT.list.length>cap()){const i=NT.list.map(x=>!!x.sticky).lastIndexOf(false);NT.list.splice(i>=0?i:NT.list.length-1,1)}
  boxPaint();if(again)chipShow(it);return it}catch(e){console.error("kitNotice",e);return null}}
@@ -93116,7 +93124,9 @@ function picOf(it){return it&&it.pic||""}
 function kitNoticeOpen(id){try{if(typeof kitPanel!=="function")return null;const one=id!=null?NT.list.find(x=>x.id===id):null;
  const U=unread();const L=one?[one]:(U.length?U:NT.list.slice(0,6));if(!L.length)return null;
  const lead=L[0];/* plain kit text rows (kpsec html), not kitFacts: no person figure is guessed from the words — the panel stays SMALL */
- const html=L.map(x=>`<p class="kntp">${esc(x.text)}${!one&&x.seen?" <small>(đã xem)</small>":""}</p>`).join("");
+ /* owner 24/11 flight bug #8: ONE NEWS = ONE ROW. Every notice is its own row of the kit bullet list (ul.kbl, KIT 31.14); a notice that carries several facts (kitKnow batch: x.items) gives one row per fact — never one wall of text joined with « · » */
+ const rows=[];for(const x of L){const seen=!one&&x.seen?" <small>(đã xem)</small>":"";const A=x.items&&x.items.length?x.items:[x.text];A.forEach((t,i)=>rows.push(`<li>${esc(t)}${i===A.length-1?seen:""}</li>`))}
+ const html=`<ul class="kbl kntl">${rows.join("")}</ul>`;
  const go=L.find(x=>typeof x.go==="function");const opts=go?[{n:go.goLabel||"Để ta xem",fx:{},go:()=>{try{go.go()}catch(e){}boxPaint()}},{n:"Để sau",fx:{},go:()=>{boxPaint()}}]:undefined;/* review r4: a kit panel with options has no ✕ (jksize) — «Để sau» always lets her close it without being sent to Dư đồ */
  const m=kitPanel({kind:"notice",title:"Tin báo",sub:one?"":(U.length?`${U.length} tin mới`:"Đã xem hết"),sections:[{html}],opts,onClose:()=>boxPaint()},true);m.__ntc=lead;showModal();picSwap(document,lead);for(const t of [0,150,400,800,1500])setTimeout(()=>{if(NT.open===m)picSwap(document,lead)},t);NT.open=m;
  for(const x of L)x.seen=true;const c=$("kntchip");if(c)chipHide(c);setTimeout(boxPaint,0);return m}catch(e){console.error("kitNoticeOpen",e);return null}}
@@ -93162,7 +93172,7 @@ body.kdlg-on #kntchip,body.kbk-open #kntchip{visibility:hidden!important}`;docum
 const KB={m:new Map(),t:0,n:0};
 function kitKnow(o){try{if(!o||!o.text)return;const k=String(o.key||o.text),p=o.pri|0,ex=KB.m.get(k);if(!ex||p>=ex.pri)KB.m.set(k,{text:plain(o.text),pri:p});if(!KB.t)KB.t=setTimeout(kitKnowFlush,0)}catch(e){console.error("kitKnow",e)}}
 function kitKnowFlush(){try{if(KB.t){clearTimeout(KB.t);KB.t=0}const L=[...KB.m.values()].map(x=>x.text);KB.m.clear();if(!L.length)return null;
- return kitNotice({id:"know:"+Date.now()+":"+(++KB.n),kind:"know",line:L.length===1?L[0]:`Ngươi biết thêm ${L.length} điều`,text:L.join(" · "),again:true})}catch(e){console.error("kitKnowFlush",e);return null}}
+ return kitNotice({id:"know:"+Date.now()+":"+(++KB.n),kind:"know",line:L.length===1?L[0]:`Ngươi biết thêm ${L.length} điều`,text:L.join(" · "),items:L,again:true})}catch(e){console.error("kitKnowFlush",e);return null}}
 /* kitKnowMany([{key,text,pri}…]) = the call for a LIST of things learned at once (the sắc phong news of SELSCENE: one line per girl «<tên> nay là <phẩm>»): all into the same batch, flushed NOW → ONE notice «Ta biết thêm N điều» (returns it) */
 function kitKnowMany(list){try{for(const x of list||[])kitKnow(x);return kitKnowFlush()}catch(e){console.error("kitKnowMany",e);return null}}
 Object.assign(window,{kitNotice,kitNoticeDrop,kitNoticeSeen,kitNoticeList,kitNoticeOpen,kitNoticeBox:boxPaint,kitKnow,kitKnowFlush,kitKnowMany});
@@ -97893,7 +97903,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="bc15a44a5a6a";window.CTM_BUILD=BUILD;
+const BUILD="0db4d3523d42";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
