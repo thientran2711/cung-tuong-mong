@@ -1379,3 +1379,5 @@ LAW-1 likes/dislikes/gifts scan + fix (opus; MAIN 116 07:57Z (e); briefs/D-law1-
 | ROBOT-COOP RUNNER U1 pairs 1-2 SWAP=0 ×10 kiếp (sonnet; briefs/b-robot10-coop-runner.md) | dev/handover/robot/coop-*-p1-2.md | B | session_01N1tNP3yvoJnQ8TgBpcq5Be | RUNNING | 24/11 05:36Z |
 | ROBOT-COOP RUNNER U2 pairs 1-2 SWAP=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p1-2-s.md | B | session_01N1tNP2VQmoYutPcH2wVYLj | RUNNING | 24/11 05:36Z |
 | ROBOT-COOP RUNNER U3 pairs 3-4 SWAP=0 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p3-4.md | B | session_01N1tNP6GBeXdWAwKq3PXxHZ | RUNNING | 24/11 05:36Z |
+PALACE AUDIT + DISTANCE EFFECT (opus; MAIN 116 08:16Z + 08:46Z; briefs/D-palace-distance.md) | reports/palace-audit.md; review/palace-distance | session_01D3E3NYCMYjjACU3pnjjM84 | RUNNING | 24/11 05:40Z (Foreman D ROOT)
+LAW-1 likes/dislikes/gifts scan + fix (opus; MAIN 116 07:57Z (e); briefs/D-law1-likes-gifts.md) | review/law1-gifts | session_01D3E3Nb2AhxBQbQBQDKoKLv | RUNNING | 24/11 05:40Z (Foreman D ROOT)
