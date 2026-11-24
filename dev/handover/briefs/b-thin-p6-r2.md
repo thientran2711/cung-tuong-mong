@@ -1,0 +1,11 @@
+# BRIEF — thin-p6 r2 FIX + RE-LAND (Foreman B, opus BIG reviewer-fixer)
+PRIORITY #1 CHECK ('thin-p6|wc-play|j70c|j71c'): main LIVE 68799300 | review/thin-p6-r1 ff1773ba (bounced) | reports/thin.md «## ENGINE P6», «## REVIEW thin-p6 r1» | claims B.
+Coordinator = Foreman B session_01N1tNP5QAMJMb8uPDHpuXza. Read dev/rules/START_CORE.md (18 LAWS first) + START_WORKER.md + START_REVIEWER.md, then reports/thin.md «## ENGINE P6» + «## REVIEW thin-p6 r1».
+## Bounce (FROM LC9 05:36Z, verbatim)
+"thin-p6-r1 ff1773ba NOT LANDED — branch tests fail ON THE BRANCH HEAD ITSELF (no merge): `node dev/test/wc-play.js` → «WC PLAY: 11 FAIL (6 seeds, 1 forced)» (e.g. wc-day-001 «NPC round: 0 people of the scope chose one of the 4 stances», «tamco applied 0, wanted the way of 2»); `node dev/test/j70c-play.js` → «J70C PLAY: 23 FAIL (4 routes)»; `node dev/test/j71c-play.js` → «J71C PLAY: 12 FAIL». Same container: j7c-play + j72c-play ALL PASS on LIVE, so not the box. Same pattern as thin-p4 (fixture runs fail). Fix, or post the exact passing commands with a fresh LAND READY. Merge with LIVE is easy (jbal2: keep BAL.wc/j70c/j71c + BAL.j72c). LIVE = 68799300."
+MAIN 117 (06:02Z): "find WHY the reviewers passed (stale fixture? test not run?), fix both, and make the reviewer brief run every *-play test of the touched seeds (law 11). New LAND READY lines here."
+## Job
+1. On bare ff1773ba reproduce the 3 no-arg failures; find the root cause (stale fixture vs engine vs test) and write it in reports/thin.md «## REVIEW thin-p6 r2» (one paragraph: why r1 passed).
+2. Fix as a whole family (law 11): every *-play test of P6/P7 (wc, j70c, j71c, fest/j7x if any) must pass with NO args (default fixture) and with the seed-file args. Numbers in BAL (law 4). Do NOT change seed content meaning.
+3. review/thin-p6-r2 = fix + merge LIVE 68799300 (keep BAL.wc/j70c/j71c + BAL.j72c). Gates on the final sha, commands + output lines pasted in the report: every *-play no-arg + args, validators, undef, one-core-guard, quickcheck, 3 old saves, CO-OP GATE coop-e2e both seat orders.
+4. PASS → «LAND READY thin-p6-r2 <full sha> FOR MAIN 117 — …» at the END of dev/handover/FOREMAN_B_STATUS.md + send_message Foreman B. Rollover at START_CTX % + 25 % (ceiling 60 %): handover in the report, tell Foreman B.
