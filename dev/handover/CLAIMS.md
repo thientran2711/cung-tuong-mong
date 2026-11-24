@@ -1259,3 +1259,4 @@ robot10 PHASE 2 nc FIXER (opus; families from nc-*.md bug files; briefs/D-robot1
 | THIN P4-SEEDS-B (sonnet writer): j68 serv + emp | content/thin/j68seeds_b.md | B | session_01N1tNP3HcduKsVYM4N4fvCv | RUNNING | 24/11 01:00Z |
 | THIN P4-SEEDS-C (sonnet writer): j68 sea + court + kid | content/thin/j68seeds_c.md | B | session_01N1tNP3EtvkNhaM33ivECj2 | RUNNING | 24/11 01:00Z |
 | THIN P4-SEEDS-D (sonnet writer): j68 rumor + myst | content/thin/j68seeds_d.md | B | session_01N1tNP5Vz5mY8AXT9jcziti | RUNNING | 24/11 01:00Z |
+REVIEW robot10-reco ORDER #6 (sonnet SMALL test-only; briefs/D-robot10-reco-review.md; also fixes harness robot10-in.js:130 child recount) of 0f00f9dc | review/robot10-reco-rv | session_01964izF7TXbcLZ2oQU5cxKC | RUNNING | 24/11 01:01Z (Foreman D depth 3)
