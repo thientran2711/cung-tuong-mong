@@ -37,7 +37,10 @@ function selxView(){const V=BAL.selx.sc.view;return selxIp()?V.ipad:V.fold}
 function selxBoxB(g){return{x:Math.round(g.w*.04),y:Math.max(8,g.H-176),w:Math.round(g.w*.92)}}
 function selxBoxT(g){return{x:Math.round(g.w*.04),y:8,w:Math.round(g.w*.92)}}
 function selxFigP(p){if(p==="emp")return{kind:"emp"};if(p==="th")return{kind:"th"};if(p==="tq")return{kind:"maid",ref:{role:"eunuch",id:"tq",name:"Tổng quản"}};
- if(p==="ma"){let m=null;try{m=elderBy("gt")}catch(e){}return{kind:"maid",ref:m||{id:"gt",name:"Giáo tập ma ma"}}}return p}
+ if(p==="ma"){let m=null;try{m=elderBy("gt")}catch(e){}const ok=m&&typeof figRoles==="function"&&figRoles(m).length;return{kind:"maid",ref:ok?m:{role:"maid",old:1,age:50,id:"selx-gt",name:"Giáo tập ma ma"}}}return p}
+/* LAW 11 (whole group): a tú nữ of the selection is not in `rivals` yet, so the figure core (j39 figRoles) gave her no figure anywhere (scene, stage, podium);
+   she takes the consort figure set like every other woman of her age (tier: none until the edict) */
+(function(){if(typeof figRoles!=="function")return;const r0=figRoles;figRoles=function(who){const r=r0.apply(this,arguments);return !r.length&&who&&who.tuNu?["consort"]:r};window.figRoles=figRoles})();
 async function selxFig(Sc,p,cx,o){o=o||{};const g=Sc.L.g,fh=o.fh||selxFh(g);const f=await Sc.fig(selxFigP(p),{cx,top:g.H-fh,fh,z:o.z||3});f.__p=p;if(o.hide)f.style.opacity=0;return f}
 /* the j59 name tag under the feet (kitNameTagBox: «Người lạ» / face known / name), kept on the layer */
 function selxTag(Sc,f,p,o){try{const w=document.createElement("div");w.innerHTML=kitNameTagBox(p,o||{});const t=w.firstElementChild;const r=f.getBoundingClientRect(),lr=Sc.L.getBoundingClientRect();
@@ -56,11 +59,11 @@ async function selxScRooms(){const Z=S.selx2;const rooms=(Z.rooms||[]).slice();i
   for(let ri=0;ri<rooms.length&&!me.dead;ri++){const R=rooms[ri];const ppl=R.ids.map(selxBy).filter(Boolean);const base=L.figs.length,n=ppl.length;
    for(let i=0;i<n;i++)await selxFig(Sc,ppl[i],g.w*(i+.5)/n,{hide:1});
    const lines=ppl.map((p,i)=>({fig:base+i,who:"Giáo tập ma ma",focus:true,text:`${selxNmS(p)}.`}));lines.push({fig:null,who:"Giáo tập ma ma",text:`${selxCap(selxNumW(n))} người này ở ${selxSo(R.so)}.`});
-   await selxPlay(Sc,me,{box:selxBoxT(g),lines,onLine:i=>{const f=L.figs[base+i];if(f)f.style.opacity=1}});
+   await selxPlay(Sc,me,{box:selxBoxB(g),lines,onLine:i=>{const f=L.figs[base+i];if(f)f.style.opacity=1}});
    /* the group stands aside as one group (top-left, top-right, then the front), its sở name above it */
    const [sx,row]=spots[ri%spots.length];const h=row?fh*.62:fh*side,top=row?g.H-h:Math.round(g.H*.04);const gw=g.w*(row?.6:.4);
    for(let i=0;i<n;i++){const f=L.figs[base+i];selxMove(f,g.w*sx-gw/2+gw*(i+.5)/n,top,h)}
-   await selxWait(me,BAL.selx.sc.ms);selxLabel(Sc,g.w*sx,Math.max(4,top-4),selxSo(R.so));
+   await selxWait(me,BAL.selx.sc.ms);selxLabel(Sc,g.w*sx,row?Math.max(4,top-30):top+h+4,selxSo(R.so));
    for(let i=0;i<n;i++){const f=L.figs[base+i];if(ppl[i]!==S&&!selxMet(ppl[i]))f.classList.add("kscn-dim")}}
   /* her room: four people, the three roommates still strangers (grey «Người lạ» until she greets them) */
   const mine=rooms[0];const ix=L.figs.map((f,i)=>i).filter(i=>L.figs[i].__p&&mine.ids.includes(L.figs[i].__p===S?"me":L.figs[i].__p.id));
