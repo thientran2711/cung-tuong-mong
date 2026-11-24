@@ -37,8 +37,17 @@
  RESULTS JSON: {pairs:[{job, lives:[{seat,player,dev,tp:{origin,road},kiep,life (robot10 tally),bugs}], lag:{years:[…], run, rejoin}, bugs}]}
  */
 /* NEGTRAP=1 (fixer #2): a setter on S.bac / S.sung / S.danh / S.suc records the call stack the moment one goes below 0 → the 'number' bug detail names the writer */
-const NEGTRAP=()=>{window.__neg=[];setInterval(()=>{try{if(typeof S!=='object'||!S||S.__nt)return;Object.defineProperty(S,'__nt',{value:1,enumerable:false});
- for(const k of ['bac','sung','danh','suc']){let v=S[k];Object.defineProperty(S,k,{enumerable:true,configurable:true,get(){return v},set(x){if(typeof x==='number'&&x<0&&!(v<0)){const st=new Error().stack.split('\n').slice(2,7).map(l=>l.trim().replace(/^at /,'').replace(/ \(.*:(\d+):\d+\)$/,':$1')).join(' < ');window.__neg.push(k+'='+x+' @ '+st);if(window.__neg.length>20)window.__neg.shift()}v=x}})}}catch(e){}},100)};
+/* POSLOG=1 (fix #2): which field of a 'pos' frame flips and flips back within 3 s (the resend detector counts A,B,A as a resend) → LAG row posFlip */
+const POSLOG=()=>{window.__posl=[];window.__posf={};const iv=setInterval(()=>{if(!window.COOP||!COOP.send||COOP.send.__pl)return;const sd=COOP.send;COOP.send=function(t,f){try{if(t&&t.t==='act'){const A=window.__actl=window.__actl||[],now=Date.now(),js=JSON.stringify(t);if(A.some(x=>now-x[0]<3000&&x[1]===js)){const k='act:'+t.k+(t.mode?':'+t.mode:'')+(t.op?':'+t.op:'');window.__posf[k]=(window.__posf[k]||0)+1}A.push([now,js]);if(A.length>80)A.shift()}
+ if(t&&t.t==='pos'){const L=window.__posl,now=Date.now(),js=JSON.stringify(t);
+ for(let j=L.length-1;j>=0&&now-L[j][0]<3000;j--)if(L[j][1]===js){if(j<L.length-1){const a=JSON.parse(js),m=JSON.parse(L[L.length-1][1]);const fl=k=>JSON.stringify(a[k])!==JSON.stringify(m[k]);
+  for(const k of Object.keys(a))if(fl(k)){if(k==='st'){for(const q of Object.keys(a.st||{}))if(a.st[q]!==(m.st||{})[q])window.__posf['st.'+q]=(window.__posf['st.'+q]||0)+1}else window.__posf[k]=(window.__posf[k]||0)+1}}else window.__posf['(same, no change between)']=(window.__posf['(same, no change between)']||0)+1;break}
+ L.push([now,js]);if(L.length>60)L.shift()}}catch(e){}return sd.apply(this,arguments)};COOP.send.__pl=1},200)};
+const NEGTRAP=()=>{window.__neg=[];setInterval(()=>{try{if(typeof S!=='object'||!S)return;
+ /* also the co-op friend entry (a person: ap() adds raw) — tagged 'friend.' */
+ let F=null;try{F=rivals.find(v=>v&&v.coop)||null}catch(e){}
+ for(const [O,tg] of [[S,''],[F,'friend.']]){if(!O||O.__nt)continue;if(O.bac<0)window.__neg.push(tg+'bac='+O.bac+' @ ARRIVED (object built with it)');Object.defineProperty(O,'__nt',{value:1,enumerable:false});
+ for(const k0 of ['bac','sung','danh','suc']){const k=k0;let v=O[k];Object.defineProperty(S,k,{enumerable:true,configurable:true,get(){return v},set(x){if(typeof x==='number'&&x<0&&!(v<0)){const st=new Error().stack.split('\n').slice(2,7).map(l=>l.trim().replace(/^at /,'').replace(/ \(.*:(\d+):\d+\)$/,':$1')).join(' < ');setTimeout(()=>{if(O[k]<0){window.__neg.push(tg+k+'='+x+' @ '+st);if(window.__neg.length>20)window.__neg.shift()}},0)/* still < 0 after this task: apply() itself clamps right after its own add */}v=x}})}}}catch(e){}},100)};
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path'),os=require('os');
 const M=__dirname,REPO=path.join(M,'..','..'),T=path.join(REPO,'dev','test');
 const CB=require(path.join(T,'coop-bot.js'));const {serve,BASE}=require(path.join(T,'coop-serve.js'));
@@ -101,7 +110,7 @@ async function room(job,TP,P,tpNext,bug,out){const b=await chromium.launch(/127\
   for(const [pl,nm] of [[host,'A'],[guest,'B']]){const o=await CB.mk(b,nm,DEVS[pl.dev],WURL);o.pl=pl;pl.o=o;seat[nm]=o;
    /* SEEDED=1 only for a solo-like repro: a seeded Math.random repeats the co-op message / client ids across rooms and reloads → the room
       stalls (seen: idle 676 steps per week, rejoin never back) */
-   if(E.SEEDED==='1')await o.ctx.addInitScript(SEEDJS(hash(job.id+':'+pl.name+':'+out.rooms+':'+SEED)));await o.ctx.addInitScript(H.WSLOG);if(E.NEGTRAP==='1')await o.ctx.addInitScript(NEGTRAP);await o.ctx.addInitScript(PP.INIT);
+   if(E.SEEDED==='1')await o.ctx.addInitScript(SEEDJS(hash(job.id+':'+pl.name+':'+out.rooms+':'+SEED)));await o.ctx.addInitScript(H.WSLOG);if(E.NEGTRAP==='1')await o.ctx.addInitScript(NEGTRAP);if(E.POSLOG==='1')await o.ctx.addInitScript(POSLOG);await o.ctx.addInitScript(PP.INIT);
    o.lastBad='';o.press={};}
   const A=seat.A,B=seat.B;
   /* the scratch page (solo, no room) for the save round-trips */
@@ -134,7 +143,7 @@ async function room(job,TP,P,tpNext,bug,out){const b=await chromium.launch(/127\
   const yearCut=async(year,final)=>{rm.yr.turns=await turnsSince(rm.yr.t);rm.turns.push(...rm.yr.turns);const playMin=Math.max(.05,(Date.now()-rm.yr.t)/6e4);const C=await H.collect(A.p,B.p,{turns:rm.yr.turns,nbTurns:rm.yr.turns.length,playMin}).catch(e=>null);if(!C)return;
    const dev={};for(const [o,sn] of [[A,C.snA],[B,C.snB]]){const l=await o.p.evaluate(()=>window.__wsl).catch(()=>[]);const lt=(sn&&sn.lt||[]).map(x=>x.d);
     dev[o.pl.dev]={seat:o===A?'host':'guest',kbPerMin:Math.round(l.reduce((s,x)=>s+x.b,0)/1024/playMin*10)/10,upKB:Math.round(l.filter(x=>x.d==='up').reduce((s,x)=>s+x.b,0)/1024),dnKB:Math.round(l.filter(x=>x.d==='dn').reduce((s,x)=>s+x.b,0)/1024),
-     resend:H.resend(l),resendBy:(()=>{const r={};const up=l.filter(x=>x.d==='up'&&x.ty!=='ping');for(let i=1;i<up.length;i++)for(let j=i-1;j>=0&&up[i].t-up[j].t<3000;j--)if(up[j].ty===up[i].ty&&up[j].h===up[i].h){r[up[i].ty]=(r[up[i].ty]||0)+1;break}return r})()/* fix #2: which message type resends (same rule as H.resend) */,longTasksPerMin:Math.round(lt.length/playMin*10)/10,longTaskMax:lt.length?Math.max(...lt):0,errs:o.errs.length}}
+     posFlip:await o.p.evaluate(()=>window.__posf||null).catch(()=>null),resend:H.resend(l),resendBy:(()=>{const r={};const up=l.filter(x=>x.d==='up'&&x.ty!=='ping');for(let i=1;i<up.length;i++)for(let j=i-1;j>=0&&up[i].t-up[j].t<3000;j--)if(up[j].ty===up[i].ty&&up[j].h===up[i].h){r[up[i].ty]=(r[up[i].ty]||0)+1;break}return r})()/* fix #2: which message type resends (same rule as H.resend) */,longTasksPerMin:Math.round(lt.length/playMin*10)/10,longTaskMax:lt.length?Math.max(...lt):0,errs:o.errs.length}}
    const y={year,room:code,final:!!final,min:+playMin.toFixed(2),turns:rm.yr.turns.length,metrics:C.metrics,dev};out.lag.years.push(y);
    const over=H.verdict(C.metrics,BUDGET);for(const x of over)bug('lag','co-op LAG budget miss: '+x.split(' ')[0],x+' · game year '+year+' · room '+code+' · per device '+JSON.stringify(dev));
    const stalls=rm.yr.turns.filter(t=>t.ms<0||t.ms>30000).length;if(stalls)bug('lag','co-op buổi stall (both ready, the room took > 30 s or never stepped)',stalls+' of '+rm.yr.turns.length+' buổi in game year '+year);
@@ -198,7 +207,7 @@ async function room(job,TP,P,tpNext,bug,out){const b=await chromium.launch(/127\
   const tm=rm.turns.map(x=>x.ms).filter(x=>x>=0);rm.turnP95=PP.pct(tm,95);
   /* harvest: page errors, robot10-in bugs (one-core, wording, lag) of both seats */
   for(const o of [A,B]){const who=(o===A?'host ':'guest ')+o.pl.dev;for(const m of [...new Set(o.errs)])bug('js','['+who+'] '+m.split('\n')[0].slice(0,200),'room '+code);
-   const rb=await o.p.evaluate(()=>window.__r10?window.__r10.bugs:[]).catch(()=>[]);for(const x of rb)bug(x.type,x.msg,x.detail+(x.at?' @ '+x.at:'')+' · '+who,{n:x.n,save:x.save})}
+   const rb=await o.p.evaluate(()=>window.__r10?window.__r10.bugs:[]).catch(()=>[]);if(E.NEGTRAP==='1'){const ng=await o.p.evaluate(()=>window.__neg||[]).catch(()=>[]);for(const x of ng)bug('number','below 0 ('+(o===A?'host':'guest')+'): '+x.split(' @ ')[0].replace(/=.*/,''),x.slice(0,500))}for(const x of rb)bug(x.type,x.msg,x.detail+(x.at?' @ '+x.at:'')+' · '+who,{n:x.n,save:x.save})}
   console.log(`  ${job.id} room ${code} (${host.name} hosts): ${rm.weeks} weeks · ${rm.buoi} buổi · ${rm.min} min · turn p95 ${rm.turnP95} ms · ${ret}`);
  }finally{await b.close().catch(()=>{})}
  return ret}
