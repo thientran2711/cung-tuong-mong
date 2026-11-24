@@ -1371,3 +1371,39 @@ coop-thin-e-net: asserts unchanged (only the init script moved to lib hostNet; s
 Known, NOT this branch (same on main, as the brief says): coop-lag budget FAIL (week-end stall family → fix-4) and rejoin ok:false (LIVE; flag for MAIN).
 Laws touched: 11 (family scan above) · 13 (check line) — no game/UI/wording/number change, laws 1–10/12 n/a.
 VERDICT: PASS — LAND READY robot-coop-tail-r1 08dc80311255b60ea30cc821c466d5e0b62a1668 (test-only).
+
+## REVIEW robot-coop-fix-3 (BIG, opus; session_01N1tNP59azvSi4P3tJ9EkLK; START_CTX ≈6 %) — FAIL
+PRIORITY #1 CHECK ('robot-coop-fix-3 coop-pos whereOf roster house'): OD 2204–2205 | main dev/build/j9.js:66 whereOf, j95.js:28 j95on / :297 j95sync / :520 whereOf wrap, jagharm.js:179, jcoophl.js:35 HOUSE | review/* robot-coop-fix-3 32121242 (fixers #4–#6), robot10-coop 6576e086 (harness) | claims B fixer #6 4TkcdjyymdxP → #7 3fqMhAjz.
+HEAD 32121242 = ebacc4d9 + LIVE 502c48c9; origin/main at start = 502c48c9 (fix-2-r3 not landed) → bare head = merged head (FF, 0 merge). Branch diff vs main: dev/build/jcoopworld.js only (+ index.html/sw.js build); coop/worker unchanged.
+
+### Verdict: FAIL — the house relay (2nd family) WORKS; the three roster parts (r1/r2/r3) are dead code in co-op, built on a wrong diagnosis
+| # | item | evidence | fix asked |
+|---|---|---|---|
+| 1 | **Law 11 / correctness: rosterFriend (r1), the j95planRival wrap (r2) and the j95sync wrap (r3) never run in co-op.** `j95on()` (j95.js:28) = `… && !(window.COOPW && COOPW.on)`; j95sync / j95plan / the npcEncounters plan / the j95 whereOf wrap are all gated by it, and CW === window.COOPW, so `CW.on` (the wraps' own gate) and a live roster are mutually exclusive. | Probe (/home/user/wt/rvout/probe.js, 2 real pages on local main Worker :8798, game 32121242): at buổi 1 week 0 BOTH seats `j95on:false, j95gate:true, COOPW.on:true, S.roster:false`; `j95sync(0,1)` builds nothing (S.roster still undefined). | Delete the three roster parts (and rosterFriend's call in onPos/keepFriendPos), or prove with a test that each runs in a live co-op room. The commit messages' causes («j95 plans her again / approach / ag_see rewrite her row») cannot happen while COOPW.on. |
+| 2 | The r2/r3 A/B cases («sees the friend at r5, she is at ksp/r3») are the HOUSE family, not the roster: `r5` = palaceOf(friend entry) fallback (her entry's `pal` on that seat ≠ her own). Main's rows fit it: the 6 first/last details of main r1–r3 all show the friend at a palace (`pal`/palaceOf) on one seat while she stands elsewhere or lives in another house on hers (e.g. «6.0 host sees guest at r2 · host entry pal r2 · guest pal r901»). | A/B below: main 97 rows (all «at r<N> / P:x» palace places); fix side 1 row. | Rewrite the comments: one cause (house), one fix (houseWire/houseIn). |
+| 3 | The r3 whereOf wrap = j9's own rule (`S.where[id] \|\| palaceOf`) with friendPl as fallback; in co-op the j95 whereOf wrap is inert, so it adds a 2nd copy of the same rule. Even if j95 ran, the j95sync wrap is circular: j95sync sets `S.where = j95view(roster)` (j95.js:318) BEFORE the wrap reads `S.where[f.id]`, so rosterFriend would copy the NPC row onto itself. | code read j95.js:297–318, jcoopworld.js:446–451 | Keep ONE rule for her place: friendPl (relay → else palace), used by onPos/keepFriendPos; drop the extra whereOf wrap unless a test shows a case j9 gets wrong. |
+| 4 | Law 11 one source: `HOUSE_W` (jcoopworld.js:398) is a second typed copy of jcoophl's `HOUSE` (jcoophl.js:35). | grep | Export the list once (e.g. `CW.HOUSE` from jcoophl, or jcoophl reads jcoopworld's) and use it in both. |
+| 5 | Identity proof missing for houseIn on the HOST: jcoophl npcList() excludes the coop entry, so the host's own palFix can still write the friend entry's housing while the relay writes hers → possible flip / NPC re-house from a display-only field. A/B shows no `hs` field in any posFlip row (fix r1–r3) → no flip seen, but no test. | jcoophl.js:241–249; posFlip keys fix side: st/clk/ask/khac only | Add a unit/e2e case: host palFix after houseIn → friend housing = her relay, 0 NPC housing changes, posKey stable. |
+| 6 | Residual row (fix r2, 1 of 99 weeks): «buổi 7.0 guest sees host at r5, host is at r902» — guest had fpos «7.0 r902» (her own palace = home) yet `S.where[f.id] = r5` (= palaceOf fallback). Detail in /home/user/wt/rvout/fix-r2 (harness row coop-p01s-S12). | A/B | Trace which writer put palaceOf over the relay at 7.0 (setWhere/applyWhere of the host's map vs keepFriendPos order); same family, fix with the relay rule. |
+
+### A/B (own, harness review/robot10-coop 6576e086 overlaid; `SWAP=<r2:1 else 0> SEED=1<r> FLUSH=4 CAP=2400 PCAP=3000 POSLOG=1 NEGTRAP=1 WORKER=http://127.0.0.1:8798 node dev/measure/robot10-coop.js 1 1 1 <out>`; fix = game 32121242, main = game 502c48c9, SAME local main Worker; sides in parallel; same seed per round)
+| round | fix rooms (weeks) | fix coop-pos | main rooms (weeks) | main coop-pos |
+|---|---|---|---|---|
+| r1 SWAP=0 | 20+10+2+20 = 52 | **0** | 33+9 = 42 | 24 |
+| r2 SWAP=1 | 17+8+12 = 37 | **1** (item 6) | 33+22 = 55 | 31 |
+| r3 SWAP=0 | 10 | **0** | 34+36 = 70 | 42 |
+| total | 99 weeks | **1** | 167 weeks | **97** |
+Other rows (not this branch): bạc/danh < 0 guest both sides (fix 2, main 2 → fix-2 Worker territory), save round-trip both sides (queued save family), stuck both sides (week-end stuck family, fix-4), coop-stat main 5 / fix 0, coop-world main 4 / fix 0, lag rows both sides.
+→ The house relay is the real fix: coop-pos 97 → 1 over ≥10-week rooms.
+
+### Gates
+- Worker `npm test` (coop/worker unchanged = main): merge ok · vault ok 48 · seat ALL OK · stale ALL OK · thin ALL OK (rc 0).
+- coop-keymove-unit: 12/12.
+- quickcheck ALONE: `node dev/tools/quickcheck.js` (no args) on 32121242 → QUICKCHECK PASS · 90 s · open 1784 ms · core gates PASS · perf median new render 209 / tab 441 / buổi 1148 / tasks>200 20 (no live build given → no live column, old save skipped)
+- coop-e2e both seat orders: NOT re-run (verdict FAIL on code; fixer #6 had 142/142 ×2 on this sha) — must run on r4.
+- Old save: NOT run here (quickcheck without a live build skips it) — r4 runs quickcheck with the live build.
+
+### Law check
+11 FAIL (items 1, 3, 4: dead/duplicate rules for one fact) · 6b real people: improved (house relay) but item 6 residual · 4 one core: no numbers added · identity: item 5 open · 7/9/10/12: no player text / UI touched.
+
+### For fixer #7 (r4): drop the roster parts (1) + the extra whereOf wrap (3) or prove them live; one HOUSE list (4); host palFix identity test (5); trace item 6; then coop-e2e both orders + quickcheck alone + A/B ≥10 weeks (expect coop-pos ≈0 vs main ≈1 per 2 weeks).
