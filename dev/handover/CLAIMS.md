@@ -1582,3 +1582,5 @@ BIG REVIEW minigame-fix dbd5ea4d | review/minigame-fix | session_01V1ZZH4xEdReni
 BIG REVIEW visitor-fix d60a0ec8 | review/visitor-fix | session_01V1ZZH1BBdQ7Qp6VjTmSeoC | RUNNING | 2026-11-24T22:55Z (MAIN 129)
 day-queue-2 finish (successor of DAYQ-2) | review/day-queue-2 | session_01V1ZZH3rrA333J71Bh71SQr | RUNNING | 2026-11-24T23:16Z (MAIN 129)
 BIG REVIEW viecnho-fix b9865381 | review/viecnho-fix | session_01V1ZZH4x8Bd88AWk6L2D4FH | RUNNING | 2026-11-24T23:31Z (MAIN 129)
+kit-tntile-r2 review | review/kit-tntile | session_01N1tNP3DHgsfJvCeghpVJkk | RUNNING | 24/11 23:34Z (FOREMAN B child7)
+kit-fitfast-r2 review | review/kit-fitfast-r2 | session_01N1tNP3wmZRB6aT6zuxEmMF | RUNNING | 24/11 23:34Z (FOREMAN B child7)
