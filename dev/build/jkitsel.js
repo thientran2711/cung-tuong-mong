@@ -30,6 +30,7 @@ const KIT_SCN={z:57,edge:4,blur:6,veil:"rgba(20,12,8,.45)",veilNight:"rgba(10,16
 .kscn-col>:not(.opts){flex:0 0 auto}
 .kscn-col>.opts{flex:1 1 auto;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:8px}
 .kscn-col>.opts>*{flex-shrink:0}
+.kscn-col>.opts{align-content:start!important;grid-auto-rows:max-content!important}/* KIT §6.2c: a card's height = its content / tier, never stretched to fill the box */
 .kscn-box.kscn-tl:before,.kscn-box.kscn-tl:after{content:"";position:absolute;width:0;height:0;border-style:solid;border-color:transparent}
 .kscn-box.kscn-tl:before{left:-${KIT_SCN.tail}px;top:var(--kty,40px);border-width:11px ${KIT_SCN.tail}px 11px 0;border-right-color:var(--gold,#b8901f)}
 .kscn-box.kscn-tl:after{left:-${KIT_SCN.tail-2}px;top:calc(var(--kty,40px) + 1px);border-width:10px ${KIT_SCN.tail-1}px 10px 0;border-right-color:#fbf1e6}
