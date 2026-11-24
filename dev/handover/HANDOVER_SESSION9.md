@@ -2982,3 +2982,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (09:42Z) SELSCENE-8 Q: quickcheck perf timeout because 7/16 new tú nữ lives end in ban hoa (S.dead) → MAIN YES: quickcheck NEWLIFE/SETTLE rerolls a life ended at the selection (same idiom as cung nữ), no game bypass, reroll count logged + capped, noted in report for the reviewer.
 - (09:55Z) SELSCENE-8 ROLLED (2d7e55da: co-op root fixed, shared cohort, quickcheck walk, direct.js). MAIN shape call: «Ra Dư đồ» co-op stick → keep the free day card in Q under the map (state only, no change to where the map opens; law 16). Opening SELSCENE-9 (brief successor note).
 - (09:56Z) SELSCENE-9 = session_01V1ZZH4SR1QdLaT7aXu5hUu (opus, child of 121). SELSCENE-8 ARCHIVED.
+- (10:05Z) LC10: framefit 178cac37 coop-e2e 136/162 vs bare LIVE 138/162 (2 new world-diff names, not ⊆) → rerunning a pair. MAIN wrote «PAUSE RUNNERS 20 MIN» in FOREMAN_F_STATUS (F reads at :17).
