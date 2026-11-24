@@ -8,3 +8,9 @@ NEXT (needs a decision, each must be proven rect-identical with opt-card-scan + 
 
 ## UPDATE 19:35Z (MAIN 126 decision: do (b) + (c), final sizes identical) — DONE in jksize.js kszLivePick3_0
 Hint = this dialog's last size or the kind|viewport|class cache; test the size below the hint first (must NOT qualify), walk up from the hint, fall back to the full loop if it qualifies. Per pick @1×: Fold 2.9 → 2.0 layouts (48 → 37 ms), iPad 3.5 → 2.1 (70 → 41 ms). Long-task totals are not comparable run to run (late pictures change the number of picks 36…112); per-pick cost is the honest number. Equivalence: kit-fitfast-prof.js EQUIV (every wrong hint ⇒ same rects) 0 diffs on 5 dialog kinds, Fold + iPad. NOT done: (a) decode-first (risk of an unfitted first paint), a diff against the whole kit page vs LIVE (only the 5 dialog kinds via EQUIV).
+
+## r2 (KK23b, 24/11) — option-tier memo
+PRIORITY #1 CHECK: MAIN 127 order | review/kit-fitfast-r1 17b1291f (base), KIT §98.7 | claims KK22 → KK23 → KK23b.
+Change: jopic.js `kitOptTier` memo + no redundant final set/band + conditional kitOdRefit (KIT §98.13). Built index.html/sw.js included.
+Measured (seeded-free, dev scratch bench = kit-fitfast-prof.js with a kitOptTier loop, 755x1000 + 1180x820, 1×): kitOptTier 11 ms → 8.5 cold / 4.4 warm per 2-card dialog.
+Gates run: dev/test/dialog-fixed.js all pass (Fold? it ran 1180x820 summary + no page errors); opt-card-scan.js baseline-vs-branch NOT conclusive — the scan picks random events, base vs base already differs in 5 lines and one run threw «Cannot set properties of null (setting 'must')». Seeded rect diff 0 on the 5 dialog kinds Fold/iPad, kit page, and before/after long-task counts on review/selection-scene: NOT DONE yet. Target ≤50 ms per day card is NOT proven (real day-card shape on SELSCENE head not measured).
