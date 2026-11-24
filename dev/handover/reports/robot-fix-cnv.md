@@ -208,3 +208,27 @@ Laws: 1-3 untouched · 4 harness reads only · 5 untouched · 6b fixed + scanned
 Final build 98040f4c (merge LIVE 15b5e1ff: tests + coop worker only, game code = 659d2f09): quickcheck PASS (render 243/212, tab 504/471, buổi 1491/1337 ms, old save ok, core gates PASS) · coop-e2e 142/142 Fold-host and 142/142 COOP_SWAP=1.
 **VERDICT: PASS — LAND READY robot-fix-cnv 98040f4c** (review/robot-fix-cnv-r1, FF from origin/main 15b5e1ff). Families 3 («Bạc +8») and 4 (memory) gone; families 1 (save drift, 31133 → 118 hits) and 2 (night stall 1/5) much smaller, their rest = residuals R1-R6, owned by ROBOT FIXER cnv #2.
 HANDOVER (context 28 % = START_CTX 3 % + 25 %): this reviewer stops here. The review of review/robot-fix-cnv-2 goes to a FRESH reviewer (Foreman F opens it). Note for it: -2 is built on 1f046fb7 and edits j6.js (saveSettle) — merge it onto review/robot-fix-cnv-r1 98040f4c (this r1 also edits j6 visRelink + jdfv + jagday), re-run r10-shared-ref + r10-play-rt + newlife-leak + coop-e2e both seats on that merge. Box files (not in git): /home/user/wt/rvout (logs, robot run cnv-20261124-1412 + saves).
+
+## ROBOT FIXER cnv #2 — rebase on r1 + LIVE (F #3 order: 98040f4c lost → 659d2f09 + origin/main d0ed42e4)
+**review/robot-fix-cnv-2 f78c695c** = 7aa243a3 + merge c6c3ca76 + merge review/robot-fix-cnv-r1 659d2f09 (j6.js: r1 visRelink body + saveSettle/save kept side by side; only conflict besides index.html/sw.js) + merge origin/main d0ed42e4; index.html/sw.js rebuilt. FF from origin/main d0ed42e4 and from 659d2f09.
+| gate (on f78c695c) | result |
+|---|---|
+| quickcheck | PASS · old save ok · render 344/303, tab 797/636, buổi 1660/2008 ms (new/live) · core gates PASS |
+| coop-e2e Fold-host / COOP_SWAP=1 | 142/142 · 142/142 |
+| r10-shared-ref cnv_mat 30 loads | 0 split families |
+| r10-weak-dead cnv_mat 150 buổi | 0 dead stamps (kav 930 · kfs 72 · kfp 124 · emo 1045) |
+| save-slots · night-softlock | ALL OK · 8/8 PASS |
+| r10-face-band cnv_mat s5 / cnv_chu s3 300 buổi | 0 / 0 |
+| newlife-leak | FAIL 2 = its own 2-year driver (same on main) + «win.__kitLastEvArt new 2 > fresh 0» (a kit counter from main, no person ref) |
+| **r10-play-rt render on cnv_mat s5 / cnv_chu s3 150 buổi** | **DRIFT 17 / 10 families** (S.ag.log/pend/did, S.visit.people kind srv→npc / npc→peddler, S.where, S.npw) — see R7 |
+R7 isolation (same probe, same seeds): 659d2f09 (r1) alone 0 / 1 (R.N.rel) · 659d2f09 + origin/main d0ed42e4 (WITHOUT -2) **16** / 0 · -2 at 173d3dfa (before both merges) 0 / 0 · f78c695c 17 / 10. → the render-on drift comes with the r1 + LIVE merge (agent plan / room list re-made at load), not from saveSettle; the per-seed counts move because every build changes the run.
+R4 (BIG review: journal «Khổng ma ma» → «Lâm ma ma» on reload): **covered** by saveSettle → nmFix("save") (the ma ma rename was a jnamefix clash rename at load; same as «Phú Sát ma ma → Trưởng Tôn ma ma» above). Probe r10-face-band FILTER ^save.S.logs, cnv_ma s5 cautious 300 buổi: load 0 · OP staffInit() 0.
+
+## HANDOVER (ROBOT FIXER cnv #2 → #3; rollover: context ≈ 28 % = START_CTX 3 % + 25 %; F #3 opens the successor)
+State: review/robot-fix-cnv-2 f78c695c pushed = READY for the fresh BIG reviewer EXCEPT R7 below (reviewer decides: land with R7 as a residual, or the successor fixes R7 first). Box files: /home/user/wt/rfx2 (worktree), /home/user/wt/rfx2-out/ (g3 gates, robot, robot2, probes), /home/user/wt/rfx2-r1 (659d2f09 + d0ed42e4 test merge, not pushed — delete).
+Open for the successor (all on review/robot-fix-cnv-2):
+- R7 render-on drift after the r1 + LIVE merge: S.ag.log / pend / did and S.visit.people (kind srv→npc, npc→peddler, name/ini/info/lid) change on reload WITH render on. Start: dev/test/r10-play-rt.js cnv cnv_mat 150 5 on 659d2f09 vs 659d2f09+d0ed42e4 (0 → 16): bisect the main commits between c6c3ca76 and d0ed42e4 (git log c6c3ca76..d0ed42e4) and r1's jagday change (AGD.lz lifeStore) — the room list (S.visit) is loaded as saved since robot-fix-cnv (j6 deser), so a kind change means something re-makes S.visit at load or at the first render after it.
+- R5 AGD.oc (jagday day-plan cache, id+week keyed) not saved: save it or derive it, then lifeStore it (BIG review text above).
+- R6 S.lost.N.at stale holder fixed only by the load census (jil loEntry) → keep c.at in step when the piece moves.
+- R1 night stall: not reproduced (see above); only if the robot shows it again.
+Laws: as above; no UI / wording / kit change; no typed number.
