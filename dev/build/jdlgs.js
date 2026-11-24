@@ -32,20 +32,33 @@ async function dlgsPlay(d,cb){let done=false;const fin=()=>{if(done)return;done=
   Sc.show();const bh=Math.round(g.H*K.boxH),bw=Math.round(g.w*K.boxW);
   DLGS.cur=kitDialogue.play(Sc,{lines:d.lines,box:()=>({x:Math.round((g.w-bw)/2),y:g.H-bh,w:bw}),onDone:()=>{DLGS.cur=null;Sc.close(fin)}});
   DLGS.log.unshift({t:Date.now(),n:d.lines.length,who:d.names.join(" · ")});DLGS.log.length=Math.min(DLGS.log.length,20)}catch(e){console.error(e);try{kitScene.close(true)}catch(x){}fin()}}
-/* the card waits under the scene: showModal plays a card's scene first (once), keeps the modal hidden while it plays */
-(function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){try{const M=$("modal");
-  if(DLGS.playing){if(M)M.hidden=true;return}const m=Q[0];
-  if(m&&m.dlg&&!m.dlg.done&&dlgsOn()&&S&&!S.dead){m.dlg.done=1;if(M)M.hidden=true;dlgsPlay(m.dlg,()=>{if(Q.length)showModal()});return}}catch(e){console.error(e)}
- return s0.apply(this,arguments)};window.showModal=showModal})();
+/* the card waits under the scene: showModal resolves the card's scene ONCE (m.dlg, or a family resolver by the card's pid / tag), plays it, then the card */
+DLGS.R=[];/* [{test:m=>bool, fn:m=>resolved|null}] — one per family */
+function dlgsFor(m){if(m.dlg)return m.dlg;if(m.__dlgk)return null;m.__dlgk=1;for(const r of DLGS.R){try{if(r.test(m)){const d=r.fn(m);if(d){m.dlg=d;DLGS.n++;return d}return null}}catch(e){console.error(e);return null}}return null}
+(function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const M=$("modal");
+  if(DLGS.playing){/* the card stays hidden under the scene; it shows when the last line is read */if(M)M.hidden=true;return}
+  /* the card's own gates run first (evGate / j95 actor gate / clash filter may drop or replace it): only a card that is really shown gets its scene */
+  const r=s0.apply(this,arguments);try{const m=Q[0];if(!M||M.hidden||!m||!dlgsOn()||!S||S.dead)return r;const d=dlgsFor(m);
+   if(d&&!d.done){d.done=1;M.hidden=true;dlgsPlay(d,()=>{if(Q[0]===m){M.hidden=false;const f=M.querySelector(".opt:not(:disabled),#mclose");if(f)f.focus({preventScroll:true})}else if(Q.length)showModal()})}}catch(e){console.error(e)}
+  return r};window.showModal=showModal})();
 
 /* ---------- family adapters (each resolves its OWN cast: law 6b) ---------- */
-/* j72 việc nhờ (110 old templates + THIN P3 composed seeds): the offer card. Unit id = "j72:<seed id>" for a composed seed (tid "c:<id>"), "j72:<tid>" for an old one.
-   Roles: A requester · B second person · M her cung nữ · me. Place: A comes to her palace (offer) / she asked around (A's place). */
+/* shared: roles → people of a family actor table (A6 / q72A actors {k,o,n}); {goi}/{xung} said by the line's speaker to the listener (jvoice kSay) */
+function dlgsActor(a,nm){if(!a)return null;if(a===S)return dlgsMe();return dlgsPer(a.f&&a.f.ref?a.f.ref:a.o,nm||a.n)}
+function dlgsVoice(a){if(!a)return null;if(a===S)return S;try{return kSpk(a)||{srv:"f",name:a.n}}catch(e){return null}}
+function dlgsCtx(act,fill,at){const maid=S.maid?{k:"maid",o:S.maid,n:S.maid.name}:null;const get=r=>r==="me"?S:r==="M"||r==="maid"?maid:act[r]||null;
+ return{who:r=>dlgsActor(get(r)),txt:(t,a,b)=>{const v=dlgsVoice(get(a)),l=dlgsVoice(get(b));if(v&&l)t=kSay(v,l,t);return fill(t)},at}}
+/* j72 việc nhờ (110 old templates + THIN P3 composed seeds): the offer card (pid q72o, pp.x). Unit id "j72:<seed id>" / "j72:<old tid>".
+   Roles A requester · B second person · M her cung nữ. Place: A comes to her palace / she asked around (A's place). A family letter: L = M. */
 function dlgsJ72Id(tid){return"j72:"+String(tid).replace(/^c:/,"")}
-function dlgsJ72(x,how){try{const sp=dlgsGet(dlgsJ72Id(x.tid));if(!sp)return null;const X=q72X(x);if(!X)return null;
- const per=a=>a?dlgsPer(a.k==="fam"?S.maid:a.o,a.k==="fam"&&S.maid?S.maid.name:a.n):null;
- const mai=S.maid?{srv:"f",name:S.maid.name}:null,vo=r=>r==="me"?S:r==="A"?(X.A.k==="fam"?mai:kSpk(X.A)||{srv:"f"}):r==="B"?(X.B&&kSpk(X.B)):r==="M"?mai:null;
- return dlgsResolve(sp,{who:r=>r==="A"?per(X.A):r==="B"?per(X.B):r==="M"?(S.maid?dlgsPer(S.maid,S.maid.name):null):null,
-  txt:(t,a,b)=>{const v=vo(a),l=vo(b);if(v&&l)t=kSay(v,l,t);return q72Txt(t,X)},at:how==="ask"?q72Home(X.A):"home"})}catch(e){console.error(e);return null}}
-if(typeof q72Offer==="function"){const f0=q72Offer;q72Offer=function(x,how){const n0=Q.length;const r=f0.apply(this,arguments);try{if(r)dlgsAttach(n0,dlgsJ72(x,how),m=>m.t==="Việc nhờ")}catch(e){console.error(e)}return r};window.q72Offer=q72Offer}
+function dlgsJ72(x,how){const sp=dlgsGet(dlgsJ72Id(x.tid));if(!sp)return null;const X=q72X(x);if(!X)return null;
+ const A=X.A&&X.A.k==="fam"?(S.maid?{k:"maid",o:S.maid,n:S.maid.name}:null):X.A;
+ return dlgsResolve(sp,dlgsCtx({A,B:X.B},t=>q72Txt(t,X),how==="ask"?q72Home(X.A):"home"))}
+DLGS.R.push({test:m=>m.pid==="q72o"&&m.pp&&m.pp.x,fn:m=>dlgsJ72(m.pp.x,m.pp.how)});
+/* j68 composed decisions (THIN P4; pid "e68c:<seed id>", pp = the cast a0/a1). Roles A, B (the seed's), M. */
+DLGS.R.push({test:m=>/^e68c:/.test(m.pid||""),fn:m=>{const sid=m.pid.slice(5),sp=dlgsGet("j68:"+sid);if(!sp)return null;const s=E68I["c:"+sid],sd=typeof J68C_SEEDS!=="undefined"&&J68C_SEEDS[sid];if(!s||!sd)return null;
+ const X=e68X(s,m.pp||{});if(!X)return null;return dlgsResolve(sp,dlgsCtx({A:X.A,B:X.B},t=>e68Fill(j68cO(t,sd),X),null))}});
+/* j7 composed intrigue (THIN P2; pid "j7c", pp.sid + pp.c cast). Roles = the seed's role ids (plotter, target, …) + maid. */
+DLGS.R.push({test:m=>m.pid==="j7c"&&m.pp&&m.pp.sid,fn:m=>{const sp=dlgsGet("j7:"+m.pp.sid);if(!sp)return null;j7cSeeds();const sd=J7I[m.pp.sid];if(!sd)return null;const X=j7cActors(sd,m.pp.c||{});if(!X)return null;
+ return dlgsResolve(sp,dlgsCtx(X,t=>j7cFill(t,X),null))}});
 try{window.DLGS=DLGS;window.dlgsResolve=dlgsResolve;window.dlgsPlay=dlgsPlay;window.dlgsGet=dlgsGet}catch(e){}
