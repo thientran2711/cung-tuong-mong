@@ -18,7 +18,7 @@ function selxW(){return BAL.selx.w}
 function selxBase(p){const W=selxW();p=p||S;return (W.base||0)+(W.sac||0)*(+p.sac||0)+(W.duc||0)*(+p.duc||0)+(W.tai||0)*(+p.tai||0)}
 /* marks: {mini, dd, hx} each 0..10 (a missing test counts as the middle mark 5); luck: false = no noise (for the odds/preview and tests) */
 function selxScore(p,m,luck){const W=selxW();m=m||{};const mk=k=>m[k]==null?5:Math.max(0,Math.min(10,+m[k]||0));const n=BAL.selx.noise||0;
- return selxBase(p)+W.mini*mk("mini")+W.dd*mk("dd")+W.hx*mk("hx")+(luck===false||!n?0:R(2*n+1)-n)}
+ return selxBase(p)+W.mini*mk("mini")+W.dd*mk("dd")+W.hx*mk("hx")+(W.imp||0)*mk("imp")/* first impression (SELSCENE-5, OD ~08:55Z): the royals' look, the same default for all */+(luck===false||!n?0:R(2*n+1)-n)}
 function selxResult(place){const B=BAL.selx;if(!(place>=1&&place<=B.yard.kept))return{kept:false,step:null};return{kept:true,step:B.placeStep[place-1]}}
 function selxHoaThan(k){return (BAL.selx.hoaThan||[]).includes(k||(S&&S.origin&&S.origin.k))}
 function selxRank(p,step,o){o=o||{};const k=o.k||(S&&S.origin&&S.origin.k);const r0=o.r0!=null?o.r0:((S&&S.origin&&S.origin.r)||0);const ht=selxHoaThan(k);
@@ -35,14 +35,15 @@ function selxNpcMarks(v,t){t=t||{};const lv=(()=>{try{return t.art&&typeof kg82L
  const NM=BAL.selx.npcMini;const mini=Math.max(0,Math.min(10,Math.round(NM.base+lv*NM.lv+R(2*NM.r+1)-NM.r)));/* law 4: numbers from BAL */const pickBy=(e,rf)=>{if(!e||!e.options)return"";const net=(()=>{try{return netOf(v)||[]}catch(x){return[]}})().join(" ");
   const ST={khiem:/Khiêm nhường|Kín đáo|An phận|Điềm tĩnh/,manh:/Kiêu ngạo|Nóng nảy|Tham vọng/,dido:/Nhiều chuyện|Ham vui|Xảo quyệt/,that:/Thật thà|Thanh liêm|Trọng nghĩa/,
    giuyen:/Điềm tĩnh|Kín đáo|Lạnh lùng/,tuxu:/Nóng nảy|Ân cần|Rộng lượng/,caunguoi:/Khiêm nhường|An phận/,nhan:/Thật thà|Thanh liêm/};
-  const o=e.options.find(x=>ST[x.stance]&&ST[x.stance].test(net))||e.options[R(e.options.length)];return rf?rf(o):selxReact(o,t.keys)};/* rf = the asking royal's reaction (jselxday selxReactR, the same for her) */
+  const kn=rf&&e.__k&&(v.__kn||{})[e.__k]>=1?e.options.find(x=>rf(x)==="+"):null;/* SELSCENE-5: she asked the ma ma (law 1, the same road as her) */
+  const o=kn||e.options.find(x=>ST[x.stance]&&ST[x.stance].test(net))||e.options[R(e.options.length)];return rf?rf(o):selxReact(o,t.keys)};/* rf = the asking royal's reaction (jselxday selxReactR, the same for her) */
  return{mini,dd:selxMark(pickBy(t.dd,t.rdd)),hx:selxMark(pickBy(t.hx,t.rhx))}}
 /* the other tú nữ of this life: real people (law 6b), drawn like the mid-game tuyển tú (j27) — own standing + face + age from BAL */
 function selxWt(L){const t=L.reduce((a,x)=>a+x[1],0);let r=R(t);for(const x of L){if((r-=x[1])<0)return x[0]}return L[0][0]}
 function selxGirls(n){const B=BAL.selx;n=n==null?B.yard.n-1:n;const L=[];for(let i=0;i<n;i++){const r0=selxWt(B.npcRank);const v=newRival(r0);try{Object.assign(v,drawFace())}catch(e){}
   v.age=B.npcAge[0]+R(B.npcAge[1]);v.tuNu=1;v.r0=r0;L.push(v)}return L}
 /* THE CONTEST: the same 3 tests and the same formula for everyone (law 1); ties: higher Sắc first. Returns the ranked list [{v, sc, marks, place, kept, step}] */
-function selxContest(girls,her){const B=BAL.selx;const L=(girls||[]).map(v=>{const marks=v.__marks||selxNpcMarks(v,her&&her.t||{});return{v,marks,sc:v.__sc!=null?v.__sc:Math.round(selxScore(v,marks))}});
+function selxContest(girls,her){const B=BAL.selx;const L=(girls||[]).map(v=>{const marks=v.__marks||Object.assign(selxNpcMarks(v,her&&her.t||{}),v.__impMk!=null?{imp:v.__impMk}:{});return{v,marks,sc:v.__sc!=null?v.__sc:Math.round(selxScore(v,marks))}});
  if(her)L.push({v:S,marks:her.marks||{},sc:her.sc!=null?her.sc:Math.round(selxScore(S,her.marks||{}))});
  L.sort((a,b)=>b.sc-a.sc||(+b.v.sac||0)-(+a.v.sac||0));L.forEach((x,i)=>{x.place=i+1;const r=selxResult(i+1);x.kept=r.kept;x.step=r.step});return L}
 function selxIntake(){const I=BAL.selx.intake;return I.min+R(I.max-I.min+1)}
