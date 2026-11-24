@@ -26,15 +26,36 @@ function union3(base, a, b) {
   for (const e of b) if (!bs.has(k(e)) && !seen.has(k(e))) { seen.add(k(e)); out.push(e); }
   return out;
 }
-/* robot-coop-fix-2: a PERSON's amounts may not leave the game's own range after the additive merge. Both seats can spend from one pot in one
-   week (each side valid on its own): base 20, host copy 5, guest copy 4 → 5 + (4 − 20) = −11 bạc on both screens (robot10-coop: guest bạc −7 / −11
-   "arrived" in the merged week). Ranges = the game's clamps (dev/build/j8.js ap() for persons, j1.js apply() for her own S): stats 0–100, th/hh
-   −100…100, bạc ≥ 0. Only on objects that ARE a person (name + rank + a stat), never on stored effect objects like {bac:-5}. Clamped here, on the
-   Worker, so the stored state (next week's merge base) and both screens hold the same value. */
-const PCL = { sung: [0, 100], danh: [0, 100], suc: [0, 100], sac: [0, 100], tai: [0, 100], tamco: [0, 100], duc: [0, 100], ghen: [0, 100], an: [0, 100],
-  th: [-100, 100], hh: [-100, 100], bac: [0, Infinity] };
-const isPerson = o => isObj(o) && typeof o.name === "string" && ("rank" in o || "role" in o || "alive" in o) && ("sung" in o || "danh" in o || "suc" in o || "bac" in o);
-function clampP(o) { for (const k in PCL) { const v = o[k]; if (isNum(v)) { const [lo, hi] = PCL[k]; if (v < lo) o[k] = lo; else if (v > hi) o[k] = hi; } } return o; }
+/* robot-coop-fix-2 (r2: ONE CORE + the whole group): a PERSON's numbers may not leave the game's own range after the additive merge. Both seats
+   can spend from one pot in one week (each side valid on its own): base 20, host copy 5, guest copy 4 → 5 + (4 − 20) = −11 bạc on both screens
+   (robot10-coop NEGTRAP). The ranges are NOT typed here: ranges.gen.js is generated from BAL.personRange (dev/build/jbalpr.js) + BAL.kh, the
+   same table the game's ap / apply / statSet read (test/range.test.mjs proves equality). A person = any object with a string name (her S, a
+   consort, a maid / staff / child / man / official; also tonight's pick rows S.nightWhy.rows — snapshots of in-range numbers, so the clamp
+   leaves them as they are). Every STAT field of a person in its range, every value of a MAP field (rl / ro / af …, keyed by person id) in its
+   range, Sức also under sucCap = the game's jkh formula over the same BAL.kh. Effect objects ({bac:-5}: no name) are never touched. Done on
+   the Worker, so the stored state (next week's merge base) and both screens hold the same value. */
+import { STAT, MAP, SUB, WORLD, KH } from "./ranges.gen.js";
+const inR = (v, r) => Math.max(r[0] == null ? -Infinity : r[0], Math.min(r[1] == null ? Infinity : r[1], v));
+const isPerson = o => isObj(o) && typeof o.name === "string";
+/* jkh.js khOf / sucCap, the same formula (khInit's defaults without writing them; test/range.test.mjs compares with jkh.js on 500 people) */
+function sucCap(p) {
+  const K = KH; if (!K || !K.on || !isObj(p)) return 100;
+  const init = p.khScar == null; /* khInit: no scar yet → oldScar × children, temporary loss 0 */
+  const scar = init ? K.oldScar * (Array.isArray(p.kids) ? p.kids.length : 0) : p.khScar, tmp = init ? 0 : p.khTmp;
+  const kh = Math.max(K.capMin, Math.round(100 - Math.max(0, (p.age || 0) - K.ageFrom) * K.agePer - (scar || 0) - (tmp || 0)));
+  return Math.min(100, Math.round(K.maxBase + K.maxPer * kh));
+}
+function clampP(o) {
+  for (const k in STAT) { const v = o[k]; if (isNum(v)) { const w = inR(v, STAT[k]); if (w !== v) o[k] = w; } }
+  for (const k in MAP) { const m = o[k]; if (isObj(m)) for (const id in m) { const v = m[id]; if (isNum(v)) { const w = inR(v, MAP[k]); if (w !== v) m[id] = w; } } }
+  for (const k in SUB) { const x = o[k]; if (isObj(x)) inF(x, SUB[k]); }
+  if (isNum(o.suc)) { const c = sucCap(o); if (o.suc > c) o.suc = c; }
+  return o;
+}
+function inF(x, T) { for (const f in T) { const v = x[f]; if (isNum(v)) { const w = inR(v, T[f]); if (w !== v) x[f] = w; } } return x; }
+/* world objects (W.S[key], e.g. the court's biến / khó): the same additive overflow, not a person */
+function clampW(st) { if (isObj(st) && isObj(st.W) && isObj(st.W.S)) for (const k in WORLD) if (isObj(st.W.S[k])) inF(st.W.S[k], WORLD[k]); return st; }
+export { sucCap, clampP, isPerson, clampW };
 const idArr = x => Array.isArray(x) && x.length > 0 && x.every(e => isObj(e) && e.id != null);
 function m3(base, a, b, inP, key) {
   if (UNION.has(key) && prim(a) && prim(b) && (base === undefined || base === null || prim(base))) return union3(base, a, b);
@@ -70,5 +91,5 @@ function m3(base, a, b, inP, key) {
   }
   return a;
 }
-export function merge3(base, A, B) { return m3(base, A, B, false); }
+export function merge3(base, A, B) { return clampW(m3(base, A, B, false)); }
 export { eq };
