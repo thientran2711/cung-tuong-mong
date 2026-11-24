@@ -53,7 +53,7 @@ function k61St(e){if(!e||!S||e===S)return 3;{const d=k61StageDesc(e);if(d===null
 function met61(e){try{return !!(S&&S.met&&S.met[e.id]!=null)||/* a meeting in week 0 stores 0 (review ts-a r6) *//* a cung nữ has met the consort she serves (review/small-bugs-2) */!!(S&&S.srv&&e&&S.srv.mid===e.id)||(typeof sameHouse==="function"&&sameHouse(S,e))}catch(x){return false}}
 /* KNOW-NOTICE: the ONE writer of S.met (a face seen for the first time = a kit notice at that moment; later meetings only refresh the week) */
 function k61MetSet(v){try{if(!S||!v||v.id==null)return;S.met=S.met||{};const first=S.met[v.id]==null;S.met[v.id]=wk();
- if(first&&v!==S&&typeof kitKnow==="function")kitKnow({key:"id:"+kOf61(v),pri:0,text:k61Named(v)?`Ngươi đã gặp mặt ${k61Title(v)}.`:`Ngươi đã thấy mặt ${k61Desc(v)}; chưa biết tên.`})}catch(e){console.error("k61MetSet",e)}k61RankSync()}
+ if(first&&v!==S&&typeof kitKnow==="function"&&!window.__k61noKn)kitKnow({key:"id:"+kOf61(v),pri:0,text:k61Named(v)?`Ngươi đã gặp mặt ${k61Title(v)}.`:`Ngươi đã thấy mặt ${k61Desc(v)}; chưa biết tên.`})}catch(e){console.error("k61MetSet",e)}k61RankSync()}
 /* KNOW-NOTICE (owner rule covers "phẩm"): the rank of ANOTHER person she knows (face seen) changes — promotion, demotion, crowned Hoàng hậu, a friend in co-op — she is told once, batched
    (S.rkSeen[id] = the rank she last knew; the first sight of a face is already told by k61Know with the rank in its title/descriptor, this only records it). Called after every week, every promoteP and every k61Know/k61MetSet. */
 function k61RankSync(){try{if(!S||!S.known||S.dead||typeof kitKnow!=="function")return;S.rkSeen=S.rkSeen||{};

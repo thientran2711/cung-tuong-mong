@@ -67,7 +67,7 @@ function visitArrive(v){try{const up=grRank(v)>grRank(S),nmd=k61Named(v),T=k61Ca
  const s=grSelf(v,S);return home?`Ngoài cửa có tiếng thưa: “${s} xin cầu kiến.”`:`Có người rảo bước tới, cúi đầu thưa: “${s} xin ra mắt.”`}catch(e){return""}}
 /* a visitor who is NOT a consort (quan, thái y, thái giám, cung nữ…): the same door line, in her own voice by kind */
 function visitArriveK(e){try{const s=grSelf(e,S);return S.place==="home"?`Ngoài cửa có tiếng thưa: “${s} xin cầu kiến.”`:`Có người rảo bước tới, cúi đầu thưa: “${s} xin ra mắt.”`}catch(x){return""}}
-function visitSeen(v){try{if(!v||v===S||!S||!S.known)return;window.__k61noKn=1;try{if(typeof k61St==="function"&&k61St(v)<2)k61Know(v,"",true,2)}finally{window.__k61noKn=0}grMet(v)}catch(e){}}
+function visitSeen(v){try{if(!v||v===S||!S||!S.known)return;window.__k61noKn=1;try{if(typeof k61St==="function"&&k61St(v)<2)k61Know(v,"",true,2);grMet(v)}finally{window.__k61noKn=0}}catch(e){}}
 /* the preview of "Chào hỏi" (what is sure: her own name; theirs by the rule — the nết part is not known before) */
 function grPreview(a,b){const ra=grRank(a),rb=grRank(b);const P=grPron(b);const L=["thấy mặt, rõ thân phận"];
  L.push(ra<rb?`ngươi xưng danh trước, ${P} biết tên ngươi`:ra===rb?"ngang hàng: mỗi bên xưng danh hay không tùy tính nết":`${P} phận dưới, xưng danh trước`);
