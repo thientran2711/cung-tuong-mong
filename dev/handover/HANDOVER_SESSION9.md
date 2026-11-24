@@ -3007,3 +3007,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (11:48Z) SSK test-mrfoot d521656c (SELSCENE-10; LIVE+fix coop-e2e 142/142 ×2). B SMALL rv ordered in FOREMAN_B_STATUS (B session not reachable by send_message — other account). LC10 told.
 - (12:00Z) KIT READY review/kit-mapgo e1073f6e (KK19; MAIN looked at Fold before/after: A ca sở / Phật đường boxes apart) → B SMALL rv ordered (after test-mrfoot).
 - (12:05Z) LC10 pre-gated test-mrfoot d521656c (FF, quickcheck PASS, coop 142/142 ×2) — waits B SMALL PASS (OD:L1370, no skip). B + E ordered to re-merge law1-audit / leave-palace on d521656c now.
+- (12:29Z) SELSCENE-10 ROLLED (c269fce4: co-op consort order fixed; days' clock fix incomplete — host moved twice). SELSCENE-11 = session_01V1ZZH1An4rTF5a1b9G4kJw (opus, child of 122). SELSCENE-10 ARCHIVED (test-mrfoot d521656c SSK stays with B rv).
