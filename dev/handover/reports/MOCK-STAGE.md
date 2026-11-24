@@ -1,3 +1,7 @@
+# KK21 = session_01V1ZZH4mC78eGamqCp84zzN, START_CTX ~2 % (get_session reads 0), roll at ~27 %, ceiling 60 %, depth 1 (limit 8); MAIN 125 session_01V1ZZGzMTVHzyPyJN9e5Qzp (24/11 ~18:25Z)
+PRIORITY #1 CHECK: KIT_REQUESTS RING-DESIGN-3 items 3,4,6,7 | review/kit-woodskin 09c4386c (new) | claims KK20 → KK21.
+DONE 1-3 (one branch review/kit-woodskin 09c4386c from main 502c48c9; KIT §98): kitPick hang look + wood skin (jkpick.js), kitDim (BAL.kdim), jplst title/rail-chip fix (+ «tạm» tag), test dev/test/kit-pick.js PASS Fold 755x1000 + iPad 1180x820 (+412x1058). Known: 390x844 six acts overflow 1 plaque; test needs a re-run if «no stage figure». Wood = code tokens, --kpk-img slot for Foreman C paint. NEXT: kit-fitfast, then moment album.
+
 # HANDOVER KK20 → KK21 (24/11 ~17:55Z; KK20 context past START+25 % (many image reads); MAIN 125 session_01V1ZZGzMTVHzyPyJN9e5Qzp opens KK21)
 PRIORITY #1 CHECK: KIT_REQUESTS SELSCENE-13 row | review/kit-rewardplate deab3d84, kit-dialogue-vn a478ddfc, kit-evframe-r2 e067900f | claims KK20 → KK21.
 DONE: dim3 mock with sếp since 17:30Z (img/_review/dim3/index.html; wait for her GO before kit-dim / optfit builds; wipe CDN dim dim2 dim3 optfit mapgo titleplate after verdict). Scripts in scratch only (/home/user/wt/kk20m/dev/mock-stage/dim4.js; may be gone).
