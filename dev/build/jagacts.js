@@ -42,7 +42,7 @@ agReg("consort","shop",(v,N,need)=>{if(need&&need!=="sung"&&need!=="ally"&&need!
  const i=v.inv.findIndex(e=>e&&!e.h&&IT[e.k]&&itm(e.k).gv&&!e.t);
  if(i>=0){const T=[];if(!need||need==="sung")T.push(["emp",N.sung||0,"sung"]);if(!S.thDead&&(!need||need==="th"))T.push(["th",N.th||0,"th"]);
   for(const [t,w,n] of T){const u=agcU(v,N,100,{[n]:X.gift.g},{},"help");if(u>0)O.push({k:"cx:gift",t:t==="emp"?S.emp:"th",u,tag:"help",act:t==="emp"?"dâng quà lên Hoàng thượng":"dâng quà lên Thái hậu",at:(kh)=>t==="emp"?agEmpAt(kh):agThAt(kh),gt:t})}
-  if(!need||need==="ally"){const fr=others(v).filter(t=>t&&t!==v&&(t===S||t.alive)&&aff(v,t)>=BAL.ag.goal.friend);if(fr.length){const t=mindPickBy(fr,x=>BAL.mind.pick.ag.base+aff(v,x),v);const u=agcU(v,N,100,{ally:X.gift.g},{},"help");if(t&&u>0)O.push({k:"cx:gift",t,u,tag:"help",act:"đem quà sang tặng",at:(kh,vv,tt)=>tt===S?"home":agAt(tt,kh)})}}}
+  if(!need||need==="ally"){const fr=others(v).filter(t=>t&&t!==v&&(t===S||t.alive)&&aff(v,t)>=netTh(v,"than"));if(fr.length){const t=mindPickBy(fr,x=>BAL.mind.pick.ag.base+aff(v,x),v);const u=agcU(v,N,100,{ally:X.gift.g},{},"help");if(t&&u>0)O.push({k:"cx:gift",t,u,tag:"help",act:"đem quà sang tặng",at:(kh,vv,tt)=>tt===S?"home":agAt(tt,kh)})}}}
  return O});
 agRunReg("cx:buy",(v)=>{const L=(S.shop||[]).filter(k=>IT[k]&&itm(k).gv&&!itm(k).il&&(v.bac||0)>=itm(k).pr+BAL.ag.cx.buy.keep);if(!L.length)return"";const k=npwPick(L,x=>itm(x).pr);return buy(v,k)?`${v.name} mua ${itm(k).n} ở Nội vụ phủ`:""});
 agRunReg("cx:gift",(v,t)=>{const i=v.inv.findIndex(e=>e&&!e.h&&IT[e.k]&&itm(e.k).gv&&!e.t);if(i<0||!t)return"";const r=giveTo(v,t===S.emp?"emp":t,i);return r?String(r).replace(/\.\s*$/,""):""});

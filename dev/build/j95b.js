@@ -238,12 +238,12 @@ function j95bTrace(u){const z=j95bZ();const r=z.rum.find(x=>x.u===u);if(!r)retur
  else msg=x?"Lần theo mãi vẫn không ra kẻ tung tin.":"Lời đồn không rõ từ đâu ra, không lần được.";
  log(msg);Q.push({t:"Tra tin đồn",h:`<p>${msg}</p>`});return msg}
 /* who someone can whisper to: a consort the spreader is not on bad terms with and who does not already hate her */
-function j95bListener(x){const L=liveRivals(true).filter(y=>y!==x&&!sameHouse(y,S)&&aff(y,S)>-30&&(!x||aff(x,y)>=-5));return npwPick(L,y=>1+Math.max(0,x?aff(x,y):0)+Math.max(0,-aff(y,S)))}
+function j95bListener(x){const L=liveRivals(true).filter(y=>y!==x&&!sameHouse(y,S)&&aff(y,S)>netTh(y,"ghet")&&(!x||aff(x,y)>netTh(x,"ky")));return npwPick(L,y=>1+Math.max(0,x?aff(x,y):0)+Math.max(0,-aff(y,S)))}
 function j95bWeek(){if(!j95bOn()||S.dead||(typeof isSrv==="function"&&isSrv()))return;const z=j95bZ();if(z.wk===wk())return;z.wk=wk();
  /* the record of her harm fades */for(const id in z.harm)if(wk()-z.harm[id].w>12)delete z.harm[id];
  for(const x of liveRivals(true)){if(x.confined)continue;
   /* evidence in hand (j78): someone holding proof of her real harm tells the victim */
-  if(evG(x,S)>=1){for(const yid in z.harm){const y=RV(+yid);if(!y||y===x||!y.alive||y.out)continue;if(!motiveOK(x,S,"expose").ok)break;if(npcWhy("exposeMe",{x})){const g=motiveOK(x,S,"expose");j95bAct("v"+x.id,"expose","me",g,"rumor:j78");j95bSeed(x,y,"j78")}break}}
+  if(evG(x,S)>=netTh(x,"repay")){for(const yid in z.harm){const y=RV(+yid);if(!y||y===x||!y.alive||y.out)continue;if(!motiveOK(x,S,"expose").ok)break;if(npcWhy("exposeMe",{x})){const g=motiveOK(x,S,"expose");j95bAct("v"+x.id,"expose","me",g,"rumor:j78");j95bSeed(x,y,"j78")}break}}
   /* a lie from someone with a motive */const g=motiveOK(x,S,"rumor");if(!g.ok)continue;
   if(npcWhy("lieMe",{x})){const y=j95bListener(x);if(y){j95bAct("v"+x.id,"rumor","me",g,"rumor:tick");j95bSeed(x,y,"tick")}}}
  /* those who believe retaliate (the gate sees the rumour as their reason) */

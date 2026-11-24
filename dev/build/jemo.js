@@ -75,11 +75,11 @@ function emoWeek(){if(!emoOn())return;const W=emoW();S.emoSnap=S.emoSnap||{};con
  emoFromLegacy();
  const others=p=>P.filter(x=>x!==p);
  for(const p of P.concat((rivals||[]).filter(v=>!v.alive))){const k=emoKey(p),o=S.emoSnap[k],n=emoSnap(p);S.emoSnap[k]=n;if(!o)continue;const nm=emoName(p);
-  if(!n.alive&&o.alive){for(const x of others(p)){const a=aff(x,p),oa=oan(x,p);if(a>=EJ().wk.friend)emoEv(x,"friendDie",`${nm} qua đời`);else if(oa>=EJ().wk.foeOan||a<=EJ().wk.foeAff)emoEv(x,"foeDie",`${nm} qua đời`)}continue}
+  if(!n.alive&&o.alive){for(const x of others(p)){const a=aff(x,p),oa=oan(x,p);if(a>=netTh(x,"than"))emoEv(x,"friendDie",`${nm} qua đời`);else if(oa>=netTh(x,"act")||a<=netTh(x,"ghet"))emoEv(x,"foeDie",`${nm} qua đời`)}continue}
   if(!n.alive)continue;
-  if(n.r>o.r){emoEv(p,"selfUp",`được tấn phong ${typeof rkName==="function"?rkName(p):""}`.trim());for(const x of others(p)){const a=aff(x,p);if(a>=EJ().wk.upFriend)emoEv(x,"friendUp",`${nm} được tấn phong`);else if(a<EJ().wk.upRival)emoEv(x,"rivalUp",`${nm} được tấn phong`,emoKey(p))}}
-  if(n.r<o.r&&!n.out){emoEv(p,"selfDown","bị giáng phẩm");for(const x of others(p))if(oan(x,p)>=EJ().wk.downOan||aff(x,p)<=EJ().wk.downAff)emoEv(x,"foeDown",`${nm} bị giáng`)}
-  if(n.out&&!o.out){emoEv(p,"cold","bị đày vào lãnh cung");for(const x of others(p))if(oan(x,p)>=EJ().wk.downOan||aff(x,p)<=EJ().wk.downAff)emoEv(x,"foeDown",`${nm} vào lãnh cung`)}
+  if(n.r>o.r){emoEv(p,"selfUp",`được tấn phong ${typeof rkName==="function"?rkName(p):""}`.trim());for(const x of others(p)){const a=aff(x,p);if(a>=netTh(x,"than"))emoEv(x,"friendUp",`${nm} được tấn phong`);else if(a<EJ().wk.upRival)emoEv(x,"rivalUp",`${nm} được tấn phong`,emoKey(p))}}
+  if(n.r<o.r&&!n.out){emoEv(p,"selfDown","bị giáng phẩm");for(const x of others(p))if(oan(x,p)>=netTh(x,"oan")||aff(x,p)<=netTh(x,"ky"))emoEv(x,"foeDown",`${nm} bị giáng`)}
+  if(n.out&&!o.out){emoEv(p,"cold","bị đày vào lãnh cung");for(const x of others(p))if(oan(x,p)>=netTh(x,"oan")||aff(x,p)<=netTh(x,"ky"))emoEv(x,"foeDown",`${nm} vào lãnh cung`)}
   if(n.conf&&!o.conf)emoEv(p,"punished","bị cấm túc");
   if(n.kidsAll>o.kidsAll){emoEv(p,"kidBorn","mẹ tròn con vuông");for(const x of others(p))if(aff(x,p)<EJ().wk.kidAff)emoEv(x,"otherKid",`${nm} sinh hạ hoàng tự`,emoKey(p))}
   if(n.kids<o.kids-(n.kidsAll-o.kidsAll)||(n.kids<o.kids&&n.kidsAll===o.kidsAll))emoEv(p,"kidDie","mất con");

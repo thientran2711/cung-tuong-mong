@@ -76,7 +76,7 @@ Object.assign(BAL,{eff:{
   decay:{vui:9,binh:0,buon:6,gian:8,so:9,ghen:6,lo:6},decayDef:6,dk:{"Thù dai":{gian:.4},"Ân cần":{gian:1.6,ghen:1.6},"Khiêm nhường":{buon:.7,so:.8},"Kiêu ngạo":{gian:.8},"Nóng nảy":{ghen:.6},"Trọng nghĩa":{buon:.8}},night:{vui:1,binh:1,buon:1,gian:1,so:1,ghen:1,lo:1},
   brake:{hi:70,mid:40,fHi:0,fMid:.5,fLo:1,fBad:1.5,soft:{"Ân cần":15,"Khiêm nhường":8,"Trọng nghĩa":8,"Vì gia tộc":5,"Xảo quyệt":-10,"Tham vọng":-5,"Thù dai":-5},ducDef:50,grudge:60,grudgeF:.5,zero:.9},
   floor:15,stack:.5,legSync:40,legV:50,
-  wk:{friend:30,foeOan:30,foeAff:-20,upFriend:40,upRival:25,downOan:25,downAff:-25,kidAff:25,fondN:6,nightAff:10,nightK:.6,neglect:6,ill:30,loyD:5,mistress:40,fearV:30,kidV:30,offV:30,manV:25},
+  wk:{upRival:25,kidAff:25,fondN:6,nightAff:10,nightK:.6,neglect:6,ill:30,loyD:5,mistress:40,fearV:30,kidV:30,offV:30,manV:25},
   emp:{born:55,lost:75,punish:35},hook:{oanMin:5,affMin:8,div:10,lo:.6,hi:1.6},nightK:{nhantu:1.05,angry:.5,gentle:1.08},loyDiv:60,mot:{anger:50,strong:60,lv:3,aff:-30}},
  jemoact:{},
  jend14:{},

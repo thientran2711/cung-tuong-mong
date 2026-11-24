@@ -40,7 +40,7 @@ npwReg("wdFrame",{grp:"G2",who:c=>c.v?[c.v]:[],why:(v,c)=>{const W=npwB().tFrame
 npwReg("vlGift",{grp:"G2",who:c=>c.F||[],why:(v,c)=>({s:aff(v,c.t)*npwB().vlGet.aff,t:c.t,r:"thương "+npwNm(c.t)+" mang sẹo, gửi mạng che mặt"})});
 /* ---- jtds: she makes a workshop piece when her craft plan calls for one ---- */
 npwReg("tdsMake",{grp:"G2",who:c=>c.p?[c.p]:[],why:(p,c)=>{const W=npwB().tdsMake;const lv=typeof wkLv==="function"?wkLv(p,c.k):0;const poor=(p.bac||0)<W.poor;
- let fr=false;try{fr=liveRivals(true).some(x=>x!==p&&aff(p,x)>=BAL.ag.why.tell.friend)}catch(e){}
+ let fr=false;try{fr=liveRivals(true).some(x=>x!==p&&aff(p,x)>=netTh(p,"than"))}catch(e){}
  return{s:W.base+lv*W.lv+(poor?W.sell:0)+(fr?W.gift:0),r:poor?"thiếu bạc, làm đồ đem bán":fr?"làm quà tặng người thân":"luyện tay nghề"}}});
 /* ---- j13: a physician really bribed (thyBribedBy) worsens her illness for the briber ---- */
 npwReg("thyHarm",{grp:"G2",who:c=>c.b?[c.b]:[],why:(b,c)=>{const W=npwB().thyHarm;const h=hostility(b,c.p);return h>0?{s:W.base+h*W.host,t:c.p,r:"oán "+npwNm(c.p)+", đã đút lót thái y"}:null}});

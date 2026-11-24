@@ -28,9 +28,11 @@ function msAffAdd(x,y,n){const c=v=>cl(v,-100,100);if(relMaster(x,y)&&!(y===S&&t
 function msOan(x,y){if(relMS(x)){if(y===S)return +x.oan||0;return (x.ro&&+x.ro[relHk(x,y)])||0}const M=x===S?S.ro:x.ro;return (M&&M[relKey(y)])||0}
 function msOanAdd(x,y,n){const c=v=>cl(Math.round(v),0,100);if(relMS(x)){if(y===S){x.oan=c((+x.oan||0)+n);return}const M=relMap(x,"ro"),k=relHk(x,y);M[k]=c((+M[k]||0)+n);return}
  const M=x===S?S.ro:relMap(x,"ro"),k=relKey(y);M[k]=c((M[k]||0)+n)}
-function aff(x,y){if(x===y)return 0;if(relMS(x)||relMS(y))return msAff(x,y);if(x===S)return S.rl[y.id]||0;if(y===S)return x.rel;return x.rl[y.id]||0}
+/* range on read (review/net-build step 0): every writer of .rel / .rl / .ro / .oan is clamped here too, BAL.linkRange */
+function relCl(v,R){return typeof v==="number"&&isFinite(v)?Math.max(R[0],Math.min(R[1],v)):0}
+function aff(x,y){if(x===y)return 0;if(relMS(x)||relMS(y))return msAff(x,y);const R=BAL.linkRange.rl;if(x===S)return relCl(S.rl[y.id],R);if(y===S)return relCl(x.rel,R);return relCl(x.rl[y.id],R)}
 function affAdd(x,y,n){if(!x||!y||x===y)return;if(relMS(x)||relMS(y))return msAffAdd(x,y,n);const R=BAL.linkRange.rl;/* ONE CORE (rv coop-flakes) */if(x===S){S.rl[y.id]=cl((S.rl[y.id]||0)+n,R[0],R[1]);return}if(y===S){x.rel=cl(x.rel+n,R[0],R[1]);return}x.rl[y.id]=cl((x.rl[y.id]||0)+n,R[0],R[1])}
-function oan(x,y){if(!x||!y||x===y)return 0;if(relMS(x)||relMS(y))return msOan(x,y);if(x===S)return S.ro[y.id]||0;if(y===S)return x.oan||0;return x.ro[y.id]||0}
+function oan(x,y){if(!x||!y||x===y)return 0;if(relMS(x)||relMS(y))return msOan(x,y);const R=BAL.linkRange.ro;if(x===S)return relCl(S.ro[y.id],R);if(y===S)return relCl(x.oan,R);return relCl(x.ro[y.id],R)}
 function oanAdd(x,y,n){if(!x||!y||x===y)return;if(relMS(x)||relMS(y))return msOanAdd(x,y,n);const R=BAL.linkRange.ro,c=v=>cl(Math.round(v),R[0],R[1]);if(x===S){S.ro[y.id]=c((S.ro[y.id]||0)+n);return}if(y===S){x.oan=c((x.oan||0)+n);return}x.ro[y.id]=c((x.ro[y.id]||0)+n)}
 /* every man and servant who can hold a relation (the oán fade, the old-save fill, the Ân oán groups) */
 function relMSAll(){const L=[],add=p=>{if(p&&typeof p==="object"&&!L.includes(p))L.push(p)};if(!S)return L;(S.men||[]).forEach(add);add(S.maid);(S.staff||[]).forEach(add);

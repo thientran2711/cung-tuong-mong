@@ -378,7 +378,7 @@ Object.assign(BAL,{cmaid:{loy:{home:[65,85],land:[70,90],th:[55,75],pick:[35,50]
    jealousy ×(1+ghen) at Hân hoan; lock = acts locked at the lowest band; comfort = the visit of someone who loves her (ch % a tuần at the
    lowest band, chLow at the low band, cooldown cd tuần, thiện cảm ≥ aff or her maid ≥ maid; answers: big / small mood, affUp / affDown, k khắc). */
 Object.assign(BAL,{mood:{band:[-60,-25,25,60],emo:{vui:.35,buon:-.25,gian:-.2,so:-.25,ghen:-.2,lo:-.2,dau:-.4,muu:0},sat:320,satMin:.2,ok:3,fail:-3,rest:5,restDs:8,restCap:25,
- decay:.2,keep:6,logMax:12,need:{sucLo:30,sucLoD:-6,sucHi:80,sucHiD:1,ill:-4,bacLo:15,bacD:-1,conf:-2,out:-5},fr:{aff:30,d:1,cap:3},foe:{oan:60,d:1,cap:1},maidHi:70,maidD:1,
+ decay:.2,keep:6,logMax:12,need:{sucLo:30,sucLoD:-6,sucHi:80,sucHiD:1,ill:-4,bacLo:15,bacD:-1,conf:-2,out:-5},fr:{d:1,cap:3},foe:{oan:60,d:1,cap:1},maidHi:70,maidD:1,
  wx:{nice:["hoa đào bay","trăng rằm","mai nở trong tuyết","nắng vàng","đom đóm","lá phong rơi"],niceD:2,harshD:-3,wetD:-1},
  od:6,odFrom:30,aff:.15,affAngry:.25,affFrom:25,ghen:.2,lock:["Múa trong yến tiệc","Kinh hồng vũ","Đánh đàn ở ngự hoa viên","Đàn khúc Phượng cầu hoàng"],
  comfort:{ch:35,chLow:15,cd:4,aff:40,maid:60,big:22,small:8,affUp:4,affDown:2,danh:1,k:1}}});
@@ -401,7 +401,7 @@ Object.assign(BAL,{mood:{band:[-60,-25,25,60],emo:{vui:.35,buon:-.25,gian:-.2,so
    (danger) alive, ≤ dangerMax; goodGate: good memory weight from which a person will not harm the other (when > goodOver × the worst wrong) ·
    mirrorDiv: an NPC act like the remembered wrong weighs 1 + weight/mirrorDiv more · socDiv: target pull of a remembered person in everyday dealings (1 + |memory|/socDiv);
    socK: kind / hostile everyday acts × (1 + memory/socK) · srvLoy: loyalty points per memMod point a servant's memories add in bribe odds.
-   hook.czMax cause records kept per holder · czClose thiện cảm from which a kind act's cause is "thân" · czRash buổi after a slight that make a hostile act "nóng giận" ·
+   hook.czMax cause records kept per holder · czRash buổi after a slight that make a hostile act "nóng giận" ·
    czTv: below this grudge an ambitious doer aiming higher acts "vì tham vọng" · czGhenDiv: Sủng gap / this = jealousy of a rival (cause kind "ghen") · czDeadMax: causes kept on a dead consort (newest). */
 Object.assign(BAL,{mem:{cap:5,fadeMo:2,keepFloor:.35,modDiv:8,modMax:10,recallMin:15,recallCd:3,invokeMin:20,invokeCost:15,logMin:25,relMin:15,pairCap:300,reinforce:.6,reinforceMax:2,
  strong:40,faint:15,hate:30,seenAf:8,taintAf:10,relCap:40,invokeAff:6,
@@ -412,7 +412,7 @@ Object.assign(BAL,{mem:{cap:5,fadeMo:2,keepFloor:.35,modDiv:8,modMax:10,recallMi
  fadeT:{/* pool nết rows come from THE trait table BAL.net.T[t].fade (jnet.js); the Emperor's keys: */
   nongnay:[1.3,.6],nhantu:[.8,1.8],datinh:[1.6,1.3],lanhlung:[.6,.6],chamchinh:[1,1],danghi:[1,.6],mesac:[1.3,1],trongtai:[1,1],hieuthao:[1,1]},
  memDanger:.5,lifeDanger:.9,dangerMax:85,goodGate:40,goodOver:1,mirrorDiv:25,socDiv:20,socK:40,srvLoy:1.5},
- hook:{useOan:15,strikeCh:25,lostCh:20,fadeCh:4,pressBase:50,max:40,useStep:5,failRel:10,tcDiv:4,czMax:24,czClose:20,czRash:3,czTv:30,czGhenDiv:3,czDeadMax:8}});
+ hook:{useOan:15,strikeCh:25,lostCh:20,fadeCh:4,pressBase:50,max:40,useStep:5,failRel:10,tcDiv:4,czMax:24,czRash:3,czTv:30,czGhenDiv:3,czDeadMax:8}});
 /* BAL.psk = PROMO-SKIP (jexam promoReward, owner 16/11 06:20Z/06:45Z/07:15Z): long-road rewards = direct rank; every reward has a gain AND a loss.
    son1 (first prince): Hoàng hậu oán +hhOan, every other mother of a prince oán +momOan.
    emp (Hoàng thượng side wins): Thái hậu quý −th; every consort of a losing side oán +oan.
@@ -569,7 +569,7 @@ BAL.relOan={hurt:.6,doer:.2,mend:.3};
    The fade is the shared BAL.oanFade (j28 oanMonth), the caps the shared −100..100 / 0..100. */
 BAL.relMS={hail:5,grudge:40,grudge2:20,srvGrudge:30,bully:20,threat:30,bribe:10};
 BAL.steal={cost:{feign:{duc:4},road:{suc:5}},failSung:3,rel:15,ghen:25,
- need:{fav:1,rank:.6,heir:.8},heirHas:.25,friend:60,friendMin:.15,oanW:.5,fear:{gap:3,f:.5},custom:.3,k:.25,pMax:.55,maxTry:2,sucMin:20};
+ need:{fav:1,rank:.6,heir:.8},heirHas:.25,friendMin:.15,oanW:.5,fear:{gap:3,f:.5},custom:.3,k:.25,pMax:.55,maxTry:2,sucMin:20};
 /* ================= BALANCE CORE (review/balance-core, owner OD 16/11 23:00Z / 23:05Z / 23:08Z, 22:50Z) =================
    (nobc, D ruling «A + drop growth/start»: start values and growth are LIVE's again; kept here: the course ladder §7 (owner: learning times) and the night-choice odds §4.)
    ONE ladder for every art and Tứ đức course, the night-choice odds. */
@@ -788,7 +788,7 @@ BAL.ngh={alumTc:55,oilTc:60,frameAff:-30,accOan:40,accPun:1,needEv:2,seeMat:2,oi
 Object.assign(BAL,{ag:{on:1,
  own:["thTH","thHH","pray","ksp","fakeIll","fakePreg","announce","flaunt","check","help","apol","visit","mediate","follow","provoke","humil","warn","test","drop","gossip","effort"],
  routine:5,restW:1.5,needW:1,unit:10,
- goal:{sung:80,th:60,hh:40,danh:50,duc:40,rest:45,friend:30,ally:2,kidAge:38},
+ goal:{sung:80,th:60,hh:40,danh:50,duc:40,rest:45,ally:2,kidAge:38},
  road:{_:{sung:1,th:.6,hh:.5,danh:.6,duc:.4,kid:.8,ally:.6,spite:.5,safe:.6},
   tt:{sung:1,th:.5,hh:.3,danh:1.2,duc:.4,kid:1,ally:.7,spite:.8,safe:.6},dtq:{sung:1,th:.4,hh:.4,danh:1,duc:.3,kid:.9,ally:.5,spite:.7,safe:.5},
   muoi:{sung:1.1,th:.6,hh:.6,danh:.8,duc:.3,kid:.8,ally:1,spite:.4,safe:.6},cn:{sung:1.3,th:.6,hh:.6,danh:.5,duc:.4,kid:1,ally:.9,spite:.4,safe:.7},
@@ -1185,7 +1185,7 @@ Object.assign(BAL.ag,{kh2:{on:1,spill:1,rest:1,max:3,maxX:1,see:{on:1,w:{ignore:
    share = the believable band (% of all servant deeds) of these errands, checked by ag-truth.test (owner: servants mostly serve, scouting is a sometime thing);
    tell.late = weight of a report a buổi late (peaks at lòng 50); scout.caught = % of failed scouting that is caught (else she comes back empty-handed);
    scout.oan = the target's regard lost when the spy is caught (the player's "Sai đi dò la": oán +5); keep = news kept per day */
-BAL.ag.know={eye:100,friend:30,close:70,tell:{tell:1,late:.5,keep:1,sell:1.5,q:{trung:.4,chuyen:.2,lanh:.1,tham:-.3,nhat:-.2}},voice:{warm:70,cool:40},serve:.25,
+BAL.ag.know={eye:100,tell:{tell:1,late:.5,keep:1,sell:1.5,q:{trung:.4,chuyen:.2,lanh:.1,tham:-.3,nhat:-.2}},voice:{warm:70,cool:40},serve:.25,
  hear:{safe:4,spite:2,ally:1},base:.01,listen:{k:1,o:50,tc:3,tin:2,mp:.25},scout:{k:2,tin:3,lose:5,mp:.5,oan:5,caught:50},watch:{k:1,tin:2,mp:.25},keep:20,share:[5,20]};
 /* AG-ALL-2g INFO SELLERS (jagknow tail; owner OD 17/11 ~16:50Z (2)): o = % per buổi that a seller comes to a buyer (her and each consort);
    kh = khắc to hear him out (dayFit); min = least worth of news that may be sold (never trivial); val = worth per kind of news (j78 fact key prefix;
@@ -1426,7 +1426,7 @@ BAL.ag.par3={on:1,
  treat:{c:{"bac":-30},g:{"rest":4}},
  staff:{thuong:{below:55},phat:{below:30},doi:{below:15},/* bạc / Danh: BAL.house.thuongBac / BAL.eff.j10.danhServAct (merge r2) */hoi:{af:20,dt:30},g:{"safe":2},gHoi:{"spite":2,"safe":1}},
  use:{sucBelow:60,g:{"rest":2}},sell:{bacBelow:40,g:{"bac":2}},
- cutRisk:30,cold:{friend:40,sonAge:8,beg:{bac:20,anD:2,sungD:4},out:{bac:10,dad:50,affD:3,facD:10,dadD:5},ev:{mat:6,tcD:5},poem:{an:30,anD:2,thi:8},son:{fondD:2},/* odds bases: BAL.odb.j14.odO…odO_6, evidence need: BAL.coldEvNeed (ONE CORE, merge r2) */
+ cutRisk:30,cold:{sonAge:8,beg:{bac:20,anD:2,sungD:4},out:{bac:10,dad:50,affD:3,facD:10,dadD:5},ev:{mat:6,tcD:5},poem:{an:30,anD:2,thi:8},son:{fondD:2},/* odds bases: BAL.odb.j14.odO…odO_6, evidence need: BAL.coldEvNeed (ONE CORE, merge r2) */
   sutra:{c:{"suc":-3},w:{"duc":3}},veg:{w:{"suc":6}},embro:{c:{"suc":-5},w:{"bac":10}},nunSuc:10,nunO:10,oanFree:20,
   /* cold-faction: a faction letter from lãnh cung (j14 coldActsOf, her card = an NPC's): road A the food eunuch (Bạc bac, odds base euO), road B her own kept maid (no bạc, odds base maidO + the maid's loyalty / loyD; caught → that maid loyalty − maidLoy). Law 2 (review): maid odds 30+70/2=65 at BAL.loy.trust … 80 at loyalty 100 = never above the eunuch's 80, so the free road pays in odds + the maid's risk, the eunuch road in bạc */
   lt:{bac:12,euO:80,maidO:30,loyD:2,maidLoy:15},gFree:{"sung":30},gStay:{"duc":1,"rest":1,"bac":1}},charity:{g:{"duc":3,"danh":2}},restLat:{sucBelow:50,g:{"rest":2}},tyGift:{g:{"spite":1,"safe":1}},work:{g:{"danh":2,"ally":1}},
@@ -1541,7 +1541,7 @@ BAL.ag.bt={off:15,offMax:3,hon:5,honMax:3,mood:{gian:5,thuong:-5},fear:4,fearTim
    cd    tuần before the same person acts again in the same kind (_ = default; per kind: cd.<kind>)
    wit   witness rank: eye × eyes(p) + host × hostility toward the one watched
    tell  a witness carries a fact when her grudge against its subject ≥ host, or her liking for the one told ≥ friend */
-BAL.ag.why={on:1,min:20,near:.6,top:3,pow:1.5,cd:{_:4,hoi67:6/* jrtrig OR16: one person moves a hồi at most once every 6 tuần */},wit:{eye:10,host:1},tell:{host:40,friend:30}};
+BAL.ag.why={on:1,min:20,near:.6,top:3,pow:1.5,cd:{_:4,hoi67:6/* jrtrig OR16: one person moves a hồi at most once every 6 tuần */},wit:{eye:10,host:1}};
 /* npc-purpose G1 kinds (jagwhy1; the stray man; an NPC affair itself begins / is exposed through her day plan + proof: role-parity part 2).
    tryst: base + rove (roving man) − fear (Kín đáo), cd [roving, other] = the old 2 / 3 tuần cadence; letter: w per reason (old order of reasons; jealous = Sủng under jSung and ghen ≥ jGhen), cd 12 = once a season;
    seek: base (his fancy, ≥ ag.why.min) + her looks above sac, his gap = BAL.net menGap; tryst base 35 − fear 12 ≥ min (rates review: a careful pair still meets); menGrudge: s while his grudge lasts, cd 9 tuần = the old once every 3 months (monthly caller) */
@@ -2071,7 +2071,7 @@ BAL.j68c={on:true,w:{def:.35},seen:.15,cd:999,obKeep:60,rumorTag:" <i>(Lời đ�
  fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:1,th:2,hh:2,duc:2,tamco:1,an:1,rel:4},
      m:{sung:3,danh:3,bac:40,suc:8,mat:1,th:4,hh:4,duc:3,tamco:2,an:2,rel:6},
      l:{sung:5,danh:5,bac:60,suc:12,mat:2,th:6,hh:6,duc:5,tamco:3,an:3,rel:9}},
- need:{friend:10,feud:-10,poor:30}};
+ need:{poor:30}};
 /* ORDER THIN P3 (j72c.js composed việc nhờ): on = composed favours live; share = draw weight of one composed seed vs one of the 110 old T7 (1);
    fx[tier] = what ONE gain/loss step of a seed is worth per key (laws 2/3/4: seeds count steps, numbers live here; rel/relb = thiện cảm of A/B,
    an = ân tình); odds = base of a do-step on the j72 ladder (q72Odds adds her skill); khac = khắc of a do-step; wait = tuần of a wait step;
@@ -2099,3 +2099,54 @@ BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's n�
  fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:2,th:2,hh:2,duc:2,maid:3,rel:4,proof:1},
      m:{sung:4,danh:4,bac:40,suc:10,mat:4,th:4,hh:4,duc:4,maid:6,rel:8,proof:1},
      l:{sung:6,danh:6,bac:60,suc:15,mat:6,th:6,hh:6,duc:6,maid:9,rel:12,proof:2}}};
+
+/* review/net-build (owner OD 24/11 ~06:00Z / ~06:40Z, MAIN 119 order; design dev/handover/reports/net-thresholds.md §3): NẾT THRESHOLDS — ONE CORE (law 4).
+   Every relation LEVEL the game tests ("quen", "thân", "ghét", "oán to act"…) is ONE base number here, and each person's nết shifts it:
+   netTh(p,key) (jnet.js) = th[key] + Σ over p's 3 nết of BAL.net.T[t].th[key] (a key a nết lacks = thFrom[key] = [source key, × share]), clamped to thClamp[key].
+   Same rule for every holder (law 1): consorts, servants, men and HER (S.net); the Emperor / Thái hậu have no pool nết → the base.
+   Keys (holder = the one whose feeling it is):
+     quen  thiện cảm from which she is friendly (help, visit, small favours, tells news)        than  thiện cảm from which she is THÂN (warn, defend, share, mourn, join side)
+     than2 thiện cảm of a life bond (lends bạc, gives treasures, intercedes with the throne)      ky    thiện cảm under which she dislikes (Không ưa: feud, cold acts)
+     ghet  thiện cảm under which she hates (refuses to meet, gloats, wishes harm)                 oan   oán from which she holds a grudge worth mending / naming
+     act   oán / danger from which she starts to act (harm band 1; provoke / humiliate / feign = act × thK)   thu  oán of a true enemy (kẻ thù lists, faction foe)
+     host  hostility from which she works against someone (spite, sabotage, refuse to help)       tell  hostility from which she spreads a secret (gossip)
+     nguoi oán under which she accepts an apology / mediation                                     repay owed ân (evG) from which she repays unasked (repay2: a debt big enough to risk herself for)
+   thK: shares of act / host used by lighter gates (provoke = act × .34 …). bandHi: share of the act shift that moves harm bands 2 / 3 (a proud girl slaps
+   sooner, murder still needs deep hate); T[t].th.act3 overrides that for band 3 (Xảo quyệt waits, then strikes hard).
+   HEAT (step 0, §2.1 robot: NPC→her danger p50 112 because ghen sat at 99 for everyone; 88 % of npcAct at band 3): heat.ghenK / heat.affK = the share of
+   ghen / dislike (−thiện cảm) that counts as danger (oán counts whole). hostility already halves both. */
+BAL.net.th={quen:10,than:30,than2:50,ky:-10,ghet:-30,oan:15,act:30,thu:45,host:45,tell:40,nguoi:30,repay:1,repay2:2};
+BAL.net.thFrom={than2:["than",1],ky:["ghet",.5],oan:["act",.5],thu:["act",1],host:["act",1],repay2:["repay",1]};
+BAL.net.thClamp={quen:[0,30],than:[15,60],than2:[35,80],ky:[-30,-5],ghet:[-60,-10],oan:[5,30],act:[10,60],thu:[25,75],host:[25,75],tell:[15,70],nguoi:[10,60],repay:[1,3],repay2:[2,4]};
+BAL.net.thK={provoke:.34,humiliate:.6,feign:.67,hostLo:.5,hostHi:1.33};
+BAL.net.bandHi=.5;
+BAL.net.heat={ghenK:.45,affK:.6};
+/* per-nết offsets (report §3.3; every row keeps a gain and a cost, laws 2/3 — the gain/cost words are the row's own gain/cost in BAL.net.T) */
+(function(){const O={
+ "Ân cần":{quen:-5,than:-10,ghet:-15,act:15,nguoi:10},
+ "Lạnh lùng":{quen:10,than:12,act:5,tell:15},
+ "Nóng nảy":{ghet:10,act:-10,tell:-5,nguoi:10},
+ "Điềm tĩnh":{than:3,ghet:-5,act:8,tell:5},
+ "Nhiều chuyện":{quen:-5,than:-5,tell:-20},
+ "Kín đáo":{quen:5,than:8,tell:25},
+ "Kiêu ngạo":{quen:5,than:15,ghet:10,act:-12,nguoi:-15,repay:1},
+ "Khiêm nhường":{quen:-5,than:-5,ghet:-10,act:12,tell:5,nguoi:10},
+ "Cương trực":{than:5,ghet:5,act:-5},
+ "Xu nịnh":{quen:-8,than:-8,act:5,tell:-5,nguoi:5,repay:1},
+ "Thật thà":{quen:-3,act:5,tell:5,nguoi:5},
+ "Xảo quyệt":{quen:-5,than:10,act:8,act3:-8,tell:-5,nguoi:-10,repay:1},
+ "Thanh liêm":{act:5,tell:5},
+ "Ham lợi":{quen:-5,than:5,tell:-10,repay:1},
+ "Rộng lượng":{quen:-5,than:-3,ghet:-15,act:12,tell:5,nguoi:20,repay:1},
+ "Thù dai":{quen:5,than:5,ghet:10,act:-8,nguoi:-20,repay:-1},
+ "Trọng nghĩa":{than:-3,act:5,tell:10,nguoi:5,repay:-1},
+ "Thực dụng":{quen:-5,than:5,tell:-5,repay:1},
+ "Tham vọng":{than:5,ghet:5,act:-5,nguoi:-5,repay:1},
+ "An phận":{ghet:-5,act:10,nguoi:5},
+ "Ham học":{quen:5,than:3,act:3,tell:5},
+ "Ham vui":{quen:-8,than:-5,tell:-8,nguoi:5},
+ "Mê tín":{},
+ "Thực tế":{quen:5,than:5,tell:5},
+ "Vì gia tộc":{act:5},
+ "Vì mình":{quen:3,than:8,act:-3,tell:-5,repay:1}};
+ for(const t in BAL.net.T)BAL.net.T[t].th=O[t]||{}})();

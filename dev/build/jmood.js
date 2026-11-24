@@ -6,7 +6,7 @@
        event result through jevb evbMood …): BAL.mood.emo[k] × strength;
      · her own acts with a real roll (runOpt deck cards + talk options, runAct consort acts): thành +ok, hỏng fail;
      · rest cards (jrest): +rest (only up to BAL.mood.restCap);
-     · each tuần: needs (Sức low / high, sick, short of bạc, cấm túc, lãnh cung), people (friends with thiện cảm ≥ fr.aff, foes with
+     · each tuần: needs (Sức low / high, sick, short of bạc, cấm túc, lãnh cung), people (friends with thiện cảm ≥ netTh(v,"than"), foes with
        oán ≥ foe.oan, her maid's thiện cảm), weather (pleasant / harsh / wet); then decay toward 0.
    OUT (one rule; bands BAL.mood.band; flavour of a low mood = her current feeling: giận → Bực dọc / Phẫn uất, ghen → Hờn tủi / Hờn ghen,
        sợ / lo âu → Bất an / Hoảng hốt, else Phiền muộn / U uất):
@@ -100,7 +100,7 @@ function mbWeek(){if(!mbOn())return;const M=mbS(),b=B(),W=mbW();if(M.wk===W)retu
  if(S.confined>0)mbAdd(N.conf,"bị cấm túc","w:conf");
  if(S.out)mbAdd(N.out,"ở lãnh cung","w:out");
  /* people */
- try{let fr=0,fo=0;for(const v of (typeof liveRivals==="function"?liveRivals(true):[])){if(v.coop)continue;if(aff(v,S)>=b.fr.aff)fr++;if(oan(v,S)>=b.foe.oan)fo++}
+ try{let fr=0,fo=0;for(const v of (typeof liveRivals==="function"?liveRivals(true):[])){if(v.coop)continue;if(aff(v,S)>=netTh(v,"than"))fr++;if(oan(v,S)>=b.foe.oan)fo++}
   if(fr)mbAdd(Math.min(b.fr.cap,fr*b.fr.d),`${fr} người trong cung quý ngươi`,"w:fr");
   if(fo)mbAdd(-Math.min(b.foe.cap,fo*b.foe.d),`${fo} người oán ngươi`,"w:foe");
   if(S.maid&&(S.maid.loyal||0)>=b.maidHi)mbAdd(b.maidD,`${S.maid.name||"cung nữ"} hết lòng với ngươi`,"w:maid")}catch(e){}

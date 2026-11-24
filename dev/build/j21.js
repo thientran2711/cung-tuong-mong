@@ -64,7 +64,7 @@ document.addEventListener("click",e=>{const s=e.target.closest("[data-scout]");i
 /* invitations land when the next buổi's places are drawn; rivals may invite her too */
 (function(){const pw=placeWhere;placeWhere=function(){pw.apply(this,arguments);try{if(S.invite){const v=rivals.find(x=>x.id===S.invite.id);const o=S.invite.o;S.invite=null;if(v&&v.alive&&!v.out&&!v.confined){if(typeof rcvInviteGo==="function"){rcvInviteGo(S,v)}else if(roll(o)){S.where[v.id]="home";seeLoc(v,"home");log(`${v.name} nhận lời, sang cung ngươi buổi này.`)}else{relAdd(S,v,BAL.eff.j21.top);log(`${v.name} từ chối lời mời.`)}}}
   if(typeof p3InvLand==="function")p3InvLand();
-  const f=liveRivals(true).filter(v=>aff(v,S)>=30&&!v.confined&&!sameHouse(S,v));if(!(typeof p3On==="function"&&p3On())&&f.length&&roll(4)){const v=pick(f);const k=palaceOf(v);S.where[v.id]=k;seeLoc(v,k);if(typeof rcvAsk==="function")rcvAsk("invite",v,S);else log(`${v.name} sai người mời ngươi sang cung nàng chơi buổi này.`)}}catch(e){}}})();
+  const f=liveRivals(true).filter(v=>aff(v,S)>=netTh(v,"than")&&!v.confined&&!sameHouse(S,v));if(!(typeof p3On==="function"&&p3On())&&f.length&&roll(4)){const v=pick(f);const k=palaceOf(v);S.where[v.id]=k;seeLoc(v,k);if(typeof rcvAsk==="function")rcvAsk("invite",v,S);else log(`${v.name} sai người mời ngươi sang cung nàng chơi buổi này.`)}}catch(e){}}})();
 /* arriving somewhere reveals who is there */
 (function(){const g=goTo;goTo=function(k){const r=g.apply(this,arguments);try{if(S.place===k)curPeople().forEach(p=>{if(p.ref&&p.kind!=="chest"&&p.ref.id!=null)seeLoc(p.ref,k)})}catch(e){}return r}})();
 /* ===== visiting a consort at her own palace: chance she is home; her gatekeeper may tell where she went ===== */
@@ -72,8 +72,8 @@ function visitBtn(v){if(!v||!v.alive||v.out||sameHouse(S,v))return"";const k=pal
  return pbtn(`data-visit="${v.id}"`,`Đến cung nàng thăm`,`tốn: ${tc} khắc · thành: ${walkLate(k,tc)?"đến nơi buổi sau, ":""}nếu nàng ở nhà thì gặp mặt · có khi nàng đi vắng`,S.confined?"đang cấm túc":S.out?"đang ở lãnh cung":walkBlock(k,tc))}
 function visitPal(id){const v=rivals.find(x=>x.id===id);if(!v||S.dead||Q.length)return;const k=palaceOf(v),tc=travel(S.place,k);if(S.confined||S.out)return;if(!walkOk(tc)){walkGo(k);return}goTo(k);if(S.place!==k)return;
  const i=curPeople().findIndex(p=>p.ref===v&&p.kind!=="chest");
- if(i>=0){if(aff(v,S)<=-40){S.visit.tk=S.visit.tk||{};S.visit.tk[i]=1;S.visit.msg=`${v.name} cáo bệnh không tiếp ngươi (nàng ghét ngươi).`}else{popIdx=i;popMsg=""}}
- else{const now=whereOf(v);const friend=aff(v,S)>=20||(v.staff||[]).some(s=>s.spyFor==="me");if(friend){seeLoc(v,now);S.visit.msg=`Cung nữ gác cửa: “${kSay({srv:"f"},v,"{Goi}",{own:true})} sang ${placeName(now)} rồi.” <button class="btn" data-follow="${v.id}">Theo đến<small>${travel(S.place,now)} khắc</small></button>`}else S.visit.msg=`Cung nữ gác cửa: “${kSay({srv:"f"},v,"{Goi}",{own:true})} đi vắng.”`}
+ if(i>=0){if(aff(v,S)<=netTh(v,"ghet")){S.visit.tk=S.visit.tk||{};S.visit.tk[i]=1;S.visit.msg=`${v.name} cáo bệnh không tiếp ngươi (nàng ghét ngươi).`}else{popIdx=i;popMsg=""}}
+ else{const now=whereOf(v);const friend=aff(v,S)>=netTh(v,"than")||(v.staff||[]).some(s=>s.spyFor==="me");if(friend){seeLoc(v,now);S.visit.msg=`Cung nữ gác cửa: “${kSay({srv:"f"},v,"{Goi}",{own:true})} sang ${placeName(now)} rồi.” <button class="btn" data-follow="${v.id}">Theo đến<small>${travel(S.place,now)} khắc</small></button>`}else S.visit.msg=`Cung nữ gác cửa: “${kSay({srv:"f"},v,"{Goi}",{own:true})} đi vắng.”`}
  renderStage()}
 document.addEventListener("click",e=>{const s=e.target.closest("[data-visit]");if(s&&!s.disabled){e.stopPropagation();visitPal(+s.dataset.visit)}},true);
 /* two-way: rivals call at her palace; if she is out, her maid tells or keeps quiet by loyalty */

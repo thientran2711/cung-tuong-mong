@@ -27,7 +27,7 @@ A("xinhh","Xin Hoàng hậu giáng",{c:{get bac(){return -BAL.actBac.xinhh}},ok:
 /* the menus: her card groups and the NPC harm bands read the new roads */
 (function(){const gi=RVGRP.findIndex(g=>g[0]==="Hại nặng");if(gi>=0)RVGRP[gi][1].push("lygian","tocao","xinhh");const gs=RVGRP.findIndex(g=>g[0]==="Sát hại");if(gs>=0)RVGRP[gs][1].push("slowpoison","expose");BANDS[2][2].push("lygian","tocao","xinhh");BANDS[3][2].push("slowpoison","expose")})();
 (function(){const n0=npcAct;npcAct=function(v,t){/* rivals weigh the new roads by trait, more against the holder of the seat they want next */
-  const nx=rkOf(v)+1;const want=rkOf(t)===nx&&SEATCAP[nx]!=null&&!seatFree(nx);if(want&&roll(45)){const L=["lygian","tocao","xinhh","slowpoison","expose"].filter(k=>{const b=bandOf(danger(v,t));return BANDS.slice(1,b+1).some(x=>x[2].includes(k))&&ACT[k].ok(v,t)});
+  const nx=rkOf(v)+1;const want=rkOf(t)===nx&&SEATCAP[nx]!=null&&!seatFree(nx);if(want&&roll(45)){const L=["lygian","tocao","xinhh","slowpoison","expose"].filter(k=>{const b=bandVT(v,t);return BANDS.slice(1,b+1).some(x=>x[2].includes(k))&&ACT[k].ok(v,t)});
    if(L.length){const w=L.map(k=>persW(v,k==="slowpoison"?"poison":k==="lygian"?"rumor":k==="xinhh"?"ally":"accuse"));let r=Math.random()*w.reduce((a,b)=>a+b),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}persCount(v,"push:"+L[i]);return runAct(v,t,L[i])}}
   return n0.apply(this,arguments)}})();
 /* rivals hunt the holder of the seat they want next */

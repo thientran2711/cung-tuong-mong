@@ -106,7 +106,7 @@ function rtNightOk(m,k){const T=rtS(),tt=T.tt;m.trysts=(m.trysts||0)+1;m.tinh=(m
 /* seen while meeting: the witness decides by her nature (same rule as an NPC seeing an NPC) */
 /* G3: who finds what she drops / intercepts her letter: a watchful one (eyes ≥ 2) really at her place, the most watchful and hostile first */
 /* k = the spot on her road (where the token goes: the man's place); no k = a letter leaving her palace: only one who sees inside her house (npwIn) and resents her stops it */
-function rtFinder(k){if(!k){const L=npwIn(S).filter(x=>hostility(x,S)>=BAL.ag.why.tell.host);return npwPick(L,x=>hostility(x,S))}const w=npcWit(k,null,{pool:liveRivals(true).filter(x=>eyes(x)>=2),vs:S})[0];return w?w.p:null}
+function rtFinder(k){if(!k){const L=npwIn(S).filter(x=>hostility(x,S)>=netTh(x,"tell"));return npwPick(L,x=>hostility(x,S))}const w=npcWit(k,null,{pool:liveRivals(true).filter(x=>eyes(x)>=2),vs:S})[0];return w?w.p:null}
 function rtSeen(m,k,what){const W=rtWit(k);rtHeat(what==="dem"?30:20);
  const w0=npcWit(k,null,{pool:W,vs:S})[0];const v=w0?w0.p:null;/* G3: the best watcher there (eyes × hostility), not a random one */
  if(!v){log(`Có tiếng bước chân ngoài hiên; ngươi và ${rtMnm(m)} kịp tản đi. Người trong cung bắt đầu xì xào.`);return}
@@ -387,7 +387,7 @@ RT_END.ng_vu=["tt","Vu oan người khác qua bát nước"];
 (function(){const r0=rtNgCards;rtNgCards=function(){let A=r0.apply(this,arguments);try{if(rtS().open)A=A.concat(rtNgNpcCards())}catch(e){}return A}})();
 /* rivals may frame her innocent child (rare; two-way) */
 (function(){const m0=rtMonth;rtMonth=function(){let ev=m0.apply(this,arguments);try{const T=S.rt;if(T&&!T.ng&&!S.out){const k=rtKidsAlive().find(x=>!x.tfOk&&(x.age||0)>=2);
- const f=k&&liveRivals(true).find(v=>netRx(v,/Xảo quyệt/)&&typeof danger==="function"&&danger(v,S)>=60);if(k&&f&&roll(k.tf?2:.6)&&rtGate(f,"accuse").ok){rtStat("ng_frameMe");rtNgSet(k,f.id,!k.tf?roll(BAL.route.frameOil):null)}}}catch(e){}return ev}})();
+ const f=k&&liveRivals(true).find(v=>netRx(v,/Xảo quyệt/)&&typeof danger==="function"&&bandVT(v,S)>=2);if(k&&f&&roll(k.tf?2:.6)&&rtGate(f,"accuse").ok){rtStat("ng_frameMe");rtNgSet(k,f.id,!k.tf?roll(BAL.route.frameOil):null)}}}catch(e){}return ev}})();
 /* ---------- NGHIỆM THÂN on the shared mini-game frame (j82 kg82Open / kitGameFrame / kitGameResult, KIT §13) ----------
    1) rtNgSleight(kind, n, cb(ok)): the tampering mini-game — the watchers' gaze cones sweep the hall; tap «Ra tay» while no gaze is on the
       bowl. 3 hồi, need 2. Speed and cone width from the number of watchers, her Tâm cơ and Tai mắt. «Để Tâm cơ quyết định» = one roll with

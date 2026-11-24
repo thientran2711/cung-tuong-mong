@@ -359,7 +359,7 @@ try{LACK.giahoa=t=>S.bac<actBac("giahoa",S,t)?"cần Bạc "+actBac("giahoa",S,t
 try{ACTDOM.giahoa="Mưu kế";J78VERB.giahoa="giá họa {t} tội ăn trộm";DIRTY.push("giahoa");
  const g=RVGRP.find(x=>x[0]==="Hại nặng");if(g&&!g[1].includes("giahoa"))g[1].push("giahoa");if(BANDS[2]&&!BANDS[2][2].includes("giahoa"))BANDS[2][2].push("giahoa")}catch(e){}
 /* NPC minds: frame-ups for the malicious (weight 2, like Vu oan) */
-(function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(O.length&&(v.malice||0)>=50){const b=bandOf(danger(v,t));const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);
+(function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(O.length&&(v.malice||0)>=50){const b=bandVT(v,t);const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);
   if(allow.includes("giahoa")&&ACT.giahoa.ok(v,t))O.push(["giahoa",2*persW(v,"giahoa")])}}catch(e){}return O}})();
 
 /* ---------- selling quietly, pawning, redeeming ---------- */

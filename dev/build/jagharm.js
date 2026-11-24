@@ -77,9 +77,9 @@ function haOpts(v,N,need){if(!v||v===S)return[];const C=HA.oc=HA.oc||{};const k=
 function haOpts0(v,N,need){const O=[];if(!haOn()||v===S||v.coop||v.confined)return O;const H=haB();if(need&&!H.needs.includes(need))return O;
  const road=BAL.ag.road[agOrg(v)]||BAL.ag.road._;
  /* her scheme on one person (she waits for a big scheme already in hand: v.plan) */
- const C=v.plan?[]:haTargets(v).filter(x=>bandOf(danger(v,x))>=1);const t=C.length?mindPickBy(C,x=>haScoreT(v,x,need),v):null;const g=t?motiveOK(v,t,"frame"):{ok:false};
+ const C=v.plan?[]:haTargets(v).filter(x=>bandVT(v,x)>=1);const t=C.length?mindPickBy(C,x=>haScoreT(v,x,need),v):null;const g=t?motiveOK(v,t,"frame"):{ok:false};
  const N2=Object.assign({},N);if(t)N2.spite=agSpN(agSpite(v,t),haB().spiteD)*road.spite;
- if(t&&g.ok){const allow=new Set(BANDS.slice(1,bandOf(danger(v,t))+1).flatMap(x=>x[2]));
+ if(t&&g.ok){const allow=new Set(BANDS.slice(1,bandVT(v,t)+1).flatMap(x=>x[2]));
   for(const vk in HA_VAR)if(allow.has(HA_VAR[vk]))allow.add(vk);
   for(const k of allow){if(HA_NO.has(k))continue;const A=ACT[k];if(!A)continue;const gn=haGain(k);if(need&&gn.g[need]==null)continue;
    if(!HA_TOG.has(k)){let ok=false;try{ok=A.ok(v,t)}catch(e){}if(!ok)continue}
@@ -98,7 +98,7 @@ function haOpts0(v,N,need){const O=[];if(!haOn()||v===S||v.coop||v.confined)retu
    if(typeof pgHeld==="function"&&pgHeld(v).length&&!(v.inv||[]).some(e=>typeof pgFood==="function"&&pgFood(e))){const u=agU(v,N2,100,{g:{spite:H.prep.cook}},{},"scheme");
     if(u>0)O.push({k:"harm:cook",ak:"cook",t,u,tag:"scheme",act:"tự tay nấu một món",at:(kh,vv)=>palaceOf(vv||v)})}}}
  /* Trả chứng cứ lấy lòng (j78 tieuhuy): she hands back what she holds on someone she fears, to buy peace (need safe / ally) */
- if((!need||need==="safe"||need==="ally")&&ACT.tieuhuy){const E=haTargets(v).filter(x=>{try{return evG(v,x)>=1&&ACT.tieuhuy.ok(v,x)}catch(e){return false}});
+ if((!need||need==="safe"||need==="ally")&&ACT.tieuhuy){const E=haTargets(v).filter(x=>{try{return evG(v,x)>=netTh(v,"repay")&&ACT.tieuhuy.ok(v,x)}catch(e){return false}});
   const x=E.length?mindPickBy(E,y=>BAL.mind.pick.ag.base+danger(y,v),v):null;
   if(x&&motiveOK(v,x,"tieuhuy").ok){const gn=haGain("tieuhuy");const N3=Object.assign({},N);N3.safe=Math.max(N.safe||0,cl(danger(x,v)/100,0,1)*road.safe);
    const u=agU(v,N3,100,{g:gn.g,l:gn.l||{}},{},"help");if(u>0&&(!need||gn.g[need]!=null))O.push({k:"harm:tieuhuy",ak:"tieuhuy",t:x,u,tag:"help",act:haVerb("tieuhuy",x),at:(kh,vv,tt)=>haPlace("tieuhuy",vv||v,tt||x,kh,false)})}}
