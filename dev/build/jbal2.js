@@ -658,6 +658,16 @@ Object.assign(BAL.mgTier.occ,{tuyen:[1,0]});
    fx[tier] = what the result itself gives or takes on top of the rank (gain and loss on every path, also when the ceiling is Đáp ứng);
    stepSung = Sủng lost per step under the ceiling. word = mini-game kinds that are word games (never offered; drop a key when its
    non-word replacement lands, review/nw-*). The tier of the board is mgTier occ "tuyen" (BAL.mgTier). Measured: dev/measure/entry-bots.js. */
+/* SELSCENE (review/selection-scene; owner OD 23/11 ~22:28Z/~23:25Z/~23:28Z/~23:47Z, 24/11 ~05:35Z/~05:40Z/~05:50Z; brief M112 ADD.6/18/19/22/23):
+   ONE CORE for the nhập cung selection. intake = tú nữ per intake (also the mid-game tuyển tú, j27 tuyenTu: was the typed 3+R(3));
+   yard = waiting yard {n girls incl. her, perRound, kept}; room = lodging {perRoom, perBed}; w = score weights (base from Đức/Tài/Sắc + the three tests,
+   each test mark 0..10: mini ½, đối đáp ¼, hành xử ¼, ADD.22); noise = luck ± for everyone (same for her and the girls, law 1);
+   cut = [−1|0, 0|+1] step cuts; ban = below this score she is sent home (ban hoa = the life ends, OD 24/11 ~05:40Z);
+   cap = highest entry rank (Tần, OD ~23:25Z); hoaThan = the hòa thân roads (cap Phi, +1 needs Sắc ≥ hoaThanSac, ADD.19);
+   fav = thiện cảm moved with the asking royal per reaction (+ / − / none); days = playable days before the edict (1 day = 16 khắc, OD 24/11 ~05:35Z). */
+Object.assign(BAL,{selx:{intake:{min:3,max:5},yard:{n:12,perRound:4,kept:4},room:{perRoom:4,perBed:2},
+ w:{sac:.15,duc:.15,tai:.1,mini:1.5,dd:.75,hx:.75,base:20},noise:3,cut:[38,52],ban:28,cap:3,hoaThan:["nc","bd","pf"],hoaThanCap:4,hoaThanSac:70,
+ fav:{plus:3,minus:-3,mini:[[8,4],[5,2],[0,-2]]},days:1,npcMatch:{hit:8,miss:3,none:5}}});
 Object.assign(BAL,{entry:{word:["tho","doi","doden","le","tc","xa","thq"],noise:4,cut:[37,53],stepSung:5,
  w:{dir:{sac:.15,duc:.15,tai:.1,raw:3,art:1.5,th:1/6,base:8},
   dan:{sac:.15,duc:.15,suc:.05,raw:3,art:0,kim:[3.5,1.5],le:2.5,kgt:1/8,kld:-1/3,ly:3,self:-3,base:0},
