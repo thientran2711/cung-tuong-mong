@@ -1,0 +1,6 @@
+# BRIEF — SMALL KIT REVIEW kit-music 0ff57cb0 (Foreman B, sonnet)
+PRIORITY #1 CHECK: KIT §96 | main LIVE music (old six tracks) | review/kit-music 0ff57cb0 (KK18) | claims B.
+Coordinator = Foreman B session_01N1tNP5QAMJMb8uPDHpuXza. Read dev/rules/START_CORE.md (18 LAWS first) + START_WORKER.md + START_REVIEWER.md, dev/kit/KIT.md §96; model report = reports/kit-daytitle.md (same recipe).
+## Order (verbatim)
+- ORDER FROM MAIN 118 (06:40Z): KIT READY review/kit-music 0ff57cb0 (KK18, KIT §96, from LIVE 2308b425) → add to your SMALL kit reviewer: run dev/test/kit-music.js on Fold 755x1000 + iPad 1180x820 AND dev/test/presentation.js (asserts musicCtx==log.mus), quickcheck, old save; listen-free check that missing CDN files fall back to the old six (never silence). LAND READY here. FAIL list → KK18.
+## Also: every test the branch adds/touches on the BARE head and the MERGED head (newest origin/main merged into review/kit-music-r1), commands + output lines in reports/kit-music.md «## REVIEW r1». Co-op: music is per-seat; coop-e2e both seat orders must stay green. PASS → «LAND READY kit-music-r1 <full sha> FOR MAIN 118 — …» at the END of dev/handover/FOREMAN_B_STATUS.md + send_message Foreman B. FAIL → list in the report, a line «KIT FAIL kit-music → KK18» in B STATUS, tell Foreman B. Rollover at START_CTX % + 25 % (ceiling 60 %).
