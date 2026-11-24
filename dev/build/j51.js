@@ -24,13 +24,13 @@ function kvMotive(v,t,o){if(!v||v===S||!v.alive||v.out||!t||t===v)return 0;o=o||
  const th=o.map((x,i)=>[x,i]).filter(([x,i])=>(t===S?x.v===null:x.v===t)&&i<pv);if(!th.length)return 0;
  if(t!==S&&(!t.alive||t.out))return 0;
  let m=KV.base;for(const tr of traitsOf(v))if(KVT[tr]!=null)m*=KVT[tr];
- if(th.some(([x])=>x.k.heir))m*=1.3;if(aff(v,t)>=40)m*=.5;return Math.round(m)}
+ if(th.some(([x])=>x.k.heir))m*=1.3;if(aff(v,t)>=netTh(v,"than"))m*=.5;return Math.round(m)}
 function kvTargets(v,o){const L=[];for(const t of others(v)){if(t===S&&(S.dead||(typeof isSrv==="function"&&isSrv())))continue;const m=kvMotive(v,t,o);if(m>0)L.push([t,m])}return L}
 function kvSonOf(v,o){const x=(o||kvOrder()).find(x=>x.v===v);return x?x.k:null}
 window.__kvS=null;window.__kvDue={};
 /* thực đơn khi mưu vì ngôi Đông cung: chỉ các mưu nhắm vào con nàng (và dò la, vu cáo chính nàng) */
 (function(){const m0=mindMenu;mindMenu=function(v,t){const K=window.__kvS;if(!K||K.v!==v||K.t!==t)return m0.apply(this,arguments);
- try{const b=bandOf(danger(v,t)+K.m);const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);const tc=witOf(v);const O=[];v.fails=v.fails||{};
+ try{const b=bandCut(v,danger(v,t)+K.m);const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);const tc=witOf(v);const O=[];v.fails=v.fails||{};
   for(const [k,w0] of KVACT){const a=ACT[k];if(!a||!allow.includes(k))continue;let ok=false;try{ok=a.ok(v,t)}catch(e){}if(!ok)continue;
    let w=w0*persW(v,k)*(1+K.m/40);let od=null;try{od=a.o?a.o(v,t):null}catch(e){}if(od!=null&&tc>=BAL.wit.lo)w*=Math.pow(oddsCl(od)/50,(tc-BAL.wit.lo)/BAL.wit.mid);
    const f=v.fails[k]||0;if(f)w*=tc<BAL.wit.mid?1+.6*f:Math.pow(.5,f);if(w>0)O.push([k,w])}

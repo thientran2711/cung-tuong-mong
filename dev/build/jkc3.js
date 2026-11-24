@@ -84,7 +84,7 @@ function kc3Acts(X){const B=BAL.kc3,nm=kc3P("nm"),ba=kc3P("ba"),di=kc3P("di");
   if(T>=B.thay.truyen.tier&&!(S.kc.truyen||{})[m.id])X.push(kcNeed(kcCard({g:"art",who:m.id,n:`Xin ${kc3Low(m.t)} truyền nghề`,t:`Thầy chỉ truyền cho người thầy coi là truyền nhân.`,k:B.thay.truyen.k,c:{suc:B.thay.truyen.suc},w:{danh:B.thay.truyen.danh},x:`${what} tiến một bước dài`,go:()=>{S.kc.truyen=Object.assign(S.kc.truyen||{},{[m.id]:1});if(m.art==="le")S.kc.le=Math.min(B.thay.leMax,(S.kc.le||0)+1);else addArt(m.art,B.thay.truyen.art)}}),m,"kc_hoc"))}}
 function kc3TeachAf(m,n){const t0=kc3Tier(m);kcAf(m,n);const t1=kc3Tier(m);if(t1>t0)log(`<b class="g">${m.t} ${m.name} coi ngươi là ${KC3TIERW[t1]}.</b>`)}
 /* the stepmother's schemes are real: proof only exists if she has really acted (law 6a) */
-function kc3DiActed(){const d=kc3P("di");return !!(d&&(S.kc.ev.doc||S.kc.diBan||(S.kc.diAct||0)>0||(d.oan||0)>=BAL.kc3.nm.do.oanMin))}
+function kc3DiActed(){const d=kc3P("di");return !!(d&&(S.kc.ev.doc||S.kc.diBan||(S.kc.diAct||0)>0||(d.oan||0)>=netTh(d,"oan")))}
 ["phan","doc","trom","tudg","tranhmoi"].forEach(e=>{const b0=KCE[e]&&KCE[e].b;if(b0)KCE[e].b=function(){if(S&&S.kc&&S.kc.c3&&/^(phan|doc|trom|tudg)$/.test(e))S.kc.diAct=(S.kc.diAct||0)+1;return b0.apply(this,arguments)}});
 /* ---------- the arc runner (j67 format at home) ---------- */
 function kc3Thread(id){const a=KCA[id];if(!a)return null;const N=BAL.kc3.cal.nc,nc=Math.max(N[0],Math.min((a.p[1]||[]).length,N[0]+R(N[1])));
