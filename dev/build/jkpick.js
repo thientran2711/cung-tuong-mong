@@ -75,7 +75,10 @@ function build(P,swap){const K=KIT_PLAQUE,G=geo(P),el=P.el,m=P.m;P.G=G;P.up=null
    const an=n.animate([{opacity:0,transform:`translateY(${dy}px) rotate(${s*9}deg)`},{opacity:1,transform:`translateY(5px) rotate(${-s*6}deg)`,offset:.46},{transform:`translateY(-2px) rotate(${s*3.2}deg)`,offset:.68},{transform:`translateY(0) rotate(${-s*1.4}deg)`,offset:.84},{opacity:1,transform:"none"}],{duration:K.dropMs,delay:(swap?0:60)+i*K.stagger,easing:"cubic-bezier(.3,.7,.4,1)",fill:"backwards"});
    P.anims.push(an);an.onfinish=()=>{n.classList.remove("kpk-drop");const j=P.anims.indexOf(an);if(j>=0)P.anims.splice(j,1)}}
   });
-}
+ fitNames(P)}
+/* a closed plaque shows its name in 2 lines at most (owner 24/11, Fold): too long with the picture -> the whole band goes slim (no picture), still too long -> a slightly smaller name; the lifted plaque shows the whole name */
+function fitNames(P){const el=P.el;el.classList.remove("kpk-slimall","kpk-tight");const over=()=>[...el.querySelectorAll(".kpk-n:not(.kpk-up) .kfoc-t b")].some(b=>b.scrollHeight>b.clientHeight+1);
+ if(!over())return;el.classList.add("kpk-slimall");if(!over())return;el.classList.add("kpk-tight")}
 function tap(P,a,n,b){if(!P.open)return;if(P.up===n){if(a.off){try{P.o.onOff&&P.o.onOff(a,P)}catch(e){}return}
   b.dispatchEvent(new CustomEvent("kpkpick",{bubbles:true,detail:{id:a.id,act:a}}));try{P.o.onPick&&P.o.onPick(a.id,a,P)}catch(e){}return}
  lift(P,a.id)}
@@ -124,10 +127,10 @@ const css=document.createElement("style");css.id="kpk-css";css.textContent=`
 .kpk .kfoc-b.kpk-b .kfoc-pic{border:1.5px solid var(--kpk-line);box-sizing:border-box;border-radius:6px;margin-left:3px}
 .kpk .kfoc-b.kpk-b.kfoc-hasi{padding-right:20px}.kpk .kfoc-b.kpk-b .kfoc-i{top:-9px;right:-7px}/* the «!» badge sits on the corner, never on the title */
 .kpk-n.kpk-slim .kfoc-b.kpk-b .kfoc-pic{display:none}.kpk-n.kpk-slim .kfoc-b.kpk-b{padding-left:9px}
-.kpk .kfoc-b.kpk-b .kfoc-t b{-webkit-line-clamp:3;max-height:3.3em;font-size:.8rem}
+.kpk .kfoc-b.kpk-b .kfoc-t b{-webkit-line-clamp:2;max-height:2.3em;font-size:.8rem}.kpk.kpk-tight .kfoc-b.kpk-b .kfoc-t b{font-size:.72rem;letter-spacing:0}.kpk.kpk-slimall .kpk-n .kfoc-pic{display:none}.kpk.kpk-slimall .kpk-n .kfoc-b.kpk-b{padding-left:9px}
 .kpk .kfoc-b.kpk-b .kfoc-t b{color:var(--kpk-ink);text-shadow:0 1px 0 var(--kpk-hi);letter-spacing:.1px}
-.kpk .kfoc-b.kpk-b .kfoc-t small{display:none;color:#3d2410;text-shadow:0 1px 0 var(--kpk-hi);font-weight:600}
-.kpk-n.kpk-up .kfoc-b.kpk-b .kfoc-t small{display:block}
+.kpk .kfoc-b.kpk-b .kfoc-t small{display:none!important;visibility:hidden;position:absolute;opacity:0;pointer-events:none;color:#3d2410;text-shadow:0 1px 0 var(--kpk-hi);font-weight:600}
+.kpk-n.kpk-up .kfoc-b.kpk-b .kfoc-t small{display:block!important;visibility:visible;position:static;opacity:1}
 .kpk-n.kpk-up{height:auto!important;min-height:var(--kph,58px)}.kpk-n.kpk-up .kfoc-b.kpk-b{height:auto;min-height:var(--kph,58px);padding-top:5px;padding-bottom:5px}.kpk-n.kpk-up .kfoc-t b{-webkit-line-clamp:unset;max-height:none}.kpk-n.kpk-up .kfoc-t small{max-height:none}
 .kpk-n.kpk-up .kfoc-b.kpk-b{box-shadow:inset 0 1.5px 0 var(--kpk-hi),inset 0 -2px 0 rgba(70,40,12,.45),0 8px 14px rgba(0,0,0,.45),0 0 0 2px #f1d79a}
 .kpk .kfoc-b.kpk-b.kfoc-off{filter:grayscale(.6);opacity:1}
