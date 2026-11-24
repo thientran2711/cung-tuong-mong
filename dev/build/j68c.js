@@ -19,11 +19,11 @@ function j68cFit(o,r){if(!r||!J68C_NET.has(j68cK(r)))return true;let T=[];try{T=
  const any=L=>!L||!L.length||L.some(n=>T.includes(n));return any(r["nết"])&&any(r["lòng"])}
 /* needs: real state on the live world (thresholds BAL.j68c.need) */
 function j68cNeed(nd,o,oB){if(!nd)return true;if(Array.isArray(nd))return nd.every(x=>j68cNeed(x,o,oB));const N=BAL.j68c.need;try{
- if(nd==="foe")return !!o&&aff(o,S)<=N.feud;
+ if(nd==="foe")return !!o&&aff(o,S)<=netTh(o,"ky");
  if(nd==="ill")return !!(o&&illOf(o));
  if(nd==="preg")return !!(o&&o.preg>0&&!o.hidden);
- if(nd==="friend")return !!o&&aff(o,S)>=N.friend;
- if(nd==="feud")return !!(o&&oB&&(aff(o,oB)<=N.feud||aff(oB,o)<=N.feud));
+ if(nd==="friend")return !!o&&aff(o,S)>=netTh(o,"quen");
+ if(nd==="feud")return !!(o&&oB&&(aff(o,oB)<=netTh(o,"ky")||aff(oB,o)<=netTh(oB,"ky")));
  if(nd==="kids")return !!o&&(o.kids||[]).some(k=>k.alive);
  if(nd==="poor")return !!o&&o.bac!=null&&o.bac<N.poor;
  if(nd==="thIll")return !S.thDead&&!!S.thIll;
