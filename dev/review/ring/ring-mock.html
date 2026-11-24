@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vòng người — mock</title>
+<style>
+:root{--panel:#fffaf0;--panel2:#f6ead6;--line:#d2b071;--trim:#d9b25f;--gold:#8f5f0c;--red:#c23b22;--ink:#2a1a12;--dim:#6b5643;
+ --display:"Noto Serif","DejaVu Serif",Georgia,serif;--body:"Be Vietnam Pro","Inter",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#120c08;overflow:hidden;font-family:var(--body);color:var(--ink);-webkit-user-select:none;user-select:none}
+#stage{position:relative;overflow:hidden;background:#1a110c}
+#bg{position:absolute;inset:0;background:url(https://ctm-img.victoria-tntt.workers.dev/img/kc-sanh.webp) center/cover;filter:saturate(.9) brightness(.62)}
+#bgveil{position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 50% 62%,rgba(255,226,160,.20),rgba(20,10,4,.55) 70%,rgba(10,5,2,.78))}
+#dimmer{position:absolute;inset:0;background:rgba(14,8,4,.0);backdrop-filter:blur(0px);pointer-events:none}
+/* HUD (reuses the game's top status row: place title + khắc pips) */
+#hud{position:absolute;left:0;right:0;top:0;height:var(--hudh);display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);z-index:60;
+ background:linear-gradient(#1b0f08ee,#1b0f0800)}
+.chip{display:inline-flex;align-items:center;gap:8px;height:var(--chiph);padding:0 16px;border-radius:999px;background:var(--panel);border:2px solid var(--trim);color:var(--ink);font:700 var(--chipf) var(--display);box-shadow:0 2px 8px #0006}
+.khac{display:flex;gap:7px;align-items:center}
+.khac i{width:var(--kd);height:var(--kd);border-radius:50%;background:#e0b24a;border:2px solid #fff3cf;box-shadow:0 0 8px #e0b24a99}
+.khac i.o{background:#5b4630;border-color:#8a7050;box-shadow:none}
+/* ring */
+#track{position:absolute;border-radius:50%;border:2px dashed rgba(240,212,140,.38);box-shadow:0 0 28px rgba(255,220,150,.16) inset;pointer-events:none}
+#pool{position:absolute;border-radius:50%;background:radial-gradient(ellipse,rgba(255,232,170,.55),rgba(255,232,170,0) 68%);pointer-events:none}
+.fig{position:absolute;transform-origin:50% 100%;will-change:transform,filter}
+.fig img{display:block;width:100%;height:auto;pointer-events:none}
+.ta{padding:2px 12px;border-radius:999px;background:#7a1f12;border:2px solid var(--trim);color:#fff3cf;font:700 var(--tagf) var(--display);white-space:nowrap}
+.fig.glow{animation:gl 1.1s ease-in-out infinite}
+@keyframes gl{0%,100%{filter:var(--f0) drop-shadow(0 0 10px #ff6a3d)}50%{filter:var(--f0) drop-shadow(0 0 26px #ff4b2a) drop-shadow(0 0 8px #ffd27a)}}
+body.static .fig.glow{animation:none;filter:var(--f0) drop-shadow(0 0 24px #ff4b2a) drop-shadow(0 0 8px #ffd27a)!important}
+/* swipe cues */
+.chev{position:absolute;top:var(--chevy);width:var(--chevw);height:var(--chevw);border-radius:50%;background:#1b0f08aa;border:2px solid var(--trim);z-index:40;display:flex;align-items:center;justify-content:center;color:#f5d88f;font:700 calc(var(--chevw)*.6) var(--display)}
+.chev.l{left:8px}.chev.r{right:8px}
+/* name plate (kit §93 kitNameTag sketch) */
+#plate{position:absolute;left:50%;transform:translateX(-50%);bottom:var(--platey);min-width:var(--platew);text-align:center;padding:10px 26px;border-radius:14px;background:linear-gradient(var(--panel),var(--panel2));border:3px solid var(--trim);box-shadow:0 4px 14px #0008;font:800 var(--platef) var(--display);color:var(--ink);z-index:45;transition:opacity .25s}
+#plate small{display:block;font:600 calc(var(--platef)*.62) var(--body);color:var(--dim);margin-top:2px}
+/* pips (mini ring map; reuses §59 stand-in xs portrait) */
+#pips{position:absolute;left:0;right:0;display:flex;justify-content:center;gap:var(--pipgap);z-index:46}
+.pip{position:relative;width:var(--pip);height:var(--pip);border-radius:50%;overflow:hidden;border:2px solid #8a7050;background:#e9d9b5;opacity:.72;flex:none}
+.pip img{position:absolute;width:250%;left:-75%;top:2%}
+.pip.f{border-color:#ffe08a;opacity:1;box-shadow:0 0 0 3px #ffe08a88,0 0 14px #ffd98a}
+.pip.dr{border-color:#ff6a3d;opacity:1;box-shadow:0 0 0 3px #ff6a3d99,0 0 16px #ff4b2a}
+body:not(.static) .pip.dr{animation:pp .9s ease-in-out infinite}
+@keyframes pp{50%{transform:scale(1.18)}}
+.pthread{position:absolute;top:50%;height:3px;background:#e0432a;transform:translateY(-50%);border-radius:2px}
+/* seal (NEW part sketch «ấn báo chuyện») */
+.seal{position:absolute;z-index:55;width:var(--seal);height:var(--seal);transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;border-radius:50%;
+ background:radial-gradient(circle at 35% 30%,#e8553a,#a3200f 70%);border:3px solid #f5d88f;box-shadow:0 0 0 3px #7a1f12,0 4px 14px #000a;color:#fff3cf;font:800 calc(var(--seal)*.2) var(--display);text-align:center;line-height:1.1}
+body:not(.static) .seal{animation:sl 1s ease-in-out infinite}
+@keyframes sl{50%{transform:translate(-50%,-62%) scale(1.08)}}
+svg.thr{position:absolute;inset:0;z-index:50;pointer-events:none;overflow:visible}
+/* notice pill (option A) */
+#pill{position:absolute;top:var(--pilly);z-index:62;display:flex;align-items:center;gap:10px;height:var(--pillh);padding:0 18px 0 12px;border-radius:999px;background:linear-gradient(#8f2312,#5d1409);border:3px solid var(--trim);color:#fff3cf;font:800 var(--pillf) var(--display);box-shadow:0 4px 16px #000a}
+#pill.l{left:10px}#pill.r{right:10px;flex-direction:row-reverse;padding:0 12px 0 18px}
+#pill .fc{display:flex}
+#pill .fc span{position:relative;width:var(--pillfc);height:var(--pillfc);border-radius:50%;overflow:hidden;border:2px solid #f5d88f;background:#e9d9b5;margin-left:-8px}
+#pill .fc span:first-child{margin-left:0}
+#pill .fc img{position:absolute;width:250%;left:-75%;top:2%}
+body:not(.static) #pill{animation:pn 1.2s ease-in-out infinite}
+@keyframes pn{50%{transform:translateX(-6px)}}
+body:not(.static) #pill.r{animation-name:pn2}
+@keyframes pn2{50%{transform:translateX(6px)}}
+/* inset window (option B; kit §93 focus shot sketch) */
+#inset{position:absolute;z-index:70;left:var(--insl);width:var(--insw);overflow:hidden;border-radius:18px;border:4px solid var(--trim);box-shadow:0 0 0 3px #4a2a12,0 14px 40px #000c;background:#2a1a12}
+#inset .ib{position:absolute;inset:0;background:url(https://ctm-img.victoria-tntt.workers.dev/img/kc-sanh.webp) 30% 40%/cover;filter:blur(3px) brightness(.8) saturate(.95)}
+#inset .iv{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 70%,rgba(255,200,140,.0),rgba(60,10,4,.55))}
+#inset .ifig{position:absolute;bottom:0;transform-origin:50% 100%}
+#inset .ifig img{display:block;width:100%}
+#inset .cap{position:absolute;left:14px;top:12px;z-index:3;display:flex;align-items:center;gap:8px;height:var(--capH);padding:0 14px;border-radius:999px;background:linear-gradient(#8f2312,#5d1409);border:2px solid var(--trim);color:#fff3cf;font:800 var(--capf) var(--display)}
+#inset .x{position:absolute;right:12px;top:12px;z-index:3;width:var(--capH);height:var(--capH);border-radius:50%;background:var(--panel);border:2px solid var(--trim);display:flex;align-items:center;justify-content:center;font:700 calc(var(--capH)*.55) var(--display);color:var(--ink)}
+/* dialogue (kit §95 dialogue spotlight + §93 kitDlgBox + kitBareOpts sketch) */
+#dlg{position:absolute;left:var(--dgl);right:var(--dgr);bottom:var(--dgb);z-index:80;border-radius:16px;background:linear-gradient(var(--panel),var(--panel2));border:3px solid var(--trim);box-shadow:0 6px 22px #000b;padding:var(--dgp)}
+#dlg .ln{font:600 var(--dgf) var(--body);color:var(--ink);line-height:1.35}
+#dlg .ln b{font-family:var(--display);color:var(--gold)}
+#dlg .op{display:grid;grid-template-columns:var(--opcols);gap:8px;margin-top:10px}
+#dlg .op div{height:var(--oph);display:flex;align-items:center;justify-content:center;border-radius:12px;background:#fff;border:2px solid var(--line);font:800 var(--opf) var(--display);color:var(--ink);box-shadow:0 2px 0 #d9b25f88}
+/* tap ripple + finger (video only) */
+#finger{position:absolute;z-index:99;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;background:rgba(255,255,255,.40);border:3px solid rgba(255,255,255,.85);display:none;pointer-events:none;box-shadow:0 0 16px #0008}
+#finger.tap{background:rgba(255,230,140,.6)}
+/* ring dim for C / B */
+#ringdim{position:absolute;inset:0;z-index:30;pointer-events:none;background:rgba(10,5,2,0)}
+/* C ripple */
+.rip{position:absolute;z-index:44;border-radius:50%;border:3px solid #ff7a4d;transform:translate(-50%,-50%);pointer-events:none}
+</style></head>
+<body>
+<div id="stage">
+  <div id="bg"></div><div id="bgveil"></div>
+  <div id="hud"><span class="chip">Sân chờ</span><span class="khac"><i></i><i></i><i></i><i class="o"></i></span></div>
+  <div id="track"></div><div id="pool"></div>
+  <div id="ring" style="position:absolute;inset:0;z-index:20"></div>
+  <div id="ringdim"></div>
+  <svg class="thr" id="thr"></svg>
+  <div class="chev l" id="chl">‹</div><div class="chev r" id="chr">›</div>
+  <div id="pips"></div>
+  <div id="plate"><span id="pn">—</span><small id="ps"></small></div>
+  <div id="pill" class="l" style="display:none"><span class="fc" id="pfc"></span><span>Có chuyện</span></div>
+  <div id="inset" style="display:none"><div class="ib"></div><div class="iv"></div><div class="cap">Có chuyện</div><div class="x">×</div></div>
+  <div id="dlg" style="display:none"><div class="ln"><b>Ma ma</b> · Chén trà đổ lên xiêm y, hai nàng to tiếng.</div>
+    <div class="op"><div>Bênh vực</div><div>Hùa theo</div><div>Hòa giải</div><div>Đứng ngoài</div></div></div>
+  <div id="finger"></div>
+</div>
+<script>
+const CDN='https://ctm-img.victoria-tntt.workers.dev/img/';
+const Q=new URLSearchParams(location.search);
+const OPT=(Q.get('opt')||'A').toUpperCase(), DEV=Q.get('dev')||'fold', STATE=Q.get('state')||'idle', PLAY=Q.get('play')==='1';
+if(!PLAY)document.body.classList.add('static');
+const D=DEV==='fold'?{W:755,H:1000,cx:377,rx:262,yF:740,yB:480,fh:610,hud:96,chip:44,chipf:'20px',kd:16,pad:18,
+  plate:{y:70,w:300,f:'26px'},pips:{y:160,s:44,g:7},pill:{y:108,h:56,f:'19px',fc:36},seal:72,chev:{y:430,w:44},tag:'15px',
+  dlg:{l:14,r:14,b:14,p:14,f:'19px',cols:'1fr 1fr',oh:50,of:'20px'},ins:{l:14,w:727,t:118,h:300,capH:40,capf:'17px'},insOpen:{t:118,h:470}}
+ :{W:1180,H:820,cx:590,rx:455,yF:628,yB:420,fh:470,hud:76,chip:44,chipf:'20px',kd:16,pad:24,
+  plate:{y:22,w:320,f:'26px'},pips:{y:92,s:42,g:8},pill:{y:90,h:54,f:'19px',fc:34},seal:70,chev:{y:300,w:46},tag:'14px',
+  dlg:{l:150,r:150,b:14,p:14,f:'19px',cols:'repeat(4,1fr)',oh:50,of:'20px'},ins:{l:240,w:700,t:92,h:260,capH:38,capf:'17px'},insOpen:{t:92,h:400}};
+const st=document.getElementById('stage');st.style.width=D.W+'px';st.style.height=D.H+'px';
+const r=document.documentElement.style;
+Object.entries({hudh:D.hud+'px',chiph:D.chip+'px',chipf:D.chipf,kd:D.kd+'px',pad:D.pad+'px',platey:D.plate.y+'px',platew:D.plate.w+'px',platef:D.plate.f,pipgap:D.pips.g+'px',pip:D.pips.s+'px',
+ pilly:D.pill.y+'px',pillh:D.pill.h+'px',pillf:D.pill.f,pillfc:D.pill.fc+'px',seal:D.seal+'px',chevy:D.chev.y+'px',chevw:D.chev.w+'px',tagf:D.tag,
+ dgl:D.dlg.l+'px',dgr:D.dlg.r+'px',dgb:D.dlg.b+'px',dgp:D.dlg.p+'px',dgf:D.dlg.f,opcols:D.dlg.cols,oph:D.dlg.oh+'px',opf:D.dlg.of,
+ insl:D.ins.l+'px',insw:D.ins.w+'px',capH:D.ins.capH+'px',capf:D.ins.capf}).forEach(([k,v])=>r.setProperty('--'+k,v));
+document.getElementById('pips').style.bottom=D.pips.y+'px';
+if(DEV!=='fold')document.getElementById('dlg').style.left=D.dlg.l+'px';
+/* people: 12 (index 0 = the player «Ta») */
+const IDS=['player','c01','c02','c03','c04','c05','c06','c07','c08','c09','c10','c11'];
+const SRC=i=>i===0?CDN+'fig-player-look1-t1-a18.webp':CDN+'fig-consort-'+IDS[i]+'-t1-a18.webp';
+const NAME=['Ta','Lâm Uyển Nhi',null,'Tô Nhược Lan',null,'Hạ Vân Thư',null,null,'Mạc Tịnh Nghi','Đường Chỉ Nhu',null,null];
+const PAIR=[5,6];            // the two girls in trouble
+const ring=document.getElementById('ring');
+const figs=IDS.map((_,i)=>{const d=document.createElement('div');d.className='fig';d.innerHTML='<img src="'+SRC(i)+'">'+'';ring.appendChild(d);return d});
+const pips=document.getElementById('pips');
+const pipEls=IDS.map((_,i)=>{const p=document.createElement('div');p.className='pip';p.innerHTML='<img src="'+SRC(i)+'">';pips.appendChild(p);return p});
+document.getElementById('pfc').innerHTML=PAIR.map(i=>'<span><img src="'+SRC(i)+'"></span>').join('');
+/* ring geometry: angle table so the front neighbours are not buried */
+const TH=[0,42,72,98,128,155,180].map(a=>a*Math.PI/180);
+function theta(d){const s=Math.sign(d),a=Math.abs(d),k=Math.min(6,a),i=Math.floor(k),f=k-i;return s*(TH[i]+(TH[Math.min(6,i+1)]-TH[i])*f)}
+function wrap(d){d=((d%12)+12)%12;return d>=6?d-12:d}
+const S={cur:1,out:0,dim:0,alert:0,inset:0,dlg:0,pill:0,pillSide:'l',thread:0,glow:0,opened:0,spot:0};
+function pose(d,i){const th=theta(d),z=Math.cos(th),u=(z+1)/2;
+  const sc=.45+.55*u*u, br=.40+.60*Math.pow(u,1.5);
+  return {x:D.cx+D.rx*Math.sin(th), y:D.yF-(D.yF-D.yB)*(1-z)/2, sc, br, u, z}}
+let LAST={};
+function render(){
+  const track=document.getElementById('track'),pool=document.getElementById('pool');
+  const ty=(D.yF+D.yB)/2,rh=(D.yF-D.yB);
+  track.style.cssText=`left:${D.cx-D.rx-30}px;width:${2*D.rx+60}px;top:${ty-rh/2-12}px;height:${rh+24}px`;
+  pool.style.cssText=`left:${D.cx-D.rx*.55}px;width:${D.rx*1.1}px;top:${D.yF-30}px;height:60px;opacity:${1-S.out*.7}`;
+  IDS.forEach((_,i)=>{
+    const d=wrap(i-S.cur),p=pose(d,i);let {x,y,sc,br}=p;let z=p.z, blur=Math.max(0,(0.2-p.u)*0), sat=.55+.45*p.u;
+    const pairIdx=PAIR.indexOf(i);
+    if(pairIdx>=0&&S.out>0){            // option C: step out toward the centre, as a pair
+      const tx=D.cx+(pairIdx?1:-1)*D.fh*.26, ty2=D.yF+(DEV==='fold'?34:22), tsc=DEV==='fold'?1.06:1.0;
+      x=x+(tx-x)*S.out; y=y+(ty2-y)*S.out; sc=sc+(tsc-sc)*S.out; br=br+(1.0-br)*S.out; z=2; sat=sat+(1-sat)*S.out}
+    else if(S.out>0){ br=br*(1-S.dim*.55); }
+    if(S.spot&&pairIdx<0){br=br*(1-S.spot*.45)}
+    const h=D.fh*sc, w=h*0.415;
+    const el=figs[i];
+    el.style.width=w+'px';el.style.left=(x-w/2)+'px';el.style.top=(y-h)+'px';
+    el.style.zIndex=Math.round(100+(pairIdx>=0&&S.out>0?500:z*100));
+    const f0=`brightness(${br.toFixed(3)}) saturate(${sat.toFixed(3)})`;
+    el.style.setProperty('--f0',f0);
+    const isg=pairIdx>=0&&S.glow>0;
+    const front=Math.abs(d)<.35&&!(S.out>0)&&!S.spot;
+    el.classList.toggle('glow',isg);
+    el.style.filter=isg?'':f0+(front?' drop-shadow(0 0 18px rgba(255,230,160,.85))':'');
+    LAST[i]={x,y,h,w,sc};
+  });
+  let tt=document.getElementById('tatag');if(!tt){tt=document.createElement('div');tt.id='tatag';tt.className='ta';tt.textContent='Ta';tt.style.cssText='position:absolute;z-index:58;transform:translate(-50%,-100%)';st.appendChild(tt)}
+  tt.style.left=LAST[0].x+'px';tt.style.top=(LAST[0].y-LAST[0].h-2)+'px';tt.style.display=(S.dlg||S.inset)?'none':'block';
+  // front plate / pips
+  const fi=Math.round(((S.cur%12)+12)%12)%12; const frontNow=Math.abs(wrap(fi-S.cur))<.35;
+  const nm=document.getElementById('pn'),ps=document.getElementById('ps');
+  const nameOf=i=>NAME[i]||'Một tú nữ';
+  nm.textContent=nameOf(fi);ps.textContent=fi===0?'':(NAME[fi]?'':'');
+  document.getElementById('plate').style.opacity=(frontNow&&!S.dlg&&!S.inset)?1:0;
+  pipEls.forEach((p,i)=>{p.classList.toggle('f',i===fi&&frontNow);p.classList.toggle('dr',S.glow>0&&PAIR.includes(i))});
+  // chevrons
+  const ch=(S.dlg||S.inset||S.out>.4)?0:1;
+  document.getElementById('chl').style.opacity=ch;document.getElementById('chr').style.opacity=ch;
+  // ring dim layer
+  document.getElementById('ringdim').style.background=`rgba(10,5,2,${(S.dimLayer||0).toFixed(3)})`;
+  // pill (option A)
+  const pill=document.getElementById('pill');pill.style.display=S.pill>0?'flex':'none';pill.className=S.pillSide;pill.style.opacity=S.pill;
+  // thread + seal over the pair
+  const thr=document.getElementById('thr');let html='';
+  document.querySelectorAll('.seal,.rip').forEach(e=>e.remove());
+  if(S.thread>0){
+    const a=LAST[PAIR[0]],b=LAST[PAIR[1]];
+    const ay=a.y-a.h*.80, by=b.y-b.h*.80, ax=a.x, bx=b.x, mx=(ax+bx)/2, my=Math.min(ay,by)-8;
+    html+=`<path d="M${ax},${ay} Q${mx},${my-18} ${bx},${by}" stroke="#e0432a" stroke-width="${DEV==='fold'?4:4}" fill="none" stroke-linecap="round" opacity="${S.thread}" stroke-dasharray="${S.thread<1?'200':'0'}"/>`;
+    const s=document.createElement('div');s.className='seal';s.innerHTML='Có<br>chuyện';s.style.left=mx+'px';s.style.top=(my-34)+'px';s.style.opacity=S.thread;
+    const sc=Math.max(.8,Math.min(1,(a.sc+b.sc)/1.4));s.style.setProperty('--seal',(D.seal*sc)+'px');st.appendChild(s)}
+  thr.innerHTML=html;thr.setAttribute('width',D.W);thr.setAttribute('height',D.H);
+  if(S.rip>0){const a=LAST[PAIR[0]],b=LAST[PAIR[1]];[a,b].forEach(q=>{const e=document.createElement('div');e.className='rip';const R=q.w*(.35+S.rip*.35);e.style.cssText+=`left:${q.x}px;top:${q.y-6}px;width:${R*1.5}px;height:${R*.42}px;opacity:${.9-S.rip*.5};border-width:2px`;st.appendChild(e)})}
+  // inset (option B)
+  const ins=document.getElementById('inset');
+  if(S.inset>0){ins.style.display='block';const t=S.opened?D.insOpen.t:D.ins.t,h=S.opened?D.insOpen.h:D.ins.h;
+    ins.style.top=(t-(1-S.inset)*220)+'px';ins.style.height=h+'px';ins.style.opacity=Math.min(1,S.inset*1.6);
+    ins.querySelectorAll('.ifig').forEach(e=>e.remove());
+    const fw=h*(S.opened?1.05:1.5)*.415*(DEV==='fold'?1:1);          // waist-up crop of two figures
+    PAIR.forEach((pi,k)=>{const f=document.createElement('div');f.className='ifig';const W=(S.opened?h*1.02:h*1.55)*.415;
+      f.style.width=W+'px';f.style.left=(D.ins.w/2+(k?1:-1)*W*.55-W/2)+'px';f.style.bottom=(-(S.opened?h*.62:h*.78)*0+ -W/.415*(S.opened?.30:.43))+'px';f.innerHTML='<img src="'+SRC(pi)+'">';
+      if(S.opened&&k===0)f.style.transform='rotate(-1.5deg)';ins.appendChild(f)});
+    ins.querySelector('.cap').style.display=S.opened?'none':'flex';ins.querySelector('.x').style.display=S.opened?'none':'flex';
+  }else ins.style.display='none';
+  const dl=document.getElementById('dlg');dl.style.display=S.dlg>0?'block':'none';dl.style.opacity=S.dlg;
+  pips.style.opacity=(S.dlg||S.opened)?.0:1;
+}
+/* tween helper */
+function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2}
+function tw(key,to,ms,from){return new Promise(res=>{const a=from!==undefined?from:S[key],t0=performance.now();(function f(n){const t=Math.min(1,(n-t0)/ms);S[key]=a+(to-a)*ease(t);render();t<1?requestAnimationFrame(f):res()})(t0)})}
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+const fing=document.getElementById('finger');
+function fpos(x,y,tap){fing.style.display='block';fing.style.left=x+'px';fing.style.top=y+'px';fing.classList.toggle('tap',!!tap)}
+async function swipe(x0,x1,y,ms,curTo){fpos(x0,y);await wait(120);const t0=performance.now();const c0=S.cur;
+  await new Promise(res=>{(function f(n){const t=Math.min(1,(n-t0)/ms),e=ease(t);fpos(x0+(x1-x0)*e,y,1);S.cur=c0+(curTo-c0)*e;render();t<1?requestAnimationFrame(f):res()})(t0)});
+  fing.style.display='none'}
+async function tap(x,y){fpos(x,y,0);await wait(260);fpos(x,y,1);await wait(160);fing.style.display='none'}
+/* option scenes */
+const TURNED=-3, PAIRC=5.5;
+function setup(state){
+  Object.assign(S,{cur:1,out:0,dim:0,alert:0,inset:0,dlg:0,pill:0,thread:0,glow:0,opened:0,spot:0,dimLayer:0,rip:0});
+  if(state==='idle'){}
+  if(state==='turned'){S.cur=TURNED}
+  if(state==='alert'||state==='open'){S.cur=TURNED}
+  if(state==='alert'){
+    if(OPT==='A'){S.glow=1;S.thread=1;S.pill=1;S.pillSide='l'}
+    if(OPT==='B'){S.glow=1;S.inset=1;S.dimLayer=.38}
+    if(OPT==='C'){S.out=.55;S.dim=.7;S.rip=.5;S.glow=1;S.dimLayer=.42}
+  }
+  if(state==='open'){
+    if(OPT==='A'){S.cur=PAIRC;S.glow=1;S.dlg=1;S.spot=1}
+    if(OPT==='B'){S.glow=0;S.inset=1;S.opened=1;S.dlg=1;S.dimLayer=.72}
+    if(OPT==='C'){S.out=1;S.dim=1;S.dlg=1;S.dimLayer=.55}
+  }
+  render()}
+async function play(){
+  setup('idle');await wait(1300);
+  await swipe(560,150,DEV==='fold'?560:470,1100,TURNED);          // swipe: ring turns
+  await wait(700);
+  // tap a side girl → she turns to front
+  await tap(LAST[(Math.round(TURNED)+12+1)%12].x,LAST[(Math.round(TURNED)+12+1)%12].y-150);
+  await tw('cur',TURNED+1,650);await wait(900);await tw('cur',TURNED,600);await wait(500);
+  // drama starts off-front
+  if(OPT==='A'){S.glow=1;await tw('thread',1,500,0);S.pill=1;await tw('pill',1,350,0);await wait(2300);
+    await tap(DEV==='fold'?90:110,D.pill.y+D.pill.h/2);
+    S.pill=0;S.thread=0;await tw('cur',PAIRC,950);await tw('dlg',1,380,0);await wait(2800)}
+  if(OPT==='B'){S.glow=1;await tw('dimLayer',.38,500);await tw('inset',1,650,0);await wait(3000);
+    await tap(D.W/2,D.ins.t+D.ins.h/2);S.opened=1;S.glow=0;S.dimLayer=.72;render();await tw('dlg',1,380,0);await wait(2800)}
+  if(OPT==='C'){S.glow=1;S.rip=0;const a=tw('out',.55,700,0),b=tw('dimLayer',.42,700,0),c=tw('dim',.7,700,0);await Promise.all([a,b,c]);
+    await tw('rip',1,500,0);S.rip=0;await wait(600);await Promise.all([tw('out',1,650),tw('dimLayer',.55,650),tw('dim',1,650)]);await tw('dlg',1,380,0);await wait(2800)}
+  window.__done=true}
+if(PLAY){setup('idle');window.__play=play}else{setup(STATE)}
+window.__ready=true;
+</script></body></html>
