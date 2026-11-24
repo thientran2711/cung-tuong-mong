@@ -1,5 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
+last wake: 24/11 10:40Z — FOREMAN D (depth 2) session_01D3E3Na3nufuz83iygjVBum (hourly; ctx ≈ 27 % → rolling over before the 31 % line; MAIN = 121)
 last wake: 24/11 09:40Z — FOREMAN D (depth 2) session_01D3E3Na3nufuz83iygjVBum (hourly; ctx ≈ 13 %; MAIN = 121)
 last wake: 24/11 09:25Z — FOREMAN D = session_01D3E3Na3nufuz83iygjVBum; START_CTX ≈ 6 %; depth 2 (took over from depth 1 01D3E3NbMrdKdp; MAIN = 120)
 last wake: 24/11 08:40Z — FOREMAN D (depth 1) session_01D3E3NbMrdKdp4hAx8gfMUq (hourly; ctx ≈ 22 %; MAIN = 120)
@@ -1550,3 +1551,16 @@ Hourly trigger trig_01K7fkGq5sw9RjGgoTxYLza6 DELETED by depth 1 at rollover; chi
   Seats now: PROMO-BUILD-2 NYnT9a58 · FIX net-build r1 NXVfZy3o · rv SERVANT-TRUST NZh6xm1S.
 - (24/11 10:09Z, D depth 2) PROMO-BUILD-2 SSK 7accb31a (base promo-build-rv 1cab34e1) → opus BIG reviewer session_01D3E3NXxkVhTabMxB4z4ood (briefs/D-promo-build-2-review.md; perf re-measure on quiet box, base vs head); worker NYnT9a58 ARCHIVED. Worker open points (reviewer judges vs OD, design gaps → OWNER QUESTION via MAIN): đăng cơ đại lễ inside the old Emperor's 27-month mourning → never held; co-op guest-queen cannot nominate.
   Seats now: FIX net-build r1 NXVfZy3o · rv SERVANT-TRUST NZh6xm1S · rv PROMO-BUILD-2 NXxkVhTa.
+
+## HANDOVER D depth 2 (01D3E3Na3nufuz) → D child (depth 3) (24/11 10:42Z; START_CTX ≈ 6 %, context 27 % — next wakes would cross the 31 % line, so rolling over now)
+MAIN = CHÍNH 121 session_01V1ZZH3Y1pnvf6EbatnuD4W (write FOR MAIN 121 lines). LANDER = LC10 session_01V1ZZH4w5vkbybCTwK1DkHR. Main head 178cac37 (24/11 10:40Z).
+PUSH RECIPE: /home/user/wt/dpush2.sh is per-container (recreate it): fetch --depth=5 explicit refspec under flock; checkout -f --detach origin/<branch>; edit; commit; on reject: fetch, checkout origin, cherry-pick -X theirs <commit>, push. md conflicts keep both.
+LAND READY waiting LC10 (posted FOR MAIN 121 at 09:40Z; recheck main log before reposting): review/law1-gifts-rv e3e3382b · review/palace-distance-rv 7cc392fb · review/promo-build-rv 1cab34e1 · review/robot10-nc-fix-4-rv 32b6bbdc · review/kit-promo-hook-rv 73c692ca.
+OPEN SEATS (mine; send_message "Foreman D = <new id>, report to it"):
+| session | job | next |
+|---|---|---|
+| session_01D3E3NXVfZy3ocFNYujBsPy | FIX net-build r1 (opus; briefs/D-net-build-fix.md; on review/net-build-rv from b029879a; 4 FAIL items) | on SSK → new opus BIG reviewer (re-review all 4 items + earlier checks) → LAND READY |
+| session_01D3E3NZh6xm1S3xPV8XpuMW | rv SERVANT-TRUST 42db050c (opus; briefs/D-servant-trust-review.md; stacked on net-build; told NOT to merge net-build-rv) | on PASS → re-merge onto fixed net-build-rv (small fixer or reviewer), then LAND READY after net-build |
+| session_01D3E3NXxkVhTabMxB4z4ood | rv PROMO-BUILD-2 7accb31a (opus; briefs/D-promo-build-2-review.md; perf re-measure) | on PASS → LAND READY after promo-build-rv; open points (đăng cơ in 27-month mourning; co-op guest-queen nominate) → OWNER QUESTION via MAIN if OD silent |
+FOLLOW-UPS: net-build band-3 share ≤30 % target (NPC→NPC oán saturation); servant-trust ring/vòng-nhóm UI waits owner design; low NPC nights/visits (pre-existing); ART REQUEST Phân cung picture → Foreman C via MAIN. FOREMAN_D_STATUS.md is ~500 KB (> 100 KB rule): child should archive finished entries older than 24 h into dev/archive/ (dev/tools/archive_move.py) at its rollover.
+Hourly trigger trig_01DCbNcYgxh5sHxoka6232iv DELETED by depth 2 at rollover; child makes its own (:37).
