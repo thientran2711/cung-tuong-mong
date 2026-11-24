@@ -177,3 +177,11 @@ Source: year-14 save → +1 game year on 434a4a30 (r10e-save-size OUT=, r10e-gro
 | her own bag (S.inv 1 357 → 1 467: 573 candles / oil, tea, tp) | | +9 k | hers; she can sell / give | keep |
 | S.rlog / S.nmReg / S.intel / S.knw | | +21 k / +3 k / +8 k / +5 k | rlog is already bounded (181 k at y14 vs 188 k at y4); nmReg 13 427 rows (name register) | owned by their modules; not law 6c |
 Technical option with no rule change (for MAIN): the browser slot could hold a compressed save (j16 saveCode «CTM2» gzip already exists for export; save() / loadSlot() are synchronous, so it needs a sync codec or an async save) — typically 5–10× smaller, old saves keep loading by prefix. Not started: a save-format change touches cloud save (jcloud rawSlot / writeSlot) and Sổ › export.
+
+## 8. Step 4 UI rows — E-FIX-4 (harness, TEST-ONLY) review/robot10-e-fix-4 e4022143 (on fix-2 r3 0673d1a1)
+| row | verdict | cause | proof |
+|---|---|---|---|
+| R3 cnv_chu schemer-4 Fold court tab: «text off screen» span.kgl.kfx x 318..1007 + span.r 715..804 (saves-r5 R3-018.json) | HARNESS false positive | the text sits in the kit one-line person row «Dạo này» (KIT §6.3h: .krv overflow hidden, cut «…» + «!» opens the full text); the robot's uiScan took the full text box, not the part she sees. Live page (looked, Fold): row cut correctly with «!» | dev/test/r10e-offscreen-clip.js: fix-2 r3 harness FAIL 1 (Fold x 324..1295, iPad 753..1724) → e4022143 ALL OK on Fold 755x1000 + iPad 1180x820; a real unclipped text past the edge is still reported |
+Change: dev/measure/robot10.js uiScan «seen» box = text box cut by every clipping ancestor that ends INSIDE the screen (a screen-wide wrapper's clip still counts). No game file.
+Still open (waiting for saves on review/robot10-saves-r5): R8 cautious-3 kmrow×kmtake, R2 rebel-3 kmchip, R8 em.pcs kid tab.
+SSK: SẴN SÀNG KIỂM robot10-e-fix-4 e4022143 (SMALL, test-only; lands after fix-2 r3).
