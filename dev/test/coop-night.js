@@ -247,6 +247,9 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
   const same=await A.p.evaluate(w=>{COOPW.nfr=w-1;COOP.emit('start',{you:COOP.state.you});return COOPW.nfr===w-1},w0);ok(same,'11: same room start keeps the night gate');
   const a=await A.p.evaluate(w=>{COOPW.nRoom='OLD1';COOPW.ngo=w;COOPW.nfr=w;COOP.emit('start',{you:COOP.state.you});return {ngo:COOPW.ngo,nfr:COOPW.nfr,room:COOPW.nRoom===COOP.state.room}},w0);
   ok(a.ngo===-1&&a.nfr===-1&&a.room,'11: host, new room: the old commit / her old ready are cleared',a);
+  /* r1 reviewer (law 11): the host's thin E copies keyed by week / week:buổi (her stored ready E.rd, her owed step E.owe, her night E.nk, her Kỳ nguyệt ask E.cyA) */
+  const e=await A.p.evaluate(w=>{const E=COOPW.thin.E;COOPW.nRoom='OLD1';E.rd.b={w:COOP.state.week||0,b:S.buoi||0,at:Date.now()};E.owe={old:1};E.nk=w;E.cyA=7;COOP.emit('start',{you:COOP.state.you});return {rd:!!E.rd.b,owe:E.owe,nk:E.nk===undefined?null:E.nk,cyA:E.cyA===undefined?null:E.cyA}},w0);
+  ok(!e.rd&&e.owe===null&&e.nk===null&&e.cyA===null,'11: host, new room: her old stored ready / owed step / night / cycle ask are cleared',e);
   const g=await B.p.evaluate(()=>{const E=COOPW.thin.E,k=(COOP.state.week||0)+':'+(S.buoi||0);COOPW.nRoom='OLD1';E.mine=k;COOP.emit('start',{you:COOP.state.you});return {mine:E.mine,room:COOPW.nRoom===COOP.state.room}});
   ok(g.mine===''&&g.room,'11: guest, new room: her old ask is cleared',g);
   for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
