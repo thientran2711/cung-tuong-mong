@@ -145,3 +145,7 @@ ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 
 - The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
 - Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+
+# KK16 — kit-framefit DONE 24/11
+PRIORITY #1 CHECK: KIT_REQUESTS.md audit + git grep main (MG10A/K-BADGE/kitColDot built already) | review/kit-framefit 055baec6 | claims KK16.
+Built: 56.18 figure slot, 48.1 tassel tag backing, 13.16 hint words; v3@390 closed moot (portrait is pre-rotated). Tests: ending-screens 268/268, dialog-fixed pass, cardflip no errors, Fold+iPad looked.
