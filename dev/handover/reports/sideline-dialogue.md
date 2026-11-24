@@ -150,3 +150,50 @@ Successor steps:
 6. Drop the thin-p4-r2 / thin-p6-r2 merges once LIVE (merge LIVE main instead). KIT REQUEST (tail side) stays filed above.
 - (24/11) W7 j68_d_ky.md DONE 161 scenes (84 j68 myst+rumor, 77 ky), W8 j7_wc.md DONE 172 (81 j7, 91 wc), W9 j70_j71.md DONE 158 (78 j70, 80 j71); each `--strict` 0 errors/0 flat; cover j7/ky/j70/j71/wc 100 %. Pushed 31ea9c68. Notes: lead.md ids ky:kyc-ma-002 etc. now duplicate W7 (drop from lead.md). Rhythm similar in ~30 ky scenes and many wc/j70 closers (polish pass optional). ky kyc-vat-001/002/003/005/012/013: W speaks from off-scene (source has no W speaker). Sub-writers sonnet; self-read only partial.
 - (11/24) W10a j68_old.md DONE 90 scenes (old j68 EV6 situations), `--strict` 0 errors / 0 flat on review/sideline-dlg-2 59361f1b. Last id done: j68:q6hhSick. Rule used: L = M when the card has no person there or the person only appears by message; unit variants kept generic (only what all v[] share); q6srv* (she is a maid) lines use {goi}/{xung}. Self-read pass pending.
+
+## REVIEW r1 (BIG reviewer opus, session_01N1tNP6TNrakpTjGJFUrY1o, 11/24/2026; START_CTX ~4 %, depth n/a) — review/sideline-dlg 9faa337e → FAIL (content xưng hô / wrong speaker family + test family not guarded)
+PRIORITY #1 CHECK ('sideline-dlg'): OD 24/11 ~10:05Z «STORY = DIALOGUE SCENES» read verbatim (brief b-sideline-dialogue.md) | main 502c48c9 = ancestor of 9faa337e (no LIVE merge needed) | review/sideline-dlg 9faa337e, figload-keep (same 3fb17db4) | claims: B dlg lead/writers only.
+
+### Gates run (bare head 9faa337e; LIVE 502c48c9 already merged in → bare head = head on newest LIVE)
+| gate | result |
+|---|---|
+| `python3 dev/test/dlgs_validate.py` / `--strict` / `--cover` | 1233 scenes, 0 errors, 0 flat; cover 1233/1233 (7 families 100 %); `jdlgsd_build.py` rebuild = no diff |
+| `bash dev/tools/quickcheck.sh` (ALONE) | QUICKCHECK PASS · open 2073 ms · old save ok · render 270/256 · buổi 1459/1457 · core gates PASS (kit-conform incl.) · time-spill PASS |
+| family plays no-arg | j72c / j68c / kyc / j70c / j71c / wc / j7c ALL PASS |
+| family plays with fixture arg (`<fam>-fixture.jsonl`) | j72c / j68c / kyc / j70c / j71c / wc / j7c ALL PASS |
+| `DLGS_ONLY=<10 units, 7 families> dlgs-play.js fold,ipadAir 10` | ALL PASS 574 |
+| `DLGS_STEP=4 dlgs-play.js fold,ipadAir` | FAILED 7 / pass 17551 (309 units × 2 devices). 5× j7 «no scene resolved» (fold) = casting flake (rerun of the 7 units: j7 all PASS). **2× scene stuck**: j70c-pushp-002 fold + j72c-craft-062 iPad «after the last line the card shows» FAIL with `playing:true, modal:false` (craft-062 also «never plays twice» FAIL); 2 targeted reruns ALL PASS 120 → intermittent (F4) |
+| norep-oldsave (vs main index.html) | NOREP OLDSAVE: ALL PASS |
+| coop-e2e SWAP=0 / SWAP=1 | 142/142 passed both seat orders |
+| quest-chips-scan fold | 133 dialogs 0 bad (main 136/0) — unaffected (no scene resolves in that harness) |
+| kyngo-shots | run 1 FAIL 2 (vat_lac «giáng» rows), run 2 PASS; main PASS — flaky, not the scenes (old kỳ ngộ, no scene) |
+| **thin-p4-shots** j68:j68c-day-007 ky:kyc-sv-012 | **branch 4 FAIL `open:false n:0` (card hidden under the scene); main PASS** |
+| **j72c-shots** | branch «offer true» but the OFFER shots show the SCENE, not the card (looked); main shows the card |
+| nrask-shots, p6-shots, j72c-shots tab | OK (cards shown) |
+
+Shots (outside git, /home/user/wt/rv-shots/dlg): Fold 755x1000 + iPad 1180x820 of 10 scenes from 7 families (j72 court + old dt_thu, j68 serv + kid, ky de, j70, j71, wc, j7 + j7 watch) looked at 3×: speaker lit / other dimmed, title = speaker, typewriter mid-line, kit §95 box, card after with choices. Nits: first scene of a fresh page can show a BLACK background (place picture not yet loaded: serv-047 both devices); her cung nữ title shows a bare name («Thanh Đại») where other servants show rank + name.
+
+### Laws checked
+- law 9 (kit): PASS — jdlgs.js draws nothing of its own (kitScene/kitDialogue §93/§95 only; body class kdlgs-on has no CSS).
+- law 4: PASS — BAL.dlgs / BAL.kdlg; 0 digits in 1233 scenes (validator).
+- law 1: PASS — watch scenes (j7 NPC↔NPC) with R = other NPC.
+- law 6b real people: engine PASS (unresolved role → no scene); CONTENT FAIL (F2).
+- law 7 / VANPHONG xưng hô: FAIL (F1). No %, no odds words: PASS.
+- law 11: FAIL (F1 validator gap, F3 tests).
+- (1) scan: 1233/1233 in-scope units carry a scene (validator --cover) and play (dlgs-play). Out of scope by Foreman B decision (a): 199 old units (wave 2). NOT covered by anyone I can see: NRASK «Phụ tuyến · <NPC>: «…» · Chương n · Lời nhờ» road-chapter asks (nrask-shots shows the old card, no scene) → Foreman B to confirm whether these are Foreman E's roads.
+- (6) old saves: quickcheck old save ok; norep ALL PASS; a card saved mid-scene shows without its scene after reload (d.done) — no lost quest state.
+
+### FAIL list (for the lead)
+F1. XƯNG HÔ (law 7; family): typed «ta» / «ngươi» next to {xung}/{goi}. kSay proof (live page): her rank 0 → Hoàng hậu = «thần thiếp … Hoàng hậu nương nương», to a higher consort «tần thiếp … Quý phi nương nương»; a typed «Ta» in the same scene breaks it.
+  a) she says «Ta» TO THE HOÀNG HẬU (8): j72c-craft-013, craft-024, craft-054, social-004, social-018, social-024, social-042, social-056 (j72_a.md).
+  b) family: 97 scenes where one speaker mixes typed «ta/ngươi» with {xung}/{goi} (j72_a 31, j7_wc 28, j68_d_ky 8, j72_old 8, j68_a 7, j68_c 6, j70_j71 5, j68_b 3, j72_b 1) — e.g. j72c-craft-023 A «…của {xung}… Ngươi biết cách nối…», j72c-craft-027 A «Ngươi giúp {xung} tìm». Fix: typed ta/ngươi of a figure speaking TO the other figure → {xung}/{goi} (keep «ta» only where the listener is her own servant AND the line has no {xung}); then add «ta»/«ngươi» to the validator rule (a line that has {xung}/{goi} may not also type ta/ngươi; a line to L∈{hh,th,emp} may not type ta) and rerun --strict (law 11 scan + before/after table).
+F2. WRONG PERSON SPEAKS (law 6b): the lit figure is not the one talking.
+  - j68c-visit-017, j68c-day-046 (L=A kind th): the Thái hậu's FIGURE speaks the lines of her nội giám («Thái hậu muốn gặp {goi}…», «{Xung} chỉ phụng mệnh truyền lời…» → kSay makes the Thái hậu say «Ai gia chỉ phụng mệnh…»).
+  - j72c-craft-013 (A kind hh): the Hoàng hậu figure speaks of «Hoàng hậu» in the third person.
+  - j68c-serv-025: A (the servant who is blamed) speaks B's demand «bình này do {A} làm vỡ. Giao nàng ta cho {xung}» (seed: B demands A) → L must be B.
+  - j72c-social-007: the official says «muốn gửi lời chúc {A}» = greets HIMSELF (seed ask: «chúc {goi}»), twice.
+  Scan (law 11): speaker naming their own placeholder → 3 lines/2 scenes; L kind th/hh/emp speaking of that title in 3rd person → 4 scenes; fix all + add both checks to dlgs_validate.py.
+F3. TEST FAMILY (law 11, brief check 5): the scene-off / tap-through was applied only to kit-conform + lib/coop-clear. Tests that open side-line cards and read or shoot #modal, none guarded: thin-p4-shots (FAILS now, main PASS), j72c-shots (shoots the scene instead of the offer), j7c-shots, kyngo-shots, p6-shots, nrask-shots, nrask-m-shots, voice-trait-shots, quest-chips-scan, reign, j71c-play/wc-play (pass today), plus the bots lib/playperf.js (quickcheck perf), lib/pw-roulette.js (61 users), lib/roulette.js (20): a bot that clicks «Sang buổi» via JS under a playing scene leaves DLGS.playing on, and every later card is hidden. Fix: one shared helper (e.g. dev/test/lib/dlgs-off.js: `BAL.dlgs.on=false` for card/shot tests, or the coop-clear tap for play bots) and use it in EVERY test listed by `grep -lE "q72Offer|q72o|e68c|j7c|kyngo|j70|compCard|jworldc|showModal" dev/test` that reads #modal; table test / guarded / result before→after.
+F4. SCENE STUCK (intermittent, 2 of ~2470 plays): after the last line DLGS.playing stays true and the card stays hidden; while it is true every later showModal hides its card → the game looks frozen until reload. Find the root cause (tap during kitScene.close? onDone not reached?) and add a guard (e.g. dlgsPlay watchdog: no scene layer on screen ⇒ fin()), then a stress run of those two units ×50 per device.
+KNOWN (Foreman B note 21:34Z, lead #4): 8 wave-1 lines starting with lowercase {xung}/{goi} (j72_old / j7_wc) are fixed on the handover branch a9e60e96 + validator rule 8c93d9af on review/sideline-dlg-2 — not on 9faa337e; the fix must reach this branch (or land with -2).
+Not FAIL (notes): KIT REQUEST tail side (filed); black first background (kit §93 bg not awaited) → KIT note for KK18.
