@@ -22,3 +22,13 @@ Checks that pass:
 ## Verdicts
 - review/robot10-e-fix-1 8f97171e: **PASS 8f97171e** (ancestor of nothing newer; main fd85907a is its parent chain → fast-forwardable).
 - review/robot10-e-fix-2 19183dca: **FAIL 19183dca 1** (Sủng trait scaling false positive).
+
+## r2 — E78r (sonnet SMALL) review/robot10-e-fix-2 145a1f54 — **PASS 145a1f54**
+PRIORITY #1 CHECK ('robot10-e-fix-2 sgNow audit'): OD 0 | ledger 0 | claims FIXER #2 only | main 0 | review/* 0 | E76r FAIL 19183dca 1 item.
+Merge with latest origin/main ac4790f0: clean merge **9d9fab98** (review/robot10-e-fix-2-r2m, pushed). Diff vs main = dev/measure (inpage6, robot10, robot10-in) + dev/test r10e-* only; no game file, index.html/sw.js unchanged vs main ✔.
+- The E76r item fixed: auditOpt maps the effect pools through `sgNow` for k==="sung" (robot10-in.js diff 19183dca→145a1f54 is that one line). Family: in j1 only Sủng goes through a scaler (fmt: `k==="sung"?sgStat`; apply: `if(k==="sung")v=sg(v)`); every other stat is drawn/applied raw → nothing else to map ✔.
+- r10e-audit-trait.js (4 trait sets × 4 raw values, builds the option via dilLineRaw, applies it, compares shown = real = audit): 19183dca harness (R10IN=old) = **FAIL 8** (nongnay ×4, lanhlung gains ×2, both ×2); 145a1f54 = **ALL OK** (16/16, shown == real change in every row, 0 audit rows).
+- Mutation (truly wrong gain line, shown = real+3, all 4 trait sets × 4 values): flagged 16/16 → real faults still caught; the old «wrong line = raw number under a trait» is flagged 8/8 on r2.
+- r10e-audit (every road beat, nc-B save 005, merged tree): 2726 beats / 9965 options, «number» rows 0, «Bạc lạ» rows 0 (14 draw errors = game-side card draws, not audit rows; unchanged by this test-only branch). r10e-kcf: ok (lose path ran, confirm closed).
+- Not re-run (unchanged by r2, covered by E76r): r10e-uiscan-book, short real run.
+Verdict: **PASS 145a1f54** (merge 9d9fab98 = same tree plus main ac4790f0; branch fd85907a-based → coordinator merges onto main). Scratch: no shots made.
