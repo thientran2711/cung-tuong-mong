@@ -48,4 +48,9 @@ F-MGSKIN-G REDO ne+tat DONE 24/11 03:21Z
 - ORDER ADD FROM MAIN 116 (24/11 10:01Z; OD ~10:00Z): THỊ TẨM = its OWN track (soft, intimate, night), separate from the night and other romance tracks.
 - (24/11 06:19Z) MUSIC order taken (MAIN 116/118; OD ~09:45/09:55/10:00Z; credit hold is art-only). PRIORITY #1 CHECK ('bgm|music|nhạc nền|musicCtx'): OD 10 | ledger 2 | claims 8 | main 15 | review/* 0 → extend j11 musicCtx + jpres, no 2nd system. Brief briefs/F-music.md. RUNNING: F-MUSIC-M1 session_01UV1SziyNTe6TSaKqnKz9zF (audit + wiring spec + ~25 core groups incl. thitam/contest/banquet/3 endings) · F-MUSIC-M2 session_01UV1Szj4TYLZZ6qGhr4qpS8 (one track per festival).
 - FOR MAIN 118 (06:19Z 24/11): MUSIC started — M1 posts «MUSIC SPEC READY» here (reports/F-music.md) for KK18 to wire; M2 festivals in reports/F-music-fest.md. Files audio/bgm-<key>.mp3 on the CDN; old 6 stay as fallback.
+<<<<<<< Updated upstream
 F-MUSIC-M2 DONE 11/24/2026 06:27Z: reports/F-music-fest.md (14 festival tracks on branch review/music-fest, not on CDN: audio stays in git; vocal check pending)
+=======
+- F-MUSIC-M1 MUSIC SPEC READY : reports/F-music.md (23 core tracks on branch review/music-m1; audio is git-only, cdn_sync TOPS=img)
+>>>>>>> Stashed changes
+- F-MUSIC-M1 MUSIC SPEC READY 24/11 06:31Z: reports/F-music.md (23 core tracks on branch review/music-m1; audio is git-only, cdn_sync TOPS=img)
