@@ -43,7 +43,7 @@ function selxBuoi(){const Z=S.selx2;return Math.min(B4L,Math.floor((selxDayK()-(
 function selxHead(){const Z=S.selx2;return `<p><small>${selxDayTitle(Z.days)} · ${BUOI[selxBuoi()]} · còn ${selxNumW(Z.kh)} khắc</small></p>`}
 function selxEvening(){return S.selx2.kh<=BAL.time.khac}
 /* ---- a beat = one kit modal card; the option's go pushes the next beat ---- */
-function selxCard(t,h,opts,who){const m={t,h:selxHead()+h,opts,who:who||null,pid:"selxD",pp:{}};Q.unshift(m);return m}
+function selxCard(t,h,opts,who){if(S.selx2&&S.selx2.days===2&&typeof selxBare==="function")opts=selxBare(opts);/* RV-SELX13 6: the whole ceremony day (Điện tuyển: dress, sân chờ acts + drama, hall, tests) = KIT §93.7 bare cards */const m={t,h:selxHead()+h,opts,who:who||null,pid:"selxD",pp:{}};Q.unshift(m);return m}
 /* every selx option snapshots the ma ma's regard (Z.ma) before it runs, so its result card can show that change (law 3: an act whose gain is the ma ma's regard never reads «không đổi chỉ số») */
 let SELX_B=null;
 /* the option hint (kit option card rows): k khắc it costs (kit «N khắc» Tốn item, like every act card) + what it gains (law 3: every option gains something) + what may come with it */
