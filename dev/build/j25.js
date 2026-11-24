@@ -98,7 +98,7 @@ const CW=n=>"@W"+n,CF=n=>"face-consort-"+pad(n);
 Object.assign(FPOOL,{ct1:[3,8,9,10,11,12,13,16,22,23].map(CW).concat([2,5,11,31,37,39].map(CF)),ct2:[1,2,6,14,15,21,24].map(CW).concat([1,12,15,18,28,32,38].map(CF)),ct3:[0,4,5,7,18,19,20].map(CW).concat([7,21,25].map(CF)),ct4:[17].map(CW).concat([13].map(CF)),ct5:[]});
 FPOOL.consort=[].concat(FPOOL.ct1,FPOOL.ct2,FPOOL.ct3,FPOOL.ct4);
 function tierOf(p){const r=p===S?S.rank:(p.queen?7:p.rank);return r<=1?1:r<=3?2:r<=5?3:r===6?4:5}
-(function(){const b0=bandKeys;bandKeys=function(kind,age,p){if(kind==="consort"&&p){const t=tierOf(p);const near=[1,2,3,4,5].sort((a,b)=>Math.abs(a-t)-Math.abs(b-t)||b-a).map(x=>"ct"+x);return age>35?["womid"].concat(near):near}return b0.apply(this,arguments)}})();
+(function(){const b0=bandKeys;bandKeys=function(kind,age,p){if(kind==="consort"&&p){const t=tierOf(p);const near=[1,2,3,4,5].sort((a,b)=>Math.abs(a-t)-Math.abs(b-t)||b-a).map(x=>"ct"+x);return age>=BAL.ageBand[1]?["womid"].concat(near):near}return b0.apply(this,arguments)}})();
 /* a consort's face follows her rank tier: re-picked on promotion or demotion */
 (function(){const ff=faceFor;faceFor=function(o,kind,age){if(kind==="consort"){const keys=bandKeys("consort",age,o);const k=keys[0];if(o.fc==null||o.fk!==k){o.fc="";o.fc=drawF(keys);o.fk=k}return}return ff.apply(this,arguments)}})();
 (function(){const fs=fsrc;fsrc=function(fc,fb){if(fc&&fc[0]==="@"){const n=+fc.slice(2);return (AV.women||[])[n]||fb||""}return fs.apply(this,arguments)}})();
