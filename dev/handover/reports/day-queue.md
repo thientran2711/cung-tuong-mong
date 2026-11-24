@@ -1,7 +1,7 @@
 # day-queue (FLIGHT-DAYQ) — owner bug (5) of OD 24/11 ~18:05Z — report
 
 Worker: FLIGHT-DAYQ session_01V1ZZH3gRpyiEtyMHxaDzFg (opus, depth 1, START_CTX ~3 %). Coordinator: MAIN CHÍNH 125.
-Branch **review/day-queue** (from origin/main 502c48c9) — head **b3d580e6** (pushed). Tier **BIG** (time / buổi turn + popup queue).
+Branch **review/day-queue** (from origin/main 502c48c9) — head **7c819a37** (pushed). Tier **BIG** (time / buổi turn + popup queue).
 
 PRIORITY #1 CHECK: OD 15/11 ~23:20Z «spread events across buổi … per-buổi cap» = D13 **jspread.js already on main** (reused, not rebuilt) + OD 24/11 ~18:05Z item (5) | main: turn = j9 nextBuoi → endTurn → curtain → dawn (jne kitNewDay title card → j87 Tuần lục book); cards = Q + showModal; big moments = j93 kmPush/KMQ (kitGain «Nhận», kitReward, night card, card-flip); j68 evGate (optional events, hard `roll(50)` at day start); dev/measure/spread_hist.js (reused) | review/*: kit-daytitle 3424b927 (#kdaytc card on dawn — counted as part of the new-day host here, compatible) | claims: none.
 
@@ -48,7 +48,12 @@ Plays to the last buổi, runs the Múa self-study callback (reveal «Nhận»),
 | 1180x820 | after | 24 | 2 · 6 · 18 · 0 · 0 · 0 | 1.615 / 1.462 / 1.2 / 1.333 | 0 | 43 | 16 | 0 | 0 |
 Reading: the morning keeps «Tin trong cung» + at most one card that fits the morning by her 15/11 rule (Bổng lộc tháng, Lễ, festival Lời mời, Điềm báo, court news); visitor/event cards (Có người…, Phụ tuyến, Ngươi bắt gặp, Quà gửi lén…) moved to later buổi (tối mean up). Cap 2/buổi unchanged. Honest notes: (1) more optional j68 events are dropped by j68's own hold limit (E68S.hold 4, by design → a log line), Fold 30→40, iPad 23→43 per 24 days — fewer optional popups overall; (2) "lost" (pre-existing harness count, LIVE has it too) 16→22 / 13→16 is within run-to-run noise (random lives, not seeded).
 
-## Gates (final head b3d580e6)
+## Update 7c819a37 (j68 dawn-held cards never vanish)
+- j68 evGate: a card held ONLY because it is the first buổi of a day always goes to EVHOLD (no drop for a full hold); evRelease shows it at a later buổi.
+- Bots 24 days: evGate:holdfull drops Fold LIVE 28 → 5, iPad LIVE 11 → 14 (rest = j68's own non-dawn reasons). Morning world cards Fold 0·1·2·3·4 = 3·5·16·0·1, iPad 2·8·15·0·0. Harness "lost" examples are all at k 47–50 (the life-cap last buổi) in LIVE and branch alike = harness artefact.
+- Gates on 7c819a37: dayq-order PASS Fold+iPad · coop-e2e 142/142 default + 142/142 swap · quickcheck PASS 274 s (old save ok; perf new/live render 297/316, tab 581/686, buổi 2955/2026 — buổi median noisier this run; previous run 1566/2055 on the same jdayq).
+
+## Gates (head b3d580e6, kept for history)
 - dayq-order (her path): LIVE **FAIL** both devices / branch **PASS** both devices (8 runs over the builds, last on the final build).
 - coop-e2e: default order **142/142**, swap order (COOP_SWAP=1) **142/142** on ec170482 (= final build; b3d580e6 only edits a test). History: builds that held cards in co-op gave 139/138/141/141 in the default order → co-op excluded. LIVE baseline 142/142 ×2.
 - quickcheck: **PASS** 265 s · open 2078 ms · old save ok · perf new/live render 268/322 ms, tab 650/574 ms, buổi 1566/2055 ms · core gates PASS (one-core-guard, rules-one-source, kit-conform, coop-one-world, time-spill guard).
