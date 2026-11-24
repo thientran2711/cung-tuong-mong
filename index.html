@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"a16b0341+","t":"2026-11-24T04:26Z","c":"titles2-scan: every j71 option incl. conditional names (48), PLAIN reasons","b":"50115d8c37ae","h":[{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"}]};
+window.CTM_BI={"s":"a8b99f9e+","t":"2026-11-24T04:35Z","c":"TITLES2 FIX r2 (E62, E61r FAIL r2 #1): a good + bad title for EACH composed việc nhờ seed at the source","b":"e7241e9aa995","h":[{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -68437,8 +68437,17 @@ function keyOfWorn(w){return typeof w==="string"&&/^dh-/.test(w)?w.slice(3).spli
 function seedOld(p){/* old saves: her past contest places from the Sổ ân thưởng list (S.honors) */
  if(p!==S||!Array.isArray(S.honors)||!S.honors.length)return;const D=bag(p);const rev={};try{for(const k in CU_KHOI)rev[CU_KHOI[k]]=k}catch(e){}
  for(const h of S.honors){(D.podium=D.podium||{n:0}).n++;if(h.p===1){const k=rev[String(h.t||"").split(" · ")[0]];if(k&&DH["w_"+k])(D["w_"+k]=D["w_"+k]||{n:0}).n++}}}
+/* E62 perf (TITLES2 r2): the catalogue holds ~2 100 keys now and dhSync runs every buổi for her and each month for every NPC. A STORED-count key the
+   person has never stepped on (no D[key]) has count 0, so it can only open when its first need is ≤ 0. Index: walk only the ALWAYS keys (derived counts
+   nights / kids / meta / l_*, or first need ≤ 0) + the person's own keys, in catalogue order — the same result as walking all of DH. The index is built
+   on first use (every catalogue file has loaded by then) and rebuilt when BAL.dh.T is replaced or a held key is not in it yet (a late catalogue entry). */
+let DHX=null;
+function dhIdx(f){const T0=T();if(DHX&&DHX.t===T0&&!f)return DHX;const ord=new Map(),al=[];let i=0;
+ for(const k in DH){ord.set(k,i++);const N=need(k);if(k==="nights"||k==="kids"||k==="meta"||k.startsWith("l_")||(N&&N[0]<=0))al.push(k)}return DHX={t:T0,ord,al,as:new Set(al)}}
+function dhKeys(D){let X=dhIdx();const L=X.al.slice();for(const k in D){if(!X.ord.has(k)){if(!DH[k])continue;X=dhIdx(1);return dhKeys(D)}if(!X.as.has(k))L.push(k)}
+ return L.length>X.al.length?L.sort((a,b)=>X.ord.get(a)-X.ord.get(b)):L}
 function dhSync(p,quiet){if(!p||typeof p!=="object")return [];const first=!p.dh;if(first){bag(p);seedOld(p);quiet=true}const D=bag(p),got=[];
- for(const key in DH){if(DH[key].me&&p!==S)continue;const c=count(p,key),i=stepOf(key,c);if(i<0&&!D[key])continue;const e=D[key]||(D[key]={n:0});
+ for(const key of dhKeys(D)){if(DH[key].me&&p!==S)continue;const c=count(p,key),i=stepOf(key,c);if(i<0&&!D[key])continue;const e=D[key]||(D[key]={n:0});
   if(!key.startsWith("l_")&&key!=="meta"&&key!=="nights"&&key!=="kids")e.n=Math.max(e.n||0,c);
   if(i>(e.i==null?-1:e.i)){e.at=e.at||[];for(let j=(e.i==null?0:e.i+1);j<=i;j++)e.at[j]=when();e.i=i;got.push(key)}}
  if(got.length){if(p===S){if(!quiet)got.forEach(k=>dhNotice(k))}else if(!p.coop)dhAutoWear(p)}
@@ -96452,7 +96461,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="50115d8c37ae";window.CTM_BUILD=BUILD;
+const BUILD="e7241e9aa995";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

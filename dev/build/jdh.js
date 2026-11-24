@@ -88,8 +88,17 @@ function keyOfWorn(w){return typeof w==="string"&&/^dh-/.test(w)?w.slice(3).spli
 function seedOld(p){/* old saves: her past contest places from the Sổ ân thưởng list (S.honors) */
  if(p!==S||!Array.isArray(S.honors)||!S.honors.length)return;const D=bag(p);const rev={};try{for(const k in CU_KHOI)rev[CU_KHOI[k]]=k}catch(e){}
  for(const h of S.honors){(D.podium=D.podium||{n:0}).n++;if(h.p===1){const k=rev[String(h.t||"").split(" · ")[0]];if(k&&DH["w_"+k])(D["w_"+k]=D["w_"+k]||{n:0}).n++}}}
+/* E62 perf (TITLES2 r2): the catalogue holds ~2 100 keys now and dhSync runs every buổi for her and each month for every NPC. A STORED-count key the
+   person has never stepped on (no D[key]) has count 0, so it can only open when its first need is ≤ 0. Index: walk only the ALWAYS keys (derived counts
+   nights / kids / meta / l_*, or first need ≤ 0) + the person's own keys, in catalogue order — the same result as walking all of DH. The index is built
+   on first use (every catalogue file has loaded by then) and rebuilt when BAL.dh.T is replaced or a held key is not in it yet (a late catalogue entry). */
+let DHX=null;
+function dhIdx(f){const T0=T();if(DHX&&DHX.t===T0&&!f)return DHX;const ord=new Map(),al=[];let i=0;
+ for(const k in DH){ord.set(k,i++);const N=need(k);if(k==="nights"||k==="kids"||k==="meta"||k.startsWith("l_")||(N&&N[0]<=0))al.push(k)}return DHX={t:T0,ord,al,as:new Set(al)}}
+function dhKeys(D){let X=dhIdx();const L=X.al.slice();for(const k in D){if(!X.ord.has(k)){if(!DH[k])continue;X=dhIdx(1);return dhKeys(D)}if(!X.as.has(k))L.push(k)}
+ return L.length>X.al.length?L.sort((a,b)=>X.ord.get(a)-X.ord.get(b)):L}
 function dhSync(p,quiet){if(!p||typeof p!=="object")return [];const first=!p.dh;if(first){bag(p);seedOld(p);quiet=true}const D=bag(p),got=[];
- for(const key in DH){if(DH[key].me&&p!==S)continue;const c=count(p,key),i=stepOf(key,c);if(i<0&&!D[key])continue;const e=D[key]||(D[key]={n:0});
+ for(const key of dhKeys(D)){if(DH[key].me&&p!==S)continue;const c=count(p,key),i=stepOf(key,c);if(i<0&&!D[key])continue;const e=D[key]||(D[key]={n:0});
   if(!key.startsWith("l_")&&key!=="meta"&&key!=="nights"&&key!=="kids")e.n=Math.max(e.n||0,c);
   if(i>(e.i==null?-1:e.i)){e.at=e.at||[];for(let j=(e.i==null?0:e.i+1);j<=i;j++)e.at[j]=when();e.i=i;got.push(key)}}
  if(got.length){if(p===S){if(!quiet)got.forEach(k=>dhNotice(k))}else if(!p.coop)dhAutoWear(p)}
