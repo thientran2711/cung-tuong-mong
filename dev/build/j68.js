@@ -151,7 +151,7 @@ function evGate(dry){if(!S||S.dead||window.__e68off||!Q.length)return;const sc=e
   const K=evKeys(m);const tl=sc.tpl[K.tpl],kl=sc.key[K.key];
   if((tl!=null&&now-tl<E68S.tpl)||(kl!=null&&now-kl<E68S.key)){Q.splice(i,1);i--;evDropInfo(m);continue}
   const ak=evActorKey(m);
-  const atDayStart=(S.buoi||0)===0&&!m.__held&&(hasMust||roll(50));
+  const atDayStart=(S.buoi||0)===0&&!m.__held&&(hasMust||BAL.spread.dawnOpt>=100||roll(BAL.spread.dawnOpt));/* FLIGHT-DAYQ: BAL odds (was roll(50)); roll() caps at BAL.odds.hi, so 100 = always */
   const block=keepOpt||sc.bk===b||sc.dn>=E68S.day||(ak&&ak===sc.last)||atDayStart;
   if(block){Q.splice(i,1);i--;if(EVHOLD.length<E68S.hold&&sc.dn<E68S.day+1)EVHOLD.push({m,at:now,K});else evDropInfo(m);continue}
   keepOpt=true}

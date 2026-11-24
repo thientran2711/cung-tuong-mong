@@ -39,7 +39,9 @@ const SP13={vo:0,L:[],stat:{plan:0,moved:0,carried:0,released:0,forced:0,void:0,
  reset(){SP13.L=[];SP13.held=0;try{if(S)S.sp13={q:[],k:-1,n:0}}catch(e){}}};
 function sp13Cap(){return BAL.spread.cap}
 /* the fitting slot of a card, or null (no preference: now if there is room) */
-function sp13Slot(m){const t=String(m.t||m.title||"").replace(/<[^>]+>/g,""),p=m.pid||"";for(const [s,rt,rp] of SP13SLOT)if(rt.test(t)||(p&&rp&&rp.test(p)))return s;return null}
+function sp13Slot(m){const t=String(m.t||m.title||"").replace(/<[^>]+>/g,""),p=m.pid||"";for(const [s,rt,rp] of SP13SLOT)if(rt.test(t)||(p&&rp&&rp.test(p)))return s;
+ /* FLIGHT-DAYQ (owner 24/11 (5)): at the first buổi of a day an unslotted world card goes to BAL.spread.dawnSlot (not at dawn, never over the book) */
+ return (S&&(S.buoi||0)===0&&BAL.spread.dawnSlot!=null)?BAL.spread.dawnSlot:null}
 function sp13Movable(m){if(!m||typeof m!=="object"||m.nl||m.mg||m.__held||m.kind==="news"||m.kind==="end")return false;
  if(/end|pcm|nlcard|death|tut/.test(m.cls||""))return false;
  /* OPTIONAL cards (j68 evOptional: visits, j68 events, merit, rewards …) are paced by the j68 scheduler (one at a time, 1 per buổi, 2 per day,
