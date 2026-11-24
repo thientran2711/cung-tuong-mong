@@ -38803,6 +38803,533 @@
         "errs": 0
        }
       }
+     },
+     {
+      "year": 1,
+      "room": "5TMC",
+      "final": false,
+      "min": 3.18,
+      "turns": 21,
+      "metrics": {
+       "coopTurnP95": 32681,
+       "coopTurnsOk": "21/21",
+       "coopActionP95": 9835,
+       "coopActionMax": 19677,
+       "coopSyncKBMax": 69.3,
+       "coopKBPerMin": 769.7,
+       "coopResendPerMin": 16.7,
+       "coopRejoinMs": -1,
+       "coopLongTasksPerMin": 284.3,
+       "coopLongTaskMax": 1773,
+       "pageErrors": 0
+      },
+      "dev": {
+       "fold": {
+        "seat": "host",
+        "kbPerMin": 840.4,
+        "upKB": 2165,
+        "dnKB": 507,
+        "posFlip": null,
+        "resend": 47,
+        "resendBy": {
+         "act": 43,
+         "bend": 1,
+         "where": 1,
+         "pos": 2
+        },
+        "longTasksPerMin": 248.8,
+        "longTaskMax": 1199,
+        "errs": 0
+       },
+       "ipad": {
+        "seat": "guest",
+        "kbPerMin": 699,
+        "upKB": 1341,
+        "dnKB": 882,
+        "posFlip": null,
+        "resend": 59,
+        "resendBy": {
+         "act": 48,
+         "actr": 1,
+         "pos": 10
+        },
+        "longTasksPerMin": 319.9,
+        "longTaskMax": 1773,
+        "errs": 0
+       }
+      }
+     },
+     {
+      "year": 1,
+      "room": "5TMC",
+      "final": true,
+      "min": 4.72,
+      "turns": 6,
+      "metrics": {
+       "coopTurnP95": 33026,
+       "coopTurnsOk": "6/6",
+       "coopActionP95": 3869,
+       "coopActionMax": 18848,
+       "coopSyncKBMax": 68.4,
+       "coopKBPerMin": 476.9,
+       "coopResendPerMin": 4,
+       "coopRejoinMs": -1,
+       "coopLongTasksPerMin": 457.5,
+       "coopLongTaskMax": 1632,
+       "pageErrors": 0
+      },
+      "dev": {
+       "fold": {
+        "seat": "host",
+        "kbPerMin": 475.4,
+        "upKB": 2081,
+        "dnKB": 162,
+        "posFlip": null,
+        "resend": 17,
+        "resendBy": {
+         "act": 16,
+         "where": 1
+        },
+        "longTasksPerMin": 420.5,
+        "longTaskMax": 1291,
+        "errs": 0
+       },
+       "ipad": {
+        "seat": "guest",
+        "kbPerMin": 484.8,
+        "upKB": 771,
+        "dnKB": 1517,
+        "posFlip": null,
+        "resend": 21,
+        "resendBy": {
+         "act": 21
+        },
+        "longTasksPerMin": 494.4,
+        "longTaskMax": 1632,
+        "errs": 0
+       }
+      }
+     },
+     {
+      "year": 1,
+      "room": "FY5B",
+      "final": false,
+      "min": 2.9,
+      "turns": 22,
+      "metrics": {
+       "coopTurnP95": 30999,
+       "coopTurnsOk": "22/22",
+       "coopActionP95": 1895,
+       "coopActionMax": 19841,
+       "coopSyncKBMax": 61.3,
+       "coopKBPerMin": 728.8,
+       "coopResendPerMin": 15.3,
+       "coopRejoinMs": -1,
+       "coopLongTasksPerMin": 293.1,
+       "coopLongTaskMax": 1495,
+       "pageErrors": 0
+      },
+      "dev": {
+       "fold": {
+        "seat": "host",
+        "kbPerMin": 769.6,
+        "upKB": 1828,
+        "dnKB": 408,
+        "posFlip": null,
+        "resend": 54,
+        "resendBy": {
+         "act": 52,
+         "where": 2
+        },
+        "longTasksPerMin": 268.2,
+        "longTaskMax": 1481,
+        "errs": 0
+       },
+       "ipad": {
+        "seat": "guest",
+        "kbPerMin": 688,
+        "upKB": 1252,
+        "dnKB": 747,
+        "posFlip": null,
+        "resend": 35,
+        "resendBy": {
+         "act": 33,
+         "pos": 2
+        },
+        "longTasksPerMin": 318.1,
+        "longTaskMax": 1495,
+        "errs": 0
+       }
+      }
+     },
+     {
+      "year": 1,
+      "room": "Z5XD",
+      "final": false,
+      "min": 2.48,
+      "turns": 22,
+      "metrics": {
+       "coopTurnP95": 25079,
+       "coopTurnsOk": "22/22",
+       "coopActionP95": 2075,
+       "coopActionMax": 19206,
+       "coopSyncKBMax": 64.3,
+       "coopKBPerMin": 829.4,
+       "coopResendPerMin": 15.7,
+       "coopRejoinMs": -1,
+       "coopLongTasksPerMin": 315.6,
+       "coopLongTaskMax": 1882,
+       "pageErrors": 0
+      },
+      "dev": {
+       "fold": {
+        "seat": "host",
+        "kbPerMin": 907.6,
+        "upKB": 1844,
+        "dnKB": 408,
+        "posFlip": null,
+        "resend": 31,
+        "resendBy": {
+         "act": 29,
+         "where": 2
+        },
+        "longTasksPerMin": 310.7,
+        "longTaskMax": 721,
+        "errs": 0
+       },
+       "ipad": {
+        "seat": "guest",
+        "kbPerMin": 770.3,
+        "upKB": 1179,
+        "dnKB": 732,
+        "posFlip": null,
+        "resend": 47,
+        "resendBy": {
+         "act": 43,
+         "pos": 4
+        },
+        "longTasksPerMin": 320.4,
+        "longTaskMax": 1882,
+        "errs": 0
+       }
+      }
+     },
+     {
+      "year": 1,
+      "room": "Z5XD",
+      "final": true,
+      "min": 31.85,
+      "turns": 79,
+      "metrics": {
+       "coopTurnP95": 125828,
+       "coopTurnsOk": "79/79",
+       "coopActionP95": 10064,
+       "coopActionMax": 19946,
+       "coopSyncKBMax": 198,
+       "coopKBPerMin": 609.5,
+       "coopResendPerMin": 3.1,
+       "coopRejoinMs": -1,
+       "coopLongTasksPerMin": 283.9,
+       "coopLongTaskMax": 2328,
+       "pageErrors": 0
+      },
+      "dev": {
+       "fold": {
+        "seat": "host",
+        "kbPerMin": 662.9,
+        "upKB": 18323,
+        "dnKB": 2788,
+        "posFlip": null,
+        "resend": 106,
+        "resendBy": {
+         "act": 98,
+         "where": 6,
+         "pos": 2
+        },
+        "longTasksPerMin": 284,
+        "longTaskMax": 1306,
+        "errs": 9
+       },
+       "ipad": {
+        "seat": "guest",
+        "kbPerMin": 557.6,
+        "upKB": 10079,
+        "dnKB": 7679,
+        "posFlip": null,
+        "resend": 93,
+        "resendBy": {
+         "act": 77,
+         "pos": 16
+        },
+        "longTasksPerMin": 283.9,
+        "longTaskMax": 2328,
+        "errs": 0
+       }
+      }
+     },
+     {
+      "year": 1,
+      "room": "JAX7",
+      "final": true,
+      "min": 5.01,
+      "turns": 9,
+      "metrics": {
+       "coopTurnP95": 26865,
+       "coopTurnsOk": "9/9",
+       "coopActionP95": 1128,
+       "coopActionMax": 19893,
+       "coopSyncKBMax": 89.9,
+       "coopKBPerMin": 402.8,
+       "coopResendPerMin": 5.3,
+       "coopRejoinMs": -1,
+       "coopLongTasksPerMin": 457.9,
+       "coopLongTaskMax": 1521,
+       "pageErrors": 0
+      },
+      "dev": {
+       "fold": {
+        "seat": "host",
+        "kbPerMin": 431.3,
+        "upKB": 1965,
+        "dnKB": 195,
+        "posFlip": null,
+        "resend": 23,
+        "resendBy": {
+         "pos": 1,
+         "act": 20,
+         "where": 2
+        },
+        "longTasksPerMin": 429.5,
+        "longTaskMax": 1220,
+        "errs": 1
+       },
+       "ipad": {
+        "seat": "guest",
+        "kbPerMin": 378.1,
+        "upKB": 488,
+        "dnKB": 1406,
+        "posFlip": null,
+        "resend": 30,
+        "resendBy": {
+         "act": 26,
+         "pos": 3,
+         "bend": 1
+        },
+        "longTasksPerMin": 486.4,
+        "longTaskMax": 1521,
+        "errs": 0
+       }
+      }
+     },
+     {
+      "year": 1,
+      "room": "4UJS",
+      "final": true,
+      "min": 5.04,
+      "turns": 10,
+      "metrics": {
+       "coopTurnP95": 28408,
+       "coopTurnsOk": "10/10",
+       "coopActionP95": 1286,
+       "coopActionMax": 19822,
+       "coopSyncKBMax": 38.1,
+       "coopKBPerMin": 350.2,
+       "coopResendPerMin": 5.2,
+       "coopRejoinMs": -1,
+       "coopLongTasksPerMin": 462.1,
+       "coopLongTaskMax": 1859,
+       "pageErrors": 0
+      },
+      "dev": {
+       "fold": {
+        "seat": "host",
+        "kbPerMin": 359.8,
+        "upKB": 1612,
+        "dnKB": 202,
+        "posFlip": null,
+        "resend": 17,
+        "resendBy": {
+         "act": 14,
+         "where": 1,
+         "pos": 2
+        },
+        "longTasksPerMin": 486.9,
+        "longTaskMax": 645,
+        "errs": 0
+       },
+       "ipad": {
+        "seat": "guest",
+        "kbPerMin": 344.9,
+        "upKB": 551,
+        "dnKB": 1188,
+        "posFlip": null,
+        "resend": 35,
+        "resendBy": {
+         "act": 30,
+         "pos": 5
+        },
+        "longTasksPerMin": 437.3,
+        "longTaskMax": 1859,
+        "errs": 0
+       }
+      }
+     },
+     {
+      "year": 1,
+      "room": "NSJN",
+      "final": false,
+      "min": 4.35,
+      "turns": 23,
+      "metrics": {
+       "coopTurnP95": 82349,
+       "coopTurnsOk": "23/23",
+       "coopActionP95": 2135,
+       "coopActionMax": 19799,
+       "coopSyncKBMax": 204.6,
+       "coopKBPerMin": 637.1,
+       "coopResendPerMin": 10.4,
+       "coopRejoinMs": -1,
+       "coopLongTasksPerMin": 294.9,
+       "coopLongTaskMax": 1524,
+       "pageErrors": 0
+      },
+      "dev": {
+       "fold": {
+        "seat": "host",
+        "kbPerMin": 665.3,
+        "upKB": 2463,
+        "dnKB": 429,
+        "posFlip": null,
+        "resend": 58,
+        "resendBy": {
+         "act": 55,
+         "where": 3
+        },
+        "longTasksPerMin": 263.4,
+        "longTaskMax": 1163,
+        "errs": 0
+       },
+       "ipad": {
+        "seat": "guest",
+        "kbPerMin": 608.9,
+        "upKB": 1405,
+        "dnKB": 1242,
+        "posFlip": null,
+        "resend": 32,
+        "resendBy": {
+         "act": 28,
+         "pos": 4
+        },
+        "longTasksPerMin": 326.4,
+        "longTaskMax": 1524,
+        "errs": 0
+       }
+      }
+     },
+     {
+      "year": 1,
+      "room": "NSJN",
+      "final": true,
+      "min": 8.52,
+      "turns": 14,
+      "metrics": {
+       "coopTurnP95": 105633,
+       "coopTurnsOk": "14/14",
+       "coopActionP95": 5148,
+       "coopActionMax": 9925,
+       "coopSyncKBMax": 121.8,
+       "coopKBPerMin": 472.3,
+       "coopResendPerMin": 5.5,
+       "coopRejoinMs": -1,
+       "coopLongTasksPerMin": 328.9,
+       "coopLongTaskMax": 2373,
+       "pageErrors": 0
+      },
+      "dev": {
+       "fold": {
+        "seat": "host",
+        "kbPerMin": 502.4,
+        "upKB": 3932,
+        "dnKB": 348,
+        "posFlip": null,
+        "resend": 56,
+        "resendBy": {
+         "act": 54,
+         "bend": 1,
+         "where": 1
+        },
+        "longTasksPerMin": 265.9,
+        "longTaskMax": 2373,
+        "errs": 0
+       },
+       "ipad": {
+        "seat": "guest",
+        "kbPerMin": 445.8,
+        "upKB": 1270,
+        "dnKB": 2528,
+        "posFlip": null,
+        "resend": 38,
+        "resendBy": {
+         "act": 32,
+         "pos": 6
+        },
+        "longTasksPerMin": 391.9,
+        "longTaskMax": 1323,
+        "errs": 0
+       }
+      }
+     },
+     {
+      "year": 1,
+      "room": "E9TG",
+      "final": false,
+      "min": 2.5,
+      "turns": 22,
+      "metrics": {
+       "coopTurnP95": 28482,
+       "coopTurnsOk": "22/22",
+       "coopActionP95": 1836,
+       "coopActionMax": 19993,
+       "coopSyncKBMax": 65.2,
+       "coopKBPerMin": 849.9,
+       "coopResendPerMin": 12.4,
+       "coopRejoinMs": -1,
+       "coopLongTasksPerMin": 317.8,
+       "coopLongTaskMax": 1840,
+       "pageErrors": 0
+      },
+      "dev": {
+       "fold": {
+        "seat": "host",
+        "kbPerMin": 881,
+        "upKB": 1764,
+        "dnKB": 436,
+        "posFlip": null,
+        "resend": 17,
+        "resendBy": {
+         "act": 15,
+         "where": 2
+        },
+        "longTasksPerMin": 288,
+        "longTaskMax": 938,
+        "errs": 0
+       },
+       "ipad": {
+        "seat": "guest",
+        "kbPerMin": 818.8,
+        "upKB": 1291,
+        "dnKB": 753,
+        "posFlip": null,
+        "resend": 45,
+        "resendBy": {
+         "act": 42,
+         "pos": 3
+        },
+        "longTasksPerMin": 347.7,
+        "longTaskMax": 1840,
+        "errs": 0
+       }
+      }
      }
     ],
     "rooms": [
@@ -53487,18 +54014,1277 @@
       "code": "5TMC",
       "host": "X",
       "t0": 1795543770834,
-      "weeks": 6,
-      "buoi": 0,
-      "turns": [],
+      "weeks": 7,
+      "buoi": 33,
+      "turns": [
+       {
+        "k0": "0:1",
+        "k1": "0:2",
+        "ms": 1068
+       },
+       {
+        "k0": "0:2",
+        "k1": "0:3",
+        "ms": 1067
+       },
+       {
+        "k0": "0:3",
+        "k1": "0:0",
+        "ms": 10357
+       },
+       {
+        "k0": "1:1",
+        "k1": "1:2",
+        "ms": 2721
+       },
+       {
+        "k0": "1:2",
+        "k1": "1:3",
+        "ms": 2980
+       },
+       {
+        "k0": "1:3",
+        "k1": "1:0",
+        "ms": 5917
+       },
+       {
+        "k0": "1:0",
+        "k1": "2:1",
+        "ms": 24263
+       },
+       {
+        "k0": "2:1",
+        "k1": "2:2",
+        "ms": 1290
+       },
+       {
+        "k0": "2:2",
+        "k1": "2:3",
+        "ms": 1629
+       },
+       {
+        "k0": "2:0",
+        "k1": "3:1",
+        "ms": 40885
+       },
+       {
+        "k0": "3:1",
+        "k1": "3:2",
+        "ms": 1551
+       },
+       {
+        "k0": "3:2",
+        "k1": "3:3",
+        "ms": 1369
+       },
+       {
+        "k0": "3:0",
+        "k1": "4:1",
+        "ms": 27477
+       },
+       {
+        "k0": "4:1",
+        "k1": "4:2",
+        "ms": 1362
+       },
+       {
+        "k0": "4:2",
+        "k1": "4:3",
+        "ms": 1200
+       },
+       {
+        "k0": "4:3",
+        "k1": "4:0",
+        "ms": 4458
+       },
+       {
+        "k0": "4:0",
+        "k1": "5:1",
+        "ms": 25923
+       },
+       {
+        "k0": "5:1",
+        "k1": "5:2",
+        "ms": 1267
+       },
+       {
+        "k0": "5:2",
+        "k1": "5:3",
+        "ms": 2908
+       },
+       {
+        "k0": "5:3",
+        "k1": "5:0",
+        "ms": 7468
+       },
+       {
+        "k0": "5:0",
+        "k1": "6:0",
+        "ms": 32681
+       },
+       {
+        "k0": "6:1",
+        "k1": "6:2",
+        "ms": 1288
+       },
+       {
+        "k0": "6:2",
+        "k1": "6:3",
+        "ms": 2402
+       },
+       {
+        "k0": "6:0",
+        "k1": "7:0",
+        "ms": 33026
+       },
+       {
+        "k0": "7:0",
+        "k1": "7:1",
+        "ms": 2466
+       },
+       {
+        "k0": "7:1",
+        "k1": "7:2",
+        "ms": 695
+       },
+       {
+        "k0": "7:2",
+        "k1": "7:3",
+        "ms": 1326
+       }
+      ],
       "yr": {
-       "t": 1795543770834,
+       "t": 1795544250808,
+       "turns": [],
+       "year": null
+      },
+      "whereDiff": 0,
+      "posDiff": 0,
+      "statLag": 0,
+      "cmp": 26,
+      "min": 8,
+      "turnP95": 33026
+     },
+     {
+      "code": "FY5B",
+      "host": "X",
+      "t0": 1795544270861,
+      "weeks": 12,
+      "buoi": 25,
+      "turns": [
+       {
+        "k0": "0:1",
+        "k1": "0:2",
+        "ms": 1197
+       },
+       {
+        "k0": "0:2",
+        "k1": "0:3",
+        "ms": 1551
+       },
+       {
+        "k0": "0:3",
+        "k1": "0:0",
+        "ms": 7099
+       },
+       {
+        "k0": "0:0",
+        "k1": "1:1",
+        "ms": 33393
+       },
+       {
+        "k0": "1:1",
+        "k1": "1:2",
+        "ms": 1826
+       },
+       {
+        "k0": "1:2",
+        "k1": "1:3",
+        "ms": 1402
+       },
+       {
+        "k0": "1:3",
+        "k1": "1:0",
+        "ms": 7213
+       },
+       {
+        "k0": "1:0",
+        "k1": "2:1",
+        "ms": 27965
+       },
+       {
+        "k0": "2:1",
+        "k1": "2:2",
+        "ms": 2045
+       },
+       {
+        "k0": "2:2",
+        "k1": "2:3",
+        "ms": 1792
+       },
+       {
+        "k0": "2:3",
+        "k1": "2:0",
+        "ms": 7461
+       },
+       {
+        "k0": "2:0",
+        "k1": "3:1",
+        "ms": 29572
+       },
+       {
+        "k0": "3:2",
+        "k1": "3:3",
+        "ms": 1781
+       },
+       {
+        "k0": "3:3",
+        "k1": "3:0",
+        "ms": 4685
+       },
+       {
+        "k0": "3:0",
+        "k1": "4:1",
+        "ms": 30999
+       },
+       {
+        "k0": "4:1",
+        "k1": "4:2",
+        "ms": 1691
+       },
+       {
+        "k0": "4:2",
+        "k1": "4:3",
+        "ms": 1384
+       },
+       {
+        "k0": "4:0",
+        "k1": "5:1",
+        "ms": 30014
+       },
+       {
+        "k0": "5:1",
+        "k1": "5:2",
+        "ms": 1084
+       },
+       {
+        "k0": "5:2",
+        "k1": "5:3",
+        "ms": 1158
+       },
+       {
+        "k0": "5:3",
+        "k1": "5:0",
+        "ms": 4983
+       },
+       {
+        "k0": "5:0",
+        "k1": "6:0",
+        "ms": 24127
+       }
+      ],
+      "yr": {
+       "t": 1795544445727,
+       "turns": [],
+       "year": 1
+      },
+      "whereDiff": 0,
+      "posDiff": 0,
+      "statLag": 1,
+      "cmp": 48
+     },
+     {
+      "code": "Z5XD",
+      "host": "X",
+      "t0": 1795544659650,
+      "weeks": 27,
+      "buoi": 113,
+      "turns": [
+       {
+        "k0": "0:1",
+        "k1": "0:2",
+        "ms": 1587
+       },
+       {
+        "k0": "0:2",
+        "k1": "0:3",
+        "ms": 785
+       },
+       {
+        "k0": "0:3",
+        "k1": "0:0",
+        "ms": 8340
+       },
+       {
+        "k0": "0:0",
+        "k1": "1:1",
+        "ms": 26809
+       },
+       {
+        "k0": "1:2",
+        "k1": "1:3",
+        "ms": 1413
+       },
+       {
+        "k0": "1:3",
+        "k1": "1:0",
+        "ms": 7299
+       },
+       {
+        "k0": "1:0",
+        "k1": "2:1",
+        "ms": 25079
+       },
+       {
+        "k0": "2:1",
+        "k1": "2:2",
+        "ms": 849
+       },
+       {
+        "k0": "2:2",
+        "k1": "2:3",
+        "ms": 1112
+       },
+       {
+        "k0": "2:3",
+        "k1": "2:0",
+        "ms": 3927
+       },
+       {
+        "k0": "2:0",
+        "k1": "3:1",
+        "ms": 22392
+       },
+       {
+        "k0": "3:1",
+        "k1": "3:2",
+        "ms": 874
+       },
+       {
+        "k0": "3:2",
+        "k1": "3:3",
+        "ms": 668
+       },
+       {
+        "k0": "3:3",
+        "k1": "3:0",
+        "ms": 6098
+       },
+       {
+        "k0": "3:0",
+        "k1": "4:1",
+        "ms": 23712
+       },
+       {
+        "k0": "4:1",
+        "k1": "4:2",
+        "ms": 1051
+       },
+       {
+        "k0": "4:2",
+        "k1": "4:3",
+        "ms": 590
+       },
+       {
+        "k0": "4:0",
+        "k1": "5:1",
+        "ms": 23747
+       },
+       {
+        "k0": "5:1",
+        "k1": "5:2",
+        "ms": 956
+       },
+       {
+        "k0": "5:2",
+        "k1": "5:3",
+        "ms": 1061
+       },
+       {
+        "k0": "5:3",
+        "k1": "5:0",
+        "ms": 6388
+       },
+       {
+        "k0": "5:0",
+        "k1": "6:0",
+        "ms": 24421
+       },
+       {
+        "k0": "6:1",
+        "k1": "6:2",
+        "ms": 1406
+       },
+       {
+        "k0": "6:2",
+        "k1": "6:3",
+        "ms": 1257
+       },
+       {
+        "k0": "6:3",
+        "k1": "6:0",
+        "ms": 4271
+       },
+       {
+        "k0": "6:0",
+        "k1": "7:1",
+        "ms": 28322
+       },
+       {
+        "k0": "7:1",
+        "k1": "7:2",
+        "ms": 891
+       },
+       {
+        "k0": "7:2",
+        "k1": "7:3",
+        "ms": 963
+       },
+       {
+        "k0": "7:0",
+        "k1": "8:1",
+        "ms": 27405
+       },
+       {
+        "k0": "8:1",
+        "k1": "8:2",
+        "ms": 810
+       },
+       {
+        "k0": "8:2",
+        "k1": "8:3",
+        "ms": 1873
+       },
+       {
+        "k0": "8:3",
+        "k1": "8:0",
+        "ms": 5532
+       },
+       {
+        "k0": "8:0",
+        "k1": "9:1",
+        "ms": 28760
+       },
+       {
+        "k0": "9:1",
+        "k1": "9:2",
+        "ms": 748
+       },
+       {
+        "k0": "9:2",
+        "k1": "9:3",
+        "ms": 1716
+       },
+       {
+        "k0": "9:0",
+        "k1": "10:1",
+        "ms": 29059
+       },
+       {
+        "k0": "10:2",
+        "k1": "10:3",
+        "ms": 1412
+       },
+       {
+        "k0": "10:3",
+        "k1": "10:0",
+        "ms": 9019
+       },
+       {
+        "k0": "10:0",
+        "k1": "11:1",
+        "ms": 32583
+       },
+       {
+        "k0": "11:1",
+        "k1": "11:2",
+        "ms": 1484
+       },
+       {
+        "k0": "11:2",
+        "k1": "11:3",
+        "ms": 2139
+       },
+       {
+        "k0": "11:3",
+        "k1": "11:0",
+        "ms": 5032
+       },
+       {
+        "k0": "11:0",
+        "k1": "12:1",
+        "ms": 35915
+       },
+       {
+        "k0": "12:2",
+        "k1": "12:3",
+        "ms": 1770
+       },
+       {
+        "k0": "13:1",
+        "k1": "13:2",
+        "ms": 2047
+       },
+       {
+        "k0": "13:2",
+        "k1": "13:3",
+        "ms": 2540
+       },
+       {
+        "k0": "13:3",
+        "k1": "13:0",
+        "ms": 87820
+       },
+       {
+        "k0": "13:0",
+        "k1": "14:1",
+        "ms": 105373
+       },
+       {
+        "k0": "14:1",
+        "k1": "14:2",
+        "ms": 1777
+       },
+       {
+        "k0": "14:2",
+        "k1": "14:3",
+        "ms": 2169
+       },
+       {
+        "k0": "14:3",
+        "k1": "14:0",
+        "ms": 83564
+       },
+       {
+        "k0": "14:0",
+        "k1": "15:1",
+        "ms": 112086
+       },
+       {
+        "k0": "15:1",
+        "k1": "15:2",
+        "ms": 2994
+       },
+       {
+        "k0": "15:2",
+        "k1": "15:3",
+        "ms": 2338
+       },
+       {
+        "k0": "15:3",
+        "k1": "15:0",
+        "ms": 85979
+       },
+       {
+        "k0": "15:0",
+        "k1": "16:1",
+        "ms": 105151
+       },
+       {
+        "k0": "16:1",
+        "k1": "16:2",
+        "ms": 889
+       },
+       {
+        "k0": "16:2",
+        "k1": "16:3",
+        "ms": 2356
+       },
+       {
+        "k0": "16:3",
+        "k1": "16:0",
+        "ms": 86717
+       },
+       {
+        "k0": "16:0",
+        "k1": "17:1",
+        "ms": 109715
+       },
+       {
+        "k0": "17:1",
+        "k1": "17:2",
+        "ms": 1324
+       },
+       {
+        "k0": "17:3",
+        "k1": "17:0",
+        "ms": 66329
+       },
+       {
+        "k0": "17:0",
+        "k1": "18:1",
+        "ms": 103802
+       },
+       {
+        "k0": "18:1",
+        "k1": "18:2",
+        "ms": 444
+       },
+       {
+        "k0": "18:2",
+        "k1": "18:3",
+        "ms": 2221
+       },
+       {
+        "k0": "18:3",
+        "k1": "18:0",
+        "ms": 7852
+       },
+       {
+        "k0": "18:0",
+        "k1": "19:1",
+        "ms": 36575
+       },
+       {
+        "k0": "19:1",
+        "k1": "19:2",
+        "ms": 2015
+       },
+       {
+        "k0": "19:2",
+        "k1": "19:3",
+        "ms": 948
+       },
+       {
+        "k0": "19:3",
+        "k1": "19:0",
+        "ms": 10601
+       },
+       {
+        "k0": "19:0",
+        "k1": "20:1",
+        "ms": 40257
+       },
+       {
+        "k0": "20:1",
+        "k1": "20:2",
+        "ms": 1371
+       },
+       {
+        "k0": "20:2",
+        "k1": "20:3",
+        "ms": 1346
+       },
+       {
+        "k0": "20:3",
+        "k1": "20:0",
+        "ms": 5401
+       },
+       {
+        "k0": "20:0",
+        "k1": "21:1",
+        "ms": 47331
+       },
+       {
+        "k0": "21:1",
+        "k1": "21:2",
+        "ms": 1824
+       },
+       {
+        "k0": "21:2",
+        "k1": "21:3",
+        "ms": 2111
+       },
+       {
+        "k0": "21:3",
+        "k1": "21:0",
+        "ms": 12393
+       },
+       {
+        "k0": "21:0",
+        "k1": "22:1",
+        "ms": 45935
+       },
+       {
+        "k0": "22:1",
+        "k1": "22:2",
+        "ms": 1570
+       },
+       {
+        "k0": "22:3",
+        "k1": "22:0",
+        "ms": 94191
+       },
+       {
+        "k0": "22:0",
+        "k1": "23:1",
+        "ms": 131893
+       },
+       {
+        "k0": "23:1",
+        "k1": "23:2",
+        "ms": 1678
+       },
+       {
+        "k0": "23:2",
+        "k1": "23:3",
+        "ms": 1429
+       },
+       {
+        "k0": "23:3",
+        "k1": "23:0",
+        "ms": 49310
+       },
+       {
+        "k0": "23:0",
+        "k1": "24:1",
+        "ms": 75215
+       },
+       {
+        "k0": "24:1",
+        "k1": "24:2",
+        "ms": 3457
+       },
+       {
+        "k0": "24:2",
+        "k1": "24:3",
+        "ms": 1798
+       },
+       {
+        "k0": "24:3",
+        "k1": "24:0",
+        "ms": 216750
+       },
+       {
+        "k0": "24:0",
+        "k1": "25:1",
+        "ms": 243993
+       },
+       {
+        "k0": "25:1",
+        "k1": "25:2",
+        "ms": 2493
+       },
+       {
+        "k0": "25:2",
+        "k1": "25:3",
+        "ms": 1439
+       },
+       {
+        "k0": "25:3",
+        "k1": "25:0",
+        "ms": 95774
+       },
+       {
+        "k0": "25:0",
+        "k1": "26:1",
+        "ms": 125828
+       },
+       {
+        "k0": "26:1",
+        "k1": "26:2",
+        "ms": 3660
+       },
+       {
+        "k0": "26:2",
+        "k1": "26:3",
+        "ms": 2179
+       },
+       {
+        "k0": "26:3",
+        "k1": "26:0",
+        "ms": 92785
+       },
+       {
+        "k0": "26:0",
+        "k1": "27:0",
+        "ms": 123717
+       },
+       {
+        "k0": "27:0",
+        "k1": "27:1",
+        "ms": 2726
+       },
+       {
+        "k0": "27:1",
+        "k1": "27:2",
+        "ms": 1251
+       },
+       {
+        "k0": "27:2",
+        "k1": "27:3",
+        "ms": 1075
+       }
+      ],
+      "yr": {
+       "t": 1795546732950,
+       "turns": [],
+       "year": null
+      },
+      "whereDiff": 0,
+      "posDiff": 7,
+      "statLag": 2,
+      "cmp": 105,
+      "min": 34.6,
+      "turnP95": 112086
+     },
+     {
+      "code": "JAX7",
+      "host": "X",
+      "t0": 1795546752420,
+      "weeks": 2,
+      "buoi": 12,
+      "turns": [
+       {
+        "k0": "0:2",
+        "k1": "0:3",
+        "ms": 1816
+       },
+       {
+        "k0": "0:3",
+        "k1": "0:0",
+        "ms": 4859
+       },
+       {
+        "k0": "0:0",
+        "k1": "1:1",
+        "ms": 26070
+       },
+       {
+        "k0": "1:1",
+        "k1": "1:2",
+        "ms": 2065
+       },
+       {
+        "k0": "1:2",
+        "k1": "1:3",
+        "ms": 830
+       },
+       {
+        "k0": "1:3",
+        "k1": "1:0",
+        "ms": 8527
+       },
+       {
+        "k0": "1:0",
+        "k1": "2:0",
+        "ms": 26865
+       },
+       {
+        "k0": "2:0",
+        "k1": "2:1",
+        "ms": 1069
+       },
+       {
+        "k0": "2:1",
+        "k1": "2:2",
+        "ms": 1264
+       }
+      ],
+      "yr": {
+       "t": 1795547057547,
+       "turns": [],
+       "year": null
+      },
+      "whereDiff": 0,
+      "posDiff": 1,
+      "statLag": 1,
+      "cmp": 10,
+      "min": 5.1,
+      "turnP95": 26865
+     },
+     {
+      "code": "4UJS",
+      "host": "X",
+      "t0": 1795547076823,
+      "weeks": 2,
+      "buoi": 12,
+      "turns": [
+       {
+        "k0": "0:2",
+        "k1": "0:3",
+        "ms": 847
+       },
+       {
+        "k0": "0:3",
+        "k1": "0:0",
+        "ms": 10519
+       },
+       {
+        "k0": "0:0",
+        "k1": "1:1",
+        "ms": 28408
+       },
+       {
+        "k0": "1:1",
+        "k1": "1:2",
+        "ms": 1604
+       },
+       {
+        "k0": "1:2",
+        "k1": "1:3",
+        "ms": 1109
+       },
+       {
+        "k0": "1:3",
+        "k1": "1:0",
+        "ms": 9468
+       },
+       {
+        "k0": "1:0",
+        "k1": "2:0",
+        "ms": 24951
+       },
+       {
+        "k0": "2:0",
+        "k1": "2:1",
+        "ms": 1856
+       },
+       {
+        "k0": "2:1",
+        "k1": "2:2",
+        "ms": 2048
+       },
+       {
+        "k0": "2:2",
+        "k1": "2:3",
+        "ms": 1418
+       }
+      ],
+      "yr": {
+       "t": 1795547384500,
+       "turns": [],
+       "year": null
+      },
+      "whereDiff": 0,
+      "posDiff": 0,
+      "statLag": 0,
+      "cmp": 12,
+      "min": 5.1,
+      "turnP95": 28408
+     },
+     {
+      "code": "NSJN",
+      "host": "X",
+      "t0": 1795547403933,
+      "weeks": 9,
+      "buoi": 41,
+      "turns": [
+       {
+        "k0": "0:2",
+        "k1": "0:3",
+        "ms": 852
+       },
+       {
+        "k0": "0:3",
+        "k1": "0:0",
+        "ms": 8939
+       },
+       {
+        "k0": "0:0",
+        "k1": "1:1",
+        "ms": 28457
+       },
+       {
+        "k0": "1:1",
+        "k1": "1:2",
+        "ms": 496
+       },
+       {
+        "k0": "1:2",
+        "k1": "1:3",
+        "ms": 1091
+       },
+       {
+        "k0": "1:3",
+        "k1": "1:0",
+        "ms": 6068
+       },
+       {
+        "k0": "1:0",
+        "k1": "2:1",
+        "ms": 31182
+       },
+       {
+        "k0": "2:1",
+        "k1": "2:2",
+        "ms": 1451
+       },
+       {
+        "k0": "2:2",
+        "k1": "2:3",
+        "ms": 927
+       },
+       {
+        "k0": "2:3",
+        "k1": "2:0",
+        "ms": 3780
+       },
+       {
+        "k0": "2:0",
+        "k1": "3:1",
+        "ms": 26565
+       },
+       {
+        "k0": "3:1",
+        "k1": "3:2",
+        "ms": 2517
+       },
+       {
+        "k0": "3:2",
+        "k1": "3:3",
+        "ms": 2058
+       },
+       {
+        "k0": "3:3",
+        "k1": "3:0",
+        "ms": 9229
+       },
+       {
+        "k0": "3:0",
+        "k1": "4:1",
+        "ms": 36155
+       },
+       {
+        "k0": "4:1",
+        "k1": "4:2",
+        "ms": 492
+       },
+       {
+        "k0": "4:2",
+        "k1": "4:3",
+        "ms": 1220
+       },
+       {
+        "k0": "4:3",
+        "k1": "4:0",
+        "ms": 9999
+       },
+       {
+        "k0": "4:0",
+        "k1": "5:1",
+        "ms": 30896
+       },
+       {
+        "k0": "5:1",
+        "k1": "5:2",
+        "ms": 2657
+       },
+       {
+        "k0": "5:2",
+        "k1": "5:3",
+        "ms": 1009
+       },
+       {
+        "k0": "5:3",
+        "k1": "5:0",
+        "ms": 82349
+       },
+       {
+        "k0": "5:0",
+        "k1": "6:0",
+        "ms": 104452
+       },
+       {
+        "k0": "6:1",
+        "k1": "6:2",
+        "ms": 1517
+       },
+       {
+        "k0": "6:2",
+        "k1": "6:3",
+        "ms": 2253
+       },
+       {
+        "k0": "6:3",
+        "k1": "6:0",
+        "ms": 41852
+       },
+       {
+        "k0": "7:1",
+        "k1": "7:2",
+        "ms": 606
+       },
+       {
+        "k0": "7:2",
+        "k1": "7:3",
+        "ms": 867
+       },
+       {
+        "k0": "7:3",
+        "k1": "7:0",
+        "ms": 82691
+       },
+       {
+        "k0": "7:0",
+        "k1": "8:1",
+        "ms": 105633
+       },
+       {
+        "k0": "8:1",
+        "k1": "8:2",
+        "ms": 1225
+       },
+       {
+        "k0": "8:2",
+        "k1": "8:3",
+        "ms": 866
+       },
+       {
+        "k0": "8:3",
+        "k1": "8:0",
+        "ms": 62338
+       },
+       {
+        "k0": "8:0",
+        "k1": "9:0",
+        "ms": 85903
+       },
+       {
+        "k0": "9:0",
+        "k1": "9:1",
+        "ms": 1338
+       },
+       {
+        "k0": "9:1",
+        "k1": "9:2",
+        "ms": 1549
+       },
+       {
+        "k0": "9:2",
+        "k1": "9:3",
+        "ms": 1025
+       }
+      ],
+      "yr": {
+       "t": 1795548184014,
+       "turns": [],
+       "year": null
+      },
+      "whereDiff": 0,
+      "posDiff": 0,
+      "statLag": 0,
+      "cmp": 38,
+      "min": 13,
+      "turnP95": 104452
+     },
+     {
+      "code": "E9TG",
+      "host": "X",
+      "t0": 1795548204285,
+      "weeks": 8,
+      "buoi": 25,
+      "turns": [
+       {
+        "k0": "0:2",
+        "k1": "0:3",
+        "ms": 1756
+       },
+       {
+        "k0": "0:3",
+        "k1": "0:0",
+        "ms": 7639
+       },
+       {
+        "k0": "0:0",
+        "k1": "1:1",
+        "ms": 28482
+       },
+       {
+        "k0": "1:1",
+        "k1": "1:2",
+        "ms": 1858
+       },
+       {
+        "k0": "1:2",
+        "k1": "1:3",
+        "ms": 1091
+       },
+       {
+        "k0": "1:3",
+        "k1": "1:0",
+        "ms": 4855
+       },
+       {
+        "k0": "1:0",
+        "k1": "2:1",
+        "ms": 19364
+       },
+       {
+        "k0": "2:1",
+        "k1": "2:2",
+        "ms": 2255
+       },
+       {
+        "k0": "2:2",
+        "k1": "2:3",
+        "ms": 1714
+       },
+       {
+        "k0": "2:3",
+        "k1": "2:0",
+        "ms": 4083
+       },
+       {
+        "k0": "2:0",
+        "k1": "3:1",
+        "ms": 28569
+       },
+       {
+        "k0": "3:1",
+        "k1": "3:2",
+        "ms": 1617
+       },
+       {
+        "k0": "3:3",
+        "k1": "3:0",
+        "ms": 7956
+       },
+       {
+        "k0": "3:0",
+        "k1": "4:1",
+        "ms": 23781
+       },
+       {
+        "k0": "4:1",
+        "k1": "4:2",
+        "ms": 740
+       },
+       {
+        "k0": "4:2",
+        "k1": "4:3",
+        "ms": 1121
+       },
+       {
+        "k0": "4:3",
+        "k1": "4:0",
+        "ms": 5697
+       },
+       {
+        "k0": "4:0",
+        "k1": "5:1",
+        "ms": 22807
+       },
+       {
+        "k0": "5:1",
+        "k1": "5:2",
+        "ms": 1185
+       },
+       {
+        "k0": "5:2",
+        "k1": "5:3",
+        "ms": 819
+       },
+       {
+        "k0": "5:3",
+        "k1": "5:0",
+        "ms": 4079
+       },
+       {
+        "k0": "5:0",
+        "k1": "6:0",
+        "ms": 23703
+       }
+      ],
+      "yr": {
+       "t": 1795548354630,
        "turns": [],
        "year": 1
       },
       "whereDiff": 0,
       "posDiff": 0,
       "statLag": 0,
-      "cmp": 19
+      "cmp": 35
      }
     ],
     "rejoin": [
@@ -53591,12 +55377,37 @@
       "room": "HEDK",
       "week": 6,
       "ms": 5284
+     },
+     {
+      "room": "5TMC",
+      "week": 6,
+      "ms": 5763
+     },
+     {
+      "room": "FY5B",
+      "week": 6,
+      "ms": 4896
+     },
+     {
+      "room": "Z5XD",
+      "week": 6,
+      "ms": 6285
+     },
+     {
+      "room": "NSJN",
+      "week": 6,
+      "ms": 6645
+     },
+     {
+      "room": "E9TG",
+      "week": 6,
+      "ms": 5704
      }
     ]
    },
-   "rooms": 22,
+   "rooms": 28,
    "t": {
-    "total": 35312804
+    "total": 39790534
    },
    "partial": true,
    "bugs": [
@@ -53604,7 +55415,7 @@
      "type": "save",
      "msg": "save→load→save changes the state (host)",
      "detail": "save.S.visit.people.0.__feelMig: 1 → undefined",
-     "n": 199,
+     "n": 212,
      "at": "coop-p07-S1",
      "saveFile": "saves/coop-20261124-0823-p7-8-ta5rfc.json"
     },
@@ -53612,42 +55423,42 @@
      "type": "save",
      "msg": "save→load→save changes the state (guest)",
      "detail": "save.S.visit.people.0.__feelMig: 1 → undefined",
-     "n": 199,
+     "n": 212,
      "at": "coop-p07-S1"
     },
     {
      "type": "lag",
      "msg": "co-op LAG budget miss: coopTurnP95",
      "detail": "coopTurnP95 26215 > 10000 · game year 1 · room AFWU · per device {\"fold\":{\"seat\":\"host\",\"kbPerMin\":904.4,\"upKB\":1599,\"dnKB\":678,\"posFlip\":null,\"resend\":13,\"resendBy\":{\"act\":12,\"where\":1},\"longTasksPerMin\":247.9,\"longTaskMax\":1466,\"errs\":0},\"ipad\":{\"seat\":\"guest\",\"kbPerMin\":898.4,\"upKB\":1176,\"dnKB\":1085,\"posFlip\":null,\"resend\":24,\"resendBy\":{\"act\":23,\"pos\":1},\"longTasksPerMin\":298.4,\"longTaskMax\":2611,\"errs\":0}}",
-     "n": 49,
+     "n": 59,
      "at": "coop-p07-S1"
     },
     {
      "type": "lag",
      "msg": "co-op LAG budget miss: coopSyncKBMax",
      "detail": "coopSyncKBMax 154.1 > 100 · game year 1 · room AFWU · per device {\"fold\":{\"seat\":\"host\",\"kbPerMin\":904.4,\"upKB\":1599,\"dnKB\":678,\"posFlip\":null,\"resend\":13,\"resendBy\":{\"act\":12,\"where\":1},\"longTasksPerMin\":247.9,\"longTaskMax\":1466,\"errs\":0},\"ipad\":{\"seat\":\"guest\",\"kbPerMin\":898.4,\"upKB\":1176,\"dnKB\":1085,\"posFlip\":null,\"resend\":24,\"resendBy\":{\"act\":23,\"pos\":1},\"longTasksPerMin\":298.4,\"longTaskMax\":2611,\"errs\":0}}",
-     "n": 38,
+     "n": 41,
      "at": "coop-p07-S1"
     },
     {
      "type": "coop-pos",
      "msg": "where one sees the friend ≠ where the friend is",
      "detail": "buổi 6.3 host sees guest at r5, guest is at H:a",
-     "n": 53,
+     "n": 61,
      "at": "coop-p07-S1"
     },
     {
      "type": "lag",
      "msg": "co-op buổi stall (both ready, the room took > 30 s or never stepped)",
      "detail": "14 of 95 buổi in game year 1",
-     "n": 38,
+     "n": 44,
      "at": "coop-p07-S1"
     },
     {
      "type": "number",
      "msg": "stat out of range: bac",
      "detail": "bac=-5 · ipad guest week 62",
-     "n": 87,
+     "n": 98,
      "at": "coop-p07-S1",
      "saveFile": "saves/coop-20261124-0823-p7-8-14hifwm.json"
     },
@@ -53678,7 +55489,7 @@
      "type": "coop-stat",
      "msg": "the friend's Sủng/Danh/Sức shown ≠ her own (one buổi late or wrong)",
      "detail": "buổi 112.3: host sees guest 90/92/64 (guest 94/97/64) · guest sees host null (host 0/38/0)",
-     "n": 9,
+     "n": 13,
      "at": "coop-p07-S1"
     },
     {
@@ -53707,14 +55518,14 @@
      "type": "lag",
      "msg": "co-op LAG budget miss: coopResendPerMin",
      "detail": "coopResendPerMin 12.5 > 12 · game year 1 · room TC6N · per device {\"fold\":{\"seat\":\"host\",\"kbPerMin\":916.5,\"upKB\":1896,\"dnKB\":738,\"posFlip\":null,\"resend\":22,\"resendBy\":{\"act\":19,\"pos\":1,\"where\":2},\"longTasksPerMin\":276.9,\"longTaskMax\":1049,\"errs\":0},\"ipad\":{\"seat\":\"guest\",\"kbPerMin\":872.7,\"upKB\":1266,\"dnKB\":1243,\"posFlip\":null,\"resend\":50,\"resendBy\":{\"act\":45,\"pos\":5},\"longTasksPerMin\":304.4,\"longTaskMax\":1873,\"errs\":0}}",
-     "n": 4,
+     "n": 8,
      "at": "coop-p07-S1"
     },
     {
      "type": "stuck",
      "msg": "co-op room stuck: no room week step in 240 s",
      "detail": "host {\"buoi\":1,\"week\":15,\"bend\":true,\"pendBuoi\":null,\"pend\":false,\"sent\":14,\"Q\":0,\"Qt\":[],\"mh\":true,\"mg\":false,\"dead\":false,\"next\":true,\"title\":false,\"st\":\"open\",\"peer\":true} || guest {\"buoi\":1,\"week\":15,\"bend\":false,\"pendBuoi\":null,\"pend\":false,\"sent\":14,\"Q\":1,\"Qt\":[\"Có người đến\"],\"mh\":true,\"mg\":false,\"dead\":false,\"next\":true,\"title\":false,\"st\":\"open\",\"peer\":true}",
-     "n": 17,
+     "n": 22,
      "at": "coop-p07-S1",
      "shots": [
       "shots/coop-p07-S1-r2-host-stuck.png",
@@ -53726,7 +55537,7 @@
      "type": "lag",
      "msg": "co-op LAG budget miss: coopActionP95",
      "detail": "coopActionP95 11069 > 8000 · game year 1 · room VSEX · per device {\"fold\":{\"seat\":\"host\",\"kbPerMin\":476.4,\"upKB\":2443,\"dnKB\":238,\"posFlip\":null,\"resend\":16,\"resendBy\":{\"act\":16},\"longTasksPerMin\":274.6,\"longTaskMax\":1744,\"errs\":0},\"ipad\":{\"seat\":\"guest\",\"kbPerMin\":375.2,\"upKB\":950,\"dnKB\":1161,\"posFlip\":null,\"resend\":27,\"resendBy\":{\"act\":25,\"pos\":2},\"longTasksPerMin\":309.4,\"longTaskMax\":1982,\"errs\":0}}",
-     "n": 5,
+     "n": 7,
      "at": "coop-p07-S1"
     },
     {
@@ -53734,6 +55545,27 @@
      "msg": "world differs between the two screens: consorts differ (id/name/rank/alive/out/kids)",
      "detail": "week 11 · host-only [] guest-only [1002:Tiêu Hàm Yên:0:1:0:] · origins tt/nc",
      "n": 1,
+     "at": "coop-p07-S1"
+    },
+    {
+     "type": "coop-world",
+     "msg": "world differs between the two screens: guest sees the friend's danh wrong (week end)",
+     "detail": "week 4 · 35 vs 37 · origins tt/td",
+     "n": 2,
+     "at": "coop-p07-S1"
+    },
+    {
+     "type": "coop-world",
+     "msg": "world differs between the two screens: guest sees the friend's suc wrong (week end)",
+     "detail": "week 4 · 100 vs 95 · origins tt/td",
+     "n": 2,
+     "at": "coop-p07-S1"
+    },
+    {
+     "type": "js",
+     "msg": "[host fold] Cannot read properties of undefined (reading 'off')",
+     "detail": "room Z5XD",
+     "n": 2,
      "at": "coop-p07-S1"
     }
    ]
