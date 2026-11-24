@@ -782,7 +782,7 @@
 "status": "LIVE-OFF",
 "group": "G2",
 "event": "\"Hoàng thượng để mắt\"; maidLoveMonth",
-"fp": "On()&&S.srv.rk>=BAL.srvRk.dai&&S.age>=18&&roll(BAL.odb.j42.rbSrvMonth+S.nt/25))/* "
+"fp": "On()&&S.srv.rk>=BAL.srvRk.dai&&S.age>=BAL.ageMin&&roll(BAL.odb.j42.rbSrvMonth+S.nt/25))/* "
 },
 {
 "f": "j42.js",
