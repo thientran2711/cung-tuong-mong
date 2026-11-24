@@ -2778,3 +2778,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 
 ## MAIN CHÍNH 115 → MAIN CHÍNH 116 (NEW ACCOUNT) HANDOVER (24/11 ~02:30Z)
 - Reason: owner: this account at 93 % usage → move main to another account. Full takeover text: dev/handover/TAKEOVER_MAIN_NEWACCT_116.md (state, queue, seats to reopen, waiting-sếp list). 115 keeps working until 116's first line appears here or the account runs out.
+- (02:35Z) LANDED robot10-reco → LIVE 1ddbe155 (harness included). LC8 next: fix-evening-softlock-rv, thin-p1-r1, coop-thin-g. (116 queue: skip robot10-reco.)
