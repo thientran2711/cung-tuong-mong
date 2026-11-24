@@ -3,6 +3,7 @@ const B=require('./boot.js');const fs=require('fs'),path=require('path'),cp=requ
 const [,,OUT,M,ONLY,OPT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 (async()=>{for(const dev of ['fold','ipadAir']){if(ONLY&&ONLY!=='all'&&ONLY!==dev)continue;const {b,p,f,srv,errs}=await B.open(dev);
  for(const x of ['lib.js','m1.js','m2.js','m4.js','scen.js'])await f.addScriptTag({content:fs.readFileSync(path.join(__dirname,x),'utf8')});
+ if(await f.evaluate(m=>!!SCEN[m+'Prep'],M)){await f.evaluate(([m,o])=>SCEN[m+'Prep'](o),[M,OPT?JSON.parse(OPT):{}]);await p.waitForTimeout(1500)}
  const cdp=await p.context().newCDPSession(p);const fdir=path.join(OUT,`fr-${M}-${dev}`);fs.rmSync(fdir,{recursive:true,force:true});fs.mkdirSync(fdir,{recursive:true});const frames=[];let rec=false,fi=0;
  cdp.on('Page.screencastFrame',async e=>{if(rec){const fn=`${fdir}/f${String(fi++).padStart(5,'0')}.jpg`;fs.writeFileSync(fn,Buffer.from(e.data,'base64'));frames.push({fn,t:e.metadata.timestamp})}try{await cdp.send('Page.screencastFrameAck',{sessionId:e.sessionId})}catch(x){}});
  const vw=p.viewportSize();await cdp.send('Page.startScreencast',{format:'jpeg',quality:90,maxWidth:vw.width*2,maxHeight:vw.height*2,everyNthFrame:1});rec=true;await p.waitForTimeout(400);
