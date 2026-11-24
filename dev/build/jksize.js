@@ -67,7 +67,7 @@ window.kitBtnSize=kitBtnSize;window.kitFrameSize=kitFrameSize;window.kitFrameApp
 .kszf,.dlg.kszf{box-sizing:border-box;padding:0;max-height:none;animation:none;width:var(--kszw);max-width:calc(100vw - 20px);background:var(--k-card,#fffaf0);border:1px solid var(--gold,#8f5f0c);border-radius:8px;
  box-shadow:0 0 0 3px #fffaf0,0 0 0 4px #d8c08a,0 8px 22px #3a24124d;display:flex;flex-direction:column;overflow:hidden;font-size:.82rem;color:var(--ink,#2a1a12)}
 .kszf>.kph{position:static;flex:none}
-/* KIT 56.18 ONE FIGURE SLOT PER FRAME SIZE (KIT REQUEST «one figure slot per frame size», ending-screens): every figure frame has the same header height (58) and no footer row under the body (the button sits at the foot of the info column, .k3foot), so the figure column is the same in every dialog of a frame size */
+/* KIT 56.21 ONE FIGURE SLOT PER FRAME SIZE (KIT REQUEST «one figure slot per frame size», ending-screens): every figure frame has the same header height (58) and no footer row under the body (the button sits at the foot of the info column, .k3foot), so the figure column is the same in every dialog of a frame size */
 .kszf>.kph,.ksz3>.kph,.kszlive>.kph{min-height:58px;box-sizing:border-box}.ksz3 .k3foot,.kszlive .k3foot{flex:none;display:flex;justify-content:center;gap:10px;margin-top:auto;padding-top:8px;position:sticky;bottom:0;z-index:3}.ksz3 .k3foot .kbtn,.ksz3 .k3foot .main,.kszlive .k3foot .kbtn,.kszlive .k3foot .main{margin:0}.kszf>.kph>.kit-x{margin-left:auto;align-self:flex-start}
 /* (3) body: figure column and info column centred vertically */
 .kszbody{display:flex;gap:12px;padding:10px 12px 12px;max-height:var(--kszcap);box-sizing:border-box;align-items:center;overflow:hidden}
@@ -591,7 +591,7 @@ window.kszFigFill3=kszFigFill3;
 window.kszFeetFit=kszFeetFit;
 /* KIT 56.4: the height a worn-title plate adds to the name tag (measured once); the room of every frame is reckoned WITH the plate, so a person with a title and one without get the same body */
 let KSZ_PLATEH=null;function kszPlateH(){if(KSZ_PLATEH!=null)return KSZ_PLATEH;let h=0;try{const T=typeof KIT_TITLES!=="undefined"&&KIT_TITLES[0],pl=T&&typeof kitTitlePlate==="function"?kitTitlePlate(T,{cls:"kdh-cap"}):"";if(pl){const x=document.createElement("div");x.className="kszf";x.style.cssText="position:absolute;visibility:hidden;left:-9999px;top:0";x.innerHTML=`<div class="kszfig"><div class="kt3">${pl}</div></div>`;document.body.appendChild(x);h=x.querySelector(".kt3").offsetHeight+2;x.remove()}}catch(e){}return KSZ_PLATEH=h}
-/* KIT 56.18: a button-only figure dialog's footer row (#mr: «Đã hiểu», ‹ Lui…) moves to the foot of the info column (.k3foot), so no figure frame has a footer under the body */
+/* KIT 56.21: a button-only figure dialog's footer row (#mr: «Đã hiểu», ‹ Lui…) moves to the foot of the info column (.k3foot), so no figure frame has a footer under the body */
 function kszFootUp(dlg){try{const R=dlg.querySelector(".k3right"),mr=document.getElementById("mr");if(!R||!mr||!dlg.contains(mr)||R.querySelector(":scope>.k3foot"))return;const bs=[...mr.children].filter(c=>c.tagName==="BUTTON"&&!c.classList.contains("kit-x")&&!c.hidden);if(!bs.length)return;const f=document.createElement("div");f.className="k3foot";bs.forEach(c=>f.appendChild(c));R.appendChild(f)}catch(e){console.error("kszFootUp",e)}}
 window.kszFootUp=kszFootUp;
 function kitFrameApplyLive3(dlg){try{kszFootUp(dlg)}catch(e){}try{kszFeetFit(dlg)}catch(e){}const g=dlg.querySelector(".opts.k3btns");if(g)kszBtnGridLive3(g);
