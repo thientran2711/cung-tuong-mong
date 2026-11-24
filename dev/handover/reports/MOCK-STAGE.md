@@ -1,3 +1,8 @@
+# MOCK-STAGE v3.4 — DONE (KIT KEEPER #14 · for MAIN 114) — 24/11 ~01:00Z
+PRIORITY #1 CHECK: OD 24/11 ~00:40Z ("Nhân vật phải đứng ở giữa bên fold á") | review/mock-stage → v3.4 | review/kit-toilroom §94 updated | claims KK14.
+Fold only: her figure stands in the MIDDLE of the room (floor between table and mirror, plate x≈312, same person scale), labels not covered, tap zones work; iPad unchanged (right). Fold stills + mp4 re-shot, frames looked at (mirror tap: no frame). Same page, «bản sửa 3.4», 110 refs all 200.
+
+---
 # MOCK-STAGE v3.3 — DONE (KIT KEEPER #14 · for MAIN 114) — 24/11 ~00:40Z
 PRIORITY #1 CHECK: OD 23/11 ~23:55Z (owner, verbatim: no gold outline on gương/bàn) | review/mock-stage 4f978cdd → 7585debd | review/kit-toilroom fc3a7000 → bb5ccd6d | claims KK14.
 Same page (110 refs all 200, «bản sửa 3.3»). v3.2 kept; added: (5) no visible outline on mirror/table, only the name labels; (6) old outline = invisible tap zone (transparent fill, no stroke); (7) nothing on tap/press/focus (tap-highlight transparent, outline none). Videos re-shot: a neutral white finger dot taps the mirror and the table, frames looked at: no frame shows. Entry-card gold outline of the mock removed too. KIT.md §94 DRAFT updated in place (canon overwrite).
