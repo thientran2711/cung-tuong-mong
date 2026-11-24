@@ -199,4 +199,8 @@ function mortFate(o0,h,t,fate,alive){if(!M.on||!S||S.dead)return o0.call(this,h,
 /* a new game: everyone rolls at the start; an old save rolls once at load */
 (function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S&&M.on){S.mort=null;delete S.tho;initAll();S.mort.old=0}}catch(e){console.error(e)}return r}})();
 (function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{initAll()}catch(e){console.error(e)}return r}})();
+/* robot10 nc-fix-3 (save drift): a person who joined since the last month tick (maid, servant, new consort, official…) had no lifespan in the
+   save, so every load of that file rolled her a DIFFERENT one (save 009: 7 people). The roll is now taken before the game is written: nobody is
+   ever saved without her lifespan (whatever road made her), and an old save still rolls once at load and keeps it. */
+(function(){const s0=ser;ser=function(){try{initAll()}catch(e){console.error("mort ser",e)}return s0.apply(this,arguments)}})();
 })();
