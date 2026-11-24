@@ -109,3 +109,50 @@ Where to start (successor):
 - Nit from the reviewer to fix in the same commit: jdayq.js header names `BAL.spread.dawnCap` — the keys are dawnSlot / dawnOpt.
 - Tests to reuse: dev/test/dayq-order.js (her day-turn path, serves via a utf-8 http server — python http.server needs `.html → text/html; charset=utf-8`, else "Invalid or unexpected token"); add her Điểm trang path. Gates: coop-e2e both orders (COOP_SWAP=1) — run sequentially, LIVE baseline was 142/142 ×2; quickcheck (commit index.html/sw.js from dev/site/build_site.sh first). time-spill-guard clr() already closes kit scenes.
 - Report LAND READY <sha> to MAIN CHÍNH 128 session_01V1ZZH2eoaTpGJXoPfwK5DT (BIG; 128 opens the reviewer).
+
+
+## DAYQ-2 (worker DAYQ-2 session_01V1ZZH4qKPudWMUYiixskpu, successor of FLIGHT-DAYQ; opened by MAIN CHÍNH 128) — OD «24/11 ~22:02Z real» item (1), shot v9
+PRIORITY #1 CHECK: OD 24/11 ~22:02Z real item (1) (v9) + OD 15/11 ~23:20Z spread rule | main 502c48c9: j3 showModal (only painter of #modal), j93 kmPush/kmPump/kmFree, jdfv showModal → stage «say» encounter (NPC-initiated, OD 21/11 ~06:55Z), j82 kgReady «Sẵn sàng» in #ov, jtoil toil tap = spend(1 khắc) → toilOpen | review/day-queue 7c819a37 (BIG PASS, jdayq: reused + extended, not rebuilt) | claims: none (this job given by MAIN 127/128).
+Branch **review/day-queue-2** (from review/day-queue 7c819a37; origin/main 502c48c9 is an ancestor = FF). Tier **BIG**.
+
+### Root cause (her v9)
+Her «Điểm trang» tap spends the khắc FIRST (spend → khắc hooks → a visitor card in Q → showModal → jdfv plays it as the stage «say» scene) and only then opens the mirror (#ov, kgReady «Sẵn sàng»). Nothing in the game knew she was inside an activity: every card / scene of the khắc was painted at once — behind or over the mini-game intro, over a reward scene, over the podium, and a visitor card even TOOK OVER the person view she had opened herself (jdfv swaps the focus). Measured on LIVE: 44/44 cases FAIL (matrix below).
+
+### Fix (jdayq.js only — the same module, new gate (c); no BAL key, no text, no UI part, no save data)
+- `dqActEl()` = she is inside an activity: mini-game screen #ov (intro «Sẵn sàng» / play / result), a kit scene ON screen (.kmov / #kmrew), podium #kpodov, roulette, the on-figure game DF.play or the person view she opened herself (dfOpen → DQ.fo).
+- outermost `showModal`: while an activity is open no queued card is painted (centre card or jdfv stage encounter) — `DQ.stat.actHeld`; the card waits in Q and `dqArmModal` paints it, unchanged, the moment she finishes. A card she opens with a tap INSIDE the activity still shows (dqInside); the card already playing in the stage scene keeps playing (dqPlaying).
+- `dqPull()` (MutationObserver on body children + #ov[hidden]): a card painted in the SAME tap that then opens the activity (her exact path: spend → card → mirror) is taken back — centre card hidden, the stage encounter closed with nothing chosen (m.dfSeen reset) — `DQ.stat.pulled`, and shown after.
+- `kmFree`: no new kit scene starts while #ov or an on-figure game is open; a scene posted inside a tap waits one pump (250 ms) so it never starts before / under the screen that tap opens (`DQ.kmTap`).
+- The day turn (gate (a)) already waited on these; render's auto-turn needs Q empty, so a held card also holds the turn (nothing lost, nothing skipped).
+- SOLO ONLY (dqUi): co-op rooms unchanged, bots unchanged.
+- Reviewer nit fixed: header named `BAL.spread.dawnCap` → now dawnSlot / dawnOpt; `dqPoll()` reads BAL.dayq.poll (no repeated 300 fallback).
+
+### Whole family (node dev/measure/dayq-family.js --before <LIVE dev/build>) — new column C + every khắc / buổi event source
+| channel | call sites (files) | A: day waits — before | after | B: not over card/book — before | after | C: not inside an activity — before | after |
+|---|---|---|---|---|---|---|---|
+| Q card (event / news / result / edict / stipend card, kitModal, kitPanel) | 402 (147) | yes | yes | **NO** | yes | **NO** | yes |
+| kit motion scene via kmPush (kitGain «Nhận», kitReward chest/tray/gift, edict, gloom, bloom, ink, tablet flip, night card, card-flip …) | 16 (6) | **NO** | yes | yes | yes | **NO** | yes |
+| mini-game screen + its result (#ov, openMG / kg82) | 29 (20) | **NO** | yes | yes | yes | **NO** | yes |
+| podium (kitPodium, j90) / roulette | 6 (2) | **NO** | yes | yes | yes | **NO** | yes |
+| person view she opened herself / its on-figure game (jdfv kitFocus) — a visitor card does not take it over | 3 (2) | yes | yes | yes | yes | **NO** | yes |
+| visitor shown as the jdfv stage «say» scene (her v9 case) | 2 (2) | yes | yes | yes | yes | **NO** | yes |
+| «Tin trong cung» first after the book | 3 (3) | yes | yes | **NO** | yes | n/a | n/a |
+| new-day motion scenes wait for «Tin trong cung» (stipend chest, rewards) | 18 (10) | yes | yes | **NO** | yes | n/a | n/a |
+| optional j68 event at the first buổi of a day | 2 (1) | yes | yes | **NO** | yes | n/a | n/a |
+| unslotted world card at the first buổi of a day (D13 jspread) | 3 (1) | yes | yes | **NO** | yes | n/a | n/a |
+Second table of the scan (in the script output): **74 source files** that hook the khắc / buổi clock (spend, endTurn, nextBuoi, dawn, agTick/agWatch, approaches, evRelease, gmTick, …) and post cards / scenes — every one goes Q → showModal or kmPush → kmPump; **direct #modal paints outside j3 showModal: 0** → every source is behind gate (C).
+
+### Her path + matrix, scripted: dev/test/dayq-hold.js (Fold 755x1000@2 + iPad 1180x820@2)
+Activities A1 Điểm trang (her tap; the card arrives INSIDE the tap's spend) · A2 j5 mini-game · A3 kitGain «Nhận» scene · A4 her own person view · A5 podium; sources S1 jgreet gmCard visitor on stage (real) · S2 j24 approaches (real; fallback card when none) · S3 released j68 held event · S4 other card · S5 new kit scene during a mini-game. Checks: nothing painted / started at 0.4 s and 1.6 s, card / scene shown after she finishes, 0 page errors.
+- LIVE 502c48c9 (dev/index.html assembled from main): **FAIL 44/44** (A1×S1 = her v9: the stage visitor «… tiến lại» runs under «Sẵn sàng»; A4×S1/S2: the visitor takes over her person view).
+- review/day-queue-2: **PASS 44/44**.
+- Shots (looked at; LIVE | branch held | branch after she finished): https://ctm-img.victoria-tntt.workers.dev/img/_review/day-queue-2/755x1000-v9-before-after.webp · https://ctm-img.victoria-tntt.workers.dev/img/_review/day-queue-2/1180x820-v9-before-after.webp
+
+### Other gates (state at handover)
+- dayq-order (day turn): PASS on runs 2–6; ~2 of 12 Fold runs FAILED with "R2 held turn did not run": diagnosed = harness, not game: the card after «Nhận» was shown as a jdfv STAGE encounter (DF.F + DF.encM set, actHeld 3, pulled 1) and the old harness only recognised #modal cards, so it never answered it. Harness fixed (dev/test/dayq-order.js: a stage encounter counts as a shown card and is answered; dbg adds act element, DQ.stat, F/E/V). Re-loop 3×4 Fold runs was running at handover → see the loop line below.
+- NOT yet run: quickcheck, coop-e2e default + COOP_SWAP=1, offline-all (solo-only change; co-op paths untouched by construction, still must be run).
+
+## HANDOVER (DAYQ-2, 24/11 ~23:30Z) — rollover by context
+Pushed: review/day-queue-2 **8a077f15** (code + test + scan + built site). Unpushed in /home/user/wt/dayq2: dev/test/dayq-order.js harness fix (stage encounter = shown card; dbg) — commit + push it (no game change, no rebuild needed).
+Successor steps: (1) commit/push the dayq-order.js change; re-run `VPONLY=755x1000` dayq-order ~6× + both devices once (serve with a utf-8 server: /home/user/wt/dayq2-s/srv.py <port> <root>); if a fail remains read the dbg F/E/V flags (V = .kfoc visible). (2) `bash dev/tools/quickcheck.sh` (alone, perf). (3) coop-e2e default then COOP_SWAP=1 (sequential; baseline 142/142). (4) `node dev/test/offline-all.js`. (5) re-run dev/test/dayq-hold.js once on the final sha. (6) report LAND READY «review/day-queue-2 <40hex> BIG» to MAIN CHÍNH 128 session_01V1ZZH2eoaTpGJXoPfwK5DT + LC12 session_01V1ZZH2p2x7oNCrRuTq7RjF. Wipe img/_review/day-queue-2 only after the verdict (verdict giver).
+Notes: LIVE comparison build = /home/user/wt/dayq2-s/livebuild (main dev/build assembled). dayq-hold debug filter: ONLY=A1:S1,A4:S2.
