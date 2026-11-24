@@ -203,3 +203,78 @@ Old saves: a life already in lãnh cung for «Bị bỏ quên» keeps its releas
 - coop-e2e: not run — no co-op file touched (j32 over() wrappers in jcoopworld unchanged; S.thatS / S.kc.lv are per-life state).
 - Shots (looked at all 8): dev/handover/shots/leave-palace/e64b-{fold,ipad}-{kc_ga,kc_tu,dan,lc_xg}.webp — Trả thẻ bài gả + xuất gia, treason → phế làm thứ dân, lãnh cung xuất gia with no confirm. Text whole, no clip, both devices.
 - OPEN for MAIN (not built): the kc end card still says «Tiểu thư ngoài cung» in its own line; j70 «lúc nàng thất sủng» word reads Sủng < 25 (not S.thatS) — left as is.
+
+## FIX r1 (E74 = session_01DgYSWoQonzS3XKxd5Bc8WS; on review/leave-palace-r from 37a862be) — sha 6c0d11f2 (game code cb3d5183; later commits = test / scan rows only)
+PRIORITY #1 CHECK ('thất sủng' / 'BAL.crime' / 'tư thông'): reports/leave-palace.md + reports/leave-palace-review.md (E72r FAIL 37a862be, 3 items) read whole | main: no crimeTier / convict / ttExposed / thatS.recall | review/*: only review/leave-palace(-r) | claims E64, E64b, E72r, E74 (this).
+
+### Item 1 — thất sủng has a way back for EVERY consort (law 1)
+- j8 tsMonth: while p.thatS, a monthly «Hoàng thượng chợt nhớ» roll `tsRecallCh(p)` = min(max, base + Danh/danhD + Đức/ducD + kid × living children)
+  from **BAL.thatS.recall {base:2, danhD:20, ducD:25, kid:2, max:12}** — one formula for her and NPCs (she keeps her own Sủng roads too). On recall
+  the flag clears and Sủng is raised by (BAL.thatS.back − Sủng) through apply() (her own Sủng modifiers count) (so she is not re-flagged the next month); her line «Hoàng thượng chợt nhớ đến ngươi…», an
+  NPC gets a news line (also a news line now when an NPC climbs back by Sủng ≥ back).
+- tsMonthAll skips v.coop (the co-op friend's entry is ruled by her own device's tsMonth(S), as npcMonthly skips it) — E72r note closed.
+- j70 OPP «lonely»: word «lúc nàng vắng ân sủng, ít người qua lại», ok = the thất sủng flag OR Sủng < BAL.thatS.lonely (the typed 25 moved into BAL) — E64b/E72r open note closed.
+- Robot (dev/test/leave-palace-tsrobot.js, the real monthTick, 6 lives × 120 months, 3 low NPCs forced Sủng 0 / Danh 0 / rank 0):
+  before (E72r, 37a862be): **17 entered, 0 left**; after: **13 entered, 10 left again** (some several times: in 2× out 2×).
+
+### Item 2 — ONE treason tier on every treason deed (law 11)
+Core: **BAL.crime.nghichK** ["spy","kpoison","pond","musk","catswap","kframe","vuco"] + **queenK** ["poison","pushp"] (nghịch when the target is
+Hoàng hậu) → j8 `crimeTier(k,t)`; `convict(a,why,k,t,sev)` = the one road for a proven deed: «nghich» → deathSentence(…,"nghich"), else the old
+punish(sev). Every existing «nghich» caller now reads crimeTier (no typed tier). NPC death lines drop the doubled «Bị ban chết vì» prefix.
+Co-op: convict never sentences a co-op friend's entry (v.coop) to death on this device (a player seat, not an NPC) — it keeps punish there.
+
+Scan (script: scan_treason.py — every deathSentence / punish / fall / framed / cold / die / convict site whose crime text or context names a treason word; before = 37a862be, after = this sha):
+| site (after) | crime | doer / victim | before | after | why |
+|---|---|---|---|---|---|
+| j4.js:53, :59 | gián điệp Cao Ly (her) | doer | "nghich" typed | crimeTier("spy") | same tier, from BAL |
+| j4.js:125 | hạ độc Hoàng hậu (her) | doer | "nghich" typed | crimeTier("poison",{queen}) | same |
+| j8.js:155 poison caught | mưu hại (any target) | doer | inline queen test | crimeTier("poison",t) | Hoàng hậu → nghịch, consort → thường (was the same, now one function) |
+| j8.js:176 kpoison caught | đầu độc hoàng tự | doer | "nghich" typed | crimeTier("kpoison") | same |
+| **j8.js:179 pond caught** | đẩy hoàng tự xuống hồ | doer | **punish sev 2** | **convict → deathSentence «nghich»** | E72r item 2: same crime as kpoison |
+| j8.js:182 kframe caught | vu hoàng tử trù ẻo thánh thượng | doer | "nghich" typed | crimeTier("kframe") | same |
+| **j9.js:145 pushPond caught** | xô Hoàng hậu xuống hồ / xô phi tần | doer | punish sev 2 | **convict(…,"pushp",t,2)**: Hoàng hậu → «nghich», a consort → punish 2 (kept) | hại Hoàng hậu |
+| **j70.js:210 trap (bắt quả tang)** | the plot kind M.k | doer | **punish sev 2 for every kind** | **convict(…,M.k,t,2)**: kpoison / pond / musk / catswap / kframe → «nghich»; poison / pushp on Hoàng hậu → «nghich»; the rest punish 2 | caught red-handed = proof |
+| **jworld2.js:145 vu cổ window** | dùng bùa ngải hãm hại (the real culprit, Thận hình ti) | doer | **punish sev 2** | **convict(…,"vuco")** → «nghich» | vu cổ |
+| jworld2.js:147 | «bị nghi dính vào vu cổ» | scapegoat (no proof) | punish 1 | kept | victim, not doer; no proof (law 6a) |
+| j7.js:21 (doll found at her palace) / j7.js:26 (poisoned gift in her name) | framed | victim of a frame | punish 2 | kept | framed victims, not doers |
+| j8.js:150 framed() / j42.js:330 | «bị vu dùng bùa ngải» | victim | punish 2 | kept | same |
+| j8.js:181 | «con trai bị tố trù ẻo» (kframe target) | victim | punish kframeSev | kept | same |
+| j7.js:187 rvmusk | xạ hương so a consort never conceives (no heir yet) | doer | fall | kept | hại phi tần, not hoàng tự |
+| j8.js:173 ksab | phá việc học của hoàng tự | doer | punish 2 | kept | no harm to his body/life |
+| j8.js:158 | tố hụt Hoàng hậu, phạm thượng | accuser | punish 2 | kept | failed accusation, not harm |
+| j8.js:413 | tráo con (her own fake), khi quân | doer | deathSentence thường | kept | khi quân, no real heir harmed |
+| j71.js:236 / j95.js:442 | mưu hại exposed BEFORE the deed | planner | punish 1 / 2 | kept | no deed yet (law 6a: proof of a deed) |
+| j8.js:458, j8.js:146, j42.js:187, j78/jaudit/jrcv «bị Hoàng hậu xét tội theo chứng cứ» | generic schemes / evidence | — | punish / fall | kept | the crime kind is not known at these sites |
+| j4.js:108 (mưu phản, tru di) / j42.js:334 (maid life, đánh chết) / jcoopworld.js:807 | — | — | death already | kept | already the top tier |
+
+### Item 3 — ONE tư thông function for her and NPCs (law 1 + 11)
+j22 **ttExposed(p,m,lead)**: the man (if known) xử trảm; npc-purpose empMercy (her Sủng, her children) → lãnh cung; else deathSentence (its
+first-year mercy / nhân từ). Callers:
+| caller | before | after |
+|---|---|---|
+| j22 affairExposed (her: tryst, j95 npcCatch, jroute rtExpose, j96 c_lo) | own body: empMercy → cold, else deathSentence | wrapper → ttExposed(S) |
+| j22 ttNpcExposed (j3 loveletter, j95 accuse) | deathSentence only (no empMercy) | wrapper → ttExposed(v) |
+| j22 trystNpc caught | own copy: deathSentence only | ttExposed(v) |
+| j30 «Bóc chuyện tư tình» on her | 50 % over «ban chết» / 50 % cold, no mercies | ttExposed(S, the man she met most) |
+| j30 «Bóc chuyện tư tình» on an NPC | ttNpcExposed | ttExposed(t) |
+| jmen.js:208 report caught (her / NPC) | own copy: deathSentence only | ttExposed(c) |
+| kept on purpose: j22.js:54 «Thú tội» card (her own confession, its own odds), jroute.js:362 nghiệm thân (bloodline), j4.js:40 old letters before entry (sev 2), j42 maid lives | — | different crimes / own choices |
+
+### GATES (on 6c0d11f2 (game code cb3d5183; later commits = test / scan rows only))
+| gate | result |
+|---|---|
+| dev/test/leave-palace.test.js | 134/134 ok (125 old + 9 new: P2 parity ×2, P2 routes, P2 scan, P3 robot, P3 her recall, P1 crimeTier table, P1 family deeds S + NPC, P1 scan) |
+| dev/test/leave-palace-tsrobot.js (new, real monthTick) | PASS: 13 NPCs entered thất sủng, 10 left (6 lives × up to 120 months) |
+| bash dev/tools/quickcheck.sh | PASS on 6c0d11f2 (core gates PASS, old save ok, perf new/live render 230/223, buổi 1239/1063 ms). First run FAILed G4 npc-purpose-scan (row j22 affair: done-text moved) → row updated to the new ttExposed line (npcWhy empMercy kept) → PASS |
+| role-parity ×2 | ALL PASS ×2 |
+| coop-e2e host Fold / guest iPad | 142/142 passed |
+| coop-e2e COOP_SWAP=1 | 142/142 passed |
+| old save | quickcheck old save from LIVE main loads + plays a buổi; Trả thẻ bài old-save case in leave-palace test ok |
+| shots | none uploaded: no new UI part (new lines are text in the existing kit news card / news feed / log). Her «chợt nhớ» line read back from the built news card at Fold 755x1000 + iPad 1180x820; two shot tries were covered by the boot / Luân hồi overlay (looked at, scratch only, deleted) |
+
+### NOTES
+- convict keeps punish for a co-op friend's entry (v.coop) on the host: her death must happen on her own device (no NPC death of a player seat). If MAIN wants the host's treason verdict to reach her phone as a death, that needs a co-op patch (parking lot).
+- BAL.eff.j8.pondSev is now used only by the non-treason fallback of convict (pond is always «nghich»); left in BAL, unused in effect.
+- OPEN for Foreman E (not in this brief): ORDER FROM MAIN 119 08:06Z (kpGate text regex «chết») touches the same branch; not done here, jkiep.js:45 still keys on words.
+
+SẴN SÀNG KIỂM leave-palace-r 6c0d11f2
