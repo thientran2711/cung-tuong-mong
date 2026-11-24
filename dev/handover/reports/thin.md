@@ -300,3 +300,9 @@ Specials used: intel (ma-007/008/016), cure (ma-006/014); no other special. th-0
 - Spread: tiers mixed s/m/l; every stance Σgain == Σloss == tier steps; `an` only on the gain side (validator rule); all objects have owner/clue/trace; no named person; no digits/%; src K/D noted.
 - Notes for ENGINE #3: (1) maid comps carry no nết/lòng (validator rule); (2) `j68c-emp-*` objects with owner `A` belong to the emperor; (3) `j68c-serv-010` and `-021`..: B role is a consort (rv) cast by nết; (4) `node dev/test/j68c-play.js` could not run here (needs the built site, sparse worktree) — engine to run it on the merged file.
 - ~100 % writer lane done (the file); fold-in, play test and gates are ENGINE's.
+
+## P5-SEEDS-B
+PRIORITY #1 CHECK: OD 8 | ledger 0 | claims 8 | main 15 | review/* 10 | archive 0 — the 25 old Kỳ ngộ untouched, no scene reused.
+- File `dev/handover/content/thin/kyseeds_b.md`: 37 seeds = grp vat 14 (lost 5, dead 3, rare 3, plot 3) + grp sv 23 (servants, children, own maids, eunuchs; fest/winter/night/wx variants). Ids kyc-vat-001..014, kyc-sv-001..023.
+- Validator (review/thin-p4 d193f687): `kyseeds_validate.py kyseeds_b.md --min 30` → 0 errors, 0 warnings. `kyc-play.js` ALL PASS (27 played, 10 skipped: no real dead/rare piece in that one world).
+- Law 2/3: every choice within eqTol (my own max/min ≤ 1.2 on all bands), every option gain+cost, plain cards gain-only; numbers copied in size from the old 25; law 4 no typed numbers in text; law 8 src K/D.
