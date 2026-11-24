@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"3214db02+","t":"2026-11-24T07:43Z","c":"review scent r1: small fixes — one box a month (stop + pick again burns no second box), Emperor's liked scent never one he dislikes (filled…","b":"a38d7c7993d3","h":[{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"}]};
+window.CTM_BI={"s":"1a44176a+","t":"2026-11-24T07:46Z","c":"review scent r1: «Thôi xông» card states its gain and its loss (law 3: keeps the boxes / loses the monthly gain) instead of a loss shown as…","b":"ae041c8cc934","h":[{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -49660,11 +49660,11 @@ function trusted(p){p=p||S;if(p.doctor)return true;if(p!==S)return false;const c
 function bribedBy(p){p=p||S;if(trusted(p))return null;return bribers(p)[0]||null}
 window.thyBribedBy=bribedBy;window.thyTrusted=trusted;
 /* ---------- what the pulse can read ---------- */
-function tainted(p){return (p.inv||[]).filter(e=>e&&e.t&&e.by!==key(p)&&TAINT[e.t]&&["xa","chi","meo","bua"].includes(e.t))}
+function tainted(p){return (p.inv||[]).filter(e=>e&&e.t&&e.by!==key(p)&&TAINT[e.t]&&["xa","chi","meo","bua","doc"].includes(e.t))}
 function plotsOnHer(){try{const z=S.j70;if(!z||!z.pl)return[];return z.pl.filter(p=>!p.end&&p.t==="me"&&!p.kn&&p.pg>=1&&(p.m==="poison2"||(p.m==="musk"&&S.preg)))}catch(e){return[]}}
-const TW={xa:"dấu xạ hương",chi:"dấu chì ngấm dần",meo:"khí suyễn do lông thú",bua:"khí huyết bị hao mà không rõ vì sao"};
-const TWHERE={xa:"túi thơm, hương trầm",chi:"son phấn",meo:"đệm gấm",bua:"túi thơm, đệm gấm"};
-const PW={tra:"dấu độc ngấm chậm, như từ trà uống hằng ngày",son:"dấu chì, chu sa, như từ son phấn",huong:"dấu hương độc, như từ lò trầm trong phòng",ty:"dấu thuốc lạ trong thang an thai",hh:"dấu hồng hoa trong canh bổ",tsv:"dấu thuốc lạ trong thang an thai",xh:"dấu xạ hương"};
+const TW={xa:"dấu xạ hương",chi:"dấu chì ngấm dần",meo:"khí suyễn do lông thú",bua:"khí huyết bị hao mà không rõ vì sao",doc:"dấu hương độc ngấm qua hơi thở"};/* doc: jscent «tẩm hương độc» (review scent r1) */
+const TWHERE={xa:"túi thơm, hương trầm",chi:"son phấn",meo:"đệm gấm",bua:"túi thơm, đệm gấm",doc:"hộp hương xông"};
+const PW={tra:"dấu độc ngấm chậm, như từ trà uống hằng ngày",son:"dấu chì, chu sa, như từ son phấn",huong:"dấu hương độc, như từ lò trầm trong phòng",lohuong:"dấu hương độc, như từ hộp hương xông trong phòng",ty:"dấu thuốc lạ trong thang an thai",hh:"dấu hồng hoa trong canh bổ",tsv:"dấu thuốc lạ trong thang an thai",xh:"dấu xạ hương"};
 function sucWord(s){return s>=BAL.sucLv.word[2]?"khí huyết dồi dào":s>=BAL.sucLv.word[1]?"khí huyết điều hòa":s>=BAL.sucLv.word[0]?"khí huyết hơi hư nhược":"khí huyết rất suy nhược"}
 /* Sức khỏe (jkh, spec 4.6): ≥ thyLo Khỏe mạnh · thyBad..thyLo Hơi yếu · < thyBad or ill Có bệnh; a bribed physician softens one step */
 function verdict(lie){const i=illOf(S);const s=S.suc||0;const K=typeof khB==="function"?khB():null,kh=K?khOf(S):100;const bad=i||(K&&kh<K.thyBad);if(bad&&!lie)return["Có bệnh","r"];if(s<40||(bad&&lie)||(K&&kh<K.thyLo))return["Hơi yếu","n"];return["Khỏe mạnh","g"]}
@@ -97199,7 +97199,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="a38d7c7993d3";window.CTM_BUILD=BUILD;
+const BUILD="ae041c8cc934";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

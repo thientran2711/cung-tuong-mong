@@ -8,7 +8,7 @@
       a rival who wears HER scent can make others blame her (frame); tell odds rise with the visited one's rank (law 5); disliked < plain < liked.
    T7 poison (law 1): she taints her own box (taintItem doc) and gives it — NPC who burns it loses Sức; an NPC taints hers (scTaint) — she loses Sức
       when it burns; «Kiểm tra đồ» (inspect) finds the tainted box and the trail gives evidence; j70 route lohuong exec taints the target's box both ways.
-   T2b / T5b / T6b (review r1): no second box burnt by stop + pick in one month; his liked scent is never a disliked one; NPC→NPC copy.
+   T2b / T5b / T6b (review r1): no second box burnt by stop + pick in one month; his liked scent is never a disliked one; NPC→NPC copy; T7b the Thái y pulse check knows the doc taint + lohuong route.
    T8 old save: emp without likes.scent / rivals without sc load; normAll fills; scOf works.
    usage: python3 dev/build/assemble.py && node dev/test/scent.test.js dev/index.html [lives=2]   → PASS / FAIL (exit 0 / 1) */
 const {chromium}=require('playwright');const path=require('path');
@@ -82,4 +82,6 @@ for(let seed=1;seed<=LIVES;seed++){const p=await b.newPage();const errs=[];p.on(
   try{const s=JSON.stringify(S);JSON.parse(s)}catch(e){bad.push("T8 save "+e.message)}
   return bad});
  if(r.length)fails.push(...r.map(x=>`seed ${seed}: ${x}`));if(errs.length)fails.push(...errs.slice(0,3).map(x=>`seed ${seed} pageerror: ${x}`));await p.close()}
+/* T7b (review r1, law 11 family): the Thái y pulse check (jthaiy, closed module) knows the doc taint and the lohuong route — static check */
+{const J=require('fs').readFileSync(path.join(__dirname,'../build/jthaiy.js'),'utf8');if(!/"bua","doc"\]\.includes\(e\.t\)/.test(J)||!/\bdoc:"[^"]+"/.test(J)||!/\blohuong:"/.test(J))fails.push("T7b jthaiy blind to the doc taint / lohuong route")}
 await b.close();if(fails.length){console.log("FAIL\n"+fails.join("\n"));process.exit(1)}console.log("PASS scent.test ("+LIVES+" lives)")})();
