@@ -1,0 +1,97 @@
+# INTRO-DESIGN report — character first-introduction shots (owner OD 24/11 ~05:10Z)
+
+PRIORITY #1 CHECK: OD 24/11 ~04:10Z→~05:10Z (selection-scene review rows s1–s23, dialogue rules ~04:45Z/~04:50Z, intro rule ~05:10Z) | main: dev/MOTION.md (no intro/reveal shot there), KIT §93 `jkitsel.js` (selection layer), `kitEntryGate` (j-entry gate, KIT 8.x), 33.9 swipe stage | review/*: kit-dialogue-vn (KK16: spotlight + typewriter + cue hook, in progress), selection-scene (SELSCENE-2, HOLD) | claims: INTRO-DESIGN = this session (CLAIMS.md L1366).
+Nothing for "character intro" exists yet; the mock REUSES the KK16 parts that are announced (typewriter line with a per-line cue hook, speaker spotlight) and only adds new INTRO parts on top.
+
+Status: RECOMMENDATIONS + storyboard mock (not a build). Mock code: branch `review/intro-design`, `dev/mock/intro-design/`. Page + clips: CDN `img/_review/intro-design.html`, `img/_review/intro-design/`.
+
+## 1. Research — how admired games / dramas introduce a character the first time
+
+Expert-first (law 8). Method: I looked for sources and found little citable material on the web (search returned generic film-writing pages); the list below is from craft knowledge of the genre (otome / VN / gacha RPG / Chinese palace dramas). Treat as designer's judgement, not as quotes.
+
+| # | Technique | Where it is seen | What makes it feel polished |
+|---|---|---|---|
+| 1 | **Close-up then pull-back** (face first, body second) | Chinese palace dramas (the first shot of an empress is the face/headdress, then the camera opens to the throne), Fire Emblem: Three Houses, Genshin story cutscenes | Scale change IS the introduction; ease-out in, ease-in-out out; the background is soft so only the face is sharp |
+| 2 | **Freeze-frame + name caption** | Drama "character cards" (vertical calligraphy: name + title), anime opening | Caption appears AFTER the face has registered (≈300 ms later); vertical brush name on the side, never over the face; holds 1.5–2 s |
+| 3 | **Depth-of-field spotlight** | VNs (Fate, Ace-Attorney witness stand), Persona dialogue | Everything else blurs (6–10 px) and dims (≈.5–.7), still readable as a shape — owner's "tắt/mở đèn" |
+| 4 | **Silhouette → colour reveal** | Persona boss reveals, Love and Deepspace entrances | Black shape + rim light first, colour fills in over ≈1 s; the pause makes the reveal land |
+| 5 | **Entrance walk-in** | Otome VNs, Mystic Messenger-style chat, Arknights operator arrival | Figure slides in from off-screen with ease-out; the others STOP moving (idle sway stops) so the eye follows one thing |
+| 6 | **Roll-call with synchronous highlight** | Fire Emblem class/house presentations, Idolmaster line-ups, drama "tuyển tú" scenes | Line types out; the instant the typewriter hits the name, that person brightens and a plaque appears at the feet; the rest stay dim but visible |
+| 7 | **Lower-third title bar** | TV dramas, 80 Days, Disco Elysium NPC tags | Bar slides from the side, tag word «LẦN ĐẦU GẶP» + name + origin; leaves after ≈3 s so it is a memory, not a HUD |
+| 8 | **Light-from-the-door entrance** | Costume dramas (the Emperor arriving) | Warm light cone + silhouette; sound/bell first, person second; the room dims so he "fills" it |
+| 9 | **Inner-thought narration** | Otome protagonists, Sengoku-style VNs | The first sight is told by HER thought line (typewriter) and the image obeys the words — this is the owner's design exactly (A) |
+| 10 | **Rank-ordered reveal** | Palace dramas (Emperor, then Empress Dowager, then Empress) | Order = importance = what her eye reaches first; the SAME shot grammar for all three so the player learns the rule; first one is the longest |
+
+Common rules across all of them (carried into the kit): (a) ONE thing moves at a time; (b) the caption never covers a face; (c) text and image are tied by a cue (the words start the picture); (d) tap = jump to the end state of the current beat, never skip the story; (e) the same shot grammar every time = recognisable "first meeting" feeling.
+
+## 2. INTRO KIT proposal (parts for KK16)
+
+New kit parts (built ONLY by the kit keeper; the mock is a prototype):
+
+| Part | What | Notes |
+|---|---|---|
+| `kitIntroStage(spec)` | One focus-shot container over the stage (Fold: stage rect 747x749; iPad: full spread 1180x820, see §4) with blur layer, shade layer, camera group, tap-to-skip | one at a time (queued with `kmPush`), Gọn/reduced-motion = final frame at once |
+| `kitIntroPlate({name,sub,mode})` | Name plate: `v` = vertical brush strip (royals, side of the face), `h` = horizontal plaque under feet (roll-call, self-intro), `bar` = lower-third (first meeting) | ONE look (cream paper + gold border + ink-red name, serif display); title via `kitTitlePlate` tier effects if the person has a title |
+| `kitIntroCue` | The KK16 typewriter fires `onCue(substr)`; intro parts subscribe | no new typewriter |
+| `kitFocusFig` | Full/half-body figure with `crop` (clip + soft mask), `fly` (to seat) | uses the existing 900 px figure (`fig-*`), nothing new |
+| `kitSpotlight` | Speaker lit / others dimmed (KK16) reused for D | same part |
+
+Timing (all ms, in the kit table so one place changes them): type speed 34 ms/char (+110 after , ; · +160 after — … · +260 after . ! ?), blur in 700–1000, close-up push 700, half→full open 700, fly to seat 900, plate fade 450–600, hold after text ≥ 1800, post-line gap 700. Tap while typing = finish the line; tap when finished = next beat; long-press = skip the whole shot to its final frame. A faint hint «Chạm: xem tiếp · Giữ: bỏ qua» shows from the first beat.
+
+Skip/seen rule: a first-introduction shot plays ONCE per person per save (flag `S.intro[id]`); replays (new life: same Hoàng thượng) are the short form: plate + 400 ms push only.
+
+Wording (VANPHONG): thoughts «Người ngồi giữa, long bào vàng rực… hẳn là Hoàng thượng.», plates «Hoàng thượng / Chí tôn thiên hạ», «Thái hậu / Mẫu nghi thiên hạ», «Hoàng hậu / Chủ lục cung», «LẦN ĐẦU GẶP», «Hoàng thượng giá lâm». No % anywhere.
+
+## 3. The shot types
+
+All figures/backgrounds are the game's own: figures `fig-emperor-a26-1`, `fig-thaihau-h1-a51`, `fig-consort-c03-t8-a36` (Hoàng hậu), `fig-eunuch-u01-a51` (Tổng quản), `fig-player-look1-t1-a18`, tú nữ `fig-consort-c01/c02/c04/c05-t1-a18`, visitor `fig-consort-c02-t3-a26`; hall `end-bg-throne.webp`, yard `ngu-hoa-vien-xuan-sang.webp`. Clip lengths below are the mock's.
+
+| ID | Type | Option | Idea | Length |
+|---|---|---|---|---|
+| A1 | ROYAL REVEAL | **Close-up card** (her description, literally) | 4 tú nữ walk in (royals NOT shown). Thought line types; at the cue word «Hoàng thượng» the hall blurs/dims and a HALF-BODY close-up fades in centred, vertical plate beside the face; the crop OPENS to full body, then the figure flies/shrinks to his seat. Repeat for Thái hậu (plate on the right) and Hoàng hậu (plate on the left), same grammar, shorter | 23 s |
+| A2 | ROYAL REVEAL | **Camera push-in** | Same words and order, but the camera itself pushes into the seat (scene scale ≈ 1 → 2.1, blurred background), the figure rises into place, then the camera pulls back; plaque «Hoàng thượng · Chí tôn thiên hạ» at the bottom. Smoother, more "drama", less like a card | 23 s |
+| B1 | SELF-INTRODUCTION (yard) | **Step forward** | The girl who speaks steps to the middle and grows 13 % (never above the stage height), others dim + blur, plaque under her feet «Khổng Thị Lan / Nữ nhi Khổng gia · Giang Nam», her line types in the box at the bottom, then she steps back | 11.7 s |
+| B2 | SELF-INTRODUCTION | **Half-body card** | Yard stays, dimmed/blurred; a half-body card slides in from the right with a vertical name strip on the left; she does not leave her spot | 11.7 s |
+| C1 | NARRATOR focus (Tổng quản) | **Centre** | He steps forward and grows to .72 of the stage, hall blurred, name plate at his feet, box at the bottom, nobody covered | 8 s |
+| C2 | NARRATOR focus | **Left + box right** | Same but he stands LEFT and his box sits on the RIGHT (the event-frame family: speaker left, box right) | 8 s |
+| D1 | ROLL-CALL | **Light + name** | Whole hall dark; Tổng quản lit; his line types: the moment the typewriter passes «—» the girl of that line lights up (slight pop) and her name plaque appears under her feet; next line, next girl; earlier girls stay lit with their plaque | 14.9 s |
+| D2 | ROLL-CALL | **Spotlight cone + seal numeral** | Same cue logic, plus a warm light cone over the lit girl and a small red numeral seal (壹 貳 參 肆) on her plaque | 14.9 s |
+| E1 | FIRST MEETING of a new NPC (visit) | **Lower-third** | Visitor walks in from the left, background softly blurred, bar «LẦN ĐẦU GẶP · Mục Tài nhân · Ngọc Thanh các» slides in, bar leaves after her first line | 9.2 s |
+| E2 | Emperor's FIRST VISIT | **Door light** | Her real room dims; warm light cone; silhouette → colour; plaque «Hoàng thượng giá lâm»; her thought line | 9.4 s |
+| F1 | DAY-1 ROOM ASSIGNMENT (OD ~08:50Z) | single option (follows her words) | 12 girls in 3 rows (yard); ma ma LIT, rest + background dimmed; her line types «Tây sở: A,| B,| C,| D.» with a beat after each name; at each name (typewriter cue) that girl's row figure vanishes and the same girl pops up as a half-body close-up in the centre, then shrinks into a group slot; after 4 → the group shrinks and goes to a corner (Tây bottom-left, Đông bottom-right, Bắc back-centre) with a plaque «Tây sở»…; at the end the scene gives way to HER room (real stage underneath): her figure + 3 grey «Người lạ» (the kit's `unknown-fig-f`) with plaques; her thought line. Ma ma = STAND-IN (consort a51 figure; the game's real ma ma figure may differ — flagged) | 29 s |
+| G1 | SELECTION RESULT per girl (OD ~09:00Z + ~09:30Z) | tray along the row | Tổng quản with the tray figure `fig-eunuch-ndp-tray` walks along the row; typewriter «Khổng Lan — lưu bài tử, ban hương nang.» → at «ban» that girl, from her place in the row, zooms up (x1.22) + lights (others dim), the item (sachet `item-tuithom` / flower `item-tp-bhoa-b1`) flies from the tray to her; KEPT → she steps aside to the right, plaque «Ở lại»; BAN HOA → she backs OUT of the screen (shrinks, slides off, fades), plaque «Ban hoa»; next girl | 18 s |
+| G2 | HER OWN result (big) | big version | She stands big in the centre, tray eunuch at the side, sachet floats to her, warm glow, plaque «Ở lại cung · ban hương nang». Needs its OWN painted background (OD ~04:40Z): mock uses the throne hall as a stand-in; new painting = Foreman C, held by the credit rule | 9.4 s |
+
+Choice for the owner per type (max 2): A1/A2, B1/B2, C1/C2, D1/D2, E1/E2, F1, G1/G2. Recommendation: **A1** (it is what she described and reads as a "character card"), **B1** (full body, she asked for the person to be shown full body), **C2** (consistent with the event frame she restated 24/11), **D1** (plain, nothing to explain; D2 only if she wants extra ceremony), **E1** + **E2** both (different moments).
+
+Other first-meeting moments to hook into the same kit (checklist for KK16/foremen, each uses a type above, no new art): new master (chủ tử) = A-short; Thái hậu summons first time = A1 short; Hoàng hậu receiving the new girls = D1; a new tú nữ arriving in the yard later = B1; Hoàng thượng first visit = E2; first time she meets a named NPC at a place = E1; first appearance of a child/prince = E1 with age tag; a new Tổng quản after a transfer = C2.
+
+## 4. Fold vs iPad
+
+- Fold 755x1000: the shot occupies the stage rect (747x749); the top status block and the tab bar stay visible (she keeps orientation). Figures keep the stage ratio in the tableau (feet ≈ 77 % of the stage, group figures .46–.66 H), only the FOCUS shot enlarges (close-up figure 1.5 x stage height).
+- iPad 1180x820: the stage page is only 582x601, a cinematic close-up in it would be tiny, so the mock lets the intro take the **whole spread** (1180x820, game chrome hidden for the length of the shot). Open question for the owner: whole spread (mock) or only the stage page.
+- Text box = existing narrator box position (bottom), centred 640 px max on iPad.
+
+## 5. What I changed my mind on while building (useful for KK16)
+
+- Figures sit at the stage height only in the tableau; the BOX at the bottom hides the lower legs of a focus figure — plates under the feet therefore need the feet raised to ≈ 77 % of the stage (otherwise the plate lies under the box).
+- Do not hard-clip the half-body crop: use a soft mask (gradient) or the bottom edge reads as a cut-out.
+- Two shots must not share one typewriter box without windows (each line replaces the previous) — the cue hook needs a per-line window.
+- The royals standing on the dais look "floating" if their feet are above the carpet; in the real build the hall needs a dais/standing line painted (Foreman C) — the mock uses the current throne background.
+- Soft figure resolution: the full-body PNGs are 900 px tall; the 1.5x close-up is upscaled ≈ 1.7x and still reads, but a bust crop (`por-` 384x506 is too small) would be sharper if she wants it at iPad size. NEW ART not required; optional list: none.
+
+## 6. Mock details
+
+`dev/mock/intro-design/` on `review/intro-design`: `intro-mock.js` (deterministic timeline engine + the 10 clips, injects into the REAL local build page), `render.js` (boot the real game with Playwright, seek, screenshot every frame), `mkvid.sh`. Clips rendered frame-by-frame at 12 fps (exact, no jitter; CPU-bound sandbox), Fold 755x1000 and iPad 1180x820, each with a 2x-speed copy. Stills at dpr 2 on the page.
+
+Existing art only (credit hold): figures fig-*, backgrounds end-bg-throne / ngu-hoa-vien-xuan-sang, kit `unknown-fig-f`, items item-tuithom / item-tp-bhoa-b1, tray figure. Words «ban hương nang / ban hoa» from OD 24/11 ~09:00Z. Typewriter pauses ('|') per name are a KK16 cue-hook requirement: the hook must support a per-name beat.
+
+Known limits of the mock (for KK16 / foremen): tableau positions are placeholders (the real hall needs a painted dais line); half-body crops reuse the 900 px full figures; the iPad mock covers the whole spread; the game's own name-guard rewrites unmet names in any DOM text («Tân Như Ý» became «Tân Phi ???» in the first take) — the real parts must pass the names through the kit name rules.
+
+## 7. Questions for the owner (to MAIN)
+
+1. A1 or A2 for the royals? 2. iPad: whole spread or the stage page only? 3. First-meeting shots: play once per person per save, short form afterwards — OK? 4. Roll-call: D1 or D2.
+
+Page: https://ctm-img.victoria-tntt.workers.dev/img/_review/intro-design.html (CDN img/_review/intro-design/, 26 videos + 2x copies + 104 stills). To wipe after the verdict: python3 dev/site/cdn_sync.py --wipe-review intro-design.
+
+~80% xong / ~0% chơi được (storyboard mock only; the kit parts are KK16's).
