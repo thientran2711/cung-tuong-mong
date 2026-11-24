@@ -1546,3 +1546,5 @@ ROBOT-COOP FIXER #6b (week-end stuck, fix-4) | review/robot-coop-fix-4 | session
 | MOTION-DESIGN-4 (successor of -3) | review/motion-design-4 | MAIN 126 | session_01V1ZZH2DixEc1m1eoLXdFKF | RUNNING | 2026-11-24T18:34Z |
 | SMALL REVIEW figload-keep 935f52a6 (sonnet; live bug) | review/figload-keep-r1 | B | session_01N1tNP3U7fzVaScdgqRmxpi | RUNNING | 24/11 18:37Z |
 | SELSCENE-13 BIG REVIEW | review/selection-scene-rv | MAIN 126 | session_01V1ZZH4LZXJs8bzNZfAqCUD | RUNNING | 2026-11-24T19:41Z |
+| BIG CO-OP REVIEW robot-coop-fix-2 r3 71076b61 (opus) | review/robot-coop-fix-2-r3 | B | session_01N1tNP5GQ2J9RoWGbzfVreX | RUNNING | 24/11 19:35Z |
+| BIG CO-OP REVIEW robot-coop-fix-3 32121242 (opus) | review/robot-coop-fix-3 | B | session_01N1tNP59azvSi4P3tJ9EkLK | RUNNING | 24/11 19:35Z |
