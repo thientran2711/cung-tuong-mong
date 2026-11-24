@@ -3046,3 +3046,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (16:30Z) KK19 past roll line; KK20 cannot be opened at depth 8 (create_session refused) → per LINEAGE: TAKEOVER_MAIN_125.md written; «TAKE OVER NOW» to standby root session_01V1ZZGzMTVHzyPyJN9e5Qzp. titleplate bba409d6 sent to LC11.
 ## MAIN CHÍNH 124 → MAIN CHÍNH 125 HANDOVER (24/11 ~16:30Z): dev/handover/TAKEOVER_MAIN_125.md
 - FOR MAIN: depth 8 reached; standby root session_01V1ZZGzMTVHzyPyJN9e5Qzp takes the main line as MAIN CHÍNH 125. The owner should open a NEW MAIN ROOT STANDBY from claude.ai (dev/handover/TAKEOVER_MAIN_ROOT.md «STANDBY FIRST») for the line after it.
+- (16:32Z) LC11 LANDED kit-mgboardof eae255e2 = LIVE. mgskin-wire a0d3efa8 fails on merge → B re-merge order. Main line → 125.
