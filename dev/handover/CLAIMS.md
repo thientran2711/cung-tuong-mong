@@ -1429,3 +1429,4 @@ NET THRESHOLDS research + audit + proposal (opus, no build; ORDER MAIN 116 06:02
 | LANDER LC10 (opus; successor of LC9) | reports/land-chain-10.md | MAIN 118 | session_01V1ZZH4w5vkbybCTwK1DkHR | RUNNING | 24/11 06:44Z |
 | SIDE-LINE DIALOGUE SCENES LEAD (opus; ORDER MAIN 118 06:42Z, OD 24/11 ~10:05Z; briefs/b-sideline-dialogue.md; schema agreed once with Foreman E) | review/sideline-dlg; reports/sideline-dialogue.md | B | session_01N1tNP4b3uXPGSvnVmsC51b | RUNNING | 24/11 06:43Z |
 | REVIEW robot-coop-fix-1 889803dc + harness robot10-coop 2bf6094f (opus BIG co-op; briefs/b-robot-coop-fix-1-review.md) | review/robot-coop-fix-1-r1 + review/robot10-coop-r2 | B | session_01N1tNP2DcFcegtmGUCGYXHH | RUNNING | 24/11 06:44Z |
+| MAP-FIX-2 map-tap-go + map-portrait LIVE fails (opus) | review/map-fix-2; reports/map-perf.md | MAIN 118 | session_01V1ZZH1VfNwzBQ4xJTkMJxY | RUNNING | 24/11 07:48Z |
