@@ -185,7 +185,7 @@ function dhPick(key,back){const o=dhObj(S,key);if(!o)return;const e=S.dh[key],L=
  opts.push({n:back?"Quay lại":"Để sau",fx:{},x:"",go:()=>{if(back)dhPanel()}});
  kitPanel({kind:"info",title:`Đeo «${o.name}»`,sub:"Mỗi lần chỉ đeo một danh hiệu, lấy một phần thưởng",dh:1,
   sections:[{h:"",html:`<div class="kt3">${kitTitlePlate(o)}</div>`},{h:"",rows:[["Cách có",esc(o.how)],["Khi đeo","chọn một phần thưởng bên dưới; tháo ra thì mất"]]}],opts},true);showModal()}
-window.dhPick=dhPick;
+window.dhPick=dhPick;window.dhNotice=dhNotice;window.DHKEYS=()=>Object.keys(DH);/* test hooks (dev/test/kit-titleplate.js) */
 /* ---------- NHIỆM VỤ › Danh hiệu ---------- */
 let DHTAB="goal";
 function tabsHTML(cur){const n=earned(S).length;const L=[];if(typeof kitGoalNow==="function"&&kitGoalNow())L.push({k:"goal",label:"Mục tiêu"});
