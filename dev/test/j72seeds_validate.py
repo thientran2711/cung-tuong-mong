@@ -153,6 +153,9 @@ for r in rows:
         for q in ([t] if t==r.get("ask") else [])+re.findall(r"“[^”]*”",t or ""):
             ma=ADDR.search(q.replace("Hoàng hậu nương nương",""))
             if ma:err(f"{i} hand-typed address {ma.group(0)!r} (use {{goi}}/{{xung}}) in «{q[:60]}»")
+            if (r.get("req") or {}).get("kind") in ("rv","fallen"):
+                mn=re.search(rf"(?<![{L_}])[Nn]gươi(?![{L_}])",q)
+                if mn:err(f"{i} a consort calls her «ngươi» by hand (use {{goi}}) in «{q[:60]}»")
     for k in (r.get("needs") or {}):
         if k not in NEEDS:err(f"{i} unknown needs key {k}")
 if MIN:
