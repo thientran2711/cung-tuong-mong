@@ -33,7 +33,7 @@ const [VW,VH]=(pos[1]||'755x1000').split('x').map(Number);
   const o={};o.quick=h.querySelector('#kg82skip').textContent;o.smallHidden=h.querySelector('#kg82skip small').hidden;o.tq=h.querySelector('#toilquick').textContent;o.words=KIT_ODDS.map((w,i)=>h.querySelector('#oz'+i).textContent===w&&!h.querySelector('#oz'+i).dataset.kgsign);o.hint=h.querySelector('#gi').textContent;o.khoa=h.querySelector('#kh').dataset.kgsign||'';
   h.remove();KG82.phase=ph;KG82.ready=rd;KG82.tut=tt;return o});
  console.log('odds probe',JSON.stringify(od));
- const oddsOK=/Để trời định/.test(od.quick)&&!od.smallHidden&&/Nhanh/.test(od.tq)&&od.words.every(Boolean)&&od.hint==='?'&&od.khoa==='●';
+ const oddsOK=/Bỏ qua/.test(od.quick)&&!od.smallHidden&&/Nhanh/.test(od.tq)&&od.words.every(Boolean)&&od.hint==='?'&&od.khoa==='●';
  console.log(oddsOK?'PASS odds words / quick buttons stay words':'FAIL odds words / quick buttons were turned into signs');
  const oddsBad=rows.filter(([k,r])=>r.quickBad&&r.quickBad.length);if(oddsBad.length)console.log('FAIL quick button turned into a sign in',oddsBad.map(x=>x[0]).join());
  console.log('errors',errs.slice(0,3));

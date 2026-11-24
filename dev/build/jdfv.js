@@ -20,7 +20,7 @@ function dfData(i){return (dfActs(i)||[]).map(g=>({k:g.k,n:g.n,can:g.can,tot:g.t
 function dfHud(F,o){try{const T=BAL.df.rawTop;if(!F||!o)return;F.hud(o.score!=null?o.score+"/"+T:null,o.time!=null?o.time+" giây":null)}catch(e){}}
 function dfSetGroups(F,G){try{F.setGroups(G)}catch(e){}}
 /* the kit play layer (K-FOCUS-1 r2): ONE kit skip button «Làm luôn» + ◂ = onBack (cancel, no act) — nothing drawn here */
-function dfPlay(F,onSkip,onBack){return F.play({skip:{n:"Bỏ qua",sub:"kết quả thường, không tính điểm",onSkip},onBack})}
+function dfPlay(F,onSkip,onBack){return F.play({skip:{n:"Bỏ qua",sub:"kết quả thường",onSkip},onBack})}
 /* owner 24/11 ~22:02Z item 6: EVERY on-figure game first shows its rules (kit «Luật chơi» block, same words as the Điểm trang rules screen) and starts only on «Sẵn sàng» */
 const DF_RULE={
  swipe:["Vuốt","Vòng đỏ lướt qua mặt nàng: vuốt ngón tay ngang qua nó, vuốt càng nhanh càng nặng tay.","Trúng và nhanh thì thành hẳn; hụt thì hỏng."],
@@ -28,8 +28,10 @@ const DF_RULE={
  bow:["Chạm đúng nhịp","Vòng khép dần quanh nàng: chạm đúng lúc vòng chuyển xanh, ba nhịp.","Đúng nhịp càng nhiều càng thành."],
  drag:["Kéo","Kéo vật vào đôi tay nàng đang đưa qua lại; thả đúng lúc tay ở vòng xanh.","Trúng giữa vòng thì trọn vẹn."],
  ear:["Giữ","Giữ ngón tay ở bên tai nàng; buông khi người bên cạnh liếc sang (thanh đỏ), giữ lại khi họ quay đi.","Giữ đủ lâu mà không bị bắt gặp thì thành."],
- words:["Chạm dấu ✓","Dấu trôi lên: chạm dấu ✓ xanh (lời hợp ý), tránh dấu ✗ đỏ (lời hỏng).","Chạm đúng nhiều dấu ✓ thì thành; chạm nhầm dấu ✗ thì mất điểm."],
+ words:["Chạm dấu","Dấu trôi lên: chạm dấu ✓ xanh (lời hợp ý), tránh dấu ✗ đỏ (lời hỏng).","Chạm đúng nhiều dấu ✓ thì thành; chạm nhầm dấu ✗ thì mất điểm."],
  stare:["Giữ ngón tay","Giữ ngón tay để thanh áp lực nằm trong dải xanh; nàng đẩy lại nên buông và giữ cho khéo.","Ở trong dải xanh càng lâu càng thành."]};
+/* owner 24/11 MAIN 128: the rules card + skip sit ABOVE every particle / weather / fx layer (they are fixed, z 9440-9470): hide them while a mini-game intro or play layer is up; the title never wraps */
+(function(){const st=document.createElement("style");st.id="dfintro-css";st.textContent=`body:has(.kfoc-play:not([hidden]) *) #kfxcv,body:has(.kfoc-play:not([hidden]) *) .kfx-fl,body:has(.kfoc-play:not([hidden]) *) .kfxk,body:has(.kfoc-play:not([hidden]) *) .kfrip{visibility:hidden!important}.dfintro .kpst{white-space:nowrap}`;document.head.appendChild(st)})();
 function dfIntro(layer,a,onGo){try{const R=DF_RULE[a.eng]||DF_RULE.words;const nm=String(a.n||"").replace(/<[^>]+>/g,"");
  const rows=[["Việc",nm,"t"],["Chạm",R[1],"t"],["Được",R[2],"t"]];
  const el=document.createElement("div");el.className="kgr dfintro";el.style.cssText="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(88%,460px);max-height:90%;display:flex;flex-direction:column;align-items:center;gap:10px;padding:14px;z-index:3;overflow:auto;box-sizing:border-box;background:var(--paper,#f6eedc);color:var(--ink,#3b2a1c);border:1px solid var(--gold,#c99a1e);border-radius:14px;box-shadow:0 6px 24px rgba(0,0,0,.35)";

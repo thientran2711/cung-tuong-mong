@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"7d21d04f+","t":"2026-11-24T22:19Z","c":"minigame-fix: every on-figure game shows kit Luật chơi + Sẵn sàng first, skip says 'Bỏ qua — kết quả thường'; mini-game frame veiled until …","b":"fa22abf1beec","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
+window.CTM_BI={"s":"483c6064+","t":"2026-11-24T22:27Z","c":"minigame-fix r2: Điểm trang mirror face warmed + board veiled until decoded; whole-family scan (39 kg82 kinds all have Luật chơi + Sẵn sàng)","b":"216c345ad1c1","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1893,7 +1893,7 @@ const MG={
  vu:["Vũ: theo bước múa","Xem các bước sáng lên rồi múa lại đúng thứ tự. 5 lượt, mỗi lượt dài thêm một bước.",gVu]};
 /* review/mg-train (owner 16/11 07:20Z no word games): thi + y lessons and their banks (DOI, YQ) + quiz() removed; the openMG wrapper (j82) puts KG82_MGL thi / y (calli, blend) in MG before every open */
 function openMG(k,lv,cb){const [t,h,fn]=MG[k];$("mgt").textContent=t;$("mgh").textContent=h;$("ov").hidden=false;mgDone=false;
- const sk=$("mgskip");sk.hidden=false;sk.innerHTML=`Để trời định<small>${kitQuickSub({win:"tiến bộ một phần",lose:"không tiến bộ"})}</small>`;sk.classList.add("kquick");sk.classList.remove("ka","kcard","kdis");delete sk.dataset.ka;
+ const sk=$("mgskip");sk.hidden=false;sk.innerHTML=`Bỏ qua<small>${kitQuickSub({win:"tiến bộ một phần",lose:"không tiến bộ"})}</small>`;sk.classList.add("kquick");sk.classList.remove("ka","kcard","kdis");delete sk.dataset.ka;
  const fin=(pts,skip)=>{if(mgDone)return;mgDone=true;if(mgStop)mgStop();mgStop=null;sk.hidden=true;const g=pts*(S.master?2:1);
   $("mgb").innerHTML=`<p class="mgres">${skip?(pts?"May mắn":"Không vào"):["","Tạm được","Khá","Xuất sắc"][pts]}</p><p style="text-align:center">Tiến bộ +${g}${S.master&&pts?" (danh sư dạy, gấp đôi)":""}</p><div style="display:flex;justify-content:center"><button class="main" id="mgok">Xong</button></div>`;
   $("mgok").onclick=()=>{$("ov").hidden=true;$("mgb").innerHTML="";cb(g)};/* the used result button is removed: no stale "Xong" with an old callback stays in #ov */$("mgok").focus()};
@@ -30075,7 +30075,9 @@ KP_SEAL.game="TÀI NGHỆ";
    the odds WORD of BAL.skip.od (word(od(...)), VANPHONG ladder, no %; none when sure) · "thành: <win>" · "hỏng: <lose>". sub = a game whose quick choice keeps
    its own rule (contests: the mark of a girl of her level; acts: the act's own odds) gives its line itself, still in this part. kitQuickRoll() = THE roll. */
 function kitQuickSub(o){o=o||{};if(o.sub!=null)return o.sub;const w=o.sure?"":word(od(BAL.skip.od));return [w,o.win?`thành: ${o.win}`:"",!o.sure&&o.lose?`hỏng: ${o.lose}`:""].filter(Boolean).join(" · ")}
-function kitQuick(o){o=o||{};const sb=kitQuickSub(o);return `<button type="button" class="${typeof kg82Btn==="function"?kg82Btn(true):"kbtn alt"} kquick" id="${o.id||"kg82skip"}"${o.data?" "+o.data:""}>${o.n||"Để trời định"}${sb?`<small>${sb}</small>`:""}</button>`}
+/* owner 24/11 (MAIN 128): ONE skip wording in every mini-game: «Bỏ qua» + what happens in plain words (numbers-as-text "5/10" become the mark word, jmgt mgWord) */
+function kitQuickWords(t){return String(t||"").replace(/(?:tính\s+)?(\d+)\/10(\s+phần)?(?:\s*\(\+\d+\))?/g,(m,n)=>{try{return typeof mgWord==="function"?"kết quả "+String(mgWord(+n)).toLowerCase():"kết quả thường"}catch(e){return"kết quả thường"}})}
+function kitQuick(o){o=o||{};const sb=kitQuickWords(kitQuickSub(o))||"kết quả thường";return `<button type="button" class="${typeof kg82Btn==="function"?kg82Btn(true):"kbtn alt"} kquick" id="${o.id||"kg82skip"}"${o.data?" "+o.data:""}>Bỏ qua<small>${sb}</small></button>`}
 function kitQuickRoll(){return roll(od(BAL.skip.od))}
 window.kitQuick=kitQuick;window.kitQuickSub=kitQuickSub;window.kitQuickRoll=kitQuickRoll;
 (function(){const st=document.createElement("style");st.id="kquick-css";/* ONE look wherever the quick button sits (inside .kg82act, in the j5 #ov lesson panel, under the care frames) */
@@ -35210,7 +35212,7 @@ function wkFinishLesson(k,pick,raw,how){const kind=WK[pick.kind]&&WK[pick.kind].
  if(typeof playArt==="function"){try{const an=ARTS.find(x=>x.k===k).n;playArt({art:k,title:`${m.mode==="prac"?"Tự học":"Học"} ${an}`,quick:m.mode==="prac"?{n:"Học nhanh",sure:1,win:"không ra thành phẩm"}:{n:"Học nhanh",roll:1,win:"tiến bộ một phần, không ra thành phẩm",lose:"không tiến bộ"},onDone:(raw,o)=>{const sk2=!!(o&&o.skipped);raw=cl(Math.round(raw||0),0,10);const pts=sk2?(o.ok!=null?(o.ok?1:0):(kitQuickRoll()?1:0)):wkLessonPts(raw)/* ONE tier rule (ag) */;
    if(m.mode==="prac"){S.mg=null;if(sk2)log("Tự học nhanh: không ra thành phẩm.");else wkFinishLesson(k,pick,raw,"tự học");render();return}cb(pts*ms);if(sk2)return;try{wkFinishLesson(k,pick,raw,m.mode==="self"?"tự học":m.mode==="th"?"học với Thái hậu":"học");render()}catch(x){}}});return}catch(x){}}
  const r=o0.call(this,k,lv,cb2);
- try{const sk=$("mgskip"),os=sk.onclick;const kind=WK[pick.kind]?pick.kind:WDEF[k];sk.innerHTML=`Học nhanh<small>${kitParse(kitQuickSub(m.mode==="prac"?{sure:1,win:"không ra thành phẩm"}:{win:"tiến bộ một phần, không ra thành phẩm",lose:"không tiến bộ"}))}</small>`;
+ try{const sk=$("mgskip"),os=sk.onclick;const kind=WK[pick.kind]?pick.kind:WDEF[k];sk.innerHTML=`Bỏ qua<small>${kitParse(kitQuickSub(m.mode==="prac"?{sure:1,win:"không ra thành phẩm"}:{win:"tiến bộ một phần, không ra thành phẩm",lose:"không tiến bộ"}))}</small>`;
   sk.onclick=()=>{skip=true;os()};const h=$("mgh");if(h)h.textContent+=` Tự tay làm (chơi): ra thành phẩm, ${WK[kind].w.toLowerCase()}: phẩm = phần chơi (từ 0 đến 10) + ${ARTS.find(x=>x.k===k).n} bậc ${wkLv(S,k)}: +${wkLv(S,k)}${WMAT[pick.mat||0]?` + vật liệu: +${WMAT[pick.mat||0]}`:""}.`}catch(x){}
  return r}})();
 /* product dialog in front of every lesson button (and the practice button once an art is mastered) */
@@ -95698,7 +95700,7 @@ function dfData(i){return (dfActs(i)||[]).map(g=>({k:g.k,n:g.n,can:g.can,tot:g.t
 function dfHud(F,o){try{const T=BAL.df.rawTop;if(!F||!o)return;F.hud(o.score!=null?o.score+"/"+T:null,o.time!=null?o.time+" giây":null)}catch(e){}}
 function dfSetGroups(F,G){try{F.setGroups(G)}catch(e){}}
 /* the kit play layer (K-FOCUS-1 r2): ONE kit skip button «Làm luôn» + ◂ = onBack (cancel, no act) — nothing drawn here */
-function dfPlay(F,onSkip,onBack){return F.play({skip:{n:"Bỏ qua",sub:"kết quả thường, không tính điểm",onSkip},onBack})}
+function dfPlay(F,onSkip,onBack){return F.play({skip:{n:"Bỏ qua",sub:"kết quả thường",onSkip},onBack})}
 /* owner 24/11 ~22:02Z item 6: EVERY on-figure game first shows its rules (kit «Luật chơi» block, same words as the Điểm trang rules screen) and starts only on «Sẵn sàng» */
 const DF_RULE={
  swipe:["Vuốt","Vòng đỏ lướt qua mặt nàng: vuốt ngón tay ngang qua nó, vuốt càng nhanh càng nặng tay.","Trúng và nhanh thì thành hẳn; hụt thì hỏng."],
@@ -95706,8 +95708,10 @@ const DF_RULE={
  bow:["Chạm đúng nhịp","Vòng khép dần quanh nàng: chạm đúng lúc vòng chuyển xanh, ba nhịp.","Đúng nhịp càng nhiều càng thành."],
  drag:["Kéo","Kéo vật vào đôi tay nàng đang đưa qua lại; thả đúng lúc tay ở vòng xanh.","Trúng giữa vòng thì trọn vẹn."],
  ear:["Giữ","Giữ ngón tay ở bên tai nàng; buông khi người bên cạnh liếc sang (thanh đỏ), giữ lại khi họ quay đi.","Giữ đủ lâu mà không bị bắt gặp thì thành."],
- words:["Chạm dấu ✓","Dấu trôi lên: chạm dấu ✓ xanh (lời hợp ý), tránh dấu ✗ đỏ (lời hỏng).","Chạm đúng nhiều dấu ✓ thì thành; chạm nhầm dấu ✗ thì mất điểm."],
+ words:["Chạm dấu","Dấu trôi lên: chạm dấu ✓ xanh (lời hợp ý), tránh dấu ✗ đỏ (lời hỏng).","Chạm đúng nhiều dấu ✓ thì thành; chạm nhầm dấu ✗ thì mất điểm."],
  stare:["Giữ ngón tay","Giữ ngón tay để thanh áp lực nằm trong dải xanh; nàng đẩy lại nên buông và giữ cho khéo.","Ở trong dải xanh càng lâu càng thành."]};
+/* owner 24/11 MAIN 128: the rules card + skip sit ABOVE every particle / weather / fx layer (they are fixed, z 9440-9470): hide them while a mini-game intro or play layer is up; the title never wraps */
+(function(){const st=document.createElement("style");st.id="dfintro-css";st.textContent=`body:has(.kfoc-play:not([hidden]) *) #kfxcv,body:has(.kfoc-play:not([hidden]) *) .kfx-fl,body:has(.kfoc-play:not([hidden]) *) .kfxk,body:has(.kfoc-play:not([hidden]) *) .kfrip{visibility:hidden!important}.dfintro .kpst{white-space:nowrap}`;document.head.appendChild(st)})();
 function dfIntro(layer,a,onGo){try{const R=DF_RULE[a.eng]||DF_RULE.words;const nm=String(a.n||"").replace(/<[^>]+>/g,"");
  const rows=[["Việc",nm,"t"],["Chạm",R[1],"t"],["Được",R[2],"t"]];
  const el=document.createElement("div");el.className="kgr dfintro";el.style.cssText="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(88%,460px);max-height:90%;display:flex;flex-direction:column;align-items:center;gap:10px;padding:14px;z-index:3;overflow:auto;box-sizing:border-box;background:var(--paper,#f6eedc);color:var(--ink,#3b2a1c);border:1px solid var(--gold,#c99a1e);border-radius:14px;box-shadow:0 6px 24px rgba(0,0,0,.35)";
@@ -97918,7 +97922,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="fa22abf1beec";window.CTM_BUILD=BUILD;
+const BUILD="216c345ad1c1";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
