@@ -141,3 +141,18 @@ F-MUSIC-M2 DONE 11/24/2026 06:27Z: reports/F-music-fest.md (14 festival tracks o
 - FROM MAIN 129 (22:46Z 24/11): main is now MAIN CHÍNH 129 = session_01V1ZZH28uEiv3GikGEDDdA6 (child of 128, depth 4). Write «FOR MAIN 129» lines; orders from 128 stand. Lander LC12 session_01V1ZZH2p2x7oNCrRuTq7RjF (main push waits sếp's permission); kit keeper KK23b session_01V1ZZH1TB4HHX715uHrEXGz. LIVE 502c48c9.
 - (24/11 23:19Z) WAKE F #3: ACK FROM MAIN 129 22:46Z (MAIN 129 session_01V1ZZH28uEiv3GikGEDDdA6; LC12 main push waits sếp's permission; LIVE 502c48c9). F: LAND READY robot-fix-cnv-r1 e50af91a waiting; BIG REVIEW -2 1UV1SzjMXDaJGsi9iroajKn running; FIXER #4 on call. No round-2 queue from E yet. Context ~18 %.
 - FROM MAIN 129 (23:41Z): kit keeper is now KK24 = session_01V1ZZH2XW37iovDknShGvBX (KK23b rolled, archived). KIT REQUESTS go to KK24.
+- FOR MAIN 129 / LC12 (23:50Z 24/11): LAND READY robot-fix-cnv-2 fe3cb80c2ec42c9656b360f98e959fc76c692f93 (FF from LIVE 502c48c9; also holds r1 e50af91a, so it lands r1 too) — BIG review PASS (session_01UV1SzjMXDaJGsi9iroajKn; pushed + ls-remote verified). = e47c61b7 + merge r1 e50af91a (index/sw only) + 2 small reviewer fixes: (1) law 11 old-world timer family completed (j77 walkSpillGo ×2, jclose cbGreetGo, jchat greet chain → lifeTimeout); (2) jstaff eventLines: a reloaded open «Tân Giả khố» / «Tuyển tú» / «Đổi chủ» card got the elder line AGAIN at every reload (m.__el page memory; same bug on LIVE: 2 copies after one reload) → added only when missing.
+
+| gate (on fe3cb80c unless noted) | result |
+|---|---|
+| quickcheck | PASS · core gates PASS · time-spill PASS · old save ok · render 274/285, tab 556/537, buổi 1565/1359 ms, tasks>200ms 26/24 (new/live) (565c6828 merge: PASS too) |
+| coop-e2e Fold-host · COOP_SWAP=1 | 142/142 · 142/142 (also on 565c6828) |
+| r10-play-rt TRUE reload (RELOAD=1) 60 round trips cnv_mat s3 · cnv_chu s3 · cnv_mat s7 | branch 1 · 2 · 5 families (only kyngo by design + 1× ag.pend.gone timing + 2× R.N.fid, see report) — LIVE 502c48c9 same harness 89 · 93 · 100 |
+| r10-play-rt in-place file, cnv_mat s5 60 | 1 family (kyngo) — e47c61b7 same run 1 (kyngo) |
+| r10-shared-ref cnv_mat 30 loads · r10-weak-dead cnv_mat 150 | 0 splits · 0 dead (kav 896 · kfs 41 · kfp 140 · emo 1041) |
+| r10-face-band cnv_mat s5 / cnv_chu s3 300 | 0 / 0 |
+| r10-load-leak own save (80 buổi) 30 loads | 0.23 MB/load, old S 4/30 — r1 e50af91a 0.17 · 3/30; LIVE 0.87 · 30/30 |
+| r10-night-after-load cnv_chu 3 lives | 6 saves at a pending flip · SYNC stuck 0 · REAL stuck 0 |
+| night-softlock · save-slots | 10/10 PASS · ALL OK |
+| newlife-leak | FAIL 2 = its own 2-year driver (LIVE same) + g.WHYL 1 entry of the NEW life (registered lifeStore, no old person / name) — LIVE FAIL 8 (KFP_MAP / KIT_AV / EMOX / AG old-life people) |
+| old saves: newlife-oldsave · evtruth-oldsave · care-oldsave | FAIL 0 · ok (evidence → tin đồn, errs 0) · ok (errors 0 0) |
