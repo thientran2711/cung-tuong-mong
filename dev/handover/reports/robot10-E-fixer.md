@@ -205,3 +205,21 @@ State: fix-3 r2 434a4a30 SSK'd (E81r re-reviewing); r3 WIP fc995c46 on top (abov
 Running at rollover: 1-life rerun «node dev/measure/robot10.js bd bd_hen skilled 1» on the fix-4 harness in /home/user/wt/e10c-out/r8 (LAG=0) — when done, read its bug file for the «reading '1'» row: it now has the stack + save → fix the real JS (R8 bd_hen, 5/5 skilled lives). If the box was recycled, rerun it.
 Not reproduced: R8 em.pcs × kstv (iPad kid tab, saves-r5 R8-skilled-2 → 0 rows; Fold twin = R8 save 081 not tried).
 Worktrees (scratch, delete when done): /home/user/wt/e10c-f3 (fix-3), /home/user/wt/e10c-f4 (fix-4), /home/user/wt/e10c-live (main 178cac37 assembled), /home/user/wt/e10c-ho (handover). Data: /home/user/wt/e10c-data (s010 = the 4.97 M save, saves-r5 files, robot10-old.js = fix-2 r3 harness for before/after). Tools: /home/user/wt/e10c-tools (jsprobe.js, uis.js, ovl.js, hopush.sh).
+
+# FIXER #4 (successor) — session_01DgYSWoKmRE1ddnzL3kKLN7 (FOREMAN E child3 session_01DgYSWorDW5KeoX9ahdEfda)
+PRIORITY #1 CHECK ('saveBlocked save writers'): OD 0 | ledger 0 | claims FIXER #3 (rolled) | main 0 | review/* robot10-e-fix-3 r3 WIP fc995c46, r2 434a4a30 (E81r reviewing), robot10-e-fix-4 r2 66728c90 (E83r PASS e75c2715) | archive 0.
+START_CTX ≈ 7 % (1 M window); rollover at ~32 %, ceiling 60 %.
+
+## 11. E-FIX-3 r3 — review/robot10-e-fix-3 f0a5f92c (on r2 434a4a30; E81r item 3)
+Game change (fc995c46, FIXER #3): j6 saveBlocked() = ONE kit notice (CTM_WAIT.saveBlocked, existing words «Không ghi được sổ (chỗ cất trong máy bị chặn hoặc đã đầy).», id-deduped) for every save writer: j6 save(); jcloud writeSlot (LS.set false → notice); jcoopworld snapSave (snap built first, local write in its own try → notice, seatPush ALWAYS runs after); jcoopthine:203 guest copy (→ notice). j16 Sổ › Ghi vào ô already prints the same words.
+Test fix (f0a5f92c): dev/test/r10e-saveblocked.js never reached j6's write because it loaded the save with a bare deser() and left the page's boot flag quiet=true (j1), so save() returned at its own `if(!S||quiet)` guard. It now loads like j6 «Tiếp tục» (quiet=true; deser; quiet=false). No wrapper (j52 NLP, jcloud STALE/C.k, jqsave, jspread, jslots, jcoopworld) was the cause.
+| check | LIVE 178cac37 (+fix-4 harness, e75c2715) | r3 f0a5f92c |
+|---|---|---|
+| r10e-saveblocked.js (saves-r5 R3-018, setItem refused) | FAIL 2: save refused 4× («hclh-save-v2-3»), no notice | ALL OK: notice ×4 calls → one kit chip on screen, 0 page errors |
+| r10e-savewrite-scan.py (save writers) | r1 e1ee6041: 5 writers, 3 silent | 5 writers, 0 silent |
+Tests on f0a5f92c: quickcheck **PASS** 569 s (core gates PASS, time-spill PASS, old save ok; perf new/live render 202/135, tab 391/391, buổi 1404/1110 ms — a robot life ran on the same box, noisy) · coop-e2e Fold host **142/142** · COOP_SWAP=1 **142/142** · monthly-allotment ALL PASS (42) · r2 tests unchanged (r10e-oldsave-noloss, r10e-consume-scan: no jil/jallot/jration/jstip change in r3).
+No UI / kit / wording / BAL change in r3. E81r's r2 verdict not received yet — r3 holds r2 unchanged; answer it on this branch when it comes.
+SSK: SẴN SÀNG KIỂM robot10-e-fix-3 f0a5f92c (BIG: save writers + item ledger; = r2 434a4a30 + E81r item 3).
+
+## 12. R4 cnv_ma (cnv-20261124-1104-R4.md) row 4 — TIMEOUT speed-4, «Bỏ cuộc?» with opts []
+Verdict: HARNESS, already fixed by E-FIX-2 (inpage6.js:19–21, review/robot10-e-fix-2 → inside fix-4-r2m e75c2715, not on main yet). «Bỏ cuộc?» is the kit confirm (j82 kg82Ask → j79 kitConfirm on #modal): its yes button sits in the body ([data-kcf-yes]), so Q opts are always [] by design; the LIVE inpage6 only pressed Q opts and waited. origin/main inpage6 has no kcfYes → R4 ran on the old harness. Lands with fix-2 r3 / fix-4.
