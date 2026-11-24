@@ -634,3 +634,34 @@ Notes for the engine/reviewer: all premise ids new (muoi_gia/tien/thi/hoi, cn_ch
 - SHOTS (Fold 755x1000@2 + iPad 1180x820@2, scratch /home/user/wt/r4s/shots + sh2, not uploaded, LOOKED 3×): j68 court-036, emp-045, visit-045 (after fix 1: «Xạ Nguyệt hớt hải bẩm: cung nhân của Hoàng hậu … đến đòi…»); Kỳ ngộ de-006 (Hoàng thượng, «Tâu, thần thiếp quen đi một mình»), sv-005, ma-005. Kit «Việc» / «Kỳ ngộ» frame, 4 / 2 options, TỐN/ĐƯỢC/MẤT, odds ladder (Rất vững / Có cơ), no overflow, no cut text. visit-011 / kid-039 / vat-007 not shootable in a fresh life (need a poor consort / a child / a dead woman's box) = grounding working; j68c-play / kyc-play build them. Pre-existing (not this branch): the VP layer rewrites «ngươi» → «ta» and «nàng» → «nàng ta» on these cards; option picture silhouette when a stance has no art.
 - Not blocking, for MAIN/Foreman B: 9 seeds keep a role that the text never names (day-049, visit-010/047, kid-001, myst-012, rumor-017/024/033/034) — harmless (it only narrows when the seed can fire); BAL.j68c.w.def .35 × 460 seeds vs 90 old templates → composed decisions are ~2/3 of j68 draws (engine measure «composed ~77 of ~123 shown per kiếp») — tune in BAL if MAIN wants more of the old 90.
 - **VERDICT: PASS 4243006e (review/thin-p4-r1 = review/thin-p4 db47f4af + review fixes + LIVE b7598e72). Lands P4 + P5 together as one fast-forward. Shots in scratch only (no CDN folder to wipe).**
+
+## REVIEW thin-p6 r1
+- 24/11 ~03:55Z · BIG reviewer-lander (opus) session_01N1tNP5hzeJJkNV7DuxNsvJ · START_CTX ~4 % (own estimate). PRIORITY #1 CHECK ('thin-p6 P8 origin'): OD 0 | ledger 0 | claims 0 | main 0 | review/* 0 | archive 0 — reuse: review/thin-p6 92cb3949 (ENGINE #4), «## API P6», «## API P7», «## ENGINE P6».
+- Branch **review/thin-p6-r1 ff1773ba** = review/thin-p6 92cb3949 + origin/main merged three times as LIVE moved (4a8c627b → 24883e24 thin-p1 → **b7598e72** map-label-overlap; ancestor check OK). Conflicts only in assemble.py (both module lists kept: j70sd/j70c after j70, jwsd/jworldc/j71sd/j71c after jworld2, jmgpool* from main) and jbal2.js (BAL.wc/j70c/j71c + BAL.mgp*/j7c kept side by side, no shared keys); index.html/sw.js rebuilt each time.
+- FIXES (committed on review/thin-p6-r1):
+  1. Law 4 — j70c.js typed numbers: object-trace cap `>60` → `BAL.j70c.obKeep` (new key, jbal2.js); tier fallback `tier(map,k,0|2|0)` now names a BAL tier ("lo"/"s"/"0") instead of a typed number (same values as before).
+  2. Co-op / law 6b — j71c.js cast `{B}` (the scripted rival who acts on her) could pick the co-op FRIEND (her rival entry v.coop is in `rivals` during her festival play) → a real player would be scripted (OD:L94 no AI stand-in). Pool now filters `!v.coop`. (World reactions are safe: jworldc casts during the tick, friend pulled out.)
+  3. Content (handover branch): wseeds_a.md, wseeds_b.md, j70seeds_a.md, j70seeds_b.md each held a stray SECOND copy of a row (wc-tho-003, wc-thi-002, j70c-pushp-004, j70c-rumor-002, j70c-huydung-004) that was never built and failed the validator (duplicate id, «lượt», bac both sides, repeated/old tells, win without price). The built jwsd.js/j70sd.js match the FIRST copies exactly → stray copies deleted; validators now 0 errors and a rebuild is byte-identical.
+  4. Test: dev/test/norep-oldsave.js assumed LIVE writes ctm-e68h; LIVE now runs jnorep itself → it compares the old ctm-nr (j68 family) when ctm-e68h is absent. dev/test/p6-shots.js takes a festival jsonl (5th arg).
+  5. KIT REQUEST filed (dev/kit/KIT_REQUESTS.md K-EF-REL): the kit relation chip «<rank> <name> thiện cảm ±N» (.ef.kef1, nowrap) is clipped on Fold 755x1000 when the name is long — the NUMBER is cut. Whole group, already on LIVE (j7c, j70 threat options, any opt.r); not restyled (law 9).
+- GATES (final sha ff1773ba unless noted):
+
+| Gate | Result |
+|---|---|
+| validators (handover content after fix 3) | wseeds 91 seeds 0 err · j70seeds 78 routes 0 err · fseeds 220 rows 0 err (--min) |
+| wc-play (all wseeds) | ALL PASS 91/91 (8 forced) |
+| j70c-play (all j70seeds) | ALL PASS 78/78 |
+| j71c-play (all fseeds) | ALL PASS 91 stages · 80 comps · 49 prizes (3 G stages skip-not-fail) |
+| j7c-play (LIVE thin-p2 after merge) · mg-pool-play (LIVE thin-p1) | ALL PASS · no page errors (132ced30) |
+| undef-scan | PASS (300 names) |
+| one-core guard (law 4) | coregates PASS in quickcheck; engines read BAL.wc / BAL.j70c / BAL.j71c only (fix 1) |
+| 3 LIVE old saves (norep-oldsave vs LIVE b7598e72) | ALL PASS (ctm-nr carried, 360 j68 keys identical, 3 slots load + play a buổi) |
+| quickcheck | **PASS** (--runs 5: open 1418 ms, old save ok, render 211/204, tab 366/356, core gates PASS). Note: the buổi metric is bimodal on this shared box for BOTH builds (runs new 992/1019/2194/2782/4815, live 795/854/1009/1874/2199); earlier r1 shas PASS at 917/936, 1105/1130; two single-metric FAILs (buổi once, longTaskMax once) re-ran PASS. |
+| coop-e2e both seats (CO-OP LAND GATE) | 141/141 at ff1773ba; 12 runs over the r1 shas: 9× 141/141, 2× «R#1.slightAt A≠B» (coop-host-lag family), 1× «week after rebirth advances» (known rebirth flake). World/route/festival keys: S.wwin (w.x.wc host-rolled, synced); S.wc, S.j70.ob, S.j71c, ctm-nr personal. |
+| no-repeat across lives (p6-measure 300 × 6 lives) | world window content 73 % → 23 % · j70 route 58 % → 2 % · festivals 208–467 composed variants each |
+| laws 2/3/7 scan (ALL rows, not a sample: 91 + 78 + 220) | 0 hits: 4 stances, Σgain = Σloss = tier steps, gain ≥1 & loss ≥1, no key on both sides, routes 2–3 cost points, no digit/%/odds word in player text, every object/prize has name+owner/from+clue+trace |
+| law 6 (real people / objects) | casts are living roster people by nết (play tests check); objects traced (S.wc.ob / S.j70.ob / S.j71c.ob, capped by BAL obKeep); 36 sampled texts read: cổ trang, no named person |
+| shots Fold 755x1000 + iPad 1180x820 (scratch, LOOKED) | world wc-tang-001, wc-su-001, wc-hoa-002 · route j70c-frame-001, accuse-004, huydung-002 · festival fc-xa-c09, fc-nguyentieu-c02, fc-dongchi-c03: kit VIỆC / CẢNH GIÁC frames, kit option rows, names filled, no {…}, 2-col or long rows by text. Fold: relation chip clipped (K-EF-REL, pre-existing kit). |
+
+- NOT BLOCKING, for Foreman B (pre-existing on LIVE, not P6/P7 code): (a) j70.js «Tai mắt báo» card says «cần 2 để tố giác» in the header line and «cần 4 để tố giác» in the body for the same person (j70.js:234 vs thrLine70 / accNeed) — law 4, one number from two sources; (b) rv6 (j68.js:24) and so j68/j7c casts can pick the co-op friend as a scripted actor — same issue as fix 2, whole group, needs the owner-side decision/worker (not changed here, 33 call sites on LIVE); (c) content notes from ENGINE #4 (some j70 tells are scenes, not acts).
+- **VERDICT: PASS ff1773ba** (LIVE b7598e72 is its ancestor; fast-forwardable). Worktrees /home/user/wt/p6r1, p6r1-ho removed after push.
