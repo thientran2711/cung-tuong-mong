@@ -1,5 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
+last wake: 24/11 06:45Z — FOREMAN D (depth 1) session_01D3E3NbMrdKdp4hAx8gfMUq (pickup)
 last wake: 21/11 04:00Z — FOREMAN D #13 session_01964izC63Mgk7VPcriQTwU7 (hourly)
 last wake: 21/11 03:00Z — FOREMAN D #13 session_01964izC63Mgk7VPcriQTwU7 (hourly)
 last wake: 21/11 02:05Z — FOREMAN D #13 session_01964izC63Mgk7VPcriQTwU7 (pickup)
@@ -1481,3 +1482,4 @@ OPEN SEATS — MINE (this account; child can send_message/archive them):
 OPEN SEATS — OLD ACCOUNT (01964iz…; report here "FOR D ROOT"; cannot be archived from here): rv nc-fix-3 BwKVSW8D (target 449cbe08, lands after nc-fix-1 — now landed), rv bal-ranks-law4 ELFBavvy (target 670991d9; promo-hist used bal-ranks-law4-rv 2f78c51c), runners A CDnhNaaE / B FhfpAxfq (phase-2 nc lives; after 80 lives fixer EqyR78Ga decides BAL moves within laws 2/3/5), fixer EqyR78Ga (on call; nit: dead stipend0 in j20 types .7).
 Other: FACE90 page sent to sếp https://claude.ai/artifact/XubGcDyanMfWZoX92reHMo (done). Hourly trigger trig_01JMbQkaUodThCTSmeoAfjoh deleted by ROOT at rollover.
 - (24/11 06:33Z) D ROOT ROLLED OVER → **FOREMAN D (depth 1) = session_01D3E3NbMrdKdp4hAx8gfMUq**. ROOT hourly trigger deleted; ROOT stops. Seats: report to depth 1.
+- (24/11 06:45Z) FOREMAN D = session_01D3E3NbMrdKdp4hAx8gfMUq; START_CTX ≈ 6 % (1M window; rollover at 31 %, ceiling 60 %); depth 1. Took over from D ROOT 01D3E3NaW9. Push tool /home/user/wt/dpush.sh in this container.
