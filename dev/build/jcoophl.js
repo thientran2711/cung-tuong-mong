@@ -240,16 +240,12 @@ if(typeof endTurn==="function"){const e0=endTurn;endTurn=function(){const r=e0.a
 /* ---------- GUEST: world housing is the host's ---------- */
 function npcList(){return (rivals||[]).filter(v=>plain(v)&&!v.coop)}
 if(typeof palFix==="function"){const pf0=palFix;const hsig=()=>JSON.stringify(npcList().map(v=>HOUSE.map(f=>v[f])));
- /* robot-coop-fix-3: the FRIEND's housing is hers (her seat houses her; it rides her pos relay): on either seat palFix reads her relayed house
-    and never keeps a re-housing of her entry (an over-cap house evicting «the newest extra», a re-picked side hall: «sees her at r5») */
- const fH=()=>{try{if(CW.friendHouse)CW.friendHouse()}catch(e){console.error("hl friend house",e)}};
  palFix=function(){if(!live())return pf0.apply(this,arguments);
-  if(host()){fH();const a=hsig();let r;try{r=pf0.apply(this,arguments)}finally{fH()}try{if(hsig()!==a)soon("house")}catch(e){}return r}/* a host move mid-week reaches her at once */
-  fH();
+  if(host()){const a=hsig();const r=pf0.apply(this,arguments);try{if(hsig()!==a)soon("house")}catch(e){}return r}/* a host move mid-week reaches her at once */
   const snap=new Map(npcList().map(v=>[v,HOUSE.map(f=>[f in v,v[f]])]));const l0=typeof log==="function"?log:null;
   /* a move of a world person is not hers to make (and not logged on her seat): the host's move reaches her as an op; her own lines stay */
   if(l0)log=function(t){if(typeof t==="string"&&!/^Ngươi/.test(t)){HL.stat.hLog=(HL.stat.hLog||0)+1;return}return l0.apply(this,arguments)};
-  let r;try{r=pf0.apply(this,arguments)}finally{if(l0)log=l0;fH();let n=0;for(const [v,a] of snap)HOUSE.forEach((f,i)=>{if(a[i][0]){if(v[f]!==a[i][1]){v[f]=a[i][1];n++}}else if(f in v){delete v[f];n++}});if(n)HL.stat.hKeep=(HL.stat.hKeep||0)+n}
+  let r;try{r=pf0.apply(this,arguments)}finally{if(l0)log=l0;let n=0;for(const [v,a] of snap)HOUSE.forEach((f,i)=>{if(a[i][0]){if(v[f]!==a[i][1]){v[f]=a[i][1];n++}}else if(f in v){delete v[f];n++}});if(n)HL.stat.hKeep=(HL.stat.hKeep||0)+n}
   return r};window.palFix=palFix}
 /* r1 (reviewer, same family, guest side): the servant-name dedupe (j95c j95cDedupe, run by start() / ageInit) renamed a WORLD servant on
    the guest seat only when her own new maid drew the same name (e2e E1: R8 maid sid21 "Thu Thiền" on the host, "San Hô" on the guest for the

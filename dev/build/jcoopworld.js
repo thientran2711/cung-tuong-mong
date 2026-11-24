@@ -396,9 +396,10 @@ function sendPos(){if(CW.ctx||!CW.on||!CW.p2||!S||S.dead)return;const st={};for(
    on the other seat is S.where[her id] = her relayed place, and «home» / no relay this buổi = palaceOf(her entry) — which reads her entry's
    housing (resHead / resHall / pal / palLone / palWait). That housing reached the other seat only inside her character blob (new life) or the
    merged week, and that seat's own palFix (render / month / deser) housed her entry like an NPC (a house over the cap evicts «the newest
-   extras», a side hall is re-picked) → her entry said «lives at r5» while she lives elsewhere. Now her house rides the pos relay like her live
-   stats (canon ids: "me" = her pid; the reader maps its own pid to "me") and her last relayed house is put back after every palFix on either
-   seat (jcoophl) and at every keepFriendPos. Display only: the week write-back never sends a house back (jcoophl keeps the room base's housing). */
+   extras», a side hall is re-picked, j95cCap drops the last resident) → her entry said «lives at r5» while she lives elsewhere. Now her house
+   rides the pos relay like her live stats (canon ids: "me" = her pid; the reader maps its own pid to "me"); no seat's palFix writes her entry's
+   housing (jpal / j95cCap: a player, like S, claimed first); her last relayed house is put back at every keepFriendPos (a merged week rebuilds
+   her entry from her blob). Display only: the week write-back never sends a house back (jcoophl keeps the room base's housing). */
 function houseWire(){const o={};for(const x of HOUSE)o[x]=S[x]==null?null:J(S[x]);return mapMe(o,true,me())}
 function houseIn(f,hs){if(!hs||typeof hs!=="object")return false;const o=mapMe(J(hs),false,me());let ch=false;
  for(const x of HOUSE){if(!(x in o))continue;if(JSON.stringify(f[x]==null?null:f[x])!==JSON.stringify(o[x])){if(o[x]==null)delete f[x];else f[x]=o[x];ch=true}}return ch}

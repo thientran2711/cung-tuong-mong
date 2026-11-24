@@ -1,5 +1,6 @@
 /* coop-house-unit (robot-coop-fix-3 r4, law 6b REAL PEOPLE + identity): the friend's HOUSE rides her pos relay (jcoopworld houseWire/houseIn)
-   and no seat's own palFix (jpal, wrapped by jcoophl) re-houses her entry or rewrites a housing number neither seat changed.
+   and no seat's own palFix (jpal + j95cCap) re-houses her entry or rewrites a housing number neither seat changed; a player (S, the friend) is
+   housed first, an NPC sharing her palace / side hall gives way (round «b» R[].resHead / R[].resHall).
    Runs the real palFix / houseIn on a solo page with the seat set to the host ("a") and then the guest ("b"); no network.
    Root (robot10-coop A/B fix-3 r2 «guest sees host at r5, host is at r902»): the viewer's palFix housed the friend's entry like an NPC (an
    over-cap house evicts «the newest extra», a re-picked side hall), so palaceOf(her entry) said r5 while she lives in the viewer's house.
@@ -45,12 +46,34 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
    ck(SEAT+': palFix ×3 with nothing changed: NPC housing identical',npcSig()===nA,null);
    ck(SEAT+': palFix ×3: her housing identical',JSON.stringify(hsOf(f))===sig0,hsOf(f));
    ck(SEAT+': palFix ×3: my own house (houseWire → posKey) identical',JSON.stringify(CW.houseWire())===mineA,CW.houseWire());
+   /* round «b» R[].resHall / R[].resHead: she and an NPC in ONE side hall of my house. The host (world housing is the host's) keeps HER
+      hall and moves the NPC (never two in one hall, never her dropped by j95cCap); the guest keeps her too and leaves the NPC to the host's op */
+   const mate=npcs().find(v=>v.resHead==="me"&&!(rkOf(v)>=3&&v.pal!=null));if(mate)mate.resHall=f.resHall;palFix();
+   const hallN=()=>{const n={};for(const y of rivals.filter(y=>y&&y.alive&&!y.out&&y.resHead==="me"&&!(rkOf(y)>=3&&y.pal!=null)))n[y.resHall]=(n[y.resHall]||0)+1;return n};
+   ck(SEAT+': shared hall: she keeps her relayed hall and her house',JSON.stringify(hsOf(f))===sig0,hsOf(f));
+   if(seat==="a")ck('host: shared hall: the NPC moves, every hall of my house ≤ BAL.res.side',!!mate&&mate.resHall!==f.resHall&&Object.values(hallN()).every(x=>x<=BAL.res.side),{n:hallN(),m:mate&&hsOf(mate)});
+   else ck('guest: shared hall: the NPC (host\'s world) is not moved on my seat (the host\'s op moves it)',!!mate&&mate.resHall===f.resHall,mate&&hsOf(mate));
    /* her entry re-housed by anything else on this seat → keepFriendPos (every place step) puts her relayed house back, S.where follows */
    f.resHead=null;f.resHall=null;S.where=S.where||{};CW.fpos.week=-1;CW.keepFriendPos();
    ck(SEAT+': keepFriendPos restores her house and her place = home',f.resHead==="me"&&S.where[f.id]==="home",{f:hsOf(f),w:S.where[f.id]});
    /* a reborn friend (other name): the old relay never lands on the new entry */
    f.name="Người Khác";f.resHead=null;CW.friendHouse();ck(SEAT+': another life: old relay not applied',f.resHead==null,hsOf(f));
    rivals.splice(rivals.indexOf(f),1)}
+  /* her own palace (she is a chủ vị on her seat) also claimed by an NPC head on mine: she keeps it, the NPC head gets another (host) */
+  {const f=setup("a");f.rank=3;f.resHead=null;f.resHall=null;const hd=npcs().find(v=>v.pal!=null&&rkOf(v)>=3&&!v.queen);
+   if(hd){f.pal=hd.pal;const hs={resHead:null,resHall:null,pal:f.pal,palLone:0,palWait:0};CW.fpos={name:f.name,hs:J(hs),week:0,buoi:0,place:"home"};palFix();
+    ck('host: her palace claimed first: she keeps pal '+hs.pal+', the NPC head moves',f.pal===hs.pal&&hd.pal!==hs.pal&&palaceOf(f)==="r"+f.id,{f:hsOf(f),hd:hsOf(hd)})}
+   else ck('host: an NPC head with a palace to test with',false,null);rivals.splice(rivals.indexOf(f),1)}
+  /* her relayed head is no house head on MY seat (a step behind): palFix leaves her entry as relayed (palaceOf falls back to her own palace)
+     and houses no one for her; before r4 the main loop gave her another house (= an NPC slot taken on one seat only) */
+  {const f=setup("a");const nh=npcs().find(v=>rkOf(v)<3&&!v.queen&&v.resHead!=="me");const hs={resHead:nh?nh.id:5,resHall:BAL.res.halls[1],pal:null,palLone:0,palWait:0};
+   CW.fpos={name:f.name,hs:J(hs),week:0,buoi:0,place:"home"};CW.houseIn(f,J(hs));const n0=npcSig();palFix();
+   ck('host: her head is no head here: her entry stays as relayed, no NPC moved for her',f.resHead===hs.resHead&&f.resHall===hs.resHall&&npcSig()===n0,{f:hsOf(f)});rivals.splice(rivals.indexOf(f),1)}
+  /* a co-op SAVE loaded (deser → palFix, COOPW not on: the robot save round-trip, a reload): she and an NPC share a hall of my house */
+  {const f=setup("a");CW.on=false;f.resHead="me";f.resHall=BAL.res.halls[0];const L=npcs().filter(v=>rkOf(v)<3&&!v.queen&&v!==f).slice(0,resCap());for(const v of L){v.resHead="me";v.resHall=f.resHall;v.pal=null;v.palLone=0}/* my house over the cap with her last in the list */palFix();
+   const n={};for(const y of rivals.filter(y=>y&&y.alive&&!y.out&&y.resHead==="me"&&!(rkOf(y)>=3&&y.pal!=null)))n[y.resHall]=(n[y.resHall]||0)+1;
+   ck('save load ('+L.length+' NPCs + her in a house of '+resCap()+'): she keeps her hall + house (j95cCap never drops her), NPCs give way, every hall ≤ BAL.res.side',f.resHead==="me"&&f.resHall===BAL.res.halls[0]&&Object.values(n).every(x=>x<=BAL.res.side),{f:hsOf(f),n});
+   const a=npcSig()+JSON.stringify(hsOf(f));palFix();ck('save load: palFix again = identity',npcSig()+JSON.stringify(hsOf(f))===a,null);rivals.splice(rivals.indexOf(f),1)}
   /* solo: no coop entry → palFix exactly as before (no friend, CW.on false): identity on a settled world */
   CW.on=false;CW.seat=seat0;palFix();const s1=npcSig();palFix();ck('solo: palFix identity (no coop entry, nothing moves)',npcSig()===s1,null);
   CW.on=on0;CW.seat=seat0;CW.fpos=fpos0;log=log0;return out});
