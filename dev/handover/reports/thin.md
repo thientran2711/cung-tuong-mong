@@ -947,6 +947,18 @@ Box note: background jobs end at 2 h — the local Workers (:8797/:8798) died at
   4. Save round-trip family (table above): get repro saves for `R[].rl[]` and `S.qPool[].name` from runs on harness ≥ d4b4408d (each family keeps its own repro save now), trace the writer by setters on the loaded objects (probe pattern: define a setter on d.R[i].rl / name before `deser(d)`, log the stack); `staff.hue` one-line game fix (j10 drop `hue:0`) can ride with that branch.
 - Box tools (lost on restart): wrangler `npm i wrangler@4` in /home/user/wt/wr; Workers via `wrangler dev --port 8798 …` in a main worktree's coop/worker (a Bash background job dies at 2 h — restart it before long runs); A/B script /home/user/wt/f6out/ab.sh (env TAG START ROUNDS CAP RTW SIDES="<wt>:<port>:<name> …", worktrees = game + harness overlay, run assemble.py first); probes /home/user/wt/f6out/{rtprobe,trap,trap2,trap3,rttest,n1probe,n2probe,misprobe}.js (serve a built worktree with `python3 -m http.server 8811`).
 
+### FIXER #7 (session_01N1tNP3fqMhAjzz59xaXXqg, opus; START_CTX ≈4 %; Foreman B = session_01N1tNP3HSiyh7FYx9Ezn8vr)
+PRIORITY #1 CHECK ('law1-maid-away / robot-coop-tail / save round-trip'): OD 2204–2205 | main 502c48c9 j42 srvTalk, j10 newServ, j17 ageInit | review/* law1-maid-away 619642d7, robot-coop-tail 08dc8031, robot10-coop d4b4408d, robot10-coop-saves cfcfd5de | claims FIXER #6 → #7 (week-end STUCK = #6b).
+#### review/law1-maid-away → **63d72694** (= 619642d7 + role-parity trim; LIVE 502c48c9 unchanged)
+| gate (local main Worker :8798 = main 502c48c9 coop/worker, wrangler dev) | result |
+|---|---|
+| `node dev/test/role-parity.test.js` ALONE (619642d7 build) | ALL PASS · note «open-list entries now closed: maid:N-ONLY:maid:beside» → row deleted from dev/tools/role-parity-open.json (13 → 12 rows), OPEN_MAX 13 → 12 with comment (law 14) |
+| `node dev/test/maid-mis-away.js` | MAID-MIS-AWAY PASS, no page errors |
+| `bash dev/tools/quickcheck.sh` ALONE | QUICKCHECK PASS · old save ok · perf median of 3 new/live: render 308/264 · tab 552/541 · buổi 1623/1537 · tasks>200 25/26 · core gates PASS |
+| coop-e2e COOP_SWAP=0 (Fold hosts) | 142/142 |
+| coop-e2e COOP_SWAP=1 (iPad hosts) | 142/142 |
+SẴN SÀNG KIỂM review/law1-maid-away 63d726941059afd8e134f692609e30eed30b2d24
+
 ## MGSKIN-WIRE
 PRIORITY #1 CHECK: OD 0 | ledger 0 | claims 8 | main kitMgSkinAdd/mgpSkin/kg82SkinSrc (j82, jmgpool; reused, no new mechanism) | review/* review/kit-mgboardof-r1 c46a17f2 (merged, not LIVE yet) | reports F-MGSKIN-A..H, kit-mgskin.
 START_CTX ~6 % (own estimate); finished well under +25 %.
