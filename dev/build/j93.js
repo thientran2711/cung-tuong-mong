@@ -217,8 +217,8 @@ const KM_BOX={tray:["mo-tray","mo-tray-open","Mâm thưởng"],chest:["mo-chest"
    grade colour, and settles on the shelf under the box; the silver comes last; then the list (grade chip · name · note) + Nhận.
    Tap during the reveal = skip to the end. Timings BAL.reveal (jbal2). Items arrive lowest grade first, the best one last. */
 /* KIT §82 title plate as the backing of every kmov caption (reward title + «Chạm để mở»): readable on any stage picture, same kit part as every title plate (kitTitlePlate, tier KM_PLATE_TIER; owner 24/11 «chữ phải đọc được», no private plate). */
-const KM_PLATE_TIER=4;
-function kmPlate(t,cls){return typeof kitTitlePlate==="function"?kitTitlePlate({name:t,tier:KM_PLATE_TIER},{id:false,cls:cls}):`<b>${kmEsc(t)}</b>`}
+const KM_PLATE_TIER=8;/* tier 8 «sh t» tone = dark ink on a light gold plate: the most readable plate of the kit (no glow animation here: kdh-still) */
+function kmPlate(t,cls){return typeof kitTitlePlate==="function"?kitTitlePlate({name:t,tier:KM_PLATE_TIER,sh:"t"},{id:false,cls:cls+" kdh-still"}):`<b>${kmEsc(t)}</b>`}
 function kitReward(o){o=o||{};const kind=KM_BOX[o.kind]?o.kind:"chest";const B=KM_BOX[kind];const RV=(typeof BAL==="object"&&BAL.reveal)||{};
  const KG=typeof KIT_GRADE!=="undefined"?KIT_GRADE:[{n:"Thường",c:"#9a8a78"}];const gOf=t=>Math.max(0,Math.min(4,t|0));
  const items=(o.items||[]).map(x=>Object.assign({tier:0},x)).sort((a,b)=>a.tier-b.tier);const coins=o.bac||0;
@@ -550,7 +550,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 @keyframes kmBreathe{0%,100%{opacity:1;scale:1}50%{opacity:.78;scale:1.05}}
 @keyframes kmArc{0%{opacity:0;transform:translate(0,120px) scale(.3)}55%{opacity:1;transform:translate(0,-40px) scale(1.15)}100%{opacity:1;transform:none}}
 @keyframes kmCoin{0%{opacity:0;transform:translate(0,0) scale(.4)}40%{opacity:1;transform:translate(calc(var(--cx) * (20px + var(--i) * 9px)),-90px) rotate(160deg)}100%{opacity:0;transform:translate(calc(var(--cx) * (40px + var(--i) * 14px)),30px) rotate(400deg)}}
-@keyframes kmBlink{0%,100%{opacity:.55}50%{opacity:1}}
+@keyframes kmBlink{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
 @keyframes kmUp2{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 @keyframes kmPulse{0%,100%{filter:none}40%{filter:brightness(1.25) drop-shadow(0 0 8px #f0d070)}}
 /* danger edge, weather chip */
