@@ -1575,3 +1575,4 @@ save-growth review | review/save-growth e573b9b8 | session_01DgYSWo2KgYDGKUVNxK9
 selection-scene r5 (successor of SELSCENE-14) | review/selection-scene | session_01V1ZZH2RPBbsHqSWXsmrmCV | RUNNING | 2026-11-24T22:05Z (MAIN 128)
 | MINIGAME-FIX (owner 22:02Z items 2+6: mini-game picture decode-first + kit intro/skip wording, sonnet) | review/minigame-fix | MAIN 128 | session_01V1ZZH17BmYP7unXApPtTph | RUNNING | 24/11 22:08Z |
 | VISITOR-FIX (owner 22:02Z items 3+4+5: visitor face/name/size, greeting by rank, no system lines in story, sonnet) | review/visitor-fix | MAIN 128 | session_01V1ZZH3EpiFUfjQmqdR8cmA | RUNNING | 24/11 22:08Z |
+| REVIEW robot-fix-cnv-2 e47c61b7 (opus BIG; briefs/F-robot-fix-cnv-review.md; -2 = r1 + R2-R7 + timer family) | review/robot-fix-cnv-2; reports/robot-fix-cnv.md | F | (opening rev2) | RUNNING | 24/11 22:08Z |
