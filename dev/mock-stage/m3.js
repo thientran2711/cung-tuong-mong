@@ -16,7 +16,7 @@ const ROOMJS=`window.MKR={
   L.appendChild(svg)},
  /* v3.2 (owner 23/11 ~23:50Z): her spot = the empty floor RIGHT of the mirror (iPad) / right part of the frame (Fold, same room frame); ONE person scale on both
     devices = room units (iPad reference 341 u at foot 495, perspective by floor depth), never clipped */
- spot(L){const ipad=innerWidth>1000;const x=ipad?690:505,foot=ipad?495:500;const R=341*(195+(foot-370)*.72)/289;const [fx,fy0]=L.map(x,foot);const fy=Math.min(fy0,L.g.H-6);
+ spot(L){const ipad=innerWidth>1000;const x=ipad?690:312,foot=ipad?495:500;const R=341*(195+(foot-370)*.72)/289;const [fx,fy0]=L.map(x,foot);const fy=Math.min(fy0,L.g.H-6);
   let h=Math.min(R*L.k,fy-8);const w=h/2.0408;const cx=Math.max(w/2+4,Math.min(L.g.w-w/2-4,fx));return{fx:cx,fy,h,R}},
  hubFig(L,fig,mk){const s=MKR.spot(L);const F=MKX.fig(L,fig,{x:s.fx,h:s.h,mk:mk||null,z:5});F.style.bottom=(L.g.H-s.fy)+'px';const pl=MKX.plate(L,S,s.fx,Math.min(L.g.H-44,s.fy-6));return{F,pl,s}},
  /* «Thay xiêm y»: figure stays in the RIGHT frame, picker LEFT, the grid zoomed to fill the panel */
