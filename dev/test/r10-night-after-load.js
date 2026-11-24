@@ -1,0 +1,36 @@
+/* robot-fix-cnv F2 («[fold] after loading her save, «Sang ngày mới» does not move the clock», robot10.js nightAfterLoad): a bot page (render off)
+   plays until the night flip is pending (S.nfX open/wait) and keeps that save; a REAL page (render on, Fold 755x1000) loads it through the title
+   slot, clears the cards the way the robot does, then presses «Sang ngày mới» two ways:
+     SYNC  = the robot's loop: 12 presses inside ONE page task (no timer can run between presses: jnf step() / the flip scene clock never tick)
+     REAL  = as she plays: press, let the page run 400 ms, answer any card that is up and close the card-flip scene with its button (jflip .kmov.kcf), press again (12 presses)
+   usage: node dev/test/r10-night-after-load.js <origin> <road> [lives] [seed]   exit 1 = REAL stays stuck (a game soft-lock) */
+const {chromium}=require('./lib/pw-roulette');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
+const [ORIGIN,ROAD,LIVES,SEED]=process.argv.slice(2);const M=path.join(__dirname,'..','measure');const rd=f=>fs.readFileSync(path.join(M,f),'utf8');
+const BLOCK=/\.(webp|png|jpe?g|gif|mp3|ogg|m4a|mp4|webm)(\?|$)/i;
+async function page(b,seed){const ctx=await b.newContext({viewport:{width:755,height:1000},reducedMotion:'reduce'});await serve(ctx);await ctx.route(BLOCK,r=>r.abort());
+ await ctx.addInitScript(()=>{window.COOP_URL='http://127.0.0.1:9/'});
+ if(seed)await ctx.addInitScript(`(function(){let s=${seed}>>>0;Math.random=function(){s=(s+0x6D2B79F5)>>>0;let t=s;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296}})();`);
+ const p=await ctx.newPage();p.__errs=[];p.on('pageerror',e=>p.__errs.push(e.message));await p.goto(BASE,{waitUntil:'domcontentloaded',timeout:120000});
+ await p.waitForFunction(()=>typeof start==='function'&&typeof showTitle==='function',null,{timeout:120000});await p.waitForTimeout(600);await p.evaluate(()=>localStorage.clear());return p}
+const gt=`((S.turn||0)*3+(S.tuan||0))*10+(S.buoi||0)`;
+(async()=>{const b=await chromium.launch({args:['--no-sandbox']});let stuck=0,syncStuck=0,n=0;
+ for(let L=1;L<=(+LIVES||3);L++){const seed=(+SEED||7)*100+L;const bp=await page(b,seed);
+  await bp.evaluate(`window.__r10cfg=${JSON.stringify({origin:ORIGIN,road:ROAD,locked:false,pers:'skilled',uiEvery:0,lagMs:1e9,rtEvery:1e9})}`);
+  await bp.evaluate(`window.__OPENONLY=${process.env.OPENONLY||process.env.EVEONLY?1:0};window.__EVEONLY=${process.env.EVEONLY?1:0}`);await bp.evaluate(rd('inpage6.js'));await bp.evaluate(rd('inty.js'));await bp.evaluate(rd('robot10-in.js'));const mode=await bp.evaluate(()=>window.__r10.mode);
+  await bp.evaluate(()=>{document.querySelectorAll('#kload,#kroul,#kroulw,#klife').forEach(e=>e.remove());document.getElementById('title').hidden=true;SLOT=1;Q=[];start();
+   window.__nfs=[];var process_env_wait_only_dummy=window.__OPENONLY||0;const c0=chooseM;chooseM=function(){try{const m=Q[0];if(m&&m.pid==='nfch'&&window.__nfs.length<3&&(!window.__nfs.length||S.turn>window.__nfLast+1)){window.__nfLast=S.turn;window.__nfs.push({save:JSON.stringify(ser()),st:'open+card',q:Q.length})}}catch(e){}return c0.apply(this,arguments)};const nb0=nextBuoi;nextBuoi=function(){const r=nb0.apply(this,arguments);try{if(window.__EVEONLY){if(S&&!S.dead&&!Q.length&&!S.mg&&(S.buoi||0)===B4L&&(!S.nfX||S.nfX.st==='done'||S.nfX.d!==day())&&window.__nfs.length<3&&(!window.__nfs.length||S.turn>window.__nfLast+1)){window.__nfLast=S.turn;window.__nfs.push({save:JSON.stringify(ser()),st:'evening (before the flip)',q:0})}return r}if(!process_env_wait_only_dummy&&S&&!S.dead&&S.nfX&&S.nfX.st&&S.nfX.st!=="done"&&window.__nfs.length<3&&(!window.__nfs.length||S.turn>window.__nfLast+1)){window.__nfLast=S.turn;window.__nfs.push({save:JSON.stringify(ser()),st:S.nfX.st,q:Q.length})}}catch(e){}return r}});
+  for(let i=0;i<3000;i++){const r=await bp.evaluate(([m])=>{try{window.__bot.step(m,5)}catch(e){}return {k:window.__nfs.length,dead:!S||S.dead,b:window.__r10.buoi}},[mode]);if(r.k>=3||r.dead||r.b>900)break}
+  const saves=await bp.evaluate(()=>window.__nfs);await bp.context().close();
+  for(const sv of saves){n++;const res={};for(const how of ['SYNC','REAL']){const p=await page(b,0);
+    const ld=await p.evaluate(s=>{localStorage.setItem(SK(1),s);localStorage.setItem('hclh-slot','1');document.getElementById('title').hidden=false;showTitle();const bt=document.querySelector('#slots button[data-load="1"]');if(!bt)return 'no button';bt.click();return S&&S.name?'':'no state'},sv.save);
+    await p.waitForTimeout(700);await p.evaluate(()=>{document.querySelectorAll('#kload,#kroul,#kroulw,#klife').forEach(e=>e.remove());try{Q.length=0;closeModal();document.getElementById('ov').hidden=true}catch(e){}});
+    const g0=await p.evaluate(gt);let moved=false,k=0;
+    if(how==='SYNC'){moved=await p.evaluate(`(()=>{const gt=()=>${gt};const g=gt();for(let n=0;n<12&&gt()===g&&!S.dead;n++){let k=0;while(k++<20&&(!document.getElementById('modal').hidden||!document.getElementById('ov').hidden)){const b=[...document.querySelectorAll('#ov button,#modal button')].filter(x=>x.offsetParent!==null&&!x.disabled);const pick=b.find(x=>!/kit-x/.test(x.className))||b[0];if(!pick)break;pick.click()}const nx=document.getElementById('next');if(nx&&!nx.disabled)nx.click();else nextBuoi()}return gt()!==g||S.dead})()`)}
+    else for(;k<12&&!moved;k++){for(let j=0;j<20;j++){const up=await p.evaluate(()=>{const v=x=>x&&!x.hidden;if(!v(document.getElementById('modal'))&&!v(document.getElementById('ov'))&&!document.querySelector('.kmov.kcf:not(.km-out)'))return false;const b=[...document.querySelectorAll('#ov button,#modal button,.kmov.kcf:not(.km-out) button')].filter(x=>x.offsetParent!==null&&!x.disabled);const pick=b.find(x=>!/kit-x/.test(x.className))||b[0];if(!pick){const sc=document.querySelector('.kmov.kcf:not(.km-out)');if(sc){sc.click();return true}return false}pick.click();return true});if(!up)break;await p.waitForTimeout(250)}
+     await p.evaluate(()=>{const nx=document.getElementById('next');if(nx&&!nx.disabled)nx.click();else nextBuoi()});await p.waitForTimeout(400);moved=await p.evaluate(`(${gt})!==${g0}||S.dead`)}
+    const st=await p.evaluate(()=>({nf:S.nfX&&S.nfX.st,dlg:S.nfX&&S.nfX.dlg,me:S.nfX&&S.nfX.me,q:Q.map(m=>m.pid||m.t).slice(0,3),modal:!document.getElementById('modal').hidden}));
+    res[how]={ld,moved,presses:how==='REAL'?k:12,st,errs:p.__errs.slice(0,2)};await p.context().close()}
+   if(!res.REAL.moved){stuck++;if(process.env.DUMP){const fn=process.env.DUMP+'-'+n+'.json';fs.writeFileSync(fn,sv.save);console.log('   stuck save → '+fn)}}if(!res.SYNC.moved)syncStuck++;
+   console.log(`${ORIGIN} life ${L} save@nf ${sv.st} (Q ${sv.q}) · SYNC ${res.SYNC.moved?'moves':'STUCK'} ${JSON.stringify(res.SYNC.st)} · REAL ${res.REAL.moved?'moves after '+res.REAL.presses+' presses':'STUCK '+JSON.stringify(res.REAL.st)}${res.REAL.errs.length?' errs '+res.REAL.errs.join('|'):''}`)}}
+ console.log(`SUMMARY ${ORIGIN}: ${n} saves at a pending night flip · SYNC (robot loop) stuck ${syncStuck} · REAL (she plays) stuck ${stuck}`);
+ await b.close();process.exit(stuck?1:0)})();

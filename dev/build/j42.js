@@ -111,7 +111,10 @@ function srvInit(){const L=liveRivals(true);if(!L.length)return;const m=pick(L.f
   ${kitRows([["Tính chủ",`${netTxt(m)}`,"t"],["Chủ tin ngươi",S.tin,"t"],["Lương tháng",`${CNV_WAGE[1]} bạc`,"t"],
    ["Đường lên","được Hoàng thượng để mắt mà phong Đáp ứng; lên Chưởng sự cô cô; được ban gả","t"],["Đường xuống","bị phạt, đày Tân Giả khố, chết trong mưu của người khác","t"]])}
   <p class="past">Mỗi buổi ${BAL.time.khac} khắc. Mục Hành sự: việc nặng và việc chủ sai. Dư đồ: chỉ nơi cung nữ được đến. Hậu cung › Đồng liêu: kết bạn, đề phòng kẻ vu cáo.</p>`}];
- log(`Ngươi vào cung làm cung nữ, hầu ${rkName(m)} ${m.name}.`)}
+ log(`Ngươi vào cung làm cung nữ, hầu ${rkName(m)} ${m.name}.`);
+ /* robot-fix-cnv F1: she leaves the consort housing (rank 0, no palace, no host) AFTER start()'s palFix → the houses are re-settled now, not by
+    the next load / render (a reload used to move a consort and write «… dời sang …» in her journal) */
+ try{palFix()}catch(e){console.error(e)}}
 (function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S&&S.origin&&S.origin.k==="cnv"&&!S.srv){quiet=true;srvInit();quiet=false;deal();showModal();render()}}catch(e){console.error(e)}return r}})();
 
 /* ---------- she is not a consort while she serves ---------- */

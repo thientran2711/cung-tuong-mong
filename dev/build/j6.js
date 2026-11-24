@@ -71,8 +71,15 @@ function deser(d){trMigrate(d);rivals=d.R;rid=d.rid;S=d.S;S.origin=originByKey(d
   for(const k in o)o[k]=fix(o[k]);return o};
  for(const k in S)if(k!=="kids")S[k]=fix(S[k]);
  tab=d.tab||"act";used=d.used||0;popIdx=null;popMsg="";
- const vk=S.visit&&S.visit.k;if(d.v<3||!vk||vk==="home"||placeOf(vk).k!==vk||!Array.isArray(S.visit.people)){S.visit={k:"home",people:homePeople(),talked:false};S.place="home"}else S.place=vk;
- if(d.v<3)S.mg=null;if(d.v<5){used=0;S.buoi=0}try{srvLad6()}catch(e){console.error(e)}/* maid-ladder-6: 5-rung save → 6 rungs (j14) */normAll();Q=deserQ(d.P||[])}
+ const vk=S.visit&&S.visit.k;/* robot-fix-cnv F1: the room she stands in is loaded AS SAVED, her own home too (was: home rebuilt from homePeople → who stood
+   there, her «đã trò chuyện» marks tk/talked and the line were lost on every reload = a reload let her talk to everyone again) */
+ if(d.v<3||!vk||(vk!=="home"&&placeOf(vk).k!==vk)||!Array.isArray(S.visit.people)){S.visit={k:"home",people:homePeople(),talked:false};S.place="home"}else S.place=vk;
+ if(d.v<3)S.mg=null;if(d.v<5){used=0;S.buoi=0}try{srvLad6()}catch(e){console.error(e)}/* maid-ladder-6: 5-rung save → 6 rungs (j14) */normAll();visRelink();Q=deserQ(d.P||[])}
+/* robot-fix-cnv F1 (law 6b, one person = one object): ser() keeps rivals ($r) and children ($k) by reference but a servant / ma ma in the room list
+   by VALUE, so after a load S.visit held a copy: talking to her changed the copy, not the real servant. Relink every visitor whose ref is a
+   servant (sid) to the live servant object (servById); a sid nobody holds any more stays as saved. */
+function visRelink(){try{const P=S&&S.visit&&S.visit.people;if(!Array.isArray(P)||typeof servById!=="function")return;
+ for(const p of P){const o=p&&p.ref;if(!o||typeof o!=="object"||o.sid==null||(rivals||[]).includes(o))continue;const s=servById(o.sid);if(s&&s!==o)p.ref=s}}catch(e){console.error(e)}}
 function save(){if(!S||quiet)return;try{if(S.dead)localStorage.removeItem(SK(SLOT));else localStorage.setItem(SK(SLOT),JSON.stringify(ser()));localStorage.setItem("hclh-slot",String(SLOT))}catch(e){}}
 function loadSlot(n){try{const d=JSON.parse(localStorage.getItem(SK(n))||"null");if(d&&d.v===2)d.P=[];/* v2: no pending choices; v2/v3 get items, stat blocks, records via normAll */
  return d&&d.v>=2&&d.v<=6?d:null}catch(e){return null}}

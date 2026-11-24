@@ -408,14 +408,16 @@ const kitFile=src=>String(src||"").split("?")[0].split("/").pop();
 /* KIT_AV: the avatar hook. pcPort / mdH stamp the portrait <img> with data-kav="<n>" (n -> the person); kitAvSweep then lays the SAME kitFxLayers stack over it through kitFxPut
    (one .kfxf box, kfxGeom follows the picture: object-fit, clip, transform), so every avatar frame (top bar md, kmini / kfc side cards, tab + list rows, tall pcPort, mdH everywhere) shows the
    marks + scratch + veil + makeup incl. Khuynh thành sparkle exactly like the mirror: same CSS, tone, keep-out mask (lkKeepCss), LOD step 0 (toilStageEl). A person / picture without fit data gets nothing. */
+/* robot-fix-cnv F4 (memory): the stamp maps hold the person WEAKLY — a strong Map of 900 people kept every OLD game alive after a load (KIT_AV.P → the old
+   S and its whole world, 2.8 MB per load, 30/30 loads retained; dev/test/r10-load-leak.js). Same rule for kfpReg (j79). Cleared per life (lifeStore). kitWeak / kitDeref live in j1 beside lifeStore. */
 const KIT_AV={n:0,P:new Map(),max:900,
- stamp:function(p){const n=++this.n;this.P.set(n,p);if(this.P.size>this.max)this.P.delete(this.P.keys().next().value);return n},
- sweep:function(root){try{(root||document).querySelectorAll("img[data-kav]").forEach(im=>{const p=KIT_AV.P.get(+im.dataset.kav);const file=kitFile(im.currentSrc||im.getAttribute("src")||im.src);const o=im.__kav;
+ stamp:function(p){const n=++this.n;this.P.set(n,kitWeak(p));if(this.P.size>this.max)this.P.delete(this.P.keys().next().value);return n},
+ sweep:function(root){try{(root||document).querySelectorAll("img[data-kav]").forEach(im=>{const p=kitDeref(KIT_AV.P.get(+im.dataset.kav));const file=kitFile(im.currentSrc||im.getAttribute("src")||im.src);const o=im.__kav;
    if(!p||!file||/face-|unknown/.test(file)||!im.isConnected){if(o)KIT_AV.drop(im);return}
    if(im.__kavf===file&&im.__kavp===p&&(!o||o.isConnected))return;if(o)KIT_AV.drop(im);im.__kavf=file;im.__kavp=p;
    const host=im.parentElement;if(!host)return;kitFxPut(im,p,host);const s=host.lastElementChild;if(s&&s.__img===im){s.setAttribute("data-kav","1");s.__file=file;im.__kav=s}else im.__kav=null})}catch(e){}},
  drop:function(im){const o=im.__kav;if(o){KFX_L.delete(o);o.remove()}im.__kav=null;im.classList.remove("kfxon")}};
-window.KIT_AV=KIT_AV;
+window.KIT_AV=KIT_AV;lifeStore("KIT_AV.P avatar stamp -> person",()=>{KIT_AV.P.clear()});
 (function(){const p0=pcPort;pcPort=function(f){let h=p0.apply(this,arguments);try{const p=f&&f.__kp;if(!p||!/class="kpor"/.test(h))return h;const m=/<img class="kpor" src="([^"]+)"/.exec(h);if(!m||/face-|unknown/.test(m[1]))return h;
   h=h.replace(m[0],`<img class="kpor" data-kav="${KIT_AV.stamp(p)}" src="${m[1]}"`);kitAvKick()}catch(e){}return h}})();
 (function(){const m0=mdH;mdH=function(p){let h=m0.apply(this,arguments);try{const q=p&&p.__kp;if(!q)return h;const m=/<img([^>]*?)src="([^"]*por-[^"]+)"/.exec(h);if(!m)return h;

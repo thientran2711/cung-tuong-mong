@@ -68,13 +68,17 @@ R.words_=words;
 /* ---- one-core number audit (law 4): a number printed on an option ("Sủng +3", "Bạc -20") must be the number the option applies ---- */
 const LAB={"Sủng":"sung","Danh":"danh","Đức":"duc","Bạc":"bac","Sức khỏe":"suc","Sức":"suc","Sắc":"sac","Tài":"tai","Tâm cơ":"tamco","Thái hậu":"th","Hoàng hậu":"hh","Tai mắt":"mat"};
 const RX=/(Sủng|Danh|Đức|Bạc|Sức khỏe|Sức|Sắc|Tài|Tâm cơ|Tai mắt)\s*([+\-−–])\s*(\d+)/g;
-function auditOpt(o,m){const txt=strip((o.n||"")+" | "+(o.x||""));const key=txt;if(R.seen["o|"+key])return;R.seen["o|"+key]=1;R.opts++;
+/* robot-fix-cnv F3 (24/11): read the line SHE sees on the card — the kit builds it from fx + x (j17 dilLine: «ngay: <fx> · thành: <x>», a j67 story
+   option from its own j67 line with «tốn: <cost>») — not o.x alone: «Bạc lạ» shows «ngay: Bạc +20 · thành: mỗi tháng Bạc +8» and the old audit compared
+   the +8 (paid monthly by j42 srvMonth) with fx bac 20; a j67 option shows «tốn: Tâm cơ −1 · thành: Tâm cơ +2» and fx is only the cost */
+const seenLine=o=>{try{return o&&o.j67?oddsLead(o,o.j67):typeof dilLineRaw==="function"?dilLineRaw(o):String(o&&o.x||"")}catch(e){return String(o&&o.x||"")}};
+function auditOpt(o,m){const txt=strip((o.n||"")+" | "+seenLine(o));const key=txt;if(R.seen["o|"+key])return;R.seen["o|"+key]=1;R.opts++;
  words(txt,"option «"+strip(m.t||m.title||"").slice(0,60)+"»");
  /* segments: "thành:" numbers belong to the win block, "hỏng:" to the loss block, the rest to the sure effect / cost */
  const obj=x=>x&&typeof x==="object"?x:null;const PW=[o.w,o.win].map(obj).filter(Boolean),PL=[o.l,o.lose].map(obj).filter(Boolean),PF=[o.fx,o.c,o.cost].map(obj).filter(Boolean);
  /* (typed-stat review, 4/4 false positives): «thắng:» = «thành:» (win on the roll; fx is the stake); a bare number with no marker may be the win of a
     sure option → compared with the win block AND the cost; the weather note «đi kiệu … Bạc −N» is charged later (jweather wxAfter, BAL.wx.kieuBac): skipped */
- txt.split(/(?=thành:|thắng:|hỏng:|thua:|kèm:|tốn:|được:|mất:)/i).forEach(seg=>{if(/kiệu/i.test(seg))return;const pools=/^(thành|thắng):/i.test(seg)?PW:/^(hỏng|thua):/i.test(seg)?PL:PF.concat(PW);if(!pools.length)return;
+ txt.split(/(?=ngay:|thành:|thắng:|hỏng:|thua:|kèm:|tốn:|được:|mất:)/i).forEach(seg=>{if(/kiệu/i.test(seg))return;const pools=/^(thành|thắng):/i.test(seg)?PW:/^(hỏng|thua):/i.test(seg)?PL:PF.concat(PW);if(!pools.length)return;
  seg.replace(RX,(a,lab,sg,n)=>{const k=LAB[lab];const v=(sg==="+"?1:-1)*(+n);const vals=pools.map(p=>p[k]).filter(x=>typeof x==="number");
   if(!vals.length)return a;/* not in any effect block: a description, not a promise */
   if(!vals.some(x=>x===v||Math.abs(x)===Math.abs(v)))bug("number","option text «"+a+"» but the effect applies "+k+"="+vals.join("/"),"«"+txt.slice(0,160)+"» in «"+strip(m.t||m.title||"").slice(0,60)+"» fx="+JSON.stringify(o.fx||{}).slice(0,120));return a})})}

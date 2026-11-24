@@ -176,7 +176,7 @@ function kitNoChange(h){try{return kpMapText(String(h||""),s=>{KIT_NOCH.lastInde
 window.kitNoChange=kitNoChange;
 /* a row that starts in lower case after a clause was dropped gets a capital first letter */
 function kitCapFirst(h){let done=false;try{return kpMapText(String(h||""),s=>{if(done)return s;const i=s.search(/\S/);if(i<0)return s;done=true;return s.slice(0,i)+s[i].toLocaleUpperCase("vi")+s.slice(i+1)})}catch(e){return h}}
-const KFP_MAP=new Map();let KFP_N=0;function kfpReg(p){const id=++KFP_N;KFP_MAP.set(id,p);if(KFP_MAP.size>800){const k=KFP_MAP.keys().next().value;KFP_MAP.delete(k)}return id}function kfpGet(id){return KFP_MAP.get(+id)||null}
+const KFP_MAP=new Map();let KFP_N=0;lifeStore("KFP_MAP figure id -> person",()=>KFP_MAP.clear());function kfpReg(p){const id=++KFP_N;KFP_MAP.set(id,kitWeak(p));if(KFP_MAP.size>800){const k=KFP_MAP.keys().next().value;KFP_MAP.delete(k)}return id}function kfpGet(id){return kitDeref(KFP_MAP.get(+id))}
 window.kfpGet=kfpGet;window.kitIsFaceObj=kitIsFaceObj;
 function kpFactRow(f,people){const SKIP=window.__kpSkip;if(typeof f==="string")f={text:f};let text=kitCapFirst(kitNoChange(kitDedupTitle(f.text||""))),who=f.who?[].concat(f.who):null;
  if(f.auto!==false){let w;[text,w]=kpPeopleIn(text,people);if(!who)who=w;text=kpChipify(kitRankText(text)).replace(/(<b>[^<]*<\/b><\/span>)\s*\.\s*$/,"$1").replace(/(<b>[^<]*<\/b><\/span>)\s*[,;·]\s*(?=<span class="kchip)/g,"$1 ")/* review r6: no lone "." after a row-end chip */}

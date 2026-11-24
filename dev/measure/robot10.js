@@ -151,7 +151,9 @@ async function life(job){const t0=Date.now();const R={job,bugs:[],cps:0,ui:{scan
     checkpoint (harness side) so a leak in those pages cannot kill the life; the bot page is never recycled (its growth = the game's) */
  const cdp=await ctx.newCDPSession(p).catch(()=>null);if(cdp)await cdp.send('Performance.enable').catch(()=>{});
  R.mem={bot:[],ui:{},rss:[]};let memT=0;const MEMEVERY=(+process.env.MEMEVERY||30)*1e3;
- const metr=async(c)=>{try{const m=(await c.send('Performance.getMetrics')).metrics;const g=k=>(m.find(x=>x.name===k)||{}).value||0;return [Math.round(g('JSHeapUsedSize')/1048576),g('Nodes'),g('JSEventListeners'),g('Documents')]}catch(e){return null}};
+ /* robot-fix-cnv F4: sample AFTER a forced GC (HeapProfiler.collectGarbage) — without it the bot page read 200k-340k "nodes" / 1 GB heap that were garbage not yet
+    collected (r10-dom-census: 5-8k nodes after GC at the same buổi); a mem finding is now memory the game really keeps */
+ const metr=async(c)=>{try{await c.send('HeapProfiler.collectGarbage').catch(()=>{});const m=(await c.send('Performance.getMetrics')).metrics;const g=k=>(m.find(x=>x.name===k)||{}).value||0;return [Math.round(g('JSHeapUsedSize')/1048576),g('Nodes'),g('JSEventListeners'),g('Documents')]}catch(e){return null}};
  const rss=()=>{try{return Math.round(require('child_process').execSync("ps -eo rss,args | grep -- '--type=renderer' | grep -v grep | awk '{s+=$1} END {print s+0}'").toString()/1024)}catch(e){return null}};
  const memSample=async()=>{const sec=Math.round((Date.now()-t1)/1e3);const m=cdp&&await metr(cdp);if(m){const yr=await p.evaluate(()=>{try{return S&&S.year||0}catch(e){return 0}}).catch(()=>0);R.mem.bot.push([sec,...m,yr])}/* [s, heap MB, nodes, listeners, docs, game year] */
   for(const d of DEV){if(!ui[d].__cdp){ui[d].__cdp=await ui[d].context().newCDPSession(ui[d]).catch(()=>null);if(ui[d].__cdp)await ui[d].__cdp.send('Performance.enable').catch(()=>{})}
@@ -219,13 +221,19 @@ async function uiCheck(p,d,cp,job,bug,R){const e0=p.__errs.length;const t0=Date.
  if(process.env.LAG!=='0')await require('./robot10-lag.js').probe(p,d,cp,R).catch(e=>bug('harness','lag probe failed: '+String(e.message).split('\n')[0],''));
  R.ui.ms=(R.ui.ms||0)+Date.now()-t0}
 const UILAG_=UILAG;
-/* after a real load, she must be able to play on: «Sang ngày mới» (kit card buttons closed as she would) must move the clock within 12 presses */
-async function nightAfterLoad(p,d,cp,bug){const r=await p.evaluate(()=>{const gt=()=>((S.turn||0)*3+(S.tuan||0))*10+(S.buoi||0);const g=gt();let n=0;
-  for(;n<12&&gt()===g&&!S.dead;n++){let k=0;while(k++<20&&(!document.getElementById('modal').hidden||!document.getElementById('ov').hidden)){
-    const b=[...document.querySelectorAll('#ov button,#modal button')].filter(x=>x.offsetParent!==null&&!x.disabled);const pick=b.find(x=>!/kit-x/.test(x.className))||b[0];if(!pick)break;pick.click()}
-   const nx=document.getElementById('next');if(nx&&!nx.disabled)nx.click();else nextBuoi()}
-  return{moved:gt()!==g||S.dead,n,nf:S.nfX&&S.nfX.st}});
- if(!r.moved)bug('stuck','['+d+'] after loading her save, «Sang ngày mới» does not move the clock (soft-lock after load)','12 presses, night flip S.nfX '+r.nf+' @ '+cp.at,{save:cp.save})}
+/* after a real load, she must be able to play on: «Sang ngày mới» (kit card buttons closed as she would) must move the clock within 12 presses.
+   robot-fix-cnv F2 (24/11): presses as SHE does — the page runs between presses (jnf step() and the card-flip clock are timers) and the card-flip scene
+   (jflip .kmov.kcf: «tap = final still, the kit button closes it», by design) is closed with its own button. The old loop pressed 12 times inside ONE
+   page task and never touched the scene: every evening save whose night flipped during the loop read as a soft-lock (dev/test/r10-night-after-load.js) */
+async function nightAfterLoad(p,d,cp,bug){const gt=`((S.turn||0)*3+(S.tuan||0))*10+(S.buoi||0)`;const g0=await p.evaluate(gt);let moved=false,n=0;
+  const answer=()=>p.evaluate(()=>{const vis=e=>e&&!e.hidden&&e.offsetParent!==null;const L=[...document.querySelectorAll('#ov button,#modal button,.kmov.kcf:not(.km-out) button')].filter(x=>x.offsetParent!==null&&!x.disabled);
+   if(!L.length){const sc=document.querySelector('.kmov.kcf:not(.km-out)');if(sc){sc.click();return true}return false}
+   if(!vis(document.getElementById('modal'))&&!vis(document.getElementById('ov'))&&!document.querySelector('.kmov.kcf:not(.km-out)'))return false;const pick=L.find(x=>!/kit-x/.test(x.className))||L[0];pick.click();return true});
+  for(;n<12&&!moved;n++){for(let k=0;k<20&&await answer().catch(()=>false);k++)await p.waitForTimeout(250);
+   await p.evaluate(()=>{const nx=document.getElementById('next');if(nx&&!nx.disabled)nx.click();else nextBuoi()}).catch(()=>{});await p.waitForTimeout(400);
+   moved=await p.evaluate(`(${gt})!==${g0}||S.dead`).catch(()=>false)}
+  const nf=await p.evaluate(()=>S.nfX&&S.nfX.st).catch(()=>'?');
+ if(!moved)bug('stuck','['+d+'] after loading her save, «Sang ngày mới» does not move the clock (soft-lock after load)','12 presses, night flip S.nfX '+nf+' @ '+cp.at,{save:cp.save})}
 /* old saves: the same life saved under older headers + the life's first save + OLDSAVE files; each must load and render with no error */
 async function oldSaves(p,d,save,first,bug){const v=JSON.parse(save);const L=[];
  for(const ver of [5,4,3]){const x=JSON.parse(save);x.v=ver;L.push(['v'+ver+' header',JSON.stringify(x)])}
