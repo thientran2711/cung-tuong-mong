@@ -11,7 +11,7 @@ let fail=0,pass=0;const ok=(c,m)=>{if(c)pass++;else fail++;if(!c||process.env.V)
 (async()=>{await new Promise(r=>srv.listen(0,'127.0.0.1',r));const b=await chromium.launch();
  for(const dev of DEVS){const ctx=await D.newDeviceContext(b,dev,{deviceScaleFactor:1});const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   await D.openDirect(p,'http://127.0.0.1:'+srv.address().port+'/',{timeout:180000});const g=p;await g.waitForFunction(()=>window.__ctmBuilt===1&&typeof start==='function'&&typeof dlgsResolve==='function',null,{timeout:180000});
-  await g.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}start();['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});Q.length=0;showModal();tab='act';render()});
+  await g.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}start();/* a grown child for j72 units whose requester is her child (req ak; same as j72c-play) */if(!allKids().some(([k])=>k.alive&&(k.age||0)>=18)){S.kids=S.kids||[];S.kids.push({name:'Thử Nhi',alive:true,age:20,sex:'f',dad:'emp'})}['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});Q.length=0;showModal();tab='act';render()});
   await g.waitForTimeout(1500);await g.addStyleTag({content:'#kload,#klife,.modal.kload,#dawn,.kne,#kneov,#kroul,#kroulw,#kcourt,.kroul{display:none!important}'});
   const ids=(await g.evaluate(()=>DLGS_DATA.map(r=>r.id).filter(id=>/^(j72|j68|j7|j70|ky|j71|wc):/.test(id)))).filter((id,i,A)=>!process.env.DLGS_STEP||i%(+process.env.DLGS_STEP)===0);ok(ids.length>0,`${dev} DLGS_DATA has scenes of live families (${ids.length})`);
   let k=0;for(const id of ids){
@@ -47,7 +47,8 @@ let fail=0,pass=0;const ok=(c,m)=>{if(c)pass++;else fail++;if(!c||process.env.V)
     ok(w==null?s.lit==="":s.lit===String(w)&&s.dim.join()===(w===0?"false,true":"true,false"),`${dev} ${id} line ${i+1}: spotlight ${JSON.stringify({lit:s.lit,dim:s.dim})}`);
     ok(s.inside&&s.over,`${dev} ${id} line ${i+1}: box inside the layer, no overflow`);
     if(k<NSHOT&&(i===0||i===1))await p.screenshot({path:path.join(OUT,`dlgs-${k}-l${i+1}-${dev}.png`)});
-    await g.evaluate(()=>document.querySelector('.kscn').click());await g.waitForTimeout(80);/* finish the line */
+    /* finish the line (a short line may already be typed out by now: then a tap would move on, so tap only while it is still typing) */
+    await g.evaluate(()=>{if(![...document.querySelectorAll('.kdv-line .kdw')].every(x=>x.classList.contains('on')))document.querySelector('.kscn').click()});await g.waitForTimeout(80);
     const fin=await g.evaluate(()=>[...document.querySelectorAll('.kdv-line .kdw')].every(x=>x.classList.contains('on')));ok(fin,`${dev} ${id} line ${i+1}: tap finishes the line`);
     await g.evaluate(()=>document.querySelector('.kscn').click());await g.waitForTimeout(i===o.n-1?900:350)}
    const e=await g.evaluate(()=>{const M=$("modal");return{q:Q.map(x=>x.pid||x.t).slice(0,4),scene:!!document.querySelector('.kscn'),modal:!M.hidden,t:Q[0]&&Q[0].t,dlg:!!(Q[0]&&Q[0].dlg&&Q[0].dlg.done),opts:M.querySelectorAll('.opt').length,playing:DLGS.playing}});

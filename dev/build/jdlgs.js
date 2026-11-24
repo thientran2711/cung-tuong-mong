@@ -44,7 +44,10 @@ function dlgsFor(m){if(m.dlg)return m.dlg;if(m.__dlgk)return null;m.__dlgk=1;for
 
 /* ---------- family adapters (each resolves its OWN cast: law 6b) ---------- */
 /* shared: roles → people of a family actor table (A6 / q72A actors {k,o,n}); {goi}/{xung} said by the line's speaker to the listener (jvoice kSay) */
-function dlgsActor(a,nm){if(!a)return null;if(a===S)return dlgsMe();return dlgsPer(a.f&&a.f.ref?a.f.ref:a.o,nm||a.n)}
+function dlgsActor(a,nm){if(!a)return null;if(a===S)return dlgsMe();
+ /* Thái hậu / Hoàng thượng: figFor picks their painting by kind (figRole), their actor object carries none → pass the kind (law 11: every th/emp scene) */
+ if(a.k==="th"||a.k==="emp"){const o=a.k==="emp"?(S.emp||a.o):(S.thO||a.o);return dlgsPer({kind:a.k,ref:o||{},name:a.n},nm||a.n)}
+ return dlgsPer(a.f&&a.f.ref?a.f.ref:a.o,nm||a.n)}
 function dlgsVoice(a){if(!a)return null;if(a===S)return S;try{return kSpk(a)||{srv:"f",name:a.n}}catch(e){return null}}
 function dlgsCtx(act,fill,at){const maid=S.maid?{k:"maid",o:S.maid,n:S.maid.name}:null;const get=r=>r==="me"?S:r==="M"||r==="maid"?maid:act[r]||null;
  return{who:r=>dlgsActor(get(r)),txt:(t,a,b)=>{const v=dlgsVoice(get(a)),l=dlgsVoice(get(b));if(v&&l)t=kSay(v,l,t);return fill(t)},at}}
