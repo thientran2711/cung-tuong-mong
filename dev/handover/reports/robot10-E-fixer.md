@@ -117,3 +117,50 @@ Successor: read briefs/E-robot10-fixer.md, this report (§3–§5), E-common. Br
 Next (in order): (1) save growth after fix-3 — measure a FRESH life (node dev/test/r10e-save-size.js - 6 on fix-3) and the next holders at year 14: rivals' inv 6 654 pieces (y_va/y_ho/y_sa clothes 2 200, lx 1 600), her inv 1 357, S.nmReg 0.33 M, S.rlog 0.19 M, S.intel 0.13 M — same rule: a real piece never vanishes, but a used-up / worn-out one is not kept; check owner rules before any cap. (2) open UI rows need saves from the runners (R3 018.json kgl.kfx, R8 cautious-3 kmtake, R2 rebel-3 kmchip, R8 em.pcs) — ask Foreman E for single saves on a review/robot10-saves-* branch. (3) R1 real-page JS (renderHud2 .replace / «sl» / kitImgErr) — re-run the R1 thd_tho life with fix-3; if it comes back, get its save.
 Scratch tools (not in git, recreate if gone): replay a save with the robot's bot = inpage6 + inty + robot10-in evaluated in a BOT_INIT page, deser(save), loop __bot.step(mode,300) (see dev/test/r10e-lesson.js for the page setup). Saves used: review/robot10-saves-r1 (thd_tho year 1), review/robot10-saves-r4 (cnv_mat year 1), handover dev/handover/robot/nc-B-tuc/saves/20261124-0057-010.json (year 14, 4.97 M chars).
 HANDOVER ADDENDUM (Foreman E messages 09:23–09:53Z read after the rollover): fix-3 acceptance items NOT yet done — do them on review/robot10-e-fix-3 before its review: (a) law 6c: fix-3 treats spent candles / hair oil / son phấn boxes as USED UP (not routed), and drops the used-up al*/lx* «kho»/«net» remains from old saves; Foreman E asked that every kho piece stays traceable — state this design in the SSK (used-up = like tea/medicine, IL_USED_KD precedent) or, if the reviewer disagrees, log each drop in S.il.log («dùng hết») instead of silent removal; (b) old-save test with the 4.97 M save: load → slimmer save, no lost lasting items for her or NPCs (count non-al/lx pieces before/after); (c) coop-e2e Fold host + COOP_SWAP; (d) scan table of every other S.* / R[] array that grows without bound (inv, logs, visit, nmReg, rlog, intel…). New input files to triage: thd-20261124-R1-tho-merged.md, pf-20261124-0256-R6.md (22 CAP), thd-20261124-0842-R2.md.
+
+# FIXER #3 (successor) — session_01DgYSWogKvvnwna26yqXVT5 (FOREMAN E child3 session_01DgYSWorDW5KeoX9ahdEfda)
+PRIORITY #1 CHECK ('ilUsedUp saveBlocked save size'): OD 0 | ledger 0 | claims 0 | main 0 | review/* robot10-e-fix-2 0673d1a1 + robot10-e-fix-3 e1ee6041 (FIXER #2) | archive 0. Law 6c text: START_CORE law 6(c) + OD 18/11 ~16:20Z (no owner rule on store caps found).
+START_CTX ≈ 5 % (1 M window); rollover at 30 %, ceiling 60 %.
+
+## 6. E-FIX-3 r2 — review/robot10-e-fix-3 434a4a30 (on r1 e1ee6041; base LIVE fd85907a)
+Why r2: r1 broke law 6c — it marked an NPC's TRIMMED surplus (unburnt candles, hair oil with lượt left) as used up, and its old-save cleanup dropped every al*/lx* «kho»/«net» store record. In the 4.97 M save that was 10 354 pieces with uses left (8 210 unburnt candles, 2 144 oil bottles with lượt) + 4 386 spent remains.
+Design r2 (law 6c: every piece traceable; a piece with uses left is never dropped; save stays small):
+- SPENT (candle burnt, oil / son phấn box at its last use): ilUsedUp(e,p) at the spend site → not routed, not netted; counted in S.il.used[owner][item] (a ledger count, bounded: owners × kinds).
+- SURPLUS WITH USES LEFT (jstip NPC trim, jallot staff trim): ilStock(e) → Nội vụ phủ COUNTED stock S.il.stock[item(.lượt)] (fungible goods: one number per kind, not one record each). jstip stipGoods hands an NPC's candle / hair oil out of that stock first (ilStockTake, fullest bottle first) → the stock never grows past one month's surplus.
+- OLD SAVES: once per loaded ledger (ilWeek), ilOldMove moves al*/lx* «kho»/«net» records: spent → S.il.used[owner], uses left → S.il.stock; her own pieces with uses left and son phấn boxes with lượt left (colour + lượt) keep their records; S.il.conv = [[week, spent, stocked]] logs the move.
+- j6 save(): unchanged from r1 (refused write → kit notice CTM_WAIT.saveBlocked once).
+### Old save no-loss (dev/test/r10e-oldsave-noloss.js, nc-B-tuc 20261124-0057-010.json, year 14)
+| | before | after load |
+|---|---|---|
+| save chars | 4 345 880 | 2 770 661 |
+| S.il.box records | 15 923 | 1 183 |
+| lasting items (not al/lx), 73 owners (her, NPCs, store by owner) | 6 551 | 6 551 (0 per-owner mismatches) |
+| al/lx with uses left (held + store + counted stock), per item | e.g. alnen0 4 936, aldau0 1 896 | equal for all 21 items (0 mismatches) |
+| spent remains in the store → S.il.used | 4 386 | +4 386 |
+| page errors | — | 0 |
+Result: ALL OK.
+### Consumable scan (dev/test/r10e-consume-scan.py: every place an al*/lx* piece leaves a bag in jallot / jration / jstip)
+| file:line | function | where the piece goes |
+|---|---|---|
+| jallot.js:64 | alNpcSpend | ilUsedUp |
+| jallot.js:71 | (wrap) | ilUsedUp |
+| jallot.js:82 | (wrap) | ilUsedUp |
+| jallot.js:110 | (wrap) | ilStock |
+| jration.js:102 | (wrap) | ilUsedUp |
+| jration.js:136 | lxGive | ilUsedUp |
+| jration.js:173 | (wrap) | ilUsedUp |
+| jstip.js:104 | (wrap) | ilStock |
+| jstip.js:125 | stipRestore | guarded stipRestore → store record «kho» (a real piece, uses left) |
+| jstip.js:179 | (wrap) | not an allotment consumable (tea served; IL_USED_KD «Trà», used up) |
+sites 10 · unmarked 0
+LIVE fd85907a: the same 10 sites, 9 unmarked (→ «kho»/«net» records); r2: 0 unmarked.
+### Growth after the fix (dev/test/r10e-save-size.js, sensible bot; dev/test/r10e-grow-scan.js)
+| run | LIVE fd85907a (FIXER #2) | r2 |
+|---|---|---|
+| year-14 save, +1 game year | 4 339 545 → 4 689 526 (+350 k) | 4 339 545 → (load 2 770 661) → 2 967 243 (+197 k from the slim load) ; store 938 records, 0 used-up consumables in it |
+| fresh life, year 1 → 4 | — | 73 436 → 1 266 729 (+~400 k / year in the first years); S.il 48 k; S.il.stock 8 kinds (628 pieces counted) |
+Growing holders still left (year 14 → 15, chars/year): R[].inv +53 k (7 263 pieces), S.rlog +21 k (bounded: 181 k at year 14 vs 188 k at year 4), R[].staff +13 k, R[].shn +12 k, R[].ky +12 k, R[].dsn +12 k, S.inv +9 k (her 1 467 pieces), S.intel +8 k, R[].wdSeen +5 k, S.knw +5 k, S.nmReg +3 k (304 k, 13 427 rows). At ~+200 k / year a year-15 save (2.97 M) reaches the ~5.2 M browser limit near year ~26 → step (3) of the order (save growth: R[].inv first). Full tables: run the scan on two saves.
+### Tests on 434a4a30
+quickcheck **PASS** 559 s (core gates PASS, old save ok, perf new/live render 221/207, tab 399/379, buổi 1118/2238 ms) · coop-e2e Fold host **142/142** · COOP_SWAP=1 (iPad host) **142/142** · monthly-allotment ALL PASS · bongloc-options 14/14 · monthly-ration 2 FAIL «mirror rows = owned colours», «mirror note + rush» = the same 2 pre-existing FAIL as LIVE fd85907a (FIXER #2 §5) · r10e-oldsave-noloss ALL OK · r10e-consume-scan 0 unmarked.
+No UI / kit / wording change in r2; no new BAL number (stock has no cap: it drains by the NPC issue). Co-op: NPC issue / trim run on the host only (as before); S.il.used / stock / conv are plain S.il fields.
+SSK: SẴN SÀNG KIỂM robot10-e-fix-3 434a4a30 (BIG: game, item ledger).
