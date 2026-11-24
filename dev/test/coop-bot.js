@@ -5,18 +5,18 @@
    Thái hậu, friend entry = the other player's real name + rank). Deaths → the bot takes the rebirth choice and goes on. */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
 const {serve,BASE}=require('./coop-serve.js');
-const WEEKS=+(process.argv[2]||52);const OUT=path.resolve(process.argv[3]||path.join(__dirname,'../shots/coop-bot'));fs.mkdirSync(OUT,{recursive:true});
-const WURL=process.argv[4]||'https://ctm-coop.victoria-tntt.workers.dev';
+const WEEKS=+(process.argv[2]||52);const OUT=path.resolve(process.argv[3]||path.join(__dirname,'../shots/coop-bot'));if(require.main===module)fs.mkdirSync(OUT,{recursive:true});
+const WURL=(require.main===module&&process.argv[4])||'https://ctm-coop.victoria-tntt.workers.dev';
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const log=[];const L=s=>{console.log(s);log.push(s)};
-async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:1,reducedMotion:'reduce'});await serve(ctx);
+async function mk(b,name,vp,wurl){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:1,reducedMotion:'reduce'});await serve(ctx);
   /* THIN=n (host's wanted thin level, dev flag) + THINPART=4,… (test-only part flags, contract C1) for a thin-guest run on a Worker with part A */
   await ctx.addInitScript(([l,pts,host])=>{try{if(l&&host)localStorage.setItem('ctm-thin',l);for(const p of pts)if(p)localStorage.setItem('ctm-thin-part-'+p,'1')}catch(e){}},[process.env.THIN||'',(process.env.THINPART||'').split(','),name==='A']);
   await ctx.addInitScript(u=>{window.COOP_URL=u;
     window.__co=()=>{const c=window.COOP;if(!c)return{};const s=c.state||{};const you=c.seat||s.you||null;const ended=c.ended||s.ended||{};
       const on=typeof c.on==='boolean'?c.on:!!(s.playing||(s.status&&s.status!=='off'));
       return{code:c.code||s.room||'',seat:you,week:c.week!=null?c.week:(s.week||0),ended,on,
-        frozen:!!(on&&(s.status!=='open'||!s.peerOnline)),waiting:!!(window.COOPW&&COOPW.on&&(COOPW.sent===(s.week||0)||(you&&ended[you]))),world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.base)}}},WURL);
+        frozen:!!(on&&(s.status!=='open'||!s.peerOnline)),waiting:!!(window.COOPW&&COOPW.on&&(COOPW.sent===(s.week||0)||(you&&ended[you]))),world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.base)}}},wurl||WURL);
   /* TRIP=1 (review/coop-thin-a): the guest tripwire (thin-guest progress meter) on the guest page */
   if(process.env.TRIP&&name==='B')await ctx.addInitScript({path:path.join(__dirname,'coop-thin-trip.js')});
   const p=await ctx.newPage();p.setDefaultTimeout(30000);const o={name,ctx,p,errs:[],acts:0,deaths:0,names:[],meets:0,harms:0,hk:{}};
@@ -57,7 +57,8 @@ const WORLD=()=>{const kidsOf=v=>(v.kids||[]).map(k=>k.name+(k.alive?'':'†')).
    friend:((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)||null)&&(({name,rank,alive,queen,sid,id})=>({name,rank:id==null?'srv':queen?7:rank,alive}))((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)),
    me:{name:S.name,rank:S.srv&&!S.srv.risen?'srv':S.rank,dead:!!S.dead,srv:!!S.srv},mst:{sung:S.sung,danh:S.danh,suc:S.suc},fst:(f=>f&&f.id!=null?{sung:f.sung,danh:f.danh,suc:f.suc}:null)((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)),where:Object.entries(S.where||{}).filter(([k])=>!(+k>=900)).map(([k,v])=>k+'@'+v).sort().join(),buoi:S.buoi||0}};
 
-(async()=>{const b=await chromium.launch(/127\.0\.0\.1|localhost/.test(WURL)?{args:['--disable-features=BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults,LocalNetworkAccessChecks']}:{});/* a local Worker (wrangler dev) */const A=await mk(b,'A',[755,1000]),B=await mk(b,'B',[1180,820]);
+/* robot10-coop.js (ROBOT-10 co-op runner) requires this file for mk / STEP / BUOI / WORLD: the run below starts only as a script */
+if(require.main===module)(async()=>{const b=await chromium.launch(/127\.0\.0\.1|localhost/.test(WURL)?{args:['--disable-features=BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults,LocalNetworkAccessChecks']}:{});/* a local Worker (wrangler dev) */const A=await mk(b,'A',[755,1000]),B=await mk(b,'B',[1180,820]);
  await A.p.goto(BASE);await A.p.waitForTimeout(3000);await tapText(A,/^(Chơi cùng bạn|Cùng hảo hữu)/);await A.p.waitForTimeout(500);await tapText(A,/^(Mời bạn|Mời hảo hữu)/);
  await until(A,()=>__co().code&&__co().seat==='a');const code=(await A.p.evaluate(()=>__co())).code;L('room '+code);
  await B.p.goto(BASE+'?room='+code);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng/,4000);
@@ -100,3 +101,4 @@ const WORLD=()=>{const kidsOf=v=>(v.kids||[]).map(k=>k.name+(k.alive?'':'†')).
 if(process.env.TRIP){const t=await B.p.evaluate(()=>window.__trip&&__trip()).catch(e=>({err:e.message}));L(`\nTRIPWIRE guest writes outside fromCanon: ${t&&t.total} (every write incl. same value ${t&&t.raw}) · by root ${JSON.stringify(t&&t.byRoot)} · S replaced ${t&&t.sReplaced} rivals replaced ${t&&t.rReplaced} · fn|root pairs ${t&&t.pairs}`);L(`TRIPWIRE by part (owner of the write, audit §3; "?" = no engine entry found): ${JSON.stringify(t&&t.byPart)}`);L(`TRIPWIRE STATE (without private "__" markers/guards = the meter to report): ${t&&t.state} · by part ${JSON.stringify(t&&t.statePart)}`);(t&&t.top||[]).forEach(x=>L(`  ${x[2]}\t${x[0]}\t${x[1]}`));fs.writeFileSync(OUT+'/trip.json',JSON.stringify(t,null,1))}
  L(`page errors A ${A.errs.length} B ${B.errs.length}`);[...new Set([...A.errs,...B.errs])].slice(0,10).forEach(e=>L('  err: '+e.slice(0,200)));
  fs.writeFileSync(OUT+'/bot-log.txt',log.join('\n')+'\n');await b.close();process.exit(div.length||weeks<WEEKS||whereDiff||posDiff.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});
+module.exports={mk,tapText,until,STEP,BUOI,WORLD,CLR,WURL};

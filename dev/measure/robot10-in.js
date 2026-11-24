@@ -154,6 +154,9 @@ const VOL=new Set(["at"]);
 function roundTrip(){if(!S||S.dead||S.mg)return;const t0=performance.now();let s1;
  try{const d1=ser();VOL.forEach(k=>delete d1[k]);s1=JSON.stringify(d1)}catch(e){bug("save","ser() throws",e.message);return}
  R.lastSave=s1;if(!R.firstSave)R.firstSave=s1;
+ /* co-op (robot10-coop.js, C.coop): never load in place in a live room (it would rewrite the shared world under the friend); the
+    runner round-trips this save in its own solo scratch page instead */
+ if(C.coop){R.rt++;return}
  /* in-place load only at a quiet moment (no card waiting, no night flip pending): loading the bot's own game under a pending night flip
     (jnf S.nfX open/wait, cards tracked by object in FLIPQ) locks the clock — the harness must not cause that itself; the real load path is
     tested at the UI checkpoints (robot10.js nightAfterLoad) */
@@ -174,6 +177,6 @@ if(C.locked)R.lock={road:C.road,openAt:null,playAt:null};
 {const nb0=nextBuoi;nextBuoi=function(){const t0=performance.now(),g0=gt();let r;try{r=nb0.apply(this,arguments)}finally{const dt=performance.now()-t0;R.nbMs.push(Math.round(dt));
   if(dt>(C.lagMs||1500))bug("lag","one buổi change took over "+(C.lagMs||1500)/1e3+" s (bot page, render off)",Math.round(dt)+" ms @ "+where())}
   R.calls++;try{if(!R.road&&S&&S.st&&S.st.f14)R.road=S.st.f14.road;R.origin=S&&S.origin&&S.origin.k}catch(e){}
-  if(S&&!S.dead&&gt()===g0&&!Q.length&&!S.mg){if(++R.noAdv>=20&&!R.halt){R.halt="softlock";bug("stuck","«Sang ngày mới» does nothing: the clock does not move (soft-lock)",where()+" · used "+used+" · place "+S.place+" · Q 0 · S.mg "+!!S.mg);R.haltSave=R.lastSave}return r}
+  if(S&&!S.dead&&gt()===g0&&!Q.length&&!S.mg){if(++R.noAdv>=20&&!R.halt&&!C.coop){/* co-op: a press waits for the friend (the room steps later): the runner's own stuck check (no room step) judges */R.halt="softlock";bug("stuck","«Sang ngày mới» does nothing: the clock does not move (soft-lock)",where()+" · used "+used+" · place "+S.place+" · Q 0 · S.mg "+!!S.mg);R.haltSave=R.lastSave}return r}
   R.noAdv=0;R.buoi++;life0();try{R.perBuoi&&R.perBuoi()}catch(e){}auditLogs();if(!(R.buoi%(C.rtEvery||1)))roundTrip();return r}}
 })();
