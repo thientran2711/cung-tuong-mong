@@ -25,6 +25,7 @@ const VJS=`window.MKV={
   const vdir=`${OUT}/raw/m3-${name}`;fs.rmSync(vdir,{recursive:true,force:true});fs.mkdirSync(vdir,{recursive:true});
   const {ctx,p}=await boot(b,W,H,1,{recordVideo:{dir:vdir,size:{width:W,height:H}}});const T0=Date.now();
   await p.addScriptTag({content:LIB});await p.addScriptTag({content:ROOMJS});await p.addScriptTag({content:VJS});
+  await p.evaluate(()=>{const i=document.querySelector('#stage .tok.fig img.j59sz');window.__meH=i?Math.round(i.getBoundingClientRect().height):0});
   await p.evaluate(()=>{try{nightScene=function(){};S.tonight=null}catch(e){};setInterval(()=>{document.querySelectorAll('body > *').forEach(e=>{if(e.id!=='mk'&&e.offsetHeight<360&&/Trong cung vừa qua/.test(e.textContent||'')&&getComputedStyle(e).position==='fixed')e.style.display='none'})},100)});
   // prep (cut away later): grab the real toilette wardrobe grid + a snapshot of the real makeup canvas
   await p.evaluate(()=>toilOpen());await p.waitForTimeout(1500);await p.evaluate(()=>{const g=document.querySelector('#kg82 .kgr-go');if(g)g.click()});await p.waitForTimeout(2000);

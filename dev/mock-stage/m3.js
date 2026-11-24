@@ -3,7 +3,7 @@ const {boot,settle,chromium}=require('./boot');const fs=require('fs');const OUT=
 const LIB=fs.readFileSync(__dirname+'/mklib.js','utf8');
 const ROOM='https://ctm-img.victoria-tntt.workers.dev/img/toil-room-c1-dapung.webp';
 // room helper: picture placed by hand (so the glow outlines map exactly), outlines traced on toil-room-c1-dapung (900x600 coords)
-const ROOMJS=`window.MKR={
+const ROOMJS=`(function(){const st=document.createElement('style');st.textContent='#mk *,#mk *:focus,#mk *:active,#mk *:focus-visible{outline:none!important;-webkit-tap-highlight-color:transparent!important}#mk .kinv *:active,#mk .kinv *:focus{box-shadow:none}';document.head.appendChild(st)})();window.MKR={
  put(L,{fx=0,fy=0.06,zoom=1,blur=0,op=1}={}){const w=L.g.w,H=L.g.H;const s=Math.max(w/1200,H/800)*zoom;const dw=1200*s,dh=800*s;
   let left=Math.min(0,Math.max(w-dw,w/2-fx*dw));if(fx===0)left=0;let top=Math.min(0,Math.max(H-dh,-fy*dh));
   const im=document.createElement('img');im.src='${ROOM}';im.style.cssText='max-width:none;max-height:none;position:absolute;left:'+left+'px;top:'+top+'px;width:'+dw+'px;height:'+dh+'px;z-index:1;opacity:'+op+(blur?';filter:blur('+blur+'px) brightness(.7)':'');L.appendChild(im);
@@ -16,12 +16,13 @@ const ROOMJS=`window.MKR={
   L.appendChild(svg)},
  /* v3.2 (owner 23/11 ~23:50Z): her spot = the empty floor RIGHT of the mirror (iPad) / right part of the frame (Fold, same room frame); ONE person scale on both
     devices = room units (iPad reference 341 u at foot 495, perspective by floor depth), never clipped */
- spot(L){const ipad=innerWidth>1000;const x=ipad?690:312,foot=ipad?495:500;const R=341*(195+(foot-370)*.72)/289;const [fx,fy0]=L.map(x,foot);const fy=Math.min(fy0,L.g.H-6);
-  let h=Math.min(R*L.k,fy-8);const w=h/2.0408;const cx=Math.max(w/2+4,Math.min(L.g.w-w/2-4,fx));return{fx:cx,fy,h,R}},
- hubFig(L,fig,mk){const s=MKR.spot(L);const F=MKX.fig(L,fig,{x:s.fx,h:s.h,mk:mk||null,z:5});F.style.bottom=(L.g.H-s.fy)+'px';const pl=MKX.plate(L,S,s.fx,Math.min(L.g.H-44,s.fy-6));return{F,pl,s}},
+ spot(L){const ipad=innerWidth>1000;const x=ipad?655:312,foot=ipad?495:500;const [fx,fy0]=L.map(x,foot);const fy=Math.min(fy0,L.g.H-6);
+  /* v3.5 (owner 24/11 ~04:25Z «Mình có một cái size chuẩn mà»): her figure = the ONE standard stage figure height (the live stage's her-figure img, KIT j59 body H), same px as on the stage */
+  const R=(window.__meH||436)/L.k;let h=Math.min(window.__meH||436,fy-8);const w=h/2.0408;const cx=Math.max(w/2+4,Math.min(L.g.w-w/2-4,fx));return{fx:cx,fy,h,R}},
+ hubFig(L,fig,mk){const s=MKR.spot(L);const F=MKX.fig(L,fig,{x:s.fx,h:s.h,mk:mk||null,z:5});F.style.bottom=(L.g.H-s.fy)+'px';const pl=MKX.plate(L,S,s.fx,Math.min(L.g.H-44,s.fy-6));pl.style.zIndex=9;return{F,pl,s}},
  /* «Thay xiêm y»: figure stays in the RIGHT frame, picker LEFT, the grid zoomed to fill the panel */
  ward(L,fig){const ipad=innerWidth>1000;MKR.put(L,{fx:.42,blur:6});const w=L.g.w,H=L.g.H;const rw=Math.round(w*(ipad?.36:.40));
-  const F=MKX.fig(L,fig,{x:w-rw/2,h:Math.min(H-50,(rw-10)*2.0408),z:5});
+  const F=MKX.fig(L,fig,{x:w-rw/2,h:Math.min(window.__meH||H-50,H-50),z:5});
   const pan=document.createElement('div');pan.className='dlg mkpan2';pan.style.cssText='position:absolute;z-index:6;left:8px;right:auto;width:'+(w-rw-16)+'px;top:8px;bottom:8px;display:flex;flex-direction:column;overflow:hidden;max-width:none;max-height:none;margin:0;animation:none';
   pan.innerHTML='<div class="kph"><span class="kptitle">Thay xiêm y</span></div><div class="mkgb" style="flex:1;min-height:0;overflow:auto;padding:8px"></div>';L.appendChild(pan);
   const gb=pan.querySelector('.mkgb');if(window.__grid){const g=window.__grid.cloneNode(true);gb.appendChild(g);const G=g.querySelector('.kinvg');
@@ -44,6 +45,7 @@ const ROOMJS=`window.MKR={
   const hideToast=()=>p.evaluate(()=>{document.querySelectorAll('body *').forEach(e=>{if(e.offsetHeight<320&&/Trong cung vừa qua/.test(e.textContent||'')&&getComputedStyle(e).position==='fixed')e.style.display='none'})});
   const shot=async(n)=>{await p.evaluate((n)=>{const vo=document.getElementById('ov');if(vo)vo.style.display=/^m3-f/.test(n)?'none':'';Q.length=0;const M=document.getElementById('modal');M.hidden=true;document.documentElement.classList.add('mkhide')},n);await settle(p);await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true});await p.waitForTimeout(600);await hideToast();await p.screenshot({path:`${OUT}/${n}-${name}.png`});console.log('shot',n,name)};
   await p.evaluate(()=>{try{nightScene=function(){};S.tonight=null}catch(e){}});
+  await p.evaluate(()=>{const i=document.querySelector('#stage .tok.fig img.j59sz');window.__meH=i?Math.round(i.getBoundingClientRect().height):0;console.log('stage figure h',window.__meH)});
   // T1 today: the entry (top-bar chip «Chưa điểm trang» + the Điểm trang act card)
   await p.evaluate(()=>{const c=document.querySelector('[data-k3="toil"]');if(c){c.style.borderRadius='6px'}});await shot('m3-t1');
   await p.evaluate(()=>{const c=document.querySelector('[data-k3="toil"]');if(c)c.style.outline=''});
