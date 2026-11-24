@@ -1,0 +1,3128 @@
+{
+ "at": "2026-11-23T23:16:11.010Z",
+ "deaths": [
+  {
+   "kind": "death",
+   "text": "${d.n} nguy kịch, không qua khỏi",
+   "rx": ".*? nguy kịch, không qua khỏi",
+   "src": "j13.js:21"
+  },
+  {
+   "kind": "death",
+   "text": "Chết rét, chết đói trong lãnh cung",
+   "rx": "Chết rét, chết đói trong lãnh cung",
+   "src": "j14.js:43"
+  },
+  {
+   "kind": "death",
+   "text": "Uống thuốc phá thai, băng huyết mà chết",
+   "rx": "Uống thuốc phá thai, băng huyết mà chết",
+   "src": "j22.js:51"
+  },
+  {
+   "kind": "death",
+   "text": "Bị ban chết vì tư thông với ${m.name}",
+   "rx": "Bị ban chết vì tư thông với .*?",
+   "src": "j22.js:22"
+  },
+  {
+   "kind": "death",
+   "text": "tư thông với ${m.name}",
+   "rx": "tư thông với .*?",
+   "src": "j22.js:44"
+  },
+  {
+   "kind": "death",
+   "text": "Thú tội tư thông, Hoàng thượng không tha",
+   "rx": "Thú tội tư thông, Hoàng thượng không tha",
+   "src": "j22.js:52"
+  },
+  {
+   "kind": "death",
+   "text": "Bệnh nặng, không qua khỏi",
+   "rx": "Bệnh nặng, không qua khỏi",
+   "src": "j3.js:122"
+  },
+  {
+   "kind": "death",
+   "text": "${pre}Tân Thái hậu ${v.name} xét lại chuyện cũ (khả năng: ${chanceLo(o)}), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",
+   "rx": ".*?Tân Thái hậu .*? xét lại chuyện cũ \\(khả năng: .*?\\), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",
+   "src": "j3.js:163"
+  },
+  {
+   "kind": "death",
+   "text": "Mưu phản cùng cha, cả họ bị tru di",
+   "rx": "Mưu phản cùng cha, cả họ bị tru di",
+   "src": "j4.js:108"
+  },
+  {
+   "kind": "death",
+   "text": "Cao Ly thua trận, thư mật của ngươi bị tìm thấy",
+   "rx": "Cao Ly thua trận, thư mật của ngươi bị tìm thấy",
+   "src": "j4.js:53"
+  },
+  {
+   "kind": "death",
+   "text": "Mật thư bị chặn, tra ra ngươi làm gián điệp cho Cao Ly",
+   "rx": "Mật thư bị chặn, tra ra ngươi làm gián điệp cho Cao Ly",
+   "src": "j4.js:59"
+  },
+  {
+   "kind": "death",
+   "text": "Hạ độc Hoàng hậu bị bắt, Thái hậu phủi tay không nhận",
+   "rx": "Hạ độc Hoàng hậu bị bắt, Thái hậu phủi tay không nhận",
+   "src": "j4.js:125"
+  },
+  {
+   "kind": "death",
+   "text": "Kiệt sức chết giữa đống đồ giặt ở Tân Giả khố",
+   "rx": "Kiệt sức chết giữa đống đồ giặt ở Tân Giả khố",
+   "src": "j42.js:268"
+  },
+  {
+   "kind": "death",
+   "text": "Lao lực kiệt sức mà chết",
+   "rx": "Lao lực kiệt sức mà chết",
+   "src": "j42.js:268"
+  },
+  {
+   "kind": "death",
+   "text": "Bị ${mm2.name} phát hiện làm tai mắt cho ${v.name}, sai đánh chết",
+   "rx": "Bị .*? phát hiện làm tai mắt cho .*?, sai đánh chết",
+   "src": "j42.js:295"
+  },
+  {
+   "kind": "death",
+   "text": "${mm2.name} biết ngươi phản chủ, sai người dìm ngươi xuống giếng sau Ngự hoa viên",
+   "rx": ".*? biết ngươi phản chủ, sai người dìm ngươi xuống giếng sau Ngự hoa viên",
+   "src": "j42.js:296"
+  },
+  {
+   "kind": "death",
+   "text": "Bị ${m.name} sai đánh trượng đến chết",
+   "rx": "Bị .*? sai đánh trượng đến chết",
+   "src": "j42.js:323"
+  },
+  {
+   "kind": "death",
+   "text": "Bị bắt quả tang khi ${k===\"poison\"?\"bỏ độc\":k===\"plant\"?\"cài bùa ngải\":\"dò la\"} ${t.name}, bị đánh chết ở Thận Hình ti",
+   "rx": "Bị bắt quả tang khi .*? .*?, bị đánh chết ở Thận Hình ti",
+   "src": "j42.js:334"
+  },
+  {
+   "kind": "death",
+   "text": "Chết dưới đòn tra khảo ở Thận Hình ti",
+   "rx": "Chết dưới đòn tra khảo ở Thận Hình ti",
+   "src": "j42.js:336"
+  },
+  {
+   "kind": "death",
+   "text": "Quỳ phạt đến kiệt sức mà chết",
+   "rx": "Quỳ phạt đến kiệt sức mà chết",
+   "src": "j42.js:368"
+  },
+  {
+   "kind": "death",
+   "text": "Bị đánh đòn vì tội trộm cắp, không qua khỏi",
+   "rx": "Bị đánh đòn vì tội trộm cắp, không qua khỏi",
+   "src": "j42.js:388"
+  },
+  {
+   "kind": "death",
+   "text": "Trước ngày sắc phong, ${m.name} sai người đẩy ngươi xuống giếng",
+   "rx": "Trước ngày sắc phong, .*? sai người đẩy ngươi xuống giếng",
+   "src": "j42.js:431"
+  },
+  {
+   "kind": "death",
+   "text": "${pre} Bụng mang dạ chửa, ngươi bị đánh chết ở Thận Hình ti",
+   "rx": ".*? Bụng mang dạ chửa, ngươi bị đánh chết ở Thận Hình ti",
+   "src": "j42.js:560"
+  },
+  {
+   "kind": "death",
+   "text": "${pre} Chuyện dính vào mưu của phi tần, ngươi bị diệt khẩu",
+   "rx": ".*? Chuyện dính vào mưu của phi tần, ngươi bị diệt khẩu",
+   "src": "j42.js:561"
+  },
+  {
+   "kind": "death",
+   "text": "${pre} Ngươi chết dưới đòn roi",
+   "rx": ".*? Ngươi chết dưới đòn roi",
+   "src": "j42.js:563"
+  },
+  {
+   "kind": "death",
+   "text": "Khó sinh, băng huyết mà chết",
+   "rx": "Khó sinh, băng huyết mà chết",
+   "src": "j8.js:389"
+  },
+  {
+   "kind": "death",
+   "text": "Bị ban rượu độc vì mưu hại ${NM(t)}",
+   "rx": "Bị ban rượu độc vì mưu hại .*?",
+   "src": "j8.js:125"
+  },
+  {
+   "kind": "death",
+   "text": "Bị ban chết vì đầu độc ${k.name}",
+   "rx": "Bị ban chết vì đầu độc .*?",
+   "src": "j8.js:146"
+  },
+  {
+   "kind": "death",
+   "text": "Bị ban chết vì vu ${k.name} trù ẻo thánh thượng",
+   "rx": "Bị ban chết vì vu .*? trù ẻo thánh thượng",
+   "src": "j8.js:152"
+  },
+  {
+   "kind": "death",
+   "text": "Tráo con bị bắt quả tang, tội khi quân",
+   "rx": "Tráo con bị bắt quả tang, tội khi quân",
+   "src": "j8.js:381"
+  },
+  {
+   "kind": "death",
+   "text": "tư thông${m?\" với \"+m.name:\"\"}",
+   "rx": "tư thông.*?",
+   "src": "j95.js:442"
+  },
+  {
+   "kind": "death",
+   "text": "Bị ${m.who} hại",
+   "rx": "Bị .*? hại",
+   "src": "jcoopworld.js:772"
+  },
+  {
+   "kind": "death",
+   "text": "Bị kẻ gian hãm hại",
+   "rx": "Bị kẻ gian hãm hại",
+   "src": "jcoopworld.js:772"
+  },
+  {
+   "kind": "death",
+   "text": "Bị hại trong cung",
+   "rx": "Bị hại trong cung",
+   "src": "jcoopworld.js:811"
+  },
+  {
+   "kind": "death",
+   "text": "Lao lực mà chết trước kỳ tuyển tú",
+   "rx": "Lao lực mà chết trước kỳ tuyển tú",
+   "src": "jkc.js:350"
+  },
+  {
+   "kind": "death",
+   "text": "Trúng độc chén canh sâm của",
+   "rx": "Trúng độc chén canh sâm của",
+   "src": "jkc.js:367"
+  },
+  {
+   "kind": "death",
+   "text": "Tự vẫn trước ngày bị ép gả",
+   "rx": "Tự vẫn trước ngày bị ép gả",
+   "src": "jkc.js:441"
+  },
+  {
+   "kind": "death",
+   "text": "Chết vì dịch sốt trước kỳ tuyển tú",
+   "rx": "Chết vì dịch sốt trước kỳ tuyển tú",
+   "src": "jkc.js:453"
+  },
+  {
+   "kind": "death",
+   "text": "Lao lực mà chết trước ngày tuyển",
+   "rx": "Lao lực mà chết trước ngày tuyển",
+   "src": "jkc2.js:269"
+  },
+  {
+   "kind": "death",
+   "text": "Kiệt sức mà chết trước ngày hòa thân",
+   "rx": "Kiệt sức mà chết trước ngày hòa thân",
+   "src": "jkc2.js:269"
+  },
+  {
+   "kind": "death",
+   "text": "Chết dưới dao thích khách đêm trước ngày hòa thân",
+   "rx": "Chết dưới dao thích khách đêm trước ngày hòa thân",
+   "src": "jkc2.js:330"
+  },
+  {
+   "kind": "death",
+   "text": "Bị ban chết vì tư thông với ${nm}",
+   "rx": "Bị ban chết vì tư thông với .*?",
+   "src": "jmen.js:208"
+  },
+  {
+   "kind": "death",
+   "text": "tư thông với ${nm}",
+   "rx": "tư thông với .*?",
+   "src": "jmen.js:208"
+  },
+  {
+   "kind": "death",
+   "text": "Bị Thái y tra ra bỏ độc người hầu cung khác, giải sang Thận hình ti",
+   "rx": "Bị Thái y tra ra bỏ độc người hầu cung khác, giải sang Thận hình ti",
+   "src": "jmline.js:83"
+  },
+  {
+   "kind": "death",
+   "text": "${ILL[i.k].n} nguy kịch, tuổi cao sức yếu không qua khỏi",
+   "rx": ".*? nguy kịch, tuổi cao sức yếu không qua khỏi",
+   "src": "jmort.js:129"
+  },
+  {
+   "kind": "death",
+   "text": "${t} Ngươi gắng sinh hạ hài nhi rồi nhắm mắt",
+   "rx": ".*? Ngươi gắng sinh hạ hài nhi rồi nhắm mắt",
+   "src": "jmort.js:170"
+  },
+  {
+   "kind": "death",
+   "text": "Ngươi trượt chân trên bậc đá đóng băng trước điện, không tỉnh lại",
+   "rx": "Ngươi trượt chân trên bậc đá đóng băng trước điện, không tỉnh lại",
+   "src": "jmort.js ACC.me"
+  },
+  {
+   "kind": "death",
+   "text": "Ngươi ngã xuống hồ Thái Dịch giữa đêm mưa",
+   "rx": "Ngươi ngã xuống hồ Thái Dịch giữa đêm mưa",
+   "src": "jmort.js ACC.me"
+  },
+  {
+   "kind": "death",
+   "text": "Ngươi nghẹn hạt sen giữa yến tiệc",
+   "rx": "Ngươi nghẹn hạt sen giữa yến tiệc",
+   "src": "jmort.js ACC.odd"
+  },
+  {
+   "kind": "death",
+   "text": "Ngươi mải đuổi con vẹt sổng lồng, trượt chân ngã từ lầu vọng nguyệt",
+   "rx": "Ngươi mải đuổi con vẹt sổng lồng, trượt chân ngã từ lầu vọng nguyệt",
+   "src": "jmort.js ACC.odd"
+  },
+  {
+   "kind": "death",
+   "text": "Ngươi cười quá đà khi xem gánh chèo, ngất đi không tỉnh",
+   "rx": "Ngươi cười quá đà khi xem gánh chèo, ngất đi không tỉnh",
+   "src": "jmort.js ACC.odd"
+  },
+  {
+   "kind": "death",
+   "text": "Tuổi trời đã tận, ${ILL[ageOf(p)>=M.oldAge?\"laobenh\":\"trongbenh\"].n.toLowerCase()} không qua khỏi, thọ ${S.age} tuổi",
+   "rx": "Tuổi trời đã tận, .*? không qua khỏi, thọ .*? tuổi",
+   "src": "jmort.js:106"
+  },
+  {
+   "kind": "death",
+   "text": "Trúng độc, không qua khỏi",
+   "rx": "Trúng độc, không qua khỏi",
+   "src": "jpoison.js:63"
+  },
+  {
+   "kind": "death",
+   "text": "bị ban chết vì mưu hại ${PQ_N[who]}",
+   "rx": "bị ban chết vì mưu hại .*?",
+   "src": "jpq.js:73"
+  },
+  {
+   "kind": "death",
+   "text": "Thái hậu dùng xong chén canh thì trở bệnh nặng",
+   "rx": "Thái hậu dùng xong chén canh thì trở bệnh nặng",
+   "src": "jpq.js:90"
+  },
+  {
+   "kind": "death",
+   "text": "Uống thuốc giả chết quá liều, không tỉnh lại nữa",
+   "rx": "Uống thuốc giả chết quá liều, không tỉnh lại nữa",
+   "src": "jroute.js:174"
+  },
+  {
+   "kind": "death",
+   "text": "Bị ban chết vì tư thông",
+   "rx": "Bị ban chết vì tư thông",
+   "src": "jroute.js:127"
+  },
+  {
+   "kind": "death",
+   "text": "Bị ban chết vì trốn khỏi cung",
+   "rx": "Bị ban chết vì trốn khỏi cung",
+   "src": "jroute.js:176"
+  },
+  {
+   "kind": "death",
+   "text": "trốn khỏi cung",
+   "rx": "trốn khỏi cung",
+   "src": "jroute.js:248"
+  },
+  {
+   "kind": "death",
+   "text": "gian lận khi trích huyết nghiệm thân",
+   "rx": "gian lận khi trích huyết nghiệm thân",
+   "src": "jroute.js:358"
+  },
+  {
+   "kind": "death",
+   "text": "Bị ban chết vì ${why}",
+   "rx": "Bị ban chết vì .*?",
+   "src": "jroute.js:362"
+  },
+  {
+   "kind": "death",
+   "text": "Bị ban chết vì con không phải cốt nhục hoàng gia",
+   "rx": "Bị ban chết vì con không phải cốt nhục hoàng gia",
+   "src": "jroute.js:362"
+  },
+  {
+   "kind": "death",
+   "text": "con không phải cốt nhục hoàng gia",
+   "rx": "con không phải cốt nhục hoàng gia",
+   "src": "jroute.js:368"
+  }
+ ],
+ "endings": [
+  {
+   "kind": "ending",
+   "text": "Xuất gia",
+   "rx": "Xuất gia",
+   "src": "j14.js:21"
+  },
+  {
+   "kind": "ending",
+   "text": "Lãnh cung",
+   "rx": "Lãnh cung",
+   "src": "j14.js:40"
+  },
+  {
+   "kind": "ending",
+   "text": "Được Vương gia che chở",
+   "rx": "Được Vương gia che chở",
+   "src": "j24.js:56"
+  },
+  {
+   "kind": "ending",
+   "text": "Thái phi",
+   "rx": "Thái phi",
+   "src": "j3.js:156"
+  },
+  {
+   "kind": "ending",
+   "text": "Hoàng thái hậu",
+   "rx": "Hoàng thái hậu",
+   "src": "j3.js:157"
+  },
+  {
+   "kind": "ending",
+   "text": "Mẫu hậu Hoàng thái hậu",
+   "rx": "Mẫu hậu Hoàng thái hậu",
+   "src": "j3.js:159"
+  },
+  {
+   "kind": "ending",
+   "text": "Hồng nhan bạc mệnh",
+   "rx": "Hồng nhan bạc mệnh",
+   "src": "j3.js:166"
+  },
+  {
+   "kind": "ending",
+   "text": "Tư thông bị phát giác",
+   "rx": "Tư thông bị phát giác",
+   "src": "j30.js:25"
+  },
+  {
+   "kind": "ending",
+   "text": "Ma ma",
+   "rx": "Ma ma",
+   "src": "j42.js:302"
+  },
+  {
+   "kind": "ending",
+   "text": "Xuất cung",
+   "rx": "Xuất cung",
+   "src": "j42.js:303"
+  },
+  {
+   "kind": "ending",
+   "text": "Xuất giá",
+   "rx": "Xuất giá",
+   "src": "j42.js:435"
+  },
+  {
+   "kind": "ending",
+   "text": "Bị đuổi khỏi cung",
+   "rx": "Bị đuổi khỏi cung",
+   "src": "j42.js:560"
+  },
+  {
+   "kind": "ending",
+   "text": "Được ban hôn",
+   "rx": "Được ban hôn",
+   "src": "j42.js:611"
+  },
+  {
+   "kind": "ending",
+   "text": "Vào vương phủ",
+   "rx": "Vào vương phủ",
+   "src": "j42.js:615"
+  },
+  {
+   "kind": "ending",
+   "text": "Thành thân",
+   "rx": "Thành thân",
+   "src": "j42.js:618"
+  },
+  {
+   "kind": "ending",
+   "text": "Cao chạy xa bay",
+   "rx": "Cao chạy xa bay",
+   "src": "j96.js:98"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · ${res.ti}",
+   "rx": "Đại kết cục · .*?",
+   "src": "jge.js:148"
+  },
+  {
+   "kind": "ending",
+   "text": "Ban chết",
+   "rx": "Ban chết",
+   "src": "jpq.js:72"
+  },
+  {
+   "kind": "ending",
+   "text": "Tân đế đăng cơ",
+   "rx": "Tân đế đăng cơ",
+   "src": "jpq.js:107"
+  },
+  {
+   "kind": "ending",
+   "text": "Trốn khỏi cung",
+   "rx": "Trốn khỏi cung",
+   "src": "jroute.js:172"
+  },
+  {
+   "kind": "ending",
+   "text": "Dâng biểu xuất gia",
+   "rx": "Dâng biểu xuất gia",
+   "src": "jroute.js:182"
+  },
+  {
+   "kind": "ending",
+   "text": "Xuất cung về quê",
+   "rx": "Xuất cung về quê",
+   "src": "jroute.js:194"
+  },
+  {
+   "kind": "ending",
+   "text": "Phế làm thứ dân",
+   "rx": "Phế làm thứ dân",
+   "src": "jroute.js:197"
+  },
+  {
+   "kind": "ending",
+   "text": "Một đời an nhiên",
+   "rx": "Một đời an nhiên",
+   "src": "jroute.js:253"
+  },
+  {
+   "kind": "ending",
+   "text": "Nữ vương Cao Ly",
+   "rx": "Nữ vương Cao Ly",
+   "src": "RARE97 nc_vuong"
+  },
+  {
+   "kind": "ending",
+   "text": "Thái hậu bị giam lỏng",
+   "rx": "Thái hậu bị giam lỏng",
+   "src": "SUCC_END a_bad"
+  },
+  {
+   "kind": "ending",
+   "text": "Thái hoàng thái hậu",
+   "rx": "Thái hoàng thái hậu",
+   "src": "SUCC_END a_rare"
+  },
+  {
+   "kind": "ending",
+   "text": "Nhiếp chính Thái hậu",
+   "rx": "Nhiếp chính Thái hậu",
+   "src": "SUCC_END b_ok"
+  },
+  {
+   "kind": "ending",
+   "text": "Thái hậu chấp chính",
+   "rx": "Thái hậu chấp chính",
+   "src": "SUCC_END b_keep"
+  },
+  {
+   "kind": "ending",
+   "text": "Bị ép trả rèm",
+   "rx": "Bị ép trả rèm",
+   "src": "SUCC_END b_bad"
+  },
+  {
+   "kind": "ending",
+   "text": "Nhị thánh lâm triều",
+   "rx": "Nhị thánh lâm triều",
+   "src": "SUCC_END b_rare"
+  },
+  {
+   "kind": "ending",
+   "text": "Nữ đế",
+   "rx": "Nữ đế",
+   "src": "SUCC_END c_ok"
+  },
+  {
+   "kind": "ending",
+   "text": "Nữ đế thoái vị",
+   "rx": "Nữ đế thoái vị",
+   "src": "SUCC_END c_abd"
+  },
+  {
+   "kind": "ending",
+   "text": "Nữ đế bị phế",
+   "rx": "Nữ đế bị phế",
+   "src": "SUCC_END c_bad"
+  },
+  {
+   "kind": "ending",
+   "text": "Thiên cổ nhất đế",
+   "rx": "Thiên cổ nhất đế",
+   "src": "SUCC_END c_rare"
+  },
+  {
+   "kind": "ending",
+   "text": "Mưu nghịch bất thành",
+   "rx": "Mưu nghịch bất thành",
+   "src": "SUCC_END c_fail"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nữ đế hiền minh",
+   "rx": "Đại kết cục · Nữ đế hiền minh",
+   "src": "GE_CAT tt_co#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Ngai vàng họ ngoại",
+   "rx": "Đại kết cục · Ngai vàng họ ngoại",
+   "src": "GE_CAT tt_co#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Hiền tướng hậu cung",
+   "rx": "Đại kết cục · Hiền tướng hậu cung",
+   "src": "GE_CAT tt_co#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Gian tướng hậu cung",
+   "rx": "Đại kết cục · Gian tướng hậu cung",
+   "src": "GE_CAT tt_co#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Buông cờ về núi",
+   "rx": "Đại kết cục · Buông cờ về núi",
+   "src": "GE_CAT tt_co#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Lật bàn bỏ đi",
+   "rx": "Đại kết cục · Lật bàn bỏ đi",
+   "src": "GE_CAT tt_co#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Vì nước khuyên cha",
+   "rx": "Đại kết cục · Vì nước khuyên cha",
+   "src": "GE_CAT tt_co#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Đại nghĩa diệt thân",
+   "rx": "Đại kết cục · Đại nghĩa diệt thân",
+   "src": "GE_CAT tt_co#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thanh thiên hậu cung",
+   "rx": "Đại kết cục · Thanh thiên hậu cung",
+   "src": "GE_CAT tt_oan#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Án sắt hậu cung",
+   "rx": "Đại kết cục · Án sắt hậu cung",
+   "src": "GE_CAT tt_oan#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Lấy luật trả oan",
+   "rx": "Đại kết cục · Lấy luật trả oan",
+   "src": "GE_CAT tt_oan#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Máu trả máu",
+   "rx": "Đại kết cục · Máu trả máu",
+   "src": "GE_CAT tt_oan#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nữ phán quan",
+   "rx": "Đại kết cục · Nữ phán quan",
+   "src": "GE_CAT tt_oan#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Phán quan khắc nghiệt",
+   "rx": "Đại kết cục · Phán quan khắc nghiệt",
+   "src": "GE_CAT tt_oan#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Hoa nở ngoài cung",
+   "rx": "Đại kết cục · Hoa nở ngoài cung",
+   "src": "GE_CAT tt_oan#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Bỏ nhà theo người",
+   "rx": "Đại kết cục · Bỏ nhà theo người",
+   "src": "GE_CAT tt_oan#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nhất gia chi chủ",
+   "rx": "Đại kết cục · Nhất gia chi chủ",
+   "src": "GE_CAT tt_tranh#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Gia chủ độc đoán",
+   "rx": "Đại kết cục · Gia chủ độc đoán",
+   "src": "GE_CAT tt_tranh#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thu phục huynh trưởng",
+   "rx": "Đại kết cục · Thu phục huynh trưởng",
+   "src": "GE_CAT tt_tranh#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Huynh muội tương tàn",
+   "rx": "Đại kết cục · Huynh muội tương tàn",
+   "src": "GE_CAT tt_tranh#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Một mình một cõi",
+   "rx": "Đại kết cục · Một mình một cõi",
+   "src": "GE_CAT tt_tranh#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Đoạn tuyệt gia môn",
+   "rx": "Đại kết cục · Đoạn tuyệt gia môn",
+   "src": "GE_CAT tt_tranh#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Phượng ấn về nhà",
+   "rx": "Đại kết cục · Phượng ấn về nhà",
+   "src": "GE_CAT tt_tranh#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Họ ngoại chuyên quyền",
+   "rx": "Đại kết cục · Họ ngoại chuyên quyền",
+   "src": "GE_CAT tt_tranh#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Trung cung kế vị",
+   "rx": "Đại kết cục · Trung cung kế vị",
+   "src": "GE_CAT tt_mat#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Đoạt ghế Trung cung",
+   "rx": "Đại kết cục · Đoạt ghế Trung cung",
+   "src": "GE_CAT tt_mat#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Tỷ muội Trung cung",
+   "rx": "Đại kết cục · Tỷ muội Trung cung",
+   "src": "GE_CAT tt_mat#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Ám vệ Trung cung",
+   "rx": "Đại kết cục · Ám vệ Trung cung",
+   "src": "GE_CAT tt_mat#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Phá ước cứu người",
+   "rx": "Đại kết cục · Phá ước cứu người",
+   "src": "GE_CAT tt_mat#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Dao trong mật ước",
+   "rx": "Đại kết cục · Dao trong mật ước",
+   "src": "GE_CAT tt_mat#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Hai bóng chùa xa",
+   "rx": "Đại kết cục · Hai bóng chùa xa",
+   "src": "GE_CAT tt_mat#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Ép hậu xuất gia",
+   "rx": "Đại kết cục · Ép hậu xuất gia",
+   "src": "GE_CAT tt_mat#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nữ tướng Nhạn Môn",
+   "rx": "Đại kết cục · Nữ tướng Nhạn Môn",
+   "src": "GE_CAT dtq_bien#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Huyết tướng Nhạn Môn",
+   "rx": "Đại kết cục · Huyết tướng Nhạn Môn",
+   "src": "GE_CAT dtq_bien#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Trấn biên giữ nước",
+   "rx": "Đại kết cục · Trấn biên giữ nước",
+   "src": "GE_CAT dtq_bien#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Dưỡng giặc giữ quyền",
+   "rx": "Đại kết cục · Dưỡng giặc giữ quyền",
+   "src": "GE_CAT dtq_bien#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Con nối nghiệp ông",
+   "rx": "Đại kết cục · Con nối nghiệp ông",
+   "src": "GE_CAT dtq_bien#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Con cầm binh quyền",
+   "rx": "Đại kết cục · Con cầm binh quyền",
+   "src": "GE_CAT dtq_bien#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Hồn về Nhạn Môn",
+   "rx": "Đại kết cục · Hồn về Nhạn Môn",
+   "src": "GE_CAT dtq_bien#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Đào ngũ theo chàng",
+   "rx": "Đại kết cục · Đào ngũ theo chàng",
+   "src": "GE_CAT dtq_bien#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Đan tâm chiếu sử",
+   "rx": "Đại kết cục · Đan tâm chiếu sử",
+   "src": "GE_CAT dtq_vu#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Giữ nhà bằng máu",
+   "rx": "Đại kết cục · Giữ nhà bằng máu",
+   "src": "GE_CAT dtq_vu#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Phò vua chính thống",
+   "rx": "Đại kết cục · Phò vua chính thống",
+   "src": "GE_CAT dtq_vu#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Lập vua trong máu",
+   "rx": "Đại kết cục · Lập vua trong máu",
+   "src": "GE_CAT dtq_vu#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Cả nhà ra biên",
+   "rx": "Đại kết cục · Cả nhà ra biên",
+   "src": "GE_CAT dtq_vu#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Trốn án ra biên",
+   "rx": "Đại kết cục · Trốn án ra biên",
+   "src": "GE_CAT dtq_vu#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Tìm ra ấn giả",
+   "rx": "Đại kết cục · Tìm ra ấn giả",
+   "src": "GE_CAT dtq_vu#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Ấn giả đền mạng",
+   "rx": "Đại kết cục · Ấn giả đền mạng",
+   "src": "GE_CAT dtq_vu#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nữ đế an dân",
+   "rx": "Đại kết cục · Nữ đế an dân",
+   "src": "GE_CAT dtq_binh#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Binh phù trong tay",
+   "rx": "Đại kết cục · Binh phù trong tay",
+   "src": "GE_CAT dtq_binh#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Trung thần giao binh",
+   "rx": "Đại kết cục · Trung thần giao binh",
+   "src": "GE_CAT dtq_binh#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Giao binh đổi quyền",
+   "rx": "Đại kết cục · Giao binh đổi quyền",
+   "src": "GE_CAT dtq_binh#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Theo cờ vương phủ",
+   "rx": "Đại kết cục · Theo cờ vương phủ",
+   "src": "GE_CAT dtq_binh#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Phản cung theo vương",
+   "rx": "Đại kết cục · Phản cung theo vương",
+   "src": "GE_CAT dtq_binh#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Giải giáp quy điền",
+   "rx": "Đại kết cục · Giải giáp quy điền",
+   "src": "GE_CAT dtq_binh#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mang binh quy ẩn",
+   "rx": "Đại kết cục · Mang binh quy ẩn",
+   "src": "GE_CAT dtq_binh#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Huynh muội trùng phùng",
+   "rx": "Đại kết cục · Huynh muội trùng phùng",
+   "src": "GE_CAT dtq_huynh#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Cướp huynh về nước",
+   "rx": "Đại kết cục · Cướp huynh về nước",
+   "src": "GE_CAT dtq_huynh#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Hòa thư hai nước",
+   "rx": "Đại kết cục · Hòa thư hai nước",
+   "src": "GE_CAT dtq_huynh#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Hòa thư lừa giặc",
+   "rx": "Đại kết cục · Hòa thư lừa giặc",
+   "src": "GE_CAT dtq_huynh#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Đánh giặc cứu huynh",
+   "rx": "Đại kết cục · Đánh giặc cứu huynh",
+   "src": "GE_CAT dtq_huynh#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thù nhà nợ nước",
+   "rx": "Đại kết cục · Thù nhà nợ nước",
+   "src": "GE_CAT dtq_huynh#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Hồng nhan đất giặc",
+   "rx": "Đại kết cục · Hồng nhan đất giặc",
+   "src": "GE_CAT dtq_huynh#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Phản quốc theo chàng",
+   "rx": "Đại kết cục · Phản quốc theo chàng",
+   "src": "GE_CAT dtq_huynh#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Hoàng thương thiên hạ",
+   "rx": "Đại kết cục · Hoàng thương thiên hạ",
+   "src": "GE_CAT muoi_tuoc#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Gian thương thiên hạ",
+   "rx": "Đại kết cục · Gian thương thiên hạ",
+   "src": "GE_CAT muoi_tuoc#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Vương tước cho con",
+   "rx": "Đại kết cục · Vương tước cho con",
+   "src": "GE_CAT muoi_tuoc#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mua tước cho con",
+   "rx": "Đại kết cục · Mua tước cho con",
+   "src": "GE_CAT muoi_tuoc#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thái hậu tán tài",
+   "rx": "Đại kết cục · Thái hậu tán tài",
+   "src": "GE_CAT muoi_tuoc#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thái hậu bạc vàng",
+   "rx": "Đại kết cục · Thái hậu bạc vàng",
+   "src": "GE_CAT muoi_tuoc#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thuyền về cố hương",
+   "rx": "Đại kết cục · Thuyền về cố hương",
+   "src": "GE_CAT muoi_tuoc#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Ôm bạc trốn đi",
+   "rx": "Đại kết cục · Ôm bạc trốn đi",
+   "src": "GE_CAT muoi_tuoc#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Diệt lưới muối lậu",
+   "rx": "Đại kết cục · Diệt lưới muối lậu",
+   "src": "GE_CAT muoi_lau#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nuốt lưới muối lậu",
+   "rx": "Đại kết cục · Nuốt lưới muối lậu",
+   "src": "GE_CAT muoi_lau#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Muối lậu nuôi dân",
+   "rx": "Đại kết cục · Muối lậu nuôi dân",
+   "src": "GE_CAT muoi_lau#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Vua muối bóng tối",
+   "rx": "Đại kết cục · Vua muối bóng tối",
+   "src": "GE_CAT muoi_lau#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Theo thuyền giang hồ",
+   "rx": "Đại kết cục · Theo thuyền giang hồ",
+   "src": "GE_CAT muoi_lau#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thủ lĩnh giang hồ",
+   "rx": "Đại kết cục · Thủ lĩnh giang hồ",
+   "src": "GE_CAT muoi_lau#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Đòi công nhà muối",
+   "rx": "Đại kết cục · Đòi công nhà muối",
+   "src": "GE_CAT muoi_lau#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nợ máu nhà muối",
+   "rx": "Đại kết cục · Nợ máu nhà muối",
+   "src": "GE_CAT muoi_lau#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Bồ Tát Giang Nam",
+   "rx": "Đại kết cục · Bồ Tát Giang Nam",
+   "src": "GE_CAT muoi_doi#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Bán lương Giang Nam",
+   "rx": "Đại kết cục · Bán lương Giang Nam",
+   "src": "GE_CAT muoi_doi#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mở kho cứu đói",
+   "rx": "Đại kết cục · Mở kho cứu đói",
+   "src": "GE_CAT muoi_doi#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Kho lương thiên hạ",
+   "rx": "Đại kết cục · Kho lương thiên hạ",
+   "src": "GE_CAT muoi_doi#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Hiền phi cứu đói",
+   "rx": "Đại kết cục · Hiền phi cứu đói",
+   "src": "GE_CAT muoi_doi#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mua danh cứu đói",
+   "rx": "Đại kết cục · Mua danh cứu đói",
+   "src": "GE_CAT muoi_doi#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Khuyên kẻ đầu cơ",
+   "rx": "Đại kết cục · Khuyên kẻ đầu cơ",
+   "src": "GE_CAT muoi_doi#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Đầu cơ đền tội",
+   "rx": "Đại kết cục · Đầu cơ đền tội",
+   "src": "GE_CAT muoi_doi#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Ân nhân lục cung",
+   "rx": "Đại kết cục · Ân nhân lục cung",
+   "src": "GE_CAT muoi_no#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Chủ nợ lục cung",
+   "rx": "Đại kết cục · Chủ nợ lục cung",
+   "src": "GE_CAT muoi_no#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nợ hóa tình thân",
+   "rx": "Đại kết cục · Nợ hóa tình thân",
+   "src": "GE_CAT muoi_no#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nợ hóa xiềng xích",
+   "rx": "Đại kết cục · Nợ hóa xiềng xích",
+   "src": "GE_CAT muoi_no#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Xóa nợ ra đi",
+   "rx": "Đại kết cục · Xóa nợ ra đi",
+   "src": "GE_CAT muoi_no#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Quỵt nợ ra đi",
+   "rx": "Đại kết cục · Quỵt nợ ra đi",
+   "src": "GE_CAT muoi_no#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thư sinh trả nợ",
+   "rx": "Đại kết cục · Thư sinh trả nợ",
+   "src": "GE_CAT muoi_no#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Trói chàng bằng nợ",
+   "rx": "Đại kết cục · Trói chàng bằng nợ",
+   "src": "GE_CAT muoi_no#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thương người hạ nhân",
+   "rx": "Đại kết cục · Thương người hạ nhân",
+   "src": "GE_CAT cn_chu#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Tớ cũ thành chủ",
+   "rx": "Đại kết cục · Tớ cũ thành chủ",
+   "src": "GE_CAT cn_chu#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Ân chủ trọn đời",
+   "rx": "Đại kết cục · Ân chủ trọn đời",
+   "src": "GE_CAT cn_chu#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nắm thóp chủ cũ",
+   "rx": "Đại kết cục · Nắm thóp chủ cũ",
+   "src": "GE_CAT cn_chu#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Trả áo về quê",
+   "rx": "Đại kết cục · Trả áo về quê",
+   "src": "GE_CAT cn_chu#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Cuỗm vàng về quê",
+   "rx": "Đại kết cục · Cuỗm vàng về quê",
+   "src": "GE_CAT cn_chu#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thay chủ nuôi con",
+   "rx": "Đại kết cục · Thay chủ nuôi con",
+   "src": "GE_CAT cn_chu#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Cướp con của chủ",
+   "rx": "Đại kết cục · Cướp con của chủ",
+   "src": "GE_CAT cn_chu#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Trốn cùng thị vệ",
+   "rx": "Đại kết cục · Trốn cùng thị vệ",
+   "src": "GE_CAT cn_tinh#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Bỏ trốn đêm loạn",
+   "rx": "Đại kết cục · Bỏ trốn đêm loạn",
+   "src": "GE_CAT cn_tinh#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Gạt lệ giữ ngôi",
+   "rx": "Đại kết cục · Gạt lệ giữ ngôi",
+   "src": "GE_CAT cn_tinh#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Chôn tình giữ ngôi",
+   "rx": "Đại kết cục · Chôn tình giữ ngôi",
+   "src": "GE_CAT cn_tinh#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Tình hóa trung nghĩa",
+   "rx": "Đại kết cục · Tình hóa trung nghĩa",
+   "src": "GE_CAT cn_tinh#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Lợi dụng tình xưa",
+   "rx": "Đại kết cục · Lợi dụng tình xưa",
+   "src": "GE_CAT cn_tinh#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Xuất gia đoạn tình",
+   "rx": "Đại kết cục · Xuất gia đoạn tình",
+   "src": "GE_CAT cn_tinh#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Đoạn tình tuyệt nghĩa",
+   "rx": "Đại kết cục · Đoạn tình tuyệt nghĩa",
+   "src": "GE_CAT cn_tinh#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Chưởng sự lục cục",
+   "rx": "Đại kết cục · Chưởng sự lục cục",
+   "src": "GE_CAT cn_ban#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Bà chúa lục cục",
+   "rx": "Đại kết cục · Bà chúa lục cục",
+   "src": "GE_CAT cn_ban#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Tỷ muội trọn đời",
+   "rx": "Đại kết cục · Tỷ muội trọn đời",
+   "src": "GE_CAT cn_ban#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Tỷ muội đồng mưu",
+   "rx": "Đại kết cục · Tỷ muội đồng mưu",
+   "src": "GE_CAT cn_ban#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Cùng nhau ra cung",
+   "rx": "Đại kết cục · Cùng nhau ra cung",
+   "src": "GE_CAT cn_ban#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Trốn cung bỏ bạn",
+   "rx": "Đại kết cục · Trốn cung bỏ bạn",
+   "src": "GE_CAT cn_ban#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Bỏ bạn vì nghĩa",
+   "rx": "Đại kết cục · Bỏ bạn vì nghĩa",
+   "src": "GE_CAT cn_ban#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Bán bạn cầu vinh",
+   "rx": "Đại kết cục · Bán bạn cầu vinh",
+   "src": "GE_CAT cn_ban#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Họ Thẩm phục hưng",
+   "rx": "Đại kết cục · Họ Thẩm phục hưng",
+   "src": "GE_CAT cn_than#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Họ Thẩm báo oán",
+   "rx": "Đại kết cục · Họ Thẩm báo oán",
+   "src": "GE_CAT cn_than#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nữ đế khoan nhân",
+   "rx": "Đại kết cục · Nữ đế khoan nhân",
+   "src": "GE_CAT cn_than#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nữ đế huyết thống",
+   "rx": "Đại kết cục · Nữ đế huyết thống",
+   "src": "GE_CAT cn_than#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mang họ mẹ đi",
+   "rx": "Đại kết cục · Mang họ mẹ đi",
+   "src": "GE_CAT cn_than#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Chối bỏ họ cha",
+   "rx": "Đại kết cục · Chối bỏ họ cha",
+   "src": "GE_CAT cn_than#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Đòi công cho mẹ",
+   "rx": "Đại kết cục · Đòi công cho mẹ",
+   "src": "GE_CAT cn_than#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Báo thù cho mẹ",
+   "rx": "Đại kết cục · Báo thù cho mẹ",
+   "src": "GE_CAT cn_than#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mật sứ hòa bình",
+   "rx": "Đại kết cục · Mật sứ hòa bình",
+   "src": "GE_CAT nc_gian#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Gián điệp hai triều",
+   "rx": "Đại kết cục · Gián điệp hai triều",
+   "src": "GE_CAT nc_gian#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Một lòng Đại Hy",
+   "rx": "Đại kết cục · Một lòng Đại Hy",
+   "src": "GE_CAT nc_gian#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Bán đứng cố quốc",
+   "rx": "Đại kết cục · Bán đứng cố quốc",
+   "src": "GE_CAT nc_gian#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thoát vòng hai nước",
+   "rx": "Đại kết cục · Thoát vòng hai nước",
+   "src": "GE_CAT nc_gian#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Phản cả hai triều",
+   "rx": "Đại kết cục · Phản cả hai triều",
+   "src": "GE_CAT nc_gian#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Tình nơi quán dịch",
+   "rx": "Đại kết cục · Tình nơi quán dịch",
+   "src": "GE_CAT nc_gian#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Câu chàng quán dịch",
+   "rx": "Đại kết cục · Câu chàng quán dịch",
+   "src": "GE_CAT nc_gian#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Cầu nối vạn dặm",
+   "rx": "Đại kết cục · Cầu nối vạn dặm",
+   "src": "GE_CAT nc_su#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Bán tin vạn dặm",
+   "rx": "Đại kết cục · Bán tin vạn dặm",
+   "src": "GE_CAT nc_su#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nữ sứ hai triều",
+   "rx": "Đại kết cục · Nữ sứ hai triều",
+   "src": "GE_CAT nc_su#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nữ sứ hai lòng",
+   "rx": "Đại kết cục · Nữ sứ hai lòng",
+   "src": "GE_CAT nc_su#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Che chở sứ đoàn",
+   "rx": "Đại kết cục · Che chở sứ đoàn",
+   "src": "GE_CAT nc_su#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Sứ đoàn đẫm máu",
+   "rx": "Đại kết cục · Sứ đoàn đẫm máu",
+   "src": "GE_CAT nc_su#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Về nam theo sứ",
+   "rx": "Đại kết cục · Về nam theo sứ",
+   "src": "GE_CAT nc_su#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Trốn nam theo sứ",
+   "rx": "Đại kết cục · Trốn nam theo sứ",
+   "src": "GE_CAT nc_su#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Vũ khúc truyền đời",
+   "rx": "Đại kết cục · Vũ khúc truyền đời",
+   "src": "GE_CAT nc_tuc#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Vũ khúc mê hồn",
+   "rx": "Đại kết cục · Vũ khúc mê hồn",
+   "src": "GE_CAT nc_tuc#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thái hậu ngoại tộc",
+   "rx": "Đại kết cục · Thái hậu ngoại tộc",
+   "src": "GE_CAT nc_tuc#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Ngoại tộc chuyên quyền",
+   "rx": "Đại kết cục · Ngoại tộc chuyên quyền",
+   "src": "GE_CAT nc_tuc#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Lấy đức rửa nhục",
+   "rx": "Đại kết cục · Lấy đức rửa nhục",
+   "src": "GE_CAT nc_tuc#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Trả nhục ngàn lần",
+   "rx": "Đại kết cục · Trả nhục ngàn lần",
+   "src": "GE_CAT nc_tuc#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Về với núi mây",
+   "rx": "Đại kết cục · Về với núi mây",
+   "src": "GE_CAT nc_tuc#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Phóng hỏa về núi",
+   "rx": "Đại kết cục · Phóng hỏa về núi",
+   "src": "GE_CAT nc_tuc#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nữ vương nhân từ",
+   "rx": "Đại kết cục · Nữ vương nhân từ",
+   "src": "GE_CAT nc_vuong#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nữ vương máu lạnh",
+   "rx": "Đại kết cục · Nữ vương máu lạnh",
+   "src": "GE_CAT nc_vuong#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Hai ngai một lòng",
+   "rx": "Đại kết cục · Hai ngai một lòng",
+   "src": "GE_CAT nc_vuong#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Hai ngai một chủ",
+   "rx": "Đại kết cục · Hai ngai một chủ",
+   "src": "GE_CAT nc_vuong#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Hợp nhất hai cõi",
+   "rx": "Đại kết cục · Hợp nhất hai cõi",
+   "src": "GE_CAT nc_vuong#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thôn tính cố quốc",
+   "rx": "Đại kết cục · Thôn tính cố quốc",
+   "src": "GE_CAT nc_vuong#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Công chúa lưu vong",
+   "rx": "Đại kết cục · Công chúa lưu vong",
+   "src": "GE_CAT nc_vuong#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Lưu vong phục thù",
+   "rx": "Đại kết cục · Lưu vong phục thù",
+   "src": "GE_CAT nc_vuong#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thống lĩnh ngự mã",
+   "rx": "Đại kết cục · Thống lĩnh ngự mã",
+   "src": "GE_CAT bd_san#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Ngự mã chuyên quyền",
+   "rx": "Đại kết cục · Ngự mã chuyên quyền",
+   "src": "GE_CAT bd_san#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Tri kỷ lưng ngựa",
+   "rx": "Đại kết cục · Tri kỷ lưng ngựa",
+   "src": "GE_CAT bd_san#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Lưng ngựa mưu sâu",
+   "rx": "Đại kết cục · Lưng ngựa mưu sâu",
+   "src": "GE_CAT bd_san#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mũi tên cứu giá",
+   "rx": "Đại kết cục · Mũi tên cứu giá",
+   "src": "GE_CAT bd_san#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mũi tên trường săn",
+   "rx": "Đại kết cục · Mũi tên trường săn",
+   "src": "GE_CAT bd_san#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Theo đường tơ lụa",
+   "rx": "Đại kết cục · Theo đường tơ lụa",
+   "src": "GE_CAT bd_san#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Cướp ngựa về tây",
+   "rx": "Đại kết cục · Cướp ngựa về tây",
+   "src": "GE_CAT bd_san#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nữ vương Tô Lận",
+   "rx": "Đại kết cục · Nữ vương Tô Lận",
+   "src": "GE_CAT bd_soi#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nữ vương sắt máu",
+   "rx": "Đại kết cục · Nữ vương sắt máu",
+   "src": "GE_CAT bd_soi#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Lập em làm vua",
+   "rx": "Đại kết cục · Lập em làm vua",
+   "src": "GE_CAT bd_soi#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Dựng vua bù nhìn",
+   "rx": "Đại kết cục · Dựng vua bù nhìn",
+   "src": "GE_CAT bd_soi#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Bắt thúc giao triều",
+   "rx": "Đại kết cục · Bắt thúc giao triều",
+   "src": "GE_CAT bd_soi#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Vương thúc phải chết",
+   "rx": "Đại kết cục · Vương thúc phải chết",
+   "src": "GE_CAT bd_soi#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Con trai hai cõi",
+   "rx": "Đại kết cục · Con trai hai cõi",
+   "src": "GE_CAT bd_soi#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Con nắm hai cõi",
+   "rx": "Đại kết cục · Con nắm hai cõi",
+   "src": "GE_CAT bd_soi#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mẹ người chạy nạn",
+   "rx": "Đại kết cục · Mẹ người chạy nạn",
+   "src": "GE_CAT bd_tuyet#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nữ chúa lưu vong",
+   "rx": "Đại kết cục · Nữ chúa lưu vong",
+   "src": "GE_CAT bd_tuyet#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Lương thảo đổi hòa",
+   "rx": "Đại kết cục · Lương thảo đổi hòa",
+   "src": "GE_CAT bd_tuyet#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Lương thảo đổi đất",
+   "rx": "Đại kết cục · Lương thảo đổi đất",
+   "src": "GE_CAT bd_tuyet#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mở ải cứu người",
+   "rx": "Đại kết cục · Mở ải cứu người",
+   "src": "GE_CAT bd_tuyet#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mở cửa Ngọc Môn",
+   "rx": "Đại kết cục · Mở cửa Ngọc Môn",
+   "src": "GE_CAT bd_tuyet#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Khúc ca Nô Nhụ",
+   "rx": "Đại kết cục · Khúc ca Nô Nhụ",
+   "src": "GE_CAT bd_tuyet#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Khúc ca oán hận",
+   "rx": "Đại kết cục · Khúc ca oán hận",
+   "src": "GE_CAT bd_tuyet#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Lời thề trọn vẹn",
+   "rx": "Đại kết cục · Lời thề trọn vẹn",
+   "src": "GE_CAT bd_hen#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Đốt cầu theo chàng",
+   "rx": "Đại kết cục · Đốt cầu theo chàng",
+   "src": "GE_CAT bd_hen#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Gác lời thề cũ",
+   "rx": "Đại kết cục · Gác lời thề cũ",
+   "src": "GE_CAT bd_hen#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Dâng lửa lời thề",
+   "rx": "Đại kết cục · Dâng lửa lời thề",
+   "src": "GE_CAT bd_hen#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nghĩa huynh đường xa",
+   "rx": "Đại kết cục · Nghĩa huynh đường xa",
+   "src": "GE_CAT bd_hen#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Lợi dụng nghĩa huynh",
+   "rx": "Đại kết cục · Lợi dụng nghĩa huynh",
+   "src": "GE_CAT bd_hen#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Đòi công cho chàng",
+   "rx": "Đại kết cục · Đòi công cho chàng",
+   "src": "GE_CAT bd_hen#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Đòi máu cho chàng",
+   "rx": "Đại kết cục · Đòi máu cho chàng",
+   "src": "GE_CAT bd_hen#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mực son tế biển",
+   "rx": "Đại kết cục · Mực son tế biển",
+   "src": "GE_CAT pt_hai#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Sổ tử đòi nợ",
+   "rx": "Đại kết cục · Sổ tử đòi nợ",
+   "src": "GE_CAT pt_hai#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Hải lộ thái bình",
+   "rx": "Đại kết cục · Hải lộ thái bình",
+   "src": "GE_CAT pt_hai#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Chủ thuyền Đông Hải",
+   "rx": "Đại kết cục · Chủ thuyền Đông Hải",
+   "src": "GE_CAT pt_hai#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Giấu đau giữ hòa",
+   "rx": "Đại kết cục · Giấu đau giữ hòa",
+   "src": "GE_CAT pt_hai#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Đổ tội cho biển",
+   "rx": "Đại kết cục · Đổ tội cho biển",
+   "src": "GE_CAT pt_hai#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thuyền về Nan Ba",
+   "rx": "Đại kết cục · Thuyền về Nan Ba",
+   "src": "GE_CAT pt_hai#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Lén thuyền về nước",
+   "rx": "Đại kết cục · Lén thuyền về nước",
+   "src": "GE_CAT pt_hai#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Sứ giả hai trời",
+   "rx": "Đại kết cục · Sứ giả hai trời",
+   "src": "GE_CAT pt_su#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nắm cả hai trời",
+   "rx": "Đại kết cục · Nắm cả hai trời",
+   "src": "GE_CAT pt_su#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Người dịch quốc thư",
+   "rx": "Đại kết cục · Người dịch quốc thư",
+   "src": "GE_CAT pt_su#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Dịch chữ đổi lòng",
+   "rx": "Đại kết cục · Dịch chữ đổi lòng",
+   "src": "GE_CAT pt_su#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Bẻ mưu hại sứ",
+   "rx": "Đại kết cục · Bẻ mưu hại sứ",
+   "src": "GE_CAT pt_su#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Bẻ gãy sứ đoàn",
+   "rx": "Đại kết cục · Bẻ gãy sứ đoàn",
+   "src": "GE_CAT pt_su#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Hồi thư bằng máu",
+   "rx": "Đại kết cục · Hồi thư bằng máu",
+   "src": "GE_CAT pt_su#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thư máu ép vua",
+   "rx": "Đại kết cục · Thư máu ép vua",
+   "src": "GE_CAT pt_su#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Người dựng giới đàn",
+   "rx": "Đại kết cục · Người dựng giới đàn",
+   "src": "GE_CAT pt_tang#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Giới đàn trong tay",
+   "rx": "Đại kết cục · Giới đàn trong tay",
+   "src": "GE_CAT pt_tang#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Đôi mắt của thầy",
+   "rx": "Đại kết cục · Đôi mắt của thầy",
+   "src": "GE_CAT pt_tang#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mượn danh thầy",
+   "rx": "Đại kết cục · Mượn danh thầy",
+   "src": "GE_CAT pt_tang#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Lấy kinh trừ đan",
+   "rx": "Đại kết cục · Lấy kinh trừ đan",
+   "src": "GE_CAT pt_tang#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Kinh đổi lấy quyền",
+   "rx": "Đại kết cục · Kinh đổi lấy quyền",
+   "src": "GE_CAT pt_tang#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thầy sang bể",
+   "rx": "Đại kết cục · Thầy sang bể",
+   "src": "GE_CAT pt_tang#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mượn thuyền thầy trốn",
+   "rx": "Đại kết cục · Mượn thuyền thầy trốn",
+   "src": "GE_CAT pt_tang#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Chủ bến Minh Châu",
+   "rx": "Đại kết cục · Chủ bến Minh Châu",
+   "src": "GE_CAT pt_dang#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nuốt bến Minh Châu",
+   "rx": "Đại kết cục · Nuốt bến Minh Châu",
+   "src": "GE_CAT pt_dang#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Lời hứa kẻ biển",
+   "rx": "Đại kết cục · Lời hứa kẻ biển",
+   "src": "GE_CAT pt_dang#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Giặc biển trong tay",
+   "rx": "Đại kết cục · Giặc biển trong tay",
+   "src": "GE_CAT pt_dang#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Sổ thật trị gian",
+   "rx": "Đại kết cục · Sổ thật trị gian",
+   "src": "GE_CAT pt_dang#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mượn dao giặc",
+   "rx": "Đại kết cục · Mượn dao giặc",
+   "src": "GE_CAT pt_dang#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Luật biển bốn phương",
+   "rx": "Đại kết cục · Luật biển bốn phương",
+   "src": "GE_CAT pt_dang#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Luật biển một chủ",
+   "rx": "Đại kết cục · Luật biển một chủ",
+   "src": "GE_CAT pt_dang#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Rửa oan chín họ",
+   "rx": "Đại kết cục · Rửa oan chín họ",
+   "src": "GE_CAT td_an#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Lật án đổ máu",
+   "rx": "Đại kết cục · Lật án đổ máu",
+   "src": "GE_CAT td_an#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Xử án công minh",
+   "rx": "Đại kết cục · Xử án công minh",
+   "src": "GE_CAT td_an#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Chín họ đền tội",
+   "rx": "Đại kết cục · Chín họ đền tội",
+   "src": "GE_CAT td_an#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Bút sử chép lại",
+   "rx": "Đại kết cục · Bút sử chép lại",
+   "src": "GE_CAT td_an#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Bút sử tùy tay",
+   "rx": "Đại kết cục · Bút sử tùy tay",
+   "src": "GE_CAT td_an#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Tro tàn trở về",
+   "rx": "Đại kết cục · Tro tàn trở về",
+   "src": "GE_CAT td_an#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mang thù trở về",
+   "rx": "Đại kết cục · Mang thù trở về",
+   "src": "GE_CAT td_an#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nhổ gốc trả oan",
+   "rx": "Đại kết cục · Nhổ gốc trả oan",
+   "src": "GE_CAT td_ke#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Diệt tận gốc",
+   "rx": "Đại kết cục · Diệt tận gốc",
+   "src": "GE_CAT td_ke#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Tha để thắng",
+   "rx": "Đại kết cục · Tha để thắng",
+   "src": "GE_CAT td_ke#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Tha để trói",
+   "rx": "Đại kết cục · Tha để trói",
+   "src": "GE_CAT td_ke#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mạng lưới che chở",
+   "rx": "Đại kết cục · Mạng lưới che chở",
+   "src": "GE_CAT td_ke#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mạng lưới bóng đêm",
+   "rx": "Đại kết cục · Mạng lưới bóng đêm",
+   "src": "GE_CAT td_ke#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Theo người cứu mạng",
+   "rx": "Đại kết cục · Theo người cứu mạng",
+   "src": "GE_CAT td_ke#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mượn người trốn án",
+   "rx": "Đại kết cục · Mượn người trốn án",
+   "src": "GE_CAT td_ke#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Tướng môn trở lại",
+   "rx": "Đại kết cục · Tướng môn trở lại",
+   "src": "GE_CAT td_song#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Tướng môn báo oán",
+   "rx": "Đại kết cục · Tướng môn báo oán",
+   "src": "GE_CAT td_song#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mở cổng cứu giá",
+   "rx": "Đại kết cục · Mở cổng cứu giá",
+   "src": "GE_CAT td_song#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mở cổng thành đêm",
+   "rx": "Đại kết cục · Mở cổng thành đêm",
+   "src": "GE_CAT td_song#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Chị em phiêu bạt",
+   "rx": "Đại kết cục · Chị em phiêu bạt",
+   "src": "GE_CAT td_song#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Chị em lục lâm",
+   "rx": "Đại kết cục · Chị em lục lâm",
+   "src": "GE_CAT td_song#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thay em gánh tội",
+   "rx": "Đại kết cục · Thay em gánh tội",
+   "src": "GE_CAT td_song#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Đẩy tội cho người",
+   "rx": "Đại kết cục · Đẩy tội cho người",
+   "src": "GE_CAT td_song#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Oán hóa thành ân",
+   "rx": "Đại kết cục · Oán hóa thành ân",
+   "src": "GE_CAT td_tha#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Giả tha chờ thời",
+   "rx": "Đại kết cục · Giả tha chờ thời",
+   "src": "GE_CAT td_tha#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Báo thù đúng người",
+   "rx": "Đại kết cục · Báo thù đúng người",
+   "src": "GE_CAT td_tha#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Báo thù không tha",
+   "rx": "Đại kết cục · Báo thù không tha",
+   "src": "GE_CAT td_tha#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Cửa Phật buông thù",
+   "rx": "Đại kết cục · Cửa Phật buông thù",
+   "src": "GE_CAT td_tha#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mượn chùa náu thân",
+   "rx": "Đại kết cục · Mượn chùa náu thân",
+   "src": "GE_CAT td_tha#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Yêu con kẻ thù",
+   "rx": "Đại kết cục · Yêu con kẻ thù",
+   "src": "GE_CAT td_tha#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Lấy tình làm dao",
+   "rx": "Đại kết cục · Lấy tình làm dao",
+   "src": "GE_CAT td_tha#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Đức Thọ đời sau",
+   "rx": "Đại kết cục · Đức Thọ đời sau",
+   "src": "GE_CAT ch_co#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Đức Thọ chuyên quyền",
+   "rx": "Đại kết cục · Đức Thọ chuyên quyền",
+   "src": "GE_CAT ch_co#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thay cô giữ nước",
+   "rx": "Đại kết cục · Thay cô giữ nước",
+   "src": "GE_CAT ch_co#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Phản cô đoạt quyền",
+   "rx": "Đại kết cục · Phản cô đoạt quyền",
+   "src": "GE_CAT ch_co#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Cháu hiền giữ lễ",
+   "rx": "Đại kết cục · Cháu hiền giữ lễ",
+   "src": "GE_CAT ch_co#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Cháu ngoan giấu dao",
+   "rx": "Đại kết cục · Cháu ngoan giấu dao",
+   "src": "GE_CAT ch_co#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Cửa thiền thay cô",
+   "rx": "Đại kết cục · Cửa thiền thay cô",
+   "src": "GE_CAT ch_co#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mượn thiền tránh họa",
+   "rx": "Đại kết cục · Mượn thiền tránh họa",
+   "src": "GE_CAT ch_co#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thần y hậu cung",
+   "rx": "Đại kết cục · Thần y hậu cung",
+   "src": "GE_CAT ch_benh#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Độc y hậu cung",
+   "rx": "Đại kết cục · Độc y hậu cung",
+   "src": "GE_CAT ch_benh#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Chén thuốc hồi sinh",
+   "rx": "Đại kết cục · Chén thuốc hồi sinh",
+   "src": "GE_CAT ch_benh#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Chén thuốc cuối cùng",
+   "rx": "Đại kết cục · Chén thuốc cuối cùng",
+   "src": "GE_CAT ch_benh#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Hiếu nữ cầm ấn",
+   "rx": "Đại kết cục · Hiếu nữ cầm ấn",
+   "src": "GE_CAT ch_benh#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mượn bệnh cầm ấn",
+   "rx": "Đại kết cục · Mượn bệnh cầm ấn",
+   "src": "GE_CAT ch_benh#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Theo cô hành cung",
+   "rx": "Đại kết cục · Theo cô hành cung",
+   "src": "GE_CAT ch_benh#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Giam cô hành cung",
+   "rx": "Đại kết cục · Giam cô hành cung",
+   "src": "GE_CAT ch_benh#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Chị em một nhà",
+   "rx": "Đại kết cục · Chị em một nhà",
+   "src": "GE_CAT ch_ho#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Em làm bóng chị",
+   "rx": "Đại kết cục · Em làm bóng chị",
+   "src": "GE_CAT ch_ho#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Phượng nghi thiên hạ",
+   "rx": "Đại kết cục · Phượng nghi thiên hạ",
+   "src": "GE_CAT ch_ho#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Một phượng duy nhất",
+   "rx": "Đại kết cục · Một phượng duy nhất",
+   "src": "GE_CAT ch_ho#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nhường ngôi cho em",
+   "rx": "Đại kết cục · Nhường ngôi cho em",
+   "src": "GE_CAT ch_ho#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Bỏ em gánh họa",
+   "rx": "Đại kết cục · Bỏ em gánh họa",
+   "src": "GE_CAT ch_ho#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Họ ngoại trăm năm",
+   "rx": "Đại kết cục · Họ ngoại trăm năm",
+   "src": "GE_CAT ch_ho#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Họ ngoại lộng quyền",
+   "rx": "Đại kết cục · Họ ngoại lộng quyền",
+   "src": "GE_CAT ch_ho#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Trả lại công bằng",
+   "rx": "Đại kết cục · Trả lại công bằng",
+   "src": "GE_CAT ch_bi#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Bí mật thành dao",
+   "rx": "Đại kết cục · Bí mật thành dao",
+   "src": "GE_CAT ch_bi#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Giữ kín che người",
+   "rx": "Đại kết cục · Giữ kín che người",
+   "src": "GE_CAT ch_bi#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Giữ kín, nắm thóp",
+   "rx": "Đại kết cục · Giữ kín, nắm thóp",
+   "src": "GE_CAT ch_bi#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mẹ con nhận nhau",
+   "rx": "Đại kết cục · Mẹ con nhận nhau",
+   "src": "GE_CAT ch_bi#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Cướp mẹ về mình",
+   "rx": "Đại kết cục · Cướp mẹ về mình",
+   "src": "GE_CAT ch_bi#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Hoàng tử thất lạc",
+   "rx": "Đại kết cục · Hoàng tử thất lạc",
+   "src": "GE_CAT ch_bi#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Hoàng tử giả danh",
+   "rx": "Đại kết cục · Hoàng tử giả danh",
+   "src": "GE_CAT ch_bi#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thi tiên đương thời",
+   "rx": "Đại kết cục · Thi tiên đương thời",
+   "src": "GE_CAT thd_tho#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thi ma đương thời",
+   "rx": "Đại kết cục · Thi ma đương thời",
+   "src": "GE_CAT thd_tho#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Ngòi bút cứu người",
+   "rx": "Đại kết cục · Ngòi bút cứu người",
+   "src": "GE_CAT thd_tho#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Ngòi bút giết người",
+   "rx": "Đại kết cục · Ngòi bút giết người",
+   "src": "GE_CAT thd_tho#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thơ theo gió đi",
+   "rx": "Đại kết cục · Thơ theo gió đi",
+   "src": "GE_CAT thd_tho#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thơ đốt ra đi",
+   "rx": "Đại kết cục · Thơ đốt ra đi",
+   "src": "GE_CAT thd_tho#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Tri âm thiên tử",
+   "rx": "Đại kết cục · Tri âm thiên tử",
+   "src": "GE_CAT thd_tho#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thi nữ dắt vua",
+   "rx": "Đại kết cục · Thi nữ dắt vua",
+   "src": "GE_CAT thd_tho#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nữ đế biến pháp",
+   "rx": "Đại kết cục · Nữ đế biến pháp",
+   "src": "GE_CAT thd_sach#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nữ đế khắc nghiệt",
+   "rx": "Đại kết cục · Nữ đế khắc nghiệt",
+   "src": "GE_CAT thd_sach#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Giấu sách giữ ngôi",
+   "rx": "Đại kết cục · Giấu sách giữ ngôi",
+   "src": "GE_CAT thd_sach#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Đốt sách giữ ngôi",
+   "rx": "Đại kết cục · Đốt sách giữ ngôi",
+   "src": "GE_CAT thd_sach#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mở trường dạy chữ",
+   "rx": "Đại kết cục · Mở trường dạy chữ",
+   "src": "GE_CAT thd_sach#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mở trường kết đảng",
+   "rx": "Đại kết cục · Mở trường kết đảng",
+   "src": "GE_CAT thd_sach#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Gánh sách theo chàng",
+   "rx": "Đại kết cục · Gánh sách theo chàng",
+   "src": "GE_CAT thd_sach#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Trộm sách theo chàng",
+   "rx": "Đại kết cục · Trộm sách theo chàng",
+   "src": "GE_CAT thd_sach#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Trạng nguyên phò tá",
+   "rx": "Đại kết cục · Trạng nguyên phò tá",
+   "src": "GE_CAT thd_tro#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Trạng nguyên con rối",
+   "rx": "Đại kết cục · Trạng nguyên con rối",
+   "src": "GE_CAT thd_tro#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Môn sinh đầy triều",
+   "rx": "Đại kết cục · Môn sinh đầy triều",
+   "src": "GE_CAT thd_tro#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Môn sinh thành phe",
+   "rx": "Đại kết cục · Môn sinh thành phe",
+   "src": "GE_CAT thd_tro#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Theo trò đi xa",
+   "rx": "Đại kết cục · Theo trò đi xa",
+   "src": "GE_CAT thd_tro#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Bỏ hết theo trò",
+   "rx": "Đại kết cục · Bỏ hết theo trò",
+   "src": "GE_CAT thd_tro#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Khoa trường vạch tội",
+   "rx": "Đại kết cục · Khoa trường vạch tội",
+   "src": "GE_CAT thd_tro#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Khoa trường thanh trừng",
+   "rx": "Đại kết cục · Khoa trường thanh trừng",
+   "src": "GE_CAT thd_tro#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Đế sư thiên tử",
+   "rx": "Đại kết cục · Đế sư thiên tử",
+   "src": "GE_CAT thd_hoc#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Đế sư lộng quyền",
+   "rx": "Đại kết cục · Đế sư lộng quyền",
+   "src": "GE_CAT thd_hoc#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Dạy vua thành người",
+   "rx": "Đại kết cục · Dạy vua thành người",
+   "src": "GE_CAT thd_hoc#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Dạy vua thành rối",
+   "rx": "Đại kết cục · Dạy vua thành rối",
+   "src": "GE_CAT thd_hoc#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Thư viện bên hồ",
+   "rx": "Đại kết cục · Thư viện bên hồ",
+   "src": "GE_CAT thd_hoc#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Ôm sách cấm đi",
+   "rx": "Đại kết cục · Ôm sách cấm đi",
+   "src": "GE_CAT thd_hoc#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mẹ nuôi Đông cung",
+   "rx": "Đại kết cục · Mẹ nuôi Đông cung",
+   "src": "GE_CAT thd_hoc#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mẹ nuôi tranh ngôi",
+   "rx": "Đại kết cục · Mẹ nuôi tranh ngôi",
+   "src": "GE_CAT thd_hoc#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Bóng che ghế chủ",
+   "rx": "Đại kết cục · Bóng che ghế chủ",
+   "src": "GE_CAT cnv_chu#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Bóng sau ghế chủ",
+   "rx": "Đại kết cục · Bóng sau ghế chủ",
+   "src": "GE_CAT cnv_chu#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nghĩa chủ tình sâu",
+   "rx": "Đại kết cục · Nghĩa chủ tình sâu",
+   "src": "GE_CAT cnv_chu#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Chủ tớ đồng tội",
+   "rx": "Đại kết cục · Chủ tớ đồng tội",
+   "src": "GE_CAT cnv_chu#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Giữ kín ra cung",
+   "rx": "Đại kết cục · Giữ kín ra cung",
+   "src": "GE_CAT cnv_chu#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Bán tin ra cung",
+   "rx": "Đại kết cục · Bán tin ra cung",
+   "src": "GE_CAT cnv_chu#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Rửa oan người cũ",
+   "rx": "Đại kết cục · Rửa oan người cũ",
+   "src": "GE_CAT cnv_chu#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Trả oán người cũ",
+   "rx": "Đại kết cục · Trả oán người cũ",
+   "src": "GE_CAT cnv_chu#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Chị em ra cung",
+   "rx": "Đại kết cục · Chị em ra cung",
+   "src": "GE_CAT cnv_ban#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Một mình ra cung",
+   "rx": "Đại kết cục · Một mình ra cung",
+   "src": "GE_CAT cnv_ban#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Kéo bạn cùng lên",
+   "rx": "Đại kết cục · Kéo bạn cùng lên",
+   "src": "GE_CAT cnv_ban#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Bước lên vai bạn",
+   "rx": "Đại kết cục · Bước lên vai bạn",
+   "src": "GE_CAT cnv_ban#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Kim chỉ thành danh",
+   "rx": "Đại kết cục · Kim chỉ thành danh",
+   "src": "GE_CAT cnv_ban#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Kim chỉ cướp danh",
+   "rx": "Đại kết cục · Kim chỉ cướp danh",
+   "src": "GE_CAT cnv_ban#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Về làng theo chàng",
+   "rx": "Đại kết cục · Về làng theo chàng",
+   "src": "GE_CAT cnv_ban#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Bỏ bạn theo chàng",
+   "rx": "Đại kết cục · Bỏ bạn theo chàng",
+   "src": "GE_CAT cnv_ban#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Chiếc ô chiều mưa",
+   "rx": "Đại kết cục · Chiếc ô chiều mưa",
+   "src": "GE_CAT cnv_mat#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Chiếc ô giăng bẫy",
+   "rx": "Đại kết cục · Chiếc ô giăng bẫy",
+   "src": "GE_CAT cnv_mat#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Tỳ nữ mẫu nghi",
+   "rx": "Đại kết cục · Tỳ nữ mẫu nghi",
+   "src": "GE_CAT cnv_mat#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Tỳ nữ lên phượng",
+   "rx": "Đại kết cục · Tỳ nữ lên phượng",
+   "src": "GE_CAT cnv_mat#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Gác ô ra đi",
+   "rx": "Đại kết cục · Gác ô ra đi",
+   "src": "GE_CAT cnv_mat#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Bẻ ô ra đi",
+   "rx": "Đại kết cục · Bẻ ô ra đi",
+   "src": "GE_CAT cnv_mat#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Tỷ muội cùng hầu",
+   "rx": "Đại kết cục · Tỷ muội cùng hầu",
+   "src": "GE_CAT cnv_mat#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Mượn chị lên cao",
+   "rx": "Đại kết cục · Mượn chị lên cao",
+   "src": "GE_CAT cnv_mat#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Tổng quản lục cung",
+   "rx": "Đại kết cục · Tổng quản lục cung",
+   "src": "GE_CAT cnv_ma#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Tổng quản hà khắc",
+   "rx": "Đại kết cục · Tổng quản hà khắc",
+   "src": "GE_CAT cnv_ma#1"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nội vụ thanh liêm",
+   "rx": "Đại kết cục · Nội vụ thanh liêm",
+   "src": "GE_CAT cnv_ma#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Tay nắm Nội vụ",
+   "rx": "Đại kết cục · Tay nắm Nội vụ",
+   "src": "GE_CAT cnv_ma#2"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Ma ma về quê",
+   "rx": "Đại kết cục · Ma ma về quê",
+   "src": "GE_CAT cnv_ma#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Ma ma cuỗm bạc",
+   "rx": "Đại kết cục · Ma ma cuỗm bạc",
+   "src": "GE_CAT cnv_ma#3"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Phụng Thánh phu nhân",
+   "rx": "Đại kết cục · Phụng Thánh phu nhân",
+   "src": "GE_CAT cnv_ma#4"
+  },
+  {
+   "kind": "ending",
+   "text": "Đại kết cục · Nhũ mẫu nhiếp chính",
+   "rx": "Đại kết cục · Nhũ mẫu nhiếp chính",
+   "src": "GE_CAT cnv_ma#4"
+  }
+ ],
+ "dynamic": [
+  {
+   "kind": "ending",
+   "call": "over(h)",
+   "src": "j32.js:19"
+  },
+  {
+   "kind": "death",
+   "call": "die(why)",
+   "src": "j8.js:95"
+  },
+  {
+   "kind": "death",
+   "call": "deathSentence(why)",
+   "src": "j8.js:380"
+  },
+  {
+   "kind": "death",
+   "call": "deathSentence(p,why)",
+   "src": "j8.js:380"
+  },
+  {
+   "kind": "ending",
+   "call": "over(d.exit[2])",
+   "src": "j97.js:280"
+  },
+  {
+   "kind": "ending",
+   "call": "over(e.h)",
+   "src": "j99succ.js:174"
+  },
+  {
+   "kind": "death",
+   "call": "die(why)",
+   "src": "jkc.js:509"
+  },
+  {
+   "kind": "ending",
+   "call": "over(h)",
+   "src": "jkc.js:508"
+  },
+  {
+   "kind": "ending",
+   "call": "over(h)",
+   "src": "jkc2.js:437"
+  },
+  {
+   "kind": "death",
+   "call": "die(why)",
+   "src": "jmort.js:63"
+  },
+  {
+   "kind": "death",
+   "call": "kill(p,`Ngươi ${t}`,K)",
+   "src": "jmort.js:109"
+  },
+  {
+   "kind": "death",
+   "call": "kill(p,t,K)",
+   "src": "jmort.js:109"
+  },
+  {
+   "kind": "death",
+   "call": "kill(p,why,kidSet())",
+   "src": "jmort.js:119"
+  },
+  {
+   "kind": "ending",
+   "call": "over(…)",
+   "src": "jroute.js:5"
+  }
+ ],
+ "ky": [
+  {
+   "id": "ma_phe",
+   "t": "Hương cũ Trường Môn"
+  },
+  {
+   "id": "ma_giao",
+   "t": "Sổ tay giáo tập"
+  },
+  {
+   "id": "ma_nhac",
+   "t": "Khúc đàn đêm vườn ngự"
+  },
+  {
+   "id": "ma_hoa",
+   "t": "Họa sư bên hàng liễu"
+  },
+  {
+   "id": "ma_ty",
+   "t": "Phương thuốc gia truyền"
+  },
+  {
+   "id": "ma_co",
+   "t": "Ván cờ tiên đế"
+  },
+  {
+   "id": "ma_lao",
+   "t": "Hiên Phật đường"
+  },
+  {
+   "id": "vat_lac",
+   "t": "Ngọc rơi trên lối"
+  },
+  {
+   "id": "vat_minh",
+   "t": "Của mình tìm lại"
+  },
+  {
+   "id": "vat_cu",
+   "t": "Di vật người đã khuất"
+  },
+  {
+   "id": "vat_thu",
+   "t": "Con vật lạc chủ"
+  },
+  {
+   "id": "vat_chung",
+   "t": "Lá thư trong chậu lan"
+  },
+  {
+   "id": "vat_ngu",
+   "t": "Món quý để dành"
+  },
+  {
+   "id": "de_mua",
+   "t": "Chung áo dưới mưa"
+  },
+  {
+   "id": "de_but",
+   "t": "Nét ngự bút"
+  },
+  {
+   "id": "de_den",
+   "t": "Điều ước hoa đăng"
+  },
+  {
+   "id": "de_su",
+   "t": "Câu hỏi của sứ thần"
+  },
+  {
+   "id": "th_kinh",
+   "t": "Sớm mai Phật đường"
+  },
+  {
+   "id": "th_tham",
+   "t": "Bánh trung thu có thư"
+  },
+  {
+   "id": "th_chi",
+   "t": "Lời dặn Đoan ngọ"
+  },
+  {
+   "id": "th_sao",
+   "t": "Đêm Thất tịch"
+  },
+  {
+   "id": "sv_den",
+   "t": "Đèn rơi cứu người"
+  },
+  {
+   "id": "sv_tuyet",
+   "t": "Đêm tuyết người gác cổng"
+  },
+  {
+   "id": "sv_co",
+   "t": "Cô cô để mắt"
+  },
+  {
+   "id": "sv_tre",
+   "t": "Hoàng tử lạc đường"
+  }
+ ],
+ "ranks": [
+  "Đáp ứng",
+  "Thường tại",
+  "Quý nhân",
+  "Tần",
+  "Phi",
+  "Quý phi",
+  "Hoàng quý phi",
+  "Hoàng hậu"
+ ],
+ "ill": [
+  "Phong hàn",
+  "Sốt rét",
+  "Kiết lỵ",
+  "Lao phổi",
+  "Đậu mùa",
+  "Tâm bệnh",
+  "Hậu sản",
+  "Trúng độc mãn tính",
+  "Chứng mất ngủ",
+  "Long thể bất an",
+  "Bệnh già",
+  "Trọng bệnh",
+  "Thủy đậu"
+ ],
+ "kitOdds": [
+  "Liều",
+  "Khó",
+  "Năm ăn năm thua",
+  "Khá chắc",
+  "Chắc",
+  "Rất chắc",
+  "Nắm chắc"
+ ],
+ "counts": {
+  "deaths": 63,
+  "endings": 388,
+  "dynamic": 14,
+  "ky": 25
+ },
+ "roads": {
+  "tt": [
+   {
+    "id": "tt_co",
+    "ok": true
+   },
+   {
+    "id": "tt_oan",
+    "ok": true
+   },
+   {
+    "id": "tt_tranh",
+    "ok": true
+   },
+   {
+    "id": "tt_mat",
+    "ok": false
+   }
+  ],
+  "dtq": [
+   {
+    "id": "dtq_bien",
+    "ok": true
+   },
+   {
+    "id": "dtq_vu",
+    "ok": true
+   },
+   {
+    "id": "dtq_binh",
+    "ok": true
+   },
+   {
+    "id": "dtq_huynh",
+    "ok": true
+   }
+  ],
+  "muoi": [
+   {
+    "id": "muoi_tuoc",
+    "ok": true
+   },
+   {
+    "id": "muoi_lau",
+    "ok": true
+   },
+   {
+    "id": "muoi_doi",
+    "ok": true
+   },
+   {
+    "id": "muoi_no",
+    "ok": true
+   }
+  ],
+  "cn": [
+   {
+    "id": "cn_chu",
+    "ok": true
+   },
+   {
+    "id": "cn_tinh",
+    "ok": true
+   },
+   {
+    "id": "cn_ban",
+    "ok": true
+   },
+   {
+    "id": "cn_than",
+    "ok": true
+   }
+  ],
+  "nc": [
+   {
+    "id": "nc_gian",
+    "ok": true
+   },
+   {
+    "id": "nc_su",
+    "ok": true
+   },
+   {
+    "id": "nc_tuc",
+    "ok": true
+   },
+   {
+    "id": "nc_vuong",
+    "ok": true
+   }
+  ],
+  "td": [
+   {
+    "id": "td_an",
+    "ok": true
+   },
+   {
+    "id": "td_ke",
+    "ok": true
+   },
+   {
+    "id": "td_song",
+    "ok": true
+   },
+   {
+    "id": "td_tha",
+    "ok": true
+   }
+  ],
+  "ch": [
+   {
+    "id": "ch_co",
+    "ok": true
+   },
+   {
+    "id": "ch_benh",
+    "ok": false
+   },
+   {
+    "id": "ch_ho",
+    "ok": true
+   },
+   {
+    "id": "ch_bi",
+    "ok": true
+   }
+  ],
+  "thd": [
+   {
+    "id": "thd_tho",
+    "ok": true
+   },
+   {
+    "id": "thd_sach",
+    "ok": true
+   },
+   {
+    "id": "thd_tro",
+    "ok": true
+   },
+   {
+    "id": "thd_hoc",
+    "ok": false
+   }
+  ],
+  "cnv": [
+   {
+    "id": "cnv_chu",
+    "ok": true
+   },
+   {
+    "id": "cnv_ban",
+    "ok": true
+   },
+   {
+    "id": "cnv_mat",
+    "ok": true
+   },
+   {
+    "id": "cnv_ma",
+    "ok": true
+   }
+  ],
+  "pf": [
+   {
+    "id": "pt_hai",
+    "ok": true
+   },
+   {
+    "id": "pt_su",
+    "ok": true
+   },
+   {
+    "id": "pt_tang",
+    "ok": true
+   },
+   {
+    "id": "pt_dang",
+    "ok": true
+   }
+  ],
+  "bd": [
+   {
+    "id": "bd_san",
+    "ok": true
+   },
+   {
+    "id": "bd_soi",
+    "ok": true
+   },
+   {
+    "id": "bd_tuyet",
+    "ok": true
+   },
+   {
+    "id": "bd_hen",
+    "ok": true
+   }
+  ]
+ },
+ "game": "https://thientran2711.github.io/cung-tuong-mong/index.html"
+}

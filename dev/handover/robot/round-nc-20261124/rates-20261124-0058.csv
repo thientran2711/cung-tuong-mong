@@ -1,0 +1,11 @@
+kiep_no,origin,road,bot,life,seed,real_min,cum_min,years,age,max_rank,ending,ending_type,group,death_cause,cause_src,who,framed_before,buoi,preg,sons,daughters,kid_deaths,heir_made,nights,sung_peak,bac_peak,bac_end,het_bac,mini_games,ky_ngo,events_distinct,bugs,bot_min
+1,nc,nc_gian,lazy,1,2270595614,939.5,939.5,11.08,31,Phi,Hồng nhan bạc mệnh,death,death,"${pre}Tân Thái hậu ${v.name} xét lại chuyện cũ (khả năng: ${chanceLo(o)}), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",j3.js:163,execution,0,1944,1,0,0,0,0,102,100,185,5,1,18,12,316,19,17.81
+1,nc,nc_gian,schemer,1,110002505,876.1,876.1,2.25,20,Quý nhân,Hồng nhan bạc mệnh,death,death,Bị ban chết vì vu ${k.name} trù ẻo thánh thượng,j8.js:152,execution,0,402,0,0,0,0,0,4,100,185,1,1,0,7,157,8,3.23
+1,nc,nc_gian,skilled,1,3248122326,1641.5,1641.5,6.58,24,Phi,Thái phi,death,death,Thái phi,j3.js:156,other,,1164,0,0,0,0,0,9,100,455,1,1,276,14,268,23,11.74
+1,nc,nc_su,lover,1,3411297707,2287.4,2287.4,,27,Hoàng hậu,CAP,cap,no ending,,,,,1653,0,0,0,0,0,19,100,871,2,1,337,15,322,21,30.18
+1,nc,nc_su,random,1,3857262870,225.3,225.3,0.83,18,Tần,Xuất gia,leave,thường,,,,,177,0,0,0,0,0,1,37,150,7,1,20,4,83,10,2.28
+1,nc,nc_su,speed,1,1086252990,208.4,208.4,,20,Quý nhân,TIMEOUT,stuck,no ending,,,,,20,0,0,0,0,0,0,45,127,4,0,10,0,31,4,1.07
+1,nc,nc_tuc,greedy,1,2020792563,3600.2,3600.2,,34,Hoàng hậu,CAP,cap,no ending,,,,,2522,1,340,0,1,0,107,100,905,13,1,588,17,403,23,30.88
+1,nc,nc_tuc,scholar,1,4239854445,3399.2,3399.2,,33,Quý phi,CAP,cap,no ending,,,,,2246,1,35,0,0,0,46,100,185,6,1,602,14,309,19,30.07
+1,nc,nc_vuong,cautious,1,1270482857,3731.1,3731.1,13.17,33,Hoàng quý phi,Hồng nhan bạc mệnh,death,death,"${pre}Tân Thái hậu ${v.name} xét lại chuyện cũ (khả năng: ${chanceLo(o)}), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",j3.js:163,execution,0,2299,0,0,0,0,0,56,100,240,6,1,1032,15,326,21,26
+1,nc,nc_vuong,rebel,1,454280370,778.2,778.2,3.67,23,Hoàng quý phi,Hồng nhan bạc mệnh,death,death,Hồng nhan bạc mệnh,j3.js:166,childbirth,0,645,3,36,0,0,0,29,100,772,2,1,182,9,205,11,7.35
