@@ -12,6 +12,6 @@ const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const SV=pr
   window.__rs=()=>{Storage.prototype.setItem=o};window.__n=()=>n;window.__jqoff=1;window.__spreadOff=1;Q.length=0;/* jqsave holds a save while an unsaveable dialog waits */try{save()}catch(e){}return {ws:typeof writeSlot}});
  await p.waitForTimeout(2500);/* save() may be deferred by its wrappers (co-op / thin layers) */
  Object.assign(r,await p.evaluate(()=>{const a=__n();try{if(typeof writeSlot==='function')writeSlot(2,'{"v":6}')}catch(e){}const c=__n();__rs();return {save:a,cloud:c-a,thrown:window.__th,keys:window.__tk,stack:new Error().stack.split('\n').length}}));
- ok(r.save>=1,'j6 save(): a refused write shows the saveBlocked kit notice',r);await p.waitForTimeout(500);ok(await W(),'the notice is on screen (kit notice, VANPHONG words)');
+ ok(r.save>=1,'j6 save(): a refused write shows the saveBlocked kit notice',r);await p.waitForTimeout(500);/* E81r: a dialog opened by the loaded life (e.g. Bộ sưu tập) holds the chip in the bell until it closes (kit notice rule) — close it, then look */await p.evaluate(()=>{try{Q.length=0;closeModal()}catch(e){}try{render()}catch(e){}});await p.waitForTimeout(800);ok(await W(),'the notice is on screen (kit notice, VANPHONG words)');
  ok(r.ws!=='function'||r.cloud>=1,'jcloud writeSlot(): a refused write shows the notice (or writeSlot is module-private: covered by the scan)',r);
  ok(!pe.length,'no page error',pe.slice(0,3));await b.close();console.log(bad?`FAIL ${bad}`:'ALL OK');process.exit(bad?1:0)})();
