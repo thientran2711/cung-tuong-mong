@@ -1504,3 +1504,4 @@ FIX promo-build-2 r1 (opus BIG; briefs/D-promo-build-2-fix.md; from de24c1ae) | 
 | ROBOT-COOP RUNNER U18 pairs 17-18 SWAP=1 | dev/handover/robot/coop-U18-* | FOREMAN E (child3) | (queued) | QUEUED | 24/11 11:58Z |
 | ROBOT-COOP RUNNER U19 pairs 19-20 SWAP=0 | dev/handover/robot/coop-U19-* | FOREMAN E (child3) | (queued) | QUEUED | 24/11 11:58Z |
 | ROBOT-COOP RUNNER U20 pairs 19-20 SWAP=1 | dev/handover/robot/coop-U20-* | FOREMAN E (child3) | (queued) | QUEUED | 24/11 11:58Z |
+rv net-build r2 (opus BIG; briefs/D-net-build-review-r2.md; target e41f4f79) | review/net-build-rv | session_01D3E3NaeN3VTQuhYDqui8cJ | RUNNING | 24/11 12:00Z (Foreman D depth 3)
