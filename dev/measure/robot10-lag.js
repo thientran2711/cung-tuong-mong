@@ -90,7 +90,7 @@ function section(L,opts){opts=opts||{};const md=[];const rec=[];const csv=[['kin
   rows.forEach(r=>csv.push(['turn','bot',r[0],r[1],r[2],r[3],r[4]]));
   md.push(nb.length?tbl(['game-year','buổi changes','buổi p50 ms','buổi p95','buổi max','months','month p50 ms','month p95','month max'],rows):'No data.','');
   const slow=pct(nb,95);if(slow!=null&&slow>(BUD.tgt.tapP95||200))rec.push(['buổi change p95 '+f0(slow)+' ms (render off, desktop CPU)','robot10-in.js nextBuoi wrapper = the game\'s nextBuoi(); per-year table above shows if it grows','profile nextBuoi (jnf / j-turn code): keep per-buổi work O(1) in save size; defer journal / NPC upkeep','a turn the player never waits on']);
-  const g=BANDS.filter(b=>byY[b]&&byY[b].nb.length>20).map(b=>pct(byY[b].nb,95));if(g.length>=2&&g[g.length-1]>1.6*g[0])rec.push(['buổi p95 grows '+f0(g[0])+' → '+f0(g[g.length-1])+' ms from the first to the last year band','nextBuoi: something scales with the save (journal / log arrays, NPC list, history)','cap or compact the growing array (ring buffer; prune the journal) in the offending function','turn time flat over a whole life']);}
+  const g=BANDS.filter(b=>byY[b]&&byY[b].nb.length>60).map(b=>pct(byY[b].nb,95));if(g.length>=2&&g[g.length-1]>1.6*g[0])rec.push(['buổi p95 grows '+f0(g[0])+' → '+f0(g[g.length-1])+' ms from the first to the last year band','nextBuoi: something scales with the save (journal / log arrays, NPC list, history)','cap or compact the growing array (ring buffer; prune the journal) in the offending function','turn time flat over a whole life']);}
  /* ---- memory ---- */
  md.push('### Solo · memory growth (bot page JS heap / DOM nodes / listeners; real pages) per game-year and per real hour','');
  {const rows=[],per=[];for(const r of lives){const m=(lagOf(r).bot||{}).mem||[];const s=m.slice(1);if(s.length<4)continue;const a=s[0],z=s[s.length-1],hr=(z[0]-a[0])/3600,yr=(z[5]||0)-(a[5]||0);
@@ -123,12 +123,14 @@ function section(L,opts){opts=opts||{};const md=[];const rec=[];const csv=[['kin
  md.push('### Known game findings folded into LAG (report only; found by the part-2 harness, 23/11)','',
   '- Real-page save load leaks ~5–6k DOM nodes + 600–800 JS listeners per load (RECYCLE=1 re-opens the pages to keep the box alive).','- Bot page JS heap 56 MB → ~1 GB with ~350k-node DOM bursts while render is off.','');
  md.push('### LAG RECOMMENDATIONS (finding → cause / file:line → proposed fix → expected effect)','');
+ rec.push(['Dư đồ («go» tab) on a PLAYED save takes ~12 s at CPU ×1, ~39 s at ×4 (a fresh life: 0.25–0.4 s); the second open costs the same, pictures blocked or not (profile of the tap, 500 µs sampling)','kmSolve (map label / path solver) dev/build/j38.js:19 with its callers hardAt / segR / ovP / costAt / search / geo; called from j38.js:83 up to 5× per open (kmSolve(its,K,W,undefined,vp) then 4 retries); the result cache window.__mapSolC[ck] is not hit on the 2nd open (same cost again)','solve the labels once per save change, not per open: make the cache key stable (ck without volatile fields), cap the first pass by the same performance.now() budget as the retries, pre-solve off the tap (idle / on load), keep the last good layout while a new one is solved','Dư đồ opens in < 400 ms on a played save']);
  rec.push(['real-page save load leaks ~5-6k DOM nodes + 600-800 listeners per load (part 2 finding)','loadSlot / start() re-render path (see reports/robot10-harness.md Part 2 for the measurements)','remove the previous screen\'s nodes + listeners before building the loaded one (one teardown function in the kit)','a long session of loads / Tiếp tục stays flat']);
  md.push(tbl(['finding','cause / file:line','proposed fix','expected effect'],rec.map(r=>r.map(x=>String(x).replace(/\n/g,' ')))),'');
  return{md,csv}}
 
 /* co-op lag JSON files (coop-lag.js --out) in folders */
 function coopFromDirs(dirs){const out=[];const walk=f=>{let st;try{st=fs.statSync(f)}catch(e){return}if(st.isDirectory()){for(const x of fs.readdirSync(f))if(x!=='saves'&&x!=='shots')walk(path.join(f,x))}
+  else if(/anim-coop.*\.json$/.test(f)){try{const j=JSON.parse(fs.readFileSync(f,'utf8'));if(j&&j.baseline){out.push({metrics:j.baseline,cpu:j.cpu,_f:path.basename(f)+' (baseline, no figures)'})}}catch(e){}}
   else if(/coop-lag.*\.json$/.test(f)){try{const j=JSON.parse(fs.readFileSync(f,'utf8'));if(j&&j.metrics){j._f=path.basename(f);out.push(j)}}catch(e){}}};dirs.forEach(walk);return out}
 
 /* ---- ANIM BUDGET (reads anim-*.json written by robot10-anim.js) ---- */
