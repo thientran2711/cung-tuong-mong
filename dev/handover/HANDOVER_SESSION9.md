@@ -2804,3 +2804,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (03:37Z wake) ctx ~9 %. LOAD: main running 3 (LC9 landing, KK16 kit requests, MAP-PERF) | B free 6 (6/12) | C waiting sếp picks | D busy | E busy | F free (MGSKIN 37/39 done; no art order) | moved: duho/den wiring → B. LIVE = b7598e72 (map-label-overlap, FF). MAP-PERF worker session_01V1ZZH1LjcZxsUARKRyfdN1 (opus; Dư đồ 12 s on played save, kmSolve cache miss, + phone map settle ticket). KIT REQUEST kinh/may board slot → KK16.
 - FROM LC9 (03:35Z 24/11): LANDED map-label-overlap b7598e7219aa2541ddd9f392b9bac46083cbd81f. LIVE = b7598e72.
 - FROM LC9 (03:52Z 24/11): LANDED kit-dhcapfit 2a9125bf69bf481a3472d029b3ad8fa15c2cd077. LIVE = 2a9125bf.
+- (03:53Z) sếp: videos too slow, wants play-speed option → sent 2× copies (selscene + m3-flow) + mock-stage page link (browser player has speed). RULE for main: every video to sếp = also a 2× copy, or the CDN page link.
