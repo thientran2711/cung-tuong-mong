@@ -82,7 +82,11 @@ const LACK={musk:t=>!t.preg||t.hidden?"nàng không có thai (ngươi biết)":"
 /* her portrait in the death dialog is labelled by her name and rank */
 (function(){const p0=pMe;pMe=function(){const f=p0.apply(this,arguments);f.rw=(S.rank>=7?"Hoàng hậu":RANKS[S.rank].n);return f}})();
 /* older eunuchs are not 'Tiểu': Lão X; servant names unique across all palaces */
-(function(){const a0=ageInit;ageInit=function(){const r=a0.apply(this,arguments);try{allServ().forEach(s=>{if(s.role!=="maid"&&s.age>=BAL.srvAge.old&&/^Tiểu /.test(s.name))s.name=s.name.replace(/^Tiểu /,"Lão ")})}catch(e){}return r}})();
+/* «Tiểu X Tử» → «Lão X Tử» at BAL.srvAge.old: ONE rule, run where the age changes (ageYear, each new year) and at load (ageInit, old saves).
+   robot-fix-cnv F1: it ran ONLY in ageInit (load), so a eunuch kept «Tiểu» all life unless she reloaded, and a reload renamed him (save→load drift) */
+function srvOldName(){try{allServ().forEach(s=>{if(s.role!=="maid"&&s.age>=BAL.srvAge.old&&/^Tiểu /.test(s.name))s.name=s.name.replace(/^Tiểu /,"Lão ")})}catch(e){}}
+(function(){const a0=ageInit;ageInit=function(){const r=a0.apply(this,arguments);srvOldName();return r}})();
+(function(){if(typeof ageYear!=="function")return;const y0=ageYear;ageYear=function(){const r=y0.apply(this,arguments);srvOldName();return r}})();
 (function(){const m0=mkServ;mkServ=function(role){let s=m0.apply(this,arguments);const taken=new Set([S&&S.maid&&S.maid.name].concat((rivals||[]).map(v=>v.maid&&v.maid.name),allServ().map(x=>x.name)));let n=2;const base=s.name;while(taken.has(s.name))s.name=base+" "+(n++);if(role!=="maid"&&s.age>=BAL.srvAge.old&&/^Tiểu /.test(s.name))s.name=s.name.replace(/^Tiểu /,"Lão ");return s}})();
 /* items without their own picture yet use the nearest picture; the proof bundle uses the proof icon */
 Object.assign(ITIMG,{tramngoc:"tram-phuong",vongvang:"vong-ngoc",gamvang:"gam-to-chau",demgam:"lua-hang-chau"});

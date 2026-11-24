@@ -157,7 +157,9 @@ function diffPath(a,b,p){if(a===b||a===undefined)return null;
 const VOL=new Set(["at"]);
 /* robot-fix-cnv F1: load-time repairs BY DESIGN (the same filter as dev/test/r10-rt.js, reviewed in nc-fix-1): the item census ledger ids (jil: S.il.at is not
    saved → .iu / il.seq), the face-keep once-flag (fcKeep), the day roster labels of who-is-where (S.roster: j95c re-syncs it at load). Any OTHER path = a bug */
-const RT_REP=/^save\.(S|R\.\d+)\.inv\.\d+\.iu$|^save\.S\.il\.seq$|\.fcKeep$|^save\.S\.roster\./;
+/* + S.where / S.menW: the who-is-where VIEW of that roster (j95view), rebuilt from it at load (j95c j95sync); in the render-off bot page it is only refreshed by
+   render, so a deser refreshes it early (0 drift in render-on play, dev/test/r10-play-rt.js) */
+const RT_REP=/^save\.(S|R\.\d+)\.inv\.\d+\.iu$|^save\.S\.il\.seq$|\.fcKeep$|^save\.S\.roster\.|^save\.S\.(where|menW)\./;
 function diffAll(a,b,p,out){if(out.length>60)return;if(a===b||a===undefined)return;if(JSON.stringify(a)===JSON.stringify(b))return;
  if(a&&b&&typeof a==="object"&&typeof b==="object"){new Set(Object.keys(a).concat(Object.keys(b))).forEach(k=>diffAll(a[k],b[k],p+"."+k,out));return}out.push(p)}
 function roundTrip(){if(!S||S.dead||S.mg)return;const t0=performance.now();let s1;
