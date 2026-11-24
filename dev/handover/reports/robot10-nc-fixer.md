@@ -181,3 +181,9 @@ Both runs served a local build of main from ~00:57Z: BEFORE nc-fix-1/-2/-3, the 
 | A 33-56: kbk-ts / kbk-ls × ef.n / kbk-rh × kbk-rh on EVERY tab | **harness false positive**: the Tuần lục book (j87 .kbk) is a 3D page-turn: .kbk-face front + .kbk-back (rotateY 180°) stacked with backface-visibility:hidden — the scan reads the hidden back face as text over text. Harness: skip text whose .kbk-face ancestor is turned away (or scan only the open face). |
 | B 5 CORS ctm-rank /hello from 127.0.0.1 | harness (local origin) |
 No new fixer branch from these two files. Next: nc_su / nc_vuong files, then the BAL moves after the 80 lives (MAIN 115 01:40Z).
+
+## 8. FIX-5 — nc-fix-4 review nit (dead legacy stipend0 types .7) — review/robot10-nc-fix-5
+stipend() always reached jecon econStipend; j20 stipend0 only kept typed numbers (lãnh cung 5 bạc, half pay, .7 cut). Removed: stipend = econStipend, the ONE road (BAL.payCold / payConfined / payCut). BLG kept (still read by blCard / jecon fallback).
+Base: nc-fix-4-rv 32b6bbdc + LIVE 35647d5e merged (index.html/sw.js rebuilt). r10-stip-noqueen 6/6 · bongloc-options 14/14.
+quickcheck: run 1 FAIL perf buổi 2656/1072 (box noise), run 2 FAIL time-spill guard (flaky: the guard alone PASS 2/2 here and 2/2 on main), run 3 PASS (buổi 1524/1355) · core gates PASS.
+SẴN SÀNG KIỂM review/robot10-nc-fix-5 fc351d87a2091ae0dbe5dddb85043c4ea659883a (SMALL; lands after nc-fix-4-rv).
