@@ -278,3 +278,19 @@ first-year mercy / nhân từ). Callers:
 - OPEN for Foreman E (not in this brief): ORDER FROM MAIN 119 08:06Z (kpGate text regex «chết») touches the same branch; not done here, jkiep.js:45 still keys on words.
 
 SẴN SÀNG KIỂM leave-palace-r 6c0d11f2
+
+## FIX r1 addendum — kpGate (ORDER FROM MAIN 119 24/11 08:06Z, via Foreman E child2/child3) — sha ea730f77
+PRIORITY #1 CHECK ('kpGate' / 'Kiếp này chưa trọn' / 'noprewarn'): OD 24/11 ~08:40Z real row read verbatim (no re-ask / «choose again» after a tap in GAME choices; system confirms + real in-world warnings + option-card rows stay) | main + review/kit-noprewarn (KK18, 1d4fc04d): kpGate untouched there | claims: KK18 kit-noprewarn (mini-game re-asks only), E74.
+Decision: the order asked the gate to key on a real ending flag instead of words. Measured against the owner's ~08:40Z rule, the «Kiếp này chưa trọn → Nghĩ lại / Vẫn chọn» card IS a re-ask after a game tap (it is not a system confirm and not an in-world event), so it is REMOVED outright rather than re-keyed: jkiep `window.kpGate=()=>false` (kept as a no-op for the co-op thin callers jcoopthin.js:443/477), the chooseM wrapper and the word regex are gone. The kiếp rule (law 16: not undone) stays: KP_RULE on the entry card + glossary; its consequence shows AFTER the choice on the end card («Kiếp dở dang: … trừ thêm 30 …», over() wrapper) and in Sổ luân hồi. The title-screen «bỏ ngang» double tap on a living save slot is a SAVE-SLOT (system) action → kept.
+
+Scan (law 11; scan_kp.py: every static option n / x / j67 text in dev/build that trips the old regex /tự vẫn|tự tận|tự sát|chết|bị giết|rượu độc/, «giả chết» excluded as before; template-built options are not counted):
+| class | count | examples (file:line) | before | after |
+|---|---|---|---|---|
+| text only MENTIONS «chết» (not her death on this tap) | 17 | j7.js:129 «Cúng các phi tần chết oan»; jrd_cn.js:373 «Để lời đồn tự chết»; jrd_dtq.js:513 «Xin Hoàng thượng tha tội chết cho hắn»; jrd_thd.js:711 «Xin tha chết, đày đi biên ải»; jrd_nc.js:79 «Nhắn lại: lão sẽ không chết»; jrd_pt.js:328/329; jrd_bd2.js:436/520; jcmaid.js:69; j4.js:117; j22.js:42/61; j42.js:369/627; j96.js:221 | «Kiếp này chưa trọn» card once per unfinished life | no card |
+| text names a death RISK on failure («hỏng: ban chết», «lộ: ban chết») | 11 | j8.js:152/174/180; j30.js:25; j4.js:125; j22.js:62; j2.js:55; j83.js:180; j99succ.js:80; jmen.js:183/184 | card | no card (the risk stays on the card's Mất / hỏng row) |
+| idioms («chết khiếp» etc., MAIN 119 report) | built in templates, not in the static list | — | card | no card (test: «Ta sợ chết khiếp», «Để lời đồn tự chết», «Tự vẫn», «Uống chén rượu độc» → kpGate false) |
+None of the 28 ends the life on the tap itself, which is why a word gate cannot be right; the one place that knows a life ended is over(), where the consequence is shown.
+
+Gates on ea730f77: leave-palace 135/135 (new: no card for death words / idioms; build has no word regex and still has the end-card «Kiếp dở dang» line) · coop-e2e host Fold 142/142 · coop-e2e COOP_SWAP=1 142/142 · quickcheck: PASS (core gates PASS incl. G3 kit-conform; old save ok; perf new/live render 214/206 ms, buổi 1350/1231 ms). An earlier run FAILed G3 on one MIXED «place:vuon» scene; two kit-conform reruns showed no MIXED (no exit status checked) and the full rerun PASSed, so it reads as flaky, not caused by this change (jkiep only) · role-parity not re-run (jkiep only).
+
+SẴN SÀNG KIỂM leave-palace-r ea730f77
