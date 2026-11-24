@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"41590ed3+","t":"2026-11-24T15:55Z","c":"j72c: a grown-child (ak) seed whose card or scene names a son (hoàng tử / con trai) or a daughter (con gái / công chúa / hoàng nữ) casts on…","b":"f7df7f563fc7","h":[{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"}]};
+window.CTM_BI={"s":"74fa756a+","t":"2026-11-24T15:56Z","c":"jdlgsd: rebuilt (kyc-sv-006/007 neutral child wording)","b":"b608238d6a1f","h":[{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -6193,7 +6193,7 @@ function figKey(f){const r=norm(f.role);if(f.identity!=null&&f.identity!=="")ret
 function figIndex(all){const ix={};for(const f of all){if(/(^|\/)por-/.test(f.file||f.src))continue;const r=norm(f.role);const k=figKey(f);(ix[r]=ix[r]||{});(ix[r][k]=ix[r][k]||[]).push(f)}return ix}
 function loadFigs(){try{Promise.all(FIGF.map(u=>fetch(u,{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]))).then(([a,b,c])=>{a=figList(a);b=figList(b);c=figList(c);
  const old=f=>/(^|\/)_old\//.test(String(f.file||f.src))||(f.por&&/(^|\/)_old\//.test(String(f.por)));a=a.filter(f=>!["thaihau","official","physician"].includes(norm(f.role)));a=a.filter(f=>!old(f));b=b.filter(f=>!old(f));c=c.filter(f=>!old(f));
- const all=a.concat(b,c);const sig=all.length+"|"+all.map(f=>f.file||f.src).join(",").length;if(sig===FIGSIG)return;FIGSIG=sig;FIGS=all;FIGIX=figIndex(all);try{if(S&&!S.dead)render()}catch(e){}}).catch(()=>{})}catch(e){}}
+ if(!a.length||!b.length||!c.length)return;/* a failed / empty refetch never wipes the last good lists (law 11: every timed figure loader) */const all=a.concat(b,c);const sig=all.length+"|"+all.map(f=>f.file||f.src).join(",").length;if(sig===FIGSIG)return;FIGSIG=sig;FIGS=all;FIGIX=figIndex(all);try{if(S&&!S.dead)render()}catch(e){}}).catch(()=>{})}catch(e){}}
 loadFigs();setInterval(loadFigs,300000);
 /* which art group a person belongs to, preferred first */
 const MANSUB={"thị vệ":["guard","thive","thi ve","vesi"],"thái y":["physician","doctor","thaiy"],"vương gia":["prince","royal","vuonggia","wang"],"nhạc sư":["musician","nhacsu","music"],"sứ thần":["envoy","suthan","ambassador"],"họa sư":["painter","hoasu"]};
@@ -9686,7 +9686,7 @@ const KIDF="https://ctm-img.victoria-tntt.workers.dev/img/FIGURES-kids.json";
 let KIDIX={prince:{},princess:{}},KIDSIG="";
 const KIDBANDS=[4,9,14,20];
 function kidBandOf(a){a=+a||0;return a<=6?4:a<=11?9:a<=16?14:20}
-function kidLoad(){try{fetch(KIDF,{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]).then(j=>{const L=figList(j).filter(f=>!/(^|\/)_old\//.test(String(f.file||f.src)));
+function kidLoad(){try{fetch(KIDF,{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]).then(j=>{const L=figList(j).filter(f=>!/(^|\/)_old\//.test(String(f.file||f.src)));/* a failed / empty refetch (offline, CDN hiccup) never wipes the last good list (law 11: every timed figure loader) */if(!L.length)return;
  const sig=L.length+"|"+L.map(f=>f.file||f.src).join(",").length;if(sig===KIDSIG)return;KIDSIG=sig;
  const ix={prince:{},princess:{}};for(const f of L){const r=norm(f.role);if(!ix[r]||f.identity==null)continue;const b=parseInt(f.ageBand,10);if(isNaN(b))continue;(ix[r][f.identity]=ix[r][f.identity]||{})[b]=f}
  KIDIX=ix;try{if(S&&!S.dead){kidAssignAll();render()}}catch(e){}}).catch(()=>{})}catch(e){}}
@@ -52369,7 +52369,7 @@ const gl=(k,l)=>typeof kitGloss==="function"?kitGloss(k,l):l;
 const HT={dow:[30,20,12],back:[14,9,5],heirB:4,clanRel:8,envy:-6,rivalO:10,fail:{sung:-3},cd:3,trac:3,tracB:3};
 /* ---------- faces: công tử (own manifest) and quý nữ (khuê các) ---------- */
 let CTIX={},KCIX={};
-function ld(u,cb){try{fetch(u,{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]).then(j=>{try{cb(typeof figList==="function"?figList(j):(j||[]));if(S&&!S.dead&&typeof tab!=="undefined"&&HTK.includes(tab))render()}catch(e){}})}catch(e){}}
+function ld(u,cb){try{fetch(u,{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]).then(j=>{try{const L=typeof figList==="function"?figList(j):(j||[]);/* a failed / empty refetch never wipes the last good list (law 11: every timed figure loader) */if(!L.length)return;cb(L);if(S&&!S.dead&&typeof tab!=="undefined"&&HTK.includes(tab))render()}catch(e){}})}catch(e){}}
 function htLoad(){ld("https://ctm-img.victoria-tntt.workers.dev/img/FIGURES-congtu.json",L=>{const ix={};L.forEach(f=>{if(f.identity)(ix[f.identity]=ix[f.identity]||[]).push(f)});CTIX=ix});
  ld("https://ctm-img.victoria-tntt.workers.dev/img/FIGURES-kc.json",L=>{const ix={};L.filter(f=>String(f.tier)==="kc").forEach(f=>{const k=`${f.role}:${f.identity}`;(ix[k]=ix[k]||[]).push(f)});KCIX=ix})}
 htLoad();setInterval(htLoad,300000);
@@ -76659,7 +76659,7 @@ window.kcHook=kcHook;
 let KCFX={};
 function kcFigLoad(){try{fetch("https://ctm-img.victoria-tntt.workers.dev/img/FIGURES-kc.json",{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]).then(j=>{const X={};
  for(const f of figList(j)){const t=String(f.tier||""),r=norm(f.role);if(!(t==="kc"||t==="ngheo")||!f.identity)continue;const k=r+":"+f.identity;const T=(X[k]=X[k]||{});(T[t]=T[t]||[]).push(f)}/* r2: the CDN list now also has a26/a36/a51 khuê các dresses for some faces: keep every band */
- const n=Object.keys(X).length;const was=Object.keys(KCFX).length;KCFX=X;if(n!==was)try{if(isKc())render()}catch(e){}}).catch(()=>{})}catch(e){}}
+ const n=Object.keys(X).length;if(!n)return;/* a failed / empty refetch never wipes the last good list (law 11: every timed figure loader) */const was=Object.keys(KCFX).length;KCFX=X;if(n!==was)try{if(isKc())render()}catch(e){}}).catch(()=>{})}catch(e){}}
 kcFigLoad();setInterval(kcFigLoad,300000);
 function kcDress(){return S&&S.origin&&(S.origin.k==="thd"||(S.origin.k==="td"&&!kcLore()))?"ngheo":"kc"}/* KC LORE: td is a Thị lang's daughter until the day she leaves home: khuê các dress; only thd is poor */
 function kcBand(age){return ageBandIx(age)}
@@ -93825,7 +93825,7 @@ let FIGXR=[],FIGXT={};
 function figxKey(f){return norm(f.role)+":"+f.identity}
 /* r2 (review FAIL #1): figxLoad.ok = the rows are in. The Thái hậu's face is for life, so she is not drawn before they are (a draw before
    would not see which faces have a painted Thái hậu robe). After BAL.figxTry failed reads (offline / missing file) she is drawn anyway. */
-function figxLoad(){try{fetch("https://ctm-img.victoria-tntt.workers.dev/img/FIGURES-x.json",{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]).then(j=>{const L=figList(j);if(!L.length)figxLoad.fail=(figxLoad.fail||0)+1;
+function figxLoad(){try{fetch("https://ctm-img.victoria-tntt.workers.dev/img/FIGURES-x.json",{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]).then(j=>{const L=figList(j);if(!L.length){figxLoad.fail=(figxLoad.fail||0)+1;/* keep the last good list (law 11: every timed figure loader) */if(figxLoad.ok)return}
   const sig=L.length+"|"+L.map(f=>f.file).join(",").length;if(sig===figxLoad.sig)return;figxLoad.sig=sig;
   const T={},A=[];for(const f of L){const t=String(f.tier);if(t==="th"||f.v){const k=figxKey(f);const X=T[k]=T[k]||{th:[],v:[]};(t==="th"?X.th:X.v).push(f)}else A.push(f)}
   FIGXR=A;FIGXT=T;if(L.length)figxLoad.ok=1;if(typeof FIGS!=="undefined"&&FIGS.length){FIGIX=figIndex(FIGS);try{if(S&&!S.dead)kitRenderSoon(250)}catch(e){}}}).catch(()=>{})}catch(e){}}
@@ -99152,7 +99152,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="f7df7f563fc7";window.CTM_BUILD=BUILD;
+const BUILD="b608238d6a1f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

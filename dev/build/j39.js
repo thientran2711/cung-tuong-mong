@@ -17,7 +17,7 @@ function figKey(f){const r=norm(f.role);if(f.identity!=null&&f.identity!=="")ret
 function figIndex(all){const ix={};for(const f of all){if(/(^|\/)por-/.test(f.file||f.src))continue;const r=norm(f.role);const k=figKey(f);(ix[r]=ix[r]||{});(ix[r][k]=ix[r][k]||[]).push(f)}return ix}
 function loadFigs(){try{Promise.all(FIGF.map(u=>fetch(u,{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]))).then(([a,b,c])=>{a=figList(a);b=figList(b);c=figList(c);
  const old=f=>/(^|\/)_old\//.test(String(f.file||f.src))||(f.por&&/(^|\/)_old\//.test(String(f.por)));a=a.filter(f=>!["thaihau","official","physician"].includes(norm(f.role)));a=a.filter(f=>!old(f));b=b.filter(f=>!old(f));c=c.filter(f=>!old(f));
- const all=a.concat(b,c);const sig=all.length+"|"+all.map(f=>f.file||f.src).join(",").length;if(sig===FIGSIG)return;FIGSIG=sig;FIGS=all;FIGIX=figIndex(all);try{if(S&&!S.dead)render()}catch(e){}}).catch(()=>{})}catch(e){}}
+ if(!a.length||!b.length||!c.length)return;/* a failed / empty refetch never wipes the last good lists (law 11: every timed figure loader) */const all=a.concat(b,c);const sig=all.length+"|"+all.map(f=>f.file||f.src).join(",").length;if(sig===FIGSIG)return;FIGSIG=sig;FIGS=all;FIGIX=figIndex(all);try{if(S&&!S.dead)render()}catch(e){}}).catch(()=>{})}catch(e){}}
 loadFigs();setInterval(loadFigs,300000);
 /* which art group a person belongs to, preferred first */
 const MANSUB={"thị vệ":["guard","thive","thi ve","vesi"],"thái y":["physician","doctor","thaiy"],"vương gia":["prince","royal","vuonggia","wang"],"nhạc sư":["musician","nhacsu","music"],"sứ thần":["envoy","suthan","ambassador"],"họa sư":["painter","hoasu"]};
