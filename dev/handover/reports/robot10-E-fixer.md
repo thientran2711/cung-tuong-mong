@@ -397,3 +397,35 @@ No TIMEOUT shape is left that is a real game bug on LIVE.
 - dev/build vs fix-5-r: identical (TEST-ONLY: dev/measure/inpage6.js, dev/measure/robot10.js, 3 new dev/test files). Lands with / after fix-5-r 7876bf70 (it is its base).
 SSK: SẴN SÀNG KIỂM robot10-e-fix-6 4424f9dd (SMALL, test-only harness).
 FOR MAIN (via Foreman E): KIT REQUEST j59t at the 9 px floor (dev/kit/KIT_REQUESTS.md 24/11 robot10 E FIXER #5); robot10-e-fix-1 8f97171e still not on main (null.queen still in jstip:133 on 8eceeef9); robot-fix-cnv(-2) (F) owns the «Sang ngày mới after load» row every E file shows.
+
+## 19. Co-op stuck room — verdict + review/robot10-coop-stuckcap 0cdb9a41 (TEST-ONLY, on review/robot10-coop 6576e086) — Foreman E child6 19:39Z / 19:45Z
+PRIORITY #1 CHECK ('coop stuck capture|STUCK REPRO|kne-ov|kitNewDay|data-km-close|coop-clear'): harness head review/robot10-coop 6576e086 (newer than 5a65a561 named in the order; it already dumps stuck/<job>-r<n>-w<week>-<seat>.json state, no shot / layer / button) | claims: only my row | dev/test/lib/coop-clear.js = THE shared co-op tap step (LAW 11).
+**VERDICT: (a) HARNESS GAP — a player can always close the picture; not a game deadlock.**
+| picture | code | closes by | the bot before |
+|---|---|---|---|
+| night card «Đêm êm đềm / lạnh nhạt / mặn nồng» (U16/U19/U20) | jne.js:97–101 kitNightEnd → j93 kmStage("kne-ov",…,{manual:true,dur:60000}); .kmov z-index 9100 (j93.js:337) over #modal (z 40/42, j82.js:661) and #ov | manual scene: NO timer (j93 kmStage only `later(o.dur)` when !manual — jne's dur 60000 is ignored); its own `button.kbtn.kmtake.kne-take[data-km-close]` «Tiếp tục»/«Nhận» sits in .kne-side, shown after `st.later(NE.list)` OR one tap on the picture (jne.js:101) | coop-clear.js:20 pressed only a VISIBLE `.kmov [data-km-close]`; never tapped the picture → if the reveal did not come, waited for ever |
+| new-day picture «Đêm không được triệu» + dawn (#dawn.kne-day, z-index 9200, «Chạm để bỏ qua») — found by the STUCKCAP smoke run: rooms 8SEK + 5R59 week 0, BOTH seats, over #modal | jne.js:167 kitNewDay: beats advance by setTimeout(lonelyMs / dawnMs); KIT §81: a tap = last beat + ONE kit «Tiếp theo» (kitSceneEnd .kmend, no [data-km-close]) | timer, or a tap then «Tiếp theo» | coop-clear never tapped #dawn and never pressed its .kmend; in the smoke run the first beat was still up after 25 s+ |
+LEAD for FOR MAIN / KK20 + Foreman B (UX, not a deadlock): both pictures depend on ONE timer to show their way out; on the stuck screens that timer had not come (night card: no button; new day: still beat 1 after 25 s), so a player sees a full-screen picture with no button over a dialog she cannot see. kitNightEnd has no «Chạm để …» hint (manual scene: j93 shows .kmhint only when !manual), kitNewDay has «Chạm để bỏ qua». Ask: a kit hint on manual scenes, or show the way out without depending on the timer; and why the timers did not fire in a live co-op room (j93 kmStage `later` / jne setTimeout; the night scene carried «km-skip» in the probe).
+Fix (test-only, the ONE shared tap step dev/test/lib/coop-clear.js TAP, so every co-op test and robot10-coop get it): (1) a visible `.kmov` or `#dawn.kne-day` scene with no visible close ([data-km-close] / .kmend / .krevok) gets ONE tap, at most every 1.5 s (a tap on a kit scene = reveal / skip, never a choice); (2) kitNewDay's own «Tiếp theo» (`#dawn.kne-day > .kmend`) is pressed like the other scene closes.
+Family scan dev/test/r10c-manual-scene-scan.py:
+| scene | class | way out | bot before | bot now |
+|---|---|---|---|---|
+| j93.js:231 | km-reward | [data-km-close] after its reveal | only if the reveal came | yes |
+| jlevel.js:33 | km-reward km-prev km-learn km-full | [data-km-close] after its reveal | only if the reveal came | yes |
+| jne.js:98 | kne-ov (night card) | [data-km-close] after its reveal | only if the reveal came | yes |
+| jpromo.js:89 | km-reward km-prev | [data-km-close] after its reveal | only if the reveal came | yes |
+| jtoil.js:1138 | ktrv-ov km-full | kitSceneEnd .kmend after its zoom (timer or tap) | only if the reveal came | yes |
+| jne.js:167 | #dawn.kne-day (kitNewDay) | timer, or tap → kitSceneEnd .kmend | NO (never tapped, .kmend not pressed) | yes |
+Proof dev/test/r10c-nightcard-tap.js (save R8-cautious-3; the reveal / beat timers forced off = the stuck screens; TAP every 500 ms for 20 s):
+| case | before (6576e086 coop-clear) | after |
+|---|---|---|
+| night card Fold / iPad | stuck 20 s, 0 taps | closed in 1.5 s / 1.0 s |
+| new day #dawn Fold / iPad | stuck 20 s, 0 taps | closed in 1.0 s / 1.0 s |
+STUCKCAP (dev/measure/robot10-coop.js): EVERY stuck room (the bug row kept a shot only for the FIRST) keeps per seat: a screenshot shots/<job>-r<n>-w<week>-<seat>-stuck.png (path only, never in git), every open layer (#modal / #ov / .kmov / .kfoc / #dawn / #klife / .kpscene / dialog) with title (aria-labelledby first), z-index, pictures, every visible button (label, disabled, **ok** = elementFromPoint at its centre reaches it, **COVERED by <element> in <layer>**), the night / new-day picture up, #modal / #ov hidden → «## Stuck rooms» one row per room per seat in the bug file (+ out.stuck in the .json). Proof dev/test/r10c-stuckcap.js (a real #modal dialog, then kitNightEnd «Đêm lạnh nhạt» over it; Fold + iPad): before = title + 2 buttons ok; after = NIGHT «Đêm lạnh nhạt», both buttons COVERED by img.kne-img in div#kneov.kmov.kne-ov, the night card's «Tiếp tục» ok → 5/5 ok.
+Real runs (pair 1, SEED 1, X Fold hosts, LIVE Worker):
+| run | coop-clear | result |
+|---|---|---|
+| STUCK=25 PCAP=240 | before | 4 rooms stuck at week 0; STUCKCAP rows: rooms 1–2 = #dawn.kne-day «Đêm không được triệu» z9200 covering every #modal button on BOTH seats (no button of its own); rooms 3–4 = nothing covered (#modal «Kính sự phòng» buttons ok, kcf flip «Chuẩn bị thị tẩm» ok) = week 0 needs more than 25 s (short STUCK on purpose) |
+| STUCK=90 PCAP=600 | after (scene tap) | room VWH6 played 19 weeks / 80 buổi in 10 min, 0 stuck (+ rejoin 6.1 s); other rows = known families (save drift, «Sức +6» / bac range on this harness branch's older game base, coop-pos, LAG) |
+coop-e2e Fold host on this branch: **141/141**.
+SSK: SẴN SÀNG KIỂM robot10-coop-stuckcap 0cdb9a41 (SMALL, test-only: dev/measure/robot10-coop.js, dev/test/lib/coop-clear.js, 3 new dev/test files). Base = the harness head review/robot10-coop 6576e086 (older game base than main; it lands with the harness, as its other commits do).
