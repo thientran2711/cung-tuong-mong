@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"bd8ba813+","t":"2026-11-24T10:07Z","c":"SELSCENE-9: free day card stays in Q under the Dư đồ (MAIN 121 ruling; «‹ Dư đồ» via jpm kpmBackHook), FAIL 3 stage = Dưỡng Tú viện (place …","b":"33cc07d95755","h":[{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"}]};
+window.CTM_BI={"s":"a127ef9d+","t":"2026-11-24T10:20Z","c":"SELSCENE-9: the stage rail «Về Dư đồ» (kplBack) and any other tab bring her free card back from the days map; coop-e2e driver leaves the ma…","b":"e0a6977a482d","h":[{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -95906,7 +95906,8 @@ let SELX_SC=null;
 function selxModal(hide){const M=document.getElementById("modal");if(M)M.style.visibility=hide?"hidden":""}
 function selxScStop(me){if(!me||me.dead)return;me.dead=1;(me.res||[]).forEach(f=>{try{f()}catch(e){}});const A=me.after||[];me.after=[];A.forEach(f=>{try{f()}catch(e){console.error(e)}})}
 async function selxScene(bg,build,keep){if(SELX_SC)selxScStop(SELX_SC);const me={after:[],res:[]};SELX_SC=me;selxModal(true);let Sc=null;
- try{Sc=kitScene.open({bg:selxArt(bg),intro:0});await build(Sc,me)}catch(e){console.error("selx scene",e)}
+ const S0=S;try{Sc=kitScene.open({bg:selxArt(bg),intro:0});await build(Sc,me)}catch(e){/* a co-op rebuild / the room's edict can end her days (or swap her state) while a scene still plays: that scene just stops (selxRefill puts the beat back if the days go on) */
+  let gone=false;try{gone=S!==S0||!S.selx2||!selxDaysOn()}catch(x){gone=true}if(!gone)console.error("selx scene",e)}
  if(me.dead&&SELX_SC!==me)return;await new Promise(r=>{try{Sc?Sc.close(r):r()}catch(e){r()}});
  if(SELX_SC===me)SELX_SC=null;if(!keep)selxModal(false);selxScStop(me);if(!keep)try{showModal();render()}catch(e){}}
 /* steps that must wait for a multi-shot scene (the podium, her ban hoa ending) */
@@ -95963,7 +95964,7 @@ async function selxScRooms(){const Z=S.selx2;const rooms=(Z.rooms||[]).slice();i
   const mine=rooms[0];const ix=L.figs.map((f,i)=>i).filter(i=>L.figs[i].__p&&mine.ids.includes(L.figs[i].__p===S?"me":L.figs[i].__p.id));
   await selxPlay(Sc,me,{box:selxBoxB(g),lines:[{fig:null,who:"Giáo tập ma ma",text:"Ai về sở nấy. Cất đồ rồi ra Tiền sảnh."}],onLine:()=>{ix.forEach(i=>{const f=L.figs[i];const p=f.__p;if(p!==S&&!selxMet(p))selxTag(Sc,f,p,{stage:0})})}})})}
 /* ================= DAY 2 · THE HALL: royals' reveal + Tổng quản roll-call (OD ~05:10Z, ~04:25Z s14, ~04:50Z) ================= */
-function selxRound(){const Z=S.selx2;if(!Z.round){const L=selxAll();Z.round=L.slice(0,Math.max(0,BAL.selx.yard.perRound-1)).map(v=>v.id)}return Z.round.map(selxBy).filter(Boolean)}
+function selxRound(){const Z=S.selx2;if(!Z)return[];if(!Z.round){const L=selxAll();Z.round=L.slice(0,Math.max(0,BAL.selx.yard.perRound-1)).map(v=>v.id)}return Z.round.map(selxBy).filter(Boolean)}
 async function selxScHall(){const RY=selxRoyals();await selxScene("hall",async(Sc,me)=>{const L=Sc.L,g=L.g;const order=["E","T","H"].map(k=>RY.find(x=>x[0]===k)).filter(Boolean);
   /* shot A — her eyes go to the throne first: each royal bust-big (focus), then back to the place, smaller, the background blurred */
   Sc.show();const cx={E:.5,T:.2,H:.8};for(const [k,nm,tok] of order)await selxFig(Sc,k==="E"?"emp":k==="T"?"th":tok,g.w*cx[k],{hide:1,z:k==="E"?3:2});
@@ -98586,7 +98587,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="33cc07d95755";window.CTM_BUILD=BUILD;
+const BUILD="e0a6977a482d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

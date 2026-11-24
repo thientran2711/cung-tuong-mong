@@ -23,7 +23,8 @@ let SELX_SC=null;
 function selxModal(hide){const M=document.getElementById("modal");if(M)M.style.visibility=hide?"hidden":""}
 function selxScStop(me){if(!me||me.dead)return;me.dead=1;(me.res||[]).forEach(f=>{try{f()}catch(e){}});const A=me.after||[];me.after=[];A.forEach(f=>{try{f()}catch(e){console.error(e)}})}
 async function selxScene(bg,build,keep){if(SELX_SC)selxScStop(SELX_SC);const me={after:[],res:[]};SELX_SC=me;selxModal(true);let Sc=null;
- try{Sc=kitScene.open({bg:selxArt(bg),intro:0});await build(Sc,me)}catch(e){console.error("selx scene",e)}
+ const S0=S;try{Sc=kitScene.open({bg:selxArt(bg),intro:0});await build(Sc,me)}catch(e){/* a co-op rebuild / the room's edict can end her days (or swap her state) while a scene still plays: that scene just stops (selxRefill puts the beat back if the days go on) */
+  let gone=false;try{gone=S!==S0||!S.selx2||!selxDaysOn()}catch(x){gone=true}if(!gone)console.error("selx scene",e)}
  if(me.dead&&SELX_SC!==me)return;await new Promise(r=>{try{Sc?Sc.close(r):r()}catch(e){r()}});
  if(SELX_SC===me)SELX_SC=null;if(!keep)selxModal(false);selxScStop(me);if(!keep)try{showModal();render()}catch(e){}}
 /* steps that must wait for a multi-shot scene (the podium, her ban hoa ending) */
@@ -80,7 +81,7 @@ async function selxScRooms(){const Z=S.selx2;const rooms=(Z.rooms||[]).slice();i
   const mine=rooms[0];const ix=L.figs.map((f,i)=>i).filter(i=>L.figs[i].__p&&mine.ids.includes(L.figs[i].__p===S?"me":L.figs[i].__p.id));
   await selxPlay(Sc,me,{box:selxBoxB(g),lines:[{fig:null,who:"Giáo tập ma ma",text:"Ai về sở nấy. Cất đồ rồi ra Tiền sảnh."}],onLine:()=>{ix.forEach(i=>{const f=L.figs[i];const p=f.__p;if(p!==S&&!selxMet(p))selxTag(Sc,f,p,{stage:0})})}})})}
 /* ================= DAY 2 · THE HALL: royals' reveal + Tổng quản roll-call (OD ~05:10Z, ~04:25Z s14, ~04:50Z) ================= */
-function selxRound(){const Z=S.selx2;if(!Z.round){const L=selxAll();Z.round=L.slice(0,Math.max(0,BAL.selx.yard.perRound-1)).map(v=>v.id)}return Z.round.map(selxBy).filter(Boolean)}
+function selxRound(){const Z=S.selx2;if(!Z)return[];if(!Z.round){const L=selxAll();Z.round=L.slice(0,Math.max(0,BAL.selx.yard.perRound-1)).map(v=>v.id)}return Z.round.map(selxBy).filter(Boolean)}
 async function selxScHall(){const RY=selxRoyals();await selxScene("hall",async(Sc,me)=>{const L=Sc.L,g=L.g;const order=["E","T","H"].map(k=>RY.find(x=>x[0]===k)).filter(Boolean);
   /* shot A — her eyes go to the throne first: each royal bust-big (focus), then back to the place, smaller, the background blurred */
   Sc.show();const cx={E:.5,T:.2,H:.8};for(const [k,nm,tok] of order)await selxFig(Sc,k==="E"?"emp":k==="T"?"th":tok,g.w*cx[k],{hide:1,z:k==="E"?3:2});
