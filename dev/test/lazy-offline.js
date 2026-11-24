@@ -10,7 +10,7 @@
    --save-data: navigator.connection.saveData=true (no background set: the strictest path, like cellular / Data-saver).
    usage: node dev/test/lazy-offline.js [--devices fold,iphone14] [--lives 2] [--weeks 2] [--root <built dir>] [--save-data] [--offline]
    exit 1 when step 1 has a broken picture that is not also missing on the CDN (404), or step 2(a) has a file not served offline. */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const D=require('./lib/device');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs'),path=require('path');const D=require('./lib/device');
 const A=process.argv.slice(2);const opt=(k,d)=>{const i=A.indexOf('--'+k);return i<0?d:(A[i+1]===undefined||A[i+1].startsWith('--')?true:A[i+1])};
 const DEVS=String(opt('devices','fold,iphone14')).split(','),LIVES=+opt('lives',2),WEEKS=+opt('weeks',2);
 const ROOT=path.resolve(opt('root',path.join(__dirname,'../..')));const SAVE=A.includes('--save-data'),OFF=A.includes('--offline');

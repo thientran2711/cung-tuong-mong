@@ -11,7 +11,7 @@
    Verdict per case: CONFORMS · MIXED (template frame, but hand-made blocks inside: .kpraw with non-kit classes, inline grid/flex/absolute
    layouts, a second picture) · CUSTOM (not a kit panel at all). Exit 1 when any case is MIXED / CUSTOM, or a float sits over the tabs.
    usage: node dev/test/kit-conform.js <url> <out.json> [WxH,...] [maxPend]   (default 755x1000; maxPend 0 = all) */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SIZES,MAXP]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,URL,OUT,SIZES,MAXP]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 /* kit block classes allowed inside .kpmain (KIT §9 / §51 / §46 / §49 / §52 / §58 / §70 / §72) */
 const KIT_BLOCK=/^(kfacts|kfact|kb|kpkb|kpsec|kpst|kpnote|ktiers|kchips|kchip|kpfaces|faces|kpl|kmlist|krel3|krelt|kreltab|kitrows|kidet|kchecks|kchk|kpidn|kpidt|kstgrid|kpick|kmc|kmc-[a-z]+|kinv[a-z]*|kshg|kshop|kgift[a-z]*|kip[a-z]*|kev[a-z]*|kintel|kevid|kthreat|kwhy|kodm|ktile[s]?|kexam[a-z]*|kpromo[a-z]*|kflip[a-z]*|ksub|kpkf|kbullets|kpicks|kslot[a-z]*|ksl[a-z]*|kpets?|kpet[a-z]*)$/;
 const VPS=(SIZES||'755x1000').split(',');
@@ -22,7 +22,7 @@ const VPS=(SIZES||'755x1000').split(',');
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.addStyleTag({content:'#kroul,#kroulw,.kroul,.kcf{display:none!important}'});
   await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function'&&window.__ctmBuilt===1,null,{timeout:180000});/* real condition: the game script ran to its end (was a 2.5 s timer) */
   /* SIDE-LINE DIALOGUE SCENES (jdlgs.js) play BEFORE a card and wait for the player's taps; this gate checks the CARD frames, so it turns the scenes off (BAL.dlgs.on, the one switch). The scenes themselves are kit (kitScene / kitDialogue, KIT §93/§95) and are played tap by tap on both devices by dev/test/dlgs-play.js. */
-  await p.evaluate(()=>{try{if(BAL.dlgs)BAL.dlgs.on=false}catch(e){}});
+  /* (turned off by the one switch lib/dlgs-off.js pw('off') at the top: every context of this run) */
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}});
   /* start() hands S over asynchronously (measured 1.2-2 s; the 'S undefined' crash of emotion-acts): wait for S itself, then re-roll a servant life (was 15 x 400 ms timers) */
   for(let i=0;i<15;i++){await p.waitForFunction(()=>typeof S!=='undefined'&&!!S&&!!S.name,null,{timeout:30000});const srv=await p.evaluate(()=>{const s=isSrv();if(s)try{nlNew()}catch(e){}start();return s});if(!srv)break}

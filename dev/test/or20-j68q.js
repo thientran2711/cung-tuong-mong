@@ -7,7 +7,7 @@
    3) law 1 / 6a: q6visitCold needs a consort SHE sent to lãnh cung; q6hhAccused needs a real wrong (a biased ruling / skimmed accounts)
       and the ruling «Xử cho A thắng» really writes that proof; law 5: the same roll is lower at a higher rung.
    usage: node dev/test/or20-j68q.js <url> [months]   (exit 1 on any FAIL) */
-const {chromium}=require('playwright');const [,,URL,MON]=process.argv;const MONTHS=+MON||26;
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,URL,MON]=process.argv;const MONTHS=+MON||26;
 (async()=>{const b=await chromium.launch();const errs=[];const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);console.log((c?'PASS ':'FAIL ')+n+(c?'':' '+JSON.stringify(x).slice(0,900)))};
  const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});
  await ctx.addInitScript(()=>{let s=2011;Math.random=()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}});

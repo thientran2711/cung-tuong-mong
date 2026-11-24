@@ -5,7 +5,7 @@
    trusted physician does not, treat() uses the same rule, NPC rules (bribes, tainted gift found in a rival), Hỏi chuyện leaks a
    rival's mạch án, old save without S.thy loads. Then at every size: the physician card (Bắt mạch group) and the result card — no
    page errors, no horizontal overflow; screenshots to outdir. */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const {serve,BASE}=require('./coop-serve.js');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs'),path=require('path');const {serve,BASE}=require('./coop-serve.js');
 const OUT=path.resolve(process.argv[2]||path.join(__dirname,'../../tmp/thaiy'));fs.mkdirSync(OUT,{recursive:true});
 const SIZES=(process.argv[3]||'755x1000x2,1000x755x2,1180x820x2,1366x1024x2,844x390x2').split(',').map(s=>s.split('x').map(Number));
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,300):''))};

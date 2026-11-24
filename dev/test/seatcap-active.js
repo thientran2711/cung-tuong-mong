@@ -1,7 +1,7 @@
 /* review/seatcap: ACTIVE play — the measure smart bot (dev/measure/inpage6.js, mode "sens" | "rand") plays real lives (she can die, fall, rise);
    a monitor checks the holders of every capped rank at the end of every turn. usage: node dev/test/seatcap-active.js <url> [lives=10] [mode=sens]
    Prints JSON {maxHolders, overMonths, lives, months, settle}; exit 1 on over-cap or page error. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,LIVES='10',MODE='sens']=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,URL,LIVES='10',MODE='sens']=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch({args:['--blink-settings=imagesEnabled=false']});const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});
  await ctx.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)(\?|$)/,r=>r.abort().catch(()=>{}));const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));p.setDefaultTimeout(1200000);
  await p.goto(URL,{waitUntil:'domcontentloaded'});for(let i=0;i<300;i++){if(await p.evaluate(()=>typeof start==='function'&&!!window.__ctmBuilt).catch(()=>false))break;await sleep(300)}

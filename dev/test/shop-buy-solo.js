@@ -2,7 +2,7 @@
    kitShop({key}) in the code) really runs a purchase when its tile's buy button is tapped: bạc goes down and (nvp) the chest grows / (pet) the
    money is paid (the pet itself is a chance). Fault caught: kitShopBuy set o=B(key)=undefined in solo → no tap ever bought anything.
    usage: NODE_PATH=$(npm root -g) node dev/test/shop-buy-solo.js <built page url> */
-const {chromium}=require('playwright');const {autoDismissRoulette,dismissRoulette}=require('./lib/roulette');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const {autoDismissRoulette,dismissRoulette}=require('./lib/roulette');
 const [,,URL]=process.argv;
 (async()=>{const b=await chromium.launch();const errs=[];let fail=0;const chk=(n,c,x)=>{if(!c)fail++;console.log(c?'PASS':'FAIL',n,c?'':JSON.stringify(x).slice(0,400))};
  const ctx=await b.newContext({viewport:{width:1180,height:820},serviceWorkers:'block'});await autoDismissRoulette(ctx);

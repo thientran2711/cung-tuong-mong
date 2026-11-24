@@ -4,7 +4,7 @@
    pair of tl+tlx) with «nạn nhân» written as the real target; P0 marks j70:<m>:<id> (and j70t for the tell pair); the real object is recorded
    (law 6c) and its trace is told when the plot is carried out; pickRoute70 still returns a route of the method (fresh-first wrapper); every built
    J70SEEDS route registers; the old counter still says 51 hand-written routes. 0 page errors. */
-const {chromium}=require('playwright');const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const FILE=process.argv[2]||path.join(__dirname,'j70c-fixture.jsonl');
 const FIX=fs.readFileSync(FILE,'utf8').split('\n').filter(l=>l.trim().startsWith('{')).map(JSON.parse).filter(r=>r.type==='route');
 const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http://x').pathname);if(p==='/')p='/index.html';const f=path.join(ROOT,p);if(!fs.existsSync(f)||fs.statSync(f).isDirectory()){r.statusCode=404;return r.end()}fs.createReadStream(f).pipe(r)});

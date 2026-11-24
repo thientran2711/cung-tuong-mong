@@ -1,5 +1,5 @@
 /* review/balance-core: night-choice odds on the real consort population (her + NPCs, weekly loop). usage: node dev/test/balance-night.js <index.html> [lives] [years] [js override] */
-const {chromium}=require('playwright');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const path=require('path');
 const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s=(s+0x6D2B79F5)>>>0;let t=s;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296}})();`;
 (async()=>{const [,,PAGE,LS,YS,BJ]=process.argv;const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:1000,height:755}});
 await ctx.addInitScript(`window.__seed=${+process.env.SEED||5100};`+SEEDRNG+`window.__bot=1;window.MutationObserver=class{observe(){}disconnect(){}takeRecords(){return[]}};`);

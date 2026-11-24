@@ -2,7 +2,7 @@
 // 1 default ranges = jtoil's old thresholds (same verdict as the pre-D17 toilDress for every ratio) · 2 host / mourning / edict shift the range
 // 3 extras on the card = applied (leAttire delta) · 4 Hội phối đồ: in-range beats lavish beats over-rank; theme tags on every wearable
 // 5 monthly reputation → edict (world key), NPC same rules · 6 old save without the new keys loads and plays a month · 7 no page errors
-const {chromium}=require('playwright');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');
 const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
 (async()=>{const b=await chromium.launch({args:['--disable-dev-shm-usage','--disable-gpu']});const pg=await b.newPage({viewport:{width:755,height:1000}});
  await pg.route(u=>!/^file:/.test(String(u)),r=>r.abort());await pg.route(/\.(webp|png|jpg|mp3|ogg)$/,r=>r.abort());

@@ -7,7 +7,7 @@
    4 admirer: likeV is one of the two most beautiful candidates (never anyone else)
    5 bot run (8 tuần) with every affair path live: no page errors, no npcWhy errors
    usage: node dev/test/npc-purpose-g1.test.js [dev/index.html] → exit 1 on any FAIL */
-const {chromium}=require('playwright');const path=require('path');const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+path.resolve(URL0);
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+path.resolve(URL0);
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&/npcWhy|npw/.test(m.text()))errs.push(m.text())});
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);

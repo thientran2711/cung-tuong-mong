@@ -4,7 +4,7 @@
    3 NPC cx2:likes: open again while the month art is unknown; eaAsk names it at BAL.steal.ea.disc (the same rule as her discover)
    4 NPC flip-mode weights = the odds SHE sees (stealShown: month art only when known); the roll stays the true oSteal
    5 old save without S.emp.ea / eaK loads, a week plays, a month art is drawn */
-const {chromium}=require('playwright');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:755,height:1000}})).newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.route(/\.(webp|png|jpg|jpeg|mp3|ogg|mp4|webm)(\?.*)?$/,r=>r.abort());await p.goto('file://'+path.resolve(process.argv[2]),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  const R=await p.evaluate(()=>{const out=[];const ok=(n,c,x)=>out.push([c?"PASS":"FAIL",n,c?"":JSON.stringify(x)]);

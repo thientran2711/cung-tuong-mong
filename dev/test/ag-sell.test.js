@@ -7,7 +7,7 @@
    5 NPC buyer: same pick, same price; buys by worth vs price; a bought deed is known by knFor, a proof fact gives evidence; j67 'Mua tin' uses the engine
    6 old save without S.tb.sl / no; no page / agent errors over a bot run
    usage: node dev/test/ag-sell.test.js [dev/index.html] [days] → exit 1 on any FAIL */
-const {chromium}=require('playwright');const path=require('path');const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+path.resolve(URL0);const DAYS=+process.argv[3]||4;
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+path.resolve(URL0);const DAYS=+process.argv[3]||4;
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);

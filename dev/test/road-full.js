@@ -7,7 +7,7 @@
    - a road NOT complete keeps the phase-1 frame (other premises + shared + st_the);
    - no page errors. Sizes: the chapter cards are the j67 kit cards (sizes are checked by the story14-view test).
    usage: node dev/test/road-full.js <url> [lives per road] */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const [,,URL,NL,ONLY]=process.argv;/* ONLY = comma list of roads to walk (default: every full road) */const NLIV=+NL||3;
 (async()=>{const b=await chromium.launch();const errs=[];const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c)console.error('FAIL',n,JSON.stringify(x).slice(0,900))};
  let p;/* boot(): a fresh context = a fresh world (the world and its children carry over from life to life in one storage) */

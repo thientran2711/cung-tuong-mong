@@ -3,7 +3,7 @@
    j71 act (AS_SAME); "Thả đèn cầu con" → the Hành sự card wish "Cầu con"; stroll takes the first "!" slot (≤2 per buổi) + frequency over
    300 buổi before/after; night sneaking (odds + BAL.ad.nightSneak, caught Danh + BAL.ad.nightCaught); the night cold-palace call; one door
    for "Nghe lén câu chuyện"; old save loads.   usage: node dev/test/act-split-w2.js <url> [W]x[H]@dpr  → "ok/FAIL" lines + "FAIL n" */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');
 const src=fs.readFileSync(__dirname+'/act-audit.js','utf8');const LIB=src.match(/const LIB=String\.raw`([\s\S]*?)`;\n\(async/)[1];
 const [,,URL,SZ]=process.argv;const [WH,DPR]=(SZ||'1180x820@1').split('@');const [W,H]=WH.split('x').map(Number);
 /* the wave-1 roll (before this branch), to compare the stroll frequency on the same states */

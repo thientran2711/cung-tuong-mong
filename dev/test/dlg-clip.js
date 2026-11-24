@@ -5,7 +5,7 @@
    Also checks the KIT rule (owner OD:L191): title (.kph), picture/figures, buttons row stay fixed; only the text/option area scrolls.
    usage: node dev/test/dlg-clip.js <page URL> <outfile.json> [WxH@dpr,...] [maxPend]   → table per viewport; exit 1 when any case has clipped text
    or a long dialog has no scroll area. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SIZES,MAXP]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,URL,OUT,SIZES,MAXP]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 const VPS=(SIZES||"755x1000@2,1000x755@2,1180x820@2,1366x1024@2,844x390@3").split(",");
 const LONG=" Một câu rất dài để nội dung vượt quá chiều cao của khung, người xem cần cuộn mới đọc hết được lời kể này.".repeat(18);
 (async()=>{const b=await chromium.launch();const R={};let bad=0;

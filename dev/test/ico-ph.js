@@ -1,7 +1,7 @@
 /* review/kit-ico-rank (KIT §59 K-ICO-2 · §77 K-ICO-1 · §77.1 K-ICO-3): placeholder pictures come from the set that fits their slot (orientation + size),
    rail icons = ico-cal / ico-goal, status icons = ico-download / ico-update (painted, no text glyph). No page errors, no horizontal overflow.
    usage: node dev/test/ico-ph.js <url> <outdir> [WxH@dpr,...]  → JSON per size + shots <outdir>/icoph-<size>-{acts,event,rail}.png; exit 1 on FAIL */
-const {chromium}=require('playwright');const [,,URL,OUT,SZ]=process.argv;const sizes=(SZ||'755x1000@2,1180x820@2').split(',');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,URL,OUT,SZ]=process.argv;const sizes=(SZ||'755x1000@2,1180x820@2').split(',');
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});let bad=0;
  for(const sz of sizes){const [wh,dpr]=sz.split('@');const [W,H]=wh.split('x').map(Number);

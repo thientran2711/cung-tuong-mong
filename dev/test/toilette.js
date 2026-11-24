@@ -1,7 +1,7 @@
 /* Điểm trang buổi sáng (review/toilette, dev/build/jtoil.js): the morning card + top-bar chip, the dress game (kitInvGrid), the makeup game
    played with real pointer moves, the effect on the Thỉnh an Thái hậu / Hoàng hậu cards by nết, skipping does not block, an old save loads.
    usage: node dev/test/toilette.js <url> <WxH@dpr> <shotdir> [oldsave.json] */
-const {chromium}=require('./lib/pw-roulette');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off',require('./lib/pw-roulette'));/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');
 const [,,URL,VP,DIR,OLD]=process.argv;const m=/(\d+)x(\d+)@([\d.]+)/.exec(VP||'755x1000@2');const W=+m[1],H=+m[2],DPR=+m[3];const tag=`${W}x${H}`;
 fs.mkdirSync(DIR,{recursive:true});
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:DPR,serviceWorkers:'block'});await ctx.route(u=>/ctmload=1|x-ctm-load/.test(String(u)),r=>r.abort());const p=await ctx.newPage();

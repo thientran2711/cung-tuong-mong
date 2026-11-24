@@ -2,7 +2,7 @@
    Bots play (dev/measure/inpage4.js) with dev/test/log-sync-inpage.js checking after every action that replaying the
    Sổ ghi gives the header value for every stat. Prints every code path that changed a stat without a matching log line,
    mapped to dev/build/j*.js file:line. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');
 const [,,URL,NS,MODE,SEED]=process.argv;const N=+NS||10,mode=MODE||"sens",seed=+SEED||12345,CH=+process.env.CH||100;
 const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
 const AUD=fs.readFileSync(path.join(__dirname,'log-sync-inpage.js'),'utf8');

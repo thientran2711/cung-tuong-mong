@@ -5,7 +5,7 @@
    2. Safe road: "Khuyên ngài giữ long thể" gives BAL.visit.adviseDuc / adviseTh.
    3. Gates: pregnant / lãnh cung / gap → no visit; empnight no longer drawn by the generic pool.
    4. BOT: real endTurn days (dialogs cleared, Sủng held at a level) → visits per year per Sủng level; Thái hậu displeased rate per archetype. */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const R=path.resolve(__dirname,'../..');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs'),path=require('path');const R=path.resolve(__dirname,'../..');
 const YEARS=+process.argv[2]||6,LIVES=+process.argv[3]||6,BEFORE=+process.env.BEFORE||0;
 (async()=>{const b=await chromium.launch({args:['--disable-gpu']});const ctx=await b.newContext({viewport:{width:1000,height:755},reducedMotion:'reduce'});
  await ctx.route(/^https?:\/\/(?!ts\.local)/,r=>/image|media|font/.test(r.request().resourceType())?r.abort():r.continue());

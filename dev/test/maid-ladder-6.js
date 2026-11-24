@@ -3,7 +3,7 @@
    exam index (ma ma = BAL.srvRk.mama), the same ladder for NPC maids (srkMax / NPC exam / ma ma choice), art tier (tam + nhị share «Cung nữ»).
    OLD SAVE: a maid life saved by the LIVE build (oldURL) loads in the new build with the mapped ranks and plays a month.
    usage: node dev/test/maid-ladder-6.js <newURL> <oldURL|-> <outdir> [WxH@dpr ...]   (shots go to <outdir>, never into git) */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');
 const [,,URL,OLD0,OUT,...SZ]=process.argv;const OLD=OLD0&&OLD0!=='-'?OLD0:null;const SIZES=SZ.length?SZ:['755x1000@1','1180x820@1'];
 if(OUT)fs.mkdirSync(OUT,{recursive:true});
 const boot=async(p,u)=>{await p.goto(u,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await p.waitForTimeout(1500);

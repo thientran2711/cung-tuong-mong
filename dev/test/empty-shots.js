@@ -1,7 +1,7 @@
 /* review/empty-states: before/after shots of every EMPTY state (forced), Fold 755x1000 + iPad 1180x820, HOST mode, into <outdir> (outside git).
    usage: node dev/test/empty-shots.js <outdir> <tag:before|after> [device,...] [stateKey,...]
    Each state = a setup that forces the panel empty, then a screenshot of the whole page. Prints one line per state: key | kit card (.kskill/.kempty) y/n | picture y/n | lines. */
-const {chromium}=require('playwright');const fs=require('fs');const D=require('./lib/device');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const D=require('./lib/device');
 const [,,OUT,TAG,DEVS,ONLY]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const devices=(DEVS&&DEVS!=='-'?DEVS:'fold,ipadAir').split(',');const sleep=t=>new Promise(r=>setTimeout(r,t));
 const NOKIDS='for(const v of rivals)v.kids=[];S.kids=[];';

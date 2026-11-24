@@ -1,6 +1,6 @@
 /* Independent scenario checks on the real page (no bot). usage: node ia_scen.js <url> <out.json>
    Each scenario drives the game through its own functions, then runs __IA.check (ia_hook.js) and a few direct asserts. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=require('../lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');
 const [,,URL='http://127.0.0.1:8971/t.html',OUT='scen.json']=process.argv;const HOOK=fs.readFileSync(path.join(__dirname,'ia_hook.js'),'utf8');
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:755,height:1000},deviceScaleFactor:1});const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  const res={};

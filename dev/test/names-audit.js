@@ -3,7 +3,7 @@
    people seen, distinct full names, duplicate full names (two people, same name, living or dead), given-name clashes among the living
    ("Uyển Nhi" beside "Thẩm Uyển Nhi"), names with an excluded Vietnamese-style surname / given name.
    usage: node dev/test/names-audit.js <path to dev/index.html> [years=20] [lives=4]   prints one JSON line */
-const {chromium}=require('playwright');const path=require('path');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');const fs=require('fs');
 const [,,GAME,Y,L]=process.argv;const YEARS=+Y||20,LIVES=+L||4;
 (async()=>{const b=await chromium.launch();const p=await b.newPage();p.setDefaultTimeout(3600000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await p.route(u=>!/^file:/.test(String(u)),r=>r.abort());await p.goto('file://'+path.resolve(GAME),{waitUntil:'domcontentloaded'});

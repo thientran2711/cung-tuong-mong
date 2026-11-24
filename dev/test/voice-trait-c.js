@@ -1,6 +1,6 @@
 /* VOICE BY TÍNH TÌNH — W-C (quests, j72): the asker's lead-in + her reaction at the end of a quest take HER tone.
    usage: node dev/test/voice-trait-c.js   (serves dev/index.html; run python3 dev/build/assemble.py first) */
-const {chromium}=require('playwright');const http=require('http');const fs=require('fs');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const http=require('http');const fs=require('fs');const path=require('path');
 const ROOT=path.join(__dirname,'..');
 function serve(){return new Promise(r=>{const s=http.createServer((q,a)=>{const f=path.join(ROOT,decodeURIComponent(q.url.split('?')[0]));fs.readFile(f,(e,d)=>{if(e){a.writeHead(404);a.end();return}a.setHeader('Content-Type',/\.html$/.test(f)?'text/html; charset=utf-8':/\.js$/.test(f)?'text/javascript':'application/octet-stream');a.end(d)})});s.listen(0,'127.0.0.1',()=>r(s))})}
 (async()=>{const srv=await serve();const url=`http://127.0.0.1:${srv.address().port}/index.html`;

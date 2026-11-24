@@ -3,7 +3,7 @@
    maid life): every chosen k is a player button (no NPC-only hidden act), both groups act, 0 throws; 3 the rolls are off while asOn (j14 sale, j10 spy/tell,
    maidLoveMonth, mlSeek start, mlFeud); 4 old save (staff with no stats) loads; 5 BAL.ag.on=0 → no staff act; perf ms per tick.
    usage: node dev/test/ag-all-b.js <page URL or file> [weeks]  → exit 1 on any FAIL or page error */
-const {chromium}=require('playwright');const [,,URL0,WK0]=process.argv;const WK=+WK0||40;const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,URL0,WK0]=process.argv;const WK=+WK0||40;const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 /* player buttons of the maid life (srvCards / srvTalk / srvStaffAct / love): SRVA key → button label */
 const BTN={/* AG-ALL-2e */follow:"Theo hầu chủ",cut:"Cắt đứt",/* AG-ALL-2c (jagknow player maid cards) */listen:"Nghe ngóng cho chủ",scout:"Tự đi dò la cho chủ",watch:"Canh chừng cung chủ",/* AG-ALL-2 G5 / G6 (jagstf2) */leave:"Xin chủ cho đi hầu cung khác",poison:"Bỏ độc vào bát cơm",pil:"Lén giữ đồ Nội vụ phủ phát",sweep:"Quét sân, lau điện",tea:"Dâng trà, hầu điểm tâm",nvp:"Lĩnh đồ ở Nội vụ phủ",rite:"Học lễ nghi với cô cô",study:"Luyện thêu thùa, chữ nghĩa",groom:"Chải chuốt, giữ nhan sắc",rest:"Nghỉ lấy sức",embro:"Thêu khăn bán ra ngoài",med:"Mua thuốc bổ",books:"Quản sổ sách trong cung",spy:"Lén báo tin",

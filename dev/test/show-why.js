@@ -1,7 +1,7 @@
 /* SHOW WHY A NUMBER (review/show-why): every result box + Sổ ghi line with a changed number carries "Vì sao" with the factors
    (nết, trọng, mood, repetition…), named when known, generic when not; the shown number = the applied number.
    usage: node dev/test/show-why.js [index.html] [base.html for the old-save check] */
-const {chromium}=require('playwright');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');
 const NEW='file://'+path.resolve(process.argv[2]||path.join(__dirname,'../index.html'));const BASE=process.argv[3]?'file://'+path.resolve(process.argv[3]):null;
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,500):''))};
 async function open(b,url,errs){const p=await b.newPage();p.on('pageerror',e=>errs.push(e.message));p.setDefaultTimeout(120000);await p.route(/^https?:/,r=>r.abort());

@@ -5,7 +5,7 @@
    2. live: real cards/acts built by the game; the shown "ghen +N" is parsed, the option is run, every rival's real delta must equal N:
       pool() Múa trong yến tiệc · artActs() Kinh hồng vũ · deal() Báo tin có thai · j7 event phoenix (Để lời đồn lan xa) · j75 pregFind card (Báo tin cho Hoàng thượng) ·
       j20 bestow card · jvisit empnight Thắp đèn line (shown == ghenN(BAL.visit.ghen) == visAfter's real gain). */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path'),cp=require('child_process');const R=path.resolve(__dirname,'../..');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs'),path=require('path'),cp=require('child_process');const R=path.resolve(__dirname,'../..');
 (async()=>{const fail=[];const sc=cp.spawnSync('python3',[R+'/dev/measure/ghen_shown_scan.py'],{encoding:'utf8'});const tot=(sc.stdout.match(/TOTAL .*/)||[''])[0];
  if(sc.status!==0)fail.push('scan: '+tot);console.log('scan',tot);
  const b=await chromium.launch({args:['--disable-gpu']});const ctx=await b.newContext({viewport:{width:1000,height:755},reducedMotion:'reduce'});

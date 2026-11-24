@@ -5,7 +5,7 @@
    4 the player's khắc costs read the same BAL.time.cost (talk / harm) the NPC side reads
    5 G12: hhAct(a, v, "reward") moves v.hh and liking by the same BAL numbers whoever is the Empress (player or NPC)
    6 BAL.ag.kh2.on = 0 → one deed per buổi (old path); no page errors */
-const {chromium}=require('playwright');const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);const NB=+process.argv[3]||40;
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);const NB=+process.argv[3]||40;
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);

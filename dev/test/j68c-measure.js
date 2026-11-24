@@ -3,7 +3,7 @@
    e68Make: real cast, variant memory, P0 marks), the clock moving BAL.ag.why.e68.gap tuần per draw (cooldowns run). Reported per family and in all:
    % of the situations shown in lives 2–6 whose DECISION (template / seed) was already met in an earlier life, and % whose exact WORDING was.
    before = BAL.j68c.on false (the 90 hand-written decisions only), after = on (90 + composed seeds). */
-const {chromium}=require('playwright');const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const N=+process.argv[2]||130,RUNS=+process.argv[3]||4;
 const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http://x').pathname);if(p==='/')p='/index.html';const f=path.join(ROOT,p);if(!fs.existsSync(f)||fs.statSync(f).isDirectory()){r.statusCode=404;return r.end()}fs.createReadStream(f).pipe(r)});
 (async()=>{await new Promise(r=>srv.listen(0,'127.0.0.1',r));const b=await chromium.launch();const ctx=await D.newDeviceContext(b,'fold',{deviceScaleFactor:1,reducedMotion:'reduce'});

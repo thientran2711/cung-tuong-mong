@@ -9,7 +9,7 @@
    8 old save: a save with no S.mgB (this build + the old build) loads, plays, gets a store; ser → deser keeps S.mgB
    9 co-op: S.mgB is a personal key (not in jcoopworld W_KEYS) → each seat by its OWN b; two players with different hands get different offsets for the same kind
    10 no page errors */
-const {chromium}=require('playwright');const path=require('path');const A=process.argv[2]||'index.html',OLD=process.argv[3]||'';
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');const A=process.argv[2]||'index.html',OLD=process.argv[3]||'';
 const U=x=>/^(https?|file):/.test(x)?x:'file://'+path.resolve(x);
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,700):''))};
 (async()=>{const b=await chromium.launch();const errs=[];

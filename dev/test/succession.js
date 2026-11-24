@@ -4,7 +4,7 @@
    Tiên đế băng hà = kit 31.16 headArt band), play each epilogue to its ending (end card says "Kết cục" for living endings),
    save + reload mid-epilogue keeps the chapter (path b), an old save without S.succ loads and a turn passes, Sổ luân hồi
    shows "Kết cục kế vị" (kit rows). FAIL on page errors, horizontal overflow, cut/outside text, '%', '…'. */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');
 const args=process.argv.slice(2);const pi=args.indexOf('--path');const ONLY=pi>=0?args.splice(pi,2)[1]:'all';
 const [BASE,OUT,...SZ]=args;fs.mkdirSync(OUT,{recursive:true});const SIZES=SZ.length?SZ:['755x1000','1180x820'];
 const sleep=t=>new Promise(r=>setTimeout(r,t));

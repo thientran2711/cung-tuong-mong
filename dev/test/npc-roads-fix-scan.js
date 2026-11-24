@@ -7,7 +7,7 @@
                      a man/eunuch named «nàng» in options/steps/loss/result lines → 0
    F5 ONE CORE     : typed numbers in jnroad*.js code (option odds/losses, odds clamp, stat/loyal defaults, pick sizes) → 0 (source scan)
    F6 help hold    : a maid/eunuch/man/consort whose nr_* quest is active plays the chapter anyway → 0; an unshown queued one is withdrawn */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs'),path=require('path');
 const [,,URL,LABEL]=process.argv;
 (async()=>{const b=await chromium.launch();const errs=[];
  const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(0);

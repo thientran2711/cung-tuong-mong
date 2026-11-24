@@ -4,7 +4,7 @@
  and by the doer's first trait. Works on old builds too (flip-time steals counted the same way).
  night-steal-2: per night also [her?, holder rank, tries, stolen] in L.N (holder = the one robbed, else the night's pick) → same-rank NPC control row in
  night-steal-sum.js; flips made inside start() (the new-life re-roll loop, which can call start() many times) are not counted. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');
 const [,,PAGE,LS,YS,OUT]=process.argv;const LIVES=+LS||10,YEARS=+YS||5,CH=5;
 const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s=(s+0x6D2B79F5)>>>0;let t=s;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296}})();`;
 (async()=>{const b=await chromium.launch({args:['--js-flags=--max-old-space-size=900','--disable-gpu']});const lives=[];const errs=[];const t0=Date.now();

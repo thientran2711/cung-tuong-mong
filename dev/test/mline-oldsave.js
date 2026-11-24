@@ -1,6 +1,6 @@
 /* review/servant-mline-r1: a save made on the previous main build loads in this build and the maid line runs on it (no S.mline / s.seek crash).
    usage: node dev/test/mline-oldsave.js <oldBuildUrl> <newBuildUrl> [months]. Prints JSON; exit 1 on page errors. */
-const {chromium}=require('playwright');const [,,OLD,NEW,MON='24']=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,OLD,NEW,MON='24']=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 async function boot(p,u){await p.goto(u,{waitUntil:'domcontentloaded'});for(let i=0;i<400;i++){const s=await p.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]');if(b){b.click();return ''}return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':''}).catch(()=>'');if(s)break;await sleep(500)}await sleep(800)}
 (async()=>{const b=await chromium.launch({args:['--blink-settings=imagesEnabled=false']});const ctx=await b.newContext({serviceWorkers:'block'});await ctx.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)(\?|$)/,r=>r.abort().catch(()=>{}));
  const errs=[];let p=await ctx.newPage();p.on('pageerror',e=>errs.push('old:'+e.message.slice(0,160)));p.setDefaultTimeout(600000);await boot(p,OLD);

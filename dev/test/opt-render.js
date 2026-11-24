@@ -15,7 +15,7 @@
    F  the game's own turns: endTurn × 80 (× 240 with --bot) with every module's hooks; each dialog with choices the GAME pushed is classified
       (event / act / shop); one that is neither an event nor flagged act / shop / showOut FAILS (an event that slipped past cost mode).
    Also: no horizontal page overflow, no option wider than its box, no page error. Writes <outdir>/opt-render-<WxH>.json (every dialog). */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');
 const args=process.argv.slice(2);const BOT=args.includes('--bot');const [PAGE,OUT,SZ]=args.filter(a=>!a.startsWith('--'));fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 const RETIRED=/(^|; )chuyện khác|có cái giá|thế đối thủ|có lợi về|chẳng được gì rõ/;

@@ -6,7 +6,7 @@
    without ky load and roll lazily · 8 Sổ luân hồi line renders, life line gets "Kỳ ngộ: …" · 9 ilAudit net stays 0 · 10 every card text is
    cổ trang (no %, no OK words) · 11 the card is a PEND event in cost mode with an evId "kyngo:<id>" and a who face · 12 she is the WHO of an NPC's
    encounter (pass at the end of her buổi, household with her) · 13 co-op friend entry never rolls · 14/15 no card with every option unpayable. */
-const {chromium}=require('playwright');const [,,URL]=process.argv;
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,URL]=process.argv;
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:1180,height:820},serviceWorkers:'block'})).newPage();
  const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{timeout:0});await p.waitForFunction(()=>typeof start==='function'&&window.KY,null,{timeout:0});

@@ -4,7 +4,7 @@
    festival events (real endTurn), borrow → the piece really moves and comes back, the shared contest formula cut for her AND an NPC, an NPC turned
    away, stay → festival events gone, NPC asks to borrow hers, calendar popover line, wear-slot label, old save + save round trip.
    usage: node dev/test/dresscode.test.js [dev/index.html]   → exit 1 on FAIL or page error */
-const path=require('path');const {chromium}=require('playwright');
+const path=require('path');const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const HTML=process.argv[2]||'dev/index.html';let fail=0;const ck=(n,c,x)=>{console.log((c?'ok  ':'FAIL')+' '+n+(x!==undefined?' · '+JSON.stringify(x):''));if(!c)fail++};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.route(u=>/^https?:/.test(u.href),r=>r.abort());await p.goto('file://'+path.resolve(HTML),{waitUntil:'domcontentloaded'});

@@ -7,7 +7,7 @@
    build never saw the old save ("no saved slot on NEW"). The test now serves BOTH builds itself from one origin (like dev/tools/quickcheck.js):
    "/" is the old or the new index.html (switched with /__ver/old|new), every other file comes from the site root (CTM_ROOT, else this
    checkout's root). */
-const {chromium}=require('playwright');const [,,OLDA,NEWA,SZ,CASES]=process.argv;
+const {chromium}=require('../lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,OLDA,NEWA,SZ,CASES]=process.argv;
 const http=require('http'),fs=require('fs'),path=require('path'),cp=require('child_process');
 const ROOT=path.resolve(process.env.CTM_ROOT||path.join(__dirname,'..','..','..'));
 async function html(a){if(/^https?:/.test(a)){const r=await fetch(new URL('index.html',a.endsWith('/')?a:a+'/'));return await r.text()}

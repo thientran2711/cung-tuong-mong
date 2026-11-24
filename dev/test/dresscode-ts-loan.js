@@ -6,7 +6,7 @@
    (2) stale dialog: the piece left the lender's chest → nothing moves. (3) old save: e.tsB → migrated by deser to e.bor + the lender's book;
    contest end → home. (4) old e.tsB with no contest pending → home at the next real endTurn. (5) lender gone from the world → the ledger box,
    never kept. (6) «Cho mượn» visit: her named piece really goes to the NPC (one copy), back the next tuần. (7) no tsB mark left anywhere. */
-const path=require('path');const {chromium}=require('playwright');
+const path=require('path');const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const HTML=process.argv[2]||'dev/index.html';let fail=0;const ck=(n,c,x)=>{console.log((c?'ok  ':'FAIL')+' '+n+(x!==undefined?' · '+JSON.stringify(x):''));if(!c)fail++};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.on('console',m=>{if(m.type()==='error'&&/^dc|dcReturn|dcLedger|dcTurn|dcWeek|dcMigTs|tsBor/.test(m.text()))errs.push('console: '+m.text().slice(0,200))});
  await p.route(u=>/^https?:/.test(u.href),r=>r.abort());await p.goto('file://'+path.resolve(HTML),{waitUntil:'domcontentloaded'});

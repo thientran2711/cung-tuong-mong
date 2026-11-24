@@ -2,7 +2,7 @@
    Checks after load: the player's own name is unchanged; zero duplicate full names; zero excluded (Vietnamese-style) names; every person in
    the registry; a turn passes; old texts no longer print a renamed person's old name (unless another person still holds it).
    usage: node dev/test/names-oldsave.js <old dev/index.html> <new dev/index.html> [years=15] [lives=3] */
-const {chromium}=require('playwright');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');
 const [,,OLD,NEW,Y,L]=process.argv;const YEARS=+Y||15,LIVES=+L||3;
 async function open(b,f){const p=await b.newPage();p.setDefaultTimeout(1800000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await p.route(u=>!/^file:/.test(String(u)),r=>r.abort());await p.goto('file://'+path.resolve(f),{waitUntil:'domcontentloaded'});

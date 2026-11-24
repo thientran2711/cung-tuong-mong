@@ -5,7 +5,7 @@
    - a man's help hồi (kinds man/doc/eun/ksp/off): title names him + road + chapter; he speaks as thần / nô tài / bản vương and calls the player
      tiểu chủ / nương nương; option 0 feeds his chapter or fails honestly, betrayal hb<0;
    - his road line on his card (manCard); no page errors. usage: node dev/test/npc-roads-men.js <url> [lives] [months] */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const [,,URL,NL,NM]=process.argv;const NLIV=+NL||2,MON=+NM||120;
 (async()=>{const b=await chromium.launch();const errs=[];const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);console.log((c?'ok   ':'FAIL ')+n);if(!c)console.error('  ',JSON.stringify(x).slice(0,900))};
  let ctx=null,p=null;

@@ -9,7 +9,7 @@
    - small avatars: no box behind the frame (computed background transparent); Sổ này ghi names one colour; no "Lui" button (✕ only);
    - turning pages: every <img> on the turning sheet copy and on the next page is decoded before the turn starts (img.complete && decode)
      and the live page is not rebuilt (same DOM nodes before/after a turn). */
-const {chromium}=require('playwright');const args=process.argv.slice(2);const URL=args[0];
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const args=process.argv.slice(2);const URL=args[0];
 const si=args.indexOf('--shots');const SHOTS=si>0?args[si+1]:null;
 let SIZES=args.slice(1).filter((a,i,A)=>a!=='--shots'&&A[i-1]!=='--shots');if(!SIZES.length)SIZES=['755x1000@2','1000x755@2','1180x820@2','1366x1024@2','844x390@3'];
 (async()=>{const b=await chromium.launch();const errs=[];const OUT={};let ok=true;

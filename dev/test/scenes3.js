@@ -1,6 +1,6 @@
 /* scenes-3 (review/scenes-3): demotion scene (jdemo), Học thành tài (jlevel), Biếu quà làm lành with a work/item (jts).
    usage: node dev/test/scenes3.js [outdir]   shots go OUTSIDE the repo (default /home/user/wt/scenes-3-shots) */
-const {chromium}=require('playwright');const D=require('./lib/device');const out=process.argv[2]||'/home/user/wt/scenes-3-shots';require('fs').mkdirSync(out,{recursive:true});
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');const out=process.argv[2]||'/home/user/wt/scenes-3-shots';require('fs').mkdirSync(out,{recursive:true});
 (async()=>{const srv=await D.serveRoot();const b=await chromium.launch({proxy:process.env.HTTPS_PROXY?{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}:undefined});const R={};
  for(const dev of ['fold','ipadAir']){const ctx=await D.newDeviceContext(b,dev);const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(String(e).slice(0,200)));
   const g=await D.openHost(p,srv.url);await p.waitForTimeout(2500);

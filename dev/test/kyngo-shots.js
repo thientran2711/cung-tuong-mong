@@ -1,7 +1,7 @@
 /* kyngo-shots: the kỳ ngộ card on the two priority devices (law 12) — a choice card (th_kinh: Thái hậu), a card with a found piece
    (vat_lac: kitItemTag), the result card, and the Sổ luân hồi block. Checks: no horizontal overflow, options inside the screen, 0 page errors.
    usage: node dev/test/kyngo-shots.js <url of the SITE index.html> <outdir> [WxH@dpr,...]  → shots <outdir>/<size>-<n>.png, last line PASS / FAIL n */
-const {chromium}=require('playwright');const [,,URL,OUT,SIZES]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));const fs=require('fs');fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,URL,OUT,SIZES]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));const fs=require('fs');fs.mkdirSync(OUT,{recursive:true});
 const VPS=(SIZES||"755x1000@2,1180x820@2").split(",");
 (async()=>{const b=await chromium.launch();let fail=0;const ck=(n,ok,i)=>{if(!ok)fail++;console.log((ok?'ok   ':'FAIL ')+n+(i?' · '+JSON.stringify(i).slice(0,200):''))};
  for(const sz0 of VPS){const [sz,dpr]=sz0.split("@");const [W,H]=sz.split("x").map(Number);const errs=[];
@@ -14,7 +14,7 @@ const VPS=(SIZES||"755x1000@2,1180x820@2").split(",");
   await p.evaluate(()=>{try{localStorage.setItem("ctm-kyngo",JSON.stringify({ma_phe:{n:1,first:{who:"Thẩm Như Ý",o:"Con gái Tể tướng",y:1}},de_mua:{n:2,first:{who:"Thẩm Như Ý",o:"Con gái Tể tướng",y:2}}}))}catch(e){}});
   await p.evaluate(()=>{const b=document.querySelector('[data-tgo="past"]');if(b)b.click()});{await sleep(1500);await p.screenshot({path:`${OUT}/${sz}-0-book.png`});
    const t=await p.evaluate(()=>document.body.innerText.includes("kỳ ngộ đã gặp"));ck(`${sz} Sổ luân hồi shows the kỳ ngộ block`,t)}
-  await p.evaluate(()=>{const M=document.getElementById('modal');Q.length=0;if(M)M.hidden=true;/* this test checks the CARD frame: the kỳ ngộ dialogue scene (jdlgs, wave 2) would hide the card until tapped through — dlgs-play checks the scenes */try{BAL.dlgs.on=false}catch(e){}});
+  await p.evaluate(()=>{const M=document.getElementById('modal');Q.length=0;if(M)M.hidden=true;/* the kỳ ngộ dialogue scene is off: lib/dlgs-off.js pw('off') at the top */});
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;for(let i=0;i<40;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!isSrv())break}Q.length=0;render()});
   await sleep(2500);
   const force=async id=>p.evaluate(id=>{Q.length=0;S.ky={m:0,cd:-1,seen:{},got:[],last:-1};for(const k in KY.DEF)if(k!==id)S.ky.seen[k]=0;BAL.kyngo.p0=100;BAL.kyngo.pity=0;

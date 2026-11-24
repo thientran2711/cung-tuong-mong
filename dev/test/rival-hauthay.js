@@ -10,7 +10,7 @@
    6 not sending: her night as before (nights +1, conception roll on her)
    7 agents off (amOn false → npcWhy fallback + j8 sendMaid): the same two-way result for her and the NPC
    usage: node dev/test/rival-hauthay.js <url or file>   (exit 0 = all pass) */
-const {chromium}=require('playwright');const [,,U0]=process.argv;const URL=/^(https?|file):/.test(U0)?U0:'file://'+require('path').resolve(U0);
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,U0]=process.argv;const URL=/^(https?|file):/.test(U0)?U0:'file://'+require('path').resolve(U0);
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'})).newPage();
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(0);
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof amOn==='function'&&typeof htCan==='function',null,{timeout:0});await p.waitForTimeout(2000);

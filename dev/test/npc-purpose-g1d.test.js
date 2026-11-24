@@ -5,7 +5,7 @@
    6 hairpin thief: the culprit is the greedy / disloyal servant; all loyal, none greedy → no theft event
    (j68h SOC gossip target: converted, but the live gossip deed is jtwoway TW.gossip — G3 row jtwoway:72) · 8 j68 tick: no second j68 event inside BAL.ag.why.e68.gap tuần · 9 bot run 32 buổi without errors
    usage: node dev/test/npc-purpose-g1d.test.js [dev/index.html] → exit 1 on any FAIL */
-const {chromium}=require('playwright');const path=require('path');const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+path.resolve(URL0);
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+path.resolve(URL0);
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&/npcWhy|npw|q72|e68/.test(m.text()))errs.push(m.text())});
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);

@@ -3,7 +3,7 @@
    Every PEND frame is opened twice per device: step OFF (kszPicStep3 = no-op) = BEFORE, step ON = AFTER. Records ksz, picture height, kszOver3 (px the frame scrolls).
    FAIL: AFTER scrolls more than BEFORE; AFTER keeps a picture above the smallest class while a class from the ladder would remove the scroll (checked by trying the ladder on the open frame).
    usage: node dev/test/scene-pic-step.js <index.html> [out.json]   env SZ=[[W,H],..] MAXP=n */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);let bad=0;const ALL=[];
  for(const [W,H] of SZ)for(const mode of ['before','after']){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1;let s=12345;Math.random=()=>{s=(s*1664525+1013904223)%4294967296;return s/4294967296};
    Object.defineProperty(HTMLImageElement.prototype,'naturalWidth',{get(){return 1280},configurable:true});Object.defineProperty(HTMLImageElement.prototype,'naturalHeight',{get(){return 720},configurable:true})});

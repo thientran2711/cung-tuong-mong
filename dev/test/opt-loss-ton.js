@@ -3,7 +3,7 @@
    Scans every PEND dialog as the game shows it (events: cost mode, the loss comes from the hint's «nhưng …»; act pickers: full
    act-card rows) — plus approachOne visits and a fixed set of worded lines (the j95s picker «Đi một mình» form).
    usage: node dev/test/opt-loss-ton.js <index.html url> [WxH,…]   (default 755x1000,1180x820) — exit 1 when a card with a certain loss shows «Tốn: không» */
-const {chromium}=require('playwright');const [,,PAGE,SZS]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,PAGE,SZS]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();let bad=0;
  for(const sz of (SZS||"755x1000,1180x820").split(",")){const [W,H]=sz.split("x").map(Number);
   const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});

@@ -12,7 +12,7 @@
      SEEDS lives (default 1,2,3) × DAYS (default 16) days; §5 = carried items appear in the sum of the lives (carry > 0 and seen > 0), and in EVERY
      life every carried item is ended, no caught error. §1–4 (the planted case that proves the path) run in every life.
      usage: node dev/test/ag-carry.test.js [dev/index.html] [days=16] [seeds=1,2,3] */
-const {chromium}=require('playwright');const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);
 const DAYS=+(process.argv[3]||16);const SEEDS=String(process.argv[4]||process.env.AGC_SEEDS||'1,2,3').split(',').map(Number).filter(Boolean);
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const errs=[];const BOT={carry:0,seenC:0,badC:0,errs:[],lives:[]};for(const SEED of SEEDS){const p=await b.newPage({viewport:{width:755,height:1000}});p.on('pageerror',e=>errs.push(e.message));

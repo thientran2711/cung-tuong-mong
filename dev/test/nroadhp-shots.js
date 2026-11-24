@@ -1,7 +1,7 @@
 /* nroadhp-shots (QUESTLINE Q2): Mệnh truyện › «Phụ tuyến» list on the owner's two devices (Fold 755x1000@2, iPad 1180x820@2) after three
    real help hồi played through j72 (help → won chapter, betrayal → lost chapter + found out, help → road closed with the finale reward).
    Shots go to <outdir> (outside git). usage: node dev/test/nroadhp-shots.js <url> <outdir> */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL0,OUT0]=process.argv;const URL=URL0||'http://127.0.0.1:8731/index.html',OUT=OUT0||'/tmp/nroadhp-shots';
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,URL0,OUT0]=process.argv;const URL=URL0||'http://127.0.0.1:8731/index.html',OUT=OUT0||'/tmp/nroadhp-shots';
 (async()=>{fs.mkdirSync(OUT,{recursive:true});const b=await chromium.launch();const errs=[];
  for(const [nm,W,H] of [['fold',755,1000],['ipad',1180,820]]){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:2,serviceWorkers:'block'});const p=await ctx.newPage();
   p.on('pageerror',e=>errs.push(e.message));await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof nhHp==='function',null,{timeout:120000});await p.waitForFunction(()=>!document.getElementById('kload'),null,{timeout:30000}).catch(()=>{});await p.evaluate(()=>{const k=document.getElementById('kload');if(k)k.remove();try{kitRoulette=o=>{try{o&&o.done&&o.done()}catch(e){}}}catch(e){}});await p.waitForTimeout(1500);

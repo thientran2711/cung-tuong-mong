@@ -6,7 +6,7 @@
    4 items still on the road (W, due not reached) when a buổi ends are not dropped: they land at once in the next buổi
    5 knCarryOut first lands the world work still waiting (agDrain), so a deed of the last khắc is read
    6 no page   (live carries across week wraps: ag-walk 4 + dev/handover/reports/probes/rv-jw-agwalk-carry.js) / agent errors */
-const {chromium}=require('playwright');const U0=process.argv[2]||'index.html';const URL=/^(https?|file):/.test(U0)?U0:'file://'+require('path').resolve(U0);
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const U0=process.argv[2]||'index.html';const URL=/^(https?|file):/.test(U0)?U0:'file://'+require('path').resolve(U0);
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);

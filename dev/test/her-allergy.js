@@ -3,7 +3,7 @@
       she learns it (taste card row "Ta"); a non-allergen work does nothing; once known, the "Nhận" option warns.
    2. NPC receivers of an allergen work get the same rash (rcpAllergy). 3. Hỏi thái y lists herself.
    usage: node dev/test/her-allergy.js <game.html> ; exit 1 on any fail or page error. */
-const {chromium}=require('playwright');const [,,G]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,G]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 async function boot(p){for(let i=0;i<300;i++){const ok=await p.evaluate(()=>{const g=document.querySelector('#kload [data-kl="go"]');if(g)g.click();return !!document.querySelector('#slots button[data-new]')});if(ok)return;await sleep(200)}}
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext();await ctx.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)(\?|$)/,r=>r.abort().catch(()=>{}));
  const errs=[];const p=await ctx.newPage();p.on('pageerror',e=>errs.push(e.message.slice(0,160)));

@@ -5,7 +5,7 @@
    - the record's self-check (no duplicate, no one missing, map counts recorded == record) is clean
    - no page error, no horizontal overflow. Saves a few screenshots.
    usage: node dev/test/roster_dom.js <baseURL of a page that wraps dev/index.html with <meta charset=utf-8>> <outdir> [WxH@dpr] */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');const {spawnSync}=require('child_process');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');const {spawnSync}=require('child_process');
 const [,,BASE,OUT,SZ]=process.argv;const [WH,DPR]=(SZ||'755x1000@2').split('@');const [W,H]=WH.split('x').map(Number);
 (async()=>{fs.mkdirSync(OUT,{recursive:true});const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+DPR||1,hasTouch:true,isMobile:W<1100});
  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));

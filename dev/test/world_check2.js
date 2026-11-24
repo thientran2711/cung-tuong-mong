@@ -9,7 +9,7 @@
      the same pay share for her and an NPC; giới nghiêm closes places for NPC plans (worldPlanW 0) and for her walk (goTo)
    4 NPCs react: aged maids leave an NPC household; tỉnh thân brings silver to NPCs; worldPlanW force slot (Hầu thuốc)
    usage: node dev/test/world_check2.js <dev/index.html | URL>  → exit 1 on any FAIL or page error */
-const {chromium}=require('playwright');const [,,U0]=process.argv;const URL=/^(https?|file):/.test(U0)?U0:'file://'+require('path').resolve(U0);
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,U0]=process.argv;const URL=/^(https?|file):/.test(U0)?U0:'file://'+require('path').resolve(U0);
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1180,height:820}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);

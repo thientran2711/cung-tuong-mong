@@ -12,7 +12,7 @@
    d tai mắt: each seat's "Kính sự phòng ghi tuần này" names the other player's nights (two-way)
    e the guest never rolls (ldRoll not called on her seat); conception float on both seats (conceiveCh × BAL.nt.concF)
    f Sổ ghi shots on both seats (scratch outdir, not git). */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs'),path=require('path');
 const {serve,BASE}=require('./coop-serve.js');
 const OUT=path.resolve(process.argv[2]||path.join(__dirname,'../../.tmp/coop-ledger'));fs.mkdirSync(OUT,{recursive:true});
 const WURL=process.argv[3]||'https://ctm-coop.victoria-tntt.workers.dev';

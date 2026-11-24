@@ -1,6 +1,6 @@
 /* review/night-steal unit tests (both directions + co-op guest + ledger notice mode + one-core costs).
    usage: node dev/test/night-steal-unit.js <index.html>   → prints PASS/FAIL lines, exit 1 on any FAIL */
-const {chromium}=require('playwright');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:1000,height:755}})).newPage();const errs=[];
  p.on('pageerror',e=>errs.push(e.message));await p.route(/\.(webp|png|jpg|jpeg|mp3|ogg|mp4|webm)(\?.*)?$/,r=>r.abort());
  await p.goto('file://'+path.resolve(process.argv[2]),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);

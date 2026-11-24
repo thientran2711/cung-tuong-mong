@@ -4,7 +4,7 @@
    walks off (layer / hidden token), the slot chip «đang đi …» stands, the task is the ONE state (ERR.tasks); her clock moves to the due khắc → she walks back ON and a kit «!»
    chip stands on her; tap the chip = the kit panel opens (not a modal gate), the chip goes. Also: a runner with NO token in view (crowded stage) is still drawn
    (kitErrandSpot); reduced motion = chips only; old save (no S.erra) loads; a 40-act full run with no page error and nobody left hidden. */
-const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const [,,BASE,OUT,W0,H0]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=require('./lib/dlgs-off').pw('off',require('./lib/pw-roulette'));/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,BASE,OUT,W0,H0]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const W=+W0||755,H=+H0||1000,tag=`${W}x${H}`;const SLOW=+process.env.SLOW||6;const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:2,hasTouch:true,isMobile:W<900});
  /* PTIME branch (parallel-time fixer #6): with the parallel-time core in the build the adapter reads S.away (jptime); __erReset clears HER sends in BOTH

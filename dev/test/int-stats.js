@@ -2,7 +2,7 @@
    an old save with fractions is rounded on load; the log has no "thù -N" and no card help text dumped into it ("Dùng được ngay");
    the week book never clips a page (an entry longer than a page scrolls inside it) and no stat chip breaks inside.
    usage: node dev/test/int-stats.js <url> [<W>x<H>@dpr ...] */
-const {chromium}=require('playwright');const args=process.argv.slice(2);const URL=args[0];
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const args=process.argv.slice(2);const URL=args[0];
 let SIZES=args.slice(1);if(!SIZES.length)SIZES=['755x1000@2','1180x820@2','412x1058@2','1000x755@2','844x390@3'];
 (async()=>{const b=await chromium.launch();const errs=[];const OUT={};let ok=true;
  for(const [si,SZ] of SIZES.entries()){const [wh,d]=SZ.split('@');const [W,H]=wh.split('x').map(Number);

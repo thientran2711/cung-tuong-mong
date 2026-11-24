@@ -2,7 +2,7 @@
    j8's own flip by making only her card eligible), frames at each beat, a 20-card + 2-card demo, reduced-motion still, tap-skip, old save.
    Checks: cards inside the tray floor, picked card inside the screen, no horizontal overflow, no page errors, scene shows j75's real pick.
    usage: node dev/test/cardflip.js <url> <outdir> 755x1000,1000x755,1180x820,1366x1024,844x390 [dpr] [shots: all|few] */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');
 const [,,BASE,OUT,VPS,DPR,SH]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));const ALL=SH==='all';
 const SHOT=async(p,o)=>{for(let i=0;i<3;i++){try{await p.screenshot(Object.assign({timeout:150000,type:'jpeg',quality:62},o));return}catch(e){console.error('shot retry',o.path)}}};

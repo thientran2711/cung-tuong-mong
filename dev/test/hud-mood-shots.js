@@ -1,6 +1,6 @@
 /* review/hud-mood-bar shots (host mode): node dev/test/hud-mood-shots.js <outdir> [moodValue=-45] [device…]
    Writes <outdir>/<device>-<tab>.png and prints header metrics (header height, overflow, mood bar box). */
-const {chromium}=require('playwright');const fs=require('fs');const D=require('./lib/device');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const D=require('./lib/device');
 const OUT=process.argv[2]||'/home/user/wt/hud-shots';const MV=+(process.argv[3]||-45);const DEV=process.argv.slice(4);
 const devices=DEV.length?DEV:['fold','ipadAir','ipadPro','pixel','iphone14'];const LAY=process.env.LAY||'row';const TABS=['act','rv','inv'];
 fs.mkdirSync(OUT,{recursive:true});

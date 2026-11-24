@@ -1,6 +1,6 @@
 /* palace-life (GAP IT05 + KP03): real stolen pieces + children living rules. Rule checks on the built game + 2 shots per viewport.
    usage: node dev/test/palace-life.js <url> <W>x<H>@dpr <outdir> <tag>     (exit 1 on a failed check or a page error) */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */
 const [,,BASE,SZ,OUT,TAG]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 (async()=>{const px=process.env.HTTPS_PROXY?{server:process.env.HTTPS_PROXY,bypass:'127.0.0.1,localhost'}:undefined;const b=await chromium.launch(px?{proxy:px}:{});
  const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),reducedMotion:'reduce',ignoreHTTPSErrors:true});

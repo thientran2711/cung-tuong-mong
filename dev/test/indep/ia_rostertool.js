@@ -2,7 +2,7 @@
    khắc by khắc), then export the slot exactly as the title menu does (xioExport), and ask dev/tools/roster.js for
    (a) the current moment, (b) 6 past buổi × every khắc. Each row must equal the snapshot taken in the page at that time.
    usage: node ia_rostertool.js <url> <repo> <outdir> [origin] [weeks] */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');const {spawnSync}=require('child_process');
+const {chromium}=require('../lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');const {spawnSync}=require('child_process');
 const [,,URL,REPO,OUT,ORI='cn',WEEKS='9']=process.argv;fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext()).newPage();await p.route(/\.(webp|png|jpg|mp3|ogg)$/,r=>r.abort());
  await p.goto(URL);await p.waitForTimeout(1500);

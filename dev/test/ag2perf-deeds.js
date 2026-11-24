@@ -2,7 +2,7 @@
    AG.stat.land + AG2.stat.land + AG3.stat.land + AG4.stat.land (role-parity part 2, jagacts4) + jagstaff landings (window.__asN.n) + every deedAdd call (split: me / consort / servant / other); split = agLand0 consort vs non-consort doer, asRun close (master = a consort or her) vs far staff.
    Same deterministic harness as ag2perf-diff (seeded Math.random + crypto, frozen clock, bot life, placeWhere + agFlush + nextBuoi).
    usage: [PRE='BAL.ag.day.redecideCap=12'] node dev/test/ag2perf-deeds.js <index.html> <N> <seed>   → one JSON line */
-const {chromium}=require('playwright');const [,,F,N0,SD]=process.argv;const N=+N0||160,SEED=+SD||1;
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const [,,F,N0,SD]=process.argv;const N=+N0||160,SEED=+SD||1;
 (async()=>{const b=await chromium.launch();const p=await b.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
 await p.route(u=>/^https?:/.test(u.href),r=>r.abort());
 await p.addInitScript(s=>{let x=s;window.__rnd=0;window.__reseed=()=>{x=s;window.__rnd=0};Math.random=()=>{window.__rnd++;x=(x*1103515245+12345)%2147483648;return x/2147483648};

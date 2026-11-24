@@ -12,7 +12,7 @@
    (i) rumour misunderstandings: each one recorded as "tin đồn: …, nguồn: …"; she is told only as hearsay ("Nghe đồn" / "Lời đồn"); retaliation carries the rumour reason
    usage: node dev/test/roster_audit.js <sens|rand> <lives> <out.json> [shard]     (GAME=path to dev/index.html, NB=4 only for a 3-buổi build, BOT=inpage6.js default)
    (j)..(q): j95c invariants, dev/test/roster_audit_c.js  */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');
 const mode=process.argv[2]||'sens',LIVES=+process.argv[3]||18,OUT=process.argv[4]||'/dev/stdout',SH=+process.argv[5]||0;
 const M=path.join(__dirname,'..','measure'),GAME=process.env.GAME||path.join(__dirname,'..','index.html');
 const NB=+process.env.NB||3;

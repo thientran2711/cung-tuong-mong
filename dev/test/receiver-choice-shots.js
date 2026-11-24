@@ -1,6 +1,6 @@
 /* RECEIVER CHOICE shots (law 12: Fold 755x1000@2 HOST + iPad 1180x820@2): her «Lời nhờ» card (jrcv PEND.rcvHelp) + the ONE ask card (PEND.rcvAsk: Kết giao, Ghé chơi, Mời đến cung ta) + her judge card as the Hoàng hậu (PEND.rcvJudge) — an NPC asks HER, 4 answers.
    usage: bash dev/site/build_site.sh && node dev/test/receiver-choice-shots.js <outdir>   (shots stay OUTSIDE the repo; boot = ptime-shots.js) */
-const {chromium}=require('playwright');const D=require('./lib/device');const OUT=process.argv[2]||'/tmp/rcv-shots';require('fs').mkdirSync(OUT,{recursive:true});
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');const OUT=process.argv[2]||'/tmp/rcv-shots';require('fs').mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const srv=await D.serveRoot();const b=await chromium.launch();const errs=[];
  for(const [nm,prof] of (process.env.ONLY?[[process.env.ONLY,process.env.ONLY==="fold"?"fold":"ipadAir"]]:[["fold","fold"],["ipad","ipadAir"]])){const ctx=await D.newDeviceContext(b,prof,{deviceScaleFactor:2,viewport:nm==="fold"?{width:755,height:1000}:{width:1180,height:820}});

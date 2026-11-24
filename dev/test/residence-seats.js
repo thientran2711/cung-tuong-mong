@@ -13,7 +13,7 @@
    R10 (re-merge 18/11) back from lãnh cung into a full house: a consort who leaves gives up her room (palFix), so when she returns
       (straight away, or by jworld đại xá) no chủ vị holds more than resCap() even before the next palFix
    exit 1 on any fail or page error. */
-const {chromium}=require('playwright');const [,,URL,GAMES='6']=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,URL,GAMES='6']=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch({args:['--blink-settings=imagesEnabled=false']});const ctx=await b.newContext({serviceWorkers:'block',viewport:{width:755,height:1000}});
  await ctx.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)(\?|$)/,r=>r.abort().catch(()=>{}));
  const errs=[];const p=await ctx.newPage();p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(600000);

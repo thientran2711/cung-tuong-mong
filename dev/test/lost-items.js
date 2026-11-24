@@ -10,7 +10,7 @@
     6 an NPC thief keeps her item → she investigates (Báo Cung Chính ti) → learns where → raises → loKeepHear → item back, thief punished
     7 person card of a rival: "Sai người lấy trộm đồ" + "Sai cung nữ thân tín lấy đồ" in Hại nặng
    Checks: page errors, horizontal overflow of the panel, modal fits the viewport. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,VP,SHOT]=process.argv;const [W,H]=(VP||'1180x820').split('x').map(Number);
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,URL,VP,SHOT]=process.argv;const [W,H]=(VP||'1180x820').split('x').map(Number);
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,serviceWorkers:'block',reducedMotion:'reduce'});
  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error')errs.push('console: '+m.text().slice(0,300))});
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.addStyleTag({content:'#kroul,#kroulw,#kload,.krbox,#dawn,#curtain,.fxo,.kmalarm,.kmnote{display:none!important}'});await p.waitForFunction(()=>typeof start==='function'&&typeof loLose==='function',null,{timeout:120000});await p.waitForTimeout(5000);

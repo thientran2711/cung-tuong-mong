@@ -4,7 +4,7 @@
    stranger art (img/kit/unknown-*) does: mdH (all sizes: strips, news rows, chips), pcPort (person card / Ân oán), pframe, kitFace→mdH,
    kitFigOf + kitStageFig (event dialogs, week book), a live person dialog (32.7), the week book person page (j87 kbk), the Ân oán panel +
    both strips, the Hậu cung Phi tần strip + card, and a "Tin trong cung" news row. Then marks U as met and checks her face comes back. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT]=process.argv;if(OUT)fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,URL,OUT]=process.argv;if(OUT)fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:1180,height:820},deviceScaleFactor:1,serviceWorkers:'block',reducedMotion:'reduce'});
  const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));

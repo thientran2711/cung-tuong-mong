@@ -3,7 +3,7 @@
    The loading screens (#kload, #klife) are WAITED FOR the game's own way: their own buttons ([data-klife] «vào luôn», the kload button) are
    tapped when they show; nothing is hidden or removed by the script.
    usage: bash dev/site/build_site.sh && node dev/test/ptime-shots.js <outdir>   (shots stay OUTSIDE the repo) */
-const {chromium}=require('playwright');const D=require('./lib/device');const OUT=process.argv[2]||'/tmp/ptime-shots';require('fs').mkdirSync(OUT,{recursive:true});
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');const OUT=process.argv[2]||'/tmp/ptime-shots';require('fs').mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 /* wait until neither loading screen is on the page (max 90 s); tap their own buttons when offered */
 async function settle(g){const t0=Date.now();let n=0;

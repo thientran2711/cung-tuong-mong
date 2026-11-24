@@ -1,4 +1,4 @@
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');
 const [,,URL,OUT,NS,CHS]=process.argv;const N=+NS||4,CH=+CHS||14;
 const INP=fs.readFileSync(__dirname+'/../measure/inpage4.js','utf8');
 const RUNS=[[777,'cn'],[4242,'dtq'],[99,'tt'],[5,'muoi']];

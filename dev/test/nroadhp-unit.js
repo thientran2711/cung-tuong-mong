@@ -6,7 +6,7 @@
        oán + BAL.nroad.sb.oan exactly (hostility toward her rises); (e) Mệnh truyện «Phụ tuyến» sub-tab = kit skill cards (kskill) + kit rows;
    (f) old save (nr without hp, no S.nrpt) loads and plays a month; __nrhpoff / co-op guest → no record; no page errors.
    usage: node dev/test/nroadhp-unit.js <url> */
-const {chromium}=require('playwright');const URL=process.argv[2]||'http://127.0.0.1:8731/index.html';
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const URL=process.argv[2]||'http://127.0.0.1:8731/index.html';
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)(\?|$)/,r=>r.abort());
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof nhHp==='function',null,{timeout:120000});await p.waitForTimeout(1500);

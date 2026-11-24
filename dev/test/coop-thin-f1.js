@@ -4,7 +4,7 @@
    F0 level on · F1 every ACT kind from the guest (script over the ACT table; before/after table): runAct returns "" on her phone, her world
    untouched, no NPC op / res sent, the host ran it ONCE in her context, the answer back in one view, the NPC + her person the same on both
    phones · F2 acts on the friend both directions (pet care / steal, gift, steal an item, harm a kid) · F8 one switch · no page errors. */
-const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||6);const SWAP=+(process.argv[4]||0);
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,c?300:2500):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));

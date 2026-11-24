@@ -2,7 +2,7 @@
    usage: node dev/test/seatcap-sim.js <url-of-dev/index.html> [lives=20] [months=120] [mode=idle|active] [trace=1] [firstLife=0]
    idle = she does nothing (kept alive); active = a bot that takes the first card each buổi and answers dialogs with option 0 (kept alive).
    Prints JSON: per life the max holders per rank, months over cap, and the source snippet of each over-cap write (trace=1). exit 1 on over-cap or page error. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,LIVES='20',MON='120',MODE='idle',TRACE='1',L0='0']=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs');const [,,URL,LIVES='20',MON='120',MODE='idle',TRACE='1',L0='0']=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch({args:['--blink-settings=imagesEnabled=false']});const ctx=await b.newContext({serviceWorkers:'block'});
  await ctx.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)(\?|$)/,r=>r.abort().catch(()=>{}));
  const errs=[];const p=await ctx.newPage();p.on('pageerror',e=>errs.push(e.message.slice(0,160)));p.setDefaultTimeout(1200000);

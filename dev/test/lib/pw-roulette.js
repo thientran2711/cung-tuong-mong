@@ -1,6 +1,7 @@
 /* Drop-in for require('playwright') in tests that start a fresh life: every context/page it creates
    gets the shared roulette auto-dismiss (taps "Bỏ qua" on #kroul), so the new-game roulette never
-   blocks the first tap. Use: const {chromium}=require('./lib/pw-roulette'); (see lib/roulette.js). */
+   blocks the first tap, and a side-line dialogue scene is tapped through (lib/dlgs-off.js AUTOTAP). A card / shot test wraps it
+   with scenes off: require('./lib/dlgs-off').pw('off',require('./lib/pw-roulette')). Use: const {chromium}=require('./lib/pw-roulette'); (see lib/roulette.js). */
 const pw=require('playwright');
 const {autoDismissRoulette}=require('./roulette');
 const orig=pw.chromium.launch.bind(pw.chromium);

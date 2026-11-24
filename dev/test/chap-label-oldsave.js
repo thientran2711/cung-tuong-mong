@@ -1,7 +1,7 @@
 /* chap-label: a save made with the build BEFORE this branch (main) loads in this build; the story labels then show Chương · Hồi.
    Three saves: v3 life at an arc chapter, the same with A.chap removed (older v2 thread), and an old v1 story (no chapters).
    usage: NODE_PATH=$(npm root -g) node dev/test/chap-label-oldsave.js <before url> <after url> */
-const {chromium}=require('playwright');const [,,BEF,AFT]=process.argv;
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,BEF,AFT]=process.argv;
 (async()=>{const b=await chromium.launch();const errs=[];
  const boot=async(url)=>{const p=await (await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'})).newPage();p.on('pageerror',e=>errs.push(url.slice(-12)+': '+e.message.slice(0,160)));
   await p.goto(url,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await p.waitForTimeout(1200);return p};

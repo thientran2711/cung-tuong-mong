@@ -6,7 +6,7 @@
    - at most one help hồi per NPC per life; its title names the person, the road and the chapter (Phụ tuyến, OD:L499);
    - one help quest played to the end (each option kind) feeds her next chapter (hb) and the j72 ledger;
    - no page errors. usage: node dev/test/npc-roads.js <url> [lives] [months] */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const [,,URL,NL,NM]=process.argv;const NLIV=+NL||3,MON=+NM||240;
 (async()=>{const b=await chromium.launch();const errs=[];const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c)console.error('FAIL',n,JSON.stringify(x).slice(0,900))};
  let ctx=null,p=null;/* a fresh page per life (one page over several long lives runs out of memory) */

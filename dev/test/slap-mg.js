@@ -3,7 +3,7 @@
    r2 (reviewer r1 item 5): the person is MET first (k61Meet, KIT §49.3), so her face is real, not the "Người lạ" silhouette; asserts kslap s1/s2/s3 + kswell on nặng only;
    checks the first-time demo, the idle glow, the tier row "Độ khó", the tier moving with her rank (mgTier), Gọn (no pops), the dodge odds per tier.
    Skill rates are measured by dev/measure/mg-bots.js (kinds tat,ne), not here. */
-const {chromium}=require('playwright');const [,,URL,SZ0,OUT,NN]=process.argv;const [SZ,SC]=SZ0.split('@');const [W,H]=SZ.split('x').map(Number);const N=+(NN||0);
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,URL,SZ0,OUT,NN]=process.argv;const [SZ,SC]=SZ0.split('@');const [W,H]=SZ.split('x').map(Number);const N=+(NN||0);
 (async()=>{const b=await chromium.launch({args:['--disable-dev-shm-usage']});const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(SC||1),serviceWorkers:'block',hasTouch:W<1100,isMobile:W<1100});
  const p=await ctx.newPage();p.setDefaultTimeout(60000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await p.waitForTimeout(2500);

@@ -7,7 +7,7 @@
    Rows: source · event · item · each choice → act (keep / back / give / burn / tear / smash / pour / well / bury / use / — = does nothing to it).
    Checks (--fail → exit 1): (a) a choice destroys / hands over / keeps something while no item is found in that event (a missing noun);
    (b) an item resolves to a key without a picture (kitItemInfo src empty). */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,FAIL]=process.argv;
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,URL,OUT,FAIL]=process.argv;
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:1180,height:820},serviceWorkers:'block'})).newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&window.ievOf,null,{timeout:0});await p.waitForTimeout(1500);
  const R=await p.evaluate(()=>{document.getElementById('title').hidden=true;try{for(let i=0;i<200;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}}catch(e){}

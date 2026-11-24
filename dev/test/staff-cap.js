@@ -4,7 +4,7 @@
    Every arrival path × trusted / untrusted: start kit, hire, plant, servant coming home (co-op settle), co-op servant, old save load,
    demotion, cold palace, the old close maid joining (jcmaid), a named palace woman (jstaff fitCap), a new life.
    usage: node dev/test/staff-cap.js   (build first: python3 dev/build/assemble.py). Prints a PASS/FAIL table; exit 1 on any FAIL. */
-const {chromium}=require('playwright');const SV=require('./coop-serve.js');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const SV=require('./coop-serve.js');
 const fs=require('fs'),path=require('path');const T=[];const ok=(c,n,x)=>T.push([c?'PASS':'FAIL',n,x==null?'':String(x).slice(0,260)]);
 (async()=>{const b=await chromium.launch({args:['--blink-settings=imagesEnabled=false']});const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block',reducedMotion:'reduce'});await SV.serve(ctx);
  await ctx.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)(\?|$)/,r=>r.abort().catch(()=>{}));

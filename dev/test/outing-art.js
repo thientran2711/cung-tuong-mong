@@ -2,7 +2,7 @@
    Checks: (1) key table — every dialog title/body that is an outing → its place, every mention that is NOT (chat, message, task, festival banner) → none;
    (2) port on kv1 (phone), land on kv2 (iPad), (3) real dialogs open with that picture, other dialogs unchanged, (4) the old fallback when the picture is not in the CDN index,
    (5) no page error.   usage: node dev/test/outing-art.js [shotsDir]   (serves dev/ itself; needs the dev/index.html build)  */
-const {chromium}=require('playwright');const D=require('./lib/device');const path=require('path'),fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');const path=require('path'),fs=require('fs');
 const SH=process.argv[2];if(SH)fs.mkdirSync(SH,{recursive:true});
 const px=process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{};
 const KEYS=['chua-ho-quoc','ngu-uyen-ngoai','nam-giao','thu-san','du-ho','tao-mo'];
@@ -57,7 +57,7 @@ const CASES=[ /* [title, body, expected key] — titles/bodies copied from the g
                 ["san","Thu săn","<p>Thu săn ở bãi săn hoàng gia: Hoàng thượng cho các hoàng tử thi cưỡi ngựa bắn cung.</p>"],
                 ["taomo","Về tảo mộ","<p>Ngươi xin về tảo mộ tổ tiên, hương khói dưới mưa phùn.</p>"],["plain","Thị tẩm","<p>Đêm nay Hoàng thượng lật thẻ bài của ngươi.</p>"]];
    for(const [nm,t,h] of shots){
-    const got=await p.evaluate(async([nm,t,h])=>{/* this test checks the CARD picture: an old j7 card now opens with its dialogue scene (jdlgs wave 2), which hides the card until tapped through — dlgs-play checks the scenes */try{BAL.dlgs.on=false}catch(e){}Q.length=0;{const M=document.getElementById("modal");kitBackdrop(M,null);delete M.dataset.kreborn;M.querySelectorAll(".kroul,#kroul").forEach(e=>e.remove())}
+    const got=await p.evaluate(async([nm,t,h])=>{/* the old j7 card's dialogue scene is off: lib/dlgs-off.js pw('off') at the top */Q.length=0;{const M=document.getElementById("modal");kitBackdrop(M,null);delete M.dataset.kreborn;M.querySelectorAll(".kroul,#kroul").forEach(e=>e.remove())}
      if(nm==="ngoai"){S.month=9;S.seen={};try{const d=mkEv("trungcuu");pushDil(d,"Tiết Trùng cửu")}catch(e){return{err:e.message}}}
      else if(nm==="dongchi"||nm==="doanngo"){S.seen={};try{const d=mkEv(nm);pushDil(d,nm==="dongchi"?"Đông chí":"Tết Đoan ngọ")}catch(e){return{err:e.message}}}
      else pushModal({t,h,who:pEmp(),opts:[{n:"Tiếp",fx:{}}]});

@@ -5,7 +5,7 @@
    Kính sự phòng summons (pid ksp) in the queue, tonight not decided yet; walk the day to buổi tối → STILL no flip (the tablet waits, S.nfP);
    end tối ("Sang ngày mới") → the flip runs there (S.nfF / S.nfX of today, or the scene queued).
    usage: node dev/test/flip-entry.js <url> [W]x[H]@dpr → lines + "ALL OK" / "FAIL n"  (co-op entry: dev/test/coop-e2e.js) */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const [,,URL,SZ]=process.argv;const [WH,DPR]=(SZ||'755x1000@1').split('@');const [W,H]=WH.split('x').map(Number);
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(DPR||1),hasTouch:W<1100,isMobile:W<1100,serviceWorkers:'block'});
  const p=await ctx.newPage();const perr=[];p.on('pageerror',e=>perr.push(e.message.slice(0,200)));

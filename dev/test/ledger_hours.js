@@ -6,7 +6,7 @@
    - officials: in the record iff on this buổi's roster (S.minW); at buổi sáng the court roster is at Cần Chính điện (thu)
    - morning court: buổi sáng, khắc 0 .. BAL.led.court-1: Hoàng thượng at thu (unless dead / away on a trip)
    usage: node dev/test/ledger_hours.js <page URL> [moments] [origin]  → JSON summary */
-const {chromium}=require('playwright');const [,,URL,NM,ORIG]=process.argv;const N=+NM||40;
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const [,,URL,NM,ORIG]=process.argv;const N=+NM||40;
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1180,height:820}});const errs=[];p.on('pageerror',e=>errs.push(e.message));p.setDefaultTimeout(240000);
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:240000});await p.waitForTimeout(2500);
  await p.evaluate(o=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;if(o)window.__forceOrigin=o;window.__nlInner=1;start();window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;try{deal()}catch(e){}render()},ORIG||'');

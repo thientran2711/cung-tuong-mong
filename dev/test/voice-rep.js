@@ -5,7 +5,7 @@
      rep6    quotes identical to one shown in the SAME situation within the last W tuần (BAL.voice.noRepeat, default 6)
      top     the most repeated quotes with how often they came.
    usage: node dev/test/voice-rep.js <url> [steps=10] [out.json]      (compare two builds by running it on each) */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');
 const [,,URL,NS,OUT]=process.argv;const N=+NS||10;
 const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});

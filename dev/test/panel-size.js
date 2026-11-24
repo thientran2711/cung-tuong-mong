@@ -2,7 +2,7 @@
    Opens every kind of #modal / dawn / #ov panel and every PEND event dialog, measures the frame (.dlg / .dbox / .mg) and prints a table.
    usage: node dev/test/panel-size.js <page URL> <outfile.json> [WxH@dpr,...] [maxPend]  → JSON {size:{case:{w,h,cls,...}}} + verdict per viewport
    FAIL (exit 1) when, at one viewport, the frames of the panel family do not share one width and one height, or content leaves the frame. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SIZES,MAXP]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,URL,OUT,SIZES,MAXP]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 const VPS=(SIZES||"755x1000@2,1000x755@2,1180x820@2,1366x1024@2,844x390@3,390x844@3,412x1058@2").split(",");
 const EXEMPT=/^(pcm|zoom)/; /* person card keeps pcard (KIT §3); picture zoom is a lightbox, not a panel */
 (async()=>{const b=await chromium.launch();const R={};let bad=0;

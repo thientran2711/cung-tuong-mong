@@ -2,7 +2,7 @@
    Opens every PEND event + the info/news/result/notice/night/rule panels (long and short) + shop at each viewport; per dialog records the frame size (ksz), presentation, the scene picture box (class by size: nearest KIT_SIZE.pic entry) and whether anything in the frame scrolls (info column, button area, modal body).
    Exit 1 when a dialog scrolls although a smaller picture class would remove the scroll (picture not at the smallest class) ; table printed per device: frame | content | pic class | scrolls.
    usage: node dev/test/scene-pic-scan.js <index.html> [out.json]   env SZ=[[W,H],..] MAXP=n */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);let bad=0;const ALL=[];
  for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1;let s=12345;Math.random=()=>{s=(s*1664525+1013904223)%4294967296;return s/4294967296}});
   await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));

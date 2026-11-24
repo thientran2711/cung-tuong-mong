@@ -6,7 +6,7 @@
    entrants) by nết (forced when no one in this world has it), 4 options, placeholders filled, choosing (the real chooseM path) is built from
    exactly steps × BAL.j71c.fx and moves every stat the right way, object trace kept, P0 mark j71c:c, never drawn twice in a life.
    A whole festival day (plan → fDay7) queues the complication after the day's own card. 0 page errors. */
-const {chromium}=require('playwright');const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const FILE=process.argv[2]||path.join(__dirname,'j71c-fixture.jsonl');
 const FIX=fs.readFileSync(FILE,'utf8').split('\n').filter(l=>l.trim().startsWith('{')).map(JSON.parse).filter(r=>['stage','comp','prize'].includes(r.type));
 const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http://x').pathname);if(p==='/')p='/index.html';const f=path.join(ROOT,p);if(!fs.existsSync(f)||fs.statSync(f).isDirectory()){r.statusCode=404;return r.end()}fs.createReadStream(f).pipe(r)});

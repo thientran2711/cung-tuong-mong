@@ -1,6 +1,6 @@
 /* caoly-road old-save test (E20): a Nam Chiếu-princess life (origin nc) saved MID-ROAD on the MAIN build (pre-rename) loads in this build, plays 60 buổi,
    and every princess-road surface now reads Cao Ly (no "Nam Chiếu" left in her origin card, story panel, chapter goal / texts). usage: node caoly-oldsave.js <this url> <main url> */
-const {chromium}=require('playwright');const [,,URL,MAIN]=process.argv;
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,URL,MAIN]=process.argv;
 (async()=>{const b=await chromium.launch();const ok=[];const errs=[];const chk=(n,c,x)=>{ok.push(!!c);console.log(c?'PASS':'FAIL',n,c?'':JSON.stringify(x).slice(0,900))};
  const boot=async url=>{const ctx=await b.newContext({viewport:{width:1180,height:820},deviceScaleFactor:1,serviceWorkers:'block'});const p=await ctx.newPage();p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   await p.goto(url,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(1200);return p};

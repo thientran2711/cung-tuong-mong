@@ -1,7 +1,7 @@
 /* shots + checks for the kit tabs (jtabs/jpane, KIT §45–46): every sub-tab of Tài nghệ, Mệnh truyện, Việc nhờ on each size.
    Checks: 0 page errors, no horizontal overflow in the pane, no text clipped by a card (scrollWidth), no "Thôi/Lui" buttons,
    the sub-tab row sits in the pane bar. usage: node dev/test/tabs-kit-shots.js <url> <outdir|-> [<W>x<H>@dpr ...] */
-const {chromium}=require('playwright');const args=process.argv.slice(2);const URL=args[0],OUT=args[1]==='-'?null:args[1];
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const args=process.argv.slice(2);const URL=args[0],OUT=args[1]==='-'?null:args[1];
 let SIZES=args.slice(2);if(!SIZES.length)SIZES=['755x1000@2','1180x820@2','412x1058@2','1000x755@2','844x390@3'];
 (async()=>{const b=await chromium.launch();const errs=[];const R={};let bad=0;
  for(const SZ of SIZES){const [wh,d]=SZ.split('@');const [W,H]=wh.split('x').map(Number);

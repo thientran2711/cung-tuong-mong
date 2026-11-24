@@ -1,7 +1,7 @@
 /* review/econ-stipend: monthly stipend goods are real items + chest reveal; Nội vụ phủ skimming event (kitEventDp person dialog);
    NPC skimming; goodsGive (EV6 gift, j67 gi); old save loads.
    usage: node dev/test/stipend.js <build url> <outdir> [WxH@dpr,...]   (screenshots: chest, event; JSON result on stdout) */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const R=[];
  for(const sz of (SIZES||"755x1000@2,1000x755@2,1180x820@2,1366x1024@2,844x390@2").split(",")){const [wh,dpr]=sz.split("@");const [W,H]=wh.split("x").map(Number);const errs=[];

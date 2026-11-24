@@ -3,7 +3,7 @@
    5 accuse path (proof / rumour / false charge / NPC) · 6 plants (no servant → withered → dead pot; loyal servant keeps it) · 7 water minigame
    8 old save (no p.shelf) · 9 item ledger (jil census keeps displayed pieces) · 10 the 70-piece table (12 groups), rank gate (ngự ban may stand above rank,
    imperial never), sources, no score in player text, creatures / incense / handmade works. Exit 1 on any FAIL. Prints tables for the report. */
-const {chromium}=require('playwright');const D=require('./lib/device');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');
 const sl=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const srv=await D.serveRoot();const b=await chromium.launch();const ctx=await D.newDeviceContext(b,'fold');const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
  const g=await D.openHost(p,srv.url,{timeout:120000});await g.waitForFunction(()=>typeof start==='function'&&document.getElementById('title'),null,{timeout:120000});

@@ -3,7 +3,7 @@
    2) a save of this build in a life whose road is NOT full (phase-1 frame, an origin whose road is not full) loads, keeps its plan, plays on;
    3) a full-road life (tt, dtq, muoi, cn; argv origins or env ROADS=nc,bd,td,ch,thd,cnv for other origins) saved in the middle of the road (ser → deser) keeps the road, its cast and its plan, and plays on.
    usage: node dev/test/road-saves.js <url> <main url> [origins, default tt,dtq,muoi,cn] */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const [,,URL,MAIN,OR]=process.argv;/* OR = comma list of origins for the full-road mid-road save (default tt; B3: thd,cnv) */
 (async()=>{const b=await chromium.launch();const errs=[];const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);console.log(c?'PASS':'FAIL',n,c?'':JSON.stringify(x).slice(0,700))};
  const boot=async url=>{const [VW,VH]=(process.env.VP||'1180x820').split('x').map(Number);const ctx=await b.newContext({viewport:{width:VW,height:VH},deviceScaleFactor:2,serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(0);

@@ -2,7 +2,7 @@
    (2) a spy on a clean player finds nothing — the news card reads one fact per row (shot);
    (3) a frame on the player opens her defence choice (shot); (4) a spy on a guilty consort still finds the real deed.
    usage: NODE_PATH=$(npm root -g) node dev/test/evtruth-oldsave.js http://127.0.0.1:PORT/index.html outdir [WxH,...] */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');
 const [,,URL,OUT,VS]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sizes=(VS||'390x844,1180x820').split(',').map(s=>s.split('x').map(Number));
 (async()=>{const b=await chromium.launch();const res={};const errs=[];
  for(const [w,h] of sizes){const p=await b.newPage({viewport:{width:w,height:h}});p.on('pageerror',e=>errs.push(e.message.slice(0,200)));

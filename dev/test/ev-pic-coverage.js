@@ -5,7 +5,7 @@
    the picture source, its kind (own = ev-/st- painting of that event or its meaning group; generic = act-cat kind banner; room = the place painting; none) and the shown height.
    Exit 1 when an M / L / XL frame (owner OD 19/11 ~04:55Z: required from M up; S frames listed apart) shows NO picture (hidden / 0 px / no src). A "generic" or "room" source is listed (map it in EVENTS.json or order art from Foreman C).
    usage: node dev/test/ev-pic-coverage.js <index.html> [out.json]   env SZ=[[W,H],..] MAXP=n */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);const ALL=[];let ST=null;
  for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1;let s=12345;Math.random=()=>{s=(s*1664525+1013904223)%4294967296;return s/4294967296}});
   await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));

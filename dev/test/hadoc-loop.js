@@ -6,7 +6,7 @@
    WHOLE GROUP: every scheme with BOTH cards (OWN70 key that is jecon-priced, __c0) × every road (Làm như thường / Hao tâm cơ / Thuê người), and the
    direct road card (j70 off for that act): the act must run once (khắc spent, Bày mưu shown at most once, road card at most once), ≤ 6 taps.
    usage: node dev/test/hadoc-loop.js [url]   (exit 0 = all pass) */
-const {chromium}=require('playwright');const URL=process.argv[2]||('file://'+require('path').resolve(__dirname,'../../index.html'));
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const URL=process.argv[2]||('file://'+require('path').resolve(__dirname,'../../index.html'));
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:755,height:1000},reducedMotion:'reduce',serviceWorkers:'block'})).newPage();
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(0);
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof doAct==='function'&&typeof OWN70==='object',null,{timeout:0});await p.waitForTimeout(2000);

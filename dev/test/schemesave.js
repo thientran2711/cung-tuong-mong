@@ -1,6 +1,6 @@
 /* old saves load: a life started and played on the OLD build (<oldURL>) is saved to slot 3, then the NEW build (<newURL>, same origin) loads it.
    Also a save holding a pending scheme choice (PEND sgpick) reloads into the same choice.  usage: node dev/test/schemesave.js <oldURL> <newURL> */
-const {chromium}=require('playwright');const [,,OLD,NEW]=process.argv;
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,OLD,NEW]=process.argv;
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:686,height:880}});const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(OLD);await p.waitForTimeout(2500);
  const o=await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;start();try{nlAccept(false)}catch(e){}Q.length=0;quiet=false;save();return{name:S.name,week:S.week,bac:S.bac,keys:Object.keys(localStorage),has:!!localStorage.getItem(SK(3))}});

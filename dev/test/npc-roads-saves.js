@@ -2,7 +2,7 @@
    1) a save from the MAIN build (no NPC roads) loads in this build, plays 6 months: live consorts get a road (lazy fill), no errors;
    2) a save of this build after 30 months (NPC roads running) → ser/deser keeps every v.nr unchanged and plays on;
    3) the person card (Hậu cung) of a consort shows her road row (kit pcard line). usage: node dev/test/npc-roads-saves.js <url> <main url> */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const [,,URL,MAIN]=process.argv;
 (async()=>{const b=await chromium.launch();const errs=[];const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);console.log(c?'PASS':'FAIL',n,c?'':JSON.stringify(x).slice(0,700))};
  const boot=async url=>{const ctx=await b.newContext({viewport:{width:1180,height:820},serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(0);

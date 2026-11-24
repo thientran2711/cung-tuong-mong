@@ -3,7 +3,7 @@
    a tap is DEAD when nothing observable changes (no panel/modal/popup/tab/state change). Empty-state illustrations (data-skill empty) and the mood emoji of a log row (kemo) are decorative and skipped. Elements inside real action cards (.pcb, .kpanec, buttons
    that act) are skipped: their tap does the action. Candidate = kit chip, skill card/head/picture, kit row, check line, person line, pager card,
    anything with cursor:pointer.  usage: NODE_PATH=$(npm root -g) node dev/test/chapter-detail-scan.js <url> [WxH] [out.json]   exit 1 if any dead tap (CHECK=1) */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,VP,OUT]=process.argv;const [W,H]=(VP||'755x1000').split('x').map(Number);
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,URL,VP,OUT]=process.argv;const [W,H]=(VP||'755x1000').split('x').map(Number);
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},serviceWorkers:'block'});const p=await ctx.newPage();
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await p.waitForTimeout(1200);

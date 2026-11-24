@@ -2,7 +2,7 @@
    play the game from it (cold start with the service worker on, old save, turns, a mini-game, Pixi, co-op lobby, offline reload) and log
    every same-origin request. FAIL on any 404, any request outside the allowlist, any page error.
    usage: bash dev/site/pages_stage.sh /tmp/site && node dev/test/pages-lock-proof.js /tmp/site */
-const {chromium}=require('playwright');const http=require('http'),fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const http=require('http'),fs=require('fs'),path=require('path');
 const SITE=path.resolve(process.argv[2]||'_site'),ROOT=path.resolve(__dirname,'../..'),sleep=t=>new Promise(r=>setTimeout(r,t));
 const MIME={html:'text/html',js:'text/javascript',json:'application/json',png:'image/png',mp3:'audio/mpeg',webmanifest:'application/manifest+json',txt:'text/plain'};
 const serve=(dir,prefix,log)=>new Promise(ok=>{const s=http.createServer((q,r)=>{let u=decodeURIComponent(q.url.split('?')[0]);if(prefix&&!u.startsWith(prefix)){log&&log.push([404,u]);r.writeHead(404);return r.end()}

@@ -1,5 +1,5 @@
 /* reviewer probe r2: NPC→her vs NPC→same-rank NPC relation drift + harm-act targeting, passive life (bot loop). env SEED0, GHEN0=1 zeroes v.ghen every week (counterfactual) */
-const {chromium}=require('playwright');const path=require('path');const [,,PAGE,LS,YS]=process.argv;
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');const [,,PAGE,LS,YS]=process.argv;
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:1000,height:755}});const p=await ctx.newPage();
  await p.route(/\.(webp|png|jpg|jpeg|mp3|ogg|mp4|webm)(\?.*)?$/,r=>r.abort());const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.addInitScript(`window.__seed=${+process.env.SEED0||1};(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s=(s+0x6D2B79F5)>>>0;let t=s;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296}})();`);

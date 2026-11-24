@@ -5,7 +5,7 @@
            same width as every #modal panel (--kpw) per viewport.
    Cases: every PEND event with a person (who / stage), person info / news / result panels, the identity card, the tutorial coach (4 intro pages +
    every spotlight step), a kitTip. Exit 1 on any FAIL.   usage: node dev/test/popup-fullbody.js <url> <out.json> [WxH,...] [maxPend]  (default 755x1000) */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SIZES,MAXP]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,URL,OUT,SIZES,MAXP]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 const VPS=(SIZES||'755x1000').split(',');
 (async()=>{const b=await chromium.launch();const R={};let bad=0;
  for(const sz of VPS){try{const [W,H]=sz.split('x').map(Number);const errs=[];const fails=[];const res={};

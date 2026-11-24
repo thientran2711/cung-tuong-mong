@@ -11,7 +11,7 @@
      swept        evidence that bypassed evA and was turned into rumour by the sweep (should be 0)
      npcBad       pairs where a consort holds more true evidence than the target's real wrongs (must be 0)
    usage: NODE_PATH=$(npm root -g) node dev/test/evtruth-bot.js http://127.0.0.1:PORT/index.html [lives=6] [seed=1] */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');
 const [,,URL,NL,SEED]=process.argv;const LIVES=+NL||6;const seed=+SEED||1;
 let INP=fs.readFileSync(path.join(__dirname,'..','measure','inpage4.js'),'utf8');
 for(const h of ['function scoreAct(a,N,cost){','function talkScore(t,N){const{p,a}=t;']){if(!INP.includes(h))throw new Error('inpage4 hook moved: '+h);

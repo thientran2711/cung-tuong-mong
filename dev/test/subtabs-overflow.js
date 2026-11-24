@@ -3,7 +3,7 @@
    Per case: tabs count, bar width, overflow y/n (scrollWidth>clientWidth), overlap y/n (the ⓘ slot touches a tab, or a tab is clipped by the bar),
    rows (wrapped lines). The Mệnh truyện bar is also scanned with a SIMULATED 6th tab «Phụ tuyến» (Q2 review/questline-q2).
    Exit 1 when any bar overflows sideways or overlaps. Prints a markdown table. */
-const {chromium}=require('playwright');const fs=require('fs');const D=require('./lib/device');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const D=require('./lib/device');
 const [,,OUT,DEVS,NOSHOT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const devices=(DEVS&&DEVS!=='-'?DEVS:'fold,ipadAir,ipadPro,pixel,iphone14').split(',');
 const sleep=t=>new Promise(r=>setTimeout(r,t));

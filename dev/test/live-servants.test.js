@@ -15,7 +15,7 @@
    T5 dev/tools/roster.js on saves of 3 lives × several khắc: self-check exit 0; --who "cung nữ của ta" answers now/khắc/buổi/doing/because +
       a timeline; --who mm:me --json parses.
    usage: python3 dev/build/assemble.py && node dev/test/live-servants.test.js dev/index.html [lives=3]   → PASS / FAIL (exit 0 / 1) */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path'),cp=require('child_process'),os=require('os');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs'),path=require('path'),cp=require('child_process'),os=require('os');
 const [,,F,L0]=process.argv;const LIVES=+L0||3;const ROSTER=path.join(__dirname,'..','tools','roster.js');
 const TMP=fs.mkdtempSync(path.join(os.tmpdir(),'ls-test-'));
 (async()=>{const b=await chromium.launch();const fails=[];const notes=[];

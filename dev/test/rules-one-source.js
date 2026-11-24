@@ -2,7 +2,7 @@
    keeps the stat name, the ONE CORE constants (BAL.time/lot/walk/sneak/age/night, mirrors BL/SEATCAP/WVAL) are what texts and rules
    print and check (§2b, perturbation), an old save (published build) loads, 0 page errors. Static half: dev/test/one-core-guard.js.
    usage: node dev/test/rules-one-source.js <base url dir> <W>x<H>@dpr   (serves <base>/_aa.html = new build, <base>/index.html = published main) */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const [,,BASE,SZ]=process.argv;const [WH,DPR]=(SZ||'755x1000@2').split('@');const [W,H]=WH.split('x').map(Number);
 const T0=Date.now(),lg=m=>console.error('['+Math.round((Date.now()-T0)/1000)+'s] '+m);
 const boot=async(ctx,url,errs)=>{lg('boot '+url);const p=await ctx.newPage();p.setDefaultTimeout(600000);p.on('pageerror',e=>errs.push(e.message.slice(0,200)));

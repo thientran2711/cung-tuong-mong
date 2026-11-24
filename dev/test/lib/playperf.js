@@ -44,7 +44,7 @@ const NEWLIFE=()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;/* t
  ['kroul','kroulw','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});document.querySelectorAll('.kmov,.kbd-roulette').forEach(e=>e.remove());render();return typeof S!=='undefined'&&S?S.name:null};
 const CLEAR=()=>{Q.length=0;const m=document.getElementById('modal');if(m&&!m.hidden){try{closeModal()}catch(e){m.hidden=true}}['kroul','dawn','kpodov'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});document.querySelectorAll('.kmov,.kmfls').forEach(e=>e.remove())};
 /* bot step (in page, JS clicks): answer the open dialog, else tap one enabled act card, else Sang buổi. Mini games are dropped. */
-const STEP=()=>{if(typeof S==='undefined'||!S)return'nos';if(S.mg){try{S.mg=null;if(typeof kg82Close==='function')kg82Close(true)}catch(e){}try{render()}catch(e){}return'mg'}
+const STEP0=()=>{if(typeof S==='undefined'||!S)return'nos';if(S.mg){try{S.mg=null;if(typeof kg82Close==='function')kg82Close(true)}catch(e){}try{render()}catch(e){}return'mg'}
  const vis=x=>x&&x.offsetParent!==null&&!x.disabled;
  if(S.dead){const b=[...document.querySelectorAll('button')].filter(vis);const k=b.find(x=>/Đầu thai|Luân hồi|Nhận thân phận|Tiến cung|Vào cung|Nhập cung/.test(x.textContent))||b.find(x=>x.closest('#modal'));if(k){k.click();return'reborn'}return'dead'}
  const T=document.getElementById('title');if(T&&!T.hidden){const b=[...T.querySelectorAll('button')].filter(vis);const k=b.find(x=>/Nhận thân phận|Tiến cung|Vào cung|Lật|Chọn/.test(x.textContent))||b[0];if(k){k.click();return'title'}}
@@ -56,6 +56,9 @@ const STEP=()=>{if(typeof S==='undefined'||!S)return'nos';if(S.mg){try{S.mg=null
  if(cards.length&&window.__bk%3){cards[Math.floor(Math.random()*cards.length)].click();return'act'}
  const n=document.getElementById('next');if(vis(n)){n.click();window.__buoiN=(window.__buoiN||0)+1;return'next'}return'idle'};
 
+/* a SIDE-LINE DIALOGUE SCENE (jdlgs) on screen is tapped through like a player FIRST ('dlgs'): a JS «Sang buổi» under it left DLGS.playing on
+   and every later card hidden (review/sideline-dlg F3). The tap is lib/dlgs-off.js TAP (one copy), inlined into the one in-page step. */
+const STEP=eval('(()=>(('+require('./dlgs-off.js').TAP+')()?\'dlgs\':('+STEP0+')()))');
 /* open the Hành sự cards (the act tab toggles them on the phone layout) */
 const OPENACT=()=>{const v=x=>x&&x.offsetParent!==null;if([...document.querySelectorAll('button.card.ka')].some(v))return 0;const t=document.querySelector('#tabs [data-tab="act"]');if(v(t))t.click();return 1};
 /* a new life, retried: right after boot start() can leave S unset for a moment (data still arriving) */

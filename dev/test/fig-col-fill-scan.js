@@ -4,7 +4,7 @@
    the Nội vụ phủ shop, the identity card. Per frame x viewport: body box (the frame body the column stands in), figure painted box (kitFigBody t..b), fill = painted height / body
    height, top gap = painted top − (name tag bottom), bottom gap = body floor − feet. FAIL (exit 1, identity card excluded: KIT 56.11 book size, printed only) when bottom gap > 8 % of the body height or fill < .70 (the "small and high" bug).
    usage: node dev/test/fig-col-fill-scan.js <index.html> [out.json] [shotdir]   env SZ=[[W,H],..] */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT,SHOT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,SRC,OUT,SHOT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);const ROWS=[];if(SHOT)fs.mkdirSync(SHOT,{recursive:true});
  for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1;let s=12345;Math.random=()=>{s=(s*1664525+1013904223)%4294967296;return s/4294967296}});

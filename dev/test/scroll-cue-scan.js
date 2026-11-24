@@ -2,7 +2,7 @@
    Opens EVERY PEND event (any person or none), the info/news/result/notice/night/rule panels with long text, the Nội vụ phủ shop, the tutorial and a tip at each viewport and records, per dialog, every
    scroll cue: scroller (class, height), kind (fade/strip), on?, overlaps text (px lines), sits over a figure column. A TALL scroller keeps the kit fade (solid lower part, the text under it is hidden, not overlapped); a SHORT scroller (< 260 px) must use the own strip. Exit 1 on a cue in/over a figure column or a fade/pill over a short scroller's text.
    usage: node dev/test/scroll-cue-scan.js <index.html> [out.json]   env SZ=[[W,H],..] MAXP=n */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);let bad=0;const ALL=[];
  for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1;let s=12345;Math.random=()=>{s=(s*1664525+1013904223)%4294967296;return s/4294967296}});
   await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));

@@ -1,6 +1,6 @@
 /* hdr-kiep: top-left header shows the life number in words (owner 23/11). usage: node dev/test/hdr-kiep.js <page url> <outdir>
    life 1/2/3/10/11 -> «Kiếp thứ nhất/hai/ba/mười/11»; header has no overflow/clip at Fold 755x1000 and iPad 1180x820; shots go to <outdir> (never git). */
-const {chromium}=require('./lib/pw-roulette');
+const {chromium}=require('./lib/dlgs-off').pw('off',require('./lib/pw-roulette'));/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const [,,URL,OUT]=process.argv;const fs=require('fs');fs.mkdirSync(OUT,{recursive:true});
 const WANT={1:'Kiếp thứ nhất',2:'Kiếp thứ hai',3:'Kiếp thứ ba',10:'Kiếp thứ mười',11:'Kiếp thứ 11'};
 (async()=>{const b=await chromium.launch();const R={pass:true,sizes:{}};

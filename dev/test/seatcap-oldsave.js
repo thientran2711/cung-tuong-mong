@@ -1,7 +1,7 @@
 /* review/seatcap: a save made on the previous build with seats ALREADY over the cap (rank 6 ×3, rank 5 ×4 incl. her) loads in this build:
    the net settles it at once (≤ cap at every rank), she keeps her rank, each NPC pushed out lands on a free rank and gets the full-seat
    compensation (Bạc up), then 24 months run with ≤ cap every month. usage: node dev/test/seatcap-oldsave.js <oldUrl> <newUrl> [months]. exit 1 on fail. */
-const {chromium}=require('playwright');const [,,OLD,NEW,MON='24']=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,OLD,NEW,MON='24']=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 async function boot(p,u){await p.goto(u,{waitUntil:'domcontentloaded'});for(let i=0;i<300;i++){if(await p.evaluate(()=>typeof start==='function'&&!!window.__ctmBuilt).catch(()=>false))break;await sleep(300)}await sleep(500)}
 (async()=>{const b=await chromium.launch({args:['--blink-settings=imagesEnabled=false']});const ctx=await b.newContext({serviceWorkers:'block'});await ctx.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)(\?|$)/,r=>r.abort().catch(()=>{}));
  const errs=[];let p=await ctx.newPage();p.on('pageerror',e=>errs.push('old:'+e.message.slice(0,160)));p.setDefaultTimeout(600000);await boot(p,OLD);

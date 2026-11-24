@@ -6,7 +6,7 @@
    after the kind's card with 4 options, every placeholder filled, choosing (the real chooseM path, stance i%4) is built from exactly
    steps × BAL.wc.fx and moves every stat the right way, the object trace is kept (law 6c), the end text says who chose what, the seed is not drawn
    again in the same life, and every built JWSEEDS seed registers. 0 page errors. */
-const {chromium}=require('playwright');const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const FILE=process.argv[2]||path.join(__dirname,'wc-fixture.jsonl');
 const FIX=fs.readFileSync(FILE,'utf8').split('\n').filter(l=>l.trim().startsWith('{')).map(JSON.parse).filter(r=>r.type==='wc');
 const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http://x').pathname);if(p==='/')p='/index.html';const f=path.join(ROOT,p);if(!fs.existsSync(f)||fs.statSync(f).isDirectory()){r.statusCode=404;return r.end()}fs.createReadStream(f).pipe(r)});

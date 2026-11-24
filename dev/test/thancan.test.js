@@ -12,7 +12,7 @@
       ordinary maid.
    T8 old save (no S.thcV): loadSlot keeps every house's personal maid as its thân cận.
    usage: python3 dev/build/assemble.py && node dev/test/thancan.test.js dev/index.html [lives=2]   → PASS / FAIL (exit 0 / 1) */
-const {chromium}=require('playwright');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');
 const [,,F,L0]=process.argv;const LIVES=+L0||2;
 (async()=>{const b=await chromium.launch();const fails=[];const notes=[];
 for(let seed=1;seed<=LIVES;seed++){const p=await b.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));

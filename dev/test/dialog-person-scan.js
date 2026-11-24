@@ -7,7 +7,7 @@
       vs AFTER (the rule): subject is never an elder / default narrator unless the dialog names her; ONE AVATAR RULE: the left subject has no line avatar,
       a line naming ≥ 2 people has none, a second person's avatar sits on the event picture (.kevav) not in the text, her own frame shows «(ta)»;
       no broken avatar image anywhere in the frame.                                                                                               */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');
 const [,,URL,OUT,SH]=process.argv;const SHOTS=SH!=='0';fs.mkdirSync(OUT,{recursive:true});
 const fails=[];const note=(ok,m)=>{if(!ok)fails.push(m)};
 const OLDN={news:"kn",notice:"kn",week:"kn",choice:"kn",rule:"tn",info:"tn",evidence:"tn",night:"ksp",reward:"tq",intel:"maid",threat:"maid",person:"maid",end:"me",result:"me"};

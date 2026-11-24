@@ -2,7 +2,7 @@
    reach her on the day and (b) the duplicate acts between this year's j71 act and the light acts (AS_SAME families + "Thả đèn" vs the
    Hành sự lantern card), BEFORE (j31 FESTEV + j7 month event + j71, all unfiltered) and AFTER (j71 at day start; light acts at the place,
    filtered). usage: node dev/test/act-split-scan.js <url>   → a markdown table + "DUP_AFTER n" */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');
 const src=fs.readFileSync(__dirname+'/act-audit.js','utf8');const LIB=src.match(/const LIB=String\.raw`([\s\S]*?)`;\n\(async/)[1];
 const [,,URL]=process.argv;
 (async()=>{const b=await chromium.launch();const p=await b.newPage();const perr=[];p.on('pageerror',e=>perr.push(e.message.slice(0,200)));

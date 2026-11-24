@@ -4,7 +4,7 @@
    Scans every PEND event dialog (KIT_ACT_PIDS excluded) + approachOne visits (N draws). Prints counts + the options whose card still has no
    meter (a rolled option names its odds by p: j17 oddsLead, review/odds-no-unknown).
    usage: node dev/test/odds-meter-back.js <index.html url> <out.json> [WxH,WxH…]   (default 755x1000,1180x820) — exit 1 on a FAIL */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');
 const [,,PAGE,OUT,SZS]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const ALL={};let bad=0;
  for(const sz of (SZS||"755x1000,1180x820").split(",")){const [W,H]=sz.split("x").map(Number);

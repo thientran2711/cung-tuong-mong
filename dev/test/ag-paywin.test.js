@@ -8,7 +8,7 @@
    5 j70 "Mua người trong cung nàng" (and "Rút thẻ bài" scheme) route: nothing at the start; the strike fails → 0; lands → route bạc
    6 her plot card: a pay-on-success route has no up-front cost (fx) but greys when she lacks the bạc, and says "chỉ khi người ấy nhận"
    7 a preparation route (materials) still pays at the start (unchanged) · no page errors */
-const {chromium}=require('playwright');const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);

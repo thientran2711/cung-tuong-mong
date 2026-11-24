@@ -1,5 +1,5 @@
 /* ag2perf-prof (review/ag-deed-perf): CDP CPU profile of the 4x khắc step only — samples under __KHAC_STEP (= spend(1)) vs __BUOI_STEP; self + inclusive ms per function. usage: node dev/test/ag2perf-prof.js <index.html> <N buổi> <seed> <out.json> (live line numbers differ: compare by function name) */
-const {chromium}=require('playwright');const fs=require('fs');const [,,F,N0,SD,OUT]=process.argv;const N=+N0||40,SEED=+SD||1;
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs');const [,,F,N0,SD,OUT]=process.argv;const N=+N0||40,SEED=+SD||1;
 (async()=>{const b=await chromium.launch();const p=await b.newPage();await p.route(u=>/^https?:/.test(u.href),r=>r.abort());
 await p.addInitScript(s=>{let x=s;Math.random=()=>{x=(x*1103515245+12345)%2147483648;return x/2147483648}},SEED);
 await p.goto('file://'+require('path').resolve(F),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);

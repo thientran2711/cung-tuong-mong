@@ -1,7 +1,7 @@
 /* silent events: let time pass (nextBuoi) for many buổi and list every time HER numbers or relations changed while no dialog
    (Q) was raised — before jaudit's notice queue those changes were only in the log / week book.
    usage: node dev/test/silent-events.js <url> [buoi=240] → JSON {n, silent:[{sig, n, ex, d}], notices} */
-const {chromium}=require('playwright');const [,,URL,NB]=process.argv;
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,URL,NB]=process.argv;
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'})).newPage();p.setDefaultTimeout(0);
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(1500);

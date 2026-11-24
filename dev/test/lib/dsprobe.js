@@ -1,7 +1,7 @@
 /* dialog-stack helper: start a game on a built root and open overlays. Shared by dev/test/dialog-stack-scan.js */
 const {chromium}=require('playwright');const D=require('./device');
 async function boot(ROOT,dev){const srv=await D.serveRoot(ROOT);const b=await chromium.launch();
- const ctx=await D.newDeviceContext(b,dev,{reducedMotion:'reduce'});await ctx.route(/ctm-img\.victoria-tntt\.workers\.dev/,r=>r.abort());
+ const ctx=await D.newDeviceContext(b,dev,{reducedMotion:'reduce'});/* dialog scans check the CARD: side-line dialogue scenes off (lib/dlgs-off.js) */await require('./dlgs-off.js').off(ctx);await ctx.route(/ctm-img\.victoria-tntt\.workers\.dev/,r=>r.abort());
  const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  const g=await D.openHost(p,srv.url);await p.waitForTimeout(2500);
  await g.addStyleTag({content:'#kroul,.kroul,[id^=kroul]{display:none!important}'});

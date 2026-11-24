@@ -5,7 +5,7 @@
    B) old save (made on origin/main, no jspread) loads and plays 12 buổi with no page error.
    C) a save made while data cards wait keeps them: reload the page, load the slot, the same cards wait and are shown later.
    usage: node dev/test/spread-e2e.js <baseURL> <newPath> <oldPath>     e.g. http://127.0.0.1:PORT dev/index.html .m/old/dev/index.html */
-const {chromium}=require('playwright');const [,,BASE,NEW,OLD]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const [,,BASE,NEW,OLD]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 const VP=[[755,1000,2],[1000,755,2],[1180,820,2],[1366,1024,2],[844,390,2],[390,844,3]];
 const PLAY=`(async function(n){const shownK={},bad=[];let forced0=SP13.stat.forced;const cap=BAL.spread.cap;
  const ans=()=>{for(let k=0;k<40&&Q.length;k++){if(document.getElementById('modal').hidden)bad.push('modal hidden with '+Q.length+' cards');const m=Q[0];

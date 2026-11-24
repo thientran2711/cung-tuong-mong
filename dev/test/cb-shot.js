@@ -1,5 +1,5 @@
 /* close-bugs: boot, run setup fn file (argv[3]) in page, wait, screenshot to argv[4]; prints fn result + modal info. usage: node cb-shot.js url fn.js out.jpg WxH */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');
 const [,,URL,FN,OUT,SZ]=process.argv;const [W,H]=(SZ||'755x1000').split('x').map(Number);
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:1,reducedMotion:'reduce',serviceWorkers:'block'});
  const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));

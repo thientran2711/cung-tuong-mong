@@ -4,7 +4,7 @@
    5 the same wearer is not remarked on again inside wd.gap tuần · 6 a consort who believes her clothes right, no festival → does not re-dress
    7 nobody short of silver → nobody pawns · 8 bot run 32 buổi without errors
    usage: node dev/test/npc-purpose-g1e.test.js [dev/index.html] → exit 1 on any FAIL */
-const {chromium}=require('playwright');const path=require('path');const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+path.resolve(URL0);
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+path.resolve(URL0);
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&/npcWhy|npw|wd|empDay/.test(m.text()))errs.push(m.text())});
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);

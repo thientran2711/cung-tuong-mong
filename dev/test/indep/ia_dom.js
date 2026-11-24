@@ -4,7 +4,7 @@
    Stage: every drawn token (name tag) is a person the record puts HERE now; every consort / Emperor / Thái hậu the record puts here
    (not of her own house when at home) is drawn. Also: no page error, no horizontal overflow, record rows == census (ia_hook).
    Random moments mix: next buổi, walk, spend a khắc on an act, save to the slot + full page RELOAD + continue (also with a card open). */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=require('../lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');
 const [,,URL,OUT,SZ='755x1000@2',NN='40',ORI='']=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 const HOOK=fs.readFileSync(path.join(__dirname,'ia_hook.js'),'utf8');
 (async()=>{fs.mkdirSync(OUT,{recursive:true});const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+DPR||1,hasTouch:true,isMobile:W<1100});

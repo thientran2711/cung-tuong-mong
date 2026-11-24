@@ -4,7 +4,7 @@
    uses the odds she saw (fzRun on the host with her shown odds), nothing is paid on her phone, her person on her phone shows the cost after
    the view; (4) two-way: a scheme road aimed at the friend (the host player); (5) host seat road (her own phone = host, solo path).
    usage: python3 dev/build/assemble.py && node dev/test/econ-tamco-coop.js [workerURL] [level=6]   (SHOTS=<dir outside git>: Fold 755x1000@2 + iPad 1180x820@2) */
-const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||6);const SWAP=+(process.argv[4]||0);
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,c?300:2500):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));

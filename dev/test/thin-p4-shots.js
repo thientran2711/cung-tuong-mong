@@ -1,6 +1,6 @@
 /* ORDER THIN P4/P5 shots: Fold 755x1000 + iPad 1180x820 of composed j68 openings and composed Kỳ ngộ cards (the real modal, kit frame).
    usage (after dev/site/build_site.sh with the seeds folded): node dev/test/thin-p4-shots.js <outdir> j68:<seed id>… ky:<seed id>… */
-const {chromium}=require('playwright');const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* card shots: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const OUT=process.argv[2]||'/tmp/thin-p4-shots';const IDS=process.argv.slice(3);fs.mkdirSync(OUT,{recursive:true});
 const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http://x').pathname);if(p==='/')p='/index.html';const f=path.join(ROOT,p);if(!fs.existsSync(f)||fs.statSync(f).isDirectory()){r.statusCode=404;return r.end()}fs.createReadStream(f).pipe(r)});
 (async()=>{await new Promise(r=>srv.listen(0,'127.0.0.1',r));const b=await chromium.launch();
