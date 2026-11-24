@@ -11153,11 +11153,6 @@
       ],
       "yr": {
        "t": 1795517932010,
-      "weeks": 4,
-      "buoi": 0,
-      "turns": [],
-      "yr": {
-       "t": 1795512126033,
        "turns": [],
        "year": 1
       },
@@ -11165,7 +11160,6 @@
       "posDiff": 0,
       "statLag": 0,
       "cmp": 74
-      "cmp": 16
      }
     ],
     "rejoin": [
@@ -11214,12 +11208,6 @@
    "rooms": 11,
    "t": {
     "total": 9675682
-     }
-    ]
-   },
-   "rooms": 5,
-   "t": {
-    "total": 3747091
    },
    "partial": true,
    "bugs": [
@@ -11228,7 +11216,6 @@
      "msg": "where one sees the friend ≠ where the friend is",
      "detail": "buổi 0.1 guest sees host at r2, host is at H:b",
      "n": 22,
-     "n": 6,
      "at": "coop-p13-S1"
     },
     {
@@ -11236,7 +11223,6 @@
      "msg": "save→load→save changes the state (host)",
      "detail": "save.S.visit.people.0.__feelMig: 1 → undefined",
      "n": 28,
-     "n": 10,
      "at": "coop-p13-S1",
      "saveFile": "saves/coop-20261124-0825-p13-14-ta5rfc.json"
     },
@@ -11245,7 +11231,6 @@
      "msg": "save→load→save changes the state (guest)",
      "detail": "save.S.visit.people.0.__feelMig: 1 → undefined",
      "n": 28,
-     "n": 10,
      "at": "coop-p13-S1"
     },
     {
@@ -11253,7 +11238,6 @@
      "msg": "co-op LAG budget miss: coopTurnP95",
      "detail": "coopTurnP95 36251 > 10000 · game year 1 · room AXNT · per device {\"fold\":{\"seat\":\"host\",\"kbPerMin\":756.9,\"upKB\":1964,\"dnKB\":742,\"posFlip\":null,\"resend\":22,\"resendBy\":{\"act\":19,\"where\":3},\"longTasksPerMin\":222.7,\"longTaskMax\":1326,\"errs\":0},\"ipad\":{\"seat\":\"guest\",\"kbPerMin\":738.3,\"upKB\":1469,\"dnKB\":1171,\"posFlip\":null,\"resend\":32,\"resendBy\":{\"act\":27,\"bend\":1,\"pos\":4},\"longTasksPerMin\":257.9,\"longTaskMax\":2282,\"errs\":0}}",
      "n": 18,
-     "n": 7,
      "at": "coop-p13-S1"
     },
     {
@@ -11261,7 +11245,6 @@
      "msg": "co-op LAG budget miss: coopSyncKBMax",
      "detail": "coopSyncKBMax 173.7 > 100 · game year 1 · room AXNT · per device {\"fold\":{\"seat\":\"host\",\"kbPerMin\":756.9,\"upKB\":1964,\"dnKB\":742,\"posFlip\":null,\"resend\":22,\"resendBy\":{\"act\":19,\"where\":3},\"longTasksPerMin\":222.7,\"longTaskMax\":1326,\"errs\":0},\"ipad\":{\"seat\":\"guest\",\"kbPerMin\":738.3,\"upKB\":1469,\"dnKB\":1171,\"posFlip\":null,\"resend\":32,\"resendBy\":{\"act\":27,\"bend\":1,\"pos\":4},\"longTasksPerMin\":257.9,\"longTaskMax\":2282,\"errs\":0}}",
      "n": 16,
-     "n": 6,
      "at": "coop-p13-S1"
     },
     {
@@ -11269,7 +11252,6 @@
      "msg": "co-op buổi stall (both ready, the room took > 30 s or never stepped)",
      "detail": "6 of 23 buổi in game year 1",
      "n": 18,
-     "n": 7,
      "at": "coop-p13-S1"
     },
     {
@@ -11277,7 +11259,6 @@
      "msg": "the friend's Sủng/Danh/Sức shown ≠ her own (one buổi late or wrong)",
      "detail": "buổi 6.0: host sees guest 6/25/93 (guest 5/27/83) · guest sees host 8/23/100 (host 8/23/100)",
      "n": 3,
-     "n": 2,
      "at": "coop-p13-S1"
     },
     {
@@ -11285,7 +11266,6 @@
      "msg": "co-op room stuck: no room week step in 240 s",
      "detail": "host {\"buoi\":3,\"week\":24,\"bend\":false,\"pendBuoi\":null,\"pend\":false,\"sent\":23,\"Q\":0,\"Qt\":[],\"mh\":true,\"mg\":false,\"dead\":false,\"next\":true,\"title\":false,\"st\":\"open\",\"peer\":true} || guest {\"buoi\":3,\"week\":24,\"bend\":false,\"pendBuoi\":null,\"pend\":false,\"sent\":23,\"Q\":0,\"Qt\":[],\"mh\":true,\"mg\":false,\"dead\":false,\"next\":true,\"title\":false,\"st\":\"open\",\"peer\":true}",
      "n": 9,
-     "n": 4,
      "at": "coop-p13-S1",
      "shots": [
       "shots/coop-p13-S1-r1-host-stuck.png",
@@ -11320,7 +11300,6 @@
      "msg": "stat out of range: bac",
      "detail": "bac=-1 · ipad guest week 4",
      "n": 14,
-     "n": 4,
      "at": "coop-p13-S1",
      "saveFile": "saves/coop-20261124-0825-p13-14-14hifwm.json"
     },
@@ -11345,8 +11324,6 @@
      "n": 3,
      "at": "coop-p13-S1",
      "saveFile": "saves/coop-20261124-0825-p13-14-n8zgfw.json"
-     "n": 1,
-     "at": "coop-p13-S1"
     }
    ]
   }

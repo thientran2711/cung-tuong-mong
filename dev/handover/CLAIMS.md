@@ -1495,12 +1495,3 @@ robot-coop-fix-2 BIG review | review/robot-coop-fix-2-r1 | session_01N1tNP53Ngf1
 ROBOT-COOP fixer #4 (fix-3, onecore) | review/robot-coop-fix-3, review/robot10-onecore | session_01N1tNP2dfra9gDdChCWdbcB (owner B) | RUNNING | 24/11 10:57Z
 | SELSCENE-10 (opus; successor of SELSCENE-9; briefs/M121-selscene-fix.md + SUCCESSOR NOTE 2) | review/selection-scene (from 726a633d); reports/selection-scene.md | MAIN 121 | session_01V1ZZH1JJGHVDhysWHZsvWq | RUNNING | 24/11 11:05Z |
 | KK19 kit keeper (sonnet; successor of KK18; HANDOVER top of reports/MOCK-STAGE.md) | review/kit-* | MAIN 122 | session_01V1ZZH551R5eFMgZWLvawik | RUNNING | 24/11 11:17Z |
-| robot10 E FIXER #2 successor (opus BIG; briefs/E-robot10-fixer.md + reports/robot10-E-fixer.md §3/HANDOVER) | review/robot10-e-fix-<n≥3>; reports/robot10-E-fixer.md | FOREMAN E (child3) | session_01DgYSWmqVHbtQnrFEo7E9r6 | RUNNING | 24/11 09:05Z |
-REVIEW net-build ed1be95a (opus BIG; briefs/D-net-build-review.md) | review/net-build-rv | session_01D3E3NaqgB7naRGuobjMu4H | RUNNING | 24/11 09:12Z (Foreman D depth 1)
-SERVANT TRUST — acts toward another person's people (opus BIG; MAIN 119 07:58Z; briefs/D-servant-trust.md) | review/servant-trust | session_01D3E3NYMzUyzf9KBhvBCtFW | RUNNING | 24/11 09:12Z (Foreman D depth 1)
-| REVIEW E77r MOMENT r1 BIG (opus; briefs/E77r-review-moment-r1.md) of 1d2189f3 | review/moment-r2; reports/moment-review-r2.md | FOREMAN E (child3) | session_01DgYSWopEScRoLUDyxAoR6m | RUNNING | 24/11 09:20Z |
-| SELSCENE-8 fix RV-SELX FAIL (opus; briefs/M121-selscene-fix.md) | review/selection-scene; reports/selection-scene.md | MAIN 121 | session_01V1ZZH42fkgxtS3ig7ApDFE | RUNNING | 24/11 09:30Z |
-| REVIEW E78r robot10-e-fix-2 r2 SMALL (sonnet; briefs/E78r-review-robot-fix2-r2.md) of 145a1f54 | reports/robot10-fix12-review.md | FOREMAN E (child3) | session_01DgYSWoMwdxE3vbLg9RaC8a | RUNNING | 24/11 09:35Z |
-| REVIEW E79r LEAVE-PALACE r1 BIG (opus; briefs/E79r-review-leave-palace-r1.md) of ea730f77 | review/leave-palace-r2; reports/leave-palace-review-r2.md | FOREMAN E (child3) | session_01DgYSWmgnAggZbjFVCTvkKj | RUNNING | 24/11 09:40Z |
-kit-optinfo SMALL review | review/kit-optinfo-r1 | session_01N1tNP3WNbdFEbb19kfqAVR (owner B) | RUNNING | 24/11 09:44Z
-robot-coop-fix-1 r2 BIG review | review/robot-coop-fix-1-r2 | session_01N1tNP2xZQymfgL6TKgMEcP (owner B) | RUNNING | 24/11 09:45Z

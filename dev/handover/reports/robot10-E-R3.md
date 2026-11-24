@@ -20,5 +20,3 @@ Type counts: ui-text-overlap 15, number 5, lag 2, ui-covered-btn 2, ui-overlap 2
 Same families as cnv_chu: mem leak 39/50, fold «Sang ngày mới» stuck after load 11/50, wall cap no ending 5/50, save→load→save diff 50/50 (here S.il.seq 27→29), «Bạc +8» vs bac=20 37/50, danh=101 2/50.
 New vs cnv_chu: js console.error «econ card TypeError: Cannot read properties of null (reading 'queen')» 2/50 (scholar-2, rebel-3); many ui-text-overlap / ui-covered-btn / ui-overlap rows (see file).
 Old harness (not 19183dca / 9e89619a). ROBOT R3 DONE.
-## Road cnv_ban — running (out-R3-ban), report when done.
-## Rollover: none yet. Foreman E session = session_01DgYSWm2Gu8SUSJpayKmy6E.
