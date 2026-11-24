@@ -4674,3 +4674,6 @@ ONE kit entry on top of §42.2: `kitKnow({key,text,pri})` (jnotice.js). Every ga
 - **Built ON §42.2, not a variant:** `kitKnow` only collects facts and hands ONE `kitNotice({kind:"know"})` to the §42.2 system (same top-bar «!» box, same top chip, same «Tin báo» panel); no chip, panel or colour of its own. Registered on the kit page as sample §42.3 (`KIT_SAMPLES`, jnotice.js).
 - **RANK of another person:** `k61RankSync()` (j61) tells her once when the rank of a person whose face she knows changes (after every week and every promoteP; the first sight carries the rank in its title/descriptor). Strangers' rank changes say nothing.
 - **For SELSCENE (sắc phong news):** `kitKnowMany([{key,text,pri}…])` puts a whole list in one batch and flushes now → ONE notice «Ta biết thêm N điều» (returns it). The screen itself (rows) is SELSCENE's.
+
+## §94.1 NO GOLD RING ON A PICKER TAB PRESS (owner OD 24/11 ~04:25Z; KK16)
+A press / tap on a kit item tab (`[data-kinvtab]`) or an item slot in `.kinv` / `.keq` (dress picker, Tư trang, shop) shows NO gold ring, outline, box-shadow or sticky-hover glow (jinv.js CSS; tap highlight transparent; on `(hover:none)` screens the `:hover` glow is off). Keyboard `:focus-visible` glow on the item slot is kept. Test: `node dev/test/kit-dress-picker.js` (19 pass Fold + iPad + phone).
