@@ -69,7 +69,8 @@ function fixtureRows(){const R=[];const dir=path.join(ROOT,'dev/test');
  const NPLANT=A.includes('--numplant');if(NUMS&&NPLANT)await g.evaluate(()=>{PEND.__cvPlantNum=()=>({t:'<p>plant</p>',o:[{n:'Plant num',fx:{sung:2},x:'Sủng +5'},{n:'Plant num ok',fx:{duc:1},x:'Đức +1'}]})});/* --numbers self-test: one planted lie must be caught */
  /* (1) every PEND dilemma builder */
  const pend=await g.evaluate(()=>Object.keys(PEND));
- for(const id of pend){for(const pp of [{},{q:3,vp:0}]){try{const ok=await g.evaluate(([id,pp])=>{Q.length=0;$('modal').hidden=true;let d=null;try{d=mkP(id,pp)}catch(e){return 0}if(!d||!d.o||d.o.length<2)return 0;pushDil(d,'PEND '+id);showModal();return 1},[id,pp]);
+ for(const id of pend){const e6=/^e68/.test(id)?await g.evaluate(id=>{try{const E=typeof E68I==='object'&&E68I[id.slice(3)];const P=E&&E.pp?E.pp():null;return P&&typeof P==='object'?P:null}catch(e){return null}},id):null;/* robot10-onecore 2: a j68 event with actors needs its own params (E68I[id].pp: who / which item); {} built none of them */
+  for(const pp of [{},{q:3,vp:0}].concat(e6?[e6]:[])){try{const ok=await g.evaluate(([id,pp])=>{Q.length=0;$('modal').hidden=true;let d=null;try{d=mkP(id,pp)}catch(e){return 0}if(!d||!d.o||d.o.length<2)return 0;pushDil(d,'PEND '+id);showModal();return 1},[id,pp]);
   if(ok){await p.waitForTimeout(60);await record('pend:'+id)}}catch(e){}}}
  /* (1b) rank- / condition-gated builders the turns rarely reach (review FAIL 2b): drive them directly.
     MF7 merits (PEND j71m, every family × variant), FV7 festivals (j71f / j71i, every kind × variant), FX7 contests (j71x),

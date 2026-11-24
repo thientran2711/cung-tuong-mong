@@ -71,7 +71,7 @@ const RX=/(Sủng|Danh|Đức|Bạc|Sức khỏe|Sức|Sắc|Tài|Tâm cơ|Tai m
 function auditOpt(o,m){const txt=strip((o.n||"")+" | "+(o.x||""));const key=txt;if(R.seen["o|"+key])return;R.seen["o|"+key]=1;R.opts++;
  words(txt,"option «"+strip(m.t||m.title||"").slice(0,60)+"»");
  /* segments: "thành:" numbers belong to the win block, "hỏng:" to the loss block, the rest to the sure effect / cost */
- const obj=x=>x&&typeof x==="object"?x:null;const PW=[o.w,o.win].map(obj).filter(Boolean),PL=[o.l,o.lose].map(obj).filter(Boolean),PF=[o.fx,o.c,o.cost].map(obj).filter(Boolean);
+ const obj=x=>x&&typeof x==="object"?x:null;const PW=[o.w,o.win,o.__w].map(obj).filter(Boolean),PL=[o.l,o.lose,o.__l].map(obj).filter(Boolean),PF=[o.fx,o.c,o.cost].map(obj).filter(Boolean);
  /* (typed-stat review, 4/4 false positives): «thắng:» = «thành:» (win on the roll; fx is the stake); a bare number with no marker may be the win of a
     sure option → compared with the win block AND the cost; the weather note «đi kiệu … Bạc −N» is charged later (jweather wxAfter, BAL.wx.kieuBac): skipped */
  txt.split(/(?=thành:|thắng:|hỏng:|thua:|kèm:|tốn:|được:|mất:)/i).forEach(seg=>{if(/kiệu/i.test(seg))return;const pools=/^(thành|thắng):/i.test(seg)?PW:/^(hỏng|thua):/i.test(seg)?PL:PF.concat(PW);if(!pools.length)return;
@@ -81,6 +81,11 @@ function auditOpt(o,m){const txt=strip((o.n||"")+" | "+(o.x||""));const key=txt;
      this option's sure effect: never compared with fx (the A/B harness flagged «Bạc +8» vs fx bac 20 in «Bạc lạ»: +20 now AND +8 each month, both true) */
   {const i=seg.indexOf(a);const ctx=seg.slice(Math.max(0,i-16),i)+"|"+seg.slice(i+a.length,i+a.length+14);if(/mỗi (tháng|năm|tuần|buổi|ngày|kỳ|lần)/i.test(ctx))return a}
   if(!vals.some(x=>x===v||Math.abs(x)===Math.abs(v)))bug("number","option text «"+a+"» but the effect applies "+k+"="+vals.join("/"),"«"+txt.slice(0,160)+"» in «"+strip(m.t||m.title||"").slice(0,60)+"» fx="+JSON.stringify(o.fx||{}).slice(0,120));return a})})}
+/* robot10-onecore 2 (law 4 + law 11, «Thay hết nước, đồ ăn | Sức +6» vs fx suc −2 in «Chuyện lạ cần tra»): a j68 option (c6) keeps its WIN / LOSS
+   blocks in a closure; only the cost (fx) was readable, so a sure option's win number («Sức +N») was compared with the cost alone. c6 now hands the
+   audit its blocks (non-enumerable __w / __l: never saved, never sent); the «pw» road (the bạc paid only on success) moves that bạc into the win as c6 does */
+if(typeof c6==="function"&&!c6.__r10){const c60=c6;c6=function(n,s){const c=c60.apply(this,arguments);try{if(c&&s){let w=s.w||null;if(s.pw&&s.c&&s.c.bac<0)w=Object.assign({},w||{},{bac:s.c.bac});
+ Object.defineProperty(c,"__w",{value:w,enumerable:false,configurable:true});Object.defineProperty(c,"__l",{value:s.l||null,enumerable:false,configurable:true})}}catch(e){}return c};c6.__r10=1}
 R.auditOpt=auditOpt;/* robot10-onecore: dev/tools/choice-value-scan.js --numbers runs the same rule on every option it builds */
 {const c0=chooseM;chooseM=function(i){try{const m=Q[0];if(m&&m.opts){if(!m.__r10){m.__r10=1;words((m.t||m.title||"")+" "+(m.h||""),"card");m.opts.forEach(o=>auditOpt(o,m))}}}catch(e){}return c0.apply(this,arguments)}}
 /* logs (her journal) and the life's ending text are player-visible too */
