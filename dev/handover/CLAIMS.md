@@ -1369,3 +1369,4 @@ REVIEW robot10-nc-fix-4 (sonnet SMALL; briefs/D-robot10-nc-fix-4-review.md) of a
 PROMO-HIST BUILD (opus BIG; ORDER MAIN 116 05:22Z; briefs/D-promo-hist-build.md; gaps a/b/c of reports/PROMO-HIST.md §3) | review/promo-hist | session_01D3E3NZEx6p8F3E5HVmYWr1 | RUNNING | 24/11 04:40Z (Foreman D ROOT)
 | PARKING LOT AUDIT E63 (sonnet; ORDER MAIN 116 05:22Z «cứ lôi ra làm tiếp»; briefs/E63-parking-audit.md) | reports/parking-audit.md | FOREMAN E (child1) | session_01DgYSWnS8t83k8g5g1at6Hy | RUNNING | 24/11 04:58Z |
 | LEAVE-THE-PALACE = ENDING E64 (opus BIG; ORDER MAIN 116 06:07Z, OD 24/11 ~06:05Z; briefs/E64-leave-palace.md) | review/leave-palace; reports/leave-palace.md | FOREMAN E (child1) | session_01DgYSWo8YEvuna16R4PLfiY | RUNNING | 24/11 04:58Z |
+| LAW-1 WHOLE-GAME AUDIT (opus BIG; ORDER MAIN 116 08:36Z, OD 24/11 ~08:35Z; briefs/b-law1-audit.md) | review/law1-audit; reports/law1-audit.md | B | (opening) | RUNNING | 24/11 05:32Z |
