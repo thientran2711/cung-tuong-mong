@@ -27,7 +27,7 @@ for f in sorted(glob.glob(D+'/j*.js')):
       if m.group(0).startswith('evG'):tot['evidence(evG) — chứng cứ, not a relation level (fix 1)']+=1;continue
       k='evidence(evG)' if m.group(0).startswith('evG') else 'number' if re.fullmatch(r"-?\d+(\.\d+)?",r) else 'name'
       tot[k]+=1;rows.append(f"{b}:{i}\t{k}\t{m.group(0)[:110]}")
-# (fix 3 family) a level tested through a local copy: const h=hostility(..) … h>=X / const f=aff(..) … f>=X, and raw (v.oan||0)>=X
+# (fix 3 family) a level tested through a local copy: const h=hostility(..) … h>=X / const f=aff(..) … f>=X, and raw (v.oan||0) / (v.rel||0) / (x.rl[..]||0)>=X (rv r2: + .rel / rl / ro)
 VP=re.compile(r"\b(?:const|let)\s+(\w+)\s*=\s*(?:aff|oan|rel|hostility)\(")
 for f in sorted(glob.glob(D+'/j*.js')):
   b=f.split('/')[-1]
@@ -40,7 +40,7 @@ for f in sorted(glob.glob(D+'/j*.js')):
         if re.fullmatch(r"-?0(\.0+)?",r) or r.startswith(('netTh','bandVT','bandCut')):continue
         if (b,g.group(0)) in KEEP:kept.append(f"{b}:{i}\tKEEP\t{g.group(0)}\t{KEEP[(b,g.group(0))]}");continue
         tot['via local']+=1;rows.append(f"{b}:{i}\tvia local\t{g.group(0)[:110]}")
-    for g in re.finditer(r"\(\w+\.oan\|\|0\)"+OP+RHS,l):
+    for g in re.finditer(r"\(\w+\.(?:oan|rel|rl\[[^\]]+\]|ro\[[^\]]+\])\|\|0\)"+OP+RHS,l):
       r=g.group(2)
       if re.fullmatch(r"-?0(\.0+)?",r) or r.startswith('netTh'):continue
       tot['raw oan']+=1;rows.append(f"{b}:{i}\traw oan\t{g.group(0)[:110]}")

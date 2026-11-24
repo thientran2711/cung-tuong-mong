@@ -227,7 +227,7 @@ function j95bClearOdds(r){const y=RV(r.y),x=r.x!=null?RV(r.x):null;if(!y)return 
 function j95bClear(u,how,face){const z=j95bZ();const r=z.rum.find(x=>x.u===u);if(!r)return"";const y=RV(r.y);if(!y||!y.alive)return"";if(!face&&typeof can==="function"&&can(BAL.m95b.k))spend(BAL.m95b.k);
  J95B.stat.clear++;const o=j95bClearOdds(r);const x=r.x!=null?RV(r.x):null;let msg;
  if(j95dice(o)){r.cleared=1;J95B.stat.clearOk++;if(y.j95rum)delete y.j95rum[key(S)];
-  if(r.truth){oanAdd(y,S,-Math.round(r.oa/2));msg=`${y.name} nghe ngươi nhận lỗi, nguôi đi phần nào; chuyện ấy có thật nên nàng vẫn còn để bụng.`}
+  if(r.truth){/* rv r2 (law 1): owning up is an apology — the same netForgive rule as every other road */if(!netForgive(y,S))msg=netRefused(S,y,"nhận lỗi với")+".";else{oanAdd(y,S,-Math.round(r.oa/2));msg=`${y.name} nghe ngươi nhận lỗi, nguôi đi phần nào; chuyện ấy có thật nên nàng vẫn còn để bụng.`}}
   else{oanAdd(y,S,-r.oa);affAdd(y,S,r.af+4);if(x&&x.alive){oanAdd(y,x,BAL.eff.j95b.j95bClear);affAdd(y,x,BAL.eff.j95b.j95bClear_2)}msg=`${y.name} tin lời ngươi: hiểu lầm đã gỡ.${x&&r.traced?` Nàng quay sang giận ${x.name}.`:""}`}
   j95bAct("v"+y.id,"cleared","me",{ok:true,why:`hết hiểu lầm: ngươi đã giải bày (${how})`},"rumor:clear")}
  else{oanAdd(y,S,BAL.eff.j95b.j95bClear_3);msg=r.truth?`${y.name} không nghe: chuyện ấy có thật.`:`${y.name} chưa tin lời ngươi.`}

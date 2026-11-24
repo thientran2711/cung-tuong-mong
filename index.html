@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"228531af+","t":"2026-11-24T10:50Z","c":"net-build-rv fix r1: npc-purpose row j83 gift line follows netTh quen (relMe deleted)","b":"4fb0b669ded4","h":[{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"}]};
+window.CTM_BI={"s":"e41f4f79+","t":"2026-11-24T11:47Z","c":"net-build-rv fix r1: drop BAL.eff.jemo.wk.upRival (no reader left; rivalUp reads netTh quen); site rebuilt","b":"7bde7e1f25ec","h":[{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -6996,7 +6996,7 @@ Object.assign(BAL,{arc:{
  muoi_tuoc:{p:.15,c:{suc:-4,bac:-100},np:2,sc:2,bar:40,fx:{danh:10,bac:200,th:5}},
  muoi_lau:{p:.15,c:{suc:-4,bac:-40},np:2,sc:2,bar:[2,45],fx:{danh:12,bac:120}},
  muoi_doi:{p:0.15,c:{suc:-8,bac:-60},np:2,sc:2,bar:50,fx:{duc:6,danh:12,sung:4},g:[12]},
- muoi_no:{p:.15,c:{suc:-3,bac:-50},np:2,sc:1,bar:20,fx:{danh:6,duc:4},g:[45]},
+ muoi_no:{p:.15,c:{suc:-3,bac:-50},np:2,sc:1,fx:{danh:6,duc:4},g:[45]},
  cn_chu:{p:.15,c:{suc:-3},np:2,sc:1,fx:{danh:10,duc:5,sung:4},g:[40]},
  cn_tinh:{p:.15,c:{suc:-3},np:2,sc:2,bar:40,fx:{sung:10,danh:6}},
  cn_ban:{p:.15,c:{suc:-3,bac:-60},np:2,sc:2,bar:30,fx:{danh:8,mat:3,th:4}},
@@ -7011,7 +7011,7 @@ Object.assign(BAL,{arc:{
  td_tha:{p:.15,c:{suc:-3},np:2,sc:1,bar:50,fx:{duc:8,danh:10,sung:4},g:[50]},
  ch_co:{p:.15,c:{suc:-3},np:2,sc:2,bar:50,fx:{th:30,danh:12}},
  ch_benh:{p:.15,c:{suc:-5},np:3,sc:2,bar:[1,45],fx:{th:15,danh:12,mat:2}},
- ch_ho:{p:.15,c:{suc:-3},np:2,sc:1,bar:25,fx:{th:15,danh:8,duc:3},g:[50]},
+ ch_ho:{p:.15,c:{suc:-3},np:2,sc:1,fx:{th:15,danh:8,duc:3},g:[50]},
  ch_bi:{p:.15,c:{suc:-3},np:2,sc:2,bar:40,fx:{th:20,duc:5,danh:6}},
  thd_tho:{p:.15,c:{suc:-3},np:2,sc:2,bar:[2,55],fx:{danh:12,tai:5}},
  thd_sach:{p:.15,c:{suc:-4},np:2,sc:2,bar:45,fx:{danh:14,tai:3,duc:3}},
@@ -7028,8 +7028,8 @@ Object.assign(BAL,{arc:{
  s_dich:{p:.15,c:{suc:-8},np:2,sc:2,bar:[1,50],fx:{duc:6,danh:14,sung:5}},
  s_tinh:{p:.15,c:{suc:-3},np:3,sc:1,bar:50,fx:{sung:10,duc:5,danh:4}},
  s_thay:{p:.15,c:{suc:-3},np:2,sc:2,bar:[1,45],fx:{mat:4,tamco:4,danh:4}},
- s_ban:{p:.15,c:{suc:-3},np:2,sc:2,bar:20,fx:{danh:10,tamco:3},g:[50]},
- st_the:{p:.15,c:{suc:-4,bac:-80},np:2,sc:2,bar:[40,2],fx:{danh:12,mat:3,sung:5},g:[15]},
+ s_ban:{p:.15,c:{suc:-3},np:2,sc:2,fx:{danh:10,tamco:3},g:[50]},
+ st_the:{p:.15,c:{suc:-4,bac:-80},np:2,sc:2,bar:2,/* bar = how many consorts thân with her (netTh «than», rv r2) */fx:{danh:12,mat:3,sung:5},g:[15]},
  st_con:{p:0.15,c:{suc:-3},np:2,sc:2,bar:40,fx:{danh:10,sung:6},g:[20]},
  st_dong:{p:0.1,c:{suc:-3},np:3,sc:3,bar:[50,50],fx:{danh:10,sung:8},g:[25]},
  },
@@ -12090,7 +12090,7 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
  td_tha_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{duc:10,danh:10,sung:4},bar:45,g:[50]},
  ch_co_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,sung:6,tamco:2},bar:40},
  ch_benh_11:{p:.12,np:2,sc:2,c:{suc:-5},fx:{danh:12,sung:5,mat:2}},
- ch_ho_11:{p:.12,np:3,sc:2,c:{suc:-4},fx:{th:12,danh:10,duc:3},bar:30,g:[40]},
+ ch_ho_11:{p:.12,np:3,sc:2,c:{suc:-4},fx:{th:12,danh:10,duc:3},g:[40]},
  ch_bi_11:{p:.12,np:3,sc:2,c:{suc:-4},fx:{th:15,danh:10,duc:6},bar:40,th:40},
  tt_co_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,sung:6},bar:40,g:[4]}, /* x: duc ≥ bar */
  tt_oan_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,duc:4},bar:45,g:[8]}, /* x: duc ≥ bar */
@@ -12112,7 +12112,7 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
  cnv_ban_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:10,duc:4},bar:35,bar2:2,g:[10,12,8]}, /* x: duc ≥ bar or mat ≥ bar2 */
  cnv_chu_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,duc:4},bar:40,g:[30,12,20]}, /* x: duc ≥ bar */
  cnv_ma_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:10,mat:2,duc:3},bar:35}, /* x: duc ≥ bar and the wooden box */
- cnv_mat_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:10,duc:4},bar:20,g:[20]}, /* x: old mistress rel ≥ bar */
+ cnv_mat_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:10,duc:4},g:[20]}, /* x: old mistress thân with her (netTh «than», rv r2) */
  thd_hoc_11:{p:.1,np:3,sc:2,c:{suc:-4},fx:{danh:12,sung:4},bar:45,g:[15]}, /* x: duc ≥ bar */
  thd_sach_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:14,sung:5,duc:4},bar:50}, /* x: danh ≥ bar */
  thd_tho_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:14,sung:6,tai:2},bar:45}, /* x: tai ≥ bar */
@@ -22522,7 +22522,7 @@ rdDef("ch_ho",11,{t:"Họ ngoại",w:"th",sj:"người đứng đầu họ ngo�
   mid:{tag:"Hai người cháu chia ghế",t:"Hai người cháu cùng giữ họ ngoại, mỗi người một nửa. Không ai mạnh hẳn, nhưng họ không chia hai.",go:(_A,G)=>CHR_TH(G[0])},
   lose:{tag:"{v} đứng đầu họ ngoại",t:A=>S.thDead?"Họ ngoại theo {v}. Ngươi vẫn là cháu Thái hậu, nhưng hương khói của bà và nhà ngoại không còn đứng sau ngươi.":"Họ ngoại theo {v}. Ngươi vẫn là cháu Thái hậu, vẫn được bà thương, nhưng nhà ngoại không còn đứng sau ngươi.",go:(A,G)=>{const v=rv67(A,"v");if(v)v.sung=cl((v.sung||0)+G[0],0,100);return CHR_TH(G[1])}}}});
 RD97L.push(rdRare({a:"ch_ho_11",tag:"Hai người cháu cùng cầm họ ngoại",w:"th",need:"th",n:"Nắm tay {v} quỳ trước Thái hậu, xin lập một phe chung",
- path:["Mời {v} vào cùng hầu","Rủ {v} cùng dâng một món","Kể lại với {v}","Xin bà đừng hỏi nữa, hai cháu tự hòa","Đề nghị họ ủng hộ cả hai cháu","Cùng {v} quỳ xin xét công bằng","Giúp {v} lo lễ Phật đản","Hứa với cô mẫu sẽ giữ {v}","Mời {v} cùng thắp"],bad:["Nhờ người nhà báo tin cho Ngự sử về đất phong","Đưa tên một quản sự đất phong nhà {v}","Tâu riêng cho nhà mình"],x:[A=>{const v=rv67(A,"v");return !S.thDead&&!!v&&(v.rel||0)>=RR("ch_ho_11").bar},"Thái hậu còn sống, {v} có thiện cảm với ngươi từ "+RR("ch_ho_11").bar],
+ path:["Mời {v} vào cùng hầu","Rủ {v} cùng dâng một món","Kể lại với {v}","Xin bà đừng hỏi nữa, hai cháu tự hòa","Đề nghị họ ủng hộ cả hai cháu","Cùng {v} quỳ xin xét công bằng","Giúp {v} lo lễ Phật đản","Hứa với cô mẫu sẽ giữ {v}","Mời {v} cùng thắp"],bad:["Nhờ người nhà báo tin cho Ngự sử về đất phong","Đưa tên một quản sự đất phong nhà {v}","Tâu riêng cho nhà mình"],x:[A=>{const v=rv67(A,"v");return !S.thDead&&!!v&&aff(v,S)>=netTh(v,"than")},"Thái hậu còn sống, {v} thân với ngươi"],
  t:"Ngươi và {v} cùng quỳ trước Thái hậu, dâng một tờ giao ước: họ ngoại trong cung là một phe, việc lớn hai người cùng bàn, ai gặp nạn người kia gánh. Thái hậu đọc xong, đóng ấn riêng của bà vào giữa tờ giấy: “Ai gia đi rồi cũng yên.” Từ đó hậu cung không còn hai người cháu, chỉ còn một nhà.",
  go:(A,G)=>e67ally(rv67(A,"v"),G[0]),rw:"nt_haiduong",ti:"Người giữ giao ước họ ngoại"}));
 /* ---------- ch_bi · Bí mật năm xưa ---------- */
@@ -24692,7 +24692,7 @@ rdDef("cnv_mat",11,{t:"Ánh mắt ấy",w:"emp",sj:"điều ánh mắt ấy tr�
   lose:{tag:"Ánh mắt khép lại",t:MATT("Ngài thôi nhìn về phía hậu viện. Ngươi vẫn là cung nữ, vẫn pha trà, vẫn sống. Con đường còn dài, chỉ không còn chiếc ô năm ấy.",
    "Ngài thôi đến. Ngươi vẫn là tiểu chủ, vẫn có cung riêng, chỉ không còn ai nhìn ngươi như chiều mưa năm ấy."),go:()=>[matSrv(rdGo("cnv_mat_11",5)),matCon(rdGo("cnv_mat_11",6))].join(" ")}}});
 RD97L.push(rdRare({a:"cnv_mat_11",tag:"Chủ cũ thành tỷ muội",w:"mis",n:"Xin {mis} cùng đứng dưới mái hiên",
- path:["Quỳ lạy {mis}","Thưa: là tỷ muội","Xin ơn cho {mis}","Gặp {v}, xin hòa","Thôi ngóng"],bad:["Thưa: là người từng hầu","Đem chuyện gói bùa"],x:[()=>{const m=CNV_MIS();return !!(m&&m.alive&&!m.out&&(m.rel||0)>=RR("cnv_mat_11").bar)},"Chủ cũ thương ngươi (giao tình từ "+RR("cnv_mat_11").bar+")"],
+ path:["Quỳ lạy {mis}","Thưa: là tỷ muội","Xin ơn cho {mis}","Gặp {v}, xin hòa","Thôi ngóng"],bad:["Thưa: là người từng hầu","Đem chuyện gói bùa"],x:[()=>{const m=CNV_MIS();return !!(m&&m.alive&&!m.out&&aff(m,S)>=netTh(m,"than"))},"Chủ cũ thương ngươi (thân với ngươi)"],
  t:"Ngươi sai người mời {mis} ra mái hiên. Hoàng thượng thấy hai người đứng chung một chiếc ô, bật cười: “Hóa ra người trẫm nhìn năm ấy, là người nàng dạy ra.” Từ đó, cung {mis} và cung ngươi đi chung một đường, ai động đến người này là động đến cả hai.",
  go:(_A,G)=>{matMis(G[0]);return [matSrv(rdGo("cnv_mat_11",7)),matCon(rdGo("cnv_mat_11",8))].join(" ")},rw:"nt_nhuy",ti:"Chủ tớ thành tỷ muội"}));
 CNV_QFIX("cnv_mat");
@@ -41374,9 +41374,10 @@ const R97X={};                 /* kết hiếm của mô-đun khác (j96…): id
 const R97NT=["nt_nhuy","nt_haiduong","nt_dongchau","ngocboi","bienngu"];
 /* ---------- helpers for conditions and effects ---------- */
 function r97v(A,k){try{return rv67(A,k||"v")}catch(e){return null}}
-function r97vRel(A,k){const v=r97v(A,k);return v?(v.rel||0):-99}
+/* rv r2 (law 4): «{v} thân với ngươi» = her own «than» level (netTh), not a per-road bar */
+function r97vThan(A,k){const v=r97v(A,k);return !!v&&aff(v,S)>=netTh(v,"than")}
 function r97has(k){return (S.inv||[]).some(e=>e&&e.k===k&&!e.h)}
-function r97allies(n){try{return liveRivals(true).filter(v=>(v.rel||0)>=n).length}catch(e){return 0}}
+function r97allies(){try{return liveRivals(true).filter(v=>aff(v,S)>=netTh(v,"than")).length}catch(e){return 0}}
 function r97art(k){return (S.arts&&S.arts[k])||0}
 function r97srv(){return typeof isSrv==="function"&&isSrv()}
 function r97son(){try{return son67()}catch(e){return null}}
@@ -41437,7 +41438,7 @@ const R97L=[
  t:"Năm sau được mùa, dân Giang Nam góp gạch dựng một sinh từ thờ ngươi khi còn sống. Ngự sử về tâu, Hoàng thượng cười mà phong cho ngươi chữ “Nhân” làm phong hiệu. Mỗi lần ngươi qua cổng, người ta thắp hương mà khấn tên ngươi.",
  go:(_A,_ok,G)=>e67kho(G[0]),rw:"bienngu",ti:"Phong hiệu Nhân"},
 {a:"muoi_no",tag:"Kim lan trước Phụng Tiên điện",w:"v",n:"Trả sổ nợ cho {v}, rồi xin cùng nàng kết nghĩa",
- path:["Xóa nợ, kết ơn","Cho vay không điều kiện","Không bán, báo cho {v}","Đứng ra nói đó là quà","Cho thêm hạn","Nhắc khéo {v}"],bad:["Bán","Đòi bằng được","Cho vay, kèm điều kiện"],x:[A=>r97vRel(A)>=AR("muoi_no").bar,`{v} có thiện cảm với ngươi từ ${AR("muoi_no").bar}`],
+ path:["Xóa nợ, kết ơn","Cho vay không điều kiện","Không bán, báo cho {v}","Đứng ra nói đó là quà","Cho thêm hạn","Nhắc khéo {v}"],bad:["Bán","Đòi bằng được","Cho vay, kèm điều kiện"],x:[A=>r97vThan(A),`{v} thân với ngươi`],
  t:"{v} cầm sổ nợ mà khóc. Trước bàn thờ Phụng Tiên điện, hai người thắp ba nén hương, kết làm tỷ muội kim lan. Từ hôm ấy, mọi lời {v} nói với Hoàng thượng đều có một câu nhắc đến ngươi, và phe nàng thành phe ngươi.",
  go:(A,_ok,G)=>e67ally(r97v(A),G[0]),rw:"nt_nhuy",ti:"Tỷ muội kim lan"},
 /* ===== Cung nữ được sủng (cn) ===== */
@@ -41502,7 +41503,7 @@ const R97L=[
  t:"Chén thuốc của Thái y viện đổi màu trong tay lương y. Cả điện quỳ rạp. Thái hậu khỏi bệnh, việc đầu tiên bà làm là đòi phượng ấn về Đức Thọ cung, rồi trao tạm vào tay ngươi: “Chừng nào ai gia còn sống, lục cung có chuyện thì hỏi con.”",
  rw:"nt_haiduong",ti:"Nhiếp lục cung sự"},
 {a:"ch_ho",tag:"Song phượng Đức Thọ cung",w:"th",n:"Nắm tay {v}, cùng quỳ trước Thái hậu",
- path:["Nhường {v} dâng trước","Đề nghị họ ủng hộ cả hai","Gặp Thái hậu giải thích","Xin bà cứu {v}","Nhường {v}","Bắt tay"],bad:["Thưa: để nàng tự chịu","Từ chối"],x:[A=>r97vRel(A)>=AR("ch_ho").bar,`{v} có thiện cảm với ngươi từ ${AR("ch_ho").bar}`],
+ path:["Nhường {v} dâng trước","Đề nghị họ ủng hộ cả hai","Gặp Thái hậu giải thích","Xin bà cứu {v}","Nhường {v}","Bắt tay"],bad:["Thưa: để nàng tự chịu","Từ chối"],x:[A=>r97vThan(A),`{v} thân với ngươi`],
  t:"Thái hậu nhìn hai đứa cháu quỳ cạnh nhau, bật cười lần đầu sau nhiều năm: “Ai gia sợ nhà mình chia hai, hóa ra lại được đôi phượng.” Bà xin Hoàng thượng ban cho hai người phong hiệu cặp đôi, cùng ra vào Đức Thọ cung. Từ đó trong cung, đụng một người là đụng cả hai.",
  go:(A,_ok,G)=>e67ally(r97v(A),G[0]),rw:"nt_nhuy",ti:"Song phượng Đức Thọ cung"},
 {a:"ch_bi",tag:"Người phi tần năm xưa còn sống",w:"th",need:"th",n:"Đưa lão cung nữ đến gặp Thái hậu lúc không có ai",
@@ -41573,14 +41574,14 @@ const R97L=[
  t:"Trước lúc nhắm mắt, lão Tổng quản dặn từng người một: các thái giám ở mười hai cung, ba cửa thành, Ngự thiện phòng, Kính sự phòng. “Từ nay các ngươi nghe nàng.” Tai mắt ba đời vua của ông, nay là của ngươi.",
  rw:"nt_haiduong",ti:"Người kế thừa lão Tổng quản"},
 {a:"s_ban",tag:"Kim lan lật đổ {v2}",w:"v",n:"Hẹn {v} uống rượu thề dưới gốc hải đường",
- path:["Đỡ lời cho cả {v}","Báo cho {v}","Mời trà, nói chuyện thật lòng","Giúp {v} bắt kẻ gài","Đỡ lời","Bắt tay"],bad:["Chỉ lo cho mình","Giữ kín","Tiếp khách sáo","Mặc kệ","Từ chối"],x:[A=>r97vRel(A)>=AR("s_ban").bar,`{v} có thiện cảm với ngươi từ ${AR("s_ban").bar}`],
+ path:["Đỡ lời cho cả {v}","Báo cho {v}","Mời trà, nói chuyện thật lòng","Giúp {v} bắt kẻ gài","Đỡ lời","Bắt tay"],bad:["Chỉ lo cho mình","Giữ kín","Tiếp khách sáo","Mặc kệ","Từ chối"],x:[A=>r97vThan(A),`{v} thân với ngươi`],
  t:"Dưới gốc hải đường, hai người từng là kẻ thù uống chung một chén rượu thề. Ba tháng sau, mọi mưu của {v2} bị chính hai người lật ra trước mặt Hoàng thượng. Cả hậu cung kháo nhau: chọc vào một người là chọc vào cả đôi.",
  go:(A,_ok,G)=>{const v2=r97v(A,"v2");return [e67ally(r97v(A),G[0]),v2?e67drop(v2,"bị vạch mưu"):""].filter(Boolean).join(" ")},rw:"nt_nhuy",ti:"Tỷ muội kim lan"},
 /* ===== Giữa đời ===== */
 {a:"st_the",tag:"Một hô trăm ứng",w:"emp",n:"Mở tiệc ở cung ngươi, mời mọi người từng chịu ơn ngươi",
- path:["Nhận lời kết nghĩa","Chăm lo cho họ","Đáp lễ, hứa nâng đỡ","Gặp từng người giải thích","Chia cho kẻ hầu và đồng minh","Đứng ra bảo vệ"],bad:["Giữ lại","Để luật xử"],x:[()=>r97allies(AR("st_the").bar[0])>=AR("st_the").bar[1],`ít nhất ${AR("st_the").bar[1]} phi tần có thiện cảm với ngươi từ ${AR("st_the").bar[0]}`],
+ path:["Nhận lời kết nghĩa","Chăm lo cho họ","Đáp lễ, hứa nâng đỡ","Gặp từng người giải thích","Chia cho kẻ hầu và đồng minh","Đứng ra bảo vệ"],bad:["Giữ lại","Để luật xử"],x:[()=>r97allies()>=AR("st_the").bar,`ít nhất ${AR("st_the").bar} phi tần thân với ngươi`],
  t:"Tiệc đêm ấy đông đến mức phải bày thêm bàn ra sân. Phi tần, cung nữ, thái giám, cả người nhà các quan đều đến. Hoàng thượng đi ngang, đứng ở cửa nhìn rất lâu, rồi cười: “Trẫm chưa từng thấy ai có nhiều người thương đến vậy.” Từ đó, việc gì trong cung ngươi nói một câu là có trăm người làm.",
- go:(_A,_ok,G)=>{let n=0;liveRivals(true).filter(v=>(v.rel||0)>=30).slice(0,4).forEach(v=>{relAdd(S,v,G[0]);n++});return n?`${n} người trong phe ngươi thêm thiện cảm (+15).`:""},rw:"nt_haiduong",ti:"Chủ một phe lục cung"},
+ go:(_A,_ok,G)=>{let n=0;liveRivals(true).filter(v=>aff(v,S)>=netTh(v,"than")).slice(0,4).forEach(v=>{relAdd(S,v,G[0]);n++});return n?`${n} người trong phe ngươi thêm thiện cảm (${balSg(G[0])}).`:""},rw:"nt_haiduong",ti:"Chủ một phe lục cung"},
 {a:"st_con",tag:"Hoàng thượng tự tay dạy con",w:"kid",need:"kid",n:"Để con tự dâng Hoàng thượng bài văn nó viết",
  path:["Lão Hàn lâm nghiêm khắc","Tiến sĩ trẻ","Tự thức canh","Tăng người canh","Đêm trước kèm con","Để chúng chơi","Xin Hoàng thượng làm lễ nhỏ","Tìm kẻ tung tin"],bad:["Cấm"],x:[()=>{const s=r97son();return !!s&&(s.fond||0)>=AR("st_con").bar},`có hoàng tử được Hoàng thượng thương từ ${AR("st_con").bar}`],
  t:"Hoàng thượng đọc bài văn của {k}, rồi gác cả tấu chương, tự tay cầm bút sửa từng chữ cho con. Từ hôm ấy, mỗi tối ngài gọi {k} vào ngự thư phòng. Triều thần nhìn nhau: chưa hoàng tử nào được vua tự dạy như thế.",
@@ -43830,7 +43831,7 @@ function succSup(){const r={houses:[],pow:0,mil:false,milArmy:false,milGuard:fal
   const vg=(S.men||[]).find(m=>m.alive&&m.role==="Vương gia");if(vg){r.vg=vg;r.vgAlly=(vg.tinh||0)>=60||S.vgAlly===vg.id}}catch(e){}
  r.mil=r.milArmy||r.milGuard;
  try{const set=new Set();const f=typeof facOf==="function"?facOf(S):null;if(f&&typeof facMembers==="function")facMembers(f).forEach(x=>{if(x!==S&&x.alive&&!x.out)set.add(x)});
-  liveRivals(true).forEach(v=>{if((v.rel||0)>=40)set.add(v)});r.allies=set.size}catch(e){}
+  liveRivals(true).forEach(v=>{if(aff(v,S)>=netTh(v,"than"))set.add(v)});r.allies=set.size}catch(e){}
  r.thOK=!!S.thDead||(S.th||0)>=BAL.succN.cTh;r.thB=!!S.thDead||(S.th||0)>=BAL.succN.thB;r.thOpp=!S.thDead&&(S.th||0)<BAL.succN.thOpp;return r}
 function succOdds(p,son,U){U=U||succSup();if(p==="b"){let o=35+U.pow/5+((S.danh||0)-BAL.succN.bDanh)/2+((S.tamco||0)-BAL.succN.bTam)/3+U.allies*3+(U.thB?8:U.thOpp?-10:0)+(U.vgAlly?5:U.vg?-8:0);return Math.round(cl(o,SUCC.b.min,SUCC.b.max))}
  let o=20+U.pow/6+((S.danh||0)-BAL.succN.cDanh)/2+((S.tamco||0)-BAL.succN.cTam)/2+U.allies*2+(U.milArmy&&U.milGuard?8:0)+(U.vgAlly?8:U.vg?-12:0)-((son&&son.age>=BAL.succN.bAge)?10:0);return Math.round(cl(o,SUCC.c.min,SUCC.c.max))}
@@ -74740,7 +74741,7 @@ function j95bClearOdds(r){const y=RV(r.y),x=r.x!=null?RV(r.x):null;if(!y)return 
 function j95bClear(u,how,face){const z=j95bZ();const r=z.rum.find(x=>x.u===u);if(!r)return"";const y=RV(r.y);if(!y||!y.alive)return"";if(!face&&typeof can==="function"&&can(BAL.m95b.k))spend(BAL.m95b.k);
  J95B.stat.clear++;const o=j95bClearOdds(r);const x=r.x!=null?RV(r.x):null;let msg;
  if(j95dice(o)){r.cleared=1;J95B.stat.clearOk++;if(y.j95rum)delete y.j95rum[key(S)];
-  if(r.truth){oanAdd(y,S,-Math.round(r.oa/2));msg=`${y.name} nghe ngươi nhận lỗi, nguôi đi phần nào; chuyện ấy có thật nên nàng vẫn còn để bụng.`}
+  if(r.truth){/* rv r2 (law 1): owning up is an apology — the same netForgive rule as every other road */if(!netForgive(y,S))msg=netRefused(S,y,"nhận lỗi với")+".";else{oanAdd(y,S,-Math.round(r.oa/2));msg=`${y.name} nghe ngươi nhận lỗi, nguôi đi phần nào; chuyện ấy có thật nên nàng vẫn còn để bụng.`}}
   else{oanAdd(y,S,-r.oa);affAdd(y,S,r.af+4);if(x&&x.alive){oanAdd(y,x,BAL.eff.j95b.j95bClear);affAdd(y,x,BAL.eff.j95b.j95bClear_2)}msg=`${y.name} tin lời ngươi: hiểu lầm đã gỡ.${x&&r.traced?` Nàng quay sang giận ${x.name}.`:""}`}
   j95bAct("v"+y.id,"cleared","me",{ok:true,why:`hết hiểu lầm: ngươi đã giải bày (${how})`},"rumor:clear")}
  else{oanAdd(y,S,BAL.eff.j95b.j95bClear_3);msg=r.truth?`${y.name} không nghe: chuyện ấy có thật.`:`${y.name} chưa tin lời ngươi.`}
@@ -97885,7 +97886,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="4fb0b669ded4";window.CTM_BUILD=BUILD;
+const BUILD="7bde7e1f25ec";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
