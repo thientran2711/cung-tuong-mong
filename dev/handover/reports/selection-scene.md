@@ -321,3 +321,7 @@ Branch: review/selection-scene (fast-forward from review/selection-scene-rv). NO
 3. quickcheck --runs 5 after MAIN's answer on the ban-hoa reroll.
 4. FAIL 5 owner mock re-shoot (dev/test/selx-flow.js, Fold 755x1000 + iPad 1180x820 @2, 2× copies, mp4) → CDN img/_review/selx8/ + index.html; background brightness note (§95 dim = KK18).
 5. SẴN SÀNG KIỂM <sha> line here + send_message MAIN.
+### MAIN 121 answers received after the handover (24/11 ~09:26Z / ~09:39Z) — for the successor
+- Co-op: owner already ruled (OD L1263 same selection/entry moment for both seats, L1641 one shared clock, L1447 co-op first) → ONE host-run synced 3 days for both seats; never skip the days in co-op (brief updated 19cd145d). The shared cohort above (selxRm) is the first part of it; the «Ra Dư đồ» stall (NOT done 1) is still open.
+- quickcheck: YES — dev/tools/quickcheck.js NEWLIFE/SETTLE may reroll a life that ended at the selection (ban hoa), same idiom as the cung nữ reroll. Conditions: (1) no game-side bypass, the days are still played by the option-0 driver; (2) log the reroll count per run and cap it (≤ 5, then FAIL with a clear message); (3) note the change + the 16-life measure (7–17 s per days pass, 7/16 ban hoa) in this ## FIX r1 section; (4) other gates (one-core-guard, kit-conform, coop-one-world …) untouched.
+- Not ours (reviewer notes): §95 dark veil (KK18), «Tốn: 2 khắc» digits + edict pill widths (kit) — do not patch privately.
