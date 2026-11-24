@@ -17,7 +17,12 @@
    Count: window.__kfocN = taps of 3 + 4 (coop-room-faces prints it). */
 const TAP=()=>{const vis=x=>!!x&&x.offsetParent!==null&&!x.disabled;
  const rs=document.querySelector('#kroul .krskip');if(rs&&rs.offsetParent!==null){rs.click();return'x'}
- if(!window.__noclose){const kc=[...document.querySelectorAll('.kmov [data-km-close],.kmov .krevok')].find(x=>vis(x)&&x.getClientRects().length);if(kc){kc.click();return'x'}}
+ if(!window.__noclose){const kc=[...document.querySelectorAll('.kmov [data-km-close],.kmov .krevok,#dawn.kne-day > .kmend')/* stuckcap: kitNewDay's own «Tiếp theo» (kitSceneEnd on #dawn, no [data-km-close]) */].find(x=>vis(x)&&x.getClientRects().length);if(kc){kc.click();return'x'}
+  /* stuckcap (U16/U19/U20 stuck rooms): a MANUAL kit scene (jne kitNightEnd «kne-ov»: no timer close) shows its close button only after its reveal
+     (j93 later(NE.list) or ONE tap on the picture, jne.js:101). If the reveal did not come, the button is there but hidden and the bot waited for ever;
+     a player taps the picture once → tap the scene once, at most every 1.5 s (a tap on a kit scene = reveal / skip, never a choice) */
+  const km=[...document.querySelectorAll('.kmov,#dawn.kne-day')].find(x=>!x.hidden&&!x.classList.contains('km-out')&&getComputedStyle(x).display!=='none'&&x.getClientRects().length&&![...x.querySelectorAll('[data-km-close],.kmend,.krevok')].some(b=>vis(b)&&b.getClientRects().length));/* no close shown yet: jne / j93 km-reward / jlevel / jpromo ([data-km-close] after the reveal), jtoil ktrv (kitSceneEnd .kmend only after its zoom), jne kitNewDay #dawn.kne-day «Đêm không được triệu» / dawn beats («Chạm để bỏ qua»: a tap = last beat + «Tiếp theo») */
+  if(km&&!km.__ccTap||km&&Date.now()-km.__ccTap>1500){km.__ccTap=Date.now();(km.id==='dawn'?km:(km.querySelector('.kne-pic,.kmst')||km)).click();return'x'}}
  const kf=[...document.querySelectorAll('.kfoc-next')].find(x=>x.offsetParent!==null);if(kf){window.__kfocN=(window.__kfocN||0)+1;kf.click();return'x'}
  const q=typeof Q!=='undefined'&&Q[0];const kb=q&&q.dfSeen?[...document.querySelectorAll('.kfoc-b:not(.kfoc-off)')].find(x=>x.offsetParent!==null&&/^m\d+$/.test(x.dataset.id||'')):null;
  if(kb){window.__kfocN=(window.__kfocN||0)+1;kb.click();return'x'}
