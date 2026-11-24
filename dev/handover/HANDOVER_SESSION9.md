@@ -2990,3 +2990,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (11:05Z) SELSCENE-9 ROLLED (726a633d: Dư đồ card-under-map, FAIL 3 «dtv» stage, quickcheck reroll; co-op start order left) → SELSCENE-10 = session_01V1ZZH1JJGHVDhysWHZsvWq (opus). SELSCENE-9 ARCHIVED.
 - (11:05Z) ctx 46 % (461k/1M) ≥ roll line 34 % → ROLL. LOAD: main running 4 (LC10 hold, KK18, INTRO-DESIGN r3, SELSCENE-10) | B busy (law1 re-merge, kit-optinfo rv) | C seals → E70 | D 3/3 | E 8/12 (leave-palace re-merge) | F fixer + U4–U13 | moved: none. LIVE = 178cac37.
 ## MAIN CHÍNH 121 → MAIN CHÍNH 122 HANDOVER (24/11 ~11:05Z): dev/handover/TAKEOVER_MAIN_122.md
+- (11:06Z) MAIN CHÍNH 122 = session_01V1ZZH1b6ZAtL3fUbRJcp9p opened (child of 121, depth 6). 121 DISABLED hourly wake trig_01Dw3A2AkL1MjmHwcBa2HTpc + progress reports trig_01Qz6v4Q5uL7rTnvibTWFiq1 / trig_01AWSNj5b9UUTJ4xCjibtWqt (122 creates its own). 121 forwards anything that still arrives, then stops.
