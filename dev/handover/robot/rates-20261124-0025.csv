@@ -1,0 +1,11 @@
+kiep_no,origin,road,bot,life,seed,real_min,cum_min,years,age,max_rank,ending,ending_type,group,death_cause,cause_src,who,framed_before,buoi,preg,sons,daughters,kid_deaths,heir_made,nights,sung_peak,bac_peak,bac_end,het_bac,mini_games,ky_ngo,events_distinct,bugs,bot_min
+1,nc,nc_gian,lazy,1,2270595614,496.5,496.5,,19,Quý phi,TIMEOUT,stuck,no ending,,,,,652,0,0,0,0,0,0,100,185,48,1,5,2,169,19,6.04
+1,nc,nc_gian,schemer,1,110002505,1814.8,1814.8,7.58,25,Quý nhân,Hồng nhan bạc mệnh,death,death,"${d.n} nguy kịch, không qua khỏi",j13.js:21,illness,0,1313,1,5,0,0,0,5,100,185,1,1,0,2,156,14,13.58
+1,nc,nc_gian,skilled,1,3248122326,1643.2,1643.2,5.58,24,Quý phi,Hồng nhan bạc mệnh,death,death,"${pre}Tân Thái hậu ${v.name} xét lại chuyện cũ (khả năng: ${chanceLo(o)}), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",j3.js:163,execution,0,987,0,0,0,0,0,19,100,185,0,1,306,14,263,15,11.6
+1,nc,nc_su,lover,1,3411297707,3533.5,3533.5,,30,Hoàng quý phi,CAP,cap,no ending,,,,,2177,2,0,0,0,0,37,100,210,1,1,604,16,360,27,30.37
+1,nc,nc_su,random,1,3857262870,93.5,93.5,,19,Tần,TIMEOUT,stuck,no ending,,,,,50,0,0,7,0,0,0,47,135,1,0,6,1,64,10,1.35
+1,nc,nc_su,speed,1,1086252990,440.2,440.2,,20,—,TIMEOUT,stuck,no ending,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,1.13
+1,nc,nc_tuc,greedy,1,2020792563,3190.9,3190.9,,31,Quý phi,CAP,cap,no ending,,,,,2316,0,0,0,0,0,38,100,185,12,1,580,15,344,16,30.3
+1,nc,nc_tuc,scholar,1,4239854445,3221.1,3221.1,,32,Hoàng quý phi,CAP,cap,no ending,,,,,2246,1,0,0,0,0,42,100,457,18,1,525,16,360,19,30.56
+1,nc,nc_vuong,cautious,1,1270482857,3343.5,3343.5,10.58,28,Quý phi,Hồng nhan bạc mệnh,death,death,"Tuổi trời đã tận, ${ILL[ageOf(p)>=M.oldAge?""laobenh"":""trongbenh""].n.toLowerCase()} không qua khỏi, thọ ${S.age} tuổi",jmort.js:106,fate (lifespan),0,1849,4,242,0,1,0,79,100,185,3,1,1020,13,334,12,23.04
+1,nc,nc_vuong,rebel,1,454280370,342.3,342.3,1.33,20,Quý nhân,Hồng nhan bạc mệnh,death,death,Hồng nhan bạc mệnh,j3.js:166,childbirth,0,238,2,0,0,0,0,13,100,185,11,1,102,4,123,8,2.68
