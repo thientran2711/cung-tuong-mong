@@ -2122,6 +2122,9 @@ BAL.kdlg={msWord:110,dim:.5,dimSat:.75,focusScale:1.5,focusBlur:14};
    maxCh = characters per line (the box never scrolls); intro = ms the place painting shows clear; per device: fh = figure height / layer, lx/rx = figure centres
    (speaker left, her right), boxH/boxW = the one speech box (bottom, centred, lying over the figures). LAW 4: jdlgs types no number of its own. */
 BAL.dlgs={on:true,min:3,max:8,maxCh:170,intro:600,
+ /* F4 watchdog (jdlgsPlay): tick = ms between checks that the scene layer is still on the page; close = ms after the last line before the scene is dropped
+    if its fade-out (kitScene.close, ~0.7 s) never called back — DLGS.playing is never left on (a stuck flag hides every later card) */
+ wd:{tick:400,close:2500},
  fold:{fh:.86,lx:.25,rx:.75,boxH:.27,boxW:.94},ipad:{fh:.92,lx:.22,rx:.78,boxH:.30,boxW:.70}};
 
 /* review/net-build (owner OD 24/11 ~06:00Z / ~06:40Z, MAIN 119 order; design dev/handover/reports/net-thresholds.md §3): NẾT THRESHOLDS — ONE CORE (law 4).

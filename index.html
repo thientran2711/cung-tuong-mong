@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"8c93d9af+","t":"2026-11-24T21:34Z","c":"dlgs_validate: reject a sentence opened by lowercase {xung}/{goi} (law 11 scan: 13 lines fixed in content, handover a9e60e96)","b":"452fcaf4645a","h":[{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"}]};
+window.CTM_BI={"s":"8fd9a8d9+","t":"2026-11-24T21:48Z","c":"Side-line dialogue WAVE 2 content: 199 old units (j68_old 90, j7_ky_old 58, j70_old 51) + law-11 content fixes (lowercase {xung}/{goi} open…","b":"2587c296481c","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -38657,6 +38657,9 @@ BAL.kdlg={msWord:110,dim:.5,dimSat:.75,focusScale:1.5,focusBlur:14};
    maxCh = characters per line (the box never scrolls); intro = ms the place painting shows clear; per device: fh = figure height / layer, lx/rx = figure centres
    (speaker left, her right), boxH/boxW = the one speech box (bottom, centred, lying over the figures). LAW 4: jdlgs types no number of its own. */
 BAL.dlgs={on:true,min:3,max:8,maxCh:170,intro:600,
+ /* F4 watchdog (jdlgsPlay): tick = ms between checks that the scene layer is still on the page; close = ms after the last line before the scene is dropped
+    if its fade-out (kitScene.close, ~0.7 s) never called back — DLGS.playing is never left on (a stuck flag hides every later card) */
+ wd:{tick:400,close:2500},
  fold:{fh:.86,lx:.25,rx:.75,boxH:.27,boxW:.94},ipad:{fh:.92,lx:.22,rx:.78,boxH:.30,boxW:.70}};
 
 /* review/net-build (owner OD 24/11 ~06:00Z / ~06:40Z, MAIN 119 order; design dev/handover/reports/net-thresholds.md §3): NẾT THRESHOLDS — ONE CORE (law 4).
@@ -96914,13 +96917,19 @@ function dlgsResolve(spec,c){try{if(!spec||!dlgsOn()||!Array.isArray(spec.lines)
 /* attach to the card the family just pushed (the last Q item pushed since n0, matched by test) */
 function dlgsAttach(n0,d,test){if(!d)return false;for(let i=Q.length-1;i>=Math.max(0,n0);i--){const m=Q[i];if(m&&!m.dlg&&(!test||test(m))){m.dlg=d;DLGS.n++;return true}}return false}
 /* the player: one kit scene, two full figures (her right), the KIT §95 dialogue; cb when the last line is read */
-async function dlgsPlay(d,cb){let done=false;const fin=()=>{if(done)return;done=true;DLGS.playing=false;document.body.classList.remove("kdlgs-on");try{cb&&cb()}catch(e){console.error(e)}};
+async function dlgsPlay(d,cb){let done=false,Sc=null,wd=0,to=0;const B=BAL.dlgs,W=B.wd;
+ const fin=()=>{if(done)return;done=true;clearInterval(wd);clearTimeout(to);DLGS.playing=false;DLGS.cur=null;document.body.classList.remove("kdlgs-on");try{cb&&cb()}catch(e){console.error(e)}};
+ /* close OUR layer only (kitScene.close acts on kitScene.cur: another scene opened since then must not be closed in our place, and our callback must not wait on it) */
+ const drop=()=>{try{if(Sc&&kitScene.cur===Sc)kitScene.close(true);else if(Sc&&Sc.L&&Sc.L.isConnected)Sc.L.remove();if(!kitScene.cur)document.body.classList.remove("kscn-on")}catch(e){console.error(e)}};
  DLGS.playing=true;document.body.classList.add("kdlgs-on");
- try{const B=BAL.dlgs,U=typeof IMG_U==="function"?IMG_U:(x=>x);const Sc=kitScene.open({bg:U(d.bg),intro:B.intro});const g=Sc.L.g,ip=document.documentElement.classList.contains("kv2"),K=ip?B.ipad:B.fold,fh=Math.round(g.H*K.fh);
-  await Sc.fig(d.figs[0],{cx:g.w*K.lx,top:g.H-fh,fh,z:2});await Sc.fig(d.figs[1],{cx:g.w*K.rx,top:g.H-fh,fh,z:3});
+ /* F4 WATCHDOG: DLGS.playing is never left on — the scene layer gone from the page (another scene / a re-render removed it) = end now;
+    the last line read but the fade-out never called back within BAL.dlgs.wd.close ms = drop the layer, end (the card shows) */
+ wd=setInterval(()=>{if(done)return clearInterval(wd);if(Sc&&Sc.L&&!Sc.L.isConnected){try{DLGS.cur&&DLGS.cur.stop()}catch(e){}drop();fin()}},W.tick);
+ try{const U=typeof IMG_U==="function"?IMG_U:(x=>x);Sc=kitScene.open({bg:U(d.bg),intro:B.intro});const g=Sc.L.g,ip=document.documentElement.classList.contains("kv2"),K=ip?B.ipad:B.fold,fh=Math.round(g.H*K.fh);
+  await Sc.fig(d.figs[0],{cx:g.w*K.lx,top:g.H-fh,fh,z:2});await Sc.fig(d.figs[1],{cx:g.w*K.rx,top:g.H-fh,fh,z:3});if(done)return;
   Sc.show();const bh=Math.round(g.H*K.boxH),bw=Math.round(g.w*K.boxW);
-  DLGS.cur=kitDialogue.play(Sc,{lines:d.lines,box:()=>({x:Math.round((g.w-bw)/2),y:g.H-bh,w:bw}),onDone:()=>{DLGS.cur=null;Sc.close(fin)}});
-  DLGS.log.unshift({t:Date.now(),n:d.lines.length,who:d.names.join(" · ")});DLGS.log.length=Math.min(DLGS.log.length,20)}catch(e){console.error(e);try{kitScene.close(true)}catch(x){}fin()}}
+  DLGS.cur=kitDialogue.play(Sc,{lines:d.lines,box:()=>({x:Math.round((g.w-bw)/2),y:g.H-bh,w:bw}),onDone:()=>{DLGS.cur=null;to=setTimeout(()=>{drop();fin()},W.close);if(kitScene.cur===Sc)Sc.close(fin);else{drop();fin()}}});
+  DLGS.log.unshift({t:Date.now(),n:d.lines.length,who:d.names.join(" · ")});DLGS.log.length=Math.min(DLGS.log.length,20)}catch(e){console.error(e);drop();fin()}}
 /* the card waits under the scene: showModal resolves the card's scene ONCE (m.dlg, or a family resolver by the card's pid / tag), plays it, then the card */
 DLGS.R=[];/* [{test:m=>bool, fn:m=>resolved|null}] — one per family */
 function dlgsFor(m){if(m.dlg)return m.dlg;if(m.__dlgk)return null;m.__dlgk=1;for(const r of DLGS.R){try{if(r.test(m)){const d=r.fn(m);if(d){m.dlg=d;DLGS.n++;return d}return null}}catch(e){console.error(e);return null}}return null}
@@ -99491,7 +99500,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="452fcaf4645a";window.CTM_BUILD=BUILD;
+const BUILD="2587c296481c";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
