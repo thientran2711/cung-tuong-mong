@@ -161,12 +161,41 @@ const T=[
   reset();S.turn=40;mercyOn();{const v=rivals.find(x=>x&&x.alive&&!x.out&&!x.queen);deathSentence(v,"Bị ban chết vì đầu độc Hoàng tử","nghich");R.p1n={alive:v.alive,dan:v.dan,out:!!v.out}}
   reset();S.turn=40;mercyOn();{const v=rivals.find(x=>x&&x.alive&&!x.out&&!x.queen);deathSentence(v,"tư thông");R.p1nctl={alive:v.alive,out:!!v.out}}
   /* P2 a proven thư tư tình (PEND.loveletter «Trình lên») → the ONE tư thông rule (deathSentence), never fall() */
-  reset();{const v=rivals.find(x=>x&&x.alive&&!x.out);const calls=[],falls=[];deathSentence=function(){calls.push([...arguments].slice(1).join("|"));return DS0.apply(this,arguments)};fall=function(){falls.push(1);return F0.apply(this,arguments)};roll=()=>true;
-   const d=PEND.loveletter({v:v.id});d.o[0].go();R.p2={calls,falls:falls.length,x:d.o[0].x}}
+  reset();{const v=rivals.find(x=>x&&x.alive&&!x.out);const calls=[],falls=[];const TT0=ttExposed;ttExposed=function(p){calls.push((p===S?"S":"npc")+"|tư thông");return TT0.apply(this,arguments)};fall=function(){falls.push(1);return F0.apply(this,arguments)};roll=()=>true;
+   const d=PEND.loveletter({v:v.id});d.o[0].go();ttExposed=TT0;R.p2={calls,falls:falls.length,x:d.o[0].x}}
+  /* E74 item 3: ONE tư thông function for her and NPCs — the same outcome both ways (man xử trảm; empMercy → lãnh cung; else deathSentence) */
+  const mkMan=()=>{const m=(S.men||[]).find(x=>x&&x.alive);return m};
+  for(const mer of [true,false]){reset();S.turn=40;S.mercy=1;npcWhy=(k,o)=>k==="empMercy"?mer:W0(k,o);has=t=>t==="nhantu"?false:H0(t);const m=mkMan();if(!m){R["p2s"+mer]="no man";continue}
+   ttExposed(S,m,"Test.");R["p2s"+mer]={man:m.alive,out:!!S.out,dead:!!S.dead};
+   reset();S.turn=40;npcWhy=(k,o)=>k==="empMercy"?mer:W0(k,o);has=t=>t==="nhantu"?false:H0(t);const m2=mkMan();const v=rivals.find(x=>x&&x.alive&&!x.out&&!x.queen);v.mercy=1;v.affair=m2.id;ttExposed(v,m2,"Test.");R["p2n"+mer]={man:m2.alive,out:!!v.out,dead:v.alive===false,aff:v.affair}}
+  /* every tư thông caller routes to ttExposed (S + NPC): affairExposed, ttNpcExposed, trystNpc caught, j30 «Bóc chuyện tư tình» both branches */
+  {reset();const seen=[];const TT0=ttExposed;ttExposed=function(p){seen.push(p===S?"S":"npc");return ""};roll=()=>true;
+   const m=mkMan();const v=rivals.find(x=>x&&x.alive&&!x.out&&!x.queen);
+   try{affairExposed(m,"a")}catch(e){seen.push("E1 "+e.message)}try{ttNpcExposed(v,m,"b")}catch(e){seen.push("E2 "+e.message)}try{trystNpc(m,100,v)}catch(e){seen.push("E3 "+e.message)}
+   const X=ACT.expose;const a0=rivals.find(x=>x&&x.alive&&x!==v);const aR1=aRoll;try{m.trysts=Math.max(1,m.trysts||0);aRoll=()=>true;X.f(a0,S)}catch(e){seen.push("E4 "+e.message)}try{v.scandal=1;X.f(S,v)}catch(e){seen.push("E5 "+e.message)}aRoll=aR1;
+   ttExposed=TT0;R.p2route=seen}
   /* P3 «bị bỏ quên» = thất sủng, not lãnh cung: he stops turning her tablet, Sủng decays, she wins him back; NPC the same */
   reset();S.out=0;S.sung=0;S.danh=0;S.rank=0;let ev=tsMonthAll();R.p3={out:S.out,ts:!!S.thatS,night:nightCh(S),ev:ev.replace(/<[^>]+>/g,"")};
-  S.sung=10;tsMonthAll();R.p3.decay=S.sung;S.sung=BAL.thatS.back;ev=tsMonthAll();R.p3.back=!S.thatS;{const keep=S.thatS;S.thatS={t:0};const z=nightCh(S);S.thatS=keep;R.p3.night2=z===0&&!S.thatS}/* back: the flag is gone (the tablet rule no longer zeroes her) */
+  {const r0=BAL.thatS.recall.max;BAL.thatS.recall.max=0;S.sung=10;tsMonthAll();R.p3.decay=S.sung;BAL.thatS.recall.max=r0}S.sung=BAL.thatS.back;ev=tsMonthAll();R.p3.back=!S.thatS;{const keep=S.thatS;S.thatS={t:0};const z=nightCh(S);S.thatS=keep;R.p3.night2=z===0&&!S.thatS}/* back: the flag is gone (the tablet rule no longer zeroes her) */
   {const v=rivals.find(x=>x&&x.alive&&!x.out&&!x.queen&&rkOf(x)<=BAL.thatS.rank);if(v){v.sung=0;v.danh=0;tsMonthAll();R.p3n={ts:!!v.thatS,out:!!v.out,night:nightCh(v)}}else R.p3n="no low NPC"}
+  /* E74 item 1: thất sủng is not a one-way trap — robot: 120 months, low NPCs forced to Sủng 0 / Danh 0 (no other Sủng road in this loop):
+     some come back by «Hoàng thượng chợt nhớ» (BAL.thatS.recall), the same formula for her */
+  {reset();let ent=0,left=0;const L=rivals.filter(x=>x&&x.alive&&!x.out&&!x.queen&&!x.coop);for(const v of L){v.rank=0;v.sung=0;v.danh=0}
+   const was=new Set();for(let mo=0;mo<120;mo++){for(const v of L){if(!v.thatS&&v.sung>BAL.thatS.sung)v.sung=Math.max(0,v.sung-5)}tsMonthAll();for(const v of L){if(v.thatS&&!was.has(v.id)){was.add(v.id);ent++}if(!v.thatS&&was.has(v.id)&&!v.__left){v.__left=1;left++}}}
+   R.p3robot={npcs:L.length,ent,left,chS:tsRecallCh(S),chN:L[0]?tsRecallCh(L[0]):null}}
+  reset();S.sung=0;S.danh=0;S.rank=0;S.thatS={t:0};{const r0=roll;roll=()=>true;const ev=tsMonth(S);roll=r0;R.p3me={ts:!!S.thatS,sung:S.sung,back:BAL.thatS.back,ev:ev.replace(/<[^>]+>/g,"")}}
+  /* E74 item 2: ONE treason tier — every treason deed (pond, pushp on Hoàng hậu, j70 trap of a treason kind, vu cổ doer, spy, kpoison, kframe, poison on Hoàng hậu) → «nghich» */
+  {reset();R.tier={};for(const [k,q] of [["spy",0],["kpoison",0],["pond",0],["musk",0],["catswap",0],["kframe",0],["vuco",0],["poison",1],["pushp",1],["poison",0],["pushp",0],["frame",0],["rumor",0],["ksab",0]])R.tier[k+(q?"@HH":"")]=crimeTier(k,q?{queen:true}:{queen:false})}
+  {reset();const got=[];deathSentence=function(p,why,tier){got.push(["ds",typeof p==="string"?"S":p===S?"S":"npc",typeof p==="string"?why:tier]);return ""};const P0=punish;punish=function(p,why,sev){got.push(["pun",typeof p==="string"?"S":p===S?"S":"npc",sev]);return ""};
+   const t=rivals.find(x=>x&&x.alive&&!x.out&&!x.queen);const a=rivals.find(x=>x&&x.alive&&!x.out&&x!==t&&!x.queen);
+   const k={name:"Hoàng tử Test",age:9,hp:50,alive:true};
+   /* pond caught (kid exists: the act picks one) */
+   t.kids=(t.kids||[]).concat([k]);{const r0=roll,aR0=aRoll,c0=caught;caught=()=>"";aRoll=()=>false;try{ACT.pond.f(a,t)}catch(e){got.push(["err pond",e.message])}aRoll=aR0;caught=c0;roll=r0}
+   /* pushp caught on Hoàng hậu / on a consort */
+   {const q=rivals.find(x=>x&&x.queen&&x.alive);const aR0=aRoll,c0=caught;caught=()=>"";aRoll=()=>false;try{if(q)pushPond(a,q);pushPond(a,t)}catch(e){got.push(["err pushp",e.message])}aRoll=aR0;caught=c0;R.hasQ=!!q}
+   /* the same deeds done BY HER (two-way): pond + kpoison caught → nghich for S */
+   {const aR0=aRoll,c0=caught;caught=()=>"";aRoll=()=>false;try{ACT.pond.f(S,t);ACT.kpoison.f(S,t)}catch(e){got.push(["err S",e.message])}aRoll=aR0;caught=c0}
+   punish=P0;R.p1fam=got}
   reset();return R});
  ok(sv.p1a.dead&&!sv.p1a.mercy,'P1 treason tier: no first-year mercy (gián điệp at month 1 dies)',sv.p1a);
  ok(!sv.p1ctl.dead&&sv.p1ctl.mercy===1,'P1 control: an ordinary death sentence keeps the first-year mercy',sv.p1ctl);
@@ -174,10 +203,19 @@ const T=[
  ok(!sv.p1bctl.dead&&sv.p1bctl.out===1,'P1 control: ordinary crime + nhân từ → lãnh cung (kept)',sv.p1bctl);
  ok(sv.p1n.alive===false&&sv.p1n.dan===1&&!sv.p1n.out,'P1 NPC the same: treason + nhân từ → phế làm thứ dân, leaves the roster',sv.p1n);
  ok(sv.p1nctl.alive&&sv.p1nctl.out,'P1 NPC control: ordinary + nhân từ → lãnh cung',sv.p1nctl);
- ok(sv.p2.falls===0&&sv.p2.calls.some(c=>/tư thông/.test(c))&&/tư thông/.test(sv.p2.x),'P2 proven thư tư tình → the one tư thông rule (deathSentence), no fall()',sv.p2);
+ ok(sv.p2.falls===0&&sv.p2.calls.some(c=>/tư thông/.test(c))&&/tư thông/.test(sv.p2.x),'P2 proven thư tư tình → the one tư thông rule (ttExposed), no fall()',sv.p2);
+ok(sv.p2strue&&sv.p2ntrue&&sv.p2strue.man===false&&sv.p2ntrue.man===false&&sv.p2strue.out&&!sv.p2strue.dead&&sv.p2ntrue.out&&!sv.p2ntrue.dead&&sv.p2ntrue.aff==null,'E74 P2 parity: empMercy → the man xử trảm, she (S) and an NPC both lãnh cung',{s:sv.p2strue,n:sv.p2ntrue});
+ok(sv.p2sfalse&&sv.p2nfalse&&sv.p2sfalse.man===false&&sv.p2nfalse.man===false&&sv.p2sfalse.dead&&sv.p2nfalse.dead,'E74 P2 parity: no mercy → the man xử trảm, she (S) and an NPC both die (deathSentence)',{s:sv.p2sfalse,n:sv.p2nfalse});
+ok(JSON.stringify(sv.p2route)===JSON.stringify(["S","npc","npc","S","npc"]),'E74 P2: affairExposed, ttNpcExposed, trystNpc caught, j30 Bóc chuyện tư tình (her + NPC) all call the ONE ttExposed',sv.p2route);
+ok(/ttExposed\(c,m,/.test(SRC)&&!/roll\(50\)\)return over\("Tư thông bị phát giác"/.test(SRC),'E74 P2 family scan: jmen report on ttExposed; the old j30 50/50 «ban chết / lãnh cung» gone',0);
  ok(sv.p3.out===0&&sv.p3.ts&&sv.p3.night===0&&/thất sủng/.test(sv.p3.ev),'P3 bị bỏ quên → thất sủng: stays out of lãnh cung, tablet set aside, a line',sv.p3);
  ok(sv.p3.decay<10&&sv.p3.decay>=6&&sv.p3.back&&sv.p3.night2,'P3 thất sủng: Sủng decays (BAL.thatS.decay); at BAL.thatS.back she is back on the tablet tray',sv.p3);
  ok(sv.p3n==="no low NPC"||(sv.p3n.ts&&!sv.p3n.out&&sv.p3n.night===0),'P3 NPC the same rule',sv.p3n);
- ok(!/Bị bỏ quên, đưa vào lãnh cung/.test(SRC)&&/ttNpcExposed\(t,/.test(SRC),'P2/P3 family scan: no «Bị bỏ quên → lãnh cung» left; j30 «Bóc chuyện tư tình» NPC branch on the same rule',0);
+ok(sv.p3robot.ent>0&&sv.p3robot.left>0,'E74 P3 robot: of the NPCs that entered thất sủng over 120 months, some left it (no one-way trap)',sv.p3robot);
+ok(!sv.p3me.ts&&sv.p3me.sung>=sv.p3me.back&&/chợt nhớ/.test(sv.p3me.ev),'E74 P3: she has the same «chợt nhớ» road (back with Sủng = BAL.thatS.back)',sv.p3me);
+{const T=sv.tier;ok(["spy","kpoison","pond","musk","catswap","kframe","vuco","poison@HH","pushp@HH"].every(k=>T[k]==="nghich")&&["poison","pushp","frame","rumor","ksab"].every(k=>T[k]===""),'E74 P1: crimeTier — treason kinds «nghich», ordinary kinds not',T)}
+{const G=sv.p1fam;const ds=G.filter(g=>g[0]==="ds");ok(ds.length>=3&&ds.every(g=>g[2]==="nghich")&&ds.some(g=>g[1]==="S")&&ds.some(g=>g[1]==="npc")&&(!sv.hasQ||ds.length>=4)&&G.some(g=>g[0]==="pun"&&g[2]===2),'E74 P1 family: pond caught + pushp on Hoàng hậu → deathSentence «nghich» for NPC and for her (two-way); pushp on a consort stays punish 2',G)}
+ok(/convict\(a,`bị bắt quả tang/.test(SRC)&&/convict\(by,"dùng bùa ngải/.test(SRC)&&!/punish\(a,"mưu hại hoàng tự"/.test(SRC),'E74 P1 family scan: j70 trap + jworld2 vu cổ doer on convict(); no punish «mưu hại hoàng tự» left',0);
+ ok(!/Bị bỏ quên, đưa vào lãnh cung/.test(SRC)&&/ttExposed\(t,/.test(SRC),'P2/P3 family scan: no «Bị bỏ quên → lãnh cung» left; j30 «Bóc chuyện tư tình» NPC branch on the same rule',0);
  ok(!errs.length,'no page errors',errs.slice(0,3));
  await b.close();const f=res.filter(x=>!x).length;console.log(`leave-palace: ${res.length-f}/${res.length} ok`);process.exit(f?1:0)})();

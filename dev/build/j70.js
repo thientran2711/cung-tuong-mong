@@ -30,7 +30,7 @@ const OPP70={
  preg:{n:"khi nàng đang mang thai",ok:(p,t)=>!!t.preg,b:4},
  birth:{n:"lúc nàng trở dạ",ok:(p,t)=>(t.preg||0)>=8,b:12},
  rain:{n:"sau cơn mưa, bậc đá trơn",ok:()=>!!(S.wx&&/mưa|bão|giông|tuyết/i.test(S.wx.b||S.wx.n||"")),b:8},
- lonely:{n:"lúc nàng thất sủng, ít người qua lại",ok:(p,t)=>(t===S?S.sung:t.sung||0)<25,b:6},
+ lonely:{n:"lúc nàng vắng ân sủng, ít người qua lại",ok:(p,t)=>!!t.thatS||(t===S?S.sung:t.sung||0)<BAL.thatS.lonely,b:6},/* E74: reads the thất sủng flag (j8 tsMonth) + BAL */
  night:{n:"một đêm vắng",ok:()=>true,b:0}};
 /* ---------- methods x routes (stage templates). k = the existing act that executes it ---------- */
 /* route: n name · tl [tell of step 1, tell of step 2] (what her people see, third person, no subject) · pl place key where it can be seen
@@ -207,7 +207,7 @@ function exec70(p,opp){const a=pa70(p),t=pt70(p),M=pm70(p);const O=OPP70[opp]||O
  if(!okAct70(a,t,M.k)&&M.k!=="joint"){p.end="miss";try{mindLog(a,"_abandon")}catch(e){}if(p.kn&&a!==S)log(`${a.name} bày mưu ${M.n.toLowerCase()} nhưng thời cơ đã qua, đành thôi.`);return ""}
  let r="";const bonus=J70CFG.prep+O.b+(p.bonus||0);const err=(p.err||0)+p.g-bonus;
  if(p.foil){/* cut at the root earlier *//*evok: plot deed (newPlot70)*/evA(t===S?S:t,a,BAL.eff.j70.evExec70);r=`${a===S?"Ngươi":a.name} định ra tay (${M.n.toLowerCase()}) ${O.n}, nhưng đường dây đã bị cắt từ trước. ${t===S?`Ngươi nắm thêm ${balAb(BAL.eff.j70.evExec70)} chứng cứ về ${a.name}.`:""}`;try{if(a!==S){a.fails=a.fails||{};a.fails[M.k]=(a.fails[M.k]||0)+1}}catch(e){}}
- else if(p.trap){/*evok: plot deed*/evA(S,a,BAL.eff.j70.evExec70_2);try{punish(a,`bị bắt quả tang ${M.n.toLowerCase()} nhắm vào ${nm70(t)}`,2)}catch(e){}relAdd(a,S,BAL.eff.j70.exec70);r=`Bẫy của ngươi sập đúng lúc: người của ${a.name} bị bắt quả tang ${M.n.toLowerCase()} ${O.n}. Chứng cứ ${balSg(BAL.eff.j70.evExec70_2)}.`}
+ else if(p.trap){/*evok: plot deed*/evA(S,a,BAL.eff.j70.evExec70_2);try{convict(a,`bị bắt quả tang ${M.n.toLowerCase()} nhắm vào ${nm70(t)}`,M.k,t,2)/* E74: a treason kind caught red-handed → the one «nghịch» tier */}catch(e){}relAdd(a,S,BAL.eff.j70.exec70);r=`Bẫy của ngươi sập đúng lúc: người của ${a.name} bị bắt quả tang ${M.n.toLowerCase()} ${O.n}. Chứng cứ ${balSg(BAL.eff.j70.evExec70_2)}.`}
  else{window.__j70exec=1;if(a)a.__won=0;try{
    if(M.k==="joint"){const f=facOf(a);r=f&&jointScheme0?jointScheme0(f,t):""}
    else if(a===S){S.__err=err;try{r=runAct(S,t,M.k)}finally{S.__err=0}}

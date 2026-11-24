@@ -19,7 +19,15 @@ function tinhW(t){return t>=BAL.tinhLv.love?"si mê ngươi":t>=BAL.tinhLv.close
 function lộRisk(k,p){p=p||S;const base={vuon:28,thu:34,tyv:20,tn:40,home:15}[k]||26;const w=watcher(p);const eN=(p===S?liveRivals(true):[S].concat(liveRivals(true))).filter(v=>v&&v!==p).reduce((s,v)=>s+eyes(v),0);return cl(Math.round(base+eN*2-(w?w.loyal/5:0)-eyes(p)*2),6,92)}
 function watcher(p){p=p||S;const s=(p.staff||[]).filter(x=>x&&x.loyal>=BAL.loy.close).sort((a,b)=>b.loyal-a.loyal)[0];if(s)return{name:s.name,loyal:s.loyal,s};if(p.maid&&p.maid.loyal>=BAL.loy.close)return{name:p.maid.name,loyal:p.maid.loyal};return null}
 function whoMayKnow(){const w=watcher();return [w?w.name+" (canh cửa)":"",...liveRivals(true).filter(v=>eyes(v)>=3).map(v=>v.name)].filter(Boolean).slice(0,3).join(", ")||"không ai rõ"}
-function affairExposed(m,how){/* full weight: the man dies; she faces death (first-year mercy aside) or lãnh cung */m.alive=false;log(`<span class="r">${how} ${m.name} bị xử trảm.</span>`);/* npc-purpose: death or lãnh cung = Hoàng thượng's mercy from his own regard for her (kind empMercy: her Sủng, her children) */if(npcWhy("empMercy",{p:S}))cold(`Tư thông với ${m.name} bị lộ`);else deathSentence(`Bị ban chết vì tư thông với ${m.name}`)}
+/* ONE tư thông rule (E74, MAIN 118 P2, law 1 + 11): any woman p (her or an NPC consort) proven in tư thông with man m (m may be unknown):
+   the man is xử trảm; Hoàng thượng's own regard for her (npc-purpose empMercy: her Sủng, her children) → lãnh cung; else deathSentence (its
+   first-year mercy, its nhân từ mercy). Every caller: affairExposed (her), ttNpcExposed (NPC), trystNpc, j30 «Bóc chuyện tư tình», jmen report. */
+function ttExposed(p,m,lead){p=p||S;const me=p===S,who=m?m.name:"thị vệ";
+ if(m){m.alive=false;log(`<span class="r">${lead?lead+" ":""}${m.name} bị xử trảm.</span>`)}else if(lead)log(`<span class="r">${lead}</span>`);
+ if(!me)p.affair=null;
+ if(npcWhy("empMercy",{p})){if(me)return cold(`Tư thông với ${who} bị lộ`);p.out=true;if(p.queen)p.queen=false;log(`<span class="r">${p.name} tư thông với ${who} bị lộ. Hoàng thượng còn nghĩ tình, tha chết, đày vào lãnh cung.</span>`);return}
+ deathSentence(p,`Bị ban chết vì tư thông với ${who}`)}
+function affairExposed(m,how,p){return ttExposed(p||S,m,how)}
 /* ONE builder (role-parity part 2, law 1 two-way + law 4): the steps with a man, for her talk card and an NPC consort's day plan
    (jagacts4 cx4:man<step>, run by p4Run) — same odds of the doer, same tình ý, same eyes and the same death if caught.
    His tình ý is kept per woman: m.tinh for her (old saves), m.tw[id] for an NPC consort; khăn / thư are real things he keeps (m.letters / m.lw[id]). */
@@ -41,9 +49,9 @@ function tryst(m,risk,p){p=p||S;if(p!==S)return trystNpc(m,risk,p);if(roll(risk)
  return r}
 /* the same night for an NPC consort: caught = he dies and she faces the same sentence; kept = v.affair (the world's affair record: the book,
    a conception by him, spies — affairMonth), Sức, a pregnancy by trystCh with the same book check */
-/* ONE tư thông rule for an NPC consort (MAIN 118 P2, law 11): the man (if known) is xử trảm, she faces deathSentence (its mercies) — never fall() */
-function ttNpcExposed(v,m,lead){if(m){m.alive=false;log(`<span class="r">${lead?lead+" ":""}${m.name} bị xử trảm.</span>`)}else if(lead)log(`<span class="r">${lead}</span>`);v.affair=null;try{deathSentence(v,`tư thông${m?" với "+m.name:" với thị vệ"}`)}catch(e){console.error(e)}}
-function trystNpc(m,risk,v){if(roll(risk)){m.alive=false;v.affair=null;log(`<span class="r">Đêm ${v.name} hẹn ${m.name} bị bắt gặp. ${m.name} bị xử trảm.</span>`);try{deathSentence(v,`tư thông với ${m.name}`)}catch(e){}return `${v.name} hẹn gặp ${m.name} bị bắt gặp`}
+/* an NPC consort's tư thông bị lộ = the ONE rule above (ttExposed), never fall() */
+function ttNpcExposed(v,m,lead){return ttExposed(v,m,lead)}
+function trystNpc(m,risk,v){if(roll(risk)){try{ttExposed(v,m,`Đêm ${v.name} hẹn ${m.name} bị bắt gặp.`)}catch(e){console.error(e)}return `${v.name} hẹn gặp ${m.name} bị bắt gặp`}
  m.trysts++;mTinhAdd(m,v,10);v.affair=m.id;v.lastTryst=wk();ap(v,{suc:BAL.eff.j22.sucTryst});
  if(!v.preg&&roll(trystCh(v))){v.preg=1;v.hidden=true;v.pregWk=wk();v.trueFather=m.id;const ok=(v.nightLog||[]).some(w=>Math.abs(w-wk())<=1);v.pregMismatch=!ok}
  return `${v.name} lén gặp riêng ${m.name}`}

@@ -142,7 +142,7 @@ EVD.vuco={place:()=>"home",
   /* co-op (thin E): the culprit is the OTHER player (her entry): her own choice (S.wwMe in her person) counts as "me" (EVD.vuco.meOf, jcoopthine) */
   const byMe=by===S?me:by&&by.coop&&EVD.vuco.meOf?(EVD.vuco.meOf(w,"me")||""):"";
   if(by&&(by===S||by.alive)){let o=b.catch+(by.schemes||0)*b.schemeK;if((by===S||by.coop)&&byMe==="clean")o*=b.clean.mul;if(by!==S&&meGet(w,"acc")===by.id)o+=b.accuseK;if((by===S||by.coop)&&byMe==="open")o+=b.accuseK;
-   if(roll(Math.round(o))){punish(by,"dùng bùa ngải hãm hại người",2);got=by;r=`Thận hình ti tra ra kẻ đặt bùa: ${nmOf(by)}.`}}
+   if(roll(Math.round(o))){convict(by,"dùng bùa ngải hãm hại người","vuco",null,2)/* E74: the proven vu cổ doer → the one «nghịch» tier */;got=by;r=`Thận hình ti tra ra kẻ đặt bùa: ${nmOf(by)}.`}}
   EVD.vuco.home(w,{got:got&&got!==S?got.id:null,me:!!got&&got===S});/* me: the culprit caught is this player (co-op: the other player's accusation of her entry hits, o.gotFr) */
   if(!got&&roll(b.innocent)){const L=liveR().filter(v=>!v.out&&v.id!==w.x.tgt&&!(by&&v===by)).sort((x,y)=>rkOf(x)-rkOf(y));const v=L[0];if(v){punish(v,"bị nghi dính vào vu cổ",1);got=v;r=`Không tra ra kẻ chủ mưu; ${v.name} bị bắt làm người chịu tội.`}}
   if(got&&roll(b.toCam))ws("cam","Án vu cổ khép lại, cung cấm giới nghiêm");return (r||"Án vu cổ không tra ra ai; Thận hình ti đóng hồ sơ.")+" Thị tẩm trở lại."},
