@@ -63,3 +63,11 @@ Tests: duodo-focus-view.js ALL OK (mock kitFocus, controller glue) · r10-tab-la
 - Repro saves used: dev/handover/robot/saves/*.json.gz (gunzip; pass the .json to the tests).
 - Harness notes for Foreman D (no game change): (a) roundTrip should render() after deser (the stage rebuilds S.visit) and count the load-time repairs apart (r10-rt.js has the filter); (b) HUD check must wait out the 500 ms hudTween; (c) inpage6 cannot answer j82 kitConfirm «Bỏ cuộc?».
 - Fixer stays on call for FAILs and the next nc-<date>.md.
+
+## § REVIEW robot10-nc-fix-2 (reviewer sonnet) — PASS
+PRIORITY #1 CHECK: brief hits reused (jdfv glue, r10-tab-layers.js); no rebuild. Target a08f8cd9 → merged with origin/main 2a80712b as review/robot10-nc-fix-2-rv 977a70e9efd9858854450b6bd2a7bc67dfe4449e (index.html/sw.js rebuilt via build_site.sh).
+- r10-tab-layers: saves 005 + 009 × Fold 755x1000 + iPad 1180x820 = 22/22 ok each (7 tabs + back on «Hành sự» focus returns, no page errors). Same script on main: 14 FAIL → 0.
+- duodo-focus-view ALL OK. quickcheck PASS (old save ok; render 257/222, tab 402/437, buổi 1169/1356 ms new/live; core gates PASS).
+- Law 9 KIT FIRST: only dfTabLayers glue in jdfv.js (hidden toggle + remove mood bubble); no CSS, no new part. Law 11 whole group: scan covers kfoc (talk/encounter say/mini-game) + kfoc-mood on all tabs both devices (story kchkt×kfoc-sayn, rel p.past×kfoc-next rows included); no other leaking stage layer found. Law 12: shots of every tab on both devices looked (iPad clean; focus back on «Hành sự»).
+- Note (not this fix): on Fold the go/court/rel/inv/art #panel reads 0×0 in my probe on BOTH main and fix (identical pixels) — probe/layout artefact or MAIN's Dư đồ lane, unchanged by this branch.
+- Conflict watch: review/map-label-overlap-r touches only j38.js; review/duodo-focus-rv differs from main in jdfv.js only at line ~55 (dfEncOn), jdfv fix is appended at the end → no overlap.
