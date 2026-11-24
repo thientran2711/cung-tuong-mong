@@ -21,7 +21,7 @@ function crkPaper(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.1
  const side=W>=H*1.05;/* sample left / wedge right (wide); sample above / wedge below (narrow) */
  const SX=side?W*.2:W*.5,SY=side?H*.42:H*.2,RS=side?Math.min(W*.17,H*.34):Math.min(W*.3,H*.17);
  const AX=side?W*.7:W*.5,AY=side?H*.72:H*.74,R=side?Math.min(W*.27,H*.55):Math.min(W*.42,H*.4);
- const TY=H*.92,RED="#c0282d",PAPER="#fbf1dc";const pops=[];let r=-1,P=null,phase="",pts=0,done=false,drag=null,stop=null;
+ const TY=H*.92,RED="#c0282d",PAPER="#fbf1dc";const pops=[];const KU=[];let r=-1,P=null,phase="",pts=0,done=false,drag=null,stop=null;
  const bt=k91Btns(box,[["crkok","✓","","Mở giấy: xem hoa cắt"]]);const okb=bt.querySelector("#crkok");
  /* wedge-plane point (rr share of R, ph radians from the wedge's left fold) → board px */
  const wA0=a=>-Math.PI/2-a/2;
@@ -32,8 +32,9 @@ function crkPaper(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.1
  const dist=(c,t)=>{const a=pl(c.r,c.ph),b=pl(t.r,t.ph);return Math.hypot(a[0]-b[0],a[1]-b[1])};
  function next(){if(done)return;r++;if(r>=NR){done=true;okb.disabled=true;phase="end";return crLater(()=>env.end(pts),300)}
   const f=FOLDS[r],a=Math.PI*2/f,shapes=CRK_SH.concat(CRK_ALIKE.slice(0,ALIKE));const z=SIZE;const T=[];
-  for(let k=0;k<HOLES;k++){for(let tr=0;tr<80;tr++){const rr=.3+Math.random()*.55,edge=Math.random()<.2?(Math.random()<.5?0:a):null;
-    const ph=edge!=null?edge:a*(.18+Math.random()*.64);const t={sh:shapes[Math.floor(Math.random()*shapes.length)],r:rr,ph};
+  const KI=typeof mgpOne==="function"?mgpOne("kim",KU):null,RN=KI?mgpRng(KI.seed):Math.random,hs=KI?KI.sh.concat(CRK_ALIKE.slice(0,ALIKE)):shapes;/* ORDER THIN P1: one composed paper (hole shapes × layout seed), drawn through the no-repeat memory; the tray keeps every cutter */
+  for(let k=0;k<HOLES;k++){for(let tr=0;tr<80;tr++){const rr=.3+RN()*.55,edge=RN()<.2?(RN()<.5?0:a):null;
+    const ph=edge!=null?edge:a*(.18+RN()*.64);const t={sh:hs[Math.floor(RN()*hs.length)],r:rr,ph};
     /* holes apart from each other (and from their own mirror images across the folds) */
     if(T.every(o=>dist(o,t)>z*3.2)&&(edge!=null||(rr*Math.sin(Math.min(ph,a-ph))>z*1.6))){T.push(t);break}}}
   const tray=shapes.map((sh,i)=>({sh,x:(side?W*.42:W*.1)+(i+.5)*((side?W*.56:W*.8)/shapes.length),y:TY}));
