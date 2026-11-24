@@ -4668,3 +4668,10 @@ ONE kit entry on top of §42.2: `kitKnow({key,text,pri})` (jnotice.js). Every ga
 - **Built ON §42.2, not a variant:** `kitKnow` only collects facts and hands ONE `kitNotice({kind:"know"})` to the §42.2 system (same top-bar «!» box, same top chip, same «Tin báo» panel); no chip, panel or colour of its own. Registered on the kit page as sample §42.3 (`KIT_SAMPLES`, jnotice.js).
 - **RANK of another person:** `k61RankSync()` (j61) tells her once when the rank of a person whose face she knows changes (after every week and every promoteP; the first sight carries the rank in its title/descriptor). Strangers' rank changes say nothing.
 - **For SELSCENE (sắc phong news):** `kitKnowMany([{key,text,pri}…])` puts a whole list in one batch and flushes now → ONE notice «Ta biết thêm N điều» (returns it). The screen itself (rows) is SELSCENE's.
+
+## 94b. kitDayTitle · DAY TITLE CARD (KIT KEEPER #17, review/kit-daytitle; owner OD 24/11 ~07:45Z; KIT_REQUESTS «DAY TITLE CARD») — `dev/build/j79.js`
+PRIORITY #1 CHECK: the ONE new-day panel = the j79 dawn panel (`.dawn .dbox.kpanel > .kpb`); no second system.
+- `kitDayTitle(o?)` → `<div class="kdayt">`: line 1 `.kdt1` = «Ngày N — <tên ngày>» for the opening days (N = 1..`KIT_DAYT.opening` = 3, N = `wk()+1`); every later day = the cổ trang date «Thượng tuần tháng ba · mùa xuân» (kitDate + SEASON); line 2 `.kdt2` = «Chương N — <tên chương>» of her current main road. `o = {n, name, date, chap:{n,name}}` overrides the live state (kit page sample).
+- HOOKS (stubs return null = the line is left out, nothing breaks): `window.kitDayName(n)` → poetic day name for the opening days (SELSCENE-3 fills 1–3); `window.kitChapterTitle()` → `{n,name}` (Foreman E fills from the road chapter data, rdDef `t` / TITLES2). A caller defines the hook BEFORE or AFTER the kit loads (the kit only installs a stub when none exists).
+- Placed at the top of `.kpb` of the day-change panel (`dawn()`), above the week summary. Game-start card «Ngày 1 · Chương 1»: the caller shows `kitDayTitle()` in its own kit panel (no part of its own).
+- Sample: kit page §94b. Test: shots Fold 755x1000 + iPad 1180x820 of the dawn panel.

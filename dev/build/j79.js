@@ -533,6 +533,33 @@ KP_SEAL.week="TUẦN";
  w.innerHTML=`<div class="dsky"><i class="lan l1"></i><i class="lan l2"></i><i class="lan l3"></i><i class="sun"></i></div><div class="dbox kpanel kpdawn">${kpHeader("week",kitDate(S.month,S.year,S.tuan),`${SEASON[S.month-1]}${S.wx?" · "+S.wx.n:""}`)}<div class="kpb"><div class="kpmain">${secs.join("")}</div></div><div class="kpfoot"><button class="kbtn" id="dawn-go">Vào ngày mới</button></div></div>`;
  w.hidden=false;w.classList.toggle("rm",reducedMotion());void w.offsetWidth;w.classList.add("on");setTimeout(bell,reducedMotion()?0:kitPace(1400));
  const close=()=>{w.classList.remove("on");setTimeout(()=>{w.hidden=true},reducedMotion()?0:350);w.onclick=null};w.onclick=e=>{if(e.target.closest("#dawn-go"))close()};/* KIT 81 (owner OD:L1261): only the button closes the week-change scene */const b=$("dawn-go");if(b)b.focus({preventScroll:true})}})();
+/* ===== KIT §94b DAY TITLE CARD (owner OD 24/11 ~07:45Z; KIT_REQUESTS «DAY TITLE CARD») — `kitDayTitle(o)` =====
+   The title card of the new day (shown by kitDayTitleShow over `#dawn` — the host of EVERY day-change scene: kitNewDay beats, the Tuần lục book j87 and this j79 panel as fallback): line 1 = «Ngày N — <day name>» for the opening days (N = 1..KIT_DAYT.opening, the
+   name from the hook `window.kitDayName(n)`, SELSCENE-3), later days = the cổ trang date «<tuần> tháng <tên> · mùa <mùa>»; line 2 = «Chương N — <chapter name>» of her current main road
+   (hook `window.kitChapterTitle()` → {n,name}, Foreman E; no chapter / hook returns null = no line 2). o = {n, name, date, chap:{n,name}} overrides (kit page sample); default = live state S. */
+const KIT_DAYT={opening:3};
+if(typeof window.kitDayName!=="function")window.kitDayName=function(n){return null};
+if(typeof window.kitChapterTitle!=="function")window.kitChapterTitle=function(){return null};
+function kitDayTitle(o){try{o=o||{};const N=o.n!=null?o.n:(typeof wk==="function"&&typeof S!=="undefined"&&S?wk()+1:1);
+ const op=N>=1&&N<=KIT_DAYT.opening;let nm=o.name!==undefined?o.name:(op?window.kitDayName(N):null);
+ const date=o.date||(typeof S!=="undefined"&&S?`${kitDate(S.month,S.year,S.tuan)} · mùa ${String(SEASON[S.month-1]||"").toLowerCase()}`:"");
+ const l1=op?`Ngày ${N}${nm?" — "+nm:""}`:date.charAt(0).toUpperCase()+date.slice(1);
+ const ch=o.chap!==undefined?o.chap:window.kitChapterTitle();const l2=ch&&ch.name?`Chương ${ch.n!=null?ch.n+" — ":"— "}${ch.name}`.replace("— —","—"):"";
+ return `<div class="kdayt"><b class="kdt1">${l1}</b>${l2?`<span class="kdt2">${l2}</span>`:""}</div>`}catch(e){return""}}
+window.kitDayTitle=kitDayTitle;
+(function(){const st=document.createElement("style");st.id="kdayt-css";st.textContent=`
+#kdaytc{position:fixed;inset:0;z-index:12000;display:flex;align-items:center;justify-content:center;pointer-events:auto;background:#1c14108c;opacity:0;transition:opacity .6s ease}
+#kdaytc.on{opacity:1}#kdaytc.rm{transition:none}
+#kdaytc>.kdayt{background:var(--k-card,#fffaf0);border:1px solid var(--gold,#b8901f);border-radius:14px;box-shadow:0 10px 36px #0006;padding:18px 28px 16px;margin:0;border-bottom:1px solid var(--gold,#b8901f);max-width:min(86vw,520px)}
+.kdayt{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px;padding:10px 12px 8px;margin:0 0 6px;border-bottom:1px solid var(--gold,#b8901f)}
+.kdayt .kdt1{font:700 1.15rem/1.25 var(--head,serif);color:var(--gold,#8f5f0c);letter-spacing:.02em}
+.kdayt .kdt2{font-size:.9rem;line-height:1.3;color:var(--ink,#3a2a1c);opacity:.85}`;document.head.appendChild(st)})();
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§94b",title:"kitDayTitle · thẻ tên ngày (Ngày N — tên ngày · ngày cổ trang + Chương N — tên chương)",where:"đầu bảng đổi ngày (.dawn .kpb), mọi màn mở ngày mới",html:()=>`<div style="max-width:420px"><button type="button" class="kbtn alt" onclick="kitDayTitleShow({n:1,name:'Nhập cung',chap:{n:1,name:'Bước qua cửa son'}})">Hiện thẻ ngày</button>${kitDayTitle({n:1,name:"Nhập cung",chap:{n:1,name:"Bước qua cửa son"}})}${kitDayTitle({n:8,date:"Thượng tuần tháng ba · mùa xuân",chap:{n:2,name:"Chén trà đầu tiên"}})}</div>`})}catch(e){}
+/* the card: fades in over #dawn when a day change starts, holds KIT_DAYT.ms, tap = close; `dawn` is wrapped by the LAST module (jend.js) so it sees every earlier override */
+KIT_DAYT.ms=2800;
+function kitDayTitleShow(o){try{if(typeof document==="undefined"||(typeof S!=="undefined"&&S&&S.dead))return;let c=document.getElementById("kdaytc");if(c)c.remove();c=document.createElement("div");c.id="kdaytc";c.setAttribute("role","status");c.innerHTML=kitDayTitle(o);if(!c.firstChild||!c.querySelector(".kdt1"))return;
+ const rm=typeof reducedMotion==="function"&&reducedMotion();c.classList.toggle("rm",rm);document.body.appendChild(c);void c.offsetWidth;c.classList.add("on");let t;const close=()=>{clearTimeout(t);c.classList.remove("on");setTimeout(()=>c.remove(),rm?0:600)};c.onclick=close;t=setTimeout(close,rm?KIT_DAYT.ms/2:KIT_DAYT.ms);return c}catch(e){console.error("kitDayTitleShow",e)}}
+window.kitDayTitleShow=kitDayTitleShow;
 (function(){const st=document.createElement("style");st.id="kp-dawn-css";st.textContent=`
 .dawn .dbox.kpanel{position:relative;z-index:1;width:var(--kpw);max-width:var(--kpw);height:var(--kph);max-height:var(--kph);overflow:auto;background:var(--k-card);border:1px solid var(--gold);border-radius:10px;box-shadow:0 0 0 3px #f6ead6,0 0 0 4px #c9a46a,0 14px 40px #000a;padding:0;text-align:left;color:var(--ink)}
 .dawn .dbox.kpanel .kph{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:10px;padding:10px 14px 9px;background:linear-gradient(#f6ead6e6,#fffaf0f0),url(img/kit/bg-default.webp) center/240px repeat;border-bottom:1px solid var(--line)}
