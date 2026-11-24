@@ -1267,3 +1267,35 @@ Reviewer fix (12866d32, scan only): verdict needs BOTH `Plant num` and `Plant c6
 4. Runs: `choice-value-scan.js` NO args (60 turns) on merged: ONE-CORE not run (needs --numbers), CHOICE-VALUE FAIL (see 5). WITH args `--numbers --turns 60` (merged, before fix): ONE-CORE NUMBERS PASS · 434 options audited · 0 lies. `--numbers --numplant --turns 2`: above. `node dev/measure/robot10.js` NO args = usage list, exit 0; `node --check robot10-in.js` ok. (A full robot10 life is the fixer's A/B harness, 60-turn scan covers the audit rule.) QUICKCHECK (alone, nothing else running, merged on LIVE eae255e2 + fix): **QUICKCHECK PASS** · 244 s · open 2156 ms · old save ok · perf (new/live) render 296/237, tab 510/544, buổi 1714/2773 ms, tasks>200ms 25/26 · core gates PASS. (Not repeated after the final merge of 502c48c9: that merge changed no file of this branch.)
 5. OPEN NOTE FOR MAIN (law 2/3, pre-existing, NOT a branch fail): `node dev/tools/choice-value-scan.js` (no args) on BARE origin/main eae255e2: CHOICE-VALUE FAIL · COST-ONLY 1 · DOMINATED 28 (this branch: 1 / 22–32, counts vary by turn draw). Rows by source on main: fv7:newyear 16, fv7:nguyentieu 4, fv7:phoenix 2, fv7:thanhminh 2, fv7:vulan 2 (festival family «Chuẩn bị kỹ rồi dự thi» vs «Ghi tên, bỏ bạc mời thầy kèm trước»: same effect, one costs more), fx7:sac 1, fx7:tai 1 (contests), COST-ONLY 1 = fixture dev/test/dialog-fixed.js (a demo option pair, not the live game; the fixer's note called it a festival row). → festival / contest owner (law 2/3, fix the whole fv7 + fx7 family).
 6. Law check: 4 one core PASS (audit rule now reads the c6 win/loss blocks; recurring amounts skipped on purpose); 11 whole family (c6 + PEND + j68 events 1111 played) PASS; 2/3 not touched by this branch (note 5); 7 wording: no player text changed; 9/10/12 no UI touched.
+
+### FIXER #6b (opus; session_01N1tNP4p4FFUjuVntyfWTNy; START_CTX ≈4 %) — review/robot-coop-fix-4 2d4d646f — SẴN SÀNG KIỂM
+PRIORITY #1 CHECK: OWNER_DECISIONS/OWNER_LEDGER/HANDOVER/PROGRESS grep «night gate / ngoW / week-end stuck» → rule «nobody runs ahead» (review/coop-night-sync) is the authority; origin/main 502c48c9 + origin/review/* git grep: cause #1 already on review/robot-coop-fix-4 9c442f44 (fixer #5), reused; harness = review/robot10-coop 6576e086 (stuck dumps); runner saves review/robot10-coop-saves cfcfd5de; CLAIMS: fix-2 r3 / fix-3 r3 belong to fixer #6 (not touched).
+Branch = 9c442f44 + merge LIVE 502c48c9 (d6ceb215) + cause #2 (6a8e4f55) + trace-only probe (2d4d646f). Ancestor = origin/main 502c48c9. Files: dev/build/jcoopworld.js, dev/test/coop-night.js, index.html, sw.js.
+Harness 6576e086 = SAFE (+11 lines, only in the stuck branch, read-only getters jcoopworld/jcoopthine/jcoopthinf) — told Foreman B.
+
+**Causes × hits (week-end stuck family, law 11)**
+| # | cause | where seen | test | fix |
+|---|---|---|---|---|
+| 1 | host's commit (ngo=w) survives his rebirth sendMe / is never turned into his own go (ngoW −1): host «Sẵn sàng»/«Chờ hảo hữu», guest waits for go | A/B main p01 (w2), p02 (w14, host nrdy −1 ngo 14 nfr 14), p04 (w5, ngo=nfr=nrdy=5 ngoW −1) = 3/5 rooms; fix 0 | coop-night case 10: main FAIL + room locked → fix PASS | 9c442f44 (fixer #5): sendMe clears nrdy/ngoW and ngo of this week; nCheck: own commit = own go |
+| 2 | night gate + thin E asks keyed by week only, carried into a NEW room without reload (week restarts at 0 → old commit/ready/ask hit the same week) | code read + case 11 (real players «Chơi cùng bạn» again; harness opens a fresh browser per room so A/B cannot hit it) | coop-night case 11: main FAIL ({"ngo":0,"nfr":0}, E.mine "0:3", room stuck) → fix PASS | 6a8e4f55: begin() clears nrdy/ngo/ngoW/nfr/nforce + E.mine/hr/forced when COOP room code changes; same-room reconnect keeps them |
+| 3? | committed night that does not end the week: ngo=ngoW=nfr=w on both, trace «night w» repeating, sent w−1, no dialog | fix-2 r3 rv note c (w7); A/B main p02 guest (w14); A/B fix p05 (w7, guest on a new-life entry scene «Theo ma ma» + host on night scene, both untapped 240 s) = 1/5 fix rooms; rerun p05 ×2 on fix = 0/2 | no repro | NOT fixed: cause unknown (all nCheck guards pass, nextBuoi chain returns early somewhere). 2d4d646f adds a trace-only line «night held w b<buổi>/<last> <Q/mg/wait/frz/eW/kc/srv/succ/modal>» once per week → the next stuck dump names the holding state. Runners please use harness 6576e086 on this branch. |
+
+**A/B (SEED 7, pairs 1–5 × 2 kiếp, CAP 300 / PCAP 1500, local Worker, harness 6576e086, same seeds)**
+| side | stuck rooms | lives | wall | lives/hour | turn p95 (non-stuck rooms) |
+|---|---|---|---|---|---|
+| main 502c48c9 | 3 (p01 w2, p02 w14, p04 w5; all cause #1) | 23 (extra lives from fresh rooms after stuck) | 75.9 min | 18.2 | 28–54 s |
+| fix 6a8e4f55 | 1 (p05 w7, cause 3?) ; rerun p05 ×2 = 0 | 20 | 67.2 min | 17.9 | 28–94 s |
+Lives/hour is the same (CAP 300 ends every life: wall-cap bound, not a speed measure); the change is stuck rooms 3/5 → 1/5 (0/2 on rerun).
+
+**Gates on 6a8e4f55 (index.html identical behaviour to 2d4d646f except the trace line), newest origin/main 502c48c9**
+| gate | result |
+|---|---|
+| coop-night no-arg (LIVE Worker) | 126 ok / 0 FAIL |
+| coop-night with args (local Worker) | 126 / 0; again on 2d4d646f: 126 / 0 |
+| coop-e2e Fold-host | 142 / 0 |
+| coop-e2e iPad-host (COOP_SWAP=1) | 142 / 0 |
+| coop-keymove-unit | 12 / 0 |
+| Worker npm test | 56 / 0 |
+| quickcheck alone | PASS 112 s (render 237, tab 538, buổi 1168 ms, median of 3) |
+Not done: U2 «buổi 0 pend:true Q 6 dialogs» rows (review/robot10-coop-saves u2) are state lines only, no dump → not classed; looks like cause 3? (dialogs held) — needs a dump with the probe.
+Logs (container-local): /home/user/wt/s6out/{ab-a-main,ab-a-fix,p5-fix-1,p5-fix-2,g}.
