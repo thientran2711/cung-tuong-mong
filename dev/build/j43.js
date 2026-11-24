@@ -15,7 +15,7 @@ function m43odds(v,t,k){try{const a=ACT[k];return a&&a.o?a.o(v,t):null}catch(e){
 /* the menu: push-down roads against the holder of the seat she wants next (about the old 45% share); the clever drop poor odds and wait */
 (function(){const m0=mindMenu;mindMenu=function(v,t){let O=m0.apply(this,arguments);try{
   const nx=rkOf(v)+1;const want=rkOf(t)===nx&&SEATCAP[nx]!=null&&!seatFree(nx);
-  if(want){const b=bandOf(danger(v,t));const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);const L=PUSHK.filter(k=>{if(!allow.includes(k)||!ACT[k])return false;try{return ACT[k].ok(v,t)}catch(e){return false}});
+  if(want){const b=bandVT(v,t);const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);const L=PUSHK.filter(k=>{if(!allow.includes(k)||!ACT[k])return false;try{return ACT[k].ok(v,t)}catch(e){return false}});
    if(L.length){const W=O.reduce((a,b)=>a+b[1],0);const pw=L.map(k=>Math.max(.05,persW(v,PUSHW[k])));const ps=pw.reduce((a,b)=>a+b,0);const tot=W>0?W*.45/.55:1;L.forEach((k,i)=>O.push([k,tot*pw[i]/ps]))}}
   if(witOf(v)>=60&&O.length){let drop=0;const keep=O.filter(x=>{const o=m43odds(v,t,x[0]);if(o!=null&&o<45&&roll(60)){drop++;return false}return true});
    if(drop){mindLog(v,"_wait");if(!keep.length){const sp=O.find(x=>x[0]==="spy");return sp?[sp]:[]}}O=keep}/* the clever wait out poor odds and dig for evidence meanwhile */

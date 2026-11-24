@@ -116,7 +116,7 @@ function kitItemLists(k,o){o=o||{};const it=IT[k];if(!it)return null;const a=typ
  if(it.w)D.push(...eff(it.w));
  if(it.use){const u=Object.entries(it.use).filter(([x,v])=>v).map(([x,v])=>`${N[x]||x} ${v>0?"+":""}${v}`);if(u.length)D.push((it.kd==="Thư từ"?"đọc: ":"dùng: ")+u.join(", "))}
  if(it.ant)D.push("an thai");if(it.fert)D.push(`${it.fert} tháng dễ thụ thai`);if(it.anti)D.push("cứu một lần trúng độc");if(it.evi)D.push(`chứng cứ +${it.evi}`);
- if(k==="ngocboi")D.push(`Sủng không dưới ${BAL.ngocboiSung}`);/* the Sủng floor is ngocboi's own rule (j8), not every kỷ vật / ngự tứ (title-sys2 family fix) */if(it.gv)D.push("đem tặng: hợp ý");if(k==="botngua")D.push("phi tần trúng: Danh -5");if(it.mat)D.push("trộn vào túi thơm, hương trầm");
+ if(k==="ngocboi")D.push(`Sủng không dưới ${BAL.ngocboiSung}`);/* the Sủng floor is ngocboi's own rule (j8), not every kỷ vật / ngự tứ (title-sys2 family fix) */if(it.gv)D.push("đem tặng: hợp ý");if(k==="botngua")D.push(`phi tần trúng: Danh ${balSg(BAL.eff.j8.danhUseItem)}`);if(it.mat)D.push("trộn vào túi thơm, hương trầm");
  if(over)M.push("vượt phẩm: dễ bị tố");if(it.il)M.push("bị khám ra là có tội");if(it.keep)M.push("mất là đại họa");
  if(o.ownTaint&&typeof TAINT==="object"&&TAINT[o.ownTaint])M.push(`đã ${TAINT[o.ownTaint].n}: ${TAINT[o.ownTaint].hurt}`);
  const lux=it.sl||it.dr?luxVal(k):0;if(o.months!=null)G.push(`còn ${o.months} tháng`);else if(it.dr)G.push("áo mặc 3 tháng");
@@ -135,10 +135,10 @@ function kinvOpenWork(x){const g=x.g,w=g.wk,i=g.i,A=typeof ARTS!=="undefined"?AR
 function kinvOpen(x){if(x&&x.g&&x.g.wk)return kinvOpenWork(x);const g=x.g,it=itm(g.k),i=g.i;const over=it.rk&&it.rk>S.rank;const B=[];
  if(it.sl)B.push(pbtn(`data-kinvact="wear" data-ix="${i}"`,g.w?"Tháo":"Đeo",g.w?"thành: cất vào rương":`thành: ${kinvPlain(it.w)}${over?" · kèm: vượt phẩm, dễ bị tố":""}`,""));
  if(it.dr)B.push(pbtn(`data-kinvact="use" data-ix="${i}"`,"May áo",`thành: Sắc +${it.dr} trong 3 tháng${over?" · kèm: vượt phẩm, dễ bị tố":""}`,""));
- if(it.use||it.evi||g.k==="botngua")B.push(pbtn(`data-kinvact="use" data-ix="${i}"`,"Dùng",g.k==="botngua"?"tốn: 2 khắc · thành: chọn một phi tần, nàng Danh -5 · kèm: bị khám ra là có tội":it.evi?`thành: chọn người, chứng cứ +${it.evi}`:`thành: ${kinvPlain(it.use)}`,g.k==="botngua"?whyTime(2):""));
+ if(it.use||it.evi||g.k==="botngua")B.push(pbtn(`data-kinvact="use" data-ix="${i}"`,"Dùng",g.k==="botngua"?`tốn: 2 khắc · thành: chọn một phi tần, nàng Danh ${balSg(BAL.eff.j8.danhUseItem)} · kèm: bị khám ra là có tội`:it.evi?`thành: chọn người, chứng cứ +${it.evi}`:`thành: ${kinvPlain(it.use)}`,g.k==="botngua"?whyTime(2):""));
  if(g.k!=="ngocboi"||g.t)B.push(pbtn(`data-kinvact="gift" data-ix="${i}"`,"Tặng","tốn: 2 khắc · thành: chọn người nhận",whyTime(2)));
  if(it.pr)B.push(pbtn(`data-kinvact="sell" data-ix="${i}"`,"Bán",`thành: Bạc +${Math.floor(it.pr/2)}`,""));
- if(typeof TAINT==="object"&&Object.values(TAINT).some(T=>T.on.includes(g.k))&&!g.t)B.push(pbtn(`data-kinvact="taint" data-ix="${i}"`,"Tẩm","thành: chọn cách tẩm, giữ làm mưu kế · kèm: Đức -3",""));
+ if(typeof TAINT==="object"&&Object.values(TAINT).some(T=>T.on.includes(g.k))&&!g.t)B.push(pbtn(`data-kinvact="taint" data-ix="${i}"`,"Tẩm",`thành: chọn cách tẩm, giữ làm mưu kế · kèm: Đức ${balSg(BAL.eff.j8.taintDuc)}`,""));
  if(g.from&&g.from!=="me"&&g.from!=="emp"&&g.from!=="th")B.push(pbtn(`data-kinvact="test" data-ix="${i}"`,"Nghiệm độc","tốn: Bạc -"+BAL.bacFee.itTest+" · thành: Thái y xem đồ có bị tẩm không",S.bac<BAL.bacFee.itTest?"thiếu bạc (cần "+BAL.bacFee.itTest+")":""));
  const F=[];if(g.n>1)F.push(`Trong rương: ${g.n} món.`);if(g.w)F.push("Ngươi đang mặc.");
  /* origin (kinvFrom) is the "Lai lịch" row of the item detail (KIT §70) */
@@ -258,8 +258,8 @@ document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.tar
    Túi thơm = tuithom (worn at the belt: Sắc +1 instead of being used up; a tainted sachet keeps hurting through j8 taintHit as before).
    Hoa tai / Giày: added by GAP IT03 (review/wear-slots, below, numbers in BAL.wearSlots). Khăn che mặt = the hủy dung veil. Old saves: worn hair/wrist keep their slots;
    a sachet or pendant becomes wearable, nothing is auto-worn. wearBonus counts every stat key (it only knew Sắc/Danh). ---------- */
-try{if(IT.ngocboi){IT.ngocboi.sl="waist";IT.ngocboi.w={danh:1};IT.ngocboi.d=`Đeo eo: Danh ${balSg(IT.ngocboi.w.danh)} · còn giữ: Sủng không dưới ${BAL.ngocboiSung} · mất là đại họa`}
- if(IT.tuithom){IT.tuithom.sl="scent";IT.tuithom.w={sac:1};delete IT.tuithom.use;IT.tuithom.d="Đeo bên mình: Sắc +1, thơm dịu"}}catch(e){}
+try{if(IT.ngocboi){IT.ngocboi.sl="waist";IT.ngocboi.w=BAL.itFx.wear.ngocboi;IT.ngocboi.d=`Đeo eo: Danh ${balSg(IT.ngocboi.w.danh)} · còn giữ: Sủng không dưới ${BAL.ngocboiSung} · mất là đại họa`}
+ if(IT.tuithom){IT.tuithom.sl="scent";IT.tuithom.w=BAL.itFx.wear.tuithom;delete IT.tuithom.use;IT.tuithom.d=`Đeo bên mình: Sắc ${balSg(IT.tuithom.w.sac)}, thơm dịu`}}catch(e){}
 /* ---------- per-rank pieces of the promotion set (D45 small-art, review/small-art-wire): same slots as above, one painting per rank.
    Đeo eo ngocboi_r0..r7 (the plain Ngọc bội of a rank, NOT the ngự ban keepsake `ngocboi`), Đeo tay vongngoc_r1..r4 (r0 = vongngoc, r5..r7 = vongvang),
    Túi thơm tuithom_r1..r7 (r0 = tuithom). rk = the rank that receives it, so it is never "vượt phẩm" for the one who is given it. Not in any shop or
@@ -326,8 +326,8 @@ function veilNeed(p){return !!(p&&p.scar&&(p.scar.sev|0)>0)}
 function veilSrc(p){try{if(window.KIT_VEIL&&KIT_VEIL.src)return KIT_VEIL.src(KIT_VEIL.tierOf(p))}catch(e){}return "img/veil-silk-ivory.png"}
 function veilGrade(p){try{const t=window.KIT_VEIL?KIT_VEIL.tierOf(p):"silk";const n=+String(t).replace(/\D/g,"");return !n?0:n<=2?0:n<=4?1:n<=6?2:n===7?3:4}catch(e){return 0}}
 function veilSet(p,on){if(!p)return;p.scar=p.scar||{sev:0};p.scar.veil=on?1:0}
-(function(){const wb0=wearBonus;wearBonus=function(p){const b=wb0.apply(this,arguments);if(veilOn(p)&&veilNeed(p))b.sac=(b.sac||0)+2;return b}})();
-(function(){const im1=itemMonth;itemMonth=function(p){let r=im1.apply(this,arguments)||"";try{if(veilOn(p)&&!veilNeed(p)&&roll(25)){if(p===S){apply({danh:BAL.eff.jinv.danhTop});r+=`Có kẻ xì xào ngươi che mặt để giấu điều gì. Danh ${balSg(BAL.eff.jinv.danhTop)}. `}else ap(p,{danh:-1})}}catch(e){}return r}})();
+(function(){const wb0=wearBonus;wearBonus=function(p){const b=wb0.apply(this,arguments);if(veilOn(p)&&veilNeed(p))b.sac=(b.sac||0)+BAL.itFx.veil.sac;return b}})();
+(function(){const im1=itemMonth;itemMonth=function(p){let r=im1.apply(this,arguments)||"";try{if(veilOn(p)&&!veilNeed(p)&&roll(25)){if(p===S){apply({danh:BAL.rl.jinv.danhTop});r+=`Có kẻ xì xào ngươi che mặt để giấu điều gì. Danh ${balSg(BAL.rl.jinv.danhTop)}. `}else ap(p,{danh:-1})}}catch(e){}return r}})();
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-keqveil]");if(!b)return;e.stopPropagation();if(b.disabled)return;veilSet(S,b.dataset.keqveil==="on");try{closeModal()}catch(x){}try{render()}catch(x){}},true);
 /* Y phục slot shows the GARMENT, not the fabric roll (owner 11/15): the j92 wardrobe paintings img/wd512/wd-<tier>-y-NN.webp
    (10 per tier, NN 01-04 Thường · 05-07 Tinh phẩm · 08-09 Trân phẩm · 10 Tuyệt phẩm). j92 has no fabric→outfit table, so the outfit is
@@ -342,7 +342,7 @@ function keqTT(){const wb=wearBonus(S),vp=vpItems(S);const slots=KEQ_TT.map(([sl
   else if(sl==="dress"){if(S.dress&&S.dress.until>S.turn&&IT[S.dress.k]){const it=itm(S.dress.k),a=typeof itemArt==="function"?itemArt(S.dress.k):null;const m=S.dress.until-S.turn;
     item={src:keqRobe(S.dress.k),name:`Áo ${it.n}`,grade:a?a.grade:0,lux:luxVal(S.dress.k),tip:`Áo may từ ${it.n} · còn ${m} tháng`};note=`áo may từ ${it.n} · còn ${m} tháng`}}
   else{ix=S.inv.findIndex(e=>!e.h&&e.w&&IT[e.k]&&itm(e.k).sl===sl);if(ix>=0){const k=S.inv[ix].k,a=typeof itemArt==="function"?itemArt(k):null;item={src:keqArt(k),name:itm(k).n,grade:a?a.grade:0,lux:luxVal(k),tip:`${label}: ${itm(k).n}`}}}
-  let mini="";if(item&&sl==="veil")mini=veilNeed(S)?kitChip("Sắc",2):`<span class="keql2"><span class="keqm">mặt đã lành</span><span class="keqw" title="che mặt không cần: dễ bị đồn" aria-label="che mặt không cần: dễ bị đồn">⚠</span></span>`;
+  let mini="";if(item&&sl==="veil")mini=veilNeed(S)?kitChip("Sắc",BAL.itFx.veil.sac):`<span class="keql2"><span class="keqm">mặt đã lành</span><span class="keqw" title="che mặt không cần: dễ bị đồn" aria-label="che mặt không cần: dễ bị đồn">⚠</span></span>`;
   else if(item){const k=sl==="dress"?S.dress.k:S.inv[ix].k,it=itm(k),over=!!(it.rk&&it.rk>S.rank),m=over?1.5:1,N=typeof NAMES==="object"?NAMES:{};
    const fx=sl==="dress"?[["Sắc",Math.round(it.dr*m)]]:Object.entries(it.w||{}).filter(([a,v])=>v).map(([a,v])=>[N[a]||a,Math.round(v*m)]);
    const risk=over?"vượt phẩm: dễ bị tố":"";
@@ -352,8 +352,8 @@ function keqTT(){const wb=wearBonus(S),vp=vpItems(S);const slots=KEQ_TT.map(([sl
  const sum=(C.length?kitChips(C):`<span class="past">chưa mang gì: không thêm</span>`)+kitLuxChip(luxOf(S))+(vp.length?kitChip(`${vp.length} món vượt phẩm: dễ bị tố`,"no"):"");
  return kitEquipSlots({key:"tutrang",title:"Bên mình",slots,sum,onPick:keqPick,col:true})}
 function keqPick(x){if(x.k==="veil"){const on=veilOn(S),need=veilNeed(S),has=veilHas(S);
-  const rows=kitRows([["Được",need?["che vết trên mặt","Sắc +2"]:[],"g"],["Mất",on&&!need?["mặt đã lành mà vẫn che: dễ bị đồn, Danh -1"]:[],"r"],["Ghi chú",[has?(need?"vết hủy dung còn trên mặt":"mặt đã lành"):"chỉ có khi bị hủy dung hay nổi mẩn"],"n"]]);
-  const B=has?[pbtn(`data-keqveil="${on?"off":"on"}"`,on?"Bỏ khăn":"Che mặt",on?(need?"kèm: vết trên mặt lộ ra, Sắc -2":"thành: hết bị đồn che mặt"):(need?"thành: che vết trên mặt, Sắc +2":"kèm: mặt lành mà che, dễ bị đồn"),"")]:[];
+  const rows=kitRows([["Được",need?["che vết trên mặt",`Sắc ${balSg(BAL.itFx.veil.sac)}`]:[],"g"],["Mất",on&&!need?[`mặt đã lành mà vẫn che: dễ bị đồn, Danh ${balSg(BAL.rl.jinv.danhTop)}`]:[],"r"],["Ghi chú",[has?(need?"vết hủy dung còn trên mặt":"mặt đã lành"):"chỉ có khi bị hủy dung hay nổi mẩn"],"n"]]);
+  const B=has?[pbtn(`data-keqveil="${on?"off":"on"}"`,on?"Bỏ khăn":"Che mặt",on?(need?`kèm: vết trên mặt lộ ra, Sắc ${balSg(-BAL.itFx.veil.sac)}`:"thành: hết bị đồn che mặt"):(need?`thành: che vết trên mặt, Sắc ${balSg(BAL.itFx.veil.sac)}`:"kèm: mặt lành mà che, dễ bị đồn"),"")]:[];
   kitModal({kind:"info",title:"Khăn che mặt",sub:on?"đang che":"trống",itemPic:kitItem(on?{src:veilSrc(S),name:"",grade:veilGrade(S),size:"lg"}:{empty:true,ghost:"img/veil-silk-ivory.png",size:"lg",name:""}).replace('<span class="kitn"></span>',''),
    html:`<div class="kinvrows">${rows}</div>${B.length?`<div class="rbtn kinvacts">${B.join("")}</div>`:""}`,btn:"Lui"});return}
  if(x.item){if(x.k==="dress"){const it=itm(S.dress.k);kitModal({kind:"info",title:"Áo mới",sub:`áo may từ ${it.n} · còn ${S.dress.until-S.turn} tháng`,

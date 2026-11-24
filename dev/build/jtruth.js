@@ -115,7 +115,7 @@ PEND.vuoan=pp=>{const a=byKey(pp.a);if(!a||!S)return null;const T=BAL.truth;cons
  O.push(kitOffIf({n:S.maid?`Gọi ${S.maid.name} làm chứng`:"Gọi cung nữ tâm phúc làm chứng",fx:{},p:clamp(base+T.wB),hint:H,risk:RK,j67:"tốn: không tốn gì",go:go(base+T.wB,`cung nữ ${S.maid.name} làm chứng ngươi không rời cung`)},!!wit,S.maid?`thiện cảm ${S.maid.name} chưa tới ${T.witLoy} (có ${S.maid.loyal||0})`:"thiếu cung nữ thân cận",kitWhenWit()));
  O.push(kitOffIf({n:"Mời Thái y nghiệm hình nhân",fx:{bac:BAL.eff.jtruth.bacFx},p:clamp(base+T.tyB),hint:H,risk:RK,j67:`tốn: Bạc ${balSg(BAL.eff.jtruth.bacFx)}`,go:go(base+T.tyB,"Thái y nghiệm ra hình nhân còn mới, kim chỉ không phải của cung ngươi")},!!ty,`thiếu thái y tâm phúc hoặc y thuật ${T.tyArts} trở lên`,kitWhenTy()));
  O.push(kitOffIf({n:`Trình chứng cứ về ${a.name}`,fx:{},p:clamp(base+T.evB*2+10),hint:H,risk:RK,j67:`tốn: ${balAb(BAL.eff.jtruth.evGo)} chứng cứ về ${a.name}`,go:()=>{evA(S,a,BAL.eff.jtruth.evGo);if(roll(clamp(base+T.evB*2+10)))clear(`ngươi trình chứng cứ về ${a.name}`);else guilty(false)}},ev>=1,kitWhyEv(a,1),kitWhenEv()));
- O.push({n:"Nhận tội, xin khoan hồng",fx:{},hint:"chịu tiếng nhẹ: Danh -6; kẻ vu oan không bị lộ",risk:"an toàn",j67:"tốn: không tốn gì",go:()=>guilty(true)});
+ O.push({n:"Nhận tội, xin khoan hồng",fx:{},hint:`chịu tiếng nhẹ: Danh ${balSg(BAL.eff.jtruth.danhGuilty)}; kẻ vu oan không bị lộ`,risk:"an toàn",j67:"tốn: không tốn gì",go:()=>guilty(true)});
  return{t:`<p>Cung Chính ti khám tẩm cung ngươi, tìm thấy hình nhân bùa ngải. Có kẻ tố ngươi ${why.replace(/^bị vu /,"")}.</p><p class="past">Ngươi không làm việc ấy. Chọn cách minh oan.</p>`,o:O,who:pv(a)}};
 
 /* ---------- 4. evidence card + intel: the rumours, shown as weak ---------- */
@@ -142,7 +142,7 @@ function evStory(t,n,x){if(!t||!S)return 0;deedAdd(t,"story",null,n,x||DEEDX.sto
    Vu oan act: caught / odds / defence / exposure exactly as for the player. */
 (function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{const T=BAL.truth;
  if(O.length&&t&&ACT.frame&&!accOK(v,t)){let has=false;for(const x of O)if(x[0]==="frame"||x[0]==="plant"){x[1]*=T.frameW;if(x[0]==="frame")has=true}
-  if(!has&&bandOf(danger(v,t))===1&&T.frameW1>0){let ok=false;try{ok=ACT.frame.ok(v,t)}catch(e){}const w=T.frameW1*(typeof persW==="function"?persW(v,"frame"):1);if(ok&&w>0)O.push(["frame",w])}}}catch(e){}return O}})();
+  if(!has&&bandVT(v,t)===1&&T.frameW1>0){let ok=false;try{ok=ACT.frame.ok(v,t)}catch(e){}const w=T.frameW1*(typeof persW==="function"?persW(v,"frame"):1);if(ok&&w>0)O.push(["frame",w])}}}catch(e){}return O}})();
 function tFrameV(a,L){return L.filter(t=>t!==a&&!(typeof sameHouse==="function"&&sameHouse(a,t))&&((t.sung||0)>(a.sung||0)||rkOf(t)>rkOf(a))&&!accOK(a,t))}
 function npcFrame(){const T=BAL.truth;const L=liveRivals(false).filter(v=>v&&v.alive&&!v.out&&!v.coop&&!v.confined);if(L.length<2)return"";
  const A=L.filter(v=>(v.malice||0)>=T.npcFrameMal&&!v.plan);if(!A.length)return"";

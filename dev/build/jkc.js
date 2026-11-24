@@ -52,8 +52,8 @@ try{for(const k in KCRARE)RARE97.add(k,{t:"Tiểu thư ngoài cung",tag:KCRARE[k
 /* OWNER #8 (15/11 20:05Z): a life as a thiếu nữ starts with a chest of her girlhood belongings that fills her slots with ordinary girlhood
    things; she keeps them into the palace (fallback outfit). New items: Ngọc bội khuê các (painting img/item-ngocboikc.webp, gpt-2-6,
    dev/art/ITEM_ART.md §5) and Vòng bạc hoa mai (img/item-vongbackc.webp); the rest are existing items. */
-try{IT.ngocboikc=IT.ngocboikc||{n:"Ngọc bội khuê các",kd:"Trang sức",d:"Đeo eo: Sắc +1 · ngọc bội con gái mang từ nhà",pr:10,rk:0,sl:"waist",w:{sac:1}};
- IT.vongbackc=IT.vongbackc||{n:"Vòng bạc hoa mai",kd:"Trang sức",d:"Đeo tay: Sắc +1 · đôi vòng bạc con gái mang từ nhà",pr:10,rk:0,sl:"wrist",w:{sac:1}};
+try{IT.ngocboikc=IT.ngocboikc||{n:"Ngọc bội khuê các",kd:"Trang sức",d:`Đeo eo: Sắc ${balSg(BAL.itFx.ngocboikc.w.sac)} · ngọc bội con gái mang từ nhà`,pr:10,rk:0,sl:"waist",w:BAL.itFx.ngocboikc.w};
+ IT.vongbackc=IT.vongbackc||{n:"Vòng bạc hoa mai",kd:"Trang sức",d:`Đeo tay: Sắc ${balSg(BAL.itFx.vongbackc.w.sac)} · đôi vòng bạc con gái mang từ nhà`,pr:10,rk:0,sl:"wrist",w:BAL.itFx.vongbackc.w};
  for(const k of ["ngocboikc","vongbackc"]){if(typeof ITEM_ART_G==="object")ITEM_ART_G[k]=0;if(typeof ITIMG==="object")ITIMG[k]=k}}catch(e){}
 
 function isKc(){return !!(typeof S!=="undefined"&&S&&S.kc&&!S.kc.inPal)}
@@ -376,7 +376,7 @@ const KCE={
   kcO("Xin tổ mẫu cho tra xét",{suc:-10},()=>kcDo("Bài vị",()=>{const to=kcR("to");if(roll(BAL.kc2.kcCard.xinToMauCho_rb+S.tamco/3+(to?to.af/5:0))){d.oan+=BAL.eff.jkc.oanO_3;S.kc.diBan=S.turn+3;return `Gia nhân khai thật: chính người của ${d.t.toLowerCase()} làm đổ.`}S.kgt-=BAL.eff.jkc.kgtO_2;if(to)kcAf(to,BAL.eff.jkc.o_4);return"Không tra ra ai. Tổ mẫu phạt ngươi quỳ ba canh giờ."})),
   kcO("Quỳ nhận lỗi cho yên nhà",{suc:-15},()=>kcDo("Bài vị",()=>{apply({duc:2});const to=kcR("to");if(to)kcAf(to,BAL.eff.jkc.o_5);return"Ngươi quỳ trước từ đường đến tối. Tổ mẫu thở dài."}))]}}},
  ao:{t:"Mượn y phục",b:()=>{const m=kcR("muoi");return{who:kcFace(m),t:`<p>Thứ muội ${m.name} xin mượn bộ y phục đẹp nhất của ngươi để đi hội ngắm hoa, nơi các nhà quyền quý đến xem mặt.</p>`,o:[
-  kcO("Cho mượn",{},()=>kcDo("Mượn y phục",()=>{kcAf(m,BAL.eff.jkc.o_6);m.danh+=3;return `${m.name} được khen ở hội hoa.`})),
+  kcO("Cho mượn",{},()=>kcDo("Mượn y phục",()=>{kcAf(m,BAL.eff.jkc.o_6);statSet(m,"danh",(m.danh||0)+3);return `${m.name} được khen ở hội hoa.`})),
   kcO("Từ chối",{},()=>kcDo("Mượn y phục",()=>{kcAf(m,BAL.eff.jkc.o_7);m.oan+=BAL.eff.jkc.oanO_4;return `${m.name} đi hội bằng áo cũ, về nhà khóc với ${kcR("di")?kcR("di").t.toLowerCase():"mẹ"}.`})),
   kcO("Cho mượn bộ khác, giữ bộ đẹp",{},()=>kcDo("Mượn y phục",()=>{kcAf(m,BAL.eff.jkc.o_8);apply({tamco:1});return"Nàng cầm áo, nhìn ngươi một lúc rồi đi."}))]}}},
  tranhmoi:{t:"Thứ muội giành mối",b:()=>{const m=kcR("muoi");const s=S.kc.suit[0];if(!s||!m)return null;return{who:kcFace(m),t:`<p>${m.name} lén gặp bà mối, nói tốt cho mình và nói xấu ngươi trước nhà ${s.n}.</p>`,o:[
@@ -392,7 +392,7 @@ const KCE={
   kcO("Từ chối, giữ kín",{},()=>kcDo("Thua bạc",()=>{kcAf(h,BAL.eff.jkc.o_15);/* he tries to raise it himself: fails at BAL.ag.why.kcDebt.fail odds → the creditor comes */if(roll(BAL.ag.why.kcDebt.fail)){S.kgt-=BAL.eff.jkc.kgtO_5;return"Chủ sòng đến tận cửa đòi nợ. Cả phố biết."}return"Huynh trưởng tự xoay xở được."}))]}}},
  tobenh:{t:"Tổ mẫu lâm bệnh",b:()=>{const t=kcR("to");S.kc.ev.tobenh=1;return{who:kcFace(t),t:`<p>Tổ mẫu lâm bệnh nặng. Cả nhà bàn ai sẽ hầu thuốc ngày đêm.</p>`,o:[
   kcO("Xin được hầu thuốc",{suc:-25},()=>kcDo("Hầu thuốc",()=>{kcAf(t,BAL.eff.jkc.o_16);apply({duc:4,kgt:2});return"Ngươi thức trắng nửa tháng. Tổ mẫu khỏi bệnh, nắm tay ngươi không buông."})),
-  kcO("Để thứ muội hầu",{},()=>kcDo("Hầu thuốc",()=>{const m=kcR("muoi");if(m){m.danh+=2;kcAf(t,BAL.eff.jkc.o_17)}return"Thứ muội được khen hiếu thảo."}))]}}},
+  kcO("Để thứ muội hầu",{},()=>kcDo("Hầu thuốc",()=>{const m=kcR("muoi");if(m){statSet(m,"danh",(m.danh||0)+2);kcAf(t,BAL.eff.jkc.o_17)}return"Thứ muội được khen hiếu thảo."}))]}}},
  dithai:{t:"Di nương có thai",b:()=>{const d=kcR("di");S.kc.ev.dithai=1;return{who:kcFace(d),t:`<p>${d.t} ${d.name} có thai. Cả phủ đổi chiều, cha ở viện phía tây nhiều hơn.</p>`,o:[
   kcO("Mang thuốc bổ sang chúc mừng",{bac:-10},()=>kcDo("Di nương có thai",()=>{kcAf(d,BAL.eff.jkc.o_18);return"Nàng cười, nhận thuốc mà không uống."})),
   kcO("Đứng ngoài",{},()=>kcDo("Di nương có thai",()=>{const me=kcR("me");if(me)kcAf(me,BAL.eff.jkc.o_19);return"Mẫu thân ngồi một mình dưới giàn tử đằng."}))]}}},
@@ -449,7 +449,7 @@ PEND.kcE=pp=>{if(!S||!S.kc||S.dead)return null;if(!isKc()&&!/^(dien)$/.test(pp.e
 function kcFest(t,art,extra){const b=rsnap();const sc=artOE(S,art)*BAL.art.score+S.tai/3+S.sac/6+R(30);let txt;
  if(sc>=60){S.danh=Math.min(100,S.danh+4);S.kap+=BAL.eff.jkc.kapKcFest;txt=`${t}: ngươi đứng đầu, cả kinh thành nhắc tên.`;if(!S.kc.ev.vp&&S.danh>=BAL.danhG.kcVihanh&&S.sac>=80&&kcRare("kcR3",.4)){S.kc.ev.vp=1;pushDil(mkP("kcE",{e:"vihanh"}),"Khách lạ ở chùa")}}
  else if(sc>=40){S.danh=Math.min(100,S.danh+2);txt=`${t}: ngươi được khen.`}else{S.danh=Math.max(0,S.danh-1);txt=`${t}: ngươi không nổi bật.`}
- const mu=kcR("muoi");if(mu&&roll(BAL.odb.jkc.rlKcFest))mu.danh+=sc<40?3:1;const x=extra?extra():"";kcRes(t,b,txt+(x?" "+x:""))}
+ const mu=kcR("muoi");if(mu&&roll(BAL.odb.jkc.rlKcFest))statSet(mu,"danh",(mu.danh||0)+(sc<40?3:1));const x=extra?extra():"";kcRes(t,b,txt+(x?" "+x:""))}
 function kcIll(p,extra){const b=rsnap();let txt="";if(roll(p)){apply({suc:-35});txt="Ngươi lên cơn sốt.";if(S.suc<=0||roll(S.suc<20?40:8)){kcRes("Dịch",b,txt);kcDie("Chết vì dịch sốt trước kỳ tuyển tú");return}}else txt="Ngươi qua được mùa dịch.";if(extra)txt+=" "+extra();kcRes("Dịch",b,txt)}
 function kcRare(id,p){S.kc.r97=S.kc.r97||{};if(S.kc.r97[id]!=null)return S.kc.r97[id];const ok=roll(p*(typeof R97CFG==="object"?R97CFG.p:1)*BAL.kcRareX);S.kc.r97[id]=ok?1:0;return ok}
 /* origin chapter: three beats per origin; the choices seed the palace arcs (S.kc.oc counts the "loyal to the house" path) */
@@ -543,7 +543,7 @@ function kcPhucMark(m){const P=BAL.entry.phuc;if(m.praw==null){const r=(Math.ran
  if(m.pduc==null)m.pduc=P.duc[0]+R(P.duc[1]);if(m.ppow==null)m.ppow=m.r==="muoi"?null:P.pow[0]+R(P.pow[1]);return m.praw}
 /* law 1 two-way: a thứ muội who holds a grudge does to her what she can do to the thứ muội (Ngáng chân) — once, in the Phúc tuyển week */
 function kcFoulBack(){const F=BAL.entry.phuc.foul;const mu=kcRivalsTT().find(x=>x.r==="muoi");if(!mu||S.kc.tt.foul!=null)return null;S.kc.tt.foul=0;
- if((mu.oan||0)<F.oan||!roll(F.od+(mu.oan||0)/F.oanDiv))return null;S.kc.tt.foul=1;S.sac=Math.max(0,S.sac-F.sac);S.danh=Math.max(0,S.danh-F.danh);
+ if((mu.oan||0)<netTh(mu,"oan")||!roll(F.od+(mu.oan||0)/F.oanDiv))return null;S.kc.tt.foul=1;S.sac=Math.max(0,S.sac-F.sac);S.danh=Math.max(0,S.danh-F.danh);
  log(`Phúc tuyển: ${mu.name} lén đổi hộp phấn, giấu trâm của ngươi. Sắc -${F.sac} · Danh -${F.danh}.`);return mu}
 /* the ONE podium result: her mark + each girl's mark, places by mark (tie: higher Sắc, then her) — stored in S.kc.tt.pod, read by every place */
 function kcPhucPod(){const T=S.kc.tt;if(T.pod)return T.pod;const L=[{id:"me",raw:T.raw,sac:S.sac}].concat(kcRivalsTT().map(m=>({id:m.id,raw:kcPhucMark(m),sac:m.sac||0})));
