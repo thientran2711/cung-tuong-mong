@@ -164,3 +164,16 @@ Growing holders still left (year 14 → 15, chars/year): R[].inv +53 k (7 263 pi
 quickcheck **PASS** 559 s (core gates PASS, old save ok, perf new/live render 221/207, tab 399/379, buổi 1118/2238 ms) · coop-e2e Fold host **142/142** · COOP_SWAP=1 (iPad host) **142/142** · monthly-allotment ALL PASS · bongloc-options 14/14 · monthly-ration 2 FAIL «mirror rows = owned colours», «mirror note + rush» = the same 2 pre-existing FAIL as LIVE fd85907a (FIXER #2 §5) · r10e-oldsave-noloss ALL OK · r10e-consume-scan 0 unmarked.
 No UI / kit / wording change in r2; no new BAL number (stock has no cap: it drains by the NPC issue). Co-op: NPC issue / trim run on the host only (as before); S.il.used / stock / conv are plain S.il fields.
 SSK: SẴN SÀNG KIỂM robot10-e-fix-3 434a4a30 (BIG: game, item ledger).
+
+## 7. Save growth after fix-3 r2 — what still grows (order step 3; measure only, no code yet)
+Source: year-14 save → +1 game year on 434a4a30 (r10e-save-size OUT=, r10e-grow-scan). Post-fix rate ≈ +200 k chars / year → a year-15 save (2.97 M) reaches the ~5.2 M browser limit near year ~26; a fresh life is 1.27 M at year 4.
+| family (year 14 → 15) | pieces | +chars / yr | cause | owner rule / who decides |
+|---|---|---|---|---|
+| NPC dresses sewn from the monthly cloth (y_* src «may») | 1 651 → 1 848 | +19 k | jwdinv useItem/wdSew: every lụa / vải bông / gấm piece an NPC gets becomes a dress; a dress is a lasting piece and never leaves (one rank-1 NPC holds 122 «Áo lụa Hàng Châu vân thủy») | lasting item → may NOT be dropped (law 6c). Needs a real road: old dresses handed down to her maids / sold / kept as cloth when she has enough — new behaviour = FEATURE FREEZE (law 18) → MAIN / parking |
+| NPC other dresses + hair / jewel / sachet sets (promotion sets jpromo prGive, wdGain) | 1 862 → 2 105 | +15 k | every rank-up set (y + trâm + vòng + ngọc bội + túi thơm) adds; nothing ever leaves an NPC | same: lasting → MAIN |
+| NPC son phấn boxes (lx*, never trimmed) | 1 633 → 1 738 | +7 k | issue 4 parts / month vs BAL.ration.npc.use 3 lượt per part spent → boxes pile up | balance number (BAL.ration.npc.use / uses) → robot10-reco / MAIN |
+| NPC food / tea / wine (banhtrai, ruoucuc, tragoi, trahop, traicay; promotion extras) | ~760 → ~820 | +4 k | NPCs never eat / drink them (non-durable for jil: they also stay in DEAD NPCs' bags, 371 pieces) | consuming them would be «used up» (S.il.used count, law 6c ok) but it is a new NPC behaviour → MAIN |
+| trân phẩm tp (NPC 188 → 223, her 107 → 123) | | +12 k | each piece is a long record (prize text) | lasting → keep |
+| her own bag (S.inv 1 357 → 1 467: 573 candles / oil, tea, tp) | | +9 k | hers; she can sell / give | keep |
+| S.rlog / S.nmReg / S.intel / S.knw | | +21 k / +3 k / +8 k / +5 k | rlog is already bounded (181 k at y14 vs 188 k at y4); nmReg 13 427 rows (name register) | owned by their modules; not law 6c |
+Technical option with no rule change (for MAIN): the browser slot could hold a compressed save (j16 saveCode «CTM2» gzip already exists for export; save() / loadSlot() are synchronous, so it needs a sync codec or an async save) — typically 5–10× smaller, old saves keep loading by prefix. Not started: a save-format change touches cloud save (jcloud rawSlot / writeSlot) and Sổ › export.
