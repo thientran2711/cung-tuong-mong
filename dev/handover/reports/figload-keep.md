@@ -25,3 +25,4 @@ Other setIntervals (UI/FX/co-op/rank queue) fetch no index/list. No other timed 
 - Branch: no args -> ALL PASS (25 ok); with arg (`node dev/test/figload-keep.js fold`) -> ALL PASS.
 - Shots (forced fetch reject after load, then loaders re-run; FIGS still 3492): Fold 755x1000 shows the full-body figure + portraits; iPad Air 1180x820 shows the Luan hoi picker with all scene paintings. (Shots not in git.)
 - quickcheck: see last lines below.
+- quickcheck ALONE (`bash dev/tools/quickcheck.sh`, run once more after a first run failed on a truncated CDN assets.json download, not on the code): QUICKCHECK PASS · 213 s · open 2041 ms · old save ok · perf (median of 3, new/live): render 206/262 ms, tab 499/465 ms, buoi 1424/1522 ms, tasks>200ms 22/24 · core gates PASS.
