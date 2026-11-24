@@ -36,7 +36,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   S.th=40;rpSync(S,true);ck(!has(S,'hoathuy'),'A2 hoathuy lost when Thái hậu warms');
   /* A2 deeds through the real hooks */
   clr(S);const v=liveRivals(true).filter(x=>!x.queen)[0];clr(v);
-  const co=caughtOdds;caughtOdds=()=>100;const r1=caught(S,v,true,'bỏ độc vào điểm tâm');caughtOdds=co;ck(!!r1,'A2 caught fired');rpSync(S,true);ck(has(S,'docphu'),'A2 docphu by a caught poison (caught hook)');
+  /* E65r (flake fix): roll() caps every odd at BAL.odds.hi (95), so caughtOdds=100 alone still misses ~5 % of runs → pin the one roll */const co=caughtOdds,mr=Math.random;caughtOdds=()=>100;Math.random=()=>0;let r1;try{r1=caught(S,v,true,'bỏ độc vào điểm tâm')}finally{caughtOdds=co;Math.random=mr}ck(!!r1,'A2 caught fired');rpSync(S,true);ck(has(S,'docphu'),'A2 docphu by a caught poison (caught hook)');
   S.year+=3;S.duc=60;rpSync(S,true);ck(!has(S,'docphu'),'A2 docphu lost after the quiet years + Đức back');
   clr(S);ACTX.a=v;window.__truthAuto=1;/* the charge sticks (jtruth: her defence lost) */const fd=framed(S,'bị vu dùng bùa ngải');window.__truthAuto=0;ACTX.a=null;rpSync(S,true);ck(has(S,'hamoan'),'A2 hamoan by framed');
   S.framedBy=key(v);fall(v,'bị tố giác, chứng cứ rành rành');rpSync(S,true);ck(!has(S,'hamoan'),'A2 hamoan lost when the framer is convicted');ck(!!(S.dh.mh_minh&&S.dh.mh_minh.i>=0),'B4 mh_minh (framed and cleared)');
