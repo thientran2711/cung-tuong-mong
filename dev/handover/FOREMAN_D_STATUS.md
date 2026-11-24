@@ -415,3 +415,4 @@ Local files from D6 (container-only, lost on reset): face_sharp16/ test images; 
 OPEN OWNER QUESTION (still unanswered): đăng cơ đại lễ inside 27-month quốc tang → D recommends defer to the first month after mourning; B skip.
 FOLLOW-UPS (no seat): net-build band-3 harm share ≤30 %; servant-trust ring UI waits owner design; ART REQUEST Phân cung picture → Foreman C via MAIN.
 Push recipe /home/user/wt/dpush2.sh (per container; text in HANDOVER D depth 3 block). Hourly trigger trig_01KLKH1LbFcyuvwsr57xX7Fi DELETED at rollover; child makes its own (:37).
+- (24/11 21:37Z) D depth 6 ROLLED OVER → **FOREMAN D (depth 7) = session_01D3E3NXc34LyTqacBtXB6sj**. depth-6 trigger deleted; 6 face-master03 workers + idle remerge seat report to depth 7; depth 6 stops.
