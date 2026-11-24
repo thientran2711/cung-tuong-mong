@@ -667,11 +667,19 @@ Object.assign(BAL.mgTier.occ,{tuyen:[1,0]});
    relations only (OD ~06:20Z); npcRank = [rank, weight] of the other tú nữ's own standing (was typed roll(60)?0:1 in j27 tuyenTu), npcAge = [min, spread]; npcMini = a tú nữ's mini-game mark from her art level (base + lv·level ± r; was typed in jselx);
    cap = highest entry rank (Tần, OD ~23:25Z); hoaThan = the hòa thân roads (cap Phi, +1 needs Sắc ≥ hoaThanSac, ADD.19);
    fav = thiện cảm moved with the asking royal per reaction (+ / − / none); days = the playable opening days (OD 24/11 ~07:05Z: day 1 enter + rooms, day 2 yard + contest, day 3 the kept wait → edict; 1 day = 1 tuần = 16 khắc);
-   lodge = the tú nữ lodging (OD ~06:55Z: «Trữ Tú cung» restored on the Dư đồ at its old spot as the selection-time lodging ONLY — not a consort cung, not in PAL / seats;
-   vien = its level-2 courts, rooms of room.perRoom girls on beds of room.perBed). */
+   lodge = the tú nữ lodging (OD 24/11 ~08:20Z FINAL: «Dưỡng Tú viện», a viện not a cung — selection-time lodging ONLY, not in PAL / seats, PAL_GONE untouched;
+   x/y = its Dư đồ spot; so = its 3 sở (level 2), one room each of room.perRoom girls on beds of room.perBed; sanh = the shared Tiền sảnh where the ma ma teaches). */
 Object.assign(BAL,{selx:{intake:{min:3,max:5},yard:{n:12,perRound:4,kept:4},room:{perRoom:4,perBed:2},
  w:{sac:.15,duc:.15,tai:.1,mini:1.5,dd:.75,hx:.75,base:20},noise:3,placeStep:[1,0,0,-1],cap:3,npcRank:[[0,60],[1,40]],npcAge:[18,3],npcMini:{base:3,lv:1.4,r:1},hoaThan:["nc","bd","pf"],hoaThanCap:4,hoaThanSac:70,
- fav:{plus:3,minus:-3,mini:[[8,4],[5,2],[0,-2]]},days:3,lodge:{n:"Trữ Tú cung",x:.303,y:.338,vien:[["dong","Đông viện"],["tay","Tây viện"],["nam","Nam viện"]]},npcMatch:{hit:8,miss:3,none:5}}});
+ fav:{plus:3,minus:-3,mini:[[8,4],[5,2],[0,-2]]},days:3,lodge:{n:"Dưỡng Tú viện",x:.303,y:.338,so:[["dong","Đông sở"],["tay","Tây sở"],["bac","Bắc sở"]],sanh:["sanh","Tiền sảnh"]},npcMatch:{hit:8,miss:3,none:5},
+ /* THE 3 DAYS (SELSCENE-4, jselxday; OD 24/11 ~07:05Z / ~08:20Z): beat = khắc of each fixed beat (gate + roll-call, rooms, dress, the yard buổi, each test, day-3 teaching;
+    yardDrama = yard khắc spent before the yard drama); lesson = the Tiền sảnh drill (k = khắc of effort kỹ / vừa / qua loa; mark 0..10 = base + duc·Đức + eff·effort ± r,
+    the same for every girl; mid = neutral mark; hint = marks at which the ma ma lets slip one / two royals' chữ trọng); maStep = ma ma regard per mark / per drama step;
+    ducStep / faceStep = Đức / Danh per drama step; fx = thiện cảm per drama step by the seed tier s/m/l; drama = {k khắc of a drama, victim = chance in a hundred she is the
+    target when the seed allows, mem = no-repeat memory across lives, extra = girls of other sở in the day-1 evening pool}; roam = [own sở, Tiền sảnh] weights of a girl's
+    place each buổi (days 1–2); menuN = names listed per menu; rest = Sức of «Nghỉ một lát»; conf = virtue pairs that clash (SELW-TESTS2 README, CONF) */
+ beat:{gate:2,rooms:1,dress:2,yard:4,yardDrama:1,test:1,teach:2},lesson:{k:[3,2,1],base:3,duc:.05,eff:2,r:1,mid:6,hint:[6,8]},maStep:1,ducStep:1,faceStep:1,
+ fx:{s:2,m:3,l:5},drama:{k:1,victim:25,mem:40,extra:2},roam:[3,1],menuN:4,rest:5,conf:[["Hiếu","Trung"],["Tín","Nhân"],["Lễ","Nghĩa"],["Nghĩa","Liêm"],["Sỉ","Khiêm"]]}});
 Object.assign(BAL,{entry:{word:["tho","doi","doden","le","tc","xa","thq"],noise:4,cut:[37,53],stepSung:5,
  w:{dir:{sac:.15,duc:.15,tai:.1,raw:3,art:1.5,th:1/6,base:8},
   dan:{sac:.15,duc:.15,suc:.05,raw:3,art:0,kim:[3.5,1.5],le:2.5,kgt:1/8,kld:-1/3,ly:3,self:-3,base:0},
