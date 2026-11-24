@@ -2030,3 +2030,17 @@ BAL.blopt={danhD:4,sungD:4,sup:25,
     Tố lên: Hoàng hậu|Thái hậu regard / repStatD, Danh / repDanhD, + repEv per proof found, repRisky when the one she reports to is the one behind it;
     Ghi nhớ: Tai mắt × memEyes. selfKhac = khắc her own trip to Nội vụ phủ costs (the maid's trip is parallel time). */
  loyD:3,repStatD:2,repDanhD:5,repEv:15,repRisky:5,memEyes:10,selfKhac:1};
+/* ORDER THIN P0 (jnorep.js, owner OD 23/11 ~22:50Z): ONE shared cross-life no-repeat memory. lives = lives kept (this one + 5 past, as the old
+   ctm-e68h), w = weight factor per past life that saw a key (×0.5, as j68), cap = keys kept per life (the store is shared by every family). */
+BAL.nr={lives:6,w:.5,cap:1500};
+/* ORDER THIN P2 (j7c.js composed intrigue): on = the family is live; share = its weekly-card weight as a multiple of one world card
+   (BAL.ag.why.dil.world); rest = months before the same seed may return in one life (as the old j7 cards, S.seen ≥ 12);
+   fx[tier] = what ONE gain/loss step of a seed is worth per key (laws 2/3/4: seeds count steps, the numbers live here; rel = thiện cảm
+   of a cast person, proof = chứng cứ against a cast consort). Tiers s/m/l as yard.md.
+   review thin-p2 r1: proof on the chứng cứ scale (evStory = a deed of that weight; DEEDW 1–2, a blood-test demand needs BAL.kh.accEv 3; the old j7 cards give
+   evGo 1–2 and only on a won roll) — the first 8/15/25 made every proof stance a full accusation in one tap (law 2 equal value). */
+BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's nết AND lòng → cast someone with any one of them */
+
+ fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:2,th:2,hh:2,duc:2,maid:3,rel:4,proof:1},
+     m:{sung:4,danh:4,bac:40,suc:10,mat:4,th:4,hh:4,duc:4,maid:6,rel:8,proof:1},
+     l:{sung:6,danh:6,bac:60,suc:15,mat:6,th:6,hh:6,duc:6,maid:9,rel:12,proof:2}}};
