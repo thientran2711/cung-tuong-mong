@@ -115,3 +115,10 @@ KIT REQUESTS (nothing private kept): **IC-1** large intro tag = the j59 tag at 1
 Page: https://ctm-img.victoria-tntt.workers.dev/img/_review/intro-design.html (CDN img/_review/intro-design/, 26 videos + 2x copies + 104 stills). To wipe after the verdict: python3 dev/site/cdn_sync.py --wipe-review intro-design.
 
 ~80% xong / ~0% chơi được (storyboard mock only; the kit parts are KK16's).
+
+## 9. r2 delivery (24/11 ~10:50Z)
+Page: https://ctm-img.victoria-tntt.workers.dev/img/_review/intro-design.html — 13 options x Fold + iPad, mp4 + 2x copy, 4 stills each (104 stills, 52 mp4). Files in `img/_review/intro-design/<clip>-<fold|ipad>[-x2].mp4`, `<clip>-<dev>-s1..s4.jpg`.
+Index: A1/A2 royal reveal; B1/B2 self-intro; C1/C2 Tổng quản; D1/D2 roll-call; E1 first meeting, E2 Emperor first visit; F1 room assignment; G1 result along the row, G2 her own turn.
+r2 fixes after frame review: G1 "Ban hoa"/"Ban hương nang" are now kit tags (sub line + name), full strength, above the dialogue box on both devices (was faded on her feet); D2 hang fixed (seal numeral is now a sibling, no blend-mode cone); A2 still s1 re-shot (was the loading screen).
+Known flags: royal tags on the carpet are light in A2 (kit tag, no plate behind); G2 uses the throne hall as stand-in (new painted background held by the credit rule); iPad mock covers the stage page only; tableau positions are placeholders.
+Mock code: branch `review/intro-design`, `dev/mock/intro-design/` (commit fff52fe0).
