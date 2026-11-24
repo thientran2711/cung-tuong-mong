@@ -1452,7 +1452,7 @@ REVIEW promo-build 7c4116de (opus BIG; briefs/D-promo-build-review.md) | review/
 | RV map-fix-2 SMALL (sonnet; c87a40e1) | review/map-fix-2-r1; reports/map-perf.md | MAIN 119 | session_01V1ZZH2u9H72DTLghtdArxu | PASS ac4790f0, LAND READY → LC10, ARCHIVED | 24/11 07:48Z |
 | LEAVE-PALACE FIX r1 E74 (opus BIG; E72r FAIL 37a862be 3 items; briefs/E74-leave-palace-fix.md) | review/leave-palace-r ea730f77; reports/leave-palace.md «FIX r1» + kpGate addendum | FOREMAN E (child3) | session_01DgYSWoQonzS3XKxd5Bc8WS | DONE: SẴN SÀNG KIỂM ea730f77 | 24/11 08:16Z |
 | ROBOT FIXER cnv families (opus; ORDER MAIN 119 07:40Z; briefs/F-robot-fixer.md) | review/robot-fix-cnv; reports/robot-fix-cnv.md | F | session_01UV1SzhQegCd1j7H5GHPzMo | SSK 1f046fb7 + HANDOVER (successor by F) | 24/11 08:20Z |
-| ROBOT-COOP RUNNER U4 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U4-* | F | session_01UV1Szh9vtuLGWyG8DpJArr | RUNNING | 24/11 08:20Z |
+| ROBOT-COOP RUNNER U4 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U4-* | F | session_01UV1Szh9vtuLGWyG8DpJArr | DONE pair 3 (20 lives, 15 families); pair 4 → U4b; ARCHIVED 18:25Z | 24/11 08:20Z |
 | ROBOT-COOP RUNNER U5 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U5-* | F | session_01UV1SzjjFvKxvNJDS3Tom9F | RUNNING | 24/11 08:20Z |
 | ROBOT-COOP RUNNER U6 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U6-* | F | session_01UV1SziPWFp447pcaYdp9tB (depth 2) | RUNNING | 24/11 08:20Z |
 | ROBOT-COOP RUNNER U7 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U7-* | F | session_01UV1SziP6h45uycmryXVrR2 | RUNNING | 24/11 08:20Z |
@@ -1540,3 +1540,4 @@ figload-keep (live bug split from sideline-dlg 3fb17db4) | review/figload-keep |
 | LC12 lander | main FF | MAIN 125 | session_01V1ZZH2p2x7oNCrRuTq7RjF | RUNNING | 2026-11-24T18:15Z |
 ROBOT-COOP FIXER #6 (fix-2 r3, fix-3 r3) | review/robot-coop-fix-2-r3, robot-coop-fix-3 | session_01N1tNP4TkcdjyymdxPqwSj5 | RUNNING | 2026-11-24T18:24Z (FOREMAN B)
 ROBOT-COOP FIXER #6b (week-end stuck, fix-4) | review/robot-coop-fix-4 | session_01N1tNP4p4FFUjuVntyfWTNy | RUNNING | 2026-11-24T18:24Z (FOREMAN B)
+| ROBOT-COOP RUNNER U4b pair 4 only SWAP=1 SEED=1 ×10 kiếp (sonnet; briefs/b-robot10-coop-runner.md) | dev/handover/robot/coop-U4b-*-p4-4-s.md | F | (opening) | RUNNING | 24/11 18:26Z |
