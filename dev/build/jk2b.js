@@ -314,7 +314,7 @@ function kitHintRow(text){if(!text)return"";try{if(typeof VP==="object"&&VP&&VP.
    roll uses, law 4) stays; a card with no odds (a certain outcome, nothing rolled) gets the same meter at «Nắm chắc» (owner 19/11 ~01:48Z). */
 function kitOptOdds(b){try{if(b.classList&&b.classList.contains("kbare"))return;/* KIT §93.7 */const kat=b.querySelector(":scope > .kat, :scope > .kabody > .kat");if(!kat||kat.querySelector(".kodds"))return;
  kat.insertAdjacentHTML("beforeend",`<span class="kodds" data-ksure="1">${oddsChip(KIT_ODDS[KIT_ODDS.length-1])}</span>`)}catch(e){console.error("kitOptOdds",e)}}
-function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid==="1")return;b.dataset.khid="1";b.classList.add("khideout");
+function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid==="1")return;if(b.classList.contains("kbare"))return;/* KIT §93.7 + §98.16 (K-BARE-HINT): a bare card carries NO «Gợi ý» row (owner: no guidance on selection answers), same guard as kitOptOdds / kitOptFinal */b.dataset.khid="1";b.classList.add("khideout");
  /* the hint, read from the option's data before its outcome rows go */
  let H=null;try{const M=b.closest("#modal");const o=M&&typeof Q!=="undefined"&&Q[0]&&Q[0].opts&&b.dataset.m!=null?Q[0].opts[+b.dataset.m]:null;H=kitHintOf(b,o)}catch(e){console.error("kitHint",e)}
  b.querySelectorAll(".kb .kr").forEach(r=>{if(!r.classList.contains("kr-ton")&&!r.classList.contains("kr-why"))r.remove()});b.querySelectorAll(".kb .kbh").forEach(h=>h.remove());/* kit-thanh-bai r3: the THÀNH / BẠI heads go with their rows (a head with no row under it was left behind) */

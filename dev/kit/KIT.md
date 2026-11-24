@@ -4692,3 +4692,6 @@ A press / tap on a kit item tab (`[data-kinvtab]`) or an item slot in `.kinv` / 
 
 ## §98.15 UNNAMED PERSON IN PROSE (owner OD 24/11 ~22:14Z; code: kitNoUnk in jnotice.js, FLIGHT-UI changes it on review/flight-ui)
 An unnamed person in prose reads «một vị cung nữ / phi tần / thái giám» (or the visible rank title), NEVER «chưa quen biết». `kitNoUnk` (applied by kitParse and kaNorm → kitNoUnkDom) is the one place that rewrites «???» in text; the stranger NAME TAG keeps «???» / «Người lạ» (OD:L673). Every brief and test for prose that names a person follows this.
+
+## §98.16 BARE CARDS CARRY NO «GỢI Ý» ROW (review/kit-fitfast-r2; K-BARE-HINT, owner OD 23/11 ~23:40Z/~23:43Z no guidance on selection answers)
+`kitHideOut` (jk2b.js) returns early on a `.kbare` card (KIT §93.7), like `kitOptOdds` and `kitOptFinal`, so `kitHintRow` never appends «Gợi ý: …» to a bare card.
