@@ -59,7 +59,7 @@ function srvHome(s){if(s&&typeof s==="object")s.home=1;return s}
 /* co-op guest (review/staff-root-r1): her own household is a PERSONAL key (jcoopworld W_KEYS has no staff), so the guest trims HER OWN
    household itself (old save, demotion, cold palace); the NPC households and the face list (fidUsed, a world key) stay the host's */
 function capSweep(){try{if(!S)return;if(window.COOPW&&COOPW.on&&COOPW.seat==="b"){capTrim(S);return}for(const p of [S].concat(typeof rivals!=="undefined"?rivals:[]))if(p&&(p===S||p.alive!==false))capTrim(p)}catch(e){}}
-function servAge(role){const age=role==="maid"?16+R(10):18+R(45);return role==="maid"?{age}:{age,fe:eunBand(age)}}
+function servAge(role){const age=role==="maid"?16+R(10):BAL.ageMin+R(45);return role==="maid"?{age}:{age,fe:eunBand(age)}}
 function pServ(s){const g=rkOfFace("serv",s);return Object.assign(pServ0(s),{rk:g[0],rw:g[1]})}
 function pServ0(s){const n=s.role==="maid"?6:4,i=(s.face>=0?s.face:0);if(s.role!=="maid")return{src:fsrc(s.fc,`img/face-eunuch-${(s.fe>=0?s.fe:eunBand(s.age||30))+1}.webp`),hue:0,ini:"Hoạn",col:"#8a8aa0"};return{src:fsrc(s.fc,""),hue:0,ini:s.role==="maid"?s.name.split(" ").pop()[0]:"Hoạn",col:s.role==="maid"?"#b9a48a":"#8a8aa0"}}
 /* the servant one sends: loyalty and traits set the odds and the risk of confessing */

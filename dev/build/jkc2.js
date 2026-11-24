@@ -131,7 +131,7 @@ function kc2Init(d){const sur=tdSur(S.name);const fam=[];const gm=()=>nmNew("m",
   /* Xuân Đào: the girl from the same village who enters the palace in the same draft (j67 cnv_ban names her) — one person, one name */
   /* the palace has no other Xuân Đào: a palace maid who drew that name gets another one (j61 hides strangers' names in any text) */
   try{const used=new Set(k61All().map(e=>e.name));for(const e of k61All())if(e&&e!==S&&/(^| )Xuân Đào$/.test(String(e.name||""))){e.name=nmNew("maid",{more:[{name:"Xuân Đào"}]});used.add(e.name)}}catch(e){console.error("kc2 xd name",e)}
-  fam.push(T("xd","Xuân Đào","Xuân Đào",18+R(2),"consort",["Ân cần","Khiêm nhường","Nóng nảy","Ham vui"],35+R(30),{out:1}));
+  fam.push(T("xd","Xuân Đào","Xuân Đào",BAL.ageMin+R(2),"consort",["Ân cần","Khiêm nhường","Nóng nảy","Ham vui"],35+R(30),{out:1}));
   fam.push(T("ly","Lý trưởng",gx(),50+R(10),"official",["Ham lợi","Cương trực","Xu nịnh","Kín đáo"],R(30),{out:1}));
   fam.push(T("ba","Bà Tư",`Bà Tư ${gmo()}`,62+R(8),"mama",["Lạnh lùng","Ân cần","Nhiều chuyện"],30+R(20),{out:1}));
  }else{const L=kc2L(),bd=kc2Br()==="bd",pf=kc2Br()==="pf";
@@ -139,12 +139,12 @@ function kc2Init(d){const sur=tdSur(S.name);const fam=[];const gm=()=>nmNew("m",
   fam.push(T("me",L.mom,pf?`${L.tx.momN} ${gf()}`:bd?(fn=>bdTxt(`Khả đôn ${fn}`,`Vương hậu ${fn}`))(gf()):`Vương hậu ${gf()}`,42+R(6),"mama",["Ân cần","Khiêm nhường","Kín đáo","Cương trực"],50+R(30)));
   if(bd){fam.push(T("huynh","Trưởng huynh",gv(),26+R(4),"man",["Tham vọng","cương trực","nóng nảy"],30+R(30)));fam.push(T("huynh2","Nhị huynh",gv(),23+R(3),"man",["Tham vọng","Kín đáo","Ham vui"],30+R(30)))}
   else{fam.push(T("huynh",pf?L.tx.huynh:"Thế tử huynh",gm(),25+R(4),"man",["Tham vọng","trung hậu","Kín đáo","nóng nảy"],35+R(30)));fam.push(T("thuc",pf?L.tx.thuc:"Vương thúc",gm(),46+R(8),"official",["Tham vọng","Kín đáo","Cương trực"],R(30),{out:0}))}
-  const mu=T("muoi",kc2Muoi(),(bd?gf():nmNew("f",{sur,more:fam})),18,"consort",["Kiêu ngạo","Tham vọng","Khiêm nhường","Ân cần"],10+R(40));mu.sac=40+R(50);mu.tai=30+R(50);fam.push(mu);
+  const mu=T("muoi",kc2Muoi(),(bd?gf():nmNew("f",{sur,more:fam})),BAL.ageMin,"consort",["Kiêu ngạo","Tham vọng","Khiêm nhường","Ân cần"],10+R(40));mu.sac=40+R(50);mu.tai=30+R(50);fam.push(mu);
   fam.push(T("sx","Sứ thần Đại Hy",gx(),45+R(10),"official",["Kín đáo","Cương trực","Điềm tĩnh","Kín đáo"],20+R(20),{out:1,hide:1}))}
  S.kc={v:3,kd:d,fam,at:{},once:{},ev:{},ch:{o:0},suit:[],intel:[],proof:{},le:0,kim:0,ds:0,g7:-99,ldSeen:0,r0:S.rank,staff0:S.staff||[],y0:S.year,t0:S.turn||0,end:null,tt:null,log:[],vil:d==="dan"?pick(KC2VIL):""};
  S.kc.due=kc2Due();kc2Words();
- if(d==="dan"){S.kgt=BAL.kc2.st.dan.kgt[0]+R(BAL.kc2.st.dan.kgt[1]);S.kap=BAL.kc2.st.dan.kap[0]+R(BAL.kc2.st.dan.kap[1]);S.khm=0;S.kld=0;S.kgtu=BAL.kc2.st.dan.kgtu;S.age=18;S.bac=Math.min(S.bac||0,8)}
- else{S.kgt=BAL.kc2.st.nc.kgt[0]+R(BAL.kc2.st.nc.kgt[1])+(kc2Br()==="bd"?BAL.kc2.st.nc.kgtBr[0]:BAL.kc2.st.nc.kgtBr[1]);S.kap=BAL.kc2.st.nc.kap[0]+R(BAL.kc2.st.nc.kap[1]);S.khm=kc2Br()==="bd"?BAL.kc2.st.nc.khm[0]:BAL.kc2.st.nc.khm[1];S.kld=0;S.kgtu=BAL.kc2.st.nc.kgtu;S.age=18;S.bac=Math.min(S.bac||0,60)}
+ if(d==="dan"){S.kgt=BAL.kc2.st.dan.kgt[0]+R(BAL.kc2.st.dan.kgt[1]);S.kap=BAL.kc2.st.dan.kap[0]+R(BAL.kc2.st.dan.kap[1]);S.khm=0;S.kld=0;S.kgtu=BAL.kc2.st.dan.kgtu;S.age=BAL.ageMin;S.bac=Math.min(S.bac||0,8)}
+ else{S.kgt=BAL.kc2.st.nc.kgt[0]+R(BAL.kc2.st.nc.kgt[1])+(kc2Br()==="bd"?BAL.kc2.st.nc.kgtBr[0]:BAL.kc2.st.nc.kgtBr[1]);S.kap=BAL.kc2.st.nc.kap[0]+R(BAL.kc2.st.nc.kap[1]);S.khm=kc2Br()==="bd"?BAL.kc2.st.nc.khm[0]:BAL.kc2.st.nc.khm[1];S.kld=0;S.kgtu=BAL.kc2.st.nc.kgtu;S.age=BAL.ageMin;S.bac=Math.min(S.bac||0,60)}
  S.rank=0;S.sung=0;S.danh=Math.min(S.danh||0,d==="nc"?12:3);S.staff=[];S.place=kc2P(d==="dan"?"nha":"tam");S.pal=null;S.tonight=null;
  if(S.maid)S.maid.kcTy=1;
  kcWhere();Q=Q.filter(m=>m.nl);S.nightWhy=null;
