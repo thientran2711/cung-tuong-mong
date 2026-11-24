@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"466811b4+","t":"2026-11-24T06:09Z","c":"kit-promo-hook: window.kitPromoHook (KIT §77c data hook) split from review/promo-hist ed47e570 onto newest main","b":"87eeb9be6cd3","h":[{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"}]};
+window.CTM_BI={"s":"e776aa19+","t":"2026-11-24T07:01Z","c":"promo-build: phân cung wording (Dưỡng Hòa điện from PLNAME, no 'quý' auto-link), shots script","b":"f296ec0f193f","h":[{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -2710,6 +2710,7 @@ function promoReqP(p){if(rkOf(p)>=7)return[];const r=rkOf(p),nx=RANKS[r+1],L=[];
  if(has("hieuthao"))L.push([p.th>=0,`Hoàng thượng hiếu thảo: Thái hậu không được ghét ${me?"ngươi":"nàng"} (Thái hậu quý ${me?"ngươi":"nàng"} ${p.th}, cần từ 0)`]);
  if(r+1===7){const N=hhNeed(p),tn=N.th,nd=N.duc,sn=N.sons;L.push([S.turn>=(p.seatBan||0),p.seatBan>S.turn?`Vừa tố Hoàng hậu, bị nghi tranh ngôi (còn ${p.seatBan-S.turn} tháng)`:"Không bị nghi tranh ngôi"],[!qq,"Ngôi Hoàng hậu bỏ trống"],[p.th>=tn,sn?`Có hoàng tử: Thái hậu quý ${me?"ngươi":"nàng"} ${p.th} (cần ${tn})`:`Chưa có hoàng tử: Thái hậu phải hết lòng, quý ${me?"ngươi":"nàng"} ${p.th} (cần ${tn})`],[p.duc>=nd,`Đức ${p.duc} (cần ${nd}${N.heir?", mẹ Thái tử":""})`])}
  else if(r+1>=5)L.push([p.hh>BAL.hiOppHh||p.th>=BAL.hiOppTh||!qBlock||(facOf(p)&&facStr(facOf(p))>=BAL.hiOppFac),`Hoàng hậu không phản đối, hoặc Thái hậu ${BAL.hiOppTh}, hoặc phe mạnh (thế lực ${BAL.hiOppFac})`]);
+ if(typeof pbKyRow==="function"){const k=pbKyRow(p);if(k)L.push(k)}/* promo-build: the ordinary road is looked at only in a kỳ sắc phong (jpromob) */
  if(p.confined)L.push([false,`Đang cấm túc (${p.confined} tháng)`]);return L}
 function promoReq(){return promoReqP(S)}
 /* the vacant seat is contested: every eligible consort (Quý phi and above) weighs in by favour, Thái hậu, sons and name */
@@ -32563,9 +32564,16 @@ function tick70(){const z=j70();if(!z)return;z.sh.push(S.sung||0);if(z.sh.length
 
 /* ---------- places and her own spying reveal plots ---------- */
 (function(){const g0=goTo;goTo=function(k){const r=g0.apply(this,arguments);try{if(j70On()&&S.place===k){const z=j70();for(const p of z.pl){if(p.end||p.kn||p.st!=="prep"||p.a==="me")continue;const R=pr70(p);if(!R||R.pl!==k||!roll(35))continue;const a=pa70(p);p.kn=1;p.kt.push(tellOf70(p,p.pg));p.pend=p.t==="me"?"seen":"npc";noteAdd(a.id,`Ở ${placeName(k)}, ngươi thấy người của nàng ${tellOf70(p,p.pg)}`);log(`Ở ${placeName(k)}, ngươi tình cờ thấy người của ${a.name} ${tellOf70(p,p.pg)}.`);break}}}catch(e){console.error(e)}return r}})();
+/* does her act k on v open the «Bày mưu» card first? (one test for j70 and jtamco's road card, review/fix-hadoc-loop) — not when she already chose
+   to act now: «Ra tay ngay» (__j70inst) or the road card she answered after it (jtamco econRoadGo: window.ECON_HER for this act and person).
+   ROBOT-10 bug B: «Ra tay ngay» → jtamco's road card → «Làm như thường» called doAct again with __j70inst already back to 0, so «Bày mưu» came
+   again, then the road card again … for ever, the act never ran and no khắc was spent. */
+function j70Wants(v,k){try{const h=window.ECON_HER;if(h&&v&&h.k===k&&h.t===v.id)return false;
+ return !!(j70On()&&v&&OWN70[k]&&!window.__j70inst&&ACT[k]&&can(2)&&!Q.length&&v.alive&&!v.out&&ACT[k].ok(S,v)&&!(typeof sameHouse==="function"&&sameHouse(S,v)))}catch(e){console.error(e);return false}}
+window.j70Wants=j70Wants;
 (function(){const d0=doAct;doAct=function(i,k){const v=rivals[i];
   /* her own plot: a big act can be done at once (as before) or prepared as a chain */
-  try{if(j70On()&&v&&OWN70[k]&&!window.__j70inst&&ACT[k]&&can(2)&&!Q.length&&v.alive&&!v.out&&ACT[k].ok(S,v)&&!(typeof sameHouse==="function"&&sameHouse(S,v))){Q.push(start70(v,k));showModal();render();return}}catch(e){console.error(e)}
+  try{if(j70Wants(v,k)){Q.push(start70(v,k));showModal();render();return}}catch(e){console.error(e)}
   const r=d0.apply(this,arguments);
   try{if(j70On()&&k==="spy"&&v){const p=j70().pl.find(p=>!p.end&&p.a===v.id&&!p.kn);if(p&&roll(50)){p.kn=1;p.dig=1;p.kt.push(tellOf70(p,p.pg));p.pend=p.t==="me"?"seen":"npc";noteAdd(v.id,`dò la ra: nàng đang bày mưu ${pm70(p).n.toLowerCase()} nhắm vào ${nm70(pt70(p))}`);log(`Dò la ra: ${v.name} đang bày mưu ${pm70(p).n.toLowerCase()} nhắm vào ${nm70(pt70(p))}.`)}}}catch(e){console.error(e)}
   return r}})();
@@ -36251,7 +36259,7 @@ palFix=function(){if(!S||!rivals)return;rivals.forEach(ensureT2);const all=[S].c
  for(const p of rivals)if(!palLive(p)&&!p.coop&&(p.resHead!=null||p.resHall!=null)){p.resHead=null;p.resHall=null}
  /* a house over the cap (old saves had 3, a promotion placed someone first): the newest NPC extras leave and are housed again below */
  for(const h of hs){const M=mates(h);if(M.length<=cap)continue;const N=M.filter(y=>y!==S);for(const y of N.slice(-(M.length-cap))){y.resHead=null;y.resHall=null}}
- const pickHost=p=>{const c=hs.filter(x=>x!==p&&cnt(x)<cap);if(!c.length)return null;const m=Math.min(...c.map(cnt));return pick(c.filter(x=>cnt(x)===m))};
+ const pickHost=p=>{const c=hs.filter(x=>x!==p&&cnt(x)<cap);if(!c.length)return null;if(typeof pcHostPick==="function"){const h=pcHostPick(p,c,cnt);if(h)return h}/* promo-build PHÂN CUNG: the host by the royals' thiện cảm (jpromob), one rule for her and every NPC */const m=Math.min(...c.map(cnt));return pick(c.filter(x=>cnt(x)===m))};
  for(const p of all){if(!palLive(p)||p.queen)continue;const r=rkOf(p);
   if(r>=3&&p.pal!=null){p.resHead=null;p.resHall=null;if(p!==S)p.palWait=0;continue}
   if(p===S&&sv){S.resHead=null;continue}
@@ -36805,6 +36813,34 @@ Object.assign(BAL,{mem:{cap:5,fadeMo:2,keepFloor:.35,modDiv:8,modMax:10,recallMi
    psk.ghen = the jealousy of the other consorts when she is raised by a direct decree or a passed grace exam (jexam exDirectUp / exGraceUp). */
 Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{sung:6,errN:2,errAt:3,errGap:6},
  quyen:{danh:6,after:24,p:6,max:1,hitSung:10,hitDanh:6},seat:{bacM:4,hieuBac:120,danh:6,gifts:2,pow:8,dad:5,ghen:10,oan:6}}});
+/* BAL.promoR = PROMOTION BUILD part A + special routes + PHÂN CUNG (owner 24/11 ~07:55Z/~08:30Z/~09:15Z/~09:20Z/~09:35Z/~09:50Z; design
+   dev/handover/reports/promo-redesign.md §3–§5 on the handover branch; code jpromob.js).
+   ky = KỲ SẮC PHONG: the ordinary promotion is only looked at in a kỳ month. Each year a WORLD draw (era + the Emperor, same for both co-op seats) picks
+     which festival of p (FEST key → chance 0..99 it is a kỳ that year) is a kỳ; a kỳ closer than gapMin months to the last one is dropped; after gapMax
+     months with no kỳ the next festival is forced. thanhtho only while the Thái hậu lives. hold = months a special exam stays open at least (then it
+     lapses at the next kỳ if never sat).
+   mourn = months with no kỳ after the Thái hậu dies (quốc tang).
+   sp = SPECIAL EXAMS at daughter weight (one exam outside the kỳ; Sủng, Danh, the months since the last decree and the kỳ are waived; the seat, the
+     Hoàng hậu / Thái hậu block rows, cấm túc, lãnh cung still apply). A FAILED or missed special exam USES UP that chance (OD ~09:50Z).
+     sung (Hoàng thượng sủng ái): Sủng ≥ RANKS[next].s + the mean add of THIS Emperor's traits (def when a trait is not listed); ≤ 1 per every months,
+       ≤ life per life (OD ~09:15Z).
+     th (Thái hậu ân điển): Thái hậu quý ≥ cut[her archetype TH_ARCH] (def), once per life per Thái hậu (life), a new Thái hậu = a new chance.
+     hh (Hoàng hậu đề cử): Hoàng hậu quý ≥ cut[the Hoàng hậu's tính tình: her trait, else the first listed of her nết] (def), target rank ≤ maxTo, once per life per Hoàng hậu.
+     birth = special exams per birth (later sons and every daughter; the FIRST son = direct, PROMO_SRC.son1).
+     cost (law 3): sungGhen = palace ghen at her favour exam (NPC: the others oán sungOan); thSung = Sủng − (Bệ hạ sees a Thái hậu person);
+       hhOwe = nợ ân to the Hoàng hậu (j72 ledger; NPC: the others oán hhOan).
+   dl = ĐẠI LỄ (direct mass conferral, design §4b): NOT BUILT — waits for sếp's answer (direct only for those who meet Sủng + Danh?). on:0 keeps it off.
+   pc = PHÂN CUNG (jpal palFix host pick + the scene): score of a host h for a consort p = wE·sung'·standing' + wH·hh'·kind[h's tính tình] +
+     wT·th'·(h's Thái hậu favour) − load × h's co-residents; x' = (x − mid) / span clamped to ±1; standing' = (palace standing / 3 + nearness to the
+     Emperor's hall) − 1 (−1..1); kind = −2..2 per tính tình (÷2); a reason line names a royal when |x'| ≥ why. */
+Object.assign(BAL,{promoR:{ky:{p:{newyear:85,doanngo:20,vantho:75,thanhtho:55,dongchi:20},gapMin:3,gapMax:8,hold:2},mourn:27,
+ sp:{sung:{add:{datinh:4,mesac:6,nongnay:6,nhantu:8,trongtai:8,hieuthao:10,danghi:12,chamchinh:14,lanhlung:16},def:8,every:24,life:2},
+  th:{cut:{tuai:40,phat:45,nghiem:60,quyen:62,danghi:68},def:55,life:1},
+  hh:{cut:{"Ân cần":40,"Khiêm nhường":45,"Điềm tĩnh":50,"Nhiều chuyện":50,"Nóng nảy":55,"Kín đáo":60,"Lạnh lùng":65,"Tham vọng":62,"Xảo quyệt":66,"Kiêu ngạo":70},def:55,maxTo:4,life:1},
+  birth:1,cost:{sungGhen:10,sungOan:6,thSung:4,hhOwe:1,hhOan:4}},
+ dl:{on:0,minGap:24,bacM:1,ghen:6},
+ pc:{wE:1,wH:1,wT:1,load:.6,why:.25,mid:{sung:30,hh:0,th:0},span:{sung:40,hh:40,th:40},
+  kind:{"Ân cần":2,"Khiêm nhường":1,"Điềm tĩnh":1,"Rộng lượng":2,"Nhiều chuyện":0,"Kín đáo":0,"Lạnh lùng":-1,"Tham vọng":-1,"Xảo quyệt":-2,"Nóng nảy":-2,"Kiêu ngạo":-2}}}});
 /* BAL.il — ITEM LEDGER + ITEM CONSERVATION (owner 16/11 13:30Z (3) + 13:40Z ONE LEDGER; jil.js reads only these):
    no item ever vanishes. Sold → the market ("mkt"): each week it may show up in her Nội vụ phủ tray (shopP), and at the latest by the ceiling
    (retW weeks after the sale) someone brings it to her for ransom (ransomPct of its price); refused or unpaid → it comes again againW weeks later.
@@ -45979,6 +46015,9 @@ setTimeout(()=>{try{if(typeof ptSend!=="function"||typeof ptLand!=="function")re
    if(lack){a.back=1;try{PT.stat.back++}catch(x){}a.rep={t:a.lbl||"Đã về",ok:false,L:[`${lack}: ${ACT[e.k].n} không thành, chưa tốn gì.`],d:[]};return}/* F4: she cannot pay it any more → the deed comes back undone */econRoadPay(S,e.k,t,e.road,e.c)}}else e=null}catch(x){console.error("econ road land",x)}
   const A=arguments;return econPrFz(e,()=>l0.apply(this,A))}}catch(e){console.error("econ road ptime",e)}},0);
 (function(){if(typeof doAct!=="function")return;const d0=doAct;doAct=function(i,k){try{const v=rivals[i],A0=ACT[k];
+  /* j70's «Bày mưu» card goes first (review/fix-hadoc-loop): its «Ra tay ngay» comes back here (__j70inst) and gets the road card; the road
+     she then picks runs the act with ECON_HER set, which j70Wants reads, so neither card can call the other again */
+  if(typeof window.j70Wants==="function"&&window.j70Wants(v,k))return d0.apply(this,arguments);
   if(!ECON_ROADGO&&v&&A0&&A0.__c0&&!Q.length&&!S.dead&&v.alive&&!v.out&&can(typeof harmK==="function"?harmK(v,k):BAL.time.cost.harm)&&A0.ok(S,v)&&(econRoadOk(k,S,v,"tc")||econRoadOk(k,S,v,"hire"))){pushDil(mkP("roadpick",{v:v.id,k}),A0.n);for(const m of Q)if(m&&m.pid==="roadpick")m.act=1;/* KIT §28.6 data flag: the act's own picker (pushDil does not carry act) */render();return}}catch(e){console.error("road",e)}
   return d0.apply(this,arguments)}})();
 window.econRoadCost=econRoadCost;window.econRoadOk=econRoadOk;window.econRoadNpc=econRoadNpc;
@@ -55447,13 +55486,14 @@ function exOn(){return !!(typeof S!=="undefined"&&S&&BAL&&BAL.ex)}
 function exSrv(p){return p===S&&typeof isSrv==="function"&&isSrv()}
 function exRk(to){return to>=7?"Hoàng hậu":RANKS[Math.max(0,to)].n}
 function exTier(to){return to<=BAL.cut.exTier[0]?0:to<=BAL.cut.exTier[1]?1:2}
-function exCd(to){const c=BAL.ex.cd;return c[Math.max(0,Math.min(c.length-1,to))]}
+function exCd(to){try{if(typeof pbCdKy==="function"){const n=pbCdKy();if(n>0)return n}}catch(e){}const c=BAL.ex.cd;return c[Math.max(0,Math.min(c.length-1,to))]}/* promo-build: a fail / a lapse waits for the NEXT kỳ sắc phong (months to it) */
 function exLv(p,k){try{if(EXK[k])return typeof virLv==="function"?virLv(p,EXK[k].vir):0;return kg82LvFor(p,k)}catch(e){return 0}}
 function exArt(p,k){try{return typeof artLv==="function"?artLv(p,k):((p.arts||{})[k]||0)}catch(e){return 0}}
 function exVirN(k){const v=(typeof VIR!=="undefined"?VIR:[]).find(x=>x.k===k);return v?v.n:k}
 function exS(p){if(!p)return{};const to=rkOf(p)+1;let e=p.ex;if(!e||typeof e!=="object"||e.to!==to){const g=e&&e.grace===to?to:null,gw=e&&e.gw;e=p.ex={to};if(g){e.grace=g;if(gw)e.gw=gw}}return e}
 /* why the exam was granted without the conditions: a daughter's birth ("f"); old saves (son grace before 20:05Z) read as "m" */
-function exGw(e){return e&&e.gw==="f"?"mừng công chúa":"mừng hoàng tử"}
+const EX_GW={f:"mừng công chúa",m:"mừng hoàng tử",sung:"Hoàng thượng sủng ái",th:"Thái hậu ân điển",hh:"Hoàng hậu đề cử"};/* promo-build: the special routes (jpromob pbGrant) */
+function exGw(e){return (e&&EX_GW[e.gw])||"mừng hoàng tử"}
 /* the rounds for the target rank */
 function exRounds(p,tier){if(tier===0)return["le",exArt(p,"nau")>exArt(p,"theu")?"banh":"theu"];
  if(tier===1){let b=EX_CKTT[0];for(const x of EX_CKTT)if(exArt(p,x[0])>exArt(p,b[0]))b=x;return[b[1],"doi"]}return["tc","xa","thq"]}
@@ -55484,7 +55524,10 @@ function exChance(p){const P=exPlan(p);const rnd=exRng(((p.id||7)*977+S.turn*131
    the wait since the last decree does not count (as candOK, j34) */
 const EX_SKIP=/^Ghế |Chờ ghế|Đang tranh ghế/;let exQ0=null;
 function exBase(p){const to=rkOf(p)+1;return (exQ0?exQ0(p):[]).filter(x=>!EX_SKIP.test(x[1])&&!(to===7&&/Cách lần/.test(x[1])))}
-function exElig(p){if(!exOn()||!p||rkOf(p)>=7||p.out||p.confined||exSrv(p)||(p!==S&&p.alive===false))return false;const e=exS(p);if(e.grace===e.to&&e.to<7)return true;const L=exBase(p);return L.length>0&&L.every(x=>x[0])}
+function exElig(p){if(!exOn()||!p||rkOf(p)>=7||p.out||p.confined||exSrv(p)||(p!==S&&p.alive===false))return false;const e=exS(p);const L=exBase(p);if(e.grace===e.to&&e.to<7)return L.filter(x=>!EX_WAIVE.test(x[1])).every(x=>x[0]);return L.length>0&&L.every(x=>x[0])}
+/* promo-build (OD 24/11 ~08:30Z/~09:15Z): a SPECIAL exam (daughter weight) waives only Sủng, Danh, the months since the last decree and the kỳ; the seat
+   (waited for after the exam), the Hoàng hậu / Thái hậu block rows, cấm túc and lãnh cung still apply */
+const EX_WAIVE=/^Sủng |^Danh |^Cách lần|^Kỳ sắc phong/;
 function exCanSit(p){const e=exS(p);return !e.pass&&!(e.cd>S.turn)&&exElig(p)}
 /* dates in the game's own words (kitDate) */
 function exDateT(turn,tuan){const d=turn-S.turn;const m0=S.month-1+d;const m=((m0%12)+12)%12+1,y=S.year+Math.floor(m0/12);
@@ -55512,14 +55555,16 @@ function exDirectUp(p,why,o){o=o||{};const me=p===S;if(!p||rkOf(p)>=6||p.out)ret
  return me?`<b class="g">Thánh chỉ: ${why}, tấn phong ${S.name} làm ${RANKS[S.rank].n}</b> (không qua khảo hạch). `:`${p.name} được tấn phong ${RANKS[p.rank].n} (${why}). `}
 function exSonUp(p){return exDirectUp(p,"mừng hoàng tử")}
 /* the ONE player text of these rules (j6 / jtabs help lines, the «Khảo hạch tấn phong» gloss): reads PROMO_SRC, never typed per place */
-function promoRuleTxt(){const d=k=>PROMO_SRC[k]==="direct";return `Sinh hoàng tử đầu lòng: ${d("son1")?"tấn phong ngay, không phải thi":"được ân thi ngay"}; hoàng tử sau và công chúa: được ân thi ngay, không cần đủ điều kiện. Phe mình thắng cuộc triều cục: tấn phong thẳng, không qua khảo hạch. Ghế trên đã đủ người thì được hậu thưởng thay, muốn lên vẫn phải thi như mọi người.`}
+function promoRuleTxt(){const d=k=>PROMO_SRC[k]==="direct",K=BAL.promoR.ky,P=BAL.promoR.sp,yr=n=>n%12?`${n} tháng`:`${n/12} năm`;
+ return `Thăng phẩm thường chỉ xét ở kỳ sắc phong: vài dịp lễ trong năm, cách nhau ${K.gapMin} đến ${K.gapMax} tháng, không đều. Đến kỳ mà đủ mọi điều kiện thì được dự khảo hạch, đỗ mới được phong; trượt thì chờ kỳ sau. Sinh hoàng tử đầu lòng: ${d("son1")?"tấn phong ngay, không phải thi":"được thi riêng"}. Hoàng tử sau và công chúa: mỗi lần sinh được ${P.birth} lần thi riêng ngoài kỳ, không cần đủ Sủng, Danh, thời gian; còn ghế, Hoàng hậu và Thái hậu không chặn mới được thi. Được Hoàng thượng sủng ái hơn người (mức Sủng tùy nết Hoàng thượng): một lần thi riêng, ${yr(P.sung.every)} mới có lại, cả đời ${P.sung.life} lần. Thái hậu ân điển, Hoàng hậu đề cử (đến ${RANKS[P.hh.maxTo].n}): mỗi vị ${P.th.life} lần trong đời, mức thiện cảm tùy nết từng vị. Thi riêng trượt hay lỡ hạn là hết lượt ân ấy, chờ kỳ sắc phong. Phe mình thắng cuộc triều cục: tấn phong thẳng, không qua khảo hạch. Ghế trên đã đủ người thì được hậu thưởng thay, muốn lên vẫn phải thi như mọi người.`}
 /* ONE hook for every long-road promotion reward (owner 16/11 06:45Z + 07:15Z). PROMO_SRC = the switch per source: "direct" rank, "grace" =
    an exam at once with the conditions waived, "none" = no rank. son1 = that mother's FIRST prince; later sons and every princess = grace.
    Faction road: every winning side = direct (07:15Z). Seats (j30 SEATCAP) still apply: a direct reward that meets a full seat becomes
    a large one-off compensation (promoFullSeat, owner 07:20Z). EVERY reward has a gain AND a loss (owner 07:15Z): the loss per source is promoCost, numbers BAL.psk (jbal2). */
-const PROMO_SRC={son1:"direct",son:"grace",dau:"grace",emp:"direct",th:"direct",quyen:"direct"};
+const PROMO_SRC={son1:"direct",son:"special",dau:"special",emp:"direct",th:"direct",quyen:"direct"};/* promo-build (OD 24/11 ~07:55Z): later sons and every daughter = "special" = ONE special exam per birth (jpromob pbGrant), no longer the old "grace" that waived every condition */
 const PROMO_WHY={son1:"mừng hoàng tử",emp:"phò tá có công",th:"Thái hậu tâu xin",quyen:"triều thần dâng sớ tiến cử"};
 function promoReward(p,src,o){o=o||{};const m=PROMO_SRC[src]||"none";if(m==="none"||!p||rkOf(p)>=6||p.out)return"";
+ if(m==="special")return typeof pbGrant==="function"?pbGrant(p,src==="dau"?"f":"m",{birth:1}):"";
  if(m==="grace")return typeof exGrace==="function"?exGrace(p,src==="dau"?"f":"m"):"";
  const nx=rkOf(p)+1;const r=(typeof seatFree==="function"&&!seatFree(nx))?promoFullSeat(p,src,o):exDirectUp(p,o.why||PROMO_WHY[src]||"ân điển",o);
  return r?r+promoCost(p,src):""}
@@ -55574,7 +55619,8 @@ function exDone(p,r){const e=exS(p),to=e.to,rk=exRk(to),me=p===S;e.n=(e.n||0)+1;
  const N=window.__exN;if(me){N.sit++;if(r.pass)N.pass++}else{N.npcSit++;if(r.pass)N.npcPass++}
  if(r.pass){e.pass=true;e.lapse=0;if(!me)return"";log(`<b class="g">Đỗ khảo hạch tấn phong ${rk}</b> (${r.total} phần, mức đỗ ${r.P.bar}).`);exDrop();
   const t=promoteP(S);if(t)log(t);else log(to>=7?"Đã đỗ: chờ Hoàng thượng chọn người lập Hoàng hậu.":`Đã đỗ: chờ ghế ${rk} trống thì có thánh chỉ.`);return t||""}
- e.cd=S.turn+exCd(to);e.lapse=0;
+ e.cd=S.turn+exCd(to);e.lapse=0;const sp=e.grace===to?exGw(e):"";if(sp){delete e.grace;delete e.gw;delete e.gx}/* promo-build (OD ~09:50Z): a failed special exam USES UP that chance */
+ if(me&&sp)log(`Thi riêng (${sp}) đã trượt: hết lượt ân ấy, chờ kỳ sắc phong.`);
  if(me){log(`<span class="r">Trượt khảo hạch tấn phong ${rk}</span> (${r.total} phần, mức đỗ ${r.P.bar}): chờ đến ${exDateT(e.cd)} mới được thi lại.`);exDrop();return""}
  try{newsAdd(p,"exam",`${p.name} trượt khảo hạch tấn phong ${rk}.`,true)}catch(x){}return""}
 /* NPCs sit the exam when the month's decree would look at them (rivalsMonth → promoteP); a son's grace raises the rank once passed */
@@ -55588,10 +55634,10 @@ function exTick(){if(!exOn()||S.dead||S.out||exSrv(S)||S.rank>=7)return;const e=
  if(S.exV==null){S.exV=1;if((S.turn||0)>0)log("Luật mới trong cung: từ nay muốn thăng phẩm phải qua khảo hạch tấn phong; đủ điều kiện chỉ là được thi.")}
  if(e.pend&&!document.getElementById("kg82"))exAbort();
  if(e.pass||e.pend)return;const w=wk();
- if(e.w1!=null){if(w>e.w1){e.w0=e.w1=null;e.cd=S.turn+exCd(e.to);e.lapse=1;window.__exN.lapse++;exDrop();
-   log(`<span class="r">Lỡ hạn khảo hạch tấn phong ${exRk(e.to)}</span>: chờ đến ${exDateT(e.cd)} mới được thi.`)}
+ if(e.w1!=null){if(w>e.w1){e.w0=e.w1=null;e.cd=S.turn+exCd(e.to);e.lapse=1;e.kyw=null;window.__exN.lapse++;exDrop();const sp=e.grace===e.to?exGw(e):"";if(sp){delete e.grace;delete e.gw;delete e.gx}
+   log(`<span class="r">Lỡ hạn khảo hạch tấn phong ${exRk(e.to)}</span>: ${sp?`hết lượt thi riêng (${sp}); `:""}chờ đến ${exDateT(e.cd)} mới được thi.`)}
   else if(!exElig(S)){e.w0=e.w1=null;exDrop()}return}
- if(e.cd>S.turn||!exElig(S))return;e.w0=w;e.w1=w+BAL.ex.win-1;e.lapse=0;const P=exPlan(S);
+ if(e.cd>S.turn||!exElig(S))return;e.w0=w;e.w1=w+BAL.ex.win-1;e.lapse=0;e.kyw=e.grace===e.to?null:(typeof pbA==="function"?pbA():1);/* promo-build: a window opened by a kỳ stays open to its end in the next month */const P=exPlan(S);
  log(`<b class="g">Được dự khảo hạch tấn phong ${exRk(e.to)}</b>: ${P.ex?P.ex.name:"Nội vụ phủ"} khảo, hạn đến hết ${exDateW(e.w1)}. Thẻ «Khảo hạch tấn phong» ở Hành sự.`);exAdd()}
 /* the act card: true cost, the honest chance (as one who plays at her own level), what a fail costs */
 function exCard(){const e=exS(S),P=exPlan(S),o=oddsCl(exChance(S));const names=P.rounds.map(k=>KG82_KIND[k].n.toLowerCase()).join(", ");
@@ -55705,19 +55751,182 @@ function exChips(){if(!exOn()||S.rank>=7||S.out)return"";const e=exS(S);const L=
  if(e.last&&!e.pass)L.push(["n",`Lần trước: ${e.last.s}/${e.last.b} phần`]);
  return L.map(([c,t])=>kitChip(t,c)).join(" ")}  /* kit status chips (KIT kitChip(text,"g"|"r"|"n")) */
 if(typeof KIT_GLOSS!=="undefined")KIT_GLOSS["Khảo hạch tấn phong"]="";
-(function(){const t=()=>{try{const B=BAL.ex;KIT_GLOSS["Khảo hạch tấn phong"]=`Đủ điều kiện sắc phong chỉ là được thi. Từ lúc đủ, ngươi có ${B.win} tuần để dự khảo hạch (thẻ ở Hành sự); lỡ hạn thì chờ như trượt. Phẩm thấp thi lễ nghi và nữ công; phẩm giữa thi cầm kỳ thi họa và câu đối; phẩm cao thi trị cung, xử án và đối đáp với Thái hậu. Tổng phần = phần thi các môn (mỗi môn 0–10, lấy trung bình nhân ${B.wPlay}) + Tứ đức + tài nghệ; giám khảo (Hoàng hậu, phẩm cao: Thái hậu) quý ngươi thì hạ mức đỗ, ghét thì nâng. Trượt: chờ ${B.cd[1]}–${B.cd[7]} tháng (phẩm càng cao càng lâu). Phi tần khác cũng thi như vậy. ${promoRuleTxt()} Cung nữ lên bậc cũng phải qua khảo hạch của Nội vụ phủ.`}catch(e){}};
+(function(){const t=()=>{try{const B=BAL.ex;KIT_GLOSS["Khảo hạch tấn phong"]=`Đủ điều kiện sắc phong chỉ là được thi, và chỉ ở kỳ sắc phong (hay một lần thi riêng được ân). Đến kỳ mà đủ, ngươi có ${B.win} tuần để dự khảo hạch (thẻ ở Hành sự); lỡ hạn thì chờ như trượt. Phẩm thấp thi lễ nghi và nữ công; phẩm giữa thi cầm kỳ thi họa và câu đối; phẩm cao thi trị cung, xử án và đối đáp với Thái hậu. Tổng phần = phần thi các môn (mỗi môn 0–10, lấy trung bình nhân ${B.wPlay}) + Tứ đức + tài nghệ; giám khảo (Hoàng hậu, phẩm cao: Thái hậu) quý ngươi thì hạ mức đỗ, ghét thì nâng. Trượt: chờ kỳ sắc phong tới. Phi tần khác cũng thi như vậy. ${promoRuleTxt()} Cung nữ lên bậc cũng phải qua khảo hạch của Nội vụ phủ.`}catch(e){}};
  if(typeof renderPanel0==="function"){const r0=renderPanel0;renderPanel0=function(){t();return r0.apply(this,arguments)}}})();
 window.exSrvPlan=exSrvPlan;window.exSrvGate=exSrvGate;window.exSrvNpc=exSrvNpc;window.exSrvS=exSrvS;window.exSrvStart=exSrvStart;window.exSrvMama=exSrvMama;window.exSonUp=exSonUp;window.exDirectUp=exDirectUp;window.promoRuleTxt=promoRuleTxt;window.promoReward=promoReward;window.promoFullSeat=promoFullSeat;window.PROMO_SRC=PROMO_SRC;window.exGrace=exGrace;
 window.exPlan=exPlan;window.exChance=exChance;window.exSim=exSim;window.exElig=exElig;window.exS=exS;window.exTick=exTick;window.exStart=exStart;
-/* kitPromoHook (MAIN 117 05:17Z, KIT §77c kitPromoChip; split from review/promo-hist ed47e570): READ-ONLY, her next promotion round under
-   TODAY's rules = {months, rank, miss, ready} or null (null = no chip: dead / out / Hoàng hậu / servant). months = the longest of the waits the ordinary
-   road checks in time (promoGap since the last decree, the exam cooldown); 0 = no time wait left. ready = she may sit now (exCanSit: exElig + no cooldown + not yet passed). miss = the other unmet promoReqP rows
-   (Sủng / Danh / Hoàng hậu / Thái hậu / seat…), so the chip never promises a round the rules would refuse. Writes nothing to S. */
-window.kitPromoHook=function(){if(!S||S.dead||S.out||rkOf(S)>=7||exSrv(S))return null;const had="ex" in S,ex0=S.ex,ej=JSON.stringify(ex0);
+/* kitPromoHook (MAIN 117 05:17Z, KIT §77c kitPromoChip; split from review/promo-hist ed47e570; promo-build: the NEW rules): READ-ONLY, her next
+   promotion chance = {months, rank, miss, ready, ky, sp} or null (null = no chip: dead / out / Hoàng hậu / servant).
+   ready = she may sit now (exCanSit: a kỳ window or a special exam open, every row met, no cooldown, not yet passed) → months 0.
+   Otherwise months = months to the first kỳ sắc phong at which the time rows can be met (promoGap since the last decree, the exam cooldown), ky = its
+   festival name; a kỳ month she cannot use (rows unmet) points to the NEXT kỳ. miss = the other unmet promoReqP rows (Sủng / Danh / Hoàng hậu /
+   Thái hậu / seat…). sp = the special exam she holds (its why) or "". Writes nothing to S (S.ex and S.pb restored). */
+window.kitPromoHook=function(){if(!S||S.dead||S.out||rkOf(S)>=7||exSrv(S))return null;const had="ex" in S,ex0=S.ex,ej=JSON.stringify(ex0);const hp="pb" in S,pj=JSON.stringify(S.pb);
  try{const r=rkOf(S),e=exS(S);const gap=Math.max(0,promoGap(r)-(S.turn-(S.lastPromo||0))),cd=e.cd>S.turn?e.cd-S.turn:0;
- const now=exCanSit(S);const L=now?[]:promoReqP(S).filter(x=>!x[0]&&!/Cách lần|Khảo hạch/.test(x[1])).map(x=>x[1]);
- return{months:now?0:Math.max(gap,cd),rank:RANKS[r+1]?RANKS[r+1].n:"Hoàng hậu",miss:L,ready:!!now}}catch(e){return null}
- finally{if(!had)delete S.ex;else if(S.ex!==ex0||JSON.stringify(S.ex)!==ej)S.ex=ex0==null?ex0:JSON.parse(ej)}};
+ const now=exCanSit(S);const L=now?[]:promoReqP(S).filter(x=>!x[0]&&!/Cách lần|Khảo hạch|^Kỳ sắc phong/.test(x[1])).map(x=>x[1]);const sp=e.grace===e.to?exGw(e):"";
+ let months=0,ky="";if(!now&&typeof pbNextKy==="function"){const A=pbA(),w=Math.max(gap,cd);const n=pbNextKy(A+Math.max(w,typeof pbKyAt==="function"&&pbKyAt(A)?1:0));
+  if(n){months=n.A-A;ky=n.n}else months=w}else if(!now)months=Math.max(gap,cd);
+ return{months,rank:RANKS[r+1]?RANKS[r+1].n:"Hoàng hậu",miss:L,ready:!!now,ky,sp}}catch(e){return null}
+ finally{if(!had)delete S.ex;else if(S.ex!==ex0||JSON.stringify(S.ex)!==ej)S.ex=ex0==null?ex0:JSON.parse(ej);if(!hp)delete S.pb;else if(JSON.stringify(S.pb)!==pj)S.pb=JSON.parse(pj)}};
+/* ================= jpromob: PROMOTION BUILD part A + special routes + PHÂN CUNG (Foreman D promo-build; owner 24/11 ~07:55Z, ~08:30Z, ~09:15Z,
+   ~09:20Z, ~09:35Z, ~09:50Z; design dev/handover/reports/promo-redesign.md on the handover branch; numbers BAL.promoR, jbal2) =================
+   (1) KỲ SẮC PHONG: no monthly promotion check any more. The ordinary road (every promoReqP row + the exam) is looked at only in a kỳ month: a few
+       festivals a year, irregular gaps (BAL.promoR.ky). promoReqP (j8) carries the row «Kỳ sắc phong …» (pbKyRow), so every reader — her exam window
+       (jexam exTick), the NPC exam (jexam promoteP wrapper), fillSeats / contests (j34), the help panel — follows ONE rule (law 1). A fail or a lapse
+       waits for the next kỳ (jexam exCd → pbCdKy).
+   (2) SPECIAL EXAMS (daughter weight): one exam outside the kỳ; Sủng / Danh / months / kỳ waived (jexam EX_WAIVE), the seat and the block rows still apply.
+       Routes: every daughter and every later son (PROMO_SRC "special", one per birth), Hoàng thượng sủng ái (Sủng ≥ the cut of THIS Emperor's nết,
+       ≤ 1 per BAL.promoR.sp.sung.every months, ≤ life per life), Thái hậu ân điển, Hoàng hậu đề cử (thiện cảm ≥ the cut of the patron's nết; once per
+       life per patron, a new patron = a new chance). A failed or missed special exam USES UP that chance (jexam exDone / exTick). One special exam at a
+       time: a birth while one is open waits in a queue (p.pbs.q). An unused special exam lapses at the next kỳ (after at least ky.hold months).
+       Every route has a loss (law 3, BAL.promoR.sp.cost). NPCs: the same checks every month (host only in co-op), their exam in jexam.
+   (3) PHÂN CUNG: window.phanCungEdict({list:[{p,fav:{E,T,H}}],then}) (called by SELSCENE when «Tin sắc phong» closes) re-houses the listed people by
+       the ONE rule of jpal palFix (pcHostPick: Hoàng thượng's favour → a nearer / better palace, Hoàng hậu's → a kind or a harsh host, Thái hậu's → a
+       host she favours) and shows a kit panel (decree line + where + why); then() when it closes. The same rule places everyone at every later palFix;
+       a promotion that changes her lodging shows the same panel.
+   (4) kitPromoHook (jexam) reads pbNextKy: months to the next kỳ, its festival, ready, miss.
+   ĐẠI LỄ (design §4b) waits for sếp: BAL.promoR.dl.on = 0, nothing built.
+   State: S.pb = {ky:{last, upto, at:{A:festKey}}, mt (mourning until A), thd, kn (A of the last kỳ notice), hr / hk (her rank / house at the last
+   palFix)}; p.pbs = {sung:{n,at}, th:{key:1}, hh:{key:1}, q:[src…]}; p.ex.gx = the A where an unused special exam lapses. A = year·12 + month − 1. */
+
+/* ---------- the kỳ calendar ---------- */
+function pbA(){return (S.year||0)*12+((S.month||1)-1)}
+function pbAM(A){return ((A%12)+12)%12+1}
+function pbAY(A){return Math.floor(A/12)}
+function pbAT(A){return S.turn+(A-pbA())}/* the turn of that month (as seen now) */
+/* world draw 0..99 of a festival in a year: the same on every seat of a co-op room (no Math.random), different for every Emperor (era + likes + traits) */
+function pbH(k,y){const E=S.emp||{},lk=E.likes||{};const s=`ky:${k}:${y}:${E.era||""}:${lk.flower||""}:${lk.music||""}:${lk.dish||""}:${[].concat(E.traits||[]).join()}`;
+ let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0)%100}
+function pbFests(A,thAlive){const F=typeof FEST!=="undefined"?FEST:{},P=BAL.promoR.ky.p,m=pbAM(A);return Object.keys(P).filter(k=>F[k]&&+F[k].m===m&&(k!=="thanhtho"||thAlive))}
+function pbFestN(k){try{return FEST[k].name}catch(e){return k}}
+/* one month of the calendar: the kỳ festival key or null; c = {last, mt} is moved on */
+function pbKyStep(c,A,thAlive){const K=BAL.promoR.ky;if(c.mt!=null&&A<c.mt)return null;const L=pbFests(A,thAlive);if(!L.length)return null;
+ const gap=c.last==null?K.gapMax:A-c.last;if(gap<K.gapMin)return null;const d=L.find(k=>pbH(k,pbAY(A))<K.p[k]);const k=d||(gap>=K.gapMax?L[0]:null);if(k)c.last=A;return k}
+function pbSt(){if(!S.pb||typeof S.pb!=="object")S.pb={};const P=S.pb;if(!P.ky||typeof P.ky!=="object"){const A=pbA();P.ky={last:A-BAL.promoR.ky.gapMin,upto:A-1,at:{}}}return P}
+/* fix the calendar up to this month (stored, so a past kỳ never moves); the Thái hậu's death starts the mourning */
+function pbKyUpdate(){if(!S||!BAL.promoR)return;const P=pbSt(),A=pbA();
+ if(S.thDead&&!P.thd){P.thd=1;P.mt=A+BAL.promoR.mourn;try{if(S.thO)delete S.thO.pbK}catch(e){}}else if(!S.thDead&&P.thd)P.thd=0;
+ const K=P.ky;if(K.upto>=A)return;const c={last:K.last,mt:P.mt};for(let a=Math.max(K.upto+1,A-24);a<=A;a++){const k=pbKyStep(c,a,!S.thDead);if(k)K.at[a]=k}K.last=c.last;K.upto=A;
+ for(const a in K.at)if(+a<A-36)delete K.at[a]}
+/* the kỳ of month A (pure: a future month is simulated from the stored calendar with today's world, nothing is written) */
+function pbKyAt(A){const P=S.pb,K=P&&P.ky;if(K&&A<=K.upto)return K.at[A]||null;const c={last:K?K.last:pbA()-BAL.promoR.ky.gapMin,mt:P?P.mt:null};
+ for(let a=K?K.upto+1:pbA();a<=A;a++){const k=pbKyStep(c,a,!S.thDead);if(a===A)return k}return null}
+function pbNextKy(from){const P=S.pb,K=P&&P.ky;const c={last:K?K.last:pbA()-BAL.promoR.ky.gapMin,mt:P?P.mt:null};const a0=K?K.upto+1:pbA();
+ for(let a=Math.min(from,a0);a<=from+48;a++){let k;if(K&&a<=K.upto)k=K.at[a]||null;else k=pbKyStep(c,a,!S.thDead);if(a>=from&&k)return{A:a,k,n:pbFestN(k)}}return null}
+/* months a fail / a lapse waits (jexam exCd): to the next kỳ after this month */
+function pbCdKy(){if(!S||!BAL.promoR)return 0;const A=pbA(),n=pbNextKy(A+1);return n?Math.max(1,n.A-A):0}
+/* the promoReqP row (j8): true in a kỳ month, while her kỳ window runs on, or once the exam is passed (the decree waits for a seat) */
+function pbKyRow(p){try{if(!BAL.promoR||typeof exOn!=="function"||!exOn()||!p||p.out||rkOf(p)+1>=7||(typeof exSrv==="function"&&exSrv(p)))return null;const e=p.ex,to=rkOf(p)+1;
+ if(e&&e.to===to&&e.pass)return[true,"Kỳ sắc phong: đã đỗ khảo hạch"];const A=pbA(),k=pbKyAt(A);if(k)return[true,`Kỳ sắc phong: ${pbFestN(k)} (đang mở)`];
+ if(p===S&&e&&e.to===to&&e.w1!=null&&e.kyw!=null)return[true,"Kỳ sắc phong: đang trong hạn thi"];
+ const n=pbNextKy(A+1);return[false,n?`Kỳ sắc phong: chưa tới (kỳ tới ${n.n}, còn ${n.A-A} tháng)`:"Kỳ sắc phong: chưa tới"]}catch(x){console.error("pbKyRow",x);return null}}
+
+/* ---------- special exams (daughter weight) ---------- */
+function pbGuest(){return !!(window.COOPW&&COOPW.on&&COOPW.seat&&COOPW.seat!=="a")}
+function pbS(p){if(!p.pbs||typeof p.pbs!=="object")p.pbs={};const s=p.pbs;s.sung=s.sung||{n:0,at:null};s.th=s.th||{};s.hh=s.hh||{};s.q=s.q||[];return s}
+function pbLive(p){return p===S?!S.dead&&!S.out&&!(S.succ&&S.succ.on):!!p&&p.alive!==false&&!p.out&&!p.coop}
+function pbCan(p){return typeof exOn==="function"&&exOn()&&pbLive(p)&&!(typeof exSrv==="function"&&exSrv(p))&&!p.queen&&rkOf(p)<6}
+function pbOpen(p){const e=exS(p);return e.grace===e.to||!!e.pass||!!e.pend||(p===S&&e.w1!=null)}
+/* the rows a special exam still needs (seat waited after the exam): all met? */
+function pbRowsOk(p){try{return exBase(p).filter(x=>!EX_WAIVE.test(x[1])).every(x=>x[0])}catch(e){return false}}
+/* the whole ordinary road met (then a special exam would waste a life chance: she sits the kỳ) */
+function pbRoadDone(p){try{return exBase(p).filter(x=>!/^Kỳ sắc phong/.test(x[1])).every(x=>x[0])}catch(e){return false}}
+function pbThK(){if(S.thDead)return null;S.thO=S.thO||{};if(!S.thO.pbK){const P=pbSt();P.thn=(P.thn||0)+1;S.thO.pbK="th"+P.thn}return S.thO.pbK}/* one key per Thái hậu: her death clears it (pbKyUpdate), the next one gets a new key = a new chance */
+function pbTemper(v,T){if(!v)return null;if(v.trait&&T[v.trait]!=null)return v.trait;for(const n of [].concat(v.net||[]))if(T[n]!=null)return n;return null}
+function pbSungCut(p){const B=BAL.promoR.sp.sung,tr=[].concat((S.emp&&S.emp.traits)||[]);const add=tr.length?tr.reduce((a,t)=>a+(B.add[t]!=null?B.add[t]:B.def),0)/tr.length:B.def;
+ return Math.round(RANKS[Math.min(RANKS.length-1,rkOf(p)+1)].s+add)}
+function pbThCut(){const B=BAL.promoR.sp.th;const a=S.thO&&S.thO.arch;return B.cut[a]!=null?B.cut[a]:B.def}
+function pbHhCut(q){const B=BAL.promoR.sp.hh;const t=pbTemper(q,B.cut);return t?B.cut[t]:B.def}
+function pbHhOf(p){return Math.round(p===S?(S.hh||0):(p.hh||0))}
+function pbEmpNet(){const tr=[].concat((S.emp&&S.emp.traits)||[]);return tr.map(t=>(typeof ETRAITS!=="undefined"&&ETRAITS[t]?ETRAITS[t][0]:t).toLowerCase()).join(", ")}
+/* grant one special exam: src f/m (birth), sung, th, hh. Returns the line (her: log text; NPC: news). */
+function pbGrant(p,src,o){o=o||{};if(!pbCan(p))return"";const me=p===S;const e=exS(p);
+ if(pbOpen(p)){if(o.birth){pbS(p).q.push(src);return me?"Ân thi riêng mừng sinh nở được giữ lại, chờ lần thi riêng đang mở xong. ":""}return""}
+ e.grace=e.to;e.gw=src;e.cd=0;e.lapse=0;const A=pbA(),n=pbNextKy(A+BAL.promoR.ky.hold);e.gx=n?n.A:A+BAL.promoR.ky.gapMax;
+ const rk=exRk(e.to),nm=me?"ngươi":p.name,cost=pbCost(p,src,o);let why;
+ if(src==="f")why="Mừng công chúa ra đời";else if(src==="m")why="Mừng hoàng tử ra đời";
+ else if(src==="sung")why=`Hoàng thượng sủng ái ${nm} hơn người (Sủng ${Math.round(p.sung||0)}; bệ hạ ${pbEmpNet()}, cần ${o.cut})`;
+ else if(src==="th")why=`Thái hậu thương ${nm} (Thái hậu quý ${nm} ${Math.round(p.th||0)}; bà ${(S.thO&&TH_ARCH[S.thO.arch]?TH_ARCH[S.thO.arch].n:"").toLowerCase()}, cần ${o.cut}), bà tâu xin`;
+ else why=`Hoàng hậu đề cử ${nm} (Hoàng hậu quý ${nm} ${pbHhOf(p)}; bà ${String(o.t||"").toLowerCase()}, cần ${o.cut})`;
+ const capT=src==="sung"?` Lần ${pbS(p).sung.n} trong ${BAL.promoR.sp.sung.life} lần của đời; lần sau sớm nhất sau ${BAL.promoR.sp.sung.every} tháng.`:src==="th"||src==="hh"?` Mỗi vị chỉ ân một lần trong đời.`:"";
+ const t=me?`<b class="g">${why}: ân cho ngươi một lần thi riêng tấn phong ${rk} ngoài kỳ</b>, không cần đủ Sủng, Danh; còn ghế và Hoàng hậu, Thái hậu không chặn mới được thi. Trượt hay lỡ hạn là hết lượt.${capT} ${cost}`
+  :`${p.name} được ân thi riêng tấn phong ${rk} (${why.replace(/^Mừng/,"mừng")}). ${cost}`;
+ window.__pbN=window.__pbN||{};const N=window.__pbN;N[src]=(N[src]||0)+1;N[me?"me":"npc"]=(N[me?"me":"npc"]||0)+1;
+ if(!me)try{newsAdd(p,"promo",t,true)}catch(x){}return t}
+/* the loss of each route (law 3); the same for an NPC */
+function pbCost(p,src,o){const C=BAL.promoR.sp.cost,me=p===S;let t="";try{
+ if(src==="sung"){if(me){ghenAll(C.sungGhen,"ngươi được ân thi riêng");t=`Lục cung ghen (ghen +${ghenN(C.sungGhen)}). `}else for(const v of consorts())if(v!==p&&!v.out)oanAdd(v,p,C.sungOan)}
+ else if(src==="th"){if(me){apply({sung:-C.thSung});t=`Bệ hạ coi ngươi là người của Thái hậu (${typeof sgStat==="function"?sgStat(-C.thSung):"Sủng −"+C.thSung}). `}else p.sung=Math.max(0,(p.sung||0)-C.thSung)}
+ else if(src==="hh"){const q=o.q;if(me){try{q72DebtAdd(q72A("hh",q.id),-C.hhOwe)}catch(x){}t=`Ngươi mang ơn Hoàng hậu một việc (nợ ân ${C.hhOwe}). `}
+  else for(const v of consorts())if(v!==p&&v!==q&&!v.out)oanAdd(v,p,C.hhOan)}
+ }catch(x){console.error("pbCost",x)}return t}
+/* the month's checks for one person: queue first, then favour, Thái hậu, Hoàng hậu (one grant a month at most) */
+function pbTry(p){if(!pbCan(p))return"";const s=pbS(p),e=exS(p),A=pbA();
+ if(e.grace===e.to&&e.gx!=null&&A>=e.gx&&!e.pass&&!e.pend&&!(p===S&&e.w1!=null)){delete e.grace;delete e.gw;delete e.gx;if(p===S)log("Lượt thi riêng chưa dùng đã hết hạn, tới kỳ sắc phong thì xét như mọi người.")}
+ if(pbOpen(p))return"";if(s.q.length)return pbGrant(p,s.q.shift(),{birth:1});
+ if(p.confined||pbRoadDone(p)||!pbRowsOk(p))return"";const SP=BAL.promoR.sp;
+ const cs=pbSungCut(p);if((p.sung||0)>=cs&&s.sung.n<SP.sung.life&&(s.sung.at==null||S.turn-s.sung.at>=SP.sung.every)){s.sung.n++;s.sung.at=S.turn;return pbGrant(p,"sung",{cut:cs})}
+ const tk=pbThK();if(tk&&(s.th[tk]||0)<SP.th.life){const ct=pbThCut();if((p.th||0)>=ct){s.th[tk]=(s.th[tk]||0)+1;return pbGrant(p,"th",{cut:ct})}}
+ const q=typeof queenP==="function"?queenP():null;if(q&&q!==p&&q!==S&&!q.out&&q.alive!==false&&e.to<=SP.hh.maxTo){const qk="hh:"+key(q);
+  if((s.hh[qk]||0)<SP.hh.life){const ch=pbHhCut(q);if(pbHhOf(p)>=ch){s.hh[qk]=(s.hh[qk]||0)+1;return pbGrant(p,"hh",{cut:ch,q,t:pbTemper(q,SP.hh.cut)||""})}}}
+ return""}
+/* once a month (after the month turns): her own checks on every seat; the NPCs on solo / the co-op host only */
+function pbMonth(){if(!S||S.dead||!BAL.promoR)return"";pbKyUpdate();const P=pbSt();if(P.m===S.turn)return"";P.m=S.turn;let ev="";
+ try{const t=pbTry(S);if(t)ev+=t}catch(x){console.error("pbMonth",x)}
+ if(!pbGuest())for(const v of rivals.slice())try{pbTry(v)}catch(x){console.error("pbMonth",x)}
+ return ev}
+(function(){if(typeof monthTick!=="function")return;const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments)||"";try{if(S&&!S.dead)ev+=pbMonth()}catch(e){console.error("promo-build",e)}return ev}})();
+/* her kỳ notice: once per kỳ month, the festival + whether she may sit + when the next one is */
+function pbNotice(){if(!S||S.dead||S.out||rkOf(S)>=7||(typeof exSrv==="function"&&exSrv(S))||!exOn())return;pbKyUpdate();const P=pbSt(),A=pbA();
+ if(S.pbV==null){S.pbV=1;if((S.turn||0)>0)log("Luật mới trong cung: thăng phẩm thường chỉ xét ở kỳ sắc phong (vài dịp lễ trong năm); đủ điều kiện mới được dự khảo hạch.")}
+ const k=pbKyAt(A);if(!k||P.kn===A)return;P.kn=A;const e=exS(S),nm=pbFestN(k),n=pbNextKy(A+1),nx=n?` Kỳ tới: ${n.n}, còn ${n.A-A} tháng.`:"";
+ if(e.pass)return;const miss=promoReqP(S).filter(x=>!x[0]&&!/^Kỳ sắc phong|Khảo hạch/.test(x[1])).map(x=>x[1]);
+ if(miss.length)log(`${nm} là kỳ sắc phong. Ngươi chưa đủ điều kiện nên không được dự (${miss[0]}${miss.length>1?`, còn ${miss.length-1} điều nữa`:""}).${nx}`);
+ else log(`<b class="g">${nm} là kỳ sắc phong</b>: Nội vụ phủ mở khảo hạch tấn phong ${exRk(e.to)} cho người đủ điều kiện.${nx}`)}
+(function(){const t0=exTick;exTick=function(){try{pbNotice()}catch(e){console.error("pbNotice",e)}return t0.apply(this,arguments)}})();
+/* Mệnh truyện › Sắc phong: one more kit chip, the next kỳ */
+(function(){if(typeof exChips!=="function")return;const c0=exChips;exChips=function(){let h=c0.apply(this,arguments)||"";try{if(h&&BAL.promoR){const A=pbA(),k=pbKyAt(A),n=pbNextKy(A+1);
+ const e=exS(S);const sp=e.grace===e.to?exGw(e):"";if(sp)h+=" "+kitChip(`Thi riêng: ${sp}`,"g");h+=" "+kitChip(k?`Kỳ sắc phong: ${pbFestN(k)}`:n?`Kỳ tới: ${n.n}, còn ${n.A-A} tháng`:"Chưa định kỳ sắc phong",k?"g":"n")}}catch(e){}return h}})();
+
+/* ---------- PHÂN CUNG: the host rule (jpal palFix → pcHostPick) ---------- */
+function pcN(x,k){const B=BAL.promoR.pc;return cl(((x||0)-B.mid[k])/B.span[k],-1,1)}
+function pcFav(p){return{E:pcN(p.sung,"sung"),H:pcN(p===S?S.hh:p.hh,"hh"),T:pcN(p.th,"th")}}
+function pcStand(h){try{if(h.pal==null)return 0;return cl(bcDanh(h.pal)/3+bcNear(h.pal)-1,-1,1)}catch(e){return 0}}
+function pcKind(h){const B=BAL.promoR.pc;const t=pbTemper(h,B.kind);return t?B.kind[t]/2:0}
+function pcAlign(h){return cl((h.th||0)/BAL.promoR.pc.span.th,-1,1)}
+function pcParts(p,h){const B=BAL.promoR.pc,f=pcFav(p);return{E:B.wE*f.E*pcStand(h),H:B.wH*f.H*pcKind(h),T:B.wT*f.T*pcAlign(h),f}}
+function pcScore(p,h,n){const x=pcParts(p,h);return x.E+x.H+x.T-BAL.promoR.pc.load*(n||0)}
+/* the host for p among the hosts with a free room c (cnt = co-residents): highest score; ties → the existing order (fewest co-residents first) */
+function pcHostPick(p,c,cnt){try{if(!BAL.promoR||!c||!c.length)return null;let best=null,bs=-1e9;
+ const L=c.slice().sort((a,b)=>cnt(a)-cnt(b));for(const h of L){const s=pcScore(p,h,cnt(h));if(s>bs+1e-9){bs=s;best=h}}return best}catch(e){console.error("pcHostPick",e);return null}}
+/* the WHY of a placement (player-visible, cổ trang): names each royal whose thiện cảm moved it */
+function pcWhy(p){const me=p===S,B=BAL.promoR.pc,nm=me?"ngươi":p.name;const hd=typeof byKey==="function"?byKey(houseOf(p)):null;const L=[];
+ const own=rkOf(p)>=3&&p.pal!=null;const dh=(typeof PLNAME!=="undefined"&&PLNAME.dtd&&PLNAME.dtd[0])||"tẩm điện Hoàng thượng";const h=own?p:hd&&hd!==p?hd:null;const f=pcFav(p);
+ const hn=h&&h!==p?(typeof j78who==="function"?j78who(h):`${RANKS[rkOf(h)].n} ${h.name}`):"";
+ if(h){const x=pcParts(p,h);
+  if(Math.abs(f.E)>=B.why&&Math.abs(pcStand(h))>=B.why/2)L.push(f.E>0?`Hoàng thượng để mắt tới ${nm} (Sủng ${Math.round(p.sung||0)}): ${own?"được ban":"ở"} cung ${pcStand(h)>0?`gần ${dh}, danh giá`:`xa ${dh}`}`:`Hoàng thượng chưa để mắt tới ${nm} (Sủng ${Math.round(p.sung||0)}): ${own?"được ban":"ở"} cung ${pcStand(h)>0?`gần ${dh}`:`xa ${dh}`}`);
+  if(!own&&Math.abs(f.H)>=B.why&&pcKind(h)!==0&&Math.sign(x.H)>0)L.push(f.H>0?`được Hoàng hậu thương: xếp ở với ${hn}, người hiền hòa`:`Hoàng hậu không ưa ${nm}: xếp ở với ${hn}, người khó tính`);
+  if(!own&&Math.abs(f.T)>=B.why&&Math.abs(pcAlign(h))>=B.why&&Math.sign(x.T)>0)L.push(f.T>0?`Thái hậu thương ${nm}: chủ vị ${hn} là người được Thái hậu tin`:`Thái hậu không ưa ${nm}: chủ vị ${hn} cũng không được lòng Thái hậu`)}
+ if(!L.length)L.push(h&&h!==p?`Nội vụ phủ xếp ${nm} vào chỗ còn trống, ở với ${hn}`:`Nội vụ phủ xếp ${nm} vào chỗ còn trống`);return L}
+function pcWhere(p){try{return houseName(p)}catch(e){return palName("home")}}
+/* the panel (kit T1 panel via the Q modal + kitRows; no own part) */
+function pcPanel(list,o){o=o||{};const me=list.find(x=>x.p===S);const rows=[];
+ if(me){rows.push(["Nơi ở",pcWhere(S)]);rows.push(["Vì sao",pcWhy(S)])}
+ for(const x of list)if(x.p!==S&&pbLive(x.p))rows.push([x.p.name,`${pcWhere(x.p)} · ${pcWhy(x.p)[0]}`]);
+ const head=o.head||`Thái giám Nội vụ phủ tuyên chỉ phân cung: mỗi người theo cung nữ về nơi ở mới.`;
+ return{t:o.t||"Phân cung",who:me?pMe():null,h:`<p>${head}</p>${kitRows(rows)}`,btn:o.btn||"Về nơi ở mới"}}
+/* the hook (SELSCENE «Tin sắc phong» → here): re-house the listed people by the rule, show the panel, then() when it closes */
+window.phanCungEdict=function(o){o=o||{};const list=(o.list||[]).filter(x=>x&&x.p);const then=typeof o.then==="function"?o.then:()=>{};let done=false;const fin=()=>{if(done)return;done=true;try{then()}catch(e){console.error("phanCungEdict then",e)}};
+ try{if(!S||!list.length){fin();return}
+  const pc0=S.palCer;for(const x of list){const p=x.p;if(!pbLive(p)||p.queen)continue;if(rkOf(p)<3){p.resHead=null;p.resHall=null;if(p!==S&&p.palLone){p.pal=null;p.palLone=0}}else if(p!==S)p.pal=null}
+  S.__pcBusy=1;try{palFix()}finally{S.__pcBusy=0}if(pc0!=null)S.palCer=pc0;pcMark();
+  window.__pcN=(window.__pcN||0)+1;const m=pcPanel(list);m.onClose=fin;Q.unshift(m);try{showModal()}catch(e){}}catch(e){console.error("phanCungEdict",e);fin()}};
+/* later promotions that change her lodging: the same panel once (the Tần ban-cung ceremony, S.palCer, has its own scene) */
+function pcMark(){const P=pbSt();P.hr=rkOf(S);P.hk=String(houseOf(S))+"|"+(S.pal==null?"":S.pal)+"|"+(S.resHall||"")}
+(function(){if(typeof palFix!=="function")return;const f0=palFix;palFix=function(){const r=f0.apply(this,arguments);try{if(S&&!S.__pcBusy&&!S.dead&&!S.out&&BAL.promoR&&!(typeof isSrv==="function"&&isSrv())){const P=pbSt();
+ const hk=String(houseOf(S))+"|"+(S.pal==null?"":S.pal)+"|"+(S.resHall||"");if(P.hr==null){pcMark();return r}
+ if(rkOf(S)>P.hr&&hk!==P.hk&&!S.palCer&&rkOf(S)<7){Q.push(pcPanel([{p:S}],{head:`Thánh chỉ tấn phong ${RANKS[rkOf(S)].n} kèm lệnh dời chỗ ở.`}))}pcMark()}}catch(e){console.error("pc later",e)}return r};window.palFix=palFix})();
+window.pbKyAt=pbKyAt;window.pbNextKy=pbNextKy;window.pbGrant=pbGrant;window.pbTry=pbTry;window.pbMonth=pbMonth;window.pbKyRow=pbKyRow;window.pbA=pbA;window.pcHostPick=pcHostPick;window.pcWhy=pcWhy;window.pbSungCut=pbSungCut;window.pbThCut=pbThCut;window.pbHhCut=pbHhCut;window.pbCdKy=pbCdKy;window.pbHhOf=pbHhOf;window.pbKyUpdate=pbKyUpdate;
 /* ================= jkitpage: TRANG MẪU KIT — the kit sample page (luật KIT TRƯỚC, owner 11/15 16:50Z; tabs-kit r7) =================
    Open the game with "#kit" at the end of the address (…/index.html#kit) or call kitSamplePage() in the console: a full-screen page shows
    every registered kit part drawn by the REAL kit functions (no copies), at the current screen size. Close = the kit ✕ or remove "#kit".
@@ -96178,7 +96387,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="87eeb9be6cd3";window.CTM_BUILD=BUILD;
+const BUILD="f296ec0f193f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
