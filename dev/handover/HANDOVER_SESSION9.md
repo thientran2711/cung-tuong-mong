@@ -2739,3 +2739,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (00:18Z) LANDED know-notice → LIVE 16f5c1dc. KNOW-NOTICE JtW95DF2 + rv MzkmnYoW archived. GAP 6.
 - (00:18Z) OWNER age bands 18/28/39/51/64 (OD 00:25Z) → Foreman E ORDER AGEBAND (BIG, before TITLES2).
 - (00:26Z) KK14 MOCK-STAGE v3.3 7585debd: MAIN LOOKED at m3 f2 (hub: figure right, no outlines), f3 (picker left, figure right), f5 (mirror face only) Fold+iPad → link sent to sếp. KIT §94 draft review/kit-toilroom bb5ccd6d.
+- (00:33Z wake) ctx 25.7 % (roll line 32 %). LOAD: main running 5 (W2 idle, W4+rv map-label, KK14, SELSCENE) | B free 0 (THIN P0–P2 + P1b/P1c) | C busy (KP23 redraws, SELART, KP10) | D free 0 (robot10 harness rv + #6/#7/#8) | E busy (TITLES2 E55; AGEBAND ordered) | F silent (no first line yet — check next wake) | moved: none. coop-thin-g 70dc7244 (B LAND READY 23:30Z, missed by 113) → LC8. D: HH 0/10 in robot proof (#6 reco worker proposes BAL).
