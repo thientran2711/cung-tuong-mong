@@ -36,3 +36,29 @@ Tags: [K] history, [D] drama. (hi) = high, (mid) = medium, (lo) = low confidence
 - RECEPTION: yes, ONE shared "Tiền sảnh / Giảng đường" (hall) where the ma ma teaches and the girls meet; no private reception rooms (they have no rank).
 - SUPERVISION: «Giáo dưỡng ma ma» (a real NPC, law 6b) sent by Nội vụ phủ under the Hoàng hậu's authority, plus a gate eunuch; one cung-nữ per room cluster for errands. The ma ma opens/closes the gate → fits "before the edict she is locked from other cung".
 - Compression: real gap of weeks → 1 playable day (owner's ruling); the edict ends the stay and each girl moves to her own cung by rank.
+
+## FOLLOW-UP 3 DAYS (for MAIN 117; name/layout decided, not argued)
+PRIORITY #1 CHECK: OD 24/11 ~06:55Z + ~07:05Z read (verbatim) | from memory, no web | (hi)/(mid)/(lo) confidence, [K] history, [D] drama.
+
+### (1) Did tú nữ stay several days inside before/after selection?
+- Qing, before: NO standing multi-day stay. Banner girls came on the appointed day by cart to 神武门, were led in and viewed the same day in rows. [K](mid) Waiting happened at the gate / in carts, not in a hostel. [K](mid-lo)
+- Qing, after: 留牌子 girls went home and were recalled for 复看; rank came after, weeks later. [K](mid) So "wait for conferral inside the palace" is not Qing practice; it is a compression.
+- Ming: chosen girls were kept INSIDE for months under 女官 for training before the final pick. [K](mid; varies by reign) This is the best real anchor for a multi-day stay inside.
+- Qing detail worth knowing: Guangxu's 1889 empress selection was held in the 储秀宫 front hall 体和殿 with Cixi presiding. [K](mid-lo) (a reason to use 储秀宫 as the review place, but it was a consort palace, not a hostel.)
+- Dramas (甄嬛传 / 延禧攻略): girls arrive together, stay several days in a shared court under a 教习嬷嬷, then the review day, then a wait for the edict. [D](mid) The owner's memory matches the DRAMA flow and Ming; it does not match plain Qing. Safe: never name a dynasty in text.
+
+### (2) Who assigned rooms; usable incidents per day
+- Assigner: 内务府 officials + 敬事房 eunuchs at the gate/yard; inside, a 教习嬷嬷 / 女官 (Ming 宫正司). [K](mid) Eunuchs stay at the gate and outer yard; girls' rooms are entered by the ma ma only. [K](mid)
+- Order by family rank / banner / bribes: better families get the better room, bed by the window or away from the draught and the night-pail; bribing the ma ma for a better bed or for roommates. [D](mid)
+- DAY 1 (enter, rooms): luggage/ornament check (plain dress, few jewels) · roll-call and seating by birth · the ma ma's first lecture on 规矩 · a bed swapped or a roommate who snores/weeps · a lost hairpin accused on the new girl · first night talk (homesick, share food/medicine) · a bribe to the eunuch · a girl falling ill and hiding it. [D](mid; sickness = delayed look [K](mid-lo))
+- DAY 2 (yard + selection): woken before dawn, a girl's dress or rouge spoiled; long standing/kneeling, hunger, need to relieve herself; someone faints or is pushed; each girl calls out name, banner, father's rank at her turn [K](mid); the 3 tests by Hoàng thượng / Thái hậu / Hoàng hậu (owner's rule). Yard events change relations only (OD 06:20Z).
+- DAY 3 (kept wait for conferral): rumours from eunuchs sold for silver; a senior consort sends someone to look over / ask for a girl (high consorts did request attendants) [K](lo); jealousy between the 4 kept; a failed-girl farewell (撂牌子, sent home to marry) [K](hi); then the edict read at the gate, rank by father's rank + the tests (答应/常在/贵人…) [K](hi); 谢恩 kneeling.
+
+### (3) Historically wrong or risky in the 3-day plan
+1. Plain Qing: no days inside before the review, and girls were not lodged to await rank. Fix: don't name a dynasty; call it «kỳ tuyển tú» only. (soft, accepted compression)
+2. 储秀宫 was a consort palace (Cixi), not a hostel — decided, only a note; keep «Trữ Tú cung» out of the "10 cung" lists as the OD says.
+3. Eunuch assigning rooms: fine at the gate/yard, but he must NOT walk into the girls' rooms; the ma ma does the room assigning inside. Please keep that in the scene.
+4. 4 per room / 2 per bed: no source for it; shared heated beds (炕) and 6–8 per room for maids are real, so it is plausible. Wording: «giường» not «sập».
+5. Emperor present at every review: in Qing often only the empress dowager / empress viewed; in dramas the emperor appears. Keep (owner's 3 tests), but a line that Hoàng thượng "xem qua" is fine.
+6. «Chính viện» avoided — correct: the 正房 is the master's, too grand for girls; Đông/Tây/Nam = 东/西/南厢-style wings, fine.
+7. «Ban hoa» for the failed = game rule; history only says 撂牌子, go home and may marry. No conflict.
