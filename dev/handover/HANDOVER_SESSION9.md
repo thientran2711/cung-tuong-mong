@@ -2743,3 +2743,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (00:34Z) OWNER: Fold room hub figure in the MIDDLE (OD 00:40Z) → KK14 mock v3.4.
 - (00:40Z) MOCK-STAGE v3.4 ca154a3d: MAIN LOOKED Fold hub (figure centred between table and mirror, labels clear) → link to sếp. KIT §94 draft review/kit-toilroom 2797e672.
 - (00:41Z) LANDED kit-selscene → LIVE e88b09b4. rv N76XbyLe archived; SELSCENE told (base main). LC8 queue: odds-no-thanh, kit-mgskin, coop-thin-g.
+- (00:54Z) LANDED odds-no-thanh → LIVE bba42773. LC8 lands coop-thin-g CODE ONLY; coop Worker THINMAX 13 deploy = Foreman B right after LANDED. Archive W2 MmpzDKtR + rv JBY4hfzp.

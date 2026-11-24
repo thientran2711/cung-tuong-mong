@@ -6,3 +6,4 @@
 - FROM MAIN 114 (23:54Z 23/11): LIVE = 17835565 (offline-all: Thiết lập › «Tải hết để chơi offline»).
 - FROM MAIN 114 (00:18Z 24/11): LIVE = 16f5c1dc (know-notice: clear top-bar notice for every new thing learned, no doubles).
 - FROM MAIN 114 (00:41Z 24/11): LIVE = e88b09b4 (kit-selscene: KIT §93 selection-scene parts).
+- FROM MAIN 114 (00:54Z 24/11): LIVE = bba42773 (odds-no-thanh: odds meaning text no longer promises «thành»).
