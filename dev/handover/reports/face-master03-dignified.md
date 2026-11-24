@@ -83,3 +83,21 @@ Remaining: AGE 39 only — 12 Dignified jobs: m04 m10 m16 m22 m28 m29 c04 c10 c1
 Identity uploads (reuse, never re-upload): c04 EbcFFhnuuO, c10 ksXxxbr16B, c16 cpwVVY30eP, c22 rgoLLr0xtc, c28 VXOpeD2MMU, m04 N253RRL6D9, m10 LwtgSwWswO, m16 rgoLsU6xtc, m22 TdJDp8FVNR, m28 aFnEukWfSh, m29 ksXxjO216B, s65 s7mSU3hl8e.
 Still not done: contact sheets/CDN (separate gallery worker per the order), final DONE to Foreman D after age 39.
 Push recipe: fetch --depth=30 under flock, checkout -B work FETCH_HEAD, append, push HEAD to the handover branch (never rebase the old detached shallow worktree).
+
+## Successor 3 rows (Dignified AGE 39) — 24/11
+PRIORITY #1 CHECK: brief + age39-fix04 read; prompt = age39-fix04/Prompts/FACE-REUSE-DIGNIFIED-AGE39-...-04.txt (9741 bytes) pasted whole, unchanged. Settings gpt-2-6, 2k, aspect auto, count 1, refs [identity upload, UPf76Ptwny]. No retries. 12 x 135 cr.
+| job | output creation | status | QC |
+|---|---|---|---|
+| m04 A39 | Xm68AtsBfo | DONE (looked) | no text, no makeup look, no wrinkles, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared |
+| m10 A39 | KLdrmD7kqp | DONE (looked) | same QC; source-hair ribbon kept |
+| m16 A39 | YMS0Pg9WeC | DONE (looked) | same QC; lavender hair ribbon from source |
+| m22 A39 | CqWQp0iEEy | DONE (looked) | same QC; pink braid ribbon from source |
+| m28 A39 | s7mSuESl8e | DONE (looked) | same QC |
+| m29 A39 | rgoLC9rxtc | DONE (looked) | same QC; faint hair ribbon from source |
+| c04 A39 | TdJD3ENVNR | DONE (looked) | same QC; faint hair ribbon |
+| c10 A39 | 9ZbisXdNYZ | DONE (looked) | same QC |
+| c16 A39 | 1lBjfGir4r | DONE (looked) | same QC |
+| c22 A39 | P3HNLCN42C | DONE (looked) | same QC |
+| c28 A39 | 9ZbilHQNYZ | DONE (looked) | same QC |
+| s65 A39 | yiF9jHtPW9 | DONE (looked) | same QC |
+Dignified total 60/60 (16/26/39/51/63 x 12). No NEEDS_REVIEW. Contact sheets/CDN not done (separate gallery worker).

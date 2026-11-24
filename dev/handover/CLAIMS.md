@@ -1562,13 +1562,13 @@ save-growth (d)+(b) | review/save-growth | session_01DgYSWn2jD6dN6G4v5qkFaf | SS
 | KIT REVIEW kit-woodskin r4 35d57ca + kit-album 716310c (sonnet) | review/kit-woodskin-r3, review/kit-album-r1 | B | session_01N1tNP5YUQmH9jDHwiUYY7g | RUNNING | 24/11 20:43Z |
 face-master03 Alluring (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-alluring.md | session_01D3E3NZd7bPaP9p5vL5dyKi | RUNNING | 24/11 21:29Z | FOREMAN D
 face-master03 Cold (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-cold.md | session_01D3E3NYEF9kwi8NEyWrcbuf | RUNNING | 24/11 21:29Z | FOREMAN D
-face-master03 Dignified (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-dignified.md | session_01D3E3NaHn3EfaM7zRmQbD31 → succ1 01D3E3NavYsSsocu2VWRExNy (26/48) → succ2 01D3E3NZZ5WqPT3VLLidzqrq (48/48) → succ3 session_01D3E3NXoPvSgYJ7NXsa2qmd (age 39) | RUNNING | 24/11 21:29Z | FOREMAN D
+face-master03 Dignified (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-dignified.md | session_01D3E3NaHn3EfaM7zRmQbD31 → succ1 01D3E3NavYsSsocu2VWRExNy (26/48) → succ2 01D3E3NZZ5WqPT3VLLidzqrq (48/48) → succ3 session_01D3E3NXoPvSgYJ7NXsa2qmd (age 39) | DONE (60/60) | 24/11 21:29Z | FOREMAN D
 face-master03 Gentle (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-gentle.md | session_01D3E3NZzg95uS8CmypjuBFk | RUNNING | 24/11 21:29Z | FOREMAN D
 face-master03 Proud (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-proud.md | session_01D3E3NZBMJvJ42NGMXAhPWA | RUNNING | 24/11 21:29Z | FOREMAN D
 face-master03 Sharp (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-sharp.md | session_01D3E3NaxuWFpancQEoeisKM | DONE | 24/11 21:29Z | FOREMAN D
 | face-master03 ALLURING (sonnet; brief briefs/D-face-master03-mass.md; ages 16/26/51/63, 72 jobs, age 39 HOLD) | reports/face-master03-alluring.md (Magnific only, no code branch) | D | session_01D3E3NZd7bPaP9p5vL5dyKi | RUNNING | 24/11 21:30Z |
 | FACE-MASTER03 PROUD (sonnet worker; ages 16/26/51/63, 15 people=60 jobs) | handover: dev/handover/reports/face-master03-proud.md | D | session_01D3E3NZBMJvJ42NGMXAhPWA | DONE | 24/11 21:31Z |
-| FACE-MASTER03 Dignified ages 16/26/51/63 (sonnet worker; briefs/D-face-master03-mass.md; 48 jobs) | Magnific only; reports/face-master03-dignified.md | D | session_01D3E3NaHn3EfaM7zRmQbD31 | RUNNING | 24/11 |
+| FACE-MASTER03 Dignified ages 16/26/51/63 (sonnet worker; briefs/D-face-master03-mass.md; 48 jobs) | Magnific only; reports/face-master03-dignified.md | D | session_01D3E3NaHn3EfaM7zRmQbD31 | DONE (60/60) | 24/11 |
 | FACE-MASTER03 COLD (sonnet worker; 15 ids x ages 16/26/51/63, age39 on hold) | Assignments/Cold_Jobs.json | D | cse_01D3E3NYEF9kwi8NEyWrcbuf | DONE | 24/11 21:31Z |
 | VIECNHO-FIX (owner bug 24/11 ~21:50Z: Việc nhờ sub-tab + person panel scroll kit + result popup Vì sao; sonnet) | review/viecnho-fix | MAIN 128 | session_01V1ZZH4XjjV9xGrojVNGZpc | RUNNING | 24/11 22:00Z |
 save-growth review | review/save-growth e573b9b8 | session_01DgYSWo2KgYDGKUVNxK99cu | RUNNING | 24/11 22:05Z | FOREMAN E (child7)
