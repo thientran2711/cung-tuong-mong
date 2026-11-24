@@ -1569,3 +1569,4 @@ face-master03 Sharp (ages 16/26/51/63; sonnet) | Magnific only, report reports/f
 | face-master03 ALLURING (sonnet; brief briefs/D-face-master03-mass.md; ages 16/26/51/63, 72 jobs, age 39 HOLD) | reports/face-master03-alluring.md (Magnific only, no code branch) | D | session_01D3E3NZd7bPaP9p5vL5dyKi | RUNNING | 24/11 21:30Z |
 | FACE-MASTER03 PROUD (sonnet worker; ages 16/26/51/63, 15 people=60 jobs) | handover: dev/handover/reports/face-master03-proud.md | D | session_01D3E3NZBMJvJ42NGMXAhPWA | RUNNING | 24/11 21:31Z |
 | FACE-MASTER03 Dignified ages 16/26/51/63 (sonnet worker; briefs/D-face-master03-mass.md; 48 jobs) | Magnific only; reports/face-master03-dignified.md | D | session_01D3E3NaHn3EfaM7zRmQbD31 | RUNNING | 24/11 |
+| FACE-MASTER03 COLD (sonnet worker; 15 ids x ages 16/26/51/63, age39 on hold) | Assignments/Cold_Jobs.json | D | cse_01D3E3NYEF9kwi8NEyWrcbuf | RUNNING | 24/11 21:31Z |
