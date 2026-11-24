@@ -284,9 +284,16 @@ function tick70(){const z=j70();if(!z)return;z.sh.push(S.sung||0);if(z.sh.length
 
 /* ---------- places and her own spying reveal plots ---------- */
 (function(){const g0=goTo;goTo=function(k){const r=g0.apply(this,arguments);try{if(j70On()&&S.place===k){const z=j70();for(const p of z.pl){if(p.end||p.kn||p.st!=="prep"||p.a==="me")continue;const R=pr70(p);if(!R||R.pl!==k||!roll(35))continue;const a=pa70(p);p.kn=1;p.kt.push(tellOf70(p,p.pg));p.pend=p.t==="me"?"seen":"npc";noteAdd(a.id,`Ở ${placeName(k)}, ngươi thấy người của nàng ${tellOf70(p,p.pg)}`);log(`Ở ${placeName(k)}, ngươi tình cờ thấy người của ${a.name} ${tellOf70(p,p.pg)}.`);break}}}catch(e){console.error(e)}return r}})();
+/* does her act k on v open the «Bày mưu» card first? (one test for j70 and jtamco's road card, review/fix-hadoc-loop) — not when she already chose
+   to act now: «Ra tay ngay» (__j70inst) or the road card she answered after it (jtamco econRoadGo: window.ECON_HER for this act and person).
+   ROBOT-10 bug B: «Ra tay ngay» → jtamco's road card → «Làm như thường» called doAct again with __j70inst already back to 0, so «Bày mưu» came
+   again, then the road card again … for ever, the act never ran and no khắc was spent. */
+function j70Wants(v,k){try{const h=window.ECON_HER;if(h&&v&&h.k===k&&h.t===v.id)return false;
+ return !!(j70On()&&v&&OWN70[k]&&!window.__j70inst&&ACT[k]&&can(2)&&!Q.length&&v.alive&&!v.out&&ACT[k].ok(S,v)&&!(typeof sameHouse==="function"&&sameHouse(S,v)))}catch(e){console.error(e);return false}}
+window.j70Wants=j70Wants;
 (function(){const d0=doAct;doAct=function(i,k){const v=rivals[i];
   /* her own plot: a big act can be done at once (as before) or prepared as a chain */
-  try{if(j70On()&&v&&OWN70[k]&&!window.__j70inst&&ACT[k]&&can(2)&&!Q.length&&v.alive&&!v.out&&ACT[k].ok(S,v)&&!(typeof sameHouse==="function"&&sameHouse(S,v))){Q.push(start70(v,k));showModal();render();return}}catch(e){console.error(e)}
+  try{if(j70Wants(v,k)){Q.push(start70(v,k));showModal();render();return}}catch(e){console.error(e)}
   const r=d0.apply(this,arguments);
   try{if(j70On()&&k==="spy"&&v){const p=j70().pl.find(p=>!p.end&&p.a===v.id&&!p.kn);if(p&&roll(50)){p.kn=1;p.dig=1;p.kt.push(tellOf70(p,p.pg));p.pend=p.t==="me"?"seen":"npc";noteAdd(v.id,`dò la ra: nàng đang bày mưu ${pm70(p).n.toLowerCase()} nhắm vào ${nm70(pt70(p))}`);log(`Dò la ra: ${v.name} đang bày mưu ${pm70(p).n.toLowerCase()} nhắm vào ${nm70(pt70(p))}.`)}}}catch(e){console.error(e)}
   return r}})();
@@ -439,7 +446,7 @@ PEND.j70def=pp=>{if(!S)return null;const L=ords70();const cur=L.length?`<p>Lện
   o.push(ch70("Thôi",{wt:[G70(`${s.name} vẫn làm việc cũ, giữ bạc mỗi tháng`)],k:[R70("chưa đổi phòng bị")],ok:()=>"Ngươi giữ như cũ."}));
   return{t:`<p>Giao cho <b>${s.name}</b> (thiện cảm ${s.loyal||0}) việc phòng bị nào?${cur?` Hiện đang: ${ORD70[cur.k].n.toLowerCase()}.`:""}</p><p class="past">Mỗi kẻ hầu một việc; kẻ đang giữ việc không sai đi việc khác được. Kẻ đã bị người khác mua chuộc thì giữ việc cũng như không.</p>`,o,who:pp.sid==="maid"?pMaid():(()=>{try{return pServ(s)}catch(e){return null}})()}}
  if(pp.s===3){const s=sv70(pp.sid);if(!s)return null;const T=liveRivals(true).filter(v=>!v.confined||true).slice().sort((a,b)=>danger(b,S)-danger(a,S)).slice(0,5);
-  const o=T.map(v=>{const c=ch70(`Theo dõi ${title70(v)}`,{wt:[G70(`thấy mưu của nàng sớm hơn nhiều; mỗi tháng có thể thêm chứng cứ`)],k:[R70("Bạc -10 mỗi tháng"),R70(`nếu bị bắt gặp, ${v.name} oán ngươi`)]});c.go=()=>{L.push({k:"theodoi",sid:pp.sid,tgt:v.id,since:wk()});log(`Ngươi sai ${s.name} theo dõi ${title70(v)}.`)};return c});
+  const o=T.map(v=>{const c=ch70(`Theo dõi ${title70(v)}`,{wt:[G70(`thấy mưu của nàng sớm hơn nhiều; mỗi tháng có thể thêm chứng cứ`)],k:[R70(`Bạc -${ORD70.theodoi.bac} mỗi tháng`),R70(`nếu bị bắt gặp, ${v.name} oán ngươi`)]});c.go=()=>{L.push({k:"theodoi",sid:pp.sid,tgt:v.id,since:wk()});log(`Ngươi sai ${s.name} theo dõi ${title70(v)}.`)};return c});
   o.push(ch70("Thôi",{wt:[G70("giữ bạc mỗi tháng, chẳng ai oán vì bị theo dõi")],k:[R70("chưa theo dõi ai")],ok:()=>"Ngươi gác lại."}));return{t:`<p>${s.name} sẽ theo dõi ai?</p>`,o,who:(()=>{try{return pServ(s)}catch(e){return null}})()}}
  return null};
 /* ---------- every warning carries concrete answers ---------- */
