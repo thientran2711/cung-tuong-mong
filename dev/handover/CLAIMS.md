@@ -1419,7 +1419,7 @@ REVIEW law1-gifts (opus BIG; briefs/D-law1-gifts-review.md) of 0a5fc0af | review
 | ROBOT-COOP RUNNER U4 pairs 3-4 SWAP=1 SEED=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p3-4-s.md | B | session_01N1tNP2J2RWyqmnHnG8Run7 | RUNNING | 24/11 05:56Z |
 | ROBOT-COOP RUNNER U5 pairs 5-6 SWAP=0 SEED=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p5-6.md | B | session_01N1tNP6DDKAsMUF9TiY87qJ | RUNNING | 24/11 05:58Z |
 | PARKING VERIFY E66 (sonnet; B-RANK anti-cheat + MG14 state; briefs/E66-parking-verify.md) | reports/parking-verify.md; review/parking-rank if a small fix | FOREMAN E (child1) | session_01DgYSWknBqBqY7X45rUVDaj | RUNNING | 24/11 06:05Z |
-| PARKING #10 HƯƠNG RIÊNG E67 (opus BIG; expert first; briefs/E67-scent.md) | review/scent; reports/scent.md | FOREMAN E (child1) | session_01DgYSWoizfjLqnTfD3oCWz3 | RUNNING | 24/11 06:05Z |
+| PARKING #10 HƯƠNG RIÊNG E67 (opus BIG; expert first; briefs/E67-scent.md) | review/scent; reports/scent.md | FOREMAN E (child1) | session_01DgYSWoizfjLqnTfD3oCWz3 | READY de29c737 | 24/11 06:05Z |
 | PARKING AUDIT E63 | reports/parking-audit.md 7f85225b | FOREMAN E (child1) | session_01DgYSWnS8t83k8g5g1at6Hy | DONE, ARCHIVED | 24/11 06:05Z |
 | VEIL-1 screen-change veil (opus; owner bug OD 24/11 ~10:20Z) | review/kit-screenveil; reports/screenveil.md | MAIN 118 | session_01V1ZZH1kjVkiTZ88EUdo1U6 | RUNNING | 24/11 07:12Z |
 | SELSCENE-6 opening 3 days (opus; successor of SELSCENE-5) | review/selection-scene | MAIN 118 | session_01V1ZZH3MNrUmsbyK2EQz7Wt | RUNNING | 24/11 07:22Z |
