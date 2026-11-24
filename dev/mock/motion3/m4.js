@@ -15,10 +15,10 @@ async function run(o){o=o||{};MD3.ensureCss();const P=MD3.pace();const RV=BAL.re
  const mst=document.createElement('style');mst.id='md3-mute';mst.textContent='.ksfl,.kmfls{display:none!important}.kst.kfhit,.kst.kfhit-r{animation:none!important}';document.head.appendChild(mst);
  const ksf0=window.kitStatFx;window.kitStatFx=function(){};/* mock: §57.1 is what this extends; its own all-cells-at-once number update is held off */
  /* fixture: the people on the home stage have MET her (the game draws a stranger as a see-through breathing silhouette; her rule: people are never see-through) */
- try{S.met=S.met||{};const K=k61S();(homePeople()||[]).concat(liveRivals(true)||[]).forEach(v=>{if(v&&v.id!=null&&S.met[v.id]==null)S.met[v.id]=0;if(K&&v)try{K[kOf61(v)]=Math.max(+K[kOf61(v)]||0,2)}catch(e){}});render()}catch(e){}await settleStage();
+ try{S.met=S.met||{};const K=k61S();(homePeople()||[]).concat(liveRivals(true)||[]).forEach(v=>{if(v&&v.id!=null&&S.met[v.id]==null)S.met[v.id]=0;if(K&&v)try{K[kOf61(v)]=Math.max(+K[kOf61(v)]||0,2)}catch(e){}});}catch(e){}/* no render here: every caller has already settled the stage (prep / M1.choose veil) — a render now would show the game's see-through breathing silhouettes */
  const b=rsnap();o.mut();
  /* the people on the stage must stay SOLID: re-render the stage with the new state FIRST and wait until every portrait is loaded (the game shows a see-through breathing silhouette «kphBreathF» while a portrait loads) — only then show the result frame */
- try{render()}catch(e){}await settleStage();
+ await MD3.cover(async()=>{try{render()}catch(e){}await settleStage(12000)},{ms:200});/* the re-render happens under the opaque kit screen veil: people are never seen half-loaded / see-through */
  resultShow(o.title,b,o.ok!==false);
  const card=document.getElementById('rtoast');document.querySelectorAll('.kmfls').forEach(e=>e.remove());
  /* HOLD THE HUD NUMBERS IN DATA (perf fix): the one HUD writer kitStatSet(c,v) keeps writing the OLD text for a held cell id until its change lands — no MutationObserver fighting render() every frame */

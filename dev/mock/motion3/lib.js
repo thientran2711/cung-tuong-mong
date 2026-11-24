@@ -29,10 +29,17 @@ function ensureCss(){if(document.getElementById('md3-css'))return;const s=docume
 /* kit scene at NORMAL brightness (owner OD 24/11 ~09:05Z: no whole-screen darkening, no blur on the background): veil off, blur off — REPORTED to MAIN, not changed in the kit */
 function sceneBright(L){const bg=L.querySelector('.kscn-bg'),vl=L.querySelector('.kscn-veil');if(bg){bg.style.filter='none';bg.style.inset='0'}if(vl)vl.style.display='none'}
 /* face zones of kit scene figures (top of the painted bbox) — used to PROVE no plate/card/box covers a face */
-function faceBoxes(L){return L.figs.map(f=>{const r=R(f),o=f.ob||{l:0,r:1,t:0,b:1};const pw=(o.r-o.l)*r.width,ph=(o.b-o.t)*r.height,cx=r.left+(o.l+o.r)/2*r.width;
- return {l:cx-pw*.22,r:cx+pw*.22,t:r.top+o.t*r.height,b:r.top+o.t*r.height+ph*(f.__half?.24:.15)}})}
+function faceBoxes(L){return (L.__paint||[]).concat(L.figs.map(f=>{const r=R(f),o=f.ob||{l:0,r:1,t:0,b:1};const pw=(o.r-o.l)*r.width,ph=(o.b-o.t)*r.height,cx=r.left+(o.l+o.r)/2*r.width;
+ return {l:cx-pw*.22,r:cx+pw*.22,t:r.top+o.t*r.height,b:r.top+o.t*r.height+ph*(f.__half?.24:.15)}}))}
 function hit(a,b){const n=x=>x.l!=null?x:{l:x.left,r:x.right,t:x.top,b:x.bottom};a=n(a);b=n(b);return !(a.r<=b.l||b.r<=a.l||a.b<=b.t||b.b<=a.t)}
 function faceCheck(L,els){const F=faceBoxes(L);const out=[];els.forEach(e=>{if(!e||!e.isConnected)return;const r=R(e);if(r.width<2)return;F.forEach((f,i)=>{if(hit(f,r))out.push({fig:i,el:e.className.split(' ')[0]})})});return out}
+/* KIT REQUEST kitScreenVeil: ONE opaque screen cover. Slides in (transform only, never an opacity fade, so two screens are never seen through each other),
+   the swap runs while the screen is fully covered, then it slides away. People / boxes never cross-fade. Opaque paper colour of the kit (.kbk paper), gold edge. */
+async function cover(swap,o){o=o||{};const d=Math.round((o.ms||260)*pace()/1.75);const c=document.createElement('div');c.className='md3-cover';
+ c.style.cssText='position:fixed;left:0;top:0;width:100%;height:100%;z-index:99995;background:#f3e6cc;border-bottom:4px solid #d9b25a;pointer-events:auto;will-change:transform;transform:translateY(-101%)';document.body.appendChild(c);
+ const a=c.animate([{transform:'translateY(-101%)'},{transform:'translateY(0)'}],{duration:d,easing:'cubic-bezier(.5,0,.3,1)',fill:'both'});await new Promise(r=>{a.onfinish=r;setTimeout(r,d+60)});
+ await swap();await wait(90);
+ const b=c.animate([{transform:'translateY(0)'},{transform:'translateY(101%)'}],{duration:d,easing:'cubic-bezier(.5,0,.3,1)',fill:'both'});await new Promise(r=>{b.onfinish=r;setTimeout(r,d+60)});c.remove()}
 /* rAF frame-time probe */
 function probeStart(){const P=window.__md3p={d:[],last:0,on:1};const f=t=>{if(!P.on)return;if(P.last)P.d.push(t-P.last);P.last=t;requestAnimationFrame(f)};requestAnimationFrame(f);return P}
 function probeStop(){const P=window.__md3p;if(!P)return null;P.on=0;const d=P.d.slice().sort((a,b)=>a-b);const q=x=>d.length?d[Math.min(d.length-1,Math.floor(x*d.length))]:0;
@@ -49,4 +56,4 @@ function acts(n,odds){meetAll();const old=window.tab;try{window.tab='act';render
 /* decode every picture of a node list BEFORE it is dealt (pre-decode: no decode work while the deal animates) */
 function decodeAll(nodes){const ims=[];nodes.forEach(n=>n.querySelectorAll('img').forEach(i=>{i.loading='eager';i.decoding='sync';ims.push(i)}));return Promise.all(ims.map(i=>new Promise(r=>{if(i.complete&&i.naturalWidth){(i.decode?i.decode():Promise.resolve()).then(r,r);return}const t=setTimeout(r,6000);i.onload=()=>{clearTimeout(t);(i.decode?i.decode():Promise.resolve()).then(r,r)};i.onerror=()=>{clearTimeout(t);r()};const s=i.src;i.src='';i.src=s}))).then(()=>ims.length)}
 async function preload(urls){await Promise.all(urls.map(u=>new Promise(r=>{const i=new Image();i.onload=i.onerror=r;i.src=u;if(i.decode)i.decode().then(r,r)})))}
-return {meetAll,acts,decodeAll,CDN,wait,pace,R,ensureCss,sceneBright,faceBoxes,faceCheck,probeStart,probeStop,preload}})();
+return {cover,meetAll,acts,decodeAll,CDN,wait,pace,R,ensureCss,sceneBright,faceBoxes,faceCheck,probeStart,probeStop,preload}})();

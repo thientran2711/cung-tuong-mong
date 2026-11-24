@@ -31,9 +31,12 @@ async function setup(o){o=o||{};MD3.ensureCss();if(!document.getElementById('md3
  const halos=[];figs.forEach((f,i)=>{const h=document.createElement('div');h.className='md3-halo';const r=R(f),lr=R(L);h.style.cssText+=`left:${r.left-lr.left-r.width*.2}px;top:${r.top-lr.top-r.height*.04}px;width:${r.width*1.4}px;height:${r.height*1.08}px`;L.insertBefore(h,f);halos.push(h)});
  st={Sc,L,figs,tags,halos,P,acts,list,sel:-1,rot:0,v:0,tiles:[],open:0,ip,w,H,pk:null,busy:0};return {people:P.length,acts:acts.length,items:list.length,fh}}
 async function enter(){const {L,figs,tags}=st;const T=(e,k,o)=>e.animate(k,Object.assign({fill:'both',easing:'cubic-bezier(.2,.8,.3,1)'},o));
- L.style.opacity='';T(L,[{opacity:0},{opacity:1}],{duration:300});T(L.querySelector('.kscn-bg'),[{transform:'scale(1.05)'},{transform:'scale(1)'}],{duration:900});
- figs.forEach((f,i)=>{T(f,[{transform:'translateX(-40px)',opacity:0},{transform:'none',opacity:1}],{duration:560,delay:140+i*150});T(tags[i],[{opacity:0},{opacity:1}],{duration:300,delay:520+i*150})});
- figs.forEach((f,i)=>f.addEventListener('click',e=>{e.stopPropagation();tapPerson(i)}));await wait(900+figs.length*150)}
+ /* ONE opaque kit screen veil, people enter by transform only at opacity 1 */
+ figs.forEach(f=>f.style.transform='translateX(-60px)');tags.forEach(t=>t.style.visibility='hidden');
+ await MD3.cover(async()=>{L.style.opacity='1'});
+ T(L.querySelector('.kscn-bg'),[{transform:'scale(1.05)'},{transform:'scale(1)'}],{duration:900});
+ figs.forEach((f,i)=>{f.style.transform='';T(f,[{transform:'translateX(-60px)'},{transform:'none'}],{duration:560,delay:i*150});setTimeout(()=>{tags[i].style.visibility=''},560+i*150)});
+ figs.forEach((f,i)=>f.addEventListener('click',e=>{e.stopPropagation();tapPerson(i)}));await wait(700+figs.length*150)}
 /* ---- tap a person: she steps out + light; the others recede (cross-fade to the pre-filtered copy + slide away) ---- */
 async function tapPerson(i){if(st.busy||st.sel===i)return;st.busy=1;await closePk();const {figs,halos,tags,w}=st;st.sel=i;const E='cubic-bezier(.2,.7,.2,1)';
  const f=figs[i],right=f.__cx<w/2;
@@ -91,8 +94,8 @@ async function give(){const N=st.tiles.length;const fi=((Math.round(st.rot)%N)+N
  const lr=R(st.L);const cx=b.left-lr.left+(ob.l+ob.r)/2*b.width,cy=b.top-lr.top+(ob.t+(ob.b-ob.t)*.5)*b.height;
  const chip=document.createElement('div');chip.style.cssText=`position:absolute;left:${cx}px;top:${cy}px;transform:translateX(-50%);z-index:50;pointer-events:none`;chip.innerHTML=kitChip('Thiện cảm',giftN(st.list[fi].k));chip.firstElementChild.style.fontSize='1.15em';st.L.appendChild(chip);
  chip.animate([{opacity:0,transform:'translate(-50%,10px)'},{opacity:1,transform:'translate(-50%,0)',offset:.2},{opacity:1,transform:'translate(-50%,-26px)',offset:.8},{opacity:0,transform:'translate(-50%,-34px)'}],{duration:1600,fill:'both'});
- await wait(1700);const nm=st.list[fi].name;close();return nm}
-function close(){if(!st)return;cancelAnimationFrame(raf);try{kitDim.off();if(st.pk)st.pk.destroy()}catch(e){}kitScene.close(true);st.open=0;st=null}
+ await wait(1700);const nm=st.list[fi].name;await close();return nm}
+async function close(){if(!st)return;cancelAnimationFrame(raf);try{kitDim.off();if(st.pk)st.pk.destroy()}catch(e){}st.open=0;st=null;await MD3.cover(async()=>{kitScene.close(true);try{render()}catch(e){}await M4.settleStage(12000)})}
 /* only the person she talks to counts: no picker part / tile / tag may cover THAT face (painted-bbox head band) */
 function check(){if(!st||st.sel<0)return [];const els=[];if(st.pk&&st.pk.el)els.push(...st.pk.el.querySelectorAll('.kfoc-b,.kpk-post,.kpk-rail'));if(st.ring)els.push(...st.tiles);els.push(st.give,st.arL,st.arR,...st.tags);const f=st.figs[st.sel];
  const F=MD3.faceBoxes({figs:[f]});return els.filter(e=>e&&e.isConnected&&R(e).width>2&&F.some(b=>{const r=R(e);return !(r.right<=b.l||b.r<=r.left||r.bottom<=b.t||b.b<=r.top)})).map(e=>e.className.split(' ')[0])}

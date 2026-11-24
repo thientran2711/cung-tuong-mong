@@ -3,6 +3,9 @@
 import sys,os,html,json
 d=sys.argv[1];F=sorted(os.listdir(d))
 CHECK=[
+ ('MAIN 127 FAIL 1','Không khung lời / khung chi tiết nào che đầu người nào: nền mẫu 1 = tranh cung điện KHÔNG có người vẽ sẵn (phi-tan-cung); kiểm tra khuôn mặt đếm cả đầu vẽ trong nền (L.__paint) + mọi người trên sân khấu: 0 điểm chạm.'),
+ ('MAIN 127 FAIL 2','Người không bao giờ trong suốt: vào cảnh CHỈ bằng transform ở opacity 1, dưới MỘT màn che kit đặc; không có fade opacity trên người.'),
+ ('MAIN 127 FAIL 3','Không chồng hình hai màn: màn che kit đặc trượt vào → đổi cảnh → trượt ra (kitScreenVeil, KIT_REQUESTS K-SCREEN-VEIL); vào và ra cảnh đều dùng.'),
  ('15:15Z (a)','Không có khung sự kiện trước — mở thẳng vào hoạt cảnh (mẫu 1: nền vào, người nói bước vào từ trái, nàng trượt vào từ phải, rồi chia bài; mẫu 2: sân khấu mở thẳng).'),
  ('15:15Z (b)','Lá bài chỉ hiện hình + tên ngắn (+ thang tỉ lệ bằng chữ); chạm = lá nhô lên + thông tin hiện; chạm lần nữa = chọn; 5–10 lá, không phải cuộn (ảnh n=5 / 7 / 10, Fold + iPad).'),
  ('15:15Z (c) + 04:35Z','Giữ bố cục hội thoại của sếp: người báo bên TRÁI toàn thân, khung lời bên PHẢI, vùng chọn đè lên người bên trái, nàng ở bên PHẢI nhỏ hơn. Khung lời kit giữ; không khung nào che mặt (kiểm tra 0 điểm chạm mặt).'),
@@ -19,9 +22,9 @@ CHECK=[
 T={'m1':'Mẫu 1 · Bàn bài — sự kiện = hội thoại + bài trên tay (chạm = nhô lên + chi tiết, chạm lần nữa = chọn → kết quả bay về ô)',
    'm2':'Mẫu 2 · Vòng bảo vật — một màn rộng; chạm người → bước ra + thẻ gỗ treo → «Biếu» → vòng đồ → «Tặng»',
    'm4':'Mẫu 4 · Bay về túi — khung kết quả như cũ, từng thay đổi bay MỘT-MỘT về đúng ô'}
-h=['<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Motion mocks 3</title>',
+h=['<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Motion mocks 4</title>',
  '<style>body{font:15px/1.4 sans-serif;background:#fbf4ea;color:#3a2618;margin:16px;max-width:1500px}h2{margin:28px 0 8px}.r{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}video,img{max-width:100%;border:1px solid #d8c3a0;border-radius:8px}.c{flex:1 1 360px}small{color:#7a5b3a}table{border-collapse:collapse;font-size:13px}td,th{border:1px solid #d8c3a0;padding:3px 7px}li{margin:3px 0}</style>',
- '<h1>MOTION-DESIGN-3 — mẫu 1 / 2 / 4 trên game thật (Fold 755x1000 + iPad 1180x820)</h1><p><small>Mock chạy trong game thật (chưa nối vào game). Video 1x + bản chậm 2×. Nền giữ độ sáng bình thường; không khung nào che mặt.</small></p>',
+ '<h1>MOTION-DESIGN-5 — mẫu 1 / 2 / 4 trên game thật (Fold 755x1000 + iPad 1180x820)</h1><p><small>Mock chạy trong game thật (chưa nối vào game). Video 1x + bản chậm 2×. Nền giữ độ sáng bình thường; không khung nào che mặt.</small></p>',
  '<h2>Đối chiếu từng lời sếp</h2><ul>'+''.join(f'<li><b>[x] {html.escape(a)}</b> — {html.escape(b)}</li>' for a,b in CHECK)+'</ul>']
 if len(sys.argv)>2: h.append(f'<h2>Đo độ mượt trên máy thật</h2><p>Mở trên Fold / iPad: <a href="{sys.argv[2]}">{sys.argv[2]}</a> — bấm «Bắt đầu đo», để máy yên ≈ 2 phút, «Chép kết quả». Mốc so sánh = đoạn idle/live (game hôm nay).</p>')
 if os.path.exists(os.path.join(d,'perf.html')): h.append(open(os.path.join(d,'perf.html')).read())

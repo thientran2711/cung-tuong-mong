@@ -7,7 +7,7 @@ window.M1=(function(){const {wait,R}=MD3;
 const OPTS=[];
 let st=null;
 async function setup(o){o=o||{};MD3.ensureCss();const n=o.n||5,plain=!!o.plain;const cards=MD3.acts(n,!plain);const list=cards.map(c=>[c.querySelector('.kan').textContent.replace(/^(Người lạ|Hoàng hậu)/,'').trim()]);await MD3.decodeAll(cards);
- const v=(liveRivals(true).filter(x=>x.alive&&!x.out)[0])||S;const bg=IMG_U('img/ev-cung-nhan.webp');await MD3.preload([bg]);
+ const v=(liveRivals(true).filter(x=>x.alive&&!x.out)[0])||S;const bg=IMG_U('img/phi-tan-cung.webp')/* people-free scene painting (no painted heads: MAIN 127 FAIL 1) */;await MD3.preload([bg]);
  const Sc=kitScene.open({bg,intro:0});const L=Sc.L;MD3.sceneBright(L);L.style.opacity='0';
  const dummy=document.createElement('div');
  await Sc.pair({msgr:v,me:S,storyTitle:v.name,story:[`<div class="kpmain"><p>${o.line||'«Muội muội đến đúng lúc. Hôm nay muốn cùng ta làm việc gì?»'}</p></div>`],choiceTitle:S.name,choice:[dummy]});
@@ -36,12 +36,15 @@ async function setup(o){o=o||{};MD3.ensureCss();const n=o.n||5,plain=!!o.plain;c
  return {n,rows,cw:Math.round(cw),ch,handTop,faceBot:Math.round(faceBot),H,w}}
 /* ENTRY: layer fades in, speaker walks in from the left, she slides in from the right, the line box drops in; cards dealt from the right edge, flipped */
 async function enter(){const {L,sb,els,slots,w}=st;const f=L.figs;const T=(e,k,o)=>e.animate(k,Object.assign({fill:'both',easing:'cubic-bezier(.2,.8,.3,1)'},o));
- L.style.opacity='';T(L,[{opacity:0},{opacity:1}],{duration:300});
- const bg=L.querySelector('.kscn-bg');T(bg,[{transform:'scale(1.06)'},{transform:'scale(1)'}],{duration:900});
- T(f[0],[{transform:'translateX(-38%) scale(.94)',opacity:0},{transform:'none',opacity:1}],{duration:700,delay:120});
- T(f[1],[{transform:'translateX(30%)',opacity:0},{transform:'none',opacity:1}],{duration:600,delay:380});
- T(sb,[{transform:'translateY(-14px)',opacity:0},{transform:'none',opacity:1}],{duration:340,delay:700});
- await wait(900);await deal()}
+ /* ONE opaque kit screen veil: old screen covered → scene swapped in (L opaque from its first frame, figures placed OFF-stage by transform) → veil slides away → people walk in by transform only (opacity 1 always) */
+ f[0].style.transform='translateX(-38%) scale(.94)';f[1].style.transform='translateX(30%)';sb.style.visibility='hidden';
+ await MD3.cover(async()=>{L.style.opacity='1'});
+ T(L.querySelector('.kscn-bg'),[{transform:'scale(1.06)'},{transform:'scale(1)'}],{duration:900});
+ f[0].style.transform='';f[1].style.transform='';
+ T(f[0],[{transform:'translateX(-38%) scale(.94)'},{transform:'none'}],{duration:700});
+ T(f[1],[{transform:'translateX(30%)'},{transform:'none'}],{duration:600,delay:260});
+ await wait(620);sb.style.visibility='';T(sb,[{transform:'translateY(-14px)'},{transform:'none'}],{duration:300});
+ await wait(420);await deal()}
 async function deal(){const {els,slots,w,hand}=st;const hr=R(hand);const T=(e,k,o)=>e.animate(k,Object.assign({fill:'both'},o));let last;
  els.forEach((E,i)=>{const s=slots[i];const sx=w+20-s.x,sy=-40-s.y;E.c.style.opacity='';
   last=T(E.c,[{transform:`translate(${sx}px,${sy}px) rotate(14deg) scale(.7)`,opacity:0},{transform:`translate(${sx*.15}px,${sy*.1}px) rotate(${s.rot+4}deg)`,opacity:1,offset:.75},{transform:`rotate(${s.rot}deg)`,opacity:1}],{duration:460,delay:i*90,easing:'cubic-bezier(.25,.8,.3,1)'});
@@ -75,6 +78,6 @@ async function choose(i){st.busy=1;const {els,L,w,H}=st;const E=els[i];const cr=
  els.forEach((x,k)=>{if(k!==i)x.c.animate([{opacity:0.86,transform:rest(k)},{opacity:0,transform:`translateY(${st.ch*.9}px) ${rest(k)}`}],{duration:380,delay:Math.abs(k-i)*40,easing:'cubic-bezier(.5,0,.9,.4)',fill:'both'})});
  if(st.plate)st.plate.animate([{opacity:1},{opacity:0}],{duration:200,fill:'both'});
  await wait(700);E.c.animate([{opacity:1,transform:`translate(${dx}px,${dy}px) scale(1.45)`},{opacity:0,transform:`translate(${dx}px,${dy-30}px) scale(1.6)`}],{duration:260,fill:'both'});await wait(200);
- kitScene.close(true);st.busy=0;return i}
+ await MD3.cover(async()=>{kitScene.close(true);try{render()}catch(e){}await M4.settleStage(12000)});/* the veil stays until every stage person is a solid painted portrait (never the game's see-through breathing silhouette) */st.busy=0;return i}
 function check(){const {L,sb,els}=st;return MD3.faceCheck(L,[sb,st.plate,...els.map(e=>e.c)])}
 return {setup,enter,deal,lift,choose,check,get st(){return st},OPTS}})();

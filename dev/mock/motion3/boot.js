@@ -2,7 +2,7 @@
    usage (node): const B=require('./boot.js'); const {b,ctx,p,f,srv}=await B.open('fold'|'ipadAir',{root}); */
 const {chromium}=require('playwright');const path=require('path');
 const D=require(path.resolve(__dirname,'../../test/lib/device.js'));
-const ROOT=process.env.GAME_ROOT||'/home/user/wt/md2ev';
+const ROOT=process.env.GAME_ROOT||"/home/user/wt/md5";
 async function open(dev,o){o=o||{};const srv=await D.serveRoot(ROOT,o.port||0);const b=o.browser||await chromium.launch();
  const ctx=await D.newDeviceContext(b,dev,{deviceScaleFactor:o.dsf||2});if(process.env.KSEED)await ctx.addInitScript(sd=>{let a=sd>>>0;Math.random=function(){a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296}},+process.env.KSEED);/* KSEED=<n>: the same random life every run (complete-mock rule: Fold and iPad show the same consort life) */
  const p=await ctx.newPage();p.setDefaultTimeout(0);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
