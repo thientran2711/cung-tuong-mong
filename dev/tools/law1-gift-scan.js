@@ -43,9 +43,18 @@ const SITES=[
  {re:/j78facts=function\(v\)\{const F=f0/,row:"LEARN by her spying (lk / dis facts)",f:"jdis.js"},
  {re:/agRunReg\("cx2:maidSpy"/,row:"LEARN by NPC spying",f:"jagacts3.js"},
  {re:/giftEval=function\(e,t\)\{const r=g0/,row:"PICK her: the dialog shows known dislikes",f:"jdis.js"},
- {re:/function giftPickIx/,row:"PICK npc: the piece by what she knows",f:"jmind.js"}];
+ {re:/function giftPickIx/,row:"PICK npc: the piece by what she knows",f:"jmind.js"},
+ /* every CALL of giveTo is a gift site too (review rv law1-gifts: callers were not probed) */
+ {re:/A\("gift","Tặng quà"/,row:"GIVE any→any (the act Tặng quà, role parity)",f:"j8.js"},
+ {re:/npcCourt\(v\);if\(!agd&&roll\(15\)\)\{const ok=.*giftPickIx\(v,t,ok\)/,row:"GIVE rv→emp/th (monthly, agent day off; giftPickIx)",f:"j8.js"},
+ {re:/const okR=.*giftPickIx\(v,t,okR\)/,row:"GIVE rv→S/rv (monthly, agent day off; giftPickIx)",f:"j8.js"},
+ {re:/log\(giveTo\(S,(RV\(p\.v\)|id===)/,row:"GIVE her→emp/th/rv (gift picker)",f:"j8.js"},
+ {re:/log\(giveTo\(S,t,i\)\)/,row:"GIVE her→emp/th/rv/maid (gift dialog)",f:"jgift.js"},
+ {re:/const r=giveTo\(S,v,S\.inv\.indexOf\(e\)\)/,row:"GIVE her→rv by a servant carrier (jptime)",f:"jptime.js"},
+ {re:/giftPickIx\(v,host,/,row:"GIVE guest→host at a rite (Lễ tấn phong)",f:"jts.js"},
+ {re:/v\.inv\.push\(\{k,from:"nvp"\}\);const r=giveTo\(v,t,/,row:"GIVE rv→S/rv (a friend's veil, giveTo)",f:"jveil.js"}];
 /* the patterns that make a line a gift / taste site at all (anything here that no SITES row claims = UNCLASSIFIED) */
-const PROBE=[/function giveTo\(/,/mkP\("giftin"/,/PEND\.giftin=/,/inv\.push\(\{k,from:("emp"|"th"|v\.id)/,/goodsGive\(S,k,\{from:"emp"/,/agRunReg\("cx:gift"/,/function (likeLearn|learnLike|learnDis|giftLearn)\(/,/function giftPickIx/,/function giftTaste\(/];
+const PROBE=[/function giveTo\(/,/\bgiveTo\((?!a,r,ix\))/,/mkP\("giftin"/,/PEND\.giftin=/,/inv\.push\(\{k,from:("emp"|"th"|v\.id)/,/goodsGive\(S,k,\{from:"emp"/,/agRunReg\("cx:gift"/,/function (likeLearn|learnLike|learnDis|giftLearn)\(/,/function giftPickIx/,/function giftTaste\(/];
 function staticScan(){const out=[];for(const f of fs.readdirSync(BUILD).filter(x=>/^j.*\.js$/.test(x)).sort()){const L=fs.readFileSync(path.join(BUILD,f),'utf8').split('\n');
   L.forEach((s,i)=>{const hit=SITES.filter(x=>x.re.test(s)&&new RegExp(x.f.split('|').map(y=>y.replace('.','\\.')).join('|')).test(f));
    if(hit.length){hit.forEach(h=>out.push({row:h.row,at:`dev/build/${f}:${i+1}`}));return}
