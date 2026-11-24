@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"434a4a30+","t":"2026-11-24T10:13Z","c":"robot10 E-FIX-3 r2: law 6c — spent consumables counted (S.il.used), surplus with uses left into Nội vụ phủ counted stock (S.il.stock), re-i…","b":"307e5ed34ae3","h":[{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"}]};
+window.CTM_BI={"s":"f0a5f92c+","t":"2026-11-24T10:58Z","c":"robot10 E-FIX-3 r3: saveblocked test loads like j6 Tiếp tục (quiet=false after deser) so it reaches j6's write","b":"a7880af7efc2","h":[{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -46972,7 +46972,7 @@ function stipGoods(p,SK){const G=[];try{if(!p||p.dead||(p===S&&typeof isSrv==="f
  for(const [k0,n0] of L){let k=k0,n=n0,kem=false,lost=false;
   if(hit.has(L.findIndex(x=>x[0]===k0))){kem=true;k=D[k0];if(k0==="thanbac"||k0==="bangda")n=Math.max(1,n0-1);if(!k){lost=true}}
   const g={k0,n0,k,n,kem,lost,E:[]};if(!lost&&IT[k])for(let i=0;i<n;i++){/* E-FIX-3: an NPC's candle / hair oil comes out of the counted stock first */const st=p!==S&&typeof alOf==="function"&&alOf(k)&&typeof ilStockTake==="function"?ilStockTake(k):null;const e=Object.assign(st||{k},{from:"noivu",d:S.turn});p.inv.push(e);g.E.push(e)}G.push(g)}
- if(p!==S){const nv=p.inv.filter(e=>e&&e.from==="noivu"&&!e.w&&!(typeof lxOf==="function"&&lxOf(e.k)));/* son phấn boxes are spent, never trimmed (jration) */const over=nv.length-BAL.stip.npcKeep*3;if(over>0)nv.slice(0,over).forEach(e=>{const i=p.inv.indexOf(e);if(i>=0){/* robot10 E-FIX-3: older candles / hair oil (uses left) go back to the Nội vụ phủ COUNTED stock (S.il.stock), handed out again first below (law 6c: never dropped, never one record each) */if(typeof alOf==="function"&&alOf(e.k)&&typeof ilStock==="function")ilStock(e);p.inv.splice(i,1)}})}
+ if(p!==S){const nv=p.inv.filter(e=>e&&e.from==="noivu"&&!e.w&&!(typeof lxOf==="function"&&lxOf(e.k)));/* son phấn boxes are spent, never trimmed (jration) */const over=nv.length-BAL.stip.npcKeep*3;if(over>0)nv.slice(0,over).forEach(e=>{const i=p.inv.indexOf(e);if(i>=0){/* robot10 E-FIX-3: older candles / hair oil (uses left) go back to the Nội vụ phủ COUNTED stock (S.il.stock), handed out again first below (law 6c: never dropped, never one record each) */if(typeof alOf==="function"&&alOf(e.k)&&typeof ilStock==="function")ilStock(e,1,p);p.inv.splice(i,1)}})}
  }catch(e){console.error("stipGoods",e)}return G}
 function stipGoodsTxt(G){return (G||[]).map(g=>g.lost?`thiếu ${stipNm(g.k0,g.n0).replace(/^\d+ \S+ /,"")}`:stipNm(g.k,g.n)).join(" · ")}
 /* Nội vụ phủ buys its own issue back cheaply */
@@ -60795,7 +60795,7 @@ function alSrvMonth(){try{if(!alOn()||!S||S.dead||!(typeof isSrv==="function"&&i
 /* NPC staff (and her own staff): the same list by their bậc, into their own small bag (kept to BAL.allot.srv.keep, older pieces used up) */
 function alStaffGive(p,skim){if(!p||!Array.isArray(p.staff)||p.out)return;const B=BAL.allot.srv;
  for(const s of p.staff){if(!s||s.sid==null||s.out||s.dead)continue;const rk=typeof srk==="function"?srk(s):0;let L=alSrvList(rk,false);if(skim)L=alSrvSkim(L).L;
-  s.inv=Array.isArray(s.inv)?s.inv:[];for(const [k,n] of L)if(IT[k])for(let i=0;i<n;i++)s.inv.push({k,from:"noivu",d:S.turn});alFix(s);if(s.inv.length>B.keep)s.inv.splice(0,s.inv.length-B.keep).forEach(e=>{/* E-FIX-3: older hair oil (lượt left) goes back to the Nội vụ phủ counted stock, issued again first (law 6c) */if(alOf(e.k)&&typeof ilStock==="function")ilStock(e)})}}
+  s.inv=Array.isArray(s.inv)?s.inv:[];for(const [k,n] of L)if(IT[k])for(let i=0;i<n;i++)s.inv.push({k,from:"noivu",d:S.turn});alFix(s);if(s.inv.length>B.keep)s.inv.splice(0,s.inv.length-B.keep).forEach(e=>{/* E-FIX-3: older hair oil (lượt left) goes back to the Nội vụ phủ counted stock, issued again first (law 6c) */if(alOf(e.k)&&typeof ilStock==="function")ilStock(e,1,s)})}}
 /* the maid's help line (kit help popup of j42 "Lương tháng") names the lệ goods too */
 (function(){try{if(typeof HX==="object"){const w0=HX.wage;Object.defineProperty(HX,"wage",{get(){try{return alOn()&&S&&S.srv?`${w0} Kèm lệ tháng của bậc ngươi: ${alSrvTxt(S.srv.rk)}. Chủ nhân bị Nội vụ phủ cắt xén thì lệ kẻ hầu cũng bị bớt.`:w0}catch(e){return w0}},configurable:true,enumerable:true})}}catch(e){}})();
 /* ---------- item detail: lượt left of a bottle (kit detail rows' own note line) ---------- */
@@ -78291,9 +78291,12 @@ const IL_USED=new Set();
 function ilEnd(e){try{Object.defineProperty(e,"used",{value:1,writable:true,enumerable:false,configurable:true})}catch(z){e.used=1}if(e.iu)IL_USED.add(e.iu)}
 function ilUsedUp(e,p,own){if(!e||typeof e!=="object"||!e.k)return;ilEnd(e);try{const I=ilS();I.used=I.used||{};const o=own!=null?String(own):ilKey(p)||"?";const m=I.used[o]=I.used[o]||{};m[e.k]=(m[e.k]||0)+1}catch(z){}}
 function ilStockKey(e){return e.k+(e.u>=0&&/^aldau/.test(e.k)?"."+e.u:"")}
-function ilStock(e,n){if(!e||typeof e!=="object"||!e.k)return;ilEnd(e);try{const I=ilS();I.stock=I.stock||{};const s=ilStockKey(e);I.stock[s]=(I.stock[s]||0)+(n||1)}catch(z){}}
-/* one piece of item k out of the counted stock (the fullest bottle first) → the piece to issue, or null (mint a new one as before) */
-function ilStockTake(k){try{const I=ilS();const T=I.stock;if(!T)return null;let best=null,bu=-1;for(const s in T){if(!(T[s]>0))continue;const [kk,u]=s.split(".");if(kk!==k)continue;const uu=u==null?1e9:+u;if(uu>bu){bu=uu;best=s}}
+function ilStock(e,n,p){if(!e||typeof e!=="object"||!e.k)return;/* E-FIX-3 r4: an EMPTY bottle (0 lượt) is spent, not stock → counted used up for its holder */if(/^aldau/.test(e.k)&&e.u!=null&&!(e.u>0)){ilUsedUp(e,p,p?null:"kho");return}ilEnd(e);try{const I=ilS();I.stock=I.stock||{};const s=ilStockKey(e);I.stock[s]=(I.stock[s]||0)+(n||1)}catch(z){}}
+/* one FULL piece of item k out of the counted stock → the piece to issue, or null (mint a new one as before).
+   E-FIX-3 r4 (E81r r2 item 2, law 1: ONE rule for her and every NPC): an issue is always a full piece — a whole candle, a bottle with all its
+   lượt (BAL.allot.oil.uses) — exactly what her own monthly issue mints. Part-used bottles stay COUNTED in the stock (law 6c: real, findable),
+   never handed out as a month's share. */
+function ilStockTake(k){try{const I=ilS();const T=I.stock;if(!T)return null;const full=BAL.allot&&BAL.allot.oil&&BAL.allot.oil.uses;let best=null;for(const s in T){if(!(T[s]>0))continue;const [kk,u]=s.split(".");if(kk!==k)continue;if(u==null||(full>0&&+u>=full)){best=s;break}}
  if(!best)return null;if(!--T[best])delete T[best];const e={k};const u=best.split(".")[1];if(u!=null)e.u=+u;return e}catch(z){return null}}
 window.ilUsedUp=ilUsedUp;window.ilStock=ilStock;window.ilStockTake=ilStockTake;
 /* old saves: an allotment consumable already sitting in the store as «kho» / «net» record (owner not her, or her spent remains) is moved to the
@@ -97806,7 +97809,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="307e5ed34ae3";window.CTM_BUILD=BUILD;
+const BUILD="a7880af7efc2";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

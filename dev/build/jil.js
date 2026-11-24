@@ -29,9 +29,12 @@ const IL_USED=new Set();
 function ilEnd(e){try{Object.defineProperty(e,"used",{value:1,writable:true,enumerable:false,configurable:true})}catch(z){e.used=1}if(e.iu)IL_USED.add(e.iu)}
 function ilUsedUp(e,p,own){if(!e||typeof e!=="object"||!e.k)return;ilEnd(e);try{const I=ilS();I.used=I.used||{};const o=own!=null?String(own):ilKey(p)||"?";const m=I.used[o]=I.used[o]||{};m[e.k]=(m[e.k]||0)+1}catch(z){}}
 function ilStockKey(e){return e.k+(e.u>=0&&/^aldau/.test(e.k)?"."+e.u:"")}
-function ilStock(e,n){if(!e||typeof e!=="object"||!e.k)return;ilEnd(e);try{const I=ilS();I.stock=I.stock||{};const s=ilStockKey(e);I.stock[s]=(I.stock[s]||0)+(n||1)}catch(z){}}
-/* one piece of item k out of the counted stock (the fullest bottle first) → the piece to issue, or null (mint a new one as before) */
-function ilStockTake(k){try{const I=ilS();const T=I.stock;if(!T)return null;let best=null,bu=-1;for(const s in T){if(!(T[s]>0))continue;const [kk,u]=s.split(".");if(kk!==k)continue;const uu=u==null?1e9:+u;if(uu>bu){bu=uu;best=s}}
+function ilStock(e,n,p){if(!e||typeof e!=="object"||!e.k)return;/* E-FIX-3 r4: an EMPTY bottle (0 lượt) is spent, not stock → counted used up for its holder */if(/^aldau/.test(e.k)&&e.u!=null&&!(e.u>0)){ilUsedUp(e,p,p?null:"kho");return}ilEnd(e);try{const I=ilS();I.stock=I.stock||{};const s=ilStockKey(e);I.stock[s]=(I.stock[s]||0)+(n||1)}catch(z){}}
+/* one FULL piece of item k out of the counted stock → the piece to issue, or null (mint a new one as before).
+   E-FIX-3 r4 (E81r r2 item 2, law 1: ONE rule for her and every NPC): an issue is always a full piece — a whole candle, a bottle with all its
+   lượt (BAL.allot.oil.uses) — exactly what her own monthly issue mints. Part-used bottles stay COUNTED in the stock (law 6c: real, findable),
+   never handed out as a month's share. */
+function ilStockTake(k){try{const I=ilS();const T=I.stock;if(!T)return null;const full=BAL.allot&&BAL.allot.oil&&BAL.allot.oil.uses;let best=null;for(const s in T){if(!(T[s]>0))continue;const [kk,u]=s.split(".");if(kk!==k)continue;if(u==null||(full>0&&+u>=full)){best=s;break}}
  if(!best)return null;if(!--T[best])delete T[best];const e={k};const u=best.split(".")[1];if(u!=null)e.u=+u;return e}catch(z){return null}}
 window.ilUsedUp=ilUsedUp;window.ilStock=ilStock;window.ilStockTake=ilStockTake;
 /* old saves: an allotment consumable already sitting in the store as «kho» / «net» record (owner not her, or her spent remains) is moved to the
