@@ -346,7 +346,8 @@ function selxRmT(R){const tok=k=>(selxRoyals().find(x=>x[0]===k)||[])[2];const T
  for(const x of L){if(x.v===S||x.v.__done)continue;x.v.__done=1;if(x.kept)x.v.rank=selxRank(x.v,x.step,{k:"_",r0:x.v.r0});else Z.out.push({id:x.v.id,name:x.v.name,face:x.v.face,hue:x.v.hue,sc:x.sc,ban:1})}
  Z.girls=[];if(worldOn())selxRoomIn(Z.keptV)};window.selxNpcOut=selxNpcOut})();
 function selxRoomIn(mine){const R=S&&S.selxRm;if(!R||R.in||!worldOn())return;R.in=1;const own=new Map((mine||[]).map(v=>[v.id,v]));
- for(const r of R.res||[]){if(!r.kept||rivals.some(v=>v.id===r.id))continue;const g=(R.g||[]).find(v=>v.id===r.id);const v=own.get(r.id)||(g?selxJ(g):null);if(!v)continue;
+ /* one order on both seats: the guest's live diff (jcoophl "a" ops) adds new world people in id order (Object.keys of the id map), so the host adds the kept girls in that same id order (not by score) */
+ for(const r of (R.res||[]).slice().sort((x,y)=>(+x.id||0)-(+y.id||0))){if(!r.kept||rivals.some(v=>v.id===r.id))continue;const g=(R.g||[]).find(v=>v.id===r.id);const v=own.get(r.id)||(g?selxJ(g):null);if(!v)continue;
   v.rank=selxRank(v,r.step,{k:"_",r0:v.r0});v.__done=1;if(typeof roomFor!=="function"||roomFor("consort"))rivals.push(v)}
  try{palFix()}catch(e){}
  const n=BAL.selx.tuan;S.tuan=(S.tuan||0)+BAL.selx.days;while(S.tuan>=n){S.tuan-=n;S.turn=(S.turn||0)+1}/* the room clock: the days, once */
