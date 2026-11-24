@@ -2,11 +2,7 @@
 Written by MAIN CHÍNH 116, 24/11 ~10:10Z after sếp's new rulings (OD 24/11 ~04:00Z → ~10:05Z). Every main keeps this file current (strike items when LIVE) and reports it to sếp at 08:00 and 20:00 her time (OD 24/11 ~10:10Z).
 | # | Job | Owner | State |
 |---|-----|-------|-------|
-| 1 | Opening 3 days (Dưỡng Tú viện, Nhập cung / Điện tuyển / Chờ chiếu, contest 12→top 4, ban hoa ending, dramas, ma ma, phân cung) | SELSCENE-5 | building (base 1257979a) |
-| 2 | Character intro shots + royal reveal (intro kit) | INTRO-DESIGN → KK | storyboard pending |
-| 3 | Dialogue kit: speaker spotlight + typewriter + cue hook + focus shot + square option buttons | KK | building |
-| 4 | Story DIALOGUE SCENES for every main road chapter / side line / quest | B (side lines) + E (roads) + KK18 (UI) | ordered 06:42Z |
-| 1 | Opening 3 days (Dưỡng Tú viện, Nhập cung / Điện tuyển / Chờ chiếu, contest 12→top 4, ban hoa ending, dramas, ma ma, phân cung) | SELSCENE-4 | mock pending |
+| 1 | Opening 3 days (Dưỡng Tú viện, Nhập cung / Điện tuyển / Chờ chiếu, contest 12→top 4, ban hoa ending, dramas, ma ma, phân cung) | SELSCENE-6 | polish + rich pools + owner mock (145205be+) |
 | 2 | Character intro shots + royal reveal (intro kit) | INTRO-DESIGN → KK | storyboard pending |
 | 3 | Dialogue kit: speaker spotlight + typewriter + cue hook + focus shot + square option buttons | KK | building |
 | 4 | Story DIALOGUE SCENES for every main road chapter / side line / quest | B (side lines) + E (roads) + KK18 (UI) | ordered 06:42Z |
@@ -23,7 +19,7 @@ Written by MAIN CHÍNH 116, 24/11 ~10:10Z after sếp's new rulings (OD 24/11 ~0
 | 15 | Event backgrounds (hương nang / ban hoa, major events) + Dưỡng Tú viện 3 sở + Tiền sảnh | C | drawing |
 | 16 | Old far-shot illustration redraws (option B) | C | drawing |
 | 17 | Art style unification audit | C | audit |
-| 18 | Dư đồ slow open (map-perf) | MAP-PERF | fixing |
+| 18 | Dư đồ slow open (map-perf) | MAP-PERF → LC10 / MAP-FIX-2 | map-perf PASS, landing; map-fix-2 fixing |
 | 19 | coop-thin-g (co-op world sync) | B | re-merge |
 | 20 | TITLES2 (per-chapter titles) | E | fix r3 |
 | 21 | Parking lot rows still not built | E | audit + build |
