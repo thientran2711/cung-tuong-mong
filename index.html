@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64","b":"7fb6ac122fee","h":[{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"}]};
+window.CTM_BI={"s":"68799300+","t":"2026-11-24T05:12Z","c":"SELF-MERGE LAND ageband: merge LIVE c0dff1b3 (index.html/sw.js rebuilt)","b":"65ee8bffeb70","h":[{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -36258,13 +36258,15 @@ function bcChoices(p,from){const B=BAL.banCung;const occ=bcOcc(p);const L=PALN.m
 /* THE CEREMONY (replaces j27): the decree's palace, «Nhận» (sure, Đức +), «Xin <cung>» with real odds, or locked with the reason */
 palCeremony=function(){if(!S||!S.palCer||S.dead)return;S.palCer=0;const from=S.pal;if(from==null)return;const B=BAL.banCung;
  const st=i=>bcDanh(i)-bcDanh(from);
- const opts=[{n:`Nhận ${PALN[from]}`,fx:{duc:B.ok.ducTake},x:"tạ ơn, dọn sang",go:()=>log(`Dọn sang ${PALN[from]}.`)}];
+ /* palace distance (jpdist, OD 24/11 ~08:45Z): how often he comes to each palace, the odds word + why */
+ const pdTxt=i=>{try{return typeof pdCardTxt==="function"?` · ${pdCardTxt(S,i)}`:""}catch(e){return ""}};
+ const opts=[{n:`Nhận ${PALN[from]}`,fx:{duc:B.ok.ducTake},x:`tạ ơn, dọn sang${pdTxt(from)}`,go:()=>log(`Dọn sang ${PALN[from]}.`)}];
  for(const c of bcChoices(S,from)){const i=c.i;
   if(c.locked){opts.push(kitOff({n:`Xin ${PALN[i]}`,fx:{},x:`dời sang ${PALN[i]}`,go:()=>{}},bcWhy(i),kitWhenRank()));continue}
   const s=st(i),up=Math.max(0,s),top=bcWanters(S,i)[0];
   const gain=`, ${bcGainTxt(bcGain(i,from))}`;
   const loss=`${sgStat(-(B.fail.sung+B.fail.sungStep*up))}, Danh ${balSg(-(B.fail.danh+B.fail.danhStep*up))}${top&&up>0?`, ${top.name} sinh oán`:""}`;
-  opts.push({n:`Xin ${PALN[i]}`,fx:{},x:`${word(c.odds)} · thành: dời sang ${PALN[i]}${gain} · hỏng: ${loss}`,go:()=>{bcAsk(S,i,from)}})}
+  opts.push({n:`Xin ${PALN[i]}`,fx:{},x:`${word(c.odds)} · thành: dời sang ${PALN[i]}${gain} · hỏng: ${loss}${pdTxt(i)}`,go:()=>{bcAsk(S,i,from)}})}
  Q.push({ev:1,t:"Ban cung",who:pEmp(),h:`<p>Thánh chỉ: ${RANKS[S.rank].n} ${S.name} được ban <b>${PALN[from]}</b>, làm chủ vị một cung. Cung nhân dọn từ ${HOMEN} sang trong ngày.</p><p>Cung càng gần ngự tẩm, càng danh giá, càng nhiều người muốn; tâu xin quá phận thì khó được chuẩn.</p>`,opts});
  log(`Được ban ${PALN[from]}.`)};
 /* NPC parity (law 1): a consort newly made chủ vị may petition the same way (host only in co-op: one roll for the world) */
@@ -78207,7 +78209,7 @@ window.visGo=function(p){const w=day();
  log(`Đêm nay Hoàng thượng ngự giá đến cung ${p.name}, nghỉ lại đến sáng.`);return"npc"};
 window.visRoll=function(){if(!host()||!empOk())return"";if(window.agDOn&&agDOn())return"";const L=[];if(meOk())L.push(S);
  if(cw()){const f=(rivals||[]).find(v=>v&&v.coop&&v.alive!==false&&!v.out);if(f)L.push(f)}
- L.sort(()=>Math.random()-.5);for(const p of L){if(!roll(visCh(p)))continue;return visGo(p)}return""};
+ L.sort(()=>Math.random()-.5);for(const p of L){if(!roll(window.visCh(p)))continue/* jpdist wraps window.visCh (palace distance) */;return visGo(p)}return""};
 /* after the tablet flip of each day (j8 flip, wrapped by j55 / j75) */
 (function(){const f0=flip;flip=function(){const r=f0.apply(this,arguments);try{const n=S&&S.visNpc;if(n&&n.w===day()&&S.tonight!=="me"){const v=(rivals||[]).find(x=>x&&x.id===n.id&&x.alive&&!x.out);if(v)S.tonight=v}}catch(e){}try{if(S&&!S.dead)visRoll()}catch(e){console.error("visit",e)}return r}})();
 /* co-op: the seat the host chose plays its card when the merged world arrives; the other seat reads the news */
@@ -78256,6 +78258,68 @@ function visAfter(){const V=B();const L=[sgStat(V.sung),`Danh +${V.danh}`];apply
 window.kneLineHook=function(){if(S&&S.visMorn!=null&&day()-S.visMorn<=1){S.visMorn=null;return "Hoàng thượng nghỉ lại tới sáng mới lên triều; cả hậu cung đều hay."}return ""};
 window.visAfter=visAfter;
 })();
+/* ================= jpdist: PALACE DISTANCE — the Emperor visits / calls a near palace more often; a far one less, but a visit there is a strong favour sign =================
+   Owner ruling (OD 24/11 ~08:45Z, verbatim in FOREMAN_D_STATUS ORDER UPDATE 08:46Z): "những cái phi tần mà thường mà ở xa nơi ở của vua á, thường là sẽ ít được
+   để ý tới hơn, bởi vì vua đi xa, vua mệt, nhiều khi vua làm biếng tới gặp. Còn khi mà đã là cái người ở xa rồi mà vua vẫn tới gặp, tức là người đó vua rất là sủng."
+   History (law 8): dev/research/palace-residence.md §1.2 — "Distance = how easily the Emperor visits, how fast news reaches her, how often she is seen".
+   ONE measure (law 4): pdFar(p) 0..1 = where p lives (jres residenceOf: chủ vị / side hall → her palace, Hoàng hậu → Càn Ninh, below Tần → Ngọc Thanh các)
+   measured on the plan to Dưỡng Hòa điện exactly as jbancung bcNear (same MAPH anchors, same spread: 0 = the nearest palace, 1 = the farthest).
+   Effects, every number in BAL.palDist, the SAME for her, the co-op friend and every NPC consort (law 1):
+     1. the tablet (j8 nightCh → flip / empPick / jledger): weight × (1 − night × far)
+     2. the visit (jvisit visCh → daily roll / jagacts2 emp:visit): odds × (1 − visit × far)
+     3. the night's Sủng (j8 nightGain → her nightFx, NPC rivalNight): + round(nightSung × far)  — gain-and-loss (laws 2/3): near = more nights, far = more per night
+     4. a visit to a far palace (far ≥ farMin): extra Sủng + round(visSung × far), Danh + round(visDanh × far), and the harem hears «… dù ở xa vẫn được ngự giá».
+   Ban cung (jbancung card): pdCardTxt(p,i) prints the visit odds word at palace i (law 7) + the reason (near / far + the far-visit bonus).
+   Pure functions of the shared world (no dice, no new save field): both co-op seats read the same numbers; old saves load unchanged. */
+Object.assign(BAL,{palDist:{
+ night:.3,        /* tablet weight × (1 − night × far): the farthest palace keeps 70 % of the weight */
+ visit:.5,        /* visit odds × (1 − visit × far): he walks there himself, so distance tells more than for the tablet's sedan */
+ nightSung:2,     /* + Sủng on every night × far (a night that reached a far palace means more) */
+ farMin:.6,       /* far ≥ this = «ở xa»: the visit is a strong favour sign */
+ nearMax:.25,     /* far ≤ this = «gần ngự tẩm» (the card's reason) */
+ visSung:4,visDanh:3, /* far visit: Sủng + round(visSung × far), Danh + round(visDanh × far) */
+ showWk:12        /* the Ban cung card's word = odds of at least one visit in this many tuần (from the real visCh at that palace) */
+}});
+const pdB=()=>BAL.palDist;
+function pdDistPt(pt){const e=MAPH.places.dtd;if(!pt||!e)return null;const a=pt.anchor||pt.box,b=e.anchor||e.box;return Math.hypot(a.x-b.x,a.y-b.y)}
+/* the plan's spread = the consort palaces (as jbancung bcNear) */
+function pdSpread(){const D=PALN.map((_,j)=>bcDistOf(j));return{lo:Math.min(...D),hi:Math.max(...D)}}
+function pdFarD(d){if(d==null)return 0;const s=pdSpread();return s.hi>s.lo?cl((d-s.lo)/(s.hi-s.lo),0,1):0}
+/* far of palace index i (= 1 − bcNear(i)) */
+function pdFarIx(i){return pdFarD(bcDistOf(i))}
+/* where p lives → the plan point; null = no consort residence (servant, lãnh cung, unknown) */
+function pdHome(p){try{const r=residenceOf(p);if(!r)return null;if(r.part==="lc"||r.part==="cungnhan")return null;
+ if(r.part==="kn")return{k:"kn",pt:MAPH.places.kn};if(r.pal!=null&&MAPH.rivalSlots[r.pal])return{k:"pal",i:r.pal,pt:MAPH.rivalSlots[r.pal]};
+ if(r.part==="ngocthanh")return{k:"home",pt:MAPH.places.home};return null}catch(e){return null}}
+function pdFar(p){const h=pdHome(p);if(!h)return 0;return h.k==="pal"?pdFarIx(h.i):pdFarD(pdDistPt(h.pt))}
+function pdPlace(p){const h=pdHome(p);if(!h)return"";return h.k==="pal"?PALN[h.i]:h.k==="kn"?PLNAME.kn[0]:(typeof HOMEN!=="undefined"?HOMEN:"")}
+/* the far-visit bonus (0 below farMin) — ONE function for the card, her visit and an NPC's */
+function pdVisBonus(far){const B=pdB();if(!(far>=B.farMin))return null;return{sung:Math.round(B.visSung*far),danh:Math.round(B.visDanh*far)}}
+function pdNightAdd(p){return Math.round(pdB().nightSung*pdFar(p))}
+/* 1. tablet */
+(function(){const n0=nightCh;nightCh=function(p){const c=n0.apply(this,arguments);try{if(c>0){const f=pdFar(p||S);if(f>0)return Math.max(1,Math.round(c*(1-pdB().night*f)))}}catch(e){}return c}})();
+/* 2. visit (jvisit: window.visCh is the one read by its daily roll and by jagacts2) */
+let pdVis0=null;
+(function(){if(typeof window.visCh!=="function")return;pdVis0=window.visCh;window.visCh=function(p){const c=pdVis0.apply(this,arguments);try{if(c>0){const f=pdFar(p);if(f>0)return c*(1-pdB().visit*f)}}catch(e){}return c}})();
+/* visit odds (0..100 per tuần) for p as if she lived at palace i (the Ban cung card) */
+function pdVisAt(p,i){if(!pdVis0)return 0;const c=pdVis0(p);return c*(1-pdB().visit*pdFarIx(i))}
+function pdVisOdds(p,i){const q=pdVisAt(p,i)/100;const o=100*(1-Math.pow(1-q,pdB().showWk));return cl(Math.round(o),BAL.odds.lo,BAL.odds.hi)}
+/* 3. the night's Sủng: whose night it is — her (default) or the NPC inside rivalNight */
+let pdWho=null;
+(function(){const g0=nightGain;nightGain=function(s){const r=g0.apply(this,arguments);try{const a=pdNightAdd(pdWho||S);if(a)return Object.assign({},r,{sung:r.sung+a})}catch(e){}return r};
+ const r0=rivalNight;rivalNight=function(v){const w0=pdWho;pdWho=v;try{return r0.apply(this,arguments)}finally{pdWho=w0}}})();
+/* 4. the far visit: her (after the visit night's extras, jvisit nightFx wrapper) */
+function pdFarLine(nm,pl){return `Hậu cung truyền nhau: ${nm} ở tận ${pl}, dù ở xa vẫn được ngự giá; ai cũng biết ân sủng ấy không nhỏ.`}
+(function(){const n0=nightFx;nightFx=function(s){const vis=!!(S&&S.visNight!=null&&typeof wk==="function"&&wk()-S.visNight<=1);const r=n0.apply(this,arguments);
+ if(vis)try{const f=pdFar(S),g=pdVisBonus(f);if(g){apply(g);log(`${pdFarLine("ngươi",pdPlace(S))} ${sgStat(g.sung)} · Danh +${g.danh}.`)}}catch(e){console.error("pdist",e)}return r}})();
+/* ...and an NPC consort (jvisit visGo → "npc"); the co-op friend plays her own card on her seat (the branch above) */
+(function(){if(typeof window.visGo!=="function")return;const v0=window.visGo;window.visGo=function(p){const r=v0.apply(this,arguments);
+ try{if(r==="npc"&&p&&p!==S){const f=pdFar(p),g=pdVisBonus(f);if(g){ap(p,g);const t=pdFarLine(p.name,pdPlace(p));log(t);try{newsAdd(p,"farvisit",t,true)}catch(e){}}}}catch(e){console.error("pdist",e)}return r}})();
+/* the Ban cung card: the visit odds word at palace i + why (law 7: no %) */
+function pdCardTxt(p,i){const B=pdB(),f=pdFarIx(i),g=pdVisBonus(f);
+ const why=g?`cung xa ngự tẩm, ngài ít lui tới; mỗi lần ngự giá thêm ${sgStat(g.sung)}, Danh +${g.danh}`:f<=B.nearMax?"cung gần ngự tẩm, ngài năng lui tới, thẻ bài dễ lật":"cung không xa không gần ngự tẩm";
+ return `ngự giá: ${word(pdVisOdds(p,i))} (${why})`}
+window.pdFar=pdFar;window.pdFarIx=pdFarIx;window.pdCardTxt=pdCardTxt;window.pdVisOdds=pdVisOdds;window.pdVisBonus=pdVisBonus;window.pdNightAdd=pdNightAdd;
 /* jgrey: two KIT parts (KIT.md §GREY, kit page) — written by the kit keeper.
    1. GREYED OPTION (owner 16/11 ~21:10Z "Chung Tú cung"): a known option she cannot take now because of COST, RANK or ITEM is never hidden:
       it shows in the kit option list greyed (not tappable) with a reason chip in the Cần row and when it opens again.
@@ -96038,7 +96102,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="7fb6ac122fee";window.CTM_BUILD=BUILD;
+const BUILD="65ee8bffeb70";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
