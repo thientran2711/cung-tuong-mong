@@ -498,7 +498,7 @@ function sendRes(v,k,b0,txt,id,pet,items,fam){if(CW.ctx&&!fW()){/* jpma r3 fix B
   CW.thin.D.after(()=>{try{CW.fStat=(CW.fStat||0)+1;resApply(m)}catch(e){console.error("thin F1 res",e)}});return}
  const rid=id||newId();CW.rpend[rid]=Date.now();  /* her week's end waits for her ack, so a res that lands after she ended is re-sent in her end */
  const msg=Object.assign({t:"res",id:rid,k,n:(ACT[k]||{}).n||k,who:S.name,fx,flags,seen,txt:t.slice(0,400)},pet&&pet.length?{pet}:{},items&&items.length?{items}:{},fam&&fam.length?{fam}:{},Object.keys(fxl).length?{fxl}:{});
- if(dOn()&&host()){const m2=Object.assign({},msg,{txt:herView(msg.txt,v.name,S.name)});if(CW.thin.D.resTo(fs(),m2,rid))return}COOP.send(msg)}
+ if(dOn()&&host()){const m2=Object.assign({},msg,{txt:herView(msg.txt,v.name,S.name)});if(CW.thin.D.resTo(fs(),m2,rid))return}resOut(msg)}
 /* part D r1: the act's text is the host's ("Ngươi" = the host, her name / "nàng ta" = her); she reads it in her own perspective */
 function herView(t,her,me0){t=String(t||"");if(!t)return t;const H="\u0001";const L="(^|[^\\p{L}])",R="(?=$|[^\\p{L}])";
  t=t.replace(new RegExp(L+"([Nn])gươi"+R,"gu"),(x,p)=>p+H);
@@ -687,15 +687,29 @@ function famCopy(p){try{return !!(p&&p!==S&&!p.coop&&typeof ilGuest==="function"
    HER piece into a COPY of a host NPC (that chest is rebuilt from the host: the piece vanished, her case closed «mất dấu», coop-lost-scan 10000137).
    The keep is refused like any refused keep (loLose: c.keep=0): her case stays «thất lạc» holding the piece, jlost finds it later. Host seat unchanged. */
 (function(){if(typeof loKeepBy!=="function")return;const k0=loKeepBy;loKeepBy=function(c,p){if(famCopy(p))return null;return k0.apply(this,arguments)};window.loKeepBy=loKeepBy})();
+/* E44j T4 (law 6c; coop-lost-scan dup 117 / id 10): the other seat's act took a piece of mine that is NOT in my hands but in my box (seized as
+   tang vật, sold, đem sửa …): rooms run the relay path (thin level 0) by default, so that act ran on its seat's copy of me, a step behind, and
+   that seat now holds a copy of a piece my box holds = 2 places. My box is the world's truth here: the actor's seat is told «rm gone» by id
+   (its famApply takes the phantom copy off, the existing «… không còn nữa» line). Either seat (two-way). */
+function famBoxBack(o){try{if(!CW.on||!o||!o.iu||o.how==="gone")return;const B=S.il&&S.il.box;if(!Array.isArray(B)||!B.some(x=>x&&famIs(x.e,o.iu)))return;
+ if(typeof ilSlots==="function"&&ilSlots(S).some(x=>famIs(x,o.iu)))return;b4Send([{op:"rm",ci:-1,k:o.k,iu:o.iu,how:"gone"}],{})}catch(e){console.error("famBoxBack",e)}}
 function famApply(ops){const out=[];let loud=0;if(!Array.isArray(ops))return {out,loud};const f=friendEntry();S.inv=S.inv||[];
  const kidBy=n=>(S.kids||[]).find(k=>k&&k.alive!==false&&kidId(k)===n)||null;
- const rm=ops.filter(o=>o.op==="rm").map(o=>{const e=famItem(o);if(!e&&!famLostCase(o,f))famMiss(o,"not hers");return [o,e]}).filter(x=>x[1]);
+ const rm=ops.filter(o=>o.op==="rm").map(o=>{const e=famItem(o);if(!e&&!famLostCase(o,f)){famMiss(o,"not hers");famBoxBack(o)}return [o,e]}).filter(x=>x[1]);
  for(const [o,e] of rm){const nm=typeof iname==="function"?iname(e):e.k;if(!famOff(e)){famMiss(o,"gone meanwhile");continue}if(o.iu&&!e.iu)e.iu=o.iu;
+  /* E44j T4: a «gone» of a piece I held for a case (marked lo: someone's lost piece in my hands) closes that case here «mất dấu» (the piece is in the other world's box) — never «held at me» with no copy */
+  if(o.how==="gone"&&e.lo){try{const c=(S.lost||[]).find(c=>c&&c.id===e.lo&&c.st!=="done");if(c){c.st="done";c.end=wk();c.how="matdau";if(typeof ilLog==="function")ilLog(e,"lo"+c.id,"coop:"+((f&&f.id)||""),"mất dấu bên hảo hữu")}}catch(z){}}
   if(o.how==="lost"&&typeof loLose==="function"){/* the NPC thief's road: a "thất lạc" case in her Tư trang › Việc, the item held by the friend */
    const th=o.by!=null?RV(o.by):null;const fk=th?key(th):f?key(f):fp();const all=S.inv;S.inv=[e];let c=null;try{c=loLose(S,{cause:"riv",by:fk,keep:1})}finally{S.inv=all.filter(x=>x!==e)}
    /* E44: the piece IS with the thief on the other seat (his real chest / the host's NPC): her case is held there even when this seat has no
       live copy of the holder to put it in (loKeepBy refused) — a case left «lost» counted the piece a second time and was later «found» to
       Nội vụ phủ: 2 copies (coop-lost-scan COOP_FAM: host chest + guest case) */
+   /* E44i T3 (coop-lost-scan LIVE SWAP 10000013 lxma2: laydo w1, «ret» w4, her seat had no case): loLose takes only a piece its own filter
+      (loOk) allows; a piece of hers that this seat reads otherwise (her copy on the host was a step behind) left with NO case = untraceable
+      here, the host's «ret» / «gone» found nothing to close. Her durable piece of her own (no lo mark: not someone else's case piece) gets its
+      case all the same (jlost loLoseE, the ONE case maker for a given piece), held by the thief. */
+   if(!c&&!e.lo&&typeof loLoseE==="function"&&typeof ilDur==="function"&&ilDur(e)){c=loLoseE(S,e,"riv");if(c){Object.assign(c,{keep:1,by:fk,st:"held",at:fk});
+     Q.push({t:"Đồ thất lạc",who:typeof pMe==="function"?pMe():"",h:`${typeof loTag==="function"?loTag(e):""}<p><b>${typeof loNm==="function"?loNm(e.k):esc(nm)}</b> trong rương ngươi đã thất lạc.</p><p class="past">Chưa rõ vì sao. Vào Tư trang › Việc › Đồ thất lạc để tra xét.</p>`,btn:"Đã hiểu"});continue}}
    if(c){if(c.st==="lost")Object.assign(c,{keep:1,by:fk,st:"held",at:fk});continue}}
   loud=1;
   if(o.how==="burn"){try{if(typeof tsbLedger==="function")tsbLedger({what:nm,how:"cháy",cause:"có kẻ phóng hỏa (chưa rõ là ai)"})}catch(x){}out.push(`<span class="r">Kho đồ của ngươi bốc cháy: mất ${esc(nm)}.</span>`)}
@@ -739,7 +753,7 @@ function famSweep(){try{if(!CW.on||!host()||CW.ctx||!S||!Array.isArray(S.lost)||
   if((first&&!was)||RET[c.how])continue;ops.push(Object.assign({op:"gone",k:c.k,how:c.how==="mat"?"mat":"matdau"},c.e&&c.e.iu?{iu:c.e.iu}:{}))}
  if(ops.length)b4Send(ops,{})}catch(e){console.error("famSweep",e)}}
 (function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(){const r=r0.apply(this,arguments);if(CW.on&&!CW.famIn)famSweep();return r}})();
-CW.famApply=famApply;CW.famRet=famRet;CW.famSweep=famSweep;/* test hooks (dev/test/coop-famops-unit.js) */
+CW.famApply=famApply;CW.famRet=famRet;CW.famSweep=famSweep;CW.resOut=resOut;CW.rqFlush=rqFlush;CW.rqLoadT=()=>rqLoad();CW.onResT=m=>onRes(m);CW.onActrT=m=>onActr(m);/* test hooks (dev/test/coop-famops-unit.js) */
 const seenIds=new Set();
 function onAct(m){if(!CW.on||m.from===CW.seat||!S||S.dead||seenIds.has(m.id))return;seenIds.add(m.id);if(m.mode!=="invite")return;
  const c=askCard(m.k,m.x,(ok,lv)=>COOP.send({t:"actr",id:m.id,ok,k:m.k,lv}));if(c){pushModal({act:1,t:"Hảo hữu tìm đến",h:c.h,opts:c.o});showModal();render();return}
@@ -748,7 +762,28 @@ function onAct(m){if(!CW.on||m.from===CW.seat||!S||S.dead||seenIds.has(m.id))ret
   {n:"Nhận",fx:{},x:"hảo hữu tiếp tục việc ấy",go:()=>COOP.send({t:"actr",id:m.id,ok:true,k:m.k})},
   ...askYield(m.k,()=>COOP.send({t:"actr",id:m.id,ok:"yield",k:m.k})),
   {n:"Từ chối",fx:{},x:"không nhận",go:()=>COOP.send({t:"actr",id:m.id,ok:false,k:m.k})}]});showModal();render()}
-function onRes(m){if(!CW.on||m.from===CW.seat||!S||seenIds.has("r"+m.id))return;seenIds.add("r"+m.id);
+/* E44k F1 (law 6c; coop-lost-scan-traced 9001 dup 2576: her «Lấy đồ» on the host's entry, her seat kept the piece + case 27, the host never
+   received the «res» and kept it too = 2 places): every «res» (an act's result: items by id, stats, children, pets) went out ONCE — a socket
+   down / reconnecting (COOP.send false) or a peer offline (the Worker relays to online seats only) lost it for good. Now the sender keeps each
+   «res» in an outbox (this phone, per room, like jkcco RQ) until the receiver's ack, and sends it again when the peer is back / the socket
+   reconnects / every few seconds; the receiver applies an id ONCE (seenIds + S.coopRs, which rides her save so a reload never applies it
+   twice) and acks every copy. Both seats, every res road (sendRes = acts, b4Send = NPC turns / returns / box answers / sweeps). */
+const RQK=()=>{try{return "ctm-resq:"+(COOP.state.room||COOP.code||"")+":"+(CW.seat||"")}catch(e){return "ctm-resq:"}};
+CW.rq=CW.rq||[];
+function rqSave(){try{const k=RQK();localStorage.setItem(k,JSON.stringify(CW.rq.filter(x=>!x.rk||x.rk===k).slice(-40)))}catch(e){}}
+/* E53r (review): the outbox belongs to ONE room + seat. leave() → join() of another room keeps this page (no reload): the old room's unacked
+   «res» must never go to the new room (its «add» would land in another friend's world = a piece from nowhere). Each entry carries its key (rk);
+   a room message keeps in memory only this room's entries (the others wait in localStorage under their own key until that room is back). */
+function rqLoad(){try{const k=RQK();CW.rq=CW.rq.filter(x=>x&&x.rk===k);const L=JSON.parse(localStorage.getItem(k)||"[]");for(const x of L)if(x&&x.id&&x.msg&&!CW.rq.some(y=>y.id===x.id)){x.rk=k;CW.rq.push(x)}}catch(e){}}
+function rqSend(x){x.at=Date.now();x.n=(x.n||0)+1;try{return COOP.send(x.msg)}catch(e){return false}}
+function resOut(msg){const x={id:msg.id,msg,t0:Date.now(),rk:RQK()};CW.rq.push(x);if(CW.rq.length>40)CW.rq.splice(0,CW.rq.length-40);rqSave();return rqSend(x)}
+function resAck(id){const i=CW.rq.findIndex(x=>x.id===id);if(i>=0){CW.rq.splice(i,1);rqSave()}}
+function rqFlush(all){if(!CW.on)return;const n=Date.now(),k=RQK();CW.rq=CW.rq.filter(x=>n-(x.t0||0)<1800000);for(const x of CW.rq)if((!x.rk||x.rk===k)&&(all||n-(x.at||0)>5000))rqSend(x)}
+COOP.on("peer",on=>{if(on)setTimeout(()=>rqFlush(true),600)});COOP.on("room",()=>{rqLoad();setTimeout(()=>rqFlush(true),900)});
+setInterval(()=>{try{if(CW.on&&CW.rq.length)rqFlush(false)}catch(e){}},2500);
+const rsSeen=id=>seenIds.has("r"+id)||(!!S&&Array.isArray(S.coopRs)&&S.coopRs.includes(id));
+function onRes(m){if(!CW.on||m.from===CW.seat||!S)return;if(rsSeen(m.id)){COOP.send({t:"actr",id:m.id,ok:true,ack:1});return}seenIds.add("r"+m.id);
+ S.coopRs=(S.coopRs||[]).concat([m.id]).slice(-80);
  try{resApply(m)}catch(e){console.error(e)}
  /* I had already ended the week (she acted on me while I waited): my end goes out again with this in it, before the ack she waits for */
  try{if(S&&!S.dead&&CW.sent===wk()){CW.sent=-1;sendEnd()}}catch(e){console.error(e)}
@@ -773,7 +808,7 @@ function resApply(m){if(fW()&&!host()&&!CW.ctx){oldRan("actApply");return}if(S.d
  if(g.cold){try{cold(m.seen==="named"?`Bị ${m.who} hại, đày vào lãnh cung`:"Bị vu hại, đày vào lãnh cung")}catch(e){console.error(e)}}
  if(note&&gotItem&&m.k==="gift"&&!g.dead&&!g.cold){showModal();render();return}  /* the Quà tặng dialog is her note */
  if(note){pushModal({t:m.tt?String(m.tt):m.k==="petcare"?"Hảo hữu sang giúp":m.seen==="named"?"Hảo hữu ra tay":"Biến cố",h:note});showModal()}render()}
-function onActr(m){if(!CW.on||m.from===CW.seat)return;if(m.ack){delete CW.rpend[m.id];soonEnd();return}invRun(m.id,m.ok,null,m.lv)}
+function onActr(m){if(!CW.on||m.from===CW.seat)return;if(m.ack){delete CW.rpend[m.id];resAck(m.id);soonEnd();return}invRun(m.id,m.ok,null,m.lv)}
 /* her answer to my invite (old relay: actr; part D: her card's choice, run by the host after her context closes) */
 function invRun(id,ok,pp,lv){let a=CW.acts[id];delete CW.acts[id];
  /* part D r1: after a host reload CW.acts is empty: rebuild from the card's pp (target id, the item itself found by value, like invHer) */
@@ -1154,8 +1189,14 @@ addEventListener("pagehide",()=>{if(CW.on)snapSave(true)});document.addEventList
    Relays ride the existing free-form act channel (k "ctm-p2", mode = op): no Worker change, protocol stays backward-compatible
    (an old client ignores an unknown k). Every act has its gain AND its loss on both sides; numbers from BAL / the existing act code. */
 const P2K="ctm-p2",P2S=new Set();
-function p2say(mode,o){try{return COOP.send(Object.assign({t:"act",k:P2K,mode,week:wk(),id:P2K+mode+":"+newId()},o||{}))}catch(e){return false}}
-const P2H={};COOP.on("act",m=>{if(!m||m.k!==P2K||!CW.on||m.from===CW.seat||!S||P2S.has(m.id))return;P2S.add(m.id);const h=P2H[m.mode];if(h)try{h(m)}catch(e){console.error(e)}});
+/* E44k F1 family (law 11 + 6c): the P2 item answers (iltake = her choice for her piece in my box, ilrefund = her silver back) ride the same
+   outbox as «res» (resent until acked, applied once per id, also after a reload: S.coopRs). A lost «ilask» is asked again by jil ilWeek (againW). */
+const P2R=new Set(["iltake","ilrefund"]);
+function p2say(mode,o){try{const m=Object.assign({t:"act",k:P2K,mode,week:wk(),id:P2K+mode+":"+newId()},o||{});return P2R.has(mode)?resOut(m):COOP.send(m)}catch(e){return false}}
+const P2H={};const p2In=m=>{if(!m||m.k!==P2K||!CW.on||m.from===CW.seat||!S)return;if(m.mode==="ack"){resAck(m.ack);return}
+ const rl=P2R.has(m.mode);if(P2S.has(m.id)||(rl&&rsSeen(m.id))){if(rl)COOP.send({t:"act",k:P2K,mode:"ack",ack:m.id,id:P2K+"ack:"+newId()});return}P2S.add(m.id);
+ if(rl)S.coopRs=(S.coopRs||[]).concat([m.id]).slice(-80);const h=P2H[m.mode];if(h)try{h(m)}catch(e){console.error(e)}
+ if(rl)COOP.send({t:"act",k:P2K,mode:"ack",ack:m.id,id:P2K+"ack:"+newId()})};COOP.on("act",p2In);CW.p2InT=p2In;/* test hook */
 const fSrvE=()=>{try{return allServ().find(isF)||null}catch(e){return null}};
 const isSrvMe=()=>typeof isSrv==="function"&&isSrv();
 
@@ -1198,6 +1239,22 @@ function nbribeIn(r){if(S.dead||!isSrvMe())return;const v=RV(r);if(!v||!v.alive)
 (function(){if(typeof evA!=="function")return;const f=evA;evA=function(h,t,n){const d=f.apply(this,arguments);
  try{if(CW.on&&!CW.b4in&&d>0&&isF(h)&&t&&t!==S&&!isF(t)&&t.id!=null&&t.id<900){if(dOn())evOut(t.id,d);else p2say("ev",{tg:t.id,n:d})}}catch(e){}return d}})();
 P2H.ev=m=>evIn(m.tg,m.n);
+/* E44j (b) (E52r finding b, law 1 + 6c REAL OBJECTS): HER piece taken into the HOST's box (tịch thu, sold out of her entry) had no road back:
+   the NPC owner's road (ilConf / ilBack) never picks a player seat (npwAsk guard T8). The host keeps the box record (the world's truth) and, at
+   the same due points as the player's own (jil ilWeek: confW wait, ransom visit), asks HER seat with the SAME dialog (PEND ilconf / ilback, pp.f);
+   her choice comes back, the host hands the piece to her entry (jil ilTake → npcToFriend «add» = one piece home). Silver she paid for a piece
+   that left the box meanwhile comes back to her (no new player words). */
+CW.ilAsk=(kind,x)=>{try{if(!CW.on||!host()||!x||!x.e)return;ilUid(x.e);p2say("ilask",{kind,u:x.e.iu,e:J(x.e),pr:x.pr|0})}catch(e){console.error("ilAsk",e)}};
+P2H.ilask=m=>{if(host()||!S||S.dead||!m||!m.e||!m.e.k)return;const pp={u:m.u,f:1,kind:m.kind==="conf"?"conf":"back",e:m.e,pr:m.pr|0};
+ pushDil(mkP(pp.kind==="conf"?"ilconf":"ilback",pp),pp.kind==="conf"?"Đồ bị tịch thu":"Đồ cũ trở về");try{showModal();render()}catch(e){}};
+CW.ilWant=(pp,how,pay)=>{p2say("iltake",{u:pp.u,k:pp.e&&pp.e.k,how,pay:pay||null})};
+P2H.iltake=m=>{if(!host()||!m)return;const f=friendEntry();const x=typeof ilFind==="function"?ilFind(m.u):null;
+ if(f&&x&&String(x.own)===String(key(f))&&typeof ilTake==="function"){ilTake(x,f,m.how||"về");return}
+ if(m.pay&&m.pay.bac>0)p2say("ilrefund",{bac:m.pay.bac|0,k:x&&x.e?x.e.k:m.k||""})};
+/* refund: only when the piece left the host box before her answer came (her entry died meanwhile: while it lives, jil ilWeek keeps every
+   other road off her pieces); no new player words (E ROOT: existing wording only) */
+P2H.ilrefund=m=>{if(host()||!S||S.dead||!(m&&m.bac>0))return;ap(S,{bac:m.bac|0})};
+CW.P2H=P2H;/* test hook (dev/test/coop-famops-unit.js) */
 function evIn(tg,n){if(S.dead)return;const v=RV(tg);if(!v||!v.alive)return;const d=evA(S,v,+n||0);if(d>0){try{log(`Tai mắt ${esc(friendName())} lén báo tin: chứng cứ với ${esc(v.name)} +${d}.`)}catch(e){}render()}}
 /* part D: the proof goes to the player who holds it, run by the host in that player's context */
 function evOut(tg,n){const T=CW.thin;if(CW.ctx)T.D.after(()=>evIn(tg,n));else if(host())T.D.kind(fs(),"ev",{tg,n});else T.doSend("ev",{tg,n})}
@@ -1311,6 +1368,9 @@ function hrCard(h,was){if(!S||S.dead)return;const x=hrFind(h);if(!x)return;const
    paid: S.j71.fx, sent live in pos) is used for her score, not the NPC "best art"; she pays the same Sức as when she plays it herself,
    her registration is closed and she gets the result card with her place and any prize. */
 function b4Snap(){const x=(CW.pulled||[]).find(y=>y[0]>=0);const v=x&&x[1];if(!v)return null;let P0=null;try{P0=tsbPets(v).map(P=>[P,Object.assign({},P)])}catch(e){}return {v,inv0:(v.inv||[]).slice(),K0:famSnap(v),P0}}
+/* E44j (a) (E52r finding a): a piece b4Ops sends to her seat («add» / «plant») is marked (object and ledger id) until the current call stack ends: jil ilGuard's
+   after-check of the same call (rivalsMonth: ilGuard is OUTSIDE b4Wrap) routes it again through ilGone → npcToFriend, which then sends nothing */
+function b4Mark(e){if(!CW.b4Sent){CW.b4Sent=new Set();Promise.resolve().then(()=>{CW.b4Sent=null})}CW.b4Sent.add(e);if(e.iu)CW.b4Sent.add("i"+e.iu)}
 function b4Ops(b,why){const v=b.v,ops=[],L1=v.inv||[];
  /* E44e (law 6c, one piece = its ledger id): her entry rebuilt meanwhile (a festival's result diffs the snapshot taken at its start) holds NEW objects
     of the SAME pieces: matched by iu they did not move. Before: every piece «rm gone» + «add» (≈35 «Được ban …» lines, a piece mid-case lost: vanish 10000013) */
@@ -1321,7 +1381,7 @@ function b4Ops(b,why){const v=b.v,ops=[],L1=v.inv||[];
      Now the same op as my own laydo (famDiff RMHOW «lost»): her seat opens her case, held by that NPC */
   let lc=null;if(!th)try{const c=typeof loCaseOf==="function"?loCaseOf(e):null;if(c&&c.e===e&&String(c.own)===String(key(v))&&c.st!=="done"&&c.cause==="riv"){lc=c;const h=loP(c.at||c.by);if(h&&h!==v&&!isF(h))th=h}}catch(z){}
   ops.push(Object.assign({op:"rm",ci,k:e.k,how:th||lc?"lost":"gone"},th?{by:th.id}:{},e.iu?{iu:e.iu}:{}))}
- for(const e of L1)if(!b.inv0.includes(e)&&e&&e.k&&!SM.has(e)){const x=J(e);delete x.ci;if(x.by==="me")x.by=me();ops.push(e.h?{op:"plant",e:x}:{op:"add",e:x,why:why||""})}
+ for(const e of L1)if(!b.inv0.includes(e)&&e&&e.k&&!SM.has(e)){const x=J(e);delete x.ci;if(x.by==="me")x.by=me();ops.push(e.h?{op:"plant",e:x}:{op:"add",e:x,why:why||""});b4Mark(e)}
  for(let [kd,c] of b.K0.kids){const n=kidId(c);if(!(v.kids||[]).includes(kd))kd=(v.kids||[]).find(k=>k&&kidId(k)===n)||kd;/* E44e: a rebuilt entry = same child, new object */if(!(v.kids||[]).includes(kd)){const to=rivals.find(r=>r!==v&&!isF(r)&&(r.kids||[]).includes(kd));ops.push(Object.assign({op:"ktake",n},to?{to:to.id}:{}));continue}
   if(c.alive!==false&&kd.alive===false){ops.push({op:"kdie",n,why:"mất sớm"});continue}
   const d={};for(const x of ["hp","tal","fond"])if(typeof kd[x]==="number"&&kd[x]!==c[x])d[x]=kd[x]-(c[x]||0);const h0=!!c.heir&&!kd.heir;
@@ -1330,7 +1390,7 @@ function b4Ops(b,why){const v=b.v,ops=[],L1=v.inv||[];
 function b4Send(ops,o){o=o||{};if(!ops.length&&!o.force)return;const rid=newId();CW.rpend[rid]=Date.now();(CW.b4s=CW.b4s||[]).push({ops:ops.map(x=>x.op),tt:o.tt||""});if(CW.b4s.length>20)CW.b4s.shift();
  const msg=Object.assign({t:"res",id:rid,k:o.pet&&o.pet.some(x=>x.op==="lose")?"petsteal":"npc",n:"",who:"",fx:o.fx||{},flags:{},seen:"effect",fam:ops,hd:o.hd||"",tt:o.tt||""},o.fest?{fest:o.fest}:{},o.pet&&o.pet.length?{pet:o.pet}:{});
  /* E44b (E44r SWAP vanish 399 / 1571): the lostReturn hook sends from the GUEST too; D.resTo runs on the host only (as sendRes) — on the guest it ran the «ret» locally and the host case stayed «held» */
- if(dOn()&&host()&&CW.thin.D.resTo(fs(),msg,rid))return;COOP.send(msg)}
+ if(dOn()&&host()&&CW.thin.D.resTo(fs(),msg,rid))return;resOut(msg)}
 /* r1 fix 2: an NPC's pet act on her entry (jpetcare mindMenu petsteal / thaopet) → the same res.pet ops as mine: she loses it, not a copy */
 function b4Pet(b){try{return b&&b.P0?petDiff(b.v,b.P0):[]}catch(e){return []}}
 function f7reg(v,kk){try{const F=FX7[kk];const X=F&&v&&v.fx7&&v.fx7[F.f];return X&&X.a&&X.y===S.year&&!X.done&&SC7[X.a]?{F,X}:null}catch(e){return null}}
@@ -1363,7 +1423,7 @@ function b4Wrap(n,f){return function(){if(!CW.on||!host()||!CW.pulled||!CW.pulle
    logged «sang hảo hữu», but no op carried it: the piece stayed on the host's display copy of her entry and never reached her seat
    (coop-lost-scan vanish 934 / 3385 / 2028: a Kỳ ngộ-kept piece given on). Now the same «add» op the diffed calls send. Host only (NPCs roll
    on the host); inside a diffed call (CW.b4in) b4Ops already sends it. */
-CW.npcToFriend=(p,e,f)=>{if(!CW.on||!host()||CW.b4in||!e||!e.k||!isF(f))return;const x=J(e);delete x.ci;if(x.by==="me")x.by=me();b4Send([e.h?{op:"plant",e:x}:{op:"add",e:x,why:"",by:p.id}],{})};
+CW.npcToFriend=(p,e,f)=>{if(!CW.on||!host()||CW.b4in||!e||!e.k||!isF(f))return;if(CW.b4Sent&&(CW.b4Sent.has(e)||(e.iu&&CW.b4Sent.has("i"+e.iu)))){CW.b4Sent.delete(e);if(e.iu)CW.b4Sent.delete("i"+e.iu);return}/* E44j (a): b4Ops of this call already sent it (the same object, or the copy giveTo made: same id) */const x=J(e);delete x.ci;if(x.by==="me")x.by=me();b4Send([e.h?{op:"plant",e:x}:{op:"add",e:x,why:"",by:p.id}],{})};
 CW.b4Wrap=b4Wrap;/* part C (jcoopthinc): the host's rivalsBuoi with her entry in the harem (G7) */
 /* r1 fix 2 (whole family): ANY NPC act on her entry, whatever path runs it (npcAct, mindRun, a j70 plot's exec70, the jealousy kv acts,
    a due plan in rivalsBuoi…), outside the diffed calls above: the host snapshots her entry around that one act and sends the same res.fam /

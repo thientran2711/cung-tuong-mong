@@ -77,7 +77,7 @@ function e68Ctx(){return{sea:SEASON[S.month-1],m:S.month,rank:S.rank,place:S.pla
 function e68Cands(fams,big){const e=e68(),C=e68Ctx(),now=wk(),out=[];const story=e68Story();
  for(const s of E68){if(fams&&!fams.includes(s.fam))continue;if(s.fam==="plot"||s.fu)continue;if(big===false&&s.big)continue;if(s.big&&story)continue;
   const last=e.cd[s.id];if(last!=null&&now-last<(s.cd||E68CFG.cd))continue;let w=0;try{w=s.w?s.w(C):1}catch(x){w=0}if(!(w>0))continue;
-  w*=Math.pow(.5,e68Past(s.id,true));out.push([s,w])}return out}
+  w*=nrW("j68",s.id,true);/* BAL.nr.w ** past lives that saw it (was a typed .5, same value) */out.push([s,w])}return out}
 function e68Pick(L){return npwPick(L,x=>x[1],{all:true})} /* npc-purpose: weighted among the situations whose people / state fit (every fitting one may come; top-only made whole families vanish: Tin đồn 28→0) */
 /* params + a variant she has not seen lately (this life first, then the last five lives) */
 function e68Make(s){const e=e68();let p=null;try{p=s.pp?s.pp():{}}catch(x){p=null}if(!p)return null;const V=s.v||[""];

@@ -28,4 +28,13 @@ ok(A.nrFresh('mg:hoa',['a','b']).join()==='b','fresh filter');ok(A.nrDraw('j7',[
 const st2={},c2=ctx(st2);ok(c2.api.nrSeen('j68','x')===0&&c2.api.nrLife()===null,'no store / no S: safe');
 // 6. cap
 c.S={};A.nrLife();for(let i=0;i<1600;i++)A.nrMarkK('t:'+i);ok(JSON.parse(st['ctm-nr']).L[0].length===1500,'cap per life');
+// 7. co-op thin guest (review r1): the host running the friend's turn (COOPW.ctx = her seat) never marks / rotates its own store
+{const st3={'ctm-e68h':JSON.stringify(old)},c3=ctx(st3),A3=c3.api;c3.S={e68:{lid:'lifeA'}};A3.nrMark('j68','host:1');const before=st3['ctm-nr'];
+ c3.window.COOPW={on:true,seat:'a',ctx:'b'};c3.S={nrl:'guestLife'};A3.nrMark('j7','guestSeed');A3.nrLife();
+ ok(st3['ctm-nr']===before&&JSON.parse(st3['ctm-nr']).cur==='lifeA','withSeat(friend): host store not written, not rotated');
+ ok(A3.nrSeen('j68','gossipTea',true)===0,'withSeat(friend): host history does not weigh her picks');
+ c3.window.COOPW.ctx=undefined;c3.S={e68:{lid:'lifeA'}};ok(A3.nrSeen('j68','gossipTea',true)===oldPast(st3,'gossipTea',true),'back to host: own history again')}
+// 8. law 4: numbers come from BAL.nr only
+{const st4={},c4=ctx(st4);c4.BAL.nr={lives:3,w:.25,cap:5};c4.S={};c4.api.nrLife();for(let i=0;i<9;i++)c4.api.nrMarkK('t:'+i);
+ ok(JSON.parse(st4['ctm-nr']).L[0].length===5,'cap read from BAL.nr');for(let l=0;l<4;l++){c4.S={};c4.api.nrLife()}ok(JSON.parse(st4['ctm-nr']).L.length===3,'lives read from BAL.nr')}
 console.log(fail?`NOREP UNIT: ${fail} FAIL`:'NOREP UNIT: ALL PASS');process.exit(fail?1:0)
