@@ -26,7 +26,7 @@ let bad=0;const ok=(c,m,x)=>{console.log((c?'ok   ':'FAIL ')+m+(x!==undefined?' 
    await g.evaluate(async()=>{document.querySelector('.dfgo')&&document.querySelector('.dfgo').click();await new Promise(r=>setTimeout(r,500))});await p.screenshot({path:`${dir}/${dev}-play.png`})}
   /* (2) veil: a frame with a slow picture stays hidden then shows */
   const v=await g.evaluate(async()=>{const sl=ms=>new Promise(r=>setTimeout(r,ms));const d=document.createElement("div");const im=new Image();im.src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";d.appendChild(im);document.body.appendChild(d);kg82Veil(d,"chai");const hid=d.style.visibility==="hidden";await sl(BAL.mgVeilMs+400);const shown=d.style.visibility==="";
-   const d2=document.createElement("div");const im2=new Image();im2.src="http://10.255.255.1/never.png";d2.appendChild(im2);document.body.appendChild(d2);kg82Veil(d2,"chai");const h2=d2.style.visibility==="hidden";await sl(BAL.mgVeilMs+400);return{hid:hid||true,shown,slowHidden:h2,slowShown:d2.style.visibility===""}});
-  ok(v.shown&&v.slowHidden&&v.slowShown,dev+' (2) veil: hidden while decoding, shown when decoded, never trapped past the cap',v);
+   const d2=document.createElement("div");const im2=new Image();im2.src="http://10.255.255.1/never.png";d2.appendChild(im2);document.body.appendChild(d2);kg82Veil(d2,"chai");const h2=d2.style.visibility==="hidden";await sl(BAL.mgVeilMs+400);return{hid,shown,slowHidden:h2,slowShown:d2.style.visibility===""}});
+  ok(v.hid&&v.shown&&v.slowHidden&&v.slowShown,dev+' (2) veil: hidden while decoding, shown when decoded, never trapped past the cap',v);
   ok(errs.length===0,dev+' no page error',errs);await ctx.close()}
  await b.close();srv.close();console.log(bad?'FAILED '+bad:'ALL OK');process.exit(bad?1:0)})();
