@@ -1558,3 +1558,4 @@ motion4 fixes (MAIN 3 FAILs) | review/motion-design-4 | session_01V1ZZH1Y318MQY7
 | REVIEW robot-fix-cnv r1 RE-LAND (opus BIG; briefs/F-robot-fix-cnv-review.md; r1 659d2f09 re-merged on newest LIVE; the 98040f4c PASS was lost unpushed) | review/robot-fix-cnv-r1; reports/robot-fix-cnv.md | F | session_01UV1Szjz8ctXWggjwCu5NY3 | RUNNING | 24/11 20:08Z |
 selection-scene faults 2-11 + perf | review/selection-scene | session_01V1ZZH1gdgYpfYjzBmjLtyo | RUNNING | 2026-11-24T20:08Z (MAIN 127)
 | ROBOT-COOP FIXER #7 (opus; law1-maid-away gate, coop-tail N1–N3, save round-trip family) | review/law1-maid-away, review/robot-coop-tail, review/robot10-coop | B | session_01N1tNP3fqMhAjzz59xaXXqg | RUNNING | 24/11 20:28Z |
+save-growth (d)+(b) | review/save-growth | (opening) | RUNNING | 24/11 20:58Z | FOREMAN E (child7)
