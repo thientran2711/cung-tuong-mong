@@ -7,7 +7,7 @@ For EACH key, in this order, one at a time or several in parallel:
    folderReference = "d06c0d09-6b77-49b7-9b61-6c5057ca21ed"
    references = [{"type":"image","identifier":"VXJxowRMMU"}]
 3. `creations_wait` until completed (repeat if not terminal). Never start a second gen for the same key.
-4. Download the full `url` with curl to `/tmp/claude-0/-home-user-cung-tuong-mong/d35a73e1-e014-5dd4-8abd-21c4aa8c02d4/scratchpad/new/<key>.png`
+4. Download the full `url` with curl to `/tmp/claude-0/-home-user-cung-tuong-mong/2400d053-9e17-5957-a139-e7881abead4f/scratchpad/new/<key>.png`
 5. Run `python3 /home/user/cung-tuong-mong/dev/art/kp23-redraw/make_webp.py <that png> <key>`
 Do NOT look at the pictures, judge them, regenerate, upload, commit or push. Do not edit any file.
 Return ONLY lines `<key> <creation identifier> <ok|error: reason>`.
