@@ -12,3 +12,13 @@ Merged LIVE origin/main 72521d62 into W4's 2a17fc28 (only index.html/sw.js confl
 - Laws touched: 11 (fix the whole group) — FAIL while any size still overlaps; 12 two devices — PASS; 9 kit — PASS; 16 no working rule changed — PASS.
 
 For W4: (1) find why DOM overlap `Thượng thư phòng|Ngự thiện phòng` appears at 390x844 day r3/r4 with solve.hard = 0 (print `__mapIts` boxes vs DOM boxes; check the 120 ms wait vs a late mapFit / kmnw variant mismatch); (2) the RX stage must also clear `Trường Môn viện|Hàm An` on the phone every run (it still showed once in 4 runs); (3) rerun the 280-case test 3× at all 4 sizes → 0 each time.
+
+## REVIEW R2 (small-tier reviewer-lander, 24/11, review/map-label-overlap-r = a7bf3e01 + LIVE main bba42773 merged, site rebuilt)
+PRIORITY #1 CHECK ('map label overlap'): OD D-find 23/11 21:17Z | main kmSolve j38.js | review/* review/map-label-overlap | claims REVIEW map-label-overlap (mine).
+**Verdict: FAIL (1 intermittent cold-start defect on iPad 1180x820).**
+- 280-case test 3× at 4 sizes: run1 0, run3 0, **run2 1 case / 4 pairs**: `1180x820 map day rank=0 zoom=fit` (the FIRST case after page load): `Càn Ninh cung|Vĩnh Hòa, Dưỡng Hòa điện|Diên Huy, Thái y viện|Ngự thiện phòng, Cảnh Phúc|Diên Huy` with `__mapSolve.hard=0` (solver clean, DOM drifted; still overlapping 800 ms after render, i.e. past the 250 ms settle check). Phone 390x844 and Fold/Pro: 0 in all 3 runs (the R1 phone defects are gone).
+- Reproduction: 14 fresh launches of `map-label-overlap.js <url> 1180x820 0 0` (cold start, rank 0, fit): **2/14 fail**. 4 further full iPad runs (70 cases each) 0/4, 6 further single cold runs 0/6 — so ~10-15 % of cold first opens at rank 0 show it; later cases (solution cached / page warm) pass.
+- Old-save (main build → this build, Dư đồ day+night, Fold + iPad): loads, 0 page errors, 0 overlaps.
+- Screenshots looked at (Fold 755x1000 day/night, iPad 1180x820 day/night, 3 frames each): sharp, tags separate, same text size.
+- Whole group: same kmSolve (RX1-3 are stages of the one loop), no per-place variant, no CSS/kit change; owner layouts unchanged.
+For W4: the settle check does not catch a first-open drift (probably fonts/rank-title painter/first image load after the 250 ms check; max 4 re-fits may be spent before the final shift). Make the fit converge: after the last observed mutation/resize re-measure until two consecutive measurements agree (or re-run on `document.fonts.ready` + image `load`), and add a cold-start loop to the test (N fresh launches of the first case) — 0/30 required. Then rerun the 280-case test 3×.
