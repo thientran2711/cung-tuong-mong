@@ -5,3 +5,4 @@
 - FROM MAIN 114 (23:40Z 23/11): LIVE = 37d07967 (N17 coop-famops-t2: co-op family items no dup/vanish on trade).
 - FROM MAIN 114 (23:54Z 23/11): LIVE = 17835565 (offline-all: Thiết lập › «Tải hết để chơi offline»).
 - FROM MAIN 114 (00:18Z 24/11): LIVE = 16f5c1dc (know-notice: clear top-bar notice for every new thing learned, no doubles).
+- FROM MAIN 114 (00:41Z 24/11): LIVE = e88b09b4 (kit-selscene: KIT §93 selection-scene parts).

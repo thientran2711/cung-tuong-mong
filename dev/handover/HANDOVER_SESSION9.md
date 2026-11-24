@@ -2742,3 +2742,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (00:33Z wake) ctx 25.7 % (roll line 32 %). LOAD: main running 5 (W2 idle, W4+rv map-label, KK14, SELSCENE) | B free 0 (THIN P0–P2 + P1b/P1c) | C busy (KP23 redraws, SELART, KP10) | D free 0 (robot10 harness rv + #6/#7/#8) | E busy (TITLES2 E55; AGEBAND ordered) | F silent (no first line yet — check next wake) | moved: none. coop-thin-g 70dc7244 (B LAND READY 23:30Z, missed by 113) → LC8. D: HH 0/10 in robot proof (#6 reco worker proposes BAL).
 - (00:34Z) OWNER: Fold room hub figure in the MIDDLE (OD 00:40Z) → KK14 mock v3.4.
 - (00:40Z) MOCK-STAGE v3.4 ca154a3d: MAIN LOOKED Fold hub (figure centred between table and mirror, labels clear) → link to sếp. KIT §94 draft review/kit-toilroom 2797e672.
+- (00:41Z) LANDED kit-selscene → LIVE e88b09b4. rv N76XbyLe archived; SELSCENE told (base main). LC8 queue: odds-no-thanh, kit-mgskin, coop-thin-g.
