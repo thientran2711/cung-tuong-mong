@@ -1502,7 +1502,7 @@ FIX promo-build-2 r1 (opus BIG; briefs/D-promo-build-2-fix.md; from de24c1ae) | 
 | ROBOT-COOP RUNNER U16 pairs 15-16 SWAP=1 | dev/handover/robot/coop-U16-* | FOREMAN E (child4) | session_01DgYSWme7viyfpYaqM6vM7t | RUNNING | 24/11 11:58Z |
 | ROBOT-COOP RUNNER U17 pairs 17-18 SWAP=0 | dev/handover/robot/coop-U17-* | FOREMAN E (child4) | session_01DgYSWoqhFR6eEQzbDDKqY6 | RUNNING | 24/11 11:58Z |
 | ROBOT-COOP RUNNER U18 pairs 17-18 SWAP=1 | dev/handover/robot/coop-U18-* | FOREMAN E (child4) | session_01DgYSWmpKLyR9tiAbos763w | RUNNING | 24/11 11:58Z |
-| ROBOT-COOP RUNNER U19 pair 19 only (pair 20 → U21) SWAP=0 | dev/handover/robot/coop-U19-* | FOREMAN E (child4) | session_01DgYSWohtCk2AGS5VzQrrH1 | RUNNING | 24/11 11:58Z |
+| ROBOT-COOP RUNNER U19 pair 19 only (pair 20 → U21; stopping 19:10Z after stuck repro) SWAP=0 | dev/handover/robot/coop-U19-* | FOREMAN E (child4) | session_01DgYSWohtCk2AGS5VzQrrH1 | RUNNING | 24/11 11:58Z |
 | ROBOT-COOP RUNNER U20 pairs 19-20 SWAP=1 | dev/handover/robot/coop-U20-* | FOREMAN E (child4) | session_01DgYSWof6mK27r2oWrXX22S | RUNNING | 24/11 11:58Z |
 rv net-build r2 (opus BIG; briefs/D-net-build-review-r2.md; target e41f4f79) | review/net-build-rv | session_01D3E3NaeN3VTQuhYDqui8cJ | RUNNING | 24/11 12:00Z (Foreman D depth 3)
 | REVIEW robot-fix-cnv 1f046fb7 (opus BIG; briefs/F-robot-fix-cnv-review.md) | review/robot-fix-cnv(-r1); reports/robot-fix-cnv.md | F | session_01UV1Szm25UYRL53kk7urYNo | DONE PASS LAND READY 98040f4c (rolled over; -2 = fresh reviewer) | 24/11 12:24Z |
