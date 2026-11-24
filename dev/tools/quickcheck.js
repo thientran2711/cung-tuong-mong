@@ -49,7 +49,7 @@ const SETTLE=()=>{try{for(let j=0;j<8&&Q.length&&!S.dead;j++){const m=Q[0];if(m.
    the selection (ban hoa, owner rule: the life ends) can never settle → reroll a new life, same idiom as the cung nữ reroll above; counted, capped. */
 const BANHOA=()=>!!(S&&S.dead&&S.fate==='Bị ban hoa, xuất cung');
 const SELX_REROLL_MAX=5;let selxRerolls=0;
-async function settleNew(g,what){for(let k=0;;k++){await within(60e3,g.waitForFunction('('+SETTLE.toString()+')()||('+BANHOA.toString()+')()',null,{polling:150}),what);
+async function settleNew(g,what){for(let k=0;;k++){await within(60e3,g.waitForFunction('('+SETTLE.toString()+')()||('+BANHOA.toString()+')()',null,{polling:150,timeout:60e3}),what);/* timeout = the within() limit (Playwright's default 30 s fired first: a tú nữ's 3 days under the perf CPU throttle) */
   if(!await g.evaluate(BANHOA))return;if(k>=SELX_REROLL_MAX)throw new Error(what+': '+(k+1)+' new lives in a row ended at the selection (ban hoa) — reroll cap '+SELX_REROLL_MAX+' reached');
   selxRerolls++;console.log('  selection: life ended in ban hoa → reroll '+(k+1)+'/'+SELX_REROLL_MAX);await g.evaluate(NEWLIFE)}}
 const BUOI=async()=>{const sl=t=>new Promise(r=>setTimeout(r,t));const k0=JSON.stringify([S.turn,S.buoi,S.month,S.year]);const t0=performance.now();
