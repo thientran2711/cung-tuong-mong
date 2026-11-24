@@ -1,7 +1,7 @@
 /* ================= MEN OF THE PALACE AND FORBIDDEN AFFAIRS (adults; man and woman only; fade to black; full consequences) ================= */
 const MROLES=[["Thị vệ","thị vệ",["vuon","thu"],24,8],["Thái y","thái y",["tyv"],29,6],["Vương gia","vương gia",["vuon","tn"],27,6],["Nhạc sư","nhạc sư",["vuon"],31,10],["Sứ thần","sứ thần",["thu","vuon"],34,8],["Họa sư","họa sư",["vuon","tn"],30,10]];
 const MTR=["phong lưu","trung hậu","tham vọng","đa tình","cẩn trọng"];
-FPOOL.man=rng(1,8,i=>"face-man-"+i);
+FPOOL.man=[];/* offline-fast (24/11): face-man-1..8 were never drawn (not on the CDN, not in assets.json): 8 × 404 probes at every start and a broken face offline. Men take their faces from bandKeys("man") = manold / off pools (j17); add files here only once they are on the CDN (dev/test/ref-offline.js checks it). */
 function menInit(){if(!S||S.men)return;S.men=MROLES.map((r,i)=>({id:"m"+i,role:r[0],rw:r[1],haunts:r[2],age:r[3]+R(r[4]),name:`${r[0]} ${nmNew("m")}`,loyal:40+R(50),af:0,tinh:0,letters:0,trysts:0,alive:true,knowsMe:[]}));S.menW={};S.aff={}}
 function manById(id){return (S.men||[]).find(m=>m.id===id&&m.alive)||null}
 function pMan(m){faceFor(m,m.rw==="vương gia"?"royal":"man",m.age);const fb=(AV.emperor||[]).filter((x,i)=>i!==S.emp.face)[Number(m.id.slice(1))%3]||"";return{rk:"off",rw:m.role,src:fsrc(m.fc,fb),hue:0,ini:m.name.split(" ").pop()[0],col:"#6a8aa0"}}
