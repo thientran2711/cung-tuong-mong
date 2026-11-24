@@ -497,3 +497,6 @@ P6-SEEDS-A validator fix: DONE (see commit below) wseeds_a.md 40 seeds, 4 per ki
 
 ## P7-SEEDS-A
 DONE b6d494b0 fseeds_a.md 117 rows: stage 49 (C 28 / W 5 / G 5 / B 2 / P 4 / R 5; 7 per fest, ≥4 C each) comp 40 (28 own = 4 per fest + 12 shared fc-xa-c01..12) prize 28 (4 per fest) validator pending (fseeds_validate.py not yet on review/thin-p6; own script check of sums, words, placeholders 0 errors)
+
+## P7-SEEDS-B
+DONE e37958f8 fseeds_b.md 103 rows: stages 42 (6 per festival: C 4 + non-C 2; trungthu vantho trungcuu thanhtho dongchi lapbat giaothua), own comps 28 (4 per festival), prizes 21 (3 per festival; 15 with IT key), shared comps fc-xb-c01..c12 (12); self-check passed (step sums, banned words, labels <= 8 words, placeholders) validator pending (not on review/thin-p6 yet)
