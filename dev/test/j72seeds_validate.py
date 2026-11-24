@@ -24,6 +24,11 @@ SK={"","tai","tamco","sac","danh","duc","mat","sung","an","thi","cam","ky","hoa"
 STAT={"sung","danh","bac","suc","mat","th","hh","duc","an"};ODDS={"de","vua","kho"};FAIL={"retry","end","bad"}
 NEEDS={"rank_min","rank_max","nights_min","month","not_confined","kids_min"}
 PH={"A","B","M","O","S","goi","Goi","xung","Xung"}
+L_="A-Za-zÀ-ỹĐđ"
+# review thin-p3 r1 (VANPHONG xưng hô): never bạn/tôi/em/anh/chị (chị em ok)/cô ấy/ông ấy; the requester's address and self-word go through
+# {goi}/{Goi}/{xung}/{Xung} (one voice core, OD:L1267) — never hand-typed «nương nương / tiểu chủ / tại hạ / thần thiếp» in the ask or a “quoted” line.
+BAD2=re.compile(rf"(?<![{L_}])(tôi|bạn|cô ấy|ông ấy|anh ấy|chị ấy)(?![{L_}])",re.I)
+ADDR=re.compile(rf"(?<![{L_}])(nương nương|tiểu chủ|tại hạ|thần thiếp)(?![{L_}])",re.I)
 BAD=re.compile(r"%|\d|\b(OK|game|turn|round|slot|lượt|ván|level|quest)\b|Chắc chắn|Nắm chắc|Rất chắc|Khó lường|Mong manh|Tùy duyên|Có cơ|Rất vững",re.I)
 A=sys.argv[1:];args=[a for n,a in enumerate(A) if not a.startswith('--') and not (n and A[n-1] in('--min','--kinds'))];MIN=int(A[A.index('--min')+1]) if '--min' in A else 0
 CHK=set(A[A.index('--kinds')+1].split(',')) if '--kinds' in A else {"craft","social","court","fam"}
@@ -143,8 +148,11 @@ for r in rows:
             if p not in PH:err(f"{i} placeholder {{{p}}} unknown")
             if p=="B" and not hb:err(f"{i} {{B}} without other")
             if p=="O" and not ho:err(f"{i} {{O}} without object")
-        mm=BAD.search(t or "")
+        mm=BAD.search(t or "") or BAD2.search(t or "")
         if mm:err(f"{i} VANPHONG word: {mm.group(0)!r} in «{t[:60]}»")
+        for q in ([t] if t==r.get("ask") else [])+re.findall(r"“[^”]*”",t or ""):
+            ma=ADDR.search(q.replace("Hoàng hậu nương nương",""))
+            if ma:err(f"{i} hand-typed address {ma.group(0)!r} (use {{goi}}/{{xung}}) in «{q[:60]}»")
     for k in (r.get("needs") or {}):
         if k not in NEEDS:err(f"{i} unknown needs key {k}")
 if MIN:

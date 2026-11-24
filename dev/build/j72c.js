@@ -67,12 +67,23 @@ function j72cNeeds(sd,X){const n=sd.needs||{};
  if(n.nights_min!=null&&(S.nights||0)<n.nights_min)return false;if(n.month&&n.month.length&&!n.month.includes(S.month))return false;
  if(n.not_confined&&S.confined)return false;if(n.kids_min!=null&&(S.kids||[]).filter(k=>k.alive).length<n.kids_min)return false;
  return j72cNeed(sd.req&&sd.req.need,X.A,X)&&(!sd.other||j72cNeed(sd.other.need,X.B,X))&&j72cGround(sd,X)}
+/* review thin-p3 r1: a family letter (fam) and an adult child (ak) keep no thiện cảm (q72Rel does nothing for them), so a rel/relb step on
+   them would be a gain of nothing / a cost of nothing (law 3). Such a step is ân tình (an) instead: same step count, a real number. */
+const J72C_NOREL=new Set(["fam","ak"]);
+function j72cNorm(sd){const ka=J72C_NOREL.has(((sd.req&&sd.req.kind)||"").split(":")[0]),kb=!!sd.other&&J72C_NOREL.has((sd.other.kind||"").split(":")[0]);if(!ka&&!kb)return sd;
+ const m=o=>{if(!o)return o;const r={};for(const [k,n] of Object.entries(o)){const k2=(k==="rel"&&ka)||(k==="relb"&&kb)?"an":k;r[k2]=(r[k2]||0)+n}return r};
+ const c=JSON.parse(JSON.stringify(sd));for(const p of ["ok","no","twist"])if(c[p]){if(c[p].gain)c[p].gain=m(c[p].gain);if(c[p].loss)c[p].loss=m(c[p].loss)}
+ for(const st of c.steps||[])for(const o of st.opts||[]){o.gain=m(o.gain);o.loss=m(o.loss)}return c}
 /* seed → T72 template */
-function j72cReg(sd){if(!sd||!sd.id||T72I["c:"+sd.id])return null;const tier=sd.tier||"m";const sp=j72cSpec(sd.req);if(!sp)return null;
+/* review thin-p3 r1: a servant seed whose lines say «nô tỳ» is a maid's ask, «nô tài» a eunuch's: cast only that sex (real people, VANPHONG) */
+function j72cSex(sd){const s=j72cTexts(sd).join(" ");return /nô tỳ/i.test(s)?"f":/nô tài/i.test(s)?"m":""}
+function j72cSexOk(o,sx){return !sx||!o||(sx==="f")===(o.role==="maid")}
+function j72cReg(sd){if(!sd||!sd.id||T72I["c:"+sd.id])return null;sd=j72cNorm(sd);const tier=sd.tier||"m";let sp=j72cSpec(sd.req);if(!sp)return null;
+ const sx=j72cSex(sd);if(sp==="sv"&&sx)sp=sx==="f"?"svm":"sve";
  const ok=j72cVal(sd.ok&&sd.ok.gain,tier,1),okl=j72cVal(sd.ok&&sd.ok.loss,tier,-1),no=j72cVal(sd.no&&sd.no.loss,tier,-1);
  const okfx=Object.assign({},ok.fx);for(const k in okl.fx)okfx[k]=(okfx[k]||0)+okl.fx[k];
  const o=sd.object;const xo=o?[`${j72cTxt(o.name,sd)}: ${j72cTxt(o.trace_ok,sd)}`]:null;
- const T={r:sp,rf:(v,a)=>j72cFit(v,sd.req),t:j72cTxt(sd.title,sd),h:j72cTxt(sd.ask,sd),dl:BAL.j72c.dl[tier],s:j72cSteps(sd),
+ const T={r:sp,rf:(v,a)=>j72cFit(v,sd.req)&&(sp!=="rsv"||j72cSexOk(v,sx)),t:j72cTxt(sd.title,sd),h:j72cTxt(sd.ask,sd),dl:BAL.j72c.dl[tier],s:j72cSteps(sd),
   ok:{fx:okfx,r:ok.r+okl.r,rb:ok.rb+okl.rb,x:xo,fn:(X,x)=>{const a=j72cTrace(sd,X,"ok"),b=j72cTwist(sd,X,x);return [a,b].filter(Boolean).join(" ")}},
   no:{fx:no.fx,r:no.r,rb:no.rb,fn:X=>j72cTrace(sd,X,"no")},
   okT:sd.ok&&sd.ok.text?j72cTxt(sd.ok.text,sd):"",noT:sd.no&&sd.no.text?j72cTxt(sd.no.text,sd):"",
@@ -80,7 +91,7 @@ function j72cReg(sd){if(!sd||!sd.id||T72I["c:"+sd.id])return null;const tier=sd.
   need:X=>j72cNeeds(sd,X),p:()=>({tw:sd.twist&&Math.random()<BAL.j72c.twist?1:0})};
  if(sd.steps.some(st=>st.fail==="bad"||(st.opts||[]).some(z=>z.fail==="bad")))T.bad={fx:no.fx,r:no.r,rb:no.rb,ev:(sp==="rv"||sp==="hh")?"A":undefined,fn:X=>j72cTrace(sd,X,"no")};
  if(sd.needs&&(sd.needs.rank_min!=null||sd.needs.rank_max!=null))T.rk=[sd.needs.rank_min!=null?sd.needs.rank_min:0,sd.needs.rank_max!=null?sd.needs.rank_max:99];
- if(sd.other){const sb=j72cSpec(sd.other);if(!sb)return null;T.b=sb;T.bf=(v,z,A)=>j72cFit(v,sd.other)}
+ if(sd.other){let sb=j72cSpec(sd.other);if(!sb)return null;if(sb==="sv"&&sx)sb=sx==="f"?"svm":"sve";T.b=sb;T.bf=(v,z,A)=>j72cFit(v,sd.other)&&(sb!=="rsv"||j72cSexOk(v,sx))}
  return T7("c:"+sd.id,sd.kind,T)}
 (function(){try{const L=(typeof J72SEEDS!=="undefined"&&Array.isArray(J72SEEDS))?J72SEEDS:[];for(const sd of L)j72cReg(sd)}catch(e){console.error("j72c",e)}})();
 /* test hooks: counts per kind of composed seeds */
