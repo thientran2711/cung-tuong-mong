@@ -14,7 +14,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
   await p.waitForTimeout(2500);await p.addStyleTag({content:'#kload,#klife,.modal.kload,#modal.kptitle,#kroulw,.kroul,#curtain{display:none!important}'});
   await p.evaluate(()=>{for(const b of document.querySelectorAll('button'))if(/Vào cung ngay/.test(b.textContent)&&b.offsetParent)b.click()});await p.waitForTimeout(1500);
   const f=[];const rep=[];const ALLH=new Set();
-  await p.evaluate(()=>{window.__hide=()=>{const w=document.getElementById('dawn');if(w){w.hidden=true;w.innerHTML='';w.classList.remove('on')}Q.length=0;const m=document.getElementById('modal');if(m){m.hidden=true;m.className='modal';m.innerHTML=''}};tab='art';render()});await p.waitForTimeout(800);
+  await p.evaluate(()=>{window.__hide=()=>{const w=document.getElementById('dawn');if(w){w.hidden=true;w.innerHTML='';w.classList.remove('on')}Q.length=0;const m=document.getElementById('modal');if(m){try{closeModal()}catch(e){}m.hidden=true}};tab='art';render()});await p.waitForTimeout(800);
   const subs=await p.evaluate(()=>[...document.querySelectorAll('#panel .ksub .pct,#panel .pctabs .pct')].map(b=>b.textContent.trim().slice(0,20)));
   const nsub=Math.max(1,subs.length);
   for(let si=0;si<nsub;si++){
@@ -25,14 +25,19 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
    if(g.n&&g.hs.length!==1)f.push('tiles of «'+subs[si]+'» have different heights '+g.hs);if(g.n&&g.cols!==2&&g.n>1)f.push('tiles of «'+subs[si]+'» not 2 columns '+g.cols);if(g.over)f.push('tile overflows '+g.over);
    if(si===0&&g.n)await p.screenshot({path:`${OUT}/${wh}-tiles.jpg`,type:'jpeg',quality:70});
    for(const k of g.keys.slice(0,6)){
-    const r=await p.evaluate(async k=>{window.__hide();const s=ktTnFind(k);s.can=undefined;const host=document.createElement('div');host.id='__tnh';host.className='modal';host.style.cssText='position:fixed;left:0;top:0;width:'+Math.min(innerWidth-20,innerWidth>=1000?884:640)+'px;z-index:99999;background:#fff;padding:8px';host.innerHTML='<div class="dlg"><div id="mb"><div data-tnpop="1" class="ktn-pop">'+kitSkillCard(Object.assign({},s,{stepsAttr:''}))+'</div></div></div>';document.body.appendChild(host);
-     try{kitActCompactOn(host)}catch(e){}await new Promise(r=>setTimeout(r,400));try{kitActCompactOn(host)}catch(e){}await new Promise(r=>setTimeout(r,300));
-     const L=[...host.querySelectorAll('.ktn-pop .kskacts')];const out=L.map(l=>[...l.querySelectorAll(':scope>.kpanec')].map(c=>Math.round(c.getBoundingClientRect().height)));
-     const ov=host.scrollWidth>host.clientWidth+1;window.__ph=Math.round(host.querySelector('.ktn-pop').getBoundingClientRect().height);const gap=[...host.querySelectorAll('.kskacts>.kpanec>button.ka')].filter(b=>{const c=b.parentElement.getBoundingClientRect(),q=b.getBoundingClientRect();return c.height-q.height>2}).length;const dbg='';host.remove();return {out,ov,gap,dbg,ph:window.__ph}},k);
-    r.out.forEach(hs=>{hs.forEach(h=>ALLH.add(h));if(hs.length&&Math.max(...hs)-Math.min(...hs)>1)f.push('pop '+k+': act cards of one list differ '+hs)});if(r.ov)f.push('pop '+k+' overflows horizontally');if(r.gap)f.push('pop '+k+': card shorter than its row '+r.gap);
-    rep.push('  pop '+k+' h='+r.ph+' '+JSON.stringify(r.out)+(r.out.length?'':' '+r.dbg))}}
+    /* the REAL pop-up (kitModal in #modal, live frame fitter), not a fake host (B review r1 rows 1-3) */
+    const r=await p.evaluate(async k=>{try{closeModal()}catch(e){}Q.length=0;quiet=false;{const m0=document.getElementById('modal');if(m0)m0.className='modal'}await new Promise(r=>setTimeout(r,350));let er='';try{ktTnPop(k)}catch(e){er=String(e).slice(0,120)}const m=document.getElementById('modal');let d=null;const tr=[];for(let i=0;i<120;i++){await new Promise(r=>setTimeout(r,100));tr.push((m.hidden?'h':'v')+Q.length);d=m.hidden?null:m.querySelector('.dlg');if(d&&d.querySelector('.ktn-pop'))break;d=null}if(!d)return {none:1,tr:tr.join(','),er,hid:m.hidden,cls:m.className,h:m.innerHTML.slice(0,80)};await new Promise(r=>setTimeout(r,700));
+     const cards=[...d.querySelectorAll('.kskacts>.kpanec')].map(c=>{const q=c.getBoundingClientRect();return {l:Math.round(q.left),t:Math.round(q.top),h:Math.round(q.height)}});const lefts=[...new Set(cards.map(c=>c.l))];
+     const rows={};cards.forEach(c=>{(rows[c.t]=rows[c.t]||[]).push(c.h)});const out=Object.values(rows);
+     const gap=[...d.querySelectorAll('.kskacts>.kpanec>button.ka')].filter(b=>{const c=b.parentElement.getBoundingClientRect(),q=b.getBoundingClientRect();return c.height-q.height>2}).length;const ov=d.scrollWidth>d.clientWidth+1;
+     const o={w:Math.round(d.getBoundingClientRect().width),n:cards.length,cols:lefts.length,out,ov,gap,kv2:document.documentElement.classList.contains('kv2')};try{closeModal()}catch(e){m.hidden=true}return o},k);
+    if(r.none){f.push('pop '+k+': the real pop-up did not open '+JSON.stringify(r));continue}
+    r.out.forEach(hs=>{hs.forEach(h=>ALLH.add(h));if(hs.length&&Math.max(...hs)-Math.min(...hs)>1)f.push('pop '+k+': cards of one ROW differ '+hs)});if(r.ov)f.push('pop '+k+' overflows horizontally');if(r.gap)f.push('pop '+k+': card shorter than its row '+r.gap);
+    if(r.kv2&&r.n>=2&&(r.w<800||r.cols<2))f.push('pop '+k+' on iPad: width '+r.w+' / columns '+r.cols+' (want XL >= 800 and 2 columns)');if(!r.kv2&&r.cols>1)f.push('pop '+k+' on Fold: '+r.cols+' columns (want 1)');
+    rep.push('  pop '+k+' w='+r.w+' cols='+r.cols+' '+JSON.stringify(r.out))}}
   
 
+  await p.evaluate(()=>{window.__hide();tab='art';render()});await p.waitForTimeout(500);{const k=await p.evaluate(()=>{const t=[...document.querySelectorAll('#panel .ktn-tile')].find(t=>t.getBoundingClientRect().height>0);return t&&t.dataset.tnmon});if(k){await p.evaluate(k=>ktTnPop(k),k);await p.waitForTimeout(1200);await p.screenshot({path:`${OUT}/${wh}-pop.jpg`,type:'jpeg',quality:70})}}
   if(errs.length)f.push('page errors '+errs.join(' | '));
   console.log(wh);console.log(rep.join('\n'));console.log(wh,f.length?'FAIL\n  '+f.join('\n  '):'ALL PASS');if(f.length)bad++;await ctx.close()}
  await b.close();process.exit(bad?1:0)})();

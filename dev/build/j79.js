@@ -1362,6 +1362,7 @@ html body #modal:has(.ktn-pop){--kph:min(calc(100dvh - 24px),920px)}
 html.kv2 body #modal:has(.ktn-pop){--kpw:min(900px,calc(100vw - 28px))}
 .ktn-pop{container-type:inline-size;--kpa-d:64px}
 @container (min-width:600px){.ktn-pop .kskacts.pcb{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+.ktn-pop .kskacts.pcb{grid-auto-rows:auto!important}/* pop-up: a card is as tall as its own content (the two cards of one row match); no list-wide tallest height = no empty block (B review r1 row 4) */
 .ktn-tile:active>.kskill{filter:brightness(.97)}/* KIT §6.3g: one act card per line (was an auto-fit 2-column grid: cards of different heights, tiny pictures) */
 `;document.head.appendChild(st)})();
 /* ---- PERSON STATS (owner 11/14): every consort shows the SAME stat set as the player, as kit tiles: Sủng · Đức · Danh · Sắc · Tài · Tâm cơ.
