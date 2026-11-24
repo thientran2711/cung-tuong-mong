@@ -30,7 +30,7 @@ const ORIGINS_S=["con nhà nông ở Giang Nam","gia đình bao y kỳ tịch","
 const IMPR={trung:["ít nói, cúi đầu","chăm chỉ, ít cười"],tham:["mắt hay liếc đồ quý","khéo nói, nhanh tay"],nhat:["rụt rè, nói lí nhí","ít nói, cúi đầu"],lanh:["mắt sáng, nhanh nhẹn","khéo nói, nhanh tay"],chuyen:["hay cười, nói nhiều","mắt sáng, nhanh nhẹn"]};
 function servMeta(s){if(!s.org)s.org=pick(ORIGINS_S);if(!s.imp)s.imp=pick(qv(IMPR,s)||["bình thường"]);return s}
 function strShow(s){servMeta(s);const mine=ownerOf(s)===S;const known=s.kn||(!mine&&s.spyFor==="me");return known?netTxt(s):`nết chưa rõ · trông ${s.imp}`}
-function servLearn(s,why){if(!s||s.kn)return;s.kn=1;log(`${why}: biết ${s.name} là người ${netTxt(s)}.`)}
+function servLearn(s,why){if(!s||s.kn)return;s.kn=1;log(`${why}: biết ${s.name} là người ${netTxt(s)}.`);try{kitKnow({key:"srv:"+(s.sid!=null?s.sid:s.name),text:`${why}: biết ${s.name} là người ${netTxt(s)}.`})}catch(e){}}
 /* the household she starts with: known after the first weeks only by watching; new hires are strangers */
 (function(){const m0=mkServ;mkServ=function(){const s=m0.apply(this,arguments);servMeta(s);s.kn=0;return s}})();
 /* the monthly pool from Nội vụ phủ: 2-3 of each kind; rivals (higher rank first) take from it too */
