@@ -20,7 +20,9 @@ const LPV_KIND=[/* first match wins; tested on "h · fate · text" */
  ["dan",/thứ dân/i],
  ["duoi",/đuổi khỏi cung|Bị đuổi/i],
  ["que",/Xuất cung|về quê|Ma ma|dưỡng già|an hưởng tuổi già|mở tiệm/i],
- ["other",/ra khỏi cung|rời cung|ẩn cư|sống đời áo vải|tự do/i]];
+ ["other",/ra khỏi cung|rời cung|ẩn cư|sống đời áo vải|tự do/i],
+ /* Trả thẻ bài kinds (jkc, new lives only; named by lpvKc through lpvNext, never matched from palace text: they sit after «other») */
+ ["hoa",/^Hòa thân thay công chúa/i],["day",/^Nữ phu tử/i]];
 /* inside-the-palace endings that must never get a «Về sau» (they match no leave word, listed so a later wording change cannot slip in) */
 const LPV_STAY=/lãnh cung|trong cung|^Thái phi$|Thành Thái phi|Thái hậu|Mẫu hậu|Tân đế|đăng cơ|Ở lại/i;
 let LPV_NEXT=null;
@@ -87,9 +89,9 @@ const LPV_DIE={gia:["Năm {a} tuổi, ngươi mất trong giấc ngủ, tuổi g
  loan:["Năm {a} tuổi, giặc cướp tràn qua vùng ngươi ở; ngươi không kịp chạy.","Năm {a} tuổi, binh biến nổi lên; ngươi mất giữa đường lánh nạn."],
  dich:["Năm {a} tuổi, dịch bệnh tràn về, ngươi mất giữa mùa hạ.","Năm {a} tuổi, ôn dịch qua làng; ngươi đi sau mấy người hàng xóm."]};
 const LPV_CAUSE={gia:"Tuổi già",benh:"Bệnh nặng",sinh:"Khó sinh",sau:"U uất thành bệnh",hai:"Bị người trong nhà hãm hại",loan:"Loạn lạc",dich:"Dịch bệnh"};
-const LPV_TITLE={phu:"Theo con ra phủ",tron:"Theo người ra đi",tron1:"Trốn đi một mình",hon:"Làm vợ ngoài cung",thiep:"Làm thiếp trong phủ",que:"Về quê",tu:"Vào cửa Phật",dan:"Làm thứ dân",duoi:"Bị đuổi khỏi cung",vuong:"Về cố quốc",other:"Rời cung"};
+const LPV_TITLE={phu:"Theo con ra phủ",tron:"Theo người ra đi",tron1:"Trốn đi một mình",hon:"Làm vợ ngoài cung",thiep:"Làm thiếp trong phủ",que:"Về quê",tu:"Vào cửa Phật",dan:"Làm thứ dân",duoi:"Bị đuổi khỏi cung",vuong:"Về cố quốc",other:"Rời cung",hoa:"Đi hòa thân",day:"Ở vậy dạy chữ"};
 const LPV_CLS={chung:"một lòng một dạ",datinh:"đa tình",quyen:"nặng công danh",bao:"nóng nảy, thù dai",lanh:"lạnh nhạt",none:""};
-function lpvFill(s,o){return String(s).replace(/\{m\}/g,o.ms||"người ấy").replace(/\{me\}/g,o.me||"").replace(/\{n\}/g,o.n).replace(/\{a\}/g,o.a)}
+function lpvFill(s,o){return String(s).replace(/\{m\}/g,o.ms||"người ấy").replace(/\{me\}/g,o.me||"").replace(/\{n\}/g,o.n).replace(/\{a\}/g,o.a).replace(/(^|[.!?]\s+)(\S)/g,(x,b,c)=>b+c.toUpperCase())}
 /* the whole «Về sau» for this life (drawn once, kept on S.lvEp) */
 function lpvEpiFor(h,t,fate,live){if(!S)return null;if(S.lvEp&&S.lvEp.f===fate)return S.lvEp;
  const nx=LPV_NEXT;LPV_NEXT=null;let k=nx&&nx.k?nx.k:lpvKindOf(h,fate,t,live);if(!k)return null;
@@ -98,11 +100,13 @@ function lpvEpiFor(h,t,fate,live){if(!S)return null;if(S.lvEp&&S.lvEp.f===fate)r
  const suc=typeof S.suc==="number"?S.suc:60;let yrs=Math.round(lpvR(B.yrs[k]||B.yrs.other)*M.y*(B.sucA+suc/B.sucD));
  const a=Math.max(age+1,Math.min(B.maxAge,age+Math.max(1,yrs)));
  let n=k==="tu"?0:Math.max(0,lpvR(B.kids[k]||B.kids.other)+(m?M.k:0));if(age>=B.birthAge)n=0;else{const span=Math.max(0,Math.min(a,B.birthAge)-age);if(span<2)n=Math.min(n,1)}
- const cause=lpvCause(k,cls,a,n,!!m);const o={ms:m?lpvShort(m.name):"",me:S.name,n,a};
+ const cause=lpvCause(k,cls,a,n,!!m);const o={ms:m?(m.short||lpvShort(m.name)):"",me:S.name,n,a};
+ /* Trả thẻ bài (she never entered): her own lines, and no line that speaks of a palace life she never had */
+ const kc=!!(S.kc&&!S.kc.inPal),pk=L=>{const f=kc?L.filter(x=>!LPV_PAL.test(x)):L;return pick(f.length?f:L)};
  const left=(typeof mySons==="function"?mySons().length:0)+(typeof myDaus==="function"?myDaus().length:0);
- const P=[pick(LPV_OPEN[k]||LPV_OPEN.other)];
- if(LPV_MID_K[k])P.push(pick(LPV_MID_K[k]));else if(m&&LPV_MID[cls])P.push(pick(LPV_MID[cls]));else P.push(pick(LPV_MID.none));
- if(left&&k!=="phu")P.push(pick(LPV_LEFT));P.push(k==="tu"?"":n?pick(LPV_KIDS):pick(LPV_KIDS0));P.push(pick(LPV_DIE[cause]));
+ const P=[pk((kc&&LPV_OPEN_KC[k])||LPV_OPEN[k]||LPV_OPEN.other)];const MK=(kc&&LPV_MID_K_KC[k])||LPV_MID_K[k];
+ if(MK)P.push(pk(MK));else if(m&&LPV_MID[cls])P.push(pk(LPV_MID[cls]));else P.push(pk(LPV_MID.none));
+ if(left&&k!=="phu")P.push(pick(LPV_LEFT));P.push(k==="tu"||k==="day"?"":n?pk(LPV_KIDS):pk(LPV_KIDS0));P.push(pk(LPV_DIE[cause]));
  const ep={f:fate,k,ti:LPV_TITLE[k],m:m?m.name:"",net,cls,kids:n,age:a,cause,cl:LPV_CAUSE[cause],txt:P.filter(Boolean).map(x=>lpvFill(x,o)).join(" ")};
  S.lvEp=ep;return ep}
 window.lpvEpiFor=lpvEpiFor;
@@ -116,3 +120,30 @@ function lpvGe(e,bond){try{const fork=e[3],sum=e[5];let k=LPV_GE[sum]||((BAL.ge.
  let m=null;if(k==="tron"||fork===3){const n=bond;m=n?(S.men||[]).find(x=>x&&x.name===n)||null:null;if(!m)k=k==="tron"?"other":k;else if(k==="other")k="tron"}
  lpvNext(k,m)}catch(e){console.error("lpvGe",e)}}
 window.lpvGe=lpvGe;
+/* ---------- Trả thẻ bài = an ENDING with «Về sau» (MAIN 117 05:07Z; owner OD 24/11 ~06:05Z, voluntary/at-home = ending, no outside road) ----------
+   The tiểu thư home road (jkc): after Điện tuyển returns her tablet (kcTraveD), every way it closes (gả / ở vậy dạy chữ / xuất gia / ✦ rare) already
+   ends the life through kcEndDo → over(). NEW lives (S.kc.lv, set at kcInit) now get the same «Về sau» passage + rows as a palace leaving:
+   kind by the ending, partner = the REAL man (the suitor object of S.kc.suit keeps his drawn nết through netOf; ✦ Trạng nguyên = the man of S.men).
+   Old saves (no S.kc.lv) keep today's card. */
+const LPV_PAL=/cung|Hoàng thượng|hoàng gia|phi tần|tường son|tú nữ cũ/i;
+const LPV_OPEN_KC={
+ hon:["Kiệu hoa đưa ngươi về với {m}; thẻ bài trả về năm ấy, mẹ ngươi cất dưới đáy rương.","Ngươi về làm vợ {m}; chuyện điện tuyển năm nào chỉ còn là một câu kể cho con cháu.","Ngày cưới, tiếng pháo nhà {m} nổ ran; ngươi nhớ lại tiếng thái giám xướng tên mình trong điện tuyển."],
+ thiep:["Ngươi vào nhà {m} làm thiếp, ở gian phòng phía tây, sau chính thất.","Chính thất nhà {m} nhận chén trà của ngươi mà không nhìn mặt.","Nhà {m} cũng có hậu viện, có thứ bậc; ngươi là người đến sau cùng."],
+ tu:["Ngươi cạo tóc ở chùa Hộ Quốc; tiếng mõ sớm chiều thay tiếng trống tuyển tú.","Ngươi khoác áo nâu, sớm quét sân chùa, tối chép kinh dưới ngọn đèn dầu.","Ngươi xin một gian thiền phòng nhìn ra rừng trúc, học quên những ngày ngồi chờ xướng tên."],
+ day:["Ngươi không lấy chồng; lớp học của ngươi ở ngõ Tây có ba mươi đứa con gái nhà nghèo.","Ngươi ở vậy, mở lớp dạy chữ, dạy thêu; người trong phố gọi ngươi là nữ phu tử."],
+ hoa:["Ngươi được nhận làm nghĩa nữ, theo đoàn sứ lên phương Bắc hòa thân.","Xe hoa đi một tháng mới tới thảo nguyên; từ đó quê nhà chỉ còn trong giấc mơ."]};
+const LPV_MID_K_KC={
+ day:["Học trò của ngươi lớn lên, có đứa làm thơ, có đứa giữ sổ sách cho cả nhà chồng.","Có năm mất mùa, ngươi bán chiếc vòng hồi môn để lớp học không phải đóng cửa.","Cha mẹ ngươi mất, anh em chia nhà; ngươi chỉ xin giữ gian phòng có mấy chiếc bàn học."],
+ hoa:["Khả hãn đối đãi ngươi trọn lễ; ngươi dạy người phương Bắc trồng dâu nuôi tằm.","Theo tục phương Bắc, khả hãn mất thì ngươi phải về với người kế vị; ngươi cắn răng mà sống.","Biên cương yên ổn hai mươi năm; người hai bên ải gọi ngươi là nương nương hòa thân."]};
+const LPV_KC={"Chính thất hầu phủ":"hon","Gả xa":"hon","Làm thiếp nhà quyền quý":"thiep","Vợ quan thanh liêm":"hon","Nữ phu tử":"day","Xuất gia":"tu","Vợ Trạng nguyên":"hon","Hòa thân thay công chúa":"hoa"};
+let LPV_KCS=null;
+(function(){
+ if(typeof kcInit==="function"){const i0=kcInit;kcInit=function(){const r=i0.apply(this,arguments);try{if(S&&S.kc)S.kc.lv=1}catch(e){}return r}}
+ if(typeof kcTraveD==="function"){const t0=kcTraveD;kcTraveD=function(){const d=t0.apply(this,arguments);try{if(S&&S.kc&&S.kc.lv)S.kc.trv=1}catch(e){}return d}}
+ if(typeof kcMarry==="function"){const m0=kcMarry;kcMarry=function(s){LPV_KCS=s||null;try{return m0.apply(this,arguments)}finally{LPV_KCS=null}}}
+ if(typeof kcEndDo==="function"){const e0=kcEndDo;kcEndDo=function(h,t,fate,alive){try{const K=S&&S.kc,k=LPV_KC[h];
+   if(K&&K.lv&&K.trv&&!K.inPal&&!S.dead&&k){let m=null;
+    if(h==="Vợ Trạng nguyên")m=typeof kcTmMan==="function"?kcTmMan():null;
+    else if((k==="hon"||k==="thiep")&&LPV_KCS&&LPV_KCS.n){m=LPV_KCS;m.name=m.name||m.n;m.short=m.n;m.sex="m";m.kind=m.kind||"man"}
+    lpvNext(k,m);alive=true}}catch(e){console.error("lpvKc",e)}
+  return e0.call(this,h,t,fate,alive)}}})();

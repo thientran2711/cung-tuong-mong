@@ -101,5 +101,47 @@ const T=[
  ok(!v.bad.length,'variety: class read from his nết, age inside (her age, BAL.leave.maxAge], «Tuổi già» only from BAL.leave.old, children inside BAL',v.bad.slice(0,6));
  const low=v.byCls.filter(([,n])=>n<10);ok(!low.length,'variety: 16 lives with the same partner class read differently (≥10 distinct passages in every class × age × children cell)',low.slice(0,6));
  ok(v.tuKids===0,'xuất gia: no children after',v.tuKids);
+ /* 4. NO CONFIRM (owner OD 24/11 ~07:25Z): her own choice to leave = done at once. Family: xgConfirm gone; the lãnh cung «Xuất gia» act ends at once;
+    the one-per-life death warning (jkiep kpGate) does not stop a «giả chết» LEAVE choice; no «(sẽ hỏi lại)» anywhere in the build */
+ const nc=await p.evaluate(()=>{const snap=JSON.stringify(ser());const R={xg:typeof xgConfirm};
+  Q.length=0;S.dead=false;S.lvEp=null;if(S.kc)S.kc.inPal=1;cold("Thử");Q.length=0;const a=coldActs().find(x=>x.n==="Xuất gia");R.act=!!a;R.actX=a&&a.x;
+  if(a){a.go();R.dead=!!S.dead;R.fate=S.fate;R.q=Q.map(m=>m&&m.t);R.k=S.lvEp&&S.lvEp.k}
+  deser(JSON.parse(snap));Q.length=0;S.dead=false;S.lvEp=null;
+  /* kpGate on every own-choice leave option text (both «giả chết» leave choices + a plain one), and one real death word as the control */
+  const G=[["✦ Giả chết, theo chàng rời cung","kết thúc kiếp này"],["Xin thuốc giả chết","ra khỏi cung · kết thúc kiếp này"],["Tìm một bài thuốc giả chết",""],["Xuất gia","kết thúc kiếp này, yên ổn"]];R.gate=[];
+  const free=!kpCheck();for(const [n,x] of G){S.kpWarn=0;const m={t:"thử",opts:[{n,x,fx:{}}]};Q.length=0;Q.push(m);const w=window.kpGate(0);R.gate.push([n,w]);Q.length=0}
+  S.kpWarn=0;const m={t:"thử",opts:[{n:"Tự vẫn",x:"",fx:{}}]};Q.length=0;Q.push(m);R.ctl=free?window.kpGate(0):"life already whole (control skipped)";Q.length=0;
+  deser(JSON.parse(snap));Q.length=0;S.dead=false;S.lvEp=null;return R});
+ ok(nc.xg==="undefined",'no-confirm: xgConfirm («Xuất gia?» card) is gone',nc.xg);
+ ok(nc.act&&nc.dead&&nc.fate==="Xuất gia"&&!nc.q.includes("Xuất gia?")&&nc.q[0]==="Kiếp này"&&!/hỏi lại/.test(nc.actX)&&nc.k==="tu",'no-confirm: lãnh cung «Xuất gia» ends the life at once (end card first, no confirm card, «Về sau» tu)',nc);
+ ok(nc.gate.every(([,w])=>!w),'no-confirm: kpGate never stops an own-choice leave option («giả chết» = leaving, not death)',nc.gate);
+ ok(nc.ctl===true||typeof nc.ctl==="string",'kpGate control: a real death choice («Tự vẫn») still gets its one warning',nc.ctl);
+ const fs=require('fs');const SRC=fs.readFileSync(HTML,'utf8');
+ ok(!/xgConfirm\(/.test(SRC)&&!/sẽ hỏi lại/.test(SRC),'no-confirm family scan: no xgConfirm( call and no «(sẽ hỏi lại)» left in the build');
+ /* 5. TRẢ THẺ BÀI (MAIN 117 05:07Z): a NEW tiểu thư life whose tablet is returned → every way out ends the life with «Về sau» (kind, the real man + his nết,
+    no palace lines); an OLD save (no S.kc.lv) keeps today's card */
+ const kc=await p.evaluate(async()=>{const R={tries:0,rows:[]};
+  for(let i=0;i<80;i++){R.tries++;try{localStorage.clear()}catch(e){}quiet=true;start();quiet=false;await new Promise(r=>setTimeout(r,30));
+   if(S&&!S.srv&&!(typeof isSrv==="function"&&isSrv())&&kcOk(S.origin.k)){if(!S.kc){kcInit();Q.length=0}break}}
+  if(!(S&&S.kc&&!S.kc.inPal))return{err:"no tiểu thư life in 80 starts",o:S&&S.origin&&S.origin.k};
+  R.lv=S.kc.lv;const snap=JSON.stringify(ser());
+  const run=(lab,f,old)=>{deser(JSON.parse(snap));Q.length=0;S.dead=false;S.lvEp=null;if(old)delete S.kc.lv;let e=null;try{f()}catch(er){e=er.message}
+   const c=Q.find(m=>m&&m.t==="Kiếp này"),h=(c&&c.h)||"";R.rows.push({lab,e,dead:!!S.dead,fate:S.fate,ep:S.lvEp,after:/Về sau/.test(h),chet:/Chết vì/.test(h),pal:S.lvEp?LPV_PAL.test(S.lvEp.txt):false})};
+  const opt=(i)=>{const d=kcTraveD();R.n=d.o.map(o=>o.n);d.o[i].go()};
+  run("gả",()=>opt(0));R.suit=S.kc.suit&&S.kc.suit[0]&&S.kc.suit[0].n;
+  run("dạy chữ (Tài 70)",()=>{S.tai=70;opt(1)});
+  run("xuất gia",()=>opt(2));
+  run("✦ hòa thân",()=>{kcTraveD();kcEnd("kcR5")});
+  run("old save: gả",()=>opt(0),true);
+  run("no tablet returned (home road ending before Điện tuyển)",()=>{S.kc.trv=0;kcEnd("tu")});
+  deser(JSON.parse(snap));Q.length=0;S.dead=false;S.lvEp=null;return R});
+ if(kc.err)ok(false,'Trả thẻ bài: a tiểu thư life',kc);else{const by=l=>kc.rows.find(r=>r.lab===l)||{};
+  ok(kc.lv===1,'Trả thẻ bài: a NEW tiểu thư life is marked (S.kc.lv)',kc.lv);
+  const g=by("gả");ok(g.dead&&g.after&&!g.chet&&g.ep&&["hon","thiep"].includes(g.ep.k)&&g.ep.m===kc.suit&&g.ep.net.length===3&&!g.pal,'Trả thẻ bài · gả: ending + «Về sau» with HIM (the suitor, his 3 nết), «Kết cục» not «Chết vì», no palace line',g);
+  const d=by("dạy chữ (Tài 70)");ok(d.dead&&d.after&&d.ep&&d.ep.k==="day"&&d.ep.kids===0&&!d.pal,'Trả thẻ bài · ở vậy dạy chữ: ending + «Về sau» day, no children',d);
+  const t=by("xuất gia");ok(t.dead&&t.after&&t.ep&&t.ep.k==="tu"&&t.ep.kids===0&&!t.pal,'Trả thẻ bài · xuất gia: ending + «Về sau» tu',t);
+  const h=by("✦ hòa thân");ok(h.dead&&h.after&&h.ep&&h.ep.k==="hoa"&&!h.pal,'Trả thẻ bài · ✦ hòa thân: ending + «Về sau» hoa',h);
+  const o=by("old save: gả");ok(o.dead&&!o.ep&&!o.after,'Trả thẻ bài · OLD save (no S.kc.lv): today\'s card, no «Về sau»',o);
+  const n=by("no tablet returned (home road ending before Điện tuyển)");ok(n.dead&&!n.ep,'home-road ending before any returned tablet: unchanged (no «Về sau»)',n)}
  ok(!errs.length,'no page errors',errs.slice(0,3));
  await b.close();const f=res.filter(x=>!x).length;console.log(`leave-palace: ${res.length-f}/${res.length} ok`);process.exit(f?1:0)})();

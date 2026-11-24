@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"f20de729+","t":"2026-11-24T05:14Z","c":"leave-palace: BAL.leave phu kind","b":"9ab0a2a5d786","h":[{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"}]};
+window.CTM_BI={"s":"0279cde1+","t":"2026-11-24T05:27Z","c":"leave-palace: rename helpers lpv* (lvRows clashed with j85), compact «Về sau» so the iPad end card fits, phủ-fitting causes","b":"bd21a5c1f7cb","h":[{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"},{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -4575,7 +4575,7 @@ function coldActsOf(p){const me=p===S,A=[],X=BAL.ag.par3.cold,odP=b=>odA(p,b),fr
  if(son)A.push({n:`Nhờ ${son.name} cầu xin`,t:"Con quỳ trước Dưỡng Hòa điện xin cho mẹ.",c:{},o:odP(BAL.odb.j14.odO_5+(son.fond||0)/X.son.fondD),k:1,w:{},l:{},x:"được tha",go:()=>free(false,`${son.name} quỳ khóc xin cho mẹ`)});
  A.push({n:"Chép kinh, giữ đức",t:"Ngày ngày chép kinh Kim Cương.",c:{...X.sutra.c},o:100,k:2,w:{...X.sutra.w}},{n:"Trồng rau",t:"Cuốc đất sau sân, trồng rau mà ăn.",c:{},o:100,k:2,w:{...X.veg.w}},{n:"Thêu khăn bán",t:"Nhờ lính gác đem ra ngoài bán.",c:{...X.embro.c},o:odP(BAL.odb.j14.odO_6),k:2,w:{...X.embro.w},l:{}},
   ...coldFacActs(p),
-  {n:"Xuất gia",t:"Cắt tóc đi tu, rời bỏ hồng trần.",c:{},o:100,fix:1,k:4,w:{},x:"kết thúc kiếp này, yên ổn (sẽ hỏi lại)",go:()=>me?xgConfirm(()=>over("Xuất gia",`${S.name} cạo tóc, vào chùa Bảo Hoa tu hành, sống nốt quãng đời thanh tịnh.`,"Xuất gia")):p3Nun(p)});
+  {n:"Xuất gia",t:"Cắt tóc đi tu, rời bỏ hồng trần.",c:{},o:100,fix:1,k:4,w:{},x:"kết thúc kiếp này, yên ổn",go:()=>me?over("Xuất gia",`${S.name} cạo tóc, vào chùa Bảo Hoa tu hành, sống nốt quãng đời thanh tịnh.`,"Xuất gia"):p3Nun(p)/* owner 24/11 ~07:25Z: her own choice to leave = done, no confirm card */});
  return A}
 /* cold-faction (law 1 + 6): faction business from lãnh cung goes by LETTER only — the same cards for her and for an NPC inside (p3Cold).
    Two roads of equal worth (law 2): the food eunuch (Bạc BAL.ag.par3.cold.lt.bac, sure-ish) or her own kept maid (no bạc, odds by the maid's loyalty;
@@ -5408,7 +5408,7 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;const d=R
 /* stop the buổi from turning over under the result: wait a little longer */
 (function(){const r0=render;render=function(){const L=advLock;if(!S||S.dead||Q.length||S.mg||used<BAL.time.khac||L)return r0.apply(this,arguments);advLock=true;const ret=(function(){const a=advLock;advLock=true;return r0.apply(this,arguments)}).apply(this,arguments);setTimeout(()=>{advLock=false;if(used>=BAL.time.khac&&!Q.length&&S&&!S.dead&&!S.mg)nextBuoi()},2600);return ret}})();
 /* Xuất gia asks first */
-function xgConfirm(go){Q.unshift({act:1,t:"Xuất gia?",h:"<p>Cạo tóc đi tu là <b>kết thúc kiếp này</b>. Không quay lại được.</p>",opts:[{n:"Xuất gia, kết thúc kiếp này",fx:{},x:"kết thúc kiếp này",go},{n:"Thôi, ở lại",fx:{}}]});showModal()}
+/* xgConfirm («Xuất gia?» confirm) removed: owner 24/11 ~07:25Z — choosing to leave ends the life at once, no confirm */
 /* no faking illness from lãnh cung; no deck card that cannot help */
 (function(){const d0=deal;deal=function(){d0.apply(this,arguments);if(S&&S.out)deck=deck.filter(a=>a.n!=="Giả bệnh")}})();
 /* map tiles: every disabled tile says why */
@@ -38347,8 +38347,8 @@ BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's n�
    (BAL.net words; the highest score wins, ties keep the order of clsOrd); mod[cls] = y (years ×), k (children ±), w (cause weights ×).
    suc: her Sức shifts the years (y × (sucA + Sức/sucD)); maxAge caps the age at death; old = from this age a death is «tuổi già». */
 BAL.leave={maxAge:84,old:62,sucA:.7,sucD:200,birthAge:42,
- yrs:{tron:[6,38],tron1:[4,34],hon:[10,46],thiep:[8,44],que:[12,50],tu:[16,54],dan:[5,36],duoi:[4,32],vuong:[14,44],phu:[10,34],other:[8,42]},
- kids:{tron:[0,4],tron1:[0,2],hon:[1,5],thiep:[0,3],que:[0,3],tu:[0,0],dan:[0,3],duoi:[0,2],vuong:[1,4],phu:[0,0],other:[0,3]},
+ yrs:{tron:[6,38],tron1:[4,34],hon:[10,46],thiep:[8,44],que:[12,50],tu:[16,54],dan:[5,36],duoi:[4,32],vuong:[14,44],phu:[10,34],other:[8,42],hoa:[10,40],day:[14,50]},
+ kids:{tron:[0,4],tron1:[0,2],hon:[1,5],thiep:[0,3],que:[0,3],tu:[0,0],dan:[0,3],duoi:[0,2],vuong:[1,4],phu:[0,0],other:[0,3],hoa:[1,4],day:[0,0]},
  clsOrd:["chung","datinh","quyen","bao","lanh"],
  cls:{chung:{"Ân cần":2,"Thật thà":2,"Trọng nghĩa":3,"Rộng lượng":1,"An phận":2,"Điềm tĩnh":1,"Thanh liêm":1},
       datinh:{"Ham vui":3,"Vì mình":2,"Xu nịnh":1,"Nhiều chuyện":1,"Thực dụng":1,"Xảo quyệt":1},
@@ -38358,7 +38358,7 @@ BAL.leave={maxAge:84,old:62,sucA:.7,sucD:200,birthAge:42,
  mod:{chung:{y:1.15,k:1},datinh:{y:.9,k:0},quyen:{y:.85,k:0},bao:{y:.75,k:0},lanh:{y:1,k:-1},none:{y:1,k:0}},
  /* cause-of-death weights (the pool picks one; class/kind rows multiply) */
  cause:{gia:3,benh:3,sinh:1,sau:1,hai:.5,loan:1,dich:1},/* hai only with a partner's house (no partner → 0); gia only from age «old»; sinh only with children born, before birthAge */
- causeK:{tron:{loan:3,dich:1.5},tron1:{loan:3,benh:1.5},dan:{benh:2,dich:2,loan:1.5},duoi:{benh:2.5,dich:2},tu:{sinh:0,sau:.5,benh:1.5},thiep:{hai:1.5,sau:1.5,loan:.3},hon:{loan:.4},phu:{loan:.3},que:{loan:.6},vuong:{loan:1.5}},
+ causeK:{tron:{loan:3,dich:1.5},tron1:{loan:3,benh:1.5},dan:{benh:2,dich:2,loan:1.5},duoi:{benh:2.5,dich:2},tu:{sinh:0,sau:.5,benh:1.5},thiep:{hai:1.5,sau:1.5,loan:.3},hon:{loan:.4},phu:{loan:.3},que:{loan:.6},vuong:{loan:1.5},hoa:{loan:1.5,benh:1.3},day:{loan:.6}},
  causeC:{chung:{sau:.3,hai:0},datinh:{sau:3,hai:2},quyen:{hai:2.5,sau:1.5},bao:{hai:2,sau:2,benh:1.3},lanh:{sau:2.5}}};
 /* j72sd: ORDER THIN P3 composed việc nhờ seeds (DATA ONLY). Built by dev/build/j72sd_build.py from every dev/handover/content/thin/j72seeds*.md;
    schema dev/handover/reports/thin.md «## API P3»; validator dev/test/j72seeds_validate.py; engine j72c.js. Do not hand-edit. */
@@ -40233,7 +40233,7 @@ try{KIT_GLOSS["Phúc duyên"]="Điểm tích qua các kiếp. Dùng để đổi
 /* one warning per life before a choice that names death, while the life is unfinished */
 /* kpGate(i): true = the warning card was put in front of Q[0] (the choice waits for "Vẫn chọn"); also used by co-op thin cards (jcoopthin) */
 window.kpGate=function(i){try{const m=Q[0],c=m&&m.opts&&m.opts[i];if(c&&S&&!S.dead&&!S.kpWarn&&!kpCheck()&&!m.kpw&&!window.__kpNoWarn){
-   const tx=[c.n,c.x,c.j67].join(" ");if(/tự vẫn|tự tận|tự sát|chết|bị giết|rượu độc/i.test(tx)){S.kpWarn=1;
+   const tx=[c.n,c.x,c.j67].join(" ").replace(/giả chết/gi,"");/* «giả chết» = her own choice to LEAVE (an ending, owner 24/11 ~07:25Z: no confirm), not a death */if(/tự vẫn|tự tận|tự sát|chết|bị giết|rượu độc/i.test(tx)){S.kpWarn=1;
     Q.unshift({act:1,t:"Kiếp này chưa trọn",kpw:1,who:pMe(),h:`<p>Kiếp này chưa trọn (${kpWhy()}), bỏ ngang sẽ mang nghiệp: mất Phúc duyên của kiếp này, trừ thêm ${KIEP.pen}, kiếp sau không được đổi thân phận.</p><p class="past">${KP_RULE}</p>`,
      opts:[{n:"Nghĩ lại",fx:{},x:""},{n:`Vẫn chọn: ${c.n}`,fx:{},x:"",go:()=>{setTimeout(()=>{try{if(Q[0]===m){chooseM(i);render()}}catch(e){}},0)}}]});showModal();return true}}}catch(e){console.error(e)}return false};
 (function(){const c0=chooseM;chooseM=function(i){if(window.kpGate(i))return;return c0.apply(this,arguments)}})();
@@ -75471,7 +75471,7 @@ function kcEnd(id){const N="Nàng";const E={tu:["Xuất gia",`${N} cắt tóc �
  kcR6:["Nữ thương Giang Nam",`${N} giữ sổ muối nhà mình, thuyền buôn đi khắp Giang Nam. Người ta gọi nàng là Diêm thương nương tử.`]}[id];
  if(KCRARE[id]){try{RARE97.meet(id,KCRARE[id][1])}catch(e){}S.r97=(S.r97||[]).concat([{a:id,tag:KCRARE[id][1],ti:E[0]}])}
  kcEndDo(E[0],E[1],E[0])}
-function kcEndDo(h,t,fate){if(S.dead)return;S.kc.end=h;Q=Q.filter(m=>m.cls==="end"||m.nl);try{lifeLog&&0}catch(e){}over(h,t+` <span class="past">(Tiểu thư ngoài cung · ${kcTitle()})</span>`,fate);try{showModal()}catch(e){}}
+function kcEndDo(h,t,fate,alive){if(S.dead)return;S.kc.end=h;Q=Q.filter(m=>m.cls==="end"||m.nl);try{lifeLog&&0}catch(e){}over(h,t+` <span class="past">(Tiểu thư ngoài cung · ${kcTitle()})</span>`,fate,alive);/* alive: jleave Trả thẻ bài endings pass true (a married/teaching/nun life is not a «Chết vì»); other callers unchanged */try{showModal()}catch(e){}}
 function kcDie(why){if(S.dead)return;S.kc.end="chết";die(why)}
 /* r2-r1 (FAIL 4): a life that ends at home by any path (a palace-side die() inside a world call, an act, an event …) still says so:
    S.kc.end is set before the end card. The end card's "Đầu thai kiếp sau" starts a NEW life (start(): a new S with no S.kc) — that is
@@ -94015,7 +94015,9 @@ const LPV_KIND=[/* first match wins; tested on "h · fate · text" */
  ["dan",/thứ dân/i],
  ["duoi",/đuổi khỏi cung|Bị đuổi/i],
  ["que",/Xuất cung|về quê|Ma ma|dưỡng già|an hưởng tuổi già|mở tiệm/i],
- ["other",/ra khỏi cung|rời cung|ẩn cư|sống đời áo vải|tự do/i]];
+ ["other",/ra khỏi cung|rời cung|ẩn cư|sống đời áo vải|tự do/i],
+ /* Trả thẻ bài kinds (jkc, new lives only; named by lpvKc through lpvNext, never matched from palace text: they sit after «other») */
+ ["hoa",/^Hòa thân thay công chúa/i],["day",/^Nữ phu tử/i]];
 /* inside-the-palace endings that must never get a «Về sau» (they match no leave word, listed so a later wording change cannot slip in) */
 const LPV_STAY=/lãnh cung|trong cung|^Thái phi$|Thành Thái phi|Thái hậu|Mẫu hậu|Tân đế|đăng cơ|Ở lại/i;
 let LPV_NEXT=null;
@@ -94082,9 +94084,9 @@ const LPV_DIE={gia:["Năm {a} tuổi, ngươi mất trong giấc ngủ, tuổi g
  loan:["Năm {a} tuổi, giặc cướp tràn qua vùng ngươi ở; ngươi không kịp chạy.","Năm {a} tuổi, binh biến nổi lên; ngươi mất giữa đường lánh nạn."],
  dich:["Năm {a} tuổi, dịch bệnh tràn về, ngươi mất giữa mùa hạ.","Năm {a} tuổi, ôn dịch qua làng; ngươi đi sau mấy người hàng xóm."]};
 const LPV_CAUSE={gia:"Tuổi già",benh:"Bệnh nặng",sinh:"Khó sinh",sau:"U uất thành bệnh",hai:"Bị người trong nhà hãm hại",loan:"Loạn lạc",dich:"Dịch bệnh"};
-const LPV_TITLE={phu:"Theo con ra phủ",tron:"Theo người ra đi",tron1:"Trốn đi một mình",hon:"Làm vợ ngoài cung",thiep:"Làm thiếp trong phủ",que:"Về quê",tu:"Vào cửa Phật",dan:"Làm thứ dân",duoi:"Bị đuổi khỏi cung",vuong:"Về cố quốc",other:"Rời cung"};
+const LPV_TITLE={phu:"Theo con ra phủ",tron:"Theo người ra đi",tron1:"Trốn đi một mình",hon:"Làm vợ ngoài cung",thiep:"Làm thiếp trong phủ",que:"Về quê",tu:"Vào cửa Phật",dan:"Làm thứ dân",duoi:"Bị đuổi khỏi cung",vuong:"Về cố quốc",other:"Rời cung",hoa:"Đi hòa thân",day:"Ở vậy dạy chữ"};
 const LPV_CLS={chung:"một lòng một dạ",datinh:"đa tình",quyen:"nặng công danh",bao:"nóng nảy, thù dai",lanh:"lạnh nhạt",none:""};
-function lpvFill(s,o){return String(s).replace(/\{m\}/g,o.ms||"người ấy").replace(/\{me\}/g,o.me||"").replace(/\{n\}/g,o.n).replace(/\{a\}/g,o.a)}
+function lpvFill(s,o){return String(s).replace(/\{m\}/g,o.ms||"người ấy").replace(/\{me\}/g,o.me||"").replace(/\{n\}/g,o.n).replace(/\{a\}/g,o.a).replace(/(^|[.!?]\s+)(\S)/g,(x,b,c)=>b+c.toUpperCase())}
 /* the whole «Về sau» for this life (drawn once, kept on S.lvEp) */
 function lpvEpiFor(h,t,fate,live){if(!S)return null;if(S.lvEp&&S.lvEp.f===fate)return S.lvEp;
  const nx=LPV_NEXT;LPV_NEXT=null;let k=nx&&nx.k?nx.k:lpvKindOf(h,fate,t,live);if(!k)return null;
@@ -94093,11 +94095,13 @@ function lpvEpiFor(h,t,fate,live){if(!S)return null;if(S.lvEp&&S.lvEp.f===fate)r
  const suc=typeof S.suc==="number"?S.suc:60;let yrs=Math.round(lpvR(B.yrs[k]||B.yrs.other)*M.y*(B.sucA+suc/B.sucD));
  const a=Math.max(age+1,Math.min(B.maxAge,age+Math.max(1,yrs)));
  let n=k==="tu"?0:Math.max(0,lpvR(B.kids[k]||B.kids.other)+(m?M.k:0));if(age>=B.birthAge)n=0;else{const span=Math.max(0,Math.min(a,B.birthAge)-age);if(span<2)n=Math.min(n,1)}
- const cause=lpvCause(k,cls,a,n,!!m);const o={ms:m?lpvShort(m.name):"",me:S.name,n,a};
+ const cause=lpvCause(k,cls,a,n,!!m);const o={ms:m?(m.short||lpvShort(m.name)):"",me:S.name,n,a};
+ /* Trả thẻ bài (she never entered): her own lines, and no line that speaks of a palace life she never had */
+ const kc=!!(S.kc&&!S.kc.inPal),pk=L=>{const f=kc?L.filter(x=>!LPV_PAL.test(x)):L;return pick(f.length?f:L)};
  const left=(typeof mySons==="function"?mySons().length:0)+(typeof myDaus==="function"?myDaus().length:0);
- const P=[pick(LPV_OPEN[k]||LPV_OPEN.other)];
- if(LPV_MID_K[k])P.push(pick(LPV_MID_K[k]));else if(m&&LPV_MID[cls])P.push(pick(LPV_MID[cls]));else P.push(pick(LPV_MID.none));
- if(left&&k!=="phu")P.push(pick(LPV_LEFT));P.push(k==="tu"?"":n?pick(LPV_KIDS):pick(LPV_KIDS0));P.push(pick(LPV_DIE[cause]));
+ const P=[pk((kc&&LPV_OPEN_KC[k])||LPV_OPEN[k]||LPV_OPEN.other)];const MK=(kc&&LPV_MID_K_KC[k])||LPV_MID_K[k];
+ if(MK)P.push(pk(MK));else if(m&&LPV_MID[cls])P.push(pk(LPV_MID[cls]));else P.push(pk(LPV_MID.none));
+ if(left&&k!=="phu")P.push(pick(LPV_LEFT));P.push(k==="tu"||k==="day"?"":n?pk(LPV_KIDS):pk(LPV_KIDS0));P.push(pk(LPV_DIE[cause]));
  const ep={f:fate,k,ti:LPV_TITLE[k],m:m?m.name:"",net,cls,kids:n,age:a,cause,cl:LPV_CAUSE[cause],txt:P.filter(Boolean).map(x=>lpvFill(x,o)).join(" ")};
  S.lvEp=ep;return ep}
 window.lpvEpiFor=lpvEpiFor;
@@ -94111,6 +94115,33 @@ function lpvGe(e,bond){try{const fork=e[3],sum=e[5];let k=LPV_GE[sum]||((BAL.ge.
  let m=null;if(k==="tron"||fork===3){const n=bond;m=n?(S.men||[]).find(x=>x&&x.name===n)||null:null;if(!m)k=k==="tron"?"other":k;else if(k==="other")k="tron"}
  lpvNext(k,m)}catch(e){console.error("lpvGe",e)}}
 window.lpvGe=lpvGe;
+/* ---------- Trả thẻ bài = an ENDING with «Về sau» (MAIN 117 05:07Z; owner OD 24/11 ~06:05Z, voluntary/at-home = ending, no outside road) ----------
+   The tiểu thư home road (jkc): after Điện tuyển returns her tablet (kcTraveD), every way it closes (gả / ở vậy dạy chữ / xuất gia / ✦ rare) already
+   ends the life through kcEndDo → over(). NEW lives (S.kc.lv, set at kcInit) now get the same «Về sau» passage + rows as a palace leaving:
+   kind by the ending, partner = the REAL man (the suitor object of S.kc.suit keeps his drawn nết through netOf; ✦ Trạng nguyên = the man of S.men).
+   Old saves (no S.kc.lv) keep today's card. */
+const LPV_PAL=/cung|Hoàng thượng|hoàng gia|phi tần|tường son|tú nữ cũ/i;
+const LPV_OPEN_KC={
+ hon:["Kiệu hoa đưa ngươi về với {m}; thẻ bài trả về năm ấy, mẹ ngươi cất dưới đáy rương.","Ngươi về làm vợ {m}; chuyện điện tuyển năm nào chỉ còn là một câu kể cho con cháu.","Ngày cưới, tiếng pháo nhà {m} nổ ran; ngươi nhớ lại tiếng thái giám xướng tên mình trong điện tuyển."],
+ thiep:["Ngươi vào nhà {m} làm thiếp, ở gian phòng phía tây, sau chính thất.","Chính thất nhà {m} nhận chén trà của ngươi mà không nhìn mặt.","Nhà {m} cũng có hậu viện, có thứ bậc; ngươi là người đến sau cùng."],
+ tu:["Ngươi cạo tóc ở chùa Hộ Quốc; tiếng mõ sớm chiều thay tiếng trống tuyển tú.","Ngươi khoác áo nâu, sớm quét sân chùa, tối chép kinh dưới ngọn đèn dầu.","Ngươi xin một gian thiền phòng nhìn ra rừng trúc, học quên những ngày ngồi chờ xướng tên."],
+ day:["Ngươi không lấy chồng; lớp học của ngươi ở ngõ Tây có ba mươi đứa con gái nhà nghèo.","Ngươi ở vậy, mở lớp dạy chữ, dạy thêu; người trong phố gọi ngươi là nữ phu tử."],
+ hoa:["Ngươi được nhận làm nghĩa nữ, theo đoàn sứ lên phương Bắc hòa thân.","Xe hoa đi một tháng mới tới thảo nguyên; từ đó quê nhà chỉ còn trong giấc mơ."]};
+const LPV_MID_K_KC={
+ day:["Học trò của ngươi lớn lên, có đứa làm thơ, có đứa giữ sổ sách cho cả nhà chồng.","Có năm mất mùa, ngươi bán chiếc vòng hồi môn để lớp học không phải đóng cửa.","Cha mẹ ngươi mất, anh em chia nhà; ngươi chỉ xin giữ gian phòng có mấy chiếc bàn học."],
+ hoa:["Khả hãn đối đãi ngươi trọn lễ; ngươi dạy người phương Bắc trồng dâu nuôi tằm.","Theo tục phương Bắc, khả hãn mất thì ngươi phải về với người kế vị; ngươi cắn răng mà sống.","Biên cương yên ổn hai mươi năm; người hai bên ải gọi ngươi là nương nương hòa thân."]};
+const LPV_KC={"Chính thất hầu phủ":"hon","Gả xa":"hon","Làm thiếp nhà quyền quý":"thiep","Vợ quan thanh liêm":"hon","Nữ phu tử":"day","Xuất gia":"tu","Vợ Trạng nguyên":"hon","Hòa thân thay công chúa":"hoa"};
+let LPV_KCS=null;
+(function(){
+ if(typeof kcInit==="function"){const i0=kcInit;kcInit=function(){const r=i0.apply(this,arguments);try{if(S&&S.kc)S.kc.lv=1}catch(e){}return r}}
+ if(typeof kcTraveD==="function"){const t0=kcTraveD;kcTraveD=function(){const d=t0.apply(this,arguments);try{if(S&&S.kc&&S.kc.lv)S.kc.trv=1}catch(e){}return d}}
+ if(typeof kcMarry==="function"){const m0=kcMarry;kcMarry=function(s){LPV_KCS=s||null;try{return m0.apply(this,arguments)}finally{LPV_KCS=null}}}
+ if(typeof kcEndDo==="function"){const e0=kcEndDo;kcEndDo=function(h,t,fate,alive){try{const K=S&&S.kc,k=LPV_KC[h];
+   if(K&&K.lv&&K.trv&&!K.inPal&&!S.dead&&k){let m=null;
+    if(h==="Vợ Trạng nguyên")m=typeof kcTmMan==="function"?kcTmMan():null;
+    else if((k==="hon"||k==="thiep")&&LPV_KCS&&LPV_KCS.n){m=LPV_KCS;m.name=m.name||m.n;m.short=m.n;m.sex="m";m.kind=m.kind||"man"}
+    lpvNext(k,m);alive=true}}catch(e){console.error("lpvKc",e)}
+  return e0.call(this,h,t,fate,alive)}}})();
 /* ================= jend: kitEndScreen — THE ENDING SCREEN, full screen (KIT §91; owner marks #48 #50 #51, OD 21/11 ~03:56Z / ~04:03Z / ~04:06Z) =================
    Owner (verbatim, 21/11 ~04:06Z): "bất cứ một cái gì mà kết thúc một cái game, kết thúc một cái kiếp là đều phải có một cái khung đẹp của nó ... thay vì là khung nhỏ
    thì tôi muốn là khung full màn hình luôn ... dưới là có cái nền ... từ cái kết cục cho tới đại kết cục hay là kỳ ngộ gì đó, mỗi một cái nó sẽ có một cái nền khác nhau".
@@ -96174,7 +96205,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="9ab0a2a5d786";window.CTM_BUILD=BUILD;
+const BUILD="bd21a5c1f7cb";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
