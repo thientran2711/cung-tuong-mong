@@ -62,3 +62,24 @@ Push recipe: fetch --depth=30 under flock /home/user/wt/fetch.lock, rebase onto 
 | c04 A63 | Lwtg8leswO | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg (slightly pink), soft smile; reads ~60, silver hair, light lines |
 | c10 A63 | 1lBjdl7r4r | DONE (looked) | same QC; reads ~63, visible lines, silver-grey hair |
 | c16 A63 | xS8sBJPjfW | DONE (looked) | same QC; reads ~63 |
+
+## Successor 2 rows (Dignified) — 22:17Z
+| job | output creation | status | QC |
+|---|---|---|---|
+| c22 A63 | gOvwvO5SXO | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; reads ~60, silver strands |
+| c28 A63 | N2535ce6D9 | DONE (looked) | same QC; reads ~63, grey hair, visible lines |
+| m04 A63 | YMS0SmrWeC | DONE (looked) | same QC; reads ~63 |
+| m10 A63 | s7mShpkl8e | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; reads ~60; source-hair ribbon kept |
+| m16 A63 | nVgcSrZYQD | DONE (looked) | same QC; reads ~63; ribbon from source |
+| m22 A63 | eI9BNPtdqL | DONE (looked) | same QC; reads ~63; pink braid ribbon from source |
+| m28 A63 | KLdrBCckqp | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; reads ~60 |
+| m29 A63 | iGkZry13uK | DONE (looked) | same QC; reads ~60; hair ribbon from source |
+| s65 A63 | 79EyQSuJAL | DONE (looked) | same QC; reads ~63, visible lines, silver hair |
+
+## HANDOVER 3 (successor 2 -> successor 3; supersedes Handover 2)
+PRIORITY #1 CHECK: brief + report read; no other worker on Dignified age 39.
+Done: ages 16, 26, 51, 63 ALL COMPLETE (48/48), every image looked at, no NEEDS_REVIEW (minor: some source hair ribbons carried into renders; some backgrounds slightly pinkish-ivory; age-51 renders read ~45-50, age-63 read ~60-63). Rows above (successor 2 section) give output creation ids; earlier rows in this file cover ages 16/26 and c04,c10 A51.
+Remaining: AGE 39 only — 12 Dignified jobs: m04 m10 m16 m22 m28 m29 c04 c10 c16 c22 c28 s65 (rows in age39-fix04/Age39_Job_Updates.json). Prompt = age39-fix04/Prompts/FACE-REUSE-DIGNIFIED-AGE39-DUAL-MASTER-SKIN-BAREFACE-NOTEXT-04.txt pasted WHOLE and UNCHANGED (9729 chars, no cut). Read age39-fix04/Claude_Apply_Age39_Fix.txt. Settings: gpt-2-6, 2k, aspectRatio auto, count 1, refs [identity upload, UPf76Ptwny].
+Identity uploads (reuse, never re-upload): c04 EbcFFhnuuO, c10 ksXxxbr16B, c16 cpwVVY30eP, c22 rgoLLr0xtc, c28 VXOpeD2MMU, m04 N253RRL6D9, m10 LwtgSwWswO, m16 rgoLsU6xtc, m22 TdJDp8FVNR, m28 aFnEukWfSh, m29 ksXxjO216B, s65 s7mSU3hl8e.
+Still not done: contact sheets/CDN (separate gallery worker per the order), final DONE to Foreman D after age 39.
+Push recipe: fetch --depth=30 under flock, checkout -B work FETCH_HEAD, append, push HEAD to the handover branch (never rebase the old detached shallow worktree).
