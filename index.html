@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"57297d00+","t":"2026-11-24T22:17Z","c":"Mở game nhanh hơn khi đang tải bản chơi offline; đủ tranh khi chơi offline.","b":"94f464e941be","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
+window.CTM_BI={"s":"74ae74a5+","t":"2026-11-24T22:17Z","c":"Sửa trò chơi nhỏ: gương soi rõ mặt, lời mở đầu nằm trên hiệu ứng.","b":"0434bc95a842","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1893,7 +1893,7 @@ const MG={
  vu:["Vũ: theo bước múa","Xem các bước sáng lên rồi múa lại đúng thứ tự. 5 lượt, mỗi lượt dài thêm một bước.",gVu]};
 /* review/mg-train (owner 16/11 07:20Z no word games): thi + y lessons and their banks (DOI, YQ) + quiz() removed; the openMG wrapper (j82) puts KG82_MGL thi / y (calli, blend) in MG before every open */
 function openMG(k,lv,cb){const [t,h,fn]=MG[k];$("mgt").textContent=t;$("mgh").textContent=h;$("ov").hidden=false;mgDone=false;
- const sk=$("mgskip");sk.hidden=false;sk.innerHTML=`Để trời định<small>${kitQuickSub({win:"tiến bộ một phần",lose:"không tiến bộ"})}</small>`;sk.classList.add("kquick");sk.classList.remove("ka","kcard","kdis");delete sk.dataset.ka;
+ const sk=$("mgskip");sk.hidden=false;sk.innerHTML=`Bỏ qua<small>${kitQuickSub({win:"tiến bộ một phần",lose:"không tiến bộ"})}</small>`;sk.classList.add("kquick");sk.classList.remove("ka","kcard","kdis");delete sk.dataset.ka;
  const fin=(pts,skip)=>{if(mgDone)return;mgDone=true;if(mgStop)mgStop();mgStop=null;sk.hidden=true;const g=pts*(S.master?2:1);
   $("mgb").innerHTML=`<p class="mgres">${skip?(pts?"May mắn":"Không vào"):["","Tạm được","Khá","Xuất sắc"][pts]}</p><p style="text-align:center">Tiến bộ +${g}${S.master&&pts?" (danh sư dạy, gấp đôi)":""}</p><div style="display:flex;justify-content:center"><button class="main" id="mgok">Xong</button></div>`;
   $("mgok").onclick=()=>{$("ov").hidden=true;$("mgb").innerHTML="";cb(g)};/* the used result button is removed: no stale "Xong" with an old callback stays in #ov */$("mgok").focus()};
@@ -30080,7 +30080,9 @@ KP_SEAL.game="TÀI NGHỆ";
    the odds WORD of BAL.skip.od (word(od(...)), VANPHONG ladder, no %; none when sure) · "thành: <win>" · "hỏng: <lose>". sub = a game whose quick choice keeps
    its own rule (contests: the mark of a girl of her level; acts: the act's own odds) gives its line itself, still in this part. kitQuickRoll() = THE roll. */
 function kitQuickSub(o){o=o||{};if(o.sub!=null)return o.sub;const w=o.sure?"":word(od(BAL.skip.od));return [w,o.win?`thành: ${o.win}`:"",!o.sure&&o.lose?`hỏng: ${o.lose}`:""].filter(Boolean).join(" · ")}
-function kitQuick(o){o=o||{};const sb=kitQuickSub(o);return `<button type="button" class="${typeof kg82Btn==="function"?kg82Btn(true):"kbtn alt"} kquick" id="${o.id||"kg82skip"}"${o.data?" "+o.data:""}>${o.n||"Để trời định"}${sb?`<small>${sb}</small>`:""}</button>`}
+/* owner 24/11 (MAIN 128): ONE skip wording in every mini-game: «Bỏ qua» + what happens in plain words (numbers-as-text "5/10" become the mark word, jmgt mgWord) */
+function kitQuickWords(t){return String(t||"").replace(/(?:tính\s+)?(\d+)\/10(\s+phần)?(?:\s*\(\+\d+\))?/g,(m,n)=>{try{return typeof mgWord==="function"?"kết quả "+String(mgWord(+n)).toLowerCase():"kết quả thường"}catch(e){return"kết quả thường"}})}
+function kitQuick(o){o=o||{};const sb=kitQuickWords(kitQuickSub(o))||"kết quả thường";return `<button type="button" class="${typeof kg82Btn==="function"?kg82Btn(true):"kbtn alt"} kquick" id="${o.id||"kg82skip"}"${o.data?" "+o.data:""}>Bỏ qua<small>${sb}</small></button>`}
 function kitQuickRoll(){return roll(od(BAL.skip.od))}
 window.kitQuick=kitQuick;window.kitQuickSub=kitQuickSub;window.kitQuickRoll=kitQuickRoll;
 (function(){const st=document.createElement("style");st.id="kquick-css";/* ONE look wherever the quick button sits (inside .kg82act, in the j5 #ov lesson panel, under the care frames) */
@@ -33147,8 +33149,15 @@ function kg82Set(k,v){if(k==="round"&&typeof v==="string"){let lab=null;const m=
   if(lab)document.querySelectorAll('[data-kg="round"]').forEach(e=>{const l=e.previousElementSibling;if(l&&l.tagName==="SMALL"&&l.textContent!==lab)l.textContent=lab})}
  kg82Set0(k,v)}
 function kg82Set0(k,v){if(typeof kitGameSet==="function")kitGameSet(k,v);else document.querySelectorAll(`[data-kg="${k}"]`).forEach(e=>e.innerHTML=v)}
+/* owner 24/11 ~22:02Z (mirror): her face / the board picture must be THERE the moment a mini-game shows: the frame stays veiled (visibility) until every picture in it
+   (her figure / face, the kind's board painting) is decoded, capped by BAL.mgVeilMs so a slow picture never traps her. Whole family: every kg82Open game. */
+function kg82Veil(d,kind){try{const cap=(BAL.mgVeilMs!=null?BAL.mgVeilMs:1500);const L=[...d.querySelectorAll("img")];try{const n=kg82BgName(kind);if(n)L.push(kg82Img(n))}catch(e){}
+ const todo=L.filter(im=>im&&!(im.complete&&im.naturalWidth>0&&!im.decode));if(!L.length)return;d.style.visibility="hidden";
+ const one=im=>im.decode?im.decode().catch(()=>0):new Promise(r=>{im.complete?r():(im.onload=im.onerror=()=>r())});
+ let off=0;const show=()=>{if(off)return;off=1;if(d.style)d.style.visibility=""};
+ Promise.race([Promise.all(L.map(one)),new Promise(r=>setTimeout(r,cap))]).then(show,show);setTimeout(show,cap+200)}catch(e){try{d.style.visibility=""}catch(x){}}}
 function kg82Open(o){const pb=KG82.preBack,pp=KG82.prePay||(typeof S!=='undefined'&&S&&S.mg&&S.mg.pay)||null;KG82.preBack=null;KG82.prePay=null;kg82Close(true);KG82.setup=0;KG82.phase="";KG82.ready=null;KG82.idNote=null;const ov=$("ov");if(!ov)return null;[...ov.children].forEach(c=>{if(c.id!=="kg82"){c.dataset.kg82h=c.hidden?"1":"0";c.hidden=true}});
- const d=document.createElement("div");d.id="kg82";d.className="mg kpanel kgame kg82 kg-idle";d.setAttribute("role","dialog");d.setAttribute("aria-modal","true");{const ps=KG82.preSkin;KG82.preSkin=null;kg82SkinOn(d,o.kind||KG82.picKind,o.skin!=null?o.skin:ps!=null?ps:typeof mgpSkin==="function"?mgpSkin(o.kind||KG82.picKind):null)/* ORDER THIN P1b: no skin asked = one drawn through the no-repeat memory (mgskin:<kind>); none registered = today's art */}d.innerHTML=kg82Frame(o);ov.appendChild(d);ov.hidden=false;d.scrollTop=0;kg82BackX(d);
+ const d=document.createElement("div");d.id="kg82";d.className="mg kpanel kgame kg82 kg-idle";d.setAttribute("role","dialog");d.setAttribute("aria-modal","true");{const ps=KG82.preSkin;KG82.preSkin=null;kg82SkinOn(d,o.kind||KG82.picKind,o.skin!=null?o.skin:ps!=null?ps:typeof mgpSkin==="function"?mgpSkin(o.kind||KG82.picKind):null)/* ORDER THIN P1b: no skin asked = one drawn through the no-repeat memory (mgskin:<kind>); none registered = today's art */}d.innerHTML=kg82Frame(o);ov.appendChild(d);ov.hidden=false;d.scrollTop=0;kg82BackX(d);kg82Veil(d,o.kind||KG82.picKind);
  /* §13.9: a charge the caller only REMEMBERS (kgDefer) is taken on «Sẵn sàng» / the quick option / any outcome (kgPay); a lesson keeps it in S.mg.pay (a reload reopens the
     same unpaid lesson, never a free one). Until then the ✕ is a free back: nothing was spent, nothing to undo. */
  if(pp){KG82.payOnGo=pp;try{if(typeof pp==="object"&&S.mg&&S.mg.pay!==pp){S.mg.pay=pp;save()}}catch(e){}KG82.backPre=()=>{KG82.payOnGo=null;try{if(typeof pb==="function")pb()}catch(e){console.error(e)}try{if(S.mg)S.mg=null}catch(e){}}}
@@ -35248,7 +35257,7 @@ function wkFinishLesson(k,pick,raw,how){const kind=WK[pick.kind]&&WK[pick.kind].
  if(typeof playArt==="function"){try{const an=ARTS.find(x=>x.k===k).n;playArt({art:k,title:`${m.mode==="prac"?"Tự học":"Học"} ${an}`,quick:m.mode==="prac"?{n:"Học nhanh",sure:1,win:"không ra thành phẩm"}:{n:"Học nhanh",roll:1,win:"tiến bộ một phần, không ra thành phẩm",lose:"không tiến bộ"},onDone:(raw,o)=>{const sk2=!!(o&&o.skipped);raw=cl(Math.round(raw||0),0,10);const pts=sk2?(o.ok!=null?(o.ok?1:0):(kitQuickRoll()?1:0)):wkLessonPts(raw)/* ONE tier rule (ag) */;
    if(m.mode==="prac"){S.mg=null;if(sk2)log("Tự học nhanh: không ra thành phẩm.");else wkFinishLesson(k,pick,raw,"tự học");render();return}cb(pts*ms);if(sk2)return;try{wkFinishLesson(k,pick,raw,m.mode==="self"?"tự học":m.mode==="th"?"học với Thái hậu":"học");render()}catch(x){}}});return}catch(x){}}
  const r=o0.call(this,k,lv,cb2);
- try{const sk=$("mgskip"),os=sk.onclick;const kind=WK[pick.kind]?pick.kind:WDEF[k];sk.innerHTML=`Học nhanh<small>${kitParse(kitQuickSub(m.mode==="prac"?{sure:1,win:"không ra thành phẩm"}:{win:"tiến bộ một phần, không ra thành phẩm",lose:"không tiến bộ"}))}</small>`;
+ try{const sk=$("mgskip"),os=sk.onclick;const kind=WK[pick.kind]?pick.kind:WDEF[k];sk.innerHTML=`Bỏ qua<small>${kitParse(kitQuickSub(m.mode==="prac"?{sure:1,win:"không ra thành phẩm"}:{win:"tiến bộ một phần, không ra thành phẩm",lose:"không tiến bộ"}))}</small>`;
   sk.onclick=()=>{skip=true;os()};const h=$("mgh");if(h)h.textContent+=` Tự tay làm (chơi): ra thành phẩm, ${WK[kind].w.toLowerCase()}: phẩm = phần chơi (từ 0 đến 10) + ${ARTS.find(x=>x.k===k).n} bậc ${wkLv(S,k)}: +${wkLv(S,k)}${WMAT[pick.mat||0]?` + vật liệu: +${WMAT[pick.mat||0]}`:""}.`}catch(x){}
  return r}})();
 /* product dialog in front of every lesson button (and the practice button once an art is mastered) */
@@ -36870,6 +36879,7 @@ Object.assign(BAL.mgTier.lev,{nghe:{cross:[5600,7850]},truyen:{lim:[10000,15000]
 /* mg-visual (owner 20/11 ~05:10Z): ONE look for «this cue is lit» and «this target was pressed» on EVERY mini-game board (kg82Spr glow + kg82Cue in j82):
    pop = scale of the lit / pressed target (was 1.08 / 1.14: hard to see) · ms = how long the pop + lit ring stay · glow/ring = colours · blur = glow size px ·
    pass = glow passes (shadow stacks) · ringW = ring width as a share of the target's width · dim = darkening of the UNLIT painting under a lit cue (contrast) */
+BAL.mgVeilMs=1500;/* owner 24/11 ~22:02Z: a mini-game frame stays veiled until its pictures (her face, the board) are decoded, at most this long */
 BAL.mgFx={pop:1.24,ms:300,glow:"#fff0a0",ring:"#ffffff",blur:44,pass:3,ringW:.07,dim:.18};
 /* dauho-lv5 (owner 21/11, Fold, «Thử tay: Đầu hồ · hồi 5/5», verbatim: "để cái mức độ mà cho mọi người chơi á, là ở cái level 5, cái hồi 5 mà bạn đang test tôi á,
    thấy nó hợp lý hơn á. Với lại là cái vòng ... của cái mũi tên này nó vô cái bình nó to quá, cho nên có một cái mũi tên nó nằm ở ngoài nhìn nó bị giả đó. Mình thu
@@ -59581,7 +59591,7 @@ function toilRules(){const box=kg82Box();if(!box)return;KG82.setup=1;box.hidden=
  $("toilrdy").addEventListener("click",()=>{box.classList.remove("kgintro");box.innerHTML="";toilDressUI()})}
 function toilOpen(){if(!S||S.dead)return;if(window.__bot){toilAuto();return}KG82.ctx="hoc";const occ=toilOcc();
  const d=kg82Open({art:"Điểm trang",title:"Trước gương đồng",how:TOIL_HOW});
- if(!d)return;["chai-bg","chai-brow","chai-puff","chai-rouge"].forEach(n=>{try{kg82Img(n)}catch(e){}});try{KIT_VEIL.load()}catch(e){}
+ if(!d)return;["chai-bg","chai-brow","chai-puff","chai-rouge"].forEach(n=>{try{kg82Img(n)}catch(e){}});try{KIT_VEIL.load()}catch(e){}try{const por=toilPor(),im=new Image();im.decoding="async";im.src=typeof IMG_U==="function"?IMG_U(por.src):por.src;if(im.decode)im.decode().catch(()=>0)}catch(e){}/* warm her face (decode) while she reads the rules / picks the dress */
  TOIL.st={occ,F:Math.max(...occ.map(o=>o.F)),parts:{},dv:null,start:wdCur(S)};toilMkPre();toilBackX();toilHUD({score:"–",round:"1/4",time:"không hạn"});toilRules()}
 /* (a) CHỌN Y PHỤC — the bag (kitInvGrid, the same items as Tư trang) + the worn slots + her portrait in the chosen dress */
 const TOIL_SL=[["tram","Cài tóc","tramngoc"],["ear","Hoa tai","hoatai"],["y","Y phục","luahang"],["wrist","Đeo tay","vongngoc"],["waist","Đeo eo","ngocboi"],["scent","Túi thơm","tuithom"],["shoe","Giày","giayhoa"]];
@@ -59657,7 +59667,7 @@ function toilGeom(W,H,src){const ky=H*.94/(TOIL_MIR.ry*2*1024),k=Math.min(ky,W/(
  return{bg:{x:ox,y:oy,s:S0},mx,my,rx,ry,img:{x:mx-fcx*s,y:my-fcy*s,w:IW*s,h:IH*s},T,fws:fw*s,ax:ax!=null}}
 function toilQuad(a,c,b,n){const L=[];for(let i=0;i<=n;i++){const t=i/n;L.push([(1-t)*(1-t)*a[0]+2*(1-t)*t*c[0]+t*t*b[0],(1-t)*(1-t)*a[1]+2*(1-t)*t*c[1]+t*t*b[1]])}return L}
 function toilMakeup(){KG82.setup=0;const st=TOIL.st,box=kg82Box();box.innerHTML="";box.hidden=false;const C=kg82Canvas(box,.86,620),{g,W,H}=C;C.cv.style.touchAction="none";
- const por=toilPor();const face=new Image();face.decoding="async";face.src=typeof IMG_U==="function"?IMG_U(por.src):por.src;let G=toilGeom(W,H,por.src);const sk=toilSkill();st.sk=sk;
+ const por=toilPor();const face=new Image();face.decoding="async";face.src=typeof IMG_U==="function"?IMG_U(por.src):por.src;/* owner 24/11 ~22:02Z: her face is IN the mirror the moment the board shows: the board stays veiled until the face is decoded (cap BAL.mgVeilMs) */{box.style.visibility="hidden";let o=0;const sh=()=>{if(o)return;o=1;box.style.visibility=""};Promise.race([face.decode?face.decode().catch(()=>0):new Promise(r=>{face.onload=face.onerror=r}),new Promise(r=>setTimeout(r,BAL.mgVeilMs||1500))]).then(sh,sh)}let G=toilGeom(W,H,por.src);const sk=toilSkill();st.sk=sk;
  /* diemtrang-score (owner 16/11): NO guide lines. The hidden ideal is THIS face's own brows / cheekbones / mouth (https://ctm-img.victoria-tntt.workers.dev/img/mk-fit face points;
     a picture without points uses the measured average, BAL.toil.fb) — anchored per portrait, so the brow target is the painted brow itself */
  const file=String(por.src||"").split("?")[0].split("/").pop();let I,brows,cheeks,lips,lr,puffR,cpts;
@@ -95863,7 +95873,23 @@ function dfData(i){return (dfActs(i)||[]).map(g=>({k:g.k,n:g.n,can:g.can,tot:g.t
 function dfHud(F,o){try{const T=BAL.df.rawTop;if(!F||!o)return;F.hud(o.score!=null?o.score+"/"+T:null,o.time!=null?o.time+" giây":null)}catch(e){}}
 function dfSetGroups(F,G){try{F.setGroups(G)}catch(e){}}
 /* the kit play layer (K-FOCUS-1 r2): ONE kit skip button «Làm luôn» + ◂ = onBack (cancel, no act) — nothing drawn here */
-function dfPlay(F,onSkip,onBack){return F.play({skip:{n:"Làm luôn",sub:"không chơi: như thường",onSkip},onBack})}
+function dfPlay(F,onSkip,onBack){return F.play({skip:{n:"Bỏ qua",sub:"kết quả thường",onSkip},onBack})}
+/* owner 24/11 ~22:02Z item 6: EVERY on-figure game first shows its rules (kit «Luật chơi» block, same words as the Điểm trang rules screen) and starts only on «Sẵn sàng» */
+const DF_RULE={
+ swipe:["Vuốt","Vòng đỏ lướt qua mặt nàng: vuốt ngón tay ngang qua nó, vuốt càng nhanh càng nặng tay.","Trúng và nhanh thì thành hẳn; hụt thì hỏng."],
+ tug:["Chạm liên tục","Chạm nhanh để đẩy thanh lên đầy; nàng kéo ngược lại.","Thanh đầy trước khi kịp tụt thì thành."],
+ bow:["Chạm đúng nhịp","Vòng khép dần quanh nàng: chạm đúng lúc vòng chuyển xanh, ba nhịp.","Đúng nhịp càng nhiều càng thành."],
+ drag:["Kéo","Kéo vật vào đôi tay nàng đang đưa qua lại; thả đúng lúc tay ở vòng xanh.","Trúng giữa vòng thì trọn vẹn."],
+ ear:["Giữ","Giữ ngón tay ở bên tai nàng; buông khi người bên cạnh liếc sang (thanh đỏ), giữ lại khi họ quay đi.","Giữ đủ lâu mà không bị bắt gặp thì thành."],
+ words:["Chạm dấu","Dấu trôi lên: chạm dấu ✓ xanh (lời hợp ý), tránh dấu ✗ đỏ (lời hỏng).","Chạm đúng nhiều dấu ✓ thì thành; chạm nhầm dấu ✗ thì mất điểm."],
+ stare:["Giữ ngón tay","Giữ ngón tay để thanh áp lực nằm trong dải xanh; nàng đẩy lại nên buông và giữ cho khéo.","Ở trong dải xanh càng lâu càng thành."]};
+/* owner 24/11 MAIN 128: the rules card + skip sit ABOVE every particle / weather / fx layer (they are fixed, z 9440-9470): hide them while a mini-game intro or play layer is up; the title never wraps */
+(function(){const st=document.createElement("style");st.id="dfintro-css";st.textContent=`body:has(.kfoc-play:not([hidden]) *) #kfxcv,body:has(.kfoc-play:not([hidden]) *) .kfx-fl,body:has(.kfoc-play:not([hidden]) *) .kfxk,body:has(.kfoc-play:not([hidden]) *) .kfrip{visibility:hidden!important}.dfintro .kpst{white-space:nowrap}`;document.head.appendChild(st)})();
+function dfIntro(layer,a,onGo){try{const R=DF_RULE[a.eng]||DF_RULE.words;const nm=String(a.n||"").replace(/<[^>]+>/g,"");
+ const rows=[["Việc",nm,"t"],["Chạm",R[1],"t"],["Được",R[2],"t"]];
+ const el=document.createElement("div");el.className="kgr dfintro";el.style.cssText="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(88%,460px);max-height:90%;display:flex;flex-direction:column;align-items:center;gap:10px;padding:14px;z-index:3;overflow:auto;box-sizing:border-box;background:var(--paper,#f6eedc);color:var(--ink,#3b2a1c);border:1px solid var(--gold,#c99a1e);border-radius:14px;box-shadow:0 6px 24px rgba(0,0,0,.35)";
+ el.innerHTML=`<h4 class="kpst">Luật chơi · ${R[0]}</h4>${kg82Rows(rows)}<button type="button" class="${kg82Btn(false)} kgr-go dfgo">Sẵn sàng<small>bắt đầu chơi</small></button>`;
+ layer.appendChild(el);const b=el.querySelector(".dfgo");b.onclick=e=>{e.stopPropagation();el.remove();onGo()};return el}catch(e){return null}}
 function dfUnplay(F){try{if(F.playing)F.endPlay()}catch(e){}}
 function dfLast(){try{const t=document.getElementById("rtoast");return t&&t.classList.contains("on")?t.innerText.trim().split("\n")[0]:""}catch(e){return""}}
 /* the focus holds the PERSON (DF.p), never a frozen index: S.visit.people can shift while it is up (co-op refreshHere unshifts the Emperor,
@@ -95883,9 +95909,12 @@ function dfTap(id){const F=DF.F;if(!F||S.dead||Q.length||DF.play)return;const i=
  const run=res=>{const j=dfHere();if(j<0)return;dfRun(j,id,res);dfAfter(a,res)};
  if(a.cls==="D"){run();return}
  const layer=dfPlay(F,()=>{if(DF.play)DF.play.skip()},()=>{const h=DF.play;DF.play=null;if(h)h.destroy()});if(!layer){run();return}
- DF.play=dfGame(a.eng,{box:layer,fig:dfFigBox(F,layer),rank:typeof rkOf==="function"?rkOf(S):S.rank,at:/Ngáng chân/.test(a.n)?"feet":null,hud:o=>dfHud(F,o),
+ const go=()=>{DF.play=dfGame(a.eng,{box:layer,fig:dfFigBox(F,layer),rank:typeof rkOf==="function"?rkOf(S):S.rank,at:/Ngáng chân/.test(a.n)?"feet":null,hud:o=>dfHud(F,o),
   onDone:res=>{DF.play=null;dfUnplay(F);run(res)}});
- if(!DF.play){dfUnplay(F);run()}}
+  if(!DF.play){dfUnplay(F);run()}};
+ /* intro first: DF.play is a stub (skip = the quick result) until «Sẵn sàng» */
+ DF.play={skip(){DF.play=null;dfUnplay(F);run({raw:null,skipped:true})},destroy(){}};
+ if(!dfIntro(layer,a,()=>{DF.play=null;go()})){DF.play=null;go()}}
 function dfAfter(a,res){const F=DF.F;if(!F)return;const i=dfIdx();if(i<0){dfGone();return}try{const ln=dfLast();F.react({line:ln?ln.slice(0,BAL.df.reactChars):"",seal:true})}catch(e){}dfSetGroups(F,dfData(i))}
 /* the old pop-up stays hidden under the focus view (the global [hidden] rule; no CSS of its own) */
 (function(){const r0=renderStage;renderStage=function(){if(DF.p&&DF.F&&!DF.play){const k=dfIdx();if(k<0){setTimeout(()=>{if(DF.p&&dfIdx()<0)dfGone()},0)}else{DF.i=k;popIdx=k}}
@@ -98066,7 +98095,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="94f464e941be";window.CTM_BUILD=BUILD;
+const BUILD="0434bc95a842";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

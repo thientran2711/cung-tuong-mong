@@ -11,7 +11,7 @@ const MG={
  vu:["Vũ: theo bước múa","Xem các bước sáng lên rồi múa lại đúng thứ tự. 5 lượt, mỗi lượt dài thêm một bước.",gVu]};
 /* review/mg-train (owner 16/11 07:20Z no word games): thi + y lessons and their banks (DOI, YQ) + quiz() removed; the openMG wrapper (j82) puts KG82_MGL thi / y (calli, blend) in MG before every open */
 function openMG(k,lv,cb){const [t,h,fn]=MG[k];$("mgt").textContent=t;$("mgh").textContent=h;$("ov").hidden=false;mgDone=false;
- const sk=$("mgskip");sk.hidden=false;sk.innerHTML=`Để trời định<small>${kitQuickSub({win:"tiến bộ một phần",lose:"không tiến bộ"})}</small>`;sk.classList.add("kquick");sk.classList.remove("ka","kcard","kdis");delete sk.dataset.ka;
+ const sk=$("mgskip");sk.hidden=false;sk.innerHTML=`Bỏ qua<small>${kitQuickSub({win:"tiến bộ một phần",lose:"không tiến bộ"})}</small>`;sk.classList.add("kquick");sk.classList.remove("ka","kcard","kdis");delete sk.dataset.ka;
  const fin=(pts,skip)=>{if(mgDone)return;mgDone=true;if(mgStop)mgStop();mgStop=null;sk.hidden=true;const g=pts*(S.master?2:1);
   $("mgb").innerHTML=`<p class="mgres">${skip?(pts?"May mắn":"Không vào"):["","Tạm được","Khá","Xuất sắc"][pts]}</p><p style="text-align:center">Tiến bộ +${g}${S.master&&pts?" (danh sư dạy, gấp đôi)":""}</p><div style="display:flex;justify-content:center"><button class="main" id="mgok">Xong</button></div>`;
   $("mgok").onclick=()=>{$("ov").hidden=true;$("mgb").innerHTML="";cb(g)};/* the used result button is removed: no stale "Xong" with an old callback stays in #ov */$("mgok").focus()};
