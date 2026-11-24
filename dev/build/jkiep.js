@@ -4,7 +4,7 @@
    - Kiếp dở dang: chết hay bỏ ngang (Kiếp mới / ghi đè sổ đang sống) trước mốc. Mất Phúc duyên kết cục và mọi Phúc duyên đã tích
      trong kiếp đó, trừ thêm KIEP.pen (không xuống dưới 0); kiếp sau không được đổi thân phận (khóa trên bản gieo sẵn "ctm-nextlife").
      Thẻ kết kiếp và Sổ luân hồi ghi "Kiếp dở dang: …". Chết vì bị hại ngoài ý muốn cũng tính (không phân biệt được).
-   - Trước khi bỏ ngang, hoặc chọn một lựa chọn có chữ chết/tự vẫn khi chưa trọn kiếp: cảnh báo một lần mỗi kiếp.
+   - Trước khi bỏ ngang (nút Kiếp mới trên sổ đang sống, việc của hệ thống): bấm hai lần. Trong game không hỏi lại sau khi chọn (sếp 24/11 ~08:40Z).
    - Cung nữ (cnv): mốc giữa chặng là thành tựu thật: lên Chưởng sự cô cô, được sủng hạnh, lên Phi lần đầu; mỗi mốc +Phúc duyên và ghi Sổ luân hồi. */
 const KIEP={mo:12,rk:2,pen:30,ms:{cs:10,sh:15,phi:10}};
 const KP_RULE="Kiếp chỉ tính là trọn khi sống đủ một năm trong cung hoặc được thăng tới Quý nhân (cung nữ: lên Chưởng sự hay được sủng hạnh). Chết hay bỏ ngang trước đó là kiếp dở dang: mất Phúc duyên của kiếp ấy, trừ thêm "+KIEP.pen+", kiếp sau không được đổi thân phận.";
@@ -40,13 +40,11 @@ function kpPenalty(base){const now=pdGet();const lost=Math.max(0,now-base);const
 (function(){const a0=nlAccept;nlAccept=function(){const r=a0.apply(this,arguments);try{if(S&&!S.dead){S.kpR0=S.rank||0;S.kpTron=0;
   const m=Q.find(x=>x&&!x.nl&&x.h&&!/kp-rule/.test(x.h));if(m)m.h+=`<p class="past kp-rule">${KP_RULE}</p>`}}catch(e){}return r}})();
 try{KIT_GLOSS["Phúc duyên"]="Điểm tích qua các kiếp. Dùng để đổi thân phận khi bắt đầu kiếp mới. "+KP_RULE}catch(e){}
-/* one warning per life before a choice that names death, while the life is unfinished */
-/* kpGate(i): true = the warning card was put in front of Q[0] (the choice waits for "Vẫn chọn"); also used by co-op thin cards (jcoopthin) */
-window.kpGate=function(i){try{const m=Q[0],c=m&&m.opts&&m.opts[i];if(c&&S&&!S.dead&&!S.kpWarn&&!kpCheck()&&!m.kpw&&!window.__kpNoWarn){
-   const tx=[c.n,c.x,c.j67].join(" ").replace(/giả chết/gi,"");/* «giả chết» = her own choice to LEAVE (an ending, owner 24/11 ~07:25Z: no confirm), not a death */if(/tự vẫn|tự tận|tự sát|chết|bị giết|rượu độc/i.test(tx)){S.kpWarn=1;
-    Q.unshift({act:1,t:"Kiếp này chưa trọn",kpw:1,who:pMe(),h:`<p>Kiếp này chưa trọn (${kpWhy()}), bỏ ngang sẽ mang nghiệp: mất Phúc duyên của kiếp này, trừ thêm ${KIEP.pen}, kiếp sau không được đổi thân phận.</p><p class="past">${KP_RULE}</p>`,
-     opts:[{n:"Nghĩ lại",fx:{},x:""},{n:`Vẫn chọn: ${c.n}`,fx:{},x:"",go:()=>{setTimeout(()=>{try{if(Q[0]===m){chooseM(i);render()}}catch(e){}},0)}}]});showModal();return true}}}catch(e){console.error(e)}return false};
-(function(){const c0=chooseM;chooseM=function(i){if(window.kpGate(i))return;return c0.apply(this,arguments)}})();
+/* NO RE-ASK after a game tap (owner OD 24/11 ~08:40Z; ORDER FROM MAIN 119 08:06Z, E74): the old «Kiếp này chưa trọn → Nghĩ lại / Vẫn chọn» card popped
+   on any option whose TEXT matched /chết|tự vẫn|…/ (idioms included: «Để lời đồn tự chết», «Cúng các phi tần chết oan») — a word gate and a re-ask, both
+   gone. The rule itself stays: it is on the entry card (KP_RULE) and its consequence shows AFTER the choice, on the end card («Kiếp dở dang» line, over()
+   wrapper above). The title-screen «bỏ ngang» double tap (a save-slot action = system) is kept. kpGate stays as a no-op for the co-op thin callers. */
+window.kpGate=function(){return false};
 /* cung nữ milestones */
 function kpMs(k,why){S.kpMs=S.kpMs||{};if(S.kpMs[k])return;S.kpMs[k]=1;try{pdAdd(KIEP.ms[k],why,"ms_"+k)}catch(e){}(S.kpMsL=S.kpMsL||[]).push(why)}
 function kpMsCheck(){if(!S||S.dead||!S.origin||S.origin.k!=="cnv"||!S.srv)return;

@@ -111,12 +111,14 @@ const T=[
   /* kpGate on every own-choice leave option text (both «giả chết» leave choices + a plain one), and one real death word as the control */
   const G=[["✦ Giả chết, theo chàng rời cung","kết thúc kiếp này"],["Xin thuốc giả chết","ra khỏi cung · kết thúc kiếp này"],["Tìm một bài thuốc giả chết",""],["Xuất gia","kết thúc kiếp này, yên ổn"]];R.gate=[];
   const free=!kpCheck();for(const [n,x] of G){S.kpWarn=0;const m={t:"thử",opts:[{n,x,fx:{}}]};Q.length=0;Q.push(m);const w=window.kpGate(0);R.gate.push([n,w]);Q.length=0}
-  S.kpWarn=0;const m={t:"thử",opts:[{n:"Tự vẫn",x:"",fx:{}}]};Q.length=0;Q.push(m);R.ctl=free?window.kpGate(0):"life already whole (control skipped)";Q.length=0;
+  /* E74 (owner OD 24/11 ~08:40Z, MAIN 119 08:06Z): no re-ask after a game tap — no word gate on any option text, death words and idioms alike */
+  R.ctl=[];for(const n of ["Tự vẫn","Ta sợ chết khiếp","Để lời đồn tự chết","Uống chén rượu độc"]){S.kpWarn=0;const m={t:"thử",opts:[{n,x:"hỏng: tội chết",fx:{}}]};Q.length=0;Q.push(m);R.ctl.push([n,window.kpGate(0)]);Q.length=0}R.free=free;
   deser(JSON.parse(snap));Q.length=0;S.dead=false;S.lvEp=null;return R});
  ok(nc.xg==="undefined",'no-confirm: xgConfirm («Xuất gia?» card) is gone',nc.xg);
  ok(nc.act&&nc.dead&&nc.fate==="Xuất gia"&&!nc.q.includes("Xuất gia?")&&nc.q[0]==="Kiếp này"&&!/hỏi lại/.test(nc.actX)&&nc.k==="tu",'no-confirm: lãnh cung «Xuất gia» ends the life at once (end card first, no confirm card, «Về sau» tu)',nc);
  ok(nc.gate.every(([,w])=>!w),'no-confirm: kpGate never stops an own-choice leave option («giả chết» = leaving, not death)',nc.gate);
- ok(nc.ctl===true||typeof nc.ctl==="string",'kpGate control: a real death choice («Tự vẫn») still gets its one warning',nc.ctl);
+ ok(nc.ctl.every(([,w])=>w===false),'E74 no re-ask: no «Kiếp này chưa trọn» card after tapping any option, death words or idioms (OD 24/11 ~08:40Z; MAIN 119)',nc.ctl);
+{const SRC0=require('fs').readFileSync(HTML,'utf8');ok(!/tự vẫn\|tự tận\|tự sát\|chết\|bị giết\|rượu độc/.test(SRC0)&&/Kiếp dở dang:/.test(SRC0),'E74 family scan: the word regex is gone from the build; the consequence still shows after (end card «Kiếp dở dang»)',0)}
  const fs=require('fs');const SRC=fs.readFileSync(HTML,'utf8');
  ok(!/xgConfirm\(/.test(SRC)&&!/sẽ hỏi lại/.test(SRC),'no-confirm family scan: no xgConfirm( call and no «(sẽ hỏi lại)» left in the build');
  /* 5. TRẢ THẺ BÀI (MAIN 117 05:07Z): a NEW tiểu thư life whose tablet is returned → every way out ends the life with «Về sau» (kind, the real man + his nết,
