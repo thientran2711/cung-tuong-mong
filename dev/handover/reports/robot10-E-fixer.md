@@ -267,3 +267,28 @@ LOAD-COMPARE (coop-e2e, same box, one after another; branch test file = 142 chec
 | r4 COOP_SWAP | 11:55:48 → 11:57:51 | 0.34 1.05 1.85 | 142/142 |
 No UI / kit / wording / BAL number change in r4 (BAL.allot.oil.uses read, not typed).
 SSK: SẴN SÀNG KIỂM robot10-e-fix-3 b76ccc59 (BIG; = r3 + one full-piece stock rule).
+
+## 15. E-FIX-5 «reading '1'» (R8 bd_hen, 5/5 skilled lives; R8 chunk2 27d53caf too) — review/robot10-e-fix-5 6b96055a (on fix-4-r2m e75c2715 = LIVE 178cac37 + fix-4 harness)
+Rerun: 1 bd_hen skilled life on fix-4-r2m → the row came back (Fold 13 + iPad 14 hits) but still WITHOUT a stack. Harness gap: with RECYCLE on (default) the real pages are re-opened at each checkpoint and their errors were moved to R.uiErrs without the stack / buổi / save (robot10.js:188 → :211 printed ''). Fixed in robot10.js (test-only). Rerun (CAP 700, UIEVERY 60, Fold): `TypeError … at srkName ← rkOfFace ← pServ ← relMSFace ← relPerson @ năm 6 th4 t2 b2 (buổi #890)` + repro save.
+Cause: the hòa-thân road men (jrd_bd «mbd_*», jrd_pt «mpt_*», role «Sứ thần», added to S.men) failed every DISPLAY «is a man» test, which only knew ids m<digits> (relMan). The Giao tình person picker drew the envoy as a SERVANT → srkName → SRK["Sứ thần"] undefined → TypeError (every checkpoint, both devices), and filed him under «Cung nhân».
+Fix (one shared predicate, law 11): j9 relManP(p) = relMan(p) OR a road man id /^m[a-z]+_/ that is in S.men. Used at every display site: jhc relMSFace (face), jhc relPerson (row: name + «Sứ thần» rank chip), jhc whoL (name on relation lines), jhc relGrp (group «Nam nhân»), jkrel man flag. relMan itself (relation keys / af maps) is NOT changed → saves keep their numbers. No kit part, no wording, no BAL.
+Family scan dev/test/r10e-manid-scan.py (every «is a man» test by id / relMan):
+| file:line | before (e75c2715) | after |
+|---|---|---|
+| jhc:70 whoL / :79 relPerson / :94 relMSFace / :104 relGrp / jkrel:43 | relMan or m<digits> → road man = servant (5 OPEN) | relManP |
+| j9 relKey / relHk / msAff / msAffAdd / relOwner (relMan) | relation keys | kept (road man keeps his j61 key x<n> + af map) |
+| j95:101 mention key, jhc:86 relMSOf | m<digits> | kept (road man resolves via his j61 key) |
+| jnet:14 netSex | /^m\d/ | kept (road man has rw → «m» first) |
+| jcoopask:75 | m<digits> = host menInit set, never asked | kept (road men are hers → asked: intended) |
+| total | 20 sites, 5 display open | 0 open |
+dev/test/r10e-roadman.js (bd_hen save, Fold 755x1000 + iPad 1180x820; every tab + the Giao tình picker):
+| check | e75c2715 | 6b96055a |
+|---|---|---|
+| servant title asked for a non-servant (srkName) | «Sứ thần Mật Hồ Đạt» ×N | none |
+| console.error | TypeError «reading '1'» at srkName | 0 |
+| envoy in «Nam nhân» / not in «Cung nhân» | no (Nam nhân 4, Cung nhân 28) | yes (Nam nhân 5, Cung nhân 27) |
+| result | FAIL 6 | ALL OK |
+Looked (Fold + iPad, scratch shots): picker «Nam nhân 5» shows «Sứ thần Hồ Đạt» with a man's face and the same kit rank chip as the other men; nothing cut, no overflow.
+Tests on 6b96055a: quickcheck run 1 FAIL perf only (buổi new runs 2790 / 924 / 4866 vs live 1346 / 1029 / 1115 — one run below live: noise) → rerun --runs 5 **PASS** (render 225/214, tab 398/382, buổi 1402/1193 ms; one slow branch-side outlier 8 398 ms, the other 4 at 1 097–1 520) · core gates PASS, old save ok · tier BIG (j9 logic) → coop-keymove-unit 12/12 · hc-portrait Fold + iPad 0 FAIL · ag-all-c 1 FAIL «Dò la pays the player's cost (15 bạc)» = the SAME FAIL on the base e75c2715 (2/2 runs; pre-existing, not this branch).
+Co-op: no co-op file touched (display predicates only).
+SSK: SẴN SÀNG KIỂM robot10-e-fix-5 6b96055a (BIG tier by j9 logic; small diff: 5 display sites + harness).
