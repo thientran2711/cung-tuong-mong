@@ -46,767 +46,195 @@
   "file": "sfx-tap.mp3",
   "magnificUrl": "https://www.magnific.com/app/creation/s7oYOaVl8e",
   "seconds": 0.08,
-  "bytes": 879,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
+  "bytes": 879
  },
  "sfx-open": {
   "kind": "sfx",
   "file": "sfx-open.mp3",
   "magnificUrl": "https://www.magnific.com/app/creation/nVjEDJcYQD",
   "seconds": 0.68,
-  "bytes": 5686,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
+  "bytes": 5686
  },
  "sfx-coin": {
   "kind": "sfx",
   "file": "sfx-coin.mp3",
   "magnificUrl": "https://www.magnific.com/app/creation/s7oYOEpl8e",
   "seconds": 0.81,
-  "bytes": 6731,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
+  "bytes": 6731
  },
  "sfx-decree": {
   "kind": "sfx",
   "file": "sfx-decree.mp3",
   "magnificUrl": "https://www.magnific.com/app/creation/EbzyKeduuO",
   "seconds": 2.3,
-  "bytes": 18643,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
+  "bytes": 18643
  },
  "sfx-promote": {
   "kind": "sfx",
   "file": "sfx-promote.mp3",
   "magnificUrl": "https://www.magnific.com/app/creation/fHAJbp8CDY",
   "seconds": 2.04,
-  "bytes": 16553,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
+  "bytes": 16553
  },
  "sfx-poison": {
   "kind": "sfx",
   "file": "sfx-poison.mp3",
   "magnificUrl": "https://www.magnific.com/app/creation/ov9Lfcg829",
   "seconds": 2.04,
-  "bytes": 16553,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
+  "bytes": 16553
  },
  "sfx-expose": {
   "kind": "sfx",
   "file": "sfx-expose.mp3",
   "magnificUrl": "https://www.magnific.com/app/creation/aF27qdYfSh",
   "seconds": 0.21,
-  "bytes": 1924,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
+  "bytes": 1924
  },
  "sfx-birth": {
   "kind": "sfx",
   "file": "sfx-birth.mp3",
   "magnificUrl": "https://www.magnific.com/app/creation/WDsQe3ZcXe",
   "seconds": 2.19,
-  "bytes": 17807,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
+  "bytes": 17807
  },
  "sfx-night": {
   "kind": "sfx",
   "file": "sfx-night.mp3",
   "magnificUrl": "https://www.magnific.com/app/creation/WDsQeZAcXe",
   "seconds": 2.51,
-  "bytes": 20315,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
+  "bytes": 20315
  },
  "sfx-page": {
   "kind": "sfx",
   "file": "sfx-page.mp3",
   "magnificUrl": "https://www.magnific.com/app/creation/rgeAUbzxtc",
   "seconds": 0.5,
-  "bytes": 4223,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
+  "bytes": 4223
  },
  "sfx-step": {
   "kind": "sfx",
   "file": "sfx-step.mp3",
   "magnificUrl": "https://www.magnific.com/app/creation/mE3SQonhJQ",
   "seconds": 0.29,
-  "bytes": 2551,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
+  "bytes": 2551
  },
  "sfx-learn-good": {
   "kind": "sfx",
   "file": "sfx-learn-good.mp3",
   "magnificUrl": "https://www.magnific.com/app/creation/s7oYOj2l8e",
   "seconds": 0.76,
-  "bytes": 6313,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
+  "bytes": 6313
  },
  "sfx-learn-bad": {
   "kind": "sfx",
   "file": "sfx-learn-bad.mp3",
   "magnificUrl": "https://www.magnific.com/app/creation/w4hVNUt7EI",
   "seconds": 0.24,
-  "bytes": 2133,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
+  "bytes": 2133
  },
  "sfx-heartbeat": {
   "kind": "sfx",
   "file": "sfx-heartbeat.mp3",
   "magnificUrl": "https://www.magnific.com/app/creation/P3EdZPf42C",
   "seconds": 0.91,
-  "bytes": 7567,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-alarm": {
-  "kind": "sfx",
-  "file": "sfx-alarm.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/gOIm2iGSXO",
-  "seconds": 0.78,
-  "bytes": 6522,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-banquet": {
-  "kind": "sfx",
-  "file": "sfx-banquet.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/p8JyQ1Hehw",
-  "seconds": 1.1,
-  "bytes": 9030,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-bloom": {
-  "kind": "sfx",
-  "file": "sfx-bloom.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/Bh4NbCxoQR",
-  "seconds": 1.7,
-  "bytes": 13836,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-buoi-bell": {
-  "kind": "sfx",
-  "file": "sfx-buoi-bell.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/fHAzsqgCDY",
-  "seconds": 1.88,
-  "bytes": 15299,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-buy": {
-  "kind": "sfx",
-  "file": "sfx-buy.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/vQZAx6Oa47",
-  "seconds": 0.81,
-  "bytes": 6731,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-cane": {
-  "kind": "sfx",
-  "file": "sfx-cane.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/TdSwacUVNR",
-  "seconds": 0.63,
-  "bytes": 5268,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-chest-open": {
-  "kind": "sfx",
-  "file": "sfx-chest-open.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/ksDePMJ16B",
-  "seconds": 1.91,
-  "bytes": 15508,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-chest-rattle": {
-  "kind": "sfx",
-  "file": "sfx-chest-rattle.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/tCiRkNZmZJ",
-  "seconds": 0.86,
-  "bytes": 7149,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-chest-royal": {
-  "kind": "sfx",
-  "file": "sfx-chest-royal.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/xSdBNQRjfW",
-  "seconds": 1.62,
-  "bytes": 13209,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-close": {
-  "kind": "sfx",
-  "file": "sfx-close.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/N2FqVfK6D9",
-  "seconds": 0.89,
-  "bytes": 7358,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-coin-bounce": {
-  "kind": "sfx",
-  "file": "sfx-coin-bounce.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/yiCuWvfPW9",
-  "seconds": 0.81,
-  "bytes": 6731,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-death-bell": {
-  "kind": "sfx",
-  "file": "sfx-death-bell.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/ksDe47o16B",
-  "seconds": 1.78,
-  "bytes": 14463,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-door-shut": {
-  "kind": "sfx",
-  "file": "sfx-door-shut.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/gOImZLuSXO",
-  "seconds": 1.44,
-  "bytes": 11746,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-edict-unroll": {
-  "kind": "sfx",
-  "file": "sfx-edict-unroll.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/lJ8tR1Agv9",
-  "seconds": 2.04,
-  "bytes": 16553,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-fail": {
-  "kind": "sfx",
-  "file": "sfx-fail.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/ov965vW829",
-  "seconds": 0.99,
-  "bytes": 8194,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-firecracker": {
-  "kind": "sfx",
-  "file": "sfx-firecracker.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/lJ8tZWQgv9",
-  "seconds": 1.65,
-  "bytes": 13418,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-gift-open": {
-  "kind": "sfx",
-  "file": "sfx-gift-open.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/s7oI3b2l8e",
-  "seconds": 0.55,
-  "bytes": 4641,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-gloom": {
-  "kind": "sfx",
-  "file": "sfx-gloom.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/EbzYlaquuO",
-  "seconds": 1.99,
-  "bytes": 16135,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-heal": {
-  "kind": "sfx",
-  "file": "sfx-heal.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/79vfnRUJAL",
-  "seconds": 1.93,
-  "bytes": 15717,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-item-fly": {
-  "kind": "sfx",
-  "file": "sfx-item-fly.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/LwB8i5WswO",
-  "seconds": 0.44,
-  "bytes": 3805,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-item-lose": {
-  "kind": "sfx",
-  "file": "sfx-item-lose.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/4RuF0US9Aa",
-  "seconds": 0.94,
-  "bytes": 7776,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-item-pop": {
-  "kind": "sfx",
-  "file": "sfx-item-pop.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/aF2GjXpfSh",
-  "seconds": 0.89,
-  "bytes": 7358,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-item-rare": {
-  "kind": "sfx",
-  "file": "sfx-item-rare.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/lJ8tRKZgv9",
-  "seconds": 2.04,
-  "bytes": 16553,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-join": {
-  "kind": "sfx",
-  "file": "sfx-join.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/bxTMO3o5Y2",
-  "seconds": 0.73,
-  "bytes": 6104,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-kneel": {
-  "kind": "sfx",
-  "file": "sfx-kneel.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/9ZQHTPGNYZ",
-  "seconds": 1.02,
-  "bytes": 8403,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-lock": {
-  "kind": "sfx",
-  "file": "sfx-lock.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/5jVDOWjKxe",
-  "seconds": 0.52,
-  "bytes": 4432,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-lot-bad": {
-  "kind": "sfx",
-  "file": "sfx-lot-bad.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/9ZQHVR0NYZ",
-  "seconds": 0.44,
-  "bytes": 3805,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-lot-good": {
-  "kind": "sfx",
-  "file": "sfx-lot-good.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/JNaCY4kOq4",
-  "seconds": 0.94,
-  "bytes": 7776,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-mg-arrow": {
-  "kind": "sfx",
-  "file": "sfx-mg-arrow.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/bxTMO9e5Y2",
-  "seconds": 0.47,
-  "bytes": 4014,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-mg-brush": {
-  "kind": "sfx",
-  "file": "sfx-mg-brush.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/UPmvGYcwny",
-  "seconds": 0.99,
-  "bytes": 8194,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-mg-fire": {
-  "kind": "sfx",
-  "file": "sfx-mg-fire.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/gOIm2YMSXO",
-  "seconds": 0.76,
-  "bytes": 6313,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-mg-miss": {
-  "kind": "sfx",
-  "file": "sfx-mg-miss.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/4RuFTV09Aa",
-  "seconds": 0.71,
-  "bytes": 5895,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-mg-needle": {
-  "kind": "sfx",
-  "file": "sfx-mg-needle.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/s7oIR2Cl8e",
-  "seconds": 1.04,
-  "bytes": 8612,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-mg-pluck": {
-  "kind": "sfx",
-  "file": "sfx-mg-pluck.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/6AHbDTfiJO",
-  "seconds": 0.94,
-  "bytes": 7776,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-mg-stone": {
-  "kind": "sfx",
-  "file": "sfx-mg-stone.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/w4haznS7EI",
-  "seconds": 0.47,
-  "bytes": 4014,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-mg-throw": {
-  "kind": "sfx",
-  "file": "sfx-mg-throw.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/eIOPFbYdqL",
-  "seconds": 0.31,
-  "bytes": 2760,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-night-watch": {
-  "kind": "sfx",
-  "file": "sfx-night-watch.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/8aNiKfeIrU",
-  "seconds": 1.88,
-  "bytes": 15299,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-notice": {
-  "kind": "sfx",
-  "file": "sfx-notice.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/mE3Zr7jhJQ",
-  "seconds": 0.89,
-  "bytes": 7358,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-pet-bird": {
-  "kind": "sfx",
-  "file": "sfx-pet-bird.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/MBwJElmDCm",
-  "seconds": 1.62,
-  "bytes": 13209,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-pet-cat": {
-  "kind": "sfx",
-  "file": "sfx-pet-cat.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/lJ8tZpkgv9",
-  "seconds": 0.94,
-  "bytes": 7776,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-pet-crane": {
-  "kind": "sfx",
-  "file": "sfx-pet-crane.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/jUXoi80LD0",
-  "seconds": 0.94,
-  "bytes": 7776,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-pet-deer": {
-  "kind": "sfx",
-  "file": "sfx-pet-deer.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/VXU7COnMMU",
-  "seconds": 1.02,
-  "bytes": 8403,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-pet-dog": {
-  "kind": "sfx",
-  "file": "sfx-pet-dog.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/EbzYgRYuuO",
-  "seconds": 0.42,
-  "bytes": 3596,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-pet-duck": {
-  "kind": "sfx",
-  "file": "sfx-pet-duck.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/LwB83XwswO",
-  "seconds": 0.99,
-  "bytes": 8194,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-pet-fish": {
-  "kind": "sfx",
-  "file": "sfx-pet-fish.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/8aNiK4LIrU",
-  "seconds": 0.81,
-  "bytes": 6731,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-pet-fox": {
-  "kind": "sfx",
-  "file": "sfx-pet-fox.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/YMLlmgGWeC",
-  "seconds": 0.78,
-  "bytes": 6522,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-pet-horse": {
-  "kind": "sfx",
-  "file": "sfx-pet-horse.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/Bh4Nb9WoQR",
-  "seconds": 1.75,
-  "bytes": 14254,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-pet-myna": {
-  "kind": "sfx",
-  "file": "sfx-pet-myna.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/5jVDycjKxe",
-  "seconds": 0.97,
-  "bytes": 7985,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-pet-parrot": {
-  "kind": "sfx",
-  "file": "sfx-pet-parrot.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/P3EQ0qD42C",
-  "seconds": 0.97,
-  "bytes": 7985,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-pet-peacock": {
-  "kind": "sfx",
-  "file": "sfx-pet-peacock.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/EbzYgYDuuO",
-  "seconds": 0.76,
-  "bytes": 6313,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-pet-rabbit": {
-  "kind": "sfx",
-  "file": "sfx-pet-rabbit.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/WDsghxwcXe",
-  "seconds": 0.99,
-  "bytes": 8194,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-pet-turtle": {
-  "kind": "sfx",
-  "file": "sfx-pet-turtle.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/LwB83ozswO",
-  "seconds": 0.68,
-  "bytes": 5686,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-pet-weasel": {
-  "kind": "sfx",
-  "file": "sfx-pet-weasel.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/8aNiKRwIrU",
-  "seconds": 0.84,
-  "bytes": 6940,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-podium": {
-  "kind": "sfx",
-  "file": "sfx-podium.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/LwB83GbswO",
-  "seconds": 2.04,
-  "bytes": 16553,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-rain": {
-  "kind": "sfx",
-  "file": "sfx-rain.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/jUXoicJLD0",
-  "seconds": 2.01,
-  "bytes": 16344,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-rank-new": {
-  "kind": "sfx",
-  "file": "sfx-rank-new.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/yiCucXBPW9",
-  "seconds": 1.57,
-  "bytes": 12791,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-reward-take": {
-  "kind": "sfx",
-  "file": "sfx-reward-take.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/yiCuWlSPW9",
-  "seconds": 0.71,
-  "bytes": 5895,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-seal-stamp": {
-  "kind": "sfx",
-  "file": "sfx-seal-stamp.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/MBwJEXNDCm",
-  "seconds": 0.29,
-  "bytes": 2551,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-sell": {
-  "kind": "sfx",
-  "file": "sfx-sell.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/Do7OEgVpcl",
-  "seconds": 1.93,
-  "bytes": 15717,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-sick": {
-  "kind": "sfx",
-  "file": "sfx-sick.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/VXU7CtKMMU",
-  "seconds": 0.47,
-  "bytes": 4014,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-snow": {
-  "kind": "sfx",
-  "file": "sfx-snow.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/LwB83MiswO",
-  "seconds": 2.04,
-  "bytes": 16553,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-tablet-flip": {
-  "kind": "sfx",
-  "file": "sfx-tablet-flip.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/rgeX91extc",
-  "seconds": 0.52,
-  "bytes": 4432,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-tablet-shuffle": {
-  "kind": "sfx",
-  "file": "sfx-tablet-shuffle.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/WDsgmYecXe",
-  "seconds": 0.81,
-  "bytes": 6731,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-thunder": {
-  "kind": "sfx",
-  "file": "sfx-thunder.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/w4hazZj7EI",
-  "seconds": 1.85,
-  "bytes": 15090,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-tray-open": {
-  "kind": "sfx",
-  "file": "sfx-tray-open.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/dty4FJvXSL",
-  "seconds": 1.72,
-  "bytes": 14045,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-visitor": {
-  "kind": "sfx",
-  "file": "sfx-visitor.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/SythAMCUb8",
-  "seconds": 1.8,
-  "bytes": 14672,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-week-drum": {
-  "kind": "sfx",
-  "file": "sfx-week-drum.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/u5nWSkRQLD",
-  "seconds": 1.36,
-  "bytes": 11119,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-win": {
-  "kind": "sfx",
-  "file": "sfx-win.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/WDsghDIcXe",
-  "seconds": 0.81,
-  "bytes": 6731,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-wind": {
-  "kind": "sfx",
-  "file": "sfx-wind.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/WDsghbLcXe",
-  "seconds": 1.88,
-  "bytes": 15299,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-wither": {
-  "kind": "sfx",
-  "file": "sfx-wither.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/79vfn3SJAL",
-  "seconds": 2.04,
-  "bytes": 16553,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-xam-drop": {
-  "kind": "sfx",
-  "file": "sfx-xam-drop.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/3zbKp33REY",
-  "seconds": 0.55,
-  "bytes": 4641,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-xam-shake": {
-  "kind": "sfx",
-  "file": "sfx-xam-shake.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/YMLltYaWeC",
-  "seconds": 1.02,
-  "bytes": 8403,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-wx-birds": {
-  "kind": "sfx",
-  "file": "sfx-wx-birds.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/SytEsfYUb8",
-  "seconds": 2.09,
-  "bytes": 16971,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-wx-cicada": {
-  "kind": "sfx",
-  "file": "sfx-wx-cicada.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/6AHryIGiJO",
-  "seconds": 2.19,
-  "bytes": 17807,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-wx-crickets": {
-  "kind": "sfx",
-  "file": "sfx-wx-crickets.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/6AHr41oiJO",
-  "seconds": 2.14,
-  "bytes": 17389,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-rite": {
-  "kind": "sfx",
-  "file": "sfx-rite.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/0egyz5eTfW",
-  "seconds": 2.46,
-  "bytes": 19897,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-festival": {
-  "kind": "sfx",
-  "file": "sfx-festival.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/s7oa1TAl8e",
-  "seconds": 1.38,
-  "bytes": 11328,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-confiscate": {
-  "kind": "sfx",
-  "file": "sfx-confiscate.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/8aNAewAIrU",
-  "seconds": 1.57,
-  "bytes": 12791,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-search": {
-  "kind": "sfx",
-  "file": "sfx-search.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/tCizXOImZJ",
-  "seconds": 1.85,
-  "bytes": 15090,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-scheme": {
-  "kind": "sfx",
-  "file": "sfx-scheme.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/lJ8freygv9",
-  "seconds": 1.78,
-  "bytes": 14463,
-  "loudness": "Mmax -16 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
- },
- "sfx-zither": {
-  "kind": "sfx",
-  "file": "sfx-zither.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/s7oCczEl8e",
-  "seconds": 2.19,
-  "bytes": 18016,
-  "loudness": "Mmax -16 LUFS, peak -2.6 dBFS (dev/audio/norm.py)"
- },
- "sfx-candle-out": {
-  "kind": "sfx",
-  "file": "sfx-candle-out.mp3",
-  "magnificUrl": "https://www.magnific.com/app/creation/MBw6kbVDCm",
-  "seconds": 1.99,
-  "bytes": 16553,
-  "loudness": "Mmax -17.4 LUFS, peak -1.5 dBFS (dev/audio/norm.py)"
+  "bytes": 7567
+ },
+ "bgm-fest-newyear": {
+  "kind": "music",
+  "file": "bgm-fest-newyear.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/tCZAnkpmZJ",
+  "seconds": 88.24,
+  "bytes": 1059258
+ },
+ "bgm-fest-nguyentieu": {
+  "kind": "music",
+  "file": "bgm-fest-nguyentieu.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/CqYcVgeEEy",
+  "seconds": 88.48,
+  "bytes": 1062079
+ },
+ "bgm-fest-thanhminh": {
+  "kind": "music",
+  "file": "bgm-fest-thanhminh.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/Bh6321hoQR",
+  "seconds": 89.84,
+  "bytes": 1078379
+ },
+ "bgm-fest-doanngo": {
+  "kind": "music",
+  "file": "bgm-fest-doanngo.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/SyvfucZUb8",
+  "seconds": 89.08,
+  "bytes": 1069289
+ },
+ "bgm-fest-phoenix": {
+  "kind": "music",
+  "file": "bgm-fest-phoenix.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/xSoIhGrjfW",
+  "seconds": 86.83,
+  "bytes": 1042330
+ },
+ "bgm-fest-thattich": {
+  "kind": "music",
+  "file": "bgm-fest-thattich.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/jU8tvYILD0",
+  "seconds": 88.69,
+  "bytes": 1064587
+ },
+ "bgm-fest-vulan": {
+  "kind": "music",
+  "file": "bgm-fest-vulan.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/jU8tvcQLD0",
+  "seconds": 88.24,
+  "bytes": 1059258
+ },
+ "bgm-fest-trungthu": {
+  "kind": "music",
+  "file": "bgm-fest-trungthu.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/iGK1jEy3uK",
+  "seconds": 87.28,
+  "bytes": 1047659
+ },
+ "bgm-fest-trungcuu": {
+  "kind": "music",
+  "file": "bgm-fest-trungcuu.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/oviRAyW829",
+  "seconds": 86.15,
+  "bytes": 1034180
+ },
+ "bgm-fest-vantho": {
+  "kind": "music",
+  "file": "bgm-fest-vantho.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/5jpdoTdKxe",
+  "seconds": 86.05,
+  "bytes": 1032926
+ },
+ "bgm-fest-dongchi": {
+  "kind": "music",
+  "file": "bgm-fest-dongchi.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/P3FqKuL42C",
+  "seconds": 90.07,
+  "bytes": 1081200
+ },
+ "bgm-fest-lapbat": {
+  "kind": "music",
+  "file": "bgm-fest-lapbat.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/bxDeBDY5Y2",
+  "seconds": 87.93,
+  "bytes": 1055496
+ },
+ "bgm-fest-giaothua": {
+  "kind": "music",
+  "file": "bgm-fest-giaothua.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/mE2GYGEhJQ",
+  "seconds": 85.92,
+  "bytes": 1031359
+ },
+ "bgm-fest-thanhtho": {
+  "kind": "music",
+  "file": "bgm-fest-thanhtho.mp3",
+  "magnificUrl": "https://www.magnific.com/app/creation/jU8tvhSLD0",
+  "seconds": 88.48,
+  "bytes": 1062079
  }
 }
