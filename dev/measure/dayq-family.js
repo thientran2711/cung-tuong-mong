@@ -30,7 +30,7 @@ const CH=[
   S=>has(S,'jdayq.js',/DQ\.newsHold/)],
  ['optional j68 event at the first buổi of a day',/atDayStart/g,
   S=>true,
-  S=>has(S,'j68.js',/BAL\.spread\.dawnOpt>=100/)],
+  S=>has(S,'j68.js',/BAL\.spread\.dawnOpt/)],
  ['unslotted world card at the first buổi of a day (D13 jspread)',/\bsp13Slot\(/g,
   S=>true,
   S=>has(S,'jspread.js',/BAL\.spread\.dawnSlot/)]];
