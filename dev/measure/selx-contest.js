@@ -1,0 +1,12 @@
+/* review/selection-scene (SELSCENE-3): THE CONTEST measure (OD 24/11 ~06:15Z). Fresh lives per origin: her place among BAL.selx.yard.n girls
+   and her step, at mini-game marks 3 / 5 / 8 (đối đáp / hành xử middle until the scene lands); the tú nữ score spread. usage: node dev/measure/selx-contest.js [N] */
+const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const ROOT=path.resolve(__dirname,'..');const N=+process.argv[2]||40;
+(async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});
+ await ctx.route('http://localhost:8813/**',r=>{const u=new URL(r.request().url());const f=path.join(ROOT,decodeURIComponent(u.pathname));if(!f.startsWith(ROOT)||!fs.existsSync(f)||fs.statSync(f).isDirectory())return r.fulfill({status:404,body:''});return r.fulfill({status:200,contentType:f.endsWith('.html')?'text/html; charset=utf-8':'application/octet-stream',body:fs.readFileSync(f)})});
+ const p=await ctx.newPage();p.setDefaultTimeout(600000);await p.goto('http://localhost:8813/index.html',{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof selxContest==='function'&&typeof start==='function');
+ await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}start()});await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.origin);
+ const r=await p.evaluate(N=>{const out={},npc=[];for(let i=0;i<N*9;i++){try{store.set(NL_KEY,null)}catch(e){}start();const k=S.origin.k;if(k==="cnv")continue;const o=out[k]=out[k]||{n:0,me:[]};o.n++;
+   const g=selxGirls();for(const m of [3,5,8]){const L=selxContest(g.map(v=>{delete v.__marks;return v}),{marks:{mini:m},t:{art:"cam"}});const me=L.find(x=>x.v===S);o.me.push([m,me.place,me.kept?me.step:"ban",me.sc,S.sac,S.tai,S.duc]);if(m===5)L.forEach(x=>{if(x.v!==S)npc.push(x.sc)})}}
+  const sum={};for(const k in out){const o=out[k];sum[k]={n:o.n};for(const m of [3,5,8]){const R=o.me.filter(x=>x[0]===m);sum[k]["m"+m]={kept:(R.filter(x=>x[2]!=="ban").length/R.length).toFixed(2),avgPlace:(R.reduce((a,x)=>a+x[1],0)/R.length).toFixed(1),up:R.filter(x=>x[2]===1).length,eq:R.filter(x=>x[2]===0).length,dn:R.filter(x=>x[2]===-1).length,avgSc:Math.round(R.reduce((a,x)=>a+x[3],0)/R.length),sac:Math.round(R.reduce((a,x)=>a+x[4],0)/R.length)}}}
+  npc.sort((a,b)=>a-b);const q=f=>npc[Math.floor(f*(npc.length-1))];return{sum,npc:{n:npc.length,p10:q(.1),p50:q(.5),p75:q(.75),p90:q(.9)},cut:BAL.selx.cut}},N);
+ console.log(JSON.stringify(r,null,1));await b.close()})();

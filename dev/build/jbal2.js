@@ -662,12 +662,16 @@ Object.assign(BAL.mgTier.occ,{tuyen:[1,0]});
    ONE CORE for the nhập cung selection. intake = tú nữ per intake (also the mid-game tuyển tú, j27 tuyenTu: was the typed 3+R(3));
    yard = waiting yard {n girls incl. her, perRound, kept}; room = lodging {perRoom, perBed}; w = score weights (base from Đức/Tài/Sắc + the three tests,
    each test mark 0..10: mini ½, đối đáp ¼, hành xử ¼, ADD.22); noise = luck ± for everyone (same for her and the girls, law 1);
-   cut = [−1|0, 0|+1] step cuts; ban = below this score she is sent home (ban hoa = the life ends, OD 24/11 ~05:40Z);
+   placeStep = the rank step of each KEPT place (1st +1, 2nd–3rd same, 4th −1; measured dev/measure/selx-contest.js: score cuts put every kept girl at +1, so the step goes by place); the selection is a CONTEST (OD 24/11 ~06:15Z): all yard.n tú nữ (her included) take the same 3 tests,
+   ranked by score, the top yard.kept are kept, the rest ban hoa (for her: the life ends, OD ~05:40Z); only the 3 tests count, yard / lodging events move
+   relations only (OD ~06:20Z); npcRank = [rank, weight] of the other tú nữ's own standing (was typed roll(60)?0:1 in j27 tuyenTu), npcAge = [min, spread]; npcMini = a tú nữ's mini-game mark from her art level (base + lv·level ± r; was typed in jselx);
    cap = highest entry rank (Tần, OD ~23:25Z); hoaThan = the hòa thân roads (cap Phi, +1 needs Sắc ≥ hoaThanSac, ADD.19);
-   fav = thiện cảm moved with the asking royal per reaction (+ / − / none); days = playable days before the edict (1 day = 16 khắc, OD 24/11 ~05:35Z). */
+   fav = thiện cảm moved with the asking royal per reaction (+ / − / none); days = the playable opening days (OD 24/11 ~07:05Z: day 1 enter + rooms, day 2 yard + contest, day 3 the kept wait → edict; 1 day = 1 tuần = 16 khắc);
+   lodge = the tú nữ lodging (OD ~06:55Z: «Trữ Tú cung» restored on the Dư đồ at its old spot as the selection-time lodging ONLY — not a consort cung, not in PAL / seats;
+   vien = its level-2 courts, rooms of room.perRoom girls on beds of room.perBed). */
 Object.assign(BAL,{selx:{intake:{min:3,max:5},yard:{n:12,perRound:4,kept:4},room:{perRoom:4,perBed:2},
- w:{sac:.15,duc:.15,tai:.1,mini:1.5,dd:.75,hx:.75,base:20},noise:3,cut:[38,52],ban:28,cap:3,hoaThan:["nc","bd","pf"],hoaThanCap:4,hoaThanSac:70,
- fav:{plus:3,minus:-3,mini:[[8,4],[5,2],[0,-2]]},days:1,npcMatch:{hit:8,miss:3,none:5}}});
+ w:{sac:.15,duc:.15,tai:.1,mini:1.5,dd:.75,hx:.75,base:20},noise:3,placeStep:[1,0,0,-1],cap:3,npcRank:[[0,60],[1,40]],npcAge:[18,3],npcMini:{base:3,lv:1.4,r:1},hoaThan:["nc","bd","pf"],hoaThanCap:4,hoaThanSac:70,
+ fav:{plus:3,minus:-3,mini:[[8,4],[5,2],[0,-2]]},days:3,lodge:{n:"Trữ Tú cung",x:.303,y:.338,vien:[["dong","Đông viện"],["tay","Tây viện"],["nam","Nam viện"]]},npcMatch:{hit:8,miss:3,none:5}}});
 Object.assign(BAL,{entry:{word:["tho","doi","doden","le","tc","xa","thq"],noise:4,cut:[37,53],stepSung:5,
  w:{dir:{sac:.15,duc:.15,tai:.1,raw:3,art:1.5,th:1/6,base:8},
   dan:{sac:.15,duc:.15,suc:.05,raw:3,art:0,kim:[3.5,1.5],le:2.5,kgt:1/8,kld:-1/3,ly:3,self:-3,base:0},

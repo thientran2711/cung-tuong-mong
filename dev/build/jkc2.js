@@ -141,7 +141,7 @@ function kc2Init(d){const sur=tdSur(S.name);const fam=[];const gm=()=>nmNew("m",
   else{fam.push(T("huynh",pf?L.tx.huynh:"Thế tử huynh",gm(),25+R(4),"man",["Tham vọng","trung hậu","Kín đáo","nóng nảy"],35+R(30)));fam.push(T("thuc",pf?L.tx.thuc:"Vương thúc",gm(),46+R(8),"official",["Tham vọng","Kín đáo","Cương trực"],R(30),{out:0}))}
   const mu=T("muoi",kc2Muoi(),(bd?gf():nmNew("f",{sur,more:fam})),18,"consort",["Kiêu ngạo","Tham vọng","Khiêm nhường","Ân cần"],10+R(40));mu.sac=40+R(50);mu.tai=30+R(50);fam.push(mu);
   fam.push(T("sx","Sứ thần Đại Hy",gx(),45+R(10),"official",["Kín đáo","Cương trực","Điềm tĩnh","Kín đáo"],20+R(20),{out:1,hide:1}))}
- S.kc={v:3,kd:d,fam,at:{},once:{},ev:{},ch:{o:0},suit:[],intel:[],proof:{},le:0,kim:0,ds:0,g7:-99,ldSeen:0,r0:S.rank,staff0:S.staff||[],y0:S.year,t0:S.turn||0,end:null,tt:null,log:[],vil:d==="dan"?pick(KC2VIL):""};
+ S.kc={v:3,kd:d,selx2:typeof SELX_V!=="undefined"?SELX_V:1,fam,at:{},once:{},ev:{},ch:{o:0},suit:[],intel:[],proof:{},le:0,kim:0,ds:0,g7:-99,ldSeen:0,r0:S.rank,staff0:S.staff||[],y0:S.year,t0:S.turn||0,end:null,tt:null,log:[],vil:d==="dan"?pick(KC2VIL):""};
  S.kc.due=kc2Due();kc2Words();
  if(d==="dan"){S.kgt=BAL.kc2.st.dan.kgt[0]+R(BAL.kc2.st.dan.kgt[1]);S.kap=BAL.kc2.st.dan.kap[0]+R(BAL.kc2.st.dan.kap[1]);S.khm=0;S.kld=0;S.kgtu=BAL.kc2.st.dan.kgtu;S.age=18;S.bac=Math.min(S.bac||0,8)}
  else{S.kgt=BAL.kc2.st.nc.kgt[0]+R(BAL.kc2.st.nc.kgt[1])+(kc2Br()==="bd"?BAL.kc2.st.nc.kgtBr[0]:BAL.kc2.st.nc.kgtBr[1]);S.kap=BAL.kc2.st.nc.kap[0]+R(BAL.kc2.st.nc.kap[1]);S.khm=kc2Br()==="bd"?BAL.kc2.st.nc.khm[0]:BAL.kc2.st.nc.khm[1];S.kld=0;S.kgtu=BAL.kc2.st.nc.kgtu;S.age=18;S.bac=Math.min(S.bac||0,60)}
@@ -382,7 +382,7 @@ Object.assign(KCE,{
  n_send:{t:"Hòa ước ký xong",b:()=>{const L=kc2L();const c=kcR("cha");return{who:kcFace(c||S.kc.fam[0]),t:`<p>Hòa ước đã ký. Sáng nay kiệu hoa đỏ dừng trước cổng ${L.court}; ${kc2Br()==="pf"?L.tx.gifts:kc2Br()==="bd"?bdTxt("ba trăm con ngựa","những xe bạc, thảm và lưu ly"):"xe lễ vật"} xếp hàng sau sứ đoàn Đại Hy. ${L.mom} đứng ở bậc thềm, không khóc trước mặt ai.</p>`+
    kitRows([[NAMES.kgt,S.kgt,"t"],["Lễ nghi Đại Hy",`${S.kc.le}/5`,"t"],[NAMES.khm,kitChip("Bạc",S.khm,"n"),"t"]]),o:[
    kc2H(kcO("Lên kiệu hoa",{},()=>pushDil(mkP("kcE",{e:"n_ramat"}),"Lễ ra mắt")),"sang Đại Hy; Lễ ra mắt định phẩm vị","an toàn")]}}},
- n_ramat:{t:"Lễ ra mắt",b:()=>{const r0=RANKS[(S.origin&&S.origin.r)||0].n;return{who:pEmp(),t:`<p>Điện Thái Hòa. Hoàng thượng ngồi trên, Thái hậu ngồi bên, bá quan hai hàng. Công chúa ${kc2L().land} dâng lễ ra mắt. Lễ hôm nay quyết định ngươi được phong tới đâu (cao nhất ${r0}).</p>`,o:[
+ n_ramat:{t:"Lễ ra mắt",b:()=>{const r0=RANKS[(S.origin&&S.origin.r)||0].n;return{who:pEmp(),t:`<p>Điện Thái Hòa. Hoàng thượng ngồi trên, Thái hậu ngồi bên, bá quan hai hàng. Công chúa ${kc2L().land} dâng lễ ra mắt. ${S.kc.selx2&&typeof SELX_SELW!=="undefined"?`Hòa ước ứng với bậc ${r0}; lễ hôm nay định ngươi được phong cao hơn, đúng bậc, hay thấp hơn một bậc.`:`Lễ hôm nay quyết định ngươi được phong tới đâu (cao nhất ${r0}).`}</p>`,o:[
    kc2H(kcO(kc2Br()==="bd"?bdTxt("Dâng điệu múa thảo nguyên","Dâng điệu múa Ba Tư"):"Dâng điệu múa cố quốc",{suc:BAL.kc2.n_ramat_o_suc},()=>kc2Exam("mua")),"chơi màn Múa; tài múa và dung mạo cộng thêm","có rủi ro"),
    kc2Br()==="bd"?kc2H(kcO("Bắn cung trước điện",{suc:BAL.kc2.n_ramat_o_suc},()=>kc2Exam("ban")),"chơi màn Bắn cung; dung mạo và lễ nghi học ở nhà cộng thêm","có rủi ro"):kc2H(kcO("Dâng khúc đàn cố quốc",{suc:BAL.kc2.n_ramat_o_suc},()=>kc2Exam("cam")),"chơi màn Đàn; tài đàn và lễ nghi học ở nhà cộng thêm","có rủi ro"),
    kc2H(kcO("Để sứ thần đọc lời chúc thay",{suc:BAL.kc2.n_ramat_o_suc2},()=>kc2Exam("")),"không thi; tính như người cùng bậc tài nghệ","an toàn")]}}}});
@@ -423,12 +423,12 @@ function kc2EnterSrv(tier,sc,raw){const K=S.kc;const age=S.age,sac=S.sac,tai=S.t
   kitRows([["Màn chơi",`${raw}/10`,"t"],["Kết quả tuyển",`${KC2SW[tier]} (${tier===2?"về cung phi tần bậc cao":tier===1?"về cung phi tần bậc thấp":"giặt đồ ở Tân Giả khố trước"})`,tier===0?"r":"t"],
    ["Chủ tin",S.tin,"t"],["Mang theo",kitChip("Bạc",S.bac,"n"),"t"]].concat(xdS?[["Xuân Đào",`vào cung cùng đợt, hầu ${kc2RkN(ownerOf(xdS))}`,"t"]]:[]).concat(K.angia?[["Nhà",`đã nhận tiền an gia, trả nửa nợ`,"t"]]:[]))});
  log(`<b class="g">Qua kỳ tuyển cung nữ (${KC2SW[tier]}): ${tier===0?"Tân Giả khố, rồi ":""}hầu ${kc2RkN(m)}.</b>`)}
-function kc2EnterNc(tier,sc,raw){const K=S.kc;const top=(S.origin&&S.origin.r)||0;const rank=Math.max(0,top-(2-tier));
+function kc2EnterNc(tier,sc,raw){const K=S.kc;const top=(S.origin&&S.origin.r)||0;const rank=K.selx2&&typeof selxRank==="function"?selxRank(S,tier-1):Math.max(0,top-(2-tier));/* SELSCENE (new lives, K.selx2): ±1, hòa thân cap Phi + Sắc (jselx); old saves keep the ceiling */
  S.rank=rank;S.sung=8+rank*5;S.lastPromo=S.turn;S.danh=Math.min(30,Math.max(S.danh,6+Math.round(S.kgt/5)));S.bac=Math.min(400,S.bac+S.khm);
  S.staff=K.staff0||[];S.place="home";if(S.maid)S.maid.loyal=cl(S.maid.loyal+BAL.eff.jkc2.loyalKc2EnterNc,0,100);try{kcPd(rank>=top?10:5,`hòa thân, phong ${RANKS[rank].n}`)}catch(e){}
  try{palFix()}catch(e){}deal();const L=kc2L();
- Q.push({t:"Nhập cung",who:pMe(),art:"img/ev-nhap-cung.webp",h:`<p>Lễ ra mắt xong. Hoàng thượng ban chiếu: công chúa ${L.land} vào cung, phong <b>${RANKS[rank].n}</b>${rank<top?` (hòa ước cho tới ${RANKS[top].n}; lễ ra mắt chưa đủ)`:""}.</p>`+
-  kitRows([["Màn chơi",`${raw}/10`,"t"],["Phẩm vị",`${RANKS[rank].n} · cao nhất ${RANKS[top].n}`,rank<top?"r":"t"],[NAMES.kgt,S.kgt,"t"],["Mang theo",[kitChip("Bạc",S.bac,"n")+" (có hồi môn)",`Danh ${S.danh}`],"t"],
+ Q.push({t:"Nhập cung",who:pMe(),art:"img/ev-nhap-cung.webp",h:`<p>Lễ ra mắt xong. Hoàng thượng ban chiếu: công chúa ${L.land} vào cung, phong <b>${RANKS[rank].n}</b>${K.selx2?(rank>top?" (Hoàng thượng thấy dung nhan, phong cao hơn hòa ước)":rank<top?" (lễ ra mắt chưa đủ, phong thấp hơn hòa ước)":""):rank<top?` (hòa ước cho tới ${RANKS[top].n}; lễ ra mắt chưa đủ)`:""}.</p>`+
+  kitRows([["Màn chơi",`${raw}/10`,"t"],["Phẩm vị",K.selx2?`${RANKS[top].n} → ${RANKS[rank].n}`:`${RANKS[rank].n} · cao nhất ${RANKS[top].n}`,rank<top?"r":"t"],[NAMES.kgt,S.kgt,"t"],["Mang theo",[kitChip("Bạc",S.bac,"n")+" (có hồi môn)",`Danh ${S.danh}`],"t"],
    ["Tỳ nữ cố quốc",S.maid?S.maid.name:"không","t"],["Đã biết trong cung",`${K.intel.length} phi tần`,"t"]])});
  log(`<b class="g">Hòa thân sang Đại Hy: ${RANKS[rank].n}.</b>`)}
 
@@ -514,11 +514,11 @@ PEND.kc2Sel=pp=>{if(!S||S.dead||!S.selx||S.selx.done)return null;const srv=S.ori
  const o=kc2SelArts().map(([art,n])=>kc2H(kcO(n,{suc:BAL.kc2.kc2SelOn_o_suc},()=>kc2SelPlay(art)),art?"chơi một màn; làm tốt thì được trọng":"không thi; tính như người cùng bậc tài nghệ","có rủi ro"));
  o.push(kc2H(kcO("Cúi đầu chờ xét",{suc:BAL.kc2.kc2SelOn_o_suc},()=>kc2SelPlay("")),"không thi; tính như người cùng bậc tài nghệ","an toàn"));
  return{who:srv?pMe():pEmp(),t:srv?`<p>Nội vụ phủ chọn cung nữ. Ma ma xem dung mạo, khéo tay, lễ nghi; người tốt được chia về hầu các vị nương nương bậc cao, người kém phải giặt đồ ở Tân Giả khố trước.</p>`
-  :(S.origin.r||0)>0?`<p>Trước ngày phong, Hoàng thượng và Thái hậu cho gọi ngươi ra mắt. Thân phận cho ngươi được phong tới <b>${top}</b>; được hay không là ở buổi hôm nay.</p>`
+  :S.selx2&&typeof SELX_SELW!=="undefined"?`<p>Trước ngày phong, Hoàng thượng và Thái hậu cho gọi ngươi ra mắt. Thân phận ngươi ứng với bậc <b>${top}</b>; ${SELX_SELW}, hoặc bị ban hoa về nhà.</p>`:(S.origin.r||0)>0?`<p>Trước ngày phong, Hoàng thượng và Thái hậu cho gọi ngươi ra mắt. Thân phận cho ngươi được phong tới <b>${top}</b>; được hay không là ở buổi hôm nay.</p>`
   :`<p>Trước ngày phong, Hoàng thượng và Thái hậu cho gọi ngươi ra mắt. Ngươi sẽ được phong <b>${top}</b>; buổi hôm nay định Hoàng thượng và Thái hậu nhìn ngươi thế nào.</p>`,o}};
 function kc2SelPlay(art){if(!S.selx||S.selx.done)return;S.selx.art=art;const fin=raw=>{if(!S.selx||S.selx.done)return;S.selx.done=1;S.selx.raw=raw;try{kc2SelDo(raw)}catch(e){console.error("kc2Sel",e)}try{showModal();render()}catch(e){}};
  if(!art){fin(entSkipRaw());return}/* entry-exam: the same value as "Để tài nghệ quyết định" */kc2Play(art,"Tuyển chọn","Điểm màn chơi quyết định phẩm vị",fin)}
-function kc2SelDo(raw){const X=S.selx;const g=X.art;const sc=Math.round(entScore("dir",raw,g));/* ONE CORE: jentry entScore */const tier=sc>=KC2CUT[1]?2:sc>=KC2CUT[0]?1:0;X.sc=sc;X.tier=tier;
+function kc2SelDo(raw){if(S.selx2&&S.origin.k!=="cnv"&&typeof selxSelDo==="function")return selxSelDo(raw);/* SELSCENE: new lives, ±1 cap Tần / ban hoa (jselx) */const X=S.selx;const g=X.art;const sc=Math.round(entScore("dir",raw,g));/* ONE CORE: jentry entScore */const tier=sc>=KC2CUT[1]?2:sc>=KC2CUT[0]?1:0;X.sc=sc;X.tier=tier;
  const note=`kỳ tuyển chọn: ${KC2SW[tier]}, màn chơi ${raw}/10`;
  if(S.origin.k==="cnv"){const st=[S.age,S.sac,S.tai,S.duc,S.tamco,S.bac];kc2Place(tier,true);[S.age,S.sac,S.tai,S.duc,S.tamco,S.bac]=st;if(S.srv){if(tier===2)S.tin=cl((S.tin||40)+BAL.eff.jkc2.tinKc2SelDo,0,100);if(tier===0){S.srv.lau=4;S.place="tgk";try{S.visit=srvVisitOf("tgk")}catch(e){}}}
   const c=Q.find(m=>m.t==="Nhập cung làm cung nữ");if(c){c.h=String(c.h).replace(/\.\s*<\/p>/,`${tier===0?" (trước hết phải giặt đồ ở Tân Giả khố bốn tuần)":""}. Kết quả ${note}.</p>`)}
@@ -529,7 +529,7 @@ function kc2SelDo(raw){const X=S.selx;const g=X.art;const sc=Math.round(entScore
   log(`Tuyển chọn (${KC2SW[tier]}): phong ${RANKS[rank].n}${rank<top?`, thân phận cho tới ${RANKS[top].n}`:""}.`)}
  try{kcSnapReset()}catch(e){}deal()}
 (function(){const a0=nlAccept;nlAccept=function(){const was=typeof NLP!=="undefined"&&NLP;const r=a0.apply(this,arguments);
- try{if(was&&S&&!S.dead&&!S.kc&&!S.selx&&kc2SelOn()){S.selx={};const d=mkP("kc2Sel",{});if(d){const m={t:"Tuyển chọn",h:d.t,opts:d.o,who:d.who,pid:"kc2Sel",pp:{}};const i=Q.findIndex(x=>/^Nhập cung/.test(x.t||""));if(i>=0)Q.splice(i,0,m);else Q.unshift(m);showModal();render()}}}catch(e){console.error("kc2Sel start",e)}return r}})();
+ try{if(was&&S&&!S.dead&&!S.kc&&!S.selx&&kc2SelOn()){S.selx={};S.selx2={v:SELX_V};const d=mkP("kc2Sel",{});if(d){const m={t:"Tuyển chọn",h:d.t,opts:d.o,who:d.who,pid:"kc2Sel",pp:{}};const i=Q.findIndex(x=>/^Nhập cung/.test(x.t||""));if(i>=0)Q.splice(i,0,m);else Q.unshift(m);showModal();render()}}}catch(e){console.error("kc2Sel start",e)}return r}})();
 
 
 /* ---------- "Chờ" worth the palace years (owner 16/11 08:45Z, OD:L1288) ----------
