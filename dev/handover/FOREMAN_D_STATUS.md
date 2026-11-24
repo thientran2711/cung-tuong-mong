@@ -439,3 +439,4 @@ Push recipe /home/user/wt/dpush2.sh (per container; text in HANDOVER D depth 3 b
 - (24/11 22:22Z) D7: COLD FULLY DONE 75/75 (3 NEEDS_REVIEW; age-39 sheet .../cold/cold-age39.jpg) → archived. Alluring: 72/72 done, age 39 6/18 in progress. Dignified succ3 on age 39 ×12. Done: Proud, Gentle, Sharp, Cold.
 - (24/11 22:29Z) D7: ALLURING FULLY DONE 90/90 (12 555 cr; 5 NEEDS_REVIEW beauty-mark only: s60@26, s60@51, s60@39, s61@39, s60@16-T01; sheets .../alluring/alluring-age{16,26,39,51,63}.jpg) → archived. Only Dignified age 39 ×12 left (succ3 XoPvSgYJ). Then gallery worker.
 - (24/11 22:30Z) D7: ALL SIX FAMILIES DONE (Dignified 60/60 incl. age 39; succ3 archived). Total 440 + 5 Sharp tests. Opening GALLERY worker (brief D-face-master03-gallery.md).
+- (24/11 22:31Z) D7: GALLERY worker = session_01D3E3NaFMSB4w1CvymaLeea (sonnet).
