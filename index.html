@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"dea7ce8a+","t":"2026-11-24T06:01Z","c":"palace-distance: rules-one-source night floor counts the palace-distance add; shots script","b":"85ab60df21ec","h":[{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"}]};
+window.CTM_BI={"s":"9e655c3e+","t":"2026-11-24T06:40Z","c":"palace-distance: Ban cung card face shows ngự giá word via the kit hint; far-visit line prints the real before→after; tests (emperor-visit …","b":"a857fb104398","h":[{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -36119,6 +36119,13 @@ const PAL_WEST=[["Vĩnh Thọ cung",.303,.222],["Dực Khôn cung",.368,.222]];
 const PAL_GONE=["Trữ Tú cung","Hàm Phúc cung","Thái Cực điện"]; /* names of the old tail slots, only for the save-migration log line */
 PAL_WEST.forEach(([n,x,y],i)=>{
  if(MAPH.rivalSlots.some(s=>s.name===n))return;const s={slot:9+i,name:n,box:{x,y,w:.058,h:.105},anchor:{x:+(x+.029).toFixed(3),y:+(y+.04).toFixed(3)}};MAPH.rivalSlots.push(s);PALN.push(n)});
+/* PALACE PLAN = HISTORY (owner OD 24/11 ~08:45Z «vị trí trên bản đồ … khớp một phần nào đó với lịch sử»; Foreman D order 24/11, review/palace-distance P1):
+   the Tây lục cung courtyards of the Dư đồ art (2 columns × 3 rows west of the axis) hold the palaces that were WEST in the Forbidden City:
+   inner column (nearest Dưỡng Hòa điện) — Vĩnh Thọ (south, next to the Emperor's hall: the favourites' palace) and Dực Khôn (middle), its north courtyard
+   left empty (Trữ Tú, dropped 18/11); outer column — Khải Tường (= Thái Cực, south), Trường Xuân (middle), Hàm An (= Hàm Phúc, north).
+   Names keep their slot INDEX (every save's S.pal / v.pal unchanged); only the place on the plan moves. jbancung bcNear / jpdist pdFar read these anchors. */
+const PAL_PLAN={"Vĩnh Thọ cung":[.368,.455],"Dực Khôn cung":[.368,.338],"Khải Tường cung":[.303,.455],"Trường Xuân cung":[.303,.338],"Hàm An cung":[.303,.222]};
+for(const s of MAPH.rivalSlots){const q=PAL_PLAN[s.name];if(!q)continue;const [x,y]=q;s.box={x,y,w:.058,h:.105};s.anchor={x:+(x+.029).toFixed(3),y:+(y+.04).toFixed(3)}}
 palHeadOK=function(p){return !!p&&(p===S?!S.out&&!S.dead:p.alive&&!p.out)&&!p.queen&&rkOf(p)>=3};
 function palHostOK(p){return palHeadOK(p)&&rkOf(p)<=5&&p.pal!=null}
 function palLive(p){return p===S?!!S&&!S.out&&!S.dead:!!p&&p.alive&&!p.out}
@@ -96108,7 +96115,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="85ab60df21ec";window.CTM_BUILD=BUILD;
+const BUILD="a857fb104398";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

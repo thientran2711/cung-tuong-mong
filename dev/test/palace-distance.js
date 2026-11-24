@@ -14,18 +14,20 @@ const URL=process.argv[2]||'file://'+path.resolve(__dirname,'../../index.html');
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof pdFar==='function',null,{timeout:120000});await p.waitForTimeout(1000);
  const r=await p.evaluate(()=>{const out=[],fail=[];const ok=(c,m)=>{out.push((c?'ok  ':'FAIL ')+m);if(!c)fail.push(m)};
   quiet=true;start();quiet=false;Q.length=0;const B=BAL.palDist,B0=JSON.parse(JSON.stringify(B));
-  const idx=n=>PALN.indexOf(n);const HA=idx("Hàm An cung"),DH=idx("Diên Huy cung");ok(HA>=0&&DH>=0,'palaces on the plan');
+  const idx=n=>PALN.indexOf(n);/* HA = the farthest palace on the plan, DH = the nearest (computed: the plan follows history, jpal PAL_PLAN) */const HA=PALN.findIndex((_,i)=>pdFarIx(i)===1),DH=PALN.findIndex((_,i)=>pdFarIx(i)===0);ok(HA>=0&&DH>=0,'palaces on the plan: farthest '+PALN[HA]+', nearest '+PALN[DH]);
+  const VT=idx("Vĩnh Thọ cung"),DK=idx("Dực Khôn cung");ok(pdFarIx(VT)<=.1&&pdFarIx(DK)<=.1,'Vĩnh Thọ / Dực Khôn beside Dưỡng Hòa điện (far '+pdFarIx(VT).toFixed(2)+' / '+pdFarIx(DK).toFixed(2)+')');
+  ok(["Vĩnh Thọ cung","Dực Khôn cung","Trường Xuân cung","Khải Tường cung","Hàm An cung"].every(n=>{const a=MAPH.rivalSlots[idx(n)].anchor;return a.x<MAPH.places.dtd.anchor.x}),'the 5 Tây lục cung names sit WEST of the axis');
   S.srv=null;S.resHead=null;/* a consort life (a random start may be a maid's) */
   for(const v of rivals)v.pal=null;
   /* (a) */
   ok(PALN.every((_,i)=>Math.abs(pdFarIx(i)-(1-bcNear(i)))<1e-9),'pdFarIx = 1 − bcNear for all '+PALN.length+' palaces');
-  ok(pdFarIx(DH)===0&&pdFarIx(HA)===1,'Diên Huy nearest (0), Hàm An farthest (1)');
+  
   const tbl=PALN.map((n,i)=>n+' '+pdFarIx(i).toFixed(2)).join(' · ');out.push('     far: '+tbl);
   S.cyb={lie:wk()};/* her monthly days (jcycle cyTray) off for this test */
-  S.rank=3;S.sung=60;S.an=30;S.preg=0;S.block=0;S.confined=0;S.out=0;S.tablet=0;S.pal=DH;ok(pdFar(S)===0,'her at Diên Huy: far 0');
-  S.pal=HA;ok(pdFar(S)===1,'her at Hàm An: far 1');
+  S.rank=3;S.sung=60;S.an=30;S.preg=0;S.block=0;S.confined=0;S.out=0;S.tablet=0;S.pal=DH;ok(pdFar(S)===0,'her at the nearest palace: far 0');
+  S.pal=HA;ok(pdFar(S)===1,'her at the farthest palace: far 1');
   const v=rivals.find(x=>x.alive&&!x.out&&!x.queen&&!x.coop&&!x.preg&&!illOf(x)&&!(typeof cyTray==='function'&&cyTray(x)));v.ill=null;v.admonWk=null;v.rank=3;v.sung=60;v.an=30;v.preg=0;v.block=0;v.confined=0;v.out=0;v.tablet=0;v.pal=HA;
-  ok(pdFar(v)===1,'NPC at Hàm An: far 1');
+  ok(pdFar(v)===1,'NPC at the farthest palace: far 1');
   const q=queenP&&queenP();if(q&&q!==S)ok(Math.abs(pdFar(q)-pdFarD(pdDistPt(MAPH.places.kn)))<1e-9,'Hoàng hậu measured at Càn Ninh: '+pdFar(q).toFixed(2));
   /* (b) tablet */
   const nc=(p,i)=>{p.pal=i;return nightCh(p)};
@@ -58,7 +60,7 @@ const URL=process.argv[2]||'file://'+path.resolve(__dirname,'../../index.html');
   const pal=o=>PALN.find(n=>o.n.endsWith(n));
   ok(cards.every(o=>o.x.includes('ngự giá: '+word(pdVisOdds(S,idx(pal(o))))+' (')),'card word = word(pdVisOdds) (shown = applied)');
   ok(!/%/.test(JSON.stringify(d.opts.map(o=>[o.n,o.x]))),'no % on the cards');
-  const take=d.opts[0];ok(/xa ngự tẩm/.test(take.x)&&/Danh \+/.test(take.x),'«Nhận Hàm An»: far reason + the far-visit bonus: '+take.x.split(' · ').pop());
+  const take=d.opts[0];ok(/xa ngự tẩm/.test(take.x)&&/Danh \+/.test(take.x),'«Nhận <farthest>»: far reason + the far-visit bonus: '+take.x.split(' · ').pop());
   out.push('     cards: '+cards.map(o=>o.n+' → '+o.x.split(' · ').pop()).join(' | '));Q.length=0;
   /* (g) one core */
   set0();S.pal=HA;const a=nightCh(S),c1=visCh(S);S.pal=DH;const a2=nightCh(S),c2=visCh(S);rs();ok(a===a2&&Math.abs(c1-c2)<1e-9,'BAL.palDist night/visit 0 → no distance effect (one core)');
