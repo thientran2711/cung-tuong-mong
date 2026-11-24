@@ -170,11 +170,14 @@ function srvGoTo(k){if(!S||S.dead||Q.length)return false;popIdx=null;popMsg="";c
 /* ---------- talking to people as a maid ---------- */
 function srvTalk(p){const m=srvM();const A=[];if(!m)return A;
  const T=(n,o,w,l,x,ex,more)=>A.push(Object.assign({n,o,w:w||{},l:l||{},x,run(){const ok=o>=100||roll(o);apply(ok?(w||{}):(l||{}));const r=ex?ex(ok)||"":"";return `${o<100?(ok?'<span class="g">thành</span>. ':'<span class="r">hỏng</span>. '):""}${fmt(ok?w:l)}${r?" "+r:""}`}},more||{}));
- if(p.sk==="mis"){T("Đấm lưng, hầu chuyện",od(SRVA.massage.o(S,m)),SRVA.massage.w,SRVA.massage.l,`công lao +${SRVA.massage.mp}`,ok=>{srvMerit(SRVA.massage.mp);return ok?`${m.name} dịu nét mặt.`:`${m.name} gắt: “Lui ra!”`});
+ if(p.sk==="mis"){/* law 1 (law1-audit row 10): ONE rule with an NPC maid (jagstaff asOpts): the four «to the master» acts only while her master is
+   in her own palace; met anywhere else she may only attend her there («Hầu bên cạnh chủ», SRVA.beside, as an NPC maid does) */
+  const misHome=srvMisHome();/* = jagstaff asMisHome(m), the NPC maid's gate; srvCards tea uses it too */if(!misHome)T("Hầu bên cạnh chủ",od(SRVA.beside.o(S,m)),SRVA.beside.w,SRVA.beside.l,"",null);
+  if(misHome){T("Đấm lưng, hầu chuyện",od(SRVA.massage.o(S,m)),SRVA.massage.w,SRVA.massage.l,`công lao +${SRVA.massage.mp}`,ok=>{srvMerit(SRVA.massage.mp);return ok?`${m.name} dịu nét mặt.`:`${m.name} gắt: “Lui ra!”`});
   T("Xin chủ ban thưởng",od(SRVA.askRew.o(S,m)),srvWa("askRew",S,m),SRVA.askRew.l,"",null,{lock:S.tin<SRVA.askRew.tin,t:`Cần Chủ tin ${SRVA.askRew.tin}`});
   const iv=(S.srv.intel||[]).map(RV).filter(v=>v&&v.alive&&v!==m)[0];
   T("Bẩm tin dò được",100,SRVA.tellMis.w,{},iv?`chủ nắm ${balAb(BAL.eff.j42.evSrvTalk)} chứng cứ của ${iv.name}`:"",()=>{if(iv){/*evok: servant-mode intel; capped, preview only*/evA(m,iv,BAL.eff.j42.evSrvTalk);S.srv.intel.splice(S.srv.intel.indexOf(iv.id),1)}},{lock:!iv,t:"Chưa dò được tin gì"});
-  T("Xin chủ tiến cử lên Nội vụ phủ",od(SRVA.askRec.o(S,m)),{},SRVA.askRec.l,`công lao +${SRVA.askRec.mpOk}`,ok=>{if(ok)srvMerit(SRVA.askRec.mpOk)},{lock:S.tin<SRVA.askRec.tin||S.srv.rk>=srvMax(),t:S.srv.rk>=srvMax()?"Đã ở bậc cao nhất cung này cho phép":`Cần Chủ tin ${SRVA.askRec.tin}`})
+  T("Xin chủ tiến cử lên Nội vụ phủ",od(SRVA.askRec.o(S,m)),{},SRVA.askRec.l,`công lao +${SRVA.askRec.mpOk}`,ok=>{if(ok)srvMerit(SRVA.askRec.mpOk)},{lock:S.tin<SRVA.askRec.tin||S.srv.rk>=srvMax(),t:S.srv.rk>=srvMax()?"Đã ở bậc cao nhất cung này cho phép":`Cần Chủ tin ${SRVA.askRec.tin}`})}
   /* AG-ALL-2 G6: what a servant of hers may do (jpromsv spAsk, the same three answers an NPC master picks from / the player consort's card) */
   {const v=typeof spGoTo==="function"?spGoTo(m,{role:"maid",rk:S.srv.rk}):null;const cd=(S.srv.lvCd||0)>S.turn;
    T("Xin chủ cho đi hầu cung khác",SRVA.leave.o(S,m),{},{},`${m.name} chọn: tăng tiền thưởng giữ ngươi lại, giáng một bậc, hoặc cho đi${v?` (bên ${v.name} còn chỗ)`:" (Nội vụ phủ chia về cung khác)"}`,()=>spAsk(m,S),
