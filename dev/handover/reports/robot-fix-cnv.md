@@ -232,3 +232,43 @@ Open for the successor (all on review/robot-fix-cnv-2):
 - R6 S.lost.N.at stale holder fixed only by the load census (jil loEntry) → keep c.at in step when the piece moves.
 - R1 night stall: not reproduced (see above); only if the robot shows it again.
 Laws: as above; no UI / wording / kit change; no typed number.
+
+## ROBOT FIXER cnv #3 (opus, session_01UV1SziKNwwyvgm7Tp4E7AD, depth 3, START_CTX ≈ 3 %) — R7 / newlife-leak / R5 / R6
+PRIORITY #1 CHECK ('robot-fix-cnv'): OD 0 | ledger 0 | claims 8 | main 0 | review/* 3 | archive 0 → reused review/robot-fix-cnv-2 f78c695c + this report; no second mechanism.
+Branch review/robot-fix-cnv-2: 0dd1e105 (R7 game + probe) → **80f49094** (R5/R6 + probe). NOT merged with LIVE 502c48c9 yet (main since d0ed42e4 = kit UI only: jk3/jk4/jkitsel/jopic/jtoil/jwkg…). NOT READY (see R7 verdict).
+
+### R7 findings (root, measured)
+1. **The old r10-play-rt drift is NOT deterministic**: same build f78c695c, same seed (cnv_mat s5) gave 9 families, then 0 on the next run. Bisecting main is meaningless (c6c3ca76..d0ed42e4 touches only kit UI files: jk3, jk4, jkitsel, jopic) — the counts move with CPU timing.
+2. Cause of the timing: jagent **AGL deferred jobs** (staff day slices AGD.lz via agLater «lz», khắc resync «sync», news scan «kn», consort deed «slice»). At every buổi press 15-25 of them are still pending when render() → save() writes the file (measured: every round trip had `lz` + `kn` pending, often `sync`). The old probe took ser() INSIDE nextBuoi (before they ran); deser's j95sync then applied the pending resync synchronously → roster rows / S.ag.* / stage changed = «drift». Proof (dbg probe, 4 seeds): draining AGL + render() before s1 → stage/roster drift gone, «repairs by design» per round trip ≈10 → <1; left: S.emoSeen (jemo emoSee runs at the START of render, before the stage takes newcomers) 2/4 seeds, S.ag.pend.N.gone (derived flag set only in agWatch after a sync) 1/4.
+3. Real-game consequence (not only harness): the file written by the press render is pre-deferred-work and nothing writes it again until her next tap; a reload in between loses the staff slices (AGD.lz dies with the page) and re-plans. Also jqsave/jspread HOLD the autosave while a code card waits (by design) and the bot page stubs save() (inpage6) — any file-based probe must handle both.
+### Changes (pushed)
+| file | change |
+|---|---|
+| jagent.js | agSettleSave(): when the AGL queue is empty again after jobs ran, save() once more (file = settled state); agSyncNow: after the deferred j95sync, `j95final() → renderStage()` (same rule as goTo/talk/nextBuoi wrappers, under __rdefer) |
+| j6.js saveSettle | + emoSee() (who she sees on the stage) · + R6: loEntry(c) for open S.lost cases (stale holder c.at corrected at save; was load census jil only) |
+| jagday.js (R5) | AGD.oc entry keeps its world `w:S`, agDecideDay uses it only in that world; lifeStore «AGD.oc» clears it (its options hold people of the world they were built in; agDecideDay rebuilds them when missing — pure perf memo, nothing to save) |
+| newlife-leak.js | ALLOW __kitLastEvArt with proof: one slot, every set replaces the whole object ({src,lab}: jgift ×3, j87, jk2b kitEvArt returns `{src,lab}`), cleared by resultShow / closeModal / lifeStore → size = 2 keys, not a growing store |
+| r10-play-rt.js | NEW method = the real file round trip: real save() restored (inpage6 stubs it); after each buổi press wait until AGL is empty (+80 ms, +AGL again), skip while the autosave is held (JQ.held / SP13.held) or a mini-game / night flip is pending; s1 = the FILE; deser → render → wait AGL → s2 = the FILE. IDLEDBG=1 prints idle times + log() stacks inside the round trip |
+Cost check (dev tool /home/user/wt/rfx3-tools/stepcost.js, 30 bot steps cnv_mat): saves 290 → 343 (+18 %), renderStage 398 → 425, wall 33 → 38 s; no loop.
+
+### R7 verdict: NOT CLOSED — the new file probe is still noisy
+A/B with the NEW probe, 60 round trips, seed 3 (same probe on both builds; runs differ run to run):
+| run | f78c695c (before) | 80f49094 / 0dd1e105 (after) |
+|---|---|---|
+| A cnv_mat | 147 families (repairs 908) | 1 (save.P kyngo card; repairs 41) |
+| A cnv_chu | 49 (repairs 660) | 35 (repairs 28) |
+| B cnv_mat (+80 ms yield, R5/R6 built) | 7 (S.tb.b/Cb/d, save.P kyngo; repairs 472) | 129 (repairs 293) |
+| B cnv_chu | 5 (same) | 35 (repairs 32) |
+Every big «after» row starts with a NEW journal line «Đến Ngự hoa viên» written INSIDE the round trip (stack: a bare goTo from a timer, e.g. j77 «Đi» `setTimeout(()=>goTo(k),0)`; also k61Meet from showModal on the loaded card). That is the in-place load handing an OLD-world timer the loaded world — a real page reload kills those timers — so these rows are not trustworthy either way, and the A/B is inconclusive. «Repairs by design» (roster re-sync at load) is lower after the fix in 4/4 runs.
+Other families seen (both builds): S.tb.b / S.tb.Cb / S.tb.d (buổi key re-made at load — not traced), save.P kyngo card dropped at load (BY DESIGN: jky `PEND.kyngo=()=>null`, «a save made with a kỳ ngộ card open: the card is not rebuilt; the encounter stays used» — F/owner to judge whether losing the encounter on reload is acceptable).
+### newlife-leak / R1 / gates
+newlife-leak NOT re-run after the ALLOW (CPU taken by R7 runs); the 2-year-driver FAIL not analysed. R1 not touched. Gates (quickcheck, coop-e2e both seats, shared-ref, weak-dead, save-slots, night-softlock, face-band, old saves) NOT run on 80f49094.
+
+## HANDOVER (FIXER #3 → #4; rollover: context ≈ 30 % ≥ START_CTX 3 % + 25 %; F #3 opens the successor)
+Box: /home/user/wt/rfx3 (worktree, branch review/robot-fix-cnv-2 @80f49094), /home/user/wt/rfx3-old (f78c695c + new probe, detached), /home/user/wt/rfx3-out (all runs), /home/user/wt/rfx3-tools (stepcost.js, r10-play-rt-dbg.js = SETTLE=1 drain-before-ser variant).
+Next, in order:
+1. Make the probe a TRUE reload: per round trip open the saved FILE in a fresh page (or `location.reload()` with localStorage kept + load slot via the title path, which also runs kmReset), render, wait AGL, read the file. No old-world timers. Run before/after (f78c695c vs 80f49094) on cnv_mat / cnv_chu, 2 seeds each.
+2. With that probe decide: keep agSettleSave + syncStage (if after ≤ before) or revert them (jagent.js only); keep the saveSettle emoSee / loEntry lines if their families are 0.
+3. Trace S.tb.b/Cb/d (buổi key re-made at load) if it survives the true-reload probe.
+4. Re-run newlife-leak (ALLOW __kitLastEvArt in place) and look at its 2-year driver FAIL; then merge origin/main 502c48c9 (or newer), rebuild, full gate set (quickcheck, coop-e2e both seats, r10-shared-ref, r10-weak-dead, r10-play-rt on/off, newlife-leak, save-slots, night-softlock, face-band, old saves), report, «READY robot-fix-cnv-2 <sha>» to F.
+Laws: 1-3, 5 untouched · 4 no typed number · 6b R5 memo no longer carries an old world's people · 7/9/10/12 no UI / wording / kit change · 11 families named + scans/tables above · 14-18 no rule changed.
