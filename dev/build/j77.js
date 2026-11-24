@@ -41,12 +41,12 @@ function j77Tc(k){try{return k===S.place?0:travel(S.place,k)}catch(e){return 1}}
 /* where she ends up when asking / sneaking / being led in costs n khắc (the ask + the walk): this buổi, or the buổi the walk spills into (j76arrive) — VANPHONG true words (day-khắc r2) */
 function j77When(n){return used+n<=BAL.time.khac?" buổi này":` (đến nơi vào ${j76arrive(n)})`}
 accAskLine=function(k){return `${word(accAskO(k))} · tốn: ${j77Tc(k)+BAL.btn.accAsk.k} khắc · thành: được vào${j77When(j77Tc(k)+BAL.btn.accAsk.k)} · hỏng: không mất gì`};
-accMini=function(k,st,risk){const L=[];const t=(st.tc!=null?st.tc:j77Tc(k))+1;
+accMini=function(k,st,risk){const L=[];const tc0=st.tc!=null?st.tc:j77Tc(k),t=tc0+BAL.btn.accAsk.k,ts=tc0+BAL.btn.accSneak.k;/* rv d-followups-1 (law 4): the khắc printed = what accAsk / accSneak spend (was a typed +1) */
  if(st.ask==="yk")L.push(`<button class="acb" data-acask="${k}" ${st.askOk?"":"disabled"}>Xin yết kiến ${st.empAway?'<i>ngài vắng</i>':st.dayDone?'<i>hôm nay đã gặp</i>':oddsChip(word(accAskO(k)))+`<i>${t} khắc</i>`}</button>`);
  if(st.ask==="bk")L.push(`<button class="acb" data-acask="${k}" ${st.askOk?"":"disabled"}>Xin bái kiến ${oddsChip(word(accAskO(k)))}<i>${t} khắc</i></button>`);
- if(st.kind)L.push(`<button class="acb" data-acsneak="${k}" ${st.sneakOk?"":"disabled"}>Lẻn vào ${oddsChip(word(accSneakO(k)))}<i>${t} khắc${risk?` · bắt: Danh ${accSneakPen(k).danh}`:""}</i></button>`);
+ if(st.kind)L.push(`<button class="acb" data-acsneak="${k}" ${st.sneakOk?"":"disabled"}>Lẻn vào ${oddsChip(word(accSneakO(k)))}<i>${ts} khắc${risk?` · bắt: Danh ${accSneakPen(k).danh}`:""}</i></button>`);
  return L.length?`<span class="macts">${L.join("")}</span>`:""};
-accSneakLine=function(k,tc){return `${word(accSneakO(k))} · tốn: ${tc+BAL.btn.accSneak.k} khắc · thành: vào được${j77When(tc+1)} · hỏng: ${accSneakPen(k).txt}`};
+accSneakLine=function(k,tc){return `${word(accSneakO(k))} · tốn: ${tc+BAL.btn.accSneak.k} khắc · thành: vào được${j77When(tc+BAL.btn.accSneak.k)} · hỏng: ${accSneakPen(k).txt}`};
 accSneak=function(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=travel(S.place,k);if(!dayFit(tc+BAL.btn.accSneak.k))return;const nm=accName(k);const o=accSneakO(k);spend(BAL.btn.accSneak.k);
  if(roll(o)){accGrant(S,k);log(`Lẻn vào ${nm} trót lọt.`);window.__accSilent=0;j77In(k);if(S.place!==k)render();return}
  const P=accSneakPen(k);const r0=S.rank;spend(tc);apply({danh:P.danh});log(`<span class="r">Lẻn vào ${nm}, bị thị vệ bắt được: Danh ${P.danh}.</span>`);punish(S,`tự tiện lẻn vào ${nm}`,P.sev);
