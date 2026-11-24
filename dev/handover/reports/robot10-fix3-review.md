@@ -1,3 +1,23 @@
+# E81r — robot10-e-fix-3 **r4 b76ccc59** (sha verified on origin review/robot10-e-fix-3) — verdict: **PASS 8693dc06fdd9158ec9af4e7b8f8791879db99897 (LAND READY)**
+8693dc06 = review/robot10-e-fix-3-r: b76ccc59 + origin/main 178cac37 (1386d21e, index.html/sw.js rebuilt; origin/main is its ancestor → fast-forward) + 1 reviewer test fix. Carries over all r2/r3 checks below.
+## r4 delta — law 1 (r2 item 2) FIXED
+- ilStockTake hands out ONLY full pieces (a whole candle, an oil bottle at BAL.allot.oil.uses lượt) = exactly what her own monthly issue mints, so her and every NPC's monthly piece is the same; part-used bottles stay counted in S.il.stock (law 6c: real, findable); an empty bottle at a trim → S.il.used for its holder. No BAL number typed (uses read from BAL).
+- Note (not blocking): a servant's empty bottle at the staff trim is counted under owner "?" (ilKey of a staff entry has no id) — still counted used up; FIXER may key it by the mistress later.
+- Part-used bottles never leave the stock (no road out yet); the size cost is nil (one count per kind × lượt, ≤ 15 keys).
+## Gates on the merge
+| gate | result |
+|---|---|
+| r10e-stock-full | FAILED 1 here: «NPC month issue leaves the part-used stock as it was» — the same stipGoods call also trims that NPC's surplus INTO the stock (aldau0.2 5 → 6). Correct game behaviour; reviewer test fix 8693dc06 checks «never drops» (>=) → ALL OK |
+| r10e-saveblocked (with my r3 fix) | ALL OK |
+| old-save no-loss, MY script (save 010) | usable al/lx 11 724 → 11 724 (0 item diffs); lasting 6 440 → 6 440 (only store→NPC weekly returns); conv [482, 4386, 10354]; 4 346 314 → 2 772 306 chars, written + reloaded (stock 10 354 kept), 0 page errors |
+| quickcheck | PASS (core gates PASS, old save ok; render 182/209, tab 326/314, buổi 879/1090 ms new/live) |
+| monthly-allotment | ALL PASS 38/38 |
+| monthly-ration | only the 2 pre-existing LIVE FAILs (mirror rows / mirror note + rush) |
+| role-parity ×2 | ALL PASS ×2 |
+| coop-e2e | not re-run on the merge: LIVE 178cac37 itself is stuck at week 0 (new-life dialogs; reported r2). FIXER #4: 142/142 ×2 (Fold host + COOP_SWAP) on the branch + LOAD-COMPARE vs LIVE. Fix-3 touches no co-op path except the saveBlocked notice (snapSave still always seatPushes). |
+| laws | 6c real objects ✔ (spent → counted, uses left → counted stock, nothing dropped) · 1 one rule ✔ · 4 BAL ✔ · 7/9 kit notice + VANPHONG words ✔ (looked Fold + iPad) · 11 whole group: 10 spend sites + 5 save writers scanned ✔ |
+
+---
 # E81r — robot10-e-fix-3 **r3 f0a5f92c** — verdict: **FAIL f0a5f92c (1 item)**
 Merge with LIVE: review/robot10-e-fix-3-r **183fb7e9** = f0a5f92c + origin/main 178cac37 (4593b922, index.html/sw.js rebuilt) + 1 reviewer test fix. Carries over everything checked on r2 below (r1 faults gone, old-save no-loss 11 724 → 11 724 usable / 6 440 → 6 440 lasting, save-size, allotment, ration = LIVE, role-parity ×2).
 ## Remaining item
