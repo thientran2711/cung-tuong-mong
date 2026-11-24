@@ -959,3 +959,25 @@ FAIL list for the fixer:
 2. «18.3 / 19.3 B sees A at H:a, A is at H:b» (merged LIVE run, after B's two rebirths): two buổi in a row, so not the 5 s relay race. Triage game vs harness (A visiting B's palace while B's page keeps A at home: maybe the pos relay / mapPlace after a rebirth) before the next "SẴN SÀNG KIỂM".
 3. Pre-existing (NOT this diff, report only): coop-bot STEP stalls with open dialogs (bare week 7 Q=2 «Lời cảnh báo, Việc nhờ»; merged week 20 Q=6 chapter dialogs) on the LIVE Worker — same on bare (old game 27240ccb) and merged; the robot10-coop runner will hit it too (stuck → bug + fresh room).
 Worktrees (this box): /home/user/wt/{fix1r1,bfix,rc2,bharn}; logs in the reviewer's scratchpad (e2e/, thin/, bot/, lag/).
+
+## REVIEW robot-coop-fix-2 (BIG, opus; session_01N1tNP53Ngf1bGuVAWcQEy5; START_CTX ≈4 %) — FAIL
+PRIORITY #1 CHECK ('coop merge clamp / bạc<0 / linkRange'): OD 2204–2205 | main coop/worker/src/merge.js (additive m3, no clamp), dev/build/jbal2.js:132 BAL.linkRange (law-4 range table, already used by the co-op client jcoopworld.js:301 keyMove) | review/* robot-coop-fix-2 b9b88cda, robot-coop-fix-1-r2 a0ac174a, robot-coop-fix-3 25db868e | claims B fixer #3 → #4.
+Reviewed: review/robot-coop-fix-2 b9b88cda (from main fd85907a; diff = coop/worker/src/merge.js +10, merge.test.mjs +15, dev/test/lib/coop-lag-hooks.js resend identity).
+Ran: Worker tests on b9b88cda — merge ok · vault ok 48 · seat ALL OK · stale ALL OK · thin ALL OK · ws ALL OK · chat ALL OK. The root cause (additive a+(b−base) on one pot spent by both seats) and the place of the fix (Worker, so the stored base matches both screens) are right. Not run (FAIL found first, no point spending hours): coop-e2e both orders, own A/B, quickcheck, merged head.
+FAIL items for the fixer:
+1. LAW 4 ONE CORE: `PCL` in merge.js types the ranges (0/100, −100/100, 0/Infinity) by hand. The Worker cannot read BAL at run time → put the person-stat ranges in BAL (one table, like BAL.linkRange; j8 ap(), j1 apply() and j1 statSet() should read it too instead of their own typed lists — same family), GENERATE the Worker's table from BAL at build (e.g. coop/worker/src/ranges.gen.js written by a script from dev/build/jbal*.js) and add a test that fails when the generated table ≠ BAL.
+2. LAW 11 FIX THE WHOLE GROUP: the Worker clamps 12 top-level keys of a person; the game clamps many more person fields that the same additive merge pushes out of range. Proof (merge3 on b9b88cda, base / host / guest → merged):
+| field (game clamp site) | base→host, guest | merged | game range |
+|---|---|---|---|
+| R[].rl[id] (j9 affAdd, BAL.linkRange.rl) | 90→100, 95 | 105 | −100…100 |
+| R[].ro[id] (j9 oanAdd, BAL.linkRange.ro) | 10→0, 4 | −6 | 0…100 |
+| R[].staff[].loyal (j10 loyal cl 0,100) | 10→0, 2 | −8 | 0…100 |
+| S.maid.loyal (j1 apply / j8 ap maid) | 10→0, 3 | −7 | 0…100 |
+| S.tin (cl 0,100) | 95→100, 98 | 103 | 0…100 |
+| R[].pg (cl 0,100) | 95→100, 99 | 104 | 0…100 |
+| R[].oan (cl 0,100 / max 0) | 5→0, 1 | −4 | 0…100 |
+| R[].ev (j8 evA max 0) | 3→0, 1 | −2 | ≥ 0 |
+| suc (j8 ap / j1 apply / statSet: min(suc, sucCap(p)), BAL.kh) | — | capped at 100 only | ≤ sucCap(p) (khí huyết) |
+(script: scratch gap.mjs; also grep counts of game clamp sites: loyal 126, hp 26, tin 13, oan 7, pg 5, rel 4, ev 2, malice 1.) Fix = one range table (item 1) covering every clamped person field incl. nested maps (rl/ro per key, maid/staff loyal, kids hp), a scan script listing game clamp sites vs Worker table, before/after table. sucCap depends on khí huyết (BAL.kh + p.khScar/khTmp/age): either compute it in the Worker from the same BAL numbers or state why the next client apply re-clamps identically on both seats (both adopt the same merged state) — with a test.
+3. Note (harmless, keep in mind for the scan): isPerson() also matches S.nightWhy.rows[] (name + rank + sung snapshot rows of tonight's pick) — clamping a 0–100 copy is harmless, but the person test should be the same rule the scan uses.
+Next: fixer #4 fixes 1–2 on review/robot-coop-fix-2 (or -r1), then full gates (Worker tests, coop-e2e both orders vs local wrangler, A/B ≥3 each side with harness ≥ 0a593f8e, quickcheck, old save) → fresh BIG review.
