@@ -45,3 +45,20 @@ Identity uploads (reuse, never re-upload): c04 EbcFFhnuuO, c10 ksXxxbr16B, c16 c
 Cost note: each call needs the full ~9.8k-char prompt typed in (~3.5k tokens) + a read; ~6k tokens per job, so one worker does ~24-26 jobs before the 25% rollover line (window 1M). Recommend ONE successor for the remaining 22 jobs (51 then 63), or two (51 / 63).
 Not yet done (needs a worker with room): per-age contact sheets (original | result, 2 columns) uploaded to the CDN under img/_review/face-master03/dignified/ and their links in this report; final DONE report to Foreman D.
 Push recipe: fetch --depth=30 under flock /home/user/wt/fetch.lock, rebase onto FETCH_HEAD, push HEAD to the handover branch; retry on reject.
+
+## Successor 2 rows (Dignified) — 22:12Z
+| job | output creation | status | QC |
+|---|---|---|---|
+| c16 A51 | LwtgDKpswO | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; reads ~50; identity not pixel-compared |
+| c22 A51 | CqWQRCQEEy | DONE (looked) | same QC |
+| c28 A51 | JNuPm4LOq4 | DONE (looked) | same QC |
+| m04 A51 | VXOpgBKMMU | DONE (looked) | same QC; mature lines light |
+| m10 A51 | ov3tPud829 | DONE (looked) | same QC; source-hair ribbon kept |
+| m16 A51 | gOvw8V8SXO | DONE (looked) | same QC |
+| m22 A51 | UPfJtdIwny | DONE (looked) | same QC; pink braid ribbon from source hair |
+| m28 A51 | BhiIPJnoQR | DONE (looked) | same QC |
+| m29 A51 | ksXxDpP16B | DONE (looked) | same QC; faint hair ribbon from source |
+| s65 A51 | rgoLeo6xtc | DONE (looked) | same QC |
+| c04 A63 | Lwtg8leswO | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg (slightly pink), soft smile; reads ~60, silver hair, light lines |
+| c10 A63 | 1lBjdl7r4r | DONE (looked) | same QC; reads ~63, visible lines, silver-grey hair |
+| c16 A63 | xS8sBJPjfW | DONE (looked) | same QC; reads ~63 |
