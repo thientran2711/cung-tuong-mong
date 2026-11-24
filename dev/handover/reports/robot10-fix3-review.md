@@ -1,3 +1,30 @@
+# E81r — BIG REVIEW robot10-e-fix-3 **r2 434a4a30** — verdict: **FAIL 434a4a30 (2 items)** (r1 faults 1+2 are gone)
+PRIORITY #1 CHECK ('ilUsedUp saveBlocked save size ilStock'): OD 0 | ledger 0 | claims FIXER #3 only | main 0 | review/* only review/robot10-e-fix-3 | archive 0.
+Merge with LIVE: review/robot10-e-fix-3-r **a9dbd78b** = 434a4a30 + origin/main 178cac37 (index.html/sw.js rebuilt; replaces the r1 merge 75ef5d60). Reviewer E81r session_01DgYSWnaebLfT2YjJ9ZWjc8.
+
+## r2 verdict items
+1. **Silent save writers still there (r1 item 3, not in r2).** jcoopworld.js snapSave (co-op world snapshot «ctm-coop-wk»; a refused setItem also skips seatPush), jcoopthine.js:203 (guest's own life copy ELS()), jcloud.js writeSlot (LS.set false ignored). Each must show the same kit notice CTM_WAIT.saveBlocked (id "saveBlocked", once), and snapSave must still seatPush when the local write fails. Foreman E sent this to FIXER #3.
+2. **Law 1 (one rule for her and NPCs): re-issue from the counted stock is NPC-only.** jstip stipGoods takes a candle / oil from S.il.stock only when `p!==S`; she always gets new pieces. And a re-issued bottle can be part-used (stock keys aldau*.2 / .4 exist — in save 010 the moved stock holds 246 bottles with 2 lượt and 680 with 4), so an NPC's monthly bottle can hold fewer lượt than hers (law C: same count by rank). Pick ONE rule for everyone and say which: (a) her issue draws from the stock too (host-side, same fullest-first rule), or (b) the stock re-issues only full bottles / tops a part bottle up to BAL.allot.oil.uses, with part bottles leaving another traceable way. No new BAL number unless it sits in BAL.
+
+## r1 faults — checked gone
+- No piece with uses left is marked used up: the two trims (jstip:104, jallot:110) now call ilStock (counted stock), ilUsedUp only at true spends (alNpcSpend / toilette oil / lxSpend / lxNpcSpend at u≤0, alLight candle, lxGive whole rest). My own grep of every splice of al*/lx* in jallot / jration / jstip / jil / jrcv agrees with the fixer's 10-site scan (0 unmarked).
+- Old-save move (ilOldMove): spent → S.il.used[owner], uses left → S.il.stock, her pieces with uses left and son phấn boxes with lượt keep their records, logged in S.il.conv. «net» records are counted spent (e0 has no lượt; every unguarded splice is a spend site) — accepted.
+
+## Gates (a9dbd78b unless noted)
+| gate | result |
+|---|---|
+| old-save no-loss, MY script (save 010, load → census/week/census) | usable al/lx pieces (held by anyone + store records + counted stock) **11 724 → 11 724, 0 item mismatches**; lasting pieces 6 440 → 6 440 over 82 owners (only 2 store→NPC returns by the normal weekly resale); 4 386 spent records → S.il.used; 10 354 → S.il.stock; S.il.conv [[482, 4386, 10354]]; box 15 923 → 1 180; save 4 346 314 → 2 772 347 chars, written to localStorage, reloaded (stock + conv kept), 0 page errors |
+| r10e-save-size, save 010, +1 game year | LIVE 178cac37: 4 339 545 → 4 641 521 (+302 k/yr), used-up records in store 14 740 → 15 532 (exit 1) · r2: → slim load → 2 940 347 at year 15, store 1 270 records, used-up in store 0 (exit 0) |
+| fresh life (NEW=1, 3 years) | 70 172 → 1 183 808 chars at year 4; store 225 records, 0 used-up in it (the remaining growth = fixer §7 families, MAIN's call) |
+| quickcheck | PASS (core gates PASS, old save ok; perf new/live render 192/169, tab 354/408, buổi 1086/1254 ms) |
+| monthly-allotment | ALL PASS 38/38, = LIVE |
+| monthly-ration | same 3 FAIL on LIVE 178cac37 and on r2 («mirror rows = owned colours», «mirror note + rush», dice «borrowGot») → pre-existing, confirmed |
+| role-parity ×2 | ALL PASS ×2 |
+| coop-e2e (Fold host; COOP_SWAP iPad host) | r2 merge: 134–137/162 and 29/41 — stuck at week 0 with 8 new-life dialogs in Q (Tiền truyện 1/4…4/4, kc2Sel, Nhập cung, Mệnh truyện, Hảo hữu vào cung). **LIVE 178cac37 fails the same way** (same FAIL rows, Q 8) → a LIVE regression on main since fd85907a, not fix-3 (FIXER #3 had 142/142 ×2 on base fd85907a). Reported to Foreman E. |
+| saveBlocked notice (j6 unchanged since r1) | Fold 755x1000@2 + iPad 1180x820@2 looked in the r1 round: kit notice chip, readable, not cut |
+| law 4 / 9 / 7 | no BAL number typed, no kit part, no new player words |
+
+---
 # E81r — BIG REVIEW robot10-e-fix-3 e1ee6041 — verdict: **FAIL e1ee6041 (3 items)**
 PRIORITY #1 CHECK ('ilUsedUp saveBlocked save size'): OD 0 | ledger 0 | claims 0 (FIXER #2 session_01DgYSWmqVHbtQnrFEo7E9r6 only) | main 0 | review/* only review/robot10-e-fix-3 | archive 0. Owner rows read verbatim: OD 18/11 ~16:20Z (law 6, real objects «không được tự nhiên biến mất, không thể tìm thấy»); no OD row on «monthly allotment» / «ration» wording beyond that.
 Reviewer: E81r session_01DgYSWnaebLfT2YjJ9ZWjc8 (opus). Merge with LIVE: review/robot10-e-fix-3-r **75ef5d60** = e1ee6041 + origin/main ac4790f0 (only index.html/sw.js conflicted → rebuilt). Not land-ready (FAIL).
