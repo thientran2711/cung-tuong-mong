@@ -306,7 +306,7 @@ function sendEnd(){if(!CW.on||!S||S.dead||CW.sent===wk()||CW.cyHold!=null/* the 
 /* P0 (co-op thin part B, jcoopthinb): the person the HOST built for her (her Luân hồi on the host); sent as it is, never re-serialized here */
 function sendMe(P0){T("sendMe "+(S&&S.dead));if(!CW.on||!S||S.dead)return;
  /* a new life: the old life's pending / sent week end is void (the server drops my sent end on `me`); she ends this week herself */
- if(CW.base){CW.pend=false;if(CW.sent===wk())CW.sent=-1;CW.bend=false;CW.nrdy=-1;CW.ngoW=-1}
+ if(CW.base){CW.pend=false;if(CW.sent===wk())CW.sent=-1;CW.bend=false;CW.nrdy=-1;CW.ngoW=-1;if(CW.ngo===wk())CW.ngo=-1}/* robot-coop-fix-4 (week-end stuck): the host's night commit goes with its run (ngoW): kept alone, a new life's ready could never commit again (nGoNow / forceNight refuse a week already committed) and his night never ran while her `end` was out */
  const C=P0&&CW.base?null:toCanon();CW.dying=null;
  if(!CW.base){/* host's first world */COOP.send({t:"init",state:C,nb:typeof B4N==="number"?B4N:3});CW.base=C}else{const Pm=P0||C.P[CW.seat];COOP.send({t:"me",P:Pm});CW.base.P=CW.base.P||{};CW.base.P[CW.seat]=J(Pm)}
  try{if(CW.base&&CW.base.P&&CW.base.P[fs()]&&!friendEntry())placeFriend(CW.base.P[fs()])}catch(e){console.error(e)}
@@ -919,6 +919,7 @@ function nightReady(){if(CW.nrdy===wk()){nCheck();return}CW.nrdy=wk();T("nready 
 function nGoNow(){if(!host()||CW.ngo===wk())return;CW.ngo=wk();T("ngo "+wk());nsay("go");CW.ngoW=wk();if(eW())try{CW.thin.flush()}catch(e){}/* thin E: the go rides the view (o.e.go): out before his week end */}
 /* host: commit when both are ready (or forced); every seat: run the committed night once free */
 function nCheck(){if(!CW.on||!S)return;const w=wk();
+ if(host()&&CW.ngo===w&&CW.ngoW!==w&&CW.sent!==w&&nAtNight()){T("ngo self "+w);CW.ngoW=w}/* robot-coop-fix-4: the host's own commit IS his go (one rule for every path that clears ngoW) */
  if(host()&&CW.ngo!==w&&nAtNight()&&((CW.nrdy===w&&(CW.nfr===w||nOtherGone()))||CW.nforce===w||nOtherEnded()))nGoNow();
  if(!host()&&CW.ngoW!==w&&nAtNight()&&nOtherEnded()&&COOP.state.week===w)CW.ngoW=w;   /* the host's end is out: it committed */
  if(CW.ngoW!==w||CW.pend||CW.sent===w||!nAtNight()||S.dead||Q.length||S.mg||frozen()||!CW.base||needWhere()||CW.inLife)return;

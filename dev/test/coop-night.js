@@ -226,6 +226,20 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
   const k=await leaveBack(A,B,'8 host',()=>sleep(12000));
   const ms=await bothPast(A,B,k,40000);ok(ms>=0,'8: the clock ends after her return and both step',[await Ok(A),await Ok(B)]);
   await setTm(A,{buoiMs:120000});await reset(A)}
+ /* 10 (robot-coop-fix-4, robot10-coop week-end stuck): the host COMMITS the night (go out, the guest runs hers and sends `end`) while his own night
+    waits on a dialog; then his seat re-sends its life (sendMe: a new life / rejoin) — that reset cleared his run flag but kept the commit, so his
+    next Sẵn sàng could never commit again: both #next locked at buổi 3 for ever. Now the reset clears the commit too (and nCheck: his commit = his go). */
+ if(await toNight('10')){const w0=(await D(A)).w;await clear(A);await clear(B);ok(await isRd(B)||await press(B),'10: guest presses at tối');await sleep(3000);
+  ok(await until(A,w=>COOPW.nfr===w,w0,30000),'10: the host has her ready');
+  await A.p.evaluate(()=>{pushModal({t:'Biến cố đêm',h:'<p>Có tiếng động ngoài hiên.</p>',opts:[{n:'Ra xem',fx:{},x:'',go:()=>{}}]});showModal();render();COOPW.nightReady()});
+  ok(await A.p.evaluate(w=>COOPW.ngo===w,w0),'10: the host committed the night (go out), his own night waits on the dialog');
+  for(let i=0;i<20&&!(await A.p.evaluate(()=>!!(COOP.state.ended&&COOP.state.ended.b)));i++){await clear(B);await sleep(1000)}
+  console.log('10: guest end out =',await A.p.evaluate(()=>!!(COOP.state.ended&&COOP.state.ended.b)));
+  const a1=await D(A);ok(a1.w===w0&&a1.b===LAST&&a1.Q===1,'10: the host still in tối behind his dialog',a1);
+  await A.p.evaluate(()=>{COOPW.sendMe(JSON.parse(JSON.stringify(COOPW.base.P[COOPW.seat])))});await sleep(1500);
+  await A.p.evaluate(()=>{const b=[...document.querySelectorAll('#modal .opts button')].find(x=>/Ra xem/.test(x.textContent));if(b)b.click()});await sleep(1000);
+  await clear(A);ok(await isRd(A)||await press(A),'10: host presses again after the re-send');await merged('10',w0)}
+ for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
  /* 9 at tối: the guest leaves after pressing, comes back; the host (still connected) recovers and the night goes for both */
  {await toNight('9');const w0=(await D(A)).w;await clear(B);await press(B);await sleep(1500);await leaveBack(B,A,'9 guest at tối');
   for(let i=0;i<3;i++){await clear(B);await sleep(300)}const c=await D(B);if(c.b>=LAST&&!c.ready){await clear(B);await press(B)}
