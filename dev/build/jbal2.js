@@ -1,5 +1,7 @@
 /* ================= jbal2: late balance knobs for the merged logic modules (review/balance). Same rule for every consort; numbers only. ================= */
 Object.assign(BAL,{illAdd:1,illDie:2});
+/* ONE DIM for the people who are NOT chosen (KIT §98 kitDim; owner 24/11 ~09:05Z / ~15:30Z): brightness + saturation on the FIGURE only, opaque, never the background; ms = cross-fade */
+BAL.kdim={b:.7,s:.75,ms:220};
 /* ACT SPLIT (jact wave 1, jact2 waves 2-3; owner-approved split 16/11). "!" happenings on Dư đồ: hapP = chance of a random happening in a buổi,
    hap2 = chance of a second one (never more than 2 per buổi); strollP = chance the Emperor's garden stroll takes the FIRST slot when he is in
    Ngự hoa viên (flag 2 of the wave-1 report: it was 9 in 300 buổi); rareMinGrade = Nội vụ phủ weekly rare item grade.
