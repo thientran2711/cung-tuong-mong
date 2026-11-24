@@ -492,3 +492,4 @@ Scope as re-scoped by Foreman B: review/thin-p1c 60c49722 = ALL 39 kinds (includ
 P6-SEEDS-A validator fix: DONE (see commit below) wseeds_a.md 40 seeds, 4 per kind, validator 0 errors
 **FOLLOW-UP on 087e886c (scope-change list):** (b) coop-e2e run TWICE on review/thin-p1-r1: 141/141 and 141/141, both seats, 0 FAIL (the earlier 138/141 did not reproduce). (c) «no pool» reasons spot-checked: mac threshold really comes from the maid (jsgame sgThr: loyal + temper by name), td_ngon 44 boards ≥40, timing-only kinds (thoico tat ne) have no content list, thu_* / tuoi are drawn on HER pet/plant; reasons accepted. (d) BAL.mgp / mgpb / mgpc: one-core-guard 0 fails.
 - DONE 9a0ef37 wseeds_b.md 51 seeds (3 x 17 kinds) validator 0 errors, 0 warnings (fixed wc-thi-002 mua).
+**CO-OP LAND GATE (thin-p1 r1, 087e886c): coop-e2e 141/141 + 141/141 (host Fold) + 141/141 with COOP_SWAP=1 (iPad hosts) = both seat orders, 0 FAIL; no-pool check ok.**
