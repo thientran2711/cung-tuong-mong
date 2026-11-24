@@ -434,3 +434,4 @@ Push recipe /home/user/wt/dpush2.sh (per container; text in HANDOVER D depth 3 b
 - (24/11 22:07Z) D7: PROUD FULLY DONE 75/75 (68 DONE, 7 NEEDS_REVIEW: s54@16, s52@26, s54@26, s52@51, s52@63, s25@39 lJhUesDgv9 eyeliner-like+crop, s54@39 fHYuRg2CDY) → worker archived. Sharp told to run age 39.
 - (24/11 22:09Z) D7: GENTLE FULLY DONE 70/70 (age 39 14/14, 0 NEEDS_REVIEW) → worker archived. Done families: Proud, Gentle. Running: Alluring, Cold, Sharp (age 39), Dignified succ2.
 - (24/11 22:10Z) D7: Cold 60/60 (3 NEEDS_REVIEW: s26@26 rosy lips, s46@26 pink eyelid, s50@63 warm bg; sheets https://ctm-img.victoria-tntt.workers.dev/img/_review/face-master03/cold/cold-age{16,26,51,63}.jpg) → told to run age 39.
+- (24/11 22:11Z) D7: SHARP FULLY DONE 75/75 (age 39 reads young ~late-20s/30s — flag; age 16 reads late-teen) → archived. Done: Proud, Gentle, Sharp. Running: Alluring, Cold (age 39), Dignified succ2.
