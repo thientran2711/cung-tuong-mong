@@ -45,7 +45,10 @@ function evTruthSweep(){if(!S||!rivals)return 0;let moved=0;const P=[S].concat(r
  for(const t of P){if(t!==S&&!t.alive&&!t.out)continue;const cap=deedCap(t);
   for(const h of P){if(h===t)continue;const g=evG(h,t);if(g>cap){const x=g-cap;if(h===/*evok: sweep*/S)t.ev=cap;else h.evm[key(t)]=cap;rumA(h,t,x);moved+=x}}}
  if(moved)try{window.__evSwept=(window.__evSwept||0)+moved}catch(e){}return moved}
-(function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{if(S&&rivals&&!S.dead){if(!S.truthV){/* first load of an old save */for(const p of [S].concat(rivals))deedSync(p);S.truthV=1}evTruthSweep()}}catch(e){console.error("truth load",e)}return r}})();
+/* save round-trip family (fixer #9): the load sweep only writes the ledger (facts the world already shows); window.__truthLoad tells the
+   reactions to a NEW wrong (jcmaid: Thái hậu learns through her maid, a roll that lowers S.th) that this is bookkeeping, not a deed she
+   does now — else a plain save → load rolled the dice and changed Thái hậu's favour (robot10-coop save.S.th 66 → 62 + a log line) */
+(function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);window.__truthLoad=1;try{if(S&&rivals&&!S.dead){if(!S.truthV){/* first load of an old save */for(const p of [S].concat(rivals))deedSync(p);S.truthV=1}evTruthSweep()}}catch(e){console.error("truth load",e)}finally{window.__truthLoad=0}return r}})();
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead){S.truthV=1;evTruthSweep()}}catch(e){}return r}})();
 /* new lives start already "swept" */
 (function(){if(typeof start!=="function")return;const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S)S.truthV=1}catch(e){}return r}})();

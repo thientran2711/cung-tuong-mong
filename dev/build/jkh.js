@@ -160,6 +160,10 @@ if(typeof pcard==="function"){const p0=pcard;pcard=function(o){try{if(S&&o&&o.na
 if(typeof rvCard==="function"){const r0=rvCard;rvCard=function(v){let h=r0.apply(this,arguments);try{const L=v?khInfo(v):[];for(const x of L.slice().reverse())if(!h.includes(x))h=h.includes('<div class="kpstats">')?h.replace('<div class="kpstats">',`<span>${x}</span><div class="kpstats">`):h.replace('<div class="pcinfo">',`<div class="pcinfo"><span>${x}</span>`)}catch(e){}return h}}
 /* a new game / an old save: health set once */
 const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S){khInit(S);(rivals||[]).forEach(khInit)}}catch(e){}return r};
+/* save round-trip family (robot10-coop row S.suc 100 → 99, fixer #9): the ceiling falls when a year passes (khOf age term) and the year step
+   never refit Sức, so S.suc sat over sucCap until the next load cut it (the deser khFit below). ONE year step for every calendar (j17 ageYear:
+   j3 / j42 / jkc / jkc2 call it right after S.age++): refit her and every living rival there, the same rule the load applies. */
+if(typeof ageYear==="function"){const ay0=ageYear;ageYear=function(){const r=ay0.apply(this,arguments);try{if(S&&khB()){khFit(S);(rivals||[]).forEach(v=>{if(v&&v.alive)khFit(v)})}}catch(e){console.error(e)}return r}}
 const z0=deser;deser=function(){const r=z0.apply(this,arguments);try{if(S){khInit(S);(rivals||[]).forEach(v=>{khInit(v);khFit(v)});khFit(S)}}catch(e){}return r};
 /* F5: the 'lệch sổ' fact in every ledger sync (her and NPCs) */
 if(typeof deedSync==="function"){const ds0=deedSync;deedSync=function(p){ds0.apply(this,arguments);try{khDeed(p)}catch(e){}}}

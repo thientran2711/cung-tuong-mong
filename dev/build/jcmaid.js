@@ -84,7 +84,7 @@ function cmGuard(t,p){try{if(t!==S||cmOff()||!S.maid||S.maid.src!=="home"||!S.or
  return `${S.maid.name} (con nhà võ) chắn trước người của ${p.name}, việc không thành. `}catch(e){return""}}
 
 /* ---------- ch: Thái hậu learns of every wrong she does ---------- */
-(function(){if(typeof deedAdd!=="function")return;const d0=deedAdd;deedAdd=function(p,k){const d=d0.apply(this,arguments);try{if(p===S&&!cmOff()&&S.maid&&S.maid.src==="th"&&!S.thDead&&roll(cmB().chKnow)){
+(function(){if(typeof deedAdd!=="function")return;const d0=deedAdd;deedAdd=function(p,k){const d=d0.apply(this,arguments);try{if(p===S&&!window.__truthLoad/* jtruth load sweep = ledger bookkeeping, not a new wrong */&&!cmOff()&&S.maid&&S.maid.src==="th"&&!S.thDead&&roll(cmB().chKnow)){
  S.th=cl((S.th||0)-cmB().chThDown,-100,100);cmC("chKnow");log(`Thái hậu biết chuyện ngươi ${d&&d.x?d.x:"làm điều sai"} (qua ${S.maid.name}). Thái hậu thiện cảm −${cmB().chThDown}.`)}}catch(e){}return d}})();
 /* ---------- muoi: she bargains back part of her bribe money ---------- */
 (function(){if(typeof bribeServ!=="function")return;const b0=bribeServ;bribeServ=function(a){const bac0=a===S?S.bac:0;const r=b0.apply(this,arguments);try{if(a===S&&!cmOff()&&S.maid&&S.maid.src==="home"&&S.origin&&S.origin.k==="muoi"){

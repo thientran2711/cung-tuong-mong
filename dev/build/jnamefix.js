@@ -105,7 +105,11 @@ function nmBirth(C){if(!C||!C.W||typeof S==="undefined"||!S)return 0;const T=nmN
  return n}
 window.nmBirth=nmBirth;window.nmOrdApply=nmOrdApply;window.NM_ORD=NM_ORD;window.NM_BIRTH=NM_BIRTH;
 (function(){
- const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{nmFix("load")}catch(e){}return r};
+ /* save round-trip family (robot10-coop row S.qPool[].name, fixer #9): a co-op life (a coop entry = the friend in rivals) is loaded only to go
+    back into its room (jslots: it is never written to a solo sổ); at load COOPW is not on yet, so nmOwner() is true on EITHER seat and the
+    load sweep renamed the guest's own people (her pool candidate sharing a short form with the friend). The room's sweep is the host's
+    nmFix("join") (jcoopworld attach) and his month sweep; a co-op save is never swept on load, so save → load → save keeps every name. */
+ const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{if(!(Array.isArray(rivals)&&rivals.some(v=>v&&v.coop)))nmFix("load")}catch(e){}return r};
  const s0=start;start=function(){const r=s0.apply(this,arguments);try{nmFix("start")}catch(e){}return r};
  /* coop-name-clash: an order the host relays inside the week (review/coop-host-lag ops carry the world key nmOrd) is applied at the next
     render on her seat, as a sync from the host (CW.inFC: the guest tripwire counts only writes outside a sync); no orders = one lookup */
