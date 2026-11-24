@@ -74,6 +74,7 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
   // (6) bất kính
   window.knAt=()=>'nhv';S.svtG=null;const ob=oan(v,S);sv.svtK=null;force(1,0,0);r=svTalk(S,sv);ok(oan(v,S)>ob&&/bất kính/.test(r),'master right there, not greeted → bất kính (oán '+ob+'→'+oan(v,S)+')');
   greetName(S,v);const ob2=oan(v,S);force(1,0,0);svTalk(S,sv);ok(oan(v,S)===ob2,'after greeting her: no bất kính');
+  S.svtG=null;sv.svtK=null;{const h=topicOpts(v).find(a=>a.n==='Hỏi han sức khỏe');if(h&&h.run)h.run();else chatMark(v)}const obT=oan(v,S);force(1,0,0);svTalk(S,sv);ok(svtGreeted(S,v)&&oan(v,S)===obT,'review r2: she talked with the master first this buổi («Hỏi han sức khỏe») → greeted, no bất kính (OD ~07:58Z)');
   S.svtG=null;const ob3=oan(v,S);sv.svtK=null;force(0,0,1);svTouch(S,sv,'bribe');ok(oan(v,S)===ob3,'covert act (Mua chuộc) skips the greeting');
   unforce();window.eyes=()=>3;ok(svtSeenO(S,v,'bribe')<svtSeenO(S,v,'talk'),'covert acts are seen less ('+svtSeenO(S,v,'bribe')+' < '+svtSeenO(S,v,'talk')+')');window.eyes=eyes0;
   // law 1 bất kính toward her

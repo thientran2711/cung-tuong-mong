@@ -89,6 +89,12 @@ function svtWrap(f,kind){return function(a,s){const b=s&&s.spyFor;const r=f.appl
 if(typeof bribeServ==="function")bribeServ=svtWrap(bribeServ,"bribe");if(typeof threatServ==="function")threatServ=svtWrap(threatServ,"threat");if(typeof tmTake==="function")tmTake=svtWrap(tmTake,"tm");
 /* greetName (jgreet: every greeting site): a greeting of this buổi is remembered both ways */
 (function(){if(typeof greetName!=="function")return;const g0=greetName;greetName=function(a,b){const r=g0.apply(this,arguments);try{const G=svtGz();G[svtId(a)+">"+svtId(b)]=1;G[svtId(b)+">"+svtId(a)]=1}catch(e){}return r}})();
+/* review r2 (OD ~07:58Z «mình là chủ tử thì mình muốn hỏi điều một vị cung nữ nào đó thì ít nhất mình cũng phải hỏi chuyện cái người chủ tử»): a face-to-face
+   talk with the master this buổi (j9 chatMark: her talk acts, a visitor's acts on her; jagacts3 p3ChatMark: the talk topics, NPC ↔ NPC too) counts as having greeted her, both ways — before, only greetName did,
+   so a master she already knew could never be greeted again and the open talk with her servant was always bất kính */
+function svtMet(a,b){try{if(!a||!b||a===b)return;const G=svtGz(),x=svtId(a),y=svtId(b);if(x&&y){G[x+">"+y]=1;G[y+">"+x]=1}}catch(e){}}
+(function(){if(typeof chatMark==="function"){const c0=chatMark;chatMark=function(v){const r=c0.apply(this,arguments);svtMet(S,v);return r}}
+ if(typeof p3ChatMark==="function"){const p0=p3ChatMark;p3ChatMark=function(p,v){const r=p0.apply(this,arguments);svtMet(p,v);return r}}/* the four talk topics (jagacts3 P3T: her ↔ NPC and NPC ↔ NPC, law 1) */})();
 /* the month: NPC mistresses have someone of another house talked to (law 1: her, the NPCs, NPC ↔ NPC); an NPC master returns the servant she no longer trusts */
 function svtMonth(){if(!SVT.on())return"";let ev="";const B=BAL.svt;let G=false;try{G=typeof mlGuest==="function"&&mlGuest()}catch(e){}
  for(const p of liveRivals(true)){if(!p||!p.alive||p.out)continue;
