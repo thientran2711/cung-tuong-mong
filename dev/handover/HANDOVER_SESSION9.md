@@ -2887,3 +2887,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (06:24Z) via 116: OD 09:35Z patron routes BUILD NOW (D ordered by 116 09:36Z); Day-3 drama seeds a–e → SELSCENE-4.
 - (06:26Z) KK18 started (depth 3, START 2 %; no B FAIL yet; KIT_REQUESTS 2 open rows already built → DONE). via 116: OD 09:40Z dò hỏi ma ma 3 options → SELSCENE-4.
 - (06:30Z) via 116: OD 09:45Z music groups → F (files+spec, 116 ORDER 09:46Z); wiring → KK18 on F's «MUSIC SPEC READY» (extend j11.js:34 musicCtx + jpres mus, one table).
+- (06:34Z) SELSCENE-4 rolled at 28 % (review/selection-scene 1257979a: Dưỡng Tú viện in BAL.selx.lodge, 3 days jselxday.js, drama engine 82 seeds, kitDayName; selx-days/rules/wire PASS). Handover synced to reports/selection-scene.md. SELSCENE-5 = session_01V1ZZH1P6EXpzNXqeuKYD38 (opus, child of 118): NOT-done 1–5 + MAIN answers (advance 3 tuần at edict YES; Phân cung hook with D; 09:30Z result animation; 09:35Z Day-3 seeds; 09:40Z dò hỏi 3 options). SELSCENE-4 archived.

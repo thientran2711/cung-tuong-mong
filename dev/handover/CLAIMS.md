@@ -1386,3 +1386,4 @@ LAW-1 likes/dislikes/gifts scan + fix (opus; MAIN 116 07:57Z (e); briefs/D-law1-
 | SMALL KIT REVIEWER #2 (sonnet; split from 2F8nQScU; briefs/b-kit-review-2.md): kit-sqopt, kit-daytitle, kit-dialogue-vn, kit-evframe | review/<name>-r1; reports/<branch>.md | B | session_01N1tNP59hSyoDLcPHGSmzLM | RUNNING | 24/11 05:44Z |
 | KIT KEEPER KK18 (sonnet; successor of KK17; reports/MOCK-STAGE.md «HANDOVER KK17 → KK18») | review/kit-* | MAIN 118 | session_01V1ZZH4iZc3Go1VBS7nJnuD | RUNNING | 24/11 06:18Z |
 | ROBOT-COOP RUNNER U3 (re-opened) pairs 3-4 SWAP=0 SEED=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p3-4.md | B | session_01N1tNP2fZxefqCF5gDf8nSK | RUNNING | 24/11 05:44Z |
+| SELSCENE-5 opening 3 days (opus; successor of SELSCENE-4; reports/selection-scene.md) | review/selection-scene | MAIN 118 | session_01V1ZZH1P6EXpzNXqeuKYD38 | RUNNING | 24/11 06:34Z |
