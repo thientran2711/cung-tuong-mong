@@ -106,7 +106,7 @@ S = {
 
 S2 = {
 "an-cu-duoc-lat": ("phi",["phi","eun"],"Before her family ancestral altar with incense smoke, a eunuch reads aloud a golden imperial edict scroll (blank, no writing visible); she kneels close to the viewer, face lifted, tears of relief and joy in her eyes as her old case is overturned."),
-"ban-hon-con": ("phi",["phi","eun"],"A eunuch reads an imperial marriage edict (scroll, no visible writing); she stands close to the viewer beside her grown daughter of about eighteen in a pink robe, both bowing their heads respectfully, the mother's face proud and moved."),
+"ban-hon-con": ("phi",["phi","eun"],"A eunuch reads an imperial marriage edict (scroll, no visible writing); she stands close to the viewer beside her grown daughter of about eighteen in a pink robe, both bowing their heads respectfully, the mother clearly older (a graceful woman of about forty, visibly a generation older than her daughter), her face raised enough to show she is proud and moved."),
 "bi-bat-buon-lau": ("maid",["maid","guard"],"At a palace gate a guard holds up a bundle of smuggled silk; the palace maid stands close to the viewer with head bowed, face pale and frightened, eyes darting up to the guard."),
 "bi-day-xuong-ho": ("phi",["phi","eun","maid"],"At the edge of a lotus pond, a eunuch and palace maids pull her out of the water onto the stone bank; she is close to the viewer, soaked hair and robe clinging, coughing slightly, face shocked and pale; maids anxious beside her."),
 "bi-giang": ("phi",["phi","eun"],"A eunuch reads a demotion edict; she stands close to the viewer, sadly removing a gold hairpin from her hair and laying it on a tray he holds, face composed but hurt."),
