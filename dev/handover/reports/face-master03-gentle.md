@@ -69,3 +69,24 @@ PRIORITY #1 CHECK: OD 0 | main none | review/* none | claims FOREMAN D row (this
 Settings (all jobs identical): Magnific MCP images_generate, mode gpt-2-6, resolution 2k, aspect auto, count 1, no extraSettings, references [identity upload, UPf76Ptwny]; prompt = file text minus the one operator sentence (len <= 9714). 135 cr each = 7,560 cr. No retries needed; 0 NEEDS_REVIEW, 0 BLOCKED.
 Per-job QC (each result looked at, 512px preview): single portrait, no text/caption anywhere, warm-ivory background, ivory embroidered robe + light-gold hairpin, no makeup look, same painting finish/skin tone as master, age direction correct (16 youthful, 26 young adult, 51 light lines + sparse silver, 63 clearly older with silver). Minor notes: c32 has a lavender hair ribbon at 16/51 (accessory only); m02/age16 reads slightly older than 16 (soft adolescent cues weak) — owner may judge. Identity likeness was judged by hairstyle/face bearing only, not side-by-side with originals (no contact sheet yet).
 NOT DONE: contact sheets (original | result, 2 columns) + CDN upload under img/_review/face-master03/gentle/ — needs output image downloads (private pikaso URLs) + cdn_sync; Foreman D to decide who builds sheets (one pass for all six families is cheaper). Results stay on Magnific; output creation ids are in the table above (webUrl pattern https://www.magnific.com/app/creation/<id>).
+
+## AGE 39 (owner unblocked 24/11 ~21:45Z) — 14/14 DONE
+Prompt: age39-fix04 file FACE-REUSE-GENTLE-AGE39-DUAL-MASTER-SKIN-BAREFACE-NOTEXT-04.txt pasted WHOLE and unchanged (9,568 chars). Same refs/settings (gpt-2-6, 2k, auto, count 1). 14 x 135 = 1,890 cr. Each result looked at: no text, no wrinkles, soft youthful adult (visual 35-36), bare face, ivory robe; 0 NEEDS_REVIEW.
+| job_id | source | age | identity upload | output creation | status | QC |
+|---|---|---|---|---|---|---|
+| FACE-GENTLE-M02-A39-MASTER-SKIN39LIMIT04-T01 | m02 | 39 | ksXxxbS16B | EbcFRThuuO | DONE | no text, bare face, zero wrinkles, youthful visual 35-36, ivory robe, ok |
+| FACE-GENTLE-M08-A39-MASTER-SKIN39LIMIT04-T01 | m08 | 39 | Sya77l1Ub8 | iGkZEsx3uK | DONE | no text, bare face, zero wrinkles, youthful visual 35-36, ivory robe, ok |
+| FACE-GENTLE-M14-A39-MASTER-SKIN39LIMIT04-T01 | m14 | 39 | EbcFFETuuO | nVgcK9aYQD | DONE | no text, bare face, zero wrinkles, youthful visual 35-36, ivory robe, ok |
+| FACE-GENTLE-M18-A39-MASTER-SKIN39LIMIT04-T01 | m18 | 39 | gOvw7wcSXO | Xm68wTSBfo | DONE | no text, bare face, zero wrinkles, youthful visual 35-36, ivory robe, ok |
+| FACE-GENTLE-M19-A39-MASTER-SKIN39LIMIT04-T01 | m19 | 39 | dtNo8IEXSL | xS8sV1DjfW | DONE | no text, bare face, zero wrinkles, youthful visual 35-36, ivory robe, ok |
+| FACE-GENTLE-M20-A39-MASTER-SKIN39LIMIT04-T01 | m20 | 39 | fHYuQHBCDY | BhiIJIroQR | DONE | no text, bare face, zero wrinkles, youthful visual 35-36, ivory robe, ok |
+| FACE-GENTLE-C02-A39-MASTER-SKIN39LIMIT04-T01 | c02 | 39 | Sya7J9wUb8 | 5je1WLIKxe | DONE | no text, bare face, zero wrinkles, youthful visual 35-36, ivory robe, ok |
+| FACE-GENTLE-C08-A39-MASTER-SKIN39LIMIT04-T01 | c08 | 39 | 9Zbi3zwNYZ | gOvwoevSXO | DONE | no text, bare face, zero wrinkles, youthful visual 35-36, ivory robe, ok |
+| FACE-GENTLE-C20-A39-MASTER-SKIN39LIMIT04-T01 | c20 | 39 | BhiItudoQR | UPfJIIfwny | DONE | no text, bare face, zero wrinkles, youthful visual 35-36, ivory robe, ok |
+| FACE-GENTLE-C26-A39-MASTER-SKIN39LIMIT04-T01 | c26 | 39 | 0e7MDhVTfW | KLdrTpAkqp | DONE | no text, bare face, zero wrinkles, youthful visual 35-36, ivory robe, ok |
+| FACE-GENTLE-C32-A39-MASTER-SKIN39LIMIT04-T01 | c32 | 39 | Sya7JAyUb8 | EbcFATIuuO | DONE | no text, bare face, zero wrinkles, youthful visual 35-36, ivory robe, ok; lavender ribbon accessory (minor) |
+| FACE-GENTLE-S62-A39-MASTER-SKIN39LIMIT04-T01 | s62 | 39 | tC2varXmZJ | O6Q4vxVynm | DONE | no text, bare face, zero wrinkles, youthful visual 35-36, ivory robe, ok |
+| FACE-GENTLE-S63-A39-MASTER-SKIN39LIMIT04-T01 | s63 | 39 | P3HN6Ma42C | yiF9al7PW9 | DONE | no text, bare face, zero wrinkles, youthful visual 35-36, ivory robe, ok |
+| FACE-GENTLE-S64-A39-MASTER-SKIN39LIMIT04-T01 | s64 | 39 | s7mSUzul8e | KLdrTHIkqp | DONE | no text, bare face, zero wrinkles, youthful visual 35-36, ivory robe, ok |
+
+## GRAND TOTAL Gentle: 70/70 DONE (ages 16, 26, 39, 51, 63 x 14). Contact sheets + CDN upload still NOT done (await Foreman D).
