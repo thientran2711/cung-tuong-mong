@@ -230,7 +230,7 @@ function selxMini(){const d=mkP("kc2Sel",{});if(!d){S.selx2.mk=Object.assign(S.s
  /* SELSCENE-8 (RV-SELX FAIL 4): «Cúi đầu chờ xét» (no board, the mark of her own art level) first, as on the dress card */
  const o=(d.o||[]).slice();const c=o.findIndex(x=>/^Cúi đầu chờ xét/.test(x.n||""));if(c>0)o.unshift(o.splice(c,1)[0]);
  Q.unshift({t:"Hoàng thượng",h:selxHead()+d.t,opts:o,who:d.who,pid:"kc2Sel",pp:{}})}
-function selxMiniDone(raw){const Z=S.selx2;Z.mk=Object.assign(Z.mk||{},{mini:raw});Z.fav=Z.fav||{};Z.fav.E=(Z.fav.E||0)+selxMiniFav(raw);selxSpend(BAL.selx.beat.test);selxTest("H","hanhxu",selxContestRun);try{showModal();render()}catch(e){}}
+function selxMiniDone(raw){const Z=S.selx2;Z.mk=Object.assign(Z.mk||{},{mini:raw});Z.fav=Z.fav||{};Z.fav.E=(Z.fav.E||0)+selxMiniFav(raw);selxSpend(BAL.selx.beat.test);selxTest("H","hanhxu",selxContestRun)/* SELSCENE-13: no show here — every caller (jkc2 kc2SelPlay fin / chooseM) shows the next card once */}
 /* THE CONTEST on the 3 marks (jselx selxContest, the same formula and the same royal reaction for every girl) */
 function selxContestRun(){const Z=S.selx2;const X=S.selx;const T=k=>SELX_TESTS.find(x=>x.id===(Z.tests&&Z.tests[k]&&Z.tests[k].id));const tok=k=>(selxRoyals().find(x=>x[0]===(Z.tests&&Z.tests[k]&&Z.tests[k].k))||[])[2];
  const K=k=>Z.tests&&Z.tests[k]&&Z.tests[k].k;const TK=k=>{const e=T(k);return e?Object.assign({},e,{__k:K(k)}):e};const t={art:X.art||"",dd:TK("doidap"),hx:TK("hanhxu"),rdd:o=>selxReactR(o,tok("doidap")),rhx:o=>selxReactR(o,tok("hanhxu"))};
