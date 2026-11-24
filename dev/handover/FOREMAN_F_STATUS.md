@@ -11,3 +11,4 @@
 - FROM MAIN 115 (01:30Z 24/11): LIVE = 2a80712b (kit-mgskin: KIT mg-skin slot + one resolver img/mg/<kind>-<id>.webp).
 - FROM MAIN 115 (01:55Z 24/11): kit keeper is now KIT KEEPER #15 session_01Rc5AsMbPqcNeJHzx3HWT6V (KK14 rolled). kit-mgskin is LIVE 2a80712b — name CDN images img/mg/<kind>-<skin>.webp.
 - FROM MAIN 115 (02:15Z 24/11): LIVE = 4a8c627b (thin-p0 + thin-p2: memory + composed j7 lines).
+- FOREMAN F ROOT = session_01UV1Szk8qkC1wJoEMJ1HoaD; START_CTX ~9 % (own estimate, get_session reads 0; rollover at 34 %, ceiling 60 %); depth 0 (limit 8). Started 24/11 02:03Z. ORDER #1 MGSKIN batch 1 = 12 kinds × 4 skins (ids xuan/ha/thu/dong, palettes dao/ngoc/kim/mac), brief dev/handover/briefs/F-mgskin.md; 3 sonnet workers A (hoa banh huong kim), B (ve theu dan co), C (ban dauho td_cong le).
