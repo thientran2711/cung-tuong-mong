@@ -8,12 +8,22 @@ const {chromium}=require('playwright');const path=require('path');const HTML=pro
  const r=await p.evaluate(()=>{let sd=20261124;Math.random=()=>{sd=(sd*16807)%2147483647;return (sd-1)/2147483646};localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<60&&!isSrv();i++)start();window.__nlInner=0;quiet=true;
   const m=srvM();if(!m)return{err:'no master'};const pal=palaceOf(m);const card={sk:"mis",kind:"srv",ref:m};const names=()=>srvTalk(card).map(o=>o.n);
   const W0=window.srvWhere;let at=pal;window.srvWhere=function(v){return v===m?at:W0.apply(this,arguments)};
-  const home=names(),homeNpc=asMisHome(m);const away0=places().map(x=>x.k).find(k=>k!==pal&&k!=="home");at=away0;const away=names(),awayNpc=asMisHome(m);window.srvWhere=W0;
-  return{srv:isSrv(),home,away,homeNpc,awayNpc,awayAt:away0}});
+  const home=names(),homeNpc=asMisHome(m);const away0=places().map(x=>x.k).find(k=>k!==pal&&k!=="home");at=away0;const away=names(),awayNpc=asMisHome(m);
+  /* r1: the REAL card on the stage (srvVisitOf → the card builders), also when her master is the Hoàng hậu (the builders tag her «hh») */
+  const real=k=>{const c=srvVisitOf(k).people.find(x=>x.ref===m);return c?srvTalk(c).map(o=>o.n):null};
+  at=pal;const realHome=real("home");at=away0;const realAway=real(away0);
+  const q0=m.queen;m.queen=true;const qpal=palaceOf(m);at=qpal;const qHome=real("home"),qHomeNpc=asMisHome(m);const qAt=places().map(x=>x.k).find(k=>k!==qpal&&k!==pal&&k!=="home");at=qAt;const qAway=real(qAt),qAwayNpc=asMisHome(m);m.queen=q0;
+  window.srvWhere=W0;
+  return{srv:isSrv(),home,away,homeNpc,awayNpc,awayAt:away0,realHome,realAway,qHome,qHomeNpc,qAway,qAwayNpc,qAt}});
  const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
  const TO=['Đấm lưng, hầu chuyện','Xin chủ ban thưởng','Bẩm tin dò được','Xin chủ tiến cử lên Nội vụ phủ'];
  ok(r.srv,'a maid life started',r.err);
  ok(r.homeNpc&&TO.every(n=>r.home.includes(n))&&!r.home.includes('Hầu bên cạnh chủ'),'master in her palace: the four «to the master» acts (NPC maid: same, asMisHome true)',r.home);
  ok(!r.awayNpc&&TO.every(n=>!r.away.includes(n))&&r.away.includes('Hầu bên cạnh chủ'),'master away ('+r.awayAt+'): only «Hầu bên cạnh chủ» (NPC maid: beside, asMisHome false)',r.away);
+ const homeOK=(L,npc)=>!!L&&npc&&TO.every(n=>L.includes(n))&&!L.includes('Hầu bên cạnh chủ'),awayOK=(L,npc)=>!!L&&!npc&&TO.every(n=>!L.includes(n))&&L.includes('Hầu bên cạnh chủ');
+ ok(homeOK(r.realHome,r.homeNpc),'real stage card, master at home: the four acts',r.realHome);
+ ok(awayOK(r.realAway,r.awayNpc),'real stage card, master away: only «Hầu bên cạnh chủ»',r.realAway);
+ ok(homeOK(r.qHome,r.qHomeNpc),'master is the Hoàng hậu, at home (card «hh»): the four acts, as an NPC maid of a Hoàng hậu',r.qHome);
+ ok(awayOK(r.qAway,r.qAwayNpc),'master is the Hoàng hậu, away ('+r.qAt+'): only «Hầu bên cạnh chủ»',r.qAway);
  ok(!errs.length,'no page errors',errs.slice(0,3));await b.close();
  const pass=res.every(Boolean);console.log(pass?'MAID-MIS-AWAY PASS':'MAID-MIS-AWAY FAIL');process.exit(pass?0:1)})();
