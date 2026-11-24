@@ -174,7 +174,10 @@ async function room(job,TP,P,tpNext,bug,out){const b=await chromium.launch(/127\
      if((pa.where===pb.where&&!pd.length&&(!pa.fst||pa.fst===pb.mst)&&(!pb.fst||pb.fst===pa.mst))||Date.now()-pend.t>5000){
       lastKey=A.k.key;rm.cmp=(rm.cmp||0)+1;
       if(pa.where!==pb.where){rm.whereDiff++;bug('coop-where','NPC places differ between the two screens',`buổi ${pa.key} host-only [${pa.where.split(',').filter(x=>!pb.where.split(',').includes(x)).slice(0,6)}] guest-only [${pb.where.split(',').filter(x=>!pa.where.split(',').includes(x)).slice(0,6)}]`)}
-      for(const x of pd){rm.posDiff++;bug('coop-pos','where one sees the friend ≠ where the friend is','buổi '+pa.key+' '+x)}
+      /* fixer #3: a coop-pos hit carries each page's relay state (game vs harness triage): the last pos frame heard (week.buổi place life), her own week/buổi/place, the friend entry id + palace, the thin level and the host's stored-person place (herPl7) */
+      const PD=()=>{try{const f=COOPW.friend&&COOPW.friend();const m=COOPW.fpos||{};return {fpos:m.week+'.'+m.buoi+' '+m.place+' life'+(m.life|0)+(m.name?' '+m.name:''),me:(COOP.week|0)+'.'+(S.buoi||0)+' '+S.place,life:COOPW.life|0,f:f?f.id+' '+f.name+' pal '+(()=>{try{return palaceOf(f)}catch(e){return '?'}})()+' where '+(S.where||{})[f&&f.id]:null,thl:(COOPW.thin&&COOPW.thin.lvl)|0,h7:COOPW.herPl7?COOPW.herPl7():null}}catch(e){return 'ERR '+e.message}};
+      const pdx=pd.length?JSON.stringify({host:await A.p.evaluate(PD).catch(()=>null),guest:await B.p.evaluate(PD).catch(()=>null)}).slice(0,600):'';
+      for(const x of pd){rm.posDiff++;bug('coop-pos','where one sees the friend ≠ where the friend is','buổi '+pa.key+' '+x+' · '+pdx)}
       if((pa.fst&&pa.fst!==pb.mst)||(pb.fst&&pb.fst!==pa.mst)){rm.statLag++;bug('coop-stat','the friend\'s Sủng/Danh/Sức shown ≠ her own (one buổi late or wrong)',`buổi ${pa.key}: host sees guest ${pa.fst} (guest ${pb.mst}) · guest sees host ${pb.fst} (host ${pa.mst})`)}}}}
    /* a room week both have passed: world compare (coop-bot WORLD), year cut for the LAG set, save round-trip, rejoin */
    const wk=Math.min(A.k.week,B.k.week);
