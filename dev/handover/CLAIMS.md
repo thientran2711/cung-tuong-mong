@@ -1292,5 +1292,5 @@ robot10 PHASE 2 nc FIXER (opus; families from nc-*.md bug files; briefs/D-robot1
 | THIN ENGINE #3 (opus): P4 j68 openings ≥60 × 4 families + ≥40 × 5 (API P4 first → writers), then P5 Kỳ ngộ | review/thin-p4; reports/thin.md | B (ORDER MAIN 113 22:36Z) | session_01N1tNP4i3MEbbZxyD92bKmn | RUNNING | 24/11 00:55Z |
 REVIEW robot10-nc-fix-1 (opus BIG save drift family; briefs/D-robot10-nc-fix-1-review.md) of 2e5d3da0 | review/robot10-nc-fix-1-rv | session_01964izBqmsSifomtfYUK96U | RUNNING | 24/11 01:39Z (Foreman D depth 3)
 REVIEW robot10-nc-fix-2 (sonnet SMALL Dư đồ layer over tabs; briefs/D-robot10-nc-fix-2-review.md) of a08f8cd9 | review/robot10-nc-fix-2-rv | session_01964izGDoYZVYJKEoMpDwU1 | RUNNING | 24/11 01:39Z (Foreman D depth 3)
-| THIN P7-SEEDS-A (sonnet writer): content/thin/fseeds_a.md festivals | dev/handover/content/thin/fseeds_a.md; reports/thin.md «## P7-SEEDS-A» | B | (opening) | RUNNING | 24/11 01:52Z |
-| THIN P7-SEEDS-B (sonnet writer): content/thin/fseeds_b.md festivals | dev/handover/content/thin/fseeds_b.md; reports/thin.md «## P7-SEEDS-B» | B | (opening) | RUNNING | 24/11 01:52Z |
+| THIN P7-SEEDS-A (sonnet writer): content/thin/fseeds_a.md festivals | dev/handover/content/thin/fseeds_a.md; reports/thin.md «## P7-SEEDS-A» | B | session_01N1tNP4XzrrTeneDD87nTKP | RUNNING | 24/11 01:52Z |
+| THIN P7-SEEDS-B (sonnet writer): content/thin/fseeds_b.md festivals | dev/handover/content/thin/fseeds_b.md; reports/thin.md «## P7-SEEDS-B» | B | session_01N1tNP6fJTWY2fjR57SjjFM | RUNNING | 24/11 01:52Z |
