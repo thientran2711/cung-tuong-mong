@@ -1482,6 +1482,6 @@ kit-optinfo SMALL review | review/kit-optinfo-r1 | session_01N1tNP3WNbdFEbb19kfq
 robot-coop-fix-1 r2 BIG review | review/robot-coop-fix-1-r2 | session_01N1tNP2xZQymfgL6TKgMEcP (owner B) | RUNNING | 24/11 09:45Z
 | SELSCENE-9 (opus; successor of SELSCENE-8; briefs/M121-selscene-fix.md + SUCCESSOR NOTE) | review/selection-scene (from 2d7e55da); reports/selection-scene.md | MAIN 121 | session_01V1ZZH4SR1QdLaT7aXu5hUu | RUNNING | 24/11 09:56Z |
 rv servant-trust | review/servant-trust-rv | session_01D3E3NZh6xm1S3xPV8XpuMW | RUNNING | 24/11 09:57Z (Foreman D depth 2)
-| REVIEW E80r robot10-e-fix-2 r3 SMALL (sonnet; briefs/E80r-review-robot-fix2-r3.md) of 0673d1a1 | review/robot10-e-fix-2-r3m; reports/robot10-fix12-review.md | FOREMAN E (child3) | (opening E80r) | RUNNING | 24/11 10:06Z |
+| REVIEW E80r robot10-e-fix-2 r3 SMALL (sonnet; briefs/E80r-review-robot-fix2-r3.md) of 0673d1a1 | review/robot10-e-fix-2-r3m; reports/robot10-fix12-review.md | FOREMAN E (child3) | session_01DgYSWkoafyYG9Rp7ZDWTCf | DONE PASS 9e89619a92f29091bc1e40a5221d75cce768916a | 24/11 10:06Z |
 | REVIEW E81r robot10-e-fix-3 BIG (opus; briefs/E81r-review-robot-fix3.md) of e1ee6041 | review/robot10-e-fix-3-r; reports/robot10-fix3-review.md | FOREMAN E (child3) | session_01DgYSWnaebLfT2YjJ9ZWjc8 | RUNNING | 24/11 10:06Z |
 | robot10 E FIXER #3 successor (opus BIG; briefs/E-robot10-fixer.md + reports/robot10-E-fixer.md HANDOVER + ADDENDUM) | review/robot10-e-fix-3 (+ -4…); reports/robot10-E-fixer.md | FOREMAN E (child3) | session_01DgYSWogKvvnwna26yqXVT5 | RUNNING | 24/11 10:15Z |

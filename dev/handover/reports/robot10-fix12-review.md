@@ -32,3 +32,12 @@ Merge with latest origin/main ac4790f0: clean merge **9d9fab98** (review/robot10
 - r10e-audit (every road beat, nc-B save 005, merged tree): 2726 beats / 9965 options, «number» rows 0, «Bạc lạ» rows 0 (14 draw errors = game-side card draws, not audit rows; unchanged by this test-only branch). r10e-kcf: ok (lose path ran, confirm closed).
 - Not re-run (unchanged by r2, covered by E76r): r10e-uiscan-book, short real run.
 Verdict: **PASS 145a1f54** (merge 9d9fab98 = same tree plus main ac4790f0; branch fd85907a-based → coordinator merges onto main). Scratch: no shots made.
+
+## r3 (E80r, sonnet small) — review/robot10-e-fix-2 0673d1a1 on 145a1f54
+PRIORITY #1 CHECK ('lessonCands r10e-lesson'): OD 0 | ledger 0 | claims FIXER #2 | main 0 | review/* only this branch | archive 0.
+- Merge: review/robot10-e-fix-2-r3m = **9e89619a92f29091bc1e40a5221d75cce768916a** (0673d1a1 + latest origin/main). Diff vs main = dev/measure (inpage6, robot10, robot10-in) + dev/test only; no game file, no index.html/sw.js change → test-only.
+- Gate: lessonCands now calls the game's own artPts(S,k)<100 (jbalcore crsPts); the literal 100 is the game's own (j2.js lesson(): artPts(p,k)>=100; crsPts min(100)) — BAL has no named key for it, so no BAL number is copied (note, not a fail). Lesson option now has L:"l"+k, so a refused pick is banned after 3 like every option.
+- Proof: r10e-lesson.js on the tgk save (robot10-saves-r4) on the merge: cands [], bot moves on → ok.
+- Mutation (gate removed from a copy via IP6=): cands ["thi"], ring lesson ×4 → "FAIL the bot keeps offering a lesson the game refuses" → a real stuck lesson is still caught. (Script prints FAIL but exits 0 under a pipe tail — exit code seen was tail's.)
+- Law check: no player-visible word, no UI, no number added to the game → the 18 laws are untouched.
+Verdict: **PASS 9e89619a92f29091bc1e40a5221d75cce768916a**. Scratch: no shots made; tgk save + mutated copy in session scratchpad only.
