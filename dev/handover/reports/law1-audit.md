@@ -161,3 +161,17 @@ review/law1-audit-r1 = 45b4057b + merge of review/test-mrfoot d521656c (tests on
 - `bash dev/tools/quickcheck.sh` (alone) → `QUICKCHECK PASS · 262 s · open 2281 ms · old save ok · perf (median of 3, new/live): render 302/270 ms, tab 571/534 ms, buổi 3617/3671 ms · core gates PASS`
 
 **LAND READY law1-audit-r1 ca1ddcf93151831c098ba3d94367cba50a8b0ce7 FOR MAIN 122 (re-merge on test-mrfoot d521656c)**
+
+## REVIEW r1 — re-merge c6c3ca76 (ORDER MAIN 123 14:28Z via Foreman B; reviewer session_01N1tNP3tqT3TXv982ieVGqU, opus)
+review/law1-audit-r1 = ca1ddcf9 + merge of LIVE origin/main c6c3ca76 (net-build-rv: relation gates on netTh / netThK, BAL.eff.jemo.wk.upRival and many BAL bar copies dropped). j42 / j92 / jbal2 auto-merged with no conflict; only index.html / sw.js conflicted → rebuilt (python3 dev/build/assemble.py + dev/site/build_site.sh). Head **3d450d3d1e0391a0cdaf44486ddcb3effadb2fa1**; origin/main c6c3ca76 is its ancestor (FF).
+Semantic check of the merge: branch code reads only BAL.ag.why.wd.poor (kept on LIVE), BAL.net.n.bcHumble / BAL.net.n.wdPawn (branch's own); no read of a key LIVE deleted (relMe, *.host, *.friend, upRival …). j42 «Hầu bên cạnh chủ» line (branch) sits beside LIVE's netThK hostility gates; j92 wdNpcPawn / wdNpcRedeem untouched by LIVE (LIVE only changed frameHost / bandVT). Built index.html holds both (wdNpcRedeem/bcHumble 6 hits, netThK 20 hits).
+- `node dev/test/law1-audit.test.js` → `law1-audit: 13/13 PASS` · `… index.html` → `law1-audit: 13/13 PASS`
+- `node dev/tools/role-parity-scan.js index.html --fam` → `LAW-1 FAMILIES: rows 22 · GAP 4` (3 D gift rows + parked B co-op ration, unchanged)
+- `node dev/test/role-parity.test.js` → `ok open baseline only shrinks (≤ 7 rows, each with its side) 7` … `ALL PASS` · `… index.html` → same, `ALL PASS`
+- `node dev/test/one-core-guard.js` → `PASS: one core …` (fails 0, balKeys 851) · `node dev/test/undef-scan.js` → `PASS: no unguarded undefined identifier (301 names checked)`
+- `node dev/test/net-build.js` (LIVE's gate, extra) → `189/189 ok` · `PASS: net-build`
+- `node dev/test/coop-e2e.js <out>` (Fold hosts) → `142/142 passed` · `COOP_SWAP=1 node dev/test/coop-e2e.js <out>` (iPad hosts) → `142/142 passed`
+- `bash dev/tools/quickcheck.sh` (alone) → `QUICKCHECK PASS · 215 s · open 1895 ms · old save ok · perf (median of 3, new/live): render 250/208 ms, tab 416/461 ms, buổi 1666/1654 ms, tasks>200ms 23/25 · core gates PASS`
+No red → no LOAD-COMPARE needed.
+
+**LAND READY law1-audit-r1 3d450d3d1e0391a0cdaf44486ddcb3effadb2fa1 FOR MAIN 123 (re-merge on c6c3ca76)**
