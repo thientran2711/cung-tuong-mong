@@ -54,7 +54,9 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const BLOCK=/\.(webp|png|jpe?g|gif|mp3|ogg|m4a|mp4|webm)(\?|$)/i;
 async function boot(b,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},reducedMotion:'reduce'});await ctx.addInitScript(require('./robot10-lag.js').REAL_INIT);const p=await ctx.newPage();
  await p.route(BLOCK,r=>r.abort());p.__errs=[];p.on('pageerror',e=>p.__errs.push(e.message+' '+(e.stack||'').split('\n').slice(1,2).join('').trim()));
- p.on('console',m=>{if(m.type()==='error'&&!NOISE.test(m.text()))p.__errs.push('console.error: '+m.text())});
+ p.on('console',m=>{if(m.type()==='error'&&!NOISE.test(m.text())){const i=p.__errs.push('console.error: '+m.text())-1;
+  /* E-FIX-4: where it fired — the Error's top frames + the checkpoint (and its save) being checked, so the row carries a repro */
+  p.__eAt=p.__eAt||{};p.__eAt[i]={at:p.__at||'',save:p.__cpSave||null,stk:''};const a=m.args()[0];if(a)a.evaluate(e=>e&&e.stack?String(e.stack).split('\n').slice(1,4).map(x=>x.trim()).join(' | '):'').then(x=>{if(x)p.__eAt[i].stk=x}).catch(()=>{})}});
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:120000});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function'&&typeof showTitle==='function',null,{timeout:120000});
  await p.waitForTimeout(800);await p.evaluate(()=>{try{localStorage.clear()}catch(e){}});return p}
 const clean=()=>{document.querySelectorAll('#kload,#kroul,#kroulw,#klife').forEach(e=>e.remove())};
@@ -93,12 +95,15 @@ function uiScan(opt){const W=innerWidth,H=innerHeight,out=[];const strip=s=>Stri
  const layer=e=>{for(let x=e.parentElement;x&&x!==document.body;x=x.parentElement){const p=cs(x).position;if(p==='absolute'||p==='fixed'||p==='sticky')return x}return document.body};
  /* labelled buttons only (a figure / portrait / icon with role=button is art, not a control label) */
  const btns=[...root.querySelectorAll('button,[role=button],a[href]')].filter(e=>vis(e)&&/\p{L}{2}/u.test(e.innerText||''));
+ /* E-FIX-4 (R8 cautious-3 «div.kmrow under button.kmtake» on every Fold tab): a row of a scrolling list passing under a STICKY bar of that same list
+    (the reward list's «Nhận», j93 .km-done .kmlist>.kmtake position:sticky) is not covered: she scrolls it out from under the bar */
+ const stuck=(t,sa)=>{if(!sa)return false;for(let x=t;x&&x!==sa;x=x.parentElement)if(cs(x).position==='sticky')return sa.contains(x);return false};
  for(const e of btns){const r=e.getBoundingClientRect();const sa=scrollAnc(e);
   if(!sa&&(r.left<-2||r.right>W+2||(!pageScrollsY&&(r.top<-2||r.bottom>H+2))))out.push({k:'offscreen-btn',msg:'button off screen: '+name(e),ex:strip(e.textContent).slice(0,40)+' @'+[r.left,r.top,r.right,r.bottom].map(Math.round).join(',')});
   if(sa){const ar=sa.getBoundingClientRect();if(r.bottom<ar.top||r.top>ar.bottom||r.right<ar.left||r.left>ar.right)continue}
   /* a button scrolled under a fixed bar of another scroll context is not a layout fault (she scrolls it out) */
   const cx=Math.min(W-1,Math.max(0,r.left+r.width/2)),cy=Math.min(H-1,Math.max(0,r.top+r.height/2));const t=document.elementFromPoint(cx,cy);
-  if(t&&!e.contains(t)&&!t.contains(e)&&root.contains(t)&&scrollAnc(t)===sa&&layer(t.closest('button,[role=button]')||t)===layer(e)&&!/^(IMG|CANVAS|SVG|VIDEO)$/i.test(t.tagName)&&cx===r.left+r.width/2&&cy===r.top+r.height/2){const tb=t.closest('button,[role=button],.btn');if(!(tb&&(tb.contains(e)||e.contains(tb))))out.push({k:'covered-btn',msg:'button covered: '+name(e)+' under '+name(t),ex:strip(e.textContent).slice(0,40)})}}
+  if(t&&!e.contains(t)&&!t.contains(e)&&root.contains(t)&&scrollAnc(t)===sa&&layer(t.closest('button,[role=button]')||t)===layer(e)&&!/^(IMG|CANVAS|SVG|VIDEO)$/i.test(t.tagName)&&cx===r.left+r.width/2&&cy===r.top+r.height/2&&!stuck(t,sa)){const tb=t.closest('button,[role=button],.btn');if(!(tb&&(tb.contains(e)||e.contains(tb))))out.push({k:'covered-btn',msg:'button covered: '+name(e)+' under '+name(t),ex:strip(e.textContent).slice(0,40)})}}
  for(let i=0;i<btns.length;i++)for(let j=i+1;j<btns.length;j++){const a=btns[i],b=btns[j];if(a.contains(b)||b.contains(a)||scrollAnc(a)!==scrollAnc(b)||layer(a)!==layer(b))continue;const r1=a.getBoundingClientRect(),r2=b.getBoundingClientRect();
   const ix=Math.min(r1.right,r2.right)-Math.max(r1.left,r2.left),iy=Math.min(r1.bottom,r2.bottom)-Math.max(r1.top,r2.top);if(ix<=2||iy<=2)continue;
   const sm=Math.min(r1.width*r1.height,r2.width*r2.height);if(ix*iy>.25*sm)out.push({k:'overlap',msg:'buttons overlap: '+name(a)+' × '+name(b),ex:strip(a.textContent).slice(0,30)+' × '+strip(b.textContent).slice(0,30)})}
@@ -113,12 +118,15 @@ function uiScan(opt){const W=innerWidth,H=innerHeight,out=[];const strip=s=>Stri
   /* flip-book leaves (kitBook .kbk-sheet, 3D faces): each leaf is a whole opaque page laid on the others; hit-testing inside preserve-3d is not reliable
      (a leaf under the spread can answer elementFromPoint), so two texts on DIFFERENT leaves are never «text over text» */
   const leaves=(x,y)=>{const a=x.closest('.kbk-sheet'),b=y.closest('.kbk-sheet');return !!(a&&b&&a!==b)||!!(a&&b&&a===b&&x.closest('.kbk-face')!==y.closest('.kbk-face'))};
+  /* E-FIX-4 (R2 rebel-3 «kmchip.kmck Thường tại × Thường tại» on every Fold tab): a decorative COPY of the same words laid on purpose
+     (aria-hidden, e.g. the j93 rank chip cracking in two clip-path halves kmck-a / kmck-b over its own label) is not «text over text» */
+  const copy=(x,y)=>{const ah=e=>!!e.closest('[aria-hidden="true"]');return (ah(x)||ah(y))&&strip(x.textContent)===strip(y.textContent)};
   const seenT=x=>{if(x.__seen!=null)return x.__seen;for(const r of x.rs){for(const [fx,fy] of [[.5,.5],[.15,.3],[.85,.3],[.15,.7],[.85,.7]]){const cx=r.left+r.width*fx,cy=r.top+r.height*fy;if(cx<0||cy<0||cx>=W||cy>=H)continue;
    const t=document.elementFromPoint(cx,cy);if(!t||t===x.e||x.e.contains(t))return x.__seen=true}}return x.__seen=false};
   for(let i=0;i<T.length;i++)for(let j=i+1;j<T.length;j++){const a=T[i],b=T[j];if(a.e.contains(b.e)||b.e.contains(a.e))continue;let hit=false;
    for(const r1 of a.rs){for(const r2 of b.rs){const ix=Math.min(r1.right,r2.right)-Math.max(r1.left,r2.left),iy=Math.min(r1.bottom,r2.bottom)-Math.max(r1.top,r2.top);
     if(ix>3&&iy>3&&ix*iy>.2*Math.min(r1.width*r1.height,r2.width*r2.height)){hit=true;break}}if(hit)break}
-   if(hit&&scrollAnc(a.e)===scrollAnc(b.e)&&seenT(a)&&seenT(b)&&!leaves(a.e,b.e))out.push({k:'text-overlap',msg:'text over text: '+name(a.e)+' × '+name(b.e),ex:label(a.e).slice(0,30)+' × '+label(b.e).slice(0,30)})}}
+   if(hit&&scrollAnc(a.e)===scrollAnc(b.e)&&seenT(a)&&seenT(b)&&!leaves(a.e,b.e)&&!copy(a.e,b.e))out.push({k:'text-overlap',msg:'text over text: '+name(a.e)+' × '+name(b.e),ex:label(a.e).slice(0,30)+' × '+label(b.e).slice(0,30)})}}
  const txt=strip(root.innerText||'');
  if(/%/.test(txt)){const i=txt.indexOf('%');out.push({k:'word',msg:'% shown to the player',ex:txt.slice(Math.max(0,i-60),i+10)})}
  /* odds words: the ladder is READ from the game (KIT_ODDS: top-level const of j79, not a window property), never typed here */
@@ -199,7 +207,7 @@ async function life(job){const t0=Date.now();const R={job,bugs:[],cps:0,ui:{scan
  for(const s of (st.x.bad||[]))bug('number','stat out of range: '+s.replace(/ \w+$/,'').replace(/=.*/,''),s,{save:st.r.lastSave});
  for(const s of (st.x.saveFail||[]))bug('save','inpage6 save round-trip failed',s);
  for(const [k,m,s] of errs)bug('js',k+': '+m.split('\n')[0].slice(0,200),s,{save:st.r.lastSave});
- for(const d of DEV)for(const m of ui[d].__errs)bug('js','['+d+' real page] '+m.split('\n')[0].slice(0,200),'');
+ for(const d of DEV)ui[d].__errs.forEach((m,i)=>{const w=(ui[d].__eAt||{})[i]||{};bug('js','['+d+' real page] '+m.split('\n')[0].slice(0,200),[w.stk,w.at?'@ '+w.at:''].filter(Boolean).join(' '),w.save?{save:w.save}:undefined)});
  for(const [d,m] of (R.uiErrs||[]))bug('js','['+d+' real page] '+m.split('\n')[0].slice(0,200),'');delete R.uiErrs;await memSample().catch(()=>{});
  /* a page whose JS heap or DOM keeps growing over the life (last samples ≥ 2× the early ones and +150 MB heap / +20000 nodes) = a leak finding */
  const grow=(S0,lab)=>{if(!S0||S0.length<6)return;const a=S0.slice(1,4),z=S0.slice(-3);const av=(x,i)=>x.reduce((s,r)=>s+r[i],0)/x.length;
@@ -213,7 +221,7 @@ async function life(job){const t0=Date.now();const R={job,bugs:[],cps:0,ui:{scan
 /* load a save through the title slot (her real load path) */
 async function loadSave(p,save){return p.evaluate(s=>{try{document.querySelectorAll('#kload,#kroul,#kroulw,#klife').forEach(e=>e.remove());localStorage.setItem(SK(1),s);localStorage.setItem('hclh-slot','1');document.getElementById('title').hidden=false;showTitle();
   const btn=document.querySelector('#slots button[data-load="1"]');if(!btn)return 'no load button (save rejected by loadSlot)';btn.click();return S&&S.name?'':'no state after load'}catch(e){return 'throws: '+e.message}},save)}
-async function uiCheck(p,d,cp,job,bug,R){const e0=p.__errs.length;const t0=Date.now();
+async function uiCheck(p,d,cp,job,bug,R){const e0=p.__errs.length;const t0=Date.now();p.__at=cp.at;p.__cpSave=cp.save;
  await p.evaluate(()=>{window.__lt=[];try{if(!window.__ltObs){window.__ltObs=new PerformanceObserver(l=>l.getEntries().forEach(x=>window.__lt.push(Math.round(x.duration))));window.__ltObs.observe({entryTypes:['longtask']})}}catch(e){}});
  const tl=Date.now();const r=await loadSave(p,cp.save);if(r)bug('save','['+d+'] save does not load in the real game: '+r,cp.at,{save:cp.save});
  await p.waitForTimeout(700);{const lt=await p.evaluate(()=>window.__lt.splice(0));const mx=Math.max(0,...lt);(R.ui.load=R.ui.load||[]).push(Date.now()-tl-700);
