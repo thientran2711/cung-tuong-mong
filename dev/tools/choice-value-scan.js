@@ -17,7 +17,7 @@
    exit 1 when any COST-ONLY or DOMINATED row is found (the gate), 0 when clean. Last line = one-line summary. */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const D=require('../test/lib/device');
 const A=process.argv.slice(2);const arg=(k,d)=>A.includes(k)?A[A.indexOf(k)+1]:d;
-const TURNS=+arg('--turns',60),SEED=+arg('--seed',7),OUT=arg('--out',null),MD=A.includes('--md'),PLANT=A.includes('--plant');const FULLSUC=A.includes('--fullsuc');/* every card drawn with Sức at her cap: a «giữ sức» road must still show a gain when Sức +N clamps to 0 (seed-7 find, #4) */
+const TURNS=+arg('--turns',60),SEED=+arg('--seed',7),OUT=arg('--out',null),MD=A.includes('--md'),PLANT=A.includes('--plant');const FULLSUC=A.includes('--fullsuc');const NUMS=A.includes('--numbers');/* robot10-onecore (law 4 + law 11): also run the ROBOT-10 one-core number audit (dev/measure/robot10-in.js auditOpt, ONE rule) on every option built here: a number printed on an option must be the number it applies *//* every card drawn with Sức at her cap: a «giữ sức» road must still show a gain when Sức +N clamps to 0 (seed-7 find, #4) */
 const ROOT=path.resolve(__dirname,'../..');
 /* (3) the demo option pair of the shot scripts: same rule, the owner saw it in a shot (OD 18/11 ~09:20Z) */
 function fixtureRows(){const R=[];const dir=path.join(ROOT,'dev/test');
@@ -41,6 +41,12 @@ function fixtureRows(){const R=[];const dir=path.join(ROOT,'dev/test');
   window.__cvsShowAll=1;if(typeof kitIsEventChoice==='function'){const k0=kitIsEventChoice;window.__cvsK0=k0;window.kitIsEventChoice=kitIsEventChoice=function(m){return window.__cvsShowAll?false:k0(m)}}});
  if(FULLSUC)await g.evaluate(()=>{const s0=showModal;window.showModal=showModal=function(){try{if(S&&typeof sucCap==='function')S.suc=sucCap(S)}catch(e){}return s0.apply(this,arguments)}});
  await g.addStyleTag({content:'#kroul,#kroulw,.kmov{display:none!important}'});
+ /* the audit rule taken from dev/measure/robot10-in.js's own text (ONE source; loading the whole harness file would also wrap start / over / contests) */
+ if(NUMS){const T=fs.readFileSync(path.join(ROOT,'dev/measure/robot10-in.js'),'utf8');const i=T.indexOf('const LAB='),j=T.indexOf('R.auditOpt=auditOpt;');if(i<0||j<0)throw new Error('robot10-in.js: audit rule not found');
+  await g.evaluate(src=>{const R=window.__r10={bugs:[],seen:{},opts:0};const strip=x=>String(x==null?"":x).replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();const words=()=>{};
+   function bug(type,msg,detail){const key=type+"|"+String(msg).slice(0,160);const b=R.seen[key];if(b){b.n++;return}const x={type,msg:String(msg).slice(0,300),detail:detail==null?"":String(detail).slice(0,600),n:1};R.seen[key]=x;R.bugs.push(x)}
+   eval(src+';R.auditOpt=auditOpt;')},T.slice(i,j))}
+ const audN=async tag=>{if(NUMS)await g.evaluate(t=>{const m=typeof Q!=='undefined'&&Q[0];const R=window.__r10;if(!m||!R||!R.auditOpt)return;const n0=R.bugs.length;(m.opts||m.o||[]).forEach(o=>{try{R.auditOpt(o,m)}catch(e){}});for(let i=n0;i<R.bugs.length;i++)R.bugs[i].src=t},tag).catch(()=>{})};
  /* one modal → its options as the kit card shows them */
  const probe=()=>g.evaluate(()=>{const M=document.getElementById('modal');if(!M||M.hidden)return null;const op=M.querySelector('.opts');if(!op)return null;
   const bs=[...op.querySelectorAll(':scope > button')];if(bs.length<2)return null;const T=e=>(e&&e.textContent||'').replace(/\s+/g,' ').trim();
@@ -55,14 +61,16 @@ function fixtureRows(){const R=[];const dir=path.join(ROOT,'dev/test');
    return{t:name.slice(0,80),rows,odds,hint:HN(name),dis:bt.disabled||bt.classList.contains('off')||bt.getAttribute('aria-disabled')==='true'}});
   return{title:title.slice(0,60),pid:m.pid||'',cs}});
  const seen={};const modals=[];
- const record=async(tag)=>{const r=await probe();if(!r)return;const key=r.title+'|'+r.cs.map(c=>c.t).join('/');if(seen[key])return;seen[key]=1;r.tag=tag;modals.push(r)};
+ const record=async(tag)=>{await audN(tag);const r=await probe();if(!r)return;const key=r.title+'|'+r.cs.map(c=>c.t).join('/');if(seen[key])return;seen[key]=1;r.tag=tag;modals.push(r)};
  /* --plant (self-test of the gate, review FAIL 2): three planted bad choices must all be flagged — cost-only, dominated, and a fake-green word (a loss written as a gain) */
  if(PLANT)await g.evaluate(()=>{PEND.__cvPlantCost=()=>({t:'<p>plant</p>',o:[{n:'Plant cost-only',fx:{bac:-10}},{n:'Plant free gain',fx:{duc:1}}]});
   PEND.__cvPlantDom=()=>({t:'<p>plant</p>',o:[{n:'Plant dominated',fx:{bac:-10,duc:2}},{n:'Plant better',fx:{bac:-10,duc:3}}]});
   PEND.__cvPlantWord=()=>({t:'<p>plant</p>',o:[{n:'Plant fake green',fx:{sung:-2},x:'nhường đêm'},{n:'Plant accept',fx:{suc:-3},x:'thân +3'}]})});
+ const NPLANT=A.includes('--numplant');if(NUMS&&NPLANT)await g.evaluate(()=>{PEND.__cvPlantNum=()=>({t:'<p>plant</p>',o:[{n:'Plant num',fx:{sung:2},x:'Sủng +5'},{n:'Plant num ok',fx:{duc:1},x:'Đức +1'}]});/* robot10-onecore 2: a j68 (c6) sure option whose printed win differs from its win block — only the WIN block (__w) can catch it */PEND.__cvPlantC6=()=>{const c=c6('Plant c6',{c:{bac:-5},w:{suc:2}});c.x=c.x.replace(/Sức \+2/,'Sức +6');return{t:'<p>plant</p>',o:[c,c6('Plant c6 ok',{w:{duc:1}})]}}});/* --numbers self-test: one planted lie must be caught */
  /* (1) every PEND dilemma builder */
  const pend=await g.evaluate(()=>Object.keys(PEND));
- for(const id of pend){for(const pp of [{},{q:3,vp:0}]){try{const ok=await g.evaluate(([id,pp])=>{Q.length=0;$('modal').hidden=true;let d=null;try{d=mkP(id,pp)}catch(e){return 0}if(!d||!d.o||d.o.length<2)return 0;pushDil(d,'PEND '+id);showModal();return 1},[id,pp]);
+ for(const id of pend){const e6=/^e68/.test(id)?await g.evaluate(id=>{try{const E=typeof E68I==='object'&&E68I[id.slice(3)];const P=E&&E.pp?E.pp():null;return P&&typeof P==='object'?P:null}catch(e){return null}},id):null;/* robot10-onecore 2: a j68 event with actors needs its own params (E68I[id].pp: who / which item); {} built none of them */
+  for(const pp of [{},{q:3,vp:0}].concat(e6?[e6]:[])){try{const ok=await g.evaluate(([id,pp])=>{Q.length=0;$('modal').hidden=true;let d=null;try{d=mkP(id,pp)}catch(e){return 0}if(!d||!d.o||d.o.length<2)return 0;pushDil(d,'PEND '+id);showModal();return 1},[id,pp]);
   if(ok){await p.waitForTimeout(60);await record('pend:'+id)}}catch(e){}}}
  /* (1b) rank- / condition-gated builders the turns rarely reach (review FAIL 2b): drive them directly.
     MF7 merits (PEND j71m, every family × variant), FV7 festivals (j71f / j71i, every kind × variant), FX7 contests (j71x),
@@ -89,6 +97,7 @@ function fixtureRows(){const R=[];const dir=path.join(ROOT,'dev/test');
  for(let i=0;i<TURNS;i++){await g.evaluate(()=>{try{if(!S||S.dead)start();Q.length=0;endTurn()}catch(e){}});
   for(let k=0;k<8;k++){await p.waitForTimeout(40);await record('turn'+i);const more=await g.evaluate(()=>{const M=document.getElementById('modal');if(!M||M.hidden)return 0;M.hidden=true;if(typeof Q!=='undefined'&&Q.length)Q.shift();return Q.length?1:0});
    if(!more)break;await g.evaluate(()=>{try{showModal()}catch(e){}})}}
+ const NB=NUMS?await g.evaluate(()=>(window.__r10&&__r10.bugs||[]).filter(b=>b.type==='number').map(b=>({msg:b.msg,detail:b.detail,src:b.src||'',n:b.n}))):[];const NO=NUMS?await g.evaluate(()=>window.__r10?__r10.opts:0):0;
  await b.close();srv.close();
  /* ---- judge ---- */
  const num=h=>{const m=String(h).match(/^(.*?)\s*([+\-−])\s?(\d+)\s*$/);if(!m)return null;return[m[1].trim().toLowerCase(),(m[2]==='+'?1:-1)*+m[3]]};
@@ -129,4 +138,5 @@ function fixtureRows(){const R=[];const dir=path.join(ROOT,'dev/test');
  console.log(`CHOICE-VALUE ${co.length+dm.length?'FAIL':'PASS'} · ${modals.length} option modals (PEND ${pend.length} builders + ${TURNS} turns) · COST-ONLY ${co.length-hn.length} · HINT-NO-GAIN ${hn.length} · DOMINATED ${dm.length} · exempt ${exempt.length} · word-only gains ${wordOnly.length} (hand-check, --words) · page errors ${errs.length}`);
  if(PLANT){const want={'Plant cost-only':'COST-ONLY','Plant dominated':'DOMINATED','Plant fake green':'COST-ONLY'};const miss=Object.keys(want).filter(n=>!rows.some(r=>r.opt.startsWith(n)&&r.flag===want[n]));
   const extra=rows.filter(r=>/^Plant (free gain|better|accept)/.test(r.opt));console.log(`PLANT ${miss.length||extra.length?'BROKEN':'OK'} · caught ${3-miss.length}/3${miss.length?' · missed: '+miss.join(', '):''}${extra.length?' · wrongly flagged: '+extra.map(r=>r.opt).join(', '):''}`);process.exit(miss.length||extra.length?3:1)}
+ if(NUMS){console.log('\n| # | source | option text vs effect | where |\n|---|---|---|---|');NB.forEach((b,i)=>console.log(`| ${i+1} | ${b.src} | ${b.msg} | ${b.detail.replace(/\|/g,'/')} |`));const real=NB.filter(b=>!/Plant (num|c6)/.test(b.detail)),pl=NB.length-real.length;console.log(`ONE-CORE NUMBERS ${real.length?'FAIL':'PASS'} · ${NO} options audited · ${real.length} option(s) print a number their effect does not apply${NPLANT?` · plant ${pl?'CAUGHT':'MISSED'}`:''}`);process.exit(NPLANT&&!pl?3:real.length?1:0)}
  process.exit(co.length+dm.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});
