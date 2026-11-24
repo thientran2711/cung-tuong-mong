@@ -1994,3 +1994,4 @@ ROOT-D1 ~00:50Z: ROOMNC trial 3 (405 cr) LOOKED (old|new sheet): ph32/ph33 curta
 ROOT-D1 ~00:52Z: KP23RD batch 1 = 15/107 (page ?v=2; heroine rose-pink by text, to-giac-truoc-ht fixed) — NOT looked/sent yet → successor. ctx ~25 % (roll ~30 %) → ROLLING: takeover dev/handover/TAKEOVER_FOREMAN_C_ROOTD1.md; opening ROOT-D2 as my child (depth 2). No schedules owned.
 ROOT-D1 ~00:53Z: ROLLED → Foreman C = ROOT-D2 session_01D3E3NXZ5xb4cXfp8zUWaMA (depth 2). ROOT-C9, ROOT-C1, KP23RD, ROOMNC, RANKROOM told. ROOT-D1 stops.
 - FROM MAIN 114 (00:54Z 24/11): LIVE = bba42773 (odds-no-thanh: odds meaning text no longer promises «thành»).
+ROOT-D1 ~00:55Z (after roll, as parent): D1-ROOMNC rolled at 27 % → successor D1-ROOMNC-2 session_01D3E3NbYh1M8Bc3mcaikGpJ (reports to ROOT-D2); old archived. ROOMNC spend 3 105 cr (23 gens), batch 2 not looked, 4 batches left. Told ROOT-D2.
