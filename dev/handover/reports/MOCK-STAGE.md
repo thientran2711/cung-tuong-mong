@@ -1,4 +1,6 @@
 # HANDOVER KK18 → KK19 (24/11 ~11:20Z; KK18 ctx 60 % = hard ceiling, START ~2 %; depth 3; MAIN 122 opens the successor)
+KK19 = session_01V1ZZH551R5eFMgZWLvawik; START_CTX ~0 % (get_session reads 0 of 1M; estimate ~2 %) → roll at ~27 %, ceiling 60 %; depth 7 (limit 8); MAIN = 122 session_01V1ZZH1b6ZAtL3fUbRJcp9p. PRIORITY #1 CHECK: OD L1103/L491/L1090, dim rule 24/11, optfit L2134/L2211/L2212 | main KIT.md §95-97 | review/kit-* (9+) | claims KK18 → KK19. Read handover; waiting for Foreman B FAIL lists; dim + optfit builds only on sếp's GO via MAIN.
+
 PRIORITY #1 CHECK: KIT.md §95-§97 + review/kit-* below | claims KK18 → KK19.
 STATE (all branches from origin/main, scratch worktrees /home/user/wt/kkm (build+tests), /home/user/wt/kkb (= main for before/after), shots /home/user/wt/kk-shots (scratch, never git)):
 1. review/kit-music 0ff57cb0 — KIT §96 music keys (B LAND READY kit-music-r1 475df8ba, in LC10 queue). 37 mp3 on the CDN (all 200). Open: iPad + presentation.js not run, «đại lễ tế Giao» category not wired (key daile exists), vocals unchecked.
