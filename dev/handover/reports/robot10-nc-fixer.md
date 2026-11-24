@@ -108,3 +108,26 @@ Fix: (1) jmort: initAll runs before ser — nobody is ever saved without a lifes
 Tests: mortality.js ok · save-slots 28 ok · coop-e2e 142 ok / 0 FAIL · quickcheck PASS.
 Stacked on review/robot10-nc-fix-1-rv ad3fa9be (LAND READY), which carries LIVE 4a8c627b.
 SẴN SÀNG KIỂM review/robot10-nc-fix-3 449cbe0848953be0f9f935bc8dffe2b4ef2c8e4b (BIG: save/rules) · quickcheck PASS (old save ok; render 201/278, tab 570/440, buổi 2358/3880 ms) · core gates PASS.
+
+## § REVIEW robot10-nc-fix-3 — PASS (reviewer session_01964izBwKVSW8D2Fjhmpn21, opus BIG save/load, 24/11 ~03:50Z)
+PRIORITY #1 CHECK ('hhBind|emoSeen|duodo-focus|r10-rt' + 'ldSeeded|initAll|deser='): OD 0 (OD:L44 anti-reroll = closest rule) | ledger 0 | claims D robot10 rows | main jmort initAll at deser, 36 deser wrappers | review/* robot10-nc-fix-3 (target), nc-fix-1-rv (base, now in LIVE) — reused r10-load-twice.js, r10-rt.js, repro saves.
+START_CTX ≈ 8 %. Land branch: review/robot10-nc-fix-3-rv **e6b841fd06850ca2d11173ac19362d47a6f199ee** = target 449cbe08 + merge LIVE 1ddbe155 + merge LIVE 24883e24 + merge LIVE b7598e72 (index.html/sw.js rebuilt by build_site.sh, assets.json = LIVE). Carries nc-fix-1-rv ad3fa9be (already in LIVE). No code change by the reviewer.
+Code read: jldseed is the LAST `deser=` in the built index.html (outermost, textually and at runtime: no later/lazy re-wrap). run() = try/finally; the title-click window gives the dice back by setTimeout(0) whatever the click does; nested deser (co-op lens flip jcoopthinc:223) does not re-seed. jmort ser hook: people() = world only on the host + her own people, so a thin guest never rolls world lifespans (host owns them).
+| check | main (LIVE) | fix (on the merge) |
+|---|---|---|
+| (a) Math.random restored: throw inside deser (S=null), throw from an uncaught wrapper (rkBase), nested deser inside deser, title click whose deal() throws, ldSeeded run twice | — | restored on every path · native again after the click task · same seed = same stream · after load two dice differ (native) |
+| r10-load-twice, 12 robot saves 001-012 | 12/12 FAIL (1-76 paths) | 15/15 ok incl. proof-save-001, save-B, save-C (0 paths) — run on both merges |
+| old saves: save 009 as v3 / v4 / v5 | — | load, 0 paths twice |
+| r10-rt 15 saves (round1/round2) | — | 15/15 ok, 0 / 0 |
+| mortality.js · save-slots.js | — | ok (0 page errors) · ALL OK |
+| coop-e2e full (live Worker, incl. rejoin + R10RV guard) | — | 142/142 |
+| ser() cost, biggest save 004 (initAll in ser) | 22.9 / 25.3 ms | 23.5 / 24.8 ms (same) |
+| quickcheck (alone; a first run beside load-twice gave buổi 5288/1971 = box noise) | — | PASS · render 287/271, tab 538/550, buổi 3381/2966 ms · core gates PASS · on the final b7598e72 merge: PASS · render 292/313, tab 530/563, buổi 1121/1447 ms; r10-load-twice 15/15 (also PASS on the 24883e24 merge) |
+(b) Design: the seeded window = deser + the title click task (deal → the act hand, showModal, render, resumeMG → a resumed mini-game board). Effect: a reload no longer re-deals the hand or re-rolls a resumed mini-game; nothing re-rolls by reloading. No owner rule asks for reload-to-reroll; OD:L44 (anti reroll-by-death) and law 6 point the same way. «Kiếp mới» (data-new) is not seeded; all in-play dice stay native. Seed = name/date/turn/buổi/age/logSeq/il.seq/R count/bạc/sủng — any act moves logSeq, so a later save seeds differently. No narrowing needed.
+(c) Co-op: thin guest world is read-only; guest ser→initAll touches only her own people; coop-e2e 142/142 incl. «after rejoin» same names/date/consorts/Hoàng hậu row on both seats.
+(e) FAMILY (law 11) — dice still thrown on FIRST TAB OPEN after a load (outside the seeded window; once drawn they are saved, so not a save→load drift, but the same file loaded twice + tab opened gives other values). Probe: load 009 / 001 twice, click every tab, diff ser:
+- court tab: figPick (men S.men[i].fid, S.court.tq/ksp/ped.fid, S.fidUsed) and kidId (R[i].kids[j].kid, S.kidUsed) — j66/j73 lazy portrait pick.
+- staff tab: drawF (S.thO.staff[i].fc, R[i].staff[j].fc, S.fseen) — j17 lazy face pick.
+- (art tab S.rcpK/pmL, men S.disK/likK/mindK, kvo .net = knowledge fills, not dice.)
+Suggest (fixer / Foreman D, not blocking): give portrait/face/kid identity when the person is made (or in initAll-style pass inside the seeded load), so a person's look exists before anyone sees her (law 6b/6c). Faces nobody has seen yet → nothing she can notice today.
+Laws: 1-3 untouched · 4 no number made at load · 5 untouched · 6 reload re-rolls nothing; lifespans exist from the save on · 7/9/10/12 no UI/wording change (no shots) · 11 family listed above · 13 check line · 14-18 no rule changed.
