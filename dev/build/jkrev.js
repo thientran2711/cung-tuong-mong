@@ -83,6 +83,7 @@ window.kitLose=kitLose;window.kitCoins=kitCoins;
 .krevl{position:absolute;left:50%;top:75px;width:300px;height:300px;margin:-150px 0 0 -150px;border-radius:50%;pointer-events:none;
  background:radial-gradient(circle,color-mix(in srgb,var(--gc) 80%,#fff) 0,color-mix(in srgb,var(--gc) 45%,transparent) 32%,transparent 68%);animation:krevBurst calc(var(--krise)*2) ease-out both,krevBreath 2.4s ease-in-out calc(var(--krise)*2) infinite}
 /* owner 24/11 flight bug #4 «to hơn nữa»: the item picture and its words of EVERY reveal (kitGain, each item of kitReward) are bigger: picture up to 340 px / 46 % of the page height (was 260 / 36 %), name 1.5rem, line under it 1rem; one size for all of them */
+body:has(.kfgain) .kmov:not(.kfgain),body:has(.kfgain) #modal:not([hidden]){visibility:hidden!important}/* ONE overlay at a time (owner 24/11 flight): while an item reveal is up, every other overlay / dialog is hidden (not removed: it comes back when the reveal closes), so nothing ghosts through the dim */
 .krev>.kitem-xl:not(.kitem-fr){--isz:min(340px,calc(46*var(--kvh,1dvh)))}
 .krevl{top:calc(var(--krevh,340px)*.5);width:min(460px,92vw);height:min(460px,92vw);margin:calc(min(460px,92vw)/-2) 0 0 calc(min(460px,92vw)/-2)}
 .krev{--krevh:min(340px,calc(46*var(--kvh,1dvh)))}
