@@ -2940,3 +2940,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (08:02Z) KK18 no-prewarn audit (reports/no-prewarn-audit.md 9a200c77): GO part A (3 game confirms off, review/kit-noprewarn). KEEP system confirms + world-info (MAIN view, law 16 until she says otherwise). Part B option-card rows (Mất/Kèm/Được/Gợi ý/có rủi ro, KIT §6) → asked sếp (law 16), KK18 waits.
 - (08:10Z) sếp asked where she said the stand-in was too faint — she did NOT; VEIL-1 changed §59.1 opacity on its own reading of her reason and MAIN relayed it as hers (MAIN mistake). Law 16 → VEIL-1 told to REVERT r4 opacity (branch back to fe8f6e3d behaviour); old vs stronger shots kept as an option only.
 - (08:12Z) VEIL-1 reverted → SSK 469d7985 (= fe8f6e3d tree, §59.1 .55/.3). B reviewer told.
+- (08:15Z) OWNER ~08:30Z real: C works on as soon as art ends → E70 road dialogue scenes moved E → C (whole job).
