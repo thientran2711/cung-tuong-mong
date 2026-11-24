@@ -1,0 +1,45 @@
+# SERVANT-TRUST — every act toward another person's servant has a relationship effect (Foreman D, worker session_01D3E3NYMzUyzf9KBhvBCtFW, 24/11)
+
+PRIORITY #1 CHECK ('lòng tin cung nữ nghi ngờ chủ tử khác' / 'svTouch' / 'chủ tin' / 'bất kính chào chủ tử'): OD rows 24/11 ~07:58Z, ~08:08Z, ~08:12Z real (verbatim, read in full) | ledger 0 | claims: none | main ac4790f0: none — REUSED: «Chủ tin» per servant (jtin.js tinOf/tinAdd, kit bars «<chủ> tin cậy» already on every servant card), ownerOf (j10), affAdd/oanAdd/evA + deedCap (jtruth: proof only up to real deeds), greetName (jgreet, the ONE greeting function), servant nết via netQ/nq, servDo "doi" | review/*: none.
+Order: FOREMAN_D_STATUS «ORDER FROM MAIN 119 (24/11 07:58Z)» → brief dev/handover/briefs/D-servant-trust.md. PLAN line posted first (FOREMAN_D_STATUS, b26c549f).
+
+Branch **review/servant-trust** from review/net-build ed1be95a. Commits 7e578d16 (build) · 42db050c (one-core khắc, last two family sites). **Final sha 42db050c4451e6521fcc357911862511cda31058.**
+
+## 1. What was built
+**ONE function for the whole family — `svTouch(actor, servant, kind)` (new dev/build/jsvt.js, assembled after jagwhy1.js).** Runs only when the servant really ENGAGED (talked / took the bạc / took the threat / became eyes). Same code for her, the NPC and NPC↔NPC (law 1); a servant who acts does it for her own master (svtWho).
+- **Her master may come to know** (roll `svtSeenO` = BAL.svt.seen: base + master's eyes × eye + near when the master stands at the same place − covert for bribe/threat/tm/plot/friend): **Chủ tin** in that servant drops (`tinAdd`, the existing jtin store; per kind BAL.svt.tin) and the master's **thiện cảm toward the one who went behind her** drops (`affAdd`, per kind BAL.svt.rel).
+- **The servant may let slip a REAL secret** (law 6a): only when the master has schemed / done a deed since this servant's last slip or keeps a tư tình, and only while `deedCap(master) > chứng cứ already held` → `evA(asker, master, BAL.svt.leak.ev)`. No secret → no chứng cứ (test). Odds BAL.svt.leak: base + (100 − lòng) × loyK + Nhiều lời / Tham + / Trung −.
+- Once per asker × servant × kind × buổi (wrappers never stack).
+**The open talk — `svTalk(actor, servant)`** (new act, the brief's «another master talks to HER servant»):
+- **Refusal first** (OD 08:12Z): odds `svtRefO` = BAL.svt.ref: base + (lòng − 50) × loyK + (Chủ tin − 50) × tinK + nết (Trung / Nhát + ; Nhiều lời / Tham −), clamped [5, 90]. Refused → **nothing changes at all** (test), her line: «… cúi đầu thưa: phận tôi tớ cung …, không dám nói chuyện riêng với người cung khác.»
+- Talks → her gain: she learns one nết of that master (learnTrait, no double notice) or «chỉ kể những chuyện ai cũng biết»; then svTouch(…,"talk") (suspicion + possible slip).
+- Her buttons (KIT parts only — the same `pbtn` group of the servant card j15 «Giao thiệp», the same row button of the staff list j10 «Kẻ hầu cung khác»): **«Hỏi chuyện» · BAL.svt.k khắc**. No odds word, no warning of what follows (OD 08:08Z); the consequence shows only after, in words.
+- NPC side (law 1): each month every NPC mistress may (BAL.svt.npc.talk) have a servant of her target talked to — HER servants included; she is told after only when it reaches her («Có kẻ bẩm: … kéo riêng … ra nói chuyện, … không từ chối. Từ đó ngươi bắt đầu nghi …»).
+**BẤT KÍNH (OD ~07:58Z)**: an OPEN talk with a servant while her master stands at the same place (agent record knAt, same khắc) and was not greeted this buổi → master's oán + (BAL.svt.greet.oan) and thiện cảm − (greet.aff), × 1.5 when the master outranks the speaker, × .5 when below. Both ways: «X đứng ngay đó mà ngươi không chào, lại gọi thẳng Y — X cho là ngươi bất kính.» / «X chẳng chào ngươi một tiếng mà gọi thẳng Y — thật là bất kính.» Greetings are remembered per buổi by wrapping greetName (every greeting site). Covert acts (Mua chuộc, Dọa tố, Cài tai mắt, j70 plots) skip the greeting but are seen less (test).
+**A low Chủ tin has a REAL effect**: an NPC master returns a servant she trusts under BAL.svt.tin.out to Nội vụ phủ (servDo "doi", BAL.svt.tin.outRoll a month); her own she decides herself (Đổi người). Whole-group fix found on the way: the jtin trust gate on the sent servant (`bestSent`: Chủ tin ≥ BAL.tinLv.send) was bypassed for HER by the j70 busy wrapper and for everyone by the jptime busy substitute → both now keep the gate (her named runner S.runner stays her own choice).
+**Her as a servant (cung-nữ road, law 1)**: when another master bribes or threatens HER (j42 cnvBribeOpts / cnvBlackOpts), her own mistress may come to know → S.tin (Chủ tin) drops, line after.
+**Numbers**: all in `BAL.svt` (jbal2.js end, commented; law 4). one-core-guard: the «Hỏi chuyện» khắc reads BAL.svt.k.
+
+## 2. Whole family (law 11) — scan `python3 dev/measure/svt-scan.py`
+Every site in dev/build/j*.js where an act makes another person's servant engage (`spyFor =` or a call of bribeServ / threatServ / tmTake / tmAsk / svTalk):
+| | BEFORE (net-build ed1be95a) | AFTER (this branch) |
+|---|---|---|
+| sites | 29 | 31 (+2: her «Hỏi chuyện» handler, NPC monthly talk) |
+| reach a relationship effect on the servant's MASTER when the servant engages | **0** (only refusals told the master: bribe «mách chủ», tmRefuse) | **26** (11 inline svTouch/svTalk · 4 inside a wrapped function · 11 call a wrapped function) |
+| exempt (with reason) | — | 5: plantServ (her own servant moves house), jagknow old-save seeding, 3 × jcoopworld state sync |
+| UNWIRED | 29 | **0** |
+Sites wired: bribeServ j29 (her «Mua chuộc» j10/j15/jsgame Mặc cả, NPC servMonth j10:88, jagacts2 day plan, jmline mlHit), threatServ j10 + par3 cnvBlack (jagacts3:183), tmTake/tmAsk jagknow (+ j7, jagacts3:27), tmAsk best (jagknow:382 inline), j70 plot accomplice (inline), j24 svDefect + svSell (inline), j42 her-as-servant bribe/threat (inline), jky spy (inline), jtsb bribe (inline), j10 servant↔servant friend talk (inline, no second chứng cứ). Acts that already carried their own master effect stay as they were: jmline beat / frame (oán + chứng cứ), refusals (mách chủ).
+
+## 3. Tests
+- dev/test/servant-trust.js (new): **48/48 PASS, 3 runs in a row** (deterministic: odds forced through BAL.svt, not Math.random sequences) — refusal = no change; seen → Chủ tin + thiện cảm drop; real slip only with a real deed (deedCap); no secret → no chứng cứ; once per buổi; law 1 (NPC → her servant, she is told after; NPC ↔ NPC); bất kính and greetName; covert skips greeting, seen less; wrappers; NPC returns the distrusted servant; bestSent gate; her button costs BAL.svt.k khắc, after-line has no number/% (kit relation read-out excepted); old save without svtG loads; 8 weeks played, 0 page errors.
+- npcmind-check (main ac4790f0 save → this build): ERRS [], exit 0.
+- one-core ×3: one-core-guard PASS (inline 3112 < baseline 3592; first run caught my typed «2 khắc» → BAL.svt.k), one-core-text PASS, one-core-bind PASS (1590 prints, 0 mismatches).
+- coop-e2e: **142/142 passed**.
+- two-way-oldsave (main save → new build): ok true, errs [].
+- quickcheck 42db050c vs live ac4790f0: **QUICKCHECK PASS** · old save ok · core gates PASS · perf median new/live render 300/261 ms, tab 596/616, buổi 1689/1539, tasks>200ms 22/25.
+- svt-scan: 31 sites, 0 UNWIRED (before 29 / 29 unwired).
+- Shots (looked at 3×, Fold 755x1000 + iPad 1180x820, real art, SHOTS OK no overflow): CDN img/_review/servant-trust/ — *-svt-card.jpg (another house's servant card, «Giao thiệp: Hỏi chuyện · 2 khắc», no warning) and *-svt-after.jpg (after the tap: kit KẾT QUẢ card shows the bất kính / thiện cảm loss only after). Wipe after verdict: python3 dev/site/cdn_sync.py --wipe-review servant-trust.
+
+## 4. Notes / not done
+- The RING / «vòng nhóm» place UI (OD ~07:52–08:05Z) is design-first and NOT decided — not built here. svTalk + svtEtq are the rule functions that UI will call (tap a follower without greeting her master = bất kính; a covert option = svTouch with a covert kind).
+- NPC↔NPC effects are silent to her unless they reach her household (witness rule unchanged).
