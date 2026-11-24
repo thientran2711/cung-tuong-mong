@@ -1431,4 +1431,4 @@ NET THRESHOLDS research + audit + proposal (opus, no build; ORDER MAIN 116 06:02
 | REVIEW robot-coop-fix-1 889803dc + harness robot10-coop 2bf6094f (opus BIG co-op; briefs/b-robot-coop-fix-1-review.md) | review/robot-coop-fix-1-r1 + review/robot10-coop-r2 | B | session_01N1tNP2DcFcegtmGUCGYXHH | RUNNING | 24/11 06:44Z |
 | MAP-FIX-2 map-tap-go + map-portrait LIVE fails (opus) | review/map-fix-2; reports/map-perf.md | MAIN 118 | session_01V1ZZH1VfNwzBQ4xJTkMJxY | RUNNING | 24/11 07:48Z |
 FACE90 PUBLIC no-login CDN page (sonnet; owner ask 24/11 ~06:40Z via D ROOT; briefs/D-face90-public.md) | CDN share/face90/; reports/face90-public.md | session_01D3E3NbZsh6G3yT2daRJV3R | CANCELLED (ROOT does it; archived) | 24/11 07:00Z (Foreman D depth 1)
-REVIEW palace-distance 9e655c3e (opus BIG; briefs/D-palace-distance-review.md) | review/palace-distance-rv | (opening) | RUNNING | 24/11 07:02Z (Foreman D depth 1)
+REVIEW palace-distance 9e655c3e (opus BIG; briefs/D-palace-distance-review.md) | review/palace-distance-rv | session_01D3E3NZ7GVBNYBajYppZbwY | RUNNING | 24/11 07:02Z (Foreman D depth 1)
