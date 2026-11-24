@@ -1122,3 +1122,28 @@ No clamp mechanism found. Both seats adopt the ONE merged state whole (jcoopworl
 - coop-worker.yml runs on `paths: coop/worker/**`: a BAL.personRange / BAL.kh change landed WITHOUT the regenerated ranges.gen.js triggers no Worker test (assemble.py regenerates, the lander must commit it). Add dev/build/jbalpr.js and dev/build/jbal2.js to the workflow paths so gen --check runs on such a land.
 - statSet now also clamps bac ≥ 0 and apply clamps S.ghen / S.an when present: no caller passes bac / ghen / an to statSet; scan shows ghen/an sites 0…100 → no behaviour change found.
 - Game-wide typed 0/100 at the 863 sites remain (scan-guarded inside the table) — outside this branch.
+
+## REVIEW robot10-onecore
+PRIORITY #1 CHECK: OD:L1267 (one core), 18 laws (4 / 11 / 2 / 3) | main dev/test/choice-value-scan.js, dev/measure/robot10-in.js | review/robot10-onecore 4d063689 | claims B fixer #5 4vn55dxG. Reviewer = small sonnet session_01N1tNP58gRW5Kr3V1fXZBZN. Worktrees rv-bare (4d063689), rv-merged (newest LIVE), rv-revert (planted regression), rv-main.
+**Verdict: PASS + 1 small fix by the reviewer** — merged head `5d4f722fdc0490056c5a71e03f6a15c4b4d9fd69` (= 4d063689 + reviewer fix 12866d32 + LIVE 502c48c9), pushed review/robot10-onecore-rv.
+1. Diff scope: `git diff --stat $(merge-base origin/main review/robot10-onecore) review/robot10-onecore` = dev/measure/robot10-in.js (+11/−1) + dev/tools/choice-value-scan.js (+16/−3). Nothing else. Merged head vs origin/main 502c48c9: same 2 files, 23+/4−. OK.
+2. Hand-play (own node/playwright script, seed 7, game built index.html, shown text vs applied delta vs BAL):
+| option | shown | applied | BAL |
+|---|---|---|---|
+| «Bạc lạ» → Nhận bạc, làm tai mắt (j42 cnvBribe, servant) | «mỗi tháng Bạc +8» + kit fx Bạc +20 | +20 now (apply fx), then 12 × srvMonth with spy = 132 vs 36 without → exactly +8 each month | coopBribe.pay 20, ag.why.srv.pun.spyPay 8 — both true, NOT a lie (recurring ≠ sure fx) |
+| «Thay hết nước, đồ ăn» (j68f poisonedFish) | Sức +6 · cost Bạc −5 | suc +6, bac −5 | base fishSwapSuc 2 / fishSwapBac −10, rescaled by jbac bacFairList (BAL.bacFair, law 2) → printed = applied, derived from BAL |
+| «Cho thái y nghiệm độc» win / loss | thành: Tâm cơ +2 · hỏng: Bạc −5 · cost Bạc −10 | win: bac −10 tamco +2 · loss: bac −15 | consistent (cost −10, loss extra −5) |
+| 1111 e68 options played (E68I all events, win path) | 400 with printed numbers | applied delta equals printed (or printed − fx) on all | 0 mismatches (one earlier run had 1: «Cáo mệt xin hôm khác» Sủng −2 on empChess, did not repeat on 2 further runs → Sủng clamp by the run's random state, note only) |
+| «Nghỉ ngơi một lát» Sức +6 (j76stand) | Sức +6 | not applied via chooseM (j76 acts run through the act path, not the PEND modal) → not verified by hand; BAL.restLatSuc = 6 = printed text; covered by scan audit only | — |
+Claim «game shows no lie, the robot misread»: CONFIRMED for «Bạc +8 mỗi tháng» (recurring) and «Sức +6» (a rescaled win; the old robot compared the win with the cost only). 0 page errors.
+3. Plant test (law 4):
+| run | result |
+|---|---|
+| bare 4d063689 `--numbers --numplant --turns 2` | both plants in table (#1 Plant num Sủng +5 vs sung=2; #2 Plant c6 Sức +6 vs suc=2), 439 audited, PASS |
+| REVERTED c6 hook (robot10-in.js without `o.__w` / `o.__l`) with the fixer's scan | table shows ONLY the num plant, c6 plant gone — but the line still said «plant CAUGHT» (exit 0). **FAIL row, fixed by reviewer**: `pl` counted any plant → one caught plant hid the missed c6. |
+| REVERTED c6 + reviewer fix 12866d32 | «ONE-CORE NUMBERS PASS · 443 audited … plant MISSED c6», exit 3 (correct) |
+| clean + reviewer fix | «plant CAUGHT (num + c6)», exit 0; on final merged head 5d4f722f: 439 audited, exit 0 |
+Reviewer fix (12866d32, scan only): verdict needs BOTH `Plant num` and `Plant c6` in the table.
+4. Runs: `choice-value-scan.js` NO args (60 turns) on merged: ONE-CORE not run (needs --numbers), CHOICE-VALUE FAIL (see 5). WITH args `--numbers --turns 60` (merged, before fix): ONE-CORE NUMBERS PASS · 434 options audited · 0 lies. `--numbers --numplant --turns 2`: above. `node dev/measure/robot10.js` NO args = usage list, exit 0; `node --check robot10-in.js` ok. (A full robot10 life is the fixer's A/B harness, 60-turn scan covers the audit rule.) QUICKCHECK (alone, nothing else running, merged on LIVE eae255e2 + fix): **QUICKCHECK PASS** · 244 s · open 2156 ms · old save ok · perf (new/live) render 296/237, tab 510/544, buổi 1714/2773 ms, tasks>200ms 25/26 · core gates PASS. (Not repeated after the final merge of 502c48c9: that merge changed no file of this branch.)
+5. OPEN NOTE FOR MAIN (law 2/3, pre-existing, NOT a branch fail): `node dev/tools/choice-value-scan.js` (no args) on BARE origin/main eae255e2: CHOICE-VALUE FAIL · COST-ONLY 1 · DOMINATED 28 (this branch: 1 / 22–32, counts vary by turn draw). Rows by source on main: fv7:newyear 16, fv7:nguyentieu 4, fv7:phoenix 2, fv7:thanhminh 2, fv7:vulan 2 (festival family «Chuẩn bị kỹ rồi dự thi» vs «Ghi tên, bỏ bạc mời thầy kèm trước»: same effect, one costs more), fx7:sac 1, fx7:tai 1 (contests), COST-ONLY 1 = fixture dev/test/dialog-fixed.js (a demo option pair, not the live game; the fixer's note called it a festival row). → festival / contest owner (law 2/3, fix the whole fv7 + fx7 family).
+6. Law check: 4 one core PASS (audit rule now reads the c6 win/loss blocks; recurring amounts skipped on purpose); 11 whole family (c6 + PEND + j68 events 1111 played) PASS; 2/3 not touched by this branch (note 5); 7 wording: no player text changed; 9/10/12 no UI touched.
