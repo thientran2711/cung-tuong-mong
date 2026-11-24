@@ -175,3 +175,15 @@ Semantic check of the merge: branch code reads only BAL.ag.why.wd.poor (kept on 
 No red → no LOAD-COMPARE needed.
 
 **LAND READY law1-audit-r1 3d450d3d1e0391a0cdaf44486ddcb3effadb2fa1 FOR MAIN 123 (re-merge on c6c3ca76)**
+
+### re-merge chase 15b5e1ff → 22f1e491 (MAIN 124 order via Foreman B; same reviewer)
+LIVE moved four times during the run; each newest origin/main merged into review/law1-audit-r1 (every time only index.html / sw.js conflicted → rebuilt with assemble.py + build_site.sh; no game code conflict): 15b5e1ff robot-coop-fix-1-r2 (tests + coop worker) → **3c0af1f7**; d0ed42e4 kit-sqopt → **75bb35b2**; eae255e2 kit-mgboardof → **c407de97**; 22f1e491 kit-toilring → **b01cc88076b4bc4f30cd093489c2e555fca6dd95**. Full set ALL GREEN on each of 3c0af1f7 / 75bb35b2 / c407de97. Final head b01cc88076b4bc4f30cd093489c2e555fca6dd95 (FF from 22f1e491):
+- `node dev/test/law1-audit.test.js` → `law1-audit: 13/13 PASS` · `… index.html` → `law1-audit: 13/13 PASS`
+- `node dev/tools/role-parity-scan.js index.html --fam` → `LAW-1 FAMILIES: rows 22 · GAP 4` (unchanged)
+- `node dev/test/role-parity.test.js` → `ALL PASS` · `… index.html` → `ALL PASS`
+- `node dev/test/one-core-guard.js` → `PASS: one core …` · `node dev/test/undef-scan.js` → `PASS: no unguarded undefined identifier (301 names checked)`
+- `node dev/test/coop-e2e.js <out>` (Fold hosts) → `142/142 passed` · `COOP_SWAP=1 node dev/test/coop-e2e.js <out>` (iPad hosts) → run 1 `141/142` (only row: «fold: no page errors» = CDN CORS block on fig-consort-c15-t2-a18.webp from ctm-img workers.dev — network, not code) · run 2 alone `142/142 passed`
+- `bash dev/tools/quickcheck.sh` (alone) → `QUICKCHECK PASS · 189 s · open 1796 ms · old save ok · perf (median of 3, new/live): render 220/231 ms, tab 401/417 ms, buổi 1023/985 ms · core gates PASS`
+LIVE since moved 22f1e491 → 8eceeef9 kit-titleplate → 284e0d08 kit-noprewarn → 502c48c9 kit-mapgo: all UI-only kit lands (jmapc / jmgcal / jsgame / jtoil / KIT.md + their tests) → per MAIN 125 rule: **self-merge at land OK (UI-only gap 22f1e491→502c48c9)**.
+
+**LAND READY law1-audit-r1 b01cc88076b4bc4f30cd093489c2e555fca6dd95 FOR MAIN 124 (re-merge on 15b5e1ff, newest merged 22f1e491)**
