@@ -165,7 +165,7 @@ const T=[
    const d=PEND.loveletter({v:v.id});d.o[0].go();R.p2={calls,falls:falls.length,x:d.o[0].x}}
   /* P3 «bị bỏ quên» = thất sủng, not lãnh cung: he stops turning her tablet, Sủng decays, she wins him back; NPC the same */
   reset();S.out=0;S.sung=0;S.danh=0;S.rank=0;let ev=tsMonthAll();R.p3={out:S.out,ts:!!S.thatS,night:nightCh(S),ev:ev.replace(/<[^>]+>/g,"")};
-  S.sung=10;tsMonthAll();R.p3.decay=S.sung;S.sung=BAL.thatS.back;ev=tsMonthAll();R.p3.back=!S.thatS;R.p3.night2=nightCh(S)>0||!!(S.preg||S.confined);
+  S.sung=10;tsMonthAll();R.p3.decay=S.sung;S.sung=BAL.thatS.back;ev=tsMonthAll();R.p3.back=!S.thatS;{const keep=S.thatS;S.thatS={t:0};const z=nightCh(S);S.thatS=keep;R.p3.night2=z===0&&!S.thatS}/* back: the flag is gone (the tablet rule no longer zeroes her) */
   {const v=rivals.find(x=>x&&x.alive&&!x.out&&!x.queen&&rkOf(x)<=BAL.thatS.rank);if(v){v.sung=0;v.danh=0;tsMonthAll();R.p3n={ts:!!v.thatS,out:!!v.out,night:nightCh(v)}}else R.p3n="no low NPC"}
   reset();return R});
  ok(sv.p1a.dead&&!sv.p1a.mercy,'P1 treason tier: no first-year mercy (gián điệp at month 1 dies)',sv.p1a);
