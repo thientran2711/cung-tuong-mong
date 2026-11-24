@@ -1273,7 +1273,7 @@ REVIEW robot10-reco ORDER #6 (sonnet SMALL test-only; briefs/D-robot10-reco-revi
 | THIN ENGINE #4 (opus): P6 world + j70 (API P6 first → writers), then P7 festivals, P8 origin roads | review/thin-p6; reports/thin.md | B (ORDER MAIN 113 22:36Z) | session_01N1tNP5RyEw6T1AADGb6c75 | RUNNING | 24/11 01:23Z |
 | THIN P6-SEEDS-A (sonnet writer): content/thin/wseeds_a.md | dev/handover/content/thin/wseeds_a.md; reports/thin.md «## P6-SEEDS-A» | B | session_01N1tNP2MwoWYuxG1JLroPAh | RUNNING | 24/11 01:31Z |
 | THIN P6-SEEDS-B (sonnet writer): content/thin/wseeds_b.md | dev/handover/content/thin/wseeds_b.md; reports/thin.md «## P6-SEEDS-B» | B | session_01N1tNP38TUgspHMN7kQ9yDq | RUNNING | 24/11 01:31Z |
-| THIN P6-SEEDS-C (sonnet writer): content/thin/j70seeds_a.md | dev/handover/content/thin/j70seeds_a.md; reports/thin.md «## P6-SEEDS-C» | B | session_01N1tNP6xLdB8SZqv3mTiHkT | RUNNING | 24/11 01:31Z |
+| THIN P6-SEEDS-C (sonnet writer): content/thin/j70seeds_a.md | dev/handover/content/thin/j70seeds_a.md; reports/thin.md «## P6-SEEDS-C» | B | session_01N1tNP6xLdB8SZqv3mTiHkT | DONE 3c105486 | 24/11 01:31Z |
 | THIN P6-SEEDS-D (sonnet writer): content/thin/j70seeds_b.md | dev/handover/content/thin/j70seeds_b.md; reports/thin.md «## P6-SEEDS-D» | B | session_01N1tNP5f3nrarcvuLRpkNPG | RUNNING | 24/11 01:31Z |
 | THIN P1c (sonnet): every other remaining mini-game kind (sg_/thu_/tuoi/exam…; full 39-kind list first) | review/thin-p1c; reports/thin.md «## P1c» | B | session_01N1tNP43Y5prdNW2dvC5otW | RUNNING | 24/11 00:14Z |
 | REVIEW thin-p1 r1 (sonnet, BIG checklist) of review/thin-p1 b43fe174 (9 kinds; land after thin-p0) | review/thin-p1-r1; reports/thin.md «## REVIEW thin-p1 r1» | B | session_01N1tNP5XaLHAQvcsGkVxdj6 | RUNNING | 24/11 00:14Z |
