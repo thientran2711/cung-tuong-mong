@@ -63,3 +63,22 @@ Heads: bare ba0e0692 (index.html/sw.js NOT BUILT: stale, no KIT_PLAQUE in it; qu
 - `node dev/test/stage-rightcol.js`: Terminated by my 280 s timeout (r1 got a result; slow, not a branch fault as far as seen).
 - `bash dev/tools/quickcheck.sh` ALONE on ba0e0692 (+ local build): `QUICKCHECK PASS · 216 s · open 1843 ms · old save ok · perf (median of 3, new/live): render 236/240 ms, tab 471/428 ms, buổi 1350/1551 ms, tasks>200ms 26/22`; final line «FAIL · NOT BUILT» because the committed built files were stale (cause 7, fixed in e47e113e; same sources). Old save loads.
 - Law 11: kit parts touched = §98.1 plaque band, §98.2 title, §98.3 dim; band placement before = fixed side, laps right column/name tags; after = placed by cost with stage parts as hard obstacles, 0 overlaps on Fold + iPad.
+
+## REVIEW r3 (small kit reviewer, 11/24/2026) review/kit-woodskin r4 35d57ca1
+PRIORITY #1 CHECK: OD 0 | main none | review/* review/kit-woodskin (35d57ca1) | claims KK22 (brief b-kit-batch-2041-review.md). Origin/main 225c5c08 is an ancestor of the head (no merge needed); bare head = merged head.
+**VERDICT: KIT FAIL kit-woodskin r4 -> KK22** (3 rows; geometry rows 1-3, 5, 6 of r1/r2 are fine).
+### r1/r2 FAIL rows, one by one
+- r1.1 / r2.1 plaques+tabs over the stage right column: FIXED (Fold: band right, under Ân sủng/Nguy hiểm chung, above the «+1» chip; iPad: left of the chosen person; overObst 0 both).
+- r1.2 / r2.2 name tags: FIXED (both tags clear on Fold + iPad).
+- r1.3 / r2.3 corner button: FIXED.
+- r1.4 / r2.4 LAW 9: **STILL FAIL.** `git grep -nE "kitPick\.|kitDim\." dev/build` outside jkpick.js = 0. KIT.md §98.1-98.12 does NOT say the part is staged / not yet wired and does not list the old pickers it will replace (jdfv.js kitFocus acts, #popw person card j6.js/jdf.js dfActs, jfocus NPC choices). KK22 says it «needs a MAIN order», but that is only in the chat, not in KIT.md. Fix: add one line to §98 «STAGED, not wired; replaces: …; wiring needs a MAIN order» -> then this row becomes «OPEN — MAIN to order the wiring» (not a KIT FAIL by itself). MAIN 127: she has not seen kitPick/kitDim in the game.
+- r1.5 / r2.5 phones: 412x1058 «no stage figure» this run, 390x844 «plaque outside the stage 1» (secondary, reported only).
+- r1.6 / r2.6 shots under a veil: FIXED in my runs (stage visible, no dawn/#modal; test clears both). veil.js is not on this branch (only on kit-chain repair A); not a fail.
+- r2.7 stale built files: **STILL FAIL.** Head 35d57ca1 index.html is built from 4514d0f9+ (CTM_BI s «4514d0f9+», 0 hits for railPad / kpk-three / ksil), sw.js V=cdc40350c2ae. `bash dev/site/build_site.sh` on the head changes index.html (+160 lines) and sw.js (V=f5f3b7442ed5). Commit the built files.
+### New row
+- 8. iPad 1180x820 (shot looked 3x): the band sits left of the chosen person (Thải Hà) and covers the OTHER person's body (bodyOver 492 px²; soft, as designed) but the group tab «Giao thiệp» sits on the edge of her face/hair (the player's figure, x≈270-340, y≈470-500 on the 2000-wide shot) and the post cord crosses plaque text («Bàn tán»). Brief: «edge-person plaques never over a face». Fix: for an edge/other person, treat HER head box (top ~25 % of her figure) as a HARD obstacle for tabs + plaques, or flip the band side.
+### Checks that passed (r4)
+- `DSF=2 node dev/test/kit-pick.js file://…/index.html out` (local build of the head): 755x1000 ALL PASS (n 6 plaques, one size 152x50, overAnchor 0, overObst 0, clip none, tabs 2, side r), 1180x820 ALL PASS (134x50, overObst 0, bodyOver 492, side l). Same with 412x1058,390x844: both FAIL as above (phones, reported).
+- kit-pick.js really shows the stage on Fold + iPad (stage + two figures visible in pick-a). 
+- Opaque silhouettes: dim = filter brightness .7 saturate .75, opacity 1, bg same (test `dim` row); .j59sil/.ksil opacity 1 in the built CSS. Plaque names 2 lines, locked act greyed with «!» badge, no cut text.
+- Not run: quickcheck / full merged-head suite (rows 4, 7, 8 already FAIL; rerun after KK22's fix).
