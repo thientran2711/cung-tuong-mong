@@ -35,8 +35,9 @@ const rows=[];
    return{t,name:d.S.name}});
   ok(c.t===before,`${tag} 3 ROUND TRIP: after a page reload the packed sổ reads back identical to what save() wrote`,{same:c.t===before,lenA:before.length,lenB:(c.t||'').length});
   const c2=await load();ok(c2.name===a.name&&!c2.none,`${tag} 3 the reloaded packed sổ plays (Tiếp tục kiếp này)`,{name:c2.name,year:c2.year});
-  const ex=await p.evaluate(async()=>{await xioExport(1);const code=XIO.code;let back=null;try{back=JSON.stringify(await readCode(code))}catch(e){back='ERR '+e}const plain=slotGet('hclh-save-v2-1');
-   return{pre:code.slice(0,5),len:code.length,same:back===JSON.stringify(JSON.parse(plain))}});
+  const ex=await p.evaluate(async()=>{quiet=true;/* no background save between the export and the compare */const plain=slotGet('hclh-save-v2-1');await xioExport(1);const code=XIO.code;let back=null;try{back=JSON.stringify(await readCode(code))}catch(e){back='ERR '+e}
+   const pl=JSON.stringify(JSON.parse(plain));let at=-1;if(back!==pl)for(let i=0;i<pl.length;i++)if(back[i]!==pl[i]){at=i;break}quiet=false;
+   return{pre:code.slice(0,5),len:code.length,same:back===pl,diffAt:at,a:at>=0?pl.slice(Math.max(0,at-60),at+40):'',b:at>=0?String(back).slice(Math.max(0,at-60),at+40):''}});
   ok(/^CTM[12]:/.test(ex.pre)&&ex.same,`${tag} 4 EXPORT: the code is made from the plain JSON and reads back the same`,ex);
   const im=await p.evaluate(()=>{const d=loadSlot(1);XIO.imp=d;XIO.to=2;XIO.ask=1;const w=document.createElement('button');w.id='x-write';document.body.appendChild(w);
    try{slotPut(SK(2),JSON.stringify(d))}catch(e){return{err:String(e)}}const z=localStorage.getItem(SK(2));const e=loadSlot(2);return{packed:z.slice(0,4)==='CTMZ',name:e&&e.S.name,same:!!e&&JSON.stringify(e)===JSON.stringify(d)}});

@@ -30,7 +30,7 @@ const freePort=()=>new Promise(r=>{const s=net.createServer();s.listen(0,'127.0.
  const newLife=async(p,n)=>{await p.evaluate(n=>{SLOT=n;$("title").hidden=true;start()},n);await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name,null,{timeout:60000});
   await p.waitForTimeout(300);await p.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw').forEach(e=>e.remove());try{nlAccept()}catch(e){}while(Q.length)Q.shift();try{closeModal()}catch(e){}try{render()}catch(e){}save()})};
  const buoi=async p=>p.evaluate(async()=>{while(Q.length)Q.shift();S.mg=null;const b0=[S.tuan,S.buoi].join();nextBuoi();while(Q.length)Q.shift();try{closeModal()}catch(e){}render();save();return b0+'→'+[S.tuan,S.buoi].join()});
- const slot=(p,n)=>p.evaluate(n=>{const d=loadSlot(n);return d?{name:d.S.name,b:[d.S.year,d.S.month,d.S.tuan,d.S.buoi].join(),h:CTM_CLOUD.hash(localStorage.getItem(SK(n)))}:null},n);
+ const slot=(p,n)=>p.evaluate(n=>{const d=loadSlot(n);return d?{name:d.S.name,b:[d.S.year,d.S.month,d.S.tuan,d.S.buoi].join(),h:CTM_CLOUD.hash((window.slotGet?slotGet(SK(n)):localStorage.getItem(SK(n))))}:null},n);
  const head=async k=>{const r=await fetch(API+'/api/vault/list',{method:'POST',headers:{'content-type':'application/json',Origin:'http://ctm.local'},body:JSON.stringify({k})});return r.json()};
  const title=async p=>{await p.evaluate(()=>{$("title").hidden=false;showTitle()});await p.waitForTimeout(300)};
  const toSlots=async p=>{await p.evaluate(()=>{document.querySelectorAll('.kmov').forEach(e=>e.remove());$("title").hidden=false;showTitle();const b=document.querySelector('#modal #mr [data-tgo="home"]');if(b)b.click()});await p.waitForSelector('#modal [data-tgo="slots"]',{timeout:10000});await p.evaluate(()=>document.querySelector('#modal [data-tgo="slots"]').click());await p.waitForSelector('#modal #slots .cloudmini',{timeout:10000});await p.waitForTimeout(300)};
@@ -71,7 +71,7 @@ const freePort=()=>new Promise(r=>{const s=net.createServer();s.listen(0,'127.0.
  await toSlots(A);const a0=await slot(A,1);
  await A.evaluate(()=>{CTM_CLOUD.state.at=1});  // force old time to see the card refresh
  await A.click('#modal #slots .cloudmini [data-cl="now"]');
- await A.waitForFunction(h=>CTM_CLOUD.hash(localStorage.getItem(SK(1)))===h,bAfter.h,{timeout:20000}).catch(()=>{});
+ await A.waitForFunction(h=>CTM_CLOUD.hash((window.slotGet?slotGet(SK(1)):localStorage.getItem(SK(1))))===h,bAfter.h,{timeout:20000}).catch(()=>{});
  const a1=await slot(A,1);ok(a1.b===bAfter.b&&a1.b!==a0.b||a1.h===bAfter.h,'A: Khớp sổ ngay from Chọn sổ pulled the buổi B played',{bu,a0:a0.b,a1:a1.b,b:bAfter.b});
  await A.waitForTimeout(500);m=await mini(A);ok(m&&/Khớp với mây/.test(m.t)&&!/Đang gửi/.test(m.t),'A: card refreshed in place after the sync',m);
  /* old time shown? card must show a real time, not 1/1 1970 */

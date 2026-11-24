@@ -140,7 +140,7 @@ const fails=[];const ok=(c,m)=>{console.log((c?'ok   ':'FAIL ')+m);if(!c)fails.p
  }
  /* old save from the published build (no guest id, no S.rk) */
  if(OLD){const O=await b.newContext({viewport:{width:W,height:H}});const op=await O.newPage();await op.goto(OLD,{waitUntil:'domcontentloaded'});await op.waitForTimeout(3000);
-  const sv=await op.evaluate(()=>{SLOT=2;document.getElementById('title').hidden=true;start();if(typeof nlAccept==='function'&&typeof NLP!=='undefined'&&NLP)nlAccept(false);Q.length=0;save();return localStorage.getItem(SK(2))});await O.close();
+  const sv=await op.evaluate(()=>{SLOT=2;document.getElementById('title').hidden=true;start();if(typeof nlAccept==='function'&&typeof NLP!=='undefined'&&NLP)nlAccept(false);Q.length=0;save();return (window.slotGet?slotGet(SK(2)):localStorage.getItem(SK(2)))});await O.close();
   const N=await mk('old');await N.p.evaluate(s=>{localStorage.clear();localStorage.setItem(SK(2),s)},sv);await N.p.reload({waitUntil:'domcontentloaded'});await N.p.waitForTimeout(2500);
   const st=await N.p.evaluate(()=>{SLOT=2;const d=loadSlot(2);if(!d)return{none:1};$('slots').querySelector('[data-load="2"]').click();return{had:!!d.S.rkGid}});await N.p.waitForTimeout(1500);
   const ld=await N.p.evaluate(()=>({name:S&&S.name,gid:rkIdGet().gid,rk:!!S.rk}));ok(!st.had&&ld.name&&/^[a-z0-9]{24}$/.test(ld.gid)&&ld.rk,'old save loads, guest id made, life tracking baseline');

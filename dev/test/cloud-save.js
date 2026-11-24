@@ -32,7 +32,7 @@ const freePort=()=>new Promise(r=>{const s=net.createServer();s.listen(0,'127.0.
  const newLife=async(p,n)=>{await p.evaluate(n=>{SLOT=n;$("title").hidden=true;start()},n);await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name,null,{timeout:60000});
   await p.waitForTimeout(300);await p.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw').forEach(e=>e.remove());try{nlAccept()}catch(e){}while(Q.length)Q.shift();try{closeModal()}catch(e){}try{render()}catch(e){}save()})};
  const buoi=async p=>p.evaluate(async()=>{while(Q.length)Q.shift();S.mg=null;const b0=[S.tuan,S.buoi].join();nextBuoi();while(Q.length)Q.shift();try{closeModal()}catch(e){}render();save();return b0+'→'+[S.tuan,S.buoi].join()});
- const slot=(p,n)=>p.evaluate(n=>{const d=loadSlot(n);return d?{name:d.S.name,b:[d.S.year,d.S.month,d.S.tuan,d.S.buoi].join(),h:CTM_CLOUD.hash(localStorage.getItem(SK(n)))}:null},n);
+ const slot=(p,n)=>p.evaluate(n=>{const d=loadSlot(n);return d?{name:d.S.name,b:[d.S.year,d.S.month,d.S.tuan,d.S.buoi].join(),h:CTM_CLOUD.hash((window.slotGet?slotGet(SK(n)):localStorage.getItem(SK(n))))}:null},n);
  const head=async k=>{const r=await fetch(API+'/api/vault/list',{method:'POST',headers:{'content-type':'application/json',Origin:'http://ctm.local'},body:JSON.stringify({k})});return r.json()};
  const title=async p=>{await p.evaluate(()=>{$("title").hidden=false;showTitle()});await p.waitForTimeout(300)};
 
@@ -65,7 +65,7 @@ const freePort=()=>new Promise(r=>{const s=net.createServer();s.listen(0,'127.0.
  const r0=(await C(I)).rev;const bu=await buoi(I);
  await I.waitForFunction(r=>CTM_CLOUD.state.rev>r,r0,{timeout:20000}).catch(()=>{});
  ok((await C(I)).rev>r0,'iPad: buổi end uploads by itself',{bu});
- const iAfter=await slot(I,1);await title(P);await P.waitForFunction(h=>CTM_CLOUD.hash(localStorage.getItem(SK(1)))===h,iAfter.h,{timeout:20000}).catch(()=>{});
+ const iAfter=await slot(I,1);await title(P);await P.waitForFunction(h=>CTM_CLOUD.hash((window.slotGet?slotGet(SK(1)):localStorage.getItem(SK(1))))===h,iAfter.h,{timeout:20000}).catch(()=>{});
  ok((await slot(P,1)).b===iAfter.b,'phone: Sổ 1 now at the iPad buổi',{phone:(await slot(P,1)).b,ipad:iAfter.b});
  await P.evaluate(()=>{document.querySelector('#slots [data-load="1"]')?.click()||(()=>{const d=loadSlot(1);SLOT=1;quiet=true;deser(d);quiet=false;$("title").hidden=true;render()})()});
  ok(await P.evaluate(()=>[S.year,S.month,S.tuan,S.buoi].join())===iAfter.b,'phone continues the same life at the same buổi');
@@ -86,7 +86,7 @@ const freePort=()=>new Promise(r=>{const s=net.createServer();s.listen(0,'127.0.
  ok((await slot(P,1)).h===pPhone.h,'kept the phone copy locally');
  const hv=L1.versions.find(v=>v.rev===L1.head);ok(hv&&hv.dev==='Điện thoại','cloud head is the phone copy',hv&&hv.dev);
  ok(L1.versions.some(v=>v.dev==='Máy tính bảng'),'the iPad copy is still among the kept versions');
- await title(I);await I.waitForFunction(h=>CTM_CLOUD.hash(localStorage.getItem(SK(1)))===h,pPhone.h,{timeout:20000}).catch(()=>{});
+ await title(I);await I.waitForFunction(h=>CTM_CLOUD.hash((window.slotGet?slotGet(SK(1)):localStorage.getItem(SK(1))))===h,pPhone.h,{timeout:20000}).catch(()=>{});
  /* the iPad was IN that life (title opened over it): not changed since base → takes the cloud copy, its old life in memory never writes back */
  ok((await slot(I,1)).h===pPhone.h,'iPad takes the kept copy');
  await I.evaluate(()=>{try{save()}catch(e){}});ok((await slot(I,1)).h===pPhone.h,'stale life in iPad memory does not overwrite it');
@@ -106,11 +106,11 @@ const freePort=()=>new Promise(r=>{const s=net.createServer();s.listen(0,'127.0.
  await title(P);await toOpt(P);await P.click('#modal [data-cl="vers"]');await P.waitForSelector('#modal.kcloud .kslot',{timeout:15000});await shot(P,'6-versions');
  await P.click(`#modal.kcloud [data-cl="restore"][data-rev="${bk.rev}"]`);await P.waitForSelector(`#modal.kcloud [data-rev="${bk.rev}"][data-ask="2"]`);
  await P.click(`#modal.kcloud [data-cl="restore"][data-rev="${bk.rev}"]`);
- await P.waitForFunction(h=>CTM_CLOUD.hash(localStorage.getItem(SK(1)))===h,pOwn.h,{timeout:20000}).catch(()=>{});
+ await P.waitForFunction(h=>CTM_CLOUD.hash((window.slotGet?slotGet(SK(1)):localStorage.getItem(SK(1))))===h,pOwn.h,{timeout:20000}).catch(()=>{});
  {const now=await slot(P,1);ok(now.h===pOwn.h,'restore brings back the backed-up phone copy',{now,pOwn,c:await C(P),msg:await P.evaluate(()=>{const n=document.querySelector('#modal.kcloud .kpnote');return n&&n.textContent})})}
 
  /* 6. 10-version cap */
- for(let i=0;i<12;i++){await P.evaluate(i=>{const d=JSON.parse(localStorage.getItem(SK(2)));d.S.bac=(d.S.bac||0)+1+i;localStorage.setItem(SK(2),JSON.stringify(d))},i);await P.evaluate(()=>CTM_CLOUD.sync())}
+ for(let i=0;i<12;i++){await P.evaluate(i=>{const d=JSON.parse((window.slotGet?slotGet(SK(2)):localStorage.getItem(SK(2))));d.S.bac=(d.S.bac||0)+1+i;localStorage.setItem(SK(2),JSON.stringify(d))},i);await P.evaluate(()=>CTM_CLOUD.sync())}
  const L3=await head(c1.k);ok(L3.versions.length===10&&L3.versions[0].rev===L3.head,'cloud keeps exactly the last 10 versions',L3.versions.length);
 
  /* 7. co-op: the room list (+ the pid of the seat) travels; the co-op life itself never goes to the cloud */
@@ -135,7 +135,7 @@ const freePort=()=>new Promise(r=>{const s=net.createServer();s.listen(0,'127.0.
  await P.evaluate(()=>{COOP.leave(true)});
 
  /* 8. old save + old device: a v5 sổ and the old single "ctm-coop-room" key on a device that never used Sổ mây */
- const raw=await P.evaluate(()=>localStorage.getItem(SK(1)));const old=JSON.parse(raw);old.v=5;delete old.b4;
+ const raw=await P.evaluate(()=>(window.slotGet?slotGet(SK(1)):localStorage.getItem(SK(1))));const old=JSON.parse(raw);old.v=5;delete old.b4;
  const O=await mk('big',{'hclh-save-v2-3':JSON.stringify(old),'ctm-coop-room':'Q9ZT'});
  ok(await O.evaluate(()=>!!loadSlot(3)&&!localStorage.getItem('ctm-cloud')),'old device: v5 sổ loads, Sổ mây off, nothing sent');
  await toOpt(O);await shot(O,'7-settings-off');

@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"6ac29a2c+","t":"2026-11-24T18:52Z","c":"SELF-MERGE LAND kit-titleplate: merge LIVE 22f1e491 (index.html/sw.js rebuilt)","b":"c8b9b8363762","h":[{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"},{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"}]};
+window.CTM_BI={"s":"64c26476+","t":"2026-11-24T20:53Z","c":"save-growth (d): pack every big browser store of a life with one sync codec (j6 slotEnc/slotDec «CTMZ»); old plain-JSON saves still load; c…","b":"2df9985201ac","h":[{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"},{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -4288,7 +4288,7 @@ function slotEnc(s){
   if(i+MINL<=n){const h=hash(i);let p=head[h],t=16;prev[i&M]=p;head[h]=i;
    while(p>=0&&i-p<W&&t-->0){if(s.charCodeAt(p+bl)===s.charCodeAt(i+bl)){let l=0;const mx=n-i<MAXL?n-i:MAXL;while(l<mx&&s.charCodeAt(p+l)===s.charCodeAt(i+l))l++;if(l>bl){bl=l;bd=i-p;if(l>=mx)break}}const q=prev[p&M];if(q>=p)break;p=q}}
   if(bl>=MINL){if(ll)flush();put(1,1);put(bl-MINL,8);put((bd-1)>>>8,8);put((bd-1)&255,8);
-   const e=i+bl;for(let k=i+1;k<e&&k+MINL<=n;k++){const h=hash(k);prev[k&M]=head[h];head[h]=k}i=e;ls=i}
+   /* a long match: index only its first and last few positions (speed; the ratio hardly moves) */const e=i+bl,e1=bl>64?i+4:e;for(let k=i+1;k<e1&&k+MINL<=n;k++){const h=hash(k);prev[k&M]=head[h];head[h]=k}if(e1<e)for(let k=e-3;k<e&&k+MINL<=n;k++){const h=hash(k);prev[k&M]=head[h];head[h]=k}i=e;ls=i}
   else{if(!ll)ls=i;ll++;i++}}
  flush();if(nb>0)put(0,15-nb);
  let r=SLOTZ;for(let k=0;k<o;k+=8192)r+=String.fromCharCode.apply(null,out.subarray(k,Math.min(o,k+8192)));return r}
@@ -97963,7 +97963,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c8b9b8363762";window.CTM_BUILD=BUILD;
+const BUILD="2df9985201ac";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

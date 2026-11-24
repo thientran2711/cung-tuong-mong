@@ -71,7 +71,7 @@ for(let seed=1;seed<=LIVES;seed++){const p=await b.newPage();const errs=[];p.on(
    const on=figFor(s7);if(!/fake-tc\.webp/.test(on))bad.push("T7 uniform not worn: "+on);thcPick(s7.sid,0);const off=figFor(s7);if(/fake-tc/.test(off))bad.push("T7 uniform worn after dismiss: "+off);
    L.splice(L.length-2,2)}else note.push("T7 figure part skipped (no identity)");
   /* T8 old save */
-  save();const raw=JSON.parse(localStorage.getItem(SK(SLOT)));delete raw.S.thcV;delete raw.S.thc;if(raw.R)for(const v of raw.R){delete v.thc;delete v.thcV}localStorage.setItem(SK(SLOT),JSON.stringify(raw));
+  save();const raw=JSON.parse((window.slotGet?slotGet(SK(SLOT)):localStorage.getItem(SK(SLOT))));delete raw.S.thcV;delete raw.S.thc;if(raw.R)for(const v of raw.R){delete v.thc;delete v.thcV}localStorage.setItem(SK(SLOT),JSON.stringify(raw));
   return{bad,note,slot:SLOT}});
  fails.push(...r.bad.map(x=>`seed ${seed}: ${x}`));notes.push(...r.note.map(x=>`seed ${seed}: ${x}`));
  const r8=await p.evaluate(slot=>{const bad=[];try{deser(loadSlot(slot))}catch(e){bad.push("T8 load threw "+e.message)}

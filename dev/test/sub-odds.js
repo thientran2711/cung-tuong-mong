@@ -46,7 +46,7 @@ function clipCheck(sel){return `(()=>{const bad=[];document.querySelectorAll(${J
   r.night=await p.evaluate(()=>{const m=document.getElementById('modal');return m&&!m.hidden?m.innerText:''});
   await p.screenshot({path:`${OUT}/${TAG}-dem-thi-tam-${W}x${H}.png`,animations:'disabled',timeout:120000});
   /* old save reads back */
-  r.save=await p.evaluate(()=>{Q.length=0;quiet=false;S.dead=false;save();const raw=localStorage.getItem(SK(3));const ok=!!raw;try{loadSlot(3)}catch(e){return 'load error '+e.message}render();return ok?'ok':'no save'});
+  r.save=await p.evaluate(()=>{Q.length=0;quiet=false;S.dead=false;save();const raw=(window.slotGet?slotGet(SK(3)):localStorage.getItem(SK(3)));const ok=!!raw;try{loadSlot(3)}catch(e){return 'load error '+e.message}render();return ok?'ok':'no save'});
   r.bad=[...badLines(r.cards.join('\n')),...badLines(r.actText),...badLines(r.result),...badLines(r.prep),...badLines(r.night),...badLines(r.hud.join('\n'))];
   r.hasLieu=/Liều/.test(r.cards.join(' ')+r.hud.join(' '));r.errs=errs;await ctx.close()}
  /* static: the built page, every template "<label>: ${word(" left would be a side chance on the ladder */

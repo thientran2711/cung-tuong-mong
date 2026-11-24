@@ -78,7 +78,7 @@ function slotEnc(s){
   if(i+MINL<=n){const h=hash(i);let p=head[h],t=16;prev[i&M]=p;head[h]=i;
    while(p>=0&&i-p<W&&t-->0){if(s.charCodeAt(p+bl)===s.charCodeAt(i+bl)){let l=0;const mx=n-i<MAXL?n-i:MAXL;while(l<mx&&s.charCodeAt(p+l)===s.charCodeAt(i+l))l++;if(l>bl){bl=l;bd=i-p;if(l>=mx)break}}const q=prev[p&M];if(q>=p)break;p=q}}
   if(bl>=MINL){if(ll)flush();put(1,1);put(bl-MINL,8);put((bd-1)>>>8,8);put((bd-1)&255,8);
-   const e=i+bl;for(let k=i+1;k<e&&k+MINL<=n;k++){const h=hash(k);prev[k&M]=head[h];head[h]=k}i=e;ls=i}
+   /* a long match: index only its first and last few positions (speed; the ratio hardly moves) */const e=i+bl,e1=bl>64?i+4:e;for(let k=i+1;k<e1&&k+MINL<=n;k++){const h=hash(k);prev[k&M]=head[h];head[h]=k}if(e1<e)for(let k=e-3;k<e&&k+MINL<=n;k++){const h=hash(k);prev[k&M]=head[h];head[h]=k}i=e;ls=i}
   else{if(!ll)ls=i;ll++;i++}}
  flush();if(nb>0)put(0,15-nb);
  let r=SLOTZ;for(let k=0;k<o;k+=8192)r+=String.fromCharCode.apply(null,out.subarray(k,Math.min(o,k+8192)));return r}
