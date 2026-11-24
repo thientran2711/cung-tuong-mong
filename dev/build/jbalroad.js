@@ -390,3 +390,16 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
  noi14:[{danh:6,sung:3},{danh:6,th:6}],
  ke14:[{danh:5},{th:5,danh:3},{danh:5},{th:4,danh:3},{danh:8},{danh:6,th:4}]
 }}});
+/* ORDER THIN P8 (jroadc.js, composed origin roads 4 → 8 per origin; API P8 in dev/handover/reports/thin.md). Seeds count STEPS; the numbers live here (law 4).
+   st = steps per option (Σgain == Σloss == st, laws 2/3); fx[key] = one option step (sc = Lợi thế points, rel = thiện cảm of a cast consort; tin = her
+   mistress's trust, cnv only); Est = ending steps (win gain-only, lose loss-only, mid 1 + 1); Efx[key] = one ending step;
+   xo[risk][band] = climax base odds (band a = chapters .5–.7, b = .8–.10, f = .11 → lower each band: law 5 harder as she climbs; lo = win or MIDDLE,
+   hi = win or LOSE, so lo starts lower: law 2); xs[stat] = the rdOdds term of the stat that carries the roll (["d",div] = S[stat]/div, ["m",k] = S[stat]×k);
+   own = weight of a part tagged rd to this road; seen = weight of a part a past life met (× per life, P0 fresh-first first); band = chapter → band. */
+BAL.road.c={st:2,
+ fx:{sung:3,danh:2,bac:30,suc:3,mat:1,th:3,hh:3,duc:2,tamco:1,tin:5,sc:1,rel:6},
+ Est:{win:3,lose:3,mid:1},
+ Efx:{sung:3,danh:3,bac:40,suc:4,mat:1,th:3,hh:3,duc:3,tamco:1,tin:6,rel:10},
+ xo:{hi:{a:50,b:45,f:40},lo:{a:35,b:30,f:25}},
+ xs:{danh:["d",5],sung:["d",6],tamco:["d",3],duc:["d",5],mat:["m",5],th:["d",5],hh:["d",5]},
+ own:3,seen:.5,band:{5:"a",6:"a",7:"a",8:"b",9:"b",10:"b",11:"f"}};
