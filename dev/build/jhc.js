@@ -161,7 +161,7 @@ function relPair(X,Y){const p=X.p,o=Y.p,rv=p!==S&&p!=="emp"&&p!=="th"&&!relMS(p)
   `<div class="kr3r krbox">${relRows(X,Y)}${note}${btn?`<div class="kr3act pcb">${btn}</div>`:""}</div>${known}</div>`}
 window.hcRelHTML=hcRelHTML;
 relHTML=function(){if(!S)return"";if(S.known&&typeof k61Hide==="function"){const h=k61Hide(()=>hcRelHTML(),3);const n=typeof k61Unknown==="function"?k61Unknown(3).length:0;
-  return h+(n?`<p class="past">Còn ${n} phi tần ngươi chưa quen biết: chưa xem được quan hệ. Gặp mặt trò chuyện, hỏi người hầu hoặc dò la để biết.</p>`:"")}return hcRelHTML()};
+  return h+(n?`<p class="past">Còn ${n} phi tần ngươi chưa gặp mặt: chưa xem được quan hệ. Gặp mặt trò chuyện, hỏi người hầu hoặc dò la để biết.</p>`:"")}return hcRelHTML()};
 
 /* ---------- 1. tabs ---------- */
 function mkTab(k,l,s,before){const T0=$("tabs");if(!T0||T0.querySelector(`[data-tab="${k}"]`))return;const b=document.createElement("button");b.dataset.tab=k;b.dataset.s=s;b.setAttribute("role","tab");b.textContent=l;b.dataset.l0=l;b.dataset.s0=s;

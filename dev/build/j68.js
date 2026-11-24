@@ -83,7 +83,7 @@ function e68Pick(L){return npwPick(L,x=>x[1],{all:true})} /* npc-purpose: weight
 function e68Make(s){const e=e68();let p=null;try{p=s.pp?s.pp():{}}catch(x){p=null}if(!p)return null;const V=s.v||[""];
  let all=[...V.keys()];if(s.vf){let ok=null;try{ok=s.vf(p)}catch(x){}if(ok&&ok.length)all=all.filter(i=>ok.includes(i));else if(ok)return null}const used=e.vu[s.id]||[];let pool=all.filter(i=>!used.includes(i));if(!pool.length){pool=all.slice();e.vu[s.id]=(e.vu[s.id]||[]).filter(i=>!all.includes(i))}
  const fresh=pool.filter(i=>!e68Past(s.id+":"+i));p.vi=pick(fresh.length?fresh:pool);
- const d=mkP("e68"+s.id,p);if(!d)return null;e.cd[s.id]=wk();(e.vu[s.id]=e.vu[s.id]||[]).push(p.vi);e.n++;if(s.big)e.bigM=S.turn;e68Mark(s.id+":"+p.vi);return d}
+ const d=mkP("e68"+s.id,p);if(!d)return null;e.cd[s.id]=wk();(e.vu[s.id]=e.vu[s.id]||[]).push(p.vi);e.n++;if(s.big)e.bigM=S.turn;e68Mark(s.id+":"+p.vi);try{if(s.fam==="visit"&&typeof visitSeen==="function")for(const k in p){const q=p[k];if(q&&typeof q==="object"&&(rivals||[]).includes(q))visitSeen(q)}/* a visitor is known by sight + name (owner 24/11) */}catch(x){}return d}
 function e68Fire(fams,pk){const L=e68Cands(fams);for(let t=0;t<4&&L.length;t++){const x=(pk||e68Pick)(L);if(!x)break;L.splice(L.indexOf(x),1);const d=e68Make(x[0]);if(d)return [d,x[0]]}return null}
 function e68Push(d,s,front){const m={t:s.t||FAM6[s.fam]||"Chuyện trong cung",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp};if(front)Q.unshift(m);else Q.push(m);return m}
 /* follow-ups: a template flagged fu fires on its due tuần (params carried) */

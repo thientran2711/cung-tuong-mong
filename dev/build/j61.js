@@ -7,7 +7,7 @@
    "Một thái giám", "Một nam nhân áo vàng"), no traits, bars or numbers, and only meeting acts (greet, ask a servant,
    scout, go see, visit) until identified. Ways to know someone: greeting / talking face to face, them speaking to her,
    the first night (the Emperor), the morning audience (thỉnh an), festival banquets (names announced), a servant's true
-   report, scouting. Logged once: "Ngươi đã biết: đó là …".
+   report, scouting. Logged once: "<tên> xưng danh với ngươi.".
    Two-way: NPCs do not know newcomers either (her at the start, girls of a new tuyển tú). npcKnows(a,b) gates targeted NPC
    acts; they learn fast (each week, at audiences and festivals, when they act socially or meet her).
    Stages: greeting face to face -> 1; asking the name, a servant's true report, scouting, an introduction (audience,
@@ -84,9 +84,9 @@ function k61CoopEnt(){try{return k61All().find(e=>e&&e.coop)||null}catch(x){retu
 window.k61Coop=k61Coop;window.k61CoopEnt=k61CoopEnt;window.K61FR=K61FR;
 function kitKnown(p){try{const e=k61PortEnt(p);return e?isKnown61(e):true}catch(e){return true}}
 function kitKnownName(p){try{const e=k61PortEnt(p);return e?k61Named(e):true}catch(e){return true}}
-/* the ONE helper for a list of people printed in a line: names she knows (fmt(v), default the name) + "thêm N vị chưa quen biết" for the rest -
+/* the ONE helper for a list of people printed in a line: names she knows (fmt(v), default the name) + "thêm N vị khác" for the rest -
    never "Quý phi ???, Tần ???" (owner 16/11 'Phi ???'; reign-road fix). Used by Triều cục, sổ thị tẩm, thiên điện, ứng viên, quà, tư tình... */
-function kitNameList(L,fmt,none){const f=fmt||(v=>v.name),K=[],U=[];for(const v of L||[])(kitKnownName(v)?K:U).push(v);const A=K.map(f);if(U.length)A.push(`${K.length?"thêm ":""}${U.length} vị chưa quen biết`);return A.join(", ")||none||""}
+function kitNameList(L,fmt,none){const f=fmt||(v=>v.name),K=[],U=[];for(const v of L||[])(kitKnownName(v)?K:U).push(v);const A=K.map(f);if(U.length)A.push(K.length?`thêm ${U.length} vị khác`:`${U.length} vị`);return A.join(", ")||none||""}
 const K61STN=["Người lạ","Thấy mặt","Biết tên","Quen biết"];
 function k61PortEnt(p){if(!p)return null;{const d=k61StageDesc(p);if(d!==undefined)return d===S?null:d}if(p.kk)return k61Ent(p.kk);if(p.src&&K61SRC[p.src])return k61Ent(K61SRC[p.src]);if(p.__kp&&typeof p.__kp==="object")return p.__kp===S?null:p.__kp;
  if(S&&(p===S.emp||p===S.thO||(rivals||[]).includes(p)))return p;return null}
@@ -117,7 +117,7 @@ function k61Know(list,how,quiet,st){st=st||2;how=k61How(how);if(!S||!k61S())retu
  L.forEach(e=>{S.known[kOf61(e)]=st<2&&k61Pub(e)?2:st});K61VER++;
  try{/* KNOW-NOTICE: every gain of face / name / acquaintance = one kit notice at that moment (batched per act), also when the caller is quiet */if(typeof kitKnow==="function"){const nmS=new Set(nm);
   for(const e of L){const key="id:"+kOf61(e);if(nmS.has(e))kitKnow({key,pri:2,text:`Ngươi biết tên: đó là ${k61Title(e)}.`});else if(st===1&&!k61Named(e))kitKnow({key,pri:1,text:`Ngươi đã thấy mặt ${k61Desc(e)}; chưa biết tên.`});else if(st===1)kitKnow({key,pri:1,text:`Ngươi đã thấy mặt ${k61Title(e)}.`});else if(st===3)kitKnow({key,pri:3,text:`Ngươi đã quen biết ${k61Title(e)}.`})}}}catch(x){console.error("k61KnowNotice",x)}k61RankSync();
- if(!quiet){if(nm.length)log(`<span class="g">Ngươi đã biết: đó là ${nm.map(k61Title).join(", ")}.</span>${how?" "+how:""}`);else if(pubSeen.length&&st<3)log(`Ngươi đã được thấy mặt ${pubSeen.map(k61Title).join(", ")}.${how?" "+how:""}`);else if(desc.length)log(`Ngươi đã thấy mặt ${desc.join(", ")}; chưa biết tên.${how?" "+how:""}`);else if(st===3)log(`<span class="g">Ngươi đã quen biết ${L.map(k61Title).join(", ")}.</span>${how?" "+how:""}`)}return L}
+ if(!quiet){if(nm.length)log(`<span class="g">${nm.map(k61Title).join(", ")} ${nm.length>1?"lần lượt xưng danh":"xưng danh với ngươi"}.</span>${how?" "+how:""}`);else if(pubSeen.length&&st<3)log(`Ngươi đã được thấy mặt ${pubSeen.map(k61Title).join(", ")}.${how?" "+how:""}`);else if(desc.length)log(`Ngươi đã thấy mặt ${desc.join(", ")}; chưa biết tên.${how?" "+how:""}`);else if(st===3)log(`<span class="g">Ngươi đã quen biết ${L.map(k61Title).join(", ")}.</span>${how?" "+how:""}`)}return L}
 function k61Meet(e,how,st){k61Know(e,how,false,st);if((rivals||[]).includes(e)){npcLearn(e,S);/* face to face = met (KIT §49.3 met61): a consort she meets is no longer a grey silhouette (review ts-a r6) */try{if(S&&e.id!=null){S.met=S.met||{};if(S.met[e.id]==null)k61MetSet(e)}}catch(x){}}}
 /* ---- NPCs and newcomers (light): S.nkn[target] = {npcKey:1}; a missing entry means everyone knows the target ---- */
 function npcKnows(a,b){if(!S||!S.nkn||!a||!b||a===b)return true;const T=S.nkn[b===S?"me":"r"+b.id];if(!T)return true;return !!T[a===S?"me":"r"+a.id]}
@@ -196,7 +196,7 @@ window.k61Gate=k61Gate;
 (function(){const t0=talk;talk=function(oi){try{if(S&&popIdx!=null&&!S.dead&&!Q.length){const p=curPeople()[popIdx];const a=p&&talkOpts(p)[oi];
   if(a&&(a.k61==="greet"||a.k61==="name")){const e=k61Ent(a.kke);if(e&&can(1)){spend(1);const k=k61Kind(e);
    if(a.k61==="greet"){/* jgreet: ONE greeting name rule (rank + nết), the line says why */const G=greetName(S,e);popMsg=G.line;log(G.line)}
-   else{k61Meet(e,k==="emp"?"Nam nhân áo vàng chính là Hoàng thượng; ngươi vội quỳ xuống.":"Người ấy xưng danh.",2);popMsg=`<span class="g">Ngươi đã biết: đó là ${k61Title(e)}.</span>`}render()}return}
+   else{k61Meet(e,k==="emp"?"Nam nhân áo vàng chính là Hoàng thượng; ngươi vội quỳ xuống.":"Người ấy xưng danh.",2);popMsg=k==="emp"?"Nam nhân áo vàng cho ngươi đứng dậy: “Trẫm đây.”":`${k61Cap(k61Desc(e))} khẽ xưng danh: “Ta là ${k61Title(e)}.”`}render()}return}
   const e=p&&k61VisEnt(p);const st0=e?k61St(e):3;const r=t0.apply(this,arguments);if(e&&st0===2&&S.visit&&(S.visit.tk||{})[popIdx])k61Know(e,"Trò chuyện thêm, ngươi hiểu người ấy hơn.",false,3);return r}}catch(x){console.error(x)}return t0.apply(this,arguments)}})();
 /* asking a servant (true answers only) */
 function k61Ask(k){const e=k61Ent(k);if(!e||!S||S.dead||Q.length||k61Named(e)||!can(1))return;const o=od(BAL.odb.j61.odO+eyes(S)*8+((S.maid&&S.maid.loyal)||40)/5);/* read before the spend (shown-odds r2-rv) */spend(1);
@@ -211,7 +211,7 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-k61]");if(
 function k61Hide(fn,st){const L0=liveRivals;liveRivals=function(q){return L0(q).filter(v=>k61St(v)>=st)};try{return fn()}finally{liveRivals=L0}}
 function k61Unknown(st){return (rivals||[]).filter(v=>v.alive&&!v.out&&k61St(v)<(st||2))}
 (function(){const r0=relHTML;relHTML=function(){if(!S||!S.known)return r0.apply(this,arguments);const h=k61Hide(()=>r0.apply(this,arguments),3);const n=k61Unknown(3).length;
- return h+(n?`<p class="past">Còn ${n} phi tần ngươi chưa quen biết: chưa xem được quan hệ. Gặp mặt trò chuyện, hỏi người hầu hoặc dò la để biết.</p>`:"")}})();
+ return h+(n?`<p class="past">Còn ${n} phi tần ngươi chưa gặp mặt: chưa xem được quan hệ. Gặp mặt trò chuyện, hỏi người hầu hoặc dò la để biết.</p>`:"")}})();
 (function(){if(typeof facHTML!=="function")return;const f0=facHTML;facHTML=function(){if(!S||!S.known)return f0.apply(this,arguments);return k61Hide(()=>f0.apply(this,arguments),2)}})();
 /* ---- ways she gets to know people ---- */
 /* someone speaking to her in an event (a dialog she must answer) */
@@ -298,7 +298,7 @@ function k61MaskT(e){const k=k61Kind(e);if(k==="consort")return e.out?"Phế phi
  if(k==="tq")return"Tổng quản thái giám";if(k==="eun")return"thái giám";if(k==="phys")return"thái y";if(k==="maid")return"cung nữ";if(k==="mama")return"ma ma";
  if(k==="off")return(typeof TDOFF!=="undefined"&&TDOFF[e.c])||"quan";if(k==="kid")return e.sex==="m"?"Hoàng tử":"Công chúa";
  if(k==="man"){const r=e.role;return r&&!/^(Công tử|Nam nhân)$/i.test(r)?r:"công tử"}return"người"}
-function k61Mask(e,before,plain){if(k61Coop(e))return K61FR;const t=k61MaskT(e);if(plain)return `một vị ${t} chưa quen biết`;/* plain = prose/log wording (no literal ???; name-mask) */const b=String(before||"").replace(/\s+$/,"").toLowerCase();return b.endsWith(t.toLowerCase())?"???":`${t} ???`}
+function k61Mask(e,before,plain){if(k61Coop(e))return K61FR;const t=k61MaskT(e);if(plain)return `một vị ${t}`;/* plain = prose/log wording (no literal ???; name-mask) */const b=String(before||"").replace(/\s+$/,"").toLowerCase();return b.endsWith(t.toLowerCase())?"???":`${t} ???`}
 /* public announcements (thẻ bài lật, sớ hặc tội at court, thánh chỉ, tấn phong / giáng / phế, births): everyone named in them
    becomes known by name and title (stage 2) the moment it is announced */
 const K61ANN=/thẻ bài của|sớ (?:hặc|khen|xin)|thánh chỉ|sắc phong|tấn phong|được phong|phong (?:Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng) |lập .{1,60}? làm (Hoàng hậu|Thái tử|Hoàng quý phi)|bị giáng|giáng xuống|bị phế|xướng tên|hạ sinh|băng hà/i;

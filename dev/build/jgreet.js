@@ -5,8 +5,7 @@
      Hoàng hậu, Hoàng quý phi; Hoàng thượng, Thái hậu) or a herald calls it (BAL.greet.ann, o.ann: thỉnh an, festival);
    - otherwise the higher one gives her name or not BY HER NẾT (BAL.net.n.greetName via nv(): Kiêu ngạo / Lạnh lùng → only a nod);
    - equals: each gives her name unless she is proud / cold (same table).
-   The result line says WHY in the SHOW-WHY read-out's markup (jwhyn: <span class="past kwl">Vì sao: …</span>); a nết is NAMED only when she
-   knows it (trKnown), else generic. Names/faces are written through j61 (k61Know / npcLearn) — no second "known" store.
+   The result line is story text (owner 24/11: narration + her words by RANK, never «Ta đã biết… Vì sao…»). Names/faces are written through j61 (k61Know / npcLearn) — no second "known" store.
    AG-MEET (agent law OD:L1386): each buổi every consort present at a place where others are spends her ONE deed of the buổi (jagent agUse) on
    approaching someone there or keeps her schedule — utility from her own needs (agNeeds ally / spite) × her nết (BAL.net.n.meetW); whom: strangers
    (grey shadows) at random weight, known people by thiện cảm / oán (mindPickBy, human slip). If she picks HER and they share a khắc and a place, she
@@ -42,20 +41,20 @@ function greetName(a,b,o){o=o||{};const ra=grRank(a),rb=grRank(b);const ka=grKne
 /* ---- words (VANPHONG: cổ trang; the nết is named only when she knows it) ---- */
 function grPron(p){try{if(p===S.emp)return"Hoàng thượng";if(S.thO&&p===S.thO)return"Thái hậu";const k=typeof k61Kind==="function"?k61Kind(p):"";if(/^(man|off|phys|eun|tq)$/.test(k))return"người ấy"/* greet-stranger: thái y, thái giám, quan, nam nhân */;return netSex(p)==="m"?"người ấy":"nàng"}catch(e){return"nàng"}}
 function grKnowsT(p,t){try{return !!t&&(rivals||[]).includes(p)&&(trKnown(p)||[]).includes(t)}catch(e){return false}}
-function grWhy(p,g){const P=grPron(p);const T=()=>{try{return k61Named(p)?k61Title(p):k61Cap(k61Desc(p))}catch(e){return P}};
- if(g.w==="low")return`${P} phận dưới, xưng danh thỉnh an trước`;
- if(g.w==="uniq")return`${T()} là ngôi chỉ một người giữ, cả cung đều biết`;if(g.w==="ann")return"có người hầu xướng danh";
- if(g.w==="me")return g.y?"ngươi xưng danh đáp lễ":"ngươi chỉ khẽ gật đầu, không xưng danh";
- const nk=grKnowsT(p,g.t);const pos=g.eq?"ngang hàng với ngươi":"phẩm cao hơn ngươi";
- if(g.y)return`${P} ${pos}, ${nk?`tính ${g.t}, `:""}xưng danh đáp lễ`;
- return`${k61Cap(P)} ta chỉ khẽ gật đầu, không xưng danh: ${pos}${nk?`, tính ${g.t}`:", xem chừng kiêu kỳ lạnh nhạt"}`}
-const grWhyM=t=>` <span class="past kwl">Vì sao: ${t}.</span>`;
-function grLine(G){const me=G.a===S,e=me?G.b:G.a,mine=me?G.A:G.B,hers=me?G.B:G.A,newHers=me?G.newB:G.newA,newMine=me?G.newA:G.newB;
- const head=hers.y?(newHers?`<span class="g">Ngươi đã biết: đó là ${k61Title(e)}.</span>`:`Ngươi chào ${k61Title(e)}.`):`Ngươi đã thấy mặt ${k61Desc(e)}; chưa biết tên.`;
- const P=[grWhy(e,hers)];const pr=grPron(e);
- if(newMine)P.push(mine.w==="low"?`ngươi xưng danh, ${pr} biết tên ngươi`:mine.w==="uniq"?`ngôi của ngươi chỉ một người giữ: ${pr} biết ngay`:mine.w==="ann"?`${pr} nghe xướng danh ngươi`:`ngươi xưng danh đáp lễ, ${pr} biết tên ngươi`);
- else if(!mine.y)P.push(mine.w==="me"?`${pr} chưa biết tên ngươi`:`ngươi chỉ khẽ gật đầu: ${pr} chưa biết tên ngươi`);
- return head+grWhyM(P.join("; "))}
+function grLine(G){/* story text (owner 24/11 ~22:02Z + ~22:08Z): a scene in cổ trang with her words, by RANK — the lower one greets first, the higher one answers; never system reasoning («Ta đã biết… Vì sao…»: the know-notice is the kit notice of k61Know). G.arr = the visitor already announced herself at the door (gmOpts) */
+ const me=G.a===S,e=me?G.b:G.a,mine=me?G.A:G.B,hers=me?G.B:G.A;let nm=false;try{nm=k61Named(e)}catch(x){}
+ const E=nm?k61Title(e):k61Desc(e),Ec=k61Cap(E),P=grPron(e),Pc=k61Cap(P);
+ if(mine.w==="low"){/* she is the lower: she greets first, in words */
+  const b=hers.y?(hers.w==="uniq"||hers.w==="ann"?`${Pc} khẽ nâng tay: “Miễn lễ.”`:`${Pc} đáp lễ, nói tên mình với ngươi.`):(nm?`${Pc} chỉ khẽ gật đầu đáp lễ.`:`${Pc} chỉ khẽ gật đầu, không xưng danh.`);
+  return `Ngươi hành lễ: “Thần thiếp ${S.name} thỉnh an ${E}.” ${b}`}
+ if(hers.w==="low"){/* the other is the lower: she greets first, her side answers */
+  return `${G.arr?"":`${Ec} hành lễ: “Thần thiếp thỉnh an ${me?"ngươi":"nương nương"}.” `}${mine.y?"Ngươi đáp lễ, nói tên mình.":`Ngươi chỉ khẽ gật đầu đáp lễ; ${P} chưa biết tên ngươi.`}`}
+ /* equals: each greets */
+ return `Hai bên chào nhau theo lễ. ${hers.y?`${Ec} nói tên mình.`:nm?`${Pc} chỉ khẽ gật đầu.`:`${Pc} chỉ khẽ gật đầu, không xưng danh.`}${mine.y?" Ngươi nói tên mình đáp lễ.":` ${Pc} chưa biết tên ngươi.`}`}
+/* a visitor who comes to find her is known by sight AND by name (a cung nhân announces her; the one-seat titles are known to the whole palace) — face + met + name, never the grey silhouette (owner 24/11 ~22:02Z) */
+/* the arrival as a stage line (owner 24/11 ~22:08Z): a higher rank is announced at the door, a lower / equal one announces herself */
+function visitArrive(v){try{const up=grRank(v)>grRank(S),nmd=k61Named(v),T=k61Cap(nmd?k61Title(v):k61Desc(v));return up?`Ngoài điện có tiếng xướng: “${T} giá đáo!”`:`Ngoài cửa có tiếng thưa: “Thần thiếp ${nmd?k61Title(v)+", xin cầu kiến":"xin ra mắt"}.”`}catch(e){return""}}
+function visitSeen(v){try{if(!v||v===S||!S||!S.known)return;if(typeof k61St==="function"&&k61St(v)<2)k61Know(v,"",true,2);grMet(v)}catch(e){}}
 /* the preview of "Chào hỏi" (what is sure: her own name; theirs by the rule — the nết part is not known before) */
 function grPreview(a,b){const ra=grRank(a),rb=grRank(b);const P=grPron(b);const L=["thấy mặt, rõ thân phận"];
  L.push(ra<rb?`ngươi xưng danh trước, ${P} biết tên ngươi`:ra===rb?"ngang hàng: mỗi bên xưng danh hay không tùy tính nết":`${P} phận dưới, xưng danh trước`);
@@ -110,7 +109,7 @@ function gmSay(k,v,plain,x){let t=plain;try{const P=window.TONE_POOL&&TONE_POOL[
 function gmOpts(v){const A=[],B=BAL.greet.meet;const f=chatF(v),g=n=>Math.max(1,Math.round(n*f));const met=npcKnows(v,S)&&S.known&&k61Named(v);
  const W=tag=>{let w=1;try{for(const t of traitsOf(v)){const R=BAL.net.T[t];if(R&&R.w&&R.w[tag]!=null)w*=R.w[tag]}}catch(e){}return w};
  const fr=Math.max(0,aff(v,S)),sp=Math.max(0,typeof agSpite==="function"?agSpite(v,S):0);
- if(!met){A.push({k:"greet",w:W(B.opt.greet),run:()=>{const hi=grRank(S)>grRank(v)&&!grUniq(S)&&!grHerald(S);const G=greetName(v,S,hi?{me:0}:{});return{h:`${k61Cap(k61Named(v)?k61Title(v):k61Desc(v))} ${(window.TONE_POOL&&kLine("greet:come",TONE_POOL.greetCome,{about:v}))||"tiến lại, cúi chào ngươi"}.`,line:G.line,G}}});return A}
+ if(!met){A.push({k:"greet",w:W(B.opt.greet),run:()=>{const hi=grRank(S)>grRank(v)&&!grUniq(S)&&!grHerald(S);const G=greetName(v,S,hi?{me:0}:{});visitSeen(v);G.line=grLine(G);/* rank decides who greets first: a higher visitor stops before her and waits (her side greets, see grLine); only an equal / lower one bows to her */const up=grRank(v)>grRank(S);G.arr=1;G.line=grLine(G);const T=k61Cap(k61Named(v)?k61Title(v):k61Desc(v)),Pn=k61Cap(grPron(v));/* arrival as a stage line (owner 24/11 ~22:08Z): a higher rank is announced at the door, a lower one announces herself; then her walk in HER tone */const tone=(window.TONE_POOL&&kLine(up?"greet:comehi":"greet:come",up?TONE_POOL.greetComeHi:TONE_POOL.greetCome,{about:v}))||(up?"tiến lại, dừng bước trước mặt ngươi":"tiến lại, cúi chào ngươi");return{h:`${visitArrive(v)} ${Pn} ${tone}.`,line:G.line,G}}});return A}
  const TK=BAL.talk,third=liveRivals(true).filter(x=>x!==v&&x!==S).sort((a,b)=>aff(v,a)-aff(v,b))[0];
  A.push({k:"health",w:W(B.opt.health)*(1+fr/B.affK),run:()=>{const n=g(TK.health);affAdd(S,v,n);chatMark(v);return{h:`${v.name} ${gmSay("Health",v,"hỏi han sức khỏe ngươi")}.`,line:`Ngươi quý nàng +${n}.`}}});
  {const o=talkPraiseO(v),n=g(nv(S,"praise"));A.push({k:"praise",w:W(B.opt.praise)*(1+fr/B.affK),run:()=>{chatMark(v);if(roll(o)){affAdd(S,v,n);return{h:`${v.name} ${gmSay("Praise",v,"khen tài nghệ của ngươi")}.`,line:`Ngươi quý nàng +${n}.`}}affAdd(S,v,-TK.praiseFail);return{h:`${v.name} ${gmSay("Praise",v,"khen tài nghệ của ngươi")}.`,line:`Ngươi cho là nàng giả lả. Ngươi quý nàng -${TK.praiseFail}.`}}})}
@@ -136,11 +135,11 @@ function gmCard(v){const O=gmOpts(v);if(!O.length)return null;const c=agPw(O.map
 /* r4: the reply card (after the visitor's act ran) is carried as data (j3 rcpReg): v, provoke, G, the two lines */
 const gmReplyCard=rcpReg("gmReply",(v,prov,G,h1,h2)=>{let opts;if(prov){try{opts=apHostOpts(v)}catch(e){opts=null}}
  if(!opts)opts=gmReplies(v,G);
- let who;try{who=k61Named(v)&&isKnown61(v)?pv(v):kitStrangerOf(v)}catch(e){who=pv(v)}
+ visitSeen(v);const who=pv(v);/* a visitor is always known by sight: face + name at the standard figure size, never the grey silhouette */
  return{ev:1,t:"Có người đến",who,h:`<p>${h1}</p><p>${h2}</p>`,opts}});
 (function(){
  /* before the agent loop's deciders: approaching is one of her uses of the buổi's ONE deed; who approaches keeps her deed (agUse), the rest decide as before */
  const at0=agTick;agTick=function(){try{gmTick()}catch(e){}return at0.apply(this,arguments)};
  const w0=agWatch;agWatch=function(){const r=w0.apply(this,arguments);try{gmWatch()}catch(e){}return r};
 })();
-Object.assign(window,{greetName,grRank,grUniq,gmTick,gmWatch,gmOpts,GM});
+Object.assign(window,{visitSeen,visitArrive,greetName,grRank,grUniq,gmTick,gmWatch,gmOpts,GM});

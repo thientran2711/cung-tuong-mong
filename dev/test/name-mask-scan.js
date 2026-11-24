@@ -42,5 +42,5 @@ for(const [f,t] of Object.entries(src)){t.split('\n').forEach((ln0,i)=>{const ln
   try{out.pal.push(...places().filter(x=>x.k[0]==='r').map(x=>x.n+' | '+x.fn+' | '+String(x.d).replace(/<[^>]+>/g,'')))}catch(e){}return out});
  console.log('unmet consorts in fresh court:',R.n);
  for(const t of R.rows.concat(R.pal)){const raw=R.names.find(n=>t.includes(n));if(raw)rep('R-RAW',`${raw} :: ${t}`);else if(t.includes('???'))rep('R-???',t);else console.log('info    ',t)}
- if(R.n&&!R.rows.some(t=>/^\s*\d+ vị chưa quen biết/.test(t)))rep('R-FAIL','no aggregate "N vị chưa quen biết" row');else rep('ok','R result rows aggregate strangers');
+ if(R.n&&!R.rows.some(t=>/^\s*\d+ vị/.test(t)))rep('R-FAIL','no aggregate "N vị" row');else rep('ok','R result rows aggregate strangers');
  console.log('page errors',errs.length,errs.slice(0,3));await b.close();console.log(bad||errs.length?'FAIL':'PASS',bad,'hits');process.exit(bad||errs.length?1:0)})();
