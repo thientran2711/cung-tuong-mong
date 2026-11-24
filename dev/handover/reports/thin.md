@@ -909,7 +909,17 @@ PRIORITY #1 CHECK ('fix-2 r3 / fix-3 r3 / rkGid round-trip'): OD 2204–2205 | m
 | coop-keymove-unit | 12/12 | 12/12 |
 | coop-range-scan / identity / gen --check | PASS 48 fields · 0 rewrites (3 states) · = BAL | — |
 | rv row 4 coop-worker.yml paths | done: coop/worker/**, dev/build/jbalpr.js, jbal2.js, gen_coop_ranges.js | — |
-A/B (harness 6576e086 overlay, CAP 300 PCAP 1500 POSLOG NEGTRAP, 5 rounds per side; sides fix2 = fix-2 game + :8797, fix3 = fix-3 game + :8798, main = main game + :8798, run in parallel): RUNNING.
+A/B (harness 6576e086 overlay, CAP 300 PCAP 1500 POSLOG NEGTRAP, 1 pair × 1 kiếp per round, 5 rounds per side, 3 sides in parallel; fix2 = fix-2 r3 game + fix-2 Worker :8797, fix3 = fix-3 r3 game + main Worker :8798, main = LIVE 502c48c9 game + main Worker :8798; room weeks per round fix2 3/4/5/5/4, fix3 2/4/2/3/3, main 2/3/2/4/4):
+| row (rounds hit / 5) | fix2 | fix3 | main | read |
+|---|---|---|---|---|
+| number: bạc < 0 ARRIVED / out of range (merge) | **0/5** | 3/5 (−12, −79, −25) | 0/5 | main-Worker sides 3/10 vs clamp Worker 0/5 (history: 0/5 vs 1/5, 0/5 vs 3/10) → fix-2 holds |
+| number: sung < 0 (guest, week 1) | 0/5 | 1/5 (−6) | 0/5 | same merge family, main Worker |
+| coop-pos «X sees the friend at r5, she is at r2/r4» | 2/5 (n1, n17) | **0/5** | 0/5 | the fix2 side has NO fix-3 game code (= main's place rule): the family fix-3 closes still shows there; fix-3 0/5; runs are short (2–5 weeks) |
+| coop-where (NPC places differ, buổi 5.0) | 1/5 (same round as its coop-pos) | 0/5 | 0/5 | rides with the coop-pos round |
+| coop-stat friend Sủng/Danh/Sức one buổi late | 1/5 | 1/5 | 1/5 | equal on all sides — not these branches |
+| save round-trip | 0/5 | 0/5 | 2/5 `save.P.0.pid: "kyngo" → undefined` | main only; → save round-trip family (queued) |
+| stuck / pageerror | 0/5 | 0/5 | 0/5 | — |
+SẴN SÀNG KIỂM review/robot-coop-fix-2-r3 71076b61 · SẴN SÀNG KIỂM review/robot-coop-fix-3 32121242 (both FF from LIVE 502c48c9).
 #### rkGid row (Foreman B ask: U3 «save round-trip 16 (rkGid)» on harness 5a65a561)
 The skip WORKS: 5a65a561 (and 7d0e9ffa on) skip `save.S.rkGid` in robot10-coop.js dp(). The harness keys a bug row by type + msg («save→load→save changes the state (host|guest)»), not by path, and keeps the FIRST detail; U3 p1-2 rows = first detail rkGid (old harness 0a593f8e, before RESUME), then **nNew 18 on 5a65a561 with lastDetail `save.R.0.rl.4: 7 → 5` (host) / `save.R.0.rl.2: 1 → 6` (guest)** — a different path. Not a harness bug; the count mixes families. NEW candidate: a consort's canonical relation map R[].rl[pid] changes on a solo load of a co-op save (same family as «save round-trip renames staff»: the scratch page is solo/owner → deser/nmFix/normalize rewrites co-op-keyed data). Harness note for runners: read lastDetail, not the first detail, for save rows after a harness switch.
 
