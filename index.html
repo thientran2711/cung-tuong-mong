@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái","b":"dd3a8a4d4b48","h":[{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"}]};
+window.CTM_BI={"s":"93b638ec+","t":"2026-11-24T05:08Z","c":"KIT 26.4: kitPodiumShow unknown option (+ global hook): grey Người lạ silhouette with the name, no cuMeet","b":"dbdaf04a9db7","h":[{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -34703,7 +34703,10 @@ function kpodRain(root,place,ms){const fx=root.querySelector(".kpod-fx");const c
   const R=root.getBoundingClientRect(),r=c.getBoundingClientRect();const s=document.createElement("i");s.className="kpc kpc-pet";s.style.background=P.pet[Math.floor(Math.random()*P.pet.length)];const sz=8+Math.random()*6;s.style.width=s.style.height=sz+"px";
   s.style.left=(r.left-R.left+Math.random()*r.width)+"px";s.style.top="-12px";fx.appendChild(s);const an=s.animate([{transform:"translate(0,0) rotate(0deg)",opacity:.95},{transform:`translate(${(Math.random()-.5)*60}px,${r.bottom-R.top+20}px) rotate(${(Math.random()-.5)*540}deg)`,opacity:.15}],{duration:4200+Math.random()*2000,easing:"linear",fill:"forwards"});an.onfinish=()=>s.remove()},420)}
 function kitPodiumShow(list,o){o=o||{};const L=kpodNorm(list);if(L.length<2)return null;kitPodiumClose(true);
- try{if(typeof cuMeet==="function")cuMeet(L.map(x=>x.who))}catch(e){}/* everyone on the dais is known (owner 15/11): face + name, never a silhouette */
+ /* KIT 26.4 (owner 24/11 ~05:35Z «Người lạ» until greeted; MAIN 117 KIT REQUEST #2): o.unknown(p) (or the global window.kitPodiumUnknown) → true for a person she has NOT met: she stands as the standard grey silhouette with her NAME (names are called aloud at a selection) and is NOT marked known (no cuMeet). Every podium / ranking / result list takes the same option (kitPodiumShow, kitPodiumTag o, the j82 contest wrapper). */
+ const U=typeof o.unknown==="function"?o.unknown:(typeof window.kitPodiumUnknown==="function"?window.kitPodiumUnknown:null);const isU=x=>{try{return !!(U&&x&&x.who&&x.who!==S&&U(x.who))}catch(e){return false}};
+ L.forEach(x=>{if(isU(x)){x.unk=1;if(!x.nameH&&x.who.name)x.nameH=`<b class="kname" data-k61skip="1" style="--rc:#7a7e84">${String(x.who.name).replace(/[<>&"]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;"}[c]))}</b>`}});
+ try{if(typeof cuMeet==="function")cuMeet(L.filter(x=>!x.unk).map(x=>x.who))}catch(e){}/* everyone on the dais is known (owner 15/11) except an entrant the option marks unknown: face + name, never a silhouette */
  const ov=document.createElement("div");ov.id="kpodov";ov.innerHTML=kitPodium(L,o);document.body.appendChild(ov);const root=ov.firstElementChild;
  const red=kpodReduced();if(red)root.classList.add("kpod-skip","kpod-red");const fit=()=>kpodFit(root);fit();
  [...root.querySelectorAll("img")].forEach(im=>{if(!im.complete)im.addEventListener("load",fit,{once:true})});try{document.fonts.ready.then(fit)}catch(e){}setTimeout(fit,400);
@@ -66681,6 +66684,26 @@ function kitStBadge(st){const m={ok:"✓",busy:"…",pause:"⏸"};return m[st]?`
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77b",title:"kitStBadge · huy hiệu trạng thái ở góc nút vuông (✓ sẵn sàng · … đang bận · ⏸ tạm dừng · xám = ngoại tuyến)",
  html:()=>`<div class="kitpg-row" style="display:flex;gap:14px;padding:8px">${[["ok",""],["busy",""],["pause",""],["","koff"]].map(([st,c])=>`<button type="button" class="krailb ${c}" aria-label="${st||"ngoại tuyến"}"><span class="krailg">♥</span>${kitStBadge(st)}</button>`).join("")}</div>`})}catch(e){}
 }catch(e){console.error("jrail",e)}})();
+
+/* KIT §77c kitPromoChip (MAIN 117 KIT REQUEST, owner 24/11 ~05:55Z «để trên cái mép trên cùng của cái sân khấu, ghi ngắn gọn thôi»): ONE short chip at the TOP edge of the stage,
+   centred (the bottom edge belongs to the figure name tags; the scene title is top-left #kshL and the chip column top-right #kshR, both clear of the centre), telling the time to the
+   next promotion round and the rank: «Kỳ thăng: 3 tháng · Tần». Data hook (Foreman D, PROMO-HIST): window.kitPromoHook = () => ({months:n, rank:"Tần"}) | null (null = no chip).
+   months 0 → «Kỳ thăng: kỳ này · Tần». cổ trang, no %, kit `.kchip` look; not tappable. Mounted after every renderStage. */
+(function(){try{
+ const css=document.createElement("style");css.id="kpromo-css";css.textContent=`#stage>.kpromo{position:absolute;top:6px;left:50%;transform:translateX(-50%);z-index:6;pointer-events:none;white-space:nowrap;margin:0;box-shadow:0 1px 4px #2a1a1244}#stage>.kpromo b{font-weight:700}`;document.head.appendChild(css);
+ window.kitPromoInfo=function(){try{const f=window.kitPromoHook;const r=typeof f==="function"?f():null;if(!r||!(r.months>=0)||!r.rank)return null;return r}catch(e){return null}};
+ window.kitPromoChip=function(r){r=r||kitPromoInfo();if(!r)return"";const w=r.months>0?`${r.months} tháng`:"kỳ này";return `<span class="kchip kpromo" data-kpromo="1">Kỳ thăng: <b>${w}</b> · ${r.rank}</span>`};
+ /* the chip stands at the centre of the top edge; when a head seal / mood seal / the right title column is there, it slides along the top edge to the nearest free place (never over a seal) */
+ window.kitPromoPlace=function(st){const c=st&&st.querySelector(":scope>.kpromo");if(!c)return;c.style.left="50%";c.style.transform="translateX(-50%)";const R=st.getBoundingClientRect(),w=c.offsetWidth,h=c.offsetHeight,top=6;
+  /* a spot is taken when anything but the stage picture / a figure body lies under the chip (seal, mood avatar, rail button, count pill, title column) */
+  const RX=/seal|kemo|kmemark|kmglw|krail|kchip|kgfbtn|kpill|j59hchip|kfig|kscene|ktitle|kshR|kshL/i;
+  const taken=x=>{const y=R.top+top+h/2;for(let dx=0;dx<=w;dx+=Math.max(8,w/12)){const px=R.left+x+dx;for(const e of document.elementsFromPoint(px,y)){if(e===c||e.closest(".kpromo"))continue;if(e===st)break;const cls=String(e.className&&e.className.baseVal!==undefined?e.className.baseVal:e.className||"")+" "+(e.id||"");if(RX.test(cls)&&!/figimg|bob/.test(cls))return true}}return false};
+  const cx=(R.width-w)/2;if(!taken(cx))return;const lo=8,hi=R.width-w-8;let best=null;for(let x=lo;x<=hi;x+=6){if(!taken(x)&&(best==null||Math.abs(x-cx)<Math.abs(best-cx)))best=x}
+  if(best!=null){c.style.left=best+"px";c.style.transform="none"}};
+ window.kitPromoMount=function(){const st=document.getElementById("stage");if(!st)return;st.querySelectorAll(":scope>.kpromo").forEach(e=>e.remove());const h=kitPromoChip();if(h){st.insertAdjacentHTML("beforeend",h);kitPromoPlace(st);setTimeout(()=>{try{kitPromoPlace(st)}catch(e){}},700)}};
+ if(typeof renderStage==="function"){const rs0=renderStage;renderStage=function(){const r=rs0.apply(this,arguments);try{kitPromoMount()}catch(e){}return r}}
+ if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77c",title:"kitPromoChip · chip «Kỳ thăng» ở mép trên sân khấu",where:"<b>Mép trên sân khấu</b> (giữa, dưới thanh trên)",note:"Chip ngắn «Kỳ thăng: 3 tháng · Tần»; dữ liệu từ <code>window.kitPromoHook</code> (Foreman D); ẩn khi hook trả null.",html:()=>`<div class="kitpg-row" style="padding:8px">${kitPromoChip({months:3,rank:"Tần"})}${kitPromoChip({months:0,rank:"Phi"})}</div>`})
+}catch(e){console.error("kpromo",e)}})();
 /* ================= jstatus: kitStatusIcon — ONE status icon (KIT §77.1, owner 16/11 16:25Z, review/status-icons) =================
    Owner: "nhiều game bây giờ nó làm rất là đơn giản. Nó chỉ là một cái icon biểu tượng download nằm ở một cái góc nhỏ … có animation sao đó để cho người chơi
    biết là có cái gì đó đang download về. Người nào muốn biết thông tin thì bấm vô cái nút đó thì nó sẽ hiện những cái thông tin … Cái nào bỏ vô trong cái icon
@@ -96032,7 +96055,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="dd3a8a4d4b48";window.CTM_BUILD=BUILD;
+const BUILD="dbdaf04a9db7";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
