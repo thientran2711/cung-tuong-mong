@@ -153,7 +153,9 @@ function selxNight(){const Z=S.selx2;const d=Z.days;if(d===3)return selxEdict();
 function selxD2Dress(){const Z=S.selx2;const I=BAL.selx.imp;const o=[];
  o.push(selxO("Ngồi trước gương điểm trang",()=>{selxSpend(I.dressK);selxToil()},{x:selxX(I.dressK,"tự chọn phấn son, y phục ra mắt ba vị")}));
  o.push(selxO("Theo ma ma ra sân chờ, để mặt mộc",()=>{selxSpend(I.mocK);try{if(S.toilette&&S.toilette.wk===toilWk())S.toilette=null}catch(e){}selxD2Go()},{x:selxX(I.mocK,"ra sân sớm, còn nhiều khắc làm quen ở sân chờ")}));
- selxAskOpts(o,()=>selxD2Dress());
+ /* SELSCENE-8 (RV-SELX FAIL 4): the two roads are of equal value (law 2); the one that opens no board (mặt mộc) stands first, so a card driven
+    by its first option alone (the go-live smoke, a bot) passes the day the same way a player who picks it does */
+ o.unshift(o.splice(1,1)[0]);selxAskOpts(o,()=>selxD2Dress());
  selxCard(selxDayTitle(2),`<p>Canh tư ma ma đã gõ cửa. Tú nữ thay xiêm y, chải tóc, để ma ma xem lại từng người trước khi ra sân chờ.</p><p>Hôm nay ba vị chí tôn sẽ nhìn mặt từng người: ăn vận, son phấn đều lọt vào mắt các vị.</p>`,o,selxMaMa())}
 /* the mirror = jtoil toilOpen (one rule for the look); the day's occasion is the hall (toilOcc wrapper below); when the mirror closes the day goes on */
 function selxToil(){const Z=S.selx2;Z.tw=1;let ok=false;try{toilOpen();ok=!!(TOIL&&TOIL.st)||!!toilToday(S)}catch(e){console.error("selx toil",e)}
@@ -225,7 +227,9 @@ function selxTest(k,type,then){const Z=S.selx2;const RY=selxRoyals();const ry=RY
    selxRes(nm,b,selxWhy(nm,tok,o,r));then()})),who)}
 /* Hoàng thượng's test = the kit mini-game of the selection (jkc2 PEND.kc2Sel → kc2SelPlay → fin → kc2SelDo → selxSelDo: the days path stores the mark) */
 function selxMini(){const d=mkP("kc2Sel",{});if(!d){S.selx2.mk=Object.assign(S.selx2.mk||{},{mini:5});return selxTest("H","hanhxu",selxContestRun)}
- Q.unshift({t:"Hoàng thượng",h:selxHead()+d.t,opts:d.o,who:d.who,pid:"kc2Sel",pp:{}})}
+ /* SELSCENE-8 (RV-SELX FAIL 4): «Cúi đầu chờ xét» (no board, the mark of her own art level) first, as on the dress card */
+ const o=(d.o||[]).slice();const c=o.findIndex(x=>/^Cúi đầu chờ xét/.test(x.n||""));if(c>0)o.unshift(o.splice(c,1)[0]);
+ Q.unshift({t:"Hoàng thượng",h:selxHead()+d.t,opts:o,who:d.who,pid:"kc2Sel",pp:{}})}
 function selxMiniDone(raw){const Z=S.selx2;Z.mk=Object.assign(Z.mk||{},{mini:raw});Z.fav=Z.fav||{};Z.fav.E=(Z.fav.E||0)+selxMiniFav(raw);selxSpend(BAL.selx.beat.test);selxTest("H","hanhxu",selxContestRun);try{showModal();render()}catch(e){}}
 /* THE CONTEST on the 3 marks (jselx selxContest, the same formula and the same royal reaction for every girl) */
 function selxContestRun(){const Z=S.selx2;const X=S.selx;const T=k=>SELX_TESTS.find(x=>x.id===(Z.tests&&Z.tests[k]&&Z.tests[k].id));const tok=k=>(selxRoyals().find(x=>x[0]===(Z.tests&&Z.tests[k]&&Z.tests[k].k))||[])[2];
@@ -245,7 +249,7 @@ function selxD3Teach(){const Z=S.selx2;Z.at=Z.home;
  selxCard(selxDayTitle(3),`<p>${selxCap(selxNumW(BAL.selx.yard.kept))} người được ban hương nang dọn về chung ${selxSo(Z.home)}. Ma ma dạy luật trong cung: gặp người trên phải lui sang bên, không được tự ý ra khỏi cung mình, thư từ ra ngoài phải qua Nội vụ phủ.</p>`,
   [selxO("Nghe ma ma dạy",()=>{selxSpend(BAL.selx.beat.teach);selxFree()},{x:selxX(BAL.selx.beat.teach,"biết luật trong cung trước khi nhận chiếu")})],selxMaMa())}
 /* the edict (evening of day 3): the rank part of jselx (±1 by place, cap Tần), the «Nhập cung» card corrected, then the Sắc phong news (KIT §93 rows) */
-function selxEdict(){const Z=S.selx2;const X=S.selx;X.tier=X.step+1;const r0=(S.origin&&S.origin.r)||0;const rank=selxRank(S,X.step);const was=S.rank;S.rank=rank;
+function selxEdict(){selxQEndOut();const Z=S.selx2;const X=S.selx;X.tier=X.step+1;const r0=(S.origin&&S.origin.r)||0;const rank=selxRank(S,X.step);const was=S.rank;S.rank=rank;
  if(rank<was)S.sung=Math.max(0,(S.sung||0)-(was-rank)*BAL.entry.stepSung);S.lastPromo=S.turn;try{palFix()}catch(e){}try{kc2R0()}catch(e){}
  X.why=rank>r0?SELX_WHY.up:rank<r0?SELX_WHY.dn:SELX_WHY.eq;const c=Q.find(m=>m.t==="Nhập cung");if(c){const h0=String(c.h),nw=`${RANKS[rank].n} (kỳ tuyển chọn: ${KC2SW[X.tier]})`;
   c.h=h0.includes(`phong <b>${RANKS[was].n}</b>`)?h0.replace(`phong <b>${RANKS[was].n}</b>`,`phong <b>${nw}</b>`):h0.replace(new RegExp(`(Phong[\\s\\S]*?>)${RANKS[was].n}(<)`),`$1${nw}$2`);try{if(typeof oiPut==="function")oiPut(c,X.why)}catch(e){}}
@@ -269,8 +273,85 @@ function selxClock(){const Z=S.selx2;if(Z.clock)return;Z.clock=1;const n=BAL.sel
 /* ---- WIRING: new tú nữ lives (direct road, not cnv / cn / hòa thân) start DAY 1 instead of the one-card selection ---- */
 (function(){const a0=nlAccept;nlAccept=function(){const r=a0.apply(this,arguments);try{if(S&&!S.dead&&BAL.selx.days>1&&S.selx2&&!S.selx2.days&&!S.selx2.done&&!S.selx.done&&selxDaysFit()&&S.selx2.girls&&S.selx2.girls.length){
   const i=Q.findIndex(m=>m.pid==="kc2Sel");if(i>=0)Q.splice(i,1);const j=Q.findIndex(m=>/^Nhập cung/.test(m.t||""));const keep=j>=0?Q.splice(j,1)[0]:null;
-  selxDay(1);const first=Q.shift();Q.splice(Math.max(0,Math.min(i<0?0:i,Q.length)),0,first);if(keep)Q.push(keep);showModal();render()}}catch(e){console.error("selx days",e)}return r}})();
+  selxDay(1);const first=Q.shift();const at=Math.max(0,Math.min(i<0?0:i,Q.length));Q.splice(at,0,first);
+  /* SELSCENE-8 (RV-SELX FAIL 4): the cards of the life that come AFTER the selection («Mệnh truyện kiếp này», «Nhập cung») wait until the days end —
+     before, they sat behind the day card and showed the moment a beat left the card chain (the mirror, the mini-game board, the Dư đồ), mid-day */
+  selxQEndPut(Q.splice(at+1).concat(keep?[keep]:[]));showModal();render()}}catch(e){console.error("selx days",e)}return r}})();
+/* the held cards live outside S (they carry closures; S is saved as data); keyed by the life so another life never receives them */
+let SELX_QEND=null;
+function selxQK(){return S?[S.name,S.origin&&S.origin.k,S.born||S.age||0].join("|"):""}
+function selxQEndPut(L){SELX_QEND={k:selxQK(),L:(SELX_QEND&&SELX_QEND.k===selxQK()?SELX_QEND.L:[]).concat(L||[])}}
+function selxQEndOut(){const h=SELX_QEND;SELX_QEND=null;if(h&&h.k===selxQK())Q.push(...h.L.filter(m=>!Q.includes(m)))}
 /* the mirror on Day 2: the day's ONE occasion is the hall (jtoil reads toilOcc for the dress verdict); when the mirror closes the day goes on */
 (function(){if(typeof toilOcc!=="function")return;const o0=toilOcc;toilOcc=function(){try{if(selxDaysOn()&&S.selx2.days===2)return[{k:"tuyen",n:"Điện tuyển",F:BAL.selx.imp.F}]}catch(e){}return o0.apply(this,arguments)};window.toilOcc=toilOcc})();
 (function(){if(typeof kg82Close!=="function")return;const c0=kg82Close;kg82Close=function(){const r=c0.apply(this,arguments);try{const Z=S&&S.selx2;if(Z&&Z.tw&&!(TOIL&&TOIL.st)){Z.tw=0;setTimeout(()=>{selxD2Go();try{showModal();render()}catch(e){}},0)}}catch(e){console.error(e)}return r};window.kg82Close=kg82Close})();
 try{Object.assign(window,{selxImpOf,selxImpRun,selxAskLvl,selxAsk,selxPhanCung,selxCarry,kitDayName,selxDayTitle,selxDay,selxDaysOn,selxContestRun,selxEdict,selxDrama,selxLessonMark,selxReactR,selxWhere})}catch(e){}
+/* ---- SELSCENE-8 (RV-SELX FAIL 1/4): RESUME. A day card is a closure chain; a saved game, a co-op rebuild (jcoopworld fromCanon keepQ → j3 serQ / deserQ)
+   or the host's copy of the guest's cards (jcoopthinb qSer) carries a card only as {pid, pp} and re-makes it with mkP. PEND.selxD re-makes the beat she
+   stands at from the day state in S.selx2 (the phase; a drama or a menu in the middle of a phase starts again at that phase's card). It makes the card
+   without pushing it (Q is swapped while the beat runs), so mkP stays a pure "make a card" call. ---- */
+function selxResumeBeat(){const Z=S.selx2;const d=Z.days,K=selxDayK();
+ if(d===1){if(!Z.home)return Z.kh>=K?selxD1Gate():selxD1Rooms();if(Z.lesson==null)return selxLesson();return selxFree()}
+ if(d===2){if(Z.yk==null)return selxD2Dress();const mk=Z.mk||{};if(!Z.impDone&&Z.yk>0)return selxYard();if(!Z.impDone)return selxHall();
+  if(mk.dd==null)return selxTest("T","doidap",()=>selxMini());if(mk.mini==null)return selxMini();if(mk.hx==null)return selxTest("H","hanhxu",selxContestRun);
+  if(!Z.pod)return selxContestRun();return selxNight()}
+ if(d===3){if(Z.kh>=K)return selxD3Teach();return selxFree()}}
+PEND.selxD=pp=>{try{if(!S||S.dead||!selxDaysOn())return null;const Q0=Q;Q=[];let m=null;try{selxResumeBeat();m=Q.find(x=>x&&x.pid==="selxD"||x&&x.pid==="kc2Sel")||null}finally{const made=Q;Q=Q0;
+  /* a beat that ends the days at once (the edict's news card, ban hoa) is not a resume: put what it made back in front */if(!m&&made.length)Q.unshift(...made)}
+  return m?{t:m.h,o:m.opts,who:m.who,cls:m.cls,t0:m.t}:null}catch(e){console.error("selx resume",e);return null}};
+/* the save / rebuild never meets a selx day without its card: if the days are on and no card of the day is in Q (nor a board / the mirror / the Dư đồ),
+   the current beat is put back (one check after each render; the same PEND path) */
+(function(){const r0=render;let t=0;render=function(){const r=r0.apply(this,arguments);try{if(selxDaysOn()&&!t)t=setTimeout(()=>{t=0;try{selxRefill()}catch(e){console.error(e)}},300)}catch(e){}return r};window.render=render})();
+/* her mini-game board is open (Hoàng thượng's test): the day waits for its end (fin → selxMiniDone); not kept in S (a reload closes the board) */
+(function(){if(typeof kc2SelPlay!=="function")return;const p0=kc2SelPlay;kc2SelPlay=function(){try{if(selxDaysOn())window.__selxMw=selxQK()}catch(e){}return p0.apply(this,arguments)};window.kc2SelPlay=kc2SelPlay;
+ const d0=selxMiniDone;selxMiniDone=function(){window.__selxMw=null;return d0.apply(this,arguments)};window.selxMiniDone=selxMiniDone})();
+function selxRefill(){if(!selxDaysOn()||window.__selxRf)return;const Z=S.selx2;if(Z.tw||window.__kpm||S.mg||window.__selxMw===selxQK())return;
+ if(Q.some(m=>m&&(m.pid==="selxD"||m.pid==="kc2Sel"||m.t==="Tin sắc phong"||m.t==="Ban hương nang")))return;
+ try{if(typeof TOIL==="object"&&TOIL&&TOIL.st)return}catch(e){}try{const g=document.getElementById("kg82");if(g&&!g.hidden&&g.getClientRects().length)return}catch(e){}
+ window.__selxRf=1;try{const d=mkP("selxD",{});if(d){Q.unshift({t:d.t0||selxDayTitle(Z.days),h:d.t,opts:d.o,who:d.who,cls:d.cls,pid:d.pid==="selxD"&&d.t0==="Hoàng thượng"?"kc2Sel":"selxD",pp:{}});showModal()}}finally{window.__selxRf=0}}
+/* ================= SELSCENE-8 (RV-SELX FAIL 1): CO-OP = ONE SHARED SELECTION, THE HOST DECIDES =================
+   A room has ONE cohort of tú nữ (S.selxRm, a WORLD key in jcoopworld W_KEYS, so it is written on the host and read by both seats):
+   - the draw: the first tú nữ life of the room (her accept runs on the host, jcoopthinb withSeat) draws the girls once (selxGirls, the host's ids and
+     face pools); every other tú nữ seat of the same cohort gets the SAME girls (copies, same ids) — law 1 and one world (OD:L96);
+   - the room tests (đối đáp of Thái hậu, hành xử of Hoàng hậu) and each girl's marks + score are fixed at the draw, ONCE (the same formula and the
+     same royal reaction as hers, selxNpcMarks / selxImpAll / selxScore): both seats see the same girls score the same;
+   - kept girls of the room = the top BAL.selx.coop.npcKept of the girls by that score (every seat's player is ranked against the same girls and kept
+     by her own place, as in solo); they enter the world ONCE, on the host (selxRoomIn), when the host's own contest ends or when the room's buổi
+     first moves after the days; the room clock moves the BAL.selx.days tuần there too (never once per seat);
+   - a seat in her 3 days keeps «Sẵn sàng» shut (as in solo); the room's buổi moves when both seats are ready, so it waits for the days to end.
+   Solo never runs any of this (selxCo() false). */
+function selxCo(){try{return !!(window.COOPW&&COOPW.on)}catch(e){return false}}
+function selxRmOpen(){const R=S&&S.selxRm;return R&&!R.in&&Array.isArray(R.g)&&R.g.length?R:null}
+function selxJ(o){return JSON.parse(JSON.stringify(o))}
+function selxRmT(R){const tok=k=>(selxRoyals().find(x=>x[0]===k)||[])[2];const TE=ty=>{const x=R.t&&R.t[ty];const e=x&&SELX_TESTS.find(q=>q.id===x.id);return e?Object.assign({},e,{__k:x.k}):null};
+ return {art:R.art||"",dd:TE("doidap"),hx:TE("hanhxu"),rdd:o=>selxReactR(o,tok("T")),rhx:o=>selxReactR(o,tok("H"))}}
+(function(){const d0=selxDay1;selxDay1=function(){if(!selxCo())return d0.apply(this,arguments);const Z=S.selx2;if(!Z||Z.girls&&Z.girls.length)return;
+ let R=selxRmOpen();
+ if(R)Z.girls=R.g.map(selxJ);
+ else if(worldOn()){Z.girls=selxGirls();R=S.selxRm={g:null,t:{},art:"",res:[],in:0};
+  try{const p=(type,k)=>{const e=selxTestPick(type,k);if(e)R.t[type]={id:e.id,k}};p("doidap","T");p("hanhxu","H")}catch(e){console.error("selx room tests",e)}
+  try{R.art=(kc2SelArts()[0]||[""])[0]||""}catch(e){}
+  try{selxAskNpc()}catch(e){}/* the girls ask the ma ma on day 1 (law 1) — here, before their answers are fixed */
+  const t=selxRmT(R);for(const v of Z.girls){let imp=BAL.selx.imp.mid;try{imp=selxImpAll(v).mk}catch(e){}v.__impMk=imp;v.__marks=Object.assign(selxNpcMarks(v,t),{imp});v.__sc=Math.round(selxScore(v,v.__marks))}
+  const L=Z.girls.slice().sort((a,b)=>b.__sc-a.__sc||(+b.sac||0)-(+a.sac||0));const nK=BAL.selx.coop.npcKept;
+  R.res=L.map((v,i)=>({id:v.id,kept:i<nK?1:0,step:i<nK?BAL.selx.placeStep[i]:null}));R.g=Z.girls.map(selxJ)}
+ else return d0.apply(this,arguments);/* an old room build on the guest: her own draw, never a world write */
+ Z.rooms=selxRoomPlan(Z.girls).map(r=>({so:r.so,ids:r.girls.map(v=>v===S?"me":v.id),beds:r.beds.map(b=>b.map(v=>v===S?"me":v.id))}))};window.selxDay1=selxDay1})();
+/* the room tests: every seat is asked the same two questions as the girls were scored on */
+(function(){const p0=selxTestPick;selxTestPick=function(type,k){try{const R=selxCo()&&selxRmOpen();const x=R&&R.t&&R.t[type];if(x&&x.k===k){const e=SELX_TESTS.find(q=>q.id===x.id);if(e)return e}}catch(e){}return p0.apply(this,arguments)};window.selxTestPick=selxTestPick})();
+/* the room decides the girls' fate: kept = the room list, whatever place the player took among them */
+(function(){const c0=selxContest;selxContest=function(){const L=c0.apply(this,arguments);try{const R=selxCo()&&S.selxRm;if(R&&R.res&&R.res.length)for(const x of L){if(x.v===S)continue;const r=R.res.find(y=>y.id===x.v.id);if(r){x.kept=!!r.kept;x.step=r.kept?r.step:null}}}catch(e){console.error(e)}return L};window.selxContest=selxContest})();
+/* the kept girls enter the world once, on the host; on the guest they stay her own copies for her news card until the host's world arrives */
+(function(){const o0=selxNpcOut;selxNpcOut=function(L){if(!selxCo())return o0.apply(this,arguments);const Z=S.selx2;Z.out=Z.out||[];
+ for(const x of L){if(x.v===S||x.v.__done)continue;x.v.__done=1;if(x.kept)x.v.rank=selxRank(x.v,x.step,{k:"_",r0:x.v.r0});else Z.out.push({id:x.v.id,name:x.v.name,face:x.v.face,hue:x.v.hue,sc:x.sc,ban:1})}
+ Z.girls=[];if(worldOn())selxRoomIn(Z.keptV)};window.selxNpcOut=selxNpcOut})();
+function selxRoomIn(mine){const R=S&&S.selxRm;if(!R||R.in||!worldOn())return;R.in=1;const own=new Map((mine||[]).map(v=>[v.id,v]));
+ for(const r of R.res||[]){if(!r.kept||rivals.some(v=>v.id===r.id))continue;const g=(R.g||[]).find(v=>v.id===r.id);const v=own.get(r.id)||(g?selxJ(g):null);if(!v)continue;
+  v.rank=selxRank(v,r.step,{k:"_",r0:v.r0});v.__done=1;if(typeof roomFor!=="function"||roomFor("consort"))rivals.push(v)}
+ try{palFix()}catch(e){}
+ const n=BAL.selx.tuan;S.tuan=(S.tuan||0)+BAL.selx.days;while(S.tuan>=n){S.tuan-=n;S.turn=(S.turn||0)+1}/* the room clock: the days, once */
+ R.g=[];/* the cohort is closed; the girls live on as world people (kept) or in each seat's record (ban hoa) */}
+/* in a room the clock of the days moves once, in selxRoomIn (never once per seat: two seats' +3 would merge to +6) */
+(function(){const k0=selxClock;selxClock=function(){if(selxCo()){const Z=S.selx2;Z.clock=1;return}return k0.apply(this,arguments)};window.selxClock=selxClock})();
+/* the room's buổi first moves after the days (both seats ready): a cohort whose host has no tú nữ of its own still enters the world */
+(function(){if(typeof nextBuoi!=="function")return;const n0=nextBuoi;nextBuoi=function(){try{if(selxCo()&&worldOn()&&!(COOPW&&COOPW.ctx)&&S&&S.selxRm&&!S.selxRm.in&&!selxDaysOn())selxRoomIn()}catch(e){console.error(e)}return n0.apply(this,arguments)};window.nextBuoi=nextBuoi})();

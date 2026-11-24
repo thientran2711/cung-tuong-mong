@@ -18,10 +18,20 @@ const OR=(process.argv[5]||'tt,dtq,muoi,cn,nc,thd,ch,td,cnv').split(',');const s
   R.q0=await p.evaluate(()=>Q.map(m=>m.t));
   R.intro=await p.evaluate(()=>{const m=Q[0];return m&&(m.entI||m.oiP)?{t:m.t,art:m.art,btn:document.getElementById('mclose')&&document.getElementById('mclose').textContent}:null});
   if(!R.intro)f.push('no intro');else{if(SH)await p.screenshot({path:`${SH}/intro-${o}-${W}.jpg`,type:'jpeg',quality:55});for(let i=0;i<6&&await p.evaluate(()=>{const m=Q[0];return !!(m&&(m.entI||m.oiP))});i++){await p.evaluate(()=>document.getElementById('mclose').click());await sleep(700)}}
+  /* SELSCENE-8 (RV-SELX FAIL 2; owner OD 24/11 ~07:05Z three playable days, ~06:15Z contest of 12 → top 4, ~05:40Z ban hoa ends the life): a NEW tú nữ
+     life (not cnv / cn / hòa thân) opens DAY 1 «Ngày thứ nhất — Nhập cung» in place of the one kc2Sel card. The days are played card by card (first
+     open option, like a player who takes the first road; the scene dressing off — it only dresses the same cards); Hoàng thượng's test on day 2 is the
+     same kc2Sel card → the exam frame checks below; then the days run on to the edict (kept) or ban hoa (the life ends). */
+  const days=await p.evaluate(()=>{const m=Q[0];return !!(m&&/^Ngày thứ nhất — Nhập cung/.test(m.t||'')&&S.selx2&&S.selx2.days===1)});R.days=days;
+  const dayRun=async()=>{for(let i=0;i<600;i++){const r=await p.evaluate(()=>{window.__selxNoSc=1;document.querySelectorAll('#kpod,.kpod').forEach(x=>x.remove());
+     if(S.dead||!(typeof selxDaysOn==='function'&&selxDaysOn()))return 'end';const m=Q[0];if(!m)return 'wait';if(m.pid==='kc2Sel')return 'sel';
+     if(m.opts&&m.opts.length){const i=m.opts.findIndex(c=>!c.off&&!c.selxMap);chooseM(Math.max(0,i))}else closeModal();return 'go'});
+    if(r==='end'||r==='sel')return r;if(r==='wait')await sleep(300)}return 'stuck'};
+  if(days){const r=await dayRun();R.dayStop=r;if(r==='stuck')f.push('days stuck')}
   const sel=await p.evaluate(()=>{const m=Q[0];if(!m||m.pid!=='kc2Sel')return null;return m.opts.map(x=>x.n)});R.opts=sel;
-  if(!sel)f.push('no selection card');else{
-   /* pick the first art option (a real game) → the exam frame */
-   await p.evaluate(()=>chooseM(0));await sleep(1500);
+  if(!sel&&!(days&&R.dayStop==='end'&&false))f.push('no selection card');else if(sel){
+   /* pick the first art option (a real game) → the exam frame (the days' card puts «Cúi đầu chờ xét» first: take the first art one) */
+   await p.evaluate(()=>{const m=Q[0];const i=m.opts.findIndex(x=>!/^Cúi đầu chờ xét/.test(x.n||''));chooseM(Math.max(0,i))});await sleep(1500);
    const fr=await p.evaluate(()=>{const d=document.getElementById('kg82');if(!d)return null;const t=d.innerText;const ov=d.scrollWidth>d.clientWidth+2;return{t:t.slice(0,700),ov,kind:KG82.tier&&KG82.tier.occ,word:KG82.tier&&KG82.tier.word}});
    R.frame=fr;if(!fr)f.push('no exam frame');else{if(!/Giám khảo/i.test(fr.t)||!/Độ khó/i.test(fr.t))f.push('frame rows');if(fr.kind!=='tuyen')f.push('tier occ '+fr.kind);
     if(/\d+\s*%/.test(fr.t))f.push('percent shown');if(SH)await p.screenshot({path:`${SH}/exam-${o}-${W}.jpg`,type:'jpeg',quality:55});
@@ -30,7 +40,8 @@ const OR=(process.argv[5]||'tt,dtq,muoi,cn,nc,thd,ch,td,cnv').split(',');const s
     if(o==='tt'||o==='cnv'){await p.evaluate(()=>document.getElementById('kg82go').click());for(let i=0;i<120&&await p.evaluate(()=>!document.getElementById('kg82ok'));i++)await sleep(1000)}
     else await p.evaluate(()=>document.getElementById('kg82skip').click());
     await sleep(500);R.res=await p.evaluate(()=>{const d=document.getElementById('kg82');return d?d.innerText.slice(0,200):''});
-    await p.evaluate(()=>{const b=document.getElementById('kg82ok');if(b)b.click()});await sleep(1200)}}
+    await p.evaluate(()=>{const b=document.getElementById('kg82ok');if(b)b.click()});await sleep(1200)}
+   if(days){const r=await dayRun();R.dayEnd=r;if(r!=='end')f.push('days did not end: '+r)}}
   const st=await p.evaluate(()=>({top:S.origin.r||0,rank:S.rank,srv:!!S.srv,sel:S.selx,q:Q.map(m=>m.t),danh:S.danh,sung:S.sung,gloom:!!document.querySelector('.km-gloom')}));Object.assign(R,st);
   /* SELSCENE (review/selection-scene, MAIN 117 Q7): a NEW life (S.selx2) runs the contest: kept → origin −1 / 0 / +1 within the cap (Tần, hòa thân Phi),
      or ban hoa (the life ends; the entry-scene checks below do not apply). An OLD save (no S.selx2) keeps the old check [ceiling−2, ceiling]. */
