@@ -1491,3 +1491,5 @@ rv promo-build-2 | review/promo-build-2-rv | session_01D3E3NXxkVhTabMxB4z4ood | 
 | REVIEW E83r robot10-e-fix-4 r2 SMALL (sonnet; briefs/E83r-review-robot-fix4-r2.md) of 66728c90 | review/robot10-e-fix-4-r2m; reports/robot10-fix4-review.md | FOREMAN E (child3) | session_01DgYSWoAbWzcJiHhnAog1Sn | DONE PASS e75c2715 | 24/11 10:58Z |
 FIX servant-trust r1 (opus BIG; briefs/D-servant-trust-fix.md; from c8d35899) | review/servant-trust-rv | session_01D3E3NXCL39uA3SvLZDaGkv | RUNNING | 24/11 10:53Z (Foreman D depth 3)
 | robot10 E FIXER #4 successor (opus BIG; briefs/E-robot10-fixer.md + reports/robot10-E-fixer.md §10 HANDOVER) | review/robot10-e-fix-3 r3 (+ -5…); reports/robot10-E-fixer.md | FOREMAN E (child3) | (opening FIXER#4) | RUNNING | 24/11 11:00Z |
+robot-coop-fix-2 BIG review | review/robot-coop-fix-2-r1 | session_01N1tNP53Ngf1bGuVAWcQEy5 (owner B) | RUNNING | 24/11 10:57Z
+ROBOT-COOP fixer #4 (fix-3, onecore) | review/robot-coop-fix-3, review/robot10-onecore | session_01N1tNP2dfra9gDdChCWdbcB (owner B) | RUNNING | 24/11 10:57Z
