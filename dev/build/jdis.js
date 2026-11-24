@@ -41,7 +41,7 @@ function disInit(){try{if(!S)return;S.disK=S.disK||{};disInitOne("emp");disInitO
 function known(p){if(!isEmp(p)&&typeof k61Own==="function"&&k61Own(p))return disOf(p).slice();S.disK=S.disK||{};return S.disK[pid(p)]||(S.disK[pid(p)]=[])}
 function unk(p){const K=known(p);return disOf(p).filter(k=>!K.includes(k))}
 function learn(p,k,why){const K=known(p);if(!k)k=unk(p)[0];if(!k||K.includes(k)||!disOf(p).includes(k))return null;K.push(k);const e=entry(k);
- try{if(isEmp(p))log(`<span class="g">Ngươi biết được: Hoàng thượng không ưa ${e.n}.</span>`);else if(isTh(p))log(`<span class="g">Ngươi biết được: Thái hậu không ưa ${e.n}.</span>`);else if(typeof noteAdd==="function")noteAdd(p.id,`${why||"Dò được"}: nàng không ưa ${e.n}`)}catch(x){}return e}
+ try{if(isEmp(p)){log(`<span class="g">Ngươi biết được: Hoàng thượng không ưa ${e.n}.</span>`);kitKnow({key:"dis:emp:"+k,text:`Ngươi biết được: Hoàng thượng không ưa ${e.n}.`})}else if(isTh(p)){log(`<span class="g">Ngươi biết được: Thái hậu không ưa ${e.n}.</span>`);kitKnow({key:"dis:th:"+k,text:`Ngươi biết được: Thái hậu không ưa ${e.n}.`})}else if(typeof noteAdd==="function")noteAdd(p.id,`${why||"Dò được"}: nàng không ưa ${e.n}`)}catch(x){}return e}
 function row(p){if(!p||(!isEmp(p)&&!isTh(p)&&typeof p!=="object"))return null;const K=known(p),N=disOf(p).length;
  const txt=K.map(k=>entry(k).n).join(" · ");const un=N-K.length;
  return [isEmp(p)?"Ngài ghét":isTh(p)?"Người ghét":"Nàng ghét",K.length?txt+(un?` (còn ${un} điều chưa rõ)`:""):"chưa rõ",K.length?"t":"n"]}

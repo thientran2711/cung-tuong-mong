@@ -75,7 +75,7 @@ function vlChest(p){return (p.inv||[]).map((e,ix)=>({e,ix})).filter(x=>vlIs(x.e)
 
 /* ---------- knowing a veil's phẩm (j92 rule: hidden until learnt) ---------- */
 function vlKnows(obs,e){if(!vlIs(e))return true;if(e.k==="mcnt")return true;const W=obs===S?(S.wdk||{}):(obs.wdk||{});return !!W[e.k]}
-function vlReveal(obs,k,how){if(!vlIsK(k)||k==="mcnt")return"";if(obs===S){S.wdk=S.wdk||{};if(S.wdk[k])return"";S.wdk[k]=1;const t=`Biết được: ${itm(k).n} là đồ phẩm ${wdPName(+k[2])}${how?` (${how})`:""}.`;try{log(t)}catch(e){}return t}
+function vlReveal(obs,k,how){if(!vlIsK(k)||k==="mcnt")return"";if(obs===S){S.wdk=S.wdk||{};if(S.wdk[k])return"";S.wdk[k]=1;const t=`Biết được: ${itm(k).n} là đồ phẩm ${wdPName(+k[2])}${how?` (${how})`:""}.`;try{log(t);kitKnow({key:"wd:"+k,text:t})}catch(e){}return t}
  obs.wdk=obs.wdk||{};obs.wdk[k]=1;return""}
 /* j92 status: a veil above her phẩm makes the outfit Vượt phẩm; truth and beliefs both go through wdP / wdBelPE */
 (function(){const p0=wdP;wdP=function(e,p){if(vlIs(e))return vlP(e,p);return p0.apply(this,arguments)}})();
@@ -129,7 +129,7 @@ function vlAsk(p,gk){const G=vlGivers(p).find(x=>x.k===gk);if(!G)return"";const 
 /* ---------- her side: dialogs in the kit modal ---------- */
 function vlWhen(c){return whyTime(c)}
 /* one option line in the kit modal: price + gain/loss + odds shown in full (these are acts, not hidden event choices) */
-function vlOpt(o){const fx=String(fmt(o.fx||{})).replace(/<[^>]+>/g,"");let L=o.x||"";if(fx)L=/tốn: /.test(L)?L.replace(/tốn: /,"tốn: "+fx+", "):(L?L.replace(/^((?:[^·]*?(?:Liều|Khó|Năm ăn năm thua|Khá chắc|Chắc|Rất chắc|Nắm chắc)) · )?/,"$1tốn: "+fx+" · "):"tốn: "+fx);o.j67=L||"tốn: không tốn gì";return o}
+function vlOpt(o){const fx=String(fmt(o.fx||{})).replace(/<[^>]+>/g,"");let L=o.x||"";if(fx)L=/tốn: /.test(L)?L.replace(/tốn: /,"tốn: "+fx+", "):(L?L.replace(new RegExp("^((?:[^·]*?(?:"+KIT_ODDS_ALT+")) · )?"),"$1tốn: "+fx+" · "):"tốn: "+fx);o.j67=L||"tốn: không tốn gì";return o}
 PEND.vlget=pp=>{if(!S||S.dead)return null;const sc=S.scar?scarOf(S):null;const O=[];const ag=vlAgent(S);
  O.push(vlOpt({n:"Tự tay kết mạng",fx:{},x:`tốn: ${VL.craftK} khắc, Sức -${VL.craftSuc} · thành: trò thêu, chơi càng khéo mạng càng quý`,go:()=>{if(!can(VL.craftK)||S.suc<VL.craftSuc+5){log("Không đủ khắc hay Sức để tự tay kết mạng.");return}pushDil(mkP("vlcraft"),"Tự tay kết mạng")}}));
  O.push(vlOpt({n:"Đặt ở Nội vụ phủ",fx:{},x:`tốn: 1 khắc · thành: mạng đúng phẩm của ngươi, giá theo phẩm`,go:()=>{if(!can(1))return;pushDil(mkP("vlnvp"),"Nội vụ phủ")}}));

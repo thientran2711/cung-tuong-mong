@@ -103,7 +103,7 @@ function rcpKn(r,fc){return rcpK(rcpPK(r)).includes(fc)}
 function rcpFacets(){const F=["a"];for(const k in RCP_ST)F.push("f:"+k,"h:"+k);return F}
 function rcpFacetTxt(r,fc){const P=rcpProf(r),who=rcpWho(r);if(fc==="a")return P.a?`${who} kiêng ${RCP_ALN[P.a]}: dùng phải là phát bệnh`:`${who} không kiêng thứ gì`;
  const [t,k]=fc.split(":");if(t==="f")return `${who} thích ${rcpStN(k,P.f[k])}`;return P.h[k]?`${who} không ưa ${rcpStN(k,P.h[k])}`:`${who} không chê lối ${WK[k].n.toLowerCase()} nào`}
-function rcpLearn(r,fc,how){if(!r||!fc)return"";const K=rcpK(rcpPK(r));if(K.includes(fc))return"";K.push(fc);return `<span class="g">Ta biết được: ${rcpFacetTxt(r,fc)}${how?" ("+how+")":""}.</span>`}
+function rcpLearn(r,fc,how){if(!r||!fc)return"";const K=rcpK(rcpPK(r));if(K.includes(fc))return"";K.push(fc);try{kitKnow({key:"rcp:"+fc,text:`Ta biết được: ${rcpFacetTxt(r,fc)}${how?" ("+how+")":""}.`})}catch(e){}return `<span class="g">Ta biết được: ${rcpFacetTxt(r,fc)}${how?" ("+how+")":""}.</span>`}
 function rcpUnknown(r){const K=rcpK(rcpPK(r));return rcpFacets().filter(f=>!K.includes(f))}
 function rcpPeople(){const L=["emp"];if(!S.thDead)L.push("th");for(const v of liveRivals(true)){let met=true;try{if(typeof k61Named==="function")met=k61Named(v)}catch(e){}if(met)L.push(v)}return L}
 /* ---------- giving: taste, repeats, allergy ---------- */

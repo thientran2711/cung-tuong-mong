@@ -104,9 +104,9 @@ function homeMenu(){const n=lastSlot();let info="";
           :`<button class="kbtn k1" data-tgo="slots">Bắt đầu<small>chọn sổ, xem Phúc duyên</small></button>`;
  return `<div class="kpmenu${n?" n4":""}">${B}<button class="kbtn alt" data-tgo="past">Sổ luân hồi</button><button class="kbtn alt" data-tgo="opt">Thiết lập</button></div>`}
 /* live nodes each sub-screen borrows from .tbox, in display order */
-function partsOf(pg){if(pg==="slots")return[$("slots"),$("pdwrap")];if(pg==="opt")return[T.querySelector(".optwrap")||document.querySelector("#modal .optwrap"),T.querySelector(".cloudwrap")||document.querySelector("#modal .cloudwrap"),T.querySelector(".xiowrap")||document.querySelector("#modal .xiowrap")];return[]}
+function partsOf(pg){if(pg==="slots")return[$("slots"),$("pdwrap")];if(pg==="opt")return[T.querySelector(".optwrap")||document.querySelector("#modal .optwrap"),T.querySelector(".cloudwrap")||document.querySelector("#modal .cloudwrap"),T.querySelector(".offwrap")||document.querySelector("#modal .offwrap"),T.querySelector(".xiowrap")||document.querySelector("#modal .xiowrap")];return[]}
 let PAST=null;
-function park(){const M=$("modal");if(!M)return;["#slots","#pdwrap",".xiowrap",".optwrap",".cloudwrap"].forEach(s=>{const n=M.querySelector(s);if(n)BOX.appendChild(n)})}
+function park(){const M=$("modal");if(!M)return;["#slots","#pdwrap",".xiowrap",".optwrap",".cloudwrap",".offwrap"].forEach(s=>{const n=M.querySelector(s);if(n)BOX.appendChild(n)})}
 let HM=null,SM=null;
 /* the sổ list (j6) was drawn with the old .main / .btn buttons: give it the kit's one button (.kbtn primary, .kbtn.alt the other).
    Thiết lập keeps what the kit already makes of its parts (Chép sổ / Nạp sổ are kit cards). */
@@ -120,7 +120,7 @@ function mount(){const M=$("modal");if(!SM||Q[0]!==SM||M.hidden)return;const box
 function dropAll(){const M=$("modal");park();[HM,SM].forEach(m=>{if(!m)return;const i=Q.indexOf(m);if(i>=0)Q.splice(i,1)});HM=SM=null;
  if(M&&M.classList.contains("kptitle")){M.classList.remove("kptitle","kpthome","kpscene");if(T.hidden&&Q.length)showModal();else M.hidden=true}}
 function homeOpen(){dropAll();HM=kitModal({scene:true,kind:"notice",title:"Cung Tường Mộng",sub:"Mỗi kiếp một thân phận. Leo từ Đáp ứng lên Hoàng hậu, rồi đưa con lên ngôi.",html:homeMenu(),cls:"kptitle kpthome"});noSeal($("modal"))}
-function subOpen(pg){dropAll();if(pg==="opt"){xioReset();try{wireOpt();wireXio()}catch(e){}try{if(window.CTM_CLOUD)CTM_CLOUD.wire()}catch(e){}}
+function subOpen(pg){dropAll();if(pg==="opt"){xioReset();try{wireOpt();wireXio()}catch(e){}try{if(window.CTM_CLOUD)CTM_CLOUD.wire()}catch(e){}try{if(window.CTM_OFFLINE)CTM_OFFLINE.wire()}catch(e){}}
  if(pg==="slots")drawSlots();
  SM=kitModal({scene:true,kind:"notice",title:HEAD[pg]||"",sub:(pg==="slots"&&csGet()==="coop"?SUBH.slotsco:SUBH[pg])||"",html:`<div class="kpt-mount" data-pg="${pg}"></div>`,cls:"kptitle"});mount()}
 function pastBody(){let h="";try{h=pastHTML()||""}catch(e){}h=h.replace(/^<h3>Sổ luân hồi<\/h3>/,"");

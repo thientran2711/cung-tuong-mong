@@ -113,11 +113,12 @@ function ilOut(p,e){const i=(p.inv||[]).indexOf(e);if(i>=0){p.inv.splice(i,1);re
 /* ---- weekly: the box moves on (returns, ransom, atonement, mending, resale) ---- */
 function ilWant(v,x,o,pr){const W=BAL.ag.why.g2il;if(!v||v===o||(v.bac||0)<(pr!=null?pr:x.pr)+W.spare)return 0;const has=(v.inv||[]).some(e=>e&&e.k===x.e.k);
  return (has?0:W.lack)+(o&&o!==v?Math.max(0,hostility(v,o))*W.hostW:0)}
-function ilWeek(){if(!S||S.dead)return;const I=ilS(),B=BAL.il;let ask=false;
+function ilWeek(){if(!S||S.dead)return;const I=ilS(),B=BAL.il;let ask=false,askF=false;
  for(const x of I.box.slice()){const o=ilP(x.own);const live=o&&ilAlive(o)&&!(o!==S&&o.out);
   if(x.at==="mkt"){
    if(live&&o===S){if(!x.shop&&roll(B.shopP)){x.shop=1;log(`Thái giám Nội vụ phủ báo: khay đồ mua ngoài cung có ${ilNm(x.e)}, giống đồ cũ của ngươi.`)}
     /* the ceiling holds (reviewer r1): due → queued even when other dialogs wait (one ransom visit a week) */if(!ask&&wk()>=x.ret){ask=true;x.ret=wk()+ilRng(B.againW);pushDil(mkP("ilback",{u:x.e.iu}),"Đồ cũ trở về")}continue}
+   if(live&&o.coop){if(!askF&&wk()>=x.ret&&typeof COOPW==="object"&&COOPW.ilAsk){askF=true;x.ret=wk()+ilRng(B.againW);COOPW.ilAsk("back",x)}continue}/* E44j (b): her piece: the same ransom visit, on her seat */
    if(live&&o!==S&&(o.bac||0)>=x.pr&&npcWhy("ilBack",{p:o,x},()=>roll(B.npcBackP))){/* npc-purpose G2c: she wants her piece back and can pay */ap(o,{bac:-x.pr});ilTake(x,o,"chuộc về");continue}
    {const bw=npcWhy("ilBuy",{x,o},()=>roll(B.npcBuyP));if(bw){const v=bw.who;ap(v,{bac:-x.pr});ilTake(x,v,"mua");continue}}/* npc-purpose G2c: the buyer = one who wants that piece and can pay */
    if(!live&&!x.shop&&npwPick(liveRivals(true),v=>ilWant(v,x,null))&&roll(B.shopP))x.shop=1;continue}/* npc-purpose G2c: put on the tray only when someone would buy it */
@@ -128,7 +129,7 @@ function ilWeek(){if(!S||S.dead)return;const I=ilS(),B=BAL.il;let ask=false;
   if(x.at!=="nvp")continue;
   if(x.dh)continue;/* jdh2 (sắc phong book / seal): its own atonement / census road; never resold */
   if((x.why==="fix"||x.why==="burn")&&wk()>=x.rel){if(live){ilTake(x,o,"sửa xong");if(o===S)Q.push({t:"Đồ sửa xong",who:pMe(),h:`${ilTag(x.e)}<p>Nội vụ phủ sửa xong <b>${ilNm(x.e)}</b>, sai người đem trả về rương ngươi.</p>`,btn:"Đã hiểu"})}else{x.why="dead";x.own=""}continue}
-  if(x.why==="conf"&&wk()>=x.rel){if(live&&o===S){if(!ask){ask=true;x.rel=wk()+ilRng(B.againW);pushDil(mkP("ilconf",{u:x.e.iu}),"Đồ bị tịch thu")}}
+  if(x.why==="conf"&&wk()>=x.rel){if(live&&o.coop){if(!askF&&typeof COOPW==="object"&&COOPW.ilAsk){askF=true;x.rel=wk()+ilRng(B.againW);COOPW.ilAsk("conf",x)}}/* E44j (b): her piece: the same atonement ask, on her seat */else if(live&&o===S){if(!ask){ask=true;x.rel=wk()+ilRng(B.againW);pushDil(mkP("ilconf",{u:x.e.iu}),"Đồ bị tịch thu")}}
    else if(live&&npcWhy("ilConf",{p:o,x},()=>roll(B.npcConfP)))ilTake(x,o,"xin lại");/* npc-purpose G2c: she asks for it back when it matters to her */else if(!live){x.why="dead";x.own=""}continue}
   if((x.why==="dead"||x.why==="kho"||x.why==="net")&&!live&&npwPick(liveRivals(true),v=>ilWant(v,x,null,Math.round(ilVal(x.e)*B.ransomPct/100)))&&roll(B.resaleP)){x.at="mkt";/* npc-purpose G2c: resold only when someone in the cung wants it */x.why="sell";x.own="";x.pr=Math.max(1,Math.round(ilVal(x.e)*B.ransomPct/100));x.ret=1e9;ilLog(x.e,"nvp","mkt","bán lại")}}
  /* ownerless pieces outside (a dead person's effects resold, released stock) beyond mktCap: Nội vụ phủ buys them back and hands them out
@@ -139,14 +140,18 @@ function ilWeek(){if(!S||S.dead)return;const I=ilS(),B=BAL.il;let ask=false;
 function ilFind(u){return ilS().box.find(x=>x.e&&x.e.iu===u)||null}
 function ilTag(e){try{if(typeof kitItemTag==="function"&&typeof kitItemInfo==="function")return kitItemTag(kitItemInfo(e)).replace('class="kiev"','class="kiev kiev-own kiev-txt"')}catch(x){}return""}
 /* ransom visit (owner: "có người mang đến cho mình chuộc", ceiling time; cannot pay → it comes again later) */
-PEND.ilback=pp=>{const x=ilFind(pp.u);if(!x||x.at!=="mkt"||x.own!=="me")return null;const nm=ilNm(x.e),pr=x.pr;const ok=S.bac>=pr;
- const O=[];if(ok)O.push({n:"Chuộc về",fx:{bac:-pr},j67:`tốn: Bạc -${pr} · thành: ${nm} về lại rương`,go:()=>{ilTake(x,S,"chuộc về");log(`Ngươi chuộc lại ${nm}: Bạc -${pr}.`)}});
+/* E44j (b) (E52r finding b, law 1 + 6c): pp.f = HER piece in the HOST's box (co-op guest seat): the host keeps the box record (world truth) and asks
+   her seat with the same dialog (jcoopworld ilAsk); her choice goes back (COOPW.ilWant) and the host hands the piece to her entry (one «add») */
+const ilFx=pp=>pp&&pp.f&&pp.e&&pp.e.k?{e:pp.e,pr:pp.pr|0,at:pp.kind==="conf"?"nvp":"mkt",why:pp.kind==="conf"?"conf":"sell",own:"me",f:1}:null;
+const ilGo=(x,pp,how,pay)=>()=>{if(x.f){if(typeof COOPW==="object"&&COOPW.ilWant)COOPW.ilWant(pp,how,pay)}else ilTake(x,S,how)};
+PEND.ilback=pp=>{const x=ilFx(pp)||ilFind(pp.u);if(!x||x.at!=="mkt"||x.own!=="me")return null;const nm=ilNm(x.e),pr=x.pr;const ok=S.bac>=pr;
+ const O=[];if(ok)O.push({n:"Chuộc về",fx:{bac:-pr},j67:`tốn: Bạc -${pr} · thành: ${nm} về lại rương`,go:()=>{ilGo(x,pp,"chuộc về",{bac:pr})();log(`Ngươi chuộc lại ${nm}: Bạc -${pr}.`)}});
  O.push({n:ok?"Thôi, không chuộc":"Chưa đủ bạc, hẹn lần sau",fx:{},j67:ok?`tốn: món đồ còn ở ngoài cung · thành: giữ lại ${pr} lượng bạc · kèm: ít lâu sau có thể lại có người mang đến`:"tốn: không tốn gì · kèm: món đồ còn ở ngoài cung, ít lâu sau có thể lại có người mang đến",go:()=>{log(`Ngươi chưa chuộc ${nm}; món đồ còn ở ngoài cung.`)}});
  return{who:pEunCourt("ped"),t:`<p>Thái giám Nội vụ phủ dò được <b>${nm}</b>, đồ cũ của ngươi, đang ở ngoài cung. Người giữ chịu đem vào nếu được chuộc Bạc ${pr}.</p>${ok?"":`<p class="past">Ngươi đang có Bạc ${S.bac}.</p>`}`,o:O}};
 /* confiscated: after the minimum wait she may atone to ask for it back (owner 13:20Z (5): back only through atonement, minimum wait) */
-PEND.ilconf=pp=>{const x=ilFind(pp.u);if(!x||x.at!=="nvp"||x.why!=="conf"||x.own!=="me")return null;const nm=ilNm(x.e),s=BAL.il.confSuc;
+PEND.ilconf=pp=>{const x=ilFx(pp)||ilFind(pp.u);if(!x||x.at!=="nvp"||x.why!=="conf"||x.own!=="me")return null;const nm=ilNm(x.e),s=BAL.il.confSuc;
  return{who:pEunCourt("ped"),t:`<p>Đã ${BAL.il.confW} tuần từ khi <b>${nm}</b> bị tịch thu. Thái giám Nội vụ phủ ngầm báo: chép kinh sám hối dâng lên, có thể xin lại.</p>`,o:[
-  {n:"Chép kinh sám hối, xin lại",fx:{suc:-s},j67:`tốn: Sức -${s} · thành: ${nm} về lại rương`,go:()=>{ilTake(x,S,"sám hối xin lại");log(`Ngươi chép kinh sám hối, xin lại ${nm}.`)}},
+  {n:"Chép kinh sám hối, xin lại",fx:{suc:-s},j67:`tốn: Sức -${s} · thành: ${nm} về lại rương`,go:()=>{ilGo(x,pp,"sám hối xin lại",null)();log(`Ngươi chép kinh sám hối, xin lại ${nm}.`)}},
   {n:"Để sau",fx:{},j67:"tốn: không tốn gì · kèm: món đồ còn ở Nội vụ phủ, ít lâu sau lại xin được",go:()=>{}}]}};
 /* Nội vụ phủ tray: her sold pieces that came back appear as one more tile (kitShop, same tile as every other) */
 function ilShopTiles(){const I=ilS();return I.box.filter(x=>x.at==="mkt"&&x.shop&&(x.own==="me"||!ilAlive(ilP(x.own)))).map(x=>{const e=x.e,nm=ilNm(e);
@@ -201,7 +206,10 @@ window.ilGone=ilGone;window.ilAudit=ilAudit;window.ilCensus=ilCensus;window.ilWh
 function ilFilter(p,keep,how){const out=(p.inv||[]).filter(e=>!keep(e));p.inv=(p.inv||[]).filter(keep);for(const e of out)ilGone(p,e,how);return p.inv}
 window.ilFilter=ilFilter;
 /* co-op, RECORD ONLY (item-ledger-solo): the live path (jcoopworld) carries the piece; the ledger writes the line and the census does not net it */
-function ilFriends(){if(!ilCoop())return[];try{return (rivals||[]).filter(v=>v&&v.coop)}catch(e){return[]}}
+/* E44j (a) (E52r finding a, law 6c): her entry taken out of the harem for the host's week end (jcoopworld withoutFriend: COOPW.pulled) is still her
+   entry: jil ilGuard's after-check of rivalsMonth runs OUTSIDE the call that puts her back, so a piece an NPC gave her there read as «gone from
+   the NPC, nowhere» and went into the host box «bị tịch thu» while b4Ops had already sent it to her seat = 2 places (coop-famops-unit 29) */
+function ilFriends(){if(!ilCoop())return[];try{const L=(rivals||[]).filter(v=>v&&v.coop);const P=typeof COOPW==="object"&&Array.isArray(COOPW.pulled)?COOPW.pulled:[];for(const x of P){const v=x&&x[1];if(v&&v.coop&&L.indexOf(v)<0)L.push(v)}return L}catch(e){return[]}}
 /* the friend's entry that now holds this piece (same object, or the live path's copy carrying its id: Cài đồ) */
 function ilToFriend(e){if(!e||!ilCoop())return null;for(const f of ilFriends())if(ilSlots(f).some(a=>a===e||(!!e.iu&&a.iu===e.iu)))return f;return null}
 const IL_SENT=new WeakSet();
@@ -227,4 +235,4 @@ function ilRob(p,e,by){if(!e||!ilDur(e)||!p)return null;ilUid(e);
  return ilGone(p,e,"lost",{cause:"srv"})}
 window.ilRob=ilRob;
 /* §64 item events: the ransom / atonement dialogs show the piece in the picture frame; "Chuộc về" / "xin lại" fly it into the chest */
-setTimeout(()=>{try{IEV_PID.ilback=pp=>{const x=ilFind(pp&&pp.u);return x?{e:x.e,acts:["back",null]}:null};IEV_PID.ilconf=pp=>{const x=ilFind(pp&&pp.u);return x?{e:x.e,acts:["back",null]}:null}}catch(e){}},0);
+setTimeout(()=>{try{IEV_PID.ilback=pp=>{const x=ilFx(pp)||ilFind(pp&&pp.u);return x?{e:x.e,acts:["back",null]}:null};IEV_PID.ilconf=pp=>{const x=ilFx(pp)||ilFind(pp&&pp.u);return x?{e:x.e,acts:["back",null]}:null}}catch(e){}},0);
