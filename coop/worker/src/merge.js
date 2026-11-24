@@ -34,7 +34,10 @@ function union3(base, a, b) {
    leaves them as they are). Every STAT field of a person in its range, every value of a MAP field (rl / ro / af …, keyed by person id) in its
    range, Sức also under sucCap = the game's jkh formula over the same BAL.kh. Effect objects ({bac:-5}: no name) are never touched. Done on
    the Worker, so the stored state (next week's merge base) and both screens hold the same value. */
-import { STAT, MAP, SUB, WORLD, KH } from "./ranges.gen.js";
+import { STAT, MAP, SUB, WORLD, KH, BODY } from "./ranges.gen.js";
+/* who has a body (BAL.personRange.body, jkh.js khí huyết): canonical paths "W.R[]" (the consorts) / "P.*.S" (the players); only they hold Sức ≤ sucCap */
+const BODY_RE = new RegExp("^(?:" + BODY.map(b => b.replace(/[.]/g, "\\.").replace(/\*/g, "[^.]+").replace(/\[\]/g, "\\[\\]")).join("|") + ")$");
+const isBody = pth => BODY_RE.test(pth || "");
 const inR = (v, r) => Math.max(r[0] == null ? -Infinity : r[0], Math.min(r[1] == null ? Infinity : r[1], v));
 const isPerson = o => isObj(o) && typeof o.name === "string";
 /* jkh.js khOf / sucCap, the same formula (khInit's defaults without writing them; test/range.test.mjs compares with jkh.js on 500 people) */
@@ -45,19 +48,19 @@ function sucCap(p) {
   const kh = Math.max(K.capMin, Math.round(100 - Math.max(0, (p.age || 0) - K.ageFrom) * K.agePer - (scar || 0) - (tmp || 0)));
   return Math.min(100, Math.round(K.maxBase + K.maxPer * kh));
 }
-function clampP(o) {
+function clampP(o, body) {
   for (const k in STAT) { const v = o[k]; if (isNum(v)) { const w = inR(v, STAT[k]); if (w !== v) o[k] = w; } }
   for (const k in MAP) { const m = o[k]; if (isObj(m)) for (const id in m) { const v = m[id]; if (isNum(v)) { const w = inR(v, MAP[k]); if (w !== v) m[id] = w; } } }
   for (const k in SUB) { const x = o[k]; if (isObj(x)) inF(x, SUB[k]); }
-  if (isNum(o.suc)) { const c = sucCap(o); if (o.suc > c) o.suc = c; }
+  if (body && isNum(o.suc)) { const c = sucCap(o); if (o.suc > c) o.suc = c; }/* r3: a servant / maid / child / man has no body in the game (Sức 0…100 only) */
   return o;
 }
 function inF(x, T) { for (const f in T) { const v = x[f]; if (isNum(v)) { const w = inR(v, T[f]); if (w !== v) x[f] = w; } } return x; }
 /* world objects (W.S[key], e.g. the court's biến / khó): the same additive overflow, not a person */
 function clampW(st) { if (isObj(st) && isObj(st.W) && isObj(st.W.S)) for (const k in WORLD) if (isObj(st.W.S[k])) inF(st.W.S[k], WORLD[k]); return st; }
-export { sucCap, clampP, isPerson, clampW };
+export { sucCap, clampP, isPerson, clampW, isBody };
 const idArr = x => Array.isArray(x) && x.length > 0 && x.every(e => isObj(e) && e.id != null);
-function m3(base, a, b, inP, key) {
+function m3(base, a, b, inP, key, pth) {
   if (UNION.has(key) && prim(a) && prim(b) && (base === undefined || base === null || prim(base))) return union3(base, a, b);
   if (eq(a, b)) return a;
   if (eq(a, base)) return b;
@@ -67,10 +70,10 @@ function m3(base, a, b, inP, key) {
     const bs = isObj(base) ? base : {}; const out = {};
     const keys = new Set([...Object.keys(a), ...Object.keys(b)]);
     for (const k of keys) {
-      const v = m3(bs[k], a[k], b[k], inP || k === "P", k);
+      const v = m3(bs[k], a[k], b[k], inP || k === "P", k, pth ? pth + "." + k : k);
       if (v !== undefined) out[k] = v;
     }
-    return isPerson(out) ? clampP(out) : out;
+    return isPerson(out) ? clampP(out, isBody(pth)) : out;
   }
   if ((idArr(a) || (Array.isArray(a) && !a.length)) && (idArr(b) || (Array.isArray(b) && !b.length)) && (idArr(a) || idArr(b))) {
     const bm = new Map((Array.isArray(base) ? base : []).filter(isObj).map(e => [String(e.id), e]));
@@ -78,7 +81,7 @@ function m3(base, a, b, inP, key) {
     const out = [];
     for (const e of a) {
       const id = String(e.id);
-      if (bmB.has(id)) out.push(m3(bm.get(id), e, bmB.get(id), inP, key));
+      if (bmB.has(id)) out.push(m3(bm.get(id), e, bmB.get(id), inP, key, (pth || "") + "[]"));
       else if (bm.has(id)) { if (!eq(bm.get(id), e)) out.push(e); /* B removed, A changed: keep A */ }
       else out.push(e);
     }

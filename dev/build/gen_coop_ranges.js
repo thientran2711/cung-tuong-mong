@@ -14,6 +14,7 @@ export const STAT = ${J(B.personRange.stat)};
 export const MAP = ${J(B.personRange.map)};
 export const SUB = ${J(B.personRange.sub)};
 export const WORLD = ${J(B.personRange.world)};
+export const BODY = ${J(B.personRange.body)};
 export const KH = ${J(B.kh)};
 `}
 const txt=build();

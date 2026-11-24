@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"1579b65c+","t":"2026-11-24T14:58Z","c":"robot-coop-fix-2-r2: index.html/sw.js rebuilt (build_site.sh)","b":"3aa00e44eff0","h":[{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"}]};
+window.CTM_BI={"s":"0f8dd283+","t":"2026-11-24T16:08Z","c":"robot-coop-fix-2-r2: index.html/sw.js rebuilt (build_site.sh)","b":"8b59d4ad6f99","h":[{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -6809,6 +6809,15 @@ BAL.personRange={
  /* world objects (the room's W.S[key], not persons; the guest's week writes them too): the court's mood (j55 trS: biến / khó) */
  world:{trieu:{bien:[0,100],kho:[0,100]}},
  map:{rl:BAL.linkRange.rl,ro:BAL.linkRange.ro,af:[-100,100]/* a man's or servant's affection per person */,hA:[0,100]/* a child's art skill */,evm:[0,null],cev:[0,null]}};
+/* robot-coop-fix-2 r3 (review r2 FAIL 1): the co-op CANONICAL state keeps a world person's feelings toward each player in maps keyed by the player
+   id (jcoopworld toCanon / jcoopthinb: r.rl[mp]=rel, r.ro[mp]=oan, r.gp[mp]=ghen, r.ep[mp]=ev, evm[mp], cev[mp]). gp / ep are the SAME numbers as
+   the stats ghen / ev: their range is a reference to the stat range, never typed again. dev/tools/coop-range-scan.js fails when a renamed map is missing here. */
+BAL.personRange.map.gp=BAL.personRange.stat.ghen;BAL.personRange.map.ep=BAL.personRange.stat.ev;
+/* robot-coop-fix-2 r3 (review r2 FAIL 2): WHO has a body (khí huyết, jkh.js): the player (her S) and the consorts (rivals) only — jkh khInit / khFit
+   run on S + every rival at start, load and each month, and every sucCap caller in the game is one of them. Servants, maids, children, men have no
+   body record and the game never caps their Sức under sucCap (jagstaff asSt / asAp: 0…100). The Worker applies sucCap to the same set, by its place
+   in the canonical room state: W.R[] = the consorts, P.<seat>.S = the players. */
+BAL.personRange.body=["W.R[]","P.*.S"];
 /* ================= jbaleff: ONE CORE (OD:L1267) amounts of relation / power effects (review/one-core-dup, family F3) =================
    BAL.eff.<module>.<site> = the amount the module's effect call applies (relAdd thiện cảm, oanAdd oán, affAdd, kcAf, tdPowAdd …);
    [a,b] = the two amounts of a `cond ? a : b` call. Site = the enclosing function / option key (_2, _3 … for the next calls in it).
@@ -97914,7 +97923,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="3aa00e44eff0";window.CTM_BUILD=BUILD;
+const BUILD="8b59d4ad6f99";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

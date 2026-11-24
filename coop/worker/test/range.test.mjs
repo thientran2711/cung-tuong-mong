@@ -1,7 +1,7 @@
 /* robot-coop-fix-2 r2 (review FAIL items 1–3): the Worker's person ranges ARE the game's (ONE CORE), every clamped person field is covered
    (the whole group), Sức stays under the game's own sucCap, effect objects are never touched. */
-import { merge3, sucCap, clampP, isPerson } from "../src/merge.js";
-import { STAT, MAP, SUB, WORLD, KH } from "../src/ranges.gen.js";
+import { merge3, sucCap, clampP, isPerson, isBody } from "../src/merge.js";
+import { STAT, MAP, SUB, WORLD, KH, BODY } from "../src/ranges.gen.js";
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
@@ -15,7 +15,9 @@ execFileSync("node", [path.join(ROOT, "dev/build/gen_coop_ranges.js"), "--check"
   assert.deepEqual(JSON.parse(JSON.stringify(ctx.BAL.personRange.stat)), STAT); assert.deepEqual(JSON.parse(JSON.stringify(ctx.BAL.personRange.map)), MAP);
   assert.deepEqual(JSON.parse(JSON.stringify(ctx.BAL.personRange.sub)), SUB); assert.deepEqual(JSON.parse(JSON.stringify(ctx.BAL.personRange.world)), WORLD);
   for (const k of ctx.BAL.personRange.core) assert.ok(STAT[k], "core stat " + k + " has a range");
-  assert.deepEqual(MAP.rl, JSON.parse(JSON.stringify(ctx.BAL.linkRange.rl))); assert.deepEqual(MAP.ro, JSON.parse(JSON.stringify(ctx.BAL.linkRange.ro))); }
+  assert.deepEqual(MAP.rl, JSON.parse(JSON.stringify(ctx.BAL.linkRange.rl))); assert.deepEqual(MAP.ro, JSON.parse(JSON.stringify(ctx.BAL.linkRange.ro)));
+  /* r3: the canonical feeling maps are the stats' own ranges (gp = ghen, ep = ev), and the body set is BAL's */
+  assert.deepEqual(MAP.gp, STAT.ghen); assert.deepEqual(MAP.ep, STAT.ev); assert.deepEqual(BODY, JSON.parse(JSON.stringify(ctx.BAL.personRange.body))); }
 { const j8 = readFileSync(path.join(ROOT, "dev/build/j8.js"), "utf8"), j1 = readFileSync(path.join(ROOT, "dev/build/j1.js"), "utf8");
   const ap = j8.slice(j8.indexOf("function ap(p,o)"), j8.indexOf("function dieIf")), apply = j1.slice(j1.indexOf("function apply(o)"), j1.indexOf("function apply(o)") + 900),
     st = j1.slice(j1.indexOf("function statSet"), j1.indexOf("function statSet") + 300);
@@ -53,6 +55,21 @@ for (const [n, b, h, g, get, want] of rows) {
   const m = one(b, h, g), v = get(m), w = want == null ? sucCap(m) : want;
   assert.equal(v, w, n); table.push(`| ${n} | ${v} |`);
 }
+/* r3 (review r2 FAIL 1): the CANONICAL shape — toCanon moved her ghen / ev into gp[mp] / ep[mp] (and rel / oan into rl / ro) */
+rows.length = 0;
+for (const [n, b, h, g, get, want] of [
+  ["R[].ep[mp] (her ev, canon)", P({ ep: { 901: 3 } }), P({ ep: { 901: 0 } }), P({ ep: { 901: 1 } }), m => m.ep[901], 0],
+  ["R[].gp[mp] (her ghen, canon) high", P({ gp: { 901: 95 } }), P({ gp: { 901: 100 } }), P({ gp: { 901: 99 } }), m => m.gp[901], 100],
+  ["R[].gp[mp] (her ghen, canon) low", P({ gp: { 901: 5 } }), P({ gp: { 901: 0 } }), P({ gp: { 901: 1 } }), m => m.gp[901], 0],
+]) { const m = one(b, h, g), v = get(m); assert.equal(v, want, n); table.push(`| ${n} | ${v} |`); }
+/* r3 (review r2 FAIL 2): Sức ≤ sucCap only on a body (the consorts W.R[], the players P.<seat>.S) — a servant's Sức over the cap is the game's own number */
+assert.ok(isBody("W.R[]") && isBody("P.a.S") && isBody("P.b.S") && !isBody("W.R[].staff[]") && !isBody("P.a.S.maid") && !isBody("W.S"));
+{ const st = (loyal) => P({ age: 40, staff: [{ id: 5, sid: 5, name: "s", age: 59, suc: 81, loyal }] });
+  const m = one(st(50), st(55), st(52)); assert.equal(m.staff[0].suc, 81, "staff Sức over sucCap stays (no body)"); assert.equal(m.staff[0].loyal, 57);
+  table.push(`| R[].staff[].suc 81 (age 59, cap ${sucCap({ name: "s", age: 59 })}), both seats moved loyal | ${m.staff[0].suc} |`); }
+{ const her = (suc) => ({ name: "her", age: 60, kids: [{}, {}, {}], suc });
+  const m = merge3({ P: { a: { name: "her", S: her(60) } } }, { P: { a: { name: "her", S: her(70) } } }, { P: { a: { name: "her", S: her(75) } } }).P.a.S;
+  assert.equal(m.suc, sucCap(m), "her Sức (P.a.S) ≤ sucCap"); table.push(`| P.a.S.suc 60→70,75 (age 60, 3 kids) | ${m.suc} = sucCap |`); }
 /* world: the court's biến / khó (W.S.trieu, not a person) */
 { const w = merge3({ W: { S: { trieu: { bien: 95, kho: 5 } } } }, { W: { S: { trieu: { bien: 100, kho: 0 } } } }, { W: { S: { trieu: { bien: 99, kho: 2 } } } }).W.S.trieu;
   assert.equal(w.bien, 100); assert.equal(w.kho, 0); table.push(`| W.S.trieu.bien / kho | ${w.bien} / ${w.kho} |`); }

@@ -2,7 +2,7 @@ name: Deploy co-op Worker
 on:
   push:
     branches: [main]
-    paths: ["coop/worker/**"]
+    paths: ["coop/worker/**", "dev/build/jbalpr.js", "dev/build/jbal2.js", "dev/build/gen_coop_ranges.js"]
   workflow_dispatch:
 jobs:
   deploy:

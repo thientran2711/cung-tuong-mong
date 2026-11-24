@@ -43,4 +43,12 @@ const miss=Object.entries(R).filter(([k,S])=>!inT.has(k)&&!EXEMPT_FIELD[k]&&S.fi
 console.log('\nNot in the table, clamped with a constant range at '+(ALL?'≥ 1':'≥ 3')+' sites (hand check: a person field? then add it to BAL.personRange):');
 for(const [k,S] of miss){const rg={};S.forEach(x=>{const r=`${x.lo==null?'·':x.lo}…${x.hi==null?'·':x.hi}`;rg[r]=(rg[r]||0)+1});console.log(`- ${k}: ${S.length} sites ${Object.entries(rg).map(([r,n])=>r+' ×'+n).join(', ')} (e.g. ${S[0].at})`)}
 console.log('\nHand-checked (not merged as a person\'s number):\n'+Object.entries(EXEMPT_FIELD).map(([k,v])=>`- ${k}: ${v}`).join('\n')+'\n'+Object.entries(EXEMPT_SITE).map(([k,v])=>`- site ${k}: ${v}`).join('\n'));
+/* r3 (review r2 FAIL 3a): the co-op CANONICAL renames — a world person's number moved into a map keyed by a player id (toCanon / jcoopthinb:
+   r.gp[mp]=r.ghen …). The Worker sees ONLY the renamed map, so every such map must be in BAL.personRange.map (else its overflow is never cut). */
+const EXEMPT_MAP={where:'S.where[pid] = a PLACE id (string), not a number'};const CAN={};
+for(const f of fs.readdirSync(DIR).filter(f=>/^jcoop.*\.js$/.test(f))){const s=fs.readFileSync(path.join(DIR,f),'utf8');const re=/\b[A-Za-z_]+\.([A-Za-z]+)\[(mp|me\(\)|fp\(\)|pid)\]\s*=(?!=)/g;let m;
+ while((m=re.exec(s))){(CAN[m[1]]=CAN[m[1]]||[]).push(f+':'+s.slice(0,m.index).split('\n').length)}}
+console.log('\nCo-op canonical maps (x.<map>[player id]= in jcoop*.js) vs BAL.personRange.map / Worker MAP:');
+for(const [k,L] of Object.entries(CAN)){const v=EXEMPT_MAP[k]?'exempt: '+EXEMPT_MAP[k]:PR.map[k]&&G.MAP[k]&&JSON.stringify(PR.map[k])===JSON.stringify(G.MAP[k])?'OK '+JSON.stringify(PR.map[k]):'MISSING';if(v==='MISSING')fail++;console.log(`- ${k}: ${L.length} sites (${L.slice(0,3).join(' ')}) → ${v}`)}
+console.log('Sức ≤ sucCap applies to the body set BAL.personRange.body = '+JSON.stringify(PR.body)+' (jkh: S + consorts); the identity guard on played states: node dev/tools/coop-range-identity.js');
 console.log(`COOP-RANGE ${fail?'FAIL':'PASS'} · ${rows.length} table fields · ${fail} wider / mismatched · ${Object.values(R).reduce((a,S)=>a+S.length,0)} clamp sites read`);process.exit(fail?1:0);

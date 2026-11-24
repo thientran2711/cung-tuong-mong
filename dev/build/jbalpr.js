@@ -22,3 +22,12 @@ BAL.personRange={
  /* world objects (the room's W.S[key], not persons; the guest's week writes them too): the court's mood (j55 trS: biến / khó) */
  world:{trieu:{bien:[0,100],kho:[0,100]}},
  map:{rl:BAL.linkRange.rl,ro:BAL.linkRange.ro,af:[-100,100]/* a man's or servant's affection per person */,hA:[0,100]/* a child's art skill */,evm:[0,null],cev:[0,null]}};
+/* robot-coop-fix-2 r3 (review r2 FAIL 1): the co-op CANONICAL state keeps a world person's feelings toward each player in maps keyed by the player
+   id (jcoopworld toCanon / jcoopthinb: r.rl[mp]=rel, r.ro[mp]=oan, r.gp[mp]=ghen, r.ep[mp]=ev, evm[mp], cev[mp]). gp / ep are the SAME numbers as
+   the stats ghen / ev: their range is a reference to the stat range, never typed again. dev/tools/coop-range-scan.js fails when a renamed map is missing here. */
+BAL.personRange.map.gp=BAL.personRange.stat.ghen;BAL.personRange.map.ep=BAL.personRange.stat.ev;
+/* robot-coop-fix-2 r3 (review r2 FAIL 2): WHO has a body (khí huyết, jkh.js): the player (her S) and the consorts (rivals) only — jkh khInit / khFit
+   run on S + every rival at start, load and each month, and every sucCap caller in the game is one of them. Servants, maids, children, men have no
+   body record and the game never caps their Sức under sucCap (jagstaff asSt / asAp: 0…100). The Worker applies sucCap to the same set, by its place
+   in the canonical room state: W.R[] = the consorts, P.<seat>.S = the players. */
+BAL.personRange.body=["W.R[]","P.*.S"];
