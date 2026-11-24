@@ -35,5 +35,19 @@ NOTE: every MCP call needs the full ~9.6k-char prompt pasted inline (~3k tokens/
 | FACE-GENTLE-S62-A26-MASTER-SKIN03-T01 | s62 | 26 | tC2varXmZJ | bxpkOhn5Y2 | DONE | no text, bare face, ivory robe, ok |
 | FACE-GENTLE-S63-A26-MASTER-SKIN03-T01 | s63 | 26 | P3HN6Ma42C | BhiIbVgoQR | DONE | no text, bare face, ivory robe, ok |
 | FACE-GENTLE-S64-A26-MASTER-SKIN03-T01 | s64 | 26 | s7mSUzul8e | lJhUZjDgv9 | DONE | no text, bare face, ivory robe, ok |
+| FACE-GENTLE-M02-A51-MASTER-SKIN03-T01 | m02 | 51 | ksXxxbS16B | P3HNMHQ42C | DONE | no text, bare face, ivory robe, light lines + sparse silver, ok |
+| FACE-GENTLE-M08-A51-MASTER-SKIN03-T01 | m08 | 51 | Sya77l1Ub8 | UPfJYQOwny | DONE | no text, bare face, ivory robe, light lines + sparse silver, ok |
+| FACE-GENTLE-M14-A51-MASTER-SKIN03-T01 | m14 | 51 | EbcFFETuuO | 3z12BgAREY | DONE | no text, bare face, ivory robe, light lines + sparse silver, ok |
+| FACE-GENTLE-M18-A51-MASTER-SKIN03-T01 | m18 | 51 | gOvw7wcSXO | WDUTf6mcXe | DONE | no text, bare face, ivory robe, light lines + sparse silver, ok |
+| FACE-GENTLE-M19-A51-MASTER-SKIN03-T01 | m19 | 51 | dtNo8IEXSL | ksXx6uB16B | DONE | no text, bare face, ivory robe, light lines + sparse silver, ok |
+| FACE-GENTLE-M20-A51-MASTER-SKIN03-T01 | m20 | 51 | fHYuQHBCDY | yiF9V7cPW9 | DONE | no text, bare face, ivory robe, light lines + sparse silver, ok |
+| FACE-GENTLE-C02-A51-MASTER-SKIN03-T01 | c02 | 51 | Sya7J9wUb8 | fHYuUEiCDY | DONE | no text, bare face, ivory robe, light lines + sparse silver, ok |
+| FACE-GENTLE-C08-A51-MASTER-SKIN03-T01 | c08 | 51 | 9Zbi3zwNYZ | TdJDHrHVNR | DONE | no text, bare face, ivory robe, light lines + sparse silver, ok |
+| FACE-GENTLE-C20-A51-MASTER-SKIN03-T01 | c20 | 51 | BhiItudoQR | KLdr300kqp | DONE | no text, bare face, ivory robe, light lines + sparse silver, ok |
+| FACE-GENTLE-C26-A51-MASTER-SKIN03-T01 | c26 | 51 | 0e7MDhVTfW | 9ZbiXF6NYZ | DONE | no text, bare face, ivory robe, light lines + sparse silver, ok |
+| FACE-GENTLE-C32-A51-MASTER-SKIN03-T01 | c32 | 51 | Sya7JAyUb8 | lJhUYhJgv9 | DONE | no text, bare face, ivory robe, light lines + sparse silver, ok; lavender ribbon accessory (minor) |
+| FACE-GENTLE-S62-A51-MASTER-SKIN03-T01 | s62 | 51 | tC2varXmZJ | aFnEwc8fSh | DONE | no text, bare face, ivory robe, light lines + sparse silver, ok |
+| FACE-GENTLE-S63-A51-MASTER-SKIN03-T01 | s63 | 51 | P3HN6Ma42C | lJhUYQ0gv9 | DONE | no text, bare face, ivory robe, light lines + sparse silver, ok |
+| FACE-GENTLE-S64-A51-MASTER-SKIN03-T01 | s64 | 51 | s7mSUzul8e | u50Hy8iQLD | DONE | no text, bare face, ivory robe, light lines + sparse silver, ok |
 
-## STATUS 24/11 ~22:20Z: ages 16 + 26 COMPLETE (28/56). Next: age 51 (14), age 63 (14). Rollover cancelled; original worker continues.
+## STATUS 24/11 ~22:35Z: ages 16, 26, 51 COMPLETE (42/56). Next: age 63 (14), then contact sheets + CDN + final report. Rollover cancelled; original worker continues.
