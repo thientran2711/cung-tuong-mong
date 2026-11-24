@@ -25,3 +25,6 @@ jnotice.js: `kitKnowFlush` keeps `items` (one per fact), the panel renders ONE `
 ## tests
 know-notice.js (fold) ok, errs 0. book-person.js not run (server start was denied by the sandbox).
 ## KIT.md: 28.8d line added. Not committed: index.html / sw.js (lander rebuilds).
+
+## EXTRA (owner 24/11 ~18:18Z, page-turn flash) — review/flight-ui next commit
+Her video: dark navy flash behind the book + seal switching person while turning. Findings: (a) the sky behind the book (`.dsky`) is a keyframe animation that ENDS on orange (`@keyframes dsky ... forwards`) over a NAVY base; if the animation restarts / repaints on her device the navy shows. Fix: once the intro sky is done (animationend, fallback 3.6 s) the sky is frozen static orange (`.dawn.kbkdawn.kbkskyd .dsky`, j87.js). (b) the seal's big LEAN clone of the old page stayed over the next page during a turn: leans now end when a turn starts and never start while `.ksht` exists (j87 beginTurn, jemoseal kesLean). I could NOT reproduce the navy flash here (desktop Chromium), so (a) is a robust guard, not a proven cause: NEEDS her phone. Frame scrub of a real-speed Fold slide turn (Hoàng thượng → Tần): orange backdrop in every frame, each page has its own seal. Mp4/frames are in the session scratch only (not in git).
