@@ -61,7 +61,8 @@ KG82_SPR.duho=["hat-lotus"];KG82_SPR.den=["doden-lantern","hat-lotus"];
 /* boards: existing event paintings of the palace lake (img/ev-le-ha: hồ ngày hè · img/ev-le-thu-2: đèn trôi trên hồ đêm), cover-fit like every board */
 const TS_IMG={"tsduho-bg":"img/ev-le-ha.webp","tsden-bg":"img/ev-le-thu-2.webp"};
 (function(){const b0=kg82BgName;kg82BgName=function(kind){if(kind==="duho")return"tsduho-bg";if(kind==="den")return"tsden-bg";return b0.apply(this,arguments)}})();
-(function(){const i0=kg82Img;kg82Img=function(n){if(TS_IMG[n]){let i=KG82_IMG[n];if(!i){i=new Image();i.decoding="async";i.src=TS_IMG[n];KG82_IMG[n]=i}return i}return i0.apply(this,arguments)}})();
+/* KIT MG-SKIN: the lake boards ask the kit resolver first (kg82SkinSrc: tsduho-bg / tsden-bg -> img/mg/tsduho-<id>.webp / tsden-<id>.webp); no skin, or the file not on the CDN index / failing to load = the event painting above */
+(function(){const i0=kg82Img;kg82Img=function(n){if(TS_IMG[n]){const id=KG82.skin&&KG82.skin.id||"",k=id?n+"@"+id:n;let i=KG82_IMG[k];if(!i){i=new Image();i.decoding="async";const d=TS_IMG[n],s=id?kg82SkinSrc(n,id):d,sk=s.indexOf("img/mg/")===0;if(sk)i.onerror=()=>{i.onerror=null;i.src=d};i.src=sk?s:d;KG82_IMG[k]=i}return i}return i0.apply(this,arguments)}})();
 function tsEngPluck(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const N=12,lv=env.lv||0,dur=24000,spd=W/(5200+lv*350);const t0=performance.now();
  const L=[];let next=600,made=0,credit=0,got=0,lost=0,wrong=0,stop=false,raf=0;const pops=[];const zx0=W*.28,zx1=W*.72,zy=H*.4,zy1=H*.74;
  const risk=KG82.tsRisk||null;let alarm=null;KG82.tsGuard=null;
