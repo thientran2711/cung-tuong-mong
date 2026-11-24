@@ -1,0 +1,17 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vòng người · bản r2 (game thật)</title>
+<style>body{margin:0;background:#2a1c12;color:#f3e6c8;font:16px/1.5 "Be Vietnam Pro",system-ui,sans-serif;padding:16px;max-width:1500px;margin:auto}
+h1{font:800 26px "Noto Serif",serif;color:#f5d88f}h2{font:800 22px "Noto Serif",serif;color:#f5d88f;margin-top:40px;border-top:2px solid #6a4a22;padding-top:16px}
+img{max-width:100%;border:2px solid #6a4a22;border-radius:8px;margin:6px 0}video{max-width:48%;border:2px solid #6a4a22;border-radius:8px}
+.c{background:#3a281a;border-radius:10px;padding:10px 14px;margin:8px 0}.rec{background:#4a3414;border:2px solid #d9b25f}
+.st{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}@media(max-width:700px){.st{grid-template-columns:1fr}video{max-width:100%}}
+a{color:#f5d88f}small{color:#d6c39a}ul{margin:4px 0 4px 18px}table{border-collapse:collapse}td,th{border:1px solid #6a4a22;padding:4px 8px;vertical-align:top}</style></head><body>
+<h1>Vòng người — bản r2 chạy trên GAME THẬT</h1>
+<p><small>Khác bản r1: mỗi hình là chính game (bản build mới nhất của main, đúng khung đầu trang, thanh dưới, sân khấu, cột Ân sủng, nút rail). Mọi chữ, nút, thẻ lấy từ bộ kit: chip = kitChip; thẻ tên = kitNameTag / j59tagHTML; người chưa quen = bóng xám «Người lạ» của kit (.j59sil); khung đối thoại = kitScene + kitDlgBox + kitBareOpts (§93/§95); nền giữ nguyên độ sáng, chỉ người trong tâm điểm sáng hơn, người khác hơi mờ. Không còn vòng bầu dục vẽ, không còn avatar tròn. Chỉ có VỊ TRÍ và CỠ người là mới. Bản r1 (chrome vẽ tay, bị luật 9 loại): <a href="ring.html">ring.html</a>, <a href="ring2.html">ring2.html</a> (đừng dùng).</small></p>
+<div class="c rec"><b>Em đề nghị (r2):</b>
+<ul><li><b>Nơi đông người (Ngự Hoa Viên, sảnh): G vòng nhóm.</b> Chín nhóm = mười tám người đều thấy cùng lúc trên sân khấu thật, người cãi nhau vẫn đứng sát nhau, chủ tử có người theo hầu lùi sau vai, chạm nhóm mở cảnh kit §95. Làm đầu tiên.</li>
+<li><b>Màn CHỌN: R vòng một người</b> (sân chờ tuyển tú, chọn người theo hầu, làm chứng, nhận quà…): cùng bộ xếp vòng, mỗi ô một người.</li>
+<li><b>S cảnh rộng: chỉ khi có nền vẽ rộng liền mạch.</b> Nền hiện tại làm người đứng giữa bồn hoa; Fold phải kéo nhiều.</li>
+<li><b>Phòng riêng:</b> một màn cho mọi người; Fold một hàng tới bốn người, từ năm trở lên vòng; iPad một hàng tới sáu.</li>
+<li><b>NPC tìm ta:</b> vòng tự xoay, người đó phóng lên, kit §95 mở sau khoảng hai giây rưỡi, giữ như video.</li></ul></div>
+<div class="c"><b>Vòng người hiện tại sẽ thay cái gì?</b> Màn Dư đồ hiện tại (j6 renderStage + j59 j59lay): mỗi người một token ở các ô cố định (Fold hai ô, iPad bốn ô, luật OD:L1439/L1442), hết ô thì lật trang bằng chip «+n» / «‹» (j59chips, j59go, j59swipe), kèm dải token tên (#tokens) và thẻ người (popCard). G/R thay phần xếp ô + lật trang + chip «+n»; thẻ người, nút hành động, đầu số người (kitHereCount), nền, cột Ân sủng, rail giữ nguyên.</div>
+<div class="c"><b>Kit nào đã dùng:</b> kitChip (chữ trên đầu nhóm, chip báo, dải tên) · kitNameTag / j59tagHTML (thẻ tên) · .figimg.j59sil (bóng «Người lạ») · kitScene + Sc.fig + kitDlgBox + kitBareOpts (cảnh §95, bảng nút) · khung game thật (HUD, rail, cột Ân sủng, tab). <b>Lưu ý video iPad</b>: trong video iPad, game ở dạng trải đôi (sân khấu bên trái, bảng thật bên phải) nên vòng nằm trong nửa trái; ảnh tĩnh iPad là lúc bảng phải đang ẩn nên sân khấu rộng cả bề ngang; cả hai đều là trạng thái thật của game.</div>

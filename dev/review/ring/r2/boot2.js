@@ -1,0 +1,2 @@
+const {boot}=require('/tmp/claude-0/ring/probe/boot');const D=require('/home/user/cung-tuong-mong/dev/test/lib/device');
+module.exports=async dev=>{const dd=D.DEVICES[dev];return boot(dev,1,0,{recordVideo:{dir:'/tmp/claude-0/ring/vid3/tmp',size:{width:dd.w,height:dd.h}}})}

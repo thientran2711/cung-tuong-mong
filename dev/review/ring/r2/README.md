@@ -1,0 +1,1 @@
+r2: mock run INSIDE the real built game (dev/test/lib/device.js host mode). boot.js starts a life; r2.js/shots3.js/rec3.js/room.js drive; rr.js = ring layout engine (KRR); scen.js = scenarios + kit scenes (kitScene/kitDlgBox/kitBareOpts) + video sequences. Paths /tmp/claude-0/ring are the author's scratch; adjust. Design only — not for main.
