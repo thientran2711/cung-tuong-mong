@@ -423,7 +423,7 @@ function keepFriendPos(){if(!CW.on||!S||!S.where)return;const f=friendEntry();if
 CW.keepFriendPos=keepFriendPos;CW.refreshHere=()=>refreshHere();
 function onBuoi(m){T("onBuoi "+m.week+"."+m.buoi+" me "+wk()+"."+(S&&S.buoi)+" Q"+Q.length+(S&&S.mg?" mg":""));if(!CW.on||!S||eW())return;CW.bend=false;CW.wantB=null;drainAg();
  /* the room moved on: if a dialog is still open, step as soon as it is closed */
- if((Q.length||S.mg)&&m.week===wk()&&(S.buoi||0)===m.buoi-1){CW.pendBuoi=m;lockNext();return}CW.pendBuoi=null;
+ if((Q.length||S.mg)&&m.week===wk()&&(S.buoi||0)===m.buoi-1){CW.pendBuoi=m;lockNext();/* SELSCENE-15 (coop-e2e a1 / r5 stall): a card pushed to Q AFTER the last show (j10 capTell from the render / nextBuoi capSweep) sat unseen while the step waited for it to close → show it */try{const M=document.getElementById("modal");if(Q.length&&!S.mg&&M&&M.hidden)showModal()}catch(e){}return}CW.pendBuoi=null;
  if(m.week===wk()&&(S.buoi||0)===m.buoi-1&&!S.dead){CW.allow=true;try{nextBuoi()}finally{CW.allow=false}}
  /* the room is further on (came back after both steps, or a pendBuoi older than the room): next step at once */
  if(!S.dead&&typeof CW.rbuoi==="number"&&CW.rweek===wk()&&CW.rbuoi>(S.buoi||0)&&(S.buoi||0)===m.buoi)setTimeout(()=>{if(CW.on&&S&&CW.rweek===wk()&&CW.rbuoi>(S.buoi||0))onBuoi({week:wk(),buoi:(S.buoi||0)+1})},0);
