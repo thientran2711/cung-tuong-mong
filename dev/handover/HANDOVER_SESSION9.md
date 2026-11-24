@@ -2861,3 +2861,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (05:40Z) OD 08:30Z PROMOTION REDESIGN (no monthly check; ordinary promo only at kỳ sắc phong with conditions + exam; đại lễ every few years = mass direct conferral; son-like direct vs daughter-like special exam). D writes reports/promo-redesign.md — NO build before sếp approves; MAIN 117 presents it to her.
 - (05:41Z) OD 08:35Z: WHOLE-GAME law-1 (two-way) audit → Foreman B 08:36Z (role-parity-scan re-run + extend, reports/law1-audit.md, close gaps). MAIN 117 follows up + tells sếp the result.
 - (05:42Z) KIT READY kit-sqopt 5917286b (KK17) → B SMALL review + opt-card-scan whole group. KK17 next: DAY TITLE CARD.
+- (05:44Z) OD 08:40Z: emotion seals ALL ANIMATED, GO NOW, no samples/questions; C told to just execute (116 order 08:41Z). Waiting-sếp item 'animated vs still' CLOSED.
