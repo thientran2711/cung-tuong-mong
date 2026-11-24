@@ -782,7 +782,7 @@
 "status": "LIVE-OFF",
 "group": "G2",
 "event": "\"Hoàng thượng để mắt\"; maidLoveMonth",
-"fp": "On()&&S.srv.rk>=BAL.srvRk.dai&&S.age>=18&&roll(BAL.odb.j42.rbSrvMonth+S.nt/25))/* "
+"fp": "On()&&S.srv.rk>=BAL.srvRk.dai&&S.age>=BAL.ageMin&&roll(BAL.odb.j42.rbSrvMonth+S.nt/25))/* "
 },
 {
 "f": "j42.js",
@@ -1259,7 +1259,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC uses her handmade work (gift/poison/sell); seeks poison",
-"done": "const f=npwPick(others(v).filter(t=>t!==v&&(t===S?v.rel>B.relMe:rel(v,t)>0)&&wkEval(v,w,t).ok)"
+"done": "const f=npwPick(others(v).filter(t=>t!==v&&(t===S?v.rel>=netTh(v,\"quen\"):rel(v,t)>0)&&wkEval(v,w,t).ok)"
 },
 {
 "f": "j83.js",
