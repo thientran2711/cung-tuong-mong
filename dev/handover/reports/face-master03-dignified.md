@@ -13,6 +13,13 @@ Identity uploads: c04 EbcFFhnuuO, c10 ksXxxbr16B, c16 cpwVVY30eP, c22 rgoLLr0xtc
 | c10 A16 | xS8swCZjfW | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared |
 | c16 A16 | lJhUPp4gv9 | DONE (looked) | same QC; background slightly pinkish-ivory |
 | c22 A16 | 0e7MoFDTfW | DONE (looked) | same QC; background slightly pinkish-ivory |
+| c28 A16 | jUIly0aLD0 | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared |
+| m10 A16 | 79EyZVvJAL | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared; source-hair ribbon kept |
+| m16 A16 | TdJDmX8VNR | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared; source-hair ribbon kept |
+| m22 A16 | ksXxJbu16B | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared; braid ribbon kept |
+| m28 A16 | Xm68Q0ABfo | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared |
+| m29 A16 | MByefP9DCm | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared |
+| s65 A16 | Sya72ETUb8 | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared |
 
 Prompt texts at /home/user/wt/dig-out/p{16,26,51,63}.txt may be wiped: regenerate with the cut sentence script (delete exactly the one operator sentence).
 
