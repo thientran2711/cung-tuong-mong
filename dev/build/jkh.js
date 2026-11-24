@@ -51,7 +51,7 @@ function khPgRisk(p){const G=BAL.pgRisk;if(!G||!p)return[0,""];const why=[];let 
 function khStat(k){try{(window.__khN=window.__khN||{})[k]=(window.__khN[k]||0)+1}catch(e){}if(typeof rtStat==="function"&&/^ng_/.test(k))rtStat(k)}
 /* is this NPC driven to use a 'lệch sổ' birth against the mother? (self-interest: her own son vs a son, a rival for the same rank, deep dislike) */
 function khMotive(v,m,k){if(!v||!m||v===m)return false;const M=BAL.preT.mot;const vs=(v===S?S.kids:v.kids||[]).some(x=>x.alive&&x.sex==="m");
- return (vs&&k.sex==="m")||(Math.abs(rkOf(v)-rkOf(m))<=M.rkGap&&aff(v,m)<M.aff)||aff(v,m)<=M.hate||(v.oan||0)>=M.oan&&m===S}
+ return (vs&&k.sex==="m")||(Math.abs(rkOf(v)-rkOf(m))<=M.rkGap&&aff(v,m)<0)||aff(v,m)<=netTh(v,"ghet")||(v.oan||0)>=netTh(v,"thu")&&m===S}
 /* a birth that does not fit the book becomes a public fact */
 function khLech(m,k,pre){k.dateOff=pre?"pre":"od";khStat("lech");const P=BAL.preT,w=pre?"sinh non":"sinh quá ngày";
  if(m!==S){k.dateKnown=1;try{noteAdd(m.id,`${k.name} ${w}, ngày sinh lệch với đêm thị tẩm ghi trong sổ Kính sự phòng`)}catch(e){}if(!S.dead&&!S.out)evA(S,m,P.evi)}
