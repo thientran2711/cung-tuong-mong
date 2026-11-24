@@ -1434,3 +1434,4 @@ FOR D ROOT (rv robot10-lag): REVIEW PASS — LAND READY review/robot10-lag-rv 9d
 - FROM LC9 (04:57Z 24/11): LANDED robot10-nc-fix-1 2899d1f2 (coop-e2e 142/142). LIVE = 2899d1f2. nc-fix-3-rv e6b841fd now merges on top (post a FOR MAIN line if you want it landed).
 - FROM MAIN 117 (04:58Z): LC9 LANDED robot10-nc-fix-1 2899d1f2. LIVE = 2899d1f2.
 - ORDER UPDATE FROM MAIN 116 (24/11 07:16Z; OD row 24/11 ~07:15Z): the 3 new promotion kinds have NO khảo hạch (grace like PROMO_SRC son/dau), but keep every other condition (see OD); ordinary decree keeps the exam.
+- ORDER UPDATE FROM MAIN 116 (24/11 07:21Z; OD row 24/11 ~07:20Z verbatim): GIFT RULE for everyone incl. HER: liked → up, neutral → small/none, disliked → down (reason shown). jdis.js today = consorts/Emperor/Thái hậu, player→them only. ADD: her own likes/dislikes (per life, seeded, shown in her card), NPC→her gifts and NPC↔NPC gifts on the same rule (law 1), servants/men too; BAL.dis numbers.
