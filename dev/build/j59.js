@@ -346,7 +346,7 @@ html body #stage.j59ph #kshR .k3c .k3ct{flex-direction:row;align-items:baseline;
 html body #stage.j59ph #kshR .k3p{width:auto}
 html body #stage.j59slot #mefig.j59off,html body #stage.j59slot #j59metag.j59off{display:none!important}
 html body #stage.j59slot .j59more{transform:none;z-index:4}
-.stage.j59 .tok.fig .figimg.j59sil{filter:url(#kfa) brightness(1.04) contrast(.8) drop-shadow(0 6px 6px #0003);opacity:.92}
+.stage.j59 .tok.fig .figimg.j59sil,.ksil{filter:url(#kfa) brightness(1.04) contrast(.8) drop-shadow(0 6px 6px #0003);opacity:1}/* KIT §59.1 stand-in = OPAQUE (owner OD 24/11 ~15:30Z); .ksil = the same look as a kit class for any figure (ring #kar, servants) */
 /* her idle sway breathes from the feet: no vertical lift, so her feet stay on the slot floor line with everyone else */
 @keyframes meidle{0%,100%{transform:translateX(-50%) scale(1,1)}50%{transform:translateX(-50%) scale(1,1.012)}}`;document.head.appendChild(css);
 /* the person card (#popw) docks in the lower panel area (a side sheet beside the stage on wide screens), so the stage
