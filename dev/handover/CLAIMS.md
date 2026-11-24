@@ -1573,5 +1573,5 @@ face-master03 Sharp (ages 16/26/51/63; sonnet) | Magnific only, report reports/f
 | VIECNHO-FIX (owner bug 24/11 ~21:50Z: Việc nhờ sub-tab + person panel scroll kit + result popup Vì sao; sonnet) | review/viecnho-fix | MAIN 128 | session_01V1ZZH4XjjV9xGrojVNGZpc | RUNNING | 24/11 22:00Z |
 save-growth review | review/save-growth e573b9b8 | session_01DgYSWo2KgYDGKUVNxK99cu | RUNNING | 24/11 22:05Z | FOREMAN E (child7)
 selection-scene r5 (successor of SELSCENE-14) | review/selection-scene | session_01V1ZZH2RPBbsHqSWXsmrmCV | RUNNING | 2026-11-24T22:05Z (MAIN 128)
-| MINIGAME-FIX (owner 22:02Z items 2+6: mini-game picture decode-first + kit intro/skip wording, sonnet) | review/minigame-fix | MAIN 128 | (opening) | RUNNING | 24/11 22:08Z |
-| VISITOR-FIX (owner 22:02Z items 3+4+5: visitor face/name/size, greeting by rank, no system lines in story, sonnet) | review/visitor-fix | MAIN 128 | (opening) | RUNNING | 24/11 22:08Z |
+| MINIGAME-FIX (owner 22:02Z items 2+6: mini-game picture decode-first + kit intro/skip wording, sonnet) | review/minigame-fix | MAIN 128 | session_01V1ZZH17BmYP7unXApPtTph | RUNNING | 24/11 22:08Z |
+| VISITOR-FIX (owner 22:02Z items 3+4+5: visitor face/name/size, greeting by rank, no system lines in story, sonnet) | review/visitor-fix | MAIN 128 | session_01V1ZZH3EpiFUfjQmqdR8cmA | RUNNING | 24/11 22:08Z |
