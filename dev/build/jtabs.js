@@ -52,18 +52,39 @@ function ktArtHTML(){try{vNormAll()}catch(e){}const SK=ktArtSkills();const G=[["
  if(works&&works.replace(/<[^>]+>/g,"").trim())list.push({k:"wk",label:"Tác phẩm",doable:ktDoable(works),total:ktTotal(works)||null,n:null});
  /* owner 17/11 07:55Z: NO info band under the tabs. "ⓘ Cách học" (or "ⓘ Tác phẩm") = the tab bar's trailing slot; Tứ đức · Đức chip · ⓘ luật Đức = the Tứ đức section header; only a real status chip (Danh sư) keeps a one-line row */
  const cur0=ktSubGet("art",list);const sub=kitSubTabs("art",list,kitInfo(cur0==="wk"?"Tác phẩm":"Cách học"));let h=sub.html+(S.master?`<div class="ktop"><span class="kchip g">Danh sư còn dạy ${S.master} tháng</span></div>`:"")+(sub.cur==="duc"?kitSecHead(kitInfo("Tứ đức"),`<button class="lnk ladi" data-v85tab="duc">ⓘ luật Đức</button>`):"");
- if(sub.cur==="wk")return h+`<div class="kskills">${works}</div>`;
+ /* owner 24/11 ~18:05Z (flight bug #1): each tab opens on an OVERVIEW — ONE equal TILE per môn (picture, bậc, bar, next line), NO act list; tap = kit pop-up with that môn's act cards (ktTnPop) */
+ if(sub.cur==="wk")return h+`<div class="kskills ktn-grid">${ktWorksList().map(s=>ktTnTile(s,"wk")).join("")}</div>`;
  const L=SK.filter(s=>s.g===sub.cur).map(s=>Object.assign(s,{can:s.acts.some(a=>!/\sdisabled[\s>]/.test(a.slice(0,a.indexOf(">")+1)))}));
  L.sort((a,b)=>(b.can-a.can)||((a.level>=5)-(b.level>=5)));
- return h+`<div class="kskills">${L.map(kitSkillCard).join("")}</div>`}
+ return h+`<div class="kskills ktn-grid">${L.map(s=>ktTnTile(s,sub.cur)).join("")}</div>`}
+function ktTnTile(s,g){const o=Object.assign({},s,{acts:[],tile:true,stepsAttr:""});return `<div class="ktn-tile${s.can===false?" kdone":""}" role="button" tabindex="0" data-tnmon="${g}:${s.kind}:${s.k}">${kitSkillCard(o)}</div>`}
+function ktTnFind(key){const [g,kind,k]=String(key).split(":");if(g==="wk")return ktWorksList().find(s=>s.k===k);return ktArtSkills().find(s=>s.kind===kind&&s.k===k)}
+function ktTnPop(key){const s=ktTnFind(key);if(!s)return;s.can=undefined;
+ kitModal({kind:"notice",title:s.name,sub:s.kicker||"",sections:[{h:"",html:`<div data-tnpop="1" class="ktn-pop">${kitSkillCard(Object.assign({},s,{stepsAttr:""}))}</div>`}],btn:"Thôi"})}
+window.ktTnPop=ktTnPop;
+document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-tnmon]");
+ if(t&&!e.target.closest("[data-ktsv]")){e.stopPropagation();try{ktTnPop(t.dataset.tnmon)}catch(x){console.error(x)}return}
+ const a=e.target.closest&&e.target.closest("#modal .ktn-pop button[data-learn],#modal .ktn-pop button[data-vlearn],#modal .ktn-pop button[data-wk],#modal .ktn-pop button[data-wkprac],#modal .ktn-pop button[data-charity]");
+ if(a&&!a.disabled)setTimeout(()=>{try{const m=document.getElementById("modal");if(m&&m.querySelector("[data-tnpop]"))kitModalClose()}catch(x){}},0)},true);
+document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.matches&&e.target.matches(".ktn-tile")){e.preventDefault();ktTnPop(e.target.dataset.tnmon)}});
+(function(){const st=document.createElement("style");st.id="kit2-tntile";st.textContent=`
+.kskills.ktn-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:10px;align-items:stretch}
+.ktn-tile .kskdo,.ktn-tile .kskx{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.ktn-tile{display:flex;cursor:pointer;min-width:0;container-type:inline-size}
+@container (max-width:330px){.ktn-tile .kskh2{grid-template-columns:minmax(0,1fr)!important;justify-items:start}.ktn-tile .kskdo{display:none}}.ktn-tile>.kskill{flex:1;margin:0;min-width:0}
+.ktn-tile .kskh{flex-wrap:wrap;gap:4px 8px}.ktn-tile .kskinfo{min-width:0}
+.dlg:has(.ktn-pop) .k3body>.k3main,.dlg:has(.ktn-pop) .k3body>.kpsubj,.dlg .kpb:has(.ktn-pop)>.kpsubj,.dlg .kpb:has(.ktn-pop)>.kpiart{display:none!important}.dlg:has(.ktn-pop) .k3right{flex:1 1 100%;width:100%}.dlg .kpb.kphas:has(.ktn-pop){grid-template-columns:minmax(0,1fr)!important}
+.ktn-tile:active>.kskill{filter:brightness(.97)}
+`;document.head.appendChild(st)})();
 /* Tác phẩm (j83 works): one skill head per art that makes works = picture, bậc, what it makes as chips, the quality ladder;
    "Tự học, làm tác phẩm" (mastered only) as a compact act. Rules behind the ⓘ "Tác phẩm" gloss (was a paragraph + bare divs). */
-function ktWorksHTML(){if(typeof wkKindsOf!=="function"||typeof WK!=="object")return"";const why=whyTime(2)||(S.suc<BAL.sucNeed.wk?"Sức dưới "+BAL.sucNeed.wk:"");
+function ktWorksList(){if(typeof wkKindsOf!=="function"||typeof WK!=="object")return[];const why=whyTime(2)||(S.suc<BAL.sucNeed.wk?"Sức dưới "+BAL.sucNeed.wk:"");
  const L=ARTS.map(a=>{const l=S.arts[a.k],ks=wkKindsOf(a.k);if(!ks.length)return null;const img=kitSkillArt("art",a.k,a.n)||(typeof AIMG==="object"&&AIMG[a.k]?AIMG[a.k]:"");
   const acts=l>=5?[pbtn(`data-wk="prac" data-art="${a.k}"`,"Tự học, làm tác phẩm",`tốn: Sức -${BAL.artLes.prac}, 2 khắc · thành: một tác phẩm, ${wkOddsTxt(S,ks[0],0)}`,why)]:[];
   const kinds=ks.map(k=>`<span class="kchip n">${WK[k].w}${WK[k].per?" · để 1 tuần":""}</span>`).join(" ");
   return{kind:"wk",k:a.k,name:a.n,kicker:artNm(l),level:l,prog:[artPts(S,a.k),100],bar:l>=5?false:undefined,desc:`${kinds} <span class="kchip g">phẩm +${wkLvQ(S,a.k)}</span><br>${wkTierTxt(S,ks[0],0)}`,next:"",acts,img,can:!!(acts.length&&!why)}}).filter(Boolean);
- L.sort((a,b)=>(b.can-a.can)||(b.level-a.level));return L.map(kitSkillCard).join("")}
+ L.sort((a,b)=>(b.can-a.can)||(b.level-a.level));return L}
+function ktWorksHTML(){return ktWorksList().map(kitSkillCard).join("")}
 KIT_GLOSS["Tác phẩm"]="Mỗi buổi học hay tự học mà tự tay chơi trò tài nghệ thì ra một tác phẩm (Học nhanh: không ra thành phẩm), cất vào rương để dâng, tặng, bán, bày ở yến tiệc. Phẩm = phần chơi trò tài nghệ (từ 0 đến 10) + chút bậc tài nghệ + vật liệu. Đồ mua bằng bạc vẫn quý hơn. Môn đạt "+BAL.art.nm[5]+" thì tự học là ra tác phẩm ngay.";
 artTabHTML=function(){return ktArtHTML()};
 /* ---------- MỆNH TRUYỆN ---------- */
