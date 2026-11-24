@@ -1,0 +1,51 @@
+kiep_no,origin,road,bot,life,seed,real_min,cum_min,years,age,max_rank,ending,ending_type,group,death_cause,cause_src,who,framed_before,buoi,preg,sons,daughters,kid_deaths,heir_made,nights,sung_peak,bac_peak,bac_end,het_bac,mini_games,ky_ngo,events_distinct,bugs,bot_min
+1,cnv,cnv_ban,cautious,1,2647859393,2348,2348,10.83,30,Đáp ứng,Xuất cung,leave,thường,,,,,1570,0,0,0,0,0,0,0,58,58,0,1162,4,36,4,12.58
+2,cnv,cnv_ban,cautious,2,3635351660,2232.9,4580.8,6.08,26,Đáp ứng,Xuất cung,leave,thường,,,,,915,0,0,0,0,0,0,0,28,28,1,1165,5,39,5,5.9
+3,cnv,cnv_ban,cautious,3,3805331875,2325,6905.8,9.42,29,Đáp ứng,Xuất cung,leave,thường,,,,,1387,0,0,0,0,0,0,0,196,196,0,1165,4,37,4,10.25
+4,cnv,cnv_ban,cautious,4,3337437478,1977.9,8883.8,3.42,21,Đáp ứng,Hồng nhan bạc mệnh,death,death,"Tuổi trời đã tận, «ILL[ageOf(p)>=M.oldAge?""laobenh"":""trongbenh""].n.toLowerCase()» không qua khỏi, thọ «S.age» tuổi",jmort.js:106,fate (lifespan),0,542,0,0,0,0,0,0,0,27,19,0,1164,4,34,1,3.62
+5,cnv,cnv_ban,cautious,5,3797927877,2273.9,11157.7,7.25,26,Đáp ứng,Xuất cung,leave,thường,,,,,1079,0,0,0,0,0,0,0,45,21,1,1165,5,39,5,7.09
+1,cnv,cnv_ban,greedy,1,2217801940,235.6,235.6,11.83,30,Đáp ứng,Xuất cung,leave,thường,,,,,1726,0,0,0,0,0,0,12,47,0,1,39,5,22,4,11.15
+2,cnv,cnv_ban,greedy,2,2840961097,250.5,486.2,10.83,30,Đáp ứng,Xuất cung,leave,thường,,,,,1594,0,0,0,0,0,0,6,74,2,1,74,7,29,4,8.85
+3,cnv,cnv_ban,greedy,3,769819274,200,686.2,9.83,30,Đáp ứng,Xuất cung,leave,thường,,,,,1461,0,0,0,0,0,0,12,51,6,1,30,4,21,9,8.37
+4,cnv,cnv_ban,greedy,4,1392978431,185.1,871.3,9.83,30,Đáp ứng,Xuất cung,leave,thường,,,,,1442,0,0,0,0,0,0,6,30,7,1,17,4,17,8,8.25
+5,cnv,cnv_ban,greedy,5,3347082072,241,1112.3,9.83,30,Đáp ứng,Xuất cung,leave,thường,,,,,1438,0,0,0,0,0,0,12,75,2,1,83,6,24,4,7.83
+1,cnv,cnv_ban,lazy,1,2039511402,358.3,358.3,11.83,30,Đáp ứng,Xuất cung,leave,thường,,,,,1758,0,0,0,0,0,0,4,154,22,0,273,7,26,9,11.29
+2,cnv,cnv_ban,lazy,2,1530727403,236.4,594.6,9.83,30,Đáp ứng,Xuất cung,leave,thường,,,,,1457,0,0,0,0,0,0,3,47,20,0,151,5,25,9,8.44
+3,cnv,cnv_ban,lazy,3,3487494068,226.6,821.2,9.83,30,Đáp ứng,Xuất cung,leave,thường,,,,,1541,0,0,0,0,0,0,4,26,22,0,107,7,19,4,8.68
+4,cnv,cnv_ban,lazy,4,3650070285,330.1,1151.3,11.83,30,Đáp ứng,Xuất cung,leave,thường,,,,,1824,0,0,0,0,0,0,0,47,22,0,246,7,28,12,12.22
+5,cnv,cnv_ban,lazy,5,3189579886,659.8,1811.1,,40,Đáp ứng,CAP,cap,no ending,,,,,2904,0,0,0,0,0,0,4,48,31,0,527,7,35,16,31.88
+1,cnv,cnv_ban,lover,1,299382356,738.6,738.6,,38,Đáp ứng,CAP,cap,no ending,,,,,2784,0,0,0,0,0,0,33,48,3,1,163,9,40,6,31.11
+2,cnv,cnv_ban,lover,2,922541513,2516,3254.6,8.75,28,Tần,Hồng nhan bạc mệnh,death,death,Bị ban chết vì tư thông với «m.name»,j22.js:22,execution,0,1475,2,0,1,0,0,52,100,78,5,1,501,17,284,15,14.15
+3,cnv,cnv_ban,lover,3,3146366986,412.4,3667,9.83,30,Đáp ứng,Xuất cung,leave,thường,,,,,1431,0,0,0,0,0,0,15,43,3,1,49,7,30,5,9.11
+4,cnv,cnv_ban,lover,4,3769526143,1534,5201,11.83,30,Đáp ứng,Xuất cung,leave,thường,,,,,1732,0,0,0,0,0,0,27,54,5,1,560,9,49,5,12.19
+5,cnv,cnv_ban,lover,5,1428662488,503.5,5704.6,10.83,30,Đáp ứng,Xuất cung,leave,thường,,,,,1595,0,0,0,0,0,0,66,23,10,1,98,8,31,10,10.21
+1,cnv,cnv_ban,random,1,1883824607,322.6,322.6,6.83,25,Đáp ứng,Xuất cung,leave,thường,,,,,1032,0,0,0,0,0,0,27,41,5,1,148,8,29,10,4.85
+2,cnv,cnv_ban,random,2,242513518,156.5,479.1,3.67,23,Đáp ứng,Hồng nhan bạc mệnh,death,death,Bị «m.name» sai đánh trượng đến chết,j42.js:323,execution,0,574,0,0,0,0,0,0,6,39,4,1,76,7,22,4,2.22
+3,cnv,cnv_ban,random,3,703003917,97.1,576.2,1.08,20,Đáp ứng,Hồng nhan bạc mệnh,death,death,Bị ban chết vì đầu độc «k.name»,j8.js:146,poison,0,174,0,0,0,0,0,0,19,24,14,1,21,8,47,8,1.73
+4,cnv,cnv_ban,random,4,540427700,274,850.1,6,25,Đáp ứng,Xuất cung,leave,thường,,,,,897,0,0,0,0,0,0,17,70,4,1,115,6,27,9,4.15
+5,cnv,cnv_ban,random,5,2878628331,313.3,1163.4,6.92,25,Đáp ứng,Xuất cung,leave,thường,,,,,1017,0,0,0,0,0,0,25,84,2,1,141,9,33,5,4.68
+1,cnv,cnv_ban,rebel,1,985333354,29.9,29.9,0.5,19,Đáp ứng,Xuất giá,death,death,Xuất giá,j42.js:435,other,,100,0,0,0,0,0,0,21,21,16,1,9,7,15,2,0.45
+2,cnv,cnv_ban,rebel,2,476549355,6.7,36.7,0.17,19,Đáp ứng,Hồng nhan bạc mệnh,death,death,Bị «m.name» sai đánh trượng đến chết,j42.js:323,execution,0,50,0,0,0,0,0,0,0,13,12,0,1,6,8,2,0.39
+3,cnv,cnv_ban,rebel,3,2433316020,1510.6,1547.3,7.25,27,Quý nhân,Hồng nhan bạc mệnh,death,death,Hồng nhan bạc mệnh,j3.js:167,childbirth,0,1255,3,0,2,1,0,35,100,91,1,1,465,10,262,18,11.27
+4,cnv,cnv_ban,rebel,4,2595892237,56.1,1603.4,0.67,20,Đáp ứng,Xuất giá,death,death,Xuất giá,j42.js:435,other,,101,0,0,0,0,0,0,15,17,8,1,22,7,15,2,0.52
+5,cnv,cnv_ban,rebel,5,2135401838,270.2,1873.6,3.08,22,Đáp ứng,Hồng nhan bạc mệnh,death,death,"Tuổi trời đã tận, «ILL[ageOf(p)>=M.oldAge?""laobenh"":""trongbenh""].n.toLowerCase()» không qua khỏi, thọ «S.age» tuổi",jmort.js:106,fate (lifespan),0,444,0,0,0,0,0,0,0,22,2,1,21,7,22,3,1.65
+1,cnv,cnv_ban,schemer,1,1737624413,247.5,247.5,9.83,30,Đáp ứng,Xuất cung,leave,thường,,,,,1422,0,0,0,0,0,0,22,28,6,1,0,5,28,10,10.06
+2,cnv,cnv_ban,schemer,2,2725116680,282.9,530.4,3.17,21,Đáp ứng,Lãnh cung,death,death,Lãnh cung,j14.js:40,other,,545,0,0,0,0,0,0,42,25,8,1,0,4,89,9,3.18
+3,cnv,cnv_ban,schemer,3,771013039,4148.6,4679,13.67,33,Thường tại,Hồng nhan bạc mệnh,death,death,Bị ban chết vì đầu độc «k.name»,j8.js:146,poison,0,2213,0,0,1,1,0,0,100,42,5,1,0,10,239,15,21.37
+4,cnv,cnv_ban,schemer,4,147853882,277.1,4956.1,10.83,30,Đáp ứng,Xuất cung,leave,thường,,,,,1560,0,0,0,0,0,0,28,32,12,1,0,6,29,10,10.56
+5,cnv,cnv_ban,schemer,5,50672121,4628.3,9584.4,11.33,29,Đáp ứng,Hồng nhan bạc mệnh,death,death,"«pre»Tân Thái hậu «v.name» xét lại chuyện cũ (khả năng: «chanceLo(o)»), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",j3.js:164,execution,0,1904,0,0,0,0,0,0,100,42,0,1,0,9,218,15,18.68
+1,cnv,cnv_ban,scholar,1,184423200,216.7,216.7,9.17,27,Đáp ứng,Hồng nhan bạc mệnh,death,death,"Tuổi trời đã tận, «ILL[ageOf(p)>=M.oldAge?""laobenh"":""trongbenh""].n.toLowerCase()» không qua khỏi, thọ «S.age» tuổi",jmort.js:106,fate (lifespan),0,1321,0,0,0,0,0,0,6,14,3,1,28,5,19,3,6.65
+2,cnv,cnv_ban,scholar,2,3491898229,4316.5,4533.2,,33,Hoàng hậu,CAP,cap,no ending,,,,,2591,2,0,0,0,0,76,100,268,77,1,888,16,422,25,30.17
+3,cnv,cnv_ban,scholar,3,3052196182,253.3,4786.4,9.83,30,Đáp ứng,Xuất cung,leave,thường,,,,,1419,0,0,0,0,0,0,6,15,0,1,36,5,20,2,8.06
+4,cnv,cnv_ban,scholar,4,1372555347,2301,7087.5,18.92,37,Đáp ứng,Hồng nhan bạc mệnh,death,death,"Tuổi trời đã tận, «ILL[ageOf(p)>=M.oldAge?""laobenh"":""trongbenh""].n.toLowerCase()» không qua khỏi, thọ «S.age» tuổi",jmort.js:106,fate (lifespan),0,2741,0,0,0,0,0,0,25,35,5,1,603,8,46,5,31
+5,cnv,cnv_ban,scholar,5,3329322012,195.3,7282.8,9.83,30,Đáp ứng,Xuất cung,leave,thường,,,,,1420,0,0,0,0,0,0,6,16,0,1,13,5,19,3,7.14
+1,cnv,cnv_ban,skilled,1,1482832690,423.3,423.3,9.92,28,Đáp ứng,Hồng nhan bạc mệnh,death,death,"Tuổi trời đã tận, «ILL[ageOf(p)>=M.oldAge?""laobenh"":""trongbenh""].n.toLowerCase()» không qua khỏi, thọ «S.age» tuổi",jmort.js:106,fate (lifespan),0,1435,0,0,0,0,0,0,22,43,4,1,179,8,29,5,7.01
+2,cnv,cnv_ban,skilled,2,3121583923,2399.3,2822.6,11.17,30,Quý phi,Thái phi,death,death,Thái phi,j3.js:157,other,,1898,0,0,0,0,0,56,100,119,3,1,484,15,345,24,17.11
+3,cnv,cnv_ban,skilled,3,2930815356,2998.7,5821.3,11.58,30,Hoàng quý phi,Hồng nhan bạc mệnh,death,death,"«pre»Tân Thái hậu «v.name» xét lại chuyện cũ (khả năng: «chanceLo(o)»), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",j3.js:164,execution,0,2013,1,0,0,0,0,33,100,198,0,1,588,16,367,15,20.53
+4,cnv,cnv_ban,skilled,4,945959509,2855.7,8677,,37,Phi,CAP,cap,no ending,,,,,2746,0,0,0,0,0,11,100,96,0,1,665,15,270,23,31.83
+5,cnv,cnv_ban,skilled,5,485469110,3633.5,12310.5,,34,Hoàng hậu,CAP,cap,no ending,,,,,2656,0,0,0,0,0,60,100,270,21,1,720,17,408,18,30.13
+1,cnv,cnv_ban,speed,1,3807604397,91.9,91.9,2.33,22,Đáp ứng,Hồng nhan bạc mệnh,death,death,Bị «m.name» sai đánh trượng đến chết,j42.js:323,execution,0,410,0,0,0,0,0,0,29,67,1,1,47,8,19,3,1.51
+2,cnv,cnv_ban,speed,2,2626773080,208.4,300.3,5.83,25,Đáp ứng,Xuất cung,leave,thường,,,,,840,0,0,0,0,0,0,18,65,12,1,93,7,28,9,4.01
+3,cnv,cnv_ban,speed,3,672669439,281.7,582,7.17,25,Đáp ứng,Xuất cung,leave,thường,,,,,1051,0,0,0,0,0,0,24,84,4,1,126,8,32,10,5.08
+4,cnv,cnv_ban,speed,4,49510282,235.6,817.6,5.83,25,Đáp ứng,Xuất cung,leave,thường,,,,,892,0,0,0,0,0,0,22,39,2,1,101,7,29,9,4.27
+5,cnv,cnv_ban,speed,5,2120652105,24.8,842.5,0.42,19,Đáp ứng,Hồng nhan bạc mệnh,death,death,"«d.n» nguy kịch, không qua khỏi",j13.js:21,illness,0,61,0,0,0,0,0,0,19,8,1,1,8,4,22,1,0.38
