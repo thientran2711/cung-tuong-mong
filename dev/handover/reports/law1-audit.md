@@ -77,3 +77,5 @@ Co-op: NPC decisions run where they ran before (bcNpcAsk host-only palFix wrap; 
 - Act table up-column timing rows (def_* ×4, staffHoi, rougeBorrow, cx:buy): carried, SAME in every rank column.
 
 **SẴN SÀNG KIỂM 0cf18edad63ac034b8e5f249c0aa9a62955092e5** (review/law1-audit)
+## Act table (buttons, role × act) — re-run on LIVE
+(running; appended when done)
