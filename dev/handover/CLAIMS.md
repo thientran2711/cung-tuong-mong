@@ -1454,14 +1454,14 @@ REVIEW promo-build 7c4116de (opus BIG; briefs/D-promo-build-review.md) | review/
 | ROBOT FIXER cnv families (opus; ORDER MAIN 119 07:40Z; briefs/F-robot-fixer.md) | review/robot-fix-cnv; reports/robot-fix-cnv.md | F | session_01UV1SzhQegCd1j7H5GHPzMo | SSK 1f046fb7 + HANDOVER (successor by F) | 24/11 08:20Z |
 | ROBOT-COOP RUNNER U4 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U4-* | F | session_01UV1Szh9vtuLGWyG8DpJArr | DONE pair 3 (20 lives, 15 families); pair 4 → U4b; ARCHIVED 18:25Z | 24/11 08:20Z |
 | ROBOT-COOP RUNNER U5 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U5-* | F | session_01UV1SzjjFvKxvNJDS3Tom9F | DONE 40 lives 23 families; ARCHIVED 20:25Z | 24/11 08:20Z |
-| ROBOT-COOP RUNNER U6 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U6-* | F | session_01UV1SziPWFp447pcaYdp9tB (depth 2) | RUNNING | 24/11 08:20Z |
-| ROBOT-COOP RUNNER U7 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U7-* | F | session_01UV1SziP6h45uycmryXVrR2 | RUNNING | 24/11 08:20Z |
-| ROBOT-COOP RUNNER U8 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U8-* | F | session_01UV1SzjsZzQJA37FcMaTxYH | RUNNING | 24/11 08:20Z |
+| ROBOT-COOP RUNNER U6 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U6-* | F | session_01UV1SziPWFp447pcaYdp9tB (depth 2) | DONE (round-1 wind-down 24/11 20:30Z); ARCHIVED | 24/11 08:20Z |
+| ROBOT-COOP RUNNER U7 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U7-* | F | session_01UV1SziP6h45uycmryXVrR2 | DONE (round-1 wind-down 24/11 20:30Z); ARCHIVED | 24/11 08:20Z |
+| ROBOT-COOP RUNNER U8 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U8-* | F | session_01UV1SzjsZzQJA37FcMaTxYH | DONE (round-1 wind-down 24/11 20:30Z); ARCHIVED | 24/11 08:20Z |
 | ROBOT-COOP RUNNER U9 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U9-* | F | session_01UV1Szk6ufhiGhKMet81jeM | DONE (wind-down F#3 20:55Z; pair 9: 20 lives, pair 10: 4 lives) | 24/11 08:20Z |
 | ROBOT-COOP RUNNER U10 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U10-* | F | session_01UV1SzhrkpA7AE9DFBzmfAt | DONE | 24/11 08:20Z |
-| ROBOT-COOP RUNNER U11 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U11-* | F | session_01UV1SziV3NRALEPA2zdoNLR | RUNNING | 24/11 08:20Z |
-| ROBOT-COOP RUNNER U12 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U12-* | F | session_01UV1SzjKjK14tpvYki18rNr | RUNNING | 24/11 08:20Z |
-| ROBOT-COOP RUNNER U13 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U13-* | F | session_01UV1SzmGJVups8vRB64UN9j | RUNNING | 24/11 08:20Z |
+| ROBOT-COOP RUNNER U11 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U11-* | F | session_01UV1SziV3NRALEPA2zdoNLR | DONE (round-1 wind-down 24/11 20:30Z); ARCHIVED | 24/11 08:20Z |
+| ROBOT-COOP RUNNER U12 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U12-* | F | session_01UV1SzjKjK14tpvYki18rNr | DONE (round-1 wind-down 24/11 20:30Z); ARCHIVED | 24/11 08:20Z |
+| ROBOT-COOP RUNNER U13 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U13-* | F | session_01UV1SzmGJVups8vRB64UN9j | DONE (round-1 wind-down 24/11 20:30Z); ARCHIVED | 24/11 08:20Z |
 PROMO-BUILD 2 follow-ups: her HH nomination (law 1) + deathbed/truy phong exams + Emperor-death mourning + Phân cung nit (opus BIG; briefs/D-promo-build-2.md) | review/promo-build-2 | (opening) | RUNNING | 24/11 08:40Z (Foreman D depth 1)
 | MOMENT FIX r1 E75 (opus BIG; E73r FAIL 5a504f92 5 items; briefs/E75-moment-fix.md) | review/moment-r | FOREMAN E (child2) | session_01DgYSWqADFR2kTet7NyTmeC | SSK 1d2189f3 (reports/moment.md ## FIX r1) | 24/11 10:05Z |
 PROMO-BUILD 2 follow-ups: her HH nomination (law 1) + deathbed/truy phong exams + Emperor-death mourning + Phân cung nit (opus BIG; briefs/D-promo-build-2.md) | review/promo-build-2 | session_01D3E3NYnT9a58st5Vj9RX4B | RUNNING | 24/11 08:40Z (Foreman D depth 1)
@@ -1540,7 +1540,7 @@ figload-keep (live bug split from sideline-dlg 3fb17db4) | review/figload-keep |
 | LC12 lander | main FF | MAIN 125 | session_01V1ZZH2p2x7oNCrRuTq7RjF | RUNNING | 2026-11-24T18:15Z |
 ROBOT-COOP FIXER #6 (fix-2 r3, fix-3 r3) | review/robot-coop-fix-2-r3, robot-coop-fix-3 | session_01N1tNP4TkcdjyymdxPqwSj5 | RUNNING | 2026-11-24T18:24Z (FOREMAN B)
 ROBOT-COOP FIXER #6b (week-end stuck, fix-4) | review/robot-coop-fix-4 | session_01N1tNP4p4FFUjuVntyfWTNy | RUNNING | 2026-11-24T18:24Z (FOREMAN B)
-| ROBOT-COOP RUNNER U4b pair 4 only SWAP=1 SEED=1 ×10 kiếp (sonnet; briefs/b-robot10-coop-runner.md) | dev/handover/robot/coop-U4b-*-p4-4-s.md | F | session_01UV1SzkJdrUu6E17XxGEXCs | RUNNING | 24/11 18:26Z |
+| ROBOT-COOP RUNNER U4b pair 4 only SWAP=1 SEED=1 ×10 kiếp (sonnet; briefs/b-robot10-coop-runner.md) | dev/handover/robot/coop-U4b-*-p4-4-s.md | F | session_01UV1SzkJdrUu6E17XxGEXCs | DONE (round-1 wind-down 24/11 20:30Z); ARCHIVED | 24/11 18:26Z |
 | KIT REVIEW kit-woodskin 09c4386c (sonnet) | review/kit-woodskin-r1 | B | session_01N1tNP6zFURqiCMvwK3meUK | RUNNING | 24/11 18:45Z |
 | ROBOT-COOP RUNNER U3 pair 3 | dev/handover/robot/coop-20261124-0723-p3-4.md | B | session_01N1tNP2fZxefqCF5gDf8nSK | DONE (archived) | 24/11 18:25Z |
 | MOTION-DESIGN-4 (successor of -3) | review/motion-design-4 | MAIN 126 | session_01V1ZZH2DixEc1m1eoLXdFKF | RUNNING | 2026-11-24T18:34Z |
