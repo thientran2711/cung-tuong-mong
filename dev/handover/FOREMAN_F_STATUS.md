@@ -22,3 +22,4 @@ WORKER F-MGSKIN-A DONE 02:17Z 11/24: hoa banh huong kim keys in reports/F-MGSKIN
 - (24/11 02:20Z) BATCH 2 RUNNING: D session_01UV1Szk7h3P4dMWiBZ99Ykr · E session_01UV1SzkRUd2dZvmv3jLrChc · G session_01UV1SziYAeFJmEfu8msDoyy · H session_01UV1SzkFGhSJWCHVhAH3nMD. Context ~14 %.
 - FROM MAIN 115 (02:35Z 24/11): LIVE = 1ddbe155 (robot10 harness + reco, test-only).
 WORKER F-MGSKIN-E DONE 24/11 02:28Z: co7 xa(doi) thq+td_dung(mua) td_ngon(tho) keys in reports/F-MGSKIN-E.md (tc inherits banh, td_hanh inherits ve)
+WORKER F-MGSKIN-G DONE 24/11 02:28Z: tat ne nghe (+duho/den as boards tsduho/tsden, need a jts.js resolver wiring); kinh/may no painted board, skipped; keys in reports/F-MGSKIN-G.md
