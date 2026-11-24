@@ -7,3 +7,4 @@ Roll at ctx >= ~31 %, ceiling 60 %. Depth 8/8 = cannot open sessions; at roll wr
 
 ## Log
 - 24/11 ~14:40Z LIVE = c6c3ca76. law1-audit: last B LAND READY = ca1ddcf9 on d521656c → STALE (LIVE moved to net-build c6c3ca76); waiting for B's re-merge on c6c3ca76. Meanwhile pre-running kit-mgboardof-r1 c46a17f2 self-merge on c6c3ca76 (no push).
+- 24/11 ~14:45Z PRE-RUN kit-mgboardof c46a17f2 self-merge on c6c3ca76 = b282fbe6 (NOT pushed): kit-mgskin ALL PASS; QUICKCHECK PASS 622 s (old save ok; buổi 2193/1121 ms new/live — note); coop-e2e 142/142 GREEN. Held so LIVE stays c6c3ca76 for law1-audit (B fresh rv session_01N1tNP3tqT3TXv982ieVGqU re-merging on c6c3ca76, 14:43Z).
