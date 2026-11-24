@@ -1,5 +1,5 @@
 /* SIDE-LINE DIALOGUE SCENES browser test (review/sideline-dlg; schema reports/sideline-dialogue.md «## SCHEMA»). After dev/site/build_site.sh:
-   node dev/test/dlgs-play.js [outdir] [fold,ipadAir] [N]   (outdir default: a temp folder OUTSIDE git; shots dlgs-<i>-<step>-<dev>.png; N = scenes with shots, default 3)
+   [DLGS_STEP=k: every k-th scene only] node dev/test/dlgs-play.js [outdir] [fold,ipadAir] [N]   (outdir default: a temp folder OUTSIDE git; shots dlgs-<i>-<step>-<dev>.png; N = scenes with shots, default 3)
    For EVERY scene in DLGS_DATA whose family adapter is live (j72, j68, j7): casts the unit in a fresh life (needs relaxed: the test only checks the scene),
    offers it, and checks: the scene plays BEFORE the card (modal hidden, kit layer + 2 figures + the §95 box), every role resolved to a real cast
    person (box title = that person's name), no {placeholder} left, the speaker lit / the other dimmed, tap = finish, next tap = next line, the right
@@ -13,7 +13,7 @@ let fail=0,pass=0;const ok=(c,m)=>{if(c)pass++;else fail++;if(!c||process.env.V)
   await D.openDirect(p,'http://127.0.0.1:'+srv.address().port+'/',{timeout:180000});const g=p;await g.waitForFunction(()=>window.__ctmBuilt===1&&typeof start==='function'&&typeof dlgsResolve==='function',null,{timeout:180000});
   await g.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}start();['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});Q.length=0;showModal();tab='act';render()});
   await g.waitForTimeout(1500);await g.addStyleTag({content:'#kload,#klife,.modal.kload,#dawn,.kne,#kneov,#kroul,#kroulw,#kcourt,.kroul{display:none!important}'});
-  const ids=await g.evaluate(()=>DLGS_DATA.map(r=>r.id).filter(id=>/^(j72|j68|j7|j70|ky|j71|wc):/.test(id)));ok(ids.length>0,`${dev} DLGS_DATA has scenes of live families (${ids.length})`);
+  const ids=(await g.evaluate(()=>DLGS_DATA.map(r=>r.id).filter(id=>/^(j72|j68|j7|j70|ky|j71|wc):/.test(id)))).filter((id,i,A)=>!process.env.DLGS_STEP||i%(+process.env.DLGS_STEP)===0);ok(ids.length>0,`${dev} DLGS_DATA has scenes of live families (${ids.length})`);
   let k=0;for(const id of ids){
    /* cast + offer the unit's real card (needs / nết / step places relaxed for the test: it checks the scene; each family's own play test checks casting) */
    const o=await g.evaluate(id=>{Q.length=0;const M=$("modal");M.hidden=true;const fam=id.split(":")[0],sid=id.slice(fam.length+1);const sp=dlgsGet(id);

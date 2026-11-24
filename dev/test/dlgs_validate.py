@@ -10,6 +10,8 @@ R=os.path.dirname(os.path.abspath(__file__))+'/..'
 B=open(R+'/build/jbal2.js',encoding='utf8').read()
 m=re.search(r'BAL\.dlgs=\{on:\w+,min:(\d+),max:(\d+),maxCh:(\d+)',B);MIN,MAX,MAXCH=map(int,m.groups())
 ODDS=['Mong manh','Hiểm','Khó lường','Tùy duyên','Có cơ','Rất vững','Liều','Năm ăn năm thua','Khá chắc','Rất chắc','Nắm chắc','Chắc chắn']
+TYPED=['nương nương','tiểu chủ','tỷ tỷ','muội muội','bổn cung','thần thiếp','tần thiếp','chủ tử']   # address words: the speaker's rank decides them → {goi}/{xung} (jvoice), never typed
+MODERN=['tôi','anh ấy','chị ấy','em ấy','vâng ạ']   # modern words (VANPHONG cổ trang)
 GEN={'goi','Goi','xung','Xung','S','E','M'}   # every family: address words (speaker → listener), season, Hoàng thượng, her cung nữ
 def sd(f,const):
     rows=[]
@@ -67,6 +69,11 @@ def check(r,where):
             if re.search(r'(?<!\w)'+re.escape(o)+r'(?!\w)',t):E.append(f'{uid} line {i+1}: odds word «{o}» (law 7)')
         for p in re.findall(r'\{([^}]*)\}',t):
             if p not in u['ph']:E.append(f'{uid} line {i+1}: placeholder {{{p}}} unknown here {sorted(u["ph"])}')
+        lo=t.lower()
+        for w2 in TYPED:
+            if re.search(r'(?<!\w)'+re.escape(w2)+r'(?!\w)',lo):E.append(f'{uid} line {i+1}: typed address «{w2}» — use {{goi}}/{{xung}} (the address core picks it by rank)')
+        for w2 in MODERN:
+            if re.search(r'(?<!\w)'+re.escape(w2)+r'(?!\w)',lo):E.append(f'{uid} line {i+1}: modern word «{w2}» (VANPHONG)')
         if x.get('focus') and wh=='nar':E.append(f'{uid} line {i+1}: focus on narration')
         if set(x)-{'who','text','focus'}:E.append(f'{uid} line {i+1}: unknown keys {sorted(set(x)-{"who","text","focus"})}')
     if L not in who:E.append(f'{uid}: L never speaks')
