@@ -102,3 +102,23 @@ function kitStBadge(st){const m={ok:"✓",busy:"…",pause:"⏸"};return m[st]?`
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77b",title:"kitStBadge · huy hiệu trạng thái ở góc nút vuông (✓ sẵn sàng · … đang bận · ⏸ tạm dừng · xám = ngoại tuyến)",
  html:()=>`<div class="kitpg-row" style="display:flex;gap:14px;padding:8px">${[["ok",""],["busy",""],["pause",""],["","koff"]].map(([st,c])=>`<button type="button" class="krailb ${c}" aria-label="${st||"ngoại tuyến"}"><span class="krailg">♥</span>${kitStBadge(st)}</button>`).join("")}</div>`})}catch(e){}
 }catch(e){console.error("jrail",e)}})();
+
+/* KIT §77c kitPromoChip (MAIN 117 KIT REQUEST, owner 24/11 ~05:55Z «để trên cái mép trên cùng của cái sân khấu, ghi ngắn gọn thôi»): ONE short chip at the TOP edge of the stage,
+   centred (the bottom edge belongs to the figure name tags; the scene title is top-left #kshL and the chip column top-right #kshR, both clear of the centre), telling the time to the
+   next promotion round and the rank: «Kỳ thăng: 3 tháng · Tần». Data hook (Foreman D, PROMO-HIST): window.kitPromoHook = () => ({months:n, rank:"Tần"}) | null (null = no chip).
+   months 0 → «Kỳ thăng: kỳ này · Tần». cổ trang, no %, kit `.kchip` look; not tappable. Mounted after every renderStage. */
+(function(){try{
+ const css=document.createElement("style");css.id="kpromo-css";css.textContent=`#stage>.kpromo{position:absolute;top:6px;left:50%;transform:translateX(-50%);z-index:6;pointer-events:none;white-space:nowrap;margin:0;box-shadow:0 1px 4px #2a1a1244}#stage>.kpromo b{font-weight:700}`;document.head.appendChild(css);
+ window.kitPromoInfo=function(){try{const f=window.kitPromoHook;const r=typeof f==="function"?f():null;if(!r||!(r.months>=0)||!r.rank)return null;return r}catch(e){return null}};
+ window.kitPromoChip=function(r){r=r||kitPromoInfo();if(!r)return"";const w=r.months>0?`${r.months} tháng`:"kỳ này";return `<span class="kchip kpromo" data-kpromo="1">Kỳ thăng: <b>${w}</b> · ${r.rank}</span>`};
+ /* the chip stands at the centre of the top edge; when a head seal / mood seal / the right title column is there, it slides along the top edge to the nearest free place (never over a seal) */
+ window.kitPromoPlace=function(st){const c=st&&st.querySelector(":scope>.kpromo");if(!c)return;c.style.left="50%";c.style.transform="translateX(-50%)";const R=st.getBoundingClientRect(),w=c.offsetWidth,h=c.offsetHeight,top=6;
+  /* a spot is taken when anything but the stage picture / a figure body lies under the chip (seal, mood avatar, rail button, count pill, title column) */
+  const RX=/seal|kemo|kmemark|kmglw|krail|kchip|kgfbtn|kpill|j59hchip|kfig|kscene|ktitle|kshR|kshL/i;
+  const taken=x=>{const y=R.top+top+h/2;for(let dx=0;dx<=w;dx+=Math.max(8,w/12)){const px=R.left+x+dx;for(const e of document.elementsFromPoint(px,y)){if(e===c||e.closest(".kpromo"))continue;if(e===st)break;const cls=String(e.className&&e.className.baseVal!==undefined?e.className.baseVal:e.className||"")+" "+(e.id||"");if(RX.test(cls)&&!/figimg|bob/.test(cls))return true}}return false};
+  const cx=(R.width-w)/2;if(!taken(cx))return;const lo=8,hi=R.width-w-8;let best=null;for(let x=lo;x<=hi;x+=6){if(!taken(x)&&(best==null||Math.abs(x-cx)<Math.abs(best-cx)))best=x}
+  if(best!=null){c.style.left=best+"px";c.style.transform="none"}};
+ window.kitPromoMount=function(){const st=document.getElementById("stage");if(!st)return;st.querySelectorAll(":scope>.kpromo").forEach(e=>e.remove());const h=kitPromoChip();if(h){st.insertAdjacentHTML("beforeend",h);kitPromoPlace(st);setTimeout(()=>{try{kitPromoPlace(st)}catch(e){}},700)}};
+ if(typeof renderStage==="function"){const rs0=renderStage;renderStage=function(){const r=rs0.apply(this,arguments);try{kitPromoMount()}catch(e){}return r}}
+ if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77c",title:"kitPromoChip · chip «Kỳ thăng» ở mép trên sân khấu",where:"<b>Mép trên sân khấu</b> (giữa, dưới thanh trên)",note:"Chip ngắn «Kỳ thăng: 3 tháng · Tần»; dữ liệu từ <code>window.kitPromoHook</code> (Foreman D); ẩn khi hook trả null.",html:()=>`<div class="kitpg-row" style="padding:8px">${kitPromoChip({months:3,rank:"Tần"})}${kitPromoChip({months:0,rank:"Phi"})}</div>`})
+}catch(e){console.error("kpromo",e)}})();
