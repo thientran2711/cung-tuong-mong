@@ -1,0 +1,26 @@
+# VIECNHO-FIX report (worker, MAIN 128/129 brief; owner bug fast lane 24/11)
+
+PRIORITY #1 CHECK: OD 22 (person-panel #86 option A 21/11, L1867 18/11, 23/11 ~20:20Z, 24/11 ~18:19Z) | ledger 3 | claims 5 | main 15 | review/* 0 | archive 0 → reused the kit card (`pcard`/`kitPcFix`, jk2b/jk4), `kitSubTabs`, `resultShow`/`kaResultRows`/`whyText`; nothing rebuilt.
+
+LAND READY: review/viecnho-fix d445cc9e3e5b4cd7bbb7a030d0fc459232f865bb (base 502c48c9, HEAD includes built index.html/sw.js; source commits ad4884b6, 070e249f, 0d951e9e, d445cc9e + 2 build commits)
+TIER (dev/tools/tier.js, run honestly): **BIG by script** — 4 "logic change (unsure)" hunks, all in player-visible TEXT builders (jwhyn.js whyWho/whyText, j63.js kaResultRows/kaWhyWho/kaWhyKem, j61.js kitNameList/k61Mask, j72.js one __kaSenOvr line). No BAL / number / save / co-op / time change. Worker's own reading: UI + text only; decision to the lander.
+KIT: KK23b «KIT OK viecnho ad4884b6» (items 1–2 kit part). Later kit edits (7.1, 85.8, tassel clear) are in KIT.md §6.4 / §6.5 / §7.1 / §85.8 — please re-confirm if required.
+QUICKCHECK PASS d445cc9e: 280 s · open 2385 ms · old save ok · perf (new/live 502c48c9, median of 3): render 294/297 ms, tab 696/652 ms, buổi 1752/1798 ms, tasks>200ms 30/27 · core gates PASS.
+Old-save: dev/test/j72c-oldsave.js ALL PASS (3 LIVE saves with open việc nhờ).
+
+## Items
+1. VIỆC NHỜ: «Hỏi han ở … : ai cần giúp?» moved to new sub-tab «Tìm việc» (after «Đang làm»; jtabs.js ktQ72HTML). Đang làm = person panel first (card now ~490 px on Fold instead of ~375). Default tab: Đang làm when a job is running, else Tìm việc. Family scan `dev/test/viecnho-scan.js`: every tab/sub-tab × Fold+iPad, «open-new act above main content» = 0 hits elsewhere (only Việc nhờ had it).
+2. PERSON PANEL SCROLL (kit §6.4, jk4.js `kitPcScroll`/`kitPcFitPortrait`/`kitPcClearTassel`, style `#kit-pc-scroll`): card = fixed frame (never scrolls); left: name+rank+portrait still, `.kplscr` (text under the portrait) is the only scroller; right: `.kpstick` (Sở trường/Tính nết/Đã biết/Dạo này + tabs) still, `.pcr` scrolls; independent. Places using it: court, rv, staff, kvo, kin, qt, q72 (+ pop-ups on the same card). Consistency scan: all 7 tabs × both devices OK. Test `dev/test/viecnho-fix.test.js`: rects of portrait/name/info block/card unchanged after scrolling each column, other column does not move, card never scrolls — Fold + iPad ALL OK.
+   - KK23b nit fixed: text now starts BELOW the pendant/tassel (no overlap with «Hoàng thượng → ta»), whole family (all portraits).
+   - **Decision for the owner/main to see (law 16)**: OD 18/11 «figure never shrinks to fit» is kept, EXCEPT where it is physically impossible: when the card is too short to leave ~80 px of text under the whole frame, the portrait narrows (floor 120 px): Fold ≈ 190 px wide (was 230), iPad page ≈ 120–140 px. Without it the text under the portrait could not be reached. Tell me if she wants the old size back (then the left text would be unreachable on short cards).
+   - Canon overwrite: KIT §6.3c / §6.3i («left column scrolls with the card») replaced by §6.4.
+3. RESULT POPUP (kit §7.1): cause ONCE as the title; ONE short line per change «<Tên>: thiện cảm +8» (no «có thiện cảm với ta hơn», no (5→13), no repeated action text); «Vì sao» only for a REAL known cause («Hoàng hậu X: tính Ân cần, trọng Lễ, hợp ý → thiện cảm với ta +6»), a cause she doesn't know says nothing; Kèm line no longer copies the title; nothing changed → «ta không được gì, cũng không mất gì»; Việc nhờ steps: title = job: step, no duplicate sentence. Unnamed person = «một vị <cung nữ/phi tần/thái giám/tước>» (owner 22:14Z) in k61Mask, kitNameList, whyWho, Kèm names, jreign. Tests: generated «Vì sao» lines (0 vague/%/«chưa quen»), real resultShow checks. NOT touched: other texts that still say «chưa quen biết» in non-result contexts (j61:214 / jhc:164 «Còn N phi tần ngươi chưa quen biết: chưa xem được quan hệ» in the relations tab; tests name-mask-scan.js / coop-thin-f1.js / text-idem-scan.js still expect the old words — not run, listed for the lander/reviewer).
+4. DƯ ĐỒ MARKER (kit §85.8, jmapc.js): `.mspot.here` z-index 60 + its tag parts above other spots. Test `dev/test/viecnho-map.test.js`: every place she can stand × Fold+iPad; OLD build 10 places FAIL (her tag/marker covered by another plaque), NEW 0 (27 places ALL OK).
+
+## Shots (Fold 755x1000 + iPad 1180x820, before/after, looked at each; CDN img/_review/viecnho-fix/)
+base https://ctm-img.victoria-tntt.workers.dev/img/_review/viecnho-fix/ + `{fold|ipad}-{before|after}-{1-dang-lam|3-ket-qua|4-du-do}.png` (items 1+2 share the 1-dang-lam shot; the Tìm việc tab shot is in the test outdir only). Item-3 shot is a synthetic result built by the harness (real resultShow with injected oán/thiện cảm), the real in-game popups are covered by the test. Note the harness shots run the dev build outside the rot.js host (real devices play the 590x820 page scaled).
+
+## Open / not done
+- Per-person row of the «Kèm» line stays aggregated («2 phi tần oán thêm 12–18») — unchanged kit behaviour.
+- Item 2's old scroll cue (`kpmore` fade) no longer shows on the new fixed card (thin scrollbars only); narrow `.kpnar` dialog cards keep the old flow.
+- ~85 % done / ~80 % playable (owner re-test on her Fold needed).
