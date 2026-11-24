@@ -25,6 +25,11 @@ Identity uploads: c04 EbcFFhnuuO, c10 ksXxxbr16B, c16 cpwVVY30eP, c22 rgoLLr0xtc
 | c16 A26 | 9ZbiDhPNYZ | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared |
 | c22 A26 | lJhUGckgv9 | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared |
 | c28 A26 | p84XbHlehw | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared |
+| m04 A26 | ksXx32916B | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared; smile subtle |
+| m10 A26 | ov3tjKb829 | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared; source-hair ribbon kept |
+| m16 A26 | aFnE7uxfSh | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared |
+| m22 A26 | MBye53yDCm | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared; pink braid ribbon from source hair |
+| m28 A26 | KLdrZdpkqp | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared |
 
 Prompt texts at /home/user/wt/dig-out/p{16,26,51,63}.txt may be wiped: regenerate with the cut sentence script (delete exactly the one operator sentence).
 
