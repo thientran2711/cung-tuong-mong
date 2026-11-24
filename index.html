@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"a76ba1e4+","t":"2026-11-24T00:18Z","c":"thin-p0-r1 review fixes: co-op thin guest (host running the friend's turn) never writes/rotates/reads the host's no-repeat store; BAL.nr th…","b":"7d28ccac6080","h":[{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"}]};
+window.CTM_BI={"s":"cc729229+","t":"2026-11-24T01:04Z","c":"thin-p4: j68c composed j68 openings engine (seed = EV6 c:\u003cid>, opener × comp wordings, BAL.j68c steps), builder, validator, fixture, play t…","b":"93838fc897d9","h":[{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"},{"s":"e6894660+","t":"2026-11-23T09:44Z","c":"SELF-MERGE LAND outing-art: merge LIVE e9c0a43d (index.html/sw.js rebuilt)"},{"s":"b2f84cd0+","t":"2026-11-23T09:23Z","c":"tranh đi chơi (chùa Hộ Quốc, Cảnh Sơn) hiện trong game"},{"s":"f38a40b1+","t":"2026-11-23T08:21Z","c":"khung sự kiện truyện chính theo xuất thân (9 kiểu) vào game"},{"s":"03002dc1+","t":"2026-11-23T07:32Z","c":"tranh đại kết cục, kết cục hiếm, Kim sách, thời tiết, Đa Bảo Các, bảng giới thiệu vào game"},{"s":"87ad5da4+","t":"2026-11-23T07:31Z","c":"27 hình đồ vật/nền trong mini-game vào game"},{"s":"8a957cca+","t":"2026-11-23T07:20Z","c":"khung tang, khung đại kết cục, nền kết cục, tranh học thành tài, nền mini-game iPad, tranh sang buổi vào game"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -91664,6 +91664,9 @@ Object.assign(BAL,{kyngo:{on:1,
   sv_co:{w:1,b:"0",o:[{g:{},c:{suc:8,kh:2},s:"rk"},{g:{th:30},c:{relM:8,kh:1}}]},
   sv_tre:{w:.8,b:"123",plain:{g:{rel:34}}}
  }}});
+/* ORDER THIN P5 (jkyc.js composed Kỳ ngộ): on = cross-life memory live; seen = weight factor of an encounter (old 25 + composed) that a past life met
+   (P0 family "ky"; fresh-first). The composed encounters' own rows (w, b, o / plain) are written into BAL.kyngo.E by jbalkyc.js (built). */
+BAL.kyc={on:1,seen:.15};
 /* ================= jky: KỲ NGỘ THƯỜNG NGÀY — rare fortune encounters on ordinary days (owner OD 19/11 ~03:30Z, ~03:25Z; design dev/design/KYNGO.md) =================
    ★ 18 LAWS (dev/rules/START_CORE.md). Numbers: BAL.kyngo (jbalky.js) only. Wraps only (goTo, act, nextBuoi, pastHTML, lifeSave); loaded last.
    ONE GATE: a person (her or any consort) is at a place this buổi (a Dư đồ walk, or a Hành sự act done at that place — MAIN 19/11 09:00Z Q1) and
@@ -91947,6 +91950,66 @@ if(typeof lifeSave==="function"){const l0=lifeSave;lifeSave=function(fate){try{c
 KY.stat.reset=()=>{KY.stat.elig=0;KY.stat.roll=0;KY.stat.hit=0;KY.stat.npcHit={};KY.stat.npcB={};KY.stat.ids={};KY._e=0;KY._h=0};
 KY.stat.buoi=()=>{const r={elig:KY.stat.elig>KY._e,hit:KY.stat.hit>KY._h,id:KY.cur&&KY.cur.id};KY._e=KY.stat.elig;KY._h=KY.stat.hit;return r};
 KY.stat.npc=()=>({hit:Object.assign({},KY.stat.npcHit),buoi:Object.assign({},KY.stat.npcB)});
+})();
+/* jbalkyc: BAL.kyngo.E rows of the ORDER THIN P5 composed Kỳ ngộ (law 4: every number of an encounter lives in BAL; law 2/3 checked by
+   dev/test/kyngo-eq.js and dev/test/kyseeds_validate.py). Built by dev/build/jkysd_build.py — do not hand-edit. */
+Object.assign(BAL.kyngo.E,{
+
+});
+/* jkysd: ORDER THIN P5 composed Kỳ ngộ seeds (DATA ONLY; numbers live in jbalkyc.js). Built by dev/build/jkysd_build.py from
+   dev/handover/content/thin/kyseeds*.md; schema dev/handover/reports/thin.md «## API P5»; validator dev/test/kyseeds_validate.py; engine jkyc.js. Do not hand-edit. */
+const KYSEEDS=[
+
+];
+/* ================= jkyc: COMPOSED KỲ NGỘ (ORDER THIN P5, owner OD 23/11 ~22:50Z; EVCAT §3 P5; schema reports/thin.md «## API P5») =================
+   A seed (KYSEEDS in jkysd.js; its numbers in BAL.kyngo.E via jbalkyc.js — law 4; both built by dev/build/jkysd_build.py from
+   dev/handover/content/thin/kyseeds*.md) becomes ONE more entry of jky's DEF at load, so the whole Kỳ ngộ runtime plays it unchanged: the ONE gate
+   (a REAL person at that place now, from the j95 location record), roll / pity / cooldown, once per life (z.seen), two-way NPC finders (law 1),
+   specials (every piece only moves, law 6c), Sổ luân hồi. Pieces come from the four real sources jky already reads (DEF.vat_chung / vat_lac /
+   vat_cu / vat_ngu `what`), never conjured. Equal value (law 2/3): dev/test/kyngo-eq.js reads jbalkyc.js too.
+   CROSS-LIFE: P0 family "ky" (seed = encounter id, old 25 included): an encounter she met in a past life weighs × BAL.kyc.seen (fresh-first);
+   marked when she meets it (S.ky.got), personal per seat. */
+(function(){if(typeof KY==="undefined"||!KY.DEF||typeof BAL==="undefined"||!BAL.kyngo)return;const DEF=KY.DEF,E=BAL.kyngo.E;
+const WHAT={plot:"vat_chung",lost:"vat_lac",dead:"vat_cu",rare:"vat_ngu"};
+const nmK=p=>p===S?"ngươi":(p&&p.name)||"vị ấy";
+function netFit(o,L){if(!L||!L.length)return true;let T=[];try{T=tr6(o)||[]}catch(e){}return L.some(n=>T.includes(n))}
+function match(x,w,F){if(!x||x.ref===F)return false;const k=w.kind;
+ if(k==="ly")return x.kind==="ly";
+ if(k==="el")return x.kind==="el"&&(!w.eid||x.eid===w.eid);
+ if(k==="man")return x.kind==="man"&&(!w.role||x.ref.role===w.role);
+ if(k==="court")return x.kind==="court"&&(!w.c||x.c===w.c);
+ if(k==="emp"||k==="th")return x.kind===k;
+ if(k==="rv")return x.kind==="rv"&&(!w.old||(x.ref.age|0)>=BAL.ageBand[2])&&(!w.sameBand||KY.band(x.ref)===KY.band(F))&&netFit(x.ref,w["nết"]);
+ if(k==="sv")return x.kind==="sv"&&x.own!==F&&(w.eunuch==null||(x.ref.role==="eunuch")===!!w.eunuch)&&x.ref.spyFor!==key(F)&&netFit(x.ref,w["nết"]);
+ if(k==="kid")return x.kind==="kid"&&x.own!==F;
+ return false}
+function whoF(sd){const w=sd.who||{};
+ if(sd.what==="plot")return (F,L,X)=>X.pl?{kind:"rv",ref:X.pl.a}:null;
+ if(sd.what==="lost")return (F,L,X)=>X.lc?{kind:"own",ref:loP(X.lc.own)}:null;
+ if(w.kind==="maid")return F=>F===S&&S.maid?{kind:"maid"}:null;
+ return (F,L)=>L.find(x=>match(x,w,F))||null}
+function whenF(n){if(!n)return null;return ()=>{const b=S.buoi||0;
+ if(n.buoi&&n.buoi.length&&!n.buoi.includes(b))return false;if(n.night&&b!==B4L)return false;
+ if(n.winter){let s="";try{s=SEASON[S.month-1]}catch(e){}if(s!=="Đông")return false}
+ if(n.wx){let v=0;try{v=wxSev()}catch(e){}if(v<1)return false}
+ if(n.fest&&n.fest.length){let f=null;try{f=festToday()}catch(e){}if(!f||!n.fest.includes(f.k))return false}return true}}
+function piece(c){const X=c.X||{};try{if(X.lc)return loNm(X.lc.k);if(X.box)return itm(X.box.e.k).n;if(X.rr)return itm(X.rr.k).n}catch(e){}return"món đồ"}
+function owner(c){const X=c.X||{};try{if(X.lc)return nmK(loP(X.lc.own));if(X.pl)return nmK(X.pl.a)}catch(e){}return""}
+function tF(sd){return c=>{let s="";try{s=SEASON[S.month-1].toLowerCase()}catch(e){}
+ const h=String(sd.t).replace(/\{W\}/g,c.wn||"").replace(/\{O\}/g,()=>`<b>${piece(c)}</b>`).replace(/\{own\}/g,()=>owner(c)).replace(/\{S\}/g,s);
+ let tag="";try{if(c.X&&c.X.lc)tag=loTag(c.X.lc.e)}catch(e){}return `<p>${h}</p>${tag}`}}
+function reg(sd){if(!sd||!sd.id||DEF[sd.id]||!E[sd.id])return false;const D={pl:sd.pl&&sd.pl.length?sd.pl.slice():["*"],who:whoF(sd),t:tF(sd),cs:1};
+ const wn=whenF(sd.when);if(wn)D.when=wn;if(sd.what&&WHAT[sd.what]&&DEF[WHAT[sd.what]]&&DEF[WHAT[sd.what]].what)D.what=DEF[WHAT[sd.what]].what;else if(sd.what)return false;
+ if(sd.n&&sd.n.length)D.n=sd.n.slice();DEF[sd.id]=D;return true}
+const L=(typeof KYSEEDS!=="undefined"&&Array.isArray(KYSEEDS))?KYSEEDS:[];let n=0;for(const sd of L){try{if(reg(sd))n++}catch(e){console.error("jkyc",sd&&sd.id,e)}}
+/* cross-life: every encounter's weight (old 25 + composed) × BAL.kyc.seen when a past life met it */
+for(const id in E){const e=E[id];if(!e||Object.getOwnPropertyDescriptor(e,"w")&&Object.getOwnPropertyDescriptor(e,"w").get)continue;const w0=e.w==null?1:e.w;
+ Object.defineProperty(e,"w",{configurable:true,enumerable:true,get(){let f=1;try{if(BAL.kyc&&BAL.kyc.on&&typeof nrSeen==="function"&&nrSeen("ky",id)>0)f=BAL.kyc.seen}catch(x){}return w0*f},set(v){/* keep the authored weight editable (tests / tuning) */Object.defineProperty(e,"w",{configurable:true,enumerable:true,writable:true,value:v})}})}
+function kycMark(){try{if(!S||!S.ky||!Array.isArray(S.ky.got)||typeof nrMark!=="function")return;for(const id of S.ky.got)if(!nrNow("ky",id))nrMark("ky",id)}catch(e){console.error("jkyc mark",e)}}
+KY.cmark=kycMark;KY.cN=n;KY.creg=reg;
+(function(){const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);kycMark();return r}})();
+(function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);kycMark();return r}})();
+window.kycCount=function(){const by={};for(const sd of L)if(DEF[sd.id]&&DEF[sd.id].cs)by[sd.grp]=(by[sd.grp]||0)+1;return{seeds:by,total:Object.values(by).reduce((a,b)=>a+b,0),all:Object.keys(DEF).length}};
 })();
 /* ================= jkcg: OUTSIDE-ROUTE GAPS (GAP LIST OR01 OR06 OR08 OR13 OR14; brief b-gap-1 J3, review/outside-gaps) =================
    Source: dev/OUTSIDE_PLAN.md (owner-approved 14/11 22:05Z) §7 map, §6 festivals, §9 carry-over, §11 title set, §13 hooks; art D48
@@ -95185,7 +95248,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="7d28ccac6080";window.CTM_BUILD=BUILD;
+const BUILD="93838fc897d9";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
