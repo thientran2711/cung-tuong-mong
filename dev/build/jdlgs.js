@@ -47,6 +47,8 @@ function dlgsFor(m){if(m.dlg)return m.dlg;if(m.__dlgk)return null;m.__dlgk=1;for
 function dlgsActor(a,nm){if(!a)return null;if(a===S)return dlgsMe();
  /* Thái hậu / Hoàng thượng: figFor picks their painting by kind (figRole), their actor object carries none → pass the kind (law 11: every th/emp scene) */
  if(a.k==="th"||a.k==="emp"){const o=a.k==="emp"?(S.emp||a.o):(S.thO||a.o);return dlgsPer({kind:a.k,ref:o||{},name:a.n},nm||a.n)}
+ /* her grown child (j72 req ak): the kid painting set (kidFig), never figFor */
+ if(a.k==="ak"&&a.o){try{const src=typeof kidFigSrc==="function"?kidFigSrc(a.o):"";return src?{src,n:nm||a.n||a.o.name||""}:null}catch(e){return null}}
  return dlgsPer(a.f&&a.f.ref?a.f.ref:a.o,nm||a.n)}
 function dlgsVoice(a){if(!a)return null;if(a===S)return S;try{return kSpk(a)||{srv:"f",name:a.n}}catch(e){return null}}
 function dlgsCtx(act,fill,at){const maid=S.maid?{k:"maid",o:S.maid,n:S.maid.name}:null;const get=r=>r==="me"?S:r==="M"||r==="maid"?maid:act[r]||null;
