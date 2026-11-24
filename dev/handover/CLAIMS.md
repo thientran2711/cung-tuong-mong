@@ -1343,7 +1343,7 @@ REVIEW bal-ranks-law4 (opus BIG; briefs/D-bal-ranks-law4-review.md) of 670991d9 
 REVIEW robot10-nc-fix-3 (opus BIG load determinism; briefs/D-robot10-nc-fix-3-review.md) of 449cbe08 | review/robot10-nc-fix-3-rv | session_01964izBwKVSW8D2Fjhmpn21 | RUNNING | 24/11 02:41Z (Foreman D depth 3)
 | REVIEW E59r AGEBAND BIG (opus; briefs/E59r-review-ageband.md) of 6155c7c4 | review/ageband-r 6f1c4701; reports/ageband-review.md | FOREMAN E ROOT | session_01DgYSWkpcS6wh3qgMxT4M88 | PASS r2 6f1c4701 (LAND READY) | 24/11 04:15Z |
 | robot10 E RUNNER R1 round 1 (sonnet; thd thd_tho+thd_sach, 10 bots × 5 kiếp = 100 lives; briefs/E-robot10-runner.md) | dev/handover/robot/thd-*-R1.md; reports/robot10-E-R1.md | FOREMAN E ROOT | session_01DgYSWoj9bMgYBBKshtSNf8 | RUNNING | 24/11 02:55Z |
-| robot10 E RUNNER R2 round 1 (sonnet; thd thd_tro+thd_hoc, 10 bots × 5 kiếp = 100 lives; briefs/E-robot10-runner.md) | dev/handover/robot/thd-*-R2.md; reports/robot10-E-R2.md | FOREMAN E ROOT | session_01DgYSWnpgCn2Ry24LupTPef | RUNNING | 24/11 02:55Z |
+| robot10 E RUNNER R2 round 1 (sonnet; thd thd_tro+thd_hoc, 10 bots × 5 kiếp = 100 lives; briefs/E-robot10-runner.md) | dev/handover/robot/thd-*-R2.md; reports/robot10-E-R2.md | FOREMAN E ROOT | session_01DgYSWnpgCn2Ry24LupTPef | DONE 24/11 18:06Z | 24/11 02:55Z |
 | robot10 E RUNNER R3 round 1 (sonnet; cnv cnv_chu+cnv_ban, 10 bots × 5 kiếp = 100 lives; briefs/E-robot10-runner.md) | dev/handover/robot/cnv-*-R3.md; reports/robot10-E-R3.md | FOREMAN E ROOT | session_01DgYSWnDqxUdkTPQkFWgEJx | RUNNING | 24/11 02:55Z |
 | robot10 E RUNNER R4 round 1 (sonnet; cnv cnv_mat+cnv_ma, 10 bots × 5 kiếp = 100 lives; briefs/E-robot10-runner.md) | dev/handover/robot/cnv-*-R4.md; reports/robot10-E-R4.md | FOREMAN E ROOT | session_01DgYSWoWnD4xaJ7CPr1gqos | RUNNING | 24/11 02:55Z |
 | robot10 E RUNNER R5 round 1 (sonnet; pf pt_hai+pt_su, 10 bots × 5 kiếp = 100 lives; briefs/E-robot10-runner.md) | dev/handover/robot/pf-*-R5.md; reports/robot10-E-R5.md | FOREMAN E ROOT | session_01DgYSWpFTV9sHDCAbjHzgTG | DONE 24/11 17:58Z | 24/11 02:55Z |
@@ -1502,7 +1502,7 @@ FIX promo-build-2 r1 (opus BIG; briefs/D-promo-build-2-fix.md; from de24c1ae) | 
 | ROBOT-COOP RUNNER U16 pairs 15-16 SWAP=1 | dev/handover/robot/coop-U16-* | FOREMAN E (child4) | session_01DgYSWme7viyfpYaqM6vM7t | RUNNING | 24/11 11:58Z |
 | ROBOT-COOP RUNNER U17 pairs 17-18 SWAP=0 | dev/handover/robot/coop-U17-* | FOREMAN E (child4) | session_01DgYSWoqhFR6eEQzbDDKqY6 | RUNNING | 24/11 11:58Z |
 | ROBOT-COOP RUNNER U18 pairs 17-18 SWAP=1 | dev/handover/robot/coop-U18-* | FOREMAN E (child4) | session_01DgYSWmpKLyR9tiAbos763w | RUNNING | 24/11 11:58Z |
-| ROBOT-COOP RUNNER U19 pairs 19-20 SWAP=0 | dev/handover/robot/coop-U19-* | FOREMAN E (child4) | session_01DgYSWohtCk2AGS5VzQrrH1 | RUNNING | 24/11 11:58Z |
+| ROBOT-COOP RUNNER U19 pair 19 only (pair 20 → U21) SWAP=0 | dev/handover/robot/coop-U19-* | FOREMAN E (child4) | session_01DgYSWohtCk2AGS5VzQrrH1 | RUNNING | 24/11 11:58Z |
 | ROBOT-COOP RUNNER U20 pairs 19-20 SWAP=1 | dev/handover/robot/coop-U20-* | FOREMAN E (child4) | session_01DgYSWof6mK27r2oWrXX22S | RUNNING | 24/11 11:58Z |
 rv net-build r2 (opus BIG; briefs/D-net-build-review-r2.md; target e41f4f79) | review/net-build-rv | session_01D3E3NaeN3VTQuhYDqui8cJ | RUNNING | 24/11 12:00Z (Foreman D depth 3)
 | REVIEW robot-fix-cnv 1f046fb7 (opus BIG; briefs/F-robot-fix-cnv-review.md) | review/robot-fix-cnv(-r1); reports/robot-fix-cnv.md | F | session_01UV1Szm25UYRL53kk7urYNo | DONE PASS LAND READY 98040f4c (rolled over; -2 = fresh reviewer) | 24/11 12:24Z |
@@ -1528,3 +1528,4 @@ kit-chain repair B (mgskin-wire + kit-nochip whole group) | review/mgskin-wire, 
 kit-rewardplate r3 SMALL review | review/kit-rewardplate | session_01N1tNP5XkWFhxvDgVqESJvw | RUNNING | 2026-11-24T17:45Z (FOREMAN B)
 | OFFLINE-FAST owner bug (offline-all slow start) | review/offline-fast; reports/offline-fast.md | MAIN 125 | session_01V1ZZH4kPEoVSax9ycpSYqp | RUNNING | 2026-11-24T17:57Z |
 figload-keep (live bug split from sideline-dlg 3fb17db4) | review/figload-keep | session_01N1tNP3uvSYvemdLirWv32k | RUNNING | 2026-11-24T18:02Z (FOREMAN B)
+| ROBOT-COOP RUNNER U21 pair 20 SWAP=0 (split from U19, >12 h ETA) | dev/handover/robot/coop-U21-* | FOREMAN E (child6) | (id next STATUS line) | RUNNING | 24/11 18:06Z |
