@@ -38,7 +38,7 @@ const DEV0={fold:{width:755,height:1000},ipad:{width:1180,height:820}};const DEV
     const key='card:'+st.t+':'+st.days;if(key!==last){last=key;if(!st.modal)await p.evaluate(()=>{try{showModal()}catch(e){}});await p.waitForTimeout(900);await shot('the-'+slug(st.t))}
     const clicked=await p.evaluate(i=>{const bb=document.querySelector('#modal button[data-m="'+i+'"]');if(bb&&!bb.disabled){bb.click();return true}return false},i);
     if(!clicked)await p.evaluate(i=>{chooseM(i);render()},i);
-    await p.waitForTimeout(450);{const rs=await p.evaluate(()=>{const r=document.querySelector('#rtoast.on');return r?r.textContent.slice(0,60):''});if(rs&&rs!==lastRes){lastRes=rs;await shot('ketqua')}}
+    await p.waitForTimeout(500);/* result cards are PARKED while the next card is open (KIT §32.10a), so no «kết quả» frame here */
     await p.evaluate(()=>document.querySelectorAll('.kmov,#kprevov,#kg82').forEach(x=>x.remove()));await p.waitForTimeout(700);continue}
    await p.evaluate(()=>{try{closeModal()}catch(e){}});await p.waitForTimeout(300)}
   await p.waitForTimeout(1200);await shot('sau-chieu');
