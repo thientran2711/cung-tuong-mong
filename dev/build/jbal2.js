@@ -2162,6 +2162,7 @@ BAL.net.heat={ghenK:.45,affK:.6};
            + (100 − lòng) × loyK + talk / greed − loyal; ev = chứng cứ the asker gains (law 6a real evidence).
    greet = bất kính: speaking straight to a master's servant while that master stands at the same place and was not greeted this buổi: oán + thiện cảm −,
            × up when the master outranks the speaker, × dn when below.
+   k     = the khắc her «Hỏi chuyện» with another house's servant takes.
    npc   = the odds a month that an NPC mistress has someone of another house talked to (her target's servant). */
 Object.assign(BAL,{svt:{on:1,
  ref:{base:35,mid:50,loyK:.6,tinK:.2,loyal:20,timid:12,talk:-18,greed:-12,min:5,max:90},
@@ -2170,4 +2171,5 @@ Object.assign(BAL,{svt:{on:1,
  rel:{talk:6,bribe:12,threat:10,tm:12,plot:12,friend:3},
  leak:{base:5,loyK:.3,talk:20,greed:10,loyal:-20,ev:1},
  greet:{oan:8,aff:6,up:1.5,dn:.5},
- npc:{talk:25}}});
+ npc:{talk:25},
+ k:2/* khắc the open talk «Hỏi chuyện» takes (her button) */}});
