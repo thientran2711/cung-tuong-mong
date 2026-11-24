@@ -299,11 +299,3 @@ Answered rows: R4 «Bỏ cuộc?» opts [] = harness, fixed in fix-2 (§12); R3 
 Known non-branch reds: coop-e2e on bare LIVE 178cac37 = 134/162 from week 0 (Q 8 dialogs) — LIVE regression; ag-all-c «Dò la pays 15 bạc» FAIL on base too; monthly-ration 2 FAIL pre-existing (§5).
 Scratch (this box; recreate if gone): worktrees /home/user/wt/f4-f3 (fix-3), /home/user/wt/f4-f4 (fix-5), /home/user/wt/f4-ho (handover, sparse: CLAIMS / STATUS / this report); tools /home/user/wt/f4-tools/hopush.sh "<msg>" <edit.sh> (fresh fetch + checkout -f + edit + commit + push, retries); data /home/user/wt/f4-data (R3-018.json + R8-hen-skilled-1.json from review/robot10-saves-r5 dev/handover/robot/saves-r5/, hen-003.json = fix-5 repro save from the rerun, also in /home/user/wt/f4-out/r8b/saves/). Robot rerun: `PAR=1 LAG=0 CAP=700 UIEVERY=60 DEV=fold node dev/measure/robot10.js bd bd_hen skilled 1 <out>` on a fix-5 checkout.
 Next for the successor: answer E81r on fix-3 r4 and the fix-5 reviewer if they FAIL; triage new runner files Foreman E forwards.
-
-## 16. Re-merge after main d521656c (test-mrfoot) — Foreman E child4 order 12:51Z
-| branch | = old head + main | conflicts | dev/build vs old head | own suite | coop-e2e Fold host | COOP_SWAP | quickcheck |
-|---|---|---|---|---|---|---|---|
-| review/robot10-e-fix-3-r2 2e7e489b | 8693dc06 (contains r4 b76ccc59) | none | identical | r10e-stock-full / saveblocked / oldsave-noloss ALL OK | 142/142 | 142/142 | PASS (render 206/223, tab 369/352, buổi 1068/1194 ms) |
-| review/leave-palace-r4 9aa54fa2 | 8d93c027 | none | identical | leave-palace 135/135 | 142/142 | 141/142 (1 FAIL S.fidUsed.50 A=undefined B=consort:c27 after week 1) → reruns below | PASS (render 208/195, tab 288/371, buổi 1657/2029 ms) |
-Bare main d521656c coop-e2e Fold host 142/142 (12:54Z, load 0.7) → the 11:42Z week-0 failure on 178cac37 is gone with test-mrfoot.
-leave-palace-r4 COOP_SWAP reruns: 142/142, 142/142 → 1 FAIL in 3 runs (S.fidUsed.50 A=undefined B=consort:c27, «same world on both seats», after week 1). Bare main d521656c COOP_SWAP: 142/142, 142/142 (0 in 2). dev/build of r4 = 8d93c027 (unchanged by the merge), so it is not a merge effect; 1/3 vs 0/2 does not prove flake or real — the leave-palace reviewer should judge if fidUsed is on its path.
