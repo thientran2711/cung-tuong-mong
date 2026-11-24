@@ -3169,3 +3169,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (22:15Z) OWNER RULE recorded (OD 24/11 ~22:14Z): unnamed person = «một vị cung nữ / phi tần / thái giám» (or visible rank), never «chưa quen biết» → FLIGHT-UI (kitNoUnk, stack step 5 changes again), KK23b (kit wording), VIECNHO/VISITOR/MINIGAME told.
 - (22:16Z) 127 relay: owner 22:08Z canon overwrite of visitor item (any visitor face+name; arrival lines by rank «… giá đáo!» / «Tần thiếp … xin cầu kiến») → briefs/visitor-fix.md ADD 2 + VISITOR-FIX told.
 - (22:18Z) FLIGHT-UI f79bd3b1 (22:14Z rule applied; v6 pair looked OK) → asked one more sha: display-time pass for old stored log lines; that sha = GO for LC12 step 5 if its tests pass.
+- (22:20Z) LC12 rebuilding steps 5–7 (flight-ui f79bd3b1→next sha, offline-fast 74204649, dayq 7c819a37); steps 2/4 = mucluc-cnv af4e19b7 / tainghe r2 aaaa6a45 wait B «KIT OK r2» → FROM MAIN line in FOREMAN_B_STATUS asking it now.
