@@ -32,7 +32,7 @@ try{Object.assign(KG82_ENG,{kinh:kwkTrace(KWK_KINH,"kinh"),may:kwkTrace(KWK_MAY,
  KG82_SPR.kinh=(KG82_SPR.ve||[]).slice();KG82_SPR.may=[];
  KG82_F.kinh=KG82_F.tho;KG82_F.may=KG82_F.theu;if(KG82_F85.theu)KG82_F85.may=KG82_F85.theu}catch(e){console.error(e)}
 /* the trace engine paints on the "ve" backdrop; the sewing game draws no brush or inkstone */
-(function(){const b0=kg82BgName;kg82BgName=function(kind){return b0.call(this,kind==="kinh"||kind==="may"?"ve":kind)}})();
+/* kinh / may borrow the «ve» board through the kit table KG82_BOARDOF (j82), skins included */
 (function(){const s0=kg82Spr;kg82Spr=function(g,n){if(kwkMode==="may"&&/^ve-(brush|inkstone)$/.test(n))return false;return s0.apply(this,arguments)}})();
 /* the kind being made: S.mg.wk while a session runs (openMG / practice), else the pick openMG just read */
 let kwkPick=null,kwkG=null;
