@@ -1,6 +1,7 @@
 # D1-ROOMNC — rooms redrawn with windows WITHOUT curtains (owner order 24/11 ~00:29Z, brief dev/handover/briefs/D1-rooms-nc.md)
 PRIORITY #1 CHECK ('curtain rèm'): OD 0 | claims 0 | main 0 | review/* 0 → reused L30 + common_blocks/window_L30.txt + C9 STY fix (PLACES4 §2), rank_rooms.json (C8-RANKROOM).
 depth 2 (limit 8). START_CTX ~0 % (get_session reads 0; estimate ~3 %). Status: ROLLED OVER at ~27 % context (START ~3 % + 25 %). Trial OK, ROOT-D1 GO 24/11 ~00:41Z; batch 1 LOOKED + on page; batch 2 GENERATED + uploaded, NOT LOOKED. See HANDOVER below.
+depth 2 (limit 8). START_CTX ~0 % (get_session reads 0; estimate ~3 %). Status: TRIAL OF 3 DONE — WAITING for the owner's go.
 
 ## Method (her words: "run lại cái prompt cũ, rồi ghi là sửa là cái cửa sổ không rèm")
 Builder dev/art/place-rank/prompts_roomnc_D1.py (branch review/rooms-nc @b0b0f0c). Original prompt of each picture = the builder JSON that made
