@@ -327,10 +327,10 @@
   "id": "ph43",
   "key": "thua-minh-cung-quyphi-ngu",
   "label": "Thừa Minh cung · Quý phi · phòng ngủ",
-  "gen": "P3FQKLy42C",
-  "look": "cửa sổ sạch NHƯNG còn rèm trắng tường trái trên kệ → ĐANG VẼ LẠI 1 lần",
+  "gen": "s7tIqn8l8e",
+  "look": "sạch rèm cửa sổ (rèm giường giữ); lần 1 còn rèm treo khoen tường trái trên/sau kệ → câu riêng, vẽ lại 1 lần: sạch",
   "structure": "giữ nguyên (thêm bình phong)",
-  "v": 4
+  "v": 5
  },
  {
   "id": "ph44",
@@ -480,8 +480,8 @@
   "id": "ph61",
   "key": "vinh-hoa-cung-phi-ngu",
   "label": "Vĩnh Hòa cung · Phi · phòng ngủ",
-  "gen": "aFzGDnCfSh",
-  "look": "cửa sổ sạch NHƯNG còn rèm tím treo khoen tường trái sau kệ → ĐANG VẼ LẠI 1 lần",
+  "gen": "s7tIqW6l8e",
+  "look": "sạch rèm cửa sổ (rèm giường giữ); lần 1 còn rèm treo khoen tường trái trên/sau kệ → câu riêng, vẽ lại 1 lần: sạch",
   "structure": "giữ nguyên (thêm bình phong)",
   "v": 5
  },
