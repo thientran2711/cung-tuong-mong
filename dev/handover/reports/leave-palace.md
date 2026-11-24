@@ -116,3 +116,45 @@ The 06:46Z return-window idea is VOID (my earlier proposal for it is withdrawn).
    c. extend dev/test/leave-palace.test.js (rows for a/b).
 3. Checks at handover: leave-palace.test 100/100 @0279cde1; quickcheck rerun was RUNNING (first run failed only G1 name clash lvRows/j85 → fixed by lpv* rename in 0279cde1); role-parity not yet run. Rerun both on the final sha. Shots: dev/handover/shots/leave-palace/ (CDN upload refused — no credentials).
 Worktrees: /home/user/wt/lp (review/leave-palace), /home/user/wt/lpho (handover). Shot scripts: /home/user/wt/lp-shots/shots.js (removes #kroul/#klife/#curtain before each shot).
+
+## STEP 1b — FORCED-REMOVAL SEVERITY TABLE (E64b; OD 24/11 ~07:55Z; origin/review/leave-palace 0279cde1 = main 2899d1f2 for these files) — FOR MAIN 117, NO code changed
+E64b = session_01DgYSWmXngQ6Z8pWqtbAjJM, START_CTX ~4 %.
+Severity ladder (history + palace dramas, law 8): (1) cấm túc / khất bổng / giáng phẩm — small faults, slander, quarrels; (2) lãnh cung (phế vào lãnh cung, still inside) — proven scheming against consorts, theft of ngự dụng, being framed, khi quân minor, mercy-commuted death; (3) out of the palace = life ends — tước danh đuổi về quê (cung nữ tư tình), phế làm thứ dân, sent to a temple by decree/custom (Võ Tắc Thiên, Cảm Nghiệp tự); (4) ngục + ban chết / tru di — tư thông with a man, hại hoàng tự / Hoàng hậu / Thái hậu, vu cổ trù ẻo, gián điệp, mưu phản, mưu hại Hoàng thượng (thập ác: mưu phản, mưu đại nghịch, đại bất kính — no mercy for these in Đường/Minh law).
+Mercy today (applies to EVERY deathSentence): first-year mercy (S.turn < BAL.eff.j8.mercyTurn 12 → giáng 1 + cấm túc 3 tháng) and nhân từ mercy (has nhantu + npcWhy empMercy → lãnh cung).
+
+| # | event (file:line) | crime / fault | current consequence (player S; NPC same path) | fits severity? | proposed |
+|---|---|---|---|---|---|
+| 1 | jpq.js:72 pqDoom | mưu hại Hoàng thượng / Thái hậu (found) | over «Ban chết» lụa trắng + clan falls; no mercy | YES (tier 4) | keep |
+| 2 | j99succ.js:170-171 c_bad / c_fail | nhiếp chính bị lật / binh biến bại lộ (mưu nghịch) | phế + ban rượu độc → over (dead) | YES (4) | keep |
+| 3 | j4.js:108 | mưu phản cùng cha (fail) | die «cả họ bị tru di»; no mercy | YES (4) | keep |
+| 4 | j4.js:53, :59 | gián điệp cho Cao Ly (treason) | deathSentence → first-year mercy = giáng 1 + cấm túc 3; nhân từ = lãnh cung | NO — treason gets the small first-year mercy | treason tier skips first-year mercy (nhân từ → lãnh cung at most) |
+| 5 | j4.js:125 | hạ độc Hoàng hậu, bị bắt | deathSentence (mercies as above) | PARTLY — first-year mercy too light | same tier as #4 |
+| 6 | j8.js:125, :146 | đầu độc phi tần / hoàng tự (doer S or NPC) | deathSentence (mercies) | PARTLY (first-year mercy too light for hại hoàng tự) | hại hoàng tự / Hoàng hậu → tier of #4; poison on a consort keeps today's mercies |
+| 7 | j8.js:152 | vu cổ trù ẻo thánh thượng | deathSentence (mercies) | PARTLY (vu cổ = thập ác) | tier of #4 |
+| 8 | j8.js:380 | giả mang thai, khi quân | deathSentence (mercies) | YES (khi quân: death or lãnh cung by mercy) | keep |
+| 9 | j8.js:381 | tráo con (đưa hài nhi ngoài cung vào) | deathSentence | YES (loạn huyết thống) | keep (optional: tier of #4) |
+| 10 | jmen.js:208, jroute.js:127, j95.js:442, j22.js:44 | tư thông bị bắt | deathSentence; the man xử trảm | YES (4) | keep |
+| 11 | j22.js:22 affairExposed | tư thông bị lộ | man xử trảm; her: empMercy → lãnh cung, else deathSentence | YES | keep |
+| 12 | j30.js:25 «Bóc chuyện tư tình» on her | tư thông (proven, ≥ exposeEv evidence) | over «Tư thông bị phát giác» ban chết, or lãnh cung | YES | keep |
+| 13 | j3.js:99 (target = NPC v) | thư tư tình với thị vệ (proven) | fall(): lãnh cung or giáng 2 | NO — same crime as #10-12 is death elsewhere (law 1 one rule) | route to the tư thông rule (#11: man dies, she death or lãnh cung by mercy) |
+| 14 | jroute.js:360-362 nghiệm thân | con không phải cốt nhục hoàng gia | nhận tội → lãnh cung; else ngDeath roll → ban chết, else lãnh cung; child sent out, the man xử trảm | YES | keep |
+| 15 | jroute.js:368 (NPC mother) | same | ngDeath → deathSentence else v.out (lãnh cung) | YES (two-way OK) | keep |
+| 16 | jroute.js:173-176 rtCaughtEsc | trốn khỏi cung, bị bắt ở cổng | mercy roll (Sủng/Thái hậu) → lãnh cung, else deathSentence; family liên lụy | YES (đào cung = trọng tội) | keep |
+| 17 | jroute.js:273 (NPC) | same | caught → escDeath roll → deathSentence | YES | keep |
+| 18 | j8.js:99 fall() callers: j10.js:164 (phe hợp mưu tố tội), j7.js:177 (bị vu trộm đồ ngự dụng), j7.js:187 (trộn xạ hương hại phi tần), j8.js:301 (giấu ngọc bội ngự dụng), jagstaff.js:122 (cung nữ tố giác), j78.js:183 (tòa xét tố cáo) | proven scheming / theft / framed | rank ≥5 or 50 % → lãnh cung; else giáng 2 + Sủng −15 (NPC: phế vào lãnh cung / đày / giáng) | YES (tier 2) | keep; optional: xạ hương that cost a real pregnancy → tier 4 (hại hoàng tự) |
+| 19 | jcoopworld.js:808, :847 | co-op: framed by the partner | lãnh cung | YES (2) | keep |
+| 20 | j3.js:140 | NO fault: bị bỏ quên (Sủng 0, Danh ≤ forget, rank ≤1) | lãnh cung | NO — lãnh cung is a punishment; a forgotten low consort only fades | QUESTION for MAIN 117: keep, or drop the lãnh cung (she stays forgotten in her own cung) |
+| 21 | j14.js:40 | in lãnh cung: điên / tuổi 40 không con | over «Lãnh cung» (life ends inside) | YES | keep |
+| 22 | j42.js:560 (maid) | cung nữ mang thai hoang | rlSrvAffairCaught_2 → đánh chết; else over «Bị đuổi khỏi cung» (life ends, «Về sau» duoi) | YES (tier 3/4) | keep |
+| 23 | j42.js:561 | cung nữ dính mưu phi tần | diệt khẩu (die) | YES | keep |
+| 24 | j42.js:562-563 | cung nữ tư tình (bị bắt) | 25 % over «Bị đuổi khỏi cung» (về quê); else đánh 20/30 roi + Tân Giả khố 8/12 tuần | YES (3 / 1) | keep |
+| 25 | j42.js:558 (the man) | thị vệ/thái giám tư tình với cung nữ | vương gia: quở trách; else đày ra biên ải (gone) or 40 trượng | YES | keep |
+| 26 | jmort.js:191-194 | NO fault: tiên đế di chiếu tuẫn táng | over «Tuẫn táng» unless Đức / Thái hậu saves her | YES (custom, Minh) | keep |
+| 27 | jmort.js:197 | NO fault: tân đế ân xá cho cung tần không con về quê | over «Xuất cung» (life ends, «Về sau» que) | YES (owner: forced out = ends) | keep |
+| 28 | jmort.js:198 | NO fault: lệ cũ, cung tần không con cạo tóc vào chùa Cảm Nghiệp | over «Xuất gia» (life ends, «Về sau» tu) | YES (owner 07:55Z: sent to a temple = life ends) | keep |
+| 29 | jmort.js:195, j24.js:56 | NO fault: tiên đế băng; theo con ra phủ / vương gia che chở | over (life ends, «Về sau» phu / thiep) | YES | keep |
+| 30 | j4.js:71, j67.js:907, :993 (foe NPC) | cha nàng vu nhà ta mưu phản (lật án) | foe phế vào lãnh cung; her father xử trảm | YES (liên lụy) | keep |
+| 31 | j8.js:96 (NPC) / j8.js:95 (S) | any death sentence + nhân từ Emperor | lãnh cung instead of death | YES (mercy is his nết) | keep, except the tier-4 crimes above (#4-7) where mercy should stop at lãnh cung only (already so) and first-year mercy should not apply |
+| 32 | road lose endings (j67.js:5 rule) | arc failures | «never ép chết, lãnh cung or mưu phản» — loss = giáng 1 / mất chỗ dựa | YES | keep |
+Not found anywhere: a forced phế làm thứ dân of a consort, a forced exile of a consort outside the palace, a temple sentence for a crime (only the custom at jmort:198). Those severities exist only as her own choice (hl_phe, hl_tu) or by custom.
+PROPOSED CHANGES (wait for MAIN 117): (P1) deathSentence gains a tier: «nghịch» (#4 gián điệp, #5/#6 hại Hoàng hậu / hoàng tự, #7 vu cổ) skips the first-year mercy (BAL key, e.g. BAL.eff.j8.noMercy list); nhân từ mercy stays (lãnh cung). (P2) #13 thư tư tình → the tư thông rule (affairExposed / deathSentence), same as #10-12. (P3) #20 bỏ quên → MAIN decides. Everything else = keep.
