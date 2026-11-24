@@ -1562,7 +1562,7 @@ save-growth (d)+(b) | review/save-growth | session_01DgYSWn2jD6dN6G4v5qkFaf | SS
 | KIT REVIEW kit-woodskin r4 35d57ca + kit-album 716310c (sonnet) | review/kit-woodskin-r3, review/kit-album-r1 | B | session_01N1tNP5YUQmH9jDHwiUYY7g | RUNNING | 24/11 20:43Z |
 face-master03 Alluring (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-alluring.md | session_01D3E3NZd7bPaP9p5vL5dyKi | RUNNING | 24/11 21:29Z | FOREMAN D
 face-master03 Cold (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-cold.md | session_01D3E3NYEF9kwi8NEyWrcbuf | RUNNING | 24/11 21:29Z | FOREMAN D
-face-master03 Dignified (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-dignified.md | session_01D3E3NaHn3EfaM7zRmQbD31 → succ1 01D3E3NavYsSsocu2VWRExNy (26/48) → succ2 session_01D3E3NZZ5WqPT3VLLidzqrq | RUNNING | 24/11 21:29Z | FOREMAN D
+face-master03 Dignified (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-dignified.md | session_01D3E3NaHn3EfaM7zRmQbD31 → succ1 01D3E3NavYsSsocu2VWRExNy (26/48) → succ2 01D3E3NZZ5WqPT3VLLidzqrq (48/48) → succ3 session_01D3E3NXoPvSgYJ7NXsa2qmd (age 39) | RUNNING | 24/11 21:29Z | FOREMAN D
 face-master03 Gentle (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-gentle.md | session_01D3E3NZzg95uS8CmypjuBFk | RUNNING | 24/11 21:29Z | FOREMAN D
 face-master03 Proud (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-proud.md | session_01D3E3NZBMJvJ42NGMXAhPWA | RUNNING | 24/11 21:29Z | FOREMAN D
 face-master03 Sharp (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-sharp.md | session_01D3E3NaxuWFpancQEoeisKM | DONE | 24/11 21:29Z | FOREMAN D
