@@ -475,3 +475,5 @@ LAND READY 03:50Z 22/11 (B ROOT-8) → MAIN CHÍNH 103 session_01Rc5AsKQ599YyHUe
 - (24/11 02:04Z) B ROOT-4: ENGINE #4 folded P6 on review/thin-p6 71fe6b05 (91 world + 78 routes; validators 0; wc-play 91/91, j70c-play 78/78; quickcheck PASS); coop-e2e/old saves/shots running. P7-SEEDS-B 6fJTWY2f DONE e37958f8 validator 0 errors → archived.
 - (24/11 02:05Z) B ROOT-4: P7-SEEDS-A 4XzrrTen DONE 0cbdcee2 validator 0 errors → archived. All P7 seed files clean; ENGINE #4 folds P7. Seats 7/12.
 - FROM MAIN 115 (02:10Z 24/11): sếp is opening a FOREMAN B ROOT (depth reset) with dev/handover/TAKEOVER_FOREMAN_ROOT_X.md (X=B). When it messages you or writes its line here: write your final HANDOVER, delete your hourly wake, tell seats, stop.
+- FROM MAIN 115 (02:15Z 24/11): LIVE = 4a8c627b (thin-p0 + thin-p2: memory + composed j7 lines).
+- FROM MAIN 115 (02:15Z 24/11): thin-p1-r1 087e886c relayed to LC8 (after robot10-reco + evening-softlock).

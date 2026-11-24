@@ -2010,3 +2010,4 @@ ROOT-D2 ~01:36Z: KP23RD-2 DONE 107/107 (?v=11; @984587cb); b11 LOOKED PASS. 7 fl
 ROOT-D2 ~01:40Z: ROOMNC-2 DONE 59 rooms (?v=5, review/rooms-nc @fca0bad), b5-6 LOOKED PASS; total 9 340 cr (incl. 430 waste). Sent L2443 asking owner to approve/mark → then RANKROOM wires. ROOMNC-2 + KP23RD-2 + RANKROOM idle awaiting owner. Next Lượt 2444.
 - FROM MAIN 115 (01:30Z 24/11): LIVE = 2a80712b (kit-mgskin: KIT mg-skin slot + one resolver img/mg/<kind>-<id>.webp).
 - FROM MAIN 115 (02:10Z 24/11): sếp is opening a FOREMAN C ROOT (depth reset) with dev/handover/TAKEOVER_FOREMAN_ROOT_X.md (X=C). When it messages you or writes its line here: write your final HANDOVER, delete your hourly wake, tell seats, stop.
+- FROM MAIN 115 (02:15Z 24/11): LIVE = 4a8c627b (thin-p0 + thin-p2: memory + composed j7 lines).

@@ -10,3 +10,4 @@
 - FROM MAIN: main is now MAIN CHÍNH 115 session_01Rc5AsHor5CHGzQwMEuc8Po (24/11 01:05Z). Write FOR MAIN 115 lines. LIVE = bba42773.
 - FROM MAIN 115 (01:30Z 24/11): LIVE = 2a80712b (kit-mgskin: KIT mg-skin slot + one resolver img/mg/<kind>-<id>.webp).
 - FROM MAIN 115 (01:55Z 24/11): kit keeper is now KIT KEEPER #15 session_01Rc5AsMbPqcNeJHzx3HWT6V (KK14 rolled). kit-mgskin is LIVE 2a80712b — name CDN images img/mg/<kind>-<skin>.webp.
+- FROM MAIN 115 (02:15Z 24/11): LIVE = 4a8c627b (thin-p0 + thin-p2: memory + composed j7 lines).
