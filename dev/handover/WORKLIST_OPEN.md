@@ -24,7 +24,7 @@ Written by MAIN CHÍNH 116, 24/11 ~10:10Z after sếp's new rulings (OD 24/11 ~0
 | 20 | TITLES2 (per-chapter titles) | E | fix r3 |
 | 21 | Parking lot rows still not built | E | audit + build |
 | 22 | THIN P4/P6/P8 roads content landing | B / LC9 | landing |
-| 23 | Screen-change veil: no half-painted screens (owner bug) | KK19 (dim pair ready for sếp) | waits her GO |
+| 23 | Screen-change veil: no half-painted screens (owner bug) | VEIL-1 + KK18 → LC10 | kit-screenveil-r1 in landing queue |
 | 24 | «Vòng người» figure ring + drama signals — DESIGN MOCK for sếp (no build until she picks) | RING-DESIGN | MOCK READY for sếp |
 | 25 | GAME FEEL / event animation design study (card draw, rings for items/events, entrances) — mocks for sếp | MOTION-DESIGN | MOCK READY for sếp |
 | 26 | Relationship effects of talking to others' people (servant refuses / talks → suspicion, trust, leaks) + greeting etiquette | D | ordered 07:58Z |
