@@ -2886,3 +2886,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (06:22Z) From 117/116: OD 09:20Z Phân cung → SELSCENE-4 told to hook it at the Day-3 edict (D builds the rule, coordinate in FOREMAN_D_STATUS); OD 09:30Z per-girl result animation → SELSCENE-4 + INTRO-DESIGN. kit-daytitle now 762eae8c (KK18 knows).
 - (06:24Z) via 116: OD 09:35Z patron routes BUILD NOW (D ordered by 116 09:36Z); Day-3 drama seeds a–e → SELSCENE-4.
 - (06:26Z) KK18 started (depth 3, START 2 %; no B FAIL yet; KIT_REQUESTS 2 open rows already built → DONE). via 116: OD 09:40Z dò hỏi ma ma 3 options → SELSCENE-4.
+- (06:30Z) via 116: OD 09:45Z music groups → F (files+spec, 116 ORDER 09:46Z); wiring → KK18 on F's «MUSIC SPEC READY» (extend j11.js:34 musicCtx + jpres mus, one table).
