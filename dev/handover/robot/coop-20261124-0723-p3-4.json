@@ -8711,7 +8711,7 @@
       "code": "SMJQ",
       "host": "X",
       "t0": 1795512663185,
-      "weeks": 22,
+      "weeks": 23,
       "buoi": 25,
       "turns": [
        {
@@ -8843,7 +8843,7 @@
       "whereDiff": 0,
       "posDiff": 17,
       "statLag": 2,
-      "cmp": 65
+      "cmp": 73
      }
     ],
     "rejoin": [
@@ -8871,7 +8871,7 @@
    },
    "rooms": 6,
    "t": {
-    "total": 8833186
+    "total": 8935664
    },
    "partial": true,
    "bugs": [
