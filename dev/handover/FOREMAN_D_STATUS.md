@@ -455,3 +455,4 @@ LESSON: face workers misread the 1M window as near 60 % → tell every worker "%
 OPEN OWNER QUESTION (still unanswered): đăng cơ đại lễ inside 27-month quốc tang → D recommends defer to the first month after mourning; B skip.
 FOLLOW-UPS (no seat): net-build band-3 harm share ≤30 %; servant-trust ring UI waits owner design; ART REQUEST Phân cung picture → Foreman C via MAIN.
 Push recipe /home/user/wt/dpush2.sh (per container; text in HANDOVER D depth 3 block). Hourly trigger trig_015Hp9pBz79zzvRxtvSuQji5 DELETED at rollover; child makes its own (:37).
+- (24/11 22:41Z) D depth 7 ROLLED OVER → **FOREMAN D (depth 8) = session_01D3E3NYVxDQJ9mC1H8jFXgG**. depth-7 trigger deleted; gallery seat NaFMSB4w + remerge seat told; depth 7 stops.
