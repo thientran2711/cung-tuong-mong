@@ -13,7 +13,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUTF]
 /* lập công options that give no title on purpose (a lighter good deed, neither the merit nor a bad way); every other option must be good / bad / decline */
 const PLAIN={"thbenh:Hỏi thăm cho phải phép":"a courtesy visit, no merit and no harm","conbenh:Giao cho nhũ mẫu":"the usual palace care of a child (cost: the child's fondness)",
  "tomuu:Giữ chứng cứ, chờ thời":"she keeps the proof for later (no deed yet)","tamtang:Dâng tơ lụa của cung mình":"a gift to the rite, not the rite itself",
- "tamtang:Theo hầu hái dâu, cho tằm ăn":"follows the rite in the back row (no merit recorded)","soke:(Tâu Thái hậu / Hoàng thượng cho người soát)":"hands the audit to others",
+ "tamtang:Theo hầu hái dâu, cho tằm ăn":"follows the rite in the back row (no merit recorded)","soke:Tâu xin Hoàng thượng cho người soát":"hands the audit to others (Thái hậu / Hoàng thượng)",
 "cuuhoang:Hô thị vệ, sai người chạy gọi":"calls the guards: a quick good act, no merit recorded (no bonus7)",
  "thbenh:Tìm thuốc quý dâng bà":"a lighter good deed, no merit recorded (no bonus7)","thbenh:Chép kinh cầu an":"a lighter good deed, no merit recorded (no bonus7)",
  "chepkinh:Chép một quyển":"one volume only: a lighter good deed, no merit recorded","hoahoan:Mở kho cung mình giúp người bị nạn":"a lighter good deed (silver), no merit recorded",
@@ -49,7 +49,7 @@ const PLAIN={"thbenh:Hỏi thăm cho phải phép":"a courtesy visit, no merit a
  /* lập công options (static: dev/build/j71.js; every CH7 of every MF family) */
  const src=fs.readFileSync(__dirname+'/../build/j71.js','utf8');const fams=[...src.matchAll(/^MF\("(\w+)"/gm)].map(m=>[m[1],m.index]);const opt=[];
  fams.forEach(([f,i],j)=>{const end=j+1<fams.length?fams[j+1][1]:src.indexOf("\nfunction",i+10);const blk=src.slice(i,end>i?end:i+20000);
-  for(const m of blk.matchAll(/CH7\(([`"])(.*?)\1|CH7\((S\.thDead\?[^,]*),/g)){const name=m[2]||"(Tâu Thái hậu / Hoàng thượng cho người soát)";const at=m.index+m[0].length;let d=0,k=blk.indexOf("{",at),e=k;for(;e<blk.length;e++){if(blk[e]==="{")d++;else if(blk[e]==="}"){d--;if(!d)break}}
+  for(const m of blk.matchAll(/CH7\((?:[^,`()]*?\?)?([`"])(.*?)\1/g)){const name=m[2];const at=m.index+m[0].length;let d=0,k=blk.indexOf("{",at),e=k;for(;e<blk.length;e++){if(blk[e]==="{")d++;else if(blk[e]==="}"){d--;if(!d)break}}
    const s=blk.slice(k,e+1);const cls=/cpm7\("\w+_a"\)|brb=/.test(s)?"bad way → bad title":/bonus7\(|cpm7\("\w+"\)/.test(s)?"merit → good title":/BAL\.cv\.rest/.test(s)?"decline (title-free)":PLAIN[`${f}:${name}`]?"plain: "+PLAIN[`${f}:${name}`]:"UNCLASSIFIED";
    opt.push([f,name.replace(/\$\{[^}]*\}/g,"‹…›"),cls]);if(cls==="UNCLASSIFIED")R.miss.push(`lc option ${f}: ${name}`)}});
  const md=[`# TITLES2 scan (law 11 + Part C) — ${new Date().toISOString().slice(0,16)}Z`,`New title keys: ${R.mine} (${R.old} kept for old saves only, never given now). Reputation: ${R.rep.filter(x=>x[1]==="good").length} good + ${R.rep.filter(x=>x[1]==="bad").length} bad. How texts checked: ${R.hows}.`,"",
