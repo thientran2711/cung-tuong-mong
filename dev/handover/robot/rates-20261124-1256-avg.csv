@@ -1,0 +1,104 @@
+group,key,lives,mean_min,median_min,fastest_min,slowest_min,death_rate,hoang_hau_rate_or_flag
+overall,ALL,50,1766,1025.7,34,4722.7,48%,18%
+than_phan,bd,50,1766,1025.7,34,4722.7,48%,18%
+nhanh,bd · bd_san,50,1766,1025.7,34,4722.7,48%,18%
+ending_type,death,24,1522.4,820.7,34.6,4387.5,100%,13%
+ending_type,no ending,17,3104.6,3204.1,760.8,4722.7,0%,35%
+ending_type,thường,9,184.4,75.8,34,567.6,0%,0%
+bot,cautious,5,3407.5,3878.2,1049.7,4387.5,80%,60%
+bot,greedy,5,3039.2,3302.5,567.6,4422.3,20%,20%
+bot,lazy,5,617.2,760.8,51.9,1025.7,40%,0%
+bot,lover,5,2365.5,2613,1852.3,2703.1,20%,20%
+bot,random,5,80.9,64.1,34,205.5,20%,0%
+bot,rebel,5,625.9,574.3,427.7,820.7,100%,0%
+bot,schemer,5,925,754.1,172.1,2176.8,80%,0%
+bot,scholar,5,2340.9,3047.3,447.4,3343.9,60%,40%
+bot,skilled,5,4033.4,4405.6,2258.3,4722.7,20%,40%
+bot,speed,5,175.7,75.8,47.9,540.3,40%,0%
+ending,Xuất gia,8,136.5,75.8,34,447.4,,
+ending,Lãnh cung,1,597,597,597,597,,
+ending,Được Vương gia che chở,0,,,,,,chua ai gap
+ending,Thái phi,2,2251,3452.4,1049.7,3452.4,,
+ending,Hoàng thái hậu,0,,,,,,chua ai gap
+ending,Mẫu hậu Hoàng thái hậu,0,,,,,,chua ai gap
+ending,Hồng nhan bạc mệnh,21,1497.1,814.5,34.6,4387.5,,
+ending,Tư thông bị phát giác,0,,,,,,chua ai gap
+ending,Ma ma,0,,,,,,chua ai gap
+ending,Xuất cung,1,567.6,567.6,567.6,567.6,,
+ending,Xuất giá,0,,,,,,chua ai gap
+ending,Bị đuổi khỏi cung,0,,,,,,chua ai gap
+ending,Được ban hôn,0,,,,,,chua ai gap
+ending,Vào vương phủ,0,,,,,,chua ai gap
+ending,Thành thân,0,,,,,,chua ai gap
+ending,Cao chạy xa bay,0,,,,,,chua ai gap
+ending,Đại kết cục · ${res.ti},0,,,,,,chua ai gap
+ending,Ban chết,0,,,,,,chua ai gap
+ending,Tân đế đăng cơ,0,,,,,,chua ai gap
+ending,Trốn khỏi cung,0,,,,,,chua ai gap
+ending,Dâng biểu xuất gia,0,,,,,,chua ai gap
+ending,Xuất cung về quê,0,,,,,,chua ai gap
+ending,Phế làm thứ dân,0,,,,,,chua ai gap
+ending,Một đời an nhiên,0,,,,,,chua ai gap
+death_cause,"${d.n} nguy kịch, không qua khỏi",0,,,,,0%,chua ai gap
+death_cause,"Chết rét, chết đói trong lãnh cung",0,,,,,0%,chua ai gap
+death_cause,"Uống thuốc phá thai, băng huyết mà chết",0,,,,,0%,chua ai gap
+death_cause,Bị ban chết vì tư thông với ${m.name},0,,,,,0%,chua ai gap
+death_cause,tư thông với ${m.name},0,,,,,0%,chua ai gap
+death_cause,"Thú tội tư thông, Hoàng thượng không tha",0,,,,,0%,chua ai gap
+death_cause,"Bệnh nặng, không qua khỏi",0,,,,,0%,chua ai gap
+death_cause,"${pre}Tân Thái hậu ${v.name} xét lại chuyện cũ (khả năng: ${chanceLo(o)}), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",0,,,,,0%,chua ai gap
+death_cause,"Mưu phản cùng cha, cả họ bị tru di",0,,,,,0%,chua ai gap
+death_cause,"Cao Ly thua trận, thư mật của ngươi bị tìm thấy",0,,,,,0%,chua ai gap
+death_cause,"Mật thư bị chặn, tra ra ngươi làm gián điệp cho Cao Ly",0,,,,,0%,chua ai gap
+death_cause,"Hạ độc Hoàng hậu bị bắt, Thái hậu phủi tay không nhận",0,,,,,0%,chua ai gap
+death_cause,Kiệt sức chết giữa đống đồ giặt ở Tân Giả khố,0,,,,,0%,chua ai gap
+death_cause,Lao lực kiệt sức mà chết,0,,,,,0%,chua ai gap
+death_cause,"Bị ${mm2.name} phát hiện làm tai mắt cho ${v.name}, sai đánh chết",0,,,,,0%,chua ai gap
+death_cause,"${mm2.name} biết ngươi phản chủ, sai người dìm ngươi xuống giếng sau Ngự hoa viên",0,,,,,0%,chua ai gap
+death_cause,Bị ${m.name} sai đánh trượng đến chết,0,,,,,0%,chua ai gap
+death_cause,"Bị bắt quả tang khi ${k===""poison""?""bỏ độc"":k===""plant""?""cài bùa ngải"":""dò la""} ${t.name}, bị đánh chết ở Thận Hình ti",0,,,,,0%,chua ai gap
+death_cause,Chết dưới đòn tra khảo ở Thận Hình ti,0,,,,,0%,chua ai gap
+death_cause,Quỳ phạt đến kiệt sức mà chết,0,,,,,0%,chua ai gap
+death_cause,"Bị đánh đòn vì tội trộm cắp, không qua khỏi",0,,,,,0%,chua ai gap
+death_cause,"Trước ngày sắc phong, ${m.name} sai người đẩy ngươi xuống giếng",0,,,,,0%,chua ai gap
+death_cause,"${pre} Bụng mang dạ chửa, ngươi bị đánh chết ở Thận Hình ti",0,,,,,0%,chua ai gap
+death_cause,"${pre} Chuyện dính vào mưu của phi tần, ngươi bị diệt khẩu",0,,,,,0%,chua ai gap
+death_cause,${pre} Ngươi chết dưới đòn roi,0,,,,,0%,chua ai gap
+death_cause,"Khó sinh, băng huyết mà chết",0,,,,,0%,chua ai gap
+death_cause,Bị ban rượu độc vì mưu hại ${NM(t)},0,,,,,0%,chua ai gap
+death_cause,Bị ban chết vì đầu độc ${k.name},0,,,,,0%,chua ai gap
+death_cause,Bị ban chết vì vu ${k.name} trù ẻo thánh thượng,0,,,,,0%,chua ai gap
+death_cause,"Tráo con bị bắt quả tang, tội khi quân",2,533.2,574.3,492.2,574.3,4%,
+death_cause,"tư thông${m?"" với ""+m.name:""""}",0,,,,,0%,chua ai gap
+death_cause,Bị ${m.who} hại,0,,,,,0%,chua ai gap
+death_cause,Bị kẻ gian hãm hại,0,,,,,0%,chua ai gap
+death_cause,Bị hại trong cung,0,,,,,0%,chua ai gap
+death_cause,Lao lực mà chết trước kỳ tuyển tú,0,,,,,0%,chua ai gap
+death_cause,Trúng độc chén canh sâm của,0,,,,,0%,chua ai gap
+death_cause,Tự vẫn trước ngày bị ép gả,0,,,,,0%,chua ai gap
+death_cause,Chết vì dịch sốt trước kỳ tuyển tú,0,,,,,0%,chua ai gap
+death_cause,Lao lực mà chết trước ngày tuyển,0,,,,,0%,chua ai gap
+death_cause,Kiệt sức mà chết trước ngày hòa thân,0,,,,,0%,chua ai gap
+death_cause,Chết dưới dao thích khách đêm trước ngày hòa thân,0,,,,,0%,chua ai gap
+death_cause,Bị ban chết vì tư thông với ${nm},0,,,,,0%,chua ai gap
+death_cause,tư thông với ${nm},0,,,,,0%,chua ai gap
+death_cause,"Bị Thái y tra ra bỏ độc người hầu cung khác, giải sang Thận hình ti",0,,,,,0%,chua ai gap
+death_cause,"${ILL[i.k].n} nguy kịch, tuổi cao sức yếu không qua khỏi",0,,,,,0%,chua ai gap
+death_cause,${t} Ngươi gắng sinh hạ hài nhi rồi nhắm mắt,0,,,,,0%,chua ai gap
+death_cause,"Ngươi trượt chân trên bậc đá đóng băng trước điện, không tỉnh lại",0,,,,,0%,chua ai gap
+death_cause,Ngươi ngã xuống hồ Thái Dịch giữa đêm mưa,0,,,,,0%,chua ai gap
+death_cause,Ngươi nghẹn hạt sen giữa yến tiệc,0,,,,,0%,chua ai gap
+death_cause,"Ngươi mải đuổi con vẹt sổng lồng, trượt chân ngã từ lầu vọng nguyệt",0,,,,,0%,chua ai gap
+death_cause,"Ngươi cười quá đà khi xem gánh chèo, ngất đi không tỉnh",0,,,,,0%,chua ai gap
+death_cause,"Tuổi trời đã tận, ${ILL[ageOf(p)>=M.oldAge?""laobenh"":""trongbenh""].n.toLowerCase()} không qua khỏi, thọ ${S.age} tuổi",0,,,,,0%,chua ai gap
+death_cause,"Trúng độc, không qua khỏi",0,,,,,0%,chua ai gap
+death_cause,bị ban chết vì mưu hại ${PQ_N[who]},0,,,,,0%,chua ai gap
+death_cause,Thái hậu dùng xong chén canh thì trở bệnh nặng,0,,,,,0%,chua ai gap
+death_cause,"Uống thuốc giả chết quá liều, không tỉnh lại nữa",0,,,,,0%,chua ai gap
+death_cause,Bị ban chết vì tư thông,0,,,,,0%,chua ai gap
+death_cause,Bị ban chết vì trốn khỏi cung,0,,,,,0%,chua ai gap
+death_cause,trốn khỏi cung,0,,,,,0%,chua ai gap
+death_cause,gian lận khi trích huyết nghiệm thân,0,,,,,0%,chua ai gap
+death_cause,Bị ban chết vì ${why},0,,,,,0%,chua ai gap
+death_cause,Bị ban chết vì con không phải cốt nhục hoàng gia,0,,,,,0%,chua ai gap
+death_cause,con không phải cốt nhục hoàng gia,0,,,,,0%,chua ai gap
