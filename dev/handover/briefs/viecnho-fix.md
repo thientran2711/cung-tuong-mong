@@ -14,3 +14,6 @@ REPORT: dev/handover/reports/viecnho-fix.md on the handover branch; LAND READY l
 
 ## ADD (MAIN 128, 24/11 ~22:00Z) — item 3 sharpened by the owner 21:57Z
 Read OWNER_DECISIONS.md row «24/11 ~21:57Z real» (line ~2418) VERBATIM + LOOK at refs/owner-2411-viecnho/v6-good-short.jpg (the popup she calls GOOD). RESULT POPUP RULE (whole result-popup family): each change = ONE short line «<Name>: thiện cảm +8» — no «có thiện cảm với ta hơn», no «(5→13)», no repeated action text; the cause appears ONCE as the popup title; long detail only in Sổ ghi; «Vì sao» only when the cause is NOT the action itself, then the plain real cause. This overrides any older line of this brief that conflicts.
+
+## ADD 2 (MAIN 128, 24/11 ~22:02Z) — item 4, owner 22:00Z
+Read OD row «24/11 ~22:00Z real» VERBATIM + LOOK at refs/owner-2411-viecnho/v8-dudo-ta-hidden.jpg: on Dư đồ her «Ta đang ở đây» marker hides BEHIND the Vĩnh Hòa plaque. RULE: her marker is ALWAYS the top layer on every map (covering a plaque's words is fine). Whole map family (every map/area view that shows her marker): z-order fix + test (marker on top of every plaque at every place she can stand), Fold+iPad shots.
