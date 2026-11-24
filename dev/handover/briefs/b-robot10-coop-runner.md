@@ -24,7 +24,7 @@ Rollover: at START_CTX % + 25 % of the window (ceiling 60 %) write a HANDOVER bl
 ## Units (20 pairs × 10 kiếp × both seat orders = 20 units; no overlap, none skipped)
 | unit | pairs | SWAP | runner session | state |
 |---|---|---|---|---|
-| U1 | 1-2 | 0 | session_01N1tNP3yvoJnQ8TgBpcq5Be | RUNNING |
+| U1 | 1-2 | 0 | rc-u1 (done 11/24) | pair 1 DONE (10+10 kiếp); pair 2: host 7/10, guest 10/10 (+extras), BLOCKED by week-end stuck family (cause 1 fix-4 in review; cause 3 open); host kiếp 8-10 rerun later on the fixed build by a fresh runner |
 | U2 | 1-2 | 1 | session_01N1tNP2VQmoYutPcH2wVYLj | RUNNING |
 | U3 | 3 (pair 4 split 24/11 13:55Z) | 0 | session_01N1tNP2fZxefqCF5gDf8nSK | DONE 24/11 18:25Z (archived; bug file robot/coop-20261124-0723-p3-4.md) |
 | U3b | 4 | 0 | session_01N1tNP4zcW21pE4pFvZ47QP | RUNNING 24/11 13:55Z (B) |
