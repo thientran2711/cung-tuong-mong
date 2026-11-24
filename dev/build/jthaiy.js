@@ -53,7 +53,7 @@ function verdict(lie){const i=illOf(S);const s=S.suc||0;const K=typeof khB==="fu
 function wksPreg(){return S.preg&&S.pregUnk&&S.pregWk!=null?wk()-S.pregWk:-1}
 function lateHint(){try{return typeof cycleLate==="function"&&cycleLate(S)}catch(e){return false}}
 /* the j75 card finds it (j75 owns the card): bring its day to now */
-function findPreg(){if(!S.pregUnk)return false;S.pregDisc=Math.min(S.pregDisc||wk(),wk());try{if(typeof pregFind==="function"){if(!Q.length)pregFind();else setTimeout(()=>{try{if(S&&S.pregUnk){pregFind();if(Q.length&&$("modal").hidden)showModal();render()}}catch(e){}},0)}}catch(e){}return true}
+function findPreg(){if(!S.pregUnk)return false;S.pregDisc=Math.min(S.pregDisc||wk(),wk());try{if(typeof pregFind==="function"){if(!Q.length)pregFind();else lifeTimeout(()=>{try{if(S&&S.pregUnk){pregFind();if(Q.length&&$("modal").hidden)showModal();render()}}catch(e){}},0)}}catch(e){}return true}
 /* the mạch án leaks to the briber */
 function leak(by,F){if(!by)return"";const L=[];try{
  if(F.preg&&S.preg&&S.hidden){S.hidden=false;ghenUp(by,6,"biết ngươi đang mang long thai",S);noteAdd(by.id,`nhờ thái y mà biết ngươi đang mang thai`);L.push("có thai")}

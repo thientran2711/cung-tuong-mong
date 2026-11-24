@@ -104,7 +104,7 @@ PEND.pgin=p=>{const f=byKey(p.f);if(!f)return null;const P=p.pk?PGX[p.pk]:null;c
 (function(){const g0=PEND.giftin;PEND.giftin=function(p){try{if(p&&p.e&&pgFood(p.e)&&!p.e.t)return PEND.pgin({f:p.f,dn:iname(p.e),pk:null,o:0,e:p.e})}catch(x){console.error("pg in",x)}return g0.apply(this,arguments)}})();
 /* the kit gift dialog (jgift giftDialog): one more row "Bỏ độc vào…" (kgg "all": shown in every recipient tab); j83's old Hạc đỉnh hồng rows go */
 function pgRow(ix){return{n:"Bỏ độc vào…",fx:{},kgg:"all",kgift:"(chọn người nhận và thứ độc; không được với Hoàng thượng, Thái hậu)",
- go:()=>setTimeout(()=>{pushDil(mkP("pgpick",{ix}),"Bỏ độc vào quà");showModal()},0)}}
+ go:()=>lifeTimeout(()=>{pushDil(mkP("pgpick",{ix}),"Bỏ độc vào quà");showModal()},0)}}
 for(const k of ["giftpick","wkgive"])(function(k){const g0=PEND[k];if(!g0)return;PEND[k]=function(p){const d=g0.apply(this,arguments);try{if(d&&d.o&&p&&p.ix!=null&&p.v==null){
   d.o=d.o.filter(o=>!(o&&/^Lén bỏ Hạc đỉnh hồng/.test(o.n||"")));const e=S.inv[p.ix];
   if(e&&pgFood(e)&&pgHeld(S).length){const i=d.o.findIndex(o=>o&&(o.kgx||o.n==="Thôi"));d.o.splice(i<0?d.o.length:i,0,pgRow(p.ix))}}}catch(x){console.error("pg gift",x)}return d}})(k);

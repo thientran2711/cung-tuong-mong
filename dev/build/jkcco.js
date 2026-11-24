@@ -55,9 +55,9 @@ function run(op,m){const f=H[op];if(!f||!S||!m)return;const o=kccoS(),dk=m.id+":
  try{f(m)}catch(e){console.error("kcco "+op,e)}
  /* old done keys: keep the last ~60 */const ks=Object.keys(o.done);if(ks.length>80)for(const k of ks.slice(0,ks.length-60))delete o.done[k]}
 function route(to,op,m){const c=CW();if(!c||!c.on)return;const me=c.seat;
- if(me==="a"){if(to==="a"){setTimeout(()=>{run(op,m);try{if(Q.length)showModal();render()}catch(e){}},0);return}
+ if(me==="a"){if(to==="a"){lifeTimeout(()=>{run(op,m);try{if(Q.length)showModal();render()}catch(e){}},0);return}
   const TH=c.thin;if(TH&&TH.D&&TH.dOn&&TH.dOn()){TH.D.later(to,()=>run(op,m));return}relay(to,op,m);return}
- if(to===me&&!c.ctx){setTimeout(()=>{run(op,m);try{if(Q.length)showModal();render()}catch(e){}},0);return}
+ if(to===me&&!c.ctx){lifeTimeout(()=>{run(op,m);try{if(Q.length)showModal();render()}catch(e){}},0);return}
  relay(to,op,m)}
 window.kccoRoute=route;
 (function(){if(typeof COOP!=="object"||typeof COOP.on!=="function")return;

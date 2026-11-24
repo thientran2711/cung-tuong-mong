@@ -52,7 +52,7 @@ accSneak=function(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=
  const P=accSneakPen(k);const r0=S.rank;spend(tc);apply({danh:P.danh});log(`<span class="r">Lẻn vào ${nm}, bị thị vệ bắt được: Danh ${P.danh}.</span>`);punish(S,`tự tiện lẻn vào ${nm}`,P.sev);
  Q.push({t:"Bị bắt",h:`<p>Thị vệ ${nm} bắt được ngươi ở cửa hông. Chuyện truyền khắp lục cung.</p><p class="r">Danh ${P.danh} · ${S.rank<r0?`bị giáng xuống ${RANKS[S.rank].n}`:S.confined?`cấm túc ${S.confined} tháng`:"bị phạt"}</p>`});showModal();render()};
 /* an accepted request walks her in at once */
-(function(){const a0=accAsk;accAsk=function(k){const r=a0.apply(this,arguments);try{if(accHas(S,k)&&S.place!==k&&Q.length&&/Được/.test(Q[0].t||"")){const m=Q[0];m.btn="Vào";m.onClose=()=>{setTimeout(()=>{if(!Q.length&&S&&S.place!==k)j77In(k)},0)};showModal()}}catch(e){}return r}})();
+(function(){const a0=accAsk;accAsk=function(k){const r=a0.apply(this,arguments);try{if(accHas(S,k)&&S.place!==k&&Q.length&&/Được/.test(Q[0].t||"")){const m=Q[0];m.btn="Vào";m.onClose=()=>{lifeTimeout(()=>{if(!Q.length&&S&&S.place!==k)j77In(k)},0)};showModal()}}catch(e){}return r}})();
 /* the card for a place she cannot enter now */
 function j77Card(k,empty){if(!S||S.dead||Q.length)return;
  if(empty){Q.push({t:empty,h:`<p>Cung trống, chưa có ai ở.</p>`,btn:"Đã hiểu"});showModal();return}
@@ -73,13 +73,13 @@ function j77Card(k,empty){if(!S||S.dead||Q.length)return;
  if(sp&&sp.ok)opts.push({n:"Đi (đến nơi vào buổi sau)",fx:{},x:`tốn: ${sp.now?`${sp.now} khắc ${bu(sp.b-1)} + `:""}${sp.rest} khắc ${bu(sp.b)} · thành: đến nơi ${bu(sp.b)}, thấy ai ở đó`,go:()=>setTimeout(()=>walkSpillGo(k),0)});
  const waitHelps=!sp&&(st.kind==="hour"||st.walk||/sáng|thỉnh an/.test(st.why||"")||(st.ask&&!st.empAway&&!st.askOk&&!st.dayDone)||(st.kind&&!st.sneakOk));
  if(waitHelps&&!S.out&&!S.confined&&!S.mg){const b=S.buoi||0,night=b>=(typeof B4L==="number"?B4L:2),morn=st.kind==="hour"||/sáng|thỉnh an/.test(st.why||""); /* owner final names (11/15): night "Sang ngày mới" / day "Sang buổi"; no daytime wait for a place that only opens in the morning */
-  if(night||!morn)opts.push({n:night?"Sang ngày mới":"Sang buổi",fx:{},x:morn?"sáng mai mở cửa · thử lại":night?"sáng mai đủ khắc · thử lại":`${bu(b+1)} đủ khắc · thử lại`,go:()=>setTimeout(()=>{try{nextBuoi()}catch(e){}},0)})}
+  if(night||!morn)opts.push({n:night?"Sang ngày mới":"Sang buổi",fx:{},x:morn?"sáng mai mở cửa · thử lại":night?"sáng mai đủ khắc · thử lại":`${bu(b+1)} đủ khắc · thử lại`,go:()=>lifeTimeout(()=>{try{nextBuoi()}catch(e){}},0)})}
  if(opts.length){opts.push({n:"Thôi",fx:{},x:""});Q.push({t:nm,h:L.join(""),opts})}else Q.push({t:nm,h:L.join(""),btn:"Đã hiểu"});
  showModal()}
 /* a walk that uses the last khắc: say so plainly, then go (she sees who is there; next buổi she starts there) */
 function j77LastWalk(k,tc){let n=0;try{n=countAt(k)}catch(e){}
  Q.push({act:1,t:accName(k),h:`<p>Đường đi ${tc} khắc · đến nơi là hết khắc, sang buổi sau.</p>${n?`<p class="past">Có ${n} bóng người ở đó.</p>`:""}<p class="past">Ngươi ở lại đó: buổi sau bắt đầu ngay tại chỗ, thấy ai ở đó.</p>`,
-  opts:[{n:"Đi",fx:{},x:`tốn: ${tc} khắc · thành: đến nơi, thấy ai ở đó; người ở đó có thể đến gần`,go:()=>setTimeout(()=>{if(S&&!S.dead&&!Q.length)goTo(k)},0)},{n:"Thôi",fx:{},x:""}]});showModal()}
+  opts:[{n:"Đi",fx:{},x:`tốn: ${tc} khắc · thành: đến nơi, thấy ai ở đó; người ở đó có thể đến gần`,go:()=>lifeTimeout(()=>{if(S&&!S.dead&&!Q.length)goTo(k)},0)},{n:"Thôi",fx:{},x:""}]});showModal()}
 /* one tap rule for the map and the list (owner 18/11 ~06:00Z–06:30Z, map-tap-go): TAP A PLACE = GO THERE AT ONCE. No confirm card, no undo, no arrival note:
    the walk khắc is deducted silently like any Hành sự action (the top bar updates); a walk into the next buổi plays the normal buổi change.
    A place she cannot reach says why in the kit CẤM toast (srvToast); a place with real choices (xin bái kiến / yết kiến, lẻn vào) still opens the ONE place card. */

@@ -306,7 +306,7 @@ const showSoon=()=>{if(window.__bot)return;setTimeout(()=>{try{if(S&&Q.length&&$
 function rerun(){if(RR!==day()||!S||S.dead||Q.length||S.mg||(S.buoi||0)<B4()||(guest()&&S.nfFin!==day())||scene())return;
  const x=X();if(!guest()&&x&&x.st!=="done")return;if(!CO()&&S.nfN===day())return;
  RR=null;
- setTimeout(()=>{try{if(!S||S.dead||Q.length||S.mg||(S.buoi||0)<B4())return;
+ lifeTimeout(()=>{try{if(!S||S.dead||Q.length||S.mg||(S.buoi||0)<B4())return;
   if(CO()){if(COOPW.pend)return;COOPW.allowN=true;try{nextBuoi()}finally{COOPW.allowN=false}}else nextBuoi()}catch(e){console.error(e)}},300)}
 /* bundle (coop-night case 1): the host's day can move on before its choice of day d ends (jcoopworld cyFree → flip → soonEnd after the
    cycle hold): no fin for d is ever sent, and a guest who waits on d (S.nfFin!==d → ask) is never answered. The host sends that day's fin

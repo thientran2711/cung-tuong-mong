@@ -30,7 +30,7 @@ const nb0=nextBuoi;nextBuoi=function(){const b0=S&&S.buoi,d0=S&&day();const r=nb
  return r};
 /* any other road into buổi tối (co-op: the friend's buổi pulled in, jcoopworld CW.rbuoi; an old save loaded at tối with the tablet waiting) */
 let SOON=0;if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);
- try{if(!SOON&&S&&!S.dead&&on()&&(S.buoi||0)>=B4()&&S.nfP===day()&&!flippedToday()){SOON=1;setTimeout(()=>{SOON=0;try{
+ try{if(!SOON&&S&&!S.dead&&on()&&(S.buoi||0)>=B4()&&S.nfP===day()&&!flippedToday()){SOON=1;const g=lifeGen();setTimeout(()=>{SOON=0;if(g!==lifeGen())return;try{
    if(S&&!S.dead&&on()&&(S.buoi||0)>=B4()&&S.nfP===day()&&!flippedToday()&&!Q.length&&!S.mg){flip();if(typeof deal==="function")deal();if(!window.__bot){try{if(Q.length&&$("modal").hidden)showModal()}catch(e){}}render()}}catch(e){console.error(e)}},0)}}catch(e){}
  return r}}
 window.feWaits=()=>!!(S&&S.nfP===day()&&!flippedToday());

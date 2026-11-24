@@ -171,7 +171,10 @@ function evHoldRe(){if(!EVHOLD.length)return 0;const keep=[];let n=0;
  for(const h of EVHOLD){let c=null;try{const e=serM(h.m,{});if(e&&e.rk)c=rcpMk(e);else if(e)c=deserQ([e])[0]||null}catch(x){c=null}
   if(c){if(h.m.opt)c.opt=1;keep.push({m:c,at:h.at,K:h.K});n++}else evDropInfo(h.m)}
  EVHOLD=keep;return n}
-(function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{evHoldRe()}catch(x){console.error(x)}return r}})();
+/* robot-fix-cnv-4 (cards lost on reload): the card at the head of the loaded queue is the one she had on screen when the file was written
+   (it passed this gate then). EVLAST is page memory, so after a load the gate took it for a NEW optional card in a buổi that already had
+   its one (sc.bk) and moved it to EVHOLD (not saved) = the open «quở mắng» / servant / visit card vanished on reload. Same rule as an open card. */
+(function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{evHoldRe()}catch(x){console.error(x)}try{if(Q[0]){EVLAST=Q[0];Q[0].__seen=1}}catch(x){console.error(x)}return r}})();
 
 (function(){const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{evRelease()}catch(x){console.error(x)}return r}})();
 (function(){const t0=typeof tdPop==="function"?tdPop:null;if(!t0)return;tdPop=function(){const n=Q.length;const r=t0.apply(this,arguments);if(Q.length>n)Q[Q.length-1].opt=1;return r}})();

@@ -111,7 +111,7 @@ const hv=x=>String(x).replace(/(của|thay vì) ngươi(?=[\s.,;:]|$)/g,(m,a)=>`
 /* a tuần ROLLED while unparked and not yet settled (the room parked since: nfParked): it is settled all the same (law 6, one world) */
 function ldHas(){try{const L=cur();return !!(L&&!L.st&&N().on&&S&&!S.dead&&!gst())}catch(e){return false}}
 function ldSettle(){const on=ldOn();if(!on&&!ldHas())return;const d0=W();
- if(gst()){if(on&&S.ldG!==d0)setTimeout(()=>{try{if(S&&S.ldG!==d0&&typeof window.nfLdAsk==="function")window.nfLdAsk(d0)}catch(e){}},400);return}   /* the guest never rolls: her nights come from the host (ldIn) */
+ if(gst()){if(on&&S.ldG!==d0)lifeTimeout(()=>{try{if(S&&S.ldG!==d0&&typeof window.nfLdAsk==="function")window.nfLdAsk(d0)}catch(e){}},400);return}   /* the guest never rolls: her nights come from the host (ldIn) */
  let L=cur();
  /* the day's flip ran in a PARKED room (nfParked) (the live one-night flip) and she left the room before the day ended: that tuần keeps its one night */
  if(!L&&S.ldPk===d0){S.ledger={wk:d0,days:[],p:-1,st:1};return}
