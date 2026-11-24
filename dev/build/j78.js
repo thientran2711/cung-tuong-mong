@@ -38,7 +38,7 @@ function j78facts(v){const F=[];const W=j78Who(v);
  S.intel=S.intel||{};const known=new Set((S.intel[v.id]||[]).map(x=>x.k));
  const dd=j78deeds(v).filter(d=>!known.has("deed:"+d.w+":"+d.k+":"+d.t));if(dd.length){const d=dd[0];F.push({k:"deed:"+d.w+":"+d.k+":"+d.t,kind:"deed",pri:d.t==="me"?78:70,txt:j78deedTxt(v,d)+"."})}
  const O=others(v).filter(x=>x===S||x.alive&&!x.out);
- if(O.length){const h=O.map(x=>[x,danger(v,x)]).sort((a,b)=>b[1]-a[1])[0];const b=bandOf(h[1]);
+ if(O.length){const h=O.map(x=>[x,danger(v,x)]).sort((a,b)=>b[1]-a[1])[0];const b=bandCut(v,h[1]);
   if(b>0)F.push({k:"hate",kind:"hate",pri:60,txt:`${W} để bụng ${j78who(h[0])} nhất; mức nguy hiểm với người ấy: ${BANDS[b][1]}.`,go:()=>{if(h[0]===S){S.dKnown=S.dKnown||{};S.dKnown[v.id]=wk()}return ""}});
   else F.push({k:"hate",kind:"hate",pri:20,txt:`${W} hiện chưa oán ai đến mức ra tay.`});
   const f=O.map(x=>[x,aff(v,x)]).sort((a,b)=>b[1]-a[1])[0];if(f&&f[1]>=30)F.push({k:"ally",kind:"ally",pri:40,txt:`${W} thân với ${j78who(f[0])} nhất.`})}
@@ -137,7 +137,7 @@ function j78thFav(a){/* two-way: an NPC brings her own Thái hậu regard, as th
 A("trinhth","Trình Thái hậu",{c:{duc:BAL.eff.j78.ducTrinhth},ok:(a,t)=>evG(a,t)>=1&&!S.thDead&&rkOf(t)<7,o:(a,t)=>odA(a,40+evG(a,t)*10+j78thFav(a)/5),
  f:(a,t)=>{ap(a,{duc:BAL.eff.j78.ducTrinhth});const o=odA(a,40+evG(a,t)*10+j78thFav(a)/5);/* the card's odds, read before the evidence is spent */evA(a,t,BAL.eff.j78.evF);if(aRoll(o,a)){ap(t,{sung:BAL.eff.j78.sungF});affAdd(t,a,BAL.eff.j78.f);if(a===S)apply({th:BAL.eff.j78.trinhth});return `${j78Who(a)} trình chứng cứ lên Thái hậu: ${j78who(t)} bị quở trách (${sgOf(t,BAL.eff.j78.sungF)}). `}
   if(a===S)apply({th:BAL.eff.j78.trinhth_2});return `Thái hậu gạt chứng cứ ${j78who(a)} trình về ${j78who(t)}. `}});
-A("trinhhh","Trình Hoàng hậu",{c:{},ok:(a,t)=>{const q=queenP();return evG(a,t)>=2&&q&&q!==a&&q!==t},o:(a,t)=>{const q=queenP();return q?oddsCl(35+aff(q,a)/2+evG(a,t)*8):5},
+A("trinhhh","Trình Hoàng hậu",{c:{},ok:(a,t)=>{const q=queenP();return evG(a,t)>=BAL.evFirm&&q&&q!==a&&q!==t},o:(a,t)=>{const q=queenP();return q?oddsCl(35+aff(q,a)/2+evG(a,t)*8):5},
  f:(a,t)=>{const q=queenP();const o=oddsCl(35+aff(q,a)/2+evG(a,t)*8);evA(a,t,BAL.eff.j78.evF_2);if(aRoll(o,a)){punish(t,"bị Hoàng hậu xét tội theo chứng cứ",1);affAdd(t,a,BAL.eff.j78.f_2);return `${j78Who(a)} trình chứng cứ lên Hoàng hậu: ${j78who(t)} bị xét tội. `}affAdd(q,a,BAL.eff.j78.f_3);return `Hoàng hậu bác chứng cứ ${j78who(a)} trình về ${j78who(t)}. `}});
 A("uyhiep","Uy hiếp đòi bạc",{c:{},ok:(a,t)=>evG(a,t)>=1&&j78pay(t)>=10,o:(a,t)=>odA(a,45+evG(a,t)*8-witOf(t)/5),
  f:(a,t)=>{const o=odA(a,45+evG(a,t)*8-witOf(t)/5);const g=j78pay(t);if(aRoll(o,a)){evA(a,t,BAL.eff.j78.evF_3);ap(t,{bac:-g});ap(a,{bac:g});oanAdd(t,a,BAL.eff.j78.f_4);return `${j78Who(t)} sợ chuyện lộ, đưa ${j78who(a)} ${g} lượng bạc để chuộc lại ${balWord(balAb(BAL.eff.j78.evF_3))} chứng cứ. `}
@@ -173,7 +173,7 @@ const J78EVK=["accuse","tocao","expose","trinhth","trinhhh","uyhiep","banphe","t
 (function(){for(const g of RVGRP)g[1]=g[1].filter(k=>!J78EVK.includes(k));RVGRP.splice(1,0,["Dùng chứng cứ",J78EVK.slice()])})();
 /* the same acts for every consort: NPCs holding evidence use them too (light weights) */
 BANDS[1][2].push("uyhiep","banphe");BANDS[2][2].push("trinhth","trinhhh");
-(function(){const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{const b=bandOf(danger(v,t));if(b&&evG(v,t)>=1){const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);
+(function(){const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{const b=bandVT(v,t);if(b&&evG(v,t)>=1){const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);
   for(const [k,w] of [["uyhiep",1],["banphe",1],["trinhth",2],["trinhhh",2]]){if(!allow.includes(k))continue;let ok=false;try{ok=ACT[k].ok(v,t)}catch(e){}if(ok)O.push([k,w*persW(v,k)])}}}catch(e){}return O}})();
 Object.assign(TELLS,{trinhhh:"sai người chép lại sổ sách, lời khai cung nhân"});
 
