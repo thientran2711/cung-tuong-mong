@@ -43,7 +43,10 @@ const within=(ms,p,what)=>Promise.race([p,new Promise((_,rej)=>setTimeout(()=>re
    cung nữ looped 40 identical start() calls in one task (27–33 s 'long task', seen on new AND live; fix oi-perf 11/17, same idiom as origin-intros/flow.js) */
 const NEWLIFE=()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<40;i++){if(i)try{store.set(NL_KEY,null)}catch(e){}start();if(!(S.origin&&S.origin.k==='cnv')&&!(window.isSrv&&isSrv()))break}
  ['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});return S.name};
-const SETTLE=()=>{try{for(let j=0;j<8&&Q.length&&!S.dead;j++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}}catch(e){try{Q.shift()}catch(x){}}
+/* SELSCENE-12: ONE card per poll (was up to 8 in one evaluate = one JS task): a tú nữ's 3 days put several heavy cards (contest, entry) into that one
+   task — longTaskMaxMs 13.5 s under the 4× throttle, while the slowest single card is ~0.9 s unthrottled (~3.6 s throttled); a player answers one card per
+   task. Same driver for the new and the live build. */
+const SETTLE=()=>{try{for(let j=0;j<1&&Q.length&&!S.dead;j++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}}catch(e){try{Q.shift()}catch(x){}}
  const n=document.getElementById('next');return !!n&&!n.disabled&&!Q.length&&!S.dead};
 /* MAIN 121 (24/11 ~09:42Z, review/selection-scene): a new tú nữ life plays her 3 selection days (option 0 driver, no game bypass); a life that ENDS at
    the selection (ban hoa, owner rule: the life ends) can never settle → reroll a new life, same idiom as the cung nữ reroll above; counted, capped. */
