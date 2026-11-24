@@ -527,16 +527,16 @@ function doAct(i,k){const v=rivals[i],a=ACT[k];const hk=typeof harmK==="function
  if(k==="plant"||k==="gift"){pushDil(mkP(k==="plant"?"plantpick":"giftpick",{v:v.id}),k==="plant"?"Cài đồ vào rương":"Tặng quà");render();return}
  const fz=ACTFZ&&ACTFZ.k===k?ACTFZ.o:actOdds(S,v,k);/* the odds she saw, read before the spend (j9 fzRun); from the card game (jsgame sgRun) = its result odds */
  /* parallel time (jptime): a deed done by a SENT servant — she pays the order, the servant goes, the deed lands at the due khắc */if(typeof ptHarmSend==="function"&&ptHarmSend(v,k,fz)){spend(hk);render();return}spend(BAL.time.cost.harm);const r=fzRun(fz,k,()=>runAct(S,v,k));if(r)log(r);render()}
-function empAct(i,k){const v=rivals[i];if(!v||S.rank<7||!can(2)||S.dead||Q.length)return;let r="";if(k==="cutpay"){spend(2);v.cutPay=1;v.cutBy="Hoàng hậu";relAdd(S,v,BAL.eff.j8.empAct);log(`Ngươi sai Nội vụ phủ khất bổng lộc của ${v.name} tháng tới.`);render();return}
+function empAct(i,k){const v=rivals[i];if(!v||S.rank<7||!can(BAL.btn.empAct.k)||S.dead||Q.length)return;let r="";if(k==="cutpay"){spend(BAL.btn.empAct.k);v.cutPay=1;v.cutBy="Hoàng hậu";relAdd(S,v,BAL.eff.j8.empAct);log(`Ngươi sai Nội vụ phủ khất bổng lộc của ${v.name} tháng tới.`);render();return}
  if(k==="judge"){if(evG(S,v)<2)return;r=judge(S,v)}
  else if(k==="conf"){const j=v.inv.findIndex(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h);if(j<0)return;if(evG(S,v)<1&&!vpItems(v).length){apply(BAL.tw.confNo);log(`Tịch thu vô cớ: Danh ${BAL.tw.confNo.danh}, Thái hậu ${BAL.tw.confNo.th}.`)}const n=iname(v.inv[j]);v.inv.splice(j,1);relAdd(S,v,-BAL.tw.g.conf[0]);v.hh-=BAL.tw.g.conf[1];r=`Ngươi tịch thu ${n} của ${v.name}.`}
  else if(k==="reward"){if(S.bac<-BAL.tw.reward.bac)return;apply(BAL.tw.reward);relAdd(S,v,BAL.tw.g.reward[0]);v.hh+=BAL.tw.g.reward[1];ap(v,{danh:BAL.tw.g.reward[2]});r=`Ngươi ban thưởng cho ${v.name}.`}
  else if(k==="pardon"){if(!v.confined&&!v.out)return;if(v.out&&!roomFor("consort"))return;if(v.out){v.out=false;v.rank=0}v.confined=0;relAdd(S,v,BAL.eff.j8.empAct_2);apply({duc:BAL.ag.hh.pardonDuc});r=`Ngươi ân xá cho ${v.name}.`}
- else return;spend(2);log(r);render()}
+ else return;spend(BAL.btn.empAct.k);log(r);render()}
 function giftTargets(){const L=[["emp","Hoàng thượng"]];if(!S.thDead)L.push(["th","Thái hậu"]);liveRivals(true).forEach(v=>L.push([v.id,(v.queen?"Hoàng hậu ":"")+v.name]));return L}
 PEND.giftpick=p=>{const e=S.inv[p.ix!=null?p.ix:-1];const L=p.v!=null?[[p.v,(RV(p.v)||{}).name]]:giftTargets();
- if(p.v!=null){const items=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h);return{t:"<p>Chọn món đồ để tặng.</p>",o:items.map(([e,i])=>({n:iname(e)+(e.t?" (đã tẩm)":""),ik:i,fx:{},x:(IT[e.k]||{}).d,go:()=>{spend(2);log(giveTo(S,RV(p.v),i))}})).concat([{n:"Thôi",fx:{}}])}}
- if(!e)return null;return{t:`<p>Tặng <b>${iname(e)}</b> cho ai?</p>`,o:L.map(([id,n])=>({n,fx:{},x:id==="emp"||id==="th"?(e.t?"không thể dâng đồ đã tẩm":giftVal(Object.assign({k:e.k},IT[e.k]),id)>=8?"rất hợp ý":""):"",go:()=>{if((id==="emp"||id==="th")&&e.t)return;spend(2);log(giveTo(S,id==="emp"||id==="th"?id:RV(id),p.ix))}})).concat([{n:"Thôi",fx:{}}])}};
+ if(p.v!=null){const items=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h);return{t:"<p>Chọn món đồ để tặng.</p>",o:items.map(([e,i])=>({n:iname(e)+(e.t?" (đã tẩm)":""),ik:i,fx:{},x:(IT[e.k]||{}).d,go:()=>{spend(BAL.btn.give.k);log(giveTo(S,RV(p.v),i))}})).concat([{n:"Thôi",fx:{}}])}}
+ if(!e)return null;return{t:`<p>Tặng <b>${iname(e)}</b> cho ai?</p>`,o:L.map(([id,n])=>({n,fx:{},x:id==="emp"||id==="th"?(e.t?"không thể dâng đồ đã tẩm":giftVal(Object.assign({k:e.k},IT[e.k]),id)>=8?"rất hợp ý":""):"",go:()=>{if((id==="emp"||id==="th")&&e.t)return;spend(BAL.btn.give.k);log(giveTo(S,id==="emp"||id==="th"?id:RV(id),p.ix))}})).concat([{n:"Thôi",fx:{}}])}};
 PEND.plantpick=p=>{const v=RV(p.v);if(!v)return null;const items=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h);const fx=p.here?{pen:-BAL.actHere.plant,here:1}:null,fz=actOdds(S,v,"plant",fx);/* the odds printed here = the odds rolled (fzRun), read before any spend */
  return{who:pv(v),t:`<p>Sai người lẻn vào cung ${v.name}, cài món gì vào rương nàng?</p><p class="past">${word(oddsCl(fz))} · hỏng: bị bắt, nàng nắm ${balAb(BAL.eff.j8.evPlantItem)} chứng cứ</p>`,o:items.map(([e,i])=>({n:iname(e)+(e.t?" ("+TAINT[e.t].n+")":""),ik:i,fx:{},p:oddsCl(fz)/* law 4: fzRun(fz) */,x:(IT[e.k]||{}).il||(e.t&&TAINT[e.t].il)?"khám ra là có tội":(IT[e.k]||{}).rk>rkOf(v)?"vượt phẩm của nàng":"",go:()=>{spend(2);fzRun(fz,"plant",()=>{if(p.here)plantHereGo(v,i);else log(runAct(S,v,"plant",i))})}})).concat([{n:"Thôi",fx:{}}])}};
 /* «Cài đồ vào rương» at her palace (here): ONE function (coop-thin F3: a co-op guest's choice becomes an intent here; the odds she saw ride along) */
@@ -544,7 +544,7 @@ function plantHereGo(v,i){ACTX=actCtx(S,v,"plant",undefined,{pen:-BAL.actHere.pl
 PEND.taintpick=p=>{const e=S.inv[p.ix];if(!e)return null;const L=Object.entries(TAINT).filter(([k,T])=>T.on.includes(e.k)&&(!T.need||S.inv.some(x=>x.k===T.need&&!x.h)));
  return{t:`<p>Lén làm gì với <b>${iname(e)}</b>?</p>`,o:L.map(([k,T])=>({n:T.n[0].toUpperCase()+T.n.slice(1),fx:T.c?{bac:-T.c,duc:BAL.eff.j8.taintDuc}:{duc:BAL.eff.j8.taintDuc},x:T.hurt+(T.need?" · tốn "+itm(T.need).n:""),go:()=>log(taintItem(S,p.ix,k))})).concat([{n:"Thôi",fx:{}}])}};
 PEND.evpick=p=>({t:"<p>Tập chứng cứ này nói về ai?</p>",o:liveRivals(true).map(v=>({kgt:v,n:v.name,fx:{},go:()=>log(useItem(S,p.ix,v))})).concat([{n:"Thôi",fx:{}}])});
-PEND.itarget=p=>({t:`<p>Dùng ${itm(p.k).n} với ai?</p>`,o:liveRivals(true).map(v=>({kgt:v,n:v.name,fx:{},go:()=>{spend(2);log(useItem(S,p.ix,v))}})).concat([{n:"Thôi",fx:{}}])});
+PEND.itarget=p=>({t:`<p>Dùng ${itm(p.k).n} với ai?</p>`,o:liveRivals(true).map(v=>({kgt:v,n:v.name,fx:{},go:()=>{spend(BAL.btn.itemUse.k);log(useItem(S,p.ix,v))}})).concat([{n:"Thôi",fx:{}}])});
 PEND.shop=()=>({who:pEunCourt("ped"),t:"<p>Thái giám Nội vụ phủ bưng vào một khay đồ mua từ ngoài cung, dâng lên cho ngươi chọn: “Đồ mới mang vào, xin "+kSay({srv:"m"},S,"{goi}")+" xem qua.”</p>",o:S.shop.map(k=>({n:iic(k,20)+itm(k).n,fx:{bac:-itm(k).pr},x:`${itm(k).kd} · ${itm(k).d}`,go:()=>{S.inv.push({k});log(`Mua ${itm(k).n}.`)}})).concat([{n:"Thôi",fx:{}}])});
 PEND.giftin=p=>{const f=byKey(p.f),e=p.e;if(!f)return null;const it=itm(e.k),hi=rkOf(f)>S.rank;
  return{who:pv(f),t:`<p>${f.name} sai người mang <b>${it.n}</b> sang tặng ngươi.</p><p class="past">${it.d}</p>`,o:[
@@ -557,27 +557,27 @@ function itemTest(p,ix){const T=BAL.ag.par3.test;const e=(p.inv||[])[ix];if(!e||
   return p===S?`Thái y phát hiện ${it.n} ${TAINT[e.t].n}${by?`; dấu vết dẫn về ${NM(by)} (chứng cứ ${balSg(BAL.eff.j8.evItemAct)})`:""}.`:`${p.name} đem ${it.n} đi nghiệm, thái y phát hiện đồ bị ${TAINT[e.t].n}`}
  return p===S?`Thái y xét ${it.n}: không thấy gì lạ.`:`${p.name} đem ${it.n} đi nghiệm độc`}
 function itemAct(a,ix){const e=S.inv[ix];if(!e||S.dead||Q.length)return;const it=itm(e.k);
- if(a==="use"){if(it.evi){pushDil(mkP("evpick",{ix}),"Tập chứng cứ");render();return}if(e.k==="botngua"){if(!can(2))return;pushDil(mkP("itarget",{ix,k:e.k}),it.n);render();return}const r=useItem(S,ix);if(r)log(r)}
+ if(a==="use"){if(it.evi){pushDil(mkP("evpick",{ix}),"Tập chứng cứ");render();return}if(e.k==="botngua"){if(!can(BAL.btn.itemUse.k))return;pushDil(mkP("itarget",{ix,k:e.k}),it.n);render();return}const r=useItem(S,ix);if(r)log(r)}
  else if(a==="wear")wear(S,ix);
- else if(a==="gift"){if(!can(2))return;pushDil(mkP("giftpick",{ix}),"Tặng quà")}
+ else if(a==="gift"){if(!can(BAL.btn.give.k))return;pushDil(mkP("giftpick",{ix}),"Tặng quà")}
  else if(a==="sell"){const r=sellItem(S,ix);if(r)log(r)}
  else if(a==="taint")pushDil(mkP("taintpick",{ix}),"Tẩm đồ");
  else if(a==="test"){const r=itemTest(S,ix);if(r)log(r)}
  render()}
 function invAct(a){if(S.dead||Q.length)return;
  if(a==="shop"){pushDil(mkP("shop"),"Nhờ thái giám mua đồ");render();return}
- if(a==="inspect"){if(!can(2))return;spend(2);const f=inspect(S);log(f.length?`Kiểm tra rương đồ, tìm thấy: ${f.join("; ")}.`:"Kiểm tra rương đồ: không thấy gì lạ.");if(f.length)Q.push({t:"Kiểm tra đồ",h:`<p>${f.join("<br>")}</p>`});render()}}
+ if(a==="inspect"){if(!can(BAL.btn.inspect.k))return;spend(BAL.btn.inspect.k);const f=inspect(S);log(f.length?`Kiểm tra rương đồ, tìm thấy: ${f.join("; ")}.`:"Kiểm tra rương đồ: không thấy gì lạ.");if(f.length)Q.push({t:"Kiểm tra đồ",h:`<p>${f.join("<br>")}</p>`});render()}}
 function invHTML(){const wb=wearBonus(S),vp=vpItems(S);const vis=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h);
  const groups=[];for(const [e,i] of vis){const g=groups.find(x=>x.k===e.k&&!!x.t===!!(e.by==="me"&&e.t)&&!x.w&&!e.w);if(g)g.n++;else groups.push({k:e.k,t:e.by==="me"?e.t:null,w:e.w,i,n:1,ext:e.t&&e.by!=="me",from:e.from})}
  const dress=S.dress&&S.dress.until>S.turn?`${itm(S.dress.k).n} (đến tháng ${S.dress.until-S.turn} nữa)`:"không";
  let h=`<div class="ph"><span>Đang mặc: Sắc +${wb.sac-(wb.shSac||0)}${wb.danh?`, Danh +${wb.danh}`:""} · áo mới: ${dress}${vp.length?` · <span class="r">vượt phẩm!</span>`:""}</span><span>Bạc ${S.bac}</span></div>
- <div class="rbtn" style="margin-bottom:6px"><button data-inv="shop">Nhờ thái giám mua đồ<small>thành: xem hàng, mua đồ từ ngoài cung qua thái giám Nội vụ phủ</small></button><button data-inv="inspect" ${!can(2)?"disabled":""}>Kiểm tra đồ<small>${word(oSee(S,true))} · tốn: 2 khắc · thành: tìm ra đồ bị tẩm độc hay bị cài · hỏng: không thấy gì</small></button></div>`;
+ <div class="rbtn" style="margin-bottom:6px"><button data-inv="shop">Nhờ thái giám mua đồ<small>thành: xem hàng, mua đồ từ ngoài cung qua thái giám Nội vụ phủ</small></button><button data-inv="inspect" ${!can(BAL.btn.inspect.k)?"disabled":""}>Kiểm tra đồ<small>${word(oSee(S,true))} · tốn: ${BAL.btn.inspect.k} khắc · thành: tìm ra đồ bị tẩm độc hay bị cài · hỏng: không thấy gì</small></button></div>`;
  if(!groups.length)return h+`<p class="past">Rương trống. Nhờ thái giám mua đồ, hoặc chờ được ban thưởng.</p>`;
  h+=`<div class="cards">`+groups.map(g=>{const it=itm(g.k),i=g.i;const B=[];
   if(it.sl)B.push(`<button data-it="wear" data-ix="${i}">${g.w?"Tháo":"Đeo"}<small>${it.rk>S.rank?"vượt phẩm":"hợp phẩm"}</small></button>`);
   if(it.dr)B.push(`<button data-it="use" data-ix="${i}">May áo<small>${it.rk>S.rank?"vượt phẩm":"3 tháng"}</small></button>`);
-  if(it.use||it.evi||g.k==="botngua")B.push(`<button data-it="use" data-ix="${i}">Dùng<small>${g.k==="botngua"?"tốn 2 khắc":fmt(it.use)||"chọn người"}</small></button>`);
-  if(g.k!=="ngocboi"||g.t)B.push(`<button data-it="gift" data-ix="${i}" ${!can(2)?"disabled":""}>Tặng<small>tốn 2 khắc</small></button>`);
+  if(it.use||it.evi||g.k==="botngua")B.push(`<button data-it="use" data-ix="${i}">Dùng<small>${g.k==="botngua"?`tốn ${BAL.btn.itemUse.k} khắc`:fmt(it.use)||"chọn người"}</small></button>`);
+  if(g.k!=="ngocboi"||g.t)B.push(`<button data-it="gift" data-ix="${i}" ${!can(BAL.btn.give.k)?"disabled":""}>Tặng<small>tốn ${BAL.btn.give.k} khắc</small></button>`);
   if(it.pr)B.push(`<button data-it="sell" data-ix="${i}">Bán<small>Bạc +${Math.floor(it.pr/2)}</small></button>`);
   if(Object.values(TAINT).some(T=>T.on.includes(g.k))&&!g.t)B.push(`<button data-it="taint" data-ix="${i}">Tẩm<small>mưu kế</small></button>`);
   if(g.from&&g.from!=="me"&&g.from!=="emp"&&g.from!=="th")B.push(`<button data-it="test" data-ix="${i}" ${S.bac<BAL.bacFee.itTest?"disabled":""}>Xét nghiệm<small>Bạc -${BAL.bacFee.itTest}</small></button>`);

@@ -653,7 +653,7 @@ function kcFamHTML(){const nha=kcFamList("nha"),ban=kcFamList("ban");const rest=
  return h}
 /* Dư đồ: sub-tabs Trong phủ · Kinh thành, one kit priced button per place (who is there; city = 1 khắc; why locked) */
 function kcMapHTML(){const B=(k)=>{const P=KCPL[k];const w=kcGoWhy(k);const ppl=kcHere(k).map(m=>m.t.toLowerCase());const tmh=S.kc.at.ftm===k&&kcTmMan()?["người ấy"]:[];const who=ppl.concat(tmh);
-  return pbtn(`class="opt" data-kcgo="${k}" title="${P[3].replace(/"/g,"")}"`,P[0],[kcCity(k)?"tốn: 1 khắc":"",who.length?"người ở đây: "+who.join(" và "):"không gặp ai"].filter(Boolean).join(" · "),w||"")};
+  return pbtn(`class="opt" data-kcgo="${k}" title="${P[3].replace(/"/g,"")}"`,P[0],[kcCity(k)?`tốn: ${BAL.walk.near} khắc`:"",who.length?"người ở đây: "+who.join(" và "):"không gặp ai"].filter(Boolean).join(" · "),w||"")};
  const inH=Object.keys(KCPL).filter(k=>KCPL[k][2]),out=Object.keys(KCPL).filter(k=>!KCPL[k][2]);
  const L0=[{k:"phu",label:"Trong phủ",n:inH.length},{k:"kinh",label:"Kinh thành",n:out.length}];/* reviewer kit-rcol-top-r1: no info band under tabs (owner 17/11 07:55Z) → the Ra phố ⓘ sits in the tab bar's trailing slot */
  const T=kitSubTabs("kcgo",L0,ktSubGet("kcgo",L0)==="kinh"?kitInfo("Ra phố","Ra phố cần tỳ nữ đi cùng; buổi tối không ra ngoài"):"");

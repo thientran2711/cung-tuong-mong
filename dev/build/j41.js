@@ -30,29 +30,29 @@ function accName(k){try{return k==="home"?palName("home"):(typeof palName==="fun
 function accState(k){if(!S||!k)return{why:""};if(S.place===k)return{why:"",here:1};
  if(S.out)return{why:"đang ở lãnh cung"};if(S.confined)return{why:`cấm túc ${S.confined} tháng`};
  const a=accessOf(S,k);const tc=k===S.place?0:travel(S.place,k);
- if(!a.ok){const st={why:a.why,kind:a.kind,ask:a.ask,tc};st.sneakOk=can(tc+2);if(a.ask==="yk")st.empAway=(S.where||{}).emp!==k;st.askOk=can(1)&&!st.empAway;return st}
+ if(!a.ok){const st={why:a.why,kind:a.kind,ask:a.ask,tc};st.sneakOk=can(tc+BAL.btn.accSneak.k);if(a.ask==="yk")st.empAway=(S.where||{}).emp!==k;st.askOk=can(BAL.btn.accAsk.k)&&!st.empAway;return st}
  if(!walkOk(tc))return{why:walkWhy(tc)}; /* the road home is a walk like any other (OD L1976) */
  return{why:"",tc}}
-function accSneakLine(k,tc){return `${word(accSneakO(k))} · tốn: ${tc+1} khắc · thành: vào được${typeof j77When==="function"?j77When(tc+1):" buổi này"} · hỏng: Danh -${BAL.sneak.danh}, bị phạt`} /* replaced by j77; same words */
-function accAskLine(k){return `${word(accAskO(k))} · tốn: 1 khắc · thành: được vào${typeof j77When==="function"?j77When(1):" buổi này"} · hỏng: không mất gì thêm`} /* replaced by j77 */
+function accSneakLine(k,tc){return `${word(accSneakO(k))} · tốn: ${tc+BAL.btn.accSneak.k} khắc · thành: vào được${typeof j77When==="function"?j77When(tc+1):" buổi này"} · hỏng: Danh -${BAL.sneak.danh}, bị phạt`} /* replaced by j77; same words */
+function accAskLine(k){return `${word(accAskO(k))} · tốn: ${BAL.btn.accAsk.k} khắc · thành: được vào${typeof j77When==="function"?j77When(1):" buổi này"} · hỏng: không mất gì thêm`} /* replaced by j77 */
 /* small kit buttons for the map hotspot: name + odds chip + price */
 function accMini(k,st,risk){const L=[];
- if(st.ask&&st.ask==="yk")L.push(`<button class="acb" data-acask="${k}" ${st.askOk?"":"disabled"}>Xin yết kiến ${st.empAway?'<i>ngài vắng</i>':oddsChip(word(accAskO(k)))+'<i>1 khắc</i>'}</button>`);
- if(st.ask==="bk")L.push(`<button class="acb" data-acask="${k}" ${st.askOk?"":"disabled"}>Xin bái kiến ${oddsChip(word(accAskO(k)))}<i>1 khắc</i></button>`);
- if(st.kind)L.push(`<button class="acb" data-acsneak="${k}" ${st.sneakOk?"":"disabled"}>Lẻn vào ${oddsChip(word(accSneakO(k)))}<i>${st.tc+1} khắc${risk?" · bắt: Danh -"+BAL.sneak.danh:""}</i></button>`);
+ if(st.ask&&st.ask==="yk")L.push(`<button class="acb" data-acask="${k}" ${st.askOk?"":"disabled"}>Xin yết kiến ${st.empAway?'<i>ngài vắng</i>':oddsChip(word(accAskO(k)))+'<i>'+BAL.btn.accAsk.k+' khắc</i>'}</button>`);
+ if(st.ask==="bk")L.push(`<button class="acb" data-acask="${k}" ${st.askOk?"":"disabled"}>Xin bái kiến ${oddsChip(word(accAskO(k)))}<i>${BAL.btn.accAsk.k} khắc</i></button>`);
+ if(st.kind)L.push(`<button class="acb" data-acsneak="${k}" ${st.sneakOk?"":"disabled"}>Lẻn vào ${oddsChip(word(accSneakO(k)))}<i>${st.tc+BAL.btn.accSneak.k} khắc${risk?" · bắt: Danh -"+BAL.sneak.danh:""}</i></button>`);
  return L.length?`<span class="macts">${L.join("")}</span>`:""}
 /* full kit buttons (Danh sách, cards) */
 function accBtns(k,st){const L=[];
- if(st.ask==="yk")L.push(pbtn(`class="btn" data-acask="${k}"`,"Xin yết kiến",accAskLine(k),st.askWhy||(st.empAway?"Hoàng thượng không có ở đây":!can(1)?"hết khắc":"")));
- if(st.ask==="bk")L.push(pbtn(`class="btn" data-acask="${k}"`,"Xin bái kiến",accAskLine(k),!can(1)?"hết khắc":""));
+ if(st.ask==="yk")L.push(pbtn(`class="btn" data-acask="${k}"`,"Xin yết kiến",accAskLine(k),st.askWhy||(st.empAway?"Hoàng thượng không có ở đây":!can(BAL.btn.accAsk.k)?"hết khắc":"")));
+ if(st.ask==="bk")L.push(pbtn(`class="btn" data-acask="${k}"`,"Xin bái kiến",accAskLine(k),!can(BAL.btn.accAsk.k)?"hết khắc":""));
  if(st.kind)L.push(pbtn(`class="btn" data-acsneak="${k}"`,"Lẻn vào",accSneakLine(k,st.tc),st.sneakOk?"":"không đủ khắc"));
  return L.join("")}
 /* acts */
-function accSneak(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=travel(S.place,k);if(!can(tc+2))return;const nm=accName(k);const o=accSneakO(k);spend(1);
+function accSneak(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=travel(S.place,k);if(!can(tc+BAL.btn.accSneak.k))return;const nm=accName(k);const o=accSneakO(k);spend(BAL.btn.accSneak.k);
  if(roll(o)){accGrant(S,k);log(`Lẻn vào ${nm} trót lọt.`);window.__accSilent=0;goTo(k);if(S.place!==k)render();return}
  spend(tc);apply({danh:-BAL.sneak.danh});log(`<span class="r">Lẻn vào ${nm}, bị thị vệ bắt được: Danh -${BAL.sneak.danh}.</span>`);punish(S,`tự tiện lẻn vào ${nm}`,1);
  Q.push({t:"Bị bắt",h:`<p>Thị vệ ${nm} bắt được ngươi ở cửa hông. Chuyện truyền khắp lục cung.</p><p class="r">Danh -${BAL.sneak.danh} ·${S.confined?`cấm túc ${S.confined} tháng`:"bị phạt"}</p>`});showModal();render()}
-function accAsk(k){if(!S||S.dead||Q.length||!can(1))return;const st=accState(k);if(!st.ask||st.empAway)return;const nm=accName(k);const o=accAskO(k);spend(1);
+function accAsk(k){if(!S||S.dead||Q.length||!can(BAL.btn.accAsk.k))return;const st=accState(k);if(!st.ask||st.empAway)return;const nm=accName(k);const o=accAskO(k);spend(BAL.btn.accAsk.k);
  if(roll(o)){accGrant(S,k);const aw=typeof j77When==="function"?j77When(k===S.place?0:travel(S.place,k)):" buổi này";/* the walk may spill: say the arrival buổi (day-khắc r2) */log(`Xin vào ${nm}: được cho vào${aw}.`);Q.push({t:st.ask==="yk"?"Được yết kiến":"Được mời vào",h:`<p>${st.ask==="yk"?"Thái giám truyền khẩu dụ: Hoàng thượng cho ngươi vào.":"Cung nữ ra cửa mời ngươi vào."}</p><p class="g">Được vào ${nm}${aw}.</p>`});}
  else{log(`Xin vào ${nm}: bị từ chối.`);Q.push({t:"Bị từ chối",h:`<p>${st.ask==="yk"?`Thái giám ra cửa: “Hoàng thượng đang ${S.emp.mood>=2?"không vui":"bận"}, ${kSay({srv:"m"},S,"{goi}")} xin hồi cung.”`:"Cung nữ ra cửa: “Chủ tử nhà nô tỳ không tiện tiếp.”"}</p>`})}
  showModal();render()}

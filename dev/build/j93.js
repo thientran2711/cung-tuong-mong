@@ -258,7 +258,7 @@ const KM_WX={"hoa đào bay":"hoadao","mưa phùn":"muaphun","sương sớm":"su
  "trời âm u":"amu","mưa rào":"muarao","mưa thu":"muarao","gió lớn":"giolon","gió bấc":"giolon","sương mù":"suongmu"};
 /* exactly what the code does with the weather (j3 endTurn, j80 sleepRegen, j9 placeWhere/travel, j8 contest, j12 rollWx) */
 function kitWxEffects(w){w=w||(S&&S.wx);if(!w)return[];const L=[];const f=w.f;
- if([1,3,4].includes(f)){L.push(["r","Đi đến nơi xa tốn 3 khắc (ngày thường 2)."]);L.push(["n","Hoàng thượng không ra Ngự hoa viên, ngồi ở thư phòng; ít người dạo vườn (chừng một phần tư ngày thường)."]);L.push(["n","Thi Sắc, thi tài ngoài trời may rủi hơn; thi Sắc ngày ướt thì người giỏi múa kém thế."])}
+ if([1,3,4].includes(f)){/* (walk-cost r3: no weather term on walking, j9 travel; the old typed «Đi đến nơi xa tốn 3 khắc» line is gone, d-followups-1) */L.push(["n","Hoàng thượng không ra Ngự hoa viên, ngồi ở thư phòng; ít người dạo vườn (chừng một phần tư ngày thường)."]);L.push(["n","Thi Sắc, thi tài ngoài trời may rủi hơn; thi Sắc ngày ướt thì người giỏi múa kém thế."])}
  if(f===2||f===4){L.push(["r","Hồi Sức chậm: qua tuần +1 (ngày thường +4), ngủ +8 (ngày thường +14)."])}
  if(f===3)L.push(["r","Giông tố: Hoàng thượng bực bội cả tuần (tính nóng nảy thì nổi giận)."]);
  if(f===2)L.push(["r","Nắng gắt: Hoàng thượng tính nóng nảy thì bực bội."]);

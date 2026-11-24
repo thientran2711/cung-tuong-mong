@@ -40,14 +40,14 @@ function accSneakPen(k){return typeof ACC_ETQ!=="undefined"&&ACC_ETQ.sneakHeavy[
 function j77Tc(k){try{return k===S.place?0:travel(S.place,k)}catch(e){return 1}}
 /* where she ends up when asking / sneaking / being led in costs n khắc (the ask + the walk): this buổi, or the buổi the walk spills into (j76arrive) — VANPHONG true words (day-khắc r2) */
 function j77When(n){return used+n<=BAL.time.khac?" buổi này":` (đến nơi vào ${j76arrive(n)})`}
-accAskLine=function(k){return `${word(accAskO(k))} · tốn: ${j77Tc(k)+1} khắc · thành: được vào${j77When(j77Tc(k)+1)} · hỏng: không mất gì`};
+accAskLine=function(k){return `${word(accAskO(k))} · tốn: ${j77Tc(k)+BAL.btn.accAsk.k} khắc · thành: được vào${j77When(j77Tc(k)+BAL.btn.accAsk.k)} · hỏng: không mất gì`};
 accMini=function(k,st,risk){const L=[];const t=(st.tc!=null?st.tc:j77Tc(k))+1;
  if(st.ask==="yk")L.push(`<button class="acb" data-acask="${k}" ${st.askOk?"":"disabled"}>Xin yết kiến ${st.empAway?'<i>ngài vắng</i>':st.dayDone?'<i>hôm nay đã gặp</i>':oddsChip(word(accAskO(k)))+`<i>${t} khắc</i>`}</button>`);
  if(st.ask==="bk")L.push(`<button class="acb" data-acask="${k}" ${st.askOk?"":"disabled"}>Xin bái kiến ${oddsChip(word(accAskO(k)))}<i>${t} khắc</i></button>`);
  if(st.kind)L.push(`<button class="acb" data-acsneak="${k}" ${st.sneakOk?"":"disabled"}>Lẻn vào ${oddsChip(word(accSneakO(k)))}<i>${t} khắc${risk?` · bắt: Danh ${accSneakPen(k).danh}`:""}</i></button>`);
  return L.length?`<span class="macts">${L.join("")}</span>`:""};
-accSneakLine=function(k,tc){return `${word(accSneakO(k))} · tốn: ${tc+1} khắc · thành: vào được${j77When(tc+1)} · hỏng: ${accSneakPen(k).txt}`};
-accSneak=function(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=travel(S.place,k);if(!dayFit(tc+1))return;const nm=accName(k);const o=accSneakO(k);spend(1);
+accSneakLine=function(k,tc){return `${word(accSneakO(k))} · tốn: ${tc+BAL.btn.accSneak.k} khắc · thành: vào được${j77When(tc+1)} · hỏng: ${accSneakPen(k).txt}`};
+accSneak=function(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=travel(S.place,k);if(!dayFit(tc+BAL.btn.accSneak.k))return;const nm=accName(k);const o=accSneakO(k);spend(BAL.btn.accSneak.k);
  if(roll(o)){accGrant(S,k);log(`Lẻn vào ${nm} trót lọt.`);window.__accSilent=0;j77In(k);if(S.place!==k)render();return}
  const P=accSneakPen(k);const r0=S.rank;spend(tc);apply({danh:P.danh});log(`<span class="r">Lẻn vào ${nm}, bị thị vệ bắt được: Danh ${P.danh}.</span>`);punish(S,`tự tiện lẻn vào ${nm}`,P.sev);
  Q.push({t:"Bị bắt",h:`<p>Thị vệ ${nm} bắt được ngươi ở cửa hông. Chuyện truyền khắp lục cung.</p><p class="r">Danh ${P.danh} · ${S.rank<r0?`bị giáng xuống ${RANKS[S.rank].n}`:S.confined?`cấm túc ${S.confined} tháng`:"bị phạt"}</p>`});showModal();render()};
@@ -211,8 +211,8 @@ seeBtn=function(v){if(!v||v===S||!v.alive||v.out||together(S,v)||!locKnown(v))re
 /* hard-lock extra way in: ask a eunuch to lead her in (bạc), for the Emperor's halls */
 function accLeadO(k){return od(BAL.odb.j77.odAccLeadO+(S.danh||0)/8+(typeof mm==="function"?mm():0))}
 function accLeadCost(){return BAL.sneak.lead}
-function accLead(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=travel(S.place,k);if(!dayFit(tc+1)||S.bac<accLeadCost())return;const nm=accName(k);
- const o=accLeadO(k);/* odds read before the spend (shown-odds r2) */spend(1);/* review ag-all-2 r2 A5 (OD 17/11 ~17:10Z (1)): the eunuch's bạc only when he leads her in */if(roll(o)){apply({bac:-accLeadCost()});accGrant(S,k);log(`Nhờ thái giám dẫn vào ${nm}: được dẫn vào (Bạc -${accLeadCost()}).`);j77In(k);if(S.place!==k)render();return}
+function accLead(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=travel(S.place,k);if(!dayFit(tc+BAL.btn.accLead.k)||S.bac<accLeadCost())return;const nm=accName(k);
+ const o=accLeadO(k);/* odds read before the spend (shown-odds r2) */spend(BAL.btn.accLead.k);/* review ag-all-2 r2 A5 (OD 17/11 ~17:10Z (1)): the eunuch's bạc only when he leads her in */if(roll(o)){apply({bac:-accLeadCost()});accGrant(S,k);log(`Nhờ thái giám dẫn vào ${nm}: được dẫn vào (Bạc -${accLeadCost()}).`);j77In(k);if(S.place!==k)render();return}
  log(`Nhờ thái giám dẫn vào ${nm}: hắn không dám nhận bạc, từ chối.`);Q.push({t:"Không được dẫn vào",h:`<p>Thái giám đẩy gói bạc lại, lắc đầu: “Không có khẩu dụ, nô tài không dám.”</p>`});showModal();render()}
 /* the closed-place card gains the eunuch and the 'chờ được triệu' line */
 (function(){const c0=j77Card;j77Card=function(k,empty){const n0=Q.length;c0.apply(this,arguments);try{if(empty||Q.length===n0)return;const m=Q[Q.length-1];const a=accessOf(S,k);if(!a.lead)return;
@@ -220,7 +220,7 @@ function accLead(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=t
   if(!ACC_ETQ.lead){m.h+=`<p class="past">Tự ý vào là tội nặng. Hoặc chờ được triệu.</p>`;showModal();return}
   if(!m.opts)m.opts=[{n:"Thôi",fx:{},x:""}],m.btn=undefined;
   const ok=dayFit(tc+1)&&S.bac>=accLeadCost();
-  if(ok)m.opts.splice(Math.max(0,m.opts.length-1),0,{n:"Nhờ thái giám dẫn vào",fx:{},x:`${word(accLeadO(k))} · tốn: ${tc+1} khắc · thành: được vào${j77When(tc+1)}, Bạc -${accLeadCost()} · hỏng: không mất bạc`,go:()=>setTimeout(()=>accLead(k),0)});
+  if(ok)m.opts.splice(Math.max(0,m.opts.length-1),0,{n:"Nhờ thái giám dẫn vào",fx:{},x:`${word(accLeadO(k))} · tốn: ${tc+BAL.btn.accLead.k} khắc · thành: được vào${j77When(tc+BAL.btn.accLead.k)}, Bạc -${accLeadCost()} · hỏng: không mất bạc`,go:()=>setTimeout(()=>accLead(k),0)});
   else m.h+=`<p class="past">Nhờ thái giám dẫn vào: ${!dayFit(tc+1)?j77Bound(tc+1):`cần ${accLeadCost()} bạc (có ${S.bac})`}.</p>`;
   m.h+=`<p class="past">Hoặc chờ được triệu.</p>`;showModal()}catch(e){}}})();
 /* map tiles: a palace whose chủ vị outranks her shows the greeting in its price */

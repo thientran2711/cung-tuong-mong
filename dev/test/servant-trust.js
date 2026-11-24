@@ -17,8 +17,8 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
  const R=await page.evaluate(()=>{const out=[];const ok=(c,m)=>out.push([!!c,m]);const B=BAL.svt;const R0=Math.random;
   const B0=JSON.parse(JSON.stringify(B));const eyes0=window.eyes,tell0=window.npcTell,net0=window.netIs;
   /* fix r1: «seen» = a real witness only (svtSeen); forcing it = her informants (eyes) at a sure roll; not seen = no witness of any kind */
-  const force=(rf,lk,sn)=>{B.ref.min=B.ref.max=rf?100:0;B.leak.base=lk?999:-999;for(const k of ['near','eyeB','talk','tell'])B.seen[k]=sn?999:-999;window.eyes=sn?()=>5:()=>0;Math.random=()=>.01};
-  const unforce=()=>{Object.assign(B.ref,B0.ref);Object.assign(B.leak,B0.leak);Object.assign(B.seen,B0.seen);window.eyes=eyes0;window.npcTell=tell0;window.netIs=net0;Math.random=R0};
+  const force=(rf,lk,sn,g)=>{B.npcGreet.min=B.npcGreet.max=g?100:0/* d-followups-1: an NPC greets first only when asked (g) */;B.ref.min=B.ref.max=rf?100:0;B.leak.base=lk?999:-999;for(const k of ['near','eyeB','talk','tell'])B.seen[k]=sn?999:-999;window.eyes=sn?()=>5:()=>0;Math.random=()=>.01};
+  const unforce=()=>{Object.assign(B.npcGreet,B0.npcGreet);Object.assign(B.ref,B0.ref);Object.assign(B.leak,B0.leak);Object.assign(B.seen,B0.seen);window.eyes=eyes0;window.npcTell=tell0;window.netIs=net0;Math.random=R0};
   const noNum=t=>!/[0-9%]/.test(String(t).replace(/<[^>]*>/g,''));
   // (1) tables
   for(const k of ['ref','seen','tin','rel','leak','greet','npc'])ok(B[k]&&typeof B[k]==='object','BAL.svt.'+k);
@@ -68,6 +68,17 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
   sv.svtK=null;const p6=tinOf(sv);svtPeer(su,sv,'chat',false);ok(tinOf(sv)===p6,'the colleague turned her cold (no engagement) → no trust effect');
   sv.svtK=null;const p7=tinOf(sv);AS_DO.gift(su,u,{t:sv},true);ok(tinOf(sv)===Math.max(0,p7-B.tin.gift),'jagstaff «Biếu quà» on another house\'s servant: her master may come to know');
   window.knAt=()=>'same';S.svtG=null;const o7=oan(v,su);force(0,0,0);svtPeer(su,sv,'gift',false);ok(oan(v,su)>o7,'a servant who skips greeting the master standing there → bất kính (oán '+o7+'→'+oan(v,su)+')');
+  // d-followups-1 item 2 (law 1): an NPC servant greets the other master first (its nết, inside its own tick: svtPeer) → no bất kính; skips → bất kính (the ONE svtEtq)
+  S.svtG=null;const o8=oan(v,su);force(0,0,0,1);svtPeer(su,sv,'gift',false);ok(oan(v,su)===o8&&svtGreeted(su,v),'an NPC servant who greets the master standing there first → no bất kính (odds by nết, e.g. '+svtNpcGreetO(su)+')');
+  S.svtG=null;force(0,0,0,0);const o9=oan(v,su),k9=SVT.stat.npcSkip||0;svtPeer(su,sv,'gift',false);ok(oan(v,su)>o9&&(SVT.stat.npcSkip||0)>k9,'… one who skips it → bất kính, the same rule as hers');
+  S.svtG=null;force(0,0,0,0);AS_DO.greet(su,u,{t:v},true);const o10=oan(v,su);svtPeer(su,sv,'gift',false);ok(svtGreeted(su,v)&&oan(v,su)===o10,'jagstaff «greet» (the mirror of her «Hành lễ thỉnh an») is the greeting of this buổi');
+  ok(B0.npcGreet&&B0.npcGreet.min<B0.npcGreet.max&&B0.npcGreet.base>B0.npcGreet.min,'NPC greeting odds from BAL.svt.npcGreet (law 4)');
+  // d-followups-1 item 4 (law 7 wording): the after-line names the one who CAME, never «ngươi / X tìm gặp Y» when Y came to X
+  window.knAt=(id)=>'p_'+id;force(0,0,1);mine.svtK=null;su.svtK=null;const rA=svtPeer(su,mine,'chat',true);
+  ok(new RegExp(su.name+'[^.]*bắt chuyện với '+mine.name).test(rA)&&new RegExp(su.name+' tìm gặp '+mine.name).test(rA)&&!new RegExp(mine.name+'[^.;]*tìm gặp '+su.name).test(rA),'another house\'s servant came to HER servant: both lines say '+su.name+' came: '+rA.replace(/<[^>]*>/g,'').slice(0,260));
+  mine.svtK=null;sv.svtK=null;const rB=svtPeer(mine,sv,'chat',true);
+  ok(new RegExp(mine.name+'[^.]*tìm gặp '+sv.name).test(rB)&&new RegExp(mine.name+' lén sang bắt chuyện với '+sv.name).test(rB)&&!new RegExp(sv.name+'[^.]*bắt chuyện với '+mine.name).test(rB),'HER servant went to another house: both lines say '+mine.name+' went: '+rB.replace(/<[^>]*>/g,'').slice(0,260));
+  {const fr=sv;fr.svtK=null;const r3=svTouch(S,fr,'friend',undefined,fr);ok(!/ngươi tìm gặp/.test(r3)&&(!r3||new RegExp(fr.name+' tìm gặp ngươi').test(r3)),'a friend of another house came to HER (j42 srvFriendTip): «'+fr.name+' tìm gặp ngươi», never «ngươi tìm gặp»: '+r3.replace(/<[^>]*>/g,'').slice(0,160))}
   unforce();window.knAt=knAt0;
   // bất kính size (fix r1 trim): one ungreeted talk with a higher master's servant stays inside the single-slight band
   ok(Math.round(B.greet.oan*B.greet.up*2.1)<=BAL.svt.greet.oan*3,'bất kính worst case ≈ '+Math.round(B.greet.oan*B.greet.up*2.1)+' oán (was 25)');
@@ -79,6 +90,7 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
   unforce();window.eyes=()=>3;ok(svtSeenO(S,v,'bribe')<svtSeenO(S,v,'talk'),'covert acts are seen less ('+svtSeenO(S,v,'bribe')+' < '+svtSeenO(S,v,'talk')+')');window.eyes=eyes0;
   // law 1 bất kính toward her
   S.svtG=null;const om=oan(S,v);mine.svtK=null;force(1,0,0);r=svTalk(v,mine);ok(oan(S,v)>om&&/bất kính/.test(r),'an NPC skips greeting her → her oán rises, told after');
+  S.svtG=null;mine.svtK=null;force(1,0,0,1);const om2=oan(S,v);r=svTalk(v,mine);ok(oan(S,v)===om2&&!/bất kính/.test(r)&&svtGreeted(v,S),'d-followups-1: an NPC mistress who greets her first (greetName) → no bất kính, like her own greeting');
   window.knAt=knAt0;
   // (7) whole family wired
   ok(/svTouch/.test(String(bribeServ))&&/svTouch/.test(String(threatServ))&&/svTouch/.test(String(tmTake)),'bribeServ / threatServ / tmTake reach svTouch');
@@ -102,6 +114,8 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
   Q.length=0;srvInit();Q.length=0;const M=srvM();ok(isSrv()&&!!M,'cung-nữ life');const x=allServ().find(y=>ownerOf(y)&&ownerOf(y)!==M&&!sameHouse(ownerOf(y),M));ok(!!x,'a colleague of another house');
   if(x){const O=ownerOf(x);S.srv.af[x.sid]=60;
    window.knAt=()=>'same';S.svtG=null;const oa=oan(O,S);force(0,0,0);srvStaffAct('gift',x);ok(oan(O,S)>oa&&/bất kính/.test(S.logs[0]||''),'cung nữ gives to another house\'s maid with that master right there, ungreeted → bất kính: '+(S.logs[0]||'').replace(/<[^>]*>/g,'').slice(0,120));
+   {S.svtG=null;x.svtK=null;let g=null;try{g=srvTalk({sk:O.queen?'hh':'rv',ref:{id:O.id}}).find(a=>a.n==='Hành lễ thỉnh an')}catch(e){}const u0=used,b0=S.bac;if(g)g.run();S.bac=Math.max(S.bac||0,999);const ob=oan(O,S),nl=(S.logs||[]).length;force(0,0,0);const did=srvStaffAct('gift',x);
+    ok(!!g&&did&&(S.logs||[]).length>nl&&svtGreeted(S,O)&&oan(O,S)===ob&&!/bất kính/.test(S.logs[0]||''),'d-followups-1: cung nữ greets that master first («Hành lễ thỉnh an») → no bất kính (the same greeting as an NPC servant\'s): '+(S.logs[0]||'').replace(/<[^>]*>/g,'').slice(0,100));used=u0;S.bac=b0/* the next checks keep their khắc and bạc */}
    window.knAt=(id)=>'p_'+id;force(0,0,1);x.svtK=null;S.svtK=null;const tx=tinOf(x),ts=S.tin;srvStaffAct('chat',x);ok(tinOf(x)<tx&&S.tin<ts,'her chat seen: the colleague\'s master AND her own master trust less ('+tx+'→'+tinOf(x)+', Chủ tin '+ts+'→'+S.tin+')');
    ok(noNum((S.logs[0]||'').replace(/<[^>]*>/g,'').replace(/^T\d+\/\d+/,'').replace(/ — [^—]*→ ta:.*$/,'')),'her log line in words: '+(S.logs[0]||'').replace(/<[^>]*>/g,'').slice(0,160));
    const asker=(O.staff||[]).find(y=>y!==x)||x;const d=mkP('svtAsk',{s:asker.sid});ok(!!d&&d.o.length===2&&!d.o.some(o=>/[0-9%]/.test(o.n+o.x)),'«Hỏi chuyện» reaches HER: one kit dilemma, two options in words');

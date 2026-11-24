@@ -2234,5 +2234,6 @@ Object.assign(BAL,{svt:{on:1,
  rel:{talk:6,bribe:12,threat:10,tm:12,plot:12,friend:3,chat:3,gift:2,ask:6},
  leak:{base:5,loyK:.3,talk:20,greed:10,loyal:-20,ev:1},
  greet:{oan:5,aff:4,up:1.4,dn:.5},
+ npcGreet:{base:70,talk:-20,loyal:15,timid:10,min:20,max:95},/* d-followups-1: odds an NPC servant greets the other master before an open act with her servant (jsvt svtNpcGreet): base + nết (Nhiều lời −, Trung / Nhát +), clamped */
  npc:{talk:25,srvAsk:50},
  k:2/* khắc the open talk «Hỏi chuyện» takes (her button) */}});

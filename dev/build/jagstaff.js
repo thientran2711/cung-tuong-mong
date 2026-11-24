@@ -112,6 +112,7 @@ function asRun(s,o){const m=ownerOf(s);if(!m)return"";const A=SRVA[o.sk];asC(s,o
   return r}
 function asOut(s,why){const o=ownerOf(s);if(o&&o.staff){const i=o.staff.indexOf(s);if(i>=0)o.staff.splice(i,1)}s.out=why||1;ASN.out=(ASN.out||0)+1}
 const AS_DO={
+ greet(s,m,o){/* d-followups-1 (law 1): the mirror of her «Hành lễ thỉnh an» (j42): the consort's regard (trSrvGreet) + the greeting of this buổi (jsvt) */const v=o.t;if(v&&typeof svtGreetDo==="function")svtGreetDo(s,v);return""},
  nvp(s){/* NPC-PURPOSE G3: a bully is a servant there who bears her a grudge (her own af < 0), the worst first; none → no bullying. A friend = the one she already likes best */
   const L=allServ().filter(x=>x!==s&&ownerOf(x)!==ownerOf(s));const by=npwPick(L,x=>-(((x.af||{})[s.sid])||0));if(by&&roll(SRVA.nvp.bully)){asAp(s,SRVA.nvp.bullyC);s.bullyBy=by.sid;oanAdd(s,by,BAL.relMS.bully);return""}if(L.length){const x=npwPick(L,y=>1+Math.max(0,((s.af||{})[y.sid])||0));s.af=s.af||{};s.af[x.sid]=cl((s.af[x.sid]||0)+BAL.ag.staff.nvpAf,-100,100)}return""},
  spy(s,m,o,ok){const v=o.t;if(ok){/*evok: capped (the player's own "Lén báo tin")*/evA(v,m,SRVA.spy.ev);return v===S?`Tai mắt ${s.name} trong cung ${m.name} lén báo tin: chứng cứ +${SRVA.spy.ev}. `:""}

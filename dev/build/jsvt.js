@@ -57,7 +57,7 @@ function svtEtq(a,m,s,at){if(!svtNear(a,m,at)||svtGreeted(a,m))return"";const B=
 /* svTouch: the servant DID engage (talked / took the bạc / took the threat / became eyes): her master may come to know; the servant may let slip */
 const SVT_VERB={friend:"cho người hầu kết thân với",talk:"kéo riêng",chat:"bắt chuyện với",gift:"biếu quà",ask:"dò hỏi chuyện trong cung qua"};
 const SVT_NOLEAK={friend:1/* the friend talk carries its own chứng cứ (j10 servMonth / jagstaff chat) */,chat:1,gift:1};
-function svTouch(a,s,kind,at){if(!SVT.on()||!a||!s)return"";let m=null;try{m=s===S?(svtSrvMe()?srvM():null)/* law 1: she herself, on the cung-nữ road, is another's servant */:ownerOf(s)}catch(e){}const A=svtWho(a);if(!m||!A||m===A||svtHouse(a)===m)return"";
+function svTouch(a,s,kind,at,mv){if(!SVT.on()||!a||!s)return"";const sMv=mv===s;/* d-followups-1 (wording, law 7): mv = who MOVED (came to the other); the after-line names the one who came, never «ngươi tìm gặp X» when X came to her */let m=null;try{m=s===S?(svtSrvMe()?srvM():null)/* law 1: she herself, on the cung-nữ road, is another's servant */:ownerOf(s)}catch(e){}const A=svtWho(a);if(!m||!A||m===A||svtHouse(a)===m)return"";
  try{if(typeof sameHouse==="function"&&sameHouse(svtHouse(a),m))return""}catch(e){}if(svtGuest(A,m))return"";
  const k=svtId(a)+"|"+(typeof j95key==="function"?j95key():"");if(s.svtK===k+"|"+kind)return"";s.svtK=k+"|"+kind;/* one effect per asker, servant, kind and buổi (wrappers never stack) */
  SVT.stat.touch[kind]=(SVT.stat.touch[kind]||0)+1;const B=BAL.svt;let r="";
@@ -66,19 +66,27 @@ function svTouch(a,s,kind,at){if(!SVT.on()||!a||!s)return"";let m=null;try{m=s==
  const W=svtSeen(a,m,kind,at,s);
  if(W){SVT.stat.seen++;SVT.stat.how=SVT.stat.how||{};SVT.stat.how[W.how]=(SVT.stat.how[W.how]||0)+1;tinAdd(s,-(B.tin[kind]||B.tin.talk));const rl=B.rel[kind]||B.rel.talk;affAdd(m,A,-rl);if(a!==A)affAdd(m,a,-rl)/* the servant who went behind her too */;
   const how=SVT_HOW[W.how](m,W.w);
-  if(s===S)r+=`${how}: ${svtNm(a)} lén tìm gặp ngươi; từ đó ${m.name} sinh nghi ngươi. `;
-  else if(m===S)r+=`${how}: ${svtNm(a)} ${SVT_VERB[kind]||"lén tìm gặp"} ${s.name}${kind==="talk"?" ra nói chuyện":""}, ${s.name} không từ chối${leak?", nghe đâu còn lỡ miệng chuyện trong cung ngươi":""}. Từ đó ngươi bắt đầu nghi ${s.name}. `;
-  else if(a===S||A===S)r+=`${how}: ${a===S?"ngươi":svtNm(a)} tìm gặp ${s.name}; từ đó ${m.name} sinh nghi cả ${a===S?"ngươi":"người ấy"} lẫn ${s.name}. `}
+  if(s===S)r+=sMv?`${how}: ngươi lén tìm gặp ${svtNm(a).replace(/,$/,"")}; từ đó ${m.name} sinh nghi ngươi. `:`${how}: ${svtNm(a)} lén tìm gặp ngươi; từ đó ${m.name} sinh nghi ngươi. `;
+  else if(m===S)r+=sMv?`${how}: ${s.name} lén ${kind==="chat"?"sang bắt chuyện với":"tìm gặp"} ${svtNm(a).replace(/,$/,"")}${leak?", nghe đâu còn lỡ miệng chuyện trong cung ngươi":""}. Từ đó ngươi bắt đầu nghi ${s.name}. `
+   :`${how}: ${svtNm(a)} ${SVT_VERB[kind]||"lén tìm gặp"} ${s.name}${kind==="talk"?" ra nói chuyện":""}, ${s.name} không từ chối${leak?", nghe đâu còn lỡ miệng chuyện trong cung ngươi":""}. Từ đó ngươi bắt đầu nghi ${s.name}. `;
+  else if(a===S||A===S)r+=sMv?`${how}: ${s.name} tìm gặp ${a===S?"ngươi":svtNm(a).replace(/,$/,"")}; từ đó ${m.name} sinh nghi cả ${a===S?"ngươi":"người ấy"} lẫn ${s.name}. `
+   :`${how}: ${a===S?"ngươi":svtNm(a)} tìm gặp ${s.name}; từ đó ${m.name} sinh nghi cả ${a===S?"ngươi":"người ấy"} lẫn ${s.name}. `}
  return r}
 /* fix r1 (law 11 + law 1 + OD ~07:58Z «Cùng là cung nữ … ít nhất cũng phải chạy lại chào hỏi cái vị chủ tử đó»): servant ↔ servant ACROSS houses — her
    cung-nữ road (j42 srvStaffAct + place card «sv»), the NPC servants' own Đồng liêu acts (jagstaff chat / gift / ask) — one call: the greeting rule for an
    open act (always, whatever the outcome), then svTouch when the colleague engaged (ok). A talk is two-way: each servant's master may come to know. */
+/* d-followups-1 (law 1, OD ~07:58Z «ít nhất cũng phải chạy lại chào hỏi cái vị chủ tử đó»): an NPC servant greets the other master first, the same act as
+   her «Hành lễ thỉnh an» (j42 / jagstaff greet: trSrvGreet gain + the greeting of this buổi, svtMet) — or skips it and the open act is bất kính (svtEtq), the
+   ONE rule for her and every NPC. Her own greeting is her choice (her greet card); an NPC's is its nết (BAL.svt.npcGreet) inside its own tick. */
+function svtGreetDo(a,v){try{const gN=typeof trSrvGreet==="function"?trSrvGreet(v):0;if(gN)affAdd(v,a,gN)}catch(e){}svtMet(a,v)}
+function svtNpcGreetO(s){const B=BAL.svt.npcGreet;return Math.round(Math.max(B.min,Math.min(B.max,B.base+nq(s,"talk",B.talk)+nq(s,"loyal",B.loyal)+nq(s,"timid",B.timid))))}
+function svtNpcGreet(a,o,at){if(!a||a===S||!o||!svtNear(a,o,at)||svtGreeted(a,o))return;if(roll(svtNpcGreetO(a))){if(svtIsSv(a))svtGreetDo(a,o);else{try{greetName(a,o)}catch(e){}svtMet(a,o)}/* an NPC mistress greets with the ONE greeting function (jgreet) */SVT.stat.npcGreet=(SVT.stat.npcGreet||0)+1}else SVT.stat.npcSkip=(SVT.stat.npcSkip||0)+1}
 function svtPeer(a,x,kind,ok,at){if(!SVT.on()||!a||!x||a===x)return"";let o=null;try{o=x===S?(svtSrvMe()?srvM():null):ownerOf(x)}catch(e){}const h=svtHouse(a);if(!o||!h||o===h)return"";
  try{if(typeof sameHouse==="function"&&sameHouse(h,o))return""}catch(e){}if(svtGuest(svtWho(a),o))return"";SVT.stat.peer=(SVT.stat.peer||0)+1;
- let r=svtEtq(a,o,x,at);if(!ok)return r;r+=svTouch(a,x,kind,at);if(kind==="chat")r+=svTouch(x,a,kind,at)/* she talked back: her own master may hear of it too */;return r}
+ svtNpcGreet(a,o,at);let r=svtEtq(a,o,x,at);if(!ok)return r;r+=svTouch(a,x,kind,at,a);if(kind==="chat")r+=svTouch(x,a,kind,at,a)/* she talked back: her own master may hear of it too; a is still the one who came (mv) */;return r}
 /* svTalk: the OPEN talk («Hỏi chuyện» with a servant of another house) — her button and the NPC's monthly deed are this one function */
 function svTalk(a,s){if(!SVT.on()||!a||!s)return"";let m=null;try{m=ownerOf(s)}catch(e){}if(!m||m===a)return"";if(svtGuest(a,m))return"";SVT.stat.talk++;
- let r=svtEtq(a,m,s);
+ svtNpcGreet(a,m);let r=svtEtq(a,m,s);
  if(roll(svtRefO(s))){SVT.stat.refuse++;/* refused: nothing changes (OD ~08:12Z «nếu như mà họ từ chối thì mình ok, không có gì hết») */
   return r+(a===S?`${s.name} cúi đầu thưa: phận tôi tớ cung ${m.name}, không dám nói chuyện riêng với người cung khác. `:"")}
  if(a===S){let t="";try{t=learnTrait(m,`${s.name} kể`,1)}catch(e){}r+=t?`${s.name} chịu nói chuyện, kể rằng chủ tử ${m.name} là người ${String(t).toLowerCase()}. `:`${s.name} chịu nói chuyện, nhưng chỉ kể những chuyện ai cũng biết. `}
@@ -117,4 +125,4 @@ if(typeof PEND==="object")PEND.svtAsk=pp=>{if(!svtSrvMe()||S.dead)return null;co
     S.srv.intel=(S.srv.intel||[]).concat([A.id]);log(`Ngươi trò chuyện cùng ${a.name}, nghe được chuyện trong cung ${A.name}: có tin để bẩm chủ.${r?" "+r:""}`)}},
   {n:"Cúi đầu từ chối",fx:{},x:"giữ phận",go:()=>{const r=svtEtq(a,m,S);log(`Ngươi cúi đầu thưa: phận tôi tớ cung ${m.name}, không dám nói chuyện riêng.${r?" "+r:""}`)}}]}};
 (function(){if(typeof servMonth!=="function")return;const m0=servMonth;servMonth=function(){let ev=m0.apply(this,arguments)||"";try{ev+=svtMonth()}catch(e){}return ev}})();
-Object.assign(window,{SVT,svTouch,svTalk,svtPeer,svtSeen,svtHouse,svtWrap,svtRefO,svtSeenO,svtLeakO,svtEtq,svtMonth,svtNear});
+Object.assign(window,{SVT,svTouch,svTalk,svtPeer,svtGreetDo,svtNpcGreet,svtNpcGreetO,svtSeen,svtHouse,svtWrap,svtRefO,svtSeenO,svtLeakO,svtEtq,svtMonth,svtNear});

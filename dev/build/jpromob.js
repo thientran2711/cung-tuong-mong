@@ -70,7 +70,7 @@ function pbSungCut(p){const B=BAL.promoR.sp.sung,tr=[].concat((S.emp&&S.emp.trai
  return Math.round(RANKS[Math.min(RANKS.length-1,rkOf(p)+1)].s+add)}
 function pbThCut(){const B=BAL.promoR.sp.th;const a=S.thO&&S.thO.arch;return B.cut[a]!=null?B.cut[a]:B.def}
 function pbHhCut(q){const B=BAL.promoR.sp.hh;const t=pbTemper(q,B.cut);return t?B.cut[t]:B.def}
-function pbHhOf(p){return Math.round(p===S?(S.hh||0):(p.hh||0))}
+function pbHhOf(p){return Math.round(p===S?(S.hh||0):(typeof hhGet==="function"?hhGet(p)/* j24 hhBind: v.hh IS hhGet(v); read it straight so a co-op guest's copy (a plain lens value, host-side) gives the same number (d-followups-1) */:(p.hh||0)))}
 function pbEmpNet(){const tr=[].concat((S.emp&&S.emp.traits)||[]);return tr.map(t=>(typeof ETRAITS!=="undefined"&&ETRAITS[t]?ETRAITS[t][0]:t).toLowerCase()).join(", ")}
 /* grant one special exam: src f/m (birth), sung, th, hh. Returns the line (her: log text; NPC: news). */
 function pbGrant(p,src,o){o=o||{};if(!pbCan(p))return"";const me=p===S;const e=exS(p);
@@ -217,7 +217,12 @@ function pbKnown(p){if(!p||p===S)return true;try{return (typeof knows!=="functio
 function pbWho(p){return p===S?"ngươi":typeof j78who==="function"?j78who(p):p.name}
 
 /* ---------- (1) her nomination ---------- */
-function pbHhMeList(){try{if(!S||!pbLive(S)||rkOf(S)<7||!exOn()||pbGuest()||(typeof isSrv==="function"&&isSrv()))return[];const SP=BAL.promoR.sp,ch=pbHhCut(S),qk="hh:"+key(S),A=pbA();
+/* d-followups-1 (law 1): a co-op GUEST who is the Hoàng hậu nominates too: her pick rides as an intent (jcoopthinf reg8 "pbHhMeDo"), the host applies it */
+/* the once-key of HER nominations: "hh:<her key>" (solo / the host seat, as before); a co-op guest seat gets its own (key(S) is "me" on both seats,
+   so the host's and the guest's nominations no longer share one once-per-life count — law 1, d-followups-1) */
+function pbHhMeKey(){let c="";try{if(window.COOPW&&COOPW.on)c=COOPW.ctx||COOPW.seat||""}catch(e){}return "hh:"+key(S)+(c&&c!=="a"?"@"+c:"")}
+function pbHhMeCoop(){try{const F=COOPW.thin&&COOPW.thin.F;return !!(F&&F.R&&F.R.pbHhMeDo&&F.on(8))}catch(e){return false}}
+function pbHhMeList(){try{if(!S||!pbLive(S)||rkOf(S)<7||!exOn()||(pbGuest()&&!pbHhMeCoop())||(typeof isSrv==="function"&&isSrv()))return[];const SP=BAL.promoR.sp,ch=pbHhCut(S),qk=pbHhMeKey(),A=pbA();
  return liveRivals(false).filter(v=>!v.coop&&pbCan(v)&&!v.confined&&!pbOpen(v)&&exS(v).to<=SP.hh.maxTo&&(pbS(v).hh[qk]||0)<SP.hh.life&&pbHhOf(v)>=ch&&pbRowsOk(v)&&!(pbRoadDone(v)&&pbKyAt(A)))
   .sort((a,b)=>pbHhOf(b)-pbHhOf(a)).slice(0,SP.meMax)}catch(e){console.error("pbHhMeList",e);return[]}}
 function pbHhMeOpts(L){const C=BAL.promoR.sp.cost;return L.map(v=>{const n=L.length-1;
@@ -226,7 +231,7 @@ function pbHhMeOpen(){const L=pbHhMeList();if(!L.length){log("Lúc này chưa c�
  const rows=L.map(v=>[pbWho(v),`lên ${exRk(exS(v).to)} · ${pbKnown(v)?`được lòng Hoàng hậu ${pbHhOf(v)}, cần ${ch}`:`được lòng Hoàng hậu đủ mức`}`]);
  Q.push({t:"Hoàng hậu đề cử",who:pMe(),h:`<p>Ngươi chủ lục cung, được đề cử một phi tần thi riêng tấn phong ngoài kỳ. Mỗi người chỉ được ngươi đề cử một lần trong đời. Người được chọn nợ ngươi một ân; người có tên mà không được chọn sẽ oán ngươi.</p>${kitRows(rows)}`,opts:pbHhMeOpts(L)});try{showModal()}catch(e){}}
 function pbHhMeDo(v,others){const SP=BAL.promoR.sp,C=SP.cost;if(!pbHhMeList().includes(v)){log(`${pbWho(v)} không còn đủ điều kiện để đề cử.`);return}
- const s=pbS(v),qk="hh:"+key(S);s.hh[qk]=(s.hh[qk]||0)+1;pbGrant(v,"hh",{cut:pbHhCut(S),q:S,me:1});
+ const s=pbS(v),qk=pbHhMeKey();s.hh[qk]=(s.hh[qk]||0)+1;pbGrant(v,"hh",{cut:pbHhCut(S),q:S,me:1});
  try{q72DebtAdd(q72A("rv",v.id),C.hhOwe)}catch(x){}affAdd(v,S,C.meAff);for(const o of others)oanAdd(o,S,C.mePassOan);
  window.__pbN=window.__pbN||{};window.__pbN.hhMe=(window.__pbN.hhMe||0)+1;
  log(`<b class="g">Ngươi đề cử ${pbWho(v)} lên ${exRk(exS(v).to)}</b>: Nội vụ phủ cho nàng một lần thi riêng ngoài kỳ. ${pbWho(v)} nợ ngươi một ân.${others.length?` ${others.length} người không được đề cử oán ngươi.`:""}`)}

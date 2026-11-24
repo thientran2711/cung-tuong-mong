@@ -111,11 +111,11 @@ function econSell(p,ix){const e=p.inv&&p.inv[ix];if(!e)return"";const no=econNo(
 sellItem=function(p,ix){return econSell(p,ix)};
 window.econSellable=econSellable;window.econPrice=econPrice;window.econRisk=econRisk;window.econSell=econSell;
 /* her own sale from a panel: 1 khắc */
-function econSellUI(ix){if(!S||S.dead||!can(1))return;const r=econSell(S,ix);if(!r)return;spend(1);log(r);render()}
+function econSellUI(ix){if(!S||S.dead||!can(BAL.btn.econSell.k))return;const r=econSell(S,ix);if(!r)return;spend(BAL.btn.econSell.k);log(r);render()}
 window.econSellUI=econSellUI;if(typeof wrapR==="function")wrapR("econSellUI",()=>"Bán đồ");
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-econsell]");if(!b||b.disabled)return;ev.stopPropagation();try{if(Q.length)closeModal()}catch(x){}econSellUI(+b.dataset.econsell)},true);
 function econSellBtn(ix){const e=S.inv[ix];const no=econNo(S,e),R=econRisk(S,e),pr=econPrice(S,e);
- return pbtn(`data-econsell="${ix}"`,e.wk||!(window.WD_ITEMS&&WD_ITEMS[e.k])?"Bán cho Nội vụ phủ":"Bán lén",`tốn: 1 khắc · thành: Bạc +${pr}${R?` · kèm: ${R.why}: ${chanceW(R.pct)}`:""}`,no||whyTime(1))}
+ return pbtn(`data-econsell="${ix}"`,e.wk||!(window.WD_ITEMS&&WD_ITEMS[e.k])?"Bán cho Nội vụ phủ":"Bán lén",`tốn: ${BAL.btn.econSell.k} khắc · thành: Bạc +${pr}${R?` · kèm: ${R.why}: ${chanceW(R.pct)}`:""}`,no||whyTime(BAL.btn.econSell.k))}
 window.econSellBtn=econSellBtn;
 
 /* ---------- Tư trang: each work is its own bag item (tab Tác phẩm) with its own panel ---------- */
@@ -125,10 +125,10 @@ kinvGroups=function(){const vis=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h&&IT[e
   if(g)g.n++;else G.push({k:e.k,t:e.by==="me"?e.t:null,w:e.w,i,n:1,from:e.from,wk:e.wk||null})}return G};
 (function(){const k0=kinvItems;kinvItems=function(){return k0.apply(this,arguments).map(x=>{const e=x.g&&x.g.i>=0?S.inv[x.g.i]:null;if(!e||!e.wk)return x;const w=e.wk;let a=null;try{a=itemArt(e)}catch(y){}
   return Object.assign(x,{cat:"tp",name:w.n,grade:econWkGrade(w),src:a?a.src:x.src,src512:a?(a.src512||a.src):x.src512,tip:`${w.n} · ${KIT_GRADE[econWkGrade(w)].n}`})})}})();
-function econWkOpen(x){const i=x.g.i,e=S.inv[i],w=e.wk,ar=ARTS.find(y=>y.k===w.a);const gr=KIT_GRADE[econWkGrade(w)];const t1=whyTime(1),t2=whyTime(2);
- const B=[pbtn(`data-wk="give" data-ix="${i}"`,"Dâng, tặng",`tốn: 2 khắc · thành: chọn người (Hoàng thượng, Thái hậu, phi tần), quý theo phẩm (${gr.n}: ${BAL.craftGift[econWkGrade(w)]})`,t2),econSellBtn(i),
-  pbtn(`data-wk="sell" data-ix="${i}"`,"Bán ra ngoài cung",`${word(wkSellO(S))} · tốn: 1 khắc · thành: Bạc +${wkSellVal(w)} · hỏng: thị vệ cửa Thần Vũ bắt gặp, Danh ${balSg(BAL.eff.j83.danhWkSell)}, mất tác phẩm`,t1)];
- if(!w.show&&w.p==null)B.push(pbtn(`data-wk="show" data-ix="${i}"`,"Bày ở yến tiệc",`tốn: 2 khắc · thành: Danh +${WSHOW[w.ti]}${w.ti===3?` · kèm: phi tần ghen +${ghenN(BAL.ghen.showTreasure)}`:""}`,t2));
+function econWkOpen(x){const i=x.g.i,e=S.inv[i],w=e.wk,ar=ARTS.find(y=>y.k===w.a);const gr=KIT_GRADE[econWkGrade(w)];const t1=whyTime(BAL.btn.wkSell.k),t2=whyTime(BAL.btn.wkGive.k);
+ const B=[pbtn(`data-wk="give" data-ix="${i}"`,"Dâng, tặng",`tốn: ${BAL.btn.wkGive.k} khắc · thành: chọn người (Hoàng thượng, Thái hậu, phi tần), quý theo phẩm (${gr.n}: ${BAL.craftGift[econWkGrade(w)]})`,t2),econSellBtn(i),
+  pbtn(`data-wk="sell" data-ix="${i}"`,"Bán ra ngoài cung",`${word(wkSellO(S))} · tốn: ${BAL.btn.wkSell.k} khắc · thành: Bạc +${wkSellVal(w)} · hỏng: thị vệ cửa Thần Vũ bắt gặp, Danh ${balSg(BAL.eff.j83.danhWkSell)}, mất tác phẩm`,t1)];
+ if(!w.show&&w.p==null)B.push(pbtn(`data-wk="show" data-ix="${i}"`,"Bày ở yến tiệc",`tốn: ${BAL.btn.wkShow.k} khắc · thành: Danh +${WSHOW[w.ti]}${w.ti===3?` · kèm: phi tần ghen +${ghenN(BAL.ghen.showTreasure)}`:""}`,t2));
  /* the rows = KIT §70 kitItemDetailRows (same Phẩm · Loại · Được · Lai lịch · Ghi chú as every item) */
  const rows=kitItemDetailRows({ix:i});
  kitModal({kind:"info",title:w.n,sub:"Tác phẩm tự tay",itemPic:kitItem({src:x.src512||x.src,name:"",grade:econWkGrade(w),size:"lg"}).replace('<span class="kitn"></span>',''),
