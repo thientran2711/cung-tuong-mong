@@ -1558,7 +1558,7 @@ motion4 fixes (MAIN 3 FAILs) | review/motion-design-4 | session_01V1ZZH1Y318MQY7
 | REVIEW robot-fix-cnv r1 RE-LAND (opus BIG; briefs/F-robot-fix-cnv-review.md; r1 659d2f09 re-merged on newest LIVE; the 98040f4c PASS was lost unpushed) | review/robot-fix-cnv-r1; reports/robot-fix-cnv.md | F | session_01UV1Szjz8ctXWggjwCu5NY3 | DONE PASS LAND READY e50af91a (FF from LIVE 502c48c9; pushed) | 24/11 20:08Z |
 selection-scene faults 2-11 + perf | review/selection-scene | session_01V1ZZH1gdgYpfYjzBmjLtyo | RUNNING | 2026-11-24T20:08Z (MAIN 127)
 | ROBOT-COOP FIXER #7 (opus; law1-maid-away gate, coop-tail N1–N3, save round-trip family) | review/law1-maid-away, review/robot-coop-tail, review/robot10-coop | B | session_01N1tNP3fqMhAjzz59xaXXqg | RUNNING | 24/11 20:28Z |
-save-growth (d)+(b) | review/save-growth | session_01DgYSWn2jD6dN6G4v5qkFaf | SSK e573b9b8 (reports/save-growth.md) | 24/11 20:58Z | FOREMAN E (child7)
+save-growth (d)+(b) | review/save-growth | session_01DgYSWn2jD6dN6G4v5qkFaf | SSK e573b9b8 (reports/save-growth.md) | 24/11 20:58Z | FOREMAN E (child8)
 | KIT REVIEW kit-woodskin r4 35d57ca + kit-album 716310c (sonnet) | review/kit-woodskin-r3, review/kit-album-r1 | B | session_01N1tNP5YUQmH9jDHwiUYY7g | RUNNING | 24/11 20:43Z |
 face-master03 Alluring (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-alluring.md | session_01D3E3NZd7bPaP9p5vL5dyKi | RUNNING | 24/11 21:29Z | FOREMAN D
 face-master03 Cold (ages 16/26/51/63; sonnet) | Magnific only, report reports/face-master03-cold.md | session_01D3E3NYEF9kwi8NEyWrcbuf | RUNNING | 24/11 21:29Z | FOREMAN D
@@ -1571,7 +1571,7 @@ face-master03 Sharp (ages 16/26/51/63; sonnet) | Magnific only, report reports/f
 | FACE-MASTER03 Dignified ages 16/26/51/63 (sonnet worker; briefs/D-face-master03-mass.md; 48 jobs) | Magnific only; reports/face-master03-dignified.md | D | session_01D3E3NaHn3EfaM7zRmQbD31 | DONE (60/60) | 24/11 |
 | FACE-MASTER03 COLD (sonnet worker; 15 ids x ages 16/26/51/63, age39 on hold) | Assignments/Cold_Jobs.json | D | cse_01D3E3NYEF9kwi8NEyWrcbuf | DONE | 24/11 21:31Z |
 | VIECNHO-FIX (owner bug 24/11 ~21:50Z: Việc nhờ sub-tab + person panel scroll kit + result popup Vì sao; sonnet) | review/viecnho-fix | MAIN 128 | session_01V1ZZH4XjjV9xGrojVNGZpc | RUNNING | 24/11 22:00Z |
-save-growth review | review/save-growth e573b9b8 | session_01DgYSWo2KgYDGKUVNxK99cu | PASS e573b9b8 (reports/save-growth-review.md; merge only on RE-MERGE order) | 24/11 22:05Z | FOREMAN E (child7)
+save-growth review | review/save-growth e573b9b8 | session_01DgYSWo2KgYDGKUVNxK99cu | PASS e573b9b8 (reports/save-growth-review.md; merge only on RE-MERGE order) | 24/11 22:05Z | FOREMAN E (child8)
 selection-scene r5 (successor of SELSCENE-14) | review/selection-scene | session_01V1ZZH2RPBbsHqSWXsmrmCV | RUNNING | 2026-11-24T22:05Z (MAIN 128)
 | MINIGAME-FIX (owner 22:02Z items 2+6: mini-game picture decode-first + kit intro/skip wording, sonnet) | review/minigame-fix | MAIN 128 | session_01V1ZZH17BmYP7unXApPtTph | RUNNING | 24/11 22:08Z |
 | VISITOR-FIX (owner 22:02Z items 3+4+5: visitor face/name/size, greeting by rank, no system lines in story, sonnet) | review/visitor-fix | MAIN 128 | session_01V1ZZH3EpiFUfjQmqdR8cmA | RUNNING | 24/11 22:08Z |
