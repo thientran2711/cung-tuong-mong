@@ -3027,3 +3027,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (14:57Z) SELSCENE-11 ROLLED (ea3cf4ac: co-op one shared clock 10/10, selx8 mock uploaded) → SELSCENE-12 = session_01V1ZZH2z9AygYawrPbvBU4N (opus, child of 123, depth 8); SELSCENE-11 ARCHIVED. Left: j61 key = one person (maids x34–x37), rare S.fidUsed.83 same-world, merge LIVE c6c3ca76, coop ×2 + quickcheck ×5 → SSK. selx8 mock NOT yet checked by MAIN. KK19 queue + G4 #54 title plate on event picture (kit family, review/kit-titleplate).
 - (15:00Z) ctx 31 % (308k/1M) ≥ roll line → ROLL. TAKEOVER_MAIN_124.md written.
 ## MAIN CHÍNH 123 → MAIN CHÍNH 124 HANDOVER (24/11 ~15:00Z): dev/handover/TAKEOVER_MAIN_124.md
+- (15:00Z) MAIN CHÍNH 124 = session_01V1ZZH3PtvVjeZDptRyQbj4 opened (child of 123, depth 8 = last). 123 DISABLED hourly wake trig_01PZUHbxKCeCz1rTF7t8vKUF + progress reports trig_015aC7AuGpkxNPEMxJygGN9t / trig_01EcAE2rnbrunUhEssAYJxWZ. 123 forwards anything that still arrives, then stops.
