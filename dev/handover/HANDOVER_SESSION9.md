@@ -2755,3 +2755,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - WAITING SẾP: (1) SELSCENE mock videos OK/fixes; (2) MOCK-STAGE event layout A1 vs A2 + toilette v3.4 OK; (3) no-roll acts: no odds chip vs «Rất vững»; (4) PROMO-HIST 3 gaps build/park; (5) CTM-CAL hand test (12 kinds); (6) Foreman F opened? Do not re-ask what she ruled.
 - Wake: trig_01S84CUDctuYXpDp6YD5mCqf (min 32) → 115 creates its own and disables this one. Push script pattern: /home/user/wt/hpush114.sh (copy of dev/tools/main-hpush.sh with explicit-refspec fetch).
 - (00:56Z) Opened MAIN CHÍNH 115 = session_01Rc5AsHor5CHGzQwMEuc8Po (depth 8, last). 114 stops; 115 disables trig_01S84CUDctuYXpDp6YD5mCqf.
+- (00:55Z) LC8: coop-thin-g CONFLICT (jcoopthin.js, jcoopworld.js) → B re-merge ordered; LC8 moved on to kit-mgskin.
