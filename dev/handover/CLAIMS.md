@@ -1455,7 +1455,7 @@ REVIEW promo-build 7c4116de (opus BIG; briefs/D-promo-build-review.md) | review/
 | ROBOT-COOP RUNNER U4 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U4-* | F | session_01UV1Szh9vtuLGWyG8DpJArr | RUNNING | 24/11 08:20Z |
 | ROBOT-COOP RUNNER U5 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U5-* | F | (opening) | RUNNING | 24/11 08:20Z |
 | ROBOT-COOP RUNNER U6 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U6-* | F | session_01UV1SziPWFp447pcaYdp9tB (depth 2) | RUNNING | 24/11 08:20Z |
-| ROBOT-COOP RUNNER U7 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U7-* | F | (opening) | RUNNING | 24/11 08:20Z |
+| ROBOT-COOP RUNNER U7 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U7-* | F | session_01UV1SziP6h45uycmryXVrR2 | RUNNING | 24/11 08:20Z |
 | ROBOT-COOP RUNNER U8 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U8-* | F | session_01UV1SzjsZzQJA37FcMaTxYH | RUNNING | 24/11 08:20Z |
 | ROBOT-COOP RUNNER U9 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U9-* | F | (opening) | RUNNING | 24/11 08:20Z |
 | ROBOT-COOP RUNNER U10 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U10-* | F | (opening) | RUNNING | 24/11 08:20Z |
