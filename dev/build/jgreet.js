@@ -32,7 +32,7 @@ function grGive(g,o2,rg,ro,o,side){if(rg<ro)return{y:1,w:"low"};if(grUniq(g))ret
  if(g===S&&o&&o.me!=null)return{y:o.me?1:0,w:"me"};return{y:grNet(g),w:"net",t:grTT(g),eq:rg===ro}}
 function grLearn(x,y){if(!x||!y||x===y||!S)return;try{if(x===S){if(S.known&&k61St(y)<2)k61Know(y,"",true,2)/* greet-stranger: a public name (Hoàng hậu, level 0/1) still needs face + level 2, else the gate asks "Chào hỏi" again forever */;grMet(y)}else if(y===S)npcLearn(x,S);else npcLearn(x,y)}catch(e){}}
 function grFace(x,y){if(x!==S||!S||!S.known)return;try{if(k61St(y)<1)k61Know(y,"",true,1);grMet(y)}catch(e){}}
-function grMet(y){try{if((rivals||[]).includes(y)&&y.id!=null){S.met=S.met||{};if(S.met[y.id]==null)S.met[y.id]=wk()}}catch(e){}}
+function grMet(y){try{if((rivals||[]).includes(y)&&y.id!=null){S.met=S.met||{};if(S.met[y.id]==null)k61MetSet(y)}}catch(e){}}
 /* she knows x's name / x knows hers BEFORE the greeting */
 function grKnew(x,y){try{if(x===S)return k61Named(y);return npcKnows(x,y)}catch(e){return true}}
 function greetName(a,b,o){o=o||{};const ra=grRank(a),rb=grRank(b);const ka=grKnew(b,a),kb=grKnew(a,b);

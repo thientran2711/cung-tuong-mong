@@ -17,7 +17,7 @@ const [,,PAGE,OUT,SZS]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t
    const md=document.getElementById('modal');const close=()=>{Q.length=0;md.hidden=true};close();S.bac=300;S.suc=80;S.th=Math.max(S.th||0,40);render();
    const T=s=>String(s||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
    const res={dialogs:0,options:0,withP:0,khoLuong:[],unlit:[],pBad:[],mismatch:[],steps:[0,0,0,0,0,0,0],fam:{},errs:[]};
-   const audit=(where,m)=>{if(!m||!m.opts)return;res.dialogs++;if(/Khó lường/.test(md.textContent))res.khoLuong.push(where);
+   const audit=(where,m)=>{if(!m||!m.opts)return;res.dialogs++;/* 23/11: «Khó lường» is the 3rd ladder word now — the text check is off; the unlit / p≠ / mismatch checks below carry the law */
     m.opts.forEach((o,i)=>{const bt=md.querySelector(`#mb .opt[data-m="${i}"]`);if(!bt)return;res.options++;
      const km=bt.querySelector('.kat > .kodds .kodm, .kodds .kodm');if(!km)return;const lv=+km.dataset.kodds;if(lv<0){res.unlit.push([where,T(o.n).slice(0,40)]);if(res.fam[where])res.fam[where].push(`${T(o.n).slice(0,26)}=(unlit) ${T(km.textContent)}`);return}res.steps[lv]++;
      if(typeof o.p==="number"){res.withP++;const want=KIT_ODDS.indexOf(word(oddsCl(Math.round(o.p))));if(lv!==want)res.pBad.push([where,T(o.n).slice(0,40),lv,want])}

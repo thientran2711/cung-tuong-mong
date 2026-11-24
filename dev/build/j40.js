@@ -36,7 +36,7 @@ function mindBelief(t,v,k){if(!t||t===S||!t.alive)return;const ev=(t.evm&&t.evm[
  const s=w[i][0];oanAdd(t,s,BAL.eff.j40.mindBelief_2);mindLog(t,"_wrongBelief");t.blamed=t.blamed||{};t.blamed[key(s)]=(t.blamed[key(s)]||0)+1;
  if(s===S&&roll(BAL.odb.j40.rbMindBelief+eyes(S)*8))noteAdd(t.id,`Nghe nói ${t.name} ngờ ngươi đứng sau chuyện ${ACT[k]?ACT[k].n.toLowerCase():"vừa rồi"}, dù không phải ngươi`)}
 /* the mind's turn: replaces the plain weighted pick */
-npcAct=function(v,t){try{if(!v||!t)return"";const T=traitsOf(v);const tc=witOf(v);mindLog(v,"_decide");
+npcAct=function(v,t){try{if(!v||!t||v.coop/* E44j (c) T9 family (law 1 + 6c): a co-op friend entry is a player seat, never an NPC actor */)return"";const T=traitsOf(v);const tc=witOf(v);mindLog(v,"_decide");
   /* Nhu mì hesitates */
   if(T.includes("Khiêm nhường")&&roll(35)){mindLog(v,"_hesitate");return""}
   /* Đa nghi wastes effort on a false suspicion */

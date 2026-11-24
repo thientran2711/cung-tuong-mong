@@ -79,7 +79,7 @@ function faceInit(){if(!S)return;faceFor(S,"consort",S.age);(rivals||[]).forEach
 const CRIME=["poison","kpoison","kframe","pond","musk","catswap","frame","plant"];
 CRIME.forEach(k=>{const A2=ACT[k];if(!A2)return;const o=A2.ok;A2.ok=(a,t)=>!a.confined&&o(a,t)});
 /* ===== EVERY CHOICE SHOWS: an odds word (none when nothing is rolled; ODDS CAP: a formerly-sure act shows the cap word, Nắm chắc), 'thành: …', 'hỏng: …' for rolled ones, and known risks ===== */
-const ODDW=/(Nắm chắc|Rất chắc|Khá chắc|Năm ăn năm thua|Chắc|Khó|Liều)/;
+const ODDW=new RegExp("(?:^|[\\s·>])("+KIT_ODDS_ALT+")(?=$|[\\s·<,.;:])");/* KIT_ODDS j0, old words too (parse only) */
 function caughtW(){/* previews: caught */return `có thể bị người của nàng phát giác: nàng nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ`}/* the caught() line of a scheme (j8 caught: evA(t,a,BAL.eff.j8.evCaught)); a function, not a const: j17 loads before BAL.eff (review/one-core-dup3 r1) */
 /* aoLz(a,b): an AOUT outcome pair whose function items are read lazily (array-element getters): j17 loads before BAL.eff (jbaleff), so a preview that
    prints the amount its j8 rule reads (ONE CORE OD:L1267) builds the words when shown. Still a plain array (jaudit §13 wraps it like the others). */
