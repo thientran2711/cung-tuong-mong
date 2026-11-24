@@ -1356,6 +1356,8 @@ function kitEmptyTab(title,lines,o,acts){return kitEmpty(title,lines,o)+(acts?`<
 @container (max-width:330px){.ktn-tile .kskh2{grid-template-columns:minmax(0,1fr)!important;justify-items:start}.ktn-tile .kskh2{gap:6px}}.ktn-tile>.kskill{flex:1;margin:0;min-width:0}
 .ktn-tile .kskh{flex-wrap:wrap;gap:4px 8px}.ktn-tile .kskinfo{min-width:0}
 .dlg:has(.ktn-pop) .k3body>.k3main,.dlg:has(.ktn-pop) .k3body>.kpsubj,.dlg .kpb:has(.ktn-pop)>.kpsubj,.dlg .kpb:has(.ktn-pop)>.kpiart{display:none!important}.dlg:has(.ktn-pop) .k3right{flex:1 1 100%;width:100%}.dlg .kpb.kphas:has(.ktn-pop){grid-template-columns:minmax(0,1fr)!important}
+/* a môn's act list is a TALL frame (law 10: tall frames grow to the screen ratio): the pop-up takes the screen height so 3 acts show without scrolling on iPad, as few scrolls as possible on Fold */
+html body #modal:has(.ktn-pop){--kph:min(calc(100dvh - 24px),920px)}
 .ktn-tile:active>.kskill{filter:brightness(.97)}/* KIT §6.3g: one act card per line (was an auto-fit 2-column grid: cards of different heights, tiny pictures) */
 `;document.head.appendChild(st)})();
 /* ---- PERSON STATS (owner 11/14): every consort shows the SAME stat set as the player, as kit tiles: Sủng · Đức · Danh · Sắc · Tài · Tâm cơ.
