@@ -20,8 +20,8 @@ const SC_K=()=>Object.keys(BAL.scent.list);
 function scName(k){const x=BAL.scent.list[k];return x?"hương "+x.n:""}
 function scBox(k){return "hg_"+k}
 function scHash(s){try{return typeof ctxHash==="function"?ctxHash(String((S&&S.ctxSeed)||"")+":"+s):0}catch(e){return 0}}
-/* the items: one box per scent, equal price (law 2), used up (IL_USED_KD «Hương liệu»), keep = never «Dùng» */
-try{for(const k of SC_K()){const L=BAL.scent.list[k];IT[scBox(k)]={n:"Hộp "+scName(k),kd:"Hương liệu",d:`Xông làm hương riêng: ${(typeof kinvPlain==="function"?kinvPlain(L.g):"")} mỗi tháng, đốt một hộp`,pr:BAL.scent.pr,sc:k,keep:1,tg:["rv","hh","th"]};SHOP_ALL.push(scBox(k));
+/* the items: one box per scent, equal price (law 2), used up (IL_USED_KD «Hương liệu»), no «Dùng» (no use field), sold back like any item */
+try{for(const k of SC_K()){const L=BAL.scent.list[k];IT[scBox(k)]={n:"Hộp "+scName(k),kd:"Hương liệu",d:`Xông làm hương riêng: ${(typeof kinvPlain==="function"?kinvPlain(L.g):"")} mỗi tháng, đốt một hộp`,pr:BAL.scent.pr,sc:k,tg:["rv","hh","th"]};SHOP_ALL.push(scBox(k));
   if(typeof TAINT==="object")(TAINT.doc=TAINT.doc||{n:"tẩm hương độc",on:[],c:BAL.scent.doc.c,hurt:"người xông hao Sức, mất ngủ"}).on.push(scBox(k))}
  LIKES.scent=SC_K().map(scName);LIKEN.scent="Hương"}catch(e){console.error("jscent items",e)}
 function scPeople(){return [S].concat(liveRivals(true)).filter(x=>x&&(x===S?!S.dead:x.alive&&!x.out))}

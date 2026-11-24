@@ -137,7 +137,7 @@ function kinvOpen(x){if(x&&x.g&&x.g.wk)return kinvOpenWork(x);const g=x.g,it=itm
  if(it.pr)B.push(pbtn(`data-kinvact="sell" data-ix="${i}"`,"Bán",`thành: Bạc +${Math.floor(it.pr/2)}`,""));
  if(typeof TAINT==="object"&&Object.values(TAINT).some(T=>T.on.includes(g.k))&&!g.t)B.push(pbtn(`data-kinvact="taint" data-ix="${i}"`,"Tẩm","thành: chọn cách tẩm, giữ làm mưu kế · kèm: Đức -3",""));
  /* jscent (review/scent): her signature scent is picked from the box itself (kit pbtn, same row as Đeo / Tẩm) */
- if(it.sc&&typeof scName==="function"){const on=S.sc===it.sc&&!S.scOff;B.push(pbtn(`data-kinvact="scent" data-ix="${i}"`,on?"Thôi xông":"Xông làm hương riêng",on?"thành: cung ngươi không còn hương riêng":`tốn: một hộp · thành: ${kinvPlain(BAL.scent.list[it.sc].g)} mỗi tháng · kèm: ai ngửi ra hương trên long bào sẽ biết đêm ấy ngài ở chỗ ngươi`,""))}
+ if(it.sc&&typeof scName==="function"){const on=S.sc===it.sc&&!S.scOff;B.push(pbtn(`data-kinvact="scent" data-ix="${i}"`,on?"Thôi xông":"Xông làm hương riêng",on?"thành: cung ngươi không còn hương riêng":`thành: ${kinvPlain(BAL.scent.list[it.sc].g)} mỗi tháng · kèm: đốt một hộp mỗi tháng và hương vương trên long bào để người khác ngửi ra`,""))}
  if(g.from&&g.from!=="me"&&g.from!=="emp"&&g.from!=="th")B.push(pbtn(`data-kinvact="test" data-ix="${i}"`,"Nghiệm độc","tốn: Bạc -"+BAL.bacFee.itTest+" · thành: Thái y xem đồ có bị tẩm không",S.bac<BAL.bacFee.itTest?"thiếu bạc (cần "+BAL.bacFee.itTest+")":""));
  const F=[];if(g.n>1)F.push(`Trong rương: ${g.n} món.`);if(g.w)F.push("Ngươi đang mặc.");if(it.sc&&S.sc===it.sc&&!S.scOff)F.push(`Ngươi đang xông ${scName(it.sc)} làm hương riêng.`);
  /* origin (kinvFrom) is the "Lai lịch" row of the item detail (KIT §70) */

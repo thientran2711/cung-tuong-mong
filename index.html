@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"ad8f202b+","t":"2026-11-24T06:07Z","c":"scent: signature scent (PARKING #10) — jscent.js, BAL.scent, item-panel pick","b":"dc369512d289","h":[{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"}]};
+window.CTM_BI={"s":"98c3f97f+","t":"2026-11-24T06:10Z","c":"scent: deed on poison taint (real evidence), unit test scent.test.js, site build","b":"3b45b774eaf3","h":[{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -45013,7 +45013,7 @@ function kinvOpen(x){if(x&&x.g&&x.g.wk)return kinvOpenWork(x);const g=x.g,it=itm
  if(it.pr)B.push(pbtn(`data-kinvact="sell" data-ix="${i}"`,"Bán",`thành: Bạc +${Math.floor(it.pr/2)}`,""));
  if(typeof TAINT==="object"&&Object.values(TAINT).some(T=>T.on.includes(g.k))&&!g.t)B.push(pbtn(`data-kinvact="taint" data-ix="${i}"`,"Tẩm","thành: chọn cách tẩm, giữ làm mưu kế · kèm: Đức -3",""));
  /* jscent (review/scent): her signature scent is picked from the box itself (kit pbtn, same row as Đeo / Tẩm) */
- if(it.sc&&typeof scName==="function"){const on=S.sc===it.sc&&!S.scOff;B.push(pbtn(`data-kinvact="scent" data-ix="${i}"`,on?"Thôi xông":"Xông làm hương riêng",on?"thành: cung ngươi không còn hương riêng":`tốn: một hộp · thành: ${kinvPlain(BAL.scent.list[it.sc].g)} mỗi tháng · kèm: ai ngửi ra hương trên long bào sẽ biết đêm ấy ngài ở chỗ ngươi`,""))}
+ if(it.sc&&typeof scName==="function"){const on=S.sc===it.sc&&!S.scOff;B.push(pbtn(`data-kinvact="scent" data-ix="${i}"`,on?"Thôi xông":"Xông làm hương riêng",on?"thành: cung ngươi không còn hương riêng":`thành: ${kinvPlain(BAL.scent.list[it.sc].g)} mỗi tháng · kèm: đốt một hộp mỗi tháng và hương vương trên long bào để người khác ngửi ra`,""))}
  if(g.from&&g.from!=="me"&&g.from!=="emp"&&g.from!=="th")B.push(pbtn(`data-kinvact="test" data-ix="${i}"`,"Nghiệm độc","tốn: Bạc -"+BAL.bacFee.itTest+" · thành: Thái y xem đồ có bị tẩm không",S.bac<BAL.bacFee.itTest?"thiếu bạc (cần "+BAL.bacFee.itTest+")":""));
  const F=[];if(g.n>1)F.push(`Trong rương: ${g.n} món.`);if(g.w)F.push("Ngươi đang mặc.");if(it.sc&&S.sc===it.sc&&!S.scOff)F.push(`Ngươi đang xông ${scName(it.sc)} làm hương riêng.`);
  /* origin (kinvFrom) is the "Lai lịch" row of the item detail (KIT §70) */
@@ -71894,8 +71894,8 @@ const SC_K=()=>Object.keys(BAL.scent.list);
 function scName(k){const x=BAL.scent.list[k];return x?"hương "+x.n:""}
 function scBox(k){return "hg_"+k}
 function scHash(s){try{return typeof ctxHash==="function"?ctxHash(String((S&&S.ctxSeed)||"")+":"+s):0}catch(e){return 0}}
-/* the items: one box per scent, equal price (law 2), used up (IL_USED_KD «Hương liệu»), keep = never «Dùng» */
-try{for(const k of SC_K()){const L=BAL.scent.list[k];IT[scBox(k)]={n:"Hộp "+scName(k),kd:"Hương liệu",d:`Xông làm hương riêng: ${(typeof kinvPlain==="function"?kinvPlain(L.g):"")} mỗi tháng, đốt một hộp`,pr:BAL.scent.pr,sc:k,keep:1,tg:["rv","hh","th"]};SHOP_ALL.push(scBox(k));
+/* the items: one box per scent, equal price (law 2), used up (IL_USED_KD «Hương liệu»), no «Dùng» (no use field), sold back like any item */
+try{for(const k of SC_K()){const L=BAL.scent.list[k];IT[scBox(k)]={n:"Hộp "+scName(k),kd:"Hương liệu",d:`Xông làm hương riêng: ${(typeof kinvPlain==="function"?kinvPlain(L.g):"")} mỗi tháng, đốt một hộp`,pr:BAL.scent.pr,sc:k,tg:["rv","hh","th"]};SHOP_ALL.push(scBox(k));
   if(typeof TAINT==="object")(TAINT.doc=TAINT.doc||{n:"tẩm hương độc",on:[],c:BAL.scent.doc.c,hurt:"người xông hao Sức, mất ngủ"}).on.push(scBox(k))}
  LIKES.scent=SC_K().map(scName);LIKEN.scent="Hương"}catch(e){console.error("jscent items",e)}
 function scPeople(){return [S].concat(liveRivals(true)).filter(x=>x&&(x===S?!S.dead:x.alive&&!x.out))}
@@ -96132,7 +96132,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="dc369512d289";window.CTM_BUILD=BUILD;
+const BUILD="3b45b774eaf3";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
