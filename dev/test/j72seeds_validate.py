@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """ORDER THIN P3 seed validator (j72 composed việc nhờ; schema in dev/handover/reports/thin.md «## API P3»).
-usage: python3 dev/test/j72seeds_validate.py <seeds.md|jsonl> [--min N]   (--min N = at least N seeds for EACH of craft, social, court, fam)
+usage: python3 dev/test/j72seeds_validate.py [files…] [--min N] [--kinds craft,social]   (no file = every dev/handover/content/thin/j72seeds*.md; --min N = at least N seeds for EACH kind in --kinds, default all 4; ids unique across files)
 Checks per seed: id unique, type j72, kind, tag K|D + src, tone, tier; req/other who-kind, nết/lòng only for rv/fallen/sv/rsv/man and names in BAL.net F/M,
 need known; title + ask (in quotes); object null or {name,owner A|B|me|kho,clue,trace_ok,trace_no[,it = real IT key]} (law 6c); 1–3 steps of go/wait/pick with real
 place keys, known skill, odds de|vua|kho, fail retry|end|bad; pick = 2–3 options, each Σgain == Σloss ≥1 and the same total for all (laws 2/3);
@@ -25,7 +25,10 @@ STAT={"sung","danh","bac","suc","mat","th","hh","duc","an"};ODDS={"de","vua","kh
 NEEDS={"rank_min","rank_max","nights_min","month","not_confined","kids_min"}
 PH={"A","B","M","O","S","goi","Goi","xung","Xung"}
 BAD=re.compile(r"%|\d|\b(OK|game|turn|round|slot|lượt|ván|level|quest)\b|Chắc chắn|Nắm chắc|Rất chắc|Khó lường|Mong manh|Tùy duyên|Có cơ|Rất vững",re.I)
-A=sys.argv[1:];args=[a for n,a in enumerate(A) if not a.startswith('--') and not (n and A[n-1]=='--min')];MIN=int(A[A.index('--min')+1]) if '--min' in A else 0
+A=sys.argv[1:];args=[a for n,a in enumerate(A) if not a.startswith('--') and not (n and A[n-1] in('--min','--kinds'))];MIN=int(A[A.index('--min')+1]) if '--min' in A else 0
+CHK=set(A[A.index('--kinds')+1].split(',')) if '--kinds' in A else {"craft","social","court","fam"}
+import glob
+if not args:args=sorted(glob.glob(os.path.join(ROOT,'dev/handover/content/thin/j72seeds*.md')))
 bad=0
 def err(m):
     global bad;bad+=1;print("ERR",m)
@@ -146,6 +149,6 @@ for r in rows:
         if k not in NEEDS:err(f"{i} unknown needs key {k}")
 if MIN:
     for k,n in per.items():
-        if n<MIN:err(f"kind {k}: only {n} seeds, need >= {MIN}")
+        if k in CHK and n<MIN:err(f"kind {k}: only {n} seeds, need >= {MIN}")
 print(f"j72seeds: {len(rows)} seeds ({', '.join(f'{k} {per[k]}' for k in sorted(per))}), {bad} errors")
 sys.exit(1 if bad else 0)
