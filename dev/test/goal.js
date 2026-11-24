@@ -21,7 +21,7 @@ const fails=[];const F=(m)=>fails.push(m);
    const g=await p.evaluate(()=>{const d=document.querySelector('#modal .dlg.kpanel');const r=d.getBoundingClientRect();return{art:!!document.querySelector('#modal .kpsubj.kpiart img'),band:!!document.querySelector('#modal #mb > .kdlgart'),fig:!!document.querySelector('#modal .kesimg'),rows:document.querySelectorAll('#modal .kpsec').length,inView:r.top>=0&&r.bottom<=innerHeight+1&&r.left>=0&&r.right<=innerWidth+1,ox:document.documentElement.scrollWidth>innerWidth}});
    if(!g.art)F('goal card: no picture left (event frame §8.2)');if(g.band)F('goal card: band on top (two pictures)');if(g.fig)F('goal card: loose figure column');if(g.rows<3)F('goal card: sections '+g.rows);if(g.ox)F('goal card: horizontal overflow');
    await shot('1-goalcard')}
-  await p.evaluate(()=>{const b=[...document.querySelectorAll('#modal button.opt:not(.kdis), #modal #mr .kbtn, #modal .kph button')].find(b=>b.offsetParent);if(b)b.click()})}
+  await p.evaluate(()=>{const b=[...document.querySelectorAll('#modal button.opt:not(.kdis), #modal #mr .kbtn, #modal .k3foot .kbtn, #modal .kph button')].find(b=>b.offsetParent);if(b)b.click()})}
  const iN=seen.findIndex(t=>/^Nhập cung/.test(t)),iG=seen.findIndex(t=>/Mệnh truyện kiếp/.test(t));
  if(iG<0)F('goal card never shown');else if(iN<0||iG!==iN+1)F('goal card not right after Nhập cung: '+seen.join(' > '));
  await p.waitForTimeout(1500);

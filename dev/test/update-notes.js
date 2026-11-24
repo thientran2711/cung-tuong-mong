@@ -30,7 +30,7 @@ const ok=(c,m,x)=>{if(!c)bad++;console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefine
   await p.screenshot({path:`${OUTD}/${tag}-panel.png`});
   const nobad=await p.evaluate(()=>/%|phiên bản|cài đặt|lưu |điểm/i.test(document.querySelector('#modal .dlg').innerText));ok(!nobad,`${tag} no forbidden words`);
   /* Lui returns to Settings */
-  await p.evaluate(()=>{const bs=[...document.querySelectorAll('#modal #mr .kbtn')];const l=bs.find(x=>/Lui/.test(x.textContent));if(l)l.click()});await p.waitForTimeout(700);
+  await p.evaluate(()=>{const bs=[...document.querySelectorAll('#modal #mr .kbtn,#modal .k3foot .kbtn')];const l=bs.find(x=>/Lui/.test(x.textContent));if(l)l.click()});await p.waitForTimeout(700);
   const back=await p.evaluate(()=>({opt:!!document.querySelector('#modal button[data-tgo="notes"]'),title:(document.querySelector('#modal .kptitle, #modal.kptitle')||{}).className}));
   ok(back.opt,`${tag} Lui returns to Thiết lập`,back);
   /* 3. existing player: a sổ exists + seen cleared → pop-up in play once, never again */
@@ -48,7 +48,7 @@ const ok=(c,m,x)=>{if(!c)bad++;console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefine
   ok(/Điều mới trong cung/.test(pop.txt||'')&&pop.seen===pop.top&&pop.saveOk,`${tag} old save loaded; pop-up shown once in play`,pop);
   const o3=await ovf();ok(o3.page<=0&&o3.dlg<=0&&o3.top>=0&&o3.bot<=0,`${tag} pop-up fits the screen`,o3);
   await p.screenshot({path:`${OUTD}/${tag}-popup.png`});
-  await p.evaluate(()=>{const b=document.querySelector('#modal #mr .kbtn');b&&b.click()});await p.waitForTimeout(600);
+  await p.evaluate(()=>{const b=document.querySelector('#modal #mr .kbtn,#modal .k3foot .kbtn');b&&b.click()});await p.waitForTimeout(600);
   const gone=await p.evaluate(()=>{const M=document.getElementById('modal');return M.hidden||!/Điều mới trong cung/.test(M.innerText)});ok(gone,`${tag} pop-up closes`);
   await p.waitForTimeout(4200);const again=await p.evaluate(()=>{const d=document.querySelector('#modal:not([hidden]) .dlg');return !!(d&&/Điều mới trong cung/.test(d.innerText))});ok(!again,`${tag} not shown again in the same visit`);
   /* 4. reload: remembered, no pop-up */

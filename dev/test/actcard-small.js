@@ -23,7 +23,7 @@ async function viaCurl(ctx){await ctx.route(/ctm-img\.victoria-tntt\.workers\.de
   if(pt){await p.mouse.click(pt[0],pt[1]);await sleep(900);
    z=await p.evaluate(()=>{const z=document.getElementById('modal');return{open:!!z&&!z.hidden,img:!!(z&&z.querySelector('.kpiart img')),title:z&&z.querySelector('.kptitle')?z.querySelector('.kptitle').textContent:''}})}
   await p.screenshot({path:`${OUT}/zoom-${wh}.jpg`,type:'jpeg',quality:60});
-  await p.evaluate(()=>{const b=document.querySelector('#mr .kbtn');if(b)b.click()});await sleep(400);const closed=await p.evaluate(()=>document.getElementById('modal').hidden);
+  await p.evaluate(()=>{const b=document.querySelector('#mr .kbtn,.k3foot .kbtn');if(b)b.click()});await sleep(400);const closed=await p.evaluate(()=>document.getElementById('modal').hidden);
   const ok=m.n>0&&ratioOK&&markOK&&z.open&&z.img&&closed&&!errs.length&&!m.hovf;if(!ok)bad++;
   console.log(wh,JSON.stringify({cards:m.n,ratioOK,markOK,zoom:z,closed,hovf:m.hovf,errs}),ok?'PASS':'FAIL');await ctx.close()}
  await b.close();process.exit(bad?1:0)})();
