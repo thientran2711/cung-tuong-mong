@@ -25,6 +25,24 @@ ONE data shape for every dialogue scene, side lines (this file) AND main roads (
 - RUNTIME (resolved, = exactly the KIT §95 call): the family adapter resolves roles + placeholders and puts on its card `m.dlg = {bg, figs:[srcL, srcR], names:[nL, nR], lines:[{fig:0|1|null, who:name, text, focus}]}` (strings only → the card survives a save). A showModal wrapper plays `m.dlg` ONCE before the card shows (kitScene.open + Sc.fig + kitDialogue.play), then the card (choice) appears as today. Co-op: the card is in the seat's own Q, so the scene shows on the seat whose quest it is (host computes the world, never the scene). Old saves: cards without `dlg` show as before.
 
 ## API DLG (writers)
+- **ENGINE READY on review/sideline-dlg 03f4f781**: `dev/build/jdlgs.js` (shared player: a card carrying `m.dlg` plays its scene once before it shows; j72 adapter LIVE on every việc nhờ offer), data `dev/build/jdlgsd.js` (built by `python3 dev/build/jdlgsd_build.py` from content/dlg/*.md), numbers `BAL.dlgs` (jbal2.js). `node dev/test/dlgs-play.js <outdir> fold,ipadAir 3` ALL PASS 188 (3 lead scenes, Fold + iPad: scene before card, two figures, title = speaker, spotlight, tap-finish, card after, never twice, 0 page errors). Writer brief: dev/handover/briefs/b-dlg-writer.md (9 slices W1–W9).
 - Writer file: `dev/handover/content/dlg/<fam>_<letter>.md` on the handover branch, one JSON object per line (lines not starting with `{` ignored): `{"id":"j72:j72c-craft-001","dlg":{…}}`.
 - Validator (on review/sideline-dlg): `python3 dev/test/dlgs_validate.py [files…] [--fam j72]` → 0 errors; it checks the shape, roles against the unit's real cast, placeholders, 3–8 lines, length, VANPHONG words, and prints the cover table «family / units / with scene». Example file: `dev/test/dlgs-fixture.jsonl`.
 - Play: `node dev/test/dlgs-play.js [file]` (opens each scene in a real life, Fold + iPad).
+
+## COVER (law 11, `python3 dev/test/dlgs_validate.py --cover`)
+| family | units | with scene | plays in game |
+|---|---|---|---|
+| j72 (110 old + 256 composed) | 366 | 3 | yes |
+| j7 | 81 | 0 | adapter next |
+| j68 comp | 460 | 0 | adapter next |
+| ky | 77 | 0 | adapter next |
+| j70 routes | 78 | 0 | adapter next |
+| j71 comp | 80 | 0 | adapter next |
+| wc | 91 | 0 | adapter next |
+| ALL | 1233 | 3 | |
+
+## KIT REQUEST (for KK18, not blocking)
+- §95 kitDialogue: the speech tail always points LEFT (kitDlgBox tail on the left edge); when the RIGHT figure (her) speaks it should point right. Ask: a `tail:"r"` side (or auto from the lit figure's side). Until then the box sits bottom-centre over both figures.
+
+## WRITERS
