@@ -16,3 +16,17 @@ Branch review/minigame-fix = 7d21d04fff6b387dbdae6e6ce3c500aa78009489 (base orig
 ## Not done / for MAIN
 - No old-save/quickcheck run beyond the two duodo tests (no save-format change). Items 1,3,4,5 of the same OD row are other workers'.
 ~70% xong / ~70% chơi được (items 2+6 only).
+
+## ROUND 2 (MAIN 128 asks) 
+Shots (real CDN art via proxy, Fold + iPad) at https://ctm-img.victoria-tntt.workers.dev/img/_review/minigame-fix/ : {fold,ipadAir}-diemtrang-intro, -mirror-40ms / -300ms / -1500ms (her face already in the mirror at 40 ms), -loihay-intro, -loihay-play (✓/✗ real pieces over the person).
+Điểm trang real fix (jtoil.js): toilOpen warms her portrait (decode) while rules/dress pick; toilMakeup veils the board until her face is decoded (cap BAL.mgVeilMs). j82 kg82Veil still covers every kg82Open frame (seen: frame absent at 40 ms, whole board at 300 ms).
+### Family table (dev/test/minigame-family-scan.js, dynamic: playArt per KG82_KIND)
+| game family | Luật chơi intro | Sẵn sàng | skip wording | decode-first |
+|---|---|---|---|---|
+| 39 kg82 kinds (Đàn Hát Cờ Đầu hồ Bắn cung Thơ Câu đối Thắp đèn Vẽ Cắm hoa Thêu Khéo tay Múa(Lục yêu…) Nấu ăn Điều hương Công Dung Ngôn Hạnh Chải chuốt Lễ nghi Trị cung Xử án Thái hậu hỏi Dán hoa điền Du hồ Hoa đăng Tát Né Chép kinh May áo Nghe ngóng Truyền lời Mặc cả Thời cơ Chải lông/Chơi thú Tưới cây Cờ năm quân) | yes (scan ALL OK 39/39) | yes | «Để trời định / Học nhanh …» + sub «tính 5/10»/odds (kitQuick, plain) | yes (kg82Veil) |
+| contests / Thử tay / khảo hạch / tuyển tú (jexam jentry jmgcal startContest) | yes (kgReady) | yes | «Để tài nghệ quyết định · màn thi tính N/10» | yes |
+| Điểm trang mirror (jtoil) | yes | yes | kit quick | yes, face decode added (was the empty mirror) |
+| scheme games jsgame, pet/shelf care, Nghiệm thân jroute, jtd, jts | yes (kgReady) | yes | kit quick | yes (kg82Open) |
+| Dư đồ on-figure 7 engines (jdfv) | ADDED this branch | ADDED | «Bỏ qua · kết quả thường, không tính phần» | n/a (kitFocus layer) |
+| NPC dodge (slapGame in focus) | no — a hand is already coming | no | new wording only | n/a |
+| Phối đồ picker (jts tsDressGame), Giọt máu (jroute rtNgScene) | no intro: a picker / a no-input animation | n/a | n/a | veiled (kg82Open) |
