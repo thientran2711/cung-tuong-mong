@@ -39,7 +39,7 @@ function j7cTexts(sd){const T=[sd.incident&&sd.incident.text];for(const k in sd.
 function j7cGround(sd,X){for(const t of j7cTexts(sd)){const m=String(t).match(/\{([^}]+)\}/g)||[];for(const p of m){const k=p.slice(1,-1);if(k==="maid"){if(!S.maid)return false}else if(!X[k])return false}}
  const o=sd.incident&&sd.incident.object;if(o&&o.owner!=="me"&&!X[o.owner])return false;return true}
 function j7cFill(t,X){return String(t||"").replace(/\{([^}]+)\}/g,(m,k)=>k==="maid"?(S.maid?S.maid.name:"cung nữ"):(X[k]?X[k].n:m))}
-function j7cFresh(sd){const j=j7c(),t=j&&j.seen[sd.id];return t==null||S.turn-t>=((BAL.j7c&&BAL.j7c.rest)||12)}
+function j7cFresh(sd){const j=j7c(),t=j&&j.seen[sd.id];return t==null||S.turn-t>=BAL.j7c.rest}  /* law 4: BAL only (review thin-p2 r1) */
 /* the seeds that can be played right now (needs + fresh + castable + grounded) */
 function j7cReady(){const out=[];for(const sd of j7cSeeds()){if(!j7cFresh(sd)||!j7cNeeds(sd))continue;const C=j7cCast(sd);if(!C)continue;const X=j7cActors(sd,C);if(!X||!j7cGround(sd,X))continue;out.push({sd,C})}return out}
 /* makeDil entry (j3): one world-weight card for the whole composed family, so it never drowns the old cards */
@@ -47,14 +47,14 @@ function j7cDil(){try{if(!S||S.dead||!(BAL.j7c&&BAL.j7c.on))return null;const D=
 /* step value: BAL.j7c.fx[tier][stat]; relations use the rel row */
 function j7cStep(tier,k){const F=BAL.j7c.fx[tier]||BAL.j7c.fx.m;return F[k]==null?F.rel:F[k]}
 const J7C_STAT=["sung","danh","bac","suc","mat","th","hh","duc","maid"];
-function j7cOpt(sd,id,X,pp){const st=sd.stances[id],tier=sd.tier||"m";const c={},w={},r=[],k=[];let proof=null;
+function j7cOpt(sd,id,X,pp){const st=sd.stances[id],tier=sd.tier||"m";const c={},w={},r=[],k=[],wt=[];let proof=null;
  const put=(o,key,n)=>{o[key]=(o[key]||0)+n};
  for(const [key,n] of Object.entries(st.gain||{})){const [a,b]=key.split(".");
   if(J7C_STAT.includes(a))put(w,a,n*j7cStep(tier,a));else if(a==="friend"&&X[b])r.push([X[b],n*j7cStep(tier,"rel")]);else if(a==="grudge"&&X[b])r.push([X[b],-n*j7cStep(tier,"rel")]);
-  else if(a==="proof"&&X[b]&&X[b].k==="rv"){proof=[X[b],n*j7cStep(tier,"proof")];k.push(G6(`chứng cứ ${X[b].n}`))}}
+  else if(a==="proof"&&X[b]&&X[b].k==="rv"){proof=[X[b],n*j7cStep(tier,"proof")];wt.push(G6(`chứng cứ ${X[b].n} ${balSg(proof[1])}`))}}  /* review r1: shown under ĐƯỢC like j68f (was «kèm», hidden on the card) */
  for(const [key,n] of Object.entries(st.loss||{})){const [a,b]=key.split(".");
   if(J7C_STAT.includes(a))put(c,a,-n*j7cStep(tier,a));else if(a==="friend"&&X[b])r.push([X[b],n*j7cStep(tier,"rel")]);else if(a==="grudge"&&X[b])r.push([X[b],-n*j7cStep(tier,"rel")])}
- return c6(j7cFill(st.text,X),{c,w,r,k,ok:()=>{const j=j7c();if(proof)try{evStory(proof[0].o,proof[1],j7cFill(sd.incident.text,X).slice(0,60))}catch(e){}
+ return c6(j7cFill(st.text,X),{c,w,r,k,wt,ok:()=>{const j=j7c();if(proof)try{evStory(proof[0].o,proof[1],j7cFill(sd.incident.text,X).slice(0,60))}catch(e){}
   const o=sd.incident&&sd.incident.object;if(o){const own=o.owner==="me"?(S.name||"ngươi"):(X[o.owner]?X[o.owner].n:"");j.ob.push({sid:sd.id,name:j7cFill(o.name,X),owner:own,trace:j7cFill(st.trace||o.trace,X),turn:S.turn})}
   return j7cFill((sd.outcomes||{})[id],X)+(o?`<br>${G6(j7cFill(o.name,X))}: ${j7cFill(st.trace||o.trace,X)}`:"")}})}
 function j7cBuild(pp){j7cSeeds();if(!pp.sid){/* first build: pick the seed through jnorep and save the cast in pp (mkP keeps pp for reload) */
