@@ -1400,3 +1400,4 @@ REVIEW kit-promo-hook (sonnet SMALL; briefs/D-kit-promo-hook-review.md) of 287a6
 | REVIEW law1-audit r1 (opus BIG reviewer-lander; briefs/b-law1-audit-review.md) of review/law1-audit 0cf18eda | review/law1-audit-r1; reports/law1-audit.md «## REVIEW r1» | B | session_01N1tNP2ZbYMtMYdedMue4Fk | RUNNING | 24/11 06:17Z |
 | F-MUSIC-M1: music audit + wiring spec + core music groups (OD 24/11 ~09:45/09:55/10:00Z; briefs/F-music.md) | CDN audio/; reports/F-music.md | FOREMAN F | (opening) | RUNNING | 24/11 06:19Z |
 | F-MUSIC-M2: one music track per yearly festival (briefs/F-music.md) | CDN audio/; reports/F-music-fest.md | FOREMAN F | (opening) | RUNNING | 24/11 06:19Z |
+REVIEW law1-gifts (opus BIG; briefs/D-law1-gifts-review.md) of 0a5fc0af | review/law1-gifts-rv | (opening) | RUNNING | 24/11 06:20Z (Foreman D ROOT)
