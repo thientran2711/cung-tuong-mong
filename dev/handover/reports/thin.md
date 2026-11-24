@@ -776,6 +776,35 @@ coopSyncKBMax 126.9 → 28.5 · coopKBPerMin 101.4 → 84.7 · coopResendPerMin 
 - Open: coop-world friend stats at week end (above); stuck at week 45 (smoke, 3 hits, repro saves/…-001.json in the smoke dir — lost with this container; re-run or wait for runner files); render-perf for coopTurnP95 = Foreman B asked MAIN 118 who owns it (do not start); runner bug files dev/handover/robot/coop-20261124-0723-p1-2(.json, -s.json) arrived — read them first.
 - Tools: local Worker = `npm i wrangler@4` in a scratch dir, then in coop/worker `wrangler dev --local --port 8799 --ip 127.0.0.1`; robot10-coop WORKER=http://127.0.0.1:8799 (localhost launch flags built in); coop-lag needs PP_ARGS with the PrivateNetworkAccess/LocalNetworkAccessChecks disable-features list (see fix-1 notes above).
 
+### FIXER #3 (session_01N1tNP3zZjxpPAGUUKwUTEY, opus; START_CTX ≈5 %; Foreman B = session_01N1tNP4gKR4CpjKFHpHLKjn)
+PRIORITY #1 CHECK ('deaf filter / rx spy / gzip BIG / coop-pos / friend stat'): OD 2204–2205 | main coop/worker/src/index.js BIG 200000, dev/build/jcoop.js rxQ+gunz, jcoopworld mapPlace/onPos/keepFriendPos, jslots mark/solo | review/* robot-coop-fix-1 889803dc (BIG FAIL A), robot-coop-fix-2 b9b88cda, robot10-coop 050b93a0 | claims B fixer #3.
+#### SSK review/robot-coop-fix-1-r2 a0ac174a (09:43Z; BIG reviewer session_01N1tNP2xZQymfgL6TKgMEcP)
+= main fd85907a + 889803dc cherry-picked unchanged (919b2f35, Worker BIG 8000) + a0ac174a (review A items 1+2, law 11).
+Fix: ONE source dev/test/lib/coop-wire.js — guestNet (dead-socket fake: __mute + __deafThin drop the host delta/snap that ARRIVE while deaf, string OR gzip binary; frames kept in arrival order behind the async gunzip, kept ones re-dispatched in order) and typeSpy (__tx/__rxT/__old gunzip binary frames, wire order). Scan `node dev/test/coop-wire-scan.js`: before 14 string-only deaf filters / rx spies, after 0 (exit 0). Left by design (listed by the scan): tx-only spies coop-thin-b/-b-r1/-b-r3 and coop-thin-e-net's host-deaf on relayed "do"/"thin" (small intent/handshake frames, never above 8000); __wsDeaf (e2e family) drops every frame, any type.
+| test (r2 test code) | fix Worker :8799 | main Worker :8798 |
+|---|---|---|
+| coop-thin-f2 L7 | 27/27 (P10 answer: g1 lostV 1 = loss real; review saw 26/27, lostV 0) | 27/27 |
+| coop-thin-a | 19/19 | 19/19 |
+| coop-thin-d | 52/53 | 51/53 (kit odds row of d2-guest-gift flaky on both; Thân sơ row main only) |
+| coop-thin-d-probe | 35/35 | 35/35 |
+| pm-coop-d | 33/35 | 33/35 (same 2 pastime-XP rows on both = pre-existing game) |
+| coop-thin-f3 L8 | 38/38 | 38/38 |
+| coop-thin-f4 L9 | 19/19 | 19/19 |
+| coop-relms-both | 15/15 | 15/15 |
+| coop-arrive-see L9 | 89/90 | 89/90 (same row «run1 tgk host-first») |
+| coop-places L9 | 19/19 | 19/19 |
+| coop-palace-life L9 | 19/19 | 19/19 |
+| coop-thancan L9 | 10/10 | 9/10 (T1 random) |
+| coop-ge-npc L9 | 10/10 | 10/10 |
+| coop-hl-faces | EXC «reading 'buoi'» on both | the ORIGINAL main test on main Worker: same EXC = pre-existing test rot |
+Gates: Worker merge/vault/seat/stale/thin + ws + chat ALL OK (:8799) · coop-e2e 142/142 seat order 0 AND COOP_SWAP=1 (:8799) · quickcheck PASS (core gates PASS, time-spill PASS, old save ok 0 errors). Logs /home/user/wt/f3out (fixer #3 box). Deploy note: the Worker auto-deploys on land (coop-worker.yml).
+#### Harness review/robot10-coop d1f05b41 (pushed; runners re-fetch)
+- 3fa85fbf: week-end friend Sủng/Danh/Sức compare settles up to 5 s like the buổi compare (read 300 ms after the step = race with the merged-week render + pos relay); save round-trip skips S.coopRoom (jslots solo(): a co-op life loaded OUTSIDE a room drops it by design — runner U2 hits) and visit.people[].__* (jfeel __feelMig migrate-once marker; deser rebuilds the home visit, migration idempotent — U1/U3 hits).
+- d1f05b41: every coop-pos hit carries both pages' relay state (last pos frame week.buổi place life, own week/buổi/place, friend id/palace/where, thin level, herPl7) for game-vs-harness triage (review B item 2).
+- Review B item 1 (place-name family) = closed by fixer #2's 050b93a0. Item 2 (coop-pos after rebirth): data from the A/B runs below.
+#### fix-2 (Worker clamp) A/B — running 09:43Z
+`CAP=300 PCAP=2400 POSLOG=1 NEGTRAP=1 node dev/measure/robot10-coop.js 1 1 1` on main game + harness d1f05b41, WORKER :8797 (fix-2 b9b88cda, clamp) vs :8798 (main, no clamp). Reasoning so far: the clamp changes only values the additive merge pushed out of range, and both pages adopt the same merged state, so it cannot make one page's view differ from the other's; the old week-end compare had no settle (now fixed). Result appended here.
+
 ## MGSKIN-WIRE
 PRIORITY #1 CHECK: OD 0 | ledger 0 | claims 8 | main kitMgSkinAdd/mgpSkin/kg82SkinSrc (j82, jmgpool; reused, no new mechanism) | review/* review/kit-mgboardof-r1 c46a17f2 (merged, not LIVE yet) | reports F-MGSKIN-A..H, kit-mgskin.
 START_CTX ~6 % (own estimate); finished well under +25 %.
