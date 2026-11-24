@@ -45,5 +45,35 @@ Verdicts: SAME = both sides, one rule · GAP = one side missing · OPEN = owned 
 - **MAIN (SELSCENE-4, review/selection-scene)**: the 12 tú nữ scored by the same 3 tests (OD ~06:15Z / ~06:20Z).
 - **B (this job)**: Ban cung «Nhận chỉ» + humble ask for NPCs · NPC «Cầm cố» / «Chuộc» · co-op ration borrow/steal never targets the friend (parked: cross-seat item move needs the item-ledger protocol; follow-up job proposed, not built here).
 
-## Act table (buttons, role × act) — re-run on LIVE
-(running; appended when done)
+## Act table (buttons, role × act) — re-run on LIVE c0dff1b3 (13 min)
+ROLE PARITY: rows 239 · cells {"—":655,"SAME":942,"NUM":384,"N·draw":7,"P-ONLY":11,"N-ONLY":2,"EXEMPT":389} · gaps 13 = exactly dev/tools/role-parity-open.json (no drift since the last round). PROMOTION npc/me: act sets equal.
+- REAL (B, closed here): «Cầm cố» t4–t7 + hh (5 rows, an NPC never pawned) · maid:beside (N-ONLY: the player maid's «Hầu bên cạnh chủ» sat in the rv/hh branch with v===m, but her own master's card is sk "mis" → dead for every master except a Hoàng hậu).
+- Carried (documented in earlier rounds, all SAME in every t1…hh column; only the «up» column = the moment of promotion, household / ration not yet given): up cx3:def_* ×4, up cx3:staffHoi, up cx4:rougeBorrow, up cx:buy (probe world, B4 note).
+
+## FIXES (review/law1-audit, from LIVE c0dff1b3)
+| # | gap (family) | LIVE c0dff1b3 | branch | how (one rule, law 1) | numbers (law 4) |
+|---|---|---|---|---|---|
+| 1 | Ban cung «Nhận chỉ» | GAP: NPC who does not ask gets nothing (her «Nhận» = Đức +1) | SAME | jbancung bcNpcAsk: no ask → takes the decree, Đức + ok.ducTake | BAL.banCung.ok.ducTake |
+| 2 | Ban cung humble ask | GAP: NPC only asked UP | SAME | bcNpcAsk picks among HER roads by nết: humble nết → humble palace (Đức road), else up (Danh road, incl. same standing nearer = her danhNear road), else Nhận; same bcAsk odds / gains / losses | BAL.net.n.bcHumble (Khiêm nhường, Ân cần) |
+| 3 | Tư trang «Cầm cố» / «Chuộc» | GAP: NPC short of silver only sold (wdSell); never pawned / redeemed; expiry ran for her only | SAME | j92 wdNpcPawn (wdPawn by nết, else wdSell), wdNpcRedeem (same wdRedeem when silver stays above the poor line), wdPawnMonth for every consort; NPC pawn leak → palace news like a sale | BAL.net.n.wdPawn; BAL.ag.why.wd.poor (existing); WD prices (existing) |
+| 4 | maid «Hầu bên cạnh chủ» | N-ONLY: dead branch for the player | SAME (scan: N-ONLY row gone; open list trimmed) | j42 srvTalk: on her master's card (sk "mis") when the master is away — the NPC maid's jagstaff asMisHome rule — the same SRVA.beside row | SRVA.beside (existing) |
+| 5 | Co-op ration borrow / steal | GAP: NPCs borrow / steal from her (host) never from the friend | PARKED | the friend's chest lives on her own seat; a host-side item move into / out of her blob has no way back (same parked row as «Trả lại quà», item-ledger.md) → proposed follow-up job: cross-seat item request through the co-op protocol, then drop the x.coop skip in jagacts4 p4Lender / p4StealT | — |
+Gains AND losses (laws 2–3): every NPC road above is her road with her gains and losses (bcAsk fail = Sủng/Danh loss + rival grudge; pawn = Bạc now, Bạc back to redeem, loss at expiry, leak = Danh −; beside = Chủ tin + / −). No new card, no new UI, no new wording (laws 7, 9): no shots needed.
+Co-op: NPC decisions run where they ran before (bcNpcAsk host-only palFix wrap; wd NPC paths in the host world pass; wdNpcRedeem returns on a non-world seat).
+
+## Tests / gates — branch head 0cf18edad63ac034b8e5f249c0aa9a62955092e5 (build files from 736f11eb, unchanged after)
+- dev/test/law1-audit.test.js 13/13 PASS (on LIVE c0dff1b3 the same test fails: no BAL.net.n.bcHumble / wdNpcPawn).
+- dev/test/role-parity.test.js PASS: no new act gap · law-1 families: no new GAP row (FAM_OPEN = 3 D gift rows + co-op ration) · open list 13 → 7 (OPEN_MAX 7) · promotion act sets equal both sides · no page errors.
+- coop-e2e both seat orders: Fold host 142/142, COOP_SWAP iPad host 142/142.
+- quickcheck PASS (core gates G1–G5 PASS incl. one-core-guard / text / bind / text-rule; old save loads + plays a buổi; perf median new/live render 275/284 ms, buổi 1557/1506 ms).
+- undef-scan PASS (299 names).
+- Shots: none — no card / UI / wording changed (all fixes are NPC-side rules + one existing kit option row reused for the player maid).
+
+## Open after this branch
+- D: gift rule for every giver/recipient + likes/dislikes for her/Thái hậu likes/servants/men + NPC likes knowledge (FAM_OPEN 3 rows; trim when D lands). Per-nết thresholds, promotion routes (designs pending sếp).
+- E: own-choice leaving / severity ladder must hold for NPCs (E64b).
+- MAIN SELSCENE-4: 12 tú nữ scored by the same 3 tests.
+- B follow-up proposal: co-op cross-seat item request (so NPCs can borrow/steal ration from the friend too; drop the x.coop skip in jagacts4).
+- Act table up-column timing rows (def_* ×4, staffHoi, rougeBorrow, cx:buy): carried, SAME in every rank column.
+
+**SẴN SÀNG KIỂM 0cf18edad63ac034b8e5f249c0aa9a62955092e5** (review/law1-audit)
