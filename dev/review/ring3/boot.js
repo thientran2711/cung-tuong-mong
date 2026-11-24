@@ -1,4 +1,4 @@
-const {chromium}=require('playwright');const D=require('/home/user/wt/ring2/dev/test/lib/device');
+const {chromium}=require('playwright');const D=require(__dirname+'/../../test/lib/device');
 async function boot(dev,dsf,minP,extra){const srv=await D.serveRoot();const b=await chromium.launch();
  const ctx=await D.newDeviceContext(b,dev,Object.assign({deviceScaleFactor:dsf||1,reducedMotion:'reduce'},extra||{}));await ctx.addInitScript(()=>{window.COOP_URL='http://127.0.0.1:9/'});if(process.env.KSEED)await ctx.addInitScript(sd=>{let a=sd>>>0;Math.random=function(){a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296}},+process.env.KSEED);if(minP)await ctx.addInitScript(n=>{window.__minP=n},minP);
  const pg=await ctx.newPage();pg.on('pageerror',e=>console.log('PERR',e.message));

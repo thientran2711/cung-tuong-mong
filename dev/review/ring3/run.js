@@ -1,6 +1,6 @@
 /* node run.js <fold|ipad> <shots|video|perf> [pk] — drives the mock in the real game; out → /home/user/wt/ring2-shots/r3 */
-const {boot}=require('./boot');const fs=require('fs');const D=require('/home/user/wt/ring2/dev/test/lib/device');
-const dev=process.argv[2]||'fold',mode=process.argv[3]||'shots',OUT='/home/user/wt/ring2-shots/r3/';fs.mkdirSync(OUT+'vid',{recursive:true});
+const {boot}=require('./boot');const fs=require('fs');const D=require(__dirname+'/../../test/lib/device');
+const dev=process.argv[2]||'fold',mode=process.argv[3]||'shots',OUT='/home/user/wt/ring3-shots/';fs.mkdirSync(OUT+'vid',{recursive:true});
 const DEV={fold:'fold',ipad:'ipadAir'}[dev];
 (async()=>{const dd=D.DEVICES[DEV];const extra=mode==='video'?{recordVideo:{dir:OUT+'vid/tmp-'+dev,size:{width:dd.w,height:dd.h}}}:{};
  const o=await boot(DEV,mode==='shots'?2:1,0,Object.assign({reducedMotion:'no-preference'},extra));const {g,pg}=o;
