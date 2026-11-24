@@ -116,6 +116,8 @@ const css=document.createElement("style");css.id="kpk-css";css.textContent=`
  box-shadow:inset 0 1.5px 0 var(--kpk-hi),inset 0 -2px 0 rgba(70,40,12,.45),0 3px 6px rgba(0,0,0,.4)}
 .kpk .kfoc-b.kpk-b::before,.kpk .kfoc-b.kpk-b::after{content:"";position:absolute;top:4px;width:4px;height:4px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e8d9b8,#6b4a22);pointer-events:none}.kpk .kfoc-b.kpk-b::before{left:3px}.kpk .kfoc-b.kpk-b::after{right:3px}
 .kpk .kfoc-b.kpk-b .kfoc-pic{border:1.5px solid var(--kpk-line);box-sizing:border-box;border-radius:6px;margin-left:3px}
+.kpk .kfoc-b.kpk-b.kfoc-hasi{padding-right:20px}.kpk .kfoc-b.kpk-b .kfoc-i{top:-9px;right:-7px}/* the «!» badge sits on the corner, never on the title */
+.kpk .kfoc-b.kpk-b .kfoc-t b{-webkit-line-clamp:3;max-height:3.3em;font-size:.8rem}
 .kpk .kfoc-b.kpk-b .kfoc-t b{color:var(--kpk-ink);text-shadow:0 1px 0 var(--kpk-hi);letter-spacing:.1px}
 .kpk .kfoc-b.kpk-b .kfoc-t small{display:none;color:#3d2410;text-shadow:0 1px 0 var(--kpk-hi);font-weight:600}
 .kpk-n.kpk-up .kfoc-b.kpk-b .kfoc-t small{display:block}
