@@ -162,10 +162,10 @@ const VOL=new Set(["at"]);
    saved → .iu / il.seq), the face-keep once-flag (fcKeep), the day roster labels of who-is-where (S.roster: j95c re-syncs it at load). Any OTHER path = a bug */
 /* + S.where / S.menW: the who-is-where VIEW of that roster (j95view), rebuilt from it at load (j95c j95sync); in the render-off bot page it is only refreshed by
    render, so a deser refreshes it early (0 drift in render-on play, dev/test/r10-play-rt.js) */
-/* + S.ag.pend / S.ag.did (robot-fix-cnv-2): the rivals' planned deeds placed in that roster (did = the plan key per rival) — re-placed by the same render-time sync (j95c render → j95sync →
+/* + S.ag.pend / did / log (robot-fix-cnv-2): the rivals' planned deeds placed in that roster (did = the plan key per rival, log = the last 60 plans) — re-placed by the same render-time sync (j95c render → j95sync →
    placeWhere → jagent agTick / agReapply: khắc kh moves to the current one, a deed whose slot is gone is dropped); 0 drift with render on
    (dev/test/r10-play-rt.js, which does NOT filter it: cnv_mat / cnv_chu 150 buổi) */
-const RT_REP=/^save\.(S|R\.\d+)\.inv\.\d+\.iu$|^save\.S\.il\.seq$|\.fcKeep$|^save\.S\.roster\.|^save\.S\.(where|menW)\.|^save\.S\.ag\.(pend|did)\./;
+const RT_REP=/^save\.(S|R\.\d+)\.inv\.\d+\.iu$|^save\.S\.il\.seq$|\.fcKeep$|^save\.S\.roster\.|^save\.S\.(where|menW)\.|^save\.S\.ag\.(pend|did|log)\./;
 function diffAll(a,b,p,out){if(out.length>60)return;if(a===b||a===undefined)return;if(JSON.stringify(a)===JSON.stringify(b))return;
  if(a&&b&&typeof a==="object"&&typeof b==="object"){new Set(Object.keys(a).concat(Object.keys(b))).forEach(k=>diffAll(a[k],b[k],p+"."+k,out));return}out.push(p)}
 function roundTrip(){if(!S||S.dead||S.mg)return;const t0=performance.now();let s1;
