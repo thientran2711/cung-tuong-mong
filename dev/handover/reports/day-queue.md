@@ -64,3 +64,32 @@ Reading: the morning keeps «Tin trong cung» + at most one card that fits the m
 - BIG tier. Lander: index.html + sw.js are rebuilt in the branch (dcb3272d).
 - Not done here (other items of the same OD row are other workers'): red strip, reward size, mood seal, Tin báo rows.
 - In co-op the old-day hold is off (the room's night/week gates own the turn); the book/news order (b) holds on both seats.
+
+## REVIEW (BIG, reviewer RV day-queue session_01V1ZZH1LA8QSoproNf1ie72, depth 1, START_CTX ~4 %) — **PASS 7c819a37**
+PRIORITY #1 CHECK: worker report (this file) | OD 15/11 ~23:20Z (spread across buổi, per-buổi cap) + OD 24/11 ~18:05Z item (5) | main: D13 jspread, j9 nextBuoi, jne kitNewDay, j87 book, j93 kmPush/kmFree, j68 evGate/EVHOLD | review/kit-daytitle 3424b927 (#kdaytc counted by dqDawn) | claims none.
+Base: origin/main 502c48c9 is an ancestor of 7c819a37 (FF OK, no merge needed; checked again right before this verdict). Reviewed b3d580e6 fully, then the worker's later 7c819a37 (j68 only) and re-ran every gate on it.
+
+| check | result |
+|---|---|
+| diff / jdayq logic | (a) nextBuoi wrapper is outermost (installed after the setTimeout(0) wrappers); a held turn polls every BAL.dayq.poll and runs nextBuoi itself once no scene / KMQ / #ov / podium / roulette is pending; if cards are up it hands back to the normal render auto-turn. Stale kmBusy with no scene frees the hold after BAL.dayq.stale (probe: DQ ran the turn; the game's own kmPump queue then waits as in LIVE — pre-existing, not jdayq). (b) showModal held only while #dawn really shows .kbk/.kne (or #kdaytc); user-tap kitModal passes. No deadlock found. |
+| reload mid-hold (probe) | reveal up, turn held (DQ.want 0-3) → save → reload → «Tiếp tục kiếp này»: same buổi, item kept (wkFinishLesson puts it in S.inv BEFORE the reveal), want cleared, day turns normally (wk 0→1, book up). OK |
+| co-op untouched | dqUi() false when COOPW.on (no hold, no card gate, no news/km hold); jspread already off in co-op; j68 dawnOpt/never-drop runs on both seats with the same draws (roll still drawn). coop-e2e default **142/142** + COOP_SWAP **142/142** on b3d580e6 AND again on 7c819a37. |
+| her path dev/test/dayq-order.js (Fold 755x1000@2 + iPad 1180x820@2) | LIVE 502c48c9 **FAIL** both (news card painted over title card + book, book stays up, «Hội phối đồ» first). Branch **PASS** both on b3d580e6 and on 7c819a37: reveal alone 3.5 s (turn held), after Nhận → title card → book (cover, closed) alone → «Tin trong cung» first, morning shows only it. 0 page errors. Shots looked at (R1/R3/R4 both builds). |
+| quickcheck | b3d580e6 PASS (old save ok, core gates PASS); 7c819a37 **PASS** 194 s, old save ok, core gates PASS, perf new/live render 223/206, tab 388/487, buổi 1119/1324. (buổi median is bimodal ~0.9 s / ~2.6 s on BOTH builds by life content — noise, not jdayq.) |
+| family scan dev/measure/dayq-family.js --before LIVE | reproduced the worker's table: every NO → yes (8 channels). |
+| bots spread_hist sens 2×12 tuần (24 days) | see table below |
+
+| device | build | shown | holdfull drops | cooldown drops | harness "lost" | page err |
+|---|---|---|---|---|---|---|
+| 755x1000 | LIVE 502c48c9 | 345 | 21 | 7 | 16 | 0 |
+| 755x1000 | b3d580e6 | 434 | 27 | 17 | 19 | 0 |
+| 755x1000 | **7c819a37** | 416 | **14** | 9 | 18 | 0 |
+| 1180x820 | LIVE 502c48c9 | 435 | 22 | 7 | 19 | 0 |
+| 1180x820 | b3d580e6 | 438 | 19 | 11 | 18 | 0 |
+| 1180x820 | **7c819a37** | 425 | **12** | 13 (+1 evHoldRe) | 11 | 0 |
+
+Side-effect judgment (law 3 / her spread rule "queue the rest to later buổi"): at b3d580e6 the extra drops were j68's existing hold cap (E68S.hold 4) and anti-repeat cooldown — existing rules, and my runs did not reproduce the worker's 23→43 (iPad 22→19). 7c819a37 goes further: a card held ONLY for the dawn is never dropped for a full hold, it moves to a later buổi (later it can still age out by the existing E68S.stale rule) → hold-cap drops now BELOW LIVE on both devices. Content is deferred, not lost. "lost" examples are all at k 48–49 (the life-cap last buổi) in LIVE and branch alike = harness artefact. Total shown not lower than LIVE.
+
+Laws touched: 4 ONE CORE ✓ (BAL.spread.dawnSlot/dawnOpt, BAL.dayq; one-core-guard PASS) · 6c REAL OBJECTS ✓ (reward in inventory before «Nhận», survives reload) · 7/9/10 n/a (no text, no UI part) · 11 WHOLE GROUP ✓ (family scan) · 12 TWO DEVICES ✓ · 13 PRIORITY #1 ✓ · 14 ✓ (j68 roll(50) replaced in place) · 16 ✓ (her OD 15/11 rule obeyed, not changed).
+Nits (non-blocking, for a later touch): jdayq.js header comment names `BAL.spread.dawnCap`, which does not exist (the keys are dawnSlot / dawnOpt); `||300` / `||10000` fallbacks repeat BAL.dayq values.
+Verdict: **LAND READY (BIG PASS) 7c819a37** — FF of origin/main 502c48c9; index.html + sw.js are built in the branch.
