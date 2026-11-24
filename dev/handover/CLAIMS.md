@@ -1330,3 +1330,7 @@ REVIEW BIG3 final-merge (opus reviewer-lander; MAIN 115 02:10Z): review/fix-kfra
 | REVIEW thin-p6 r1 (opus BIG reviewer-lander; P6 91 world + 78 j70 routes + P7 91 stages/80 comps/49 prizes) of review/thin-p6 92cb3949 | review/thin-p6-r1; reports/thin.md «## REVIEW thin-p6 r1» | B | session_01N1tNP5hzeJJkNV7DuxNsvJ | RUNNING | 24/11 02:08Z |
 | THIN ENGINE #5 (opus): P8 origin roads 4→8 (API P8 first → writers) | review/thin-p8; reports/thin.md «## ENGINE P8» | B (ORDER MAIN 113 22:36Z) | session_01N1tNP5qWqSsV3KaU6QDK33 | RUNNING | 24/11 02:08Z |
 | TITLES2 FIX r1 E58 (opus BIG; E56r FAIL 537091a1, reports/titles2-review.md; briefs/E58-titles2-fix.md) | review/titles2-r; reports/titles2.md | FOREMAN E ROOT | session_01DgYSWptEaBm4zGxrWmFfKR | RUNNING | 24/11 02:13Z |
+| THIN P8-SEEDS-A (sonnet writer): rdseeds_a tt dtq thd | dev/handover/content/thin/rdseeds_a.md; reports/thin.md «## P8-SEEDS-A» | B | session_01N1tNP4xU1qDx5RTmhVUA54 | RUNNING | 24/11 02:16Z |
+| THIN P8-SEEDS-B (sonnet writer): rdseeds_b muoi cn cnv | dev/handover/content/thin/rdseeds_b.md; reports/thin.md «## P8-SEEDS-B» | B | session_01N1tNP3JRFuS4cs3MxbkNwi | RUNNING | 24/11 02:16Z |
+| THIN P8-SEEDS-C (sonnet writer): rdseeds_c td ch | dev/handover/content/thin/rdseeds_c.md; reports/thin.md «## P8-SEEDS-C» | B | session_01N1tNP4fSphz3Cza4PZyuxt | RUNNING | 24/11 02:16Z |
+| THIN P8-SEEDS-D (sonnet writer): rdseeds_d nc bd pf | dev/handover/content/thin/rdseeds_d.md; reports/thin.md «## P8-SEEDS-D» | B | session_01N1tNP5ePMqU9zztdpGasyn | RUNNING | 24/11 02:16Z |
