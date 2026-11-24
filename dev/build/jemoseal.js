@@ -50,7 +50,7 @@ function kesHead(el,r){const L=KIT_EMOSEAL.lean.head;let H=0;try{const st=(el.__
  if(!H&&el.__fig){const q=el.__fig.getBoundingClientRect();if(q.height>20)H=q.height*(KIT_FIG&&KIT_FIG.h||.79)}}catch(e){}
  return H?H*L.f:Math.min(innerWidth,innerHeight)*L.panel}
 /* STAGE SEALS UNDER A MODAL (ROOT-66 / owner 19/11 ~07:25Z): while ANY dialog / sheet / book page is open (kitDialogOpen = the whole family, body.kbk-open) a seal that is NOT inside it never leans (and a running lean ends); only the seal beside the person in the dialog leans. */
-function kesBlocked(el){try{if(el.closest(KIT_EMOSEAL.lean.modalIn))return false;return(typeof kitDialogOpen==="function"&&kitDialogOpen())||document.body.classList.contains("kbk-open")}catch(e){return false}}
+function kesBlocked(el){try{if(el.closest(KIT_EMOSEAL.lean.modalIn))return false;return(typeof kitDialogOpen==="function"&&kitDialogOpen())||document.body.classList.contains("kbk-open")||!!document.querySelector(".kmov,.krbox")/* owner 24/11 flight (law 11): a reward / gain / scene overlay counts as an open dialog even without role=dialog: no big seal clone (z 9990) above ANY overlay */}catch(e){return false}}
 /* 3-PART SET (KIT_EMOSEAL.three[ak] = {out,back} clip seconds, c0/c1 = the gold circle as a share of the clip frame at the clip's start / end vs in the loop): files <set><ak>-out.webp / <set><ak>.webp / <set><ak>-back.webp.
    "yes" = all three probed present, "no" = a part is missing (single loop / CSS motion), "wait" = still probing (the lean waits, it never starts with the wrong set). */
 /* A seal picture is NEVER swapped inside a displayed <img> (the owner-visible "beige square" for a frame at every part change): each picture is its own <img> inside the big seal's box (span.kemo-big),
