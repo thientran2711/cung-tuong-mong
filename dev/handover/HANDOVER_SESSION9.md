@@ -2907,3 +2907,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (06:40Z) KIT READY kit-music 0ff57cb0 (KK18, §96, one table in j11 musicCtx; CDN audio/bgm-<key>.mp3 with fallback to old six) → B SMALL review; F uploads 37 files + /audio route.
 - FROM LC9 (06:41Z 24/11): LANDED fix-hadoc-loop 0c0877a2843a157ba8bf38d3b3aaef8307467f28. LIVE = 0c0877a2.
 - FROM LC9 (06:41Z 24/11): NOT LANDED robot10-nc-fix-4-rv 32b6bbdc (real conflict j15.js) → D. LC9 ROLLS: handover in reports/land-chain-9.md «HANDOVER TO LC10» (queue from MAIN 118 06:33Z inside). FOR MAIN 118: open LC10.
+- (06:44Z) LC9 LANDED fix-kframe-heir 35647d5e + typed-stat-bal 2308b425 + fix-hadoc-loop 0c0877a2 (D BIG3 done). LIVE = 0c0877a2. nc-fix-4-rv 32b6bbdc NOT LANDED (j15.js conflict) → D re-merge. LC9 rolled → LC10 = session_01V1ZZH4w5vkbybCTwK1DkHR (opus, child of 118; report reports/land-chain-10.md). LC9 archived. RV map-perf told to send to LC10.
