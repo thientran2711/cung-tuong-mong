@@ -280,6 +280,7 @@ Gates: table in FOREMAN_F_STATUS.md «FOR MAIN 127 / LC12 … LAND READY robot-f
 New note for FIXER #4 (pre-existing, same on LIVE, not a blocker): r10-rt on the LIVE-written quickcheck save — at the first load the home room holds «Lão Minh Tử» (kind serv, sid 1) while servById(1) = null (a copy with no live servant, law 6b family); the next load drops her (room 2 → 1 người).
 Laws: 1–3, 5 untouched · 4 harness reads only · 6b as at the PASS (shared-ref 0 person splits) · 7/9/10/12 no UI / wording / kit change in r1 (LIVE kit changes were reviewed on their own branches) · 11 scans re-run · 13 check line · 14–18 no rule changed.
 **VERDICT: PASS — LAND READY robot-fix-cnv-r1 e50af91a (FF from LIVE 502c48c9).** Done; this reviewer stops.
+<<<<<<< HEAD
 
 ## ROBOT FIXER cnv #4 (opus, session_01UV1SzhnKuNkgn4n6LmAkh3, depth 3, START_CTX ≈ 4 %) — true reload, R7 closed, cards / timers / shared ref
 PRIORITY #1 CHECK ('robot-fix-cnv'): OD 0 | ledger 0 | claims 8 | main 0 | review/* 3 | archive 0 → continued review/robot-fix-cnv-2 80f49094 + this report; extended existing mechanisms (j68 deser wrapper, j1 life registry / j93 kmGen, r10-play-rt), no second mechanism.
@@ -326,3 +327,5 @@ Timer scan (/home/user/wt/rfx4-tools/timerscan.py over dev/build/j*.js): setTime
 Laws: 1–3, 5 untouched · 4 no typed number · 6b/6c an open card and the stage keep their people across a reload · 7/9/10/12 no UI / wording / kit change · 11 three families + timer scan + tables above · 13 check line · 14–18 no rule changed.
 
 READY robot-fix-cnv-2 e47c61b782b0cf205fbe9b7d366ac0d2e48b5d83 (merged LIVE 502c48c9; not yet r1 e50af91a).
+=======
+>>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)

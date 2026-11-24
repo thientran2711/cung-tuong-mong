@@ -22,6 +22,7 @@ Magnific images_generate, mode gpt-2-6, resolution 2k, aspect auto, count 1, fol
 - s50: LwtgSmCswO
 
 ## Run log (60 planned jobs; one attempt each, no retries so far)
+<<<<<<< HEAD
 | job | src | age | identity upload | output creation (webUrl: https://www.magnific.com/app/creation/<id>) | status |
 |---|---|---|---|---|---|
 | FACE-COLD-S13-A16 | s13 | 16 | IfZhvvqtvE | EbcFqQTuuO | DONE |
@@ -96,3 +97,16 @@ DONE 60/60 jobs (ages 16/26/51/63, 15 people). 57 DONE, 3 NEEDS_REVIEW. Cost 60 
 - age 51: https://ctm-img.victoria-tntt.workers.dev/img/_review/face-master03/cold/cold-age51.jpg
 - age 63: https://ctm-img.victoria-tntt.workers.dev/img/_review/face-master03/cold/cold-age63.jpg
 Uploaded with dev/site/cdn_sync.py (review folder; verdict giver wipes with --wipe-review face-master03/cold... topic path). Looked at the age-26 sheet: hairstyles and faces track the sources.
+=======
+| job | src | age | identity | output creation | status |
+|---|---|---|---|---|---|
+| FACE-COLD-S13-A16 | s13 | 16 | IfZhvvqtvE | EbcFqQTuuO | DONE |
+| FACE-COLD-S14-A16 | s14 | 16 | eI9BoIfdqL | rgoLgWextc | PENDING_QC |
+| FACE-COLD-S15-A16 | s15 | 16 | VXOpeBYMMU | ksXxs0B16B | PENDING_QC |
+| FACE-COLD-S26-A16 | s26 | 16 | yiF9NZ5PW9 | WDUTDsmcXe | PENDING_QC |
+
+QC notes: s13/s14/s15/s26 age16 looked at: no text, ivory robe+pin, skin matches master tone, teen-appropriate, no makeup look. (QC of identity vs source not pixel-compared; subjective.)
+
+## HANDOVER (successor)
+Remaining jobs: every (src,age) in the 15x{16,26,51,63} grid not in the log above (also order: finish age16 for s27..s50, then 26, 51, 63). Prompts are re-buildable: read Prompts file, delete the operator sentence, check len. Status PENDING_QC means generated, not yet looked at. Still to do at the end: contact sheets per age uploaded to CDN img/_review/face-master03/cold/, link here.
+>>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)

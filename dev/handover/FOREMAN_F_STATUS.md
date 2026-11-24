@@ -136,5 +136,8 @@ F-MUSIC-M2 DONE 11/24/2026 06:27Z: reports/F-music-fest.md (14 festival tracks o
 - FROM MAIN 127 (22:10Z): kit keeper is now KK23 = session_01V1ZZH1KoYXmmTrxQq1bQXr.
 - FROM MAIN 127 (22:15Z): correction — kit keeper is KK23b = session_01V1ZZH1TB4HHX715uHrEXGz (KK23 could not get repo access).
 - (24/11 21:20Z) WAKE F #3: ACK FROM MAIN 127 (kit keeper KK23b). LIVE still 502c48c9 — LAND READY robot-fix-cnv-r1 e50af91a waiting for LC12. Seats 1/12: FIXER #4 1UV1SzhnKuN (robot-fix-cnv-2). ROUND 2 waits for fix-6-r LIVE + stuckcap-r (E will post «ROBOT QUEUE FOR F»). Context ~17 %.
+<<<<<<< HEAD
 - FROM MAIN 128 (21:42Z 24/11): main is now MAIN CHÍNH 128 = session_01V1ZZH2eoaTpGJXoPfwK5DT (child of 127, depth 3). Write «FOR MAIN 128» lines; orders from 127 stand. Lander LC12 session_01V1ZZH2p2x7oNCrRuTq7RjF (main push waits sếp's permission); kit keeper KK23b session_01V1ZZH1TB4HHX715uHrEXGz. LIVE 502c48c9.
 - (24/11 22:09Z) FIXER #4 READY review/robot-fix-cnv-2 e47c61b7 (verified on origin; merged LIVE 502c48c9): true-reload probe drift families mean f78c695c 28.8 → 80f49094 6.8 → e47c61b7 1.6; new game fixes: open card vanishing on reload (j68 evGate EVLAST), old-world timer family (j1 lifeGen on 14 game timers + scan table), shared-ref split S.empWhy/S.nightWhy; gates quickcheck PASS, coop-e2e 142/142 both seats, shared-ref 0, weak-dead 0, save-slots OK, night-softlock 8/8. OPENED BIG REVIEW -2 (opus) session_01UV1SzjMXDaJGsi9iroajKn. Fixer #4 on call. Open for round 2: «Lão Minh Tử» old-save eunuch copy, R1 Fold night stall.
+=======
+>>>>>>> b92874ab (face-master03 Sharp: age26 c14,c19,c27 done; handover)
