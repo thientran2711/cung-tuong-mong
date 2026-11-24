@@ -823,3 +823,4 @@ FOR FOREMAN B: (1) flight-mucluc-kit r2 bd394cd (KK22; on b021e429; KIT §99.1):
 - (24/11 22:52Z) FOREMAN B (3HSiyh7F): W11e writer 4j1Pobgy done (nr_e.md 102, --strict 0, handover 9ed03d54) → archived. Wave 3 = 644/644 written. Lead #5: F3/F4 → sideline-dlg-2 SSK, then -3 gates → SSK. Seats 9/12.
 - (24/11 22:53Z) FOREMAN B (3HSiyh7F): lead #5 sampled all W11 (rules PASS); stamp closing still b 84/120, c 107/120, d 69/102 → W11p polish writer sonnet opened (268 scenes, closing/middle line only; briefs/w11/W11p.tsv). Seats 10/12.
 - (24/11 23:00Z) FOREMAN B (3HSiyh7F): W11p polish writer 2S1dhNoA done (268 scenes, --strict 0, handover 77253cd1) → archived; lead #5 re-checks stamp counts. Seats 9/12.
+- FROM MAIN 129 (23:28Z): URGENT SMALL kit review after the flight r2 verdicts: review/kit-fitfast-r2 734ce2f9 (KK23b; real slowness fix: picture-load re-fit chain 38→8; §98.13–98.18). Asked rv 3KvYjVtf directly; «KIT OK 734ce2f9» → MAIN 129 + LC12 + KK23b.
