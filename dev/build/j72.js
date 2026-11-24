@@ -20,7 +20,7 @@ function q72A(k,id){try{
  if(k==="rv"){const v=RV(id);if(!v||!v.alive||v.out)return null;return{o:v,n:v.name,f:pv(v),k:"rv",id}}
  if(k==="fallen"){const v=RV(id);if(!v||!v.alive||!v.out)return null;return{o:v,n:v.name,f:pv(v),k:"fallen",id}}
  if(k==="off"){if(typeof trS!=="function")return null;const T=trS();const h=T&&T.H&&T.H[id];if(!h)return null;return{o:h,n:`${TDOFF[id]} ${h.name}`,f:pMin(h),k:"off",id}}
- if(k==="ak"){const e=q72Kid(id);if(!e||!e[0].alive||(e[0].age||0)<18)return null;return{o:e[0],n:e[0].name,f:kidFace(e[0]),k:"ak",id,mom:e[1]}}
+ if(k==="ak"){const e=q72Kid(id);if(!e||!e[0].alive||(e[0].age||0)<BAL.ageMin)return null;return{o:e[0],n:e[0].name,f:kidFace(e[0]),k:"ak",id,mom:e[1]}}
  if(k==="rsv"){const s=servById(id);if(!s)return null;const ow=ownerOf(s);if(!ow||ow===S||!ow.alive||ow.out)return null;return{o:s,n:s.name,f:pServ(s),k:"rsv",id,own:ow}}
  if(k==="sv"){const s=servById(id);if(!s||ownerOf(s)!==S)return null;return{o:s,n:s.name,f:pServ(s),k:"sv",id}}
  if(k==="fam"){const h=q72Dad();if(h)return{o:h,n:`Phụ thân ${h.name}`,f:pMin(h),k:"off",id:h.c,fam:1};if(!S.maid)return null;return{o:S.maid,n:`Thư nhà (do ${S.maid.name} mang vào)`,f:Object.assign(pMaid(),{rw:"Mang thư nhà"}),k:"fam",id:null}}
@@ -39,11 +39,11 @@ function q72Pick(sp,not,ff){not=not||[];const nk0=a=>a&&!not.includes(q72Key(a))
   if(sp==="rvp")L=L.filter(v=>v.preg);if(sp==="rvc")L=L.filter(v=>v.confined);
   L=L.filter(v=>aff(v,S)>-30&&!(typeof sameHouse==="function"&&sameHouse(S,v)&&sp!=="rv"&&sp!=="rv+"));
   const v=wpick(L.filter(v=>nk({k:sp==="hh"?"hh":sp==="fallen"?"fallen":"rv",id:v.id})),v=>1+Math.max(0,aff(v,S))/15);return v?q72A(sp==="hh"?"hh":sp==="fallen"?"fallen":"rv",v.id):null}
- if(sp==="sv"||sp==="svm"||sp==="sve"){const L=(S.staff||[]).filter(s=>s&&s.sid!=null&&(s.age||18)>=18&&(sp==="sv"||(sp==="svm"?s.role==="maid":s.role!=="maid"))&&nk({k:"sv",id:s.sid}));const s=wpick(L,s=>1+(s.loyal||0)/30);return s?q72A("sv",s.sid):null}
+ if(sp==="sv"||sp==="svm"||sp==="sve"){const L=(S.staff||[]).filter(s=>s&&s.sid!=null&&(s.age||BAL.ageMin)>=BAL.ageMin&&(sp==="sv"||(sp==="svm"?s.role==="maid":s.role!=="maid"))&&nk({k:"sv",id:s.sid}));const s=wpick(L,s=>1+(s.loyal||0)/30);return s?q72A("sv",s.sid):null}
  if(sp.indexOf("man:")===0){const rw=sp.slice(4);const L=(S.men||[]).filter(m=>m.alive!==false&&m.rw===rw&&nk({k:"man",id:m.id}));const m=wpick(L);return m?q72A("man",m.id):null}
  if(sp==="off"){if(typeof trS!=="function"||typeof CLANS==="undefined")return null;const T=trS();const L=CLANS.filter(c=>T.H[c]&&T.H[c].dadOf!=="me"&&nk({k:"off",id:c}));const c=wpick(L,c=>1+Math.max(0,(T.H[c].af[key(S)]||0))/10);return c?q72A("off",c):null}
- if(sp==="ak"||sp==="akf"){let L=[];try{L=allKids().filter(([k])=>k.alive&&(k.age||0)>=18&&(sp==="ak"||k.sex==="f")&&!k.hW&&nk({k:"ak",id:k.name}))}catch(x){}const e=wpick(L);return e?q72A("ak",e[0].name):null}
- if(sp==="rsv"){const L=[];for(const v of liveRivals(true)){if(v.confined)continue;for(const s of (v.staff||[]))if(s&&s.sid!=null&&(s.age||18)>=18&&nk({k:"rsv",id:s.sid}))L.push(s)}const s=wpick(L);return s?q72A("rsv",s.sid):null}
+ if(sp==="ak"||sp==="akf"){let L=[];try{L=allKids().filter(([k])=>k.alive&&(k.age||0)>=BAL.ageMin&&(sp==="ak"||k.sex==="f")&&!k.hW&&nk({k:"ak",id:k.name}))}catch(x){}const e=wpick(L);return e?q72A("ak",e[0].name):null}
+ if(sp==="rsv"){const L=[];for(const v of liveRivals(true)){if(v.confined)continue;for(const s of (v.staff||[]))if(s&&s.sid!=null&&(s.age||BAL.ageMin)>=BAL.ageMin&&nk({k:"rsv",id:s.sid}))L.push(s)}const s=wpick(L);return s?q72A("rsv",s.sid):null}
  if(sp==="fam"){const a=q72A("fam");return a&&nk0(a)&&(!ff||ff(a.o,a))?a:null}
  if(sp==="maid"){if(!S.maid||!nk({k:"maid"}))return null;return q72A("maid")}
  const a=q72A(sp);return a&&nk0(a)&&(!ff||(()=>{try{return ff(a.o,a)}catch(e){return false}})())?a:null}
