@@ -142,4 +142,8 @@ Law 12: Fold 755x1000 and iPad 1180x820 both looked 3× (BEFORE iPad tiles: room
 - `python3 dev/test/screen-veil-scan.py` — exits 1 when a full-screen body layer is not in the watcher.
 - Pages served from disk by a Playwright route (no local server). New lines follow the existing CTM_WAIT style (wait-words-scan).
 
-SẴN SÀNG KIỂM fe8f6e3d (review/kit-screenveil)
+## r3 → r4 (owner OD 24/11 ~07:25Z «1», then ~07:27Z «2 đi» overwrites it)
+- r3 f5c6e2e4 (late pictures hidden until decoded) was REVERTED (7ecdf5bd, tree identical to fe8f6e3d) when sếp changed to «2 đi»: a figure that arrives AFTER the view is shown keeps the KIT §59.1 grey stand-in until decoded. fe8f6e3d already did that (the veil only covers screen changes; §59.1 covers later arrivals).
+- Her reason ("nó hiện bóng xám để tôi biết rằng là có một người nữa đang ở đó"): checked every late-figure case (law 11) — all full-body figures (stage, event / person dialogs, frames) take the same §59.1 `data-kwait="f|m"` mark from one rule (jph.js), in the figure's exact box (kit silhouette body box). It was too faint to read as a person (opacity .55, breathing down to .3; Fold + iPad shots of a never-arriving figure at a real figure's spot). r4 850602bc: opacity .92 (breath .7), the same strength as the `.j59sil` stranger → clearly a grey woman / man standing there. KIT.md §59.1 line added. CSS-only change: the veil numbers above are unchanged (no re-measure needed).
+
+SẴN SÀNG KIỂM 850602bc (review/kit-screenveil)
