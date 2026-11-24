@@ -629,7 +629,7 @@ function kitMarkHtml(mark,alt){const m=/emo-(?:m-|mo-)?([a-z0-9_-]+)\.webp/.exec
 .ksart{position:relative;margin:0;display:block;width:100%;overflow:hidden;border-radius:4px;background:#efe4cf;
  border:1px solid var(--gold,#8f5f0c);box-shadow:inset 0 0 0 2px #fffaf0,inset 0 0 0 3px #e6d3ac}
 .ksart-tags{position:absolute;top:6px;left:6px;z-index:3;display:flex;flex-wrap:wrap;gap:4px;max-width:calc(100% - 12px);pointer-events:none}
-.ksart-tag{font-style:normal;font-size:.68rem;font-weight:700;line-height:1.2;padding:2px 8px;border-radius:999px;color:#fffaf0;background:#4a2f12d9;border:1px solid #e6d3ac;box-shadow:0 1px 3px #0006;white-space:nowrap}
+.ksart-tag{font-style:normal;font-size:.68rem;font-weight:700;line-height:1.2;padding:2px 8px;border-radius:999px;color:#fffaf0;background:#4a2f12d9;border:1px solid #e6d3ac;box-shadow:0 1px 3px #0006;white-space:normal;text-wrap:balance;text-align:center;max-width:100%;box-sizing:border-box}
 .ksart-wide{aspect-ratio:16/9}.ksart-tall{aspect-ratio:3/4}
 /* 28.19b corner mark (review/mood-dialog): o.mark = a small seal (the mood seal img/kit/emo-*.webp) in the TOP-RIGHT corner of the picture */
 /*   a background layer, not an <img>: the many "picture fills its frame" img rules of the slots (.kdpban, .kaart…) never stretch it */

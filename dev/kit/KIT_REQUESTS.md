@@ -250,3 +250,6 @@ K-FOCUS-1b SPEC (append to kitFocus; pure display, no numbers of its own, knobs 
 ## 24/11 KK16 audit (MAIN 116 order: mark built requests DONE)
 - K-BADGE-HAOHUU → DONE KIT §77b kitStBadge (jrail.js, on main). K-ICO-HAOHUU → DONE (KIT §69.2). `kitColDot` → DONE KIT §60.1 (review/kit-e-rows). KR home-stat rows / «quý nhau» / «thế lực nhà» → DONE (review/kit-cost-rows-home 3332c63b, KIT §13.14–15). K-PM-1 `kitGameVs` → DONE (KIT §13.8, kit-gamevs.js). K-GE-1 `kitBranchMap` → DONE (kit-ge.js). K-FOCUS-1/1b kitFocus + kitIdle + kitMoodSay → DONE (KIT §92). chapter-card kitSlide → on main. MG-SKIN → DONE (kit-mgskin). K-DH-CAPFIT → PASS 9b487835 (LC9).
 - «Chủ tin» / «Hoàng thượng để ý» hint words → DONE KIT §13.16 (review/kit-framefit). Timed choice countdown (night-final) → DONE KIT §32.5c/§69.4.
+
+## 24/11 KIT KEEPER #15 — K-DH-CAPFIT «title plate on the event picture clips long names» (filed by E55 on review/titles2 537091a1)
+- DONE on review/kit-dhcapfit: KIT §82.2 (plate wraps between words when its box is narrower than the name; kitDhCap caption ≤ 2 lines with font step .74/.66/.6 rem; .ksart-tag same wrap). Test dev/test/kit-dhcapfit.js 26/26. Status: KIT READY (small kit review pending).
