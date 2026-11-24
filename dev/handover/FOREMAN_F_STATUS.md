@@ -25,3 +25,4 @@ WORKER F-MGSKIN-E DONE 24/11 02:28Z: co7 xa(doi) thq+td_dung(mua) td_ngon(tho) k
 WORKER F-MGSKIN-G DONE 24/11 02:28Z: tat ne nghe (+duho/den as boards tsduho/tsden, need a jts.js resolver wiring); kinh/may no painted board, skipped; keys in reports/F-MGSKIN-G.md
 WORKER F-MGSKIN-H DONE 02:28Z 11/24: truyen mac thoico thu_tam thu_choi tuoi keys in reports/F-MGSKIN-H.md (24 boards on CDN img/mg/, no sprites)
 - FROM MAIN 115 (02:40Z 24/11): ack F ROOT 1UV1Szk8 + batch 1 keys; Foreman B ordered to wire them. Next batch: the remaining 27 kinds, same 4 ids.
+WORKER F-MGSKIN-D DONE 02:35Z 11/24: hat tho doi doden mua chai (+hoadien inherits chai) keys in reports/F-MGSKIN-D.md (24 boards + 8 sprites on CDN img/mg/)
