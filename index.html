@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit","b":"540fab8e80d8","h":[{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"}]};
+window.CTM_BI={"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place","b":"bc15a44a5a6a","h":[{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -6134,7 +6134,7 @@ function mapFit(pre){pre=pre===true;try{const sc=document.querySelector(".game.m
  const prot=s=>s.classList.contains("here")||!!s.querySelector(".khap");const rank=s=>{if(prot(s))return 9;const n=+((s.querySelector(".mmeta")||{}).textContent||"").replace(/\D.*$/,"")||0;return s.classList.contains("empty")?-1:s.classList.contains("sm")?Math.min(n,50)/100:1+Math.min(5,n)/10};
  const solveTags=(vp,pre)=>{
   /* still touching at the floor size: NEVER hide a tag - kmSolve (above) moves the lower-priority tags to clear spots with a leader line + dot to their own building; her place and "!" places keep home unless two of them collide */
-  labs().forEach(e=>{e.classList.remove("kmnw");e.style.translate="";const o=e.querySelector(":scope>.mlead");if(o)o.remove()});
+  labs().forEach(e=>{e.classList.remove("kmnw");e.style.translate="";e.style.removeProperty("--kmx");e.style.removeProperty("--kmy");e.classList.remove("kmmv");const o=e.querySelector(":scope>.mlead");if(o)o.remove()});
   const wr=w.getBoundingClientRect();const parts=sp=>[...sp.querySelectorAll(".mlab,.mmeta")].map(e=>e.getBoundingClientRect()).filter(r=>r.width>0).map(r=>[r.left,r.top,r.right,r.bottom]);
   const its=labs().map(s=>{const b=box(s);if(!b)return null;const r=s.getBoundingClientRect();return{s,bv:[[b.left,b.top,b.right,b.bottom]],pv:[parts(s)],sr:[r.left,r.top,r.right,r.bottom],A:[(r.left+r.right)/2,(r.top+r.bottom)/2],rk:rank(s),prot:prot(s)}}).filter(Boolean);
   /* variant 1 = the same tag with its name on ONE line (kit class kmnw): measured for every tag in one pass, chosen by the solver only where the wrapped shape does not fit */
@@ -6146,10 +6146,10 @@ function mapFit(pre){pre=pre===true;try{const sc=document.querySelector(".game.m
   const ck=(vr?rd(vr):"")+"|"+K.toFixed(3)+"|"+rd(W)+"|"+nits.map(i=>rd(i.bv[0])+";"+rd(i.bv[1])+";"+rd(i.sr)+";"+i.pv.map(q=>q.map(rd).join("/")).join("~")+";"+i.rk+i.prot).join("|");
   let sol;try{const SC=window.__mapSolC3||(window.__mapSolC3=new Map());let q=SC.get(ck);if(q)SC.delete(ck);else if(pre)return;/* map-perf: the fit inside render() runs before the later render steps lay out the rows around the map (one frame before the real fit): it only reuses a stored solution, never solves a layout that is about to change */else{const t0=performance.now();q=kmChain(nits,K,W,vr);window.__mapSolMs=performance.now()-t0;window.__mapSolN=(window.__mapSolN||0)+1}SC.set(ck,q);/* least recently used out */while(SC.size>16)SC.delete(SC.keys().next().value);
    sol={t:q.t,v:q.v,lead:q.lead,hard:q.hard,bad:q.bad,A:q.A.map(a=>[a[0]+ox,a[1]+oy]),E:q.E.map(a=>[a[0]+ox,a[1]+oy])};window.__mapErr=""}catch(e){window.__mapErr=String(e&&e.stack||e).slice(0,300);console.error(e);sol={t:its.map(()=>[0,0]),v:its.map(()=>0),A:its.map(i=>i.A),E:its.map(i=>i.A),lead:its.map(()=>false),hard:-1,bad:[]}}
-  its.forEach((i,n)=>{const t=sol.t[n];i.s.classList.toggle("kmnw",!!sol.v[n]);i.s.style.translate=t[0]||t[1]?(t[0]/K)+"px "+(t[1]/K)+"px":"";if(!sol.lead[n])return;const A=sol.A[n],e=sol.E[n],ax=(A[0]-i.sr[0]-t[0])/K,ay=(A[1]-i.sr[1]-t[1])/K,lx=(e[0]-i.sr[0]-t[0])/K,ly=(e[1]-i.sr[1]-t[1])/K,d=Math.hypot(lx-ax,ly-ay);const el=document.createElement("i");el.className="mlead";el.setAttribute("aria-hidden","true");el.style.cssText="left:"+ax+"px;top:"+ay+"px;width:"+d+"px;transform:rotate("+Math.atan2(ly-ay,lx-ax)+"rad)";i.s.insertBefore(el,i.s.firstChild)});
+  its.forEach((i,n)=>{const t=sol.t[n];i.s.classList.toggle("kmnw",!!sol.v[n]);/* kit-mapgo (MAIN 122 24/11): the BUTTON (the building's tap box) never moves; only the tag (.mlab + .mmeta) slides by --kmx/--kmy (jmapc.js), so no two place boxes overlap, whatever the solver does with the tags. The leader runs from the building (button box) to the moved tag. */i.s.style.translate="";if(t[0]||t[1]){i.s.style.setProperty("--kmx",(t[0]/K)+"px");i.s.style.setProperty("--kmy",(t[1]/K)+"px");i.s.classList.add("kmmv")}else{i.s.style.removeProperty("--kmx");i.s.style.removeProperty("--kmy");i.s.classList.remove("kmmv")}if(!sol.lead[n])return;const A=sol.A[n],e=sol.E[n],ax=(A[0]-i.sr[0])/K,ay=(A[1]-i.sr[1])/K,lx=(e[0]-i.sr[0])/K,ly=(e[1]-i.sr[1])/K,d=Math.hypot(lx-ax,ly-ay);const el=document.createElement("i");el.className="mlead";el.setAttribute("aria-hidden","true");el.style.cssText="left:"+ax+"px;top:"+ay+"px;width:"+d+"px;transform:rotate("+Math.atan2(ly-ay,lx-ax)+"rad)";i.s.insertBefore(el,i.s.firstChild)});
   window.__mapVer=its.map((i,n)=>{const t=sol.t[n],b=i.bv[sol.v[n]||0];return{s:i.s,e:[b[0]+t[0],b[1]+t[1],b[2]+t[0],b[3]+t[1]]}});window.__mapIts=its.map(i=>({bv:i.bv,pv:i.pv,sr:i.sr,A:i.A,rk:i.rk,prot:i.prot,n:i.s.dataset.go||i.s.dataset.ak||i.s.textContent.slice(0,8)}));window.__mapK=[K,[wr.left,wr.top,wr.right,wr.bottom],vp];window.__mapSolve={t:sol.t,v:sol.v,hard:sol.hard,bad:sol.bad.map(n=>its[n].s.dataset.go||its[n].s.dataset.ak||its[n].s.textContent.slice(0,10)),moved:sol.t.filter(t=>t[0]||t[1]).length,oneLine:sol.v.filter(v=>v).length};
  };
- const place=zz=>{const __t0=performance.now();w.style.width=(zz*100)+"%";if(kp)return;/* map-perf: the text painters (rank title / name tone / marks, j79 - normally one frame AFTER the render) run on the map NOW, so the tags are measured in their final shape: before, every first open solved twice (raw text, then painted text) */try{if(typeof kitRankPaint==="function")kitRankPaint(w);if(typeof kitNameTone==="function")kitNameTone(w);if(typeof kitMarkPaint==="function")kitMarkPaint(w)}catch(e){}labs().forEach(e=>{e.classList.remove("kmhide","kmnw");e.style.translate="";const o=e.querySelector(":scope>.mlead");if(o)o.remove()});const flo=one?KMAP_MLS_ONE[0]:KMAP_MLS;let m=one?KMAP_MLS_ONE[1]:1;w.style.setProperty("--mls",m);while(pairs().length&&m>flo+.001){m=Math.max(flo,+(m-.04).toFixed(2));w.style.setProperty("--mls",m)}
+ const place=zz=>{const __t0=performance.now();w.style.width=(zz*100)+"%";if(kp)return;/* map-perf: the text painters (rank title / name tone / marks, j79 - normally one frame AFTER the render) run on the map NOW, so the tags are measured in their final shape: before, every first open solved twice (raw text, then painted text) */try{if(typeof kitRankPaint==="function")kitRankPaint(w);if(typeof kitNameTone==="function")kitNameTone(w);if(typeof kitMarkPaint==="function")kitMarkPaint(w)}catch(e){}labs().forEach(e=>{e.classList.remove("kmhide","kmnw");e.style.translate="";e.style.removeProperty("--kmx");e.style.removeProperty("--kmy");e.classList.remove("kmmv");const o=e.querySelector(":scope>.mlead");if(o)o.remove()});const flo=one?KMAP_MLS_ONE[0]:KMAP_MLS;let m=one?KMAP_MLS_ONE[1]:1;w.style.setProperty("--mls",m);while(pairs().length&&m>flo+.001){m=Math.max(flo,+(m-.04).toFixed(2));w.style.setProperty("--mls",m)}
   /* map-perf: no solve here - the viewport solve right after (same fit) replaced it every time, so it only doubled the cost */
   window.__mapMs=performance.now()-__t0;window.__mapMls=m};
  const z=Math.max(fit,window.__mapZ||fit);place(z);window.__mapFit=fit;
@@ -33108,7 +33108,7 @@ function kg82Open(o){const pb=KG82.preBack,pp=KG82.prePay||(typeof S!=='undefine
     same unpaid lesson, never a free one). Until then the ✕ is a free back: nothing was spent, nothing to undo. */
  if(pp){KG82.payOnGo=pp;try{if(typeof pp==="object"&&S.mg&&S.mg.pay!==pp){S.mg.pay=pp;save()}}catch(e){}KG82.backPre=()=>{KG82.payOnGo=null;try{if(typeof pb==="function")pb()}catch(e){console.error(e)}try{if(S.mg)S.mg=null}catch(e){}}}
  else if(typeof pb==="function")KG82.backPre=pb;return d}
-function kg82Close(silent){KG82.skin={id:"",name:"",pal:"son"};kgPay();/* closed by an outcome before «Sẵn sàng» (jsgame «Giao cho người làm»): the remembered charge is due */if(KG82.run&&KG82.run.stop){try{KG82.run.stop()}catch(e){}}KG82.run=null;KG82.peek=()=>null;KG82.hint=null;KG82.phase="";KG82.back=null;KG82.backPre=null;KG82.payOnGo=null;KG82.backAsk=null;KG82.quit=null;KG82.quitAsk=null;KG82.xdo=null;KG82.giveUp=0;KG82.engX=KG82.onHud=KG82.onVs=KG82.guardMs=KG82.vs=KG82.kyNet=KG82.kyNoise=KG82.kyOut=KG82.onFin=KG82.endMark=null;/* round C (jpma): engine / live plate / Cờ net hooks */
+function kg82Close(silent){KG82.skin={id:"",name:"",pal:"son"};kgPay();/* closed by an outcome before «Sẵn sàng» (jsgame «Giao cho người làm»): the remembered charge is due */if(KG82.run&&KG82.run.stop){try{KG82.run.stop()}catch(e){}}KG82.run=null;KG82.peek=()=>null;KG82.hint=null;KG82.phase="";KG82.back=null;KG82.backPre=null;KG82.payOnGo=null;KG82.quit=null;KG82.xdo=null;KG82.giveUp=0;KG82.engX=KG82.onHud=KG82.onVs=KG82.guardMs=KG82.vs=KG82.kyNet=KG82.kyNoise=KG82.kyOut=KG82.onFin=KG82.endMark=null;/* round C (jpma): engine / live plate / Cờ net hooks */
  const d=kg82El();if(!d)return;const ov=$("ov");d.remove();[...ov.children].forEach(c=>{if(c.dataset.kg82h!=null){c.hidden=c.dataset.kg82h==="1";delete c.dataset.kg82h}});
  if(typeof mgDone==="undefined"||mgDone)ov.hidden=true}
 const kg82Box=()=>document.getElementById("kg82box");
@@ -33440,31 +33440,27 @@ function kg82Norm(st){if(!st)return[];if(Array.isArray(st))return st.filter(x=>x
         caller's own clean-up for that back (jaudit works deck card: the card untaken); a caller with nothing charged sets backPre itself (jtd: its own
         «Thôi, để lúc khác · không tốn gì»); jaudit's pending cost for the unplayed game is dropped;
      1. KG82.back (a caller with nothing at stake, set right after kg82Open — Thử tay: back to the kind list, the kind not saved): the game closes, back() runs;
-        KG82.backAsk = the confirm lines asked first while a board is live (Thử tay: the rounds played of this kind are not kept);
+        (no confirm: owner OD 24/11 ~08:08Z «không có một lời nhắc nào về bất cứ hành động của tôi» — the rounds played of this kind are simply not kept);
      2. a result screen (jk4 kitOvBtn: #kg82ok / #kg92ok): presses it, the caller's own result applies (unchanged 32.10 behaviour); a screen whose
-        only way on is another button (jsgame «Ra tay», jtoil result, Nghiệm thân blood scene) names it in KG82.xdo — the ✕ runs it, no confirm;
-     3. otherwise = GIVE UP (laws 2/3: leaving is never a free escape from what the caller charged or staked): a kit confirm «Bỏ cuộc?», then
+        only way on is another button (jsgame «Ra tay», jtoil result, Nghiệm thân blood scene) names it in KG82.xdo — the ✕ runs it at once;
+     3. otherwise = GIVE UP (laws 2/3: leaving is never a free escape from what the caller charged or staked): NO confirm (OD 24/11 ~08:08Z), straight
         the caller's OWN lose path with 0/10 — during play KG82.quit() (kg82Play / sgEng / j92 / jroute / jtoil end their run with 0), on the rules
         screen the «Sẵn sàng» button runs with KG82.giveUp set (the run ends at once with 0, no board, no clock); «Hướng dẫn» is put back first.
-   KG82.quitAsk = the caller's own confirm lines when its lose result is not «0/10» (jtoil: Để mộc). Callers never draw their own back button;
-   kg82Close clears back / backAsk / quit / quitAsk / xdo. Test: node dev/test/mg-back.js. */
+   Callers never draw their own back button;
+   kg82Close clears back / quit / xdo. Test: node dev/test/mg-back.js. */
 function kg82BackX(d){try{if(!d||typeof kitXHTML!=="function"||d.querySelector(".kit-x[data-kitx=kgback]"))return;const h=d.querySelector(".kph");
  const html=kitXHTML('data-kitx="kgback"',"Quay lại");if(h){if(getComputedStyle(h).position==="static")h.style.position="relative";h.insertAdjacentHTML("beforeend",html)}
  else{d.insertAdjacentHTML("afterbegin",html);d.firstElementChild.classList.add("kxabs")}
  d.querySelector(".kit-x[data-kitx=kgback]").addEventListener("click",e=>{e.stopPropagation();e.preventDefault();kg82Back()})}catch(e){console.error("kg82BackX",e)}}
-/* the confirm is the kit's (j79 kitConfirm on #modal); body.kg82cf (showModal rewrites #modal's own class) lifts it over the game layer #ov while it is open */
-function kg82Ask(lines,yes,onYes,title,no){if(typeof kitConfirm!=="function"){onYes();return}const B=document.body.classList,off=()=>B.remove("kg82cf");
- B.add("kg82cf");kitConfirm({title:title||(yes==="Bỏ cuộc"?"Bỏ cuộc?":"Quay lại?"),lines,yes,no:no||"Chơi tiếp",onYes:()=>{off();onYes()},onNo:off})}
 function kg82Back(){if(!kg82El())return;
  if(typeof KG82.backPre==="function"&&KG82.phase!=="play"&&KG82.phase!=="result"){const f=KG82.backPre;KG82.backPre=null;KG82.payOnGo=null;kg82Close();try{f()}catch(e){console.error(e)}
   /* jaudit (b)/(c): the cost it holds pending for this game is dropped — a game closed unplayed costs nothing — so the next act is not blocked */
   window.__aaPend=null;window.__aaTitle=null;try{if(S&&S.mg&&S.mg.cost)S.mg=null;save();render()}catch(e){}return}
- if(typeof KG82.back==="function"){const f=KG82.back,live=KG82.phase==="play"&&!KG82.tut&&KG82.run;
-  const go=()=>{kg82Close();try{f()}catch(e){console.error(e)}};if(live&&KG82.backAsk)kg82Ask(KG82.backAsk,"Quay lại",go);else go();return}
+ if(typeof KG82.back==="function"){const f=KG82.back;
+  kg82Close();try{f()}catch(e){console.error(e)}return}
  const ok=typeof kitOvBtn==="function"?kitOvBtn():null;if(ok){ok.click();return}
  if(typeof KG82.xdo==="function"){const f=KG82.xdo;f();return}
- const live=KG82.phase==="play"&&!KG82.tut&&typeof KG82.quit==="function";
- kg82Ask(KG82.quitAsk||[live?"Ván đang chơi dừng lại, tính như thua: 0/10 phần.":"Chưa chơi mà rời đi thì tính như bỏ cuộc: 0/10 phần.","Thưởng phạt theo đúng luật của việc này."],"Bỏ cuộc",kg82GiveUp)}
+ kg82GiveUp()}
 function kg82GiveUp(){const tb=document.getElementById("kgtback");if(KG82.tut&&tb)tb.click();
  if(KG82.phase==="play"&&typeof KG82.quit==="function"){const q=KG82.quit;KG82.quit=null;q();return}
  const box=kg82Box(),go=box&&(box.querySelector(".kgr-go")||(KG82.ready&&box.querySelector(KG82.ready.go)));
@@ -33647,7 +33643,6 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§13.7",title:"kgR
 /* layout only (colours and chrome come from the kit) */
 (function(){const st=document.createElement("style");st.id="kg82-css";st.textContent=`
 #ov .mg.kg82{width:100%;max-width:560px}
-body.kg82cf #modal{z-index:40}
 .kg82cv{display:block;margin:0 auto;touch-action:none;user-select:none;-webkit-user-select:none;border-radius:var(--k-rad,8px);max-width:100%}
 #kg82,#kg82 canvas,#kg82 button{-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;user-select:none}
 .kg82act{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0 4px}.kg82act button{flex:1 1 200px;display:flex;flex-direction:column;align-items:center;justify-content:center}
@@ -46006,6 +46001,9 @@ document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.tar
 .kinv .kinvg>.kitem-slot>.kitb{border-radius:7px}
 .kinv .kinvg>.kitem-slot[role=button]:hover>.kitb,.kinv .kinvg>.kitem-slot[role=button]:focus-visible>.kitb{filter:var(--k-glow,drop-shadow(0 0 5px #ffd66e));outline:none}
 .kinv .kinvg>.kitem-slot:focus{outline:none}
+/* KIT 94.1 (owner 24/11 ~04:25Z: no gold ring on the picker tab press): a press / tap on a kit item tab or slot shows NO gold ring, outline or sticky-hover glow (keyboard :focus-visible on the slot glow above stays); touch screens keep no :hover glow */
+.kinv [data-kinvtab],.kinv .kitem-slot{-webkit-tap-highlight-color:transparent}.kinv [data-kinvtab]:focus,.kinv [data-kinvtab]:active,.kinv [data-kinvtab]:focus-visible{outline:none!important;box-shadow:none!important}
+@media (hover:none){.kinv .kinvg>.kitem-slot[role=button]:hover>.kitb,.keq .kitem-slot[role=button]:hover>.kitb{filter:none}}
 .kpsubj.kpitem>.kitem{--isz:100%;width:100%}
 .dlg.kpanel .kinvacts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:6px}
 `;document.head.appendChild(st)})();
@@ -48149,7 +48147,7 @@ function kitCloseOthers(){let n=0;
  return n}
 function kitDialogStack(){try{const m=typeof Q!=="undefined"?Q[0]:null;if(!m)return 0;return kitDialogWins(m)?kitCloseOthers():0}catch(e){console.error("kitDialogStack",e);return 0}}
 window.kitDialogStack=kitDialogStack;window.kitCloseOthers=kitCloseOthers;window.kitDialogWins=kitDialogWins;
-(function(){const st=document.createElement("style");st.id="kit-dialog-stack";st.textContent=`html body:not(.kg82cf) #modal:not(.kptitle){z-index:42}`;document.head.appendChild(st);
+(function(){const st=document.createElement("style");st.id="kit-dialog-stack";st.textContent=`html body #modal:not(.kptitle){z-index:42}`;document.head.appendChild(st);
  setTimeout(()=>{const s1=showModal;showModal=function(){const r=s1.apply(this,arguments);kitDialogStack();return r}},0)})();
 /* game / lesson results in #ov (kg82 "Đã hiểu", j92 Chải chuốt, the old j5 "Xong"): the result card closes with ✕ / tap outside / Esc,
    which press that button (its own handler applies the result as before); while the game runs there is no ✕ */
@@ -59437,7 +59435,7 @@ function toilAuto(){const occ=toilOcc(),F=Math.max(...occ.map(o=>o.F)),d=toilDre
  const col=toilColFix(S.toilette&&S.toilette.col);const h0=wdHash(String(S.name||"")+":"+toilWk()),HD=typeof hdNpc==="function"?hdNpc(S,h0,sk.sk):null;const R=toilNpcPlay(sk.sk,h0,col,col.want||"",d.style,occ.map(o=>o.k),S.rank,HD?HD.q:null);
  S.toilette={day:toilWk()*10,wk:toilWk(),score:R.score,makeup:true,style:d.style,dv:d.v,F,occ:occ.map(o=>o.k),look:R.look,slip:R.slip,parts:R.parts,col,auto:1};if(HD)S.toilette.hd=HD;if(typeof lxSit==="function")lxSit(S,S.toilette)}
 /* KIT §13.9 (mg-back): the kit ✕ «Quay lại» on the mirror = leaving it as «Để mộc» (the existing lose choice), asked once; on the result it presses «Đã hiểu» */
-function toilBackX(){try{KG82.quitAsk=[`Rời gương lúc này thì tính như ${toilMkW("moc")}: không trang điểm.`];KG82.quit=()=>toilFinish(false)}catch(e){}}
+function toilBackX(){try{KG82.quit=()=>toilFinish(false)}catch(e){}}
 const TOIL_HOW="Hồi 1: chọn y phục theo dịp hôm nay. Hồi 2–4: tự tay kẻ mày lên đúng chân mày, đánh phấn hồng lên hai gò má, chấm son đúng chỗ khi vòng khép vừa môi. Có hoa điền thì chọn một chiếc, kéo vào giữa trán, nghiêng cho cân rồi dán. Không có đường chỉ: tay vụng thì mặt vụng.";
 /* ui-leftover-fold MG12 (KIT §13.7): the game's FIRST screen is the kit rules screen (kgReady: luật + picture of the move + «Sẵn sàng»), then Hồi 1 (the dress). Nothing runs and no khắc go before «Sẵn sàng». */
 function toilRules(){const box=kg82Box();if(!box)return;KG82.setup=1;box.hidden=false;box.innerHTML=`<div class="kg82act"><button type="button" class="${kg82Btn()}" id="toilrdy">Bắt đầu</button></div>`;
@@ -59617,7 +59615,7 @@ function toilFinish(made){const st=TOIL.st;if(!st)return;KG82.setup=1;try{if(KG8
  const eff=[];try{for(const h of ["th",qOn()?rivals[0]:null,"emp"].filter(Boolean)){if(h==="th"&&S.thDead)continue;const r=leAttire(S,"",h);const t=r.toil;if(!t||!t.aff)continue;
   eff.push(`${toilWho(h)}: ${h==="emp"?`Sủng ${balSg(t.aff>0?BAL.eff.jtoil.empSung:-BAL.eff.jtoil.empSung)}`:`thiện cảm ${t.aff>0?"+":""}${t.aff}`} khi gặp hôm nay`)}}catch(e){}
  const html=`<div class="kgr">${kitRows(rows.concat([["Hôm nay",eff.length?eff:["không ai đổi cách nhìn ta"],"n"]]))}</div><div class="kg82act"><button class="${kg82Btn()}" id="toildone">Đã hiểu</button></div>`;
- toilHUD({score:made&&!quick?`${score}/100`:"–",round:"4/4",time:"đã xong"});const showRes=()=>{kg82ShowRes(html,tOk);const b=$("toildone");if(b)b.onclick=()=>{TOIL.st=null;kg82Close();render()};KG82.quit=null;KG82.quitAsk=null;KG82.xdo=()=>{const x=$("toildone");if(x)x.click()}};
+ toilHUD({score:made&&!quick?`${score}/100`:"–",round:"4/4",time:"đã xong"});const showRes=()=>{kg82ShowRes(html,tOk);const b=$("toildone");if(b)b.onclick=()=>{TOIL.st=null;kg82Close();render()};KG82.quit=null;KG82.xdo=()=>{const x=$("toildone");if(x)x.click()}};
  try{toilReveal({look:mk,made,score,good,pre:made?toilPreName(S.toilette.col):"" },showRes)}catch(e){showRes()}
  try{save()}catch(e){}}
 (function(){const st=document.createElement("style");st.id="toil-css";st.textContent=`
@@ -67691,7 +67689,7 @@ function sgPlay(J){const G=J.G;if(typeof S==="undefined"||!S||S.dead){try{render
   const html=kitGameResult({parts,note:note+" Chạm «Ra tay»: việc làm theo cơ may này, kết quả hiện ở thẻ kết quả."})+kitRows(xr)+
    `<div class="kg82act"><button class="${kg82Btn()}" id="sgdo">Ra tay</button></div>`;
   kg82ShowRes(html,st>0?true:st<0?false:null);/* merge-train-4: result sound (result-sfx): odds up = win, down = lose */kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");$("sgdo").onclick=()=>{kg82Close();J.run(m)};KG82.quit=null;/* §13.9: the ✕ never acts silently: it asks first; «Ra tay» stays the only way on (the pay is spent), «Ở lại» keeps this card */
-  KG82.xdo=()=>kg82Ask([`Ra tay ngay: việc làm theo cơ may ${word(p1)}.`,"Kết quả hiện ở thẻ kết quả."],"Ra tay",()=>{const b=$("sgdo");if(b)b.click()},"Ra tay?","Ở lại");const dd=kg82El();if(dd)dd.scrollTop=0};
+  KG82.xdo=()=>{const b=$("sgdo");if(b)b.click()};const dd=kg82El();if(dd)dd.scrollTop=0};
  intro()}
 function sgEng(G,v,onEnd){const box=kg82Box();box.innerHTML="";const res=$("kg82box-res");if(res){res.hidden=true;res.innerHTML=""}KG82.phase="play";let done=false,dead=false,stop=null;
  KG82.peekBad=null;const env=KG82.cur={v,kind:G.g,lv:mgPlayLv(G.g),hud:o=>{for(const k in o)kg82Set(k,kg82Cap(o[k]))},end:(raw,info)=>{if(done)return;done=true;clearTimeout(guard);KG82.peek=()=>null;KG82.peekBad=null;const st=stop;KG82.run=null;try{if(st)st()}catch(e){}onEnd(cl(Math.round(raw),0,10),info||{})}};
@@ -69592,7 +69590,7 @@ function dhNotice(key){const o=dhObj(S,key);if(!o||typeof kitPanel!=="function")
   opts:worn?[{n:"Đã hiểu",fx:{},x:"",go:()=>dhApplyFx(S)}]:[{n:"Đeo ngay",fx:{},x:chTxt(key,S.dh[key].i)||o.fx||"tấm danh hiệu trên đầu",go:()=>dhPick(key)},{n:"Để sau",fx:{},x:"",go:()=>{}}]})}
 /* OD 21/11 ~04:14Z (#54): the new-title plate sits ON the event picture (caption at its bottom centre, like the chapter slide title), not as its own band under it.
    Applies to every title dialog (Danh hiệu mới / lên bậc / đeo): the .kt3 plate of the info column moves into the picture (.k3ev). The drawn title art is parked. */
-function kitDhCap(){try{const d=document.querySelector("#modal:not([hidden]) .dlg");if(!d)return;const ev=d.querySelector(".k3right>.k3ev,.k3body>.k3mpic"),src=d.querySelector(".k3right .kt3:not(.kdhcap)");if(!ev||!src||!src.querySelector(".kdh,.kdh-cap,.j59t"))return;
+function kitDhCap(){try{const d=document.querySelector("#modal:not([hidden]) .dlg");if(!d)return;const ev=d.querySelector(".k3right>.k3ev,.k3body>.k3mpic,.k3ev,.k3mpic"),src=[...d.querySelectorAll(".kt3:not(.kdhcap)")].find(e=>!e.closest(".k3ev,.k3mpic")&&e.querySelector(".kdh,.kdh-cap,.j59t"));if(!ev||!src)return;/* kit-titleplate (MAIN 124 G4 #54): the dialog is laid out in TWO shapes depending on timing / device load: picture in .k3right>.k3ev (plate in .k3right) or picture .k3body>.k3mpic (plate in a .kpsec section, no .k3right column). The old selector only knew the first, so on a busy device the plate stayed a band under the picture. Now any plate of the dialog that is not already in the picture moves into the picture. */
  if(!ev.querySelector(":scope>.kdhcap")){const c=src.cloneNode(true);c.classList.add("kdhcap");c.style.display="";ev.appendChild(c)}src.style.display="none";kdhCapFit(ev.querySelector(":scope>.kdhcap"))}catch(e){}}
 /* K-DH-CAPFIT (KIT §82.2): the caption plate on the picture never cuts its name. The plate wraps between words (jtitle .kdh rule); here, on the narrow event
    picture (Fold / iPad 120 px column), it keeps to TWO lines: font steps .74 → .66 → .6 rem until the name takes ≤ 2 lines (KDH_CAP_FS); never smaller, never cut. */
@@ -69605,7 +69603,7 @@ window.kitDhCap=kitDhCap;window.kdhCapFit=kdhCapFit;
    loader / a modal opened without showModal), and the plate then stays a band under the picture. ONE observer on #modal re-runs the idempotent kitDhCap
    on the next frame after any change, for EVERY title dialog (new / up / wear: any .k3ev picture with a .kt3 plate). */
 (function(){let q=0;const run=()=>{q=0;kitDhCap()};const go=()=>{const m=document.getElementById("modal");if(!m)return setTimeout(go,500);
- try{new MutationObserver(()=>{if(q||m.hidden)return;if(!m.querySelector(".k3ev"))return;q=requestAnimationFrame(run)}).observe(m,{childList:true,subtree:true,attributes:true,attributeFilter:["hidden"]})}catch(e){}};go()})();
+ try{new MutationObserver(()=>{if(q||m.hidden)return;if(!m.querySelector(".k3ev,.k3mpic"))return;q=requestAnimationFrame(run)}).observe(m,{childList:true,subtree:true,attributes:true,attributeFilter:["hidden"]})}catch(e){}};go()})();
 /* ---------- the bonus picker: wear a title and choose its ONE bonus (kit info panel + option cards) ---------- */
 function dhPick(key,back){const o=dhObj(S,key);if(!o)return;const e=S.dh[key],L=choices(key,e.i);
  if(L.length<2){if(L.length)e.pick=L[0];dhWear(S,key);if(back)dhPanel();return}
@@ -69615,7 +69613,7 @@ function dhPick(key,back){const o=dhObj(S,key);if(!o)return;const e=S.dh[key],L=
  opts.push({n:back?"Quay lại":"Để sau",fx:{},x:"",go:()=>{if(back)dhPanel()}});
  kitPanel({kind:"info",title:`Đeo «${o.name}»`,sub:"Mỗi lần chỉ đeo một danh hiệu, lấy một phần thưởng",dh:1,
   sections:[{h:"",html:`<div class="kt3">${kitTitlePlate(o)}</div>`},{h:"",rows:[["Cách có",esc(o.how)],["Khi đeo","chọn một phần thưởng bên dưới; tháo ra thì mất"]]}],opts},true);showModal()}
-window.dhPick=dhPick;
+window.dhPick=dhPick;window.dhNotice=dhNotice;window.DHKEYS=()=>Object.keys(DH);/* test hooks (dev/test/kit-titleplate.js) */
 /* ---------- NHIỆM VỤ › Danh hiệu ---------- */
 let DHTAB="goal";
 function tabsHTML(cur){const n=earned(S).length;const L=[];if(typeof kitGoalNow==="function"&&kitGoalNow())L.push({k:"goal",label:"Mục tiêu"});
@@ -79487,6 +79485,7 @@ html body .game .mapv.kpmv.kside.kleather{--kmv-fb:54px}
 html body .game .mapv.kpmv.kside.kleather>.mapsc{background:#e6dabf!important}
 html body .game .mapv.kside.kleather>.mapsc .mapimg{-webkit-mask-image:linear-gradient(90deg,#0000,#000 var(--kmv-fade-x),#000 calc(100% - var(--kmv-fade-x)),#0000),linear-gradient(#0000,#000 var(--kmv-fade-y),#000 calc(100% - var(--kmv-fade-y)),#0000);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,#0000,#000 var(--kmv-fade-x),#000 calc(100% - var(--kmv-fade-x)),#0000),linear-gradient(#0000,#000 var(--kmv-fade-y),#000 calc(100% - var(--kmv-fade-y)),#0000);mask-composite:intersect}
 .mapw .mspot .mlab,.mapw .mspot .mmeta{zoom:var(--mls,1)}
+/* kit-mapgo: a tag the solver moved slides by --kmx/--kmy (set on the spot by mapFit; zoom of the tag compensated) while its tap box stays on the building; a moved tag stays tappable (it opens the same place) */.mapw .mspot>.mlab,.mapw .mspot>.mmeta{translate:calc(var(--kmx,0px)/var(--mls,1)) calc(var(--kmy,0px)/var(--mls,1))}.mapw .mspot.kmmv>.mlab,.mapw .mspot.kmmv>.mmeta{pointer-events:auto!important}
 .mapw .mspot>.mlead{position:absolute;height:0;border-top:2px solid #ffe7b0;transform-origin:0 50%;pointer-events:none;z-index:0;filter:drop-shadow(0 0 1.5px #3a2a1e) drop-shadow(0 0 1px #3a2a1e)}.mapw .mspot>.mlead::before{content:"";position:absolute;left:-4px;top:-5px;width:7px;height:7px;border-radius:50%;background:#ffe7b0;border:1.5px solid #3a2a1e}
 .mapw .mspot.kmhide .mlab,.mapw .mspot.kmhide .mmeta{display:none!important}
 .mapw .mspot.kmnw .mlab{white-space:nowrap!important;max-width:none!important}
@@ -88310,7 +88309,7 @@ function run(kind,seq){const K=KG82_KIND[kind],ds=C().d.slice(),n=ds.length,raws
   const d=kg82Open({art:"Thử tay",title:`${K.n} · hồi ${i+1}/${n}`,how:K.how,round:"Hồi",roundV:`${i+1}/${n}`,pic:kg82Pic(kind)});if(!d)return;
   /* owner 20/11 ~04:45Z (KIT §13.9): the kit ✕ «Quay lại» on every screen of a kind → the kind list; a kind left before its last round is NOT saved
      (raws stay local, recSet only at round n — unchanged); asked once while a board is live */
-  KG82.back=()=>pick();KG82.backAsk=[`Bỏ dở môn ${K.n}: các hồi đã chơi của môn này không được ghi.`,"Trở lại danh sách các môn, chọn môn khác."];
+  KG82.back=()=>pick();
   const box=kg82Box();box.innerHTML=`<h4 class="kpst">Thử tay · ${K.n}</h4>`+kg82Rows([["Môn",`${K.n} · ${K.t}`,"t"],["Hồi",`${i+1}/${n}`,"t"],["Độ khó",mgDiffTxt(t,kind),"n"]])+
    `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button></div>`;
   kgReady(box,{kind});/* KIT §13.7 rules screen; mgcal numbers unchanged (rounds, gaps) */
@@ -97894,7 +97893,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="540fab8e80d8";window.CTM_BUILD=BUILD;
+const BUILD="bc15a44a5a6a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
