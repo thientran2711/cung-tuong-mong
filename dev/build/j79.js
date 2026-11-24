@@ -637,7 +637,10 @@ window.kitQuick=kitQuick;window.kitQuickSub=kitQuickSub;window.kitQuickRoll=kitQ
 /* seal: optional word for the header seal (default KP_SEAL.game "TÀI NGHỆ"; scheme games pass "MƯU") — one kit parameter for every caller
    kitGameFrame({art:"Cầm", title:"Tấu khúc", how:"Chạm đúng dây khi nốt chạm vạch đỏ.", hud:[["score","Điểm",0],["time","Thời gian","30 giây"]], id:"kgbox"})
    -> HTML of the frame; the game draws into #<id> (.kgbox). Update a HUD cell with kitGameSet("score", 12). */
-function kitBoardBg(kind){try{if(!kind||typeof KG82_BOARDBG==="undefined"||!KG82_BOARDBG.has(kind))return"";const s=`img/kit/mg-${kind}-bg.webp`;if(typeof kitPhOnCdn==="function"&&!kitPhOnCdn(s))return"";return typeof IMG_U==="function"?IMG_U(s):s}catch(e){return""}}
+function kitBoardBg(kind){try{if(!kind||typeof KG82_BOARDBG==="undefined"||!KG82_BOARDBG.has(kind))return"";let s=`img/kit/mg-${kind}-bg.webp`;if(typeof kitPhOnCdn==="function"&&!kitPhOnCdn(s))return"";
+ /* KIT MG-SKIN: the live skin's board painting (img/mg/<kind>-<id>.webp) when the CDN index lists it (a DOM backdrop has no load fallback, so an unknown index = default art) */
+ {const id=typeof KG82!=="undefined"&&KG82.skin&&KG82.skin.id;if(id&&typeof kg82SkinSrc==="function"&&typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE)s=kg82SkinSrc(kind+"-bg",id)}
+ return typeof IMG_U==="function"?IMG_U(s):s}catch(e){return""}}
 window.kitBoardBg=kitBoardBg;
 function kitGameFrame(g){g=g||{};const fg=g.fig?kitGameFig(g):"";const bgb=kitBoardBg(g.kind);return `<div class="kgame">${kpHeader("game",`${g.art?g.art+": ":""}${g.title||""}`,"",g.seal).replace(/<\/div>$/,'<span class="kgmk" hidden></span><span class="kgclk" hidden></span></div>')}`+
  `<div class="kgbody${fg?" kgfig-on":g.pic?" kgpic-on":""}">`+(fg||(g.pic?`<div class="kgpic"><img src="${g.pic}" alt="" draggable="false" onerror="this.parentNode.parentNode.classList.remove('kgpic-on');this.parentNode.remove()"></div>`:""))+`<div class="kginfo">`+
@@ -717,7 +720,18 @@ function kitGameResult(r){r=r||{};const rows=[];
 /* KIT-MGBG r2 (review FAIL): on a painted board every progress/state part sits on a CREAM PLATE and has a darker ring, so empty pips and buttons never vanish on the picture (one place, all four boards) */
 .kgbox.kgbox-bg .nwb-pool{background:rgba(255,250,240,.88);border:1px solid var(--k-hair,#b59a6a);border-radius:999px;padding:5px 12px;width:max-content;max-width:100%;margin:6px auto;box-sizing:border-box}
 .kgbox.kgbox-bg .nwb-pip{border-color:#6b4f1d;border-width:2px;background:rgba(255,250,240,.6)}.kgbox.kgbox-bg .nwb-pip.on{background:var(--gold,#d99a1e);border-color:#7a4f0a}.kgbox.kgbox-bg .nwb-pip.band{border-color:#1f6b38}
-.kgbox.kgbox-bg .btn,.kgbox.kgbox-bg .kgbtn{background:rgba(255,250,240,.94);border:2px solid #6b4f1d;box-shadow:0 1px 4px #2a1a1255}.kgres{padding:0 14px 10px}
+.kgbox.kgbox-bg .btn,.kgbox.kgbox-bg .kgbtn{background:rgba(255,250,240,.94);border:2px solid #6b4f1d;box-shadow:0 1px 4px #2a1a1255}
+/* KIT MG-SKIN BUTTON PALETTES (KIT.md §MG-SKIN; owner OD 23/11 ~23:05Z real): the open mini-game frame carries data-mgpal (kg82SkinOn) = ONE of 5 palettes, built ONLY from kit
+   tokens (theme §1.1 + the seal lacquer of .kbtn; the lower stop is the same token shaded toward --ink): son (default = today's lacquer, unchanged) · ngoc (--good) · kim (--gold) ·
+   mac (--dim/--ink) · dao (--peony, dark ink text). Main buttons (.kbtn) take the ground; the cream buttons (.kgbtn, .btn, .kbtn.alt, quick buttons .kquick) keep the cream card and take the
+   palette rim. Canvas engines read the same colours with kitMgPal(). Contrast is tested (dev/test/kit-mgskin.js: text ≥ 4.5:1 on both stops, rim ≥ 3:1 on the card). */
+#kg82[data-mgpal]{--mgp-a:#b0402c;--mgp-b:#8a2a1e;--mgp-ink:#fff8e6;--mgp-rim:#6e1d12}
+#kg82[data-mgpal="ngoc"]{--mgp-a:var(--good,#2d7a52);--mgp-b:color-mix(in srgb,var(--good,#2d7a52) 72%,var(--ink,#2a1a12));--mgp-ink:#fff8e6;--mgp-rim:color-mix(in srgb,var(--good,#2d7a52) 60%,var(--ink,#2a1a12))}
+#kg82[data-mgpal="kim"]{--mgp-a:var(--gold,#8f5f0c);--mgp-b:color-mix(in srgb,var(--gold,#8f5f0c) 72%,var(--ink,#2a1a12));--mgp-ink:#fff8e6;--mgp-rim:color-mix(in srgb,var(--gold,#8f5f0c) 60%,var(--ink,#2a1a12))}
+#kg82[data-mgpal="mac"]{--mgp-a:var(--dim,#6b5643);--mgp-b:var(--ink,#2a1a12);--mgp-ink:#fff8e6;--mgp-rim:var(--ink,#2a1a12)}
+#kg82[data-mgpal="dao"]{--mgp-a:var(--peony,#e48aa4);--mgp-b:color-mix(in srgb,var(--peony,#e48aa4) 82%,var(--k-seal,#9a2c1c));--mgp-ink:var(--ink,#2a1a12);--mgp-rim:var(--k-seal,#9a2c1c)}
+#kg82[data-mgpal]:not([data-mgpal="son"]) .kbtn:not(.alt):not(.kdanger):not(.kquick){background:var(--mgp-a);background:linear-gradient(var(--mgp-a),var(--mgp-b));color:var(--mgp-ink);border-color:var(--mgp-rim)}
+#kg82[data-mgpal]:not([data-mgpal="son"]) .kbtn.alt,#kg82[data-mgpal]:not([data-mgpal="son"]) button.kquick,#kg82[data-mgpal]:not([data-mgpal="son"]) .kgbtn,#kg82[data-mgpal]:not([data-mgpal="son"]) .kgbox .btn{border-color:var(--mgp-rim)}.kgres{padding:0 14px 10px}
 .kgrow{display:flex;justify-content:space-between;gap:8px;align-items:center}.kgrow>b{flex:none;white-space:nowrap}.kgr .kpkb .krl{white-space:normal;max-width:9rem}
 /* K-GE-3 (review/kit-ge): a row whose LABEL is a title plate (.kdh, a wide nowrap pill) puts the plate on its own line above the value, at every width (same rule as the kt3 plate block of the title popups) */
 .kpkb .kr:has(>.krl>.kdh)>.krl{grid-column:1/-1;max-width:none;padding:.3rem 0 0;text-transform:none;letter-spacing:normal}
