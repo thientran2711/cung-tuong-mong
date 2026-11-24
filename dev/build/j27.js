@@ -47,7 +47,7 @@ function palCeremony(){if(!S||!S.palCer||S.dead)return;S.palCer=0;const occ={};[
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead){palFix();palCeremony();tuyenTu();if(Q.length&&$("modal").hidden)showModal()}}catch(e){}return r}})();
 /* TUYỂN TÚ: every third spring, 3-5 young consorts enter at Đáp ứng / Thường tại; living consorts (her too) capped at BAL.harem.cap */
 function tuyenTu(){if(!S||S.month!==2||S.tuan!==0||S.ttDone===S.year)return;if(S.year%3!==0&&liveRivals(true).length>=8)return;S.ttDone=S.year;const live=liveRivals(true).length+1;let n=Math.min(BAL.selx.intake.min+R(BAL.selx.intake.max-BAL.selx.intake.min+1),BAL.harem.cap-live);/* SELSCENE: intake from BAL (was typed 3+R(3); same draw) */const L=[];
- while(n-->0&&roomFor("consort")){const v=newRival(roll(60)?0:1);Object.assign(v,drawFace());v.age=18+R(3);rivals.push(v);L.push(v)}palFix();
+ while(n-->0&&roomFor("consort")){const v=newRival(roll(60)?0:1);Object.assign(v,drawFace());v.age=BAL.ageMin+R(3);rivals.push(v);L.push(v)}palFix();
  if(L.length){log(`Tuyển tú: ${L.map(v=>`${v.name} (${RANKS[v.rank].n})`).join(", ")} vào cung.`);if(!quiet)Q.push({t:"Tuyển tú",h:`<p>Mùa xuân năm thứ ${S.year}, cung tuyển tú nữ. ${L.length} người vào cung:</p>${kitRows(L.map(v=>[`${mdH(pv(v),"xs")}${v.name}`,`${RANKS[v.rank].n} · ${houseName(v)}`,"t"]))}`})}}
 /* the cap applies to every way a consort enters */
 (function(){const r0=roomFor;roomFor=function(role){if(role==="consort"&&S&&rivals&&liveRivals(true).length+1>=BAL.harem.cap)return false;return r0.apply(this,arguments)}})();

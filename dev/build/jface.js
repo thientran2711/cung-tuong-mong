@@ -78,7 +78,7 @@ KIT_FACEFX.person=function(ref){try{if(ref==null||typeof S==="undefined"||!S)ret
 
 /* ---------- shared helpers ---------- */
 const FXF={ill:[0,2,4,6],weakSuc:25,kidHp:[35,20],doc:[0,4,7],docWk:[0,3,4],slowWk:9,docMed:40,docNpcHeal:35,docNotice:30,
- tat:3,tatWk:2,tatDuc:-2,tatRel:-20,penQuy:-8,penWk:[0,1,2],phatDuc:-1,phatRel:-15,cd:3};
+ tat:3,tatWk:2,tatDuc:-2,tatRel:-20,penQuy:BAL.rl.jface.penQuy,penWk:[0,1,2],phatDuc:-1,phatRel:-15,cd:3};
 function fxSeen(p){return KIT_FACEFX.seen(p)}                        /* the one "seen" rule: herself, or she knows / has seen the person (group rule) */
 function fxLive(p){return KIT_FACEFX.live(p)}
 function fxKey(by){try{return by&&["consort","player"].includes(KIT_FACEFX.kind(by))?key(by):null}catch(e){return null}}
@@ -180,10 +180,10 @@ A("tat","Tát",{c:{},ok:(a,t)=>together(a,t)&&rkOf(a)>rkOf(t)&&!(t.slap&&t.slap.
  if(sev>=3&&roll(B.thau)){ap(a,{danh:B.thauDanh});r+=`Thái hậu nghe chuyện, quở trách nặng lời (Danh ${a===S?"ngươi":NM(a)} ${B.thauDanh}). `}
  if((t.sung||0)>=B.hoangMin&&roll(B.hoang[sev])){ap(a,{sung:B.sung[sev]});r+=`Hoàng thượng nghe chuyện, không vui (${sgOf(a,B.sung[sev],a===S?"Sủng ngươi":`Sủng ${NM(a)}`)}). `}
  r+=slapEvidence(a,t,sev);return `<span class="${t===S?"r":"g"}">${r}</span>`}});
-A("phatquy","Phạt quỳ",{c:{duc:FXF.phatDuc},ok:(a,t)=>fxAuth(a,t)&&!(t.pen&&t.pen.until>wk()),o:()=>100,x:"nàng quỳ nửa ngày ngoài sân: Sức -8, đi lại chậm một tuần · nàng oán ngươi",f:(a,t)=>{
+A("phatquy","Phạt quỳ",{c:{duc:FXF.phatDuc},ok:(a,t)=>fxAuth(a,t)&&!(t.pen&&t.pen.until>wk()),o:()=>100,x:`nàng quỳ nửa ngày ngoài sân: Sức ${balSg(BAL.rl.jface.penQuy)}, đi lại chậm một tuần · nàng oán ngươi`,f:(a,t)=>{
  if(typeof ducAdd==="function")ducAdd(a,FXF.phatDuc,"phạt quỳ");else ap(a,{duc:FXF.phatDuc});relAdd(t,a,FXF.phatRel);if(t===S)apply({suc:FXF.penQuy});else ap(t,{suc:FXF.penQuy});penGive(t,"quy","bị phạt",a);
  if(t.schemes>0)ap(a,{danh:1});return `<span class="${t===S?"r":"g"}">${NMc(a)} phạt ${NM(t)} quỳ nửa ngày ngoài sân: Sức -${-FXF.penQuy}, gối đau, đi lại chậm.</span> `}});
-try{AOUT.tat=["nàng in dấu tay trên má, Sắc giảm vài tuần; nàng oán ngươi",""];AOUT.phatquy=["nàng quỳ phạt: Sức -8, đi lại chậm một tuần; nàng oán ngươi",""]}catch(e){}
+try{AOUT.tat=["nàng in dấu tay trên má, Sắc giảm vài tuần; nàng oán ngươi",""];AOUT.phatquy=[`nàng quỳ phạt: Sức ${balSg(BAL.rl.jface.penQuy)}, đi lại chậm một tuần; nàng oán ngươi`,""]}catch(e){}
 try{LACK.tat=t=>!together(S,t)?"nàng ở cùng chỗ với ngươi":rkOf(S)<=rkOf(t)?"phẩm ngươi cao hơn nàng":t.slap&&t.slap.until>wk()?"má nàng còn in dấu tay":"";
  LACK.phatquy=t=>!fxAuth(S,t)?"ngươi là Hoàng hậu, hoặc trên nàng ba phẩm":t.pen&&t.pen.until>wk()?"nàng đang chịu phạt":""}catch(e){}
 try{ACTDOM.tat="Mưu kế";ACTDOM.phatquy="Mưu kế";J78VERB.tat="tát {t}";J78VERB.phatquy="phạt {t} quỳ";HARMK["Tát"]="tat";HARMK["Phạt quỳ"]="phatquy"}catch(e){}
