@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"1f046fb7+","t":"2026-11-24T11:39Z","c":"robot-fix-cnv: eunuch «Lão» rename at the new year too (was load-only), S.where view in the harness repair filter; site build","b":"0e7b75f21ee5","h":[{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"}]};
+window.CTM_BI={"s":"b3853e5e+","t":"2026-11-24T12:28Z","c":"robot-fix-cnv: eunuch «Lão» rename at the new year too (was load-only), S.where view in the harness repair filter; site build","b":"039c2f10964f","h":[{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"},{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -4290,7 +4290,13 @@ function deser(d){trMigrate(d);rivals=d.R;rid=d.rid;S=d.S;S.origin=originByKey(d
    by VALUE, so after a load S.visit held a copy: talking to her changed the copy, not the real servant. Relink every visitor whose ref is a
    servant (sid) to the live servant object (servById); a sid nobody holds any more stays as saved. */
 function visRelink(){try{const P=S&&S.visit&&S.visit.people;if(!Array.isArray(P)||typeof servById!=="function")return;
- for(const p of P){const o=p&&p.ref;if(!o||typeof o!=="object"||o.sid==null||(rivals||[]).includes(o))continue;const s=servById(o.sid);if(s&&s!==o)p.ref=s}}catch(e){console.error(e)}}
+ const one=[S.emp,S.thO,S.maid].concat(Object.values(S.court||{})).filter(x=>x&&typeof x==="object");
+ for(const p of P){const o=p&&p.ref;if(!o||typeof o!=="object"||(rivals||[]).includes(o))continue;let s=null;
+  if(o.sid!=null)s=servById(o.sid);
+  /* review r1 (law 6b, same family): a man of S.men (Nhạc sư, thái y…) and the one-of persons (Hoàng thượng, Thái hậu, her maid, a court official) stood in the room as a copy too */
+  else if(o.id!=null&&Array.isArray(S.men))s=S.men.find(m=>m&&m.id===o.id&&m.name===o.name)||null;
+  if(!s&&o.name)s=one.find(x=>x.name===o.name&&x.role===o.role&&x.kind===o.kind)||null;
+  if(s&&s!==o)p.ref=s}}catch(e){console.error(e)}}
 function save(){if(!S||quiet)return;try{if(S.dead)localStorage.removeItem(SK(SLOT));else localStorage.setItem(SK(SLOT),JSON.stringify(ser()));localStorage.setItem("hclh-slot",String(SLOT))}catch(e){}}
 function loadSlot(n){try{const d=JSON.parse(localStorage.getItem(SK(n))||"null");if(d&&d.v===2)d.P=[];/* v2: no pending choices; v2/v3 get items, stat blocks, records via normAll */
  return d&&d.v>=2&&d.v<=6?d:null}catch(e){return null}}
@@ -83304,6 +83310,9 @@ Object.assign(window,{greetName,grRank,grUniq,gmTick,gmWatch,gmOpts,GM});
    Off: BAL.ag.day.on = 0 (the per-buổi AG1 choice and the old schedule dice come back). Counters: AGD.stat, window.__agDayMs.
    ===================================================================================================================== */
 const AGD={stat:{draw:0,slots:0,deeds:0,replan:0,keep:0,touch:0,land:0,miss:0,world:0},ms:[],errs:[],oc:{},bo:null};
+/* review r1 robot-fix-cnv F4: AGD.lz holds the world (w) it was drawn for and its queue (newlife-leak «AGD…»); it already drops itself on another world, now it is
+   dropped at once. AGD.oc is NOT reset here: a load resetting it re-plans the day and rewrites S.ag.log (save→load drift, r10-play-rt thd) — residual for the fixer */
+lifeStore("AGD.lz day-plan queue (holds its world)",()=>{AGD.lz=null});
 const AGREG={consort:{},hh:{},maid:{},srv:{},emp:{},th:{}};const AGNEEDREG={};
 function agdErr(w,e){try{AGD.errs.push(w+": "+(e&&e.message||e));if(AGD.errs.length>40)AGD.errs.shift();console.error("jagday",w,e)}catch(x){}}
 function agReg(grp,key,fn){(AGREG[grp]=AGREG[grp]||{})[key]=fn}
@@ -95673,6 +95682,10 @@ function dfTabLayers(){try{const off=typeof tab!=="undefined"&&tab!=="act";const
  if(off)document.querySelectorAll("#game>.kfoc-mood,body>.kfoc-mood").forEach(b=>b.remove())}catch(e){console.error("dfTabLayers",e)}}
 (function(){const r0=window.renderPanel;if(typeof r0!=="function")return;window.renderPanel=renderPanel=function(){const r=r0.apply(this,arguments);dfTabLayers();return r}})();/* renderPanel: every tab change draws the panel (render() and the j63 log jump) */
 window.dfTabLayers=dfTabLayers;
+/* review r1 robot-fix-cnv F4 (newlife-leak family): the open stage encounter (DF.p = the visitor, DF.F = its kitFocus) belongs to the life it opened in;
+   a new life / a load / the title closes it, so the new life never holds (or answers) the old life's visitor (newlife-leak «DF.3.3.0», g.DF old names) */
+lifeStore("DF stage encounter (visitor of that life)",()=>{const F=DF.F,h=DF.play;DF.F=null;DF.p=null;DF.i=null;DF.tk=null;DF.encM=null;DF.play=null;
+ try{if(h)h.destroy()}catch(e){}try{if(F)F.destroy()}catch(e){}});
 /* ================= jroad8: ONE 8-TAB BAR ON EVERY ROAD (owner 21/11 ~03:15Z, mark #32; MAIN CHÍNH 85 brief maid-8tabs) =================
    Owner (verbatim, OD 21/11 ~03:15Z): "Mình vẫn giữ đủ 8 cái tab, nhưng mà mỗi một cái tab mình để y chang luôn … tôi nghĩ là mình không có nên thay đổi
    những cái tab này … trước mắt là cứ làm cái layout là 8 cái tab. Còn mà đổi cái gì vào trong cái tab gì cho nó đúng thì tôi sẽ báo bạn sau."
@@ -97807,7 +97820,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="0e7b75f21ee5";window.CTM_BUILD=BUILD;
+const BUILD="039c2f10964f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

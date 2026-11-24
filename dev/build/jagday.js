@@ -25,6 +25,9 @@
    Off: BAL.ag.day.on = 0 (the per-buổi AG1 choice and the old schedule dice come back). Counters: AGD.stat, window.__agDayMs.
    ===================================================================================================================== */
 const AGD={stat:{draw:0,slots:0,deeds:0,replan:0,keep:0,touch:0,land:0,miss:0,world:0},ms:[],errs:[],oc:{},bo:null};
+/* review r1 robot-fix-cnv F4: AGD.lz holds the world (w) it was drawn for and its queue (newlife-leak «AGD…»); it already drops itself on another world, now it is
+   dropped at once. AGD.oc is NOT reset here: a load resetting it re-plans the day and rewrites S.ag.log (save→load drift, r10-play-rt thd) — residual for the fixer */
+lifeStore("AGD.lz day-plan queue (holds its world)",()=>{AGD.lz=null});
 const AGREG={consort:{},hh:{},maid:{},srv:{},emp:{},th:{}};const AGNEEDREG={};
 function agdErr(w,e){try{AGD.errs.push(w+": "+(e&&e.message||e));if(AGD.errs.length>40)AGD.errs.shift();console.error("jagday",w,e)}catch(x){}}
 function agReg(grp,key,fn){(AGREG[grp]=AGREG[grp]||{})[key]=fn}
