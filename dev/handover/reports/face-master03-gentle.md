@@ -16,5 +16,10 @@ NOTE: every MCP call needs the full ~9.6k-char prompt pasted inline (~3k tokens/
 | FACE-GENTLE-C02-A16-MASTER-SKIN03-T01 | c02 | 16 | Sya7J9wUb8 | IfZhurstvE | DONE | no text, bare face, ivory robe, ok |
 | FACE-GENTLE-C08-A16-MASTER-SKIN03-T01 | c08 | 16 | 9Zbi3zwNYZ | rgoLwAfxtc | DONE | no text, bare face, ivory robe, ok |
 | FACE-GENTLE-C20-A16-MASTER-SKIN03-T01 | c20 | 16 | BhiItudoQR | 0e7MBKoTfW | DONE | no text, bare face, ivory robe, ok |
+| FACE-GENTLE-C26-A16-MASTER-SKIN03-T01 | c26 | 16 | 0e7MDhVTfW | 1lBj7ZHr4r | DONE | no text, bare face, ivory robe, ok |
+| FACE-GENTLE-C32-A16-MASTER-SKIN03-T01 | c32 | 16 | Sya7JAyUb8 | 5je1S22Kxe | DONE | no text, bare face, ivory robe, ok; lavender ribbon accessory (minor, hairpin/ribbon colour), no text |
+| FACE-GENTLE-S62-A16-MASTER-SKIN03-T01 | s62 | 16 | tC2varXmZJ | xS8sOTnjfW | DONE | no text, bare face, ivory robe, ok; long braid |
+| FACE-GENTLE-S63-A16-MASTER-SKIN03-T01 | s63 | 16 | P3HN6Ma42C | cpwVoLf0eP | DONE | no text, bare face, ivory robe, ok |
+| FACE-GENTLE-S64-A16-MASTER-SKIN03-T01 | s64 | 16 | s7mSUzul8e | dtNof49XSL | DONE | no text, bare face, ivory robe, ok |
 
-## STATUS 24/11 ~21:55Z: rollover CANCELLED (Foreman D: window 1M). Original worker continues; 9/56 DONE (age16 up to c20). Next: c26 c32 s62 s63 s64, then ages 26/51/63.
+## STATUS 24/11 ~22:05Z: age 16 COMPLETE (14/14). Next: age 26 (14), 51, 63. Rollover cancelled; original worker continues.
