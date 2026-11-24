@@ -1394,3 +1394,4 @@ LAW-1 likes/dislikes/gifts scan + fix (opus; MAIN 116 07:57Z (e); briefs/D-law1-
 | PARKING #10 HƯƠNG RIÊNG E67 (opus BIG; expert first; briefs/E67-scent.md) | review/scent; reports/scent.md | FOREMAN E (child1) | session_01DgYSWoizfjLqnTfD3oCWz3 | RUNNING | 24/11 06:05Z |
 | PARKING AUDIT E63 | reports/parking-audit.md 7f85225b | FOREMAN E (child1) | session_01DgYSWnS8t83k8g5g1at6Hy | DONE, ARCHIVED | 24/11 06:05Z |
 | REVIEW E68r parking-rank SMALL (test-only) of f3c7ce80 | review/parking-rank; reports/parking-rank-review.md | FOREMAN E (child1) | session_01DgYSWp7114rbXtgpPug6pw | RUNNING | 24/11 06:08Z |
+REVIEW kit-promo-hook (sonnet SMALL; briefs/D-kit-promo-hook-review.md) of 287a6adf | review/kit-promo-hook-rv | (opening) | RUNNING | 24/11 06:08Z (Foreman D ROOT)
