@@ -10,4 +10,9 @@ NOTE: every MCP call needs the full ~9.6k-char prompt pasted inline (~3k tokens/
 | FACE-GENTLE-M02-A16-MASTER-SKIN03-T01 | m02 | 16 | ksXxxbS16B | 8aRmhWuIrU | DONE | no text, bare face, ivory robe, soft smile, looks ~18-20 (slightly older than 16) |
 | FACE-GENTLE-M08-A16-MASTER-SKIN03-T01 | m08 | 16 | Sya77l1Ub8 | rgoLlKgxtc | DONE | no text, bare face, ivory robe, smile, ok |
 | FACE-GENTLE-M14-A16-MASTER-SKIN03-T01 | m14 | 16 | EbcFFETuuO | tC2vft3mZJ | DONE | no text, bare face, ivory robe, smile, ok |
-| FACE-GENTLE-M18-A16-MASTER-SKIN03-T01 | m18 | 16 | gOvw7wcSXO | 9Zbi26kNYZ | QUEUED (unchecked) | |
+| FACE-GENTLE-M18-A16-MASTER-SKIN03-T01 | m18 | 16 | gOvw7wcSXO | 9Zbi26kNYZ | DONE | no text, bare face, ivory robe, ok |
+| FACE-GENTLE-M19-A16-MASTER-SKIN03-T01 | m19 | 16 | dtNo8IEXSL | cpwVeju0eP | DONE | no text, bare face, ivory robe, braid, ok |
+
+## HANDOVER (rollover, 24/11 ~21:45Z) — 5/56 DONE (all age 16: m02 m08 m14 m18 m19)
+Foreman D depth 7 = session_01D3E3NXc34LyTqacBtXB6sj. Decision: keep MCP (no REST gpt-2-6), do not switch models.
+Successor: reuse identity uploads above (do not re-upload); strip prompt = file text minus the one operator sentence; call images_generate(mode gpt-2-6, resolution 2k, aspectRatio auto, count 1, references [identity, UPf76Ptwny]); creations_wait then creations_read each; log row per job; next job = m20 age16, then c02 c08 c20 c26 c32 s62 s63 s64 (age16), then ages 26, 51, 63 for all 14. Skip age 39. Contact sheets (original|result per age) + CDN upload still TODO after all jobs. Tip: ~3.5k tokens per job; run several per message.
