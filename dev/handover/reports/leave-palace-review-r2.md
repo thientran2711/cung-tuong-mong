@@ -56,3 +56,40 @@ review/leave-palace-r3 = merge of LIVE 178cac37 (parent 2) into 87f6480b (parent
 | quickcheck run 2 (quiet box) | PASS: render 254/255, tab 463/515, buổi 1406/2980 ms, core gates PASS, old save ok → run 1 = box noise (the LIVE side swung the same way) |
 | coop-e2e host Fold | 138/162 (suite grew from 142): «#next enabled / buổi advanced for both» from week 0, 8 new-life dialogs queued (Q:8: Tiền truyện 1–4/4, kc2Sel…) |
 | LOAD-COMPARE: coop-e2e on bare LIVE 178cac37 | SAME failure at week 0 (Q:8, «buổi 0:0 advanced for both» FAIL, room S9Q3) — LIVE regression since fd85907a (E81r saw the same); not the branch. COOP_SWAP not rerun (relay red on LIVE). |
+
+## RE-MERGE r5 (E85r, opus, session_01DgYSWmzS4RRsmqyV6HEwXr; brief briefs/E85r-remerge-leave-palace.md, ORDER FROM MAIN 123 14:45Z + FROM MAIN 124 15:23Z «newest LIVE») — **PASS 7a3541fd17ea9da156d97855a67a6c88ee488a50**
+PRIORITY #1 CHECK ('robot10-e-fix leave-palace re-merge'): claims = E85r (this) | main LIVE c6c3ca76 → 15b5e1ff → d0ed42e4 → eae255e2 → 22f1e491 (moved 4× during the review) | review/leave-palace-r4 9aa54fa2 → review/leave-palace-r5 | reports: this file r2/r3, robot10-E-fixer.md §16, ageband.md:33, law1-gifts.md:150, night-ledger.md §4 (same-world coop-host-lag family). START_CTX ~4 %.
+
+### MERGES (review/leave-palace-r5, each pushed)
+| commit | = | conflicts | dev/build delta vs that LIVE |
+|---|---|---|---|
+| cd5dc417 + d1d8ae9c | 9aa54fa2 + LIVE c6c3ca76 (net-build) | **j30.js** (branch's own expose line = ttExposed road vs LIVE's own xinhh line = netTh gate; each side changed only its own A() line → kept both), **jbal2.js** (BAL.crime/thatS/leave block vs BAL.net.th block added at the same spot → kept both + the blank line), index.html/sw.js rebuilt | 20 files, every file's +/− lines = 8d93c027 vs 178cac37 (sorted line compare per file, 20/20 same) |
+| 6206fe86 | + LIVE 15b5e1ff (robot-coop-fix-1 r2, gzip frames) | none | 20/20 same |
+| 9419ef65 | + LIVE d0ed42e4 (kit-sqopt) | index.html/sw.js only, rebuilt | 20/20 same |
+| 153aa7a1 | + LIVE eae255e2 (kit-mgboardof) | index.html/sw.js only, rebuilt | 20/20 same |
+| 7a3541fd | + LIVE 22f1e491 (kit-toilring, CSS) | index.html/sw.js only, rebuilt | 20/20 same |
+No game-code difference beyond the LIVE side in any step.
+
+### GATES
+| on | leave-palace.test | quickcheck | coop-e2e Fold host | COOP_SWAP=1 (iPad host) |
+|---|---|---|---|---|
+| d1d8ae9c (LIVE c6c3ca76) | 135/135 | PASS (render 222/246, tab 425/407, buổi 1210/1104 ms; core gates, old save ok) | 4/5 (1× S.fidUsed.25 «after rejoin» A=undefined B=maid:m52) | **3/3** 142/142 |
+| bare LIVE c6c3ca76 | – | – | 5/5 | **2/2** 142/142 |
+| 6206fe86 (LIVE 15b5e1ff) | 135/135 | – (superseded) | 1/1 | 2/2 (stopped when LIVE moved) |
+| 9419ef65 (LIVE d0ed42e4) | 135/135 + leave-palace-fit Fold 24 / iPad 24 overflow 0 | PASS (render 251/226, tab 418/404, buổi 1118/1104 ms) | 2/2 | 6/7 (1× «after week 2» R#9.inv.10.iu A=10000001 B=10000030) |
+| bare LIVE d0ed42e4 | – | – | 2/2 | 5/5 |
+| 153aa7a1 (LIVE eae255e2) | 135/135 | PASS (render 253/229, tab 406/483, buổi 1154/1142 ms) | 1/1 | **3/3** |
+| bare LIVE eae255e2 | – | – | – | 1/1 |
+| 7a3541fd (LIVE 22f1e491) | 135/135 | run 1 FAIL perf only (longTasks200 26/16, buổi 2340/1328 ms — box noise); run 2 PASS (render 213/222, tab 366/379, buổi 1050/1114 ms, tasks 18/19; core gates, old save ok) | 1/1 | 1/1 |
+All runs serial on a quiet 4-core box (one coop-e2e at a time).
+
+### COOP «same world» fidUsed question (ORDER MAIN 123)
+Totals over this review: branch 2 fails in 26 coop-e2e runs (Fold host 1 in 10, COOP_SWAP 1 in 16; with r4 (E fixer): 3 in 29); bare LIVE 0 in 15 (+ E fixer 0 in 2 on d521656c). Each fail is a single canonical-W key, each a different one: S.fidUsed consort tail after week 1 (r4), S.fidUsed maid tail after rejoin, R#9.inv.10.iu (a guest-numbered 1e7+ item id) after week 2 — all labelled by the test itself «coop-host-lag family». Fisher on 3/29 vs 0/17 ≈ p 0.3: not proof either way.
+Code read: the branch's dev/build diff writes no fid / fidUsed / usedFaces / inv / iu, creates no consort or servant and calls no figPick / figGC / ilUid (grep of the + lines: 0 hits). Consort faces enter S.fidUsed only through j39 figPick (display-time, implicit world write dropped on the guest by jcoopthinc), are never freed (figGC frees servant faces only, host only); the maid-tail form is the OPEN B «after rejoin S.fidUsed guest-only tail maid:m42/m52» already logged on other branches (ageband.md:33; law1-gifts.md:150 lists R#2.inv.0.iu + fidUsed under load; night-ledger S.fidUsed.49). The only new world activity of the branch is tsMonthAll (monthly roll for thất sủng consorts) + convict/deathSentence on proven crimes: it shifts the host's roll stream, which can move WHEN an existing host-lag race shows, but cannot add a face or an item id. → pre-existing LIVE co-op host-lag flake (family OPEN B, Foreman B's co-op fixer), not caused by leave-palace. On LIVE it is rarer in these runs (0 in 17) — worth B's fixer knowing; not a reason to hold the branch.
+
+### LAW CHECK (merge only; content laws unchanged from r2 PASS)
+law 4 one core: the j30 merge keeps LIVE's netTh gate (no typed number) and the branch's BAL.crime; law 9 kit: no UI change in the merge, LIVE's kit-sqopt square option + toilring ride along (leave-palace-fit: end card 24+24, overflow 0); law 11: delta identical file by file; others as r2.
+
+**PASS 7a3541fd17ea9da156d97855a67a6c88ee488a50** (review/leave-palace-r5; ancestor = origin/main 22f1e491 → fast-forward ready). Scratch shots none (no new UI); scratch logs deleted.
+
+LIVE moved again to 8eceeef9 (kit-titleplate) at ~17:15Z after these gates: E85r re-merges it next on the same branch and posts a second line; if LC11 lands before that, 7a3541fd is FF from 22f1e491 only.
