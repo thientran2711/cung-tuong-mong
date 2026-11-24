@@ -1,0 +1,75 @@
+# map-perf — Dư đồ opens slowly on a played save + «phone map settle» (MAP-PERF, worker session_01V1ZZH1LjcZxsUARKRyfdN1, for MAIN 116)
+
+PRIORITY #1 CHECK: OD 0 hits (kmSolve / mapSolC) | main dev/build/j38.js:19 kmSolve, j38.js:83 cache window.__mapSolC2 (8 keys) | review/* map-label-overlap-r b7598e72 (LANDED = LIVE base of this branch), review/robot10-lag 9001e14c (harness, reused unchanged) | claims MAP-PERF = this session.
+START: depth 1, START_CTX ~3 %.
+
+Branch `review/map-perf` @ **d6c2b4d4** from origin/main b7598e72. Only file of game code touched: `dev/build/j38.js` (+ rebuilt index.html / sw.js / assets.json). No kit part, no CSS, no wording, no BAL number.
+
+## Root cause (one cause for both tickets)
+`mapFit` (the only caller of the tag solver `kmSolve`) runs on ~10 triggers around an open (render, the next frame, picture load, fonts, rows settle, ResizeObserver x2, MutationObserver, settle check up to 6 re-fits, periodic re-renders) and:
+1. every fit solved **twice**: a no-viewport pass inside `place()` whose result the viewport pass right after always threw away;
+2. the cache key held **screen px** (scroll position, frame offset) and its 8 slots were filled by those passes → on re-open / re-render / scroll nothing was ever reused (measured: 48 solver calls, 9 distinct layouts per open);
+3. the first fit inside `render()` measured the tags **before** the rows around the map existed and before the rank-title painter (j79, one frame later) rewrapped a name → 2–3 different layouts per open, each a full solve;
+4. after a scroll clamp the stored position (`__mapPos2`, from the async scroll event) was an in-between value → the next fit restored another scroll → another visible box → another solve;
+5. on a **played** save no clean layout exists, so each solve ran all 8 stages from scratch with their own time boxes: ~5 s per fit at CPU×1.
+Together: 11–21 s at ×1, 35–69 s at ×4 on the first open, 6–13 s on a re-open; and the settle check / re-renders kept re-solving with slightly different inputs, so the map **re-laid out every 5–6 s for 20 s** (the «phone map settle» ticket: same mechanism, worst on the phone where every solve reaches the last-resort stages; main phone run: max settle 18.6 s, 6 cases never settled within 15 s).
+
+## Fix (whole group: the one shared solver, every map view — portrait kv1 + landscape kv2 + every zoom step; courtyards .kpmv never solve; every device)
+- no throw-away pass: one solve per fit (viewport pass only);
+- solver works in **map-frame coordinates**; cache key = frame-relative geometry; **LRU 16** (`window.__mapSolC3`): same layout = 0 ms whatever the scroll / re-render / re-open;
+- the fit inside `render()` only **reuses** a stored solution (never solves a layout about to change); on the switch into the tab only the next-frame fit runs (still before the first paint);
+- the text painters (`kitRankPaint` / `kitNameTone` / `kitMarkPaint`) run on the map before it is measured (tags measured in their final shape);
+- the fit stores the scroll it chose at once;
+- `kmChain`: the stage chain (same stages, map-label-overlap RX1–3 kept) under **one 400 ms time box** (`KMAP_SOLVE_MS`), every later stage warm-starts from the best layout so far: base (40 %) → the loosest clean stage 200/16 (25 %): if even it cannot clear the tags the stricter ones cannot either → straight to RX1 (≥ 75 %) → RX2/RX3 (rest); if it clears them, the stricter clean stages are tried in their old order while the box lasts and the first clean one wins (same preference as before);
+- exact speed-ups in `kmSolve` (same result, checked on 98 recorded solver calls with a fake clock: 98/98 identical): bounding-box skip of far tags in `hardAt`, best-so-far cut-off in `search`/`costAt`, SA re-counts only tags near the moved one, scratch `geo` result, repair skips a tag whose search inputs did not change.
+
+## Before / after
+Save = robot repro save dev/handover/robot/saves/20261123-2308-004 (year 14, rank 5, Quý phi, 26 places). Box = this 4-CPU software-GL container (same class as the robot run).
+
+robot10-lag harness `probe()` (review/robot10-lag dev/measure/robot10-lag.js, unchanged; click → 2nd frame; 2 probes, «Sang ngày mới» between them = a new buổi = a new map):
+| device | CPU | Dư đồ probe 1 BEFORE (main) | probe 2 BEFORE | probe 1 AFTER | probe 2 AFTER |
+|---|---|---|---|---|---|
+| Fold 755x1000 | ×1 | 21 568 ms | 13 087 | **1 326** | **278** |
+| Fold 755x1000 | ×4 | 69 234 | 1 514* | **2 533** | **1 484** |
+| iPad 1180x820 | ×1 | 10 202 | 12 970 | **1 451** | **1 280** |
+| iPad 1180x820 | ×4 | 56 654 | 38 581 | **3 063** | **3 513** |
+(*before, probe 2 at ×4 hit a still-running settle loop). Other tabs in the same probes: Hành sự 0.5–1.0 s, Tư trang 0.5–1.0 s at ×1 — Dư đồ is now in the same band.
+
+Map-perf probe (one open, 20 s watch; re-open after Hành sự, same buổi):
+| | Fold ×1 before → after | iPad ×1 before → after | Fold ×4 | iPad ×4 |
+|---|---|---|---|---|
+| open (tap → 2nd frame) | 11.5 s → **1.0–1.3 s** | 11 s → **1.2–1.5 s** | 38.1 → **2.3 s** | 35.3 → **2.7 s** |
+| re-open | 6.1 s → **0.24–0.29 s** | 6 s → **0.21–0.31 s** | 22.5 → **0.94** | 13.8 → **0.92** |
+| solver calls in 20 s | 46 → 3–5 (one chain) | 37 → 4–5 | 42 → 3 | 37 → 4 |
+| tags moved after settle (8–20 s) | yes → **no** | yes → **no** | yes → no | yes → no |
+| solver hard (tags touching) | 0 → 0 | 0 → 0 | 0 → 0 | 0 → 0 |
+Of the remaining ~1.2 s at ×1: tab render ~350 ms (other modules) + one solve 0.6–0.9 s + paint ~0.2 s. Target «< 1 s at ×1» is met for re-open (0.2–0.3 s) and on Fold in the probe run (0.99 s with a 350 ms box); with the 400 ms box needed to keep map-labels-scan quality (below) first open on a new buổi is **1.0–1.5 s at ×1** (iPad up to ~1.8 s on a busy box) — honest gap, see Notes. Table rows AFTER = build 8e86028d (same fit fixes, box 400 ms); final d6c2b4d4 only reorders the clean stages.
+
+«Phone map settle» (map-label-overlap.js, fresh life, ranks 0,2,3,5,7 × day/night × zoom 0–4 = 60 cases + 10 courtyards per size):
+| size | BEFORE max settle / unsettled > 15 s | AFTER max settle / unsettled | overlaps before → after |
+|---|---|---|---|
+| Fold 755x1000 | 4.7 s / 0 | **1.4 s / 0** | 0 → 0 |
+| iPad 1180x820 | 7.0 s / 0 | **1.9 s / 0** | 0 → 0 |
+| iPad Pro 1366x1024 | — | **1.6 s / 0** | → 0 |
+| Phone 390x844 | **18.6 s / 6** | **1.6 s / 0** | 0 → 0 |
+
+## Tests (final build d6c2b4d4)
+- dev/test/map-label-overlap.js, ranks 0,2,3,5,7 × day/night × zoom 0–4 + 10 courtyards: Fold 755x1000 / iPad 1180x820 / iPad Pro 1366x1024 / phone 390x844 = **0 overlaps in 240 map cases + 40 courtyards**, no page errors, max settle 1.0 / 1.9 / 1.5 / 1.6 s, unsettled 0 (main: phone 18.6 s, 6 unsettled).
+- iPad 1180x820 **cold start COLD=30: 30/30 clean**, max settle 1.3 s (R3 on main: 2.8 s). Fold COLD=10 (earlier build): 10/10.
+- dev/test/map-labels-scan.js ranks 2,3,5 Fold + iPad (day/night + courtyards): **3 runs 14/14 PASS** (+ 1 extra iPad 3,5 run: 2 «dot within 16 px» nits on night r3/r5, no overlap). Baseline main on the same box is flaky on that same case too: 4 runs → 1 run with an actual tag overlap (`lc|home`, `r5|r4`, day r5) + 1 run with a dot nit. Not a regression; the case is time-boxed in both.
+- Solver exactness: the speed-ups in kmSolve give byte-identical results on 98 recorded calls (fake clock).
+- **QUICKCHECK PASS** (dev/tools/quickcheck.sh, 659 s: open 1.8 s, old save from LIVE loads + plays, perf new/live render 287/308, tab 450/506, buổi 1584/2798 ms, core gates PASS).
+- Old save: the robot repro save (older build, year 14) loads and opens Dư đồ with 0 errors in every probe above; quickcheck old-save from LIVE ok.
+- Final harness re-run on d6c2b4d4 (busy box, other tabs ~30 % slower than the table): Fold ×1 go 1193 / 514 ms, ×4 3373 / 3318; iPad ×1 1435 / 1788 (iPad ×4 not re-run: local server timed out).
+
+## Looked at
+Fold 755x1000 + iPad 1180x820, played save, before and after (scratch shots, not in git): every tag separate and readable, same size; iPad after has fewer long crossing leaders than main (3 vs 5) on this save (last-resort stage on both).
+
+## Notes for main / tickets
+- First open after a new buổi stays ~1.0–1.5 s at ×1 on this box because one full solve is still needed for a new map; options if sếp wants < 1 s there too: solve in a Web Worker off the main thread (tags appear a moment later), or remember solutions in localStorage across reloads. Not done (bigger change, possible visible tag jump).
+- Phone 390x844 on the PLAYED save: no clean layout exists even with every stage (hard 5–10 before and after; same on main). Fresh-life phone cases are clean. Phone is not a law-12 device; ticket if wanted: smaller info rows on phone.
+- The lotus «me» marker above her place is not part of the tag box (can sit on a neighbour's info row on Fold, same on main) — not touched.
+- KIT §85.7 TAG SOLVER: new solver constant `KMAP_SOLVE_MS` (400 ms, j38) — kit keeper may record it in KIT.md (no visual change).
+- Scratch tools used (not committed): saved-call dumper + node chain simulator + fake-clock equivalence check; can be added to dev/measure on request.
+
+~100% xong / ~95% chơi được cho lỗi này (mở lại tức thì; mở lần đầu một buổi mới ~1–1,5 s).
