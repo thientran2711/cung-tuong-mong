@@ -1436,3 +1436,4 @@ REVIEW palace-distance 9e655c3e (opus BIG; briefs/D-palace-distance-review.md) |
 | REVIEW kit-music (sonnet SMALL; briefs/b-kit-music-review.md; ORDER MAIN 118 06:40Z) of review/kit-music 0ff57cb0 | review/kit-music-r1; reports/kit-music.md | B | session_01N1tNP3f5iMADfxhzg5aFWT | RUNNING | 24/11 07:02Z |
 | REVIEW kit-screenveil (sonnet SMALL whole-game; briefs/b-kit-screenveil-review.md; ORDER MAIN 118 07:06Z) of review/kit-screenveil fe8f6e3d | review/kit-screenveil-r1; reports/screenveil.md | B | session_01N1tNP5NC2cVvb6hDSKPiu9 | RUNNING | 24/11 07:10Z |
 | THIN-P8 road-play helper (sonnet; splits rv 4YxeqtxE remaining roads) | review/thin-p8-r1 (no code); reports/thin.md | B | session_01N1tNP4b5Pe2Aq1vxpZPBcx | RUNNING | 24/11 07:12Z |
+| DLG WRITER W2 j72_b (sonnet; briefs/b-dlg-writer.md; lead 4b3uXPGS) | review/sideline-dlg content | B | session_01N1tNP6DMVNu32Gq6i9edUo | RUNNING | 24/11 07:14Z |
