@@ -1417,3 +1417,4 @@ REVIEW law1-gifts (opus BIG; briefs/D-law1-gifts-review.md) of 0a5fc0af | review
 | SELSCENE-5 opening 3 days (opus; successor of SELSCENE-4; reports/selection-scene.md) | review/selection-scene | MAIN 118 | session_01V1ZZH1P6EXpzNXqeuKYD38 | RUNNING | 24/11 06:34Z |
 | REVIEW E65r TITLES2 r3 BIG (opus; briefs/E65r-review-titles2-r3.md) of 86e0fcf1 | review/titles2-r2; reports/titles2-review-r3.md | FOREMAN E (child1) | session_01DgYSWkTHXKFwZRgoxgzfwZ | RUNNING | 24/11 05:58Z |
 | ROBOT-COOP RUNNER U4 pairs 3-4 SWAP=1 SEED=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p3-4-s.md | B | session_01N1tNP2J2RWyqmnHnG8Run7 | RUNNING | 24/11 05:56Z |
+| ROBOT-COOP RUNNER U5 pairs 5-6 SWAP=0 SEED=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p5-6.md | B | session_01N1tNP6DDKAsMUF9TiY87qJ | RUNNING | 24/11 05:58Z |
