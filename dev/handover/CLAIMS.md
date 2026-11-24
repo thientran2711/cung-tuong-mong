@@ -1509,4 +1509,4 @@ rv net-build r2 (opus BIG; briefs/D-net-build-review-r2.md; target e41f4f79) | r
 | ROBOT FIXER cnv #2 (opus; successor; residuals R1-R3, review/robot-fix-cnv-2 on 1f046fb7) | review/robot-fix-cnv-2; reports/robot-fix-cnv.md | F | session_01UV1Szktd1kHeRCPadpEMyu | RUNNING (START_CTX ≈ 3 %, depth 2) | 24/11 12:24Z |
 | SELSCENE-11 (opus; successor of SELSCENE-10; brief M121-selscene-fix.md + reports/selection-scene.md «FIX r1 — SELSCENE-10») | review/selection-scene (from c269fce4) | MAIN 122 | session_01V1ZZH1An4rTF5a1b9G4kJw | RUNNING | 24/11 12:29Z |
 | RV test-mrfoot SMALL (sonnet) of d521656c | review/test-mrfoot; reports/test-mrfoot.md | MAIN 122 | session_01V1ZZH3jimhL3hVZTZNqAJb | RUNNING | 24/11 12:33Z |
-| REVIEW E84r robot10-e-fix-5 BIG (opus; briefs/E84r-review-robot-fix5.md) of 6b96055a | review/robot10-e-fix-5-r; reports/robot10-fix5-review.md | FOREMAN E (child4) | (opening) | RUNNING | 24/11 12:45Z |
+| REVIEW E84r robot10-e-fix-5 BIG (opus; briefs/E84r-review-robot-fix5.md) of 6b96055a | review/robot10-e-fix-5-r; reports/robot10-fix5-review.md | FOREMAN E (child4) | session_01DgYSWoVjheqq11nzo7HMWF | RUNNING | 24/11 12:45Z |
