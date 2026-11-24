@@ -1522,3 +1522,4 @@ robot10-onecore SMALL review | review/robot10-onecore | session_01N1tNP58gRW5Kr3
 REVIEW d-followups-1 (opus BIG; briefs/D-followups-1-review.md) | review/d-followups-1-rv | session_01D3E3NX5CughfPF92X2Mv3Z | RUNNING | 24/11 17:00Z (Foreman D depth 5)
 | ROBOT FIXER cnv #3 (opus; successor of #2; R7 render-on drift bisect on r1+LIVE, R5 AGD.oc, R6 S.lost.at, R1, newlife-leak FAIL 2) | review/robot-fix-cnv-2 on f78c695c; reports/robot-fix-cnv.md | F | session_01UV1SziKNwwyvgm7Tp4E7AD | RUNNING | 24/11 17:15Z |
 robot10 E FIXER #5 (R8 families a–h, then R2/R5) | review/robot10-e-fix-6.. | session_01DgYSWkYxbaSjuykrs5JW4Q | RUNNING | 24/11 17:40Z | owner FOREMAN E (child6)
+D REMERGE + LAND READY train (opus BIG; ORDER MAIN 125 16:31Z; servant-trust → promo-build-2 → law1-gifts → palace-distance → nc-fix-4 → kit-promo-hook; briefs/D-remerge-land.md) | review/<x>-rv | session_01D3E3Na1itJyTLYhXYvK1Zr | RUNNING | 24/11 17:39Z (Foreman D depth 5)
