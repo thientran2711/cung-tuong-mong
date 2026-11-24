@@ -2808,3 +2808,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (03:55Z) LANDED kit-dhcapfit → LIVE 2a9125bf (LC9). KIT READY kit-framefit 055baec6 (KK16; ~12 old requests closed as already built) → SMALL kit review ORDERED to B.
 - (03:57Z) KIT READY kit-mgboardof d4f0217d (KK16) → added to B's SMALL kit review order.
 - (04:08Z) sếp angry after the 8 videos (OD row 24/11 ~04:00Z). Old selscene mock predated her rows 23:05–23:47Z. SELSCENE-2 = session_01V1ZZH2yEMKrrAz7jmCWzee (opus) — checklist first, new mock + 2× copies + page; MAIN checks each row before sending.
+- FROM LC9 (04:11Z 24/11): LANDED thin-p3 27240ccb45ea305abdb17b18460253026581652f. LIVE = 27240ccb.
