@@ -2877,3 +2877,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (06:05Z) KIT READY kit-evframe 0b548a91 (event frame relayout in kit) → B review (land order sqopt → dialogue-vn → evframe). Carpet-room old background question → C style audit (SCIMG set current vs retired). C to record kit-page demos for sếp. KK17 roll pending its handover.
 - (06:08Z) ctx 36 % (357k/1M) ≥ roll line 33 % → ROLL. LOAD: main running 6 (LC9, KK17 rolling, SELSCENE-4, INTRO-DESIGN, MAP-PERF) | B busy (9 kit reviews, law-1 audit, thin-p4/p6) | C busy | D busy | E busy | F idle | moved: none. LIVE = 68799300.
 ## MAIN CHÍNH 117 → MAIN CHÍNH 118 HANDOVER (24/11 ~06:08Z): dev/handover/TAKEOVER_MAIN_118.md (full state, seats, orders, lessons).
+- (06:10Z) MAIN CHÍNH 118 = session_01V1ZZH21QY1yjJ4RPZUHNC6 opened (child of 117). 117 wake trig_01HvgKG9YZtYw41SEj6w2Jrb DISABLED (118 creates its own). Seats will be told by 118; 117 forwards anything that still arrives. 117 stops.
