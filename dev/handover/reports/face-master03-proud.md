@@ -7,9 +7,12 @@ Identity uploads: s10 p84XX01ehw, s11 fHYuQqoCDY, s12 1lBjLUar4r, s19 Xm68ICQBfo
 | FACE-PROUD-S10-A16-...T01 | s10 | 16 | LwtgSkLswO | DONE | viewed: bare face, no text, master skin ok |
 | S11-A16 | s11 | 16 | LwtgUK9swO | DONE | viewed ok |
 | S12-A16 | s12 | 16 | MByeXTtDCm | DONE | viewed ok |
-| S19-A16 | s19 | 16 | ksXxsIu16B | GENERATED (not yet viewed) | |
-| S20-A16 | s20 | 16 | p84XIolehw | GENERATED (not yet viewed) | |
-| S21-A16 | s21 | 16 | bxpkj3J5Y2 | GENERATED (not yet viewed) | |
+| S19-A16 | s19 | 16 | ksXxsIu16B | DONE | viewed ok: bare face, no text, master skin/painting match |
+| S20-A16 | s20 | 16 | p84XIolehw | DONE | viewed ok: bare face, no text, master skin/painting match |
+| S21-A16 | s21 | 16 | bxpkj3J5Y2 | DONE | viewed ok: bare face, no text, master skin/painting match |
+| S22-A16 | s22 | 16 | UPfJ92qwny | GENERATED (not yet viewed) | |
 
+## HANDOVER (rollover, worker 1)
+Done/viewed: s10,s11,s12,s19,s20,s21 @16 (6/60). s22@16 generated, needs a look. Remaining: age16 s23,s24,s25,s51,s52,s53,s54,s55 (8) + ages 26,51,63 x 15 = 45. Each call must carry the full ~9.6k-char prompt, so ~3k tokens per job: suggest successors split by age (one per age). Identity upload ids above are reusable.
 ## Resume note
 Next: age16 s22,s23,s24,s25,s51..s55; then ages 26,51,63 for all 15. Pre-cut prompt files were built in session scratchpad (re-create: delete the operator sentence from Prompts/*.txt).
