@@ -11,26 +11,26 @@
          Event: the plaque button gets «kpkpick» (bubbles) on the 2nd tap, data-id = act id.   kitDim.on(figs,{keep}) · kitDim.off() · kitDim.state().
    PURE DISPLAY: no game logic, no numbers of its own.   Test: dev/test/kit-pick.js (Fold 755x1000 + iPad 1180x820). */
 (function(){try{
-const KIT_PICK=window.KIT_PICK=window.KIT_PICK||{
+const KIT_PLAQUE=window.KIT_PLAQUE=window.KIT_PLAQUE||{
  dropMs:700,stagger:80,swayS:[3.4,4.6],swayDeg:1.3,liftMs:200,liftDy:-8,liftScale:1.05,closeMs:170,
- w:{kv1:152,kv2:200},h:{kv1:62,kv2:56},pic:{kv1:40,kv2:48},cord:{rail:18,gap:10,gapS:6},hS:50,gx:8,max:6,railAt:.40,railMin:.18,railLap:.34,minW:128,post:8,tabH:34,
+ w:{kv1:152,kv2:200},h:{kv1:62,kv2:56},pic:{kv1:40,kv2:48},cord:{rail:18,gap:10,gapS:6},hS:50,gx:8,max:6,railAt:.40,railMin:.18,railLap:.34,slimW:140,minW:128,post:8,tabH:34,
  motion:null /* test hook: true = ignore reduced motion */};
 const kv=()=>document.documentElement.classList.contains("kv2")?"kv2":"kv1";
-const still=()=>{if(KIT_PICK.motion===true)return false;try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)||document.documentElement.classList.contains("kf-still")}catch(e){}return false};
+const still=()=>{if(KIT_PLAQUE.motion===true)return false;try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)||document.documentElement.classList.contains("kf-still")}catch(e){}return false};
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const DIM=()=>Object.assign({b:.7,s:.75,ms:220},(typeof BAL!=="undefined"&&BAL.kdim)||{});
 let CUR=null;
 function btn(a,i){return typeof kitFocus!=="undefined"&&kitFocus.btn?kitFocus.btn(a,i):`<button type="button" class="kfoc-b" data-i="${i}" data-id="${esc(a.id)}"><span class="kfoc-t"><b>${esc(a.n)}</b></span></button>`}
 /* anchor of a stage figure inside the host (host px) */
 function rect(el,host){host=host||document.getElementById("stage")||document.body;const h=host.getBoundingClientRect(),r=el.getBoundingClientRect();return {x:r.left-h.left,y:r.top-h.top,w:r.width,h:r.height}}
-function open(o){if(CUR)CUR.destroy();o=o||{};const host=o.host||document.getElementById("stage")||document.body,m=kv(),K=KIT_PICK;
+function open(o){if(CUR)CUR.destroy();o=o||{};const host=o.host||document.getElementById("stage")||document.body,m=kv(),K=KIT_PLAQUE;
  const P={o,host,m,anims:[],open:true,up:null};CUR=P;
  const gs=o.groups&&o.groups.length?o.groups:[{k:"",n:"",acts:o.acts||[]}];P.groups=gs;P.group=o.group||gs[0].k;
  const el=P.el=document.createElement("div");el.className="kpk kpk-"+m+(still()?" kpk-still":"");el.setAttribute("role","group");el.setAttribute("aria-label","Chọn việc");host.appendChild(el);
  build(P);if(o.dismiss!==false){P.away=e=>{if(!P.open||el.contains(e.target))return;P.close()};setTimeout(()=>{if(P.open)document.addEventListener("pointerdown",P.away,true)},0)}
  P.lift=id=>lift(P,id);P.setGroup=k=>{if(k===P.group)return;P.group=k;build(P,true)};P.close=()=>close(P);P.destroy=()=>destroy(P);
  return P}
-function geo(P){const K=KIT_PICK,m=P.m,hr=P.host.getBoundingClientRect(),A=P.o.anchor||{x:hr.width*.4,y:hr.height*.2,w:hr.width*.2,h:hr.height*.6},W=hr.width,H=hr.height;
+function geo(P){const K=KIT_PLAQUE,m=P.m,hr=P.host.getBoundingClientRect(),A=P.o.anchor||{x:hr.width*.4,y:hr.height*.2,w:hr.width*.2,h:hr.height*.6},W=hr.width,H=hr.height;
  const gr=P.groups.find(g=>g.k===P.group)||P.groups[0],acts=(gr.acts||[]).slice(0,K.max),n=acts.length,post=K.post;
  /* the band (columns + post) goes on the side that has room and covers the fewest OTHER people (o.avoid = their anchors) */
  const fit=s=>{let free=s==="r"?W-(A.x+A.w)-8:A.x-8,minRail=A.y+A.h*K.railMin;const maxB=H-6;
@@ -49,7 +49,7 @@ function geo(P){const K=KIT_PICK,m=P.m,hr=P.host.getBoundingClientRect(),A=P.o.a
  let railY=F.top;
  const tabsH=P.groups.length>1?K.tabH+8:0;if(railY-tabsH<2)railY=2+tabsH;
  return {lapped:F.lap>0,comp:F.comp,A,acts,n,side:F.s,cols:F.cols,cw:F.cw,h:F.hh,gap:F.gg,rows:F.rows,railY,bandW:F.bw,x0:F.x0,post,floor:Math.min(A.y+A.h,H-2),tabsH,W,H}}
-function build(P,swap){const K=KIT_PICK,G=geo(P),el=P.el,m=P.m;P.G=G;P.up=null;
+function build(P,swap){const K=KIT_PLAQUE,G=geo(P),el=P.el,m=P.m;P.G=G;P.up=null;
  const old=[...el.querySelectorAll(".kpk-n,.kpk-tabs")];old.forEach(x=>x.remove());
  const side=G.side,pw=G.post;
  /* signpost + rail (built once) */
@@ -64,7 +64,7 @@ function build(P,swap){const K=KIT_PICK,G=geo(P),el=P.el,m=P.m;P.G=G;P.up=null;
  G.acts.forEach((a,i)=>{const c=i%G.cols,r=(i/G.cols)|0,n=document.createElement("div");n.className="kpk-n";n.dataset.id=a.id;
   const kc=r?G.gap:K.cord.rail,x=G.x0+c*(G.cw+K.gx),y=G.railY+K.cord.rail+r*(G.h+G.gap);
   n.style.cssText=`left:${x}px;top:${y}px;width:${G.cw}px;height:${G.h}px;--kc:${kc}px;--kph:${G.h}px;--kpp:${K.pic[m]}px;--sd:${(K.swayDeg*(1-.12*r)).toFixed(2)}deg;--ss:${(K.swayS[0]+(K.swayS[1]-K.swayS[0])*((i*37%10)/10)).toFixed(2)}s;--sdl:${(-(i*.9+c*1.3)).toFixed(2)}s`;
-  n.innerHTML=`<i class="kpk-cord"></i>`+btn(a,i);const b=n.querySelector(".kfoc-b");b.classList.add("kpk-b");b.dataset.id=a.id;b.setAttribute("aria-pressed","false");
+  n.innerHTML=`<i class="kpk-cord"></i>`+btn(a,i);if(G.cw<K.slimW)n.classList.add("kpk-slim");/* narrow side: no picture, the whole name gets the room (OD:L177 names never cut) */const b=n.querySelector(".kfoc-b");b.classList.add("kpk-b");b.dataset.id=a.id;b.setAttribute("aria-pressed","false");
   b.addEventListener("click",ev=>{ev.stopPropagation();tap(P,a,n,b)});el.appendChild(n);
   /* fall-in from the rail: transform + opacity only, staggered top → bottom, settles with a damped swing */
   if(!still()&&n.animate){const s=c%2?-1:1,dy=-(y-G.railY)+4;n.classList.add("kpk-drop");
@@ -75,11 +75,11 @@ function build(P,swap){const K=KIT_PICK,G=geo(P),el=P.el,m=P.m;P.G=G;P.up=null;
 function tap(P,a,n,b){if(!P.open)return;if(P.up===n){if(a.off){try{P.o.onOff&&P.o.onOff(a,P)}catch(e){}return}
   b.dispatchEvent(new CustomEvent("kpkpick",{bubbles:true,detail:{id:a.id,act:a}}));try{P.o.onPick&&P.o.onPick(a.id,a,P)}catch(e){}return}
  lift(P,a.id)}
-function lift(P,id){const K=KIT_PICK,n=P.el.querySelector(`.kpk-n[data-id="${CSS.escape(String(id))}"]`);if(!n)return;
+function lift(P,id){const K=KIT_PLAQUE,n=P.el.querySelector(`.kpk-n[data-id="${CSS.escape(String(id))}"]`);if(!n)return;
  if(P.up&&P.up!==n){const u=P.up;u.classList.remove("kpk-up");u.querySelector(".kpk-b").setAttribute("aria-pressed","false");if(!still()&&u.animate)u.animate([{transform:`translateY(${K.liftDy}px) scale(${K.liftScale})`},{transform:"none"}],{duration:K.liftMs-40,easing:"ease-out"})}
  P.up=n;n.classList.add("kpk-up");n.querySelector(".kpk-b").setAttribute("aria-pressed","true");
  if(!still()&&n.animate){const a=n.animate([{transform:"none"},{transform:`translateY(${K.liftDy}px) scale(${K.liftScale})`}],{duration:K.liftMs,easing:"cubic-bezier(.3,.8,.4,1)",fill:"forwards"});P.anims.push(a)}else n.style.transform=`translateY(${K.liftDy}px) scale(${K.liftScale})`}
-function close(P){if(!P||!P.open)return;P.open=false;document.removeEventListener("pointerdown",P.away,true);const K=KIT_PICK,N=[...P.el.querySelectorAll(".kpk-n,.kpk-tabs,.kpk-rail,.kpk-post")];
+function close(P){if(!P||!P.open)return;P.open=false;document.removeEventListener("pointerdown",P.away,true);const K=KIT_PLAQUE,N=[...P.el.querySelectorAll(".kpk-n,.kpk-tabs,.kpk-rail,.kpk-post")];
  if(!still()&&N[0]&&N[0].animate){N.forEach(x=>x.animate([{opacity:1},{opacity:0}],{duration:K.closeMs,fill:"forwards"}));setTimeout(()=>destroy(P,true),K.closeMs+20)}else destroy(P,true)}
 function destroy(P,fromClose){if(!P)return;P.open=false;document.removeEventListener("pointerdown",P.away,true);P.anims.forEach(a=>{try{a.cancel()}catch(e){}});P.anims.length=0;try{P.el.remove()}catch(e){}if(CUR===P){CUR=null;if(P.o.onClose&&fromClose!==false)try{P.o.onClose()}catch(e){}}}
 window.kitPick={open,rect,current:()=>CUR,close:()=>{if(CUR)CUR.close()},destroy:()=>{if(CUR)CUR.destroy()}};
@@ -95,7 +95,9 @@ function dimOne(im,fade){if(!im||im.__kdc)return;const p=im.parentElement;if(!p)
  c.style.cssText=`position:absolute;left:${ir.left-pr.left}px;top:${ir.top-pr.top}px;width:${ir.width}px;height:${ir.height}px;pointer-events:none;filter:brightness(${D.b}) saturate(${D.s});opacity:${fade&&!still()?0:1}`;
  im.after(c);im.__kdc=c;DM.els.push(im);if(fade&&!still()&&c.animate)c.animate([{opacity:0},{opacity:1}],{duration:D.ms,fill:"forwards"})}
 function dimOff(){const D=DIM();DM.els.forEach(im=>{const c=im.__kdc;if(c){im.__kdc=null;if(!still()&&c.animate){c.animate([{opacity:1},{opacity:0}],{duration:D.ms,fill:"forwards"});setTimeout(()=>c.remove(),D.ms+20)}else c.remove()}else{im.classList.remove("kdim-d");im.style.removeProperty("--kdb");im.style.removeProperty("--kds")}});DM.els=[]}
-window.kitDim={on(figs,o){o=o||{};dimOff();const keep=o.keep;[].slice.call(figs||[]).forEach(f=>{if(f===keep||(keep&&f.contains&&f.contains(keep)))return;dimOne(f.tagName==="IMG"?f:(f.querySelector("img")||f.querySelector(".j59sil,canvas,svg")),o.fade!==false)})},off:dimOff,state:()=>({n:DM.els.length,b:DIM().b,s:DIM().s})};
+window.kitDim={/* figs may be a FUNCTION returning the current figure elements; kitDim.refresh() re-applies it after a stage redraw replaced the tokens (the dim copies live beside the old nodes) */
+ refresh(){const L=DM.last;if(L)window.kitDim.on(L.figs,Object.assign({},L.o,{fade:false}))},
+ on(figs,o){o=o||{};dimOff();DM.last={figs,o};const keep=typeof o.keep==="function"?o.keep():o.keep;if(typeof figs==="function")figs=figs();[].slice.call(figs||[]).forEach(f=>{if(f===keep||(keep&&f.contains&&f.contains(keep)))return;dimOne(f.tagName==="IMG"?f:(f.querySelector("img")||f.querySelector(".j59sil,canvas,svg")),o.fade!==false)})},off(){DM.last=null;dimOff()},state:()=>({n:DM.els.length,b:DIM().b,s:DIM().s})};
 
 const css=document.createElement("style");css.id="kpk-css";css.textContent=`
 /* wood tokens: ONE look. --kpk-img = the slot for Foreman C's painted wood (none until it exists) */
@@ -104,7 +106,7 @@ const css=document.createElement("style");css.id="kpk-css";css.textContent=`
 .kpk-post{position:absolute;border-radius:4px 4px 2px 2px;border:1px solid var(--kpk-line);box-sizing:border-box;background:var(--kpk-img),linear-gradient(90deg,var(--kpk-w3),var(--kpk-w2) 45%,var(--kpk-w1) 55%,var(--kpk-w3));box-shadow:2px 3px 5px rgba(0,0,0,.35);pointer-events:none}
 .kpk-post::before{content:"";position:absolute;left:50%;top:-5px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e7c27a,#a8782f 70%);border:1px solid var(--kpk-line);box-sizing:border-box}
 .kpk-rail{position:absolute;height:8px;border-radius:4px;border:1px solid var(--kpk-line);box-sizing:border-box;background:var(--kpk-img),linear-gradient(var(--kpk-w1),var(--kpk-w2) 55%,var(--kpk-w3));box-shadow:0 3px 5px rgba(0,0,0,.35);pointer-events:none}
-.kpk-tabs{position:absolute;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:0;margin:0}.kpk-tabs .pct{height:${KIT_PICK.tabH}px;white-space:nowrap}
+.kpk-tabs{position:absolute;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:0;margin:0}.kpk-tabs .pct{height:${KIT_PLAQUE.tabH}px;white-space:nowrap}
 .kpk-n{position:absolute;transform-origin:50% calc(-1 * var(--kc,12px));will-change:transform;contain:layout style;animation:kpk-sw var(--ss,4s) ease-in-out var(--sdl,0s) infinite alternate}
 .kpk-n.kpk-up{animation-play-state:paused;z-index:3}
 @keyframes kpk-sw{from{rotate:calc(var(--sd,1.2deg)*-1)}to{rotate:var(--sd,1.2deg)}}
@@ -117,6 +119,7 @@ const css=document.createElement("style");css.id="kpk-css";css.textContent=`
 .kpk .kfoc-b.kpk-b::before,.kpk .kfoc-b.kpk-b::after{content:"";position:absolute;top:4px;width:4px;height:4px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e8d9b8,#6b4a22);pointer-events:none}.kpk .kfoc-b.kpk-b::before{left:3px}.kpk .kfoc-b.kpk-b::after{right:3px}
 .kpk .kfoc-b.kpk-b .kfoc-pic{border:1.5px solid var(--kpk-line);box-sizing:border-box;border-radius:6px;margin-left:3px}
 .kpk .kfoc-b.kpk-b.kfoc-hasi{padding-right:20px}.kpk .kfoc-b.kpk-b .kfoc-i{top:-9px;right:-7px}/* the «!» badge sits on the corner, never on the title */
+.kpk-n.kpk-slim .kfoc-b.kpk-b .kfoc-pic{display:none}.kpk-n.kpk-slim .kfoc-b.kpk-b{padding-left:9px}
 .kpk .kfoc-b.kpk-b .kfoc-t b{-webkit-line-clamp:3;max-height:3.3em;font-size:.8rem}
 .kpk .kfoc-b.kpk-b .kfoc-t b{color:var(--kpk-ink);text-shadow:0 1px 0 var(--kpk-hi);letter-spacing:.1px}
 .kpk .kfoc-b.kpk-b .kfoc-t small{display:none;color:#3d2410;text-shadow:0 1px 0 var(--kpk-hi);font-weight:600}
