@@ -115,3 +115,61 @@ PRIORITY #1 CHECK ('netTh' / 'evG' / relation levels): OD 24/11 ~06:00Z / ~06:35
 3. Step 2: BAL.net.th / thFrom / thClamp / thK / bandHi + T[t].th for all 26 nết ✓ (Mê tín {} by design); one netTh for her / NPCs / servants / men ✓; laws 2/3: every offset row trades a gain for a cost (Kiêu ngạo acts sooner but befriends later and forgives less; Rộng lượng forgives but…); no nết strictly better ✓. News lines via newsAdd (law 9) ✓, cổ trang, no number / % (law 7) ✓ after the pronoun fix. Law 1 ✗ (FAIL 2), law 6a ✗ (FAIL 1).
 4. Robot (this branch before my fixes, same runner, CPU shared by 5 runs): sens 101 weeks / 3 runs: NPC→her danger p50 **35**, ≥60 **10 %**, proud ÷ gentle harm **×2.97**, harm max ÷ min ×14.9; npcAct band at call {0:41, 1:74, 2:14, 3:21}. rand 36 weeks / 2 runs: danger p50 20, ≥60 11 %, proud ÷ gentle ×2.41. Report's direction reproduced (×2.6 / p50 37). Band-3 target ≤ 30 % (NPC→NPC oán saturation) stays a FOLLOW-UP, not a fail.
 5. Gates: net-build 170/170 ✓ · npcmind-check ERRS [] ✓ · one-core-guard PASS (3112 < 3592) · one-core-text PASS · one-core-bind PASS (1590 / 0) ✓ · two-way-oldsave ok, errs [] ✓ · coop-e2e: 1st run 138/142 («same world» S.fidUsed maid face ids A=undefined / B=maid:mXX, weeks 1–3 + rejoin), re-run **142/142**; LIVE ac4790f0 142/142 → one flake in 2 runs, watch it on the fixer's run · quickcheck PASS ×2 (core gates PASS, old save ok) but perf ✗ (FAIL 4).
+
+## FIX r1 (fixer session_01D3E3NXVfZy3ocFNYujBsPy, opus, 24/11)
+PRIORITY #1 CHECK ('evG netTh'): OD 24/11 ~06:00Z / ~06:35Z / ~06:40Z read verbatim | ledger 0 | claims net-build NYsFNUq9 (archived) + rv NaqgB7na (FAIL) | main 178cac37: jnet.js BAL.net.T, BAL.mem.fadeT, no netTh | review/*: net-build ed1be95a, net-build-rv b029879a (start), servant-trust 42db050c (stacked; merged in a scratch tree, not pushed) | real ân store found and reused: the j72 nợ ân book (q72Debt / jrtrig rtDebt).
+
+**Branch review/net-build-rv, final sha e41f4f7933458870fbc689c7128730938cc1e644** (c1266dec fixes · 7c580d3e merge LIVE origin/main 178cac37 + site rebuilt · 228531af npc-purpose row follows the j83 line · e41f4f79 BAL.eff.jemo.wk.upRival deleted + site rebuilt).
+
+### Fix 1 — evG is EVIDENCE (law 6a, her choices)
+| gate | b029879a | 228531af |
+|---|---|---|
+| j78 Trình Thái hậu / Uy hiếp / Bán phe / Trả chứng cứ / mindMenu (j78:137/142/145/150/176) | evG ≥ netTh(a,"repay") (1–3 by nết) | evG ≥ 1 (holds proof) |
+| j78 Trình Hoàng hậu, j95:79 nắm thóp, j95:456 tố giác | evG ≥ netTh(·,"repay2") | evG ≥ BAL.evFirm (2, new key next to accNeedEv) |
+| j95b:246, jagharm:101, jtsb:100 | evG ≥ netTh(·,"repay") | evG ≥ 1 |
+| scan `evG(..)>=netTh` in dev/build | 11 | **0** (net-build test checks it) |
+- «repay» now reads the REAL ân store: jrtrig rtWhyAll «… muốn trả ân cho ngươi» fires only when the j72 nợ ân debt d ≥ netTh(v,"repay") (Thù dai / Trọng nghĩa at 1, Kiêu ngạo / Thực dụng … later). «repay2» deleted (no reader).
+- Test: a player with the slowest «repay» nết (Kiêu ngạo + …, repay 3) holding 1 proof: Trình Thái hậu / Uy hiếp / Bán phe / Trả chứng cứ all open; Trình Hoàng hậu shut at 1, open at BAL.evFirm; no proof → shut.
+
+### Fix 2 — one forgiveness rule, both ways (law 1)
+ONE function `netForgive(t,a)` (jnet.js) = oán(t→a) < netTh(t,"nguoi"); one refusal line `netRefused` («…, nhưng bị gạt đi» / to her «…, nhưng ngươi vẫn chưa nguôi giận»). Told after, in words; no pre-warning (the hint only says «thành: oán −N», the shape every odds hint uses).
+| road | before | after |
+|---|---|---|
+| her «Tạ lỗi» (j9:130 → jtwoway TW apol) | always accepted | netForgive(v,S) |
+| her «Nhún nhường» (j9:131) | always | netForgive(v,S) |
+| TW apol, any doer incl. NPC→her (jtwoway:51) | always | netForgive(t,a) — her own nết decides when she is the wronged one |
+| SOC.apologise / SOC.mediate (j28) | inline nguoi check | netForgive (same function) |
+| NPC cx:humble (jagacts:63) | always | netForgive(t,v) (cost still paid) |
+| her «Tạ lỗi, đền bạc» (jemoact:429) | always | netForgive; refused → the silver still pleases her (thiện cảm +), oán stays |
+| jrcv RCVK.mediate, NPC receiver | free pick | yes answers removed while oán ≥ her «nguoi»; her own answer stays her choice; co-op friend untouched |
+| j24 apSorry / jtsb «Nhận lời xin lỗi» | her choice (2 buttons) | unchanged — her choice IS the two-way side |
+
+### Fix 3 — every relation level on netTh (laws 4, 11, 14)
+Scan = `python3 dev/measure/net-scan-rv.py dev/build`, widened for the whole family: + rel() calls, + levels tested through a local copy (const h=hostility(..) … h>=X), + raw (x.oan||0)>=X; a KEEP table in the script holds the 8 rows that are not levels (running max, two-person compare, a change of thiện cảm, a bar the caller passes as netTh).
+| scan row kind | b029879a | 228531af |
+|---|---|---|
+| typed number | 14 | **0** |
+| BAL / alias copy of a level | 75 | **0** |
+| via a local copy | 15 | **0** |
+| raw (x.oan||0) | 3 | **0** |
+| total relation gates off netTh | **107** (reviewer's narrower scan: 99) | **0** |
+| evidence gates evG ≥ n (not levels, fix 1) | 23 | 34 (= 23 + the 11 restored) |
+- Player-visible: rvCard «Thù ngươi» / «Thân với ngươi» now read the holder's own ghet / than (was −20 / 20); printed «nàng thân với ngươi (x/N)» (jmkt, jts) and «cần Hoàng hậu thiện cảm N+» (j30) print netTh; «Cần một phi tần quý ngươi từ 30» (j10) and «(thiện cảm 40)» (j83) → words without a per-nết number.
+- Mapping used: 5–15 → quen · 20–40 → than · 45–60 (life bond, patron, keeps her secret) → than2 · −10…−20 → ky · −30 → ghet · oán 12–20 → oan · 25–30 → act · 40–60 → thu · hostility 20–25 → host×hostLo · 30 → host×hostMid (new thK .67) · 35–50 → host · 60 → host×hostHi.
+- BAL copies DELETED in place (law 14; every reader moved, grep shows no code reader left): facJoinAff, ag.par3.fac.{frAff,clanAff,sharedOan,drop.aff}, invite.hate, ag.why.dil.{coldFriend,allyAff}, m30.xinhhAff, mline.feudHost, j72c.need.feud, ag.why.g2wk.relMe, talk.warn.foe, ag.cx.humble.oan, ag.hh.{pardonAff,cutRelMax}, ag.cx2.help.aff + bacFee.lendAff, ag.par3.invite.minAff, ag.par4.kidGuard.host, ag.why.ap.{fr,ally,gift,sorry}, ag.why.fav.{aff,host}, ag.why.job.aff, ag.why.srvWk.host, ag.why.wd.{host,fr,spyHost}, ag.why.bul.host, ag.why.j22.host, ag.why.lie (whole), ag.why.g2rcp.accHost, ag.why.fxSrv.hot, ag.why.cmood.oan, cyc.foeHost, dc.bor.fav, eff.jemo.wk.{kidAff,nightAff,upRival}, eff.jemo.brake.grudge, eff.jemo.mot.aff, ge.bond.sis, preT.mot.{aff,hate,oan}, toil.taste.scout.ask.need, mood.foe.oan, mood.comfort.aff, emo2.hon.aff, nroad.askRel, pm.npc.minAff, pm.eye.likeMin, route.seen.aff, ngh.frameAff, shelf.visit.affMin, shelf.acc.hostMin, stip.oan, thy.bribeHost, cv.tsBorrow.aff, ag.cx.ally.rel, pet.{helpFr,helpMind}, patronRel, favorRel, ty.plotRel, rcp.giftRel, lux.xx.hostMin, arc.trig.gr, WD.frameHost (j92), entry.phuc.foul.oan, kc3 nm.do.oanMin, world2 day.coldOan (≈80 keys).
+- Kept on purpose (not thiện cảm / oán / hostility levels): ghen cuts (g ≥ 70 …), q72RelV / tdRel / loyalty / tình scales, jkrel number colours (>10 green / <−10 red, the colour of a printed number, not a person's level).
+
+### Fix 4 — perf
+- netTh and the band cuts depend only on the holder's 3 nết → kept per person in a WeakMap keyed on the p.net array (p.net is only ever replaced, never edited: scan `.net[i]=` / `.net.push(` = 0), so a redraw / migration / a new S.net recomputes. netCross exits before any work unless the change reaches or leaves a level. bandVT not memoised on danger (ghen is written raw in many places; a stale band would change behaviour) — measured cost 7 ms per 6 buổi, not the hot spot.
+- Probe (CPU ×4, 6 buổi, wrapped calls): traitsOf 41 ms, danger 35, hostility 15, netTh 11, aff 10, bandVT 7, netCross 3 — the net-build functions are a few % of a buổi; the reviewer's +29…49 % was mostly run noise (my own 3-run A/B before the memo: CPU new/live 4934/4174 ms, wall 19771/19467 ms, spread 3180–6780).
+- **quickcheck e41f4f79 (final): QUICKCHECK PASS · core gates PASS · old save ok · perf new/live render 249/266 ms, tab 471/457 ms, buổi 1477/4331 ms (live run noisy), tasks>200ms 24/25.** quickcheck 228531af: PASS, buổi 1438/1406 ms, render 228/237, tab 441/450. (Run on 7c580d3e: buổi 1243/1777; failed only G4 npc-purpose-scan → the row text for the j83 line updated in 228531af.)
+- Robot direction reproduced (new build, CPU shared): sens 91 weeks / 3 runs: NPC→her danger p50 42, proud ÷ gentle harm **×3.02**, max ÷ min ×22; rand 2 runs: proud ÷ gentle **×2.40**, max ÷ min ×16 (report ×2.6 / rv ×2.97 / rv rand ×2.41).
+
+### Gates
+- `node dev/test/net-build.js` **189/189 PASS** (new: (8) fix 1 acts, (9) fix 2 every road, (10) net-scan-rv = 0 + no evG gate on a nết level, (11) memo = computed levels / band cuts).
+- npcmind-check (main 178cac37 save → new): ERRS [] · two-way-oldsave: ok, errs [] · one-core-guard PASS (inline 3108 < 3592) · one-core-text PASS · one-core-bind PASS (1587 prints, 0 mismatches) · npc-purpose-scan PASS (419 rows).
+- servant-trust: review/servant-trust 42db050c merged into a scratch tree on top of c1266dec (assemble list: jsvt.js kept after jagwhy1.js, main's new modules kept): **servant-trust.js 48/48 PASS**, net-build 189/189, net-scan-rv 0 — svTouch unbroken. Not pushed.
+- **coop-e2e: NOT green, and not from this branch.** New build 131/154 (23 FAIL); LIVE origin/main 178cac37 run the same way: 25 FAIL of the SAME family («#next enabled» at buổi 0:0 with Q 7–8 opening cards, then «week 1/3 advanced», «same world»), its run then crashed at the end (scratch tree is not git). The count of checks changed (142 → 154/162) since ac4790f0 → main's test or the LIVE Worker moved. D / MAIN: please check coop on main itself.
+
+### Handover
+Done; only review remains. Worktrees: /home/user/wt/nbfix (review/net-build-rv), /home/user/wt/nbst (scratch merge, delete), /home/user/wt/nbho (this report) — removed after push.
