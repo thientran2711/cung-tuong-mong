@@ -28,7 +28,7 @@ function kidWardHome(k,mo){const f=kmFoster(k,mo);if(!f)return null;if(f==="th")
 function kmWards(p){const L=[];try{for(const [k,mo] of allKids())if(k.alive&&kmFoster(k,mo)===p)L.push([k,mo])}catch(e){}return L}
 /* where the child sleeps away from the mother: A ca sở / Đông cung (prince 6–17), or with the foster mother */
 function kmAway(k,mo){if(!k||!k.alive)return false;if(!kmMomOk(kmMom(mo)))return true;
- const a=k.age|0;return k.sex==="m"&&a>=(typeof PLX_AGE==="number"?PLX_AGE:6)&&a<(typeof PLX_ADULT==="number"?PLX_ADULT:18)}
+ const a=k.age|0;return k.sex==="m"&&a>=(typeof PLX_AGE==="number"?PLX_AGE:6)&&a<(typeof PLX_ADULT==="number"?PLX_ADULT:BAL.ageMin)}
 function kmSee(k,how){if(!k||k.kmS===(S.turn|0))return false;k.kmS=S.turn|0;kmHM(k);k.hM=cl(k.hM+how,0,100);return true}
 /* she walks to the place where her child is now (jplx: A ca sở / Đông cung, Thượng thư phòng in the morning) */
 function kmVisitAt(place){if(!S||S.dead||!place)return"";const B=kmB(),N=[];

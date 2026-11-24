@@ -34,7 +34,7 @@ function qnFid(q){if(q.fk)return q.fk;const U=figUsed();const used=new Set(U);(r
  if(!fr.length&&typeof FIGIX!=="undefined"&&FIGIX.consort)fr=Object.keys(FIGIX.consort).filter(k=>!used.has(k)).map(k=>"x:"+k);
  if(!fr.length)return null;q.fk=pick(fr);U.push(q.fk.replace(/^x:/,""));return q.fk}
 function qnFace(q){if(q&&!htKn(q))return Object.assign(SIL("f"),{rw:"Người lạ"});let src="";
- try{const k=qnFid(q);if(k&&k.startsWith("x:")){const L=FIGIX.consort[k.slice(2)];const f=L&&figBest(L,0,q.age||18);if(f)src=figPath(f.por||f.file)}else if(k&&KCIX[k]){const f=figBest(KCIX[k],null,q.age||18);if(f)src=figPath(f.por||f.file)}}catch(e){}
+ try{const k=qnFid(q);if(k&&k.startsWith("x:")){const L=FIGIX.consort[k.slice(2)];const f=L&&figBest(L,0,q.age||BAL.ageMin);if(f)src=figPath(f.por||f.file)}else if(k&&KCIX[k]){const f=figBest(KCIX[k],null,q.age||BAL.ageMin);if(f)src=figPath(f.por||f.file)}}catch(e){}
  return{rk:"",rw:"Quý nữ",src,hue:0,ini:String(q.name).split(" ").pop()[0],col:"#b0607a"}}
 window.qnFace=qnFace;
 /* knowledge: kn = 1 known (name, face, Sắc, Tài). Promised / married ones are public. */
@@ -258,7 +258,7 @@ function honCard(x){const k=x.k,p=x.p,me=p===S;const L=[`Mẹ: <b>${momLab(p)}</
  if(!me)B=[`<p class="kr3note">Hôn sự của con phi tần khác do mẹ con ấy, Hoàng thượng hoặc Thái hậu định.</p>`];
  return pcard({tabKey:"hon",f:kidFace(k),name:k.sex==="f"?h54Name(k):k.name,rank:`${ic("con",16)}${k.sex==="m"?"Hoàng tử":"Công chúa"} · ${k.age} tuổi`,lines:L,chips,note:sp?`<span class="khtsph">${k.sex==="f"?"Nhà chồng":"Nhà vợ"}</span>${sp}`:"",groups:[["Việc hôn sự",B]],empty:""})}
 function honTab(){h54PoolUp();qnPoolUp();const L=honList();
- const head=`<div class="ph"><span>Con từ ${BAL.age.betroth} tuổi được bàn hôn sự, cưới khi tròn ${BAL.age.wed}. Nhà thông gia chống lưng ngươi: <b>${S.hon||0}</b>.</span>${S.hEnv?`<span class="r">Sứ thần Bắc Địch chờ cầu hôn một công chúa từ 18 tuổi.</span>`:""}</div>`;
+ const head=`<div class="ph"><span>Con từ ${BAL.age.betroth} tuổi được bàn hôn sự, cưới khi tròn ${BAL.age.wed}. Nhà thông gia chống lưng ngươi: <b>${S.hon||0}</b>.</span>${S.hEnv?`<span class="r">Sứ thần Bắc Địch chờ cầu hôn một công chúa từ ${BAL.age.wed} tuổi.</span>`:""}</div>`;
  if(!L.length)return head+htEmpty("img/act-hon-su.webp","Chưa có hoàng tự nào đến tuổi bàn hôn sự",["Công chúa, hoàng tử từ "+(BAL.age.matchShow)+" tuổi hiện ở đây; từ "+(BAL.age.betroth)+" tuổi mẹ được bàn hôn sự, cưới khi tròn "+(BAL.age.wed)+".","Công chúa gả vào nhà quyền thần: nhà chồng chống lưng người mẹ. Hoàng tử cưới quý nữ: nhà vợ chống lưng người mẹ và cả hoàng tử trong hàng kế vị.","Các mối (công tử, quý nữ) ở mục Quý tộc kén rể · kén dâu."]);
  return head+pager("hon",L.map(x=>({f:kidFace(x.k),name:sname(x.k),sep:x.sep})),i=>honCard(L[i]))}
 /* 5. Quý tộc kén rể · kén dâu */

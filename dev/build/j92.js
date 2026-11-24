@@ -209,10 +209,10 @@ function wdCause(obs,t){if(!obs||!t||obs===t)return null;if(obs===S){const k=wdK
 window.wdCause=wdCause;
 const WD_ST_WORD={over:"vượt phẩm",under:"quá giản dị",tang:"mặc đồ đỏ vàng giữa quốc tang",ok:"đúng phẩm"};
 /* her ma ma (or a maid old enough to be one) who is sharp-eyed: lanh lợi and loyal */
-function wdMama(p){const L=[p.maid].concat(p.staff||[]).filter(Boolean);return L.find(s=>{let m=false;try{m=personRoleRank(s,"maid").role==="mama"||(s.age||0)>=36}catch(e){}return m&&(netIs(s,"sharp")||(s.loyal||0)>=BAL.loy.top)&&(s.loyal||0)>=BAL.loy.close&&!s.spyFor})||null}
+function wdMama(p){const L=[p.maid].concat(p.staff||[]).filter(Boolean);return L.find(s=>{let m=false;try{m=personRoleRank(s,"maid").role==="mama"||(s.age||0)>=BAL.ageBand[1]}catch(e){}return m&&(netIs(s,"sharp")||(s.loyal||0)>=BAL.loy.top)&&(s.loyal||0)>=BAL.loy.close&&!s.spyFor})||null}
 /* someone to sell or pawn things quietly outside the palace: a ma ma or a eunuch of her own staff (loyal 40+) */
 function wdAgent(p){const L=[p.maid].concat(p.staff||[]).filter(s=>s&&!s.spyFor&&(s.loyal||0)>=BAL.loy.low);
- return L.find(s=>s.role==="eunuch")||L.find(s=>{try{return personRoleRank(s,"maid").role==="mama"||(s.age||0)>=36}catch(e){return false}})||null}
+ return L.find(s=>s.role==="eunuch")||L.find(s=>{try{return personRoleRank(s,"maid").role==="mama"||(s.age||0)>=BAL.ageBand[1]}catch(e){return false}})||null}
 
 /* ---------- getting things: a real item into the chest (rewards, purchases, gifts) ---------- */
 function wdNtFree(){S.wdNt=S.wdNt||[];return WD_LIST.filter(r=>r[4]===4&&!S.wdNt.includes(r[0])).map(r=>r[0])}

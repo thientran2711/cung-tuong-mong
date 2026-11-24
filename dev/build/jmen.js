@@ -29,7 +29,7 @@ function menGuards(){return (S.men||[]).filter(m=>m.rw==="thị vệ")}
   for(let i=0;i<3;i++){const id="m"+(S.men.length);S.men.push({id,role:"Thị vệ",rw:"thị vệ",haunts:["thu","dtd"],age:20+R(14),name:`Thị vệ ${nmNew("m")}`,loyal:40+R(50),af:0,tinh:0,letters:0,trysts:0,alive:true,knowsMe:[]})}}}catch(e){}return r}})();
 /* who a man fancies: set once from his nature (phong lưu / đa tình) and the consorts' looks; renewed if she is gone */
 (function(){const m0=menInit;menInit=function(){const r=m0.apply(this,arguments);try{if(S&&S.men)for(const m of S.men){const v=m.likeV!=null?RV(m.likeV):null;if(v&&v.alive&&!v.out)continue;m.likeV=null;
-  if(!MEN_FANCY.some(t=>hasT(m,t)))continue;const C=liveRivals(false).filter(x=>!x.queen&&(x.age||20)>=18&&!x.affair);if(!C.length)continue;
+  if(!MEN_FANCY.some(t=>hasT(m,t)))continue;const C=liveRivals(false).filter(x=>!x.queen&&(x.age||20)>=BAL.ageMin&&!x.affair);if(!C.length)continue;
   /* the most beautiful one he can see (her looks), the id breaks ties: no dice */
   C.sort((a,b)=>((typeof effSac==="function"?effSac(b):b.sac||0)-(typeof effSac==="function"?effSac(a):a.sac||0))||(menH(a.id)-menH(b.id)));const lv=npwPick(C.slice(0,2),x=>typeof effSac==="function"?effSac(x):x.sac||0);if(lv)m.likeV=lv.id}}catch(e){console.error("menLikeV",e)}return r}})();
 (function(){if(typeof figPick!=="function")return;const f0=figPick;figPick=function(who){try{if(S&&who&&who.rw==="thị vệ"&&(S.men||[]).includes(who)){const M=FIGIX.man||{};const ks=Object.keys(M).filter(k=>/thive/.test(k)).sort();
