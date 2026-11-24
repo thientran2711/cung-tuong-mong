@@ -103,7 +103,7 @@ function req(road,paid){const self=road==="self";if(!paid){if(why(road))return""
  const o=findO(self);const tl=tainted(S),pl=plotsOnHer();const own=by&&pl.some(p=>p.r==="ty"&&p.a===by.id);let found=0;
  if(!lie){for(const e of tl)if(roll(o)){e.seen=1;found++;P.push(`<p class="r">Trong mạch có ${TW[e.t]}: hẳn có món đồ quanh ngươi bị ${TAINT[e.t].n} (${TWHERE[e.t]}). Nên đem đồ đi nghiệm độc.</p>`)}
   for(const p of pl){if(p.r==="ty"&&!S.doctor)continue;/* the plotting physician does not tell on himself */if(!roll(o))continue;found++;const a=RV(p.a);p.kn=1;try{p.kt.push(tellOf70(p,p.pg))}catch(e){}p.pend="seen";
-   P.push(`<p class="r">Thái y nhận ra ${PW[p.r]||"dấu thuốc lạ"}: có kẻ đang ngầm hại ngươi.</p>`);if(a)try{noteAdd(a.id,`Thái y bắt mạch thấy ${PW[p.r]||"dấu thuốc lạ"}, có lẽ nàng ta đứng sau`)}catch(e){}}}
+   P.push(`<p class="r">Thái y nhận ra ${PW[p.r]||"dấu thuốc lạ"}: có kẻ đang ngầm hại ngươi.</p>`);if(a)try{noteAdd(a.id,`Thái y bắt mạch thấy ${PW[p.r]||"dấu thuốc lạ"}, có lẽ nàng ta đứng sau`,1)}catch(e){}}}
  if(!found&&!lie&&!(tl.length||pl.length))P.push(`<p class="past">Không thấy dấu độc, dấu thuốc lạ nào.</p>`);
  else if(!found)P.push(`<p class="past">Thái y không nói gì thêm.</p>`);
  if(own&&!S.doctor)rec("own",1);

@@ -13,7 +13,7 @@ fs.mkdirSync(OUT,{recursive:true});let bad=0;const chk=(n,c,x)=>{if(c){console.l
 const MEAS=`(()=>{const M=document.getElementById('modal');if(!M||M.hidden)return null;const d=M.querySelector('.dlg');if(!d)return null;const R=e=>{const r=e.getBoundingClientRect();return{x:Math.round(r.left),y:Math.round(r.top),w:Math.round(r.width),h:Math.round(r.height)}};
  const fig=d.querySelector('.kszfig .kszfs')||d.querySelector('.kszfig');const tag=d.querySelector('.kszfig>.kt3');const ev=d.querySelector('.k3right>.k3ev');const opts=d.querySelector('.opts');
  const cards=opts?[...opts.querySelectorAll(':scope>button.ka.kopt')].filter(b=>b.offsetParent):[];
- const oc=cards.map(b=>{const kat=b.querySelector('.kat'),kan=b.querySelector('.kat>.kan'),od=b.querySelector('.kat>.kodds'),pic=b.querySelector(':scope>.kaart');const B=R(b);return{B,odd:od?(()=>{const o=R(od),t=R(kan);return o.y<t.y+t.h-2&&o.y+o.h>t.y+2})():null,pic:pic?R(pic):null,hasOdd:!!od}});
+ const oc=cards.map(b=>{const kat=b.querySelector('.kat'),kan=b.querySelector('.kat>.kan'),od=b.querySelector('.kat>.kodds'),pic=b.querySelector(':scope>.kaart');const B=R(b);return{B,kodrow:b.classList.contains('kodrow'),odd:od?(()=>{const o=R(od),t=R(kan);return o.y<t.y+t.h-2&&o.y+o.h>t.y+2})():null,pic:pic?R(pic):null,hasOdd:!!od}});
  const sealN=d.querySelectorAll(':scope>.kseal-ev').length,seal=d.querySelector(':scope>.kseal-ev');const D=R(d);const kph=d.querySelector('.kph');
  return{ksz:d.dataset.ksz||'',D,fig:fig?R(fig):null,tag:tag?R(tag):null,ev:ev?R(ev):null,kol:opts?(opts.dataset.kol||'')+(opts.dataset.kot||''):'',oc,sealN,seal:seal?{...R(seal),c:seal.dataset.c}:null,kph:kph?R(kph):null,title:((d.querySelector('.kph')||{}).textContent||'').trim().slice(0,30)}})()`;
 (async()=>{const b=await chromium.launch();
@@ -27,7 +27,7 @@ const MEAS=`(()=>{const M=document.getElementById('modal');if(!M||M.hidden)retur
   const R=[];const settle=async()=>{await p.waitForTimeout(700);await p.waitForFunction(()=>!(window.KLIFE&&KLIFE.on),null,{timeout:90000}).catch(()=>{});await p.waitForTimeout(1200);await p.evaluate(()=>{try{kmReset()}catch(e){}});await p.waitForTimeout(500)};
   const grab=async(name)=>{await settle();const m=await p.evaluate(MEAS);if(!m){chk(`${tag} ${name}: dialog open`,false,null);return}m.name=name;R.push(m);await p.screenshot({path:`${OUT}/${tag}-${name}.png`});
    /* (a)(b)(c) option cards */
-   if(m.oc.length){chk(`${tag} ${name}: odds on the title row (${m.oc.filter(c=>c.hasOdd).length}/${m.oc.length} cards have odds)`,m.oc.every(c=>!c.hasOdd||c.odd),m.oc.map(c=>c.odd));
+   if(m.oc.length){chk(`${tag} ${name}: odds on the title row (${m.oc.filter(c=>c.hasOdd).length}/${m.oc.length} cards have odds)`,m.oc.every(c=>!c.hasOdd||c.odd||c.kodrow),m.oc.map(c=>c.odd));
     chk(`${tag} ${name}: option picture fills the card`,m.oc.every(c=>!c.pic||c.pic.h>=c.B.h-8),m.oc.map(c=>[c.pic&&c.pic.h,c.B.h]));
     if(z.w>=1100&&m.oc.length>=3)chk(`${tag} ${name}: iPad option cards in 2 columns (layout ${m.kol})`,m.kol[0]==='2',m.kol);
     if(z.w<800)chk(`${tag} ${name}: phone option cards in 1 column (layout ${m.kol})`,m.kol[0]==='1',m.kol)}
