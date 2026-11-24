@@ -153,7 +153,10 @@ function emoGateWrap(){if(window.__emoGate||typeof motiveOK!=="function")return;
 (function(){const r0=render;render=function(){try{emoGateWrap();emoSee()}catch(e){}return r0.apply(this,arguments)}})();
 try{emoGateWrap()}catch(e){}
 /* ---------- fog of knowledge ---------- */
-function emoSee(){if(!emoOn())return;const W=emoW();S.emoSeen=S.emoSeen||{};try{for(const x of curPeople()){const p=emoRes(x);if(p)S.emoSeen[emoKey(p)]=W}}catch(e){}}
+function emoSee(){if(!emoOn())return;const W=emoW();S.emoSeen=S.emoSeen||{};try{for(const x of curPeople()){const p=emoRes(x);if(!p)continue;const k=emoKey(p);if(k&&!/^x\d+$/.test(k))S.emoSeen[k]=W}}catch(e){}}
+/* robot10 nc-fix (save drift): an «x<n>» key (emoRegKey) names an object for this session only — a new one is made for every rebuilt stage entry and means
+   nothing after a reload — so it is never written to the save record; old saves drop the ones they gathered (they grew with every walk) */
+(function(){if(typeof deser!=="function")return;const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{const E=S&&S.emoSeen;if(E&&typeof E==="object")for(const k of Object.keys(E))if(/^x\d+$/.test(k))delete E[k]}catch(e){}return r}})();
 /* owner OD 17/11 ~20:25Z + ~20:35Z: the face (seal) of ANYONE she knows is always shown, updated each khắc (no grey "chưa rõ" seal); a Người lạ (j60
    kitIsKnown false: the unknown silhouette) shows none. Only the CAUSE needs scouting (jmoodknow moodCauseKnown). emoSee keeps S.emoSeen as a record. */
 function emoKnown(p){p=emoRes(p);if(!p)return false;if(p===S)return true;try{if(typeof kitIsKnown==="function"&&!kitIsKnown(p))return false}catch(e){}return true}

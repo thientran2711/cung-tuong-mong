@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"cc806719+","t":"2026-11-24T03:50Z","c":"robot10-lag-rv: rebuild on merged main (assets.json = LIVE)","b":"bc7b37f74799","h":[{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"}]};
+window.CTM_BI={"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)","b":"dd3a8a4d4b48","h":[{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -2315,7 +2315,7 @@ function rstats(v,rank){rank=rank==null?(v.queen?7:v.rank):rank;
  const d=(k,x)=>{if(v[k]==null)v[k]=x};
  d("age",18+R(8));d("sac",40+R(55));d("tai",30+R(50));d("tamco",Math.round((v.malice||40)/3)+R(20));d("duc",Math.max(5,65-Math.round((v.malice||40)/2))+R(15));
  if(typeof tmInstall==="function")tmInstall(v);/* 2f2: Tai mắt = her real placed spies, none at birth */d("danh",8+rank*8);d("bac",40+rank*20);d("suc",80);d("arts",{cam:R(3),ky:R(2),thi:R(3),hoa:R(2),vu:R(3),y:R(2)});d("artp",{cam:0,ky:0,thi:0,hoa:0,vu:0,y:0});
- d("maid",{name:nmNew("maid"),loyal:50+R(31)});d("preg",0);d("hidden",false);d("fake",0);d("anthai",0);d("doctor",0);d("confined",0);d("shield",0);d("tablet",0);d("block",0);
+ if(v.maid==null)v.maid={name:nmNew("maid"),loyal:50+R(31)};/* robot10 nc-fix: lazy — d() takes its value eagerly, so every load (normAll) took and registered a fresh maid name for each consort that already had one */d("preg",0);d("hidden",false);d("fake",0);d("anthai",0);d("doctor",0);d("confined",0);d("shield",0);d("tablet",0);d("block",0);
  d("lastPromo",0);d("inv",[]);d("evm",{});d("rl",{});d("ro",{});d("oan",0);d("an",0);d("nightLog",[]);d("th",R(20)-5);d("hh",R(20)-5);d("schemes",0);d("hieu","");d("dress",null);d("asthma",R(7)===0);d("pray",0);d("fert",0);d("thu",0);
  return v}
 function normAll(){const d=(k,x)=>{if(S[k]==null)S[k]=x};
@@ -5348,6 +5348,11 @@ function hhBind(o){if(!o)return;const d=Object.getOwnPropertyDescriptor(o,"hh");
  if(typeof old==="number"&&old!==0){const q=queenP();if(q&&q!==o){const cur=aff(q,o);affAdd(q,o,Math.round((old+cur)/2)-cur)}}}
 (function(){const c0=consorts,B=new WeakSet();consorts=function(){const L=c0.apply(this,arguments);for(const p of L)if(p&&!B.has(p)){hhBind(p);B.add(p)}/* bind once per object (perf, review ag-all-2 r2 B5) */return L}})();
 (function(){const a0=ageInit;ageInit=function(){const r=a0.apply(this,arguments);try{consorts()}catch(e){}return r}})();
+/* robot10 nc-fix (save→load→save drift): a consort loaded from a save (made after the one-number merge) has no own hh — the getter above is not
+   saved — so normAll→rstats seeded a RANDOM hh (R(20)-5) and the first consorts() call blended it into the Empress's real regard: every load moved
+   «Hoàng hậu với X» by a random amount. Bind those rivals BEFORE the load runs normAll, so rstats sees the real value through the getter.
+   An old save that still carries a numeric hh keeps the one-time migration above. */
+(function(){const d0=deser;deser=function(d){try{if(d&&Array.isArray(d.R))for(const r of d.R)if(r&&typeof r==="object"&&!Object.prototype.hasOwnProperty.call(r,"hh"))hhBind(r)}catch(e){console.error("hhBind load",e)}return d0.apply(this,arguments)}})();
 /* result cards for the newer acts too */
 wrapR("scout",()=>"Sai tai mắt dò nơi ở");wrapR("invite",()=>"Mời đến cung ta");wrapR("visitPal",()=>"Đến cung nàng thăm");wrapR("goSee",()=>"Đến gặp");
 /* every talk tells what she learned and the bar moves with their new values */
@@ -44035,7 +44040,10 @@ function emoGateWrap(){if(window.__emoGate||typeof motiveOK!=="function")return;
 (function(){const r0=render;render=function(){try{emoGateWrap();emoSee()}catch(e){}return r0.apply(this,arguments)}})();
 try{emoGateWrap()}catch(e){}
 /* ---------- fog of knowledge ---------- */
-function emoSee(){if(!emoOn())return;const W=emoW();S.emoSeen=S.emoSeen||{};try{for(const x of curPeople()){const p=emoRes(x);if(p)S.emoSeen[emoKey(p)]=W}}catch(e){}}
+function emoSee(){if(!emoOn())return;const W=emoW();S.emoSeen=S.emoSeen||{};try{for(const x of curPeople()){const p=emoRes(x);if(!p)continue;const k=emoKey(p);if(k&&!/^x\d+$/.test(k))S.emoSeen[k]=W}}catch(e){}}
+/* robot10 nc-fix (save drift): an «x<n>» key (emoRegKey) names an object for this session only — a new one is made for every rebuilt stage entry and means
+   nothing after a reload — so it is never written to the save record; old saves drop the ones they gathered (they grew with every walk) */
+(function(){if(typeof deser!=="function")return;const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{const E=S&&S.emoSeen;if(E&&typeof E==="object")for(const k of Object.keys(E))if(/^x\d+$/.test(k))delete E[k]}catch(e){}return r}})();
 /* owner OD 17/11 ~20:25Z + ~20:35Z: the face (seal) of ANYONE she knows is always shown, updated each khắc (no grey "chưa rõ" seal); a Người lạ (j60
    kitIsKnown false: the unknown silhouette) shows none. Only the CAUSE needs scouting (jmoodknow moodCauseKnown). emoSee keeps S.emoSeen as a record. */
 function emoKnown(p){p=emoRes(p);if(!p)return false;if(p===S)return true;try{if(typeof kitIsKnown==="function"&&!kitIsKnown(p))return false}catch(e){}return true}
@@ -93882,6 +93890,14 @@ function dfMoodNext(first){const I=BAL.df.idle;return first?I.first:I.every[0]+M
  const arm=first=>{if(tm)clearTimeout(tm);tm=setTimeout(tick,dfMoodNext(first))};
  const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{if(S&&S.place!==plc){plc=S.place;arm(true)}}catch(e){}return r}})();
 window.dfMoodPick=dfMoodPick;
+/* robot10 nc-fix (text over text, Fold story / rel tabs): the focus layer and the mood bubble are drawn on #game over the STAGE, but a tap on another
+   tab (the tab bar stays free under the focus) left them standing over that tab's panel. They belong to «Hành sự» only: hidden while another tab
+   is up (the open focus — a talk, an encounter or a mini-game on it — comes back as it was when she returns), the short mood bubble just goes. */
+function dfTabLayers(){try{const off=typeof tab!=="undefined"&&tab!=="act";const F=typeof kitFocus==="object"&&kitFocus&&kitFocus.current?kitFocus.current():null;
+ if(F&&F.el&&F.open){if(F.el.hidden!==off){F.el.hidden=off;if(!off&&kitFocus.reposition)kitFocus.reposition()}}
+ if(off)document.querySelectorAll("#game>.kfoc-mood,body>.kfoc-mood").forEach(b=>b.remove())}catch(e){console.error("dfTabLayers",e)}}
+(function(){const r0=window.renderPanel;if(typeof r0!=="function")return;window.renderPanel=renderPanel=function(){const r=r0.apply(this,arguments);dfTabLayers();return r}})();/* renderPanel: every tab change draws the panel (render() and the j63 log jump) */
+window.dfTabLayers=dfTabLayers;
 /* ================= jroad8: ONE 8-TAB BAR ON EVERY ROAD (owner 21/11 ~03:15Z, mark #32; MAIN CHÍNH 85 brief maid-8tabs) =================
    Owner (verbatim, OD 21/11 ~03:15Z): "Mình vẫn giữ đủ 8 cái tab, nhưng mà mỗi một cái tab mình để y chang luôn … tôi nghĩ là mình không có nên thay đổi
    những cái tab này … trước mắt là cứ làm cái layout là 8 cái tab. Còn mà đổi cái gì vào trong cái tab gì cho nó đúng thì tôi sẽ báo bạn sau."
@@ -96016,7 +96032,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="bc7b37f74799";window.CTM_BUILD=BUILD;
+const BUILD="dd3a8a4d4b48";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
