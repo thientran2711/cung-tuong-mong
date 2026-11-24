@@ -38,3 +38,18 @@ People keep their identity (idn/fid) for life (j35); only the picture's band fol
 
 ## For C / MAIN
 - Art file tags a18/a26/a36/a51/a65 keep their names; they now mean bands 18–27/28–38/39–50/51–63/64+. If the owner wants the files renamed, that is a C job; code reads tags only through `BAL.ageArt`.
+
+## FIX r1 (E60, review/ageband-r from 86b87a32; fixes E59r FAIL 1, LAW 11)
+PRIORITY #1 CHECK ('ageBand|ageMin'): OD 10 | review/ageband-r 86b87a32 (E59r FAIL) | claims AGEBAND row (E).
+Scan (reviewer's line) over ALL dev/build/j*.js + wider scan (`age…<>=…15-19`, `15-19+R(`, `,15-19,"role"`, every `18` near age/tuổi/T( in jkc*/j54/jht/j3/j8/jbal*): 5 sites meaning "youngest adult"; everything else is not an adult minimum.
+
+| site | before | after |
+|---|---|---|
+| jkc.js:131 Thứ muội | `18` | `BAL.ageMin` |
+| jkc.js:133 Khuê hữu ×2 | `18+R(2)` | `BAL.ageMin+R(2)` |
+| jkc2.js:134 Xuân Đào | `18+R(2)` | `BAL.ageMin+R(2)` |
+| jkc2.js:142 muội | `18` | `BAL.ageMin` |
+| jbal.js:40 `ps.consAge[0]` (harem seed, j2:15; found by the wider scan, not in the reviewer's list) | typed `18` | `BAL.ps.consAge[0]=BAL.ageMin` set right after ageMin (jbal.js:343) |
+
+Left on purpose (not an adult minimum): j91:237 pixel geometry `Math.max(18,…)`; `BAL.age.wed:18` (marriage age, own rule; the «công chúa từ … tuổi» text reads it); j10/j3 maid 16+R (maids, j96 min 19 noted by reviewer); jht:57 quý nữ 15+R(5), j54:49 daughters 15–19 (girls, not adults); j54/jht/jkc `age>=19`; comment jkc.js:101 («18 tuổi» text in a comment). No runtime change (values stay 18).
+Gates on the fixed tree: ageband-unit 13/13 PASS · quickcheck PASS (core gates incl. one-core-guard / rules-one-source / kit-conform, time-spill, old save ok, perf render 195/202 tab 351/296 buổi 940/1013 new/live); first quickcheck line said "NOT BUILT" only because the tree was uncommitted — re-run after commit below.
