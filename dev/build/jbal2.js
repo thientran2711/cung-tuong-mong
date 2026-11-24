@@ -2089,3 +2089,6 @@ BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's nแบ
  fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:2,th:2,hh:2,duc:2,maid:3,rel:4,proof:1},
      m:{sung:4,danh:4,bac:40,suc:10,mat:4,th:4,hh:4,duc:4,maid:6,rel:8,proof:1},
      l:{sung:6,danh:6,bac:60,suc:15,mat:6,th:6,hh:6,duc:6,maid:9,rel:12,proof:2}}};
+
+/* KIT music (KK18 ยง96): an event track holds this long before the base track returns */
+BAL.kmus={holdMs:6000};

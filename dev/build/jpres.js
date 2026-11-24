@@ -72,6 +72,7 @@ function kpresPlan(m){const c=kpresCat(m),story=kpresStory(m);if(!c&&!story)retu
  const P=Object.assign({},KPG[g]||{},/^fest/.test(c||"")?KPFEST:{},KPC[c]||{});
  if(!c&&story){/* story card with no event picture: main line = grave (court), side = plain */ Object.assign(P,story==="main"?{sfx:"edict",mus:"bgm-day",ent:"scroll"}:{sfx:"notice"})}
  if(story==="main")P.ent=P.ent||"scroll"
+ try{const mk=typeof kmusEvent==="function"?kmusEvent(c||"",g||"",P,m):"";if(mk)P.mus="bgm-"+mk}catch(e){}
  return Object.assign(P,{cat:c||"",grp:g||(story?"story":""),story})}
 function kpresFx(f,el){if(!f)return"";try{
  if(f.kit&&typeof kitFx==="function"){if(!KPRES_LAST[f.kit]||performance.now()-KPRES_LAST[f.kit]>6000){KPRES_LAST[f.kit]=performance.now();kitFx(f.kit,{el})}return"kit:"+f.kit}
@@ -90,7 +91,8 @@ function kpresShow(m){try{if(!m||m.__pres)return;const P=kpresPlan(m);if(!P)retu
  KPRES_LOG.push({cat:P.cat,grp:P.grp,sfx,mus:P.mus||"",vo,fx,ent,story:P.story||""});if(KPRES_LOG.length>80)KPRES_LOG.shift()}catch(e){console.error("kpres",e)}}
 (function(){const W=(n,f)=>{const o=window[n];if(typeof o!=="function"||o.__kpres)return;const w=f(o);w.__kpres=1;window[n]=w;try{(0,eval)(n+"=window."+n)}catch(e){}};
  W("showModal",o=>function(){const r=o.apply(this,arguments);try{kpresShow(typeof Q!=="undefined"&&Q[0])}catch(e){}return r});
- W("musicCtx",o=>function(){try{const m=typeof Q!=="undefined"&&Q[0];if(m&&m.__presMus&&S&&!S.dead&&S.place!=="lc"&&(m.pid||m.evId))return m.__presMus}catch(e){}return o.apply(this,arguments)})})();
+ /* musicCtx wrapper removed (KIT §96, KK18): j11 kmusKey reads m.__presMus itself, so the hold rule / endings / fest apply to cards too */
+})();
 /* ================= PEOPLE MOMENTS (owner 15/11 20:05Z item 13 + 22:45Z list; S3-151/182/205; review/presentation-wiring) =================
    The 13 approved people animations + the painted-effect list, wired from ONE table (KPM) through the kit: kitFigMove (KIT §68.8, what happens to a stage figure),
    kitFx (§54 screen moments), kitFxBurst / kitFxSheet / kitFxRim (§68). No private drawing here. Every moment is local presentation after the state applied
