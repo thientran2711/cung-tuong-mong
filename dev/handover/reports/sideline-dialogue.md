@@ -47,3 +47,4 @@ ONE data shape for every dialogue scene, side lines (this file) AND main roads (
 
 ## WRITERS
 - (24/11) W1 j72_a.md DONE: 127 scenes (63 craft + 64 social), 0 errors on dlgs_validate (review/sideline-dlg 03f4f781). Last id done: j72:j72c-social-064. Include the lead's two fixture ids (craft-001, craft-007) as written there. Self-read pass pending.
+- (24/11) W2 j72_b.md DONE: 129 scenes (63 court + 66 fam), 0 errors on dlgs_validate (review/sideline-dlg 03f4f781 tree). Last id done: j72:j72c-fam-066. fam units (all L = M): sv/ak/maid asks are told by M bringing the servant's plea or the child's letter. Self-read pass pending.
