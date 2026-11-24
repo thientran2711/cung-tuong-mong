@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"6a8e4f55+","t":"2026-11-24T19:07Z","c":"robot-coop-fix-4 (week-end stuck family, law 11): a NEW room clears the night gate (nrdy/ngo/ngoW/nfr/nforce) and thin E's asks (E.mine/hr/…","b":"c55bfa782664","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
+window.CTM_BI={"s":"2d4d646f+","t":"2026-11-24T21:14Z","c":"robot-coop-fix-4: trace-only probe 'night held w' in nCheck (once per week: which wrapper state kept a committed night from ending the week…","b":"8544246dcc89","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1202,6 +1202,8 @@ function chanceLo(n){return chanceLvl(n).toLowerCase()}
 function chanceW(n){return n<=0?"không có khả năng":"khả năng "+chanceLo(n)}
 const CHW=/khả năng (rất thấp|thấp|vừa|cao|rất cao)|không có khả năng/;
 function cl(v,a,b){return Math.max(a,Math.min(b,v))}
+/* ONE CORE (robot-coop-fix-2 r2): a person's number kept in ITS range, BAL.personRange.stat (jbalpr.js; same table as the co-op Worker merge) */
+function prCl(k,v){const r=BAL.personRange.stat[k];if(!r)return v;return Math.max(r[0]==null?-Infinity:r[0],Math.min(r[1]==null?Infinity:r[1],v))}
 /* ODDS CAP (owner 17/11 ~17:00Z + 17:35Z "Trần 95%, việc chắc ăn mà hỏng thì chỉ hỏng nhẹ"): nothing rolled is ever sure. ONE cap in BAL:
    BAL.odds.lo / hi (5 / 95). roll(o) = THE roll every chance in the game uses (hers and NPCs'): it never passes above hi. oddsCl(o) = an act's
    odds clamped to [lo, hi] (odA and every act odds). An act that used to be sure (o 100 or no o) now rolls at the cap (oddsOf) and fails
@@ -1271,12 +1273,11 @@ function apply(o){const pops=[];
   for(const k in o){let v=o[k];if(!v)continue;
     if(k==="maid"){S.maid.loyal=cl(S.maid.loyal+v,0,100);pops.push([k,v]);continue}
     if(k==="sung")v=sg(v);S[k]=(S[k]||0)+v;if(NAMES[k])pops.push([k,v])}
-  for(const k of ["sung","danh","suc","sac","tai","tamco","duc"])S[k]=cl(S[k],0,100);S.suc=Math.min(S.suc,sucCap(S));
-  S.th=cl(S.th,-100,100);S.hh=cl(S.hh,-100,100);S.bac=Math.max(0,S.bac);/* 2f2: mat = the real list (jagknow tmInstall), no clamp */
+  for(const k of BAL.personRange.core)if(S[k]!=null||k==="th"||k==="hh"||k==="bac")S[k]=prCl(k,S[k]);S.suc=Math.min(S.suc,sucCap(S));/* ONE CORE: BAL.personRange (jbalpr.js) *//* 2f2: mat = the real list (jagknow tmInstall), no clamp */
   if(!quiet)pops.forEach(([k,v],i)=>popNum(k,v,i))}
 /* fix-kframe-heir (LAW 11, robot10 «Danh 101»): a direct write to a person's 0..100 stat outside apply / ap goes through the SAME clamp they use
    (0..100, Sức also under sucCap; Thân / Hận −100..100); returns the value really set. dev/test/scan-stat-clamp.py lists every write. */
-function statSet(p,k,v){if(["sung","danh","suc","sac","tai","tamco","duc","ghen","an"].includes(k))v=cl(v,0,100);else if(k==="th"||k==="hh")v=cl(v,-100,100);p[k]=v;if(k==="suc"&&typeof sucCap==="function")p.suc=Math.min(p.suc,sucCap(p));return p[k]}
+function statSet(p,k,v){if(BAL.personRange.core.includes(k))v=prCl(k,v);/* ONE CORE: BAL.personRange (jbalpr.js) */p[k]=v;if(k==="suc"&&typeof sucCap==="function")p.suc=Math.min(p.suc,sucCap(p));return p[k]}
 /* the screen of THIS phone (effects, scenes, sounds, floaters): off for bots, quiet code paths, and while a co-op host runs the other seat's
    turn (COOPW.ctx). coop-thin F2 r2: her intents run on the host with quiet off (her cards reach her through her Q, her floaters / effects are
    captured and play on HER phone, jcoopthin uiCap); every screen gate reads this ONE rule, so nothing of hers draws on the host's screen */
@@ -2318,7 +2319,7 @@ function queenP(){return S.rank>=7?S:(qOn()?rivals[0]:null)}
 function malOf(p){return p===S?Math.max(0,70-S.duc):p.malice}
 function wk(){return S.turn*3+S.tuan}
 function ap(p,o){if(p===S)return apply(o);for(const k in o){const v=o[k];if(!v)continue;if(k==="maid"){p.maid.loyal=cl(p.maid.loyal+v,0,100);continue}p[k]=(p[k]||0)+v}
- for(const k of ["sung","danh","suc","sac","tai","tamco","duc","ghen","an"])if(p[k]!=null)p[k]=cl(p[k],0,100);if(p.suc!=null)p.suc=Math.min(p.suc,sucCap(p));p.th=cl(p.th||0,-100,100);p.hh=cl(p.hh||0,-100,100);p.bac=Math.max(0,p.bac||0)}
+ for(const k of BAL.personRange.core){const al=k==="th"||k==="hh"||k==="bac";if(p[k]!=null||al)p[k]=prCl(k,al?p[k]||0:p[k])}if(p.suc!=null)p.suc=Math.min(p.suc,sucCap(p))/* ONE CORE: BAL.personRange (jbalpr.js) */}
 function dieIf(p,why){if(p!==S&&p.alive&&p.suc<=0){p.alive=false;if(p.queen)p.queen=false;return `<span class="r">${p.name} ${why}.</span> `}return""}
 /* a rival's full stat block: the same fields the player's formulas read */
 function rstats(v,rank){rank=rank==null?(v.queen?7:v.rank):rank;
@@ -6784,6 +6785,39 @@ Object.assign(BAL,{itFx:{tramngoc:{w:{sac:2}},
  wear:{ngocboi:{danh:1},tuithom:{sac:1}},
  veil:{sac:2}/* the hủy dung veil while the mark is on her face (jinv wearBonus wrap) */}});
 if(typeof IT!=="undefined")for(const k in BAL.itFx)if(IT[k])Object.assign(IT[k],BAL.itFx[k]);
+/* ONE CORE (law 4) — THE ranges of a person's numbers (robot-coop-fix-2 r2, review FAIL item 1). Pure data: no function, reads no BAL key set outside this file,
+   so the co-op Worker's copy is GENERATED from this file (dev/build/gen_coop_ranges.js → coop/worker/src/ranges.gen.js; coop/worker/test/range.test.mjs
+   fails when the two differ). Readers: j8 ap(), j1 apply() + statSet() (the stat block, `core`), j9 affAdd / oanAdd + COOPW.keyMove (BAL.linkRange),
+   the Worker's week merge (every field below on every named person: her S, the consorts, their maids / staff / kids, the men), and
+   dev/tools/coop-range-scan.js (every game clamp site of these fields must use this range). [lo, hi]; null = no bound on that side.
+   Sức also stays under sucCap(p) (jkh, BAL.kh: khí huyết) — the Worker computes the same cap from BAL.kh (generated with this table). */
+/* review/coop-flakes (D20; rv: ONE CORE, law 4; moved here from jbal2.js): the range of every person-to-person link — rl thiện cảm, ro oán — ONE source:
+   j9 affAdd / oanAdd clamp with it, and COOPW.keyMove (co-op: one person's link moving to another id, a stand-in → her world id, a re-id'd person)
+   clamps the ADDED link with it. */
+BAL.linkRange={rl:[-100,100],ro:[0,100]};
+BAL.personRange={
+ /* the stat block ap / apply / statSet clamp (Sức: then sucCap) */
+ core:["sung","danh","suc","sac","tai","tamco","duc","ghen","an","th","hh","bac"],
+ stat:{sung:[0,100],danh:[0,100],suc:[0,100],sac:[0,100],tai:[0,100],tamco:[0,100],duc:[0,100],ghen:[0,100],an:[0,100],th:[-100,100],hh:[-100,100],bac:[0,null],
+  loyal:[0,100]/* maid / staff / men (j10, j42, jagstaff …) */,tin:[0,100]/* trust (maid, court, staff) */,pg:[0,100]/* rival's power grab */,oan:[0,100]/* her oán toward the player */,
+  rel:[-100,100]/* a consort's thiện cảm toward the player */,malice:[0,100],ev:[0,null]/* evidence held (j8 evA) */,caseEv:[0,null],dw:[0,null]/* her wrongs ledger count */,
+  tinh:[0,100]/* a man's tình */,dad:[0,100],pow:[0,100]/* a minister's power */,
+  hp:[0,100],fond:[0,100],tal:[0,100],hM:[0,100],tv:[0,100],tw:[0,100],td:[0,100],tcR:[0,100],fM:[0,100],af:[-100,100]/* a scalar affection (jkc: a suitor) — the per-person map af is below *//* a child's health / fondness / talent / learning (j25, j53, j54, jkidlife) */,rumor:[0,null],khTmp:[0,null],nt:[0,100]/* a cung nữ's nữ công (j42) */},
+ /* maps keyed by a person's id: every value in the range */
+ /* objects held under a person by this key (not named themselves): their fields in range — a married daughter's household k.hW (j54) */
+ sub:{hW:{joy:[0,100]}},
+ /* world objects (the room's W.S[key], not persons; the guest's week writes them too): the court's mood (j55 trS: biến / khó) */
+ world:{trieu:{bien:[0,100],kho:[0,100]}},
+ map:{rl:BAL.linkRange.rl,ro:BAL.linkRange.ro,af:[-100,100]/* a man's or servant's affection per person */,hA:[0,100]/* a child's art skill */,evm:[0,null],cev:[0,null]}};
+/* robot-coop-fix-2 r3 (review r2 FAIL 1): the co-op CANONICAL state keeps a world person's feelings toward each player in maps keyed by the player
+   id (jcoopworld toCanon / jcoopthinb: r.rl[mp]=rel, r.ro[mp]=oan, r.gp[mp]=ghen, r.ep[mp]=ev, evm[mp], cev[mp]). gp / ep are the SAME numbers as
+   the stats ghen / ev: their range is a reference to the stat range, never typed again. dev/tools/coop-range-scan.js fails when a renamed map is missing here. */
+BAL.personRange.map.gp=BAL.personRange.stat.ghen;BAL.personRange.map.ep=BAL.personRange.stat.ev;
+/* robot-coop-fix-2 r3 (review r2 FAIL 2): WHO has a body (khí huyết, jkh.js): the player (her S) and the consorts (rivals) only — jkh khInit / khFit
+   run on S + every rival at start, load and each month, and every sucCap caller in the game is one of them. Servants, maids, children, men have no
+   body record and the game never caps their Sức under sucCap (jagstaff asSt / asAp: 0…100). The Worker applies sucCap to the same set, by its place
+   in the canonical room state: W.R[] = the consorts, P.<seat>.S = the players. */
+BAL.personRange.body=["W.R[]","P.*.S"];
 /* ================= jbaleff: ONE CORE (OD:L1267) amounts of relation / power effects (review/one-core-dup, family F3) =================
    BAL.eff.<module>.<site> = the amount the module's effect call applies (relAdd thiện cảm, oanAdd oán, affAdd, kcAf, tdPowAdd …);
    [a,b] = the two amounts of a `cond ? a : b` call. Site = the enclosing function / option key (_2, _3 … for the next calls in it).
@@ -36661,10 +36695,7 @@ Object.assign(BAL,{coopTm:{lens:[3,5,8],buoiMs:300000,pauseCapMs:60000,readMs:80
 /* review/coop-cyhold: the longest the host's week draw waits for the friend's Kỳ nguyệt sự answer (jcoopworld cyHold); after it the draw runs
    with the «no answer» outcome (as when her week end frees it), her card stays open for her (never answered for her) */
 BAL.coop=Object.assign({},BAL.coop||{},{cyWaitMs:90000});
-/* review/coop-flakes (D20; rv: ONE CORE, law 4): the range of every person-to-person link — rl thiện cảm, ro oán — ONE source: j9 affAdd /
-   oanAdd clamp with it, and COOPW.keyMove (co-op: one person's link moving to another id, a stand-in → her world id, a re-id'd person) clamps
-   the ADDED link with it. Before, affAdd / oanAdd typed −100…100 / 0…100 themselves. */
-BAL.linkRange={rl:[-100,100],ro:[0,100]};
+/* BAL.linkRange now lives in jbalpr.js (ONE source with the person ranges; the co-op Worker table is generated from it) */
 /* ITEM DETAIL (KIT §70, review/item-info): allow = show "hạn mức phẩm ta N" (her rank's luxury allowance) on the Xa xỉ row of every item detail,
    and mark "quá hạn mức" when wearing the piece would take her over it (coordinator 15/11 design "xa xỉ value vs her rank allowance", after the
    owner's 23:05Z dress-contest ruling; the older 08:10Z ruling hid the allowance — set false to hide it again, the row keeps "món này N · Bên mình N → M").
@@ -97903,7 +97934,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c55bfa782664";window.CTM_BUILD=BUILD;
+const BUILD="8544246dcc89";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
