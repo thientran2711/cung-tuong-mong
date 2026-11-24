@@ -23,3 +23,21 @@ ONE life on both devices: Phùng Uyển Ninh, Thường tại, buổi trưa, 15 
 
 ## Re-run
 `cd dev/review/ring3; export SAVE=/home/user/wt/ring4-shots/life.json PICK='Tư Mã Ý Hoan'` (missing → `node meet.js` after boot writes a life, then `node capture.js`) → `bash dev/site/build_site.sh` (needs the merged kit) → `node run.js <fold|ipad> <shots|video|perf>` → enc + fin scripts in /home/user/wt/ring4-shots (ffmpeg cut at CUT, 2× = setpts 2) → `python3 dev/site/cdn_sync.py img/_review/ring4`. ~Design 95 % / playable 0 %.
+
+## HANDOVER → RING-DESIGN-5 (rolled at context ≈47 % > START 5 % + 25 %; worker rule OD 16/11 08:22Z — the COORDINATOR opens the successor)
+State: review/ring-design-4 has kit-woodskin 66bf8bb5 MERGED (KIT_PLAQUE rename; mock does not use KIT_PICK) but the CDN page img/_review/ring4 still shows the e9a98922 shoot. Re-shoot was stopped. Shots/scripts in /home/user/wt/ring4-shots (life.json = the ONE life; prev.py, enc.sh, fin.sh; contact sheets via ffmpeg fps). Worktree /home/user/wt/ring4 (sparse). After merging a kit sha ALWAYS run `bash dev/site/build_site.sh` (index.html is built; do NOT commit index.html/sw.js — `git checkout -- index.html sw.js` before commit).
+MAIN 127 FAIL of e9a98922 (verbatim, 24/11 19:38Z) — fix ALL, whole family, same shot names, new sha:
+(1) SAME KIẾP, DIFFERENT WORLD per device: Fold m1 has 6 areas … iPad has 5 areas … different people per area. Who stands where must come from game state, never from screen size (law 6). Same areas + same people on both devices; layout only may differ.
+(2) SEE-THROUGH servants: grey silhouettes are translucent — must be opaque (KK22 req 8 .j59sil; use the kit fix, don't patch locally).
+(3) OVERLAP behind chosen person: s-hang/p-hang/p-fan iPad — a dark servant head peeks out right behind Tư Mã Ý Hoan's head; silhouettes overlap the lady's sleeves. People never overlap; servant stands clearly beside/behind with a gap.
+(4) Thẻ gỗ (p-hang): Fold 6 plaques in one narrow column, labels break to 3 lines («Khen tài nghệ nàng ta»); a faded ghost word under «Bàn tán về … Hàn Như Ý» on both devices (hidden text layer showing through). Plaques by the person near the feet per OD 24/11 ~15:30Z.
+(5) Quạt nút (p-fan): iPad «Bàn tán về Hoàng hậu Hàn Như Ý» card — «Tốn 1 khắc» cut by the next card; Fold cards overlap each other's text edges.
+(6) Nan quạt (p-rib): Fold top two ribs cut (…hidden under the next rib); iPad last rib «Cảnh báo nàng ta» runs off the bottom edge.
+(7) Small: on Fold the «!» button jumps between d0 (beside TRẦN NỮ seal) and all other frames (below it) — pre-existing on bare LIVE? say which.
+Then check every frame yourself (sheet of the videos too, fps=12 tile) for see-through people, box over face, overlaps, «???» before posting READY.
+My analysis for the successor:
+- (1) area.js assign(): capacity uses kv() (view.kv1 3 / kv2 4) AND a width fit on D (device span) → different areas per device. Make it device-free: fixed groups-per-area from BAL.area (e.g. grpPerArea 2 = what Fold holds at kit scale) and NO width test; iPad then shows the same 2 groups wider apart. Lối đi appears on both or neither.
+- (2) The stand-in asset img/kit/unknown-fig-f.webp body alpha is 255 (only the hem fades) — it reads ghostly because it is pale flat grey; kitDim copy over it too. Get KK22's opaque stand-in look (req 8) as a class/function usable outside `.stage.j59 .tok` (mock figure = `#kar .kar-f > img`), apply it; no local filter.
+- (3) stepOut() puts followers behind her left shoulder (overlap). Need a no-overlap layout: followers beside her with a gap (Fold has room only if she stands further right — then the plaque band shrinks). Fold geometry: stage 636, rail ~82 px; plaque kv1 152 px, 2 columns need ≥ 312 px band.
+- (4)(5)(6) kit plaque width/height on Fold (3-line names) + «ghost word» under the 2-line name in .kpk plaques → KK22 (kitPick §98.1); fan/rib overlaps are the mock's own picker geometry (area.js picker 'fan'/'rib') — give fan buttons enough vertical step for the 3-line card (bh), clamp rib fan so the last rib stays inside the stage (D.H) and the top ribs don't cover each other's text (span/r0).
+- Audit (run.js __karAudit): add person-person box overlap (except intended), card-card text overlap, element off-stage bottom.
