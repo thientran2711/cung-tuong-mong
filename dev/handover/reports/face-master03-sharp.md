@@ -1,4 +1,4 @@
-# face-master03 — Sharp worker report (FINAL)
+# face-master03 — Sharp worker report (FINAL, incl. age 39)
 PRIORITY #1 CHECK: OD 0 hits (face-master03) | main none | review/* none | claims: this row (session_01D3E3NaxuWFpancQEoeisKM)
 
 ## Result
@@ -78,4 +78,24 @@ Settings (all jobs): Magnific images_generate, mode gpt-2-6, resolution 2k, aspe
 
 ## Not done
 - Contact sheets (original | result) + CDN upload to img/_review/face-master03/sharp/: NOT built. Output images exist only as Magnific creations (ids above); identity originals are on CDN img/share/face90/<id>.png. Say the word and a worker builds them.
-- Age 39: on hold per owner.
+
+
+## AGE 39 (unblocked by owner ~21:45Z; prompt = age39-fix04 Sharp file pasted WHOLE, 9687 chars, sha 5993aff4…)
+15/15 DONE, all looked at; same settings/refs; no retries. QC: no text, no visible makeup, zero wrinkles, ivory robe + pin. Faces read ~late-20s to early-30s (young for 39) — flag for owner. Identity not side-by-side checked. Total Sharp now 75/75 (5 ages x 15).
+| source | age | identity upload | output id | status | QC |
+|---|---|---|---|---|---|
+| m09 | 39 | fHYEKbDCDY | ov3tOKv829 | DONE | style+robe+pin ok, no text, no visible makeup, zero wrinkles (reads ~late 20s-30s); identity not side-by-side checked |
+| c05 | 39 | eI9Xa4ydqL | Xm687kMBfo | DONE | style+robe+pin ok, no text, no visible makeup, zero wrinkles (reads ~late 20s-30s); identity not side-by-side checked |
+| c06 | 39 | 0e7V8JuTfW | eI9BUxBdqL | DONE | style+robe+pin ok, no text, no visible makeup, zero wrinkles (reads ~late 20s-30s); identity not side-by-side checked |
+| c11 | 39 | lJhS9fGgv9 | BhiIJSzoQR | DONE | style+robe+pin ok, no text, no visible makeup, zero wrinkles (reads ~late 20s-30s); identity not side-by-side checked |
+| c14 | 39 | mEAvqcfhJQ | cpwVxxG0eP | DONE | style+robe+pin ok, no text, no visible makeup, zero wrinkles (reads ~late 20s-30s); identity not side-by-side checked |
+| c19 | 39 | IfZmFWctvE | TdJDljmVNR | DONE | style+robe+pin ok, no text, no visible makeup, zero wrinkles (reads ~late 20s-30s); identity not side-by-side checked |
+| c27 | 39 | YMScX9rWeC | xS8spetjfW | DONE | style+robe+pin ok, no text, no visible makeup, zero wrinkles (reads ~late 20s-30s); identity not side-by-side checked |
+| c31 | 39 | ov3Iu0B829 | nVgcrlMYQD | DONE | style+robe+pin ok, no text, no visible makeup, zero wrinkles (reads ~late 20s-30s); identity not side-by-side checked |
+| s07 | 39 | dtNBfccXSL | rgoLDI8xtc | DONE | style+robe+pin ok, no text, no visible makeup, zero wrinkles (reads ~late 20s-30s); identity not side-by-side checked |
+| s08 | 39 | u50FxhMQLD | DoPdU3Cpcl | DONE | style+robe+pin ok, no text, no visible makeup, zero wrinkles (reads ~late 20s-30s); identity not side-by-side checked |
+| s09 | 39 | nVgWd2yYQD | UPfJmXIwny | DONE | style+robe+pin ok, no text, no visible makeup, zero wrinkles (reads ~late 20s-30s); identity not side-by-side checked |
+| s39 | 39 | 79EORw2JAL | 9ZbiQCrNYZ | DONE | style+robe+pin ok, no text, no visible makeup, zero wrinkles (reads ~late 20s-30s); identity not side-by-side checked |
+| s40 | 39 | jUIsPsiLD0 | jUIlXB2LD0 | DONE | style+robe+pin ok, no text, no visible makeup, zero wrinkles (reads ~late 20s-30s); identity not side-by-side checked |
+| s41 | 39 | u50FjqIQLD | ksXxDBJ16B | DONE | style+robe+pin ok, no text, no visible makeup, zero wrinkles (reads ~late 20s-30s); identity not side-by-side checked |
+| s42 | 39 | Xm6oEmXBfo | jUIlXvdLD0 | DONE | style+robe+pin ok, no text, no visible makeup, zero wrinkles (reads ~late 20s-30s); identity not side-by-side checked |
