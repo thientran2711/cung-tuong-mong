@@ -2072,6 +2072,23 @@ BAL.j68c={on:true,w:{def:.35},seen:.15,cd:999,obKeep:60,rumorTag:" <i>(Lời đ�
      m:{sung:3,danh:3,bac:40,suc:8,mat:1,th:4,hh:4,duc:3,tamco:2,an:2,rel:6},
      l:{sung:5,danh:5,bac:60,suc:12,mat:2,th:6,hh:6,duc:5,tamco:3,an:3,rel:9}},
  need:{friend:10,feud:-10,poor:30}};
+/* ORDER THIN P6 (jworldc.js composed world reactions, owner OD 23/11 ~22:50Z; reports/thin.md «## API P6»): on = composed scenes live; npcMax = NPCs
+   in a seed's scope who choose a stance (the same 4 as hers, law 1); rankHi = scope "hi" from this rank (Tần) up, "lo" below; seen = draw weight of a
+   seed met in a past life (fresh-first, on top of jnorep ×nr.w); obKeep = object traces kept; fx[tier] = what ONE gain/loss step is worth per key
+   (laws 2/3/4: seeds count steps, numbers live here; rel = thiện cảm of that person); npcCant = weight of a stance an NPC cannot pay (bạc). */
+BAL.wc={on:true,npcMax:8,rankHi:3,seen:.15,obKeep:60,npcCant:.1,
+ fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:1,th:2,hh:2,duc:2,tamco:1,an:1,rel:4},
+     m:{sung:3,danh:3,bac:40,suc:8,mat:1,th:4,hh:4,duc:3,tamco:2,an:2,rel:6},
+     l:{sung:5,danh:5,bac:60,suc:12,mat:2,th:6,hh:6,duc:5,tamco:3,an:3,rel:9}}};
+/* ORDER THIN P6 (j70c.js composed j70 routes): on = composed routes live; vis/need/bac = the route tiers (tell visibility, prep weeks, price — the same
+   ranges as the 51 hand-written routes); obKeep = object traces kept (S.j70.ob); law 2 (validator): vis lo0/mid1/hi2 + need s0/m1/l2 + bac 0:0/s0/m1/l2 + acc 1 = 2..3 cost points. */
+BAL.j70c={on:true,obKeep:60,vis:{lo:2,mid:5,hi:8},need:{s:2,m:3,l:4},bac:{"0":0,s:20,m:40,l:60}};
+/* ORDER THIN P7 (j71c.js composed festivals): on = composed stages / complications / prizes live; fx[tier] = what ONE gain/loss step of a
+   complication stance is worth (laws 2/3/4: seeds count steps; rel = the rival's thiện cảm); obKeep = object traces kept. */
+BAL.j71c={on:true,obKeep:60,
+ fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:1,th:2,hh:2,duc:2,tamco:1,an:1,rel:4},
+     m:{sung:3,danh:3,bac:40,suc:8,mat:1,th:4,hh:4,duc:3,tamco:2,an:2,rel:6},
+     l:{sung:5,danh:5,bac:60,suc:12,mat:2,th:6,hh:6,duc:5,tamco:3,an:3,rel:9}}};
 /* ORDER THIN P3 (j72c.js composed việc nhờ): on = composed favours live; share = draw weight of one composed seed vs one of the 110 old T7 (1);
    fx[tier] = what ONE gain/loss step of a seed is worth per key (laws 2/3/4: seeds count steps, numbers live here; rel/relb = thiện cảm of A/B,
    an = ân tình); odds = base of a do-step on the j72 ladder (q72Odds adds her skill); khac = khắc of a do-step; wait = tuần of a wait step;
