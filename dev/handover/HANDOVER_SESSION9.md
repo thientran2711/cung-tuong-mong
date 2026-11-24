@@ -3091,3 +3091,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (18:39Z) mucluc sticky2 re-shoot checked OK (blank = worker's test spacer) → GO LC12 for b021e429. Asked worker about a ghosted 2nd figure in iPad shot (fade timing?).
 - (18:41Z) FLIGHT-SOUND LAND READY SMALL review/sfx-instant cce57071 (first tap 177–260 ms → ≤1.2 ms, 0 silent/drops) → GO LC12. OFFLINE-FAST told to merge on top (start-up audio overlap).
 - (18:45Z) KK21 kit-tntile 23772dda (kitSkillTile + even act-card heights §21e) → FLIGHT-TAINGHE switches + re-shoots → new sha; LC12 lands mucluc + sfx first. flight-ui head e92984b3 (adds page-turn flash guard; not reproduced on desktop — her phone must confirm); waiting CDN pictures before GO.
+- (18:49Z) KK21: tainghe kit = review/kit-tntile 23772dda (KIT OK; LC12 gates, GO after pictures). kit-woodskin now 880c7c8b (CSS wood already; + KIT REQ 7b jrail) — kitDim part stays off LIVE until sếp GO on dim3. KK21 → kit-fitfast.
