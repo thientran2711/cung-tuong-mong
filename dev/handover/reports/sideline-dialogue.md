@@ -32,6 +32,9 @@ PRIORITY #1 CHECK: prio1 «dlgs wave 2|old j68 decision|DLGS.R» → only review
 - 59361f1b (code): resolvers — old j68 (pid «e68<id>», roles A/B/C = EV6 slots via A6, fill e68Fill + {it}); old j7 (table DLGS_J7O in jdlgs.js: per card ONLY the people the card shows; hidden schemers never cast: pp.a of poisongift/comet/fire, pp.v of doll/guardrumour/ghost/taster); ky (existing resolver) + law 6b fixes: hidden W (th_tham) → no W, W = herself → no W, kind maid (vat_minh) → her cung nữ; j70 unit id «j70:<method>:<route>» for old routes (route ids repeat), seeds unchanged.
 - Validator: 199 old units (j7 33, j68 90, ky 25, j70 51), cover rows «old (wave 2)» 0 %; `--units <fam>` = the W10 slice list (id, roles, placeholders, source line).
 - Probe (fixture scenes for all 199, not committed): resolver path verified in a real life (j68 gossipTea ALL PASS 21; wave-1 regression 5 units ALL PASS 113). dlgs-play old-unit casting: test-only fallbacks (j95b motive gate off, fuller household) being finished.
+- e892fba4: {it} of lost-piece cards (jlost lostItem / hairpinThief) = the REAL piece taken from her chest (law 6c), not the old made-up list; validator reads j68h G6set re-slots (rumorPreg / rumorEmpLove = two consorts A + B); ky th_tham roles M only (hidden plotter). 60d691aa: dlgs-play casts every old unit.
+- PROBE (fixture scenes for all 199 old units, file not committed): Fold ALL PASS — j7 + j70 1598 checks; j68 + ky 2054 + reruns of 7 (97, 59) after the fixes above. Shots looked at (j7 Hoàng hậu card, ky Tổng quản): speaker lit, two real figures, narration untitled.
+- Writers (Foreman B, 21:23Z): W10a = 6PD5B4c52aFzMEVUg; W10b then W10c = 2PybdFSJvqpXim3bC. Both told of e892fba4.
 - W10 slices (writer brief «WAVE 2 rules»): W10a j68_old.md (90) · W10b j7_ky_old.md (33 + 25) · W10c j70_old.md (51).
 
 ## SCHEMA
