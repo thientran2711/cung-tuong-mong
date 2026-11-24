@@ -73,16 +73,22 @@ function ktChapToc(){try{const c=S&&S.st&&S.st.ch;if(!c||!Array.isArray(c.plan))
  let n=c.n||0;
  if(!c.all){const m=S.st.ms,M=S.st.M;let t="";try{t=m?MS67[m.id].t():M?ARC67[M.a].t:""}catch(e){}
   if(t)out.push(["now",`Chương ${n} · ${t}`,"đang làm"]);
-  const part=i=>{try{return typeof f14Part==="function"&&f14()?f14Part(i).t:""}catch(e){return""}};
   const max=c.max||14;
   let road=0;try{const f=S.st.f14;if(f&&f.road&&!f.r0&&ARC67[f.road])road=f.road}catch(e){}
-  c.plan.slice(Math.max(0,(c.i||0)+1)).filter(x=>x!=="fin").forEach(p=>{if(n>=max)return;n++;let nm="";if(p==="o"&&road){nm=ARC67[road].t;road=0}
+  /* slots whose arc is not chosen yet («o» next premise of the origin, «s» shared arc): the REAL titles of the arcs still to come, in list order (never a typed name); none left = that chapter cannot run, so it is not listed */
+  const played=new Set((c.past||[]).map(x=>x.a)),Mx=S.st.M?S.st.M.a:"";
+  const rdId=(S.st.f14&&S.st.f14.road)||"";const qo=(c.pool||[]).filter(id=>ARC67[id]&&!played.has(id)&&id!==Mx&&id!==rdId).map(id=>ARC67[id].t);
+  let qs=[];try{qs=arcIds67("*").filter(id=>!(c.usedS||[]).includes(id)&&!played.has(id)&&id!==Mx&&arcOk67(ARC67[id])).map(id=>ARC67[id].t)}catch(e){}
+  c.plan.slice(Math.max(0,(c.i||0)+1)).filter(x=>x!=="fin").forEach(p=>{if(n>=max)return;let nm="",gu=0;
+   if(p==="o"&&road){nm=ARC67[road].t;road=0}
    try{if(p==="end:12"&&typeof eg12==="function")p=eg12();
     if(/^ms:/.test(p))nm=MS67[p.slice(3)].t();else if(/^st:/.test(p))nm=ARC67[p.slice(3)].t}catch(e){}
-   if(!nm)nm=p==="s"?"Chuyện chung trong cung":(part(n)||"Chuyện kế của kiếp này");
-   out.push(["next",`Chương ${n} · ${nm}`,"chưa tới"])})}
+   if(!nm&&p==="o"){nm=qo.shift()||qs.shift()||"";gu=1}else if(!nm&&p==="s"){nm=qs.shift()||"";gu=1}
+   if(!nm)return;if(gu&&out.some(x=>x[1].endsWith(" · "+nm)))return;n++;out.push(["next",`Chương ${n} · ${nm}`,gu?"dự kiến":"chưa tới"])})}
  return out.length?out:null}catch(e){console.error(e);return null}}
 window.ktChapToc=ktChapToc;
+/* cung nữ road (owner 24/11, MAIN 127): Thân phận has no chapter slide, so its Mục lục is one kit chip button (data-ktoc) that opens the same Mục lục frame */
+(function(){if(typeof srvRoadHTML!=="function")return;const r0=srvRoadHTML;srvRoadHTML=function(){const h=r0.apply(this,arguments);try{if(ktChapToc())return `<div class="ktop"><button type="button" class="kchip n" data-ktoc="1">Mục lục chương</button></div>`+h}catch(e){}return h}})();
 /* ---------- MỆNH TRUYỆN ---------- */
 function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="object"&&(QUEST67[S.origin.k]||QUEST67.tt))||{t:""};
  const past=c&&c.past?c.past:[];const rare=(S.r97||[]);

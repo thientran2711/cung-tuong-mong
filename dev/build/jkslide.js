@@ -16,15 +16,20 @@ function kitSlide(key,slides,o){o=o||{};slides=(slides||[]).filter(Boolean);if(!
  return `<div class="kslide" data-ksk="${esc(key)}" data-ksn="${n}"><div class="kslw">${pic}`+
   (n>1?`<button type="button" class="kslar kslprev" data-ksgo="-1" aria-label="Chương trước"${cur<=0?" disabled":""}>‹</button><button type="button" class="kslar kslnext" data-ksgo="1" aria-label="Chương sau"${cur>=n-1?" disabled":""}>›</button><span class="kslpos">${cur+1}/${n}</span>`:"")+
   (KST[key].items.length?`<button type="button" class="kslmuc" data-ksmuc="1">Mục lục</button>`:"")+`</div><div class="kslb">${bod}</div></div>`}
+/* owner 24/11 (f10-mucluc): Mục lục = ONE LARGE kit frame listing EVERY chapter by number + NAME with its state (kitStepList: đã qua ✓ / đang làm ▸ / chưa tới ·); `.kmuc` keeps it the one big size (jkpc).
+   Opened by the «Mục lục» corner button of a kitSlide (data-ksmuc) and by any chip button data-ktoc (cung nữ road, which has no chapter slide). items = [state,text,note] */
+function kitTocOpen(title,items){if(typeof kitModal!=="function")return;
+ kitModal({kind:"info",title:title||"Mục lục",sections:[{h:"",html:`<div class="kmuc">${typeof kitStepList==="function"?kitStepList((items||[]).map(x=>[x[0],`<span class="kmn">${x[0]==="now"?`<b>${x[1]}</b>`:x[1]}</span>`,x[2]||""])):""}</div>`}],btn:"Lui"});
+ setTimeout(()=>{try{const n=document.querySelector("#modal .kmuc .ksp-now");if(n&&n.scrollIntoView)n.scrollIntoView({block:"center"})}catch(e){}},60)}
+window.kitTocOpen=kitTocOpen;
 function go(root,d){const key=root.dataset.ksk,n=+root.dataset.ksn;const st=KSL[key]||{i:0,n};const i=Math.max(0,Math.min(n-1,st.i+d));if(i===st.i)return;st.i=i;KSL[key]=st;
  root.querySelectorAll(".ksls").forEach((e,j)=>e.hidden=j!==i);root.querySelectorAll(".kslbd").forEach((e,j)=>e.hidden=j!==i);
  const p=root.querySelector(".kslprev"),nx=root.querySelector(".kslnext"),ps=root.querySelector(".kslpos");if(p)p.disabled=i<=0;if(nx)nx.disabled=i>=n-1;if(ps)ps.textContent=`${i+1}/${n}`;
  try{const P=document.getElementById("panel");if(P&&typeof kitRowsAlign==="function")kitRowsAlign(root)}catch(e){}}
 document.addEventListener("click",e=>{try{const t=e.target;if(!t||!t.closest)return;
  const g=t.closest("[data-ksgo]");if(g){e.stopPropagation();e.preventDefault();if(!g.disabled)go(g.closest(".kslide"),+g.dataset.ksgo);return}
- const m=t.closest("[data-ksmuc]");if(m){e.stopPropagation();e.preventDefault();const root=m.closest(".kslide"),T=KST[root.dataset.ksk];if(T&&typeof kitModal==="function"){/* owner 24/11 (f10-mucluc): Mục lục = ONE LARGE kit frame listing EVERY chapter by number + NAME with its state (kitStepList: đã qua ✓ / đang làm ▸ / chưa tới ·); `.kmuc` keeps it the one big size (jkpc) */
-  kitModal({kind:"info",title:T.title,sections:[{h:"",html:`<div class="kmuc">${typeof kitStepList==="function"?kitStepList(T.items.map(x=>[x[0],`<span class="kmn">${x[0]==="now"?`<b>${x[1]}</b>`:x[1]}</span>`,x[2]||""])):""}</div>`}],btn:"Lui"});
-  setTimeout(()=>{try{const n=document.querySelector("#modal .kmuc .ksp-now");if(n&&n.scrollIntoView)n.scrollIntoView({block:"center"})}catch(e){}},60)}return}
+ const m=t.closest("[data-ksmuc]");if(m){e.stopPropagation();e.preventDefault();const root=m.closest(".kslide"),T=KST[root.dataset.ksk];if(T)kitTocOpen(T.title,T.items);return}
+ const tc=t.closest("[data-ktoc]");if(tc){e.stopPropagation();e.preventDefault();const L=typeof ktChapToc==="function"?ktChapToc():null;if(L)kitTocOpen("Mục lục chương",L);return}
  const s=t.closest(".ksls[data-kstap]");if(s&&!t.closest("button")){const f=window[s.dataset.kstap];if(typeof f==="function"){e.stopPropagation();f()}}}catch(x){console.error("kslide",x)}},true);
 /* swipe: a horizontal drag of the picture goes to the next / previous slide */
 let sx=null,sy=null;

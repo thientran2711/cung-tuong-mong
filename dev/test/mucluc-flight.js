@@ -9,8 +9,10 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,O
   await sleep(2000);
   await p.evaluate(()=>{try{kmReset()}catch(e){}Q.length=0;const lc=document.getElementById('klife');if(lc)lc.remove();const m=document.getElementById('modal');if(m)m.hidden=true;tab='story';render()});await sleep(800);
   const tag=`${W} ${o}`;
-  const has=await p.evaluate(()=>!!document.querySelector('[data-ksmuc]'));if(!has){F.push(`${tag}: no «Mục lục» button`);await p.screenshot({path:`${OUT}/ml-${o}-${W}-none.png`});await ctx.close();continue}
-  await p.evaluate(()=>document.querySelector('[data-ksmuc]').click());await sleep(900);
+  /* open slots must show real arc titles, never a typed fallback (MAIN 127) */
+  const fb=await p.evaluate(()=>{const T=ktChapToc();return T?T.filter(x=>/Chuyện chung|Chuyện kế|Phần (đầu|giữa|cuối)/.test(x[1])).map(x=>x[1]):[]});if(fb.length)F.push(`${tag}: typed fallback names ${fb.join(' | ')}`);
+  const has=await p.evaluate(()=>!!document.querySelector('[data-ksmuc],[data-ktoc]'));if(!has){F.push(`${tag}: no «Mục lục» button`);await p.screenshot({path:`${OUT}/ml-${o}-${W}-none.png`});await ctx.close();continue}
+  await p.evaluate(()=>document.querySelector('[data-ksmuc],[data-ktoc]').click());await sleep(900);
   const r=await p.evaluate(()=>{const m=document.querySelector('#modal:not([hidden]) .dlg');if(!m)return{none:1};const q=m.getBoundingClientRect();const rows=[...m.querySelectorAll('.kmuc .kchk')].map(e=>e.textContent.trim());
    return{h:q.height,w:q.width,vh:innerHeight,over:m.scrollWidth>m.clientWidth+2,rows,txt:m.textContent}});
   if(r.none)F.push(`${tag}: no dialog`);else{if(/Còn khoảng|chương nữa/.test(r.txt))F.push(`${tag}: «Còn khoảng/chương nữa» row`);if(r.over)F.push(`${tag}: overflow`);if(r.rows.length<14)F.push(`${tag}: only ${r.rows.length} chapter rows`);

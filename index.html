@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"502c48c9+","t":"2026-11-24T17:38Z","c":"SELF-MERGE LAND kit-mapgo: merge LIVE 284e0d08 (index.html/sw.js rebuilt)","b":"33dc91146b95","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
+window.CTM_BI={"s":"bd394cd2+","t":"2026-11-24T20:45Z","c":"flight-mucluc-kit r2: ktPinTop follows the bar's real height (ResizeObserver) — chip row pinned on Fold 755; ktop-sticky.js non-vacuous, 4 …","b":"ac92cf926a3a","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -31015,15 +31015,20 @@ function kitSlide(key,slides,o){o=o||{};slides=(slides||[]).filter(Boolean);if(!
  return `<div class="kslide" data-ksk="${esc(key)}" data-ksn="${n}"><div class="kslw">${pic}`+
   (n>1?`<button type="button" class="kslar kslprev" data-ksgo="-1" aria-label="Chương trước"${cur<=0?" disabled":""}>‹</button><button type="button" class="kslar kslnext" data-ksgo="1" aria-label="Chương sau"${cur>=n-1?" disabled":""}>›</button><span class="kslpos">${cur+1}/${n}</span>`:"")+
   (KST[key].items.length?`<button type="button" class="kslmuc" data-ksmuc="1">Mục lục</button>`:"")+`</div><div class="kslb">${bod}</div></div>`}
+/* owner 24/11 (f10-mucluc): Mục lục = ONE LARGE kit frame listing EVERY chapter by number + NAME with its state (kitStepList: đã qua ✓ / đang làm ▸ / chưa tới ·); `.kmuc` keeps it the one big size (jkpc).
+   Opened by the «Mục lục» corner button of a kitSlide (data-ksmuc) and by any chip button data-ktoc (cung nữ road, which has no chapter slide). items = [state,text,note] */
+function kitTocOpen(title,items){if(typeof kitModal!=="function")return;
+ kitModal({kind:"info",title:title||"Mục lục",sections:[{h:"",html:`<div class="kmuc">${typeof kitStepList==="function"?kitStepList((items||[]).map(x=>[x[0],`<span class="kmn">${x[0]==="now"?`<b>${x[1]}</b>`:x[1]}</span>`,x[2]||""])):""}</div>`}],btn:"Lui"});
+ setTimeout(()=>{try{const n=document.querySelector("#modal .kmuc .ksp-now");if(n&&n.scrollIntoView)n.scrollIntoView({block:"center"})}catch(e){}},60)}
+window.kitTocOpen=kitTocOpen;
 function go(root,d){const key=root.dataset.ksk,n=+root.dataset.ksn;const st=KSL[key]||{i:0,n};const i=Math.max(0,Math.min(n-1,st.i+d));if(i===st.i)return;st.i=i;KSL[key]=st;
  root.querySelectorAll(".ksls").forEach((e,j)=>e.hidden=j!==i);root.querySelectorAll(".kslbd").forEach((e,j)=>e.hidden=j!==i);
  const p=root.querySelector(".kslprev"),nx=root.querySelector(".kslnext"),ps=root.querySelector(".kslpos");if(p)p.disabled=i<=0;if(nx)nx.disabled=i>=n-1;if(ps)ps.textContent=`${i+1}/${n}`;
  try{const P=document.getElementById("panel");if(P&&typeof kitRowsAlign==="function")kitRowsAlign(root)}catch(e){}}
 document.addEventListener("click",e=>{try{const t=e.target;if(!t||!t.closest)return;
  const g=t.closest("[data-ksgo]");if(g){e.stopPropagation();e.preventDefault();if(!g.disabled)go(g.closest(".kslide"),+g.dataset.ksgo);return}
- const m=t.closest("[data-ksmuc]");if(m){e.stopPropagation();e.preventDefault();const root=m.closest(".kslide"),T=KST[root.dataset.ksk];if(T&&typeof kitModal==="function"){/* owner 24/11 (f10-mucluc): Mục lục = ONE LARGE kit frame listing EVERY chapter by number + NAME with its state (kitStepList: đã qua ✓ / đang làm ▸ / chưa tới ·); `.kmuc` keeps it the one big size (jkpc) */
-  kitModal({kind:"info",title:T.title,sections:[{h:"",html:`<div class="kmuc">${typeof kitStepList==="function"?kitStepList(T.items.map(x=>[x[0],`<span class="kmn">${x[0]==="now"?`<b>${x[1]}</b>`:x[1]}</span>`,x[2]||""])):""}</div>`}],btn:"Lui"});
-  setTimeout(()=>{try{const n=document.querySelector("#modal .kmuc .ksp-now");if(n&&n.scrollIntoView)n.scrollIntoView({block:"center"})}catch(e){}},60)}return}
+ const m=t.closest("[data-ksmuc]");if(m){e.stopPropagation();e.preventDefault();const root=m.closest(".kslide"),T=KST[root.dataset.ksk];if(T)kitTocOpen(T.title,T.items);return}
+ const tc=t.closest("[data-ktoc]");if(tc){e.stopPropagation();e.preventDefault();const L=typeof ktChapToc==="function"?ktChapToc():null;if(L)kitTocOpen("Mục lục chương",L);return}
  const s=t.closest(".ksls[data-kstap]");if(s&&!t.closest("button")){const f=window[s.dataset.kstap];if(typeof f==="function"){e.stopPropagation();f()}}}catch(x){console.error("kslide",x)}},true);
 /* swipe: a horizontal drag of the picture goes to the next / previous slide */
 let sx=null,sy=null;
@@ -56269,16 +56274,22 @@ function ktChapToc(){try{const c=S&&S.st&&S.st.ch;if(!c||!Array.isArray(c.plan))
  let n=c.n||0;
  if(!c.all){const m=S.st.ms,M=S.st.M;let t="";try{t=m?MS67[m.id].t():M?ARC67[M.a].t:""}catch(e){}
   if(t)out.push(["now",`Chương ${n} · ${t}`,"đang làm"]);
-  const part=i=>{try{return typeof f14Part==="function"&&f14()?f14Part(i).t:""}catch(e){return""}};
   const max=c.max||14;
   let road=0;try{const f=S.st.f14;if(f&&f.road&&!f.r0&&ARC67[f.road])road=f.road}catch(e){}
-  c.plan.slice(Math.max(0,(c.i||0)+1)).filter(x=>x!=="fin").forEach(p=>{if(n>=max)return;n++;let nm="";if(p==="o"&&road){nm=ARC67[road].t;road=0}
+  /* slots whose arc is not chosen yet («o» next premise of the origin, «s» shared arc): the REAL titles of the arcs still to come, in list order (never a typed name); none left = that chapter cannot run, so it is not listed */
+  const played=new Set((c.past||[]).map(x=>x.a)),Mx=S.st.M?S.st.M.a:"";
+  const rdId=(S.st.f14&&S.st.f14.road)||"";const qo=(c.pool||[]).filter(id=>ARC67[id]&&!played.has(id)&&id!==Mx&&id!==rdId).map(id=>ARC67[id].t);
+  let qs=[];try{qs=arcIds67("*").filter(id=>!(c.usedS||[]).includes(id)&&!played.has(id)&&id!==Mx&&arcOk67(ARC67[id])).map(id=>ARC67[id].t)}catch(e){}
+  c.plan.slice(Math.max(0,(c.i||0)+1)).filter(x=>x!=="fin").forEach(p=>{if(n>=max)return;let nm="",gu=0;
+   if(p==="o"&&road){nm=ARC67[road].t;road=0}
    try{if(p==="end:12"&&typeof eg12==="function")p=eg12();
     if(/^ms:/.test(p))nm=MS67[p.slice(3)].t();else if(/^st:/.test(p))nm=ARC67[p.slice(3)].t}catch(e){}
-   if(!nm)nm=p==="s"?"Chuyện chung trong cung":(part(n)||"Chuyện kế của kiếp này");
-   out.push(["next",`Chương ${n} · ${nm}`,"chưa tới"])})}
+   if(!nm&&p==="o"){nm=qo.shift()||qs.shift()||"";gu=1}else if(!nm&&p==="s"){nm=qs.shift()||"";gu=1}
+   if(!nm)return;if(gu&&out.some(x=>x[1].endsWith(" · "+nm)))return;n++;out.push(["next",`Chương ${n} · ${nm}`,gu?"dự kiến":"chưa tới"])})}
  return out.length?out:null}catch(e){console.error(e);return null}}
 window.ktChapToc=ktChapToc;
+/* cung nữ road (owner 24/11, MAIN 127): Thân phận has no chapter slide, so its Mục lục is one kit chip button (data-ktoc) that opens the same Mục lục frame */
+(function(){if(typeof srvRoadHTML!=="function")return;const r0=srvRoadHTML;srvRoadHTML=function(){const h=r0.apply(this,arguments);try{if(ktChapToc())return `<div class="ktop"><button type="button" class="kchip n" data-ktoc="1">Mục lục chương</button></div>`+h}catch(e){}return h}})();
 /* ---------- MỆNH TRUYỆN ---------- */
 function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="object"&&(QUEST67[S.origin.k]||QUEST67.tt))||{t:""};
  const past=c&&c.past?c.past:[];const rare=(S.r97||[]);
@@ -56373,7 +56384,7 @@ html body :is(#panel,#kitpage) .kcattabs.ktsub>.pctinfo{position:static}
 (function(){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);try{if(typeof kitActCompactOn==="function")kitActCompactOn($("panel"))}catch(e){}return r}})();
 
 /* ktPinTop: the chip row (.ktop) right under a sub-tab bar (.ksub) sticks just below it: its top = the bar's real height */
-(function(){const pin=()=>{try{document.querySelectorAll(".ksub+.ktop,.kpbar+.ktop").forEach(t=>{const b=t.previousElementSibling,h=b.offsetHeight+parseFloat(getComputedStyle(b).marginBottom||0);t.style.setProperty("--ktt",(b.offsetHeight-1)+"px")})}catch(e){}};
+(function(){let RO=null;const pin=()=>{try{document.querySelectorAll(".ksub+.ktop,.kpbar+.ktop").forEach(t=>{const b=t.previousElementSibling,h=b.offsetHeight;if(h>0)t.style.setProperty("--ktt",(h-1)+"px");/* the bar may not be laid out yet (0 px) or wrap to 2 rows later (Fold 755): follow its real height */if(window.ResizeObserver){if(!RO)RO=new ResizeObserver(()=>pin());if(!b.__ktro){b.__ktro=1;RO.observe(b)}}})}catch(e){}};window.addEventListener("resize",()=>pin());try{document.fonts&&document.fonts.ready.then(()=>pin())}catch(e){}
  try{const P=document.getElementById("panel");if(P){let r=0;new MutationObserver(()=>{if(r)return;r=requestAnimationFrame(()=>{r=0;pin()})}).observe(P,{childList:true,subtree:true})}}catch(e){}window.ktPinTop=pin})();
 /* review/chapter-detail (owner 15/11 "Bấm vào báo thù cho nhà không có thông tin gì hiện ra à"; queue C24).
    ONE model of the chapter she is on (chapModel) feeds: (1) the chapter detail kit panel (chip / card / picture / check line tap), (2) the inline
@@ -97927,7 +97938,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="33dc91146b95";window.CTM_BUILD=BUILD;
+const BUILD="ac92cf926a3a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
