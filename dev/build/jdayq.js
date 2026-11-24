@@ -31,10 +31,11 @@ function dqOldPending(){try{
   const ov=document.getElementById("ov");if(ov&&!dqHidden(ov))return true;
   if(document.getElementById("kpodov")||document.querySelector('[id^="kroul"],.kroul-ov'))return true}catch(e){}return false}
 /* (b) the new-day host (#dawn: kitNewDay title card, then the Tuần lục book) is on screen */
-function dqDawn(){try{const d=document.getElementById("dawn");if(d&&!dqHidden(d)&&(d.classList.contains("on")||d.classList.contains("kne-day")))return true;
+function dqDawn(){try{const vis=el=>!!(el&&!dqHidden(el)&&el.getBoundingClientRect().width>0&&getComputedStyle(el).display!=="none");
+  /* only a host that is REALLY on screen with its content (a leftover class / empty host after a new life never holds a card) */
+  const d=document.getElementById("dawn");if(vis(d)&&(d.classList.contains("on")||d.classList.contains("kne-day"))&&d.querySelector(".kbk,.kne"))return true;
   /* the kit day title card (#kdaytc, review/kit-daytitle, not on main yet) counts as part of the new-day host */
-  const k=document.getElementById("kdaytc");if(k&&!dqHidden(k)&&k.getBoundingClientRect().width>0)return true;
-  return document.body.classList.contains("kbk-open")}catch(e){return false}}
+  const k=document.getElementById("kdaytc");if(vis(k))return true;return false}catch(e){return false}}
 function dqIsNews(m){return !!(m&&typeof m==="object"&&(m.kind==="news"||/^Tin trong cung/.test(String(m.t||""))))}
 function dqIsEnd(m){return !!(m&&typeof m==="object"&&(m.kind==="end"||/end|death|pcm|nlcard/.test(m.cls||"")))}
 /* «Tin trong cung» first after the book (an ending / death card keeps its place) */
