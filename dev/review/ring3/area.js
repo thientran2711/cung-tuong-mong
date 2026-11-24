@@ -41,16 +41,15 @@ html body .game .mapv.kpmv.kside.kleather.kar-map>.mapsc>.mapw,html body .game .
 function btn(a){const sub=[a.word,a.ton?('Tốn '+a.ton):''].filter(Boolean);const pic=a.pic&&/^(https?:|img\/|data:)/.test(a.pic)?`<img class="kfoc-pic" alt="" src="${esc(a.pic)}" draggable="false">`:`<span class="kfoc-pic kfoc-ph"></span>`;
  return `<button type="button" class="kfoc-b${a.off?' kfoc-off kitoff':''}" data-id="${esc(a.id)}">${pic}<span class="kfoc-t"><b>${esc(a.n)}</b>${sub.length?`<small>${sub.map(x=>`<span>${esc(x)}</span>`).join(' · ')}</small>`:''}</span></button>`}
 function mkFig(m){const e=document.createElement('div');e.className='kar-f tok fig';const src=m.src;
- e.innerHTML=`<img class="l" alt="" src="${esc(src)}"><span class="kar-tag kscn-tag">${m.tag||''}</span>`;
+ e.innerHTML=`<img class="l${m.sil?' ksil':''}" alt="" src="${esc(src)}"><span class="kar-tag kscn-tag">${m.tag||''}</span>`;
  m.el=e;m.lit=e.querySelector('img.l');m.tg=e.querySelector('.kar-tag');m.tg.style.setProperty('--tc',m.tc||'');m.tg.style.display='none';e.style.display='none';
  e.addEventListener('click',ev=>{ev.stopPropagation();onTap(m)});L.appendChild(e);return e}
-/* group shapes, in figure-width units: master(s) front, followers behind both shoulders (owner ~07:58Z) */
-function shape(g){const ms=g.masters,fs=g.fol;const out=[];
- if(ms.length===1){out.push({m:ms[0],dx:0,s:1,dy:0,z:3});fs.forEach((f,i)=>out.push({m:f,dx:(i%2?1:-1)*((A.folDx||.40)+.16*(i>>1)),s:A.folS||.86,dy:A.folDy||.035,z:1}))}
- else{ms.forEach((m,i)=>out.push({m,dx:(i-(ms.length-1)/2)*.95,s:1,dy:0,z:3,flip:i===ms.length-1&&ms.length===2}));
-  fs.forEach((f,i)=>{const side=i%2?1:-1;out.push({m:f,dx:side*((ms.length-1)/2*.95+(A.folDx||.40)+.15*(i>>1)),s:A.folS||.86,dy:A.folDy||.035,z:1})})}
+/* group shapes, in figure-height units (ux = centre x): master(s) in the middle, followers BESIDE them with a gap — people never overlap (MAIN 127 fix 3) */
+function shape(g){const ms=g.masters,fs=g.fol,gp=A.folGap||.05,S=A.folS||.70,out=[];const wm=ms.map(m=>m.asp||.32);const tot=wm.reduce((a,b)=>a+b,0)+gp*(ms.length-1);let x=-tot/2;
+ ms.forEach((m,i)=>{out.push({m,ux:x+wm[i]/2,s:1,dy:0,z:3,flip:i===ms.length-1&&ms.length===2});x+=wm[i]+gp});
+ let Lx=-tot/2,Rx=tot/2;fs.forEach((f,i)=>{const w=(f.asp||.32)*S;if(i%2){out.push({m:f,ux:Rx+gp+w/2,s:S,dy:A.folDy||.0,z:1,w});Rx+=gp+w}else{out.push({m:f,ux:Lx-gp-w/2,s:S,dy:A.folDy||.0,z:1,w});Lx-=gp+w}});
  return out}
-function gw(g){const P=shape(g);let l=9,r=-9;P.forEach(p=>{const w=(p.m.asp||.32)*p.s;l=Math.min(l,p.dx*.32-w/2);r=Math.max(r,p.dx*.32+w/2)});g.P=P;g.wU=r-l;g.cU=(r+l)/2;return g.wU}
+function gw(g){const P=shape(g);let l=9,r=-9;P.forEach(p=>{const w=(p.m.asp||.32)*p.s;l=Math.min(l,p.ux-w/2);r=Math.max(r,p.ux+w/2)});g.P=P;g.wU=r-l;g.cU=(r+l)/2;return g.wU}
 /* AREA_PLAN rules 1–6: purpose → area; plain walk → nết pull; Emperor route; overflow → neighbour by purpose, then «Lối đi». Nobody is sent away. */
 function areaOf(g){const a=g.act;let i=AREAS.findIndex(x=>(x.acts||[]).indexOf(a)>=0&&!(a==='walk'||a==='ag_effort'));
  if(a==='seekemp'){/* rule 4: bold nết wait where he IS (route[kh]), others where he passes next */const R=A.route||[];const kh=window.__karKh||0;const bold=g.masters.some(m=>(m.net||[]).some(n=>/Kiêu ngạo|Tham vọng/.test(n))||(m.sac||0)>=((A.bold&&A.bold.sac)||75));
@@ -58,19 +57,19 @@ function areaOf(g){const a=g.act;let i=AREAS.findIndex(x=>(x.acts||[]).indexOf(a
  if(i<0){/* rule 3: plain walk → strongest nết pull, ties → Vườn hoa */let best=-1,bs=0;AREAS.forEach((x,j)=>{const s=g.masters.reduce((t,m)=>t+(m.net||[]).filter(n=>(x.net||[]).indexOf(n)>=0).length,0);if(s>bs){bs=s;best=j}});
   i=best>=0?best:AREAS.findIndex(x=>x.k==='vuonhoa')}
  return Math.max(0,i)}
-function assign(){const cap=kv()==='kv2'?(A.view&&A.view.kv2||4):(A.view&&A.view.kv1||3);const span=D.x1-D.x0,minGap=(A.gap||.06)*fh;
+function assign(){/* RING-DESIGN-5 (MAIN fix 1): who stands in which area comes from game state + BAL.area only (grpMax groups, refSpan = the narrowest device's stage span at kit scale) — never from the screen width */
+ const cap=A.grpMax||2,span=A.refSpan||520,minGap=(A.gap||.06)*fh;
  AREAS.forEach(a=>{a.g=[];a.w=0});const fits=(a,g)=>a.g.length<cap&&a.w+g.wU*fh+(a.g.length+1)*minGap<=span;
- const ord=G.slice().sort((x,y)=>(y.pri||0)-(x.pri||0));
+ const ord=G.slice().sort((x,y)=>(y.pri||0)-(x.pri||0)||G.indexOf(x)-G.indexOf(y));
  for(const g of ord){const i=areaOf(g);let a=AREAS[i];g.want=a.k;
   if(!fits(a,g)){const nb=((A.near||{})[a.k]||[]).map(k=>AREAS.find(x=>x.k===k)).filter(Boolean);a=nb.find(x=>fits(x,g))||null;
-   if(!a){a=AREAS.find(x=>x.extra&&fits(x,g));if(!a){a={k:'x'+AREAS.length,n:A.extraName||'Lối đi',x:.42,acts:[],extra:1,g:[],w:0,hs:{x:.30,y:.80,w:.22,h:.14}};AREAS.push(a)}}}
+   if(!a){a=AREAS.find(x=>x.extra&&fits(x,g));if(!a){const ne=AREAS.filter(x=>x.extra).length;a={k:'x'+AREAS.length,n:(A.extraName||'Lối đi')+' '+['nhất','nhì','tam','tứ','ngũ','lục'][ne],x:[.42,.28,.62,.18,.80,.5][ne%6],acts:[],extra:1,g:[],w:0,hs:{x:.06+.15*(ne%6),y:.80,w:.14,h:.14}};AREAS.push(a)}}}
   a.g.push(g);a.w+=g.wU*fh;g.area=a;
-  /* moved off the Emperor's spot by rule 6: she waits where he will pass next — the caption says so (no false «trước Hoàng thượng») */
   if(a.k!==g.want&&g.want==='ngudao'&&!g.masters.some(m=>m.kind==='emp'))g.cap='Đang chờ Hoàng thượng đi qua'}}
 function bgSet(x,ms,from){const W=D.W,H=D.H,z=kv()==='kv2'?(A.zoom&&A.zoom.kv2||1.45):(A.zoom&&A.zoom.kv1||1);let bw=Math.max(W*z,H*(16/9)),bh=bw*9/16;if(bh<H){bh=H;bw=H*16/9}
  BG.style.width=bw+'px';BG.style.height=bh+'px';const tx=-(bw-W)*x,ty=-(bh-H);const t=`translate(${tx}px,${ty}px)`;if(ms){return an(BG,[{transform:from||BG.__t||t},{transform:t}],{duration:ms,easing:'cubic-bezier(.45,0,.25,1)'}).finished.then(()=>{BG.__t=t})}BG.style.transform=t;BG.__t=t}
 function place(a){const n=a.g.length;const span=D.x1-D.x0;const tot=a.g.reduce((s,g)=>s+g.wU*fh,0);const gap=(span-tot)/(n+1);let x=D.x0+gap;
- a.g.forEach(g=>{const cx=x+g.wU*fh/2;g.cx=cx;g.top=1e9;g.P.forEach(p=>{const m=p.m,h=fh*p.s,w=h*(m.asp||.32),mx=cx+(p.dx*.32-g.cU)*fh,fy=D.feet-p.dy*D.H;
+ a.g.forEach(g=>{const cx=x+g.wU*fh/2;g.cx=cx;g.top=1e9;g.P.forEach(p=>{const m=p.m,h=fh*p.s,w=h*(m.asp||.32),mx=cx+(p.ux-g.cU)*fh,fy=D.feet-p.dy*D.H;
    m.x=mx-w/2;m.y=fy-h;m.tg.style.display=p.z===3?'block':'none';m.w=w;m.h=h;m.z=p.z;Object.assign(m.el.style,{width:w+'px',height:h+'px',zIndex:10+p.z,transform:`translate(${m.x}px,${m.y}px)`,display:'block'});m.el.__t=`translate(${m.x}px,${m.y}px)`;
    if(p.flip)m.el.querySelectorAll('img').forEach(i=>i.style.transform='scaleX(-1)');g.top=Math.min(g.top,m.y)});
   x+=g.wU*fh+gap;capFor(g)})}
@@ -132,11 +131,14 @@ async function unsel(keepGroup){await closePk();if(window.__karMeEl){const me=wi
  if(!keepGroup&&sel){try{kitDim.off()}catch(e){}a.g.forEach(x=>{x.P.forEach(p=>{p.m.tg.style.display=p.z===3?'block':'none'});if(x.capEl)an(x.capEl,[{opacity:+getComputedStyle(x.capEl).opacity},{opacity:1}],{duration:250})});sel=null}}
 /* step out: she walks toward the player to the talk spot on the LEFT (speaker-left rule, owner 04:35Z); her group steps back */
 async function stepOut(m){const g=m.g;if(sel!==g)await pickGroup(g);if(selM===m)return;if(selM)await unsel(true);selM=m;
- const k=A.stepK||1.12;const tcx=D.x0+(D.x1-D.x0)*(kv()==='kv2'?(A.spot&&A.spot.kv2||.30):(A.spot&&A.spot.kv1||.24));const tx=Math.max(D.x0+4,tcx-m.w*k/2),ty=Math.min(D.H-m.h*k-52,m.y+(A.stepY||.045)*D.H);
+ const k=A.stepK||1.12;const gp=(A.folGap||.05)*fh;const fo=g.P.filter(p=>p.m!==m).map(p=>p.m);const band=kv()==='kv2'?(A.band&&A.band.kv2||210):(A.band&&A.band.kv1||140);
+ /* RING-DESIGN-5 fix 3: her followers stand BESIDE her on the left with a gap (never behind her shoulder); as many as leave the plaque band free, the rest keep their own place */
+ let nFit=0,need=0;for(const q of fo){if(D.x0+4+need+q.w+gp+m.w*k+band<=D.x1){need+=q.w+gp;nFit++}else break}
+ const tcx=D.x0+(D.x1-D.x0)*(kv()==='kv2'?(A.spot&&A.spot.kv2||.30):(A.spot&&A.spot.kv1||.24));const tx=Math.max(D.x0+4+need,tcx-m.w*k/2),ty=Math.min(D.H-m.h*k-52,m.y+(A.stepY||.045)*D.H);
  const to=`translate(${tx+(m.w*(k-1))/2}px,${ty+m.h*(k-1)}px) scale(${k})`;m.el.__t2=to;m.el.style.zIndex=30;
  AREAS[cur].g.forEach(x=>x.capEl&&an(x.capEl,[{opacity:+getComputedStyle(x.capEl).opacity},{opacity:0}],{duration:200}));AREAS[cur].g.forEach(x=>{if(x!==g)x.P.forEach(p=>{p.m.tg.style.display='none'})});g.P.forEach(p=>{if(p.m!==m)p.m.tg.style.display='none'});
  const mid=`translate(${(m.x+tx)/2}px,${(m.y+ty)/2-8}px) scale(${(1+k)/2})`;an(m.el,[{transform:m.el.__t},{transform:mid,offset:.5},{transform:to}],{duration:A.walkMs||700});
- g.P.forEach((p,j)=>{if(p.m===m)return;const q=p.m;/* her followers / companions follow her and stand behind her LEFT shoulder (owner ~07:58Z: behind the master), so her free right side stays empty for the plaques */const bx=Math.max(D.x0-q.w*.25,tx+(m.w*k)*.5-q.w*(.95+.18*j)),by=ty+m.h*k-q.h*.95-.02*D.H;const t3=`translate(${bx}px,${by}px) scale(.95)`;q.el.style.zIndex=29;q.el.__t3=t3;an(q.el,[{transform:q.el.__t},{transform:t3}],{duration:520})});
+ let acc=0;fo.forEach((q,j)=>{if(j>=nFit)return;acc+=q.w+gp;const bx=tx-acc,by=ty+m.h*k-q.h;const t3=`translate(${bx}px,${by}px)`;q.el.style.zIndex=29;q.el.__t3=t3;an(q.el,[{transform:q.el.__t},{transform:t3}],{duration:520})});
  await wait((A.walkMs||700)+40);m.fx={x:tx,y:ty,w:m.w*k,h:m.h*k};m.tg.style.display='block';tagsFix()}
 /* ===== the person-interaction picker — the 3 the owner named (15:40Z); all = kit .kfoc-b buttons + kit .pctabs; no frame, no card, never over a face =====
    'hang' THẺ GỖ TREO (her favourite): compact plaques drop from above beside her and sway to rest; tap = it lifts + its line shows; tap again = choose.
@@ -158,31 +160,31 @@ async function picker(m,kind){await closePk();if(kind==='hang'&&window.kitPick){
   B.forEach((b,i)=>{b.classList.add('kar-min');b.style.width=cw+'px';b.style.transformOrigin='50% -60px';const c=i%cols,r=(i/cols)|0;const bx=x0+c*(cw+gx),by=y0+r*(58+12);b.__x=bx;b.__y=by;
    /* unrolls DOWN from its hook (never passes over a face above it), then sways to rest */b.style.transformOrigin='50% 0';an(b,[{transform:`translate(${bx}px,${by}px) rotate(7deg) scaleY(.08)`,opacity:0},{transform:`translate(${bx}px,${by}px) rotate(-5deg) scaleY(1.03)`,opacity:1,offset:.5},{transform:`translate(${bx}px,${by}px) rotate(2.5deg) scaleY(1)`,offset:.78},{transform:`translate(${bx}px,${by}px) rotate(0deg) scaleY(1)`,opacity:1}],{duration:880,delay:i*80,easing:'ease-out'})});
   tx=x0;ty=y0-44}
- else if(kind==='fan'){const n=B.length,R=Math.min(f.h*.42,(n*bh*1.02)/1.75),top=Math.max(64,Math.min(f.y+f.h*(A.pkY||.44)-bh*.2,f.y+f.h*.97-f.h*.52-bh));const hipX=f.x+f.w*.72,hipY=f.y+f.h*.50;
-  B.forEach((b,i)=>{b.style.width=col+'px';const t=n>1?i/(n-1):.5,ang=(-50+100*t)*Math.PI/180;const bx=f.x+f.w*.62+Math.cos(ang)*R*.55,by=top+(f.h*.52)*t-bh/2;b.__x=bx;b.__y=by;
+ else if(kind==='fan'){/* RING-DESIGN-5: cards are stacked by their MEASURED height (+gap), top below her face, bottom inside the stage — no card covers another's text */
+  const gap=6,bx0=(D.x1-(f.x+f.w+8)>=230)?f.x+f.w+8:Math.min(f.x+f.w*.62,D.x1-150),cw=Math.min(K==='kv2'?300:236,D.x1-bx0-10),hs=B.map(b=>(b.style.width=cw+'px',b.offsetHeight||bh));const tot=hs.reduce((x,y)=>x+y,0)+gap*(B.length-1);const faceB=f.y+f.h*.24+40,avail=D.H-8;
+  const top=Math.max(64,Math.min(faceB,avail-tot));const hipX=f.x+f.w*.72,hipY=f.y+f.h*.50;const bxs=bx0;let y=top;
+  B.forEach((b,i)=>{const bx=Math.max(D.x0,Math.min(D.x1-cw-4,bxs+(i%2?12:0))),by=y;y+=hs[i]+gap;b.__x=bx;b.__y=by;
    an(b,[{transform:`translate(${hipX}px,${hipY-bh/2}px) scale(.25)`,opacity:0},{transform:`translate(${bx}px,${by}px)`,opacity:1}],{duration:340,delay:60+i*45,easing:ease})});
-  tx=f.x+f.w*.62;ty=top-bh*.55-36}
- else{/* rib: pin at her hand; ribs fan out to the right; each button's left edge sits r0 from the pin */const n=B.length,span=Math.min(78,14*(n-1)),r0=K==='kv2'?70:46,len=Math.min(col+20,K==='kv2'?270:220),a0=-8;
-  const px=f.x+f.w*.66,py=f.y+f.h*.50;
-  B.forEach((b,i)=>{b.classList.add('kar-min','kar-rib');b.style.width=len+'px';const ang=n>1?a0+span*i/(n-1):0;b.__ang=ang;b.style.transformOrigin=`${-r0}px 26px`;const bx=px+r0,by=py-26;b.__x=bx;b.__y=by;
-   b.style.zIndex=String(10+i);an(b,[{transform:`translate(${bx}px,${by}px) rotate(${a0-8}deg) scaleX(.2)`,opacity:0},{transform:`translate(${bx}px,${by}px) rotate(${a0}deg)`,opacity:1,offset:.25},{transform:`translate(${bx}px,${by}px) rotate(${ang}deg)`,opacity:1}],{duration:700,delay:40,easing:'cubic-bezier(.3,.7,.25,1)'})});
-  tx=px+r0;ty=py-(r0+len)*Math.sin(-a0*Math.PI/180)-26-44;if(ty<44)ty=44}
+  tx=bxs;ty=Math.max(8,top-34)}
+ else{/* rib: a ladder of paper-fan ribs pinned at her hand — each rib turns about its own pin a little more than the one above, the pins step down by the rib height + gap, so every rib's text is clear and the last rib stays on the stage */
+  const n=B.length,r0=0,len=Math.min(K==='kv2'?270:250,D.x1-D.x0-60),gap=5;const hs=B.map(b=>(b.classList.add('kar-min','kar-rib'),b.style.width=len+'px',b.offsetHeight||58));const sep=Math.max(...hs)+gap;const amax=Math.min(14,(n>1?14:0)),a0=-4;
+  const tot=sep*(n-1)+hs[n-1]+Math.sin(amax*Math.PI/180)*len;const px=(D.x1-(f.x+f.w+8)>=len)?f.x+f.w+8:Math.min(f.x+f.w*.66,D.x1-len-8),faceB=f.y+f.h*.24+40;const py0=Math.max(64,Math.min(faceB,D.H-8-tot));
+  B.forEach((b,i)=>{const ang=n>1?a0+(amax-a0)*i/(n-1):0;b.__ang=ang;b.style.transformOrigin='0 50%';const bx=px,by=py0+i*sep;b.__x=bx;b.__y=by;b.style.zIndex=String(10+i);
+   an(b,[{transform:`translate(${bx}px,${by}px) rotate(${a0-10}deg) scaleX(.2)`,opacity:0},{transform:`translate(${bx}px,${by}px) rotate(${a0}deg)`,opacity:1,offset:.25},{transform:`translate(${bx}px,${by}px) rotate(${ang}deg)`,opacity:1}],{duration:700,delay:40+i*30,easing:'cubic-bezier(.3,.7,.25,1)'})});
+  tx=px;ty=Math.max(8,py0-58)}
+ if(kind!=='hang')tx=Math.max(D.x0,Math.min(Math.max(tx,f.x+f.w*.78),D.x1-tb.offsetWidth-4));
  tb.style.transform=`translate(${tx}px,${ty}px)`;an(tb,[{opacity:0,transform:`translate(${tx}px,${ty+6}px)`},{opacity:1,transform:`translate(${tx}px,${ty}px)`}],{duration:220,delay:300});
- /* never over a face (OD 15:30Z/MAIN): measured at the final pose, the whole picker drops below every face it would cover (bounded by the floor) */
- {const fr=[...L.querySelectorAll('.kar-f')].filter(e=>e.style.display!=='none'&&e.offsetParent).map(e=>{const r=e.getBoundingClientRect();return {l:r.left+r.width*.3,r:r.right-r.width*.3,t:r.top+r.height*.02,b:r.top+r.height*.19}});
-  const pr=[...B,tb].map(e=>e.getBoundingClientRect());const sr=L.getBoundingClientRect();let dy=0;
-  for(let it=0;it<4;it++){let need=0;pr.forEach(q=>fr.forEach(fc=>{if(q.right>fc.l&&q.left<fc.r&&q.bottom+dy>fc.t&&q.top+dy<fc.b)need=Math.max(need,fc.b+6-(q.top+dy))}));if(!need)break;dy+=need}
-  const maxB=Math.max(...pr.map(q=>q.bottom));dy=Math.min(dy,Math.max(0,sr.bottom-6-maxB));if(dy>0)p.style.transform=`translateY(${dy.toFixed(1)}px)`}
+ {const pl=m.tg.getBoundingClientRect();if(m.tg.style.display!=='none'&&[...B].some(b=>{const r=b.getBoundingClientRect();return !(r.right<pl.left||r.left>pl.right||r.bottom<pl.top||r.top>pl.bottom)}))m.tg.style.visibility='hidden'}
  Q2.forEach(x=>window.__karAn(...x));
  B.forEach(b=>b.addEventListener('click',ev=>{ev.stopPropagation();lift(b,kind)}));await wait(kind==='hang'?900+B.length*80:800);return B}
 function lift(b,kind){if(KP){const n=b.closest('.kpk-n');const id=n?n.dataset.id:b.dataset.id;KP.lift(id);return}const p=PK;if(!p)return;if(b.classList.contains('kar-up')){b.dispatchEvent(new CustomEvent('karpick',{bubbles:true}));return}
  p.querySelectorAll('.kar-up').forEach(x=>{x.classList.remove('kar-up');if(kind==='rib'){x.style.zIndex=x.__z||'';an(x,[{transform:`translate(${x.__x}px,${x.__y}px) rotate(${x.__ang}deg)`}],{duration:220})}else if(kind==='hang')an(x,[{transform:`translate(${x.__x}px,${x.__y}px)`}],{duration:200})});
  b.classList.add('kar-up');
  if(kind==='hang')an(b,[{transform:`translate(${b.__x}px,${b.__y}px)`},{transform:`translate(${b.__x}px,${b.__y-10}px) scale(1.04)`}],{duration:220});
- else if(kind==='rib'){b.__z=b.style.zIndex;b.style.zIndex='40';an(b,[{transform:`translate(${b.__x}px,${b.__y}px) rotate(${b.__ang}deg)`},{transform:`translate(${b.__x+16}px,${b.__y}px) rotate(0deg) scale(1.05)`}],{duration:260,easing:'cubic-bezier(.2,.8,.25,1.1)'})}}
+ else if(kind==='rib'){b.__z=b.style.zIndex;b.style.zIndex='40';an(b,[{transform:`translate(${b.__x}px,${b.__y}px) rotate(${b.__ang}deg)`},{transform:`translate(${b.__x+Math.max(0,Math.min(16,D.x1-6-(b.__x+b.offsetWidth*1.05)))}px,${b.__y}px) rotate(0deg) scale(1.05)`}],{duration:260,easing:'cubic-bezier(.2,.8,.25,1.1)'})}}
 /* NPC line (kit bubble) + her own figure steps in on the right (speaker left / her right) */
-async function talk(m,text){await closePk();const me=document.createElement('div');me.className='kar-f';const src=window.__karMe;me.innerHTML=`<img class="l" alt="" src="${esc(src)}">`;
- const f=m.fx,h=f.h,w=h*(window.__karMeAsp||.32);const x=Math.min(D.x1-w-6,Math.max(f.x+f.w+D.W*.06,D.x1-w-D.W*.06)),y=f.y;Object.assign(me.style,{width:w+'px',height:h+'px',zIndex:31});L.appendChild(me);window.__karMeEl=me;
+async function talk(m,text){await closePk();const me=document.createElement('div');me.className='kar-f';const src=window.__karMe;me.innerHTML=`<img class="l${m.sil?' ksil':''}" alt="" src="${esc(src)}">`;
+ const f=m.fx,asp=window.__karMeAsp||.32,room=D.x1-6-(f.x+f.w+8);let h=f.h,w=h*asp;if(w>room){w=Math.max(60,room);h=w/asp}const x=Math.min(D.x1-w-6,Math.max(f.x+f.w+8,D.x1-w-D.W*.06)),y=f.y+f.h-h;Object.assign(me.style,{width:w+'px',height:h+'px',zIndex:31});L.appendChild(me);window.__karMeEl=me;
  me.__t=`translate(${x}px,${y}px)`;me.__y=y;an(me,[{transform:`translate(${D.W+20}px,${y}px)`},{transform:me.__t}],{duration:650});await wait(700);tagsFix();
  if(typeof kitMoodSay==='function'){try{const b=kitMoodSay(m.el.querySelector('img.l'),text,{hold:6000});const e=b&&b.classList?b:[...document.querySelectorAll('.kfoc-mood')].pop();if(e)e.classList.add('kar-say')}catch(e){}}return me}
 function onTap(m){if(window.__karAuto)return;if(!sel||sel!==m.g)pickGroup(m.g);else stepOut(m).then(()=>picker(m,window.__karPk||'hang'))}

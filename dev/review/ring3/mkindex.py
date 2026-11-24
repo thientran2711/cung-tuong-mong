@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """python3 mkindex.py → img/_review/ring4/index.html (owner review page, Vietnamese). Reads ring4-shots/<dev>/perf.json."""
 import json,os
-W='/home/user/wt/ring4/img/_review/ring4';S='/home/user/wt/ring4-shots'
+W='/home/user/wt/ring5/img/_review/ring4';S='/home/user/wt/ring5-shots'
 def perf(d):
   try:return json.load(open(f'{S}/{d}/perf.json'))
   except Exception:return {}

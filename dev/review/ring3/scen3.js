@@ -7,8 +7,8 @@ window.BAL=window.BAL||{};BAL.area={ /* = dev/AREA_PLAN.md §4 (proposed BAL, la
        {k:'dinhco', n:'Đình cờ', acts:['ag_cx3:pmPlay','ag_cx3:pmDuel','wager'],net:['Nóng nảy','Thực tế'],x:.72,hs:{x:.40,y:.36,w:.18,h:.14}},
        {k:'nonbo',  n:'Non bộ',  acts:['tryst','spy','scheme','ambush','ag_cx3:talkSecret','changed'],net:['Kín đáo','Xảo quyệt','Thù dai'],x:0,hs:{x:.13,y:.22,w:.17,h:.18}}],
  near:{ngudao:['vuonhoa','thuyta'],vuonhoa:['ngudao','thuyta'],thuyta:['dinhco','vuonhoa'],dinhco:['thuyta','nonbo'],nonbo:['dinhco','vuonhoa']},
- route:['ngudao','vuonhoa','thuyta','dinhco'],bold:{sac:75},joinAff:10,avoidAff:-20,grpMax:4,view:{kv1:3,kv2:4},extraName:'Lối đi',moveKh:0,
- gap:.06,feet:.9,folS:.86,folDx:.40,folDy:.035,zoom:{kv1:1,kv2:1.45},panMs:760,walkMs:700,stepK:1.12,stepY:.045,spot:{kv1:.24,kv2:.30},farOp:.55,pkMax:6};
+ route:['ngudao','vuonhoa','thuyta','dinhco'],bold:{sac:75},joinAff:10,avoidAff:-20,grpMax:2,extraName:'Lối đi',moveKh:0,
+ gap:.06,feet:.9,folS:.60,band:{kv1:128,kv2:210},folGap:.05,folDy:0,refSpan:520,zoom:{kv1:1,kv2:1.45},panMs:760,walkMs:700,stepK:1.12,stepY:.045,spot:{kv1:.24,kv2:.30},farOp:.55,pkMax:6};
 window.KSC=async function(want){try{BAL.df.idle={every:[1e9,1e9],first:1e9}}catch(e){}const CAP3={'ag_cx3:pmPlay':'Đang cùng chơi cờ','ag_cx3:pmDuel':'Đang thách đấu','ag_cx3:talkSecret':'Đang chia sẻ chuyện riêng','ag_cx3:talkHealth':'Đang hỏi han sức khỏe','ag_flaunt':'Đang khoe sắc','ag_effort':'Đang dạo vườn','ag_follow':'Theo hầu','ag_cx3:qin':'Đang gảy đàn'};
  const b0=S.buoi;let best=null;
  for(let sd=0;sd<14;sd++){S.j95seed=1000+sd*7919;for(const b of [1,2]){S.buoi=b;const R=j95plan();for(let kh=0;kh<4;kh++){let n=0,pr=0;for(const id in R.P){const w=R.P[id][kh];if(w&&w[0]==='vuon'){n++;if(w[2]&&w[1]!=='follow')pr++}}
