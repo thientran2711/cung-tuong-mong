@@ -2826,3 +2826,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (04:42Z) OD 05:55Z PROMO-HIST conditions + Emperor-dependent favour (D order updated by 116 05:56Z); promotion-countdown chip at stage TOP edge → KIT REQUEST KK16 (hook from D).
 - (04:43Z) OD 06:00Z: (1) lodging-day own dramas → SELSCENE-2 row; (2) nết-driven thresholds → D ORDER (by 116 06:02Z).
 - (04:45Z) SELSCENE-2 rolled at ctx 41 % after pushing RULES core review/selection-scene a417bcd7 (jselx.js + BAL.selx, selx-rules 14/14). SELSCENE-3 = session_01V1ZZH1e2fr7fAsMUGnRASh (opus, child of 117): wire into kc2SelDo, playable day + lodging Đông/Tây viện + dramas, scene layer on kit, mock. SELSCENE-2 told to stop (archive later).
+- (04:46Z) OD 06:05Z: every leave-the-palace choice = ending (epilogue by partner's nết: age/cause/children); 40-road audit → E ORDER (by 116 06:07Z). MAIN 117 owes sếp the answer «hiện có những lựa chọn này chưa?» when E's audit table lands. SELSCENE-3 started (START_CTX 3 %, depth 2).
