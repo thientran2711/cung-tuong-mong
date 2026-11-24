@@ -958,6 +958,16 @@ PRIORITY #1 CHECK ('law1-maid-away / robot-coop-tail / save round-trip'): OD 220
 | coop-e2e COOP_SWAP=0 (Fold hosts) | 142/142 |
 | coop-e2e COOP_SWAP=1 (iPad hosts) | 142/142 |
 SẴN SÀNG KIỂM review/law1-maid-away 63d726941059afd8e134f692609e30eed30b2d24
+#### review/robot-coop-tail 08dc8031 (test-only N1–N3; branch unchanged)
+| gate | tail 08dc8031 | main 502c48c9 (same game; main's test files) |
+|---|---|---|
+| `node dev/test/coop-wire-scan.js` | string-only deaf filters / rx spies left: 0 | — |
+| `node dev/test/coop-thin-e-net.js http://127.0.0.1:8798` (swap 0) | RESULT 21 / 21 | — |
+| `node dev/test/coop-thin-e-net.js http://127.0.0.1:8798 6 1` (swap 1) | RESULT 21 / 21 | — |
+| `node dev/test/coop-lag.js` (LIVE Worker; a local `wrangler dev` Worker is unreachable from coop-lag: it launches with PP.LAUNCH_ARGS only, without coop-e2e's localhost private-network flags → room never opens, Timeout at line 49) | run 1: 8/8 turns ok, early steps 0 ms, FAIL budget turnP95 56 629 (a week-end turn), actionP95 8 907, longTaskMax 12 174 · run 2: 8/8 ok, FAIL turnP95 **1 210 095** (week 0 → 1 took 20 min, then moved) | 7/8 ok · turn «0:0 → 1:0» = **−3177 ms** and «buổi stuck: 1 of 8» = exactly the N3 false stuck the branch fixes · turnP95 6 738 |
+| rejoin (both sides) | ok:false ×2 | ok:false |
+Read: N3 behaves as designed (early step = 0 ms, a key that moves is not «stuck»; a real long stall still FAILs through coopTurnP95). The budget FAIL and rejoin ok:false are the GAME (LIVE 502c48c9 on both sides, not this test-only branch): the 20-min week-end stall belongs to the week-end STUCK family (FIXER #6b); rejoin ok:false on main too → flagged to Foreman B. Harness note (not fixed here): coop-lag cannot use a local Worker (missing the coop-e2e localhost launch args).
+SẴN SÀNG KIỂM review/robot-coop-tail 08dc80311255b60ea30cc821c466d5e0b62a1668
 
 ## MGSKIN-WIRE
 PRIORITY #1 CHECK: OD 0 | ledger 0 | claims 8 | main kitMgSkinAdd/mgpSkin/kg82SkinSrc (j82, jmgpool; reused, no new mechanism) | review/* review/kit-mgboardof-r1 c46a17f2 (merged, not LIVE yet) | reports F-MGSKIN-A..H, kit-mgskin.
