@@ -41,7 +41,9 @@ function cardOK(a){return !a.done&&!S.dead&&canPay(a)&&!a.lock&&(typeof j76win==
 function placeOK(p){return p.k!=="home"&&S.place!==p.k&&!S.confined&&!S.out&&can(travel(S.place,p.k)+1)&&(typeof accessOf!=="function"||accessOf(S,p.k).ok)}
 function talkCands(){const out=[];if(!S.visit||S.visit.talked===true)return out;const tk=S.visit.tk||{};
   curPeople().forEach((p,pi)=>{if(tk[pi])return;talkOpts(p).forEach((a,oi)=>{if(!canPay(a)||a.lock)return;const c=a.act?2:1;if(!can(c))return;out.push({p,pi,a,oi})})});return out}
-function lessonCands(){return ARTS.filter(a=>S.arts[a.k]<5&&S.bac>=(typeof tchFee==="function"?tchFee(a.k):5+S.arts[a.k]*5)&&can(2)&&!S.mg)}
+/* robot10 E-FIX-2 r3 (E round 1 TIMEOUT «lc out:1» R1 + «tgk» R4, ring = lesson ×400): an art at 100 points below level 5 (crsPts) is refused by j2 lesson()
+   (artPts>=100) — the same gate the game uses; and the lesson option now carries an L so a refused pick is banned after 3 like every other one */
+function lessonCands(){return ARTS.filter(a=>S.arts[a.k]<5&&(typeof artPts!=="function"||artPts(S,a.k)<100)&&S.bac>=(typeof tchFee==="function"?tchFee(a.k):5+S.arts[a.k]*5)&&can(2)&&!S.mg)}
 function fire(f){f()}
 // ---- RANDOM
 function randomStep(){
@@ -105,7 +107,7 @@ function sensibleStep(){
   deck.forEach((a,i)=>{if(!cardOK(a))return;const c=cardCost(a);opts.push({L:"c"+a.n,s:scoreAct(a,N,c),f:()=>{note("card",a.n);act(i)}})});
   if(!HS)talkCands().forEach(t=>{const s=talkScore(t,N);opts.push({L:"t"+t.pi+t.a.n,s,f:()=>{note("talk",t.a.n);popIdx=t.pi;talk(t.oi)}})});
   const L=lessonCands().filter(a=>S.suc>=45&&S.bac>=(typeof tchFee==="function"?tchFee(a.k):5+S.arts[a.k]*5)+20).sort((a,b)=>S.arts[a.k]-S.arts[b.k]);
-  if(!HS&&L.length){const x=L[0];opts.push({s:2.0+(S.sung>=40?.5:0)-(S.suc<55?1.5:0),f:()=>{note("lesson");if(S.bac>=150&&!S.master)hireMaster();lesson(x.k)}})}
+  if(!HS&&L.length){const x=L[0];opts.push({L:"l"+x.k,s:2.0+(S.sung>=40?.5:0)-(S.suc<55?1.5:0),f:()=>{note("lesson");if(S.bac>=150&&!S.master)hireMaster();lesson(x.k)}})}
   /* diff-remeasure: free self-study in the Tài nghệ tab (act-dedupe w1 moved the Hành sự "Tự học X" card there); off with window.__noSelf */
   if(!HS&&!window.__noSelf&&typeof lessonMode==="function"&&!S.mg&&can(2)&&S.suc>=60){const A=ARTS.filter(a=>S.arts[a.k]<5).sort((a,b)=>S.arts[a.k]-S.arts[b.k]);if(A.length)opts.push({L:"self",s:1.3-(S.suc<70?.5:0),f:()=>{note("selfStudy");lessonMode(A[0].k,"self")}})}
   /* diff-remeasure: free Tứ đức self-study (Tài nghệ tab, j85 lessonVir "self"; exam rows read two virtues, BAL.ex.wVir); off with window.__noSelf */
