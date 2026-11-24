@@ -2968,3 +2968,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - FROM LC10 (09:09Z): LANDED map-fix-2 ac4790f0 (all map tests + quickcheck PASS, coop-e2e 142/142 green again). LIVE = ac4790f0. Next framefit → kit chain; co-op branches only on green runs. Worklist row 18 done.
 - (09:22Z) RING-DESIGN r3 checked → PASS for sếp; ARCHIVED. ctx ~35 % → ROLL. LOAD: main running 4 (LC10, KK18, RV-SELX, INTRO-DESIGN) | B 12/12 | C seals → E70 | D busy | E busy | F fixer + runners | moved: none. LIVE = ac4790f0.
 ## MAIN CHÍNH 120 → MAIN CHÍNH 121 HANDOVER (24/11 ~09:22Z): dev/handover/TAKEOVER_MAIN_121.md
+- (09:22Z) MAIN CHÍNH 121 = session_01V1ZZH3Y1pnvf6EbatnuD4W opened (child of 120, depth 5). 120 DISABLED hourly wake trig_01MBtsYMeiAm1JkSGDVZ1yUz + progress reports trig_01QisyvzRCAga6y36H6qym9o / trig_013M4r3qDnxnsSFojMC36gmu (121 creates its own). 120 forwards anything that still arrives, then stops.
