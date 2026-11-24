@@ -51,12 +51,17 @@ let pdWho=null;
 /* 4. the far visit: her (after the visit night's extras, jvisit nightFx wrapper) */
 function pdFarLine(nm,pl){return `Hậu cung truyền nhau: ${nm} ở tận ${pl}, dù ở xa vẫn được ngự giá; ai cũng biết ân sủng ấy không nhỏ.`}
 (function(){const n0=nightFx;nightFx=function(s){const vis=!!(S&&S.visNight!=null&&typeof wk==="function"&&wk()-S.visNight<=1);const r=n0.apply(this,arguments);
- if(vis)try{const f=pdFar(S),g=pdVisBonus(f);if(g){apply(g);log(`${pdFarLine("ngươi",pdPlace(S))} ${sgStat(g.sung)} · Danh +${g.danh}.`)}}catch(e){console.error("pdist",e)}return r}})();
+ if(vis)try{const f=pdFar(S),g=pdVisBonus(f);if(g){const s0=S.sung,d0=S.danh;apply(Object.assign({},g));/* apply() scales / rewrites: print what really changed */log(`${pdFarLine("ngươi",pdPlace(S))} Sủng ${s0} → ${S.sung} · Danh ${d0} → ${S.danh}.`)}}catch(e){console.error("pdist",e)}return r}})();
 /* ...and an NPC consort (jvisit visGo → "npc"); the co-op friend plays her own card on her seat (the branch above) */
 (function(){if(typeof window.visGo!=="function")return;const v0=window.visGo;window.visGo=function(p){const r=v0.apply(this,arguments);
- try{if(r==="npc"&&p&&p!==S){const f=pdFar(p),g=pdVisBonus(f);if(g){ap(p,g);const t=pdFarLine(p.name,pdPlace(p));log(t);try{newsAdd(p,"farvisit",t,true)}catch(e){}}}}catch(e){console.error("pdist",e)}return r}})();
+ try{if(r==="npc"&&p&&p!==S){const f=pdFar(p),g=pdVisBonus(f);if(g){ap(p,Object.assign({},g));const t=pdFarLine(p.name,pdPlace(p));log(t);try{newsAdd(p,"farvisit",t,true)}catch(e){}}}}catch(e){console.error("pdist",e)}return r}})();
 /* the Ban cung card: the visit odds word at palace i + why (law 7: no %) */
 function pdCardTxt(p,i){const B=pdB(),f=pdFarIx(i),g=pdVisBonus(f);
  const why=g?`cung xa ngự tẩm, ngài ít lui tới; mỗi lần ngự giá thêm ${sgStat(g.sung)}, Danh +${g.danh}`:f<=B.nearMax?"cung gần ngự tẩm, ngài năng lui tới, thẻ bài dễ lật":"cung không xa không gần ngự tẩm";
  return `ngự giá: ${word(pdVisOdds(p,i))} (${why})`}
+/* the card face (kit hint, jk2b kitHint): the kit's own hint for the option + the short distance phrase (the full one stays in the option text) */
+function pdCardShort(p,i){const B=pdB(),f=pdFarIx(i),g=pdVisBonus(f),w=word(pdVisOdds(p,i));
+ return g?`ngự giá ${w}: cung xa, ngài ít đến, song mỗi lần đến là ân sủng lớn`:f<=B.nearMax?`ngự giá ${w}: cung gần, ngài năng đến`:`ngự giá ${w}: cung không xa không gần`}
+function pdHint(o,p,i){if(!o||typeof kitHint!=="function")return o;const h0=o.hint;o.hint=lv=>{let h="";try{h=h0!=null?(typeof h0==="function"?h0(lv):String(h0)):kitHint(Object.assign({},o,{hint:null}),null,lv).hint}catch(e){}return (h?h+"; ":"")+pdCardShort(p,i)};return o}
+window.pdHint=pdHint;window.pdCardShort=pdCardShort;
 window.pdFar=pdFar;window.pdFarIx=pdFarIx;window.pdCardTxt=pdCardTxt;window.pdVisOdds=pdVisOdds;window.pdVisBonus=pdVisBonus;window.pdNightAdd=pdNightAdd;

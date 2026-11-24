@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"68799300+","t":"2026-11-24T05:12Z","c":"SELF-MERGE LAND ageband: merge LIVE c0dff1b3 (index.html/sw.js rebuilt)","b":"65ee8bffeb70","h":[{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"}]};
+window.CTM_BI={"s":"dea7ce8a+","t":"2026-11-24T06:01Z","c":"palace-distance: rules-one-source night floor counts the palace-distance add; shots script","b":"85ab60df21ec","h":[{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -36267,6 +36267,7 @@ palCeremony=function(){if(!S||!S.palCer||S.dead)return;S.palCer=0;const from=S.p
   const gain=`, ${bcGainTxt(bcGain(i,from))}`;
   const loss=`${sgStat(-(B.fail.sung+B.fail.sungStep*up))}, Danh ${balSg(-(B.fail.danh+B.fail.danhStep*up))}${top&&up>0?`, ${top.name} sinh oán`:""}`;
   opts.push({n:`Xin ${PALN[i]}`,fx:{},x:`${word(c.odds)} · thành: dời sang ${PALN[i]}${gain} · hỏng: ${loss}${pdTxt(i)}`,go:()=>{bcAsk(S,i,from)}})}
+ try{if(typeof pdHint==="function"){pdHint(opts[0],S,from);for(const o of opts)if(o!==opts[0]&&!o.off){const i=PALN.findIndex(n=>o.n===`Xin ${n}`);if(i>=0)pdHint(o,S,i)}}}catch(e){}
  Q.push({ev:1,t:"Ban cung",who:pEmp(),h:`<p>Thánh chỉ: ${RANKS[S.rank].n} ${S.name} được ban <b>${PALN[from]}</b>, làm chủ vị một cung. Cung nhân dọn từ ${HOMEN} sang trong ngày.</p><p>Cung càng gần ngự tẩm, càng danh giá, càng nhiều người muốn; tâu xin quá phận thì khó được chuẩn.</p>`,opts});
  log(`Được ban ${PALN[from]}.`)};
 /* NPC parity (law 1): a consort newly made chủ vị may petition the same way (host only in co-op: one roll for the world) */
@@ -78311,14 +78312,19 @@ let pdWho=null;
 /* 4. the far visit: her (after the visit night's extras, jvisit nightFx wrapper) */
 function pdFarLine(nm,pl){return `Hậu cung truyền nhau: ${nm} ở tận ${pl}, dù ở xa vẫn được ngự giá; ai cũng biết ân sủng ấy không nhỏ.`}
 (function(){const n0=nightFx;nightFx=function(s){const vis=!!(S&&S.visNight!=null&&typeof wk==="function"&&wk()-S.visNight<=1);const r=n0.apply(this,arguments);
- if(vis)try{const f=pdFar(S),g=pdVisBonus(f);if(g){apply(g);log(`${pdFarLine("ngươi",pdPlace(S))} ${sgStat(g.sung)} · Danh +${g.danh}.`)}}catch(e){console.error("pdist",e)}return r}})();
+ if(vis)try{const f=pdFar(S),g=pdVisBonus(f);if(g){const s0=S.sung,d0=S.danh;apply(Object.assign({},g));/* apply() scales / rewrites: print what really changed */log(`${pdFarLine("ngươi",pdPlace(S))} Sủng ${s0} → ${S.sung} · Danh ${d0} → ${S.danh}.`)}}catch(e){console.error("pdist",e)}return r}})();
 /* ...and an NPC consort (jvisit visGo → "npc"); the co-op friend plays her own card on her seat (the branch above) */
 (function(){if(typeof window.visGo!=="function")return;const v0=window.visGo;window.visGo=function(p){const r=v0.apply(this,arguments);
- try{if(r==="npc"&&p&&p!==S){const f=pdFar(p),g=pdVisBonus(f);if(g){ap(p,g);const t=pdFarLine(p.name,pdPlace(p));log(t);try{newsAdd(p,"farvisit",t,true)}catch(e){}}}}catch(e){console.error("pdist",e)}return r}})();
+ try{if(r==="npc"&&p&&p!==S){const f=pdFar(p),g=pdVisBonus(f);if(g){ap(p,Object.assign({},g));const t=pdFarLine(p.name,pdPlace(p));log(t);try{newsAdd(p,"farvisit",t,true)}catch(e){}}}}catch(e){console.error("pdist",e)}return r}})();
 /* the Ban cung card: the visit odds word at palace i + why (law 7: no %) */
 function pdCardTxt(p,i){const B=pdB(),f=pdFarIx(i),g=pdVisBonus(f);
  const why=g?`cung xa ngự tẩm, ngài ít lui tới; mỗi lần ngự giá thêm ${sgStat(g.sung)}, Danh +${g.danh}`:f<=B.nearMax?"cung gần ngự tẩm, ngài năng lui tới, thẻ bài dễ lật":"cung không xa không gần ngự tẩm";
  return `ngự giá: ${word(pdVisOdds(p,i))} (${why})`}
+/* the card face (kit hint, jk2b kitHint): the kit's own hint for the option + the short distance phrase (the full one stays in the option text) */
+function pdCardShort(p,i){const B=pdB(),f=pdFarIx(i),g=pdVisBonus(f),w=word(pdVisOdds(p,i));
+ return g?`ngự giá ${w}: cung xa, ngài ít đến, song mỗi lần đến là ân sủng lớn`:f<=B.nearMax?`ngự giá ${w}: cung gần, ngài năng đến`:`ngự giá ${w}: cung không xa không gần`}
+function pdHint(o,p,i){if(!o||typeof kitHint!=="function")return o;const h0=o.hint;o.hint=lv=>{let h="";try{h=h0!=null?(typeof h0==="function"?h0(lv):String(h0)):kitHint(Object.assign({},o,{hint:null}),null,lv).hint}catch(e){}return (h?h+"; ":"")+pdCardShort(p,i)};return o}
+window.pdHint=pdHint;window.pdCardShort=pdCardShort;
 window.pdFar=pdFar;window.pdFarIx=pdFarIx;window.pdCardTxt=pdCardTxt;window.pdVisOdds=pdVisOdds;window.pdVisBonus=pdVisBonus;window.pdNightAdd=pdNightAdd;
 /* jgrey: two KIT parts (KIT.md §GREY, kit page) — written by the kit keeper.
    1. GREYED OPTION (owner 16/11 ~21:10Z "Chung Tú cung"): a known option she cannot take now because of COST, RANK or ITEM is never hidden:
@@ -96102,7 +96108,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="65ee8bffeb70";window.CTM_BUILD=BUILD;
+const BUILD="85ab60df21ec";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

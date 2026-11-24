@@ -44,7 +44,7 @@ const URL=process.argv[2]||'file://'+path.resolve(__dirname,'../../index.html');
   const runVis=i=>{S.pal=i;Q.length=0;const d0=S.danh=30;S.visNight=wk();S.visLost=null;S.visQ=0;const L0=S.logSeq||0;nightFx(2);Q.length=0;return{dd:S.danh-d0,log:S.logs.slice(0,(S.logSeq||0)-L0).join(' ')}};
   const vf=runVis(HA),vn=runVis(DH),g=pdVisBonus(1);
   ok(g&&vf.dd-vn.dd===g.danh,`her far visit: Danh +${vf.dd} vs near +${vn.dd} (bonus +${g&&g.danh})`);
-  ok(/dù ở xa vẫn được ngự giá/.test(vf.log)&&!/dù ở xa/.test(vn.log),'her far visit: news line «dù ở xa vẫn được ngự giá» (near: none)'+(/dù ở xa/.test(vf.log)?'':' LOG: '+vf.log.slice(0,400)));
+  ok(/dù ở xa vẫn được ngự giá/.test(vf.log)&&new RegExp('Danh '+(30+vf.dd-g.danh)+' → '+(30+vf.dd)+'\\.').test(vf.log)&&!/dù ở xa/.test(vn.log),'her far visit: news line «dù ở xa vẫn được ngự giá» (near: none)'+(/dù ở xa/.test(vf.log)?'':' LOG: '+vf.log.slice(0,400)));
   /* NPC */
   const runNpc=i=>{v.pal=i;v.danh=30;v.visW=null;S.tonight=null;if(S.emp)S.emp.visit=null;const L0=S.logSeq||0;const r=window.visGo(v);return{r,dd:v.danh-30,log:S.logs.slice(0,(S.logSeq||0)-L0).join(' ')}};
   const nf=runNpc(HA),nn=runNpc(DH);ok(nf.r==="npc"&&nf.dd-nn.dd===g.danh,`NPC far visit: Danh +${nf.dd} vs near +${nn.dd}`);

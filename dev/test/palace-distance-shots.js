@@ -26,8 +26,12 @@ const DEVS=A.filter(a=>D.DEVICES[a]);const NET=!A.includes('--no-net');let bad=0
   await g.evaluate(()=>{S.srv=null;S.resHead=null;S.rank=3;S.sung=60;for(const v of rivals)if(v.pal===PALN.indexOf("Hàm An cung"))v.pal=null;S.pal=PALN.indexOf("Hàm An cung");S.palCer=1;Q.length=0;palCeremony();render();showModal()});await pg.waitForTimeout(1500);
   await shot('pd-bancung');
   await g.evaluate(()=>{const L=[...document.querySelectorAll('#modal .opts button')];const x=L[L.length-1];if(x)x.scrollIntoView({block:'end'})});await shot('pd-bancung-end');
-  await g.evaluate(()=>{Q.length=0;try{closeModal()}catch(e){}const HA=PALN.indexOf("Hàm An cung"),TX=PALN.indexOf("Trường Xuân cung");S.danh=30;S.visNight=wk();nightFx(2);Q.length=0;
-   const v=rivals.find(x=>x.alive&&!x.out&&!x.queen&&!x.coop);if(v){v.rank=Math.max(3,v.rank);v.pal=TX;v.visW=null;S.tonight=null;if(S.emp)S.emp.visit=null;window.visGo(v)}S.tonight=null;Q.length=0;tab="log";render()});await pg.waitForTimeout(1200);
+  await g.evaluate(()=>{for(let j=0;j<6;j++){Q.length=0;const m=document.getElementById("modal");if(m)m.hidden=true;tab="log";render()}});await pg.waitForTimeout(800);
+  await g.evaluate(()=>{Q.length=0;const m=document.getElementById("modal");if(m)m.hidden=true;S.danh=30;S.visNight=wk();nightFx(2);Q.length=0;const TX=PALN.indexOf("Trường Xuân cung");
+   const v=rivals.find(x=>x.alive&&!x.out&&!x.queen&&!x.coop&&x.pal!==S.pal);if(v){v.rank=Math.max(3,v.rank);v.pal=TX;v.visW=null;S.tonight=null;if(S.emp)S.emp.visit=null;window.visGo(v)}S.tonight=null;Q.length=0;
+   const r0=window.render;tab="log";render();if(m)m.hidden=true;document.querySelectorAll('.kres,.kresult,#kres').forEach(e=>e.remove())});await pg.waitForTimeout(1000);
+  for(let k=0;k<3;k++){await g.evaluate(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;document.querySelectorAll('.kres,.kresult,#kres').forEach(e=>e.remove())});await pg.waitForTimeout(500)}
+  const hit=await g.evaluate(()=>{const L=[...document.querySelectorAll('body *')].filter(e=>e.children.length<=3&&/dù ở xa vẫn được ngự giá/.test(e.textContent||'')&&(e.textContent||'').length<400);Q.length=0;const md=document.getElementById('modal');if(md)md.hidden=true;document.querySelectorAll('.kres,.kresult,#kres').forEach(x=>x.remove());const e=L[L.length-1];if(e){e.scrollIntoView({block:'center'});return L.length}return 0});if(!hit){bad++;console.log(`FAIL ${tag}: far-visit line not in Sổ ghi`)}await pg.waitForTimeout(500);
   await shot('pd-log');
   if(process.env.BC_DBG)console.log(await g.evaluate(()=>[...document.querySelectorAll('#modal .opts button')].pop().outerHTML.slice(0,3000)));
   if(errs.length){bad++;console.log(`FAIL ${tag}: ${errs.length} page errors: ${errs[0]}`)}

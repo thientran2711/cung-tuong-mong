@@ -134,6 +134,12 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
  ok(ta.fr&&tb.fr,'each seat sees the friend as a person',{a:ta.frName,b:tb.frName});
  ok(JSON.stringify(ta.me)===JSON.stringify(tb.fr),'host person: same odds on both seats',{A:ta.me,B:tb.fr});
  ok(JSON.stringify(tb.me)===JSON.stringify(ta.fr),'guest person: same odds on both seats',{B:tb.me,A:ta.fr});
+ /* palace distance (jpdist, review/palace-distance): where each person lives → the same far / night add / far-visit bonus / visit-odds words on both seats */
+ const ptab=async o=>{await clear(o);return o.p.evaluate(()=>{if(typeof pdFar!=='function')return null;const T=p=>({far:+pdFar(p).toFixed(6),add:pdNightAdd(p),bon:pdVisBonus(pdFar(p)),w:PALN.map((_,i)=>word(pdVisOdds(p,i)))});const fr=rivals.find(v=>v.coop);return{me:T(S),fr:fr?T(fr):null,ix:PALN.map((_,i)=>+pdFarIx(i).toFixed(6))}})};
+ const pa=await ptab(A),pb=await ptab(B);
+ ok(pa&&pb&&JSON.stringify(pa.ix)===JSON.stringify(pb.ix),'palace distance: same far table on both seats',{A:pa&&pa.ix,B:pb&&pb.ix});
+ ok(pa&&pb&&pa.fr&&pb.fr&&JSON.stringify(pa.me)===JSON.stringify(pb.fr),'palace distance: host person same on both seats',{A:pa&&pa.me,B:pb&&pb.fr});
+ ok(pa&&pb&&pa.fr&&pb.fr&&JSON.stringify(pb.me)===JSON.stringify(pa.fr),'palace distance: guest person same on both seats',{B:pb&&pb.me,A:pa&&pa.fr});
  for(const [o,vp] of [[A,'fold host'],[B,'ipad guest']]){await clear(o);
   const r=await o.p.evaluate(()=>{const keep={rank:S.rank,pal:S.pal,palCer:S.palCer};const occ=bcOcc(S);const f=PALN.findIndex((_,i)=>!occ[i]);S.rank=4;S.pal=f;S.palCer=1;Q.length=0;palCeremony();const d=Q[Q.length-1];
    const L=(d&&d.opts||[]).filter(c=>/^Xin /.test(c.n)&&!c.off).map(c=>{const i=PALN.indexOf(c.n.slice(4));return [c.n,c.x.split(' · ')[0],word(bcOdds(S,i,f))]});
