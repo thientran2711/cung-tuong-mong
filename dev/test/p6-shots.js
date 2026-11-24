@@ -1,10 +1,10 @@
-/* ORDER THIN P6/P7 shots: Fold 755x1000 + iPad 1180x820, 3 composed items each — node dev/test/p6-shots.js <outdir> [world ids] [route ids]
+/* ORDER THIN P6/P7 shots: Fold 755x1000 + iPad 1180x820, 3 composed items each — node dev/test/p6-shots.js <outdir> [world ids] [route ids] [festival jsonl]
    shows (1) composed world reaction cards (a real window opened with that seed), (2) a «Tai mắt báo» card of a composed j70 route against her,
    (3) a j71c festival complication card (fixture). Scratch shots (not in git). */
 const {chromium}=require('playwright');const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const OUT=process.argv[2]||'/tmp/p6shots';fs.mkdirSync(OUT,{recursive:true});
 const WIDS=(process.argv[3]||'wc-hoa-001,wc-dis-002,wc-day-001').split(','),RIDS=(process.argv[4]||'j70c-poison-001,j70c-musk-002,j70c-rumor-003').split(',');
-const FIX=fs.readFileSync(path.join(__dirname,'j71c-fixture.jsonl'),'utf8').split('\n').filter(l=>l.startsWith('{')).map(JSON.parse);
+const FIX=fs.readFileSync(process.argv[5]||path.join(__dirname,'j71c-fixture.jsonl'),'utf8').split('\n').filter(l=>l.startsWith('{')).map(JSON.parse);
 const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http://x').pathname);if(p==='/')p='/index.html';const f=path.join(ROOT,p);if(!fs.existsSync(f)||fs.statSync(f).isDirectory()){r.statusCode=404;return r.end()}fs.createReadStream(f).pipe(r)});
 (async()=>{await new Promise(r=>srv.listen(0,'127.0.0.1',r));const b=await chromium.launch();
  for(const dev of ['fold','ipadAir']){const ctx=await D.newDeviceContext(b,dev,{deviceScaleFactor:1,reducedMotion:'reduce'});
