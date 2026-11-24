@@ -48,7 +48,7 @@ function twDo(a,t,k,paid){const D=TW[k];if(!D||!a)return"";try{if(D.req&&!D.req(
 const G=()=>BAL.tw.g;
 /* --- deeds both sides had (NPC side now pays and rolls like hers) --- */
 TWD("help",{n:"Giúp đỡ nàng",req:(a,t)=>!!t,run:(a,t)=>{relAdd(a,t,G().help);oanAdd(t,a,-G().helpOan);return `${twNm(a)} sang giúp ${NM(t)} việc khó`}});
-TWD("apol",{n:"Tạ lỗi",req:(a,t)=>!!t&&oan(t,a)>0,run:(a,t)=>{oanAdd(t,a,-G().apol);return `${twNm(a)} hạ mình tạ lỗi với ${NM(t)}`}});
+TWD("apol",{n:"Tạ lỗi",req:(a,t)=>!!t&&oan(t,a)>0,run:(a,t)=>{if(!netForgive(t,a))return netRefused(a,t,"hạ mình tạ lỗi với");oanAdd(t,a,-G().apol);return `${twNm(a)} hạ mình tạ lỗi với ${NM(t)}`}});
 TWD("thTH",{n:"Thỉnh an, chép kinh",req:()=>!S.thDead,o:a=>odA(a,G().thTHo),run:(a,t,ok)=>{const g=G().thTH;if(ok)twAp(a,{th:g[0],danh:g[1],duc:g[2]});else twAp(a,{th:g[3]});return `${twNm(a)} sớm hôm hầu hạ Thái hậu${ok?"":", Thái hậu không vui"}`}});
 TWD("thHH",{n:"Thỉnh an",req:(a,q)=>!!q&&q!==a,o:a=>odA(a,G().thHHo),run:(a,q,ok)=>{const g=G().thHH;if(ok){twAp(a,{hh:g[0],danh:g[1],duc:g[2]});if(q!==S)q.ghen=cl((q.ghen||0)-g[4],0,100)}else twAp(a,{hh:g[3]});return `${twNm(a)} sang thỉnh an Hoàng hậu`}});
 TWD("pray",{n:"Cầu tự ở Phụng Tiên điện",req:a=>!(a.fert>0||a.pray>0),o:a=>odA(a,G().prayO),run:(a,t,ok)=>{if(ok)a.pray=G().pray;return `${twNm(a)} lên Phụng Tiên điện thắp hương cầu tự`}});
@@ -96,7 +96,7 @@ function twFollowT(v){const L=liveRivals(true).filter(x=>x!==v&&rkOf(x)>rkOf(v)+
 (function(){const t0=topicOpts;topicOpts=function(v){const A=t0.apply(this,arguments);try{if(!S||!v)return A;
   /* her existing options: costs/gains from BAL.tw (one source) */
   for(const a of A){if(a.n==="Giúp đỡ nàng"){a.c=twCost("help");a.x=`nàng quý ngươi +${G().help} · oán -${G().helpOan}`;a.run=()=>{chatMark(v);return twDo(S,v,"help",true)+"."}}
-   else if(a.n==="Tạ lỗi"){a.c=twCost("apol");a.x=`oán -${G().apol}`;a.run=()=>{chatMark(v);return twDo(S,v,"apol",true)+"."}}}
+   else if(a.n==="Tạ lỗi"){a.c=twCost("apol");a.x=`thành: oán -${G().apol}`;a.run=()=>{chatMark(v);return twDo(S,v,"apol",true)+"."}}}
   if(sameHouse(S,v))return A;
   const add=(k,x)=>{const D=TW[k];if(!D||(D.req&&!D.req(S,k==="mediate"?v:v)))return;const c=twCost(k);
    A.push({n:D.n,c:Object.keys(c).length?c:undefined,o:D.o?D.o(S,v):100,x,run:()=>{chatMark(v);return twDo(S,v,k,true)+"."}})};

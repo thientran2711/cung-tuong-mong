@@ -62,13 +62,26 @@ function netMigrateAll(){if(!S)return;try{const L=[S].concat(typeof rivals!=="un
 /* ================= NẾT THRESHOLDS (review/net-build; BAL.net.th — jbal2.js) =================
    netTh(p,key): the relation level of person p for key (base + her 3 nết offsets, clamped). Every relation gate reads this, never a typed number (law 4);
    same rule for her (S.net) and for everyone else (law 1). Emperor / Thái hậu (no pool nết) → the base. */
-function netTh(p,key){const N=BAL.net,b=N.th[key];if(b==null)return 0;let o=0;try{const F=N.thFrom[key];for(const t of (p&&typeof p==="object"?traitsOf(p):[])){const R=N.T[t];if(!R||!R.th)continue;
+/* PERF (net-build-rv fix 4): netTh and the band shifts depend ONLY on the holder's 3 nết, so they are kept per person and recomputed when her nết array
+   changes (p.net is only ever replaced, never edited in place: a redraw / migration / a test setting S.net = a new array → a miss). People without
+   a pool nết (Emperor / Thái hậu) are computed each time (base). No behaviour change: same numbers, fewer traitsOf walks. */
+const NET_MEMO=new WeakMap();
+function netMemo(p){if(!p||typeof p!=="object"||!Array.isArray(p.net))return null;let m=NET_MEMO.get(p);if(!m||m.n!==p.net){m={n:p.net,v:{},b:null};NET_MEMO.set(p,m)}return m}
+function netTh(p,key){const m=netMemo(p);if(m&&m.v[key]!==undefined)return m.v[key];const r=netTh0(p,key);const m2=netMemo(p);if(m2)m2.v[key]=r;return r}
+function netTh0(p,key){const N=BAL.net,b=N.th[key];if(b==null)return 0;let o=0;try{const F=N.thFrom[key];for(const t of (p&&typeof p==="object"?traitsOf(p):[])){const R=N.T[t];if(!R||!R.th)continue;
   if(R.th[key]!=null)o+=R.th[key];else if(F&&R.th[F[0]]!=null)o+=R.th[F[0]]*F[1]}}catch(e){}const C=N.thClamp[key];return C?Math.max(C[0],Math.min(C[1],Math.round(b+o))):Math.round(b+o)}
 /* a lighter gate: share k (BAL.net.thK[k]) of p's level of key */
 function netThK(p,key,k){return Math.round(netTh(p,key)*BAL.net.thK[k])}
+/* FORGIVENESS (net-build-rv fix 2, law 1): ONE rule for every apology / mediation road — her «Tạ lỗi» / «Nhún nhường» (j9 / jtwoway), the NPC deeds
+   (SOC.apologise / SOC.mediate j28, TW apol jtwoway, cx:humble jagacts, «Tạ lỗi, đền bạc» jemoact) and the receiver of a mediation (jrcv RCVK.mediate):
+   the wronged one t lets a's wrong go only while t's oán toward a is under t's own «nguoi» level (her = S.net, same function). Told after, in words. */
+function netForgive(t,a){try{return oan(t,a)<netTh(t,"nguoi")}catch(e){return true}}
+function netRefused(a,t,what){return `${a===S?"Ngươi":a.name} ${what} ${NM(t)}, nhưng ${t===S?"ngươi vẫn chưa nguôi giận":"bị gạt đi"}`}
 /* harm band of danger d for holder v: band 1 starts at BANDS[1][0] + v's act shift, bands 2 / 3 at bandHi of it (T[t].th.act3 = her own band-3 shift) */
-function bandCut(v,d){const sh=netTh(v,"act")-BAL.net.th.act;let s3=null;try{for(const t of traitsOf(v)){const R=BAL.net.T[t];if(R&&R.th&&R.th.act3!=null)s3=(s3||0)+R.th.act3}}catch(e){}
- let b=0;for(let i=1;i<BANDS.length;i++){const c=BANDS[i][0]+(i===1?sh:i===3&&s3!=null?s3:Math.round(sh*BAL.net.bandHi));if(d>=c)b=i}return b}
+function bandCuts(v){const m=netMemo(v);if(m&&m.b)return m.b;const sh=netTh(v,"act")-BAL.net.th.act;let s3=null;try{for(const t of traitsOf(v)){const R=BAL.net.T[t];if(R&&R.th&&R.th.act3!=null)s3=(s3||0)+R.th.act3}}catch(e){}
+ /* rv: cuts never fall below the band under them (a gentle Xảo quyệt went 1 → 3 at 72 while her band 2 began at 75) */
+ const C=[];let lc=-1e9;for(let i=1;i<BANDS.length;i++){const c=Math.max(lc,BANDS[i][0]+(i===1?sh:i===3&&s3!=null?s3:Math.round(sh*BAL.net.bandHi)));lc=c;C[i]=c}const m2=netMemo(v);if(m2)m2.b=C;return C}
+function bandCut(v,d){const C=bandCuts(v);let b=0;for(let i=1;i<C.length;i++)if(d>=C[i])b=i;return b}
 function bandVT(v,t){return bandCut(v,danger(v,t))}
 /* RANGE (step 0, LAW 11): thiện cảm −100..100 and oán 0..100 (BAL.linkRange) hold for every writer — 55 modules write .rel / .rl / .oan / .ro straight;
    aff()/oan() clamp on read and netClampAll() puts every stored value back in range each week and on load (old saves with out-of-range values load clean). */
@@ -83,9 +96,10 @@ function netClampAll(){if(!S)return 0;const A=BAL.linkRange.rl,O=BAL.linkRange.r
    (told to the player); when it falls under her «ghet» level toward anyone, the hatred shows (news by the witness rule, newsAdd). Once per crossing. */
 const NET_TH_LINE={than:{"Lạnh lùng":"vốn ít khi mở lòng, nay lại coi ngươi là chỗ thân tình","Kiêu ngạo":"vốn kiêu kỳ, nay chịu nhận ngươi là người thân",
  "Ân cần":"nắm tay ngươi, nói từ nay coi nhau như chị em ruột","Kín đáo":"kể ngươi nghe một chuyện riêng chưa nói với ai","Nóng nảy":"nói ai động đến ngươi là động đến nàng",
- "Cương trực":"nói thẳng: từ nay chuyện của ngươi là chuyện của y","Xu nịnh":"nói từ nay xin được theo hầu bên ngươi",_:"nay coi ngươi là chỗ thân tình"}};
-function netCross(x,y,b,a){if(!S||!x||!y||x===y||x===S||typeof x!=="object"||typeof y!=="object"||!rivals.includes(x))return;S.netX=S.netX||{};
- const k=x.id+">"+(y===S?"me":y.id),th=netTh(x,"than"),gh=netTh(x,"ghet"),st=a>=th?1:a<=gh?-1:0,o=S.netX[k]||0;if(st===o)return;S.netX[k]=st;
+ "Cương trực":"nói thẳng: từ nay chuyện của ngươi là chuyện của nàng","Xu nịnh":"nói từ nay xin được theo hầu bên ngươi",_:"nay coi ngươi là chỗ thân tình"}};
+function netCross(x,y,b,a){if(!S||!x||!y||x===y||x===S||typeof x!=="object"||typeof y!=="object"||b===a)return;const th=netTh(x,"than"),gh=netTh(x,"ghet");
+ /* perf (fix 4): nothing to tell unless the change reaches a level (or comes back from one) */if(a<th&&b<th&&a>gh&&b>gh&&!(S.netX&&S.netX[x.id+">"+(y===S?"me":y.id)]))return;
+ if(!rivals.includes(x))return;S.netX=S.netX||{};const k=x.id+">"+(y===S?"me":y.id),st=a>=th?1:a<=gh?-1:0,o=S.netX[k]||0;if(st===o)return;S.netX[k]=st;
  if(st===1&&y===S&&b<th){const L=NET_TH_LINE.than;newsAdd(x,"netThan",`${x.name} ${tv(L,x,L._)}`,true)}
  else if(st===-1&&b>gh)newsAdd(x,"netGhet",`${x.name} từ nay ghét ${NM(y)} ra mặt`,false)}
 (function(){const a0=affAdd;affAdd=function(x,y,n){let b=null;try{if(n&&x&&y&&x!==y&&x!==S)b=aff(x,y)}catch(e){}const r=a0.apply(this,arguments);try{if(b!=null)netCross(x,y,b,aff(x,y))}catch(e){}return r}})();

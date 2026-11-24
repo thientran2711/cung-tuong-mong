@@ -1,8 +1,8 @@
 /* jagwhyg2d: NPC-PURPOSE G2 kinds, part d (registrations only; the ONE helper is jagwhy.js; numbers in jbal2 "// G2d" block) */
 /* Each kind: who(ctx) = the people who could act, why(p, ctx) = {s, t, r} from her real state or null (no reason → nothing happens).
    Numbers: BAL.ag.why (jbal2 "// G2d" block). Report: dev/handover/reports/npc-purpose.md §G2 (handover branch). */
-/* ---- jcycle: foes read / forge the cycle book (grudge = hostility ≥ BAL.cyc.foeHost; access = her informants) ---- */
-function g2dCyWho(c){return (c.F||[]).filter(v=>v&&v!==c.t&&hostility(v,c.t)>=BAL.cyc.foeHost)}
+/* ---- jcycle: foes read / forge the cycle book (grudge = hostility ≥ netTh(v,"host"); access = her informants) ---- */
+function g2dCyWho(c){return (c.F||[]).filter(v=>v&&v!==c.t&&hostility(v,c.t)>=netTh(v,"host"))}
 function g2dCyWhy(v,c){const W=npwB().cyRead;return{s:hostility(v,c.t)*W.host+eyes(v)*W.eye,t:c.t,r:"oán "+npwNm(c.t)}}
 npwReg("cyRead",{grp:"G2",each:true,who:g2dCyWho,why:g2dCyWhy});
 npwReg("cyLie",{grp:"G2",who:g2dCyWho,why:g2dCyWhy});

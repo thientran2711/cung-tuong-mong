@@ -60,7 +60,7 @@ const WD={/* KNOBS (dev/WARDROBE.md §Núm) */
  sellLo:40,sellHi:60,sellRisk:12,sellDanh:3,       /* bán lén via ma ma / thái giám: % of price, % chance the need leaks, Danh lost */
  pawnPct:50,redeemPct:60,pawnWeeks:12,            /* cầm cố: get 50% now, redeem for 60% within 12 tuần, else lost */
  rewardGarment:45,ntSon:35,ntPromo:25,ntContest:15,ntStory:60,ntTH:1, /* % chances a bestowal brings a garment / a ngự tứ */
- frameMalice:60,frameHost:60,frameP:3,            /* NPC giá họa: needs malice and hostility, % per month */
+ frameMalice:60,frameP:3,            /* NPC giá họa: needs malice and hostility, % per month */
  warnBase:20,                                     /* tai mắt warning before a frame-up lands */
  traceBase:35,traceMat:5,clearBase:55,clearMat:5};
 const WD_GRADE=["Thường","Tinh phẩm","Trân phẩm","Tuyệt phẩm","Ngự tứ","“Phẩm của {P} mà dùng được món này, e là có ai ban riêng?”","“Người ngoài nhìn vào còn tưởng {P} là cung nữ.”"];

@@ -76,7 +76,7 @@ const F95=new Set(["ally","gift","tieuhuy","visit"]);
 /* port 16/11, whole family: every act the game groups as harm (RVGRP, j9 + jecon/jtsb/jpoison/jpet…) passes the gate; "Giao thiệp" acts are friendly */
 try{if(typeof RVGRP!=="undefined")for(const [g,L] of RVGRP)for(const k of L){if(g==="Giao thiệp"||k==="tieuhuy")F95.add(k);else H95.add(k)}}catch(e){}
 function j95except(a,t){/* a recorded reason to act against her own affection */try{
- for(const h of liveRivals(true)){if(h===a||h===t)continue;if(evG(h,a)>=netTh(h,"repay2")&&hostility(h,t)>=netTh(h,"host"))return `bị khống chế: ${h.name} nắm thóp bằng chứng cứ, ép ra tay`}
+ for(const h of liveRivals(true)){if(h===a||h===t)continue;if(evG(h,a)>=BAL.evFirm&&hostility(h,t)>=netTh(h,"host"))return `bị khống chế: ${h.name} nắm thóp bằng chứng cứ, ép ra tay`}
  const f=facOf(a);const L=f&&facLeader(f);if(L&&L!==a&&L!==t&&L!==S&&hostility(L,t)>=netThK(L,"host","hostHi")&&aff(a,L)>=netTh(a,"than"))return `vâng lệnh chủ phe ${L.name}`;
  const r=a.j95rum&&a.j95rum[key(t)];if(r&&wk()-r.w<=8)return `nghe tin đồn (${r.txt}) nên hiểu lầm`}catch(e){}return ""}
 function motiveOK(a,t,kind){if(!a||!t||a===S||a===t)return{ok:true,why:a===S?"người chơi tự chọn":""};
@@ -453,7 +453,7 @@ function j95npcCatch(m){const R=S.roster;if(!R)return;const kh=j95kh();const k=S
   if(out==="one"){evA(v,S,BAL.eff.j95.evJ95npcCatch_2);continue}evA(v,S,BAL.eff.j95.evJ95npcCatch_3);v.j95saw={w:wk(),m:m.id};
   if(out==="rev")Q.push({t:"Có người thấy",who:pv(v),h:`<p>Lúc trở ra, ngươi thấy bóng ${v.name} khuất sau cửa. Nàng đã thấy ngươi đi cùng ${m.name}.</p>`});
   const hard=motiveOK(v,S,"expose");
-  if(hard.ok&&hostility(v,S)>=netTh(v,"host")&&evG(v,S)>=netTh(v,"repay2")&&npwPick(["tell","hold"],x=>x==="tell"?hostility(v,S):Math.max(0,100-hostility(v,S)))==="tell"){/* G3: she accuses when her grudge outweighs keeping the card for later */const o=oddsCl(Math.min(25+evG(v,S)*15,90));if(j95dice(o)){affairExposed(m,`${v.name} tố giác:`);return}/* two-way law: a failed accusation costs the accuser what it costs her (Danh -8, resentment +25, regard -20, punishment) */ap(v,{danh:-BAL.tw.g.accFail[0]});oanAdd(S,v,BAL.tw.g.accFail[1]);affAdd(S,v,-BAL.tw.g.accFail[2]);punish(v,"vu cáo người khác tư thông",1)}
+  if(hard.ok&&hostility(v,S)>=netTh(v,"host")&&evG(v,S)>=BAL.evFirm&&npwPick(["tell","hold"],x=>x==="tell"?hostility(v,S):Math.max(0,100-hostility(v,S)))==="tell"){/* G3: she accuses when her grudge outweighs keeping the card for later */const o=oddsCl(Math.min(25+evG(v,S)*15,90));if(j95dice(o)){affairExposed(m,`${v.name} tố giác:`);return}/* two-way law: a failed accusation costs the accuser what it costs her (Danh -8, resentment +25, regard -20, punishment) */ap(v,{danh:-BAL.tw.g.accFail[0]});oanAdd(S,v,BAL.tw.g.accFail[1]);affAdd(S,v,-BAL.tw.g.accFail[2]);punish(v,"vu cáo người khác tư thông",1)}
   else if(aff(v,S)>=netTh(v,"than")){j95z().owe["by:"+v.id]=wk()}}}
 
 /* ---------------- 8. DATA FOR THE KIT: habits she knows ---------------- */

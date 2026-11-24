@@ -15,7 +15,7 @@ const BAL={entryToastMs:5000,/* owner 18/11 ~03:4xZ: ms the place-entry line sta
  hintMid:25,hintSharp:45,hintMat:3,
  /* TRUNG Y (jty, sếp 15/11 09:15Z): the Y phục slot is empty → she is in her inner robe. ONE source for every number of that rule */
  ty:{out:2,crowd:3,crowdN:3,royal:6,royalDuc:1,meet:1,reissueWk:2,   /* Danh lost: out of her palace / extra with ≥crowdN people / extra (tai tiếng) before the Emperor or Thái hậu (+ Đức); a visitor at home */
-  robNight:12,robLonely:8,robPlot:45,robThug:3,robDanh:3,robWalk:2,omenWk:2,plotCh:12,plotRel:-30, /* robbery: % parts, Danh lost, omen lasts N weeks, weekly % an enemy plans it, relation that makes an enemy */
+  robNight:12,robLonely:8,robPlot:45,robThug:3,robDanh:3,robWalk:2,omenWk:2,plotCh:12, /* robbery: % parts, Danh lost, omen lasts N weeks, weekly % an enemy plans it, relation that makes an enemy */
   npcOut:2,npcRob:2},                                                /* NPC: Danh per week seen out in trung y; weekly % an NPC is robbed (night walks) */
  /* THÁI Y (jthaiy, owner 15/11 20:20Z): monthly "Thỉnh bình an mạch" (free) + "Mời thái y bắt mạch" (two roads) + bribed / trusted physician */
  thy:{cost:[6,8,10,12,15,20,25,35],  /* bạc road by rank (≈ 1/7–1/8 of BAL.pay[rank]: scarce at low ranks, the same weight at every rank) */
@@ -25,7 +25,7 @@ const BAL={entryToastMs:5000,/* owner 18/11 ~03:4xZ: ms the place-entry line sta
   routineHint:25,routineTrust:25,    /* routine visit: % it notices "something odd" about a hidden harm (+ trusted) */
   early:50,earlyTrust:20,            /* requested check 2 weeks after conception: % to feel the hỉ mạch (≥3 weeks: always) */
   lie:35,lieSelf:20,leak:50,         /* bribed, untrusted physician: % he lies (at Thái y viện, with people around, less) / % her news reaches the briber */
-  trustAf:40,bribeAf:30,bribeHost:40,/* thiện cảm the physician needs to be her man / a rival's bribe weight that turns him / hostility that makes a rival use it */
+  trustAf:40,bribeAf:30,/* thiện cảm the physician needs to be her man / a rival's bribe weight that turns him / hostility that makes a rival use it */
   npcBribe:6,npcBribeBac:30,npcBribeAf:20,npcDecay:4, /* NPC: monthly % a hostile rival bribes the physician, its price, weight it adds, monthly fade */
   npcFind:15,npcFindDoc:35,          /* NPC: monthly % the routine visit finds a hidden harm in her (+ her own trusted physician) */
   askAf:30,askBase:40,               /* Hỏi chuyện with the physician: thiện cảm needed for him to tell a rival's mạch án / base odds (+ thiện cảm/2) */
@@ -129,7 +129,7 @@ Object.assign(BAL,{route:{
  spy:{suc:-5} /* cost: spy on the accuser's bowl */,
  frameOil:70 /* roll: a rival framing her innocent child uses oil */,
  heatW:[15,35,60,80] /* Lời ra tiếng vào: the cut points of its words (rtHeatW: Yên ắng < [0] ≤ Có kẻ xì xào < [1] … ≥ [3] Sắp vỡ lở) (review/one-core-arcs) */,
- seen:{aff:45,rel:5} /* a rival who sees her with the man but likes her (thiện cảm ≥ aff) keeps quiet; thiện cảm +rel */,
+ seen:{rel:5} /* a rival who sees her with the man but likes her (thiện cảm ≥ aff) keeps quiet; thiện cảm +rel */,
  oan:{report:40,threat:25,ngWin:30,demand:40,frame:50} /* oán the rival takes: reported to Cung Chính ti / threatened / lost the blood test / her false
    accusation of the rival's child / caught framing the rival */,
  threatEv:2 /* evidence on the rival gained by threatening her (printed in the choice) */
@@ -389,11 +389,11 @@ Object.assign(BAL,{tinhLv:{known:10,warm:30,prince:40,close:50,ally:60,love:70},
 /* review/one-core-jkc PART 2 (ONE CORE OD:L1267 + LUẬT SỬA CẢ NHÓM, dev/measure/one-core-text-rule.js): cuts whose number a help / gloss / tip text
    ALSO typed (the tiểu thư fault family): the rule and the text now read the same key. */
 Object.assign(BAL,{
- accNeedEv:[2,4],          /* chứng cứ needed to accuse (Tố giác): [anyone, Hoàng hậu (rank 7+)] — j8 accNeed + the act text */
+ accNeedEv:[2,4],evFirm:2,/* evFirm: chứng cứ (evG) for a FIRM hold — present it to the Hoàng hậu, force a third person to act, accuse in an affair (j78 trinhhh, j95) */          /* chứng cứ needed to accuse (Tố giác): [anyone, Hoàng hậu (rank 7+)] — j8 accNeed + the act text */
  coldEvNeed:2,             /* chứng cứ that clear her name from lãnh cung (j14 «Tìm chứng cứ minh oan») */
  ngocboiSung:15,           /* the Ngọc bội ngự ban keeps its owner's Sủng from falling below this (j8; item text, jinv) */
  sinhThanSung:50,          /* her birthday is bestowed only when Sủng is at least this (j20; ban thưởng list) */
- m30:{tocaoEv:1,exposeEv:2,xinhhAff:40},     /* j30: chứng cứ for «Tố tội thật» / «Bóc chuyện tư tình»; Hoàng hậu thiện cảm for «Xin Hoàng hậu giáng» */
+ m30:{tocaoEv:1,exposeEv:2},     /* j30: chứng cứ for «Tố tội thật» / «Bóc chuyện tư tình»; Hoàng hậu thiện cảm for «Xin Hoàng hậu giáng» */
  srvx:{tinOut:10,keepTin:60,secNeed:2,friendAf:30,colN:10,tinUp:35}, /* cung nữ road (j42): Chủ tin below tinOut = sent to Tân Giả khố; from keepTin the chủ keeps her past
                            the age; secNeed = secrets of the chủ she must know to betray; friendAf = quý from which a colleague counts as a friend  tinUp = the Chủ tin she needs to rise a rung (j42 srvMonth; jts Xét phẩm box prints it)  colN = rows in her Đồng liêu list (j42 srvColleagues: her palace first, then friends, ill-wishers, the rest). */
  virx:{hanhCap:80,camSung:40},               /* j85: Hạnh bậc 3 monthly Đức +1 stops at hanhCap; Cầm bậc 5 cheers the Emperor when Sủng is at least camSung */
@@ -401,7 +401,7 @@ Object.assign(BAL,{
  sucNeed:{self:25,wk:15,rcp:10,kid:5,yKid:15}, /* Sức an act needs (the lock, its «Sức dưới N» word and the act's own check read the same key): self = «Tự học»
                            (j23 / j85 / jtabs / j83 deck card); wk = «Tự học, làm tác phẩm» (j83 / jtabs Tác phẩm tab); rcp = master / teacher lessons (jrcp);
                            kid = teaching a child chữ / lễ nghi / nghệ (j53 / j54); yKid = Y thuật care of a sick child (jact) */
- facJoinAff:30,             /* a consort with no faction joins hers when her thiện cảm with the player is at least this (j10 «lập phe») */
+              /* a consort with no faction joins hers when her thiện cảm with the player is at least this (j10 «lập phe») */
 });
 /* review/one-core-jkc-2 (ONE CORE OD:L1267 + LUẬT SỬA CẢ NHÓM, the «thiếu bạc (cần N)» lock family; scan dev/measure/one-core-bac-lock.js): each action's
    price is ONE key that its cost text («Bạc -N»), its lock (S.bac<N), its lock word («cần N bạc») and its handler (apply({bac:-N}), the NPC mirror
@@ -410,7 +410,7 @@ Object.assign(BAL,{
 Object.assign(BAL.house,{hireBac:20,plantBac:40}); /* Nội vụ phủ: thêm cung nữ / thái giám (her and every NPC); «Cài người vào cung khác» */
 Object.assign(BAL,{
  bacFee:{court:20,kidCare:10,kidGuard:20,cnvGift:5,h54Thu:15,h54Noi:10,h54Hoa:50,tdProbe:30,tdLeak:20,tdGift:40,itTest:10,htAsk:5,master:60,
-   lend:30,lendAff:30,ksp:30,midwife:40,backer:30,npcMat:15,giu:40},
+   lend:30,ksp:30,midwife:40,backer:30,npcMat:15,giu:40},
    /* court = «Biếu» a court person (j10 / j15; the NPC Tổng quản gift too) · kidCare / kidGuard = «Chăm sóc» / «Canh giữ các con» (j25) · cnvGift =
       cung nữ road «Biếu quà» a colleague (j42) · h54Thu / h54Noi / h54Hoa = a married daughter: letter, «Nhờ con vào cung nói giúp», a tông nữ's dowry (j54) ·
       tdProbe / tdLeak / tdGift = triều đình acts (j55, her and NPCs) · itTest = «Nghiệm độc» an item (j8 / jinv) · htAsk = «Dò hỏi gia thế» (jht) ·
@@ -435,7 +435,7 @@ Object.assign(BAL,{cv:{ransom:60,/* bạc to ransom the maid's parents (j7 maidh
  cuu:{sung:2,suc:6}/* j71 Cứu giá «Hoảng sợ đứng nhìn»: Sủng −sung (he saw her stand still) · Sức +suc (unhurt, keeps the strength «Lao vào» spends: Sức −10, hurt up to 15) */,
  decl:{suc:6,duc:2,sung:2,an:2}/* DECLINE-THE-EMPEROR family (law 3, OD L1877): «Cáo bệnh» to his night / summons / trip = she rests a whole night, Sức +suc (as «Nghỉ ngơi một lát»); «Dặn cung nữ chỉ viết chuyện vặt» (no spying on him for her father) = Đức +duc; sung / an = what the consort's «Cáo bệnh» on lật thẻ costs (Sủng −sung, Ân tình −an). ONE source: her cards (j8 ksp, jagmaid amNight, jts summons, jworld trip, jcmaid cmTt) AND the summoned NPC's «Cáo bệnh» (jrcv) read it */}});
 /* CHOICE VALUE #4 (law 4 on every line this branch rewrote, reviewer re-check #2 FAIL 1): the typed numbers of those options live here, the cards print the keys */
-Object.assign(BAL.cv,{glance:{warm:10,cold:-5}/* j24 «Một ánh mắt» (fired by npcWhy manPoem): hắn tình ý when she answers / burns the poem */,vase:{take:{hh:-5,danh:-3,maid:30},leave:{maid:-30,duc:-3}}/* j3 vase: «Nhận tội thay nàng» / «Để nàng chịu đòn» */,coldL:{duc:5,rel:20,ign:{duc:-2}}/* j3 coldletter: «Giúp nàng» Đức + her thiện cảm · «Làm ngơ» */,confessTha:{tin:-6,suc:-8}/* j42 «Nhận tội, xin tha» */,spy:{suc:-10,rel:-10}/* j7 «Tìm kẻ tung tin»: a night of searching · the culprit's thiện cảm when caught */,ghost:{watch:{suc:-10},skip:{danh:-3,maid:-5}}/* j7 ghost: «Rình bắt kẻ giả ma» / «Mặc kệ» */,tong:{bac:-50,danh:-2}/* j7 foreignwed «Tiến cử một tông nữ» */,hostage:{pay:25,skip:-35}/* j7 maidhostage: maid loyalty when she ransoms / abandons the parents */,cmaidSkip:{duc:-1}/* j7 condemnedmaid «Không can dự» */,gift7:{miss:{th:-2,sung:-2},jade:60,npcMin:100,jit:25}/* j71 feast gift: «Không dâng lễ» costs Thái hậu / Sủng · «Dâng ngọc quý» price = what a rich rival (bạc ≥ npcMin) spends · jit = luck in the gift ranking */,closeDoor:{maid:-3}/* j71 «Đóng cửa cung giữ mình» */,stipSup:{danh:-2}/* jstip «Tố lên …»: the superior who backed the eunuch is blamed */,tsBorrow:{aff:25,cost:-2}/* jts hội phối đồ «Mượn áo»: thiện cảm needed · the favour owed */,facAsk:20/* j25 «Có người đến» (a faction head asks her in): event chance (%) */,secPayMul:2/* jcmaid «Trả nợ thay / Gửi tiền thuốc»: maid loyalty = secLoy × this (the «Mặc kệ» side loses secLoy × 1) */});
+Object.assign(BAL.cv,{glance:{warm:10,cold:-5}/* j24 «Một ánh mắt» (fired by npcWhy manPoem): hắn tình ý when she answers / burns the poem */,vase:{take:{hh:-5,danh:-3,maid:30},leave:{maid:-30,duc:-3}}/* j3 vase: «Nhận tội thay nàng» / «Để nàng chịu đòn» */,coldL:{duc:5,rel:20,ign:{duc:-2}}/* j3 coldletter: «Giúp nàng» Đức + her thiện cảm · «Làm ngơ» */,confessTha:{tin:-6,suc:-8}/* j42 «Nhận tội, xin tha» */,spy:{suc:-10,rel:-10}/* j7 «Tìm kẻ tung tin»: a night of searching · the culprit's thiện cảm when caught */,ghost:{watch:{suc:-10},skip:{danh:-3,maid:-5}}/* j7 ghost: «Rình bắt kẻ giả ma» / «Mặc kệ» */,tong:{bac:-50,danh:-2}/* j7 foreignwed «Tiến cử một tông nữ» */,hostage:{pay:25,skip:-35}/* j7 maidhostage: maid loyalty when she ransoms / abandons the parents */,cmaidSkip:{duc:-1}/* j7 condemnedmaid «Không can dự» */,gift7:{miss:{th:-2,sung:-2},jade:60,npcMin:100,jit:25}/* j71 feast gift: «Không dâng lễ» costs Thái hậu / Sủng · «Dâng ngọc quý» price = what a rich rival (bạc ≥ npcMin) spends · jit = luck in the gift ranking */,closeDoor:{maid:-3}/* j71 «Đóng cửa cung giữ mình» */,stipSup:{danh:-2}/* jstip «Tố lên …»: the superior who backed the eunuch is blamed */,tsBorrow:{cost:-2}/* jts hội phối đồ «Mượn áo»: thiện cảm needed · the favour owed */,facAsk:20/* j25 «Có người đến» (a faction head asks her in): event chance (%) */,secPayMul:2/* jcmaid «Trả nợ thay / Gửi tiền thuốc»: maid loyalty = secLoy × this (the «Mặc kệ» side loses secLoy × 1) */});
 /* MAID LADDER (maid-ladder-6, owner OD 19/11 ~01:26Z «Cung nữ chia là thô sử, tam đẳng, nhị đẳng, nhất đẳng, nhất đẳng là đại cung nữ như giờ»):
    SRK.maid = thô sử 0 · tam đẳng 1 · nhị đẳng 2 · nhất đẳng (Đại cung nữ) 3 · Chưởng sự cô cô 4 · Nữ quan 5; ma ma = the stay-on standing after it (index 6
    in BAL.ex.srvBar/srvCd (jbal2) and the promo chest). Named rungs: every gate reads these, never a typed number. tier[rung] = the 5-step standing of the art, frame,

@@ -372,7 +372,7 @@ function selfP70maid(){return S.maid?Math.max(0,Math.round((S.maid.loyal-50)*4))
 function self70(a){const out=[];const busy=ords70().map(o=>o.sid);
  if(S.maid&&!busy.includes("maid")&&roll(selfP70maid()))out.push({n:S.maid.name,b:10,t:`${S.maid.name} tự canh chừng cho ngươi (thiện cảm ${S.maid.loyal})`});
  for(const s of S.staff||[]){if(busy.includes(s.sid)||traitor70(s)||netIs(s,"timid"))continue;const p=netIs(s,"loyal")?(s.loyal-50)*2:(s.loyal-80)*3;if(p>0&&roll(Math.min(p,85)))out.push({n:s.name,b:8,t:`${s.name} tự để mắt cho ngươi (thiện cảm ${s.loyal}${s.kn?`, tính ${netTxt(s)}`:""})`})}
- for(const v of liveRivals(true)){if(v===a||v.confined)continue;const f=aff(v,S);if(f>=50&&roll(Math.min((f-40)/2,25)))out.push({n:v.name,b:8,t:`${title70(v)} thân với ngươi (thiện cảm ${f}), cho người báo tin`})}
+ for(const v of liveRivals(true)){if(v===a||v.confined)continue;const f=aff(v,S);if(f>=netTh(v,"than2")&&roll(Math.min((f-40)/2,25)))out.push({n:v.name,b:8,t:`${title70(v)} thân với ngươi (thiện cảm ${f}), cho người báo tin`})}
  if(S.emp&&npcWhy("j70Guard",{p:S.emp},()=>roll(10)))out.push({n:"Hoàng thượng",b:10,t:`Hoàng thượng thương ngươi (Sủng ${S.sung}), cho thị vệ để mắt`});
  if(!S.thDead&&S.thO&&npcWhy("j70Guard",{p:S.thO},()=>roll(8)))out.push({n:"Thái hậu",b:8,t:`Thái hậu quý ngươi (${S.th}), sai người trông chừng`});
  return out}

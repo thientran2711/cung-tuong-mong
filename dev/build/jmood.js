@@ -100,7 +100,7 @@ function mbWeek(){if(!mbOn())return;const M=mbS(),b=B(),W=mbW();if(M.wk===W)retu
  if(S.confined>0)mbAdd(N.conf,"bị cấm túc","w:conf");
  if(S.out)mbAdd(N.out,"ở lãnh cung","w:out");
  /* people */
- try{let fr=0,fo=0;for(const v of (typeof liveRivals==="function"?liveRivals(true):[])){if(v.coop)continue;if(aff(v,S)>=netTh(v,"than"))fr++;if(oan(v,S)>=b.foe.oan)fo++}
+ try{let fr=0,fo=0;for(const v of (typeof liveRivals==="function"?liveRivals(true):[])){if(v.coop)continue;if(aff(v,S)>=netTh(v,"than"))fr++;if(oan(v,S)>=netTh(v,"thu"))fo++}
   if(fr)mbAdd(Math.min(b.fr.cap,fr*b.fr.d),`${fr} người trong cung quý ngươi`,"w:fr");
   if(fo)mbAdd(-Math.min(b.foe.cap,fo*b.foe.d),`${fo} người oán ngươi`,"w:foe");
   if(S.maid&&(S.maid.loyal||0)>=b.maidHi)mbAdd(b.maidD,`${S.maid.name||"cung nữ"} hết lòng với ngươi`,"w:maid")}catch(e){}
@@ -112,7 +112,7 @@ function mbWeek(){if(!mbOn())return;const M=mbS(),b=B(),W=mbW();if(M.wk===W)retu
 /* someone who loves her comes to comfort a sad / frightened her (not an angry one: people keep away from anger) */
 function mbComfort(){const M=mbS(),C=B().comfort,W=mbW();const bi=mbBand().i;if(bi>-1)return;const sk=k=>{MOOD_N.cskip=MOOD_N.cskip||{};MOOD_N.cskip[k]=(MOOD_N.cskip[k]||0)+1};
  if(mbFlav()==="gian")return sk("angry");if(M.cw!=null&&W-M.cw<C.cd)return sk("cooldown");if(!roll(bi<=-2?C.ch:C.chLow))return sk("roll");
- let v=null;try{v=liveRivals(true).filter(x=>!x.coop&&!x.queen&&aff(x,S)>=C.aff&&(typeof kitIsKnown!=="function"||kitIsKnown(x))).sort((a,b)=>aff(b,S)-aff(a,S))[0]||null}catch(e){}
+ let v=null;try{v=liveRivals(true).filter(x=>!x.coop&&!x.queen&&aff(x,S)>=netTh(x,"than")&&(typeof kitIsKnown!=="function"||kitIsKnown(x))).sort((a,b)=>aff(b,S)-aff(a,S))[0]||null}catch(e){}
  const maid=!v&&S.maid&&(S.maid.loyal||0)>=C.maid?S.maid:null;if(!v&&!maid)return sk("nobody");M.cw=W;MOOD_N.comfort++;
  const nm=v?v.name:maid.name,who=v?pv(v):pMaid(),them=v?"nàng ta":"nàng";const band=mbBand().name.toLowerCase();
  const big=C.big,small=C.small;
