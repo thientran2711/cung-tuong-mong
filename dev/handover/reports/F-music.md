@@ -38,9 +38,9 @@ Model for every track: Google Lyria 3 Pro via Magnific `audio_music_generate` (E
 | end-grand | đại kết cục: full ensemble, triumphant | P3Fq15S42C |
 | end-kyngo | kết cục kỳ ngộ: most moving, radiant | Doy43i4pcl |
 | lanhcung | NOT generated: keep `bgm-cold` (cold, sparse; fits) — the key `lanhcung` is an alias of `bgm-cold` | — |
-| fest-<key> ×14 | pending M2 (reports/F-music-fest.md) | — |
+| fest-<key> ×14 | DONE by M2: newyear nguyentieu thanhminh doanngo phoenix thattich vulan trungthu vantho trungcuu thanhtho dongchi lapbat giaothua; files `audio/bgm-fest-<key>.mp3` on branch `review/music-fest` (reports/F-music-fest.md, −10.9…−12.6 LUFS) | see M2 |
 
-Festival keys on main (j31 FEST + j71 + jsfx): newyear, nguyentieu, thanhminh, doanngo, phoenix, thattich, vulan, trungthu, trungcuu, vantho, dongchi, lapbat, giaothua, thanhtho (+ `hanthuc`, only in jsfx SFXFEST — M2 to confirm). Until M2 delivers: festival day → `bgm-festival` (existing).
+Festival keys on main (j31 FEST + j71 + jsfx): newyear, nguyentieu, thanhminh, doanngo, phoenix, thattich, vulan, trungthu, trungcuu, vantho, dongchi, lapbat, giaothua, thanhtho (M2 confirmed these 14; `hanthuc` is only an SFX key, no festival). Missing file → `bgm-festival`.
 
 ## 2. Signals KK18 can use (all already exist)
 - state: `S.dead`, `S.place==="lc"` (lãnh cung), `S.buoi` (0 sáng,1 trưa,2 chiều,3 tối = `B4L` night; BUK in j26/j94), `S.month` + `SEASON[S.month-1]`/`SEAK` (xuan/ha/thu/dong), `festToday()` → `{k,name}`, `S.kc` (tuyển tú run), tab = `TABS` key in j84 (act go rv rel court men fac staff kid inv art story log).
