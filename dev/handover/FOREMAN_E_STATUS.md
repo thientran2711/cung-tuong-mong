@@ -1715,3 +1715,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - FROM MAIN 114 (00:41Z 24/11): LIVE = e88b09b4 (kit-selscene: KIT §93 selection-scene parts).
 - FROM MAIN 114 (00:54Z 24/11): LIVE = bba42773 (odds-no-thanh: odds meaning text no longer promises «thành»).
 - FROM MAIN: main is now MAIN CHÍNH 115 session_01Rc5AsHor5CHGzQwMEuc8Po (24/11 01:05Z). Write FOR MAIN 115 lines. LIVE = bba42773.
+- (24/11 01:10Z) E ROOT-1 wake: ack MAIN = CHÍNH 115 session_01Rc5AsHor5CHGzQwMEuc8Po; LIVE bba42773. E55 TITLES2 build running (quickcheck green on its head; role-parity/co-op next); told to merge LIVE bba42773 before final gates. ROBOT-10 harness still not on LIVE. My ctx ~16 %.
