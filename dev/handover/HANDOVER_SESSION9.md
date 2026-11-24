@@ -2735,3 +2735,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (23:49Z) OWNER: no gold outline on toilette props, invisible tap zones, no highlight on tap (OD 23:55Z) → added to KK14 v3.2 order.
 - (23:51Z) kit-selscene-r eca7df67 SMALL kit PASS (via 113) → LC8. After LANDED: archive rv N76XbyLe, tell SELSCENE to base on main.
 - (23:54Z) LANDED offline-all → LIVE 17835565 (deadline met). W5 HiB54y5c + rv JjPE1Lvb archived. sếp told how to use. GAP 7.
+- (00:14Z) KK14 MOCK-STAGE v3.2 4f978cdd (points 1–4 done) but still gold outlines → sent back for points 5–7 (OD 23:55Z) as v3.3; not shown to sếp. KIT §94 draft on review/kit-toilroom fc3a7000.
