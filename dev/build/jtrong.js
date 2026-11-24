@@ -64,7 +64,7 @@ function trKey(p0){const p=trRes(p0);return p==="th"?"th":p===S?"me":p===S.emp?"
 function trongKnown(p){if(trRes(p)===S)return true;S.tgK=S.tgK||{};return !!S.tgK[trKey(p)]}
 function trongLearn(p,tags,why){if(!S||trongKnown(p))return;const H=trongHit(p,tags);if(!H.length||!roll(BAL.trong.learn))return;S.tgK[trKey(p)]=1;const q=trRes(p);
  const nm=q==="th"?"Thái hậu":q===S.emp?"Hoàng thượng":q&&q.queen?"Hoàng hậu":q&&q.name||"";const t=`${why||"Qua lời qua lại"}: biết ${nm} trọng ${trongOf(p).join(", ")}`;
- try{if(q&&q.id!=null&&q!==S.emp)noteAdd(q.id,t)}catch(e){}log(`<span class="past">${t}.</span>`)}
+ try{if(q&&q.id!=null&&q!==S.emp)noteAdd(q.id,t)}catch(e){}log(`<span class="past">${t}.</span>`);try{kitKnow({key:"n:"+(q&&q.id!=null?q.id:trKey(p)),pri:2,text:`${t}.`})}catch(e){}}
 function trongLine(p){return `Trọng: ${trongKnown(p)?trongOf(p).map(v=>`<b>${kitGloss(v)}</b>`).join(" · "):"chưa rõ"}`}
 
 /* ---------- ONE greeting rule ---------- */
