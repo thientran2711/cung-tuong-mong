@@ -79,7 +79,13 @@ function deser(d){trMigrate(d);rivals=d.R;rid=d.rid;S=d.S;S.origin=originByKey(d
    by VALUE, so after a load S.visit held a copy: talking to her changed the copy, not the real servant. Relink every visitor whose ref is a
    servant (sid) to the live servant object (servById); a sid nobody holds any more stays as saved. */
 function visRelink(){try{const P=S&&S.visit&&S.visit.people;if(!Array.isArray(P)||typeof servById!=="function")return;
- for(const p of P){const o=p&&p.ref;if(!o||typeof o!=="object"||o.sid==null||(rivals||[]).includes(o))continue;const s=servById(o.sid);if(s&&s!==o)p.ref=s}}catch(e){console.error(e)}}
+ const one=[S.emp,S.thO,S.maid].concat(Object.values(S.court||{})).filter(x=>x&&typeof x==="object");
+ for(const p of P){const o=p&&p.ref;if(!o||typeof o!=="object"||(rivals||[]).includes(o))continue;let s=null;
+  if(o.sid!=null)s=servById(o.sid);
+  /* review r1 (law 6b, same family): a man of S.men (Nhạc sư, thái y…) and the one-of persons (Hoàng thượng, Thái hậu, her maid, a court official) stood in the room as a copy too */
+  else if(o.id!=null&&Array.isArray(S.men))s=S.men.find(m=>m&&m.id===o.id&&m.name===o.name)||null;
+  if(!s&&o.name)s=one.find(x=>x.name===o.name&&x.role===o.role&&x.kind===o.kind)||null;
+  if(s&&s!==o)p.ref=s}}catch(e){console.error(e)}}
 /* robot-fix-cnv-2 R2: what the file must hold is the SETTLED state — rules that ran only at render / load / month are settled here, before writing
    (save() runs at the end of render() and before it everywhere): (1) lazy faces (an age-band change, a jmort fc reset, a new hire) — the file held the
    old face key and a reload re-picked a random face; (2) a name clash made mid-month (a new servant / consort sharing a short form with someone,

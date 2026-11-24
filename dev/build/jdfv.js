@@ -89,3 +89,7 @@ function dfTabLayers(){try{const off=typeof tab!=="undefined"&&tab!=="act";const
  if(off)document.querySelectorAll("#game>.kfoc-mood,body>.kfoc-mood").forEach(b=>b.remove())}catch(e){console.error("dfTabLayers",e)}}
 (function(){const r0=window.renderPanel;if(typeof r0!=="function")return;window.renderPanel=renderPanel=function(){const r=r0.apply(this,arguments);dfTabLayers();return r}})();/* renderPanel: every tab change draws the panel (render() and the j63 log jump) */
 window.dfTabLayers=dfTabLayers;
+/* review r1 robot-fix-cnv F4 (newlife-leak family): the open stage encounter (DF.p = the visitor, DF.F = its kitFocus) belongs to the life it opened in;
+   a new life / a load / the title closes it, so the new life never holds (or answers) the old life's visitor (newlife-leak «DF.3.3.0», g.DF old names) */
+lifeStore("DF stage encounter (visitor of that life)",()=>{const F=DF.F,h=DF.play;DF.F=null;DF.p=null;DF.i=null;DF.tk=null;DF.encM=null;DF.play=null;
+ try{if(h)h.destroy()}catch(e){}try{if(F)F.destroy()}catch(e){}});
