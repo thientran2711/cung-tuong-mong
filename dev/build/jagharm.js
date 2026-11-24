@@ -25,7 +25,7 @@
       No floor, no cap, no dice: a quiet buổi has none; a happening is still there next buổi only if the doer's plan keeps her there.
    Numbers: BAL.ag.harm (jbal2). No new UI: the '!' mark and the witness card are the existing kit (jact kitHapMark, jagent agScene / agReact).
    ============================================================================================================================================ */
-const HA={stat:{opt:0,plan:0,land:0,prep:0,drop:0,mute:0,steal:0,stealNo:0,gift:0,taint:0,cook:0,by:{},hap:{n:0,by:{}}},hist:[]};
+const HA={stat:{opt:0,plan:0,land:0,prep:0,drop:0,mute:0,steal:0,stealNo:0,gift:0,taint:0,cook:0,by:{},hap:{n:0,by:{}}},hist:[]};lifeStore("HA harm caches (id+week keyed, robot-fix-cnv F4)",()=>{HA.oc=null;HA.gv=null;HA.here=null;HA.hk=null});
 function haB(){return BAL.ag.harm}
 function haOn(){try{return typeof agOn==="function"&&agOn()&&!!haB()&&!window.__haOff}catch(e){return false}}
 /* the act functions that call caught() and with which guard (j8 ACT: caught(a,t,ps,…)); null = the act has no caught step */

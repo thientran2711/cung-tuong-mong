@@ -22,7 +22,7 @@
    the tutorial coach kitTip, the co-op clock #kctm/#kctmf (status, 16/11 ruling).
    State: in memory only (the list of this session); S.closeSeen keeps the closing chip once per buổi. Old saves: nothing new stored. */
 (function(){try{
-const NT=window.NT={list:[],seq:0,chips:0,shown:[],log:[]};
+const NT=window.NT={list:[],seq:0,chips:0,shown:[],log:[]};lifeStore("NT notice tray (lines of that life, robot-fix-cnv F4)",()=>{NT.list.length=0;NT.shown.length=0;NT.log.length=0;NT.chips=0});
 const $=id=>document.getElementById(id);
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const plain=s=>String(s==null?"":s).replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();

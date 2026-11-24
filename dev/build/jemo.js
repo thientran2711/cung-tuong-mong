@@ -38,10 +38,10 @@ function emoRes(p){if(!p)return null;if(p.__kp)p=p.__kp;if(p.kind&&!p.name&&type
 function emoTH(){S.thO=S.thO||{};return S.thO}
 function emoKey(p){if(!p)return"";if(p===S)return"me";if(S.emp&&p===S.emp)return"emp";if(p===S.thO)return"th";if(p.id!=null)return String(p.id);if(p.sid!=null)return"s"+p.sid;return emoRegKey(p)}
 /* r1 fix (review/kit-figure-mood): people with no id / sid (maid, ma ma, any NPC) get a registered key, so the tap on their seal resolves in emoByKey (it was a silent dead tap) */
-const EMOX=new Map(),EMOXK=new WeakMap();let EMOXN=0;function emoRegKey(p){let k=EMOXK.get(p);if(!k){k="x"+(++EMOXN);EMOXK.set(p,k)}EMOX.set(k,p);if(EMOX.size>600)EMOX.delete(EMOX.keys().next().value);return k}
+const EMOX=new Map(),EMOXK=new WeakMap();let EMOXN=0;lifeStore("EMOX mood-seal key -> person (weak, robot-fix-cnv F4)",()=>EMOX.clear());function emoRegKey(p){let k=EMOXK.get(p);if(!k){k="x"+(++EMOXN);EMOXK.set(p,k)}EMOX.set(k,kitWeak(p));if(EMOX.size>600)EMOX.delete(EMOX.keys().next().value);return k}
 function emoByKey(k){if(k==="me")return S;if(k==="emp")return S.emp;if(k==="th")return emoTH();const v=(rivals||[]).find(x=>String(x.id)===String(k));if(v)return v;
  if(/^s\d+$/.test(k)){try{const q=allServ().find(s=>"s"+s.sid===k);if(q)return q}catch(e){}}
- const m=(S.men||[]).find(x=>String(x.id)===String(k));if(m)return m;return EMOX.get(String(k))||null}
+ const m=(S.men||[]).find(x=>String(x.id)===String(k));if(m)return m;return kitDeref(EMOX.get(String(k)))}
 function emoName(p){if(!p)return"";if(p===S)return"ngươi";if(p===S.emp)return"Hoàng thượng";if(p===S.thO)return"Thái hậu";return p.name||""}
 function emoTraits(p){try{if(p===S.thO)return traitsOf("th");return traitsOf(p)}catch(e){return[]}}
 function emoGet(p){p=emoRes(p);if(!p)return{k:"binh",v:0};const e=p.emo;if(!e||!EMO[e.k]||e.v<EJ().floor)return{k:"binh",v:0,why:""};return e}

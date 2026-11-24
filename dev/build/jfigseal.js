@@ -14,14 +14,14 @@
    NEVER covers the face (it stands beside the head, the face is inside the head edge), never clipped (clamped inside the stage / dialog), never above the head (that place is the
    "this is you" marker kitMeMark of jmark).  Off switch for measuring: window.__emoOff=1 (the same as the portrait seals). ===== */
 window.KIT_FIGSEAL=window.KIT_FIGSEAL||{k:.105,min:22,max:50,dx:.194,dy:.916,pad:10};/* pad = clear gap to the stage plaque columns #kshR/#kshL *//* dx/dy = seal centre from the standing anchor, in body heights (owner 18/11 ~06:20Z: one fixed offset for everybody) */
-const KFS_REG=new Map();let KFS_ID=0;
+const KFS_REG=new Map();let KFS_ID=0;lifeStore("KFS_REG figure seal id -> person (weak, robot-fix-cnv F4)",()=>KFS_REG.clear());
 /* kitStageFig is the one maker of img.kesimg: remember WHOSE figure it is (never read from the picture) */
 (function(){if(typeof kitStageFig!=="function")return;const f0=kitStageFig;kitStageFig=function(p,o){let h=f0.apply(this,arguments);try{const q=p&&(p.__kp||p);
-  if(q&&h&&!(o&&o.noSeal)&&h.indexOf('<img class="kesimg"')>=0){const id=++KFS_ID;KFS_REG.set(id,q);if(KFS_REG.size>600)KFS_REG.delete(KFS_REG.keys().next().value);h=h.replace('<img class="kesimg"',`<img class="kesimg" data-kfsp="${id}"`)}}catch(e){}return h}})();
+  if(q&&h&&!(o&&o.noSeal)&&h.indexOf('<img class="kesimg"')>=0){const id=++KFS_ID;KFS_REG.set(id,kitWeak(q));if(KFS_REG.size>600)KFS_REG.delete(KFS_REG.keys().next().value);h=h.replace('<img class="kesimg"',`<img class="kesimg" data-kfsp="${id}"`)}}catch(e){}return h}})();
 /* kszFigHtml (jksize, the person dialog frame) is the other maker of a person's full-body figure: same registry */
 (function(){if(typeof kszFigHtml!=="function")return;const f0=kszFigHtml;kszFigHtml=function(p){let h=f0.apply(this,arguments);try{const q=p&&(p.__kp||p);
-  if(q&&h&&h.indexOf('<span class="kszfs"><img ')>=0){const id=++KFS_ID;KFS_REG.set(id,q);if(KFS_REG.size>600)KFS_REG.delete(KFS_REG.keys().next().value);h=h.replace('<span class="kszfs"><img ',`<span class="kszfs"><img data-kfsp="${id}" `)}}catch(e){}return h}})();
-function kfsPerson(fig){try{if(fig.id==="mefig")return S;const id=fig.dataset&&fig.dataset.kfsp;if(id)return KFS_REG.get(+id)||null;const tok=fig.closest&&fig.closest("#tokens .tok");
+  if(q&&h&&h.indexOf('<span class="kszfs"><img ')>=0){const id=++KFS_ID;KFS_REG.set(id,kitWeak(q));if(KFS_REG.size>600)KFS_REG.delete(KFS_REG.keys().next().value);h=h.replace('<span class="kszfs"><img ',`<span class="kszfs"><img data-kfsp="${id}" `)}}catch(e){}return h}})();
+function kfsPerson(fig){try{if(fig.id==="mefig")return S;const id=fig.dataset&&fig.dataset.kfsp;if(id)return kitDeref(KFS_REG.get(+id));const tok=fig.closest&&fig.closest("#tokens .tok");
  if(tok){const ppl=typeof curPeople==="function"?curPeople():[];return ppl[+tok.dataset.p]||null}}catch(e){}return null}
 function kfsFigs(){return[...document.querySelectorAll("#mefig,#tokens .tok.fig img.figimg,img.kesimg,.kszfs>img")].filter(e=>!e.closest(".kgfig,.kpfig,.kidfig2,.kfsno")&&!(e.closest(".dlg")&&!e.closest(".kbk-pg")&&e.closest("#modal")))/* owner 21/11 #73: a person frame shows the person ONCE: the left figure of a dialog carries no round head seal (it read as a second portrait of the same person); the feeling of a mood event sits on the event picture corner (KIT 28.19b mark) */}
 /* the drawn picture box inside the <img> (object-fit: contain, picture centred) */

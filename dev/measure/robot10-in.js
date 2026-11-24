@@ -79,7 +79,7 @@ function auditOpt(o,m){const txt=strip((o.n||"")+" | "+seenLine(o));const key=tx
  /* (typed-stat review, 4/4 false positives): «thắng:» = «thành:» (win on the roll; fx is the stake); a bare number with no marker may be the win of a
     sure option → compared with the win block AND the cost; the weather note «đi kiệu … Bạc −N» is charged later (jweather wxAfter, BAL.wx.kieuBac): skipped */
  txt.split(/(?=ngay:|thành:|thắng:|hỏng:|thua:|kèm:|tốn:|được:|mất:)/i).forEach(seg=>{if(/kiệu/i.test(seg))return;const pools=/^(thành|thắng):/i.test(seg)?PW:/^(hỏng|thua):/i.test(seg)?PL:PF.concat(PW);if(!pools.length)return;
- seg.replace(RX,(a,lab,sg,n)=>{const k=LAB[lab];const v=(sg==="+"?1:-1)*(+n);const vals=pools.map(p=>p[k]).filter(x=>typeof x==="number");
+ seg.replace(RX,(a,lab,sg,n,off)=>{/* robot-fix-cnv F3: «mỗi tháng Bạc +8» is a periodic amount (paid later, j42 srvMonth), not the effect applied now */if(/mỗi\s+(tháng|tuần|buổi|ngày|năm|đêm)\s*$/i.test(seg.slice(Math.max(0,off-14),off)))return a;const k=LAB[lab];const v=(sg==="+"?1:-1)*(+n);const vals=pools.map(p=>p[k]).filter(x=>typeof x==="number");
   if(!vals.length)return a;/* not in any effect block: a description, not a promise */
   if(!vals.some(x=>x===v||Math.abs(x)===Math.abs(v)))bug("number","option text «"+a+"» but the effect applies "+k+"="+vals.join("/"),"«"+txt.slice(0,160)+"» in «"+strip(m.t||m.title||"").slice(0,60)+"» fx="+JSON.stringify(o.fx||{}).slice(0,120));return a})})}
 {const c0=chooseM;chooseM=function(i){try{const m=Q[0];if(m&&m.opts){if(!m.__r10){m.__r10=1;words((m.t||m.title||"")+" "+(m.h||""),"card");m.opts.forEach(o=>auditOpt(o,m))}}}catch(e){}return c0.apply(this,arguments)}}
@@ -155,6 +155,11 @@ function diffPath(a,b,p){if(a===b||a===undefined)return null;
  if(typeof a!==typeof b||a===null||b===null||typeof a!=="object")return p+": "+J(a).slice(0,60)+" → "+J(b).slice(0,60);
  const ks=new Set(Object.keys(a).concat(Object.keys(b)));for(const k of ks){const r=diffPath(a[k],b[k],p+"."+k);if(r)return r}return null}
 const VOL=new Set(["at"]);
+/* robot-fix-cnv F1: load-time repairs BY DESIGN (the same filter as dev/test/r10-rt.js, reviewed in nc-fix-1): the item census ledger ids (jil: S.il.at is not
+   saved → .iu / il.seq), the face-keep once-flag (fcKeep), the day roster labels of who-is-where (S.roster: j95c re-syncs it at load). Any OTHER path = a bug */
+const RT_REP=/^save\.(S|R\.\d+)\.inv\.\d+\.iu$|^save\.S\.il\.seq$|\.fcKeep$|^save\.S\.roster\./;
+function diffAll(a,b,p,out){if(out.length>60)return;if(a===b||a===undefined)return;if(JSON.stringify(a)===JSON.stringify(b))return;
+ if(a&&b&&typeof a==="object"&&typeof b==="object"){new Set(Object.keys(a).concat(Object.keys(b))).forEach(k=>diffAll(a[k],b[k],p+"."+k,out));return}out.push(p)}
 function roundTrip(){if(!S||S.dead||S.mg)return;const t0=performance.now();let s1;
  try{const d1=ser();VOL.forEach(k=>delete d1[k]);s1=JSON.stringify(d1)}catch(e){bug("save","ser() throws",e.message);return}
  R.lastSave=s1;if(!R.firstSave)R.firstSave=s1;
@@ -165,7 +170,8 @@ function roundTrip(){if(!S||S.dead||S.mg)return;const t0=performance.now();let s
   /* once per life (after the first checkpoint), a save taken while the night flip is pending goes to the real pages too: she can close the game there */
   if(C.uiEvery&&S.nfX&&S.nfX.st!=="done"&&!R.nightCp&&R.nextCp){R.nightCp=1;R.cps.push({buoi:R.buoi,at:where()+" (night flip pending)",save:s1,q:(Q[0]&&strip(Q[0].t||Q[0].title||"").slice(0,60))||""})}return}
  try{quiet=true;deser(JSON.parse(s1));quiet=false;const d2=ser();VOL.forEach(k=>delete d2[k]);const s2=JSON.stringify(d2);
-  if(s1!==s2){const dp=diffPath(JSON.parse(s1),JSON.parse(s2),"save");bug("save","save→load→save changes the state",dp)}}
+  if(s1!==s2){const A=JSON.parse(s1),B=JSON.parse(s2),L=[];diffAll(A,B,"save",L);const real=L.filter(x=>!RT_REP.test(x));R.rtRep=(R.rtRep||0)+(L.length-real.length);
+   if(real.length){const pa=real[0].split(".").slice(1);let x=A,y=B;for(const k of pa){x=x==null?x:x[k];y=y==null?y:y[k]}bug("save","save→load→save changes the state",diffPath(x,y,real[0])+(real.length>1?" (+"+(real.length-1)+" more paths)":""))}}}
  catch(e){quiet=false;bug("save","load of her own save throws",String(e.message)+" "+(String(e.stack).split("\n")[1]||"").trim())}
  R.rt++;R.rtMs+=performance.now()-t0;
  if(C.uiEvery&&R.buoi>=(R.nextCp||1)){R.nextCp=R.buoi+C.uiEvery;R.cps.push({buoi:R.buoi,at:where(),save:s1,q:(Q[0]&&strip(Q[0].t||Q[0].title||"").slice(0,60))||""})}}

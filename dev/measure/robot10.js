@@ -223,12 +223,12 @@ async function uiCheck(p,d,cp,job,bug,R){const e0=p.__errs.length;const t0=Date.
 const UILAG_=UILAG;
 /* after a real load, she must be able to play on: «Sang ngày mới» (kit card buttons closed as she would) must move the clock within 12 presses.
    robot-fix-cnv F2 (24/11): presses as SHE does — the page runs between presses (jnf step() and the card-flip clock are timers) and the card-flip scene
-   (jflip .kmov.kcf: «tap = final still, the kit button closes it», by design) is closed with its own button. The old loop pressed 12 times inside ONE
+   (jflip .kmov.kcf: «tap = final still, the kit button closes it») and every other manual kit scene (j93 kmStage .kmov, e.g. km-reward, dur 60 s, manual) are closed with their own button / a tap, by design; a visitor card playing in the stage encounter (jdfv kitFocus .kfoc: the centre modal stays hidden while it plays there) is answered with its own choice buttons; the morning panel (#dawn, «Tiếp theo») is pressed on — the card flip waits behind it (jflip busy()). The old loop pressed 12 times inside ONE
    page task and never touched the scene: every evening save whose night flipped during the loop read as a soft-lock (dev/test/r10-night-after-load.js) */
 async function nightAfterLoad(p,d,cp,bug){const gt=`((S.turn||0)*3+(S.tuan||0))*10+(S.buoi||0)`;const g0=await p.evaluate(gt);let moved=false,n=0;
-  const answer=()=>p.evaluate(()=>{const vis=e=>e&&!e.hidden&&e.offsetParent!==null;const L=[...document.querySelectorAll('#ov button,#modal button,.kmov.kcf:not(.km-out) button')].filter(x=>x.offsetParent!==null&&!x.disabled);
-   if(!L.length){const sc=document.querySelector('.kmov.kcf:not(.km-out)');if(sc){sc.click();return true}return false}
-   if(!vis(document.getElementById('modal'))&&!vis(document.getElementById('ov'))&&!document.querySelector('.kmov.kcf:not(.km-out)'))return false;const pick=L.find(x=>!/kit-x/.test(x.className))||L[0];pick.click();return true});
+  const answer=()=>p.evaluate(()=>{const vis=e=>e&&!e.hidden&&e.offsetParent!==null;const L=[...document.querySelectorAll('#ov button,#modal button,.kmov:not(.km-out) button,#dawn:not([hidden]) button,.kfoc .kfoc-next,.kfoc button.kfoc-b:not(.kfoc-off)')].filter(x=>x.offsetParent!==null&&!x.disabled);
+   if(!L.length){const sc=document.querySelector('.kmov:not(.km-out)');if(sc){sc.click();return true}return false}
+   if(!vis(document.getElementById('modal'))&&!vis(document.getElementById('ov'))&&!document.querySelector('.kmov:not(.km-out)')&&!document.querySelector('.kfoc .kfoc-b,.kfoc .kfoc-next,#dawn:not([hidden]) button'))return false;const pick=L.find(x=>!/kit-x/.test(x.className))||L[0];pick.click();return true});
   for(;n<12&&!moved;n++){for(let k=0;k<20&&await answer().catch(()=>false);k++)await p.waitForTimeout(250);
    await p.evaluate(()=>{const nx=document.getElementById('next');if(nx&&!nx.disabled)nx.click();else nextBuoi()}).catch(()=>{});await p.waitForTimeout(400);
    moved=await p.evaluate(`(${gt})!==${g0}||S.dead`).catch(()=>false)}

@@ -23,6 +23,9 @@
    Off switch for measuring: BAL.ag.on=0 or window.__agOff=1 (old drips). Loaded last (after j95/j95b/j95c, jtwoway, jmind, j75, jcoopworld).
    ===================================================================================================================== */
 const AG={self:0,inTick:0,errs:[],ms:[],bt:[],q:null,tm:{needs:0,opts:0,sync:0,land:0},stat:{tick:0,slice:0,qdrop:0,acts:0,by:{},wit:0,witNpc:0,land:0,drop:0,mute:0}};
+/* robot-fix-cnv F4 (newlife-leak family): the agent caches are keyed by rival id + week (AG.sc / nc / mwc / askc / na, the slice queue q, the room key rdMe);
+   a new life or a loaded game reuses ids and weeks, so a cache hit handed the OLD life's people to the new one (AG.sc "3:follow".L = last life's consorts) */
+lifeStore("AG agent caches (id+week keyed)",()=>{AG.sc=null;AG.nc=null;AG.mwc=null;AG.askc=null;AG.na=null;AG.q=null;AG.rdMe=null;AG.cB=null});
 function agErr(w,e){try{AG.errs.push(w+": "+(e&&e.message||e));if(AG.errs.length>40)AG.errs.shift();console.error("jagent",w,e)}catch(x){}}
 function agGuest(){try{return !!(window.COOPW&&COOPW.on&&COOPW.seat!=="a")}catch(e){return false}}
 function agLive(){try{return !!(typeof S!=="undefined"&&S&&!S.dead&&BAL.ag&&BAL.ag.on&&!window.__agOff)}catch(e){return false}}
