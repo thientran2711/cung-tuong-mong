@@ -14,7 +14,7 @@
    (93.6) kitNewsRankRow(p,{rank,how,ph}) / kitNewsRankList(rows) → the sắc phong news row: kit face + name (or placeholder) + new rank chip + how known.
    kitEdict({fromWord}) (j93) prints the given «from» word on the old-rank chip (a tú nữ: «Tú nữ»). */
 const KIT_SCN={z:57,edge:4,blur:6,veil:"rgba(20,12,8,.45)",veilNight:"rgba(10,16,48,.45)",night:"brightness(.62) saturate(.85)",intro:1300,toBlur:700,
- fold:{fh:.80,mfh:.94,hfh:.78,msgrX:.22,meX:.82,cX:.02,cW:.60,cTop:.42,nmX:.2,nbW:.42,boxX:.43,boxW:.555,soloFh:.97,soloX:.22},ipad:{fh:.86,mfh:.98,hfh:.84,msgrX:.17,meX:.84,cX:.02,cW:.64,cTop:.40,nmX:.15,nbW:.40,boxX:.41,boxW:.575,soloFh:.97,soloX:.20},gap:8,tail:13};
+ fold:{fh:.80,mfh:.94,hfh:.62,msgrX:.22,meX:.82,cX:.02,cW:.60,cTop:.42,nmX:.2,nbW:.42,boxX:.43,boxW:.555,soloFh:.97,soloX:.22},ipad:{fh:.86,mfh:.98,hfh:.64,msgrX:.17,meX:.84,cX:.02,cW:.64,cTop:.40,nmX:.15,nbW:.40,boxX:.41,boxW:.575,soloFh:.97,soloX:.20},gap:8,tail:13};
 (function(){try{const st=document.createElement("style");st.id="kscn-css";st.textContent=`
 .kscn{position:fixed;z-index:${KIT_SCN.z};overflow:hidden;border-radius:var(--k-rad,12px);background:#2a1a12}
 .kscn-bg{position:absolute;inset:-14px;background-size:cover;background-position:center;filter:blur(${KIT_SCN.blur}px)}
@@ -66,13 +66,13 @@ const kitScene={
   if(!o.msgr){const fh=Math.round(H*K.soloFh);await kitScene.fig(L,o.me,{cx:w*K.soloX,top:H-fh,fh,z:3});
    return{box:kitDlgBox(L,o.choiceTitle||o.storyTitle,[...(o.story||[]),...(o.choice||[])],{x:X,y:gap,w:BW,h:H-2*gap},{y:Math.round(H*.20)},{kind:o.kind,seal:o.seal})}}
   /* LAYOUT A (owner OD 24/11 ~04:35Z, restating ~20:20Z/~20:22Z/~20:27Z): the speaker stands LEFT, FULL BODY, big; his story box on the RIGHT; the choice box BELOW lies over the left figure; THEN her own figure on the
-     RIGHT, HALF BODY (small, cut by the layer's bottom edge on purpose); never two figures stacked on the left. NO choice (two others talking): both FULL BODY, one on each side, the box between. */
+     RIGHT, small (smaller scale than his, WHOLE, never cropped by the layer); never two figures stacked on the left. NO choice (two others talking): both FULL BODY, one on each side, the box between. */
   const msg=o.msgr,hasCh=(o.choice||[]).length>0;
   if(!hasCh){const fh=Math.round(H*K.fh);await kitScene.fig(L,msg,{cx:w*K.nmX,top:H-fh,fh,z:2});const f2=await kitScene.fig(L,o.me,{cx:w*(1-K.nmX),top:H-fh,fh,z:2});
    const bw=Math.round(w*K.nbW),sb=kitDlgBox(L,o.storyTitle,o.story||[],{x:Math.round((w-bw)/2),y:gap,w:bw},null,{kind:o.kind,seal:o.seal});return{story:sb}}
   const mfh=Math.round(H*K.mfh);await kitScene.fig(L,msg,{cx:w*K.msgrX,top:H-mfh,fh:mfh,z:2});
   const sb=kitDlgBox(L,o.storyTitle,o.story||[],{x:X,y:gap,w:BW},{y:ip?52:62},{kind:o.kind,seal:o.seal});const sh=Math.ceil(sb.getBoundingClientRect().height);
-  const hfh=Math.round(H*K.hfh),f2=await kitScene.fig(L,o.me,{cx:w*K.meX,top:gap+sh+10,fh:hfh,z:3});f2.dataset.half="1";f2.__half=1;/* half body: cut by the bottom edge, not clipped by a box */
+  const hfh=Math.round(H*K.hfh),f2=await kitScene.fig(L,o.me,{cx:w*K.meX,top:H-hfh,fh:hfh,z:3});f2.dataset.half="1";f2.__half=1;/* her figure: WHOLE (feet on the floor band, never cropped by the layer: owner OD 23/11 ~20:27Z «no figure is ever clipped») at a clearly SMALLER scale than the speaker (hfh .62 / .64 H vs mfh .94 / .98 H, <= .7 of his height: OD 24/11 ~04:35Z «half body, small»); the boxes may lie over a figure in front of it, never the frame */
   const cy=Math.max(gap+sh+12,Math.round(H*K.cTop)),cw=Math.round(w*K.cW);
   const cb=kitDlgBox(L,o.choiceTitle,o.choice||[],{x:Math.round(w*K.cX),y:cy,w:cw,h:H-cy-gap},{y:26,side:"r"},{kind:o.kind,seal:o.seal,noSeal:true});return{story:sb,choice:cb}},
  close(now,cb){const C=kitScene.cur;kitScene.cur=null;if(!C){cb&&cb();return}const L=C.L;const off=()=>document.body.classList.remove("kscn-on");if(now||kscnCalm()){L.remove();off();cb&&cb();return}
