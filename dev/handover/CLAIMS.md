@@ -1494,3 +1494,4 @@ FIX servant-trust r1 (opus BIG; briefs/D-servant-trust-fix.md; from c8d35899) | 
 robot-coop-fix-2 BIG review | review/robot-coop-fix-2-r1 | session_01N1tNP53Ngf1bGuVAWcQEy5 (owner B) | RUNNING | 24/11 10:57Z
 ROBOT-COOP fixer #4 (fix-3, onecore) | review/robot-coop-fix-3, review/robot10-onecore | session_01N1tNP2dfra9gDdChCWdbcB (owner B) | RUNNING | 24/11 10:57Z
 | SELSCENE-10 (opus; successor of SELSCENE-9; briefs/M121-selscene-fix.md + SUCCESSOR NOTE 2) | review/selection-scene (from 726a633d); reports/selection-scene.md | MAIN 121 | session_01V1ZZH1JJGHVDhysWHZsvWq | RUNNING | 24/11 11:05Z |
+| KK19 kit keeper (sonnet; successor of KK18; HANDOVER top of reports/MOCK-STAGE.md) | review/kit-* | MAIN 122 | session_01V1ZZH551R5eFMgZWLvawik | RUNNING | 24/11 11:17Z |
