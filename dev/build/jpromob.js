@@ -94,7 +94,7 @@ function pbCost(p,src,o){const C=BAL.promoR.sp.cost,me=p===S;let t="";try{
 function pbTry(p){if(!pbCan(p))return"";const s=pbS(p),e=exS(p),A=pbA();
  if(e.grace===e.to&&e.gx!=null&&A>=e.gx&&!e.pass&&!e.pend&&!(p===S&&e.w1!=null)){delete e.grace;delete e.gw;delete e.gx;if(p===S)log("Lượt thi riêng chưa dùng đã hết hạn, tới kỳ sắc phong thì xét như mọi người.")}
  if(pbOpen(p))return"";if(s.q.length)return pbGrant(p,s.q.shift(),{birth:1});
- if(p.confined||pbRoadDone(p)||!pbRowsOk(p))return"";const SP=BAL.promoR.sp;
+ if(p.confined||(pbRoadDone(p)&&pbKyAt(A))||!pbRowsOk(p))return"";const SP=BAL.promoR.sp;/* rv: the whole road met → she sits the kỳ only when one is open THIS month; outside a kỳ the favour / patron exam is its value (OD ~08:30Z «không cần tới kỳ») */
  const cs=pbSungCut(p);if((p.sung||0)>=cs&&s.sung.n<SP.sung.life&&(s.sung.at==null||S.turn-s.sung.at>=SP.sung.every)){s.sung.n++;s.sung.at=S.turn;return pbGrant(p,"sung",{cut:cs})}
  const tk=pbThK();if(tk&&(s.th[tk]||0)<SP.th.life){const ct=pbThCut();if((p.th||0)>=ct){s.th[tk]=(s.th[tk]||0)+1;return pbGrant(p,"th",{cut:ct})}}
  const q=typeof queenP==="function"?queenP():null;if(q&&q!==p&&q!==S&&!q.out&&q.alive!==false&&e.to<=SP.hh.maxTo){const qk="hh:"+key(q);
@@ -118,7 +118,8 @@ function pbDlWhich(){const B=BAL.promoR.dl,D=pbDlSt(),A=pbA(),F=typeof FEST!=="u
  if(!k&&!S.thDead&&F.thanhtho&&S.month===+F.thanhtho.m&&B.thTho.includes(S.thAge)&&!sn["th"+S.thAge]){sn["th"+S.thAge]=1;k="thTho";w=`Thái hậu thọ ${S.thAge}`}
  if(!k&&S.emp&&F.vantho&&S.month===+F.vantho.m&&B.empTho.includes(S.emp.age)&&!sn["e"+S.emp.age+era]){sn["e"+S.emp.age+era]=1;k="empTho";w=`Hoàng thượng thọ ${S.emp.age}`}
  const hk=S.heir&&S.heir.k?String(S.heir.k.name||"")+":"+(S.heir.k.id||""):"";if(sn.h==null)sn.h=hk;else if(hk&&sn.h!==hk){sn.h=hk;if(!k){k="thaitu";w=`lập ${S.heir.k.name} làm Thái tử`}}
- if(!k)return null;if(D.last!=null&&A-D.last<B.minGap)return{k,w,down:1};D.last=A;return{k,w}}
+ if(!k)return null;{const P=pbSt();if(P.mt!=null&&A<P.mt)return{k,w,tang:1}}/* rv (OD 24/11 ~07:00Z real «none during quốc tang»): the occasion passes uncelebrated */
+ if(D.last!=null&&A-D.last<B.minGap)return{k,w,down:1};D.last=A;return{k,w}}
 /* full conditions of a đại lễ for one person (her and every NPC by the same rows) */
 function pbDlRows(p){const B=BAL.promoR.dl,to=rkOf(p)+1;const L=exBase(p).filter(x=>!/^Kỳ sắc phong/.test(x[1]));const d=B.duc[Math.min(B.duc.length-1,to)]||0;
  if(d)L.push([(p.duc||0)>=d,`Đức ${Math.round(p.duc||0)} (cần ${d})`]);return L}
@@ -128,6 +129,7 @@ function pbDlCost(p){const B=BAL.promoR.dl,me=p===S;const n=Math.max(0,Math.min(
  for(const v of consorts())if(v!==p&&!v.out)oanAdd(v,p,B.oan);return ""}
 /* the đại lễ month (pbMonth): direct decrees, or a seat contest when seats are short; the kỳ of this month is replaced */
 function pbDl(){const B=BAL.promoR.dl;if(!B||!B.on)return"";const X=pbDlWhich();if(!X)return"";const A=pbA(),K=pbSt().ky,nm=PB_DL[X.k];
+ if(X.tang)return `<b class="g">${nm}</b> (${X.w}): cả cung đang để quốc tang, không mở đại lễ, không có kỳ sắc phong. `;
  if(X.down){if(!K.at[A]){K.at[A]="dl:"+X.k}return `<b class="g">${nm}</b> (${X.w}): mới có đại lễ chưa lâu, năm nay chỉ mở kỳ sắc phong. `}
  delete K.at[A];window.__pbDl=(window.__pbDl||0)+1;
  const all=[S].concat(pbGuest()?[]:rivals.filter(v=>!v.coop));const ok=all.filter(p=>pbDlOk(p));const by={};for(const p of ok){const r=rkOf(p)+1;(by[r]=by[r]||[]).push(p)}
