@@ -1,11 +1,15 @@
 /* in-page: the REAL crowd of one buổi at Ngự hoa viên → KAR groups. Numbers = proposed BAL.area (law 4; numbers are ours, see report). */
-window.BAL=window.BAL||{};BAL.area=BAL.area||{
- /* law 8: Ngự hoa viên areas after the Forbidden City Imperial Garden (Đôi Tú sơn rockery NE, Phù Bích/Trừng Thụy pavilions over ponds, flower beds + paths of the central axis) */
- vuon:[{k:'nonbo',n:'Non bộ',x:0,acts:['tryst','ambush','spy','scheme','ag_cx3:talkSecret','walk','changed']},
-       {k:'loihoa',n:'Lối hoa',x:.5,acts:['stroll','attend','seekemp','paint','ag_flaunt','ag_effort','walk']},
-       {k:'dinh',n:'Đình bên hồ',x:1,acts:['music','poem','ag_cx3:pmPlay','ag_cx3:pmDuel','ag_cx3:talkHealth','walk']}],
- view:{kv1:3,kv2:4},gap:.06,folDx:.40,feet:.9,zoom:{kv1:1,kv2:1.45},folS:.86,folDy:.035,panMs:760,walkMs:700,stepK:1.12,spot:{kv1:.24,kv2:.30},farOp:.55,stepX:.10,stepY:.045,pkMax:6,extraName:'Lối đi'};
-window.KSC=async function(want){try{BAL.df.idle={every:[1e9,1e9],first:1e9}}catch(e){}const CAP3={'ag_cx3:pmPlay':'Đang cùng chơi cờ','ag_cx3:pmDuel':'Đang thách đấu','ag_cx3:talkSecret':'Đang chia sẻ chuyện riêng','ag_cx3:talkHealth':'Đang hỏi han sức khỏe','ag_flaunt':'Đang khoe sắc','ag_effort':'Đang dạo vườn','ag_follow':'Theo hầu'};
+window.BAL=window.BAL||{};BAL.area={ /* = dev/AREA_PLAN.md §4 (proposed BAL, law 4). MOCK-ONLY keys: x = crop of the ONE existing garden painting for the area scene,
+   hs = hotspot box on that painting for the garden map (stand-in 'tạm' until Foreman C paints the bird's-eye map + one scene per area) */
+ vuon:[{k:'ngudao', n:'Ngự đạo', acts:['stroll','attend','escort','seekemp','ag_flaunt','ag_cx2:court','ag_cx2:show','ag_cx2:flat'],net:['Kiêu ngạo','Tham vọng'],x:.52,hs:{x:.33,y:.70,w:.20,h:.16}},
+       {k:'vuonhoa',n:'Vườn hoa',acts:['paint','walk','ag_effort','ag_cx3:talkPraise','ag_cx3:talkGossip','sell','play'],net:['Ân cần','Nhiều chuyện','Ham vui'],x:.12,hs:{x:.02,y:.52,w:.22,h:.18}},
+       {k:'thuyta', n:'Thủy tạ', acts:['music','poem','ag_cx3:qin','ag_cx3:talkHealth'],net:['Điềm tĩnh','Khiêm nhường','Ham học'],x:1,hs:{x:.70,y:.18,w:.24,h:.20}},
+       {k:'dinhco', n:'Đình cờ', acts:['ag_cx3:pmPlay','ag_cx3:pmDuel','wager'],net:['Nóng nảy','Thực tế'],x:.72,hs:{x:.40,y:.36,w:.18,h:.14}},
+       {k:'nonbo',  n:'Non bộ',  acts:['tryst','spy','scheme','ambush','ag_cx3:talkSecret','changed'],net:['Kín đáo','Xảo quyệt','Thù dai'],x:0,hs:{x:.13,y:.22,w:.17,h:.18}}],
+ near:{ngudao:['vuonhoa','thuyta'],vuonhoa:['ngudao','thuyta'],thuyta:['dinhco','vuonhoa'],dinhco:['thuyta','nonbo'],nonbo:['dinhco','vuonhoa']},
+ route:['ngudao','vuonhoa','thuyta','dinhco'],bold:{sac:75},joinAff:10,avoidAff:-20,grpMax:4,view:{kv1:3,kv2:4},extraName:'Lối đi',moveKh:0,
+ gap:.06,feet:.9,folS:.86,folDx:.40,folDy:.035,zoom:{kv1:1,kv2:1.45},panMs:760,walkMs:700,stepK:1.12,stepY:.045,spot:{kv1:.24,kv2:.30},farOp:.55,pkMax:6};
+window.KSC=async function(want){try{BAL.df.idle={every:[1e9,1e9],first:1e9}}catch(e){}const CAP3={'ag_cx3:pmPlay':'Đang cùng chơi cờ','ag_cx3:pmDuel':'Đang thách đấu','ag_cx3:talkSecret':'Đang chia sẻ chuyện riêng','ag_cx3:talkHealth':'Đang hỏi han sức khỏe','ag_flaunt':'Đang khoe sắc','ag_effort':'Đang dạo vườn','ag_follow':'Theo hầu','ag_cx3:qin':'Đang gảy đàn'};
  const b0=S.buoi;let best=null;
  for(let sd=0;sd<14;sd++){S.j95seed=1000+sd*7919;for(const b of [1,2]){S.buoi=b;const R=j95plan();for(let kh=0;kh<4;kh++){let n=0,pr=0;for(const id in R.P){const w=R.P[id][kh];if(w&&w[0]==='vuon'){n++;if(w[2]&&w[1]!=='follow')pr++}}
    const sc=-Math.abs(n-want)+(pr?3:0);if(!best||sc>best.sc)best={seed:S.j95seed,b,kh,n,pr,sc}}}}

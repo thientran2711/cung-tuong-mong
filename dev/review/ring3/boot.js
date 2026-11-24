@@ -8,5 +8,10 @@ async function boot(dev,dsf,minP,extra){const srv=await D.serveRoot();const b=aw
  await g.waitForFunction(()=>{['kroul','kroulw','dawn','kload','kpodov'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});document.querySelectorAll('.kmov,.kmfls').forEach(e=>e.remove());
   for(const e of [...document.body.children]){if(e.id==='modal'||e.id==='title'||e.querySelector('#tabs'))continue;const cs=getComputedStyle(e),r=e.getBoundingClientRect();
    if(cs.position==='fixed'&&cs.display!=='none'&&r.width*r.height>=innerWidth*innerHeight*.8){const bt=e.querySelector('button.kbtn,button');if(bt&&!e.__qcPressed){e.__qcPressed=1;bt.click()}else e.remove()}}try{for(let j=0;j<8&&Q.length&&!S.dead;j++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}}catch(e){}return !Q.length&&(window.__qcN=(window.__qcN||0)+1)>12},null,{timeout:60000,polling:150}).catch(()=>{});
+ /* ONE consort life on every device (owner 14:50Z complete mock): SAVE=<file> — first run writes the save, later runs load the same one */
+ if(process.env.SAVE){const fs=require('fs'),f=process.env.SAVE;
+  if(fs.existsSync(f)){await g.evaluate(j=>{localStorage.setItem(SK(3),j);SLOT=3;const d=loadSlot(3);quiet=true;d.tab='act';deser(d);quiet=false;Q.length=0;document.getElementById('title').hidden=true;render()},fs.readFileSync(f,'utf8'))}
+  else{const j=await g.evaluate(()=>{save();return localStorage.getItem(SK(3))});fs.writeFileSync(f,j)}
+  console.log('LIFE',await g.evaluate(()=>S.name+' · '+(S.origin&&S.origin.k)+' · rank '+S.rank+' · '+S.year+'/'+S.month+'/'+S.tuan+' b'+S.buoi))}
  return {srv,b,ctx,pg,g}}
 module.exports={boot};
