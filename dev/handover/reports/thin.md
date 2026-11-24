@@ -405,6 +405,7 @@ Worked examples (valid; copy the shape):
 ```
 
 ## ENGINE P6» when ready (~1–2 h); write now from this schema.
+ENGINE #4 (opus, session_01N1tNP5RyEw6T1AADGb6c75) on **review/thin-p6** (from thin-p0-r1). Engines `dev/build/jworldc.js` (world) + `dev/build/j70c.js` (routes); data `dev/build/jwsd.js` / `dev/build/j70sd.js` (built by `python3 dev/build/jwsd_build.py` / `python3 dev/build/j70sd_build.py`, which read every writer file); numbers `BAL.wc` / `BAL.j70c` (jbal2.js, law 4). Validators `python3 dev/test/wseeds_validate.py [files…] [--min] [--kinds a,b]` and `python3 dev/test/j70seeds_validate.py [files…] [--min] [--meths a,b]`; fixtures `dev/test/wc-fixture.jsonl`, `dev/test/j70c-fixture.jsonl`; play tests `node dev/test/wc-play.js [file]`, `node dev/test/j70c-play.js [file]`. Engine sha posted in «## ENGINE P6» when ready (~1–2 h); write now from this schema.
 **WRITER FILES (one per writer; builders/validators read every `dev/handover/content/thin/wseeds*.md` resp. `j70seeds*.md`; ids unique across files; one JSON object per line, lines not starting with `{` ignored):**
 - `wseeds_a.md` writer A = WORLD kinds of jworld.js: **tang away tuyen hoa dis dich su tho sao xa** (≥4 per kind, ≥40)
 - `wseeds_b.md` writer B = WORLD kinds of jworld2.js: **day lap hau thb thi vuong ret trung vuco cam trom phong hon ngoai phat benh tinh** (≥3 per kind, ≥51)
@@ -502,3 +503,6 @@ DONE b6d494b0 fseeds_a.md 117 rows: stage 49 (C 28 / W 5 / G 5 / B 2 / P 4 / R 5
 DONE e37958f8 fseeds_b.md 103 rows: stages 42 (6 per festival: C 4 + non-C 2; trungthu vantho trungcuu thanhtho dongchi lapbat giaothua), own comps 28 (4 per festival), prizes 21 (3 per festival; 15 with IT key), shared comps fc-xb-c01..c12 (12); self-check passed (step sums, banned words, labels <= 8 words, placeholders) validator pending (not on review/thin-p6 yet)
 DONE e37958f8 validator 0 errors 0 warnings (103 rows; stages 42, comps 40, prizes 21; ~208 composed variants per festival; engine 71fe6b05)
 DONE b6d494b0 fseeds_a.md 117 rows: stage 49 (C 28 / W 5 / G 5 / B 2 / P 4 / R 5; 7 per fest, ≥4 C each) comp 40 (28 own = 4 per fest + 12 shared fc-xa-c01..12) prize 28 (4 per fest) validator 0 errors (71fe6b05; fixes in next commit)
+
+## ENGINE P6
+- 01:3xZ 24/11 ENGINE #4 (opus, session_01N1tNP5RyEw6T1AADGb6c75). START_CTX ~3 % (used_tokens reads 0 → own estimate; roll at ~28 %, ceiling 60 %). Branch review/thin-p6 from thin-p0-r1 a76ba1e4 (thin-p2/p3/p4 not merged). «## API P6» published; engines + validators next (sha here when ready).
