@@ -32,13 +32,19 @@ function dlgsResolve(spec,c){try{if(!spec||!dlgsOn()||!Array.isArray(spec.lines)
 /* attach to the card the family just pushed (the last Q item pushed since n0, matched by test) */
 function dlgsAttach(n0,d,test){if(!d)return false;for(let i=Q.length-1;i>=Math.max(0,n0);i--){const m=Q[i];if(m&&!m.dlg&&(!test||test(m))){m.dlg=d;DLGS.n++;return true}}return false}
 /* the player: one kit scene, two full figures (her right), the KIT §95 dialogue; cb when the last line is read */
-async function dlgsPlay(d,cb){let done=false;const fin=()=>{if(done)return;done=true;DLGS.playing=false;document.body.classList.remove("kdlgs-on");try{cb&&cb()}catch(e){console.error(e)}};
+async function dlgsPlay(d,cb){let done=false,Sc=null,wd=0,to=0;const B=BAL.dlgs,W=B.wd;
+ const fin=()=>{if(done)return;done=true;clearInterval(wd);clearTimeout(to);DLGS.playing=false;DLGS.cur=null;document.body.classList.remove("kdlgs-on");try{cb&&cb()}catch(e){console.error(e)}};
+ /* close OUR layer only (kitScene.close acts on kitScene.cur: another scene opened since then must not be closed in our place, and our callback must not wait on it) */
+ const drop=()=>{try{if(Sc&&kitScene.cur===Sc)kitScene.close(true);else if(Sc&&Sc.L&&Sc.L.isConnected)Sc.L.remove();if(!kitScene.cur)document.body.classList.remove("kscn-on")}catch(e){console.error(e)}};
  DLGS.playing=true;document.body.classList.add("kdlgs-on");
- try{const B=BAL.dlgs,U=typeof IMG_U==="function"?IMG_U:(x=>x);const Sc=kitScene.open({bg:U(d.bg),intro:B.intro});try{Sc.L.setAttribute("data-vp-skip","")}catch(e){}const g=Sc.L.g,ip=document.documentElement.classList.contains("kv2"),K=ip?B.ipad:B.fold,fh=Math.round(g.H*K.fh);
-  await Sc.fig(d.figs[0],{cx:g.w*K.lx,top:g.H-fh,fh,z:2});await Sc.fig(d.figs[1],{cx:g.w*K.rx,top:g.H-fh,fh,z:3});
+ /* F4 WATCHDOG: DLGS.playing is never left on — the scene layer gone from the page (another scene / a re-render removed it) = end now;
+    the last line read but the fade-out never called back within BAL.dlgs.wd.close ms = drop the layer, end (the card shows) */
+ wd=setInterval(()=>{if(done)return clearInterval(wd);if(Sc&&Sc.L&&!Sc.L.isConnected){try{DLGS.cur&&DLGS.cur.stop()}catch(e){}drop();fin()}},W.tick);
+ try{const U=typeof IMG_U==="function"?IMG_U:(x=>x);Sc=kitScene.open({bg:U(d.bg),intro:B.intro});try{Sc.L.setAttribute("data-vp-skip","")}catch(e){}const g=Sc.L.g,ip=document.documentElement.classList.contains("kv2"),K=ip?B.ipad:B.fold,fh=Math.round(g.H*K.fh);
+  await Sc.fig(d.figs[0],{cx:g.w*K.lx,top:g.H-fh,fh,z:2});await Sc.fig(d.figs[1],{cx:g.w*K.rx,top:g.H-fh,fh,z:3});if(done)return;
   Sc.show();const bh=Math.round(g.H*K.boxH),bw=Math.round(g.w*K.boxW);
-  DLGS.cur=kitDialogue.play(Sc,{lines:d.lines,box:()=>({x:Math.round((g.w-bw)/2),y:g.H-bh,w:bw}),onDone:()=>{DLGS.cur=null;Sc.close(fin)}});
-  DLGS.log.unshift({t:Date.now(),n:d.lines.length,who:d.names.join(" · ")});DLGS.log.length=Math.min(DLGS.log.length,20)}catch(e){console.error(e);try{kitScene.close(true)}catch(x){}fin()}}
+  DLGS.cur=kitDialogue.play(Sc,{lines:d.lines,box:()=>({x:Math.round((g.w-bw)/2),y:g.H-bh,w:bw}),onDone:()=>{DLGS.cur=null;to=setTimeout(()=>{drop();fin()},W.close);if(kitScene.cur===Sc)Sc.close(fin);else{drop();fin()}}});
+  DLGS.log.unshift({t:Date.now(),n:d.lines.length,who:d.names.join(" · ")});DLGS.log.length=Math.min(DLGS.log.length,20)}catch(e){console.error(e);drop();fin()}}
 /* the card waits under the scene: showModal resolves the card's scene ONCE (m.dlg, or a family resolver by the card's pid / tag), plays it, then the card */
 DLGS.R=[];/* [{test:m=>bool, fn:m=>resolved|null}] — one per family */
 function dlgsFor(m){if(m.dlg)return m.dlg;if(m.__dlgk)return null;m.__dlgk=1;for(const r of DLGS.R){try{if(r.test(m)){const d=r.fn(m);if(d){m.dlg=d;DLGS.n++;return d}return null}}catch(e){console.error(e);return null}}return null}
