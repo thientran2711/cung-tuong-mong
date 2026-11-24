@@ -968,6 +968,34 @@ SẴN SÀNG KIỂM review/law1-maid-away 63d726941059afd8e134f692609e30eed30b2d2
 | rejoin (both sides) | ok:false ×2 | ok:false |
 Read: N3 behaves as designed (early step = 0 ms, a key that moves is not «stuck»; a real long stall still FAILs through coopTurnP95). The budget FAIL and rejoin ok:false are the GAME (LIVE 502c48c9 on both sides, not this test-only branch): the 20-min week-end stall belongs to the week-end STUCK family (FIXER #6b); rejoin ok:false on main too → flagged to Foreman B. Harness note (not fixed here): coop-lag cannot use a local Worker (missing the coop-e2e localhost launch args).
 SẴN SÀNG KIỂM review/robot-coop-tail 08dc80311255b60ea30cc821c466d5e0b62a1668
+#### Round «b» (fix-3 32121242 vs main 502c48c9; harness d4b4408d overlay, CAP 600, RTW=1, NEGTRAP, pair 1 × 1 kiếp, 3 rounds/side, local main Worker :8798)
+| row | fix-3 r1 / r2 / r3 | main r1 / r2 |
+|---|---|---|
+| room | 17 wk ok / 15 wk ok / 5 wk ok | 3 rooms stuck, timeout (EXIT 124) / stuck at 0 buổi |
+| `R[].resHead` (host) | 8 hits / 8 hits / 0 | 0 / 0 |
+| `R[].resHall` (guest) | 0 / **9 hits** / 0 | 0 / 0 |
+| `S.suc` 100 → 99 | 1 (guest) / 1 (host) / 0 | 1 (guest) / 0 |
+| `S.qPool[].name` (guest) | 0 / 0 / 0 | 1 / 0 |
+**Verdict: fix-3 does NOT close the resHall family** (main sides were stuck too early to reach it). Traced on the repro saves (solo load, setters on the loaded fields, probe /home/user/wt/f7out/probe/rt.js — container-local):
+- host save (…-1wc669a): the friend's entry R[10] (id 902, coop, Đáp ứng) sits in head 2 / hall «tay» WITH NPC R[3] (id 4, tay, head 2); load → j95c `j95cCap` (inside palFix) drops the LAST over-cap resident = the friend (resHead 2→null, resHall tay→null, palLone 1).
+- guest save (…-2jgfuz): her own S (head 2, tay) + NPC R[3] (head 2, tay) + NPC R[7] (head 2, dong); load → palFix `hallFix` (BAL.res.side per hall) moves R[3] tay→dong and caps R[7] out.
+- = two people in one side hall of head 2 on BOTH seats (law 6b). The friend's house (relayed by fix-3 houseWire) is placed without the head's hall count, or an NPC is housed into her hall. Fix direction: the host's housing (palFix/hallFix/j95cCap) must count the friend entry as a resident (host-authoritative), and the guest takes the host's result for her own S.resHall/resHead — needs a design check with the fix-3 owner/reviewer (fix-3 is in BIG review 59azvSi4).
+Other save round-trip families (traced on main):
+- `S.qPool[].name` (guest): jnamefix `nmFix("load")` (deser wrap) runs as OWNER on a co-op guest save (COOPW not on yet at load → nmOwner() true); the friend's coop entry R[11] «Giang Mộng Dao» is held first (e.guest) and her own pool candidate «Thượng Quan Mộng Dao» shares the short form «Mộng Dao» → renamed («like»). Real on a guest reload. Fix: skip the load sweep for a co-op save (S.coopRoom set and a coop entry in rivals); the host's nmFix("join") already renames at join.
+- `S.suc` 100 → 99: j? `khFit(p)` on load caps suc at sucCap(p) (99); some live writer lets Sức reach 100 above the cap — writer not traced yet (set a setter on S.suc in a live co-op run / NEGTRAP-style trap).
+- `R[].staff[].hue` + same family `R[].hue`: FIXED → **review/robot-coop-savert 2df73a76** (from LIVE 502c48c9): the 4 creators of saved people stop writing the dead `hue` (j10 mkServ, j3 drawFace, jstaff elder servant, jcoopworld friend servant); dev/test/hue-dead.js main FAIL → branch PASS; undef-scan PASS. Gates NOT run yet (quickcheck, coop-e2e ×2, old save).
+
+#### Week-end STUCK family (taken over from #6b, Foreman B 21:48Z)
+| dump | cause |
+|---|---|
+| U1 p02 r16-w32, r17-w15, r18-w2 (robot10-coop-saves u1/dumps) | **cause 3** (ngo=ngoW=nfr=w, sent w−1, Q 0, «night w» ×80, f=true = the friend is a consort in rivals) |
+| U2 p02s r12-w98, r13-w185 (u2/dumps) | cause 1 (host ngoW −1, guest already ended, friend just reborn) → fixed on fix-4 9c442f44 |
+Cause-3 lead (not proven): the U1 pair-2 stuck save (u1/pair2-S1-stuck-wk14-buoi3-1v7zrt6.json, host) holds `S.nfX = {d:14, st:"open", fr:"feign", mgAt set, dlg:1, me: absent}` — the friend chose Tranh sủng and played her steal game, the HOST never chose. jnf `endTurn` wrapper returns (hold + wake) while x.st≠"done", so every nCheck night call returns with buổi 3 → loop. In a SOLO load of that save the choice card is shown again (heal → showChoice) and the week ends, so the co-op hold is elsewhere: suspects = jsmg host chooseM wrapper / x.st «mg» never back to «open» on the host, heal not re-showing (nfch removed by a co-op path while dlg=1), or step not reached. Harness **review/robot10-coop 918bfa84** (test-only): the stuck dump now adds `nf` = S.nfX + day + nfC/nfN/nfFin/nfW + tonight + flip scene on + stealMgBusy + nfch queued + friend-as-consort → runners re-fetch (Foreman B decides); the next cause-3 dump names the holding state.
+
+### HANDOVER (FIXER #7 → FIXER #8; rollover by context: START_CTX ≈4 %, now ≈29 % of 1M)
+- SSK sent: review/law1-maid-away **63d72694**, review/robot-coop-tail **08dc8031** (tables above). fix-2-r3 71076b61 / fix-3 32121242 / fix-4 2d4d646f in BIG review — answer their FAILs first.
+- Queue: (1) review/robot-coop-savert 2df73a76 → gates (quickcheck alone, coop-e2e SWAP 0/1 vs a local main Worker, old save) → SSK; add the `S.qPool[].name` fix (nmFix load skip for a co-op save, + test from the repro save) and the `S.suc` writer if found, same branch (law 11, one save round-trip family branch); (2) cause-3 stuck: wait for a dump with `nf` (harness 918bfa84) or reproduce: U1 pair 2 (SEED 1, SWAP=0) re-sticks within a few weeks; (3) resHall/resHead: report above → Foreman B / fix-3 reviewer; fix after their word.
+- Box (lost): wrangler `npm i wrangler@4` in /home/user/wt/wr; Worker `wrangler dev --port 8798 --ip 127.0.0.1` in a main worktree's coop/worker (start with nohup). coop-lag cannot reach a local Worker (no localhost launch args) → run it on LIVE. 4 cores only: never run a quickcheck/role-parity next to robot pairs.
 
 ## MGSKIN-WIRE
 PRIORITY #1 CHECK: OD 0 | ledger 0 | claims 8 | main kitMgSkinAdd/mgpSkin/kg82SkinSrc (j82, jmgpool; reused, no new mechanism) | review/* review/kit-mgboardof-r1 c46a17f2 (merged, not LIVE yet) | reports F-MGSKIN-A..H, kit-mgskin.
