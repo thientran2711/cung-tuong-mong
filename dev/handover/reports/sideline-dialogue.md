@@ -22,7 +22,7 @@ ONE data shape for every dialogue scene, side lines (this file) AND main roads (
 - `role` = a cast key the family's own engine already resolves to a REAL living person (law 6b). Side-line role keys: j72 `A B M me` · j7 `plotter target maid me` · j68 `A B M me` · ky `W me` · j70 `M me` (her cung nữ brings what she saw) · j71 `B A W M me` · wc `A B M me`. Roads (E): the road's cast keys (`v`, `dad`, …) + `me`.
 - `text`: polished cổ trang (VANPHONG, law 7): no digits, no %, no odds words; the family's own placeholders (`{A}` `{O}` `{goi}` `{xung}` `{M}` `{plotter}` `{W}`…); ≤ BAL.dlgs.maxCh characters per line. Rules of content: line 1–2 tell who she is and what happened, the middle gives the detail that makes it a story, the last line leads into the task / choice. `L` speaks ≥1 line; `me` speaks ≥1 line unless `watch`.
 - WHERE IT HANGS: never inside the seed files (THIN owns them). A side table keyed by the unit id: `{"id":"<fam>:<unit id>","dlg":{…}}` (unit id = seed id, old template id, or `<seed id>#s<n>` for step n). Built into `dev/build/jdlgsd.js` (DLGS_DATA) by `dev/build/jdlgsd_build.py`.
-- RUNTIME (resolved, = exactly the KIT §95 call): the family adapter resolves roles + placeholders and puts on its card `m.dlg = {bg, figs:[srcL, srcR], names:[nL, nR], lines:[{fig:0|1|null, who:name, text, focus}]}` (strings only → the card survives a save). A showModal wrapper plays `m.dlg` ONCE before the card shows (kitScene.open + Sc.fig + kitDialogue.play), then the card (choice) appears as today. Co-op: the card is in the seat's own Q, so the scene shows on the seat whose quest it is (host computes the world, never the scene). Old saves: cards without `dlg` show as before.
+- RUNTIME (resolved, = exactly the KIT §95 call): `{bg, figs:[srcL, srcR], names:[nL, nR], lines:[{fig:0|1|null, who:name, text, focus}]}` (strings only). It is found for a card either on the card (`m.dlg`, set by j71c/jworldc with `dlgsMk(id, cast, fill, at)`) or by a family resolver keyed by the card's pid (`DLGS.R`: q72o, e68c:*, j7c, kyngo, j70 seen). The showModal wrapper lets the card's own gates run FIRST, then (only for a card really shown) hides it, plays the scene ONCE (kitScene.open + Sc.fig + kitDialogue.play) and shows the card (choice) after the last line. Background = `at`, else the family's place, else where she stands (S.place). Roads (E): call `dlgsMk("<road unit id>", {<cast key>: A6-like actor {k,o,n}}, fill, at)` and put the result on the chapter card as `dlg`. Co-op: the card is in the seat's own Q, so the scene shows on the seat whose quest it is (host computes the world, never the scene). Old saves: cards without `dlg` show as before.
 
 ## API DLG (writers)
 - **ENGINE READY on review/sideline-dlg 03f4f781**: `dev/build/jdlgs.js` (shared player: a card carrying `m.dlg` plays its scene once before it shows; j72 adapter LIVE on every việc nhờ offer), data `dev/build/jdlgsd.js` (built by `python3 dev/build/jdlgsd_build.py` from content/dlg/*.md), numbers `BAL.dlgs` (jbal2.js). `node dev/test/dlgs-play.js <outdir> fold,ipadAir 3` ALL PASS 188 (3 lead scenes, Fold + iPad: scene before card, two figures, title = speaker, spotlight, tap-finish, card after, never twice, 0 page errors). Writer brief: dev/handover/briefs/b-dlg-writer.md (9 slices W1–W9).
@@ -34,13 +34,17 @@ ONE data shape for every dialogue scene, side lines (this file) AND main roads (
 | family | units | with scene | plays in game |
 |---|---|---|---|
 | j72 (110 old + 256 composed) | 366 | 3 | yes |
-| j7 | 81 | 0 | adapter next |
-| j68 comp | 460 | 0 | adapter next |
-| ky | 77 | 0 | adapter next |
-| j70 routes | 78 | 0 | adapter next |
-| j71 comp | 80 | 0 | adapter next |
-| wc | 91 | 0 | adapter next |
-| ALL | 1233 | 3 | |
+| j7 | 81 | 1 | yes |
+| j68 comp | 460 | 1 | yes |
+| ky | 77 | 1 | yes |
+| j70 routes | 78 | 1 | yes (her cung nữ reports a tell aimed at her; not when she saw it herself) |
+| j71 comp | 80 | 1 | yes |
+| wc | 91 | 1 | yes |
+| ALL | 1233 | 9 (lead scenes, content/dlg/lead.md) | |
+
+## LOG
+- 07:2xZ c5aba2a7: all 7 adapters live; `node dev/test/dlgs-play.js <out> fold,ipadAir 9` ALL PASS 506 (every scene of DLGS_DATA cast in a real life and played: scene before card, 2 painted figures, title = speaker, spotlight, tap-finish, card after with choices, never twice, 0 page errors). Shots looked at (Fold + iPad): j72 thường tại / cung nữ letter / rsv servant, j68 Quý phi, ky ma ma, j70 cung nữ report.
+- NOT YET: the 33 old j7 ev() cards, 90 old j68 decisions, 25 old kỳ ngộ, 51 old j70 routes (old composed text: second wave after W1–W9), festival STAGES (no person speaks), coop-e2e, old saves.
 
 ## KIT REQUEST (for KK18, not blocking)
 - §95 kitDialogue: the speech tail always points LEFT (kitDlgBox tail on the left edge); when the RIGHT figure (her) speaks it should point right. Ask: a `tail:"r"` side (or auto from the lit figure's side). Until then the box sits bottom-centre over both figures.
