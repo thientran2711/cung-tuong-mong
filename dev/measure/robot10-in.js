@@ -71,7 +71,10 @@ const RX=/(Sủng|Danh|Đức|Bạc|Sức khỏe|Sức|Sắc|Tài|Tâm cơ|Tai m
 /* robot-fix-cnv F3 (24/11): read the line SHE sees on the card — the kit builds it from fx + x (j17 dilLine: «ngay: <fx> · thành: <x>», a j67 story
    option from its own j67 line with «tốn: <cost>») — not o.x alone: «Bạc lạ» shows «ngay: Bạc +20 · thành: mỗi tháng Bạc +8» and the old audit compared
    the +8 (paid monthly by j42 srvMonth) with fx bac 20; a j67 option shows «tốn: Tâm cơ −1 · thành: Tâm cơ +2» and fx is only the cost */
-const seenLine=o=>{try{return o&&o.j67?oddsLead(o,o.j67):typeof dilLineRaw==="function"?dilLineRaw(o):String(o&&o.x||"")}catch(e){return String(o&&o.x||"")}};
+/* robot-fix-cnv-2 R3: the card and the hint draw HER literal Sủng through sgTxt (j1 SG-CARD: sg() = Hoàng thượng nồng nàn ×1.3 / lạnh lùng ×.7 on gains,
+   the same sg() apply() uses) → the auditor reads the line through sgTxt too and compares a Sủng number with sg(effect) (an already-drawn number, marked by
+   the no-break space, may also equal the raw effect: sgFix) */
+const seenLine=o=>{let r;try{r=o&&o.j67?oddsLead(o,o.j67):typeof dilLineRaw==="function"?dilLineRaw(o):String(o&&o.x||"")}catch(e){r=String(o&&o.x||"")}try{if(typeof sgTxt==="function")r=sgTxt(r)}catch(e){}return r};
 function auditOpt(o,m){const txt=strip((o.n||"")+" | "+seenLine(o));const key=txt;if(R.seen["o|"+key])return;R.seen["o|"+key]=1;R.opts++;
  words(txt,"option «"+strip(m.t||m.title||"").slice(0,60)+"»");
  /* segments: "thành:" numbers belong to the win block, "hỏng:" to the loss block, the rest to the sure effect / cost */
@@ -79,7 +82,7 @@ function auditOpt(o,m){const txt=strip((o.n||"")+" | "+seenLine(o));const key=tx
  /* (typed-stat review, 4/4 false positives): «thắng:» = «thành:» (win on the roll; fx is the stake); a bare number with no marker may be the win of a
     sure option → compared with the win block AND the cost; the weather note «đi kiệu … Bạc −N» is charged later (jweather wxAfter, BAL.wx.kieuBac): skipped */
  txt.split(/(?=ngay:|thành:|thắng:|hỏng:|thua:|kèm:|tốn:|được:|mất:)/i).forEach(seg=>{if(/kiệu/i.test(seg))return;const pools=/^(thành|thắng):/i.test(seg)?PW:/^(hỏng|thua):/i.test(seg)?PL:PF.concat(PW);if(!pools.length)return;
- seg.replace(RX,(a,lab,sg,n,off)=>{/* robot-fix-cnv F3: «mỗi tháng Bạc +8» is a periodic amount (paid later, j42 srvMonth), not the effect applied now */if(/mỗi\s+(tháng|tuần|buổi|ngày|năm|đêm)\s*$/i.test(seg.slice(Math.max(0,off-14),off)))return a;const k=LAB[lab];const v=(sg==="+"?1:-1)*(+n);const vals=pools.map(p=>p[k]).filter(x=>typeof x==="number");
+ seg.replace(RX,(a,lab,sg,n,off)=>{/* robot-fix-cnv F3: «mỗi tháng Bạc +8» is a periodic amount (paid later, j42 srvMonth), not the effect applied now */if(/mỗi\s+(tháng|tuần|buổi|ngày|năm|đêm)\s*$/i.test(seg.slice(Math.max(0,off-14),off)))return a;const k=LAB[lab];const v=(sg==="+"?1:-1)*(+n);const raw=pools.map(p=>p[k]).filter(x=>typeof x==="number");const vals=k==="sung"&&typeof window.sg==="function"?raw.map(x=>window.sg(x)).concat(/\u00a0/.test(a)?raw:[]):raw;
   if(!vals.length)return a;/* not in any effect block: a description, not a promise */
   if(!vals.some(x=>x===v||Math.abs(x)===Math.abs(v)))bug("number","option text «"+a+"» but the effect applies "+k+"="+vals.join("/"),"«"+txt.slice(0,160)+"» in «"+strip(m.t||m.title||"").slice(0,60)+"» fx="+JSON.stringify(o.fx||{}).slice(0,120));return a})})}
 {const c0=chooseM;chooseM=function(i){try{const m=Q[0];if(m&&m.opts){if(!m.__r10){m.__r10=1;words((m.t||m.title||"")+" "+(m.h||""),"card");m.opts.forEach(o=>auditOpt(o,m))}}}catch(e){}return c0.apply(this,arguments)}}

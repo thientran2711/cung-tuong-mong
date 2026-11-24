@@ -49,7 +49,7 @@ function place(st){const post=postOf(st.eid);if(!post)return;const m=masterFor(p
 /* every household sweep (j10 capSweep: render, buổi, month) first puts each named woman back with her right master (a queen sent to the cold palace loses hers at once) */
 if(typeof capSweep==="function"){const cs0=capSweep;capSweep=function(){try{if(S&&!isGuest())for(const st of elders())place(st)}catch(e){}return cs0.apply(this,arguments)}}
 function giveFace(st){if(!S||!st||isGuest())return;
- if(!st.fc&&typeof drawF==="function"){try{st.fc=drawF(["mama","womid"],st.age)||"";st.fk="mama"}catch(e){}}
+ if(!st.fc&&typeof faceFor==="function"){try{faceFor(st,"elder",st.age)/* R2: the same key faceInit keeps (was fk «mama» for every age → re-picked at the next render / load) */}catch(e){}}
  if(st.fid||typeof FIGS==="undefined"||!FIGS.length)return;
  const U=new Set(figUsed());const keys=r=>Object.keys((typeof FIGIX!=="undefined"&&FIGIX[r])||{}).sort();
  let k=keys("mama").find(x=>!U.has(x));

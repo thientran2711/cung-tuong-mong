@@ -86,7 +86,7 @@ const LACK={musk:t=>!t.preg||t.hidden?"nàng không có thai (ngươi biết)":"
    robot-fix-cnv F1: it ran ONLY in ageInit (load), so a eunuch kept «Tiểu» all life unless she reloaded, and a reload renamed him (save→load drift) */
 function srvOldName(){try{allServ().forEach(s=>{if(s.role!=="maid"&&s.age>=BAL.srvAge.old&&/^Tiểu /.test(s.name))s.name=s.name.replace(/^Tiểu /,"Lão ")})}catch(e){}}
 (function(){const a0=ageInit;ageInit=function(){const r=a0.apply(this,arguments);srvOldName();return r}})();
-(function(){if(typeof ageYear!=="function")return;const y0=ageYear;ageYear=function(){const r=y0.apply(this,arguments);srvOldName();return r}})();
+(function(){if(typeof ageYear!=="function")return;const y0=ageYear;ageYear=function(){const r=y0.apply(this,arguments);srvOldName();/* R2: a new age band picks its face here, not only at the next render/load */try{faceInit()}catch(e){}return r}})();
 (function(){const m0=mkServ;mkServ=function(role){let s=m0.apply(this,arguments);const taken=new Set([S&&S.maid&&S.maid.name].concat((rivals||[]).map(v=>v.maid&&v.maid.name),allServ().map(x=>x.name)));let n=2;const base=s.name;while(taken.has(s.name))s.name=base+" "+(n++);if(role!=="maid"&&s.age>=BAL.srvAge.old&&/^Tiểu /.test(s.name))s.name=s.name.replace(/^Tiểu /,"Lão ");return s}})();
 /* items without their own picture yet use the nearest picture; the proof bundle uses the proof icon */
 Object.assign(ITIMG,{tramngoc:"tram-phuong",vongvang:"vong-ngoc",gamvang:"gam-to-chau",demgam:"lua-hang-chau"});

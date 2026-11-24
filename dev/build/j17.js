@@ -31,6 +31,8 @@ const FPOOL={consort:rng(1,40,i=>"face-consort-"+pad(i)),maid:rng(1,6,i=>"face-m
 /* pool keys for a person, preferred band first, then the nearest bands */
 function bandKeys(kind,age){const B=BAL.ageBand;if(kind==="consort")return age<B[1]?["consort","womid","mama"]:age<B[2]?["womid","consort","mama"]:["mama","womid","consort"];
  if(kind==="maid")return age<B[1]?["maid","womid","mama"]:age<=44?["womid","maid","mama"]:["mama","womid","maid"];
+ /* robot-fix-cnv-2 R2: a named palace elder (jstaff, ma ma) draws from the mama/womid pools only (jstaff giveFace), by her age like everyone */
+ if(kind==="elder")return age<B[2]?["womid","mama"]:["mama","womid"];
  if(kind==="eunuch"){const b=eunBand(age||30);return [0,1,2,3].sort((x,y)=>Math.abs(x-b)-Math.abs(y-b)||x-y).map(x=>"eun"+x)}
  const near=(pre,b,n)=>[...Array(n).keys()].sort((x,y)=>Math.abs(x-b)-Math.abs(y-b)||x-y).map(x=>pre+x);
  if(kind==="emperor"||kind==="royal")return near("emp",Math.min(3,ageBandIx(age)),4);
@@ -74,7 +76,7 @@ function kidVar(k){const used=new Set(allKids().map(([x])=>x).filter(x=>x!==k&&x
 function faceInit(){if(!S)return;faceFor(S,"consort",S.age);(rivals||[]).forEach(v=>faceFor(v,"consort",v.age||20));
  if(S.maid)faceFor(S.maid,S.maid.old?"mama":"maid",S.maid.age||BAL.ageMin);if(S.emp)faceFor(S.emp,"emperor",S.emp.age);S.thO=S.thO||{};faceFor(S.thO,"thaihau",S.thAge||55);S.thF=S.thO.fc;
  for(const k in (S.court||{})){const c=S.court[k];faceFor(c,k==="ty"?"official":"eunuch",c.age||40)}
- if(typeof allServ==="function")allServ().forEach(s=>faceFor(s,s.role==="maid"?"maid":"eunuch",s.age||20))}
+ if(typeof allServ==="function")allServ().forEach(s=>faceFor(s,s.role==="maid"?(s.eid?"elder":"maid"):"eunuch",s.age||20))}
 /* under cấm túc a consort's palace is watched: no crimes can be set in motion (every consort alike) */
 const CRIME=["poison","kpoison","kframe","pond","musk","catswap","frame","plant"];
 CRIME.forEach(k=>{const A2=ACT[k];if(!A2)return;const o=A2.ok;A2.ok=(a,t)=>!a.confined&&o(a,t)});
