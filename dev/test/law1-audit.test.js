@@ -42,7 +42,10 @@ const {chromium}=require('playwright');const path=require('path');const html=pro
   T("wd redeem only above the poor line",kept&&v.wdPawn.length===0&&v.inv.length===1&&v.bac===BAL.ag.why.wd.poor+5,{kept,bac:v.bac});
   setNet(v,proudT);v.inv=[{k:itK}];v.bac=1;wdNpcPawn(v,0);T("wd other nết sells (her wdSell)",(v.wdPawn||[]).length===0&&v.inv.length===0&&v.bac>1,{bac:v.bac});
   /* expiry: one rule for everyone */
-  v.inv=[{k:itK}];v.bac=1;setNet(v,pawnT);wdNpcPawn(v,0);v.wdPawn[0].due=wk()-1;wdPawnMonth(v);T("wd expiry for an NPC",v.wdPawn.length===0,null);
+  v.inv=[{k:itK}];v.bac=1;setNet(v,pawnT);wdNpcPawn(v,0);v.wdPawn[0].due=wk()-1;const bx0=((S.il&&S.il.box)||[]).filter(x=>x.why==="pawn"&&x.e&&x.e.k===itK).length;wdPawnMonth(v);
+  /* law 6c (review r1): the forfeited piece is not deleted — the item ledger (jil ilGuard wdPawnMonth → ilGone "pawn") keeps it at the market outside the palace */
+  const bx1=((S.il&&S.il.box)||[]).filter(x=>x.why==="pawn"&&x.at==="mkt"&&x.e&&x.e.k===itK).length;
+  T("wd expiry for an NPC (piece kept by the ledger at the market, law 6c)",v.wdPawn.length===0&&bx1===bx0+1,{bx0,bx1});
   window.roll=leak0;
   /* her own pawn still works */
   S.inv=[{k:itK}];S.staff=S.staff||[];S.maid=S.maid||maidMk(S);S.maid.loyal=90;S.maid.spyFor=null;S.maid.age=40;const sb=S.bac;const ag=wdAgent(S);const r=wdPawn(S,0);T("wd her pawn unchanged",!!r&&(S.wdPawn||[]).length>=1&&S.bac>sb,{r:String(r).slice(0,60),ag:ag&&ag.name,maid:!!S.maid,inv:S.inv.length,itK,bac:[sb,S.bac]});

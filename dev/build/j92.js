@@ -420,10 +420,11 @@ function wdMonth(pre){let ev="";S.wdk=S.wdk||{};
  for(const p of consorts()){if(p!==S){wdNpcInit(p);wdNpcDress(p)}const st=wdStatus(p);
   if(st==="over"){if(npcWhy("wdNotice",{p})){ap(p,{sung:WD.overSung});if(p===S)log(`Hoàng thượng để mắt tới y phục rực rỡ của ngươi. ${sgStat(WD.overSung)}.`)}/* rivals' jealousy: the approved luxury law (jinv luxMonth) */}
   if(!p.confined)ev+=wdRemark(p,st)} /* npc-purpose: wdRemark asks npcWhy("wdRemark") — a remark only from one with a reason */
- ev+=wdTaimat();for(const p of consorts())if(!p.coop)ev+=wdPawnMonth(p);for(const p of consorts())wdNtMonth(p);
+ ev+=wdTaimat();const wOn=typeof worldOn!=="function"||worldOn();/* law1-audit r1: an NPC's pawn expires / is chosen only in the world pass (co-op: the host's; the guest's world frame never routes an NPC piece into her ledger) */
+ for(const p of consorts())if(!p.coop&&(p===S||wOn))ev+=wdPawnMonth(p);for(const p of consorts())wdNtMonth(p);
  /* NPCs: redeem what they can afford, then the ones short of silver sell or pawn (law1-audit: her two roads, by nết) */
  for(const v of liveRivals(true))wdNpcRedeem(v);
- for(const o of npcWhyAll("wdPawn")){const v=o.who;const i=(v.inv||[]).findIndex(e=>e&&!e.h&&wdItem(e)&&!wdIsNt(e));if(i>=0)wdNpcPawn(v,i)}
+ if(wOn)for(const o of npcWhyAll("wdPawn")){const v=o.who;const i=(v.inv||[]).findIndex(e=>e&&!e.h&&wdItem(e)&&!wdIsNt(e));if(i>=0)wdNpcPawn(v,i)}
  return ev}
 (function(){const m0=monthTick;monthTick=function(){let pre=null;try{const q=queenP();pre={th:!!S.thDead,q:q&&q!==S?q.id:null,P:wdPOf(S)}}catch(e){}
  const r=m0.apply(this,arguments);let add="";try{if(pre&&S&&!S.dead)add=wdMonth(pre)}catch(e){console.error(e)}return (r||"")+add}})();
