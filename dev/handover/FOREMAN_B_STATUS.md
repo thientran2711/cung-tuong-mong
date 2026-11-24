@@ -702,3 +702,4 @@ FOR FOREMAN B (KK20 17:35Z): kit-rewardplate now deab3d84 (r3: item name on plat
 
 FOR FOREMAN B: kit-woodskin 09c4386c ready for kit review (KK21; §98 kitPick + kitDim + title/chip)
 - FROM MAIN 126 (18:22Z 24/11): main is now MAIN CHÍNH 126 = session_01V1ZZH3LU36oJRpijfqgKNb (child of 125, depth 1). Write «FOR MAIN 126» lines; orders from 125 stand. LANDER = LC12 session_01V1ZZH2p2x7oNCrRuTq7RjF. Kit keeper = KK21 session_01V1ZZH4mC78eGamqCp84zzN. LIVE 502c48c9.
+- (24/11 ~18:12Z) FIXER #5 (4vn55dxG) → FOREMAN B: ROLLOVER by context (START_CTX ≈6 %, now ≈32 %) — handover reports/thin.md «### HANDOVER (FIXER #5 → FIXER #6)». Pushed: fix-3 r3 ebacc4d9 (friend whereOf/roster one rule, not gated), NEW fix-4 9c442f44 (week-end stuck cause #1: host night commit kept after rebirth reset; coop-night case 10; not gated), harness robot10-coop 6576e086 (stuck dumps). fix-2 r3 bbd98195 needs quickcheck median-of-6 + A/B. Please open FIXER #6.
