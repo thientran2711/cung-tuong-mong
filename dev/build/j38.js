@@ -24,12 +24,14 @@ function kmSolve(it,K,wr,budget,vp,etol,DCp,RX,init){etol=etol||60;const DC=(DCp
  const cr=(a,b,c)=>(b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]),segX=(p,q,r,s)=>cr(p,q,r)*cr(p,q,s)<0&&cr(r,s,p)*cr(r,s,q)<0;
  const cl=(v,a,b)=>Math.min(Math.max(v,a),b);
  /* geometry of tag i at offset t, variant v: box, dot, leader end, leader on/off */
- const geo=(i,t,v)=>{const u=it[i].bv[v],bi=[u[0]+t[0],u[1]+t[1],u[2]+t[0],u[3]+t[1]],R=RI[i];const touch=bi[2]>R[0]&&bi[0]<R[2]&&bi[3]>R[1]&&bi[1]<R[3];
+ /* map-perf: geo writes into ONE scratch result (millions of calls per solve: no garbage); callers copy what they keep (upd) */
+ const G={bi:[0,0,0,0],a:null,e:null,ld:false,len:0,out:false},GA=[0,0],GE=[0,0];
+ const geo=(i,t,v)=>{const u=it[i].bv[v],bi=G.bi;bi[0]=u[0]+t[0];bi[1]=u[1]+t[1];bi[2]=u[2]+t[0];bi[3]=u[3]+t[1];const R=RI[i];const touch=bi[2]>R[0]&&bi[0]<R[2]&&bi[3]>R[1]&&bi[1]<R[3];
   const out=!!vp&&(bi[2]<=vp[0]-1||bi[0]>=vp[2]+1);let a=null,e=null,ld=false,len=0;
-  if(!touch&&!out){const cx=(bi[0]+bi[2])/2,cy=(bi[1]+bi[3])/2;a=[cl(cx,R[0],R[2]),cl(cy,R[1],R[3])];let bd=1e9;for(const p of it[i].pv[v]){const q=[cl(a[0],p[0]+t[0],p[2]+t[0]),cl(a[1],p[1]+t[1],p[3]+t[1])],d=Math.hypot(q[0]-a[0],q[1]-a[1]);if(d<bd){bd=d;e=q}}len=bd;ld=bd>2*K}
-  return{bi,a,e,ld,len,out}};
- const BB=it.map(()=>[0,0,0,0]),PD=Math.max(DC,3)+2,bbx=(o,b,ld,a,e)=>{o[0]=b[0];o[1]=b[1];o[2]=b[2];o[3]=b[3];if(ld){for(const q of [a,e]){if(q[0]<o[0])o[0]=q[0];if(q[0]>o[2])o[2]=q[0];if(q[1]<o[1])o[1]=q[1];if(q[1]>o[3])o[3]=q[1]}}return o},GB=[0,0,0,0];
- const upd=i=>{const g=geo(i,T[i],V[i]);B[i]=g.bi;P[i]=it[i].pv[V[i]].map(p=>[p[0]+T[i][0],p[1]+T[i][1],p[2]+T[i][0],p[3]+T[i][1]]);LD[i]=g.ld;A[i]=g.a||A[i];E[i]=g.e||A[i];bbx(BB[i],B[i],LD[i],A[i],E[i])};
+  if(!touch&&!out){const cx=(bi[0]+bi[2])/2,cy=(bi[1]+bi[3])/2;a=GA;a[0]=cl(cx,R[0],R[2]);a[1]=cl(cy,R[1],R[3]);let bd=1e9;for(const p of it[i].pv[v]){const q0=cl(a[0],p[0]+t[0],p[2]+t[0]),q1=cl(a[1],p[1]+t[1],p[3]+t[1]),d=Math.hypot(q0-a[0],q1-a[1]);if(d<bd){bd=d;e=GE;e[0]=q0;e[1]=q1}}len=bd;ld=bd>2*K}
+  G.a=a;G.e=e;G.ld=ld;G.len=len;G.out=out;return G};
+ const BB=it.map(()=>[0,0,0,0]),PD=Math.max(DC,3)+2,bbx=(o,b,ld,a,e)=>{o[0]=b[0];o[1]=b[1];o[2]=b[2];o[3]=b[3];if(ld){if(a[0]<o[0])o[0]=a[0];if(a[0]>o[2])o[2]=a[0];if(a[1]<o[1])o[1]=a[1];if(a[1]>o[3])o[3]=a[1];if(e[0]<o[0])o[0]=e[0];if(e[0]>o[2])o[2]=e[0];if(e[1]<o[1])o[1]=e[1];if(e[1]>o[3])o[3]=e[1]}return o},GB=[0,0,0,0];
+ const upd=i=>{const g=geo(i,T[i],V[i]);B[i]=g.bi.slice();P[i]=it[i].pv[V[i]].map(p=>[p[0]+T[i][0],p[1]+T[i][1],p[2]+T[i][0],p[3]+T[i][1]]);LD[i]=g.ld;A[i]=g.a?g.a.slice():A[i];E[i]=g.e?g.e.slice():A[i];bbx(BB[i],B[i],LD[i],A[i],E[i])};
  for(let i=0;i<n;i++)upd(i);
  const hardAt=(i,g,M,cap)=>{let v=0,w=0;const bi=g.bi,a=g.a,ei=g.e,li=g.ld;if(li&&g.len>LMAX)v++;const q=bbx(GB,bi,li,a,ei),q0=q[0]-PD,q1=q[1]-PD,q2=q[2]+PD,q3=q[3]+PD;for(let j=0;j<n;j++){if(j===i||(M&&!M[j]))continue;const bb=BB[j];if(bb[0]>q2||bb[2]<q0||bb[1]>q3||bb[3]<q1)continue;/* map-perf: tag + leader boxes too far apart for any rule below - exact skip */const bj=B[j];if(ovP(bi,bj,2))v++;if(LD[j]&&inP(bi,A[j],DC))w++;if(li){if(inP(bj,a,DC))w++;if(segR(a,ei,bj,3))w++}if(LD[j]){if(segR(A[j],E[j],bi,3))w++;if(li&&segX(a,ei,A[j],E[j]))w++}if(cap!==undefined&&(RX>2?v:RX?v+w*.08:v+w)>=cap)break}return RX>2?v:RX?v+w*.08:v+w};
  const SR=it.map(x=>{const w=x.sr[2]-x.sr[0],h=x.sr[3]-x.sr[1];return[x.sr[0]+w*.2,x.sr[1]+h*.2,x.sr[2]-w*.2,x.sr[3]-h*.2]});
@@ -42,7 +44,8 @@ function kmSolve(it,K,wr,budget,vp,etol,DCp,RX,init){etol=etol||60;const DC=(DCp
  const ord=it.map((x,i)=>i).sort((a,b)=>it[b].rk-it[a].rk);
  if(init){/* map-perf: a later stage starts from the best layout of the stage before (only its still-violating tags get searched again) */for(let i=0;i<n;i++){T[i]=init.t[i].slice();V[i]=init.v[i]||0;upd(i)}}else{const M=new Uint8Array(n);for(const i of ord){const s=search(i,M);T[i]=s[0];V[i]=s[1];upd(i);M[i]=1}}
  const asc=ord.slice().reverse();
- for(let pass=0;pass<6;pass++){let ch=0;for(const i of asc){if(!hardI(i))continue;const s=search(i,null);if(costAt(i,s[0],null,s[1])<costAt(i,T[i],null)){T[i]=s[0];V[i]=s[1];upd(i);ch++}}if(!ch)break}
+ /* map-perf: a tag searched with nothing changed since gives the same answer: skip it (sv = layout version of its last fruitless search) */let ver=0;const sv=new Int32Array(n).fill(-1);
+ for(let pass=0;pass<6;pass++){let ch=0;for(const i of asc){if(sv[i]===ver||!hardI(i))continue;const s=search(i,null);if(costAt(i,s[0],null,s[1])<costAt(i,T[i],null)){T[i]=s[0];V[i]=s[1];upd(i);ch++;ver++}else sv[i]=ver}if(!ch)break}
  let hv=it.map((x,i)=>hardI(i));const tot=()=>hv.reduce((a,b)=>a+b,0);
  if(tot()){const t0=performance.now();let best=T.map(t=>t.slice()),bestV=V.slice(),bh=tot(),sd=(n*2654435761)>>>0;const rnd=()=>{sd=(sd+0x6D2B79F5)>>>0;let z=sd;z=Math.imul(z^z>>>15,z|1);z^=z+Math.imul(z^z>>>7,z|61);return((z^z>>>14)>>>0)/4294967296};
   const mvOK=it.map((x,i)=>!x.prot||hv[i]>0&&(RX||it.some((p,j)=>j!==i&&p.prot&&ovP(B[i],B[j],2))));
@@ -53,13 +56,13 @@ function kmSolve(it,K,wr,budget,vp,etol,DCp,RX,init){etol=etol||60;const DC=(DCp
     if(d<=0||rnd()<Math.exp(-d/Tm)){const o=BB[i].slice();T[i]=t;V[i]=nv;upd(i);const b=BB[i];/* map-perf: only tags whose tag+leader box is near the old or the new place of i can change their count (same skip rule as hardAt) */for(let m=0;m<n;m++){const c=BB[m];if(m===i||!(o[0]>c[2]+PD||o[2]<c[0]-PD||o[1]>c[3]+PD||o[3]<c[1]-PD)||!(b[0]>c[2]+PD||b[2]<c[0]-PD||b[1]>c[3]+PD||b[3]<c[1]-PD))hv[m]=hardI(m)}}Tm=Math.max(4,Tm*.9993);if(performance.now()-t0>(budget||350))break}
    if(tot()<bh){bh=tot();best=T.map(t=>t.slice());bestV=V.slice()}}
   for(let i=0;i<n;i++){T[i]=best[i];V[i]=bestV[i];upd(i)}hv=it.map((x,i)=>hardI(i));
-  for(let pass=0;pass<3;pass++){let ch=0;for(const i of asc){if(T[i][0]===0&&T[i][1]===0||hardI(i))continue;const s=search(i,null);if(costAt(i,s[0],null,s[1])<costAt(i,T[i],null)-.5){T[i]=s[0];V[i]=s[1];upd(i);ch++}}if(!ch)break}}
+  {let ver=0;const sv=new Int32Array(n).fill(-1);for(let pass=0;pass<3;pass++){let ch=0;for(const i of asc){if(sv[i]===ver||T[i][0]===0&&T[i][1]===0||hardI(i))continue;const s=search(i,null);if(costAt(i,s[0],null,s[1])<costAt(i,T[i],null)-.5){T[i]=s[0];V[i]=s[1];upd(i);ch++;ver++}else sv[i]=ver}if(!ch)break}}}
  /* RX (last resort, only when no clean layout exists): 1 = leader dots / lines near a tag cost a little instead of forbidding (leaders stay <= 90 px, protected tags may move); 2 = leaders up to 200 px and a tag cut by the visible edge costs a little (she pans) instead of being forbidden; 3 = only tag boxes touching each other count (any leader length / crossing allowed); hard = tag boxes that still touch (plus too-long leaders) */const hd=i=>Math.floor(hardI(i));return{t:T,v:V,A,E,lead:LD,hard:it.reduce((a,x,i)=>a+hd(i),0)/2,bad:it.map((x,i)=>hd(i)?i:-1).filter(i=>i>=0)}}
-/* map-perf: the stage chain of the tag solver, ONE time box for the whole chain (KMAP_SOLVE_MS of real time; before: every stage had its own box and started from nothing, 2-5 s per solve on a played save). Stages as before (map-label-overlap): base -> dot clearance 28 / 16 + edge 60-200 -> last resort RX1-3; a later stage starts from the best layout so far; the clean stages are skipped once half the box is used (RX still runs while two tags touch: it is the no-overlap guarantee) */
-const KMAP_SOLVE_MS=350;
-function kmChain(its,K,W,vp){const t0=performance.now(),D=KMAP_SOLVE_MS,el=()=>performance.now()-t0;let q=kmSolve(its,K,W,D*.25,vp);
- for(const [et,dc,rx] of [[60,28],[60,16],[120,16],[200,16],[200,16,1],[200,16,2],[200,16,3]]){if(!(q.hard>0))break;if(!vp&&rx)break;if(!rx&&el()>D*.5)continue;
-  const q2=kmSolve(its,K,W,rx?Math.max(D*.1,D-el())/(rx===1?1.6:1.2):D*.06,vp,et,dc,rx,q);if(q2.hard<q.hard)q=q2}
+/* map-perf: the stage chain of the tag solver, ONE time box for the whole chain (KMAP_SOLVE_MS of real time; before: every stage had its own box and started from nothing, 2-5 s per solve on a played save). Stages as before (map-label-overlap): base -> dot clearance 28 / 16 + edge 60-200 -> last resort RX1-3; a later stage starts from the best layout so far. Shares of the box: base 40 %, each clean stage 12 % (skipped once the box is used up), RX1 at least 40 %, RX2/RX3 what is left (at least 10 %): RX still runs while two tags touch, it is the no-overlap guarantee */
+const KMAP_SOLVE_MS=400;
+function kmChain(its,K,W,vp){const t0=performance.now(),D=KMAP_SOLVE_MS,el=()=>performance.now()-t0;let q=kmSolve(its,K,W,D*.4,vp);
+ for(const [et,dc,rx] of [[60,28],[60,16],[120,16],[200,16],[200,16,1],[200,16,2],[200,16,3]]){if(!(q.hard>0))break;if(!vp&&rx)break;if(!rx&&el()>D)continue;
+  const q2=kmSolve(its,K,W,rx?Math.max(D*(rx===1?.4:.1),(D-el())/(rx===1?1:1.2)):D*.12,vp,et,dc,rx,q);if(q2.hard<q.hard)q=q2}
  return q}
 /* the plan always covers the screen: the smallest zoom fills the height as well as the width */
 function mapFit(pre){pre=pre===true;try{const sc=document.querySelector(".game.maptab .mapsc");if(!sc)return;const w=sc.querySelector(".mapw"),img=sc.querySelector(".mapimg");if(!w)return;
