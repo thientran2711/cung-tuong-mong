@@ -89,4 +89,6 @@ try{new MutationObserver(ms=>{if(ms.every(m=>m.target.closest&&m.target.closest(
 img.kemo.kfseal{position:absolute!important;z-index:7;display:block;box-sizing:border-box;object-fit:contain;border-radius:50%;pointer-events:auto;cursor:pointer;-webkit-tap-highlight-color:transparent;filter:drop-shadow(0 1px 2px #000a);transform:none;margin:0;max-width:none;max-height:none;animation:none}
 img.kemo.kfseal.kemo-an{opacity:.85}
 img.kemo.kfseal.kfseal-old{pointer-events:none;z-index:6}/* the previous still, kept under the new one until it is decoded */
+body.kbk-open .kbk-pg{isolation:isolate}/* each page is its own stacking context: the head seal (z 7) of the page BESIDE it in the stack must never paint over this page (the other person's face on a page) */
+body.kbk-open img.kemo.kfseal:not(.kbk-person>img.kfseal){visibility:hidden!important;pointer-events:none!important}/* owner 24/11 flight bug #6: the ROOM figure's seal (her own, or the one beside the person on the stage) floated over the open Tuần lục book (it sits in the game shell, z 7) = "the wrong person's face" on every page; under the book only the seal of the page's own person shows (host .kbk-person) */
 `;document.head.appendChild(st)})();
