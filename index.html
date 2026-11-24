@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"940cfb29+","t":"2026-11-24T01:48Z","c":"TITLES2: effect size words from BAL.dh.rp.deg (one-core guard); KIT REQUEST K-DH-CAPFIT","b":"e3561b746cd8","h":[{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"}]};
+window.CTM_BI={"s":"887b931f+","t":"2026-11-24T02:15Z","c":"TITLES2: effect size words from BAL.dh.rp.deg (one-core guard); KIT REQUEST K-DH-CAPFIT","b":"825f40102a20","h":[{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -26460,7 +26460,7 @@ MF("cuuhoang",{t:"Lập công · Cứu giá",cd:60,w:()=>.6,who:()=>pEmp(),
   return [CH7(st==="y"?"Tự tay sơ cứu ngài":"Lao vào cứu ngài",{c:{suc:-10},p,w:{sung:8,an:4,danh:3},wt:bonus7(B),l:{suc:hurt7(15)},lt:["ngài bị thương nhẹ, tâm trạng xấu đi"],ok:()=>`Ngươi cứu được Hoàng thượng; ngài nắm tay ngươi rất lâu.${bonusDo7(B,"cứu giá")}`,no:()=>{if(S.emp.mood<2)S.emp.mood=2;return "Ngươi xông vào nhưng không kịp; ngài bị thương nhẹ, ngươi cũng bị thương."}}),
    CH7("Hô thị vệ, sai người chạy gọi",{w:{sung:2},k:["ngài bị thương nhẹ, tâm trạng xấu đi"],ok:()=>{if(S.emp.mood<2)S.emp.mood=2;return "Thị vệ đến hơi chậm, ngài bị thương nhẹ nhưng ghi nhận ngươi nhanh trí."}}),
    /* choice-value (MAIN ROOT-59 ~23:05Z, OD 22:05Z): «Hoảng sợ đứng nhìn» stays — gain = she stays unhurt and keeps her strength (no wound / Sức risk of «Lao vào»), cost = his favour (BAL.cv.cuu) */
-   CH7("Hoảng sợ đứng nhìn",{c:{sung:-BAL.cv.cuu.sung},w:{suc:BAL.cv.cuu.suc},wt:["giữ được thân mình vô sự"],k:["ngài bị thương nhẹ, tâm trạng xấu đi"],ok:()=>{if(S.emp.mood<2)S.emp.mood=2;return "Thị vệ đến chậm, ngài bị thương nhẹ; ngài thấy ngươi chỉ đứng nhìn. Ngươi không hề hấn gì."}})]}});
+   CH7("Hoảng sợ đứng nhìn",{c:{sung:-BAL.cv.cuu.sung},w:{suc:BAL.cv.cuu.suc},wt:["giữ được thân mình vô sự"],k:["ngài bị thương nhẹ, tâm trạng xấu đi"],ok:()=>{cpm7("cuuhoang_a");if(S.emp.mood<2)S.emp.mood=2;return "Thị vệ đến chậm, ngài bị thương nhẹ; ngài thấy ngươi chỉ đứng nhìn. Ngươi không hề hấn gì."}})]}});
 MF("thbenh",{t:"Lập công · Hầu bệnh Thái hậu",cd:9,w:()=>!S.thDead&&S.thIll?4:0,who:()=>pTH(),
  v:["Thái hậu nhiễm phong hàn, sốt mấy đêm liền, Từ Ninh cung đóng cửa.","Thái hậu trúng gió, đau lưng không trở mình được.","Thái hậu mất ngủ triền miên, người gầy rộc.","Thái hậu ngã trong vườn, trật chân, phải nằm một chỗ.","Trời nóng, Thái hậu sốt cao, ăn gì nôn nấy.","Thái hậu ho lâu ngày, các thái y bó tay.","Thái hậu đau mắt, không đọc kinh được, buồn bực khó chịu."],
  pp:()=>!S.thDead&&S.thIll?{}:null,
@@ -26527,7 +26527,7 @@ MF("chepkinh",{t:"Lập công · Chép kinh",cd:24,w:()=>S.thDead?0:1,who:()=>pT
  pp:()=>S.thDead?null:{},
  o:X=>[CH7("Chép trọn bộ bằng chữ khải",{c:{suc:-15},p:od(BAL.odb.j71.odP_14+(S.tai||0)/3+aw7(S,"thi")*6),w:{th:8,duc:2,danh:2},wt:bonus7({dai:1}),l:{th:3},ok:()=>`Nét chữ của ngươi khiến Thái hậu khen mãi.${bonusDo7({dai:1},"chép kinh")}`,ll:"Nét chữ chưa đều; Thái hậu vẫn nhận, khen ngươi có lòng."}),
   CH7("Chép một quyển",{c:{suc:-6},w:{th:3,duc:1},wl:"Ngươi chép một quyển dâng Thái hậu."}),
-  CH7("Nhờ cung nữ chép thay",{p:od(BAL.odb.j71.odP_5),w:{th:3},l:{th:-4},lt:["Thái hậu nhận ra nét chữ người khác"],wl:"Thái hậu nhận kinh, không nhận ra gì.",ll:"Thái hậu nhận ra nét chữ không phải của ngươi."})],
+  CH7("Nhờ cung nữ chép thay",{p:od(BAL.odb.j71.odP_5),w:{th:3},l:{th:-4},lt:["Thái hậu nhận ra nét chữ người khác"],wl:"Thái hậu nhận kinh, không nhận ra gì.",ll:"Thái hậu nhận ra nét chữ không phải của ngươi.",ok:()=>{cpm7("chepkinh_a");return ""}})],
  npc:v=>{if(S.thDead||(v.suc||0)<40)return"";const ok=roll(oddsCl(40+(v.tai||0)/3+aw7(v,"thi")*6));ap(v,ok?{suc:-15,th:8,duc:2,danh:2}:{suc:-15,th:3});if(ok)daiDo7(v);return ok?`${v.name} chép trọn bộ kinh dâng Thái hậu, được khen (Thái hậu với nàng +8).`:""}});
 MF("soke",{t:"Lập công · Soát sổ sách",cd:36,w:()=>S.rank>=3?1:0,who:()=>pEunCourt("tq"),
  v:["Sổ chi tiêu Nội vụ phủ năm nay lệch hơn năm trước cả ngàn lượng mà không ai giải thích nổi.","Bạc may áo mùa đông cho cung nhân đã chi mà áo chưa thấy đâu.","Sổ hương đèn các chùa trong cung ghi gấp đôi số thật.","Tiền thuốc men Ngự dược phòng tăng vọt trong khi ít người bệnh.","Sổ lương cung nữ có tên mấy người đã xuất cung từ lâu.","Chi phí sửa ngự uyển ghi ba lần cho cùng một hòn non bộ."],
@@ -26543,8 +26543,8 @@ MF("hoagiai",{t:"Lập công · Hòa giải",cd:24,w:()=>{const L=liveRivals(tru
  pre:X=>{X.A=evActor("rv",X.p.a0);X.B=evActor("rv",X.p.a1);return !!(X.A&&X.B)},
  o:X=>{const A=X.A,B=X.B;
   return [CH7("Đứng ra giảng hòa",{p:od(BAL.odb.j71.odP_16+S.danh/3+(S.duc||0)/4+(S.tamco||0)/5),w:{danh:2,duc:2},r:[[A,5],[B,5]],wt:[G7("hai nàng bớt giận nhau")],lr:[[A,-4],[B,-4]],ok:()=>{cpm7("hoagiai");relAdd(A.o,B.o,BAL.eff.j71.ok_2);return `${A.n} và ${B.n} nghe ngươi, làm lành với nhau.`},ll:"Hai bên đều cho rằng ngươi thiên vị bên kia."}),
-   CH7(`Bênh ${A.n}`,{r:[[A,8],[B,-8]],wl:`Ngươi bênh ${A.n}.`}),
-   CH7(`Bênh ${B.n}`,{r:[[B,8],[A,-8]],wl:`Ngươi bênh ${B.n}.`}),
+   CH7(`Bênh ${A.n}`,{r:[[A,8],[B,-8]],wl:`Ngươi bênh ${A.n}.`,ok:()=>{cpm7("hoagiai_a");return ""}}),
+   CH7(`Bênh ${B.n}`,{r:[[B,8],[A,-8]],wl:`Ngươi bênh ${B.n}.`,ok:()=>{cpm7("hoagiai_a");return ""}}),
    CH7("Mặc kệ",{w:{suc:BAL.cv.rest}/* decline family: she keeps her strength */,wl:"Ngươi không dính vào."})]},
  npc:v=>{const L=liveRivals(true).filter(x=>x!==v&&present7(x));const P=[];for(const a of L)for(const b of L)if(a.id<b.id&&aff(a,b)+aff(b,a)<0)P.push([a,b]);if(!P.length)return"";const [a,b]=npwPick(P,([a,b])=>-(aff(a,b)+aff(b,a))+Math.max(0,aff(v,a))+Math.max(0,aff(v,b)));/* npc-purpose G2: she steps into the feud that hurts the most among people she cares for; her Danh/Đức = the success */if(!roll(oddsCl(30+(v.danh||0)/3+(v.duc||0)/4)))return"";ap(v,{danh:BAL.eff.j71.danhNpc_2,duc:2});relAdd(a,b,BAL.eff.j71.npc_2);relAdd(v,a,BAL.eff.j71.npc_3);relAdd(v,b,BAL.eff.j71.npc_4);return `${v.name} đứng ra giảng hòa ${a.name} và ${b.name}, được khen (Danh ${balSg(BAL.eff.j71.danhNpc_2)}).`}});
 MF("tamtang",{t:"Lập công · Lễ Thân tằm",cd:36,w:()=>S.month>=2&&S.month<=4?2:0,who:()=>S.thDead?pEmp():pTH(),
@@ -26561,14 +26561,14 @@ MF("hoahoan",{t:"Lập công · Hỏa hoạn, thiên tai trong cung",cd:36,w:()=
  o:X=>{const B={dai:1};
   return [CH7("Đốc thúc cung nhân cứu người",{c:{suc:-10},p:cl(Math.round(35+help7(S)*4+(S.tamco||0)/4),10,92),w:{danh:4,sung:3,maid:5},wt:bonus7(B),l:{suc:hurt7(10)},lt:hurt7(10)?[]:["không cứu kịp hết"],ok:()=>`Nhờ ngươi đốc thúc, không ai mất mạng; Hoàng thượng khen ngươi gan dạ.${bonusDo7(B,"cứu nạn trong cung")}`,ll:"Việc rối loạn, ngươi bị thương nhẹ; nhiều người vẫn bị nạn."}),
    CH7("Mở kho cung mình giúp người bị nạn",{c:{bac:-30},w:{duc:3,danh:2},wl:"Ngươi mở kho cung mình giúp người bị nạn."}),
-   CH7("Đóng cửa cung giữ mình",{w:{...BAL.cv.closeDoor,suc:BAL.cv.rest},wl:"Ngươi đóng cửa cung, không ra ngoài; cung nhân thấy chủ lạnh lùng."})]}});
+   CH7("Đóng cửa cung giữ mình",{w:{...BAL.cv.closeDoor,suc:BAL.cv.rest},ok:()=>{cpm7("hoahoan_a");return ""},wl:"Ngươi đóng cửa cung, không ra ngoài; cung nhân thấy chủ lạnh lùng."})]}});
 MF("dichbenh",{t:"Lập công · Dịch trong cung",cd:36,w:()=>.8,who:()=>pDoc(),
  v:["Dịch tả lan trong dãy nhà cung nữ, mỗi ngày mấy người ngã bệnh.","Bệnh sốt rét lan ở khu thái giám gần hồ nước đọng.","Bệnh đau mắt đỏ lan khắp các cung, thái y không đủ người.","Một trận cúm lan nhanh trong hậu cung giữa tiết giao mùa.","Bệnh lỵ lan ở Ngự thiện phòng, người ta sợ ăn uống.","Ghẻ lở lan trong đám cung nhân giặt giũ ở Hoán y cục."],
  pp:()=>({}),
  o:X=>{const B={dai:1,pd:1};
   return [CH7("Tự tay bốc thuốc phát cho cung nhân",{c:{suc:-12},p:od(BAL.odb.j71.odP_2+aw7(S,"y")*12),w:{danh:4,duc:3,maid:6},wt:bonus7(B),l:{suc:hurt7(10)},lt:hurt7(10)?[]:["thuốc chưa hiệu nghiệm"],ok:()=>`Thuốc của ngươi chặn được dịch; cung nhân khắp nơi nhắc tên ngươi.${bonusDo7(B,"chặn dịch")}`,ll:"Thuốc chưa hiệu nghiệm, ngươi còn nhiễm nhẹ, mệt mấy hôm."}),
    CH7("Bỏ bạc mua thuốc",{c:{bac:-40},w:{duc:3,danh:2},wl:"Ngươi bỏ bạc mua thuốc cho cung nhân."}),
-   CH7("Đóng cửa cung tránh dịch",{w:{suc:3,maid:-3},wl:"Ngươi đóng cửa cung tránh dịch; cung nhân bệnh thấy chủ bỏ mặc."})]}});
+   CH7("Đóng cửa cung tránh dịch",{w:{suc:3,maid:-3},ok:()=>{cpm7("dichbenh_a");return ""},wl:"Ngươi đóng cửa cung tránh dịch; cung nhân bệnh thấy chủ bỏ mặc."})]}});
 /* builder (PEND j71m) */
 function mFill7(s,X){const f=MF7[X.k];let t=typeof s==="string"?s:s[0];if(f.fill)t=f.fill(t,X);return t.replace(/\{A\}/g,X.A?X.A.n:"").replace(/\{B\}/g,X.B?X.B.n:"").replace(/\{M\}/g,S.maid?S.maid.name:"cung nữ")}
 PEND.j71m=pp=>{if(!S)return null;const f=MF7[pp.k];if(!f)return null;const X={k:pp.k,p:pp};
@@ -36843,13 +36843,16 @@ BAL.dh.rp={b:{t:4,a:4},mem:8,night:3,deg:[4,8]/* additive effect size words: ≤
   hamoan:{win:12,keep:18,g:["tren",8],l:["danh",-6]},
   bacmenh:{sac:70,win:18,g:["tren",8],l:["phuc",-2]}}};
 /* cp  CHAPTER / SIDE-LINE titles (achievement titles of jdh, worn like them; tone t = kept faith, a = won by betrayal or cruelty).
-       road  one good + one bad title per main road, raised one step per chapter (.4 premise to .11) closed that way: n = chapters per step, b tier, ch = bonus choices;
-       arc   one good + one bad title per side arc (shared s_*, late st_*, thanh mai tm96*, end arcs *14), once;  vn  j72 việc nhờ, per kind (ok = good, fail / bại lộ = bad);
-       mh    j70 mưu hại roles (target who foiled / exposer / framed-and-cleared / the one who warned; schemer caught / schemer unseen);  lc  j71 lập công per family (+ the hush-money bad one).
+       ch    EACH main-road chapter (.4 premise to .11, every road): its own good + bad title (names DH3N, jdh3n.js), once at that chapter's close (FIX r1): n = steps, b tier, ch = bonus choices;
+       road  OLD SAVES ONLY: the one-pair-per-road title stepped per chapter before FIX r1 (never given now; kept so an old save keeps it);
+       arc   one good + one bad title per side arc (shared s_*, late st_*, thanh mai tm96*, end arcs *14), once;  vn  EACH j72 việc nhờ chain template (T7 id), once (ok = good, fail / bại lộ = bad);
+       vnK   OLD SAVES ONLY: the per-kind việc nhờ pair before FIX r1;
+       mh    j70 mưu hại roles PER METHOD GROUP (target who foiled / schemer caught / schemer unseen: độc, vu, đồn, ngáng trở, hại thân) + the method-free exposer / framed-and-cleared / warner;
+       lc    j71 lập công per family + every bad way (hush money, standing by, borrowed hand, partiality, closed door).
        lean  how she closed HER chapter: (Σ good − bad option tags of the jge lean during the chapter) × lt + (Đức now − Đức at the chapter's first choice) × duc;
              > 0 good, < 0 bad, 0 → the ending's own sign (lost = bad). An NPC's off-screen road chapter (jnroad, no options): its ending sign, 0 → Đức ≥ npcDuc good. */
-BAL.dh.cp={road:{b:3,n:[1,4,8],chT:["danh","gTren","duc"],chA:["tamco","don","gBac"]},arc:{b:4,n:[1],chT:["danh","gHau"],chA:["tamco","don"]},
- vn:{b:2,n:[1,5,10],chT:["gHau","danh"],chA:["tamco","gBac"]},mh:{b:3,n:[1,3,6],chT:["don","danh"],chA:["tamco","don"]},lc:{b:3,n:[1,3,6],chT:["danh","gTren"],chA:["gBac","tamco"]},
+BAL.dh.cp={ch:{b:3,n:[1],chT:["danh","gTren","duc"],chA:["tamco","don","gBac"]},road:{b:3,n:[1,4,8],chT:["danh","gTren","duc"],chA:["tamco","don","gBac"]},arc:{b:4,n:[1],chT:["danh","gHau"],chA:["tamco","don"]},
+ vn:{b:2,n:[1],chT:["gHau","danh"],chA:["tamco","gBac"]},vnK:{b:2,n:[1,5,10],chT:["gHau","danh"],chA:["tamco","gBac"]},mh:{b:3,n:[1,3,6],chT:["don","danh"],chA:["tamco","don"]},lc:{b:3,n:[1,3,6],chT:["danh","gTren"],chA:["gBac","tamco"]},
  lean:{lt:1,duc:.5},npcDuc:50};
 
 /* review/suc-khoe (jkh.js, owner 16/11 18:05–19:00Z; spec dev/handover/reports/suc-khoe.md §4.1–4.7 with the owner changes):
@@ -70229,6 +70232,95 @@ window.geDbg={term:geTerm,cond:geCond,stat:geStat,shade:geShade,lean:geLean,mis:
 /* shared with the NPC parity module (jgenpc.js): the same names, keys, odds and lean formulas — nothing copied */
 window.geK={R1N,R2N,SHN,STATK,key:geKey,store:geStore,seatTaken:geSeatTaken,lifeNo:geLifeNo};
 }catch(e){console.error("jge",e)}})();
+/* review/titles2-r FIX r1 (E58): the NAMES of the per-chapter and per-chain titles (TITLES2 Part B; jdh3.js reads DH3N; data only, no logic).
+   cp[road] = 8 pairs «good/bad» for its chapters .4 (the road's premise arc) … .11, each named from that chapter's own words (rdDef t / sj, ARC67[road].t);
+   vn[tid]  = the pair for one j72 việc nhờ chain template (T7 id), named from that chain's own subject: good = done, bad = dropped / late / bại lộ.
+   Rules (OD 23/11 ~22:55Z, E56r FAIL 1/2): ≤ 4 words, natural cổ trang phrase, unique in DH_CAT, no clash with jdh / jkcg / jge / j8 / arc or chapter names
+   (dev/test/titles2-scan.js checks every one). bd_hoa / bd_ngua / bd_tuc / bd_hoang reuse the nc_* chapter texts with their own land, so their names differ. */
+const DH3N={cp:{
+tt_co:"Hiếu thuận giữ nghĩa/Mượn thế phủ cha;Giữ nghĩa môn sinh/Bán đứng môn sinh;Bắt kẻ đọc thư/Dùng kẻ trộm thư;Gỡ lời đàn hặc/Mượn sớ hại người;Lòng son một dạ/Hai lòng đôi ngả;Tự cầm cờ chính/Kết bè riêng tư;Can gián đêm hội/Châm lửa triều hội;Ván cờ khép đẹp/Ván cờ máu lạnh",
+tt_oan:"Quyết minh oan cha/Mặc cha chịu oan;Lần ra sổ giả/Ngụy tạo sổ sách;Giữ mạng nhân chứng/Mua chuộc nhân chứng;Tìm kẻ hưởng lợi/Đục nước béo cò;Thăm cha trong ngục/Bỏ cha trong ngục;Đứng chứng công đường/Khai gian công đường;Án xử phân minh/Lấy án đổi án;Tiếng nhà trong sạch/Rửa tiếng bằng máu",
+tt_tranh:"Hàn gắn phủ cha/Châm ngòi huynh đệ;Hiểu lòng huynh trưởng/Ly gián huynh trưởng;Giữ người trong phủ/Lôi kéo gia nhân;Dẹp lời đồn độc/Thêu dệt chuyện độc;Hầu cha tận hiếu/Nhòm ngó gia ấn;Trao ấn đúng người/Cướp gia ấn phủ;Gia yến sum vầy/Gia yến tan đàn;Một nhà chung lòng/Phủ cha tan nát",
+tt_mat:"Giữ lời cha hứa/Lật lọng mật ước;Trả ân Trung cung/Quỵt ân Trung cung;Cam lòng dưới bậc/Vượt bậc bội ước;Qua được phép thử/Gian dối Trung cung;Chặn kẻ chen ngang/Bán ước cho người;Ba mặt một lòng/Ba mặt hai lời;Giữ ước đến cùng/Xé ước giữa chừng;Mật ước vẹn tròn/Mật ước nhuốm máu",
+dtq_bien:"Lo cho Nhạn Môn/Mặc kệ biên ải;Lương thảo kịp mùa/Bớt xén lương thảo;Bắt kẻ bán tin/Bán tin quân trại;Xin được viện binh/Ngăn đường viện binh;Giữ lòng Ứng Châu/Đổ lỗi mất thành;Can vua thân chinh/Xúi vua thân chinh;Hậu thuẫn quyết chiến/Mưu lợi chiến trận;Đón cha khải hoàn/Mừng thầm bại trận",
+dtq_vu:"Tin cha trung nghĩa/Phủi tay với cha;Nhận ra nét giả/Giả nét chữ người;Tìm ra lính trạm/Bịt miệng lính trạm;Đón cha đối chất/Lánh mặt cha già;Vạch bàn tay trong/Che giấu nội gián;Đối chất rành mạch/Đối chất gian trá;Đủ chứng giải oan/Hủy chứng cứ thật;Trời sáng oan tan/Oan nọ chồng oan",
+dtq_binh:"Giữ cha trung quân/Mượn binh quyền cha;Dâng hổ phù về/Giấu nửa hổ phù;Yên lòng chư tướng/Kích động chư tướng;Chén rượu giải binh/Chén rượu ép người;Gạt lời gièm pha/Đổ thêm lời gièm;Vẹn cả trung hiếu/Hai mặt vua cha;Giao ấn êm đẹp/Níu giữ ấn soái;Công thần vinh quy/Công thần thất thế",
+dtq_huynh:"Lo cứu huynh trưởng/Bỏ huynh nơi giặc;Gom bạc chuộc người/Ăn chặn tiền chuộc;Cự điều kiện giặc/Ngầm thuận sứ giặc;Giữ thể diện triều/Bán thể diện triều;Mở đường cứu lén/Lộ đường cứu lén;Gột tiếng hàng thư/Đổ tội hàng thư;Biện bạch cho huynh/Khai buộc tội huynh;Huynh muội vẹn tình/Huynh muội đoạn tình",
+muoi_tuoc:"Xin tước chính đường/Mua tước bằng bạc;Tìm người bảo lãnh/Mua người nói giúp;Lễ vật đúng phép/Bạc lót cửa cung;Nhà buôn có nết/Trả đũa lời chê;Đắp đê lập công/Kể công đòi tước;Gỡ tờ sớ tố/Đổ tội mua quan;Tước phong xứng đáng/Tước phong đút lót;Tước nhà vẻ vang/Tước nhà ô danh",
+muoi_lau:"Tra rõ thuyền muối/Che giấu muối lậu;Giữ sổ hải trình/Sửa sổ hải trình;Lần ra kẻ hãm/Hãm hại trả đũa;Phá đường muối lậu/Chia phần muối lậu;Cứu cha khỏi ngục/Mặc cha ngục tối;Giữ lão lái thuyền/Diệt khẩu lái thuyền;Án muối công minh/Đút lót án muối;Nhà muối trắng án/Trắng án bẩn tay",
+muoi_doi:"Thương dân năm đói/Lợi dụng năm đói;Trả ruộng cho dân/Gom ruộng dân đói;Mở cháo dân đói/Đuổi dân ngoài thành;Mở kho tỏ lòng/Tích trữ đầu cơ;Phát chẩn tận tay/Phát chẩn lấy tiếng;Bắt kẻ ăn bớt/Chia phần ăn bớt;Mùa sau no ấm/Ép giá mùa sau;Giang Nam mang ơn/Giang Nam oán hận",
+muoi_no:"Cho vay có nghĩa/Cho vay nặng lãi;Giữ kín giấy nợ/Phô giấy nợ người;Rộng lòng tha lãi/Ép lãi đến cùng;Gạt kẻ thứ ba/Bán nợ cho người;Gỡ nợ cho người/Nợ chồng thêm nợ;Che tiếng con nợ/Rêu rao chuyện nợ;Nợ hóa thành ân/Nợ hóa thành oán;Chỉ đỏ thắt duyên/Chỉ đỏ trói người",
+cn_chu:"Nhớ ơn chủ cũ/Quên ơn chủ cũ;Chén trà ân tình/Chén trà hờn cũ;Nâng đỡ đồng liêu/Rẻ rúng đồng liêu;Gỡ bẫy yến thọ/Giăng bẫy yến thọ;Ngang hàng giữ lễ/Ngang hàng lên mặt;Đỡ chủ sa cơ/Đạp chủ sa cơ;Ngồi lại hòa giải/Đối diện kết thù;Chủ tớ trọn nghĩa/Chủ tớ thành thù",
+cn_tinh:"Gác lại tình xưa/Vấn vương tình xưa;Đốt thư năm xưa/Giữ thư làm tin;Đòi lại thư cũ/Mua thư bịt miệng;Lặng tiễn người đi/Níu kéo thị vệ;Dập lời đồn tình/Đổ đồn cho người;Ngay thẳng khi tra/Gian dối khi tra;Không ép lời khai/Ép người khai gian;Chôn chặt chuyện cũ/Khơi lại chuyện cũ",
+cn_ban:"Nhớ người tri kỷ/Quên người tri kỷ;Che chở Tố Nga/Mặc Tố Nga nguy;Giữ kín điều thấy/Đem bí mật bán;Lật mặt kẻ vu/Hùa theo kẻ vu;Thuốc thang cho bạn/Bỏ bạn lúc bệnh;Lời khai trọn nghĩa/Bẻ lời khai bạn;Rửa oan cho bạn/Gác oan của bạn;Chị em trọn tình/Chị em lìa tình",
+cn_than:"Tìm lại thân thế/Giấu nhẹm thân thế;Giữ di vật cũ/Bán di vật cũ;Án cũ công tâm/Mượn án cũ hại;Đón người nhà cũ/Chối người nhà cũ;Đứng vững trước hặc/Đút lót kẻ hặc;Nhận lại họ Thẩm/Chối bỏ họ Thẩm;Minh oan cha ruột/Bỏ oan cha ruột;Họ thật rạng danh/Họ thật chôn vùi",
+nc_gian:"Khước từ mật lệnh/Nhận mật lệnh ngầm;Cắt đường thư ngầm/Mở đường thư ngầm;Trình rương hàng lạ/Che rương hàng lạ;Thẳng thắn trước vua/Lừa mắt Hoàng thượng;Giữ tin hành quân/Lộ tin hành quân;Thật lòng khi xét/Diệt khẩu lão Phác;Tự thú trước án/Đốt thư phi tang;Một dạ với vua/Lòng về cố quốc",
+nc_su:"Tiếp sứ cố hương/Mượn sứ mưu riêng;Sứ lễ chu toàn/Sứ lễ thất thố;Gấm thọ dâng vẹn/Tráo gấm Bách thọ;Xin tội cho huynh/Che tội phạm cấm;Đại yến rạng mặt/Đại yến bẽ mặt;Chợ biên đôi lợi/Chợ biên một lợi;Tiễn sứ thanh bạch/Gửi hàng lậu sứ;Bắc cầu hai nước/Cầu gãy hai nước",
+nc_tuc:"Hòa nhập đất mới/Khinh khi đất mới;Áo quê đúng lễ/Áo quê trái lễ;Canh quê đãi khách/Mượn canh hại người;Thờ tổ đúng phép/Lén lập bàn thờ;Gỡ sớ ngoại tộc/Đẩy sớ hại người;Lễ Phật đản vẹn/Lễ Phật đản lỗi;Nghĩa nữ giữ gốc/Mua tông phả mới;Hai nửa vẹn toàn/Hai nửa chia lìa",
+nc_vuong:"Đứng ngoài tranh ngôi/Nhúng tay tranh ngôi;Ấn phong đúng chủ/Ấn phong trao gian;Gỡ thế hai phe/Khoét sâu hai phe;Đáp thư của mẹ/Ngoảnh mặt thư mẹ;Xuất binh có nghĩa/Xúi binh xâm lấn;Bình tâm tin bại/Lợi dụng tin bại;Lời quyết công tâm/Lời quyết vụ lợi;Ngai cố quốc yên/Ngai cố quốc loạn",
+bd_hoa:"Giữ lời hòa thân/Phá lời hòa thân;Bái điện đúng nghi/Bái điện ngạo nghễ;Dâng gấm mừng thọ/Gấm thọ đánh tráo;Chuộc lỗi cho huynh/Bao che huynh trưởng;Yến tiệc rạng danh/Yến tiệc gây hấn;Chợ biên công bằng/Chợ biên ép giá;Sứ về tay sạch/Sứ về hàng cấm;Hòa ước bền lâu/Hòa ước rạn vỡ",
+bd_ngua:"Ngựa chợ minh bạch/Ngựa chợ mờ ám;Chặn thư Hội Đồng/Thư lén Hội Đồng;Trình lộ dẫn giả/Cấp lộ dẫn giả;Ngay thật trước vua/Che mắt Hoàng thượng;Giữ kín quân tình/Bán tin quân tình;Cứu lão đúng phép/Bịt miệng lão Phác;Ra mặt nhận lỗi/Phi tang thư từ;Lòng theo Đại Hy/Lòng theo thảo nguyên",
+bd_tuc:"Giữ gốc thảo nguyên/Coi rẻ đất khách;Y phục hợp lễ/Y phục khiêu khích;Món quê mời khách/Món quê giấu độc;Thờ tổ giữ lễ/Thờ tổ trái phép;Bác sớ hạn ngôi/Mượn sớ hạn ngôi;Học lễ chu toàn/Học lễ qua loa;Nhận nghĩa giữ họ/Đổi họ cầu vinh;Một người hai quê/Mất cả hai quê",
+bd_hoang:"Lánh xa tranh vị/Dấn thân tranh vị;Sách phong đúng người/Sách phong đổi chác;Hòa giải hai phe/Gây thêm chia rẽ;Cứu mẹ nơi xa/Bỏ mặc thư mẹ;Binh xuất có danh/Dẫn giặc về nhà;Vững lòng tin bại/Hả hê tin bại;Quyết đoán vì dân/Quyết đoán vì mình;Ngai vàng yên vị/Ngai vàng nhuộm máu",
+bd_san:"Săn thu chính đại/Săn thu giở trò;Chăm ngựa tận tình/Lén vào chuồng ngựa;Tìm kẻ cắt đai/Cắt đai yên người;Cưỡi ngựa hầu vua/Ngựa phi đoạt sủng;Trị dịch cứu ngựa/Giấu dịch chuồng ngựa;Mã cầu thượng võ/Mã cầu gian lận;Gác ngựa ở lại/Lén ngựa ra đi;Vi trường hiển hách/Vi trường tai tiếng",
+bd_soi:"Phò người chính thống/Phò kẻ tiếm ngôi;Đáp thư phân minh/Đáp thư hai mặt;Tước dao sứ giả/Mượn dao sứ giả;Khai thông Tây Thị/Chặn đường Tây Thị;Che chở vương hậu/Bán đứng vương hậu;Thắng ngôi chính đại/Mua trận chọn ngôi;Hộ tống bình an/Phục binh Thông Lĩnh;Ngai về chính chủ/Ngai về bù nhìn",
+bd_tuyet:"Thương người chạy nạn/Xua người chạy nạn;Mở kho Thường Bình/Rút kho Thường Bình;Giữ giá lương ải/Buôn lương chợ ải;Truy cướp Lương Châu/Chia phần của cướp;Dựng lều lánh nạn/Bỏ mặc chân ải;Chữa sốt trong trại/Phong trại bỏ mặc;Mở ải đón người/Đóng ải đuổi người;Nô Nhụ đón xuân/Nô Nhụ tang thương",
+bd_hen:"Kính lửa thánh thề/Khinh lời thề thánh;Giữ nhẫn ấn thề/Đem nhẫn thề cầm;Kết nghĩa chân thành/Kết nghĩa giả dối;Tìm lẽ sân vật/Che án sân vật;Trao thư nguyên vẹn/Chặn thư người khác;Thăm ngục giữ nghĩa/Tố thêm trong ngục;Cứu người đêm xử/Dìm người đêm xử;Thề lửa vẹn nghĩa/Thề lửa phản bội",
+pt_hai:"Ngóng thuyền cố quốc/Mặc thuyền trôi dạt;Hồi âm Phúc Châu/Giấu thư Phúc Châu;Kính người giữ kiêng/Đuổi người giữ kiêng;Kết bạn Tân La/Ép thuyền Tân La;Dẹp giặc Đông Hải/Cấu kết giặc biển;Cứu người sống sót/Bỏ người sống sót;Kiểm cống minh bạch/Ăn bớt rương cống;Đủ người về nước/Gạch tên người về",
+pt_su:"Quốc thư đúng mực/Quốc thư ngạo mạn;Hồi thư đúng lễ/Hồi thư lắt léo;Xếp chỗ hợp lễ/Tranh chỗ yến tiệc;Lễ bái vẹn toàn/Lễ bái khinh nhờn;Hồi tứ hậu hĩnh/Hồi tứ bớt xén;Che chở lưu học/Đuổi lưu học sinh;Tiễn thuyền yên ổn/Giữ thuyền làm tin;Sứ về trọn vẹn/Sứ về dở dang",
+pt_tang:"Trọng lời thỉnh thầy/Cản lời thỉnh thầy;Nhường khoang cho thầy/Bán khoang thuyền thầy;Gỡ lệnh chặn thầy/Tố chuyến đi lén;Chữa mắt cho thầy/Mặc mắt thầy mờ;Hòa giải chùa quán/Khích chùa đấu quán;Giữ xá lợi tháp/Trộm xá lợi tháp;Đao dâng cửa Phật/Giữ đao làm của;Thầy đi thuận buồm/Ép thầy ở lại",
+pt_dang:"Hồi môn đến bến/Nhòm ngó hồi môn;Kê khai hòm đao/Lén bán hòm đao;Báo thuyền giặc sớm/Mở bến cho giặc;Chuộc người thuyền giặc/Mặc cả tiền chuộc;Sổ thu ngay thẳng/Sửa sổ Thị bạc;Dâng đao chém sắt/Giấu đao chém sắt;Ô Cửu đền tội/Thả hổ về rừng;Luật biển công bằng/Luật biển một phe",
+td_an:"Quyết lật án oan/Mượn án báo thù;Tìm ra sớ gốc/Tẩy xóa sớ gốc;Giữ người nhớ án/Ép nhân chứng khai;Đỡ đòn phản công/Phản đòn tàn độc;Chứng cứ chân thật/Chứng cứ ngụy tạo;Dâng sớ đúng lúc/Dâng sớ vu ngược;Tam ty minh xét/Tam ty bị mua;Án cũ minh bạch/Oan cũ sinh oan",
+td_ke:"Lần tìm kẻ hại/Lấy oán trả oán;Lần theo đường bạc/Nuốt trọn đường bạc;Giữ mạng tay sai/Giết tay sai cũ;Nhổ tai mắt cung/Mượn tai mắt người;Kết minh chính đáng/Lợi dụng đồng minh;Bẫy ngược đúng tội/Bẫy ngược hại lây;Vạch mặt trước triều/Lén diệt kẻ lộ;Trả thù đúng người/Trả thù vạ lây",
+td_song:"Tìm em thất lạc/Mặc em lưu lạc;Giữ kín tin em/Đem tin em đổi;Giữ đường thư em/Lộ đường thư em;Che chở em út/Bịt miệng kẻ nghi;Thuốc men cho em/Bỏ mặc em thương;Hộ tịch đường hoàng/Hộ tịch giả mạo;Đón em về nhà/Dùng em làm cờ;Máu mủ tình thâm/Máu mủ dửng dưng",
+td_tha:"Nghĩ lại mối thù/Nuôi lòng báo thù;Phá vụ trù ếm/Đặt búp bê ếm;Đứng ngoài sớ hặc/Thêm dầu sớ hặc;Nghe lời thú nhận/Bêu lời thú nhận;Khước từ mặc cả/Nhận lời mặc cả;Đêm giỗ hòa giải/Đêm giỗ rửa hận;Hóa giải nước cuối/Dồn địch đường cùng;Cởi nút oán xưa/Thắt chặt nút oán",
+ch_co:"Hiếu kính cô mẫu/Tranh quyền cô mẫu;Tai mắt có chừng/Tai mắt khắp nơi;Nhận lỗi tai mắt/Thí bỏ tai mắt;Cửu môn đúng người/Cửu môn người mình;Khước lệnh hại người/Vâng lệnh hại người;Từ chối đúng lẽ/Thề gian Đức Thọ;Thọ yến vẹn nghi/Thọ yến bày cờ;Cô cháu tình sâu/Cô cháu lìa lòng",
+ch_benh:"Lo bệnh cô mẫu/Chờ cô mẫu yếu;Tìm phương thuốc hay/Phương thuốc vụ lợi;Giữ lòng người cũ/Gom kẻ trở cờ;Tra chén thuốc độc/Đổ độc cho người;Đêm đêm hầu bệnh/Hầu bệnh lấy công;Tìm vị cứu mạng/Ém vị thuốc quý;Canh đêm quyết định/Toan tính đêm ấy;Che chở người cũ/Thâu tóm người cũ",
+ch_ho:"Nhường nhịn em họ/Tranh sủng em họ;Thỉnh an nhường bước/Chen trước thỉnh an;Quà thọ chân thành/Quà thọ hạ người;Bỏ qua lời gièm/Gièm em trước cô;Nhà ngoại tín cẩn/Mua chuộc nhà ngoại;Chung tay chống hặc/Mượn hặc hại em;Nhường ghế bên cô/Giành ghế bên cô;Đứng đầu họ ngoại/Họ ngoại chia lìa",
+ch_bi:"Kín miệng chuyện xưa/Rình chuyện năm xưa;Tìm kẻ trình thư/Dùng kẻ trình thư;Thương cháu họ Lâm/Hại cháu họ Lâm;Thưa thật cô mẫu/Dối gạt cô mẫu;Tìm lại hộp gấm/Bán hộp gấm cũ;Bảo vệ người giữ/Dùng thư uy hiếp;Thanh minh tha người/Thanh minh diệt khẩu;Chôn sâu bí mật/Bí mật hại người",
+thd_tho:"Thơ hay tự bút/Thơ hay mượn người;Thơ vượt tường cung/Thơ nhờ đút lót;Tìm lại tập nháp/Trộm nháp người khác;Thi tài chính đáng/Mua chuộc giám khảo;Rửa tiếng đạo thơ/Vu người đạo thơ;Chứng thơ chính chủ/Chứng thơ giả tạo;Bảng vàng xứng tên/Bảng vàng khuất tất;Tài nữ danh xứng/Tài nữ hư danh",
+thd_sach:"Quý bản thảo cha/Coi rẻ bản thảo;In sách đúng lúc/Giấu sách mưu lợi;Đỡ đòn phủ quyền/Đổ đòn cho cha;Che chở cha già/Mặc cha nguy khốn;Dâng sách ngự lãm/Sửa sách cầu vinh;Gỡ án văn tự/Khai sách phỉ báng;Liều mình cứu cha/Đổ hết cho cha;Chữ cha lưu thế/Chữ cha vùi lấp",
+thd_tro:"Thương học trò cha/Dùng học trò cha;Tố kẻ bán đề/Bán đề kiếm lời;Soi bảng khoa trước/Che bảng gian lận;Che chở sĩ tử/Nộp người bị truy;Dâng đơn kêu oan/Ém đơn kêu oan;Khoa án sáng tỏ/Khoa án vạ lây;Thi lại công minh/Thi lại sắp đặt;Khoa trường trong sạch/Khoa trường ô uế",
+thd_hoc:"Dạy chữ tận tâm/Dạy chữ mưu lợi;Thương hai trò nhỏ/Thiên vị trò nhỏ;Giải lòng nghi mẹ/Gieo nghi cho mẹ;Khảo hạch công tâm/Khảo hạch thiên lệch;Phạt có tình thương/Phạt trẻ trút giận;Giảng đạo tận tình/Giảng đạo xuyên tạc;Lời phê công bằng/Lời phê ác ý;Người thầy đáng kính/Người thầy đáng sợ",
+cnv_chu:"Kín miệng hầu chủ/Rình bí mật chủ;Giữ gói thuốc kín/Lấy gói thuốc chủ;Đuổi kẻ dò hỏi/Bán tin kẻ dò;Qua phép thử chủ/Gian dối phép thử;Dập lời xạ hương/Thổi lời xạ hương;Lời khai che chủ/Lời khai bán chủ;Kín miệng đêm tra/Khai hết đêm tra;Dao cất trong vỏ/Dao kề cổ chủ",
+cnv_ban:"Đứng về Xuân Đào/Bỏ mặc Xuân Đào;Tìm vòng ngọc thật/Giấu vòng ngọc thật;Vạch mặt Thu Cúc/Theo phe Thu Cúc;Xin tha Xuân Đào/Mặc Xuân Đào chịu;Làm chứng ngay thẳng/Làm chứng gian dối;Xin chủ xử công/Xui chủ xử oan;Giao sổ cửa sau/Đốt sổ cửa sau;Đồng hương tương trợ/Đồng hương phản bạn",
+cnv_mat:"Tránh ánh mắt vua/Đón ánh mắt vua;Dỗ lòng chủ ghen/Khích lòng chủ ghen;Giữ phận tỳ nữ/Cố ý gặp vua;Tên ghi đường hoàng/Lén ghi tên sổ;Đêm đầu e ấp/Đêm đầu toan tính;Tớ lên không quên/Tớ lên đạp chủ;Gột lời quyến rũ/Đáp đồn bằng mưu;Ánh mắt chân tình/Ánh mắt mưu toan",
+cnv_ma:"Kính trọng ma ma/Khinh nhờn ma ma;Học việc chăm chỉ/Học việc lười nhác;Bù khoản sổ thiếu/Khoét thêm sổ thiếu;Minh oan ma ma/Hùa tố ma ma;Đứng ra bảo thầy/Bỏ thầy lúc khó;Sát hạch thực tài/Sát hạch gian lận;Chăm ma ma bệnh/Chờ ma ma ngã;Nối ghế ma ma/Cướp ghế ma ma"},
+vn:{
+th_thuoc:"Tìm thuốc tận hiếu/Lỡ thuốc Thái hậu",th_thuoc2:"Ba đêm canh lò/Bỏ lò thuốc nguội",th_kinh_om:"Kinh an Thái hậu/Kinh dở giữa chừng",hh_hau_th:"Chia phiên hầu khéo/Bỏ phiên hầu bà",
+emp_om:"Hầu thuốc long thể/Lơ là long thể",emp_kinh_th:"Kinh cầu thánh an/Kinh dâng lỡ hẹn",rv_thuoc:"Xin thuốc cứu bạn/Hẹn thuốc rồi quên",rv_tham_om:"Cùng bạn thăm bệnh/Thăm bệnh lấy lệ",
+th_tham:"Thay bà thăm bệnh/Phụ lời Thái hậu",hh_om:"Hầu thuốc Trung cung/Bỏ thuốc Trung cung",doc_docman:"Báo tin trúng độc/Tin độc chậm chân",lc_thuoc:"Thuốc vào lãnh cung/Thuốc lãnh cung dở",
+thuoc_cam:"Thuốc qua cấm túc/Thuốc cấm túc hỏng",huong_doc:"Thử hương an thần/Bỏ dở thử hương",rv_con_om:"Lo thầy cho trẻ/Lỡ thầy cho trẻ",thu_ab:"Thư làm lành tới/Thư làm lành lạc",
+hoa_giai:"Gỡ giận Trung cung/Hòa giải thêm giận",hh_kieu:"Khuyên người bớt kiêu/Lời khuyên phản tác",rv_di_cung:"Đi cùng che chở/Bỏ bạn giữa đường",bo_chung:"Xin người buông tha/Xin tha bất thành",
+loi_thoi:"Chén trà làm lành/Chén trà thêm hiềm",don_ta:"Dò oán Trung cung/Dò oán hỏng việc",off_hoa:"Hòa hai nhà quan/Hai nhà thêm thù",mat_tram:"Tìm lại trang sức/Trang sức mất tăm",
+mat_tram2:"Làm chứng ngay tình/Làm chứng lỡ lời",tai_mat:"Bắt kẻ lọt chuyện/Để lọt tai mắt",bac_mat:"Tìm lại bạc lương/Bạc lương mất trắng",hang_lau:"Giữ hàng cho bạn/Hàng lậu vỡ lở",
+chuoc_sv:"Chuộc lại gia bảo/Lỡ hẹn chuộc đồ",doi_thuoc:"Tra trộm nhân sâm/Mất dấu nhân sâm",dem_chung:"Hẹn giờ Tý vẹn/Hẹn giờ Tý hỏng",rsv_tin:"Tin đổi lời xin/Đổi ơn hụt tay",
+tra_emp:"Trà an thần ngự/Trà an thần hỏng",emp_co:"Ván cờ giải khuây/Ván cờ mất vui",so_th:"Tấu khẩn kịp giờ/Tấu khẩn lỡ giờ",tho_te:"Văn tế đầu năm/Văn tế lỡ lễ",
+an_xa:"Ân xá cầu phúc/Ân xá dở dang",qua_tet:"Quà Tết vừa lòng/Quà Tết hỏng việc",bien_tin:"Dò ý biên cương/Dò ý hỏng việc",kho_lua:"Phê sớ phát chẩn/Sớ chẩn bị gác",
+ao_bien:"Áo bông biên ải/Áo bông lỡ hẹn",su_thu:"Thư hòa tới ngự/Thư hòa dở dang",so_hl:"Đặt sớ đúng chỗ/Sớ đặt hỏng việc",so_khen:"Phú mừng biên yên/Phú mừng dở dang",
+tham_o:"Dò án tham ô/Dò án hỏng việc",off_bac:"Đổi ơn quyền thần/Ơn quyền thần hỏng",off_con:"Che chở con quan/Bỏ mặc con quan",ak_bien:"Xin người ra biên/Xin biên không thành",
+gioi_th:"Đưa người thỉnh an/Thỉnh an hỏng việc",hh_th:"Đưa lời hai cung/Lời hai cung lạc",th_nhac_hh:"Nhắc Trung cung khéo/Lời nhắc hỏng việc",th_tram:"Trâm đổi đôi mắt/Mắt Càn Ninh lỡ",
+tin_doi:"Tin đổi lời đỡ/Lời đỡ không thành",quat_rv:"Quạt vẽ dâng vua/Quạt vẽ dang dở",ksp_xem:"Xem sổ trót lọt/Xem sổ hỏng việc",tu_nu:"Dạy lễ tân phi/Dạy lễ bỏ dở",
+vay_bac:"Vay bạc đúng hẹn/Vay bạc quá hẹn",rv_ngheo:"Giúp bạn túng thiếu/Hứa giúp bỏ ngang",rv_tho:"Thơ yến thưởng hoa/Thơ yến lỡ hẹn",rv_huong:"Túi hương an thần/Túi hương hỏng việc",
+canh_thai:"Canh giữ long thai/Lơ là long thai",giu_thu:"Giữ kín hộp thư/Để lộ hộp thư",lc_ao:"Áo ấm lãnh cung/Áo ấm lỡ hẹn",lc_thu:"Thư oan tới ngự/Thư oan bị chặn",
+ak_me:"Lời xin lỗi mẹ/Lời xin lỗi lạc",mama_nghi:"Xin cho dưỡng già/Dưỡng già lỡ dịp",maid_vay:"Mượn tiền trả đủ/Mượn tiền không trả",sv_luong:"Xin thưởng cho người/Thưởng hứa không thành",
+dt_thu:"Trao túi thơm kín/Túi thơm lạc đường",dt_hen:"Một khắc tương phùng/Hẹn hò dang dở",dt_che:"Che duyên kín đáo/Duyên kín vỡ lở",xc_mai:"Mai mối thành đôi/Mai mối lỡ làng",
+xc_uoc:"Hẹn ước ghi sổ/Hẹn ước dở dang",xc_hoimon:"Góp của hồi môn/Hồi môn lỡ hẹn",dong_tam:"Nút đồng tâm thắt/Nút đồng tâm tuột",giau_cn:"Cứu người khỏi chủ/Bỏ người cho chủ",
+th_thanhminh:"Kinh tảo mộ vẹn/Kinh tảo mộ lỡ",th_kinh2:"Kinh dâng Hộ Quốc/Kinh Hộ Quốc dở",th_mai:"Bình mai đón Tết/Bình mai úa tàn",th_trungcuu:"Rượu cúc Trùng cửu/Rượu cúc hỏng men",
+hh_trungthu:"Yến Trung thu đẹp/Yến Trung thu hỏng",hh_trungcuu:"Bình phong mừng thọ/Bình phong dở dang",hh_doanngo:"Túi ngũ sắc khéo/Túi ngũ sắc lỡ",th_aodong:"Áo bông người già/Áo bông dở mũi",
+akf_den:"Đèn lồng Nguyên tiêu/Đèn lồng tắt lửa",tv_mua:"Thuốc sau Hội Phượng/Thuốc trị thương lỡ",maid_tet:"Quà Tết về quê/Quà Tết thất lạc",kho_tet:"Kho lụa rõ ràng/Kho lụa lộn xộn",
+su_tet:"Dẫn sứ dâng lễ/Lễ sứ thất nghi",akf_xuan:"Điệu múa yến xuân/Điệu múa lỡ nhịp",tho_hs:"Đề thơ dâng ngự/Đề thơ hỏng tranh",dan_ns:"Khúc đàn tái hiện/Khúc đàn bỏ dở",
+ns_doi:"Ngón đàn đổi ơn/Lời tiến cử hụt",hs_hoa:"Bách điểu triều phụng/Bức họa dở dang",dich_thu:"Dịch quốc thư chuẩn/Dịch quốc thư sai",ak_sach:"Tìm sách cổ quý/Sách cổ bặt tăm",
+ak_co:"Ván cờ tri âm/Ván cờ bất hòa",le_hoa:"Dạy lễ xuất giá/Lễ xuất giá lỗi",fam_suy:"Gánh đỡ nhà suy/Mặc nhà thế suy",fam_tt:"Dò ý lập trữ/Dò ý trữ hỏng",
+fam_dtq:"Lương thảo cho cha/Lương thảo lỡ cha",fam_muoi:"Quyền muối trấn mới/Quyền muối không thành",fam_nc:"Giảm cống cho quê/Cống quê vẫn nặng",fam_bd:"Chợ ngựa biên ải/Chợ ngựa không thành",
+fam_pf:"Mở bến cho thuyền/Thuyền quê lỡ bến",fam_cn:"Giúp đồng liêu cũ/Phụ đồng liêu cũ",fam_ch:"Vẹn lời cô gửi/Phụ lời cô gửi",fam_thd:"Sách cho trường làng/Trường làng thiếu sách",
+fam_td:"Cứu người hầu cũ/Bỏ người hầu cũ",fam_tien:"Bạc nhà đến tay/Bạc nhà thất lạc",rgl_th1:"Kinh giỗ tiên đế/Kinh giỗ lỡ dịp",rgl_th2:"Vun mẹ con hòa/Mẹ con vẫn hờn",
+rgl_th3:"Hoàng tôn đầy nhà/Hoàng tôn vắng nhà",rgl_hh1:"Phương thuốc cầu tự/Thuốc cầu tự lỡ",rgl_hh2:"Cầu tự thành tâm/Cầu tự dở dang",rgl_hh3:"Giữ yên Trung cung/Trung cung dậy sóng",
+rgl_ly1:"Lần chuyện năm xưa/Chuyện xưa đứt dấu",rgl_ly2:"Lời khai A Hạnh/A Hạnh im lặng",rgl_ly3:"Rửa oan phế phi/Oan phế phi còn",rgl_mb1:"Thư nhà tới tay/Thư nhà thất lạc",
+rgl_mb2:"Thuốc cho mẹ già/Thuốc mẹ lỡ hẹn",rgl_mb3:"Giữ lời xuất cung/Lỡ lời xuất cung",rgl_tq1:"Lo cho cháu họ/Phụ lời cháu họ",rgl_tq2:"Dạy chữ con nuôi/Con nuôi thất học",
+rgl_tq3:"Đất dưỡng lão/Đất dưỡng lão lỡ",rgl_ty1:"Sách thuốc tìm về/Sách thuốc biệt tăm",rgl_ty2:"Thử thuốc thành công/Thử thuốc hỏng việc",rgl_ty3:"Y thư dâng ngự/Y thư dang dở",
+nr_emp:"Nói giúp trước vua/Lời giúp không tới",nr_th:"Đỡ lời trước bà/Phụ lời trước bà",nr_hh:"Đỡ lời Trung cung/Phụ lời Trung cung",nr_thu:"Chuyển thư kín đáo/Thư kín lỡ tay",
+nr_do:"Dò tin giúp bạn/Dò tin hỏng việc",nr_y:"Thái y kín miệng/Bệnh kín lỡ thầy",nr_che:"Che chở bạn đường/Bỏ bạn lúc nguy",nr_bac:"Bạc giúp lúc gấp/Bạc gấp không giúp"}};
 /* ================= jdh3: DANH HIỆU part 3 — TITLES2 (owner OD 23/11 ~22:45Z Q + ~22:55Z "tiến hành làm luôn"; brief E55, review/titles2) =================
    Expert first (law 8): dev/handover/reports/titles2-expert.md (E54). Reuses jdh (DH_CAT, p.dh, dhObj, dhInc, the Danh hiệu panel) and KIT §82 / §82.1
    (kitTitlePlate with the two tones: sh "t" thiện = gold-white, sh "a" ác = gold-crimson; kit panel / rows only). Every number: BAL.dh.rp / BAL.dh.cp (jbal2).
@@ -70399,7 +70491,7 @@ function convicted(p){deed(p,"toi");try{const kp=typeof key==="function"?key(p):
   if(N.length&&Array.isArray(L))L.push(`<span class="rlab">Người đời gọi:</span> ${N.join(" · ")}`)}}catch(e){}return L}})();
 
 /* =================== PART B — CHÍNH TRUYỆN / PHỤ TUYẾN =================== */
-/* road → [good, bad] (3–4 words, the road's own words; Part B pattern «việc của đường + cách xử») */
+/* OLD SAVES ONLY (before FIX r1): road → [good, bad], one pair per road stepped per chapter; kept so an old save keeps its title; the per-chapter names are DH3N (jdh3n.js) */
 const ROADT={tt_co:["Con cờ giữ nước","Con cờ đổi phe"],tt_oan:["Rửa tiếng gia môn","Đổ oan cho người"],tt_tranh:["Nối lại một nhà","Chia phủ tranh quyền"],tt_mat:["Giữ trọn mật ước","Bội ước Trung cung"],
  dtq_bien:["Hậu phương giữ vững","Bán tin biên ải"],dtq_vu:["Giải oan thư phản","Mượn thư hại người"],dtq_binh:["Trao trả binh phù","Mưu đoạt binh phù"],dtq_huynh:["Đón huynh về nước","Bỏ huynh đất giặc"],
  muoi_tuoc:["Tước sạch không mua","Bạc đổi tước quan"],muoi_lau:["Bến sạch thuyền ngay","Thuyền lậu nuôi riêng"],muoi_doi:["Thóc chẩn tới dân","Đục khoét thóc chẩn"],muoi_no:["Trả sạch nợ cung","Quỵt nợ trong cung"],
@@ -70418,29 +70510,66 @@ const ARCT={s_than:["Nhận đúng người thân","Nhận bừa thân thích"],
  st_the:["Thế lực chính danh","Kết bè lũng đoạn"],st_con:["Mẹ hiền dạy con","Ép con theo ý"],st_dong:["Đông cung chính vị","Mưu ngôi Thái tử"],
  tm96a:["Từ biệt người xưa","Lưu luyến người xưa"],tm96b:["Vàng không sợ lửa","Lửa thiêu tình cũ"],tm96c:["Dứt tình chọn cung","Bỏ cung theo tình"],
  noi14:["Hương hỏa nối dòng","Mượn con nối dõi"],hau14:["Phượng tọa chính danh","Đạp người lên ngôi"],ke14:["Dạy con nên vua","Buông rèm sau ngai"]};
-/* j72 việc nhờ kinds (KIND72) → [good, bad] */
+/* OLD SAVES ONLY (before FIX r1): j72 việc nhờ kinds (KIND72) → [good, bad]; the per-chain names are DH3N.vn */
 const VNT={craft:["Tìm vật trả người","Tráo vật lừa người"],social:["Giao thiệp chu toàn","Đưa chuyện hai lòng"],inv:["Soi rõ trắng đen","Kết án qua loa"],pro:["Che chở kẻ yếu","Bỏ mặc người cầu"],
  love:["Se duyên lành","Ép duyên lấy lợi"],trade:["Có vay có trả","Ơn đổi lấy lợi"],risk:["Liều mình vì nghĩa","Liều lĩnh lộ chuyện"],court:["Góp sức việc triều","Lộ tay việc triều"],fam:["Chu toàn việc nhà","Bỏ bê việc nhà"]};
-/* j70 mưu hại roles → [name, tone, how] (every M70 method closes through exec70 / abandon70 / the accuse win / a conviction, so every kind is covered) */
-const MHT={mh_thoat:["Thoát lưới độc","t","Mưu hại nhắm vào bị chặn từ gốc hay sập bẫy"],mh_vach:["Vạch rõ gian tay","t","Tố giác thành, chứng cứ rành rành"],
- mh_minh:["Minh oan sau án","t","Bị vu oan, rồi kẻ vu oan bị kết tội"],mh_bao:["Báo tin cứu người","t","Báo trước cho người sắp bị hại"],
- mh_lo:["Bàn tay lộ dấu","a","Bày mưu hại người mà bị bắt quả tang hay bị lộ"],mh_nap:["Người nấp sau rèm","a","Bày mưu hại người, ra tay mà không ai thấy"]};
-/* j71 lập công families (MF7) → name; the bad one: hush money (thamo «Nhận bạc bịt miệng», j71 brb) */
+/* j70 mưu hại roles (FIX r1, E56r FAIL 3): the target / schemer names are PER METHOD GROUP (never a poison word for a non-poison case);
+   MG70 = method (M70 key, p.m) → group; MHG = group → [what she escaped (target), how it was done (schemer), thoat, lo, nap]. Expert pattern:
+   target «cách chống đỡ + kết cục», schemer «cách ra tay + kết cục». The exposer / the framed-then-cleared / the warner are method-free. */
+const MG70={poison:"doc",poison2:"doc",musk:"doc",kpoison:"doc",frame:"vu",kframe:"vu",plant:"vu",joint:"vu",rumor:"don",accuse:"don",block:"pha",bribe:"pha",ksab:"pha",huydung:"than",pond:"than",pushp:"than",catswap:"than"};
+const MHG={doc:["mưu hạ độc, hại thai","mưu hạ độc, hại thai","Thoát chén thuốc độc","Lộ tay hạ độc","Hạ độc không dấu"],
+ vu:["mưu vu oan, cài tang vật","mưu vu oan, cài tang vật","Thoát vòng vu cáo","Vu cáo bại lộ","Ngậm máu phun người"],
+ don:["lời đồn bẩn, lời tố gian","chuyện tung tin, tố gian","Lời đồn tự tan","Tung tin bại lộ","Tung tin giấu mặt"],
+ pha:["mưu rút thẻ bài, mua người hay phá việc học","mưu rút thẻ bài, mua người hay phá việc học","Vượt qua ngáng trở","Ngáng chân bại lộ","Ngáng chân trong tối"],
+ than:["mưu hủy dung, đẩy xuống hồ hay tráo hài nhi","mưu hủy dung, đẩy xuống hồ hay tráo hài nhi","Thoát hiểm gang tấc","Hại người lộ mặt","Ra tay trong tối"]};
+const MHT={mh_vach:["Vạch rõ gian tay","t",x=>`Tố giác kẻ mưu hại thành công ${tms(x)}`],mh_minh:["Minh oan sau án","t",x=>`Được rửa oan khi kẻ vu oan bị kết tội ${tms(x)}`],
+ mh_bao:["Báo tin cứu người","t",x=>`Báo trước cho người sắp bị hại ${tms(x)}`]};
+for(const g in MHG){const [w1,w2,n1,n2,n3]=MHG[g];MHT[`mh_${g}_thoat`]=[n1,"t",x=>`Thoát được ${w1} nhắm vào mình ${tms(x)}`];
+ MHT[`mh_${g}_lo`]=[n2,"a",x=>`Bày ${w2} mà bị lộ ${tms(x)}`];MHT[`mh_${g}_nap`]=[n3,"a",x=>`Bày ${w2} mà không ai hay ${tms(x)}`]}
+/* old saves only (before FIX r1 these three went to every method; kept so an old save keeps what it earned; never given now) */
+const MHOLD={mh_thoat:["Thoát lưới độc","t","Thoát được mưu hại nhắm vào mình"],mh_lo:["Bàn tay lộ dấu","a","Bày mưu hại người mà bị lộ"],mh_nap:["Người nấp sau rèm","a","Bày mưu hại người mà không ai hay"]};
+const mhG=p=>{try{return MG70[p&&p.m]||null}catch(e){return null}};
+/* j71 lập công families (MF7) → name; LCW = the deed words of each family (how text «Lập công ‹w›»); LCA = the bad ways (FIX r1, E56r FAIL 4: every bad way, like s_dich) */
 const LCT={cuute:"Công cứu tế",cuuhoang:"Công cứu giá",thbenh:"Công hầu bệnh",conbenh:"Công trông trẻ bệnh",tomuu:"Công vạch mưu",suthan:"Công tiếp sứ",thamo:"Công trừ tham ô",
  tiencu:"Công tiến hiền",chepkinh:"Công chép kinh",soke:"Công soát sổ",hoagiai:"Công hòa giải",tamtang:"Công lễ Thân tằm",hoahoan:"Công cứu nạn cung",dichbenh:"Công chặn dịch"};
 const LCWHY={"cứu tế":"cuute","cứu giá":"cuuhoang","hầu bệnh Thái hậu":"thbenh","vạch mưu":"tomuu","tiếp sứ":"suthan","bắt kẻ tham ô":"thamo","tiến cử hiền tài":"tiencu",
  "chép kinh":"chepkinh","soát sổ sách":"soke","lễ Thân tằm":"tamtang","cứu nạn trong cung":"hoahoan","chặn dịch":"dichbenh"};
-const tms=n=>n===1?"một lần":`${nW(n)} lần`;
-const arcName=k=>{try{return (ARC67[k]&&ARC67[k].t)||k}catch(e){return k}};
+const LCW=Object.assign({conbenh:"trông con bệnh",hoagiai:"hòa giải"},...Object.keys(LCWHY).map(w=>({[LCWHY[w]]:w})));
+/* key = family, the option it marks (j71 cpm7("<fam>_a")), name, how */
+const LCA={cuuhoang:["Hoảng sợ đứng nhìn","Bỏ mặc thánh giá","Đứng nhìn khi thánh giá gặp nạn"],chepkinh:["Nhờ cung nữ chép thay","Công mượn tay người","Nhờ người chép kinh thay mà nhận công"],
+ hoagiai:["Bênh ‹A› / Bênh ‹B›","Thiên vị một bên","Được nhờ hòa giải mà bênh một bên"],hoahoan:["Đóng cửa cung giữ mình","Đóng cửa ngồi nhìn","Đóng cửa cung giữ mình khi trong cung gặp nạn"],
+ dichbenh:["Đóng cửa cung tránh dịch","Bỏ mặc cung nhân","Đóng cửa cung tránh dịch, bỏ mặc cung nhân"],thamo:["Nhận bạc bịt miệng","Bạc lấp miệng gian","Nhận bạc bịt miệng kẻ tham ô"]};
+const tms=n=>n===1?"một lần":n<=10?`${nW(n)} lần`:"nhiều lần";
+const nCh=n=>n<=10?nW(n):"nhiều";
+const plainT=s=>{try{return String(typeof plain==="function"?plain(String(s||"")):s||"").replace(/\{[^}]*\}/g,"người ấy").replace(/\s*\(\d+\/\d+\)/g,"").replace(/\d+\s*bạc/g,"bạc").trim()}catch(e){return String(s||"")}};
+const arcName=k=>{try{return plainT((ARC67[k]&&ARC67[k].t)||k)}catch(e){return k}};
 const KIND=k=>{try{return (typeof KIND72==="object"&&KIND72[k]&&(KIND72[k].n||KIND72[k]))||k}catch(e){return k}};
+/* the jnroad NPC-road asks (T7 nr_*: their heading is spoken, so the how text names the deed) */
+const NRV={nr_emp:"Nói giúp trước mặt Hoàng thượng",nr_th:"Đỡ lời trước Thái hậu",nr_hh:"Đỡ lời trước Hoàng hậu",nr_thu:"Đưa lá thư kín đến tay người nhà",
+ nr_do:"Dò xem kẻ kia đang tính gì",nr_y:"Mời thái y chữa bệnh kín",nr_che:"Che chở người cùng đường",nr_bac:"Giúp bạc lúc túng gấp"};
+const vnName=t=>{try{const T=typeof T72I==="object"&&T72I[t];const s=T&&(typeof T.t==="function"?"":T.t);return s?plainT(s):(NRV[t]||t)}catch(e){return t}};
+/* DH3N (jdh3n.js) → ROADC[road][n] = [good, bad] for n = BAL.road.first − 1 (the premise .4) … BAL.road.last (.11); VNC[tid] = [good, bad] */
+const ROADC={},VNC={};
+try{for(const r in DH3N.cp)DH3N.cp[r].split(";").forEach((x,i)=>{(ROADC[r]=ROADC[r]||{})[i+4]=x.split("/").map(s=>s.trim())});for(const t in DH3N.vn)VNC[t]=DH3N.vn[t].split("/").map(s=>s.trim())}catch(e){console.error("jdh3n",e)}
+const SIDE=i=>i?"bằng thủ đoạn, phụ người hay trái lẽ":"mà giữ được nghĩa với người, lẽ với đời";
+const chName=(r,n)=>{try{return n===4?arcName(r):plainT(ARC67[ROAD14[r][n]].t)}catch(e){return ""}};
 function cpCat(){if(typeof DH_CAT!=="object")return;const T=BAL.dh.T=BAL.dh.T||{},C=CB();
- const put=(key,n,g,sh,how,c)=>{DH_CAT[key]={n,g,sh,how};T[key]={b:c.b,n:c.n,ch:sh==="t"?c.chT:c.chA}};
- for(const r in ROADT)ROADT[r].forEach((n,i)=>put(`cp_${r}_${i?"a":"t"}`,n,"cp",i?"a":"t",x=>`Khép lại ${tms(x)} chương đường «${arcName(r)}» ${i?"bằng thủ đoạn, phụ người hay trái lẽ":"mà giữ được nghĩa với người, lẽ với đời"}`,C.road));
- for(const a in ARCT)ARCT[a].forEach((n,i)=>put(`ca_${a}_${i?"a":"t"}`,n,"pt",i?"a":"t",()=>`Khép lại chuyện «${arcName(a)}» ${i?"bằng thủ đoạn, phụ người hay trái lẽ":"mà giữ được nghĩa với người, lẽ với đời"}`,C.arc));
- for(const k in VNT)VNT[k].forEach((n,i)=>put(`vn_${k}_${i?"a":"t"}`,n,"pt",i?"a":"t",x=>`Việc nhờ «${KIND(k)}»: ${i?"bỏ dở hay bại lộ":"làm xong"} ${tms(x)}`,C.vn));
- for(const k in MHT){const [n,sh,h]=MHT[k];put(k,n,"pt",sh,x=>`${h} (mưu hại) ${tms(x)}`,C.mh)}
- for(const k in LCT)put(`lc_${k}`,LCT[k],"pt","t",x=>`Lập công «${String((typeof MF7==="object"&&MF7[k]&&MF7[k].t)||k).replace(/^Lập công · /,"")}» ${tms(x)}`,C.lc);
- put("lc_brb","Bạc lấp miệng gian","pt","a",x=>`Nhận bạc bịt miệng kẻ tham ô ${tms(x)}`,C.lc)}
+ const put=(key,n,g,sh,how,c,old)=>{DH_CAT[key]={n,g,sh,how};if(old)DH_CAT[key].old=1;T[key]={b:c.b,n:c.n,ch:sh==="t"?c.chT:c.chA}};
+ /* (1) EACH main-road chapter: .4 premise + .5–.11, a good and a bad name of its own, once at that chapter's close */
+ for(const r in ROADC)for(const n in ROADC[r])ROADC[r][n].forEach((nm,i)=>put(`cp_${r}_${n}_${i?"a":"t"}`,nm,"cp",i?"a":"t",
+  ()=>+n===4?`Khép lại hồi mở đầu đường «${arcName(r)}» ${SIDE(i)}`:`Khép lại chương «${chName(r,+n)}» trên đường «${arcName(r)}» ${SIDE(i)}`,C.ch));
+ /* old saves only: the whole-road pair given before FIX r1 (never given now) */
+ for(const r in ROADT)ROADT[r].forEach((nm,i)=>put(`cp_${r}_${i?"a":"t"}`,nm,"cp",i?"a":"t",x=>`Khép lại ${nCh(x)} chương trên đường «${arcName(r)}» ${SIDE(i)}`,C.road,1));
+ for(const a in ARCT)ARCT[a].forEach((nm,i)=>put(`ca_${a}_${i?"a":"t"}`,nm,"pt",i?"a":"t",()=>`Khép lại chuyện «${arcName(a)}» ${SIDE(i)}`,C.arc));
+ /* (2) EACH j72 việc nhờ chain (T7 template), once */
+ for(const t in VNC)VNC[t].forEach((nm,i)=>put(`vn_${t}_${i?"a":"t"}`,nm,"pt",i?"a":"t",()=>`Việc nhờ «${vnName(t)}»: ${i?"bỏ dở, lỡ hẹn hay để bại lộ":"làm xong, trọn lời đã nhận"}`,C.vn));
+ for(const k in VNT)VNT[k].forEach((nm,i)=>put(`vn_${k}_${i?"a":"t"}`,nm,"pt",i?"a":"t",x=>i?`Bỏ dở hay để bại lộ việc nhờ loại «${KIND(k)}» ${tms(x)}`:`Làm xong việc nhờ loại «${KIND(k)}» ${tms(x)}`,C.vnK,1));
+ /* (3) mưu hại per method group */
+ for(const k in MHT){const [n,sh,h]=MHT[k];put(k,n,"pt",sh,h,C.mh)}
+ for(const k in MHOLD){const [n,sh,h]=MHOLD[k];put(k,n,"pt",sh,x=>`${h} ${tms(x)}`,C.mh,1)}
+ /* (4) lập công: every good family + every bad way */
+ for(const k in LCT)put(`lc_${k}`,LCT[k],"pt","t",x=>`Lập công ${LCW[k]||k} ${tms(x)}`,C.lc);
+ for(const k in LCA){const [,n,h]=LCA[k];put(k==="thamo"?"lc_brb":`lc_${k}_a`,n,"pt","a",x=>`${h} ${tms(x)}`,C.lc)}}
 cpCat();
 /* the ONE give: her or an NPC (host), a counted step of a jdh title (dhInc: notice, auto-wear for NPCs) */
 function cpGive(p,key){try{if(!canRun(p)||!DH_CAT[key]||typeof dhInc!=="function")return;dhInc(p,key)}catch(e){console.error("cp",e)}}
@@ -70449,31 +70578,37 @@ window.cpGive=cpGive;
 function sideOf(A,E){const L=CB().lean;let sc=0;try{const s=typeof geS==="function"?geS():null,z=A.__rp0;if(z){sc=((s?s.lt:0)-(z.lt||0))*L.lt+((S.duc||0)-(z.d||0))*L.duc}}catch(e){}
  if(sc>0)return "t";if(sc<0)return "a";return (E&&E.k<0)?"a":"t"}
 (function(){if(typeof res67!=="function")return;const r0=res67;res67=function(tk){try{const A=th67(tk);if(A&&!A.__rp0){const s=typeof geS==="function"?geS():null;A.__rp0={lt:s?s.lt:0,d:S.duc||0}}}catch(e){}return r0.apply(this,arguments)}})();
-function cpKeyOf(a){const d=ARC67[a];if(!d)return null;const road=d.road||(typeof ROAD14==="object"&&ROAD14[a]?a:null);if(road&&ROADT[road])return ["cp_"+road];if(ARCT[a])return ["ca_"+a];return null}
+/* the title key of a closed ARC67 arc: a road chapter → cp_<road>_<n> (n = its rn; the road's premise arc = BAL.road.first − 1), a side arc → ca_<arc> */
+function cpKeyOf(a){const d=ARC67[a];if(!d)return null;const prem=typeof ROAD14==="object"&&ROAD14[a]&&d.o!=="rd";const road=d.o==="rd"?d.road:prem?a:null;
+ if(road){const n=prem?BAL.road.first-1:d.rn;return ROADC[road]&&ROADC[road][n]?[`cp_${road}_${n}`]:null}if(ARCT[a])return ["ca_"+a];return null}
 window.cpKeyOf=cpKeyOf;
 (function(){if(typeof end67!=="function")return;const e0=end67;end67=function(A,k,ign){const r=e0.apply(this,arguments);try{if(A&&!ign&&S&&!S.dead){const K=cpKeyOf(A.a);if(K){const a=ARC67[A.a],E=a&&a.E&&(a.E[k]||a.E[Object.keys(a.E)[0]]);cpGive(S,`${K[0]}_${sideOf(A,E)}`)}}}catch(e){console.error("cp",e)}return r}})();
-/* NPC off-screen road chapters (jnroad nrEnd(A, k, he, who)): the ending's sign, 0 → Đức */
-(function(){if(typeof nrEnd!=="function")return;const n0=nrEnd;nrEnd=function(A,k,he,who){const r=n0.apply(this,arguments);try{if(who&&who!==S&&isP(who)&&A&&A.road&&ROADT[A.road]){const g=k>0?"t":k<0?"a":((who.duc||0)>=CB().npcDuc?"t":"a");cpGive(who,`cp_${A.road}_${g}`)}}catch(e){console.error("cp",e)}return r}})();
-/* j72 việc nhờ: ok = good, fail (late / dropped) or bad (bại lộ) = bad; per kind */
-(function(){if(typeof q72End!=="function")return;const q0=q72End;q72End=function(x,res){let kd=null;try{kd=x&&typeof T72I==="object"&&T72I[x.tid]?T72I[x.tid].kind:null}catch(e){}const r=q0.apply(this,arguments);
- try{if(kd&&VNT[kd]&&S&&!S.dead){if(res==="ok")cpGive(S,`vn_${kd}_t`);else if(res==="fail"||res==="bad")cpGive(S,`vn_${kd}_a`)}}catch(e){console.error("cp",e)}return r}})();
+/* NPC off-screen road chapters (jnroad nrEnd(A, k, he, who); A = the ARC67 chapter object, or the road's premise arc for .4): the SAME per-chapter keys;
+   the ending's sign, 0 → Đức */
+let AK=null;const arcKey=A=>{if(!AK){AK=new Map();for(const k in ARC67)AK.set(ARC67[k],k)}return AK.get(A)};
+(function(){if(typeof nrEnd!=="function")return;const n0=nrEnd;nrEnd=function(A,k,he,who){const r=n0.apply(this,arguments);try{if(who&&who!==S&&isP(who)&&A){const K=cpKeyOf(arcKey(A));
+ if(K&&/^cp_/.test(K[0])){const g=k>0?"t":k<0?"a":((who.duc||0)>=CB().npcDuc?"t":"a");cpGive(who,`${K[0]}_${g}`)}}}catch(e){console.error("cp",e)}return r}})();
+/* j72 việc nhờ: ok = good, fail (late / dropped) or bad (bại lộ) = bad; per chain template (T7 id), once each */
+(function(){if(typeof q72End!=="function")return;const q0=q72End;q72End=function(x,res){const r=q0.apply(this,arguments);
+ try{const tid=x&&x.tid;if(tid&&VNC[tid]&&S&&!S.dead){if(res==="ok")cpGive(S,`vn_${tid}_t`);else if(res==="fail"||res==="bad")cpGive(S,`vn_${tid}_a`)}}catch(e){console.error("cp",e)}return r}})();
 /* j70 mưu hại: who did what in the case (her and NPCs, two-way) */
 (function(){if(typeof exec70!=="function")return;const x0=exec70;exec70=function(p){const prev=EXC;EXC=new Set();let r;try{r=x0.apply(this,arguments)}finally{const seen=EXC;EXC=prev;
  try{const a=typeof pa70==="function"?pa70(p):null,t=typeof pt70==="function"?pt70(p):null;if(p&&p.end==="done"&&a&&t){
-  if(p.foil||p.trap)cpGive(t,"mh_thoat");if(p.trap||seen.has(a))cpGive(a,"mh_lo");else if(!p.foil)cpGive(a,"mh_nap")}}catch(e){console.error("cp",e)}}return r}})();
-(function(){if(typeof abandon70!=="function")return;const a0=abandon70;abandon70=function(p,why){const r=a0.apply(this,arguments);try{if(why==="exposed"){cpGive(S,"mh_vach");const a=typeof pa70==="function"?pa70(p):null;if(a&&a!==S)cpGive(a,"mh_lo")}}catch(e){}return r}})();
-/* a frame she (or any target) broke at once (jtruth frameExpose(framer, target, how): «minh oan được») = the target who defended well; jtruth loads after jdh3 */
-setTimeout(()=>{try{if(typeof frameExpose!=="function"||frameExpose.__cp)return;const f0=frameExpose;frameExpose=function(a,p){const r=f0.apply(this,arguments);try{cpGive(p,"mh_thoat");deed(a,"lo");cpGive(a,"mh_lo");convicted(a)}catch(e){}return r};frameExpose.__cp=1}catch(e){}},0);
+  const g=mhG(p);if(g){if(p.foil||p.trap)cpGive(t,`mh_${g}_thoat`);if(p.trap||seen.has(a))cpGive(a,`mh_${g}_lo`);else if(!p.foil)cpGive(a,`mh_${g}_nap`)}}}catch(e){console.error("cp",e)}}return r}})();
+(function(){if(typeof abandon70!=="function")return;const a0=abandon70;abandon70=function(p,why){const r=a0.apply(this,arguments);try{if(why==="exposed"){cpGive(S,"mh_vach");const a=typeof pa70==="function"?pa70(p):null,g=mhG(p);if(a&&a!==S&&g)cpGive(a,`mh_${g}_lo`)}}catch(e){}return r}})();
+/* a frame she (or any target) broke at once (jtruth frameExpose(framer, target, how): «minh oan được») = the target who defended well (group vu); jtruth loads after jdh3 */
+setTimeout(()=>{try{if(typeof frameExpose!=="function"||frameExpose.__cp)return;const f0=frameExpose;frameExpose=function(a,p){const r=f0.apply(this,arguments);try{cpGive(p,"mh_vu_thoat");deed(a,"lo");cpGive(a,"mh_vu_lo");convicted(a)}catch(e){}return r};frameExpose.__cp=1}catch(e){}},0);
 /* her warning to an NPC's target (j70 optsNpc70: duc70(S, …, "báo tin cứu người")) */
 (function(){if(typeof duc70!=="function")return;const d0=duc70;duc70=function(p,n,why){const r=d0.apply(this,arguments);try{if(/báo tin cứu người/.test(String(why||"")))cpGive(p,"mh_bao")}catch(e){}return r}})();
 /* j71 lập công: every granted merit (bonusDo7 why → family); conbenh / hoagiai close on their own «ok» (window.cpMerit7, j71); NPC merits (MF7[k].npc) */
 (function(){if(typeof bonusDo7!=="function")return;const b0=bonusDo7;bonusDo7=function(o,why){const r=b0.apply(this,arguments);try{const k=LCWHY[String(why||"")];if(k)cpGive(S,"lc_"+k)}catch(e){}return r}})();
-window.cpMerit7=k=>{try{if(LCT[k])cpGive(S,"lc_"+k)}catch(e){}};
+/* j71 cpm7(k): a merit closed on its own «ok» (conbenh / hoagiai), or k = "<fam>_a" = one of the bad ways LCA (the option is marked in j71.js) */
+window.cpMerit7=k=>{try{const m=/^(\w+)_a$/.exec(String(k));if(m){if(LCA[m[1]]&&m[1]!=="thamo")cpGive(S,`lc_${m[1]}_a`)}else if(LCT[k])cpGive(S,"lc_"+k)}catch(e){}};
 (function(){try{if(typeof MF7!=="object")return;for(const k in MF7){const f=MF7[k];if(!f||typeof f.npc!=="function"||f.npc.__cp)continue;const n0=f.npc;f.npc=function(v){const s=n0.apply(this,arguments);try{if(s&&v&&LCT[k])cpGive(v,"lc_"+k)}catch(e){}return s};f.npc.__cp=1}}catch(e){console.error("cp",e)}})();
 /* the hush money (thamo «Nhận bạc bịt miệng» sets S.j71.brb = the turn): seen on her next turn end */
 function cpMisc(p){try{if(p!==S)return;const j=S.j71;const r=rep(S);if(j&&j.brb!=null&&r.brb!==j.brb){r.brb=j.brb;cpGive(S,"lc_brb")}}catch(e){}}
 /* tests / scan */
-window.TITLES2={RP,ROADT,ARCT,VNT,MHT,LCT,LCWHY,fxW,heldIds,sumK,deed,snap,sideOf,cpMisc};
+window.TITLES2={RP,ROADT,ROADC,ARCT,VNT,VNC,MHT,MHOLD,MG70,MHG,LCT,LCWHY,LCW,LCA,fxW,heldIds,sumK,deed,snap,sideOf,cpMisc,arcKey,chName,vnName};
 }catch(e){console.error("jdh3",e)}})();
 /* ================= jdemo: GIÁNG PHẨM / LÃNH CUNG — Nội vụ phủ thu đồ vượt phẩm (review/scenes-3, sweep S3-82, owner OD:L374 08:35Z) =================
    "Demoted / sent to cold palace: above-rank items are CONFISCATED in a scene — Nội vụ phủ eunuch (person dialog) takes each item cell onto a tray,
@@ -95717,7 +95852,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="e3561b746cd8";window.CTM_BUILD=BUILD;
+const BUILD="825f40102a20";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

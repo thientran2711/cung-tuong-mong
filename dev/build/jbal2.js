@@ -760,13 +760,16 @@ BAL.dh.rp={b:{t:4,a:4},mem:8,night:3,deg:[4,8]/* additive effect size words: ≤
   hamoan:{win:12,keep:18,g:["tren",8],l:["danh",-6]},
   bacmenh:{sac:70,win:18,g:["tren",8],l:["phuc",-2]}}};
 /* cp  CHAPTER / SIDE-LINE titles (achievement titles of jdh, worn like them; tone t = kept faith, a = won by betrayal or cruelty).
-       road  one good + one bad title per main road, raised one step per chapter (.4 premise to .11) closed that way: n = chapters per step, b tier, ch = bonus choices;
-       arc   one good + one bad title per side arc (shared s_*, late st_*, thanh mai tm96*, end arcs *14), once;  vn  j72 việc nhờ, per kind (ok = good, fail / bại lộ = bad);
-       mh    j70 mưu hại roles (target who foiled / exposer / framed-and-cleared / the one who warned; schemer caught / schemer unseen);  lc  j71 lập công per family (+ the hush-money bad one).
+       ch    EACH main-road chapter (.4 premise to .11, every road): its own good + bad title (names DH3N, jdh3n.js), once at that chapter's close (FIX r1): n = steps, b tier, ch = bonus choices;
+       road  OLD SAVES ONLY: the one-pair-per-road title stepped per chapter before FIX r1 (never given now; kept so an old save keeps it);
+       arc   one good + one bad title per side arc (shared s_*, late st_*, thanh mai tm96*, end arcs *14), once;  vn  EACH j72 việc nhờ chain template (T7 id), once (ok = good, fail / bại lộ = bad);
+       vnK   OLD SAVES ONLY: the per-kind việc nhờ pair before FIX r1;
+       mh    j70 mưu hại roles PER METHOD GROUP (target who foiled / schemer caught / schemer unseen: độc, vu, đồn, ngáng trở, hại thân) + the method-free exposer / framed-and-cleared / warner;
+       lc    j71 lập công per family + every bad way (hush money, standing by, borrowed hand, partiality, closed door).
        lean  how she closed HER chapter: (Σ good − bad option tags of the jge lean during the chapter) × lt + (Đức now − Đức at the chapter's first choice) × duc;
              > 0 good, < 0 bad, 0 → the ending's own sign (lost = bad). An NPC's off-screen road chapter (jnroad, no options): its ending sign, 0 → Đức ≥ npcDuc good. */
-BAL.dh.cp={road:{b:3,n:[1,4,8],chT:["danh","gTren","duc"],chA:["tamco","don","gBac"]},arc:{b:4,n:[1],chT:["danh","gHau"],chA:["tamco","don"]},
- vn:{b:2,n:[1,5,10],chT:["gHau","danh"],chA:["tamco","gBac"]},mh:{b:3,n:[1,3,6],chT:["don","danh"],chA:["tamco","don"]},lc:{b:3,n:[1,3,6],chT:["danh","gTren"],chA:["gBac","tamco"]},
+BAL.dh.cp={ch:{b:3,n:[1],chT:["danh","gTren","duc"],chA:["tamco","don","gBac"]},road:{b:3,n:[1,4,8],chT:["danh","gTren","duc"],chA:["tamco","don","gBac"]},arc:{b:4,n:[1],chT:["danh","gHau"],chA:["tamco","don"]},
+ vn:{b:2,n:[1],chT:["gHau","danh"],chA:["tamco","gBac"]},vnK:{b:2,n:[1,5,10],chT:["gHau","danh"],chA:["tamco","gBac"]},mh:{b:3,n:[1,3,6],chT:["don","danh"],chA:["tamco","don"]},lc:{b:3,n:[1,3,6],chT:["danh","gTren"],chA:["gBac","tamco"]},
  lean:{lt:1,duc:.5},npcDuc:50};
 
 /* review/suc-khoe (jkh.js, owner 16/11 18:05–19:00Z; spec dev/handover/reports/suc-khoe.md §4.1–4.7 with the owner changes):

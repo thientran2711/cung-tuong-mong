@@ -168,7 +168,7 @@ function convicted(p){deed(p,"toi");try{const kp=typeof key==="function"?key(p):
   if(N.length&&Array.isArray(L))L.push(`<span class="rlab">Người đời gọi:</span> ${N.join(" · ")}`)}}catch(e){}return L}})();
 
 /* =================== PART B — CHÍNH TRUYỆN / PHỤ TUYẾN =================== */
-/* road → [good, bad] (3–4 words, the road's own words; Part B pattern «việc của đường + cách xử») */
+/* OLD SAVES ONLY (before FIX r1): road → [good, bad], one pair per road stepped per chapter; kept so an old save keeps its title; the per-chapter names are DH3N (jdh3n.js) */
 const ROADT={tt_co:["Con cờ giữ nước","Con cờ đổi phe"],tt_oan:["Rửa tiếng gia môn","Đổ oan cho người"],tt_tranh:["Nối lại một nhà","Chia phủ tranh quyền"],tt_mat:["Giữ trọn mật ước","Bội ước Trung cung"],
  dtq_bien:["Hậu phương giữ vững","Bán tin biên ải"],dtq_vu:["Giải oan thư phản","Mượn thư hại người"],dtq_binh:["Trao trả binh phù","Mưu đoạt binh phù"],dtq_huynh:["Đón huynh về nước","Bỏ huynh đất giặc"],
  muoi_tuoc:["Tước sạch không mua","Bạc đổi tước quan"],muoi_lau:["Bến sạch thuyền ngay","Thuyền lậu nuôi riêng"],muoi_doi:["Thóc chẩn tới dân","Đục khoét thóc chẩn"],muoi_no:["Trả sạch nợ cung","Quỵt nợ trong cung"],
@@ -187,29 +187,66 @@ const ARCT={s_than:["Nhận đúng người thân","Nhận bừa thân thích"],
  st_the:["Thế lực chính danh","Kết bè lũng đoạn"],st_con:["Mẹ hiền dạy con","Ép con theo ý"],st_dong:["Đông cung chính vị","Mưu ngôi Thái tử"],
  tm96a:["Từ biệt người xưa","Lưu luyến người xưa"],tm96b:["Vàng không sợ lửa","Lửa thiêu tình cũ"],tm96c:["Dứt tình chọn cung","Bỏ cung theo tình"],
  noi14:["Hương hỏa nối dòng","Mượn con nối dõi"],hau14:["Phượng tọa chính danh","Đạp người lên ngôi"],ke14:["Dạy con nên vua","Buông rèm sau ngai"]};
-/* j72 việc nhờ kinds (KIND72) → [good, bad] */
+/* OLD SAVES ONLY (before FIX r1): j72 việc nhờ kinds (KIND72) → [good, bad]; the per-chain names are DH3N.vn */
 const VNT={craft:["Tìm vật trả người","Tráo vật lừa người"],social:["Giao thiệp chu toàn","Đưa chuyện hai lòng"],inv:["Soi rõ trắng đen","Kết án qua loa"],pro:["Che chở kẻ yếu","Bỏ mặc người cầu"],
  love:["Se duyên lành","Ép duyên lấy lợi"],trade:["Có vay có trả","Ơn đổi lấy lợi"],risk:["Liều mình vì nghĩa","Liều lĩnh lộ chuyện"],court:["Góp sức việc triều","Lộ tay việc triều"],fam:["Chu toàn việc nhà","Bỏ bê việc nhà"]};
-/* j70 mưu hại roles → [name, tone, how] (every M70 method closes through exec70 / abandon70 / the accuse win / a conviction, so every kind is covered) */
-const MHT={mh_thoat:["Thoát lưới độc","t","Mưu hại nhắm vào bị chặn từ gốc hay sập bẫy"],mh_vach:["Vạch rõ gian tay","t","Tố giác thành, chứng cứ rành rành"],
- mh_minh:["Minh oan sau án","t","Bị vu oan, rồi kẻ vu oan bị kết tội"],mh_bao:["Báo tin cứu người","t","Báo trước cho người sắp bị hại"],
- mh_lo:["Bàn tay lộ dấu","a","Bày mưu hại người mà bị bắt quả tang hay bị lộ"],mh_nap:["Người nấp sau rèm","a","Bày mưu hại người, ra tay mà không ai thấy"]};
-/* j71 lập công families (MF7) → name; the bad one: hush money (thamo «Nhận bạc bịt miệng», j71 brb) */
+/* j70 mưu hại roles (FIX r1, E56r FAIL 3): the target / schemer names are PER METHOD GROUP (never a poison word for a non-poison case);
+   MG70 = method (M70 key, p.m) → group; MHG = group → [what she escaped (target), how it was done (schemer), thoat, lo, nap]. Expert pattern:
+   target «cách chống đỡ + kết cục», schemer «cách ra tay + kết cục». The exposer / the framed-then-cleared / the warner are method-free. */
+const MG70={poison:"doc",poison2:"doc",musk:"doc",kpoison:"doc",frame:"vu",kframe:"vu",plant:"vu",joint:"vu",rumor:"don",accuse:"don",block:"pha",bribe:"pha",ksab:"pha",huydung:"than",pond:"than",pushp:"than",catswap:"than"};
+const MHG={doc:["mưu hạ độc, hại thai","mưu hạ độc, hại thai","Thoát chén thuốc độc","Lộ tay hạ độc","Hạ độc không dấu"],
+ vu:["mưu vu oan, cài tang vật","mưu vu oan, cài tang vật","Thoát vòng vu cáo","Vu cáo bại lộ","Ngậm máu phun người"],
+ don:["lời đồn bẩn, lời tố gian","chuyện tung tin, tố gian","Lời đồn tự tan","Tung tin bại lộ","Tung tin giấu mặt"],
+ pha:["mưu rút thẻ bài, mua người hay phá việc học","mưu rút thẻ bài, mua người hay phá việc học","Vượt qua ngáng trở","Ngáng chân bại lộ","Ngáng chân trong tối"],
+ than:["mưu hủy dung, đẩy xuống hồ hay tráo hài nhi","mưu hủy dung, đẩy xuống hồ hay tráo hài nhi","Thoát hiểm gang tấc","Hại người lộ mặt","Ra tay trong tối"]};
+const MHT={mh_vach:["Vạch rõ gian tay","t",x=>`Tố giác kẻ mưu hại thành công ${tms(x)}`],mh_minh:["Minh oan sau án","t",x=>`Được rửa oan khi kẻ vu oan bị kết tội ${tms(x)}`],
+ mh_bao:["Báo tin cứu người","t",x=>`Báo trước cho người sắp bị hại ${tms(x)}`]};
+for(const g in MHG){const [w1,w2,n1,n2,n3]=MHG[g];MHT[`mh_${g}_thoat`]=[n1,"t",x=>`Thoát được ${w1} nhắm vào mình ${tms(x)}`];
+ MHT[`mh_${g}_lo`]=[n2,"a",x=>`Bày ${w2} mà bị lộ ${tms(x)}`];MHT[`mh_${g}_nap`]=[n3,"a",x=>`Bày ${w2} mà không ai hay ${tms(x)}`]}
+/* old saves only (before FIX r1 these three went to every method; kept so an old save keeps what it earned; never given now) */
+const MHOLD={mh_thoat:["Thoát lưới độc","t","Thoát được mưu hại nhắm vào mình"],mh_lo:["Bàn tay lộ dấu","a","Bày mưu hại người mà bị lộ"],mh_nap:["Người nấp sau rèm","a","Bày mưu hại người mà không ai hay"]};
+const mhG=p=>{try{return MG70[p&&p.m]||null}catch(e){return null}};
+/* j71 lập công families (MF7) → name; LCW = the deed words of each family (how text «Lập công ‹w›»); LCA = the bad ways (FIX r1, E56r FAIL 4: every bad way, like s_dich) */
 const LCT={cuute:"Công cứu tế",cuuhoang:"Công cứu giá",thbenh:"Công hầu bệnh",conbenh:"Công trông trẻ bệnh",tomuu:"Công vạch mưu",suthan:"Công tiếp sứ",thamo:"Công trừ tham ô",
  tiencu:"Công tiến hiền",chepkinh:"Công chép kinh",soke:"Công soát sổ",hoagiai:"Công hòa giải",tamtang:"Công lễ Thân tằm",hoahoan:"Công cứu nạn cung",dichbenh:"Công chặn dịch"};
 const LCWHY={"cứu tế":"cuute","cứu giá":"cuuhoang","hầu bệnh Thái hậu":"thbenh","vạch mưu":"tomuu","tiếp sứ":"suthan","bắt kẻ tham ô":"thamo","tiến cử hiền tài":"tiencu",
  "chép kinh":"chepkinh","soát sổ sách":"soke","lễ Thân tằm":"tamtang","cứu nạn trong cung":"hoahoan","chặn dịch":"dichbenh"};
-const tms=n=>n===1?"một lần":`${nW(n)} lần`;
-const arcName=k=>{try{return (ARC67[k]&&ARC67[k].t)||k}catch(e){return k}};
+const LCW=Object.assign({conbenh:"trông con bệnh",hoagiai:"hòa giải"},...Object.keys(LCWHY).map(w=>({[LCWHY[w]]:w})));
+/* key = family, the option it marks (j71 cpm7("<fam>_a")), name, how */
+const LCA={cuuhoang:["Hoảng sợ đứng nhìn","Bỏ mặc thánh giá","Đứng nhìn khi thánh giá gặp nạn"],chepkinh:["Nhờ cung nữ chép thay","Công mượn tay người","Nhờ người chép kinh thay mà nhận công"],
+ hoagiai:["Bênh ‹A› / Bênh ‹B›","Thiên vị một bên","Được nhờ hòa giải mà bênh một bên"],hoahoan:["Đóng cửa cung giữ mình","Đóng cửa ngồi nhìn","Đóng cửa cung giữ mình khi trong cung gặp nạn"],
+ dichbenh:["Đóng cửa cung tránh dịch","Bỏ mặc cung nhân","Đóng cửa cung tránh dịch, bỏ mặc cung nhân"],thamo:["Nhận bạc bịt miệng","Bạc lấp miệng gian","Nhận bạc bịt miệng kẻ tham ô"]};
+const tms=n=>n===1?"một lần":n<=10?`${nW(n)} lần`:"nhiều lần";
+const nCh=n=>n<=10?nW(n):"nhiều";
+const plainT=s=>{try{return String(typeof plain==="function"?plain(String(s||"")):s||"").replace(/\{[^}]*\}/g,"người ấy").replace(/\s*\(\d+\/\d+\)/g,"").replace(/\d+\s*bạc/g,"bạc").trim()}catch(e){return String(s||"")}};
+const arcName=k=>{try{return plainT((ARC67[k]&&ARC67[k].t)||k)}catch(e){return k}};
 const KIND=k=>{try{return (typeof KIND72==="object"&&KIND72[k]&&(KIND72[k].n||KIND72[k]))||k}catch(e){return k}};
+/* the jnroad NPC-road asks (T7 nr_*: their heading is spoken, so the how text names the deed) */
+const NRV={nr_emp:"Nói giúp trước mặt Hoàng thượng",nr_th:"Đỡ lời trước Thái hậu",nr_hh:"Đỡ lời trước Hoàng hậu",nr_thu:"Đưa lá thư kín đến tay người nhà",
+ nr_do:"Dò xem kẻ kia đang tính gì",nr_y:"Mời thái y chữa bệnh kín",nr_che:"Che chở người cùng đường",nr_bac:"Giúp bạc lúc túng gấp"};
+const vnName=t=>{try{const T=typeof T72I==="object"&&T72I[t];const s=T&&(typeof T.t==="function"?"":T.t);return s?plainT(s):(NRV[t]||t)}catch(e){return t}};
+/* DH3N (jdh3n.js) → ROADC[road][n] = [good, bad] for n = BAL.road.first − 1 (the premise .4) … BAL.road.last (.11); VNC[tid] = [good, bad] */
+const ROADC={},VNC={};
+try{for(const r in DH3N.cp)DH3N.cp[r].split(";").forEach((x,i)=>{(ROADC[r]=ROADC[r]||{})[i+4]=x.split("/").map(s=>s.trim())});for(const t in DH3N.vn)VNC[t]=DH3N.vn[t].split("/").map(s=>s.trim())}catch(e){console.error("jdh3n",e)}
+const SIDE=i=>i?"bằng thủ đoạn, phụ người hay trái lẽ":"mà giữ được nghĩa với người, lẽ với đời";
+const chName=(r,n)=>{try{return n===4?arcName(r):plainT(ARC67[ROAD14[r][n]].t)}catch(e){return ""}};
 function cpCat(){if(typeof DH_CAT!=="object")return;const T=BAL.dh.T=BAL.dh.T||{},C=CB();
- const put=(key,n,g,sh,how,c)=>{DH_CAT[key]={n,g,sh,how};T[key]={b:c.b,n:c.n,ch:sh==="t"?c.chT:c.chA}};
- for(const r in ROADT)ROADT[r].forEach((n,i)=>put(`cp_${r}_${i?"a":"t"}`,n,"cp",i?"a":"t",x=>`Khép lại ${tms(x)} chương đường «${arcName(r)}» ${i?"bằng thủ đoạn, phụ người hay trái lẽ":"mà giữ được nghĩa với người, lẽ với đời"}`,C.road));
- for(const a in ARCT)ARCT[a].forEach((n,i)=>put(`ca_${a}_${i?"a":"t"}`,n,"pt",i?"a":"t",()=>`Khép lại chuyện «${arcName(a)}» ${i?"bằng thủ đoạn, phụ người hay trái lẽ":"mà giữ được nghĩa với người, lẽ với đời"}`,C.arc));
- for(const k in VNT)VNT[k].forEach((n,i)=>put(`vn_${k}_${i?"a":"t"}`,n,"pt",i?"a":"t",x=>`Việc nhờ «${KIND(k)}»: ${i?"bỏ dở hay bại lộ":"làm xong"} ${tms(x)}`,C.vn));
- for(const k in MHT){const [n,sh,h]=MHT[k];put(k,n,"pt",sh,x=>`${h} (mưu hại) ${tms(x)}`,C.mh)}
- for(const k in LCT)put(`lc_${k}`,LCT[k],"pt","t",x=>`Lập công «${String((typeof MF7==="object"&&MF7[k]&&MF7[k].t)||k).replace(/^Lập công · /,"")}» ${tms(x)}`,C.lc);
- put("lc_brb","Bạc lấp miệng gian","pt","a",x=>`Nhận bạc bịt miệng kẻ tham ô ${tms(x)}`,C.lc)}
+ const put=(key,n,g,sh,how,c,old)=>{DH_CAT[key]={n,g,sh,how};if(old)DH_CAT[key].old=1;T[key]={b:c.b,n:c.n,ch:sh==="t"?c.chT:c.chA}};
+ /* (1) EACH main-road chapter: .4 premise + .5–.11, a good and a bad name of its own, once at that chapter's close */
+ for(const r in ROADC)for(const n in ROADC[r])ROADC[r][n].forEach((nm,i)=>put(`cp_${r}_${n}_${i?"a":"t"}`,nm,"cp",i?"a":"t",
+  ()=>+n===4?`Khép lại hồi mở đầu đường «${arcName(r)}» ${SIDE(i)}`:`Khép lại chương «${chName(r,+n)}» trên đường «${arcName(r)}» ${SIDE(i)}`,C.ch));
+ /* old saves only: the whole-road pair given before FIX r1 (never given now) */
+ for(const r in ROADT)ROADT[r].forEach((nm,i)=>put(`cp_${r}_${i?"a":"t"}`,nm,"cp",i?"a":"t",x=>`Khép lại ${nCh(x)} chương trên đường «${arcName(r)}» ${SIDE(i)}`,C.road,1));
+ for(const a in ARCT)ARCT[a].forEach((nm,i)=>put(`ca_${a}_${i?"a":"t"}`,nm,"pt",i?"a":"t",()=>`Khép lại chuyện «${arcName(a)}» ${SIDE(i)}`,C.arc));
+ /* (2) EACH j72 việc nhờ chain (T7 template), once */
+ for(const t in VNC)VNC[t].forEach((nm,i)=>put(`vn_${t}_${i?"a":"t"}`,nm,"pt",i?"a":"t",()=>`Việc nhờ «${vnName(t)}»: ${i?"bỏ dở, lỡ hẹn hay để bại lộ":"làm xong, trọn lời đã nhận"}`,C.vn));
+ for(const k in VNT)VNT[k].forEach((nm,i)=>put(`vn_${k}_${i?"a":"t"}`,nm,"pt",i?"a":"t",x=>i?`Bỏ dở hay để bại lộ việc nhờ loại «${KIND(k)}» ${tms(x)}`:`Làm xong việc nhờ loại «${KIND(k)}» ${tms(x)}`,C.vnK,1));
+ /* (3) mưu hại per method group */
+ for(const k in MHT){const [n,sh,h]=MHT[k];put(k,n,"pt",sh,h,C.mh)}
+ for(const k in MHOLD){const [n,sh,h]=MHOLD[k];put(k,n,"pt",sh,x=>`${h} ${tms(x)}`,C.mh,1)}
+ /* (4) lập công: every good family + every bad way */
+ for(const k in LCT)put(`lc_${k}`,LCT[k],"pt","t",x=>`Lập công ${LCW[k]||k} ${tms(x)}`,C.lc);
+ for(const k in LCA){const [,n,h]=LCA[k];put(k==="thamo"?"lc_brb":`lc_${k}_a`,n,"pt","a",x=>`${h} ${tms(x)}`,C.lc)}}
 cpCat();
 /* the ONE give: her or an NPC (host), a counted step of a jdh title (dhInc: notice, auto-wear for NPCs) */
 function cpGive(p,key){try{if(!canRun(p)||!DH_CAT[key]||typeof dhInc!=="function")return;dhInc(p,key)}catch(e){console.error("cp",e)}}
@@ -218,29 +255,35 @@ window.cpGive=cpGive;
 function sideOf(A,E){const L=CB().lean;let sc=0;try{const s=typeof geS==="function"?geS():null,z=A.__rp0;if(z){sc=((s?s.lt:0)-(z.lt||0))*L.lt+((S.duc||0)-(z.d||0))*L.duc}}catch(e){}
  if(sc>0)return "t";if(sc<0)return "a";return (E&&E.k<0)?"a":"t"}
 (function(){if(typeof res67!=="function")return;const r0=res67;res67=function(tk){try{const A=th67(tk);if(A&&!A.__rp0){const s=typeof geS==="function"?geS():null;A.__rp0={lt:s?s.lt:0,d:S.duc||0}}}catch(e){}return r0.apply(this,arguments)}})();
-function cpKeyOf(a){const d=ARC67[a];if(!d)return null;const road=d.road||(typeof ROAD14==="object"&&ROAD14[a]?a:null);if(road&&ROADT[road])return ["cp_"+road];if(ARCT[a])return ["ca_"+a];return null}
+/* the title key of a closed ARC67 arc: a road chapter → cp_<road>_<n> (n = its rn; the road's premise arc = BAL.road.first − 1), a side arc → ca_<arc> */
+function cpKeyOf(a){const d=ARC67[a];if(!d)return null;const prem=typeof ROAD14==="object"&&ROAD14[a]&&d.o!=="rd";const road=d.o==="rd"?d.road:prem?a:null;
+ if(road){const n=prem?BAL.road.first-1:d.rn;return ROADC[road]&&ROADC[road][n]?[`cp_${road}_${n}`]:null}if(ARCT[a])return ["ca_"+a];return null}
 window.cpKeyOf=cpKeyOf;
 (function(){if(typeof end67!=="function")return;const e0=end67;end67=function(A,k,ign){const r=e0.apply(this,arguments);try{if(A&&!ign&&S&&!S.dead){const K=cpKeyOf(A.a);if(K){const a=ARC67[A.a],E=a&&a.E&&(a.E[k]||a.E[Object.keys(a.E)[0]]);cpGive(S,`${K[0]}_${sideOf(A,E)}`)}}}catch(e){console.error("cp",e)}return r}})();
-/* NPC off-screen road chapters (jnroad nrEnd(A, k, he, who)): the ending's sign, 0 → Đức */
-(function(){if(typeof nrEnd!=="function")return;const n0=nrEnd;nrEnd=function(A,k,he,who){const r=n0.apply(this,arguments);try{if(who&&who!==S&&isP(who)&&A&&A.road&&ROADT[A.road]){const g=k>0?"t":k<0?"a":((who.duc||0)>=CB().npcDuc?"t":"a");cpGive(who,`cp_${A.road}_${g}`)}}catch(e){console.error("cp",e)}return r}})();
-/* j72 việc nhờ: ok = good, fail (late / dropped) or bad (bại lộ) = bad; per kind */
-(function(){if(typeof q72End!=="function")return;const q0=q72End;q72End=function(x,res){let kd=null;try{kd=x&&typeof T72I==="object"&&T72I[x.tid]?T72I[x.tid].kind:null}catch(e){}const r=q0.apply(this,arguments);
- try{if(kd&&VNT[kd]&&S&&!S.dead){if(res==="ok")cpGive(S,`vn_${kd}_t`);else if(res==="fail"||res==="bad")cpGive(S,`vn_${kd}_a`)}}catch(e){console.error("cp",e)}return r}})();
+/* NPC off-screen road chapters (jnroad nrEnd(A, k, he, who); A = the ARC67 chapter object, or the road's premise arc for .4): the SAME per-chapter keys;
+   the ending's sign, 0 → Đức */
+let AK=null;const arcKey=A=>{if(!AK){AK=new Map();for(const k in ARC67)AK.set(ARC67[k],k)}return AK.get(A)};
+(function(){if(typeof nrEnd!=="function")return;const n0=nrEnd;nrEnd=function(A,k,he,who){const r=n0.apply(this,arguments);try{if(who&&who!==S&&isP(who)&&A){const K=cpKeyOf(arcKey(A));
+ if(K&&/^cp_/.test(K[0])){const g=k>0?"t":k<0?"a":((who.duc||0)>=CB().npcDuc?"t":"a");cpGive(who,`${K[0]}_${g}`)}}}catch(e){console.error("cp",e)}return r}})();
+/* j72 việc nhờ: ok = good, fail (late / dropped) or bad (bại lộ) = bad; per chain template (T7 id), once each */
+(function(){if(typeof q72End!=="function")return;const q0=q72End;q72End=function(x,res){const r=q0.apply(this,arguments);
+ try{const tid=x&&x.tid;if(tid&&VNC[tid]&&S&&!S.dead){if(res==="ok")cpGive(S,`vn_${tid}_t`);else if(res==="fail"||res==="bad")cpGive(S,`vn_${tid}_a`)}}catch(e){console.error("cp",e)}return r}})();
 /* j70 mưu hại: who did what in the case (her and NPCs, two-way) */
 (function(){if(typeof exec70!=="function")return;const x0=exec70;exec70=function(p){const prev=EXC;EXC=new Set();let r;try{r=x0.apply(this,arguments)}finally{const seen=EXC;EXC=prev;
  try{const a=typeof pa70==="function"?pa70(p):null,t=typeof pt70==="function"?pt70(p):null;if(p&&p.end==="done"&&a&&t){
-  if(p.foil||p.trap)cpGive(t,"mh_thoat");if(p.trap||seen.has(a))cpGive(a,"mh_lo");else if(!p.foil)cpGive(a,"mh_nap")}}catch(e){console.error("cp",e)}}return r}})();
-(function(){if(typeof abandon70!=="function")return;const a0=abandon70;abandon70=function(p,why){const r=a0.apply(this,arguments);try{if(why==="exposed"){cpGive(S,"mh_vach");const a=typeof pa70==="function"?pa70(p):null;if(a&&a!==S)cpGive(a,"mh_lo")}}catch(e){}return r}})();
-/* a frame she (or any target) broke at once (jtruth frameExpose(framer, target, how): «minh oan được») = the target who defended well; jtruth loads after jdh3 */
-setTimeout(()=>{try{if(typeof frameExpose!=="function"||frameExpose.__cp)return;const f0=frameExpose;frameExpose=function(a,p){const r=f0.apply(this,arguments);try{cpGive(p,"mh_thoat");deed(a,"lo");cpGive(a,"mh_lo");convicted(a)}catch(e){}return r};frameExpose.__cp=1}catch(e){}},0);
+  const g=mhG(p);if(g){if(p.foil||p.trap)cpGive(t,`mh_${g}_thoat`);if(p.trap||seen.has(a))cpGive(a,`mh_${g}_lo`);else if(!p.foil)cpGive(a,`mh_${g}_nap`)}}}catch(e){console.error("cp",e)}}return r}})();
+(function(){if(typeof abandon70!=="function")return;const a0=abandon70;abandon70=function(p,why){const r=a0.apply(this,arguments);try{if(why==="exposed"){cpGive(S,"mh_vach");const a=typeof pa70==="function"?pa70(p):null,g=mhG(p);if(a&&a!==S&&g)cpGive(a,`mh_${g}_lo`)}}catch(e){}return r}})();
+/* a frame she (or any target) broke at once (jtruth frameExpose(framer, target, how): «minh oan được») = the target who defended well (group vu); jtruth loads after jdh3 */
+setTimeout(()=>{try{if(typeof frameExpose!=="function"||frameExpose.__cp)return;const f0=frameExpose;frameExpose=function(a,p){const r=f0.apply(this,arguments);try{cpGive(p,"mh_vu_thoat");deed(a,"lo");cpGive(a,"mh_vu_lo");convicted(a)}catch(e){}return r};frameExpose.__cp=1}catch(e){}},0);
 /* her warning to an NPC's target (j70 optsNpc70: duc70(S, …, "báo tin cứu người")) */
 (function(){if(typeof duc70!=="function")return;const d0=duc70;duc70=function(p,n,why){const r=d0.apply(this,arguments);try{if(/báo tin cứu người/.test(String(why||"")))cpGive(p,"mh_bao")}catch(e){}return r}})();
 /* j71 lập công: every granted merit (bonusDo7 why → family); conbenh / hoagiai close on their own «ok» (window.cpMerit7, j71); NPC merits (MF7[k].npc) */
 (function(){if(typeof bonusDo7!=="function")return;const b0=bonusDo7;bonusDo7=function(o,why){const r=b0.apply(this,arguments);try{const k=LCWHY[String(why||"")];if(k)cpGive(S,"lc_"+k)}catch(e){}return r}})();
-window.cpMerit7=k=>{try{if(LCT[k])cpGive(S,"lc_"+k)}catch(e){}};
+/* j71 cpm7(k): a merit closed on its own «ok» (conbenh / hoagiai), or k = "<fam>_a" = one of the bad ways LCA (the option is marked in j71.js) */
+window.cpMerit7=k=>{try{const m=/^(\w+)_a$/.exec(String(k));if(m){if(LCA[m[1]]&&m[1]!=="thamo")cpGive(S,`lc_${m[1]}_a`)}else if(LCT[k])cpGive(S,"lc_"+k)}catch(e){}};
 (function(){try{if(typeof MF7!=="object")return;for(const k in MF7){const f=MF7[k];if(!f||typeof f.npc!=="function"||f.npc.__cp)continue;const n0=f.npc;f.npc=function(v){const s=n0.apply(this,arguments);try{if(s&&v&&LCT[k])cpGive(v,"lc_"+k)}catch(e){}return s};f.npc.__cp=1}}catch(e){console.error("cp",e)}})();
 /* the hush money (thamo «Nhận bạc bịt miệng» sets S.j71.brb = the turn): seen on her next turn end */
 function cpMisc(p){try{if(p!==S)return;const j=S.j71;const r=rep(S);if(j&&j.brb!=null&&r.brb!==j.brb){r.brb=j.brb;cpGive(S,"lc_brb")}}catch(e){}}
 /* tests / scan */
-window.TITLES2={RP,ROADT,ARCT,VNT,MHT,LCT,LCWHY,fxW,heldIds,sumK,deed,snap,sideOf,cpMisc};
+window.TITLES2={RP,ROADT,ROADC,ARCT,VNT,VNC,MHT,MHOLD,MG70,MHG,LCT,LCWHY,LCW,LCA,fxW,heldIds,sumK,deed,snap,sideOf,cpMisc,arcKey,chName,vnName};
 }catch(e){console.error("jdh3",e)}})();

@@ -199,7 +199,7 @@ MF("cuuhoang",{t:"Lập công · Cứu giá",cd:60,w:()=>.6,who:()=>pEmp(),
   return [CH7(st==="y"?"Tự tay sơ cứu ngài":"Lao vào cứu ngài",{c:{suc:-10},p,w:{sung:8,an:4,danh:3},wt:bonus7(B),l:{suc:hurt7(15)},lt:["ngài bị thương nhẹ, tâm trạng xấu đi"],ok:()=>`Ngươi cứu được Hoàng thượng; ngài nắm tay ngươi rất lâu.${bonusDo7(B,"cứu giá")}`,no:()=>{if(S.emp.mood<2)S.emp.mood=2;return "Ngươi xông vào nhưng không kịp; ngài bị thương nhẹ, ngươi cũng bị thương."}}),
    CH7("Hô thị vệ, sai người chạy gọi",{w:{sung:2},k:["ngài bị thương nhẹ, tâm trạng xấu đi"],ok:()=>{if(S.emp.mood<2)S.emp.mood=2;return "Thị vệ đến hơi chậm, ngài bị thương nhẹ nhưng ghi nhận ngươi nhanh trí."}}),
    /* choice-value (MAIN ROOT-59 ~23:05Z, OD 22:05Z): «Hoảng sợ đứng nhìn» stays — gain = she stays unhurt and keeps her strength (no wound / Sức risk of «Lao vào»), cost = his favour (BAL.cv.cuu) */
-   CH7("Hoảng sợ đứng nhìn",{c:{sung:-BAL.cv.cuu.sung},w:{suc:BAL.cv.cuu.suc},wt:["giữ được thân mình vô sự"],k:["ngài bị thương nhẹ, tâm trạng xấu đi"],ok:()=>{if(S.emp.mood<2)S.emp.mood=2;return "Thị vệ đến chậm, ngài bị thương nhẹ; ngài thấy ngươi chỉ đứng nhìn. Ngươi không hề hấn gì."}})]}});
+   CH7("Hoảng sợ đứng nhìn",{c:{sung:-BAL.cv.cuu.sung},w:{suc:BAL.cv.cuu.suc},wt:["giữ được thân mình vô sự"],k:["ngài bị thương nhẹ, tâm trạng xấu đi"],ok:()=>{cpm7("cuuhoang_a");if(S.emp.mood<2)S.emp.mood=2;return "Thị vệ đến chậm, ngài bị thương nhẹ; ngài thấy ngươi chỉ đứng nhìn. Ngươi không hề hấn gì."}})]}});
 MF("thbenh",{t:"Lập công · Hầu bệnh Thái hậu",cd:9,w:()=>!S.thDead&&S.thIll?4:0,who:()=>pTH(),
  v:["Thái hậu nhiễm phong hàn, sốt mấy đêm liền, Từ Ninh cung đóng cửa.","Thái hậu trúng gió, đau lưng không trở mình được.","Thái hậu mất ngủ triền miên, người gầy rộc.","Thái hậu ngã trong vườn, trật chân, phải nằm một chỗ.","Trời nóng, Thái hậu sốt cao, ăn gì nôn nấy.","Thái hậu ho lâu ngày, các thái y bó tay.","Thái hậu đau mắt, không đọc kinh được, buồn bực khó chịu."],
  pp:()=>!S.thDead&&S.thIll?{}:null,
@@ -266,7 +266,7 @@ MF("chepkinh",{t:"Lập công · Chép kinh",cd:24,w:()=>S.thDead?0:1,who:()=>pT
  pp:()=>S.thDead?null:{},
  o:X=>[CH7("Chép trọn bộ bằng chữ khải",{c:{suc:-15},p:od(BAL.odb.j71.odP_14+(S.tai||0)/3+aw7(S,"thi")*6),w:{th:8,duc:2,danh:2},wt:bonus7({dai:1}),l:{th:3},ok:()=>`Nét chữ của ngươi khiến Thái hậu khen mãi.${bonusDo7({dai:1},"chép kinh")}`,ll:"Nét chữ chưa đều; Thái hậu vẫn nhận, khen ngươi có lòng."}),
   CH7("Chép một quyển",{c:{suc:-6},w:{th:3,duc:1},wl:"Ngươi chép một quyển dâng Thái hậu."}),
-  CH7("Nhờ cung nữ chép thay",{p:od(BAL.odb.j71.odP_5),w:{th:3},l:{th:-4},lt:["Thái hậu nhận ra nét chữ người khác"],wl:"Thái hậu nhận kinh, không nhận ra gì.",ll:"Thái hậu nhận ra nét chữ không phải của ngươi."})],
+  CH7("Nhờ cung nữ chép thay",{p:od(BAL.odb.j71.odP_5),w:{th:3},l:{th:-4},lt:["Thái hậu nhận ra nét chữ người khác"],wl:"Thái hậu nhận kinh, không nhận ra gì.",ll:"Thái hậu nhận ra nét chữ không phải của ngươi.",ok:()=>{cpm7("chepkinh_a");return ""}})],
  npc:v=>{if(S.thDead||(v.suc||0)<40)return"";const ok=roll(oddsCl(40+(v.tai||0)/3+aw7(v,"thi")*6));ap(v,ok?{suc:-15,th:8,duc:2,danh:2}:{suc:-15,th:3});if(ok)daiDo7(v);return ok?`${v.name} chép trọn bộ kinh dâng Thái hậu, được khen (Thái hậu với nàng +8).`:""}});
 MF("soke",{t:"Lập công · Soát sổ sách",cd:36,w:()=>S.rank>=3?1:0,who:()=>pEunCourt("tq"),
  v:["Sổ chi tiêu Nội vụ phủ năm nay lệch hơn năm trước cả ngàn lượng mà không ai giải thích nổi.","Bạc may áo mùa đông cho cung nhân đã chi mà áo chưa thấy đâu.","Sổ hương đèn các chùa trong cung ghi gấp đôi số thật.","Tiền thuốc men Ngự dược phòng tăng vọt trong khi ít người bệnh.","Sổ lương cung nữ có tên mấy người đã xuất cung từ lâu.","Chi phí sửa ngự uyển ghi ba lần cho cùng một hòn non bộ."],
@@ -282,8 +282,8 @@ MF("hoagiai",{t:"Lập công · Hòa giải",cd:24,w:()=>{const L=liveRivals(tru
  pre:X=>{X.A=evActor("rv",X.p.a0);X.B=evActor("rv",X.p.a1);return !!(X.A&&X.B)},
  o:X=>{const A=X.A,B=X.B;
   return [CH7("Đứng ra giảng hòa",{p:od(BAL.odb.j71.odP_16+S.danh/3+(S.duc||0)/4+(S.tamco||0)/5),w:{danh:2,duc:2},r:[[A,5],[B,5]],wt:[G7("hai nàng bớt giận nhau")],lr:[[A,-4],[B,-4]],ok:()=>{cpm7("hoagiai");relAdd(A.o,B.o,BAL.eff.j71.ok_2);return `${A.n} và ${B.n} nghe ngươi, làm lành với nhau.`},ll:"Hai bên đều cho rằng ngươi thiên vị bên kia."}),
-   CH7(`Bênh ${A.n}`,{r:[[A,8],[B,-8]],wl:`Ngươi bênh ${A.n}.`}),
-   CH7(`Bênh ${B.n}`,{r:[[B,8],[A,-8]],wl:`Ngươi bênh ${B.n}.`}),
+   CH7(`Bênh ${A.n}`,{r:[[A,8],[B,-8]],wl:`Ngươi bênh ${A.n}.`,ok:()=>{cpm7("hoagiai_a");return ""}}),
+   CH7(`Bênh ${B.n}`,{r:[[B,8],[A,-8]],wl:`Ngươi bênh ${B.n}.`,ok:()=>{cpm7("hoagiai_a");return ""}}),
    CH7("Mặc kệ",{w:{suc:BAL.cv.rest}/* decline family: she keeps her strength */,wl:"Ngươi không dính vào."})]},
  npc:v=>{const L=liveRivals(true).filter(x=>x!==v&&present7(x));const P=[];for(const a of L)for(const b of L)if(a.id<b.id&&aff(a,b)+aff(b,a)<0)P.push([a,b]);if(!P.length)return"";const [a,b]=npwPick(P,([a,b])=>-(aff(a,b)+aff(b,a))+Math.max(0,aff(v,a))+Math.max(0,aff(v,b)));/* npc-purpose G2: she steps into the feud that hurts the most among people she cares for; her Danh/Đức = the success */if(!roll(oddsCl(30+(v.danh||0)/3+(v.duc||0)/4)))return"";ap(v,{danh:BAL.eff.j71.danhNpc_2,duc:2});relAdd(a,b,BAL.eff.j71.npc_2);relAdd(v,a,BAL.eff.j71.npc_3);relAdd(v,b,BAL.eff.j71.npc_4);return `${v.name} đứng ra giảng hòa ${a.name} và ${b.name}, được khen (Danh ${balSg(BAL.eff.j71.danhNpc_2)}).`}});
 MF("tamtang",{t:"Lập công · Lễ Thân tằm",cd:36,w:()=>S.month>=2&&S.month<=4?2:0,who:()=>S.thDead?pEmp():pTH(),
@@ -300,14 +300,14 @@ MF("hoahoan",{t:"Lập công · Hỏa hoạn, thiên tai trong cung",cd:36,w:()=
  o:X=>{const B={dai:1};
   return [CH7("Đốc thúc cung nhân cứu người",{c:{suc:-10},p:cl(Math.round(35+help7(S)*4+(S.tamco||0)/4),10,92),w:{danh:4,sung:3,maid:5},wt:bonus7(B),l:{suc:hurt7(10)},lt:hurt7(10)?[]:["không cứu kịp hết"],ok:()=>`Nhờ ngươi đốc thúc, không ai mất mạng; Hoàng thượng khen ngươi gan dạ.${bonusDo7(B,"cứu nạn trong cung")}`,ll:"Việc rối loạn, ngươi bị thương nhẹ; nhiều người vẫn bị nạn."}),
    CH7("Mở kho cung mình giúp người bị nạn",{c:{bac:-30},w:{duc:3,danh:2},wl:"Ngươi mở kho cung mình giúp người bị nạn."}),
-   CH7("Đóng cửa cung giữ mình",{w:{...BAL.cv.closeDoor,suc:BAL.cv.rest},wl:"Ngươi đóng cửa cung, không ra ngoài; cung nhân thấy chủ lạnh lùng."})]}});
+   CH7("Đóng cửa cung giữ mình",{w:{...BAL.cv.closeDoor,suc:BAL.cv.rest},ok:()=>{cpm7("hoahoan_a");return ""},wl:"Ngươi đóng cửa cung, không ra ngoài; cung nhân thấy chủ lạnh lùng."})]}});
 MF("dichbenh",{t:"Lập công · Dịch trong cung",cd:36,w:()=>.8,who:()=>pDoc(),
  v:["Dịch tả lan trong dãy nhà cung nữ, mỗi ngày mấy người ngã bệnh.","Bệnh sốt rét lan ở khu thái giám gần hồ nước đọng.","Bệnh đau mắt đỏ lan khắp các cung, thái y không đủ người.","Một trận cúm lan nhanh trong hậu cung giữa tiết giao mùa.","Bệnh lỵ lan ở Ngự thiện phòng, người ta sợ ăn uống.","Ghẻ lở lan trong đám cung nhân giặt giũ ở Hoán y cục."],
  pp:()=>({}),
  o:X=>{const B={dai:1,pd:1};
   return [CH7("Tự tay bốc thuốc phát cho cung nhân",{c:{suc:-12},p:od(BAL.odb.j71.odP_2+aw7(S,"y")*12),w:{danh:4,duc:3,maid:6},wt:bonus7(B),l:{suc:hurt7(10)},lt:hurt7(10)?[]:["thuốc chưa hiệu nghiệm"],ok:()=>`Thuốc của ngươi chặn được dịch; cung nhân khắp nơi nhắc tên ngươi.${bonusDo7(B,"chặn dịch")}`,ll:"Thuốc chưa hiệu nghiệm, ngươi còn nhiễm nhẹ, mệt mấy hôm."}),
    CH7("Bỏ bạc mua thuốc",{c:{bac:-40},w:{duc:3,danh:2},wl:"Ngươi bỏ bạc mua thuốc cho cung nhân."}),
-   CH7("Đóng cửa cung tránh dịch",{w:{suc:3,maid:-3},wl:"Ngươi đóng cửa cung tránh dịch; cung nhân bệnh thấy chủ bỏ mặc."})]}});
+   CH7("Đóng cửa cung tránh dịch",{w:{suc:3,maid:-3},ok:()=>{cpm7("dichbenh_a");return ""},wl:"Ngươi đóng cửa cung tránh dịch; cung nhân bệnh thấy chủ bỏ mặc."})]}});
 /* builder (PEND j71m) */
 function mFill7(s,X){const f=MF7[X.k];let t=typeof s==="string"?s:s[0];if(f.fill)t=f.fill(t,X);return t.replace(/\{A\}/g,X.A?X.A.n:"").replace(/\{B\}/g,X.B?X.B.n:"").replace(/\{M\}/g,S.maid?S.maid.name:"cung nữ")}
 PEND.j71m=pp=>{if(!S)return null;const f=MF7[pp.k];if(!f)return null;const X={k:pp.k,p:pp};
