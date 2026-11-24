@@ -4,9 +4,10 @@ window.MOCK=async()=>{const {A,at,E,ctr,wait}=TL;const CDN='https://ctm-img.vict
  const M=document.getElementById('modal');M.style.background='transparent';M.style.backdropFilter='none';
  const cap=E('div','','Mẫu 1 · Bàn bài — việc đến như một lá bài, lựa chọn xòe như bài trên tay',document.body);cap.style.cssText='position:fixed;left:50%;top:172px;transform:translateX(-50%);z-index:100000;background:rgba(40,16,12,.78);color:#fff;border-radius:999px;padding:5px 16px;font:600 12.5px/1.2 sans-serif;white-space:nowrap;pointer-events:none;opacity:0';
  A(cap,[{opacity:0},{opacity:1,offset:.08},{opacity:1,offset:.95},{opacity:0}],{at:100,dur:11500,ease:'linear'});
+ { const U=CDN+'ev-cung-nhan.webp';await new Promise(r=>{const i=new Image();i.onload=i.onerror=r;i.src=U});window.evArt=()=>U}
  const dyn=(el,kf,o={})=>A(el,kf,Object.assign({},o,{at:TL.now()+(o.dt||0)}));
- const cw=LAND?Math.min(230,H*.31):Math.min(215,W*.29),ch=cw*1.22;const HX=LAND?W*.63:W/2,HY=LAND?H*.62:H*.69;const sp=cw*(LAND?1.02:.93);
- const px=W-cw*.7-16,py=LAND?118:172;
+ const SR=document.getElementById('stage').getBoundingClientRect();const cw=Math.max(150,Math.min(215,SR.width*.3)),ch=cw*1.22;const HX=SR.left+SR.width/2,HY=SR.top+SR.height*.68;const sp=cw*(LAND?1.02:.93);
+ const px=SR.right-cw*.7-12,py=SR.top+10;
  const fan=(i)=>({x:(i-1)*sp,y:Math.abs(i-1)*cw*.08,r:(i-1)*12});
  let cards=[],pile=[],dlgEl;
  // ---- build state at t=300 ----
@@ -26,7 +27,7 @@ window.MOCK=async()=>{const {A,at,E,ctr,wait}=TL;const CDN='https://ctm-img.vict
    face.appendChild(wrap);wrap.appendChild(o);o.style.cssText+=';width:100%;margin:0;flex-direction:column;align-items:stretch;height:100%;box-shadow:none;border:0;background:transparent';
    cards.push({hw,face,back});});
   // layout of the shrunken dialog: centre it higher
-  const r=dlgEl.getBoundingClientRect();const tgt=LAND?{x:-W*.2,y:0,s:.92}:{x:0,y:-(r.top+r.height/2-(H*.33)),s:.9};
+  const r=dlgEl.getBoundingClientRect();const tgt={x:(SR.left+SR.width/2)-(r.left+r.width/2),y:-(r.top+r.height/2-(SR.top+SR.height*.3)),s:Math.min(.88,SR.width*.94/r.width)};
   dyn(dlgEl,[{transform:'none'},{transform:`translate(${tgt.x}px,${tgt.y}px) scale(${tgt.s})`}],{dur:600,ease:'cubic-bezier(.22,.9,.28,1)'});
   cards.forEach((c,i)=>{const f=fan(i);const sx=px+cw*.35-HX,sy=py+ch*.35-HY;
    dyn(c.hw,[{opacity:1,transform:`translate(${sx}px,${sy}px) scale(.5) rotate(18deg)`},{opacity:1,transform:`translate(${f.x}px,${f.y}px) scale(1) rotate(${f.r}deg)`}],{dur:620,dt:500+i*190});
@@ -39,10 +40,10 @@ window.MOCK=async()=>{const {A,at,E,ctr,wait}=TL;const CDN='https://ctm-img.vict
   c.hw.style.zIndex=5;c.hw.style.boxShadow='0 0 28px 8px rgba(255,214,120,.85)';c.hw.style.borderRadius='14px';
   [0,2].forEach(i=>{const g=fan(i);dyn(cards[i].hw,[{transform:`translate(${g.x}px,${g.y}px) rotate(${g.r}deg)`},{transform:`translate(${g.x*1.1}px,${g.y+8}px) rotate(${g.r*1.25}deg) scale(.96)`}],{dur:360});cards[i].face.style.filter='brightness(.9)'});});
  // ---- choose: card 2 to centre, others fall; then the REAL choice runs and the REAL result card appears ----
- at(6200,()=>{const f=fan(1);dyn(cards[1].hw,[{transform:`translate(${f.x}px,${f.y-cw*.2}px) scale(1.1)`},{transform:`translate(${W/2-HX}px,${H*.5-HY}px) scale(1.35)`}],{dur:520});
+ at(6200,()=>{const f=fan(1);dyn(cards[1].hw,[{transform:`translate(${f.x}px,${f.y-cw*.2}px) scale(1.1)`},{transform:`translate(0px,${SR.top+SR.height*.45-HY}px) scale(1.3)`}],{dur:520});
   [0,2].forEach((i,k)=>{const g=fan(i);dyn(cards[i].hw,[{opacity:1,transform:`translate(${g.x*1.1}px,${g.y+8}px) rotate(${g.r*1.25}deg) scale(.96)`},{opacity:0,transform:`translate(${g.x*1.7}px,${g.y+ch*.9}px) rotate(${g.r*2.4}deg) scale(.9)`}],{dur:520,dt:k*80,ease:'cubic-bezier(.5,0,.9,.4)'})});
   dyn(dlgEl,[{opacity:1},{opacity:0}],{dur:380,dt:100});});
- at(7000,()=>{const lay=document.getElementById('mhl');dyn(cards[1].hw,[{opacity:1,transform:`translate(${W/2-HX}px,${H*.5-HY}px) scale(1.35)`},{opacity:0,transform:`translate(${W/2-HX}px,${H*.62-HY}px) scale(.8)`}],{dur:420,ease:'ease-in'});
+ at(7000,()=>{const lay=document.getElementById('mhl');dyn(cards[1].hw,[{opacity:1,transform:`translate(0px,${SR.top+SR.height*.45-HY}px) scale(1.3)`},{opacity:0,transform:`translate(0px,${SR.top+SR.height*.6-HY}px) scale(.8)`}],{dur:420,ease:'ease-in'});
   setTimeout(()=>{const b=rsnap();chooseM(1);try{S.sung+=3;S.suc-=3}catch(e){}resultShow('Quý nhân mời nàng thưởng trà',rsnap()&&b,true)},300);});
  at(10800,()=>{const lay=document.getElementById('mhl');if(lay)lay.remove()});
  return 11600};

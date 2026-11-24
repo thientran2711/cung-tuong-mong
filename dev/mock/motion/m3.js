@@ -7,6 +7,10 @@ window.MOCK=async()=>{const {A,at,E,ctr,wait}=TL;const CDN='https://ctm-img.vict
  const dlg=()=>{const d=M.querySelector('.dlg');if(d)d.style.animation='none';return d};
  const v=rivals.find(r=>r.alive&&!r.out);
  const show=(m)=>{pushModal(m);showModal();return dlg()};
+ { const U=CDN+'ev-cung-nhan.webp';await new Promise(r=>{const i=new Image();i.onload=i.onerror=r;i.src=U});window.evArt=()=>U}
+ // pre-warm: paint each dialog once off-camera so pictures are decoded before the take (no half-painted card)
+ const M0=[{t:'Tin trong cung',h:'<p>.</p>',btn:'Đã rõ'},{t:'Người đến thăm',who:pv(v),h:'<p>.</p>',opts:[{n:'a',fx:{sung:1}}]},{t:'Quý nhân mời nàng thưởng trà',h:'<p>.</p>',opts:[{n:'a',fx:{sung:1}}]}];
+ M.style.opacity=0;for(const m of M0){pushModal(m);showModal();await wait(1500);closeModal();await wait(200)}M.style.opacity='';
  // 3a TIN
  at(300,()=>{setCap('Mẫu 3a · Tin trong cung — mở từ trên xuống như cuộn giấy, chuông nhỏ lóe');const d=show({t:'Tin trong cung',h:'<p>Hoàng thượng ban hoa lụa cho Bành quý nhân. Trong cung người người đều hay.</p>',btn:'Đã rõ'});
   dyn(d,[{opacity:1,clipPath:'inset(0 0 100% 0)',transform:'translateY(-26px)'},{opacity:1,clipPath:'inset(0 0 0 0)',transform:'translateY(0)'}],{dur:700,ease:'cubic-bezier(.3,.8,.3,1)'});
@@ -23,15 +27,16 @@ window.MOCK=async()=>{const {A,at,E,ctr,wait}=TL;const CDN='https://ctm-img.vict
   const st=d.querySelector('.kseal');if(st)dyn(st,[{opacity:0,transform:'scale(2.6) rotate(-14deg)'},{opacity:1,transform:'scale(1) rotate(0)'}],{dur:240,dt:1900,ease:'cubic-bezier(.6,0,.9,.5)'});});
  at(7000,()=>closeModal());
  // 3c KHÁCH
- at(7400,()=>{setCap('Mẫu 3c · Khách tới — bóng người hiện ở cửa rồi mới rõ mặt');const d=show({t:'Người đến thăm',who:pv(v),h:'<p>Có người đứng chờ ngoài cửa viện, xin gặp.</p>',opts:[{n:'Mời vào.',fx:{}},{n:'Nói đang bận.',fx:{}}]});
+ at(7400,()=>{setCap('Mẫu 3c · Khách tới — bóng người hiện ở cửa rồi mới rõ mặt');const d=show({t:'Người đến thăm',who:pv(v),h:'<p>Có người đứng chờ ngoài cửa viện, xin gặp.</p>',opts:[{n:'Mời vào, dùng trà.',fx:{sung:2,suc:-2}},{n:'Nói đang bận.',fx:{danh:2,bac:-10}}]});
   dyn(d,[{opacity:0,transform:'translateX(60px)'},{opacity:1,transform:'translateX(0)'}],{dur:520});
-  const f=d.querySelector('.kszfig');if(f){dyn(f,[{filter:'brightness(0)'},{filter:'brightness(0)',offset:.45},{filter:'brightness(1.25) saturate(.6)',offset:.8},{filter:'brightness(1) saturate(1)'}],{dur:1500,dt:300,ease:'ease-out'});dyn(f,[{transform:'translateX(80px)'},{transform:'translateX(0)'}],{dur:800,dt:200});}});
+  const f=d.querySelector('.kszfig');if(f){const G='url(#kfa) brightness(1.04) contrast(.8)';dyn(f,[{filter:G,opacity:.92},{filter:G,opacity:.92,offset:.5},{filter:'none',opacity:1}],{dur:1600,dt:300,ease:'ease-out'});dyn(f,[{transform:'translateX(80px)'},{transform:'translateX(0)'}],{dur:800,dt:200});}});
  at(10200,()=>closeModal());
- // 3d VIỆC
- at(10600,()=>{setCap('Mẫu 3d · Việc — ảnh đẩy gần, dấu việc đóng xuống, chữ hiện dần');const d=show({t:'Quý nhân mời nàng thưởng trà',h:'<p>Bành quý nhân dừng bên lối hoa, mỉm cười hỏi thăm. Nàng đáp thế nào cho phải đạo?</p>',opts:[{n:'Nhận lời.',fx:{sung:3,suc:-3}},{n:'Từ chối khéo.',fx:{danh:2,bac:-10}},{n:'Dò hỏi chuyện trong cung.',fx:{tamco:1}}]});
+ // 3d VIỆC — the card is built hidden first and revealed only when every picture in it is decoded (no half-painted card)
+ at(10250,()=>{M.style.opacity=0;show({t:'Quý nhân mời nàng thưởng trà',h:'<p>Bành quý nhân dừng bên lối hoa, mỉm cười hỏi thăm. Nàng đáp thế nào cho phải đạo?</p>',opts:[{n:'Nhận lời.',fx:{sung:3,suc:-3}},{n:'Từ chối khéo.',fx:{danh:2,bac:-10}},{n:'Dò hỏi chuyện trong cung.',fx:{tamco:1}}]})});
+ at(11500,()=>{setCap('Mẫu 3d · Việc — ảnh đẩy gần, dấu việc đóng xuống, chữ hiện dần');const d=M.querySelector('.dlg');M.style.opacity='';
   dyn(d,[{opacity:0,transform:'translateY(18px) scale(.97)'},{opacity:1,transform:'none'}],{dur:420});
-  const im=d.querySelector('.k3main img');if(im)dyn(im,[{transform:'scale(1)'},{transform:'scale(1.16)'}],{dur:3200,ease:'ease-out'});
+  const im=d.querySelector('.k3main img');if(im)dyn(im,[{transform:'scale(1)'},{transform:'scale(1.16)'}],{dur:3000,ease:'ease-out'});
   const sl=d.querySelector('.kpseal');if(sl)dyn(sl,[{opacity:0,transform:'scale(2.6) rotate(-12deg)'},{opacity:1,transform:'scale(1) rotate(0)'}],{dur:240,dt:500,ease:'cubic-bezier(.6,0,.9,.5)'});
-  const tx=d.querySelector('.k3right');if(tx)dyn(tx,[{clipPath:'inset(0 0 100% 0)'},{clipPath:'inset(0 0 0 0)'}],{dur:900,dt:700,ease:'steps(14,end)',back:true});});
- at(13900,()=>closeModal());
- return 14600};
+  const tx=d.querySelector('.k3right p');if(tx)dyn(tx,[{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0 0 0)'}],{dur:1000,dt:600,ease:'steps(24,end)',back:true});});
+ at(14900,()=>closeModal());
+ return 15600};

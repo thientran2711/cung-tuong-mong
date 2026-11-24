@@ -16,6 +16,7 @@ window.MOCK=async()=>{const {A,at,E,ctr,cell,wait}=TL;
  const result=(ok,title,mut)=>{const b=rsnap();mut();log('Thái hậu nhấp một ngụm trà.');resultShow(title,b,ok);return document.getElementById('rtoast')};
  const chips=()=>[...document.querySelectorAll('#rtoast .rd .ef')];
  const nm=t=>Object.keys(NAME).find(k=>t.startsWith(k+' ')||t.startsWith(k));
+ { const b0=rsnap();S.sung+=1;resultShow('.',b0,true);await wait(1800);const t0=document.getElementById('rtoast');if(t0)t0.classList.remove('on');await wait(600)}
  // ---- 4a THÀNH ----
  at(500,()=>{const t=result(true,'Dâng trà hầu Thái hậu',()=>{S.sung+=3;S.danh+=3;S.bac-=10;S.suc-=5});const r=t.getBoundingClientRect();back(r,TL.now());});
  at(1900,()=>{const N=TL.now();chips().forEach((c,i)=>{const n=nm(c.textContent.trim()),ce=n&&cell(n);if(!ce)return;const bad=c.classList.contains('r');const a=ctr(c),z=ctr(ce);const col=bad?'#d94a3a':'#ffd36b';
