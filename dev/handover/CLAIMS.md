@@ -1381,7 +1381,7 @@ LAW-1 likes/dislikes/gifts scan + fix (opus; MAIN 116 07:57Z (e); briefs/D-law1-
 | ROBOT-COOP RUNNER U3 pairs 3-4 SWAP=0 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p3-4.md | B | session_01N1tNP6GBeXdWAwKq3PXxHZ | PAUSED (archived 05:43Z for kit seat; U3 back to QUEUED) | 24/11 05:36Z |
 PALACE AUDIT + DISTANCE EFFECT (opus; MAIN 116 08:16Z + 08:46Z; briefs/D-palace-distance.md) | reports/palace-audit.md; review/palace-distance | session_01D3E3NYCMYjjACU3pnjjM84 | RUNNING | 24/11 05:40Z (Foreman D ROOT)
 LAW-1 likes/dislikes/gifts scan + fix (opus; MAIN 116 07:57Z (e); briefs/D-law1-likes-gifts.md) | review/law1-gifts | session_01D3E3Nb2AhxBQbQBQDKoKLv | RUNNING | 24/11 05:40Z (Foreman D ROOT)
-| REVIEW mgskin-wire r1 (sonnet SMALL reviewer-lander; briefs/b-mgskin-wire-review.md) of review/mgskin-wire 53e3b70b | review/mgskin-wire-r1; reports/thin.md «## REVIEW mgskin-wire r1» | B | session_01N1tNP63hZJuLnXd4UvJ6U4 | RUNNING | 24/11 05:38Z |
+| REVIEW mgskin-wire r1 (sonnet SMALL reviewer-lander; briefs/b-mgskin-wire-review.md) of review/mgskin-wire 53e3b70b | review/mgskin-wire-r1; reports/thin.md «## REVIEW mgskin-wire r1» | B | session_01N1tNP63hZJuLnXd4UvJ6U4 | PASS a0d3efa8 LAND READY (archived) | 24/11 05:38Z |
 | thin-p6 r2 FIX + RE-LAND (opus; LC9 bounce 05:36Z: wc/j70c/j71c-play fail no-arg on ff1773ba; briefs/b-thin-p6-r2.md) | review/thin-p6-r2; reports/thin.md «## REVIEW thin-p6 r2» | B | session_01N1tNP436YFaYo5MMDCeWak | RUNNING | 24/11 05:43Z |
 | SMALL KIT REVIEWER #2 (sonnet; split from 2F8nQScU; briefs/b-kit-review-2.md): kit-sqopt, kit-daytitle, kit-dialogue-vn, kit-evframe | review/<name>-r1; reports/<branch>.md | B | session_01N1tNP59hSyoDLcPHGSmzLM | RUNNING | 24/11 05:44Z |
 | KIT KEEPER KK18 (sonnet; successor of KK17; reports/MOCK-STAGE.md «HANDOVER KK17 → KK18») | review/kit-* | MAIN 118 | session_01V1ZZH4iZc3Go1VBS7nJnuD | RUNNING | 24/11 06:18Z |
@@ -1389,3 +1389,4 @@ LAW-1 likes/dislikes/gifts scan + fix (opus; MAIN 116 07:57Z (e); briefs/D-law1-
 | SELSCENE-5 opening 3 days (opus; successor of SELSCENE-4; reports/selection-scene.md) | review/selection-scene | MAIN 118 | session_01V1ZZH1P6EXpzNXqeuKYD38 | RUNNING | 24/11 06:34Z |
 | REVIEW E65r TITLES2 r3 BIG (opus; briefs/E65r-review-titles2-r3.md) of 86e0fcf1 | review/titles2-r2; reports/titles2-review-r3.md | FOREMAN E (child1) | session_01DgYSWkTHXKFwZRgoxgzfwZ | RUNNING | 24/11 05:58Z |
 | ROBOT-COOP RUNNER U4 pairs 3-4 SWAP=1 SEED=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p3-4-s.md | B | session_01N1tNP2J2RWyqmnHnG8Run7 | RUNNING | 24/11 05:56Z |
+| ROBOT-COOP RUNNER U5 pairs 5-6 SWAP=0 SEED=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p5-6.md | B | session_01N1tNP6DDKAsMUF9TiY87qJ | RUNNING | 24/11 05:58Z |
