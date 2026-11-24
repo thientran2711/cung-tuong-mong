@@ -187,3 +187,22 @@ stipend() always reached jecon econStipend; j20 stipend0 only kept typed numbers
 Base: nc-fix-4-rv 32b6bbdc + LIVE 35647d5e merged (index.html/sw.js rebuilt). r10-stip-noqueen 6/6 · bongloc-options 14/14.
 quickcheck: run 1 FAIL perf buổi 2656/1072 (box noise), run 2 FAIL time-spill guard (flaky: the guard alone PASS 2/2 here and 2/2 on main), run 3 PASS (buổi 1524/1355) · core gates PASS.
 SẴN SÀNG KIỂM review/robot10-nc-fix-5 fc351d87a2091ae0dbe5dddb85043c4ea659883a (SMALL; lands after nc-fix-4-rv).
+
+## 9. Runner files nc-20261124-0354-vuong.md (B, 62 rows) + nc-20261124-0533.md (A nc_su lives 11-20, 26 rows) — triage 08:00Z
+Every row is already owned / landed / harness (same families as §7: kbk-* = Tuần lục back face FP; econ null.queen = nc-fix-4-rv LAND READY; stats 101 / «Sức +6» = BIG3 chain landed; mspot / j59t = MAIN; stage layers = nc-fix-2 landed). The only NEW row:
+- **stuck inpage6 TIMEOUT, ring spyQueen ↔ dilemma «Dò la: Thôi.»** (vuong lazy-1/speed-1/speed-2; su lazy-1/-2, speed-1/-2) = **harness bot loop, not a game bug.** Checked on main with saves nc-B-vuong/saves/20261124-0354-004.json: doAct(0,"spy") opens the road card «Dò la — <Hoàng hậu>» with 4 live options (Làm như thường / Hao tâm cơ… / Thuê người… / Thôi), nothing locked; «Thôi» correctly spends nothing. The lazy/speed personas pick «Thôi», and inpage6's spyQueen branch (inpage6.js:99, score 3.6, no memory) offers the same act again → endless free loop. Fix for the runner owner: after an act's card was answered «Thôi», drop that act for the rest of the buổi (or score «Thôi» below every live option). Save 0533-003 (bạc 5): spy opens nothing — the bot's S.bac≥20 guard differs from that moment, same loop.
+No new fixer branch.
+
+## HANDOVER (rollover: context 45 % at 07:55Z > START_CTX 3 % + 25 %; the coordinator opens the successor)
+State of my branches:
+| branch | sha | state |
+|---|---|---|
+| review/robot10-nc-fix-1 (→ -rv ad3fa9be) | 2e5d3da0 | LANDED 2899d1f2 |
+| review/robot10-nc-fix-2 (→ -rv 977a70e9) | a08f8cd9 | LANDED 43cf5434 |
+| review/robot10-nc-fix-3 (→ -rv e6b841fd) | 449cbe08 | LAND READY (lands after nc-fix-1: done) |
+| review/robot10-nc-fix-4 (→ -rv 32b6bbdc) | a1712058 | LAND READY |
+| review/robot10-nc-fix-5 | fc351d87 | SSK (SMALL; on nc-fix-4-rv; lands after it) — needs a reviewer |
+Tests I added (reuse them): dev/test/r10-rt.js (save→load→save, 2 rounds), r10-load-twice.js (same save, two pages), r10-tab-layers.js (stage layers over tabs), r10-stip-noqueen.js.
+Harness notes for the runner owner (not fixed by me): roundTrip must render() after deser; HUD check must wait out hudTween (500 ms); inpage6 cannot press j82 kitConfirm «Bỏ cuộc?»; kbk-* Tuần lục back-face text; spyQueen↔«Thôi» loop (above); CORS from a local origin.
+NEXT JOB for the successor (MAIN 115 01:40Z: «after the 80 lives the opus fixer decides the BAL moves within LAW 2/3/5 and lands them through normal review»): all 80 phase-2 lives are in (A gian 20 + su 20: rates-20261124-0633.md; B tuc 20 + vuong 20: rates file named in FOREMAN_D_STATUS B line 1466). Start from the reco proposals (n=10, reports/robot10-reco.md: tuanP 25→21, birth.hardDie 45→31, kyngo.p0 85→68, eff.j68q.cd 10→19) and re-decide each on the 80 lives; each move: BAL only, before/after numbers, laws 2/3/5 checked, one branch review/robot10-bal-moves, SSK under «FOR D ROOT». Kiếp real-minutes cap + kỳ ngộ ceiling per kiếp: keep PROVISIONAL numbers as named BAL constants (MAIN 115). Also watch the next runner round (runner A idle awaiting a re-run order after the fixes land).
+Successor reading set: dev/rules/START_CORE.md + START_WORKER.md, briefs/D-robot10-nc-fixer.md, this report. Worktrees of mine under /home/user/wt (r10fix, r10fix2..5, r10main, r10ho) can be deleted.
