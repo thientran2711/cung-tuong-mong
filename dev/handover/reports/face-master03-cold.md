@@ -31,8 +31,31 @@ Magnific images_generate, mode gpt-2-6, resolution 2k, aspect auto, count 1, fol
 | FACE-COLD-S27-A16 | s27 | 16 | BhiItCpoQR | BhiIartoQR | DONE |
 | FACE-COLD-S28-A16 | s28 | 16 | jUIlgAaLD0 | 3z12YtOREY | DONE |
 | FACE-COLD-S29-A16 | s29 | 16 | ov3tmL3829 | TdJDBkgVNR | DONE |
+| FACE-COLD-S30-A16 | s30 | 16 | YMS0THvWeC | N253nbV6D9 | DONE |
+| FACE-COLD-S31-A16 | s31 | 16 | yiF9N89PW9 | ksXxUoh16B | DONE |
+| FACE-COLD-S32-A16 | s32 | 16 | UPfJOXPwny | cpwVB4r0eP | DONE |
+| FACE-COLD-S46-A16 | s46 | 16 | 0e7MDjETfW | ov3tEWB829 | DONE |
+| FACE-COLD-S47-A16 | s47 | 16 | xS8slpOjfW | JNuP2XfOq4 | DONE |
+| FACE-COLD-S48-A16 | s48 | 16 | jUIlgdFLD0 | gOvw6dESXO | DONE |
+| FACE-COLD-S49-A16 | s49 | 16 | P3HN6Ql42C | ov3tQ4A829 | DONE |
+| FACE-COLD-S50-A16 | s50 | 16 | LwtgSmCswO | JNuP2CkOq4 | DONE |
+| FACE-COLD-S13-A26 | s13 | 26 | IfZhvvqtvE | rgoLPMFxtc | DONE |
+| FACE-COLD-S14-A26 | s14 | 26 | eI9BoIfdqL | 8aRmqNcIrU | DONE |
+| FACE-COLD-S15-A26 | s15 | 26 | VXOpeBYMMU | 1lBjyBUr4r | DONE |
+| FACE-COLD-S26-A26 | s26 | 26 | yiF9NZ5PW9 | N2530rM6D9 | NEEDS_REVIEW (lips look rosy/saturated, possible makeup read) |
+| FACE-COLD-S27-A26 | s27 | 26 | BhiItCpoQR | DoPdfZJpcl | DONE |
+| FACE-COLD-S28-A26 | s28 | 26 | jUIlgAaLD0 | s7mS3fel8e | DONE |
+| FACE-COLD-S29-A26 | s29 | 26 | ov3tmL3829 | 9ZbiTLpNYZ | DONE |
+| FACE-COLD-S30-A26 | s30 | 26 | YMS0THvWeC | YMS0t6kWeC | DONE |
+| FACE-COLD-S31-A26 | s31 | 26 | yiF9N89PW9 | w4COGsS7EI | DONE |
+| FACE-COLD-S32-A26 | s32 | 26 | UPfJOXPwny | 3z12eZIREY | DONE |
+| FACE-COLD-S46-A26 | s46 | 26 | 0e7MDjETfW | aFnElQSfSh | NEEDS_REVIEW (eyelids pinkish-shaded, may read as eyeshadow) |
+| FACE-COLD-S47-A26 | s47 | 26 | xS8slpOjfW | nVgchpiYQD | DONE |
+| FACE-COLD-S48-A26 | s48 | 26 | jUIlgdFLD0 | 5je14wxKxe | DONE |
+| FACE-COLD-S49-A26 | s49 | 26 | P3HN6Ql42C | 9ZbiDTrNYZ | DONE |
+| FACE-COLD-S50-A26 | s50 | 26 | LwtgSmCswO | 3z12XBKREY | DONE |
 
 QC notes: s13/s14/s15/s26/s27/s28/s29 age16 (7 jobs; all marked DONE after viewing; s27 has a pale-lavender hair ribbon, within robe/pin vocabulary) looked at: no text, ivory robe+pin, skin matches master tone, teen-appropriate, no makeup look. (QC of identity vs source not pixel-compared; subjective.)
 
-## HANDOVER (successor)
-Remaining jobs: 53 of 60 (age16: s30,s31,s32,s46,s47,s48,s49,s50; then ages 26, 51, 63 for all 15). Rolled over at 7/60 because each generate call carries ~3k tokens of prompt.
+## HANDOVER
+Worker continues itself (rollover cancelled by Foreman D). Ages 16 and 26 done (30/60); 51 and 63 next. Contact sheets at the end.
