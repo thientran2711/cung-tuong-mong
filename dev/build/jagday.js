@@ -28,6 +28,10 @@ const AGD={stat:{draw:0,slots:0,deeds:0,replan:0,keep:0,touch:0,land:0,miss:0,wo
 /* review r1 robot-fix-cnv F4: AGD.lz holds the world (w) it was drawn for and its queue (newlife-leak «AGD…»); it already drops itself on another world, now it is
    dropped at once. AGD.oc is NOT reset here: a load resetting it re-plans the day and rewrites S.ag.log (save→load drift, r10-play-rt thd) — residual for the fixer */
 lifeStore("AGD.lz day-plan queue (holds its world)",()=>{AGD.lz=null});
+/* robot-fix-cnv-3 R5: AGD.oc (her options of THIS buổi, kept from the day draw for agDecideDay a moment later) is a pure perf memo — agDecideDay
+   rebuilds them (agOptsG) when the entry is missing; its options hold the world they were built in (o.t = a person), so an entry is used only in
+   that world (w) and the memo is dropped on new life / load / title (newlife-leak «AGD.oc…» = an old life's person) */
+lifeStore("AGD.oc day-plan options memo (holds its world)",()=>{AGD.oc={}});
 const AGREG={consort:{},hh:{},maid:{},srv:{},emp:{},th:{}};const AGNEEDREG={};
 function agdErr(w,e){try{AGD.errs.push(w+": "+(e&&e.message||e));if(AGD.errs.length>40)AGD.errs.shift();console.error("jagday",w,e)}catch(x){}}
 function agReg(grp,key,fn){(AGREG[grp]=AGREG[grp]||{})[key]=fn}
@@ -71,7 +75,7 @@ function agDrawB(p,id,b,base,W){const c=j95c(b);const slot={pl:base[0],a:base[1]
  let O=agOptsG(p,N,need);
  /* fix2 perf: her options of THIS buổi, drawn here at its start, are the ones agDecideDay checks her pick against a moment later (same buổi, same
     needs) — kept once for that check instead of being built twice (profile CPU×4: agDecide units up to 36 ms) */
- if(typeof id==="string"&&id[0]==="v"&&b===AGD.bo)AGD.oc[id]={key:wk()+"-"+b,need,O};
+ if(typeof id==="string"&&id[0]==="v"&&b===AGD.bo)AGD.oc[id]={key:wk()+"-"+b,need,O,w:S};/* robot-fix-cnv-3 R5: w = the world it was built in (its options hold that world's people) */
  if(W)O=O.map(o=>{let m=(W.deed&&W.deed[o.k]!=null?W.deed[o.k]:1);if(W.place){let pl=null;try{pl=o.at(0,p,o.t)}catch(e){}if(pl&&W.place[pl]!=null)m*=W.place[pl]}return m===1?o:Object.assign({},o,{u:o.u*m})}).filter(o=>o.u>0);
  if(!O.length)return slot;
  const o=mindPick(O.map(x=>[x,x.u]),p);if(!o)return slot;
@@ -195,7 +199,7 @@ function agRow(s){const r=[s.pl,s.a||"go",s.t||null,s.why||""];return [r,r.slice
 /* ---------------- the planned deed lands (AG1 pend / ledger / witness path) ---------------- */
 function agDecideDay(v){const s=agDaySlot("v"+v.id);if(!s)return null;if(!s.k)return 0;/* a buổi of her schedule: she keeps it */
  let N;try{N=agNeedsG(v)}catch(e){return 0}
- const oc=AGD.oc["v"+v.id];delete AGD.oc["v"+v.id];const O=oc&&oc.key===agKey()&&oc.need===s.need?oc.O:agOptsG(v,N,s.need);const o=O.find(x=>x.k===s.k&&(x.t?ledgerId(x.t):null)===(s.t||null))||O.find(x=>x.k===s.k);
+ const oc=AGD.oc["v"+v.id];delete AGD.oc["v"+v.id];const O=oc&&oc.w===S&&oc.key===agKey()&&oc.need===s.need?oc.O:agOptsG(v,N,s.need);const o=O.find(x=>x.k===s.k&&(x.t?ledgerId(x.t):null)===(s.t||null))||O.find(x=>x.k===s.k);
  if(!o){AGD.stat.miss++;(AGD.why=AGD.why||{})['opt:'+s.k]=((AGD.why||{})['opt:'+s.k]||0)+1;agTouch(v);return 0}/* she cannot do it any more (cost, target gone): she keeps her place and re-plans next buổi */
  o.need=s.need;const at=(kh,vv,tt)=>{let k=null;try{k=o.at(kh,vv,tt)}catch(e){}return k===s.pl?k:null};
  let sl=agSlot(v,at,o.t,o);if(!sl)sl=agSlot(v,o.at,o.t,o);if(!sl){AGD.stat.miss++;(AGD.why=AGD.why||{})['slot:'+s.k]=((AGD.why||{})['slot:'+s.k]||0)+1;return 0}
