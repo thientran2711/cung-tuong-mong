@@ -14,7 +14,7 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;console.log((c?'ok   ':'FAIL ')+m)};
   const L=liveRivals(false);out.rivals=L.length;
   const R=j7cReady();out.ready=R.map(x=>x.sd.id);
   const d=mkP("j7c",{});out.card=!!d;if(!d)return out;out.text=d.t;out.opts=d.o.map(o=>o.n+' | '+o.x);out.pp=JSON.parse(JSON.stringify(d.pp));
-  const sd=J7I[d.pp.sid];out.castOk=Object.entries(d.pp.c).every(([role,c])=>{if(c.k!=='rv')return true;const v=RV(c.id);const rr=sd.roles[role];return v&&v.alive!==false&&(!rr['nết']||!rr['nết'].length||rr['nết'].some(n=>tr6(v).includes(n)))});
+  const sd=J7I[d.pp.sid];out.castOk=Object.entries(d.pp.c).every(([role,c])=>{if(c.k!=='rv')return true;const v=RV(c.id);const rr=sd.roles[role];return v&&v.alive!==false&&(j7cFit(v,rr)||(BAL.j7c.loose&&j7cFit(v,rr,true)))});/* review r1: the engine's own rule (nết AND lòng; BAL.j7c.loose = any one listed) — the old check ignored loose and failed at random */
   out.unfilled=/\{[a-z]+\}/.test(d.t+d.o.map(o=>o.n).join());out.marked=nrNow('j7',d.pp.sid);
   const re=mkP("j7c",JSON.parse(JSON.stringify(d.pp)));out.rebuilt=!!re&&re.t===d.t;
   const before=JSON.stringify([S.danh,S.suc,S.mat,S.duc,S.hh,S.bac,L.map(v=>aff(v,S))]);const ob0=S.j7c.ob.length;d.o[0].go();out.changed=before!==JSON.stringify([S.danh,S.suc,S.mat,S.duc,S.hh,S.bac,L.map(v=>aff(v,S))]);
