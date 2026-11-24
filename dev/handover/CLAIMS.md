@@ -1398,3 +1398,5 @@ REVIEW kit-promo-hook (sonnet SMALL; briefs/D-kit-promo-hook-review.md) of 287a6
 | ROBOT-COOP RUNNER U6 pairs 5-6 SWAP=1 SEED=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p5-6-s.md | B | session_01N1tNP5XrCevHuEb54HPjLr | RUNNING | 24/11 06:13Z |
 | REVIEW map-perf r1 (sonnet SMALL) of review/map-perf d6c2b4d4 | reports/map-perf.md «REVIEW r1» | MAIN 118 | session_01V1ZZH2sAiTzNB7k2oGMcY3 | RUNNING | 24/11 07:05Z |
 | REVIEW law1-audit r1 (opus BIG reviewer-lander; briefs/b-law1-audit-review.md) of review/law1-audit 0cf18eda | review/law1-audit-r1; reports/law1-audit.md «## REVIEW r1» | B | session_01N1tNP2ZbYMtMYdedMue4Fk | RUNNING | 24/11 06:17Z |
+| F-MUSIC-M1: music audit + wiring spec + core music groups (OD 24/11 ~09:45/09:55/10:00Z; briefs/F-music.md) | CDN audio/; reports/F-music.md | FOREMAN F | (opening) | RUNNING | 24/11 06:19Z |
+| F-MUSIC-M2: one music track per yearly festival (briefs/F-music.md) | CDN audio/; reports/F-music-fest.md | FOREMAN F | (opening) | RUNNING | 24/11 06:19Z |
