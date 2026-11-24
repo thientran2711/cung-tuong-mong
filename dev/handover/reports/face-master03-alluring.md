@@ -64,5 +64,23 @@ s16 s7mSSval8e | s17 Sya77u8Ub8 | s18 LwtggCqswO | s33 eI9BBA0dqL | s34 P3HNNsi4
 | s59 | 51 | 1lBjcGVr4r | DONE | ok, mark very small/faint under right eye |
 | s60 | 51 | bxpkzAQ5Y2 | NEEDS_REVIEW | beauty mark barely visible (s60 again); otherwise ok |
 | s61 | 51 | iGkZCQE3uK | DONE | ok, mature 51 look, mark ok |
+| s16 | 63 | ksXxTcJ16B | DONE | ok, clearly older 63 look, mark ok |
+| s17 | 63 | O6Q4haiynm | DONE | ok, mark ok, lines on the deep side but soft |
+| s18 | 63 | p84XUyOehw | DONE | ok, clearly older 63 look, mark ok |
+| s33 | 63 | p84XUN9ehw | DONE | ok, clearly older 63 look, mark ok |
+| s34 | 63 | fHYuRMECDY | DONE | ok, clearly older 63 look, mark ok |
+| s35 | 63 | s7mSdFAl8e | DONE | ok, clearly older 63 look, mark ok |
+| s36 | 63 | 4Rq6EyP9Aa | DONE | ok, mark ok, lines/grey on the heavy side for 63 |
+| s37 | 63 | bxpkTkR5Y2 | DONE | ok, clearly older 63 look, mark ok |
+| s38 | 63 | gOvwIRWSXO | DONE | ok, clearly older 63 look, mark ok |
+| s43 | 63 | lJhU82fgv9 | DONE | ok, clearly older 63 look, mark ok |
+| s44 | 63 | EbcFzJ3uuO | DONE | ok, clearly older 63 look, mark ok |
+| s45 | 63 | IfZh6SmtvE | DONE | ok, clearly older 63 look, mark ok |
+| s56 | 63 | 4Rq6FJw9Aa | DONE | ok, clearly older 63 look, mark ok |
+| s57 | 63 | s7mSILql8e | DONE | ok, mark ok, lines on the heavy side for 63 |
+| s58 | 63 | u50Hcq9QLD | DONE | ok, mark ok, lines on the heavy side for 63 |
+| s59 | 63 | gOvwhPiSXO | DONE | ok, clearly older 63 look, mark ok |
+| s60 | 63 | jUIl8yxLD0 | DONE | ok, clearly older 63 look, mark ok |
+| s61 | 63 | Xm68NFRBfo | DONE | ok, mark ok, lines on the heavy side for 63 |
 
-Progress: 51 DONE / 72, 3 NEEDS_REVIEW, rows logged 54. Credits spent ~7290.
+Progress: 69 DONE / 72, 3 NEEDS_REVIEW, rows logged 72. Credits spent ~9720.
