@@ -2106,7 +2106,7 @@ BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's n�
    with him» — liked = he lingers, everyone smells it; disliked = he leaves early, few notice: gain AND loss both ways, law 3).
    tell: odds that one observer smells it = base + eye·eyes(observer) + tm (she has tai mắt) + rk·rank of the visited (law 5: the higher she is,
    the more eyes on her) + like/dis; ghen / rel = what the observer feels toward the one she THINKS was there (two can share a scent: the tell can
-   point to the wrong person — law 6a). copy: an NPC whose Ghen toward her ≥ ghen copies her scent with odds p a month (frames her; she can do the
+   point to the wrong person — law 6a). copy: an NPC whose Ghen toward her ≥ ghen copies her scent with odds p a month (and one whose thiện cảm toward another consort ≤ −ghen copies that one's; review r1) (frames her; she can do the
    same by buying a rival's scent). poison: the j70 route «Mua chuộc cung nữ coi lò hương» (bạc only when it lands, payWin70) and its vis / need;
    doc: TAINT «tẩm hương độc» on a box (c = bạc to taint one herself, suc = Sức lost by the one who burns that box). */
 BAL.scent={list:{tram:{n:"trầm",g:{duc:1}},lan:{n:"lan",g:{sac:1}},que:{n:"quế",g:{suc:5}},mai:{n:"mai",g:{danh:1}}},

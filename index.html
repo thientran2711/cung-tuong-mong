@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"de29c737+","t":"2026-11-24T06:38Z","c":"scent: boxes sellable (no keep flag), tell shown under kèm in the kit action card","b":"4fecc41d2c0a","h":[{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"}]};
+window.CTM_BI={"s":"d024ff68+","t":"2026-11-24T07:13Z","c":"scent: boxes sellable (no keep flag), tell shown under kèm in the kit action card","b":"b62b5dcbbcd7","h":[{"s":"7429bfa3+","t":"2026-11-24T05:44Z","c":"Kỳ ngộ ghép + mở đầu j68 mới (THIN P4)"},{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -38495,7 +38495,7 @@ BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's n�
    with him» — liked = he lingers, everyone smells it; disliked = he leaves early, few notice: gain AND loss both ways, law 3).
    tell: odds that one observer smells it = base + eye·eyes(observer) + tm (she has tai mắt) + rk·rank of the visited (law 5: the higher she is,
    the more eyes on her) + like/dis; ghen / rel = what the observer feels toward the one she THINKS was there (two can share a scent: the tell can
-   point to the wrong person — law 6a). copy: an NPC whose Ghen toward her ≥ ghen copies her scent with odds p a month (frames her; she can do the
+   point to the wrong person — law 6a). copy: an NPC whose Ghen toward her ≥ ghen copies her scent with odds p a month (and one whose thiện cảm toward another consort ≤ −ghen copies that one's; review r1) (frames her; she can do the
    same by buying a rival's scent). poison: the j70 route «Mua chuộc cung nữ coi lò hương» (bạc only when it lands, payWin70) and its vis / need;
    doc: TAINT «tẩm hương độc» on a box (c = bạc to taint one herself, suc = Sức lost by the one who burns that box). */
 BAL.scent={list:{tram:{n:"trầm",g:{duc:1}},lan:{n:"lan",g:{sac:1}},que:{n:"quế",g:{suc:5}},mai:{n:"mai",g:{danh:1}}},
@@ -72752,16 +72752,16 @@ function scHas(p){return (p.inv||[]).findIndex(e=>e&&!e.h&&e.k===scBox(p.sc))}
 function scInit(v){if(!v||v===S||v.sc!==undefined)return;const K=SC_K();v.sc=K[scHash("sc:"+v.id)%K.length];v.inv=v.inv||[];const [a,b]=BAL.scent.npcStock;const n=a+scHash("scn:"+v.id)%(b-a+1);for(let i=0;i<n;i++)v.inv.push({k:scBox(v.sc)})}
 /* the scent a person really carries now (none when the box ran out) */
 function scOf(p){if(!p)return null;if(p!==S)scInit(p);return p.sc&&!p.scOff&&BAL.scent.list[p.sc]?p.sc:null}
-function scEmp(){try{const E=S&&S.emp;if(!E)return null;E.likes=E.likes||{};E.known=E.known||{};if(!E.likes.scent)E.likes.scent=LIKES.scent[scHash("emp:scent:"+(E.name||""))%LIKES.scent.length];return E}catch(e){return null}}
+function scEmp(){try{const E=S&&S.emp;if(!E)return null;E.likes=E.likes||{};E.known=E.known||{};if(!E.likes.scent){/* review r1: never a scent he already dislikes (jdis may have drawn first) */const D=Array.isArray(E.dis)?E.dis:[],A0=LIKES.scent.filter(n=>!D.includes("scent:"+n)),A=A0.length?A0:LIKES.scent;E.likes.scent=A[scHash("emp:scent:"+(E.name||""))%A.length]}return E}catch(e){return null}}
 function scDis(k){try{return typeof disOf==="function"&&disOf("emp").includes("scent:"+scName(k))}catch(e){return false}}
 function scLiked(k){const E=scEmp();return !!(E&&k&&E.likes.scent===scName(k))}
 function scTm(p){try{return typeof taiMatRaw==="function"&&taiMatRaw(p).length>0}catch(e){return false}}
 /* burn one box (pick or month): the gain; a tainted box hurts the one who burns it */
-function scBurn(p){const i=scHas(p);if(i<0){p.scOff=1;return null}const e=p.inv.splice(i,1)[0];p.scOff=0;ap(p,Object.assign({},BAL.scent.list[p.sc].g));
+function scBurn(p){const i=scHas(p);if(i<0){p.scOff=1;return null}const e=p.inv.splice(i,1)[0];p.scOff=0;p.scT=S.turn;ap(p,Object.assign({},BAL.scent.list[p.sc].g));
  if(e.t==="doc"){ap(p,{suc:BAL.scent.doc.suc});p.scHurt=(p.scHurt||0)+1}return e}
 /* her pick (item panel): the box's scent becomes hers and one box burns now */
 function scPick(ix){const e=S.inv[ix],it=e&&itm(e.k);if(!it||!it.sc||e.h)return"";if(S.sc===it.sc&&!S.scOff){S.sc=null;S.scOff=0;return `Ngươi thôi xông ${scName(it.sc)}; cung ngươi không còn hương riêng.`}
- S.sc=it.sc;S.inv.splice(ix,1);S.inv.unshift(e);const b=scBurn(S);if(!b)return "";
+ S.sc=it.sc;S.inv.splice(ix,1);S.inv.unshift(e);/* review r1: one box a month — picking again (or switching) in a month already burnt burns nothing more */if(S.scT===S.turn){S.scOff=0;return `Ngươi đổi sang ${scName(S.sc)} làm hương riêng; lò tháng này đã xông, sang tháng mới đốt hộp mới.`}const b=scBurn(S);if(!b)return "";
  return `Ngươi chọn ${scName(S.sc)} làm hương riêng, sai cung nữ xông khắp tẩm điện và y phục. ${fmt(BAL.scent.list[S.sc].g)}`+(b.t==="doc"?` <span class="r">Hương nồng gắt lạ, ngươi chóng mặt.</span> ${fmt({suc:BAL.scent.doc.suc})}`:"")}
 /* the month: everyone burns one box (law 1); NPCs restock and the jealous may copy her scent (frames her) */
 function scMonth(){if(!S||S.dead)return;const B=BAL.scent;
@@ -72769,6 +72769,8 @@ function scMonth(){if(!S||S.dead)return;const B=BAL.scent;
   else if(b&&b.t==="doc")log(`<span class="r">Đêm qua ${scName(S.sc)} trong lò nồng gắt lạ, ngươi trằn trọc mất ngủ.</span> ${fmt({suc:B.doc.suc})} · nên kiểm tra đồ.`)}
  if(typeof worldOn==="function"&&!worldOn())return;
  for(const v of liveRivals(true)){scInit(v);if(S.sc&&!S.scOff&&v.sc!==S.sc&&(+v.ghen||0)>=B.copy.ghen&&roll(B.copy.p)){v.sc=S.sc;v.scCopy=1}
+  /* review r1 (law 1, NPC↔NPC): a consort who hates another consort (thiện cảm ≤ −copy.ghen) may copy THAT consort's scent the same way */
+  else if(!v.scCopy){const W=liveRivals(true).filter(w=>w!==v&&scOf(w)&&w.sc!==v.sc&&aff(v,w)<=-B.copy.ghen);if(W.length&&roll(B.copy.p)){const w=pick(W);v.sc=w.sc;v.scCopy=w.id}}
   if(scHas(v)<0&&(v.bac||0)>=B.pr+B.keep)buy(v,scBox(v.sc));scBurn(v)}}
 /* the night (j8 night(p), her and NPCs): the Emperor's taste, then the morning tell */
 function scNight(p){p=p||S;const k=scOf(p);if(!k)return;const B=BAL.scent;scEmp();let mod=0;const nm=scName(k);
@@ -72795,7 +72797,7 @@ try{if(typeof M70==="object"&&M70.poison2){const P=BAL.scent.poison;M70.poison2.
  if(typeof night==="function"){const n0=night;night=function(p){try{scNight(p||S)}catch(e){console.error("jscent night",e)}return n0.apply(this,arguments)}}
  if(typeof monthTick==="function"){const m0=monthTick;monthTick=function(){const ev=m0.apply(this,arguments);try{scMonth()}catch(e){console.error("jscent month",e)}return ev}}
  if(typeof discover==="function"){const d0=discover;discover=function(){scEmp();return d0.apply(this,arguments)}}
- if(typeof normAll==="function"){const a0=normAll;normAll=function(){const r=a0.apply(this,arguments);try{scEmp()}catch(e){}return r}}
+ if(typeof normAll==="function"){const a0=normAll;normAll=function(){try{scEmp()}catch(e){}const r=a0.apply(this,arguments);try{scEmp()}catch(e){}return r}}
  if(typeof itemAct==="function"){const i0=itemAct;itemAct=function(a,ix){if(a==="scent"){if(S.dead||Q.length)return;const r=scPick(ix);if(r)log(r);render();return}return i0.apply(this,arguments)}}
 })();
 window.scTellOdds=scTellOdds;window.scOf=scOf;window.scName=scName;window.scNight=scNight;window.scMonth=scMonth;window.scTell=scTell;window.scTaint=scTaint;window.scPick=scPick;window.scEmp=scEmp;window.scInit=scInit;
@@ -97197,7 +97199,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="4fecc41d2c0a";window.CTM_BUILD=BUILD;
+const BUILD="b62b5dcbbcd7";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

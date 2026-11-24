@@ -8,6 +8,7 @@
       a rival who wears HER scent can make others blame her (frame); tell odds rise with the visited one's rank (law 5); disliked < plain < liked.
    T7 poison (law 1): she taints her own box (taintItem doc) and gives it — NPC who burns it loses Sức; an NPC taints hers (scTaint) — she loses Sức
       when it burns; «Kiểm tra đồ» (inspect) finds the tainted box and the trail gives evidence; j70 route lohuong exec taints the target's box both ways.
+   T2b / T5b / T6b (review r1): no second box burnt by stop + pick in one month; his liked scent is never a disliked one; NPC→NPC copy.
    T8 old save: emp without likes.scent / rivals without sc load; normAll fills; scOf works.
    usage: python3 dev/build/assemble.py && node dev/test/scent.test.js dev/index.html [lives=2]   → PASS / FAIL (exit 0 / 1) */
 const {chromium}=require('playwright');const path=require('path');
@@ -33,6 +34,8 @@ for(let seed=1;seed<=LIVES;seed++){const p=await b.newPage();const errs=[];p.on(
   const st=Object.keys(B.list.lan.g)[0];if(JSON.stringify([S[st]])===s0&&S[st]<100)bad.push("T2 no gain "+st);
   if(!/hương riêng/.test(S.logs[0]||""))bad.push("T2 no log");
   h="";kitModal=o=>{h=o.html||""};kinvOpen({g:{k:box("lan"),i:S.inv.findIndex(e=>e.k===box("lan")),n:1},grade:0});kitModal=km;if(!/Thôi xông/.test(h))bad.push("T2 no stop button");
+  /* T2b (review r1): stop then pick again in the same month burns no second box (one box a month, no instant gain per toggle) */
+  {S.inv.push({k:box("lan")});const c0=cnt(S,"lan"),g0=S[st];if(S.sc==="lan"&&!S.scOff)scPick(S.inv.findIndex(e=>e.k===box("lan")));scPick(S.inv.findIndex(e=>e.k===box("lan")));if(cnt(S,"lan")!==c0||S[st]!==g0)bad.push("T2b toggle burnt again "+cnt(S,"lan")+"/"+c0);if(S.sc!=="lan"||S.scOff)bad.push("T2b sc "+S.sc);S.inv.splice(S.inv.findIndex(e=>e.k===box("lan")),1)}
   /* T3 month */
   scMonth();if(cnt(S,"lan")!==0||S.scOff)bad.push("T3 month burn "+cnt(S,"lan")+" off "+S.scOff);
   scMonth();if(!S.scOff)bad.push("T3 no fade");if(!/phai dần/.test(S.logs[0]||""))bad.push("T3 no fade line");if(scOf(S))bad.push("T3 scOf after fade");
@@ -49,6 +52,10 @@ for(let seed=1;seed<=LIVES;seed++){const p=await b.newPage();const errs=[];p.on(
   a=v.sung;scNight(v);if(v.sung-a!==B.like.sung&&v.sung<100)bad.push(`T5 npc liked ${a}→${v.sung}`);
   E.likes.scent=scName("mai");S.emp.dis=["scent:"+scName("que")];a=S.sung=50;scNight(S);if(!(S.sung<a))bad.push(`T5 her dis ${a}→${S.sung}`);
   a=v.sung=50;scNight(v);if(v.sung-a!==B.dis.sung)bad.push(`T5 npc dis ${a}→${v.sung}`);S.emp.dis=[];E.likes.scent=scName("tram");
+  /* T5b (review r1): his liked scent is never one he dislikes (jdis may draw first) */
+  {const sv=E.likes.scent;delete E.likes.scent;S.emp.dis=["scent:"+sv];scEmp();if(E.likes.scent===sv)bad.push("T5b liked = disliked "+sv);E.likes.scent=sv;S.emp.dis=[]}
+  /* T6b (review r1, law 1 NPC↔NPC): a consort who hates another consort copies that one's scent (same BAL.scent.copy) */
+  {const R2=liveRivals(true).filter(x=>x.alive&&!x.out);if(R2.length>=2){const [c,w]=R2;scInit(c);scInit(w);const K2=Object.keys(B.list);w.sc=K2.find(k=>k!==c.sc);w.scOff=0;w.inv.push({k:box(w.sc)});delete c.scCopy;const a0=aff(c,w);affAdd(c,w,-200);const sv=S.sc;S.sc=null;const r0=roll;roll=()=>true;scMonth();roll=r0;S.sc=sv;if(c.sc!==w.sc)bad.push("T6b npc→npc copy "+c.sc+"/"+w.sc);affAdd(c,w,a0-aff(c,w))}}
   /* T6 tell */
   roll=()=>true;for(const x of liveRivals(true)){x.sc="mai";x.scOff=0;x.inv.push({k:box("mai")})}w.sc="lan";w.inv.push({k:box("lan")});S.sc="que";
   const af=aff(u,w);S.logs.unshift("-");scTell(w,"lan",0);if(!(aff(u,w)<af))bad.push(`T6 npc observer aff ${af}→${aff(u,w)}`);

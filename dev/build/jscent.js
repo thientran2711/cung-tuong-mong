@@ -30,16 +30,16 @@ function scHas(p){return (p.inv||[]).findIndex(e=>e&&!e.h&&e.k===scBox(p.sc))}
 function scInit(v){if(!v||v===S||v.sc!==undefined)return;const K=SC_K();v.sc=K[scHash("sc:"+v.id)%K.length];v.inv=v.inv||[];const [a,b]=BAL.scent.npcStock;const n=a+scHash("scn:"+v.id)%(b-a+1);for(let i=0;i<n;i++)v.inv.push({k:scBox(v.sc)})}
 /* the scent a person really carries now (none when the box ran out) */
 function scOf(p){if(!p)return null;if(p!==S)scInit(p);return p.sc&&!p.scOff&&BAL.scent.list[p.sc]?p.sc:null}
-function scEmp(){try{const E=S&&S.emp;if(!E)return null;E.likes=E.likes||{};E.known=E.known||{};if(!E.likes.scent)E.likes.scent=LIKES.scent[scHash("emp:scent:"+(E.name||""))%LIKES.scent.length];return E}catch(e){return null}}
+function scEmp(){try{const E=S&&S.emp;if(!E)return null;E.likes=E.likes||{};E.known=E.known||{};if(!E.likes.scent){/* review r1: never a scent he already dislikes (jdis may have drawn first) */const D=Array.isArray(E.dis)?E.dis:[],A0=LIKES.scent.filter(n=>!D.includes("scent:"+n)),A=A0.length?A0:LIKES.scent;E.likes.scent=A[scHash("emp:scent:"+(E.name||""))%A.length]}return E}catch(e){return null}}
 function scDis(k){try{return typeof disOf==="function"&&disOf("emp").includes("scent:"+scName(k))}catch(e){return false}}
 function scLiked(k){const E=scEmp();return !!(E&&k&&E.likes.scent===scName(k))}
 function scTm(p){try{return typeof taiMatRaw==="function"&&taiMatRaw(p).length>0}catch(e){return false}}
 /* burn one box (pick or month): the gain; a tainted box hurts the one who burns it */
-function scBurn(p){const i=scHas(p);if(i<0){p.scOff=1;return null}const e=p.inv.splice(i,1)[0];p.scOff=0;ap(p,Object.assign({},BAL.scent.list[p.sc].g));
+function scBurn(p){const i=scHas(p);if(i<0){p.scOff=1;return null}const e=p.inv.splice(i,1)[0];p.scOff=0;p.scT=S.turn;ap(p,Object.assign({},BAL.scent.list[p.sc].g));
  if(e.t==="doc"){ap(p,{suc:BAL.scent.doc.suc});p.scHurt=(p.scHurt||0)+1}return e}
 /* her pick (item panel): the box's scent becomes hers and one box burns now */
 function scPick(ix){const e=S.inv[ix],it=e&&itm(e.k);if(!it||!it.sc||e.h)return"";if(S.sc===it.sc&&!S.scOff){S.sc=null;S.scOff=0;return `Ngươi thôi xông ${scName(it.sc)}; cung ngươi không còn hương riêng.`}
- S.sc=it.sc;S.inv.splice(ix,1);S.inv.unshift(e);const b=scBurn(S);if(!b)return "";
+ S.sc=it.sc;S.inv.splice(ix,1);S.inv.unshift(e);/* review r1: one box a month — picking again (or switching) in a month already burnt burns nothing more */if(S.scT===S.turn){S.scOff=0;return `Ngươi đổi sang ${scName(S.sc)} làm hương riêng; lò tháng này đã xông, sang tháng mới đốt hộp mới.`}const b=scBurn(S);if(!b)return "";
  return `Ngươi chọn ${scName(S.sc)} làm hương riêng, sai cung nữ xông khắp tẩm điện và y phục. ${fmt(BAL.scent.list[S.sc].g)}`+(b.t==="doc"?` <span class="r">Hương nồng gắt lạ, ngươi chóng mặt.</span> ${fmt({suc:BAL.scent.doc.suc})}`:"")}
 /* the month: everyone burns one box (law 1); NPCs restock and the jealous may copy her scent (frames her) */
 function scMonth(){if(!S||S.dead)return;const B=BAL.scent;
@@ -47,6 +47,8 @@ function scMonth(){if(!S||S.dead)return;const B=BAL.scent;
   else if(b&&b.t==="doc")log(`<span class="r">Đêm qua ${scName(S.sc)} trong lò nồng gắt lạ, ngươi trằn trọc mất ngủ.</span> ${fmt({suc:B.doc.suc})} · nên kiểm tra đồ.`)}
  if(typeof worldOn==="function"&&!worldOn())return;
  for(const v of liveRivals(true)){scInit(v);if(S.sc&&!S.scOff&&v.sc!==S.sc&&(+v.ghen||0)>=B.copy.ghen&&roll(B.copy.p)){v.sc=S.sc;v.scCopy=1}
+  /* review r1 (law 1, NPC↔NPC): a consort who hates another consort (thiện cảm ≤ −copy.ghen) may copy THAT consort's scent the same way */
+  else if(!v.scCopy){const W=liveRivals(true).filter(w=>w!==v&&scOf(w)&&w.sc!==v.sc&&aff(v,w)<=-B.copy.ghen);if(W.length&&roll(B.copy.p)){const w=pick(W);v.sc=w.sc;v.scCopy=w.id}}
   if(scHas(v)<0&&(v.bac||0)>=B.pr+B.keep)buy(v,scBox(v.sc));scBurn(v)}}
 /* the night (j8 night(p), her and NPCs): the Emperor's taste, then the morning tell */
 function scNight(p){p=p||S;const k=scOf(p);if(!k)return;const B=BAL.scent;scEmp();let mod=0;const nm=scName(k);
@@ -73,7 +75,7 @@ try{if(typeof M70==="object"&&M70.poison2){const P=BAL.scent.poison;M70.poison2.
  if(typeof night==="function"){const n0=night;night=function(p){try{scNight(p||S)}catch(e){console.error("jscent night",e)}return n0.apply(this,arguments)}}
  if(typeof monthTick==="function"){const m0=monthTick;monthTick=function(){const ev=m0.apply(this,arguments);try{scMonth()}catch(e){console.error("jscent month",e)}return ev}}
  if(typeof discover==="function"){const d0=discover;discover=function(){scEmp();return d0.apply(this,arguments)}}
- if(typeof normAll==="function"){const a0=normAll;normAll=function(){const r=a0.apply(this,arguments);try{scEmp()}catch(e){}return r}}
+ if(typeof normAll==="function"){const a0=normAll;normAll=function(){try{scEmp()}catch(e){}const r=a0.apply(this,arguments);try{scEmp()}catch(e){}return r}}
  if(typeof itemAct==="function"){const i0=itemAct;itemAct=function(a,ix){if(a==="scent"){if(S.dead||Q.length)return;const r=scPick(ix);if(r)log(r);render();return}return i0.apply(this,arguments)}}
 })();
 window.scTellOdds=scTellOdds;window.scOf=scOf;window.scName=scName;window.scNight=scNight;window.scMonth=scMonth;window.scTell=scTell;window.scTaint=scTaint;window.scPick=scPick;window.scEmp=scEmp;window.scInit=scInit;
