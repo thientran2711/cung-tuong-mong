@@ -1486,3 +1486,4 @@ rv servant-trust | review/servant-trust-rv | session_01D3E3NZh6xm1S3xPV8XpuMW | 
 | REVIEW E81r robot10-e-fix-3 BIG (opus; briefs/E81r-review-robot-fix3.md) of e1ee6041 | review/robot10-e-fix-3-r; reports/robot10-fix3-review.md | FOREMAN E (child3) | session_01DgYSWnaebLfT2YjJ9ZWjc8 | RUNNING | 24/11 10:06Z |
 | robot10 E FIXER #3 successor (opus BIG; briefs/E-robot10-fixer.md + reports/robot10-E-fixer.md HANDOVER + ADDENDUM) | review/robot10-e-fix-3 (+ -4…); reports/robot10-E-fixer.md | FOREMAN E (child3) | session_01DgYSWogKvvnwna26yqXVT5 | RUNNING | 24/11 10:15Z |
 fix net-build r1 | review/net-build-rv | session_01D3E3NXVfZy3ocFNYujBsPy | RUNNING | 24/11 10:08Z (Foreman D depth 2)
+rv promo-build-2 | review/promo-build-2-rv | session_01D3E3NXxkVhTabMxB4z4ood | RUNNING | 24/11 10:09Z (Foreman D depth 2)
