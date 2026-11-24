@@ -2062,16 +2062,6 @@ if(typeof ARTB85!=="undefined")Object.assign(ARTB85,BAL.artB);
 /* ORDER THIN P0 (jnorep.js, owner OD 23/11 ~22:50Z): ONE shared cross-life no-repeat memory. lives = lives kept (this one + 5 past, as the old
    ctm-e68h), w = weight factor per past life that saw a key (×0.5, as j68), cap = keys kept per life (the store is shared by every family). */
 BAL.nr={lives:6,w:.5,cap:1500};
-/* ORDER THIN P4 (j68c.js composed j68 openings): on = composed seeds live; w[fam] = draw weight of ONE composed seed in e68Cands (old templates weigh ~1–2;
-   def for families not listed); seen = extra factor when any past life met the seed (fresh-first; e68Cands' ×nr.w per life still applies);
-   cd = per-life cooldown tuần of one seed (999 = once per life); fx[tier] = what ONE gain/loss step is worth per key (laws 2/3/4: seeds count
-   steps, numbers live here; rel = thiện cảm / lòng trung / quyến luyến of that person); need = live-state thresholds; obKeep = object traces kept;
-   rumorTag = the hearsay label every composed rumour carries (j68h grounding rule, as the old rumours). */
-BAL.j68c={on:true,w:{def:.35},seen:.15,cd:999,obKeep:60,rumorTag:" <i>(Lời đồn.)</i>",
- fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:1,th:2,hh:2,duc:2,tamco:1,an:1,rel:4},
-     m:{sung:3,danh:3,bac:40,suc:8,mat:1,th:4,hh:4,duc:3,tamco:2,an:2,rel:6},
-     l:{sung:5,danh:5,bac:60,suc:12,mat:2,th:6,hh:6,duc:5,tamco:3,an:3,rel:9}},
- need:{friend:10,feud:-10,poor:30}};
 /* ORDER THIN P6 (jworldc.js composed world reactions, owner OD 23/11 ~22:50Z; reports/thin.md «## API P6»): on = composed scenes live; npcMax = NPCs
    in a seed's scope who choose a stance (the same 4 as hers, law 1); rankHi = scope "hi" from this rank (Tần) up, "lo" below; seen = draw weight of a
    seed met in a past life (fresh-first, on top of jnorep ×nr.w); obKeep = object traces kept; fx[tier] = what ONE gain/loss step is worth per key
@@ -2089,6 +2079,16 @@ BAL.j71c={on:true,obKeep:60,
  fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:1,th:2,hh:2,duc:2,tamco:1,an:1,rel:4},
      m:{sung:3,danh:3,bac:40,suc:8,mat:1,th:4,hh:4,duc:3,tamco:2,an:2,rel:6},
      l:{sung:5,danh:5,bac:60,suc:12,mat:2,th:6,hh:6,duc:5,tamco:3,an:3,rel:9}}};
+/* ORDER THIN P4 (j68c.js composed j68 openings): on = composed seeds live; w[fam] = draw weight of ONE composed seed in e68Cands (old templates weigh ~1–2;
+   def for families not listed); seen = extra factor when any past life met the seed (fresh-first; e68Cands' ×nr.w per life still applies);
+   cd = per-life cooldown tuần of one seed (999 = once per life); fx[tier] = what ONE gain/loss step is worth per key (laws 2/3/4: seeds count
+   steps, numbers live here; rel = thiện cảm / lòng trung / quyến luyến of that person); need = live-state thresholds; obKeep = object traces kept;
+   rumorTag = the hearsay label every composed rumour carries (j68h grounding rule, as the old rumours). */
+BAL.j68c={on:true,w:{def:.35},seen:.15,cd:999,obKeep:60,rumorTag:" <i>(Lời đồn.)</i>",
+ fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:1,th:2,hh:2,duc:2,tamco:1,an:1,rel:4},
+     m:{sung:3,danh:3,bac:40,suc:8,mat:1,th:4,hh:4,duc:3,tamco:2,an:2,rel:6},
+     l:{sung:5,danh:5,bac:60,suc:12,mat:2,th:6,hh:6,duc:5,tamco:3,an:3,rel:9}},
+ need:{friend:10,feud:-10,poor:30}};
 /* ORDER THIN P3 (j72c.js composed việc nhờ): on = composed favours live; share = draw weight of one composed seed vs one of the 110 old T7 (1);
    fx[tier] = what ONE gain/loss step of a seed is worth per key (laws 2/3/4: seeds count steps, numbers live here; rel/relb = thiện cảm of A/B,
    an = ân tình); odds = base of a do-step on the j72 ladder (q72Odds adds her skill); khac = khắc of a do-step; wait = tuần of a wait step;
@@ -2116,7 +2116,6 @@ BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's n�
  fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:2,th:2,hh:2,duc:2,maid:3,rel:4,proof:1},
      m:{sung:4,danh:4,bac:40,suc:10,mat:4,th:4,hh:4,duc:4,maid:6,rel:8,proof:1},
      l:{sung:6,danh:6,bac:60,suc:15,mat:6,th:6,hh:6,duc:6,maid:9,rel:12,proof:2}}};
-
 /* KIT §95 kitDialogue (owner OD 24/11 ~04:45Z/~04:50Z): typewriter speed + spotlight dimming. LAW 4: the kit reads these, it types no number of its own. */
 BAL.kdlg={msWord:110,dim:.5,dimSat:.75,focusScale:1.5,focusBlur:14};
 /* SIDE-LINE DIALOGUE SCENES (jdlgs.js, owner OD 24/11 ~10:05Z): on = scenes play before side-line cards; min/max = lines per scene (owner: few lines, each full of meaning);
