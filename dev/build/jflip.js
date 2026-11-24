@@ -297,7 +297,7 @@ const st=document.createElement("style");st.id="kcf-css";st.textContent=`
 .kcf-c{container-type:inline-size}
 /* name tag under EVERY card (owner 16/11 14:00Z: rank + name, no title): the kit kitNameRank (KIT 48): rank in its jewel rank colour over the name, plain vivid text, no glow (the tray floor is a pale silk surface, = paper rule 48.1h) */
 .kcf-tag{position:absolute;left:50%;top:100%;transform:translateX(-50%);width:max-content;max-width:160cqw;margin-top:3px;pointer-events:none;text-align:center}
-.kcf-tag.kcf-tag-l,.kcf-pick .kcf-tag{display:none}.kcf-pick .kcf-tag.kcf-tag-l{display:block;top:79%;margin-top:0}   /* the picked card is big: its tag sits right under the frame (over the tassel), never down at the tassel's end where the result chip stands */
+.kcf-tag.kcf-tag-l,.kcf-pick .kcf-tag{display:none}.kcf-pick .kcf-tag.kcf-tag-l{display:block;top:79%;margin-top:0;background:var(--kcfpaper,rgba(244,232,206,.96));border-radius:7px;padding:1px 9px 2px;box-shadow:0 0 7px 3px var(--kcfpaper,rgba(244,232,206,.96))}   /* the picked card is big: its tag sits right under the frame (over the tassel), never down at the tassel's end where the result chip stands */
 /* HER card on the tray (owner 16/11 14:05Z): a soft WHITE glow round the whole frame from the very start, so she knows her card at a glance; static (no running light, no motion), never over the portrait */
 /* KIT §67 fix (s22): ONLY the marker <i> on her card — the overlay also carries .kcf-mine (her night) and was shrunk into this box */i.kcf-mine{position:absolute;left:8.5%;top:17.8%;width:83%;height:54.4%;border-radius:3cqw;pointer-events:none;box-shadow:0 0 3cqw .8cqw #ffffffd9,0 0 9cqw 2cqw #ffffff8c,0 0 18cqw 3cqw #ffffff40}
 .kcf-pick i.kcf-mine{display:none}
