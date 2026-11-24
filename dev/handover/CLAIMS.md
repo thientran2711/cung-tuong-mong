@@ -1267,3 +1267,4 @@ REVIEW robot10-reco ORDER #6 (sonnet SMALL test-only; briefs/D-robot10-reco-revi
 | THIN P3-SEEDS-A (sonnet writer): j72 craft + social ≥60 each | content/thin/j72seeds_a.md; reports/thin.md «## P3-SEEDS-A» | B | session_01N1tNP4Qd6f8URu967a5p8s | RUNNING | 24/11 00:47Z |
 | THIN P3-SEEDS-B (sonnet writer): j72 court + fam ≥60 each | content/thin/j72seeds_b.md; reports/thin.md «## P3-SEEDS-B» | B | session_01N1tNP4UCts4u53HyCCRv7R | RUNNING | 24/11 00:47Z |
 | REVIEW thin-p2 r1 (opus BIG reviewer-lander) of review/thin-p2 3f4e1fcd + 4 open gates | review/thin-p2-r1; reports/thin.md «## REVIEW thin-p2 r1» | B | session_01N1tNP4CJvo5LTSpe5PNSLK | PASS d9386531 (contains main bba42773 + thin-p0-r1 a76ba1e4); on call until LIVE | 24/11 02:40Z |
+| THIN ENGINE #4 (opus): P6 world + j70 (API P6 first → writers), then P7 festivals, P8 origin roads | review/thin-p6; reports/thin.md | B (ORDER MAIN 113 22:36Z) | session_01N1tNP5RyEw6T1AADGb6c75 | RUNNING | 24/11 01:23Z |
