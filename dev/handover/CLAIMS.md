@@ -1451,3 +1451,14 @@ REVIEW promo-build 7c4116de (opus BIG; briefs/D-promo-build-review.md) | review/
 | DLG WRITER W7+W8+W9 (j68_d_ky, j7_wc, j70_j71; sonnet; lead 5NjXSPTa) | review/sideline-dlg content | B | session_01N1tNP3N2JkydSHBdWnPP2o | RUNNING | 24/11 07:58Z |
 | RV map-fix-2 SMALL (sonnet; c87a40e1) | review/map-fix-2-r1; reports/map-perf.md | MAIN 119 | session_01V1ZZH2u9H72DTLghtdArxu | PASS ac4790f0, LAND READY → LC10, ARCHIVED | 24/11 07:48Z |
 | LEAVE-PALACE FIX r1 E74 (opus BIG; E72r FAIL 37a862be 3 items; briefs/E74-leave-palace-fix.md) | review/leave-palace-r | FOREMAN E (child2) | session_01DgYSWoQonzS3XKxd5Bc8WS | RUNNING | 24/11 08:16Z |
+| ROBOT FIXER cnv families (opus; ORDER MAIN 119 07:40Z; briefs/F-robot-fixer.md) | review/robot-fix-cnv; reports/robot-fix-cnv.md | F | (opening) | RUNNING | 24/11 08:20Z |
+| ROBOT-COOP RUNNER U4 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U4-* | F | (opening) | RUNNING | 24/11 08:20Z |
+| ROBOT-COOP RUNNER U5 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U5-* | F | (opening) | RUNNING | 24/11 08:20Z |
+| ROBOT-COOP RUNNER U6 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U6-* | F | (opening) | RUNNING | 24/11 08:20Z |
+| ROBOT-COOP RUNNER U7 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U7-* | F | (opening) | RUNNING | 24/11 08:20Z |
+| ROBOT-COOP RUNNER U8 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U8-* | F | (opening) | RUNNING | 24/11 08:20Z |
+| ROBOT-COOP RUNNER U9 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U9-* | F | (opening) | RUNNING | 24/11 08:20Z |
+| ROBOT-COOP RUNNER U10 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U10-* | F | (opening) | RUNNING | 24/11 08:20Z |
+| ROBOT-COOP RUNNER U11 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U11-* | F | (opening) | RUNNING | 24/11 08:20Z |
+| ROBOT-COOP RUNNER U12 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U12-* | F | (opening) | RUNNING | 24/11 08:20Z |
+| ROBOT-COOP RUNNER U13 (sonnet; briefs/b-robot10-coop-runner.md; ORDER MAIN 119 07:58Z) | dev/handover/robot/coop-U13-* | F | (opening) | RUNNING | 24/11 08:20Z |
