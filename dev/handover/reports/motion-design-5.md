@@ -13,3 +13,7 @@ All 6 videos re-shot (Fold 755x1000 + iPad 1180x820; 1x + 2x slow; KSEED=1) and 
 Page: https://ctm-img.victoria-tntt.workers.dev/img/_review/motion4/index.html ; kperf real-device probe link kept: .../motion4/probe/kperf.html?khost=1&kperf=1. Wipe with the verdict: python3 dev/site/cdn_sync.py --wipe-review motion4.
 Open for the build: kitScreenVeil part; the veil hold while settling is ~1 s on a cold stage (real build should preload stage portraits before the veil closes).
 Status: ~100 % design of picks / ~0 % playable (mocks).
+
+## UPDATE r2 (MAIN 127: half-painted screen on veil open, WORKLIST #23)
+Cause found: the home-stage backdrop is the Pixi room copy (`#scimg` stays opacity 0 under it), loaded async; and Chrome does not repaint a canvas fully occluded by an opaque layer, so the veil opened on a blank paper wall + small portraits for 1-2 frames. Fix (mock, in `MD3.cover`): `paintReady()` after every swap = decode every <img> + CSS background picture, wait `PX.bg` loaded and `!PX.loading`, 2 rAF + hold; veil colour alpha .996 (looks opaque, keeps the canvas painting underneath). All 14 veil opens (6 videos) checked at 24 fps around each open: backdrop + people + tabs painted from the first revealed frame. All 6 videos re-shot on a FRESH build of 102582c5 (earlier take used a stale index.html without kit-woodskin r3).
+Build note for the real kit part: open the veil only when the Pixi backdrop is loaded AND the veil is not a fully occluding opaque layer (or draw one warm-up frame under a 0.996 alpha veil).

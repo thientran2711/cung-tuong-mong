@@ -35,10 +35,17 @@ function hit(a,b){const n=x=>x.l!=null?x:{l:x.left,r:x.right,t:x.top,b:x.bottom}
 function faceCheck(L,els){const F=faceBoxes(L);const out=[];els.forEach(e=>{if(!e||!e.isConnected)return;const r=R(e);if(r.width<2)return;F.forEach((f,i)=>{if(hit(f,r))out.push({fig:i,el:e.className.split(' ')[0]})})});return out}
 /* KIT REQUEST kitScreenVeil: ONE opaque screen cover. Slides in (transform only, never an opacity fade, so two screens are never seen through each other),
    the swap runs while the screen is fully covered, then it slides away. People / boxes never cross-fade. Opaque paper colour of the kit (.kbk paper), gold edge. */
+/* the veil may open only when everything visible is decoded AND painted: every <img> + every CSS background picture on the page decoded, layout flushed, two animation frames, then a short hold */
+async function paintReady(){const urls=new Set();const imgs=[...document.querySelectorAll('img')];imgs.forEach(i=>{if(i.src)urls.add(i.currentSrc||i.src)});
+ document.querySelectorAll('#stage,#stage *,.kscn,.kscn *,body,#app,#app *').forEach(e=>{try{const b=getComputedStyle(e).backgroundImage;if(b&&b!=='none')(b.match(/url\((['"]?)(.*?)\1\)/g)||[]).forEach(m=>urls.add(m.replace(/^url\((['"]?)/,'').replace(/(['"]?)\)$/,'')))}catch(x){}});
+ await Promise.all([...urls].filter(u=>!/^data:/.test(u)).map(u=>new Promise(r=>{const i=new Image();const t=setTimeout(r,5000);i.onload=i.onerror=()=>{clearTimeout(t);(i.decode?i.decode().catch(()=>{}):Promise.resolve()).then(r)};i.src=u})));
+ /* the home-stage backdrop is the Pixi room copy (#scimg stays opacity 0 under it): wait until it has loaded its picture and drawn, else the veil opens on a blank paper wall */
+ {const t0=performance.now();const ok=()=>{try{if(typeof PX==='undefined'||!PX||!PX.src)return true;return !!(!PX.loading&&PX.bg&&PX.bg.texture&&PX.bg.texture.valid!==false&&PX.src===PX.bgSrc)}catch(e){return true}};while(!ok()&&performance.now()-t0<8000)await wait(60)}
+ await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));void document.body.offsetHeight;await wait(200);await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))}
 async function cover(swap,o){o=o||{};const d=Math.round((o.ms||260)*pace()/1.75);const c=document.createElement('div');c.className='md3-cover';
- c.style.cssText='position:fixed;left:0;top:0;width:100%;height:100%;z-index:99995;background:#f3e6cc;border-bottom:4px solid #d9b25a;pointer-events:auto;will-change:transform;transform:translateY(-101%)';document.body.appendChild(c);
+ c.style.cssText='position:fixed;left:0;top:0;width:100%;height:100%;z-index:99995;background:rgba(243,230,204,.996);border-bottom:4px solid #d9b25a;pointer-events:auto;will-change:transform;transform:translateY(-101%)';document.body.appendChild(c);
  const a=c.animate([{transform:'translateY(-101%)'},{transform:'translateY(0)'}],{duration:d,easing:'cubic-bezier(.5,0,.3,1)',fill:'both'});await new Promise(r=>{a.onfinish=r;setTimeout(r,d+60)});
- await swap();await wait(90);
+ await swap();await paintReady();
  const b=c.animate([{transform:'translateY(0)'},{transform:'translateY(101%)'}],{duration:d,easing:'cubic-bezier(.5,0,.3,1)',fill:'both'});await new Promise(r=>{b.onfinish=r;setTimeout(r,d+60)});c.remove()}
 /* rAF frame-time probe */
 function probeStart(){const P=window.__md3p={d:[],last:0,on:1};const f=t=>{if(!P.on)return;if(P.last)P.d.push(t-P.last);P.last=t;requestAnimationFrame(f)};requestAnimationFrame(f);return P}
@@ -56,4 +63,4 @@ function acts(n,odds){meetAll();const old=window.tab;try{window.tab='act';render
 /* decode every picture of a node list BEFORE it is dealt (pre-decode: no decode work while the deal animates) */
 function decodeAll(nodes){const ims=[];nodes.forEach(n=>n.querySelectorAll('img').forEach(i=>{i.loading='eager';i.decoding='sync';ims.push(i)}));return Promise.all(ims.map(i=>new Promise(r=>{if(i.complete&&i.naturalWidth){(i.decode?i.decode():Promise.resolve()).then(r,r);return}const t=setTimeout(r,6000);i.onload=()=>{clearTimeout(t);(i.decode?i.decode():Promise.resolve()).then(r,r)};i.onerror=()=>{clearTimeout(t);r()};const s=i.src;i.src='';i.src=s}))).then(()=>ims.length)}
 async function preload(urls){await Promise.all(urls.map(u=>new Promise(r=>{const i=new Image();i.onload=i.onerror=r;i.src=u;if(i.decode)i.decode().then(r,r)})))}
-return {cover,meetAll,acts,decodeAll,CDN,wait,pace,R,ensureCss,sceneBright,faceBoxes,faceCheck,probeStart,probeStop,preload}})();
+return {cover,paintReady,meetAll,acts,decodeAll,CDN,wait,pace,R,ensureCss,sceneBright,faceBoxes,faceCheck,probeStart,probeStop,preload}})();
