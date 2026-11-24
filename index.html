@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place","b":"bc15a44a5a6a","h":[{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"},{"s":"d6c2b4d4+","t":"2026-11-24T05:49Z","c":"Dư đồ mở nhanh hơn (14 giây → hơn 1 giây)"}]};
+window.CTM_BI={"s":"e239ce53+","t":"2026-11-24T18:42Z","c":"motion-design-3: mẫu 2 on one wide scene with RING-DESIGN hanging plaques, real act cards (BAL), name-only plain cards, mẫu 4 HUD held in d…","b":"bf96b9ec94ed","h":[{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -36535,6 +36535,8 @@ if(typeof BUK!=="undefined"&&BUK.length===3)BUK.splice(1,0,window.B4_TRUA_IMG?"t
  return r}})();
 /* ================= jbal2: late balance knobs for the merged logic modules (review/balance). Same rule for every consort; numbers only. ================= */
 Object.assign(BAL,{illAdd:1,illDie:2});
+/* ONE DIM for the people who are NOT chosen (KIT §98 kitDim; owner 24/11 ~09:05Z / ~15:30Z): brightness + saturation on the FIGURE only, opaque, never the background; ms = cross-fade */
+BAL.kdim={b:.7,s:.75,ms:220};
 /* ACT SPLIT (jact wave 1, jact2 waves 2-3; owner-approved split 16/11). "!" happenings on Dư đồ: hapP = chance of a random happening in a buổi,
    hap2 = chance of a second one (never more than 2 per buổi); strollP = chance the Emperor's garden stroll takes the FIRST slot when he is in
    Ngự hoa viên (flag 2 of the wave-1 report: it was 9 in 300 buổi); rareMinGrade = Nội vụ phủ weekly rare item grade.
@@ -92411,6 +92413,9 @@ function kitLineToast(text){try{if(!text)return null;try{const md=document.getEl
  try{if(typeof kitToastWatch==="function")kitToastWatch()}catch(e){}
  el.addEventListener("click",()=>el.remove());clearTimeout(kitLineToast.t);kitLineToast.t=setTimeout(()=>{el.classList.add("out");setTimeout(()=>{if(el.classList.contains("out"))el.remove()},500)},window.__toastKeep?60000:BAL.entryToastMs);return el}catch(e){return null}}
 window.kitLineToast=window.kitLineToast||kitLineToast;
+/* the left rail's real right edge in stage px → --krw (the title's max-width follows it; a long title wraps instead of running under the chip); no rail → the old 80 px */
+function railW(st){try{const rl=$("krail"),R=st.getBoundingClientRect();let w=80;if(rl&&rl.getClientRects().length){const q=rl.getBoundingClientRect();if(q.width>0)w=Math.max(80,Math.ceil(q.right-R.left)+8)}
+ if(railW.v!==w){railW.v=w;st.style.setProperty("--krw",w+"px")}}catch(e){}}
 function lay(){try{const st=$("stage");if(!st)return;let nm=$("kpname"),en=$("kpent");
  const t=$("sc-t"),live=!!t&&!!S&&!S.dead&&onStage()&&st.getBoundingClientRect().height>40;
  const name=live?((t.querySelector(".rt1")||{}).textContent||"").trim():"";
@@ -92424,6 +92429,7 @@ function lay(){try{const st=$("stage");if(!st)return;let nm=$("kpname"),en=$("kp
  if(name){if(!nm){nm=document.createElement("div");nm.id="kpname";nm.className="kpname";st.appendChild(nm)}
   /* owner 18/11 ~20:55Z: plain TEXT on the scene picture, no plaque / frame, not fixed-width; (owner 21/11 overwrites this: the big PALACE on line 1 (top), her smaller HALL on line 2 below) */
   const parts=name.split(/\s*·\s*/).filter(Boolean).slice(0,2),hh=parts.map(x=>`<span>${esc(x)}</span>`).join("");if(nm.__h!==hh){nm.innerHTML=hh;nm.__h=hh}nm.hidden=false;
+  railW(st);/* KIT §98.2: the title never reaches the left rail (head-count chip): its room = stage width − the rail's real right edge */
   const h=Math.ceil(nm.getBoundingClientRect().height)+6;st.style.setProperty("--kpnh",h+"px");st.classList.add("kpn")}
  else{if(nm)nm.hidden=true;st.style.setProperty("--kpnh","0px");st.classList.remove("kpn")}
  /* (3) entry line chip, top of the stage */
@@ -92432,7 +92438,7 @@ function lay(){try{const st=$("stage");if(!st)return;let nm=$("kpname"),en=$("kp
  else if(en)en.hidden=true;
  }catch(e){console.error("jplst",e)}}
 /* the chip never covers her marker (the flower above her head): if they meet, the chip starts to the right of the marker */
-function placeEnt(){try{const en=$("kpent"),st=$("stage");if(!en||en.hidden||!st)return;en.style.left="";const ch=en.querySelector(".kchip");if(!ch)return;const mk=document.querySelector(".kmemark");
+function placeEnt(){try{const en=$("kpent"),st=$("stage");if(st&&$("kpname")&&!$("kpname").hidden){railW(st);const nm=$("kpname"),h=Math.ceil(nm.getBoundingClientRect().height)+6;if(st.style.getPropertyValue("--kpnh")!==h+"px")st.style.setProperty("--kpnh",h+"px")}if(!en||en.hidden||!st)return;en.style.left="";const ch=en.querySelector(".kchip");if(!ch)return;const mk=document.querySelector(".kmemark");
  if(mk&&mk.getClientRects().length){const R=st.getBoundingClientRect(),q=mk.getBoundingClientRect(),c=ch.getBoundingClientRect();
   if(q.right>c.left-4&&q.left<c.right+4&&q.top<c.bottom+2&&q.bottom>c.top-2)en.style.left=Math.round(q.right-R.left+8)+"px"}}catch(e){}}
 function lay2(){lay();placeEnt();clearTimeout(lay2.a);clearTimeout(lay2.b);lay2.a=setTimeout(placeEnt,400);lay2.b=setTimeout(placeEnt,1300)}
@@ -92447,8 +92453,10 @@ try{if(window.kitStageRail)kitStageRail.add({id:"here",order:0,chip:()=>{const n
 const css=document.createElement("style");css.id="kit-plst";css.textContent=`
 :root{--kts:0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 9px #fff8eecc}
 html body .stage #sc-t{display:none!important}
-.kpname{position:absolute;top:8px;right:10px;z-index:3;box-sizing:border-box;display:flex;flex-direction:column;align-items:flex-end;max-width:calc(100% - 80px);pointer-events:none;text-align:right;font-weight:800;font-size:1.1rem;line-height:1.2;color:#2a1a12;text-shadow:var(--kts)}
-.kpname>span{white-space:nowrap}
+.kpname{position:absolute;top:8px;right:10px;z-index:3;box-sizing:border-box;display:flex;flex-direction:column;align-items:flex-end;max-width:calc(100% - var(--krw,80px) - 10px);pointer-events:none;text-align:right;font-weight:800;font-size:1.1rem;line-height:1.2;color:#2a1a12;text-shadow:var(--kts)}
+.kpname>span{white-space:normal;overflow-wrap:break-word;text-wrap:balance}/* a long title wraps inside its room (KIT §98.2), never under the rail chip */
+/* the «tạm» stand-in tag never sits on the title: on a place stage it goes to the bottom-left corner (KIT §98.2) */
+html body .stage.kpn>.ktam{top:auto;right:auto;left:8px;bottom:8px}
 html body .stage.kpn .kshR{top:calc(8px + var(--kpnh,0px))}
 html body .stage.kpn .kshR.kasx{max-height:calc(100% - 16px - var(--kpnh,0px) - var(--kgrb,0px))}
 html body .stage .kmnote.kmslot{position:absolute!important;top:6px!important;bottom:auto!important;left:62px;right:calc(var(--kgrw,150px) + 16px);translate:none!important;max-width:none;animation:none;display:flex;justify-content:center;z-index:6;pointer-events:none}
@@ -95184,7 +95192,7 @@ function close(F){if(!F.open)return;const K=KIT_FOC;F.open=false;F.skipOpen();
  wa(F,F.q(".kfoc-veil"),[{opacity:1},{opacity:0}],{duration:K.veilOutMs,delay:Math.max(0,K.closeMs-K.veilOutMs)});
  setTimeout(()=>destroy(F,1),K.closeMs+K.foldCloseMs*.5+40)}
 function destroy(F,fromClose){if(!F||F.gone)return;F.gone=true;F.open=false;[...F.anims].forEach(a=>{try{a.cancel()}catch(e){}});F.el.remove();try{if(F.tok)F.tok.style.visibility=F.tokVis||""}catch(e){}if(CUR===F)CUR=null;try{if(F.o.onClose)F.o.onClose()}catch(e){}}
-window.kitFocus={open,current:()=>CUR,reposition:()=>{if(CUR&&CUR.open){CUR.A=area();const A=CUR.A;CUR.el.style.cssText=`left:${A.left}px;top:${A.top}px;width:${A.w}px;height:${A.h}px`;layout(CUR)}}};
+window.kitFocus={open,btn:btnHTML,current:()=>CUR,reposition:()=>{if(CUR&&CUR.open){CUR.A=area();const A=CUR.A;CUR.el.style.cssText=`left:${A.left}px;top:${A.top}px;width:${A.w}px;height:${A.h}px`;layout(CUR)}}};
 try{addEventListener("resize",()=>kitFocus.reposition())}catch(e){}
 
 /* ---------- kitMoodSay: ONE short bubble beside a figure's head (K-FOCUS-1b) ---------- */
@@ -95260,6 +95268,135 @@ html.kf-still #tokens .tok.fig img.kidl,.kf-off #tokens .tok.fig img.kidl{animat
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§92",title:"kitFocus · gặp riêng một người trên sân khấu (khung focus + quạt nút trái/phải + bảng tên) · kitIdle · kitMoodSay",
  html:()=>`<div class="kitpg-row"><p>Mở bằng <code>kitFocus.open({p,fig,from,plate,groups,onAct,onClose})</code> trên sân khấu Dư đồ; nút chỉ có một cỡ mỗi chế độ (cao 64 Fold / 72 iPad), tab nhóm đặt trên đầu, «!» mở chi tiết. Không có mẫu tĩnh: xem <code>dev/test/kit-focus.js</code>.</p></div>`})}catch(e){}
 }catch(e){console.error("jfocus",e)}})();
+/* ================= jkpick: kitPick = the PERSON-INTERACTION PICKER (KIT §98; request «kitPick» + «wood skin» of RING-DESIGN-3; owner OD 24/11 ~15:30Z / ~15:40Z)
+   «Thẻ gỗ treo»: when she picks one person on a people stage, the acts she can do with that person hang as small WOODEN PLAQUES on a signpost BESIDE the person
+   (her free side), LOW (from about her waist down to her feet) — never over a face, never from the screen's top edge, never a frame / card / veil.
+   Plaques drop from the rail and sway to rest (idle sway stays gentle); tap = the plaque lifts + its line shows (odds word, cost); tap again = choose.
+   A plaque = the kit act button (kitFocus.btn = .kfoc-b: picture + name + «word · Tốn …»); the WOOD SKIN is the kit look of that button inside .kpk (CSS tokens --kpk-*, one painted-wood
+   slot --kpk-img for Foreman C's art later; until then a code wood of the kit's gold/brown). ONE plaque size per mode (kv1/kv2), the same on every place.
+   kitDim: ONE dim for the people who are NOT chosen: brightness + saturation on the FIGURE, OPAQUE (never opacity / see-through); the background is never touched.
+     Static filter on a copy of the figure that cross-fades in (compositor opacity, no animated filter); numbers = BAL.kdim {b,s,ms}.
+   API:  const P=kitPick.open({host,anchor:{x,y,w,h},side:"auto"|"l"|"r",groups:[{k,n,acts:[{id,n,pic,word,ton,off,why,info}]}] | acts:[…],group,onPick(id,act,P),onOff(act,P),onClose(),dismiss:true});
+         P.lift(id) · P.setGroup(k) · P.close() (animated) · P.destroy() · kitPick.rect(figEl,host) → anchor {x,y,w,h} in host px · kitPick.current() · kitPick.close()
+         Event: the plaque button gets «kpkpick» (bubbles) on the 2nd tap, data-id = act id.   kitDim.on(figs,{keep}) · kitDim.off() · kitDim.state().
+   PURE DISPLAY: no game logic, no numbers of its own.   Test: dev/test/kit-pick.js (Fold 755x1000 + iPad 1180x820). */
+(function(){try{
+const KIT_PICK=window.KIT_PICK=window.KIT_PICK||{
+ dropMs:700,stagger:80,swayS:[3.4,4.6],swayDeg:1.3,liftMs:200,liftDy:-8,liftScale:1.05,closeMs:170,
+ w:{kv1:152,kv2:200},h:{kv1:62,kv2:56},pic:{kv1:40,kv2:48},cord:{rail:18,gap:10,gapS:6},hS:50,gx:8,max:6,railAt:.40,railMin:.18,railLap:.34,minW:128,post:8,tabH:34,
+ motion:null /* test hook: true = ignore reduced motion */};
+const kv=()=>document.documentElement.classList.contains("kv2")?"kv2":"kv1";
+const still=()=>{if(KIT_PICK.motion===true)return false;try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)||document.documentElement.classList.contains("kf-still")}catch(e){}return false};
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const DIM=()=>Object.assign({b:.7,s:.75,ms:220},(typeof BAL!=="undefined"&&BAL.kdim)||{});
+let CUR=null;
+function btn(a,i){return typeof kitFocus!=="undefined"&&kitFocus.btn?kitFocus.btn(a,i):`<button type="button" class="kfoc-b" data-i="${i}" data-id="${esc(a.id)}"><span class="kfoc-t"><b>${esc(a.n)}</b></span></button>`}
+/* anchor of a stage figure inside the host (host px) */
+function rect(el,host){host=host||document.getElementById("stage")||document.body;const h=host.getBoundingClientRect(),r=el.getBoundingClientRect();return {x:r.left-h.left,y:r.top-h.top,w:r.width,h:r.height}}
+function open(o){if(CUR)CUR.destroy();o=o||{};const host=o.host||document.getElementById("stage")||document.body,m=kv(),K=KIT_PICK;
+ const P={o,host,m,anims:[],open:true,up:null};CUR=P;
+ const gs=o.groups&&o.groups.length?o.groups:[{k:"",n:"",acts:o.acts||[]}];P.groups=gs;P.group=o.group||gs[0].k;
+ const el=P.el=document.createElement("div");el.className="kpk kpk-"+m+(still()?" kpk-still":"");el.setAttribute("role","group");el.setAttribute("aria-label","Chọn việc");host.appendChild(el);
+ build(P);if(o.dismiss!==false){P.away=e=>{if(!P.open||el.contains(e.target))return;P.close()};setTimeout(()=>{if(P.open)document.addEventListener("pointerdown",P.away,true)},0)}
+ P.lift=id=>lift(P,id);P.setGroup=k=>{if(k===P.group)return;P.group=k;build(P,true)};P.close=()=>close(P);P.destroy=()=>destroy(P);
+ return P}
+function geo(P){const K=KIT_PICK,m=P.m,hr=P.host.getBoundingClientRect(),A=P.o.anchor||{x:hr.width*.4,y:hr.height*.2,w:hr.width*.2,h:hr.height*.6},W=hr.width,H=hr.height;
+ const gr=P.groups.find(g=>g.k===P.group)||P.groups[0],acts=(gr.acts||[]).slice(0,K.max),n=acts.length,post=K.post;
+ /* the band (columns + post) goes on the side that has room and covers the fewest OTHER people (o.avoid = their anchors) */
+ const fit=s=>{let free=s==="r"?W-(A.x+A.w)-8:A.x-8,minRail=A.y+A.h*K.railMin;const maxB=H-6;
+  /* last resort on a narrow phone: the band may lap the outer 35 % of her BODY (never her face: the rail then starts below the shoulders) */
+  let lap=0;if(free<K.w[m]*.9&&!(P.o.noLap)){lap=Math.round(A.w*.35);free+=lap;minRail=Math.max(minRail,A.y+A.h*K.railLap)}
+  const mk=(cols,comp)=>{let cw=cols===2?Math.min(K.w[m],Math.floor((free-post-10-K.gx)/2)):Math.min(K.w[m],free-post-6);cw=Math.max(cols===2?K.minW:104,cw);
+   const hh=comp?K.hS:K.h[m],gg=comp?K.cord.gapS:K.cord.gap,bw=cols*cw+(cols-1)*K.gx,x0=s==="r"?A.x+A.w+6-lap:A.x-6-bw-post-4+lap,rows=Math.ceil(n/cols),tot=K.cord.rail+rows*hh+(rows-1)*gg;
+   const want=A.y+A.h*K.railAt,top=Math.max(minRail,Math.min(want,maxB-tot)),over=Math.max(0,top+tot-maxB);return {cols,cw,bw,x0,rows,tot,top,over,hh,gg,comp:!!comp}};
+  /* 1 column if it fits low, else 2 columns (narrower), else the one that overflows least */
+  let c1=mk(1),c2=n>3&&free>=2*K.minW+post+10+K.gx?mk(2):null;let C=c1;if(c2&&(c1.over>0&&c2.over<c1.over||(n>3&&free>=2*K.w[m]+post+10+K.gx)))C=c2;
+  if(C.over>0){const d1=mk(1,1),d2=c2?mk(2,1):null;C=d2&&d2.over<d1.over?d2:d1;if(C.over>0&&d2&&d2.over<C.over)C=d2}/* tier S (compact) only when M cannot fit */
+  const bx0=s==="r"?C.x0:C.x0-post-4,bx1=s==="r"?C.x0+C.bw+post+4:C.x0+C.bw,by0=C.top,by1=C.top+C.tot;let ov=0;(P.o.avoid||[]).forEach(o=>{const w=Math.min(bx1,o.x+o.w)-Math.max(bx0,o.x),hh=Math.min(by1,o.y+o.h)-Math.max(by0,o.y);if(w>0&&hh>0)ov+=w*hh});
+  return Object.assign({s,free,ov,lap},C)};
+ let side=P.o.side&&P.o.side!=="auto"?P.o.side:null,F;
+ if(side)F=fit(side);else{const r=fit("r"),l=fit("l");F=r.ov!==l.ov?(r.ov<l.ov?r:l):(r.free>=l.free?r:l)}
+ let railY=F.top;
+ const tabsH=P.groups.length>1?K.tabH+8:0;if(railY-tabsH<2)railY=2+tabsH;
+ return {lapped:F.lap>0,comp:F.comp,A,acts,n,side:F.s,cols:F.cols,cw:F.cw,h:F.hh,gap:F.gg,rows:F.rows,railY,bandW:F.bw,x0:F.x0,post,floor:Math.min(A.y+A.h,H-2),tabsH,W,H}}
+function build(P,swap){const K=KIT_PICK,G=geo(P),el=P.el,m=P.m;P.G=G;P.up=null;
+ const old=[...el.querySelectorAll(".kpk-n,.kpk-tabs")];old.forEach(x=>x.remove());
+ const side=G.side,pw=G.post;
+ /* signpost + rail (built once) */
+ let post=el.querySelector(".kpk-post"),rail=el.querySelector(".kpk-rail");if(!post){post=document.createElement("i");post.className="kpk-post";rail=document.createElement("i");rail.className="kpk-rail";el.append(post,rail)}
+ post.style.cssText=`left:${side==="r"?G.x0+G.bandW+4:G.x0-pw-4}px;top:${G.railY-6}px;width:${pw}px;height:${Math.max(30,G.floor-(G.railY-6))}px`;
+ rail.style.cssText=`left:${side==="r"?G.x0-4:G.x0-pw-4}px;top:${G.railY}px;width:${G.bandW+pw+8}px`;
+ /* tabs (kit .pctabs/.pct) above the rail when more than one group */
+ if(P.groups.length>1){const t=document.createElement("div");t.className="kpk-tabs pctabs";t.innerHTML=P.groups.map(g=>`<button type="button" class="pct${g.k===P.group?" on":""}" data-k="${esc(g.k)}">${esc(g.n||"Việc")}</button>`).join("");
+  t.style.cssText=`left:${G.x0}px;top:0;width:${G.bandW}px;visibility:hidden`;t.__fit=1;t.addEventListener("click",e=>{const b=e.target.closest(".pct");if(!b)return;e.stopPropagation();P.setGroup(b.dataset.k)});el.appendChild(t);
+  /* the tab row may wrap to 2 lines in a narrow band: it grows UPWARD from the rail (measured), never onto the plaques */
+  const th=Math.ceil(t.getBoundingClientRect().height);t.style.top=Math.max(2,G.railY-th-8)+"px";t.style.visibility=""}
+ G.acts.forEach((a,i)=>{const c=i%G.cols,r=(i/G.cols)|0,n=document.createElement("div");n.className="kpk-n";n.dataset.id=a.id;
+  const kc=r?G.gap:K.cord.rail,x=G.x0+c*(G.cw+K.gx),y=G.railY+K.cord.rail+r*(G.h+G.gap);
+  n.style.cssText=`left:${x}px;top:${y}px;width:${G.cw}px;height:${G.h}px;--kc:${kc}px;--kph:${G.h}px;--kpp:${K.pic[m]}px;--sd:${(K.swayDeg*(1-.12*r)).toFixed(2)}deg;--ss:${(K.swayS[0]+(K.swayS[1]-K.swayS[0])*((i*37%10)/10)).toFixed(2)}s;--sdl:${(-(i*.9+c*1.3)).toFixed(2)}s`;
+  n.innerHTML=`<i class="kpk-cord"></i>`+btn(a,i);const b=n.querySelector(".kfoc-b");b.classList.add("kpk-b");b.dataset.id=a.id;b.setAttribute("aria-pressed","false");
+  b.addEventListener("click",ev=>{ev.stopPropagation();tap(P,a,n,b)});el.appendChild(n);
+  /* fall-in from the rail: transform + opacity only, staggered top → bottom, settles with a damped swing */
+  if(!still()&&n.animate){const s=c%2?-1:1,dy=-(y-G.railY)+4;n.classList.add("kpk-drop");
+   const an=n.animate([{opacity:0,transform:`translateY(${dy}px) rotate(${s*9}deg)`},{opacity:1,transform:`translateY(5px) rotate(${-s*6}deg)`,offset:.46},{transform:`translateY(-2px) rotate(${s*3.2}deg)`,offset:.68},{transform:`translateY(0) rotate(${-s*1.4}deg)`,offset:.84},{opacity:1,transform:"none"}],{duration:K.dropMs,delay:(swap?0:60)+i*K.stagger,easing:"cubic-bezier(.3,.7,.4,1)",fill:"backwards"});
+   P.anims.push(an);an.onfinish=()=>{n.classList.remove("kpk-drop");const j=P.anims.indexOf(an);if(j>=0)P.anims.splice(j,1)}}
+  });
+}
+function tap(P,a,n,b){if(!P.open)return;if(P.up===n){if(a.off){try{P.o.onOff&&P.o.onOff(a,P)}catch(e){}return}
+  b.dispatchEvent(new CustomEvent("kpkpick",{bubbles:true,detail:{id:a.id,act:a}}));try{P.o.onPick&&P.o.onPick(a.id,a,P)}catch(e){}return}
+ lift(P,a.id)}
+function lift(P,id){const K=KIT_PICK,n=P.el.querySelector(`.kpk-n[data-id="${CSS.escape(String(id))}"]`);if(!n)return;
+ if(P.up&&P.up!==n){const u=P.up;u.classList.remove("kpk-up");u.querySelector(".kpk-b").setAttribute("aria-pressed","false");if(!still()&&u.animate)u.animate([{transform:`translateY(${K.liftDy}px) scale(${K.liftScale})`},{transform:"none"}],{duration:K.liftMs-40,easing:"ease-out"})}
+ P.up=n;n.classList.add("kpk-up");n.querySelector(".kpk-b").setAttribute("aria-pressed","true");
+ if(!still()&&n.animate){const a=n.animate([{transform:"none"},{transform:`translateY(${K.liftDy}px) scale(${K.liftScale})`}],{duration:K.liftMs,easing:"cubic-bezier(.3,.8,.4,1)",fill:"forwards"});P.anims.push(a)}else n.style.transform=`translateY(${K.liftDy}px) scale(${K.liftScale})`}
+function close(P){if(!P||!P.open)return;P.open=false;document.removeEventListener("pointerdown",P.away,true);const K=KIT_PICK,N=[...P.el.querySelectorAll(".kpk-n,.kpk-tabs,.kpk-rail,.kpk-post")];
+ if(!still()&&N[0]&&N[0].animate){N.forEach(x=>x.animate([{opacity:1},{opacity:0}],{duration:K.closeMs,fill:"forwards"}));setTimeout(()=>destroy(P,true),K.closeMs+20)}else destroy(P,true)}
+function destroy(P,fromClose){if(!P)return;P.open=false;document.removeEventListener("pointerdown",P.away,true);P.anims.forEach(a=>{try{a.cancel()}catch(e){}});P.anims.length=0;try{P.el.remove()}catch(e){}if(CUR===P){CUR=null;if(P.o.onClose&&fromClose!==false)try{P.o.onClose()}catch(e){}}}
+window.kitPick={open,rect,current:()=>CUR,close:()=>{if(CUR)CUR.close()},destroy:()=>{if(CUR)CUR.destroy()}};
+
+/* ---------- kitDim: ONE dim for the people who are not chosen (owner OD 24/11 ~09:05Z + ~15:30Z) ----------
+   figure only, never the background, never see-through: a copy of the figure image with a STATIC filter (brightness + saturate from BAL.kdim) cross-fades on top of the figure
+   (opacity only = compositor). If an image has no positioned parent that matches its box, the filter goes straight on the image (no fade). off() fades back. */
+const DM={els:[]};
+function dimOne(im,fade){if(!im||im.__kdc)return;const p=im.parentElement;if(!p)return;const cs=getComputedStyle(p),ir=im.getBoundingClientRect(),pr=p.getBoundingClientRect(),D=DIM();
+ const direct=()=>{im.classList.add("kdim-d");im.style.setProperty("--kdb",D.b);im.style.setProperty("--kds",D.s);DM.els.push(im)};
+ if(im.tagName!=="IMG"||cs.position==="static"||Math.abs(ir.width-pr.width)>2||Math.abs(ir.height-pr.height)>2){direct();return}
+ const c=document.createElement("img");c.className="kdim-c "+(im.className||"").replace(/\b(kidl\w*|figimg)\b/g,"").trim();c.alt="";c.draggable=false;c.src=im.currentSrc||im.src;c.setAttribute("aria-hidden","true");
+ c.style.cssText=`position:absolute;left:${ir.left-pr.left}px;top:${ir.top-pr.top}px;width:${ir.width}px;height:${ir.height}px;pointer-events:none;filter:brightness(${D.b}) saturate(${D.s});opacity:${fade&&!still()?0:1}`;
+ im.after(c);im.__kdc=c;DM.els.push(im);if(fade&&!still()&&c.animate)c.animate([{opacity:0},{opacity:1}],{duration:D.ms,fill:"forwards"})}
+function dimOff(){const D=DIM();DM.els.forEach(im=>{const c=im.__kdc;if(c){im.__kdc=null;if(!still()&&c.animate){c.animate([{opacity:1},{opacity:0}],{duration:D.ms,fill:"forwards"});setTimeout(()=>c.remove(),D.ms+20)}else c.remove()}else{im.classList.remove("kdim-d");im.style.removeProperty("--kdb");im.style.removeProperty("--kds")}});DM.els=[]}
+window.kitDim={on(figs,o){o=o||{};dimOff();const keep=o.keep;[].slice.call(figs||[]).forEach(f=>{if(f===keep||(keep&&f.contains&&f.contains(keep)))return;dimOne(f.tagName==="IMG"?f:(f.querySelector("img")||f.querySelector(".j59sil,canvas,svg")),o.fade!==false)})},off:dimOff,state:()=>({n:DM.els.length,b:DIM().b,s:DIM().s})};
+
+const css=document.createElement("style");css.id="kpk-css";css.textContent=`
+/* wood tokens: ONE look. --kpk-img = the slot for Foreman C's painted wood (none until it exists) */
+.kpk{--kpk-w1:#c99a5b;--kpk-w2:#b4813f;--kpk-w3:#97662d;--kpk-line:#5a3a1a;--kpk-ink:#2b1708;--kpk-hi:rgba(255,236,196,.55);--kpk-img:none;position:absolute;left:0;top:0;width:0;height:0;z-index:30;pointer-events:none}
+.kpk>*{pointer-events:auto}
+.kpk-post{position:absolute;border-radius:4px 4px 2px 2px;border:1px solid var(--kpk-line);box-sizing:border-box;background:var(--kpk-img),linear-gradient(90deg,var(--kpk-w3),var(--kpk-w2) 45%,var(--kpk-w1) 55%,var(--kpk-w3));box-shadow:2px 3px 5px rgba(0,0,0,.35);pointer-events:none}
+.kpk-post::before{content:"";position:absolute;left:50%;top:-5px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e7c27a,#a8782f 70%);border:1px solid var(--kpk-line);box-sizing:border-box}
+.kpk-rail{position:absolute;height:8px;border-radius:4px;border:1px solid var(--kpk-line);box-sizing:border-box;background:var(--kpk-img),linear-gradient(var(--kpk-w1),var(--kpk-w2) 55%,var(--kpk-w3));box-shadow:0 3px 5px rgba(0,0,0,.35);pointer-events:none}
+.kpk-tabs{position:absolute;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:0;margin:0}.kpk-tabs .pct{height:${KIT_PICK.tabH}px;white-space:nowrap}
+.kpk-n{position:absolute;transform-origin:50% calc(-1 * var(--kc,12px));will-change:transform;contain:layout style;animation:kpk-sw var(--ss,4s) ease-in-out var(--sdl,0s) infinite alternate}
+.kpk-n.kpk-up{animation-play-state:paused;z-index:3}
+@keyframes kpk-sw{from{rotate:calc(var(--sd,1.2deg)*-1)}to{rotate:var(--sd,1.2deg)}}
+.kpk-still .kpk-n,html.kf-still .kpk-n,.kf-off .kpk-n{animation:none!important}
+@media (prefers-reduced-motion:reduce){.kpk-n{animation:none!important}}
+.kpk-cord{position:absolute;left:50%;top:calc(-1 * var(--kc,12px));width:4px;height:var(--kc,12px);margin-left:-2px;pointer-events:none;background:repeating-linear-gradient(135deg,#8a6a3a 0 2px,#cfae72 2px 4px);border-radius:2px;box-shadow:0 0 0 .5px rgba(60,35,10,.55)}
+.kpk .kfoc-b.kpk-b{--kfh:var(--kph,58px);--kfp:var(--kpp,40px);position:relative;width:100%;height:var(--kph,58px);min-height:var(--kph,58px);padding:2px 8px 2px 5px;border-radius:7px;border:1.5px solid var(--kpk-line);color:var(--kpk-ink);
+ background:var(--kpk-img),repeating-linear-gradient(93deg,rgba(80,45,15,.13) 0 1px,transparent 1px 5px,rgba(255,226,170,.10) 5px 6px,transparent 6px 11px),linear-gradient(180deg,var(--kpk-w1),var(--kpk-w2) 58%,var(--kpk-w3));
+ box-shadow:inset 0 1.5px 0 var(--kpk-hi),inset 0 -2px 0 rgba(70,40,12,.45),0 3px 6px rgba(0,0,0,.4)}
+.kpk .kfoc-b.kpk-b::before,.kpk .kfoc-b.kpk-b::after{content:"";position:absolute;top:4px;width:4px;height:4px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e8d9b8,#6b4a22);pointer-events:none}.kpk .kfoc-b.kpk-b::before{left:3px}.kpk .kfoc-b.kpk-b::after{right:3px}
+.kpk .kfoc-b.kpk-b .kfoc-pic{border:1.5px solid var(--kpk-line);box-sizing:border-box;border-radius:6px;margin-left:3px}
+.kpk .kfoc-b.kpk-b .kfoc-t b{color:var(--kpk-ink);text-shadow:0 1px 0 var(--kpk-hi);letter-spacing:.1px}
+.kpk .kfoc-b.kpk-b .kfoc-t small{display:none;color:#3d2410;text-shadow:0 1px 0 var(--kpk-hi);font-weight:600}
+.kpk-n.kpk-up .kfoc-b.kpk-b .kfoc-t small{display:block}
+.kpk-n.kpk-up{height:auto!important;min-height:var(--kph,58px)}.kpk-n.kpk-up .kfoc-b.kpk-b{height:auto;min-height:var(--kph,58px);padding-top:5px;padding-bottom:5px}.kpk-n.kpk-up .kfoc-t b{-webkit-line-clamp:unset;max-height:none}.kpk-n.kpk-up .kfoc-t small{max-height:none}
+.kpk-n.kpk-up .kfoc-b.kpk-b{box-shadow:inset 0 1.5px 0 var(--kpk-hi),inset 0 -2px 0 rgba(70,40,12,.45),0 8px 14px rgba(0,0,0,.45),0 0 0 2px #f1d79a}
+.kpk .kfoc-b.kpk-b.kfoc-off{filter:grayscale(.6);opacity:1}
+.kpk .kfoc-b.kpk-b:focus-visible{outline:2px solid #fff3c4;outline-offset:2px}
+.kdim-d{filter:brightness(var(--kdb,.7)) saturate(var(--kds,.75))!important}
+.kdim-c{transform-origin:50% 100%}
+`;document.head.appendChild(css);
+}catch(e){console.error("jkpick",e)}})();
 const KIT_SQOPT={pic:64,narrow:56};/* KIT §6.2c: the ONE square option picture size (px); narrow = html.kpnarrow */
 /* ================= jkitsel: KIT §93 — scene layer «layout A» + name tag for a half-known person + sắc phong news row (KIT KEEPER #13, review/kit-selscene) =================
    Kit requests of SELSCENE (dev/kit/KIT_REQUESTS.md «23/11 SELSCENE» 1–4) and the event layout A the owner chose (OD 23/11 ~20:20Z/~20:22Z/~20:25Z/~20:27Z/~20:30Z,
@@ -95277,7 +95414,7 @@ const KIT_SQOPT={pic:64,narrow:56};/* KIT §6.2c: the ONE square option picture 
    (93.6) kitNewsRankRow(p,{rank,how,ph}) / kitNewsRankList(rows) → the sắc phong news row: kit face + name (or placeholder) + new rank chip + how known.
    kitEdict({fromWord}) (j93) prints the given «from» word on the old-rank chip (a tú nữ: «Tú nữ»). */
 const KIT_SCN={z:57,edge:4,blur:6,veil:"rgba(20,12,8,.45)",veilNight:"rgba(10,16,48,.45)",night:"brightness(.62) saturate(.85)",intro:1300,toBlur:700,
- fold:{fh:.80,msgrX:.19,meX:.30,boxX:.43,boxW:.555,soloFh:.97,soloX:.22},ipad:{fh:.86,msgrX:.115,meX:.27,boxX:.41,boxW:.575,soloFh:.97,soloX:.20},gap:8,tail:13};
+ fold:{fh:.80,mfh:.94,hfh:.78,msgrX:.22,meX:.82,cX:.02,cW:.60,cTop:.42,nmX:.2,nbW:.42,boxX:.43,boxW:.555,soloFh:.97,soloX:.22},ipad:{fh:.86,mfh:.98,hfh:.84,msgrX:.17,meX:.84,cX:.02,cW:.64,cTop:.40,nmX:.15,nbW:.40,boxX:.41,boxW:.575,soloFh:.97,soloX:.20},gap:8,tail:13};
 (function(){try{const st=document.createElement("style");st.id="kscn-css";st.textContent=`
 .kscn{position:fixed;z-index:${KIT_SCN.z};overflow:hidden;border-radius:var(--k-rad,12px);background:#2a1a12}
 .kscn-bg{position:absolute;inset:-14px;background-size:cover;background-position:center;filter:blur(${KIT_SCN.blur}px)}
@@ -95296,6 +95433,9 @@ const KIT_SCN={z:57,edge:4,blur:6,veil:"rgba(20,12,8,.45)",veilNight:"rgba(10,16
 .kscn-box.kscn-tl:before,.kscn-box.kscn-tl:after{content:"";position:absolute;width:0;height:0;border-style:solid;border-color:transparent}
 .kscn-box.kscn-tl:before{left:-${KIT_SCN.tail}px;top:var(--kty,40px);border-width:11px ${KIT_SCN.tail}px 11px 0;border-right-color:var(--gold,#b8901f)}
 .kscn-box.kscn-tl:after{left:-${KIT_SCN.tail-2}px;top:calc(var(--kty,40px) + 1px);border-width:10px ${KIT_SCN.tail-1}px 10px 0;border-right-color:#fbf1e6}
+.kscn-box.kscn-tr:before,.kscn-box.kscn-tr:after{content:"";position:absolute;width:0;height:0;border-style:solid;border-color:transparent}
+.kscn-box.kscn-tr:before{right:-${KIT_SCN.tail}px;top:var(--kty,40px);border-width:11px 0 11px ${KIT_SCN.tail}px;border-left-color:var(--gold,#b8901f)}
+.kscn-box.kscn-tr:after{right:-${KIT_SCN.tail-2}px;top:calc(var(--kty,40px) + 1px);border-width:10px 0 10px ${KIT_SCN.tail-1}px;border-left-color:#fbf1e6}
 .kpl .kplt .kscn-rk{margin-left:6px}
 body.kscn-on .kemo-big{visibility:hidden!important}
 button.ka.kbare .kat{margin:auto 0}button.ka.kbare .kabody{display:flex;flex-direction:column;justify-content:center}
@@ -95330,14 +95470,21 @@ const kitScene={
  async pair(L,o){const ip=document.documentElement.classList.contains("kv2"),K=ip?KIT_SCN.ipad:KIT_SCN.fold,w=L.g.w,H=L.g.H,gap=KIT_SCN.gap,X=Math.round(w*K.boxX),BW=Math.round(w*K.boxW);
   if(!o.msgr){const fh=Math.round(H*K.soloFh);await kitScene.fig(L,o.me,{cx:w*K.soloX,top:H-fh,fh,z:3});
    return{box:kitDlgBox(L,o.choiceTitle||o.storyTitle,[...(o.story||[]),...(o.choice||[])],{x:X,y:gap,w:BW,h:H-2*gap},{y:Math.round(H*.20)},{kind:o.kind,seal:o.seal})}}
-  const fh=Math.round(H*K.fh);await kitScene.fig(L,o.msgr,{cx:w*K.msgrX,top:0,fh,z:2});await kitScene.fig(L,o.me,{cx:w*K.meX,top:H-fh,fh,z:3});
-  const sb=kitDlgBox(L,o.storyTitle,o.story||[],{x:X,y:gap,w:BW},{y:ip?52:62},{kind:o.kind,seal:o.seal});const sh=Math.ceil(sb.getBoundingClientRect().height),top=gap+sh+12;
-  const cb=kitDlgBox(L,o.choiceTitle,o.choice||[],{x:X,y:top,w:BW,h:H-top-gap},{y:Math.max(26,Math.round(H*(ip?.30:.36))-top)},{kind:o.kind,seal:o.seal,noSeal:true});return{story:sb,choice:cb}},
+  /* LAYOUT A (owner OD 24/11 ~04:35Z, restating ~20:20Z/~20:22Z/~20:27Z): the speaker stands LEFT, FULL BODY, big; his story box on the RIGHT; the choice box BELOW lies over the left figure; THEN her own figure on the
+     RIGHT, HALF BODY (small, cut by the layer's bottom edge on purpose); never two figures stacked on the left. NO choice (two others talking): both FULL BODY, one on each side, the box between. */
+  const msg=o.msgr,hasCh=(o.choice||[]).length>0;
+  if(!hasCh){const fh=Math.round(H*K.fh);await kitScene.fig(L,msg,{cx:w*K.nmX,top:H-fh,fh,z:2});const f2=await kitScene.fig(L,o.me,{cx:w*(1-K.nmX),top:H-fh,fh,z:2});
+   const bw=Math.round(w*K.nbW),sb=kitDlgBox(L,o.storyTitle,o.story||[],{x:Math.round((w-bw)/2),y:gap,w:bw},null,{kind:o.kind,seal:o.seal});return{story:sb}}
+  const mfh=Math.round(H*K.mfh);await kitScene.fig(L,msg,{cx:w*K.msgrX,top:H-mfh,fh:mfh,z:2});
+  const sb=kitDlgBox(L,o.storyTitle,o.story||[],{x:X,y:gap,w:BW},{y:ip?52:62},{kind:o.kind,seal:o.seal});const sh=Math.ceil(sb.getBoundingClientRect().height);
+  const hfh=Math.round(H*K.hfh),f2=await kitScene.fig(L,o.me,{cx:w*K.meX,top:gap+sh+10,fh:hfh,z:3});f2.dataset.half="1";f2.__half=1;/* half body: cut by the bottom edge, not clipped by a box */
+  const cy=Math.max(gap+sh+12,Math.round(H*K.cTop)),cw=Math.round(w*K.cW);
+  const cb=kitDlgBox(L,o.choiceTitle,o.choice||[],{x:Math.round(w*K.cX),y:cy,w:cw,h:H-cy-gap},{y:26,side:"r"},{kind:o.kind,seal:o.seal,noSeal:true});return{story:sb,choice:cb}},
  close(now,cb){const C=kitScene.cur;kitScene.cur=null;if(!C){cb&&cb();return}const L=C.L;const off=()=>document.body.classList.remove("kscn-on");if(now||kscnCalm()){L.remove();off();cb&&cb();return}
   L.boxes.forEach(b=>b.animate([{opacity:1},{opacity:0,transform:"translateX(30px)"}],{duration:260,fill:"both"}));L.figs.forEach(f=>f.animate([{opacity:1},{opacity:0,transform:"translateX(-50px)"}],{duration:380,delay:120,fill:"both"}));
   L.animate([{opacity:1},{opacity:0}],{duration:420,delay:260,fill:"both"}).onfinish=()=>{L.remove();off();cb&&cb()}}};
 /* 93.3 the layout A dialogue box. nodes = DOM nodes or html strings; the node with class «opts» (or a list of kit option buttons wrapped by the caller) is the ONLY scroller */
-function kitDlgBox(L,title,nodes,pos,tail,ho){ho=ho||{};pos=pos||{};const b=document.createElement("div");b.className="dlg kpanel kscn-box"+(tail?" kscn-tl":"");
+function kitDlgBox(L,title,nodes,pos,tail,ho){ho=ho||{};pos=pos||{};const b=document.createElement("div");b.className="dlg kpanel kscn-box"+(tail?(tail.side==="r"?" kscn-tr":" kscn-tl"):"");
  b.innerHTML=typeof kpHeader==="function"?kpHeader(ho.kind||"choice",title||"","",ho.seal):`<div class="kph"><span class="kpht"><span class="kptitle">${title||""}</span></span></div>`;if(ho.noSeal)b.querySelectorAll(".kpseal").forEach(e=>e.remove());
  const c=document.createElement("div");c.className="kscn-col";(nodes||[]).forEach(n=>{if(n==null)return;if(typeof n==="string"){const t=document.createElement("div");t.innerHTML=n;while(t.firstChild)c.appendChild(t.firstChild)}else c.appendChild(n)});b.appendChild(c);
  b.style.cssText=`left:${pos.x||0}px;top:${pos.y||0}px;width:${pos.w||300}px;height:${pos.h?pos.h+"px":"auto"}`;if(tail)b.style.setProperty("--kty",(tail.y||40)+"px");
@@ -97893,7 +98040,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="bc15a44a5a6a";window.CTM_BUILD=BUILD;
+const BUILD="bf96b9ec94ed";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
