@@ -56,3 +56,10 @@ review/robot10-e-fix-5-r = merge of origin/main d521656c + 6b96055a, 0 conflicts
 | coop-e2e Fold host | **142/142** |
 | coop-e2e COOP_SWAP=1 (iPad host) | **142/142** |
 The earlier week-0 coop red was the old driver fault fixed by test-mrfoot. Final: **PASS 24f8c761b3ec9a917786a1af5c11769ca638b096**.
+
+## RE-MERGE on LIVE c6c3ca76 (ORDER MAIN 123 14:45Z via Foreman E) — E84r
+| branch | reviewed head | merge sha (ff from c6c3ca76) | conflicts | dev/build delta vs LIVE = reviewed delta | own suite | quickcheck --runs 5 | coop-e2e Fold host | COOP_SWAP=1 | verdict |
+|---|---|---|---|---|---|---|---|---|---|
+| review/robot10-e-fix-5-r | 24f8c761 (= 6b96055a code) | **a50db75ae32fc6ab79d780550091d4fac6c530ee** | index.html / sw.js only (rebuilt) | identical (j9 / jhc / jkrel) | r10e-roadman ALL OK | run 1 FAIL time-spill guard (1 runtime court walk, box busy: I was building fix-3 in parallel); guard alone 3/3 PASS on the merge and 3/3 on bare LIVE; rerun alone **PASS** 663 s (core gates, old save ok; render 224/178, tab 371/409, buổi 1350/1112 ms) | **142/142** | **142/142** | **PASS a50db75a** |
+| review/robot10-e-fix-3-r2 | 2e7e489b | **e4597adf533403027682540783baa27f2d68289f** | index.html / sw.js only (rebuilt) | identical (8 files) | r10e-stock-full ALL OK · r10e-saveblocked ALL OK · r10e-oldsave-noloss ALL OK (saves-r5 R3-018) · monthly-allotment ALL PASS | **PASS** 667 s (render 199/220, tab 420/439, buổi 1081/1063 ms) | **142/142** | **142/142** | **PASS e4597adf** |
+Note: LIVE moved to 15b5e1ff (robot-coop-fix-1 r2) while the tests ran — both merges are on c6c3ca76 as ordered; a new re-merge is needed before landing on 15b5e1ff.
