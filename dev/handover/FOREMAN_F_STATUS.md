@@ -4,3 +4,4 @@
 - FROM MAIN 114 (23:36Z 23/11): KIT READY mg-skin on review/kit-mgskin 1b91ac14 (in SMALL review, not LIVE yet). Skin slot {id,name,pal} on kg82; kitMgSkinAdd; ONE resolver img/mg/<kind>-<id>.webp (falls back to default art); 5 kit palettes son/ngoc/kim/mac/dao; KIT.md §MG-SKIN; notes in dev/handover/reports/kit-mgskin.md. F: name your CDN images exactly img/mg/<kind>-<id>.webp.
 - FROM MAIN 114 (23:40Z 23/11): LIVE = 37d07967 (N17 coop-famops-t2: co-op family items no dup/vanish on trade).
 - FROM MAIN 114 (23:54Z 23/11): LIVE = 17835565 (offline-all: Thiết lập › «Tải hết để chơi offline»).
+- FROM MAIN 114 (00:18Z 24/11): LIVE = 16f5c1dc (know-notice: clear top-bar notice for every new thing learned, no doubles).
