@@ -19,3 +19,18 @@ BRANCH: review/kit-dhcapfit @e6d28d21 (from LIVE 2a80712b; merges clean on LIVE 
 https://ctm-img.victoria-tntt.workers.dev/img/_review/kit-dhcapfit/after-khuynh.webp · https://ctm-img.victoria-tntt.workers.dev/img/_review/kit-dhcapfit/after-donthuyen.webp · https://ctm-img.victoria-tntt.workers.dev/img/_review/kit-dhcapfit/after-phuonghoang.webp · https://ctm-img.victoria-tntt.workers.dev/img/_review/kit-dhcapfit/after-hienluong.webp · before: https://ctm-img.victoria-tntt.workers.dev/img/_review/kit-dhcapfit/before-khuynh.webp
 ## For Foreman E (TITLES2)
 Nothing to change in jdh3: the notice uses kitDhCap, so after this lands the plate fits. E55's titles2-ui.js WARN K-DH-CAPFIT line should go quiet once review/titles2 is merged over it.
+
+## REVIEW r1 (sonnet reviewer-lander session_01N1tNP3VEPfzDnytmKioybP · 24/11)
+START_CTX ~3 %. PRIORITY #1 CHECK: OD 0 | ledger 0 | claims KK15 | main kitDhCap jdh.js:165 + kitTitlePlate jtitle.js:29 | review/kit-dhcapfit e6d28d21 | KIT_REQUESTS K-DH-CAPFIT.
+Branch review/kit-dhcapfit-r1 = e6d28d21 + merge LIVE 4a8c627b (clean) + rebuilt index.html/sw.js/assets.json → 9b487835ad2bba99bb1fa5b4ce1d288461b9c244.
+| check | result |
+|---|---|
+| Merge newest origin/main, rebuild | clean merge; build OK; built files committed (sha holds its own build) |
+| Consistency scan, every kitDhCap / kitTitlePlate place (laws 9/10/11) | ONE plate rule in jtitle.js .kdh, caption fit in jdh.js kdhCapFit, sibling .ksart-tag in jk2b.js; users: title dialogs + TITLES2 notice (kitDhCap), stage tag kitTitleTag3/j59, Danh hiệu panel rows, jmb/j79 slots, kesf figure, NPC tag; no per-place variant, no private CSS |
+| node dev/test/kit-dhcapfit.js | 26/26 (Fold 755x1000 + iPad 1180x820), 0 page errors |
+| quickcheck | PASS 203 s · core gates PASS · time-spill PASS · open 1683 ms · old save loads and plays a buổi · perf new/live render 191/228, buổi 1166/1209 |
+| Old save | save made by LIVE build loads on r1, name kept, title dialog caption works, 0 errors |
+| Shots Fold + iPad, full screen, each looked 3× (law 12) | title dialog «Khuynh quốc khuynh thành» both devices: 2 lines inside picture, nothing cut; stage tag both devices; Danh hiệu panel both devices: OK |
+| Wording (law 7) | no new player text, no % |
+Note (nit, not a fault): iPad stage, longest title worn by her → plate now 2 lines (57→71 px tag stack, bottom 761 vs stage bottom 764, inside). Before: name ran out of the plate into the rival's tag. Better now, tight by 3 px; only the longest names.
+Verdict: **PASS** 9b487835ad2bba99bb1fa5b4ce1d288461b9c244. Shots were scratch only, nothing uploaded to the CDN review folder (nothing to wipe).
