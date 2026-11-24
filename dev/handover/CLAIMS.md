@@ -1538,3 +1538,5 @@ figload-keep (live bug split from sideline-dlg 3fb17db4) | review/figload-keep |
 | RING-DESIGN-4 | review/ring-design-4 | MAIN 125 | session_01V1ZZH3w4Qe8y5BUHHuit3G | RUNNING | 2026-11-24T18:15Z |
 | MOTION-DESIGN-3 | review/motion-design-3 | MAIN 125 | session_01V1ZZH4AGe6TobJ6LfAciTy | RUNNING | 2026-11-24T18:15Z |
 | LC12 lander | main FF | MAIN 125 | session_01V1ZZH2p2x7oNCrRuTq7RjF | RUNNING | 2026-11-24T18:15Z |
+ROBOT-COOP FIXER #6 (fix-2 r3, fix-3 r3) | review/robot-coop-fix-2-r3, robot-coop-fix-3 | session_01N1tNP4TkcdjyymdxPqwSj5 | RUNNING | 2026-11-24T18:24Z (FOREMAN B)
+ROBOT-COOP FIXER #6b (week-end stuck, fix-4) | review/robot-coop-fix-4 | session_01N1tNP4p4FFUjuVntyfWTNy | RUNNING | 2026-11-24T18:24Z (FOREMAN B)
