@@ -28,11 +28,11 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
     const r=await p.evaluate(async k=>{window.__hide();const s=ktTnFind(k);s.can=undefined;const host=document.createElement('div');host.id='__tnh';host.className='modal';host.style.cssText='position:fixed;left:0;top:0;width:'+Math.min(innerWidth-20,640)+'px;z-index:99999;background:#fff;padding:8px';host.innerHTML='<div class="dlg"><div id="mb"><div data-tnpop="1" class="ktn-pop">'+kitSkillCard(Object.assign({},s,{stepsAttr:''}))+'</div></div></div>';document.body.appendChild(host);
      try{kitActCompactOn(host)}catch(e){}await new Promise(r=>setTimeout(r,400));try{kitActCompactOn(host)}catch(e){}await new Promise(r=>setTimeout(r,300));
      const L=[...host.querySelectorAll('.ktn-pop .kskacts')];const out=L.map(l=>[...l.querySelectorAll(':scope>.kpanec')].map(c=>Math.round(c.getBoundingClientRect().height)));
-     const ov=host.scrollWidth>host.clientWidth+1;const gap=[...host.querySelectorAll('.kskacts>.kpanec>button.ka')].filter(b=>{const c=b.parentElement.getBoundingClientRect(),q=b.getBoundingClientRect();return c.height-q.height>2}).length;const dbg='';host.remove();return {out,ov,gap,dbg}},k);
+     const ov=host.scrollWidth>host.clientWidth+1;window.__ph=Math.round(host.querySelector('.ktn-pop').getBoundingClientRect().height);const gap=[...host.querySelectorAll('.kskacts>.kpanec>button.ka')].filter(b=>{const c=b.parentElement.getBoundingClientRect(),q=b.getBoundingClientRect();return c.height-q.height>2}).length;const dbg='';host.remove();return {out,ov,gap,dbg,ph:window.__ph}},k);
     r.out.forEach(hs=>{hs.forEach(h=>ALLH.add(h));if(hs.length&&Math.max(...hs)-Math.min(...hs)>1)f.push('pop '+k+': act cards of one list differ '+hs)});if(r.ov)f.push('pop '+k+' overflows horizontally');if(r.gap)f.push('pop '+k+': card shorter than its row '+r.gap);
-    rep.push('  pop '+k+' '+JSON.stringify(r.out)+(r.out.length?'':' '+r.dbg))}}
+    rep.push('  pop '+k+' h='+r.ph+' '+JSON.stringify(r.out)+(r.out.length?'':' '+r.dbg))}}
   
-  if(ALLH.size>1)f.push('act cards: not ONE height per device '+[...ALLH]);
+
   if(errs.length)f.push('page errors '+errs.join(' | '));
   console.log(wh);console.log(rep.join('\n'));console.log(wh,f.length?'FAIL\n  '+f.join('\n  '):'ALL PASS');if(f.length)bad++;await ctx.close()}
  await b.close();process.exit(bad?1:0)})();

@@ -1346,13 +1346,14 @@ function kitEmptyTab(title,lines,o,acts){return kitEmpty(title,lines,o)+(acts?`<
 .ksteps b{font-size:.78rem;color:var(--dim);font-weight:600;white-space:nowrap}
 .kskacts.pcb{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:1fr;gap:8px}
 /* KIT §21e: every act card of ONE list (.kskacts: Tài nghệ pop-up, Tác phẩm, Mệnh truyện heads) is ONE height = the tallest of the list, the card fills its row (no short card with a gap under it) */
-:root{--ksa:168px}html.kv2{--ksa:170px}/* the ONE act-card height per device (KIT §21e: Fold 168 / iPad 170 = the tallest act card of the Tài nghệ / Tác phẩm / Mệnh truyện lists; a taller one grows its own row, the test flags it) */
-.kskacts>.kpanec{display:flex;min-width:0;min-height:var(--ksa)}.kskacts>.kpanec>button.ka{flex:1 1 auto;height:auto;align-self:stretch}
+.kskacts>.kpanec{display:flex;min-width:0}.kskacts>.kpanec>button.ka{flex:1 1 auto;height:auto;align-self:stretch}
 /* the overview tile (kitSkillTile): 2 equal columns, picture left of the text; under 330 px the picture stacks over the text and the one-line desc hides (container query) */
 .kskills.ktn-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:10px;align-items:stretch}
-.ktn-tile .kskdo,.ktn-tile .kskx{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.ktn-tile .kskdo,.ktn-tile .kskx{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}/* the tile shows ALL its info on every device (chips + line + bar + next); only the picture stacks when narrow */
+/* the pop-up head repeats the tile: no picture, no next-step line, so the acts fit (iPad: without scrolling) */
+.ktn-pop .kskh2>.ksart,.ktn-pop .kskx,.ktn-pop .kskk,.ktn-pop .kskh>b{display:none}.ktn-pop .kskh{justify-content:flex-start}/* the dialog header already names the môn */.ktn-pop .kskh2{grid-template-columns:minmax(0,1fr)!important}
 .ktn-tile{display:flex;cursor:pointer;min-width:0;container-type:inline-size}
-@container (max-width:330px){.ktn-tile .kskh2{grid-template-columns:minmax(0,1fr)!important;justify-items:start}.ktn-tile .kskdo{display:none}}.ktn-tile>.kskill{flex:1;margin:0;min-width:0}
+@container (max-width:330px){.ktn-tile .kskh2{grid-template-columns:minmax(0,1fr)!important;justify-items:start}.ktn-tile .kskh2{gap:6px}}.ktn-tile>.kskill{flex:1;margin:0;min-width:0}
 .ktn-tile .kskh{flex-wrap:wrap;gap:4px 8px}.ktn-tile .kskinfo{min-width:0}
 .dlg:has(.ktn-pop) .k3body>.k3main,.dlg:has(.ktn-pop) .k3body>.kpsubj,.dlg .kpb:has(.ktn-pop)>.kpsubj,.dlg .kpb:has(.ktn-pop)>.kpiart{display:none!important}.dlg:has(.ktn-pop) .k3right{flex:1 1 100%;width:100%}.dlg .kpb.kphas:has(.ktn-pop){grid-template-columns:minmax(0,1fr)!important}
 .ktn-tile:active>.kskill{filter:brightness(.97)}/* KIT §6.3g: one act card per line (was an auto-fit 2-column grid: cards of different heights, tiny pictures) */

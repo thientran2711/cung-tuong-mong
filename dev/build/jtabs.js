@@ -60,7 +60,7 @@ function ktArtHTML(){try{vNormAll()}catch(e){}const SK=ktArtSkills();const G=[["
 function ktTnTile(s,g){return kitSkillTile(s,`${g}:${s.kind}:${s.k}`)}/* the tile = KIT §21e kitSkillTile (j79) */
 function ktTnFind(key){const [g,kind,k]=String(key).split(":");if(g==="wk")return ktWorksList().find(s=>s.k===k);return ktArtSkills().find(s=>s.kind===kind&&s.k===k)}
 function ktTnPop(key){const s=ktTnFind(key);if(!s)return;s.can=undefined;
- kitModal({kind:"notice",title:s.name,sub:s.kicker||"",sections:[{h:"",html:`<div data-tnpop="1" class="ktn-pop">${kitSkillCard(Object.assign({},s,{stepsAttr:""}))}</div>`}],btn:"Thôi"})}
+ kitModal({kind:"info",title:s.name,sub:s.kicker||"",sections:[{h:"",html:`<div data-tnpop="1" class="ktn-pop">${kitSkillCard(Object.assign({},s,{stepsAttr:""}))}</div>`}],btn:"Thôi"})}
 window.ktTnPop=ktTnPop;
 document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-tnmon]");
  if(t&&!e.target.closest("[data-ktsv]")){e.stopPropagation();try{ktTnPop(t.dataset.tnmon)}catch(x){console.error(x)}return}
