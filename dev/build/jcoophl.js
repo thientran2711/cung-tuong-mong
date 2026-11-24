@@ -32,7 +32,7 @@ const NOADD=new Set(["mood","rank","buoi","tuan","month","year","turn","age","er
    authors it: the guest's own palFix (deser / render / month) leaves every world person's housing as it was (her own S housing is hers), her
    week end carries the room base's housing (so m3 never adds two seats' resHead ids: R#11.resHead A=2 B=3 → 4 = a third consort), and the
    host sends its housing writes at once (numbers included: the guest never moves them, nothing is counted twice) */
-const HOUSE=["resHead","resHall","pal","palLone","palWait"],HSET=new Set(HOUSE);
+const HOUSE=X.HOUSE,HSET=new Set(HOUSE);/* ONE list: jcoopworld (the pos relay houseWire/houseIn uses the same) */
 /* r3 (coop-e2e 3/7 STUCK NIGHT, guest week n buổi 3): the room CLOCK (year / month / tuần / turn = jnf / jnight / nCheck's day() = S.turn*3+S.tuan)
    moves ONLY with the merged week, never as a live op. Before: the host's endTurn moved its tuần, its check sent ["s",["S","tuan"],n+1]
    (NOADD = "the host's value"), the guest still in her tối of day n jumped to day n+1 → jnf asked the host's word for a day the host had not
@@ -240,12 +240,16 @@ if(typeof endTurn==="function"){const e0=endTurn;endTurn=function(){const r=e0.a
 /* ---------- GUEST: world housing is the host's ---------- */
 function npcList(){return (rivals||[]).filter(v=>plain(v)&&!v.coop)}
 if(typeof palFix==="function"){const pf0=palFix;const hsig=()=>JSON.stringify(npcList().map(v=>HOUSE.map(f=>v[f])));
+ /* robot-coop-fix-3: the FRIEND's housing is hers (her seat houses her; it rides her pos relay): on either seat palFix reads her relayed house
+    and never keeps a re-housing of her entry (an over-cap house evicting «the newest extra», a re-picked side hall: «sees her at r5») */
+ const fH=()=>{try{if(CW.friendHouse)CW.friendHouse()}catch(e){console.error("hl friend house",e)}};
  palFix=function(){if(!live())return pf0.apply(this,arguments);
-  if(host()){const a=hsig();const r=pf0.apply(this,arguments);try{if(hsig()!==a)soon("house")}catch(e){}return r}/* a host move mid-week reaches her at once */
+  if(host()){fH();const a=hsig();let r;try{r=pf0.apply(this,arguments)}finally{fH()}try{if(hsig()!==a)soon("house")}catch(e){}return r}/* a host move mid-week reaches her at once */
+  fH();
   const snap=new Map(npcList().map(v=>[v,HOUSE.map(f=>[f in v,v[f]])]));const l0=typeof log==="function"?log:null;
   /* a move of a world person is not hers to make (and not logged on her seat): the host's move reaches her as an op; her own lines stay */
   if(l0)log=function(t){if(typeof t==="string"&&!/^Ngươi/.test(t)){HL.stat.hLog=(HL.stat.hLog||0)+1;return}return l0.apply(this,arguments)};
-  let r;try{r=pf0.apply(this,arguments)}finally{if(l0)log=l0;let n=0;for(const [v,a] of snap)HOUSE.forEach((f,i)=>{if(a[i][0]){if(v[f]!==a[i][1]){v[f]=a[i][1];n++}}else if(f in v){delete v[f];n++}});if(n)HL.stat.hKeep=(HL.stat.hKeep||0)+n}
+  let r;try{r=pf0.apply(this,arguments)}finally{if(l0)log=l0;fH();let n=0;for(const [v,a] of snap)HOUSE.forEach((f,i)=>{if(a[i][0]){if(v[f]!==a[i][1]){v[f]=a[i][1];n++}}else if(f in v){delete v[f];n++}});if(n)HL.stat.hKeep=(HL.stat.hKeep||0)+n}
   return r};window.palFix=palFix}
 /* r1 (reviewer, same family, guest side): the servant-name dedupe (j95c j95cDedupe, run by start() / ageInit) renamed a WORLD servant on
    the guest seat only when her own new maid drew the same name (e2e E1: R8 maid sid21 "Thu Thiền" on the host, "San Hô" on the guest for the

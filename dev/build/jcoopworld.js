@@ -44,6 +44,8 @@ const W_KEYS=["year","month","tuan","turn","emp","thDead","thAge","thO","thF","c
 const HOST_ONLY=["tn","thIll","cm","men","menG2","wxDay","nmReg","nmOrd"];  /* wxDay: weather-khac, the host rolls the day (jwxk) */  /* tn: B2 the Emperor's night (host) */   /* the guest never writes these: her toCanon copies them from the room base */
 const CM_P=["seen","spy","thDrop","hhDrop"],MEN_P=["tinh","letters","trysts","knowsMe","af","grudge","grudgeN","debt","seen","oan"];/* oan: his oán toward her (rel-men-servants, j9) — hers, like af */
 const REFF=["resHead","spyFor","lover","mid","owner","by","who","tgt","from","to"];   /* fields whose "me" value names the viewer */
+/* where a person LIVES (jpal palFix writes it): ONE list for the pos relay (houseWire/houseIn, below) and jcoophl (world housing is the host's) */
+const HOUSE=["resHead","resHall","pal","palLone","palWait"];
 const STAT=["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","mat","confined","shield","block"];
 const LOOK=["face","fc","fk","fcKeep","fid","pid","age","sac","tai","tamco","duc","arts","pal","resHead","dress","ill","maid","lot","hieu","titleWorn","dh","toilette","wd","mkKnow"];  /* toilette + wd: her look of the day and the clothes she wears (jtoil toilFriendRec / toilDress, diemtrang-coop-look); hieu + titleWorn + dh: her hiệu and worn title show on the friend too (review/title-sys) */
 const J=x=>x==null?x:JSON.parse(JSON.stringify(x));
@@ -258,7 +260,7 @@ function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
  try{if(typeof sidN!=="undefined")sidN=Math.max(sidN,...allServ().map(s=>+s.sid||0).filter(n=>n<900),0)}catch(e){}}
 CW.attach=()=>{const C=CW.dying||CW.base;if(C)attach(C)};
 /* jcoopthin (thin guest, part A) reads the world split and the friend-entry builders from here: one source */
-CW.X={W_KEYS,HOST_ONLY,CM_P,MEN_P,REFF,STAT,mapMe,buildFriend,buildFriendSrv,friendSrv,myBlob,pullFriend,pushFriend,isF,J};
+CW.X={W_KEYS,HOST_ONLY,CM_P,MEN_P,REFF,STAT,HOUSE,mapMe,buildFriend,buildFriendSrv,friendSrv,myBlob,pullFriend,pushFriend,isF,J};
 CW.sendMe=P=>sendMe(P);CW.friendHome=friendHome;
 
 /* ---------- sending ---------- */
@@ -390,15 +392,19 @@ function sendPos(){if(CW.ctx||!CW.on||!CW.p2||!S||S.dead)return;const st={};for(
  const hs=houseWire(),hss=JSON.stringify(hs);
  const k=[wk(),S.buoi||0,S.place||"home",used,LIVE.map(x=>S[x]).join("/"),!!S.out,S.name,P.h,tl?JSON.stringify(tl):"",wd?JSON.stringify(wd):"",fxs,hss].join(":");if(k===CW.posKey)return;CW.posKey=k;
  sentOr(COOP.send({t:"pos",place:S.place||"home",khac:used,week:wk(),buoi:S.buoi||0,st,fh:P.h,out:!!S.out,alive:!S.dead,name:S.name,life:CW.life||0,tl,wd,fx,hs}),()=>{if(CW.posKey===k)CW.posKey=""})}
-/* robot-coop-fix-3, 2nd family (robot10-coop coop-pos after HER rebirth: «host sees guest at P:b, guest is at r3»): her HOUSE (where she lives:
-   resHead / resHall / pal / palLone / palWait, the jcoophl HOUSE set) reached the other seat only inside her character blob (new life) or the
-   merged week, so a house given to her later in the week (the new consort placed with house head 3) left her entry on the other seat at her own
-   palace until the week end. Her house now rides the pos relay like her live stats (canon ids: "me" = her pid; the reader maps its own pid to "me").
-   Display only: the week write-back never sends a house back (jcoophl keeps the room base's housing). */
-const HOUSE_W=["resHead","resHall","pal","palLone","palWait"];
-function houseWire(){const o={};for(const x of HOUSE_W)o[x]=S[x]==null?null:J(S[x]);return mapMe(o,true,me())}
+/* robot-coop-fix-3 (robot10-coop coop-pos «X sees the friend at r<N>, she is at <place>»; law 6b real people): ONE cause, her HOUSE. Her place
+   on the other seat is S.where[her id] = her relayed place, and «home» / no relay this buổi = palaceOf(her entry) — which reads her entry's
+   housing (resHead / resHall / pal / palLone / palWait). That housing reached the other seat only inside her character blob (new life) or the
+   merged week, and that seat's own palFix (render / month / deser) housed her entry like an NPC (a house over the cap evicts «the newest
+   extras», a side hall is re-picked) → her entry said «lives at r5» while she lives elsewhere. Now her house rides the pos relay like her live
+   stats (canon ids: "me" = her pid; the reader maps its own pid to "me") and her last relayed house is put back after every palFix on either
+   seat (jcoophl) and at every keepFriendPos. Display only: the week write-back never sends a house back (jcoophl keeps the room base's housing). */
+function houseWire(){const o={};for(const x of HOUSE)o[x]=S[x]==null?null:J(S[x]);return mapMe(o,true,me())}
 function houseIn(f,hs){if(!hs||typeof hs!=="object")return false;const o=mapMe(J(hs),false,me());let ch=false;
- for(const x of HOUSE_W){if(!(x in o))continue;if(JSON.stringify(f[x]==null?null:f[x])!==JSON.stringify(o[x])){if(o[x]==null)delete f[x];else f[x]=o[x];ch=true}}return ch}
+ for(const x of HOUSE){if(!(x in o))continue;if(JSON.stringify(f[x]==null?null:f[x])!==JSON.stringify(o[x])){if(o[x]==null)delete f[x];else f[x]=o[x];ch=true}}return ch}
+/* her last relayed house onto her entry again (after anything on this seat re-housed it); same life only (a reborn friend has a new entry) */
+function friendHouse(){if(!CW.on||!S)return false;const f=friendEntry(),m=CW.fpos;if(!f||!m||!m.hs||(m.name&&m.name!==f.name))return false;return houseIn(f,m.hs)}
+CW.houseWire=houseWire;CW.houseIn=houseIn;CW.friendHouse=friendHouse;
 /* her own numbers, live: shown on her entry; the week write-back baseline moves with them so the merge never counts them as mine */
 function liveStats(m){const f=friendEntry();if(!f||!m.st||(m.name&&m.name!==f.name))return false;let ch=false;
  for(const x of LIVE){const v=m.st[x];if(typeof v!=="number")continue;if(x==="rank"&&f.queen)continue;if(f[x]!==v){f[x]=v;ch=true}if(f.__b&&x in f.__b)f.__b[x]=v}
@@ -427,28 +433,12 @@ COOP.on("act",m=>{if(!m||m.k!==FK||!CW.on||m.from===CW.seat||!S)return;
 function herPl7(){try{if(!host()||!(CW.thin&&CW.thin.on&&CW.thin.on(7)))return null;const B=CW.thin.seatOf(CW.seat==="a"?"b":"a");return B&&B.S&&B.S.place||null}catch(e){return null}}
 CW.herPl7=herPl7;
 function onPos(m){if(!CW.on||m.from===CW.seat||!S)return;CW.fpos=m;const pl=mapPlace(herPl7()||m.place);const f=friendEntry();if(!f)return;
- let sc=liveStats(m);if(typeof m.fh==="string"){if(famTake())sc=true;if(CW.famGotH!==m.fh)famAsk(m.fh)}S.where=S.where||{};const was=S.where[f.id];S.where[f.id]=pl||palaceOf(f);rosterFriend(f);if(was!==S.where[f.id]||sc){refreshHere();presAll(true);if(!Q.length)render()}}
-function keepFriendPos(){if(!CW.on||!S||!S.where)return;const f=friendEntry();if(!f)return;/* part E (CW.ctx: her step on the host = the host's own place) and her relayed place: ONE rule, friendPl */S.where[f.id]=friendPl(f);rosterFriend(f)}
-/* robot-coop-fix-3 (robot10-coop coop-pos «host sees guest at r4, guest is at ksp»; law 6b real people): the friend is a PLAYER, not an NPC, but the
-   palace roster (j95: S.roster.P["v"+id], one plan row per khắc) planned her like any consort. j95's whereOf, the people-at-a-place lists, «who sees
-   whom», catches and approaches read that plan, so her screen place (S.where, from her pos relay) and the roster disagreed. ONE source: from this
-   khắc on her roster rows say where she really is (her own palace = "rest", anywhere else = "visit"); the next relay writes them again. */
-function rosterFriend(f){try{const R=S.roster;if(!R||!R.P||typeof j95kh!=="function")return;const e=R.P["v"+f.id];if(!Array.isArray(e))return;const w=S.where[f.id];if(!w)return;
- const a=w===palaceOf(f)?"rest":"visit";for(let i=j95kh();i<e.length;i++)if(Array.isArray(e[i])&&(e[i][0]!==w||e[i][1]!==a))e[i]=[w,a,null,""]}catch(e){}}
-/* robot-coop-fix-3 r2 (A/B run 5 «host sees guest at r5, guest is at ksp» at buổi 0.1, her S.where = ksp): at a new buổi j95 PLANS the roster again
-   (j95planRival, wrapped by jagday's NPC day agenda) — after her pos relay had already arrived, so her rows went back to an NPC plan until the
-   next relay. Her rows come from her real place from the moment they are planned: the OUTERMOST wrap of j95planRival (installed once every
-   module has loaded) fills the friend's rows with S.where (her place this buổi) or her palace. */
+ let sc=liveStats(m);if(typeof m.fh==="string"){if(famTake())sc=true;if(CW.famGotH!==m.fh)famAsk(m.fh)}S.where=S.where||{};const was=S.where[f.id];S.where[f.id]=pl||palaceOf(f);if(was!==S.where[f.id]||sc){refreshHere();presAll(true);if(!Q.length)render()}}
+function keepFriendPos(){if(!CW.on||!S||!S.where)return;const f=friendEntry();if(!f)return;friendHouse();/* part E (CW.ctx: her step on the host = the host's own place) and her relayed place: ONE rule, friendPl */S.where[f.id]=friendPl(f)}
+/* where the friend is on this seat, ONE rule (keepFriendPos; onPos writes the same from the message it holds): part E (CW.ctx) the host's own
+   place; else her relayed place this buổi (herPl7 at level 7); else her palace (palaceOf her entry = her relayed house, above). j9 whereOf reads
+   S.where first, so every reader (people at a place, who sees whom, catches) gets this. (j95's roster never runs in co-op: j95on() = !COOPW.on.) */
 function friendPl(f){if(CW.ctx){const o=CW.thin&&CW.thin.outerS;return o&&o.place&&o.place!=="home"?mapPlace(o.place):palaceOf(f)}const h7=herPl7();const pl=h7?mapPlace(h7):CW.fpos&&CW.fpos.week===wk()&&CW.fpos.buoi===(S.buoi||0)?mapPlace(CW.fpos.place):null;return pl||palaceOf(f)}
-setTimeout(()=>{try{if(typeof j95planRival!=="function"||j95planRival.__cwF)return;const f0=j95planRival;j95planRival=function(v,c){const P=f0.apply(this,arguments);try{if(CW.on&&S&&isF(v)&&Array.isArray(P)){const w=friendPl(v),a=w===palaceOf(v)?"rest":"visit";for(let i=0;i<P.length;i++)P[i]=[w,a,null,""]}}catch(e){}return P};j95planRival.__cwF=1}catch(e){console.error("j95planRival coop wrap",e)}},0);
-/* robot-coop-fix-3 r3 (A/B round 5 «guest sees host at r5, host is at r3» at buổi 6.0 with her S.where = r3): her roster rows are planned / written
-   by NPC code after her relay (a new week's plan before her first relay of the week, j95 approach, jagknow ag_see, jagday rq), and whereOf reads
-   the roster first (j95 wrap) — so the place the game showed for her was an NPC plan again. Where she IS comes from ONE rule on every reader:
-   the OUTERMOST whereOf (installed after every module) answers for the friend with her relayed place S.where (onPos / keepFriendPos), else friendPl. */
-setTimeout(()=>{try{if(typeof whereOf!=="function"||whereOf.__cwF)return;const w0=whereOf;whereOf=function(p){try{if(CW.on&&S&&p&&p!==S&&isF(p)&&!(typeof HA==="object"&&HA&&HA.here&&HA.here[p.id]!=null)/* jagharm: a harm landing on her right now keeps its own spot */){const w=(S.where||{})[p.id];return w||friendPl(p)}}catch(e){}return w0.apply(this,arguments)};whereOf.__cwF=1}catch(e){console.error("whereOf coop wrap",e)}
- /* the rows too (j95 at(), «who sees whom», catches, jagent / jagday read R.P rows directly): j95sync is the hub every roster planner and writer
-    calls (new plan, approach, ag_see …); after it her rows say S.where again (rosterFriend: from this khắc on) */
- try{if(typeof j95sync==="function"&&!j95sync.__cwF){const s0=j95sync;j95sync=function(){const r=s0.apply(this,arguments);try{if(CW.on&&S&&S.where){const f=friendEntry();if(f&&S.where[f.id])rosterFriend(f)}}catch(e){}return r};j95sync.__cwF=1}}catch(e){console.error("j95sync coop wrap",e)}},0);
 CW.keepFriendPos=keepFriendPos;CW.refreshHere=()=>refreshHere();
 function onBuoi(m){T("onBuoi "+m.week+"."+m.buoi+" me "+wk()+"."+(S&&S.buoi)+" Q"+Q.length+(S&&S.mg?" mg":""));if(!CW.on||!S||eW())return;CW.bend=false;CW.wantB=null;drainAg();
  /* the room moved on: if a dialog is still open, step as soon as it is closed */
