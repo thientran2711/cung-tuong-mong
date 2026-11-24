@@ -33,42 +33,44 @@ Identity uploads: s10 p84XX01ehw, s11 fHYuQqoCDY, s12 1lBjLUar4r, s19 Xm68ICQBfo
 | S51-A26 | s51 | 26 | w4COA5r7EI | DONE | viewed ok |
 | S52-A26 | s52 | 26 | iGkZDYo3uK | NEEDS_REVIEW | slight smirk/smile, prompt wants restrained mouth |
 | S53-A26 | s53 | 26 | lJhURTsgv9 | DONE | viewed ok |
-| S54-A26 | s54 | 26 | ov3tbGc829 | GENERATED (to view) | |
-| S55-A26 | s55 | 26 | cpwVve40eP | GENERATED (to view) | |
-| S10-A51 | s10 | 51 | 1lBj9kGr4r | GENERATED (to view) | |
-| S11-A51 | s11 | 51 | lJhU2WOgv9 | GENERATED (to view) | |
-| S12-A51 | s12 | 51 | xS8sihUjfW | GENERATED (to view) | |
-| S19-A51 | s19 | 51 | 1lBj6LYr4r | GENERATED (to view) | |
-| S20-A51 | s20 | 51 | 8aRm1gPIrU | GENERATED (to view) | |
-| S21-A51 | s21 | 51 | WDUTa4IcXe | GENERATED (to view) | |
-| S22-A51 | s22 | 51 | jUIlZJJLD0 | GENERATED (to view) | |
-| S23-A51 | s23 | 51 | WDUTf52cXe | GENERATED (to view) | |
-| S24-A51 | s24 | 51 | 6AKRdSIiJO | GENERATED (to view) | |
-| S25-A51 | s25 | 51 | dtNoKCoXSL | GENERATED (to view) | |
-| S51-A51 | s51 | 51 | iGkZBQ13uK | GENERATED (to view) | |
-| S52-A51 | s52 | 51 | 79Ey0LUJAL | GENERATED (to view) | |
-| S53-A51 | s53 | 51 | mEAal1UhJQ | GENERATED (to view) | |
-| S54-A51 | s54 | 51 | cpwVusX0eP | GENERATED (to view) | |
-| S55-A51 | s55 | 51 | N253XPB6D9 | GENERATED (to view) | |
-| S10-A63 | s10 | 63 | 8aRmLJ4IrU | GENERATED (to view) | |
-| S11-A63 | s11 | 63 | CqWQJBQEEy | GENERATED (to view) | |
-| S12-A63 | s12 | 63 | s7mSY6Al8e | GENERATED (to view) | |
-| S19-A63 | s19 | 63 | LwtgneeswO | GENERATED (to view) | |
-| S20-A63 | s20 | 63 | iGkZION3uK | GENERATED (to view) | |
-| S21-A63 | s21 | 63 | 9ZbioM5NYZ | GENERATED (to view) | |
-| S22-A63 | s22 | 63 | lJhUcmUgv9 | GENERATED (to view) | |
-| S23-A63 | s23 | 63 | lJhUcjngv9 | GENERATED (to view) | |
-| S24-A63 | s24 | 63 | 1lBjGiTr4r | GENERATED (to view) | |
-| S25-A63 | s25 | 63 | Sya7Va4Ub8 | GENERATED (to view) | |
-| S51-A63 | s51 | 63 | eI9Bxp3dqL | GENERATED (to view) | |
-| S52-A63 | s52 | 63 | mEAa7lwhJQ | GENERATED (to view) | |
-| S53-A63 | s53 | 63 | xS8sYhGjfW | GENERATED (to view) | |
-| S54-A63 | s54 | 63 | ksXxzLm16B | GENERATED (to view) | |
-| S55-A63 | s55 | 63 | Lwtg0WGswO | GENERATED (to view) | |
+| S54-A26 | s54 | 26 | ov3tbGc829 | NEEDS_REVIEW | faint soft smile, otherwise ok |
+| S55-A26 | s55 | 26 | cpwVve40eP | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S10-A51 | s10 | 51 | 1lBj9kGr4r | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S11-A51 | s11 | 51 | lJhU2WOgv9 | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S12-A51 | s12 | 51 | xS8sihUjfW | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S19-A51 | s19 | 51 | 1lBj6LYr4r | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S20-A51 | s20 | 51 | 8aRm1gPIrU | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S21-A51 | s21 | 51 | WDUTa4IcXe | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S22-A51 | s22 | 51 | jUIlZJJLD0 | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S23-A51 | s23 | 51 | WDUTf52cXe | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S24-A51 | s24 | 51 | 6AKRdSIiJO | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S25-A51 | s25 | 51 | dtNoKCoXSL | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S51-A51 | s51 | 51 | iGkZBQ13uK | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S52-A51 | s52 | 51 | 79Ey0LUJAL | NEEDS_REVIEW | slight smirk (prompt wants restrained mouth) |
+| S53-A51 | s53 | 51 | mEAal1UhJQ | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S54-A51 | s54 | 51 | cpwVusX0eP | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S55-A51 | s55 | 51 | N253XPB6D9 | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S10-A63 | s10 | 63 | 8aRmLJ4IrU | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S11-A63 | s11 | 63 | CqWQJBQEEy | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S12-A63 | s12 | 63 | s7mSY6Al8e | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S19-A63 | s19 | 63 | LwtgneeswO | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S20-A63 | s20 | 63 | iGkZION3uK | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S21-A63 | s21 | 63 | 9ZbioM5NYZ | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S22-A63 | s22 | 63 | lJhUcmUgv9 | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S23-A63 | s23 | 63 | lJhUcjngv9 | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S24-A63 | s24 | 63 | 1lBjGiTr4r | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S25-A63 | s25 | 63 | Sya7Va4Ub8 | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S51-A63 | s51 | 63 | eI9Bxp3dqL | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S52-A63 | s52 | 63 | mEAa7lwhJQ | NEEDS_REVIEW | faint soft smile, otherwise ok |
+| S53-A63 | s53 | 63 | xS8sYhGjfW | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S54-A63 | s54 | 63 | ksXxzLm16B | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
+| S55-A63 | s55 | 63 | Lwtg0WGswO | DONE | viewed ok: bare face, no text, master skin/painting, age direction ok |
 
 ## NOTE
 Worker 1 resumed (window is 1M tokens; early rollover was a mistake). Template quirk kept unchanged: age26 prompt still says 'At16 this is youthful self-assurance'.
-## OLD HANDOVER (superseded)
-Done/viewed: s10,s11,s12,s19,s20,s21 @16 (6/60). s22@16 generated, needs a look. Remaining: age16 s23,s24,s25,s51,s52,s53,s54,s55 (8) + ages 26,51,63 x 15 = 45. Each call must carry the full ~9.6k-char prompt, so ~3k tokens per job: suggest successors split by age (one per age). Identity upload ids above are reusable.
-## Resume note
-Next: age16 s22,s23,s24,s25,s51..s55; then ages 26,51,63 for all 15. Pre-cut prompt files were built in session scratchpad (re-create: delete the operator sentence from Prompts/*.txt).
+## SUMMARY (final, worker 1)
+- 60/60 jobs generated (ages 16/26/51/63 x 15 people), each viewed once. DONE 55, NEEDS_REVIEW 5 (soft smile/smirk on a restrained-mouth prompt): s54@16 iGkZcVE3uK, s52@26 iGkZDYo3uK, s54@26 ov3tbGc829, s52@51 79Ey0LUJAL, s52@63 mEAa7lwhJQ, No text, no makeup look, skin/painting consistent with master in all viewed. No retries used. Age 39 not run (on hold).
+- Minor notes: s20@26 (huGfKNLvqL) has a long loose ribbon beside the hair; s25@16 (bxpksfd5Y2) reads slightly older than 16.
+- NOT DONE: contact sheets (original | result) per age and CDN upload img/_review/face-master03/proud/ — outputs stay on Magnific; open any via https://www.magnific.com/app/creation/<output id>. Foreman can order a follow-up worker for sheets.
+- Cost: 60 x 135 = 8 100 credits (balance was 2 639 842 at start).
+- Template quirk kept unchanged: the age 26/51/63 prompts still end the personality block with 'At16 this is youthful self-assurance'.
