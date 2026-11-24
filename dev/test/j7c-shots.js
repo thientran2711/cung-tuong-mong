@@ -9,16 +9,18 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
  for(const dev of ['fold','ipadAir']){const ctx=await D.newDeviceContext(b,dev,{deviceScaleFactor:2,reducedMotion:'reduce'});
   await ctx.route(u=>!/^http:\/\/127\.0\.0\.1[:/]/.test(u.href)&&/^https?:/.test(u.href),r=>r.abort());const p=await ctx.newPage();p.on('pageerror',e=>errs.push(dev+': '+e.message));
   const g=await D.openHost(p,'http://127.0.0.1:'+srv.address().port+'/',{timeout:120000});await g.waitForFunction(()=>window.__ctmBuilt===1&&typeof start==='function',null,{timeout:120000});
-  await g.evaluate(X=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<40;i++){if(i)try{store.set(NL_KEY,null)}catch(e){}start();if(!(S.origin&&S.origin.k==='cnv')&&!(window.isSrv&&isSrv()))break}['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});
+  await g.evaluate(X=>{try{window.kmOn=()=>false}catch(e){}/* no reward scenes over the card in this test */try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<40;i++){if(i)try{store.set(NL_KEY,null)}catch(e){}start();if(!(S.origin&&S.origin.k==='cnv')&&!(window.isSrv&&isSrv()))break}['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});
    for(const s of X)if(!J7SEEDS.some(y=>y.id===s.id))J7SEEDS.push(s);S.rank=Math.max(S.rank,2);while(Q.length)Q.shift();render()},EXTRA);await p.waitForTimeout(2500);
   await RL.passNewLifePopups(g).catch(()=>{});
   for(let k=0;k<14;k++){let hit=false;for(const t of ['Nhận thân phận','Nhận','Bỏ qua','Đã hiểu','Tạ ơn','Tuân chỉ','Tiếp','Vào cung ngay']){const L=g.locator('button:visible').filter({hasText:new RegExp('^\\s*'+t)});
     if(await L.count().catch(()=>0)){await L.first().click({timeout:1500}).catch(()=>{});hit=true;await p.waitForTimeout(500);break}}
    if(!hit)break}
+  await g.waitForFunction(()=>{try{for(let j=0;j<8&&Q.length&&!S.dead;j++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}}catch(e){try{Q.shift()}catch(x){}}
+   const n=document.getElementById('next');return !!n&&!n.disabled&&!Q.length},null,{polling:150,timeout:60000}).catch(()=>{});await p.waitForTimeout(800);
   await p.keyboard.press('Escape').catch(()=>{});await p.waitForTimeout(400);
   const ids=IDS.length?IDS:await g.evaluate(()=>j7cReady().slice(0,3).map(x=>x.sd.id));
   for(const id of ids){const ok=await g.evaluate(id=>{j7cSeeds();const sd=J7I[id];if(!sd)return 'no seed';const C=j7cCast(sd);if(!C)return 'no cast';const d=mkP("j7c",{sid:id,c:C});if(!d)return 'no card';
-    while(Q.length)Q.shift();pushDil(d,"Chuyện trong cung");return 'ok'},id);
+    while(Q.length)Q.shift();try{closeModal()}catch(e){}while(Q.length)Q.shift();pushDil(d,"Chuyện trong cung");return 'ok'},id);
    await p.waitForTimeout(1200);const f=path.join(OUT,`j7c-${id}-${dev}.png`);await p.screenshot({path:f});console.log(id,dev,ok,f)}
   await ctx.close()}
  console.log('errors',errs.length,errs[0]||'');await b.close();srv.close()})();
