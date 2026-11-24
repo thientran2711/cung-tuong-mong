@@ -49,7 +49,7 @@ const STEP=()=>{const c=__co();if(c.frozen||c.waiting)return'coop';if(typeof S==
 /* per-buổi view: NPC whereabouts (from the shared state) + where each sees the other */
 const BUOI=()=>{if(typeof S==='undefined'||!S||S.dead)return null;const c=__co();const f=(rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null);
   /* one place name on both pages (robot-coop-fix-1): my own 'home' = H:<my seat>; the friend's palace as THIS page names it (palaceOf(f), e.g. r3 on the host; the game maps her 'home' there, jcoopworld mapPlace) = H:<her seat>. Was: 'home' → r901/r902 on each page, so the host's r3 for her palace never matched her r902 (false coop-pos every buổi). */
-  const ms=COOPW.seat==='a'?'a':'b',fs=ms==='a'?'b':'a';let fp=null;try{fp=f&&f.id!=null?palaceOf(f):null}catch(e){}const hm=x=>x==='home'?'H:'+ms:(fp&&x===fp?'H:'+fs:x);
+  const ms=((window.COOP&&COOP.state&&COOP.state.you)||COOPW.seat)==='a'?'a':'b'/* the room seat (CW.seat can be the other seat inside a thin withSeat step) */,fs=ms==='a'?'b':'a';let fp=null;try{fp=f&&f.id!=null?palaceOf(f):null}catch(e){}const hm=x=>x==='home'?'H:'+ms:(fp&&x===fp?'H:'+fs:x);
   return{key:c.week+'.'+(S.buoi||0),ready:!c.waiting&&!c.frozen&&!document.querySelector('#coopfz')&&(COOPW.seat==='a'||COOPW.whereKey===c.week+':'+(S.buoi||0)),where:Object.entries(S.where||{}).filter(([k,v])=>!(+k>=900)&&typeof v==='string').map(([k,v])=>k+'@'+v).sort().join(),
    fpl:f&&f.id!=null?hm(whereOf(f)):null,me:f&&f.id==null?null:hm(S.place||'home'),fst:f&&f.id!=null?[f.sung,f.danh,f.suc].join('/'):null,fk:f?k61St(f):-1,mst:[S.sung,S.danh,S.suc].join('/')}};
 /* the world as this client sees it (only shared truth, no personal data) */
