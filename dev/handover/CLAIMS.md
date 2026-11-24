@@ -1469,3 +1469,4 @@ PROMO-BUILD 2 follow-ups: her HH nomination (law 1) + deathbed/truy phong exams 
 | REVIEW kit-noprewarn (sonnet SMALL; briefs/b-kit-noprewarn-review.md; ORDER MAIN 119 08:25Z) of review/kit-noprewarn 1d4fc04d | review/kit-noprewarn-r1; reports/kit-noprewarn.md | B | session_01N1tNP5dbixXSuyxL38fcxB | RUNNING | 24/11 08:45Z |
 | ROBOT-COOP FIXER #3 (opus) | review/robot-coop-fix-1 r2 + review/robot-coop-fix-2 | B | session_01N1tNP3zZjxpPAGUUKwUTEY | RUNNING | 24/11 08:35Z |
 | SIDE-LINE DLG LEAD #3 (opus) | review/sideline-dlg (+ -2 second wave) | B | session_01N1tNP6z16eEuagFdH5WCZE | RUNNING | 24/11 08:15Z |
+kit-optfit SMALL review | review/kit-optfit-r1 | session_01N1tNP2kA3NCKySUjhemX3g (owner B) | RUNNING | 24/11 08:46Z
