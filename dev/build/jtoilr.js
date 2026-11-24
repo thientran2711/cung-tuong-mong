@@ -28,7 +28,7 @@ function toilGiveCost(p){let st=30;try{st=BAL.pay[Math.min(7,rkOf(p||S))]||30}ca
 function toilGiveItem(cost){const R=toilRx();let best=null;try{(S.inv||[]).forEach((e,i)=>{const it=e&&IT[e.k];if(!it||e.h||e.w||e.t||e.wk||!(it.pr>0))return;if(econNo(S,e)||econGiver(e))return;const v=econPrice(S,e);if(v<cost*R.giveItemLo||v>cost*R.giveItemHi)return;
   const d=Math.abs(v-cost);if(!best||d<best.d)best={i,d,n:it.n,pr:v}})}catch(e){}return best}
 /* the kit's own hint wording (KIT §28.6 kitHint, level >= 1): the ladder word of the odds (word(), VANPHONG) folded the way kitHint folds it. Level 0 (vague) names no chance. */
-const toilOddsW=o=>{const w=word(o);return /^(Nắm chắc|Rất chắc|Chắc)$/.test(w)?"dễ thành":/^(Khó|Liều)$/.test(w)?"khó thành":"thành bại khó đoán"};
+const toilOddsW=o=>{const w=word(o);return kitOddsIdx(w)>=5?"thường ổn":kitOddsIdx(w)<=2?"dễ hỏng":"hên xui"};
 function toilHhOk(){try{return qOn()&&S.rank<7}catch(e){return false}}
 /* ---- ONE rule per answer for her and an NPC consort (AG-ALL-2e3: jagacts3 p3ToilAns / p3ToilPraise / p3ToilAsk run the same functions; p = who answers) ---- */
 function toilTellO(p,h){const R=toilRx();return cl(Math.round(R.tellBase+(p.hh||0)/R.tellHhDiv+(toilGrudgeOf(h,p)?R.grudgeTell:0)),R.tellMin,R.tellMax)}

@@ -213,8 +213,8 @@ function cyBook(how){const c=cyb();c.read=cyCur();const F=[];const L=consorts().
  for(const p of L){const a=cyRep(p,0),b=cyRep(p,-1);const n=cyNights(p);
   F.push({who:p,kind:p===S?"me":"person",text:`${p===S?"Ta":p.name}: tháng này ${cyRepText(a)} · tháng trước: ${cyRepText(b)}${n?` · ${n} đêm thị tẩm`:""}`});
   if(p===S)continue;
-  if(a.s==="miss"||b.s==="miss"){if(cyPreg(p)&&S.cyKnow[p.id]!==p.pregWk){S.cyKnow[p.id]=p.pregWk;try{noteAdd(p.id,"Sổ nguyệt sự: tháng này không báo; e là đã có tin vui")}catch(e){}found.push(`${p.name} tháng này không báo nguyệt sự: e là đã có tin vui.`)}}
-  if(p.preg&&p.pregMismatch&&!p.fake&&p.cyEvi!==p.pregWk){p.cyEvi=p.pregWk;const g=evA(S,p,BAL.eff.jcycle.evG);if(g){try{noteAdd(p.id,`Sổ nguyệt sự: ngày nàng ta có thai không khớp đêm thị tẩm nào (chứng cứ +${g})`)}catch(e){}found.push(`Ngày ${p.name} có thai không khớp đêm thị tẩm nào trong sổ: chứng cứ +${g}.`)}}
+  if(a.s==="miss"||b.s==="miss"){if(cyPreg(p)&&S.cyKnow[p.id]!==p.pregWk){S.cyKnow[p.id]=p.pregWk;try{noteAdd(p.id,"Sổ nguyệt sự: tháng này không báo; e là đã có tin vui",1)}catch(e){}found.push(`${p.name} tháng này không báo nguyệt sự: e là đã có tin vui.`)}}
+  if(p.preg&&p.pregMismatch&&!p.fake&&p.cyEvi!==p.pregWk){p.cyEvi=p.pregWk;const g=evA(S,p,BAL.eff.jcycle.evG);if(g){try{noteAdd(p.id,`Sổ nguyệt sự: ngày nàng ta có thai không khớp đêm thị tẩm nào (chứng cứ +${g})`,1)}catch(e){}found.push(`Ngày ${p.name} có thai không khớp đêm thị tẩm nào trong sổ: chứng cứ +${g}.`)}}
   if(p.preg&&p.fake&&a.s==="ok"&&p.cyEvi!=="f"+p.pregWk){p.cyEvi="f"+p.pregWk;cyDeed(p,"cyfk:"+p.pregWk,"cyfake","báo có thai giả mà ma ma cung ấy vẫn báo nguyệt sự");const g=evA(S,p,BAL.eff.jcycle.evG_2);if(g)found.push(`${p.name} báo có thai mà ma ma cung ấy vẫn báo nguyệt sự: chứng cứ +${g}.`)}}
  const opts=[];const rum=c.rum;
  if(rum&&rum.m===cyCur()&&!rum.fixed&&!rum.self){const fx=rum;opts.push({n:"Xin Kính sự phòng chép lại cho đúng",fx:{},x:`sổ ghi đúng, tin đồn tắt · biết kẻ sửa sổ: ${typeof chanceW==="function"?chanceW(((S.court&&S.court.ksp&&S.court.ksp.af.me)||0)>=B().fixAf?90:40):""}`,

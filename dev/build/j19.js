@@ -23,11 +23,11 @@ function kcls(t){const s=t.replace(/<[^>]+>/g,"").trim();if(!s)return"n";if(/b�
 function eff(t){t=String(t).trim();if(!t)return"";if(/^<span class="(g|r)">/.test(t)&&/<\/span>$/.test(t)&&(t.match(/<span/g)||[]).length===1)return t.replace(/^<span class="(g|r)">/,'<span class="ef $1">');
  if(/^<b class="r">/.test(t))return `<span class="ef r">${t.replace(/<[^>]+>/g,"")}</span>`;return `<span class="ef ${kcls(t)}">${t}</span>`}
 function effList(x,def){const parts=[].concat(x).filter(Boolean).join(" · ");if(!parts)return eff("không");return kSplitTop(parts,/ · |, /y).filter(s=>s.trim()).map(s=>{let h=eff(s);if(def&&/class="ef n"/.test(h)&&!KNEU.test(s.replace(/<[^>]+>/g,"").trim()))h=h.replace('class="ef n"',`class="ef ${def}"`);return h}).join('<span class="ksep">·</span>')}
-function oddsChip(w){if(!w)return"";/* no odds word = no roll (ODDS CAP: the ladder has no "sure" word) */const m=String(w).match(ODDW);const k=m?m[1]:w;const lv=KIT_ODDS.indexOf(k)<0?undefined:KIT_ODDS.indexOf(k);const rest=String(w).replace(k,"").replace(/^\s*·\s*/,"");
+function oddsChip(w){if(!w)return"";w=kitOddsNorm(w);/* no odds word = no roll (ODDS CAP: the ladder has no "sure" word) */const m=String(w).match(ODDW);const k=m?m[1]:w;const lv=KIT_ODDS.indexOf(kitOddsCanon(k))<0?undefined:KIT_ODDS.indexOf(kitOddsCanon(k));const rest=String(w).replace(k,"").replace(/^\s*·\s*/,"");
  return `<span class="oc oc${lv==null?2:lv}">${k}</span>${rest?`<span class="ef ${/khó hơn/.test(rest)?"r":/dễ hơn/.test(rest)?"g":"n"}">${rest}</span>`:""}`}
 /* parse a 'word · tốn: … · thành: … · hỏng: … · note' line into kit HTML */
 function kitParse(str){str=String(str||"").trim();if(!str)return"";const segs=str.split(/ · (?![^<]*>)/);let odds="",out=[];let cur=null;
- for(let s of segs){const plain=s.replace(/<[^>]+>/g,"").trim();const mo=plain.match(/^(Nắm chắc|Rất chắc|Khá chắc|Năm ăn năm thua|Chắc|Khó|Liều)(?=$|\s|·)/);
+ for(let s of segs){const plain=s.replace(/<[^>]+>/g,"").trim();const mo=plain.match(new RegExp("^("+KIT_ODDS_ALT+")(?=$|\\s|·)"));
   if(!odds&&mo&&plain.length<=mo[1].length+2){odds=mo[1];continue}
   if(/^Quẻ: /.test(plain)&&odds){odds+=" · "+plain;continue}
   const ml=s.match(/^\s*(?:<[^>]+>)*\s*(tốn|thành|hỏng|bại|ngay|kèm|Tốn|Thành|Hỏng|Bại|Kèm)\s*:\s*/);if(ml){cur={l:ml[1].toLowerCase().replace('bại','hỏng'),v:[s.slice(ml[0].length)]};out.push(cur);continue}

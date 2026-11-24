@@ -36,7 +36,7 @@ function fakeIllRisk(){const c=BAL.tw.g.illCatch/100;return Math.round(100*(1-Ma
 function illNightF(p){const i=illOf(p);if(p.fakeIll)return 1.2;return !i?1:ILL[i.k].cont?0:i.st>=2?.3:.7}
 function treatO(p,way){return oddsCl(lotB(p,"Sức khỏe")+(way==="ty"?55+careOdds(p):way==="self"?30+careY(p):20+careOdds(p)))}
 function treat(p,way){const i=illOf(p);if(!i)return"";let o=lotB(p,"Sức khỏe")+(way==="ty"?55+careOdds(p):way==="self"?30+careY(p):20+careOdds(p));
- const bribed=typeof thyBribedBy==="function"?thyBribedBy(p):mindPickBy(liveRivals(true).filter(v=>v!==p&&S.court&&(S.court.ty.af[v.id]||0)>=30&&hostility(v,p)>=40),v=>hostility(v,p)*mindW(v,"bribe"),null);/* npc-mind: was FIRST */
+ const bribed=typeof thyBribedBy==="function"?thyBribedBy(p):mindPickBy(liveRivals(true).filter(v=>v!==p&&!v.coop/* E44j (c) T9 family: a co-op friend entry is a player seat, never the NPC briber (as jthaiy bribers rv) */&&S.court&&(S.court.ty.af[v.id]||0)>=30&&hostility(v,p)>=40),v=>hostility(v,p)*mindW(v,"bribe"),null);/* npc-mind: was FIRST */
  const ob=way==="ty"&&bribed?npcWhy("thyHarm",{p,b:bribed},()=>roll(BAL.ag.why.thyHarm.p)):null;/* npc-purpose G2: only a rival who really paid the physician (thyBribedBy) and still wants her harmed; the old 25 = the success */
  if(ob){i.st=Math.min(3,i.st+1);return `<span class="r">Thang thuốc của thái y làm bệnh nặng thêm.</span> (Có kẻ đã mua chuộc thái y?) `}
  if(roll(oddsCl(o))){p.ill=null;return `${NMc(p)} khỏi bệnh. `}if(i.st>1&&roll(BAL.rk.treatStep)){i.st--;return `Bệnh đỡ, còn ${STG[i.st]}. `}return "Bệnh chưa thuyên giảm. "}
@@ -66,7 +66,7 @@ function lotTag(dom,o){const b=lotB(S,dom);if(!b)return"";const d=o==null?0:ladI
 /* the lot in plain words: scope, direction, the cards it touches */
 function lotEffect(l){if(!l)return"";if(l.dom==="Hung")return l.lv>=3?"Tuần này phi tần dễ ra tay hại ngươi hơn (gấp rưỡi). Nên giữ mình, ít ra ngoài.":"";const b=LVB[l.lv];if(!b)return"Tuần này không có gì thay đổi.";
  const names=[...new Set((deck||[]).filter(a=>a.dom===l.dom).map(a=>a.n).concat(Object.keys(ACTDOM).filter(k=>ACTDOM[k]===l.dom&&ACT[k]).map(k=>ACT[k].n)))].slice(0,5);
- const st=Math.abs(b)>=10?"khoảng một bậc":"nửa bậc";const ex=b<0?(Math.abs(b)>=10?"Chắc → Khá chắc":"có khi Chắc → Khá chắc"):(b>=10?"Khá chắc → Chắc":"có khi Khá chắc → Chắc");
+ const st=Math.abs(b)>=10?"khoảng một bậc":"nửa bậc";const W5=KIT_ODDS[5],W4=KIT_ODDS[4];const ex=b<0?(Math.abs(b)>=10?`${W5} → ${W4}`:`có khi ${W5} → ${W4}`):(b>=10?`${W4} → ${W5}`:`có khi ${W4} → ${W5}`);
  return `Tuần này: các việc thuộc «${l.dom}» ${b<0?"khó":"dễ"} thành hơn ${st} (${ex}).${names.length?` Gồm: ${names.join(", ")}${names.length>=5?"…":""}.`:""}`}
 function lotHTML(l){const L=LOTS[l.i];return `<div class="xam"><div class="tube">Xăm</div><div class="stick">${LV[l.lv]}</div></div><p style="text-align:center"><b>Quẻ ${LV[l.lv]}</b> · ${l.dom}</p><p style="text-align:center;font-style:italic">${L[1].replace("\n","<br>")}</p><p class="past" style="text-align:center">${L[2]}</p><p style="text-align:center"><span class="ef ${LVB[l.lv]<0||(l.dom==="Hung"&&l.lv>=3)?"r":LVB[l.lv]>0?"g":"n"}">${lotEffect(l)}</span></p>`}
 function newLots(){const l=drawLot(S,false);S.relot=0;if(worldOn())for(const v of liveRivals(true))drawLot(v,false);/* NPC lots: host only */log(`Xin xăm: quẻ ${LV[l.lv]} · ${l.dom}.`);if(!window.__dawnOn)Q.push({t:"Gieo quẻ đầu tuần",h:lotHTML(l)})}

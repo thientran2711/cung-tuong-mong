@@ -86,9 +86,9 @@ function mK(p){S.mindK=S.mindK||{};const k=mKey(p);return S.mindK[k]||(S.mindK[k
 function likeKnown(p){if(p===S||own(p))return true;if(isEmp(p)){const K=S.emp.known||{};return Object.keys(LIKES).some(f=>K[f])}if(jdisLikes(p)&&disLikeKeys(p).length)return disLikeKnown(p).length>0;return !!mK(p).l}
 function disKnownL(p){if(p===S||own(p))return mindDis(p);if(jdisOwn(p)&&typeof disKnown==="function")return disKnown(isEmp(p)?"emp":isTh(p)?"th":p);return mK(p).d}
 function learnLike(p,why){if(likeKnown(p)||isEmp(p))return false;if(jdisLikes(p)&&disLikeKeys(p).length)return !!disLikeLearn(p,null,why);mK(p).l=1;const nm=pName(p);const t=`${why||"Dò được"}: ${nm} thích ${keyName(mindLikeRaw(p))}`;
- try{if(p&&p.id!=null&&isRiv(p)&&typeof noteAdd==="function")noteAdd(p.id,t);else log(`<span class="past">${t}.</span>`)}catch(e){}return true}
+ try{if(p&&p.id!=null&&isRiv(p)&&typeof noteAdd==="function")noteAdd(p.id,t);else{log(`<span class="past">${t}.</span>`);kitKnow({key:"like:"+(p&&p.id!=null?p.id:nm),text:`${t}.`})}}catch(e){}return true}
 function learnDis(p,k,why){if(jdisOwn(p)&&typeof disLearn==="function")return disLearn(isEmp(p)?"emp":isTh(p)?"th":p,k,why);const D=mindDis(p),K=mK(p).d;k=k||D.find(x=>!K.includes(x));
- if(!k||K.includes(k)||!D.includes(k))return null;K.push(k);try{log(`<span class="past">${why||"Dò được"}: ${pName(p)} không ưa ${keyName(k)}.</span>`)}catch(e){}return k}
+ if(!k||K.includes(k)||!D.includes(k))return null;K.push(k);try{log(`<span class="past">${why||"Dò được"}: ${pName(p)} không ưa ${keyName(k)}.</span>`);kitKnow({key:"dis:"+(p&&p.id!=null?p.id:pName(p))+":"+k,text:`${why||"Dò được"}: ${pName(p)} không ưa ${keyName(k)}.`})}catch(e){}return k}
 function pName(p){if(p===S)return"ngươi";if(isEmp(p))return"Hoàng thượng";if(isTh(p))return"Thái hậu";const o=obj(p);return o&&o.queen?"Hoàng hậu":String(o&&o.name||"")}
 /* ---------- the record ---------- */
 function mindOf(p0){const p=obj(p0);if(!p)return null;let net=[];try{net=traitsOf(isTh(p0)?"th":isEmp(p0)?S.emp:p0)||[]}catch(e){}

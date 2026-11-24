@@ -250,7 +250,7 @@ window.kitOptCompactRows=kitOptCompactRows;
 /* a picture-less option gets the §59 placeholder in the same slot when a sibling has a picture (one form per dialog) */
 let KIT_OPT_UNI=0;function kitOptUnify(b){if(KIT_OPT_UNI)return;try{KIT_OPT_UNI=1;const c=b.parentElement;if(!c)return;const sib=[...c.children].filter(x=>x.matches&&x.matches("button.ka")&&x.matches(KIT_OPT_SEL));if(!sib.some(x=>x.querySelector(":scope > .kaart")))return;
  sib.forEach(x=>{if(x.querySelector(":scope > .kaart")||x.classList.contains("kcard"))return;x.__koph=1;delete x.dataset.kopt;kpOptArt(x);kitOptCompactRows(x);kitOptFinal(x)})}catch(e){}finally{KIT_OPT_UNI=0}}
-function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.classList.contains("kcard")||b.closest(".pc"))return;
+function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.classList.contains("kcard")||b.closest(".pc")||b.classList.contains("kbare"))return;/* KIT §93.7 bare selection card: no rows */
  {const k1=b.querySelector("small.kb");if(b.__kofSig&&k1&&b.__kofSig===kitOptSig(b,k1))return}/* idempotent: our own DOM edits must not re-trigger the observers that call us */
  b.querySelectorAll(".kfill,.kobang,.kdup").forEach(e=>e.remove());b.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
  const body=b.querySelector(":scope > .kabody")||b;let kb=body.querySelector(":scope > small.kb, :scope > .kb");if(!kb){kb=document.createElement("small");kb.className="kb";body.appendChild(kb)}
@@ -395,7 +395,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2d",title:"Th�
 /* kit sample page (§6.3, review/pcard-actrow): the acts of a person card = the same long row, one per line (pop-up / tab / any width) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.3",title:"Việc trên thẻ người: ảnh vuông + Tốn/Được, ô thông tin full-width dưới",html:()=>
  `<div class="pc"><div class="pcr"><div class="pcb">`+
- [["Tâm sự","tốn: 1 khắc · được: thiện cảm +6 · ghi chú: chỉ làm được khi nàng ta ở nhà"],["Sai đi dò la","Năm ăn năm thua · tốn: 2 khắc · được: biết 2 điều thật về nàng ta, "+evSg(BAL.ag.ev.one)+" · mất: thiện cảm -5 · cần: đã gặp mặt"],["Nghe ngóng chung","tốn: 1 khắc · được: biết 1 điều thật trong cung (hay về người đang gây chuyện)"]]
+ [["Tâm sự","tốn: 1 khắc · được: thiện cảm +6 · ghi chú: chỉ làm được khi nàng ta ở nhà"],["Sai đi dò la","Tùy duyên · tốn: 2 khắc · được: biết 2 điều thật về nàng ta, "+evSg(BAL.ag.ev.one)+" · mất: thiện cảm -5 · cần: đã gặp mặt"],["Nghe ngóng chung","tốn: 1 khắc · được: biết 1 điều thật trong cung (hay về người đang gây chuyện)"]]
   .map(([n,x],i)=>pbtn(`data-kitsample="pc${i}"`,n,typeof kitParse==="function"?kitParse(x):x,"")).join("")+`</div></div></div>`})}catch(e){}
 /* GOAL / TASK cards (owner 16/11 21:10Z, chapter goal list "Đi làm: Học một môn tài nghệ" had no picture): an "Đi làm: <việc>" option is matched on the
    task itself (prefix dropped), and when nothing names a picture it shows the task's act / act-category picture (kitActArt) — every goal card has one. */

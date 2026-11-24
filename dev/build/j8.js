@@ -423,7 +423,7 @@ function promoteP(p){if(rkOf(p)>=7||!promoReqP(p).every(x=>x[0]))return"";const 
 function promote(){return promoteP(S)}
 function birth(fake){return birthP(S,fake)}
 function pregMonth(){return pregMonthP(S)}
-function maidMonthP(p){if(!p.maid)p.maid=maidMk(p);const m=p.maid;m.loyal=cl(m.loyal-BAL.eff.j8.loyalMaidMonthP,0,100);if(m.loyal>=BAL.loy.warn||!npcWhy("maidSell",{m,p},()=>roll(BAL.ag.why.j8.sellP)))return"";/* sellP = the old monthly chance a buyer reaches the disloyal maid; cd only after a sale */const pool=others(p);if(!pool.length)return"";
+function maidMonthP(p){if(!p.maid)p.maid=maidMk(p);const m=p.maid;m.loyal=cl(m.loyal-BAL.eff.j8.loyalMaidMonthP,0,100);if(m.loyal>=BAL.loy.warn||!npcWhy("maidSell",{m,p},()=>roll(BAL.ag.why.j8.sellP)))return"";/* sellP = the old monthly chance a buyer reaches the disloyal maid; cd only after a sale */const pool=others(p).filter(x=>!x.coop)/* E44i T9 (law 6c + 1): a co-op friend entry is a player seat, never the NPC buyer (as jsteal stEligible, jky, npwAsk) */;if(!pool.length)return"";
  const pr=x=>Math.round(-BAL.tw.maid.bac*econSchemeMul(x,p));/* two-way law: buying a maid costs the player's price (Mua người trong cung nàng, Dùng bạc, same rank/guard multiplier); an NPC who cannot pay does not buy */const a=mindPickBy(pool.filter(x=>(x.bac||0)>=pr(x)),x=>Math.max(BAL.mind.pick.j8buy.floor,BAL.mind.pick.j8buy.top-rel(x,p))*mindW(x,"bribe"),null);/* npc-mind: was ARGMIN rel */if(!a)return"";ap(a,{bac:-pr(a)});const me=p===S;let ev;
  if(p.schemes>0){ap(p,{danh:-10});evA(a,p,BAL.eff.j8.evMaidMonthP);relAdd(a,p,BAL.eff.j8.maidMonthP);ev=me?`<span class="r">${m.name} bị ${a.name} mua chuộc, đem chuyện ngươi bày mưu hại người kể ra ngoài.</span> Danh ${balSg(BAL.eff.j8.maidMonthP)}. `:`Cung nữ của ${p.name} bị ${NM(a)} mua chuộc, khai ra mưu kế của chủ. `;punish(p,"bị cung nữ tố giác mưu kế",2)}
  else{/* IT05 (law 6c REAL OBJECTS, OD:L1313): the bought maid takes a REAL piece out of her chest to the one who bought her (jlost case "held":
@@ -468,7 +468,7 @@ function rivalsTurn(){const live=liveRivals(true);let ev="";
  for(const v of live){if(!v.alive||v.out)continue;v.sung=cl(v.sung+R(3)-1,0,100);if(v.block)v.block--;
   if(S.sung>v.sung-10&&!v.queen&&roll(33))v.rel-=1;if(v.queen&&S.rank>=4&&roll(50))v.rel-=1;
   if(S.sac>75)ghenUp(v,1,"thấy nhan sắc ngươi hơn người",S);v.ghen=cl(v.ghen-(v.rel>20?3:1),0,100);v.pg=Math.max(0,v.pg-1);
-  if(v.queen&&!(window.agDOn&&agDOn())){const g=mindPickBy(others(v).filter(p=>evG(v,p)>=BAL.ag.ev.judge&&rel(v,p)<0),p=>evG(v,p)*BAL.mind.pick.j8ev.ev-rel(v,p)/BAL.mind.pick.j8ev.rel,v);if(g&&roll(35*mindW(v,"punish")))/* npc-mind: was FIRST + flat 35 */{ev+=seenNPC(v,g,judge(v,g));if(S.dead)return ev;continue}}
+  if(v.queen&&!v.coop/* E44j (c) T9 family: her entry as Hoàng hậu never judges by an NPC roll (a target stays a target: law 1) */&&!(window.agDOn&&agDOn())){const g=mindPickBy(others(v).filter(p=>evG(v,p)>=BAL.ag.ev.judge&&rel(v,p)<0),p=>evG(v,p)*BAL.mind.pick.j8ev.ev-rel(v,p)/BAL.mind.pick.j8ev.rel,v);if(g&&roll(35*mindW(v,"punish")))/* npc-mind: was FIRST + flat 35 */{ev+=seenNPC(v,g,judge(v,g));if(S.dead)return ev;continue}}
   const t=pickTarget(v);if(!t)continue;
   let want=((v.malice/100)*(rel(v,t)<0?1:.25)+hostility(v,t)/200)*(rkOf(t)>=rkOf(v)-1||(t===S&&v.ghen>=60)?1:.4);if(t.shield)want*=.5;
   if(roll(want*4)){ev+=seenNPC(v,t,npcAct(v,t));if(S.dead)return ev}}
@@ -487,7 +487,7 @@ if(queenP())S.vacSince=null;
  return ev}
 function rivalsMonth(){let ev="";
  for(const v of liveRivals(true)){if((S.storms||0)&&roll(4*S.storms)){ap(v,{suc:-15});}if(v.confined)v.confined--;if(v.shield)v.shield--;if(v.pray)v.pray--;if(v.fert)v.fert--;v.anthai=0;
-  itemMonth(v);ev+=seenNPC(v,v,"")||"";const pm=pregMonthP(v);if(pm)ev+=pm;if(!v.alive||v.out)continue;anMonth(v);ev+=npcMonthly(v);ev+=maidMonthP(v);
+  itemMonth(v);ev+=seenNPC(v,v,"")||"";const pm=pregMonthP(v);if(pm)ev+=pm;if(!v.alive||v.out)continue;anMonth(v);if(!v.coop)ev+=npcMonthly(v)/* E44j (c) T9 family (law 1 + 6c): her entry's month (study, buy, use / wear her pieces, gifts, deeds) is her own seat's, never an NPC roll on the host: useItem here used up her piece → b4Ops «rm gone» */;ev+=maidMonthP(v);
   if(v.duc>=BAL.ducLv.up)v.th=cl(v.th+1,-100,100);else if(v.duc<BAL.ducLv.down)v.th=cl(v.th-1,-100,100);ev+=promoteP(v)}
  /* Thái hậu and the Empress reward or punish, by the same rule for every consort */
  const qq=queenP();

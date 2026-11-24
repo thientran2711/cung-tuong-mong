@@ -213,7 +213,7 @@ function j95bSeed(x,y,how,claim){/* x spreads to y that SHE harmed y. x = rival 
 function spyOther95b(y){try{return typeof spyIn70==="function"&&spyIn70(S,y)}catch(e){return false}}
 function j95bHear(r){const y=RV(r.y);if(!y||!y.alive)return;r.known=1;J95B.stat.heard++;const x=r.x!=null?RV(r.x):null;
  const src=x?`người bên cung ${x.name}`:"có kẻ";const txt=`Nghe đồn ${src} đã rỉ tai ${y.name} rằng ngươi ${r.txt}. Dạo này ${y.name} nhìn ngươi lạnh hẳn đi.`;
- try{noteAdd(y.id,`Nghe đồn: ${src} rỉ tai nàng rằng ngươi ${r.txt} (lời đồn)`)}catch(e){}J95B.notes.push(txt);if(J95B.notes.length>100)J95B.notes.splice(0,50);
+ try{noteAdd(y.id,`Nghe đồn: ${src} rỉ tai nàng rằng ngươi ${r.txt} (lời đồn)`,1)}catch(e){}J95B.notes.push(txt);if(J95B.notes.length>100)J95B.notes.splice(0,50);
  Q.push({t:"Nghe đồn",who:pv(y),opt:1,h:`<p>${txt}</p><p><i>(Lời đồn; ngươi chưa thể chắc ai đã nói gì.)</i></p>`,rum95:r.u,
   opts:j95bRumOpts(r,y,x)})}
 /* port 16/11 (owner 11/15 07:15Z): whole Tốn / Được / Mất + odds word on every option */
