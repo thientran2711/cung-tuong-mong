@@ -1,0 +1,51 @@
+kiep_no,origin,road,bot,life,seed,real_min,cum_min,years,age,max_rank,ending,ending_type,group,death_cause,cause_src,who,framed_before,buoi,preg,sons,daughters,kid_deaths,heir_made,nights,sung_peak,bac_peak,bac_end,het_bac,mini_games,ky_ngo,events_distinct,bugs,bot_min
+1,bd,bd_hen,cautious,1,1971027008,3591.4,3591.4,12.25,30,Hoàng quý phi,Xuất gia,leave,thường,,,,,2107,1,0,0,0,0,71,100,457,4,1,1054,17,358,9,22.42
+2,bd,bd_hen,cautious,2,3596068797,4350.6,7942,,33,Hoàng hậu,CAP,cap,no ending,,,,,2647,0,0,0,0,0,66,100,323,0,1,1092,15,387,13,30.26
+3,bd,bd_hen,cautious,3,3753282126,3571.9,11513.8,10.42,28,Quý phi,Thái phi,death,death,Thái phi,j3.js:157,other,,1806,1,0,0,0,0,103,100,186,6,1,1151,15,392,15,17.34
+4,bd,bd_hen,cautious,4,3251832491,3962.1,15476,,33,Hoàng quý phi,CAP,cap,no ending,,,,,2658,0,0,0,0,0,73,100,180,8,1,1137,13,342,12,31.24
+5,bd,bd_hen,cautious,5,3657979300,4299.3,19775.3,,34,Hoàng hậu,CAP,cap,no ending,,,,,2599,1,0,0,0,0,128,100,303,33,1,1121,14,398,13,30.16
+1,bd,bd_hen,greedy,1,1991627440,2407.3,2407.3,10.33,28,Hoàng quý phi,Hồng nhan bạc mệnh,death,death,"«pre»Tân Thái hậu «v.name» xét lại chuyện cũ (khả năng: «chanceLo(o)»), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",j3.js:164,execution,0,1828,0,0,0,0,0,35,100,175,2,1,376,55,348,8,26.68
+2,bd,bd_hen,greedy,2,1138356125,2943.6,5350.9,,29,Hoàng hậu,CAP,cap,no ending,,,,,1855,0,0,0,0,0,42,100,281,5,1,453,53,369,9,30.75
+3,bd,bd_hen,greedy,3,543644774,2343.9,7694.8,9.25,27,Quý phi,Hồng nhan bạc mệnh,death,death,"«pre»Tân Thái hậu «v.name» xét lại chuyện cũ (khả năng: «chanceLo(o)»), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",j3.js:164,execution,0,1661,2,1,1,2,0,59,100,630,3,1,353,59,385,6,26.05
+4,bd,bd_hen,greedy,4,1703687739,3033.6,10728.3,,31,Hoàng hậu,CAP,cap,no ending,,,,,2055,2,1,0,1,0,26,100,286,110,1,551,53,393,9,31.34
+5,bd,bd_hen,greedy,5,3275916876,3077.6,13805.9,,31,Tần,CAP,cap,no ending,,,,,2049,0,0,0,0,0,19,100,185,40,1,597,48,353,9,30.26
+1,bd,bd_hen,lazy,1,3018844876,41.9,41.9,0.42,18,Thường tại,Hồng nhan bạc mệnh,death,death,"«d.n» nguy kịch, không qua khỏi",j13.js:21,illness,0,71,0,0,0,0,0,0,32,125,0,1,5,13,47,3,2.05
+2,bd,bd_hen,lazy,2,429739289,927.5,969.4,,19,Hoàng quý phi,TIMEOUT,stuck,no ending,,,,,1710,2,2,0,0,0,0,100,193,10,1,24,3,305,9,21.34
+3,bd,bd_hen,lazy,3,238970722,1338.8,2308.2,,32,Hoàng quý phi,CAP,cap,no ending,,,,,2241,0,0,0,0,0,51,100,210,52,1,37,49,356,10,31.08
+4,bd,bd_hen,lazy,4,2481971695,1134.9,3443.1,,32,Hoàng hậu,CAP,cap,no ending,,,,,2213,0,0,0,0,0,21,100,279,16,1,71,47,356,9,30.2
+5,bd,bd_hen,lazy,5,2021481296,832.9,4276,,18,Quý phi,TIMEOUT,stuck,no ending,,,,,1448,0,0,0,0,0,0,100,194,12,1,28,5,285,10,17.32
+1,bd,bd_hen,lover,1,906184995,3445.5,3445.5,,29,Hoàng quý phi,CAP,cap,no ending,,,,,1903,0,0,0,0,0,46,100,155,2,1,611,57,387,10,31.06
+2,bd,bd_hen,lover,2,40146794,1829.8,5275.3,6.33,26,Quý phi,Hồng nhan bạc mệnh,death,death,"«d.n» nguy kịch, không qua khỏi",j13.js:21,illness,0,1131,2,0,1,0,0,62,100,155,0,1,229,60,339,8,18.08
+3,bd,bd_hen,lover,3,3773957977,3000,8275.2,,31,Quý phi,CAP,cap,no ending,,,,,2052,0,0,0,0,0,22,100,155,20,1,516,57,356,10,30.97
+4,bd,bd_hen,lover,4,2752910472,2872.7,11147.9,,29,Phi,CAP,cap,no ending,,,,,1980,2,1,0,0,0,63,100,672,54,1,441,62,411,12,30.29
+5,bd,bd_hen,lover,5,2190474431,—,11147.9,,,—,HARNESS,harness,no ending,,,,,,,,,,,,,,,0,0,0,,5,
+1,bd,bd_hen,random,1,3527214887,75.1,75.1,0.33,20,Thường tại,Xuất gia,leave,thường,,,,,88,0,0,0,0,0,0,6,86,5,0,12,5,44,4,0.95
+2,bd,bd_hen,random,2,1369808342,219.9,295,1.25,19,Thường tại,Xuất gia,leave,thường,,,,,234,0,0,0,0,0,0,16,105,6,1,35,4,84,5,2.19
+3,bd,bd_hen,random,3,1809510389,23,318,0.17,19,Đáp ứng,Xuất gia,leave,thường,,,,,39,0,0,0,0,0,0,2,54,2,0,7,3,23,4,0.87
+4,bd,bd_hen,random,4,1646934172,189.9,507.9,1.08,21,Thường tại,Hồng nhan bạc mệnh,death,death,Bị ban chết vì đầu độc «k.name»,j8.js:148,poison,0,199,0,0,0,0,0,2,14,77,8,1,20,3,82,4,1.45
+5,bd,bd_hen,random,5,3985134803,153.5,661.3,0.67,19,Thường tại,Xuất gia,leave,thường,,,,,144,0,0,0,0,0,0,19,105,0,1,14,3,66,2,1.09
+1,bd,bd_hen,rebel,1,3980904668,2812.6,2812.6,,30,Quý phi,CAP,cap,no ending,,,,,2040,15,2,3,1,0,54,100,721,112,1,707,46,433,9,30.18
+2,bd,bd_hen,rebel,2,3518442793,1255.8,4068.5,4.67,24,Tần,Hồng nhan bạc mệnh,death,death,"Tráo con bị bắt quả tang, tội khi quân",j8.js:385,execution,0,812,5,1,1,0,0,6,100,614,0,1,378,26,260,7,12.53
+3,bd,bd_hen,rebel,3,3327674226,2875.2,6943.6,,31,Quý phi,CAP,cap,no ending,,,,,2006,14,0,6,1,0,24,100,167,3,1,795,47,414,9,30.13
+4,bd,bd_hen,rebel,4,1275707903,475.2,7418.9,1.75,21,Tần,Hồng nhan bạc mệnh,death,death,Hồng nhan bạc mệnh,j3.js:167,childbirth,0,299,2,0,1,0,0,1,100,155,4,1,186,11,134,4,4.56
+5,bd,bd_hen,rebel,5,815217504,3073.1,10492,,30,Phi,CAP,cap,no ending,,,,,2036,14,3,2,3,0,85,100,633,5,1,798,55,447,9,30.86
+1,bd,bd_hen,schemer,1,2835675820,116.7,116.7,1.17,20,Thường tại,Hồng nhan bạc mệnh,death,death,Bị ban chết vì đầu độc «k.name»,j8.js:148,poison,0,224,0,0,0,0,0,1,40,155,13,0,0,4,72,3,1.88
+2,bd,bd_hen,schemer,2,3923833801,1104,1220.7,5.17,24,Thường tại,Hồng nhan bạc mệnh,death,death,Bị ban chết vì đầu độc «k.name»,j8.js:148,poison,0,871,0,0,0,0,0,1,100,155,12,1,0,7,143,8,6.27
+3,bd,bd_hen,schemer,3,325523498,151.3,1372,0.92,18,Quý nhân,Lãnh cung,death,death,Lãnh cung,j14.js:40,other,,164,0,0,0,0,0,0,23,155,19,0,0,6,66,3,1.73
+4,bd,bd_hen,schemer,4,1279460527,162.1,1534.2,2.75,20,Thường tại,Lãnh cung,death,death,Lãnh cung,j14.js:40,other,,433,0,0,0,0,0,0,26,155,13,1,0,6,65,5,2.79
+5,bd,bd_hen,schemer,5,1685607336,507.5,2041.6,5.08,24,Thường tại,Lãnh cung,death,death,Lãnh cung,j14.js:40,other,,827,0,0,0,0,0,0,36,120,1,1,0,6,113,9,4.8
+1,bd,bd_hen,scholar,1,4010242839,2310,2310,6.67,26,Tần,Xuất gia,leave,thường,,,,,1199,0,0,0,0,0,37,100,155,0,1,416,47,313,7,18.3
+2,bd,bd_hen,scholar,2,2854974382,3309.3,5619.3,,29,Quý phi,CAP,cap,no ending,,,,,1867,1,0,1,1,0,34,100,155,2,1,588,50,375,10,30.75
+3,bd,bd_hen,scholar,3,2562260173,320,5939.3,0.92,20,Quý nhân,Hồng nhan bạc mệnh,death,death,"«pre»Tân Thái hậu «v.name» xét lại chuyện cũ (khả năng: «chanceLo(o)»), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",j3.js:164,execution,0,178,0,0,0,0,0,0,100,155,5,1,63,11,93,3,3.39
+4,bd,bd_hen,scholar,4,869852452,3313,9252.2,,28,Hoàng quý phi,CAP,cap,no ending,,,,,1880,1,1,0,1,0,65,100,574,1,1,642,51,401,10,30.78
+5,bd,bd_hen,scholar,5,2725953403,3114,12366.2,10,30,Hoàng hậu,Hồng nhan bạc mệnh,death,death,"Tuổi trời đã tận, «ILL[ageOf(p)>=M.oldAge?""laobenh"":""trongbenh""].n.toLowerCase()» không qua khỏi, thọ «S.age» tuổi",jmort.js:106,fate (lifespan),0,1776,0,0,0,0,0,21,100,576,1,1,556,47,368,8,27.92
+1,bd,bd_hen,skilled,1,773503098,2618.8,2618.8,,19,Hoàng hậu,TIMEOUT,stuck,no ending,,,,,1412,0,0,0,0,0,0,100,455,0,1,510,3,354,11,14.19
+2,bd,bd_hen,skilled,2,2391465979,3356,5974.8,,34,Phi,CAP,cap,no ending,,,,,2545,0,0,0,0,0,98,100,155,7,1,558,16,356,16,30.6
+3,bd,bd_hen,skilled,3,2200697412,3906.5,9881.3,,34,Hoàng hậu,CAP,cap,no ending,,,,,2463,0,0,0,0,0,63,100,303,3,1,614,17,470,14,30.12
+4,bd,bd_hen,skilled,4,2363273629,4354.2,14235.5,,33,Hoàng hậu,CAP,cap,no ending,,,,,2571,1,0,1,1,0,67,100,312,12,1,851,17,339,17,30.13
+5,bd,bd_hen,skilled,5,1923571582,4072,18307.5,,35,Quý phi,CAP,cap,no ending,,,,,2646,2,0,1,0,0,61,100,166,4,1,723,17,351,16,30.72
+1,bd,bd_hen,speed,1,2186106729,39.9,39.9,0.25,20,Đáp ứng,Xuất gia,leave,thường,,,,,43,0,0,0,0,0,0,3,27,2,1,14,4,30,3,2.15
+2,bd,bd_hen,speed,2,3307819948,547.2,587.1,1.75,20,Đáp ứng,Xuất gia,leave,thường,,,,,296,0,0,0,0,0,0,40,120,0,1,45,8,107,4,3.95
+3,bd,bd_hen,speed,3,3903811227,24.4,611.6,0.17,20,Đáp ứng,Xuất gia,leave,thường,,,,,42,0,0,0,0,0,0,2,45,12,0,5,3,19,3,1.84
+4,bd,bd_hen,speed,4,596336198,62.6,674.2,0.25,19,Thường tại,Xuất gia,leave,thường,,,,,45,0,0,0,0,0,3,12,50,10,1,4,2,44,3,2.06
+5,bd,bd_hen,speed,5,1191047549,77.9,752.1,0.67,19,Thường tại,Xuất gia,leave,thường,,,,,107,0,0,0,0,0,1,3,36,1,1,24,3,47,3,2.13
