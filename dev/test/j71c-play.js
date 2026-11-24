@@ -48,11 +48,11 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;if(!c||process.env.V)console.log((c?'ok
    const all=card.h+" "+card.opts.map(o=>o.n+" "+o.x).join(" ");r.unfilled=/\{[A-Za-z]+\}/.test(all);r.text=plain(card.h).slice(0,140);
    const k=n++%4;const sid=Object.keys(sd.stances)[k],st=sd.stances[sid];const tier=sd.tier||"m",F=BAL.j71c.fx[tier];S.an=50;
    const s0=snap(),rb=B?aff(B.o,S):0;const rec={};const ap0=apply;apply=function(o){for(const[kk,v]of Object.entries(o||{}))if(typeof v==='number')rec[kk]=(rec[kk]||0)+v;return ap0.apply(this,arguments)};
-   const obN=(S.j71c.ob||[]).length;Q.length=0;Q.push(card);showModal();try{chooseM(k)}finally{apply=ap0}
+   const obL=(S.j71c.ob||[]).slice(-1)[0];const RL=[];const ra0=relAdd;relAdd=function(x,y,n){if(B&&(x===B.o||y===B.o))RL.push(n);return ra0.apply(this,arguments)};Q.length=0;Q.push(card);showModal();try{chooseM(k)}finally{apply=ap0;relAdd=ra0}
    const exp={};for(const[kk,v]of Object.entries(st.gain))exp[kk]=(exp[kk]||0)+v*F[kk==="rel.B"?"rel":kk];for(const[kk,v]of Object.entries(st.loss))exp[kk]=(exp[kk]||0)-v*F[kk==="rel.B"?"rel":kk];
    r.num=[];const gv=X_.val(st.gain,tier,1),lv=X_.val(st.loss,tier,-1);for(const kk of SK){const want=exp[kk]||0,got=(gv.fx[kk]||0)+(lv.fx[kk]||0);if(want!==got)r.num.push(`${kk} ${got}≠${want}`);const asked=kk==="an"?(S.an||0)-s0.an:(rec[kk]||0);if(want&&Math.sign(asked)!==Math.sign(want))r.num.push(`${kk} applied ${asked}, wanted the way of ${want}`)}
-   if(B&&exp["rel.B"]){const d=aff(B.o,S)-rb;if(!(Math.sign(d)===Math.sign(exp["rel.B"])||d===0&&Math.abs(aff(B.o,S))>=100))r.num.push(`rel.B ${d}≠${exp["rel.B"]}`)}
-   const OB=S.j71c.ob||[];r.objOk=sd.object?OB.length===obN+1&&!/\{/.test(OB[OB.length-1].trace):OB.length===obN;
+   if(B&&exp["rel.B"]){/* the engine's call; the person's own rules size it */const d=RL.reduce((a,x)=>a+x,0);if(Math.sign(d)!==Math.sign(exp["rel.B"]))r.num.push(`rel.B asked ${d}≠${exp["rel.B"]}`)}
+   const OB=S.j71c.ob||[];const last=OB.slice(-1)[0];/* the list is capped (BAL.j71c.obKeep): compare the newest entry */r.objOk=sd.object?last!==obL&&last.sid===sd.id&&!/\{/.test(last.trace+last.name):last===obL;
    {const z=X_.drawComp(fest,kind,L());r.rest=!z||z.id!==sd.id}Q.length=0;
   }catch(e){r.err=String(e&&e.stack||e).slice(0,300);tr6=tr0}}
   /* a whole festival day: plan a composed C stage, she enters, the day plays, the complication queues after the day's card */
