@@ -63,3 +63,31 @@ phan-cung (edict panel: her + 3 kept girls; unknown girls keep «Quý nhân ???�
 4. palace-distance (review/palace-distance 9e655c3e) has not posted SẴN SÀNG KIỂM yet; its diff touches jbancung palCeremony only — no conflict with jpal pickHost; merge when it lands.
 
 ~95% xong / ~90% chơi được
+
+## REVIEW (reviewer session_01D3E3NZ3GPT7U4Pw6sW2FKR, opus BIG, 24/11)
+PRIORITY #1 CHECK ('kỳ sắc phong' / 'phanCungEdict' / 'kitPromoChip'): OD 24/11 ~05:55Z, ~07:00Z real, ~07:15Z, ~07:55Z, ~08:30Z, ~09:10Z, ~09:15Z, ~09:20Z, ~09:35Z, ~09:50Z read verbatim | ledger 0 | claims promo-build NZySUEoG (archived) | main fd85907a: PROMO_SRC jexam.js, promoteP j8.js, BAL.promo.* — no kỳ/special/phanCung code | review/*: kit-promo-hook-rv 73c692ca (already merged here), promo-hist ed47e570 (not landing), palace-distance (own lane, no conflict with jpal pickHost); kitPromoChip §77c: on no branch and not in KIT.md (KK16 not landed) — the hook is a superset of the 73c692ca shape {months,rank,miss,ready}+{ky,sp}, so the chip will read it unchanged.
+
+**REVIEW PASS — LAND READY review/promo-build-rv 1cab34e1eaf4301ec380524bd7fd7d465147bf2f** (base origin/main fd85907a = ancestor).
+
+### Merge
+review/promo-build 7c4116de + LIVE fd85907a: conflicts only assemble.py (took main's list + jpromob after jexam) and index.html/sw.js (rebuilt). jbal2 auto-merged (BAL.promoR block intact).
+
+### Reviewer fixes (small, on -rv)
+1. **No đại lễ during quốc tang** (OD 24/11 ~07:00Z real «none during quốc tang»; design §3 global rule): pbDlWhich returned a đại lễ inside the Thái hậu mourning (P.mt) → direct decrees in mourning. Now the occasion passes uncelebrated with the line «… cả cung đang để quốc tang, không mở đại lễ, không có kỳ sắc phong». Test added.
+2. **Favour / patron exam outside the kỳ for a fully qualified consort** (OD ~08:30Z: the favoured one rises «không cần tới kỳ»; ~09:15Z «đó là cái lợi của việc được sủng ái»): pbTry refused every special when the whole ordinary road was met (pbRoadDone) — so the MORE qualified she was, the longer she waited (up to 8 months). Now refused only when a kỳ is open THIS month (she sits the kỳ). Test added. Old test «NPC ordinary exam only in kỳ» setup reset (the months run to the kỳ could now raise the Sủng-99 NPC by a favour exam).
+3. **PHÂN CUNG why line** said «Hoàng thượng để mắt tới ta (Sủng 45): ở cung xa Dưỡng Hòa điện» (favour → far palace, self-contradicting; seen on both shots). Now printed only when the favour pulled her that way (same sign rule as the Hoàng hậu / Thái hậu lines).
+
+### Checklist
+1. Owner rows: no monthly check (promoReqP kỳ row, NPC exam at the end of a kỳ month — monthTick runs rivalsMonth/promote before month++, pbMonth after, so the đại lễ that replaces a kỳ is seen by the NPC pass of that month) ✔; irregular BAL kỳ table, 23 kỳ / 10 y, gaps 3–9 ✔; full condition set + exam ✔; specials at daughter weight with seat + HH/TH block kept ✔; favour cut per THIS Emperor's nết, ≤1/24 months, ≤2/life ✔; TH ân điển / HH đề cử once per patron, renewed ✔; first son direct ✔; failed AND lapsed special uses up the chance ✔; daughter no longer waives the block ✔; đại lễ direct only with full conditions (+ Đức), seats short → contest, minGap → ordinary kỳ ✔ (+ fix 1); th/emp/quyen direct ✔.
+2. Laws 1–6: law 1 — same pbTry/pbDlOk/pcHostPick for her and NPCs ✔; open gap (not a FAIL, follow-up queued by D): SHE as Hoàng hậu cannot nominate. Law 2/3 — no choice offered; each route has a loss (ghen/oán, Sủng −4, nợ ân, lễ tạ ân Bạc), births gain-only (allowed) ✔. Law 4 — every number in BAL.promoR, one-core ×3 PASS ✔. Law 5 — favour cut follows RANKS[next].s, đại lễ Đức rises, exam tier rises; note: TH/HH patron cuts do not rise with rank (exam difficulty does) — D may tune. Law 6 — patrons must be alive / seated, palaces real ✔.
+3. PHÂN CUNG: window.phanCungEdict({list:[{p,fav}],then}) exact; then() once via the modal onClose (button and ✕ both go through closeModal) and on empty list / error ✔; host rule pcHostPick inside jpal palFix pickHost for everyone ✔; kit T1 panel + kitRows, cổ trang, no % ✔; ends with the button «Về nơi ở mới» ✔. Shots Fold 755x1000 + iPad 1180x820 (edict + later move) looked at 3×: no overflow / cut text. Notes: picture = room fallback (a laundry yard on the shot) — ART REQUEST already filed by D; unknown girls show «Quý nhân ??? (Sủng 41)» — the Sủng number of a stranger (nit for the follow-up).
+4. kitPromoHook: next kỳ months + festival, ready in a kỳ, read-only (S.ex / S.pb restored) — kit-promo-hook Fold + iPad PASS ✔.
+5. Save / co-op: old save (no S.pb) loads ✔ (promo-build + quickcheck old-save); calendar stored for past months ✔; coop-e2e 142/142 ✔, coop-one-world gate PASS ✔. Note: each seat starts its own S.pb.ky at its first month (deterministic world hash) — same when both seats start together; not host-broadcast.
+6. Robot (my own, 8 lives × 10 y, same drift Sủng +1.2 / Danh +1 a month, auto-sit by exSim; tool kept outside git): her promotions per life 5 y / 10 y: LIVE 0.63 / 1.25 → rv 1.63 / 2.50; NPC (all consorts) LIVE 3.00 / 7.38 → rv 6.50 / 10.25; specials in 8 lives: sung 51, hh 4, th 1. rv NPC 10 y matches the worker's 10.55 / 10.95 → not frozen, not flooded; totals sit above LIVE because of the favour route (knob BAL.promoR.sp.sung.add — numbers are ours, D decides).
+7. Gates on 1cab34e1: promo-build 31/31 ×3 (29 + 2 reviewer) · one-core ×3 PASS · quickcheck PASS (core gates PASS, old save ok, perf render 262/251, tab 487/486, buổi 1730/1459 ms; an earlier run failed perf only while my shots ran in parallel) · coop-e2e 142/142 · promo-exam 32/32 = LIVE · promo-rules FAIL set = LIVE (NPC servants roll; 844x390 reveal) · promo-skip FAIL set = LIVE (grace-seat, strike-back) · promo-next-rank BAD set = LIVE · kit-promo-hook Fold + iPad PASS.
+
+### Follow-ups (not blocking)
+- LAW 1: she as Hoàng hậu → «Hoàng hậu đề cử» act card (D queued).
+- Quốc tang after the Emperor's death (design §3 says Emperor or Thái hậu): only the Thái hậu's death starts BAL.promoR.mourn; the Emperor's death mostly ends her life today, so low impact.
+- Deathbed / truy phong (design rows 9–10) not in this brief.
+- kitPromoChip §77c (KK16) still to land; reads this hook unchanged.
