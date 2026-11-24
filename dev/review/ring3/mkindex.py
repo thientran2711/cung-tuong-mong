@@ -53,6 +53,7 @@ table{{border-collapse:collapse;width:100%;font-size:14px}}td,th{{border-bottom:
 <h2>Kiểm theo từng lời sếp dặn</h2><table><tr><th>Lời dặn</th><th>Mẫu này</th></tr>{chk}</table>
 <h2>Độ mượt</h2><p>Số: khung chậm (95 phần trăm khung nhanh hơn) / khung thường, tính bằng mili-giây; 17 là mượt (60 hình/giây), trên 34 là khựng. Máy ảo của em không có card đồ họa nên chỉ so được với dòng «đứng yên»; số thật phải đo trên máy sếp.</p>
 <table><tr><th>Bước</th><th>Fold ×1</th><th>Fold ×4 chậm</th><th>Fold ×6 chậm</th><th>iPad ×1</th><th>iPad ×4</th><th>iPad ×6</th></tr>{rows}</table>
+<p><b>Em đọc bảng:</b> khi máy ảo rảnh (Fold ×1) các bước hoạt cảnh đều 17 = mượt như lúc đứng yên; bước nặng nhất là «Vào khu» vì trong mẫu nó vẽ lại cả màn game khi đổi trang — bản làm thật sẽ mở khu mà không vẽ lại cả game, nên bước đó sẽ nhẹ như các bước khác. Số iPad đo lúc máy ảo đang bận tải ảnh lên (dòng «đứng yên» cũng đã 67), nên chỉ so tương đối được. Không có bước nào bị bỏ hoạt cảnh.</p>
 <p><b>Đo trên máy thật:</b> mở <a href="kperf.html?kperf=1">trang đo độ mượt</a> trên Fold và trên iPad, đợi chừng 20 giây, chụp bảng gửi em.</p>
 <p>Kế hoạch khu (ai đi khu nào, số người đo thật, số trong BAL, mô tả tranh cho C): dev/AREA_PLAN.md trên nhánh review/ring-design-3.</p>
 </main></body></html>'''

@@ -95,7 +95,7 @@ function mount(){css();const old=document.getElementById('kar');if(old)old.remov
  L=document.createElement('div');L.id='kar';L.className=kv();st().appendChild(L);document.documentElement.classList.add('karon');
  BG=document.createElement('div');BG.className='kar-bg';BG.style.backgroundImage=`url("${BGSRC}")`;L.appendChild(BG);D=geo();
  G.forEach(g=>{g.capEl=null;g.P.forEach(p=>mkFig(p.m))});L.addEventListener('click',()=>{if(!window.__karAuto)unsel()})}
-async function enter(i){window.__karMapOn=0;{tab='act';render();try{j77Tap('vuon')}catch(e){}await wait(200)}/* phone shell: the here-tap = the game's own «show my place» (jk3 k3ShowPlace) */if(!document.querySelector('#stage #kar'))mount();else D=geo()
+async function enter(i){window.__karMapOn=0;{window.__k3quiet=1;tab='act';render();try{j77Tap('vuon')}catch(e){}await wait(160);try{j77Tap('vuon')}catch(e){}await wait(60)}/* phone shell: the here-tap = the game's own «show my place» (jk3 k3ShowPlace) */if(!document.querySelector('#stage #kar'))mount();else D=geo()
  const a=AREAS[i];cur=i;stageTitle('Ngự hoa viên · '+a.n);G.forEach(g=>{g.P.forEach(p=>p.m.el.style.display='none');if(g.capEl)g.capEl.style.display='none'});bgSet(a.x);
  an(BG,[{transform:BG.__t+' scale(1.06)',opacity:.6},{transform:BG.__t,opacity:1}],{duration:520,easing:'cubic-bezier(.2,.7,.2,1)'});
  place(a);const F=figsOf(a);F.forEach((m,k)=>{m.el.style.opacity=0;an(m.el,[{transform:`translate(${m.x}px,${m.y+18}px)`,opacity:0},{transform:m.el.__t,opacity:1}],{duration:460,delay:160+k*40})});
