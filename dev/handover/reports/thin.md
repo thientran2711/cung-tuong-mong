@@ -30,6 +30,7 @@ ENGINE #2 (opus, session_01N1tNP5YG1W5gC9UKfSfGwY) on **review/thin-p3** (from t
  "req":{"kind":"<who>","nết":[any-of],"lòng":[any-of],"need":"<need>"},          // the requester A (real roster person)
  "other":{…same fields…},                                                           // optional second real person B (never the same as A)
  "title":"…","ask":"“…”",                                                           // title ≤ 8 words; ask = A's own words, in “ ”
+ "dh":"<good>/<bad>",                                                              // REQUIRED (titles2, E62 2bbba7ee): danh hiệu pair, each ≤ 4 words, cổ trang, from the seed's own content, unique; good = done, bad = dropped/late/exposed. Missing → j72seeds_validate.py FAILS; clash check: node dev/test/titles2-scan.js <page>
  "object":{"name":"…","owner":"A|B|me|kho","clue":"…","trace_ok":"…","trace_no":"…","it":"<IT key, optional>"} | null,
  "steps":[ 1–3 steps ],
  "ok":{"text":"…","gain":{…}}, "no":{"text":"…","loss":{…}},
