@@ -194,7 +194,7 @@ function tabsHTML(cur){const n=earned(S).length;const L=[];if(typeof kitGoalNow=
 function dhPanel(){if(!S)return;dhSync(S,true);DHTAB="dh";const wk=wornKey(S),E=earned(S);const sec=[];const tb=tabsHTML("dh");if(tb)sec.push({h:"",html:tb});
  const wo=wk&&dhObj(S,wk);sec.push({h:"Danh hiệu trên đầu",rows:[wo?[kitTitlePlate(wo),[esc(wo.fx||"chỉ để làm đẹp")],"t"]:["Trên đầu","chưa mang danh hiệu nào"]]});
  try{if(typeof window.dh2Secs==="function")for(const x of window.dh2Secs())sec.push(x)}catch(e){console.error("dh2Secs",e)}/* phase 2 (jdh2): hiệu ban + đường sám hối */
- for(const [g,gl] of GROUPS){const keys=Object.keys(DH).filter(k=>DH[k].g===g);const got=keys.filter(k=>E.includes(k)).map(k=>dhObj(S,k)).sort((a,b)=>b.tier-a.tier);
+ for(const [g,gl] of GROUPS){const keys=Object.keys(DH).filter(k=>DH[k].g===g&&(!DH[k].old||E.includes(k)));/* old = kept for old saves only (jdh3 FIX r1): counted only when held */const got=keys.filter(k=>E.includes(k)).map(k=>dhObj(S,k)).sort((a,b)=>b.tier-a.tier);
   const rest=ONCE.has(g)?[]:keys.filter(k=>!E.includes(k));const rows=got.map(o=>[kitTitlePlate(o),[esc(DH[o.key].how(need(o.key)[S.dh[o.key].i])),esc(o.key===wk?o.fx:(chTxt(o.key,S.dh[o.key].i)||o.fx)||"chỉ để làm đẹp")],"t"]);
   rest.forEach(k=>{const N=need(k),c=count(S,k);rows.push([esc(DH[k].n),[esc(DH[k].how(N[0])),`đã ${Math.min(c,N[0])}/${N[0]}`],"n"])});
   if(rows.length)sec.push({h:`${gl} · ${got.length}/${keys.length}`,rows})}
