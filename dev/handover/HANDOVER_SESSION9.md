@@ -2820,3 +2820,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 ## MAIN CHÍNH 117 (took over 24/11 ~04:40Z, NEW ACCOUNT)
 - MAIN CHÍNH 117 = session_01V1ZZH1TdLydvegnFGXoGe7; START_CTX ~8 % (get_session reads 0; own estimate ~80k/1M) → roll line ~33 %, ceiling 60 %; depth 1 (child of 116 session_01V1ZZH3cJHSsRhYPpjzkQgj). Worktree /home/user/wt/h117, push /home/user/wt/hpush117.sh.
 - LOAD: main running 5 (LC9 landing, KK16 kit, SELSCENE-2 HOLD, INTRO-DESIGN, MAP-PERF; owner bugs/UI/go-live only) | B free 5 (7/12) | C orders (style audit, Japanese room redraw, thẻ bài/ban hoa backgrounds) | D busy (+PROMO-HIST) | E busy (+parking lot, TITLES2 r3) | F free (no art order) | moved: none. LIVE = 43cf5434. KIT.md:4635-4647 conflict markers on LIVE (E line) → KK16.
+- (04:37Z) Hourly wake = trig_01HvgKG9YZtYw41SEj6w2Jrb (min 32, into 117); 116's trig_019nuwogfxtzvXjqMf9rXsQt stays disabled. One line sent to LC9, KK16 (+ KIT.md:4635 conflict markers fix), SELSCENE-2 (HOLD), INTRO-DESIGN, MAP-PERF.
