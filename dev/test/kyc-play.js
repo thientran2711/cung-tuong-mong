@@ -24,28 +24,30 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;if(!c||process.env.V)console.log((c?'ok
   try{if(typeof lyAlive==="function"&&lyAlive())PPL.push({kind:"ly",ref:lyAlive()})}catch(e){}
   out.ppl=[...new Set(PPL.map(x=>x.kind+(x.c?":"+x.c:x.eid?":"+x.eid:"")))].join(" ");
   if(!PPL.some(x=>x.kind==="ly")&&RV[0])PPL.push({kind:"ly",ref:RV[RV.length-1],test:1});
-  const p0=B.p0,st0=B.step;
+  const p0=B.p0,st0=B.step,pm0=B.pMax;
   for(const sd of FIX){const r={id:sd.id};out.seeds.push(r);try{
    if(!KY.DEF[sd.id]){B.E[sd.id]={w:sd.w||1,b:sd.b||"0123"};if(sd.plain)B.E[sd.id].plain=sd.plain;else B.E[sd.id].o=sd.o;if(typeof KYSEEDS!=='undefined')KYSEEDS.push(sd);KY.creg(sd);r.late=1}
    const Dd=KY.DEF[sd.id];r.reg=!!Dd&&!!B.E[sd.id];if(!Dd){r.err='not registered';continue}
-   let X0=Dd.what?Dd.what(S):{};if(Dd.what&&!X0&&sd.what==='plot'&&typeof j70==='function'&&j70()&&RV[0]){/* a plot in prep by a real consort (the j70 record), test-only, removed after */const P={st:'prep',a:RV[0].id,t:'zz',k:'test'};(j70().pl=j70().pl||[]).push(P);r.plot=P;r.forcedWhat=1;X0=Dd.what(S)}if(Dd.what&&!X0){r.skip=`no real ${sd.what} piece in this world`;continue}
-   const W=Dd.who(S,PPL,X0);r.who=W?(W.kind+":"+((W.ref&&W.ref.name)||W.kind)):null;r.notMe=!W||W.ref!==S;
+   let X0=Dd.what?Dd.what(S):{};if(Dd.what&&!X0&&sd.what==='plot'&&typeof j70==='function'&&j70()&&RV[0]){/* a plot in prep by a real consort (the j70 record), test-only, removed after */const P={st:'prep',a:RV[0].id,t:'zz',k:'test'};(j70().pl=j70().pl||[]).push(P);r.plot=P;r.forcedWhat=1;X0=Dd.what(S)}if(Dd.what&&!X0&&sd.what==='lost'){/* a consort really loses one of her real pieces (jlost loLose, as kyngo-unit 5) */const v=RV.find(x=>(x.inv||[]).some(e=>e&&loOk(e)));if(v){loLose(v,{cause:"mis"});r.forcedWhat=1;X0=Dd.what(S)}}
+   if(Dd.what&&!X0&&sd.what==='dead'){/* a dead woman's effect in the Nội vụ phủ box (the jil record, as ky-keeper-f2) */const kk=Object.keys(IT).find(k=>IT[k]&&IT[k].pr>0&&!itm(k).nt);if(kk){const e={k:kk,from:"emp"};ilUid(e);ilS().box.push({e,at:"nvp",why:"dead",own:"",w:wk()});r.forcedWhat=1;X0=Dd.what(S)}}
+   if(Dd.what&&!X0){r.skip=`no real ${sd.what} piece in this world`;continue}
+   let W=Dd.who(S,PPL,X0);if(!W&&sd.who&&sd.who.kind==='rv'&&sd.who.old&&RV.length){/* an elder consort (test: one real consort aged into the elder band) */const v=RV[RV.length-1];v.age=BAL.ageBand[2]+4;r.forcedWho=1;W=Dd.who(S,PPL,X0)}r.who=W?(W.kind+":"+((W.ref&&W.ref.name)||W.kind)):null;r.notMe=!W||W.ref!==S;
    if(!W){r.skip=`no ${sd.who&&sd.who.kind} of that sort in this world`;continue}
    r.whenNow=Dd.when?!!Dd.when(S):true;
    const pl0=Dd.pl,wh0=Dd.when,wo0=Dd.who;Dd.pl=["zz"];Dd.when=null;Dd.who=(F,L,X)=>wo0(F,PPL,X);
-   S.ky={m:0,cd:-1,seen:{},got:[],last:-1};for(const id in KY.DEF)if(id!==sd.id)S.ky.seen[id]=0;S.bac=Math.max(S.bac||0,9999);S.suc=100;B.p0=100;B.step=0;Q.length=0;
+   S.ky={m:0,cd:-1,seen:{},got:[],last:-1};for(const id in KY.DEF)if(id!==sd.id)S.ky.seen[id]=0;S.bac=Math.max(S.bac||0,9999);S.suc=100;S.out=false;S.dead=false;B.p0=100;B.step=0;B.pMax=100;Q.length=0;
    const band=KY.band(S),b0=B.E[sd.id].b;if(!String(b0).includes(String(band))){r.band=`her band ${band} not in b ${b0}: b forced for the test`;B.E[sd.id].b=String(b0)+band}
    if(r.skip){Dd.pl=pl0;Dd.when=wh0;Dd.who=wo0;continue}
-   KY.arrive(S,"zz","t");if(r.band)B.E[sd.id].b=b0;Dd.pl=pl0;Dd.when=wh0;Dd.who=wo0;B.p0=p0;B.step=st0;
+   KY.arrive(S,"zz","t");if(r.band)B.E[sd.id].b=b0;Dd.pl=pl0;Dd.when=wh0;Dd.who=wo0;B.p0=p0;B.step=st0;B.pMax=pm0;
    const m=Q[0];r.fired=S.ky.got[0]===sd.id&&!!m&&m.evId==="kyngo:"+sd.id;if(!r.fired)continue;
    const all=(m.h||"")+(m.opts||[]).map(o=>o.n+" "+o.x).join(" ");r.unfilled=/\{[A-Za-z]+\}/.test(all);r.text=plain(m.h).slice(0,150);
    r.shape=sd.plain?!m.opts:(m.opts&&m.opts.length===2&&m.pid==="kyngo");
-   if(m.opts){const s0=JSON.stringify([S.danh,S.sung,S.duc,S.tamco,S.th,S.suc,S.bac]);chooseM(0);r.res=!!(Q[0]&&Q[0].ky);r.changed=s0!==JSON.stringify([S.danh,S.sung,S.duc,S.tamco,S.th,S.suc,S.bac])||/thiện cảm|tiến bộ|biết|chứng cứ|tai mắt|dứt|lên/.test(Q[0]?Q[0].h:"")}else r.res=r.changed=true;
+   if(m.opts){const s0=JSON.stringify([S.danh,S.sung,S.duc,S.tamco,S.th,S.suc,S.bac]);chooseM(0);r.res=!!(Q[0]&&Q[0].ky);r.changed=s0!==JSON.stringify([S.danh,S.sung,S.duc,S.tamco,S.th,S.suc,S.bac])||/thiện cảm|tiến bộ|biết|chứng cứ|tai mắt|dứt|lên|\+\d/.test(Q[0]?Q[0].h:"")}else r.res=r.changed=true;
    if(r.plot){const L=j70().pl;const i=L.indexOf(r.plot);if(i>=0)L.splice(i,1);delete r.plot}r.seen=S.ky.seen[sd.id]!=null;KY.cmark();r.mark=nrNow("ky",sd.id);r.w=B.E[sd.id].w===(sd.w||1);Q.length=0;
   }catch(e){r.err=String(e&&e.stack||e).slice(0,300)}}
   return out},FIX);
  console.log('real people kinds in this world: '+R.ppl);
- for(const r of R.seeds){const t=`${r.id} (${r.who||'-'})${r.forcedWhat?' [test plot]':''}${r.whenNow===false?' [when forced]':''}${r.band?' ['+r.band+']':''}`;
+ for(const r of R.seeds){const t=`${r.id} (${r.who||'-'})${r.forcedWhat?' [test piece]':''}${r.forcedWho?' [aged for test]':''}${r.whenNow===false?' [when forced]':''}${r.band?' ['+r.band+']':''}`;
   if(r.err){ok(false,t+' '+r.err);continue}if(r.skip){console.log('skip '+t+': '+r.skip);continue}
   ok(r.reg,t+' registers (DEF + BAL.kyngo.E)');ok(r.notMe,t+' who is a real person, never the finder');ok(r.fired,t+' fires through jky\'s gate as a kyngo card');if(!r.fired)continue;
   ok(!r.unfilled&&r.shape,t+' card shape + placeholders filled: '+r.text);ok(r.res&&r.changed,t+' option runs to a result with a real change');ok(r.seen&&r.mark,t+' once per life + P0 «ky» mark');ok(r.w,t+' weight = authored (no past life)')}
