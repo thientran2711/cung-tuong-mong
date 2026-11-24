@@ -1448,3 +1448,4 @@ NET BUILD step0 heat/range fix + one BAL relation levels + per-nết thresholds 
 | REVIEW E73r MOMENT BIG (opus; briefs/E73r-review-moment.md) of 5a504f92 | review/moment(-r); reports/moment-review.md | FOREMAN E (child2) | (opening) | RUNNING | 24/11 07:40Z |
 NET BUILD step0 heat/range fix + one BAL relation levels + per-nết thresholds (opus BIG; FROM MAIN 119 07:40Z; briefs/D-net-build.md) | review/net-build | session_01D3E3NYsFNUq9PXUiPGzBEH | RUNNING | 24/11 07:40Z (Foreman D depth 1)
 REVIEW promo-build 7c4116de (opus BIG; briefs/D-promo-build-review.md) | review/promo-build-rv | session_01D3E3NZ3GPT7U4Pw6sW2FKR | RUNNING | 24/11 07:45Z (Foreman D depth 1)
+| DLG WRITER W7+W8+W9 (j68_d_ky, j7_wc, j70_j71; sonnet; lead 5NjXSPTa) | review/sideline-dlg content | B | session_01N1tNP3N2JkydSHBdWnPP2o | RUNNING | 24/11 07:58Z |
