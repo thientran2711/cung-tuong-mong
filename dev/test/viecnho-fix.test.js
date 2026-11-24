@@ -43,12 +43,20 @@ let fails=0;const ok=(c,m)=>{if(!c){fails++;console.log('FAIL',m)}else console.l
  /* (3) Vì sao wording: every source of whyText, known / unknown name + nết */
  const p=await b.newPage({viewport:{width:755,height:1000}});await p.route(u=>/^https?:/.test(u.href)&&!/cdn|r2.dev|workers.dev|pages.dev/.test(u.host),r=>r.abort());await p.goto('file://'+path.join(ROOT,'index.html'));await p.waitForTimeout(2500);
  await p.evaluate(()=>{window.__bot=1;localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<60&&isSrv();i++)start();window.__nlInner=0;Q.length=0;try{$("modal").hidden=true}catch(e){}});
- const lines=await p.evaluate(()=>{const out=[];const V=rivals.slice(0,4);const nets=Object.keys(BAL.net.T).slice(0,3);
+ const lines=await p.evaluate(()=>{const out=[];const V=rivals.slice(0,4);const nets=Object.keys(BAL.net.T).slice(0,3);window.trKnown=()=>[nets[0]];window.trongKnown=()=>true;
   for(const v of V)for(const known of [0,1])for(const st of ["aff","oan"])for(const d of [12,-6]){const sv=typeof k61Named==="function"?k61Named:null;try{if(sv)window.k61Named=()=>!!known;const F=[{k:"net",t:nets[0],s:1},{k:"trong",v:"Lễ",s:1,j:v}];out.push(whyText({who:v,stat:st,d,F},d))}finally{if(sv)window.k61Named=sv}}
   out.push(whyText({who:"th",stat:"th",d:4,F:[{k:"mood",t:"lòng ngươi đang vui",s:1}]},4));out.push(whyText({who:"emp",stat:"sung",d:5,F:[{k:"talk",t:"đêm vui"}]},5));
   out.push(...whyUniq(["A → x","A → x","B → y"]));return out});
- const bad=lines.filter(t=>/người chưa quen|theo tính nết|%|undefined|NaN/.test(t)||!/→/.test(t)||/\s{2,}/.test(t));
+ const empties=lines.filter(t=>!t).length;lines.splice(0,lines.length,...lines.filter(Boolean));
+ const bad=lines.filter(t=>/người chưa quen|chưa quen biết|chưa rõ tên|theo tính nết|%|undefined|NaN/.test(t)||!/→/.test(t)||/\s{2,}/.test(t));
  ok(bad.length===0,`Vì sao: ${lines.length} lines, 0 vague/duplicate-prefix (${bad.slice(0,3).join(' | ')})`);
- ok(lines.some(t=>/chưa rõ tên/.test(t))&&lines.some(t=>/oán ta [+−]\d/.test(t)&&/thiện cảm với ta/.test(lines.join('|'))),'Vì sao: unknown name says «chưa rõ tên»; verbs «oán ta» / «thiện cảm với ta»');
+ ok(lines.some(t=>/oán ta [+−]\d/.test(t))&&lines.some(t=>/thiện cảm với ta [+−]\d/.test(t))&&empties>0,`Vì sao: verbs «oán ta» / «thiện cảm với ta»; ${empties} lines with only an unknown cause are dropped (no vague line)`);
+ /* result popup (owner 24/11 ~21:57Z): ONE short line per change «<Name>: thiện cảm +8», cause once as the title, no «hơn» / (a→b) / repeated action text; an unnamed person = «một vị <tước>» */
+ const pop=await p.evaluate(()=>{window.__bot=0;const out=[];const vs=rivals.filter(r=>!r.queen);const v=vs[0],u=vs[1];
+  const t1=(()=>{const bf=rsnap();window.k61Named=()=>true;affAdd(v,S,8);window.__kaSenOvr="Vá lại quạt tròn bị mối cắn: Cắt viền";resultShow("Vá lại quạt tròn bị mối cắn: Cắt viền",bf,true);const t=document.getElementById('rtoast');return t?t.textContent:''})();
+  const t2=(()=>{const bf=rsnap();window.k61Named=x=>x!==u;affAdd(u,S,6);oanAdd(u,S,12);resultShow("Việc nhờ",bf,true);const t=document.getElementById('rtoast');return t?t.textContent:''})();return{t1,t2,name:v.name}});
+ ok(/thiện cảm \+\d+/.test(pop.t1)&&pop.t1.includes(pop.name),'result popup: «'+pop.name+': thiện cảm +8» in one short line');
+ ok(!/hơn|\(\d+|chưa rõ/.test(pop.t1.replace(/Xem đầy đủ.*/,'')),'result popup: no «hơn», no (a→b), no repeated action text ('+pop.t1.replace(/\s+/g,' ').slice(0,200)+')');
+ ok(!/chưa quen/.test(pop.t2)&&/một vị/i.test(pop.t2),'result popup: unnamed person = «một vị <tước>», never «chưa quen biết» ('+pop.t2.replace(/\s+/g,' ').slice(0,200)+')');
  console.log(lines.slice(0,6).join('\n'));
  await b.close();console.log(fails?`FAILED ${fails}`:'ALL OK');process.exit(fails?1:0)})().catch(e=>{console.log('ERR',e.message);process.exit(1)});

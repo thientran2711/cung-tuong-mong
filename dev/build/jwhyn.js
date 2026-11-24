@@ -61,9 +61,9 @@ let WHY_NIGHT=null;
   if(W.mood)F.push({k:"mood",t:`Hoàng thượng đang ${W.mood>0?"vui":W.mood===-1?"buồn":"giận"}`,s:W.mood>0?1:-1});
   F.push({k:"talk",t:s>=BAL.nightEnd.warm?"đêm vui":s>=BAL.nightEnd.normal?"đêm êm":"đêm nhạt"});whyT();whyNote("emp","sung",d,F,q0)}}catch(e){}return r}})();
 /* ---------- the one sentence ---------- */
-/* KIT §7 result "Vì sao" (owner 24/11 ~21:50Z real, Fold shot v5: «người chưa quen: theo tính nết → oán +12» = unreadable): ONE plain line per person = WHO (her name, or «Vị <bậc> chưa rõ tên» when the name is not yet known to her — never the bare «người chưa quen»)
+/* KIT §7 result "Vì sao" (owner 24/11 ~21:50Z real, Fold shot v5: «người chưa quen: theo tính nết → oán +12» = unreadable): ONE plain line per person = WHO (her name, or «Một vị <cung nữ / phi tần / thái giám / tước>» when the name is not yet known to her (owner 24/11 ~22:14Z) — never «người chưa quen» / «chưa quen biết»)
    + the REAL cause in plain words (nết/trọng named when she knows them, else «ta chưa rõ tính nết nàng») → what it did to HER («oán ta +12», «thiện cảm với ta +6», «Sủng thêm 5»). One colon after the WHO, no %, no vague «theo tính nết». Identical lines of one result merge («… (2 người)»). */
-function whyWho(p){if(p==="th")return"Thái hậu";if(p==="emp")return"Hoàng thượng";try{if(p&&p.queen&&typeof kaWho!=="function")return"Hoàng hậu";if(typeof kaNamed==="function"&&!kaNamed(p)){const r=p&&RANKS[p.rank];return r&&p!==S?`Vị ${r.n} chưa rõ tên`:"Một người chưa rõ tên"}return typeof kaWho==="function"?kaWho(p):p.name||""}catch(e){return p&&p.name||""}}
+function whyWho(p){if(p==="th")return"Thái hậu";if(p==="emp")return"Hoàng thượng";try{if(p&&p.queen&&typeof kaWho!=="function")return"Hoàng hậu";if(typeof kaNamed==="function"&&!kaNamed(p)){try{return`Một vị ${k61MaskT(p)}`}catch(e){return"Một vị phi tần"}}return typeof kaWho==="function"?kaWho(p):p.name||""}catch(e){return p&&p.name||""}}
 function whyPron(p){if(p==="th")return"Thái hậu";if(p==="emp")return"Hoàng thượng";try{return typeof netSex==="function"&&netSex(p)==="m"?"người":"nàng"}catch(e){return"nàng"}}
 const WHY_STAT={aff:"thiện cảm với ta",oan:"oán ta",th:"thiện cảm với ta",hh:"thiện cảm với ta",sung:"Sủng"};
 /* her own stats are said in words ("Sủng thêm 5"): the Sổ ghi replay (jlogsync) reads "Sủng +5" as a second change */
@@ -77,7 +77,7 @@ function whyText(e,d){const p=e.who;let kn=[],tk=false;try{kn=p==="th"||p==="emp
   else if(f.k==="trong"){if(tk){const s=`trọng ${f.v}, ${f.s>0?"hợp ý":"trái ý"}`;if(!parts.includes(s))parts.push(s)}else unkTr=true}
   else if(f.t&&!parts.includes(f.t))parts.push(f.t)}
  {const Ns=parts.filter(x=>/^tính /.test(x));if(Ns.length>1){const i=parts.indexOf(Ns[0]);for(const x of Ns.slice(1))parts.splice(parts.indexOf(x),1);parts[i]="tính "+Ns.map(x=>x.slice(5)).join(", ")}}
- if(unkNet||unkTr){const pr=whyPron(p);parts.push(unkNet&&unkTr?`ta chưa rõ tính nết và điều ${pr} trọng`:unkNet?(parts.some(x=>/^tính /.test(x))?"còn nết khác ta chưa rõ":`ta chưa rõ tính nết ${pr}`):`ta chưa rõ điều ${pr} trọng`)}
+ /* «Vì sao» only when it tells her a real cause (owner 24/11 ~21:57Z): a cause she does not know («ta chưa rõ tính nết nàng») explains nothing → no line; the number stays on the Được / Mất / Kèm line */
  if(!parts.length)return"";const n=d!=null?d:e.d;if(!n)return"";
  return `${p==="emp"?"Đêm thị tẩm":whyWho(p)}: ${parts.join(", ")} → ${WHY_STAT[e.stat]||e.stat} ${WHY_OWN.has(e.stat)?(n>0?"thêm ":"bớt "):(n>0?"+":"−")}${Math.abs(n)}`}
 /* identical lines of one result (two strangers of the same bậc) say it once with the count */
