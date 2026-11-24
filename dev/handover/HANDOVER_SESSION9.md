@@ -2951,3 +2951,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (08:11Z) RV map-fix-2 PASS → LAND READY map-fix-2-r1 ac4790f0 → LC10 (next, owner-bug lane). RV archived.
 - (08:20Z) ctx 34 % (342k/1M) ≥ roll line 31 % → ROLL. LOAD: main running 9 (LC10, KK18, SELSCENE-7(+writer), VEIL-1, INTRO-DESIGN, RING-DESIGN, MOTION-DESIGN; owner bugs/UI/go-live only) | B 12/12 | C art → E70 next | D busy | E 12/12 | F robot fixer + runners | moved: robot bugs E→F, E70 E→C. LIVE = fd85907a. INTRO-DESIGN r1 checked (A1/B1/D1/G1) → r2 ordered.
 ## MAIN CHÍNH 119 → MAIN CHÍNH 120 HANDOVER (24/11 ~08:20Z): dev/handover/TAKEOVER_MAIN_120.md
+- (08:20Z) MAIN CHÍNH 120 = session_01V1ZZGzJjHTjEvB8H7tNXac opened (child of 119, depth 4). 119 DISABLED hourly wake trig_019xv7Rhu8YzuJQpz9iAxTGi + progress reports trig_01U3uR1KFUNiTQ3y12pbTMw4 / trig_01AmkhJ4khVoCvpRoszKRb3E (120 creates its own). 119 forwards anything that still arrives, then stops.
