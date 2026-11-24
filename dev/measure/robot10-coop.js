@@ -83,6 +83,14 @@ const ONE=`(()=>{const k=(${TICK.toString()})();const t=(${CB.CLR.TAP.toString()
 /* the next thân phận for this seat's next life (read by j2 start / jcoopthinb core through __forceOrigin, the road through robot10-in's a67init) */
 const SETTP=tp=>{window.__r10cfg.origin=tp.origin;window.__r10cfg.road=tp.road;window.__forceOrigin=tp.origin;window.__origO=tp.origin};
 const SCR=()=>{try{return JSON.stringify({buoi:S&&S.buoi,week:COOP.state.week,bend:COOPW.bend,pendBuoi:COOPW.pendBuoi,pend:COOPW.pend,sent:COOPW.sent,Q:Q.length,Qt:Q.map(x=>String(x.t||x.title||'').slice(0,40)),mh:document.getElementById('modal').hidden,mg:!!(S&&S.mg),dead:S&&S.dead,next:(document.getElementById('next')||{}).disabled,title:!document.getElementById('title').hidden,st:COOP.state.status,peer:COOP.state.peerOnline}).slice(0,900)}catch(e){return 'scr: '+e.message}};
+/* SCRX (stuck dump): the lock inputs of jcoopworld lockNext + the night gate + thin E, #next text, the COOPW trace tail */
+const SCRX=()=>{const W=window.COOPW||{},n=document.getElementById('next')||{},f=(g)=>{try{return g()}catch(e){return 'x:'+e.message}};
+ return {nextText:n.textContent,nextDis:n.disabled,coopWait:n.dataset&&n.dataset.coopWait,wk:f(()=>S.week),buoi:f(()=>S.buoi),
+  eW:f(()=>W.eW&&W.eW()),lv:f(()=>W.thin&&W.thin.lvl),eWait:f(()=>W.eWait&&W.eWait()),eAsked:f(()=>W.eAsked&&W.eAsked()),nReady:f(()=>W.nReady&&W.nReady()),
+  waiting:f(()=>W.isWaiting&&W.isWaiting()),frozen:f(()=>W.isFrozen&&W.isFrozen()),hold:W.hold,base:!!W.base,inLife:W.inLife,lvWas:W.lvWas,
+  nrdy:W.nrdy,ngo:W.ngo,ngoW:W.ngoW,nfr:W.nfr,nforce:W.nforce,wantB:W.wantB,whereKey:W.whereKey,rweek:W.rweek,rbuoi:W.rbuoi,wkIn:W.wkIn,
+  coop:f(()=>({week:COOP.state.week,buoi:COOP.state.buoi,ended:COOP.state.ended,bended:COOP.state.bended,seats:COOP.state.seats,status:COOP.state.status,seat:COOP.seat})),
+  modal:f(()=>{const m=document.getElementById('modal');return m&&!m.hidden?m.innerText.slice(0,300):''}),tr:(W.tr||[]).slice(-150)}};
 /* save round-trip in a solo scratch page: load her save (deser), save again, the two must match (fields the load only fills in are fine) */
 const RT=s=>{const J=x=>String(JSON.stringify(x));function dp(a,b,p){if(a===b||a===undefined)return null;
   if(typeof a==='string'&&typeof b==='string'){let i=0;while(i<a.length&&a[i]===b[i])i++;return p+' (text differs at char '+i+'): «…'+a.slice(Math.max(0,i-30),i+40)+'» → «…'+b.slice(Math.max(0,i-30),i+40)+'»'}
@@ -207,6 +215,9 @@ async function room(job,TP,P,tpNext,bug,out){const b=await chromium.launch(/127\
    if(Date.now()-lastStep>STUCK){const tr=[];for(const o of [A,B])tr.push((o===A?'host ':'guest ')+await o.p.evaluate(SCR).catch(e=>e.message));
     const x=bug('stuck','co-op room stuck: no room week step in '+STUCK/1e3+' s',tr.join(' || '));if(x.n===1){x.save=await A.p.evaluate(()=>window.__r10&&window.__r10.lastSave).catch(()=>null);const d=path.join(OUT,'shots');fs.mkdirSync(d,{recursive:true});
      for(const o of [A,B]){const f=path.join(d,`${job.id}-r${out.rooms}-${o===A?'host':'guest'}-stuck.png`);await o.p.screenshot({path:f}).catch(()=>{});(x.shots=x.shots||[]).push(path.relative(OUT,f))}}
+    /* fixer #5 (week-end stuck family): every stuck room dumps WHY #next is locked on each seat (SCR's `next` = #next.disabled) + the COOPW trace tail */
+    for(const o of [A,B]){const sd=path.join(OUT,'stuck');fs.mkdirSync(sd,{recursive:true});const j=await o.p.evaluate(SCRX).catch(e=>({err:e.message}));j.scr=await o.p.evaluate(SCR).catch(e=>e.message);
+     fs.writeFileSync(path.join(sd,`${job.id}-r${out.rooms}-w${rm.weeks}-${o===A?'host':'guest'}.json`),JSON.stringify(j,null,1))}
     ret='stuck';break}
    await sleep(40)}
   await yearCut(rm.yr.year,true);rm.min=+((Date.now()-rm.t0)/6e4).toFixed(1);
