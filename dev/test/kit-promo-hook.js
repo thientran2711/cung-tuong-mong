@@ -12,9 +12,9 @@ const {chromium}=require('playwright');const URL=process.argv[2];const [W,H]=(pr
    if(pre!==post)bad.push("hook wrote to S");const w=want(got);if(w)bad.push(w);out.push({k,got,bad})};
   const r0=S.rank;
   ck("new game",null,g=>!g?"null":!(g.months>=0)?"months "+g.months:g.rank!==RANKS[r0+1].n?"rank "+g.rank:!Array.isArray(g.miss)?"miss not array":"");
-  ck("all met + exam open",()=>{S.lastPromo=S.turn-99;S.sung=S.danh=999;delete S.ex;exS(S)},g=>{const el=exCanSit(S);return !g?"null":el&&(g.months!==0||!g.ready)?"can sit but months "+g.months+" ready "+g.ready:el&&g.miss.length?"elig but miss "+g.miss:!el?"exElig false: "+JSON.stringify(promoReqP(S).filter(x=>!x[0]).map(x=>x[1])):""});
+  ck("all met + exam open",()=>{S.lastPromo=S.turn-99;S.sung=S.danh=999;delete S.ex;exS(S);/* promo-build: in a kỳ month */for(let i=0;i<24&&typeof pbKyAt==="function"&&!pbKyAt(pbA());i++){S.month=S.month%12+1;if(S.month===1)S.year++}},g=>{const el=exCanSit(S);return !g?"null":el&&(g.months!==0||!g.ready)?"can sit but months "+g.months+" ready "+g.ready:el&&g.miss.length?"elig but miss "+g.miss:!el?"exElig false: "+JSON.stringify(promoReqP(S).filter(x=>!x[0]).map(x=>x[1])):""});
   ck("exam cooldown 4",()=>{delete S.ex;const e=exS(S);e.cd=S.turn+4},g=>!g?"null":g.months<4?"months "+g.months+" < cd 4":"");
-  ck("gap not met",()=>{delete S.ex;S.lastPromo=S.turn},g=>!g?"null":g.months!==promoGap(S.rank)?"months "+g.months+" want "+promoGap(S.rank):"");
+  ck("gap not met",()=>{delete S.ex;S.lastPromo=S.turn},g=>{if(!g)return"null";/* promo-build: the first kỳ sắc phong at or after the wait */const w=typeof pbNextKy==="function"?pbNextKy(pbA()+promoGap(S.rank)).A-pbA():promoGap(S.rank);return g.months!==w?"months "+g.months+" want "+w:""});
   ck("rank 3, Sủng/Danh 0",()=>{S.rank=3;S.sung=S.danh=0;S.lastPromo=S.turn-99;delete S.ex},g=>!g?"null":g.rank!==RANKS[4].n?"rank "+g.rank:!g.miss.some(t=>/^Sủng/.test(t))?"no Sủng row in miss":g.ready?"ready while unmet":"");
   ck("Hoàng hậu (rank 7)",()=>{S.rank=7},g=>g===null?"":"not null");
   ck("lãnh cung",()=>{S.rank=r0;S.out=1},g=>g===null?"":"not null");

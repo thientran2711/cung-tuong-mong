@@ -9,7 +9,7 @@ let SIZES=args.slice(3);if(!SIZES.length)SIZES=['755x1000@2','1000x755@2','1180x
 const boot=async(p,u)=>{await p.goto(u,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await p.waitForTimeout(1500);
  await p.evaluate(()=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}try{localStorage.clear()}catch(e){}SLOT=3;window.__nlInner=1;document.getElementById('title').hidden=true;
   for(let i=0;i<60;i++){start();if(!isSrv()&&S.rank<=2)break}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;S.bac=200;S.suc=90;render()})};
-const elig=`(()=>{const nx=RANKS[S.rank+1];S.sung=nx.s+5;S.danh=nx.d+5;S.duc=Math.max(S.duc,nx.dd||0);S.lastPromo=S.turn-12;S.hh=40;S.th=60;S.confined=0;render()})()`;
+const elig=`(()=>{const nx=RANKS[S.rank+1];S.sung=nx.s+5;S.danh=nx.d+5;S.duc=Math.max(S.duc,nx.dd||0);S.lastPromo=S.turn-12;S.hh=40;S.th=60;S.confined=0;/* promo-build: the ordinary exam opens only in a kỳ sắc phong month */for(let i=0;i<24&&typeof pbKyAt==="function"&&!pbKyAt(pbA());i++){S.month=S.month%12+1;if(S.month===1)S.year++}render()})()`;
 (async()=>{const b=await chromium.launch();const errs=[];const T=[];const ok=(c,n,x)=>T.push([c?'PASS':'FAIL',n,x==null?'':String(x).slice(0,160)]);
  for(const [si,SZ] of SIZES.entries()){const [wh,d]=SZ.split('@');const [W,H]=wh.split('x').map(Number);
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+d,hasTouch:true,isMobile:W<1100,reducedMotion:'reduce',serviceWorkers:'block'});const p=await ctx.newPage();
