@@ -1375,7 +1375,7 @@ PROMO REDESIGN design doc (MAIN 116 07:57Z a–d + 08:33Z; NO build) + kitPromoH
 PALACE AUDIT + DISTANCE EFFECT (opus; MAIN 116 08:16Z + 08:46Z; briefs/D-palace-distance.md) | reports/palace-audit.md; review/palace-distance | (opening) | RUNNING | 24/11 05:40Z (Foreman D ROOT)
 LAW-1 likes/dislikes/gifts scan + fix (opus; MAIN 116 07:57Z (e); briefs/D-law1-likes-gifts.md) | review/law1-gifts | (opening) | RUNNING | 24/11 05:40Z (Foreman D ROOT)
 | ROBOT-COOP LEAD/FIXER #2 (opus; successor of 2uLSjqhM; briefs/b-robot10-coop-fixer.md) | review/robot-coop-fix-<n>; reports/thin.md «## ROBOT-COOP» | B | session_01N1tNP3va8MrNMqi1MZLTgt | RUNNING | 24/11 05:36Z |
-| REVIEW robot10-coop r1 (sonnet SMALL test-only; briefs/b-robot10-coop-review.md) of review/robot10-coop 48d1d7e1 | review/robot10-coop-r1 | B | session_01N1tNP6pEDc1YrVZnAFh6AX | RUNNING | 24/11 05:36Z |
+| REVIEW robot10-coop r1 (sonnet SMALL test-only; briefs/b-robot10-coop-review.md) of review/robot10-coop 48d1d7e1 | review/robot10-coop-r1 | B | session_01N1tNP6pEDc1YrVZnAFh6AX | PASS 6a6413db LAND READY (archived) | 24/11 05:36Z |
 | ROBOT-COOP RUNNER U1 pairs 1-2 SWAP=0 ×10 kiếp (sonnet; briefs/b-robot10-coop-runner.md) | dev/handover/robot/coop-*-p1-2.md | B | session_01N1tNP3yvoJnQ8TgBpcq5Be | RUNNING | 24/11 05:36Z |
 | ROBOT-COOP RUNNER U2 pairs 1-2 SWAP=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p1-2-s.md | B | session_01N1tNP2VQmoYutPcH2wVYLj | RUNNING | 24/11 05:36Z |
 | ROBOT-COOP RUNNER U3 pairs 3-4 SWAP=0 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p3-4.md | B | session_01N1tNP6GBeXdWAwKq3PXxHZ | PAUSED (archived 05:43Z for kit seat; U3 back to QUEUED) | 24/11 05:36Z |
@@ -1388,3 +1388,4 @@ LAW-1 likes/dislikes/gifts scan + fix (opus; MAIN 116 07:57Z (e); briefs/D-law1-
 | ROBOT-COOP RUNNER U3 (re-opened) pairs 3-4 SWAP=0 SEED=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p3-4.md | B | session_01N1tNP2fZxefqCF5gDf8nSK | RUNNING | 24/11 05:44Z |
 | SELSCENE-5 opening 3 days (opus; successor of SELSCENE-4; reports/selection-scene.md) | review/selection-scene | MAIN 118 | session_01V1ZZH1P6EXpzNXqeuKYD38 | RUNNING | 24/11 06:34Z |
 | REVIEW E65r TITLES2 r3 BIG (opus; briefs/E65r-review-titles2-r3.md) of 86e0fcf1 | review/titles2-r2; reports/titles2-review-r3.md | FOREMAN E (child1) | session_01DgYSWkTHXKFwZRgoxgzfwZ | RUNNING | 24/11 05:58Z |
+| ROBOT-COOP RUNNER U4 pairs 3-4 SWAP=1 SEED=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p3-4-s.md | B | session_01N1tNP2J2RWyqmnHnG8Run7 | RUNNING | 24/11 05:56Z |
