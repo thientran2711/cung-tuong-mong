@@ -40,4 +40,22 @@ Scan dev/test/r10e-null-seat-scan.js (every direct queenP() read handed to a per
 Runtime dev/test/r10e-econ-noqueen.js (nc-B save 005, seat emptied, khất bổng set): LIVE = «econ card TypeError: Cannot read properties of null (reading 'queen')» at rkOf ← rkName ← stipEvent ← econStipend (= the robot's row), 4 FAIL; fix-1 = card built, row «Khất bổng theo ý Nội vụ phủ» / «theo ý Hoàng hậu» (cutBy) / seat filled unchanged «theo ý Hoàng hậu», 0 errors — ALL OK.
 Tests: quickcheck PASS 298 s (old save ok; perf new/live render 350/348, tab 650/676, buổi 1645/1735 ms; core gates PASS; its «NOT BUILT» line was the uncommitted tree — built + committed after) · bongloc-options 14/14 · bongloc-group-scan ok. No UI/kit/wording change except the orderer name in an existing row; no BAL number; co-op not touched (isSrv seat skips stipSkim as before).
 
-### E-FIX-2 harness (test-only) — in progress
+### E-FIX-2 harness (TEST-ONLY: dev/measure + dev/test, no game file) — review/robot10-e-fix-2 19183dcac3310a87aa6c87224ccf95de9725b24d (base LIVE fd85907a)
+| row family | cause in the harness | change | proof (LIVE harness → fixed) |
+|---|---|---|---|
+| number «Bạc +8» vs bac 20, «Tâm cơ +3» vs tamco −1, «Sủng +2» vs sung −1 | auditOpt read o.n+o.x: no «ngay: <fx>» part; a road beat's x = its WIN block while fx = its price; «mỗi tháng Bạc +8» (monthly tai mắt pay) read as the option's effect | robot10-in auditOpt reads the line the kit draws (j67 line / dilLineRaw), «ngay:» = fx segment, per-period «mỗi tháng/tuần/năm…» amounts skipped; auditOpt exposed as __r10.auditOpt | dev/test/r10e-audit.js (every road beat of every ARC67 arc drawn via PEND.j67 = 2727 beats / 8954 options + «Bạc lạ»): 13 + 1 rows → 0 + 0 |
+| kbk-* text over text on every tab (Tuần lục) | the flip-book stacks its leaves; a leaf's header lies on the same header of the leaves under it | uiScan text-over-text only when BOTH texts are seen (top element at one of 5 points) and not on different flip-book leaves (.kbk-sheet / .kbk-face; 3D hit-testing unreliable) | dev/test/r10e-uiscan-book.js (robot's own uiScan, nc-B save 005, 4 book pages): Fold 28 kbk rows → 0, iPad → 0; a real text laid on a page title is still reported on both devices. Book pages looked at (Fold p1, iPad p3–4): clean |
+| stuck TIMEOUT «Bỏ cuộc?» opts [] over a MƯU game | after the bot's ✕ on a live jsgame, j82 asks kitConfirm; inpage6 never pressed it | inpage6 modalStep presses [data-kcf-yes] first (the caller's own lose path, as she would) | dev/test/r10e-kcf.js: LIVE confirm left / closed by «Thôi» (loop) → fixed: lose path ran in 1 step |
+| mem «bot page keeps growing» | unknown | memSample adds a DOM census (nodes in the document by holder, S.logs, Q) and the mem row prints it | short real run (pf pt_hai, 1 bot, 1 life, CAP 480 s, UIEVERY 40): census in-document nodes 1430 → 781 flat while the CDP count 5878 → 2100 (it also counts detached nodes held by JS); no mem row in 11 min. A long round shows which holder grows |
+Short real run on the fixed harness: 7 rows (soft-lock after load, wall cap, save drift = HOLD families; lag; 3 bet rows that my first draft caused — removed, audit back to the old rule for «thành:» of plain options; re-scan 0/0). No harness crash.
+Not changed: plain options keep the old «thành:» rule (win block from o.w only).
+SSK: SẴN SÀNG KIỂM robot10-e-fix-2 19183dca (SMALL reviewer: test-only). Runners should take it before round 2.
+
+## 3. Open / for Foreman E
+- HOLD (MAIN): save→load→save drift rows (S.logs.0, S.visit.people.0.sk / S.visit.tk, S.il.seq) and «Sang ngày mới» stuck after load on Fold — every file has them.
+- Needs repro saves (runners did not push saves/): TIMEOUT at «lc out:1» (R1) and «tgk» (R4); court tab span.kgl.kfx off screen x 318..1007 (R3, 1 hit).
+- Design note for MAIN/content: road option «Nhờ người quen lo liệu, không dùng bạc» costs Sức −19 while its kèm says «tốn bạc» (Hầu bệnh / Mùa dịch beats).
+- Remaining round-1 files (R2, R8, full R5/R6/R7) not yet triaged.
+
+## HANDOVER (rollover: START_CTX ~5 % + 25 % reached, ctx ~36 %)
+Successor fixer: read this report, briefs/E-robot10-fixer.md, D's reports/robot10-nc-fixer.md. Branches: review/robot10-e-fix-1 8f97171e (game, SSK sent), review/robot10-e-fix-2 19183dca (harness, SSK). Tests: dev/test/r10e-*.js (usage in headers; saves: dev/handover/robot/nc-B-tuc/saves/*.json work). Handover pushes: fetch --force refspec, checkout fresh, append, commit, push — never rebase. Worktrees /home/user/wt/e10-* are scratch (deleted).
