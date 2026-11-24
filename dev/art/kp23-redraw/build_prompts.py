@@ -143,7 +143,7 @@ S2 = {
 "thai-hau-quo-trach": ("th",["th","phi"],"The Empress Dowager, seated close to the viewer, scolds sternly with a severe face, one hand raised; the consort kneels before her with head bowed, face ashamed, still visible."),
 "thai-y-khong-thay-la": ("doc",["doc","phi"],"The imperial physician shakes his head and hands back an open box with an object, close to the viewer, face calm and reassuring; the consort receives it, relieved but doubtful."),
 "them-loi-buoc-toi": ("phi",["phi","hh"],"She points and adds accusations before the Empress, close to the viewer, face sharp and cold; the Empress, seated, listens; an accused woman kneels in the middle ground, face pale."),
-"theo-cha-muu": ("phi",["phi"],"By a candle, she reads a secret letter from her father, close to the viewer, then holds its corner to the flame, face grave and resolved."),
+"theo-cha-muu": ("phi",["phi"],"By a candle, she holds the corner of her father's secret letter to the flame to burn it, close to the viewer, face grave and resolved. One single scene in one frame, never split into panels."),
 "theu-khan-ban-lc": ("plain",["plain"],"In the cold palace by a lattice window, she embroiders a handkerchief, close to the viewer, face quiet and patient, soft daylight on her face."),
 "tich-thu-co-co": ("phi",["phi","eun"],"The Empress's eunuch takes away her jewellery box, close to the viewer; she stands watching, face suppressing anger and humiliation."),
 "tich-thu-vo-co": ("maid",["maid","eun"],"A eunuch wrenches a jewellery box from the palace maid's hands; she is close to the viewer, holding on, face indignant and frightened."),
