@@ -2933,3 +2933,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (07:40Z) MORNING REPORT questions for sếp: (1) lip-teeth hold (18/11 16:42Z «wait for my drawing») — lift? (2) AI narrator needs her API key + cost cap. D nết thresholds BUILD ordered (summary in report).
 - (07:42Z) ctx 23 % (228k/1M; roll 31 %). F session not reachable by send_message (other account) → order sits in FOREMAN_F_STATUS (F reads at :17). LC10 told ageband-r 6f1c4701.
 - (07:45Z) LC10: ageband-r already LIVE (68799300); thin-p6 play tests PASS, quickcheck running.
+- (07:50Z) OWNER RULE ~08:08Z real: no pre-action reminders anywhere → RING-DESIGN corrected; KK18 audit ordered (report only).
