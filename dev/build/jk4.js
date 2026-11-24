@@ -887,7 +887,7 @@ function kitCloseOthers(){let n=0;
  return n}
 function kitDialogStack(){try{const m=typeof Q!=="undefined"?Q[0]:null;if(!m)return 0;return kitDialogWins(m)?kitCloseOthers():0}catch(e){console.error("kitDialogStack",e);return 0}}
 window.kitDialogStack=kitDialogStack;window.kitCloseOthers=kitCloseOthers;window.kitDialogWins=kitDialogWins;
-(function(){const st=document.createElement("style");st.id="kit-dialog-stack";st.textContent=`html body:not(.kg82cf) #modal:not(.kptitle){z-index:42}`;document.head.appendChild(st);
+(function(){const st=document.createElement("style");st.id="kit-dialog-stack";st.textContent=`html body #modal:not(.kptitle){z-index:42}`;document.head.appendChild(st);
  setTimeout(()=>{const s1=showModal;showModal=function(){const r=s1.apply(this,arguments);kitDialogStack();return r}},0)})();
 /* game / lesson results in #ov (kg82 "Đã hiểu", j92 Chải chuốt, the old j5 "Xong"): the result card closes with ✕ / tap outside / Esc,
    which press that button (its own handler applies the result as before); while the game runs there is no ✕ */
@@ -1056,7 +1056,7 @@ let KIT_OPT_DPQ=0;/* a card that changed height inside a person dialog → the d
 function kitOptFitDone(b,h0){try{if(Math.abs(b.offsetHeight-h0)>1&&b.closest("#modal .dlg.kdper")&&!KIT_OPT_DPQ){KIT_OPT_DPQ=requestAnimationFrame(()=>{KIT_OPT_DPQ=0;try{kitDpFit()}catch(e){}})}}catch(e){}}
 function kitOptFit(b){const h0=b&&b.offsetHeight||0;kitOptFit0(b);if(b)kitOptFitDone(b,h0)}
 function kitOptGroup(b){const r=b.closest("#modal .dlg")||b.parentElement||document;return [...r.querySelectorAll(KIT_OPT_FIT_SEL)].filter(x=>x.querySelector(":scope > .kaart")&&x.querySelector(":scope > .kabody"))}
-function kitOptSet(x,s,h){const art=x.querySelector(":scope > .kaart");if(!art)return;h=h||s;if(s){x.style.setProperty("--kaw",s+"px","important");x.style.setProperty("--kah",h+"px","important");art.style.setProperty("flex-basis",s+"px","important");art.style.setProperty("width",s+"px","important");art.style.setProperty("height",h+"px","important");x.classList.toggle("kasq",s===h)}
+function kitOptSet(x,s,h){const art=x.querySelector(":scope > .kaart");if(!art)return;if(s&&x.matches("button.ka.kopt")&&!x.closest(".pc"))return;/* KIT §6.2c: a dialog option card's picture size = its tier (kitOptTier, jopic): the legacy fitters never set a width of their own */h=h||s;if(s){x.style.setProperty("--kaw",s+"px","important");x.style.setProperty("--kah",h+"px","important");art.style.setProperty("flex-basis",s+"px","important");art.style.setProperty("width",s+"px","important");art.style.setProperty("height",h+"px","important");x.classList.toggle("kasq",s===h)}
  else{x.style.removeProperty("--kah");x.style.removeProperty("--kaw");["flex-basis","width","height"].forEach(k=>art.style.removeProperty(k));x.classList.remove("kasq")}}
 /* PERSON / SUBJECT DIALOGS (owner 17/11 ~05:00Z, final rule): the group is a person card's act rows or a dialog with a figure column (.kpsubj / kdper):
    every card is ONE size (the tallest text sets it) and its picture is a TALL 3:4 RECTANGLE filling the card height (width = 3/4 of that height, 54..112 px;

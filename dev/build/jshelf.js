@@ -96,11 +96,11 @@ Object.assign(BAL,{shelf:{
  plant:{start:80,hw:3,wither:35,deadW:3,witherLux:.3,khacSelf:1,/* OWNER DECIDED (OD 17/11 ~18:15Z, option 1): servants care plants + pets at 0 khắc to her; 'Tự tay chăm' = khacSelf khắc; ONE 'Chăm sóc' act */srvBase:.45,srvLoyK:.006,srvMax:1.1,qCut:[.6,.9],/* servant care words: below qCut[0] vụng về, below qCut[1] tạm được, else khéo tay */srvTr:{"Cẩn thận":.2,"Chăm chỉ":.2,"Lười biếng":-.3,"Vụng về":-.2},
   gain:[10,45],word:[.35,.8],/* her care score: below word[0] "chưa khéo", at or above word[1] "rất khéo tay" */game:{rounds:3,steps:10,band:[6,8],ms:[260,170]}},
  /* the shared deed "Ghé chơi" (TW call): friendship + a look at the room */
- visit:{rel:3,w:.6,affMin:-15,dayP:24,base:5,herW:15,upW:5},/* a drop-in visit = kind g3call (her ally need); dayP = the chance (in 100) her free buổi lets her go (read in npcWhy done; 24 = the old 12 for everyone, raised as only consorts with an ally need ≥ g3.call.min now have the reason: 12-seed probe, visits to her 0.73× at 18; G1 #7); target weight base + liking (+ her, + a superior) *//* anyone not on bad terms may call (owner: NPCs come to her room as she goes to theirs) */
+ visit:{rel:3,w:.6,dayP:24,base:5,herW:15,upW:5},/* a drop-in visit = kind g3call (her ally need); dayP = the chance (in 100) her free buổi lets her go (read in npcWhy done; 24 = the old 12 for everyone, raised as only consorts with an ally need ≥ g3.call.min now have the reason: 12-seed probe, visits to her 0.73× at 18; G1 #7); target weight base + liking (+ her, + a superior) *//* anyone not on bad terms may call (owner: NPCs come to her room as she goes to theirs) */
  seeDeeds:["call","visit","help","apol","provoke","humil","test","mediate","warn"],
  /* Tố xa xỉ / Tố vượt phẩm, the room cause. Nobody knows the scores (owner (d)): a charge rests on what one SAW, a TIP (rumour) or a GUESS; the inquiry settles the truth.
     guessO: a hostile NPC with nothing seen / heard still accuses on a guess guessO in 100 a month (npcO in 100 with something seen / heard); vp*: a ngự ban piece above rank is allowed, so a proven charge only sends it back to the chest */
- acc:{cdA:48,vpConf:1,/* proven vượt phẩm: a ngự ban piece only goes back to the chest (vpDanhT); any other over-rank piece is confiscated + punish(vượt phẩm, vpConf) */cdT:72,hostMin:50,ghenMin:70,npcO:15,guessO:2,ducT:-2,danhT:-4,repT:2,danhA:2,rel:-10,waveDanhA:-2,falseDanhA:-5,falseDanhT:2,falseRel:-12,vpDanhT:-2}}});
+ acc:{cdA:48,vpConf:1,/* proven vượt phẩm: a ngự ban piece only goes back to the chest (vpDanhT); any other over-rank piece is confiscated + punish(vượt phẩm, vpConf) */cdT:72,ghenMin:70,npcO:15,guessO:2,ducT:-2,danhT:-4,repT:2,danhA:2,rel:-10,waveDanhA:-2,falseDanhA:-5,falseDanhT:2,falseRel:-12,vpDanhT:-2}}});
 
 /* ---------- new décor pieces (IT, kd "Bày biện"): only earned (bought, given, bestowed); names + one line each (player text, VANPHONG) ---------- */
 (function(){const D={
@@ -255,7 +255,7 @@ function shelfSpyTxt(a,t,by){const r=shelfSee(a,t,by);if(!r||a!==S)return"";retu
 /* ---------- NPC VISITS (owner (2): "tại sao người ta không tới phòng của tôi?") — the shared deed Ghé chơi, two-way ---------- */
 (function(){try{BAL.tw.g.call=BAL.shelf.visit.rel;
  TWD("call",{n:"Ghé chơi",req:(a,t)=>!!t&&t!==a&&!t.out&&t.alive!==false,run:(a,t)=>/* RECEIVER CHOICE (jrcv RCVK.call): the host answers */rcvAsk("call",a,t)});
- SOC.call={w:BAL.shelf.visit.w,ok:(v,t)=>t!==v&&!t.out&&aff(v,t)>=BAL.shelf.visit.affMin,run:(v,t)=>twDo(v,t,"call",true)};
+ SOC.call={w:BAL.shelf.visit.w,ok:(v,t)=>t!==v&&!t.out&&aff(v,t)>netTh(v,"ky"),run:(v,t)=>twDo(v,t,"call",true)};
  if(typeof AGSOC==="object"){AGSOC.call=["call","social","ally",g=>({ally:g.call})];AGACTW.call="ghé chơi"}}catch(e){console.error("shelf call",e)}})();
 /* two-way (OD:L1386): the deed NPCs do to her is also hers — "Ghé chơi" in her talk list (jtwoway topicOpts), same deed, same gain, both see the rooms */
 (function(){if(typeof topicOpts!=="function")return;const t0=topicOpts;topicOpts=function(v){const A=t0.apply(this,arguments);try{const D=TW.call;
@@ -266,7 +266,7 @@ function shelfSpyTxt(a,t,by){const r=shelfSee(a,t,by);if(!r||a!==S)return"";retu
    NPC-PURPOSE G3: only when her ALLY need (0..1 × g3.call.k) is real (≥ BAL.ag.why.g3.call.min) and at most once per BAL.ag.why.cd.g3call tuần; the one she visits = near-best
    of the people she likes (old weights); no daily dice */
 npwReg("g3call",{who:c=>[c.v],why:v=>{const V=BAL.shelf.visit;let N={};try{N=agNeedsC(v)}catch(e){}const n=(N.ally||0)*BAL.ag.why.g3.call.k;/* need 0..1 → the 0..100 score scale */if(n<BAL.ag.why.g3.call.min)return null;
-  const L=[S].concat(liveRivals(true)).filter(x=>x&&x!==v&&x.alive!==false&&!x.out&&aff(v,x)>=V.affMin);const t=npwPick(L,x=>V.base+Math.max(0,aff(v,x))+(x===S?V.herW:0)+(rkOf(x)>rkOf(v)?V.upW:0),{all:true});/* G1 #7: every one she likes may be the one (old agPw weights); top-only sent the herW-boosted player most calls: visits to her 174→383 */
+  const L=[S].concat(liveRivals(true)).filter(x=>x&&x!==v&&x.alive!==false&&!x.out&&aff(v,x)>netTh(v,"ky"));const t=npwPick(L,x=>V.base+Math.max(0,aff(v,x))+(x===S?V.herW:0)+(rkOf(x)>rkOf(v)?V.upW:0),{all:true});/* G1 #7: every one she likes may be the one (old agPw weights); top-only sent the herW-boosted player most calls: visits to her 174→383 */
   return t?{s:n,t,r:"muốn thân với "+npwNm(t),k:palaceOf(t)}:null}});
 (function(){if(typeof agDecide0!=="function")return;const d0=agDecide0;agDecide0=function(v){const r=d0.apply(this,arguments);try{if(r||!v||v.confined)return r;
   const w=npcWhy("g3call",{v},()=>roll(BAL.shelf.visit.dayP));/* the chance to drop in this buổi = the old dayP (her free buổi); cd stamped only when she goes */const t=w&&w.tgt;if(!t)return r;const c={k:"call",t,tag:"social",act:AGACTW.call,need:"ally",why:w.why,at:(kh,vv,tt)=>palaceOf(tt)};const sl=agSlot(v,c.at,t);if(!sl)return r;
@@ -319,8 +319,8 @@ function shelfNpcAccuse(){const B=BAL.shelf.acc;for(const a of liveRivals(true))
    const r=shelfSeen(a,t);let kind=r&&r.vr>0?"vp":r&&r.lv>=2?"xx":null;
    if(kind?!roll(B.npcO):!roll(B.guessO))continue;if(!kind)kind="xx";/* a guess */
    a.shA=wk();t.shT=wk();const txt=kind==="vp"?shelfVpAccuse(a,t):shelfAccuse(a,t);if(t===S)Q.push({t:kind==="vp"?"Bị tố bày đồ vượt phẩm":"Bị tố bày biện xa xỉ",who:typeof pv==="function"?pv(a):null,h:`<p>${txt}</p>`});else try{newsAdd(a,kind,txt,false)}catch(e){}}}}
-npwReg("g3acc",{who:c=>[c.a],why:(a,c)=>{const B=BAL.shelf.acc;const L=c.T.filter(t=>hostility(a,t)>=B.hostMin||(t===S&&(a.ghen||0)>=B.ghenMin));
-  const t=npwPick(L,x=>hostility(a,x)+(shelfSeen(a,x)?B.hostMin:0));return t?{s:Math.min(100,hostility(a,t)),t,r:"oán "+npwNm(t)}:null}});
+npwReg("g3acc",{who:c=>[c.a],why:(a,c)=>{const B=BAL.shelf.acc;const L=c.T.filter(t=>hostility(a,t)>=netTh(a,"host")||(t===S&&(a.ghen||0)>=B.ghenMin));
+  const t=npwPick(L,x=>hostility(a,x)+(shelfSeen(a,x)?netTh(a,"host"):0));return t?{s:Math.min(100,hostility(a,t)),t,r:"oán "+npwNm(t)}:null}});
 
 /* Thái hậu: her own taste decides; she hears of a room through the palace talk (someone saw it or heard of it) — even ngự ban can be "quá xa xỉ" to her (owner OD 17/11 ~19:50Z) */
 function shelfThRebuke(){if(!S||S.thDead)return;const B=BAL.shelf.th;const P=[S].concat(liveRivals(true)).filter(p=>p&&p.alive!==false&&!p.out);

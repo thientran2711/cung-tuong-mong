@@ -151,7 +151,7 @@ function wkAsk(k,mode,run){const a=ARTS.find(x=>x.k===k),l=S.arts[k],fee=mode===
 (function(){const l0=lessonMode;lessonMode=function(k,mode){if(wkPend||!wkLessonOK(k,mode))return l0.apply(this,arguments);wkAsk(k,mode,()=>l0.call(this,k,mode))}})();
 /* practice once mastered: j82's playArt gives the raw score directly when present; otherwise the art's lesson game */
 function wkPractice(k){if(!wkLessonOK(k,"prac"))return;wkAsk(k,"prac",()=>{if(!wkLessonOK(k,"prac"))return;
- const pc={suc:-10,khac:2};if(typeof playArt==="function"&&typeof kgDefer==="function"){kgDefer(pc,()=>wkPracOpen(k));return}apply({suc:pc.suc});spend(pc.khac);wkPracOpen(k)})}
+ const pc={suc:-BAL.artLes.prac,khac:2};if(typeof playArt==="function"&&typeof kgDefer==="function"){kgDefer(pc,()=>wkPracOpen(k));return}apply({suc:pc.suc});spend(pc.khac);wkPracOpen(k)})}
 /* KIT §13.9: the practice charge (Sức -10, 2 khắc) is taken on «Sẵn sàng» (kgDefer); the ✕ before it = free back */
 function wkPracOpen(k){{
  if(typeof playArt==="function"){const pick=wkPend||{kind:WDEF[k],mat:0};wkPend=null;const an=ARTS.find(x=>x.k===k).n;S.mg={k,l:5,mode:"prac",wk:pick,pa:1};
@@ -166,7 +166,7 @@ const WFOLD=/^(Dâng canh ở ngự thư phòng|Cắm hoa dâng Hoàng thượng
 function wkDeckCard(){const k=pick(["mon","bhoa","tho","theu"]),K=WK[k],a=K.a,m=k==="mon"?1:0;const s=wkSubj(k),l=S.arts[a],prac=l>=5;
  const t=k==="mon"?(S.emp.known.dish?`Tự tay nấu ${s}, món ngài thích.`:`Tự tay nấu ${s}; chưa biết ngài thích món gì.`):k==="bhoa"?(S.emp.known.flower?`Cắm một bình ${s}, loài hoa ngài yêu.`:`Cắm một bình ${s}; chưa biết ngài thích hoa gì.`):k==="tho"?"Mài mực, viết một bài thơ.":"Thêu một chiếc khăn lụa.";
  const an=ARTS.find(x=>x.k===a).n;
- return{n:`${prac?"Tự học":"Tự học"} ${an}: ${K.n.toLowerCase()}`,t,c:Object.assign({suc:prac?-10:-15},K.mat[m]?{bac:-K.mat[m]}:{}),o:100,k:2,w:{},dom:"Tài nghệ",lock:!prac&&S.suc<BAL.sucNeed.self,
+ return{n:`${prac?"Tự học":"Tự học"} ${an}: ${K.n.toLowerCase()}`,t,c:Object.assign({suc:prac?-BAL.artLes.prac:-BAL.artLes.self},K.mat[m]?{bac:-K.mat[m]}:{}),o:100,k:2,w:{},dom:"Tài nghệ",lock:!prac&&S.suc<BAL.sucNeed.self,
   x:`${prac?"":`tiến bộ ${an} ${kStepW(1,2)} · `}tự tay chơi thì ra thành phẩm · ${wkOddsTxt(S,k,m)}`,go:()=>{S.mg={k:a,l,mode:prac?"prac":"self",wk:{kind:k,mat:m,subj:s}};save();resumeMG()}}}
 (function(){const d0=deal;deal=function(){d0.apply(this,arguments);try{if(!S||S.out||(S.srv&&!S.srv.risen)||(typeof isSrv==="function"&&isSrv())||!Array.isArray(deck))return;/* ROLE PARITY: a risen maid gets the works card like a born consort */deck.push(wkDeckCard())}catch(e){}}})();
 /* ---- the chest: works listed with every use and its true gain and cost ---- */
@@ -177,7 +177,7 @@ PEND.wkgive=p=>{const e=S.inv[p.ix];if(!e||!e.wk)return null;const w=e.wk;const 
  for(const [id,n] of wkTargets(S)){const r=wkTgt(id);if(!r)continue;const ev=wkEval(S,w,r);if(!ev.ok){if(ev.why)no.push(`${n}: ${ev.why}`);continue}
   O.push({n,fx:{},x:wkGainTxt(ev),go:()=>{spend(2);log(wkGive(S,r,S.inv.indexOf(e)))}})}
  if(w.kind==="mon"&&S.inv.some(x=>x.k==="hacdinh"&&!x.h))for(const v of liveRivals(true)){const sp=caughtOdds(S,v,true);
-  O.push({n:`Lén bỏ Hạc đỉnh hồng rồi tặng ${rkName(v)} ${v.name}`,fx:{},x:`${word(oPoison(S))} · thành: nàng trúng độc, Sức -120, thường là chết, dùng hết 1 Hạc đỉnh hồng · hỏng: bị tra ra, ban chết · kèm: Đức -10 · nàng phát giác trước, nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ: ${chanceW(sp)}`,/* previews: caught (ACT.poison.f, via wkPoison) */go:()=>{spend(2);log(wkPoison(S,v,S.inv.indexOf(e)))}})}
+  O.push({n:`Lén bỏ Hạc đỉnh hồng rồi tặng ${rkName(v)} ${v.name}`,fx:{},x:`${word(oPoison(S))} · thành: nàng trúng độc, Sức ${balSg(-BAL.rl.j8.hit.strong)}, thường là chết, dùng hết 1 Hạc đỉnh hồng · hỏng: bị tra ra, ban chết · kèm: Đức ${balSg(ACT.poison.c.duc)} · nàng phát giác trước, nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ: ${chanceW(sp)}`,/* previews: caught (ACT.poison.f, via wkPoison) */go:()=>{spend(2);log(wkPoison(S,v,S.inv.indexOf(e)))}})}
  O.push({n:"Thôi",fx:{}});
  return{t:`<p>Dâng, tặng <b>${w.n}</b> (${WTIER[w.ti]}, ${w.bn==="ngươi"?"tự tay ngươi làm":"của "+w.bn}) cho ai? Tốn 2 khắc.</p><p class="past">Đồ quý mua bằng bạc giá trị hơn: dâng Hoàng thượng: Tranh cổ ${sgStat(Math.max(1,Math.round(IT.tranhco.gv/2)))}, Đàn cổ ${sgStat(Math.max(1,Math.round(IT.dancoc.gv/2)))}. Đồ tự tay làm được thêm chân tình với người hiền hậu, thêm hợp ý khi trúng sở thích.${no.length?"<br>"+no.join("<br>"):""}</p>`,o:O}};
 function wkAct(a,ix){const e=S.inv[ix];if(!e||!e.wk||S.dead||Q.length)return;
@@ -188,7 +188,7 @@ if(typeof wrapR==="function")wrapR("wkAct",(a,ix)=>({give:"Dâng, tặng",sell:"
 function wkCardsHTML(){const L=S.inv.map((e,i)=>[e,i]).filter(([e])=>e.wk&&!e.h);if(!L.length)return"";const t2=whyTime(2),t1=whyTime(1);
  return `<div class="ph"><span>Tác phẩm tự tay (${L.length})</span><span>Thường · Khá · Tinh xảo · Tuyệt phẩm</span></div><div class="cards">`+L.map(([e,i])=>{const w=e.wk,a=ARTS.find(x=>x.k===w.a);const sv=wkSellVal(w),so=wkSellO(S);const cb=wkContestB(S,w.a);
   const B=[pbtn(`data-wk="give" data-ix="${i}"`,"Dâng, tặng",`tốn: 2 khắc · thành: chọn người, xem được bao nhiêu`,t2),
-   pbtn(`data-wk="sell" data-ix="${i}"`,"Bán ra ngoài cung",`${word(so)} · tốn: 1 khắc · thành: Bạc +${sv} · hỏng: Danh -3, mất tác phẩm`,t1)];
+   pbtn(`data-wk="sell" data-ix="${i}"`,"Bán ra ngoài cung",`${word(so)} · tốn: 1 khắc · thành: Bạc +${sv} · hỏng: Danh ${balSg(BAL.eff.j83.danhWkSell)}, mất tác phẩm`,t1)];
   if(!w.show&&!(w.p!=null))B.push(pbtn(`data-wk="show" data-ix="${i}"${capAt(BAL.btn.wkShow)}`,"Bày ở yến tiệc",`${capW()} · tốn: ${BAL.btn.wkShow.k} khắc · thành: Danh +${WSHOW[w.ti]}${w.ti===3?` · kèm: phi tần ghen +${ghenN(BAL.ghen.showTreasure)}`:""}`,t2));
   return `<div class="card"><h4>${ic(AIMG[w.a],20)}${w.n}</h4><p><b>${WTIER[w.ti]}</b> (${w.q} phần) · ${a?a.n:""} · ${w.bn==="ngươi"?"tự tay ngươi làm":"của "+w.bn} · ${w.d}${w.p!=null?" · phải dâng trong tuần này":""}${w.show?" · đã bày ở yến tiệc":""}${cb?` · Tranh ghế vòng Tài nghệ +${cb}`:""}</p><div class="rbtn">${B.join("")}</div></div>`}).join("")+`</div>`}
 (function(){const i0=invHTML;invHTML=function(){const W=S.inv.filter(e=>e.wk&&!e.h);W.forEach(e=>e.h=1);let h;try{h=i0.apply(this,arguments)}finally{W.forEach(e=>delete e.h)}
@@ -198,7 +198,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest("[data-wk]");if
 /* ---- the Tài nghệ tab: what each art's sessions produce; practice once mastered ---- */
 function wkTabHTML(){const why=whyTime(2)||(S.suc<BAL.sucNeed.wk?"Sức dưới "+BAL.sucNeed.wk:"");
  let h=`<div class="ph"><span>Mỗi buổi học hay tự học mà tự tay chơi trò tài nghệ thì ra một tác phẩm (Học nhanh: không ra thành phẩm), cất vào rương để dâng, tặng, bán, bày ở yến tiệc. Phẩm = phần chơi trò tài nghệ (từ 0 đến 10) + chút bậc tài nghệ + vật liệu.</span><span>Đồ mua bằng bạc vẫn quý hơn</span></div><div class="arts">`;
- h+=ARTS.map(a=>{const l=S.arts[a.k],ks=wkKindsOf(a.k);if(!ks.length)return"";const B=l>=5?[pbtn(`data-wk="prac" data-art="${a.k}"`,"Tự học, làm tác phẩm",`tốn: Sức -10, 2 khắc · thành: một tác phẩm, ${wkOddsTxt(S,ks[0],0)}`,why)]:[];
+ h+=ARTS.map(a=>{const l=S.arts[a.k],ks=wkKindsOf(a.k);if(!ks.length)return"";const B=l>=5?[pbtn(`data-wk="prac" data-art="${a.k}"`,"Tự học, làm tác phẩm",`tốn: Sức ${balSg(-BAL.artLes.prac)}, 2 khắc · thành: một tác phẩm, ${wkOddsTxt(S,ks[0],0)}`,why)]:[];
   return `<div class="art"><b>${ic(AIMG[a.k],20)}${a.n} · bậc ${l}: +${wkLvQ(S,a.k)}</b><span class="u">${ks.map(k=>`${WK[k].w}${WK[k].per?" (để 1 tuần)":""}${WK[k].fin?" ("+wkFinTxt(WK[k])+")":""}`).join(" · ")}</span><span class="u">${wkTierTxt(S,ks[0],0)}</span>${B.length?`<div class="pcb">${B.join("")}</div>`:""}</div>`}).join("")+`</div>`;
  return h}
 (function(){const a0=artTabHTML;artTabHTML=function(){return a0.apply(this,arguments)+wkTabHTML()}})();
@@ -221,7 +221,7 @@ function wkUseOpts(v,w){const B=BAL.ag.why.g2wk,L=[];
  if(w.kind==="mon"&&v.malice>B.malice&&v.inv.some(e=>e.k==="hacdinh"&&!e.h)){const t=npwPick(others(v).filter(t=>t.alive&&!t.out),t=>wkGrudge(v,t)-B.host);if(t)L.push({k:"poison",t,s:wkGrudge(v,t)})}
  if(v.sung<B.sungHi&&wkEval(v,w,"emp").ok)L.push({k:"emp",t:"emp",s:B.emp+(B.sungHi-v.sung)});
  if(!S.thDead&&(v.th||0)<B.thWant&&wkEval(v,w,"th").ok)L.push({k:"th",t:"th",s:B.th+(B.thWant-(v.th||0))/2});
- const f=npwPick(others(v).filter(t=>t!==v&&(t===S?v.rel>B.relMe:rel(v,t)>0)&&wkEval(v,w,t).ok),t=>1+(t===S?v.rel:rel(v,t)));if(f)L.push({k:"gift",t:f,s:B.gift+(f===S?v.rel:rel(v,f))});
+ const f=npwPick(others(v).filter(t=>t!==v&&(t===S?v.rel>=netTh(v,"quen"):rel(v,t)>0)&&wkEval(v,w,t).ok),t=>1+(t===S?v.rel:rel(v,t)));if(f)L.push({k:"gift",t:f,s:B.gift+(f===S?v.rel:rel(v,f))});
  if(w.ti<=1&&!WK[w.kind].per&&(v.bac||0)<B.poor)L.push({k:"sell",s:B.sell+B.poor-(v.bac||0)});return L}
 (function(){const m0=npcMonthly;npcMonthly=function(v){const b=v&&v.arts?Object.assign({},v.arts):null,bp=v&&v.artp?Object.assign({},v.artp):null;const ev=m0.apply(this,arguments);
  try{if(v&&v.alive&&!v.out){if(!v.inv)v.inv=[];if(b&&bp)for(const a in v.arts)if(v.arts[a]!==b[a]||(v.artp||{})[a]!==bp[a]){if(v.inv.filter(e=>e.wk).length<4)wkNpcMake(v,a);break}wkNpcUse(v)}}catch(x){}return ev}})();
@@ -231,19 +231,19 @@ function wkPoison(a,t,ix){const e=a.inv[ix];if(!e||!e.wk||e.wk.kind!=="mon"||!a.
 if(typeof wrapR==="function")wrapR("wkPoisonPick",()=>"Bỏ độc vào món");
 /* ================= ĐỒ CẤM: reliable but risky ways to get poison, same rules for every consort =================
    effect and how traceable each poison is, shown on the chest card */
-const WILL={hacdinh:{eff:"chết",tr:"dễ lần ra: thái y nhận ra ngay, tra được người mua"},xahuong:{eff:"sảy thai (trộn vào túi thơm, hương trầm)",tr:"khó lần ra: mùi lẫn trong hương"},botngua:{eff:"ngứa, mất thể diện, Danh -5",tr:"vừa: áo dính bột còn để lại dấu"}};
+const WILL={hacdinh:{eff:"chết",tr:"dễ lần ra: thái y nhận ra ngay, tra được người mua"},xahuong:{eff:"sảy thai (trộn vào túi thơm, hương trầm)",tr:"khó lần ra: mùi lẫn trong hương"},botngua:{eff:"ngứa, mất thể diện, Danh {n:eff.j8.danhUseItem}",tr:"vừa: áo dính bột còn để lại dấu"}};sgRuleObj(WILL.botngua,"eff");/* the same key j8 useItem applies */
 /* jreg: forbidden goods added later (jpoison docngam/phanhuy/meduoc) get the same Hiệu quả / Dấu vết line */
 regEach(WILL,k=>{if(IT[k]&&!/Hiệu quả:/.test(itm(k).d))IT[k].d+=` · Hiệu quả: ${WILL[k].eff} · Dấu vết: ${WILL[k].tr}`},"WILL desc");
 /* who ends up holding evidence when a buyer is exposed: the Empress, else the most hostile consort */
 function illWitness(p){const q=queenP();if(q&&q!==p)return q;const L=consorts().filter(x=>x!==p&&x.alive&&!x.out);if(!L.length)return null;return mindPickBy(L,x=>BAL.mind.pick.j83.base+hostility(x,p)*mindW(x,"frame"),null)}/* npc-mind: was ARGMAX */
 /* she is a holder too (S has no alive flag: review FAIL 6 #3, the act was one-way) */
-function illAllies(p){return consorts().filter(v=>v!==p&&(v===S||v.alive)&&!v.out&&!v.coop&&aff(v,p)>=40&&(v.inv||[]).some(e=>WILL[e.k]&&!e.h&&!e.t))}
+function illAllies(p){return consorts().filter(v=>v!==p&&(v===S||v.alive)&&!v.out&&!v.coop&&aff(v,p)>=netTh(v,"than")&&(v.inv||[]).some(e=>WILL[e.k]&&!e.h&&!e.t))}
 const IROUTE={
  maid:{n:"Sai cung nữ thân tín mua lén ngoài cung",k:1,ks:Object.keys(WILL),cost:k=>itm(k).pr+15,o:p=>oddsCl(Math.round(55+(p.maid?p.maid.loyal:0)/3+eyes(p)*2)),
   need:p=>!p.maid?"không có cung nữ thân tín":p.maid.loyal<BAL.loy.low?`Thiện cảm ${p.maid.name} dưới ${balAb(BAL.loy.low)}, nàng không dám đi`:"",when:"tuần sau mới mang về",fail:p=>`${p.maid?p.maid.name:"cung nữ"} bị bắt ở cửa Thần Vũ, khai ra ngươi (${balAb(BAL.eff.j83.evIllBuy_2)} chứng cứ), Thiện cảm -${balAb(BAL.eff.j83.loyalIllBuy)}, mất bạc`},
- thaiy:{n:"Hối lộ người ở Thái y viện",k:1,ks:["hacdinh","xahuong"],cost:k=>itm(k).pr+40,o:p=>oddsCl(70+eyes(p)*3),need:()=>"",when:"có ngay",fail:()=>`thái y tố giác: Danh -6, người đứng sau nắm ${balAb(BAL.eff.j83.evIllBuy_3)} chứng cứ, mất bạc`},
- cho:{n:"Chợ đen ở cửa Thần Vũ",k:2,ks:Object.keys(WILL),cost:k=>itm(k).pr,o:p=>oddsCl(Math.round(60+(p.tamco||0)/5)),need:p=>p.confined?"đang bị cấm túc":!(S.tuan===2&&(S.buoi||0)===B4L)?"chỉ họp buổi tối hạ tuần":"",when:"có ngay",/* previews: illBuy */fail:()=>`thị vệ bắt gặp: Danh -8, người đứng sau nắm ${balAb(BAL.eff.j83.evIllBuy_4)} chứng cứ, mất bạc`},
- ally:{n:"Xin đồng minh",k:2,ks:Object.keys(WILL),cost:()=>0,o:()=>100,need:p=>illAllies(p).length?"":"chưa có đồng minh thân (thiện cảm 40) đang giữ đồ cấm",when:"tùy đồng minh trả lời",fail:()=>""}};
+ thaiy:{n:"Hối lộ người ở Thái y viện",k:1,ks:["hacdinh","xahuong"],cost:k=>itm(k).pr+40,o:p=>oddsCl(70+eyes(p)*3),need:()=>"",when:"có ngay",fail:()=>`thái y tố giác: Danh ${balSg(BAL.eff.j83.danhIllThaiy)}, người đứng sau nắm ${balAb(BAL.eff.j83.evIllBuy_3)} chứng cứ, mất bạc`},
+ cho:{n:"Chợ đen ở cửa Thần Vũ",k:2,ks:Object.keys(WILL),cost:k=>itm(k).pr,o:p=>oddsCl(Math.round(60+(p.tamco||0)/5)),need:p=>p.confined?"đang bị cấm túc":!(S.tuan===2&&(S.buoi||0)===B4L)?"chỉ họp buổi tối hạ tuần":"",when:"có ngay",/* previews: illBuy */fail:()=>`thị vệ bắt gặp: Danh ${balSg(BAL.eff.j83.danhIllCho)}, người đứng sau nắm ${balAb(BAL.eff.j83.evIllBuy_4)} chứng cứ, mất bạc`},
+ ally:{n:"Xin đồng minh",k:2,ks:Object.keys(WILL),cost:()=>0,o:()=>100,need:p=>illAllies(p).length?"":"chưa có đồng minh thân tình đang giữ đồ cấm",when:"tùy đồng minh trả lời",fail:()=>""}};
 /* one attempt: same function for her and for every consort; returns the log line */
 function illBuy(p,r,k,from,paid){const R0=IROUTE[r],nm=p===S?"Ngươi":`${rkName(p)} ${p.name}`;
  /* RECEIVER CHOICE (review FAIL 6 #3): the holder answers with the 4 answers (jrcv RCVK.illAlly) — an NPC holder picks, she as the holder gets the card.
@@ -255,21 +255,21 @@ function illBuy(p,r,k,from,paid){const R0=IROUTE[r],nm=p===S?"Ngươi":`${rkName
     the same pick as every dirty act's sent servant j29 DIRTY / DIRTY_SENT: bribel, laydo, laydol), her maid and an NPC's alike; refused → nothing spent */
  let hf=0;if(r==="maid"&&p.maid&&typeof stf2Ord==="function"){const oc=stf2Ord(p,p.maid,null,"illMaid");/* «làm qua loa» (parallel-time stf2Ord «half»): she goes, at the odds − BAL.road.hp.half (as every dirty order, j29 ordHalf) */if(oc==="half")hf=BAL.road.hp.half;if(oc&&oc!=="obey"&&oc!=="half"){if(paid&&p===S)apply({bac:R0.cost(k)});if(p===S)p.maid.kn=1;
    return p===S?(oc==="refuse"?`${p.maid.name} quỳ xin nương nương đừng sai việc mua đồ cấm; việc không thành. `:`${p.maid.name} viện cớ thoái thác, không đi; việc không thành. `):`${nm} sai ${p.maid.name} mua lén đồ cấm, nàng không đi. `}}
- const c=R0.cost(k);if(!paid){if(p.bac<c)return"";ap(p,{bac:-c})}if(typeof ducAdd==="function")ducAdd(p,-3,"mua đồ cấm");else ap(p,{duc:-3});
+ const c=R0.cost(k);if(!paid){if(p.bac<c)return"";ap(p,{bac:-c})}if(typeof ducAdd==="function")ducAdd(p,BAL.rl.j83.ducIllBuy,"mua đồ cấm");else ap(p,{duc:BAL.rl.j83.ducIllBuy});
  if(roll(hf?oddsCl(R0.o(p)-hf):R0.o(p))){if(r==="maid"){p.illP=p.illP||[];p.illP.push({k,w:wk()+1});return `${nm} sai ${p.maid.name} lén mua ${itm(k).n} ngoài cung; tuần sau mang về. Bạc -${c}. `}p.inv.push({k});return `${nm} có được ${itm(k).n} (${R0.n.toLowerCase()}). Bạc -${c}. `}
- const w=illWitness(p);if(r==="maid"){evA(w,p,BAL.eff.j83.evIllBuy_2);if(p.maid)p.maid.loyal=cl(p.maid.loyal-BAL.eff.j83.loyalIllBuy,0,100)}else if(r==="thaiy"){ap(p,{danh:-6});evA(w,p,BAL.eff.j83.evIllBuy_3)}else{ap(p,{danh:-8});evA(w,p,BAL.eff.j83.evIllBuy_4)}
+ const w=illWitness(p);if(r==="maid"){evA(w,p,BAL.eff.j83.evIllBuy_2);if(p.maid)p.maid.loyal=cl(p.maid.loyal-BAL.eff.j83.loyalIllBuy,0,100)}else if(r==="thaiy"){ap(p,{danh:BAL.eff.j83.danhIllThaiy});evA(w,p,BAL.eff.j83.evIllBuy_3)}else{ap(p,{danh:BAL.eff.j83.danhIllCho});evA(w,p,BAL.eff.j83.evIllBuy_4)}
  if(p!==S)newsAdd(p,"illicit",`Người của ${nm} bị bắt khi lén mua đồ cấm.`);
  return `<span class="r">${nm} mua lén ${itm(k).n} không thành: ${R0.fail(p)}${w?` (${w===S?"ngươi":rkName(w)+" "+w.name} giữ chứng cứ)`:""}.</span> `}
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead)for(const p of consorts()){if(!p.illP||!p.illP.length)continue;const now=p.illP.filter(x=>x.w<=wk());p.illP=p.illP.filter(x=>x.w>wk());for(const x of now){p.inv.push({k:x.k});if(p===S)log(`${S.maid?S.maid.name:"Cung nữ"} lén mang ${itm(x.k).n} về, giấu trong rương.`)}}}catch(x){}return r}})();
 function illAsk(r){const R0=IROUTE[r];if(S.dead||Q.length||!can(R0.k)||R0.need(S))return;const O=[];
  if(r==="ally"){for(const v of illAllies(S))for(const e of v.inv.filter(e=>WILL[e.k]&&!e.h&&!e.t).slice(0,3))O.push({n:`${itm(e.k).n} của ${rkName(v)} ${v.name}`,fx:{},
   x:`${typeof rcvWord==="function"?rcvWord(v,S):capW()} · nàng có thể đưa, nhường lại lấy bạc, từ chối hoặc đem chuyện đi mách · đưa: có ${itm(e.k).n} (${WILL[e.k].eff}), nàng nắm ${balAb(BAL.eff.j83.evIllBuy)} chứng cứ của ngươi`,go:()=>{spend(R0.k);log(illBuy(S,"ally",e.k,v))}})}
- else for(const k of R0.ks){const c=R0.cost(k);O.push({n:`${itm(k).n}: ${WILL[k].eff}`,fx:{bac:-c},x:`${word(R0.o(S))} · thành: có ${itm(k).n}, ${R0.when} · hỏng: ${R0.fail(S)} · kèm: Đức -3`,go:()=>{spend(R0.k);log(illBuy(S,r,k,null,1))}})}
+ else for(const k of R0.ks){const c=R0.cost(k);O.push({n:`${itm(k).n}: ${WILL[k].eff}`,fx:{bac:-c},x:`${word(R0.o(S))} · thành: có ${itm(k).n}, ${R0.when} · hỏng: ${R0.fail(S)} · kèm: Đức ${balSg(BAL.rl.j83.ducIllBuy)}`,go:()=>{spend(R0.k);log(illBuy(S,r,k,null,1))}})}
  O.push({n:"Thôi",fx:{}});
  Q.push({act:1,t:R0.n,who:pMe(),h:`<p>${R0.n}. Tốn ${R0.k} khắc.</p><p class="past">${Object.keys(WILL).map(k=>`${itm(k).n}: ${WILL[k].eff}; ${WILL[k].tr}`).join("<br>")}</p>`,opts:O});showModal();render()}
 if(typeof wrapR==="function")wrapR("illAsk",r=>IROUTE[r]?IROUTE[r].n:"");
 function illHTML(){return `<div class="ph"><span>Đồ cấm: độc dược không bán công khai. Bị lộ là có người nắm chứng cứ của ngươi.</span></div><div class="rbtn" style="margin-bottom:6px">`+Object.entries(IROUTE).map(([r,R0])=>{const nd=R0.need(S);const lo=Math.min(...R0.ks.map(R0.cost)),hi=Math.max(...R0.ks.map(R0.cost));
- return pbtn(`data-ill="${r}"`,R0.n,r==="ally"?`tốn: ${R0.k} khắc · tùy đồng minh: đưa, nhường lại lấy bạc, từ chối hoặc đem đi mách · đưa: nàng nắm ${balAb(BAL.eff.j83.evIllBuy)} chứng cứ của ngươi`:`${word(R0.o(S))} · tốn: ${R0.k} khắc, Bạc -${lo} đến -${hi} · thành: có độc dược, ${R0.when} · hỏng: ${R0.fail(S)} · kèm: Đức -3`,whyTime(R0.k)||nd)}).join("")+`</div>`}
+ return pbtn(`data-ill="${r}"`,R0.n,r==="ally"?`tốn: ${R0.k} khắc · tùy đồng minh: đưa, nhường lại lấy bạc, từ chối hoặc đem đi mách · đưa: nàng nắm ${balAb(BAL.eff.j83.evIllBuy)} chứng cứ của ngươi`:`${word(R0.o(S))} · tốn: ${R0.k} khắc, Bạc -${lo} đến -${hi} · thành: có độc dược, ${R0.when} · hỏng: ${R0.fail(S)} · kèm: Đức ${balSg(BAL.rl.j83.ducIllBuy)}`,whyTime(R0.k)||nd)}).join("")+`</div>`}
 (function(){const i0=invHTML;invHTML=function(){const h=i0.apply(this,arguments);const j=h.indexOf('</div>',h.indexOf('class="rbtn"'));return j<0?h+illHTML():h.slice(0,j+6)+illHTML()+h.slice(j+6)}})();
 document.addEventListener("click",ev=>{const b=ev.target.closest("[data-ill]");if(!b||b.disabled)return;ev.stopPropagation();illAsk(b.dataset.ill)},true);
 /* NPCs: the malicious look for poison by the same routes — no longer a monthly dice (malice > 60, roll 8): an NPC consort CHOOSES a route in her

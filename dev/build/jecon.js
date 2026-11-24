@@ -17,7 +17,7 @@ Object.assign(BAL,{
  duty:[2,4,10,18,30,48,72,100]/* review/bongloc-options: Đáp ứng too has her lễ tiết, so every month offers the lễ nghĩa choice */,banThuong:[0,0,0,0,0,0,20,40],dutySkip:{danh:1,duc:0},
  /* review/balance-2: lễ nghĩa paid in full keeps face AND earns name, by rank (the duty grows with the rank; Danh gates RANKS[].d grow ~12 a rank) — everyone, NPCs too */
  dutyDanh:[0,0,1,1,1,2,2,0],
- home:{tt:30,dtq:20,muoi:40,cn:0,nc:25,bd:20,pf:22,td:0,ch:20,thd:5,cnv:0},homeEvery:3,nightBac:20,patronRel:40,patronPay:[10,10,12,14,16,18,20,22],
+ home:{tt:30,dtq:20,muoi:40,cn:0,nc:25,bd:20,pf:22,td:0,ch:20,thd:5,cnv:0},homeEvery:3,nightBac:20,patronPay:[10,10,12,14,16,18,20,22],
  sellPct:50,noivuPct:70,craftSell:[8,14,24,40],craftLv:3,craftGift:[2,3,5,7],
  giftLeak:{emp:35,th:25,hh:25},giftHit:{emp:{sung:-6,danh:-4},th:{th:-6,danh:-2},hh:{hh:-6,danh:-2}},
  priceTier:{sonphan:8,huongtram:10,tuithom:6,demgam:12,thuocanthai:15,yensao:25,agiao:35,luahang:30,tramngoc:30,vongngoc:50,botngua:30,nhansam:60,nghien:60,xahuong:50,
@@ -39,7 +39,7 @@ function econDoDuty(p,pay,pre){const d=econDuty(p),b=econBan(p);const r=Math.min
  const dn=BAL.dutySkip.danh+Math.floor(r/2),du=BAL.dutySkip.duc;if(d||b){if(!pre)ap(p,{danh:-dn});if(du){if(typeof ducAdd==="function")ducAdd(p,-du,"bớt lễ nghĩa");else ap(p,{duc:-du})}}return{paid:0,d,b,dn,du}}
 /* nhà mẹ đẻ (by origin, every BAL.homeEvery months), patron errands */
 function econHome(p){try{if(p!==S||!S.origin||S.out||(S.month%BAL.homeEvery)!==1)return 0;return S.homeCut?0:(BAL.home[S.origin.k]||0)}catch(e){return 0}}
-function econPatron(p){if(p.out)return null;const r=rkOf(p);const L=consorts().filter(v=>v!==p&&!v.out&&v.alive!==false&&rkOf(v)>=r+2&&rel(v,p)>=BAL.patronRel&&(v.bac||0)>=40);
+function econPatron(p){if(p.out)return null;const r=rkOf(p);const L=consorts().filter(v=>v!==p&&!v.out&&v.alive!==false&&rkOf(v)>=r+2&&rel(v,p)>=netTh(v,"than2")&&(v.bac||0)>=40);
  if(!L.length)return null;const v=L.sort((a,b)=>rel(b,p)-rel(a,p))[0];const n=BAL.patronPay[Math.min(7,r)];ap(v,{bac:-n});ap(p,{bac:n});return{v,n}}
 function econStipend(p){const r=rkOf(p),me=p===S,staff=(p.staff||[]).length;let base=BAL.pay[Math.min(7,r)],why=[],cut=false;
  if(p.out){base=BAL.payCold;why.push(`lãnh cung: chỉ ${BAL.payCold} bạc`)}else{if(p.confined){base=Math.round(base*BAL.payConfined);why.push("cấm túc: nửa bổng, không lễ nghĩa")}
@@ -127,7 +127,7 @@ kinvGroups=function(){const vis=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h&&IT[e
   return Object.assign(x,{cat:"tp",name:w.n,grade:econWkGrade(w),src:a?a.src:x.src,src512:a?(a.src512||a.src):x.src512,tip:`${w.n} · ${KIT_GRADE[econWkGrade(w)].n}`})})}})();
 function econWkOpen(x){const i=x.g.i,e=S.inv[i],w=e.wk,ar=ARTS.find(y=>y.k===w.a);const gr=KIT_GRADE[econWkGrade(w)];const t1=whyTime(1),t2=whyTime(2);
  const B=[pbtn(`data-wk="give" data-ix="${i}"`,"Dâng, tặng",`tốn: 2 khắc · thành: chọn người (Hoàng thượng, Thái hậu, phi tần), quý theo phẩm (${gr.n}: ${BAL.craftGift[econWkGrade(w)]})`,t2),econSellBtn(i),
-  pbtn(`data-wk="sell" data-ix="${i}"`,"Bán ra ngoài cung",`${word(wkSellO(S))} · tốn: 1 khắc · thành: Bạc +${wkSellVal(w)} · hỏng: thị vệ cửa Thần Vũ bắt gặp, Danh -3, mất tác phẩm`,t1)];
+  pbtn(`data-wk="sell" data-ix="${i}"`,"Bán ra ngoài cung",`${word(wkSellO(S))} · tốn: 1 khắc · thành: Bạc +${wkSellVal(w)} · hỏng: thị vệ cửa Thần Vũ bắt gặp, Danh ${balSg(BAL.eff.j83.danhWkSell)}, mất tác phẩm`,t1)];
  if(!w.show&&w.p==null)B.push(pbtn(`data-wk="show" data-ix="${i}"`,"Bày ở yến tiệc",`tốn: 2 khắc · thành: Danh +${WSHOW[w.ti]}${w.ti===3?` · kèm: phi tần ghen +${ghenN(BAL.ghen.showTreasure)}`:""}`,t2));
  /* the rows = KIT §70 kitItemDetailRows (same Phẩm · Loại · Được · Lai lịch · Ghi chú as every item) */
  const rows=kitItemDetailRows({ix:i});
@@ -149,7 +149,7 @@ addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[dat
        "Sai cung nữ thân tín lấy lòng" (bribel): no bạc, her cung nữ's loyalty −BAL.loyalCost, odds −BAL.selfMinus;
        "Nhờ ơn người quen ở Kính sự phòng" (blockf): no bạc, an ally with thiện cảm ≥ BAL.favorRel spends it: thiện cảm −BAL.favorCost.
    - Watched more at high rank: when a scheme of hers is caught at rank ≥ BAL.watchRank, Danh −(rank − BAL.watchRank + 1) more. */
-Object.assign(BAL,{schemeRk:.15,schemeGuard:.1,selfMinus:8,loyalCost:25,favorRel:60,favorCost:30,watchRank:5});
+Object.assign(BAL,{schemeRk:.15,schemeGuard:.1,selfMinus:8,loyalCost:25,favorCost:30,watchRank:5});
 const ECON_FREE=["ally","gift"];
 function econGuards(t){return Math.min(3,[t.maid].concat(t.staff||[]).filter(s=>s&&(s.loyal||0)>=BAL.loy.trust).length)}
 function econSchemeMul(a,t){if(!a||!t)return 1;/* two-way law (owner 16/11 s21): one price for everyone, no NPC discount (was .06/.04 for NPCs) */return 1+BAL.schemeRk*Math.max(0,rkOf(t)-rkOf(a))+BAL.schemeGuard*econGuards(t)}
@@ -171,9 +171,9 @@ function econSchemePrice(k,a,t){const A0=ACT[k];const base=A0&&A0.__c0&&A0.__c0.
 function econVeto(){try{return typeof J95C==="object"&&J95C&&J95C.stat?J95C.stat.frameGate|0:0}catch(e){return 0}}
 /* the routes without bạc */
 function econLoyalMaid(p){return p.maid&&!p.maid.spyFor&&(p.maid.loyal||0)>=BAL.loy.low?p.maid:null}
-function econFavor(p){return consorts().filter(v=>v!==p&&!v.out&&v.alive!==false&&rel(v,p)>=BAL.favorRel).sort((x,y)=>rel(y,p)-rel(x,p))[0]||null}
-A("spyk","Tự đi dò la",{c:{},ok:()=>true,o:a=>oddsCl(oSpy(a)-BAL.selfMinus),x:"không tốn bạc · tự đi nghe ngóng: dễ lộ hơn · lộ: Danh -2",f:(a,t)=>{
- if(aRoll(oddsCl(oSpy(a)-BAL.selfMinus),a)){ap(a,{tamco:1});return spyFind(a,t,"tự đi nghe ngóng")}
+function econFavor(p){return consorts().filter(v=>v!==p&&!v.out&&v.alive!==false&&rel(v,p)>=netTh(v,"than2")).sort((x,y)=>rel(y,p)-rel(x,p))[0]||null}
+A("spyk","Tự đi dò la",{c:{},ok:()=>true,o:a=>oddsCl(oSpy(a)-BAL.selfMinus),x:`không tốn bạc · tự đi nghe ngóng: dễ lộ hơn · lộ: Danh ${balSg(BAL.eff.jecon.danhF)}`,f:(a,t)=>{
+ if(aRoll(oddsCl(oSpy(a)-BAL.selfMinus),a)){ap(a,{tamco:BAL.rl.jecon.spykTam});return spyFind(a,t,"tự đi nghe ngóng")}
  relAdd(a,t,BAL.eff.jecon.f);ap(a,{danh:BAL.eff.jecon.danhF});return `${NMc(a)} rình nghe chuyện ${NM(t)}: <span class="r">bị bắt gặp</span>. Danh ${balSg(BAL.eff.jecon.danhF)}. `}});
 /* RECEIVER CHOICE (OD 18/11 ~21:15Z, no forced action): her trusted maid is the ORDERED one (j29 runAct: DIRTY + DIRTY_SENT → jagstf2 stf2Ord, obey / refuse /
    tell, the same as every sent servant); the target's maid answers through the SAME pick as «Mua chuộc cung nữ» (jrcv rcvMaidBribe, cnvBribeOpts with pay 0) */
@@ -189,7 +189,7 @@ function rcvBlockGo(p,v,t,pen){relAdd(v,p,-BAL.favorCost);const c=caught(p,t,fal
 A("blockf","Nhờ ơn người quen rút thẻ bài",{c:{},ok:(a,t)=>!!econFavor(a)&&!t.block,o:a=>oBlock(a),xw:(a,t)=>{const v=econFavor(a);return v&&typeof rcvWord==="function"?`${v===S?"ngươi":v.name}: ${rcvWord(v,a)}`:""},x:`không tốn bạc · người quen của ngươi trả ơn: thiện cảm -${BAL.favorCost} · nàng có thể giúp hết lòng, làm qua loa, từ chối, hoặc đem chuyện đi mách · thành: 2 tuần nàng không được lật thẻ`,f:(a,t)=>{
  /* RECEIVER CHOICE (jrcv RCVK.blockf, OD 18/11 ~21:15Z): the acquaintance answers (her: a card) */const v=econFavor(a);if(!v)return"";return rcvAsk("blockf",a,v,key(t))}});
 try{for(const [k,g] of [["spyk","Hại nhỏ"],["bribel","Hại nặng"],["blockf","Hại nặng"]]){const G=RVGRP.find(x=>x[0]===g);if(G&&!G[1].includes(k))G[1].push(k);ACTDOM[k]=ACTDOM[k]||"Mưu kế"}
- AOUT.spyk=aoLz(()=>`nắm thêm ${balWord(balAb(BAL.eff.jtruth.evN))} chứng cứ, Tâm cơ +1`/* previews: spyFind */,`bị bắt gặp: Danh -2, nàng thù ${balSg(BAL.eff.jecon.f)}`);AOUT.bribel=[`cung nữ của nàng ngả về phía ngươi (dò ra mưu kế: ${balAb(BAL.eff.jecon.evF)} chứng cứ)`,`bị báo cho chủ: nàng nắm ${balAb(BAL.ag.ev.one)} chứng cứ`];AOUT.blockf=["2 tuần nàng không được lật thẻ","không thành; người quen vẫn mất thiện cảm"];
+ AOUT.spyk=aoLz(()=>`nắm thêm ${balWord(balAb(BAL.eff.jtruth.evN))} chứng cứ, Tâm cơ ${balSg(BAL.rl.jecon.spykTam)}`/* previews: spyFind */,`bị bắt gặp: Danh ${balSg(BAL.eff.jecon.danhF)}, nàng thù ${balSg(BAL.eff.jecon.f)}`);AOUT.bribel=[`cung nữ của nàng ngả về phía ngươi (dò ra mưu kế: ${balAb(BAL.eff.jecon.evF)} chứng cứ)`,`bị báo cho chủ: nàng nắm ${balAb(BAL.ag.ev.one)} chứng cứ`];AOUT.blockf=["2 tuần nàng không được lật thẻ","không thành; người quen vẫn mất thiện cảm"];
  J78VERB.spyk="tự dò la {t}";J78VERB.bribel="sai cung nữ lấy lòng người của {t}";J78VERB.blockf="nhờ người rút thẻ bài của {t}"}catch(e){}
 /* watched more at high rank */
 (function(){const c0=caught;caught=function(a,t,ps,desc){const r=c0.apply(this,arguments);try{if(r&&a&&rkOf(a)>=BAL.watchRank){const n=rkOf(a)-BAL.watchRank+1;ap(a,{danh:-n});return r+`Phẩm cao, nhiều mắt nhìn: Danh -${n}. `}}catch(e){}return r}})();
