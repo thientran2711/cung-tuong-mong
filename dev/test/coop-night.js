@@ -239,6 +239,18 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
   await A.p.evaluate(()=>{COOPW.sendMe(JSON.parse(JSON.stringify(COOPW.base.P[COOPW.seat])))});await sleep(1500);
   await A.p.evaluate(()=>{const b=[...document.querySelectorAll('#modal .opts button')].find(x=>/Ra xem/.test(x.textContent));if(b)b.click()});await sleep(1000);
   await clear(A);ok(await isRd(A)||await press(A),'10: host presses again after the re-send');await merged('10',w0)}
+ /* 11 (robot-coop-fix-4, same family): the night gate and thin E's asks are keyed by week only; a NEW room (no reload) starts at week 0 again, so
+    the old room's commit / ready / ask would hit the same week of the new room. The room's start (begin) clears them when the room changes and
+    keeps them on a reconnect to the same room. Simulated: the seat's last room is named OLD1 with a commit / ask at this very week, then the
+    room's start fires (as a new room's would) → cleared; the same start with the room unchanged → kept. */
+ if(await toNight('11')){const w0=(await D(A)).w;await clear(A);await clear(B);
+  const same=await A.p.evaluate(w=>{COOPW.nfr=w-1;COOP.emit('start',{you:COOP.state.you});return COOPW.nfr===w-1},w0);ok(same,'11: same room start keeps the night gate');
+  const a=await A.p.evaluate(w=>{COOPW.nRoom='OLD1';COOPW.ngo=w;COOPW.nfr=w;COOP.emit('start',{you:COOP.state.you});return {ngo:COOPW.ngo,nfr:COOPW.nfr,room:COOPW.nRoom===COOP.state.room}},w0);
+  ok(a.ngo===-1&&a.nfr===-1&&a.room,'11: host, new room: the old commit / her old ready are cleared',a);
+  const g=await B.p.evaluate(()=>{const E=COOPW.thin.E,k=(COOP.state.week||0)+':'+(S.buoi||0);COOPW.nRoom='OLD1';E.mine=k;COOP.emit('start',{you:COOP.state.you});return {mine:E.mine,room:COOPW.nRoom===COOP.state.room}});
+  ok(g.mine===''&&g.room,'11: guest, new room: her old ask is cleared',g);
+  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
+  ok(await isRd(B)||await press(B),'11: guest presses');ok(await isRd(A)||await press(A),'11: host presses');await merged('11',w0)}
  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
  /* 9 at tối: the guest leaves after pressing, comes back; the host (still connected) recovers and the night goes for both */
  {await toNight('9');const w0=(await D(A)).w;await clear(B);await press(B);await sleep(1500);await leaveBack(B,A,'9 guest at tối');

@@ -865,7 +865,12 @@ function onState(m){T("state");if(!CW.on||!m.state)return;const C=m.state;
    pushModal({t:home?"Hảo hữu chọn thân phận":"Hảo hữu vào cung",h:`<p>Hảo hữu ngươi ${old?"đã đầu thai, ":"đã chọn xong thân phận, "}${home?"nay còn ở nhà cha chờ kỳ tuyển tú, chưa vào cung":"nay ở trong cung"+(friendSrv(P)?", làm cung nữ":", phong "+esc(RANKS[P.rank]?RANKS[P.rank].n:""))}. Mặt mũi, tên tuổi kiếp này ra sao, phải gặp mới biết.</p>`+(home?`<p class="past">Qua kỳ tuyển tú, nàng sẽ vào cung; khi ấy hai người mới gặp được nhau.</p>`:`<p class="past">Muốn gặp nhau: hai người cùng đến một nơi trên Dư đồ trong cùng một buổi, rồi chạm vào người kia và chọn Chào hỏi.</p>`)})}
   showModal();render()}}
 function newLife(){CW.inLife=true;CW.newLife=true;try{start()}catch(e){console.error(e)}}
-function begin(d){T("begin");CW.on=true;CW.cyHold=null;CW.cyK="";clearTimeout(CW.cyT);CW.cyT=null;CW.cyTo=null;CW.seat=d.you||COOP.state.you;CW.ssv=COOP.state.msv||0;CW.ssvWk=wk();CW.seatOld=false;const C=d.state||COOP.state.C;CW.base=C?J(C):null;CW.sent=-1;CW.pend=false;CW.wkIn=C&&typeof C.week==="number"?C.week:undefined;
+function begin(d){T("begin");CW.on=true;
+ /* robot-coop-fix-4 (week-end stuck family, law 11): the night gate (nrdy/ngo/ngoW/nfr/nforce) and thin E's asks (E.mine/hr/forced) are keyed by
+    week / week:buổi only — a NEW room (left one room, opened or joined another without a reload) starts at week 0 again, so the old room's
+    values would hit the same week of the new one (host: «already committed» → no go; guest: «already asked» → no ready) = both #next locked.
+    A reconnect to the SAME room keeps them (his commit / her ready stand). */
+ {const rm=COOP.state.room||"";if(CW.nRoom!==rm){if(CW.nRoom!==undefined){T("new room "+rm);CW.nrdy=CW.ngo=CW.ngoW=CW.nfr=CW.nforce=-1;try{const E=CW.thin&&CW.thin.E;if(E){E.mine="";E.hr="";E.forced=""}}catch(e){}}CW.nRoom=rm}}CW.cyHold=null;CW.cyK="";clearTimeout(CW.cyT);CW.cyT=null;CW.cyTo=null;CW.seat=d.you||COOP.state.you;CW.ssv=COOP.state.msv||0;CW.ssvWk=wk();CW.seatOld=false;const C=d.state||COOP.state.C;CW.base=C?J(C):null;CW.sent=-1;CW.pend=false;CW.wkIn=C&&typeof C.week==="number"?C.week:undefined;
  const s=COOP.state;
  if(C&&C.P&&C.P[CW.seat]&&!C.P[CW.seat].dead){fromCanon(C);CW.fWasHome=friendHome(C.P[fs()]);/* a fresh page (came back by link / reload) has no hand of cards yet: deal it, as loading a sổ does */if(!deck||!deck.length)try{deal()}catch(e){console.error(e)}if(s.ended&&s.ended[CW.seat])CW.sent=wk();
   /* rejoin / reload (owner 16/11: "khắc và việc đã làm bị mất"): her own week as it stood (snapLoad), never the week start again */
