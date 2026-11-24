@@ -28,6 +28,8 @@ PRIORITY #1 CHECK ('kitDialogue|dialogue scene|dlg'): OD 24/11 ~10:05Z (STORY = 
 - (lead #4) WAVE 2 code on review/sideline-dlg-2 (see «## WAVE 2» below).
 - (11/24/2026 ~22:25Z) LEAD #5 session_01N1tNP4528yQ2vSnbQmZ3Dh (opus). START_CTX ~4 % (used_tokens read 0 → estimate) → roll at ~29 %. Did review r1 F1/F2/F3 + engine veil fix on -2, wave 3 NRASK on -3 (see HANDOVER LEAD #5 → #6).
 
+- (24/11 ~23:35Z) LEAD #6 session_01N1tNP68tc2s81zEknsjxkB (opus). START_CTX ~5 % (used_tokens reads 0 → estimate; 1M window) → roll at ~30 %, ceiling 60 %. Worktrees /home/user/wt/sdlg (-2, local sdlg2) + sdlg-ho. -2 f0f40347 rebuilt: validator --strict 1432/0. Waiting for review/sideline-dlg-f4 (lead #5 worker still running).
+
 ## WAVE 2 (lead #4, review/sideline-dlg-2)
 PRIORITY #1 CHECK: prio1 «dlgs wave 2|old j68 decision|DLGS.R» → only review/sideline-dlg (wave 1, jdlgs.js) + lead #3's WAVE 2 MAP; reuse: same engine, DLGS.R adapters, validator, dlgs-play.
 - 59361f1b (code): resolvers — old j68 (pid «e68<id>», roles A/B/C = EV6 slots via A6, fill e68Fill + {it}); old j7 (table DLGS_J7O in jdlgs.js: per card ONLY the people the card shows; hidden schemers never cast: pp.a of poisongift/comet/fire, pp.v of doll/guardrumour/ghost/taster); ky (existing resolver) + law 6b fixes: hidden W (th_tham) → no W, W = herself → no W, kind maid (vat_minh) → her cung nữ; j70 unit id «j70:<method>:<route>» for old routes (route ids repeat), seeds unchanged.
