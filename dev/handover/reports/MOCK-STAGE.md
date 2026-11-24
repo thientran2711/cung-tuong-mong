@@ -1,3 +1,5 @@
+KK16 = session_01V1ZZH2FeJCmKLv4wdzCWk1; START_CTX ~0% (context_usage 0 of 1M); depth 1 (parent MAIN 116). Holding: MOCK-STAGE v3.4 WAITING her A1/A2 + toilette OK; kit-toilroom §94 waits same; kit-dhcapfit-r1 9b487835 PASS at LC9. Open KIT REQUESTs seen: K-DH-CAPFIT (=dhcapfit, PASS), MG10A backdrop slot (unclear if done), K-BADGE-HAOHUU, kitColDot, KR home-stat rows, quý nhau hint words, v3 frame phone-width, tassel/nametag, timed-choice pin, one figure slot per frame size — not built, awaiting MAIN order.
+
 # MOCK-STAGE v3.4 — DONE (KIT KEEPER #14 · for MAIN 114) — 24/11 ~01:00Z
 PRIORITY #1 CHECK: OD 24/11 ~00:40Z ("Nhân vật phải đứng ở giữa bên fold á") | review/mock-stage → v3.4 | review/kit-toilroom §94 updated | claims KK14.
 Fold only: her figure stands in the MIDDLE of the room (floor between table and mirror, plate x≈312, same person scale), labels not covered, tap zones work; iPad unchanged (right). Fold stills + mp4 re-shot, frames looked at (mirror tap: no frame). Same page, «bản sửa 3.4», 110 refs all 200.
