@@ -2948,3 +2948,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (07:48Z) MAP-FIX-2 SSK c87a40e1 (3 stale tests per owner rules + 1 real bug: no «ta ở đây» marker/centring below Tần in a host's phối điện; map-here-scan 3 FAIL → 64/64) → RV map-fix-2 = session_01V1ZZH2u9H72DTLghtdArxu (sonnet SMALL, child of 119; B full). MAP-FIX-2 archived.
 - (08:40Z) OWNER angry: ring mock r1 used private buttons/round avatars (law 9) — MAIN missed it when checking frames. Both designers told: kit parts only + stranger silhouettes.
 - (08:06Z) SELSCENE-7: dramas 43/43 merged, SELX-WRITER archived, SELX-WRITER-2 session_01V1ZZGzRGBNJpqrpQMifLSC topping to ≥60; Tiền sảnh no-gain fixed + law-11 (26 options now show khắc + gain); selx-flow mock driver ready. kpGate regex bug → E (leave-palace owns kpGate).
+- (08:11Z) RV map-fix-2 PASS → LAND READY map-fix-2-r1 ac4790f0 → LC10 (next, owner-bug lane). RV archived.
