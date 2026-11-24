@@ -1544,3 +1544,4 @@ ROBOT-COOP FIXER #6b (week-end stuck, fix-4) | review/robot-coop-fix-4 | session
 | KIT REVIEW kit-woodskin 09c4386c (sonnet) | review/kit-woodskin-r1 | B | session_01N1tNP6zFURqiCMvwK3meUK | RUNNING | 24/11 18:45Z |
 | ROBOT-COOP RUNNER U3 pair 3 | dev/handover/robot/coop-20261124-0723-p3-4.md | B | session_01N1tNP2fZxefqCF5gDf8nSK | DONE (archived) | 24/11 18:25Z |
 | MOTION-DESIGN-4 (successor of -3) | review/motion-design-4 | MAIN 126 | session_01V1ZZH2DixEc1m1eoLXdFKF | RUNNING | 2026-11-24T18:34Z |
+| SMALL REVIEW figload-keep 935f52a6 (sonnet; live bug) | review/figload-keep-r1 | B | session_01N1tNP3U7fzVaScdgqRmxpi | RUNNING | 24/11 18:37Z |
