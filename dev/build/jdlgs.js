@@ -71,7 +71,8 @@ DLGS.R.push({test:m=>m.pid==="j7c"&&m.pp&&m.pp.sid,fn:m=>{const sp=dlgsGet("j7:"
 /* WAVE 2 — old j68 situations (EV6 tables j68e/f/g/q; card pid "e68<id>", pp = cast a0..a2 + vi). Unit "j68:<id>". Roles A B C (the EV6 slots a:[kinds], A6 real people) + M.
    Placeholders = the card's own: {A}{B}{C}{M}{S}{W}{P}{E}{it} (e68Fill). A unit with no person slot: L = M (her cung nữ brings it). */
 DLGS.R.push({test:m=>{const p=m.pid||"";return /^e68/.test(p)&&!/^e68c:/.test(p)&&typeof E68I!=="undefined"&&!!E68I[p.slice(3)]},fn:m=>{const id=m.pid.slice(3),sp=dlgsGet("j68:"+id);if(!sp)return null;const s=E68I[id],pp=m.pp||{};
- const X=e68X(s,pp);if(!X)return null;const it=s.items&&pp.it!=null?s.items[pp.it%s.items.length]:null;
+ const X=e68X(s,pp);if(!X)return null;/* {it}: a lost-piece card (jlost LO_EV lostItem / hairpinThief, law 6c) names the REAL piece of her chest it bound (pp.lc case), never the old made-up list */
+ let it=s.items&&pp.it!=null?s.items[pp.it%s.items.length]:null;if(pp.lc!=null){try{const c=loGet(pp.lc);it=c&&c.k?loNm(c.k):null}catch(e){it=null}}
  return dlgsResolve(sp,dlgsCtx({A:X.A,B:X.B,C:X.C},t=>{t=e68Fill(t,X);return it!=null?t.replace(/\{it\}/g,it):t},null))}});
 /* WAVE 2 — old j7 intrigue cards (ev() in j7.js + rcpMama jrcp.js; card pid = the ev id, pp = its params). Unit "j7:<ev id>".
    Cast per card = ONLY the people the card itself shows or names (law 6b); a hidden schemer (pp.a of poisongift / comet / fire, pp.v of doll / guardrumour /

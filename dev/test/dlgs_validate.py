@@ -58,8 +58,14 @@ for f in ['j68e.js','j68f.js','j68g.js','j68q.js']:
         a=re.search(r'\ba:\[([^\]]*)\]',seg);n=len([x for x in (a.group(1).split(',') if a else []) if x.strip()])
         ro={'M'}|set('ABC'[:n]);ph=set('ABC'[:n])|{'W','P'}|({'it'} if re.search(r'\bitems:\[',seg) else set())
         add('j68',mm.group(1),ro,ph,None);UNITS['j68:'+mm.group(1)]['old']=1;UNITS['j68:'+mm.group(1)]['src']=f'{f}:{src[:mm.start()].count(chr(10))+1} a:[{a.group(1) if a else ""}]'
+for f in sorted(glob.glob(R+'/build/j68*.js')):   # G6set (j68h …) can re-slot an EV6 (rumorPreg / rumorEmpLove: two consorts)
+    for mm in re.finditer(r'G6set\("([^"]+)",\{a:\[([^\]]*)\]',open(f,encoding='utf8').read()):
+        u=UNITS.get('j68:'+mm.group(1))
+        if u:n=len([x for x in mm.group(2).split(',') if x.strip()]);u['roles']|=set('ABC'[:n]);u['ph']|=set('ABC'[:n]);u['src']+=f' + {os.path.basename(f)} G6set a:[{mm.group(2)}]'
 src=rd('jky.js');d=src[src.index('const DEF={'):];d=d[:d.index('\n};')] if '\n};' in d else d
-for k in re.findall(r'^\s*([a-z]+_[a-z]+):\{',d,re.M):add('ky',k,{'W','M'},{'W'});UNITS['ky:'+k]['old']=1;UNITS['ky:'+k]['src']=f'jky.js:{src[:src.index(chr(10)+" "+k+":{")].count(chr(10))+2} DEF.{k} (who:)'
+for k in re.findall(r'^\s*([a-z]+_[a-z]+):\{',d,re.M):
+    add('ky',k,{'M'} if k=='th_tham' else {'W','M'},set() if k=='th_tham' else {'W'});   # th_tham: W is a hidden plotter (hide:1) — never shown or named (law 6b)
+    UNITS['ky:'+k]['old']=1;UNITS['ky:'+k]['src']=f'jky.js:{src[:src.index(chr(10)+" "+k+":{")].count(chr(10))+2} DEF.{k} (who:)'
 src=rd('j70.js')
 for mm in re.finditer(r'(?:^\s*(\w+):\{k:"\w+"|M70\.(\w+)=\{k:"\w+")[^\n]*?R:\[(.*?)\]\}',src,re.S|re.M):
     m70=mm.group(1) or mm.group(2)
