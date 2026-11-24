@@ -45,3 +45,14 @@ review/leave-palace-r ea730f77 + origin/main ac4790f0 → **87f6480b** on review
 - Tuần lục shows her own news line; NPC S.news lines are not drawn on the j79 book pages (newsHTML is appended to wkSummary, j79 dawn draws its own groups) — pre-existing on LIVE, outside this branch; parking-lot candidate for MAIN.
 
 **PASS 87f6480bf3fda9636440b5c1876f77964c1f6774** (review/leave-palace-r2; ancestor = origin/main ac4790f0 → fast-forward ready). LAND READY.
+
+## RE-MERGE r3 (ORDER FROM MAIN 121 10:38Z via Foreman E: LIVE moved ac4790f0 → 178cac37, kit-framefit) — **PASS 8d93c02766df28738976691a8b8ee8a829add4d9**
+review/leave-palace-r3 = merge of LIVE 178cac37 (parent 2) into 87f6480b (parent 1); only index.html / sw.js conflicted → rebuilt; dev/build diff vs LIVE identical to r2 (20 files, +265/−41).
+| gate (on 8d93c027) | result |
+|---|---|
+| leave-palace.test.js | 135/135 ok |
+| leave-palace-fit.js (end card after framefit) | Fold 24 + iPad 24, overflow 0 |
+| quickcheck run 1 | FAIL perf only: buổi 3001/1352 ms (core gates, old save PASS) |
+| quickcheck run 2 (quiet box) | PASS: render 254/255, tab 463/515, buổi 1406/2980 ms, core gates PASS, old save ok → run 1 = box noise (the LIVE side swung the same way) |
+| coop-e2e host Fold | 138/162 (suite grew from 142): «#next enabled / buổi advanced for both» from week 0, 8 new-life dialogs queued (Q:8: Tiền truyện 1–4/4, kc2Sel…) |
+| LOAD-COMPARE: coop-e2e on bare LIVE 178cac37 | SAME failure at week 0 (Q:8, «buổi 0:0 advanced for both» FAIL, room S9Q3) — LIVE regression since fd85907a (E81r saw the same); not the branch. COOP_SWAP not rerun (relay red on LIVE). |
