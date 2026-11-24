@@ -29,7 +29,7 @@ Rollover: at START_CTX % + 25 % of the window (ceiling 60 %) write a HANDOVER bl
 | U3 | 3 (pair 4 split 24/11 13:55Z) | 0 | session_01N1tNP2fZxefqCF5gDf8nSK | DONE 24/11 18:25Z (archived; bug file robot/coop-20261124-0723-p3-4.md) |
 | U3b | 4 | 0 | session_01N1tNP4zcW21pE4pFvZ47QP | RUNNING 24/11 13:55Z (B) |
 | U4 | 3-4 | 1 | session_01UV1Szh9vtuLGWyG8DpJArr | → FOREMAN F (ORDER MAIN 119 07:58Z) |
-| U5 | 5-6 | 0 | session_01UV1SzjjFvKxvNJDS3Tom9F | RUNNING (F, 24/11 08:25Z) |
+| U5 | 5-6 | 0 | session_01UV1SzjjFvKxvNJDS3Tom9F | DONE (24/11 20:20Z) |
 | U6 | 5-6 | 1 | session_01UV1SziPWFp447pcaYdp9tB | RUNNING (started 24/11 ~08:25Z) |
 | U7 | 7-8 | 0 | session_01UV1SziP6h45uycmryXVrR2 | RUNNING 24/11 08:23Z (F) |
 | U8 | 7-8 | 1 | session_01UV1SzjsZzQJA37FcMaTxYH | RUNNING (F) |
