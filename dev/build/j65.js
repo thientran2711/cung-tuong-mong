@@ -1,7 +1,7 @@
 /* j65: each fact once per view (owner 11/14: "the same information is repeated over and over").
    Builds on j62 (kid age once). Only wraps renderers / rewrites their output; no new styles.
    Kept place -> removed repeat:
-   - age: "Tuổi N" everywhere; the 4-band "(18–25)" is derived from the age, dropped on every card
+   - age: "Tuổi N" everywhere; the band label (BAND4N) is derived from the age, dropped on every card
    - date + buổi: top bar (me-d) -> status panel date chip hidden, buổi chip shows only "còn N khắc"; map header drops the buổi
    - her own stats: HUD + status panel -> Quan hệ "Ngươi" drops the Hoàng thượng / Thái hậu rows; Rương đồ drops "Bạc N"
    - servant loyalty: her card in Kẻ hầu -> panel chip "Lòng X" hidden while X's card is open

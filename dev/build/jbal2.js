@@ -2027,6 +2027,16 @@ BAL.blopt={danhD:4,sungD:4,sup:25,
 /* ORDER THIN P0 (jnorep.js, owner OD 23/11 ~22:50Z): ONE shared cross-life no-repeat memory. lives = lives kept (this one + 5 past, as the old
    ctm-e68h), w = weight factor per past life that saw a key (×0.5, as j68), cap = keys kept per life (the store is shared by every family). */
 BAL.nr={lives:6,w:.5,cap:1500};
+/* ORDER THIN P3 (j72c.js composed việc nhờ): on = composed favours live; share = draw weight of one composed seed vs one of the 110 old T7 (1);
+   fx[tier] = what ONE gain/loss step of a seed is worth per key (laws 2/3/4: seeds count steps, numbers live here; rel/relb = thiện cảm of A/B,
+   an = ân tình); odds = base of a do-step on the j72 ladder (q72Odds adds her skill); khac = khắc of a do-step; wait = tuần of a wait step;
+   dl = deadline tuần; obKeep = object traces kept in S.q72c.ob (oldest dropped); twist = chance a seed's hidden twist is true (fixed when the favour is made); need = live-state thresholds of the needs. */
+BAL.j72c={on:true,share:1,twist:.3,
+ fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:1,th:2,hh:2,duc:2,an:1,rel:4,relb:4},
+     m:{sung:3,danh:3,bac:40,suc:8,mat:1,th:4,hh:4,duc:3,an:2,rel:6,relb:6},
+     l:{sung:5,danh:5,bac:60,suc:12,mat:2,th:6,hh:6,duc:5,an:3,rel:9,relb:9}},
+ odds:{de:80,vua:60,kho:45},khac:{s:1,m:2,l:2},wait:{s:1,m:1,l:2},dl:{s:4,m:6,l:8},obKeep:60,
+ need:{friend:10,feud:-10,poor:30,lo:45}};
 /* ORDER THIN P1 (jmgpool.js): mini-game content pools composed from parts, drawn through jnorep (family mg:<kind>). min = items a pooled test type must hold (test dev/test/mg-pool.js). */
 BAL.mgp={min:40};
 /* ORDER THIN P1c (jmgpool_c.js): pool sizes of the P1c kinds (floor BAL.mgp.min); nghe = every triple of the ten secret words. */
