@@ -1142,7 +1142,7 @@ const SNK="ctm-coop-wk",SEAT_MS=3000;let svT=0,seatT=0,seatAt=0,seatLast="";
 const DEV=(()=>{try{let d=localStorage.getItem("ctm-coop-dev");if(!d){d=Math.random().toString(36).slice(2,12)+Date.now().toString(36);localStorage.setItem("ctm-coop-dev",d)}return d}catch(e){return "x"+Math.random().toString(36).slice(2,10)}})();
 function snapSave(now){svT=0;let o=null;try{o=CW.snap&&CW.snap();if(o){o.dev=DEV;o.sv=CW.ssv||0}}catch(e){console.error("coop snap",e)}if(!o)return;
  /* E-FIX-3 (E81r 3): a refused local write is told (saveBlocked kit notice) and no longer skips the seat push to the server copy */
- try{localStorage.setItem(SNK,JSON.stringify(o))}catch(e){if(typeof saveBlocked==="function")saveBlocked()}try{seatPush(o,now)}catch(e){console.error("coop seatPush",e)}}
+ try{slotPut(SNK,JSON.stringify(o))}catch(e){if(typeof saveBlocked==="function")saveBlocked()}try{seatPush(o,now)}catch(e){console.error("coop seatPush",e)}}
 function snapSoon(){if(CW.on&&!svT)svT=setTimeout(snapSave,1000)}
 CW.snapNow=()=>{try{clearTimeout(svT)}catch(e){}snapSave(true)};/* r4: a carried card is in her seat copy at once (a reload right after the carry keeps it) */
 /* review/lag-play-2: the seat copy is ~40 KB; when the server can (room reply caps "seatd") only the PARTS that changed since the copy
@@ -1176,7 +1176,7 @@ COOP.on("room",m=>{seatBase=null;seatBusy=0;seatPend=null;seatLast="";if(!CW.on|
 function snapOk(o,C){const P=C&&C.P&&C.P[CW.seat];
  return !!(o&&o.d&&P&&o.room===COOP.state.room&&o.seat===CW.seat&&o.week===wk()&&(o.c&&o.c.life||0)===(P.life||0)&&o.d.S&&o.d.S.name===P.name)}
 function pickSnap(L,R){if(!R)return L;if(!L)return R;if(R.dev&&R.dev===L.dev)return L;return (R.sv||0)>(L.sv||0)?R:L}
-function snapLoad(C){try{let L=null;try{L=JSON.parse(localStorage.getItem(SNK)||"null")}catch(e){}if(!snapOk(L,C))L=null;
+function snapLoad(C){try{let L=null;try{L=JSON.parse(slotGet(SNK)||"null")}catch(e){}if(!snapOk(L,C))L=null;
  const R=snapOk(COOP.state.mine,C)?COOP.state.mine:null;const o=pickSnap(L,R);
  CW.ssv=Math.max(L&&L.sv||0,COOP.state.msv||0);CW.ssvWk=wk();CW.seatOld=false;seatLast="";if(o)T("snap "+(o===R?"server":"local")+" sv"+(o.sv||0));return o}catch(e){return null}}
 CW.pickSnap=pickSnap;CW.seatVer=()=>({ssv:CW.ssv||0,dev:DEV,old:!!CW.seatOld});

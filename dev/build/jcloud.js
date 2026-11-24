@@ -29,7 +29,7 @@ function norm(s){try{const d=JSON.parse(s);delete d.at;if(Array.isArray(d.P))d.P
 function clean(s){try{const d=JSON.parse(s);if(Array.isArray(d.P)&&d.P.some(x=>x&&/kptitle/.test(x.cls||""))){d.P=d.P.filter(x=>!(x&&/kptitle/.test(x.cls||"")));return JSON.stringify(d)}}catch(e){}return s}
 function hash(s){if(s==null)return "";s=norm(s);let h1=0xdeadbeef,h2=0x41c6ce57;for(let i=0;i<s.length;i++){const c=s.charCodeAt(i);h1=Math.imul(h1^c,2654435761);h2=Math.imul(h2^c,1597334677)}
  h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);return (h2>>>0).toString(36)+(h1>>>0).toString(36)}
-function rawSlot(n){return loadSlot(n)?LS.get(SK(n)):null}
+function rawSlot(n){return loadSlot(n)?slotGet(SK(n)):null}/* save-growth: the plain JSON (the slot itself may be packed, j6 slotEnc) */
 function devLabel(){const t=("ontouchstart" in window)||(navigator.maxTouchPoints>0);const m=Math.min(innerWidth,innerHeight);return !t?"Máy tính":m<800?"Điện thoại":"Máy tính bảng"}
 function sumOf(raw){try{const d=JSON.parse(raw);const s=d.S;return {n:String(s.name||""),w:window.CTM_SLOTWHO?CTM_SLOTWHO(s):"",a:Number.isInteger(s.age)?s.age:null,d:[window.CTM_SLOTDATE?CTM_SLOTDATE(s):"",typeof BUOI!=="undefined"&&BUOI[s.buoi||0]?String(BUOI[s.buoi||0]).toLowerCase():""].filter(Boolean).join(", "),at:d.at||0}}catch(e){return null}}
 const okPid=p=>typeof p==="string"&&/^[A-Za-z0-9]{8,32}$/.test(p);
@@ -53,7 +53,7 @@ let STALE=null;
 /* with Sổ mây on, a solo life is not written while the title is up: she left the game (☰ saved it), "Tiếp tục" reloads it from
    the sổ, and a background save there would only make a false "changed on this device" (→ a needless conflict) */
 {const f=save;save=function(){if(STALE&&S&&S===STALE.s&&SLOT===STALE.n)return;if(C.k&&!T.hidden&&S&&typeof S==="object"&&!S.coopRoom&&!S.dead)return;return f.apply(this,arguments)}}
-function writeSlot(n,raw){if(raw==null)LS.del(SK(n));else if(!LS.set(SK(n),raw)&&typeof saveBlocked==="function")saveBlocked()/* E-FIX-3: a refused write is told (one notice for every save writer) */;if(n===SLOT&&S&&typeof S==="object"&&!S.coopRoom)STALE={s:S,n}}
+function writeSlot(n,raw){if(raw==null)LS.del(SK(n));else if(!LS.set(SK(n),slotEnc(slotDec(raw)))&&typeof saveBlocked==="function")saveBlocked()/* E-FIX-3: a refused write is told (one notice for every save writer) */;if(n===SLOT&&S&&typeof S==="object"&&!S.coopRoom)STALE={s:S,n}}
 const playing=()=>T.hidden&&typeof S==="object"&&S&&!S.dead;
 let BUSY=null,AGAIN=false,STATE="";
 function sync(o){if(!C.k)return Promise.resolve("");if(BUSY){AGAIN=true;return BUSY}

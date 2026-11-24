@@ -60,6 +60,41 @@ function showEmp(){Q.unshift({t:empNm(),cls:"pcm",h:empCardHTML()});showModal()}
 
 /* save / load: three slots */
 let SLOT=1;const SK=n=>"hclh-save-v2-"+n;
+/* save-growth (d): ONE sync codec for every big browser store of a life (save slots, co-op week copy, guest copy).
+   LZ77 on UTF-16 code units (64 k window), bit-packed 15 bits per char into U+0020..U+801F (no surrogates, no control chars,
+   safe for every browser's localStorage). Stored form "CTMZ" + length (2 chars) + stream. Anything else (old saves = plain JSON)
+   is returned unchanged by slotDec, so every old save still loads. */
+const SLOTZ="CTMZ";
+function slotEnc(s){
+ const n=s.length;let out=new Uint16Array(Math.ceil(n*17/15/4)+64),o=0,acc=0,nb=0;
+ const put=(v,bits)=>{acc=(acc<<bits)|v;nb+=bits;if(nb>=15){nb-=15;if(o>=out.length){const t=new Uint16Array(out.length*2);t.set(out);out=t}out[o++]=32+((acc>>>nb)&0x7fff);acc&=(1<<nb)-1}};
+ const W=65536,M=W-1,head=new Int32Array(W).fill(-1),prev=new Int32Array(W),MAXL=259,MINL=4;
+ const hash=i=>(Math.imul((s.charCodeAt(i)<<5)^(s.charCodeAt(i+1)<<3)^(s.charCodeAt(i+2)<<1)^s.charCodeAt(i+3),-1640531535)>>>16);
+ put(n>>>15&0x7fff,15);put(n&0x7fff,15);
+ let ls=0,ll=0;
+ const flush=()=>{while(ll>0){const m=ll>128?128:ll;put(0,1);put(m-1,7);for(let j=0;j<m;j++){const c=s.charCodeAt(ls+j);if(c<128)put(c,8);else{put(1,1);put(c>>>8,8);put(c&255,8)}}ls+=m;ll-=m}};
+ let i=0;
+ while(i<n){let bl=0,bd=0;
+  if(i+MINL<=n){const h=hash(i);let p=head[h],t=16;prev[i&M]=p;head[h]=i;
+   while(p>=0&&i-p<W&&t-->0){if(s.charCodeAt(p+bl)===s.charCodeAt(i+bl)){let l=0;const mx=n-i<MAXL?n-i:MAXL;while(l<mx&&s.charCodeAt(p+l)===s.charCodeAt(i+l))l++;if(l>bl){bl=l;bd=i-p;if(l>=mx)break}}const q=prev[p&M];if(q>=p)break;p=q}}
+  if(bl>=MINL){if(ll)flush();put(1,1);put(bl-MINL,8);put((bd-1)>>>8,8);put((bd-1)&255,8);
+   const e=i+bl;for(let k=i+1;k<e&&k+MINL<=n;k++){const h=hash(k);prev[k&M]=head[h];head[h]=k}i=e;ls=i}
+  else{if(!ll)ls=i;ll++;i++}}
+ flush();if(nb>0)put(0,15-nb);
+ let r=SLOTZ;for(let k=0;k<o;k+=8192)r+=String.fromCharCode.apply(null,out.subarray(k,Math.min(o,k+8192)));return r}
+function slotDec(z){
+ if(typeof z!=="string"||z.slice(0,4)!==SLOTZ)return z;
+ let zi=4,acc=0,nb=0;const L=z.length;
+ const get=bits=>{while(nb<bits){if(zi>=L)throw new Error("slotDec: short");acc=(acc<<15)|(z.charCodeAt(zi++)-32);nb+=15}nb-=bits;const v=(acc>>>nb)&((1<<bits)-1);acc&=(1<<nb)-1;return v};
+ const n=get(15)*32768+get(15),out=new Uint16Array(n);let o=0;
+ while(o<n){if(get(1)===0){const m=get(7)+1;if(o+m>n)throw new Error("slotDec: run");for(let j=0;j<m;j++){const c=get(8);out[o++]=c<128?c:((c&127)<<9|get(9))}}
+  else{const l=get(8)+4,d=(get(8)<<8|get(8))+1;if(d>o||o+l>n)throw new Error("slotDec: ref");for(let j=0;j<l;j++,o++)out[o]=out[o-d]}}
+ let r="";for(let k=0;k<n;k+=8192)r+=String.fromCharCode.apply(null,out.subarray(k,Math.min(n,k+8192)));return r}
+/* every reader/writer of a big life store goes through these two (j6 save/loadSlot, j16 Sổ › export/import, jcloud rawSlot/writeSlot,
+   jcoopworld week copy, jcoopthine guest copy); the text handed around (cloud, export code, hash) stays the plain JSON */
+function slotGet(k){let r=null;try{r=localStorage.getItem(k)}catch(e){return null}if(r==null)return null;try{return slotDec(r)}catch(e){console.error("slotDec",k,e);return null}}
+function slotPut(k,json){localStorage.setItem(k,json==null?json:slotEnc(json))}
+window.slotGet=slotGet;window.slotPut=slotPut;window.slotEnc=slotEnc;window.slotDec=slotDec;
 function ser(){const rs=new Set(rivals),ks=new Set(allKids().map(x=>x[0]));
  const walk=(o,top)=>{if(o===null||typeof o!=="object")return o;if(!top&&rs.has(o))return{$r:o.id};if(!top&&ks.has(o))return{$k:o.name};
   if(Array.isArray(o))return o.map(x=>walk(x,false));const r={};
@@ -73,12 +108,12 @@ function deser(d){trMigrate(d);rivals=d.R;rid=d.rid;S=d.S;S.origin=originByKey(d
  tab=d.tab||"act";used=d.used||0;popIdx=null;popMsg="";
  const vk=S.visit&&S.visit.k;if(d.v<3||!vk||vk==="home"||placeOf(vk).k!==vk||!Array.isArray(S.visit.people)){S.visit={k:"home",people:homePeople(),talked:false};S.place="home"}else S.place=vk;
  if(d.v<3)S.mg=null;if(d.v<5){used=0;S.buoi=0}try{srvLad6()}catch(e){console.error(e)}/* maid-ladder-6: 5-rung save → 6 rungs (j14) */normAll();Q=deserQ(d.P||[])}
-function save(){if(!S||quiet)return;try{if(S.dead)localStorage.removeItem(SK(SLOT));else localStorage.setItem(SK(SLOT),JSON.stringify(ser()));localStorage.setItem("hclh-slot",String(SLOT))}catch(e){if(!S.dead)saveBlocked()}}
+function save(){if(!S||quiet)return;try{if(S.dead)localStorage.removeItem(SK(SLOT));else slotPut(SK(SLOT),JSON.stringify(ser()));localStorage.setItem("hclh-slot",String(SLOT))}catch(e){if(!S.dead)saveBlocked()}}
 /* robot10 E-FIX-3: a save the browser refuses (storage full / blocked) was dropped silently — her progress stopped being kept. ONE notice for
    EVERY save writer (j6 save, jcloud writeSlot, co-op jcoopworld snapSave, jcoopthine guest copy; j16 Sổ › Ghi vào ô prints the same words): the kit notice, once */
 function saveBlocked(){try{if(typeof window.kitNotice==="function"&&typeof CTM_WAIT==="object"&&CTM_WAIT.saveBlocked)window.kitNotice({id:"saveBlocked",line:CTM_WAIT.saveBlocked,sticky:true})}catch(z){}}
 window.saveBlocked=saveBlocked;
-function loadSlot(n){try{const d=JSON.parse(localStorage.getItem(SK(n))||"null");if(d&&d.v===2)d.P=[];/* v2: no pending choices; v2/v3 get items, stat blocks, records via normAll */
+function loadSlot(n){try{const d=JSON.parse(slotGet(SK(n))||"null");if(d&&d.v===2)d.P=[];/* v2: no pending choices; v2/v3 get items, stat blocks, records via normAll */
  return d&&d.v>=2&&d.v<=6?d:null}catch(e){return null}}
 function showTitle(){const T=$("title");const L=[1,2,3].map(n=>{const d=loadSlot(n);
   if(!d)return `<div class="slot"><b>Ô ${n}</b><span class="past">Trống</span><button class="main" data-new="${n}">Bắt đầu kiếp mới</button></div>`;
