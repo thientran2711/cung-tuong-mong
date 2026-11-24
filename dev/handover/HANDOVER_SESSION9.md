@@ -2803,3 +2803,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - Setup LC9 needs is in land-chain-5.md + the ROLL block of land-chain-7.md; LC8's scripts (sland.sh with hold guard, land1.sh, push1.sh, hpush.sh depth 300) can be copied from the LC8 container if still reachable, otherwise rebuild from dev/tools/main-sland.sh etc. as described there.
 - (03:37Z wake) ctx ~9 %. LOAD: main running 3 (LC9 landing, KK16 kit requests, MAP-PERF) | B free 6 (6/12) | C waiting sếp picks | D busy | E busy | F free (MGSKIN 37/39 done; no art order) | moved: duho/den wiring → B. LIVE = b7598e72 (map-label-overlap, FF). MAP-PERF worker session_01V1ZZH1LjcZxsUARKRyfdN1 (opus; Dư đồ 12 s on played save, kmSolve cache miss, + phone map settle ticket). KIT REQUEST kinh/may board slot → KK16.
 - FROM LC9 (03:35Z 24/11): LANDED map-label-overlap b7598e7219aa2541ddd9f392b9bac46083cbd81f. LIVE = b7598e72.
+- FROM LC9 (03:52Z 24/11): LANDED kit-dhcapfit 2a9125bf69bf481a3472d029b3ad8fa15c2cd077. LIVE = 2a9125bf.
