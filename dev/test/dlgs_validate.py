@@ -40,6 +40,30 @@ for s in sd('j70sd.js','J70SEEDS'):add('j70',s['id'],{'M'},set())
 for s in sd('j71sd.js','J71SEEDS'):
     if s.get('type')=='comp':add('j71',s['id'],{'B','M'} if (s.get('roles') or {}).get('B') else {'M'},{'B','O','F'})
 for s in sd('jwsd.js','JWSEEDS'):ro=set((s.get('roles') or {}).keys())|{'M'};add('wc',s['id'],ro,ro|{'O','X'})
+# WAVE 2 (review/sideline-dlg-2): the OLD composed cards of j7 / j68 / ky / j70 (rows marked 'old' in the cover table)
+def rd(f):return open(R+'/build/'+f,encoding='utf8').read()
+J=rd('jdlgs.js')
+def srcof(k):
+    for f in ['j7.js','jrcp.js']:
+        x=rd(f);i=x.find('ev("'+k+'"')
+        if i>=0:return f'{f}:{x[:i].count(chr(10))+1} ev("{k}")'
+    return '?'
+t7=re.search(r'const DLGS_J7O=\{(.*?)\};\n',J,re.S).group(1)
+for mm in re.finditer(r'(\w+):\{([^{}]*)\}',t7):
+    ro=set(re.findall(r'(\w+):\[',mm.group(2)))|{'M'};add('j7',mm.group(1),ro,ro,None);UNITS['j7:'+mm.group(1)]['old']=1;UNITS['j7:'+mm.group(1)]['src']=srcof(mm.group(1))
+for f in ['j68e.js','j68f.js','j68g.js','j68q.js']:
+    src=rd(f);ms=list(re.finditer(r'EV6\("([^"]+)","([a-z]+)",\{',src))
+    for i,mm in enumerate(ms):
+        seg=src[mm.start():ms[i+1].start() if i+1<len(ms) else len(src)]
+        a=re.search(r'\ba:\[([^\]]*)\]',seg);n=len([x for x in (a.group(1).split(',') if a else []) if x.strip()])
+        ro={'M'}|set('ABC'[:n]);ph=set('ABC'[:n])|{'W','P'}|({'it'} if re.search(r'\bitems:\[',seg) else set())
+        add('j68',mm.group(1),ro,ph,None);UNITS['j68:'+mm.group(1)]['old']=1;UNITS['j68:'+mm.group(1)]['src']=f'{f}:{src[:mm.start()].count(chr(10))+1} a:[{a.group(1) if a else ""}]'
+src=rd('jky.js');d=src[src.index('const DEF={'):];d=d[:d.index('\n};')] if '\n};' in d else d
+for k in re.findall(r'^\s*([a-z]+_[a-z]+):\{',d,re.M):add('ky',k,{'W','M'},{'W'});UNITS['ky:'+k]['old']=1;UNITS['ky:'+k]['src']=f'jky.js:{src[:src.index(chr(10)+" "+k+":{")].count(chr(10))+2} DEF.{k} (who:)'
+src=rd('j70.js')
+for mm in re.finditer(r'(?:^\s*(\w+):\{k:"\w+"|M70\.(\w+)=\{k:"\w+")[^\n]*?R:\[(.*?)\]\}',src,re.S|re.M):
+    m70=mm.group(1) or mm.group(2)
+    for r in re.findall(r'\{id:"([^"]+)"',mm.group(3)):add('j70',f'{m70}:{r}',{'M'},set());UNITS[f'j70:{m70}:{r}']['old']=1;UNITS[f'j70:{m70}:{r}']['src']=f'j70.js:{src[:src.index(chr(123)+"id:"+chr(34)+r+chr(34),mm.start())].count(chr(10))+1} M70.{m70} route {r}'
 LIVE={'j72','j68','j7','ky','j70','j71','wc'}   # families whose adapter plays the scene in the game now
 
 def check(r,where):
@@ -85,6 +109,11 @@ def check(r,where):
     return E
 
 def main(a):
+    if '--units' in a:   # W10 slice list: every OLD unit of a family with its cast roles, placeholders and source line
+        fam=a[a.index('--units')+1]
+        for k,v in UNITS.items():
+            if v['fam']==fam and v.get('old'):print(f"{k}\troles {sorted(v['roles'])}\tph {sorted(v['ph']-GEN)}\t{v.get('src','')}")
+        return 0
     fams=None;cover='--cover' in a
     if '--fam' in a:fams=set(a[a.index('--fam')+1].split(','));a=a[:a.index('--fam')]+a[a.index('--fam')+2:]
     files=[x for x in a if not x.startswith('--')] or sorted(glob.glob(R+'/handover/content/dlg/*.md'))
@@ -114,8 +143,11 @@ def main(a):
         print('| family | units | with scene | % | plays in game |\n|---|---|---|---|---|')
         T=[0,0]
         for fam in ['j72','j7','j68','ky','j70','j71','wc']:
-            U=[k for k,v in UNITS.items() if v['fam']==fam];w=len([k for k in U if k in allf]);T[0]+=len(U);T[1]+=w
-            print(f'| {fam} | {len(U)} | {w} | {100*w//max(1,len(U))} | {"yes" if fam in LIVE else "adapter pending"} |')
+            for old in (0,1):
+                U=[k for k,v in UNITS.items() if v['fam']==fam and bool(v.get('old'))==bool(old)]
+                if not U:continue
+                w=len([k for k in U if k in allf]);T[0]+=len(U);T[1]+=w
+                print(f'| {fam}{" old (wave 2)" if old else ""} | {len(U)} | {w} | {100*w//max(1,len(U))} | {"yes" if fam in LIVE else "adapter pending"} |')
         print(f'| ALL | {T[0]} | {T[1]} | {100*T[1]//max(1,T[0])} | |')
     return 1 if err else 0
 if __name__=='__main__':sys.exit(main(sys.argv[1:]))

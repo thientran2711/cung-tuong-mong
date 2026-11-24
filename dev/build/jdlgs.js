@@ -68,15 +68,35 @@ DLGS.R.push({test:m=>/^e68c:/.test(m.pid||""),fn:m=>{const sid=m.pid.slice(5),sp
 /* j7 composed intrigue (THIN P2; pid "j7c", pp.sid + pp.c cast). Roles = the seed's role ids (plotter, target, …) + maid. */
 DLGS.R.push({test:m=>m.pid==="j7c"&&m.pp&&m.pp.sid,fn:m=>{const sp=dlgsGet("j7:"+m.pp.sid);if(!sp)return null;j7cSeeds();const sd=J7I[m.pp.sid];if(!sd)return null;const X=j7cActors(sd,m.pp.c||{});if(!X)return null;
  return dlgsResolve(sp,dlgsCtx(X,t=>j7cFill(t,X),null))}});
+/* WAVE 2 — old j68 situations (EV6 tables j68e/f/g/q; card pid "e68<id>", pp = cast a0..a2 + vi). Unit "j68:<id>". Roles A B C (the EV6 slots a:[kinds], A6 real people) + M.
+   Placeholders = the card's own: {A}{B}{C}{M}{S}{W}{P}{E}{it} (e68Fill). A unit with no person slot: L = M (her cung nữ brings it). */
+DLGS.R.push({test:m=>{const p=m.pid||"";return /^e68/.test(p)&&!/^e68c:/.test(p)&&typeof E68I!=="undefined"&&!!E68I[p.slice(3)]},fn:m=>{const id=m.pid.slice(3),sp=dlgsGet("j68:"+id);if(!sp)return null;const s=E68I[id],pp=m.pp||{};
+ const X=e68X(s,pp);if(!X)return null;const it=s.items&&pp.it!=null?s.items[pp.it%s.items.length]:null;
+ return dlgsResolve(sp,dlgsCtx({A:X.A,B:X.B,C:X.C},t=>{t=e68Fill(t,X);return it!=null?t.replace(/\{it\}/g,it):t},null))}});
+/* WAVE 2 — old j7 intrigue cards (ev() in j7.js + rcpMama jrcp.js; card pid = the ev id, pp = its params). Unit "j7:<ev id>".
+   Cast per card = ONLY the people the card itself shows or names (law 6b); a hidden schemer (pp.a of poisongift / comet / fire, pp.v of doll / guardrumour /
+   ghost / taster) is never cast. role → [A6 kind, pp key | null]. M (her cung nữ) is always there. Placeholder {<role>} = that person's name. */
+const DLGS_J7O={doll:{},poisongift:{v:["rv","v"]},guardrumour:{},ghost:{},pact:{v:["rv","v"]},eunuch:{sv:["sv","sid"]},empnight:{emp:["emp",null]},minister:{emp:["emp",null]},
+ jealousprince:{emp:["emp",null],kid:["kid","k"]},flood:{},newgirl:{},princefever:{kid:["kid","k"],doc:["doc",null]},foreignwed:{emp:["emp",null],kid:["kid","k"]},maidhostage:{v:["rv","v"]},
+ doctorblack:{doc:["doc",null]},comet:{v:["rv","v"]},phoenix:{},doanngo:{},trungcuu:{emp:["emp",null]},vulan:{},dongchi:{},thbirthday:{th:["th",null]},caning:{v:["rv","v"]},condemnedmaid:{},
+ coldvisit:{f:["rv","f"]},taster:{},letterhome:{},fire:{v:["rv","v"]},rvframe:{a:["rv","a"],b:["rv","b"]},rvquarrel:{a:["rv","a"],b:["rv","b"]},rvmusk:{a:["rv","a"],b:["rv","b"]},
+ rvbribe:{a:["rv","a"],b:["rv","b"],ksp:["ksp",null]},rcpMama:{}};
+DLGS.R.push({test:m=>!!(m.pid&&m.pid!=="j7c"&&DLGS_J7O[m.pid]&&typeof EVI!=="undefined"&&EVI[m.pid]),fn:m=>{const sp=dlgsGet("j7:"+m.pid);if(!sp)return null;const pp=m.pp||{},C=DLGS_J7O[m.pid],act={};
+ for(const r in C){const[k,key]=C[r];if(key&&pp[key]==null)continue;const a=A6(k,key?pp[key]:null);if(a)act[r]=a}
+ return dlgsResolve(sp,dlgsCtx(act,t=>String(t).replace(/\{(\w+)\}/g,(x,r)=>act[r]?act[r].n:x),null))}});
 /* families whose card is built inside their own closure (j71c, jworldc) call this when they build it: id = unit id, act = their cast table */
 function dlgsMk(id,act,fill,at){try{const sp=dlgsGet(id);return sp?dlgsResolve(sp,dlgsCtx(act||{},fill||(t=>t),at)):null}catch(e){console.error(e);return null}}
 /* kỳ ngộ (jky + THIN P5 jkyc): the encounter card (pid "kyngo" with choices, or the no-choice card) of KY.cur; ONE scene per encounter. Role W = the person met. */
 DLGS.R.push({test:m=>/^kyngo:/.test(m.evId||"")&&typeof KY!=="undefined"&&KY.cur&&m.evId==="kyngo:"+KY.cur.id&&!KY.cur.__dlg,fn:m=>{const c=KY.cur;c.__dlg=1;const w=c.W;if(!w)return null;
+ /* law 6b: a hidden person (th_tham plotter, hide:1) is never shown or named; a W that is she herself is no second figure; kind maid (vat_minh) = her own cung nữ */
+ if(w.hide||w.ref===S)return dlgsMk("ky:"+c.id,{},t=>t,null);if(w.kind==="maid"&&!w.ref){if(!S.maid)return null;return dlgsMk("ky:"+c.id,{W:{k:"maid",o:S.maid,n:S.maid.name,f:null}},t=>String(t).replace(/\{W\}/g,S.maid.name),null)}
  const n=c.wn||(typeof wName==="function"?wName(w):(w.ref&&w.ref.name)||"");const W={k:w.kind==="el"?"mama":w.kind,o:w.ref||w,n,f:null};
  return dlgsMk("ky:"+c.id,{W},t=>String(t).replace(/\{W\}/g,n),null)}});
+/* j70 unit id: composed seed "j70:<seed id>"; old route "j70:<method>:<route>" (old route ids repeat across methods: tsv ×5, bup/thay/chu/son ×2) */
+function dlgsJ70Id(p){const r=String(p.r||"");return /^j70c-/.test(r)?"j70:"+r:"j70:"+p.m+":"+r}
 /* she saw the tell HERSELF on the spot (j70 goTo): no cung nữ report scene for that plot (law 6b: the scene must match who really saw it) */
 if(typeof goTo==="function"){const g0=goTo;goTo=function(k){let pre=null;try{const z=typeof j70==="function"?j70():null;pre=z?new Set(z.pl.filter(p=>p.pend==="seen").map(p=>p.id)):null}catch(e){}
  const r=g0.apply(this,arguments);try{const z=pre&&j70();if(z)for(const p of z.pl)if(p.pend==="seen"&&!pre.has(p.id))p.dlgSelf=1}catch(e){}return r}}
 /* j70 plots (51 routes + THIN P6 composed): her people saw a TELL of a plot aimed at her (pid "j70", stage "seen"); L = her cung nữ who saw it. Unit id "j70:<route id>". */
-DLGS.R.push({test:m=>m.pid==="j70"&&m.pp&&m.pp.s==="seen",fn:m=>{const p=P70(m.pp.id);if(!p||pt70(p)!==S||!S.maid||p.dlgSelf)return null;return dlgsMk("j70:"+p.r,{},t=>t,null)}});
+DLGS.R.push({test:m=>m.pid==="j70"&&m.pp&&m.pp.s==="seen",fn:m=>{const p=P70(m.pp.id);if(!p||pt70(p)!==S||!S.maid||p.dlgSelf)return null;return dlgsMk(dlgsJ70Id(p),{},t=>t,null)}});
 try{window.DLGS=DLGS;window.dlgsResolve=dlgsResolve;window.dlgsPlay=dlgsPlay;window.dlgsGet=dlgsGet;window.dlgsMk=dlgsMk}catch(e){}
