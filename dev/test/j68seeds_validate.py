@@ -115,6 +115,7 @@ for r in rows:
     if "B" in R and "A" not in R:err(i+" role B without A")
     if not R and f not in("sea","myst","court"):err(f"{i} fam {f} needs a role A (a real person)")
     for k,v in R.items():role(i,k,v)
+    if "A" in R and "B" in R and kof(R["A"])==kof(R["B"]) and kof(R["A"]) in("maid","emp","th","doc","eun","ksp"):err(f"{i} roles A and B are the same fixed person ({kof(R['A'])}) → never cast")
     if "A" in R:NEEDK[f].add(kof(R["A"]))
     else:NEEDK[f].add("-")
     o=r.get("object","MISSING")
