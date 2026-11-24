@@ -127,3 +127,11 @@ PRIORITY #1 CHECK ('square|vuông|small option'): KIT §6.2b dialog option card 
 Owner (OD 24/11 ~04:10Z s3/s8, verbatim): "Cái nút á có vài chữ nó còn chẳng có cái thông tin gì ở dưới hết, mà bạn mắc gì bạn phải làm cho cái hình này nó to ra như vậy? Sao không làm cái nút nhỏ lại?" … "Tại sao không lấy cái nút hình chữ nhật á, hình vuông á, cái nút mà nút ảnh hình vuông để mà làm ảnh đại diện."
 Ask: a SMALL option button for the nhập cung scene's bare options (§93.7 kitBareOpt has no Tốn/Được rows, only a few words): square picture thumb (e.g. the §6.3 square size) + the text, height = its content, no big empty card; same look in every scene box (yard acts, tests, edict, news «Vào cung»). Fold 755x1000 + iPad 1180x820. Whether it stays scene-only (like §93.7) or replaces §6.2b for row-less options is the owner's/MAIN's call (it touches OD 18/11 ~07:25Z «ONE size»).
 Status: DONE (KK18 audit 24/11) — review/kit-sqopt 5917286b KIT §6.2c SQUARE option (in Foreman B review).
+
+## 24/11 RING-DESIGN (r2, kit keeper please; mock = review/ring-design, page img/_review/ring/ring-r2.html)
+1. kring — layout part: place N figures/groups on an oval (angle table, depth scale, figure-only dim; NO drawn track); one part for people and items (see MOTION-DESIGN m2).
+2. kstageSheet — compact option sheet next to the lit figure ON the place stage (kitDlgBox is scene-layer only; kitBareOpt cards with art are too tall on Fold).
+3. kfigglow — alert rim glow on a figure (red-orange) for "có chuyện"; kitAlarm only pulses the screen edge.
+4. knoticeDir — directional notice chip at the stage edge (arrow toward the trouble); mock uses kitChip red + ‹ ›.
+5. Ân sủng column collapsible in crowd/ring mode (Fold floor drops to ~410 px).
+6. kitHereCount for the head-count chip over ALL pages (not the current page).

@@ -21,3 +21,15 @@ Pros: most cinematic, cannot be missed, no new marker. Cons: forced attention, p
 ## RECOMMENDATION
 A as base (non-intrusive: thread + seal + pill + dots), tap result = ring turns pair to front (A open state, close to C). Use B inset only for big dramas; small ones only seal. Dots row in all.
 Foreman note: needs KK18 parts above, no code written. ~Design 100 % / game 0 % built.
+
+# r2 (REAL GAME, kit parts) — READY https://ctm-img.victoria-tntt.workers.dev/img/_review/ring/ring-r2.html
+PRIORITY #1 CHECK: OD 07:42–09:15Z rows read | main j6 renderStage + j59 j59lay/j59chips (the live place-people view) | review/* none for rings (review/motion-design has an item ring; one shared kitRing suggested) | claims none.
+Why r2: r1 (hand-drawn chrome, dark veil, drawn oval, round avatars) FAILED law 9 / owner rulings 08:55–09:15Z. r2 runs INSIDE the built game (dev/test/lib/device.js host mode, Fold + iPad): real HUD, stage, rail, tabs; chips = kitChip, plaques = kitNameTag/j59tagHTML, strangers = .figimg.j59sil, scene = kitScene + Sc.fig + kitDlgBox + kitBareOpts. No drawn oval, no dark overlay on the background (figures only brighter/softer).
+Sections: Phòng riêng (4/6, today vs row vs ring) · G vòng nhóm (Ngự Hoa Viên 18 people, 9 groups, followers behind master, no pre-warning etiquette, NPC auto-turn + zoom + §95) · S wide scene (honest breaks) · R person ring for CHOICE screens.
+RECOMMEND: G for crowded places; R for choice screens; S only with a wide painted background that has a continuous floor; room: one screen, Fold row up to 4 / ring from 5, iPad row up to 6.
+Replaces in live game: j59 fixed slots (Fold 2 / iPad 4) + «+n»/«‹» page chips (j59chips/j59go/j59swipe); keeps popCard, kitHereCount, rail.
+KIT REQUESTS (filed below in dev/kit/KIT_REQUESTS.md): kring layout part; stage option sheet; figure alert glow; directional notice chip; collapsible Ân sủng column in crowd mode; head-count over all pages.
+Kit parts that darken a whole screen (report only): kitScene veil rgba(20,12,8,.45)+blur (§93, used by §95), kitGloom vignette, kitInk blots, #modal backdrop.
+Law 8: palace-drama/etiquette check on the page (from memory, K/D tagged; needs an expert to confirm).
+Open points: stranger silhouettes drawn by kit only for stage 0; real life seeds in this run had few people so the «hôm nay» room frame shows few; iPad videos show the real spread layout (stage left + panel right).
+Code: review/ring-design dev/review/ring/r2. ~Design 100 % / playable 0 %.
