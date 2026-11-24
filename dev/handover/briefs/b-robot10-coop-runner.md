@@ -26,7 +26,7 @@ Rollover: at START_CTX % + 25 % of the window (ceiling 60 %) write a HANDOVER bl
 |---|---|---|---|---|
 | U1 | 1-2 | 0 | session_01N1tNP3yvoJnQ8TgBpcq5Be | RUNNING |
 | U2 | 1-2 | 1 | session_01N1tNP2VQmoYutPcH2wVYLj | RUNNING |
-| U3 | 3-4 | 0 | session_01N1tNP6GBeXdWAwKq3PXxHZ | RUNNING |
+| U3 | 3-4 | 0 | — | QUEUED (paused 05:43Z, restart from 0) |
 | U4 | 3-4 | 1 | — | QUEUED |
 | U5 | 5-6 | 0 | — | QUEUED |
 | U6 | 5-6 | 1 | — | QUEUED |

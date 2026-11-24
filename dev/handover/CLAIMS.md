@@ -1378,8 +1378,9 @@ LAW-1 likes/dislikes/gifts scan + fix (opus; MAIN 116 07:57Z (e); briefs/D-law1-
 | REVIEW robot10-coop r1 (sonnet SMALL test-only; briefs/b-robot10-coop-review.md) of review/robot10-coop 48d1d7e1 | review/robot10-coop-r1 | B | session_01N1tNP6pEDc1YrVZnAFh6AX | RUNNING | 24/11 05:36Z |
 | ROBOT-COOP RUNNER U1 pairs 1-2 SWAP=0 ×10 kiếp (sonnet; briefs/b-robot10-coop-runner.md) | dev/handover/robot/coop-*-p1-2.md | B | session_01N1tNP3yvoJnQ8TgBpcq5Be | RUNNING | 24/11 05:36Z |
 | ROBOT-COOP RUNNER U2 pairs 1-2 SWAP=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p1-2-s.md | B | session_01N1tNP2VQmoYutPcH2wVYLj | RUNNING | 24/11 05:36Z |
-| ROBOT-COOP RUNNER U3 pairs 3-4 SWAP=0 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p3-4.md | B | session_01N1tNP6GBeXdWAwKq3PXxHZ | RUNNING | 24/11 05:36Z |
+| ROBOT-COOP RUNNER U3 pairs 3-4 SWAP=0 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p3-4.md | B | session_01N1tNP6GBeXdWAwKq3PXxHZ | PAUSED (archived 05:43Z for kit seat; U3 back to QUEUED) | 24/11 05:36Z |
 PALACE AUDIT + DISTANCE EFFECT (opus; MAIN 116 08:16Z + 08:46Z; briefs/D-palace-distance.md) | reports/palace-audit.md; review/palace-distance | session_01D3E3NYCMYjjACU3pnjjM84 | RUNNING | 24/11 05:40Z (Foreman D ROOT)
 LAW-1 likes/dislikes/gifts scan + fix (opus; MAIN 116 07:57Z (e); briefs/D-law1-likes-gifts.md) | review/law1-gifts | session_01D3E3Nb2AhxBQbQBQDKoKLv | RUNNING | 24/11 05:40Z (Foreman D ROOT)
 | REVIEW mgskin-wire r1 (sonnet SMALL reviewer-lander; briefs/b-mgskin-wire-review.md) of review/mgskin-wire 53e3b70b | review/mgskin-wire-r1; reports/thin.md «## REVIEW mgskin-wire r1» | B | session_01N1tNP63hZJuLnXd4UvJ6U4 | RUNNING | 24/11 05:38Z |
 | thin-p6 r2 FIX + RE-LAND (opus; LC9 bounce 05:36Z: wc/j70c/j71c-play fail no-arg on ff1773ba; briefs/b-thin-p6-r2.md) | review/thin-p6-r2; reports/thin.md «## REVIEW thin-p6 r2» | B | session_01N1tNP436YFaYo5MMDCeWak | RUNNING | 24/11 05:43Z |
+| SMALL KIT REVIEWER #2 (sonnet; split from 2F8nQScU; briefs/b-kit-review-2.md): kit-sqopt, kit-daytitle, kit-dialogue-vn, kit-evframe | review/<name>-r1; reports/<branch>.md | B | session_01N1tNP59hSyoDLcPHGSmzLM | RUNNING | 24/11 05:44Z |
