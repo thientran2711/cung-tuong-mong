@@ -129,3 +129,9 @@ Cards with `pid` not listed in the 11 jpres rows (shops, gift/plant picks, `gift
 START_CTX ≈ 6 % of the window; used so far ≈ 35 %; no rollover needed.
 
 MUSIC SPEC READY
+
+## FOREMAN F CHECK + CDN (24/11 07:22Z)
+- CDN: all 37 new tracks uploaded by Foreman F to audio/bgm-<key>.mp3 (23 core from review/music-m1 + 14 fest from review/music-fest; old 6 untouched); img/_index.json rebuilt; spot-fetch 200 OK (joy, thitam, fest-trungthu, end-kyngo). The CDN worker already serves /audio/* (bgm-day.mp3 200). No md5 duplicates among the 37.
+- Loudness/size (ffmpeg ebur128): core 76.0 s, −11.7…−12.0 LUFS, 1.07 MB each; fest 85.9–90.1 s, −10.9…−12.6 LUFS, 1.03–1.08 MB; live bgm-day = −11.3 LUFS → matched.
+- VOCAL CHECK DONE: faster-whisper base on every track, VAD on: 0 speech-like segments in all 37 (banquet 4 / end-grand 1 raw VAD segments, all no-speech) → instrumental, PASS.
+- «daile» trigger (MAIN 118 Q): daile plays for (1) Đại lễ tế Giao (jworld AWAY_N.te); (2) the GRAND investiture ceremony of the top ranks (Hoàng quý phi / Hoàng hậu / Thái hậu sắc lập, D's promo-redesign «đại lễ» step) — an ordinary rank sắc phong keeps «conferral»; (3) court rites with no festival track of their own (e.g. jend14 «đại lễ Thái miếu»). A yearly festival that has bgm-fest-<k> always uses its own track.
