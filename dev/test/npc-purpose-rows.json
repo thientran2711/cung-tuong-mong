@@ -371,7 +371,7 @@
 "group": "G1",
 "event": "death→lãnh cung; midwife plant; maid bought by rival",
 "fp": "  if(has(\"nhantu\")&&roll(30)){p.out=true;if(p.queen)p.queen=",
-"done": "if(has(\"nhantu\")&&npcWhy(\"empMercy\",{p})){p.out=true;"
+"done": "if(has(\"nhantu\")&&npcWhy(\"empMercy\",{p})){if(CR.mercy===\"dan\")return dsDan(p,why);p.out=true;"
 },
 {
 "f": "j8.js",
