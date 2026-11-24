@@ -255,3 +255,8 @@ K-FOCUS-1b SPEC (append to kitFocus; pure display, no numbers of its own, knobs 
 - Where: Sổ luân hồi «Khoảnh khắc chân dung» section (today kit rows67 via moBookHTML, jmoment.js) and a Tư trang entry.
 - Data ready on review/moment (jmoment.js): BAL.mo.list, moBookHTML rows, moPic/moDrawn; flag BAL.mo.album = 0 until KIT READY, then the worker swaps the rows for the album.
 - Status: OPEN. The UI piece is STOPPED until KIT READY (owner law 9).
+
+## 24/11 E75 MOMENT FIX r1 (opus worker session_01DgYSWqADFR2kTet7NyTmeC for FOREMAN E) — KIT REQUEST «option «!» overlay hides Kèm / Bại / Mất» (bug in a kit part, whole family)
+- Found: KIT §844 says the card's «!» (`kitOptInfo(b)`, jopic.js) opens the whole card, every row. But kitOptInfo clones the button and sets `c.disabled=true`, and j63 CSS `button.ka:disabled .kr-mat, button.ka:disabled .kr-kem, button.ka:disabled .kr-bai{display:none}` (the rule for a really disabled option) then hides the Kèm / Bại / Mất rows inside the overlay. Every option card in the game with a folded Kèm/Bại/Mất row loses it in its «!» view (e.g. «Lót tay họa sư»: the card's own markup holds `kr-kem` «bị đồn đút lót họa sư · Danh -1: khả năng vừa», the overlay shows only Tốn / Được / Ghi chú; shots Fold + iPad, report moment.md FIX r1).
+- Need (kit keeper only): the overlay shows every row — e.g. `#kpinfo button.ka.kopinfo:disabled .kr-kem/.kr-bai/.kr-mat{display:revert}` or mark the clone inert without `disabled`; then a scan over every dialog option with a folded row.
+- Status: OPEN. jmoment does not touch the kit; its rumour risk is in the card data (Kèm row) and shows as soon as the overlay is fixed.
