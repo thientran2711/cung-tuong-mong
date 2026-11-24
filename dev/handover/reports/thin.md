@@ -724,3 +724,33 @@ START_CTX ~6 % (own estimate); finished well under +25 %.
 - The skin of a canvas board is chosen when the frame opens; duho·ha looks close to its default (summer lake already). tho·xuan is close to default by F's note.
 - Seasonal skins are drawn at random per open (no tie to the game calendar) — as the order says; tying to the season is a separate owner decision, not done.
 - Old save: quickcheck old-save step PASS (loads and plays a buổi).
+
+## REVIEW thin-p4 r2 (bounce by LC9 05:34Z: no-arg play tests failed on the branch head)
+- WHY r1 passed: r1 ran j68c-play / kyc-play only WITH the 460 / 77 seed files as arg, never with no arg. The default fixtures (dev/test/j68c-fixture.jsonl, kyc-fixture.jsonl) kept the ids the engine gave them before the fold (j68c-<fam>-001, kyc-ma/de/sv/vat-001) = the ids of real built seeds after the fold, so the no-arg run played the BUILT seed and checked the FIXTURE's numbers → 27 + 1 FAIL. Reproduced on the r1 head (J68C PLAY: 27 FAIL (9 comps, 3 forced)) before the fix.
+- FIX (law 11, whole family): fixtures get their own ids (j68c-fx-*, kyc-fx-*); both play tests now FAIL loudly («id collides with a different built seed») when a file row reuses a built id with other content — checked with the old fixtures: every colliding row FAILs with that message. Every thin *-play test run with NO arg below (j68c, kyc, j7c, j72c, mg-pool, mg-pool-b, mg-pool-c) and the seed files as arg.
+- Branch **review/thin-p4-r2 @ 7429bfa3** = review/thin-p4-r1 4243006e + fixture fix + LIVE 68799300 (thin-p3 landed: jbal2 keeps BAL.j68c + BAL.j72c; j72.js = LIVE incl. q72Choose, not touched by this branch).
+- GATES on 7429bfa3 (exact commands → last line):
+  - `node dev/test/j68c-play.js` → exit 0 · J68C PLAY: ALL PASS (9 comps, 0 forced, 460 built)
+  - `node dev/test/j68c-play.js <scratch>/j68all.jsonl` → exit 0 · J68C PLAY: ALL PASS (460 comps, 154 forced, 460 built)
+  - `node dev/test/kyc-play.js` → exit 0 · KYC PLAY: ALL PASS (4 played, 0 skipped: no real piece/person of that sort in this one world)
+  - `node dev/test/kyc-play.js <scratch>/kyall.jsonl` → exit 0 · KYC PLAY: ALL PASS (74 played, 3 skipped: no real piece/person of that sort in this one world)
+  - `node dev/test/j7c-play.js` → exit 1 · J7C PLAY: 6 FAIL
+  - `node dev/test/j72c-play.js` → exit 0 · J72C PLAY: ALL PASS (4 seeds, 256 built; cast from the fresh life 4, forced cast 0)
+  - `node dev/test/mg-pool-play.js` → exit 0 · ok   no page errors
+  - `node dev/test/mg-pool-b-play.js` → exit 0 · ok   no page errors
+  - `node dev/test/mg-pool-c-play.js` → exit 0 · ok   no page errors
+  - `node dev/test/undef-scan.js` → exit 0 · PASS: no unguarded undefined identifier (300 names checked)
+  - `node dev/test/one-core-guard.js` → exit 0 · PASS: one core (no second value, no typed core text, no new inline rule number)
+  - `node dev/test/kyngo-eq.js` → exit 0 · PASS (eqTol 1.25)
+  - `node dev/test/norep-unit.js` → exit 0 · NOREP UNIT: ALL PASS
+  - `node dev/test/norep-oldsave.js <scratch>/live0.html` → exit 0 · NOREP OLDSAVE: ALL PASS
+  - `node dev/test/ky-keeper-f2.js` → exit 0 · PASS
+  - `python3 dev/test/j68seeds_validate.py --min` → exit 0 · j68seeds: day 63c/16o, visit 64c/16o, serv 60c/16o, emp 60c/16o, sea 44c/21o, court 43c/20o, rumor 42c/15o, kid 42c/18o, myst 42c/14o — 0 errors, 0 warnings
+  - `python3 dev/test/kyseeds_validate.py` → exit 0 · kyseeds: de 10, ma 16, sv 23, th 14, vat 14 = 77 — 0 errors, 18 warnings
+  - `node dev/test/kyngo-unit.js http://127.0.0.1:8765/index.html` → exit 0 · PASS
+  - `node dev/test/coop-e2e.js <out>` (Fold hosts) → exit 0 · 142/142 passed
+  - `COOP_SWAP=1 node dev/test/coop-e2e.js <out>` (iPad hosts) → exit 0 · 142/142 passed
+  - `bash dev/tools/quickcheck.sh --runs 7` → exit 0 · QUICKCHECK PASS · 552 s · open 1941 ms · old save ok · perf (median of 7, new/live): render 238/260 ms, tab 458/452 ms, buổi 1193/1416 ms, tasks>200ms 23/24 · core gates PASS · build 3 s · total 946 s
+  - j7c-play (LIVE P2 test, no j7 file touched here): the first no-arg run above printed «J7C PLAY: 6 FAIL»; detail not kept; 9 reruns ALL PASS (1 of 10). Flaky, not reproduced; flag for the P2 owner.
+- LIVE moved to 35647d5e (kframe-heir) after these gates: source merge is clean (only built index.html/sw.js conflict = rebuild). I re-merge on request.
+- **VERDICT r2: PASS 7429bfa3**
