@@ -222,6 +222,9 @@ async function runBg(){if(bgRun||KLOAD.paused||!figList.length)return;bgRun=true
  catch(e){await refresh("fig").catch(()=>{})}
  bgRun=false;paintChip()}
 
+/* offline-fast: is this picture/sound in assets.json (= in the offline set)? true / false, or null while the manifest is not read yet.
+   Used by probes of pictures that may not exist yet (j94 scnLive), so a not-yet-drawn file is never asked for (a 404 online, a failure offline). */
+let MSET=null;window.kitAssetHas=function(p){if(!MAN)return null;if(!MSET)MSET=new Set(MAN.files.map(f=>f[0]));return MSET.has(String(p).replace(/^\.?\//,"").replace(/[?#].*$/,""))};
 window.kitLoadReady=function(cb){if(!el)cb();else enterCb.push(cb)};
 
 /* ---------- LIFE GATE (owner OD 18/11 ~01:50Z "vô game mà thấy những cái ô nó trống ... cảm giác như nó bị lag"; review/life-preload; KIT §35.3) ----------

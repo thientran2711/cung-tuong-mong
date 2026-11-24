@@ -76,7 +76,9 @@ BG_MB = float(os.environ.get('CTM_BG_MB', '120'))
 # + every small UI picture of the kit (icons, menu / rail / status icons, emotion marks, crests, frames, item slots, tokens…; owner OD 18/11 ~01:35Z:
 #   letters "L"/"M" and missing top-bar / stat icons on a fresh Fold): img/kit/ except the scene art of mini games, night-end, podium, card flip (~5 MB more)
 # person-set seal clips (img/kit/emo-anim/th-*, ACTWIRE: 63 clips ≈ 32 MB) are NOT always-core: fetched on use (jemoseal kesPre probes them before a lean)
-ALWAYS = re.compile(r'(img/title-key|img/frame|icons/|audio/sfx-|audio/bgm-day|img/kit/(?!mg-|ne-|podium|cf-|emo-anim/th-))')
+# offline-fast (owner flight 25/11): EVERY face (img/face-*: ~150 small files) is always core — j17 probes every pool face at each start (FPOOL probe)
+# and a face that is not on the device is dropped from the draw / shows blank offline; faces added after first-hour.txt was recorded had fallen to lazy.
+ALWAYS = re.compile(r'(img/title-key|img/face-|img/frame|icons/|audio/sfx-|audio/bgm-day|img/kit/(?!mg-|ne-|podium|cf-|emo-anim/th-))')
 try: FIRST = {l.strip() for l in open(os.path.join(R, 'dev', 'site', 'first-hour.txt'), encoding='utf-8') if l.strip() and not l.startswith('#')}
 except Exception: FIRST = None   # no list yet: old behaviour (everything non-figure is core)
 def first_ok(k):
