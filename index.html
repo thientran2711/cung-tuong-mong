@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"bba42773+","t":"2026-11-24T00:40Z","c":"SELF-MERGE LAND odds-no-thanh: merge LIVE e88b09b4 (index.html/sw.js rebuilt)","b":"d6a72c7fe7b9","h":[{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"},{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."}]};
+window.CTM_BI={"s":"a08f8cd9+","t":"2026-11-24T01:19Z","c":"robot10 nc-fix-2: stage layers over another tab (Fold story/rel text over text)","b":"93af2cd319a5","h":[{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -29578,7 +29578,10 @@ window.kitQuick=kitQuick;window.kitQuickSub=kitQuickSub;window.kitQuickRoll=kitQ
 /* seal: optional word for the header seal (default KP_SEAL.game "TÀI NGHỆ"; scheme games pass "MƯU") — one kit parameter for every caller
    kitGameFrame({art:"Cầm", title:"Tấu khúc", how:"Chạm đúng dây khi nốt chạm vạch đỏ.", hud:[["score","Điểm",0],["time","Thời gian","30 giây"]], id:"kgbox"})
    -> HTML of the frame; the game draws into #<id> (.kgbox). Update a HUD cell with kitGameSet("score", 12). */
-function kitBoardBg(kind){try{if(!kind||typeof KG82_BOARDBG==="undefined"||!KG82_BOARDBG.has(kind))return"";const s=`https://ctm-img.victoria-tntt.workers.dev/img/kit/mg-${kind}-bg.webp`;if(typeof kitPhOnCdn==="function"&&!kitPhOnCdn(s))return"";return typeof IMG_U==="function"?IMG_U(s):s}catch(e){return""}}
+function kitBoardBg(kind){try{if(!kind||typeof KG82_BOARDBG==="undefined"||!KG82_BOARDBG.has(kind))return"";let s=`https://ctm-img.victoria-tntt.workers.dev/img/kit/mg-${kind}-bg.webp`;if(typeof kitPhOnCdn==="function"&&!kitPhOnCdn(s))return"";
+ /* KIT MG-SKIN: the live skin's board painting (https://ctm-img.victoria-tntt.workers.dev/img/mg/<kind>-<id>.webp) when the CDN index lists it (a DOM backdrop has no load fallback, so an unknown index = default art) */
+ {const id=typeof KG82!=="undefined"&&KG82.skin&&KG82.skin.id;if(id&&typeof kg82SkinSrc==="function"&&typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE)s=kg82SkinSrc(kind+"-bg",id)}
+ return typeof IMG_U==="function"?IMG_U(s):s}catch(e){return""}}
 window.kitBoardBg=kitBoardBg;
 function kitGameFrame(g){g=g||{};const fg=g.fig?kitGameFig(g):"";const bgb=kitBoardBg(g.kind);return `<div class="kgame">${kpHeader("game",`${g.art?g.art+": ":""}${g.title||""}`,"",g.seal).replace(/<\/div>$/,'<span class="kgmk" hidden></span><span class="kgclk" hidden></span></div>')}`+
  `<div class="kgbody${fg?" kgfig-on":g.pic?" kgpic-on":""}">`+(fg||(g.pic?`<div class="kgpic"><img src="${g.pic}" alt="" draggable="false" onerror="this.parentNode.parentNode.classList.remove('kgpic-on');this.parentNode.remove()"></div>`:""))+`<div class="kginfo">`+
@@ -29658,7 +29661,18 @@ function kitGameResult(r){r=r||{};const rows=[];
 /* KIT-MGBG r2 (review FAIL): on a painted board every progress/state part sits on a CREAM PLATE and has a darker ring, so empty pips and buttons never vanish on the picture (one place, all four boards) */
 .kgbox.kgbox-bg .nwb-pool{background:rgba(255,250,240,.88);border:1px solid var(--k-hair,#b59a6a);border-radius:999px;padding:5px 12px;width:max-content;max-width:100%;margin:6px auto;box-sizing:border-box}
 .kgbox.kgbox-bg .nwb-pip{border-color:#6b4f1d;border-width:2px;background:rgba(255,250,240,.6)}.kgbox.kgbox-bg .nwb-pip.on{background:var(--gold,#d99a1e);border-color:#7a4f0a}.kgbox.kgbox-bg .nwb-pip.band{border-color:#1f6b38}
-.kgbox.kgbox-bg .btn,.kgbox.kgbox-bg .kgbtn{background:rgba(255,250,240,.94);border:2px solid #6b4f1d;box-shadow:0 1px 4px #2a1a1255}.kgres{padding:0 14px 10px}
+.kgbox.kgbox-bg .btn,.kgbox.kgbox-bg .kgbtn{background:rgba(255,250,240,.94);border:2px solid #6b4f1d;box-shadow:0 1px 4px #2a1a1255}
+/* KIT MG-SKIN BUTTON PALETTES (KIT.md §MG-SKIN; owner OD 23/11 ~23:05Z real): the open mini-game frame carries data-mgpal (kg82SkinOn) = ONE of 5 palettes, built ONLY from kit
+   tokens (theme §1.1 + the seal lacquer of .kbtn; the lower stop is the same token shaded toward --ink): son (default = today's lacquer, unchanged) · ngoc (--good) · kim (--gold) ·
+   mac (--dim/--ink) · dao (--peony, dark ink text). Main buttons (.kbtn) take the ground; the cream buttons (.kgbtn, .btn, .kbtn.alt, quick buttons .kquick) keep the cream card and take the
+   palette rim. Canvas engines read the same colours with kitMgPal(). Contrast is tested (dev/test/kit-mgskin.js: text ≥ 4.5:1 on both stops, rim ≥ 3:1 on the card). */
+#kg82[data-mgpal]{--mgp-a:#b0402c;--mgp-b:#8a2a1e;--mgp-ink:#fff8e6;--mgp-rim:#6e1d12}
+#kg82[data-mgpal="ngoc"]{--mgp-a:var(--good,#2d7a52);--mgp-b:color-mix(in srgb,var(--good,#2d7a52) 72%,var(--ink,#2a1a12));--mgp-ink:#fff8e6;--mgp-rim:color-mix(in srgb,var(--good,#2d7a52) 60%,var(--ink,#2a1a12))}
+#kg82[data-mgpal="kim"]{--mgp-a:var(--gold,#8f5f0c);--mgp-b:color-mix(in srgb,var(--gold,#8f5f0c) 72%,var(--ink,#2a1a12));--mgp-ink:#fff8e6;--mgp-rim:color-mix(in srgb,var(--gold,#8f5f0c) 60%,var(--ink,#2a1a12))}
+#kg82[data-mgpal="mac"]{--mgp-a:var(--dim,#6b5643);--mgp-b:var(--ink,#2a1a12);--mgp-ink:#fff8e6;--mgp-rim:var(--ink,#2a1a12)}
+#kg82[data-mgpal="dao"]{--mgp-a:var(--peony,#e48aa4);--mgp-b:color-mix(in srgb,var(--peony,#e48aa4) 82%,var(--k-seal,#9a2c1c));--mgp-ink:var(--ink,#2a1a12);--mgp-rim:var(--k-seal,#9a2c1c)}
+#kg82[data-mgpal]:not([data-mgpal="son"]) .kbtn:not(.alt):not(.kdanger):not(.kquick){background:var(--mgp-a);background:linear-gradient(var(--mgp-a),var(--mgp-b));color:var(--mgp-ink);border-color:var(--mgp-rim)}
+#kg82[data-mgpal]:not([data-mgpal="son"]) .kbtn.alt,#kg82[data-mgpal]:not([data-mgpal="son"]) button.kquick,#kg82[data-mgpal]:not([data-mgpal="son"]) .kgbtn,#kg82[data-mgpal]:not([data-mgpal="son"]) .kgbox .btn{border-color:var(--mgp-rim)}.kgres{padding:0 14px 10px}
 .kgrow{display:flex;justify-content:space-between;gap:8px;align-items:center}.kgrow>b{flex:none;white-space:nowrap}.kgr .kpkb .krl{white-space:normal;max-width:9rem}
 /* K-GE-3 (review/kit-ge): a row whose LABEL is a title plate (.kdh, a wide nowrap pill) puts the plate on its own line above the value, at every width (same rule as the kt3 plate block of the title popups) */
 .kpkb .kr:has(>.krl>.kdh)>.krl{grid-column:1/-1;max-width:none;padding:.3rem 0 0;text-transform:none;letter-spacing:normal}
@@ -32447,12 +32461,12 @@ function kg82Set(k,v){if(k==="round"&&typeof v==="string"){let lab=null;const m=
  kg82Set0(k,v)}
 function kg82Set0(k,v){if(typeof kitGameSet==="function")kitGameSet(k,v);else document.querySelectorAll(`[data-kg="${k}"]`).forEach(e=>e.innerHTML=v)}
 function kg82Open(o){const pb=KG82.preBack,pp=KG82.prePay||(typeof S!=='undefined'&&S&&S.mg&&S.mg.pay)||null;KG82.preBack=null;KG82.prePay=null;kg82Close(true);KG82.setup=0;KG82.phase="";KG82.ready=null;KG82.idNote=null;const ov=$("ov");if(!ov)return null;[...ov.children].forEach(c=>{if(c.id!=="kg82"){c.dataset.kg82h=c.hidden?"1":"0";c.hidden=true}});
- const d=document.createElement("div");d.id="kg82";d.className="mg kpanel kgame kg82 kg-idle";d.setAttribute("role","dialog");d.setAttribute("aria-modal","true");d.innerHTML=kg82Frame(o);ov.appendChild(d);ov.hidden=false;d.scrollTop=0;kg82BackX(d);
+ const d=document.createElement("div");d.id="kg82";d.className="mg kpanel kgame kg82 kg-idle";d.setAttribute("role","dialog");d.setAttribute("aria-modal","true");{const ps=KG82.preSkin;KG82.preSkin=null;kg82SkinOn(d,o.kind||KG82.picKind,o.skin!=null?o.skin:ps)}d.innerHTML=kg82Frame(o);ov.appendChild(d);ov.hidden=false;d.scrollTop=0;kg82BackX(d);
  /* §13.9: a charge the caller only REMEMBERS (kgDefer) is taken on «Sẵn sàng» / the quick option / any outcome (kgPay); a lesson keeps it in S.mg.pay (a reload reopens the
     same unpaid lesson, never a free one). Until then the ✕ is a free back: nothing was spent, nothing to undo. */
  if(pp){KG82.payOnGo=pp;try{if(typeof pp==="object"&&S.mg&&S.mg.pay!==pp){S.mg.pay=pp;save()}}catch(e){}KG82.backPre=()=>{KG82.payOnGo=null;try{if(typeof pb==="function")pb()}catch(e){console.error(e)}try{if(S.mg)S.mg=null}catch(e){}}}
  else if(typeof pb==="function")KG82.backPre=pb;return d}
-function kg82Close(silent){kgPay();/* closed by an outcome before «Sẵn sàng» (jsgame «Giao cho người làm»): the remembered charge is due */if(KG82.run&&KG82.run.stop){try{KG82.run.stop()}catch(e){}}KG82.run=null;KG82.peek=()=>null;KG82.hint=null;KG82.phase="";KG82.back=null;KG82.backPre=null;KG82.payOnGo=null;KG82.backAsk=null;KG82.quit=null;KG82.quitAsk=null;KG82.xdo=null;KG82.giveUp=0;KG82.engX=KG82.onHud=KG82.onVs=KG82.guardMs=KG82.vs=KG82.kyNet=KG82.kyNoise=KG82.kyOut=KG82.onFin=KG82.endMark=null;/* round C (jpma): engine / live plate / Cờ net hooks */
+function kg82Close(silent){KG82.skin={id:"",name:"",pal:"son"};kgPay();/* closed by an outcome before «Sẵn sàng» (jsgame «Giao cho người làm»): the remembered charge is due */if(KG82.run&&KG82.run.stop){try{KG82.run.stop()}catch(e){}}KG82.run=null;KG82.peek=()=>null;KG82.hint=null;KG82.phase="";KG82.back=null;KG82.backPre=null;KG82.payOnGo=null;KG82.backAsk=null;KG82.quit=null;KG82.quitAsk=null;KG82.xdo=null;KG82.giveUp=0;KG82.engX=KG82.onHud=KG82.onVs=KG82.guardMs=KG82.vs=KG82.kyNet=KG82.kyNoise=KG82.kyOut=KG82.onFin=KG82.endMark=null;/* round C (jpma): engine / live plate / Cờ net hooks */
  const d=kg82El();if(!d)return;const ov=$("ov");d.remove();[...ov.children].forEach(c=>{if(c.dataset.kg82h!=null){c.hidden=c.dataset.kg82h==="1";delete c.dataset.kg82h}});
  if(typeof mgDone==="undefined"||mgDone)ov.hidden=true}
 const kg82Box=()=>document.getElementById("kg82box");
@@ -32476,7 +32490,33 @@ function kg82Blossom(g,x,y,r,col,glow){g.save();g.translate(x,y);if(glow){g.shad
 /* ---------- painted art (gpt-2-6, img/kit/mg-*.webp; KIT.md §13): board backgrounds + transparent sprites ----------
    the canvas only draws small live marks (aim trail, beat line, melody ribbon, ink strokes, threads, gauges) and places these pictures */
 const KG82_IMG={};
-function kg82Img(n){let i=KG82_IMG[n];if(!i){i=new Image();i.decoding="async";i.src=`https://ctm-img.victoria-tntt.workers.dev/img/kit/mg-${n}.webp`;KG82_IMG[n]=i}return i}
+/* KIT MG-SKIN (owner OD 23/11 ~23:05Z real, «các cái nút chọn màu này, hình này … cũng là cái game đó nhưng mà sẽ là những cái hình khác»; KIT.md §MG-SKIN):
+   ONE «skin» slot on the shared mini-game frame = {id, name, pal}: the board picture, the piece pictures and the button palette of ONE look; same rules, other look.
+   Default skin (id "") = today's art (https://ctm-img.victoria-tntt.workers.dev/img/kit/mg-<n>.webp) + palette "son" (today's lacquer buttons). A skin id swaps every picture the board asks for through ONE
+   resolver: board painting <kind>-bg / <kind>-bg-hoc -> img/mg/<kind>-<id>.webp, sprite <name> -> img/mg/<name>-<id>.webp (art: Foreman C, gpt-2-6, STYLE_ANCHOR);
+   a file not painted yet (not in img/_index.json, or failing to load) = that one picture falls back to the default art, never a hole.
+   Pick: the caller passes kg82Open({skin}) or sets KG82.preSkin (like preBack) — THIN P1 wires the pick (shared cross-life no-repeat memory). */
+const KG82_PAL=["son","ngoc","kim","mac","dao"];window.KG82_PAL=KG82_PAL;
+const KG82_SKINS={};window.KG82_SKINS=KG82_SKINS;/* kind -> [{id,name,pal}] (the default skin is implicit, always first) */
+KG82.skin={id:"",name:"",pal:"son"};
+function kitMgSkinAdd(kind,id,o){o=o||{};if(!kind||!id||!/^[a-z0-9_]+$/.test(id))return null;const pal=KG82_PAL.includes(o.pal)?o.pal:"son";const L=KG82_SKINS[kind]||(KG82_SKINS[kind]=[]);
+ let s=L.find(x=>x.id===id);if(!s){s={id};L.push(s)}s.name=o.name||"";s.pal=pal;return s}
+function kitMgSkinList(kind){return [{id:"",name:"",pal:"son"}].concat(KG82_SKINS[kind]||[])}
+/* sk = a skin object {id,pal} | an id of this kind | a palette word alone ("kim") | null (default) -> the resolved skin */
+function kitMgSkin(kind,sk){if(sk&&typeof sk==="object")return{id:/^[a-z0-9_]*$/.test(sk.id||"")?(sk.id||""):"",name:sk.name||"",pal:KG82_PAL.includes(sk.pal)?sk.pal:"son"};
+ if(typeof sk==="string"&&sk){const f=(KG82_SKINS[kind]||[]).find(x=>x.id===sk);if(f)return{id:f.id,name:f.name,pal:f.pal};if(KG82_PAL.includes(sk))return{id:"",name:"",pal:sk}}
+ return{id:"",name:"",pal:"son"}}
+/* the file of picture n under the live skin (default art when no skin, or the skinned file is not on the CDN index) */
+function kg82SkinSrc(n,id){if(id==null)id=KG82.skin&&KG82.skin.id||"";const d=`https://ctm-img.victoria-tntt.workers.dev/img/kit/mg-${n}.webp`;if(!id)return d;
+ const s=/-bg(-hoc)?$/.test(n)?`https://ctm-img.victoria-tntt.workers.dev/img/mg/${n.replace(/-bg(-hoc)?$/,"")}-${id}.webp`:`https://ctm-img.victoria-tntt.workers.dev/img/mg/${n}-${id}.webp`;return typeof kitPhOnCdn==="function"&&!kitPhOnCdn(s)?d:s}
+/* put a skin on the open frame: data-mgpal (button palette, j79 CSS) + KG82.skin (pictures); null = default */
+function kg82SkinOn(d,kind,sk){const s=kitMgSkin(kind,sk);KG82.skin=s;if(d){d.dataset.mgpal=s.pal;if(s.id)d.dataset.mgskin=s.id;else delete d.dataset.mgskin}return s}
+/* the live palette colours for a canvas engine (option pills, buttons drawn on the board): {a, b, ink, rim} read from the open frame's CSS (kit tokens), son when no frame */
+function kitMgPal(){const d=document.getElementById("kg82"),cs=d?getComputedStyle(d):null,v=(k,f)=>{const x=cs&&cs.getPropertyValue(k).trim();return x||f};
+ return{pal:(d&&d.dataset.mgpal)||"son",a:v("--mgp-a","#b0402c"),b:v("--mgp-b","#8a2a1e"),ink:v("--mgp-ink","#fff8e6"),rim:v("--mgp-rim","#6e1d12")}}
+Object.assign(window,{kitMgSkinAdd,kitMgSkinList,kitMgSkin,kg82SkinSrc,kg82SkinOn,kitMgPal});
+function kg82Img(n){const id=KG82.skin&&KG82.skin.id||"",k=id?n+"@"+id:n;let i=KG82_IMG[k];if(!i){i=new Image();i.decoding="async";const d=`https://ctm-img.victoria-tntt.workers.dev/img/kit/mg-${n}.webp`,s=id?kg82SkinSrc(n,id):d;
+  if(s!==d)i.onerror=()=>{i.onerror=null;i.src=d};i.src=s;KG82_IMG[k]=i}return i}
 function kg82Ok(n){const i=kg82Img(n);return i.complete&&i.naturalWidth>0}
 /* contest board vs lesson room: KG82.ctx "thi" (startContest) | "hoc" (lessons, practice, works) */
 const KG82_HOC=["dan","co","tho","ve","mua","huong","theu","banh"];
@@ -32486,7 +32526,7 @@ const KG82_BGC={};
 function kg82Bg(g,W,H,kind,veil,ay){const n=kg82BgName(kind),im=kg82Img(n);
  if(!kg82Ok(n)){kg82Silk(g,W,H,"#f6ead6","#ead6b4");return}
  /* scaled once per board size into an offscreen canvas (cheap per-frame blit) */
- const key=[n,W,H,veil||0,ay].join("|");let c=KG82_BGC[key];
+ const key=[n,KG82.skin&&KG82.skin.id||"",W,H,veil||0,ay].join("|");let c=KG82_BGC[key];
  if(!c){c=document.createElement("canvas");const r=Math.min(3,window.devicePixelRatio||1);c.width=Math.round(W*r);c.height=Math.round(H*r);const x=c.getContext("2d");x.setTransform(r,0,0,r,0,0);
   const iw=im.naturalWidth,ih=im.naturalHeight,k=Math.max(W/iw,H/ih),dw=iw*k,dh=ih*k;x.imageSmoothingQuality="high";x.drawImage(im,(W-dw)/2,(H-dh)*(ay==null?.8:ay),dw,dh);
   if(veil){x.fillStyle=`rgba(255,250,238,${veil})`;x.fillRect(0,0,W,H)}KG82_BGC[key]=c}
@@ -54954,6 +54994,9 @@ KIT_SAMPLES.push({id:"§AP01",title:"Origin frame · khung chính tuyến theo x
  html:()=>`<div class="kitpg-row">${["tt","dtq","muoi","cn","nc","td","ch","thd","srv"].map(k=>`<button type="button" class="kbtn alt" onclick="(function(){try{const o=S.origin;S.origin={k:'${k}'};Q.push({t:'Chính tuyến · Mẫu khung · Chương 1 · Hồi 1/5',h:'<p>Khung xuất thân mẫu.</p>',btn:'Đã rõ'});showModal();S.origin=o}catch(e){console.error(e)}})()">${k}</button>`).join("")}</div>`});
 
 /* KIT board backdrop slot (KIT-MGBG, j79 kitGameFrame .kgbox-bg): one button per DOM board opens an empty kit game frame with the painted backdrop */
+/* KIT MG-SKIN (j82 kg82SkinOn + j79 data-mgpal palettes): one button per palette opens the real «Đàn» rules screen in that skin (same rules, other look) */
+KIT_SAMPLES.push({id:"§MG-SKIN",title:"Mini-game skin slot · bộ «áo» trò chơi (5 bảng màu nút: son · ngoc · kim · mac · dao)",where:"<b>Every kg82 mini-game frame.</b> <code>kg82Open({skin})</code> or <code>KG82.preSkin</code> → <code>data-mgpal</code> (button palette, kit tokens) + pictures through <code>kg82SkinSrc</code> (<code>img/mg/&lt;kind&gt;-&lt;id&gt;.webp</code>, unpainted → default art). Tap a palette.",
+ html:()=>`<div class="kitpg-row">${(typeof KG82_PAL!=="undefined"?KG82_PAL:[]).map(k=>`<button type="button" class="kbtn alt" onclick="(function(){try{KG82.preSkin='${k}';playArt({art:'Đàn',onDone:function(){}})}catch(e){console.error(e)}})()">${k}</button>`).join("")}</div>`});
 KIT_SAMPLES.push({id:"§MGBG",title:"Board backdrop slot · nền tranh bàn chơi (thu_tam · thu_choi · tuoi · co7)",where:"<b>DOM mini-game boards</b> (care games, Cờ năm quân). <code>kitGameFrame({kind})</code> with <code>kind</code> in <code>KG82_BOARDBG</code> → <code>.kgbox.kgbox-bg</code> (cover picture + soft veil). Tap to open an empty frame.",
  html:()=>`<div class="kitpg-row">${["thu_tam","thu_choi","tuoi","co7"].map(k=>`<button type="button" class="kbtn alt" onclick="(function(){try{Q.push({t:'Mẫu nền bàn chơi',h:kitGameFrame({art:'Mẫu',title:'${k}',how:'Nền tranh sau khu chơi.',id:'kgsample',kind:'${k}'}),btn:'Đã rõ',cls:'pcm'});showModal()}catch(e){console.error(e)}})()">${k}</button>`).join("")}</div>`});
 /* ================= jtitle: KIT 82 · TITLE SYSTEM PARTS (owner 11/16 13:00Z / 13:15Z / 13:20Z; review/title-tag) =================
@@ -95173,7 +95216,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d6a72c7fe7b9";window.CTM_BUILD=BUILD;
+const BUILD="93af2cd319a5";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -116,12 +116,12 @@ function kg82Set(k,v){if(k==="round"&&typeof v==="string"){let lab=null;const m=
  kg82Set0(k,v)}
 function kg82Set0(k,v){if(typeof kitGameSet==="function")kitGameSet(k,v);else document.querySelectorAll(`[data-kg="${k}"]`).forEach(e=>e.innerHTML=v)}
 function kg82Open(o){const pb=KG82.preBack,pp=KG82.prePay||(typeof S!=='undefined'&&S&&S.mg&&S.mg.pay)||null;KG82.preBack=null;KG82.prePay=null;kg82Close(true);KG82.setup=0;KG82.phase="";KG82.ready=null;KG82.idNote=null;const ov=$("ov");if(!ov)return null;[...ov.children].forEach(c=>{if(c.id!=="kg82"){c.dataset.kg82h=c.hidden?"1":"0";c.hidden=true}});
- const d=document.createElement("div");d.id="kg82";d.className="mg kpanel kgame kg82 kg-idle";d.setAttribute("role","dialog");d.setAttribute("aria-modal","true");d.innerHTML=kg82Frame(o);ov.appendChild(d);ov.hidden=false;d.scrollTop=0;kg82BackX(d);
+ const d=document.createElement("div");d.id="kg82";d.className="mg kpanel kgame kg82 kg-idle";d.setAttribute("role","dialog");d.setAttribute("aria-modal","true");{const ps=KG82.preSkin;KG82.preSkin=null;kg82SkinOn(d,o.kind||KG82.picKind,o.skin!=null?o.skin:ps)}d.innerHTML=kg82Frame(o);ov.appendChild(d);ov.hidden=false;d.scrollTop=0;kg82BackX(d);
  /* §13.9: a charge the caller only REMEMBERS (kgDefer) is taken on «Sẵn sàng» / the quick option / any outcome (kgPay); a lesson keeps it in S.mg.pay (a reload reopens the
     same unpaid lesson, never a free one). Until then the ✕ is a free back: nothing was spent, nothing to undo. */
  if(pp){KG82.payOnGo=pp;try{if(typeof pp==="object"&&S.mg&&S.mg.pay!==pp){S.mg.pay=pp;save()}}catch(e){}KG82.backPre=()=>{KG82.payOnGo=null;try{if(typeof pb==="function")pb()}catch(e){console.error(e)}try{if(S.mg)S.mg=null}catch(e){}}}
  else if(typeof pb==="function")KG82.backPre=pb;return d}
-function kg82Close(silent){kgPay();/* closed by an outcome before «Sẵn sàng» (jsgame «Giao cho người làm»): the remembered charge is due */if(KG82.run&&KG82.run.stop){try{KG82.run.stop()}catch(e){}}KG82.run=null;KG82.peek=()=>null;KG82.hint=null;KG82.phase="";KG82.back=null;KG82.backPre=null;KG82.payOnGo=null;KG82.backAsk=null;KG82.quit=null;KG82.quitAsk=null;KG82.xdo=null;KG82.giveUp=0;KG82.engX=KG82.onHud=KG82.onVs=KG82.guardMs=KG82.vs=KG82.kyNet=KG82.kyNoise=KG82.kyOut=KG82.onFin=KG82.endMark=null;/* round C (jpma): engine / live plate / Cờ net hooks */
+function kg82Close(silent){KG82.skin={id:"",name:"",pal:"son"};kgPay();/* closed by an outcome before «Sẵn sàng» (jsgame «Giao cho người làm»): the remembered charge is due */if(KG82.run&&KG82.run.stop){try{KG82.run.stop()}catch(e){}}KG82.run=null;KG82.peek=()=>null;KG82.hint=null;KG82.phase="";KG82.back=null;KG82.backPre=null;KG82.payOnGo=null;KG82.backAsk=null;KG82.quit=null;KG82.quitAsk=null;KG82.xdo=null;KG82.giveUp=0;KG82.engX=KG82.onHud=KG82.onVs=KG82.guardMs=KG82.vs=KG82.kyNet=KG82.kyNoise=KG82.kyOut=KG82.onFin=KG82.endMark=null;/* round C (jpma): engine / live plate / Cờ net hooks */
  const d=kg82El();if(!d)return;const ov=$("ov");d.remove();[...ov.children].forEach(c=>{if(c.dataset.kg82h!=null){c.hidden=c.dataset.kg82h==="1";delete c.dataset.kg82h}});
  if(typeof mgDone==="undefined"||mgDone)ov.hidden=true}
 const kg82Box=()=>document.getElementById("kg82box");
@@ -145,7 +145,33 @@ function kg82Blossom(g,x,y,r,col,glow){g.save();g.translate(x,y);if(glow){g.shad
 /* ---------- painted art (gpt-2-6, img/kit/mg-*.webp; KIT.md §13): board backgrounds + transparent sprites ----------
    the canvas only draws small live marks (aim trail, beat line, melody ribbon, ink strokes, threads, gauges) and places these pictures */
 const KG82_IMG={};
-function kg82Img(n){let i=KG82_IMG[n];if(!i){i=new Image();i.decoding="async";i.src=`img/kit/mg-${n}.webp`;KG82_IMG[n]=i}return i}
+/* KIT MG-SKIN (owner OD 23/11 ~23:05Z real, «các cái nút chọn màu này, hình này … cũng là cái game đó nhưng mà sẽ là những cái hình khác»; KIT.md §MG-SKIN):
+   ONE «skin» slot on the shared mini-game frame = {id, name, pal}: the board picture, the piece pictures and the button palette of ONE look; same rules, other look.
+   Default skin (id "") = today's art (img/kit/mg-<n>.webp) + palette "son" (today's lacquer buttons). A skin id swaps every picture the board asks for through ONE
+   resolver: board painting <kind>-bg / <kind>-bg-hoc -> img/mg/<kind>-<id>.webp, sprite <name> -> img/mg/<name>-<id>.webp (art: Foreman C, gpt-2-6, STYLE_ANCHOR);
+   a file not painted yet (not in img/_index.json, or failing to load) = that one picture falls back to the default art, never a hole.
+   Pick: the caller passes kg82Open({skin}) or sets KG82.preSkin (like preBack) — THIN P1 wires the pick (shared cross-life no-repeat memory). */
+const KG82_PAL=["son","ngoc","kim","mac","dao"];window.KG82_PAL=KG82_PAL;
+const KG82_SKINS={};window.KG82_SKINS=KG82_SKINS;/* kind -> [{id,name,pal}] (the default skin is implicit, always first) */
+KG82.skin={id:"",name:"",pal:"son"};
+function kitMgSkinAdd(kind,id,o){o=o||{};if(!kind||!id||!/^[a-z0-9_]+$/.test(id))return null;const pal=KG82_PAL.includes(o.pal)?o.pal:"son";const L=KG82_SKINS[kind]||(KG82_SKINS[kind]=[]);
+ let s=L.find(x=>x.id===id);if(!s){s={id};L.push(s)}s.name=o.name||"";s.pal=pal;return s}
+function kitMgSkinList(kind){return [{id:"",name:"",pal:"son"}].concat(KG82_SKINS[kind]||[])}
+/* sk = a skin object {id,pal} | an id of this kind | a palette word alone ("kim") | null (default) -> the resolved skin */
+function kitMgSkin(kind,sk){if(sk&&typeof sk==="object")return{id:/^[a-z0-9_]*$/.test(sk.id||"")?(sk.id||""):"",name:sk.name||"",pal:KG82_PAL.includes(sk.pal)?sk.pal:"son"};
+ if(typeof sk==="string"&&sk){const f=(KG82_SKINS[kind]||[]).find(x=>x.id===sk);if(f)return{id:f.id,name:f.name,pal:f.pal};if(KG82_PAL.includes(sk))return{id:"",name:"",pal:sk}}
+ return{id:"",name:"",pal:"son"}}
+/* the file of picture n under the live skin (default art when no skin, or the skinned file is not on the CDN index) */
+function kg82SkinSrc(n,id){if(id==null)id=KG82.skin&&KG82.skin.id||"";const d=`img/kit/mg-${n}.webp`;if(!id)return d;
+ const s=/-bg(-hoc)?$/.test(n)?`img/mg/${n.replace(/-bg(-hoc)?$/,"")}-${id}.webp`:`img/mg/${n}-${id}.webp`;return typeof kitPhOnCdn==="function"&&!kitPhOnCdn(s)?d:s}
+/* put a skin on the open frame: data-mgpal (button palette, j79 CSS) + KG82.skin (pictures); null = default */
+function kg82SkinOn(d,kind,sk){const s=kitMgSkin(kind,sk);KG82.skin=s;if(d){d.dataset.mgpal=s.pal;if(s.id)d.dataset.mgskin=s.id;else delete d.dataset.mgskin}return s}
+/* the live palette colours for a canvas engine (option pills, buttons drawn on the board): {a, b, ink, rim} read from the open frame's CSS (kit tokens), son when no frame */
+function kitMgPal(){const d=document.getElementById("kg82"),cs=d?getComputedStyle(d):null,v=(k,f)=>{const x=cs&&cs.getPropertyValue(k).trim();return x||f};
+ return{pal:(d&&d.dataset.mgpal)||"son",a:v("--mgp-a","#b0402c"),b:v("--mgp-b","#8a2a1e"),ink:v("--mgp-ink","#fff8e6"),rim:v("--mgp-rim","#6e1d12")}}
+Object.assign(window,{kitMgSkinAdd,kitMgSkinList,kitMgSkin,kg82SkinSrc,kg82SkinOn,kitMgPal});
+function kg82Img(n){const id=KG82.skin&&KG82.skin.id||"",k=id?n+"@"+id:n;let i=KG82_IMG[k];if(!i){i=new Image();i.decoding="async";const d=`img/kit/mg-${n}.webp`,s=id?kg82SkinSrc(n,id):d;
+  if(s!==d)i.onerror=()=>{i.onerror=null;i.src=d};i.src=s;KG82_IMG[k]=i}return i}
 function kg82Ok(n){const i=kg82Img(n);return i.complete&&i.naturalWidth>0}
 /* contest board vs lesson room: KG82.ctx "thi" (startContest) | "hoc" (lessons, practice, works) */
 const KG82_HOC=["dan","co","tho","ve","mua","huong","theu","banh"];
@@ -155,7 +181,7 @@ const KG82_BGC={};
 function kg82Bg(g,W,H,kind,veil,ay){const n=kg82BgName(kind),im=kg82Img(n);
  if(!kg82Ok(n)){kg82Silk(g,W,H,"#f6ead6","#ead6b4");return}
  /* scaled once per board size into an offscreen canvas (cheap per-frame blit) */
- const key=[n,W,H,veil||0,ay].join("|");let c=KG82_BGC[key];
+ const key=[n,KG82.skin&&KG82.skin.id||"",W,H,veil||0,ay].join("|");let c=KG82_BGC[key];
  if(!c){c=document.createElement("canvas");const r=Math.min(3,window.devicePixelRatio||1);c.width=Math.round(W*r);c.height=Math.round(H*r);const x=c.getContext("2d");x.setTransform(r,0,0,r,0,0);
   const iw=im.naturalWidth,ih=im.naturalHeight,k=Math.max(W/iw,H/ih),dw=iw*k,dh=ih*k;x.imageSmoothingQuality="high";x.drawImage(im,(W-dw)/2,(H-dh)*(ay==null?.8:ay),dw,dh);
   if(veil){x.fillStyle=`rgba(255,250,238,${veil})`;x.fillRect(0,0,W,H)}KG82_BGC[key]=c}
