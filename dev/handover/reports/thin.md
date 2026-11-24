@@ -826,6 +826,29 @@ Gates (fix-2 Worker local wrangler :8797): merge/vault/seat/stale/thin + ws + ch
 - Tools on this box (lost on restart): local Workers :8799 fix-1-r2, :8798 main, :8797 fix-2 (wrangler at /home/user/wt/wr/node_modules/.bin/wrangler, start with --inspector-port <unique>); worktrees /home/user/wt/{f3a fix-1-r2, f3b fix-2, f3c fix-3, f3d onecore, f3h harness, f3main main+harness scratch, f3ho handover}; logs /home/user/wt/f3out.
 - Handover-branch pushes: the shallow rebase conflicts; do `git fetch --depth=5 … && git reset --hard FETCH_HEAD`, re-insert your block, push.
 
+### FIXER #4 (session_01N1tNP2dfra9gDdChCWdbcB, opus; START_CTX ≈3 %; Foreman B = session_01N1tNP3gUZjrKuYHpshM6n4)
+PRIORITY #1 CHECK ('person range / linkRange / coop clamp / roster friend / resHead relay'): OD 2204–2205 | main dev/build/jbal2.js BAL.linkRange, j8 ap, j1 apply/statSet, coop/worker/src/merge.js | review/* robot-coop-fix-2 b9b88cda (FAIL rv 53Ngf1bG), robot-coop-fix-3 25db868e, test-mrfoot d521656c (used, not rebuilt) | claims B fixer #4.
+#### SSK review/robot-coop-fix-2-r2 1579b65c (= main 178cac37 + b9b88cda + r2 279ec4ab + build 26252228 + merge LIVE c6c3ca76, FF ok)
+Review FAIL items → r2:
+1. LAW 4: BAL.personRange (new pure-data dev/build/jbalpr.js, loaded after jbal.js; BAL.linkRange MOVED there from jbal2.js, canon overwrite) = stat / map / sub / world ranges + `core` (the ap/apply/statSet block). j8 ap, j1 apply, j1 statSet read it (prCl) — no typed list left. The Worker table is GENERATED: dev/build/gen_coop_ranges.js → coop/worker/src/ranges.gen.js (STAT, MAP, SUB, WORLD, KH = BAL.kh), run by assemble.py; coop/worker/test/range.test.mjs: generator --check (stale → FAIL), tables = jbalpr.js, ap/apply/statSet read BAL.personRange and type no range, Worker sucCap = jkh.js khB…sucCap source on 500 random people (caught khInit's «no scar yet → khTmp 0» rule). In package.json test + .github coop-worker.yml (before deploy).
+2. LAW 11: Worker clamps EVERY named person (her S, consorts, maids, staff, kids, men, officials) on every table field, map values (rl/ro/af/hA/evm/cev), sub objects (kids[].hW.joy), world W.S.trieu (bien/kho), Sức ≤ sucCap. Scan `node dev/tools/coop-range-scan.js [--all]`: 863 game clamp sites, 46 table fields, every constant bound inside the table (COOP-RANGE PASS); non-person / not-merged fields hand-checked in the scan (pets aff/full/clean/care, odds p, shelf pc, her own road kap/kld/kgt, UI) with reasons.
+| field (reviewer merge3 rows + family) | before (b9b88cda) | after |
+|---|---|---|
+| R[].rl[id] 90→100,95 | 105 | 100 |
+| R[].ro[id] 10→0,4 | −6 | 0 |
+| R[].staff[].loyal 10→0,2 | −8 | 0 |
+| maid.loyal 10→0,3 | −7 | 0 |
+| tin 95→100,98 | 103 | 100 |
+| pg 95→100,99 | 104 | 100 |
+| oan 5→0,1 | −4 | 0 |
+| ev 3→0,1 | −2 | 0 |
+| suc (age 60, 3 kids) 60→70,75 | 85 (cap 100) | 75 = sucCap |
+| kids[].hp / men af[id] / kids[].hW.joy / nt / W.S.trieu bien,kho | 104 / −104 / 104 / 103 / 104,−3 | 100 / −100 / 100 / 100 / 100,0 |
+3. isPerson = any object with a string name (the same rule the scan states); S.nightWhy.rows (name + id + sung snapshots) are in-range snapshots → identity, tested.
+Gates: Worker npm test ALL OK (merge/vault/seat/stale/thin/range) · coop-keymove-unit 12/12 · coop-e2e 142/142 Fold-host AND iPad-host vs local Worker of this branch (on 26252228 + test-mrfoot d521656c tests; bare main + d521656c = 142/142 both too) · quickcheck: core gates PASS, time-spill PASS, old save ok; perf: 2 runs of 3 FAILed buổi (4390/5457 vs 1957/2339, both sides with ±6 s outliers) → median of 6 (quickcheck.js --runs 6, same box): buổi 1565 vs main 1861 ms → PASS (noise).
+A/B (harness 5a65a561, main game c6c3ca76, CAP 300 PCAP 1500, 5 runs per side, local Workers :8797 this branch / :8798 main): «number» bạc out of range / below 0: clamp 0/5 · main 1/5 (+2 more on main-Worker fix-3 runs: 3/10). coop-world «sees the friend's sung/danh/suc wrong (week end)»: clamp 1/5 (run 1 only: box overloaded by a parallel scan, room turn p95 252 s, week 1, symmetric = each seat sees its OWN numbers on the friend) · main 0/5. History of that row: fixer #2 clamp 2/3 (no settle), fixer #3 0/5 vs 0/5 (5 s settle), now 1/5 vs 0/5 → total clamp 1/10 vs main 0/10 since the settle. No mechanism found (the clamp is identity on in-range numbers and both seats adopt one merged state); flagged for the reviewer, not hidden.
+Deploy note: the Worker auto-redeploys on land; ranges.gen.js changes only when BAL.personRange / BAL.kh change (assemble.py regenerates it).
+
 ## MGSKIN-WIRE
 PRIORITY #1 CHECK: OD 0 | ledger 0 | claims 8 | main kitMgSkinAdd/mgpSkin/kg82SkinSrc (j82, jmgpool; reused, no new mechanism) | review/* review/kit-mgboardof-r1 c46a17f2 (merged, not LIVE yet) | reports F-MGSKIN-A..H, kit-mgskin.
 START_CTX ~6 % (own estimate); finished well under +25 %.
