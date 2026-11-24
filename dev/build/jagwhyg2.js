@@ -3,7 +3,7 @@
    why(p, ctx) = {s, t, r} from her real state (grudge, need, nết, ties) or null. Numbers: BAL.ag.why "// G2 kinds" block (jbal2).
    Report: dev/handover/reports/npc-purpose.md §G2 (handover branch). Loaded after jagwhy.js (assemble.py). */
 /* ---- jlost: items that go missing ---- */
-npwReg("loTake",{grp:"G2",pickAll:true,who:c=>{const p=c.p;if(!p)return[];let R0=[];try{R0=liveRivals(true).filter(v=>v!==p&&bandOf(danger(v,p))>=BAL.ag.why.loTake.band&&loMotive(v,p)&&(v.bac||0)>=LO.act.bac)}catch(e){}return R0.concat(loStaff(p))},
+npwReg("loTake",{grp:"G2",pickAll:true,who:c=>{const p=c.p;if(!p)return[];let R0=[];try{R0=liveRivals(true).filter(v=>v!==p&&bandVT(v,p)>=BAL.ag.why.loTake.band&&loMotive(v,p)&&(v.bac||0)>=LO.act.bac)}catch(e){}return R0.concat(loStaff(p))},
  why:(v,c)=>{const B=BAL.ag.why.loTake,p=c.p;if(loStaff(p).includes(v)){const g=netQ(v,"greed")*B.greed,t=(v===p.maid?B.care:0)+Math.max(0,netQ(v,"timid"))*B.timid;if(g<=0&&t<=0)return null;
    return g>=t?{s:g,t:p,r:"tham của, lấy đồ trong rương chủ"}:{s:t,t:p,r:"cất nhầm chỗ",flag:"mis"}}/* the maid who keeps the chest may misplace a piece in her daily work (a slip of a real duty; a timid one more often) → cause "mis", mostly found again at home */
   return {s:danger(v,p)*mindW(v,"scheme")*B.rivW,t:p,r:"oán "+npwNm(p)+", sai người lấy trộm đồ"}}});

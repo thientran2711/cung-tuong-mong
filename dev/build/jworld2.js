@@ -26,7 +26,7 @@ const meGet=(w,k)=>{const M=S&&S.wwMe;return M&&M[w.id]?M[w.id][k]:undefined};
 function info(w,t,extra){return{t:t||window.worldName(w),who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>${extra||""}`}}
 function giftRound(b,who,mother,tag){/* NPCs give by their own silver and grudges (the same three options as hers) */
  const G=[],C=[],K=[];for(const v of liveR()){if(v===mother||v.out||v.confined)continue;const g=Math.round((v.bac||0)*b.npcGift);
-  const cold=(v.ghen||0)>=b.coldGhen||(mother&&mother!==S&&typeof oan==="function"&&oan(v,mother)>=b.coldOan);
+  const cold=(v.ghen||0)>=b.coldGhen||(mother&&mother!==S&&typeof oan==="function"&&oan(v,mother)>=netTh(v,"act"));
   const k=npcPick(v,[["give",mW(v,"social")*(g>=b.mid?b.npcW.give[0]:b.npcW.give[1])],["cold",mW(v,"harm")*(cold?b.npcW.cold[0]:b.npcW.cold[1])],["skip",b.npcW.skip]]);
   if(k==="give"&&g>0){ap(v,{bac:-g});if(mother)affAdd(mother,v,g>=b.big?b.bigAff:b.midAff);G.push(v)}else if(k==="cold"){if(mother&&mother!==S)relAdd(mother,v,-b.skipOan);C.push(v)}else K.push(v)}
  return{G,C,K}}

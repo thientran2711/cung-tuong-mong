@@ -36,7 +36,7 @@ function fakeIllRisk(){const c=BAL.tw.g.illCatch/100;return Math.round(100*(1-Ma
 function illNightF(p){const i=illOf(p);if(p.fakeIll)return 1.2;return !i?1:ILL[i.k].cont?0:i.st>=2?.3:.7}
 function treatO(p,way){return oddsCl(lotB(p,"Sức khỏe")+(way==="ty"?55+careOdds(p):way==="self"?30+careY(p):20+careOdds(p)))}
 function treat(p,way){const i=illOf(p);if(!i)return"";let o=lotB(p,"Sức khỏe")+(way==="ty"?55+careOdds(p):way==="self"?30+careY(p):20+careOdds(p));
- const bribed=typeof thyBribedBy==="function"?thyBribedBy(p):mindPickBy(liveRivals(true).filter(v=>v!==p&&!v.coop/* E44j (c) T9 family: a co-op friend entry is a player seat, never the NPC briber (as jthaiy bribers rv) */&&S.court&&(S.court.ty.af[v.id]||0)>=30&&hostility(v,p)>=40),v=>hostility(v,p)*mindW(v,"bribe"),null);/* npc-mind: was FIRST */
+ const bribed=typeof thyBribedBy==="function"?thyBribedBy(p):mindPickBy(liveRivals(true).filter(v=>v!==p&&!v.coop/* E44j (c) T9 family: a co-op friend entry is a player seat, never the NPC briber (as jthaiy bribers rv) */&&S.court&&(S.court.ty.af[v.id]||0)>=30&&hostility(v,p)>=netTh(v,"host")),v=>hostility(v,p)*mindW(v,"bribe"),null);/* npc-mind: was FIRST */
  const ob=way==="ty"&&bribed?npcWhy("thyHarm",{p,b:bribed},()=>roll(BAL.ag.why.thyHarm.p)):null;/* npc-purpose G2: only a rival who really paid the physician (thyBribedBy) and still wants her harmed; the old 25 = the success */
  if(ob){i.st=Math.min(3,i.st+1);return `<span class="r">Thang thuốc của thái y làm bệnh nặng thêm.</span> (Có kẻ đã mua chuộc thái y?) `}
  if(roll(oddsCl(o))){p.ill=null;return `${NMc(p)} khỏi bệnh. `}if(i.st>1&&roll(BAL.rk.treatStep)){i.st--;return `Bệnh đỡ, còn ${STG[i.st]}. `}return "Bệnh chưa thuyên giảm. "}

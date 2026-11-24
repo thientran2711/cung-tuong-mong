@@ -153,9 +153,8 @@ window.F14ROLE=F14ROLE;
 function f14Hostile(A,k){try{return !!(A&&F14ROLE[A.a]&&F14ROLE[A.a][k]===1)}catch(e){return false}}
 /* hate for real: both sides' thiện cảm drop by at least hate.min (j9 relAdd also raises oán both ways) */
 function f14Hate(v){if(!v)return;const H=BAL.st14.hate;const m=Math.max(aff(S,v)||0,aff(v,S)||0);relAdd(S,v,-Math.max(H.min,H.base+m))}
-/* a hostile role takes, when it can, someone who is not already her friend (thiện cảm under hate.friend both ways) */
-(function(){const c0=castRv67;castRv67=function(A,k,f){if(!f14()||!A||!f14Hostile(A,k))return c0.apply(this,arguments);const F=BAL.st14.hate.friend;
- let r=c0.call(this,A,k,v=>(!f||f(v))&&(aff(S,v)||0)<F&&(aff(v,S)||0)<F);if(!r)r=c0.apply(this,arguments);
+/* a hostile role takes, when it can, someone who is not already her friend (thiện cảm under each side's netTh "than") */
+(function(){const c0=castRv67;castRv67=function(A,k,f){if(!f14()||!A||!f14Hostile(A,k))return c0.apply(this,arguments); let r=c0.call(this,A,k,v=>(!f||f(v))&&(aff(S,v)||0)<netTh(S,"than")&&(aff(v,S)||0)<netTh(v,"than"));if(!r)r=c0.apply(this,arguments);
  try{if(r&&!(A.host14||{})[k]){const v=rv67(A,k);if(v){A.host14=A.host14||{};A.host14[k]=v.id;f14Hate(v)}}}catch(e){console.error(e)}return r}})();
 (function(){const n0=newThread67;newThread67=function(id,kind){const A=n0.apply(this,arguments);try{if(A&&f14())for(const k of ["v","v2"]){if(A.act&&A.act[k]!=null&&!(A.host14||{})[k]){const v=rv67(A,k);if(v&&f14Hostile(A,k)){A.host14=A.host14||{};A.host14[k]=v.id;f14Hate(v)}}}}catch(e){console.error(e)}return A}})();
 function f14Foe(){try{if(!f14()||!S.foe)return;const e=rivals.find(v=>v.name===S.foe&&v.alive);if(!e||S.st.f14.foe)return;e.enemy=true;f14Hate(e);S.st.f14.foe=e.id}catch(e){console.error(e)}}

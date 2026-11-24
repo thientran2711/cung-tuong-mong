@@ -73,7 +73,7 @@ Object.assign(BAL,{arc:{
  muoi_tuoc:{p:.15,c:{suc:-4,bac:-100},np:2,sc:2,bar:40,fx:{danh:10,bac:200,th:5}},
  muoi_lau:{p:.15,c:{suc:-4,bac:-40},np:2,sc:2,bar:[2,45],fx:{danh:12,bac:120}},
  muoi_doi:{p:0.15,c:{suc:-8,bac:-60},np:2,sc:2,bar:50,fx:{duc:6,danh:12,sung:4},g:[12]},
- muoi_no:{p:.15,c:{suc:-3,bac:-50},np:2,sc:1,bar:20,fx:{danh:6,duc:4},g:[45]},
+ muoi_no:{p:.15,c:{suc:-3,bac:-50},np:2,sc:1,fx:{danh:6,duc:4},g:[45]},
  cn_chu:{p:.15,c:{suc:-3},np:2,sc:1,fx:{danh:10,duc:5,sung:4},g:[40]},
  cn_tinh:{p:.15,c:{suc:-3},np:2,sc:2,bar:40,fx:{sung:10,danh:6}},
  cn_ban:{p:.15,c:{suc:-3,bac:-60},np:2,sc:2,bar:30,fx:{danh:8,mat:3,th:4}},
@@ -88,7 +88,7 @@ Object.assign(BAL,{arc:{
  td_tha:{p:.15,c:{suc:-3},np:2,sc:1,bar:50,fx:{duc:8,danh:10,sung:4},g:[50]},
  ch_co:{p:.15,c:{suc:-3},np:2,sc:2,bar:50,fx:{th:30,danh:12}},
  ch_benh:{p:.15,c:{suc:-5},np:3,sc:2,bar:[1,45],fx:{th:15,danh:12,mat:2}},
- ch_ho:{p:.15,c:{suc:-3},np:2,sc:1,bar:25,fx:{th:15,danh:8,duc:3},g:[50]},
+ ch_ho:{p:.15,c:{suc:-3},np:2,sc:1,fx:{th:15,danh:8,duc:3},g:[50]},
  ch_bi:{p:.15,c:{suc:-3},np:2,sc:2,bar:40,fx:{th:20,duc:5,danh:6}},
  thd_tho:{p:.15,c:{suc:-3},np:2,sc:2,bar:[2,55],fx:{danh:12,tai:5}},
  thd_sach:{p:.15,c:{suc:-4},np:2,sc:2,bar:45,fx:{danh:14,tai:3,duc:3}},
@@ -105,8 +105,8 @@ Object.assign(BAL,{arc:{
  s_dich:{p:.15,c:{suc:-8},np:2,sc:2,bar:[1,50],fx:{duc:6,danh:14,sung:5}},
  s_tinh:{p:.15,c:{suc:-3},np:3,sc:1,bar:50,fx:{sung:10,duc:5,danh:4}},
  s_thay:{p:.15,c:{suc:-3},np:2,sc:2,bar:[1,45],fx:{mat:4,tamco:4,danh:4}},
- s_ban:{p:.15,c:{suc:-3},np:2,sc:2,bar:20,fx:{danh:10,tamco:3},g:[50]},
- st_the:{p:.15,c:{suc:-4,bac:-80},np:2,sc:2,bar:[40,2],fx:{danh:12,mat:3,sung:5},g:[15]},
+ s_ban:{p:.15,c:{suc:-3},np:2,sc:2,fx:{danh:10,tamco:3},g:[50]},
+ st_the:{p:.15,c:{suc:-4,bac:-80},np:2,sc:2,bar:2,/* bar = how many consorts thân with her (netTh «than», rv r2) */fx:{danh:12,mat:3,sung:5},g:[15]},
  st_con:{p:0.15,c:{suc:-3},np:2,sc:2,bar:40,fx:{danh:10,sung:6},g:[20]},
  st_dong:{p:0.1,c:{suc:-3},np:3,sc:3,bar:[50,50],fx:{danh:10,sung:8},g:[25]},
  },
@@ -173,7 +173,7 @@ Object.assign(BAL,{arc:{
    (j9 hostility / her oán) that counts as a reason, its score = min × grudge / gr; debtK = score per nợ ân above min; fac / facAlly = score
    (× min) of an opposed / own jreign side; goal = that person's own road names her as rival; evK = she / they did a HOSTILE deed to the other within the
    last ev entries of the people ledger (S.roster.acts); evF = the same for a friendly deed (gift / visit / kết giao) or a cleared misunderstanding (r2). */
-BAL.arc.trig={on:1,fb:[2,3],fr:[2,2],st:[3,1,3,3],min:1,early:2,gr:30,debtK:.5,fac:1,facAlly:1,goal:1.2,evK:1.5,evF:1,ev:12};
+BAL.arc.trig={on:1,fb:[2,3],fr:[2,2],st:[3,1,3,3],min:1,early:2,debtK:.5,fac:1,facAlly:1,goal:1.2,evK:1.5,evF:1,ev:12};
 
 /* typed-stat-bal GROUP C block (law 4): new amounts of group-C modules — Object.assign(BAL.eff.<module>,{…}) or new keys, never a key set twice */
 Object.assign(BAL.eff.jpetcare,{babySuc:1/* Sức a week at least from a Non-stage pet (petcStageT X.suc + its text) */,playSuc:1/* Sức from the «Chơi» care game (petcBody text + petc result) */});

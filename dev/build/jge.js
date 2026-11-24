@@ -83,7 +83,7 @@ function geAsk(){if(!geReady()||geQd())return;const s=geS();geLive(s);pushDil(mk
 window.geAsk=geAsk;
 /* «người ấy»: the strongest real bond of her life */
 function geBond(){let best=null,bv=-1;try{for(const m of (S.men||[]))if(m&&m.alive!==false&&(m.tinh||0)>=GB().bond.men&&(m.tinh||0)>bv){best=m.name;bv=m.tinh}
- for(const v of (typeof liveRivals==="function"?liveRivals(true):[]))if(v&&aff(S,v)>=GB().bond.sis&&aff(S,v)>bv){best=v.name;bv=aff(S,v)}}catch(e){}return best}
+ for(const v of (typeof liveRivals==="function"?liveRivals(true):[]))if(v&&aff(S,v)>=netTh(S,"than")&&aff(S,v)>bv){best=v.name;bv=aff(S,v)}}catch(e){}return best}
 PEND.ge1=()=>{const s=geS();if(!s||s.done)return null;const who=geBond();
  const o=R1N.map((n,i)=>{const c={n,fx:{},x:i===3?(who?`người ấy: ${who}`:""):"",risk:"có rủi ro",hint:"nẻo này dẫn tới đâu, thành hay hỏng, đến câu cuối mới rõ",go:()=>{const s2=geS();if(!s2||s2.done)return;s2.r1=i;pushDil(mkP("ge2",{}),"Hồi kết nhánh")}};
   if(i===3&&!who&&typeof kitOff==="function")kitOff(c,"chưa có ai","khi có một người ngươi thật lòng gắn bó");return c});
