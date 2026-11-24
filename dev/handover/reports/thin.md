@@ -493,3 +493,7 @@ P6-SEEDS-A validator fix: DONE (see commit below) wseeds_a.md 40 seeds, 4 per ki
 **FOLLOW-UP on 087e886c (scope-change list):** (b) coop-e2e run TWICE on review/thin-p1-r1: 141/141 and 141/141, both seats, 0 FAIL (the earlier 138/141 did not reproduce). (c) «no pool» reasons spot-checked: mac threshold really comes from the maid (jsgame sgThr: loyal + temper by name), td_ngon 44 boards ≥40, timing-only kinds (thoico tat ne) have no content list, thu_* / tuoi are drawn on HER pet/plant; reasons accepted. (d) BAL.mgp / mgpb / mgpc: one-core-guard 0 fails.
 - DONE 9a0ef37 wseeds_b.md 51 seeds (3 x 17 kinds) validator 0 errors, 0 warnings (fixed wc-thi-002 mua).
 **CO-OP LAND GATE (thin-p1 r1, 087e886c): coop-e2e 141/141 + 141/141 (host Fold) + 141/141 with COOP_SWAP=1 (iPad hosts) = both seat orders, 0 FAIL; no-pool check ok.**
+
+
+## P7-SEEDS-A
+DONE b6d494b0 fseeds_a.md 117 rows: stage 49 (C 28 / W 5 / G 5 / B 2 / P 4 / R 5; 7 per fest, ≥4 C each) comp 40 (28 own = 4 per fest + 12 shared fc-xa-c01..12) prize 28 (4 per fest) validator pending (fseeds_validate.py not yet on review/thin-p6; own script check of sums, words, placeholders 0 errors)
