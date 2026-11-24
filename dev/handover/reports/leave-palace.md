@@ -158,3 +158,23 @@ Mercy today (applies to EVERY deathSentence): first-year mercy (S.turn < BAL.eff
 | 32 | road lose endings (j67.js:5 rule) | arc failures | «never ép chết, lãnh cung or mưu phản» — loss = giáng 1 / mất chỗ dựa | YES | keep |
 Not found anywhere: a forced phế làm thứ dân of a consort, a forced exile of a consort outside the palace, a temple sentence for a crime (only the custom at jmort:198). Those severities exist only as her own choice (hl_phe, hl_tu) or by custom.
 PROPOSED CHANGES (wait for MAIN 117): (P1) deathSentence gains a tier: «nghịch» (#4 gián điệp, #5/#6 hại Hoàng hậu / hoàng tự, #7 vu cổ) skips the first-year mercy (BAL key, e.g. BAL.eff.j8.noMercy list); nhân từ mercy stays (lãnh cung). (P2) #13 thư tư tình → the tư thông rule (affairExposed / deathSentence), same as #10-12. (P3) #20 bỏ quên → MAIN decides. Everything else = keep.
+
+## STEP 2 (E64b) — NO CONFIRM on her own choice to leave (OD 24/11 ~07:25Z) — family scan, before → after
+Scan: grep `xgConfirm|kết thúc kiếp|hỏi lại|Không quay lại được|Thôi, ở lại|Nghĩ lại|kitConfirm(` over dev/build/j*.js (+ every option whose x says «kết thúc kiếp này»: j14:21, j42:435/438/611/615/618, j97:280, jge:148, jroute:160/182/189/194/197/253).
+| site | before | after |
+|---|---|---|
+| j25.js:41 xgConfirm | «Xuất gia?» card: «Cạo tóc đi tu là kết thúc kiếp này. Không quay lại được.» [Xuất gia, kết thúc kiếp này] / [Thôi, ở lại] | removed (comment line) |
+| j14.js:21 lãnh cung act «Xuất gia» | x «kết thúc kiếp này, yên ổn (sẽ hỏi lại)» → xgConfirm → over | x «kết thúc kiếp này, yên ổn» → over at once (NPC p3Nun unchanged) |
+| jkiep.js kpGate (one warning per unfinished life before a choice naming death) | fired on own-choice LEAVE options because they contain «chết»: j96:221 «✦ Giả chết, theo chàng rời cung», jroute:149 «Xin thuốc giả chết», j96:214 «Tìm một bài thuốc giả chết» | «giả chết» is stripped before the death-word test → no warning on leaving; real death choices (tự vẫn …) keep their one warning |
+| all other «kết thúc kiếp này» options (list above) | no confirm (one click → over) | unchanged |
+| j82.js:468 kitConfirm «Bỏ cuộc?» (mini-game quit), jcloud.js:184 (delete cloud save) | not a life ending | unchanged (out of family) |
+| dev/test/opt-render.js | rendered xgConfirm card | line removed |
+
+## STEP 3 (E64b) — TRẢ THẺ BÀI = ENDING + «Về sau» for NEW lives (MAIN 117 05:07Z)
+Today (audit): Điện tuyển returns the tablet (jkc.js:560 → PEND kcE trave → kcTraveD :562): [Gả cho <suitor>] kcMarry → kcEndDo (4 fates by suitor kind/score) · [Xin ở vậy, mở lớp dạy chữ] (Tài ≥60 or thd) kcEndDo «Nữ phu tử» else marry · [Cắt tóc đi tu] kcEnd tu · ✦ kcR2 Vợ Trạng nguyên · ✦ kcR5 hòa thân. Every one ALREADY ends the life via over() — there is NO playable outside road after it; what was missing = the epilogue, and the card said «Chết vì: Vợ quan thanh liêm» (kcEndDo passed no alive → overAlive false).
+Built (jleave.js tail, jkc.js kcEndDo(h,t,fate,alive), BAL.leave yrs/kids/causeK + hoa/day):
+- kcInit marks NEW lives S.kc.lv=1; kcTraveD marks S.kc.trv=1; kcEndDo after a returned tablet → lpvNext(kind, partner) + alive=true → the same «Về sau» passage + rows as a palace leaving.
+- kinds: Chính thất hầu phủ / Gả xa / Vợ quan thanh liêm / Vợ Trạng nguyên → hon · Làm thiếp nhà quyền quý → thiep · Nữ phu tử → day (new: no children) · Xuất gia → tu · Hòa thân thay công chúa → hoa (new).
+- partner = the REAL man: the suitor object in S.kc.suit (netOf draws and stores his 3 nết on him) · ✦ Trạng nguyên = kcTmMan() of S.men.
+- her own lines (LPV_OPEN_KC / LPV_MID_K_KC) and no line about a palace life she never had (LPV_PAL filter on every pool).
+- OLD saves (no S.kc.lv) and home-road endings before any returned tablet keep today's card.
