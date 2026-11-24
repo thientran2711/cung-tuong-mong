@@ -129,3 +129,40 @@ Shots (Fold 755x1000 + iPad 1180x820 @2, looked at 3×, outside git: /home/user/
 Not built (per brief): đăng cơ in quốc tang (owner Q via MAIN), co-op guest-queen nominate.
 
 ~96% xong / ~90% chơi được
+
+## REVIEW r2 (reviewer session_01D3E3NZnFXh5e2NqrPJTpg8, opus BIG, 24/11)
+PRIORITY #1 CHECK ('promo-build-2 review r2' / 'truy phong' / 'dieK'): OD 24/11 ~05:55Z, ~07:15Z («no crime»), ~07:55Z read via the r1 review + fix rows | ledger 0 | claims rv r2 = this session | main c6c3ca76 (net-build-rv landed; no death mark there) | review/* promo-build-2-rv f9cdc020 (target), promo-build-rv 1cab34e1 (ancestor ✔, not yet on main) | archive 0.
+
+**VERDICT: REVIEW PASS — LAND READY review/promo-build-2-rv 70571e8a763fb604b7f1ef7e7dcba60db06aac3b** (lands after / together with promo-build-rv 1cab34e1, which is its ancestor; origin/main c6c3ca76 is its ancestor too).
+
+### My changes on the branch
+1. 44c36b5e **law 1 two-way (small fix):** j99succ «Ép Thái phi tuẫn táng» marked the NPC `tuan` (truy phong allowed) while the exact mirror, her own j3 «Tân Thái hậu xét lại chuyện cũ … ban lụa trắng, ép ngươi tuẫn táng» reads `crime` (no truy phong). Same act both ways → j99succ now `crime` too (both are retribution for old deeds dressed as tuẫn táng; the new Emperor is the punisher's son, law 6). In play the NPC was never examined (the succession life ends right after), so no visible change; `tuan` stays a valid allowed kind.
+2. 25891922 merge LIVE origin/main c6c3ca76 (net-build-rv): conflicts j30.js + jroute.js = main's netTh lines + the fix's dieMk marks kept (j30 1/1, jroute 8/8 marks); index.html/sw.js rebuilt.
+3. 0fd07e7a + 70571e8a merge LIVE origin/main 15b5e1ff (robot-coop-fix-1: tests + coop worker only, clean), build line. Rescan after both merges: no new unmarked death site.
+
+### (2) the fix — own checks
+- **Scan of every `alive=false` (my own regex over dev/build/j*.js, after the main merge):** every death site carries dieMk / deathSentence / kidDie / kill / dieIf; the rest are not deaths (j54 temporary hide, jbook animation vars, jcoopask/jcoopworld guest copies, jrank local var, jpq/jcoopworld catch fallbacks → unmarked = refused, safe). **Natural play probe:** 8 lives × 462 months, every dead rival marked (ill 138 / age 74 / left 43), **0 unmarked**; truy phong granted only to age/ill.
+- **Her lines (die/over/deathSentence, 67 literal lines + kill/kcDie whys + ACC accidents) through dieKOf:** every ban chết / tru di / Thận hình ti / lụa trắng / tư thông → crime; phá thai / giả chết / lãnh cung → disgrace; living exits (ban hôn, Vương gia che chở, Thái phi, Thái hậu, xuất gia…) pass alive=true or match overAlive → never examined. Nits (no outcome change, both kinds allowed): «ngã xuống hồ Thái Dịch» reads `ill` («Dịch»), «cảm hàn» reads `other`.
+- pbTp refuses every kind outside BAL.promoR.sp.tp.okK (crime / disgrace / nun / fled / left / wed / gone / unmarked) ✔ · «Kiếp này» reason in the same kit section + kitRows row (law 9) ✔, words cổ trang, no number, no % (law 7) ✔ · executed NPC → no news (test + probe) ✔ · law 1: one pbTp/pbTpBar for her and NPCs, mirror fixed above ✔ · law 4: okK in BAL, no typed number in the new code, one-core-guard PASS ×3 ✔.
+
+### (1)+(3) gates (run one at a time, this box, head before/after the main merge)
+| gate | result |
+|---|---|
+| quickcheck f9cdc020 | PASS · render 246/283, tab 520/536, buổi 2190/1597 ms new/live (median of 3; on par within the box swing seen in r1), old save ok, core gates PASS |
+| quickcheck 25891922 (after merging c6c3ca76) | 1st run FAIL perf buổi 3929/1640 (single runs new 3929/1620/4946 vs live 2693/1640/1336 = box swing); perf re-measured with 7 lives each: PASS, buổi 1482/1428, render 246/238, tab 522/528 (on par); standard rerun PASS (buổi 1331/1665) |
+| quickcheck 70571e8a (final, after merging 15b5e1ff) | PASS · render 211/251, tab 395/505, buổi 1385/1528 ms, old save ok, core gates PASS |
+| promo-build | 48/48 + no errors ×4 before the merge; after the merge 3 of 4 runs 48/48, 1 run BAD on the OLD base check «kitPromoHook ready in kỳ» (got null: the check ticks up to 40 unseeded months and kitPromoHook returns null if she dies / leaves meanwhile — random world, not this fix; test-determinism nit for D, same family as r1's flaky «HH đề cử once») |
+| promo-exam | 32/33, FAIL set = LIVE d521656c (old-save exam card) |
+| promo-rules | 27/29, FAIL set = LIVE (NPC servants roll; 844x390 reveal) |
+| promo-skip | FAIL set = LIVE (grace-seat, strike-back) |
+| promo-next-rank | BAD set = LIVE (card names "") |
+| kit-promo-hook | Fold 755x1000 8/8 · iPad 1180x820 8/8 |
+| coop-e2e | 142/142 |
+| two-way-oldsave | LIVE save → head: ok, 40 weeks, no errors |
+| one-core-guard | PASS ×3 |
+Shots (Fold 755x1000 + iPad 1180x820, looked at, scratch only, not uploaded): «Kiếp này» executed → kit section «Truy phong» row «… chết vì mang tội, Hoàng thượng không truy phong người đã bị xử.»; illness → «… truy tặng … làm Quý nhân.»; button «Chuyển kiếp» at the bottom, no overflow, no cut text. (Voice layer prints «Ta» in her own end panel, the same as the existing truy tặng line.)
+
+### Still open (not this brief)
+Owner question đăng cơ đại lễ vs quốc tang (via MAIN) · co-op guest-queen nominate (follow-up) · two flaky base checks in promo-build (unseeded random world).
+
+~96% xong / ~90% chơi được
