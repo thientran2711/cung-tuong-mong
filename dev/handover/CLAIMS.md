@@ -1498,8 +1498,8 @@ ROBOT-COOP fixer #4 (fix-3, onecore) | review/robot-coop-fix-3, review/robot10-o
 rv servant-trust r2 (opus BIG; briefs/D-servant-trust-review-r2.md; target 2c1c2bfc) | review/servant-trust-rv | session_01D3E3NbdduX9tP1Nv41ptUk | RUNNING | 24/11 11:41Z (Foreman D depth 3)
 FIX promo-build-2 r1 (opus BIG; briefs/D-promo-build-2-fix.md; from de24c1ae) | review/promo-build-2-rv | session_01D3E3NYmiFCzMBQ7S9iptKN | RUNNING | 24/11 11:51Z (Foreman D depth 3)
 | ROBOT-COOP RUNNER U14 pairs 13-14 SWAP=1 SEED=1 ×10 kiếp (sonnet; briefs/E-coop-runner.md; ORDER MAIN 122 11:40Z) | dev/handover/robot/coop-U14-* | FOREMAN E (child4) | session_01DgYSWm8buMnCdRUuNmh1do | DONE 24/11 19:48Z | 24/11 11:58Z |
-| ROBOT-COOP RUNNER U15 pairs 15-16 SWAP=0 | dev/handover/robot/coop-U15-* | FOREMAN E (child4) | session_01DgYSWopMPC7t2kQVrrP187 | RUNNING | 24/11 11:58Z |
-| ROBOT-COOP RUNNER U16 pairs 15-16 SWAP=1 | dev/handover/robot/coop-U16-* | FOREMAN E (child4) | session_01DgYSWme7viyfpYaqM6vM7t | RUNNING | 24/11 11:58Z |
+| ROBOT-COOP RUNNER U15 pairs 15-16 SWAP=0 | dev/handover/robot/coop-U15-* | FOREMAN E (child4) | session_01DgYSWopMPC7t2kQVrrP187 | DONE 24/11 20:12Z | 24/11 11:58Z |
+| ROBOT-COOP RUNNER U16 pairs 15-16 SWAP=1 | dev/handover/robot/coop-U16-* | FOREMAN E (child4) | session_01DgYSWme7viyfpYaqM6vM7t | DONE 24/11 20:12Z | 24/11 11:58Z |
 | ROBOT-COOP RUNNER U17 pairs 17-18 SWAP=0 | dev/handover/robot/coop-U17-* | FOREMAN E (child4) | session_01DgYSWoqhFR6eEQzbDDKqY6 | DONE 24/11 19:48Z | 24/11 11:58Z |
 | ROBOT-COOP RUNNER U18 pairs 17-18 SWAP=1 | dev/handover/robot/coop-U18-* | FOREMAN E (child4) | session_01DgYSWmpKLyR9tiAbos763w | DONE 24/11 19:58Z | 24/11 11:58Z |
 | ROBOT-COOP RUNNER U19 pair 19 only (pair 20 → U21; stopping 19:10Z after stuck repro) SWAP=0 | dev/handover/robot/coop-U19-* | FOREMAN E (child4) | session_01DgYSWohtCk2AGS5VzQrrH1 | DONE 24/11 19:20Z (archived 20:08Z) | 24/11 11:58Z |
