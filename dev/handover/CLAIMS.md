@@ -1570,4 +1570,4 @@ face-master03 Sharp (ages 16/26/51/63; sonnet) | Magnific only, report reports/f
 | FACE-MASTER03 PROUD (sonnet worker; ages 16/26/51/63, 15 people=60 jobs) | handover: dev/handover/reports/face-master03-proud.md | D | session_01D3E3NZBMJvJ42NGMXAhPWA | RUNNING | 24/11 21:31Z |
 | FACE-MASTER03 Dignified ages 16/26/51/63 (sonnet worker; briefs/D-face-master03-mass.md; 48 jobs) | Magnific only; reports/face-master03-dignified.md | D | session_01D3E3NaHn3EfaM7zRmQbD31 | RUNNING | 24/11 |
 | FACE-MASTER03 COLD (sonnet worker; 15 ids x ages 16/26/51/63, age39 on hold) | Assignments/Cold_Jobs.json | D | cse_01D3E3NYEF9kwi8NEyWrcbuf | RUNNING | 24/11 21:31Z |
-| VIECNHO-FIX (owner bug 24/11 ~21:50Z: Việc nhờ sub-tab + person panel scroll kit + result popup Vì sao; sonnet) | review/viecnho-fix | MAIN 128 | (opening) | RUNNING | 24/11 22:00Z |
+| VIECNHO-FIX (owner bug 24/11 ~21:50Z: Việc nhờ sub-tab + person panel scroll kit + result popup Vì sao; sonnet) | review/viecnho-fix | MAIN 128 | session_01V1ZZH4XjjV9xGrojVNGZpc | RUNNING | 24/11 22:00Z |
