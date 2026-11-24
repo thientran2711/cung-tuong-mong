@@ -138,7 +138,7 @@ const AS_DO={
  tryst(s,m,o,ok){const man=o.man;if(ok){s.mt[man.id]=(s.mt[man.id]||0)+SRVA.tryst.tinh;s.manLove=man.id;return""}return asCaught(s,m,man)},
  vow(s,m,o,ok){if(!ok)return"";if(o.man){s.vow=o.man.id;s.manLove=o.man.id;return""}const x=o.t;if(x&&!x.lover){s.lover=x.sid;x.lover=s.sid}return""}};
 /* "Hẹn gặp riêng" caught: the player maid's own road for an NPC maid (was maidLoveMonth roll 4: expelled 30 / Tân Giả khố; the man exiled 35) */
-function asCaught(s,m,man){const B=asB();asOut(s,roll(B.expel)?"expel":"tgk");if(man&&man.rw!=="vương gia"&&roll(B.exile))man.alive=false;
+function asCaught(s,m,man){const B=asB();asOut(s,roll(B.expel)?"expel":"tgk");if(man&&man.rw!=="vương gia"&&roll(B.exile)){man.alive=false;dieMk(man,"crime")}
  const mine=isSrv()&&(m===srvM()||((S.srv.af||{})[s.sid]||0)>=30);const line=`${s.name}, cung nữ của ${NM(m)}, tư tình với ${man?man.name:"một nam nhân"} bị lộ: ${s.out==="expel"?"bị đuổi khỏi cung":"bị đày xuống Tân Giả khố"}${man&&!man.alive?"; hắn bị đày ra biên ải":""}. `;
  if(mine||m===S)return line;try{log(line)}catch(e){}return""}
 /* "Quỳ dâng trà" where he passes (jagmaid amDo: ONE rule); choosing it is her seeking (jmline s.seek), so her master may notice */

@@ -253,16 +253,23 @@ function pbDeath(p){const SP=BAL.promoR.sp,D=SP.death;if(!D||typeof illOf!=="fun
  return dec?`<b class="g">${res}</b> `:res+" "}
 
 /* ---------- (3) truy phong ---------- */
+/* fix r1 (review FAIL 1, laws 6/8, OD ~07:15Z «no crime»): only an honourable death is examined. The death mark p.dieK (j8 dieMk, set at every death
+   site) must be one of BAL.promoR.sp.tp.okK; a crime (ban chết, xử tử …), a disgrace (tự vẫn, chết trong lãnh cung …), a life that left the palace (nun,
+   fled, left) or an unmarked death (no record) gets no truy phong: the Emperor does not honour the person he condemned. */
+function pbTpBar(p){const k=p&&p.dieK;if(p&&(p.nun||p.fled||p.left))return"left";if(k==null)return"none";return (BAL.promoR.sp.tp.okK||[]).includes(k)?"":k}
 function pbTp(p){const T=BAL.promoR.sp.tp;if(!T||!T.on||!exOn()||!p||p.pbTp!=null)return null;p.pbTp=0;if(p.out||p.coop||rkOf(p)>=6)return null;
+ const bar=pbTpBar(p);if(bar){window.__pbN=window.__pbN||{};window.__pbN.tpBar=(window.__pbN.tpBar||0)+1;return{ok:0,bar}}
  const miss=pbFullRows(p).filter(x=>!x[0]).map(x=>x[1]);if(miss.length)return{ok:0,miss};const r=exSimC(p);if(!r.pass)return{ok:0,r};
  p.pbTp=rkOf(p)+1;window.__pbN=window.__pbN||{};window.__pbN.tp=(window.__pbN.tp||0)+1;return{ok:1,rk:RANKS[p.pbTp].n,r}}
 function pbTpLine(p,x){const nm=p===S?"ngươi":"nàng";if(x.ok)return `Nội vụ phủ xét công đức lúc sinh thời, truy tặng ${nm} làm ${x.rk}.`;
+ if(x.bar)return x.bar==="crime"?`${p===S?"Ngươi":"Nàng"} chết vì mang tội, Hoàng thượng không truy phong người đã bị xử.`:x.bar==="disgrace"?`${p===S?"Ngươi":"Nàng"} chết trong ô danh, Nội vụ phủ không xét truy phong.`:"Nội vụ phủ không xét truy phong.";
  if(x.miss)return `Nội vụ phủ xét: chưa đủ điều kiện truy phong (${x.miss[0]}${x.miss.length>1?`, còn ${x.miss.length-1} điều nữa`:""}).`;return `Nội vụ phủ xét: công đức chưa đủ để truy phong (${x.r.total} phần, mức ${x.r.P.bar}).`}
 /* NPC deaths (host / solo): the month after; an old save marks the dead it already has as done (no burst of news) */
 function pbTpNpc(){const P=pbSt();let ev="";if(!P.tpV){P.tpV=1;for(const v of rivals)if(v.alive===false&&v.pbTp==null)v.pbTp=0;return""}
  for(const v of rivals){if(v.alive!==false||v.pbTp!=null||v.coop)continue;const x=pbTp(v);if(x&&x.ok){const t=`Truy phong: ${pbTpLine(v,x).replace("nàng",v.name)}`;try{newsAdd(v,"promo",t,true)}catch(e){}ev+=t+" "}}return ev}
 /* her death: the title (or why not) in the «Kiếp này» panel (kit section + kit rows) */
 (function(){if(typeof over!=="function")return;const o0=over;over=function(h,t,fate,alive){let x=null;
+ try{if(S&&!S.dead&&BAL.promoR&&S.dieK==null)dieMk(S,`${h||""} ${fate||""}`)}catch(e){}
  try{if(S&&!S.dead&&BAL.promoR&&!S.out&&!(typeof isSrv==="function"&&isSrv())&&!(S.succ&&S.succ.on)&&!(typeof overAlive==="function"&&overAlive(fate,alive)))x=pbTp(S)}catch(e){console.error("pbTp",e)}
  const r=o0.apply(this,arguments);
  try{if(x){const m=Q.find(q=>q&&/(^|\s)end(\s|$)/.test(q.cls||""));if(m){m.h+=`<div class="kpsec kend-tp"><h4 class="kpst">Truy phong</h4>${kitRows([["Truy phong",pbTpLine(S,x),"t"]])}</div>`;if(Q[0]===m&&!$("modal").hidden)showModal()}}}catch(e){console.error("pbTp end",e)}

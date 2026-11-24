@@ -204,7 +204,7 @@ function menReport(by,m,c,y,formal){const at=placeName(y.k);const nm=m.name;cons
  const gain=(o)=>ap(by,o);
  if(c&&(y.r==="tryst"||y.r==="meet")&&(c!==S||m.trysts>0||y.r==="tryst")){const o=odA(by,(formal?42:58)+(by.danh||0)/5+(formal?(by.tamco||0)/4:0));
   oanAdd(c,by,BAL.eff.jmen.menReport);affAdd(c,by,BAL.eff.jmen.menReport_2);
-  if(roll(o)){m.alive=false;log(`<span class="r">${menCap(byT)} báo ${formal?"Cung Chính ti":"thị vệ"}: bắt được ${nm} cùng ${c===S?"ngươi":`${rkName(c)} ${c.name}`} ở ${at}. ${nm} bị xử trảm.</span>`);
+  if(roll(o)){m.alive=false;dieMk(m,"crime");log(`<span class="r">${menCap(byT)} báo ${formal?"Cung Chính ti":"thị vệ"}: bắt được ${nm} cùng ${c===S?"ngươi":`${rkName(c)} ${c.name}`} ở ${at}. ${nm} bị xử trảm.</span>`);
    gain({danh:BAL.eff.jmen.danhTryst});if(c===S)deathSentence(`Bị ban chết vì tư thông với ${nm}`);else deathSentence(c,`tư thông với ${nm}`);return true}
   m.ban=wk()+MEN.banS;oanAdd(m,by,BAL.relMS.grudge);/* rel-men-servants: beaten and sent out on her word */log(`<span class="r">${menCap(byT)} báo ${formal?"Cung Chính ti":"thị vệ"} chuyện ở ${at}; ${c===S?"ngươi":`${rkName(c)} ${c.name}`} chối phăng, chỉ ${nm} bị đánh trượng, đuổi ra ngoại triều.</span>`);gain({danh:BAL.eff.jmen.danhTrystFail});return false}
  if(c){const o=formal?odA(by,48+(by.danh||0)/5+(by.tamco||0)/4):100;oanAdd(c,by,BAL.eff.jmen.menReport_3);affAdd(c,by,BAL.eff.jmen.menReport_4);m.ban=wk()+(formal?MEN.banF:MEN.banS);oanAdd(m,by,BAL.relMS.grudge);

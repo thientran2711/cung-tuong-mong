@@ -95,9 +95,31 @@ const {chromium}=require('playwright');const D=require('./lib/device');
    const r0=v.rank;const un=simAs(true);pbDeath(v);un();v.ill=null;return{got:`rank ${r0}→${v.rank}`,bad:(v.pbs||{}).dth!==1?"NPC deathbed not examined: "+JSON.stringify(pbFullRows(v).filter(x=>!x[0]).map(x=>x[1])):v.rank!==r0+1&&seatFree(r0+1)?"NPC not promoted":""}});
   ck("pb2: truy phong — her death → title in Kiếp này",()=>{fresh();S.rank=1;S.sung=S.danh=S.duc=99;S.lastPromo=S.turn-99;S.hh=60;S.th=60;S.confined=0;delete S.ex;const un=simAs(true);Q.length=0;die("Lao phổi nguy kịch, không qua khỏi");un();
    const m=Q.find(x=>x&&/(^|\s)end(\s|$)/.test(x.cls||""));const ok=m&&/Truy phong/.test(m.h)&&/truy tặng ngươi làm/.test(m.h);const r={got:(m&&(m.h.match(/truy tặng[^<]*/)||[""])[0]),bad:!m?"no end panel":!ok?"no truy phong row":""};Q.length=0;return r});
-  ck("pb2: truy phong — NPC death → news, never past Hoàng quý phi",()=>{fresh();pbTpNpc();const v=liveRivals(false).find(x=>x.rank<3);v.sung=v.danh=v.duc=99;v.lastPromo=S.turn-99;v.hh=99;v.th=60;v.alive=false;const un=simAs(true);const t=pbTpNpc();un();
-   const w=liveRivals(false).find(x=>x.rank===6);let hi="";if(w){w.alive=false;delete w.pbTp;pbTpNpc();hi=w.pbTp?"past HQP":""}
+  ck("pb2: truy phong — NPC death → news, never past Hoàng quý phi",()=>{fresh();pbTpNpc();const v=liveRivals(false).find(x=>x.rank<3);v.sung=v.danh=v.duc=99;v.lastPromo=S.turn-99;v.hh=99;v.th=60;v.alive=false;dieMk(v,"ill");const un=simAs(true);const t=pbTpNpc();un();
+   const w=liveRivals(false).find(x=>x.rank===6);let hi="";if(w){w.alive=false;dieMk(w,"ill");delete w.pbTp;pbTpNpc();hi=w.pbTp?"past HQP":""}
    return{got:t.slice(0,80),bad:!v.pbTp?"no title":!/Truy phong/.test(t)?"no news line":hi}});
+  /* fix r1 (review FAIL 1): the death mark p.dieK — crime / disgrace / unmarked deaths get no truy phong, her and NPCs alike */
+  const tpElig=()=>{S.rank=1;S.sung=S.danh=S.duc=99;S.lastPromo=S.turn-99;S.hh=60;S.th=60;S.confined=0;delete S.ex};
+  const endTp=()=>{const m=Q.find(x=>x&&/(^|\s)end(\s|$)/.test(x.cls||""));const h=m?m.h:"";Q.length=0;const i=h.indexOf("kend-tp");return{m:!!m,tp:/truy tặng ngươi/.test(h),why:(i<0?"":h.slice(i,i+600)).replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim()}};
+  ck("fix: her executed (deathSentence) → no truy phong",()=>{fresh();tpElig();S.turn=Math.max(S.turn,BAL.eff.j8.mercyTurn+1);S.mercy=1;const tr=S.traits;const h0=has;has=k=>k==="nhantu"?false:h0(k);const un=simAs(true);Q.length=0;
+   try{deathSentence("Bị ban chết vì tư thông với thị vệ")}finally{un();has=h0}const e=endTp();return{got:`dieK ${S.dieK} · ${e.why.slice(0,70)}`,bad:!S.dead?"not dead":!e.m?"no end panel":e.tp?"truy phong given to the executed":S.dieK!=="crime"?"no crime mark":!/mang tội/.test(e.why)?"no why line":""}});
+  ck("fix: her ban chết by over() fate (j30 path) → no truy phong",()=>{fresh();tpElig();const un=simAs(true);Q.length=0;over("Tư thông bị phát giác","Chuyện tư tình bị phơi bày trước Hoàng thượng. Ngươi bị ban chết.","Ban chết: tư thông bại lộ");un();
+   const e=endTp();return{got:`dieK ${S.dieK}`,bad:e.tp?"truy phong after ban chết":S.dieK!=="crime"?"fate not read as crime":""}});
+  ck("fix: her disgrace (phá thai) → no truy phong; illness → yes",()=>{fresh();tpElig();let un=simAs(true);Q.length=0;die("Uống thuốc phá thai, băng huyết mà chết");un();const e1=endTp();const k1=S.dieK;
+   fresh();tpElig();un=simAs(true);Q.length=0;die("Lao phổi nguy kịch, không qua khỏi");un();const e2=endTp();
+   return{got:`${k1} / ${S.dieK}`,bad:e1.tp?"truy phong after a disgrace":k1!=="disgrace"?"phá thai not disgrace":!e2.tp?"illness death lost its truy phong":S.dieK!=="ill"?"illness not ill":""}});
+  ck("fix: NPC executed / murdered / unmarked → news only for the murdered",()=>{fresh();pbTpNpc();const L=liveRivals(false).filter(x=>x.rank<3&&!x.queen).slice(0,3);if(L.length<3)return{got:L.length,bad:"no npcs"};
+   for(const v of L){v.sung=v.danh=v.duc=99;v.lastPromo=S.turn-99;v.hh=99;v.th=60;v.confined=0;delete v.ex}
+   const [a,b2,c]=L;S.turn=Math.max(S.turn,BAL.eff.j8.mercyTurn+1);a.mercy=1;const h0=has;has=k=>k==="nhantu"?false:h0(k);try{deathSentence(a,"đầu độc hoàng tử")}finally{has=h0}
+   b2.suc=0;dieIf(b2,"chết sau một bát canh");c.alive=false;/* unmarked (no record) */
+   const un=simAs(true);const t=pbTpNpc();un();
+   return{got:`${a.dieK}/${b2.dieK}/${c.dieK} · ${t.slice(0,60)}`,bad:a.alive!==false?"a not executed":a.pbTp?"executed NPC got truy phong":new RegExp(a.name).test(t)?"news for the executed":b2.dieK!=="murder"?"poisoned not murder":!b2.pbTp?"murdered NPC lost truy phong":c.pbTp?"unmarked death got truy phong":""}});
+  ck("fix: dieKOf on every her death line",()=>{const T=[["Ban chết: tư thông bại lộ","crime"],["Bị ban chết vì tư thông","crime"],["Mưu phản cùng cha, cả họ bị tru di","crime"],["Tráo con bị bắt quả tang, tội khi quân","crime"],
+    ["Bị Thái y tra ra bỏ độc người hầu cung khác, giải sang Thận hình ti","crime"],["Chết dưới đòn tra khảo ở Thận Hình ti","crime"],["Tân Thái hậu xét lại chuyện cũ, ban lụa trắng, ép ngươi tuẫn táng theo tiên đế","crime"],["Bị ban rượu độc vì mưu hại X","crime"],
+    ["Uống thuốc phá thai, băng huyết mà chết","disgrace"],["Uống thuốc giả chết quá liều, không tỉnh lại nữa","disgrace"],["Chết rét, chết đói trong lãnh cung","disgrace"],
+    ["Khó sinh, băng huyết mà chết","birth"],["“Giữ con.” Ngươi gắng sinh hạ hài nhi rồi nhắm mắt","birth"],["Trúng độc, không qua khỏi","murder"],["Bị Lý phi hại","murder"],["Trước ngày sắc phong, X sai người đẩy ngươi xuống giếng","murder"],
+    ["Lao phổi nguy kịch, không qua khỏi","ill"],["Bệnh nặng, không qua khỏi","ill"],["Tuổi trời đã tận, lão bệnh không qua khỏi, thọ 70 tuổi","ill"],["","age"]];
+   const bad=T.filter(([t,k])=>dieKOf(t)!==k).map(([t,k])=>`${t.slice(0,30)}→${dieKOf(t)}≠${k}`);return{got:`${T.length-bad.length}/${T.length}`,bad:bad.join("; ")}});
   ck("pb2: quốc tang when the Emperor changes → no kỳ, no đại lễ",()=>{fresh();pbKyUpdate();const P=S.pb;const A=pbA();S.emp.era="Tân"+S.turn;pbKyUpdate();let k=0;for(let a=A;a<A+BAL.promoR.mourn-1;a++)if(pbKyAt(a))k++;
    S.month=+FEST.newyear.m;const D=P.dl||(P.dl={last:null,seen:{}});D.last=null;const t=pbDl();return{got:`mt +${P.mt-A} kỳ ${k}`,bad:P.mt==null||P.mt-A<BAL.promoR.mourn-1?"no mourning":k?"kỳ during mourning":/ban ân chiếu/.test(t)?"đại lễ during mourning":""}});
   ck("pb2: unknown girl's Sủng hidden in Phân cung why",()=>{fresh();const v=liveRivals(false).find(x=>!pbKnown(x));if(!v)return{got:"all known",bad:""};v.sung=90;const L=pcWhy(v).join(" ");const g=pbGrant;return{got:L.slice(0,80),bad:/Sủng \d/.test(L)?"Sủng shown for a stranger":""}});

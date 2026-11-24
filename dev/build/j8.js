@@ -19,7 +19,7 @@ function malOf(p){return p===S?Math.max(0,70-S.duc):p.malice}
 function wk(){return S.turn*3+S.tuan}
 function ap(p,o){if(p===S)return apply(o);for(const k in o){const v=o[k];if(!v)continue;if(k==="maid"){p.maid.loyal=cl(p.maid.loyal+v,0,100);continue}p[k]=(p[k]||0)+v}
  for(const k of ["sung","danh","suc","sac","tai","tamco","duc","ghen","an"])if(p[k]!=null)p[k]=cl(p[k],0,100);if(p.suc!=null)p.suc=Math.min(p.suc,sucCap(p));p.th=cl(p.th||0,-100,100);p.hh=cl(p.hh||0,-100,100);p.bac=Math.max(0,p.bac||0)}
-function dieIf(p,why){if(p!==S&&p.alive&&p.suc<=0){p.alive=false;if(p.queen)p.queen=false;return `<span class="r">${p.name} ${why}.</span> `}return""}
+function dieIf(p,why){if(p!==S&&p.alive&&p.suc<=0){p.alive=false;dieMk(p,why||"other");if(p.queen)p.queen=false;return `<span class="r">${p.name} ${why}.</span> `}return""}
 /* a rival's full stat block: the same fields the player's formulas read */
 function rstats(v,rank){rank=rank==null?(v.queen?7:v.rank):rank;
  const d=(k,x)=>{if(v[k]==null)v[k]=x};
@@ -92,11 +92,25 @@ function punishDemoP(){return has("nongnay")?100:has("nhantu")?25:50}
 function punish(p,why,sev){if(typeof p==="string"){sev=why;why=p;p=S}
   if(sev>=2&&rkOf(p)>0&&roll(punishDemoP())){seatPut(p,seatDown(p,rkOf(p)-1));log(`<span class="r">${NMc(p)} bị giáng xuống ${rkName(p)} vì ${why}.</span>`);return}
   const m=punishMonths();p.confined=Math.max(p.confined||0,m);log(`<span class="r">${NMc(p)} bị cấm túc ${m} tháng vì ${why}.</span>`)}
+/* DEATH CAUSE (promo-build-2 fix, review FAIL 1; laws 6/8): ONE mark p.dieK on every person who dies (her S.dieK too), set where the death happens.
+   Kinds: crime (xử tử / ban chết / xử trảm / tru di …) · disgrace (tự vẫn, phá thai giấu tội, chết trong lãnh cung, trốn cung …) · ill · birth · age ·
+   murder (bị người hại: độc, đẩy xuống giếng …) · tuan (tuẫn táng) · other; not a death: nun · fled · left · wed · gone. First mark wins.
+   dieKOf(text) reads a death line when a site only has words (over() fates, kill(why), dieIf(why)). Truy phong (jpromob pbTp) refuses crime / disgrace. */
+const DIE_K=["crime","disgrace","ill","birth","age","murder","tuan","other","nun","fled","left","wed","gone"];
+function dieKOf(t){t=String(t||"");if(!t)return"age";
+ if(/ban chết|bị ban|xử tử|xử trảm|chém đầu|tru di|mưu phản|tư thông|khi quân|lụa trắng|rượu độc|bạch lăng|thận hình ti|tra khảo|gián điệp|tội/i.test(t))return"crime";
+ if(/tự vẫn|tự sát|tự tận|tự ải|thắt cổ|phá thai|giả chết|lãnh cung|điên dại|trốn khỏi cung|^phế /i.test(t))return"disgrace";
+ if(/sinh hạ|khó sinh|băng huyết|lâm bồn|sinh nở/i.test(t))return"birth";
+ if(/độc|hại|giếng|đẩy|ám sát|thích khách|bát canh|yến sào|diệt khẩu|đánh chết|đánh trượng/i.test(t))return"murder";
+ if(/bệnh|nguy kịch|nhiễm|sốt|dịch|đậu mùa|lao lực|kiệt sức/i.test(t))return"ill";
+ if(/tuổi trời|tuổi cao|thọ /i.test(t))return"age";return"other"}
+function dieMk(p,k){try{if(p&&p.dieK==null)p.dieK=DIE_K.includes(k)?k:dieKOf(k)}catch(e){}return p}
+window.dieKOf=dieKOf;window.dieMk=dieMk;
 function deathSentence(p,why){if(typeof p==="string"){why=p;p=S}
   if(S.turn<BAL.eff.j8.mercyTurn&&!p.mercy){p.mercy=1;ap(p,{danh:BAL.eff.j8.danhDeathSentence,sung:BAL.eff.j8.sungDeathSentence});if(rkOf(p)>0)seatPut(p,seatDown(p,rkOf(p)-1));p.confined=Math.max(p.confined||0,BAL.eff.j8.mercyConfine);log(`<span class="r">${p===S?"Ngươi":p.name}: ${why.replace(/^Bị /,"suýt bị ")}. Niệm tình mới vào cung, Hoàng thượng tha tội chết: giáng một bậc, cấm túc ${BAL.eff.j8.mercyConfine} tháng, Danh ${balSg(BAL.eff.j8.danhDeathSentence)}, ${sgOf(p,BAL.eff.j8.sungDeathSentence)}. Lần sau sẽ không tha.</span>`);return}
-  if(p===S){if(has("nhantu")&&npcWhy("empMercy",{p}))return cold(`${why}. Hoàng thượng nhân từ tha tội chết, đày ngươi vào lãnh cung`);return die(why)}
+  if(p===S){if(has("nhantu")&&npcWhy("empMercy",{p}))return cold(`${why}. Hoàng thượng nhân từ tha tội chết, đày ngươi vào lãnh cung`);dieMk(S,"crime");return die(why)}
   if(has("nhantu")&&npcWhy("empMercy",{p})){p.out=true;if(p.queen)p.queen=false;log(`<span class="r">${p.name}: ${why}. Hoàng thượng nhân từ, đày vào lãnh cung.</span>`);return}
-  p.alive=false;if(p.queen)p.queen=false;log(`<span class="r">${p.name} bị ban chết: ${why}.</span>`)}
+  p.alive=false;dieMk(p,"crime");if(p.queen)p.queen=false;log(`<span class="r">${p.name} bị ban chết: ${why}.</span>`)}
 /* a proven crime (accusation with evidence) */
 function fall(p,why){if(p===S){if(ACTX.a&&ACTX.a!==S)S.framedBy=key(ACTX.a);if(S.rank>=5||R(2)){cold(`Ngươi ${why}`);return}S.rank=seatDown(S,S.rank-2);apply({sung:-15});log(`<span class="r">Ngươi ${why}, bị giáng xuống ${RANKS[S.rank].n}.</span>`);return}
  if(ACTX.a&&ACTX.a!==p)p.coldBy=key(ACTX.a);if(p.queen||p.rank>=5){p.out=true;p.queen=false;log(`<span class="g">${p.name} ${why}, bị phế vào lãnh cung.</span>`)}
@@ -390,7 +404,7 @@ function pregMonthP(p){if(!p.preg)return"";p.preg++;const me=p===S;
  p.preg=0;p.hidden=false;return ev+birthP(p,false)}
 /* childbirth risk: 1 base, +3 if Sức<40, +0.5 per year over 30; physician -2, Y thuật 2+ -1.5, an thai -1; floor 0.5 */
 function birthP(p,fake){const me=p===S;
- if(!fake&&roll(birthRisk(p))){if(me){die("Khó sinh, băng huyết mà chết");return""}p.alive=false;if(p.queen)p.queen=false;return `<span class="r">${p.name} khó sinh, băng huyết mà chết.</span> `}
+ if(!fake&&roll(birthRisk(p))){if(me){die("Khó sinh, băng huyết mà chết");return""}p.alive=false;dieMk(p,"birth");if(p.queen)p.queen=false;return `<span class="r">${p.name} khó sinh, băng huyết mà chết.</span> `}
  let ev="";
  if(!fake){let plot=p.catplot?byKey(p.catplot):null;p.catplot=null;
   if(!plot){const bad=others(p).filter(x=>x!==S&&rel(x,p)<-20&&(x.malice>50||(p===S&&x.ghen>=60)));const bp=bad.length?npcWhy("birthPlot",{p,bad},()=>roll(npw1B("j8").birthP)):null;if(bp)plot=bp.who}
@@ -476,7 +490,7 @@ function rivalsTurn(){const live=liveRivals(true);let ev="";
   let want=((v.malice/100)*(rel(v,t)<0?1:.25)+hostility(v,t)/200)*(rkOf(t)>=rkOf(v)-1||(t===S&&v.ghen>=60)?1:.4);if(t.shield)want*=.5;
   if(roll(want*4)){ev+=seenNPC(v,t,npcAct(v,t));if(S.dead)return ev}}
  if(S.block)S.block--;
- const q=rivals[0];if(qOn()&&R(480)===0){q.alive=false;q.queen=false;ev+=`Hoàng hậu ${q.name} băng hà vì bệnh. Ngôi trung cung bỏ trống. `}
+ const q=rivals[0];if(qOn()&&R(480)===0){q.alive=false;dieMk(q,"ill");q.queen=false;ev+=`Hoàng hậu ${q.name} băng hà vì bệnh. Ngôi trung cung bỏ trống. `}
 if(queenP())S.vacSince=null;
  /* a vacant seat is filled by the Emperor's choice after 3 months of mourning: each week (1 in 8) he weighs every eligible consort, her included (Hoàng quý phi meeting the conditions), by favour, Thái hậu, sons and name */
  if(!queenP()&&S.vacSince==null)S.vacSince=S.turn;
