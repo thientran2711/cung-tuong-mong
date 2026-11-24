@@ -567,3 +567,8 @@ DONE c3a5108c tt: prem 4, open 15 (8 win-ok / 8 lose-ok), comp 16, turn 8, clim 
 
 ## P8-SEEDS-C
 DONE be416354 td: prem 4 · open 14 (w8/l8) · comp 16 · turn 8 · clim a5/b5/f4 | ch: prem 4 · open 14 (w8/l8) · comp 16 · turn 8 · clim a5/b5/f4 — validator 0 errors (rdseeds_validate.py --min --origins td,ch on review/thin-p8 d92a4c71). Notes: ch climaxes carry no need (Thái hậu not required: a/b clims avoid her, f clims tied to ch premises mention her); ch premise/pool hồi that mention Thái hậu/cô mẫu carry need ["th"] (6/14 open, 2/16 comp, 2/8 turn).
+
+## P8-SEEDS-B
+PRIORITY #1 CHECK ('thin-p6 P8 origin'): OD 0 | ledger 0 | claims 0 | main 0 | review/* 0 | archive 0 — reused «## API P8» schema + review/thin-p8 validator.
+DONE c7b6499b muoi: prem 4 · open 16 (9 win-capable / 9 lose-capable) · comp 16 · turn 8 · clim a5/b5/f4 | cn: same counts | cnv: same counts (174 rows) validator 0 errors (`python3 dev/test/rdseeds_validate.py dev/handover/content/thin/rdseeds_b.md --min --origins muoi,cn,cnv` on review/thin-p8 d92a4c71, 0 warnings). rdc-play.js on the file not finished in my 120 s window (left to ENGINE #5).
+Notes for the engine/reviewer: all premise ids new (muoi_gia/tien/thi/hoi, cn_chuoi/tiec/chuviet/theo, cnv_kho/thu/hach/tieu); each f clim carries rd=its premise; no `sung` in cnv rows; needs auto-added where the text has {v}/{v2}/{mis} (and `th`/`man` on 3 rows); no named person anywhere; every object's destination is stated in rt; climax stat `suc` is not allowed by the validator so those options carry another stat (mat/tamco/duc…).
