@@ -21,7 +21,7 @@ const args=process.argv.slice(2);let out=path.join(__dirname,'..','handover','ro
 for(let i=0;i<args.length;i++){if(args[i]==='--out')out=args[++i];else ins.push(args[i])}
 if(!ins.length){console.log('usage: node dev/measure/robot10-agg.js <run.json|folder> [...] [--out folder]');process.exit(2)}
 const files=[],cats=[],bals=[];const walk=f=>{const st=fs.statSync(f);if(st.isDirectory()){for(const x of fs.readdirSync(f))if(x!=='saves'&&x!=='shots')walk(path.join(f,x))}
- else if(/catalog\.json$/.test(f))cats.push([f,st.mtimeMs]);else if(/(^|[\\/])bal\.json$/.test(f))bals.push([f,st.mtimeMs]);else if(/\.json$/.test(f)&&!/\.ext\.json$/.test(f))files.push([f,st.mtimeMs])};
+ else if(/^catalog.*\.json$/.test(path.basename(f)))cats.push([f,st.mtimeMs]);else if(/(^|[\\/])bal\.json$/.test(f))bals.push([f,st.mtimeMs]);else if(/\.json$/.test(f)&&!/\.ext\.json$/.test(f))files.push([f,st.mtimeMs])};
 ins.forEach(walk);files.sort((a,b)=>a[1]-b[1]);cats.sort((a,b)=>b[1]-a[1]);
 const lives=new Map();
 for(const [f] of files){let d;try{d=JSON.parse(fs.readFileSync(f,'utf8'))}catch(e){continue}if(!Array.isArray(d))continue;
