@@ -2895,3 +2895,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (05:59Z) ROOT STANDBY = session_01V1ZZGzMTVHzyPyJN9e5Qzp, depth 0 (title MAIN DỰ PHÒNG; standby for MAIN CHÍNH 118 session_01V1ZZH21QY1yjJ4RPZUHNC6)
 - (06:46Z) OD 10:10Z: footer = «~85% xong · còn 22 việc không tính hình nhân vật» (WORKLIST_OPEN.md). Progress reports to sếp: trig_01PgdFeWfykH9RMYq7tHv9CN (08:00 Asia/Ho_Chi_Minh) + trig_01HSzgKreJ6NsSTFvEfqn7BW (20:00) into 118 — PASS BOTH ON at rollover (re-point/re-create for the next main).
 - (06:48Z) MAIN ROOT STANDBY = session_01V1ZZGzMTVHzyPyJN9e5Qzp (registered; send it «TAKE OVER NOW» only if create_session is refused at rollover).
+- (06:50Z) OD 10:15Z: sếp lives in Atlanta → both progress reports re-set to CRON_TZ=America/New_York 08:00 / 20:00 (same trigger ids).
