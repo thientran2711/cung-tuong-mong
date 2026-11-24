@@ -39,8 +39,9 @@ video{width:100%;max-height:78vh;background:#000;border-radius:8px}.st{display:f
 .rec{font-weight:700;color:var(--red)}small{opacity:.8}a{color:var(--red)}
 </style></head><body><div class="w"><h1>Cảnh giới thiệu nhân vật lần đầu</h1>
 <p>Mỗi loại có hai cách (A1/A2, B1/B2…). Sếp xem từng video (có nút tốc độ 0.5×–2× khi bấm vào video; kèm bản chạy nhanh gấp đôi), rồi cho em biết chọn chữ nào mỗi loại. Hình dựng thật trên bản game hiện tại, bằng nhân vật và nền có sẵn của game. Mỗi video có hai máy: <b>Fold dọc</b> và <b>iPad ngang</b>.</p>
+<p><small><b>Lưu ý:</b> khung ngoài (thanh trên, cột bên phải, nút dưới) là bản game hiện tại, chỉ xem cảnh ở giữa.</small></p>
 <p><b>Em khuyến nghị:</b> A1 · B1 · C2 · D1 · E1 và E2.</p>
-<p><small>Hai chỗ cần sếp quyết: (1) trên iPad, cảnh giới thiệu chiếm cả hai trang (như em dựng) hay chỉ trang sân khấu bên trái; (2) cảnh giới thiệu chỉ chiếu một lần cho mỗi người (lần sau chỉ chạy bản rút gọn).</small></p>''']
+<p><small>Một chỗ cần sếp quyết: cảnh giới thiệu chỉ chiếu một lần cho mỗi người (lần sau chỉ chạy bản rút gọn).</small></p>''']
 B='intro-design/'
 for L,title,desc,opts,rec in T:
     out.append(f'<h2><span class="tag">{L}</span>{html.escape(title)}</h2><p>{html.escape(desc)}</p>')
@@ -48,6 +49,7 @@ for L,title,desc,opts,rec in T:
         out.append(f'<div class="opt"><h3><span class="tag">{oid}</span>{html.escape(on)}{" <span class=rec>· em khuyến nghị</span>" if oid==rec or (L in "EG") else ""}</h3><p>{html.escape(od)}</p><div class="row">')
         for dev,dn in (('fold','Fold dọc 755×1000'),('ipad','iPad ngang 1180×820')):
             out.append(f'<figure><figcaption><b>{dn}</b></figcaption><video controls preload="metadata" playsinline src="{B}{oid}-{dev}.mp4" poster="{B}{oid}-{dev}-s2.jpg"></video><small><a href="{B}{oid}-{dev}-x2.mp4">bản nhanh gấp đôi</a></small><div class="st">'+''.join(f'<img loading="lazy" src="{B}{oid}-{dev}-s{i}.jpg" alt="">' for i in (1,2,3,4))+'</div></figure>')
+        if oid=='G2':out.append('<p><small>Ghi chú cho họa sĩ: khoảnh khắc này cần một nền tranh riêng (hiện tạm dùng nền điện).</small></p>')
         out.append('</div></div>')
 out.append('</div></body></html>')
 open('page.html','w').write('\n'.join(out))

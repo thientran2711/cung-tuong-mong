@@ -24,7 +24,7 @@ function load(clipId,device){return new Promise(async res=>{dev=device;const g=d
  const st=document.getElementById('stage').getBoundingClientRect();
  const stg=document.getElementById('stage');W=st.width;H=st.height;
  const old=document.getElementById('intro-ov');if(old)old.remove();
- ov=document.createElement('div');ov.className='kscn kscn-clear';ov.id='intro-ov';ov.style.cssText=`position:absolute;left:0;top:0;width:${W}px;height:${H}px;overflow:hidden;z-index:99999;background:transparent;border-radius:0;font-family:${FONT};color:#3a2410`;stg.appendChild(ov);{let hs=document.getElementById('intro-hide');if(!hs){hs=document.createElement('style');hs.id='intro-hide';document.head.appendChild(hs)}hs.textContent=clipId==='E2'?'':'#stage>*:not(#intro-ov){visibility:hidden!important}'}
+ ov=document.createElement('div');ov.className='kscn kscn-clear';ov.id='intro-ov';ov.style.cssText=`position:absolute;left:0;top:0;width:${W}px;height:${H}px;overflow:hidden;z-index:99999;background:transparent;border-radius:0;font-family:${FONT};color:#3a2410`;stg.appendChild(ov);{let hs=document.getElementById('intro-hide');if(!hs){hs=document.createElement('style');hs.id='intro-hide';document.head.appendChild(hs)}hs.textContent=clipId==='E2'?'#stage>.stop,#stage>.kpname,#stage>.krail,#stage>.ksh,#stage>.kmemark,#stage>.kmfly{visibility:hidden!important}':'#stage>*:not(#intro-ov){visibility:hidden!important}'}
  tracks=[];texts=[];cues=[];
  const css=el('style','',ov,`#intro-ov i.cur{display:inline-block;width:2px;height:1em;background:#8f5f0c;margin-left:2px;vertical-align:-2px;animation:none}#intro-ov *{box-sizing:border-box}`);
  const need=['end-bg-throne.webp','ngu-hoa-vien-xuan-sang.webp','fig-emperor-a26-1.webp','fig-thaihau-h1-a51.webp','fig-consort-c03-t8-a36.webp','fig-eunuch-u01-a51.webp','fig-player-look1-t1-a18.webp','fig-consort-c01-t1-a18.webp','fig-consort-c02-t1-a18.webp','fig-consort-c04-t1-a18.webp','fig-consort-c05-t1-a18.webp','fig-consort-c06-t1-a18.webp','fig-consort-c07-t1-a18.webp','fig-consort-c02-t3-a26.webp','fig-consort-c03-t1-a18.webp','fig-consort-c08-t1-a18.webp','fig-consort-c09-t1-a18.webp','fig-consort-c10-t1-a18.webp','fig-consort-c11-t1-a18.webp','fig-consort-c10-t1-a51.webp','fig-mama-k01-a51.webp','unknown-fig-f.webp','fig-eunuch-ndp-tray.webp','item-tuithom.webp','item-tp-bhoa-b1.webp'];
@@ -50,7 +50,7 @@ const seal=(txt,css)=>el('div',`position:absolute;z-index:56;width:44px;height:4
 function skipChip(){return chipEl('Chạm: xem tiếp · giữ: bỏ qua','right:8px;top:8px;z-index:70')}
 const fade=(a,b,c,d)=>[[a,0],[b,1,'out'],[c,1],[d,0,'io']];
 /* geometry by device */
-const G=()=>({sp:.3,gs:.2,royY:.47,royH:.34,girlH:.46,girlFeet:.77,faceH:1.5});
+const G=()=>({sp:.3,gs:.2,royY:.47,royH:.34,girlH:.46,girlFeet:(dev==='ipad'?.69:.77),faceH:1.5});
 /* ===== A: ROYAL REVEAL ===== */
 function royalScene(){const g=G(),root=el('div','position:absolute;inset:0;overflow:hidden;z-index:0;isolation:isolate');
  const cam=el('div','position:absolute;inset:0;transform-origin:0 0;z-index:1',root);
@@ -82,7 +82,7 @@ function buildA(mode){const S=royalScene();const g=G();const ids=['e','t','h'];c
   }else{ /* A2: the camera itself pushes in on the seat, then pulls back; figure stays on its seat; plaque under feet */
    const ft=f._cx,tp=topY;const camS=g.faceH*H/f._h*0.9;
    T(S.cam,{s:[[cue-100,1],[cue+800,camS,'out'],[cue+800+openAt,camS,'lin'],[ld,1,'io']],x:[[cue-100,0],[cue+800,W/2-ft*camS,'out'],[cue+800+openAt,W/2-ft*camS,'lin'],[ld,0,'io']],y:[[cue-100,0],[cue+800,H*.04-tp*camS,'out'],[cue+800+openAt,H*.04-tp*camS,'lin'],[ld,0,'io']]},'0 0');
-   const pl=plate(PL[id][0]+'  ·  '+PL[id][1],'',{css:`left:${W*.5-170}px;bottom:${H*.2}px;width:340px`,fs:18});T(pl,{o:[[cue+500,0],[cue+1100,1,'out'],[cue+800+openAt,1],[ld-100,0]],y:[[cue+500,10],[cue+1100,0,'out']]},'50% 0%')
+   const pl=plate(PL[id][0]+'  ·  '+PL[id][1],'',{css:`left:${W*.5-170}px;bottom:${H*.25}px;width:340px`,fs:18});T(pl,{o:[[cue+500,0],[cue+1100,1,'out'],[cue+800+openAt,1],[ld-100,0]],y:[[cue+500,10],[cue+1100,0,'out']]},'50% 0%')
   }
   /* seat copy: A1 hidden until clone lands; A2 emerges with a soft rise at cue */
   if(mode==='A1')T(f,{o:[[0,0],[ld,0],[ld+60,1,'lin']]});
@@ -104,7 +104,7 @@ function buildA(mode){const S=royalScene();const g=G();const ids=['e','t','h'];c
 /* ===== B: SELF-INTRODUCTION in the yard ===== */
 function buildB(mode){const g=G();const root=el('div','position:absolute;inset:0;overflow:hidden;z-index:0;isolation:isolate');const bgl=bg('ngu-hoa-vien-xuan-sang.webp',root,50,50);
  const nm=['unknown-fig-f.webp','fig-consort-c04-t1-a18.webp','unknown-fig-f.webp','unknown-fig-f.webp'];const cx=[-1.5,-.5,.5,1.5].map(k=>.5+k*.2);
- const ph=.66,feet=.77;
+ const ph=dev==='ipad'?.6:.66,feet=(dev==='ipad'?.69:.77);
  const F=nm.map((n,i)=>fig(n,cx[i],feet,ph,root,10+i));const sp=F[1];const sh=shade(root,'#1c0c0a',20);
  const sk=skipChip();
  const line='Tiểu nữ họ Khổng, tên Lan, người Giang Nam. Nhà làm quan nhỏ, nay may mắn vào cung ra mắt các tỷ muội.';
@@ -136,23 +136,23 @@ function buildB(mode){const g=G();const root=el('div','position:absolute;inset:0
  T(sk,{o:[[t0,0],[t0+500,1,'out']]});vignette();return end}
 /* ===== C: NARRATOR (Tổng quản) focus ===== */
 function buildC(mode){const root=el('div','position:absolute;inset:0;overflow:hidden;z-index:0;isolation:isolate');const bgl=bg('end-bg-throne.webp',root,50,40);const g=G();
- const sh=shade(root,'#1c0c0a',20);
+ const cf=dev==='ipad'?.68:.76;const sh=shade(root,'#1c0c0a',20);
  const names=['unknown-fig-f.webp','unknown-fig-f.webp','unknown-fig-f.webp','fig-player-look1-t1-a18.webp'];const gx=[-1.5,-.5,.5,1.5].map(k=>.5+k*g.gs);
  const girls=names.map((n,i)=>fig(n,gx[i],g.girlFeet,g.girlH,root,10+i));
  const eu=fig('fig-eunuch-u01-a51.webp',mode==='C1'?.5:.3,.5,.34,root,25);
  const line='Chư vị tú nữ nghe cho rõ: vào điện phải cúi đầu, chưa được hỏi thì không được ngẩng mặt, không được nói.';
- const t0=600;const box=textBox('Tổng quản thái giám',mode==='C1'?null:'right','LỜI');
+ const t0=600;const box=textBox('Tổng quản thái giám',null,'LỜI');
  const bigH=.72,bigS=bigH/.34;const tp=typer(box._tx,t0+1600,line,34);texts.push(tp);const end=tp.end+1800;
  /* he steps forward from his place and grows; the hall blurs + dims; the box may sit anywhere */
  const cxTo=mode==='C1'?W*.5:W*(dev==='ipad'?.3:.3);
  const upTo=(.92-bigH*0+0)*H;
- T(eu,{s:[[t0,1],[t0+1500,bigS*.0+bigS*.0+bigS,'out'],[end-900,bigS,'lin'],[end,1,'io']],y:[[t0,0],[t0+1500,(.76-.5)*H,'out'],[end-900,(.76-.5)*H],[end,0,'io']],x:[[t0,0],[t0+1500,mode==='C1'?0:0,'out']]},'50% 100%');
+ T(eu,{s:[[t0,1],[t0+1500,bigS*.0+bigS*.0+bigS,'out'],[end-900,bigS,'lin'],[end,1,'io']],y:[[t0,0],[t0+1500,(cf-.5)*H,'out'],[end-900,(cf-.5)*H],[end,0,'io']],x:[[t0,0],[t0+1500,mode==='C1'?0:0,'out']]},'50% 100%');
  T(bgl,{blur:[[t0,0],[t0+1200,10,'io'],[end-900,10],[end,0,'io']]},'50% 50%');
  T(sh,{o:[[t0,0],[t0+1200,.6,'io'],[end-900,.6],[end,0,'io']]});
  girls.forEach(f=>T(f,{blur:[[t0,0],[t0+1200,6,'io'],[end-900,6],[end,0,'io']],br:[[t0,1],[t0+1200,.45,'io'],[end-900,.45],[end,1,'io']]}));
- const pl=plate('Lý Tổng quản','Đại tổng quản Nội đình',{css:`left:${mode==='C1'?W/2-110:W*(dev==='ipad'?.3:.3)-110}px;top:${H*.76+H*.012}px;width:220px`,fs:18});T(pl,{o:[[t0+1200,0],[t0+1800,1,'out'],[end-1100,1],[end-500,0]]});
+ const pl=plate('Lý Tổng quản','Đại tổng quản Nội đình',{css:`left:${mode==='C1'?W/2-110:W*(dev==='ipad'?.3:.3)-110}px;top:${H*cf+H*.012}px;width:220px`,fs:18});T(pl,{o:[[t0+1200,0],[t0+1800,1,'out'],[end-1100,1],[end-500,0]]});
  /* box placement: C1 = under him, centred, bottom; C2 = right of him (event-frame family) */
- if(mode==='C2'){box.style.width=(dev==='ipad'?W*.44:W*.5)+'px';box.style.left='auto';box.style.right='14px';box.style.bottom='auto';box.style.top=(H*.3)+'px'}
+ 
  T(box,{o:[[t0+1000,0],[t0+1500,1,'out'],[end-1000,1],[end-400,0]]});
  const sk=skipChip();T(sk,{o:[[t0+1000,0],[t0+1500,1,'out']]});
  /* he enters with a small side-step so the scale-up reads as coming forward */
@@ -160,7 +160,7 @@ function buildC(mode){const root=el('div','position:absolute;inset:0;overflow:hi
 /* ===== D: ROLL-CALL synced to the typewriter ===== */
 function buildD(mode){const g=G();const root=el('div','position:absolute;inset:0;overflow:hidden;z-index:0;isolation:isolate');const bgl=bg('end-bg-throne.webp',root,50,40);const sh=shade(root,'#12070a',20);
  const names=['fig-consort-c01-t1-a18.webp','fig-consort-c04-t1-a18.webp','fig-consort-c05-t1-a18.webp','fig-player-look1-t1-a18.webp'];const gx=[-1.5,-.5,.5,1.5].map(k=>.5+k*.205);
- const greys=names.map((n,i)=>fig('unknown-fig-f.webp',gx[i],.77,.5,root,9+i));const girls=names.map((n,i)=>fig(n,gx[i],.77,.5,root,10+i));
+ const greys=names.map((n,i)=>fig('unknown-fig-f.webp',gx[i],(dev==='ipad'?.69:.77),.5,root,9+i));const girls=names.map((n,i)=>fig(n,gx[i],(dev==='ipad'?.69:.77),.5,root,10+i));
  const eu=fig('fig-eunuch-u01-a51.webp',dev==='ipad'?.1:.11,.42,.3,root,12);
  const LINES=[['Tú nữ thứ nhất — Tần thị Nhã, con gái quan Lễ bộ, quê Giang Nam.','Tần Nhã','Giang Nam'],['Tú nữ thứ hai — Khổng thị Lan, con gái quan Tri huyện Giang Châu.','Khổng Lan','Giang Châu'],['Tú nữ thứ ba — Lục thị Thanh, con gái nhà buôn lụa đất Tô.','Lục Thanh','Tô Châu'],['Tú nữ thứ tư — Hạ thị Linh, con gái nhà nông khá giả đất Thục.','Hạ Linh','Đất Thục']];
  const box=textBox('Tổng quản thái giám',null,'XƯỚNG TÊN');box._tx.style.minHeight='46px';
@@ -176,11 +176,11 @@ function buildD(mode){const g=G();const root=el('div','position:absolute;inset:0
  tps.forEach((tp,i)=>{tp.win=[tp.t0,i<tps.length-1?tps[i+1].t0:1e9]});
  girls.forEach((f,i)=>{const c=lit[i];
   T(f,{o:[[c-100,0],[c+450,1,'out']],s:[[c-100,1],[c+350,1.045,'back'],[c+900,1.0,'io']]});T(greys[i],{o:[[c-100,1],[c+450,0,'out']]});
-  const pl=plate(LINES[i][1],LINES[i][2],{css:`left:${gx[i]*W-75}px;top:${.77*H+5}px;width:150px;white-space:nowrap;z-index:58`,fs:dev==='ipad'?18:16,sfs:11});
-  if(mode==='D2'){const sl=el('div',`position:absolute;left:${gx[i]*W+52}px;top:${.77*H-8}px;z-index:59;width:30px;height:30px;border-radius:6px;background:#b3261a;color:#ffe9b8;font:800 14px/30px ${SERIF};text-align:center;border:1.5px solid #e3b04b;box-shadow:0 2px 6px rgba(0,0,0,.5);transform:rotate(8deg)`,root,['壹','貳','參','肆'][i]);T(sl,{o:[[c+150,0],[c+700,1,'out']]},'50% 50%');}
+  const pl=plate(LINES[i][1],LINES[i][2],{css:`left:${gx[i]*W-75}px;top:${(dev==='ipad'?.69:.77)*H+5}px;width:150px;white-space:nowrap;z-index:58`,fs:dev==='ipad'?18:16,sfs:11});
+  if(mode==='D2'){const sl=el('div',`position:absolute;left:${gx[i]*W+52}px;top:${(dev==='ipad'?.69:.77)*H-8}px;z-index:59;width:30px;height:30px;border-radius:6px;background:#b3261a;color:#ffe9b8;font:800 14px/30px ${SERIF};text-align:center;border:1.5px solid #e3b04b;box-shadow:0 2px 6px rgba(0,0,0,.5);transform:rotate(8deg)`,root,['壹','貳','參','肆'][i]);T(sl,{o:[[c+150,0],[c+700,1,'out']]},'50% 50%');}
   T(pl,{o:[[c+150,0],[c+700,1,'out']],y:[[c+150,-6],[c+700,0,'out']]},'50% 0%');
   if(mode==='D2'){const cone=el('div',`position:absolute;left:${gx[i]*W-W*.12}px;top:0;width:${W*.24}px;height:${H}px;z-index:9;pointer-events:none;background:linear-gradient(rgba(255,226,150,.0),rgba(255,226,150,.34) 55%,rgba(255,226,150,.0));clip-path:polygon(40% 0,60% 0,100% 100%,0 100%)`);T(cone,{o:[[c-100,0],[c+500,1,'out'],[c+2300,.0,'io']]},'50% 0%')}
-  else{const ring=el('div',`position:absolute;left:${gx[i]*W-W*.1}px;top:${.77*H-8}px;width:${W*.2}px;height:16px;border-radius:50%;background:radial-gradient(ellipse,rgba(255,225,150,.9),rgba(255,225,150,0) 70%);z-index:9`);T(ring,{o:[[c-100,0],[c+450,1,'out']]},'50% 50%')}});
+  else{const ring=el('div',`position:absolute;left:${gx[i]*W-W*.1}px;top:${(dev==='ipad'?.69:.77)*H-8}px;width:${W*.2}px;height:16px;border-radius:50%;background:radial-gradient(ellipse,rgba(255,225,150,.9),rgba(255,225,150,0) 70%);z-index:9`);T(ring,{o:[[c-100,0],[c+450,1,'out']]},'50% 50%')}});
  const end=t+800;
  T(box,{o:[[500,0],[900,1,'out'],[end-900,1],[end-300,0]]});
  return end}
@@ -188,23 +188,20 @@ function buildD(mode){const g=G();const root=el('div','position:absolute;inset:0
 function buildE(mode){const root=el('div','position:absolute;inset:0;overflow:hidden;z-index:0;isolation:isolate');const g=G();
  if(mode==='E1'){ /* a new NPC (visiting consort) is met for the first time: lower-third + walk-in; the garden stays visible */
   const bgl=bg('ngu-hoa-vien-xuan-sang.webp',root,50,50);const sh=shade(root,'#1c0c0a',20);
-  const me=fig('fig-player-look1-t1-a18.webp',.78,.78,dev==='ipad'?.56:.58,root,12);
-  const v=fig('fig-consort-c02-t3-a26.webp',dev==='ipad'?.38:.34,.78,dev==='ipad'?.6:.66,root,14);
+  const me=fig('fig-player-look1-t1-a18.webp',.78,(dev==='ipad'?.69:.77),dev==='ipad'?.56:.58,root,12);
+  const v=fig('fig-consort-c02-t3-a26.webp',dev==='ipad'?.38:.34,(dev==='ipad'?.69:.77),dev==='ipad'?.6:.66,root,14);
   T(v,{x:[[300,-W*.5],[2300,0,'out']],o:[[300,0],[1000,1,'out']],br:[[300,1]]});T(me,{o:[[0,1]],br:[[1500,1],[2600,.62,'io'],[6300,.62],[7000,1,'io']]});
   T(bgl,{blur:[[1500,0],[2600,4,'io'],[6300,4],[7000,0,'io']]},'50% 50%');T(sh,{o:[[1500,0],[2600,.3,'io'],[6300,.3],[7000,0,'io']]});
-  /* lower-third caption bar */
-  const lt=el('div',`position:absolute;left:0;right:0;top:${H*.04}px;z-index:60;height:64px`);
-  const bar=el('div',`position:absolute;left:0;top:0;height:64px;width:${W*.82}px;background:linear-gradient(90deg,rgba(143,43,29,.95),rgba(143,43,29,.88) 70%,rgba(143,43,29,0));border-top:1.5px solid #e3b04b;border-bottom:1.5px solid #e3b04b`,lt);
-  el('div',`position:absolute;left:18px;top:6px;font:700 11px ${FONT};color:#ffe9b8;letter-spacing:.14em`,lt,'LẦN ĐẦU GẶP');el('div',`position:absolute;left:18px;top:20px;font:800 24px ${SERIF};color:#fff6e0;letter-spacing:.05em;text-shadow:0 2px 6px rgba(0,0,0,.5)`,lt,'Mục Tài nhân');el('div',`position:absolute;left:18px;top:46px;font:600 11.5px ${FONT};color:#ffe3b0`,lt,'Ngọc Thanh các · hậu cung');
-  T(lt,{x:[[1600,-W],[2400,0,'out'],[6000,0],[6800,-W*.6,'in']],o:[[1600,0],[2000,1,'lin'],[6500,1],[6900,0]]},'0 0');
+  /* kit stage tag (.tok .tag, §28 / §93.5) under the newcomer's feet: origin line + name */
+  const lt=plate('Mục Tài nhân','Lần đầu gặp · Ngọc Thanh các',{css:`left:${(dev==='ipad'?.38:.34)*W-110}px;top:${(dev==='ipad'?.69:.77)*H+5}px;width:220px;white-space:nowrap;z-index:58`,fs:19,sfs:11});T(lt,{o:[[1800,0],[2500,1,'out'],[6300,1],[6900,0]],y:[[1800,-8],[2500,0,'out']]},'50% 0%');
   const box=textBox('Mục Tài nhân',dev==='ipad'?'left':null,'LỜI');const tp=typer(box._tx,2800,'Muội muội vừa vào cung phải không? Ta ở Ngọc Thanh các, bên kia hồ sen — khi rảnh cứ sang chơi.',34);texts.push(tp);
   T(box,{o:[[2600,0],[3000,1,'out'],[tp.end+1300,1],[tp.end+1800,0]]});vignette();return tp.end+2400}
  /* E2: the Emperor's first visit to her palace — the REAL stage (her room) behind; door light, silhouette, colour fills in, plaque */
  ov.style.background='transparent';const sh=shade(root,'#1c0c0a',2);T(sh,{o:[[0,0],[900,.58,'io'],[8000,.58],[9000,0,'io']]});
  const door=el('div',`position:absolute;left:${W*.5-W*.17}px;bottom:0;width:${W*.34}px;height:${H*.8}px;z-index:4;background:linear-gradient(rgba(255,222,150,.0),rgba(255,222,150,.65) 40%,rgba(255,230,170,.95));clip-path:polygon(30% 0,70% 0,100% 100%,0 100%);mix-blend-mode:screen`);T(door,{o:[[300,0],[1400,1,'out'],[4200,1],[5200,.0,'io']]},'50% 100%');
- const em=fig('fig-emperor-a26-1.webp',.5,.78,.72,root,12);
+ const em=fig('fig-emperor-a26-1.webp',.5,(dev==='ipad'?.69:.77),.62,root,12);
  T(em,{sil:[[0,1],[2200,1],[3600,0,'io']],o:[[600,0],[1500,1,'out']],s:[[600,.55],[3600,1.0,'out']],y:[[600,H*.03],[3600,0,'out']]},'50% 100%');
- const pl=plate('Hoàng thượng giá lâm','Lần đầu ngự giá Trường Xuân cung',{css:`left:${W*(dev==='ipad'?.62:.58)}px;top:${H*.14}px;width:${dev==='ipad'?300:230}px`,fs:20});T(pl,{o:[[3800,0],[4500,1,'out'],[7600,1],[8200,0]],y:[[3800,-10],[4500,0,'out']]},'50% 0%');
+ const pl=plate('Hoàng thượng giá lâm','Lần đầu ngự giá Trường Xuân cung',{css:`left:${W/2-130}px;top:${(dev==='ipad'?.69:.77)*H+4}px;width:260px;white-space:nowrap;z-index:58`,fs:17,sfs:11});T(pl,{o:[[3800,0],[4500,1,'out'],[7600,1],[8200,0]],y:[[3800,-10],[4500,0,'out']]},'50% 0%');
  const box=textBox('Ta nghĩ thầm',null,'TÂM NIỆM');const tp=typer(box._tx,4300,'Người ấy… là Hoàng thượng. Ta phải giữ nét mặt thật bình thản.',34);texts.push(tp);T(box,{o:[[4200,0],[4600,1,'out'],[8300,1],[8900,0]]});
  return 9400}
 
@@ -222,9 +219,9 @@ function buildF(){const root=el('div','position:absolute;inset:0;overflow:hidden
  const slotOf=[5,9,2,0,10,3,7,11,1,6,4,8];
  const rows=[];for(let r=0;r<3;r++)for(let k=0;k<4;k++)rows.push([xs[k],rowFeet[r],rowH[r]]);
  const rowFigs=[];for(let i=0;i<12;i++){const [x,f,h]=rows[slotOf[i]];rowFigs[i]=fig('unknown-fig-f.webp',x,f,h,bgbox,10+Math.round(f*10))}
- const mm=fig('fig-mama-k01-a51.webp',.12,.8,.5,root,26);const mmt=plate('Tống ma ma','Giáo tập ma ma',{col:'#ff4a1c',css:`left:${.12*W-60}px;top:${.8*H+3}px;width:120px`});
+ const FF=dev==='ipad'?.69:.76;const mm=fig('fig-mama-k01-a51.webp',.1,FF,.5,root,26);const mmt=plate('Tống ma ma','Giáo tập ma ma',{col:'#ff4a1c',css:`left:${.1*W-60}px;top:${FF*H+3}px;width:120px`});
  const box=textBox('Giáo tập ma ma',null,'XƯỚNG TÊN');const sk=skipChip();
- const grpX=[0,.55*W,.34*W],grpS=[.5,.5,.4],grpFeet=[.8,.8,.5],grpName=['Tây sở','Đông sở','Bắc sở'];
+ const grpX=[.08*W,.55*W,.34*W],grpS=[.5,.5,.4],grpFeet=[FF,FF,.5],grpName=['Tây sở','Đông sở','Bắc sở'];
  const CX=[.3,.47,.64,.81];
  const grp=[0,1,2].map(g=>el('div','position:absolute;inset:0;z-index:30',root));
  let t=1900;
@@ -243,7 +240,7 @@ function buildF(){const root=el('div','position:absolute;inset:0;overflow:hidden
    const x1=W/2-CX[k]*W,y1=H*.03-topY;
    T(slot,{x:[[cue,x1],[cue+500,x1,'lin'],[cue+520,x1],[cue+500+700,0,'io']],y:[[cue,y1],[cue+500+700,0,'io']],s:[[cue,bigS],[cue+500,bigS,'lin'],[cue+1200,1,'io']],o:[[cue,0],[cue+300,1,'out']],clipB:[[cue,.48],[cue+500,.48,'lin'],[cue+1200,0,'io']]},'50% 0%');
    /* fix transform-origin & anchor: slot sits at its slot place, the close-up transform moves it to the centre */
-   const pl=plate(NAMES[idx],'',{css:`left:${W/2-120}px;top:${H*.03+H*.0}px;width:240px;white-space:nowrap;z-index:58`,fs:dev==='ipad'?24:22});T(pl,{o:[[cue+200,0],[cue+600,1,'out'],[cue+1100,1],[cue+1300,0]],y:[[cue+200,-8],[cue+600,0,'out']]},'50% 0%');pl.style.top=(H*.5)+'px';
+   const pl=plate(NAMES[idx],'',{css:`left:${W/2-120}px;top:${H*.03+H*.0}px;width:240px;white-space:nowrap;z-index:58`,fs:dev==='ipad'?24:22});T(pl,{o:[[cue+200,0],[cue+600,1,'out'],[cue+1100,1],[cue+1300,0]],y:[[cue+200,-8],[cue+600,0,'out']]},'50% 0%');pl.style.top=(H-176)+'px';
    /* her place in the rows empties */
    T(rf,{o:[[cue-100,1],[cue+250,0]],br:[[0,1],[900,.5,'io']],blur:[[0,0],[900,2,'io']]});
    /* during the close-up the others stay dim; the slot figure is lit */
@@ -284,12 +281,11 @@ function buildG(mode){const root=el('div','position:absolute;inset:0;overflow:hi
   it.style.left=(ex-85)+'px';it.style.top=(ey-85)+'px';T(it,{x:[[cue,0],[cue+1500,.5*W-ex+.0,'io']],y:[[cue,0],[cue+1500,-.14*H,'io']],s:[[cue,.4],[cue+1500,1.15,'out']],o:[[cue,0],[cue+300,1,'out']]},'50% 50%');
   const glow=el('div',`position:absolute;left:${W*.5-W*.3}px;top:${H*.2}px;width:${W*.6}px;height:${W*.6}px;border-radius:50%;background:radial-gradient(circle,rgba(255,226,150,.7),rgba(255,226,150,0) 65%);z-index:11;mix-blend-mode:screen`,root);T(glow,{o:[[cue+1200,0],[cue+2200,1,'out'],[cue+4200,.6,'io']],s:[[cue+1200,.6],[cue+2400,1.1,'out']]},'50% 50%');
   const pl=plate('Ở lại cung · ban hương nang','Tân thị Như Ý',{css:`left:${W/2-200}px;top:${H*.05}px;width:400px;white-space:nowrap;z-index:58`,fs:19});T(pl,{o:[[cue+1500,0],[cue+2200,1,'out']],y:[[cue+1500,-10],[cue+2200,0,'out']]},'50% 0%');
-  const note=el('div',`position:absolute;right:10px;top:10px;z-index:70;font:600 11px ${FONT};color:#fff3d6;background:rgba(40,12,8,.7);border-radius:8px;padding:3px 8px`,null,'nền riêng của khoảnh khắc: cần tranh vẽ (tạm dùng nền điện)');
   vignette();return tp.end+3800}
  /* G1: yard, four girls, tray eunuch walks along the row */
  const bgl=bg('ngu-hoa-vien-xuan-sang.webp',root,50,50);const sh=shade(root,'#1c0c0a',20);
  const names=['fig-consort-c01-t1-a18.webp','fig-consort-c04-t1-a18.webp','fig-consort-c02-t1-a18.webp','fig-consort-c05-t1-a18.webp'];const nm=['Tần Nhã','Khổng Lan','Lục Thanh','Hạ Linh'];const keep=[1,0,1,0];
- const cx=[-1.5,-.5,.5,1.5].map(k=>.5+k*(dev==='ipad'?.16:.2));const ph=.66,feet=.77;
+ const cx=[-1.5,-.5,.5,1.5].map(k=>.5+k*(dev==='ipad'?.16:.2));const ph=dev==='ipad'?.58:.66,feet=(dev==='ipad'?.65:.77);
  const F=names.map((n,i)=>fig(n,cx[i],feet,ph,root,10+i));
  const eu=fig('fig-eunuch-ndp-tray.webp',.06,.78,.42,root,30);
  const box=textBox('Tổng quản thái giám',null,'KẾT QUẢ');const sk=skipChip();
@@ -307,9 +303,9 @@ function buildG(mode){const root=el('div','position:absolute;inset:0;overflow:hi
   /* spotlight: others dim while this girl is served */
   F.forEach((g,j)=>{});
   if(keep[i]){const tx=(kc===0?.9:.78)*W-cx[i]*W;kc++;f.style.zIndex=40+i;T(f,{x:[[cue+1500,0],[cue+2500,tx,'io']],s:[[cue-200,1],[cue+500,1.22,'out'],[cue+1500,1.22],[cue+2500,.85,'io']],br:[[0,1]]},'50% 100%');
-   const pl=plate('Ban hương nang','Lưu bài tử',{css:`left:${cx[i]*W-80}px;top:${feet*H-.075*H}px;width:160px;white-space:nowrap;z-index:58`,fs:17,sfs:11});T(pl,{o:[[cue+600,0],[cue+1100,1,'out'],[cue+2400,1],[cue+2900,0]],x:[[cue+1500,0],[cue+2500,tx,'io']]},'50% 0%')}
+   const pl=plate('Ban hương nang','Lưu bài tử',{css:`left:${cx[i]*W-80}px;top:${feet*H+6}px;width:160px;white-space:nowrap;z-index:58`,fs:17,sfs:11});T(pl,{o:[[cue+600,0],[cue+1100,1,'out'],[cue+2400,1],[cue+2900,0]],x:[[cue+1500,0],[cue+2500,tx,'io']]},'50% 0%')}
   else{f.style.zIndex=40+i;T(f,{s:[[cue-200,1],[cue+500,1.22,'out'],[cue+1900,1.22],[cue+3300,.8,'in']],y:[[cue+1900,0],[cue+3300,-H*.04,'in']],x:[[cue+1900,0],[cue+3300,-W*.7,'in']],o:[[cue+2500,1],[cue+3300,0]]},'50% 100%');
-   const pl=plate('Ban hoa','Hồi gia',{css:`left:${cx[i]*W-80}px;top:${feet*H-.075*H}px;width:160px;white-space:nowrap;z-index:58`,fs:17,sfs:11});T(pl,{o:[[cue+600,0],[cue+1100,1,'out'],[cue+2300,1],[cue+2800,0]]},'50% 0%')}
+   const pl=plate('Ban hoa','Hồi gia',{css:`left:${cx[i]*W-80}px;top:${feet*H+6}px;width:160px;white-space:nowrap;z-index:58`,fs:17,sfs:11});T(pl,{o:[[cue+600,0],[cue+1100,1,'out'],[cue+2300,1],[cue+2800,0]]},'50% 0%')}
   t=cue+3500;
   sdim.push([cue-300,0],[cue+300,.4,'io'],[t-900,.4]);bd.push([cue-300,0],[cue+300,3,'io'],[t-900,3]);
  });
