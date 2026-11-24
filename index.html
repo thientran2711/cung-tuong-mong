@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"0273f818+","t":"2026-11-24T00:03Z","c":"review fix-hadoc-loop r1: hadoc-loop test makes the target known (j61 dropped unknown targets silently) and requires the khắc spent","b":"bc3dbc69b5e9","h":[{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"}]};
+window.CTM_BI={"s":"00bd261c+","t":"2026-11-24T02:21Z","c":"review fix-hadoc-loop r1: hadoc-loop test makes the target known (j61 dropped unknown targets silently) and requires the khắc spent","b":"9ae5abd54a1b","h":[{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -81297,7 +81297,7 @@ let WT=null;
 let FLIPQ=new WeakSet();
 function wake(){step();if(!WT&&!window.__bot)WT=setInterval(step,250)}
 function sleep(){if(WT){clearInterval(WT);WT=null}}
-function step(){try{if(!S||S.dead||!nfOn()){sleep();return}const x=X();if(guest()&&S.nfW===day()&&S.nfFin!==day())finLate();if(!x||x.st==="done"){if(!(guest()&&S.nfW===day()&&S.nfFin!==day()))sleep();return}
+function step(){try{if(!S||S.dead||!nfOn()){sleep();return}heal();const x=X();if(guest()&&S.nfW===day()&&S.nfFin!==day())finLate();if(!x||x.st==="done"){if(!(guest()&&S.nfW===day()&&S.nfFin!==day()))sleep();return}
  if(x.st==="wait"){if(Q.some(m=>m&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="nfch"&&(m.pid==="nfsum"||FLIPQ.has(m))))return;
   /* co-op host: the draw is held for the friend's Kỳ nguyệt answer (jcoopworld CW.cyHold; cyFree turns the card when it comes): the choice
      waits for that card, at most BAL.coop.cyWaitMs (she never answers: the night goes on without a card, as the live night did) */
@@ -81410,8 +81410,17 @@ const rd0=render;render=function(){try{nfActs()}catch(e){}const r=rd0.apply(this
 function hold(){S.buoi=B4();RR=day();try{if(used>=4)used=3}catch(e){}/* no j6 auto "Sang ngày mới" while the choice / a dialog is open */try{render()}catch(e){}showSoon()}
 function herNight(){S.buoi=B4();if(CO())RR=day();try{if(used>=4)used=3}catch(e){}/* no auto "Sang ngày mới" (j6 used>=4) between her night dialogs; jnight spends the day after nightFx */try{if(S.ntk&&S.ntk.w===day()&&S.ntk.who==="me")S.ntk=null}catch(e){}
  IN=1;try{nightScene()}finally{IN=0}try{render()}catch(e){}showSoon()}
+/* SOFT-LOCK GUARD (review/fix-evening-softlock, ROBOT-10 bug A): S.nfX is SAVED but what releases it is not — the choice card (Q pid "nfch",
+   no PEND builder: deserQ drops it on reload) and her steal game (jsmg BUSY, the j82 #kg82 layer). After a reload (or a game layer closed without
+   its onDone) S.nfX stayed {st:"open",dlg:1} or {st:"mg"} for ever: every «Sang ngày mới» went to hold() and the day never turned (Q 0, no modal).
+   heal(): a choice whose card is gone is shown again (dlg cleared → step → showChoice, her 10 s clock anew); a steal game that is no longer on
+   screen counts as over without a rung (st back to "open"; her pick x.me is kept, the one resolve runs). Runs at each press and each step tick. */
+function heal(){try{const x=X();if(!x)return;
+ if(x.st==="mg"&&!(typeof window.stealMgBusy==="function"&&window.stealMgBusy()))x.st="open";
+ if(x.st==="open"&&x.me===undefined&&x.dlg&&!Q.some(m=>m&&m.pid==="nfch"))x.dlg=0}catch(e){console.error(e)}}
+window.nfHeal=heal;
 const et0=endTurn;endTurn=function(){if(!S||S.dead||Q.length||S.mg||!nfOn())return et0.apply(this,arguments);
- const d=day();
+ const d=day();heal();
  if(S.nfC!==d){S.nfC=d;
   if(!guest()){S.nfX={d,st:S.nfN===d?"done":"wait",at:Date.now()};FLIPQ=new WeakSet();if(S.nfN!==d&&!flippedToday()){const q0=new Set(Q);realFlip();FLIPQ=new WeakSet(Q.filter(m=>m&&typeof m==="object"&&!q0.has(m)))}}   /* her night already played today (his visit, a summons): no flip, no choice */
   else ask()}
@@ -91143,6 +91152,9 @@ function herGame(mode,o,cb){const B=M();const kind=B.art&&B.art[mode];const nm=m
  /* jaudit's playArt hook marks a paid game (window.__aaL); this game is free: keep its mark as it was */
  const L=window.__aaL;try{pa()}catch(e){console.error(e);BUSY=0;try{cb(0,null,true)}catch(e2){}}finally{window.__aaL=L}}
 window.stealMgPlay=herGame;
+/* is her steal game really running? (jnf heal, review/fix-evening-softlock): BUSY with no game layer on screen (#kg82 closed without its onDone,
+   or a reload: BUSY is not saved) is no game — BUSY drops so the next try can play */
+window.stealMgBusy=function(){if(BUSY&&typeof window.__smgFake!=="function"&&!document.getElementById("kg82"))BUSY=0;return !!(BUSY||PEND)/* PEND: her pick is being recorded inside chooseM, the game opens right after */};
 
 /* her Hành sự deck cards (j2 deal; j75 marks them __steal where its buổi check matches): the game first, then the card as before with that try's odds */
 const isStealCard=a=>!!(a&&a.o!=null&&(a.__steal||((a.n==="Tranh sủng"||a.n==="Chặn ngự giá")&&a.b===(typeof B4L==="number"?B4L:2))));
@@ -95560,7 +95572,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="bc3dbc69b5e9";window.CTM_BUILD=BUILD;
+const BUILD="9ae5abd54a1b";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
