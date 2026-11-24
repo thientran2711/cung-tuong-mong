@@ -1520,3 +1520,4 @@ robot-coop-fix-2-r2 BIG review | review/robot-coop-fix-2-r2 | session_01N1tNP35V
 ROBOT-COOP FIXER #5 | review/robot-coop-fix-3, robot10-onecore, … | session_01N1tNP4vn55dxGBWKu7brhf | RUNNING | 2026-11-24T16:08Z (FOREMAN B)
 robot10-onecore SMALL review | review/robot10-onecore | session_01N1tNP58gRW5Kr3V1fXZBZN | RUNNING | 2026-11-24T16:52Z (FOREMAN B)
 REVIEW d-followups-1 (opus BIG; briefs/D-followups-1-review.md) | review/d-followups-1-rv | session_01D3E3NX5CughfPF92X2Mv3Z | RUNNING | 24/11 17:00Z (Foreman D depth 5)
+| ROBOT FIXER cnv #3 (opus; successor of #2; R7 render-on drift bisect on r1+LIVE, R5 AGD.oc, R6 S.lost.at, R1, newlife-leak FAIL 2) | review/robot-fix-cnv-2 on f78c695c; reports/robot-fix-cnv.md | F | (opening) | RUNNING | 24/11 17:15Z |
