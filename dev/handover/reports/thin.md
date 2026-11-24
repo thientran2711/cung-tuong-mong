@@ -673,6 +673,44 @@ Notes for the engine/reviewer: all premise ids new (muoi_gia/tien/thi/hoi, cn_ch
 - NOT BLOCKING, for Foreman B (pre-existing on LIVE, not P6/P7 code): (a) j70.js «Tai mắt báo» card says «cần 2 để tố giác» in the header line and «cần 4 để tố giác» in the body for the same person (j70.js:234 vs thrLine70 / accNeed) — law 4, one number from two sources; (b) rv6 (j68.js:24) and so j68/j7c casts can pick the co-op friend as a scripted actor — same issue as fix 2, whole group, needs the owner-side decision/worker (not changed here, 33 call sites on LIVE); (c) content notes from ENGINE #4 (some j70 tells are scenes, not acts).
 - **VERDICT: PASS ff1773ba** (LIVE b7598e72 is its ancestor; fast-forwardable). Worktrees /home/user/wt/p6r1, p6r1-ho removed after push.
 
+## REVIEW thin-p6 r2
+- 24/11 ~06:10–07:45Z · BIG reviewer-fixer (opus) session_01N1tNP436YFaYo5MMDCeWak · START_CTX ~3 % (own estimate). PRIORITY #1 CHECK ('thin-p6|wc-play|j70c|j71c'): main LIVE 68799300 | review/thin-p6-r1 ff1773ba (bounced by LC9 05:36Z) | reports/thin.md «## ENGINE P6», «## REVIEW thin-p6 r1» | claims B — reuse: r1 branch as base, nothing rebuilt.
+- **WHY r1 PASSED (root cause, stale fixture):** the three fixtures (dev/test/wc-fixture.jsonl, j70c-fixture.jsonl, j71c-fixture.jsonl) were written by ENGINE #4 at 517b4a4d, BEFORE the P6/P7 seeds were folded, using the same ids the writers later gave real seeds (wc-hoa-001…wc-day-001, j70c-pond-001…, fc-xa-c01, fc-trungthu-p02, fc-newyear-c01 …: 19 rows). After 71fe6b05 folded the seeds into jwsd/j70sd/j71sd, the engine registers the BUILT row first, and wcReg / j70cReg / j71cReg skip any id already registered — so a no-arg run tests the fixture's stances/tells/fx against a DIFFERENT built seed with the same id → «0 people chose one of the 4 stances», «tamco applied 0», «tells are the seed's own» etc. Engine and seeds were fine. r1 (and ENGINE #4's last run) only ran the play tests WITH the seed files as args (those rows equal the built ones exactly), never the no-arg default, so the shadowing never showed. Same shape as thin-p4: a fixture run that nobody ran.
+- FIXES on review/thin-p6-r2 (tests only; no engine, BAL or seed change; seed meaning untouched):
+  1. Fixture ids moved to a test range 9xx (wc-*-901, j70c-*-901, fc-*-s91/c91/p91…; inner references renamed with them); validators on the 3 fixtures still 0 errors.
+  2. Guard (law 11, whole family): wc-play / j70c-play / j71c-play now FAIL loudly «fixture rows not shadowed by a different built seed of the same id: <ids>» when a fixture row's id is already built with different content (checked: the OLD fixture → FAIL lists all 6 wc ids; the seed files themselves → no hit, they equal the built rows).
+  3. Same family scan over every dev/test/*fixture*.jsonl vs every built dev/build/j*sd.js id — before/after:
+     | fixture | rows | shadowed before | after |
+     |---|---|---|---|
+     | wc-fixture | 6 | 6 | 0 |
+     | j70c-fixture | 4 | 4 | 0 |
+     | j71c-fixture | 9 | 9 | 0 |
+     | j7c-fixture | 3 | 0 | 0 |
+     | j72c-fixture | 4 | 0 | 0 |
+  4. j7c-play (LIVE P2 test, also a fixture run): failed at random ~2 of 7 runs on this box («a composed card is built (undefined)» + 5 follow-ons) because a fresh random world can hold no consort with the fixture's nết (the test's comment said it forces this; the code never did). Now forces the nết exactly as wc-play does, reported «(forced nết)»; forced path proven (tr6 emptied → ALL PASS forced); 8/8 runs PASS after. NOTE: j7c-play takes NO file arg (always its fixture) — the j7seeds content is covered by j7seeds_validate + the build, not by this test.
+- MERGE: + LIVE origin/main 68799300 (conflicts: assemble.py both module lists kept — j70sd/j70c, j72sd/j72c, jwsd/jworldc/j71sd/j71c; jbal2.js BAL.wc/j70c/j71c + BAL.j72c side by side; KIT_REQUESTS.md both entries; index.html/sw.js rebuilt by build_site.sh). LIVE is an ancestor (fast-forwardable).
+- GATES (play/validators/undef/one-core/old saves on b235b871; aea1baec = b235b871 + the j7c-play test fix only; quickcheck + coop on aea1baec). Seed files = handover content/thin/*.md (a+b concatenated):
+  | Gate | Command | Result |
+  |---|---|---|
+  | wc no-arg | `node dev/test/wc-play.js` | WC PLAY: ALL PASS (6 seeds, 1 forced, 91 built) |
+  | wc args | `node dev/test/wc-play.js wseeds.md` | WC PLAY: ALL PASS (91 seeds, 9 forced, 91 built) |
+  | j70c no-arg | `node dev/test/j70c-play.js` | J70C PLAY: ALL PASS (4 routes, 78 built) |
+  | j70c args | `node dev/test/j70c-play.js j70seeds.md` | J70C PLAY: ALL PASS (78 routes, 78 built) |
+  | j71c no-arg | `node dev/test/j71c-play.js` | J71C PLAY: ALL PASS (4 stages, 3 comps, 2 prizes, 0 forced) |
+  | j71c args | `node dev/test/j71c-play.js fseeds.md` | J71C PLAY: ALL PASS (91 stages, 80 comps, 49 prizes, 16 forced) |
+  | j7c (LIVE P2) | `node dev/test/j7c-play.js` | J7C PLAY: ALL PASS ×8 on aea1baec |
+  | j72c (LIVE P3) no-arg / a / b | `node dev/test/j72c-play.js [j72seeds_a.md / _b.md]` | ALL PASS (4 seeds) · ALL PASS (127) · ALL PASS (129), 256 built |
+  | validators | wseeds / j70seeds / fseeds --min / j72seeds | 91 · 78 · 220 · 256 rows, 0 errors each |
+  | validator j7seeds (LIVE content, not touched) | `python3 dev/test/j7seeds_validate.py j7seeds.md` | 5 errors «dup id» j7-041/048/061/068/077 — pre-existing stray second copies in handover j7seeds.md (same kind as r1 fix 3); built j7sd.js unaffected; for Foreman B |
+  | undef | `node dev/test/undef-scan.js` | PASS (300 names) |
+  | one core | `node dev/test/one-core-guard.js` | PASS |
+  | 3 old saves | `node dev/test/norep-oldsave.js <LIVE 68799300 index.html>` | NOREP OLDSAVE: ALL PASS (3 lives, 0 errors) |
+  | quickcheck | `bash dev/tools/quickcheck.sh` (aea1baec vs live 68799300) | QUICKCHECK PASS · open 2000 ms · old save ok · render 275/261, tab 578/588, buổi 1335/1570, tasks>200ms 24/27 · core gates PASS |
+  | CO-OP GATE | `node dev/test/coop-e2e.js` / `COOP_SWAP=1 node dev/test/coop-e2e.js` | 142/142 (Fold hosts) · 142/142 (iPad hosts) |
+- Laws touched: 4 (no number added; tests read BAL), 11 (whole fixture family scanned + guard); 1/2/3/6/7 unchanged from r1 (no seed/engine change). No UI change → no shots.
+- FOR THE REVIEWER BRIEF (MAIN 117 ask): every reviewer of a composed-seed branch runs EVERY *-play test of the touched families TWICE: no-arg (default fixture) AND with the seed files; and pastes both result lines. The shadow guard now makes a stale fixture fail in the no-arg run by name.
+- **VERDICT: PASS aea1baec** (review/thin-p6-r2; LIVE 68799300 is its ancestor).
+
 ## ROBOT-COOP
 PRIORITY #1 CHECK ('robot10 coop'): OD 2204–2205 | ledger 0 | claims CLAIMS L1365 (this seat) | main dev/measure/robot10.js (solo only) + robot10-in.js + dev/test/coop-bot.js + coop-lag.js | review/robot10-lag-rv (dev/test/lib/coop-lag-hooks.js, copied unchanged) | archive 0. Reused, nothing rebuilt.
 Lead: B ROBOT-10 CO-OP LEAD (opus). Branch review/robot10-coop @48d1d7e1 (from main 27240ccb). TEST-ONLY: dev/measure/robot10-coop.js (new), dev/test/lib/coop-lag-hooks.js (copy of robot10-lag-rv), dev/test/coop-bot.js (requirable: exports mk/STEP/BUOI/WORLD, its own run unchanged, WURL only from argv when run as a script), dev/measure/robot10-in.js (C.coop guard: no in-place deser in a live room, no solo soft-lock check). No game file, no index.html/sw.js.
