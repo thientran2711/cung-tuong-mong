@@ -288,5 +288,13 @@ window.cpMerit7=k=>{try{const m=/^(\w+)_a$/.exec(String(k));if(m){if(LCA[m[1]]&&
 /* the hush money (thamo «Nhận bạc bịt miệng» sets S.j71.brb = the turn): seen on her next turn end */
 function cpMisc(p){try{if(p!==S)return;const j=S.j71;const r=rep(S);if(j&&j.brb!=null&&r.brb!==j.brb){r.brb=j.brb;cpGive(S,"lc_brb")}}catch(e){}}
 /* tests / scan */
+/* ORDER MAIN 117 (05:15Z; OD 24/11 ~07:45Z, DAY TITLE CARD): READ-ONLY hook for KK16's day card on the j79 dawn panel — her CURRENT main-story chapter as
+   «Chương N — <name>», from the SAME source as the goal line (j67 d("goal"): S.st.ch / S.st.M = the open ARC67 chapter (rdDef road chapters included) /
+   S.st.ms = a milestone chapter); no typed text, nothing written. "" when no chapter is open (old v1 story, before the first chapter, co-op friend entry). */
+function chapterTitle(p){try{p=p||S;if(!p||p!==S||!p.st||!p.st.v2||!p.st.ch)return "";const st=p.st;let n,t;
+ if(st.ms&&typeof MS67==="object"&&MS67[st.ms.id]){n=st.ch.n;t=MS67[st.ms.id].t()}
+ else if(st.M&&ARC67[st.M.a]){n=st.M.chap||1;const a=ARC67[st.M.a];t=typeof fill67==="function"?fill67(a.t,st.M):a.t}else return "";
+ t=plainT(t);return t&&n?`Chương ${n} — ${t}`:""}catch(e){return ""}}
+window.chapterTitle=chapterTitle;
 window.TITLES2={RP,ROADT,ROADC,ARCT,VNT,VNC,MHT,MHOLD,MG70,MHG,LCT,LCWHY,LCW,LCA,fxW,heldIds,sumK,deed,snap,sideOf,cpMisc,arcKey,chName,vnName};
 }catch(e){console.error("jdh3",e)}})();
