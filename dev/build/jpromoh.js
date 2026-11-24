@@ -79,3 +79,9 @@ function phMonth(){if(!S||S.dead||!BAL.promoH)return"";const P=phSt();if(P.m===S
 window.phDebug=function(){return{ph:S&&S.ph,n:window.__phN||null}};
 window.phForce=function(occ){if(!S)return"";S.ph=S.ph||{};const P=phSt();P.m=null;P.oc={t:S.turn,L:occ||[]};return phMonth()};
 window.PROMO_GW=PROMO_GW;window.phTry=phTry;window.phCost=phCost;window.phMonth=phMonth;window.phOcc=phOcc;
+/* kitPromoHook (MAIN 117 05:17Z, KIT §77c kitPromoChip): her next promotion round = {months, rank} or null. months = the longest of the waits the
+   ordinary road checks in time (promoGap since the last decree, the exam cooldown); 0 = she may sit now. miss = the other conditions not met yet
+   (promoReqP rows: Sủng / Danh / Hoàng hậu / Thái hậu / seat…), so the chip never promises a round the rules would refuse. */
+window.kitPromoHook=function(){try{if(!S||S.dead||S.out||S.rank>=7||(typeof exSrv==="function"&&exSrv(S)))return null;const r=S.rank,e=typeof exS==="function"?exS(S):{};
+ const gap=Math.max(0,promoGap(r)-(S.turn-(S.lastPromo||0))),cd=e.cd>S.turn?e.cd-S.turn:0;const L=promoReqP(S).filter(x=>!x[0]&&!/Cách lần|Khảo hạch/.test(x[1])).map(x=>x[1]);
+ const now=typeof exElig==="function"&&exElig(S);return{months:now?0:Math.max(gap,cd),rank:r+1>=7?"Hoàng hậu":RANKS[r+1].n,miss:now?[]:L}}catch(e){return null}};

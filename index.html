@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"96de475b+","t":"2026-11-24T04:51Z","c":"PROMO-HIST roads: grand-occasion batch grace, favour grace, deathbed decree (her + every NPC, BAL.promoH + BAL.psk.fest/sung/death, result …","b":"7866370ea50d","h":[{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"}]};
+window.CTM_BI={"s":"1a919714+","t":"2026-11-24T05:06Z","c":"promo-hist: occasion draw per Emperor (era+likes+traits, same on co-op seats), cleaner WHY wording; coop-e2e COOP_PH=1 probe (same world dr…","b":"730067c1b42b","h":[{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -55682,6 +55682,12 @@ function phMonth(){if(!S||S.dead||!BAL.promoH)return"";const P=phSt();if(P.m===S
 window.phDebug=function(){return{ph:S&&S.ph,n:window.__phN||null}};
 window.phForce=function(occ){if(!S)return"";S.ph=S.ph||{};const P=phSt();P.m=null;P.oc={t:S.turn,L:occ||[]};return phMonth()};
 window.PROMO_GW=PROMO_GW;window.phTry=phTry;window.phCost=phCost;window.phMonth=phMonth;window.phOcc=phOcc;
+/* kitPromoHook (MAIN 117 05:17Z, KIT §77c kitPromoChip): her next promotion round = {months, rank} or null. months = the longest of the waits the
+   ordinary road checks in time (promoGap since the last decree, the exam cooldown); 0 = she may sit now. miss = the other conditions not met yet
+   (promoReqP rows: Sủng / Danh / Hoàng hậu / Thái hậu / seat…), so the chip never promises a round the rules would refuse. */
+window.kitPromoHook=function(){try{if(!S||S.dead||S.out||S.rank>=7||(typeof exSrv==="function"&&exSrv(S)))return null;const r=S.rank,e=typeof exS==="function"?exS(S):{};
+ const gap=Math.max(0,promoGap(r)-(S.turn-(S.lastPromo||0))),cd=e.cd>S.turn?e.cd-S.turn:0;const L=promoReqP(S).filter(x=>!x[0]&&!/Cách lần|Khảo hạch/.test(x[1])).map(x=>x[1]);
+ const now=typeof exElig==="function"&&exElig(S);return{months:now?0:Math.max(gap,cd),rank:r+1>=7?"Hoàng hậu":RANKS[r+1].n,miss:now?[]:L}}catch(e){return null}};
 /* ================= jkitpage: TRANG MẪU KIT — the kit sample page (luật KIT TRƯỚC, owner 11/15 16:50Z; tabs-kit r7) =================
    Open the game with "#kit" at the end of the address (…/index.html#kit) or call kitSamplePage() in the console: a full-screen page shows
    every registered kit part drawn by the REAL kit functions (no copies), at the current screen size. Close = the kit ✕ or remove "#kit".
@@ -96141,7 +96147,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="7866370ea50d";window.CTM_BUILD=BUILD;
+const BUILD="730067c1b42b";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
