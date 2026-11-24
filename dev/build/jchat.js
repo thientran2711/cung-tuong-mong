@@ -143,10 +143,10 @@ function wPair(a,b){const W=C().w||{};if(a.k==="srv"&&b.k==="srv"||a.k==="srv"&&
 function wpick(L){let s=0;for(const x of L)s+=x[1];let r=Math.random()*s;for(const x of L){r-=x[1];if(r<=0)return x[0]}return L[L.length-1][0]}
 function arm(short){if(CH.t)clearTimeout(CH.t);const c=C();if(!c||!c.on)return;const g=c.gap||{};const s=short?(c.retry||20):R(g.min||60,g.max||120);CH.t=setTimeout(tick,s*1000)}
 /* ---------- (a) greeting on arrival home ---------- */
-function greet(){if(!on())return;CH.gt=[];const run=(n)=>{const b=busy();CH.gt.push(n+":"+(b||"-"));if(b==="modal"||b==="queue"){if(n<((C().greet||{}).tries||6))return setTimeout(()=>run(n+1),((C().greet||{}).wait||1500));return}
-  if(b&&b!=="nostage")return;const L=b?[]:present();const M=L.find(x=>x.p.kind==="maid");if(!M){/* her figure picture may still be loading */if(n<((C().greet||{}).tries||6)&&S.place==="home")return setTimeout(()=>run(n+1),((C().greet||{}).wait||1500));return}const pool=(window.CHAT_L&&CHAT_L.greet)||[];const c=ctx(M,null);
+function greet(){if(!on())return;CH.gt=[];const run=(n)=>{const b=busy();CH.gt.push(n+":"+(b||"-"));if(b==="modal"||b==="queue"){if(n<((C().greet||{}).tries||6))return lifeTimeout(()=>run(n+1),((C().greet||{}).wait||1500));return}
+  if(b&&b!=="nostage")return;const L=b?[]:present();const M=L.find(x=>x.p.kind==="maid");if(!M){/* her figure picture may still be loading */if(n<((C().greet||{}).tries||6)&&S.place==="home")return lifeTimeout(()=>run(n+1),((C().greet||{}).wait||1500));return}const pool=(window.CHAT_L&&CHAT_L.greet)||[];const c=ctx(M,null);
   const cand=pool.filter(s=>{const t=tagOf(s);return !t||tagOk(t,c)}).map(s=>[s,1]);const s=choose(cand);if(!s)return;const r=fill("A:"+untag(s),M,null,{c,v:{}});if(!r)return;used(s);
-  CH.run=0;clearB();if(play([r],"greet"))CH.stat.greet++};setTimeout(()=>run(0),((C().greet||{}).delay||900))}
+  CH.run=0;clearB();if(play([r],"greet"))CH.stat.greet++};lifeTimeout(()=>run(0),((C().greet||{}).delay||900))}
 /* ---------- (c) the people of one happening stand together (once per visit) ---------- */
 function hapPeople(P){const idOf=p=>lid(ent(p));const pairs=[];if(typeof agPlanned!=="function")return pairs;
  for(const d of agPlanned()){if(d.pl!==S.place||!d.t)continue;const a=P.find(p=>idOf(p)===d.who),b=P.find(p=>{const id=idOf(p);return id===d.t||id===String(d.t)});if(a&&b&&a!==b&&!pairs.some(q=>q.includes(a)||q.includes(b)))pairs.push([a,b])}return pairs}
