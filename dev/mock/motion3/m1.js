@@ -49,7 +49,7 @@ async function deal(){const {els,slots,w,hand}=st;const hr=R(hand);const T=(e,k,
   T(E.p,[{transform:'scaleX(0)'},{transform:'scaleX(0)',offset:.5},{transform:'scaleX(1)'}],{duration:340,delay:i*90+380,easing:'ease-out'})});
  await wait(els.length*90+760)}
 function rest(i,a){const s=st.slots[i];return `rotate(${s.rot}deg)`}
-function plateFor(i){const {L,cards,list,w,H,ip,handTop,faceBot,rows,slots,ch}=st;if(st.plate){const old=st.plate;old.animate([{opacity:1},{opacity:0}],{duration:140,fill:'both'}).onfinish=()=>old.remove();L.boxes=L.boxes.filter(b=>b!==old)}
+function plateFor(i){const {L,cards,list,w,H,ip,handTop,faceBot,rows,slots,ch}=st;if(st.plate){const old=st.plate;old.remove();L.boxes=L.boxes.filter(b=>b!==old)}/* ONE detail box at a time: the old one is gone before the new one shows (no cross-fade, no ghost) */
  /* the REAL kit option card (title row + odds meter + Tốn/Được/Bại + kit «Gợi ý» row); its picture is already on the lifted card, so the plate drops it (one plate form for every hand) */
  const card=cards[i].cloneNode(true);card.querySelectorAll('.kaart').forEach(e=>e.remove());
  const pw=Math.min(ip?520:w-16,w-16);const box=kitDlgBox(L,'',[card],{x:0,y:0,w:pw},null,{kind:'choice',noSeal:true});box.classList.add('md3-plate');box.querySelectorAll('.kph').forEach(e=>e.remove());
@@ -63,7 +63,7 @@ function plateFor(i){const {L,cards,list,w,H,ip,handTop,faceBot,rows,slots,ch}=s
  x=cand.filter(ok).sort((a,b)=>cost(a)-cost(b))[0];if(x==null)x=Math.round((w-pw)/2);
  const minY=Math.max(0,...obs.filter(o=>!(x+pw<=o.l||x>=o.r)).map(o=>o.b))+6;
  y=Math.max(Math.round(minY),Math.min(H-bh-4,y));box.style.left=x+'px';box.style.top=y+'px';
- box.animate([{opacity:0,transform:'translateY(10px)'},{opacity:1,transform:'none'}],{duration:200,easing:'ease-out',fill:'both'});st.plate=box;return box}
+ box.style.opacity='1';box.animate([{transform:'translateY(8px)'},{transform:'none'}],{duration:160,easing:'ease-out'});/* opaque from the first frame (transform only) */st.plate=box;return box}
 async function lift(i){const {els}=st;const prev=st.lift;st.lift=i;
  els.forEach((E,k)=>{const s=st.slots[k];const on=k===i;const was=k===prev;
   if(on){E.c.style.zIndex=5;E.c.animate([{transform:rest(k)},{transform:`translateY(-${st.ch*.2}px) scale(1.07)`}],{duration:220,easing:'cubic-bezier(.3,1.4,.5,1)',fill:'both'});E.gl.animate([{opacity:0},{opacity:1}],{duration:200,fill:'both'});E.c.animate([{opacity:E.c.__o||1},{opacity:1}],{duration:160,fill:'both'});E.c.__o=1}

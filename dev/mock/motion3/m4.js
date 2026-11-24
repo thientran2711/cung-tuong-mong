@@ -4,12 +4,22 @@
    Timing from BAL (proposal: BAL.reveal.fly = 300*BAL.pace, flyGap = BAL.reveal.list/8, flyPre = BAL.reveal.pause*.6): at today's pace 1.75 = 525 ms per flight + 77 ms gap ≈ 0.6 s per change, first flight 735 ms after the frame. Tap anywhere = finish at once. */
 window.M4=(function(){const {wait,R}=MD3;let cur=null;
 const cellOf=n=>[...document.querySelectorAll('.kst')].find(e=>e.getBoundingClientRect().width>0&&(e.querySelector('.kstl')||{}).textContent.trim()===n);
+async function settleStage(max){const t0=performance.now();max=max||12000;
+ /* settled = no stage picture is still «on its way» (the kit marks it img[data-kwait]; it draws a see-through breathing silhouette) and every stage <img> is complete */
+ const busy=()=>{const st=document.getElementById('stage')||document.body;return [...st.querySelectorAll('img')].some(i=>{const b=i.getBoundingClientRect();return b.height>60&&(i.hasAttribute('data-kwait')||!i.complete||!i.naturalWidth)})};
+ let ok=0;while(performance.now()-t0<max){if(!busy()){if(++ok>=4)break}else ok=0;await wait(100)}return !busy()}
+async function prep(){try{S.met=S.met||{};const K=k61S();(homePeople()||[]).concat(liveRivals(true)||[]).forEach(v=>{if(v&&v.id!=null&&S.met[v.id]==null)S.met[v.id]=0;if(K&&v)try{K[kOf61(v)]=Math.max(+K[kOf61(v)]||0,2)}catch(e){}});render()}catch(e){}return settleStage(20000)}
 async function run(o){o=o||{};MD3.ensureCss();const P=MD3.pace();const RV=BAL.reveal;const FLY=o.fly||Math.round(300*P),GAP=o.gap!=null?o.gap:Math.round(RV.list/8),PRE=o.pre!=null?o.pre:Math.round(RV.pause*.6);
  const V=e=>e.querySelector('.kstv');const old={};document.querySelectorAll('.kst').forEach(e=>{if(e.id&&V(e)&&R(e).width>0)old[e.id]=V(e).textContent});
  /* today three systems fire AT ONCE (jstatfx .ksfl HUD floats, j93 .kmfls card floats, jfx/jkrev kfhit cell flashes) — kitFlyTo replaces them (law 11 group). Muted with ONE style tag (no MutationObserver, no per-mutation work). */
  const mst=document.createElement('style');mst.id='md3-mute';mst.textContent='.ksfl,.kmfls{display:none!important}.kst.kfhit,.kst.kfhit-r{animation:none!important}';document.head.appendChild(mst);
  const ksf0=window.kitStatFx;window.kitStatFx=function(){};/* mock: §57.1 is what this extends; its own all-cells-at-once number update is held off */
- const b=rsnap();o.mut();resultShow(o.title,b,o.ok!==false);
+ /* fixture: the people on the home stage have MET her (the game draws a stranger as a see-through breathing silhouette; her rule: people are never see-through) */
+ try{S.met=S.met||{};const K=k61S();(homePeople()||[]).concat(liveRivals(true)||[]).forEach(v=>{if(v&&v.id!=null&&S.met[v.id]==null)S.met[v.id]=0;if(K&&v)try{K[kOf61(v)]=Math.max(+K[kOf61(v)]||0,2)}catch(e){}});render()}catch(e){}await settleStage();
+ const b=rsnap();o.mut();
+ /* the people on the stage must stay SOLID: re-render the stage with the new state FIRST and wait until every portrait is loaded (the game shows a see-through breathing silhouette «kphBreathF» while a portrait loads) — only then show the result frame */
+ try{render()}catch(e){}await settleStage();
+ resultShow(o.title,b,o.ok!==false);
  const card=document.getElementById('rtoast');document.querySelectorAll('.kmfls').forEach(e=>e.remove());
  /* HOLD THE HUD NUMBERS IN DATA (perf fix): the one HUD writer kitStatSet(c,v) keeps writing the OLD text for a held cell id until its change lands — no MutationObserver fighting render() every frame */
  const nw={};document.querySelectorAll('.kst').forEach(e=>{if(e.id&&old[e.id]!=null&&V(e)&&R(e).width>0&&e.dataset.k&&S[e.dataset.k]!=null){nw[e.id]=old[e.id].replace(/-?\d+/,String(Math.round(S[e.dataset.k])))}});
@@ -32,4 +42,4 @@ async function run(o){o=o||{};MD3.ensureCss();const P=MD3.pace();const RV=BAL.re
   await new Promise(r=>{an.onfinish=r;an.oncancel=r;setTimeout(r,FLY+80)});chip.remove();land(x);if(!done)await wait(GAP)}
  if(!done&&o.item){try{kitFlyItem(o.item)}catch(e){}await wait(Math.round(900*P)+80)}
  if(!done)done=true;HOLD.clear();window.kitStatSet=kss0;Object.keys(nw).forEach(id=>setAll(id,nw[id]));window.kitStatFx=ksf0;setTimeout(()=>mst.remove(),400);document.removeEventListener('pointerdown',tap,{capture:true});return {n:rows.length,each:FLY+GAP}}
-return {run,get cur(){return cur}}})();
+return {run,prep,settleStage,get cur(){return cur}}})();

@@ -12,6 +12,7 @@ window.SCEN={
   P.seg('m1-lift');await M1.lift(1);await MD3.wait(1500);await M1.lift(Math.min(3,(o.n||5)-1));P.end();await MD3.wait(1700);
   P.seg('m1-choose');await M1.choose(Math.min(3,(o.n||5)-1));P.end();const D=BAL.kitpage.demo;
   P.seg('m4-fly');await M4.run({title:'Mời cùng việc',ok:true,mut:()=>{S.sung+=D.ask.sung;S.bac-=D.gift.bac;S.danh+=D.ask.danh}});P.end();await MD3.wait(1500);return g},
+ async m4Prep(){await M4.prep()},
  async m2Prep(o){window.__m2g=await M2.setup({n:12,people:(o||{}).people})},
  async m2(o){const P=window.__seg||{seg(){},end(){}};const g=window.__m2g||await M2.setup({n:12});window.__m2g=null;P.seg('m2-enter');await M2.enter();P.end();await MD3.wait(600);
   P.seg('m2-tap');await M2.tapPerson(1);P.end();await MD3.wait(400);const tp=k=>M2.tapPlaque(k);
