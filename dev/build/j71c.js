@@ -58,7 +58,7 @@ function compCard(k,c){const sd=CI[c.id];if(!sd)return null;const X={};if(c.b!=n
  const tier=sd.tier||"m";const opts=Object.entries(sd.stances||{}).map(([id,st])=>{const g=val(st.gain,tier,1),l=val(st.loss,tier,-1);const rr=[];if(X.B&&(g.B+l.B))rr.push([X.B,g.B+l.B]);
   return c6(fill(st.text),{c:l.fx,w:g.fx,r:rr,ok:()=>{let tr="";if(o){const j=jc();tr=`${fill(o.name)}: ${fill(st.trace||o.trace)}.`;j.ob.push({sid:sd.id,name:fill(o.name),owner:o.owner==="me"?(S.name||"ngươi"):o.owner==="kho"?"Nội vụ phủ":(X.B?X.B.n:""),trace:fill(st.trace||o.trace),turn:S.turn});if(j.ob.length>Bf().obKeep)j.ob.splice(0,j.ob.length-Bf().obKeep)}
    return [fill((sd.outcomes||{})[id]),tr].filter(Boolean).join(" ")}})});
- return{t:`${fShort7(k)} · Chuyện bên lề hội`,who:X.B?X.B.f:(typeof pMaid==="function"&&S.maid?pMaid():pEmp()),h:`<p>${fill(sd.text)}</p>`,opts}}
+ return{t:`${fShort7(k)} · Chuyện bên lề hội`,who:X.B?X.B.f:(typeof pMaid==="function"&&S.maid?pMaid():pEmp()),h:`<p>${fill(sd.text)}</p>`,opts,dlg:typeof dlgsMk==="function"?dlgsMk("j71:"+sd.id,X,fill,null):null/* sideline-dlg: the opening scene (jdlgs) */}}
 const PEND7=[];
 if(typeof fDay7==="function"){const d0=fDay7;fDay7=function(k){const j=j7s();const P=j.plans&&j.plans[k];const planned=P&&P.y===S.year?P:null;const vi0=planned?planned.pp.vi:null;const me=planned?planned.me:0;const pp0=planned?planned.pp:null;
  LASTV[k]=null;const m=d0.apply(this,arguments);try{if(m&&on()&&!S.confined&&!(typeof isSrv==="function"&&isSrv())){const vi=vi0!=null?vi0:LASTV[k];const V=vi!=null&&FV7[k]?FV7[k][vi]:null;

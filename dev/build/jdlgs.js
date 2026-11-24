@@ -20,7 +20,7 @@ function dlgsResolve(spec,c){try{if(!spec||!dlgsOn()||!Array.isArray(spec.lines)
  const L=spec.L,R=spec.R||"me";if(!L||L===R)return null;const who=r=>r==="me"?dlgsMe():c.who(r);const pL=who(L),pR=who(R);if(!pL||!pR)return null;
  const lines=[];for(const ln of spec.lines){const f=ln.who==="nar"?null:ln.who===L?0:ln.who===R?1:-1;if(f<0)return null;
   const sp=f==null?null:[L,R][f],ls=f==null?null:[R,L][f];const t=String(c.txt?c.txt(ln.text,sp,ls):ln.text||"").trim();if(!t||/\{[^}]*\}/.test(t))return null;lines.push({fig:f,who:f==null?"":[pL.n,pR.n][f],text:t,focus:!!ln.focus&&f!=null})}
- let bg="";try{const a=typeof kitPlaceArt==="function"?kitPlaceArt(spec.at||c.at||"home"):null;bg=a&&a.src||""}catch(e){}
+ let bg="";try{const a=typeof kitPlaceArt==="function"?kitPlaceArt(spec.at||c.at||(S&&S.place)||"home"):null;bg=a&&a.src||""}catch(e){}
  return{bg,figs:[pL.src,pR.src],names:[pL.n,pR.n],lines,watch:!!spec.watch}}catch(e){console.error(e);return null}}
 /* attach to the card the family just pushed (the last Q item pushed since n0, matched by test) */
 function dlgsAttach(n0,d,test){if(!d)return false;for(let i=Q.length-1;i>=Math.max(0,n0);i--){const m=Q[i];if(m&&!m.dlg&&(!test||test(m))){m.dlg=d;DLGS.n++;return true}}return false}
@@ -49,11 +49,11 @@ function dlgsVoice(a){if(!a)return null;if(a===S)return S;try{return kSpk(a)||{s
 function dlgsCtx(act,fill,at){const maid=S.maid?{k:"maid",o:S.maid,n:S.maid.name}:null;const get=r=>r==="me"?S:r==="M"||r==="maid"?maid:act[r]||null;
  return{who:r=>dlgsActor(get(r)),txt:(t,a,b)=>{const v=dlgsVoice(get(a)),l=dlgsVoice(get(b));if(v&&l)t=kSay(v,l,t);return fill(t)},at}}
 /* j72 việc nhờ (110 old templates + THIN P3 composed seeds): the offer card (pid q72o, pp.x). Unit id "j72:<seed id>" / "j72:<old tid>".
-   Roles A requester · B second person · M her cung nữ. Place: A comes to her palace / she asked around (A's place). A family letter: L = M. */
+   Roles A requester · B second person · M her cung nữ. Place: A comes to where she is / she asked around (A's place). Default background = the place she stands (S.place). A family letter: L = M. */
 function dlgsJ72Id(tid){return"j72:"+String(tid).replace(/^c:/,"")}
 function dlgsJ72(x,how){const sp=dlgsGet(dlgsJ72Id(x.tid));if(!sp)return null;const X=q72X(x);if(!X)return null;
  const A=X.A&&X.A.k==="fam"?(S.maid?{k:"maid",o:S.maid,n:S.maid.name}:null):X.A;
- return dlgsResolve(sp,dlgsCtx({A,B:X.B},t=>q72Txt(t,X),how==="ask"?q72Home(X.A):"home"))}
+ return dlgsResolve(sp,dlgsCtx({A,B:X.B},t=>q72Txt(t,X),how==="ask"?q72Home(X.A):null))}
 DLGS.R.push({test:m=>m.pid==="q72o"&&m.pp&&m.pp.x,fn:m=>dlgsJ72(m.pp.x,m.pp.how)});
 /* j68 composed decisions (THIN P4; pid "e68c:<seed id>", pp = the cast a0/a1). Roles A, B (the seed's), M. */
 DLGS.R.push({test:m=>/^e68c:/.test(m.pid||""),fn:m=>{const sid=m.pid.slice(5),sp=dlgsGet("j68:"+sid);if(!sp)return null;const s=E68I["c:"+sid],sd=typeof J68C_SEEDS!=="undefined"&&J68C_SEEDS[sid];if(!s||!sd)return null;
@@ -61,4 +61,15 @@ DLGS.R.push({test:m=>/^e68c:/.test(m.pid||""),fn:m=>{const sid=m.pid.slice(5),sp
 /* j7 composed intrigue (THIN P2; pid "j7c", pp.sid + pp.c cast). Roles = the seed's role ids (plotter, target, …) + maid. */
 DLGS.R.push({test:m=>m.pid==="j7c"&&m.pp&&m.pp.sid,fn:m=>{const sp=dlgsGet("j7:"+m.pp.sid);if(!sp)return null;j7cSeeds();const sd=J7I[m.pp.sid];if(!sd)return null;const X=j7cActors(sd,m.pp.c||{});if(!X)return null;
  return dlgsResolve(sp,dlgsCtx(X,t=>j7cFill(t,X),null))}});
-try{window.DLGS=DLGS;window.dlgsResolve=dlgsResolve;window.dlgsPlay=dlgsPlay;window.dlgsGet=dlgsGet}catch(e){}
+/* families whose card is built inside their own closure (j71c, jworldc) call this when they build it: id = unit id, act = their cast table */
+function dlgsMk(id,act,fill,at){try{const sp=dlgsGet(id);return sp?dlgsResolve(sp,dlgsCtx(act||{},fill||(t=>t),at)):null}catch(e){console.error(e);return null}}
+/* kỳ ngộ (jky + THIN P5 jkyc): the encounter card (pid "kyngo" with choices, or the no-choice card) of KY.cur; ONE scene per encounter. Role W = the person met. */
+DLGS.R.push({test:m=>/^kyngo:/.test(m.evId||"")&&typeof KY!=="undefined"&&KY.cur&&m.evId==="kyngo:"+KY.cur.id&&!KY.cur.__dlg,fn:m=>{const c=KY.cur;c.__dlg=1;const w=c.W;if(!w)return null;
+ const n=c.wn||(typeof wName==="function"?wName(w):(w.ref&&w.ref.name)||"");const W={k:w.kind==="el"?"mama":w.kind,o:w.ref||w,n,f:null};
+ return dlgsMk("ky:"+c.id,{W},t=>String(t).replace(/\{W\}/g,n),null)}});
+/* she saw the tell HERSELF on the spot (j70 goTo): no cung nữ report scene for that plot (law 6b: the scene must match who really saw it) */
+if(typeof goTo==="function"){const g0=goTo;goTo=function(k){let pre=null;try{const z=typeof j70==="function"?j70():null;pre=z?new Set(z.pl.filter(p=>p.pend==="seen").map(p=>p.id)):null}catch(e){}
+ const r=g0.apply(this,arguments);try{const z=pre&&j70();if(z)for(const p of z.pl)if(p.pend==="seen"&&!pre.has(p.id))p.dlgSelf=1}catch(e){}return r}}
+/* j70 plots (51 routes + THIN P6 composed): her people saw a TELL of a plot aimed at her (pid "j70", stage "seen"); L = her cung nữ who saw it. Unit id "j70:<route id>". */
+DLGS.R.push({test:m=>m.pid==="j70"&&m.pp&&m.pp.s==="seen",fn:m=>{const p=P70(m.pp.id);if(!p||pt70(p)!==S||!S.maid||p.dlgSelf)return null;return dlgsMk("j70:"+p.r,{},t=>t,null)}});
+try{window.DLGS=DLGS;window.dlgsResolve=dlgsResolve;window.dlgsPlay=dlgsPlay;window.dlgsGet=dlgsGet;window.dlgsMk=dlgsMk}catch(e){}

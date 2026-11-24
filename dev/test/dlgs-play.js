@@ -13,7 +13,7 @@ let fail=0,pass=0;const ok=(c,m)=>{if(c)pass++;else fail++;if(!c||process.env.V)
   await D.openDirect(p,'http://127.0.0.1:'+srv.address().port+'/',{timeout:180000});const g=p;await g.waitForFunction(()=>window.__ctmBuilt===1&&typeof start==='function'&&typeof dlgsResolve==='function',null,{timeout:180000});
   await g.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}start();['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});Q.length=0;showModal();tab='act';render()});
   await g.waitForTimeout(1500);await g.addStyleTag({content:'#kload,#klife,.modal.kload,#dawn,.kne,#kneov,#kroul,#kroulw,#kcourt,.kroul{display:none!important}'});
-  const ids=await g.evaluate(()=>DLGS_DATA.map(r=>r.id).filter(id=>/^(j72|j68|j7):/.test(id)));ok(ids.length>0,`${dev} DLGS_DATA has scenes of live families (${ids.length})`);
+  const ids=await g.evaluate(()=>DLGS_DATA.map(r=>r.id).filter(id=>/^(j72|j68|j7|j70|ky|j71|wc):/.test(id)));ok(ids.length>0,`${dev} DLGS_DATA has scenes of live families (${ids.length})`);
   let k=0;for(const id of ids){
    /* cast + offer the unit's real card (needs / nết / step places relaxed for the test: it checks the scene; each family's own play test checks casting) */
    const o=await g.evaluate(id=>{Q.length=0;const M=$("modal");M.hidden=true;const fam=id.split(":")[0],sid=id.slice(fam.length+1);const sp=dlgsGet(id);
@@ -24,6 +24,12 @@ let fail=0,pass=0;const ok=(c,m)=>{if(c)pass++;else fail++;if(!c||process.env.V)
      for(let t=0;t<8;t++){Q.length=0;const d=keep(["j68cFit","j68cNeed"],()=>{let y=null;for(let i=0;i<20&&!y;i++)y=e68Make(s);return y});if(!d)return{err:"cannot cast"};e68Push(d,s,true);showModal();if(Q[0]&&Q[0].dlg)break}}
     else if(fam==="j7"){j7cSeeds();const sd=J7I[sid];if(!sd)return{err:"no seed"};const R=liveRivals(true).filter(v=>v.alive&&!v.out);const c={};let i=0;for(const r in sd.roles){const kd=sd.roles[r].kind||"rv";c[r]=kd==="rv"?{k:"rv",id:R[i++].id}:{k:kd}}
      const d=keep(["j7cGround"],()=>mkP("j7c",{sid,c}));if(!d)return{err:"cannot build"};Q.unshift({t:"Chuyện trong cung",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp})}
+    else if(fam==="j70"){const sd=J70SEEDS.find(x=>x.id===sid);if(!sd)return{err:"no route"};const z=j70();z.pl=z.pl.filter(x=>x.end);const a=liveRivals(true).find(x=>x.alive&&!x.out&&!x.plan);if(!a)return{err:"no plotter"};a.bac=Math.max(a.bac||0,999);/* a plot record of that route aimed at her (the shape newPlot70 writes; j70c-play tests the real plotting) */const p={id:++z.n,a:a.id,t:"me",m:sd.m,r:sid,mo:"band",st:"prep",pg:0,need:1,born:wk(),g:0,kn:1,kt:[],err:0,cool:0,wt:0};z.pl.push(p);if(!p)return{err:"no plot"};p.pend="seen";p.kn=1;if(!p.kt.length)p.kt.push(tellOf70(p,0));
+     const d=mkP("j70",{id:p.id,s:"seen"});if(!d)return{err:"no card"};Q.unshift({t:"Mưu hại",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp})}
+    else if(fam==="ky"){const sd=KYSEEDS.find(x=>x.id===sid);if(!sd)return{err:"no seed"};const v=liveRivals(true).find(x=>x.alive&&!x.out);const w=sd.who&&sd.who.kind==="rv"?{kind:"rv",ref:v}:Object.assign({},sd.who||{});
+     KY.cur={id:sid,W:w,wn:w.ref&&w.ref.name||w.name||""};Q.unshift({t:"Kỳ ngộ",h:"<p>…</p>",opts:[{n:"A",fx:{}},{n:"B",fx:{}}],pid:"kyngo",pp:{id:sid},evId:"kyngo:"+sid,ky:1,ev:1})}
+    else if(fam==="j71"||fam==="wc"){/* their card is built inside the family closure: the same call they make (dlgsMk) with a real cast */const v=liveRivals(true).find(x=>x.alive&&!x.out);const a=A6("rv",v.id);
+     const d=dlgsMk(id,fam==="j71"?{B:a}:{A:a},t=>e68Fill(String(t).replace(/\{O\}/g,"vật ấy").replace(/\{F\}/g,"hội"),{A:a,B:a}),null);if(!d)return{err:"dlgsMk null"};Q.unshift({t:"x",h:"<p>…</p>",opts:[{n:"A",fx:{}},{n:"B",fx:{}}],dlg:d})}
     showModal();const m=Q[0];if(!m||!m.dlg)return{err:"no scene resolved",pid:m&&m.pid};
     return{n:sp.lines.length,L:m.dlg.names[0],R:m.dlg.names[1],who:m.dlg.lines.map(l=>l.fig),modal:!M.hidden,scene:!!document.querySelector('.kscn'),dlg:true}},id);
    if(o.err){ok(false,`${dev} ${id}: ${o.err}`);continue}

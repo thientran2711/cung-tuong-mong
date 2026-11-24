@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"03f4f781+","t":"2026-11-24T06:59Z","c":"dlgs_validate: count the 4 follow-up (fu) j72 templates too (366 units)","b":"a0785bb107e8","h":[{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"}]};
+window.CTM_BI={"s":"efc6defe+","t":"2026-11-24T07:06Z","c":"sideline-dlg: card-resolver registry (scene resolved by the card's pid at show time, after the card's own gates) + j68 + j7 adapters; play …","b":"a60f1015a036","h":[{"s":"d33d214b+","t":"2026-11-24T03:20Z","c":"Hạ độc: không còn vòng lặp bày mưu"},{"s":"7aa2ca7f+","t":"2026-11-24T03:20Z","c":"Số chỉ số trong lời văn lấy từ một nguồn"},{"s":"fffb7bfb+","t":"2026-11-24T03:20Z","c":"Khung người kế vị và danh hiệu thừa kế sửa đúng"},{"s":"6f1c4701+","t":"2026-11-24T04:01Z","c":"Tuổi chia lại: 18, 28, 39, 51, 64"},{"s":"9d144cda+","t":"2026-11-24T04:13Z","c":"Đo độ trễ và hiệu ứng (chỉ thử nghiệm)"},{"s":"ad3fa9be+","t":"2026-11-24T02:03Z","c":"Lưu → tải → lưu không còn đổi trạng thái"},{"s":"977a70e9+","t":"2026-11-24T01:40Z","c":"Dư đồ: lớp chú ý không còn đè sang thẻ khác"},{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -89487,7 +89487,7 @@ function wcOpts(sd,w,X){const tier=sd.tier||"m";return Object.entries(sd.stances
 function wcCard(w){const c=w.x&&w.x.wc;if(!c)return null;const sd=WCI[c.id];if(!sd)return null;
  if(typeof isSrv==="function"&&isSrv())return null;if(S.out||S.dead)return null;const X=wcActors(sd,w,c);if(!X)return null;
  let nm="";try{nm=window.worldName(w)}catch(e){}
- return{t:nm||"Thế sự trong cung",who:X.A?X.A.f:pEmp(),wwin:1,h:`<p>${fill(sd.news,sd,X)}</p><p>${fill(sd.text,sd,X)}</p>`,opts:wcOpts(sd,w,X)}}
+ return{t:nm||"Thế sự trong cung",who:X.A?X.A.f:pEmp(),wwin:1,h:`<p>${fill(sd.news,sd,X)}</p><p>${fill(sd.text,sd,X)}</p>`,opts:wcOpts(sd,w,X),dlg:typeof dlgsMk==="function"?dlgsMk("wc:"+sd.id,X,t=>fill(t,sd,X),null):null/* sideline-dlg: the opening scene (jdlgs) */}}
 function wcEnd(w){const c=w.x&&w.x.wc;if(!c||!c.r)return"";const sd=WCI[c.id];if(!sd)return"";const X=wcActors(sd,w,c)||{};
  const P=[];for(const[k,L]of Object.entries(c.r)){const st=sd.stances[k];if(!st||!L||!L.length)continue;
   const N=L.map(x=>sd.scope==="srv"?x:(()=>{const p=byPid(x);return p&&p!==S?p.name:null})()).filter(Boolean);if(N.length)P.push(`${N.join(", ")}: «${fill(st.text,sd,X)}»`)}
@@ -89794,7 +89794,7 @@ function compCard(k,c){const sd=CI[c.id];if(!sd)return null;const X={};if(c.b!=n
  const tier=sd.tier||"m";const opts=Object.entries(sd.stances||{}).map(([id,st])=>{const g=val(st.gain,tier,1),l=val(st.loss,tier,-1);const rr=[];if(X.B&&(g.B+l.B))rr.push([X.B,g.B+l.B]);
   return c6(fill(st.text),{c:l.fx,w:g.fx,r:rr,ok:()=>{let tr="";if(o){const j=jc();tr=`${fill(o.name)}: ${fill(st.trace||o.trace)}.`;j.ob.push({sid:sd.id,name:fill(o.name),owner:o.owner==="me"?(S.name||"ngươi"):o.owner==="kho"?"Nội vụ phủ":(X.B?X.B.n:""),trace:fill(st.trace||o.trace),turn:S.turn});if(j.ob.length>Bf().obKeep)j.ob.splice(0,j.ob.length-Bf().obKeep)}
    return [fill((sd.outcomes||{})[id]),tr].filter(Boolean).join(" ")}})});
- return{t:`${fShort7(k)} · Chuyện bên lề hội`,who:X.B?X.B.f:(typeof pMaid==="function"&&S.maid?pMaid():pEmp()),h:`<p>${fill(sd.text)}</p>`,opts}}
+ return{t:`${fShort7(k)} · Chuyện bên lề hội`,who:X.B?X.B.f:(typeof pMaid==="function"&&S.maid?pMaid():pEmp()),h:`<p>${fill(sd.text)}</p>`,opts,dlg:typeof dlgsMk==="function"?dlgsMk("j71:"+sd.id,X,fill,null):null/* sideline-dlg: the opening scene (jdlgs) */}}
 const PEND7=[];
 if(typeof fDay7==="function"){const d0=fDay7;fDay7=function(k){const j=j7s();const P=j.plans&&j.plans[k];const planned=P&&P.y===S.year?P:null;const vi0=planned?planned.pp.vi:null;const me=planned?planned.me:0;const pp0=planned?planned.pp:null;
  LASTV[k]=null;const m=d0.apply(this,arguments);try{if(m&&on()&&!S.confined&&!(typeof isSrv==="function"&&isSrv())){const vi=vi0!=null?vi0:LASTV[k];const V=vi!=null&&FV7[k]?FV7[k][vi]:null;
@@ -95319,7 +95319,11 @@ const DLGS_DATA=[
 {"id":"j72:j72c-fam-001","dlg":{"L":"M","R":"me","lines":[{"who":"nar","text":"Chiều muộn, {M} bưng vào một phong thư còn vương mùi mực quê nhà."},{"who":"M","text":"{Goi}, thư lão phu nhân gửi vào, người đưa thư dặn phải trao tận tay."},{"who":"me","text":"Mẫu thân viết gì? Ngươi đọc cho ta nghe."},{"who":"M","text":"Lão phu nhân viết: «Con gái, mẹ già vụng tay, mấy cô hàng xóm cứ đòi xem mẫu thêu trong cung.»"},{"who":"M","text":"«Con vẽ cho mẹ một mẫu gửi về, để mẹ được nở mày nở mặt với người ta.»"},{"who":"me","text":"Cả đời mẹ chưa từng nhờ ta điều gì. Mẫu này, ta phải tự tay vẽ."}]}},
 {"id":"j72:j72c-craft-007","dlg":{"L":"A","R":"me","lines":[{"who":"A","text":"{Goi} thứ tội, {xung} là người hầu bên cung {B}, liều mạng sang đây cầu {goi} một việc."},{"who":"me","text":"Đứng lên mà nói. Chủ ngươi có chuyện gì?"},{"who":"A","text":"Chậu lan vân chủ {xung} quý nhất bị sâu đục lá, mấy hôm nay vàng úa từng đốm."},{"who":"A","text":"Chủ {xung} sĩ diện, nhất định không chịu nhờ ai. Lan mà chết, kẻ coi sóc như {xung} khó giữ nổi mình."},{"who":"me","text":"Thì ra ngươi lén chủ mà đến. Được, để ta xem lá lan trước đã."}]}},
 {"id":"j68:j68c-visit-001","dlg":{"L":"A","R":"me","lines":[{"who":"A","text":"{Goi} đang rảnh chăng? {Xung} mới được người nhà gửi vào ít trà ngon, nghĩ ngay đến {goi} trước tiên."},{"who":"me","text":"Hộp {O} này quý lắm, {goi} hậu tình quá."},{"who":"A","text":"Chút lòng thành thôi. Chỉ là cung {xung} dạo này vắng vẻ, Hoàng thượng lâu rồi chưa ghé qua."},{"who":"A","text":"Nếu {goi} có dịp hầu chuyện, xin nhắc giùm một lời. Ơn ấy, {xung} ghi tạc trong lòng."},{"who":"me","text":"Lời nhờ cậy nặng hơn hộp trà nhiều. Để {xung} nghĩ xem nên đáp thế nào."}]}},
-{"id":"j7:j7-002","dlg":{"L":"target","R":"me","lines":[{"who":"nar","text":"Phòng thêu phía tây cung, đôi gối mẫu đơn dâng Thái hậu nằm trên án, mép chỉ đã bị rút lỏng."},{"who":"target","text":"Nửa tháng trời {xung} thêu từng cánh hoa, chỉ cần ôm vào lòng là bung ra từng mảng."},{"who":"me","text":"Mũi kim lạ này vương trên tay vịn ghế. Chỗ ấy ai hay ngồi?"},{"who":"target","text":"Là chỗ của {plotter}. {Xung} không dám nói bừa, nhưng ngày dâng lễ chẳng còn bao lâu nữa."},{"who":"me","text":"Chuyện này cần nghĩ cho kỹ, một bước sai là cả hai cùng mang tiếng."}]}}
+{"id":"j7:j7-002","dlg":{"L":"target","R":"me","lines":[{"who":"nar","text":"Phòng thêu phía tây cung, đôi gối mẫu đơn dâng Thái hậu nằm trên án, mép chỉ đã bị rút lỏng."},{"who":"target","text":"Nửa tháng trời {xung} thêu từng cánh hoa, chỉ cần ôm vào lòng là bung ra từng mảng."},{"who":"me","text":"Mũi kim lạ này vương trên tay vịn ghế. Chỗ ấy ai hay ngồi?"},{"who":"target","text":"Là chỗ của {plotter}. {Xung} không dám nói bừa, nhưng ngày dâng lễ chẳng còn bao lâu nữa."},{"who":"me","text":"Chuyện này cần nghĩ cho kỹ, một bước sai là cả hai cùng mang tiếng."}]}},
+{"id":"j71:fc-newyear-c01","dlg":{"L":"B","R":"me","lines":[{"who":"B","text":"Ôi chao, {xung} vụng quá! Chén trà nghiêng một cái, đổ ngay lên {O} của {goi}."},{"who":"me","text":"Sắp đến giờ nộp rồi, vệt trà còn ướt cả một góc lụa."},{"who":"B","text":"Để {xung} lau cho, {goi} đừng giận. Năm mới đầu xuân, ai lại nỡ trách nhau vì một chén trà."},{"who":"me","text":"Lụa thì lau được, còn lòng người có vô ý hay không, chỉ người ấy tự biết."}]}},
+{"id":"wc:wc-tang-002","dlg":{"L":"A","R":"me","lines":[{"who":"nar","text":"Tin Thái hậu băng hà, cả cung đổ về chính điện, lệnh quỳ theo phẩm vừa truyền xuống."},{"who":"A","text":"Hàng đầu bên linh cữu phải để {xung} quỳ. Bao năm qua, người hầu hạ Thái hậu sớm hôm là {xung}."},{"who":"me","text":"Lệnh truyền quỳ theo phẩm trật, ma ma xếp chỗ đang lúng túng kia kìa."},{"who":"A","text":"Phẩm trật là chuyện của người sống. Trước linh cữu, chỉ nên tính đến tấm lòng."}]}},
+{"id":"j70:j70c-poison-002","dlg":{"L":"M","R":"me","lines":[{"who":"M","text":"{Goi}, nô tỳ có chuyện phải bẩm riêng, xin người cho lui hết kẻ hầu."},{"who":"me","text":"Nói đi, ở đây chỉ có hai ta."},{"who":"M","text":"Nô tỳ nghe phong thanh có kẻ thuê thợ bạc ngoài phố đúc một đôi đũa giống hệt đôi đũa thử độc của người."},{"who":"M","text":"Lại có một cung nữ lạ giấu vật gì dài dài trong ống tay áo, cứ lảng vảng gần thiện phòng."},{"who":"me","text":"Đũa bạc mà bị tráo thì thử độc cũng bằng không. Phải đề phòng từ hôm nay."}]}},
+{"id":"ky:kyc-ma-002","dlg":{"L":"W","R":"me","lines":[{"who":"nar","text":"Trong điện Thọ Ninh, khói hương còn vương trên án thờ."},{"who":"W","text":"Lễ dâng hương, nén nào đặt trước nén nào đặt sau, sai một nén là cả năm không yên."},{"who":"me","text":"Vãn bối đứng đây đã lâu, chỉ sợ làm phiền bà."},{"who":"W","text":"Đứng đó mà nhìn thì chẳng học được gì. Muốn học thì lại gần đây."}]}}
 ];
 /* ================= jdlgs: SIDE-LINE DIALOGUE SCENES (owner OD 24/11 ~10:05Z «STORY = DIALOGUE SCENES»; Foreman B, review/sideline-dlg) =================
    Every side-line quest that involves a person opens with a short visual-novel scene before its card: the person who comes stands LEFT, she
@@ -95343,7 +95347,7 @@ function dlgsResolve(spec,c){try{if(!spec||!dlgsOn()||!Array.isArray(spec.lines)
  const L=spec.L,R=spec.R||"me";if(!L||L===R)return null;const who=r=>r==="me"?dlgsMe():c.who(r);const pL=who(L),pR=who(R);if(!pL||!pR)return null;
  const lines=[];for(const ln of spec.lines){const f=ln.who==="nar"?null:ln.who===L?0:ln.who===R?1:-1;if(f<0)return null;
   const sp=f==null?null:[L,R][f],ls=f==null?null:[R,L][f];const t=String(c.txt?c.txt(ln.text,sp,ls):ln.text||"").trim();if(!t||/\{[^}]*\}/.test(t))return null;lines.push({fig:f,who:f==null?"":[pL.n,pR.n][f],text:t,focus:!!ln.focus&&f!=null})}
- let bg="";try{const a=typeof kitPlaceArt==="function"?kitPlaceArt(spec.at||c.at||"home"):null;bg=a&&a.src||""}catch(e){}
+ let bg="";try{const a=typeof kitPlaceArt==="function"?kitPlaceArt(spec.at||c.at||(S&&S.place)||"home"):null;bg=a&&a.src||""}catch(e){}
  return{bg,figs:[pL.src,pR.src],names:[pL.n,pR.n],lines,watch:!!spec.watch}}catch(e){console.error(e);return null}}
 /* attach to the card the family just pushed (the last Q item pushed since n0, matched by test) */
 function dlgsAttach(n0,d,test){if(!d)return false;for(let i=Q.length-1;i>=Math.max(0,n0);i--){const m=Q[i];if(m&&!m.dlg&&(!test||test(m))){m.dlg=d;DLGS.n++;return true}}return false}
@@ -95372,11 +95376,11 @@ function dlgsVoice(a){if(!a)return null;if(a===S)return S;try{return kSpk(a)||{s
 function dlgsCtx(act,fill,at){const maid=S.maid?{k:"maid",o:S.maid,n:S.maid.name}:null;const get=r=>r==="me"?S:r==="M"||r==="maid"?maid:act[r]||null;
  return{who:r=>dlgsActor(get(r)),txt:(t,a,b)=>{const v=dlgsVoice(get(a)),l=dlgsVoice(get(b));if(v&&l)t=kSay(v,l,t);return fill(t)},at}}
 /* j72 việc nhờ (110 old templates + THIN P3 composed seeds): the offer card (pid q72o, pp.x). Unit id "j72:<seed id>" / "j72:<old tid>".
-   Roles A requester · B second person · M her cung nữ. Place: A comes to her palace / she asked around (A's place). A family letter: L = M. */
+   Roles A requester · B second person · M her cung nữ. Place: A comes to where she is / she asked around (A's place). Default background = the place she stands (S.place). A family letter: L = M. */
 function dlgsJ72Id(tid){return"j72:"+String(tid).replace(/^c:/,"")}
 function dlgsJ72(x,how){const sp=dlgsGet(dlgsJ72Id(x.tid));if(!sp)return null;const X=q72X(x);if(!X)return null;
  const A=X.A&&X.A.k==="fam"?(S.maid?{k:"maid",o:S.maid,n:S.maid.name}:null):X.A;
- return dlgsResolve(sp,dlgsCtx({A,B:X.B},t=>q72Txt(t,X),how==="ask"?q72Home(X.A):"home"))}
+ return dlgsResolve(sp,dlgsCtx({A,B:X.B},t=>q72Txt(t,X),how==="ask"?q72Home(X.A):null))}
 DLGS.R.push({test:m=>m.pid==="q72o"&&m.pp&&m.pp.x,fn:m=>dlgsJ72(m.pp.x,m.pp.how)});
 /* j68 composed decisions (THIN P4; pid "e68c:<seed id>", pp = the cast a0/a1). Roles A, B (the seed's), M. */
 DLGS.R.push({test:m=>/^e68c:/.test(m.pid||""),fn:m=>{const sid=m.pid.slice(5),sp=dlgsGet("j68:"+sid);if(!sp)return null;const s=E68I["c:"+sid],sd=typeof J68C_SEEDS!=="undefined"&&J68C_SEEDS[sid];if(!s||!sd)return null;
@@ -95384,7 +95388,18 @@ DLGS.R.push({test:m=>/^e68c:/.test(m.pid||""),fn:m=>{const sid=m.pid.slice(5),sp
 /* j7 composed intrigue (THIN P2; pid "j7c", pp.sid + pp.c cast). Roles = the seed's role ids (plotter, target, …) + maid. */
 DLGS.R.push({test:m=>m.pid==="j7c"&&m.pp&&m.pp.sid,fn:m=>{const sp=dlgsGet("j7:"+m.pp.sid);if(!sp)return null;j7cSeeds();const sd=J7I[m.pp.sid];if(!sd)return null;const X=j7cActors(sd,m.pp.c||{});if(!X)return null;
  return dlgsResolve(sp,dlgsCtx(X,t=>j7cFill(t,X),null))}});
-try{window.DLGS=DLGS;window.dlgsResolve=dlgsResolve;window.dlgsPlay=dlgsPlay;window.dlgsGet=dlgsGet}catch(e){}
+/* families whose card is built inside their own closure (j71c, jworldc) call this when they build it: id = unit id, act = their cast table */
+function dlgsMk(id,act,fill,at){try{const sp=dlgsGet(id);return sp?dlgsResolve(sp,dlgsCtx(act||{},fill||(t=>t),at)):null}catch(e){console.error(e);return null}}
+/* kỳ ngộ (jky + THIN P5 jkyc): the encounter card (pid "kyngo" with choices, or the no-choice card) of KY.cur; ONE scene per encounter. Role W = the person met. */
+DLGS.R.push({test:m=>/^kyngo:/.test(m.evId||"")&&typeof KY!=="undefined"&&KY.cur&&m.evId==="kyngo:"+KY.cur.id&&!KY.cur.__dlg,fn:m=>{const c=KY.cur;c.__dlg=1;const w=c.W;if(!w)return null;
+ const n=c.wn||(typeof wName==="function"?wName(w):(w.ref&&w.ref.name)||"");const W={k:w.kind==="el"?"mama":w.kind,o:w.ref||w,n,f:null};
+ return dlgsMk("ky:"+c.id,{W},t=>String(t).replace(/\{W\}/g,n),null)}});
+/* she saw the tell HERSELF on the spot (j70 goTo): no cung nữ report scene for that plot (law 6b: the scene must match who really saw it) */
+if(typeof goTo==="function"){const g0=goTo;goTo=function(k){let pre=null;try{const z=typeof j70==="function"?j70():null;pre=z?new Set(z.pl.filter(p=>p.pend==="seen").map(p=>p.id)):null}catch(e){}
+ const r=g0.apply(this,arguments);try{const z=pre&&j70();if(z)for(const p of z.pl)if(p.pend==="seen"&&!pre.has(p.id))p.dlgSelf=1}catch(e){}return r}}
+/* j70 plots (51 routes + THIN P6 composed): her people saw a TELL of a plot aimed at her (pid "j70", stage "seen"); L = her cung nữ who saw it. Unit id "j70:<route id>". */
+DLGS.R.push({test:m=>m.pid==="j70"&&m.pp&&m.pp.s==="seen",fn:m=>{const p=P70(m.pp.id);if(!p||pt70(p)!==S||!S.maid||p.dlgSelf)return null;return dlgsMk("j70:"+p.r,{},t=>t,null)}});
+try{window.DLGS=DLGS;window.dlgsResolve=dlgsResolve;window.dlgsPlay=dlgsPlay;window.dlgsGet=dlgsGet;window.dlgsMk=dlgsMk}catch(e){}
 /* ================= jwalk — WALK COST, ONE RULE FOR EVERYONE (review/walk-cost, ORDER MAIN ROOT-76 20/11; owner OD 19/11 ~22:00Z
    «tôi đang ở Ngự Hoa Viên khắc ba nè, tôi bấm về nhà là tốn một khắc, tức là khắc thứ tư là tôi đã ở nhà rồi»; law 1 two-way, law 4 one core).
    Her: j2 goTo("home") / j42 srvGoTo home pay travel(place,home) like every other walk (j9 travel, BAL.walk.near / far), spill included (j9).
@@ -97886,7 +97901,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="a0785bb107e8";window.CTM_BUILD=BUILD;
+const BUILD="a60f1015a036";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

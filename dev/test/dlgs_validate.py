@@ -36,9 +36,9 @@ for s in sd('j68sd.js','J68SEEDS'):
 for s in sd('jkysd.js','KYSEEDS'):add('ky',s['id'],{'W'},{'W'})
 for s in sd('j70sd.js','J70SEEDS'):add('j70',s['id'],{'M'},set())
 for s in sd('j71sd.js','J71SEEDS'):
-    if s.get('type')=='comp':add('j71',s['id'],{'A','B','W','M'},{'A','B','W','O','F'})
+    if s.get('type')=='comp':add('j71',s['id'],{'B','M'} if (s.get('roles') or {}).get('B') else {'M'},{'B','O','F'})
 for s in sd('jwsd.js','JWSEEDS'):ro=set((s.get('roles') or {}).keys())|{'M'};add('wc',s['id'],ro,ro|{'O','X'})
-LIVE={'j72'}   # families whose adapter plays the scene in the game now
+LIVE={'j72','j68','j7','ky','j70','j71','wc'}   # families whose adapter plays the scene in the game now
 
 def check(r,where):
     E=[];uid=r.get('id','?');d=r.get('dlg')

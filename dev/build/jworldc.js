@@ -88,7 +88,7 @@ function wcOpts(sd,w,X){const tier=sd.tier||"m";return Object.entries(sd.stances
 function wcCard(w){const c=w.x&&w.x.wc;if(!c)return null;const sd=WCI[c.id];if(!sd)return null;
  if(typeof isSrv==="function"&&isSrv())return null;if(S.out||S.dead)return null;const X=wcActors(sd,w,c);if(!X)return null;
  let nm="";try{nm=window.worldName(w)}catch(e){}
- return{t:nm||"Thế sự trong cung",who:X.A?X.A.f:pEmp(),wwin:1,h:`<p>${fill(sd.news,sd,X)}</p><p>${fill(sd.text,sd,X)}</p>`,opts:wcOpts(sd,w,X)}}
+ return{t:nm||"Thế sự trong cung",who:X.A?X.A.f:pEmp(),wwin:1,h:`<p>${fill(sd.news,sd,X)}</p><p>${fill(sd.text,sd,X)}</p>`,opts:wcOpts(sd,w,X),dlg:typeof dlgsMk==="function"?dlgsMk("wc:"+sd.id,X,t=>fill(t,sd,X),null):null/* sideline-dlg: the opening scene (jdlgs) */}}
 function wcEnd(w){const c=w.x&&w.x.wc;if(!c||!c.r)return"";const sd=WCI[c.id];if(!sd)return"";const X=wcActors(sd,w,c)||{};
  const P=[];for(const[k,L]of Object.entries(c.r)){const st=sd.stances[k];if(!st||!L||!L.length)continue;
   const N=L.map(x=>sd.scope==="srv"?x:(()=>{const p=byPid(x);return p&&p!==S?p.name:null})()).filter(Boolean);if(N.length)P.push(`${N.join(", ")}: «${fill(st.text,sd,X)}»`)}
