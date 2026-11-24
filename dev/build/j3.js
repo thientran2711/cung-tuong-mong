@@ -1,9 +1,9 @@
 
 /* portraits */
 const AV=window.AVATARS||{women:[],emperor:[],maids:[]};
-function drawFace(){const n=(AV.women||[]).length;if(!n)return{face:-1,hue:0};S.usedFaces=S.usedFaces||[];
+function drawFace(){const n=(AV.women||[]).length;if(!n)return{face:-1};S.usedFaces=S.usedFaces||[];
   let free=[...Array(n).keys()].filter(i=>!S.usedFaces.includes(i));let hue=0;
-  if(!free.length)return{face:-1,hue:0};const f=pick(free);S.usedFaces.push(f);return{face:f,hue:0}}
+  if(!free.length)return{face:-1};const f=pick(free);S.usedFaces.push(f);return{face:f}}
 function srcW(o){return o&&o.face>=0&&AV.women&&AV.women[o.face]?AV.women[o.face]:""}
 function pv(v){const g=rkOfFace("consort",v);return{rk:g[0],rw:g[1],w:["r",v.id],src:fsrc(v.fc,srcW(v)),hue:0,ini:v.name.split(" ").pop()[0],col:RCOL[v.queen?7:v.rank]}}
 function pEmp(){return{rk:"emp",rw:"Hoàng thượng",w:["e"],src:fsrc(S.emp.fc,(AV.emperor||[])[S.emp.face]||""),hue:0,ini:"Đế",col:"#f0d070"}}

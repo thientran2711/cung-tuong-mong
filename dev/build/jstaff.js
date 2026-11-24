@@ -37,7 +37,7 @@ function elderName(post,i){const nm=post.names[i%post.names.length];let T=null;t
  const nb=nmNew("f");return[nb,nmSurOf(nb)+" "+nm[1].split(" ").slice(-2).join(" ")]}
 function mk(post,i,age){const nm=elderName(post,i);if(typeof sidN!=="undefined")sidN=Math.max(sidN,...allServ().map(s=>s.sid||0),0);
  return{sid:typeof sidN!=="undefined"?++sidN:Date.now(),eid:post.id,n:i,name:nm[0],call:nm[1],role:"maid",rk:post.rk,age,retire:rint(...(B().retire||[63,68])),
-  tr:post.tr||"trung",loyal:70+R(16),spyFor:null,lover:null,af:{},hue:0,face:-1,fc:"",fk:"",fid:"",elder:1,since:S?S.year:1}}
+  tr:post.tr||"trung",loyal:70+R(16),spyFor:null,lover:null,af:{},face:-1,fc:"",fk:"",fid:"",elder:1,since:S?S.year:1}}
 const elderCallOf=m=>{const st=(m.staff||[]).find(s=>s.eid);return st?st.call:"ma ma"};
 /* keep the household rule: a master over her cap sends ordinary servants back to Nội vụ phủ (never a named one) — the ONE trim (j10 capTrim,
    review/staff-cap-fix): same order, and she is told of every removal */
