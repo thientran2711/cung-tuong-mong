@@ -68,7 +68,7 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
   unforce();
   // (9) her buttons
   ok(/data-sv="hoi2"/.test(staffHTML()),'staff list: «Hỏi chuyện» on another house\'s servant');
-  const q0=Q.splice(0);const used0=used;const before=S.logs.length;servAct('hoi2',sv.sid);Q.push(...q0);ok(used===used0+2,'«Hỏi chuyện» costs 2 khắc (used '+used0+'→'+used+' can2 '+can(2)+' dead '+S.dead+' owner '+(ownerOf(sv)&&ownerOf(sv).name)+')');ok(S.logs.length>before,'a line is logged after');
+  const q0=Q.splice(0);const used0=used;const before=S.logs.length;servAct('hoi2',sv.sid);Q.push(...q0);ok(used===used0+BAL.svt.k,'«Hỏi chuyện» costs BAL.svt.k khắc (used '+used0+'→'+used+' can2 '+can(2)+' dead '+S.dead+' owner '+(ownerOf(sv)&&ownerOf(sv).name)+')');ok(S.logs.length>before,'a line is logged after');
   ok(noNum(S.logs[0].replace(/<[^>]*>/g,'').replace(/^T\d+\/\d+/,'').replace(/ — [^—]*→ ta:.*$/,'')/* the kit relation read-out (after the act) */.replace(/chứng cứ \+?-?\d+/gi,'')),'her log line has no number / %: '+S.logs[0].replace(/<[^>]*>/g,'').slice(0,300));
   // (10) old save
   const d=JSON.parse(JSON.stringify(ser()));delete d.svtG;quiet=true;deser(d);quiet=false;ok(!!S&&typeof svTalk==='function','old save without svtG loads');
