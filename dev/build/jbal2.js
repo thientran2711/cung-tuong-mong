@@ -2054,3 +2054,16 @@ BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's n�
  fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:2,th:2,hh:2,duc:2,maid:3,rel:4,proof:1},
      m:{sung:4,danh:4,bac:40,suc:10,mat:4,th:4,hh:4,duc:4,maid:6,rel:8,proof:1},
      l:{sung:6,danh:6,bac:60,suc:15,mat:6,th:6,hh:6,duc:6,maid:9,rel:12,proof:2}}};
+/* jscent (review/scent, PARKING #10 HƯƠNG RIÊNG, owner 20/11 ~06:35Z): every number of the signature scent (law 4).
+   list: the four scents (key → name, the monthly gain while she burns it; equal value, law 2: one stat each at the huongtram ratio Đức 1 ≈ Sức 5).
+   pr: one box of that incense (all equal); npcStock: boxes an NPC brings from home [min,max]; keep: bạc an NPC keeps after a restock buy.
+   like / dis: the Emperor's liked / disliked scent on a night (sung = Sủng to the one he visits; tell = odds points added to «others smell who was
+   with him» — liked = he lingers, everyone smells it; disliked = he leaves early, few notice: gain AND loss both ways, law 3).
+   tell: odds that one observer smells it = base + eye·eyes(observer) + tm (she has tai mắt) + rk·rank of the visited (law 5: the higher she is,
+   the more eyes on her) + like/dis; ghen / rel = what the observer feels toward the one she THINKS was there (two can share a scent: the tell can
+   point to the wrong person — law 6a). copy: an NPC whose Ghen toward her ≥ ghen copies her scent with odds p a month (frames her; she can do the
+   same by buying a rival's scent). poison: the j70 route «Mua chuộc cung nữ coi lò hương» (bạc only when it lands, payWin70) and its vis / need;
+   doc: TAINT «tẩm hương độc» on a box (c = bạc to taint one herself, suc = Sức lost by the one who burns that box). */
+BAL.scent={list:{tram:{n:"trầm",g:{duc:1}},lan:{n:"lan",g:{sac:1}},que:{n:"quế",g:{suc:5}},mai:{n:"mai",g:{danh:1}}},
+ pr:12,npcStock:[2,4],keep:10,like:{sung:3,tell:15},dis:{sung:-3,tell:-15},
+ tell:{base:20,eye:4,tm:15,rk:3,ghen:4,rel:3},copy:{p:10,ghen:40},poison:{bac:35,vis:2,need:2},doc:{c:5,suc:-8}};
