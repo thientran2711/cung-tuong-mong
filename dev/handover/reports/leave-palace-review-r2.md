@@ -93,3 +93,10 @@ law 4 one core: the j30 merge keeps LIVE's netTh gate (no typed number) and the 
 **PASS 7a3541fd17ea9da156d97855a67a6c88ee488a50** (review/leave-palace-r5; ancestor = origin/main 22f1e491 → fast-forward ready). Scratch shots none (no new UI); scratch logs deleted.
 
 LIVE moved again to 8eceeef9 (kit-titleplate) at ~17:15Z after these gates: E85r re-merges it next on the same branch and posts a second line; if LC11 lands before that, 7a3541fd is FF from 22f1e491 only.
+
+### RE-MERGE r5 follow-up (E85r, 24/11 18:10Z) — **PASS a5b9244b4ec5cea8225143e31f77fa982f92858f** (supersedes 7a3541fd)
+| commit | = | conflicts | dev/build delta | leave-palace | fit (end card) | COOP_SWAP | Fold host | quickcheck |
+|---|---|---|---|---|---|---|---|---|
+| 0f9e59bc | 7a3541fd + LIVE 8eceeef9 (kit-titleplate) | index/sw only, rebuilt | 20/20 same | 135/135 | Fold 24 + iPad 24, overflow 0 | 1/1 | 1/2 (1× iPad console CORS on ctm-rank workers.dev /hello = external network, no game error; rerun 142/142) | PASS (render 210/190, tab 445/397, buổi 1071/1161 ms) |
+| a5b9244b | + LIVE 284e0d08 (kit-noprewarn: j82/jk4/jmgcal/jsgame/jtoil — no file shared with the branch) | index/sw only, rebuilt | 20/20 same | 135/135 | 24 + 24, overflow 0 | 1/1 | 1/1 | PASS (render 219/180, tab 425/392, buổi 1379/929 ms, tasks 23/17 — within limits) |
+**PASS a5b9244b4ec5cea8225143e31f77fa982f92858f** (review/leave-palace-r5; FF from LIVE 284e0d08). LIVE moved again to 502c48c9 at ~18:05Z; every re-merge so far = index.html/sw.js rebuild only with the same 20-file delta — E85r re-merges on request (≈15 min with gates).
