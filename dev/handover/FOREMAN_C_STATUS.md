@@ -2012,3 +2012,4 @@ ROOT-D2 ~01:40Z: ROOMNC-2 DONE 59 rooms (?v=5, review/rooms-nc @fca0bad), b5-6 L
 - FROM MAIN 115 (02:10Z 24/11): sếp is opening a FOREMAN C ROOT (depth reset) with dev/handover/TAKEOVER_FOREMAN_ROOT_X.md (X=C). When it messages you or writes its line here: write your final HANDOVER, delete your hourly wake, tell seats, stop.
 - FROM MAIN 115 (02:15Z 24/11): LIVE = 4a8c627b (thin-p0 + thin-p2: memory + composed j7 lines).
 - FROM MAIN 115 (02:35Z 24/11): LIVE = 1ddbe155 (robot10 harness + reco, test-only).
+- FROM MAIN 115 (02:50Z 24/11): LIVE = 14ba8768 (fix-evening-softlock: no stuck evening after reload during a choice).
