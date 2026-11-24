@@ -2033,3 +2033,14 @@ BAL.mgp={min:40};
 BAL.mgpc={nghe:120,td_hanh:150,kinh:360,may:350};
 /* ORDER THIN P1b (jmgpool_b.js): items per pooled test type of lane P1b (co and doi/doden: per group size / rows / round type) */
 BAL.mgpb={dan:64,co:90,dauho:60,theu:64,mua:64,doi:80,doden:44,tc:100,xa:200,thq:130};
+/* ORDER THIN P2 (j7c.js composed intrigue): on = the family is live; share = its weekly-card weight as a multiple of one world card
+   (BAL.ag.why.dil.world); rest = months before the same seed may return in one life (as the old j7 cards, S.seen ≥ 12);
+   fx[tier] = what ONE gain/loss step of a seed is worth per key (laws 2/3/4: seeds count steps, the numbers live here; rel = thiện cảm
+   of a cast person, proof = chứng cứ against a cast consort). Tiers s/m/l as yard.md.
+   review thin-p2 r1: proof on the chứng cứ scale (evStory = a deed of that weight; DEEDW 1–2, a blood-test demand needs BAL.kh.accEv 3; the old j7 cards give
+   evGo 1–2 and only on a won roll) — the first 8/15/25 made every proof stance a full accusation in one tap (law 2 equal value). */
+BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's nết AND lòng → cast someone with any one of them */
+
+ fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:2,th:2,hh:2,duc:2,maid:3,rel:4,proof:1},
+     m:{sung:4,danh:4,bac:40,suc:10,mat:4,th:4,hh:4,duc:4,maid:6,rel:8,proof:1},
+     l:{sung:6,danh:6,bac:60,suc:15,mat:6,th:6,hh:6,duc:6,maid:9,rel:12,proof:2}}};
