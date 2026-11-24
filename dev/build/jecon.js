@@ -26,6 +26,8 @@ try{for(const k in BAL.priceTier)if(IT[k])IT[k].pr=BAL.priceTier[k]}catch(e){}
 /* the old tables read the same numbers (display + any code that still reads them) */
 try{BL.splice(0,BL.length,...BAL.pay)}catch(e){}
 try{WVAL.splice(0,WVAL.length,...BAL.craftGift)}catch(e){}
+/* LAW 4 (robot10 nc-fix-3b): the khất bổng share is read from BAL.payCut, never typed («bớt 3 phần 10» at 5 sites) */
+function payCutTxt(){try{return `${Math.round((1-BAL.payCut)*10)} phần 10`}catch(e){return "một phần"}}
 function econMonthName(){try{return typeof WMON!=="undefined"&&WMON[S.month]?WMON[S.month]:String(S.month)}catch(e){return ""}}
 function econDuty(p){const r=Math.min(7,rkOf(p));return p.out||p.confined?0:BAL.duty[r]}
 function econBan(p){const r=Math.min(7,rkOf(p));return p.out||p.confined?0:BAL.banThuong[r]}
@@ -43,7 +45,7 @@ function econPatron(p){if(p.out)return null;const r=rkOf(p);const L=consorts().f
  if(!L.length)return null;const v=L.sort((a,b)=>rel(b,p)-rel(a,p))[0];const n=BAL.patronPay[Math.min(7,r)];ap(v,{bac:-n});ap(p,{bac:n});return{v,n}}
 function econStipend(p){const r=rkOf(p),me=p===S,staff=(p.staff||[]).length;let base=BAL.pay[Math.min(7,r)],why=[],cut=false;
  if(p.out){base=BAL.payCold;why.push(`lãnh cung: chỉ ${BAL.payCold} bạc`)}else{if(p.confined){base=Math.round(base*BAL.payConfined);why.push("cấm túc: nửa bổng, không lễ nghĩa")}
-  if(p.cutPay>0){cut=true;base=Math.round(base*BAL.payCut);why.push(`Nội vụ phủ khất bổng${p.cutBy?" theo ý "+p.cutBy:""}: bớt 3 phần 10`);p.cutPay--;if(!p.cutPay)p.cutBy=""}}
+  if(p.cutPay>0){cut=true;base=Math.round(base*BAL.payCut);why.push(`Nội vụ phủ khất bổng${p.cutBy?" theo ý "+p.cutBy:""}: bớt ${payCutTxt()}`);p.cutPay--;if(!p.cutPay)p.cutBy=""}}
  /* jstip: the goods of her rank (real items) and the Nội vụ phủ skimming (silver + worse goods), same rule for every consort */
  const SK=typeof stipSkim==="function"?stipSkim(p,base,cut):null;const skB=SK?SK.bac:0;
  const G=typeof stipGoods==="function"?stipGoods(p,SK):[];
@@ -77,7 +79,7 @@ function econStipend(p){const r=rkOf(p),me=p===S,staff=(p.staff||[]).length;let 
    else card.h+=`<p class="past">${econNoOpt(S)}</p>`;
    Q.push(card);if(follow)Q.push(follow);try{if(typeof stipShow==="function")stipShow(G,net,SK,1)}catch(e){console.error("stip show",e)}}else econDoDuty(p,true)}catch(e){console.error("econ card",e)}
  return line};
-blCard=function(){return `<p>Bổng lộc phát ngày đầu mỗi tháng, theo phẩm vị (mọi phi tần như nhau). Mỗi kẻ hầu ăn công ${BAL.wage} bạc/tháng. Phẩm càng cao, lễ nghĩa càng tốn.</p>${kitRows(BAL.pay.map((b,i)=>[i>=7?"Hoàng hậu":RANKS[i].n,[`<span class="ef t">${b} bạc</span>`,typeof stipRankTxt==="function"?stipRankTxt(i):BLG[i],BAL.duty[i]?`lễ nghĩa ${BAL.duty[i]}`:"",BAL.banThuong[i]?`ban thưởng ${BAL.banThuong[i]}`:""].filter(Boolean),"n"]))}<p class="past">Lãnh cung: chỉ ${BAL.payCold} bạc. Cấm túc: nửa bổng. Hoàng hậu ghét ngươi (thiện cảm dưới -30): mỗi tháng sai Nội vụ phủ khất bổng (bớt 3 phần 10): ${word(20)}. Sinh con, được ân thưởng: cộng thêm một lần.</p>${typeof stipRuleTxt==="function"?stipRuleTxt():""}`};
+blCard=function(){return `<p>Bổng lộc phát ngày đầu mỗi tháng, theo phẩm vị (mọi phi tần như nhau). Mỗi kẻ hầu ăn công ${BAL.wage} bạc/tháng. Phẩm càng cao, lễ nghĩa càng tốn.</p>${kitRows(BAL.pay.map((b,i)=>[i>=7?"Hoàng hậu":RANKS[i].n,[`<span class="ef t">${b} bạc</span>`,typeof stipRankTxt==="function"?stipRankTxt(i):BLG[i],BAL.duty[i]?`lễ nghĩa ${BAL.duty[i]}`:"",BAL.banThuong[i]?`ban thưởng ${BAL.banThuong[i]}`:""].filter(Boolean),"n"]))}<p class="past">Lãnh cung: chỉ ${BAL.payCold} bạc. Cấm túc: nửa bổng. Hoàng hậu ghét ngươi (thiện cảm dưới -30): mỗi tháng sai Nội vụ phủ khất bổng (bớt ${payCutTxt()}): ${word(20)}. Sinh con, được ân thưởng: cộng thêm một lần.</p>${typeof stipRuleTxt==="function"?stipRuleTxt():""}`};
 /* a good night: Hoàng thượng's thưởng also brings silver (same for every consort). It is the night entry of j20's reward silver (BBAC), so it
    goes through the ONE ân thưởng path: inside bestow, before the tray (j93 kitReward) counts its coins, in the awards ledger (S.awards), the
    "Ân thưởng …: <món>, Bạc +N" log line and the award card chip — no second silver wrapper, no stray Bạc line of its own. */
