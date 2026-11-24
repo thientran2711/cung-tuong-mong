@@ -148,9 +148,12 @@ let MAN=null,HAVE=null,coreList=[],figList=[];
 async function cacheHave(c,files){const H=new Set();let i=0;const w=async()=>{while(i<files.length){const k=keyOf(files[i++]);try{if((await c.keys(k)).length)H.add(k)}catch(e){}}};
  await Promise.all(Array.from({length:Math.min(16,files.length)},w));return H}
 const TM=KLOAD.tm={};const tm=k=>{TM[k]=Math.round(performance.now())};/* test hook: boot check timings (dev/measure/offline-fast.js) */
+/* offline-fast: the manifest's saved copy, offline — the app shells first (small); never an ignoreSearch walk over 'ctm-assets' (~32 000 keys) unless no shell has it */
+async function shellCopy(p){const u=new URL(p,location.href).href;try{for(const k of (await caches.keys()).filter(k=>k.startsWith("ctm-shell-")).reverse()){const r=await (await caches.open(k)).match(u,{ignoreSearch:true});if(r)return r}}catch(e){}
+ try{return await caches.match(p,{ignoreSearch:true})}catch(e){return null}}
 async function plan(){tm("plan");
  let r=null;try{r=await fetch("assets.json",{cache:"no-cache"})}catch(e){}
- if(!r||!r.ok)r=await caches.match("assets.json",{ignoreSearch:true});if(!r)return false;tm("manGot");
+ if(!r||!r.ok)r=await shellCopy("assets.json");if(!r)return false;tm("manGot");
  MAN=await r.json();tm("manParsed");const c=await caches.open(AC);
  /* offline-fast: the ~1 450 core + figure files were looked up one by one at EVERY start (4.8 s at CPU 4× with a half-full cache; the music's own
     cache read waited behind them = no sound for seconds after opening). Files on the known list (see «Tải hết» below) are not asked again. */
@@ -411,7 +414,7 @@ addEventListener("visibilitychange",()=>{if(document.hidden)seenSave()});addEven
 function oaHit(f){const k=deadKey(f);if(SEEN.has(k))return;const u=!NEED.has(k);NEED.delete(k);oaSeen(f);ALL.have+=f[2];ALL.files++;ALL.left--;if(u)oaU()}
 function oaMiss(f){const k=deadKey(f);if(SEEN.has(k)||NEED.has(k))return;NEED.add(k);seenDirty++;seenSoon();oaU()}
 function oaU(){ALL.unknown=Math.max(0,(ALL.unknown||0)-1);if(!ALL.unknown&&ALL.counting){ALL.counting=false;seenSave();oaPaint()}}
-async function oaMan(){if(MAN)return true;let r=null;try{r=await fetch("assets.json",{cache:"no-cache"})}catch(e){}if(!r||!r.ok)try{r=await caches.match("assets.json",{ignoreSearch:true})}catch(e){}if(!r)return false;try{MAN=await r.json();return true}catch(e){return false}}
+async function oaMan(){if(MAN)return true;let r=null;try{r=await fetch("assets.json",{cache:"no-cache"})}catch(e){}if(!r||!r.ok)try{r=await shellCopy("assets.json")}catch(e){}if(!r)return false;try{MAN=await r.json();return true}catch(e){return false}}
 /* what is left = the manifest minus the known list minus the files the line said are gone; no cache lookups (one call in flight is shared) */
 function allPlan(){if(OFF)return Promise.resolve(false);if(allPlanning)return allPlanning;ALL.planning=true;oaPaint();
  allPlanning=(async()=>{try{if(!await oaMan())return false;await seenGet();const o=oaGet();allDead=new Set(o.dead&&o.dead.v===MAN.v?o.dead.k:[]);
