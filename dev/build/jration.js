@@ -35,7 +35,7 @@ Object.assign(BAL,{ration:{on:true,
  borrow:{base:25,aff:2,ghen:10,whim:20,fail:-2,spare:2,trait:{"Ân cần":15,"Khiêm nhường":10,"Kín đáo":0,"Xảo quyệt":-5,"Tham vọng":-10,"Kiêu ngạo":-15}},
  beg:{hh:15,th:10,stat:2,fail:-3,cd:2},/* xin Hoàng hậu / Thái hậu: base + stat/2 (jveil xin road); fail costs favour; once per cd months */
  steal:{danh:-4,duc:-2,oan:10,cut:1,add:10},/* caught stealing: Danh, Đức, the victim's oán, bổng khất 1 month; odds = plant odds + add */
- npc:{use:3,buy:50},/* NPC month: lượt spent per part; chance to buy when out (borrow / beg / steal / ask her = day-plan choices, jagacts4); (her «Chia» answer: jrcv RCVK.rougeBorrow, the asker quý BAL.rcv.help.af) */
+ npc:{use:4,buy:50},/* NPC month: lượt spent per part (save-growth (b): 3 = exactly the issue n×uses÷parts, so every bought / bestowed box piled up for good; 4 = the issue plus what she buys when out, the stock stays small);  chance to buy when out (borrow / beg / steal / ask her = day-plan choices, jagacts4); (her «Chia» answer: jrcv RCVK.rougeBorrow, the asker quý BAL.rcv.help.af) */
  allergy:{rel:2,chiW:[.3,.45,.25],nguaW:[.2,.45,.35]},/* a tainted box at the sitting → the ONE rash system (jrash rashGive: timed, picture, Thái y): severity weights for pha chì / bột ngứa; the first use of a clean box rolls RASH.cos like any son phấn; rel = her oán toward the one who tainted it */
  tribute:{ch:{promo:60,son:60,contest:35,birthday:50,sinhthan:50,night:5},ghen:3}}});
 const LX_KD="Son phấn";
