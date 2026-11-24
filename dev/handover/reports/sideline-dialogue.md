@@ -133,6 +133,7 @@ Lead #2 fixed this session: duplicate ids (lead.md removed), «ngài»→{goi} f
 - §95 kitDialogue: the speech tail always points LEFT (kitDlgBox tail on the left edge); when the RIGHT figure (her) speaks it should point right. Ask: a `tail:"r"` side (or auto from the lit figure's side). Until then the box sits bottom-centre over both figures.
 
 ## WRITERS
+- (11/24) W11a nr_a.md DONE 200 scenes (nr tt/dtq/muoi/cn roads 192 + 8 stock j72:nr_*), --strict 0 errors on review/sideline-dlg-3 78b9a9d2. Last id done: j72:nr_bac. Order-of-ending variety applied; self-read pass pending.
 - (11/24) W10b j7_ky_old.md DONE 58 scenes (j7 33 + ky 25) and W10c j70_old.md DONE 51 scenes, both --strict 0 errors on review/sideline-dlg-2 59361f1b. Last id done: j70:huydung:son. Self-read pass pending.
 - (24/11) W4 j68_a.md DONE 127 scenes, W5 j68_b.md DONE 120 scenes, W6 j68_c.md DONE 129 scenes (all --strict 0 errors / 0 flat). Last id done: j68:j68c-kid-042. Unit with no `A` person (sea events) use L = M (her cung nữ reports). Self-read pass pending.
 - (24/11) W1p j72_a.md POLISHED (127 scenes, nar opener, no stock replies, --strict 0). W3 j72_old.md DONE: 110 scenes (the 110 T7 templates), --strict 0 errors/0 flat. Fam letters (r:fam) L = M; sứ thần fam letters L = A. Self-read pass pending.
