@@ -48,3 +48,6 @@ PRIORITY #1 CHECK: read START_CORE/WORKER/REVIEWER + brief + this report; git gr
 - coop-e2e 142/142 passed; duodo-focus-view ALL OK; duodo-focus-games ALL OK (law 5 harder at rank 7 kept); kit-focus PASS 755x1000 + 1180x820; minigame-fix ALL OK; family scan 39/39 (see flake note).
 - Shots looked (real CDN art via curl proxy), Fold 755x1000 + iPad 1180x820: Lời hay intro (readable, title one line, Bỏ qua · kết quả thường under), play field (✓/✗ are real pieces over her), Điểm trang rules screen, mirror at 40 ms = her face already in the mirror on both devices. Shots kept in scratch only, none in git/CDN.
 Re-review: after 1–3 are fixed (with «KIT OK <sha>» for 1–2), send the new sha / LC12 merge sha.
+
+### RE-REVIEW 66edf06f (BIG reviewer) — FAIL
+66edf06f = dbd5ea4d + dev/test/mg-noword-kit.js only (assert restored to the fixture's own «Để trời định» button) → item 3 closed. Items 1 (private dfIntro frame, inline bg/border/radius/shadow) and 2 (dfintro-css body:has fx rule in jdfv) are unchanged in jdfv.js → still FAIL; no step-8 merge sha judged (nothing to land). Needs KK23b «KIT OK» for the focus-layer rules card, then a new sha.
