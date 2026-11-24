@@ -1274,7 +1274,7 @@ REVIEW robot10-reco ORDER #6 (sonnet SMALL test-only; briefs/D-robot10-reco-revi
 | THIN P6-SEEDS-A (sonnet writer): content/thin/wseeds_a.md | dev/handover/content/thin/wseeds_a.md; reports/thin.md «## P6-SEEDS-A» | B | session_01N1tNP2MwoWYuxG1JLroPAh | RUNNING | 24/11 01:31Z |
 | THIN P6-SEEDS-B (sonnet writer): content/thin/wseeds_b.md | dev/handover/content/thin/wseeds_b.md; reports/thin.md «## P6-SEEDS-B» | B | session_01N1tNP38TUgspHMN7kQ9yDq | RUNNING | 24/11 01:31Z |
 | THIN P6-SEEDS-C (sonnet writer): content/thin/j70seeds_a.md | dev/handover/content/thin/j70seeds_a.md; reports/thin.md «## P6-SEEDS-C» | B | session_01N1tNP6xLdB8SZqv3mTiHkT | DONE 3c105486 | 24/11 01:31Z |
-| THIN P6-SEEDS-D (sonnet writer): content/thin/j70seeds_b.md | dev/handover/content/thin/j70seeds_b.md; reports/thin.md «## P6-SEEDS-D» | B | session_01N1tNP5f3nrarcvuLRpkNPG | RUNNING | 24/11 01:31Z |
+| THIN P6-SEEDS-D (sonnet writer): content/thin/j70seeds_b.md | dev/handover/content/thin/j70seeds_b.md; reports/thin.md «## P6-SEEDS-D» | B | session_01N1tNP5f3nrarcvuLRpkNPG | DONE 0a76974b | 24/11 01:31Z |
 | THIN P1c (sonnet): every other remaining mini-game kind (sg_/thu_/tuoi/exam…; full 39-kind list first) | review/thin-p1c; reports/thin.md «## P1c» | B | session_01N1tNP43Y5prdNW2dvC5otW | RUNNING | 24/11 00:14Z |
 | REVIEW thin-p1 r1 (sonnet, BIG checklist) of review/thin-p1 b43fe174 (9 kinds; land after thin-p0) | review/thin-p1-r1; reports/thin.md «## REVIEW thin-p1 r1» | B | session_01N1tNP5XaLHAQvcsGkVxdj6 | PASS 087e886c (review/thin-p1-r1; archive) | 24/11 00:14Z |
 AGEBAND (owner 24/11 age bands 18/28/39/51/64) | review/ageband | Foreman E | ORDERED | 24/11 00:18Z (MAIN 114)
