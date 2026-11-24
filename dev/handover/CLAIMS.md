@@ -1475,3 +1475,4 @@ kit-optfit SMALL review | review/kit-optfit-r1 | session_01N1tNP2kA3NCKySUjhemX3
 REVIEW net-build ed1be95a (opus BIG; briefs/D-net-build-review.md) | review/net-build-rv | session_01D3E3NaqgB7naRGuobjMu4H | RUNNING | 24/11 09:12Z (Foreman D depth 1)
 SERVANT TRUST — acts toward another person's people (opus BIG; MAIN 119 07:58Z; briefs/D-servant-trust.md) | review/servant-trust | session_01D3E3NYMzUyzf9KBhvBCtFW | RUNNING | 24/11 09:12Z (Foreman D depth 1)
 | REVIEW E77r MOMENT r1 BIG (opus; briefs/E77r-review-moment-r1.md) of 1d2189f3 | review/moment-r2; reports/moment-review-r2.md | FOREMAN E (child3) | session_01DgYSWopEScRoLUDyxAoR6m | RUNNING | 24/11 09:20Z |
+| SELSCENE-8 fix RV-SELX FAIL (opus; briefs/M121-selscene-fix.md) | review/selection-scene; reports/selection-scene.md | MAIN 121 | (opening) | RUNNING | 24/11 09:30Z |
