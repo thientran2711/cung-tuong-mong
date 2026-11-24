@@ -62,7 +62,7 @@ function amWeek(){if(!amOn())return"";let ev="";try{for(const [s,p] of amMaids()
 function amNightTea(v){if(!amOn()||!v||!v.staff)return"";let ev="";try{for(const s of v.staff)if(s&&s.role==="maid"&&mlAgeOk(s)&&amSeeking(s))ev+=amDecide(s,v,true)||""}catch(e){console.error("jagmaid teaN",e)}return ev}
 /* ---------- 3 his pool ---------- */
 function amPool(){if(!amOn())return[];const L=[];for(const [s,p] of amMaids())if(empMemN(s)>0)L.push({m:s,o:p});
- if(isSrv()&&!S.dead&&(S.age||0)>=18&&!(S.srv.lau>0)&&empMemN(S)>0)L.push({m:S,o:srvM()});return L}
+ if(isSrv()&&!S.dead&&(S.age||0)>=BAL.ageMin&&!(S.srv.lau>0)&&empMemN(S)>0)L.push({m:S,o:srvM()});return L}
 function amCh(m){const C=amD().ch,st=amSt(m);return cl(Math.round(amSung(m)/C.sung+st.sac/C.sac),0,C.cap)}
 function amFind(k){if(k==="me")return isSrv()?{m:S,o:srvM()}:null;if(k&&k[0]==="s"){const s=servById(+k.slice(1));return s&&s.role==="maid"?{m:s,o:ownerOf(s)}:null}return null}
 /* ---------- 4 a maid's night ---------- */
@@ -102,7 +102,7 @@ function amNight(m,o,via){amNightGain(m);if(m.sid!=null)empMet(m,"night",1);if(r
 function amMeNight(){const m=srvM();amNightGain(S);empMet(S,"night",1);const d=amJealD(m);if(d){apply({tin:-d});log(`<span class="r">${m.name} biết đêm qua Hoàng thượng cho gọi ngươi, sa sầm nét mặt.</span> Chủ tin -${d}.`)}
  if(roomFor("consort")){srvRise("Hoàng thượng cho gọi ngươi đến hầu, sủng hạnh rồi phong");try{if(!isSrv())night(S)}catch(e){}return}
  S.srv.fav={w:wk(),n:((S.srv.fav&&S.srv.fav.n)||0)+1};AMN.fav++;log("Đêm qua ngươi được Hoàng thượng sủng hạnh. Hậu cung không còn chỗ phong: ngươi vẫn là cung nữ, nhưng cả cung biết ngươi đã được sủng hạnh.")}
-PEND.amNight=()=>{if(!isSrv()||(S.age||0)<18)return null;const m=srvM();const room=roomFor("consort");const D=amD();
+PEND.amNight=()=>{if(!isSrv()||(S.age||0)<BAL.ageMin)return null;const m=srvM();const room=roomFor("consort");const D=amD();
  const k=empMemK(S);const mem=EMPMEM[k]?`<p class="past">Ngài còn nhớ ${EMPMEM[k]} hôm trước của ngươi.</p>`:"";
  return{t:`<p>Tổng quản Càn Thanh cung đến truyền: đêm nay Hoàng thượng cho gọi ngươi đến Dưỡng Hòa điện hầu.</p>${mem}`,who:pEmp(),o:[
   {n:"Tắm gội chờ giá",fx:{},x:`thành: được sủng hạnh${room?`, rồi được phong ${RANKS[0].n}`:"; hậu cung không còn chỗ phong, ngươi vẫn là cung nữ"}${m?` · kèm: chủ ghen, Chủ tin -${amJealN(m)}: ${chanceW(amJealP(m))}`:""}`,go:()=>amMeNight()},
