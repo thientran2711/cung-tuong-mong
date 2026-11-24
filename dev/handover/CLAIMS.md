@@ -1510,6 +1510,6 @@ rv net-build r2 (opus BIG; briefs/D-net-build-review-r2.md; target e41f4f79) | r
 | SELSCENE-11 (opus; successor of SELSCENE-10; brief M121-selscene-fix.md + reports/selection-scene.md «FIX r1 — SELSCENE-10») | review/selection-scene (from c269fce4) | MAIN 122 | session_01V1ZZH1An4rTF5a1b9G4kJw | RUNNING | 24/11 12:29Z |
 | RV test-mrfoot SMALL (sonnet) of d521656c | review/test-mrfoot; reports/test-mrfoot.md | MAIN 122 | session_01V1ZZH3jimhL3hVZTZNqAJb | RUNNING | 24/11 12:33Z |
 | REVIEW E84r robot10-e-fix-5 BIG (opus; briefs/E84r-review-robot-fix5.md) of 6b96055a | review/robot10-e-fix-5-r; reports/robot10-fix5-review.md | FOREMAN E (child4) | session_01DgYSWoVjheqq11nzo7HMWF | DONE PASS 24f8c761 (merge d521656c+6b96055a) | 24/11 13:55Z |
-REMERGE servant-trust onto net-build c6c3ca76 (opus BIG; briefs/D-servant-trust-remerge.md) | review/servant-trust-rv | session_01D3E3NZurAt4CAaE8UhHYD7 | RUNNING | 24/11 13:35Z (Foreman D depth 4)
+REMERGE servant-trust onto net-build c6c3ca76 (opus BIG; briefs/D-servant-trust-remerge.md) | review/servant-trust-rv | session_01D3E3NZurAt4CAaE8UhHYD7 | DONE 59ea20a8 | 24/11 13:35Z (Foreman D depth 4)
 rv promo-build-2 r2 (opus BIG; briefs/D-promo-build-2-review-r2.md; target f9cdc020) | review/promo-build-2-rv | session_01D3E3NZnFXh5e2NqrPJTpg8 | RUNNING | 24/11 13:55Z (Foreman D depth 4)
 co-op runner U3b (pair 4 SWAP=0, split from U3) | review/robot10-coop 5a65a561 | session_01N1tNP4zcW21pE4pFvZ47QP | RUNNING | 2026-11-24T13:55Z (FOREMAN B)
