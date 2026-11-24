@@ -90,7 +90,7 @@ PEND.ge1=()=>{const s=geS();if(!s||s.done)return null;const who=geBond();
  return {who:pMe(),mustChoose:1,t:`<b>Hồi kết nhánh · Ngã rẽ 1 · Đi hay ở</b><br>Cuối con đường «${esc(C(s).n)}». Ngoảnh lại một đời trong cung, ngươi đứng trước hai ngã rẽ cuối cùng. Ngã thứ nhất: ở lại hay ra đi?`,o}};
 PEND.ge2=()=>{const s=geS();if(!s||s.done||s.r1==null)return null;
  const o=R2N.map((n,i)=>{let x="";if(GB().showOdds){const j=C(s).e.findIndex(e=>e[3]===s.r1&&e[4]===i);if(j>=0&&s.st[j]==="o"&&typeof oddsLv==="function"&&typeof KIT_ODDS!=="undefined")x=KIT_ODDS[Math.max(0,oddsLv(geOdds(s,j)))]}
-  return {n,fx:{},x,risk:"có rủi ro",hint:"thành bại khó đoán; hỏng thì có thể mất danh tiếng, phẩm vị",go:()=>geResolve(i)}});
+  return {n,fx:{},x,risk:"có rủi ro",hint:"hên xui; hỏng thì có thể mất danh tiếng, phẩm vị",go:()=>geResolve(i)}});
  return {who:pMe(),mustChoose:1,t:`<b>Hồi kết nhánh · Ngã rẽ 2 · Đối đãi thế nào</b><br>Ngươi đã chọn: «${R1N[s.r1]}». Còn lại một câu: với thiên hạ, với những người quanh mình, ngươi đối đãi thế nào?`,o}};
 /* ---------- resolve ---------- */
 function geResolve(r2,force){const s=geS();if(!s||s.done)return null;if(r2!=null)s.r2=r2;geLive(s);const E=C(s).e,Bd=D(s);
