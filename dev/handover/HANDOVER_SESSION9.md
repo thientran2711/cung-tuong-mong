@@ -2763,3 +2763,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (01:05Z) New LAND READY found → LC8: thin-p0 a76ba1e4 (B, BIG PASS, land FIRST of THIN set) and robot10-harness-rv 811cb1a6 (D, SMALL test-only). LC8 queue: coop-thin-g 70dc7244 → kit-mgskin 1b91ac14 → thin-p0 → robot10-harness-rv.
 - (01:08Z) 115 seats + B–F told. WAKE: create_trigger REFUSED (depth 8 cannot create routines); update of old wake prompt denied by permission check → old wake trig_01S84CUDctuYXpDp6YD5mCqf left ENABLED (fires into 114, which is told: on wake only ping 115, no work). sếp told; a ROOT main can create its own wake.
 - (01:10Z) Acks: LC8 (kit-mgskin landing; coop-thin-g waits B re-merge), SELSCENE holding, KK14 holding (v3.4 ca154a3d; §94 draft 2797e672), W4 R2 READY a7bf3e01 → rv MK4aJreh re-reviewing.
+- (01:00Z) 115 (depth 8) cannot create triggers → 114 created trig_01YVQJ9HZMGCvbbcXNc26dsU firing directly into 115 (min 32) and disabled trig_01S84CUDctuYXpDp6YD5mCqf. 114 stopped.
