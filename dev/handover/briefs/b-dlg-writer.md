@@ -35,3 +35,15 @@ Rollover at START_CTX % + 25 % (ceiling 60 %): write the HANDOVER (last id done)
 | W7 | j68_d_ky.md | j68 comp myst + rumor (84) + kỳ ngộ (77, L = "W") | content/thin/j68seeds_d.md, kyseeds_a/b.md |
 | W8 | j7_wc.md | j7 (81) + world reactions wc (91) | content/thin/j7seeds.md, wseeds_a/b.md |
 | W9 | j70_j71.md | j70 routes (78, L = "M": her cung nữ reports the tell) + j71 complications (80) | content/thin/j70seeds_a/b.md, fseeds_a/b.md |
+| W10a | j68_old.md | WAVE 2: old j68 situations (90; card pid «e68<id>») | `python3 dev/test/dlgs_validate.py --units j68` (on review/sideline-dlg-2) → id · roles · placeholders · source file:line of the EV6 (read its v[] body variants, o() choices, t title) |
+| W10b | j7_ky_old.md | WAVE 2: old j7 intrigue cards (33) + old kỳ ngộ (25) | `--units j7` (ev() in j7.js / jrcp.js: body t, choices o[].n / o[].x) + `--units ky` (jky.js DEF.<id>: who / what / txt) |
+| W10c | j70_old.md | WAVE 2: old j70 routes (51; id «j70:<method>:<route>», L = "M": her cung nữ reports the tell she saw) | `--units j70` (j70.js M70.<method>.R[route]: n, tl[] tells, pl place, gd, st; method n) |
+
+### WAVE 2 rules (W10a–c, lead #4, 11/24/2026)
+- Branch for the check: **review/sideline-dlg-2** (not review/sideline-dlg). `python3 dev/test/dlgs_validate.py --units <fam>` lists every unit of your slice with its allowed roles and placeholders; anything else fails the validator.
+- Cast = ONLY the people the card itself shows or names (law 6b). A hidden schemer is never cast and never named (old j7 doll / guardrumour / ghost / taster have no rival role; poisongift / comet / fire have the victim only; ky th_tham: the plotter is hidden — L = "M" or a W-less scene with L = "M").
+- A unit with no person role (roles only M + me): L = "M" — her cung nữ brings the news (festival, weather, a letter, a rumour).
+- Old j68: roles A / B / C = the EV6 slots `a:[kinds]` in order (rv consort, sv servant, maid, emp, th, doc thái y, eun Tổng quản, kid her child, man); placeholders {A}{B}{C}{W} weather/season{P} her place{it} (only where listed). The card has several body variants v[]: write ONE scene that fits every variant (say what is common; never a detail found in one variant only).
+- Old j7: role names = the placeholder: {v} the rival on the card, {a}/{b} the two rivals (rv* cards), {f} the cold-palace consort, {sv} the servant, {kid} her child, emp / th / doc / ksp (their titles come from the game). Watch scenes allowed for rvframe / rvquarrel (R = the other rival, "watch": true).
+- Old ky: role W = the person met (kind per DEF.who), {W} = the name; M allowed.
+- Old j70: L = "M" only, no person named (the plotter is not known yet: she has only a tell).

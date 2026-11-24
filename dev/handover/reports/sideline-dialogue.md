@@ -24,6 +24,16 @@ PRIORITY #1 CHECK ('kitDialogue|dialogue scene|dlg'): OD 24/11 ~10:05Z (STORY = 
   NOTE for other tests (law 11 family risk): any test that opens a side-line card with showModal and inspects #modal at once must turn BAL.dlgs.on off or tap the scene through (as kit-conform now does); 355 test files call showModal, only the gates run by quickcheck were checked.
   SECOND WAVE = follow-up, NOT this review's scope (Foreman B decision a): 33 old j7 ev() cards, 90 old j68 decisions (pid «e68<id>»), 25 old kỳ ngộ, 51 old j70 routes → review/sideline-dlg-2 + W10 after SSK.
 
+- (11/24/2026 ~21:20Z) LEAD #4 session_01N1tNP5TRZA1MiEzTnYgqNB (opus). START_CTX ~4 % (used_tokens reads 0 → estimate; 1M window) → roll at ~29 %, ceiling 60 %. Worktrees /home/user/wt/sdlg (code, local branch sdlg2 = review/sideline-dlg-2) + /home/user/wt/sdlg-ho (handover).
+- (lead #4) WAVE 2 code on review/sideline-dlg-2 (see «## WAVE 2» below).
+
+## WAVE 2 (lead #4, review/sideline-dlg-2)
+PRIORITY #1 CHECK: prio1 «dlgs wave 2|old j68 decision|DLGS.R» → only review/sideline-dlg (wave 1, jdlgs.js) + lead #3's WAVE 2 MAP; reuse: same engine, DLGS.R adapters, validator, dlgs-play.
+- 59361f1b (code): resolvers — old j68 (pid «e68<id>», roles A/B/C = EV6 slots via A6, fill e68Fill + {it}); old j7 (table DLGS_J7O in jdlgs.js: per card ONLY the people the card shows; hidden schemers never cast: pp.a of poisongift/comet/fire, pp.v of doll/guardrumour/ghost/taster); ky (existing resolver) + law 6b fixes: hidden W (th_tham) → no W, W = herself → no W, kind maid (vat_minh) → her cung nữ; j70 unit id «j70:<method>:<route>» for old routes (route ids repeat), seeds unchanged.
+- Validator: 199 old units (j7 33, j68 90, ky 25, j70 51), cover rows «old (wave 2)» 0 %; `--units <fam>` = the W10 slice list (id, roles, placeholders, source line).
+- Probe (fixture scenes for all 199, not committed): resolver path verified in a real life (j68 gossipTea ALL PASS 21; wave-1 regression 5 units ALL PASS 113). dlgs-play old-unit casting: test-only fallbacks (j95b motive gate off, fuller household) being finished.
+- W10 slices (writer brief «WAVE 2 rules»): W10a j68_old.md (90) · W10b j7_ky_old.md (33 + 25) · W10c j70_old.md (51).
+
 ## SCHEMA
 ONE data shape for every dialogue scene, side lines (this file) AND main roads (Foreman E). It is the KIT §95 `kitDialogue.play` line format with a ROLE in `who` instead of a name; the shared engine turns it into the real call.
 ```
