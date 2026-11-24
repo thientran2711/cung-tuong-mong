@@ -178,3 +178,19 @@ Built (jleave.js tail, jkc.js kcEndDo(h,t,fate,alive), BAL.leave yrs/kids/causeK
 - partner = the REAL man: the suitor object in S.kc.suit (netOf draws and stores his 3 nết on him) · ✦ Trạng nguyên = kcTmMan() of S.men.
 - her own lines (LPV_OPEN_KC / LPV_MID_K_KC) and no line about a palace life she never had (LPV_PAL filter on every pool).
 - OLD saves (no S.kc.lv) and home-road endings before any returned tablet keep today's card.
+
+## STEP 4 (E64b) — FORCED-REMOVAL changes MAIN 118 approved (06:16Z P1/P2/P3) — before → after
+| item | site | before | after |
+|---|---|---|---|
+| P1 treason tier | j8.js deathSentence(p,why,tier) + BAL.crime {thuong:{first:1,mercy:cold}, nghich:{first:0,mercy:dan}} | every death sentence: first-year mercy (giáng 1 + cấm túc 3) and nhân từ → lãnh cung | tier «nghich» skips the first-year mercy; nhân từ → dsDan: giam vào ngục rồi phế làm thứ dân, đuổi ra khỏi cung (her life ends, «Về sau» dan; NPC alive=false, dan=1, fate line + news). Others unchanged |
+| P1 callers | j4.js:53, :59 gián điệp · j4.js:125 hạ độc Hoàng hậu · j8.js poison when the target is Hoàng hậu · j8.js kpoison (đầu độc hoàng tự) · j8.js kframe (vu cổ trù ẻo) | thường | «nghich» |
+| P2 one tư thông rule | j22.js ttNpcExposed(v,m,lead) (new core: the man xử trảm, she → deathSentence «tư thông…») | j3.js:99 loveletter → fall() (lãnh cung / giáng) · j30.js:25 «Bóc chuyện tư tình» NPC branch: 50 % alive=false / 50 % fall() · j95.js:442 inline copy | all three → ttNpcExposed; loveletter x «thành: nàng bị xét tội tư thông» |
+| P3 thất sủng | j8.js tsMonth / tsMonthAll + BAL.thatS {sung:0, rank:1, decay:2, back:15}; j3.js month calls tsMonthAll | j3.js:140 Sủng ≤0 + Danh ≤ forget + rank ≤1 → cold «Bị bỏ quên, đưa vào lãnh cung» (player only) | no lãnh cung: p.thatS set, nightCh 0 (he does not turn her tablet), Sủng −2 a month, a line (her log / NPC news); back at Sủng ≥15 by her own deeds. Every consort the same |
+Old saves: a life already in lãnh cung for «Bị bỏ quên» keeps its release roads; S.thatS is new optional state.
+
+## STEP 5 (E64b) — fixes found while looking at the shots (fix the family)
+- «con cháu quây quần bên giường» was drawn for a life with no children anywhere (xuất gia, no palace child) → LPV_DIE lines naming con cháu only when she has children (test: 40 xuất gia lives).
+- kcMarry «Vợ quan thanh liêm» says «chồng nàng thương nàng suốt đời» whatever the suitor is; now the line stays only when HIS real nết reads một lòng (law 6b; test both ways).
+- End card of a life that ended at home before entry (jkc, old saves too): rows «Sống trong cung / Phẩm cao nhất / Con cái» were wrong (she never entered) → j32 shows only Thân phận + Kết cục (+ «Về sau» rows). This also makes the iPad card fit (the XL info column is overflow:clip, law 10; it clipped «Kết cục / Người ấy / Về sau»).
+- Fit test dev/test/leave-palace-fit.js: 24 Trả thẻ bài endings × Fold 755x1000 + iPad 1180x820, .k3right and #mb never overflow.
+- dsDan fate line lower-cases the crime after «vì».
