@@ -894,6 +894,25 @@ The stuck rows' `"next":true` is `#next.disabled` (SCR reads .disabled): BOTH se
 - In review: robot10-onecore 4d063689 (SSK sent). SSK pending: fix-2 r3 bbd98195 (e2e 142/142 ×2, npm test ALL OK, keymove 12/12; needs quickcheck median-of-6 + A/B), fix-3 r3 ebacc4d9 (all gates again), fix-4 9c442f44 (before/after + gates).
 - Box tools (lost on restart): wrangler /home/user/wt/wr; Workers :8798 main (f5main/coop/worker), :8797 fix-2 r3 (f5f2/coop/worker); A/B script /home/user/wt/f5out/ab.sh (SIDES / TAG env; worktrees f5abfix / f5abmain / f5abfix2 = game + harness overlay — run assemble.py in each first!). Long jobs = Bash run_in_background only.
 
+### FIXER #6 (session_01N1tNP4TkcdjyymdxPqwSj5, opus; START_CTX ≈5 %; Foreman B = session_01N1tNP48H6M2nn3Y3SvKzBw)
+PRIORITY #1 CHECK ('fix-2 r3 / fix-3 r3 / rkGid round-trip'): OD 2204–2205 | main coop/worker/src/merge.js, jcoopworld.js whereOf/j95sync | review/* robot-coop-fix-2-r3 bbd98195, robot-coop-fix-3 ebacc4d9, robot10-coop 6576e086 | claims B fixer #5 4vn55dxG → #6 (fix-4 = fixer #6b).
+#### Merge LIVE 502c48c9 (both FF from the old heads; only index.html/sw.js conflicted → build_site.sh rebuilt)
+- review/robot-coop-fix-2-r3 **71076b61** (= bbd98195 + LIVE 502c48c9); ranges.gen.js `--check` = BAL.
+- review/robot-coop-fix-3 **32121242** (= ebacc4d9 + LIVE 502c48c9).
+#### Gates (local Workers: :8797 = fix-2 r3 coop/worker, :8798 = main 502c48c9 coop/worker; wrangler dev)
+| gate | fix-2 r3 71076b61 | fix-3 r3 32121242 |
+|---|---|---|
+| quickcheck ALONE `--runs 6` (median, new/live) | PASS · render 237/239 · tab 462/466 · **buổi 1311/1419** · tasks>200 23/25 · core gates PASS · time-spill PASS · old save ok (the r3 3591 was the buổi outlier: live runs here 4036 / 4501 in 2 of 6) | PASS · render 268/282 · tab 506/482 · buổi 1266/1592 · tasks>200 24/26 · core gates PASS · old save ok |
+| coop-e2e COOP_SWAP=0 (Fold hosts) | 142/142 (:8797) | 142/142 (:8798) |
+| coop-e2e COOP_SWAP=1 (iPad hosts) | 142/142 (:8797) | 142/142 (:8798) |
+| Worker `npm test` | ALL OK (… range ok) | ALL OK (Worker = main) |
+| coop-keymove-unit | 12/12 | 12/12 |
+| coop-range-scan / identity / gen --check | PASS 48 fields · 0 rewrites (3 states) · = BAL | — |
+| rv row 4 coop-worker.yml paths | done: coop/worker/**, dev/build/jbalpr.js, jbal2.js, gen_coop_ranges.js | — |
+A/B (harness 6576e086 overlay, CAP 300 PCAP 1500 POSLOG NEGTRAP, 5 rounds per side; sides fix2 = fix-2 game + :8797, fix3 = fix-3 game + :8798, main = main game + :8798, run in parallel): RUNNING.
+#### rkGid row (Foreman B ask: U3 «save round-trip 16 (rkGid)» on harness 5a65a561)
+The skip WORKS: 5a65a561 (and 7d0e9ffa on) skip `save.S.rkGid` in robot10-coop.js dp(). The harness keys a bug row by type + msg («save→load→save changes the state (host|guest)»), not by path, and keeps the FIRST detail; U3 p1-2 rows = first detail rkGid (old harness 0a593f8e, before RESUME), then **nNew 18 on 5a65a561 with lastDetail `save.R.0.rl.4: 7 → 5` (host) / `save.R.0.rl.2: 1 → 6` (guest)** — a different path. Not a harness bug; the count mixes families. NEW candidate: a consort's canonical relation map R[].rl[pid] changes on a solo load of a co-op save (same family as «save round-trip renames staff»: the scratch page is solo/owner → deser/nmFix/normalize rewrites co-op-keyed data). Harness note for runners: read lastDetail, not the first detail, for save rows after a harness switch.
+
 ## MGSKIN-WIRE
 PRIORITY #1 CHECK: OD 0 | ledger 0 | claims 8 | main kitMgSkinAdd/mgpSkin/kg82SkinSrc (j82, jmgpool; reused, no new mechanism) | review/* review/kit-mgboardof-r1 c46a17f2 (merged, not LIVE yet) | reports F-MGSKIN-A..H, kit-mgskin.
 START_CTX ~6 % (own estimate); finished well under +25 %.
