@@ -34,10 +34,10 @@ function over(h,t,fate,alive){if(S.dead)return"";const live=overAlive(fate,alive
  const chR=ch.map(x=>{const m=String(x).match(/^([^:.]{2,26}):\s*(.+)$/);return m?[m[1],m[2],"t"]:["Nguyên do",x,"t"]});
  const maxR=Math.max(S.rank,S.maxRank||0);
  /* LEAVE-THE-PALACE = ENDING (owner OD 24/11 ~06:05Z, jleave.js): a life that leaves the palace gets its «Về sau» — his nết × her state × how she left */
- let ep=null;try{ep=typeof lvEpiFor==="function"?lvEpiFor(h,t,fate,live):null}catch(e){console.error("lv",e)}
- const epH=ep?`<div class="kpsec kend-after"><h4 class="kpst">Về sau · ${ep.ti}</h4><p>${ep.txt}</p>${kitRows(lvRows(ep))}</div>`:"";
+ let ep=null;try{ep=typeof lpvEpiFor==="function"?lpvEpiFor(h,t,fate,live):null}catch(e){console.error("lv",e)}
+ const epH=ep?`<div class="kpsec kend-after"><p><b>Về sau · ${ep.ti}.</b> ${ep.txt}</p></div>`:"";/* rows go into «Kiếp này» below (iPad 1180x820: the card must fit with no clip) */
  Q=[{t:"Kiếp này",cls:"end",art:endArt(h,t,fate,live),who:pMe(),h:`<h3>${h}</h3><p>${t}</p>${epH}${chR.length?`<div class="kpsec kend-why">${kitRows(chR)}</div>`:""}
-  <div class="kpsec kend-life"><h4 class="kpst">Kiếp này</h4>${kitRows([["Thân phận",`${S.name} · ${S.origin.n}`,"t"],["Sống trong cung",`${S.year} năm · ${S.age} tuổi`,"t"],["Phẩm cao nhất",maxR>=7?"Hoàng hậu":RANKS[maxR].n,"t"],["Con cái",`${ms} hoàng tử, ${md} công chúa`,"t"],[live?"Kết cục":"Chết vì",fate,"t"]])}</div>
+  <div class="kpsec kend-life"><h4 class="kpst">Kiếp này</h4>${kitRows([["Thân phận",`${S.name} · ${S.origin.n}`,"t"],["Sống trong cung",`${S.year} năm · ${S.age} tuổi`,"t"],["Phẩm cao nhất",maxR>=7?"Hoàng hậu":RANKS[maxR].n,"t"],["Con cái",`${ms} hoàng tử, ${md} công chúa`,"t"],[live?"Kết cục":"Chết vì",fate,"t"]].concat(ep?lpvRows(ep):[]))}</div>
   <p class="past">${live?"Kiếp này khép lại.":"Chết là hết."} Kiếp sau bắt đầu lại từ đầu, chỉ còn tên trong Sổ luân hồi.</p>`,btn:"Chuyển kiếp",onClose:start}];
  showModal();render();return""}
 /* the highest rank this life reached */

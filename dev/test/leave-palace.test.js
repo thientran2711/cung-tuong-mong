@@ -53,7 +53,7 @@ const T=[
   for(const [h,f,al,k,site] of T){deser(JSON.parse(snap));Q.length=0;S.dead=false;S.lvEp=null;if(S.kc)S.kc.inPal=1;
    const m=(S.men||[]).find(x=>x.rw==="vương gia"),th=(S.men||[]).find(x=>x.rw==="thị vệ");
    const fate=f.replace("{m}",m.name).replace("{t}",th.name),t=`${S.name} ${fate}.`;
-   over(h,t,fate,al);const html=(Q[0]&&Q[0].h)||"";R.push({site,k,got:S.lvEp?S.lvEp.k:"",dead:!!S.dead,card:Q[0]&&Q[0].t==="Kiếp này",after:/kend-after/.test(html),ep:S.lvEp,partner:S.lvEp&&S.lvEp.m,want:/\{[mt]\}/.test(f)?(f.includes("{m}")?m.name:th.name):""})}
+   over(h,t,fate,al);const html=(Q[0]&&Q[0].h)||"";R.push({site,k,got:S.lvEp?S.lvEp.k:"",dead:!!S.dead,card:Q[0]&&Q[0].t==="Kiếp này",after:/kend-after/.test(html)&&/Về sau/.test(html),ep:S.lvEp,partner:S.lvEp&&S.lvEp.m,want:/\{[mt]\}/.test(f)?(f.includes("{m}")?m.name:th.name):""})}
   deser(JSON.parse(snap));Q.length=0;return R},T);
  for(const r of out){ok(r.dead&&r.card,`${r.site}: life ends on the «Kiếp này» end card`,r);
   ok(r.got===r.k&&r.after===!!r.k,`${r.site}: «Về sau» ${r.k?`kind ${r.k}`:"absent (inside the palace / death)"}`,{got:r.got,after:r.after});
@@ -90,7 +90,7 @@ const T=[
   for(const c in NETS)for(const age of [17,26,38,50])for(const kids of [0,2]){const T=[];
    for(let i=0;i<16;i++){deser(JSON.parse(snap));Q.length=0;S.dead=false;S.lvEp=null;S.age=age;
     if(kids){for(let j=0;j<kids;j++){try{S.kids.push({name:"Tiểu "+j,alive:true,sex:j?"f":"m",age:2,father:"emp"})}catch(e){}}}
-    const m={name:"Vương gia Thử Nghiệm "+c,sex:"m",kind:"man",net:NETS[c]};lvNext("thiep",m);over("Được ban hôn",`Thánh chỉ ban ${S.name} cho ${m.name}.`,`Được ban hôn cho ${m.name}`,true);
+    const m={name:"Vương gia Thử Nghiệm "+c,sex:"m",kind:"man",net:NETS[c]};lpvNext("thiep",m);over("Được ban hôn",`Thánh chỉ ban ${S.name} cho ${m.name}.`,`Được ban hôn cho ${m.name}`,true);
     const e=S.lvEp;if(!e){R.bad.push(["no ep",c,age]);continue}T.push(e.txt);
     if(e.cls!==c)R.bad.push(["cls",c,e.cls,e.net]);if(e.age<=age||e.age>B.maxAge)R.bad.push(["age",c,age,e.age]);
     if(e.cause==="gia"&&e.age<B.old)R.bad.push(["gia young",e.age]);if(e.kids<0||e.kids>B.kids.thiep[1]+1)R.bad.push(["kids",e.kids])}
