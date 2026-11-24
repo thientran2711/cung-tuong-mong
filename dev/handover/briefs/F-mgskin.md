@@ -37,3 +37,10 @@ ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 
 - Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
 (Worker: at your limit write the handover in your report + a status line; Foreman F opens the successor.)
+
+## BATCH 2 NOTES (Foreman F, 24/11 after batch 1 — read before you start)
+- Batch 1 DONE (hoa banh huong kim ve theu dan co ban dauho; td_cong → theu skins, le → huong skins by inheritance). Look at its sheets for the bar: img/_review/f-mgskin/<kind>-sheet.jpg (default first column, then xuan/ha/thu/dong; boards on top, skinned sprites below).
+- INHERITANCE: many kinds draw ANOTHER kind's board (e.g. td_cong draws theu-bg-hoc, le draws huong-bg). The resolver names the file after the BOARD, not the kind. If your kind's board belongs to a kind already skinned (batch 1 list above, or another kind in your own list), paint NOTHING for it; report «<kind>: inherits <board kind> skins». Only paint boards nobody has skinned yet. Two of your kinds sharing one board = paint that board once.
+- Sprite file names have no "mg-" prefix: default img/kit/mg-<sprite>.webp → skin img/mg/<sprite>-<id>.webp.
+- Magnific folder ba4aecfe… is not visible on this account: results go to Personal; that is fine, just log creation ids.
+- Your kinds are in your launch prompt; report file reports/F-MGSKIN-<letter>.md.
