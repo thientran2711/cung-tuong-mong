@@ -1,4 +1,4 @@
-# E84r — SMALL REVIEW robot10-e-fix-6 4424f9dd (TEST-ONLY harness) — verdict **PASS 4424f9dd8a…** (see sha below)
+# E84r — SMALL REVIEW robot10-e-fix-6 4424f9dd (TEST-ONLY harness) — verdict **PASS 4424f9dddd894f278dd44e85b4b821fc6b90bd4f**
 PRIORITY #1 CHECK ('robot10-e-fix-6'): claims F5 session_01DgYSWkYxbaSjuykrs5JW4Q | review/robot10-e-fix-6 new (order from Foreman E child6 18:34Z carries the line).
 Sha verdicted: origin/review/robot10-e-fix-6 **4424f9dd** (on b69b0da6 = fix-5-r 7876bf70 + LIVE 8eceeef9). Lands with/after fix-5-r. LIVE is now 502c48c9 → needs a re-merge before landing (on order).
 
