@@ -36,3 +36,14 @@ HONEST: iPad pairs shot but not all looked; event pair Fold scan returned empty 
 
 ## D. If sếp says GO (build, one branch review/kit-dim)
 KIT_DIM table + rows 1,2,3,5,6,8,9,10,11 pointed at it; KIT.md §0 UI law «background keeps normal brightness» + §93/§95 canon overwritten in place; tests: dim-scan (every full-screen element with alpha ≥ .15 & dark & ≥ 45 % viewport = FAIL except night + endings), Fold + iPad shots of all screens. §95 spotlight stays (figures only).
+
+## UPLOADED (KK18, 24/11 ~11:25Z) — all 200 checked
+- Dim pairs: https://ctm-img.victoria-tntt.workers.dev/img/_review/dim/index.html (4 screens × Fold/iPad × BEFORE|AFTER)
+- Optfit pair: https://ctm-img.victoria-tntt.workers.dev/img/_review/optfit/index.html
+(uploaded with `python3 dev/site/cdn_sync.py img/_review/dim img/_review/optfit`; wipe with `--wipe-review dim` / `optfit` when the verdict is in)
+
+## HANDOVER KK18 → KK19 (details also at the top of reports/MOCK-STAGE.md)
+- RECIPE dim shots: /home/user/wt/kk-shots/dimshots.js (Playwright, route from /home/user/wt/kkm built at origin/main, DSF 2; screens: event dialog, kitScene day/night, kitReward; AFTER = CSS injection of the rule). Missing: focus view (kitFocus on Dư đồ), §95 shot (kit-dialogue-vn not on main), reward chest not visible (animation timing; wait longer / click).
+- RECIPE optfit pair: /home/user/wt/kk-shots/optfit.js (wraps each .kat's non-title children into .kchips, absolute at right, float spacer on .kan::before sized meter + «!»). The real build = chip wrapper in j63/kaNorm + JS-measured spacer + a rule that line 1 never ends with a one-word line. ONLY on sếp's GO (L2134 / L2211 / L2212).
+- kit-optinfo: e672ebcb, B r1 fc2a2449 LAND READY (LC10). kit-music r1 475df8ba LAND READY. kit-noprewarn 1d4fc04d waits B SMALL review. kit-optfit 69003e15 SUPERSEDED (do not land).
+- Open: B FAIL lists for the 9 KK16/KK17 branches (none seen), KIT_REQUESTS re-audit done (no waiting requester), «đại lễ tế Giao» music category, vocals check, iPad + presentation.js for kit-music.
