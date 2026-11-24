@@ -58,8 +58,8 @@ function petBest(p,f){let b=0;for(const P of tsbPets(p))if(petOk(P)){const v=pet
 function petGuard(t,beast){try{return petBest(t,"guard")+(beast?petBest(t,"beast"):0)}catch(e){return 0}}
 window.PETSTAT=window.PETSTAT||{got:[0,0,0,0,0],rescue:0,rescueNpc:0,sniff:0,lost:0};
 function petBonus(p,on){/* the +1 (or +2) of the following pet: applied once, removed when it stops following */const P=tsbPetOn(p);
- if(p.petB){const k=p.petB,n=p.petBn||1;if(p===S)S[k]=Math.max(0,(S[k]||0)-n);else p[k]=Math.max(0,(p[k]||0)-n);p.petB=null;p.petBn=0}
- if(on&&P){const T=petT(P),k=T.st,n=1+(T.sacX||0);if(p===S)S[k]=(S[k]||0)+n;else p[k]=(p[k]||0)+n;p.petB=k;p.petBn=n}}
+ if(p.petB){const k=p.petB,n=p.petBn==null?1:p.petBn;/* fix-kframe-heir: 0 added at the cap → 0 taken off */if(p===S)S[k]=Math.max(0,(S[k]||0)-n);else p[k]=Math.max(0,(p[k]||0)-n);p.petB=null;p.petBn=0}
+ if(on&&P){const T=petT(P),k=T.st,n=1+(T.sacX||0);const q=p===S?S:p,b0=q[k]||0;statSet(q,k,b0+n);/* fix-kframe-heir: clamped (was 100 + n = 101); the amount really added is what comes off */p.petB=k;p.petBn=(q[k]||0)-b0}}
 const tsbPetBonus=petBonus;
 function petAdd(p,t,from,src){t=petK(t);const T=PET[t];if(!T)return null;p.pets=p.pets||[];if(p.pets.length>=petMax(p))return null;
  const P={t,from,src:src||"",care:80,at:tsbWk()};p.pets.push(P);try{PETSTAT.got[T.tr]++}catch(e){}
@@ -208,7 +208,7 @@ PEND.tsbPetW=pp=>{const P=tsbPets(S)[pp.i];if(!P)return null;const T=petT(P);con
 function petTarget(t){const L=tsbPets(t);if(!L.length)return -1;let j=0;L.forEach((P,i)=>{if(petT(P).tr>petT(L[j]).tr)j=i});return j}
 function petHarmO(a,t){const j=petTarget(t);const P=tsbPets(t)[j];const T=petT(P);return oddsCl(Math.min(Math.round(odA(a,50+(a.tamco||0)/5+(T.easy?15:0)-T.tr*4)-tsbGuard(t)),90))}
 A("thaopet","Hại thú nuôi của nàng",{c:{bac:-BAL.actBac.thaopet},ok:(a,t)=>(a.bac||0)>=BAL.actBac.thaopet&&tsbPets(t).length>0,o:(a,t)=>petHarmO(a,t),x:"nàng mất con thú quý nhất (thả đi hay làm hại)",
- f:(a,t)=>{ap(a,{bac:-BAL.actBac.thaopet});const j=petTarget(t);const P=tsbPets(t)[j];const T=petT(P);const c=caught(a,t,false,`sai người hại ${T.n.replace(/^./,c=>c.toLowerCase())} của ${NM(t)}`);if(c)return c;const o=petHarmO(a,t);
+ f:(a,t)=>{const j=petTarget(t);const P=tsbPets(t)[j];if(!P)return actNone(a);/* fix-kframe-heir: no pet left → no cost */ap(a,{bac:-BAL.actBac.thaopet});const T=petT(P);const c=caught(a,t,false,`sai người hại ${T.n.replace(/^./,c=>c.toLowerCase())} của ${NM(t)}`);if(c)return c;const o=petHarmO(a,t);
   if(!aRoll(o,a)){const e=roll(40);if(e)/*evok: pet harm act (runAct deed)*/evA(t,a,BAL.eff.jpet.evF);return `Kẻ lạ lảng vảng bên chuồng thú của ${NM(t)} bị kẻ hầu chặn lại${e?`; hắn khai là người của ${NM(a)} (chứng cứ ${balSg(BAL.eff.jpet.evF)})`:""}. `}
   const fly=/hoami|sao|vet|uyenuong|camke|phuong|thanhlong|bachloc|kylan|cuuvi|hac|thienma/.test(P.t);const n=petLose(t,j,fly?"bị thả đi (chưa rõ ai làm)":"bị hại (chưa rõ ai làm)");
   if(T.tr>=3&&roll(25)){/* a rare animal the court knows: the loss is noticed */if(t===S)apply({danh:-1})}

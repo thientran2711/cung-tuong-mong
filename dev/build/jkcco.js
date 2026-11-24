@@ -78,7 +78,7 @@ function answer(m,a,extra){const r=Object.assign({},J(m),{ans:a,rc:myClan(),rn:S
 function itIn(e,m){const x=Object.assign({},e);x.from="coop:"+pidOf(m.from);S.inv=S.inv||[];S.inv.push(x);try{if(typeof ilLog==="function")ilLog(x,"coop:"+pidOf(m.from),"me",m.kind==="letter"?"thư hảo hữu":"quà hảo hữu")}catch(er){}return x}
 function intel(id){const v=typeof RV==="function"?RV(id):null;if(!v||!v.alive)return null;try{if(mySide()==="h"&&typeof kcIntel1==="function")kcIntel1(v,K().letter.know);else if(typeof k61Know==="function")k61Know(v,"thư hảo hữu",true,K().letter.know)}catch(e){}return v}
 const nameKey=()=>mySide()==="h"?"Lời đồn":"Danh";
-function nameMove(n){/* her name with the world: palace Danh up = good; at home Lời đồn (kld) down = good */if(mySide()==="h")S.kld=Math.max(0,(S.kld||0)-n);else S.danh=Math.max(0,(S.danh||0)+n)}
+function nameMove(n){/* her name with the world: palace Danh up = good; at home Lời đồn (kld) down = good */if(mySide()==="h")S.kld=Math.max(0,(S.kld||0)-n);else statSet(S,"danh",(S.danh||0)+n)}
 const nameTxt=n=>mySide()==="h"?`Lời đồn ${balSg(-n)}`:`Danh ${balSg(n)}`;
 PEND.kcco=p=>{const m0=p&&p.m;if(!m0||!S||S.dead)return null;const m=Object.assign({},m0,{fn:fLabel()});const C=K(),fn=esc(fLabel()),go=f=>()=>{const b=rsnap();const t=f();if(t)log(t);try{resultShow("Hảo hữu",b,true)}catch(e){}};
  const at=m.fs==="h"?"ở nhà":"trong cung";
@@ -127,7 +127,7 @@ H.ans=r=>{const o=kccoS();const m=o.out.find(x=>x.id===r.id);if(m)m.ans=r.ans;co
 H.world=m=>{if(typeof worldOn==="function"&&!worldOn())return;const C=K();
  if(m.wk==="soUp"){if(m.rc&&typeof tdPowAdd==="function"){tdPowAdd(m.rc,C.so.pow);if(m.fc&&typeof tdRelAdd==="function")tdRelAdd(m.fc,m.rc,C.so.rel)}return}
  if(m.wk==="soDn"){if(m.pl.c&&typeof tdPowAdd==="function"){tdPowAdd(m.pl.c,-m.pl.pow);if(m.fc&&typeof tdRelAdd==="function")tdRelAdd(m.fc,m.pl.c,-C.so.rel)}return}
- if(m.wk==="ruNpc"){const v=RV(m.pl.v);if(!v||!v.alive)return;v.danh=Math.max(0,(v.danh||0)+m.pl.dir*m.pl.n);try{if(typeof newsAdd==="function")newsAdd(v,"rumor",`Kinh thành đồn ${m.pl.dir>0?"khen":"chê"} ${v.name}.`)}catch(e){}}};
+ if(m.wk==="ruNpc"){const v=RV(m.pl.v);if(!v||!v.alive)return;statSet(v,"danh",(v.danh||0)+m.pl.dir*m.pl.n);try{if(typeof newsAdd==="function")newsAdd(v,"rumor",`Kinh thành đồn ${m.pl.dir>0?"khen":"chê"} ${v.name}.`)}catch(e){}}};
 /* ---------- the sender's acts (shared by both sides) ---------- */
 const U=()=>S.kcco&&S.kcco.last||{};
 const usedNow=k=>U()[k]===S.turn;
@@ -165,7 +165,7 @@ window.kccoActs=kccoActs;
 /* failL: the stat part of a failure as an effect (home cards: runOpt applies a.l and the card's «Bại» column prints it); failLf: the home part as kcCard lf (Lời đồn under the fog rule, the father's liking); failOf(k, noStat) runs both when not a card, then the rest */
 function failL(k){const C=K();if(k==="letter")return mySide()==="h"?{}:{danh:-C.letter.lost};if(/^ru_/.test(k))return{danh:-C.rumour.lost};if((k==="soUp"||k==="soDn")&&mySide()!=="h")return{danh:-C.so.lost};return{}}
 function failLf(k){const C=K();if(mySide()!=="h")return[];if(k==="letter")return[["ld",C.letter.lost]];if(k==="soUp"||k==="soDn")return[["af",kcR("cha"),-C.so.af]];return[]}
-function failOf(k,noStat){const C=K();if(!noStat){const l=failL(k);if(l.danh)S.danh=Math.max(0,(S.danh||0)+l.danh);kcLfRun(failLf(k).filter(Boolean))}
+function failOf(k,noStat){const C=K();if(!noStat){const l=failL(k);if(l.danh)statSet(S,"danh",(S.danh||0)+l.danh);kcLfRun(failLf(k).filter(Boolean))}
  if(k==="letter"){kccoS().last.letter=S.turn;return"Thư thất lạc giữa đường."}
  if(k==="soUp"||k==="soDn"){kccoS().last.so=S.turn;return"Cha không chịu dâng sớ."}
  if(/^ru_/.test(k)){kccoS().last.rumour=S.turn;return"Người ta lần ra lời đồn từ chỗ ngươi."}return""}
