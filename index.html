@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"05abe8e6+","t":"2026-11-24T00:04Z","c":"ORDER THIN P2: fold in 81 j7 seeds (P2-SEEDS, validator 0 errors), loose cast fallback (BAL.j7c.loose), reach + shot tests","b":"47d92b4c4f9b","h":[{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"},{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"}]};
+window.CTM_BI={"s":"d49be698+","t":"2026-11-24T00:12Z","c":"ORDER THIN P2: fold in 81 j7 seeds (P2-SEEDS, validator 0 errors), loose cast fallback (BAL.j7c.loose), reach + shot tests","b":"76cb67975ec7","h":[{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"},{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."},{"s":"2ba6c64e+","t":"2026-11-23T13:34Z","c":"SELF-MERGE LAND coop-famops-t1: merge LIVE 9f9d318c (index.html/sw.js rebuilt)"},{"s":"e74b0808+","t":"2026-11-23T12:08Z","c":"sửa các lỗi gia tộc trong chơi chung (quà tịch thu, việc thất lạc, lượt NPC) vào game"},{"s":"44fb8468+","t":"2026-11-23T11:17Z","c":"KIT-MGBG r2: cream plate under .nwb-pool and darker ring on pips/buttons on .kgbox-bg boards (one place)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -2236,7 +2236,7 @@ const J7SEEDS=[
 const J7I={};
 function j7cSeeds(){const L=(typeof J7SEEDS!=="undefined"&&Array.isArray(J7SEEDS))?J7SEEDS:[];for(const s of L)J7I[s.id]=s;return L}
 function j7c(){if(!S)return null;const j=S.j7c=S.j7c||{};j.seen=j.seen||{};j.ob=j.ob||[];j.n=j.n||0;return j}
-const J7C_FIX={maid:1,emp:1,th:1,doc:1,eun:1};
+const J7C_FIX=new Set(["maid","emp","th","doc","eun"]);
 /* nết filter: any-of per list, lists AND-ed (yard.md rule); fixed people take no filter */
 /* loose = the seed's nết and lòng lists read as ONE any-of list (used only when no one in the roster fits both: the actor still has a wanted nết) */
 function j7cFit(o,r,loose){if(!r)return true;let T=[];try{T=tr6(o)||[]}catch(e){T=[]}
@@ -2250,10 +2250,10 @@ function j7cPool(kind,r,loose){try{
 /* cast every role with a distinct real person; null = the roster cannot play this seed now */
 function j7cCast(sd){const C={},used=new Set();
  for(const role in (sd.roles||{})){const r=sd.roles[role]||{},kind=r.kind||"rv";
-  if(J7C_FIX[kind]){if(!A6(kind))return null;C[role]={k:kind,id:null};continue}
+  if(J7C_FIX.has(kind)){if(!A6(kind))return null;C[role]={k:kind,id:null};continue}
   let L=j7cPool(kind,r).filter(id=>!used.has(kind+":"+id));if(!L.length&&BAL.j7c.loose)L=j7cPool(kind,r,true).filter(id=>!used.has(kind+":"+id));if(!L.length)return null;const id=pick(L);used.add(kind+":"+id);C[role]={k:kind,id}}
  return C}
-function j7cActors(sd,C){const X={};for(const role in C){const c=C[role];const a=J7C_FIX[c.k]?A6(c.k):A6(c.k,c.id);if(!a)return null;if(c.k==="rv"&&(a.o.alive===false))return null;X[role]=a}return X}
+function j7cActors(sd,C){const X={};for(const role in C){const c=C[role];const a=J7C_FIX.has(c.k)?A6(c.k):A6(c.k,c.id);if(!a)return null;if(c.k==="rv"&&(a.o.alive===false))return null;X[role]=a}return X}
 function j7cNeeds(sd){const n=sd.needs||{};try{
  if(n.rank_min!=null&&S.rank<n.rank_min)return false;if(n.rank_max!=null&&S.rank>n.rank_max)return false;
  if(n.nights_min!=null&&(S.nights||0)<n.nights_min)return false;if(n.month&&n.month.length&&!n.month.includes(S.month))return false;
@@ -95219,7 +95219,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="47d92b4c4f9b";window.CTM_BUILD=BUILD;
+const BUILD="76cb67975ec7";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

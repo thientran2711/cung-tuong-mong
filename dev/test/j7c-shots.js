@@ -11,7 +11,10 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
   const g=await D.openHost(p,'http://127.0.0.1:'+srv.address().port+'/',{timeout:120000});await g.waitForFunction(()=>window.__ctmBuilt===1&&typeof start==='function',null,{timeout:120000});
   await g.evaluate(X=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<40;i++){if(i)try{store.set(NL_KEY,null)}catch(e){}start();if(!(S.origin&&S.origin.k==='cnv')&&!(window.isSrv&&isSrv()))break}['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});
    for(const s of X)if(!J7SEEDS.some(y=>y.id===s.id))J7SEEDS.push(s);S.rank=Math.max(S.rank,2);while(Q.length)Q.shift();render()},EXTRA);await p.waitForTimeout(2500);
-  for(let k=0;k<3;k++){await RL.passNewLifePopups(g,{pri:['Nhận thân phận','Vào cung ngay','Nhận','Đã hiểu','Tiếp','Đóng','Lui','Tạ ơn','Tuân chỉ']});await p.waitForTimeout(1200)}
+  await RL.passNewLifePopups(g).catch(()=>{});
+  for(let k=0;k<14;k++){let hit=false;for(const t of ['Nhận thân phận','Nhận','Bỏ qua','Đã hiểu','Tạ ơn','Tuân chỉ','Tiếp','Vào cung ngay']){const L=g.locator('button:visible').filter({hasText:new RegExp('^\\s*'+t)});
+    if(await L.count().catch(()=>0)){await L.first().click({timeout:1500}).catch(()=>{});hit=true;await p.waitForTimeout(500);break}}
+   if(!hit)break}
   await p.keyboard.press('Escape').catch(()=>{});await p.waitForTimeout(400);
   const ids=IDS.length?IDS:await g.evaluate(()=>j7cReady().slice(0,3).map(x=>x.sd.id));
   for(const id of ids){const ok=await g.evaluate(id=>{j7cSeeds();const sd=J7I[id];if(!sd)return 'no seed';const C=j7cCast(sd);if(!C)return 'no cast';const d=mkP("j7c",{sid:id,c:C});if(!d)return 'no card';

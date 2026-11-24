@@ -10,7 +10,7 @@
 const J7I={};
 function j7cSeeds(){const L=(typeof J7SEEDS!=="undefined"&&Array.isArray(J7SEEDS))?J7SEEDS:[];for(const s of L)J7I[s.id]=s;return L}
 function j7c(){if(!S)return null;const j=S.j7c=S.j7c||{};j.seen=j.seen||{};j.ob=j.ob||[];j.n=j.n||0;return j}
-const J7C_FIX={maid:1,emp:1,th:1,doc:1,eun:1};
+const J7C_FIX=new Set(["maid","emp","th","doc","eun"]);
 /* nết filter: any-of per list, lists AND-ed (yard.md rule); fixed people take no filter */
 /* loose = the seed's nết and lòng lists read as ONE any-of list (used only when no one in the roster fits both: the actor still has a wanted nết) */
 function j7cFit(o,r,loose){if(!r)return true;let T=[];try{T=tr6(o)||[]}catch(e){T=[]}
@@ -24,10 +24,10 @@ function j7cPool(kind,r,loose){try{
 /* cast every role with a distinct real person; null = the roster cannot play this seed now */
 function j7cCast(sd){const C={},used=new Set();
  for(const role in (sd.roles||{})){const r=sd.roles[role]||{},kind=r.kind||"rv";
-  if(J7C_FIX[kind]){if(!A6(kind))return null;C[role]={k:kind,id:null};continue}
+  if(J7C_FIX.has(kind)){if(!A6(kind))return null;C[role]={k:kind,id:null};continue}
   let L=j7cPool(kind,r).filter(id=>!used.has(kind+":"+id));if(!L.length&&BAL.j7c.loose)L=j7cPool(kind,r,true).filter(id=>!used.has(kind+":"+id));if(!L.length)return null;const id=pick(L);used.add(kind+":"+id);C[role]={k:kind,id}}
  return C}
-function j7cActors(sd,C){const X={};for(const role in C){const c=C[role];const a=J7C_FIX[c.k]?A6(c.k):A6(c.k,c.id);if(!a)return null;if(c.k==="rv"&&(a.o.alive===false))return null;X[role]=a}return X}
+function j7cActors(sd,C){const X={};for(const role in C){const c=C[role];const a=J7C_FIX.has(c.k)?A6(c.k):A6(c.k,c.id);if(!a)return null;if(c.k==="rv"&&(a.o.alive===false))return null;X[role]=a}return X}
 function j7cNeeds(sd){const n=sd.needs||{};try{
  if(n.rank_min!=null&&S.rank<n.rank_min)return false;if(n.rank_max!=null&&S.rank>n.rank_max)return false;
  if(n.nights_min!=null&&(S.nights||0)<n.nights_min)return false;if(n.month&&n.month.length&&!n.month.includes(S.month))return false;
