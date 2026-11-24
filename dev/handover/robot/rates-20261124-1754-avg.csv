@@ -1,0 +1,468 @@
+group,key,lives,mean_min,median_min,fastest_min,slowest_min,death_rate,hoang_hau_rate_or_flag
+overall,ALL,50,1210.4,1040.6,73.5,3146.1,28%,0%
+than_phan,pf,50,1210.4,1040.6,73.5,3146.1,28%,0%
+nhanh,pf · pt_su,50,1210.4,1040.6,73.5,3146.1,28%,0%
+ending_type,death,14,1068.9,1040.6,102.4,3146.1,100%,0%
+ending_type,no ending,28,1630.4,2019.8,381.5,2963.9,0%,0%
+ending_type,thường,8,197.8,116.6,73.5,720.4,0%,0%
+bot,cautious,5,2090.6,2963.9,161.9,3146.1,20%,0%
+bot,greedy,5,1800.2,2115.6,493.1,2271,20%,0%
+bot,lazy,5,659.2,708.6,102.4,987.3,20%,0%
+bot,lover,5,1525.3,1478.9,1040.6,2019.8,40%,0%
+bot,random,5,116.7,106,73.5,191.1,0%,0%
+bot,rebel,5,726,1120.5,272.3,1210.6,80%,0%
+bot,schemer,5,1015.7,612.8,283.6,2590.2,80%,0%
+bot,scholar,5,2277.9,2267.6,2006.2,2431,0%,0%
+bot,skilled,5,1761.3,2092.2,720.4,2140.6,20%,0%
+bot,speed,5,346.9,401.5,116.6,430.2,0%,0%
+ending,Xuất gia,8,197.8,116.6,73.5,720.4,,
+ending,Lãnh cung,0,,,,,,chua ai gap
+ending,Được Vương gia che chở,0,,,,,,chua ai gap
+ending,Thái phi,3,1974.3,1736.1,1040.6,3146.1,,
+ending,Hoàng thái hậu,0,,,,,,chua ai gap
+ending,Mẫu hậu Hoàng thái hậu,0,,,,,,chua ai gap
+ending,Hồng nhan bạc mệnh,11,821.9,576,102.4,2590.2,,
+ending,Tư thông bị phát giác,0,,,,,,chua ai gap
+ending,Ma ma,0,,,,,,chua ai gap
+ending,Xuất cung,0,,,,,,chua ai gap
+ending,Xuất giá,0,,,,,,chua ai gap
+ending,Bị đuổi khỏi cung,0,,,,,,chua ai gap
+ending,Được ban hôn,0,,,,,,chua ai gap
+ending,Vào vương phủ,0,,,,,,chua ai gap
+ending,Thành thân,0,,,,,,chua ai gap
+ending,Cao chạy xa bay,0,,,,,,chua ai gap
+ending,Đại kết cục · ${res.ti},0,,,,,,chua ai gap
+ending,Ban chết,0,,,,,,chua ai gap
+ending,Tân đế đăng cơ,0,,,,,,chua ai gap
+ending,Trốn khỏi cung,0,,,,,,chua ai gap
+ending,Dâng biểu xuất gia,0,,,,,,chua ai gap
+ending,Xuất cung về quê,0,,,,,,chua ai gap
+ending,Phế làm thứ dân,0,,,,,,chua ai gap
+ending,Một đời an nhiên,0,,,,,,chua ai gap
+ending,Nữ vương Cao Ly,0,,,,,,chua ai gap
+ending,Thái hậu bị giam lỏng,0,,,,,,chua ai gap
+ending,Thái hoàng thái hậu,0,,,,,,chua ai gap
+ending,Nhiếp chính Thái hậu,0,,,,,,chua ai gap
+ending,Thái hậu chấp chính,0,,,,,,chua ai gap
+ending,Bị ép trả rèm,0,,,,,,chua ai gap
+ending,Nhị thánh lâm triều,0,,,,,,chua ai gap
+ending,Nữ đế,0,,,,,,chua ai gap
+ending,Nữ đế thoái vị,0,,,,,,chua ai gap
+ending,Nữ đế bị phế,0,,,,,,chua ai gap
+ending,Thiên cổ nhất đế,0,,,,,,chua ai gap
+ending,Mưu nghịch bất thành,0,,,,,,chua ai gap
+ending,Đại kết cục · Nữ đế hiền minh,0,,,,,,chua ai gap
+ending,Đại kết cục · Ngai vàng họ ngoại,0,,,,,,chua ai gap
+ending,Đại kết cục · Hiền tướng hậu cung,0,,,,,,chua ai gap
+ending,Đại kết cục · Gian tướng hậu cung,0,,,,,,chua ai gap
+ending,Đại kết cục · Buông cờ về núi,0,,,,,,chua ai gap
+ending,Đại kết cục · Lật bàn bỏ đi,0,,,,,,chua ai gap
+ending,Đại kết cục · Vì nước khuyên cha,0,,,,,,chua ai gap
+ending,Đại kết cục · Đại nghĩa diệt thân,0,,,,,,chua ai gap
+ending,Đại kết cục · Thanh thiên hậu cung,0,,,,,,chua ai gap
+ending,Đại kết cục · Án sắt hậu cung,0,,,,,,chua ai gap
+ending,Đại kết cục · Lấy luật trả oan,0,,,,,,chua ai gap
+ending,Đại kết cục · Máu trả máu,0,,,,,,chua ai gap
+ending,Đại kết cục · Nữ phán quan,0,,,,,,chua ai gap
+ending,Đại kết cục · Phán quan khắc nghiệt,0,,,,,,chua ai gap
+ending,Đại kết cục · Hoa nở ngoài cung,0,,,,,,chua ai gap
+ending,Đại kết cục · Bỏ nhà theo người,0,,,,,,chua ai gap
+ending,Đại kết cục · Nhất gia chi chủ,0,,,,,,chua ai gap
+ending,Đại kết cục · Gia chủ độc đoán,0,,,,,,chua ai gap
+ending,Đại kết cục · Thu phục huynh trưởng,0,,,,,,chua ai gap
+ending,Đại kết cục · Huynh muội tương tàn,0,,,,,,chua ai gap
+ending,Đại kết cục · Một mình một cõi,0,,,,,,chua ai gap
+ending,Đại kết cục · Đoạn tuyệt gia môn,0,,,,,,chua ai gap
+ending,Đại kết cục · Phượng ấn về nhà,0,,,,,,chua ai gap
+ending,Đại kết cục · Họ ngoại chuyên quyền,0,,,,,,chua ai gap
+ending,Đại kết cục · Trung cung kế vị,0,,,,,,chua ai gap
+ending,Đại kết cục · Đoạt ghế Trung cung,0,,,,,,chua ai gap
+ending,Đại kết cục · Tỷ muội Trung cung,0,,,,,,chua ai gap
+ending,Đại kết cục · Ám vệ Trung cung,0,,,,,,chua ai gap
+ending,Đại kết cục · Phá ước cứu người,0,,,,,,chua ai gap
+ending,Đại kết cục · Dao trong mật ước,0,,,,,,chua ai gap
+ending,Đại kết cục · Hai bóng chùa xa,0,,,,,,chua ai gap
+ending,Đại kết cục · Ép hậu xuất gia,0,,,,,,chua ai gap
+ending,Đại kết cục · Nữ tướng Nhạn Môn,0,,,,,,chua ai gap
+ending,Đại kết cục · Huyết tướng Nhạn Môn,0,,,,,,chua ai gap
+ending,Đại kết cục · Trấn biên giữ nước,0,,,,,,chua ai gap
+ending,Đại kết cục · Dưỡng giặc giữ quyền,0,,,,,,chua ai gap
+ending,Đại kết cục · Con nối nghiệp ông,0,,,,,,chua ai gap
+ending,Đại kết cục · Con cầm binh quyền,0,,,,,,chua ai gap
+ending,Đại kết cục · Hồn về Nhạn Môn,0,,,,,,chua ai gap
+ending,Đại kết cục · Đào ngũ theo chàng,0,,,,,,chua ai gap
+ending,Đại kết cục · Đan tâm chiếu sử,0,,,,,,chua ai gap
+ending,Đại kết cục · Giữ nhà bằng máu,0,,,,,,chua ai gap
+ending,Đại kết cục · Phò vua chính thống,0,,,,,,chua ai gap
+ending,Đại kết cục · Lập vua trong máu,0,,,,,,chua ai gap
+ending,Đại kết cục · Cả nhà ra biên,0,,,,,,chua ai gap
+ending,Đại kết cục · Trốn án ra biên,0,,,,,,chua ai gap
+ending,Đại kết cục · Tìm ra ấn giả,0,,,,,,chua ai gap
+ending,Đại kết cục · Ấn giả đền mạng,0,,,,,,chua ai gap
+ending,Đại kết cục · Nữ đế an dân,0,,,,,,chua ai gap
+ending,Đại kết cục · Binh phù trong tay,0,,,,,,chua ai gap
+ending,Đại kết cục · Trung thần giao binh,0,,,,,,chua ai gap
+ending,Đại kết cục · Giao binh đổi quyền,0,,,,,,chua ai gap
+ending,Đại kết cục · Theo cờ vương phủ,0,,,,,,chua ai gap
+ending,Đại kết cục · Phản cung theo vương,0,,,,,,chua ai gap
+ending,Đại kết cục · Giải giáp quy điền,0,,,,,,chua ai gap
+ending,Đại kết cục · Mang binh quy ẩn,0,,,,,,chua ai gap
+ending,Đại kết cục · Huynh muội trùng phùng,0,,,,,,chua ai gap
+ending,Đại kết cục · Cướp huynh về nước,0,,,,,,chua ai gap
+ending,Đại kết cục · Hòa thư hai nước,0,,,,,,chua ai gap
+ending,Đại kết cục · Hòa thư lừa giặc,0,,,,,,chua ai gap
+ending,Đại kết cục · Đánh giặc cứu huynh,0,,,,,,chua ai gap
+ending,Đại kết cục · Thù nhà nợ nước,0,,,,,,chua ai gap
+ending,Đại kết cục · Hồng nhan đất giặc,0,,,,,,chua ai gap
+ending,Đại kết cục · Phản quốc theo chàng,0,,,,,,chua ai gap
+ending,Đại kết cục · Hoàng thương thiên hạ,0,,,,,,chua ai gap
+ending,Đại kết cục · Gian thương thiên hạ,0,,,,,,chua ai gap
+ending,Đại kết cục · Vương tước cho con,0,,,,,,chua ai gap
+ending,Đại kết cục · Mua tước cho con,0,,,,,,chua ai gap
+ending,Đại kết cục · Thái hậu tán tài,0,,,,,,chua ai gap
+ending,Đại kết cục · Thái hậu bạc vàng,0,,,,,,chua ai gap
+ending,Đại kết cục · Thuyền về cố hương,0,,,,,,chua ai gap
+ending,Đại kết cục · Ôm bạc trốn đi,0,,,,,,chua ai gap
+ending,Đại kết cục · Diệt lưới muối lậu,0,,,,,,chua ai gap
+ending,Đại kết cục · Nuốt lưới muối lậu,0,,,,,,chua ai gap
+ending,Đại kết cục · Muối lậu nuôi dân,0,,,,,,chua ai gap
+ending,Đại kết cục · Vua muối bóng tối,0,,,,,,chua ai gap
+ending,Đại kết cục · Theo thuyền giang hồ,0,,,,,,chua ai gap
+ending,Đại kết cục · Thủ lĩnh giang hồ,0,,,,,,chua ai gap
+ending,Đại kết cục · Đòi công nhà muối,0,,,,,,chua ai gap
+ending,Đại kết cục · Nợ máu nhà muối,0,,,,,,chua ai gap
+ending,Đại kết cục · Bồ Tát Giang Nam,0,,,,,,chua ai gap
+ending,Đại kết cục · Bán lương Giang Nam,0,,,,,,chua ai gap
+ending,Đại kết cục · Mở kho cứu đói,0,,,,,,chua ai gap
+ending,Đại kết cục · Kho lương thiên hạ,0,,,,,,chua ai gap
+ending,Đại kết cục · Hiền phi cứu đói,0,,,,,,chua ai gap
+ending,Đại kết cục · Mua danh cứu đói,0,,,,,,chua ai gap
+ending,Đại kết cục · Khuyên kẻ đầu cơ,0,,,,,,chua ai gap
+ending,Đại kết cục · Đầu cơ đền tội,0,,,,,,chua ai gap
+ending,Đại kết cục · Ân nhân lục cung,0,,,,,,chua ai gap
+ending,Đại kết cục · Chủ nợ lục cung,0,,,,,,chua ai gap
+ending,Đại kết cục · Nợ hóa tình thân,0,,,,,,chua ai gap
+ending,Đại kết cục · Nợ hóa xiềng xích,0,,,,,,chua ai gap
+ending,Đại kết cục · Xóa nợ ra đi,0,,,,,,chua ai gap
+ending,Đại kết cục · Quỵt nợ ra đi,0,,,,,,chua ai gap
+ending,Đại kết cục · Thư sinh trả nợ,0,,,,,,chua ai gap
+ending,Đại kết cục · Trói chàng bằng nợ,0,,,,,,chua ai gap
+ending,Đại kết cục · Thương người hạ nhân,0,,,,,,chua ai gap
+ending,Đại kết cục · Tớ cũ thành chủ,0,,,,,,chua ai gap
+ending,Đại kết cục · Ân chủ trọn đời,0,,,,,,chua ai gap
+ending,Đại kết cục · Nắm thóp chủ cũ,0,,,,,,chua ai gap
+ending,Đại kết cục · Trả áo về quê,0,,,,,,chua ai gap
+ending,Đại kết cục · Cuỗm vàng về quê,0,,,,,,chua ai gap
+ending,Đại kết cục · Thay chủ nuôi con,0,,,,,,chua ai gap
+ending,Đại kết cục · Cướp con của chủ,0,,,,,,chua ai gap
+ending,Đại kết cục · Trốn cùng thị vệ,0,,,,,,chua ai gap
+ending,Đại kết cục · Bỏ trốn đêm loạn,0,,,,,,chua ai gap
+ending,Đại kết cục · Gạt lệ giữ ngôi,0,,,,,,chua ai gap
+ending,Đại kết cục · Chôn tình giữ ngôi,0,,,,,,chua ai gap
+ending,Đại kết cục · Tình hóa trung nghĩa,0,,,,,,chua ai gap
+ending,Đại kết cục · Lợi dụng tình xưa,0,,,,,,chua ai gap
+ending,Đại kết cục · Xuất gia đoạn tình,0,,,,,,chua ai gap
+ending,Đại kết cục · Đoạn tình tuyệt nghĩa,0,,,,,,chua ai gap
+ending,Đại kết cục · Chưởng sự lục cục,0,,,,,,chua ai gap
+ending,Đại kết cục · Bà chúa lục cục,0,,,,,,chua ai gap
+ending,Đại kết cục · Tỷ muội trọn đời,0,,,,,,chua ai gap
+ending,Đại kết cục · Tỷ muội đồng mưu,0,,,,,,chua ai gap
+ending,Đại kết cục · Cùng nhau ra cung,0,,,,,,chua ai gap
+ending,Đại kết cục · Trốn cung bỏ bạn,0,,,,,,chua ai gap
+ending,Đại kết cục · Bỏ bạn vì nghĩa,0,,,,,,chua ai gap
+ending,Đại kết cục · Bán bạn cầu vinh,0,,,,,,chua ai gap
+ending,Đại kết cục · Họ Thẩm phục hưng,0,,,,,,chua ai gap
+ending,Đại kết cục · Họ Thẩm báo oán,0,,,,,,chua ai gap
+ending,Đại kết cục · Nữ đế khoan nhân,0,,,,,,chua ai gap
+ending,Đại kết cục · Nữ đế huyết thống,0,,,,,,chua ai gap
+ending,Đại kết cục · Mang họ mẹ đi,0,,,,,,chua ai gap
+ending,Đại kết cục · Chối bỏ họ cha,0,,,,,,chua ai gap
+ending,Đại kết cục · Đòi công cho mẹ,0,,,,,,chua ai gap
+ending,Đại kết cục · Báo thù cho mẹ,0,,,,,,chua ai gap
+ending,Đại kết cục · Mật sứ hòa bình,0,,,,,,chua ai gap
+ending,Đại kết cục · Gián điệp hai triều,0,,,,,,chua ai gap
+ending,Đại kết cục · Một lòng Đại Hy,0,,,,,,chua ai gap
+ending,Đại kết cục · Bán đứng cố quốc,0,,,,,,chua ai gap
+ending,Đại kết cục · Thoát vòng hai nước,0,,,,,,chua ai gap
+ending,Đại kết cục · Phản cả hai triều,0,,,,,,chua ai gap
+ending,Đại kết cục · Tình nơi quán dịch,0,,,,,,chua ai gap
+ending,Đại kết cục · Câu chàng quán dịch,0,,,,,,chua ai gap
+ending,Đại kết cục · Cầu nối vạn dặm,0,,,,,,chua ai gap
+ending,Đại kết cục · Bán tin vạn dặm,0,,,,,,chua ai gap
+ending,Đại kết cục · Nữ sứ hai triều,0,,,,,,chua ai gap
+ending,Đại kết cục · Nữ sứ hai lòng,0,,,,,,chua ai gap
+ending,Đại kết cục · Che chở sứ đoàn,0,,,,,,chua ai gap
+ending,Đại kết cục · Sứ đoàn đẫm máu,0,,,,,,chua ai gap
+ending,Đại kết cục · Về nam theo sứ,0,,,,,,chua ai gap
+ending,Đại kết cục · Trốn nam theo sứ,0,,,,,,chua ai gap
+ending,Đại kết cục · Vũ khúc truyền đời,0,,,,,,chua ai gap
+ending,Đại kết cục · Vũ khúc mê hồn,0,,,,,,chua ai gap
+ending,Đại kết cục · Thái hậu ngoại tộc,0,,,,,,chua ai gap
+ending,Đại kết cục · Ngoại tộc chuyên quyền,0,,,,,,chua ai gap
+ending,Đại kết cục · Lấy đức rửa nhục,0,,,,,,chua ai gap
+ending,Đại kết cục · Trả nhục ngàn lần,0,,,,,,chua ai gap
+ending,Đại kết cục · Về với núi mây,0,,,,,,chua ai gap
+ending,Đại kết cục · Phóng hỏa về núi,0,,,,,,chua ai gap
+ending,Đại kết cục · Nữ vương nhân từ,0,,,,,,chua ai gap
+ending,Đại kết cục · Nữ vương máu lạnh,0,,,,,,chua ai gap
+ending,Đại kết cục · Hai ngai một lòng,0,,,,,,chua ai gap
+ending,Đại kết cục · Hai ngai một chủ,0,,,,,,chua ai gap
+ending,Đại kết cục · Hợp nhất hai cõi,0,,,,,,chua ai gap
+ending,Đại kết cục · Thôn tính cố quốc,0,,,,,,chua ai gap
+ending,Đại kết cục · Công chúa lưu vong,0,,,,,,chua ai gap
+ending,Đại kết cục · Lưu vong phục thù,0,,,,,,chua ai gap
+ending,Đại kết cục · Thống lĩnh ngự mã,0,,,,,,chua ai gap
+ending,Đại kết cục · Ngự mã chuyên quyền,0,,,,,,chua ai gap
+ending,Đại kết cục · Tri kỷ lưng ngựa,0,,,,,,chua ai gap
+ending,Đại kết cục · Lưng ngựa mưu sâu,0,,,,,,chua ai gap
+ending,Đại kết cục · Mũi tên cứu giá,0,,,,,,chua ai gap
+ending,Đại kết cục · Mũi tên trường săn,0,,,,,,chua ai gap
+ending,Đại kết cục · Theo đường tơ lụa,0,,,,,,chua ai gap
+ending,Đại kết cục · Cướp ngựa về tây,0,,,,,,chua ai gap
+ending,Đại kết cục · Nữ vương Tô Lận,0,,,,,,chua ai gap
+ending,Đại kết cục · Nữ vương sắt máu,0,,,,,,chua ai gap
+ending,Đại kết cục · Lập em làm vua,0,,,,,,chua ai gap
+ending,Đại kết cục · Dựng vua bù nhìn,0,,,,,,chua ai gap
+ending,Đại kết cục · Bắt thúc giao triều,0,,,,,,chua ai gap
+ending,Đại kết cục · Vương thúc phải chết,0,,,,,,chua ai gap
+ending,Đại kết cục · Con trai hai cõi,0,,,,,,chua ai gap
+ending,Đại kết cục · Con nắm hai cõi,0,,,,,,chua ai gap
+ending,Đại kết cục · Mẹ người chạy nạn,0,,,,,,chua ai gap
+ending,Đại kết cục · Nữ chúa lưu vong,0,,,,,,chua ai gap
+ending,Đại kết cục · Lương thảo đổi hòa,0,,,,,,chua ai gap
+ending,Đại kết cục · Lương thảo đổi đất,0,,,,,,chua ai gap
+ending,Đại kết cục · Mở ải cứu người,0,,,,,,chua ai gap
+ending,Đại kết cục · Mở cửa Ngọc Môn,0,,,,,,chua ai gap
+ending,Đại kết cục · Khúc ca Nô Nhụ,0,,,,,,chua ai gap
+ending,Đại kết cục · Khúc ca oán hận,0,,,,,,chua ai gap
+ending,Đại kết cục · Lời thề trọn vẹn,0,,,,,,chua ai gap
+ending,Đại kết cục · Đốt cầu theo chàng,0,,,,,,chua ai gap
+ending,Đại kết cục · Gác lời thề cũ,0,,,,,,chua ai gap
+ending,Đại kết cục · Dâng lửa lời thề,0,,,,,,chua ai gap
+ending,Đại kết cục · Nghĩa huynh đường xa,0,,,,,,chua ai gap
+ending,Đại kết cục · Lợi dụng nghĩa huynh,0,,,,,,chua ai gap
+ending,Đại kết cục · Đòi công cho chàng,0,,,,,,chua ai gap
+ending,Đại kết cục · Đòi máu cho chàng,0,,,,,,chua ai gap
+ending,Đại kết cục · Mực son tế biển,0,,,,,,chua ai gap
+ending,Đại kết cục · Sổ tử đòi nợ,0,,,,,,chua ai gap
+ending,Đại kết cục · Hải lộ thái bình,0,,,,,,chua ai gap
+ending,Đại kết cục · Chủ thuyền Đông Hải,0,,,,,,chua ai gap
+ending,Đại kết cục · Giấu đau giữ hòa,0,,,,,,chua ai gap
+ending,Đại kết cục · Đổ tội cho biển,0,,,,,,chua ai gap
+ending,Đại kết cục · Thuyền về Nan Ba,0,,,,,,chua ai gap
+ending,Đại kết cục · Lén thuyền về nước,0,,,,,,chua ai gap
+ending,Đại kết cục · Sứ giả hai trời,0,,,,,,chua ai gap
+ending,Đại kết cục · Nắm cả hai trời,0,,,,,,chua ai gap
+ending,Đại kết cục · Người dịch quốc thư,0,,,,,,chua ai gap
+ending,Đại kết cục · Dịch chữ đổi lòng,0,,,,,,chua ai gap
+ending,Đại kết cục · Bẻ mưu hại sứ,0,,,,,,chua ai gap
+ending,Đại kết cục · Bẻ gãy sứ đoàn,0,,,,,,chua ai gap
+ending,Đại kết cục · Hồi thư bằng máu,0,,,,,,chua ai gap
+ending,Đại kết cục · Thư máu ép vua,0,,,,,,chua ai gap
+ending,Đại kết cục · Người dựng giới đàn,0,,,,,,chua ai gap
+ending,Đại kết cục · Giới đàn trong tay,0,,,,,,chua ai gap
+ending,Đại kết cục · Đôi mắt của thầy,0,,,,,,chua ai gap
+ending,Đại kết cục · Mượn danh thầy,0,,,,,,chua ai gap
+ending,Đại kết cục · Lấy kinh trừ đan,0,,,,,,chua ai gap
+ending,Đại kết cục · Kinh đổi lấy quyền,0,,,,,,chua ai gap
+ending,Đại kết cục · Thầy sang bể,0,,,,,,chua ai gap
+ending,Đại kết cục · Mượn thuyền thầy trốn,0,,,,,,chua ai gap
+ending,Đại kết cục · Chủ bến Minh Châu,0,,,,,,chua ai gap
+ending,Đại kết cục · Nuốt bến Minh Châu,0,,,,,,chua ai gap
+ending,Đại kết cục · Lời hứa kẻ biển,0,,,,,,chua ai gap
+ending,Đại kết cục · Giặc biển trong tay,0,,,,,,chua ai gap
+ending,Đại kết cục · Sổ thật trị gian,0,,,,,,chua ai gap
+ending,Đại kết cục · Mượn dao giặc,0,,,,,,chua ai gap
+ending,Đại kết cục · Luật biển bốn phương,0,,,,,,chua ai gap
+ending,Đại kết cục · Luật biển một chủ,0,,,,,,chua ai gap
+ending,Đại kết cục · Rửa oan chín họ,0,,,,,,chua ai gap
+ending,Đại kết cục · Lật án đổ máu,0,,,,,,chua ai gap
+ending,Đại kết cục · Xử án công minh,0,,,,,,chua ai gap
+ending,Đại kết cục · Chín họ đền tội,0,,,,,,chua ai gap
+ending,Đại kết cục · Bút sử chép lại,0,,,,,,chua ai gap
+ending,Đại kết cục · Bút sử tùy tay,0,,,,,,chua ai gap
+ending,Đại kết cục · Tro tàn trở về,0,,,,,,chua ai gap
+ending,Đại kết cục · Mang thù trở về,0,,,,,,chua ai gap
+ending,Đại kết cục · Nhổ gốc trả oan,0,,,,,,chua ai gap
+ending,Đại kết cục · Diệt tận gốc,0,,,,,,chua ai gap
+ending,Đại kết cục · Tha để thắng,0,,,,,,chua ai gap
+ending,Đại kết cục · Tha để trói,0,,,,,,chua ai gap
+ending,Đại kết cục · Mạng lưới che chở,0,,,,,,chua ai gap
+ending,Đại kết cục · Mạng lưới bóng đêm,0,,,,,,chua ai gap
+ending,Đại kết cục · Theo người cứu mạng,0,,,,,,chua ai gap
+ending,Đại kết cục · Mượn người trốn án,0,,,,,,chua ai gap
+ending,Đại kết cục · Tướng môn trở lại,0,,,,,,chua ai gap
+ending,Đại kết cục · Tướng môn báo oán,0,,,,,,chua ai gap
+ending,Đại kết cục · Mở cổng cứu giá,0,,,,,,chua ai gap
+ending,Đại kết cục · Mở cổng thành đêm,0,,,,,,chua ai gap
+ending,Đại kết cục · Chị em phiêu bạt,0,,,,,,chua ai gap
+ending,Đại kết cục · Chị em lục lâm,0,,,,,,chua ai gap
+ending,Đại kết cục · Thay em gánh tội,0,,,,,,chua ai gap
+ending,Đại kết cục · Đẩy tội cho người,0,,,,,,chua ai gap
+ending,Đại kết cục · Oán hóa thành ân,0,,,,,,chua ai gap
+ending,Đại kết cục · Giả tha chờ thời,0,,,,,,chua ai gap
+ending,Đại kết cục · Báo thù đúng người,0,,,,,,chua ai gap
+ending,Đại kết cục · Báo thù không tha,0,,,,,,chua ai gap
+ending,Đại kết cục · Cửa Phật buông thù,0,,,,,,chua ai gap
+ending,Đại kết cục · Mượn chùa náu thân,0,,,,,,chua ai gap
+ending,Đại kết cục · Yêu con kẻ thù,0,,,,,,chua ai gap
+ending,Đại kết cục · Lấy tình làm dao,0,,,,,,chua ai gap
+ending,Đại kết cục · Đức Thọ đời sau,0,,,,,,chua ai gap
+ending,Đại kết cục · Đức Thọ chuyên quyền,0,,,,,,chua ai gap
+ending,Đại kết cục · Thay cô giữ nước,0,,,,,,chua ai gap
+ending,Đại kết cục · Phản cô đoạt quyền,0,,,,,,chua ai gap
+ending,Đại kết cục · Cháu hiền giữ lễ,0,,,,,,chua ai gap
+ending,Đại kết cục · Cháu ngoan giấu dao,0,,,,,,chua ai gap
+ending,Đại kết cục · Cửa thiền thay cô,0,,,,,,chua ai gap
+ending,Đại kết cục · Mượn thiền tránh họa,0,,,,,,chua ai gap
+ending,Đại kết cục · Thần y hậu cung,0,,,,,,chua ai gap
+ending,Đại kết cục · Độc y hậu cung,0,,,,,,chua ai gap
+ending,Đại kết cục · Chén thuốc hồi sinh,0,,,,,,chua ai gap
+ending,Đại kết cục · Chén thuốc cuối cùng,0,,,,,,chua ai gap
+ending,Đại kết cục · Hiếu nữ cầm ấn,0,,,,,,chua ai gap
+ending,Đại kết cục · Mượn bệnh cầm ấn,0,,,,,,chua ai gap
+ending,Đại kết cục · Theo cô hành cung,0,,,,,,chua ai gap
+ending,Đại kết cục · Giam cô hành cung,0,,,,,,chua ai gap
+ending,Đại kết cục · Chị em một nhà,0,,,,,,chua ai gap
+ending,Đại kết cục · Em làm bóng chị,0,,,,,,chua ai gap
+ending,Đại kết cục · Phượng nghi thiên hạ,0,,,,,,chua ai gap
+ending,Đại kết cục · Một phượng duy nhất,0,,,,,,chua ai gap
+ending,Đại kết cục · Nhường ngôi cho em,0,,,,,,chua ai gap
+ending,Đại kết cục · Bỏ em gánh họa,0,,,,,,chua ai gap
+ending,Đại kết cục · Họ ngoại trăm năm,0,,,,,,chua ai gap
+ending,Đại kết cục · Họ ngoại lộng quyền,0,,,,,,chua ai gap
+ending,Đại kết cục · Trả lại công bằng,0,,,,,,chua ai gap
+ending,Đại kết cục · Bí mật thành dao,0,,,,,,chua ai gap
+ending,Đại kết cục · Giữ kín che người,0,,,,,,chua ai gap
+ending,"Đại kết cục · Giữ kín, nắm thóp",0,,,,,,chua ai gap
+ending,Đại kết cục · Mẹ con nhận nhau,0,,,,,,chua ai gap
+ending,Đại kết cục · Cướp mẹ về mình,0,,,,,,chua ai gap
+ending,Đại kết cục · Hoàng tử thất lạc,0,,,,,,chua ai gap
+ending,Đại kết cục · Hoàng tử giả danh,0,,,,,,chua ai gap
+ending,Đại kết cục · Thi tiên đương thời,0,,,,,,chua ai gap
+ending,Đại kết cục · Thi ma đương thời,0,,,,,,chua ai gap
+ending,Đại kết cục · Ngòi bút cứu người,0,,,,,,chua ai gap
+ending,Đại kết cục · Ngòi bút giết người,0,,,,,,chua ai gap
+ending,Đại kết cục · Thơ theo gió đi,0,,,,,,chua ai gap
+ending,Đại kết cục · Thơ đốt ra đi,0,,,,,,chua ai gap
+ending,Đại kết cục · Tri âm thiên tử,0,,,,,,chua ai gap
+ending,Đại kết cục · Thi nữ dắt vua,0,,,,,,chua ai gap
+ending,Đại kết cục · Nữ đế biến pháp,0,,,,,,chua ai gap
+ending,Đại kết cục · Nữ đế khắc nghiệt,0,,,,,,chua ai gap
+ending,Đại kết cục · Giấu sách giữ ngôi,0,,,,,,chua ai gap
+ending,Đại kết cục · Đốt sách giữ ngôi,0,,,,,,chua ai gap
+ending,Đại kết cục · Mở trường dạy chữ,0,,,,,,chua ai gap
+ending,Đại kết cục · Mở trường kết đảng,0,,,,,,chua ai gap
+ending,Đại kết cục · Gánh sách theo chàng,0,,,,,,chua ai gap
+ending,Đại kết cục · Trộm sách theo chàng,0,,,,,,chua ai gap
+ending,Đại kết cục · Trạng nguyên phò tá,0,,,,,,chua ai gap
+ending,Đại kết cục · Trạng nguyên con rối,0,,,,,,chua ai gap
+ending,Đại kết cục · Môn sinh đầy triều,0,,,,,,chua ai gap
+ending,Đại kết cục · Môn sinh thành phe,0,,,,,,chua ai gap
+ending,Đại kết cục · Theo trò đi xa,0,,,,,,chua ai gap
+ending,Đại kết cục · Bỏ hết theo trò,0,,,,,,chua ai gap
+ending,Đại kết cục · Khoa trường vạch tội,0,,,,,,chua ai gap
+ending,Đại kết cục · Khoa trường thanh trừng,0,,,,,,chua ai gap
+ending,Đại kết cục · Đế sư thiên tử,0,,,,,,chua ai gap
+ending,Đại kết cục · Đế sư lộng quyền,0,,,,,,chua ai gap
+ending,Đại kết cục · Dạy vua thành người,0,,,,,,chua ai gap
+ending,Đại kết cục · Dạy vua thành rối,0,,,,,,chua ai gap
+ending,Đại kết cục · Thư viện bên hồ,0,,,,,,chua ai gap
+ending,Đại kết cục · Ôm sách cấm đi,0,,,,,,chua ai gap
+ending,Đại kết cục · Mẹ nuôi Đông cung,0,,,,,,chua ai gap
+ending,Đại kết cục · Mẹ nuôi tranh ngôi,0,,,,,,chua ai gap
+ending,Đại kết cục · Bóng che ghế chủ,0,,,,,,chua ai gap
+ending,Đại kết cục · Bóng sau ghế chủ,0,,,,,,chua ai gap
+ending,Đại kết cục · Nghĩa chủ tình sâu,0,,,,,,chua ai gap
+ending,Đại kết cục · Chủ tớ đồng tội,0,,,,,,chua ai gap
+ending,Đại kết cục · Giữ kín ra cung,0,,,,,,chua ai gap
+ending,Đại kết cục · Bán tin ra cung,0,,,,,,chua ai gap
+ending,Đại kết cục · Rửa oan người cũ,0,,,,,,chua ai gap
+ending,Đại kết cục · Trả oán người cũ,0,,,,,,chua ai gap
+ending,Đại kết cục · Chị em ra cung,0,,,,,,chua ai gap
+ending,Đại kết cục · Một mình ra cung,0,,,,,,chua ai gap
+ending,Đại kết cục · Kéo bạn cùng lên,0,,,,,,chua ai gap
+ending,Đại kết cục · Bước lên vai bạn,0,,,,,,chua ai gap
+ending,Đại kết cục · Kim chỉ thành danh,0,,,,,,chua ai gap
+ending,Đại kết cục · Kim chỉ cướp danh,0,,,,,,chua ai gap
+ending,Đại kết cục · Về làng theo chàng,0,,,,,,chua ai gap
+ending,Đại kết cục · Bỏ bạn theo chàng,0,,,,,,chua ai gap
+ending,Đại kết cục · Chiếc ô chiều mưa,0,,,,,,chua ai gap
+ending,Đại kết cục · Chiếc ô giăng bẫy,0,,,,,,chua ai gap
+ending,Đại kết cục · Tỳ nữ mẫu nghi,0,,,,,,chua ai gap
+ending,Đại kết cục · Tỳ nữ lên phượng,0,,,,,,chua ai gap
+ending,Đại kết cục · Gác ô ra đi,0,,,,,,chua ai gap
+ending,Đại kết cục · Bẻ ô ra đi,0,,,,,,chua ai gap
+ending,Đại kết cục · Tỷ muội cùng hầu,0,,,,,,chua ai gap
+ending,Đại kết cục · Mượn chị lên cao,0,,,,,,chua ai gap
+ending,Đại kết cục · Tổng quản lục cung,0,,,,,,chua ai gap
+ending,Đại kết cục · Tổng quản hà khắc,0,,,,,,chua ai gap
+ending,Đại kết cục · Nội vụ thanh liêm,0,,,,,,chua ai gap
+ending,Đại kết cục · Tay nắm Nội vụ,0,,,,,,chua ai gap
+ending,Đại kết cục · Ma ma về quê,0,,,,,,chua ai gap
+ending,Đại kết cục · Ma ma cuỗm bạc,0,,,,,,chua ai gap
+ending,Đại kết cục · Phụng Thánh phu nhân,0,,,,,,chua ai gap
+ending,Đại kết cục · Nhũ mẫu nhiếp chính,0,,,,,,chua ai gap
+death_cause,"${d.n} nguy kịch, không qua khỏi",0,,,,,0%,chua ai gap
+death_cause,"Chết rét, chết đói trong lãnh cung",0,,,,,0%,chua ai gap
+death_cause,"Uống thuốc phá thai, băng huyết mà chết",0,,,,,0%,chua ai gap
+death_cause,Bị ban chết vì tư thông với ${m.name},0,,,,,0%,chua ai gap
+death_cause,tư thông với ${m.name},0,,,,,0%,chua ai gap
+death_cause,"Thú tội tư thông, Hoàng thượng không tha",0,,,,,0%,chua ai gap
+death_cause,"Bệnh nặng, không qua khỏi",0,,,,,0%,chua ai gap
+death_cause,"${pre}Tân Thái hậu ${v.name} xét lại chuyện cũ (khả năng: ${chanceLo(o)}), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",0,,,,,0%,chua ai gap
+death_cause,"Mưu phản cùng cha, cả họ bị tru di",0,,,,,0%,chua ai gap
+death_cause,"Cao Ly thua trận, thư mật của ngươi bị tìm thấy",0,,,,,0%,chua ai gap
+death_cause,"Mật thư bị chặn, tra ra ngươi làm gián điệp cho Cao Ly",0,,,,,0%,chua ai gap
+death_cause,"Hạ độc Hoàng hậu bị bắt, Thái hậu phủi tay không nhận",0,,,,,0%,chua ai gap
+death_cause,Kiệt sức chết giữa đống đồ giặt ở Tân Giả khố,0,,,,,0%,chua ai gap
+death_cause,Lao lực kiệt sức mà chết,0,,,,,0%,chua ai gap
+death_cause,"Bị ${mm2.name} phát hiện làm tai mắt cho ${v.name}, sai đánh chết",0,,,,,0%,chua ai gap
+death_cause,"${mm2.name} biết ngươi phản chủ, sai người dìm ngươi xuống giếng sau Ngự hoa viên",0,,,,,0%,chua ai gap
+death_cause,Bị ${m.name} sai đánh trượng đến chết,0,,,,,0%,chua ai gap
+death_cause,"Bị bắt quả tang khi ${k===""poison""?""bỏ độc"":k===""plant""?""cài bùa ngải"":""dò la""} ${t.name}, bị đánh chết ở Thận Hình ti",0,,,,,0%,chua ai gap
+death_cause,Chết dưới đòn tra khảo ở Thận Hình ti,0,,,,,0%,chua ai gap
+death_cause,Quỳ phạt đến kiệt sức mà chết,0,,,,,0%,chua ai gap
+death_cause,"Bị đánh đòn vì tội trộm cắp, không qua khỏi",0,,,,,0%,chua ai gap
+death_cause,"Trước ngày sắc phong, ${m.name} sai người đẩy ngươi xuống giếng",0,,,,,0%,chua ai gap
+death_cause,"${pre} Bụng mang dạ chửa, ngươi bị đánh chết ở Thận Hình ti",0,,,,,0%,chua ai gap
+death_cause,"${pre} Chuyện dính vào mưu của phi tần, ngươi bị diệt khẩu",0,,,,,0%,chua ai gap
+death_cause,${pre} Ngươi chết dưới đòn roi,0,,,,,0%,chua ai gap
+death_cause,"Khó sinh, băng huyết mà chết",0,,,,,0%,chua ai gap
+death_cause,Bị ban rượu độc vì mưu hại ${NM(t)},0,,,,,0%,chua ai gap
+death_cause,Bị ban chết vì đầu độc ${k.name},0,,,,,0%,chua ai gap
+death_cause,Bị ban chết vì vu ${k.name} trù ẻo thánh thượng,0,,,,,0%,chua ai gap
+death_cause,"Tráo con bị bắt quả tang, tội khi quân",0,,,,,0%,chua ai gap
+death_cause,"tư thông${m?"" với ""+m.name:""""}",0,,,,,0%,chua ai gap
+death_cause,Bị ${m.who} hại,0,,,,,0%,chua ai gap
+death_cause,Bị kẻ gian hãm hại,0,,,,,0%,chua ai gap
+death_cause,Bị hại trong cung,0,,,,,0%,chua ai gap
+death_cause,Lao lực mà chết trước kỳ tuyển tú,0,,,,,0%,chua ai gap
+death_cause,Trúng độc chén canh sâm của,0,,,,,0%,chua ai gap
+death_cause,Tự vẫn trước ngày bị ép gả,0,,,,,0%,chua ai gap
+death_cause,Chết vì dịch sốt trước kỳ tuyển tú,0,,,,,0%,chua ai gap
+death_cause,Lao lực mà chết trước ngày tuyển,0,,,,,0%,chua ai gap
+death_cause,Kiệt sức mà chết trước ngày hòa thân,0,,,,,0%,chua ai gap
+death_cause,Chết dưới dao thích khách đêm trước ngày hòa thân,0,,,,,0%,chua ai gap
+death_cause,Bị ban chết vì tư thông với ${nm},0,,,,,0%,chua ai gap
+death_cause,tư thông với ${nm},0,,,,,0%,chua ai gap
+death_cause,"Bị Thái y tra ra bỏ độc người hầu cung khác, giải sang Thận hình ti",0,,,,,0%,chua ai gap
+death_cause,"${ILL[i.k].n} nguy kịch, tuổi cao sức yếu không qua khỏi",0,,,,,0%,chua ai gap
+death_cause,${t} Ngươi gắng sinh hạ hài nhi rồi nhắm mắt,0,,,,,0%,chua ai gap
+death_cause,"Ngươi trượt chân trên bậc đá đóng băng trước điện, không tỉnh lại",0,,,,,0%,chua ai gap
+death_cause,Ngươi ngã xuống hồ Thái Dịch giữa đêm mưa,0,,,,,0%,chua ai gap
+death_cause,Ngươi nghẹn hạt sen giữa yến tiệc,0,,,,,0%,chua ai gap
+death_cause,"Ngươi mải đuổi con vẹt sổng lồng, trượt chân ngã từ lầu vọng nguyệt",0,,,,,0%,chua ai gap
+death_cause,"Ngươi cười quá đà khi xem gánh chèo, ngất đi không tỉnh",0,,,,,0%,chua ai gap
+death_cause,"Tuổi trời đã tận, ${ILL[ageOf(p)>=M.oldAge?""laobenh"":""trongbenh""].n.toLowerCase()} không qua khỏi, thọ ${S.age} tuổi",0,,,,,0%,chua ai gap
+death_cause,"Trúng độc, không qua khỏi",1,300.8,300.8,300.8,300.8,2%,
+death_cause,bị ban chết vì mưu hại ${PQ_N[who]},0,,,,,0%,chua ai gap
+death_cause,Thái hậu dùng xong chén canh thì trở bệnh nặng,0,,,,,0%,chua ai gap
+death_cause,"Uống thuốc giả chết quá liều, không tỉnh lại nữa",0,,,,,0%,chua ai gap
+death_cause,Bị ban chết vì tư thông,0,,,,,0%,chua ai gap
+death_cause,Bị ban chết vì trốn khỏi cung,0,,,,,0%,chua ai gap
+death_cause,trốn khỏi cung,0,,,,,0%,chua ai gap
+death_cause,gian lận khi trích huyết nghiệm thân,0,,,,,0%,chua ai gap
+death_cause,Bị ban chết vì ${why},0,,,,,0%,chua ai gap
+death_cause,Bị ban chết vì con không phải cốt nhục hoàng gia,0,,,,,0%,chua ai gap
+death_cause,con không phải cốt nhục hoàng gia,0,,,,,0%,chua ai gap
