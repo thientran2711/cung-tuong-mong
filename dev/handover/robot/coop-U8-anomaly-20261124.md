@@ -18,3 +18,8 @@ BUG FAMILY «guest life never ends» (seat X guest Fold, pair 7, SEED=1 SWAP=1, 
 Same family, opposite seat: after 2 h guest X (Fold) has 3 kiếp, host Y (iPad) only 1 (bd/bd_tuyet) and its kiếp 2 not ending. So «one seat's life never ends while the other seat cycles» hits either seat; room keeps stepping weeks (room NUQH 34 weeks, turn p95 66 s, stuck). Pair 8 resumed (2nd job).
 
 ## Check 18:27Z (pair 8, 4 h in): guest 7 kiếp (weeks 6,16,26,9,24,28,39), host 3 kiếp (weeks 25, 152, 152). Host kiếp 2 ran to week 152 (76 min) before ending; host kiếp 3 ended at week 152 in 0 min (suspicious: same week count, looks like the previous life's counter). The never-ending host life = host kiếp 2, reached week 152.
+
+## FINAL 20:30Z (F #3 wind-down; harness gap = night picture not tapped, fix on review/robot10-coop-stuckcap)
+- TAG for every «stuck» row in coop-20261124-0823-p7-8-s.* (pair 7) and coop-20261124-1426-p8-8-s.* (pair 8): **harness: night-picture tap (stuckcap)**. Snapshots all show buoi 3, next:true, pend:false, Q:0, st open, peer:true on both seats = room waiting at the night step, consistent with the untapped night picture (not verified on screens).
+- TAG the «one seat's life never ends» rows (pair 7 guest, pair 8 host kiếp 2 week 152) **stuckcap (probable)**: rooms rotated on stuck/rejoin, so the slow seat's life most likely sat on the night picture; not individually verified.
+- Counts. Pair 7 (SWAP=1): host 10 (+4 extra stopped), guest 1. Pair 8 (SWAP=1): guest 10 (+2 extra), host 4. Not completed: pair 7 guest 9 kiếp, pair 8 host 6 kiếp (round 2 on fixed harness).
