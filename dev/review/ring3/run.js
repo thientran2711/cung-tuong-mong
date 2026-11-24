@@ -46,7 +46,7 @@ const DEV={fold:'fold',ipad:'ipadAir'}[dev];
    await step('enter',`KAR.enter(${TA})`,1300,rate);await shot('a'+TA)}
   await step('group',pickJS,800,rate);await shot('g-'+pk);
   await step('step',`KAR.stepOut(__G.masters[0])`,1000,rate);await shot('s-'+pk);
-  await step('picker',`KAR.picker(__G.masters[0],'${pk}')`,1500,rate);await shot('p-'+pk);
+  await step('picker',`KAR.picker(__G.masters[0],'${pk}')`,2800,rate);await shot('p-'+pk);
   await step('lift',`(()=>{const b=document.querySelectorAll('#kar .kar-pk .kfoc-b,#kar .kpk .kfoc-b')[1];b&&KAR.lift(b,'${pk}')})()`,900,rate);await shot('l-'+pk);
   await step('talk',`KAR.talk(__G.masters[0],'Muội muội cũng ra vườn ngắm hoa sao?')`,1900,rate);await shot('t-'+pk);
   await step('back',`KAR.unsel()`,1000,rate)}

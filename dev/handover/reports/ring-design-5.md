@@ -21,3 +21,9 @@ Videos (scrub every 0.1 s): only transient overlaps while rib/fan open or my fig
 - Perf table on the page is not re-measured (perf.json missing this round); geometry changes touch only mock layout.
 - ~Design 95 % / playable 0 %.
 Re-run: cd dev/review/ring3; SAVE=/home/user/wt/ring5-shots/life.json (node meet.js writes it) PICK='Tư Mã Ý Hoan' node run.js <fold|ipad> <shots|video>; encode with ffmpeg (cut at the logged CUT, 2× = setpts=2*PTS); python3 dev/site/cdn_sync.py img/_review/ring4.
+
+## Round 2 (MAIN 127 3 small fixes, same page)
+(1) map: «Lối đi» areas have NO map hotspot (listed in the grid only), «Ngự đạo» hotspot moved above the grid → no label ghost under the grid, no cramped strip.
+(2) fan/rib: cards never cover her name tag (stack bottom = tag top when the band overlaps the tag; fan gap tightens to 3, rib tilt shrinks to fit); the earlier «hide the tag» hack removed.
+(3) Fold tabs: fan/rib tabs one row (mock .pctabs). kitPick (hang) tabs stack vertically on Fold → KIT REQUEST sent to KK22 (OPEN) together with the lifted-plaque wrap. Mock also clears a stale rail slot (inline left/flex-direction) — the kit 7b fix is flaky (one run showed the rail + head-count chip on the right over the title).
+Videos re-shot; contact sheets fps=12 looked at: settled frames 0 see-through / 0 overlap / name tag visible; scrub only single-sample transient overlaps while the rib/fan/hang open (≤ 1 frame each) and one 6 px frame while my figure slides in.

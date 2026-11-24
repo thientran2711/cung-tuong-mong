@@ -1,7 +1,7 @@
 /* in-page: the REAL crowd of one buổi at Ngự hoa viên → KAR groups. Numbers = proposed BAL.area (law 4; numbers are ours, see report). */
 window.BAL=window.BAL||{};BAL.area={ /* = dev/AREA_PLAN.md §4 (proposed BAL, law 4). MOCK-ONLY keys: x = crop of the ONE existing garden painting for the area scene,
    hs = hotspot box on that painting for the garden map (stand-in 'tạm' until Foreman C paints the bird's-eye map + one scene per area) */
- vuon:[{k:'ngudao', n:'Ngự đạo', acts:['stroll','attend','escort','seekemp','ag_flaunt','ag_cx2:court','ag_cx2:show','ag_cx2:flat'],net:['Kiêu ngạo','Tham vọng'],x:.52,hs:{x:.33,y:.70,w:.20,h:.16}},
+ vuon:[{k:'ngudao', n:'Ngự đạo', acts:['stroll','attend','escort','seekemp','ag_flaunt','ag_cx2:court','ag_cx2:show','ag_cx2:flat'],net:['Kiêu ngạo','Tham vọng'],x:.52,hs:{x:.33,y:.52,w:.20,h:.14}},
        {k:'vuonhoa',n:'Vườn hoa',acts:['paint','walk','ag_effort','ag_cx3:talkPraise','ag_cx3:talkGossip','sell','play'],net:['Ân cần','Nhiều chuyện','Ham vui'],x:.12,hs:{x:.02,y:.52,w:.22,h:.18}},
        {k:'thuyta', n:'Thủy tạ', acts:['music','poem','ag_cx3:qin','ag_cx3:talkHealth'],net:['Điềm tĩnh','Khiêm nhường','Ham học'],x:1,hs:{x:.70,y:.18,w:.24,h:.20}},
        {k:'dinhco', n:'Đình cờ', acts:['ag_cx3:pmPlay','ag_cx3:pmDuel','wager'],net:['Nóng nảy','Thực tế'],x:.72,hs:{x:.40,y:.36,w:.18,h:.14}},

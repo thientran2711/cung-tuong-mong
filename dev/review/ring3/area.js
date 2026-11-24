@@ -80,7 +80,7 @@ function capFor(g){if(!g.cap)return;if(!g.capEl||!g.capEl.isConnected){g.capEl=d
    stale inline values (= the kit default slot) and the people chip counts THIS area (kitArea feed, request #7). */
 /* keep it so while the mock is on: the live rail re-paints on every render (MutationObserver = before the next paint, no one-frame jump) */
 let railMO=null;function railWatch(){if(railMO)return;railMO=new MutationObserver(()=>{if(window.__karOn)railFix()});railMO.observe(document.getElementById('game')||document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['style'],characterData:true})}
-function railFix(){try{railWatch();/* 7b stale rail left: fixed in the kit (jrail, KK21 880c7c8b) — the mock no longer touches the rail */
+function railFix(){try{railWatch();{const rl=document.getElementById('krail');if(rl&&document.getElementById('kar')&&(rl.style.left||rl.style.flexDirection)){rl.style.left='';rl.style.flexDirection=''}}/* 7b stale rail left: fixed in the kit (jrail, KK21 880c7c8b) — the mock no longer touches the rail */
  const a=AREAS[cur],c=document.querySelector('#krail .krailc .j59n');const tn=document.querySelector('#stage #kpname>span');if(a&&tn&&document.getElementById('kar')&&tn.textContent!=='Ngự hoa viên · '+a.n)tn.textContent='Ngự hoa viên · '+a.n;if(a&&c&&c.textContent!==String(count(a)))c.textContent=String(count(a))}catch(e){}}
 function tagsFix(){railFix();try{const a=AREAS[cur];if(!a)return;const F=figsOf(a).filter(m=>m.tg.style.display!=='none'&&m.el.style.display!=='none');
  const pr=m=>(m===selM?0:sel&&m.g===sel?1:2)*100-(m.z||0);F.sort((x,y)=>pr(x)-pr(y));const keep=[];
@@ -93,7 +93,7 @@ function count(a){return a.g.reduce((s,g)=>s+g.P.length,0)}
 function mapHTML(){const chip=n=>n?`<i>${n} bóng người</i>`:`<i>vắng</i>`;const tot=AREAS.reduce((s,a)=>s+count(a),0);
  return `<div class="mapv kpmv kar-map" data-kpm="vuon"><div class="maptools"><span><button class="btn mz kpm-back" aria-label="Về Dư đồ">‹ Dư đồ</button></span><span class="past kpm-t"><b>Ngự hoa viên</b> · <em>${tot} bóng người</em></span></div>
  <div class="mapsc"><div class="mapw" style="width:100%"><img class="mapimg" src="${esc(BGSRC)}" alt="Ngự hoa viên">
- ${AREAS.map((a,i)=>{const b=a.hs;return `<button class="mspot kpm-spot" data-kar="${i}" title="${esc(a.n)}" style="left:${b.x*100}%;top:${b.y*100}%;width:${b.w*100}%;height:${b.h*100}%"><span class="mlab">${esc(a.n)}${chip(count(a))}</span></button>`}).join('')}
+ ${AREAS.map((a,i)=>{if(a.extra)return '';const b=a.hs;return `<button class="mspot kpm-spot" data-kar="${i}" title="${esc(a.n)}" style="left:${b.x*100}%;top:${b.y*100}%;width:${b.w*100}%;height:${b.h*100}%"><span class="mlab">${esc(a.n)}${chip(count(a))}</span></button>`}).join('')}
  ${typeof kitTam==='function'?kitTam(true):''}</div></div>
  <div class="kpm-list">${AREAS.map((a,i)=>`<button class="btn kpm-row" data-kar="${i}"><b class="kpm-rn">${esc(a.n)}</b><span class="kpm-rs">${count(a)?count(a)+' bóng người':'vắng người'}</span></button>`).join('')}</div></div>`}
 function inject(){const v=document.querySelector('#panel .mapv:not(.kar-map)');if(!v)return null;const cls=v.className,sky=v.dataset.sky||'';v.outerHTML=mapHTML();const n=document.querySelector('#panel .kar-map');n.className=cls+' kpmv kar-map';if(sky)n.dataset.sky=sky;const mw=n.querySelector('.mapw');mw.style.setProperty('width','100%','important');mw.style.setProperty('height','auto','important');const mi=n.querySelector('.mapimg');['width:100%','height:auto','max-width:100%','max-height:none','min-height:0','min-width:0'].forEach(x=>{const [k,v]=x.split(':');mi.style.setProperty(k,v,'important')});/* the whole garden in view (the real painted map gets its own fit) */const m=document.querySelector('#panel .kar-map');
@@ -161,20 +161,20 @@ async function picker(m,kind){await closePk();if(kind==='hang'&&window.kitPick){
    /* unrolls DOWN from its hook (never passes over a face above it), then sways to rest */b.style.transformOrigin='50% 0';an(b,[{transform:`translate(${bx}px,${by}px) rotate(7deg) scaleY(.08)`,opacity:0},{transform:`translate(${bx}px,${by}px) rotate(-5deg) scaleY(1.03)`,opacity:1,offset:.5},{transform:`translate(${bx}px,${by}px) rotate(2.5deg) scaleY(1)`,offset:.78},{transform:`translate(${bx}px,${by}px) rotate(0deg) scaleY(1)`,opacity:1}],{duration:880,delay:i*80,easing:'ease-out'})});
   tx=x0;ty=y0-44}
  else if(kind==='fan'){/* RING-DESIGN-5: cards are stacked by their MEASURED height (+gap), top below her face, bottom inside the stage — no card covers another's text */
-  const gap=6,bx0=(D.x1-(f.x+f.w+8)>=230)?f.x+f.w+8:Math.min(f.x+f.w*.62,D.x1-150),cw=Math.min(K==='kv2'?300:236,D.x1-bx0-10),hs=B.map(b=>(b.style.width=cw+'px',b.offsetHeight||bh));const tot=hs.reduce((x,y)=>x+y,0)+gap*(B.length-1);const faceB=f.y+f.h*.24+40,avail=D.H-8;
+  let gap=6;const bx0=(D.x1-(f.x+f.w+8)>=230)?f.x+f.w+8:Math.min(f.x+f.w*.62,D.x1-150),cw=Math.min(K==='kv2'?300:236,D.x1-bx0-10),hs=B.map(b=>(b.style.width=cw+'px',b.offsetHeight||bh));let tot=hs.reduce((x,y)=>x+y,0)+gap*(B.length-1);const faceB=f.y+f.h*.21,tagOver=bx0<f.x+f.w/2+135,avail=tagOver?f.y+f.h-4:D.H-8;
+  if(tot>avail-faceB){gap=3;tot=hs.reduce((x,y)=>x+y,0)+gap*(B.length-1)}
   const top=Math.max(64,Math.min(faceB,avail-tot));const hipX=f.x+f.w*.72,hipY=f.y+f.h*.50;const bxs=bx0;let y=top;
   B.forEach((b,i)=>{const bx=Math.max(D.x0,Math.min(D.x1-cw-4,bxs+(i%2?12:0))),by=y;y+=hs[i]+gap;b.__x=bx;b.__y=by;
    an(b,[{transform:`translate(${hipX}px,${hipY-bh/2}px) scale(.25)`,opacity:0},{transform:`translate(${bx}px,${by}px)`,opacity:1}],{duration:340,delay:60+i*45,easing:ease})});
   tx=bxs;ty=Math.max(8,top-34)}
  else{/* rib: a ladder of paper-fan ribs pinned at her hand — each rib turns about its own pin a little more than the one above, the pins step down by the rib height + gap, so every rib's text is clear and the last rib stays on the stage */
-  const n=B.length,r0=0,len=Math.min(K==='kv2'?270:250,D.x1-D.x0-60),gap=5;const hs=B.map(b=>(b.classList.add('kar-min','kar-rib'),b.style.width=len+'px',b.offsetHeight||58));const sep=Math.max(...hs)+gap;const amax=Math.min(14,(n>1?14:0)),a0=-4;
-  const tot=sep*(n-1)+hs[n-1]+Math.sin(amax*Math.PI/180)*len;const px=(D.x1-(f.x+f.w+8)>=len)?f.x+f.w+8:Math.min(f.x+f.w*.66,D.x1-len-8),faceB=f.y+f.h*.24+40;const py0=Math.max(64,Math.min(faceB,D.H-8-tot));
+  const n=B.length,r0=0,len=Math.min(K==='kv2'?270:250,D.x1-D.x0-60),gap=5;const hs=B.map(b=>(b.classList.add('kar-min','kar-rib'),b.style.width=len+'px',b.offsetHeight||58));const sep=Math.max(...hs)+gap;const a0=-4;const px=(D.x1-(f.x+f.w+8)>=len)?f.x+f.w+8:Math.min(f.x+f.w*.66,D.x1-len-8),faceB=f.y+f.h*.21,avail=(px<f.x+f.w/2+135)?f.y+f.h-4:D.H-8;
+  /* tilt as much as the room allows (max 14°) so the last rib stays above her name tag / inside the stage */const room=avail-faceB-(sep*(n-1)+hs[n-1]);const amax=n>1?Math.max(a0+1,Math.min(14,Math.asin(Math.max(0,Math.min(1,room/len)))*180/Math.PI)):0;const tot=sep*(n-1)+hs[n-1]+Math.max(0,Math.sin(amax*Math.PI/180))*len;const py0=Math.max(64,Math.min(faceB,avail-tot));
   B.forEach((b,i)=>{const ang=n>1?a0+(amax-a0)*i/(n-1):0;b.__ang=ang;b.style.transformOrigin='0 50%';const bx=px,by=py0+i*sep;b.__x=bx;b.__y=by;b.style.zIndex=String(10+i);
    an(b,[{transform:`translate(${bx}px,${by}px) rotate(${a0-10}deg) scaleX(.2)`,opacity:0},{transform:`translate(${bx}px,${by}px) rotate(${a0}deg)`,opacity:1,offset:.25},{transform:`translate(${bx}px,${by}px) rotate(${ang}deg)`,opacity:1}],{duration:700,delay:40+i*30,easing:'cubic-bezier(.3,.7,.25,1)'})});
   tx=px;ty=Math.max(8,py0-58)}
  if(kind!=='hang')tx=Math.max(D.x0,Math.min(Math.max(tx,f.x+f.w*.78),D.x1-tb.offsetWidth-4));
  tb.style.transform=`translate(${tx}px,${ty}px)`;an(tb,[{opacity:0,transform:`translate(${tx}px,${ty+6}px)`},{opacity:1,transform:`translate(${tx}px,${ty}px)`}],{duration:220,delay:300});
- {const pl=m.tg.getBoundingClientRect();if(m.tg.style.display!=='none'&&[...B].some(b=>{const r=b.getBoundingClientRect();return !(r.right<pl.left||r.left>pl.right||r.bottom<pl.top||r.top>pl.bottom)}))m.tg.style.visibility='hidden'}
  Q2.forEach(x=>window.__karAn(...x));
  B.forEach(b=>b.addEventListener('click',ev=>{ev.stopPropagation();lift(b,kind)}));await wait(kind==='hang'?900+B.length*80:800);return B}
 function lift(b,kind){if(KP){const n=b.closest('.kpk-n');const id=n?n.dataset.id:b.dataset.id;KP.lift(id);return}const p=PK;if(!p)return;if(b.classList.contains('kar-up')){b.dispatchEvent(new CustomEvent('karpick',{bubbles:true}));return}
