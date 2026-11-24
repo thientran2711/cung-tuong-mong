@@ -47,6 +47,15 @@ const {chromium}=require('playwright');const path=require('path');const html=pro
   /* her own pawn still works */
   S.inv=[{k:itK}];S.staff=S.staff||[];S.maid=S.maid||maidMk(S);S.maid.loyal=90;S.maid.spyFor=null;S.maid.age=40;const sb=S.bac;const ag=wdAgent(S);const r=wdPawn(S,0);T("wd her pawn unchanged",!!r&&(S.wdPawn||[]).length>=1&&S.bac>sb,{r:String(r).slice(0,60),ag:ag&&ag.name,maid:!!S.maid,inv:S.inv.length,itK,bac:[sb,S.bac]});
   window.nv=nv0;return out});
+ /* 3 maid life: «Hầu bên cạnh chủ» on her own master's card (sk "mis") when the master is away — the NPC maid's jagstaff rule (asMisHome) */
+ Object.assign(R,await p.evaluate(()=>{const out={};const T=(k,c,x)=>{out[k]={ok:!!c,x}};localStorage.clear();window.__nlInner=1;for(let i=0;i<80&&!isSrv();i++)start();window.__nlInner=0;Q.length=0;
+  if(!isSrv()){T("maid life reached",false,null);return out}const m=srvM();const card={sk:"mis",ref:m};
+  const lab=()=>srvTalk(card).map(o=>o.n||o.t||"").filter(Boolean);
+  /* where the master is: srvWhere (the one place read both sides use, asMisHome) pinned for the two cases, then put back */
+  const wo=srvWhere;window.srvWhere=x=>x===m?palaceOf(m):wo(x);const atHome=lab();
+  const away=places().map(x=>x.k).find(k=>k!==palaceOf(m)&&k!=="home"&&k!=="tgk");window.srvWhere=x=>x===m?away:wo(x);const atAway=lab();window.srvWhere=wo;
+  T("maid: master away → «Hầu bên cạnh chủ» (as an NPC maid)",atAway.includes("Hầu bên cạnh chủ"),{away,atAway});
+  T("maid: master at home → no «Hầu bên cạnh chủ» (as an NPC maid)",!atHome.includes("Hầu bên cạnh chủ"),{atHome});return out}));
  let fail=0;for(const k in R){console.log((R[k].ok?"PASS ":"FAIL ")+k+(R[k].x!=null?" "+JSON.stringify(R[k].x):""));if(!R[k].ok)fail++}
  await b.close();
  const F=await require('../tools/role-parity-fam.js').famScan(html);const bg=F.gaps.filter(g=>g.owner==="B"&&!/Co-op/.test(g.fam));
