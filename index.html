@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn","b":"b1a656d5fe7f","h":[{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"}]};
+window.CTM_BI={"s":"55ba373c","t":"2026-11-24T02:25Z","c":"KIT §82.2 K-DH-CAPFIT: title plate never cuts its name","b":"4859c42ee7d9","h":[{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -41489,7 +41489,7 @@ function kitMarkHtml(mark,alt){const m=/emo-(?:m-|mo-)?([a-z0-9_-]+)\.webp/.exec
 .ksart{position:relative;margin:0;display:block;width:100%;overflow:hidden;border-radius:4px;background:#efe4cf;
  border:1px solid var(--gold,#8f5f0c);box-shadow:inset 0 0 0 2px #fffaf0,inset 0 0 0 3px #e6d3ac}
 .ksart-tags{position:absolute;top:6px;left:6px;z-index:3;display:flex;flex-wrap:wrap;gap:4px;max-width:calc(100% - 12px);pointer-events:none}
-.ksart-tag{font-style:normal;font-size:.68rem;font-weight:700;line-height:1.2;padding:2px 8px;border-radius:999px;color:#fffaf0;background:#4a2f12d9;border:1px solid #e6d3ac;box-shadow:0 1px 3px #0006;white-space:nowrap}
+.ksart-tag{font-style:normal;font-size:.68rem;font-weight:700;line-height:1.2;padding:2px 8px;border-radius:999px;color:#fffaf0;background:#4a2f12d9;border:1px solid #e6d3ac;box-shadow:0 1px 3px #0006;white-space:normal;text-wrap:balance;text-align:center;max-width:100%;box-sizing:border-box}
 .ksart-wide{aspect-ratio:16/9}.ksart-tall{aspect-ratio:3/4}
 /* 28.19b corner mark (review/mood-dialog): o.mark = a small seal (the mood seal img/kit/emo-*.webp) in the TOP-RIGHT corner of the picture */
 /*   a background layer, not an <img>: the many "picture fills its frame" img rules of the slots (.kdpban, .kaart…) never stretch it */
@@ -55247,12 +55247,15 @@ function kitTitleOpen(t){t=kitTitleDef(t);if(!t||typeof kitModal!=="function")re
  kitModal({kind:"info",title:t.name,sub:"Danh hiệu · bậc "+KIT_TIER_NAME[Math.max(0,Math.min(7,(t.tier|0)))],sections:[{h:"",rows:[["Đạt được",t.when||"—",""],["Cách có",t.how||"—",""],["Khi đeo",t.fx||"chỉ để làm đẹp",""],["Đang",worn?"đang đeo":"chưa đeo",""]]}],btn:"Đã hiểu"})}
 window.kitTitleOpen=kitTitleOpen;window.kitTitleTag3=kitTitleTag3;
 document.addEventListener("click",e=>{const x=e.target&&e.target.closest&&e.target.closest(".kdh[data-kdh]");if(x&&!x.closest(".stage"))kitTitleOpen(x.dataset.kdh)},true);
+/* K-DH-CAPFIT (KIT §82.2, 24/11): the plate NEVER cuts its name. One line while the name fits its box; a box narrower than the one-line name (kitDhCap caption on a
+   narrow event picture, a stage tag, a frame tag .kt3, a kit row) wraps the name between words into balanced lines (text-wrap:balance), same font, same plate.
+   Rule lives here in the ONE plate, so every place that shows a title plate gets it; no per-screen variant. Test dev/test/kit-dhcapfit.js. */
 (function(){const st=document.createElement("style");st.id="kit-dh";
  const m=(a,p,b)=>`color-mix(in srgb,${a} ${p}%,${b})`;
  st.textContent=`
-.kdh{position:relative;display:inline-flex;align-items:center;justify-content:center;max-width:100%;box-sizing:border-box;padding:1px 12px 2px;border-radius:999px;font-family:var(--display,"Noto Serif",Georgia,serif);font-weight:700;font-size:.74rem;letter-spacing:.03em;line-height:1.25;white-space:nowrap;color:#fffdf4;
+.kdh{position:relative;display:inline-flex;align-items:center;justify-content:center;max-width:100%;box-sizing:border-box;padding:1px 12px 2px;border-radius:999px;font-family:var(--display,"Noto Serif",Georgia,serif);font-weight:700;font-size:.74rem;letter-spacing:.03em;line-height:1.25;white-space:normal;text-wrap:balance;text-align:center;color:#fffdf4;
  background:linear-gradient(135deg,${m("var(--dh)",55,"#fff")},var(--dh) 45%,${m("var(--dh)",70,"#000")});border:1.5px solid ${m("var(--dh)",55,"#fff")};box-shadow:0 0 0 1px #00000033,0 1px 4px #0006;overflow:visible;isolation:isolate}
-.kdh>b{position:relative;z-index:1;font-weight:700;text-shadow:0 1px 1.5px #000a,0 0 3px #0008}
+.kdh>b{position:relative;z-index:1;min-width:0;overflow-wrap:normal;word-break:keep-all;font-weight:700;text-shadow:0 1px 1.5px #000a,0 0 3px #0008}
 .kdh.kdh-art{background:var(--kdh-art,none) center/100% 100% no-repeat;border:0;box-shadow:none;padding:4px 18px}
 .kdh-s{position:absolute;inset:-2px;border-radius:inherit;pointer-events:none;z-index:0}
 .kdh-t3,.kdh-t4{box-shadow:0 0 0 1px #00000033,0 0 6px ${m("var(--dh)",70,"transparent")}}
@@ -67879,9 +67882,13 @@ function dhNotice(key){const o=dhObj(S,key);if(!o||typeof kitPanel!=="function")
 /* OD 21/11 ~04:14Z (#54): the new-title plate sits ON the event picture (caption at its bottom centre, like the chapter slide title), not as its own band under it.
    Applies to every title dialog (Danh hiệu mới / lên bậc / đeo): the .kt3 plate of the info column moves into the picture (.k3ev). The drawn title art is parked. */
 function kitDhCap(){try{const d=document.querySelector("#modal:not([hidden]) .dlg");if(!d)return;const ev=d.querySelector(".k3right>.k3ev,.k3body>.k3mpic"),src=d.querySelector(".k3right .kt3:not(.kdhcap)");if(!ev||!src||!src.querySelector(".kdh,.kdh-cap,.j59t"))return;
- if(!ev.querySelector(":scope>.kdhcap")){const c=src.cloneNode(true);c.classList.add("kdhcap");c.style.display="";ev.appendChild(c)}src.style.display="none"}catch(e){}}
-window.kitDhCap=kitDhCap;
-(function(){const st=document.createElement("style");st.id="kdh-cap-css";st.textContent=`.ksz3 :is(.k3ev,.k3mpic)>.kt3.kdhcap{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);z-index:3;margin:0!important;width:max-content;max-width:calc(100% - 16px);text-align:center;filter:drop-shadow(0 2px 4px #2a1a1288)}`;document.head.appendChild(st);
+ if(!ev.querySelector(":scope>.kdhcap")){const c=src.cloneNode(true);c.classList.add("kdhcap");c.style.display="";ev.appendChild(c)}src.style.display="none";kdhCapFit(ev.querySelector(":scope>.kdhcap"))}catch(e){}}
+/* K-DH-CAPFIT (KIT §82.2): the caption plate on the picture never cuts its name. The plate wraps between words (jtitle .kdh rule); here, on the narrow event
+   picture (Fold / iPad 120 px column), it keeps to TWO lines: font steps .74 → .66 → .6 rem until the name takes ≤ 2 lines (KDH_CAP_FS); never smaller, never cut. */
+const KDH_CAP_FS=["",".66rem",".6rem"];
+function kdhCapFit(c){try{const k=c&&c.querySelector(".kdh"),b=k&&k.querySelector("b");if(!b)return;for(const f of KDH_CAP_FS){k.style.fontSize=f;const lh=parseFloat(getComputedStyle(b).lineHeight)||12;if(b.getBoundingClientRect().height<=lh*2.4)break}}catch(e){}}
+window.kitDhCap=kitDhCap;window.kdhCapFit=kdhCapFit;
+(function(){const st=document.createElement("style");st.id="kdh-cap-css";st.textContent=`.ksz3 :is(.k3ev,.k3mpic)>.kt3.kdhcap{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);z-index:3;margin:0!important;width:max-content;max-width:calc(100% - 8px);text-align:center;filter:drop-shadow(0 2px 4px #2a1a1288)}.ksz3 :is(.k3ev,.k3mpic)>.kt3.kdhcap .kdh{padding-left:8px;padding-right:8px}`;document.head.appendChild(st);
  if(typeof showModal==="function"){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{requestAnimationFrame(kitDhCap);setTimeout(kitDhCap,300);setTimeout(kitDhCap,900)}catch(e){}return r}}})();
 /* K-G4-PLATE (LIVE G4 80-dialog-fixed #54 flaky on a busy device): the fixed 300 / 900 ms calls miss a dialog that is (re)built later (kit sizing / life
    loader / a modal opened without showModal), and the plate then stays a band under the picture. ONE observer on #modal re-runs the idempotent kitDhCap
@@ -95419,7 +95426,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b1a656d5fe7f";window.CTM_BUILD=BUILD;
+const BUILD="4859c42ee7d9";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
