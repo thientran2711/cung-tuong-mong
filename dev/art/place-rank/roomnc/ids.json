@@ -1,0 +1,262 @@
+{
+"canh-phuc-cung-dong-phoi": {
+"id": "ph01",
+"label": "Cảnh Phúc cung · Đông phối · tiếp khách"
+},
+"canh-phuc-cung-dong-phoi-ngu": {
+"id": "ph02",
+"label": "Cảnh Phúc cung · Đông phối · phòng ngủ"
+},
+"canh-phuc-cung-tay-phoi": {
+"id": "ph03",
+"label": "Cảnh Phúc cung · Tây phối · tiếp khách"
+},
+"canh-phuc-cung-tay-phoi-ngu": {
+"id": "ph04",
+"label": "Cảnh Phúc cung · Tây phối · phòng ngủ"
+},
+"chung-tu-cung-dong-phoi": {
+"id": "ph05",
+"label": "Chung Tú cung · Đông phối · tiếp khách"
+},
+"chung-tu-cung-dong-phoi-ngu-r3": {
+"id": "ph06",
+"label": "Chung Tú cung · Đông phối · phòng ngủ"
+},
+"chung-tu-cung-phi": {
+"id": "ph07",
+"label": "Chung Tú cung · Phi · tiếp khách"
+},
+"chung-tu-cung-phi-ngu": {
+"id": "ph08",
+"label": "Chung Tú cung · Phi · phòng ngủ"
+},
+"chung-tu-cung-quyphi": {
+"id": "ph09",
+"label": "Chung Tú cung · Quý phi · tiếp khách"
+},
+"chung-tu-cung-quyphi-ngu": {
+"id": "ph10",
+"label": "Chung Tú cung · Quý phi · phòng ngủ"
+},
+"chung-tu-cung-tay-phoi": {
+"id": "ph11",
+"label": "Chung Tú cung · Tây phối · tiếp khách"
+},
+"chung-tu-cung-tay-phoi-ngu": {
+"id": "ph12",
+"label": "Chung Tú cung · Tây phối · phòng ngủ"
+},
+"dien-huy-cung-dong-phoi": {
+"id": "ph13",
+"label": "Diên Huy cung · Đông phối · tiếp khách"
+},
+"dien-huy-cung-dong-phoi-ngu": {
+"id": "ph14",
+"label": "Diên Huy cung · Đông phối · phòng ngủ"
+},
+"dien-huy-cung-phi": {
+"id": "ph15",
+"label": "Diên Huy cung · Phi · tiếp khách"
+},
+"dien-huy-cung-phi-ngu": {
+"id": "ph16",
+"label": "Diên Huy cung · Phi · phòng ngủ"
+},
+"dien-huy-cung-quyphi": {
+"id": "ph17",
+"label": "Diên Huy cung · Quý phi · tiếp khách"
+},
+"dien-huy-cung-quyphi-ngu": {
+"id": "ph18",
+"label": "Diên Huy cung · Quý phi · phòng ngủ"
+},
+"dien-huy-cung-tay-phoi": {
+"id": "ph19",
+"label": "Diên Huy cung · Tây phối · tiếp khách"
+},
+"dien-huy-cung-tay-phoi-ngu": {
+"id": "ph20",
+"label": "Diên Huy cung · Tây phối · phòng ngủ"
+},
+"ham-an-cung-dong-phoi": {
+"id": "ph21",
+"label": "Hàm Ân cung · Đông phối · tiếp khách"
+},
+"ham-an-cung-dong-phoi-ngu": {
+"id": "ph22",
+"label": "Hàm Ân cung · Đông phối · phòng ngủ"
+},
+"ham-an-cung-phi": {
+"id": "ph23",
+"label": "Hàm Ân cung · Phi · tiếp khách"
+},
+"ham-an-cung-phi-ngu": {
+"id": "ph24",
+"label": "Hàm Ân cung · Phi · phòng ngủ"
+},
+"ham-an-cung-quyphi": {
+"id": "ph25",
+"label": "Hàm Ân cung · Quý phi · tiếp khách"
+},
+"ham-an-cung-quyphi-ngu": {
+"id": "ph26",
+"label": "Hàm Ân cung · Quý phi · phòng ngủ"
+},
+"ham-an-cung-tan-ngu": {
+"id": "ph27",
+"label": "Hàm Ân cung · Tần · phòng ngủ"
+},
+"ham-an-cung-tay-phoi": {
+"id": "ph28",
+"label": "Hàm Ân cung · Tây phối · tiếp khách"
+},
+"ham-an-cung-tay-phoi-ngu": {
+"id": "ph29",
+"label": "Hàm Ân cung · Tây phối · phòng ngủ"
+},
+"khai-tuong-cung-dong-phoi": {
+"id": "ph30",
+"label": "Khải Tường cung · Đông phối · tiếp khách"
+},
+"khai-tuong-cung-dong-phoi-ngu": {
+"id": "ph31",
+"label": "Khải Tường cung · Đông phối · phòng ngủ"
+},
+"khai-tuong-cung-phi": {
+"id": "ph32",
+"label": "Khải Tường cung · Phi · tiếp khách"
+},
+"khai-tuong-cung-phi-ngu": {
+"id": "ph33",
+"label": "Khải Tường cung · Phi · phòng ngủ"
+},
+"khai-tuong-cung-quyphi": {
+"id": "ph34",
+"label": "Khải Tường cung · Quý phi · tiếp khách"
+},
+"khai-tuong-cung-quyphi-ngu": {
+"id": "ph35",
+"label": "Khải Tường cung · Quý phi · phòng ngủ"
+},
+"khai-tuong-cung-tan": {
+"id": "ph36",
+"label": "Khải Tường cung · Tần · tiếp khách"
+},
+"khai-tuong-cung-tan-ngu": {
+"id": "ph37",
+"label": "Khải Tường cung · Tần · phòng ngủ"
+},
+"khai-tuong-cung-tay-phoi": {
+"id": "ph38",
+"label": "Khải Tường cung · Tây phối · tiếp khách"
+},
+"khai-tuong-cung-tay-phoi-ngu": {
+"id": "ph39",
+"label": "Khải Tường cung · Tây phối · phòng ngủ"
+},
+"thua-minh-cung-phi": {
+"id": "ph40",
+"label": "Thừa Minh cung · Phi · tiếp khách"
+},
+"thua-minh-cung-phi-ngu": {
+"id": "ph41",
+"label": "Thừa Minh cung · Phi · phòng ngủ"
+},
+"thua-minh-cung-quyphi": {
+"id": "ph42",
+"label": "Thừa Minh cung · Quý phi · tiếp khách"
+},
+"thua-minh-cung-quyphi-ngu": {
+"id": "ph43",
+"label": "Thừa Minh cung · Quý phi · phòng ngủ"
+},
+"thua-minh-cung-tan": {
+"id": "ph44",
+"label": "Thừa Minh cung · Tần · tiếp khách"
+},
+"thua-minh-cung-tan-ngu": {
+"id": "ph45",
+"label": "Thừa Minh cung · Tần · phòng ngủ"
+},
+"thua-minh-cung-tay-phoi": {
+"id": "ph46",
+"label": "Thừa Minh cung · Tây phối · tiếp khách"
+},
+"thua-minh-cung-tay-phoi-ngu": {
+"id": "ph47",
+"label": "Thừa Minh cung · Tây phối · phòng ngủ"
+},
+"truong-xuan-cung-dong-phoi": {
+"id": "ph48",
+"label": "Trường Xuân cung · Đông phối · tiếp khách"
+},
+"truong-xuan-cung-dong-phoi-ngu": {
+"id": "ph49",
+"label": "Trường Xuân cung · Đông phối · phòng ngủ"
+},
+"truong-xuan-cung-phi": {
+"id": "ph50",
+"label": "Trường Xuân cung · Phi · tiếp khách"
+},
+"truong-xuan-cung-phi-ngu": {
+"id": "ph51",
+"label": "Trường Xuân cung · Phi · phòng ngủ"
+},
+"truong-xuan-cung-quyphi": {
+"id": "ph52",
+"label": "Trường Xuân cung · Quý phi · tiếp khách"
+},
+"truong-xuan-cung-quyphi-ngu": {
+"id": "ph53",
+"label": "Trường Xuân cung · Quý phi · phòng ngủ"
+},
+"truong-xuan-cung-tan": {
+"id": "ph54",
+"label": "Trường Xuân cung · Tần · tiếp khách"
+},
+"truong-xuan-cung-tan-ngu": {
+"id": "ph55",
+"label": "Trường Xuân cung · Tần · phòng ngủ"
+},
+"truong-xuan-cung-tay-phoi": {
+"id": "ph56",
+"label": "Trường Xuân cung · Tây phối · tiếp khách"
+},
+"truong-xuan-cung-tay-phoi-ngu": {
+"id": "ph57",
+"label": "Trường Xuân cung · Tây phối · phòng ngủ"
+},
+"vinh-hoa-cung-dong-phoi": {
+"id": "ph58",
+"label": "Vĩnh Hòa cung · Đông phối · tiếp khách"
+},
+"vinh-hoa-cung-dong-phoi-ngu": {
+"id": "ph59",
+"label": "Vĩnh Hòa cung · Đông phối · phòng ngủ"
+},
+"vinh-hoa-cung-phi": {
+"id": "ph60",
+"label": "Vĩnh Hòa cung · Phi · tiếp khách"
+},
+"vinh-hoa-cung-phi-ngu": {
+"id": "ph61",
+"label": "Vĩnh Hòa cung · Phi · phòng ngủ"
+},
+"vinh-hoa-cung-quyphi": {
+"id": "ph62",
+"label": "Vĩnh Hòa cung · Quý phi · tiếp khách"
+},
+"vinh-hoa-cung-quyphi-ngu": {
+"id": "ph63",
+"label": "Vĩnh Hòa cung · Quý phi · phòng ngủ"
+},
+"vinh-hoa-cung-tay-phoi": {
+"id": "ph64",
+"label": "Vĩnh Hòa cung · Tây phối · tiếp khách"
+},
+"vinh-hoa-cung-tay-phoi-ngu": {
+"id": "ph65",
+"label": "Vĩnh Hòa cung · Tây phối · phòng ngủ"
+}
+}
