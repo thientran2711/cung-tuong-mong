@@ -131,11 +131,11 @@ function pcHostPick(p,c,cnt){try{if(!BAL.promoR||!c||!c.length)return null;let b
  const L=c.slice().sort((a,b)=>cnt(a)-cnt(b));for(const h of L){const s=pcScore(p,h,cnt(h));if(s>bs+1e-9){bs=s;best=h}}return best}catch(e){console.error("pcHostPick",e);return null}}
 /* the WHY of a placement (player-visible, cổ trang): names each royal whose thiện cảm moved it */
 function pcWhy(p){const me=p===S,B=BAL.promoR.pc,nm=me?"ngươi":p.name;const hd=typeof byKey==="function"?byKey(houseOf(p)):null;const L=[];
- const own=rkOf(p)>=3&&p.pal!=null;const h=own?p:hd&&hd!==p?hd:null;const f=pcFav(p);
+ const own=rkOf(p)>=3&&p.pal!=null;const dh=(typeof PLNAME!=="undefined"&&PLNAME.dtd&&PLNAME.dtd[0])||"tẩm điện Hoàng thượng";const h=own?p:hd&&hd!==p?hd:null;const f=pcFav(p);
  const hn=h&&h!==p?(typeof j78who==="function"?j78who(h):`${RANKS[rkOf(h)].n} ${h.name}`):"";
  if(h){const x=pcParts(p,h);
-  if(Math.abs(f.E)>=B.why&&Math.abs(pcStand(h))>=B.why/2)L.push(f.E>0?`Hoàng thượng để mắt tới ${nm} (Sủng ${Math.round(p.sung||0)}): ${own?"được ban":"ở"} cung ${pcStand(h)>0?"gần Càn Thanh, danh giá":"xa Càn Thanh"}`:`Hoàng thượng chưa để mắt tới ${nm} (Sủng ${Math.round(p.sung||0)}): ${own?"được ban":"ở"} cung ${pcStand(h)>0?"gần Càn Thanh":"xa Càn Thanh"}`);
-  if(!own&&Math.abs(f.H)>=B.why&&pcKind(h)!==0&&Math.sign(x.H)>0)L.push(f.H>0?`Hoàng hậu quý ${nm}: xếp ở với ${hn}, người hiền hòa`:`Hoàng hậu không ưa ${nm}: xếp ở với ${hn}, người khó tính`);
+  if(Math.abs(f.E)>=B.why&&Math.abs(pcStand(h))>=B.why/2)L.push(f.E>0?`Hoàng thượng để mắt tới ${nm} (Sủng ${Math.round(p.sung||0)}): ${own?"được ban":"ở"} cung ${pcStand(h)>0?`gần ${dh}, danh giá`:`xa ${dh}`}`:`Hoàng thượng chưa để mắt tới ${nm} (Sủng ${Math.round(p.sung||0)}): ${own?"được ban":"ở"} cung ${pcStand(h)>0?`gần ${dh}`:`xa ${dh}`}`);
+  if(!own&&Math.abs(f.H)>=B.why&&pcKind(h)!==0&&Math.sign(x.H)>0)L.push(f.H>0?`được Hoàng hậu thương: xếp ở với ${hn}, người hiền hòa`:`Hoàng hậu không ưa ${nm}: xếp ở với ${hn}, người khó tính`);
   if(!own&&Math.abs(f.T)>=B.why&&Math.abs(pcAlign(h))>=B.why&&Math.sign(x.T)>0)L.push(f.T>0?`Thái hậu thương ${nm}: chủ vị ${hn} là người được Thái hậu tin`:`Thái hậu không ưa ${nm}: chủ vị ${hn} cũng không được lòng Thái hậu`)}
  if(!L.length)L.push(h&&h!==p?`Nội vụ phủ xếp ${nm} vào chỗ còn trống, ở với ${hn}`:`Nội vụ phủ xếp ${nm} vào chỗ còn trống`);return L}
 function pcWhere(p){try{return houseName(p)}catch(e){return palName("home")}}
