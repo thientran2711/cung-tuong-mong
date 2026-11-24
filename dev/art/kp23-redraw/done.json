@@ -1,6 +1,77 @@
 {
- "to-giac-truoc-ht": {"gen": "SyvhTYVUb8", "batch": "pilot", "note": "Lỗi nhỏ: tai có hoa tai nhỏ; phong thư kiểu dấu sáp (Tây)."},
- "hh-ban-cho": {"gen": "IfR3gLYtvE", "batch": "pilot", "note": "Lỗi nhỏ: Hoàng hậu có chấm nhỏ trên trán."},
- "bi-bat-tra-khao": {"gen": "JNECpMgOq4", "batch": "pilot", "note": ""},
- "theo-len-nui": {"gen": "rgBXGGwxtc", "batch": "pilot", "note": ""}
+ "to-giac-truoc-ht": {
+  "gen": "IfR3ODFtvE",
+  "batch": "pilot-regen",
+  "note": ""
+ },
+ "hh-ban-cho": {
+  "gen": "IfR3gLYtvE",
+  "batch": "pilot",
+  "note": ""
+ },
+ "bi-bat-tra-khao": {
+  "gen": "JNECpMgOq4",
+  "batch": "pilot",
+  "note": ""
+ },
+ "theo-len-nui": {
+  "gen": "rgBXGGwxtc",
+  "batch": "pilot",
+  "note": ""
+ },
+ "bao-cho": {
+  "gen": "3zkKEybREY",
+  "batch": "b1",
+  "note": ""
+ },
+ "bat-gap-trao-anh-mat": {
+  "gen": "UPavBsCwny",
+  "batch": "b1",
+  "note": ""
+ },
+ "bi-bat-mang-thu-lanh-cung": {
+  "gen": "VXJ7LcnMMU",
+  "batch": "b1",
+  "note": ""
+ },
+ "bi-cam-tuc": {
+  "gen": "gOhmdsMSXO",
+  "batch": "b1",
+  "note": ""
+ },
+ "bi-phat-giac-dinh": {
+  "gen": "yiQumObPW9",
+  "batch": "b1",
+  "note": ""
+ },
+ "cam-quan-vay-cung": {
+  "gen": "0ewUx0nTfW",
+  "batch": "b1",
+  "note": ""
+ },
+ "cau-xin": {
+  "gen": "0ewUxzZTfW",
+  "batch": "b1",
+  "note": ""
+ },
+ "cau-xin-quan-su": {
+  "gen": "LwI8DrWswO",
+  "batch": "b1",
+  "note": ""
+ },
+ "giai-cau-do-den": {
+  "gen": "IfR3yoKtvE",
+  "batch": "b1",
+  "note": ""
+ },
+ "giao-viec": {
+  "gen": "P3FQhyp42C",
+  "batch": "b1",
+  "note": ""
+ },
+ "hh-gat-loi": {
+  "gen": "rgBXTrixtc",
+  "batch": "b1",
+  "note": ""
+ }
 }

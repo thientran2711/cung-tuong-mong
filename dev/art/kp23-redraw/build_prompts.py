@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import master_common
 H = os.path.dirname(os.path.abspath(__file__))
 
-STYLE = ("STYLE (identical for every picture of this set): delicate hand-painted 2D guofeng anime illustration, soft painterly watercolour look, "
+STYLE = ("STYLE (identical for every picture of this set): from the reference picture take ONLY the drawing style, never its costume or colours; every costume is the one written in CAST. delicate hand-painted 2D guofeng anime illustration, soft painterly watercolour look, "
  "clean refined linework, soft airy washes, gentle diffuse light, realistic fabric behaviour and natural anatomy; the same drawing style, brushwork, "
  "palette treatment and figure proportions in every picture. Muted elegant palette: ivory, soft rose, celadon, mist blue, warm wood and restrained gold accents. "
  "Faces: refined beautiful East Asian faces in the same painterly anime style, clear fair porcelain skin, eyes open and clearly drawn, "
@@ -28,7 +28,7 @@ EXTRA = "NOTHING on the forehead (no hoa điền, no dot, no mark, nothing). Bar
 NEG = "NO text, NO letters, NO writing, NO caption, NO signature, NO watermark, NO border frame."
 
 CAST = {
- "phi": "SHE (the main character) = a young adult imperial consort, beautiful, elegant up-do with gold hairpins and a few fresh flowers (each hair flower a bloom only, no leaves), flowing layered silk court robe in soft colours with fine embroidery and a light phi bạch silk scarf over her arms.",
+ "phi": "SHE (the main character) = a young adult imperial consort, beautiful, elegant up-do with gold hairpins and a few fresh flowers (each hair flower a bloom only, no leaves), flowing layered silk court robe in soft rose-pink and ivory with fine gold embroidery and a light ivory phi bạch silk scarf over her arms (her OWN costume written here; never the blue costume of the reference picture).",
  "emp": "THE EMPEROR = a handsome young-adult man in a warm royal-yellow dragon robe with wide sleeves (black only as a thin accent), a small gold crown on his topknot; if he sits on the throne he FACES THE VIEWER, never turned away.",
  "hh": "THE EMPRESS = a beautiful adult woman in a royal gold and deep red brocade robe with phoenix embroidery and a gold phoenix crown, dignified.",
  "th": "THE EMPRESS DOWAGER = a beautiful dignified older lady of about fifty, silver-streaked hair in a stately up-do, deep antique-gold royal robe, calm wise face.",
@@ -86,7 +86,7 @@ S = {
 "tim-ke-tung-tin": ("phi",["phi","maid"],"At night she holds a lantern and questions a row of palace maids standing in line, close to the viewer, face sharp and searching; the nearest maid looks nervous."),
 "to-giac-khong-thanh": ("hh",["hh","phi"],"The Empress, seated close to the viewer, coolly pushes a piece of evidence aside on the table with a dismissive face; the accuser, a consort kneeling beside the table, bows her head in dismay."),
 "to-giac-truoc": ("phi",["phi","th"],"The consort kneels and presents evidence on a tray before the Empress Dowager, close to the viewer, face earnest and resolute; the Empress Dowager, seated, examines it with a stern thoughtful face."),
-"to-giac-truoc-ht": ("phi",["phi","emp"],"In the hall the consort kneels close to the viewer and raises a sealed letter of evidence with both hands toward the Emperor; the Emperor, seated on the throne FACING THE VIEWER, leans forward, attentive and grave."),
+"to-giac-truoc-ht": ("phi",["phi","emp"],"In the hall the consort kneels close to the viewer and raises a folded Chinese paper memorial of evidence (plain folded paper, no wax seal) with both hands toward the Emperor; the Emperor, seated on the throne FACING THE VIEWER, leans forward, attentive and grave."),
 "to-khong-tin": ("phi",["phi","maid"],"The consort shakes her head with a reproachful, disbelieving face, close to the viewer; her palace maid kneels before her trying to report something, face anxious."),
 "trung-doc": ("doc",["doc","phi","maid"],"In a bedchamber, the poisoned consort lies pale on the bed, eyes half closed but face visible; the imperial physician kneels close at the bedside taking her pulse with a grave face; a palace maid behind clutches her hands in panic. No blood."),
 "trung-doc-thuoc-giai": ("maid",["maid","phi"],"The palace maid takes a small antidote bottle from an opened chest and supports her pale mistress, helping her drink; both close to the viewer, the maid's face anxious and determined, the consort weak but conscious."),
@@ -154,7 +154,7 @@ S2 = {
 "to-loi-voi-chu": ("maid",["maid","phi"],"The palace maid reports to her mistress, close to the viewer, pointing toward another maid dozing in the corner, face eager; the mistress looks over with a raised eyebrow."),
 "tra-ke-phong-hoa": ("eun",["eun"],"A eunuch investigator crouches close to the viewer, holding a lantern over a scorched oil stain on a wooden floor, face sharp and suspicious, turned three-quarter toward us."),
 "trai-gioi": ("phi",["phi"],"She kneels in white robes before an altar with an incense burner, praying for rain, close to the viewer, eyes closed gently in devotion, face serene, cloudy sky behind."),
-"trinh-len-ht": ("phi",["phi","emp"],"She kneels close to the viewer and raises a sealed letter with both hands toward the Emperor; the Emperor, seated on the throne FACING THE VIEWER, reaches for it with a serious face."),
+"trinh-len-ht": ("phi",["phi","emp"],"She kneels close to the viewer and raises a folded Chinese paper memorial (plain folded paper, no wax seal) with both hands toward the Emperor; the Emperor, seated on the throne FACING THE VIEWER, reaches for it with a serious face."),
 "trung-co-quoc": ("pri",["pri"],"She stands at a window looking south, close to the viewer, holding a jade pendant from her homeland, face homesick and wistful, turned three-quarter toward us."),
 "tui-ngai": ("phi",["phi","child"],"Dragon Boat Festival: she kneels close to the viewer, tying a festive five-colour silk cord around her small child's wrist, a sprig of mugwort on the table beside them, face loving; the child smiles up at her."),
 "vao-lanh-cung": ("plain",["plain","eun"],"At the old gate of the cold palace, she steps in carrying a small cloth bundle, close to the viewer, face numb and sorrowful; a eunuch holds the creaking gate open."),
