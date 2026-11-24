@@ -351,8 +351,18 @@ function selxRoomIn(mine){const R=S&&S.selxRm;if(!R||R.in||!worldOn())return;R.i
   v.rank=selxRank(v,r.step,{k:"_",r0:v.r0});v.__done=1;if(typeof roomFor!=="function"||roomFor("consort"))rivals.push(v)}
  try{palFix()}catch(e){}
  const n=BAL.selx.tuan;S.tuan=(S.tuan||0)+BAL.selx.days;while(S.tuan>=n){S.tuan-=n;S.turn=(S.turn||0)+1}/* the room clock: the days, once */
+ R.ck="c"+Date.now().toString(36)+Math.floor(Math.random()*1e4);R.clk=[S.turn||0,S.tuan||0];S.selxClk=R.ck;/* ONE SHARED CLOCK (OD L1641): the guest moves hers at the same moment (selxClkSync) */
  R.g=[];/* the cohort is closed; the girls live on as world people (kept) or in each seat's record (ban hoa) */}
+/* ONE SHARED CLOCK (OD L1641) on the guest: her clock (j8 wk = turn·3+tuần, the key of the night handshake jnf day()) is not in the live diff
+   (jcoophl CLOCK: it rides the week merge only), so when the host's selxRoomIn moves the room clock by the days, the guest sat days behind
+   until the week end → nights keyed apart, both seats «Chờ hảo hữu…» (coop-e2e «buổi 0:3 advanced for both», both seat orders). The cohort
+   (S.selxRm, live diff) carries the move's key + the clock after it: the guest moves hers by the same days ONCE (seat-own flag S.selxClk,
+   kept in her blob); after a full rebuild her clock already IS the host's (≥ R.clk) → only the flag is set, never a second move. */
+function selxClkSync(){try{if(typeof selxCo!=="function"||!selxCo()||worldOn())return;const R=S&&S.selxRm;if(!R||!R.in||!R.ck||!R.clk||S.selxClk===R.ck)return;S.selxClk=R.ck;
+ const n=BAL.selx.tuan,d=x=>(x[0]||0)*n+(x[1]||0);if(d([S.turn,S.tuan])>=d(R.clk))return;S.tuan=(S.tuan||0)+BAL.selx.days;while(S.tuan>=n){S.tuan-=n;S.turn=(S.turn||0)+1}}catch(e){console.error("selxClkSync",e)}}
+window.selxClkSync=selxClkSync;
+(function(){if(typeof render!=="function")return;const r0=render;render=function(){selxClkSync();return r0.apply(this,arguments)};window.render=render})();
 /* in a room the clock of the days moves once, in selxRoomIn (never once per seat: two seats' +3 would merge to +6) */
 (function(){const k0=selxClock;selxClock=function(){if(selxCo()){const Z=S.selx2;Z.clock=1;return}return k0.apply(this,arguments)};window.selxClock=selxClock})();
 /* the room's buổi first moves after the days (both seats ready): a cohort whose host has no tú nữ of its own still enters the world */
-(function(){if(typeof nextBuoi!=="function")return;const n0=nextBuoi;nextBuoi=function(){try{if(selxCo()&&worldOn()&&!(COOPW&&COOPW.ctx)&&S&&S.selxRm&&!S.selxRm.in&&!selxDaysOn())selxRoomIn()}catch(e){console.error(e)}return n0.apply(this,arguments)};window.nextBuoi=nextBuoi})();
+(function(){if(typeof nextBuoi!=="function")return;const n0=nextBuoi;nextBuoi=function(){selxClkSync();try{if(selxCo()&&worldOn()&&!(COOPW&&COOPW.ctx)&&S&&S.selxRm&&!S.selxRm.in&&!selxDaysOn())selxRoomIn()}catch(e){console.error(e)}return n0.apply(this,arguments)};window.nextBuoi=nextBuoi})();
