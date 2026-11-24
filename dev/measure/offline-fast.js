@@ -8,7 +8,7 @@
      nums   tap on the row button → panel shows real numbers (not zeros)
      dl     tap on «Bắt đầu tải» → first not-yet-cached file asked from the line
    PASS per scenario: SW wait at the tap < 800 ms, worst SW wait from Thiết lập on < 1 s, worst main-thread stall from Thiết lập on < 0.7 s, first numbers < 2 s, first download < 1.5 s after the tap, no page errors.
-   usage: node dev/measure/offline-fast.js [cpu=4] [devices=fold,ipadAir] [scen=half,cold,resume] */
+   usage: node dev/measure/offline-fast.js [cpu=4] [devices=fold,ipadAir] [scen=half,warm,known,cold,resume] */
 const ARGS=process.argv.slice(2);process.argv[2]=require('path').join(require('os').tmpdir(),'offline-fast-root-'+require('path').basename(require('path').resolve(__dirname,'../..')));
 const {chromium}=require('playwright');const OA=require('../test/offline-all.js');const D=require('../test/lib/device');
 const CPU=+(ARGS[0]||4),DEVS=(ARGS[1]||'fold,ipadAir').split(','),SC=(ARGS[2]||'half,cold,resume').split(',');
@@ -30,6 +30,9 @@ async function run(b,srv,dev,scen){
  if(scen!=='cold')await fill(g,10764-837);
  await g.evaluate(s=>{localStorage.setItem('ctm-offall',JSON.stringify(s==='resume'?{on:1}:{}))},scen);
  if(scen==='cold')await g.evaluate(async()=>{for(const k of await caches.keys())await caches.delete(k)});
+ if(scen==='known'){/* the panel was opened once and the count finished (known list complete), then the game is opened again */
+  await p.reload({waitUntil:'commit'});await p.waitForFunction(titleUp,null,{timeout:300000,polling:250});g=D.gameFrame(p);await g.evaluate(()=>CTM_OFFLINE.plan());
+  await g.waitForFunction(()=>!KLOAD.all.counting,null,{timeout:300000,polling:500}).catch(()=>{});await g.evaluate(()=>new Promise(r=>{document.dispatchEvent(new Event('visibilitychange'));setTimeout(r,3000)}));await sleep(26000)}
  if(scen==='warm'){/* her SECOND opening after this build: one plain open first (the known list is written), then the measured one */
   await p.reload({waitUntil:'commit'});await p.waitForFunction(titleUp,null,{timeout:300000,polling:250});await sleep(26000);g=D.gameFrame(p);await g.evaluate(()=>localStorage.setItem('ctm-offall','{}'))}
  await ctx.addInitScript(PROBE);
