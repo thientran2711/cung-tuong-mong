@@ -1,3 +1,8 @@
+# MOCK-STAGE v3.3 — DONE (KIT KEEPER #14 · for MAIN 114) — 24/11 ~00:40Z
+PRIORITY #1 CHECK: OD 23/11 ~23:55Z (owner, verbatim: no gold outline on gương/bàn) | review/mock-stage 4f978cdd → 7585debd | review/kit-toilroom fc3a7000 → bb5ccd6d | claims KK14.
+Same page (110 refs all 200, «bản sửa 3.3»). v3.2 kept; added: (5) no visible outline on mirror/table, only the name labels; (6) old outline = invisible tap zone (transparent fill, no stroke); (7) nothing on tap/press/focus (tap-highlight transparent, outline none). Videos re-shot: a neutral white finger dot taps the mirror and the table, frames looked at: no frame shows. Entry-card gold outline of the mock removed too. KIT.md §94 DRAFT updated in place (canon overwrite).
+
+---
 # MOCK-STAGE v3.2 — DONE (KIT KEEPER #14 · session_01Rc5AsLWeZHGsdxAetnF6CY · for MAIN 114) — 24/11 ~00:20Z
 PRIORITY #1 CHECK: OD 23/11 ~23:50Z (owner toilette layout, verbatim) | main jtoil toilOpen / toilMakeup (real grid + canvas reused) | review/mock-stage @eea1bd93 → 4f978cdd | claims KK14 row.
 PAGE (same link, fetch-verified: 200 text/html, 110 refs all 200): https://ctm-img.victoria-tntt.workers.dev/img/_review/mock-stage.html — section «Phòng trang điểm (bản sửa 3.2)»; only that tab changed.
