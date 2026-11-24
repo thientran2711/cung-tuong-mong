@@ -58,7 +58,11 @@ function dlgsGen(t){try{const sea=SEASON[S.month-1];return String(t).replace(/\{
 /* j72 việc nhờ (110 old templates + THIN P3 composed seeds): the offer card (pid q72o, pp.x). Unit id "j72:<seed id>" / "j72:<old tid>".
    Roles A requester · B second person · M her cung nữ. Place: A comes to where she is / she asked around (A's place). Default background = the place she stands (S.place). A family letter: L = M. */
 function dlgsJ72Id(tid){return"j72:"+String(tid).replace(/^c:/,"")}
-function dlgsJ72(x,how){const sp=dlgsGet(dlgsJ72Id(x.tid));if(!sp)return null;const X=q72X(x);if(!X)return null;
+/* NRASK road asks (Foreman E's roads, jnrask*.js; review r1 law 11: they ARE side-line person asks): the help-hồi card is a j72 offer of a stock
+   template nr_<kind> with x.p={nr,nn,av}. Unit "nr:<ask key>#<i>" (key = nrAskId(road, chapter), i = the drawn ask); no ask drawn (av -1) = the
+   stock card, unit "j72:nr_<kind>". Roles A = the road NPC who asks (consort / maid / eunuch / man, q72A), B = her road rival when the card has one. */
+function dlgsNrId(x){try{const p=x.p||{};if(!/^nr_/.test(x.tid)||!p.nr||p.av==null||p.av<0||typeof nrAskId!=="function")return null;/* the card speaks the ask only when its kind still matches (nrAskOf); else it is the stock card */const a=nrAskL(p.nr,p.nn)[p.av];if(!a||"nr_"+a.k!==x.tid)return null;return"nr:"+nrAskId(p.nr,p.nn)+"#"+p.av}catch(e){return null}}
+function dlgsJ72(x,how){const sp=dlgsGet(dlgsNrId(x)||dlgsJ72Id(x.tid));if(!sp)return null;const X=q72X(x);if(!X)return null;
  const A=X.A&&X.A.k==="fam"?(S.maid?{k:"maid",o:S.maid,n:S.maid.name}:null):X.A;
  return dlgsResolve(sp,dlgsCtx({A,B:X.B},t=>q72Txt(t,X),how==="ask"?q72Home(X.A):null))}
 DLGS.R.push({test:m=>m.pid==="q72o"&&m.pp&&m.pp.x,fn:m=>dlgsJ72(m.pp.x,m.pp.how)});

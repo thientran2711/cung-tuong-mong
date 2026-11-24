@@ -142,7 +142,21 @@ def pron_err(u,d):
         elif lc!='low':why='consort to consort (rank decides)'
         if why:out.append((i,why))
     return out
-LIVE={'j72','j68','j7','ky','j70','j71','wc'}   # families whose adapter plays the scene in the game now
+# NRASK (review r1, law 11): the help-hồi asks of Foreman E's roads (jnrask.js / jnrask_b.js / jnrask_m.js) + the 7 stock nr_<kind> cards (jnroad.js def).
+# Unit "nr:<ask key>#<i>"; roles A = the road NPC who asks, B = her rival (only when the ask names {B}), M. Writers use {xung}/{goi} (never the ask's {me}/{call}/{he} slots).
+import subprocess
+NRJS=r"""global.window=global;const out={};for(const f of ['jnrask.js','jnrask_b.js','jnrask_m.js']){const b=new Set(Object.keys(global.NRASK||{}));require(process.argv[1]+'/'+f);for(const k in NRASK)if(!b.has(k))out[k]={f,L:[].concat(NRASK[k]).map(a=>({k:a.k,c:a.c||'',h:a.h,o:a.o}))}}console.log(JSON.stringify(out))"""
+try:NR=json.loads(subprocess.run(['node','-e',NRJS,os.path.abspath(R+'/build')],capture_output=True,text=True,check=True).stdout)
+except Exception as e:NR={};print('WARN cannot read NRASK',e)
+for key,v in NR.items():
+    for i,a in enumerate(v['L']):
+        txt=a['h']+' '+a['c']+' '+json.dumps(a['o'],ensure_ascii=False);hb='{B}' in txt
+        uid=f'nr:{key}#{i}';ro={'A','M'}|({'B'} if hb else set())
+        UNITS[uid]={'roles':ro|{'me'},'ph':{'A'}|({'B'} if hb else set())|GEN,'rule':None,'fam':'nr','src':f"{v['f']} {key}[{i}] kind {a['k']}: {a['h'][:160]}",
+                    'kinds':{'A':'man' if v['f']=='jnrask_m.js' else None,'B':'rv' if hb else None}}
+for k in re.findall(r'def\("(\w+)"',rd('jnroad.js')):
+    UNITS[f'j72:nr_{k}']={'roles':{'A','B','M','me'},'ph':{'A','B'}|GEN,'rule':None,'fam':'nr','src':f'jnroad.js def("{k}") stock help card (no ask drawn)','kinds':{'B':'rv'}}
+LIVE={'j72','j68','j7','ky','j70','j71','wc','nr'}   # families whose adapter plays the scene in the game now
 
 def check(r,where):
     E=[];uid=r.get('id','?');d=r.get('dlg')
@@ -193,7 +207,7 @@ def main(a):
     if '--units' in a:   # W10 slice list: every OLD unit of a family with its cast roles, placeholders and source line
         fam=a[a.index('--units')+1]
         for k,v in UNITS.items():
-            if v['fam']==fam and v.get('old'):print(f"{k}\troles {sorted(v['roles'])}\tph {sorted(v['ph']-GEN)}\t{v.get('src','')}")
+            if v['fam']==fam and (v.get('old') or fam=='nr'):print(f"{k}\troles {sorted(v['roles'])}\tph {sorted(v['ph']-GEN)}\t{v.get('src','')}")
         return 0
     fams=None;cover='--cover' in a
     if '--fam' in a:fams=set(a[a.index('--fam')+1].split(','));a=a[:a.index('--fam')]+a[a.index('--fam')+2:]
@@ -223,7 +237,7 @@ def main(a):
                     except Exception:pass
         print('| family | units | with scene | % | plays in game |\n|---|---|---|---|---|')
         T=[0,0]
-        for fam in ['j72','j7','j68','ky','j70','j71','wc']:
+        for fam in ['j72','j7','j68','ky','j70','j71','wc','nr']:
             for old in (0,1):
                 U=[k for k,v in UNITS.items() if v['fam']==fam and bool(v.get('old'))==bool(old)]
                 if not U:continue
