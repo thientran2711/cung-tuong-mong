@@ -23,6 +23,7 @@ const TARGET={
  birth:{lo:8,hi:12,mid:10,src:'OD:L19 (childbirth death 8–12 % per birth)'},
  kiepMin:{hi:120,src:'PROVISIONAL — OD 23/11 ~23:25Z «a kiếp must not drag» has no number; MAIN to set'},
  endShare:{hi:50,src:'order #6 (4): one ending > half of all endings = too common'},
+ kyMax:{hi:6,src:'PROVISIONAL — no OD number for kỳ ngộ per kiếp; MAIN to set'},
  evRep:{hi:25,src:'order #5/#6 (4): > 25 % of a kiếp\'s cards seen again in the same kiếp = repetitive'}};
 const MIN_N=20,CLAMP=[.5,2];
 const REPO=path.join(__dirname,'..','..');
@@ -157,7 +158,7 @@ function recommend(c){const {L,BALX,pct,f1,mean,by,M,lifeMin,ended}=c;const rank
   /* kỳ ngộ */
   const ky=L.map(r=>(M(r).ky||[]).length),z=P(ky.filter(x=>!x).length,L.length),p0=get(B,'kyngo.p0');
   if(z>50)add('(4) kỳ ngộ too rare',`${f1(z)} % of lives met no kỳ ngộ (mean ${f1(mean(ky))} per life)${low(L.length)}`,K('kyngo.p0')+' · '+K('kyngo.festP'),`p0 ${show(p0)} · festP ${show(get(B,'kyngo.festP'))}`,`festP ${scaleV(get(B,'kyngo.festP'),1.5)} (p0 already ${p0})`,'more lives meet at least one kỳ ngộ');
-  else if(mean(ky)>6)add('(4) kỳ ngộ too common',`mean ${f1(mean(ky))} kỳ ngộ per life`,K('kyngo.p0'),show(p0),String(scaleV(p0,.8)),'kỳ ngộ feels special again');
+  else if(mean(ky)>TARGET.kyMax.hi)add('(4) kỳ ngộ too common',`mean ${f1(mean(ky))} kỳ ngộ per life vs ≤ ${TARGET.kyMax.hi} (${TARGET.kyMax.src})`,K('kyngo.p0'),show(p0),String(scaleV(p0,.8)),'kỳ ngộ feels special again');
   else notes.push(`kỳ ngộ: mean ${f1(mean(ky))} per life, ${f1(z)} % of lives with none — no change`);
   /* event variety (metric 12) */
   const ds=mean(L.map(r=>M(r).evDistinct)),rp=mean(L.map(r=>M(r).evRep));if(ds){const x=P(rp||0,ds);
