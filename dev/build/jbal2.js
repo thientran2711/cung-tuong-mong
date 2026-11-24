@@ -674,11 +674,11 @@ Object.assign(BAL,{selx:{intake:{min:3,max:5},yard:{n:12,perRound:4,kept:4},room
  fav:{plus:3,minus:-3,mini:[[8,4],[5,2],[0,-2]]},days:3,lodge:{n:"Dưỡng Tú viện",x:.303,y:.338,so:[["dong","Đông sở"],["tay","Tây sở"],["bac","Bắc sở"]],sanh:["sanh","Tiền sảnh"]},npcMatch:{hit:8,miss:3,none:5},
  /* THE 3 DAYS (SELSCENE-4, jselxday; OD 24/11 ~07:05Z / ~08:20Z): beat = khắc of each fixed beat (gate + roll-call, rooms, dress, the yard buổi, each test, day-3 teaching;
     yardDrama = yard khắc spent before the yard drama); lesson = the Tiền sảnh drill (k = khắc of effort kỹ / vừa / qua loa; mark 0..10 = base + duc·Đức + eff·effort ± r,
-    the same for every girl; mid = neutral mark; hint = marks at which the ma ma lets slip one / two royals' chữ trọng); maStep = ma ma regard per mark / per drama step;
+    the same for every girl; mid = neutral mark; hint = marks at which the ma ma lets slip one / two royals' chữ trọng; fx = the sure gain of each effort beside the ma ma's regard (law 3: kỹ = her regard, at least maMin steps · vừa = Đức · qua loa = Sức «để sức cho ngày mai»)); maStep = ma ma regard per mark / per drama step;
     ducStep / faceStep = Đức / Danh per drama step; fx = thiện cảm per drama step by the seed tier s/m/l; drama = {k khắc of a drama, victim = chance in a hundred she is the
     target when the seed allows, mem = no-repeat memory across lives, extra = girls of other sở in the day-1 evening pool, two = chance in a hundred of a SECOND day-3 drama (OD ~09:50Z «1-2 chuyện không lặp lại»)}; roam = [own sở, Tiền sảnh] weights of a girl's
     place each buổi (days 1–2); menuN = names listed per menu; rest = Sức of «Nghỉ một lát»; conf = virtue pairs that clash (SELW-TESTS2 README, CONF) */
- beat:{gate:2,rooms:1,dress:2,yard:4,yardDrama:1,test:1,teach:2},lesson:{k:[3,2,1],base:3,duc:.05,eff:2,r:1,mid:6,hint:[6,8]},maStep:1,ducStep:1,faceStep:1,
+ beat:{gate:2,rooms:1,dress:2,yard:4,yardDrama:1,test:1,teach:2},lesson:{k:[3,2,1],base:3,duc:.05,eff:2,r:1,mid:6,hint:[6,8],fx:[{},{duc:1},{suc:5}],maMin:1},maStep:1,ducStep:1,faceStep:1,
  fx:{s:2,m:3,l:5},drama:{k:1,victim:25,mem:40,extra:2,two:50},roam:[3,1],menuN:4,rest:5,conf:[["Hiếu","Trung"],["Tín","Nhân"],["Lễ","Nghĩa"],["Nghĩa","Liêm"],["Sỉ","Khiêm"]],
  /* SELSCENE-5 (OD 24/11 ~08:55Z / ~09:25Z / ~09:40Z / ~09:20Z; MAIN 118 answers a–e):
     imp = the FIRST IMPRESSION on Day 2 (the toilette look judged by each of the 3 royals by HIS / HER own taste, the one jtoil rule toilHostKind + BAL.toil.react):

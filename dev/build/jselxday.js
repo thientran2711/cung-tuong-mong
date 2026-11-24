@@ -42,28 +42,44 @@ function selxHead(){const Z=S.selx2;return `<p><small>${selxDayTitle(Z.days)} ·
 function selxEvening(){return S.selx2.kh<=BAL.time.khac}
 /* ---- a beat = one kit modal card; the option's go pushes the next beat ---- */
 function selxCard(t,h,opts,who){const m={t,h:selxHead()+h,opts,who:who||null,pid:"selxD",pp:{}};Q.unshift(m);return m}
-function selxO(n,go,more){return Object.assign({n,fx:{},x:"",go},more||{})}
-function selxRes(title,b,txt,know){try{if(txt)log(txt)}catch(e){}try{(know||[]).forEach(k=>kitKnow({text:k,key:"selx:"+k}))}catch(e){}try{resultShow(title,b,true)}catch(e){}}
+/* every selx option snapshots the ma ma's regard (Z.ma) before it runs, so its result card can show that change (law 3: an act whose gain is the ma ma's regard never reads «không đổi chỉ số») */
+let SELX_B=null;
+/* the option hint (kit option card rows): k khắc it costs (kit «N khắc» Tốn item, like every act card) + what it gains (law 3: every option gains something) + what may come with it */
+function selxX(k,g,kem){return [k>0?`${k} khắc`:"",g?`thành: ${g}`:"",kem?`kèm: ${kem}`:""].filter(Boolean).join(" · ")}
+function selxO(n,go,more){return Object.assign({n,fx:{},x:"",go:function(){try{SELX_B={ma:(S.selx2&&S.selx2.ma)||0}}catch(e){SELX_B=null}return go.apply(this,arguments)}},more||{})}
+function selxRes(title,b,txt,know){try{if(txt)log(txt)}catch(e){}try{(know||[]).forEach(k=>kitKnow({text:k,key:"selx:"+k}))}catch(e){}
+ const dm=SELX_B&&S.selx2?(S.selx2.ma||0)-SELX_B.ma:0;SELX_B=null;
+ /* the ma ma's regard is not a stat: when it moved, the kit §93.8 card with given rows shows it in words beside the stat rows (no digits, law 7) */
+ if(dm&&!window.__bot&&typeof kitResultCard==="function"&&typeof kaResultRows==="function"){try{const [G,B]=kaResultRows(b,title);const who='<span class="ef t">Giáo tập ma ma:</span> ';
+   (dm>0?G:B).push(who+(dm>0?'<span class="ef g">để ý tới ngươi hơn</span>':'<span class="ef r">không vừa ý ngươi</span>'));let sen="";try{sen=kaSentence(b)}catch(e){}
+   kitResultCard({title,ok:null,sen,rows:[{k:"duoc",label:"Được",items:G},{k:"mat",label:"Mất",items:B}]});selxResHold();return}catch(e){}}
+ try{resultShow(title,b,true)}catch(e){}selxResHold()}
+/* ONE card per selx deed: the option wrapper (j19 wrapR «chooseM») would show a second, generic card titled by the option (it reads only stats, so the ma ma's regard read «không đổi chỉ số»
+   and covered the selx card); after selxRes the rest of this click shows no other result card (same pattern as jts __tsNoRes) */
+let SELX_RES_HOLD=0;function selxResHold(){SELX_RES_HOLD=1;setTimeout(()=>{SELX_RES_HOLD=0},0)}
+(function(){if(typeof resultShow!=="function")return;const r0=resultShow;resultShow=function(){if(SELX_RES_HOLD)return;return r0.apply(this,arguments)}})();
 /* ---- DAY START (title card, kit day card hook for KK17: window.selxDayName) ---- */
 function selxDay(n){const Z=S.selx2;Z.days=n;Z.kh=selxDayK();Z.at=Z.home||(BAL.selx.lodge.so[0][0]);
  if(n===1)return selxD1Gate();if(n===2)return selxD2Dress();return selxD3Teach()}
 /* ================= DAY 1 «Nhập cung» ================= */
 function selxD1Gate(){const Z=S.selx2;const L=selxAll();Z.heard=L.map(v=>v.id);
  selxCard(selxDayTitle(1),`<p>Trời vừa hửng, xe đưa tú nữ dừng trước cửa Bắc. Thái giám Nội vụ phủ cầm sổ, đọc tên từng người cùng chức tước của cha: ${L.map(v=>v.name).join(", ")}.</p><p>Tên thì nghe cả, nhưng mặt người nào ứng với tên nào, ngươi chưa biết.</p>`,
-  [selxO("Theo thái giám vào cửa viện",()=>{selxSpend(BAL.selx.beat.gate);selxD1Rooms()})],(()=>{try{return pMsg()}catch(e){return null}})())}
+  [selxO("Theo thái giám vào cửa viện",()=>{selxSpend(BAL.selx.beat.gate);selxD1Rooms()},{x:selxX(BAL.selx.beat.gate,"vào Dưỡng Tú viện, nhận sở ở")})],(()=>{try{return pMsg()}catch(e){return null}})())}
 function selxD1Rooms(){const Z=S.selx2;const R=(Z.rooms||[])[0]||{so:BAL.selx.lodge.so[0][0],ids:["me"]};Z.home=R.so;Z.at=R.so;const mates=R.ids.filter(i=>i!=="me").map(selxBy).filter(Boolean);
  selxCard(BAL.selx.lodge.n,`<p>Qua cổng ${BAL.selx.lodge.n}, Giáo tập ma ma đứng chờ, tay cầm thước gỗ. Bà chia mỗi sở một phòng, ${selxNumW(BAL.selx.room.perRoom)} người một phòng, ${selxNumW(BAL.selx.room.perBed)} người một giường.</p><p>Ngươi ở <b>${selxSo(R.so)}</b>, cùng phòng với ${selxNumW(mates.length)} tú nữ ngươi chưa quen. Ma ma dặn: «Cất đồ rồi ra ${BAL.selx.lodge.sanh[1]}, học quy củ.»</p>`,
-  [selxO(`Cất đồ, ra ${BAL.selx.lodge.sanh[1]}`,()=>{selxSpend(BAL.selx.beat.rooms);Z.at=BAL.selx.lodge.sanh[0];selxLesson()})],selxMaMa())}
+  [selxO(`Cất đồ, ra ${BAL.selx.lodge.sanh[1]}`,()=>{selxSpend(BAL.selx.beat.rooms);Z.at=BAL.selx.lodge.sanh[0];selxLesson()},{x:selxX(BAL.selx.beat.rooms,"ra học quy củ với ma ma")})],selxMaMa())}
 /* the drill: effort i (0 = kỹ, 1 = vừa, 2 = qua loa) costs BAL.selx.lesson.k[i] khắc; mark = the same formula for everyone (law 1) */
 function selxLessonMark(p,i){const L=BAL.selx.lesson;const m=L.base+L.duc*(+p.duc||0)+L.eff*(L.k.length-1-i)+R(2*L.r+1)-L.r;return Math.max(0,Math.min(10,Math.round(m)))}
-const SELX_LES=[["Tập thật kỹ từng bước, từng lạy","Ngươi tập tới mỏi gối, ma ma gật đầu."],["Tập cho thuộc rồi thôi","Ngươi thuộc bài, ma ma không khen không chê."],["Tập qua loa, để sức cho ngày mai","Ngươi giữ được sức, ma ma nhíu mày."]];
+const SELX_LES=[["Tập thật kỹ từng bước, từng lạy","Ngươi tập tới mỏi gối."],["Tập cho thuộc rồi thôi","Ngươi thuộc bài, lễ nghi đã vào nếp."],["Tập qua loa, để sức cho ngày mai","Ngươi ngồi nghỉ ở góc sảnh, sức hồi lại."]];
 function selxLesson(){const Z=S.selx2;const L=BAL.selx.lesson;
  selxCard(BAL.selx.lodge.sanh[1],`<p>Ma ma dạy quy củ: đi bước nhỏ, mắt không ngẩng quá vai người trên; hành lễ vạn phúc hai tay chồng bên hông; thưa gửi nhỏ nhẹ, không cướp lời.</p><p>Bà gõ thước: «Ai tập kỹ, ta nhớ. Ai lười, ta cũng nhớ.»</p>`,
-  SELX_LES.map(([n,o],i)=>selxO(n,()=>{const b=rsnap();selxSpend(L.k[i]);const mk=selxLessonMark(S,i);Z.lesson=mk;Z.ma=(Z.ma||0)+(mk-L.mid)*BAL.selx.maStep;
+  SELX_LES.map(([n,o],i)=>selxO(n,()=>{const b=rsnap();selxSpend(L.k[i]);const mk=selxLessonMark(S,i);Z.lesson=mk;const dm=(mk-L.mid)*BAL.selx.maStep;const dmm=i===0?Math.max(L.maMin*BAL.selx.maStep,dm):dm;Z.ma=(Z.ma||0)+dmm;
+   const fx=L.fx[i]||{};if(fx.duc)S.duc=cl((S.duc||0)+fx.duc,0,100);if(fx.suc)S.suc=cl((S.suc||0)+fx.suc,0,sucCap(S));
    selxAll().forEach(v=>{const e=R(L.k.length);v.__ma=(v.__ma||0)+(selxLessonMark(v,e)-L.mid)*BAL.selx.maStep});/* law 1: every girl takes the same lesson */
    try{selxAskNpc()}catch(e){}
    const know=[];const H=selxHints(mk);H.forEach(t=>know.push(t));
-   selxRes("Học quy củ",b,`${o} ${mk>=L.mid?"Ma ma để ý tới ngươi.":"Ma ma không vừa ý ngươi lắm."}`,know);Z.at=Z.home;selxFree()})),selxMaMa())}
+   selxRes("Học quy củ",b,`${o} ${dmm>0?"Ma ma gật đầu, để ý tới ngươi.":dmm<0?"Ma ma nhíu mày, không vừa ý ngươi lắm.":"Ma ma không khen không chê."}`,know);Z.at=Z.home;selxFree()},{x:selxLesX(i)})),selxMaMa())}
+function selxLesX(i){const L=BAL.selx.lesson;const f=L.fx[i]||{};return selxX(L.k[i],i===0?"Giáo tập ma ma để ý tới ngươi hơn; có khi bà buột miệng điều các vị chí tôn trọng":f.duc?`Đức +${f.duc}`:`Sức +${f.suc}`,i===2?"ma ma không vừa ý ngươi":"")}
 /* hints (knowledge only, score untouched): a high mark → the ma ma lets slip what one / two royals value this life */
 function selxRoyals(){const q=(()=>{try{return liveRivals(false).find(v=>v.queen)||null}catch(e){return null}})();return [["T","Thái hậu","th"],["E","Hoàng thượng",S.emp],["H","Hoàng hậu",q]].filter(x=>x[2])}
 function selxTrong(tok){try{return trongOf(tok)||[]}catch(e){return[]}}
@@ -76,12 +92,12 @@ function selxWhere(v){const Z=S.selx2;if(Z.days===3)return v===S?Z.at:Z.home;con
 function selxHere(){const Z=S.selx2;return selxAll().filter(v=>selxWhere(v)===Z.at)}
 /* ---- free khắc (days 1 and 3): greet, talk, walk, rest; at tối the evening drama ---- */
 function selxFree(){const Z=S.selx2;if(selxEvening())return selxEve();const H=selxHere();const o=[];const T=BAL.time.cost.talk;
- H.filter(v=>!selxMet(v)).slice(0,BAL.selx.menuN).forEach(v=>o.push(selxO(`Làm quen với ${selxNm(v)}`,()=>{selxSpend(T);selxGreet(v);selxFree()})));
- H.filter(v=>selxMet(v)).slice(0,BAL.selx.menuN).forEach(v=>o.push(selxO(`Trò chuyện với ${v.name}`,()=>{const b=rsnap();selxSpend(T);relAdd(S,v,BAL.selx.fx.s);selxRes("Trò chuyện",b,`Ngươi ngồi nói chuyện với ${v.name} một lúc; hai người thân hơn.`);selxFree()})));
- if(Z.days!==3)[...BAL.selx.lodge.so.map(s=>s[0]),BAL.selx.lodge.sanh[0]].filter(p=>p!==Z.at).forEach(p=>o.push(selxO(`Sang ${selxSo(p)}`,()=>{selxSpend(BAL.walk.near);Z.at=p;selxFree()})));
+ H.filter(v=>!selxMet(v)).slice(0,BAL.selx.menuN).forEach(v=>o.push(selxO(`Làm quen với ${selxNm(v)}`,()=>{selxSpend(T);selxGreet(v);selxFree()},{x:selxX(T,"biết mặt nàng; nàng chịu thì biết cả tên")})));
+ H.filter(v=>selxMet(v)).slice(0,BAL.selx.menuN).forEach(v=>o.push(selxO(`Trò chuyện với ${v.name}`,()=>{const b=rsnap();selxSpend(T);relAdd(S,v,BAL.selx.fx.s);selxRes("Trò chuyện",b,`Ngươi ngồi nói chuyện với ${v.name} một lúc; hai người thân hơn.`);selxFree()},{x:selxX(T,`${v.name} thân với ngươi hơn`)})));
+ if(Z.days!==3)[...BAL.selx.lodge.so.map(s=>s[0]),BAL.selx.lodge.sanh[0]].filter(p=>p!==Z.at).forEach(p=>o.push(selxO(`Sang ${selxSo(p)}`,()=>{selxSpend(BAL.walk.near);Z.at=p;selxFree()},{x:selxX(BAL.walk.near,`tới ${selxSo(p)}, gặp người ở đó`)})));
  if(Z.days===1)selxAskOpts(o,()=>selxFree());
- o.push(selxO("Nghỉ một lát",()=>{const b=rsnap();selxSpend(T);S.suc=cl((S.suc||0)+BAL.selx.rest,0,sucCap(S));selxRes("Nghỉ",b,"Ngươi ngả lưng một lát, sức hồi lại.");selxFree()}));
- o.push(selxO("Ngồi yên chờ tới tối",()=>{Z.kh=Math.min(Z.kh,BAL.time.khac);selxFree()}));
+ o.push(selxO("Nghỉ một lát",()=>{const b=rsnap();selxSpend(T);S.suc=cl((S.suc||0)+BAL.selx.rest,0,sucCap(S));selxRes("Nghỉ",b,"Ngươi ngả lưng một lát, sức hồi lại.");selxFree()},{x:selxX(T,`Sức +${BAL.selx.rest}`)}));
+ o.push(selxO("Ngồi yên chờ tới tối",()=>{Z.kh=Math.min(Z.kh,BAL.time.khac);selxFree()},{x:selxX(0,"tới ngay buổi tối, không phải chờ")}));
  selxCard(selxSo(Z.at),`<p>${H.length?`Ở ${selxSo(Z.at)} lúc này có ${H.map(selxNm).join(", ")}.`:`${selxSo(Z.at)} vắng người.`}</p>`,o,selxMaMa())}
 /* greeting = the existing two-way rule (jgreet greetName: a face always, a name only if her nết and birth let her give it) */
 function selxGreet(v){const Z=S.selx2;Z.met=Z.met||{};Z.met[v.id]=1;let line="";try{const G=greetName(S,v);line=G&&G.line||""}catch(e){}try{k61Know(v,"Làm quen ở "+BAL.selx.lodge.n,true,1)}catch(e){}
@@ -117,7 +133,14 @@ function selxDrama(type,pool,then){const Z=S.selx2;const P=selxPick(type,pool);i
  selxCard(type==="yard"?"Sân chờ":selxSo(Z.at)||BAL.selx.lodge.n,`<p>${selxFill(intro,c,her)}</p>`,["benh","hua","hoagiai","ngoai"].map(k=>selxO(selxFill(ST[k].text,c,her),()=>{const b=rsnap();
    let t=BAL.selx.drama.k;t-=selxApply(ST[k].gain,c,f,1);t+=Math.max(0,-selxApply(ST[k].loss,c,f,-1));selxSpend(Math.max(0,t));selxBystand(s,c,f);
    const know=(s.know||[]).map(r=>c[r]).filter(v=>v&&v!==S);know.forEach(v=>{try{k61Know(v,"Cùng một chuyện ở "+(type==="yard"?"sân chờ":BAL.selx.lodge.n),true,1)}catch(e){}});
-   const out=selxFill(her?SELX_VOUT[k]:s.outcomes[k],c,her);const mm=s.outcomes&&s.outcomes.maMa;selxRes("Chuyện "+(type==="yard"?"ở sân chờ":"trong viện"),b,`${out}${mm?` Ma ma: «${mm}»`:""}`);then()})),selxWho(c.bully||c.victim))}
+   const out=selxFill(her?SELX_VOUT[k]:s.outcomes[k],c,her);const mm=s.outcomes&&s.outcomes.maMa;selxRes("Chuyện "+(type==="yard"?"ở sân chờ":"trong viện"),b,`${out}${mm?` Ma ma: «${mm}»`:""}`);then()},{x:selxStX(ST[k],c,her)})),selxWho(c.bully||c.victim))}
+/* a stance's option hint: its khắc (drama.k ± the seed's time steps) + its gains / what comes with it, in words with the cast's names (law 2: every stance shows what it is worth) */
+function selxStX(st,c,her){const D=BAL.selx;const nm=r=>r==="ma"?"Giáo tập ma ma":r==="bystander"?"người đứng xem":c[r]===S||her&&r==="victim"?"":c[r]?selxNm(c[r]):"";
+ const w=(key,n,gain)=>{const [a,r]=key.split(".");if(a==="friend"||a==="grudge"){const who=nm(r);if(!who)return"";return `${who} ${a==="friend"?"quý ngươi hơn":"ghét ngươi hơn"}`}
+  if(a==="duc")return `Đức ${gain?"+":"-"}${n*D.ducStep}`;if(a==="face")return `Danh -${n*D.faceStep}`;if(a==="fav")return gain?"được để mắt tới":"";return""};
+ let t=D.drama.k;const G=[],K=[];for(const [key,n] of Object.entries(st.gain||{})){if(key==="time"){t-=n;continue}const x=w(key,n,true);if(x)(/ghét|^Danh -|^Đức -/.test(x)?K:G).push(x)}
+ for(const [key,n] of Object.entries(st.loss||{})){if(key==="time"){t+=n;continue}const x=w(key,n,false);if(x)(/quý ngươi/.test(x)?G:K).push(x)}
+ if(!G.length&&t<D.drama.k)G.push("đỡ tốn khắc");return selxX(Math.max(0,t),G.join("; "),K.join("; "))}
 /* the evening: day 1 = a dorm drama among her room and the girls near; day 3 = a drama among the 4 kept; then the night */
 function selxEve(){const Z=S.selx2;const d=Z.days;const pool=d===3?selxAll():selxAll().filter(v=>selxHomeOf(v)===Z.home).concat(selxAll().filter(v=>selxHomeOf(v)!==Z.home).slice(0,BAL.selx.drama.extra));
  selxDrama(d===3?"kept":"dorm",pool,()=>d===3&&!S.selx2.two&&R(100)<BAL.selx.drama.two?(S.selx2.two=1,selxDrama("kept",pool,()=>selxNight())):selxNight())}
@@ -126,8 +149,8 @@ function selxNight(){const Z=S.selx2;const d=Z.days;if(d===3)return selxEdict();
 /* ================= DAY 2 «Điện tuyển» ================= */
 /* ---- DAY 2 morning: the TOILETTE (OD 24/11 ~08:55Z; the existing jtoil mirror, the occasion «Điện tuyển»), or dress as given with a bare face ---- */
 function selxD2Dress(){const Z=S.selx2;const I=BAL.selx.imp;const o=[];
- o.push(selxO("Ngồi trước gương điểm trang",()=>{selxSpend(I.dressK);selxToil()}));
- o.push(selxO("Theo ma ma ra sân chờ, để mặt mộc",()=>{selxSpend(I.mocK);try{if(S.toilette&&S.toilette.wk===toilWk())S.toilette=null}catch(e){}selxD2Go()}));
+ o.push(selxO("Ngồi trước gương điểm trang",()=>{selxSpend(I.dressK);selxToil()},{x:selxX(I.dressK,"tự chọn phấn son, y phục ra mắt ba vị")}));
+ o.push(selxO("Theo ma ma ra sân chờ, để mặt mộc",()=>{selxSpend(I.mocK);try{if(S.toilette&&S.toilette.wk===toilWk())S.toilette=null}catch(e){}selxD2Go()},{x:selxX(I.mocK,"ra sân sớm, còn nhiều khắc làm quen ở sân chờ")}));
  selxAskOpts(o,()=>selxD2Dress());
  selxCard(selxDayTitle(2),`<p>Canh tư ma ma đã gõ cửa. Tú nữ thay xiêm y, chải tóc, để ma ma xem lại từng người trước khi ra sân chờ.</p><p>Hôm nay ba vị chí tôn sẽ nhìn mặt từng người: ăn vận, son phấn đều lọt vào mắt các vị.</p>`,o,selxMaMa())}
 /* the mirror = jtoil toilOpen (one rule for the look); the day's occasion is the hall (toilOcc wrapper below); when the mirror closes the day goes on */
@@ -171,22 +194,22 @@ function selxAsk(back){const Z=S.selx2;const A=BAL.selx.ask;const L=selxRoyals()
  selxCard("Dò hỏi ma ma",`<p>Giáo tập ma ma ở trong cung đã lâu, biết rõ tính các vị chí tôn. Ngươi muốn hỏi về vị nào?</p>`,o,selxMaMa())}
 function selxAskHow(k,nm,back){const Z=S.selx2;const A=BAL.selx.ask;const T=BAL.time.cost.talk;const o=[];
  const done=(mode,lvl,txt)=>{const b=rsnap();const know=selxAskTell(k,lvl);Z.asked=(Z.asked||0)+1;selxRes("Dò hỏi ma ma",b,lvl?txt:"Ma ma lắc đầu: «Chuyện bề trên, nô tì không dám nói bừa.»",know);back()};
- if((S.bac||0)>=A.bac)o.push(selxO("Dúi bạc vào tay ma ma",()=>{S.bac=Math.max(0,(S.bac||0)-A.bac);selxSpend(T);done("bac",2,"Ma ma cất bạc vào tay áo, ghé tai nói nhỏ.")},{x:`tốn ${selxNumW(A.bac)} lượng bạc`}));
- o.push(selxO("Giúp ma ma việc vặt cho bà vui lòng rồi mới hỏi",()=>{selxSpend(A.pleaseK);Z.ma=(Z.ma||0)+A.maPlease;done("please",selxAskLvl("please",Z.ma),"Ma ma vui lòng, kể cho ngươi nghe.")}));
- o.push(selxO("Cứ hỏi thẳng",()=>{selxSpend(T);done("ask",selxAskLvl("ask",Z.ma||0),"Ma ma ngẫm một lúc rồi đáp.")}));
+ if((S.bac||0)>=A.bac)o.push(selxO("Dúi bạc vào tay ma ma",()=>{S.bac=Math.max(0,(S.bac||0)-A.bac);selxSpend(T);done("bac",2,"Ma ma cất bạc vào tay áo, ghé tai nói nhỏ.")},{x:`${T} khắc · Bạc -${A.bac} · thành: ma ma kể đủ ${nm} ưa gì, trọng gì`}));
+ o.push(selxO("Giúp ma ma việc vặt cho bà vui lòng rồi mới hỏi",()=>{selxSpend(A.pleaseK);Z.ma=(Z.ma||0)+A.maPlease;done("please",selxAskLvl("please",Z.ma),"Ma ma vui lòng, kể cho ngươi nghe.")},{x:selxX(A.pleaseK,"ma ma vui lòng ngươi; bà kể nhiều hay ít tùy lòng bà")}));
+ o.push(selxO("Cứ hỏi thẳng",()=>{selxSpend(T);done("ask",selxAskLvl("ask",Z.ma||0),"Ma ma ngẫm một lúc rồi đáp.")},{x:selxX(T,"ma ma đáp tùy tính bà: kể đủ, nói một ý, hoặc lắc đầu")}));
  selxCard("Dò hỏi ma ma",`<p>Ngươi muốn biết ${nm} ưa gì, trọng gì.</p>`,o,selxMaMa())}
 /* law 1: every tú nữ may ask the same ma ma on day 1 — a girl of standing pays, a girl of the pleasing nết wins her first, the others just ask (same levels) */
 function selxAskNpc(){const A=BAL.selx.ask;const RY=selxRoyals();if(!RY.length)return;for(const v of selxAll()){if(v.__kn)continue;v.__kn={};const k=RY[selxHash(v.id+":ask")%RY.length][0];const N=selxNet(v);
   const mode=(v.r0||0)>=A.npcBuyR0?"bac":N.some(t=>A.npcPlease.includes(t))?"please":"ask";const ma=(v.__ma||0)+(mode==="please"?A.maPlease:0);if(mode==="please")v.__ma=ma;v.__kn[k]=selxAskLvl(mode,ma)}}
 function selxYard(){const Z=S.selx2;if(Z.yk<=0)return selxHall();const T=BAL.time.cost.talk;const step=n=>{selxSpend(n);Z.yk-=n};
  if(!Z.yd&&Z.yk<=BAL.selx.beat.yard-BAL.selx.beat.yardDrama){Z.yd=1;return selxDrama("yard",selxAll(),()=>{Z.yk=Math.max(0,Z.yk-BAL.selx.drama.k);selxYard()})}
- const o=[];selxAll().filter(v=>!selxMet(v)).slice(0,BAL.selx.menuN).forEach(v=>o.push(selxO(`Làm quen với ${selxNm(v)}`,()=>{step(T);selxGreet(v);selxYard()})));
+ const o=[];selxAll().filter(v=>!selxMet(v)).slice(0,BAL.selx.menuN).forEach(v=>o.push(selxO(`Làm quen với ${selxNm(v)}`,()=>{step(T);selxGreet(v);selxYard()},{x:selxX(T,"biết mặt nàng; nàng chịu thì biết cả tên")})));
  const unk=selxRoyals().filter(x=>!(Z.know||{})[x[0]]);if(unk.length)o.push(selxO("Dò hỏi thái giám về các vị chí tôn",()=>{const b=rsnap();step(T);const [k,nm,tok]=unk[0];Z.know=Z.know||{};Z.know[k]=1;const tr=selxTrong(tok);
-  selxRes("Dò hỏi",b,"",tr.length?[`Thái giám nói nhỏ: ${nm} trọng chữ ${tr[0]}.`]:[]);selxYard()}));
- o.push(selxO("Đứng yên giữ sức",()=>{step(T);selxYard()}));
+  selxRes("Dò hỏi",b,"",tr.length?[`Thái giám nói nhỏ: ${nm} trọng chữ ${tr[0]}.`]:[]);selxYard()},{x:selxX(T,"biết một vị chí tôn trọng chữ gì")}));
+ o.push(selxO("Đứng yên giữ sức",()=>{const b=rsnap();step(T);S.suc=cl((S.suc||0)+BAL.selx.rest,0,sucCap(S));selxRes("Giữ sức",b,"Ngươi đứng yên dưới bóng hòe, sức hồi lại.");selxYard()},{x:selxX(T,`Sức +${BAL.selx.rest}`)}));
  selxCard("Sân chờ",`<p>${selxCap(selxNumW(BAL.selx.yard.n))} tú nữ đứng chờ dưới tán hòe, chưa ai được gọi. Người thì thầm, người lặng lẽ chỉnh lại trâm cài.</p>`,o)}
 function selxHall(){selxCard("Điện tuyển",`<p>Thái giám xướng: «Tú nữ vào điện!» Ngươi theo hàng bước vào, mắt nhìn xuống nền gạch.</p><p>Người ngồi giữa hẳn là Hoàng thượng; bên trái là Thái hậu; bên phải, một vị nương nương đoan trang, hẳn là Hoàng hậu.</p>`,
-  [selxO("Quỳ xuống thỉnh an",()=>{selxSpend(BAL.selx.beat.test);const b=rsnap();const me=selxImpRun();if(me&&me.L.length)selxRes("Ba vị nhìn mặt",b,me.L.map(selxImpWhy).join(" "));selxTest("T","doidap",()=>selxMini())})])}
+  [selxO("Quỳ xuống thỉnh an",()=>{selxSpend(BAL.selx.beat.test);const b=rsnap();const me=selxImpRun();if(me&&me.L.length)selxRes("Ba vị nhìn mặt",b,me.L.map(selxImpWhy).join(" "));selxTest("T","doidap",()=>selxMini())},{x:selxX(BAL.selx.beat.test,"ba vị nhìn mặt ngươi lần đầu")})])}
 /* the royal's reaction (the same for her and every girl, law 1): an answer that shows a virtue this royal values = "+", one that clashes = "−" */
 function selxReactR(opt,tok){const tr=selxTrong(tok);const V=opt&&opt.values||[];if(V.some(x=>tr.includes(x)))return"+";const C=BAL.selx.conf;if(V.length&&tr.some(t=>C.some(([a,b])=>a===V[0]&&b===t||b===V[0]&&a===t)))return"−";return""}
 function selxWhy(nm,tok,opt,react){const tr=selxTrong(tok);const v=(opt.values||[])[0];const gl=(typeof VIRT_GL==="object"&&VIRT_GL[v])||v||"";
@@ -218,7 +241,7 @@ function selxContestRun(){const Z=S.selx2;const X=S.selx;const T=k=>SELX_TESTS.f
 /* ================= DAY 3 «Chờ chiếu» ================= */
 function selxD3Teach(){const Z=S.selx2;Z.at=Z.home;
  selxCard(selxDayTitle(3),`<p>${selxCap(selxNumW(BAL.selx.yard.kept))} người được ban hương nang dọn về chung ${selxSo(Z.home)}. Ma ma dạy luật trong cung: gặp người trên phải lui sang bên, không được tự ý ra khỏi cung mình, thư từ ra ngoài phải qua Nội vụ phủ.</p>`,
-  [selxO("Nghe ma ma dạy",()=>{selxSpend(BAL.selx.beat.teach);selxFree()})],selxMaMa())}
+  [selxO("Nghe ma ma dạy",()=>{selxSpend(BAL.selx.beat.teach);selxFree()},{x:selxX(BAL.selx.beat.teach,"biết luật trong cung trước khi nhận chiếu")})],selxMaMa())}
 /* the edict (evening of day 3): the rank part of jselx (±1 by place, cap Tần), the «Nhập cung» card corrected, then the Sắc phong news (KIT §93 rows) */
 function selxEdict(){const Z=S.selx2;const X=S.selx;X.tier=X.step+1;const r0=(S.origin&&S.origin.r)||0;const rank=selxRank(S,X.step);const was=S.rank;S.rank=rank;
  if(rank<was)S.sung=Math.max(0,(S.sung||0)-(was-rank)*BAL.entry.stepSung);S.lastPromo=S.turn;try{palFix()}catch(e){}try{kc2R0()}catch(e){}
