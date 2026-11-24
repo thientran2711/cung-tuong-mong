@@ -102,7 +102,7 @@ function optLine(a){const o=oddsOf(a),capd=oddsCapped(a);const rolled=o<100&&!a.
 function dilSrc(c){const own=f=>typeof f==="function"&&!(f.name&&typeof window!=="undefined"&&window[f.name]===f)?String(f):f&&typeof f!=="function"?String(f):"";return own(c&&c.go)+own(c&&c.fail)}
 /* ONE ODDS RULE (review/odds-no-unknown, law 4 + law 7): a rolled option names the odds of its roll as `p` (the SAME number its go rolls);
    a card line with no ladder word gets word(p) first, so the meter shows the real odds. No "unknown" odds word exists any more. */
-function oddsLead(c,s){s=String(s||"");if(!c||typeof c.p!=="number"||!isFinite(c.p)||ODDW.test(s))return s;
+function oddsLead(c,s){s=String(s||"");if(!c||typeof c.p!=="number"||!isFinite(c.p)||c.p>=100||ODDW.test(s))return s;/* p >= 100 = it cannot fail: no odds word (owner 24/11 ~04:25Z) */
  const body=s?(/^\s*(?:<[^>]+>)*\s*(tốn|thành|hỏng|ngay|kèm|được|mất)\s*:/i.test(s)?s:"thành: "+s):"";return [word(oddsCl(Math.round(c.p))),body].filter(Boolean).join(" · ")}
 /* kit-ton-row (econ-tamco, FOREMAN_D): an option may carry `ton:{tamco:-n}` / `ton:{bac:-pr}` = a PRICE the fx does not pay itself (the act pays it elsewhere); the card shows it in the «Tốn» row.
    It is inserted as «tốn: …» right after the odds word unless the line already has a «tốn:» part. Display only: nothing is charged here. */

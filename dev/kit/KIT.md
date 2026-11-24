@@ -1228,8 +1228,8 @@ so stage blocks may stand beside a head or between figures, never over the paint
 - KIT PART `kitOptOdds(b)` (jk2b, owner 19/11 ~01:48Z: «để lại cái thể hiện cái đó như cũ») → the option head shows the kit ODDS METER `kitOdds`
   (§ odds meter, j79: 7 segments red → green + the VANPHONG ladder word Mong manh / Hiểm / Khó lường / Tùy duyên / Có cơ / Vững / Rất vững;
   tap = the ladder). The meter is the card's own `.kat > .kodds` (kaNorm → kaOdds → oddsChip from the option's line = the odds the roll uses,
-  law 4; a rolled option names its odds by `p`, §25 ONE ODDS RULE); kitHideOut never removes it. An option with no roll (a certain outcome)
-  gets the same meter at «Rất vững». Only the 7 ladder words exist (no unknown word, no unlit meter). Never a percentage.
+  law 4; a rolled option names its odds by `p`, §25 ONE ODDS RULE); kitHideOut never removes it. An option with no roll (a certain outcome, or `p` ≥ 100: «Ta biết rồi», «Đã hiểu») shows NO odds meter at all
+  (owner 24/11 ~04:25Z, canon overwrite of 19/11 ~01:48Z: "Những cái option nào 100% thì không cần để những cái thông tin nắm chắc như thế này, nó rất là rối"; `kitOptOdds` now only removes a leftover `data-ksure` meter, `oddsLead` j17 adds no word for p ≥ 100; test `odds-meter-back.js`: certain options = no meter, rolled options = their real rung). Only the 7 ladder words exist (no unknown word, no unlit meter). Never a percentage.
   The «an toàn / có rủi ro / liều» risk chip (kitRisk, `.krisk`) is RETIRED everywhere.
 - After the choice the result card (section 7) shows the full Được / Mất + why, and the Tuần lục logs the truth.
 - Balance of the hidden outcomes: audited by bots on review/event-balance (owner 14:30Z / 15:10Z), which builds on `kitHint`.
@@ -1238,7 +1238,7 @@ so stage blocks may stand beside a head or between figures, never over the paint
 - Use (data only): `Q.push({…, ev:1, opts:[…]})` for an event built outside PEND; `act:1` / `shop:1` for an active act's picker / a shop;
   `hideOut:true` on an item or one option hides it too; any other priced button: `data-khide="1"`.
 - KIT SAMPLE PAGE: the one page of §47 (`#kit`, jkitpage.js) — samples "§53" (kitChip tones, the 7 odds-meter steps, an event option in cost
-  mode run through the real modal markup + kaNorm → kitHideOut: odds meter + Tốn + kitHintRow, no Tốn when free, a certain option at «Rất vững»;
+  mode run through the real modal markup + kaNorm → kitHideOut: odds meter + Tốn + kitHintRow, no Tốn when free, a certain option with NO meter;
   kitResultSeal ×3, kitKemRow).
   (The duplicate `?kit` / `kitSample()` page of review/opt-render was dropped by reviewer r7.)
 

@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ","b":"e37c6c6d45fa","h":[{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"}]};
+window.CTM_BI={"s":"2a9125bf+","t":"2026-11-24T03:35Z","c":"SELF-MERGE LAND kit-dhcapfit: merge LIVE b7598e72 (index.html/sw.js rebuilt)","b":"31a8deb53e57","h":[{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -4881,7 +4881,7 @@ function optLine(a){const o=oddsOf(a),capd=oddsCapped(a);const rolled=o<100&&!a.
 function dilSrc(c){const own=f=>typeof f==="function"&&!(f.name&&typeof window!=="undefined"&&window[f.name]===f)?String(f):f&&typeof f!=="function"?String(f):"";return own(c&&c.go)+own(c&&c.fail)}
 /* ONE ODDS RULE (review/odds-no-unknown, law 4 + law 7): a rolled option names the odds of its roll as `p` (the SAME number its go rolls);
    a card line with no ladder word gets word(p) first, so the meter shows the real odds. No "unknown" odds word exists any more. */
-function oddsLead(c,s){s=String(s||"");if(!c||typeof c.p!=="number"||!isFinite(c.p)||ODDW.test(s))return s;
+function oddsLead(c,s){s=String(s||"");if(!c||typeof c.p!=="number"||!isFinite(c.p)||c.p>=100||ODDW.test(s))return s;/* p >= 100 = it cannot fail: no odds word (owner 24/11 ~04:25Z) */
  const body=s?(/^\s*(?:<[^>]+>)*\s*(tốn|thành|hỏng|ngay|kèm|được|mất)\s*:/i.test(s)?s:"thành: "+s):"";return [word(oddsCl(Math.round(c.p))),body].filter(Boolean).join(" · ")}
 /* kit-ton-row (econ-tamco, FOREMAN_D): an option may carry `ton:{tamco:-n}` / `ton:{bac:-pr}` = a PRICE the fx does not pay itself (the act pays it elsewhere); the card shows it in the «Tốn» row.
    It is inserted as «tốn: …» right after the odds word unless the line already has a «tốn:» part. Display only: nothing is charged here. */
@@ -41369,9 +41369,10 @@ function kitHintOf(b,o){if(o)return kitHint(o,typeof Q!=="undefined"?Q[0]:null);
 /* KIT PARTS (KIT 28.6, kit sample page): the hint row + the kit odds meter — every hidden-outcome option uses these, nothing private */
 function kitHintRow(text){if(!text)return"";try{if(typeof VP==="object"&&VP&&VP.fix)text=VP.fix(text)}catch(e){}return `<span class="kr kr-hint"><span class="krl">Gợi ý</span><span class="krv"><span class="ef i">${text}</span></span></span>`}
 /* the odds meter of an option card: the card's own .kodds (kaNorm → kaOdds → oddsChip → kitOdds, read from the option's line = the odds the
-   roll uses, law 4) stays; a card with no odds (a certain outcome, nothing rolled) gets the same meter at «Nắm chắc» (owner 19/11 ~01:48Z). */
-function kitOptOdds(b){try{if(b.classList&&b.classList.contains("kbare"))return;/* KIT §93.7 */const kat=b.querySelector(":scope > .kat, :scope > .kabody > .kat");if(!kat||kat.querySelector(".kodds"))return;
- kat.insertAdjacentHTML("beforeend",`<span class="kodds" data-ksure="1">${oddsChip(KIT_ODDS[KIT_ODDS.length-1])}</span>`)}catch(e){console.error("kitOptOdds",e)}}
+   roll uses, law 4) stays; a card with NO roll (a certain outcome, nothing rolled: «Ta biết rồi», «Đã hiểu») shows NO odds meter at all
+   (owner 24/11 ~04:25Z, canon overwrite of 19/11 ~01:48Z «Nắm chắc» on a certain card: "Những cái option nào 100% thì không cần để những cái thông tin nắm chắc như thế này, nó rất là rối").
+   Kept as a part name: it now only removes a leftover sure meter (data-ksure), so every caller / old save stays valid. */
+function kitOptOdds(b){try{if(b.classList&&b.classList.contains("kbare"))return;b.querySelectorAll(".kodds[data-ksure]").forEach(e=>e.remove())}catch(e){console.error("kitOptOdds",e)}}
 function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid==="1")return;b.dataset.khid="1";b.classList.add("khideout");
  /* the hint, read from the option's data before its outcome rows go */
  let H=null;try{const M=b.closest("#modal");const o=M&&typeof Q!=="undefined"&&Q[0]&&Q[0].opts&&b.dataset.m!=null?Q[0].opts[+b.dataset.m]:null;H=kitHintOf(b,o)}catch(e){console.error("kitHint",e)}
@@ -55248,7 +55249,7 @@ KIT_SAMPLES.push(
  {id:"§49.1",title:"kitRel2 · quan hệ hai cột (Ân oán: hai người · Hoàng thượng · chưa rõ)",where:"<b>Ân oán</b> (pair view), Gia tộc card, every place that shows how two people stand. LEFT box = that person → me, RIGHT box = me → that person. Short words, number in its colour, no bars.",html:()=>`<div style="max-width:360px">${kitRel2([{head:"Hoàng hậu → ta",dir:"them",rows:[{w:"Thiện cảm",now:-24,kind:"good"},{w:"Oán",now:12,kind:"bad"}]},{head:"Ta → Hoàng hậu",dir:"me",rows:[{w:"Thiện cảm",now:41,kind:"good"},{w:"Oán",unk:"chưa rõ"}]}])}${kitRel2([{head:"Hoàng thượng → ta",dir:"them",rows:[{w:"Sủng",now:42,kind:"pos"},{w:"Ân tình",now:5,kind:"pos"}]}])}${kitRel2([{head:"Tô Lan Chi → Ôn Ngưng Sương",dir:"x",rows:[{w:"Thiện cảm",unk:"chưa rõ"}]}])}</div>`});/* §53 (KIT 28.6 event options + §7 result card parts) (review/opt-render, moved here by reviewer r7 — ONE kit sample page). The event option is the
 /* §53 (KIT 28.6 event options + §7 result card parts) (review/opt-render, moved here by reviewer r7 — ONE kit sample page). The event option is the
    game's own modal option markup (button.opt + dilLine) run through kaNorm → kitHideOut (data-khide), so the hint comes from the real kitHint and
-   the odds meter is the card's own (a certain option: «Nắm chắc»; owner 19/11 ~01:48Z, kitRisk retired). */
+   the odds meter is the card's own (a certain option: NO meter, owner 24/11 ~04:25Z; owner 19/11 ~01:48Z, kitRisk retired). */
 function kitPgEvOpts(){const W=o=>word(o);const O=[{n:"Gói bánh ú dâng Thái hậu",fx:{suc:-5,th:4},x:"Thái hậu thiện cảm +4"},
   {n:"Xin ân cho gia đình",fx:{},x:`${W(55)} · thành: Danh +3, Bạc +40 · hỏng: Sủng -4`},
   {n:"Theo cha mưu đại sự",fx:{},x:`${W(20)} · thành: Hoàng hậu bị phế, Danh +10 · hỏng: cả họ bị tru di`}];
@@ -95639,7 +95640,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="e37c6c6d45fa";window.CTM_BUILD=BUILD;
+const BUILD="31a8deb53e57";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

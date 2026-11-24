@@ -309,9 +309,10 @@ function kitHintOf(b,o){if(o)return kitHint(o,typeof Q!=="undefined"?Q[0]:null);
 /* KIT PARTS (KIT 28.6, kit sample page): the hint row + the kit odds meter — every hidden-outcome option uses these, nothing private */
 function kitHintRow(text){if(!text)return"";try{if(typeof VP==="object"&&VP&&VP.fix)text=VP.fix(text)}catch(e){}return `<span class="kr kr-hint"><span class="krl">Gợi ý</span><span class="krv"><span class="ef i">${text}</span></span></span>`}
 /* the odds meter of an option card: the card's own .kodds (kaNorm → kaOdds → oddsChip → kitOdds, read from the option's line = the odds the
-   roll uses, law 4) stays; a card with no odds (a certain outcome, nothing rolled) gets the same meter at «Nắm chắc» (owner 19/11 ~01:48Z). */
-function kitOptOdds(b){try{if(b.classList&&b.classList.contains("kbare"))return;/* KIT §93.7 */const kat=b.querySelector(":scope > .kat, :scope > .kabody > .kat");if(!kat||kat.querySelector(".kodds"))return;
- kat.insertAdjacentHTML("beforeend",`<span class="kodds" data-ksure="1">${oddsChip(KIT_ODDS[KIT_ODDS.length-1])}</span>`)}catch(e){console.error("kitOptOdds",e)}}
+   roll uses, law 4) stays; a card with NO roll (a certain outcome, nothing rolled: «Ta biết rồi», «Đã hiểu») shows NO odds meter at all
+   (owner 24/11 ~04:25Z, canon overwrite of 19/11 ~01:48Z «Nắm chắc» on a certain card: "Những cái option nào 100% thì không cần để những cái thông tin nắm chắc như thế này, nó rất là rối").
+   Kept as a part name: it now only removes a leftover sure meter (data-ksure), so every caller / old save stays valid. */
+function kitOptOdds(b){try{if(b.classList&&b.classList.contains("kbare"))return;b.querySelectorAll(".kodds[data-ksure]").forEach(e=>e.remove())}catch(e){console.error("kitOptOdds",e)}}
 function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid==="1")return;b.dataset.khid="1";b.classList.add("khideout");
  /* the hint, read from the option's data before its outcome rows go */
  let H=null;try{const M=b.closest("#modal");const o=M&&typeof Q!=="undefined"&&Q[0]&&Q[0].opts&&b.dataset.m!=null?Q[0].opts[+b.dataset.m]:null;H=kitHintOf(b,o)}catch(e){console.error("kitHint",e)}
