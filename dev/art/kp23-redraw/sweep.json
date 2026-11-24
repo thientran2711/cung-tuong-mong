@@ -1,0 +1,854 @@
+{
+ "an-cu-duoc-lat": {
+  "pic": "act-an-cu-duoc-lat.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "main woman from behind, small"
+ },
+ "ban-hon-con": {
+  "pic": "act-ban-hon-con.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "foreground from behind; main figures small"
+ },
+ "bi-bat-buon-lau": {
+  "pic": "act-bi-bat-buon-lau.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "woman turned away"
+ },
+ "bi-day-xuong-ho": {
+  "pic": "act-bi-day-xuong-ho.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "group from behind"
+ },
+ "bi-giang": {
+  "pic": "act-bi-giang.webp",
+  "kind": "new",
+  "verdict": "BLUR",
+  "note": "only shadow silhouettes on screen"
+ },
+ "bi-quan-su-bat-gap": {
+  "pic": "act-bi-quan-su-bat-gap.webp",
+  "kind": "new",
+  "verdict": "FAR",
+  "note": "small figures, faces unclear"
+ },
+ "bo-bac-chuoc": {
+  "pic": "act-bo-bac-chuoc.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "tiny woman from behind"
+ },
+ "bo-mac": {
+  "pic": "act-bo-mac.webp",
+  "kind": "new",
+  "verdict": "BLUR",
+  "note": "horseman only a shadow silhouette"
+ },
+ "cach-chuc-bien-ai": {
+  "pic": "act-cach-chuc-bien-ai.webp",
+  "kind": "new",
+  "verdict": "FAR",
+  "note": "tiny figure far right in courtyard"
+ },
+ "cai-ba-do": {
+  "pic": "act-cai-ba-do.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "small woman from behind"
+ },
+ "can-rang-chiu": {
+  "pic": "act-can-rang-chiu.webp",
+  "kind": "new",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "cat-giu-con-tin": {
+  "pic": "act-cat-giu-con-tin.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "woman from behind"
+ },
+ "chai-chuot-nhan-sac": {
+  "pic": "act-chai-chuot-nhan-sac.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "woman from behind, small"
+ },
+ "chep-kinh": {
+  "pic": "act-chep-kinh.webp",
+  "kind": "new",
+  "verdict": "FAR",
+  "note": "main woman small, from behind"
+ },
+ "chi-huy-dap-lua": {
+  "pic": "act-chi-huy-dap-lua.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "man from behind, small"
+ },
+ "chung-cu-bi-huy": {
+  "pic": "act-chung-cu-bi-huy.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "woman walking away, small"
+ },
+ "gai-ngua-yen-tiec": {
+  "pic": "act-gai-ngua-yen-tiec.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "woman turned away"
+ },
+ "giau-trong-ruong": {
+  "pic": "act-giau-trong-ruong.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "two women from behind"
+ },
+ "giup-mot-tay": {
+  "pic": "act-giup-mot-tay.webp",
+  "kind": "new",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "gop-bac-giau-the": {
+  "pic": "act-gop-bac-giau-the.webp",
+  "kind": "new",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "gui-bac-chua-benh": {
+  "pic": "act-gui-bac-chua-benh.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "woman facing away tying bundle"
+ },
+ "hau-benh-ca-thang": {
+  "pic": "act-hau-benh-ca-thang.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "mostly from behind, medium-far"
+ },
+ "hh-bac-chung-cu": {
+  "pic": "act-hh-bac-chung-cu.webp",
+  "kind": "new",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "hop-muu": {
+  "pic": "act-hop-muu.webp",
+  "kind": "new",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "hop-muu-lo": {
+  "pic": "act-hop-muu-lo.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "three kneeling women from behind, small"
+ },
+ "im-lang": {
+  "pic": "act-im-lang.webp",
+  "kind": "new",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "ke-la-vao-phong": {
+  "pic": "act-ke-la-vao-phong.webp",
+  "kind": "new",
+  "verdict": "FAR",
+  "note": "tiny figures, shadowy intruder"
+ },
+ "ke-toi": {
+  "pic": "act-ke-toi.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "foreground woman from behind"
+ },
+ "khong-chiu-dua-bac": {
+  "pic": "act-khong-chiu-dua-bac.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "woman walking away, back view"
+ },
+ "kiem-tra-ruong": {
+  "pic": "act-kiem-tra-ruong.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "two figures walking away, small"
+ },
+ "lam-ngo": {
+  "pic": "act-lam-ngo.webp",
+  "kind": "new",
+  "verdict": "FAR",
+  "note": "main woman small in courtyard"
+ },
+ "lao-vao-cuu": {
+  "pic": "act-lao-vao-cuu.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "two women from behind, no faces"
+ },
+ "loi-don-khong-ai-tin": {
+  "pic": "act-loi-don-khong-ai-tin.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "two women from behind"
+ },
+ "mach": {
+  "pic": "act-mach.webp",
+  "kind": "new",
+  "verdict": "FAR",
+  "note": "women small, one from behind"
+ },
+ "mach-hh": {
+  "pic": "act-mach-hh.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "woman mostly back/profile"
+ },
+ "nho-tra-an": {
+  "pic": "act-nho-tra-an.webp",
+  "kind": "new",
+  "verdict": "FAR",
+  "note": "small shadowy dim silhouettes"
+ },
+ "o-yen-nghi": {
+  "pic": "act-o-yen-nghi.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "kneeling woman from behind"
+ },
+ "pha-hoc-lo": {
+  "pic": "act-pha-hoc-lo.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "woman by pond from behind, small"
+ },
+ "quy-xin-tha-cho-nang": {
+  "pic": "act-quy-xin-tha-cho-nang.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "kneeling woman from behind"
+ },
+ "tha-den-cau-con": {
+  "pic": "act-tha-den-cau-con.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "woman kneeling from behind"
+ },
+ "tha-den-cau-sieu": {
+  "pic": "act-tha-den-cau-sieu.webp",
+  "kind": "new",
+  "verdict": "FAR",
+  "note": "small woman at railing"
+ },
+ "thai-hau-quo-trach": {
+  "pic": "act-thai-hau-quo-trach.webp",
+  "kind": "new",
+  "verdict": "BLUR",
+  "note": "dark silhouettes, no readable faces"
+ },
+ "thai-y-khong-thay-la": {
+  "pic": "act-thai-y-khong-thay-la.webp",
+  "kind": "new",
+  "verdict": "BLUR",
+  "note": "shadow-screen silhouettes only"
+ },
+ "them-loi-buoc-toi": {
+  "pic": "act-them-loi-buoc-toi.webp",
+  "kind": "new",
+  "verdict": "FAR",
+  "note": "figures small and dim"
+ },
+ "theo-cha-muu": {
+  "pic": "act-theo-cha-muu.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "woman from behind"
+ },
+ "theu-khan-ban-lc": {
+  "pic": "act-theu-khan-ban-lc.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "woman from behind"
+ },
+ "thu-long": {
+  "pic": "act-thu-long.webp",
+  "kind": "new",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "thuoc-doc-bi-phat-hien": {
+  "pic": "act-thuoc-doc-bi-phat-hien.webp",
+  "kind": "new",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "tich-thu-co-co": {
+  "pic": "act-tich-thu-co-co.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "woman cropped from behind"
+ },
+ "tich-thu-vo-co": {
+  "pic": "act-tich-thu-vo-co.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "foreground from behind; main pair small"
+ },
+ "tim-chung-cu-cha": {
+  "pic": "act-tim-chung-cu-cha.webp",
+  "kind": "new",
+  "verdict": "FAR",
+  "note": "woman small far right, back turned"
+ },
+ "tim-chung-cu-minh-oan": {
+  "pic": "act-tim-chung-cu-minh-oan.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "woman from behind"
+ },
+ "tim-thay-hinh-nhan": {
+  "pic": "act-tim-thay-hinh-nhan.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "official from behind"
+ },
+ "to-giac-truoc-hh": {
+  "pic": "act-to-giac-truoc-hh.webp",
+  "kind": "new",
+  "verdict": "FAR",
+  "note": "both figures small in big hall"
+ },
+ "to-loi-voi-chu": {
+  "pic": "act-to-loi-voi-chu.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "foreground from behind; main small"
+ },
+ "tra-bac-thay": {
+  "pic": "act-tra-bac-thay.webp",
+  "kind": "new",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "tra-ke-phong-hoa": {
+  "pic": "act-tra-ke-phong-hoa.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "official crouching from behind"
+ },
+ "trai-gioi": {
+  "pic": "act-trai-gioi.webp",
+  "kind": "new",
+  "verdict": "FAR",
+  "note": "tiny kneeling figure in courtyard"
+ },
+ "trinh-len-ht": {
+  "pic": "act-trinh-len-ht.webp",
+  "kind": "new",
+  "verdict": "FAR",
+  "note": "small kneeling woman far away"
+ },
+ "trung-co-quoc": {
+  "pic": "act-trung-co-quoc.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "woman at window from behind"
+ },
+ "tui-ngai": {
+  "pic": "act-tui-ngai.webp",
+  "kind": "new",
+  "verdict": "BACK",
+  "note": "woman and child from behind"
+ },
+ "vao-lanh-cung": {
+  "pic": "act-vao-lanh-cung.webp",
+  "kind": "new",
+  "verdict": "FAR",
+  "note": "tiny figure walking away in gate"
+ },
+ "vuong-gia-quo-trach": {
+  "pic": "act-vuong-gia-quo-trach.webp",
+  "kind": "new",
+  "verdict": "FAR",
+  "note": "two small figures far across courtyard"
+ },
+ "an-thuong": {
+  "pic": "act-an-thuong-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "ban": {
+  "pic": "act-ban-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "ban-len": {
+  "pic": "act-ban-len-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "ban-ra-ngoai": {
+  "pic": "act-ban-ra-ngoai-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "ban-thuong": {
+  "pic": "act-ban-thuong-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "banh-trung-thu": {
+  "pic": "act-banh-trung-thu-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "bat-thuoc-bi-do": {
+  "pic": "act-bat-thuoc-bi-do-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "bay-ke-phan-gian": {
+  "pic": "act-bay-ke-phan-gian-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "bay-o-yen-tiec": {
+  "pic": "act-bay-o-yen-tiec-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "benh-chua-giam": {
+  "pic": "act-benh-chua-giam-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "bi-ban-chet": {
+  "pic": "act-bi-ban-chet-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "bo-bac-lo-lot": {
+  "pic": "act-bo-bac-lo-lot-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "bo-yen-thuc-ben-con": {
+  "pic": "act-bo-yen-thuc-ben-con-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "cai-lai": {
+  "pic": "act-cai-lai-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "cam-co": {
+  "pic": "act-cam-co-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "cam-do": {
+  "pic": "act-cam-do-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "cat-bong-de-dang": {
+  "pic": "act-cat-bong-de-dang-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "chuoc-do": {
+  "pic": "act-chuoc-do-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "chuoc-lai": {
+  "pic": "act-chuoc-lai-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "ghi-nho-chung-cu": {
+  "pic": "act-ghi-nho-chung-cu-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "giau-ngu-tu": {
+  "pic": "act-giau-ngu-tu-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "giau-ong": {
+  "pic": "act-giau-ong-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "giu-chung-cu": {
+  "pic": "act-giu-chung-cu-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "goi-banh-u": {
+  "pic": "act-goi-banh-u-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "gui-le-van-an": {
+  "pic": "act-gui-le-van-an-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "hanh-le-bi-che": {
+  "pic": "act-hanh-le-bi-che-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "hh-bi-phe": {
+  "pic": "act-hh-bi-phe-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "hinh-nhan-lan-goc": {
+  "pic": "act-hinh-nhan-lan-goc-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "hoang-hau-bang-ha-tra": {
+  "pic": "act-hoang-hau-bang-ha-tra-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "hoi-chuyen-cu": {
+  "pic": "act-hoi-chuyen-cu-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "hoi-phuong": {
+  "pic": "act-hoi-phuong-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "ke-gia-ma": {
+  "pic": "act-ke-gia-ma-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "kham-phong": {
+  "pic": "act-kham-phong-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "khan-cha-me": {
+  "pic": "act-khan-cha-me-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "khap-cung-don": {
+  "pic": "act-khap-cung-don-h.webp",
+  "kind": "old",
+  "verdict": "BACK",
+  "note": "two women facing away down corridor"
+ },
+ "khiem-nhuong-choi-tu": {
+  "pic": "act-khiem-nhuong-choi-tu-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "khong-can-du": {
+  "pic": "act-khong-can-du-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "kiem-tra-ruong-sach": {
+  "pic": "act-kiem-tra-ruong-sach-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "lam-banh-cho-con": {
+  "pic": "act-lam-banh-cho-con-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "lat-an-tien-de": {
+  "pic": "act-lat-an-tien-de-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "le-duoc-khen": {
+  "pic": "act-le-duoc-khen-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "le-mon": {
+  "pic": "act-le-mon-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "le-tru-ta": {
+  "pic": "act-le-tru-ta-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "len-bao-tin": {
+  "pic": "act-len-bao-tin-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "len-cai": {
+  "pic": "act-len-cai-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "len-gui-bac-nha": {
+  "pic": "act-len-gui-bac-nha-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "len-mua-ngoai-cung": {
+  "pic": "act-len-mua-ngoai-cung-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "li-xi": {
+  "pic": "act-li-xi-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "ly-gian-khong-tin": {
+  "pic": "act-ly-gian-khong-tin-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "mat-bao-cho": {
+  "pic": "act-mat-bao-cho-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "o-cung-giu-am": {
+  "pic": "act-o-cung-giu-am-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "quan-su-gat-dau": {
+  "pic": "act-quan-su-gat-dau-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "rinh-bat-gia-ma": {
+  "pic": "act-rinh-bat-gia-ma-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "roi-lanh-cung": {
+  "pic": "act-roi-lanh-cung-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "ruou-cuc": {
+  "pic": "act-ruou-cuc-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "so-khen": {
+  "pic": "act-so-khen-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "so-lo-chuoc-chung-cu": {
+  "pic": "act-so-lo-chuoc-chung-cu-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "tam-doc": {
+  "pic": "act-tam-doc-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "tao-mo": {
+  "pic": "act-tao-mo-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "tau-tuyen-it": {
+  "pic": "act-tau-tuyen-it-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "tau-xin-nguoi-cua-cha": {
+  "pic": "act-tau-xin-nguoi-cua-cha-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "thai-giam-chet-duoi": {
+  "pic": "act-thai-giam-chet-duoi-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "thang-bac": {
+  "pic": "act-thang-bac-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "thang-cuoc": {
+  "pic": "act-thang-cuoc-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "thay-dong-tinh": {
+  "pic": "act-thay-dong-tinh-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "thua-bac": {
+  "pic": "act-thua-bac-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "thua-cuoc": {
+  "pic": "act-thua-cuoc-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "thuyen-ve-nhat": {
+  "pic": "act-thuyen-ve-nhat-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "tiec-duoc-khen": {
+  "pic": "act-tiec-duoc-khen-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "tiec-truc-trac": {
+  "pic": "act-tiec-truc-trac-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "tinh-duong": {
+  "pic": "act-tinh-duong-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "tro-ve-lanh-cung-nuoi": {
+  "pic": "act-tro-ve-lanh-cung-nuoi-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "tu-boc-thuoc": {
+  "pic": "act-tu-boc-thuoc-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "tu-dung": {
+  "pic": "act-tu-dung-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "tu-tay-ket": {
+  "pic": "act-tu-tay-ket-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "tu-thong-ban-chet": {
+  "pic": "act-tu-thong-ban-chet-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "viec-khong-thanh": {
+  "pic": "act-viec-khong-thanh-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "viet-cau-doi": {
+  "pic": "act-viet-cau-doi-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ },
+ "xu-tram": {
+  "pic": "act-xu-tram-h.webp",
+  "kind": "old",
+  "verdict": "OK",
+  "note": "main person close/clear or hands/object scene reads clearly"
+ }
+}
