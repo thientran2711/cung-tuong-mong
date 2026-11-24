@@ -2774,3 +2774,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (01:55Z) sếp asked again for the Foreman F open code (she forgot to open it at 23:45Z) → paste block given in chat (ROOT, reads FOREMAN_F.md; MAIN = 115; kit keeper = KK15 session_01Rc5AsMbPqcNeJHzx3HWT6V).
 - (02:10Z) D RE-FLAG: 3 BIG LAND READY missed by 115 (fix-kframe-heir-rv fcdf5b19, typed-stat-bal-rv a902ebe4, fix-hadoc-loop-rv 0273f818; all stale vs LIVE) → D re-opens 1 opus rv to final-merge on LIVE. sếp asked ROOT codes for B/C/D/E (depth reset): new generic dev/handover/TAKEOVER_FOREMAN_ROOT_X.md; predecessors B 3vyw59cT (d3), C D3E3NXZ5 (d2), D CEg2Mg4f (d3), E qA3L2ohC (d1).
 - (02:15Z) LANDED thin-p0+p2 → LIVE 4a8c627b. thin-p1-r1 087e886c → LC8 queue (after robot10-reco-rv, fix-evening-softlock-rv).
+- (02:20Z) KIT READY K-DH-CAPFIT review/kit-dhcapfit e6d28d21 (KK15). Main/KK15 depth 8 → SMALL kit rv ordered to Foreman B via STATUS; KK16 successor will also be opened by B.
