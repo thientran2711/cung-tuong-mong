@@ -373,8 +373,15 @@ function wdSell(p,ix){const e=p.inv[ix];if(!e||e.h||!wdItem(e))return"";if(wdIsN
 function wdPawn(p,ix){const e=p.inv[ix];if(!e||e.h||!wdItem(e))return"";if(wdIsNt(e))return"";const ag=wdAgent(p);if(!ag)return"";
  p.inv.splice(ix,1);const pr=wdPrice(e),g=Math.max(1,Math.round(pr*WD.pawnPct/100)),back=Math.round(pr*WD.redeemPct/100);p.wdPawn=p.wdPawn||[];p.wdPawn.push({e,g,back,due:wk()+WD.pawnWeeks,ag:ag.name});ap(p,{bac:g});
  let r=`${wdNmC(p)} sai ${ag.name} mang ${wdItem(e).n} đi cầm: Bạc +${g}; chuộc lại ${back} bạc trong ${WD.pawnWeeks} tuần. `;
- if(roll(wdLeak(p,ag,true))){ap(p,{danh:-WD.sellDanh});r+=`<span class="r">Chuyện lộ ra: ${wdNm(p)} túng thiếu phải cầm đồ.</span> Danh -${WD.sellDanh}. `}return r}
+ if(roll(wdLeak(p,ag,true))){ap(p,{danh:-WD.sellDanh});r+=`<span class="r">Chuyện lộ ra: ${wdNm(p)} túng thiếu phải cầm đồ.</span> Danh -${WD.sellDanh}. `;if(p!==S)try{newsAdd(p,"wd",`${wdNmC(p)} túng thiếu, sai người mang đồ đi cầm.`)}catch(x){}}return r}
 function wdRedeem(p,i){const P=(p.wdPawn||[])[i];if(!P||p.bac<P.back)return"";ap(p,{bac:-P.back});p.wdPawn.splice(i,1);p.inv.push(P.e);return `${wdNmC(p)} chuộc lại ${wdItem(P.e).n}: Bạc -${P.back}. `}
+/* law1-audit (OD 24/11 ~08:35Z): an NPC short of silver holds HER two roads — «Bán lén» or «Cầm cố» (same wdSell / wdPawn, same prices, same
+   leak) — and picks by nết (BAL.net.n.wdPawn: a nết that wants the piece back pawns); she redeems when her silver stays above the «poor» line
+   after paying (BAL.ag.why.wd.poor, the line that made her pawn); an unredeemed piece is lost at the due tuần for everyone (wdPawnMonth). */
+function wdNpcPawn(v,ix){let pw=0;try{pw=nv(v,"wdPawn")}catch(e){}return pw?wdPawn(v,ix):wdSell(v,ix)}
+function wdNpcRedeem(v){if(!v||v===S||v.coop||!(v.wdPawn||[]).length)return"";if(typeof worldOn==="function"&&!worldOn())return"";/* co-op: NPCs are the host's */
+ let r="";const poor=BAL.ag.why.wd.poor;
+ for(let i=v.wdPawn.length-1;i>=0;i--){const P=v.wdPawn[i];if(P&&wk()<=P.due&&(v.bac||0)-P.back>=poor)r+=wdRedeem(v,i)}return r}
 function wdPawnMonth(p){if(!p.wdPawn||!p.wdPawn.length)return"";let r="";p.wdPawn=p.wdPawn.filter(P=>{if(wk()<=P.due)return true;if(p===S)r+=`${wdItem(P.e).n} cầm cố đã quá hạn, mất hẳn. `;return false});return r}
 
 /* ---------- ngự tứ lost or broken = bất kính (the same risk for everyone holding one) ---------- */
@@ -413,9 +420,10 @@ function wdMonth(pre){let ev="";S.wdk=S.wdk||{};
  for(const p of consorts()){if(p!==S){wdNpcInit(p);wdNpcDress(p)}const st=wdStatus(p);
   if(st==="over"){if(npcWhy("wdNotice",{p})){ap(p,{sung:WD.overSung});if(p===S)log(`Hoàng thượng để mắt tới y phục rực rỡ của ngươi. ${sgStat(WD.overSung)}.`)}/* rivals' jealousy: the approved luxury law (jinv luxMonth) */}
   if(!p.confined)ev+=wdRemark(p,st)} /* npc-purpose: wdRemark asks npcWhy("wdRemark") — a remark only from one with a reason */
- ev+=wdTaimat();ev+=wdPawnMonth(S);for(const p of consorts())wdNtMonth(p);
- /* NPCs short of silver sell quietly too */
- for(const o of npcWhyAll("wdPawn")){const v=o.who;const i=(v.inv||[]).findIndex(e=>e&&!e.h&&wdItem(e)&&!wdIsNt(e));if(i>=0)wdSell(v,i)}
+ ev+=wdTaimat();for(const p of consorts())if(!p.coop)ev+=wdPawnMonth(p);for(const p of consorts())wdNtMonth(p);
+ /* NPCs: redeem what they can afford, then the ones short of silver sell or pawn (law1-audit: her two roads, by nết) */
+ for(const v of liveRivals(true))wdNpcRedeem(v);
+ for(const o of npcWhyAll("wdPawn")){const v=o.who;const i=(v.inv||[]).findIndex(e=>e&&!e.h&&wdItem(e)&&!wdIsNt(e));if(i>=0)wdNpcPawn(v,i)}
  return ev}
 (function(){const m0=monthTick;monthTick=function(){let pre=null;try{const q=queenP();pre={th:!!S.thDead,q:q&&q!==S?q.id:null,P:wdPOf(S)}}catch(e){}
  const r=m0.apply(this,arguments);let add="";try{if(pre&&S&&!S.dead)add=wdMonth(pre)}catch(e){console.error(e)}return (r||"")+add}})();
@@ -491,4 +499,4 @@ document.addEventListener("click",ev=>{const b=ev.target.closest("[data-wd]");if
 (function(){if(typeof pcard!=="function")return;const p0=pcard;pcard=function(o){try{if(S&&o&&o.name){const nm=String(o.name).replace(/<[^>]*>/g,"");const p=nm===S.name?S:rivals.find(v=>v.name===nm);
   if(p&&(p===S||(typeof knows!=="function"||knows(p)))){const sl=wdSlots(p);const C=sl.map(x=>chip(`${x.slot==="tram"?"Trâm":"Y phục"}: ${x.name}${x.empty?"":" · "+x.gradeName}`,x.nt?"ok":""));
    if(sl[0].label)C.push(chip(sl[0].label,sl[0].labelKey==="ok"?"ok":"hot"));o=Object.assign({},o,{chips:(o.chips||[]).concat(C)})}}}catch(e){}return p0.call(this,o)}})();
-window.wdAutoUI=wdAutoUI;window.wdGroomUI=wdGroomUI;window.wdSell=wdSell;window.wdPawn=wdPawn;window.wdRedeem=wdRedeem;window.wdWear=wdWear;window.wdTakeOff=wdTakeOff;
+window.wdAutoUI=wdAutoUI;window.wdGroomUI=wdGroomUI;window.wdSell=wdSell;window.wdPawn=wdPawn;window.wdRedeem=wdRedeem;window.wdNpcPawn=wdNpcPawn;window.wdNpcRedeem=wdNpcRedeem;window.wdWear=wdWear;window.wdTakeOff=wdTakeOff;
