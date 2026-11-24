@@ -179,10 +179,11 @@ const ROADT={tt_co:["Con cờ giữ nước","Con cờ đổi phe"],tt_oan:["R�
  cnv_chu:["Giữ kín miệng bình","Nắm thóp chủ nhân"],cnv_ban:["Tình nghĩa đồng hương","Đạp bạn đồng hương"],cnv_mat:["Dứt ánh mắt xưa","Ánh mắt lén lút"],cnv_ma:["Trò ngoan ma ma","Qua mặt ma ma"],
  nc_gian:["Trung với Đại Hy","Mật thám cố quốc"],nc_su:["Cầu nối hai nước","Đưa tin cố quốc"],nc_tuc:["Hòa hai dòng máu","Chối bỏ cố hương"],nc_vuong:["Giữ yên hai cõi","Mưu ngai cố quốc"],
  bd_san:["Vi trường thượng võ","Mưu hiểm vi trường"],bd_soi:["Giữ ngai chính thống","Dựng ngai bù nhìn"],bd_tuyet:["Che chở người nạn","Đuổi người lánh nạn"],bd_hen:["Giữ lời thề lửa","Phụ lời thề lửa"],
- pt_hai:["Đón thuyền đồng hương","Bỏ thuyền ngoài khơi"],pt_su:["Quốc thư vẹn lễ","Quốc thư hai lòng"],pt_tang:["Tiễn thầy qua bể","Giữ thầy làm tin"],pt_dang:["Hồi môn trọn vẹn","Cướp thuyền hồi môn"]};
+ pt_hai:["Đón thuyền đồng hương","Bỏ thuyền ngoài khơi"],pt_su:["Quốc thư vẹn lễ","Quốc thư hai lòng"],pt_tang:["Tiễn thầy qua bể","Giữ thầy làm tin"],pt_dang:["Hồi môn trọn vẹn","Cướp thuyền hồi môn"],
+ bd_hoa:["Giữ vẹn hòa ước","Xé bỏ hòa ước"],bd_ngua:["Ngựa tốt về triều","Buôn ngựa cho giặc"],bd_tuc:["Giữ nếp thảo nguyên","Bỏ nếp quê nhà"],bd_hoang:["Khả hãn chính vị","Đoạt ngai Khả hãn"]};
 /* side arcs (o "*", "st", "tm", "eg") → [good, bad] */
 const ARCT={s_than:["Nhận đúng người thân","Nhận bừa thân thích"],s_thu:["Trả thư đúng chủ","Mật thư làm bẫy"],s_hoa:["Cứu người trong lửa","Đổ lửa cho người"],s_su:["Tiếp sứ vẹn lễ","Mưu lợi với sứ"],
- s_dich:["Ở lại mùa dịch","Bỏ cung tránh dịch"],s_tinh:["Giữ lòng trong sạch","Tình riêng ngoài cung"],s_thay:["Trọng lời lão nhân","Phụ lòng lão nhân"],s_ban:["Thù hóa tri kỷ","Thù càng thêm sâu"],
+ s_dich:["Ở lại mùa dịch","Bỏ cung tránh dịch"],s_tinh:["Giữ lòng trong sạch","Tình riêng ngoài cung"],s_thay:["Trọng lời lão nhân","Phụ lòng lão nhân"],s_ban:["Hóa thù làm bạn","Thù càng thêm sâu"],
  st_the:["Thế lực chính danh","Kết bè lũng đoạn"],st_con:["Mẹ hiền dạy con","Ép con theo ý"],st_dong:["Đông cung chính vị","Mưu ngôi Thái tử"],
  tm96a:["Từ biệt người xưa","Lưu luyến người xưa"],tm96b:["Vàng không sợ lửa","Lửa thiêu tình cũ"],tm96c:["Dứt tình chọn cung","Bỏ cung theo tình"],
  noi14:["Hương hỏa nối dòng","Mượn con nối dõi"],hau14:["Phượng tọa chính danh","Đạp người lên ngôi"],ke14:["Dạy con nên vua","Buông rèm sau ngai"]};
