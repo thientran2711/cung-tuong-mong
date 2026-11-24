@@ -13,7 +13,7 @@
 (function(){try{
 const KIT_PICK=window.KIT_PICK=window.KIT_PICK||{
  dropMs:700,stagger:80,swayS:[3.4,4.6],swayDeg:1.3,liftMs:200,liftDy:-8,liftScale:1.05,closeMs:170,
- w:{kv1:152,kv2:200},h:{kv1:62,kv2:56},pic:{kv1:40,kv2:48},cord:{rail:18,gap:10,gapS:6},hS:50,gx:8,max:6,railAt:.40,railMin:.18,railLap:.34,minW:128,post:8,tabH:34,
+ w:{kv1:152,kv2:200},h:{kv1:62,kv2:56},pic:{kv1:40,kv2:48},cord:{rail:18,gap:10,gapS:6},hS:50,gx:8,max:6,railAt:.40,railMin:.18,railLap:.34,slimW:140,minW:128,post:8,tabH:34,
  motion:null /* test hook: true = ignore reduced motion */};
 const kv=()=>document.documentElement.classList.contains("kv2")?"kv2":"kv1";
 const still=()=>{if(KIT_PICK.motion===true)return false;try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)||document.documentElement.classList.contains("kf-still")}catch(e){}return false};
@@ -64,7 +64,7 @@ function build(P,swap){const K=KIT_PICK,G=geo(P),el=P.el,m=P.m;P.G=G;P.up=null;
  G.acts.forEach((a,i)=>{const c=i%G.cols,r=(i/G.cols)|0,n=document.createElement("div");n.className="kpk-n";n.dataset.id=a.id;
   const kc=r?G.gap:K.cord.rail,x=G.x0+c*(G.cw+K.gx),y=G.railY+K.cord.rail+r*(G.h+G.gap);
   n.style.cssText=`left:${x}px;top:${y}px;width:${G.cw}px;height:${G.h}px;--kc:${kc}px;--kph:${G.h}px;--kpp:${K.pic[m]}px;--sd:${(K.swayDeg*(1-.12*r)).toFixed(2)}deg;--ss:${(K.swayS[0]+(K.swayS[1]-K.swayS[0])*((i*37%10)/10)).toFixed(2)}s;--sdl:${(-(i*.9+c*1.3)).toFixed(2)}s`;
-  n.innerHTML=`<i class="kpk-cord"></i>`+btn(a,i);const b=n.querySelector(".kfoc-b");b.classList.add("kpk-b");b.dataset.id=a.id;b.setAttribute("aria-pressed","false");
+  n.innerHTML=`<i class="kpk-cord"></i>`+btn(a,i);if(G.cw<K.slimW)n.classList.add("kpk-slim");/* narrow side: no picture, the whole name gets the room (OD:L177 names never cut) */const b=n.querySelector(".kfoc-b");b.classList.add("kpk-b");b.dataset.id=a.id;b.setAttribute("aria-pressed","false");
   b.addEventListener("click",ev=>{ev.stopPropagation();tap(P,a,n,b)});el.appendChild(n);
   /* fall-in from the rail: transform + opacity only, staggered top → bottom, settles with a damped swing */
   if(!still()&&n.animate){const s=c%2?-1:1,dy=-(y-G.railY)+4;n.classList.add("kpk-drop");
@@ -117,6 +117,7 @@ const css=document.createElement("style");css.id="kpk-css";css.textContent=`
 .kpk .kfoc-b.kpk-b::before,.kpk .kfoc-b.kpk-b::after{content:"";position:absolute;top:4px;width:4px;height:4px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e8d9b8,#6b4a22);pointer-events:none}.kpk .kfoc-b.kpk-b::before{left:3px}.kpk .kfoc-b.kpk-b::after{right:3px}
 .kpk .kfoc-b.kpk-b .kfoc-pic{border:1.5px solid var(--kpk-line);box-sizing:border-box;border-radius:6px;margin-left:3px}
 .kpk .kfoc-b.kpk-b.kfoc-hasi{padding-right:20px}.kpk .kfoc-b.kpk-b .kfoc-i{top:-9px;right:-7px}/* the «!» badge sits on the corner, never on the title */
+.kpk-n.kpk-slim .kfoc-b.kpk-b .kfoc-pic{display:none}.kpk-n.kpk-slim .kfoc-b.kpk-b{padding-left:9px}
 .kpk .kfoc-b.kpk-b .kfoc-t b{-webkit-line-clamp:3;max-height:3.3em;font-size:.8rem}
 .kpk .kfoc-b.kpk-b .kfoc-t b{color:var(--kpk-ink);text-shadow:0 1px 0 var(--kpk-hi);letter-spacing:.1px}
 .kpk .kfoc-b.kpk-b .kfoc-t small{display:none;color:#3d2410;text-shadow:0 1px 0 var(--kpk-hi);font-weight:600}
