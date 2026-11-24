@@ -1425,4 +1425,4 @@ REVIEW law1-gifts (opus BIG; briefs/D-law1-gifts-review.md) of 0a5fc0af | review
 | SELSCENE-6 opening 3 days (opus; successor of SELSCENE-5) | review/selection-scene | MAIN 118 | session_01V1ZZH3MNrUmsbyK2EQz7Wt | RUNNING | 24/11 07:22Z |
 | E69 B-MOMENT #9 Khoảnh khắc chân dung (opus; briefs/E69-moment.md) | review/moment; reports/moment.md | FOREMAN E | session_01DgYSWpc3VRPoSDT4hF2V2H | RUNNING | 24/11 06:40Z |
 PROMO BUILD part A kỳ sắc phong + special-exam/patron routes + PHÂN CUNG phanCungEdict (opus BIG; OD 24/11 ~09:20Z/~09:35Z/~09:50Z; briefs/D-promo-build-A.md) | review/promo-build | session_01D3E3NZySUEoGSM1U1L4WvJ | RUNNING | 24/11 06:50Z (Foreman D depth 1)
-NET THRESHOLDS research + audit + proposal (opus, no build; ORDER MAIN 116 06:02Z/06:41Z; briefs/D-net-thresholds.md) | reports/net-thresholds.md | (opening) | RUNNING | 24/11 06:55Z (Foreman D depth 1)
+NET THRESHOLDS research + audit + proposal (opus, no build; ORDER MAIN 116 06:02Z/06:41Z; briefs/D-net-thresholds.md) | reports/net-thresholds.md | session_01D3E3NZ3P5j3cm5nr2pybFY | RUNNING | 24/11 06:55Z (Foreman D depth 1)
