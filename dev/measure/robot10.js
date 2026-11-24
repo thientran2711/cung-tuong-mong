@@ -52,7 +52,7 @@ const UILAG=+process.env.UILAG||400,UILOAD=+process.env.UILOAD||5000;
 const rd=f=>fs.readFileSync(path.join(M,f),'utf8');
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const BLOCK=/\.(webp|png|jpe?g|gif|mp3|ogg|m4a|mp4|webm)(\?|$)/i;
-async function boot(b,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},reducedMotion:'reduce'});const p=await ctx.newPage();
+async function boot(b,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},reducedMotion:'reduce'});await ctx.addInitScript(require('./robot10-lag.js').REAL_INIT);const p=await ctx.newPage();
  await p.route(BLOCK,r=>r.abort());p.__errs=[];p.on('pageerror',e=>p.__errs.push(e.message+' '+(e.stack||'').split('\n').slice(1,2).join('').trim()));
  p.on('console',m=>{if(m.type()==='error'&&!NOISE.test(m.text()))p.__errs.push('console.error: '+m.text())});
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:120000});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function'&&typeof showTitle==='function',null,{timeout:120000});
@@ -132,6 +132,7 @@ async function life(job){const t0=Date.now();const R={job,bugs:[],cps:0,ui:{scan
  /* fast bot page */
  const ctx=await b.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'});
  await ctx.addInitScript(()=>{window.MutationObserver=class{observe(){}disconnect(){}takeRecords(){return[]}};HTMLElement.prototype.focus=function(){}});
+ await ctx.addInitScript(require('./robot10-lag.js').BOT_INIT);
  await ctx.addInitScript(`window.__seed=${job.seed};(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s=(s+0x6D2B79F5)>>>0;let t=s;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296}})();`);
  const p=await ctx.newPage();await p.route(BLOCK,r=>r.abort());const errs=[];p.on('pageerror',e=>errs.push(['pageerror',e.message,(e.stack||'').split('\n').slice(1,3).join(' ')]));
  p.on('console',m=>{if(m.type()==='error'&&!NOISE.test(m.text()))errs.push(['console.error',m.text(),'']);});
@@ -152,7 +153,7 @@ async function life(job){const t0=Date.now();const R={job,bugs:[],cps:0,ui:{scan
  R.mem={bot:[],ui:{},rss:[]};let memT=0;const MEMEVERY=(+process.env.MEMEVERY||30)*1e3;
  const metr=async(c)=>{try{const m=(await c.send('Performance.getMetrics')).metrics;const g=k=>(m.find(x=>x.name===k)||{}).value||0;return [Math.round(g('JSHeapUsedSize')/1048576),g('Nodes'),g('JSEventListeners'),g('Documents')]}catch(e){return null}};
  const rss=()=>{try{return Math.round(require('child_process').execSync("ps -eo rss,args | grep -- '--type=renderer' | grep -v grep | awk '{s+=$1} END {print s+0}'").toString()/1024)}catch(e){return null}};
- const memSample=async()=>{const sec=Math.round((Date.now()-t1)/1e3);const m=cdp&&await metr(cdp);if(m)R.mem.bot.push([sec,...m]);
+ const memSample=async()=>{const sec=Math.round((Date.now()-t1)/1e3);const m=cdp&&await metr(cdp);if(m){const yr=await p.evaluate(()=>{try{return S&&S.year||0}catch(e){return 0}}).catch(()=>0);R.mem.bot.push([sec,...m,yr])}/* [s, heap MB, nodes, listeners, docs, game year] */
   for(const d of DEV){if(!ui[d].__cdp){ui[d].__cdp=await ui[d].context().newCDPSession(ui[d]).catch(()=>null);if(ui[d].__cdp)await ui[d].__cdp.send('Performance.enable').catch(()=>{})}
    const u=ui[d].__cdp&&await metr(ui[d].__cdp);if(u)(R.mem.ui[d]=R.mem.ui[d]||[]).push([sec,...u])}
   const r=rss();if(r!=null)R.mem.rss.push([sec,r])};
@@ -164,12 +165,13 @@ async function life(job){const t0=Date.now();const R={job,bugs:[],cps:0,ui:{scan
    if(!oldDone){oldDone=true;const first=await p.evaluate(()=>window.__r10.firstSave);for(const d of DEV.slice(0,1))await oldSaves(ui[d],d,cp.save,first,bug)}}
   if(n>=1||await p.evaluate(()=>!!window.__r10.halt))break;if(Date.now()-t1>CAP){cap=true;break}}
  R.t.play=Date.now()-t1;
- const st=await p.evaluate(()=>({res:window.__res,r:{bugs:window.__r10.bugs,buoi:window.__r10.buoi,rt:window.__r10.rt,rtMs:Math.round(window.__r10.rtMs),nbMs:window.__r10.nbMs,road:window.__r10.road,origin:window.__r10.origin,ending:window.__r10.ending,words:window.__r10.words,opts:window.__r10.opts,lastSave:window.__r10.lastSave,life:window.__r10.life||null,lock:window.__r10.lock||null,halt:window.__r10.halt||null,calls:window.__r10.calls,steps:window.__r10.steps,m:window.__r10.mSnap?window.__r10.mSnap():null,kitOdds:window.__r10.KIT_ODDS},x:window.__bot.extra(),state:S?{year:S.year,rank:S.rank,age:S.age,dead:S.dead}:null}));
+ const st=await p.evaluate(()=>({res:window.__res,r:{bugs:window.__r10.bugs,buoi:window.__r10.buoi,rt:window.__r10.rt,rtMs:Math.round(window.__r10.rtMs),nbMs:window.__r10.nbMs,nbY:window.__r10.nbY||[],lt:window.__r10lt||[],road:window.__r10.road,origin:window.__r10.origin,ending:window.__r10.ending,words:window.__r10.words,opts:window.__r10.opts,lastSave:window.__r10.lastSave,life:window.__r10.life||null,lock:window.__r10.lock||null,halt:window.__r10.halt||null,calls:window.__r10.calls,steps:window.__r10.steps,m:window.__r10.mSnap?window.__r10.mSnap():null,kitOdds:window.__r10.KIT_ODDS},x:window.__bot.extra(),state:S?{year:S.year,rank:S.rank,age:S.age,dead:S.dead}:null}));
  const res=st.res[0]||null;R.res=res&&{title:res.title,fate:res.fate,rank:res.rank,maxRank:res.maxRank,years:res.years,age:res.age,origin:res.origin,lb:res.lb,stuck:res.stuck,state:res.state,ring:res.ring};
  R.buoi=st.r.buoi;R.calls=st.r.calls;R.kitOdds=st.r.kitOdds;R.halt=st.r.halt;R.lock=st.r.lock;
  /* the owner's tally fields (same JSON from every runner; robot10-agg.js reads them) */
  R.life=st.r.life||{id:st.r.halt?'SOFTLOCK':cap?'CAP':(res&&res.title)||'?',type:st.r.halt?'softlock':cap?'cap':(res&&res.title==='TIMEOUT')?'stuck':(res&&res.title==='CRASH')?'crash':'?',group:'no ending',death:false,
   maxRank:Math.max(-1,...(st.r.steps||[]).map(x=>x.r)),steps:st.r.steps,age:st.state&&st.state.age,year:st.state&&st.state.year};if(!R.life.m)R.life.m=st.r.m;R.life.botMin=+(R.t.play/6e4).toFixed(2);R.road=st.r.road;R.origin=st.r.origin;R.rt={n:st.r.rt,ms:st.r.rtMs};R.words=st.r.words;R.opts=st.r.opts;
+ R.lag=R.lag||{};R.lag.bot={nbY:st.r.nbY,lt:st.r.lt,playMs:R.t.play,mem:R.mem.bot};
  const nb=st.r.nbMs.slice().sort((a,b)=>a-b);R.nb={n:nb.length,p50:nb[nb.length>>1]||0,p95:nb[Math.floor(nb.length*.95)]||0,max:nb[nb.length-1]||0};
  for(const x of st.r.bugs)bug(x.type,x.msg,x.detail+(x.at?' @ '+x.at:''),{n:x.n,save:x.save});
  if(cap)bug('stuck','no ending within the wall cap ('+CAP/1e3+' s)','state '+JSON.stringify(st.state),{save:st.r.lastSave});
@@ -212,6 +214,9 @@ async function uiCheck(p,d,cp,job,bug,R){const e0=p.__errs.length;const t0=Date.
   await scan('tab '+t)}
  const lt=await p.evaluate(()=>window.__lt.splice(0));R.ui.long.push(...lt);const big=lt.filter(x=>x>UILAG_);
  if(big.length)bug('lag','['+d+'] tab switch freezes over '+UILAG+' ms',Math.max(...big)+' ms longest · '+big.length+' long tasks @ '+cp.at,{save:cp.save});
+
+ /* ORDER #7 LAG probe goes LAST (it throttles the CPU ×4 and acts on the page: its long tasks must not reach the UI-scan checks above) */
+ if(process.env.LAG!=='0')await require('./robot10-lag.js').probe(p,d,cp,R).catch(e=>bug('harness','lag probe failed: '+String(e.message).split('\n')[0],''));
  R.ui.ms=(R.ui.ms||0)+Date.now()-t0}
 const UILAG_=UILAG;
 /* after a real load, she must be able to play on: «Sang ngày mới» (kit card buttons closed as she would) must move the clock within 12 presses */
