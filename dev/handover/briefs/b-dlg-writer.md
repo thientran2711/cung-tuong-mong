@@ -34,3 +34,6 @@ Rollover at START_CTX % + 25 % (ceiling 60 %): write the HANDOVER (last id done)
 | W7 | j68_d_ky.md | j68 comp myst + rumor (84) + kỳ ngộ (77, L = "W") | content/thin/j68seeds_d.md, kyseeds_a/b.md |
 | W8 | j7_wc.md | j7 (81) + world reactions wc (91) | content/thin/j7seeds.md, wseeds_a/b.md |
 | W9 | j70_j71.md | j70 routes (78, L = "M": her cung nữ reports the tell) + j71 complications (80) | content/thin/j70seeds_a/b.md, fseeds_a/b.md |
+
+## ADDRESS WORDS (lead 4b3uXPGS, 24/11 07:18Z — binding)
+NEVER type address words: no «nương nương», «tiểu chủ», «tỷ tỷ», «muội muội», «bổn cung», «thần thiếp», «tần thiếp», «chủ tử», «tôi». Use {goi}/{xung} — the address core picks by rank. Re-fetch review/sideline-dlg (dev/test/dlgs_validate.py) before validating; the newer validator REJECTS typed address words. Model file: content/dlg/j72_a.md (fixed).
