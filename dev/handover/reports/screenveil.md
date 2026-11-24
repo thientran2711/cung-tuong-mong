@@ -148,3 +148,21 @@ Law 12: Fold 755x1000 and iPad 1180x820 both looked 3× (BEFORE iPad tiles: room
 - OPTION for MAIN to show her (not a change): every late full-body figure (stage, event / person dialogs, frames) uses the one §59.1 f/m mark in the figure's exact box; at the current .55 (breathing to .3) it is faint over a room. Shots old (.55) vs stronger (.92, = the `.j59sil` stranger) of a never-arriving figure at a real figure's spot: /tmp/claude-0/-home-user-cung-tuong-mong/623b50df-171c-562e-9f7c-cd31d26fbd46/scratchpad/shots/sil-fold-old.png, sil-fold-new.png, sil-ipadAir-old.png, sil-ipadAir-new.png, sil-cmp.jpg (side by side), late-zoom.jpg (iPad, her own figure late at .55). (On the Fold shots the figure over the dialog is the test overlay only.)
 
 SẴN SÀNG KIỂM 469d7985 (review/kit-screenveil)
+
+## REVIEW r1 (sonnet reviewer · 24/11 · session_01N1tNP5NC2cVvb6hDSKPiu9)
+START_CTX ~8 %. PRIORITY #1 CHECK: OD 24/11 ~10:20Z (read verbatim: veil on every screen change, plain screen + short line, whole view at once) | main: no screen veil | review/kit-screenveil 469d7985 (= tree of fe8f6e3d; r3/r4 reverted per owner «2 đi» + MAIN 119) | claims: VEIL-1.
+Branch review/kit-screenveil-r1 = 469d7985 + merge LIVE 056c2402 (assemble.py list conflict: kept main's list + jscrv.js last; index.html/sw.js rebuilt) → 16a2521d09e76b84035b90793c855dfdc7b7fa7d (main is its ancestor).
+| check | result |
+|---|---|
+| Law 11 scan | python3 dev/test/screen-veil-scan.py: 245 sites, full-screen body layers not in the watcher 0 (merged head). My own grep of document.body.appendChild layers: all full-screen ones are .kmov / #kpodov / #krkov / #coopfz / #kctmh / #kctmp / #kchatp / #kitpage... all in SCRV_OV or small toasts → none unveiled |
+| Law 9 | ONE part: dev/build/jscrv.js (kitScreenVeil, KIT §97), no private copy elsewhere (git grep). Numbers in BAL.kscrv (law 4) |
+| screen-veil.js NO args (Fold+iPad, cold 1.5 Mbps/300 ms + warm) BARE fe8f6e3d | exit 1: 1 step (Fold cold Hành sự... «tab staff» 1/188 frames, a portrait set late). warm 0 |
+| same, MERGED head 9c18fad3 (run 1) | exit 1: 5 steps, all COLD: Fold Đức Thọ cung 7/188 (late figure c04 + act-nghe-len), Fold Ngự hoa viên 42/516 (fig-consort-c29), iPad Càn Ninh 41/44, Dưỡng Hòa điện 102/103, về cung 88/89 (all fig-consort-c17-t8). warm 0/0 |
+| same, iPad only, merged (run 2) | exit 1: 3 steps cold (Đức Thọ cung 31/284, Càn Ninh 2/197, điện 1/135: figures fig-consort-c22 / fig-mama-k03 + act-tao-mo-h). warm 0 |
+| Reading | cold half-painted frames vary run to run (1.5 Mbps line, 10 s cap, NPC figures that arrive after the view settled = the §59.1 grey stand-in the owner chose with «2 đi»). Every residual frame is a late FIGURE or one late portrait, never a room/background/frame. BEFORE the veil: 33/38 cold steps half-painted; AFTER: 3–5/38 cold, 0/38 warm. Worker's own table listed the same 4 residuals. Not a FAIL of the veil, but the owner should know a very slow line can still show a grey figure stand-in |
+| bash dev/tools/quickcheck.sh (alone) | run A: PASS, buổi 2985/2408 (noisy). run B: FAIL perf buổi 4769/1607. run C (--runs 5, alone): **PASS 361 s** · open 2040 ms · old save ok · render 265/278, tab 471/454, buổi 1632/1409 (new runs 7030/1414/1471/1632/4696 vs live 1409/1385/4167/1294/2686 → same spread, box-load noise; ~+15 % median, within limit) · core gates PASS |
+| coop-e2e.js | both seat orders (default + COOP_SWAP=1): 142/142 passed each, 0 page errors; veil does not touch sync (DOM-only, state frames unchanged) |
+| Old save | quickcheck: old save loads + plays a buổi, 0 errors |
+| Fold + iPad shots (law 12) | looked 3× at video frames: Fold veil = plain paper + centred «Đang sang cung…», nothing else; iPad after the veil = full room with backdrop + figure (the grey figure is the by-design «Người lạ») |
+Notes for KK18 / MAIN 119 (not FAIL): (1) buổi timing is noisy on this box; if buổi really got slower it would be the 90 ms settle re-scan per screen change, watch it in the next quickcheck on LIVE; (2) late-arriving figure stand-in is still the §59.1 grey one (owner «2 đi», unchanged).
+Verdict: **PASS** 16a2521d09e76b84035b90793c855dfdc7b7fa7d
