@@ -1382,7 +1382,7 @@ LAW-1 likes/dislikes/gifts scan + fix (opus; MAIN 116 07:57Z (e); briefs/D-law1-
 PALACE AUDIT + DISTANCE EFFECT (opus; MAIN 116 08:16Z + 08:46Z; briefs/D-palace-distance.md) | reports/palace-audit.md; review/palace-distance | session_01D3E3NYCMYjjACU3pnjjM84 | RUNNING | 24/11 05:40Z (Foreman D ROOT)
 LAW-1 likes/dislikes/gifts scan + fix (opus; MAIN 116 07:57Z (e); briefs/D-law1-likes-gifts.md) | review/law1-gifts | session_01D3E3Nb2AhxBQbQBQDKoKLv | RUNNING | 24/11 05:40Z (Foreman D ROOT)
 | REVIEW mgskin-wire r1 (sonnet SMALL reviewer-lander; briefs/b-mgskin-wire-review.md) of review/mgskin-wire 53e3b70b | review/mgskin-wire-r1; reports/thin.md «## REVIEW mgskin-wire r1» | B | session_01N1tNP63hZJuLnXd4UvJ6U4 | PASS a0d3efa8 LAND READY (archived) | 24/11 05:38Z |
-| thin-p6 r2 FIX + RE-LAND (opus; LC9 bounce 05:36Z: wc/j70c/j71c-play fail no-arg on ff1773ba; briefs/b-thin-p6-r2.md) | review/thin-p6-r2; reports/thin.md «## REVIEW thin-p6 r2» | B | session_01N1tNP436YFaYo5MMDCeWak | RUNNING | 24/11 05:43Z |
+| thin-p6 r2 FIX + RE-LAND (opus; LC9 bounce 05:36Z: wc/j70c/j71c-play fail no-arg on ff1773ba; briefs/b-thin-p6-r2.md) | review/thin-p6-r2; reports/thin.md «## REVIEW thin-p6 r2» | B | session_01N1tNP436YFaYo5MMDCeWak | PASS aea1baec LAND READY (archived) | 24/11 05:43Z |
 | SMALL KIT REVIEWER #2 (sonnet; split from 2F8nQScU; briefs/b-kit-review-2.md): kit-sqopt, kit-daytitle, kit-dialogue-vn, kit-evframe | review/<name>-r1; reports/<branch>.md | B | session_01N1tNP59hSyoDLcPHGSmzLM | RUNNING | 24/11 05:44Z |
 | KIT KEEPER KK18 (sonnet; successor of KK17; reports/MOCK-STAGE.md «HANDOVER KK17 → KK18») | review/kit-* | MAIN 118 | session_01V1ZZH4iZc3Go1VBS7nJnuD | RUNNING | 24/11 06:18Z |
 | ROBOT-COOP RUNNER U3 (re-opened) pairs 3-4 SWAP=0 SEED=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p3-4.md | B | session_01N1tNP2fZxefqCF5gDf8nSK | RUNNING | 24/11 05:44Z |
@@ -1395,3 +1395,4 @@ LAW-1 likes/dislikes/gifts scan + fix (opus; MAIN 116 07:57Z (e); briefs/D-law1-
 | PARKING AUDIT E63 | reports/parking-audit.md 7f85225b | FOREMAN E (child1) | session_01DgYSWnS8t83k8g5g1at6Hy | DONE, ARCHIVED | 24/11 06:05Z |
 | REVIEW E68r parking-rank SMALL (test-only) of f3c7ce80 | review/parking-rank; reports/parking-rank-review.md | FOREMAN E (child1) | session_01DgYSWp7114rbXtgpPug6pw | RUNNING | 24/11 06:08Z |
 REVIEW kit-promo-hook (sonnet SMALL; briefs/D-kit-promo-hook-review.md) of 287a6adf | review/kit-promo-hook-rv | session_01D3E3NY3oMUMV2oP3CrJ2wL | RUNNING | 24/11 06:08Z (Foreman D ROOT)
+| ROBOT-COOP RUNNER U6 pairs 5-6 SWAP=1 SEED=1 ×10 kiếp (sonnet) | dev/handover/robot/coop-*-p5-6-s.md | B | session_01N1tNP5XrCevHuEb54HPjLr | RUNNING | 24/11 06:13Z |
