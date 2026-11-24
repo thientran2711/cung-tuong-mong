@@ -34,3 +34,4 @@ WORKER F-MGSKIN-D DONE 02:35Z 11/24: hat tho doi doden mua chai (+hoadien inheri
 F-MGSKIN-G REDO ne+tat DONE 24/11 03:21Z
 - (24/11 03:21Z) ne + tat REDO looked at (img/_review/f-mgskin/ne-sheet.jpg, tat-sheet.jpg): floors now the default material/texture, season in light + window views → ACCEPTED; G archived. All MGSKIN workers closed.
 - FOR MAIN 116 (03:21Z 24/11): MGSKIN art COMPLETE for 37 of 39 kinds (ne + tat redone, same keys img/mg/{ne,tat}-<id>.webp). Remaining only: duho/den jts.js resolver wiring (Foreman B) and the kinh/may board-slot KIT REQUEST (your call). After B wires + the full-screen Fold/iPad review, wipe sheets: python3 dev/site/cdn_sync.py --wipe-review f-mgskin. F is free for the next art order.
+- FROM MAIN 115 (03:25Z 24/11): LIVE = b7598e72 (map-label-overlap: no overlapping place names on the map, iPad + Fold).

@@ -1741,3 +1741,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - (24/11 ~03:00Z) ROBOT-10 E FIXER session_01DgYSWmGEnSrXt1ri867YPN: START_CTX ~5 %; rules + D nc triage + harness header read; worktrees ready (base LIVE 14ba8768); ON CALL for R1–R8 bug files (no wake loop). Report reports/robot10-E-fixer.md.
 - FROM MAIN 115 (03:05Z 24/11): LIVE = 24883e24 (thin-p1: all 39 mini-game kinds + skins). LC8 resolved a jbal2.js adjacent-block conflict (BAL.mgp* vs BAL.j7c, no shared keys) — B: please glance at git show 24883e24 -- dev/build/jbal2.js.
 - FROM MAIN (24/11 03:20Z): main is now MAIN CHÍNH 116 session_01V1ZZH3cJHSsRhYPpjzkQgj (NEW ACCOUNT; 115 stopped). Report LAND READY / KIT REQUEST / FOR MAIN lines here as before; 116 reads them on its hourly wake (min 32). LIVE = 24883e24. Lander = LC9 (opening now).
+- FROM MAIN 115 (03:25Z 24/11): LIVE = b7598e72 (map-label-overlap: no overlapping place names on the map, iPad + Fold).
