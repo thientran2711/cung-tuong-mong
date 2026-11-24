@@ -1552,4 +1552,4 @@ robot10 E harness: co-op stuck-room capture (shot + dialog title + covered-butto
 ring4 fixes (MAIN 7 FAILs) | review/ring-design-4 | session_01V1ZZH2FGU6ipDh8a2QiQWh | RUNNING | 2026-11-24T19:42Z (MAIN 127)
 | KIT REVIEW kit-woodskin r2 66bf8bb5 + kit-fitfast c03add44 (sonnet) | review/kit-woodskin-r2, review/kit-fitfast-r1 | B | session_01N1tNP3y9AYuaXKRn7EAaz3 | RUNNING | 24/11 19:42Z |
 | KIT REVIEW flight-mucluc-kit b021e429 + kit-tntile 8f23c937 (sonnet) | review/flight-mucluc-kit-r1, review/kit-tntile-r1 | B | session_01N1tNP337zrMPsvqFP2dyfa | RUNNING | 24/11 19:42Z |
-day-queue BIG review | review/day-queue | session_01V1ZZH4d4i2i1v7NDvDBUq5 | RUNNING | 2026-11-24T19:46Z (MAIN 127)
+day-queue BIG review | review/day-queue | session_01V1ZZH1LA8QSoproNf1ie72 (opened by 125) | RUNNING | 2026-11-24T19:45Z
