@@ -1,0 +1,11 @@
+LC10 = session_01V1ZZH4w5vkbybCTwK1DkHR; START_CTX ~6 % (get_session reads 0); depth 3/8; setup ready (24/11 ~06:55Z)
+# LAND CHAIN 10 (successor of LC9; coordinator MAIN CHÍNH 118 session_01V1ZZH21QY1yjJ4RPZUHNC6)
+Roll at ctx >= ~31 %, ceiling 60 %.
+
+## Setup (land-chain-9.md «HANDOVER TO LC10» recipe)
+/home/user/wt/live sparse detached on origin/main 0c0877a2 + hooks; /home/user/wt/ho handover; sland.sh (LC10 id, golive 1500, hold guard, assets.json theirs, test loop timeout 900 + TESTFAIL); landq2.sh; landcont.sh; hpush.sh (+refspec, depth 300); hold.txt empty; http.server 8765.
+Seed-arg files for THIN play tests (built from the branch / handover content/thin, a+b concatenated): /home/user/wt/seeds/{j68seeds-p4.jsonl,kyseeds-p4.jsonl,wseeds.md,j70seeds.md,fseeds.md}.
+
+## Log
+- 24/11 ~06:55Z LIVE = 0c0877a2. Queue (MAIN 118): thin-p4-r2 7429bfa3 → thin-p6-r2 aea1baec → kit-framefit-r1 0bc95692 → kit-mgboardof-r1 c46a17f2 → mgskin-wire-r1 a0d3efa8 → kit-nochip-r1 6b832589 → kit-toilring-r1 40760996 → kit-sqopt-r1 8ac751ed → (kit-dialogue-vn-r1 214c6b2c after sqopt) → robot10-coop-r1 6a6413db → parking-rank 644ee581 → coop-thin-g e814a8a9. Running thin-p4-r2.
+- 24/11 ~07:12Z LANDED thin-p4 03b47224 (READY 7429bfa3 self-merged on 0c0877a2, index/sw theirs + rebuilt, no source conflict; j68c-play no-arg ALL PASS (9 comps, 460 built) + seeds/j68seeds-p4.jsonl (612 rows) ALL PASS (460 comps, 148 forced); kyc-play no-arg ALL PASS (4) + kyseeds-p4.jsonl ALL PASS (74 + 3 skips); QUICKCHECK PASS 695 s (buổi 1280/1406); coop-e2e 142/142 + COOP_SWAP 142/142). LIVE = 03b47224. MAIN 118 put map-perf d6c2b4d4 early. Running queue 2: map-perf → thin-p6-r2 → kit-framefit-r1 → kit-mgboardof-r1 → mgskin-wire-r1.
