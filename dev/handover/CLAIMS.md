@@ -1340,4 +1340,4 @@ REVIEW BIG3 final-merge (opus reviewer-lander; MAIN 115 02:10Z): review/fix-kfra
 | F-MGSKIN-H: mini-game skins batch 2 (truyen mac thoico thu_tam thu_choi tuoi) × 4 skins xuan/ha/thu/dong (owner OD 23/11 ~23:05Z; briefs/F-mgskin.md) | CDN img/mg/; reports/F-MGSKIN-H.md | FOREMAN F | session_01UV1SzkFGhSJWCHVhAH3nMD | RUNNING | 24/11 02:19Z |
 | REVIEW kit-dhcapfit (sonnet SMALL kit reviewer-lander; MAIN 115 ORDER 02:20Z) of review/kit-dhcapfit e6d28d21 | review/kit-dhcapfit-r1; reports/kit-dhcapfit.md «## REVIEW r1» | B | session_01N1tNP3VEPfzDnytmKioybP | RUNNING | 24/11 02:24Z |
 REVIEW bal-ranks-law4 (opus BIG; briefs/D-bal-ranks-law4-review.md) of 670991d9 | review/bal-ranks-law4-rv | session_01964izELFBavvyUNjoPto8y | RUNNING | 24/11 02:36Z (Foreman D depth 3)
-REVIEW robot10-nc-fix-3 (opus BIG load determinism; briefs/D-robot10-nc-fix-3-review.md) of 449cbe08 | review/robot10-nc-fix-3-rv | (opening) | RUNNING | 24/11 02:41Z (Foreman D depth 3)
+REVIEW robot10-nc-fix-3 (opus BIG load determinism; briefs/D-robot10-nc-fix-3-review.md) of 449cbe08 | review/robot10-nc-fix-3-rv | session_01964izBwKVSW8D2Fjhmpn21 | RUNNING | 24/11 02:41Z (Foreman D depth 3)
