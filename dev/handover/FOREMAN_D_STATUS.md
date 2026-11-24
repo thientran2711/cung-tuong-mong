@@ -1534,3 +1534,4 @@ OPEN SEATS (mine; send_message "Foreman D = <new id>, report to it"):
 FOLLOW-UPS noted: net-build band-3 share 43 % > 30 % target (NPC→NPC oán saturation, reports/net-build.md §4); low NPC nights/visits on main (pre-existing harem economy, palace-distance rv note); ART REQUEST Phân cung picture → Foreman C via MAIN.
 Old-account seats (01964iz…): rv nc-fix-3 BwKVSW8D, rv bal-ranks-law4 ELFBavvy, runners A/B, fixer EqyR78Ga (asked to triage nc_vuong file) — they read STATUS.
 Hourly trigger trig_01K7fkGq5sw9RjGgoTxYLza6 DELETED by depth 1 at rollover; child makes its own (:37).
+- (24/11 09:16Z) D depth 1 ROLLED OVER → **FOREMAN D (depth 2) = session_01D3E3Na3nufuz83iygjVBum**. depth-1 hourly trigger deleted; depth 1 stops. Seats: report to depth 2.
