@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"dcca45fc+","t":"2026-11-24T04:24Z","c":"THIN P8: 4 chapter titles without placeholders (validator now rejects them), rdc-oldsave + rdc-shots, play test survives a lost page; build…","b":"a2abbf79691f","h":[{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"}]};
+window.CTM_BI={"s":"63ad70a8+","t":"2026-11-24T04:31Z","c":"REVIEW thin-p8 r1: law 6b/3/7 fixes on P8 roads","b":"e83d7fd7cbe9","h":[{"s":"45339cab+","t":"2026-11-24T02:53Z","c":"Việc nhờ: lời nhờ ghép mới, đến đều hơn mỗi kiếp"},{"s":"9b487835+","t":"2026-11-24T02:32Z","c":"Bảng tên tước hiệu không còn bị cắt chữ"},{"s":"f282779a+","t":"2026-11-24T03:05Z","c":"map-label-overlap review R3: PASS, report REVIEW R3 section"},{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -24925,7 +24925,7 @@ function rdcOpt(o,clim,band){const C=rdcB(),c={},w={},rel=[];let sc=0;
  for(const [k,n] of Object.entries(o.gain||{})){if(k==="sc")sc+=n*C.fx.sc;else if(k.startsWith("rel."))rel.push([k.slice(4),n]);else w[k]=(w[k]||0)+n*C.fx[k]}
  const X={n:o.n,c,w,rt:o.rt||"",rf:o.rf||""};if(o.wx)X.wx=o.wx;if(o.lx)X.lx=o.lx;if(sc)X.sc=sc;
  if(rel.length)X.go=(A,ok)=>{for(const [k,n] of rel)if(n<0||ok!==false)rdRel(A,k,n*C.fx.rel)};
- if(clim){const t=C.xs[o.stat]||C.xs.danh;const q=[C.xo[o.risk==="lo"?"lo":"hi"][band]||50,[t[0],o.stat,t[1]]];X.o=A=>rdOdds(q,A);X.l={};
+ if(clim){const t=C.xs[o.stat]||C.xs.danh;const q=[C.xo[o.risk==="lo"?"lo":"hi"][band]??C.xo.hi.a,[t[0],o.stat,t[1]]];X.o=A=>rdOdds(q,A);X.l={};
   X.e=o.risk==="lo"?["win","mid"]:["win","lose"]}
  return X}
 /* the real people a hồi names by title (law 6b, thin-p8 r1): Thái hậu / Hoàng hậu speak or appear → the hồi needs her alive (j67 need th / hh);
@@ -96137,7 +96137,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="a2abbf79691f";window.CTM_BUILD=BUILD;
+const BUILD="e83d7fd7cbe9";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

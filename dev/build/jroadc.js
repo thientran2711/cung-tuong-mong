@@ -26,7 +26,7 @@ function rdcOpt(o,clim,band){const C=rdcB(),c={},w={},rel=[];let sc=0;
  for(const [k,n] of Object.entries(o.gain||{})){if(k==="sc")sc+=n*C.fx.sc;else if(k.startsWith("rel."))rel.push([k.slice(4),n]);else w[k]=(w[k]||0)+n*C.fx[k]}
  const X={n:o.n,c,w,rt:o.rt||"",rf:o.rf||""};if(o.wx)X.wx=o.wx;if(o.lx)X.lx=o.lx;if(sc)X.sc=sc;
  if(rel.length)X.go=(A,ok)=>{for(const [k,n] of rel)if(n<0||ok!==false)rdRel(A,k,n*C.fx.rel)};
- if(clim){const t=C.xs[o.stat]||C.xs.danh;const q=[C.xo[o.risk==="lo"?"lo":"hi"][band]||50,[t[0],o.stat,t[1]]];X.o=A=>rdOdds(q,A);X.l={};
+ if(clim){const t=C.xs[o.stat]||C.xs.danh;const q=[C.xo[o.risk==="lo"?"lo":"hi"][band]??C.xo.hi.a,[t[0],o.stat,t[1]]];X.o=A=>rdOdds(q,A);X.l={};
   X.e=o.risk==="lo"?["win","mid"]:["win","lose"]}
  return X}
 /* the real people a hồi names by title (law 6b, thin-p8 r1): Thái hậu / Hoàng hậu speak or appear → the hồi needs her alive (j67 need th / hh);
