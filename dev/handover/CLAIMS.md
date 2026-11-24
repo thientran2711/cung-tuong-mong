@@ -1481,3 +1481,4 @@ SERVANT TRUST — acts toward another person's people (opus BIG; MAIN 119 07:58Z
 kit-optinfo SMALL review | review/kit-optinfo-r1 | session_01N1tNP3WNbdFEbb19kfqAVR (owner B) | RUNNING | 24/11 09:44Z
 robot-coop-fix-1 r2 BIG review | review/robot-coop-fix-1-r2 | session_01N1tNP2xZQymfgL6TKgMEcP (owner B) | RUNNING | 24/11 09:45Z
 | SELSCENE-9 (opus; successor of SELSCENE-8; briefs/M121-selscene-fix.md + SUCCESSOR NOTE) | review/selection-scene (from 2d7e55da); reports/selection-scene.md | MAIN 121 | session_01V1ZZH4SR1QdLaT7aXu5hUu | RUNNING | 24/11 09:56Z |
+rv servant-trust | review/servant-trust-rv | session_01D3E3NZh6xm1S3xPV8XpuMW | RUNNING | 24/11 09:57Z (Foreman D depth 2)
