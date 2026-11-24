@@ -123,7 +123,7 @@ const SELX_VOUT={benh:"{bully} sững lại; người xung quanh nhìn ngươi k
 function selxApply(side,c,f,sign){const D=BAL.selx;const Z=S.selx2;const who=k=>k==="bystander"?(c.bystanders||[]):c[k]?[c[k]]:[];let t=0;
  for(const [key,n] of Object.entries(side||{})){const [a,r]=key.split(".");if(a==="friend"||a==="grudge"){if(r==="ma"){Z.ma=(Z.ma||0)+(a==="friend"?1:-1)*n*D.maStep;continue}
    const s=a==="friend"?1:-1;who(r).forEach(v=>{if(v&&v!==S)relAdd(S,v,s*n*f)})}
-  else if(a==="duc")S.duc=cl((S.duc||0)+sign*n*D.ducStep,0,100);else if(a==="face")S.danh=cl((S.danh||0)-n*D.faceStep,0,100);else if(a==="time")t+=sign*n;else if(a==="fav")Z.fav0=(Z.fav0||0)+sign*n}return t}
+  else if(a==="duc")S.duc=cl((S.duc||0)+sign*n*D.ducStep,0,100);else if(a==="face")S.danh=cl((S.danh||0)+sign*n*D.faceStep,0,100);/* face in gain = she keeps face (Danh +), in loss = loses face (Danh −); before it always lowered Danh, so a «face» gain was a hidden loss (law 2/3) */else if(a==="time")t+=sign*n;else if(a==="fav")Z.fav0=(Z.fav0||0)+sign*n}return t}
 /* bystanders act by their nết (the seed's bystander table): defend → closer to the victim, cold to the bully; join → the reverse (law 1, NPC↔NPC) */
 function selxBystand(seed,c,f){const T=seed.bystander||{};for(const v of c.bystanders||[]){const N=selxNet(v);const act=["defend","join","silent","ma"].find(k=>(T[k]||[]).some(x=>N.includes(x)))||(R(2)?"silent":"defend");
   if(act==="defend"){if(c.victim&&c.victim!==v)relAdd(v,c.victim,f);if(c.bully&&c.bully!==v)relAdd(v,c.bully,-f)}else if(act==="join"){if(c.bully&&c.bully!==v)relAdd(v,c.bully,f);if(c.victim&&c.victim!==v)relAdd(v,c.victim,-f)}}}
@@ -137,7 +137,7 @@ function selxDrama(type,pool,then){const Z=S.selx2;const P=selxPick(type,pool);i
 /* a stance's option hint: its khắc (drama.k ± the seed's time steps) + its gains / what comes with it, in words with the cast's names (law 2: every stance shows what it is worth) */
 function selxStX(st,c,her){const D=BAL.selx;const nm=r=>r==="ma"?"Giáo tập ma ma":r==="bystander"?"người đứng xem":c[r]===S||her&&r==="victim"?"":c[r]?selxNm(c[r]):"";
  const w=(key,n,gain)=>{const [a,r]=key.split(".");if(a==="friend"||a==="grudge"){const who=nm(r);if(!who)return"";return `${who} ${a==="friend"?"quý ngươi hơn":"ghét ngươi hơn"}`}
-  if(a==="duc")return `Đức ${gain?"+":"-"}${n*D.ducStep}`;if(a==="face")return `Danh -${n*D.faceStep}`;if(a==="fav")return gain?"được để mắt tới":"";return""};
+  if(a==="duc")return `Đức ${gain?"+":"-"}${n*D.ducStep}`;if(a==="face")return `Danh ${gain?"+":"-"}${n*D.faceStep}`;if(a==="fav")return gain?"được để mắt tới":"";return""};
  let t=D.drama.k;const G=[],K=[];for(const [key,n] of Object.entries(st.gain||{})){if(key==="time"){t-=n;continue}const x=w(key,n,true);if(x)(/ghét|^Danh -|^Đức -/.test(x)?K:G).push(x)}
  for(const [key,n] of Object.entries(st.loss||{})){if(key==="time"){t+=n;continue}const x=w(key,n,false);if(x)(/quý ngươi/.test(x)?G:K).push(x)}
  if(!G.length&&t<D.drama.k)G.push("đỡ tốn khắc");return selxX(Math.max(0,t),G.join("; "),K.join("; "))}
