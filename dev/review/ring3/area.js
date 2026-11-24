@@ -18,7 +18,7 @@ function geo(){const s=st(),r=s.getBoundingClientRect();const q=x=>{const e=docu
 function css(){if(document.getElementById('kar-css'))return;const c=document.createElement('style');c.id='kar-css';c.textContent=`
 html.karon #tokens,html.karon #mefig,html.karon #stage .kmemark,html.karon #j59metag,html.karon .j59more,html.karon .kspet,html.karon #tokens .tok{visibility:hidden!important}
 html.kv1.karon .kshR{display:none!important}
-html.karon .kfoc-mood:not(.kar-say){display:none!important}
+html.karon .kfoc-mood:not(.kar-say),html.karon .khead.ksay{display:none!important}
 #kar{position:absolute;inset:0;z-index:1;overflow:hidden;contain:layout paint}
 #kar .kar-bg{position:absolute;left:0;top:0;background-size:100% 100%;will-change:transform;z-index:0}
 #kar .kar-f{position:absolute;left:0;top:0;transform-origin:50% 100%;will-change:transform,opacity;cursor:pointer;contain:layout}
@@ -81,7 +81,7 @@ function capFor(g){if(!g.cap)return;if(!g.capEl||!g.capEl.isConnected){g.capEl=d
    stale inline values (= the kit default slot) and the people chip counts THIS area (kitArea feed, request #7). */
 /* keep it so while the mock is on: the live rail re-paints on every render (MutationObserver = before the next paint, no one-frame jump) */
 let railMO=null;function railWatch(){if(railMO)return;railMO=new MutationObserver(()=>{if(window.__karOn)railFix()});railMO.observe(document.getElementById('game')||document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['style'],characterData:true})}
-function railFix(){try{railWatch();const kr=document.getElementById('krail');if(kr&&kr.parentNode===st()){kr.style.left='';kr.style.flexDirection=''}
+function railFix(){try{railWatch();/* 7b stale rail left: fixed in the kit (jrail, KK21 880c7c8b) — the mock no longer touches the rail */
  const a=AREAS[cur],c=document.querySelector('#krail .krailc .j59n');const tn=document.querySelector('#stage #kpname>span');if(a&&tn&&document.getElementById('kar')&&tn.textContent!=='Ngự hoa viên · '+a.n)tn.textContent='Ngự hoa viên · '+a.n;if(a&&c&&c.textContent!==String(count(a)))c.textContent=String(count(a))}catch(e){}}
 function tagsFix(){railFix();try{const a=AREAS[cur];if(!a)return;const F=figsOf(a).filter(m=>m.tg.style.display!=='none'&&m.el.style.display!=='none');
  const pr=m=>(m===selM?0:sel&&m.g===sel?1:2)*100-(m.z||0);F.sort((x,y)=>pr(x)-pr(y));const keep=[];
@@ -116,9 +116,9 @@ function swCover(a){const hud=document.querySelector('header.hud'),tb=document.g
 async function enter(i){const fromMap=!!window.__karMapOn||!document.querySelector('#stage #kar');let ov=null;if(fromMap){ov=swCover(AREAS[i]);await an(ov,[{opacity:0,transform:'scale(1.05)'},{opacity:1,transform:'none'}],{duration:240,easing:'cubic-bezier(.2,.7,.2,1)'}).finished}
  window.__karMapOn=0;{window.__k3quiet=1;tab='act';render();try{j77Tap('vuon')}catch(e){}await wait(160);try{j77Tap('vuon')}catch(e){}await wait(60)}/* phone shell: the here-tap = the game's own «show my place» (jk3 k3ShowPlace) */railFix();if(!document.querySelector('#stage #kar'))mount();else D=geo()
  const a=AREAS[i];cur=i;stageTitle('Ngự hoa viên · '+a.n);G.forEach(g=>{g.P.forEach(p=>p.m.el.style.display='none');if(g.capEl)g.capEl.style.display='none'});bgSet(a.x);
- place(a);tagsFix();/* RING-DESIGN-4: no see-through people — the camera settles on the whole layer (painting + people together, all opaque) */
+ place(a);tagsFix();if(ov)ov.remove();/* cut, never a cross-fade over the people (a fading cover would show them half see-through) *//* RING-DESIGN-4: no see-through people — the camera settles on the whole layer (painting + people together, all opaque) */
  L.style.transformOrigin='50% 92%';an(L,[{transform:'scale(1.07)'},{transform:'none'}],{duration:560,easing:'cubic-bezier(.2,.7,.2,1)'});
- a.g.forEach(g=>{if(g.capEl)an(g.capEl,[{opacity:0},{opacity:1}],{duration:260,delay:420})});if(ov)an(ov,[{opacity:1},{opacity:0}],{duration:300,easing:'ease-out'}).finished.then(()=>ov.remove());await wait(700)}
+ a.g.forEach(g=>{if(g.capEl)an(g.capEl,[{opacity:0},{opacity:1}],{duration:260,delay:420})});await wait(700)}
 async function back(){await unsel();const a=AREAS[cur];if(a){a.g.forEach(g=>g.capEl&&an(g.capEl,[{opacity:1},{opacity:0}],{duration:200}));await an(L,[{transform:'none'},{transform:'scale(1.05)'}],{duration:240,easing:'ease-in'}).finished;figsOf(a).forEach(m=>m.el.style.display='none')}return showMap()}
 /* focus: lit group / dim the rest (figures only; the painting keeps its brightness, owner 09:05Z) */
 /* focus = the ONE kit dim (KIT §98.3 kitDim: opaque figure-only copy with a static filter, BAL.kdim) on every figure outside the chosen group */

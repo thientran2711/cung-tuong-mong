@@ -14,7 +14,7 @@ def cell(d,k,r):
 rows=''.join(f"<tr><td>{n}</td>{''.join(cell(d,k,r) for d in ['fold','ipad'] for r in [1,4,6])}</tr>" for k,n in STEPS)
 def pair(n,cap):
   return f'<figure><div class="pair"><img loading="lazy" src="s3/fold-{n}.jpg" alt=""><img loading="lazy" class="ip" src="s3/ipad-{n}.jpg" alt=""></div><figcaption>{cap}</figcaption></figure>'
-PK=[('hang','Thẻ gỗ treo','các thẻ rơi xuống cạnh người, đung đưa rồi đứng yên; chạm một thẻ = thẻ nhấc lên và hiện dòng chi tiết, chạm lần nữa = chọn'),
+PK=[('hang','Thẻ gỗ treo','thẻ gỗ treo bằng dây trên một cột gỗ cạnh người đó (bên trống, từ ngang hông xuống), thả xuống rồi đung đưa; chạm một thẻ = thẻ nhấc lên, hiện đủ tên + lời đoán + Tốn, chạm lần nữa = chọn. Đây là bộ phận kit chung (thợ kit làm), vân gỗ vẽ bằng mã; khi C vẽ tranh gỗ thì chỉ việc thay vào'),
     ('fan','Quạt nút','các nút đầy đủ (tên + lời đoán + Tốn) xòe ra theo đường cong từ hông người đó, đọc được hết một lượt'),
     ('rib','Nan quạt giấy','các nút là nan quạt ghim ở tay người đó: quạt khép rồi mở ra; chạm một nan = nan đó xoay thẳng và trượt ra, chạm lần nữa = chọn')]
 pk=''
@@ -23,7 +23,8 @@ for k,n,d in PK:
 CHK=[('Không có đường chấm bầu dục (08:55Z)','Đạt — không vẽ vòng, không đường chấm'),
 ('Nền giữ độ sáng thường, chỉ người không được chọn mờ đi (09:05Z, 15:30Z)','Đạt — tranh nền không tối; nhóm/người không chọn mờ, người được chọn sáng'),
 ('Một màn, không vuốt trái phải trong một khu (09:10Z)','Đạt — mỗi khu là một màn; đổi khu bằng bản đồ khu'),
-('Nút, khung, bảng tên đều là đồ kit; không avatar tròn; người lạ = bóng xám «Người lạ» (09:15Z)','Đạt — kitPalaceMap, .kfoc-b, .pctabs, .kchip, bảng tên kscn; người lạ = bóng xám. Vân gỗ của «thẻ gỗ treo» chưa có trong kit → đã gửi yêu cầu kit'),
+('Nút, khung, bảng tên đều là đồ kit; không avatar tròn; người lạ = bóng xám «Người lạ» (09:15Z)','Đạt — kitPalaceMap, .kfoc-b, .pctabs, .kchip, bảng tên kscn; người lạ = bóng xám. thẻ gỗ treo là bộ phận kit chung mới (kitPick, thợ kit KK21)'),
+('Thẻ gỗ treo phải trông như thẻ gỗ thật (15:40Z)','Đạt — cột gỗ, thanh ngang, dây xoắn, thẻ vân gỗ viền sẫm; không còn là nút giấy'),
 ('Mẫu phải hoàn chỉnh, cùng một kiếp trên hai máy (14:50Z)','Đạt — cùng kiếp Phùng Uyển Ninh, cùng buổi trưa, cùng 15 người trong vườn (Dư đồ ghi «Ta + 15 bóng» = tổng các khu), cùng người được chọn (Quý nhân Tư Mã Ý Hoan) trên hai máy'),
 ('Người không được chọn mờ đi hoặc tối — KHÔNG trong suốt (15:30Z)','Đạt — người không chọn tối và nhạt màu nhưng vẫn đặc, không nhìn xuyên qua; bóng xám người hầu / người lạ cũng đặc. Máy kiểm từng ảnh và quét video mỗi 0,1 giây: 0 lỗi'),
 ('Bảng tên không bao giờ chồng lên nhau; tên không bị cắt','Đạt — máy kiểm từng ảnh và từng 0,1 giây video: 0 chỗ chồng, 0 chỗ cắt'),
@@ -49,7 +50,7 @@ table{{border-collapse:collapse;width:100%;font-size:14px}}td,th{{border-bottom:
 .vids{{display:grid;grid-template-columns:1fr 1.5fr;gap:10px}}@media (max-width:700px){{.vids{{grid-template-columns:1fr}}.pair{{flex-direction:column}}.pair img,.pair img.ip{{width:100%}}}}.rec{{border-left:4px solid var(--acc);padding:6px 12px}}</style></head><body><main>
 <h1>Ngự hoa viên chia khu + 3 kiểu chọn việc — mẫu 4</h1>
 <p>Cùng một kiếp (Phùng Uyển Ninh, Thường tại, buổi trưa), cùng 15 người thật trong vườn, trên Fold 755x1000 (trái) và iPad 1180x820 (phải). Tranh các khu hiện là cắt từ một bức Ngự hoa viên có sẵn (chỉ cho mẫu); bản đồ vườn có dấu «tạm».</p>
-<div class="rec"><b>Khuyến nghị của em:</b> dùng <b>Thẻ gỗ treo</b> cho mọi màn nói chuyện giữa người với người. Lý do: gọn nhất trên Fold (2 cột thẻ ngắn cạnh người, không che mặt), giống luật lá bài sếp đã chốt (chạm = nhấc lên đọc, chạm lần nữa = chọn), hoạt cảnh rơi–đung đưa rõ «cảm giác game». Quạt nút dễ đọc nhất (thấy hết lời đoán và Tốn một lượt) nhưng chiếm nhiều chỗ và ít lạ mắt. Nan quạt giấy đẹp và lạ nhất khi mở, nhưng chữ bị nghiêng nên đọc chậm hơn, nhất là trên Fold. Vân gỗ cho thẻ cần kit làm (em đã gửi yêu cầu).</div>
+<div class="rec"><b>Khuyến nghị của em:</b> dùng <b>Thẻ gỗ treo</b> cho mọi màn nói chuyện giữa người với người. Lý do: gọn nhất trên Fold (2 cột thẻ ngắn cạnh người, không che mặt), giống luật lá bài sếp đã chốt (chạm = nhấc lên đọc, chạm lần nữa = chọn), hoạt cảnh rơi–đung đưa rõ «cảm giác game». Quạt nút dễ đọc nhất (thấy hết lời đoán và Tốn một lượt) nhưng chiếm nhiều chỗ và ít lạ mắt. Nan quạt giấy đẹp và lạ nhất khi mở, nhưng chữ bị nghiêng nên đọc chậm hơn, nhất là trên Fold. Thẻ gỗ giờ là bộ phận kit chung, dùng được cho mọi màn nói chuyện.</div>
 <h2>Video</h2><div class="vids"><div><b>Fold</b><br><video controls preload="metadata" src="vid/fold-1x.mp4"></video><br><a href="vid/fold-2x.mp4">chậm 2×</a></div><div><b>iPad</b><br><video controls preload="metadata" src="vid/ipad-1x.mp4"></video><br><a href="vid/ipad-2x.mp4">chậm 2×</a></div></div>
 <h2>1. Dư đồ → bản đồ khu của Ngự hoa viên</h2>{pair('d0','Dư đồ: Ngự hoa viên ghi «Ta + 15 bóng»')}{pair('m1','Bấm Ngự hoa viên: tầng thứ hai — 5 khu, mỗi khu ghi số bóng người; chọn một khu')}
 <h2>2. Từng khu (tối đa 3–4 nhóm một màn)</h2>{pair('a0','Ngự đạo (người hầu đứng sau lưng chủ tử, bóng xám)')}{pair('a1','Vườn hoa')}{pair('a2','Thủy tạ')}{pair('a3','Đình cờ')}{pair('a4','Non bộ (iPad: khu này vắng vì các nhóm đã đứng đủ ở khu khác)')}

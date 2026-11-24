@@ -13,7 +13,7 @@ const html=`<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta nam
 .kchip{display:inline-block;border-radius:999px;background:#fffaf0;border:1px solid #c9a35a;padding:2px 9px}.pct{border:1px solid #c9a35a;border-radius:999px;background:#fffaf0;padding:2px 9px;font-size:12px}.pct.on{background:#8a2c2c;color:#fff}
 button.go{font-size:16px;padding:8px 16px;margin:6px 0;border-radius:10px;border:1px solid #b8892b;background:#fffaf0}
 ${css}</style></head><body><main id="stage" class="stage j59"></main><div id="out"><b>Đo độ mượt hoạt cảnh khu vườn</b> (cùng bộ máy hoạt cảnh, cùng tranh; chưa có giao diện game).<br><button class="go" id="go">Bắt đầu đo</button><div id="res"></div></div>
-<script>var tab='act';function render(){}function j77Tap(){}var CR=${JSON.stringify(CR)};${scen}</script><script>${area}</script>
+<script>var tab='act';function render(){}function j77Tap(){}var CR=${JSON.stringify(CR)};${scen}</script><script>${rd('jkpick.js')}</script><script>${area}</script>
 <script>
 const W=ms=>new Promise(r=>setTimeout(r,ms));async function meas(fn,ms){const ft=[];let l=performance.now(),on=1;const f=t=>{if(!on)return;ft.push(t-l);l=t;requestAnimationFrame(f)};requestAnimationFrame(f);await fn();await W(ms);on=0;ft.shift();ft.sort((a,b)=>a-b);const p=q=>ft[Math.min(ft.length-1,Math.floor(ft.length*q))]||0;return {p50:p(.5),p95:p(.95),jank:ft.filter(x=>x>33.4).length,n:ft.length}}
 async function run(){document.getElementById('go').disabled=true;const R=[];const add=(n,r)=>{R.push([n,r]);show(R)};
