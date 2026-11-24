@@ -102,10 +102,18 @@ function uiScan(opt){const W=innerWidth,H=innerHeight,out=[];const strip=s=>Stri
   /* picture placeholders (pictures are blocked: portraits are not checked) and pointer-events:none floaters (stat pops) are not layout */
   const T=els.filter(e=>vis(e)&&!/Đang thỉnh tranh/.test(e.textContent)&&!deco(e)&&[...e.childNodes].some(n=>n.nodeType===3&&/\p{L}{2}/u.test(n.textContent))).slice(0,600).map(e=>{const rg=document.createRange();rg.selectNodeContents(e);/* per line box: a wrapped inline chip is two boxes, not one tall rectangle */
    return{e,rs:[...rg.getClientRects()].filter(r=>r.width>4&&r.height>4)}}).filter(x=>x.rs.length);
+  /* E-FIX-2 (E round 1 «kbk-rh × kbk-rh» on every Fold tab): a text she cannot see is not «text over text» — the Tuần lục flip-book stacks its
+     leaves, so each header lies on the same header of the leaves under it. Seen = at one of 5 points of one of its line boxes the top element is it (a text partly covered by another text is still seen and reported;
+     one covered at every point — a leaf under the open page — is not) */
+  /* flip-book leaves (kitBook .kbk-sheet, 3D faces): each leaf is a whole opaque page laid on the others; hit-testing inside preserve-3d is not reliable
+     (a leaf under the spread can answer elementFromPoint), so two texts on DIFFERENT leaves are never «text over text» */
+  const leaves=(x,y)=>{const a=x.closest('.kbk-sheet'),b=y.closest('.kbk-sheet');return !!(a&&b&&a!==b)||!!(a&&b&&a===b&&x.closest('.kbk-face')!==y.closest('.kbk-face'))};
+  const seenT=x=>{if(x.__seen!=null)return x.__seen;for(const r of x.rs){for(const [fx,fy] of [[.5,.5],[.15,.3],[.85,.3],[.15,.7],[.85,.7]]){const cx=r.left+r.width*fx,cy=r.top+r.height*fy;if(cx<0||cy<0||cx>=W||cy>=H)continue;
+   const t=document.elementFromPoint(cx,cy);if(!t||t===x.e||x.e.contains(t))return x.__seen=true}}return x.__seen=false};
   for(let i=0;i<T.length;i++)for(let j=i+1;j<T.length;j++){const a=T[i],b=T[j];if(a.e.contains(b.e)||b.e.contains(a.e))continue;let hit=false;
    for(const r1 of a.rs){for(const r2 of b.rs){const ix=Math.min(r1.right,r2.right)-Math.max(r1.left,r2.left),iy=Math.min(r1.bottom,r2.bottom)-Math.max(r1.top,r2.top);
     if(ix>3&&iy>3&&ix*iy>.2*Math.min(r1.width*r1.height,r2.width*r2.height)){hit=true;break}}if(hit)break}
-   if(hit&&scrollAnc(a.e)===scrollAnc(b.e))out.push({k:'text-overlap',msg:'text over text: '+name(a.e)+' × '+name(b.e),ex:label(a.e).slice(0,30)+' × '+label(b.e).slice(0,30)})}}
+   if(hit&&scrollAnc(a.e)===scrollAnc(b.e)&&seenT(a)&&seenT(b)&&!leaves(a.e,b.e))out.push({k:'text-overlap',msg:'text over text: '+name(a.e)+' × '+name(b.e),ex:label(a.e).slice(0,30)+' × '+label(b.e).slice(0,30)})}}
  const txt=strip(root.innerText||'');
  if(/%/.test(txt)){const i=txt.indexOf('%');out.push({k:'word',msg:'% shown to the player',ex:txt.slice(Math.max(0,i-60),i+10)})}
  /* odds words: the ladder is READ from the game (KIT_ODDS: top-level const of j79, not a window property), never typed here */
@@ -154,6 +162,10 @@ async function life(job){const t0=Date.now();const R={job,bugs:[],cps:0,ui:{scan
  const metr=async(c)=>{try{const m=(await c.send('Performance.getMetrics')).metrics;const g=k=>(m.find(x=>x.name===k)||{}).value||0;return [Math.round(g('JSHeapUsedSize')/1048576),g('Nodes'),g('JSEventListeners'),g('Documents')]}catch(e){return null}};
  const rss=()=>{try{return Math.round(require('child_process').execSync("ps -eo rss,args | grep -- '--type=renderer' | grep -v grep | awk '{s+=$1} END {print s+0}'").toString()/1024)}catch(e){return null}};
  const memSample=async()=>{const sec=Math.round((Date.now()-t1)/1e3);const m=cdp&&await metr(cdp);if(m){const yr=await p.evaluate(()=>{try{return S&&S.year||0}catch(e){return 0}}).catch(()=>0);R.mem.bot.push([sec,...m,yr])}/* [s, heap MB, nodes, listeners, docs, game year] */
+  /* E-FIX-2 (E round 1 «bot page memory keeps growing»): WHERE the nodes are — nodes IN the document (by top-level holder) vs the CDP count (which also
+     holds detached nodes still referenced from JS) → R.mem.census [s, docNodes, cdpNodes, [[holder, n]×5], logs, Q] */
+  if(m){const c=await p.evaluate(()=>{const tops=[...document.body.children].map(e=>[(e.id?'#'+e.id:e.tagName.toLowerCase()+'.'+String(e.className).split(' ')[0]),e.getElementsByTagName('*').length+1]).sort((a,b)=>b[1]-a[1]).slice(0,5);
+   let L=0,q=0;try{L=(S.logs||[]).length;q=Q.length}catch(e){}return [document.getElementsByTagName('*').length,tops,L,q]}).catch(()=>null);if(c)(R.mem.census=R.mem.census||[]).push([sec,c[0],m[1],c[1],c[2],c[3]])}
   for(const d of DEV){if(!ui[d].__cdp){ui[d].__cdp=await ui[d].context().newCDPSession(ui[d]).catch(()=>null);if(ui[d].__cdp)await ui[d].__cdp.send('Performance.enable').catch(()=>{})}
    const u=ui[d].__cdp&&await metr(ui[d].__cdp);if(u)(R.mem.ui[d]=R.mem.ui[d]||[]).push([sec,...u])}
   const r=rss();if(r!=null)R.mem.rss.push([sec,r])};
@@ -186,7 +198,7 @@ async function life(job){const t0=Date.now();const R={job,bugs:[],cps:0,ui:{scan
  for(const [d,m] of (R.uiErrs||[]))bug('js','['+d+' real page] '+m.split('\n')[0].slice(0,200),'');delete R.uiErrs;await memSample().catch(()=>{});
  /* a page whose JS heap or DOM keeps growing over the life (last samples ≥ 2× the early ones and +150 MB heap / +20000 nodes) = a leak finding */
  const grow=(S0,lab)=>{if(!S0||S0.length<6)return;const a=S0.slice(1,4),z=S0.slice(-3);const av=(x,i)=>x.reduce((s,r)=>s+r[i],0)/x.length;
-  const h0=av(a,1),h1=av(z,1),n0=av(a,2),n1=av(z,2);if((h1>2*h0&&h1-h0>150)||(n1>2*n0&&n1-n0>20000))bug('mem',lab+' memory keeps growing over the life (leak)','JS heap '+Math.round(h0)+' → '+Math.round(h1)+' MB · DOM nodes '+Math.round(n0)+' → '+Math.round(n1)+' · listeners '+Math.round(av(a,3))+' → '+Math.round(av(z,3))+' over '+z[z.length-1][0]+' s',{save:st.r.lastSave})};
+  const h0=av(a,1),h1=av(z,1),n0=av(a,2),n1=av(z,2);if((h1>2*h0&&h1-h0>150)||(n1>2*n0&&n1-n0>20000))bug('mem',lab+' memory keeps growing over the life (leak)','JS heap '+Math.round(h0)+' → '+Math.round(h1)+' MB · DOM nodes '+Math.round(n0)+' → '+Math.round(n1)+' · listeners '+Math.round(av(a,3))+' → '+Math.round(av(z,3))+' over '+z[z.length-1][0]+' s'+(/bot page/.test(lab)&&R.mem.census&&R.mem.census.length?(()=>{const c0=R.mem.census[0],c1=R.mem.census[R.mem.census.length-1];return ' · in the document '+c0[1]+' → '+c1[1]+' nodes (rest = detached, held by JS) · biggest holder '+JSON.stringify(c1[3][0])+' · S.logs '+c0[4]+' → '+c1[4]})():''),{save:st.r.lastSave})};
  grow(R.mem.bot,'bot page (game, render off)');for(const d of DEV)grow(R.mem.ui[d],'['+d+'] real page');
  }catch(e){const m=String(e.message).split('\n')[0];/* a tab that dies mid-life (Target crashed: renderer out of memory) is a game finding (memory growth over a long life), not a runner fault */
   if(/Target crashed|Page crashed/i.test(m)){const mb=R.mem&&R.mem.bot||[],rs=R.mem&&R.mem.rss||[];bug('crash','browser tab crashed mid-life (renderer out of memory?)','after '+Math.round((Date.now()-t0)/1e3)+' s of play · last bot-page sample [s, heap MB, nodes, listeners, docs] '+JSON.stringify(mb.slice(-1)[0]||null)+' (first '+JSON.stringify(mb[1]||mb[0]||null)+') · renderer RSS MB '+JSON.stringify(rs.slice(-1)[0]||null))}else bug('harness','runner error: '+m,String(e.stack).slice(0,400))}

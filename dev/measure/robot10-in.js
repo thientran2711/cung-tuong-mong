@@ -11,7 +11,7 @@ const where=()=>{try{return S?`năm ${S.year} th${S.month} t${S.tuan} b${S.buoi|
 /* one bug per key (type + message); n counts repeats; the repro save is the save taken at the start of the buổi it happened in */
 function bug(type,msg,detail){const key=type+"|"+String(msg).slice(0,160);const b=R.seen[key];if(b){b.n++;return}
  const x={type,msg:String(msg).slice(0,300),detail:detail==null?"":String(detail).slice(0,600),at:where(),buoi:R.buoi,n:1,save:R.lastSave};R.seen[key]=x;R.bugs.push(x)}
-R.bug=bug;
+R.bug=bug;R.auditOpt=(o,m)=>auditOpt(o,m||{});/* E-FIX-2: the audit is callable by dev/test/r10e-audit.js */
 
 /* ---- forced thân phận: origin via window.__forceOrigin (j2 start), road = the j67 premise arc picked in a67init (jst14) ---- */
 window.__origO=C.origin;window.__ovX=1;window.__forceOrigin=C.origin;
@@ -68,14 +68,18 @@ R.words_=words;
 /* ---- one-core number audit (law 4): a number printed on an option ("Sủng +3", "Bạc -20") must be the number the option applies ---- */
 const LAB={"Sủng":"sung","Danh":"danh","Đức":"duc","Bạc":"bac","Sức khỏe":"suc","Sức":"suc","Sắc":"sac","Tài":"tai","Tâm cơ":"tamco","Thái hậu":"th","Hoàng hậu":"hh","Tai mắt":"mat"};
 const RX=/(Sủng|Danh|Đức|Bạc|Sức khỏe|Sức|Sắc|Tài|Tâm cơ|Tai mắt)\s*([+\-−–])\s*(\d+)/g;
-function auditOpt(o,m){const txt=strip((o.n||"")+" | "+(o.x||""));const key=txt;if(R.seen["o|"+key])return;R.seen["o|"+key]=1;R.opts++;
+/* robot10 E-FIX-2 (E round 1: «Bạc +8» vs bac=20, «Tâm cơ +3» vs tamco=-1, «Sủng +2» vs sung=-1 = false positives): audit the line SHE SEES — the dialog
+   line the kit draws (a road beat's own j67 line «tốn: … · thành: …», else dilLineRaw: «ngay: <fx> · <x>»), not o.n + o.x (x alone has no «ngay:»
+   part, and a road beat's x is its WIN block while its fx is the price) */
+function seenLine(o){try{if(o&&o.j67)return typeof oddsLead==="function"?oddsLead(o,o.j67):o.j67;if(typeof dilLineRaw==="function")return dilLineRaw(o)}catch(e){}return o&&o.x||""}
+function auditOpt(o,m){const txt=strip((o.n||"")+" | "+seenLine(o));const key=txt;if(R.seen["o|"+key])return;R.seen["o|"+key]=1;R.opts++;
  words(txt,"option «"+strip(m.t||m.title||"").slice(0,60)+"»");
  /* segments: "thành:" numbers belong to the win block, "hỏng:" to the loss block, the rest to the sure effect / cost */
  const obj=x=>x&&typeof x==="object"?x:null;const PW=[o.w,o.win].map(obj).filter(Boolean),PL=[o.l,o.lose].map(obj).filter(Boolean),PF=[o.fx,o.c,o.cost].map(obj).filter(Boolean);
  /* (typed-stat review, 4/4 false positives): «thắng:» = «thành:» (win on the roll; fx is the stake); a bare number with no marker may be the win of a
     sure option → compared with the win block AND the cost; the weather note «đi kiệu … Bạc −N» is charged later (jweather wxAfter, BAL.wx.kieuBac): skipped */
- txt.split(/(?=thành:|thắng:|hỏng:|thua:|kèm:|tốn:|được:|mất:)/i).forEach(seg=>{if(/kiệu/i.test(seg))return;const pools=/^(thành|thắng):/i.test(seg)?PW:/^(hỏng|thua):/i.test(seg)?PL:PF.concat(PW);if(!pools.length)return;
- seg.replace(RX,(a,lab,sg,n)=>{const k=LAB[lab];const v=(sg==="+"?1:-1)*(+n);const vals=pools.map(p=>p[k]).filter(x=>typeof x==="number");
+ txt.split(/(?=thành:|thắng:|hỏng:|thua:|kèm:|tốn:|được:|mất:|ngay:)/i).forEach(seg=>{if(/kiệu/i.test(seg))return;const pools=/^(thành|thắng):/i.test(seg)?PW:/^(hỏng|thua):/i.test(seg)?PL:PF.concat(PW);if(!pools.length)return;
+ seg.replace(RX,(a,lab,sg,n,off)=>{/* E-FIX-2: «mỗi tháng Bạc +8» = a per-period amount paid later (tai mắt pay), not this option's effect */if(/mỗi\s+(tháng|tuần|năm|ngày|buổi|kỳ)\s*$/i.test(seg.slice(Math.max(0,off-14),off)))return a;const k=LAB[lab];const v=(sg==="+"?1:-1)*(+n);const vals=pools.map(p=>p[k]).filter(x=>typeof x==="number");
   if(!vals.length)return a;/* not in any effect block: a description, not a promise */
   if(!vals.some(x=>x===v||Math.abs(x)===Math.abs(v)))bug("number","option text «"+a+"» but the effect applies "+k+"="+vals.join("/"),"«"+txt.slice(0,160)+"» in «"+strip(m.t||m.title||"").slice(0,60)+"» fx="+JSON.stringify(o.fx||{}).slice(0,120));return a})})}
 {const c0=chooseM;chooseM=function(i){try{const m=Q[0];if(m&&m.opts){if(!m.__r10){m.__r10=1;words((m.t||m.title||"")+" "+(m.h||""),"card");m.opts.forEach(o=>auditOpt(o,m))}}}catch(e){}return c0.apply(this,arguments)}}

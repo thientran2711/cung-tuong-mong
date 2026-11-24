@@ -16,6 +16,9 @@ function note(k,d){window.__acts[k]=(window.__acts[k]||0)+1;(window.__ring=windo
 function rvBtns(i){const ck=S.turn+'_'+S.tuan+'_'+(S.buoi||0)+'_'+used+'_'+S.suc+'_'+S.bac+'_'+rivals.length+'_'+i+'_'+(rivals[i]&&rivals[i].id);window.__rvc=window.__rvc||{};if(window.__rvc.k!==S.turn+'_'+S.tuan)window.__rvc={k:S.turn+'_'+S.tuan};if(window.__rvc[ck])return window.__rvc[ck];return window.__rvc[ck]=rvBtns0(i)}
 function rvBtns0(i){const v=rivals[i];const d=document.createElement('div');d.innerHTML=rvButtons(v,i);return [...d.querySelectorAll('button[data-r]')].filter(b=>!b.disabled).map(b=>b.dataset.a)}
 function modalStep(sens){
+  /* robot10 E-FIX-2 (E round 1 TIMEOUT «Bỏ cuộc?» opts [] over a MƯU game): leaving a live mini-game with the kit ✕ asks the kit confirm «Bỏ cuộc?»
+     (j82 kg82Ask → j79 kitConfirm on #modal); press its yes button = the game's own lose path (0/10), as she would — the dialog has no Q opts */
+  {const y=document.querySelector('#modal:not([hidden]) [data-kcf-yes]');if(y&&!y.disabled&&y.isConnected){y.click();try{note('kcfYes',(y.textContent||'').trim())}catch(e){}return true}}
   {const k=q('#kg82ok');const ovOn=q('#ov')&&!q('#ov').hidden;/* kit-close (KIT 32.10) hides the result's close-only button behind ✕: press it while the result shows */if(k&&(k.offsetParent!==null||(k.isConnected&&ovOn))){k.click();return true}const sk=q('#kg82skip');if(sk&&sk.offsetParent!==null){sk.click();return true}}
   if(!q('#ov').hidden){const ok=q('#mgok')||q('#kg92ok');if(ok){ok.click();return true}const sk=q('#mgskip');if(sk&&!sk.hidden){sk.click();return true}if(window.__ovX){const kx=q('#ov .kit-x');if(kx&&kx.offsetParent!==null){kx.click();return true}}/* robot10: a game with no Xong / Bỏ qua — leave it with the kit ✕ as she would */return true}
   if(Q.length){
