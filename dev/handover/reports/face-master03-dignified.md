@@ -10,6 +10,9 @@ Identity uploads: c04 EbcFFhnuuO, c10 ksXxxbr16B, c16 cpwVVY30eP, c22 rgoLLr0xtc
 |---|---|---|---|
 | m04 A16 | 1lBjL83r4r | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, smile as spec; identity vs source not pixel-compared |
 | c04 A16 | MByeXxyDCm | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg; identity not pixel-compared |
+| c10 A16 | xS8swCZjfW | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared |
+| c16 A16 | lJhUPp4gv9 | DONE (looked) | same QC; background slightly pinkish-ivory |
+| c22 A16 | 0e7MoFDTfW | DONE (looked) | same QC; background slightly pinkish-ivory |
 
 Prompt texts at /home/user/wt/dig-out/p{16,26,51,63}.txt may be wiped: regenerate with the cut sentence script (delete exactly the one operator sentence).
 
