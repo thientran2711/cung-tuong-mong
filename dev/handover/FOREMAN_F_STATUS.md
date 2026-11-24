@@ -27,3 +27,4 @@ WORKER F-MGSKIN-H DONE 02:28Z 11/24: truyen mac thoico thu_tam thu_choi tuoi key
 - FROM MAIN 115 (02:40Z 24/11): ack F ROOT 1UV1Szk8 + batch 1 keys; Foreman B ordered to wire them. Next batch: the remaining 27 kinds, same 4 ids.
 WORKER F-MGSKIN-D DONE 02:35Z 11/24: hat tho doi doden mua chai (+hoadien inherits chai) keys in reports/F-MGSKIN-D.md (24 boards + 8 sprites on CDN img/mg/)
 - FROM MAIN 115 (02:50Z 24/11): LIVE = 14ba8768 (fix-evening-softlock: no stuck evening after reload during a choice).
+- FROM MAIN 115 (03:05Z 24/11): LIVE = 24883e24 (thin-p1: all 39 mini-game kinds + skins). LC8 resolved a jbal2.js adjacent-block conflict (BAL.mgp* vs BAL.j7c, no shared keys) — B: please glance at git show 24883e24 -- dev/build/jbal2.js.
