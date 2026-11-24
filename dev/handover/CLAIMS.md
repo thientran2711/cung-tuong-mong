@@ -1497,11 +1497,11 @@ ROBOT-COOP fixer #4 (fix-3, onecore) | review/robot-coop-fix-3, review/robot10-o
 | KK19 kit keeper (sonnet; successor of KK18; HANDOVER top of reports/MOCK-STAGE.md) | review/kit-* | MAIN 122 | session_01V1ZZH551R5eFMgZWLvawik | RUNNING | 24/11 11:17Z |
 rv servant-trust r2 (opus BIG; briefs/D-servant-trust-review-r2.md; target 2c1c2bfc) | review/servant-trust-rv | session_01D3E3NbdduX9tP1Nv41ptUk | RUNNING | 24/11 11:41Z (Foreman D depth 3)
 FIX promo-build-2 r1 (opus BIG; briefs/D-promo-build-2-fix.md; from de24c1ae) | review/promo-build-2-rv | session_01D3E3NYmiFCzMBQ7S9iptKN | RUNNING | 24/11 11:51Z (Foreman D depth 3)
-| ROBOT-COOP RUNNER U14 pairs 13-14 SWAP=1 SEED=1 ×10 kiếp (sonnet; briefs/E-coop-runner.md; ORDER MAIN 122 11:40Z) | dev/handover/robot/coop-U14-* | FOREMAN E (child3) | (queued: waits for test-mrfoot on main) | QUEUED | 24/11 11:58Z |
-| ROBOT-COOP RUNNER U15 pairs 15-16 SWAP=0 | dev/handover/robot/coop-U15-* | FOREMAN E (child3) | (queued) | QUEUED | 24/11 11:58Z |
-| ROBOT-COOP RUNNER U16 pairs 15-16 SWAP=1 | dev/handover/robot/coop-U16-* | FOREMAN E (child3) | (queued) | QUEUED | 24/11 11:58Z |
-| ROBOT-COOP RUNNER U17 pairs 17-18 SWAP=0 | dev/handover/robot/coop-U17-* | FOREMAN E (child3) | (queued) | QUEUED | 24/11 11:58Z |
-| ROBOT-COOP RUNNER U18 pairs 17-18 SWAP=1 | dev/handover/robot/coop-U18-* | FOREMAN E (child3) | (queued) | QUEUED | 24/11 11:58Z |
+| ROBOT-COOP RUNNER U14 pairs 13-14 SWAP=1 SEED=1 ×10 kiếp (sonnet; briefs/E-coop-runner.md; ORDER MAIN 122 11:40Z) | dev/handover/robot/coop-U14-* | FOREMAN E (child4) | session_01DgYSWm8buMnCdRUuNmh1do | RUNNING | 24/11 11:58Z |
+| ROBOT-COOP RUNNER U15 pairs 15-16 SWAP=0 | dev/handover/robot/coop-U15-* | FOREMAN E (child4) | session_01DgYSWopMPC7t2kQVrrP187 | RUNNING | 24/11 11:58Z |
+| ROBOT-COOP RUNNER U16 pairs 15-16 SWAP=1 | dev/handover/robot/coop-U16-* | FOREMAN E (child4) | session_01DgYSWme7viyfpYaqM6vM7t | RUNNING | 24/11 11:58Z |
+| ROBOT-COOP RUNNER U17 pairs 17-18 SWAP=0 | dev/handover/robot/coop-U17-* | FOREMAN E (child4) | session_01DgYSWoqhFR6eEQzbDDKqY6 | RUNNING | 24/11 11:58Z |
+| ROBOT-COOP RUNNER U18 pairs 17-18 SWAP=1 | dev/handover/robot/coop-U18-* | FOREMAN E (child4) | session_01DgYSWmpKLyR9tiAbos763w | RUNNING | 24/11 11:58Z |
 | ROBOT-COOP RUNNER U19 pairs 19-20 SWAP=0 | dev/handover/robot/coop-U19-* | FOREMAN E (child3) | (queued) | QUEUED | 24/11 11:58Z |
 | ROBOT-COOP RUNNER U20 pairs 19-20 SWAP=1 | dev/handover/robot/coop-U20-* | FOREMAN E (child3) | (queued) | QUEUED | 24/11 11:58Z |
 rv net-build r2 (opus BIG; briefs/D-net-build-review-r2.md; target e41f4f79) | review/net-build-rv | session_01D3E3NaeN3VTQuhYDqui8cJ | RUNNING | 24/11 12:00Z (Foreman D depth 3)
