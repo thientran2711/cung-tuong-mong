@@ -328,7 +328,7 @@ function selxRmT(R){const tok=k=>(selxRoyals().find(x=>x[0]===k)||[])[2];const T
 (function(){const d0=selxDay1;selxDay1=function(){if(!selxCo())return d0.apply(this,arguments);const Z=S.selx2;if(!Z||Z.girls&&Z.girls.length)return;
  let R=selxRmOpen();
  if(R)Z.girls=R.g.map(selxJ);
- else if(worldOn()){Z.girls=selxGirls();R=S.selxRm={g:null,t:{},art:"",res:[],in:0,c0:[S.turn||0,S.tuan||0]};/* c0: the room clock at the draw (an array: it rides the live diff) */
+ else if(worldOn()){Z.girls=selxGirls();try{if(typeof figPick==="function"&&(typeof figxReady!=="function"||figxReady()))Z.girls.forEach(v=>figPick(v))}catch(e){console.error("selx faces",e)}/* each girl's face is the host's, given at the draw: it rides R.g (one person, one face on both seats) */R=S.selxRm={g:null,t:{},art:"",res:[],in:0,c0:[S.turn||0,S.tuan||0]};/* c0: the room clock at the draw (an array: it rides the live diff) */
   try{const p=(type,k)=>{const e=selxTestPick(type,k);if(e)R.t[type]={id:e.id,k}};p("doidap","T");p("hanhxu","H")}catch(e){console.error("selx room tests",e)}
   try{R.art=(kc2SelArts()[0]||[""])[0]||""}catch(e){}
   try{selxAskNpc()}catch(e){}/* the girls ask the ma ma on day 1 (law 1) — here, before their answers are fixed */
@@ -370,6 +370,17 @@ window.selxClkSync=selxClkSync;
    keys of different people met. Her id is the same on both seats (the room draw) and is her key once she enters rivals («r<id>»): she keeps that key
    from the first day, so what she learnt of her name carries over to the world person, and no counter is spent. */
 (function(){if(typeof kOf61!=="function")return;const k0=kOf61;kOf61=function(e){try{if(e&&e.tuNu&&e.id!=null&&S&&!(rivals||[]).includes(e)){const k="r"+e.id;e.kk=k;/* j61 k61PortEnt finds a person out of rivals only by .kk (else «known»: a stranger's plate showed her name) */if(!(rivals||[]).some(v=>v&&v.id===e.id))KREG[k]=e;return k}}catch(x){}return k0.apply(this,arguments)};window.kOf61=kOf61})();
+/* ONE FACE PER GIRL, ONE WORLD FACE LIST (SELSCENE-12, coop-e2e «the same world» S.fidUsed.83 A=undefined B="consort:c20"): the girls of the days were drawn
+   with no face id, so each seat picked one at render (j39 figPick), and on the guest (thin room level 3, where jcoophl's guard is off) the pick went
+   into HER S.fidUsed — a world list the host never had (a6 trace: consort:c29 / c12 / c30 added on the guest, week 0), and the same girl could
+   wear another face on the other seat. Rule (host owns faces, law 6b): the host gives each girl her face at the draw (selxDay1) or at its first pick,
+   written into the room cohort (S.selxRm.g, live diff); the guest wears that face, and a pick for a girl of the days never grows her world list. */
+(function(){if(typeof figPick!=="function")return;const p0=figPick;figPick=function(who){try{if(who&&who.tuNu&&who.id!=null&&S&&selxCo()&&!(rivals||[]).includes(who)){
+  const R=S.selxRm,g=R&&Array.isArray(R.g)?R.g.find(x=>x&&x.id===who.id):null;
+  if(worldOn()){const k=p0.apply(this,arguments);if(k&&g&&g.fid!==k)g.fid=k;return k}
+  if(g&&typeof g.fid==="string"&&g.fid&&who.fid!==g.fid)who.fid=g.fid;
+  const U=typeof figUsed==="function"?figUsed():null,n=U?U.length:0;const k=p0.apply(this,arguments);
+  if(U&&k&&U.length>n){const i=U.lastIndexOf(k);if(i>=n)U.splice(i,1)}return k}}catch(e){console.error("selx fig",e)}return p0.apply(this,arguments)};window.figPick=figPick})();
 /* same group: a kit plate (j61 k61PortEnt → kitKnownName) of a girl not keyed yet read «known» (her name on a stranger) until something else keyed her */
 (function(){if(typeof k61PortEnt!=="function")return;const p0=k61PortEnt;k61PortEnt=function(p){try{if(p&&p.tuNu&&p.id!=null&&!p.kk&&S&&!(rivals||[]).includes(p))kOf61(p)}catch(e){}return p0.apply(this,arguments)};window.k61PortEnt=k61PortEnt})();
 (function(){if(typeof render!=="function")return;const r0=render;render=function(){selxClkSync();return r0.apply(this,arguments)};window.render=render})();
