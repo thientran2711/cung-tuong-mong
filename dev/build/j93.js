@@ -216,6 +216,9 @@ const KM_BOX={tray:["mo-tray","mo-tray-open","Mâm thưởng"],chest:["mo-chest"
    of it one by one into the spotlight (KIT §54.1 kitRevealHTML: the kit graded frame kitItem "xl", name, grade chip), stays ~1.3 s glowing in its
    grade colour, and settles on the shelf under the box; the silver comes last; then the list (grade chip · name · note) + Nhận.
    Tap during the reveal = skip to the end. Timings BAL.reveal (jbal2). Items arrive lowest grade first, the best one last. */
+/* KIT §82 title plate as the backing of every kmov caption (reward title + «Chạm để mở»): readable on any stage picture, same kit part as every title plate (kitTitlePlate, tier KM_PLATE_TIER; owner 24/11 «chữ phải đọc được», no private plate). */
+const KM_PLATE_TIER=4;
+function kmPlate(t,cls){return typeof kitTitlePlate==="function"?kitTitlePlate({name:t,tier:KM_PLATE_TIER},{id:false,cls:cls}):`<b>${kmEsc(t)}</b>`}
 function kitReward(o){o=o||{};const kind=KM_BOX[o.kind]?o.kind:"chest";const B=KM_BOX[kind];const RV=(typeof BAL==="object"&&BAL.reveal)||{};
  const KG=typeof KIT_GRADE!=="undefined"?KIT_GRADE:[{n:"Thường",c:"#9a8a78"}];const gOf=t=>Math.max(0,Math.min(4,t|0));
  const items=(o.items||[]).map(x=>Object.assign({tier:0},x)).sort((a,b)=>a.tier-b.tier);const coins=o.bac||0;
@@ -225,9 +228,9 @@ function kitReward(o){o=o||{};const kind=KM_BOX[o.kind]?o.kind:"chest";const B=K
  const info=x=>({name:x.n,src:x.img,src512:x.img,grade:x.g,gname:x.gn||KG[x.g].n,col:x.coin?"#c9a46a":KG[x.g].c,sub:""});
  const tile=(x,i)=>`<span class="kmsh" style="--i:${i}"${kt(x)}>${kitItem({src:x.img,name:"",grade:x.g,gname:x.gn||"",size:"sm",tip:x.n}).replace('<span class="kitn"></span>','')}</span>`;
  const rows=seq.map(x=>`<div class="kmrow"${kt(x)}>${typeof kitGradeChip==="function"?kitGradeChip(x.g,{name:x.gn,size:"sm",col:x.coin?"#c9a46a":""}):""}<b${x.coin?' class="g"':""}>${kmEsc(x.n)}</b>${x.d?`<small>${kmEsc(x.d)}</small>`:""}</div>`).join("");
- const html=`<div class="kmrew kmrew-${kind}${seq.length>6?" km-long":""}"><div class="kmrew-h"><b>${kmEsc(o.title||B[2])}</b>${o.from?`<small>${kmEsc(o.from)}</small>`:""}</div>
+ const html=`<div class="kmrew kmrew-${kind}${seq.length>6?" km-long":""}"><div class="kmrew-h">${kmPlate(o.title||B[2],"kmrew-pl")}${o.from?`<small>${kmPlate(o.from,"kmrew-pl kmrew-pl-s")}</small>`:""}</div>
   <div class="kmbox"><i class="kmlight km-loop"></i><img class="kmbox-c km-loop" src="${KM_DIR}${B[0]}.webp" alt="" draggable="false"><img class="kmbox-o" src="${KM_DIR}${B[1]}.webp" alt="" draggable="false"><i class="kmlight kmlight-f km-loop"></i><div class="kmcoins">${coins?Array.from({length:Math.min(9,3+Math.round(coins/10))},(_,i)=>`<img src="${KM_DIR}mo-coin-silver.webp" alt="" style="--i:${i}">`).join(""):""}</div><div class="kmspot" style="--kshelf:${RV.shelf||380}ms"></div></div>
-  <div class="kmshelf"></div><div class="kmtap km-loop">Chạm để mở</div><div class="kmlist">${rows}<button class="kbtn kmtake" data-km-close>Nhận</button></div></div>`;
+  <div class="kmshelf"></div><div class="kmtap km-loop">${kmPlate("Chạm để mở","kmrew-pl kmrew-pl-s")}</div><div class="kmlist">${rows}<button class="kbtn kmtake" data-km-close>Nhận</button></div></div>`;
  kmPush(done=>{const st=kmStage("km-reward",html,{manual:true,dur:60000,onEnd:done});const root=st.ov.querySelector(".kmrew");st.ov.id="kmrew";let step=0;
   const spot=root.querySelector(".kmspot"),shelf=root.querySelector(".kmshelf");const T=[];const later=(ms,f)=>T.push(setTimeout(()=>{try{f()}catch(e){console.error(e)}},ms));
   /* kit-rows-b KP15: the shelf shows at most KMCAP icons + one «+N» chip (22 items = 3 rows of icons covered the list and the Nhận button); the full list below holds every item */const KMCAP=8,more=n=>`<span class="kmsh kmsh-more" style="--i:${KMCAP}">+${n}</span>`;const shelfAll=()=>seq.slice(0,seq.length>KMCAP+1?KMCAP:seq.length).map(tile).join("")+(seq.length>KMCAP+1?more(seq.length-KMCAP):"");
@@ -495,7 +498,7 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .km-reward{background:radial-gradient(ellipse at 50% 42%,#4a2a14e0,#140a06f2 70%)}
 .kmrew{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;max-width:560px}
 .kmrew-h{display:flex;flex-direction:column;align-items:center;text-align:center;animation:kmFade calc(.4s*var(--pace)) ease both}
-.kmrew-h b{font-family:var(--display);font-size:1.25rem;color:#f6e3b4;letter-spacing:.05em}.kmrew-h small{color:#e9d6b0;font-size:.82rem}
+.kmrew-h>b{font-family:var(--display);font-size:1.25rem;color:#f6e3b4;letter-spacing:.05em}.kmrew-h .kmrew-pl{font-size:1.15rem;padding:3px 20px 4px;margin-bottom:2px}.kmtap .kmrew-pl-s{font-size:.9rem;letter-spacing:.08em}.kmrew-h small .kmrew-pl-s{font-size:.82rem;margin-top:4px}.kmrew-h small{color:#e9d6b0;font-size:.82rem}
 .kmbox{position:relative;width:min(70vw,340px);aspect-ratio:520/420;display:flex;align-items:flex-end;justify-content:center}
 .kmbox-c,.kmbox-o{position:absolute;left:0;right:0;bottom:0;margin:auto;width:100%;height:auto;max-height:100%;object-fit:contain;filter:drop-shadow(0 10px 14px #000a)}
 .kmbox-c{animation:kmBob 2.2s ease-in-out infinite;filter:drop-shadow(0 0 16px #f0d07090) drop-shadow(0 10px 14px #000a)}.kmbox-c.km-loop{}
