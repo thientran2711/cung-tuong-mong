@@ -1549,3 +1549,4 @@ ROBOT-COOP FIXER #6b (week-end stuck, fix-4) | review/robot-coop-fix-4 | session
 | BIG CO-OP REVIEW robot-coop-fix-2 r3 71076b61 (opus) | review/robot-coop-fix-2-r3 | B | session_01N1tNP5GQ2J9RoWGbzfVreX | RUNNING | 24/11 19:35Z |
 | BIG CO-OP REVIEW robot-coop-fix-3 32121242 (opus) | review/robot-coop-fix-3 | B | session_01N1tNP59azvSi4P3tJ9EkLK | RUNNING | 24/11 19:35Z |
 robot10 E harness: co-op stuck-room capture (shot + dialog title + covered-button flag per seat) | review/robot10-coop-stuckcap | session_01DgYSWkYxbaSjuykrs5JW4Q (FIXER #5) | RUNNING | 24/11 19:47Z | owner FOREMAN E (child6)
+ring4 fixes (MAIN 7 FAILs) | review/ring-design-4 | session_01V1ZZH2FGU6ipDh8a2QiQWh | RUNNING | 2026-11-24T19:42Z (MAIN 127)
