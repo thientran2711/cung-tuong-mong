@@ -125,9 +125,13 @@ const famOf=m=>{const p=String(m.pid||"");return p?p.replace(/[-_:\d].*$/,"").sl
   if(m.opts.length>1){const ok=m.opts.filter(o=>!o.off);if(ok.length>1){const ck=k.slice(0,60);const t=M.opt[ck]=M.opt[ck]||{};ok.forEach(o=>{const on=strip(o.n||"").replace(/\d+/g,"#").slice(0,40);const x=t[on]=t[on]||[0,0];x[0]++;if(o===m.opts[i])x[1]++})}}}}catch(e){}return c1.apply(this,arguments)}}
 /* per buổi: favor / economy / family / rank / pace (one click per buổi change + every bot step that is an action) */
 let kidsSeen=new Map(),pregOn=false,rk0=null;
+/* child identity must survive a save round-trip (objects are re-created, kids have no id): id if any, else unique name + sex (mkKid keeps names unique) */
+const kidKey=k=>k&&k.id!=null?"i"+k.id:"n"+(k&&k.name||"")+"|"+(k&&k.sex||"");
+/* self-check: sons+daus must equal the distinct kids seen (a re-count after reload would break this) */
+R.kidCheck=()=>({sons:M.sons,daus:M.daus,distinct:kidsSeen.size,ok:M.sons+M.daus===kidsSeen.size});
 function perBuoi(){try{if(!S)return;M.pace.buoi++;M.pace.clicks++;M.sungPk=Math.max(M.sungPk,S.sung||0);M.bacPk=Math.max(M.bacPk,S.bac||0);M.bacEnd=S.bac;if((S.bac||0)<=0)M.bacZero++;M.nights=S.nights||0;
  const pg=!!S.preg;if(pg&&!pregOn)M.preg++;pregOn=pg;
- (S.kids||[]).forEach(k=>{const id=k.id!=null?k.id:k;if(!kidsSeen.has(id)){kidsSeen.set(id,k.alive!==false);if(k.sex==="m")M.sons++;else M.daus++}else if(kidsSeen.get(id)&&k.alive===false){kidsSeen.set(id,false);M.kidDead++;if(k.heir||(S.heir&&S.heir.k===k))M.heirLost++}});
+ (S.kids||[]).forEach(k=>{const id=kidKey(k);if(!kidsSeen.has(id)){kidsSeen.set(id,k.alive!==false);if(k.sex==="m")M.sons++;else M.daus++}else if(kidsSeen.get(id)&&k.alive===false){kidsSeen.set(id,false);M.kidDead++;if(k.heir||(S.heir&&S.heir.k===k))M.heirLost++}});
  if(S.heir&&S.heir.k&&S.heir.k.alive===false&&!M._hl){M._hl=1}
  if(rk0!=null&&S.rank<rk0)M.demote++;rk0=S.rank;if(M.rankAt[S.rank]==null)M.rankAt[S.rank]={buoi:R.buoi,age:S.age,year:S.year,clicks:M.pace.clicks,choices:M.pace.choices,chars:M.pace.chars,mg:M.pace.mgPlay,mgs:M.pace.mgSkip}}catch(e){}}
 R.perBuoi=perBuoi;

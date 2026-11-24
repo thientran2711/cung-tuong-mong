@@ -55,7 +55,7 @@ const whoOf=t=>{for(const [k,re] of WHO)if(re.test(t||''))return k;return 'other
 const causeText=r=>(M(r).die&&M(r).die.why)||r.life.cause||r.life.fate||r.life.id||'';
 const dead=L.filter(r=>r.life.death);
 const causeList=r=>[M(r).die&&M(r).die.why,r.life.cause,r.life.fate,r.life.chain0].filter(Boolean);
-dead.forEach(r=>{const cl=causeList(r);let e=null,t=cl[0]||r.life.id||'';for(const x of cl){e=CATM.match(CAT.deaths,x);if(e){t=x;break}}e=e||CATM.match(CAT.endings,r.life.id);r._cause=e?e.text:'(not in catalogue) '+t.slice(0,80);r._csrc=e?e.src:'';r._who=whoOf(t+' '+(r.life.id||''))});
+dead.forEach(r=>{const cl=causeList(r);let e=null,t=cl[0]||r.life.id||'';for(const x of cl){e=CATM.match(CAT.deaths,x);if(e){t=x;break}}e=e||CATM.match(CAT.endings,r.life.id);r._cause=e?e.text.replace(/\$\{([^}]*)\}/g,'«$1»'):'(not in catalogue) '+t.slice(0,80);r._csrc=e?e.src:'';r._who=whoOf(t+' '+(r.life.id||''))});
 L.forEach(r=>{const e=CATM.match(CAT.endings,r.life.id);r._end=ended(r)?(e?e.text:'(not in catalogue) '+r.life.id):null;r._esrc=e?e.src:''});
 /* ---------- the kiếp series: kiếp no. within (origin, road, bot) by life number (each life = a new seed) ---------- */
 const series=by(L,r=>r.job.origin+' · '+r.job.road+' · '+r.job.bot);
