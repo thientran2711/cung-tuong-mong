@@ -1477,4 +1477,4 @@ SERVANT TRUST — acts toward another person's people (opus BIG; MAIN 119 07:58Z
 | REVIEW E77r MOMENT r1 BIG (opus; briefs/E77r-review-moment-r1.md) of 1d2189f3 | review/moment-r2; reports/moment-review-r2.md | FOREMAN E (child3) | session_01DgYSWopEScRoLUDyxAoR6m | RUNNING | 24/11 09:20Z |
 | SELSCENE-8 fix RV-SELX FAIL (opus; briefs/M121-selscene-fix.md) | review/selection-scene; reports/selection-scene.md | MAIN 121 | session_01V1ZZH42fkgxtS3ig7ApDFE | RUNNING | 24/11 09:30Z |
 | REVIEW E78r robot10-e-fix-2 r2 SMALL (sonnet; briefs/E78r-review-robot-fix2-r2.md) of 145a1f54 | reports/robot10-fix12-review.md | FOREMAN E (child3) | session_01DgYSWoMwdxE3vbLg9RaC8a | RUNNING | 24/11 09:35Z |
-| REVIEW E79r LEAVE-PALACE r1 BIG (opus; briefs/E79r-review-leave-palace-r1.md) of ea730f77 | review/leave-palace-r2; reports/leave-palace-review-r2.md | FOREMAN E (child3) | (opening) | RUNNING | 24/11 09:40Z |
+| REVIEW E79r LEAVE-PALACE r1 BIG (opus; briefs/E79r-review-leave-palace-r1.md) of ea730f77 | review/leave-palace-r2; reports/leave-palace-review-r2.md | FOREMAN E (child3) | session_01DgYSWmgnAggZbjFVCTvkKj | RUNNING | 24/11 09:40Z |
