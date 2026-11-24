@@ -86,7 +86,7 @@ const SCR=()=>{try{return JSON.stringify({buoi:S&&S.buoi,week:COOP.state.week,be
 /* save round-trip in a solo scratch page: load her save (deser), save again, the two must match (fields the load only fills in are fine) */
 const RT=s=>{const J=x=>String(JSON.stringify(x));function dp(a,b,p){if(a===b||a===undefined)return null;
   if(typeof a==='string'&&typeof b==='string'){let i=0;while(i<a.length&&a[i]===b[i])i++;return p+' (text differs at char '+i+'): «…'+a.slice(Math.max(0,i-30),i+40)+'» → «…'+b.slice(Math.max(0,i-30),i+40)+'»'}
-  if(typeof a!==typeof b||a===null||b===null||typeof a!=='object')return p+': '+J(a).slice(0,60)+' → '+J(b).slice(0,60);for(const k of new Set(Object.keys(a).concat(Object.keys(b)))){const r=dp(a[k],b[k],p+'.'+k);if(r)return r}return null}
+  if(typeof a!==typeof b||a===null||b===null||typeof a!=='object')return p+': '+J(a).slice(0,60)+' → '+J(b).slice(0,60);for(const k of new Set(Object.keys(a).concat(Object.keys(b)))){if(/^__chg/.test(k)&&/\.visit$/.test(p))continue;/* UI-only markers of the visit stage (jchat group/align): deser (j6:74) rebuilds a home visit, the next render sets them again */const r=dp(a[k],b[k],p+'.'+k);if(r)return r}return null}
  try{quiet=true;deser(JSON.parse(s));quiet=false;const d=ser();delete d.at;const s2=JSON.stringify(d);return s2===s?'':(dp(JSON.parse(s),JSON.parse(s2),'save')||'')}catch(e){quiet=false;return 'throws: '+e.message}};
 
 /* ---- one pair (one room; a stuck room ends and the rest of the kiếp go on in a fresh room) ---- */
