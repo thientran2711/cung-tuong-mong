@@ -127,7 +127,7 @@ async function getOne(c,f,grp){const g=KLOAD[grp];let got=0;const k0=keyOf(f);FL
  for(let t=0;t<4;t++){try{
    const k=keyOf(f),r=await (CDNB&&k.startsWith(CDNB)?fetch(k+"&ctmload=1",{cache:"no-cache",mode:"cors",credentials:"omit"}):fetch(k,{headers:{"x-ctm-load":"1"},cache:"no-cache"}));if(!r.ok){const x=new Error("http "+r.status);if(grp==="all"&&(r.status===404||r.status===403||r.status===410))x.dead=true;throw x}
    await c.put(keyOf(f),r);  /* the browser streams it into the cache; no page script per chunk (keeps the game smooth) */
-   g.have+=f[2]-got;g.left--;g.files++;tick(grp);return true}
+   g.have+=f[2]-got;g.left--;g.files++;if(grp==="all")ALL.got=(ALL.got||0)+1;/* test hook: files «Tải hết» itself brought */oaSeen(f);tick(grp);return true}
   catch(e){g.have-=got;got=0;if(e&&e.name==="QuotaExceededError"){setErr(grp,"quota");throw e}
    if(e&&e.dead){setErr(grp,"dead");throw e}
    if(navigator.onLine===false){setErr(grp,"offline");throw e}
@@ -147,11 +147,16 @@ let MAN=null,HAVE=null,coreList=[],figList=[];
    Instead: ask the cache for exactly the keys of the listed files (small lookups, 16 at a time). */
 async function cacheHave(c,files){const H=new Set();let i=0;const w=async()=>{while(i<files.length){const k=keyOf(files[i++]);try{if((await c.keys(k)).length)H.add(k)}catch(e){}}};
  await Promise.all(Array.from({length:Math.min(16,files.length)},w));return H}
-async function plan(){
+const TM=KLOAD.tm={};const tm=k=>{TM[k]=Math.round(performance.now())};/* test hook: boot check timings (dev/measure/offline-fast.js) */
+async function plan(){tm("plan");
  let r=null;try{r=await fetch("assets.json",{cache:"no-cache"})}catch(e){}
- if(!r||!r.ok)r=await caches.match("assets.json",{ignoreSearch:true});if(!r)return false;
- MAN=await r.json();const c=await caches.open(AC);HAVE=await cacheHave(c,MAN.files.filter(f=>f[3]==="core"||f[3]==="fig"));
- await migrate(c);
+ if(!r||!r.ok)r=await caches.match("assets.json",{ignoreSearch:true});if(!r)return false;tm("manGot");
+ MAN=await r.json();tm("manParsed");const c=await caches.open(AC);
+ /* offline-fast: the ~1 450 core + figure files were looked up one by one at EVERY start (4.8 s at CPU 4× with a half-full cache; the music's own
+    cache read waited behind them = no sound for seconds after opening). Files on the known list (see «Tải hết» below) are not asked again. */
+ await seenGet();const cf=MAN.files.filter(f=>f[3]==="core"||f[3]==="fig");HAVE=new Set();const ask=[];for(const f of cf)(SEEN.has(deadKey(f))?HAVE.add(keyOf(f)):ask.push(f));
+ KLOAD.asked=ask.length;if(ask.length){const H=await cacheHave(c,ask);H.forEach(k=>HAVE.add(k));for(const f of ask)if(H.has(keyOf(f)))oaSeen(f)}tm("have");
+ await migrate(c);tm("migrated");
  coreList=[];figList=[];for(const f of MAN.files){if(f[3]==="fx"||f[3]==="lazy")continue;/* KIT §68 painted effects + "lazy" (perf budget, assets.py): on demand, never ahead; sw.js caches them when first shown */const g=f[3]==="core"?"core":"fig",G=KLOAD[g];G.total+=f[2];
   if(HAVE.has(keyOf(f))){G.have+=f[2];G.files++}else{(g==="core"?coreList:figList).push(f);G.left++}}
  return true}
@@ -376,25 +381,51 @@ const OA="ctm-offall",oaSleep=t=>new Promise(ok=>setTimeout(ok,t));
 const oaGet=()=>{try{return JSON.parse(localStorage.getItem(OA)||"{}")||{}}catch(e){return{}}};
 const oaSet=o=>{try{localStorage.setItem(OA,JSON.stringify(Object.assign(oaGet(),o)))}catch(e){}};
 try{const o0=JSON.parse(localStorage.getItem("ctm-offall")||"{}");if(o0&&o0.on&&o0.paused)ALL.state="paused"}catch(e){}  /* paused before the reload: still paused (Tải tiếp), never restarted by itself */
-let allList=[],allRun=false,allPlanned=false,allPlanning=false,allDead=new Set();
+let allList=[],allRun=false,allPlanned=false,allPlanning=null,allDead=new Set();
 const deadKey=f=>f[0]+"?"+f[1];
 /* how much, in words (VANPHONG: no %, MB is the one unit): «khoảng 4,2 nghìn MB» / «khoảng 350 MB» */
 function oaSize(n){const m=Math.max(0,n)/1e6;if(m<1)return"dưới 1 MB";if(m>=950)return"khoảng "+(Math.round(m/100)/10).toLocaleString("vi-VN")+" nghìn MB";return"khoảng "+(m<10?(Math.round(m*10)/10).toLocaleString("vi-VN"):m<100?Math.round(m):Math.round(m/10)*10).toLocaleString("vi-VN")+" MB"}
+/* offline-fast (owner 24/11 ~18:00Z, Fold: «tốn ít nhất 10 tới 15 giây để nó bắt đầu lên tiếng nhạc, đồng thời bắt đầu tải game … nó vẫn hiện mọi thứ là zero»):
+   the plan used to ask the cache about ALL ~32 000 files (12 lookups at a time) before it gave a single number — every sound and picture the game
+   wanted from the cache (sw.js) queued behind those lookups, the panel showed zeros, and a tap on «Bắt đầu tải» during it was dropped. Now:
+   - KNOWN LIST: the files this device already holds — and those found missing — are remembered (cache 'ctm-offmeta' › have.json {have,need},
+     '<path>?<hash>' lists, saved every 20 s while
+     it changes and when the app goes to the background). The plan = manifest minus that list: no cache lookups, the numbers come at once.
+   - files never seen yet (an old device, pictures the game cached on use) are COUNTED in the background, gently: 2 lookups at a time, a breath every
+     32, waiting while the loading / life screens work — from the END of the list, while «Bắt đầu tải» downloads from the FRONT at once (each file is
+     still looked up just before it is fetched); the two meet in the middle. Meanwhile the panel says «đang đếm…» and the numbers fill in. */
+const META="ctm-offmeta",MKEY="have.json";
+let SEEN=null,seenLoad=null,seenDirty=0,seenSaveT=0;const SEEN0=[],NEED=new Set();let cntOn=false;
+function oaSeen(f){const k=deadKey(f);if(!SEEN){SEEN0.push(k);return}if(!SEEN.has(k)){SEEN.add(k);seenDirty++;seenSoon()}}
+function seenGet(){if(SEEN)return Promise.resolve(SEEN);if(seenLoad)return seenLoad;
+ seenLoad=(async()=>{let a={};try{const r=await (await caches.open(META)).match(MKEY);if(r)a=await r.json()}catch(e){}const S1=new Set(Array.isArray(a&&a.have)?a.have:[]);
+  if(a&&Array.isArray(a.need))a.need.forEach(k=>{if(!S1.has(k))NEED.add(k)});/* known missing last time: not counted again (the download loop still looks each one up just before fetching it) */
+  SEEN0.splice(0).forEach(k=>S1.add(k));if(HAVE&&MAN)for(const f of MAN.files)if((f[3]==="core"||f[3]==="fig")&&HAVE.has(keyOf(f)))S1.add(deadKey(f));SEEN=S1;seenDirty++;return SEEN})();return seenLoad}
+async function seenSave(){if(!SEEN||!seenDirty||!MAN)return;seenDirty=0;try{const k=new Set(MAN.files.map(deadKey));const a=[],b=[];SEEN.forEach(x=>{if(k.has(x))a.push(x)});NEED.forEach(x=>{if(k.has(x)&&!SEEN.has(x))b.push(x)});
+ await (await caches.open(META)).put(MKEY,new Response(JSON.stringify({have:a,need:b}),{headers:{"Content-Type":"application/json"}}))}catch(e){}}
+function seenSoon(){if(!seenSaveT)seenSaveT=setTimeout(()=>{seenSaveT=0;seenSave()},20000)}
+addEventListener("visibilitychange",()=>{if(document.hidden)seenSave()});addEventListener("pagehide",()=>{seenSave()});
+/* one file found in the cache / found missing (by the counter or by the download loop): the numbers move once, never twice */
+function oaHit(f){const k=deadKey(f);if(SEEN.has(k))return;const u=!NEED.has(k);NEED.delete(k);oaSeen(f);ALL.have+=f[2];ALL.files++;ALL.left--;if(u)oaU()}
+function oaMiss(f){const k=deadKey(f);if(SEEN.has(k)||NEED.has(k))return;NEED.add(k);seenDirty++;seenSoon();oaU()}
+function oaU(){ALL.unknown=Math.max(0,(ALL.unknown||0)-1);if(!ALL.unknown&&ALL.counting){ALL.counting=false;seenSave();oaPaint()}}
 async function oaMan(){if(MAN)return true;let r=null;try{r=await fetch("assets.json",{cache:"no-cache"})}catch(e){}if(!r||!r.ok)try{r=await caches.match("assets.json",{ignoreSearch:true})}catch(e){}if(!r)return false;try{MAN=await r.json();return true}catch(e){return false}}
-/* what is left = the manifest minus what the cache holds minus the files the line said are gone. Small keyed lookups (like cacheHave), never a whole-cache walk. */
-async function allPlan(){if(OFF||allPlanning)return allPlanned;allPlanning=true;ALL.planning=true;oaPaint();
- try{if(!await oaMan())return false;const o=oaGet();const dd=o.dead&&o.dead.v===MAN.v?o.dead.k:[];allDead=new Set(dd);
-  const c=await caches.open(AC);const files=MAN.files;const have=new Uint8Array(files.length);let i=0,n=0;
-  const w=async()=>{while(i<files.length){const j=i++,f=files[j];if(f[3]==="core"||f[3]==="fig"){if(HAVE&&HAVE.has(keyOf(f))){have[j]=1;continue}}
-    try{if((await c.keys(keyOf(f))).length)have[j]=1}catch(e){}if(++n%400===0)await oaSleep(0)}};
-  await Promise.all(Array.from({length:12},w));
-  const A=ALL;A.have=0;A.total=0;A.files=0;A.left=0;A.skipped=0;const L=[];
-  for(let j=0;j<files.length;j++){const f=files[j];A.total+=f[2];if(have[j]){A.have+=f[2];A.files++}else if(allDead.has(deadKey(f)))A.skipped++;else{L.push(f);A.left++}}
-  /* the figures and the effects first: what she is likely to see soonest */
-  const rk={core:0,fig:1,fx:2,lazy:3};L.sort((a,b)=>(rk[a[3]]-rk[b[3]]));allList=L;allPlanned=true;
-  if(!L.length){A.state="done";oaSet({done:MAN.v,on:0})}else if(A.state==="done")A.state="idle";
-  return true}catch(e){console.error("offall plan",e);return false}
- finally{allPlanning=false;ALL.planning=false;oaPaint()}}
+/* what is left = the manifest minus the known list minus the files the line said are gone; no cache lookups (one call in flight is shared) */
+function allPlan(){if(OFF)return Promise.resolve(false);if(allPlanning)return allPlanning;ALL.planning=true;oaPaint();
+ allPlanning=(async()=>{try{if(!await oaMan())return false;await seenGet();const o=oaGet();allDead=new Set(o.dead&&o.dead.v===MAN.v?o.dead.k:[]);
+   oaBase();allPlanned=true;if(ALL.unknown)oaCount();return true}catch(e){console.error("offall plan",e);return false}
+  finally{allPlanning=null;ALL.planning=false;oaPaint()}})();return allPlanning}
+function oaBase(){const A=ALL;A.have=0;A.total=0;A.files=0;A.left=0;A.skipped=0;let u=0;const L=[];
+ for(const f of MAN.files){A.total+=f[2];const k=deadKey(f);if(SEEN.has(k)){A.have+=f[2];A.files++}else if(allDead.has(k))A.skipped++;else{L.push(f);A.left++;if(!NEED.has(k))u++}}
+ /* the figures and the effects first: what she is likely to see soonest */
+ const rk={core:0,fig:1,fx:2,lazy:3};L.sort((a,b)=>(rk[a[3]]-rk[b[3]]));allList=L;A.unknown=u;A.counting=u>0;
+ if(!L.length){A.state="done";oaSet({done:MAN.v,on:0})}else if(A.state==="done")A.state="idle"}
+/* the background count (see above): from the end of the list, 2 at a time, a breath every 32 lookups, never while a loading / life screen works */
+async function oaCount(){if(cntOn)return;cntOn=true;try{const c=await caches.open(AC);const L=allList;let j=L.length-1,n=0;
+  const w=async()=>{while(j>=0&&ALL.unknown>0){while(LIFE.on||KLOAD.phase==="core"||KLOAD.phase==="ask")await oaSleep(400);
+    const f=L[j--],k=deadKey(f);if(SEEN.has(k)||NEED.has(k))continue;let hit=false;try{hit=(await c.keys(keyOf(f))).length>0}catch(e){}
+    if(hit)oaHit(f);else oaMiss(f);if(++n%32===0){tickAll();await oaSleep(24)}}};
+  await Promise.all([w(),w()])}catch(e){console.error("offall count",e)}finally{cntOn=false;if(ALL.counting){ALL.counting=false;ALL.unknown=0}tickAll()}}
 function oaNews(){const o=oaGet();return !!o.done&&ALL.state!=="done"&&allPlanned&&ALL.left>0&&ALL.state==="idle"}
 async function runAll(){if(OFF||allRun)return;allRun=true;
  try{if(!allPlanned&&!await allPlan()){ALL.state="net";return}
@@ -404,26 +435,31 @@ async function runAll(){if(OFF||allRun)return;allRun=true;
   oaPaint();const c=await caches.open(AC);
   for(let pass=0;pass<3&&ALL.state==="run";pass++){
    let i=0,bad=0,stop=false;const list=allList;
-   const w=async()=>{while(!stop&&ALL.state==="run"&&i<list.length){
-     while((LIFE.busy>0||LIFE.on)&&ALL.state==="run")await oaSleep(300);if(ALL.state!=="run")return;
-     const f=list[i++],k=keyOf(f);
+   const w=async wi=>{while(!stop&&ALL.state==="run"&&i<list.length){
+     /* the game's own pictures go first: under a loading / life screen nothing; while the life set or the title prefetch is busy, ONE file at a time
+        (so a tap on «Bắt đầu tải» starts at once — offline-fast — and the game's pictures still have the line) */
+     while((LIFE.on||(LIFE.busy>0&&wi>0))&&ALL.state==="run")await oaSleep(300);if(ALL.state!=="run")return;
+     const f=list[i++],k=keyOf(f);if(SEEN.has(deadKey(f)))continue;/* the counter found it meanwhile (already counted) */
      if(FLY.has(k))await oaSleep(400);
-     try{if((await c.keys(k)).length){ALL.have+=f[2];ALL.left--;ALL.files++;tickAll();continue}}catch(e){}
+     let hit=false;try{hit=(await c.keys(k)).length>0}catch(e){}
+     if(hit){oaHit(f);tickAll();continue}oaMiss(f);
      try{await getOne(c,f,"all");bad=0}catch(e){
       if(ALL.err==="quota"){stop=true;ALL.state="quota";return}
       if(navigator.onLine===false||ALL.err==="offline"){stop=true;ALL.state="offline";return}
       if(ALL.err==="dead"){allDead.add(deadKey(f));ALL.skipped++;ALL.left--;ALL.err="";oaSet({dead:{v:MAN.v,k:[...allDead]}});bad=0;continue}
       bad++;if(bad>=8){stop=true;ALL.state="net";return}}}};
-   await Promise.all(Array.from({length:3},w));
+   await Promise.all([0,1,2].map(w));
    if(ALL.state!=="run")break;
-   allPlanned=false;await allPlan();if(!allList.length){ALL.state="done";break}}      /* a second look: what the cache still lacks */
+   allPlanned=false;await allPlan();if(!allList.length){ALL.state="done";break}}      /* a second look: what is still not known to be here */
   if(ALL.state==="run"){ALL.state=allList.length?"net":"done"}
   if(ALL.state==="done")oaSet({done:MAN.v,on:0,paused:0});
  }catch(e){console.error("offall run",e);if(ALL.state==="run")ALL.state="net"}
- finally{allRun=false;oaPaint()}}
+ finally{allRun=false;seenSave();oaPaint()}}
 const tickAll=()=>{if(!oaPaint.t)oaPaint.t=setTimeout(()=>{oaPaint.t=0;oaPaint()},250)};
-function oaPause(){if(ALL.state==="run"){ALL.state="paused";oaSet({paused:1,on:1})}oaPaint()}
-async function oaStart(){if(allRun&&ALL.state==="run")return;if(ALL.state==="paused"||ALL.state==="quota"||ALL.state==="offline"||ALL.state==="net"||ALL.state==="idle"){ALL.state="idle";ALL.err=""}oaSet({on:1,paused:0});allPlanned=false;await allPlan();if(allList.length)runAll();oaPaint()}
+function oaPause(){if(ALL.state==="run"){ALL.state="paused";oaSet({paused:1,on:1});seenSave()}oaPaint()}
+/* «Bắt đầu tải» / «Tải tiếp»: the plan is instant now, so the first file is asked for at once, even while the count still runs */
+async function oaStart(){if(allRun&&ALL.state==="run")return;if(ALL.state==="paused"||ALL.state==="quota"||ALL.state==="offline"||ALL.state==="net"||ALL.state==="idle"){ALL.state="idle";ALL.err=""}oaSet({on:1,paused:0});
+ if(!cntOn)allPlanned=false;if(!allPlanned)await allPlan();if(allList.length)runAll();oaPaint()}
 /* resume after a reload / closing the app / coming back online */
 function oaResume(){const o=oaGet();if(OFF||!o.on||o.paused)return;oaStart()}
 {let n=0;const t=setInterval(()=>{if(++n>200)clearInterval(t);if(KLOAD.phase==="core"||KLOAD.phase==="ask"||KLOAD.phase==="idle"&&!MAN||!MAN&&n<20)return;clearInterval(t);setTimeout(oaResume,6000)},3000)}
@@ -432,18 +468,19 @@ addEventListener("offline",()=>{if(ALL.state==="run"){/* the loop notices on its
 
 /* ---- free room + the line: the panel's warnings ---- */
 let oaFree=null;
-async function oaRoom(){try{if(navigator.storage&&navigator.storage.estimate){const q=await navigator.storage.estimate();if(q&&q.quota){oaFree={free:Math.max(0,q.quota-q.usage),quota:q.quota};return oaFree}}}catch(e){}oaFree=null;return null}
+async function oaRoom(){oaRoom.done=0;try{if(navigator.storage&&navigator.storage.estimate){const q=await navigator.storage.estimate();if(q&&q.quota){oaFree={free:Math.max(0,q.quota-q.usage),quota:q.quota};oaRoom.done=1;return oaFree}}}catch(e){}oaFree=null;oaRoom.done=1;return null}
 const oaCell=()=>{const c=navigator.connection;return !!(c&&(c.type==="cellular"||c.saveData))};
 
 /* ---- the Thiết lập row (kit row + kit button) and the kit panel ---- */
 function oaWord(){const s=ALL.state,o=oaGet();
  if(s==="done")return["Đã tải đủ, chơi offline được","g"];
- if(s==="run")return[ALL.planning&&!ALL.total?"Đang soát tranh đã cất trong máy":"Đang tải · còn "+oaSize(ALL.total-ALL.have),"n"];
- if(s==="paused")return["Tạm ngưng · còn "+oaSize(ALL.total-ALL.have),"n"];
+ if(s==="run")return[ALL.counting||ALL.planning&&!ALL.total?"Đang tải · đang đếm phần còn lại…":"Đang tải · còn "+oaSize(ALL.total-ALL.have),"n"];
+ if(s==="paused")return["Tạm ngưng · còn "+(ALL.counting?"đang đếm…":oaSize(ALL.total-ALL.have)),"n"];
  if(s==="quota")return["Máy hết chỗ · đã cất "+oaSize(ALL.have),"r"];
  if(s==="offline")return["Đường xa đứt · thông lại sẽ tải tiếp","n"];
  if(s==="net")return["Đường xa chập chờn · chạm để tải tiếp","r"];
  if(allPlanned&&!ALL.left)return["Đã tải đủ, chơi offline được","g"];
+ if(allPlanned&&ALL.counting)return["Đang đếm tranh đã cất trong máy…","n"];
  if(allPlanned&&o.done)return["Có "+ALL.left.toLocaleString("vi-VN")+" tranh mới cần tải","r"];
  if(allPlanned)return["Còn "+ALL.left.toLocaleString("vi-VN")+" tranh · "+oaSize(ALL.total-ALL.have),"n"];
  return["Chưa tải hết · chạm để xem còn bao nhiêu","n"]}
@@ -454,12 +491,12 @@ function oaWire(){let w=document.querySelector("#modal .offwrap");const T=docume
  w.innerHTML=oaSection();if(!allPlanned&&!allPlanning&&!OFF)allPlan()}
 function oaPaint(){try{document.querySelectorAll(".offwrap").forEach(w=>{if(w.querySelector("[data-oa]"))w.innerHTML=oaSection()})}catch(e){}
  try{oaPaintPanel()}catch(e){}}
-const oaLeftWords=()=>ALL.state==="done"||(allPlanned&&!ALL.left)?"không còn":ALL.left.toLocaleString("vi-VN")+" món · "+oaSize(ALL.total-ALL.have);
+const oaLeftWords=()=>ALL.state==="done"||(allPlanned&&!ALL.left)?"không còn":ALL.counting?"đang đếm…":ALL.left.toLocaleString("vi-VN")+" món · "+oaSize(ALL.total-ALL.have);
 const oaDone=()=>ALL.state==="done"||(allPlanned&&!ALL.left);
-const oaProg=()=>({key:"offall",fresh:true,have:ALL.have,total:ALL.total||1,sub:oaDone()?"Đã tải đủ, chơi offline được.":ALL.state==="run"?"Tải ngầm, chơi cứ như thường. Có thể đóng bảng này.":ALL.state==="paused"?"Đang tạm ngưng, chạm Tải tiếp để đi tiếp.":""});
-const oaShort=()=>{const left=Math.max(0,ALL.total-ALL.have);return !!oaFree&&!oaDone()&&oaFree.free<left*1.05+50e6};
+const oaProg=()=>({key:"offall",fresh:true,have:ALL.have,total:ALL.total||1,sub:oaDone()?"Đã tải đủ, chơi offline được.":ALL.state==="run"?"Tải ngầm, chơi cứ như thường. Có thể đóng bảng này.":ALL.state==="paused"?"Đang tạm ngưng, chạm Tải tiếp để đi tiếp.":ALL.counting?"Đang đếm tranh đã cất trong máy…":""});
+const oaShort=()=>{const left=Math.max(0,ALL.total-ALL.have);return !!oaFree&&!oaDone()&&!ALL.counting&&oaFree.free<left*1.05+50e6};
 function oaNotes(){const s=ALL.state,left=Math.max(0,ALL.total-ALL.have),done=oaDone(),n=[];
- if(!done)n.push(`<div class="kpnote">Nên dùng Wi-Fi: cả bộ tranh vẽ và tiếng nhạc nặng ${oaSize(left)}. Có thể tạm ngưng, đóng máy, tải tiếp lúc khác; phần đã về vẫn giữ.</div>`);
+ if(!done)n.push(`<div class="kpnote">Nên dùng Wi-Fi: cả bộ tranh vẽ và tiếng nhạc nặng ${oaSize(ALL.counting?ALL.total:left)}. Có thể tạm ngưng, đóng máy, tải tiếp lúc khác; phần đã về vẫn giữ.</div>`);
  if(oaCell()&&!done)n.push(`<div class="kpnote">Máy đang dùng mạng di động hoặc chế độ tiết kiệm dữ liệu. Nên đợi có Wi-Fi rồi hãy tải.</div>`);
  if(oaShort())n.push(`<div class="kpnote">Máy chỉ còn trống ${oaSize(oaFree.free)}, chưa đủ chỗ cho ${oaSize(left)}. Vẫn tải được tới khi hết chỗ; muốn đủ cả bộ, dọn bớt chỗ trong máy trước.</div>`);
  if(IOSB&&!done)n.push(`<div class="kpnote">Trên iPad, iPhone: Safari và ứng dụng ở màn hình chính cất tranh riêng. Nên mở từ màn hình chính rồi hãy tải; Safari có thể tự dọn tranh nếu lâu ngày không mở.</div>`);
@@ -471,13 +508,14 @@ const oaClose=`<button class="kbtn alt" data-oa="close">Đóng<small>về Thiế
 function oaBtns(){const s=ALL.state;if(oaDone())return `<div class="kslot-a">${oaClose}</div>`;if(s==="run")return `<div class="kslot-a"><button class="kbtn" data-oa="pause">Tạm ngưng<small>cho việc tải nghỉ chân, muốn thì tải tiếp sau</small></button>${oaClose}</div>`;
  const go=["paused","quota","net","offline"].includes(s)?"Tải tiếp":"Bắt đầu tải";
  return `<div class="kslot-a"><button class="kbtn" data-oa="start">${go}<small>${s==="quota"?"thử tiếp sau khi đã dọn chỗ":"tải ngầm lúc chơi, tranh ngươi cần vẫn đi trước"}</small></button>${oaClose}</div>`}
-const oaRowsHTML=()=>kitRows([["Còn phải tải",`<span class="oa-left">${oaLeftWords()}</span>`,"n"],["Chỗ trống trong máy",oaFree?oaSize(oaFree.free):"chưa rõ",oaShort()?"r":"n"],["Cất sẵn",`<span class="oa-files">${ALL.files.toLocaleString("vi-VN")} / ${(ALL.files+ALL.left+ALL.skipped).toLocaleString("vi-VN")} món</span>`,"n"]]);
+const oaRowsHTML=()=>kitRows([["Còn phải tải",`<span class="oa-left">${oaLeftWords()}</span>`,"n"],["Chỗ trống trong máy",oaFree?oaSize(oaFree.free):oaRoom.done?"chưa rõ":"đang xem…",oaShort()?"r":"n"],["Cất sẵn",`<span class="oa-files">${ALL.files.toLocaleString("vi-VN")} / ${(ALL.files+ALL.left+ALL.skipped).toLocaleString("vi-VN")} món</span>`,"n"]]);
 function oaPaintPanel(){const m=document.querySelector("#modal .oa-prog");if(!m)return;const root=m.closest(".dlg")||document;
  try{if(typeof kitProgressSet==="function")kitProgressSet(m,oaProg())}catch(e){}
  const set=(sel,h)=>{const n=root.querySelector(sel);if(n&&n.innerHTML!==h)n.innerHTML=h};
  set(".oa-rows",oaRowsHTML());set(".oa-notes",oaNotes());set(".oa-btns",oaBtns())}
 async function oaPanel(){if(typeof kitPanel!=="function")return;
- if(!allPlanned)await allPlan();await oaRoom();
+ /* offline-fast: the plan is instant (known list); the free room (storage.estimate can take a while with a big cache) fills in after the panel is up */
+ if(!allPlanned)await allPlan();oaRoom().then(()=>oaPaint());
  try{const onT=(()=>{const t=document.getElementById("title");return !!t&&!t.hidden})();kitPanel({kind:"notice",cls:onT?"kptitle":undefined,title:"Tải hết để chơi offline",sub:"Tải sẵn mọi tranh vẽ và tiếng nhạc vào máy, mất mạng vẫn chơi đủ hình",
   sections:[{h:"Tiến độ",html:`<div class="oa-prog">${kitProgress(oaProg())}</div>`},{h:"Chi tiết",html:`<div class="oa-rows">${oaRowsHTML()}</div>`},{h:"Lưu ý",html:`<div class="oa-notes">${oaNotes()}</div>`},{h:"",html:`<div class="oa-btns">${oaBtns()}</div>`}],opts:[{n:"Đóng",fx:{},go:()=>{}}]},true);showModal();setTimeout(oaPaint,50)}catch(e){ALL.panelErr=String(e&&e.stack);console.error("offall panel",e)}}
 document.addEventListener("click",e=>{const b=e.target&&e.target.closest&&e.target.closest("[data-oa]");if(!b)return;e.preventDefault();e.stopPropagation();const a=b.dataset.oa;
