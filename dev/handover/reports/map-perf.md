@@ -130,3 +130,13 @@ Note: do not run quickcheck and the browser tests at the same time on one box (q
 
 SẴN SÀNG KIỂM c87a40e16ddb2acef43d3a5f2619abe57fdd547b → MAIN 118.
 ~100% xong / ~95% chơi được cho lỗi này.
+
+## RV MAP-FIX-2 (small reviewer, for MAIN 119) — PASS
+PRIORITY #1 CHECK: OD 18/11 19:45Z (4), 18/11 22:10Z, OD:L1921 (all three exist, quoted in the test headers) | main LIVE fd85907a | review/map-fix-2 c87a40e1 | claims MAP-FIX-2 (done).
+Merged origin/main fd85907a into c87a40e1 (only index.html/sw.js conflicted → theirs + rebuild) = **ac4790f0** → pushed `review/map-fix-2-r1`.
+- 3 test updates: follow the cited owner rules; not weakened (picker case + «Đi một mình» + nobody-free case ADDED; toasts read kitNoticeList/#kntchip; portrait now asserts 0 cards/0 bars, rail buttons == kitStageRail need, her .here == mapHereK, fitH vs Ân sủng row).
+- Real fix whole (law 11): jres mapHereK one key → j27 mapHTML (.here, marker, «Ta + N bóng», not greyed) + j38 fit key. map-here-scan 64/64 PASS (Fold, iPad, phone, ranks 0-7 × home/vuon).
+- map-tap-go fold/ipadAir/iphone14: 0 FAIL. map-portrait 755x1000, 412x1058, 390x844, 1180x820, 1366x1024: 5/5. map-label-overlap Fold+iPad ranks 0,2,3,5: 100 cases, 0 overlaps. map-frame-kit Fold+iPad PASS.
+- QUICKCHECK PASS (556 s: old save ok, core gates PASS, perf ≈ live). coop-e2e 142/142 (fold+ipad seats, no page errors).
+- Looked at Fold 755x1000 + iPad 1180x820 as Thường tại at home: her palace carries the glow marker + «Ta + N bóng · còn 4 khắc», view centred on it, no overlap; rail Cung nhân/Chí tôn (Fold left rail, iPad top-right). KIT: no private parts.
+LAND READY map-fix-2-r1 ac4790f0f24a8f5f198b03ae581f70075ee28a10
