@@ -32,10 +32,16 @@ Identity uploads: c04 EbcFFhnuuO, c10 ksXxxbr16B, c16 cpwVVY30eP, c22 rgoLLr0xtc
 | m28 A26 | KLdrZdpkqp | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared |
 | m29 A26 | dtNoj6sXSL | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared |
 | s65 A26 | MBye1g5DCm | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared |
+| c04 A51 | ksXxzTO16B | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared; reads ~50, light expression lines, dark hair |
+| c10 A51 | 1lBjYNnr4r | DONE (looked) | no text, no makeup look, ivory robe+pin, warm-ivory bg, soft smile; identity not pixel-compared; reads ~50, light expression lines, dark hair |
 
 Prompt texts at /home/user/wt/dig-out/p{16,26,51,63}.txt may be wiped: regenerate with the cut sentence script (delete exactly the one operator sentence).
 
-## HANDOVER (rollover)
-Cost finding: every images_generate call needs the FULL ~9.8k-char prompt typed into the call (~3.5k tokens of context each), so one worker can only do ~15-20 jobs before the 60% ceiling. 2 of 48 done; 46 remain.
-Remaining: ages 16 (10: c10 c16 c22 c28 m10 m16 m22 m28 m29 s65), 26 (12), 51 (12), 63 (12). Recommend 4 successor workers, one per age (12 jobs each; age 16 has 10).
-Successor steps: fetch handover branch (sparse dev/handover), rebuild prompt = Prompts/FACE-REUSE-DIGNIFIED-AGE<age>-...-03.txt minus the one operator sentence, reuse identity uploads above (already uploaded, hashes verified) + ref UPf76Ptwny, gpt-2-6 2k auto count 1; creations_wait + creations_read each; log in this file (append rows; rebase-retry push). Do not re-run m04/c04 A16.
+## HANDOVER 2 (successor 1 -> successor 2; supersedes the first handover above)
+Done: ages 16 (12/12) and 26 (12/12) complete; age 51: c04, c10 done. 26 of 48 jobs done (m04/c04 A16 from the first worker + 24 by successor 1). Looked at every image; no NEEDS_REVIEW. Minor notes only: several sources carry hair ribbons into the render (m10, m16, m22, c04 A26, m22 A26 pink braid ribbon) and some backgrounds read slightly pinkish-ivory; none has text/makeup.
+Remaining: age 51 (10: c16 c22 c28 m04 m10 m16 m22 m28 m29 s65), age 63 (12: c04 c10 c16 c22 c28 m04 m10 m16 m22 m28 m29 s65). Age 39 stays ON HOLD (owner). Total remaining 22.
+Settings unchanged: images_generate mode gpt-2-6, resolution 2k, aspectRatio auto, count 1, references [identity upload, UPf76Ptwny], no folderReference needed (outputs land in the account's default). Prompt = Prompts/FACE-REUSE-DIGNIFIED-AGE<age>-...-03.txt minus the ONE operator sentence; the age-51 text differs from age 26 only in the PROMPT ID/TARGET AGE/'age51' lines and the PHYSICAL AGE paragraph.
+Identity uploads (reuse, never re-upload): c04 EbcFFhnuuO, c10 ksXxxbr16B, c16 cpwVVY30eP, c22 rgoLLr0xtc, c28 VXOpeD2MMU, m04 N253RRL6D9, m10 LwtgSwWswO, m16 rgoLsU6xtc, m22 TdJDp8FVNR, m28 aFnEukWfSh, m29 ksXxjO216B, s65 s7mSU3hl8e.
+Cost note: each call needs the full ~9.8k-char prompt typed in (~3.5k tokens) + a read; ~6k tokens per job, so one worker does ~24-26 jobs before the 25% rollover line (window 1M). Recommend ONE successor for the remaining 22 jobs (51 then 63), or two (51 / 63).
+Not yet done (needs a worker with room): per-age contact sheets (original | result, 2 columns) uploaded to the CDN under img/_review/face-master03/dignified/ and their links in this report; final DONE report to Foreman D.
+Push recipe: fetch --depth=30 under flock /home/user/wt/fetch.lock, rebase onto FETCH_HEAD, push HEAD to the handover branch; retry on reject.
