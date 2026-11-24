@@ -12,7 +12,7 @@ STYLE = ("STYLE (identical for every picture of this set): from the reference pi
  "clean refined linework, soft airy washes, gentle diffuse light, realistic fabric behaviour and natural anatomy; the same drawing style, brushwork, "
  "palette treatment and figure proportions in every picture. Muted elegant palette: ivory, soft rose, celadon, mist blue, warm wood and restrained gold accents. "
  "Faces: refined beautiful East Asian faces in the same painterly anime style, clear fair porcelain skin, eyes open and clearly drawn, "
- "mouths closed with lips together even when smiling, talking or crying, absolutely no teeth visible. Every ear of every person is bare and plain, nothing hanging from the ears. No chrysanthemum flowers anywhere (mourning flowers are white lilies and white peonies). Natural graceful adult proportions about seven heads tall, never chibi, never a tiny head. "
+ "mouths closed with lips together even when smiling, talking or crying, absolutely no teeth visible. Every ear of every person is bare and plain, nothing hanging from the ears; for every woman, soft hair falls over both ears so the ears are hidden by hair. No chrysanthemum flowers anywhere (mourning flowers are white lilies and white peonies). Natural graceful adult proportions about seven heads tall, never chibi, never a tiny head. "
  "Ancient Chinese-inspired imperial palace (not Japanese); hair ornaments are only hairpins, flowers and small crowns; rich, well-kept, elegant settings, never shabby or poor. "
  "NOT photorealistic, NOT 3D, NOT a photo.")
 CAMERA = ("CAMERA (identical for every picture of this set): portrait 3:4 story illustration. The MAIN CHARACTER is CLOSE to the viewer in a medium shot "
