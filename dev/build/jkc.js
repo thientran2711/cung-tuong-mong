@@ -663,7 +663,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /* Mệnh truyện ngoài cung: one kit skill card per thread (chapter label "Chương · Hồi", owner 15/11 20:30Z), then the facts table */
 /* chapter-card-2 (owner #29 «every chapter place»): the khuê các threads (Chương ngoài cung / Tuyển tú / Thanh mai) are ONE kitSlide, not stacked cards; L = [{kicker,title,sub,desc,done}] */
 function kcSlideHTML(L){let im="";try{im=typeof kitOriginWide==="function"?kitOriginWide(S.origin.k):kitOriginArt(S.origin.k)}catch(e){}
- return kitSlide("story-kc",L.map(x=>({kicker:x.kicker,title:x.title,sub:x.sub,img:im,body:kitRows([[x.rl||"Việc",x.desc]]),toc:[x.done?"done":"now",x.title,x.sub]})),{tocTitle:"Mục lục chương"})}
+ return kitSlide("story-kc",L.map(x=>({kicker:x.kicker,title:x.title,sub:x.sub,img:im,body:kitRows([[x.rl||"Việc",x.desc]]),toc:[x.done?"done":"now",x.title,x.sub]})),{tocTitle:"Mục lục chương",tocAll:typeof ktChapToc==="function"?ktChapToc():null})}
 function kcStoryHTML(){const k=S.origin.k;const n=[4,10,16].filter(x=>S.turn>=x).length;const bk=(()=>{try{return RARE97.book()}catch(e){return{}}})();const found=Object.keys(KCRARE).filter(x=>bk[x]).length;
  const nxt=[4,10,16].find(x=>S.turn<x);const tm=S.tm96&&kcTmMan();const left=Math.max(0,kcMonthsLeft());
  const step=S.kc.tt?(S.kc.tt.art?3:2):S.kc.soOk?2:S.kc.so?1:0;

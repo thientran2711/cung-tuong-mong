@@ -66,6 +66,29 @@ function ktWorksHTML(){if(typeof wkKindsOf!=="function"||typeof WK!=="object")re
  L.sort((a,b)=>(b.can-a.can)||(b.level-a.level));return L.map(kitSkillCard).join("")}
 KIT_GLOSS["Tác phẩm"]="Mỗi buổi học hay tự học mà tự tay chơi trò tài nghệ thì ra một tác phẩm (Học nhanh: không ra thành phẩm), cất vào rương để dâng, tặng, bán, bày ở yến tiệc. Phẩm = phần chơi trò tài nghệ (từ 0 đến 10) + chút bậc tài nghệ + vật liệu. Đồ mua bằng bạc vẫn quý hơn. Môn đạt "+BAL.art.nm[5]+" thì tự học là ra tác phẩm ngay.";
 artTabHTML=function(){return ktArtHTML()};
+/* MỤC LỤC CHƯƠNG (owner 24/11 f10-mucluc): EVERY chapter of her road by number + NAME with its state. Past = S.st.ch.past, now = the running chapter (milestone or arc), later = the rest of the plan:
+   a named step (ms:/st:) shows its real name; an open slot (the origin's next premise «o», a shared arc «s») is not chosen yet, so it shows the part's name (BAL.st14.parts via F14). One source: ARC67 / MS67 / F14; no typed names. null = no chapter frame (old v1 save). */
+function ktChapToc(){try{const c=S&&S.st&&S.st.ch;if(!c||!Array.isArray(c.plan))return null;const out=[];
+ (c.past||[]).forEach(x=>{if(x.n!=null)out.push(["done",`Chương ${x.n} · ${msName67(x)}`,x.tag||"đã qua"])});
+ let n=c.n||0;
+ if(!c.all){const m=S.st.ms,M=S.st.M;let t="";try{t=m?MS67[m.id].t():M?ARC67[M.a].t:""}catch(e){}
+  if(t)out.push(["now",`Chương ${n} · ${t}`,"đang làm"]);
+  const max=c.max||14;
+  let road=0;try{const f=S.st.f14;if(f&&f.road&&!f.r0&&ARC67[f.road])road=f.road}catch(e){}
+  /* slots whose arc is not chosen yet («o» next premise of the origin, «s» shared arc): the REAL titles of the arcs still to come, in list order (never a typed name); none left = that chapter cannot run, so it is not listed */
+  const played=new Set((c.past||[]).map(x=>x.a)),Mx=S.st.M?S.st.M.a:"";
+  const rdId=(S.st.f14&&S.st.f14.road)||"";const qo=(c.pool||[]).filter(id=>ARC67[id]&&!played.has(id)&&id!==Mx&&id!==rdId).map(id=>ARC67[id].t);
+  let qs=[];try{qs=arcIds67("*").filter(id=>!(c.usedS||[]).includes(id)&&!played.has(id)&&id!==Mx&&arcOk67(ARC67[id])).map(id=>ARC67[id].t)}catch(e){}
+  c.plan.slice(Math.max(0,(c.i||0)+1)).filter(x=>x!=="fin").forEach(p=>{if(n>=max)return;let nm="",gu=0;
+   if(p==="o"&&road){nm=ARC67[road].t;road=0}
+   try{if(p==="end:12"&&typeof eg12==="function")p=eg12();
+    if(/^ms:/.test(p))nm=MS67[p.slice(3)].t();else if(/^st:/.test(p))nm=ARC67[p.slice(3)].t}catch(e){}
+   if(!nm&&p==="o"){nm=qo.shift()||qs.shift()||"";gu=1}else if(!nm&&p==="s"){nm=qs.shift()||"";gu=1}
+   if(!nm)return;if(gu&&out.some(x=>x[1].endsWith(" · "+nm)))return;n++;out.push(["next",`Chương ${n} · ${nm}`,gu?"dự kiến":"chưa tới"])})}
+ return out.length?out:null}catch(e){console.error(e);return null}}
+window.ktChapToc=ktChapToc;
+/* cung nữ road (owner 24/11, MAIN 127): Thân phận has no chapter slide, so its Mục lục is one kit chip button (data-ktoc) that opens the same Mục lục frame */
+(function(){if(typeof srvRoadHTML!=="function")return;const r0=srvRoadHTML;srvRoadHTML=function(){const h=r0.apply(this,arguments);try{if(ktChapToc())return `<div class="ktop"><button type="button" class="kchip n" data-ktoc="1">Mục lục chương</button></div>`+h}catch(e){}return h}})();
 /* ---------- MỆNH TRUYỆN ---------- */
 function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="object"&&(QUEST67[S.origin.k]||QUEST67.tt))||{t:""};
  const past=c&&c.past?c.past:[];const rare=(S.r97||[]);
@@ -90,8 +113,8 @@ function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="
   if(cur&&fin&&!finIn)cur.body+=rows67([fin]);
   const sl=past.map(x=>{let im=art;try{if(x.a&&typeof stArtOf==="function")im=stArtOf(x.a,null,null)||art}catch(e){}return{kicker:`Chương ${x.n}`,title:msName67(x),sub:x.tag,img:im,body:rows67([["Kết cục",`<b class="${x.k>0?"g":x.k<0?"r":""}">${x.tag}</b>`]]),toc:["done",`Chương ${x.n} · ${msName67(x)}`,x.tag]}});
   if(cur){cur.toc=["now",`Chương ${cur.kicker.replace(/^Chương /,"")} · ${cur.title}`,"đang làm"];sl.push(cur)}
-  h+=`<div class="ktop"><span class="kchip n" data-chap="1">${ktEsc(Q0.t)}</span>${F?` <span class="kchip n" data-chap="1">Chương ${F.n}/${F.max} · ${ktEsc(F.part)}</span>`:""}${nx?` <span class="kchip n" data-chap="1">còn ${F?"":"khoảng "}${nx} chương</span>`:""}</div>`+
-   (sl.length?kitSlide("story-now",sl,{cur:sl.length-1,tocMore:nx?[["next",`Còn ${F?"":"khoảng "}${nx} chương nữa`,"chưa tới"]]:[]}):card)}
+  h+=`<div class="ktop"><span class="kchip n" data-chap="1">${ktEsc(Q0.t)}</span>${F?` <span class="kchip n" data-chap="1">Chương ${F.n}/${F.max} · ${ktEsc(F.part)}</span>`:""}${(()=>{const T=ktChapToc(),k=T?T.filter(x=>x[0]==="next").length:nx;return k?` <span class="kchip n" data-chap="1">còn ${F||T?"":"khoảng "}${k} chương</span>`:""})()}</div>`+
+   (sl.length?kitSlide("story-now",sl,{cur:sl.length-1,tocAll:ktChapToc(),tocMore:nx?[["next",`Còn ${F?"":"khoảng "}${nx} chương nữa`,"chưa tới"]]:[]}):card)}
  else if(sub.cur==="rank"){
   if(S.rank>=7)h+=kitEmpty("Ta là Hoàng hậu, không còn bậc để lên",["Đưa con mình lên ngôi để thành Hoàng thái hậu."],{topic:"Sắc phong"});
   else if(S.out)h+=kitEmpty("Ta đang ở lãnh cung, chưa bàn chuyện sắc phong",[`Được minh oan thì phục vị ${RANKS[Math.max(0,Math.min(6,S.coldRank||0))].n} (hoặc thấp hơn một bậc).`],{topic:"Sắc phong"});
@@ -102,7 +125,7 @@ function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="
  else{const R=[];
   past.forEach(x=>{let im=art;try{if(x.a&&typeof stArtOf==="function")im=stArtOf(x.a,null,null)||art}catch(e){}R.push({kicker:`Chương ${x.n}`,title:msName67(x),sub:x.tag,img:im,body:rows67([["Kết cục",`<b class="${x.k>0?"g":x.k<0?"r":""}">${x.tag}</b>`]]),toc:["done",`Chương ${x.n} · ${msName67(x)}`,x.tag]})});
   rare.forEach(x=>{const tt=ARC67[x.a]?ARC67[x.a].t:x.a;R.push({kicker:"Kết cục hiếm",title:tt,sub:x.tag,img:art,body:rows67([["Kết cục",x.ti&&x.ti!==x.tag?`${x.tag} · danh hiệu «${x.ti}»`:x.tag]]),toc:["done",`✦ ${tt}`,x.tag]})});
-  h+=R.length?kitSlide("story-past",R,{cur:R.length-1}):kitEmpty("Ta chưa qua chương nào",["Mỗi chương khép lại sẽ ghi vào đây."],{topic:"Mệnh truyện"})}
+  h+=R.length?kitSlide("story-past",R,{cur:R.length-1,tocAll:ktChapToc()}):kitEmpty("Ta chưa qua chương nào",["Mỗi chương khép lại sẽ ghi vào đây."],{topic:"Mệnh truyện"})}
  return h}
 KIT_GLOSS["Ngôi Hoàng hậu"]="";
 (function(){const t=()=>{try{KIT_GLOSS["Ngôi Hoàng hậu"]=`Ngôi Hoàng hậu cần: ngôi bỏ trống, có hoàng tử và Thái hậu ${BAL.hhTh} (không con trai: Thái hậu ${has("hieuthao")?BAL.hhThNoSonHieu:BAL.hhThNoSon}), và Đức ${hhNeed(S).duc} (mẹ Thái tử: ${BAL.hhDucHeir}). Khi ngôi trống, Hoàng thượng chọn trong những người đủ điều kiện (nặng ở hoàng tử, Thái hậu, Danh). Đủ điều kiện thì được dự khảo hạch tấn phong; đỗ mới được chọn. ${typeof promoRuleTxt==="function"?promoRuleTxt():""}`}catch(e){}};
@@ -133,6 +156,8 @@ function ktPersonK(k,name,what){let v=null;try{const m=/^r(\d+)$/.exec(k)||/^(\d
 if(typeof q72HTML==="function")q72HTML=function(){return ktQ72HTML()};
 (function(){const st=document.createElement("style");st.id="kit-tabs";st.textContent=`
 .ktop{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 10px}
+/* owner 24/11 (OD L1867): the info chips under a sub-tab bar stay FIXED with the bar (only the content below scrolls); top = bar height, set by ktPinTop */
+.ksub+.ktop,.kpbar+.ktop{position:sticky;top:var(--ktt,40px);z-index:4;background:var(--panel,#f6ead6);padding:4px 0 6px;margin:0 0 6px}
 /* the tab bar's trailing info slot: pinned to the RIGHT END of the bar (stays visible while the tabs scroll) */
 .pctabs>.pctinfo{flex:0 0 auto;margin-left:auto;align-self:center;position:sticky;right:0;padding:0 2px 0 10px;background:var(--panel);white-space:nowrap}
 .pctabs>.pctinfo .kgl{font-size:.82rem}
@@ -156,3 +181,7 @@ html body :is(#panel,#kitpage) .kcattabs.ktsub>.pctinfo{position:static}
 `;document.head.appendChild(st)})();
 /* compact acts (KIT §43) after every panel render: the sub-tab click and the Mệnh truyện pane render through renderPanel, not render */
 (function(){const r0=renderPanel;renderPanel=function(){const r=r0.apply(this,arguments);try{if(typeof kitActCompactOn==="function")kitActCompactOn($("panel"))}catch(e){}return r}})();
+
+/* ktPinTop: the chip row (.ktop) right under a sub-tab bar (.ksub) sticks just below it: its top = the bar's real height */
+(function(){let RO=null;const pin=()=>{try{document.querySelectorAll(".ksub+.ktop,.kpbar+.ktop").forEach(t=>{const b=t.previousElementSibling,h=b.offsetHeight;if(h>0)t.style.setProperty("--ktt",(h-1)+"px");/* the bar may not be laid out yet (0 px) or wrap to 2 rows later (Fold 755): follow its real height */if(window.ResizeObserver){if(!RO)RO=new ResizeObserver(()=>pin());if(!b.__ktro){b.__ktro=1;RO.observe(b)}}})}catch(e){}};window.addEventListener("resize",()=>pin());try{document.fonts&&document.fonts.ready.then(()=>pin())}catch(e){}
+ try{const P=document.getElementById("panel");if(P){let r=0;new MutationObserver(()=>{if(r)return;r=requestAnimationFrame(()=>{r=0;pin()})}).observe(P,{childList:true,subtree:true})}}catch(e){}window.ktPinTop=pin})();

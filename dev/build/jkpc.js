@@ -8,7 +8,7 @@ function kitPanelCompact(dlg){try{if(!dlg||!dlg.classList.contains("kpanel")||dl
  const mb=dlg.querySelector(":scope > #mb");if(!mb)return false;
  if(mb.querySelector(".kpmenu,.kpt-mount"))return true;  /* title menu and its sub-screens (Chọn sổ, Thiết lập, Sổ luân hồi): forms / short lists, fitted up to --kph */
  /* panels built around a stage / big picture / person keep the one big size */
- if(mb.querySelector(".kpsubj.kes,.kpid,.kpfaces,.kdlgart,.kpev,.kmlist")||dlg.querySelector(":scope > .kdper,:scope > .kdlgart"))return false;
+ if(mb.querySelector(".kpsubj.kes,.kpid,.kpfaces,.kdlgart,.kpev,.kmlist,.kmuc")||dlg.querySelector(":scope > .kdper,:scope > .kdlgart"))return false;
  /* the rest is decided by CONTENT: fitted height (class on) is at most KPC_MAX of the big frame height (class off) -> short content fits itself, long content keeps the one big size */
  const had=dlg.classList.contains("kpcompact");dlg.classList.remove("kpcompact");const big=dlg.offsetHeight;dlg.classList.add("kpcompact");const nat=dlg.offsetHeight;
  if(!had)dlg.classList.remove("kpcompact");
