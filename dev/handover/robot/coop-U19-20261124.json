@@ -19392,9 +19392,9 @@
        "year": 2
       },
       "whereDiff": 0,
-      "posDiff": 72,
+      "posDiff": 76,
       "statLag": 1,
-      "cmp": 59
+      "cmp": 61
      }
     ],
     "rejoin": [
@@ -19482,7 +19482,7 @@
    },
    "rooms": 24,
    "t": {
-    "total": 20919704
+    "total": 21012813
    },
    "partial": true,
    "bugs": [
@@ -19546,12 +19546,12 @@
      "type": "coop-pos",
      "msg": "where one sees the friend ≠ where the friend is",
      "detail": "buổi 6.0 host sees guest at tn, guest is at r5 · {\"host\":{\"fpos\":\"6.0 r5 life1 Lôi Kiều Nguyệt\",\"me\":\"6.0 home\",\"life\":0,\"f\":\"902 Lôi Kiều Nguyệt pal r5 where r5\",\"thl\":0,\"h7\":null},\"guest\":{\"fpos\":\"6.0 home life0 Chân Tố Ngưng\",\"me\":\"6.0 r5\",\"life\":1,\"f\":\"901 Chân Tố Ngưng pal r5 where r5\",\"thl\":0,\"h7\":null}}",
-     "n": 165,
-     "nNew": 75,
+     "n": 169,
+     "nNew": 79,
      "sha": "0618959d",
      "shaNew": "f6248f79",
      "at": "coop-p19-S1",
-     "lastDetail": "buổi 45.3 guest sees host at P:a, host is at r3 · {\"host\":{\"fpos\":\"45.3 home life1 Tư Mã Linh Tê\",\"me\":\"45.3 home\",\"life\":0,\"f\":\"902 Tư Mã Linh Tê pal r902 where r902\",\"thl\":0,\"h7\":null},\"guest\":{\"fpos\":\"45.3 home life0 Nhan Uyển Thanh\",\"me\":\"45.3 home\",\"life\":1,\"f\":\"901 Nhan Uyển Thanh pal r901 where r901\",\"thl\":0,\"h7\":null}}"
+     "lastDetail": "buổi 46.3 guest sees host at P:a, host is at r3 · {\"host\":{\"fpos\":\"46.3 home life1 Tư Mã Linh Tê\",\"me\":\"46.3 home\",\"life\":0,\"f\":\"902 Tư Mã Linh Tê pal r902 where r902\",\"thl\":0,\"h7\":null},\"guest\":{\"fpos\":\"46.3 home life0 Nhan Uyển Thanh\",\"me\":\"46.3 home\",\"life\":1,\"f\":\"901 Nhan Uyển Thanh pal r901 where r901\",\"thl\":0,\"h7\":null}}"
     },
     {
      "type": "stuck",

@@ -1,0 +1,40 @@
+  coop-p19-S1 Y(guest, ipad) kiếp 6: cn/cn_chu → Xuất gia [thường: Xuất gia] · max Đáp ứng · 0.25 y · 1.0 min
+  coop-p19-S1 Y(guest, ipad) kiếp 7: ch/ch_benh → Xuất gia [thường: Xuất gia] · max Thường tại · 0.5 y · 4.3 min
+  coop-p19-S1 room 2NZA (X hosts): 20 weeks · 85 buổi · 12.4 min · turn p95 29274 ms · stuck
+  coop-p19-S1 rejoin (guest re-opens the game) 5625 ms
+  coop-p19-S1 room 8BX5 (X hosts): 9 weeks · 41 buổi · 15.2 min · turn p95 98013 ms · stuck
+  coop-p19-S1 Y(guest, ipad) kiếp 8: pf/pt_tang → Phế làm thứ dân [thường: Phế làm thứ dân, xuất cung] · max Thường tại · 0.08 y · 1.7 min
+  coop-p19-S1 rejoin (guest re-opens the game) 5962 ms
+  coop-p19-S1 room CVKB (X hosts): 7 weeks · 33 buổi · 7.5 min · turn p95 32611 ms · stuck
+  coop-p19-S1 rejoin (guest re-opens the game) 6107 ms
+  coop-p19-S1 room JV2E (X hosts): 10 weeks · 45 buổi · 11.5 min · turn p95 100752 ms · stuck
+  coop-p19-S1 room WWBS (X hosts): 1 weeks · 8 buổi · 4.8 min · turn p95 34835 ms · stuck
+  coop-p19-S1 rejoin (guest re-opens the game) 5207 ms
+  coop-p19-S1 room Y5FQ (X hosts): 25 weeks · 106 buổi · 27.4 min · turn p95 99807 ms · stuck
+flushed on SIGTERM
+--- RESUME 16:23Z (2h limit) ---
+RESUME /home/user/wt/u19-out/coop-20261124-1258-p19-20.json: coop-p19-S1 partial 12 lives
+ROBOT-10 CO-OP pairs 19-20 · 10 kiếp per seat · X (Fold) hosts · seed 1 · 1 parallel · origins tt dtq muoi cn nc td ch thd cnv pf bd · Worker https://ctm-coop.victoria-tntt.workers.dev
+  coop-p19-S1 rejoin (guest re-opens the game) 5477 ms
+  coop-p19-S1 room 8AXE (X hosts): 24 weeks · 101 buổi · 15.3 min · turn p95 31286 ms · stuck
+  coop-p19-S1 rejoin (guest re-opens the game) 5292 ms
+  coop-p19-S1 room UAVZ (X hosts): 17 weeks · 73 buổi · 15.6 min · turn p95 84545 ms · stuck
+  coop-p19-S1 room BX9W (X hosts): 3 weeks · 15 buổi · 5.1 min · turn p95 20998 ms · stuck
+  coop-p19-S1 room V5UZ (X hosts): 5 weeks · 24 buổi · 10 min · turn p95 104364 ms · stuck
+  coop-p19-S1 rejoin (guest re-opens the game) 5294 ms
+  coop-p19-S1 Y(guest, ipad) kiếp 9: dtq/dtq_huynh → Phế làm thứ dân [thường: Phế làm thứ dân, xuất cung] · max Đáp ứng · 0.17 y · 0.3 min
+  coop-p19-S1 room BCSH (X hosts): 22 weeks · 93 buổi · 21.8 min · turn p95 103518 ms · stuck
+  coop-p19-S1 rejoin (guest re-opens the game) 6916 ms
+  coop-p19-S1 room XQ7T (X hosts): 12 weeks · 53 buổi · 17.1 min · turn p95 100174 ms · stuck
+  coop-p19-S1 room F4CV (X hosts): 3 weeks · 16 buổi · 5.9 min · turn p95 40768 ms · stuck
+  coop-p19-S1 rejoin (guest re-opens the game) 5226 ms
+flushed on SIGTERM
+--- RESTART pair 19 only 18:04Z (pair 20 → U21 per foreman child6) ---
+RESUME /home/user/wt/u19-out/coop-20261124-1258-p19-20.json: coop-p19-S1 partial 13 lives
+ROBOT-10 CO-OP pairs 19-19 · 10 kiếp per seat · X (Fold) hosts · seed 1 · 1 parallel · origins tt dtq muoi cn nc td ch thd cnv pf bd · Worker https://ctm-coop.victoria-tntt.workers.dev
+  coop-p19-S1 rejoin (guest re-opens the game) 7158 ms
+  coop-p19-S1 room NH3K (X hosts): 8 weeks · 37 buổi · 15.2 min · turn p95 104807 ms · stuck
+  coop-p19-S1 room 5RXG (X hosts): 4 weeks · 20 buổi · 5.8 min · turn p95 29791 ms · stuck
+  coop-p19-S1 room SR8W (X hosts): 2 weeks · 12 buổi · 5.1 min · turn p95 27731 ms · stuck
+  coop-p19-S1 rejoin (guest re-opens the game) 6850 ms
+flushed on SIGTERM
