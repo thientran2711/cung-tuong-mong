@@ -13,39 +13,43 @@
 (function(){try{
 const KIT_PLAQUE=window.KIT_PLAQUE=window.KIT_PLAQUE||{
  dropMs:700,stagger:80,swayS:[3.4,4.6],swayDeg:1.3,liftMs:200,liftDy:-8,liftScale:1.05,closeMs:170,
- w:{kv1:152,kv2:200},h:{kv1:62,kv2:56},pic:{kv1:40,kv2:48},cord:{rail:18,gap:10,gapS:6},hS:50,gx:8,max:6,railAt:.40,railMin:.18,railLap:.34,slimW:140,minW:128,post:8,tabH:34,
+ w:{kv1:152,kv2:200},h:{kv1:62,kv2:56},pic:{kv1:40,kv2:48},cord:{rail:18,gap:10,gapS:6},hS:50,gx:8,max:6,railAt:.40,railMin:.18,railLap:.34,slimW:140,minW:128,post:8,tabH:34,pen2:1500,penS:4000,obst:'#kshR,#kshL,.kshR,.kshL,.krail,.krailb,#kpname,.kchip,.tok .tag,.kscn-tag,#tomap',
  motion:null /* test hook: true = ignore reduced motion */};
 const kv=()=>document.documentElement.classList.contains("kv2")?"kv2":"kv1";
 const still=()=>{if(KIT_PLAQUE.motion===true)return false;try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)||document.documentElement.classList.contains("kf-still")}catch(e){}return false};
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const DIM=()=>Object.assign({b:.7,s:.75,ms:220},(typeof BAL!=="undefined"&&BAL.kdim)||{});
+const DIM=()=>BAL.kdim;/* law 4: the numbers live in BAL.kdim only */
 let CUR=null;
 function btn(a,i){return typeof kitFocus!=="undefined"&&kitFocus.btn?kitFocus.btn(a,i):`<button type="button" class="kfoc-b" data-i="${i}" data-id="${esc(a.id)}"><span class="kfoc-t"><b>${esc(a.n)}</b></span></button>`}
 /* anchor of a stage figure inside the host (host px) */
 function rect(el,host){host=host||document.getElementById("stage")||document.body;const h=host.getBoundingClientRect(),r=el.getBoundingClientRect();return {x:r.left-h.left,y:r.top-h.top,w:r.width,h:r.height}}
+/* the kit parts of the stage that a plaque band must never cover, as rects in host px (visible, not inside the picker, not a whole-stage container) */
+function obstacles(host){const K=KIT_PLAQUE,h=host.getBoundingClientRect(),out=[];try{host.querySelectorAll(K.obst).forEach(e=>{if(e.closest(".kpk")||e.hidden||getComputedStyle(e).visibility==="hidden")return;const r=e.getBoundingClientRect();if(r.width<6||r.height<6||r.width*r.height>.55*h.width*h.height)return;out.push({x:r.left-h.left,y:r.top-h.top,w:r.width,h:r.height})})}catch(e){}return out}
 function open(o){if(CUR)CUR.destroy();o=o||{};const host=o.host||document.getElementById("stage")||document.body,m=kv(),K=KIT_PLAQUE;
  const P={o,host,m,anims:[],open:true,up:null};CUR=P;
  const gs=o.groups&&o.groups.length?o.groups:[{k:"",n:"",acts:o.acts||[]}];P.groups=gs;P.group=o.group||gs[0].k;
- const el=P.el=document.createElement("div");el.className="kpk kpk-"+m+(still()?" kpk-still":"");el.setAttribute("role","group");el.setAttribute("aria-label","Chọn việc");host.appendChild(el);
+ P.obst=obstacles(host);const el=P.el=document.createElement("div");el.className="kpk kpk-"+m+(still()?" kpk-still":"");el.setAttribute("role","group");el.setAttribute("aria-label","Chọn việc");host.appendChild(el);
  build(P);if(o.dismiss!==false){P.away=e=>{if(!P.open||el.contains(e.target))return;P.close()};setTimeout(()=>{if(P.open)document.addEventListener("pointerdown",P.away,true)},0)}
  P.lift=id=>lift(P,id);P.setGroup=k=>{if(k===P.group)return;P.group=k;build(P,true)};P.close=()=>close(P);P.destroy=()=>destroy(P);
  return P}
 function geo(P){const K=KIT_PLAQUE,m=P.m,hr=P.host.getBoundingClientRect(),A=P.o.anchor||{x:hr.width*.4,y:hr.height*.2,w:hr.width*.2,h:hr.height*.6},W=hr.width,H=hr.height;
  const gr=P.groups.find(g=>g.k===P.group)||P.groups[0],acts=(gr.acts||[]).slice(0,K.max),n=acts.length,post=K.post;
- /* the band (columns + post) goes on the side that has room and covers the fewest OTHER people (o.avoid = their anchors) */
+ /* the band (tabs + rail + columns + post) goes on the side, tier and height that cover the least: kit parts of the stage (P.obst: right column, rail chips, title, name tags, corner buttons) count HARD, other people (o.avoid) SOFT */
+ const ovl=(x0,y0,x1,y1,L)=>{let a=0;L.forEach(o=>{const w=Math.min(x1,o.x+o.w)-Math.max(x0,o.x),hh=Math.min(y1,o.y+o.h)-Math.max(y0,o.y);if(w>0&&hh>0)a+=w*hh});return a};
+ const tabsEst=P.groups.length>1?K.tabH+8:0,av=P.o.avoid||[],ob=P.obst||[];
  const fit=s=>{let free=s==="r"?W-(A.x+A.w)-8:A.x-8,minRail=A.y+A.h*K.railMin;const maxB=H-6;
   /* last resort on a narrow phone: the band may lap the outer 35 % of her BODY (never her face: the rail then starts below the shoulders) */
   let lap=0;if(free<K.w[m]*.9&&!(P.o.noLap)){lap=Math.round(A.w*.35);free+=lap;minRail=Math.max(minRail,A.y+A.h*K.railLap)}
   const mk=(cols,comp)=>{let cw=cols===2?Math.min(K.w[m],Math.floor((free-post-10-K.gx)/2)):Math.min(K.w[m],free-post-6);cw=Math.max(cols===2?K.minW:104,cw);
-   const hh=comp?K.hS:K.h[m],gg=comp?K.cord.gapS:K.cord.gap,bw=cols*cw+(cols-1)*K.gx,x0=s==="r"?A.x+A.w+6-lap:A.x-6-bw-post-4+lap,rows=Math.ceil(n/cols),tot=K.cord.rail+rows*hh+(rows-1)*gg;
-   const want=A.y+A.h*K.railAt,top=Math.max(minRail,Math.min(want,maxB-tot)),over=Math.max(0,top+tot-maxB);return {cols,cw,bw,x0,rows,tot,top,over,hh,gg,comp:!!comp}};
-  /* 1 column if it fits low, else 2 columns (narrower), else the one that overflows least */
-  let c1=mk(1),c2=n>3&&free>=2*K.minW+post+10+K.gx?mk(2):null;let C=c1;if(c2&&(c1.over>0&&c2.over<c1.over||(n>3&&free>=2*K.w[m]+post+10+K.gx)))C=c2;
-  if(C.over>0){const d1=mk(1,1),d2=c2?mk(2,1):null;C=d2&&d2.over<d1.over?d2:d1;if(C.over>0&&d2&&d2.over<C.over)C=d2}/* tier S (compact) only when M cannot fit */
-  const bx0=s==="r"?C.x0:C.x0-post-4,bx1=s==="r"?C.x0+C.bw+post+4:C.x0+C.bw,by0=C.top,by1=C.top+C.tot;let ov=0;(P.o.avoid||[]).forEach(o=>{const w=Math.min(bx1,o.x+o.w)-Math.max(bx0,o.x),hh=Math.min(by1,o.y+o.h)-Math.max(by0,o.y);if(w>0&&hh>0)ov+=w*hh});
-  return Object.assign({s,free,ov,lap},C)};
+   const hh=comp?K.hS:K.h[m],gg=comp?K.cord.gapS:K.cord.gap,bw=cols*cw+(cols-1)*K.gx,x0=s==="r"?A.x+A.w+6-lap:A.x-6-bw-post-4+lap,rows=Math.ceil(n/cols),tot=K.cord.rail+rows*hh+(rows-1)*gg;return {cols,cw,bw,x0,rows,tot,hh,gg,comp:!!comp,pen:(cols===2?K.pen2:0)+(comp?K.penS:0)}};
+  const V=[mk(1)];if(n>3&&free>=2*K.minW+post+10+K.gx)V.push(mk(2));V.push(mk(1,1));if(n>3&&free>=2*K.minW+post+10+K.gx)V.push(mk(2,1));
+  let best=null;V.forEach(C=>{const want=A.y+A.h*K.railAt,lo=Math.max(minRail,2+tabsEst),hi=maxB-C.tot,T=[Math.max(minRail,Math.min(want,hi))];for(let t=lo;t<=hi;t+=6)T.push(t);
+   const bx0=s==="r"?C.x0:C.x0-post-4,bx1=s==="r"?C.x0+C.bw+post+4:C.x0+C.bw;
+   T.forEach(top=>{const over=Math.max(0,top+C.tot-maxB),y0=top-tabsEst,hard=ovl(bx0,y0,bx1,top+C.tot,ob),soft=ovl(bx0,y0,bx1,top+C.tot,av);
+    const cost=hard*100+soft+over*C.bw*200+C.pen+Math.abs(top-want)*.05*C.bw;if(!best||cost<best.cost)best=Object.assign({cost,hard,soft,over,top},C)})});
+  return Object.assign({s,free,ov:best.hard+best.soft,lap},best)};
  let side=P.o.side&&P.o.side!=="auto"?P.o.side:null,F;
- if(side)F=fit(side);else{const r=fit("r"),l=fit("l");F=r.ov!==l.ov?(r.ov<l.ov?r:l):(r.free>=l.free?r:l)}
+ if(side)F=fit(side);else{const r=fit("r"),l=fit("l");F=r.cost!==l.cost?(r.cost<l.cost?r:l):(r.free>=l.free?r:l)}
  let railY=F.top;
  const tabsH=P.groups.length>1?K.tabH+8:0;if(railY-tabsH<2)railY=2+tabsH;
  return {lapped:F.lap>0,comp:F.comp,A,acts,n,side:F.s,cols:F.cols,cw:F.cw,h:F.hh,gap:F.gg,rows:F.rows,railY,bandW:F.bw,x0:F.x0,post,floor:Math.min(A.y+A.h,H-2),tabsH,W,H}}
@@ -82,7 +86,7 @@ function lift(P,id){const K=KIT_PLAQUE,n=P.el.querySelector(`.kpk-n[data-id="${C
 function close(P){if(!P||!P.open)return;P.open=false;document.removeEventListener("pointerdown",P.away,true);const K=KIT_PLAQUE,N=[...P.el.querySelectorAll(".kpk-n,.kpk-tabs,.kpk-rail,.kpk-post")];
  if(!still()&&N[0]&&N[0].animate){N.forEach(x=>x.animate([{opacity:1},{opacity:0}],{duration:K.closeMs,fill:"forwards"}));setTimeout(()=>destroy(P,true),K.closeMs+20)}else destroy(P,true)}
 function destroy(P,fromClose){if(!P)return;P.open=false;document.removeEventListener("pointerdown",P.away,true);P.anims.forEach(a=>{try{a.cancel()}catch(e){}});P.anims.length=0;try{P.el.remove()}catch(e){}if(CUR===P){CUR=null;if(P.o.onClose&&fromClose!==false)try{P.o.onClose()}catch(e){}}}
-window.kitPick={open,rect,current:()=>CUR,close:()=>{if(CUR)CUR.close()},destroy:()=>{if(CUR)CUR.destroy()}};
+window.kitPick={open,rect,obstacles,current:()=>CUR,close:()=>{if(CUR)CUR.close()},destroy:()=>{if(CUR)CUR.destroy()}};
 
 /* ---------- kitDim: ONE dim for the people who are not chosen (owner OD 24/11 ~09:05Z + ~15:30Z) ----------
    figure only, never the background, never see-through: a copy of the figure image with a STATIC filter (brightness + saturate from BAL.kdim) cross-fades on top of the figure
