@@ -31,6 +31,8 @@ function dqOldPending(){try{
   if(document.getElementById("kpodov")||document.querySelector('[id^="kroul"],.kroul-ov'))return true}catch(e){}return false}
 /* (b) the new-day host (#dawn: kitNewDay title card, then the Tuần lục book) is on screen */
 function dqDawn(){try{const d=document.getElementById("dawn");if(d&&!dqHidden(d)&&(d.classList.contains("on")||d.classList.contains("kne-day")))return true;
+  /* the kit day title card (#kdaytc, review/kit-daytitle, not on main yet) counts as part of the new-day host */
+  const k=document.getElementById("kdaytc");if(k&&!dqHidden(k)&&k.getBoundingClientRect().width>0)return true;
   return document.body.classList.contains("kbk-open")}catch(e){return false}}
 function dqIsNews(m){return !!(m&&typeof m==="object"&&(m.kind==="news"||/^Tin trong cung/.test(String(m.t||""))))}
 function dqIsEnd(m){return !!(m&&typeof m==="object"&&(m.kind==="end"||/end|death|pcm|nlcard/.test(m.cls||"")))}

@@ -65,6 +65,8 @@ function sp13Release(){if(SP13.off()||!SP13.L.length)return 0;const now=SP13.now
  for(const x of SP13.L){if(x.due>now){keep.push(x);continue}
   if(!sp13Alive(x.m)){x.m.__sp13r="void";SP13.stat.void++;try{if(typeof evDropInfo==="function")evDropInfo(x.m)}catch(e){}continue}
   const lim=x.code?B.codeWait:B.maxWait;const force=now-x.b0>=lim||(x.end!=null&&now>=x.end);
+  /* FLIGHT-DAYQ: the first buổi of a day releases only cards that fit the morning (slot 0); the rest wait one more buổi unless forced */
+  if(!force&&(S.buoi||0)===0&&BAL.spread.dawnSlot!=null&&sp13Slot(x.m)!==0){x.due=now+1;keep.push(x);continue}
   if(z.n<cap||force){if(force&&z.n>=cap)SP13.stat.forced++;if(now>x.slotDue)SP13.stat.carried++;x.m.__sp13c=now;x.m.__sp13r="rel"+now;z.n++;Q.push(x.m);SP13.stat.released++;n++}
   else{x.due=now+1;keep.push(x)}}
  SP13.L=keep;sp13Sync();return n}
