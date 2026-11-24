@@ -1466,3 +1466,6 @@ PROMO-BUILD 2 follow-ups: her HH nomination (law 1) + deathbed/truy phong exams 
 | MOMENT FIX r1 E75 (opus BIG; E73r FAIL 5a504f92 5 items; briefs/E75-moment-fix.md) | review/moment-r | FOREMAN E (child2) | session_01DgYSWqADFR2kTet7NyTmeC | RUNNING | 24/11 08:37Z |
 PROMO-BUILD 2 follow-ups: her HH nomination (law 1) + deathbed/truy phong exams + Emperor-death mourning + Phân cung nit (opus BIG; briefs/D-promo-build-2.md) | review/promo-build-2 | session_01D3E3NYnT9a58st5Vj9RX4B | RUNNING | 24/11 08:40Z (Foreman D depth 1)
 | RV-SELX BIG review of review/selection-scene 7a1b4a10 (opus; briefs/M120-selscene-review.md) | review/selection-scene-rv; reports/selection-scene.md | MAIN 120 | session_01V1ZZH2YJQJsKuz5reHfkkt | RUNNING | 24/11 08:40Z |
+| REVIEW kit-noprewarn (sonnet SMALL; briefs/b-kit-noprewarn-review.md; ORDER MAIN 119 08:25Z) of review/kit-noprewarn 1d4fc04d | review/kit-noprewarn-r1; reports/kit-noprewarn.md | B | session_01N1tNP5dbixXSuyxL38fcxB | RUNNING | 24/11 08:45Z |
+| ROBOT-COOP FIXER #3 (opus) | review/robot-coop-fix-1 r2 + review/robot-coop-fix-2 | B | session_01N1tNP3zZjxpPAGUUKwUTEY | RUNNING | 24/11 08:35Z |
+| SIDE-LINE DLG LEAD #3 (opus) | review/sideline-dlg (+ -2 second wave) | B | session_01N1tNP6z16eEuagFdH5WCZE | RUNNING | 24/11 08:15Z |
