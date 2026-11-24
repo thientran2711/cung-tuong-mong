@@ -1578,3 +1578,4 @@ selection-scene r5 (successor of SELSCENE-14) | review/selection-scene | session
 | REVIEW robot-fix-cnv-2 e47c61b7 (opus BIG; briefs/F-robot-fix-cnv-review.md; -2 = r1 + R2-R7 + timer family) | review/robot-fix-cnv-2; reports/robot-fix-cnv.md | F | session_01UV1SzjMXDaJGsi9iroajKn | RUNNING | 24/11 22:08Z |
 day-queue-2 khắc-level hold (owner 22:02Z item 1; successor of FLIGHT-DAYQ) | review/day-queue-2 | session_01V1ZZH4qKPudWMUYiixskpu | RUNNING | 2026-11-24T22:12Z (MAIN 128)
 face-master03 GALLERY (one HTML link; sonnet; briefs/D-face-master03-gallery.md) | CDN img/_review/face-master03/gallery/ | session_01D3E3NaFMSB4w1CvymaLeea | RUNNING | 24/11 22:30Z | FOREMAN D
+BIG REVIEW minigame-fix dbd5ea4d | review/minigame-fix | session_01V1ZZH4xEdReniygn67owPB | RUNNING | 2026-11-24T22:42Z (MAIN 128)
