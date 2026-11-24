@@ -11,11 +11,10 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const REALL=require('./lib/coop-real.js');async function mk(b,name,vp,want){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:1,reducedMotion:'reduce'});await serve(ctx);await REALL.origin(ctx,name==='host'?'a':'b');
   await ctx.addInitScript(([u,w])=>{window.COOP_URL=u;if(w)try{localStorage.setItem('ctm-thin',String(w))}catch(e){}
    window.__co=()=>{const c=window.COOP;if(!c)return{};return{code:c.code,seat:c.seat,world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.on)}};
-   /* a dead socket: while __mute, every `do` frame this page sends is dropped (the socket still looks open); __wss = the page's sockets */
-   const W0=window.WebSocket,s0=W0.prototype.send;window.__wss=[];window.__drop=[];
-   W0.prototype.send=function(d){if(window.__mute&&typeof d==='string'&&d.indexOf('"t":"do"')>=0){window.__drop.push(d.slice(0,80));return}return s0.apply(this,arguments)};
-   window.WebSocket=function(u,p){const s=p===undefined?new W0(u):new W0(u,p);window.__wss.push(s);/* r1 #3: a dead HOST socket: while __deaf, every relayed `do` frame that reaches this page is dropped (registered first: stops onmessage too) */s.addEventListener('message',ev=>{if(window.__holdThin&&typeof ev.data==='string'&&ev.data.indexOf('"t":"thin"')>=0){(window.__thq=window.__thq||[]).push([s,ev.data]);ev.stopImmediatePropagation();return}if(window.__deaf&&typeof ev.data==='string'&&ev.data.indexOf('"t":"do"')>=0){window.__lost=(window.__lost||[]);window.__lost.push(ev.data.slice(0,80));ev.stopImmediatePropagation()}});return s};window.WebSocket.prototype=W0.prototype;
-   Object.assign(window.WebSocket,{CONNECTING:0,OPEN:1,CLOSING:2,CLOSED:3})},[WURL,want]);
+   },[WURL,want]);
+  /* a dead socket (__mute: her `do` sends dropped; __deaf: relayed `do` dropped on arrival; __holdThin: `thin` held in __thq), string AND gzip
+     binary frames: ONE source, dev/test/lib/coop-wire.js hostNet (review N2 of robot-coop-fix-1 r2) */
+  await ctx.addInitScript(require('./lib/coop-wire.js').hostNet);
   const p=await ctx.newPage();p.setDefaultTimeout(90000);const o={name,ctx,p,errs:[]};
   p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon|fonts\.gstatic|CORS|WebSocket/.test(m.text()))o.errs.push('console: '+m.text().slice(0,300))});return o}
 const tapText=async(o,re,ms=8000)=>{const t0=Date.now();while(Date.now()-t0<ms){const r=await o.p.evaluate(src=>{const R=new RegExp(src);

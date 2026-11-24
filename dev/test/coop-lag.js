@@ -69,7 +69,10 @@ async function press(o,k0){for(let t=0;t<80;t++){await clear(o);const r=await o.
   for(let t=0;t<200&&!done;t++){const a=await A.p.evaluate(()=>__co2()),c=await B.p.evaluate(()=>__co2());if(a.key!==k0&&c.key!==k0&&(a.key===c.key||a.waiting||c.waiting))done=true;else{await clear(A);await clear(B);await sleep(150)}}
   const ka=await A.p.evaluate(()=>__co2().key),kb=await B.p.evaluate(()=>__co2().key);
   const ca=await A.p.evaluate(k=>window.__kch[k]||0,ka),cb=await B.p.evaluate(k=>window.__kch[k]||0,kb);
-  const ms=done&&t2&&ca&&cb?Math.max(ca,cb)-t2:-1;R.turns.push({k0,to:[ka,kb],ms});
+  /* robot-coop-fix-1 r2 review N3: the buổi can step before the second press() returns (press() spends time in clear() on dialogs) → the
+     raw time went NEGATIVE and the turn counted as «stuck» although both keys moved. A turn is stuck only when the key did not move (moved);
+     a step that landed before the last press returned took 0 ms after it. */
+  const ms=done&&t2&&ca&&cb?Math.max(0,Math.max(ca,cb)-t2):-1;R.turns.push({k0,to:[ka,kb],ms,moved:done});
   if(PROF){R.prof=R.prof||{};for(const o of [A,B]){const {profile:P}=await o.cdp.send('Profiler.stop');const dt={};const N=new Map(P.nodes.map(n=>[n.id,n]));const par={};for(const n of P.nodes)for(const c of n.children||[])par[c]=n.id;
    for(let i=0;i<P.samples.length;i++)dt[P.samples[i]]=(dt[P.samples[i]]||0)+(P.timeDeltas[i]||0);const self={},tot={};
    for(const [id,us] of Object.entries(dt)){const n=N.get(+id);const f=n.callFrame;const k=(f.functionName||'(anon)')+' '+(f.url||'').split('/').pop()+':'+(f.lineNumber+1);self[k]=(self[k]||0)+us;
@@ -87,6 +90,6 @@ async function press(o,k0){for(let t=0;t<80;t++){await clear(o);const r=await o.
  R.frames=C.frames;R.lat=C.lat;R.metrics=Object.assign(C.metrics,{coopRejoinMs:R.rejoin.ms,pageErrors:A.errs.length+B.errs.length});
  R.errs=A.errs.concat(B.errs).slice(0,8);
  const over=verdict(R.metrics,BUDGET);
- if(turnMs.length<NB)over.push('buổi stuck: '+(NB-turnMs.length)+' of '+NB);if(R.metrics.pageErrors)over.push('page errors '+R.metrics.pageErrors);
+ {const nStuck=R.turns.filter(x=>!x.moved).length;if(nStuck)over.push('buổi stuck: '+nStuck+' of '+NB)}if(R.metrics.pageErrors)over.push('page errors '+R.metrics.pageErrors);
  R.over=over;console.log(JSON.stringify({metrics:R.metrics,over}));console.log(JSON.stringify(C.frames));
  if(OUT)fs.writeFileSync(OUT,JSON.stringify(R,null,1));await b.close();console.log(over.length?'FAIL\n'+over.join('\n'):'PASS coop-lag');process.exit(over.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});
