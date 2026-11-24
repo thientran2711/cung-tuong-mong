@@ -223,3 +223,43 @@ Part A reputation titles: unchanged (PASSED). KIT: §82 / §82.1 parts only; kit
 | titles2-ui Fold 755x1000 + iPad 1180x820 @2 | PASS (topmost every step); WARN K-DH-CAPFIT only. Shots: dev/handover/shots/titles2-r/ (CDN upload refused: no Cloudflare key in this container) |
 
 Names: 1040 new (768 chapter + 272 chain) + 15 mưu hại group + 5 bad lập công; all ≤ 4 words, unique in DH_CAT, clash-free vs jdh / jkcg / jge / j8 / arc + chapter names (3 first-draft clashes with existing DH_CAT names renamed: «Một dạ với vua», «Mở ải đón người», «Bí mật hại người»).
+
+## FIX r2 (E62, session_01DgYSWneH8kcAmxPqvFy7XZ) — SẴN SÀNG KIỂM titles2-r2 2bbba7ee
+PRIORITY #1 CHECK: ('danh hiệu|titles2|j72c|J72SEEDS|dh pair') OD 23/11 ~22:45Z Q + ~22:55Z BUILD NOW (verbatim, «EACH … j72 việc nhờ chain») | main 27240ccb: j72c.js:81-95 j72cReg, j72sd.js (256 seeds), j72sd_build.py, dev/test/j72seeds_validate.py (Foreman B THIN) | review/titles2-r2 a16b0341 (E61r FAIL r2) | claims TITLES2 (E), THIN (B).
+Branch review/titles2-r2: a16b0341 → **a8b99f9e** (titles) → **2bbba7ee** (perf). origin/main still 27240ccb = already merged in a16b0341 (no new merge needed).
+
+### (1) BLOCKING — a title pair for EACH composed việc nhờ chain, at the SOURCE
+- Seed schema: new field `"dh":"good/bad"` (right after `title`) on all 256 seeds in dev/handover/content/thin/j72seeds_a.md (craft 63 + social 64) and j72seeds_b.md (court 63 + fam 66); j72sd.js rebuilt by j72sd_build.py (no hand edit). The 512 names come from each seed's own title / object / obstacle (e.g. craft-001 «Mò tìm trâm ngọc dưới hồ sen» → «Mò trâm hồ sen / Trâm chìm đáy bùn»; court-043 «Giữ kín chẩn đoán của thái y» → «Kín lời thái y / Lộ bệnh thái y»; fam-052 → «Thư phúng viếng kịp / Phúng viếng trễ tang»). Good = done, bad = dropped / late / exposed. All ≤ 4 words, no placeholders or digits. Modern words in the seeds were not reused: object «lọ siro ho» → «Thuốc ho cho ông», «sinh nhật» → «sinh thần», «công thức» → «phép bánh».
+- jdh3.js: `VNC["c:"+id]` is read from J72SEEDS (no hand list; a new seed with dh gets its title without touching jdh3); vnName replaces {A}/{B} in the how text («Việc nhờ «Pha thuốc cao trị bỏng cho người nhờ»: làm xong, trọn lời đã nhận»).
+- Gates that fail a seed with no pair: **j72seeds_validate.py** (dh missing / not 2 names / good == bad / > 4 words / placeholder-digit-% / dup over seeds / equal to a jdh3n name) → the a16b0341 seed files give **256 errors**, these give 0. **titles2-scan.js**: every J72SEEDS seed must have its pair AND be registered by j72c (on top of the existing per-T72I row). **titles2-unit F6** (3 cases): every seed has its pair from dh; ok → good and bad (bại lộ) → bad on a `c:` chain; how text without placeholders. F6 + F2 FAIL on a16b0341 (62/66), PASS here.
+- j72c.js NOT touched (its API kept).
+
+### FOR B (THIN writers / Foreman B)
+Every NEW j72 seed line must carry `"dh":"<good>/<bad>"` (≤ 4 words each, cổ trang, from the seed's own content, unique). Without it **dev/test/j72seeds_validate.py FAILS** the seed and titles2-scan reports it missing. Please add the field to the schema text in reports/thin.md «## API P3» (B's file, I did not edit it). The full clash check vs every DH_CAT / j8 / arc name = `node dev/test/titles2-scan.js <page>`.
+
+### (2) PERF
+Cause found: jdh.js dhSync walked the WHOLE title catalogue for her every buổi (endTurn), for every NPC each month and on every dhInc. The catalogue grew from 395 keys (LIVE) to 2164, so each call cost ~5× more. Fix (jdh.js, same result): only walk the keys that can change (derived counts nights / kids / meta / l_*, or a first need ≤ 0) plus the person's own held keys, in catalogue order. A stored-count key she has never stepped on has count 0 and cannot open. The index is built on first use and rebuilt when BAL.dh.T is replaced or an unknown held key shows up.
+| in-page, same box, same page state (ms per call; 3 runs) | LIVE 27240ccb (395 keys) | a16b0341 (1652 keys) | 2bbba7ee (2164 keys) |
+|---|---|---|---|
+| dhSync(her) | 0.053 / 0.062 / 0.057 | 0.32 / 0.235 / 0.237 | **0.041 / 0.016 / 0.010** |
+| dhSync all 10 NPCs | 0.92 / 0.64 / 0.69 | 3.08 / 2.45 / 2.65 | **0.13 / 0.17 / 0.13** |
+| rpSync all NPCs | — | 0.08 | 0.07–0.13 |
+| quickcheck (median of 3, new/live) | render | tab | buổi | tasks>200 ms |
+|---|---|---|---|---|
+| run 1 (a8b99f9e, before the perf fix) | 186/181 | 406/396 | 1151/916 | 21/21 |
+| run 2 (2bbba7ee) | 183/187 | 357/406 | 872/1894 | 19/23 |
+| run 3 (2bbba7ee) | 169/173 | 324/428 | 1013/2209 | 19/22 |
+Single buổi samples swing 785–3706 ms on LIVE itself (box noise), so the quickcheck buổi numbers are noisy in both directions. The in-page table is the clean measure: titles2 no longer adds cost per buổi (it is now cheaper than LIVE).
+
+### Gates on 2bbba7ee (alone on the box)
+| gate | result |
+|---|---|
+| titles2-unit | PASS 66/66 in 5 of 6 runs. One run FAILED 2 cases; I did not capture which ones. E61r saw A2 «caught fired» flaky on a16b0341 too; 4 reruns PASS |
+| titles2-scan | rows 833 · missing 0 · clashes 0 · dups 0 · long 0 · bad how 0 |
+| j72seeds_validate | 256 seeds, 0 errors (a16b0341 seed files: 256 errors) |
+| quickcheck + old save | PASS ×2 on 2bbba7ee (table above), core gates PASS, old save ok |
+| role-parity ×2 | ALL PASS, ALL PASS |
+| coop-e2e Fold host / COOP_SWAP=1 | 141/141, 141/141 |
+| titles2-ui Fold 755x1000 + iPad 1180x820 @2 | PASS, topmost every step; WARN K-DH-CAPFIT ×2 (iPad notice caption plate, kitDhCap; kit, not TITLES2). Shots looked at (/home/user/wt/e62-shots/ui, outside git): same as E61r's notes — narrow panel column and «khô ng» on the «Đeo ngay» card = LIVE kit |
+Note: commit a8b99f9e's Claude-Session trailer names the foreman's session by mistake (mine = session_01DgYSWneH8kcAmxPqvFy7XZ). Not rewritten (no force-push).
+FOR Foreman E: MAIN 117's 05:15Z order (chapterTitle hook for KK16) is not in my brief and was not done here.
