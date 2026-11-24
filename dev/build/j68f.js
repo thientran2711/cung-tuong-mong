@@ -64,7 +64,7 @@ EV6("bribedServ","serv",{a:["sv","rv"],pp:()=>{const a=sv6();const b=rv6(fo6)??r
  o:X=>[c6("Thưởng hắn vì thành thật",{c:{bac:-15},r:[[X.A,12]]}),
   c6("Bảo hắn giả vờ nhận, làm phản gián",{p:od(BAL.odb.j68f.odP_11+(X.A.o.loyal||50)/2),w:{mat:1},wt:[G6(`chứng cứ ${X.B.n} ${balSg(BAL.eff.j68f.evOk)}`)],r:[[X.A,4]],lt:[R6("hắn hai lòng, lộ chuyện")],l:{danh:-1},ok:()=>{evStory(X.B.o,BAL.eff.j68f.evOk,"mua chuộc người hầu của ngươi");return `${X.A.n} mang về bằng chứng ${X.B.n} mua chuộc người hầu. Chứng cứ ${balSg(BAL.eff.j68f.evOk)}.`}}),
   c6("Đuổi hắn đi cho chắc",{w:{tamco:1},r:[[X.A,-30]],k:[R6("mất một người hầu quen việc")]})]});
-EV6("servRomance","serv",{a:["sv"],pp:()=>{const a=sv6(s=>s.role==="maid"&&(s.age||20)>=18);return a==null?null:{a0:a}},w:C=>1,
+EV6("servRomance","serv",{a:["sv"],pp:()=>{const a=sv6(s=>s.role==="maid"&&(s.age||20)>=BAL.ageMin);return a==null?null:{a0:a}},w:C=>1,
  v:["{A} bị bắt gặp đứng nói chuyện với một thị vệ gác cửa lúc chập tối.","{A} giấu trong gối một chiếc khăn thêu tên một thị vệ.","{A} xin ngươi cho phép khi mãn hạn được gả cho người đồng hương làm lính ngự lâm.","Người ta đồn {A} có tình ý với tiểu thái giám bên Ngự thiện phòng."],
  o:X=>[c6("Che giấu cho nàng",{r:[[X.A,15]],k:[R6("lộ ra ngươi bị trách quản người không nghiêm")]}),
   c6("Răn dạy, giữ phép cung",{w:{danh:1},r:[[X.A,-6]]}),
@@ -112,7 +112,7 @@ EV6("poisonedFish","myst",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a
  v:["Đàn cá chép trong chậu sứ trước sân chết nổi bụng hết một đêm.","Chú vẹt trong cung bỗng lăn ra chết, mỏ tím tái.","Chậu lan quý héo rũ chỉ sau một đêm, đất có mùi lạ.","Con chó nhỏ cung nữ nuôi ăn thức ăn thừa xong thì nôn mửa."],
  o:X=>[c6("Cho thái y nghiệm độc",{c:{bac:-20},p:70,wt:[G6("biết có độc hay không")],w:{tamco:1},l:{bac:-5},lt:[R6("xét không ra")],ok:()=>{const bad=liveRivals(true).some(v=>{try{return bandOf(danger(v,S))>=3}catch(e){return false}});return bad?"Thái y nói có dấu độc nhẹ; có kẻ đang thử tay. Ngươi đề phòng hơn.":"Thái y nói là do nước tù và trời trở, không có độc."}}),
   c6(`Hỏi ${X.A.n}, người coi việc`,{p:od(BAL.odb.j68f.odP_8+S.tamco/3),r:[[X.A,2]],wt:[G6("biết ai lại gần")],lr:[[X.A,-6]],lt:[R6("hắn sợ bị đổ tội")],ok:()=>`${X.A.n} khai không thấy người lạ; chuyện có lẽ do sơ suất.`}),
-  c6("Thay hết nước, đồ ăn",{c:{bac:-10,suc:-2},w:{suc:2},k:[R6("không biết nguyên do")]})]});
+  c6("Thay hết nước, đồ ăn",{c:{bac:BAL.eff.j68f.fishSwapBac},w:{suc:BAL.eff.j68f.fishSwapSuc},k:[R6("không biết nguyên do")]})]});
 EV6("nightSteps","myst",{a:["maid"],pp:()=>S.maid?{a0:0}:null,w:C=>1,
  v:["{M} thề đêm qua nghe tiếng bước chân trên mái ngói buồng ngươi.","Cửa sổ thư phòng sáng ra mở toang, sách vở xô lệch.","Dấu giày lạ in trên nền tuyết ngoài hiên sau.","Có người để lại một nhành hoa khô trước cửa cung ngươi mỗi đêm rằm."],
  o:X=>[c6("Thức đêm rình bắt",{c:{suc:-10},p:od(BAL.odb.j68f.odP_20+eyes(S)*5),w:{mat:1},wt:[G6("biết là ai")],l:{suc:-3},lt:[R6("không bắt được ai")],ok:()=>{const v=liveRivals(true).find(v=>v.plan&&v.plan.t===key(S));return v?`Bóng người chạy về phía cung ${v.name}. Ngươi ghi nhớ.`:"Chỉ là một tiểu thái giám đi tắt lấy nước; không có gì đáng ngại."}}),

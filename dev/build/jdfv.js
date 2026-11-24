@@ -81,3 +81,11 @@ function dfMoodNext(first){const I=BAL.df.idle;return first?I.first:I.every[0]+M
  const arm=first=>{if(tm)clearTimeout(tm);tm=setTimeout(tick,dfMoodNext(first))};
  const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{if(S&&S.place!==plc){plc=S.place;arm(true)}}catch(e){}return r}})();
 window.dfMoodPick=dfMoodPick;
+/* robot10 nc-fix (text over text, Fold story / rel tabs): the focus layer and the mood bubble are drawn on #game over the STAGE, but a tap on another
+   tab (the tab bar stays free under the focus) left them standing over that tab's panel. They belong to «Hành sự» only: hidden while another tab
+   is up (the open focus — a talk, an encounter or a mini-game on it — comes back as it was when she returns), the short mood bubble just goes. */
+function dfTabLayers(){try{const off=typeof tab!=="undefined"&&tab!=="act";const F=typeof kitFocus==="object"&&kitFocus&&kitFocus.current?kitFocus.current():null;
+ if(F&&F.el&&F.open){if(F.el.hidden!==off){F.el.hidden=off;if(!off&&kitFocus.reposition)kitFocus.reposition()}}
+ if(off)document.querySelectorAll("#game>.kfoc-mood,body>.kfoc-mood").forEach(b=>b.remove())}catch(e){console.error("dfTabLayers",e)}}
+(function(){const r0=window.renderPanel;if(typeof r0!=="function")return;window.renderPanel=renderPanel=function(){const r=r0.apply(this,arguments);dfTabLayers();return r}})();/* renderPanel: every tab change draws the panel (render() and the j63 log jump) */
+window.dfTabLayers=dfTabLayers;
