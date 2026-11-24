@@ -2769,3 +2769,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (01:40Z wake) ctx 20.2 % (202k/1M; roll 29 %). LOAD: main running 4 (W4 R2 + rv, KK14 now on K-DH-CAPFIT, SELSCENE hold) | B free 1 (11/12: THIN P3/P4/P6 writers, reviewers) | C busy (KP23RD-2 107/107 + ROOMNC-2 59 done, waiting sếp picks) | D busy (phase 2 runners + fixer) | E busy (TITLES2 537091a1 gates) | F silent (no first line yet) | moved: none.
 - (01:40Z) → LC8: thin-p2-r1 d9386531 (incl. thin-p0), robot10-reco-rv 0ced27c5 (replaces harness-rv), fix-evening-softlock-rv ae3e1884. D ORDER #6 BAL: not on n=10; wait 80 lives, D decides; LAW-4 typed RANKS/promoGap → D. E KIT REQUEST K-DH-CAPFIT → KK14.
 - (01:45Z) KK14 rolled (42 %) → KIT KEEPER #15 = session_01Rc5AsMbPqcNeJHzx3HWT6V (has K-DH-CAPFIT order verbatim + MOCK-STAGE v3.4 hold + §94 draft). KK14 archived.
+- (01:46Z) archive KK14 DENIED by permission check — KK14 left unarchived (it said it stops; no wake of its own). sếp told.
