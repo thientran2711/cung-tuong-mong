@@ -38,6 +38,7 @@ PICK = {'khai-tuong-cung-tan': 'prompts_pr19_room32b.json', 'truong-xuan-cung-ta
 # room-specific line (ROOT-D1 24/11 ~00:41Z: inside her order "nhắc kỹ trong prompt là cửa sổ không rèm") naming a spot where the OLD
 # picture (or a first redo) had fabric at a window in an odd place. Appended after NC. Only such lines; nothing else changes.
 EXTRA = {
+ 'khai-tuong-cung-quyphi-ngu': " No fabric hangs anywhere on the left side wall: no white curtain on rings, no drape behind or above the tall shelf; the left wall shows bare wooden panels and bare carved lattice only.",
  'khai-tuong-cung-tay-phoi-ngu': " No fabric hangs anywhere on the right side wall: no curtain on rings, no drape behind or above the tall cabinet; the right wall shows bare wooden panels and bare carved lattice only.",
  'thua-minh-cung-tan-ngu': " No fabric hangs anywhere on the left side wall: no curtain on rings, no drape behind or above the tall shelf; the left wall shows bare wooden panels and bare carved lattice only.",
  'truong-xuan-cung-dong-phoi': " No fabric hangs anywhere on the left side wall: no curtain on rings, no drape behind or above the tall shelf; the left wall shows bare wooden panels and bare carved lattice only.",
@@ -46,7 +47,7 @@ EXTRA = {
  'chung-tu-cung-tay-phoi': " On the left side wall behind the tall shelf cabinet, any lattice window is bare carved lattice with window paper: no curtain, no fabric hangs there.",
  'canh-phuc-cung-tay-phoi-ngu': " On the right side wall behind the tall shelf cabinet, any lattice window is bare carved lattice with window paper: no curtain, no fabric hangs there.",
  'dien-huy-cung-dong-phoi': " No fabric hangs anywhere on the left side wall: no white curtain on rings, no drape behind or above the tall shelf; the left wall shows bare wooden panels and bare carved lattice only.",
- 'ham-an-cung-tay-phoi': " On the left side wall between the tall shelf and the chairs, any lattice window is bare carved lattice with window paper: no green curtain, no fabric hangs there.",
+ 'ham-an-cung-tay-phoi': " No fabric hangs anywhere on the left side wall: no white curtain on rings, no drape behind or above the tall shelf; the left wall shows bare wooden panels and bare carved lattice only.",
  'ham-an-cung-phi-ngu': " On the right side wall behind the tall shelf, any lattice window is bare carved lattice with window paper: no curtain, no fabric hangs there.",
  'khai-tuong-cung-tan': " At the far left edge of the back wall, beside the vase of lotus, no curtain and no fabric hangs: bare wall or bare carved lattice.",
  'khai-tuong-cung-dong-phoi': " The small high lattice window on the left side wall, behind the tall cabinet, is bare carved lattice with window paper: no curtain, no sheer white fabric hanging there.",
