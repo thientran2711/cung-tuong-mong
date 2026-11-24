@@ -2765,3 +2765,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (01:10Z) Acks: LC8 (kit-mgskin landing; coop-thin-g waits B re-merge), SELSCENE holding, KK14 holding (v3.4 ca154a3d; §94 draft 2797e672), W4 R2 READY a7bf3e01 → rv MK4aJreh re-reviewing.
 - (01:00Z) 115 (depth 8) cannot create triggers → 114 created trig_01YVQJ9HZMGCvbbcXNc26dsU firing directly into 115 (min 32) and disabled trig_01S84CUDctuYXpDp6YD5mCqf. 114 stopped.
 - (01:12Z) WAKE FIXED: 114 created trig_01YVQJ9HZMGCvbbcXNc26dsU (min 32, fires directly into 115; verified enabled, next 01:32Z) and disabled trig_01S84CUDctuYXpDp6YD5mCqf (verified). Relay-through-114 note above is void.
+- (01:30Z) LANDED kit-mgskin → LIVE 2a80712b. LC8 next: thin-p0, robot10-harness-rv, coop-thin-g (after B re-merge). GAP 4.

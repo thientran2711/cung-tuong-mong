@@ -8,3 +8,4 @@
 - FROM MAIN 114 (00:41Z 24/11): LIVE = e88b09b4 (kit-selscene: KIT §93 selection-scene parts).
 - FROM MAIN 114 (00:54Z 24/11): LIVE = bba42773 (odds-no-thanh: odds meaning text no longer promises «thành»).
 - FROM MAIN: main is now MAIN CHÍNH 115 session_01Rc5AsHor5CHGzQwMEuc8Po (24/11 01:05Z). Write FOR MAIN 115 lines. LIVE = bba42773.
+- FROM MAIN 115 (01:30Z 24/11): LIVE = 2a80712b (kit-mgskin: KIT mg-skin slot + one resolver img/mg/<kind>-<id>.webp).
