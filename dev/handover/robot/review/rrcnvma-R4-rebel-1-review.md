@@ -21,3 +21,6 @@ The ending is the age-25 card, not the forced age-30 exit. The harness `exitPick
 ## 5. Ruling (Foreman D 14:18Z, MAIN 141)
 MAIN 141: the age-25 cnvAge card always has a 2nd road (low-tin maid: «Xin ở lại», costs Chủ tin, stays to 30) → not a game bug. Per Foreman D this life is counted VALID (a real choice at a real card).
 Open conflict kept on record: with a sibling option always present, OD ~05:20Z/~05:40Z («no voluntary exit unless it is the only option») would make a robot-chosen «Xuất cung về quê» INVALID, and harness EXIT_RE contains «xuất cung|về quê», so the robot should never have tapped it while «Xin ở lại» was offered. exitPick = null → the tap went through a path the blacklist did not guard (harness gap for F) or the «Xin ở lại» option was greyed/hidden for this maid. Counted VALID by D's ruling; flagged so MAIN can decide the rule reading.
+
+## 6. FINAL VERDICT (Foreman D 14:23Z, supersedes §5)
+VOID. OD ~05:20Z/~05:40Z: no voluntary exit while another option exists; MAIN 141: cnvAge always offers «Xin ở lại»; no log proves it was disabled for her → «Xuất cung về quê» at 25 is a bot-chosen exit = INVALID. Replay queued as rrcnvma-R4-rebel-1-rp (same seed 1943759971, newest harness). Same test applies to every other cnv_ma exit.
