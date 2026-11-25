@@ -3074,5 +3074,165 @@
   "row": "R6·greedy·3:523933307",
   "game": "local build of origin/main 17835565 (NOT LIVE)",
   "audit": "ending VALID by robot-audit (Lãnh cung age 30), NOT COUNTED: local build, not LIVE github.io (Foreman E lesson d 17:30Z). Bug-finding only."
+ },
+ {
+  "job": {
+   "id": "R6-lazy-3",
+   "origin": "pf",
+   "road": "pt_tang",
+   "bot": "sens",
+   "seed": 3145388129,
+   "dev": "ipad",
+   "url": "https://thientran2711.github.io/cung-tuong-mong/"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "b4b181f8",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 0,
+   "cap": null,
+   "stuck": 0,
+   "unstick": 0,
+   "slice": null,
+   "areaTaps": 60,
+   "dlgScroll": 4,
+   "scrolls": 5,
+   "infoTaps": 16,
+   "dlgClose": 17,
+   "taps": 300
+  },
+  "life": {
+   "id": "Hồng nhan bạc mệnh",
+   "type": "death",
+   "fate": "Chết dưới dao thích khách đêm trước ngày hòa thân",
+   "death": true,
+   "age": 18,
+   "year": 1,
+   "rank": 0,
+   "text": "Chết dưới dao thích khách đêm trước ngày hòa thân.",
+   "card": [
+    "Kêu cứu Rất vững TỐN không ĐƯỢC thường thoát; có khi bị thươ",
+    "Tự mình chống trả Rất vững TỐN Sức -10 ĐƯỢC thắng thì cả tri"
+   ],
+   "duringArea": false,
+   "lastTaps": [
+    "page «Phòng của ta · Ở đây có 1 người.» «Sang buổi»",
+    "page «Phòng của ta · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách Đại H»",
+    "page «Phòng của ta · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách Đại H»",
+    "page «Phòng của ta · Ở đây có 1 người.» «Sang buổi»",
+    "page «Phòng của ta · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »",
+    "page «Phòng của ta · Ở đây có 1 người.» «Sang ngày mới»",
+    ".kbk «Tổng lược» «Trang sau»",
+    ".kbk «Tổng lược» «Trang sau»",
+    ".kbk «Tổng lược» «Trang trước»",
+    ".kbk «Tổng lược» «Trang trước»",
+    ".kbk «Tổng lược» «Lui»",
+    ".dlg «Thích khách» «Tự mình chống trảRất vữngTốnSức -10Đượcthắng thì c»"
+   ]
+  },
+  "exitPick": null,
+  "bugs": [],
+  "dead": [],
+  "buoi": 81,
+  "steps": 2682,
+  "status": [],
+  "offers": [
+   {
+    "buoi": 57,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 58,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 59,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 61,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 62,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 63,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 64,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Ở đây có 1 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 65,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Ở đây có 1 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 66,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 73,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 79,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Ở đây có 1 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   }
+  ],
+  "t": {
+   "total": 1247257
+  },
+  "unit": "E-S6",
+  "row": "R6·lazy·3:3145388129 (rerun on LIVE)",
+  "game": "github.io Build 4763d410aa0d (= LIVE 08e7d79f), harness b4b181f8",
+  "audit": "VALID (death by assassin, real taps, LIVE build) — COUNTED"
  }
 ]
