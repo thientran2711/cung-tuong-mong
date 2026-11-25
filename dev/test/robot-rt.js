@@ -233,6 +233,8 @@ async function play(p) {
   await p.screenshot({ path: path.join(SHOTS, 'end.png') }).catch(() => {});
   R.harness.deadButtons = R.dead.length; R.harness.taps = (R.harness.taps0 || 0) + rt.stats().taps; R.t = { total: Date.now() - T0 };
   save();
+  /* the life is over: stamp the checkpoint ENDED so a later resume=1 (until-loop) never replays a pre-ending save into a «Kiếp thứ hai» (s1d: buổi 400 → replay to 511 over its results) */
+  if (!R.sliced) { try { fs.writeFileSync(CKPT + '.tmp', JSON.stringify({ ended: true, at: new Date().toISOString(), life: R.life, buoi: R.buoi })); fs.renameSync(CKPT + '.tmp', CKPT) } catch (e) {} }
   console.log('LIFE DONE ' + LIFE + ' ' + (R.life.id) + ' age ' + (R.life.age ?? '?') + ' · buổi ' + R.buoi + ' · taps ' + R.harness.taps + ' · dead buttons ' + R.dead.length + ' · stuck ' + R.harness.stuck + ' · bugs ' + R.bugs.length);
 }
 
@@ -270,6 +272,11 @@ const BOT = A.bot || 'sens', SEED = +A.seed || 1, LIFE = A.life || ['rt', A.orig
 const STUCK_MS = (+A.stuckMin || 15) * 60e3, SLICE = +A.slice || 0, CP = +A.cp || 50;
 const OUT = path.resolve(OUT0), SHOTS = path.join(OUT, 'shots-' + LIFE); fs.mkdirSync(SHOTS, { recursive: true });
 const seat = Seat({ url: URL0, out: OUT0, dev: DEV, bot: A.bot, seed: A.seed, life: A.life, origin: A.origin, road: A.road, stuckMin: A.stuckMin, slice: A.slice, cp: A.cp, resume: A.resume === "1" });
+/* never replay or overwrite an ENDED life: ended ckpt stamp, or a results json whose life has a real end (override: force=1) */
+{ const ckf = path.join(OUT, LIFE + '.ckpt.json'), rf = path.join(OUT, LIFE + '.json'); let why = null;
+  try { if (fs.existsSync(ckf) && JSON.parse(fs.readFileSync(ckf, 'utf8')).ended) why = 'checkpoint stamped ENDED' } catch (e) {}
+  try { if (!why && fs.existsSync(rf)) { const L = JSON.parse(fs.readFileSync(rf, 'utf8')).life; if (L && /^(death|end|grand)$/.test(L.type || '') ) why = 'results already hold the ending «' + L.id + '»' } } catch (e) {}
+  if (why && A.force !== '1') { console.log('LIFE ALREADY ENDED ' + LIFE + ' (' + why + ') — nothing to do (force=1 to override)'); process.exit(0) } }
 (async () => {
   /* one browser profile per life (<out>/profile-<life>): pictures / music are fetched once and stay cached across restarts and resume
      (a fresh profile re-downloads everything behind «Lần đầu nhập cung», which the CDN throttles (429) when many robots start together) */
