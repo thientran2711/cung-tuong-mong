@@ -22,6 +22,11 @@ Review sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/art-nhv/shee
 - SCENES (ref ngu-hoa-vien-xuan-sang = creation nVgbF1xYQD): "Paint in EXACTLY the same painterly style, texture, palette and soft light as the reference garden painting … eye-level FRONTAL view, straight-on camera, of <area> … The lower ~36–40 percent of the image is a wide level open <paving> floor, evenly lit, completely clear of objects … nothing tall in the front … central 45 percent … Spring morning, bright clear daylight, normal brightness, not oversaturated, no glossy floor … no people … no Japanese elements." Full text of each is stored in the Magnific creation metadata (ids above).
 - NON BỘ redo (refs EbciNe3uuO + nVgbF1xYQD): same scene, grotto nook moved to 50–65 % width, stair 35–50 %.
 
+## Map: all 16 states (MAIN 146 22:12Z: map approved; states to match pl2 nhat-garden's 16)
+img/pl2/ngu-hoa-vien-{xuan,ha,thu,dong}-{sang,trua,chieu,toi}.webp, 1792×1013, 480–525 KB each. Method: gpt-2-6 "repaint reference 1 EXACTLY … only change season / time" — season sáng from the xuân-sáng master (CDN upload YMS5sh0WeC) + nhat-garden-<mùa>-sang as season ref (lJhDIY6gv9 hạ, 79EBaMfJAL thu, 0e71SbeTfW đông); xuân trưa/chiều/tối from the master + nhat-garden-xuan-<buổi> (xS80X34jfW, iGkfbXb3uK, xS80XZQjfW); other seasons' trưa/chiều/tối from that season's sáng + my xuân trưa/chiều/tối as light ref. Creations: xuan trua tC2O3dUmZJ, chieu 79EBagRJAL, toi yiFIEJBPW9; ha sang 0e71S6kTfW, trua JNuoEoCOq4, chieu eI9l4SsdqL, toi CqW6YZmEEy; thu sang jUITBQrLD0, trua VXOxJUfMMU, chieu xS80oBSjfW, toi 8aR733MIrU; dong sang 9ZbhFUhNYZ, trua Xm6SN3PBfo, chieu SyaevuTUb8, toi fHYNnM7CDY.
+Alignment: edge cross-correlation vs the xuân-sáng master = (0,0) shift for all 15 → ONE hotspot set serves all 16. Looked at all: no people/text, toi = moonlit blue with lanterns, areas readable. Sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/art-nhv/sheet2/index.html
+Festival states (newyear/trungthu/… that nhat-garden has) NOT painted — not asked.
+
 ## Not done / next
-- Only xuân-sáng. AREA_PLAN §6 wants xuân × 4 buổi first (trưa/chiều/tối), then hạ/thu/đông = 16 per picture. Method for the rest: gpt-2-6 edits of these masters (same composition, change light/season), as pl-night-art / place-seasons did.
+- Area SCENES are xuân-sáng only (MAIN asked only the map's states).
 - hotspots.json + wiring = NHV-BUILD.
