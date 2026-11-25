@@ -210,3 +210,4 @@ Verdict: **PASS — review/flight-choose-guard-r ff0f723f FF 0756a05b** (= d716e
 | 3d quickcheck ff0f723f vs live 0756a05b | PASS 668 s (dead-card hook included), old save ok, render 302/305 |
 | reviewer fix (test only) | dead-card.js part 5 passed on «0/2 open + Lui» too — the Lui net alone is not the law-2 fix; now it needs ≥1 payable road open |
 | laws 4 / 7 / 9 | no number; no new player text (the «Cần: …» temper line is the existing one); kit «Lui» only |
+
