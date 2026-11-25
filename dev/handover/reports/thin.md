@@ -1990,3 +1990,34 @@ fix-6's tryEnd keeps the SAME `onBuoi(CW.pendBuoi);return` (no soonEnd/sendEnd a
 1 two-way: same code both seats, host + guest rows both orders — OK · 4 one core: no numbers — OK · 6c nothing lost (carried + shown again) — OK · 7/9/10/12 no player text, no UI — OK · 11 one classifier + one carry over all Q-gated seat steps + 542-producer scan — OK · 14 drop path deleted in place — OK · solo untouched (CW.on) — OK.
 ### Verdict
 PASS. LAND READY review/robot-coop-fix-6-rv 833cd64fec993d142cca3434ac3bb0ae18c93f87 (BIG co-op; carries fix-5 / fix-4-r1 / fix-2-r3 + Worker). Land coop-night-live too (DAYQ-3) — co-op rebirth needs it on LIVE.
+
+## EXPRESS P8 r2
+PRIORITY #1 CHECK ('thin-p8'): OD 0 | ledger 0 | claims 7 | main 0 (no jroadc/jrdcsd on LIVE 5e013076) | review/* 2 (thin-p8-r1 c69d6ec9, thin-p8) | archive 0 — reused review/thin-p8-r1 c69d6ec9 as-is; nothing rebuilt.
+Worker: B #22 EXPRESS (opus) session_01N1tNP6VU7S24E2m8sfegeD, depth 1, START_CTX ~4 %.
+### (1) Content check vs LIVE 5e013076
+| Part | Expected (reports/thin.md) | LIVE 5e013076 | Verdict |
+|---|---|---|---|
+| P4 j68 composed (j68sd.js) | 460 decisions + 152 openers = 612 | 612 ids; j68sd/j68c in assemble; 03b47224 ancestor of main | LIVE, complete |
+| P5 Kỳ ngộ (jkysd.js) | 77 | 77 ids | LIVE, complete |
+| P6 world (jwsd.js) | 91 | 91 ids | LIVE, complete |
+| P6 routes j70 (j70sd.js) | 78 | 78 ids | LIVE, complete (fd85907a ancestor of main) |
+| P7 festivals (j71sd.js) | 220 | 220 ids | LIVE, complete |
+| P8 roads (jrdcsd.js + jroadc.js) | 44 premises / 627 rows | NONE (files absent; «rc-tt-o01» 0 hits in LIVE index.html); c69d6ec9 NOT an ancestor of main | MISSING → r2 |
+### (2) Branch
+**review/thin-p8-r2 @0348e07a66c8ca97e42dd804bc50ff7dfd43007d** = LIVE origin/main 5e013076 + merge review/thin-p8-r1 c69d6ec9 (merge-base 502c48c9). Conflicts: assemble.py (took LIVE list incl. jdayq.js, inserted 'jrdcsd.js','jroadc.js' after 'jrd_cnv.js' exactly as r1), index.html/sw.js (rebuilt by build_site.sh). j67.js auto-merged. No content/BAL change; built index holds rc-tt-o01.
+### (3) Gates on 0348e07a (merged head)
+| Gate | Result |
+|---|---|
+| `node dev/test/one-core-guard.js` (no --allow-grow) | `{"modules":447,...,"fails":0}` PASS |
+| `node dev/test/one-core-text.js` | PASS |
+| `python3 dev/test/rdseeds_validate.py` | `RDSEEDS: 627 rows, 0 errors, 0 warnings` |
+| `node dev/test/undef-scan.js` | PASS (310 names) |
+| `RDC_STOP12=1 node dev/test/rdc-play.js` (no args, fixture, 2 lives × tt_fixa/tt_fixb) | `RDC PLAY: ALL PASS (59)` (all ch4..11, parts met again 17/42, 20/42) |
+| `RDC_STOP12=1 node dev/test/rdc-play.js all.md 1 tt_ruong,pf_co` (seed args, real P8 roads) | `RDC PLAY: ALL PASS (31)` (tt_ruong fin=Ruộng về cho dân, pf_co fin=Y bị đưa về; ch4..11) |
+| `node dev/test/rdc-oldsave.js live.html` (LIVE 5e013076) | 44 roads registered; 3 LIVE saves bd/cnv/tt keep old road + plan, play a buổi; 0 page errors; `RDC OLDSAVE: ALL PASS` |
+| `node dev/test/coop-e2e.js` / `COOP_SWAP=1 …` | `143/143 passed` / `143/143 passed` |
+| `bash dev/tools/quickcheck.sh` ALONE | open 2008 ms · old save ok · perf new/live render 245/258, tab 512/499, buổi 1703/1607, tasks>200ms 26/26 · core gates: only G4 crawl `FAIL fold · Ô lưu · Lui · close button did not close its layer` = the KNOWN PRE-EXISTING LIVE fault (FOREMAN_B_STATUS 21:36Z (a), cured by fix-7 r3) — not P8 |
+| shots `RDC_ORIGIN=pf node dev/test/rdc-shots.js <dir> pf_co_11:x` Fold 755x1000 + iPad 1180x820 @2 | errors 0; LOOKED 3×: kit k3 dialog + kit option rows TỐN/ĐƯỢC + kit odds bar with words (Khó lường/Hiểm/Mong manh), title plate, single «Kéo xuống» cue, no overflow/cut text, no custom chip. Pictures grey = CDN blocked in test. Shots kept outside git. |
+Not run (express, named): all 44 roads re-play (r1 played 44/44 on 4d9f748c; the merge touched only assemble.py order + rebuild, so 2 real roads + fixture re-smoked).
+### Verdict
+**SSK review/thin-p8-r2 0348e07a66c8ca97e42dd804bc50ff7dfd43007d** — P4/P6 already LIVE; P8 ready to land on LIVE 5e013076 (fast-forward from main). Known pre-existing G4 «Ô lưu → Lui» stays until fix-7 lands.
