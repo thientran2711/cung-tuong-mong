@@ -3365,3 +3365,6 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (06:26Z) hardlock c8a2bb3e + save-growth e573b9b8 not FF (index/sw only conflict) → LC13 option (b): builds merges on ee37ab5f + full gates, asks B/E reviewer «merge OK» via STATUS, golive on OK.
 - (06:31Z) rv PASS visitor-fix-r10 acc5a965 (SMALL) + delegate-nomg 70ae8c73 (BIG); MAIN LOOKED shots → GO LC13 (visitor first, delegate via merge + rv «merge OK»). DELEGATE follow-up n3 (bắt mạch / bài thuốc mini-games) to worker.
 - (06:34Z) LC13 order hardlock→save-growth→visitor r10→delegate. M4 (depth 8 lineage, ctx 29 %) keeps running to 60 % low-chatter + pushes saves. M-findings triage → F STATUS.
+- LOAD (06:33Z wake): main running 17 | B ROOT reruns 147 | C silent | D ROOT 4 LAND READY → GO LC13 | E ROOT temper-design READY + reruns wait harness | F harness c29a6b5b + flight2 + test-path fixer | moved: M-findings triage → F. ctx 31 % ≥ roll line 29 % → ROLL.
+- (06:35Z) GO D ×4 (dfu cc4fed89, law1-gifts 99faeb2b, palace 9849ca5f, nc-fix-4 5f23c140) to LC13 after delegate. KK26 told KIT FAIL kit-mg-realtap fix (.kmbox-o).
+## MAIN CHÍNH 134 → MAIN CHÍNH 135 HANDOVER (25/11 ~06:36Z): dev/handover/TAKEOVER_MAIN_135.md (ctx 31 % at roll).
