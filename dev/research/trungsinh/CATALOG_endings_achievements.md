@@ -1,0 +1,71 @@
+# trungsinhgame.com — in-game catalog (Sổ luân hồi), read by TS-P2 on 25/11
+Source: hourglass icon → «Sổ luân hồi». Counters at read time: 33 thành tựu, 32 kết cục. Each achievement = +1 điểm luân hồi; rebirth points buy face re-roll/«Mặt VIP»/origin reroll. Reference only — our own game must design its own endings, never copy this text.
+
+## KẾT CỤC (32) — title — one-line description (+ whether seen)
+- **Xả thân cứu giá** — Nàng hy sinh đỡ kiếm cho hoàng đế, lưu danh nghĩa liệt. _[Chưa mở kết cục]_
+- **Sóng dữ ngự hồ** — Nàng và hoàng đế cùng tử nạn trong cuộc tập kích trên hồ. _[Chưa mở kết cục]_
+- **Thọ chung chính tẩm** — Nàng ra đi khi thọ số đã tròn, sau một đời dài nhiều biến đổi. _[Chưa mở kết cục]_
+- **Hoa rụng vì bệnh** — Bệnh tật khép lại cuộc đời nàng; những điều đã làm vẫn còn trong ký ức người sống. _[Chưa mở kết cục]_
+- **Án dưới cửa son** — Một bản án đã định đoạt số phận. Cung đình không cho nàng thêm cơ hội. _[Chưa mở kết cục]_
+- **Khó sinh** — Nàng không qua khỏi cơn trở dạ. _[Chưa mở kết cục]_
+- **Một đêm biến cố** — Tai biến bất ngờ làm câu chuyện dừng lại giữa chừng. _[Chưa mở kết cục]_
+- **Hương độc sau rèm** — Một lần trúng độc khép lại đời nàng giữa chốn cung đình. _[Chưa mở kết cục]_
+- **Áo vải bạc màu** — Sức lực cạn kiệt sau những tháng ngày mỏi mệt. _[Chưa mở kết cục]_
+- **Phượng ghi sử sách** — Nàng từng ngồi ở ngôi trung cung, để tên mình lại giữa những trang sử. _[Chưa mở kết cục]_
+- **Một đời chưởng sự** — Từ công việc nhỏ, nàng đã trở thành người trông coi nội đình. _[Chưa mở kết cục]_
+- **Mực thơm còn mãi** — Tài nghệ của nàng được nhớ đến lâu hơn những lời tranh giành. _[Chưa mở kết cục]_
+- **Người giữ lòng lành** — Nàng để lại lòng biết ơn trong nhiều người từng được mình giúp. _[Chưa mở kết cục]_
+- **Bóng người sau rèm** — Nàng hiểu lòng người, biết dùng mưu và để lại cả quyền thế lẫn những oán hờn. _[Chưa mở kết cục]_
+- **Ngoài bức tường son** — Nàng sống phần đời còn lại bên ngoài cung, tự chọn những tháng ngày của mình. _[Đã ghi nhận 1 lần]_
+- **Trăng lạnh cô cung** — Những năm cuối trôi qua trong cảnh bị giam lỏng, xa tiếng nhạc và yến tiệc. _[Chưa mở kết cục]_
+- **Gấm vóc đầy rương** — Nàng dành dụm được một gia sản, dù danh phận không kể hết câu chuyện. _[Chưa mở kết cục]_
+- **Một đời vô danh** — Không được ghi trong sử, nàng vẫn có một đời với những lựa chọn của riêng mình. _[Chưa mở kết cục]_
+- **Tranh ngôi thất bại · Ban chết** — Tranh đoạt phụng vị thất bại, nàng bị hoàng đế ban chết. _[Chưa mở kết cục]_
+- **Ám sát vì thù cũ** — Phe cánh bị phế truất trả thù, khép lại cuộc đời nàng. _[Chưa mở kết cục]_
+- **Bóng dao đoạt mệnh** — Một vụ ám sát bất ngờ khép lại kiếp này. _[Chưa mở kết cục]_
+- **Mẫu nghi tân triều** — Tân đế đăng cơ, nàng được tôn làm Hoàng Thái Hậu. _[Chưa mở kết cục]_
+- **Cùng người du ngoạn thiên hạ** — Hoàng đế nhường ngôi cho Thái tử, cùng nàng rời cung du ngoạn. _[Chưa mở kết cục]_
+- **Tiếng chuông cuối đời** — Tiên đế băng hà, nàng vào chùa hoàng gia. _[Chưa mở kết cục]_
+- **Khép cùng tiên đế** — Số phận khép lại bởi lệnh tuẫn táng. _[Chưa mở kết cục]_
+- **Bình yên sau đổi triều** — Mẹ con rời vòng tranh quyền, lui về đất phong hoặc biệt cung. _[Chưa mở kết cục]_
+- **Rời cung khi đổi triều** — Cung nhân được tân triều cho hồi hương. _[Chưa mở kết cục]_
+- **Duyên nơi chân trời** — Bỏ trốn thành công, đổi tên sống cùng người thương. _[Chưa mở kết cục]_
+- **Mật thư bại lộ** — Bỏ trốn thất bại, bị bắt trở về lãnh cung. _[Chưa mở kết cục]_
+- **Lạc nhau ngoài kinh thành** — Cuộc trốn chạy khép lại trong truy bắt. _[Chưa mở kết cục]_
+- **Tự chọn luân hồi** — Chủ động khép kiếp cũ, mở một cuộc đời mới. _[Chưa mở kết cục]_
+- **Duyên ngoài cửa son** — Được ban hôn và rời cung cùng người tri kỷ. _[Đã ghi nhận 1 lần]_
+
+## THÀNH TỰU (33) — title — condition — reward
+- **Cánh cửa son** — Bắt đầu cuộc đời đầu tiên. — Đạt ở kiếp 1 · +1 điểm luân hồi
+- **Giữ lửa cung đình** — Từng được phân vào nhà bếp. — Chưa đạt · +1 điểm luân hồi
+- **Gấm vóc qua tay** — Từng được phân vào Hoán Y viện. — Chưa đạt · +1 điểm luân hồi
+- **Dấu chân hiên ngọc** — Từng được phân việc quét dọn. — Chưa đạt · +1 điểm luân hồi
+- **Một đường kim** — Từng được phân vào xưởng thêu. — Đạt ở kiếp 1 · +1 điểm luân hồi
+- **Con nhà danh giá** — Sinh vào gia đình quan lại. — Chưa đạt · +1 điểm luân hồi
+- **Nét bút như thần** — Đạt ít nhất 90 điểm giống mẫu trong một kỳ thi. — Chưa đạt · +1 điểm luân hồi
+- **Một bước Bảo lâm** — Được xếp Bảo lâm ngay trong tuyển tú. — Chưa đạt · +1 điểm luân hồi · Song Liễu Diệp Ngân
+- **Đường mây mở lối** — Được thăng một bậc trong cung. — Chưa đạt · +1 điểm luân hồi · Tuyết Mai
+- **Từ áo vải đến gấm hoa** — Từ cung nữ trở thành người có phẩm vị. — Chưa đạt · +1 điểm luân hồi · Thu Phong
+- **Giữ việc nội đình** — Đạt bậc Tổng quản ma ma. — Chưa đạt · +1 điểm luân hồi · Hồng Mai Song Hoa
+- **Phượng nghi thiên hạ** — Đạt ngôi Hoàng hậu. — Chưa đạt · +1 điểm luân hồi · Song Lam Điệp
+- **Tiếng khóc trong cung** — Đón người con đầu tiên chào đời. — Chưa đạt · +1 điểm luân hồi
+- **Nếp tẻ đủ đầy** — Có cả hoàng tử và công chúa trong một đời. — Chưa đạt · +1 điểm luân hồi
+- **Mãn đường hoàng tự** — Có ít nhất ba người con trong một đời. — Chưa đạt · +1 điểm luân hồi
+- **Ngày con xuất giá** — Có công chúa trưởng thành được ban hôn. — Chưa đạt · +1 điểm luân hồi
+- **Vinh hiển tông thất** — Có hoàng tử được phong Vương gia hoặc Thân vương. — Chưa đạt · +1 điểm luân hồi
+- **Mẫu thân Đông cung** — Có con được lập làm Thái tử. — Chưa đạt · +1 điểm luân hồi
+- **Mẫu nghi tân triều** — Được tân đế tôn làm Hoàng Thái Hậu. — Chưa đạt · +1 điểm luân hồi
+- **Mười năm dưới mái son** — Sống trong một đời ít nhất 120 tháng. — Chưa đạt · +1 điểm luân hồi · Trúc Khê
+- **Thất tuần bình an** — Sống đến 70 tuổi. — Chưa đạt · +1 điểm luân hồi · Anh Đào Mộng
+- **Tâm lành giữa cung sâu** — Thực hiện 12 việc thiện trong một đời. — Chưa đạt · +1 điểm luân hồi · Huyền Vân
+- **Người giấu quân cờ** — Thành công 8 lần dùng mưu trong một đời. — Chưa đạt · +1 điểm luân hồi · Bích Thủy
+- **Hòm bạc đầy** — Có ít nhất 1.000 bạc trong một đời. — Chưa đạt · +1 điểm luân hồi
+- **Qua cơn sinh tử** — Bình phục 3 lần bệnh trong một đời. — Chưa đạt · +1 điểm luân hồi
+- **Không còn cô độc** — Có 3 người đạt thiện cảm từ 60 trở lên. — Chưa đạt · +1 điểm luân hồi
+- **Tài danh trong cung** — Tài nghệ đạt 95. — Chưa đạt · +1 điểm luân hồi
+- **Trí tuệ hơn người** — Trí tuệ đạt 95. — Đạt ở kiếp 1 · +1 điểm luân hồi
+- **Bước qua tường son** — Được xuất cung hoặc rời cung thành công. — Đạt ở kiếp 1 · +1 điểm luân hồi
+- **Ngũ thập cẩm y** — Sưu tập đủ 50 bộ y phục qua các đời. — Chưa đạt · +1 điểm luân hồi
+- **Năm lần hoa nở** — Bắt đầu kiếp thứ 5. — Chưa đạt · +1 điểm luân hồi
+- **Mười giấc phù sinh** — Bắt đầu kiếp thứ 10. — Chưa đạt · +1 điểm luân hồi
+- **Sử sách muôn màu** — Mở khóa 8 kết cục khác nhau. — Chưa đạt · +1 điểm luân hồi
