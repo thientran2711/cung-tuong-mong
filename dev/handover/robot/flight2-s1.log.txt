@@ -1,0 +1,21 @@
+RESUME flight2-s1d from 2026-11-25T07:16:01.191Z buổi 21
+CP buổi 50 year 1 save 331314 chars
+CP buổi 100 year 1 save 439595 chars
+CP buổi 150 year 2 save 481523 chars
+CP buổi 200 year 2 save 576568 chars
+CP buổi 250 year 2 save 647115 chars
+RESUME flight2-s1d from 2026-11-25T08:09:29.174Z buổi 267
+CP buổi 267 year null save 648971 chars
+CP buổi 317 year 3 save 824749 chars
+BUG stuck no progress 15 min on .dlg «Tin báo»
+RESUME flight2-s1d from 2026-11-25T08:35:31.907Z buổi 332
+CP buổi 332 year null save 817826 chars
+CP buổi 382 year 3 save 911313 chars
+LIFE DONE flight2-s1d Được ban hôn age 22 · buổi 400 · taps 2588 · dead buttons 53 · stuck 1 · bugs 1
+RESUME flight2-s1d from 2026-11-25T08:54:52.129Z buổi 399
+CP buổi 399 year null save 962892 chars
+RESUME flight2-s1d from 2026-11-25T09:00:23.806Z buổi 400
+CP buổi 400 year null save 963313 chars
+CP buổi 450 year 4 save 1112109 chars
+RESUME flight2-s1d from 2026-11-25T09:09:58.169Z buổi 490
+CP buổi 490 year null save 1168040 chars

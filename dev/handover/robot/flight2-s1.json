@@ -1,0 +1,2847 @@
+{
+ "job": {
+  "id": "flight2-s1d",
+  "origin": "cnv",
+  "road": "cnv_mat",
+  "bot": "sens",
+  "seed": 3839386041,
+  "dev": "fold",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "63f87747",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 1,
+  "unstick": [
+   {
+    "at": 727,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 735,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1505,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1971,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2445,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1382,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 981,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 1021,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1042,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1128,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   }
+  ],
+  "slice": null,
+  "areaTaps": 3684,
+  "taps0": 0,
+  "resumed": [
+   {
+    "at": "2026-11-25T07:17:32.319Z",
+    "buoi": 21,
+    "from": "2026-11-25T07:16:01.191Z"
+   },
+   {
+    "at": "2026-11-25T08:12:04.349Z",
+    "buoi": 267,
+    "from": "2026-11-25T08:09:29.174Z"
+   },
+   {
+    "at": "2026-11-25T08:36:03.350Z",
+    "buoi": 332,
+    "from": "2026-11-25T08:35:31.907Z"
+   },
+   {
+    "at": "2026-11-25T09:00:16.205Z",
+    "buoi": 399,
+    "from": "2026-11-25T08:54:52.129Z"
+   },
+   {
+    "at": "2026-11-25T09:01:07.106Z",
+    "buoi": 400,
+    "from": "2026-11-25T09:00:23.806Z"
+   },
+   {
+    "at": "2026-11-25T09:10:06.582Z",
+    "buoi": 490,
+    "from": "2026-11-25T09:09:58.169Z"
+   }
+  ],
+  "infoTaps": 238,
+  "dlgClose": 36,
+  "scrolls": 348
+ },
+ "life": null,
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "stuck|no progress 15 min on .dlg «Tin báo»",
+   "type": "stuck",
+   "msg": "no progress 15 min on .dlg «Tin báo»",
+   "n": 1,
+   "at": 1382,
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/stuck-1.png",
+   "save": "/home/user/wt/outRT/shots-flight2-s1d/stuck-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 27,
+    "w": 0,
+    "b": 0,
+    "age": 22,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   },
+   "buttons": [
+    "Nghe lệnhTốnkhôngĐượckhôngGhi chúchọn rồi xem kết quả ở bước sau!",
+    "Để sauTốnkhôngĐượckhông"
+   ]
+  }
+ ],
+ "dead": [
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Ô lưu",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590408436.png",
+   "dev": "fold",
+   "at": 67,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Xem bản thân",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590414822.png",
+   "dev": "fold",
+   "at": 73,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Sắc79Tài49Tâm cơ21Đức30Danh0Chủ tin47",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590421186.png",
+   "dev": "fold",
+   "at": 80,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Bạc12Sức80/100",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590427557.png",
+   "dev": "fold",
+   "at": 86,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Buổi sáng, còn 4 khắc",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590433958.png",
+   "dev": "fold",
+   "at": 92,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "trời quang",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590440366.png",
+   "dev": "fold",
+   "at": 99,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tin báo: 6 tin mới",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590446791.png",
+   "dev": "fold",
+   "at": 105,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "kQuản sự Tân Giả khố",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590453203.png",
+   "dev": "fold",
+   "at": 112,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Chọn chính mình",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590459576.png",
+   "dev": "fold",
+   "at": 118,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "5Đồng liêu",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590465956.png",
+   "dev": "fold",
+   "at": 124,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "4Chí tôn",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590472439.png",
+   "dev": "fold",
+   "at": 131,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tai mắt0",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590478827.png",
+   "dev": "fold",
+   "at": 137,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Ngài để ý0",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590485206.png",
+   "dev": "fold",
+   "at": 144,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Công lao0/10",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590491633.png",
+   "dev": "fold",
+   "at": 150,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Lương tháng3 bạc",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590498008.png",
+   "dev": "fold",
+   "at": 156,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tân Giả khố3 tuần",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590504388.png",
+   "dev": "fold",
+   "at": 163,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Nguy hiểm chung: 0",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590510839.png",
+   "dev": "fold",
+   "at": 169,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Xét phẩm: thiếu 2",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590517236.png",
+   "dev": "fold",
+   "at": 176,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Lịch tháng",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590523635.png",
+   "dev": "fold",
+   "at": 182,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Mục tiêu chương (có mới)",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590530035.png",
+   "dev": "fold",
+   "at": 188,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Người được sai đi (có mới)",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590536423.png",
+   "dev": "fold",
+   "at": 195,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Hành sự",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590545850.png",
+   "dev": "fold",
+   "at": 204,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Dư đồ",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590552218.png",
+   "dev": "fold",
+   "at": 211,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Hậu cung",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590558622.png",
+   "dev": "fold",
+   "at": 217,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Giao tình",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590564989.png",
+   "dev": "fold",
+   "at": 223,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Hoàng tự",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590571399.png",
+   "dev": "fold",
+   "at": 230,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tư trang",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590577746.png",
+   "dev": "fold",
+   "at": 236,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tài nghệ",
+   "cover": "button.kbtn.kmend in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590584139.png",
+   "dev": "fold",
+   "at": 243,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Mệnh truyện",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590590521.png",
+   "dev": "fold",
+   "at": 249,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Sang buổi",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590596931.png",
+   "dev": "fold",
+   "at": 255,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tâm trạngBình thản0",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590608482.png",
+   "dev": "fold",
+   "at": 267,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tiếp theo",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590613499.png",
+   "dev": "fold",
+   "at": 272,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Bạc12Sức85/100",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590643125.png",
+   "dev": "fold",
+   "at": 302,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "hoa đào bay",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590649498.png",
+   "dev": "fold",
+   "at": 308,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tin báo: 7 tin mới",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590655879.png",
+   "dev": "fold",
+   "at": 314,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tân Giả khố2 tuần",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590665264.png",
+   "dev": "fold",
+   "at": 324,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Mục tiêu chương",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590671694.png",
+   "dev": "fold",
+   "at": 330,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Bạc15Sức86/100",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590707532.png",
+   "dev": "fold",
+   "at": 366,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "ve kêu râm ran",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590713911.png",
+   "dev": "fold",
+   "at": 372,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tin báo: 1 tin mới",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590720259.png",
+   "dev": "fold",
+   "at": 379,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Cung nữ tam đẳngTiểu Mãn",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590726676.png",
+   "dev": "fold",
+   "at": 385,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "8Đồng liêu",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590733044.png",
+   "dev": "fold",
+   "at": 392,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tân Giả khố1 tuần",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590739444.png",
+   "dev": "fold",
+   "at": 398,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Sắc79Tài49Tâm cơ21Đức30Danh8Chủ tin40",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590886503.png",
+   "dev": "fold",
+   "at": 545,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Bạc15Sức91/100",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590892854.png",
+   "dev": "fold",
+   "at": 551,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "nắng sớm oi ả",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590899224.png",
+   "dev": "fold",
+   "at": 558,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tin báo: 2 tin mới",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590905586.png",
+   "dev": "fold",
+   "at": 564,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Cung nữ tam đẳngThư Nhi",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590911967.png",
+   "dev": "fold",
+   "at": 570,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Xét phẩm: thiếu 1",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590918320.png",
+   "dev": "fold",
+   "at": 577,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Bạc15Sức100/100",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590941402.png",
+   "dev": "fold",
+   "at": 600,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "trời trong mát",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590947786.png",
+   "dev": "fold",
+   "at": 606,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tin báo: 3 tin mới",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590954171.png",
+   "dev": "fold",
+   "at": 613,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "9Đồng liêu",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/outRT/shots-flight2-s1d/dead-fold-1795590960567.png",
+   "dev": "fold",
+   "at": 619,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lôi Linh Vận"
+   }
+  }
+ ],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 331314,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 100,
+   "year": 1,
+   "chars": 439595,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 150,
+   "year": 2,
+   "chars": 481523,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 200,
+   "year": 2,
+   "chars": 576568,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 250,
+   "year": 2,
+   "chars": 647115,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 267,
+   "year": null,
+   "chars": 648971,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 317,
+   "year": 3,
+   "chars": 824749,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 332,
+   "year": null,
+   "chars": 817826,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 382,
+   "year": 3,
+   "chars": 911313,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 399,
+   "year": null,
+   "chars": 962892,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 400,
+   "year": null,
+   "chars": 963313,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 450,
+   "year": 4,
+   "chars": 1112109,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 490,
+   "year": null,
+   "chars": 1168040,
+   "key": "hclh-save-v2-1"
+  }
+ ],
+ "buoi": 511,
+ "steps": 19543,
+ "status": [],
+ "_snapAt": 1795598066308,
+ "trace": [
+  [
+   300,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   300,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   300,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   301,
+   ".dlg «Lễ Phật đản» «Lui»"
+  ],
+  [
+   302,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Công lao11/10»"
+  ],
+  [
+   302,
+   ".dlg «Công lao 11/» «Lui»"
+  ],
+  [
+   303,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Người được sai đi (có mới)»"
+  ],
+  [
+   304,
+   ".dlg «Tin chờ người sai đi» «Nghe lệnhTốnkhôngĐượcViệc chủ sai·trả lời trước kh»"
+  ],
+  [
+   306,
+   ".dlg «Việc chủ sai» «Từ chốiTốnChủ tin -3ĐượckhôngGhi chúkhông tốn khắc»"
+  ],
+  [
+   313,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Sang buổi»"
+  ],
+  [
+   314,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang buổi»"
+  ],
+  [
+   314,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Mục tiêu chương (có mới)»"
+  ],
+  [
+   314,
+   ".dlg «Chương 5 · Chủ nhân ghen» «Danh hiệu 1/35»"
+  ],
+  [
+   315,
+   ".dlg «Danh hiệu» «Đeo «Kim vàng chỉ bạc»TốnkhôngĐượckhôngGhi chúchọn»"
+  ],
+  [
+   316,
+   ".dlg «Đeo «Kim vàng chỉ bạc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   317,
+   ".dlg «Danh hiệu» «Đeo «Kim vàng chỉ bạc»TốnkhôngĐượckhôngGhi chúchọn»"
+  ],
+  [
+   317,
+   ".dlg «Đeo «Kim vàng chỉ bạc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   318,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   318,
+   ".dlg «Danh hiệu» «Đeo «Kim vàng chỉ bạc»TốnkhôngĐượckhôngGhi chúchọn»"
+  ],
+  [
+   319,
+   ".dlg «Đeo «Kim vàng chỉ bạc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   320,
+   ".dlg «Danh hiệu» «Đeo «Kim vàng chỉ bạc»TốnkhôngĐượckhôngGhi chúchọn»"
+  ],
+  [
+   321,
+   ".dlg «Đeo «Kim vàng chỉ bạc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   321,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   322,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   322,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   322,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   330,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Dư đồ»"
+  ],
+  [
+   330,
+   ".mapsc «Sang buổi»"
+  ],
+  [
+   331,
+   ".mapsc «Lịch tháng»"
+  ],
+  [
+   331,
+   ".dlg «Lịch tháng» «mồng 10»"
+  ],
+  [
+   331,
+   ".dlg «Lịch tháng» «ngày 14»"
+  ],
+  [
+   332,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   332,
+   ".dlg «Lịch tháng» «ngày 25: Nguyệt tín»"
+  ],
+  [
+   332,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   334,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   336,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   337,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   337,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   337,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   337,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   338,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   339,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   340,
+   ".dlg «Lễ Phật đản» «Lui»"
+  ],
+  [
+   341,
+   ".mapsc «Đồng liêu · chạm để mở danh sách»"
+  ],
+  [
+   341,
+   ".mapsc «Hậu cung»"
+  ],
+  [
+   341,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang buổi»"
+  ],
+  [
+   342,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Lương tháng3 bạc»"
+  ],
+  [
+   342,
+   ".dlg «Lương tháng ba bạc» «Lui»"
+  ],
+  [
+   343,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Tâm trạngBình thản-2»"
+  ],
+  [
+   343,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   344,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang buổi»"
+  ],
+  [
+   345,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Hành sự»"
+  ],
+  [
+   346,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Hầu hạHầu hạLĩnh đồ ở Nội vụ phủRất vữngLĩnh than,»"
+  ],
+  [
+   347,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang buổi»"
+  ],
+  [
+   347,
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Chọn chính mình»"
+  ],
+  [
+   348,
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang ngày mới»"
+  ],
+  [
+   350,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   351,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   351,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   352,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   352,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   352,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   354,
+   ".dlg «Bị đánh đòn» «Lui»"
+  ],
+  [
+   355,
+   ".dlg «Chính tuyến · Từ cung nữ đi lên · Chương 5 · Hồi 1» «Gánh nước, không nói một lờiRất vữngTốnSức -6Đượcđ»"
+  ],
+  [
+   355,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   356,
+   ".dlg «Long thể bất an» «Lui»"
+  ],
+  [
+   363,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Sang buổi»"
+  ],
+  [
+   363,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «ve kêu râm ran»"
+  ],
+  [
+   364,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Biết chuyện của chủ3»"
+  ],
+  [
+   365,
+   ".dlg «Biết chuyện của chủ» «Lui»"
+  ],
+  [
+   366,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Sang buổi»"
+  ],
+  [
+   366,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang buổi»"
+  ],
+  [
+   366,
+   "page «Tích Cần viện · Ở đây còn 11 người.» «Xét phẩm: thiếu 1»"
+  ],
+  [
+   367,
+   ".dlg «Xét phẩm cuối tháng · Cung nữ nhị đẳng» «Lui»"
+  ],
+  [
+   368,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «10Đồng liêu»"
+  ],
+  [
+   368,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Sang ngày mới»"
+  ],
+  [
+   369,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Sang ngày mới»"
+  ],
+  [
+   371,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   372,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   372,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   372,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   372,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   373,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   373,
+   "page «Tích Cần viện · Quý nhân Nghiêm Lan Âm đi vắng, đa» «Mệnh truyện»"
+  ],
+  [
+   374,
+   "page «Tích Cần viện · Quý nhân Nghiêm Lan Âm đi vắng, đa» «Việc nhờ»"
+  ],
+  [
+   374,
+   "page «Tích Cần viện · Quý nhân Nghiêm Lan Âm đi vắng, đa» «Sang buổi»"
+  ],
+  [
+   375,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Lịch tháng»"
+  ],
+  [
+   375,
+   ".dlg «Lịch tháng» «mồng 3»"
+  ],
+  [
+   375,
+   ".dlg «Lịch tháng» «ngày 15»"
+  ],
+  [
+   375,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   376,
+   ".dlg «Lịch tháng» «mồng 3»"
+  ],
+  [
+   376,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   377,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Tâm trạngBình thản-3»"
+  ],
+  [
+   377,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   378,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Sang buổi»"
+  ],
+  [
+   379,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Tài nghệ»"
+  ],
+  [
+   379,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Vũ · Y · Nữ công 8/12»"
+  ],
+  [
+   380,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang buổi»"
+  ],
+  [
+   380,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Tai mắt0»"
+  ],
+  [
+   381,
+   ".dlg «mat» «Lui»"
+  ],
+  [
+   381,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Chọn chính mình»"
+  ],
+  [
+   382,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Sang ngày mới»"
+  ],
+  [
+   385,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   385,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   385,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   386,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   386,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   386,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   387,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   388,
+   ".dlg «Đồ thất lạc» «Nói không thấyRất vữngTốnkhôngĐượckhôngGợi ýkhông »"
+  ],
+  [
+   389,
+   ".dlg «Đồ thất lạc» «Lui»"
+  ],
+  [
+   396,
+   "page «Tích Cần viện · Quý nhân Nghiêm Lan Âm đi vắng, đa» «Lương tháng3 bạc»"
+  ],
+  [
+   396,
+   ".dlg «Lương tháng ba bạc» «Lui»"
+  ],
+  [
+   397,
+   "page «Tích Cần viện · Quý nhân Nghiêm Lan Âm đi vắng, đa» «Sắc79Tài55Tâm cơ24Đức47Danh56Chủ tin23»"
+  ],
+  [
+   397,
+   ".dlg «Sắc» «Lui»"
+  ],
+  [
+   398,
+   "page «Tích Cần viện · Quý nhân Nghiêm Lan Âm đi vắng, đa» «Sang buổi»"
+  ],
+  [
+   398,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Chọn chính mình»"
+  ],
+  [
+   399,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Chọn chính mình»"
+  ],
+  [
+   399,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Sang buổi»"
+  ],
+  [
+   399,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Biết chuyện của chủ3»"
+  ],
+  [
+   400,
+   ".dlg «Biết chuyện của chủ» «Lui»"
+  ],
+  [
+   401,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Người được sai đi (có mới)»"
+  ],
+  [
+   401,
+   ".dlg «Tin chờ người sai đi» «Xem lời nhờTốnkhôngĐượcCó khách đến chơi·trả lời t»"
+  ],
+  [
+   403,
+   ".dlg «Có khách đến chơi» «Tiếp đón nồng hậuRất vữngTốnSức -4Đượcđược lòng ng»"
+  ],
+  [
+   404,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang buổi»"
+  ],
+  [
+   405,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Mục tiêu chương (có mới)»"
+  ],
+  [
+   406,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   406,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   406,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   407,
+   ".dlg «Danh hiệu» «Đeo «Kim vàng chỉ bạc»TốnkhôngĐượckhôngGhi chúchọn»"
+  ],
+  [
+   407,
+   ".dlg «Đeo «Kim vàng chỉ bạc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   408,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   408,
+   ".dlg «Danh hiệu» «Đeo «Kim vàng chỉ bạc»TốnkhôngĐượckhôngGhi chúchọn»"
+  ],
+  [
+   409,
+   ".dlg «Đeo «Kim vàng chỉ bạc»» «Bạc dư dảTốnkhôngĐượcBạc thu vào thêm một phần mườ»"
+  ],
+  [
+   410,
+   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượckhôngMấtBạc thu vào thêm»"
+  ],
+  [
+   410,
+   ".dlg «Danh hiệu» «Đeo «Kim vàng chỉ bạc»TốnkhôngĐượckhôngGhi chúchọn»"
+  ],
+  [
+   411,
+   ".dlg «Đeo «Kim vàng chỉ bạc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   412,
+   ".dlg «Danh hiệu» «Đeo «Kim vàng chỉ bạc»TốnkhôngĐượckhôngGhi chúchọn»"
+  ],
+  [
+   413,
+   ".dlg «Đeo «Kim vàng chỉ bạc»» «Bạc dư dảTốnkhôngĐượcBạc thu vào thêm một phần mườ»"
+  ],
+  [
+   414,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Kim vàng chỉ bạc»TốnkhôngĐượckhôn»"
+  ],
+  [
+   414,
+   ".dlg «Đeo «Kim vàng chỉ bạc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   415,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Kim vàng chỉ bạc»TốnkhôngĐượckhôn»"
+  ],
+  [
+   416,
+   ".dlg «Đeo «Kim vàng chỉ bạc»» «Bạc dư dả · đang lấyTốnkhôngĐượcBạc thu vào thêm m»"
+  ],
+  [
+   417,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   417,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   417,
+   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượckhôngMấtBạc thu vào thêm»"
+  ],
+  [
+   418,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   426,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Sang ngày mới»"
+  ],
+  [
+   429,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   430,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   430,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   430,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   430,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   431,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   432,
+   ".dlg «Bị đánh đòn» «Lui»"
+  ],
+  [
+   433,
+   ".dlg «Cung Chính ti xét xử» «Lui»"
+  ],
+  [
+   434,
+   ".dlg «Bị soát phòng» «Lui»"
+  ],
+  [
+   435,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   436,
+   "#kmrew «Nhận»"
+  ],
+  [
+   436,
+   "#kmrew «Thường»"
+  ],
+  [
+   436,
+   ".dlg «Đại án ngoại thích» «Lui»"
+  ],
+  [
+   437,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Xét phẩm: thiếu 1»"
+  ],
+  [
+   438,
+   ".dlg «Xét phẩm cuối tháng · Cung nữ nhị đẳng» «Lui»"
+  ],
+  [
+   439,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Tai mắt0»"
+  ],
+  [
+   439,
+   ".dlg «mat» «Lui»"
+  ],
+  [
+   440,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang buổi»"
+  ],
+  [
+   441,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «10Đồng liêu»"
+  ],
+  [
+   441,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «10Đồng liêu»"
+  ],
+  [
+   441,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Sang buổi»"
+  ],
+  [
+   442,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang buổi»"
+  ],
+  [
+   442,
+   "page «Tích Cần viện · Ở đây còn 11 người.» «Dư đồ»"
+  ],
+  [
+   443,
+   "page «Tích Cần viện · Ở đây còn 11 người.» «Hội Phượng (thi cưỡi ngựa bắn cung)Hạ · còn 4 khắc»"
+  ],
+  [
+   443,
+   ".dlg «Tân Giả khố» «Lui»"
+  ],
+  [
+   444,
+   "page «Tích Cần viện · Ở đây còn 11 người.» «Sang ngày mới»"
+  ],
+  [
+   447,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   448,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   448,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   448,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   448,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   449,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   450,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   451,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Giao tình»"
+  ],
+  [
+   451,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Sắc79Tài55Tâm cơ24Đức47Danh47Chủ tin23»"
+  ],
+  [
+   451,
+   ".dlg «Sắc» «Lui»"
+  ],
+  [
+   452,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Sang buổi»"
+  ],
+  [
+   453,
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Mệnh truyện»"
+  ],
+  [
+   453,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Nợ ân 0»"
+  ],
+  [
+   454,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Sang buổi»"
+  ],
+  [
+   454,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Tai mắt cho người khác»"
+  ],
+  [
+   455,
+   ".dlg «Tai mắt cho người khác» «Lui»"
+  ],
+  [
+   456,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «3Chí tôn»"
+  ],
+  [
+   456,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang buổi»"
+  ],
+  [
+   456,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang buổi»"
+  ],
+  [
+   456,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Tai mắt cho người khác»"
+  ],
+  [
+   457,
+   ".dlg «Tai mắt cho người khác» «Lui»"
+  ],
+  [
+   458,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Lịch tháng»"
+  ],
+  [
+   458,
+   ".dlg «Lịch tháng» «ngày 25: Nguyệt tín»"
+  ],
+  [
+   458,
+   ".dlg «Lịch tháng» «ngày 26: Nguyệt tín»"
+  ],
+  [
+   459,
+   ".dlg «Lịch tháng» «ngày 19»"
+  ],
+  [
+   459,
+   ".dlg «Lịch tháng» «ngày 15»"
+  ],
+  [
+   459,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   460,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Sang ngày mới»"
+  ],
+  [
+   463,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   463,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   464,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   464,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   464,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   464,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   465,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   466,
+   ".dlg «Đại án ngoại thích» «Lui»"
+  ],
+  [
+   467,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Tâm trạngBình thản-5»"
+  ],
+  [
+   468,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   468,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «nắng sớm oi ả»"
+  ],
+  [
+   469,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Sang buổi»"
+  ],
+  [
+   470,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Sắc79Tài55Tâm cơ24Đức47Danh47Chủ tin23»"
+  ],
+  [
+   470,
+   ".dlg «Sắc» «Lui»"
+  ],
+  [
+   471,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Sang buổi»"
+  ],
+  [
+   472,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Tài nghệ»"
+  ],
+  [
+   472,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «chiều âm u»"
+  ],
+  [
+   473,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang buổi»"
+  ],
+  [
+   473,
+   "page «Tích Cần viện · Ở đây còn 11 người.» «Mục tiêu chương (có mới)»"
+  ],
+  [
+   474,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   474,
+   ".dlg «Danh hiệu» «Đeo «Kim vàng chỉ bạc»TốnkhôngĐượckhôngGhi chúchọn»"
+  ],
+  [
+   475,
+   ".dlg «Đeo «Kim vàng chỉ bạc»» «Học mau tiếnTốnkhôngĐượcTự học tài nghệ: đôi khi t»"
+  ],
+  [
+   476,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Kim vàng chỉ bạc»TốnkhôngĐượckhôn»"
+  ],
+  [
+   476,
+   ".dlg «Đeo «Kim vàng chỉ bạc»» «Bạc dư dảTốnkhôngĐượcBạc thu vào thêm một phần mườ»"
+  ],
+  [
+   477,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   477,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   477,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Kim vàng chỉ bạc»TốnkhôngĐượckhôn»"
+  ],
+  [
+   478,
+   ".dlg «Đeo «Kim vàng chỉ bạc»» «Bạc dư dả · đang lấyTốnkhôngĐượcBạc thu vào thêm m»"
+  ],
+  [
+   479,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Kim vàng chỉ bạc»TốnkhôngĐượckhôn»"
+  ],
+  [
+   479,
+   ".dlg «Đeo «Kim vàng chỉ bạc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   480,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   480,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   481,
+   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượckhôngMấtBạc thu vào thêm»"
+  ],
+  [
+   481,
+   ".dlg «Danh hiệu» «Đeo «Kim vàng chỉ bạc»TốnkhôngĐượckhôngGhi chúchọn»"
+  ],
+  [
+   482,
+   ".dlg «Đeo «Kim vàng chỉ bạc»» «Học mau tiếnTốnkhôngĐượcTự học tài nghệ: đôi khi t»"
+  ],
+  [
+   482,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   483,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Kim vàng chỉ bạc»TốnkhôngĐượckhôn»"
+  ],
+  [
+   483,
+   ".dlg «Đeo «Kim vàng chỉ bạc»» «Học mau tiến · đang lấyTốnkhôngĐượcTự học tài nghệ»"
+  ],
+  [
+   484,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Kim vàng chỉ bạc»TốnkhôngĐượckhôn»"
+  ],
+  [
+   485,
+   ".dlg «Đeo «Kim vàng chỉ bạc»» «Bạc dư dảTốnkhôngĐượcBạc thu vào thêm một phần mườ»"
+  ],
+  [
+   485,
+   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượckhôngMấtBạc thu vào thêm»"
+  ],
+  [
+   485,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   486,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   486,
+   ".dlg «Danh hiệu» «Đeo «Kim vàng chỉ bạc»TốnkhôngĐượckhôngGhi chúchọn»"
+  ],
+  [
+   487,
+   ".dlg «Đeo «Kim vàng chỉ bạc»» «Bạc dư dảTốnkhôngĐượcBạc thu vào thêm một phần mườ»"
+  ],
+  [
+   488,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Kim vàng chỉ bạc»TốnkhôngĐượckhôn»"
+  ],
+  [
+   488,
+   ".dlg «Đeo «Kim vàng chỉ bạc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   489,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Kim vàng chỉ bạc»TốnkhôngĐượckhôn»"
+  ],
+  [
+   489,
+   ".dlg «Đeo «Kim vàng chỉ bạc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   489,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   497,
+   "page «Tích Cần viện · Ở đây còn 11 người.» «Chọn chính mình»"
+  ],
+  [
+   497,
+   "page «Tích Cần viện · Ở đây còn 11 người.» «Sang ngày mới»"
+  ],
+  [
+   500,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   501,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   501,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   502,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   502,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   502,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   504,
+   ".dlg «Bị đánh đòn» «Lui»"
+  ],
+  [
+   505,
+   ".dlg «Chính tuyến · Từ cung nữ đi lên · Chương 5 · Hồi 2» «Từ chối, báo Quý nhân Trình Linh LungRất vữngTốnDa»"
+  ],
+  [
+   505,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   506,
+   "#kmrew «Thường»"
+  ],
+  [
+   506,
+   ".dlg «Lui»"
+  ],
+  [
+   507,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   507,
+   ".dlg «Lui»"
+  ],
+  [
+   508,
+   "#kmrew «Nhận»"
+  ],
+  [
+   509,
+   "#kmrew «Thường»"
+  ],
+  [
+   509,
+   ".dlg «Yến đầy tháng hoàng tử» «Lui»"
+  ],
+  [
+   516,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Sang buổi»"
+  ],
+  [
+   517,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Buổi trưa, còn 4 khắc»"
+  ],
+  [
+   517,
+   ".dlg «trưa · còn» «Lui»"
+  ],
+  [
+   518,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Buổi trưa, còn 4 khắc»"
+  ],
+  [
+   518,
+   ".dlg «trưa · còn» «Lui»"
+  ],
+  [
+   519,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang buổi»"
+  ],
+  [
+   519,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «mưa thu»"
+  ],
+  [
+   520,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Hoàng tự»"
+  ],
+  [
+   521,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang buổi»"
+  ],
+  [
+   521,
+   "page «Tích Cần viện · Ở đây còn 11 người.» «Người được sai đi (có mới)»"
+  ],
+  [
+   521,
+   ".dlg «Tin chờ người sai đi» «Xem lời nhờTốnkhôngĐượcCó khách đến chơi·trả lời t»"
+  ],
+  [
+   523,
+   ".dlg «Có khách đến chơi» «Từ chốiRất vữngTốnkhôngĐượcthêm thể diện, giữ thể »"
+  ],
+  [
+   530,
+   "page «Tích Cần viện · Ở đây còn 11 người.» «Chọn chính mình»"
+  ],
+  [
+   531,
+   "page «Tích Cần viện · Ở đây còn 11 người.» «Sang ngày mới»"
+  ],
+  [
+   5,
+   "#modal «Cung Tường Mộng» «Chơi một mìnhTiếp tục: Cung nữ tam đẳng Lôi Linh V»"
+  ],
+  [
+   6,
+   "#modal «Chọn sổ» «Tiếp tục kiếp này»"
+  ],
+  [
+   9,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Mệnh truyện»"
+  ],
+  [
+   10,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Sang buổi»"
+  ],
+  [
+   11,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang buổi»"
+  ],
+  [
+   12,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Người được sai đi (có mới)»"
+  ],
+  [
+   13,
+   ".dlg «Tin chờ người sai đi» «Xem lời nhờTốnkhôngĐượcCó khách đến chơi·trả lời t»"
+  ],
+  [
+   15,
+   ".dlg «Có khách đến chơi» «Tiếp qua loaRất vữngTốnSức -2Đượcđược lòng ngườiMấ»"
+  ],
+  [
+   23,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Bạc238Sức68/100»"
+  ],
+  [
+   23,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   25,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang buổi»"
+  ],
+  [
+   26,
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Tin báo: 4 tin mới»"
+  ],
+  [
+   26,
+   ".dlg «Tin báo» «Để sauTốnkhôngĐượckhông»"
+  ],
+  [
+   34,
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Chọn chính mình»"
+  ],
+  [
+   35,
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang ngày mới»"
+  ],
+  [
+   38,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   38,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   39,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   39,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   39,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   39,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   41,
+   ".dlg «Yến đầy tháng hoàng tử» «Lui»"
+  ],
+  [
+   43,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Hoàng tự»"
+  ],
+  [
+   43,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Tin báo: 2 tin mới»"
+  ],
+  [
+   43,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   45,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Sang buổi»"
+  ],
+  [
+   45,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Xét phẩm: thiếu 1»"
+  ],
+  [
+   46,
+   ".dlg «Xét phẩm cuối tháng · Cung nữ nhị đẳng» «Lui»"
+  ],
+  [
+   47,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Lịch tháng»"
+  ],
+  [
+   48,
+   ".dlg «Lịch tháng» «ngày 23: Nguyệt tín»"
+  ],
+  [
+   48,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   48,
+   ".dlg «Lịch tháng» «ngày 21»"
+  ],
+  [
+   49,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   49,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   51,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang buổi»"
+  ],
+  [
+   51,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Tai mắt cho người khác»"
+  ],
+  [
+   51,
+   ".dlg «Tai mắt cho người khác» «Lui»"
+  ],
+  [
+   53,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Biết chuyện của chủ3»"
+  ],
+  [
+   53,
+   ".dlg «Biết chuyện của chủ» «Lui»"
+  ],
+  [
+   55,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang buổi»"
+  ],
+  [
+   55,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Lương tháng3 bạc»"
+  ],
+  [
+   55,
+   ".dlg «Lương tháng ba bạc» «Lui»"
+  ],
+  [
+   57,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «đêm u ám»"
+  ],
+  [
+   58,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Sang ngày mới»"
+  ],
+  [
+   61,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   62,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   62,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   63,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   63,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   63,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   65,
+   ".dlg «Bị đánh đòn» «Lui»"
+  ],
+  [
+   66,
+   ".dlg «Thái hậu bệnh nặng» «Lui»"
+  ],
+  [
+   68,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Mệnh truyện»"
+  ],
+  [
+   68,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Thân phậnViệc nhờSổ ghiĐang làm 0/4Tìm việc Nợ ân »"
+  ],
+  [
+   68,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Sang buổi»"
+  ],
+  [
+   69,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Buổi trưa, còn 4 khắc»"
+  ],
+  [
+   69,
+   ".dlg «trưa · còn» «Lui»"
+  ],
+  [
+   71,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Lịch tháng»"
+  ],
+  [
+   71,
+   ".dlg «Lịch tháng» «ngày 25: Tiết Vạn thọ: Nguyệt tín»"
+  ],
+  [
+   72,
+   ".dlg «Lịch tháng» «ngày 15: Tết Trung thu»"
+  ],
+  [
+   73,
+   ".dlg «Lịch tháng» «mồng 3»"
+  ],
+  [
+   73,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   73,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   75,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Sang buổi»"
+  ],
+  [
+   75,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Sang buổi»"
+  ],
+  [
+   76,
+   "page «Tích Cần viện · Ở đây còn 10 người.» «Tai mắt cho người khác»"
+  ],
+  [
+   76,
+   ".dlg «Tai mắt cho người khác» «Lui»"
+  ],
+  [
+   78,
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Mệnh truyện»"
+  ],
+  [
+   79,
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang ngày mới»"
+  ],
+  [
+   81,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   82,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   82,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   82,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   82,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   83,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   84,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   86,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Xét phẩm: thiếu 1»"
+  ],
+  [
+   86,
+   ".dlg «Xét phẩm cuối tháng · Cung nữ nhị đẳng» «Lui»"
+  ],
+  [
+   88,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Tư trang»"
+  ],
+  [
+   88,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   89,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Sang buổi»"
+  ],
+  [
+   89,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Sắc79Tài55Tâm cơ24Đức50Danh47Chủ tin23»"
+  ],
+  [
+   89,
+   ".dlg «Sắc» «Lui»"
+  ],
+  [
+   91,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Công lao10/10»"
+  ],
+  [
+   91,
+   ".dlg «Công lao 10/» «Lui»"
+  ],
+  [
+   93,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   93,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Sang ngày mới»"
+  ],
+  [
+   96,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   96,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   96,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   97,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   97,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   97,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   99,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   100,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Tài nghệ»"
+  ],
+  [
+   101,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Hoàng tự»"
+  ],
+  [
+   101,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   102,
+   "page «Tích Cần viện · Ở đây còn 11 người.» «Sang buổi»"
+  ],
+  [
+   102,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang buổi»"
+  ],
+  [
+   103,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Tư trang»"
+  ],
+  [
+   104,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Vải vóc 17»"
+  ],
+  [
+   104,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Sang ngày mới»"
+  ],
+  [
+   108,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   109,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   109,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   109,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   109,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   110,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   111,
+   ".dlg «Bị đánh đòn» «Lui»"
+  ],
+  [
+   113,
+   ".dlg «Chính tuyến · Từ cung nữ đi lên · Chương 5 · Hồi 3» «Quỳ nhận lỗi về mìnhRất vữngTốnSức -4Đượcđược tiến»"
+  ],
+  [
+   113,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   115,
+   ".dlg «Thái hậu bệnh nặng» «Lui»"
+  ],
+  [
+   117,
+   ".dlg «Đại lễ sắc lập Thái tử» «Lui»"
+  ],
+  [
+   124,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   124,
+   ".dlg «sáng · còn» «Lui»"
+  ],
+  [
+   126,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Tin báo: 17 tin mới»"
+  ]
+ ],
+ "_ckAt": 1795598089401,
+ "_ckB": 511,
+ "dumps": [
+  "/home/user/wt/outRT/shots-flight2-s1d/stuck-1-dump.json"
+ ]
+}
