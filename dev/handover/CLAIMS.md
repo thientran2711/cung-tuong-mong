@@ -1792,3 +1792,10 @@ B INVESTIGATOR coop page freeze (guest JS hang at .kfoc, U3c Q4XY; + F s6d famil
 | F HARNESS FIXER #8 (opus; option-card tap point on pack-4 2-column cards, FOREMAN E 20:15Z; test-only; successor of #7 session_01UV1Szi5ghGi8EzN935Ko5A) | review/robot-realtap 496b6b66 | FOREMAN F #16 | session_01UV1SzkpxWCNw1tedMBxupX | RUNNING | 2026-11-25T22:14Z |
 | F S3E-DISPLAY-FIX (opus; s3e display bugs: «Công lao 11/10» no clamp, Dư đồ every place «đang cấm túc», «Rất vững» on a drowning road; whole family) | review/s3e-display-fix | FOREMAN F #16 | (opening) | RUNNING | 2026-11-25T22:15Z |
 | F LIFE RUNNERS s9c (iPad bold) + s11 (Fold greedy) + s12 (iPad lazy) on LIVE 5e013076, harness review/robot-realtap 496b6b66 | dev/handover/robot/flight2-s9c/s11/s12.* | FOREMAN F #16 | (opening) | RUNNING | 2026-11-25T22:15Z |
+| F HARNESS FIXER #8 (opus; option-card tap point on pack-4 2-column cards, FOREMAN E 20:15Z; test-only; successor of #7 session_01UV1Szi5ghGi8EzN935Ko5A) | review/robot-realtap 496b6b66 | FOREMAN F #16 | (opening) | RUNNING | 2026-11-25T22:20Z |
+| C3-SEALS (Foreman C ROOT 3; briefs/C3-SEALS.md) | review/c3-seals; reports/C3-SEALS.md | FOREMAN C ROOT 3 | (opening) | RUNNING | 25/11 22:13Z |
+| C3-EVBG (Foreman C ROOT 3; briefs/C3-EVBG.md) | review/c3-evbg; reports/C3-EVBG.md | FOREMAN C ROOT 3 | (opening) | RUNNING | 25/11 22:13Z |
+| C3-DTV (Foreman C ROOT 3; briefs/C3-DTV.md) | review/c3-dtv; reports/C3-DTV.md | FOREMAN C ROOT 3 | (opening) | RUNNING | 25/11 22:13Z |
+| C3-FARSHOT (Foreman C ROOT 3; briefs/C3-FARSHOT.md) | review/c3-farshot; reports/C3-FARSHOT.md | FOREMAN C ROOT 3 | (opening) | RUNNING | 25/11 22:13Z |
+| C3-STYLE (Foreman C ROOT 3; briefs/C3-STYLE.md) | review/c3-style; reports/C3-STYLE.md | FOREMAN C ROOT 3 | (opening) | RUNNING | 25/11 22:13Z |
+| C3-RANKROOM (Foreman C ROOT 3; briefs/C3-RANKROOM.md) | review/c3-rankroom; reports/C3-RANKROOM.md | FOREMAN C ROOT 3 | (opening) | RUNNING | 25/11 22:13Z |
