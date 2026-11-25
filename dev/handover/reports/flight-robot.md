@@ -147,3 +147,23 @@ Branch review/flight-choose-guard from LIVE 4da55ce8: d716e6ea.
 | quickcheck | — | PASS 633 s (1st run FAIL on perf longTaskMax 3894 vs 2281 = noise; rerun PASS, render 268/268) |
 
 READY flight-choose-guard d716e6ea.
+
+## flight-e68-season (FLIGHT ROOT-CAUSE FIXER, 25/11)
+PRIORITY #1 CHECK ('EVHOLD' / 'needs.month' / 'deserQ'): reused j68 EVHOLD stale drop (evRelease), deserQ, template w(ctx) gate; no new mechanism.
+Branch review/flight-e68-season from LIVE 4da55ce8: 6b9a0ce4.
+
+### Verdict (reviewer side note: spring opener + winter j68c-sea-023)
+Real gap, pre-existing on LIVE. A j68 card is drawn only while its template fits (w(ctx) > 0: month / season / fest / rank, j68c needs.month), but it can WAIT — EVHOLD (up to E68S.stale 6 tuần) or the pending P of a save rebuilt by deserQ — and the month can turn meanwhile. The text is (re)built with the CURRENT season ({S} of opener j68c-sea-o04 «Gió {S} lùa…»), so a winter lò sưởi story came out in tháng 2 under «Gió xuân» (repro save yr97b6: month 2).
+
+### Fix (whole family of waiting j68 cards)
+j68.js e68Fits(m): a j68 card (pid e68…) still fits when its template's w(e68Ctx()) > 0. evRelease drops a held card that no longer fits (like a stale hold); deserQ (save load, EVHOLD re-serialization, co-op rebuild) drops a pending j68 card that no longer fits. Non-j68 cards untouched.
+
+### Tests
+| test | before (4da55ce8) | after (6b9a0ce4) |
+|---|---|---|
+| dev/test/e68-season.js: sea-023 pending (deserQ) built tháng 12, month → 2 | kept (1) | dropped (0); kept in tháng 12 |
+| same, held in EVHOLD, released in tháng 2 | shown (1) | dropped, not shown |
+| coop-e2e both seats | — | 142/142 |
+| quickcheck | — | PASS 653 s, render 259/261 ms |
+
+READY flight-e68-season 6b9a0ce4.
