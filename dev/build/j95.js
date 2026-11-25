@@ -85,7 +85,7 @@ function motiveOK(a,t,kind,me){if(!a||!t||a===t||(a===S&&!me))return{ok:true,why
  if(a!==S&&(typeof a!=="object"||a.rel==null))return{ok:true,why:""};
  const af=aff(a,t),oa=oan(a,t),gh=t===S?(a.ghen||0):Math.max(0,Math.round(((t.sung||0)-(a.sung||0))/2));
  let ef=false;try{const f=facOf(a),g=facOf(t);ef=!!(f&&g&&f!==g)}catch(e){}
- if(H95.has(kind)){const ex=j95except(a,t);const md=typeof tpMoodM==="function"?tpMoodM(a):0;const mot=Math.max(oa,gh,-af)+(ef?10:0)+(nv(a,"motive"))+md;
+ if(H95.has(kind)){const ex=j95except(a,t);const md=typeof tpMoodM==="function"?tpMoodM(a,kind):0;const mot=Math.max(oa,gh,-af)+(ef?10:0)+(nv(a,"motive"))+md;
   if(af>=40&&!ex)return{ok:false,why:`thiện cảm ${af} với ${t===S?"ngươi":t.name}`};
   if(mot<30&&!ex)return{ok:false,why:`động cơ yếu (oán ${oa}, ghen ${gh}, thiện cảm ${af})`};
   if(ex)return{ok:true,why:ex,ex:1};

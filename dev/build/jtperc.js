@@ -26,7 +26,7 @@
    ===================================================================================================================================== */
 Object.assign(BAL,{tp:{on:1,
  /* base Δ thiện cảm of one onlooker per deed (− harsh, + kind); a deed not listed is not judged */
- base:{dapdo:-1,mang:-2,danh:-5,khac:-3,gaysu:-3,pham:-3,cham:-2,ke:-2,khoe:-1,khoc:1,tui:1,thuong:1,tiec:1,
+ base:{dapdo:-1,mang:-2,danh:-5,khac:-3,gaysu:-3,pham:-3,cham:-2,ke:-2,khoe:-1,khoc:1,tui:1,thuong:1,tiec:1,cau:1,
   provoke:-3,humil:-4,vent:-3,gossip:-1,help:1,apol:1,mediate:1,
   soat:-2,bove:-1,treo:-1,noi:-2,nghi:-2,quo:-2,cai:-1,okho:-2,qgian:-1,qhac:-1,khon:-1,vuive:1},
  /* REVIEW B1 (LAW 11): every outburst reaction of every kind of person → the deed it is judged as (jemoact R_ + jfeel BAL.feel.act; keys of
@@ -40,11 +40,13 @@ Object.assign(BAL,{tp:{on:1,
  tagN:3,goodK:.5,goodKind:1.2,evilK:1.5,evilOan:3,reason:.6,noReason:1.3,pubOan:40,
  tellUp:30,tellHost:30,empK:.5,hiCap:2,cap:{th:6,hh:8,sung:4},capWk:36,max:12,days:3,keep:40,
  /* motive gate (j95 motiveOK, every doer): a heavy angry / jealous mood adds moodM to the motive (feeling level ≥ moodLv) */
- moodM:10,moodLv:2,moodG:["gian","ghen"]}});
+ moodM:10,moodLv:2,moodG:["gian","ghen"],
+ /* REVIEW B2: the motive kinds the mood term applies to = gây sự (agent provoke covers humil / drop / gossip, j95s rumor; vent / humil named for direct calls) */
+ moodK:["provoke","vent","humil","gossip","rumor"]}});
 /* the deeds' virtue tags (jtrong DEED: +1 honours, −1 offends), design table (c) */
 Object.assign(DEED,{dapdo:{"Kiệm":-1,"Lễ":-1},mang:{"Nhân":-1},danh:{"Nhân":-1,"Lễ":-1},khac:{"Nhân":-1,"Lễ":-1},gaysu:{"Lễ":-1,"Khiêm":-1},
  pham:{"Lễ":-1,"Đễ":-1,"Tín":1,"Trung":1},cham:{"Khiêm":-1,"Nhân":-1},ke:{"Tín":-1},khoe:{"Khiêm":-1},khoc:{"Nhân":1},tui:{"Nhân":1},
- thuong:{"Nhân":1,"Kiệm":-1},tiec:{"Nghĩa":1,"Kiệm":-1},
+ thuong:{"Nhân":1,"Kiệm":-1},cau:{"Kiệm":-1},tiec:{"Nghĩa":1,"Kiệm":-1},
  soat:{"Nhân":-1,"Tín":-1},bove:{"Lễ":-1},treo:{"Lễ":-1,"Nhân":-1},noi:{"Nhân":-1},nghi:{"Tín":-1,"Nhân":-1},quo:{"Nhân":-1,"Lễ":1},
  cai:{"Lễ":-1},okho:{"Nhân":-1,"Nghĩa":-1},qgian:{"Lễ":-1},qhac:{"Khiêm":-1,"Trung":1},khon:{"Đễ":-1},vuive:{"Nghĩa":1},humil:DEED.humiliate,vent:DEED.provoke,apol:DEED.apologise});
 const TP={stat:{deed:0,eye:0,hear:0,up:0,zero:0,lab:{good:0,evil:0},gate:{ok:0,no:0}},fd:0,tw:0,pk:null};
@@ -52,13 +54,16 @@ function tpOn(){try{return !!(typeof S!=="undefined"&&S&&BAL.tp&&BAL.tp.on&&!win
 function tpS(){S.tp=S.tp||{q:[],m:{},r:{},c:{},n:0};const T=S.tp;T.q=T.q||[];T.m=T.m||{};T.r=T.r||{};T.c=T.c||{};return T}
 /* keys: "me" her, "emp", "th", a consort id (jmem's memKey: one key style) */
 function tpK(p){try{if(p==="th"||(S.thO&&p===S.thO))return"th";if(S.emp&&p===S.emp)return"emp";if(p&&p!==S&&typeof relMS==="function"&&relMS(p)){const k=relKey(p);return k?"x"+k:null}return typeof memKey==="function"?memKey(p):p===S?"me":p&&p.id!=null?String(p.id):null}catch(e){return null}}
-function tpP(k){if(k==="me")return S;if(k==="emp")return S.emp||null;if(k==="th")return"th";if(/^x/.test(k)){try{return relMSOf(k.slice(1))}catch(e){return null}}try{const v=RV(+k);return v&&v.alive&&!v.out?v:null}catch(e){return null}}
+function tpP(k){if(k==="me")return S;if(k==="emp")return S.emp||null;if(k==="th")return"th";if(/^x/.test(k)){try{return typeof window.relMSOf==="function"?window.relMSOf(k.slice(1)):null}catch(e){return null}}try{const v=RV(+k);return v&&v.alive&&!v.out?v:null}catch(e){return null}}
+/* REVIEW N6: the doer key of a knowledge record = the record's own person ids («me», «v<id>» a consort, «emp», «th», «s<sid>» a servant),
+   else the j61 person key (kOf61: «x<n>» a man / child / court person) — never «v»+ a non-consort key */
+function tpAb(X,xk){try{if(xk==="me"||xk==="emp"||xk==="th")return xk;if(tpCons(X))return"v"+X.id;if(X&&X.sid!=null)return"s"+X.sid;return typeof kOf61==="function"?kOf61(X)||xk:xk}catch(e){return xk}}
 function tpRid(k){return k==="me"||k==="emp"||k==="th"?k:"v"+k}
 function tpCons(p){return !!p&&p!=="th"&&p!==S.emp&&(p===S||(typeof rivals!=="undefined"&&rivals.includes(p)))}
 function tpName(p){try{return p===S?"ngươi":p==="th"?"Thái hậu":p===S.emp?"Hoàng thượng":p.queen?"Hoàng hậu":p.name||""}catch(e){return""}}
 function tpHash(s){let h=2166136261;s=String(s);for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return((h>>>0)%10000)/100}
 /* ---------- the motive gate's mood term (j95 motiveOK reads it for every doer, her included) ---------- */
-function tpMoodM(a){try{const B=BAL.tp;if(!B||!B.on||window.__tpOff||typeof emoGet!=="function")return 0;const e=emoGet(a);if(!e||!e.k)return 0;
+function tpMoodM(a,kind){try{const B=BAL.tp;if(!B||!B.on||window.__tpOff||typeof emoGet!=="function")return 0;/* REVIEW B2 (D, owner «gây sự» only): the mood term counts for the gây sự kinds only (BAL.tp.moodK), the same for her and every NPC */if(kind&&!(B.moodK||[]).includes(kind))return 0;const e=emoGet(a);if(!e||!e.k)return 0;
  const g=typeof feelGrp==="function"?feelGrp(e.k):e.k;if(!B.moodG.includes(g))return 0;const lv=typeof feelLv==="function"?feelLv(a,e.k):(typeof emoLv==="function"?emoLv(e.k):0);
  return lv>=B.moodLv?B.moodM:0}catch(e){return 0}}
 /* her motive toward t: the SAME gate the NPCs pass (law 1, design (d) Option A) */
@@ -122,7 +127,7 @@ function tpDeed(X,d,V,o){if(!tpOn()||!X||!BAL.tp.base[d])return null;o=o||{};if(
  try{const T=tpS(),xk=tpK(X);if(!xk)return null;const vk=V?tpK(V):null;const at=o.at||null;const pl=at?at.pl:(o.pl||tpWhere(X));let kh=0;try{kh=at?at.kh:j95kh()}catch(e){}
   const it={id:++T.n,x:xk,v:vk,d,o:o.out?1:0,wk:wk(),pl,j:{}};TP.stat.deed++;
   /* the servants who stood there carry it (one knowledge record): its id lets the later gossip passes find who was told */
-  try{if(typeof knwSee==="function"&&pl&&o.what){const Z0=S.knw;const c=knwSee(pl,kh,o.what,xk==="me"?"me":"v"+xk,"tp:"+it.id);if(c&&S.knw)it.iid="i"+wk()+"."+S.knw.n}}catch(e){}
+  try{if(typeof knwSee==="function"&&pl&&o.what){const Z0=S.knw;const c=knwSee(pl,kh,o.what,tpAb(X,xk),"tp:"+it.id);if(c&&S.knw)it.iid="i"+wk()+"."+S.knw.n}}catch(e){}
   const seen=[];for(const O of (at?at.eyes:tpEye(pl,kh,X,V))){const k=tpRid(tpK(O));if(it.j[k])continue;it.j[k]=1;const g=tpJudge(O,it,"eye");if(g)seen.push([O,g])}
   tpUp(it);
   T.q.push(it);if(T.q.length>BAL.tp.keep)T.q.splice(0,T.q.length-BAL.tp.keep);
