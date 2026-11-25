@@ -7,13 +7,14 @@
    screen is free (no card, no scene, no held turn) — the moment the robot reloads. (two taps, see CAL). Then page.reload() → title → «Tiếp tục kiếp này» (Sổ 1) and the
    loaded life must show the same năm / tháng / tuần / buổi / tuổi / name (never an older step).
    Cases: buoi (sáng→trưa), day (tối→sáng, new tuần), month (hạ tuần→tháng mới), year ×SEEDS (tháng chạp→tháng giêng, the robot bug), servant road
-   year (cung nữ: srvEndTurn), robot-y3 (the robot's own Year-3 sổ, STEPS_R taps over the new year), newlife (death → Luân hồi → the new life), oldsave (a sổ written by the OLD build loads, plays one step, reloads).
+   year (cung nữ: srvEndTurn), robot-y3 (the robot's own Year-3 sổ, STEPS_R taps over the new year), day-0s / month-0s / year-0s (reload the instant the calendar flips), newlife (death → Luân hồi → the new life), oldsave (a sổ written by the OLD build loads, plays one step, reloads).
+   env SBR_ONLY=year,year-0s (run only these cases), SBR_STEPS / SBR_STEPS_R (taps), SBR_SAVE (robot sổ file), SBR_ACT=1 (an act after each tap)
    usage: node dev/test/save-boundary-reload.js [newPath=index.html] [oldPath] [devices=fold,ipadAir] [seeds=1,2,3]
           (serves the repo root = the BUILT site; oldPath e.g. a copy of origin/main's index.html in the root; no oldPath = oldsave case skipped)
    exit 0 = every case PASS. */
 const {chromium}=require('playwright');const D=require('./lib/device');
 const [,,NEW='index.html',OLD='',DEVS='fold,ipadAir',SEEDS='1,2,3']=process.argv;
-let BASEURL='';const sleep=t=>new Promise(r=>setTimeout(r,t));
+let BASEURL='';const ONLY=(process.env.SBR_ONLY||'').split(',').filter(Boolean);const want=n=>!ONLY.length||ONLY.includes(n);const sleep=t=>new Promise(r=>setTimeout(r,t));
 const seedInit=seed=>{let s=(seed*2654435761>>>0)%2147483646+1;Math.random=()=>{s=(s*16807)%2147483647;return (s-1)/2147483646};
  /* j52 rolls a life from crypto: same seed → same life on every build */try{const c=crypto,g=c.getRandomValues.bind(c);let t=seed>>>0||1;c.getRandomValues=a=>{if(a instanceof Uint32Array&&a.length===1){t=(Math.imul(t,1103515245)+12345)>>>0;a[0]=t||1;return a}return g(a)}}catch(e){}};
 /* in-page helpers (string, evaluated in the game frame) */
@@ -92,6 +93,17 @@ async function robotCase(b,dev,url,seed,raw){const D0=JSON.parse(raw);const s1=(
     const h=typeof SP13!=='undefined'?SP13.L.filter(x=>x.code).length:0;maxHeld=Math.max(maxHeld,h);const a=__sbr.full(),sv=__sbr.saved();if(a!==sv)mis++;const pr=__sbr.probe();if(pr&&pr!=='ok')mis++;L.push(`tap→${a}${a!==sv?' ≠ sổ '+sv:''}${h?' ['+h+' code]':''}${pr?' · +1 bạc '+pr:''}`)}
    return{mis,maxHeld,log:L,shown:__sbr.full(),free:ok}},STEPS_R);
   r.k0=k1;r.loaded=await reloadLoad(p,open);r.pass=r.free&&!r.mis&&r.loaded===r.shown;r.pe=pe.slice(0,3);if(pe.length)r.pass=false;return r})}
+/* 0 s cases (robot M4, MAIN 140 ~12:00Z: a reload 0 s after the year flip lost the buổi + the year-end stipend): the tap before the boundary
+   settles as usual, then ONE tap on the boundary and the page is reloaded the moment the calendar changes (polled every 20 ms, nothing answered,
+   no wait): the sổ must already hold the new buổi (same date / age / name; bạc printed). */
+async function zeroCase(b,dev,url,seed,origin,cal){return play(b,dev,url,seed,async(p,open,pe)=>{await open();
+  const r=await p.evaluate(async([origin,cal])=>{__sbr.newLife(origin);await __sbr.settle();eval(cal);used=0;render();await __sbr.settle();
+   const tapW=async()=>{const k=__sbr.key();used=BAL.time.khac;const n=document.getElementById('next');n.disabled=false;n.click();return __sbr.after(k)};
+   const ok=await tapW();const k0=__sbr.key();used=BAL.time.khac;const n=document.getElementById('next');n.disabled=false;n.click();
+   /* she keeps answering what the step shows (night scene, cards) in the background; the reload happens the moment the date changes */
+   __sbr.after(k0);const sl=t=>new Promise(r=>setTimeout(r,t));let i=0;for(;i<3000&&__sbr.key()===k0;i++)await sl(20);
+   return{ok,k0,ms:i*20,shown:__sbr.full(),key:__sbr.key(),saved:__sbr.saved()}},[origin,cal]);
+  r.loaded=await reloadLoad(p,open);r.pass=r.ok&&r.key!==r.k0&&r.loaded.startsWith(r.key+' ');r.pe=pe.slice(0,3);if(pe.length)r.pass=false;return r})}
 async function newLifeCase(b,dev,url,seed){return play(b,dev,url,seed,async(p,open,pe)=>{await open();
   const r=await p.evaluate(async()=>{__sbr.newLife('thd');await __sbr.settle();const old=S,n0=S.name;die('Bệnh nặng không qua khỏi');
    const sl=t=>new Promise(r=>setTimeout(r,t));let picked=[];
@@ -110,13 +122,15 @@ async function oldSaveCase(b,dev,seed){/* a sổ written by the OLD build (plain
  const seeds=SEEDS.split(',').map(Number);
  for(const dev of DEVS.split(',')){
   const L=[['buoi','thd',CAL.buoi,seeds[0]],['day','thd',CAL.day,seeds[0]],['month','thd',CAL.month,seeds[0]],...seeds.map(s=>['year','thd',CAL.year,s]),['year-srv','cnv',CAL.year,seeds[0]]];
-  for(const [name,origin,cal,seed] of L){const r=await stepCase(b,dev,url,seed,name,origin,cal);rows.push([dev,name,seed,r]);if(!r.pass)fail++;
+  for(const [name,origin,cal,seed] of L){if(!want(name))continue;const r=await stepCase(b,dev,url,seed,name,origin,cal);rows.push([dev,name,seed,r]);if(!r.pass)fail++;
    console.log(`${r.pass?'PASS':'FAIL'} ${dev} ${name} seed ${seed} · ${r.mis} moment(s) sổ ≠ screen (max ${r.maxHeld} unseen code cards) · end on screen ${r.shown} · after reload ${r.loaded}`+('\n    '+r.log.join('\n    '))+`${r.free?'':' · SCREEN NOT FREE'}${r.pe.length?' · pageerror '+r.pe[0]:''}`)}
-  {const raw=robotSave();if(raw){const r=await robotCase(b,dev,url,seeds[0],raw);rows.push([dev,'robot-y3',seeds[0],r]);if(!r.pass)fail++;
+  for(const [name,cal] of [['day-0s',CAL.day],['month-0s',CAL.month],['year-0s',CAL.year]]){if(!want(name))continue;const r=await zeroCase(b,dev,url,seeds[0],'thd',cal);rows.push([dev,name,seeds[0],r]);if(!r.pass)fail++;
+   console.log(`${r.pass?'PASS':'FAIL'} ${dev} ${name} seed ${seeds[0]} · before ${r.k0} · flip seen after ${r.ms} ms: screen ${r.shown} · sổ at that moment ${r.saved} · reload at once → ${r.loaded}${r.pe.length?' · pageerror '+r.pe[0]:''}`)}
+  if(want('robot-y3')){const raw=robotSave();if(raw){const r=await robotCase(b,dev,url,seeds[0],raw);rows.push([dev,'robot-y3',seeds[0],r]);if(!r.pass)fail++;
     console.log(`${r.pass?'PASS':'FAIL'} ${dev} robot-y3 (M2 sổ) · loaded ${r.k0} · ${r.mis} moment(s) sổ ≠ screen (max ${r.maxHeld} unseen code cards) · end on screen ${r.shown} · after reload ${r.loaded}`+('\n    '+(r.log||[]).join('\n    '))+(r.err?' · '+r.err:'')+(r.pe&&r.pe.length?' · pageerror '+r.pe[0]:''))}
    else console.log('SKIP robot-y3: no robot save (set SBR_SAVE=<save_after_rollback.json>)')}
-  {const r=await newLifeCase(b,dev,url,seeds[0]);rows.push([dev,'newlife',seeds[0],r]);if(!r.pass)fail++;
+  if(want('newlife')){const r=await newLifeCase(b,dev,url,seeds[0]);rows.push([dev,'newlife',seeds[0],r]);if(!r.pass)fail++;
    console.log(`${r.pass?'PASS':'FAIL'} ${dev} newlife · old ${r.n0} · on screen ${r.shown} · sổ ${r.saved} · after reload ${r.loaded}${r.newLife?'':' · NO NEW LIFE '+JSON.stringify(r.picked)}${r.pe.length?' · pageerror '+r.pe[0]:''}`)}
-  if(OLD){const r=await oldSaveCase(b,dev,seeds[0]);rows.push([dev,'oldsave',seeds[0],r]);if(!r.pass)fail++;
+  if(OLD&&want('oldsave')){const r=await oldSaveCase(b,dev,seeds[0]);rows.push([dev,'oldsave',seeds[0],r]);if(!r.pass)fail++;
    console.log(`${r.pass?'PASS':'FAIL'} ${dev} oldsave · old build ${r.oldKey} · loaded ${r.loadedOld} · on screen ${r.shown} · after reload ${r.loaded}${r.pe.length?' · pageerror '+r.pe[0]:''}`)}}
  console.log(fail?`SAVE-BOUNDARY FAIL ${fail}/${rows.length}`:`SAVE-BOUNDARY PASS ${rows.length}/${rows.length}`);await b.close();srv.close();process.exit(fail?1:0)})().catch(e=>{console.error(e);process.exit(2)});

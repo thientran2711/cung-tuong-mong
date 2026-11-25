@@ -3,8 +3,8 @@
    while it was open lost it (and whatever it would have done).
    1) A choice card made only of data (its options carry fx / text, no function) is saved whole and comes back as it was.
    2) A choice card whose options run code (opt.go closures: visits, festivals, catches…) cannot be written down. While such a card is
-      waiting, the autosave is held, so the slot keeps the last moment with no such card open; the save is made as soon as the card is
-      answered. A reload therefore lands either before the card or after it, never on a half-told card.
+      waiting, the autosave is held WITHIN THE SAME BUỔI, so the slot keeps the last moment with no such card open; the save is made as soon
+      as the card is answered. A step of time (new buổi / tuần / tháng / năm) is always written at once, without such cards (save-year-rollback).
    Old saves load as before (entries without $full use the old path). Off switch for measuring: window.__jqoff=1.
    ===================================================================================================================== */
 const JQ={held:0,stat:{full:0,held:0,flushed:0}};
@@ -18,7 +18,14 @@ function jqSaveable(m){return !m||!!m.pid||!m.opts||!!jqData(m)}
   for(const m of Q){if(m.pid||!m.opts){out.push(base[bi++]);continue}const c=jqData(m);if(c){out.push(c);JQ.stat.full++}}return out.filter(Boolean)};
  const dq0=deserQ;deserQ=function(L){if(window.__jqoff||!(L||[]).some(e=>e&&e.$full))return dq0.apply(this,arguments);const out=[];
   for(const e of L||[]){if(e&&e.$full){try{const c=Object.assign({},e);delete c.$full;delete c.w;c.who=WHO(e.w);out.push(c)}catch(x){}}else out.push(...dq0([e]))}return out};
+ /* save-year-rollback (LAW 11, robot M2 + M4 25/11): the hold may only keep the sổ at the CURRENT buổi. When time has moved since the last
+    write (Sang buổi / ngày / tháng / năm: the stipend card, the year-end cards open right after the step), the step is written AT ONCE with
+    the code cards left out (they cannot be written down; a reload then shows the new buổi without them — before, it went back to the buổi
+    before the step: robot M4 lost the buổi + the year-end stipend on a reload 0 s after the year flip). Inside one buổi the hold is as before:
+    a reload lands before her open code card, never after a half-told one. */
+ const jqKey=()=>{try{return [S.year,S.month,S.tuan,S.buoi||0,S.name].join(".")}catch(e){return ""}};
  const sv0=save;save=function(){if(window.__jqoff||!S||quiet||S.dead)return sv0.apply(this,arguments);
-  if(Q.some(m=>!jqSaveable(m))){JQ.held=1;JQ.stat.held++;return}JQ.held=0;return sv0.apply(this,arguments)};
+  if(Q.some(m=>!jqSaveable(m))&&JQ.k===jqKey()&&JQ.s===S){JQ.held=1;JQ.stat.held++;return}
+  if(Q.some(m=>!jqSaveable(m)))JQ.stat.stepNow=(JQ.stat.stepNow||0)+1;JQ.held=0;const r=sv0.apply(this,arguments);JQ.k=jqKey();JQ.s=S;return r};
  const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(JQ.held&&S&&!S.dead&&!quiet&&!Q.some(m=>!jqSaveable(m))){JQ.held=0;JQ.stat.flushed++;save()}}catch(e){}return r};
 })();
