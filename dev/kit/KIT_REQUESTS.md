@@ -311,3 +311,7 @@ wording (5 of 12 lines one template sentence, s9) → MAIN. Probe: /home/user/wt
 
 ## 25/11 KK29 — DONE (review/kit-opts-pack-4): «not a danger» flag for selection-day cards (SELSCENE-18 asked via MAIN 140)
 Flag name: **`nodanger:1`** on the queue card (`Q.push({…,pid:"selxD3",nodanger:1})`) or on a kit panel spec (`kitPanel({…,nodanger:1})`). Also silent without a flag: pids starting `selx` / `kc2Sel` (`KIT_NODANGER_PRE`, j11) and every act picker in `KIT_ACT_PIDS`. One function `kitNoDanger(card)` decides the red wash (`kitAlarm`), the heartbeat and the tension music. KIT §93.9; scan table `dev/test/kit-alarm-scan.js`.
+
+
+## 25/11 makeup-set — kitSwatches SET block + OFF item + row note (worker MAKEUP-SET, MAIN 147 told 25/11 ~23:05Z)
+Owner OD 25/11 ~23:20Z: the mirror lost its preset sets (jration lxColRows dropped every set she did not fully own). Needed in KIT §60 kitSwatches: a set item = 4 swatches side by side + name; a greyed item with why; a note line under a row. Built INSIDE the one kit part (jtoil kitSwatches + #kswt-css, KIT.md §60), no private copy; for the kit keeper's review on review/makeup-set.
