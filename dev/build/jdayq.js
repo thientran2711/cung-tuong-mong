@@ -24,7 +24,7 @@
    kmPush (held by kmFree); both gates are here, in one place. Installed LAST (outermost wrappers, after every module's own). No save data, no UI,
    no player-visible text. Numbers: BAL.dayq + BAL.spread.dawnSlot / dawnOpt (jbal2.js). Tests: dev/test/dayq-order.js (day turn), dev/test/dayq-hold.js (every khắc event source × activity), dev/test/dayq-hold-coop.js (gate (c) in a co-op room). Report: dev/handover/reports/day-queue.md
    ===================================================================================================================================== */
-const DQ={want:null,t:0,mt:0,newsHold:0,fo:null,stat:{held:0,ran:0,dropped:0,modalHeld:0,newsFirst:0,kmHeld:0,actHeld:0,pulled:0,actKm:0}};
+const DQ={want:null,t:0,mt:0,newsHold:0,fo:null,stat:{held:0,ran:0,dropped:0,modalHeld:0,newsFirst:0,kmHeld:0,actHeld:0,pulled:0,actKm:0,painted:0,tapPaint:0,netArm:0,rearm:0,newsLet:0,newsPass:0}};
 /* solo only: a co-op room keeps its own gates (jcoopworld reshowQ already waits on the book; night / week gates pace the turn) and its seats must
    draw the same random numbers in the same order — holding cards there would shift j68's draws on one seat (worlds drift) */
 function dqUi(){try{return !window.__bot&&!(window.COOPW&&COOPW.on)&&typeof S!=="undefined"&&!!S&&!S.dead}catch(e){return false}}
@@ -73,22 +73,45 @@ function dqPull(){try{if(!dqUiC()||!Q.length||DQ.user||!dqActEl())return;const D
   if(D&&D.F&&D.encM===m&&m&&m.dfSeen&&!D.play){const F=D.F;m.dfSeen=0;D.encM=null;try{F.destroy()}catch(e){try{F.close()}catch(x){}}try{dfClosed(D.tk)}catch(e){}n=1}
   const M=$("modal");if(M&&!dqHidden(M)){DQ_HID.set.call(M,true);n=1}
   if(n){DQ.stat.pulled++;dqArmModal()}}catch(e){console.error("dayq pull",e)}}
+/* SANGBUOI-HELD (Robot M4 25/11, review/sangbuoi-held-fix): a queue NOBODY paints — cards in Q, #modal REALLY hidden, no mini-game, and Q[0] not
+   already playing in the jdfv stage scene. Every silent exit of the hold family (a dropped held turn, the «Sang buổi» tap, the newsHold scene gate,
+   a render that leaves such a queue) paints it through the full showModal chain (so every gate — #dawn, activity, night flip — still holds it on
+   screen-visible terms and re-arms), never only render(): a hidden card never blocks «Sang buổi» unseen. */
+function dqQHidden(){try{if(!Q.length||(S&&S.mg))return false;const M=$("modal");if(!M||!dqHidden(M))return false;if(dqPlaying())return false;
+  const D=window.DF;if(D&&D.F&&Q[0]&&D.encM===Q[0])return false;return true}catch(e){return false}}
+function dqPaintQ(){try{if(!dqUiC()||!dqQHidden())return false;DQ.stat.painted++;DQ.ra=0;showModal();if(dqQHidden()&&!DQ.mt)dqArmModal();return true}catch(e){console.error("dayq paint",e);return false}}
+/* the night gate's exception (jnf showModal): the «Tin trong cung» card on top that jdayq newsHold holds the queued (NOT yet on screen) flip scene
+   for. It paints first (≤ one poll), then the flip plays and the choice follows it at once (owner OD 16/11 22:45Z «no dialog under / over the flip
+   scene» = while the scene is ON SCREEN). */
+function dqNewsPass(){try{if(!DQ.newsHold||!dqUi()||!Q[0]||!dqIsNews(Q[0])||dqDawn())return false;if(document.querySelector(".kmov:not(.km-out)"))return false;
+  if(typeof kmBusy!=="undefined"&&kmBusy)return false;if(!(typeof window.cfBusy==="function"&&window.cfBusy()))return false;DQ.stat.newsPass++;return true}catch(e){return false}}
+window.dqNewsPass=dqNewsPass;
 /* (a) the held turn runs by itself once the old buổi is finished (same buổi, nothing else open) */
 function dqWait(){if(DQ.t)return;const tick=()=>{DQ.t=0;try{const w=DQ.want;if(!w)return;if(!dqUi()||bkey()!==w){DQ.want=null;DQ.stat.dropped++;return}
-  if(dqOldPending()){DQ.t=setTimeout(tick,dqPoll());return}DQ.want=null;if(Q.length||S.mg){DQ.stat.dropped++;try{render()}catch(e){}return}DQ.stat.ran++;nextBuoi()}catch(e){console.error("dayq wait",e)}};
+  if(dqOldPending()){dqPaintQ();DQ.t=setTimeout(tick,dqPoll());return}DQ.want=null;if(Q.length||S.mg){DQ.stat.dropped++;try{render()}catch(e){}dqPaintQ();return}DQ.stat.ran++;nextBuoi()}catch(e){console.error("dayq wait",e)}};
  DQ.t=setTimeout(tick,dqPoll())}
 /* (b) a card held while the new-day host is up is painted once it closes */
 function dqArmModal(){if(DQ.mt)return;const tick=DQ.mtf=()=>{clearTimeout(DQ.mt);DQ.mt=0;try{if(!dqUiC())return;if((dqUi()&&dqDawn())||dqActBlocks()){DQ.mt=setTimeout(tick,dqPoll());return}
-  if(dqUi())dqNewsFirst();const M=$("modal");if(Q.length&&M&&dqHidden(M))showModal()}catch(e){console.error("dayq modal",e)}};DQ.mt=setTimeout(tick,dqPoll())}
+  if(dqUi())dqNewsFirst();const M=$("modal");if(Q.length&&M&&dqHidden(M))showModal();
+  /* SANGBUOI-HELD (Robot M4: DQ.mt 0, dropped 0, cards hidden until a tab tap): the tick was ONE-SHOT — when an inner showModal gate swallowed
+     this paint nothing re-armed. While the queue is still unpainted, look again (bounded: BAL.dayq.rearm looks; any paint / empty Q resets) */
+  if(dqQHidden()){if((DQ.ra=(DQ.ra||0)+1)<=BAL.dayq.rearm){DQ.stat.rearm++;DQ.mt=setTimeout(tick,dqPoll())}}else DQ.ra=0}catch(e){console.error("dayq modal",e)}};DQ.mt=setTimeout(tick,dqPoll())}
 function dqInstall(){
  /* (a) outermost nextBuoi: hold the turn while the old buổi's big moment is pending */
- const nb=nextBuoi;nextBuoi=function(){if(dqUi()&&!dqForced()&&dqOldPending()){if(!DQ.want)DQ.stat.held++;DQ.want=bkey();dqWait();return}return nb.apply(this,arguments)};window.nextBuoi=nextBuoi;
+ const nb=nextBuoi;nextBuoi=function(){if(dqUi()&&!dqForced()&&dqQHidden()){DQ.stat.tapPaint++;if(dqPaintQ())return}if(dqUi()&&!dqForced()&&dqOldPending()){if(!DQ.want)DQ.stat.held++;DQ.want=bkey();dqWait();return}return nb.apply(this,arguments)};window.nextBuoi=nextBuoi;
+ /* SANGBUOI-HELD: in solo the «Sang buổi» button runs the BARE j9 nextBuoi (j6 wired #next before any wrapper; jcoopworld routes only a co-op room
+    through the wrapped one), which returns silently on Q.length — Robot M4's dead tap. Her tap paints a queue nobody painted, then nothing else
+    changes (the button keeps its old route) */
+ try{const n=$("next");if(n){const o=n.onclick;n.onclick=function(e){try{if(dqUi()&&!dqForced()&&dqQHidden()){DQ.stat.tapPaint++;if(dqPaintQ())return}}catch(x){}return o?o.call(this,e):undefined}}}catch(e){console.error("dayq next",e)}
  /* (b) outermost showModal: nothing painted over the title card / book */
  const sm=showModal;showModal=function(){if(dqUiC()&&Q.length&&!DQ.user&&!(dqUi()&&dqDawn())&&dqActBlocks()){DQ.stat.actHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}
   if(dqUi()&&Q.length&&dqDawn()&&!DQ.user){DQ.stat.modalHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}return sm.apply(this,arguments)};window.showModal=showModal;
  /* an info panel she opens herself (kitModal inside a tap / key event: a person / item / term, e.g. inside the book) is shown at once, over the book;
     a kitModal posted by the game (no user event) waits like any card */
  if(typeof kitModal==="function"){const km=kitModal;kitModal=function(){let u=0;try{const ev=window.event;u=ev&&/click|pointer|touch|key|mouse/.test(ev.type)?1:0}catch(e){}if(!u)return km.apply(this,arguments);DQ.user=(DQ.user||0)+1;try{return km.apply(this,arguments)}finally{DQ.user--}};window.kitModal=kitModal}
+ /* SANGBUOI-HELD net: any render that leaves a queue nobody paints (cards pushed without showModal, a gate that dropped its arm) arms the
+    painter; it waits on #dawn / an activity like every held card (solo; a co-op room keeps reshowQ / wantB) */
+ if(typeof render==="function"){const rd=render;render=function(){const r=rd.apply(this,arguments);try{if(dqUi()&&!DQ.mt&&dqQHidden()){DQ.stat.netArm++;dqArmModal()}}catch(e){}return r};window.render=render}
  /* (c) the person view she opens herself (jdfv dfOpen, a tap on a person) is an activity; one opened by a card (encounter) is that card */
  if(typeof dfOpen==="function"){const fo=dfOpen;dfOpen=function(){const r=fo.apply(this,arguments);try{DQ.fo=window.DF&&DF.tk||null}catch(e){}return r};window.dfOpen=dfOpen}
  /* (c) an activity appears (mini-game screen shown, a scene / podium / roulette / person view added): a card painted in the same tap is taken back */
@@ -102,7 +125,11 @@ function dqInstall(){
   /* a scene posted inside a tap waits one pump (kmPump retries in 250 ms): the tap may be opening an activity (her «Điểm trang» tap spends the
      khắc first, then opens the mirror) — a scene of the khắc never starts before / under that screen */
   const ev=window.event;if(ev&&/click|pointer|touch|key|mouse/.test(ev.type)&&!DQ.kmTap){DQ.kmTap=1;setTimeout(()=>{DQ.kmTap=0},0);DQ.stat.actKm++;return false}}}catch(e){}
- try{if(DQ.newsHold){if(dqUi()&&Q.some(dqIsNews)){DQ.stat.kmHeld++;return false}DQ.newsHold=0}}catch(e){}return true}})();
+ try{if(DQ.newsHold){if(dqUi()&&Q.some(dqIsNews)){
+  /* SANGBUOI-HELD (Robot M4 night dump, rv 2yv2CZAt): the news card is held UNPAINTED and the scene waits on it → paint it now; if an inner gate
+     still swallows it (any gate that waits on THIS queued scene: jnf night gate ⇄ the unstarted flip = an ~80 s mutual wait), let the scene
+     through — a scene never waits on a card that cannot be painted */
+  if(dqQHidden()&&!dqDawn()){dqPaintQ();if(dqQHidden()){DQ.stat.newsLet++;return true}}DQ.stat.kmHeld++;return false}DQ.newsHold=0}}catch(e){}return true}})();
 (function(){if(typeof dawn!=="function")return;const d0=dawn;dawn=function(){try{if(dqUi())DQ.newsHold=1}catch(e){}return d0.apply(this,arguments)}})();
 /* a new life / a loaded slot drops what the old one held — but a card already HELD for an activity (dqArmModal armed) is not dropped with it: the
    reset removes the scene / podium, so the held card is painted at the next tick (else it stayed hidden in Q for ever and the turn never came) */
