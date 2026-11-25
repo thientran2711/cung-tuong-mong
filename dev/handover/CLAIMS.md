@@ -1588,3 +1588,6 @@ KIT KEEPER KK24 (successor of KK23b) | kit/* | session_01V1ZZH2XW37iovDknShGvBX 
 selection-scene r6 (successor of SELSCENE-15; long-task line 68→≤40) | review/selection-scene | session_01V1ZZH1G5Kd2AYQ5BrPhXdN | RUNNING | 2026-11-24T23:52Z (MAIN 129)
 kit mucluc r3 review | review/flight-mucluc-kit | session_01N1tNP2WLLioHUbYHsQkybW | RUNNING | 25/11 00:42Z (FOREMAN B child7)
 kit-scene-fade review | review/kit-scene-fade | session_01N1tNP6KvszkfmUqbjSQVxB | RUNNING | 25/11 00:42Z (FOREMAN B child7)
+robot-coop-savert BIG review | review/robot-coop-savert | session_01N1tNP4ZyfP6D8ujXL6neuR | RUNNING | 25/11 00:45Z (FOREMAN B child7)
+robot-coop-fix-5 (stuck cause 3, FIXER #10) | review/robot-coop-fix-5 | session_01N1tNP5P5MetjLKWvphzukd | RUNNING | 25/11 00:45Z (FOREMAN B child7)
+hardlock-choice (no takeable choice, whole family) | review/hardlock-choice | session_01N1tNP3HWwA785d24xRGQTm | RUNNING | 25/11 00:45Z (FOREMAN B child7)
