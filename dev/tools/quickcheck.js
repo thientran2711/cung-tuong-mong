@@ -51,7 +51,10 @@ const SETTLE=()=>{try{for(let j=0;j<1&&Q.length&&!S.dead;j++){const m=Q[0];if(m.
 /* MAIN 121 (24/11 ~09:42Z, review/selection-scene): a new tú nữ life plays her 3 selection days (option 0 driver, no game bypass); a life that ENDS at
    the selection (ban hoa, owner rule: the life ends) can never settle → reroll a new life, same idiom as the cung nữ reroll above; counted, capped. */
 const BANHOA=()=>!!(S&&S.dead&&S.fate==='Bị ban hoa, xuất cung');
-const SELX_REROLL_MAX=5;let selxRerolls=0;
+/* SELSCENE-20 (26/11): cap 5 → 20. Probe 3f5ace79 vs bb308363, same option-0 driver, 24 lives each: ban hoa 10/24 (10 of 17 day lives) vs 14/24
+   (14 of 20) — not higher on the new build, ~3 of 5 day lives on both = the owner's rule (BAL.selx.yard: 12 girls, top 4 kept) for an average girl; jdayq r4 changes nothing there. At p≈0.6–0.7 a cap of 5 ends one
+   settle in 6 ban hoa ~5–12 % of the time (5+ settles per run ⇒ ~1 run in 3 FAILed on luck); 20 ⇒ <0.1 % per settle. */
+const SELX_REROLL_MAX=20;let selxRerolls=0;
 /* SELSCENE-12: SETTLE_MS = the bot playing a tú nữ's whole 3 days (option-0 driver) under the perf CPU throttle: 15–35 s unthrottled on this box (ea3cf4ac and this branch alike) ×4 cpu ⇒ up to ~140 s; 60 s failed whenever a tú nữ life came up. Only this wait; the gated perf numbers are unchanged. */
 const SETTLE_MS=180e3;
 async function settleNew(g,what){for(let k=0;;k++){await within(SETTLE_MS,g.waitForFunction('('+SETTLE.toString()+')()||('+BANHOA.toString()+')()',null,{polling:150,timeout:SETTLE_MS}),what);/* timeout = the within() limit (Playwright's default 30 s fired first: a tú nữ's 3 days under the perf CPU throttle) */
