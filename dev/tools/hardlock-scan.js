@@ -36,10 +36,10 @@ function staticSeeds(){const dir=path.join(ROOT,'dev/build');const R=[];
   S.rank=Math.max(S.rank||0,3);if(!S.maid&&typeof newMaid==='function')S.maid=newMaid(nmNew('maid'),50);if((S.staff||[]).length<4&&typeof fillStaff==='function')fillStaff(S,true);
   window.__HL=[];window.__hlKeep=(m,tag)=>{if(m&&m.opts&&m.opts.length)window.__HL.push({m,tag})};
   /* judge one card at one purse: through the real showModal, on the DOM */
-  window.__hlJudge=(m,bac)=>{const b0=S.bac,e0=window.__e68off;S.bac=bac;window.__e68off=1;/* the j68 scheduler (evGate) must not hold the card back */Q.length=0;Q.push(m);let r=null;try{showModal();const M=$('modal');const bs=[...M.querySelectorAll('.opts > button.opt')];
-    if(M.hidden)return (S.bac=b0,window.__e68off=e0,{hidden:1,dead:!!S.dead});const en=bs.filter(x=>!x.disabled).length;const x=typeof kitModalCloser==='function'&&!!kitModalCloser();
+  window.__hlJudge=(m,bac)=>{const b0=S.bac,e0=window.__e68off,q0=window.__bot;S.bac=bac;window.__e68off=1;window.__bot=1;/* jdayq (solo new-day order) holds a card back when not a bot: off while judging *//* the j68 scheduler (evGate) must not hold the card back */Q.length=0;Q.push(m);let r=null;try{showModal();const M=$('modal');const bs=[...M.querySelectorAll('.opts > button.opt')];
+    if(M.hidden)return (S.bac=b0,window.__e68off=e0,window.__bot=q0,{hidden:1,dead:!!S.dead});const en=bs.filter(x=>!x.disabled).length;const x=typeof kitModalCloser==='function'&&!!kitModalCloser();
     r={en,x,n:bs.length,why:(m.opts||[]).map(c=>c&&c.off&&c.off.why||((c&&c.fx&&c.fx.bac&&bac+c.fx.bac<0)?'bạc '+c.fx.bac:'')).slice(0,6),names:(m.opts||[]).map(c=>String(c&&c.n||'').replace(/<[^>]+>/g,'').slice(0,50)).slice(0,6)}}catch(e){r={err:String(e).slice(0,120)}}
-   S.bac=b0;window.__e68off=e0;Q.length=0;$('modal').hidden=true;return r}});
+   S.bac=b0;window.__e68off=e0;window.__bot=q0;Q.length=0;$('modal').hidden=true;return r}});
  await g.addStyleTag({content:'#kroul,#kroulw,.kmov,#kmrew{display:none!important}'});
  /* harvest: build cards (not shown) */
  const H=await g.evaluate(()=>{const keep=window.__hlKeep;const P0=window.__HL;let n={pend:0,e68:0,e68skip:0,jobs:0};window.__e68off=1;
