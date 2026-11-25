@@ -1777,3 +1777,4 @@ net-ghen-2 step 2 (W10b, successor of W10) | review/net-ghen-2 | session_01D3E3N
 coop-presence-reload BIG review (opus) | review/coop-presence-reload | session_01N1tNP2N8xkKLq6Len7PMr9 | RUNNING | 2026-11-25 18:05Z (Foreman B child 4)
 KK31 kitHand + iPad text-first | review/kit-hand | session_01V1ZZH4F57paDBkBCH9PESr | RUNNING | 25/11 17:56Z (MAIN 144; successor of KK30)
 net-ghen-2 BIG review (RV5) | review/net-ghen-2 80d217ed | session_01D3E3NXw8WVA9KvuPq36f82 | RUNNING | 2026-11-25 18:12Z (Foreman D)
+coop-night-live BIG review (opus, pre-opened) | review/coop-night-live | session_01N1tNP5h1rt4Z5947oiDeqt | RUNNING | 2026-11-25 18:24Z (Foreman B child 4)
