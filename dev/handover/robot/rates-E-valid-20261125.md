@@ -1,34 +1,34 @@
-# ROBOT-10 rates — E line, VALID lives only (audit 25/11; 309 solo lives out of 646 + 15 valid co-op lives not aggregated)
+# ROBOT-10 rates — E line, VALID solo lives only (audit 25/11 final; co-op lives are not in agg format)
 
-> BIAS WARNING: capped / timed-out / exit lives were removed, so this sample is skewed to SHORT lives that ended in death; deep-life numbers (late ranks, old age, Thái phi) are under-represented until the reruns land. Source: reports/robot-audit-E.md. Co-op lives are not in robot10-agg format (no job/life at top) and are not included.
+> BIAS WARNING: capped / timed-out / exit lives were removed → sample skewed to SHORT lives that ended in death until the reruns land. Source: reports/robot-audit-E.md.
 
-# ROBOT-10 round report · 20261125-0525 (UTC)
+# ROBOT-10 round report · 20261125-0527 (UTC)
 
-309 lives from 1 result files · thân phận thd cnv pf bd · catalogue catalog.json of the run: 63 death texts, 388 endings, 14 run-time-built sites.
+314 lives from 1 result files · thân phận thd cnv pf bd · catalogue catalog.json of the run: 63 death texts, 388 endings, 14 run-time-built sites.
 Ending groups = the game's own S.kesT (jend): death; đại kết cục = grand; rare; kỳ ngộ = fate; thường = exile / fail / leave / throne. «no ending» = soft-lock / wall cap / bot stuck / crash (each is also a bug in its run's bug file). «real min» = the PACE MODEL (section 11), not the robot's own time.
 
 ## 0 · Overall
 
 | group | lives | ending reached | death | thường | kỳ ngộ | đại kết cục | rare | Hoàng hậu | Nữ đế | Hoàng thái hậu | no ending | avg years | avg real min | bugs |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| ALL | 309 | 100% | 78% | 21% | 0% | 1% | 0% | 3% | 0% | 1% | 0% | 6.5 | 1189.4 | 2962 |
+| ALL | 314 | 100% | 78% | 20% | 0% | 1% | 0% | 3% | 0% | 1% | 0% | 6.5 | 1191.6 | 3013 |
 
-## 1 · DEATH — 241 of 309 lives died (78%)
+## 1 · DEATH — 246 of 314 lives died (78%)
 
 | cause (from the code) | where | deaths | of deaths | of lives | who caused it | mean age | mean rank at death | mean real min | framed before |
 |---|---|---|---|---|---|---|---|---|---|
-| Tuổi trời đã tận, «ILL[ageOf(p)>=M.oldAge?"laobenh":"trongbenh"].n.toLowerCase()» không qu | jmort.js:106 | 43 | 18% | 14% | fate (lifespan) ×43 | 26.1 | Quý nhân | 1676 | — |
-| «pre»Tân Thái hậu «v.name» xét lại chuyện cũ (khả năng: «chanceLo(o)»), ban lụa trắng, ép  | j3.js:164 | 40 | 17% | 13% | execution ×40 | 24.9 | Quý nhân | 1628.9 | — |
-| Bị ban chết vì đầu độc «k.name» | j8.js:146 | 31 | 13% | 10% | poison ×31 | 21.8 | Đáp ứng | 820.3 | 1/31 |
+| Tuổi trời đã tận, «ILL[ageOf(p)>=M.oldAge?"laobenh":"trongbenh"].n.toLowerCase()» không qu | jmort.js:106 | 46 | 19% | 15% | fate (lifespan) ×46 | 26 | Quý nhân | 1691.7 | — |
+| «pre»Tân Thái hậu «v.name» xét lại chuyện cũ (khả năng: «chanceLo(o)»), ban lụa trắng, ép  | j3.js:164 | 40 | 16% | 13% | execution ×40 | 24.9 | Quý nhân | 1628.9 | — |
+| Bị ban chết vì đầu độc «k.name» | j8.js:146 | 32 | 13% | 10% | poison ×32 | 21.8 | Đáp ứng | 812.6 | 1/32 |
 | «d.n» nguy kịch, không qua khỏi | j13.js:21 | 20 | 8% | 6% | illness ×20 | 21.7 | Thường tại | 1077.6 | 1/20 |
 | Bị «m.name» sai đánh trượng đến chết | j42.js:323 | 19 | 8% | 6% | execution ×19 | 20.2 | Đáp ứng | 66.3 | — |
-| Hồng nhan bạc mệnh | j3.js:167 | 17 | 7% | 6% | childbirth ×17 | 23.6 | Quý nhân | 1185.2 | 1/17 |
-| Thái phi | j3.js:157 | 17 | 7% | 6% | other ×17 | 27.4 | Quý phi | 2609.2 | — |
-| Tráo con bị bắt quả tang, tội khi quân | j8.js:381 | 11 | 5% | 4% | execution ×11 | 23 | Tần | 1116.3 | — |
+| Hồng nhan bạc mệnh | j3.js:167 | 17 | 7% | 5% | childbirth ×17 | 23.6 | Quý nhân | 1185.2 | 1/17 |
+| Thái phi | j3.js:157 | 17 | 7% | 5% | other ×17 | 27.4 | Quý phi | 2609.2 | — |
+| Tráo con bị bắt quả tang, tội khi quân | j8.js:381 | 11 | 4% | 4% | execution ×11 | 23 | Tần | 1116.3 | — |
 | Lãnh cung | j14.js:40 | 10 | 4% | 3% | other ×10 | 22.5 | Đáp ứng | 494.4 | — |
 | Bị ban chết vì tư thông với «m.name» | j22.js:22 | 8 | 3% | 3% | execution ×8 | 27.4 | Tần | 2528.7 | — |
+| Bị ban chết vì vu «k.name» trù ẻo thánh thượng | j8.js:152 | 6 | 2% | 2% | execution ×6 | 23.3 | Đáp ứng | 2488.8 | — |
 | Khó sinh, băng huyết mà chết | j8.js:389 | 5 | 2% | 2% | childbirth ×5 | 26 | Quý nhân | 1978.9 | — |
-| Bị ban chết vì vu «k.name» trù ẻo thánh thượng | j8.js:152 | 5 | 2% | 2% | execution ×5 | 23.2 | Đáp ứng | 2929.9 | — |
 | Mẫu hậu Hoàng thái hậu | j3.js:160 | 3 | 1% | 1% | other ×3 | 35 | Hoàng hậu | 4015.1 | — |
 | Tư thông bị phát giác | j30.js:25 | 2 | 1% | 1% | execution ×2 | 28.5 | Phi | 3050.3 | — |
 | Bị «mm2.name» phát hiện làm tai mắt cho «v.name», sai đánh chết | j42.js:295 | 2 | 1% | 1% | execution ×2 | 21 | Đáp ứng | 88.2 | — |
@@ -38,15 +38,15 @@ Ending groups = the game's own S.kesT (jend): death; đại kết cục = grand;
 | «mm2.name» biết ngươi phản chủ, sai người dìm ngươi xuống giếng sau Ngự hoa viên | j42.js:296 | 1 | 0% | 0% | NPC / scheme | 22 | Đáp ứng | 61.9 | — |
 | Bị đánh đòn vì tội trộm cắp, không qua khỏi | j42.js:388 | 1 | 0% | 0% | execution | 18 | Đáp ứng | 4.5 | — |
 
-By who caused it: execution 88 (37%) · fate (lifespan) 43 (18%) · poison 35 (15%) · other 30 (12%) · childbirth 24 (10%) · illness 20 (8%) · NPC / scheme 1 (0%)
+By who caused it: execution 89 (36%) · fate (lifespan) 46 (19%) · poison 36 (15%) · other 30 (12%) · childbirth 24 (10%) · illness 20 (8%) · NPC / scheme 1 (0%)
 
-Per thân phận: bd 100% (66/66) · cnv 52% (72/138) · pf 100% (52/52) · thd 96% (51/53)
+Per thân phận: bd 100% (68/68) · cnv 52% (72/138) · pf 100% (55/55) · thd 96% (51/53)
 
-Per age band at death: 20-24: 118 · 25-29: 65 · <20: 29 · 30-39: 29
+Per age band at death: 20-24: 120 · 25-29: 68 · <20: 29 · 30-39: 29
 
-Per rank at death: Đáp ứng: 120 · Thường tại: 23 · Phi: 23 · Tần: 22 · Quý phi: 19 · Quý nhân: 16 · Hoàng quý phi: 10 · Hoàng hậu: 8
+Per rank at death: Đáp ứng: 122 · Thường tại: 23 · Tần: 23 · Phi: 23 · Quý phi: 19 · Quý nhân: 17 · Hoàng quý phi: 11 · Hoàng hậu: 8
 
-Stage (life frame part): part 1: 120 · part 0: 61 · part 2: 60
+Stage (life frame part): part 1: 125 · part 0: 61 · part 2: 60
 
 **Death causes «chưa ai gặp» (0 hits): 59 of 63** (maybe unreachable, or only rare: judge after a whole round)
 
@@ -110,13 +110,13 @@ Stage (life frame part): part 1: 120 · part 0: 61 · part 2: 60
 - Bị ban chết vì con không phải cốt nhục hoàng gia (jroute.js:362)
 - con không phải cốt nhục hoàng gia (jroute.js:368)
 
-## 2 · ENDINGS — 309 of 309 lives reached an ending
+## 2 · ENDINGS — 314 of 314 lives reached an ending
 
 | ending | where | type | lives | rate | mean real min | mean in-game years |
 |---|---|---|---|---|---|---|
-| Hồng nhan bạc mệnh | j3.js:167 | death | 209 | 68% | 1273.8 | 5 |
-| Xuất cung | j42.js:303 | leave | 64 | 21% | 501.8 | 10.7 |
-| Thái phi | j3.js:157 | death | 17 | 6% | 2609.2 | 9 |
+| Hồng nhan bạc mệnh | j3.js:167 | death | 214 | 68% | 1274.9 | 5 |
+| Xuất cung | j42.js:303 | leave | 64 | 20% | 501.8 | 10.7 |
+| Thái phi | j3.js:157 | death | 17 | 5% | 2609.2 | 9 |
 | Lãnh cung | j14.js:40 | death | 10 | 3% | 494.4 | 4.4 |
 | Mẫu hậu Hoàng thái hậu | j3.js:160 | death | 3 | 1% | 4015.1 | 12.3 |
 | Tư thông bị phát giác | j30.js:25 | death | 2 | 1% | 3050.3 | 9.6 |
@@ -124,7 +124,7 @@ Stage (life frame part): part 1: 120 · part 0: 61 · part 2: 60
 | Đại kết cục · Thơ theo gió đi | GE_CAT thd_tho#3 | grand | 1 | 0% | 773.4 | 13.1 |
 | Đại kết cục · Theo trò đi xa | GE_CAT thd_tro#3 | grand | 1 | 0% | 772.4 | 8.9 |
 
-Every ending title as the game printed it: Hồng nhan bạc mệnh [death] ×209 · Xuất cung [leave] ×64 · Thái phi [death] ×17 · Lãnh cung [death] ×10 · Mẫu hậu Hoàng thái hậu [death] ×3 · Tư thông bị phát giác [death] ×2 · Đại kết cục · Giữ kín ra cung [grand] ×2 · Đại kết cục · Thơ theo gió đi [grand] ×1 · Đại kết cục · Theo trò đi xa [grand] ×1
+Every ending title as the game printed it: Hồng nhan bạc mệnh [death] ×214 · Xuất cung [leave] ×64 · Thái phi [death] ×17 · Lãnh cung [death] ×10 · Mẫu hậu Hoàng thái hậu [death] ×3 · Tư thông bị phát giác [death] ×2 · Đại kết cục · Giữ kín ra cung [grand] ×2 · Đại kết cục · Thơ theo gió đi [grand] ×1 · Đại kết cục · Theo trò đi xa [grand] ×1
 
 **Endings «chưa ai gặp»: 379 of 388** — the 30 code / rare / succession endings are listed here; 349 of 352 Đại kết cục titles (GE_CAT, two shadings each) are in the -avg.csv.
 
@@ -163,24 +163,24 @@ Every ending title as the game printed it: Hồng nhan bạc mệnh [death] ×20
 
 | rank | reached (≥) | highest = this | mean real min to reach | mean in-game year of reach | mean age at reach |
 |---|---|---|---|---|---|
-| Đáp ứng | 100% | 123 | 111.7 | 1.2 | 19.2 |
-| Thường tại | 60% | 50 | 109.6 | 1.5 | 19.5 |
-| Quý nhân | 44% | 33 | 316 | 1.9 | 19.9 |
-| Tần | 33% | 19 | 746.7 | 3.2 | 21.3 |
-| Phi | 27% | 25 | 1246.7 | 5 | 23.1 |
-| Quý phi | 19% | 25 | 1698 | 6.5 | 24.6 |
-| Hoàng quý phi | 11% | 24 | 2040.5 | 7.3 | 25.3 |
+| Đáp ứng | 100% | 123 | 116.4 | 1.3 | 19.2 |
+| Thường tại | 61% | 52 | 107.3 | 1.5 | 19.5 |
+| Quý nhân | 44% | 33 | 309.8 | 1.9 | 19.9 |
+| Tần | 34% | 20 | 745.2 | 3.2 | 21.3 |
+| Phi | 27% | 25 | 1231.8 | 5 | 23.1 |
+| Quý phi | 19% | 26 | 1667.7 | 6.4 | 24.5 |
+| Hoàng quý phi | 11% | 25 | 2004.1 | 7.2 | 25.3 |
 | Hoàng hậu | 3% | 10 | 3057.2 | 10 | 28.1 |
 
-Demotions per life: mean 2.6 (lives with ≥1: 55%) · lãnh cung entries: mean 1.4 (lives with ≥1: 51%) · Hoàng hậu 3% · Nữ đế 0% · Hoàng thái hậu 1%
+Demotions per life: mean 2.6 (lives with ≥1: 56%) · lãnh cung entries: mean 1.4 (lives with ≥1: 52%) · Hoàng hậu 3% · Nữ đế 0% · Hoàng thái hậu 1%
 
 Per thân phận (share reaching ≥ rank):
 
 | thân phận | Đáp ứng | Thường tại | Quý nhân | Tần | Phi | Quý phi | Hoàng quý phi | Hoàng hậu |
 |---|---|---|---|---|---|---|---|---|
-| bd | 100% | 100% | 80% | 59% | 44% | 32% | 23% | 11% |
+| bd | 100% | 100% | 81% | 60% | 44% | 32% | 22% | 10% |
 | cnv | 100% | 16% | 11% | 8% | 6% | 4% | 1% | 1% |
-| pf | 100% | 98% | 71% | 58% | 50% | 29% | 23% | 4% |
+| pf | 100% | 98% | 69% | 56% | 49% | 29% | 24% | 4% |
 | thd | 100% | 89% | 58% | 43% | 40% | 32% | 9% | 0% |
 
 ## 4 · FAMILY
@@ -198,13 +198,13 @@ Per thân phận (share reaching ≥ rank):
 
 | per life | mean | lives with ≥1 | max |
 |---|---|---|---|
-| thị tẩm (nights) | 12.9 | 49% | 134 |
-| peak Sủng | 60.9 | 94% | 100 |
+| thị tẩm (nights) | 13.1 | 49% | 134 |
+| peak Sủng | 61.4 | 94% | 100 |
 | times framed (accusation stuck) | 0.2 | 14% | 5 |
-| her schemes caught | 7.2 | 38% | 112 |
+| her schemes caught | 7.2 | 39% | 112 |
 | death sentences on her | 0.1 | 6% | 2 |
 
-Schemes she ran (doAct kind): rumor 34829 (caught 0%, 92 lives) · vp 28550 (caught 0%, 93 lives) · gift 18799 (caught 0%, 93 lives) · ksab 6002 (caught 23%, 88 lives) · accuse 4160 (caught 1%, 259 lives) · spy 2621 (caught 0%, 113 lives) · frame 1261 (caught 57%, 85 lives) · plant 883 (caught 0%, 71 lives) · huydung 300 (caught 0%, 30 lives) · pond 245 (caught 13%, 57 lives) · kpoison 158 (caught 0%, 53 lives) · ally 116 (caught 0%, 50 lives) · block 41 (caught 0%, 18 lives) · bribe 38 (caught 0%, 15 lives) · takeaway 20 (caught 5%, 8 lives) · poison 19 (caught 0%, 8 lives) · kframe 16 (caught 0%, 9 lives)
+Schemes she ran (doAct kind): rumor 35502 (caught 0%, 94 lives) · vp 29114 (caught 0%, 95 lives) · gift 19274 (caught 0%, 95 lives) · ksab 6108 (caught 23%, 90 lives) · accuse 4267 (caught 1%, 264 lives) · spy 2666 (caught 0%, 116 lives) · frame 1303 (caught 57%, 87 lives) · plant 910 (caught 0%, 73 lives) · huydung 303 (caught 0%, 32 lives) · pond 250 (caught 14%, 58 lives) · kpoison 165 (caught 0%, 55 lives) · ally 119 (caught 0%, 52 lives) · block 48 (caught 0%, 20 lives) · bribe 42 (caught 0%, 16 lives) · takeaway 20 (caught 5%, 8 lives) · poison 20 (caught 0%, 9 lives) · kframe 16 (caught 0%, 9 lives)
 
 Framed «won» (an accusation she beat) is not hooked yet: only accusations that stuck (framed(her)) are counted.
 
@@ -212,25 +212,25 @@ Framed «won» (an accusation she beat) is not hooked yet: only accusations that
 
 | bạc | mean | median | min | max |
 |---|---|---|---|---|
-| peak | 135.6 | 101 | 8 | 1157 |
-| at the end | 13.5 | 4 | 0 | 542 |
+| peak | 136.4 | 103 | 8 | 1157 |
+| at the end | 13.3 | 4 | 0 | 542 |
 
-«Hết bạc» (bạc ≤ 0 at a buổi change): 88% of lives · per bot: cautious 56% · greedy 100% · lazy 47% · lover 97% · random 84% · rebel 98% · schemer 95% · scholar 100% · skilled 100% · speed 100%
+«Hết bạc» (bạc ≤ 0 at a buổi change): 88% of lives · per bot: cautious 56% · greedy 100% · lazy 47% · lover 97% · random 84% · rebel 98% · schemer 94% · scholar 100% · skilled 100% · speed 100%
 
 ## 7 · MINI-GAMES — win rate per game per rank (law 5: must fall as she climbs)
 
 | game | plays | left to luck | Đáp ứng | Thường tại | Quý nhân | Tần | Phi | Quý phi | Hoàng quý phi | Hoàng hậu | law 5 (ranks ≤ 2 vs ≥ 4) |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| hoc:cam | 14715 | 0% | 0% (6344) | 0% (2694) | 0% (2487) | 0% (1170) | 0% (945) | 0% (590) | 0% (352) | 0% (133) | ok |
+| hoc:cam | 14922 | 0% | 0% (6371) | 0% (2740) | 0% (2544) | 0% (1188) | 0% (945) | 0% (590) | 0% (411) | 0% (133) | ok |
 | hoc:dan | 1 | 100% | 100% (1) | — | — | — | — | — | — | — | too few |
-| hoc:hoa | 11109 | 0% | 0% (4637) | 0% (1746) | 0% (1760) | 0% (1118) | 0% (932) | 0% (516) | 0% (296) | 0% (104) | ok |
+| hoc:hoa | 11231 | 0% | 0% (4662) | 0% (1769) | 0% (1778) | 0% (1134) | 0% (946) | 0% (516) | 0% (322) | 0% (104) | ok |
 | hoc:huong | 1 | 100% | — | 100% (1) | — | — | — | — | — | — | too few |
-| hoc:ky | 12417 | 0% | 0% (5494) | 0% (2178) | 0% (2164) | 0% (771) | 0% (686) | 0% (692) | 0% (316) | 0% (116) | ok |
-| hoc:nau | 6170 | 0% | 0% (2266) | 0% (1122) | 0% (1189) | 0% (599) | 0% (424) | 0% (321) | 0% (208) | 0% (41) | ok |
-| hoc:theu | 6474 | 0% | 0% (2586) | 0% (1220) | 0% (1200) | 0% (445) | 0% (500) | 0% (337) | 0% (165) | 0% (21) | ok |
-| hoc:thi | 8753 | 0% | 0% (4535) | 0% (1593) | 0% (1289) | 0% (406) | 0% (280) | 0% (384) | 0% (219) | 0% (47) | ok |
-| hoc:vu | 10514 | 0% | 0% (4196) | 0% (1489) | 0% (1725) | 0% (1112) | 0% (841) | 0% (676) | 0% (376) | 0% (99) | ok |
-| hoc:y | 7302 | 0% | 0% (3105) | 0% (1321) | 0% (1080) | 0% (620) | 0% (645) | 0% (251) | 0% (202) | 0% (78) | ok |
+| hoc:ky | 12630 | 0% | 0% (5520) | 0% (2233) | 0% (2239) | 0% (786) | 0% (696) | 0% (710) | 0% (330) | 0% (116) | ok |
+| hoc:nau | 6283 | 0% | 0% (2281) | 0% (1134) | 0% (1212) | 0% (623) | 0% (435) | 0% (321) | 0% (236) | 0% (41) | ok |
+| hoc:theu | 6585 | 0% | 0% (2601) | 0% (1240) | 0% (1214) | 0% (479) | 0% (500) | 0% (345) | 0% (185) | 0% (21) | ok |
+| hoc:thi | 8902 | 0% | 0% (4576) | 0% (1625) | 0% (1350) | 0% (410) | 0% (291) | 0% (384) | 0% (219) | 0% (47) | ok |
+| hoc:vu | 10674 | 0% | 0% (4213) | 0% (1512) | 0% (1745) | 0% (1151) | 0% (877) | 0% (676) | 0% (401) | 0% (99) | ok |
+| hoc:y | 7379 | 0% | 0% (3105) | 0% (1330) | 0% (1106) | 0% (622) | 0% (645) | 0% (266) | 0% (227) | 0% (78) | ok |
 | thi:co | 1 | 100% | 0% (1) | — | — | — | — | — | — | — | too few |
 | thi:dan | 2 | 100% | 0% (2) | — | — | — | — | — | — | — | too few |
 | thi:mua | 1 | 100% | 0% (1) | — | — | — | — | — | — | — | too few |
@@ -241,25 +241,25 @@ Win = contest place 1 (j82 startContest) · lesson score ≥ 5 of 10 (j82 playAr
 
 Per life: mean 10.1 · lives with ≥1: 100%
 
-- Kỳ ngộ ×307
-- Đèn rơi cứu người ×289
-- Ngọc rơi trên lối ×273
-- Sổ tay giáo tập ×258
-- Con vật lạc chủ ×255
-- Sớm mai Phật đường ×206
-- Hoàng tử lạc đường ×172
-- Của mình tìm lại ×122
-- Lời dặn Đoan ngọ ×102
-- Ván cờ tiên đế ×98
-- Phương thuốc gia truyền ×97
-- Nét ngự bút ×94
-- Chung áo dưới mưa ×92
-- Lá thư trong chậu lan ×87
+- Kỳ ngộ ×312
+- Đèn rơi cứu người ×294
+- Ngọc rơi trên lối ×277
+- Sổ tay giáo tập ×263
+- Con vật lạc chủ ×260
+- Sớm mai Phật đường ×211
+- Hoàng tử lạc đường ×177
+- Của mình tìm lại ×125
+- Lời dặn Đoan ngọ ×103
+- Ván cờ tiên đế ×100
+- Phương thuốc gia truyền ×99
+- Nét ngự bút ×96
+- Chung áo dưới mưa ×95
+- Lá thư trong chậu lan ×90
 - Cô cô để mắt ×48
-- Câu hỏi của sứ thần ×35
-- Khúc đàn đêm vườn ngự ×31
+- Câu hỏi của sứ thần ×36
+- Khúc đàn đêm vườn ngự ×32
 - kyc-ma-007 ×24
-- Họa sư bên hàng liễu ×22
+- Họa sư bên hàng liễu ×23
 - kyc-de-002 ×19
 - kyc-vat-004 ×18
 - kyc-vat-014 ×18
@@ -317,70 +317,70 @@ Kỳ ngộ «chưa ai gặp»: 4 of 25 — Hiên Phật đường · Món quý �
 
 ## 9 · BALANCE FLAGS
 
-Options offered ≥ 10 times to ≥ 3 different bots and taken ≥ 90 % or ≤ 2 % of the time (law 2: all options of one choice are worth the same) — 679 flags (bot policies bias this: read with the bot mix in mind):
+Options offered ≥ 10 times to ≥ 3 different bots and taken ≥ 90 % or ≤ 2 % of the time (law 2: all options of one choice are worth the same) — 700 flags (bot policies bias this: read with the bot mix in mind):
 
 | card | option | offered | taken | bots | flag |
 |---|---|---|---|---|---|
-| giftpick/Tặng quà | Nến mỡ dê | 297530 | 1% | 3 | ≤ 2 %: never worth taking? |
-| giftpick/Tặng quà | Trà Long Tĩnh | 88753 | 1% | 3 | ≤ 2 %: never worth taking? |
-| plantpick/Cài đồ vào rương | Nến mỡ dê | 15345 | 2% | 3 | ≤ 2 %: never worth taking? |
-| cyrep/Kỳ nguyệt sự | Báo lùi vài hôm | 10391 | 0% | 10 | ≤ 2 %: never worth taking? |
-| cyrep/Kỳ nguyệt sự | Báo sớm, nói đã sạch kỳ | 10391 | 0% | 10 | ≤ 2 %: never worth taking? |
-| Thế cờ «Song long»: dùng vật liệu gì? | Thế cờ «Song long» · bàn cờ gỗ | 6873 | 0% | 6 | ≤ 2 %: never worth taking? |
-| Khúc «Xuân hiểu»: dùng vật liệu gì? | Khúc «Xuân hiểu» · giấy hoa tiên | 6625 | 0% | 6 | ≤ 2 %: never worth taking? |
-| j70start/Bày mưu | Ra tay ngay: tung tin đồn | 5977 | 99% | 3 | ≥ 90 %: the others never worth it? |
-| Điệu «Đạp ca»: dùng vật liệu gì? | Điệu «Đạp ca» · thuê nhạc công | 5923 | 0% | 6 | ≤ 2 %: never worth taking? |
-| giftpick/Tặng quà | Lụa Hàng Châu | 5855 | 1% | 3 | ≤ 2 %: never worth taking? |
-| giftpick/Tặng quà | Vòng ngọc Hòa Điền | 5521 | 1% | 3 | ≤ 2 %: never worth taking? |
-| Thư pháp «Xuân nhật»: dùng vật liệu gì? | Thư pháp «Xuân nhật» · giấy hoa tiên | 4954 | 0% | 6 | ≤ 2 %: never worth taking? |
-| giftpick/Tặng quà | Trâm ngọc bích | 4852 | 1% | 3 | ≤ 2 %: never worth taking? |
-| plantpick/Cài đồ vào rương | Nước bào hoa | 4829 | 1% | 3 | ≤ 2 %: never worth taking? |
-| Tranh mai: dùng vật liệu gì? | Tranh mai · giấy Tuyên, màu khoáng | 4396 | 0% | 6 | ≤ 2 %: never worth taking? |
-| plantpick/Cài đồ vào rương | Trà Long Tĩnh | 4322 | 1% | 3 | ≤ 2 %: never worth taking? |
-| Túi hương hoa lài: dùng vật liệu gì? | Túi hương hoa lài · trầm, quế | 3964 | 0% | 6 | ≤ 2 %: never worth taking? |
-| Khăn thêu hoa cúc: dùng vật liệu gì? | Khăn thêu hoa cúc · lụa, chỉ màu | 3578 | 0% | 6 | ≤ 2 %: never worth taking? |
-| plantpick/Cài đồ vào rương | Vải bông | 3253 | 1% | 3 | ≤ 2 %: never worth taking? |
-| giftpick/Tặng quà | Áo lụa thêu hoa nhỏ | 2648 | 1% | 3 | ≤ 2 %: never worth taking? |
-| Cháo trắng hành phi: dùng vật liệu gì? | Cháo trắng hành phi · sâm, táo đỏ | 2326 | 0% | 6 | ≤ 2 %: never worth taking? |
-| giftpick/Tặng quà | Áo tang vải trắng | 2088 | 2% | 3 | ≤ 2 %: never worth taking? |
+| giftpick/Tặng quà | Nến mỡ dê | 299876 | 1% | 3 | ≤ 2 %: never worth taking? |
+| giftpick/Tặng quà | Trà Long Tĩnh | 89263 | 1% | 3 | ≤ 2 %: never worth taking? |
+| plantpick/Cài đồ vào rương | Nến mỡ dê | 15445 | 2% | 3 | ≤ 2 %: never worth taking? |
+| cyrep/Kỳ nguyệt sự | Báo lùi vài hôm | 10616 | 0% | 10 | ≤ 2 %: never worth taking? |
+| cyrep/Kỳ nguyệt sự | Báo sớm, nói đã sạch kỳ | 10616 | 0% | 10 | ≤ 2 %: never worth taking? |
+| Thế cờ «Song long»: dùng vật liệu gì? | Thế cờ «Song long» · bàn cờ gỗ | 7016 | 0% | 6 | ≤ 2 %: never worth taking? |
+| Khúc «Xuân hiểu»: dùng vật liệu gì? | Khúc «Xuân hiểu» · giấy hoa tiên | 6700 | 0% | 6 | ≤ 2 %: never worth taking? |
+| j70start/Bày mưu | Ra tay ngay: tung tin đồn | 6096 | 99% | 3 | ≥ 90 %: the others never worth it? |
+| Điệu «Đạp ca»: dùng vật liệu gì? | Điệu «Đạp ca» · thuê nhạc công | 6024 | 0% | 6 | ≤ 2 %: never worth taking? |
+| giftpick/Tặng quà | Lụa Hàng Châu | 5893 | 1% | 3 | ≤ 2 %: never worth taking? |
+| giftpick/Tặng quà | Vòng ngọc Hòa Điền | 5523 | 1% | 3 | ≤ 2 %: never worth taking? |
+| Thư pháp «Xuân nhật»: dùng vật liệu gì? | Thư pháp «Xuân nhật» · giấy hoa tiên | 5022 | 0% | 6 | ≤ 2 %: never worth taking? |
+| giftpick/Tặng quà | Trâm ngọc bích | 4952 | 1% | 3 | ≤ 2 %: never worth taking? |
+| plantpick/Cài đồ vào rương | Nước bào hoa | 4855 | 1% | 3 | ≤ 2 %: never worth taking? |
+| Tranh mai: dùng vật liệu gì? | Tranh mai · giấy Tuyên, màu khoáng | 4432 | 0% | 6 | ≤ 2 %: never worth taking? |
+| plantpick/Cài đồ vào rương | Trà Long Tĩnh | 4337 | 1% | 3 | ≤ 2 %: never worth taking? |
+| Túi hương hoa lài: dùng vật liệu gì? | Túi hương hoa lài · trầm, quế | 4010 | 0% | 6 | ≤ 2 %: never worth taking? |
+| Khăn thêu hoa cúc: dùng vật liệu gì? | Khăn thêu hoa cúc · lụa, chỉ màu | 3642 | 0% | 6 | ≤ 2 %: never worth taking? |
+| plantpick/Cài đồ vào rương | Vải bông | 3260 | 1% | 3 | ≤ 2 %: never worth taking? |
+| giftpick/Tặng quà | Áo lụa thêu hoa nhỏ | 2650 | 1% | 3 | ≤ 2 %: never worth taking? |
+| Cháo trắng hành phi: dùng vật liệu gì? | Cháo trắng hành phi · sâm, táo đỏ | 2356 | 0% | 6 | ≤ 2 %: never worth taking? |
+| giftpick/Tặng quà | Áo tang vải trắng | 2100 | 2% | 3 | ≤ 2 %: never worth taking? |
 | giftpick/Tặng quà | Trâm hoa lụa | 2069 | 1% | 3 | ≤ 2 %: never worth taking? |
 | e68q6srvQuan/Kẻ hầu | Tố quản sự lên chủ nhân | 2031 | 91% | 10 | ≥ 90 %: the others never worth it? |
 | e68q6srvMood/Kẻ hầu | Dỗ khéo vài câu rồi lui | 2008 | 91% | 10 | ≥ 90 %: the others never worth it? |
-| Hội phối đồ: báo đề | Sai tai mắt dò bên chủ hội | 1947 | 1% | 10 | ≤ 2 %: never worth taking? |
-| j70start/Bày mưu | Bày mưu: dán thơ nặc danh | 1925 | 0% | 3 | ≤ 2 %: never worth taking? |
-| Bị giật y phục giữa đường | Viết thư xin nhà gửi áo | 1786 | 1% | 10 | ≤ 2 %: never worth taking? |
-| Thế cờ «Song long»: dùng vật liệu gì? | Thế cờ «Song long» · bàn cờ ngọc | 1601 | 0% | 6 | ≤ 2 %: never worth taking? |
-| Thư pháp «Xuân nhật»: dùng vật liệu gì? | Thư pháp «Xuân nhật» · giấy dát vàng, mự | 1549 | 0% | 6 | ≤ 2 %: never worth taking? |
-| adStroll/Hoàng thượng dạo vườn | Ra vấn an | 1340 | 0% | 8 | ≤ 2 %: never worth taking? |
+| Hội phối đồ: báo đề | Sai tai mắt dò bên chủ hội | 1990 | 1% | 10 | ≤ 2 %: never worth taking? |
+| j70start/Bày mưu | Bày mưu: dán thơ nặc danh | 1953 | 0% | 3 | ≤ 2 %: never worth taking? |
+| Bị giật y phục giữa đường | Viết thư xin nhà gửi áo | 1816 | 1% | 10 | ≤ 2 %: never worth taking? |
+| Thế cờ «Song long»: dùng vật liệu gì? | Thế cờ «Song long» · bàn cờ ngọc | 1605 | 0% | 6 | ≤ 2 %: never worth taking? |
+| Thư pháp «Xuân nhật»: dùng vật liệu gì? | Thư pháp «Xuân nhật» · giấy dát vàng, mự | 1552 | 0% | 6 | ≤ 2 %: never worth taking? |
+| adStroll/Hoàng thượng dạo vườn | Ra vấn an | 1384 | 0% | 8 | ≤ 2 %: never worth taking? |
+| adStroll/Hoàng thượng dạo vườn | Lánh đi lối khác | 1384 | 90% | 8 | ≥ 90 %: the others never worth it? |
 | e68q6srvQuan/Kẻ hầu | Đút bạc cho quản sự | 1288 | 1% | 10 | ≤ 2 %: never worth taking? |
 | e68q6srvMood/Kẻ hầu | Bỏ bạc nhờ bếp làm cho người | 1272 | 1% | 10 | ≤ 2 %: never worth taking? |
 | Điệu «Đạp ca»: dùng vật liệu gì? | Điệu «Đạp ca» · nhạc công, lụa múa mới | 1249 | 0% | 6 | ≤ 2 %: never worth taking? |
-| j70start/Bày mưu | Ra tay ngay: phá việc học | 1128 | 2% | 3 | ≤ 2 %: never worth taking? |
-| j70thr/Lời cảnh báo | Ra lệnh phòng bị | 1076 | 99% | 10 | ≥ 90 %: the others never worth it? |
-| j70thr/Lời cảnh báo | Để sau | 1076 | 1% | 10 | ≤ 2 %: never worth taking? |
-| Túi hương hoa lài: dùng vật liệu gì? | Túi hương hoa lài · trầm kỳ nam, long di | 1038 | 0% | 6 | ≤ 2 %: never worth taking? |
-| j70thr/Lời cảnh báo | Ra tay trước | 989 | 0% | 9 | ≤ 2 %: never worth taking? |
+| j70start/Bày mưu | Ra tay ngay: phá việc học | 1156 | 2% | 3 | ≤ 2 %: never worth taking? |
+| j70thr/Lời cảnh báo | Ra lệnh phòng bị | 1125 | 99% | 10 | ≥ 90 %: the others never worth it? |
+| j70thr/Lời cảnh báo | Để sau | 1125 | 1% | 10 | ≤ 2 %: never worth taking? |
+| Túi hương hoa lài: dùng vật liệu gì? | Túi hương hoa lài · trầm kỳ nam, long di | 1040 | 0% | 6 | ≤ 2 %: never worth taking? |
+| j70thr/Lời cảnh báo | Ra tay trước | 1030 | 0% | 9 | ≤ 2 %: never worth taking? |
 | Khúc «Xuân hiểu»: dùng vật liệu gì? | Khúc «Xuân hiểu» · dây đàn tơ mới, phổ l | 940 | 0% | 6 | ≤ 2 %: never worth taking? |
 | ilback/Đồ cũ trở về | Chuộc về | 909 | 0% | 9 | ≤ 2 %: never worth taking? |
 | ilback/Đồ cũ trở về | Thôi, không chuộc | 909 | 100% | 9 | ≥ 90 %: the others never worth it? |
-| j70def/Phòng bị | Thôi | 798 | 0% | 9 | ≤ 2 %: never worth taking? |
-| j70start/Bày mưu | Bày mưu: trả bạc cho các ma ma già | 798 | 0% | 3 | ≤ 2 %: never worth taking? |
-| j70start/Bày mưu | Bày mưu: tung tin qua thái giám | 798 | 0% | 3 | ≤ 2 %: never worth taking? |
-| maidhostage/Việc khó xử | Bày kế phản gián | 797 | 92% | 10 | ≥ 90 %: the others never worth it? |
-| j70def/Phòng bị | Giao việc: canh chừng cung | 764 | 98% | 8 | ≥ 90 %: the others never worth it? |
-| j70def/Phòng bị | Giao việc: thử độc đồ ăn | 764 | 0% | 8 | ≤ 2 %: never worth taking? |
-| j70def/Phòng bị | Giao việc: theo dõi một người | 764 | 0% | 8 | ≤ 2 %: never worth taking? |
-| j70def/Phòng bị | Giao việc: giữ sổ sách, làm chứng | 764 | 0% | 8 | ≤ 2 %: never worth taking? |
-| Khăn thêu hoa cúc: dùng vật liệu gì? | Khăn thêu hoa cúc · lụa Hàng Châu, chỉ k | 717 | 0% | 6 | ≤ 2 %: never worth taking? |
-| Phi tần ghen | Đáp lại khéo | 695 | 0% | 10 | ≤ 2 %: never worth taking? |
-| Phi tần ghen | Đáp trả gay gắt | 695 | 0% | 10 | ≤ 2 %: never worth taking? |
-| Có người bán tin | Mua tin | 674 | 0% | 10 | ≤ 2 %: never worth taking? |
-| Có người bán tin | Không mua | 674 | 100% | 10 | ≥ 90 %: the others never worth it? |
-| prep/Chuẩn bị thị tẩm | Tập trước Cầm | 653 | 0% | 6 | ≤ 2 %: never worth taking? |
+| j70def/Phòng bị | Thôi | 827 | 0% | 9 | ≤ 2 %: never worth taking? |
+| maidhostage/Việc khó xử | Bày kế phản gián | 817 | 93% | 10 | ≥ 90 %: the others never worth it? |
+| j70start/Bày mưu | Bày mưu: trả bạc cho các ma ma già | 810 | 0% | 3 | ≤ 2 %: never worth taking? |
+| j70start/Bày mưu | Bày mưu: tung tin qua thái giám | 810 | 0% | 3 | ≤ 2 %: never worth taking? |
+| j70def/Phòng bị | Giao việc: canh chừng cung | 793 | 98% | 8 | ≥ 90 %: the others never worth it? |
+| j70def/Phòng bị | Giao việc: thử độc đồ ăn | 793 | 0% | 8 | ≤ 2 %: never worth taking? |
+| j70def/Phòng bị | Giao việc: theo dõi một người | 793 | 0% | 8 | ≤ 2 %: never worth taking? |
+| j70def/Phòng bị | Giao việc: giữ sổ sách, làm chứng | 793 | 0% | 8 | ≤ 2 %: never worth taking? |
+| Khăn thêu hoa cúc: dùng vật liệu gì? | Khăn thêu hoa cúc · lụa Hàng Châu, chỉ k | 718 | 0% | 6 | ≤ 2 %: never worth taking? |
+| Phi tần ghen | Đáp lại khéo | 715 | 0% | 10 | ≤ 2 %: never worth taking? |
+| Phi tần ghen | Đáp trả gay gắt | 715 | 0% | 10 | ≤ 2 %: never worth taking? |
+| Có người bán tin | Mua tin | 704 | 0% | 10 | ≤ 2 %: never worth taking? |
+| Có người bán tin | Không mua | 704 | 100% | 10 | ≥ 90 %: the others never worth it? |
+| prep/Chuẩn bị thị tẩm | Tập trước Cầm | 656 | 0% | 6 | ≤ 2 %: never worth taking? |
 | Sai Thúy Mặc đi dò la | Thôi, để sau | 613 | 0% | 4 | ≤ 2 %: never worth taking? |
-| nfch/Kính sự phòng | Chặn ngự giá | 603 | 0% | 10 | ≤ 2 %: never worth taking? |
-| poisongift/Việc khó xử | Nhờ Thái hậu đứng ra | 550 | 0% | 10 | ≤ 2 %: never worth taking? |
-| doll/Việc khó xử | Đốt ngay, lần dấu kẻ chôn | 548 | 91% | 9 | ≥ 90 %: the others never worth it? |
+| nfch/Kính sự phòng | Chặn ngự giá | 610 | 0% | 10 | ≤ 2 %: never worth taking? |
+| poisongift/Việc khó xử | Nhờ Thái hậu đứng ra | 563 | 0% | 10 | ≤ 2 %: never worth taking? |
 
 Roads (nhánh) of this round's thân phận never played: thd_sach, pt_dang, bd_soi · locked roads that never opened: none
 
@@ -388,10 +388,10 @@ Roads (nhánh) of this round's thân phận never played: thd_sach, pt_dang, bd_
 
 | kind | lives hit | mean per life | max |
 |---|---|---|---|
-| softlock | 53% | 0.5 | 1 |
+| softlock | 54% | 0.5 | 1 |
 | stuck | 0% | 0 | 0 |
 | crash | 0% | 0 | 0 |
-| mem | 60% | 0.6 | 1 |
+| mem | 61% | 0.6 | 1 |
 | js | 4% | 0.1 | 2 |
 | save | 100% | 1 | 1 |
 | number | 52% | 0.7 | 6 |
@@ -406,15 +406,15 @@ Cách tính: phút thật = (số chữ nàng đọc ÷ 17 chữ/giây + số l�
 
 | group | lives | mean min | median | fastest | slowest |
 |---|---|---|---|---|---|
-| ALL | 309 | 1189.4 | 557.6 | 4.5 | 10940.3 |
-| bd | 66 | 1574.1 | 1049.7 | 34.6 | 4387.5 |
+| ALL | 314 | 1191.6 | 576 | 4.5 | 10940.3 |
+| bd | 68 | 1588.2 | 1104 | 34.6 | 4387.5 |
 | cnv | 138 | 681.9 | 250.5 | 4.5 | 4628.3 |
-| pf | 52 | 1536.1 | 1210.6 | 73.3 | 6315.8 |
+| pf | 55 | 1497.8 | 1120.5 | 73.3 | 6315.8 |
 | thd | 53 | 1691.9 | 1402.4 | 50.5 | 10940.3 |
-| ending: death | 241 | 1384.5 | 878.4 | 4.5 | 10940.3 |
+| ending: death | 246 | 1383.3 | 881.8 | 4.5 | 10940.3 |
 | ending: thường | 64 | 501.8 | 253.3 | 165.3 | 2370.5 |
 | ending: đại kết cục | 4 | 437.9 | 772.4 | 93.2 | 773.4 |
-| «Hồng nhan bạc mệnh» | 209 | 1273.8 | 754.1 | 4.5 | 10940.3 |
+| «Hồng nhan bạc mệnh» | 214 | 1274.9 | 763.4 | 4.5 | 10940.3 |
 | «Lãnh cung» | 10 | 494.4 | 404.3 | 73.3 | 1870.8 |
 | «Mẫu hậu Hoàng thái hậu» | 3 | 4015.1 | 4072.3 | 3274.3 | 4698.9 |
 | «Thái phi» | 17 | 2609.2 | 2587.5 | 1049.7 | 3691.9 |
@@ -422,7 +422,7 @@ Cách tính: phút thật = (số chữ nàng đọc ÷ 17 chữ/giây + số l�
 | «Xuất cung» | 64 | 501.8 | 253.3 | 165.3 | 2370.5 |
 | «Đại kết cục · Giữ kín ra cung» | 2 | 102.9 | 112.5 | 93.2 | 112.5 |
 
-Whole round: 6125.7 giờ chơi thật cho 309 kiếp ≈ 1189.4 phút/kiếp ≈ 19.8 ngày/kiếp nếu chơi 1 giờ/ngày.
+Whole round: 6235.8 giờ chơi thật cho 314 kiếp ≈ 1191.6 phút/kiếp ≈ 19.9 ngày/kiếp nếu chơi 1 giờ/ngày.
 
 Cumulative over the kiếp series (same thân phận · nhánh · bot, kiếp 1..N = a new seed each):
 
@@ -437,7 +437,7 @@ Cumulative over the kiếp series (same thân phận · nhánh · bot, kiếp 1.
 | bd · bd_hen · schemer | 5 | 116.7 · 1104 · 151.3 · 162.1 · 507.5 | 2041.6 min = 34 h |
 | bd · bd_hen · scholar | 2 | 320 · 3114 | 3434 min = 57.2 h |
 | bd · bd_san · cautious | 4 | 3878.2 · 4387.5 · 1049.7 · 3452.4 | 12767.8 min = 212.8 h |
-| bd · bd_san · greedy | 1 | 3302.5 | 3302.5 min = 55 h |
+| bd · bd_san · greedy | 3 | 1943.6 · 2165.2 · 3302.5 | 7411.3 min = 123.5 h |
 | bd · bd_san · lazy | 2 | 342.8 · 51.9 | 394.7 min = 6.6 h |
 | bd · bd_san · lover | 1 | 2293.6 | 2293.6 min = 38.2 h |
 | bd · bd_san · random | 1 | 34.6 | 34.6 min = 0.6 h |
@@ -503,11 +503,11 @@ Cumulative over the kiếp series (same thân phận · nhánh · bot, kiếp 1.
 | pf · pt_hai · scholar | 3 | 3276.1 · 1114.3 · 2269.5 | 6659.9 min = 111 h |
 | pf · pt_hai · skilled | 1 | 1062.6 | 1062.6 min = 17.7 h |
 | pf · pt_su · cautious | 1 | 3146.1 | 3146.1 min = 52.4 h |
-| pf · pt_su · greedy | 1 | 493.1 | 493.1 min = 8.2 h |
+| pf · pt_su · greedy | 2 | 1640.5 · 493.1 | 2133.6 min = 35.6 h |
 | pf · pt_su · lazy | 1 | 102.4 | 102.4 min = 1.7 h |
 | pf · pt_su · lover | 2 | 669.2 · 1409.7 | 2078.9 min = 34.6 h |
 | pf · pt_su · rebel | 4 | 1210.6 · 300.8 · 1120.5 · 272.3 | 2904.2 min = 48.4 h |
-| pf · pt_su · schemer | 3 | 224.5 · 81.7 · 73.3 | 379.4 min = 6.3 h |
+| pf · pt_su · schemer | 5 | 224.5 · 81.7 · 73.3 · 283.6 · 576 | 1239 min = 20.7 h |
 | pf · pt_su · skilled | 1 | 1736.1 | 1736.1 min = 28.9 h |
 | pf · pt_tang · cautious | 1 | 1438 | 1438 min = 24 h |
 | pf · pt_tang · lazy | 1 | 105.5 | 105.5 min = 1.8 h |
@@ -541,50 +541,50 @@ Cumulative over the kiếp series (same thân phận · nhánh · bot, kiếp 1.
 
 ## 12 · EVENT VARIETY (cards she answered; key = pid or the title without numbers)
 
-Per kiếp: distinct cards mean 146.3 · cards seen more than once in the same kiếp mean 68.3 · distinct cards in the whole round 7244
+Per kiếp: distinct cards mean 147.2 · cards seen more than once in the same kiếp mean 68.6 · distinct cards in the whole round 7409
 
 | family (pid prefix) | distinct cards | shows |
 |---|---|---|
-| card | 3064 | 221604 |
-| ev | 116 | 50311 |
-| j | 248 | 26269 |
-| giftpick | 1 | 18812 |
-| e | 97 | 16787 |
-| cyrep | 1 | 10391 |
-| entpick | 1 | 10237 |
-| q | 3224 | 7654 |
+| card | 3146 | 226143 |
+| ev | 116 | 51246 |
+| j | 248 | 26816 |
+| giftpick | 1 | 19287 |
+| e | 97 | 17047 |
+| cyrep | 1 | 10616 |
+| entpick | 1 | 10462 |
+| q | 3307 | 7832 |
 | ilback | 1 | 4788 |
-| nfch | 1 | 3227 |
-| ksp | 1 | 2140 |
-| rg | 2 | 2125 |
-| kyngo | 1 | 2104 |
-| night | 1 | 2095 |
-| roadpick | 5 | 1706 |
-| adStroll | 1 | 1340 |
+| nfch | 1 | 3308 |
+| ksp | 1 | 2190 |
+| rg | 2 | 2180 |
+| kyngo | 1 | 2138 |
+| night | 1 | 2115 |
+| roadpick | 5 | 1742 |
+| adStroll | 1 | 1384 |
 | cnvBribe | 1 | 1117 |
-| prep | 1 | 994 |
-| plantpick | 1 | 884 |
-| rvframe | 1 | 814 |
-| maidhostage | 1 | 797 |
-| rvmusk | 1 | 795 |
-| rvbribe | 1 | 782 |
-| ghost | 1 | 683 |
+| prep | 1 | 1004 |
+| plantpick | 1 | 911 |
+| rvframe | 1 | 836 |
+| maidhostage | 1 | 817 |
+| rvmusk | 1 | 815 |
+| rvbribe | 1 | 804 |
+| ghost | 1 | 702 |
 | cnvScold | 385 | 667 |
 | cnvFest | 2 | 660 |
-| rvquarrel | 2 | 596 |
-| guardrumour | 1 | 568 |
-| poisongift | 1 | 550 |
-| doll | 1 | 548 |
-| menEnc | 2 | 422 |
-| empnight | 1 | 411 |
-| trungcuu | 2 | 403 |
-| tsbFirst | 1 | 397 |
-| cmLand | 1 | 379 |
-| taster | 1 | 358 |
-| tsbPetGift | 3 | 351 |
-| vase | 1 | 314 |
-| kc | 2 | 309 |
-| tsbPetHunt | 1 | 256 |
+| rvquarrel | 2 | 614 |
+| guardrumour | 1 | 579 |
+| poisongift | 1 | 563 |
+| doll | 1 | 556 |
+| menEnc | 2 | 431 |
+| empnight | 1 | 420 |
+| tsbFirst | 1 | 406 |
+| trungcuu | 2 | 406 |
+| cmLand | 1 | 392 |
+| taster | 1 | 365 |
+| tsbPetGift | 3 | 360 |
+| vase | 1 | 327 |
+| kc | 2 | 314 |
+| tsbPetHunt | 1 | 264 |
 
 | series | kiếp | distinct / kiếp | repeated in the kiếp | seen in an earlier kiếp of the series |
 |---|---|---|---|---|
@@ -597,7 +597,7 @@ Per kiếp: distinct cards mean 146.3 · cards seen more than once in the same k
 | bd · bd_hen · schemer | 5 | 91.8 | 36.4 | 60% |
 | bd · bd_hen · scholar | 2 | 230.5 | 101 | 20% |
 | bd · bd_san · cautious | 4 | 343.3 | 169.5 | 73% |
-| bd · bd_san · greedy | 1 | 390 | 178 | — |
+| bd · bd_san · greedy | 3 | 324 | 147.3 | 58% |
 | bd · bd_san · lazy | 2 | 122.5 | 47 | 82% |
 | bd · bd_san · lover | 1 | 289 | 141 | — |
 | bd · bd_san · random | 1 | 26 | 10 | — |
@@ -663,11 +663,11 @@ Per kiếp: distinct cards mean 146.3 · cards seen more than once in the same k
 | pf · pt_hai · scholar | 3 | 296.7 | 132 | 65% |
 | pf · pt_hai · skilled | 1 | 211 | 93 | — |
 | pf · pt_su · cautious | 1 | 249 | 138 | — |
-| pf · pt_su · greedy | 1 | 126 | 39 | — |
+| pf · pt_su · greedy | 2 | 186 | 71 | 67% |
 | pf · pt_su · lazy | 1 | 101 | 21 | — |
 | pf · pt_su · lover | 2 | 201.5 | 74 | 42% |
 | pf · pt_su · rebel | 4 | 163.5 | 70 | 72% |
-| pf · pt_su · schemer | 3 | 52.3 | 19.3 | 78% |
+| pf · pt_su · schemer | 5 | 71.2 | 26.4 | 62% |
 | pf · pt_su · skilled | 1 | 288 | 141 | — |
 | pf · pt_tang · cautious | 1 | 215 | 90 | — |
 | pf · pt_tang · lazy | 1 | 100 | 27 | — |
@@ -707,38 +707,38 @@ Families / templates never seen in the round need an event catalogue (j68 EV6 / 
 
 | device | action | taps | p50 ms | p95 ms | max ms |
 |---|---|---|---|---|---|
-| fold | tab switch | 2736 | 842 | 2391 | 62706 |
-| fold | act card | 283 | 1757 | 2569 | 3065 |
-| fold | Sang ngày mới | 304 | 1576 | 3040 | 8596 |
-| fold | ALL | 3323 | 987 | 2576 | 62706 |
-| ipad | tab switch | 2736 | 779 | 2566 | 56289 |
-| ipad | act card | 304 | 1715 | 2355 | 3111 |
-| ipad | Sang ngày mới | 303 | 2230 | 3735 | 20489 |
-| ipad | ALL | 3343 | 960 | 3111 | 56289 |
+| fold | tab switch | 2898 | 845 | 2424 | 62706 |
+| fold | act card | 301 | 1750 | 2586 | 3203 |
+| fold | Sang ngày mới | 321 | 1571 | 3029 | 8596 |
+| fold | ALL | 3520 | 986 | 2615 | 62706 |
+| ipad | tab switch | 2898 | 777 | 2971 | 56289 |
+| ipad | act card | 322 | 1715 | 2351 | 3111 |
+| ipad | Sang ngày mới | 321 | 2224 | 3683 | 20489 |
+| ipad | ALL | 3541 | 955 | 3238 | 56289 |
 
 Slowest tabs (max over all probes):
 
 | device | tab | taps | p50 | p95 | max |
 |---|---|---|---|---|---|
-| fold | tab:go | 304 | 1190 | 19029 | 62706 |
-| ipad | tab:go | 304 | 1137 | 39630 | 56289 |
-| fold | tab:court | 304 | 827 | 1586 | 5422 |
-| ipad | tab:inv | 304 | 817 | 2081 | 3589 |
-| fold | tab:act | 304 | 1552 | 2315 | 3284 |
-| fold | tab:inv | 304 | 853 | 2045 | 3224 |
-| fold | tab:act(again) | 304 | 1458 | 2248 | 3087 |
-| fold | tab:rel | 304 | 530 | 1239 | 2849 |
+| fold | tab:go | 322 | 1197 | 19290 | 62706 |
+| ipad | tab:go | 322 | 1270 | 39630 | 56289 |
+| fold | tab:court | 322 | 828 | 1603 | 5422 |
+| ipad | tab:inv | 322 | 799 | 2053 | 3589 |
+| fold | tab:act | 322 | 1547 | 2290 | 3284 |
+| fold | tab:inv | 322 | 853 | 2010 | 3224 |
+| fold | tab:act(again) | 322 | 1447 | 2233 | 3087 |
+| fold | tab:rel | 322 | 538 | 1243 | 2849 |
 
 Tap → screen by game-year (does it slow as the save grows?):
 
 | device | game-year | taps | p50 ms | p95 ms | max ms |
 |---|---|---|---|---|---|
-| fold | year 0-2 | 2323 | 851 | 2438 | 25417 |
-| fold | year 3-5 | 641 | 1111 | 2697 | 53364 |
+| fold | year 0-2 | 2477 | 859 | 2451 | 25417 |
+| fold | year 3-5 | 684 | 1113 | 2893 | 53364 |
 | fold | year 6-9 | 337 | 1294 | 2886 | 62706 |
 | fold | year 10+ | 22 | 1603 | 3083 | 3284 |
-| ipad | year 0-2 | 2342 | 831 | 3363 | 56289 |
-| ipad | year 3-5 | 638 | 1087 | 3067 | 52359 |
+| ipad | year 0-2 | 2496 | 828 | 3587 | 56289 |
+| ipad | year 3-5 | 682 | 1083 | 3161 | 52359 |
 | ipad | year 6-9 | 341 | 1236 | 2757 | 50900 |
 | ipad | year 10+ | 22 | 1626 | 3211 | 3390 |
 
@@ -746,9 +746,9 @@ Tap → screen by game-year (does it slow as the save grows?):
 
 | where | long tasks | per min | longest ms | total ms |
 |---|---|---|---|---|
-| fold (real page, probe only, CPU ×4) | 16425 | 106.1 | 50018 | 8340866 |
-| ipad (real page, probe only, CPU ×4) | 16896 | 81.3 | 37820 | 11379296 |
-| bot page (render off = game logic only) | 4615 | 6.8 | 226849 | 9925219 |
+| fold (real page, probe only, CPU ×4) | 17440 | 105.4 | 50018 | 8921459 |
+| ipad (real page, probe only, CPU ×4) | 17884 | 80.5 | 37820 | 12186457 |
+| bot page (render off = game logic only) | 4846 | 6.7 | 258547 | 10703402 |
 
 Worst frames, script attribution (long-animation-frame API; src:position is the built index.html, find it with the build's char offset):
 
@@ -767,9 +767,9 @@ Worst frames, script attribution (long-animation-frame API; src:position is the 
 
 | game-year | buổi changes | buổi p50 ms | buổi p95 | buổi max | months | month p50 ms | month p95 | month max |
 |---|---|---|---|---|---|---|---|---|
-| ALL | 38842 | 53 | 227 | 11794 | 2497 | 1056 | 2666 | 13524 |
-| year 0-2 | 22709 | 49 | 174 | 11794 | 1465 | 859 | 1452 | 13524 |
-| year 3-5 | 10914 | 57 | 400 | 2165 | 696 | 1333 | 2227 | 3987 |
+| ALL | 41213 | 53 | 227 | 11794 | 2651 | 1052 | 2624 | 13524 |
+| year 0-2 | 24287 | 49 | 175 | 11794 | 1568 | 857 | 1458 | 13524 |
+| year 3-5 | 11707 | 57 | 402 | 2165 | 747 | 1333 | 2205 | 3987 |
 | year 6-9 | 4799 | 76 | 932 | 3185 | 309 | 2247 | 4090 | 5487 |
 | year 10+ | 420 | 88 | 1658 | 2407 | 27 | 3099 | 4999 | 5015 |
 
@@ -782,24 +782,24 @@ Worst frames, script attribution (long-animation-frame API; src:position is the 
 | bd-bd_hen-scholar-5 | 26 min | 0 | 72 → 518 | — | 1029.9 | 323852 | 19579 |
 | thd-thd_hoc-schemer-2 | 12.3 min | 0 | 76 → 504 | — | 2090.6 | 932019 | 39610 |
 | bd-bd_san-scholar-2 | 27.3 min | 0 | 75 → 467 | — | 861.5 | 1097 | 1842 |
+| pf-pt_su-greedy-2 | 18.2 min | 0 | 72 → 443 | — | 1224.2 | 915990 | 42606 |
 | bd-bd_hen-greedy-3 | 24.2 min | 0 | 72 → 432 | — | 894.4 | 552489 | 35058 |
+| pf-pt_su-schemer-4 | 10.7 min | 0 | 79 → 432 | — | 1973.3 | 996440 | 40494 |
 | bd-bd_hen-greedy-1 | 24.7 min | 0 | 77 → 409 | — | 806.5 | 278927 | 17322 |
 | pf-pt_su-skilled-1 | 23.4 min | 0 | 69 → 398 | — | 844.8 | 392179 | 25408 |
-| thd-thd_hoc-skilled-4 | 17.6 min | 0 | 71 → 371 | — | 1024.7 | 494635 | 28329 |
-| thd-thd_hoc-lover-5 | 20.4 min | 0 | 67 → 360 | — | 862.5 | 446936 | 26831 |
 
-Over 34 lives: heap growth median 720 MB/h, p95 2090.6 MB/h; per game-year median — MB, p95 — MB (budget heapGrowthMB 15 per play window; domGrowth 1500).
+Over 37 lives: heap growth median 747.4 MB/h, p95 2090.6 MB/h; per game-year median — MB, p95 — MB (budget heapGrowthMB 15 per play window; domGrowth 1500).
 
-Tab crashes: **0 of 309 lives** (none). Harness runs PAR 2 + page recycle: a crash here is box RAM, see reports/robot10-harness.md Part 2.
+Tab crashes: **0 of 314 lives** (none). Harness runs PAR 2 + page recycle: a crash here is box RAM, see reports/robot10-harness.md Part 2.
 
 Budget (dev/test/play-perf-budget.json — _target is the goal, default is the regression ceiling; CPU-throttled ×4):
 
 | device | metric | measured ms | target | ceiling | verdict |
 |---|---|---|---|---|---|
-| fold | tapP95 | 2576 | 200 | 3500 | within regression ceiling |
+| fold | tapP95 | 2615 | 200 | 3500 | within regression ceiling |
 | fold | tapMax | 62706 | 400 | 8000 | OVER ceiling |
 | fold | actLongTaskMax | 50018 | 300 | 4500 | OVER ceiling |
-| ipad | tapP95 | 3111 | 200 | 3500 | within regression ceiling |
+| ipad | tapP95 | 3238 | 200 | 3500 | within regression ceiling |
 | ipad | tapMax | 56289 | 400 | 8000 | OVER ceiling |
 | ipad | actLongTaskMax | 37820 | 300 | 4500 | OVER ceiling |
 
@@ -817,10 +817,10 @@ No co-op lag runs passed in. Foreman B's co-op runners record the same metrics t
 | finding | cause / file:line | proposed fix | expected effect |
 |---|---|---|---|
 | buổi change p95 227 ms (render off, desktop CPU) | robot10-in.js nextBuoi wrapper = the game's nextBuoi(); per-year table above shows if it grows | profile nextBuoi (jnf / j-turn code): keep per-buổi work O(1) in save size; defer journal / NPC upkeep | a turn the player never waits on |
-| buổi p95 grows 174 → 1658 ms from the first to the last year band | nextBuoi: something scales with the save (journal / log arrays, NPC list, history) | cap or compact the growing array (ring buffer; prune the journal) in the offending function | turn time flat over a whole life |
+| buổi p95 grows 175 → 1658 ms from the first to the last year band | nextBuoi: something scales with the save (journal / log arrays, NPC list, history) | cap or compact the growing array (ring buffer; prune the journal) in the offending function | turn time flat over a whole life |
 | bot-page heap grows p95 2091 MB per real hour (render off) | bot page: ~350k-node DOM bursts while render is off (game finding 23/11); DOM nodes/listeners columns above | find the function that builds the DOM bursts when render is off; skip DOM work while the page is hidden / render is off | heap flat; no tab crash on a long life |
-| [fold] tap → screen p95 2576 ms (target 200); slowest: tab:go p95 19029 ms | (anon) (FrameRequestCallback) :-1, 3951 ms in one frame | render only the changed panel; build tab content lazily on first open | tap p95 under the target on a phone-class CPU |
-| [ipad] tap → screen p95 3111 ms (target 200); slowest: tab:go p95 39630 ms | (anon) (FrameRequestCallback) :-1, 10663 ms in one frame | render only the changed panel; build tab content lazily on first open | tap p95 under the target on a phone-class CPU |
+| [fold] tap → screen p95 2615 ms (target 200); slowest: tab:go p95 19290 ms | (anon) (FrameRequestCallback) :-1, 3951 ms in one frame | render only the changed panel; build tab content lazily on first open | tap p95 under the target on a phone-class CPU |
+| [ipad] tap → screen p95 3238 ms (target 200); slowest: tab:go p95 39630 ms | (anon) (FrameRequestCallback) :-1, 10663 ms in one frame | render only the changed panel; build tab content lazily on first open | tap p95 under the target on a phone-class CPU |
 | Dư đồ («go» tab) on a PLAYED save takes ~12 s at CPU ×1, ~39 s at ×4 (a fresh life: 0.25–0.4 s); the second open costs the same, pictures blocked or not (profile of the tap, 500 µs sampling) | kmSolve (map label / path solver) dev/build/j38.js:19 with its callers hardAt / segR / ovP / costAt / search / geo; called from j38.js:83 up to 5× per open (kmSolve(its,K,W,undefined,vp) then 4 retries); the result cache window.__mapSolC[ck] is not hit on the 2nd open (same cost again) | solve the labels once per save change, not per open: make the cache key stable (ck without volatile fields), cap the first pass by the same performance.now() budget as the retries, pre-solve off the tap (idle / on load), keep the last good layout while a new one is solved | Dư đồ opens in < 400 ms on a played save |
 | real-page save load leaks ~5-6k DOM nodes + 600-800 listeners per load (part 2 finding) | loadSlot / start() re-render path (see reports/robot10-harness.md Part 2 for the measurements) | remove the previous screen's nodes + listeners before building the loaded one (one teardown function in the kit) | a long session of loads / Tiếp tục stays flat |
 
@@ -832,30 +832,30 @@ No anim-stress runs found (`node dev/measure/robot10-anim.js …`, files anim-*.
 
 | group | lives | ending reached | death | thường | kỳ ngộ | đại kết cục | rare | Hoàng hậu | Nữ đế | Hoàng thái hậu | no ending | avg years | avg real min | bugs |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| bd | 66 | 100% | 100% | 0% | 0% | 0% | 0% | 11% | 0% | 2% | 0% | 6 | 1574.1 | 726 |
+| bd | 68 | 100% | 100% | 0% | 0% | 0% | 0% | 10% | 0% | 1% | 0% | 6 | 1588.2 | 758 |
 | cnv | 138 | 100% | 52% | 46% | 0% | 1% | 0% | 1% | 0% | 1% | 0% | 7.7 | 681.9 | 1013 |
-| pf | 52 | 100% | 100% | 0% | 0% | 0% | 0% | 4% | 0% | 2% | 0% | 5.2 | 1536.1 | 582 |
+| pf | 55 | 100% | 100% | 0% | 0% | 0% | 0% | 4% | 0% | 2% | 0% | 5.2 | 1497.8 | 601 |
 | thd | 53 | 100% | 96% | 0% | 0% | 4% | 0% | 0% | 0% | 0% | 0% | 5.5 | 1691.9 | 641 |
 | bd · bd_hen | 15 | 100% | 100% | 0% | 0% | 0% | 0% | 7% | 0% | 0% | 0% | 4.7 | 1172.8 | 94 |
-| bd · bd_san | 24 | 100% | 100% | 0% | 0% | 0% | 0% | 13% | 0% | 0% | 0% | 5.2 | 1522.4 | 196 |
+| bd · bd_san | 26 | 100% | 100% | 0% | 0% | 0% | 0% | 12% | 0% | 0% | 0% | 5.4 | 1563.3 | 228 |
 | bd · bd_tuyet | 27 | 100% | 100% | 0% | 0% | 0% | 0% | 11% | 0% | 4% | 0% | 7.3 | 1843 | 436 |
 | cnv · cnv_ban | 34 | 100% | 50% | 50% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 8.8 | 943.7 | 258 |
 | cnv · cnv_chu | 36 | 100% | 56% | 39% | 0% | 6% | 0% | 3% | 0% | 3% | 0% | 7 | 702.8 | 257 |
 | cnv · cnv_ma | 34 | 100% | 41% | 59% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 8.1 | 560.6 | 226 |
 | cnv · cnv_mat | 34 | 100% | 62% | 38% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 6.8 | 519.3 | 272 |
 | pf · pt_hai | 20 | 100% | 100% | 0% | 0% | 0% | 0% | 5% | 0% | 0% | 0% | 6.8 | 1860.1 | 260 |
-| pf · pt_su | 13 | 100% | 100% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 3.1 | 833.9 | 60 |
+| pf · pt_su | 16 | 100% | 100% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 3.3 | 833.8 | 79 |
 | pf · pt_tang | 19 | 100% | 100% | 0% | 0% | 0% | 0% | 5% | 0% | 5% | 0% | 5.1 | 1675.6 | 262 |
 | thd · thd_hoc | 13 | 100% | 100% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 3.6 | 1304.7 | 66 |
 | thd · thd_tho | 21 | 100% | 95% | 0% | 0% | 5% | 0% | 0% | 0% | 0% | 0% | 6.5 | 2023.1 | 319 |
 | thd · thd_tro | 19 | 100% | 95% | 0% | 0% | 5% | 0% | 0% | 0% | 0% | 0% | 5.7 | 1590.7 | 256 |
 | bot cautious | 25 | 100% | 76% | 24% | 0% | 0% | 0% | 12% | 0% | 0% | 0% | 9 | 2682.1 | 293 |
-| bot greedy | 30 | 100% | 43% | 57% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 9.7 | 957.2 | 255 |
+| bot greedy | 33 | 100% | 48% | 52% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 9.4 | 1044.4 | 295 |
 | bot lazy | 36 | 100% | 44% | 44% | 0% | 11% | 0% | 0% | 0% | 0% | 0% | 7.5 | 311.1 | 336 |
 | bot lover | 35 | 100% | 74% | 26% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 8.2 | 1665.9 | 392 |
 | bot random | 19 | 100% | 89% | 11% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 2.7 | 140.7 | 107 |
 | bot rebel | 43 | 100% | 91% | 9% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 4.5 | 878.1 | 382 |
-| bot schemer | 61 | 100% | 92% | 8% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 4.7 | 1142 | 582 |
+| bot schemer | 63 | 100% | 92% | 8% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 4.7 | 1119.4 | 593 |
 | bot scholar | 27 | 100% | 89% | 11% | 0% | 0% | 0% | 19% | 0% | 11% | 0% | 8.5 | 1906.2 | 295 |
 | bot skilled | 20 | 100% | 90% | 10% | 0% | 0% | 0% | 10% | 0% | 0% | 0% | 8.3 | 1970.5 | 284 |
 | bot speed | 13 | 100% | 100% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0.9 | 99.6 | 36 |
@@ -871,7 +871,7 @@ No anim-stress runs found (`node dev/measure/robot10-anim.js …`, files anim-*.
 | bd · bd_hen · schemer | 5 | 100% | 100% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 3 | 408.3 | 28 |
 | bd · bd_hen · scholar | 2 | 100% | 100% | 0% | 0% | 0% | 0% | 50% | 0% | 0% | 0% | 5.5 | 1717 | 11 |
 | bd · bd_san · cautious | 4 | 100% | 100% | 0% | 0% | 0% | 0% | 50% | 0% | 0% | 0% | 10 | 3191.9 | 73 |
-| bd · bd_san · greedy | 1 | 100% | 100% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 11.8 | 3302.5 | 19 |
+| bd · bd_san · greedy | 3 | 100% | 100% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 8.6 | 2470.4 | 51 |
 | bd · bd_san · lazy | 2 | 100% | 100% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 2.3 | 197.4 | 8 |
 | bd · bd_san · lover | 1 | 100% | 100% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 8.1 | 2293.6 | 6 |
 | bd · bd_san · random | 1 | 100% | 100% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0.2 | 34.6 | 4 |
@@ -937,11 +937,11 @@ No anim-stress runs found (`node dev/measure/robot10-anim.js …`, files anim-*.
 | pf · pt_hai · scholar | 3 | 100% | 100% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 7.3 | 2220 | 46 |
 | pf · pt_hai · skilled | 1 | 100% | 100% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 4.4 | 1062.6 | 14 |
 | pf · pt_su · cautious | 1 | 100% | 100% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 8.1 | 3146.1 | 6 |
-| pf · pt_su · greedy | 1 | 100% | 100% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 1.7 | 493.1 | 4 |
+| pf · pt_su · greedy | 2 | 100% | 100% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 3.4 | 1066.8 | 12 |
 | pf · pt_su · lazy | 1 | 100% | 100% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 1.3 | 102.4 | 3 |
 | pf · pt_su · lover | 2 | 100% | 100% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 3.2 | 1039.5 | 9 |
 | pf · pt_su · rebel | 4 | 100% | 100% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 2.8 | 726 | 17 |
-| pf · pt_su · schemer | 3 | 100% | 100% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 1.6 | 126.5 | 13 |
+| pf · pt_su · schemer | 5 | 100% | 100% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 2.4 | 247.8 | 24 |
 | pf · pt_su · skilled | 1 | 100% | 100% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 6.7 | 1736.1 | 8 |
 | pf · pt_tang · cautious | 1 | 100% | 100% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 3.6 | 1438 | 11 |
 | pf · pt_tang · lazy | 1 | 100% | 100% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 0% | 1.5 | 105.5 | 8 |
@@ -979,37 +979,37 @@ No anim-stress runs found (`node dev/measure/robot10-anim.js …`, files anim-*.
 
 ## RECOMMENDATIONS (OWNER ORDER #6 — report only; values change after sếp's OK via MAIN, then one re-run confirms)
 
-BAL read from the game page http://127.0.0.1:46877/index.html at 2026-11-25T05:25:15.216Z (law 4). Targets: OD:L43 (each origin HH ~20–40 %, smart bot) · OD:L19/L43 (overall ~32 %) · OD:L43 (cnv ~20–25 %) · OD:L19 (early death ~40–45 %) · OD:L19 (childbirth death 8–12 % per birth) · kiếp cap: PROVISIONAL — OD 23/11 ~23:25Z «a kiếp must not drag» has no number; MAIN to set. Proposed values = first-order estimates (current × target ÷ observed, ×0.5–×2); rows under 20 lives are «low n».
+BAL read from the game page http://127.0.0.1:42347/index.html at 2026-11-25T05:27:50.746Z (law 4). Targets: OD:L43 (each origin HH ~20–40 %, smart bot) · OD:L19/L43 (overall ~32 %) · OD:L43 (cnv ~20–25 %) · OD:L19 (early death ~40–45 %) · OD:L19 (childbirth death 8–12 % per birth) · kiếp cap: PROVISIONAL — OD 23/11 ~23:25Z «a kiếp must not drag» has no number; MAIN to set. Proposed values = first-order estimates (current × target ÷ observed, ×0.5–×2); rows under 20 lives are «low n».
 
 | area | finding (off vs target) | BAL key(s) file:line | current | proposed | expected effect |
 |---|---|---|---|---|---|
-| (1) origin weight | nc: HH reach 7.6 % (9/118) BELOW 20–40 % · n 118 | BAL.orig.ow.nc jbal.js:140 | 6 (6 % of rolls) | 12 + tune the origin's own numbers (start stats BAL.orig.nc / its roads) | weight alone cannot lift reach: a hard origin rolled a bit more only if MAIN wants; the reach fix is in its own numbers |
+| (1) origin weight | nc: HH reach 7.3 % (9/123) BELOW 20–40 % · n 123 | BAL.orig.ow.nc jbal.js:140 | 6 (6 % of rolls) | 12 + tune the origin's own numbers (start stats BAL.orig.nc / its roads) | weight alone cannot lift reach: a hard origin rolled a bit more only if MAIN wants; the reach fix is in its own numbers |
 | (1) origin weight | thd: HH reach 0 % (0/53) BELOW 20–40 % · n 53 | BAL.orig.ow.thd jbal.js:140 | 9 (9 % of rolls) | 18 + tune the origin's own numbers (start stats BAL.orig.thd / its roads) | weight alone cannot lift reach: a hard origin rolled a bit more only if MAIN wants; the reach fix is in its own numbers |
 | (1) origin weight | cnv: HH reach 0.7 % (1/138) BELOW 20–25 % · n 138 | BAL.orig.ow.cnv jbal.js:140 | 8 (8 % of rolls) | 16 + tune the origin's own numbers (start stats BAL.orig.cnv / its roads) | weight alone cannot lift reach: a hard origin rolled a bit more only if MAIN wants; the reach fix is in its own numbers |
 | (1) overall HH | expected overall HH with today's weights 2.2 % vs target ~32 % (origins measured: nc thd cnv) | BAL.orig.ow jbal.js:140 | sum 100 | the per-origin values above, renormalised to the same sum | expected overall HH 2.2 % |
 | (1) origin weight | no lives this round: 6 origin(s) — HH reach unknown | BAL.orig.ow jbal.js:140 | cn 13 · dtq 17 · muoi 17 · ch 13 · td 9 · tt 8 | keep | measured when their runners' JSON joins the round |
-| (2) early death | death before old age (55, BAL.mort.oldAge) 78 % of lives (241/309) vs 40–45 % → TOO HIGH · n 309 | BAL.mort.oldAge jbal2.js:176 | 55 | per cause below | early death → ~42.5 % |
-| (2) death cause | execution: 88 early deaths = 28.5 % of lives (36.5 % of early deaths) · mean age 23.7 | BAL.mort.fate.tuanP jbal2.js:181 | 25 | 14 | execution deaths × ~0.54 (odds scaled) |
-| (2) death cause | fate (lifespan): 43 early deaths = 13.9 % of lives (17.8 % of early deaths) · mean age 26.1 | BAL.mort.life.dice.adult.mean jbal2.js:174 | 45 | 83 | fate (lifespan) deaths × ~0.54 (later death age) |
-| (2) death cause | fate (lifespan): 43 early deaths = 13.9 % of lives (17.8 % of early deaths) · mean age 26.1 | BAL.mort.dieAge jbal2.js:178 | [45,15,25] | [83,15,25] | fate (lifespan) deaths × ~0.54 (later death age) |
-| (2) death cause | poison: 35 early deaths = 11.3 % of lives (14.5 % of early deaths) · mean age 21.6 | BAL.mort.acc.npc jbal2.js:176 | 0.08 | 0.04 | poison deaths × ~0.54 (odds scaled) |
-| (2) death cause | other: 30 early deaths (12.4 % of them) — sites: j3.js:157, j14.js:40, j3.js:160 | no BAL key mapped for this cause (law 4 gap?) | — | — | — |
-| (2) death cause | childbirth: 24 early deaths = 7.8 % of lives (10 % of early deaths) · mean age 23.9 | BAL.mort.birth.hardDie jbal2.js:179 | 45 | 25 | childbirth deaths × ~0.54 (odds scaled) |
-| (2) death cause | childbirth: 24 early deaths = 7.8 % of lives (10 % of early deaths) · mean age 23.9 | BAL.mort.birth.hardX jbal2.js:179 | 2 | 1.09 | childbirth deaths × ~0.54 (odds scaled) |
-| (2) death cause | illness: 20 early deaths = 6.5 % of lives (8.3 % of early deaths) · mean age 21.7 | BAL.mort.illAge jbal2.js:178 | [35,25,1.5] | [64,25,1.5] | illness deaths × ~0.54 (later death age) |
-| (2) death cause | illness: 20 early deaths = 6.5 % of lives (8.3 % of early deaths) · mean age 21.7 | BAL.mort.sudden jbal2.js:176 | 15 | 8 | illness deaths × ~0.54 (odds scaled) |
+| (2) early death | death before old age (55, BAL.mort.oldAge) 78.3 % of lives (246/314) vs 40–45 % → TOO HIGH · n 314 | BAL.mort.oldAge jbal2.js:176 | 55 | per cause below | early death → ~42.5 % |
+| (2) death cause | execution: 89 early deaths = 28.3 % of lives (36.2 % of early deaths) · mean age 23.7 | BAL.mort.fate.tuanP jbal2.js:181 | 25 | 14 | execution deaths × ~0.54 (odds scaled) |
+| (2) death cause | fate (lifespan): 46 early deaths = 14.6 % of lives (18.7 % of early deaths) · mean age 26 | BAL.mort.life.dice.adult.mean jbal2.js:174 | 45 | 83 | fate (lifespan) deaths × ~0.54 (later death age) |
+| (2) death cause | fate (lifespan): 46 early deaths = 14.6 % of lives (18.7 % of early deaths) · mean age 26 | BAL.mort.dieAge jbal2.js:178 | [45,15,25] | [83,15,25] | fate (lifespan) deaths × ~0.54 (later death age) |
+| (2) death cause | poison: 36 early deaths = 11.5 % of lives (14.6 % of early deaths) · mean age 21.6 | BAL.mort.acc.npc jbal2.js:176 | 0.08 | 0.04 | poison deaths × ~0.54 (odds scaled) |
+| (2) death cause | other: 30 early deaths (12.2 % of them) — sites: j3.js:157, j14.js:40, j3.js:160 | no BAL key mapped for this cause (law 4 gap?) | — | — | — |
+| (2) death cause | childbirth: 24 early deaths = 7.6 % of lives (9.8 % of early deaths) · mean age 23.9 | BAL.mort.birth.hardDie jbal2.js:179 | 45 | 24 | childbirth deaths × ~0.54 (odds scaled) |
+| (2) death cause | childbirth: 24 early deaths = 7.6 % of lives (9.8 % of early deaths) · mean age 23.9 | BAL.mort.birth.hardX jbal2.js:179 | 2 | 1.08 | childbirth deaths × ~0.54 (odds scaled) |
+| (2) death cause | illness: 20 early deaths = 6.4 % of lives (8.1 % of early deaths) · mean age 21.7 | BAL.mort.illAge jbal2.js:178 | [35,25,1.5] | [65,25,1.5] | illness deaths × ~0.54 (later death age) |
+| (2) death cause | illness: 20 early deaths = 6.4 % of lives (8.1 % of early deaths) · mean age 21.7 | BAL.mort.sudden jbal2.js:176 | 15 | 8 | illness deaths × ~0.54 (odds scaled) |
 | (2) death cause | NPC / scheme: 1 early deaths (0.4 % of them) — sites: j42.js:296 | no BAL key mapped for this cause (law 4 gap?) | — | — | — |
-| (2) lifespan floor | 33 death(s) «Tuổi trời đã tận» before age 30 (= mean − sd of her lifespan dice; youngest 19) | BAL.mort.life.dice.adult.lo jbal2.js:174 | 15 | 30 | no lifespan death before mean − sd; illness / schemes still kill young |
-| (2) childbirth | death in childbirth 14.5 % per birth (24 of 165) vs 8–12 % → TOO HIGH · n 165 | BAL.mort.birth.hardDie jbal2.js:179 | 45 | 31 | → ~10 % per birth |
-| (3) reach speed | Phi: reached by 84/309 · after 4 game years · 1246.7 real min (pace model) · passes the step from Tần: 81.6 % · n 103 | RANKS[4].s/.d j1.js:6 (not in BAL: law 4 flag) · promoGap j8.js:405 | Sủng 52 · Danh 42 · gap 5 tháng | see bottleneck row | — |
-| (3) reach speed | Quý phi: reached by 59/309 · after 5.5 game years · 1698 real min (pace model) · passes the step from Phi: 70.2 % · n 84 | RANKS[5].s/.d j1.js:6 (not in BAL: law 4 flag) · promoGap j8.js:405 | Sủng 66 · Danh 55 · gap 7 tháng | see bottleneck row | — |
-| (3) reach speed | Hoàng quý phi: reached by 34/309 · after 6.3 game years · 2040.5 real min (pace model) · passes the step from Quý phi: 57.6 % · n 59 | RANKS[6].s/.d j1.js:6 (not in BAL: law 4 flag) · promoGap j8.js:405 | Sủng 78 · Danh 68 · gap 9 tháng | see bottleneck row | — |
-| (3) reach speed | Hoàng hậu: reached by 10/309 · after 9 game years · 3057.2 real min (pace model) · passes the step from Hoàng quý phi: 29.4 % · n 34 | RANKS[7].s/.d j1.js:6 (not in BAL: law 4 flag) · promoGap j8.js:405 | Sủng 85 · Danh 78 · gap 11 tháng | see bottleneck row | — |
-| (3) bottleneck | HH 3.2 % < 20 %: the hardest step is Hoàng quý phi → Hoàng hậu (only 29.4 % of those at Hoàng quý phi pass) · n 34 | RANKS[7] j1.js:6 (move to BAL first, law 4) | Sủng 85 · Danh 78 | Sủng 82 · Danh 73 (the step from Hoàng quý phi cut to ×0.5) | more lives pass the bottleneck step → HH reach up; re-run confirms |
-| (3) pace model | reading = 67.3 % of the modelled real minutes; PACE is NOT calibrated against human-paced play (part-2 gap) | robot10-agg.js PACE (READ_CPS 17, CLICK_S 1, CHOICE_S 2) | — | calibrate READ_CPS with one human-paced kiếp before any minutes-based tuning; until then use the game-year column | real-minute rows become trustworthy |
-| (3) kiếp length | mean kiếp 1189.4 real min (ended lives 1189.4) vs cap 120 min (PROVISIONAL — OD 23/11 ~23:25Z «a kiếp must not drag» has no number; MAIN to set) | pace: robot10-agg.js PACE + the rank steps above | — | lower the slowest step (bottleneck row) or BAL.entry.cap start rank | — |
-| (4) ending too common | «Hồng nhan bạc mệnh» = 67.6 % of 309 endings (order #6 (4): one ending > half of all endings = too common) · n 309 | see (2) death rows (this ending is a death) | — | the (2) values | other endings get room |
-| (4) rare ending too rare | road bd_san: 0 rare endings in 24 lives (p 0.15 → expected 3.6) | BAL.arc.rare.bd_san.p jbalbd.js:27 | 0.15 | 0.22 | rare ending seen about once per 4 lives |
+| (2) lifespan floor | 36 death(s) «Tuổi trời đã tận» before age 30 (= mean − sd of her lifespan dice; youngest 19) | BAL.mort.life.dice.adult.lo jbal2.js:174 | 15 | 30 | no lifespan death before mean − sd; illness / schemes still kill young |
+| (2) childbirth | death in childbirth 14.4 % per birth (24 of 167) vs 8–12 % → TOO HIGH · n 167 | BAL.mort.birth.hardDie jbal2.js:179 | 45 | 31 | → ~10 % per birth |
+| (3) reach speed | Phi: reached by 86/314 · after 4 game years · 1231.8 real min (pace model) · passes the step from Tần: 81.1 % · n 106 | RANKS[4].s/.d j1.js:6 (not in BAL: law 4 flag) · promoGap j8.js:405 | Sủng 52 · Danh 42 · gap 5 tháng | see bottleneck row | — |
+| (3) reach speed | Quý phi: reached by 61/314 · after 5.4 game years · 1667.7 real min (pace model) · passes the step from Phi: 70.9 % · n 86 | RANKS[5].s/.d j1.js:6 (not in BAL: law 4 flag) · promoGap j8.js:405 | Sủng 66 · Danh 55 · gap 7 tháng | see bottleneck row | — |
+| (3) reach speed | Hoàng quý phi: reached by 35/314 · after 6.2 game years · 2004.1 real min (pace model) · passes the step from Quý phi: 57.4 % · n 61 | RANKS[6].s/.d j1.js:6 (not in BAL: law 4 flag) · promoGap j8.js:405 | Sủng 78 · Danh 68 · gap 9 tháng | see bottleneck row | — |
+| (3) reach speed | Hoàng hậu: reached by 10/314 · after 9 game years · 3057.2 real min (pace model) · passes the step from Hoàng quý phi: 28.6 % · n 35 | RANKS[7].s/.d j1.js:6 (not in BAL: law 4 flag) · promoGap j8.js:405 | Sủng 85 · Danh 78 · gap 11 tháng | see bottleneck row | — |
+| (3) bottleneck | HH 3.2 % < 20 %: the hardest step is Hoàng quý phi → Hoàng hậu (only 28.6 % of those at Hoàng quý phi pass) · n 35 | RANKS[7] j1.js:6 (move to BAL first, law 4) | Sủng 85 · Danh 78 | Sủng 82 · Danh 73 (the step from Hoàng quý phi cut to ×0.5) | more lives pass the bottleneck step → HH reach up; re-run confirms |
+| (3) pace model | reading = 67.5 % of the modelled real minutes; PACE is NOT calibrated against human-paced play (part-2 gap) | robot10-agg.js PACE (READ_CPS 17, CLICK_S 1, CHOICE_S 2) | — | calibrate READ_CPS with one human-paced kiếp before any minutes-based tuning; until then use the game-year column | real-minute rows become trustworthy |
+| (3) kiếp length | mean kiếp 1191.6 real min (ended lives 1191.6) vs cap 120 min (PROVISIONAL — OD 23/11 ~23:25Z «a kiếp must not drag» has no number; MAIN to set) | pace: robot10-agg.js PACE + the rank steps above | — | lower the slowest step (bottleneck row) or BAL.entry.cap start rank | — |
+| (4) ending too common | «Hồng nhan bạc mệnh» = 68.2 % of 314 endings (order #6 (4): one ending > half of all endings = too common) · n 314 | see (2) death rows (this ending is a death) | — | the (2) values | other endings get room |
+| (4) rare ending too rare | road bd_san: 0 rare endings in 26 lives (p 0.15 → expected 3.9) | BAL.arc.rare.bd_san.p jbalbd.js:27 | 0.15 | 0.22 | rare ending seen about once per 4 lives |
 | (4) rare ending too rare | road bd_tuyet: 0 rare endings in 27 lives (p 0.15 → expected 4.1) | BAL.arc.rare.bd_tuyet.p jbalbd.js:163 | 0.15 | 0.22 | rare ending seen about once per 4 lives |
 | (4) rare ending too rare | road cnv_ban: 0 rare endings in 34 lives (p 0.15 → expected 5.1) | BAL.arc.rare.cnv_ban.p jbalarc.js:98 | 0.15 | 0.22 | rare ending seen about once per 4 lives |
 | (4) rare ending too rare | road cnv_chu: 0 rare endings in 36 lives (p 0.15 → expected 5.4) | BAL.arc.rare.cnv_chu.p jbalarc.js:97 | 0.15 | 0.22 | rare ending seen about once per 4 lives |
@@ -1019,6 +1019,6 @@ BAL read from the game page http://127.0.0.1:46877/index.html at 2026-11-25T05:2
 | (4) rare ending too rare | road thd_tho: 0 rare endings in 21 lives (p 0.15 → expected 3.2) | BAL.arc.rare.thd_tho.p jbalarc.js:93 | 0.15 | 0.22 | rare ending seen about once per 4 lives |
 | (4) rare ending too rare | road thd_tro: 0 rare endings in 20 lives (p 0.15 → expected 3) | BAL.arc.rare.thd_tro.p jbalarc.js:95 | 0.15 | 0.22 | rare ending seen about once per 4 lives |
 | (4) kỳ ngộ too common | mean 10.1 kỳ ngộ per life vs ≤ 6 (PROVISIONAL — no OD number for kỳ ngộ per kiếp; MAIN to set) | BAL.kyngo.p0 jbalky.js:10 | 85 | 68 | kỳ ngộ feels special again |
-| (4) events repeat | cards seen again in the same kiếp: 68.3 of 146.3 distinct (46.7 %) vs ≤ 25 % | BAL.eff.j68q.cd jbaleff.js:42 | 10 | 19 | longer cooldown before a j68 card returns |
+| (4) events repeat | cards seen again in the same kiếp: 68.6 of 147.2 distinct (46.6 %) vs ≤ 25 % | BAL.eff.j68q.cd jbaleff.js:42 | 10 | 19 | longer cooldown before a j68 card returns |
 
-No change needed / not yet judgeable: branch pf (par nc) is in BAL.orig.br.nc (weight 1 of 3): rolled · branch bd (par nc) is in BAL.orig.br.nc (weight 1 of 3): rolled · road bd_hen: no rare ending yet in 15 lives (p 0.15: need ≥ 20 lives to judge) · road pt_su: no rare ending yet in 13 lives (p 0.15: need ≥ 20 lives to judge) · road pt_tang: no rare ending yet in 19 lives (p 0.15: need ≥ 20 lives to judge) · road thd_hoc: no rare ending yet in 12 lives (p 0.15: need ≥ 20 lives to judge)
+No change needed / not yet judgeable: branch pf (par nc) is in BAL.orig.br.nc (weight 1 of 3): rolled · branch bd (par nc) is in BAL.orig.br.nc (weight 1 of 3): rolled · road bd_hen: no rare ending yet in 15 lives (p 0.15: need ≥ 20 lives to judge) · road pt_su: no rare ending yet in 16 lives (p 0.15: need ≥ 20 lives to judge) · road pt_tang: no rare ending yet in 19 lives (p 0.15: need ≥ 20 lives to judge) · road thd_hoc: no rare ending yet in 12 lives (p 0.15: need ≥ 20 lives to judge)

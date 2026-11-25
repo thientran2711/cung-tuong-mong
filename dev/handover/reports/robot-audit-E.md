@@ -1,9 +1,16 @@
 PRIORITY #1 CHECK: OD 25/11 rows ~05:10Z/05:15Z/05:20Z/05:40Z/05:45Z/05:58Z read verbatim | main dev/measure/robot10-agg.js (reused for rates), no robot-audit.js on main 4da55ce8 or origin/review/* | CLAIMS: E = this seat (F/B/D audit their own lines).
 
+# FINAL (after cross-check with F's shared script, 25/11)
+**AUDIT E FINAL total 822 (solo 661 + co-op 161) · valid 333 · rerun 489 (cap 168 / timeout 50 / stuck 20 / exit 251) · jsclick 0 (allowed per OD ~05:58Z) · diff-vs-F 0 lives**
+- Cross-check: F's dev/measure/robot-audit.js (60a6ae02), run with the new --allow-jsclick flag on E's files, gives 823 rows · VALID 333 · INVALID 490 (exit 251, cap 168, stuck/harness 20, timeout 50). The only difference is 1 ROW (co-op pair coop-p14s-S1 «no finished life») that is not a life. Per-life comparison over all 822 lives: 0 disagreements on valid/invalid or reason; exit-road judgment, «Xuất cung tuổi 30» (64 cnv lives = imposed by age, j42:303) and co-op (161 lives, 15 valid) identical in both.
+- Raw (first-pass) difference F 909 vs 807 came from F's counting bugs, patched on review/robot-audit-E: (a) .md life tables whose JSON exists under another stem were counted again (+82: bd R7 chunk md, pf pt_su chunk md); (b) the same life in a *-merged file was counted twice (weak signature; now job id + seed + ending). Same seed replayed with a different ending = 2 lives (13 cases, listed by a seed scan; both kept by both scripts).
+- PATCH for F (review/robot-audit-E, dev/measure/robot-audit.js): --allow-jsclick (rule 1 off, OD ~05:58Z), md-skip when a JSON of the same round chunk exists, de-dup key = job id + seed + ending. F's own file on the handover branch is untouched — F: take the patch from the review branch.
+- RERUN LIST = section «RERUN LIST» below (489 lives by origin / road; solo seeds listed, co-op lives rerun as pair/seat/kiếp).
+
 ## NOTES (read first)
-- Script: dev/measure/robot-audit.js on branch review/robot-audit-E (from origin/main 4da55ce8). Re-run: `node dev/measure/robot-audit.js dev/handover/robot --coop U14,U15,U16,U17,U18,U19,U20,U21 --out dev/handover/reports/robot-audit-E.md --valid-dir <dir>`; add `--strict-click` for the brief's JS-click rule. (This file = script output + this NOTES block.)
+- Script: dev/measure/robot-audit-E.js on branch review/robot-audit-E (F's shared dev/measure/robot-audit.js + patch, same branch) (from origin/main 4da55ce8). Re-run: `node dev/measure/robot-audit-E.js dev/handover/robot --coop U14,U15,U16,U17,U18,U19,U20,U21 --out dev/handover/reports/robot-audit-E.md --valid-dir <dir>`; add `--strict-click` for the brief's JS-click rule. (This file = script output + this NOTES block.)
 - JS-CLICK: robot10.js + inpage6.js drive the game with el.click() / evaluate clicks (page.mouse/touchscreen taps are not used anywhere on main), so EVERY life is a machine click. The brief says that makes every life invalid, but the owner's later word wins (OD 25/11 ~05:58Z: machine-click lives that played to a true end COUNT). So jsclick = 0 here; under the STRICT reading all 807 would be invalid (valid 0).
-- SCOPE: solo = every thd/cnv/bd/pf file in dev/handover/robot (R1 thd_tho, R2 thd_tro/thd_hoc, R3+R4 cnv, R5 pf pt_hai/pt_su, R6 pf pt_tang, R7 bd_san, R8 bd_tuyet/bd_hen), 646 lives after de-dup (same job id + seed = one life). Co-op = E round 1 U14–U21 only, 161 lives that ENDED (a seat life the room never finished, e.g. stuck rooms, is not in the JSON and is not counted: those lives were lost too).
+- SCOPE: solo = every thd/cnv/bd/pf file in dev/handover/robot (R1 thd_tho, R2 thd_tro/thd_hoc, R3+R4 cnv, R5 pf pt_hai/pt_su, R6 pf pt_tang, R7 bd_san, R8 bd_tuyet/bd_hen), after de-dup (same job id + seed + same ending = one life; 13 seeds were replayed with a different ending → both plays kept). Co-op = E round 1 U14–U21 only, 161 lives that ENDED (a seat life the room never finished, e.g. stuck rooms, is not in the JSON and is not counted: those lives were lost too).
 - OTHER LINES (not audited here): nc-*/ncA/nc-B-*/round-nc-* (D), coop-2026…-pN-M(-s) and coop-U4/U4b/U8/U11/U13 (B pairs), flight-A-* (F), lag-* / anim-* (lag/anim probes), catalog/proof files.
 - EXIT RULE: the result JSON logs no last choices, so «game left only one option» cannot be proven per life. Each ending was checked against the code on main: Xuất gia (j14/j25), Xuất cung về quê/mở tiệm (j42 cnvAge, jroute hl_que), Xuất giá (j42 cnvWed), Được ban hôn, Phế làm thứ dân (jroute) are always option cards with a sibling option → bot-chosen = INVALID (note: the harness filed Xuất giá / Được ban hôn under «death»). «Xuất cung tuổi 30» (j42:303) is forced by age → VALID (64 cnv lives). Thái phi, Lãnh cung, Mẫu hậu, deaths, Đại kết cục = VALID. If a rerun harness blacklists exits, any life that STILL ends by one of these is the game's only-option case.
 - The 166 CAP lives hit the 1800 s wall cap before the game ended them; they never reached a true end.
@@ -12,7 +19,7 @@ PRIORITY #1 CHECK: OD 25/11 rows ~05:10Z/05:15Z/05:20Z/05:40Z/05:45Z/05:58Z read
 
 # ROBOT AUDIT E — every life vs the owner rules of 25/11
 
-AUDIT E total 807 valid 324 invalid 483 (cap 166 / timeout 50 / stuck 16 / exit 251 / jsclick 0)
+AUDIT E total 822 valid 333 invalid 489 (cap 168 / timeout 50 / stuck 20 / exit 251 / jsclick 0)
 
 Rules applied: OD 25/11 ~05:10Z real taps · ~05:15Z life until death/real ending, no cap · ~05:20Z/~05:40Z no voluntary exit unless it is the only option · ~05:45Z audit+rerun · ~05:58Z JS-click lives that reached a true end COUNT. Generated by dev/measure/robot-audit.js.
 
@@ -29,12 +36,12 @@ Rules applied: OD 25/11 ~05:10Z real taps · ~05:15Z life until death/real endin
 | coop U20 | 18 | 3 | 0 | 0 | 0 | 15 | 0 |
 | coop U21 | 6 | 1 | 0 | 0 | 0 | 5 | 0 |
 | solo R1 | 48 | 21 | 13 | 10 | 0 | 4 | 0 |
-| solo R2 | 98 | 32 | 34 | 11 | 7 | 14 | 0 |
+| solo R2 | 100 | 32 | 35 | 11 | 8 | 14 | 0 |
 | solo R3 | 100 | 70 | 10 | 2 | 0 | 18 | 0 |
 | solo R4 | 100 | 68 | 13 | 3 | 0 | 16 | 0 |
-| solo R5 | 100 | 33 | 32 | 11 | 6 | 18 | 0 |
+| solo R5 | 111 | 40 | 33 | 11 | 9 | 18 | 0 |
 | solo R6 | 50 | 19 | 19 | 3 | 0 | 9 | 0 |
-| solo R7 | 50 | 24 | 14 | 1 | 2 | 9 | 0 |
+| solo R7 | 52 | 26 | 14 | 1 | 2 | 9 | 0 |
 | solo R8 | 100 | 42 | 31 | 9 | 1 | 17 | 0 |
 
 ## Counts by origin / road
@@ -42,7 +49,7 @@ Rules applied: OD 25/11 ~05:10Z real taps · ~05:15Z life until death/real endin
 | origin / road | N | valid | cap | timeout | stuck | exit | jsclick |
 |---|---|---|---|---|---|---|---|
 | bd / bd_hen | 56 | 15 | 20 | 3 | 1 | 17 | 0 |
-| bd / bd_san | 53 | 24 | 14 | 1 | 2 | 12 | 0 |
+| bd / bd_san | 55 | 26 | 14 | 1 | 2 | 12 | 0 |
 | bd / bd_soi | 3 | 0 | 0 | 0 | 0 | 3 | 0 |
 | bd / bd_tuyet | 53 | 27 | 11 | 6 | 0 | 9 | 0 |
 | ch / ch_benh | 5 | 0 | 0 | 0 | 0 | 5 | 0 |
@@ -70,7 +77,7 @@ Rules applied: OD 25/11 ~05:10Z real taps · ~05:15Z life until death/real endin
 | nc / nc_vuong | 3 | 0 | 0 | 0 | 0 | 3 | 0 |
 | pf / pt_dang | 7 | 0 | 0 | 0 | 0 | 7 | 0 |
 | pf / pt_hai | 55 | 20 | 13 | 7 | 0 | 15 | 0 |
-| pf / pt_su | 52 | 13 | 19 | 4 | 6 | 10 | 0 |
+| pf / pt_su | 63 | 20 | 20 | 4 | 9 | 10 | 0 |
 | pf / pt_tang | 54 | 19 | 19 | 3 | 0 | 13 | 0 |
 | td / td_ke | 8 | 2 | 0 | 0 | 0 | 6 | 0 |
 | td / td_song | 6 | 0 | 0 | 0 | 0 | 6 | 0 |
@@ -78,7 +85,7 @@ Rules applied: OD 25/11 ~05:10Z real taps · ~05:15Z life until death/real endin
 | thd / thd_hoc | 52 | 13 | 20 | 3 | 4 | 12 | 0 |
 | thd / thd_sach | 2 | 0 | 0 | 0 | 0 | 2 | 0 |
 | thd / thd_tho | 51 | 21 | 13 | 10 | 0 | 7 | 0 |
-| thd / thd_tro | 55 | 19 | 14 | 8 | 3 | 11 | 0 |
+| thd / thd_tro | 57 | 19 | 15 | 8 | 4 | 11 | 0 |
 | tt / tt_co | 5 | 2 | 0 | 0 | 0 | 3 | 0 |
 | tt / tt_mat | 5 | 1 | 0 | 0 | 0 | 4 | 0 |
 | tt / tt_oan | 3 | 0 | 0 | 0 | 0 | 3 | 0 |
@@ -117,7 +124,7 @@ Rules applied: OD 25/11 ~05:10Z real taps · ~05:15Z life until death/real endin
 | nc / nc_vuong | 3 | exit 3 | U15·host/X/fold·7:1; U14·host/Y/ipad·1:1; U16·guest/X/fold·7:1 |
 | pf / pt_dang | 7 | exit 7 | U16·guest/X/fold·15:1; U17·host/X/fold·3:1; U17·guest/Y/ipad·5:1; U17·guest/Y/ipad·1:1; U18·guest/X/fold·3:1; U18·host/Y/ipad·5:1; U18·host/Y/ipad·1:1 |
 | pf / pt_hai | 35 | cap 13, exit 15, timeout 7 | R5·skilled·1:3114640601; R5·skilled·2:2491481444; R5·skilled·5:506625597; R5·random·1:1347038790; R5·random·2:3525233687; R5·random·3:2795021456; R5·random·4:657460705; R5·random·5:217758658; R5·skilled·3:2682250011; R5·greedy·1:3113021953; R5·greedy·3:4270494435; R5·greedy·4:3802600038 …(+23, full list in the .json) |
-| pf / pt_su | 39 | cap 19, exit 10, stuck 6, timeout 4 | R5·skilled·2:2572962968; R5·skilled·3:618859327; R5·skilled·4:4290667466; R5·skilled·5:2066841993; R5·random·1:975131458; R5·random·2:445559107; R5·random·3:254790540; R5·random·4:2564901989; R5·random·5:2104411590; R5·greedy·2:1756174360; R5·greedy·1:2937005677; R5·greedy·4:3473878858 …(+27, full list in the .json) |
+| pf / pt_su | 43 | cap 20, exit 10, stuck 9, timeout 4 | R5·skilled·2:2572962968; R5·skilled·3:618859327; R5·skilled·4:4290667466; R5·skilled·5:2066841993; R5·random·1:975131458; R5·random·2:445559107; R5·random·3:254790540; R5·random·4:2564901989; R5·random·5:2104411590; R5·greedy·2:1756174360; R5·greedy·1:2937005677; R5·greedy·4:3473878858 …(+31, full list in the .json) |
 | pf / pt_tang | 35 | cap 19, timeout 3, exit 13 | R6·skilled·3:2844095027; R6·skilled·4:207980214; R6·random·2:2027701647; R6·random·3:1855161576; R6·random·4:3475684313; R6·random·5:3552077722; R6·greedy·1:3103755961; R6·greedy·2:333164740; R6·greedy·3:523933307; R6·greedy·5:495740957; R6·greedy·4:56038910; R6·cautious·1:764262748 …(+23, full list in the .json) |
 | td / td_ke | 6 | exit 6 | U15·host/X/fold·13:1; U19·guest/Y/ipad·3:1; U17·host/X/fold·1:1; U17·guest/Y/ipad·11:1; U18·guest/X/fold·1:1; U18·host/Y/ipad·11:1 |
 | td / td_song | 6 | exit 6 | U15·host/X/fold·2:1; U15·guest/Y/ipad·8:1; U14·guest/X/fold·14:1; U16·guest/X/fold·2:1; U16·host/Y/ipad·8:1; U18·guest/X/fold·6:1 |
@@ -125,7 +132,7 @@ Rules applied: OD 25/11 ~05:10Z real taps · ~05:15Z life until death/real endin
 | thd / thd_hoc | 39 | exit 12, cap 20, stuck 4, timeout 3 | R2·skilled·2:3869935016; R2·skilled·3:4042475087; R2·random·1:3704739314; R2·random·2:1048523251; R2·random·3:857754684; R2·random·4:3167866133; R2·random·5:2707375734; R2·skilled·5:1195490457; R2·scholar·1:2897240659; R2·scholar·2:3426813010; R2·scholar·3:3887303409; R2·scholar·4:1709108512 …(+27, full list in the .json) |
 | thd / thd_sach | 2 | exit 2 | U19·host/X/fold·1:1; U20·guest/X/fold·1:1 |
 | thd / thd_tho | 30 | timeout 10, cap 13, exit 7 | R1·skilled·1:795064746; R1·skilled·2:286280747; R1·skilled·3:2243047412; R1·skilled·4:2405623629; R1·random·1:1077992375; R1·random·2:3215553126; R1·random·3:3676043525; R1·random·4:3513467308; R1·random·5:3683447523; R1·skilled·5:1945133230; R1·greedy·1:372282412; R1·greedy·5:1522350896 …(+18, full list in the .json) |
-| thd / thd_tro | 36 | exit 11, cap 14, timeout 8, stuck 3 | R2·skilled·2:2781804425; R2·skilled·3:710662602; R2·skilled·4:1333821759; R2·random·1:2979049785; R2·random·2:208458564; R2·random·3:399227131; R2·random·4:4226300030; R2·random·5:371034781; R2·greedy·1:2613534650; R2·greedy·2:4231497531; R2·greedy·3:4040728964; R2·greedy·4:4203305181 …(+24, full list in the .json) |
+| thd / thd_tro | 38 | exit 11, cap 15, timeout 8, stuck 4 | R2·skilled·2:2781804425; R2·skilled·3:710662602; R2·skilled·4:1333821759; R2·random·1:2979049785; R2·random·2:208458564; R2·random·3:399227131; R2·random·4:4226300030; R2·random·5:371034781; R2·greedy·1:2613534650; R2·greedy·2:4231497531; R2·greedy·3:4040728964; R2·greedy·4:4203305181 …(+26, full list in the .json) |
 | tt / tt_co | 3 | exit 3 | U16·guest/X/fold·16:1; U17·guest/Y/ipad·2:1; U18·guest/X/fold·4:1 |
 | tt / tt_mat | 4 | exit 4 | U19·host/X/fold·3:1; U19·guest/Y/ipad·5:1; U17·guest/Y/ipad·13:1; U20·guest/X/fold·3:1 |
 | tt / tt_oan | 3 | exit 3 | U15·host/X/fold·5:1; U14·host/Y/ipad·7:1; U16·guest/X/fold·5:1 |
@@ -427,7 +434,9 @@ Rules applied: OD 25/11 ~05:10Z real taps · ~05:15Z life until death/real endin
 | R2 | thd | thd_tro | schemer/3/2851488065 | Hồng nhan bạc mệnh | VALID | died: Lao phổi nguy kịch, không qua khỏi |
 | R2 | thd | thd_tro | schemer/4/694081520 | Hồng nhan bạc mệnh | VALID | died: Lao phổi nguy kịch, không qua khỏi |
 | R2 | thd | thd_tro | schemer/5/1403505399 | Hồng nhan bạc mệnh | VALID | died: Bị ban chết vì đầu độc Hoàng tử Vĩnh Tường |
+| R2 | thd | thd_tro | scholar/1/1120856050 | CAP | INVALID | cap: wall cap, no ending |
 | R2 | thd | thd_tro | scholar/1/1120856050 | Xuất gia | INVALID | exit: bot-chosen exit «Xuất gia làm ni cô» (game offered a sibling option) |
+| R2 | thd | thd_tro | scholar/2/2759607283 | HARNESS | INVALID | stuck: harness/browser closed, crash or softlock — life abandoned |
 | R2 | thd | thd_tro | scholar/2/2759607283 | Hồng nhan bạc mệnh | VALID | died: Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 26 tuổi |
 | R2 | thd | thd_tro | scholar/3/2568838716 | HARNESS | INVALID | stuck: harness/browser closed, crash or softlock — life abandoned |
 | R2 | thd | thd_tro | scholar/4/583982869 | HARNESS | INVALID | stuck: harness/browser closed, crash or softlock — life abandoned |
@@ -699,8 +708,11 @@ Rules applied: OD 25/11 ~05:10Z real taps · ~05:15Z life until death/real endin
 | R5 | pf | pt_su | cautious/5/1600557612 | HARNESS | INVALID | stuck: harness/browser closed, crash or softlock — life abandoned |
 | R5 | pf | pt_su | greedy/1/2937005677 | CAP | INVALID | cap: wall cap, no ending |
 | R5 | pf | pt_su | greedy/2/1756174360 | CAP | INVALID | cap: wall cap, no ending |
+| R5 | pf | pt_su | greedy/2/1756174360 | Hồng nhan bạc mệnh | VALID | died: Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 25 tuổi |
 | R5 | pf | pt_su | greedy/3/4097038015 | Hồng nhan bạc mệnh | VALID | died: Bà đỡ quỳ ngoài điện: ngươi khó sinh, chỉ giữ được một. Hoàng thượng l |
+| R5 | pf | pt_su | greedy/3/4097038015 | HARNESS | INVALID | stuck: harness/browser closed, crash or softlock — life abandoned |
 | R5 | pf | pt_su | greedy/4/3473878858 | CAP | INVALID | cap: wall cap, no ending |
+| R5 | pf | pt_su | greedy/4/3473878858 | HARNESS | INVALID | stuck: harness/browser closed, crash or softlock — life abandoned |
 | R5 | pf | pt_su | greedy/5/1250053385 | CAP | INVALID | cap: wall cap, no ending |
 | R5 | pf | pt_su | lazy/1/1284393375 | CAP | INVALID | cap: wall cap, no ending |
 | R5 | pf | pt_su | lazy/2/3938049582 | CAP | INVALID | cap: wall cap, no ending |
@@ -708,9 +720,12 @@ Rules applied: OD 25/11 ~05:10Z real taps · ~05:15Z life until death/real endin
 | R5 | pf | pt_su | lazy/4/4235963764 | CAP | INVALID | cap: wall cap, no ending |
 | R5 | pf | pt_su | lazy/5/2279197099 | CAP | INVALID | cap: wall cap, no ending |
 | R5 | pf | pt_su | lover/1/3108502015 | CAP | INVALID | cap: wall cap, no ending |
+| R5 | pf | pt_su | lover/2/1487979278 | Thái phi | VALID | died: Thái phi theo con ra phủ |
 | R5 | pf | pt_su | lover/2/1487979278 | Hồng nhan bạc mệnh | VALID | died: Hoàng thượng niên hiệu Thừa Bình băng hà, thọ 26 tuổi. Tân Thái hậu Na |
+| R5 | pf | pt_su | lover/3/1948469677 | CAP | INVALID | cap: wall cap, no ending |
 | R5 | pf | pt_su | lover/3/1948469677 | HARNESS | INVALID | stuck: harness/browser closed, crash or softlock — life abandoned |
 | R5 | pf | pt_su | lover/4/3933325524 | CAP | INVALID | cap: wall cap, no ending |
+| R5 | pf | pt_su | lover/5/4103305739 | Hồng nhan bạc mệnh | VALID | died: Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 25 tuổi |
 | R5 | pf | pt_su | lover/5/4103305739 | Hồng nhan bạc mệnh | VALID | died: Bị ban chết vì tư thông với Thị vệ Điền Phụng Chi |
 | R5 | pf | pt_su | random/1/975131458 | Xuất gia | INVALID | exit: bot-chosen exit «Xuất gia» (game offered a sibling option) |
 | R5 | pf | pt_su | random/2/445559107 | Xuất gia | INVALID | exit: bot-chosen exit «Xuất gia» (game offered a sibling option) |
@@ -722,10 +737,15 @@ Rules applied: OD 25/11 ~05:10Z real taps · ~05:15Z life until death/real endin
 | R5 | pf | pt_su | rebel/3/2347588843 | Hồng nhan bạc mệnh | VALID | died: Sổ Kính sự phòng không ghi đêm thị tẩm nào trước khi có 'thai', giả ma |
 | R5 | pf | pt_su | rebel/4/4006441326 | Hồng nhan bạc mệnh | VALID | died: Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 19 tuổi |
 | R5 | pf | pt_su | rebel/5/171964429 | HARNESS | INVALID | stuck: harness/browser closed, crash or softlock — life abandoned |
+| R5 | pf | pt_su | schemer/1/2621365542 | HARNESS | INVALID | stuck: harness/browser closed, crash or softlock — life abandoned |
 | R5 | pf | pt_su | schemer/1/2621365542 | Hồng nhan bạc mệnh | VALID | died: Bị ban chết vì đầu độc Công chúa Thuần Hy |
+| R5 | pf | pt_su | schemer/2/483804791 | Hồng nhan bạc mệnh | VALID | died: Bị ban chết vì vu Hoàng tử Vĩnh Tinh trù ẻo thánh thượng |
 | R5 | pf | pt_su | schemer/2/483804791 | Hồng nhan bạc mệnh | VALID | died: Bị ban chết vì đầu độc Công chúa Hòa Đoan |
+| R5 | pf | pt_su | schemer/3/4069348208 | Hồng nhan bạc mệnh | VALID | died: Bị ban chết vì vu Hoàng tử Vĩnh Tuấn trù ẻo thánh thượng |
 | R5 | pf | pt_su | schemer/3/4069348208 | Lãnh cung | VALID | died: Phát điên trong lãnh cung |
+| R5 | pf | pt_su | schemer/4/1931787457 | Hồng nhan bạc mệnh | VALID | died: Bị ban chết vì vu Hoàng tử Vĩnh Mẫn trù ẻo thánh thượng |
 | R5 | pf | pt_su | schemer/4/1931787457 | HARNESS | INVALID | stuck: harness/browser closed, crash or softlock — life abandoned |
+| R5 | pf | pt_su | schemer/5/1471297058 | Hồng nhan bạc mệnh | VALID | died: Bị ban chết vì đầu độc Hoàng tử Vĩnh Tinh |
 | R5 | pf | pt_su | schemer/5/1471297058 | HARNESS | INVALID | stuck: harness/browser closed, crash or softlock — life abandoned |
 | R5 | pf | pt_su | scholar/1/136898467 | CAP | INVALID | cap: wall cap, no ending |
 | R5 | pf | pt_su | scholar/2/2813902882 | CAP | INVALID | cap: wall cap, no ending |
@@ -797,7 +817,9 @@ Rules applied: OD 25/11 ~05:10Z real taps · ~05:15Z life until death/real endin
 | R7 | bd | bd_san | cautious/3/304984224 | CAP | INVALID | cap: wall cap, no ending |
 | R7 | bd | bd_san | cautious/4/2483179121 | Thái phi | VALID | died: Thành Thái phi |
 | R7 | bd | bd_san | cautious/5/2022688722 | Thái phi | VALID | died: Thái phi theo con ra phủ |
+| R7 | bd | bd_san | greedy/1/1955587375 | Hồng nhan bạc mệnh | VALID | died: Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 26 tuổi |
 | R7 | bd | bd_san | greedy/1/1955587375 | CAP | INVALID | cap: wall cap, no ending |
+| R7 | bd | bd_san | greedy/2/2482496702 | Hồng nhan bạc mệnh | VALID | died: Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 25 tuổi |
 | R7 | bd | bd_san | greedy/2/2482496702 | CAP | INVALID | cap: wall cap, no ending |
 | R7 | bd | bd_san | greedy/3/2922198749 | Xuất cung | INVALID | exit: bot-chosen exit «Xuất cung về quê» (game offered a sibling option) |
 | R7 | bd | bd_san | greedy/4/2759622532 | Hồng nhan bạc mệnh | VALID | died: Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 31 tuổi |
