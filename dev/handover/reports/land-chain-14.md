@@ -24,7 +24,7 @@ Roll at ctx >= ~30 %, ceiling 60 %. BLOCKER: main push only after sếp writes h
 - 11:3xZ robot-coop-fix-7-rv 1b32c409 NOT stacked: j74.js rules conflict with robot-bugs-m1 (both add a «title never bare» guard) → back to B for one-guard re-merge (MAIN 139 agreed).
 - F gates on d3b99724 stack: dead-card PASS, e68-season PASS, sid-rekey-known PASS (needs file path arg «index.html», http URL threw), k61-wkey PASS, coop-e2e 142/142 ×2, HOSTDIE 143/143 ×2; QC 3eed1dc7 PASS 288 s, 2b0fc217 PASS 268 s, d3b99724 (see below).
 
-## HANDOVER TO LC15 (LC14 rolls: context near START + 25 %)
+## HANDOVER TO LC15 (LC14 rolls: context near START + 25 %) — LC15 = session_01V1ZZH1aWaTnQCXA6E5kXmf (opened 11:35Z, child of LC14, depth 4); e68 d3b99724 QC PASS 280 s → READY 13
 ### BLOCKER
 No main push without sếp's own go-live words written in YOUR (LC15) chat. Never try other push paths. Coordinator now MAIN 140 session_01V1ZZH2mX8zALmjaRN5SQvL.
 ### TOOLS (dev/handover/reports/lc14-tools/)
