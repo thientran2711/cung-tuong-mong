@@ -101,9 +101,9 @@ const KG82_RW=/^(Hồi|Câu|Môn|Vòng|Lượt|Bước)\s+(.+)$/,KG82_PLACE=/^(N
 /* KIT §N.1 figure-column backdrop (owner OD 21/11 ~03:48Z/~03:50Z, mg-5s-clear): on the wide screen the figure stands on a NEW tall (portrait) painting per subject, never the board picture and never the flat yellow. ONE table: kind -> file in img/ (art: Foreman C, img/mgbg-<kind>.webp); a missing file = the old cream gradient (CSS fallback). */
 /* KIT-MGBG: the DOM boards that take the painted board backdrop slot (kitGameFrame .kgbox-bg, key mg-<kind>-bg) */
 const KG82_BOARDBG=new Set(["thu_tam","thu_choi","tuoi","co7"]);window.KG82_BOARDBG=KG82_BOARDBG;
-const KG82_MGBG=new Proxy({},{get:(o,k)=>typeof k==="string"?`img/mgbg-${k}.webp`:undefined});window.KG82_MGBG=KG82_MGBG;
+const KG82_MGBG=new Proxy({},{get:(o,k)=>typeof k==="string"?`img/mgbg-${(typeof KG82_BOARDOF!=="undefined"&&KG82_BOARDOF[k])||k}.webp`:undefined});/* review/art-slots: a kind played on another kind's board (kinh, may → ve) takes that board's figure backdrop too */window.KG82_MGBG=KG82_MGBG;
 function kg82Pic(kind){KG82.picKind=kind;/* the kind being opened: kg82Open hands it to the frame for the figure-column backdrop */if(["duho","den","may"].includes(kind)||KG82_BOARDBG.has(kind))return "";const s=`img/kit/mg-${kg82BgName(kind)}.webp`;
- try{if(typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE&&!KIT_CDNHAVE.has(s)){if(typeof kitPhNote==="function")kitPhNote("mg",kg82BgName(kind),"light",(KG82_KIND[kind]||{}).t||kind);return ""}}catch(e){}return s}
+ try{if(typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE&&!KIT_CDNHAVE.has(s.replace(/^.*?(?=img\/)/,""))){if(typeof kitPhNote==="function")kitPhNote("mg",kg82BgName(kind),"light",(KG82_KIND[kind]||{}).t||kind);return ""}}catch(e){}return s}
 function kg82Frame(o){KG82.rlock=o.round||"";const hud=[["score","Phần","0/10"],["round",o.round||"Hồi",o.roundV||"–"],["time","Còn","–"]];
  if(kg82Kit())return kitGameFrame({art:o.art,title:o.title,how:o.how,hud,id:"kg82box",pic:o.pic,fig:o.fig!==false,seal:o.seal,kind:o.kind||KG82.picKind});
  return `<div class="kgame"><div class="kph"><b class="kpseal">${o.seal||"TÀI NGHỆ"}</b><span class="kpht"><span class="kptitle">${o.art}: ${o.title}</span></span></div><div class="kghow"><span class="krl">Cách chơi</span><span>${o.how}</span></div>`+
