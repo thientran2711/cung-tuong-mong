@@ -5079,5 +5079,1771 @@
   "row": "R6·greedy·5:495740957 (rerun on LIVE github.io)",
   "game": "github.io LIVE, MIXED builds (life ran ~18:19-22:2xZ across Build 9434d88366cc → 4763d410aa0d → 0dc642a71578 → 13f84c70f2a3; resumed once at buổi 367 after a bareTap crash on 64d62d9b)",
   "audit": "VALID (Thái phi age 23, real taps, github.io); mixed builds noted — COUNTED unless Foreman E rules otherwise"
+ },
+ {
+  "job": {
+   "id": "R6-lover-2",
+   "origin": "pf",
+   "road": "pt_tang",
+   "bot": "sens",
+   "seed": 1847542930,
+   "dev": "fold",
+   "url": "https://thientran2711.github.io/cung-tuong-mong/"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "b4b181f8",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 0,
+   "cap": null,
+   "stuck": 0,
+   "unstick": 18,
+   "slice": null,
+   "areaTaps": 3028,
+   "dlgScroll": 397,
+   "scrolls": 489,
+   "dlgClose": 374,
+   "infoTaps": 740,
+   "nextNoTurn": 65,
+   "kfocVisits": 33,
+   "loops": 15,
+   "bareBlocked": 2,
+   "taps": 7150
+  },
+  "life": {
+   "id": "Lãnh cung",
+   "type": "end",
+   "fate": "Phát điên trong lãnh cung",
+   "death": false,
+   "age": 23,
+   "year": 6,
+   "rank": 0,
+   "card": [
+    "✕"
+   ],
+   "duringArea": false,
+   "lastTaps": [
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Ân oánPhe pháiPhế phiTa▾⇄Hoàng thượng▾Quan hệ giữa»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm bệnh · nặng»",
+    ".dlg «Tâm bệnh · nặng» «Lui»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc862Sức93/93»",
+    ".dlg «Bạc» «Lui»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»",
+    ".dlg «Tin trong cung buổi này» «Lui»",
+    ".kmov «Ta biết rồi»",
+    ".kmov «Ta biết rồi»"
+   ]
+  },
+  "exitPick": null,
+  "bugs": [
+   {
+    "k": "game|softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Tin trong cung buổi này)",
+    "type": "game",
+    "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Tin trong cung buổi này)",
+    "n": 13,
+    "at": 2091,
+    "shot": "/home/user/wt/out/run/shots-R6-lover-2/noturn-1.png",
+    "dump": "/home/user/wt/out/run/shots-R6-lover-2/noturn-1-dump.json",
+    "S": {
+     "dead": false,
+     "y": 3,
+     "t": 24,
+     "w": 0,
+     "b": 3,
+     "age": 20,
+     "rank": 2,
+     "name": "Hách Hàn Tuyết"
+    },
+    "trace": [
+     ".dlg «Lời nhận xét» «Lui»",
+     "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «Dấu ấn Thường tại»",
+     "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «Sang buổi»",
+     "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «Dư đồ»",
+     "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.» «Sang buổi»",
+     "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tai mắt0»",
+     ".dlg «Tai mắt» «Lui»",
+     "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Lịch tháng»",
+     ".dlg «Lịch tháng» «ngày 13: Nguyệt tín»",
+     ".dlg «Lịch tháng» «ngày 11: Nguyệt tín»",
+     ".dlg «Lịch tháng» «Lễ Phật»",
+     ".dlg «Lịch tháng» «mồng 5: Tiết Thanh minh»",
+     ".dlg «Lịch tháng» «Lui»",
+     "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»",
+     "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Xuân · còn 4 khắc · đi gần 1 khắc, xa 2 · bóng: ng»",
+     ".dlg «Càn Ninh cung» «Lui»",
+     "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Hậu cung»",
+     "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»",
+     "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»",
+     "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+    ]
+   },
+   {
+    "k": "stuck|no-clock loop: 150 taps without a clock step on page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "type": "stuck",
+    "msg": "no-clock loop: 150 taps without a clock step on page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "n": 1,
+    "at": 6080,
+    "shot": "/home/user/wt/out/run/shots-R6-lover-2/loop-12.png",
+    "dump": null,
+    "S": {
+     "dead": false,
+     "y": 4,
+     "t": 40,
+     "w": 2,
+     "b": 3,
+     "age": 21,
+     "rank": 2,
+     "name": "Hách Hàn Tuyết"
+    },
+    "buttons": [
+     "Ô lưu",
+     "Xem bản thân",
+     "Sắc100Tài100Tâm cơ66Đức57Danh93Sủng23",
+     "Bạc1031Sức98/98",
+     "Buổi tối, còn 4 khắc",
+     "Hôm nay mặt mộc",
+     "đêm u ám",
+     "Quẻ Hạ hạ (Hung)",
+     "Tâm trạngBình thản-2",
+     "Về phòng",
+     "Tin báo",
+     "Người được sai đi (có mới)"
+    ],
+    "trace": [
+     "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Bạc1031Sức98/98»",
+     "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Mục tiêu chương»",
+     "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Số lần ân thưởng3»",
+     "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Số lần ân thưởng3»",
+     "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Hoàng tự»",
+     "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»",
+     "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»",
+     "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»",
+     "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»",
+     "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Hành sự»",
+     "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»",
+     "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»",
+     "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»",
+     "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»",
+     "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»",
+     "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Giao thiệpGiao thiệpTrò chuyện với cung nữNgồi ngh»",
+     "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Y dược 3/3»",
+     "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Buổi tối, còn 4 khắc»",
+     "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Mưu kế 5/5»",
+     "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư» «Mưu kếMưu kếXem sổ nguyệt sựRất vữngLót tay thái g»"
+    ],
+    "next": {
+     "dis": true,
+     "q": 10,
+     "mg": false,
+     "qt": [
+      "Chương 3 · Học lễ nghi cung cấm",
+      "Tin báo",
+      "Chương 3 · Học lễ nghi cung cấm",
+      "Tin chờ người sai đi",
+      "Quan hệ với",
+      "Chương 3 · Học lễ nghi cung cấm"
+     ],
+     "t": "Có tin đang chờ · xo"
+    }
+   },
+   {
+    "k": "game|softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=10: Chương 3 · Học lễ nghi cung cấm / Tin báo / Chương 3 · Học lễ nghi cung cấm / Tin chờ người sai đi / Quan hệ với / Chương 3 · Học lễ nghi cung cấm)",
+    "type": "game",
+    "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=10: Chương 3 · Học lễ nghi cung cấm / Tin báo / Chương 3 · Học lễ nghi cung cấm / Tin chờ người sai đi / Quan hệ với / Chương 3 · Học lễ nghi cung cấm)",
+    "n": 1,
+    "at": 6080,
+    "shot": "/home/user/wt/out/run/shots-R6-lover-2/loop-12.png",
+    "S": {
+     "dead": false,
+     "y": 4,
+     "t": 40,
+     "w": 2,
+     "b": 3,
+     "age": 21,
+     "rank": 2,
+     "name": "Hách Hàn Tuyết"
+    }
+   },
+   {
+    "k": "harness|area tap would have landed on a button (it appeared under the point) — blocked: «Thường Son sáp Hộp son môi dùng khi điểm trang (tô»",
+    "type": "harness",
+    "msg": "area tap would have landed on a button (it appeared under the point) — blocked: «Thường Son sáp Hộp son môi dùng khi điểm trang (tô»",
+    "n": 1,
+    "at": 6114
+   },
+   {
+    "k": "game|softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Tin báo / Tin trong cung buổi này)",
+    "type": "game",
+    "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Tin báo / Tin trong cung buổi này)",
+    "n": 1,
+    "at": 7212,
+    "shot": "/home/user/wt/out/run/shots-R6-lover-2/noturn-14.png",
+    "dump": null,
+    "S": {
+     "dead": false,
+     "y": 5,
+     "t": 47,
+     "w": 2,
+     "b": 3,
+     "age": 22,
+     "rank": 1,
+     "name": "Hách Hàn Tuyết"
+    },
+    "trace": [
+     ".mapsc «Lịch tháng»",
+     ".dlg «Lịch tháng» «ngày 19»",
+     ".dlg «Lịch tháng» «ngày 21»",
+     ".dlg «Lịch tháng» «ngày 26»",
+     ".dlg «Lịch tháng» «ngày 23»",
+     ".dlg «Lịch tháng» «Lui»",
+     ".mapsc «Sang buổi»",
+     ".mapsc «Phật đường1 bóng · 2 khắc»",
+     ".dlg «Chọn người theo hầu» «Đi một mìnhTốnkhôngĐượcviệc ta làm bên ngoài được »",
+     ".dlg «Ra ngoài khi mặc trung y?» «Vẫn điTốnDanh -2Đượckhông»",
+     "page «Phật đường · Ở đây còn 1 người.» «Hậu cung»",
+     "page «Phật đường · Ở đây còn 1 người.» «Sang buổi»",
+     ".dlg «Ra ngoài khi mặc trung y?» «Vẫn điTốnDanh -2Đượckhông»",
+     ".dlg «Phật đường» «Lẻn vàoVữngTốn3 khắcĐượcvào được buổi nàyBạiDanh -»",
+     ".dlg «Ra ngoài khi mặc trung y?» «Ở lạiTốnkhôngĐượckhôngGhi chú(thay y phục trong Tư»",
+     "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Sang ngày mới»",
+     "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Tin báo: 20 tin mới»",
+     "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Sắc100Tài100Tâm cơ70Đức57Danh56Sủng8»",
+     "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Sang ngày mới»",
+     "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Sang ngày mới»"
+    ]
+   }
+  ],
+  "dead": [],
+  "buoi": 916,
+  "steps": 12809,
+  "status": [
+   "STATUS R6-lover-2 · buổi 400 · year 3 · rank 2 · bugs 1 · stuck 0 · dead buttons 0",
+   "STATUS R6-lover-2 · buổi 631 · year 5 · rank 1 · bugs 4 · stuck 0 · dead buttons 0"
+  ],
+  "offers": [
+   {
+    "buoi": 57,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 58,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 59,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 62,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 63,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 64,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 65,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": true
+   },
+   {
+    "buoi": 66,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 73,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Ở đây có 1 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 82,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 83,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 84,
+    "y": 1,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 113,
+    "y": 1,
+    "rank": 0,
+    "screen": ".dlg «Đại hàn, tuyết lớn»",
+    "label": "Chịu rét cho quaTốnSức -8Đượcgiữ lại 20 lượng bạcKèmnhiễm ph",
+    "picked": true
+   },
+   {
+    "buoi": 197,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 198,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 199,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 208,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 213,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Ở đây có 1 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 219,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Phòng của ta · Ở đây có 1 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 268,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 0Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 268,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 269,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 0Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 269,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 272,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Đào Diệp hầu thayRất vữngT",
+    "picked": false
+   },
+   {
+    "buoi": 276,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Đào Diệp hầu thayRất vữngT",
+    "picked": true
+   },
+   {
+    "buoi": 309,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Huệ Tâm hầu thayRất vữngTố",
+    "picked": false
+   },
+   {
+    "buoi": 311,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 311,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 313,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+    "label": "Lễ nghiLễ nghiKhảo hạch tấn phongRất vữngHoàng hậu Tôn Uyển ",
+    "picked": false
+   },
+   {
+    "buoi": 313,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Huệ Tâm hầu thayRất vữngTố",
+    "picked": false
+   },
+   {
+    "buoi": 317,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 317,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 317,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Huệ Tâm hầu thayRất vữngTố",
+    "picked": true
+   },
+   {
+    "buoi": 326,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Tử Đằng hầu thayRất vữngTố",
+    "picked": true
+   },
+   {
+    "buoi": 330,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Tố Trân hầu thayRất vữngTố",
+    "picked": false
+   },
+   {
+    "buoi": 334,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 334,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 334,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Tố Trân hầu thayRất vữngTố",
+    "picked": false
+   },
+   {
+    "buoi": 338,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 338,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 346,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Tố Trân hầu thayRất vữngTố",
+    "picked": false
+   },
+   {
+    "buoi": 347,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 4 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 348,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 348,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 348,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 349,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 350,
+    "y": 3,
+    "rank": 2,
+    "screen": ".mapsc «»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 352,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 353,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 354,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 355,
+    "y": 3,
+    "rank": 2,
+    "screen": ".mapsc «»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 355,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Tố Trân hầu thayRất vữngTố",
+    "picked": false
+   },
+   {
+    "buoi": 363,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Tố Trân hầu thayRất vữngTố",
+    "picked": false
+   },
+   {
+    "buoi": 364,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 364,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 367,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Tố Trân hầu thayRất vữngTố",
+    "picked": false
+   },
+   {
+    "buoi": 368,
+    "y": 3,
+    "rank": 2,
+    "screen": ".mapsc «»",
+    "label": "lá phong rơi",
+    "picked": true
+   },
+   {
+    "buoi": 369,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Ngự thiện phòng · Ở đây còn 1 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 370,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Ngự thiện phòng · Ở đây còn 1 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 372,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 372,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 374,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 375,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 380,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Tố Trân hầu thayRất vữngTố",
+    "picked": false
+   },
+   {
+    "buoi": 383,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 384,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 387,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thái y viện · Ở đây còn 2 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 387,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thái y viện · Ở đây còn 2 người.»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 387,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thái y viện · Ở đây còn 2 người.»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 388,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Thái y viện · Ở đây còn 1 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 388,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Tố Trân hầu thayRất vữngTố",
+    "picked": true
+   },
+   {
+    "buoi": 397,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Ngọc Thanh các · Ở đây còn 5 người.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 408,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 408,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 408,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Lưu Chu hầu thayRất vữngTố",
+    "picked": true
+   },
+   {
+    "buoi": 414,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Lịch tháng»",
+    "label": "ngày 20: Hết hạn khảo hạch tấn phong",
+    "picked": false
+   },
+   {
+    "buoi": 415,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Kính sự phòng · Ở đây còn 1 người.»",
+    "label": "Lễ nghiLễ nghiKhảo hạch tấn phongRất vữngHoàng hậu Tôn Uyển ",
+    "picked": false
+   },
+   {
+    "buoi": 416,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Kính sự phòng · Ở đây còn 2 người.»",
+    "label": "Lễ nghiLễ nghiKhảo hạch tấn phongRất vữngHoàng hậu Tôn Uyển ",
+    "picked": false
+   },
+   {
+    "buoi": 418,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 418,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 421,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Đại hàn, tuyết lớn»",
+    "label": "Chịu rét cho quaTốnSức -8Đượcgiữ lại 20 lượng bạcKèmnhiễm ph",
+    "picked": true
+   },
+   {
+    "buoi": 424,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 1Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 424,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 424,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Lưu Chu hầu thayRất vữngTố",
+    "picked": true
+   },
+   {
+    "buoi": 425,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 2Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 425,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 433,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 2Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 433,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 433,
+    "y": 3,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Lễ nghiLễ nghiKhảo hạch tấn phongRất vữngQuan Nội vụ phủ khả",
+    "picked": false
+   },
+   {
+    "buoi": 437,
+    "y": 3,
+    "rank": 2,
+    "screen": ".dlg «Lịch tháng»",
+    "label": "ngày 20: Hết hạn khảo hạch tấn phong",
+    "picked": false
+   },
+   {
+    "buoi": 449,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 2Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 449,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 450,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Lưu Chu hầu thayRất vữngTố",
+    "picked": false
+   },
+   {
+    "buoi": 452,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Lễ nghiLễ nghiKhảo hạch tấn phongRất vữngQuan Nội vụ phủ khả",
+    "picked": false
+   },
+   {
+    "buoi": 458,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Lưu Chu hầu thayRất vữngTố",
+    "picked": false
+   },
+   {
+    "buoi": 470,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Lưu Chu hầu thayRất vữngTố",
+    "picked": true
+   },
+   {
+    "buoi": 487,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 2Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 487,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 497,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Lễ nghiLễ nghiKhảo hạch tấn phongRất vữngQuan Nội vụ phủ khả",
+    "picked": true
+   },
+   {
+    "buoi": 507,
+    "y": 4,
+    "rank": 2,
+    "screen": "#kmrew «»",
+    "label": "ThườngSắc phongChiếu sắc phong hiệu của Hoàng thượng · không",
+    "picked": false
+   },
+   {
+    "buoi": 507,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Sắc phong · Kỷ vật",
+    "picked": false
+   },
+   {
+    "buoi": 520,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Không gặp ai.»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 2Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 520,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Không gặp ai.»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 527,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 528,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 529,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 531,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "lá phong rơi",
+    "picked": true
+   },
+   {
+    "buoi": 532,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 533,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Không gặp ai.»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 539,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Vương Ngọc Tranh hầu thayR",
+    "picked": false
+   },
+   {
+    "buoi": 545,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 546,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 547,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 2Triều ",
+    "picked": false
+   },
+   {
+    "buoi": 547,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Sắc phong",
+    "picked": false
+   },
+   {
+    "buoi": 547,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Cảnh Thăng",
+    "picked": false
+   },
+   {
+    "buoi": 547,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Vương Ngọc Tranh hầu thayR",
+    "picked": false
+   },
+   {
+    "buoi": 548,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 549,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 550,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 552,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 552,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 553,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 5 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 553,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 5 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 554,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 555,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 556,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 557,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 558,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 559,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": true
+   },
+   {
+    "buoi": 560,
+    "y": 4,
+    "rank": 2,
+    "screen": ".mapsc «»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 560,
+    "y": 4,
+    "rank": 2,
+    "screen": ".mapsc «»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 561,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 561,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 562,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 562,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 563,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 563,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 564,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 564,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 565,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 566,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 567,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 568,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 569,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 570,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 571,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Phong hàn · nhẹ",
+    "picked": false
+   },
+   {
+    "buoi": 572,
+    "y": 4,
+    "rank": 2,
+    "screen": "#kmrew «»",
+    "label": "ThườngSắc phongChiếu sắc phong hiệu của Hoàng thượng · không",
+    "picked": false
+   },
+   {
+    "buoi": 574,
+    "y": 4,
+    "rank": 2,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Cảnh Thăng",
+    "picked": false
+   },
+   {
+    "buoi": 587,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 1 ngư»",
+    "label": "Cảnh Thăng",
+    "picked": false
+   },
+   {
+    "buoi": 587,
+    "y": 4,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Vương Ngọc Tranh hầu thayR",
+    "picked": true
+   },
+   {
+    "buoi": 590,
+    "y": 4,
+    "rank": 1,
+    "screen": "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 2 ngư»",
+    "label": "Cảnh Thăng",
+    "picked": false
+   },
+   {
+    "buoi": 595,
+    "y": 4,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Vương Ngọc Tranh hầu thayR",
+    "picked": false
+   },
+   {
+    "buoi": 607,
+    "y": 4,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Vương Ngọc Tranh hầu thayR",
+    "picked": false
+   },
+   {
+    "buoi": 611,
+    "y": 5,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Vương Ngọc Tranh hầu thayR",
+    "picked": false
+   },
+   {
+    "buoi": 623,
+    "y": 5,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Chu Châu Nhi hầu thayRất v",
+    "picked": true
+   },
+   {
+    "buoi": 627,
+    "y": 5,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Chu Châu Nhi hầu thayRất v",
+    "picked": true
+   },
+   {
+    "buoi": 631,
+    "y": 5,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Chu Châu Nhi hầu thayRất v",
+    "picked": true
+   },
+   {
+    "buoi": 634,
+    "y": 5,
+    "rank": 1,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 6 người»",
+    "label": "Cảnh Thăng",
+    "picked": false
+   },
+   {
+    "buoi": 635,
+    "y": 5,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Chu Châu Nhi hầu thayRất v",
+    "picked": false
+   },
+   {
+    "buoi": 643,
+    "y": 5,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Chu Châu Nhi hầu thayRất v",
+    "picked": false
+   },
+   {
+    "buoi": 660,
+    "y": 5,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Chu Châu Nhi hầu thayRất v",
+    "picked": false
+   },
+   {
+    "buoi": 661,
+    "y": 5,
+    "rank": 1,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 3 người»",
+    "label": "Cảnh Thăng",
+    "picked": false
+   },
+   {
+    "buoi": 664,
+    "y": 5,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Chu Châu Nhi hầu thayRất v",
+    "picked": true
+   },
+   {
+    "buoi": 674,
+    "y": 5,
+    "rank": 1,
+    "screen": "#kg82 «»",
+    "label": "Đặt vào hương, phấnGhi chúkhông hợp đề Cổ phong",
+    "picked": false
+   },
+   {
+    "buoi": 674,
+    "y": 5,
+    "rank": 1,
+    "screen": "#kg82 «»",
+    "label": "Đặt vào áoĐượchợp đề Cổ phong",
+    "picked": false
+   },
+   {
+    "buoi": 674,
+    "y": 5,
+    "rank": 1,
+    "screen": "#kg82 «»",
+    "label": "Đặt vào cài tócĐượchợp đề Cổ phong",
+    "picked": false
+   },
+   {
+    "buoi": 674,
+    "y": 5,
+    "rank": 1,
+    "screen": "#kg82 «»",
+    "label": "Đặt vào cài tócGhi chúkhông hợp đề Cổ phong",
+    "picked": false
+   },
+   {
+    "buoi": 712,
+    "y": 5,
+    "rank": 1,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 713,
+    "y": 5,
+    "rank": 1,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 714,
+    "y": 5,
+    "rank": 1,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 4 người»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 715,
+    "y": 5,
+    "rank": 1,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 3 người»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 716,
+    "y": 5,
+    "rank": 1,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 5 người»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 719,
+    "y": 5,
+    "rank": 1,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 720,
+    "y": 5,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Chu Châu Nhi hầu thayRất v",
+    "picked": false
+   },
+   {
+    "buoi": 721,
+    "y": 5,
+    "rank": 1,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 724,
+    "y": 5,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Chu Châu Nhi hầu thayRất v",
+    "picked": false
+   },
+   {
+    "buoi": 729,
+    "y": 5,
+    "rank": 1,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 4 người»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 730,
+    "y": 5,
+    "rank": 1,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 4 người»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 731,
+    "y": 5,
+    "rank": 1,
+    "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người»",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 740,
+    "y": 5,
+    "rank": 1,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Chu Châu Nhi hầu thayRất v",
+    "picked": false
+   },
+   {
+    "buoi": 768,
+    "y": 5,
+    "rank": 0,
+    "screen": ".dlg «Bị thu hiệu ban»",
+    "label": "ThườngSắc phong",
+    "picked": true
+   },
+   {
+    "buoi": 857,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 873,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 874,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 877,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 878,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 886,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 887,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 888,
+    "y": 6,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   }
+  ],
+  "t": {
+   "total": 10584076
+  },
+  "unit": "E-S6",
+  "row": "R6·lover·2:1847542930 (rerun on LIVE github.io)",
+  "game": "github.io LIVE, started ~19:3xZ on Build 4763d410aa0d; site updated mid-life to 0dc642a71578 and 13f84c70f2a3; harness b4b181f8 (no resume)",
+  "audit": "VALID (Lãnh cung age 23, real taps, github.io); mixed builds noted — COUNTED"
  }
 ]
