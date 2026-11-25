@@ -1,4 +1,4 @@
-# REVIEW — review/temper-outburst 394e6ea6 (BIG tier, seat T1) — VERDICT: FAIL (3 blocking, all small)
+# REVIEW — review/temper-outburst 394e6ea6 (BIG tier, seat T1) — VERDICT r1: FAIL (3 blocking) → r2: PASS 6b85187e
 
 PRIORITY #1 CHECK: OD 25/11 ~05:45Z (1) + ~08:05Z read verbatim | main 9f72524b jemoact.js eaMeOut/eaPick/R_/BAL.ea, jfeel.js feelActTick/feelDo/BAL.feel.act, jbal2.js BAL.pm.val | review/temper-outburst 394e6ea6 (base = origin/main 9f72524b, LIVE has not moved) | claims D ROOT seat T1 (worker session_01D3E3NZEbGABqJK79fgHJ5q). Rules read: START_CORE (18 laws), START_WORKER, START_REVIEWER, brief D-temper-robot-0725 COMMON + SEAT T1, temper-design.md, temper-outburst.md.
 
@@ -41,3 +41,24 @@ Not for this PASS. The guarantee is in code (BAL.ea.pick.cap danh 6 / duc 3 / hh
 ## Next
 Worker fixes F1–F3 (+ N1, N2) on review/temper-outburst, reruns temper-equal.js + temper-outburst.js (Fold + iPad) and reports READY; re-review is a short delta check of eaOptX / eaPx / BAL.ea.fx + the two scripts.
 Scratch shots: /home/user/wt/rv-temper-shots (outside git; deleted with this verdict).
+
+## ROUND 2 — review/temper-outburst 6b85187e (T1b) — VERDICT: PASS (sha below)
+PRIORITY #1 CHECK: reports/temper-outburst.md «ROUND 2» + «G4 … real-tap» read | delta 394e6ea6..6b85187e (jemoact eaPx lu / khac branch / eaKhacOk / BAL.ea.fx mang·danh·khac / BAL.ea.hoi.bac, jfeel caugat, own build) | origin/main 9f72524b = branch base (LIVE has not moved) | claims T1b session_01D3E3NaH1eX32YRAhiQCYnb.
+
+| Finding | Check | Result |
+|---|---|---|
+| F1 signs | temper-signs.js 17 rows 0 wrong; INDEPENDENT check (reviewer script: run eaDo with a real rival, read the real Oán / ghen): khoe ghen +6 shown = +6 applied on every rival; cham / kexau / khac shown «+3 / +10 / +10», applied +2 / +7 / +7 — the sign is right; the size is the target's own nết factor (j28 `persF(x,"slight")` wrapper on oanAdd, game-wide, every Oán number in the game is shown before it) → NOT this branch, see note A | FIXED |
+| F2 khac | eaPx follows eaDo's `hi` branch: her → «X sẽ đến hỏi tội (đền Bạc 16, Danh −1)» priced by the eaHoi Tạ lỗi bill; NPC → hiOan 15, and an NPC never takes it where eaDo would punish (eaKhacOk) | FIXED |
+| F3 harshness | Cáu gắt 4 ≤ Mắng 4 < Đánh 5 + Danh −1 | FIXED |
+| N1 own build | quickcheck step 1 passed (the sha holds its build) | FIXED |
+| N2 vent | hot −92 → −77 Fold / −82 → −67 iPad, jfeel −76 → −61 (= pick.vent 15) | FIXED |
+
+Gates on 6b85187e: temper-equal 36 rows fail 0, 330 cells (0 under 3, 0 spread) · temper-signs 0/17 · temper-outburst.js real taps Fold 755x1000@2 + iPad 1180x820@2 PASS (0 dead, 0 errors; shots looked at: Fold timid 4 rows Khóc / Nuốt giận / Bỏ bữa / Mắng with Tốn / Được / Mất; the iPad jfeel shot is taken while the frame fades in — data checked in the json, 4 options) · emotion-acts @Fold FAIL 5 = same pre-existing set (gian, vui, scoldlive, hit, lock), gen/out/hoi/ext/oldsave ok · one-core PASS · quickcheck PASS · open 2041 ms · old save ok · perf new/live render 251/302, tab 716/582, buổi 1449/3256 · core gates PASS.
+
+Notes (non-blocking, for D):
+A. Every Oán number shown in the game (events, options) is the base before the target's nết factor (persF slight: a forgiving person takes less). Game-wide family, not this branch → WORKLIST candidate «show the Oán the target will really take» or accept as hidden nết (law 6b: people differ). 
+B. dev/test/robot-rt.js + realtap.js on this branch = review/robot-realtap 4523381f copies; review/robot-realtap has moved on → when both land, the lander keeps robot-realtap's newer files (add/add conflict, take theirs).
+C. G4 arms (temper-hh-rt.js on the real-tap harness) are running on T1b's box on build fca15148; not needed for this PASS (caps in code); D reads their numbers before T2 (perception) goes live.
+D. Seen in passing (iPad Hành sự stage, not this branch): two figure name labels overlap at the left edge («Cung nữ … / Mã Anh Ninh»).
+
+PASS sha: 6b85187e (ancestor = origin/main 9f72524b, fast-forward ready).
