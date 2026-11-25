@@ -78,7 +78,9 @@ function dqPull(){try{if(!dqUiC()||!Q.length||DQ.user||!dqActEl())return;const D
    a render that leaves such a queue) paints it through the full showModal chain (so every gate — #dawn, activity, night flip — still holds it on
    screen-visible terms and re-arms), never only render(): a hidden card never blocks «Sang buổi» unseen. */
 function dqQHidden(){try{if(!Q.length||(S&&S.mg))return false;const M=$("modal");if(!M||!dqHidden(M))return false;if(dqPlaying())return false;
-  const D=window.DF;if(D&&D.F&&Q[0]&&D.encM===Q[0])return false;return true}catch(e){return false}}
+  const D=window.DF;if(D&&D.F&&Q[0]&&D.encM===Q[0])return false;
+  /* a visitor card waiting (≤ 4 s, its own poll repaints) for her face to load before the jdfv encounter scene (rv-visitor-fix 1) is being painted */
+  if(Q[0]&&Q[0].__dfWait===1)return false;return true}catch(e){return false}}
 function dqPaintQ(){try{if(!dqUiC()||!dqQHidden())return false;DQ.stat.painted++;DQ.ra=0;showModal();if(dqQHidden()&&!DQ.mt)dqArmModal();return true}catch(e){console.error("dayq paint",e);return false}}
 /* the night gate's exception (jnf showModal): the «Tin trong cung» card on top that jdayq newsHold holds the queued (NOT yet on screen) flip scene
    for. It paints first (≤ one poll), then the flip plays and the choice follows it at once (owner OD 16/11 22:45Z «no dialog under / over the flip
