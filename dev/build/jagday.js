@@ -42,7 +42,7 @@ function agDaySlot(id,b){const D=agDz();if(D.d!==wk())return null;const L=D.P[id
  const e0=agEmpAt,t0=agThAt,a0=agAt;
  agEmpAt=function(kh){if(AG.cB!=null){const s=agDaySlot("emp",AG.cB);if(s)return s.pl}return e0.apply(this,arguments)};
  agThAt=function(kh){if(AG.cB!=null){const s=agDaySlot("th",AG.cB);if(s)return s.pl}return t0.apply(this,arguments)};
- agAt=function(p,kh){if(AG.cB!=null&&p&&p!==S){const id=ledgerId(p);const s=id&&agDaySlot(id,AG.cB);if(s)return s.pl}return a0.apply(this,arguments)};
+ agAt=function(p,kh){if(AG.cB!=null&&p&&p!==S&&!p.coop/* the co-op friend: jagent agAt (her real place) */){const id=ledgerId(p);const s=id&&agDaySlot(id,AG.cB);if(s)return s.pl}return a0.apply(this,arguments)};
 })();
 /* the options of a person's group: the registered providers (+ the consort's jagent options) */
 function agOptsG(p,N,need){const g=agGrp(p);let O=[];

@@ -44,6 +44,8 @@ const W_KEYS=["year","month","tuan","turn","emp","thDead","thAge","thO","thF","c
 const HOST_ONLY=["tn","thIll","cm","men","menG2","wxDay","nmReg","nmOrd"];  /* wxDay: weather-khac, the host rolls the day (jwxk) */  /* tn: B2 the Emperor's night (host) */   /* the guest never writes these: her toCanon copies them from the room base */
 const CM_P=["seen","spy","thDrop","hhDrop"],MEN_P=["tinh","letters","trysts","knowsMe","af","grudge","grudgeN","debt","seen","oan"];/* oan: his oán toward her (rel-men-servants, j9) — hers, like af */
 const REFF=["resHead","spyFor","lover","mid","owner","by","who","tgt","from","to"];   /* fields whose "me" value names the viewer */
+/* where a person LIVES (jpal palFix writes it): ONE list for the pos relay (houseWire/houseIn, below) and jcoophl (world housing is the host's) */
+const HOUSE=["resHead","resHall","pal","palLone","palWait"];
 const STAT=["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","mat","confined","shield","block"];
 const LOOK=["face","fc","fk","fcKeep","fid","pid","age","sac","tai","tamco","duc","arts","pal","resHead","dress","ill","maid","lot","hieu","titleWorn","dh","toilette","wd","mkKnow"];  /* toilette + wd: her look of the day and the clothes she wears (jtoil toilFriendRec / toilDress, diemtrang-coop-look); hieu + titleWorn + dh: her hiệu and worn title show on the friend too (review/title-sys) */
 const J=x=>x==null?x:JSON.parse(JSON.stringify(x));
@@ -84,6 +86,10 @@ function buildFriend(P,mine){if(!P||!P.S||P.dead||P.S.dead||friendHome(P))return
  const v={id:fp(),coop:true,name:P.name||s.name,rank:s.rank||0,queen:(s.rank||0)>=7,trait:"Khiêm nhường",malice:15,rel,oan,rl,ro,ev:((mine||S||{}).cev||{})[fp()]||0,
   evm:{me:cev[mp]||0},alive:true,out:!!s.out,kids:[],ghen:0,pg:0,nights:0,inv:[],staff:[],nightLog:[]};
  for(const k of STAT)if(s[k]!=null)v[k]=s[k];for(const k of LOOK)if(s[k]!=null)v[k]=s[k];
+ /* robot-coop-fix-3 r5 (A/B r1 host save «R[4].resHall tay → dong» ×6, the reverse of r3's dong → tay): her WHOLE house rides her blob (LOOK
+    held only pal / resHead: the rebuilt entry had no resHall / palLone / palWait, so the merged week's deser palFix gave an NPC her side hall,
+    keepFriendPos then put her relayed hall back = two in one hall in every save until the next palFix; a save load moved the NPC) */
+ for(const k of HOUSE)if(s[k]!=null)v[k]=J(s[k]);
  /* B r1 item 6 (root, both paths): "hh" (the Empress's regard) is derived from the Empress's row toward this entry (j24 hhGet). A plain copied
     number was "migrated" by j24 hhBind at the next consorts() (blended into that row: the Empress's row toward the other seat moved every
     rebirth / every rebuild of the entry). Bound here, before anything sees the entry: no migration; the week write-back never sends it back. */
@@ -97,6 +103,8 @@ function buildFriend(P,mine){if(!P||!P.S||P.dead||P.S.dead||friendHome(P))return
     Display copies only: what an act does to them goes to her through `res` (item / kid ops), never through the week write-back. */
  v.inv=bagOf(s.inv);v.kids=kidsCopy(s.kids);if(s.preg&&!s.hidden){v.preg=s.preg;if(s.fake)v.fake=s.fake}v.fx7=J((s.j71&&s.j71.fx)||null);
  mapMe(v,false,mp);v.id=fp();
+ /* …and her last relayed house (same life), BEFORE anything on this seat (deser palFix) houses anyone around her: one writer of her house */
+ try{const m=CW.fpos;if(m&&m.hs&&(!m.name||m.name===v.name))houseIn(v,m.hs)}catch(e){}
  v.__b=J(Object.assign({},...STAT.map(k=>({[k]:k==="hh"?hhSafe(v):v[k]})),{rel:v.rel,oan:v.oan,rl:v.rl,ro:v.ro,em:v.evm.me,out:v.out,rank:v.rank,ill:v.ill||null,fx:fxSnap(v)}));
  return v}
 function buildFriendSrv(P){const s=P.S;return {sid:fp(),coop:true,name:P.name||s.name,role:"maid",fc:s.fc,fk:s.fk,face:0,hue:0,age:s.age||BAL.ageMin,loyal:60,
@@ -277,7 +285,7 @@ function lifeRekey(){const mine=new Set([S.maid].concat(S.staff||[],S.kids||[],(
 CW.lifeRekey=()=>lifeRekey();/* test hook (dev/test/sid-rekey-known.js) */
 CW.attach=()=>{const C=CW.dying||CW.base;if(C)attach(C)};
 /* jcoopthin (thin guest, part A) reads the world split and the friend-entry builders from here: one source */
-CW.X={W_KEYS,HOST_ONLY,CM_P,MEN_P,REFF,STAT,mapMe,buildFriend,buildFriendSrv,friendSrv,myBlob,pullFriend,pushFriend,isF,J};
+CW.X={W_KEYS,HOST_ONLY,CM_P,MEN_P,REFF,STAT,HOUSE,mapMe,buildFriend,buildFriendSrv,friendSrv,myBlob,pullFriend,pushFriend,isF,J};
 CW.sendMe=P=>sendMe(P);CW.friendHome=friendHome;
 
 /* ---------- sending ---------- */
@@ -406,8 +414,33 @@ CW.famPack=famPack;
 function sendPos(){if(CW.ctx||!CW.on||!CW.p2||!S||S.dead)return;const st={};for(const x of LIVE)st[x]=S[x];
  const P=famPack();if(P.h!==CW.famSentH)sendFam(P);
  const tl=S.toilette&&S.toilette.wk===wk()?J(S.toilette):null,wd=S.wd?J(S.wd):null;const fx={};for(const x of FXL)fx[x]=S[x]==null?null:J(S[x]);const fxs=JSON.stringify(fx);/* her look of the day + worn clothes, live (diemtrang-coop-look) */
- const k=[wk(),S.buoi||0,S.place||"home",used,LIVE.map(x=>S[x]).join("/"),!!S.out,S.name,P.h,tl?JSON.stringify(tl):"",wd?JSON.stringify(wd):"",fxs].join(":");if(k===CW.posKey)return;CW.posKey=k;
- sentOr(COOP.send({t:"pos",place:S.place||"home",khac:used,week:wk(),buoi:S.buoi||0,st,fh:P.h,out:!!S.out,alive:!S.dead,name:S.name,life:CW.life||0,tl,wd,fx}),()=>{if(CW.posKey===k)CW.posKey=""})}
+ const hs=houseWire(),hss=JSON.stringify(hs);
+ const k=[wk(),S.buoi||0,S.place||"home",used,LIVE.map(x=>S[x]).join("/"),!!S.out,S.name,P.h,tl?JSON.stringify(tl):"",wd?JSON.stringify(wd):"",fxs,hss].join(":");if(k===CW.posKey)return;CW.posKey=k;
+ sentOr(COOP.send({t:"pos",place:S.place||"home",khac:used,week:wk(),buoi:S.buoi||0,st,fh:P.h,out:!!S.out,alive:!S.dead,name:S.name,life:CW.life||0,tl,wd,fx,hs}),()=>{if(CW.posKey===k)CW.posKey=""})}
+/* robot-coop-fix-3 (robot10-coop coop-pos «X sees the friend at r<N>, she is at <place>»; law 6b real people): ONE cause, her HOUSE. Her place
+   on the other seat is S.where[her id] = her relayed place, and «home» / no relay this buổi = palaceOf(her entry) — which reads her entry's
+   housing (resHead / resHall / pal / palLone / palWait). That housing reached the other seat only inside her character blob (new life) or the
+   merged week, and that seat's own palFix (render / month / deser) housed her entry like an NPC (a house over the cap evicts «the newest
+   extras», a side hall is re-picked, j95cCap drops the last resident) → her entry said «lives at r5» while she lives elsewhere. Now her house
+   rides the pos relay like her live stats (canon ids: "me" = her pid; the reader maps its own pid to "me"); no seat's palFix writes her entry's
+   housing (jpal / j95cCap: a player, like S, claimed first); her last relayed house is put back at every keepFriendPos (a merged week rebuilds
+   her entry from her blob). Display only: the week write-back never sends a house back (jcoophl keeps the room base's housing). */
+/* r5 (A/B r2 SWAP=1 coop-pos «host sees guest at r4, guest is at P:b»: her S.resHead still named head 4 while HER seat no longer honoured it —
+   houseOf(S) = her own place (head gone / out / below Tần on her seat, or she is a chủ vị herself) — and the raw id went out: the other seat,
+   where head 4 still stands, housed her at r4). ONE rule for both seats: the relay carries the house her own seat resolves (j9 houseOf); a
+   resHead her seat does not honour goes out as none (her own palace), so palaceOf(her entry) on the other seat = where she really lives */
+function houseWire(){const o={};for(const x of HOUSE)o[x]=S[x]==null?null:J(S[x]);
+ try{if(o.resHead!=null&&houseOf(S)===key(S)){o.resHead=null;o.resHall=null}}catch(e){}return mapMe(o,true,me())}
+function houseIn(f,hs){if(!hs||typeof hs!=="object")return false;const o=mapMe(J(hs),false,me());let ch=false;
+ for(const x of HOUSE){if(!(x in o))continue;if(JSON.stringify(f[x]==null?null:f[x])!==JSON.stringify(o[x])){if(o[x]==null)delete f[x];else f[x]=o[x];ch=true}}return ch}
+/* her last relayed house onto her entry again (after anything on this seat re-housed it); same life only (a reborn friend has a new entry) */
+function friendHouse(){if(!CW.on||!S)return false;const f=friendEntry(),m=CW.fpos;if(!f||!m||!m.hs||(m.name&&m.name!==f.name))return false;return houseSettle(houseIn(f,m.hs))}
+/* robot-coop-fix-3 r5 (same family): her house changed on this seat (relay) → this seat's palFix runs NOW, so an NPC / my own player sharing her
+   palace or side hall gives way at once (host: the NPC moves and jcoophl sends the move; guest: her own S moves, world people stay the host's).
+   Before: nothing re-housed until the map / week end, every save in between held two people in one hall and a save load moved one of them.
+   Not inside a rebuild (fromCanon: its deser runs palFix itself) nor a thin seat step (CW.ctx: S is the other seat's) */
+function houseSettle(ch){if(ch&&CW.on&&!CW.inFC&&!CW.ctx&&S&&!S.dead&&typeof palFix==="function")try{palFix()}catch(e){console.error("house settle",e)}return ch}
+CW.houseWire=houseWire;CW.houseIn=houseIn;CW.friendHouse=friendHouse;
 /* her own numbers, live: shown on her entry; the week write-back baseline moves with them so the merge never counts them as mine */
 function liveStats(m){const f=friendEntry();if(!f||!m.st||(m.name&&m.name!==f.name))return false;let ch=false;
  for(const x of LIVE){const v=m.st[x];if(typeof v!=="number")continue;if(x==="rank"&&f.queen)continue;if(f[x]!==v){f[x]=v;ch=true}if(f.__b&&x in f.__b)f.__b[x]=v}
@@ -417,6 +450,7 @@ function liveStats(m){const f=friendEntry();if(!f||!m.st||(m.name&&m.name!==f.na
  if(m.fx&&typeof m.fx==="object"){const bx=f.__b&&f.__b.fx;for(const x of FXL){if(!(x in m.fx))continue;if(bx&&!fxEq(f[x],bx[x]))continue;/* a mark this seat put on her this week waits for the week write-back */
   const v=m.fx[x];if(!fxEq(v,f[x])){f[x]=J(v);ch=true}if(bx)bx[x]=v==null?null:J(v)}}/* her face marks, live (review/looks-2) */
  if(famIn(f,m.fam,m.pets))ch=true;
+ if(houseSettle(houseIn(f,m.hs)))ch=true;
  return ch}
 /* her bag / kids / pregnancy / festival entries / pets onto her entry (inline pos of an old client, or the ctm-fam relay) */
 function famIn(f,fm,pets){let ch=false;
@@ -436,7 +470,11 @@ function herPl7(){try{if(!host()||!(CW.thin&&CW.thin.on&&CW.thin.on(7)))return n
 CW.herPl7=herPl7;
 function onPos(m){if(!CW.on||m.from===CW.seat||!S)return;CW.fpos=m;const pl=mapPlace(herPl7()||m.place);const f=friendEntry();if(!f)return;
  let sc=liveStats(m);if(typeof m.fh==="string"){if(famTake())sc=true;if(CW.famGotH!==m.fh)famAsk(m.fh)}S.where=S.where||{};const was=S.where[f.id];S.where[f.id]=pl||palaceOf(f);if(was!==S.where[f.id]||sc){refreshHere();presAll(true);if(!Q.length)render()}}
-function keepFriendPos(){if(!CW.on||!S||!S.where)return;const f=friendEntry();if(!f)return;if(CW.ctx){/* part E: her step on the host: the host's own place */const o=CW.thin&&CW.thin.outerS;S.where[f.id]=o&&o.place&&o.place!=="home"?mapPlace(o.place):palaceOf(f);return}const h7=herPl7();const pl=h7?mapPlace(h7):CW.fpos&&CW.fpos.week===wk()&&CW.fpos.buoi===(S.buoi||0)?mapPlace(CW.fpos.place):null;S.where[f.id]=pl||palaceOf(f)}
+function keepFriendPos(){if(!CW.on||!S||!S.where)return;const f=friendEntry();if(!f)return;friendHouse();/* part E (CW.ctx: her step on the host = the host's own place) and her relayed place: ONE rule, friendPl */S.where[f.id]=friendPl(f)}
+/* where the friend is on this seat, ONE rule (keepFriendPos; onPos writes the same from the message it holds): part E (CW.ctx) the host's own
+   place; else her relayed place this buổi (herPl7 at level 7); else her palace (palaceOf her entry = her relayed house, above). j9 whereOf reads
+   S.where first, so every reader (people at a place, who sees whom, catches) gets this. (j95's roster never runs in co-op: j95on() = !COOPW.on.) */
+function friendPl(f){if(CW.ctx){const o=CW.thin&&CW.thin.outerS;return o&&o.place&&o.place!=="home"?mapPlace(o.place):palaceOf(f)}const h7=herPl7();const pl=h7?mapPlace(h7):CW.fpos&&CW.fpos.week===wk()&&CW.fpos.buoi===(S.buoi||0)?mapPlace(CW.fpos.place):null;return pl||palaceOf(f)}
 CW.keepFriendPos=keepFriendPos;CW.refreshHere=()=>refreshHere();
 function onBuoi(m){T("onBuoi "+m.week+"."+m.buoi+" me "+wk()+"."+(S&&S.buoi)+" Q"+Q.length+(S&&S.mg?" mg":""));if(!CW.on||!S||eW())return;CW.bend=false;CW.wantB=null;drainAg();
  /* the room moved on: if a dialog is still open, step as soon as it is closed */

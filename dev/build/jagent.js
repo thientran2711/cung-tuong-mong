@@ -93,7 +93,9 @@ const AGWHY={sung:"muốn được Hoàng thượng để ý hơn",th:"muốn đ
 
 /* ---------------- OPTIONS: the deeds she could tap if she were the player ---------------- */
 /* place of a person at khắc kh: the ledger when there is one, else her home */
-function agAt(p,kh){const R=agRec();const id=p===S?"me":ledgerId(p);if(R&&id&&R.P[id]&&R.P[id][kh])return R.P[id][kh][0];if(p===S)return"home";if(S.emp&&p===S.emp)return"dtd";if(p==="th")return"tn";return p.out?"lc":palaceOf(p)}
+/* co-op (robot-coop-fix-3 r4, A/B r3 «host sees guest at tn, guest is at tyv»: an NPC's face-to-face harm landed on the friend at the place
+   of HER NPC day plan): the friend is a player — where she is = whereOf (her relayed place, jcoopworld keepFriendPos), never a plan row */
+function agAt(p,kh){if(p&&p.coop&&p!==S)return whereOf(p);const R=agRec();const id=p===S?"me":ledgerId(p);if(R&&id&&R.P[id]&&R.P[id][kh])return R.P[id][kh][0];if(p===S)return"home";if(S.emp&&p===S.emp)return"dtd";if(p==="th")return"tn";return p.out?"lc":palaceOf(p)}
 function agEmpAt(kh){const R=agRec();return R&&R.P.emp?R.P.emp[kh][0]:"dtd"}
 function agThAt(kh){const R=agRec();return R&&R.P.th?R.P.th[kh][0]:"tn"}
 /* the deeds of TW she does for herself (target fixed by the deed) */
