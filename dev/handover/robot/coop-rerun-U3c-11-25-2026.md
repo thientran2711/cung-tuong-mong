@@ -5,3 +5,4 @@ Game = stack review/robot-coop-stack-u3 512cfee6 + own local Worker; harness = r
 | # | room | seed | devices | result |
 |---|---|---|---|---|
 | S1 | BF8G | 44 | Fold/iPad | INVALID: scheduled reload at buổi 20 OK both seats; stuck 15 min at night buổi 27-28 Y1 on host dialog «Sai Thải Hà đi dò la» (VIỆC spy-target choice, cards without ✕; card-body taps open title-chip popup «Trăng soi rèm ngọc»/«Phúc ấm đầy nhà», choice never resolves; unstick reload re-opens it). NEW (not in KNOWN) — game vs nested-chip harness TBD by Foreman B. Dump: review/robot10-coop-saves u3r/BF8G/host-fold-stuck-1-dump.json @363ede66. Also «Tâm trạng · X» Lui dead (known). Run cut at ~30 min. |
+| S2 | DSZG | 45 | Fold/iPad | INVALID: reload at buổi 20 OK both seats; stuck 15 min at buổi ~53-62 Y1 night on «Sai Hoán Bích đi dò la» (same class as S1, repro 2/2; j2.js:189 maidSpy target chooser). Dump: review/robot10-coop-saves u3r/DSZG/host-stuck-1-dump.json @b79e0baa. Run cut at ~60 min. |
