@@ -1,0 +1,115 @@
+{
+ "unit": "U1",
+ "date": "11/25/2026",
+ "game": "review/robot-coop-fix-6 c4163a93 (own local Worker, wrangler dev --local)",
+ "harness": "review/robot-realtap 5edf09f6 + realtap-B-5edf-patch.diff (+U1 ktut r4, olu skip, year-rollover reload)",
+ "valid_lives": 0,
+ "valid_segments": 0,
+ "rooms": [
+  {
+   "code": "2GBH",
+   "start_z": "06:19",
+   "build": "old harness",
+   "result": "INVALID",
+   "cause": "Tâm trạng empty-card loop, buổi 2-3 (cause 5, fixed in fix-6)"
+  },
+  {
+   "code": "RF5E",
+   "start_z": "06:42",
+   "build": "old harness",
+   "result": "INVALID",
+   "cause": "same loop"
+  },
+  {
+   "code": "UT2J",
+   "start_z": "06:48",
+   "build": "c29a6b5b",
+   "result": "INVALID",
+   "cause": "no progress buổi 9 on Tâm trạng panel x2"
+  },
+  {
+   "code": "9TEZ",
+   "start_z": "07:25",
+   "build": "dump patch",
+   "result": "INVALID",
+   "cause": "guest #ktut coach over dawn, host week barrier"
+  },
+  {
+   "code": "QDSJ",
+   "start_z": "07:55",
+   "build": "fix-6 d16c5300",
+   "result": "INVALID",
+   "cause": "guest sent to #title by Escape key (harness)"
+  },
+  {
+   "code": "SHT3",
+   "start_z": "08:12",
+   "build": "fix-6",
+   "result": "INVALID",
+   "cause": "aborted at start (patch switch)"
+  },
+  {
+   "code": "DETE",
+   "start_z": "08:14",
+   "build": "fix-6 c4163a93",
+   "result": "INVALID",
+   "cause": "guest #ktut over dawn at buổi 9, host week barrier"
+  },
+  {
+   "code": "NB8G",
+   "start_z": "08:50",
+   "build": "c4163a93+ktut patch",
+   "result": "INVALID",
+   "cause": "host bare #title after unstick reload"
+  },
+  {
+   "code": "3QN3",
+   "start_z": "09:15",
+   "build": "c4163a93",
+   "result": "INVALID",
+   "cause": "aborted (harness base switch to 5edf09f6)"
+  },
+  {
+   "code": "52AR",
+   "start_z": "09:20",
+   "build": "5edf09f6+B patch",
+   "result": "INVALID",
+   "cause": "#ktut «Thỉnh an» over «Kỳ ngộ», buổi 11; ktut r2 patch did not fire (Đã hiểu not in hit list)"
+  },
+  {
+   "code": "QBRF",
+   "start_z": "09:55",
+   "build": "r2",
+   "result": "INVALID",
+   "cause": "same ktut stall"
+  },
+  {
+   "code": "N7XX",
+   "start_z": "10:00",
+   "build": "r3",
+   "result": "INVALID",
+   "cause": "no stuck for 45 min to buổi 13; killed for segment rule (no mid-year reload)"
+  },
+  {
+   "code": "KSPE",
+   "start_z": "10:50",
+   "build": "r3 + midReload",
+   "result": "INVALID",
+   "cause": "#ktut stall 580x «Đã hiểu» (harness re-chose «Đi làm» coach)"
+  },
+  {
+   "code": "ECGF",
+   "start_z": "11:25",
+   "build": "r4",
+   "result": "INVALID",
+   "cause": "start failure: both seats on #title, life never opened"
+  },
+  {
+   "code": "VZ68",
+   "start_z": "11:30",
+   "build": "r4",
+   "result": "INVALID",
+   "cause": "host bend 1.2 f=true loop + host seat offline; guest night 1 + ktut over dawn (new signature)"
+  }
+ ]
+}

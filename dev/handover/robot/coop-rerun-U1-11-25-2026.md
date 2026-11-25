@@ -1,0 +1,23 @@
+# U1 co-op rerun (Foreman B ROOT/child brief) — 11/25/2026
+
+Runner: U1 sonnet co-op rerun runner. Seats: pair 1 host Fold / guest iPad. Header of the running segment: segment 1/U1, seed 114, host Fold / guest iPad, game c4163a93 (+ own Worker), harness 5edf09f6 + B-5edf patch + U1 ktut r4 / olu skip / reload.
+
+## Result so far: 0 valid lives, 0/20 valid segments
+15 rooms started, every one INVALID (harness error or stuck). See the JSON for the per-room table. Dumps (not shots) are in review/robot10-coop-saves u1r/<room>/ (2GBH, 9TEZ, DETE, NB8G, 52AR, VZ68).
+
+## Harness fixes found by this unit (all pushed to handover)
+- room code not read (cbb90e91): regex `Chép mã` (landed by F in c29a6b5b).
+- realtap-U1-ktut-patch.diff -> r2 -> r4 merged into realtap-B-5edf-patch.diff: tap the card's own «Đã hiểu» from the DOM (it is visible but not in the hit list), stop choosing «Đi làm…» after 3 dismissals in a buổi, year-rollover save+reload.
+
+## Findings
+- NOT a bug (withdrawn): «Nguyên do chưa rõ» is the legit mood-seal popover; «Lịch tháng» no-close warning = harness false positive (✕ is in the header).
+- Open signature VZ68 (new): host `bend 1.2 f=true` repeated while guest `night 1 / pull`; guest sees «Đợi hảo hữu trở lại — hảo hữu đang vắng» (host seat online False) with the #ktut «Thỉnh an» coach over the dawn screen.
+- #ktut «Thỉnh an Thái hậu hoặc Hoàng hậu» coach appears at buổi 5–12 over the dawn screen / over a Kỳ ngộ card, no lit card to tap (hole target is not a card).
+
+## Moment log / reviews
+Not written: no life reached an end (rule: review at end of life). Every room was invalid before a life ended.
+
+## HANDOVER block (for the successor of this runner)
+Setup: /home/user/wt/g6 = worktree of review/robot-coop-fix-6 c4163a93 (build_site.sh already run; play.html = index.html + COOP_URL injection to http://127.0.0.1:8787); `cd coop/worker && npx wrangler dev --local --port 8787 --ip 127.0.0.1`; static server `node /tmp/.../static.js` on 8080 (any threaded static server); harness files in g6/dev/test = 5edf09f6 + B-5edf diff.
+Run: `RELOAD_AT=15 node dev/test/robot-rt-coop.js http://127.0.0.1:8080/play.html <out> host=fold guest=ipad kiep=1 seed=<n> tag=<name>` (one room per container). Out dir /home/user/wt/out/u1 (stuck rooms in /home/user/wt/out/stuck).
+Remaining rows: all U1 rows of the RERUN LIST except the STUCK row; U1 now counts in SEGMENTS (MAIN 139): segment 1 running (room 8RQ9).
