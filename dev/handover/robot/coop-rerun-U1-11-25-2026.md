@@ -23,3 +23,9 @@ Run: `RELOAD_AT=15 node dev/test/robot-rt-coop.js http://127.0.0.1:8080/play.htm
 UPDATE 12:35Z (Foreman B child 2 ruling): STOP burning rooms on c4163a93. Successor must use the ONE shared stack review/robot-coop-stack-u3 512cfee6 (= c4163a93 + fix-5-r1 3f672533; rebuild index.html/sw.js with `bash dev/site/build_site.sh`) + harness review/robot-realtap 5edf09f6 + the shared dev/handover/robot/realtap-B-5edf-patch.diff (RELOAD_AT=<buổi> env hook; NO local variants). Label segments «game = stack 512cfee6 (pre-land), PROVISIONAL» until MAIN 140 accepts it. Segment = 2 h real-tap or year 2, 0 stuck, ≥1 save+reload mid-year; U1 order host Fold / guest iPad; use seeds not yet used (used: 101-114; next 115+).
 Last attempts on c4163a93: 1a KSPE (ktut 580x), 1b ECGF (boot flake), 1c VZ68 (cause-3 night loop family, known-fixed-pending-land), 1d 8RQ9 (night loop host «night 2 f=true / pull»), all INVALID. Runner stopped at 12:35Z (context limit), no room running.
 Remaining rows: all U1 rows of the RERUN LIST except the STUCK row; U1 now counts in SEGMENTS (MAIN 139): segment 1 running (room 8RQ9).
+
+## U1b (successor, session_01N1tNP33JueFVZyZyM7LWb6) — depth unknown (get_session not read), START_CTX ~5% of window
+- 25/11 ~12:45Z setup done: worktree /home/user/wt/s3 = review/robot-coop-stack-u3 512cfee6 + harness 5edf09f6 (dev/test realtap.js, robot-rt.js, robot-rt-coop.js) + realtap-B-5edf-patch.diff applied; build_site.sh run; wrangler dev --local :8787; python http.server :8080 serves index.html directly (COOP_URL env injects the Worker, no play.html needed).
+- Run: `COOP_URL=http://127.0.0.1:8787 RELOAD_AT=8,15 node dev/test/robot-rt-coop.js http://127.0.0.1:8080/index.html /home/user/wt/out/u1b host=fold guest=ipad kiep=1 seed=<n> tag=s<n>`.
+- Segment label: «game = stack 512cfee6 (pre-land), PROVISIONAL».
+- Segment 1 started: room EGEN, seed 115, host Fold / guest iPad. 404 CONSOLE lines = CDN assets absent locally (noise).
