@@ -7,6 +7,8 @@
   NEG     a fall (−n): the wrappers scale only a rise → shown == applied
   NOFAC   ghen / tin: no nết factor on apply (ghenN / tinAdd) → shown == applied
   FALL    pvOan's own fallback text inside a try/typeof guard
+  LOY     thiện cảm whose apply on the SAME line is servant loyalty set directly (loyAdd / .loyal) and no affAdd / relAdd:
+          the trust wrapper never runs → shown == applied (review/net-ghen-2, wave 2)
   RAW     oán / thiện cảm toward an NPC holder printed from a bare number → shown ≠ applied when the holder's nết factor ≠ 1
 usage: python3 dev/test/relshow-scan.py [--list] [--fail-raw]   (run from the repo root)"""
 import re,glob,sys,os
@@ -49,13 +51,14 @@ for f in sorted(glob.glob(os.path.join(R,'j*.js'))):
         elif neg:c='NEG'
         elif any(w in code[max(0,m.start()-120):m.end()] for w in WIRE):c='WIRED' if any(w+'(' in m.group(0) or w in code[max(0,m.start()-60):m.start()] for w in WIRE) else ('FALL' if 'typeof pv' in code[max(0,m.start()-120):m.start()] else 'RAW')
         elif her(pre,m.group(1),kind):c='HER'
+        elif kind=='aff' and re.search(r'loyAdd\(|\.loyal\b',code) and not re.search(r'\b(affAdd|relAdd)\(',code):c='LOY'
         else:c='RAW'
         rows.append((b,i,kind,c,m.group(0)[:70]))
 from collections import Counter
 C=Counter((k,c) for _,_,k,c,_ in rows)
-print('| kind | WIRED | HER | NEG | NOFAC | FALL | RAW | total |\n|---|---|---|---|---|---|---|---|')
+print('| kind | WIRED | HER | NEG | NOFAC | FALL | LOY | RAW | total |\n|---|---|---|---|---|---|---|---|---|')
 for k in('oan','aff','gt'):
-  n=[C[(k,c)] for c in('WIRED','HER','NEG','NOFAC','FALL','RAW')];print(f'| {k} | '+' | '.join(map(str,n))+f' | {sum(n)} |')
+  n=[C[(k,c)] for c in('WIRED','HER','NEG','NOFAC','FALL','LOY','RAW')];print(f'| {k} | '+' | '.join(map(str,n))+f' | {sum(n)} |')
 if '--list' in args:
   for r in rows:
     if r[3]=='RAW':print(f'{r[0]}:{r[1]} {r[2]} RAW {r[4]}')
