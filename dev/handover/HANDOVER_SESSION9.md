@@ -3279,3 +3279,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (03:05Z) KK25 KIT READY kit-map-marker 92b35e3d (.mspot.here z-index 30; test FAIL main/PASS branch) → B kit rv with real painting + area map.
 - (03:10Z) DAYQ-4 LAND READY BIG day-queue-2 38290f61; MAIN LOOKED dq4 pair (mini-game intro alone, visitor after) OK → BIG rv session_01V1ZZH2EFxJ9XyhsiDsFATZ (opus).
 - (03:12Z) LIVE 345eb929 (sfx-instant) 02:09Z; ROLLBACK 5d4f722f. Visitor 7dbfe98a gates green → auto-lands after 4232709a. day-queue-2 38290f61: BIG rv 2EFxJ9Xy running; LC13 stacks only after its PASS + MAIN GO.
+- (03:16Z) VISITOR-FIX LAND READY SMALL visitor-fix-r9 98a29b65 (on 42af6315; «một vị Thường tại», «Một vị Phi tâu xin…») → SMALL rv by 1BBdQ7Qp with fresh shots. KIT REQUEST icon-row wrap gap (Sổ ghi iPad) → KK25.
