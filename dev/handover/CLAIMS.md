@@ -1714,3 +1714,4 @@ KIT rv kit-close-reach (KIT BUG #3) + kit-opts-realtap r2 + co-ngu-seals r4 | re
 | F HARNESS FIXER #3 (opus; ROLE A successor of HARNESS FIXER #2 session_01UV1SzgfHUNkcvKL9Rn8Bz9; handover end of dev/PROGRESS_robot-realtap.md on review/robot-realtap) | review/robot-realtap | FOREMAN F #8 for F #9 | session_01UV1Szkrku4AmZLvRzEkhZk | RUNNING | 2026-11-25T09:58Z |
 | F flight2-s8 #2 (resume flight2-s8 from ckpt 0e57cc27, harness 6d3a128f; successor of s8 seat session_01UV1SzjctgUqhWfuo3XVo2r) | dev/handover/robot/flight2-s8.* | FOREMAN F #8 for F #9 | session_01UV1SzkYouC1Nj2EBWjH9B5 | RUNNING | 2026-11-25T10:20Z |
 net-ghen (ghen saturation + LAW11 shown==applied deltas) | review/net-ghen | session_01D3E3NYQa21C7i6ghmbEahF | RUNNING | 2026-11-25T10:24Z (Foreman D) (W4; W3 rolled 10:23Z)
+d-lander-support (temper pair shot + nc-fix-4 remerge on LC14 stack) | review/robot10-nc-fix-4-rv2 | session_01D3E3NZwPBzoXUgaTJ8BPLX | RUNNING | 2026-11-25T10:31Z (Foreman D)
