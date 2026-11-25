@@ -3,9 +3,13 @@ const PG={};
 function pFaceOf(p){if(!p)return{src:"",ini:"?",col:KIT_ROLE.slate};if(p.kind==="emp")return pEmp();if(p.kind==="th")return pTH();if(p.kind==="maid")return pMaid();if(p.kind==="ty")return pDoc();
  if(p.kind==="ksp")return{src:courtSrc("ksp",S.court&&S.court.ksp),hue:0,ini:"Hoạn",col:p.col||"#8a8aa0"};if(p.kind==="peddler")return{src:courtSrc("ped",S.court&&S.court.ped),hue:0,ini:"Hoạn",col:p.col||"#8a8aa0"};if(p.kind==="kid"&&p.ref)return kidFace(p.ref);
  if(p.kind==="hh"&&p.ref){const f=pv(p.ref);return f}if(p.ref&&p.kind!=="kid"&&p.kind!=="chest")return pv(p.ref);return{src:"",ini:p.ini,col:p.col}}
-/* button-crawl 25/11: f.rk may come as a number (the jk2b small-frame wrap hands mdH's person face in, and mdH already reads String(p.rk)) — read it as text
-   the same way, so a tap on a Hậu cung person no longer throws «f.rk.split is not a function» */
-function pcPort(f,col,status){const fr=f.rk==null?"":String(f.rk);const rb=/^c\d/.test(fr)&&RIMG[+fr.slice(1)]?`<img class="pcb2" src="img/${RIMG[+fr.slice(1)]}.webp" alt="" onerror="this.remove()">`:"";return `<div class="pcp${f.src?"":" noimg"}${fr?" rk-"+fr.split(" ").join(" rk-"):""}" style="--c:${col||f.col||"var(--gold)"}">${f.src?`<img src="${f.src}" alt="" data-i="${f.ini||""}" onerror="kitImgErr(this,{cls:'noimg',swap:1})">`:(f.ini||"")}${rb}${status?`<em class="pcs">${status}</em>`:""}</div>`}
+/* rkStr (pcport-rk r2): the ONE reader of a figure's rank ground — replaces the button-crawl local String() cast here (law 14). Always a STRING
+   ("c3", "sv2", "kid c4", "" = none); a number/array/object/NaN left on a figure by any writer or old save never throws (rk split on a non-string) and never
+   paints a junk class («rk-[object»). A bare person (role maid/eunuch + numeric rk) maps to its sv/eu ground. */
+function rkStr(f){if(!f)return"";let r=f.rk;if(typeof r==="string")return r.trim();if(Array.isArray(r))return r.filter(x=>typeof x==="string"&&x).join(" ").trim();if(typeof r==="number"&&isFinite(r)&&r>=0&&r%1===0){if(f.role==="maid")return"sv"+r;if(f.role==="eunuch")return"eu"+r}return""}
+/* rkCanon: writer side — what a figure builder stores in .rk */
+function rkCanon(v){return typeof v==="string"?v:rkStr({rk:v})}
+function pcPort(f,col,status){f=f||{};const rk=rkStr(f);const rb=/^c\d/.test(rk)&&RIMG[+rk.slice(1)]?`<img class="pcb2" src="img/${RIMG[+rk.slice(1)]}.webp" alt="" onerror="this.remove()">`:"";return `<div class="pcp${f.src?"":" noimg"}${rk?" rk-"+rk.split(" ").join(" rk-"):""}" style="--c:${col||f.col||"var(--gold)"}">${f.src?`<img src="${f.src}" alt="" data-i="${f.ini||""}" onerror="kitImgErr(this,{cls:'noimg',swap:1})">`:(f.ini||"")}${rb}${status?`<em class="pcs">${status}</em>`:""}</div>`}
 function ghenBar(n){return `<div class="pgh"><span>Ghen <b>${n}</b></span><div class="mini"><u style="width:${cl(n,0,100)}%"></u></div></div>`}
 /* o: {f, col, name, rank (html), status, out, ghen, lines[], chips[], note, groups:[[header,[button html]]], empty, close} */
 /* KIT 48.7 (kit-rank-name): the person card header is the STACKED form — rank line over the bare name line, the rank printed ONCE (the name drops a rank it starts with;

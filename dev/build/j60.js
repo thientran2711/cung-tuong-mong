@@ -47,7 +47,7 @@ function personRoleRank(p,hint){const out=(role,rank,extra)=>Object.assign({role
   if(hint)return out(hint)}catch(e){}
  return out(hint||"other")}
 /* fallback for face objects built without a known person: read the rank ground class and label */
-function kitRoleOfFace(f){const rk=String(f.rk||""),rw=String(f.rw||"");let m;
+function kitRoleOfFace(f){const rk=rkStr(f),rw=String(f.rw||"");let m;
  if((m=rk.match(/(?:^|\s)c(\d)/))&&!/^kid/.test(rk))return f.w&&f.w[0]==="me"?{role:"player",rank:+m[1],origin:S&&S.origin?S.origin.k:null}:{role:"consort",rank:+m[1]};
  if(rk==="cold")return{role:"cold",rank:"cold"};if(rk==="emp")return{role:"emp"};if(rk==="th")return{role:"thaihau"};
  if((m=rk.match(/^sv(\d)/)))return{role:"maid",rank:+m[1]};if((m=rk.match(/^eu(\d)/)))return{role:"eunuch",rank:+m[1]};
