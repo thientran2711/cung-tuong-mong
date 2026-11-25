@@ -21,7 +21,7 @@ const RT = require('./realtap.js');
 let SHA = ''; try { SHA = execSync('git -C ' + JSON.stringify(__dirname) + ' rev-parse --short=8 HEAD').toString().trim() } catch (e) {}
 
 /* exit roads the bot may NOT choose while another option exists (owner ~05:20Z list + every «kết thúc kiếp này» road) */
-const EXIT_RE = /xuất gia|xuất cung|về quê|thứ dân|bỏ cuộc|kiếp mới|luân hồi|an nhiên|giả chết|cao chạy|kết thúc kiếp|xuất giá|thành thân|vương phủ|tự vẫn|tự tận|quyên sinh|bắt đầu lại|chơi lại|rời cung|xin ra khỏi cung/i;
+const EXIT_RE = /xuất gia|xuất cung|về quê|thứ dân|bỏ cuộc|kiếp mới|luân hồi|an nhiên|giả chết|cao chạy|kết thúc kiếp|xuất giá|thành thân|vương phủ|tự vẫn|tự tận|quyên sinh|bắt đầu lại|chơi lại|rời cung|xin ra khỏi cung|bỏ trốn|trốn khỏi cung|đi theo chàng|kết:\s*(bỏ trốn|xuất|tự vẫn|tự tận|quyên sinh|cao chạy|rời cung)/i; /* F #15 21:55Z (FOREMAN E 21:36Z, E-S2 «Thuở thanh mai» «Đến bến sông … kết: Bỏ trốn»): elopement / «kết: <exit>» option = exit road */
 const CLOSE_RE = /^(✕|×|x|đóng|lui|thôi|quay lại|trở về|để sau|bỏ qua)$/i;
 const LOW_RE = /hướng dẫn|luật chơi|về luật|^bỏ qua|xem đầy đủ|^\?$|^$/i; /* help / skip / empty icons: only when nothing else */
 /* leaving a co-op room / going back to the title is NEVER a robot move (not a game ending): never tapped, the robot waits instead */
