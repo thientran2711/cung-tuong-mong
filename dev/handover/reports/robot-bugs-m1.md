@@ -1,0 +1,20 @@
+# robot-bugs-m1 — report (worker ROBOT-BUGS-M1, child of MAIN CHÍNH 137)
+PRIORITY #1 CHECK: OD «Kiếp thứ» 1 row (23/11 ~20:50Z, geLifeNo) | main: kitStatusIcon 15 hits, no title-blank guard | review/* none | claims none.
+Branch: `review/robot-bugs-m1` @ 13b0907a (base LIVE 9f72524b). Built index.html/sw.js committed (quickcheck wants the sha to hold its build).
+Tests: QUICKCHECK PASS (273 s: open 0 errors, old save loads + plays, perf new/live render 276/349, buổi 1637/2924); CORE GATES PASS (one-core, rules-one-source, kit-conform, hooks 8); TIME-SPILL PASS. Real-tap repro scripts (page.mouse + elementFromPoint) on Fold 755x1000 and iPad 1180x820, shots looked at. Scripts/shots are in /home/user/wt/rb-shots (not in git).
+
+## (A) Title blank / soft-lock — FIXED (whole group)
+Repro on current build: fresh profile → home panel ✕ → title with 0 buttons (Q=0, #modal hidden). Root: the home / Chọn sổ panels ARE the title's buttons (#title .tbox is never shown); nothing re-opened them after ✕ / Esc / tap-outside closed the only modal.
+Fix (j74, one guard): title up + #modal hidden + empty Q + no #kload/#klife/#kroul ⇒ ☰ over a live life: back to the game (same path as «Tiếp tục»); otherwise the home panel again. Runs after closeModal and as a MutationObserver watchdog on #modal/#title.
+Second cause of «cover art, no buttons ≥9 min» (M3): jload's #kload (z 9600) shows «Vào cung ngay» only when a download raises an error; a download that STALLS (hung request) left no button at all. Fix (jload): after 20 s with no file finished the cover offers «Vào cung ngay» too (timer repaint; «Thỉnh tiếp» only on a real error). Proof: hung CDN, t=8 s buttons [] → t=32 s [«Vào cung ngay»].
+Table (Fold + iPad, real taps; buttons left in #modal): fresh ✕ before 0 → after 6 · fresh Esc 6 · tap outside 6 · Thiết lập ✕ → home 6 · death + reload ✕ 0 → 6 · ☰ in life ✕ → back to the game · kload hang → button at 20 s. Not a bug: ✕ on a fresh home reopens the home (nothing to return to).
+## (B) JS errors after death + reload — FIXED root, 'sung' NOT reproduced
+Repro: kload «Vào cung ngay» → title (no life) → open the download icon panel: `kitStatusIcon open TypeError … 'find'` from j25's showModal wrapper `rivals.find` with S/rivals undefined. Fix: j25 wrapper guards `S` + `Array.isArray(rivals)`. After fix: 0 errors in the same sequence (Fold). The `reading 'sung'` TypeError did NOT reproduce on LIVE 9f72524b with real taps (death via over(), reload, ✕, ☰, every status icon); not guessed at. Group scan: 6 synthetic modal shapes + closeModal + kitModal with no life: all OK except the life-only `night` card (S.emp), which cannot open on the title. If it returns: capture the stack (index.html line) and send it.
+## (C) Exam strip with no board — NOT a race; deterministic give-up result, by kit design
+Repro (real taps): exam rules screen → ✕ (give up, 0/10) → a bare strip «Khảo hạch: Môn 1/2 · MÔN 1 0/10 · Vụng», board 0×0 hidden, «Môn kế tiếp» (#kg82ok) hidden. That is KIT §13.9 / jk4 kitOvSync: a result card's button is hidden and the header ✕ presses it (✕ → Môn 2 rules, verified). Left unchanged (law 16, owner rule). Parking-lot note for MAIN: a first-time player may not see that the ✕ means «next»; the ✕ label «Quay lại» fits poorly on a result.
+## (D) «Kiếp thứ hai» on a first life — FIXED
+Root: geLifeNo() = lifeLog().length+1; j32 over() writes the life to lifeLog the moment it ends, so on the ending screen (S.dead) it counted this life twice → «hai». Fix (jge): once S.dead the log already holds this life (no +1). jkcg kctGive had a private copy of the formula → now reads geK.lifeNo (one source). After: first life mid-life and at death both «Kiếp thứ nhất» (Fold + iPad).
+## Not fixed / notes
+- Robot items 3 (focus-veil over cards), 4 (modal pile-up), 6, 7 (rail icons overlapping panel) are outside this brief; not touched.
+- Perf step of the first quickcheck run died ("browser closed", infra); second run PASS.
+~100% xong / ~90% chơi được (B 'sung' unreproduced).
