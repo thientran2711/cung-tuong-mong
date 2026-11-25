@@ -1,6 +1,6 @@
 diff -ruN a/dev/test/realtap.js b/dev/test/realtap.js
 --- a/dev/test/realtap.js	2026-11-25 20:29:45.228610425 +0000
-+++ b/dev/test/realtap.js	2026-11-25 22:01:32.818041055 +0000
++++ b/dev/test/realtap.js	2026-11-25 22:29:27.346719864 +0000
 @@ -12,7 +12,7 @@
  const path = require('path');
  
@@ -102,7 +102,7 @@ diff -ruN a/dev/test/realtap.js b/dev/test/realtap.js
  module.exports = { make, PROBE };
 diff -ruN a/dev/test/robot-rt-coop.js b/dev/test/robot-rt-coop.js
 --- a/dev/test/robot-rt-coop.js	2026-11-25 20:29:45.242367139 +0000
-+++ b/dev/test/robot-rt-coop.js	2026-11-25 22:01:32.821168756 +0000
++++ b/dev/test/robot-rt-coop.js	2026-11-25 22:29:27.358220925 +0000
 @@ -51,14 +51,27 @@
  
  async function seatLoop(ctx, who, dev, other) {
@@ -132,7 +132,14 @@ diff -ruN a/dev/test/robot-rt-coop.js b/dev/test/robot-rt-coop.js
      if (k >= KIEP && other.done) break;
      if (k >= KIEP && !extra && other.done) break;
      if (k >= KIEP + 20) break; /* safety net: 20 extra lives while the friend is still in the same life = runaway */
-@@ -69,7 +82,7 @@
+@@ -66,10 +79,14 @@
+   return p;
+ }
+ 
++/* patch #14 STALE-BUILD GUARD (investigator 4fU4zVDR: the committed index.html of a stack can be older than its sources, e.g. no kfoc «Sẵn sàng» intro): re-assemble dev/index.html and compare the build hash (sha256 of dev/index.html + swreg.js + kwait.js, 12 hex = window.CTM_BUILD) with the index.html this runner will play; mismatch → refuse (exit 2). STALE_OK=1 skips. */
++if (!process.env.STALE_OK) { try { const cp = require('child_process'), cr = require('crypto'), ROOT = path.resolve(__dirname, '../..'); cp.execFileSync('python3', [path.join(ROOT, 'dev/build/assemble.py')], { stdio: 'ignore' });
++  const B = cr.createHash('sha256').update(Buffer.concat(['dev/index.html', 'dev/site/swreg.js', 'dev/site/kwait.js'].map(x => fs.readFileSync(path.join(ROOT, x))))).digest('hex').slice(0, 12), m = /const BUILD="([0-9a-f]{12})"/.exec(fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8'));
++  if (!m || m[1] !== B) { console.error('STALE BUILD: index.html has ' + (m ? m[1] : 'no BUILD') + ', sources assemble to ' + B + ' — run `bash dev/site/build_site.sh` in this tree, then rerun (STALE_OK=1 to skip)'); process.exit(2) } console.log('BUILD OK ' + B) } catch (e) { console.error('stale-build guard could not run: ' + String(e.message).split('\n')[0] + ' (STALE_OK=1 to skip)'); process.exit(2) } }
  (async () => {
    /* one cached browser profile per seat (pictures fetched once; see robot-rt.js) */
    const ctxs = [];
@@ -143,7 +150,7 @@ diff -ruN a/dev/test/robot-rt-coop.js b/dev/test/robot-rt-coop.js
    const hDev = A.host || 'fold', gDev = A.guest || 'ipad';
 diff -ruN a/dev/test/robot-rt.js b/dev/test/robot-rt.js
 --- a/dev/test/robot-rt.js	2026-11-25 20:29:45.236862331 +0000
-+++ b/dev/test/robot-rt.js	2026-11-25 22:01:32.819674323 +0000
++++ b/dev/test/robot-rt.js	2026-11-25 22:29:27.348462636 +0000
 @@ -40,6 +40,7 @@
  /* RESUME (container restart): <out>/<life>.ckpt.json holds R + the game's localStorage save + rng state; resume=1 continues the SAME life */
  const CKPT = path.join(OUT, LIFE + '.ckpt.json'); let ck = null;
