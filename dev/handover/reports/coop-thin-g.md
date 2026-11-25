@@ -957,3 +957,37 @@ LAND READY: coop-thin-g **e814a8a9a80a206a13a5c17f7187a93a082d4817** (review/coo
 1. Automatic: `.github/workflows/coop-worker.yml` («Deploy co-op Worker») runs on every push to main that touches `coop/worker/**`. This branch changes `coop/worker/src/index.js` (THINMAX 9 → 13) + `coop/worker/test/thin.test.mjs`, so the LAND push itself starts it (merge/vault/seat tests, then `npx wrangler@4 deploy` with secrets CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID). Check: the «Deploy co-op Worker» Actions run on the landed sha = success.
 2. If it did not run or failed: re-run it (workflow_dispatch), or from a worktree of the landed main: `cd coop/worker && npm install && node test/merge.test.mjs && node test/vault.test.mjs && node test/seat.test.mjs && node test/thin.test.mjs && npx wrangler@4 deploy` (api.cloudflare.com is proxy-authenticated in cloud sessions; give wrangler a dummy CLOUDFLARE_API_TOKEN if it refuses to start).
 3. Verify: `WEEKS=1 node dev/test/coop-thin-g.js <live Worker URL> 13 0` → «G0 room level 13 on both seats [13,13]». Until the deploy, live rooms stay capped at level 9 (old thin path: safe, just no part G).
+
+## EXPRESS r4 — worker session_01N1tNP6cP62jVGboghSKGVX (opus), Foreman B ROOT 2, 11/25/2026 — SSK 6449175a (6449175a8e93d42262d7506fb1863e20a478663b)
+PRIORITY #1 CHECK ('coop-thin-g'): OD 1 | ledger 0 | claims 8 | main 6 | review/* 6 | archive 0 → reused review/coop-thin-g-r3 (PASS e814a8a9); nothing rebuilt. START_CTX ≈ 5 % of 1M; depth 1.
+(1) CONTENT CHECK vs LIVE 5e013076 → **NOT LANDED**: dev/build/jcoopthing.js, jcoopthinf6b.js, dev/test/coop-thin-g.js, coop-thin-f6b.js, coop-thin-hostnull.js absent on main; coop/worker THINMAX = 9 on main (13 on r3). merge-base r3/main = 43cf5434; main is 478 commits ahead.
+(2) Branch **review/coop-thin-g-r4** = r3 e814a8a9 + merge LIVE **5e013076** → **6449175a**. week-wait 8e654ee0 (stepQ) is **NOT on LIVE** (no stepQ in main dev/build) → nothing to unify with yet; LIVE co-op changes since 43cf5434 are only jcoopworld (flight-sid-rebirth lifeRekey, flight-coop-sync host night gate) + Worker BIG 8000 — both kept as ONE rule each. Conflicts (none in jcoopthin.js this time):
+| file | resolution |
+|---|---|
+| jcoopworld nCheck | LIVE host commit gate line (flight-coop-sync) first, then branch part-G guest line (gG: guest only) — both kept, distinct seats |
+| j10 | branch capSweep (coopGuest()) + LIVE servAge BAL.ageMin |
+| j8 | LIVE line (same code, LIVE comment) |
+| jbal2 | LIVE skip{…,cap:5} + branch mgSc |
+| jtoil | branch toilFinShow split (already carries pre + save()); LIVE removed quitAsk → dropped `KG82.quitAsk=null` (0 quitAsk left in dev/build, same as LIVE) |
+| jts | branch tsSkipRes / tsSummonEnd / tsDenEnd split, carrying LIVE m-fix-1 kitSkipCap(BAL.skip.raw), BAL.eff.jts.anOnDone, bandVT, ducDenMiss (law 4; family grep: 0 `bandOf(danger(`, 0 `raw:ok?7`, 0 «Ân tình +3», 0 «"Đức +1"» left) |
+| tests coop-cyc/night/timer clear() | branch visible-button + option cycling, LIVE `.k3foot` added to the #mr selector |
+| index.html / sw.js | rebuilt (build_site.sh); assets.json = LIVE |
+(3) GATES on 6449175a (local Worker wrangler dev :8787 from this branch, THINMAX 13; one co-op test at a time unless noted):
+| gate | result |
+|---|---|
+| coop/worker npm test (merge, vault, seat, stale, thin) | PASS (thin ALL OK) |
+| coop-e2e THIN 13 SWAP=0 | 143/143 ×2 |
+| coop-e2e THIN 13 SWAP=1 | run 1 138/143 (week 3 not advanced ×2 seats → same-world / same-month / back-in-week reds) **while I ran coregates (browser probe) beside it = 2 browser loads on 4 cores**; then **143/143 ×3** alone (runs 2–4) |
+| coop-night THIN 13 | 111/111 |
+| coop-thin-g own: g4 / g4s (WEEKS=4, both seat orders) | 24/24 / 24/24 |
+| coop-keymove-unit | 12/12 |
+| undef-scan | PASS (317 names) |
+| save-rt-coop (71c538df) head vs LIVE 5e013076 dev/index.html | rows IDENTICAL 11/11 (6 ok; 5 FAIL = LIVE's own, robot-coop-savert not landed) |
+| quickcheck ALONE `--runs 5` (old save) | core gates: only **G4 button-crawl «Ô lưu · Lui»** = PRE-EXISTING on LIVE (fix-7 r3 line); open 1794 ms; old save ok; perf buổi 4046/1402 = bimodal (new [4046,5239,3188,1334,4739] / live [1227,5374,4513,1402,1191]) → quickcheck.js alone `--runs 9`: **PASS** render 205/216, tab 463/499, buổi 1457/1579, tasks>200 24/24, old save ok |
+| REAL 2-seat room (robot-rt-coop, real taps, Fold 755x1000 host + iPad 1180x820 guest, seed 19, room VVGW, slice 24) + **both-seat reload at buổi 10** (test-only RELOADAT hook in a local copy of robot-rt.js, not committed: host unstick lvl 3 → guest rejoins via want) | **24 buổi each seat**, reload → both «Cùng hảo hữu → Trở lại phòng» and played on to 24; stuck 0, dead buttons 0, page errors 0. Harness notes (pre-existing family, seen on LIVE runners): «Lịch tháng» no-clock loop 150 taps (both seats, recovered), «Lịch tháng» scrolled end has no close (its close is the header ✕) |
+| LOOK Fold + iPad (end state, both seats, scratch only) | same date «Tháng tư · hạ tuần · năm thứ nhất», Buổi chiều on both; host Fold kit «Tâm trạng · Ta» card, guest iPad Hành sự + kit result toast; no overflow / cut text (Fold: last mood line under the kit «Kéo xuống» cue = known KIT text-first item, KK31). Looked 3×. |
+NOT run (express; named): trip1 DANHP 36-week ×N (r3 ran ×2 88/88 before this merge; LIVE co-op deltas are jcoopworld only) — the g4/g4s G9/G9b week checks ran instead.
+18 LAWS touched: 4 ONE CORE (LIVE BAL keys carried into the branch's split functions; core gates PASS) · 6b one key one person (LIVE lifeRekey kept) · 9 KIT (no UI change) · 11 (family greps above). None broken.
+WORKER DEPLOY: coop/worker/src/index.js = LIVE BIG 8000 + branch **THINMAX 13** (+ test/thin.test.mjs). The land push to main touching coop/worker/** starts «Deploy co-op Worker»; else recipe in «WORKER DEPLOY RECIPE (THINMAX 13)» above. ORDER vs B queue: week-wait 8e654ee0 + presence-reload dad08c51 also deploy the Worker and week-wait edits jcoopworld nCheck (stepQ) — whichever lands second needs a re-merge of jcoopworld nCheck (keep ONE carry rule: stepQ + host commit gate + part-G guest line). Recommend: land week-wait / presence-reload first (owner deadlock bug), then re-merge r4 on that LIVE (small, nCheck only) and land with the Worker deploy.
+FOR MAIN (unchanged): rkOfFace {$r} · hn H2 k61PortEnt p.kk · dialog-fixed #54 · thin d / f1 / as9s / cyc / lost-scan.
+SSK review/coop-thin-g-r4 **6449175a8e93d42262d7506fb1863e20a478663b** (contains LIVE 5e013076).
