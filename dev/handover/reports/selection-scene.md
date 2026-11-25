@@ -377,3 +377,30 @@ Worktrees /home/user/wt/rv19, rv19m, rvst, rvho removed after this report; scrat
 | kit-notice-action | 16/16 |
 | kit-one-opt-tap | 30/30, or 1 FAIL on the random-life «LOCKED» ksp-card |
 | kit-faces-opts | case «lines14 opts6» flaky: the drag does not fire the last option. This build: 0 / 1 / 1 / 3 FAILs in 4 runs. LIVE 351122ba: 1 / 1 / 0 in 3 runs. Pre-existing kit family, sent to KK31 |
+
+## SELSCENE-19 r4 — re-merge onto LIVE 5e013076 → 3f5ace795 (NOT land-ready: quickcheck) + HANDOVER (26/11 ~00:15Z; MAIN 148 session_01V1ZZH2sHQhqUaYCB6kPJxt; rollover: context limit reached, the coordinator opens the successor)
+- Merge: bb308363 + LIVE 5e013076 (SANGBUOI r4 + coop-rebirth-stuck).
+  - dev/tools/quickcheck.js keeps BOTH sides: selection settleNew / BANHOA reroll + the r4 BUOI body (untimed pre-clear, sleep subtraction, held-turn loop).
+  - dev/test/coop-e2e.js: LIVE's #next diagnostic line + the COOP_LIFETR dump.
+  - No game-source conflict; index.html / sw.js rebuilt. Pushed review/selection-scene-r19 = 3f5ace795.
+- Gates on 3f5ace795, 2 at a time:
+
+| gate | result |
+|---|---|
+| co-ngu, sid ×2, k61 ×2 | PASS |
+| selx-rules / wire / days / days2 / map / flow | PASS |
+| kit-faces-opts 36/36 · touchdrag 8/8 · notice 16/16 | PASS |
+| kit-one-opt-tap | 1 FAIL: the known random «LOCKED» ksp-card |
+| coop-e2e A / B | 143/143 · 143/143 |
+
+- **OPEN — quickcheck vs LIVE 5e013076:**
+  - Run 1: FAIL, buổi 4265 vs 2430 (limit 3930). New 3008–4780, all 5 new lives tú nữ day lives; LIVE 1840–5663. Tasks 55/37; day lives 68 / 44 / 55 / 60 / 34.
+  - Runs 2 and 3: «6 new lives in a row ended at the selection (ban hoa) — reroll cap 5».
+  - On bb308363 (LIVE 351122ba) the same driver gave about 7 rerolls per run and never hit the cap. The driver (SETTLE / NEWLIFE / settleNew) is unchanged. The game files that changed between bb308363 and 3f5ace795 are jdayq.js (+80 lines: SANGBUOI r4 dqN* / coop-rebirth dqOn + dqNextHeal) and jnf.js.
+  - **Lead:** jdayq r4 holds or reorders the selection-day cards for the option-0 driver, so the contest score drops and ban hoa becomes near-certain. It could also slow the buổi after the days.
+  - **Next steps:**
+    - (1) Probe the ban hoa rate: about 20 NEWLIFE + settleNew lives on 3f5ace795 vs bb308363, same driver, count S.fate «Bị ban hoa».
+    - (2) If 3f5ace795 is higher, check which selx cards jdayq dqActEl / dqN holds or skips. selx-days / days2 pass, so look at the quickcheck path: the cards answered in one poll by SETTLE with j<1.
+    - (3) Then rerun quickcheck alone.
+- phanCungEdict (MAIN 148 / Foreman D): already wired. jselxday:280 «Tin sắc phong» onClose → selxPhanCung → window.phanCungEdict({list,then}); the signature equals D's review/dfu-lr 6459cdc8 jpromob.js:193. Nothing to do until both land; then one run to «Tin sắc phong» must show window.__pcN > 0.
+- Worktree /home/user/wt/s19 (branch review/selection-scene-r19 = 3f5ace795); scratch logs in /home/user/wt/s19-out6.
