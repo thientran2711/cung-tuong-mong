@@ -3354,3 +3354,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (05:36Z) OWNER «đưa lên live luôn» (makeup) → LC13 told land 008aa59b + 74068c07 asap; good-looks follow-up goes straight to LC13 after MAIN LOOK (no new sếp look needed).
 - (05:38Z) DELEGATE-NOMG LAND READY 9b38be2c BIG (FF on 0756a05b) → BIG rv 22tLFisY told to review now.
 - (05:50Z) OWNER IDEA OD ~05:45Z temper-driven play (forced outburst choice + mood×personality×relations design) → OD row + PARKING_LOT #13 + ORDER Foreman E design proposal (opus, expert first, no code).
+- (05:41Z) VISITOR-FIX r10 37199041 READY (silhouette = j59 stage-token stand-in, preload+renderStage; capital fix; 30/30) on old 49f17d4d → SMALL rv 1W8A4mF7: merge on LIVE, shots pair, coop-e2e, verdict.
