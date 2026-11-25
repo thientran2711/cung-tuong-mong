@@ -1621,3 +1621,4 @@ selection-scene r7 (successor of SELSCENE-16; co-op 4 failures root cause) | rev
 | FLIGHT ROBOT B-COOP (sonnet; briefs/F-flight-robot.md; arm B 4232709a+fe3cb80c local) | dev/handover/robot/flight-B-coop-* | F | (opening) | RUNNING | 25/11 02:22Z |
 | MAKEUP NO-BOOST (owner bug 25/11 ~03:10Z: same makeup strength at every size) | review/makeup-noboost | MAIN 132 | session_01V1ZZGzj7EkYqGXjn8rJrrX | RUNNING | 25/11 04:06Z |
 | SANSANG-MUSIC-FIX (owner LIVE bugs 25/11 04:06Z+04:10Z) | review/sansang-music-fix | MAIN 132 | session_01V1ZZH1Z5G4aTpbCaR3rDY7 | RUNNING | 25/11 04:08Z |
+| DELEGATE-NOMG (owner rule 25/11 04:12Z: no mini-game for servant-done acts) | review/delegate-nomg | MAIN 132 | session_01V1ZZH3fnPTQoZv6e7HPqN9 | RUNNING | 25/11 04:09Z |
