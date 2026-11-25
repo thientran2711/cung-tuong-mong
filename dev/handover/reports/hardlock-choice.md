@@ -199,3 +199,37 @@ Order (MAIN 140, FOREMAN_B_STATUS 25/11 ~12:45Z): r3 deletes jdeadcard.js but ch
 - Law 2/3: unchanged from r3 (swap rule, floor); r4 only adds two hold-backs (tsDis, need) and the DOM backstop, all ending in the same step-3 «Lui».
 - DOM backstop redraws once (s0 again) only when no leave exists yet; the second pass finds the leave → no loop.
 - Handover: done (no rollover; ctx well under START+25 %).
+
+## REVIEW r4 — PASS (BIG delta reviewer, opus, session_01N1tNP2Ax24R2W5DqPrjgvP; depth 4; START_CTX ≈4 %)
+PRIORITY #1 CHECK ('hardlock-choice-r4 jdeadcard choose-guard kitNoLock'): OD 0 | ledger 0 | claims 3 (fixer 5EhLGrd9 + r1–r3) | main jdeadcard.js (LIVE 9f72524b, deleted by r3/r4) | review/* hardlock-choice-r3 87e622fb (BIG PASS), lc14-chooseguard-on-cnv 3eed1dc7, lc15-temperfix-on-bcstack2 23e5b84f | archive 0 → nothing rebuilt; r4 = r3 + choose-guard's jdeadcard rules ported.
+**LAND READY review/hardlock-choice-r4 9f2522d29562f148b1f73d0c3791a08e72a32ec3 FOR MAIN 140 / LC15 (BIG; rules; replaces r3 87e622fb)** — LC15 top review/lc15-temperfix-on-bcstack2 is still 23e5b84f (re-fetched at verdict) = first parent of 9f2522d2 → merged-on-top = head; no -rv branch needed.
+
+### Delta judged
+`git diff 23e5b84f 9f2522d2 --name-status`: M assemble.py, jbal2.js, jgrey.js, quickcheck.d/85-dead-card.sh + README, dead-card.js; D jdeadcard.js; A jnolock.js, hardlock-choice.js, hardlock-scan.js; index.html/sw.js rebuilt. The r3 delta of assemble.py/jbal2.js/jgrey.js on 23e5b84f is line-for-line the same as r3's on LIVE 9f72524b (diff of the two diffs = empty). Real new code = `git diff 87e622fb 9f2522d2 -- dev/build/jnolock.js dev/test/dead-card.js`. `bash dev/site/build_site.sh` on head → index.html identical except the build line (window.CTM_BI).
+
+### Checks
+1. choose-guard port (law 11/14): choose-guard's jdeadcard changes (diff 9f72524b→23e5b84f of jdeadcard.js) = (a) deadCardOff `c.lock||c.tsDis` + `c.need.some(!ok)`; (b) deadCardIs DOM truth (every visible `#modal .opts button[data-m]` disabled = dead). In jnolock: (a) → kitLockWhy «time» / «need» (model pass, so kitTakeable / step 3 see them); (b) → kitDomDead(), same selector + visibility filter, checked AFTER the draw with the same guards as deadCardIs (no kgx road, no cancel road); if dead → m.__nlDom → kitNoLock again (nothing but the leave counts as takeable) → the same step-3 «Lui» → one redraw (inner s0, no loop). Same behaviour, but better: the old net only swapped #mr for a hand-made button; now it is the kit ✕ / the card's cancel road. kitNoLock = the ONE decision point: `git grep -E "jdeadcard|deadCardIs|deadCardOff"` (index/sw excluded) → comments + the 85 hook's old-sha fallback only; index.html has 0 deadCardIs/deadCardOff; `every(b=>b.disabled)` only in kitDomDead. Double draw is safe: 249 game calls already re-draw with showModal(); the wrappers that run twice (j61 k61Shown, j36 voice, jgoal queueCard, jend kesMark) are guarded/idempotent. OK.
+2. dead-card.js UNION: r3 part 3 (3a Sức swap, 3b «Lui» open + forced) kept verbatim; choose-guard part 4 (out-of-card pick 99/−1/undefined refused) + part 5 (temper lock keeps a payable road, «open» must not be 0/…) kept verbatim; choose-guard's old part 3 (#mclose of jdeadcard) is the same synthetic card as r3 3b → dropped as old path, covered by 3b; new part 6 (tsDis + unmet need → «Lui» from the model pass) + part 7 (model blinded, DOM greyed → «Lui» via __nlDom, ✕ closes). Nothing lost. OK.
+3. Law 2/3/4: unchanged from r3 (altCost(short,S.rank) from BAL.bacTuan/altK, Danh via BAL.nolock.of, floor BAL.nolock.keep; no typed number; one-core-guard PASS). r4 only adds hold-backs that all end in the same «Lui» leave, which costs nothing and gains nothing = the card's leave like every kit ✕, not a cost-only road. OK.
+4. Law 9 kit: «Lui» drawn by kitModalCloser as the kit ✕ (shots); no #mr button, no private CSS. OK.
+5. Co-op: same path both seats (closeModal → guest i:-1); coop-e2e both seat orders below. OK.
+6. «Ô lưu · Lui» G4 button-crawl FAIL: same single fault on base 23e5b84f (quickcheck run on 23e5b84f by this reviewer, below) → pre-existing on the LC15 stack, not r4. FOR LC15 / F button-crawl owner.
+
+### Gates (reviewer runs on head 9f2522d2 = merged on LC15 top 23e5b84f)
+| gate | result |
+|---|---|
+| `node dev/test/dead-card.js file://…/index.html` | `DEAD-CARD PASS` — scan n 0 / 343 built; part2 1/4 + 1/4; part3 a open 2 paid 2, open+forced «Lui» ✕ closes, net 1, bạc 2; part4 err "" Q 1 bad 3; part5 open 1/2; part6 why time,need «Lui» dom false bạc 500; part7 «Lui» dom true open 0/2 closes |
+| MUTATE A: old path (jnolock step-3 push off + LC15 jdeadcard.js re-assembled after jdayq) | `DEAD-CARD FAIL 4` (part3 open/forced lui null, part6 lui null, part7 lui null) ✔ |
+| MUTATE B: tsDis + unmet need lines dropped from kitLockWhy | `DEAD-CARD FAIL 1` (part6 why "," — «Lui» only via dom) ✔ |
+| MUTATE C: kitDomDead() → false in the showModal wrapper | `DEAD-CARD FAIL 1` (part7 lui null, no ✕, card stays: after 1) ✔ |
+| `node dev/test/hardlock-choice.js <shots>` (Fold + iPad) | `HARDLOCK-CHOICE ALL PASS` (0 page errors) |
+| `node dev/tools/hardlock-scan.js --turns 40 --md` | `HARDLOCK-SCAN PASS · 905 choice cards … HARD LOCKS 0 · not drawn 14 (dead 0, first e68:kindVisit) · page errors 0` |
+| `node dev/test/temper-outburst.js <url> <out> 755x1000@2,1180x820@2` | `PASS` (hot/stale/timid/jfeel/npc/cap/old ok, errs 0, dead 0, both devices) |
+| choose-guard's own tests = dead-card parts 4 + 5 | PASS (above) |
+| one-core-guard / undef-scan | `PASS: one core …` / `PASS: no unguarded undefined identifier (309 names checked)` |
+| `node dev/test/coop-e2e.js <out> http://127.0.0.1:8787` (local wrangler dev) Fold host | run 1 `141/144` (FAIL «#next enabled» / «buổi 3:2 advanced for both» / «week after rebirth advances»: week-3 handshake, Q 0, no modal on either seat = the known co-op week-end stuck family, not a card); rerun ×2 `142/142 passed` / `142/142 passed` → flake |
+| `COOP_SWAP=1` iPad host | `142/142 passed` |
+| `bash dev/tools/quickcheck.sh HEAD` ALONE on 9f2522d2 (LIVE 9f72524b) | `QUICKCHECK FAIL · CORE GATES FAIL · G4 90-button-crawl` — **old save ok**, open 1977 ms, perf new/live render 210/232, tab 614/613, buổi 1287/2781 ms, tasks>200ms 24/27. ONE fault: `FAIL fold · Ô lưu [div#modal.modal.kptitle:Cung Tường Mộng] · Lui · close button did not close its layer` |
+| `bash dev/tools/quickcheck.sh HEAD` on base 23e5b84f (no r4) | `QUICKCHECK FAIL · CORE GATES FAIL · G4 90-button-crawl` — the SAME single fault `FAIL fold · Ô lưu [div#modal.modal.kptitle:Cung Tường Mộng] · Lui · close button did not close its layer`; old save ok; perf render 259/254, tab 592/602, buổi 1674/2881 ms → **pre-existing on the LC15 stack, not r4** |
+Shots (scratch only, deleted; looked 3×), Fold 755x1000@2 + iPad 1180x820@2: (1) j68c-serv-022 at the old all-bạc price, 14 short, Sức 60 → every road open «(thiếu bạc, lấy công sức bù)» TỐN «Bạc −26 · Sức −16 / −7 / −24», no ✕; (2) same card, Sức 1 Danh 0 → roads greyed with their own price, kit ✕ top right (= «Lui»), no extra button; (3) DOM-truth card (model blinded, both roads greyed on screen) → kit ✕ appears (__nlDom). No overflow, no cut text, 0 page errors. (Paintings show «Đang thỉnh tranh…» = CDN blocked in the test, not a bug.)
+Law check: 2 OK · 3 OK · 4 OK · 6c OK · 7 OK (r3 nit stays: Danh-paid tag says «công sức») · 9 OK · 11 OK · 14 OK.
