@@ -3358,3 +3358,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (05:56Z) OWNER OD ~05:55Z: wants sample sheet good looks ×1.0/1.3/1.4/1.5 (+1.9 ref) before choosing → MAKEUP-NOBOOST making s5-levels; follow-up held until her pick.
 - (05:45Z) DELEGATE-NOMG new LAND READY 170e05b3 BIG (rv FAIL item dfLast glue fixed) → rv 22tLFisY has it; GO after PASS.
 - (05:50Z) M3 reported skip-only mini-games → M1–M5 told: real tap «Sẵn sàng» every time + play boards with mg-bots.js SKILLED logic via real taps; «Bỏ qua» ~10 % only.
+- (05:59Z) LIVE 008aa59b (makeup-fit r6: makeup sits on the painted face) 05:57Z; ROLLBACK 0756a05b. noboost 74068c07 merging next. Told sếp. CDN wipe makeup-fit / visitor-fix / visitor-fix-r8 by MAIN. Pre-existing test fails (toilette.js, toil-overlay mefig, hoa-dien hang) → ORDER F.
