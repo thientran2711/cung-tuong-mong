@@ -70,3 +70,12 @@ Pilot: ev-thang-tran LwtVBN0swO, ev-trieu-chinh 1lBWp4tr4r, ev-yen-tiec xS80diEj
 Credits: 20 × 80 = 1,600 total (pilot 240 + batch 1,360).
 Review folder (all 20, ≤250 KB webp, same names as live keys): https://ctm-img.victoria-tntt.workers.dev/img/_review/c3-farshot/<key>.webp?v=2
 NOTE: act-lam-tho-v2 etc. keep live key names → swap = overwrite img/<key>.webp after backing old to img/_backup/ (waiting Foreman C GO).
+
+## Step 4 — LIVE SWAP + checks (Foreman C GO 25/11 ~22:28Z)
+- Backup of the 20 OLD live pictures (verified byte-equal to live before overwrite): CDN img/_backup/c3-farshot/<key>.webp.
+- Overwrote the 20 live img/<key>.webp on the CDN via cdn_sync (md5 verified live == new); img/_index.json rebuilt by cdn_sync (hash list for SW precache updates by itself). No ACTS.json/EVENTS.json change needed (same keys).
+- CODE CHANGE needed: KIT_PIC_SUBJ subject boxes (dev/build/jksize.js, + built index.html) were drawn for the old tiny figures → updated 13 ev-* boxes (acts have no box) to the new large subjects. Test kit-size7-focus.js: 331 pictures, 329 boxes, bad 0 (2 missing act-cat-bong-de-dang / act-cat-giu-con-tin are PRE-EXISTING, not mine).
+- In-game check on the built game (real kit frame kszFrame3, notice kind, S + XL) at Fold 755x1000 and iPad 1180x820 for ev-hoang-de-vui, ev-fest-phoenix, ev-cung-nu-2: subject fills the crop, no faces, no cut-off figure. PASS.
+LAND READY review/c3-farshot 49d7de45 (2 files: dev/build/jksize.js, index.html; CDN pictures already live)
+Rollback: copy img/_backup/c3-farshot/<key>.webp back over img/<key>.webp via cdn_sync + revert the commit.
+Total credits 1,600.
