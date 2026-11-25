@@ -111,5 +111,71 @@
    "result": "INVALID",
    "cause": "host bend 1.2 f=true loop + host seat offline; guest night 1 + ktut over dawn (new signature)"
   }
- ]
+ ],
+ "u1b": {
+  "session": "session_01N1tNP33JueFVZyZyM7LWb6",
+  "depth": 3,
+  "start_ctx_pct": 5,
+  "game": "review/robot-coop-stack-u3 512cfee6 (pre-land), PROVISIONAL, MAIN 140 ACCEPTED (segments count)",
+  "harness": "review/robot-realtap 5edf09f6 + realtap-B-5edf-patch.diff #9 (handover 30bad3b6, sha256 3a291855)",
+  "valid_segments": 0,
+  "rooms": [
+   {
+    "code": "EGEN",
+    "seed": 115,
+    "result": "aborted (old patch, restarted on patch 3f4ceacd)"
+   },
+   {
+    "code": "DHQ8",
+    "seed": 115,
+    "result": "INVALID",
+    "cause": "host stuck buổi 25 «Bổng lộc tháng ba» with #kpop open; popup fix never fired (no #kxcatch) → patch #1",
+    "dump": "review/robot10-coop-saves u1r/DHQ8"
+   },
+   {
+    "code": "2PQB",
+    "seed": 116,
+    "result": "INVALID (my error)",
+    "cause": "RELOAD_AT='8,15' parsed NaN → no scheduled reload; 71 buổi 0 stuck"
+   },
+   {
+    "code": "KZGY",
+    "seed": 117,
+    "result": "INVALID",
+    "cause": "guest iPad stuck buổi 72 on kit notice «Tin báo» (options below the 21-row list, no ✕; banner chip modal loop)",
+    "dump": "u1r/KZGY"
+   },
+   {
+    "code": "V7E9",
+    "seed": 118,
+    "result": "INVALID",
+    "cause": "host stuck buổi 24, BF8G chip-modal loop «Sai Thải Bình đi dò la» (.dlg chip modal) → patch #6/#7",
+    "dump": "u1r/V7E9"
+   },
+   {
+    "code": "6DBR",
+    "seed": 119,
+    "result": "INVALID",
+    "cause": "guest iPad stuck buổi 65, same «Tin báo» signature as KZGY",
+    "dump": "u1r/6DBR (+ guest ckpt = save)"
+   },
+   {
+    "code": "UFFT",
+    "seed": 120,
+    "result": "not a segment",
+    "cause": "boot flake, life never opened (known)"
+   },
+   {
+    "code": "73HN",
+    "seed": 121,
+    "result": "INVALID (killed at buổi 29)",
+    "cause": "guest 46× DEAD on a greyed .kitoff focus card (regression of patch #7) → patch #9"
+   },
+   {
+    "code": "running: seed 122",
+    "seed": 122,
+    "result": "running on patch #9"
+   }
+  ]
+ }
 }
