@@ -53,3 +53,38 @@ Worker is at its context ceiling; MAIN opens the successor. r1 = fdbd44c6 (LAND 
 - Fact (probe on fdbd44c6): j6.js:97 `$("next").onclick=nextBuoi` runs BEFORE every wrapper file (assemble order j9, j10, j6 …), so the button holds the bare j9 nextBuoi. jcoopworld.js:1085 reroutes only `CW.on`; jdayq (r1) wraps the button only to paint a hidden queue. The render auto-advance (j6.js:10, `setTimeout(()=>nextBuoi(),350)` when khắc are spent) calls the GLOBAL (wrapped) chain — so solo players get the wrappers only when they spend all khắc, never when they tap «Sang buổi» with khắc left.
 - To do (LAW 11 family): (1) list every nextBuoi wrapper (`grep -n "nextBuoi=function" dev/build/j*.js`, ~40) with its real effect (jspread D13 spread, j68 evRelease, jagent agDrain, jky npcPass, jagknow, jptime, jexam ticks, jpromo, jgift, jfe, jclose greet/wxSync, jerr, jlooks, j76 carry, j77 stay, jdayq hold (a) …) and mark which a solo tap misses; (2) change the button to `n.onclick=function(e){return window.nextBuoi()}` (keep jdayq's hidden-queue paint first; keep jcoopworld's co-op route) — or do it once in jdayq install, the outermost layer; (3) risks to test: re-entry (jaudit depth, jagknow KN.turn, jspread SP13.nb try/finally), double paint (j70/jmen/j42 call showModal/render after base), jdayq hold (a) now applies to taps (a tap during a pending reward scene is HELD, not run — that is the owner's flight rule, intended), co-op unchanged (CW.on path already wrapped), bots (window.__bot) unchanged; (4) tests: a solo tap with khắc left must run the same wrapper effects as the auto-advance (compare a stat/trace per wrapper: e.g. SP13.stat, evRelease count, KN.turn, DQ.stat.held), plus re-run sangbuoi-held.js, modal-open-buoi.js, dayq-hold/-coop/-order, coop-e2e both orders (COOP_SWAP=1), quickcheck, old save.
 - Tools: dev/test/sangbuoi-held.js (tapAny/drain/newLife/diag helpers; CASES=… env filter, TRACE=1), python http.server needs the ROOT index.html (dev/index.html has no charset meta).
+
+## BIG REVIEW (rv session_01V1ZZH13YzNeAK6hT1mU9ZN, successor of rv 2yv2CZAt) — r1 fdbd44c6: FAIL (r2 required)
+PRIORITY #1 CHECK: OD 16/11 22:45Z (no dialog under/over the flip scene) | main jdayq.js kmFree, jnf.js:271 night gate, j6.js:97 `$("next").onclick=nextBuoi` | review/* sangbuoi-held-fix fdbd44c6, tainghe-open-fix-rv f8cb11b2 (not landed; included via fdbd44c6) | claims SANGBUOI-HELD-FIX 3zq7i35Q (rolled) → r2 worker session_01V1ZZGzWMXPB5U9tSX79ouA.
+Merge: fdbd44c6 onto LIVE 9f72524b (visitor-fix-r10) = local f4c19834 (conflicts index.html/sw.js only, rebuilt). Not pushed: the final verdict is on r2.
+
+### MAIN 137 EXTRA — CONFIRMED on LIVE and on the merge (LAW 11 family → r2)
+Probe (scratch, real `page.tap('#next')`, solo, buổi 1 with khắc left; outermost window.nextBuoi + wrapper effect functions counted):
+| build | path | outer nextBuoi | agDrain | evRelease | knCarryOut | ptTick |
+|---|---|---|---|---|---|---|
+| LIVE 9f72524b Fold/iPad | tap «Sang buổi» | 0 | 0 | 0 | 0 | 0 |
+| LIVE 9f72524b Fold/iPad | window.nextBuoi() (auto-advance path) | 1 | 2 | 1 | 1 | 1 |
+| merge f4c19834 Fold/iPad | tap | 0 | 0 | 0 | 0 | 0 |
+| merge f4c19834 Fold/iPad | window.nextBuoi() | 1 | 2 | 1 | 1 | 1 |
+The buổi advances on a tap, but NPC agents (jagent), events (j68), knowledge carry (jagknow) and palace time (jptime) never run for a solo player who taps with khắc left. Cause: j6 binds the bare j9 nextBuoi at load, before all ~37 wrappers (index.html offset 1264342 vs first wrapper 1809340).
+
+### Gate list (r1 merge)
+| gate | result |
+|---|---|
+| (a) news ≤1 s in M4 night state, flip after (sangbuoi-held F) | PASS Fold 154 ms / flip 160 ms · iPad 338 ms / 235 ms |
+| (b) dqArmModal re-arm bounded by BAL.dayq.rearm (law 4: in jbal2.js:557, not typed) + dqWait drop paints | PASS (E both devices) |
+| (c) dqNewsPass/newsLet never paints over a flip ON SCREEN (own test: real .kmov.kcf.km-full on screen, nfX open, news held; showModal + render + dqArmModal + nextBuoi + #next tap, 3 s) | PASS: 0 frames card-over-scene, dqNewsPass false 30/30, newsLet 0; news paints 151 ms (Fold) / 75 ms (iPad) after the scene closes |
+| (d) co-op unchanged | PASS: coop-e2e 142/142 + COOP_SWAP 142/142, dayq-hold-coop 17/17 both orders, coop-one-world PASS |
+| (e) timed wait cue | no new timed wait. Pre-existing jdfv visitor face-wait ≤4 s has no cue AND hard-codes 4000 (jdfv.js:72, law 4) → KK26 note + BAL key, not this branch |
+| (f) modal-hold-scan / sangbuoi-exit-scan | PASS on merge, FAIL on LIVE (both) |
+| (g) modal-open-buoi Fold + iPad | ALL PASS both · flip-newlife ALL OK · dead-card PASS · dayq-hold 46 PASS · dayq-order PASS · quickcheck PASS (alone; buổi 2516/3767 ms; a run beside other browsers gave a perf FAIL = load) |
+| (h) real-tap shots | Fold A1/F1 looked at: kit card, no cut/overflow. F1 is a synthetic night (HUD says Buổi trưa) → a REAL night shot is still owed on r2 |
+| sangbuoi-held.js | **FLAKY case B**: merge 4 runs → 2 FAIL (Fold «scene closed: NO card painted, Q=2, next disabled, dropped=1» = a stuck screen; iPad «cards closed but the buổi did not advance»); fdbd44c6 alone 4 runs → 2 FAIL (Fold + iPad «did not advance»). Not from the merge |
+Kit: no UI added (0 style/markup lines in the diff). Law 4 OK (BAL.dayq.rearm). OD 16/11 22:45Z respected (gate c).
+
+### FAIL list for r2 (worker 01V1ZZGzWMXPB5U9tSX79ouA)
+1. One entry point: the solo «Sang buổi» tap must run the OUTERMOST wrapped nextBuoi (keep jdayq's hidden-queue paint first, keep jcoopworld's co-op route). Regression proof: the table above must show equal wrapper effects for tap vs auto-advance (Fold + iPad), plus re-entry checks (jaudit depth, jagknow KN.turn, jspread SP13.nb).
+2. Case B must be stable: 10/10 per device. First find whether «did not advance» is a real held turn (dqWait first exit `!dqUi()||bkey()!==w` drops the turn WITHOUT painting) or test timing; the Fold «NO card painted, next disabled» is a softlock if real. Under CPU load is when it shows: run with another browser busy.
+3. (h) a REAL night (buổi tối, real jflip scene, a real «Tin trong cung» card) + «Sang buổi» tapped, Fold 755x1000 + iPad 1180x820, looked at; one pair to img/_review/sangbuoi-held/pair.jpg.
+4. Re-run every gate above on r2 merged onto the newest LIVE.
+Notes: jdfv face-wait 4000 ms typed (law 4) + no cue → MAIN for KK26 (not blocking this branch).
