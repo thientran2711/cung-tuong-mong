@@ -1,8 +1,45 @@
 # PASS-not-landed scan 25/11 (read-only; MAIN 145 order; MOTION-DESIGN-5 worker)
 
-PRIORITY #1 CHECK: no existing scan file (grep reports/ + git grep origin/main for pass-not-landed: none). Known seed: review/kit-music-r1 475df8ba PASS 24/11 never landed.
+## TRULY MISSING (content check 25/11; follow-up of MAIN 145 — read this table, ignore the sha-based part below)
 
-## Method (and its limits — read before trusting a row)
+Method: branch diff vs merge-base (GitHub compare main...tip; dev/build + dev/kit only; index.html/sw.js/assets.json ignored). ≤8 NEW identifiers (function/const/window.X/KIT_*), else ≤6 distinctive added lines, looked up on origin/main (17dfa64da) AND on the in-flight trees (lc16-music-on-kitok, lc16-kitok-on-live2, sangbuoi-held-fix, selection-scene-r19, coop-rebirth-stuck, coop-night-live). ≥ 66 % found = LANDED / IN-FLIGHT. Chains (-rN / -rv): only the newest revision is judged, older ones are SUPERSEDED by it. Control (5 recent main commits through the same check): 4 clean, 1 partial from later edits → treat 12–57 % rows as «eyeball first».
+
+| sha (tip) | branch | what for the player | PASS by/when (file) | evidence (fraction of new content found) |
+|---|---|---|---|---|
+| 2f78c51c | bal-ranks-law4-rv | số theo hạng đều lấy từ BAL (luật một lõi số) | FOREMAN_D_STATUS-11-24-2026 24/11 | main 0.0 |
+| 73fe03b9 | co-ngu-seals | lời sấm cổ ngữ / ấn (LOTS) trong quẻ | FOREMAN_B_STATUS 25/11 | main 0.0 |
+| 5399c31f | coop-presence-reload | đôi bạn: hiện diện + tải lại phòng không mất trạng thái | FOREMAN_B_STATUS 25/11 | main 0.2; selscene-r19 0.2 |
+| cc4fed89 | d-followups-1-rv | phong vị: phanCungEdict / kitPromoHook (selscene-r19 mang ~25 %) | FOREMAN_D_STATUS 25/11 | main 0.0; selscene-r19 0.25 |
+| 09e7b6e6 | flight-mucluc-kit | mục lục truyện trong màn bay (ktChapToc, kitTocOpen) | land-chain-12 25/11 | main 0.25; selscene-r19 0.25 |
+| a3108ff7 | kit-nochip-r2 | bỏ chip tự chế, dùng bộ phận kit | FOREMAN_B_STATUS 24/11 | main 0.0 |
+| 69003e15 | kit-optfit | tiêu đề thẻ lựa chọn vừa khung | FOREMAN_B_STATUS-11-24-2026 24/11 | main 0.0 |
+| a6ca9994 | kit-optinfo-r2 | hàng thông tin trên thẻ lựa chọn | land-chain-13 25/11 | main 0.0 |
+| dfdf48e4 | kit-opts-realtap | chạm thật trên thẻ lựa chọn | MOCK-STAGE 25/11 | main 0.0 |
+| f44c657d | kit-ring5 | vòng chọn RING-DESIGN-5 / thẻ gỗ (KIT_PLAQUE ~57 % đã có) | ring-design 25/11 | main 0.57; selscene-r19 0.57 |
+| 14e66f43 | kit-scene-fade | cảnh kit mờ dần vào/ra | land-chain-12 25/11 | main 0.0 |
+| b01cc880 | law1-audit-r1 | luật 1 hai chiều: NPC chuộc/cầm đồ (wdNpcRedeem/Pawn) | FOREMAN_B_STATUS-11-24-2026 24/11 | main 0.0 |
+| 854c1fc1 | law1-maid-away-r1 | luật 1: cung nữ đi vắng / về cung (misHome) | FOREMAN_B_STATUS 24/11 | main 0.0 |
+| 11b6e923 | lc12-step8 | bước 8 của LC12 (minigame-fix); r2 nodiff → kiểm tay | count-1 24/11 | main 0.62; selscene-r19 0.62 |
+| afb92cef | lc14-sansang-on-palace | LC14 stack (sáng-sáng trên palace-distance) | FOREMAN_D_STATUS 25/11 | main 0.12; selscene-r19 0.38 |
+| 19c0a3b0 | lc14-savegrowth-on-cnv | LC14 stack (save-growth trên cnv) | FOREMAN_D_STATUS 25/11 | main 0.25; selscene-r19 0.25 |
+| 44115c0c | leave-palace-r5 | rời cung / ra ngoài cung (ttNpcExposed, LPV_MID) | land-chain-12 24/11 | main 0.0 |
+| b2a0d0c2 | mgskin-wire-r2 | trò chơi nhỏ theo mùa + tên (MGSKIN_SEASON/NAMES) | FOREMAN_B_STATUS 24/11 | main 0.0 |
+| 96c2859e | net-thresholds | ngưỡng oán mạng (oanCool) | FOREMAN_D_STATUS 25/11 | main 0.0 |
+| 9849ca5f | palace-distance-rv | khoảng cách giữa các cung (pdCardShort, pdVisBonus) | FOREMAN_D_STATUS 25/11 | main 0.0 |
+| 4defb821 | promo-build-2-rv | phong vị / sắc phong (phanCungEdict, kitPromoHook) | FOREMAN_D_STATUS 24/11 | main 0.0; selscene-r19 0.25 |
+| e573b9b8 | save-growth | chặn lưu khi lớn lên (saveBlocked, ilStockTake) | land-chain-12 25/11 | main 0.25; selscene-r19 0.25 |
+| 5c428bd8 | scent-r | hương: nói tỉ lệ + người (scTellOdds) | FOREMAN_E_STATUS 24/11 | main 0.0 |
+| 65abb0de | servant-trust-rv | người hầu giữ bí mật (svtHasSecret, SVT_COVERT) | FOREMAN_D_STATUS 24/11 | main 0.0 |
+| 02842ca2 | sideline-dlg-3-r2 | lời thoại bên lề (dlgsResolve); chuỗi -2-r1, -f4 cùng việc; kitTypeLine/kitDialogue đã có ở selscene-r19 | FOREMAN_B_STATUS 25/11 | main 0.25; selscene-r19 0.5 |
+| 25a9a9cc | talk-others-people-rv | nói chuyện về người khác (elderTalkGain) | FOREMAN_D_STATUS 25/11 | main 0.0; selscene-r19 0.25 |
+
+In flight (content found on LC16 / selscene trees, not main): coop-night-live [night-live], coop-rebirth-stuck-r6 [rebirth], d-robot-bugs [lc16-kit,lc16-kitok], kit-close-reach [lc16-kit,lc16-kitok], kit-fitfast-r3 [selscene-r19], kit-opts-pack-3 [lc16-kit,lc16-kitok], kit-opts-pack-4-rv2 [lc16-kit,lc16-kitok], kit-promo-hook-rv [selscene-r19], kit-batch2-r1 [selscene-r19], kit-dialogue-vn-r2 [selscene-r19], kit-music-r1 [lc16-kit].
+Landed under other shas (content on main): kit-opts-pack, kit-woodskin-r2, pcport-rk-r2, kit-evframe-r2.
+lc14-* rows are lander-stack branches: their content = their member branches (re-merge trains), so MISSING there means the train itself is not on main yet.
+
+---
+
+## (first-pass, sha-based — noisy, MAIN 145: not actionable) Method (and its limits — read before trusting a row)
 - Source: every file in dev/handover/reports/*.md (1395), dev/handover/FOREMAN_*_STATUS.md, HANDOVER_SESSION9.md and dev/archive FOREMAN_*_STATUS-11-2x / HANDOVER_SESSION9 on the handover branch (history is grafted at 13:00Z 25/11, so «last 5 days» = lines that carry a date 20–25/11).
 - A row = a branch named on a line with LAND READY / KIT OK / «reviewer|review|verdict … PASS» AND a 7–12 hex sha. (Bare «PASS» was dropped: robot-test PASS lines flooded the first pass.)
 - on main? = GitHub compare main...<sha|branch tip>: behind/identical = the sha/tip IS an ancestor of main. 72 matched branches have their tip on main → skipped (landed). A branch whose tip is NOT an ancestor and has no main commit subject naming its branch/topic is listed as NOT LANDED (suspect).
