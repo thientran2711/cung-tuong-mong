@@ -91,6 +91,38 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
    const n={};for(const y of rivals.filter(y=>y&&y.alive&&!y.out&&y.resHead==="me"&&!(rkOf(y)>=3&&y.pal!=null)))n[y.resHall]=(n[y.resHall]||0)+1;
    ck('save load ('+L.length+' NPCs + her in a house of '+resCap()+'): she keeps her hall + house (j95cCap never drops her), NPCs give way, every hall ≤ BAL.res.side',f.resHead==="me"&&f.resHall===BAL.res.halls[0]&&Object.values(n).every(x=>x<=BAL.res.side),{f:hsOf(f),n});
    const a=npcSig()+JSON.stringify(hsOf(f));palFix();ck('save load: palFix again = identity',npcSig()+JSON.stringify(hsOf(f))===a,null);rivals.splice(rivals.indexOf(f),1)}
+  /* r5 (A/B r1 host save «R[4].resHall tay → dong» ×6): the merged week REBUILDS her entry from her blob (fromCanon → buildFriend → deser palFix).
+     The blob gave only pal / resHead (LOOK): no resHall → deser palFix gave an NPC her hall, keepFriendPos put her relayed hall back → two in one
+     hall in every save; the save load (CW.on off) moved the NPC. Now: her whole house + her last relay are on the entry before any palFix, and a
+     relayed house change re-houses this seat at once (houseSettle) → the saved state is a palFix fixed point (= save→load→save identity) */
+  for(const seat of ["a","b"]){const f=setup(seat);const SEAT=seat==="a"?"host":"guest";const myPid=seat==="a"?901:902;const HL=BAL.res.halls;
+   const mate=npcs().find(v=>v.resHead==="me"&&!(rkOf(v)>=3&&v.pal!=null));
+   const blob={name:f.name,S:{name:f.name,rank:f.rank,age:f.age||20,resHead:myPid,resHall:HL[1],pal:null,palLone:0,palWait:0}};
+   CW.fpos=null;const v0=CW.X.buildFriend(J(blob));
+   ck(SEAT+': rebuilt entry carries her WHOLE house from her blob (resHall too)',!!v0&&v0.resHead==="me"&&v0.resHall===HL[1],v0&&hsOf(v0));
+   CW.fpos={name:f.name,hs:{resHead:myPid,resHall:HL[0],pal:null,palLone:0,palWait:0},week:-1,buoi:0,place:"home"};
+   const v1=CW.X.buildFriend(J(blob));ck(SEAT+': rebuilt entry carries her last relayed house (same life) before any palFix',!!v1&&v1.resHead==="me"&&v1.resHall===HL[0],v1&&hsOf(v1));
+   CW.fpos.name="Người Khác";const v2=CW.X.buildFriend(J(blob));ck(SEAT+': another life\'s relay is not put on the rebuilt entry',!!v2&&v2.resHall===HL[1],v2&&hsOf(v2));CW.fpos.name=f.name;
+   /* the rebuild itself: her old entry out, the rebuilt one in, an NPC in her relayed hall, the rebuild's palFix, then keepFriendPos (a place step) */
+   rivals.splice(rivals.indexOf(f),1);const g=v1;g.id=f.id;rivals.push(g);if(mate){mate.resHead="me";mate.resHall=HL[0]}
+   CW.inFC=1;try{palFix()}finally{CW.inFC=0}S.where=S.where||{};CW.keepFriendPos();
+   if(seat==="a")ck('host: rebuild: the NPC in her hall gave way in the rebuild\'s own palFix',!!mate&&mate.resHall!==g.resHall&&g.resHall===HL[0],{m:mate&&hsOf(mate),g:hsOf(g)});
+   const sv=()=>JSON.stringify(rivals.filter(v=>v).map(v=>[v.id].concat(hsOf(v))))+JSON.stringify(hsOf(S));
+   /* the save load: palFix with no room open (the robot scratch page) must change NOTHING (host save; the guest's world people are the host's) */
+   if(seat==="a"){const a0=sv();CW.on=false;palFix();ck('host: rebuild → save → load: palFix = identity (no housing rewritten)',sv()===a0,null);CW.on=true;
+    /* her LIVE relay moves her into the hall an NPC holds → this seat re-houses at once, the next save loads unchanged */
+    const m2=npcs().find(v=>v.resHead==="me"&&v.resHall===HL[1]&&!(rkOf(v)>=3&&v.pal!=null))||mate;if(m2)m2.resHall=HL[1];
+    CW.fpos.hs={resHead:myPid,resHall:HL[1],pal:null,palLone:0,palWait:0};const ch=CW.friendHouse();
+    ck('host: live relay into an NPC\'s hall: she takes it, the NPC moves at once',ch&&g.resHall===HL[1]&&!!m2&&m2.resHall!==HL[1],{m:m2&&hsOf(m2),g:hsOf(g)});
+    const a1=sv();CW.on=false;palFix();ck('host: live relay → save → load: palFix = identity',sv()===a1,null);CW.on=true}
+   else{/* guest: two players in one hall after the host's relay (she, the host, came into MY hall) → I move at once (the host keeps it) */
+    S.rank=0;S.pal=null;S.resHead=f.resHead==="me"?null:S.resHead;const hd=npcs().find(v=>v.pal!=null&&rkOf(v)>=3&&!v.queen&&palHostOK(v));
+    if(hd){for(const v of rivals)if(v!==g&&v.resHead===key(hd))v.resHead=null;S.resHead=key(hd);S.resHall=HL[0];
+     CW.fpos.hs={resHead:hd.id,resHall:HL[0],pal:null,palLone:0,palWait:0};const ch=CW.friendHouse();
+     ck('guest: live relay puts the host in my hall: I move at once (no two players in one hall)',ch&&g.resHall===HL[0]&&S.resHead===key(hd)&&S.resHall===HL[1],{S:hsOf(S),g:hsOf(g)});
+     const pp=()=>JSON.stringify([hsOf(S),hsOf(g)]);const a1=pp();CW.on=false;palFix();ck('guest: live relay → save → load: palFix keeps both players where they are (world people are the host\'s, not tested here)',S.resHall===HL[1]&&g.resHall===HL[0]&&pp()===a1,{S:hsOf(S),g:hsOf(g)});CW.on=true}
+    else ck('guest: an NPC head to live with',false,null);S.resHead=null;S.resHall=null;S.rank=Math.max(S.rank,3)}
+   rivals.splice(rivals.indexOf(g),1)}
   /* solo: no coop entry → palFix exactly as before (no friend, CW.on false): identity on a settled world */
   CW.on=false;CW.seat=seat0;palFix();const s1=npcSig();palFix();ck('solo: palFix identity (no coop entry, nothing moves)',npcSig()===s1,null);
   CW.on=on0;CW.seat=seat0;CW.fpos=fpos0;log=log0;return out});

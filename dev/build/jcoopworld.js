@@ -86,6 +86,10 @@ function buildFriend(P,mine){if(!P||!P.S||P.dead||P.S.dead||friendHome(P))return
  const v={id:fp(),coop:true,name:P.name||s.name,rank:s.rank||0,queen:(s.rank||0)>=7,trait:"Khiêm nhường",malice:15,rel,oan,rl,ro,ev:((mine||S||{}).cev||{})[fp()]||0,
   evm:{me:cev[mp]||0},alive:true,out:!!s.out,kids:[],ghen:0,pg:0,nights:0,inv:[],staff:[],nightLog:[]};
  for(const k of STAT)if(s[k]!=null)v[k]=s[k];for(const k of LOOK)if(s[k]!=null)v[k]=s[k];
+ /* robot-coop-fix-3 r5 (A/B r1 host save «R[4].resHall tay → dong» ×6, the reverse of r3's dong → tay): her WHOLE house rides her blob (LOOK
+    held only pal / resHead: the rebuilt entry had no resHall / palLone / palWait, so the merged week's deser palFix gave an NPC her side hall,
+    keepFriendPos then put her relayed hall back = two in one hall in every save until the next palFix; a save load moved the NPC) */
+ for(const k of HOUSE)if(s[k]!=null)v[k]=J(s[k]);
  /* B r1 item 6 (root, both paths): "hh" (the Empress's regard) is derived from the Empress's row toward this entry (j24 hhGet). A plain copied
     number was "migrated" by j24 hhBind at the next consorts() (blended into that row: the Empress's row toward the other seat moved every
     rebirth / every rebuild of the entry). Bound here, before anything sees the entry: no migration; the week write-back never sends it back. */
@@ -99,6 +103,8 @@ function buildFriend(P,mine){if(!P||!P.S||P.dead||P.S.dead||friendHome(P))return
     Display copies only: what an act does to them goes to her through `res` (item / kid ops), never through the week write-back. */
  v.inv=bagOf(s.inv);v.kids=kidsCopy(s.kids);if(s.preg&&!s.hidden){v.preg=s.preg;if(s.fake)v.fake=s.fake}v.fx7=J((s.j71&&s.j71.fx)||null);
  mapMe(v,false,mp);v.id=fp();
+ /* …and her last relayed house (same life), BEFORE anything on this seat (deser palFix) houses anyone around her: one writer of her house */
+ try{const m=CW.fpos;if(m&&m.hs&&(!m.name||m.name===v.name))houseIn(v,m.hs)}catch(e){}
  v.__b=J(Object.assign({},...STAT.map(k=>({[k]:k==="hh"?hhSafe(v):v[k]})),{rel:v.rel,oan:v.oan,rl:v.rl,ro:v.ro,em:v.evm.me,out:v.out,rank:v.rank,ill:v.ill||null,fx:fxSnap(v)}));
  return v}
 function buildFriendSrv(P){const s=P.S;return {sid:fp(),coop:true,name:P.name||s.name,role:"maid",fc:s.fc,fk:s.fk,face:0,hue:0,age:s.age||BAL.ageMin,loyal:60,
@@ -404,7 +410,12 @@ function houseWire(){const o={};for(const x of HOUSE)o[x]=S[x]==null?null:J(S[x]
 function houseIn(f,hs){if(!hs||typeof hs!=="object")return false;const o=mapMe(J(hs),false,me());let ch=false;
  for(const x of HOUSE){if(!(x in o))continue;if(JSON.stringify(f[x]==null?null:f[x])!==JSON.stringify(o[x])){if(o[x]==null)delete f[x];else f[x]=o[x];ch=true}}return ch}
 /* her last relayed house onto her entry again (after anything on this seat re-housed it); same life only (a reborn friend has a new entry) */
-function friendHouse(){if(!CW.on||!S)return false;const f=friendEntry(),m=CW.fpos;if(!f||!m||!m.hs||(m.name&&m.name!==f.name))return false;return houseIn(f,m.hs)}
+function friendHouse(){if(!CW.on||!S)return false;const f=friendEntry(),m=CW.fpos;if(!f||!m||!m.hs||(m.name&&m.name!==f.name))return false;return houseSettle(houseIn(f,m.hs))}
+/* robot-coop-fix-3 r5 (same family): her house changed on this seat (relay) → this seat's palFix runs NOW, so an NPC / my own player sharing her
+   palace or side hall gives way at once (host: the NPC moves and jcoophl sends the move; guest: her own S moves, world people stay the host's).
+   Before: nothing re-housed until the map / week end, every save in between held two people in one hall and a save load moved one of them.
+   Not inside a rebuild (fromCanon: its deser runs palFix itself) nor a thin seat step (CW.ctx: S is the other seat's) */
+function houseSettle(ch){if(ch&&CW.on&&!CW.inFC&&!CW.ctx&&S&&!S.dead&&typeof palFix==="function")try{palFix()}catch(e){console.error("house settle",e)}return ch}
 CW.houseWire=houseWire;CW.houseIn=houseIn;CW.friendHouse=friendHouse;
 /* her own numbers, live: shown on her entry; the week write-back baseline moves with them so the merge never counts them as mine */
 function liveStats(m){const f=friendEntry();if(!f||!m.st||(m.name&&m.name!==f.name))return false;let ch=false;
@@ -415,7 +426,7 @@ function liveStats(m){const f=friendEntry();if(!f||!m.st||(m.name&&m.name!==f.na
  if(m.fx&&typeof m.fx==="object"){const bx=f.__b&&f.__b.fx;for(const x of FXL){if(!(x in m.fx))continue;if(bx&&!fxEq(f[x],bx[x]))continue;/* a mark this seat put on her this week waits for the week write-back */
   const v=m.fx[x];if(!fxEq(v,f[x])){f[x]=J(v);ch=true}if(bx)bx[x]=v==null?null:J(v)}}/* her face marks, live (review/looks-2) */
  if(famIn(f,m.fam,m.pets))ch=true;
- if(houseIn(f,m.hs))ch=true;
+ if(houseSettle(houseIn(f,m.hs)))ch=true;
  return ch}
 /* her bag / kids / pregnancy / festival entries / pets onto her entry (inline pos of an old client, or the ctm-fam relay) */
 function famIn(f,fm,pets){let ch=false;
