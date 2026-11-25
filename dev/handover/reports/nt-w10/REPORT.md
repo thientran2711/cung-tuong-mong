@@ -55,3 +55,39 @@ Kit request (R2) for MAIN/kit keeper; residuals a (= kit request), b, c, f; N4 �
 
 ## HANDOVER
 None needed (SSK). If FAIL: worktree recipe in nt-w9 §HANDOVER; before relshow-scan run `python3 dev/build/assemble.py && node dev/test/relshow-bal.js $PWD/dev/index.html dev/test/relshow-bal.json`.
+
+---
+# ROUND 2 (Foreman D depth 4 order 15:10Z: fold RV4 N1/N2/N3/N5) — review/net-ghen-2 @ d0bdb6dc — SSK
+PRIORITY #1 CHECK: OD net-ghen LAW 11 wave 2 | main none | review/net-ghen-2 b8795da6 | claims W10. Reused: j1 ghenUp, jaudit pvOanAny, dev/measure nt-run/nt-sum/nt-norm.
+Commits: 02b218e1 (N2/N3/N5), d0bdb6dc (site rebuilt).
+
+## Changes
+- N2 jshelf.js shelfReact: the two direct `obs.ghen=…` raises (her lavish shelf seen; her ngự ban items seen) and their NPC `oanAdd(obs,t,n*ghenOanK)` twins now go through ONE call `ghenUp(obs,n,why,t)`: t = her → obs.ghen +n + Chạnh lòng feeling (new: the feeling); t = an NPC → oán toward t × BAL.net.ghenOanK + feeling (same amount as before). Reasons «thấy ngươi/‹tên› bày đồ xa hoa», «… bày đồ ngự ban». In-page check: ghen 14→18 (+2 +2, same numbers as before), 4 ghenUp calls with the right by. Side note: a co-op seat t (t.coop) now takes ghenUp's co-op path (raise ghen) like every other ghenUp site.
+- N3 jagacts3.js P3C.dance: her card keeps «phi tần ghen +N» (ghenAll = their ghen of her); an NPC dancer's option text is now `pvOanAny(ghenN(BAL.ghen.dance)×BAL.net.ghenOanK,"phi tần oán nàng ta")` → «phi tần oán nàng ta +1 đến +4» (what ghenUp applies; numbers from BAL, range per unknown nết). relshow-scan: oán WIRED 78→79, RAW 0.
+- N5 jbal2.js comment «42 %» → «59 % … (RV4 robot on 96c2859e: 15168 of 25898 ghenUp gain)».
+- N4 (kit wait) and N6 (kit keeper) not touched, per order.
+
+## N1 robot (nt-run sens, 900 s per slot, 4 slots in parallel × 3 rounds = 12 slots ALONE; nt-sum / nt-norm). No BAL tuned.
+| build | slots | weeks | ghen p50/p90 NPC→her | NPC→her band-3 | NPC→NPC band-3 | all band-3 | proud÷gentle |
+|---|---|---|---|---|---|---|---|
+| RV4 de69f206 (6 slots) | 6 | 1395 | 14/96 | 11.2 % | 40.5 % | 25.6 % | 2.13 |
+| W10 d0bdb6dc | 12 | 786 | 72/96 | 150/944 = 15.9 % | 194/464 = 41.8 % | 344/1408 = 24.4 % | 2.05 |
+| A/B control b8795da6 (pre-N2/N3) | 4 | 213 | 81/96 | 25/234 = 10.7 % | 110/224 = 49.1 % | 135/458 = 29.5 % | 4.25 (small sample) |
+- Targets hold on d0bdb6dc: all band-3 ≤ 30 % ✓, proud÷gentle ≥ 2 ✓. ghenUp gain toward her: 45209, caused by her 45209 / by an NPC 0 ✓.
+- CAVEAT: every slot on this box stopped early with «bot step hang >120s» / «read hang» (12/12 runs; avg 65 weeks/slot vs RV4 232). The control build b8795da6 hangs the same way (4/4), so it is the harness under 4-way load, not N2/N3. Short lives = early weeks, which is why ghen p50 reads 72–81 here vs 14 on RV4's long lives (same on the control). A reviewer wanting RV4-comparable p50 should run 3 slots, not 4.
+
+## Gates on d0bdb6dc
+| gate | result |
+|---|---|
+| build (build_site + assemble) | OK |
+| one-core ×4 | PASS (bind 0 mismatches) |
+| c6-cancel-scan | 0 cards |
+| relshow-scan --fail-raw (fresh dump) | PASS RAW 0 (oán 104 sites, WIRED 79) |
+| relshow-rt | PASS |
+| net-build | PASS 203/203 |
+| rc-scan dau,hau + rc-sum | 1003 runs, 602 cards, 0 page errors; not named 39 = residual a 26 (servant leaves), b 3 (Thỉnh an familiarity), c 10 (Múa LOSE Sủng 8→5 ×2 — her card's Bại says only «Danh −6»; Bạc 380→395 stipend landing during the act ×8). «consort evon»: 4 changes, 0 not named → W9's row confirmed. All consort families 0. |
+| quickcheck ALONE | PASS 746 s (render 278/299, buổi 1714/1699) |
+| coop-e2e fresh, alone | 142/142 first run |
+| real taps Fold + iPad | her Múa card text read from the page on both devices: «Kèm phi tần ghen +4», unchanged ✓; a real TAP on it NOT achieved (in the act-audit 'hau' setup the dealt card sits in a hidden list; Hành sự / Tài nghệ / Học tập taps did not surface it). The NPC dancer text and jshelf have no card she sees. 0 page errors. |
+
+Open for Foreman D: residual c is a real shown ≠ applied on her Múa card (Bại omits Sủng −3) — pre-existing, family «lose row of an act card»; kit request family for a/f; RV4 N4/N6 with the kit keeper.
