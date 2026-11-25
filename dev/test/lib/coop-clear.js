@@ -42,5 +42,13 @@ const SCR=()=>{const V=x=>!!x&&x.offsetParent!==null;const bt=r=>[...r.querySele
   sx:(()=>{try{const Z=S.selx2;return{sel:S.selx?{done:S.selx.done|0,art:S.selx.art||''}:null,days:Z?Z.days|0:null,at:Z&&Z.at,ban:Z&&Z.ban|0,mw:window.__selxMw||null,qk:typeof selxQK==='function'?selxQK():null,dead:!!S.dead,clk:window.__selxClk||null}}catch(e){return null}})(),
   scn:(()=>{const L=document.querySelector('.kscn');return L?{box:!!L.querySelector('.kdv-box'),t:(L.innerText||'').slice(0,80),taps:window.__kscnN|0}:null})(),
   ov:[...document.querySelectorAll('.kmov,#ov,#kg82,.kcf,#kroul,#kneov,.kfoc')].filter(x=>V(x)||getComputedStyle(x).display!=='none'&&x.getClientRects().length).map(x=>({k:(x.id||x.className).toString().slice(0,40),b:bt(x)})).slice(0,8),
-  mg:typeof S!=='undefined'&&S&&S.mg?Object.keys(S.mg).slice(0,6):null,nf,ntr:window.__nfTr||null,dtr:window.__dayTr||null}};
-module.exports={TAP,tap,first,SCR};
+  mg:typeof S!=='undefined'&&S&&S.mg?Object.keys(S.mg).slice(0,6):null,/* SELSCENE-17: the dialog hold gates (jnf night gate ← jflip cfBusy; j52 identity card NLP; the stage day title) */hold:(()=>{try{return{NLP:typeof NLP!=='undefined'?!!NLP:null,nlQ:Q.some(m=>m&&m.nl),cfB:typeof cfBusy==='function'?!!cfBusy():null,cfA:typeof cfAge==='function'?cfAge():null,nfX:S&&S.nfX?JSON.stringify(S.nfX).slice(0,120):null,pend:!!(window.COOPW&&COOPW.pend),dawn:(()=>{const d=document.getElementById('dawn');return d?(!d.hidden)+':'+d.className:null})(),dt:!!document.getElementById('kdaytc'),cfd:(window.__cfdbg||[]).slice(-4)}}catch(e){return String(e)}})(),nf,ntr:window.__nfTr||null,dtr:window.__dayTr||null}};
+/* lifeWait(o, clear) — LAW 11 (SELSCENE-17, coop-e2e tt-A1 «#next enabled» + «buổi 3:0 advanced for both»): a seat that is still MAKING her life — her 3 selection
+   days (jselxday selxDaysOn), a kit selection scene on screen (body.kscn-on), a life that just ended (S.dead: her «Kiếp này» card → Chuyển kiếp), the
+   rebirth choice (COOPW.inLife) — has no «Sẵn sàng» to press; the room clock waits for her too (jcooptimer myLife). A bot's press budget (80 tries) only
+   counts tries in her playing life: before, a life that ended at the selection (ban hoa) and was reborn into a second set of days INSIDE one press
+   (each try = one scene tap + 250 ms while a scene is up) spent the whole budget → a false «#next enabled» FAIL. Every bot's press calls this first.
+   Cap 6 min (≈45 cards + scenes per set of days), as coop-e2e daysThrough. */
+const MAKING=()=>{try{if(typeof S==='undefined'||!S)return true;if(S.dead)return true;if(window.COOPW&&COOPW.inLife)return true;if(document.body.classList.contains('kscn-on'))return true;return typeof selxDaysOn==='function'&&!!selxDaysOn()}catch(e){return false}};
+async function lifeWait(o,clear,ms=360000){const t0=Date.now();while(Date.now()-t0<ms){let m=false;try{m=await o.p.evaluate(MAKING)}catch(e){return}if(!m)return;await clear(o);await new Promise(r=>setTimeout(r,200))}}
+module.exports={TAP,tap,first,SCR,lifeWait,MAKING};
