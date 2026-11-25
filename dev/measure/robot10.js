@@ -1,3 +1,4 @@
+/* NOTE (owner 25/11 ~05:10Z): this in-page JS bot does NOT tap like a person — every robot LIFE round now runs dev/test/robot-rt.js (solo) / dev/test/robot-rt-coop.js (co-op) on review/robot-realtap; lives from this runner are INVALID for counts (dev/measure/robot-audit.js). */
 /* ROBOT-10 — robots play whole lives and report every bug (owner OD 23/11 ~19:20Z «ROBOT PLAYTEST BEFORE SHE PLAYS»).
  USAGE
    node dev/measure/robot10.js <origin> <branch|all|spread> <bots> <lives> [out]
