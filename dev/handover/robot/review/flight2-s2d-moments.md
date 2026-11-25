@@ -1,0 +1,185 @@
+# flight2-s2d moments (runner notes first, then harness log)
+
+## Runner (player) notes
+### flight2-s2b cnv_mat rand (casual newcomer, iPad, harness c29a6b5b) — moment log (first life s2 voided: harness stuck, evidence kept)
+- year1 month5 (18 tuổi, Cung nữ tam đẳng của Phi Vương Thư Dao) · Tư trang tab + person dialog «Tâm trạng · Phi» · ODD · a different person (Phi) than s2 (Hoàng hậu) with the same seed: roulette/character not reproducible by seed; the same person dialog (no backdrop, ✕ at ~(750,267)) is again left open over a tab; as a player I would not know it stays until I tap ✕ · shots-flight2-s2b/now.png
+- same · ODD · Tư trang tab behind the dialog shows «Đã biết: Vượt phẩm» chips and «Xa xỉ 20» with a ×-marked chip row — meaning unclear to a newcomer.
+### flight2-s2d (continuation, harness 4523381f, resumed from ckpt buổi 18) — moments
+- year2 month4 (20 tuổi, Cung nữ tam đẳng của Phi Thẩm Linh Tê), buổi ~150 · Dư đồ tab + «Tâm trạng · Ta» dialog · DELIGHTED · the self mood dialog is rich and readable (Thanh tâm trạng, Vì sao lên xuống, Cảm xúc, Ảnh hưởng), cổ trang wording, clear reasons for -3 «trời giông tố».
+- same · CONFUSED · the dialog covers most of the screen while the phi and cung nữ figure are barely visible behind; as a newcomer I do not see which tab/map place I was on (Dư đồ shows greyed places «vắng · 2 khắc»), so «Sang buổi» (bright) is the only obvious next step.
+- ODD (all runs) · same seed 1508948518 produced a different person each restart (Hoàng hậu Tăng Diệu Âm → Phi Vương Thư Dao → Phi Thẩm Linh Tê): seed does not fix the roulette identity; irreproducible lives across restarts.
+- save size: 314200 chars @buổi 50, 375537 @100, 418217 @150 (year 2) → ~+0.7k chars per buổi.
+
+## Harness moment log (shots on CDN img/_review/flight2-s2d/ : m-look, noclose, end, stuck; m-new shots kept locally only)
+# flight2-s2d moment log (bot rand, ipad, seed 1508948518, real-tap harness 95718760)
+Format: game date · screen · feeling · what happened · shot (relative to the out dir). Lines written by the harness; the runner adds its own feelings from the shots (ROBOT-PLAYER-REVIEW.md §A).
+
+- year 7 · turn 74 · tuần 2 · buổi 0 · rank 0 · #klife «» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2d/m-new-907-1.png
+- year 7 · turn 74 · tuần 2 · buổi 0 · rank 0 · page «Tích Cần viện · Ở đây còn 17 người.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc61Tài49Tâm cơ33Đức41Danh4 | Bạc87Sức100/100 | Buổi sáng, còn 4 khắc | nắng sớm oi ả | Tâm trạngBình thản0 | Về phòng · shots-flight2-s2d/m-new-907-2.png
+- year 7 · turn 74 · tuần 2 · buổi 0 · rank 0 · .dlg «Tin chờ người sai đi» · NEW SCREEN · first time on this screen; buttons: Lui | Xem lời nhờTốnkhôngĐượcCó kh | Xem lời nhờTốnkhôngĐượcCó kh | Xem lời nhờTốnkhôngĐượcCó kh | Xem lời nhờTốnkhôngĐượcCó kh | Xem lời nhờTốnkhôngĐượcCó kh | Xem lời nhờTốnkhôngĐượcCó kh | Nghe lệnhTốn · shots-flight2-s2d/m-new-907-3.png
+- year 7 · turn 74 · tuần 2 · buổi 0 · rank 0 · #modal «Có khách đến chơi» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2d/m-new-907-4.png
+- year 7 · turn 74 · tuần 2 · buổi 0 · rank 0 · .dlg «Có khách đến chơi» · NEW SCREEN · first time on this screen; buttons: Tiếp đón nồng hậuRất vữngTốn | Tiếp qua loaRất vữngTốnSức - | Từ chốiRất vữngTốnkhôngĐượct | Tiếp rồi đem chuyện đi kể vớ · shots-flight2-s2d/m-new-907-5.png
+- year 7 · turn 74 · tuần 2 · buổi 0 · rank 0 · #kxcatch «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc61Tài49Tâm cơ33Đức41Danh4 | Bạc87Sức98/100 | Buổi sáng, còn 4 khắc | nắng sớm oi ả | Tâm trạngBình thản0 | Về phòng · shots-flight2-s2d/m-new-907-6.png
+- year 7 · turn 74 · tuần 2 · buổi 0 · rank 0 · .dlg «Bạc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-907-7.png
+- year 7 · turn 74 · tuần 2 · buổi 1 · rank 0 · .dlg «Chương 8 · Đêm đầu» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh | Đi làm: Làm tròn phận sự hầu | Đi làm: Đi làm quen các nơi | Đi làm: Kết thân một người c · shots-flight2-s2d/m-new-908-8.png
+- year 7 · turn 74 · tuần 2 · buổi 3 · rank 0 · .kfoc «» · NEW SCREEN · first time on this screen; buttons: Hầu bên cạnh chủ · Tùy duyên | Lui · shots-flight2-s2d/m-new-910-9.png
+- year 7 · turn 75 · tuần 0 · buổi 0 · rank 0 · .kne «» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2d/m-new-910-10.png
+- year 7 · turn 75 · tuần 0 · buổi 0 · rank 0 · #dawn «» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-flight2-s2d/m-new-911-11.png
+- year 7 · turn 75 · tuần 0 · buổi 0 · rank 0 · .kbk «Tổng lược» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2d/m-new-911-12.png
+- year 7 · turn 75 · tuần 0 · buổi 0 · rank 0 · .dlg «Tin trong cung buổi này» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-911-13.png
+- year 7 · turn 75 · tuần 0 · buổi 0 · rank 0 · #kmrew «» · NEW SCREEN · first time on this screen; buttons: Thường | ThườngNước bào hoaChải tóc v | Nhận · shots-flight2-s2d/m-new-911-14.png
+- year 7 · turn 75 · tuần 0 · buổi 0 · rank 0 · .dlg «» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-911-15.png
+- year 7 · turn 75 · tuần 0 · buổi 0 · rank 0 · .dlg «Tin về chủ nhân» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-911-16.png
+- year 7 · turn 75 · tuần 0 · buổi 0 · rank 0 · .dlg «Chính tuyến · Từ cung nữ đi lên · Chương 8 · Hồi 4» · NEW SCREEN · first time on this screen; buttons: Không xin gì, chỉ cúi đầuCó | Nói một câu thật lòngCó cơTố | Xin ngài nhớ đến Hoàng hậu T · shots-flight2-s2d/m-new-911-17.png
+- year 7 · turn 75 · tuần 0 · buổi 0 · rank 0 · .dlg «Chương 8 khép lại» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-911-18.png
+- year 7 · turn 75 · tuần 0 · buổi 0 · rank 0 · .dlg «Chương 9: Từ tớ thành chủ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-911-19.png
+- year 7 · turn 75 · tuần 0 · buổi 0 · rank 0 · page «Tích Cần viện · Hoàng hậu Trương Bích Lạc đi vắng,» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc61Tài49Tâm cơ33Đức41Danh4 | Bạc90Sức98/100 | Buổi sáng, còn 4 khắc | ve kêu râm ran | Tâm trạngBình thản+16 | Về phòng · shots-flight2-s2d/m-new-911-20.png
+- year 7 · turn 75 · tuần 0 · buổi 0 · rank 0 · .dlg «Chương 9 · Từ tớ thành chủ» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh | Đi làm: Làm tròn phận sự hầu | Đi làm: Đi làm quen các nơi | Đi làm: Kết thân một người c · shots-flight2-s2d/m-new-911-21.png
+- year 7 · turn 75 · tuần 0 · buổi 0 · rank 0 · .dlg «Danh hiệu» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh · shots-flight2-s2d/m-new-911-22.png
+- year 7 · turn 75 · tuần 0 · buổi 0 · rank 0 · .dlg «Thiên mệnh» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh · shots-flight2-s2d/m-new-911-23.png
+- year 7 · turn 75 · tuần 0 · buổi 1 · rank 0 · .dlg «Công · Nữ công» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-912-24.png
+- year 7 · turn 75 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Ta» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-914-25.png
+- year 7 · turn 75 · tuần 1 · buổi 0 · rank 0 · .dlg «Công lao 10/» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-915-26.png
+- year 7 · turn 75 · tuần 1 · buổi 2 · rank 0 · .dlg «Lương tháng ba bạc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-917-27.png
+- year 7 · turn 75 · tuần 1 · buổi 2 · rank 0 · .dlg «mat» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-917-28.png
+- year 7 · turn 75 · tuần 2 · buổi 0 · rank 0 · #modal «Tin trong cung buổi này» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-919-29.png
+- year 7 · turn 75 · tuần 2 · buổi 0 · rank 0 · .dlg «Kỳ ngộ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-919-30.png
+- year 7 · turn 75 · tuần 2 · buổi 0 · rank 0 · page «Đức Thọ cung · Ở đây còn 8 người.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc61Tài49Tâm cơ33Đức42Danh5 | Bạc90Sức100/100 | Buổi sáng, còn 1 khắc | ve kêu râm ran | Tâm trạngBình thản-3 | Về Đức Thọ cung · shots-flight2-s2d/m-new-919-31.png
+- year 7 · turn 75 · tuần 2 · buổi 1 · rank 0 · page «Tích Cần viện · Ở đây còn 8 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-920.png
+- year 7 · turn 75 · tuần 2 · buổi 1 · rank 0 · .dlg «trưa · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-920-32.png
+- year 7 · turn 76 · tuần 0 · buổi 0 · rank 0 · .dlg «sáng · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-923-33.png
+- year 7 · turn 76 · tuần 1 · buổi 0 · rank 0 · .dlg «Xét phẩm cuối tháng · Cung nữ nhị đẳng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-927-34.png
+- year 7 · turn 76 · tuần 1 · buổi 2 · rank 0 · .dlg «Tin báo» · NEW SCREEN · first time on this screen; buttons: Nghe lệnhTốnkhôngĐượckhôngGh | Để sauTốnkhôngĐượckhông · shots-flight2-s2d/m-new-929-35.png
+- year 7 · turn 76 · tuần 2 · buổi 0 · rank 0 · #dawn «Tổng lược» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2d/m-new-931-36.png
+- year 7 · turn 76 · tuần 2 · buổi 0 · rank 0 · .dlg «Hoàng thượng để ý» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-931-37.png
+- year 7 · turn 76 · tuần 2 · buổi 1 · rank 0 · #modal «Nguy hiểm chung» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2d/m-new-932-38.png
+- year 7 · turn 76 · tuần 2 · buổi 1 · rank 0 · .dlg «Nguy hiểm chung» · NEW SCREEN · first time on this screen; buttons: Lui | Nép mình theo hầu chủTốnChủ | Biếu quà làm lànhTốnkhôngĐượ · shots-flight2-s2d/m-new-932-39.png
+- year 7 · turn 77 · tuần 0 · buổi 0 · rank 0 · .dlg «Long thể bất an» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-935-40.png
+- year 7 · turn 77 · tuần 0 · buổi 1 · rank 0 · .dlg «Lịch tháng» · NEW SCREEN · first time on this screen; buttons: Lui | Tháng trước | Tháng sau | mồng 1 | mồng 2 | mồng 3 | mồng 4 | mồng 5 · shots-flight2-s2d/m-new-936-41.png
+- year 7 · turn 77 · tuần 0 · buổi 2 · rank 0 · .dlg «chiều · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-937-42.png
+- year 7 · turn 77 · tuần 1 · buổi 1 · rank 0 · page «Tích Cần viện · Ở đây còn 6 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-940.png
+- year 7 · turn 77 · tuần 1 · buổi 1 · rank 0 · .dlg «Học Công: làm gì?» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2d/m-new-940-43.png
+- year 7 · turn 77 · tuần 1 · buổi 1 · rank 0 · .dlg «Hà bao uyên ương: dùng vật liệu gì?» · NEW SCREEN · first time on this screen; buttons: Lui | Xem thêm | Hà bao uyên ương · vải, chỉ | Hà bao uyên ương · lụa, chỉ | Hà bao uyên ương · gấm, chỉ  · shots-flight2-s2d/m-new-940-44.png
+- year 7 · turn 77 · tuần 1 · buổi 1 · rank 0 · #kg82 «» · NEW SCREEN · first time on this screen; buttons: Quay lại | Sẵn sàngtừ lúc này mới tính | Hướng dẫnchơi thử một hồi dễ | Bỏ quaKhó lường · thành: tiế | Thôi, để lúc kháckhông tốn g · shots-flight2-s2d/m-new-940-45.png
+- year 7 · turn 77 · tuần 1 · buổi 1 · rank 0 · #modal «Việc chủ sai» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2d/m-new-940-46.png
+- year 7 · turn 77 · tuần 1 · buổi 1 · rank 0 · .dlg «Việc chủ sai» · NEW SCREEN · first time on this screen; buttons: Giúp hết lòngTốn2 khắc (cả đ | Giúp qua loaTốnChủ tin -1·1 | Từ chốiTốnChủ tin -3Đượckhôn · shots-flight2-s2d/m-new-940-47.png
+- year 7 · turn 77 · tuần 1 · buổi 1 · rank 0 · page «Cần Chính điện · Ở đây còn 3 người.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc61Tài49Tâm cơ33Đức44Danh5 | Bạc96Sức100/100 | Buổi trưa, còn 0 khắc | nắng vàng | Tâm trạngBình thản+15 | Về Cần Chính điện · shots-flight2-s2d/m-new-940-48.png
+- year 7 · turn 77 · tuần 1 · buổi 2 · rank 0 · .dlg «Hoàng hậu Trương Bích Lạc quở mắng» · NEW SCREEN · first time on this screen; buttons: Cúi đầu nhận lỗiRất vữngTốnk | Khóc lóc xin thaCó cơTốnkhôn | Cãi lạiRất vữngTốnkhôngĐượct · shots-flight2-s2d/m-new-940-49.png
+- year 7 · turn 77 · tuần 1 · buổi 2 · rank 0 · page «Tích Cần viện · Ở đây còn 7 người. Không ở lại Cần» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc61Tài49Tâm cơ33Đức44Danh5 | Bạc96Sức85/100 | Buổi chiều, còn 4 khắc | nắng vàng | Tâm trạngBình thản+15 | Về phòng · shots-flight2-s2d/m-new-941-50.png
+- year 7 · turn 77 · tuần 2 · buổi 0 · rank 0 · .dlg «Bị đánh đòn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-943-51.png
+- year 7 · turn 77 · tuần 2 · buổi 3 · rank 0 · .dlg «Ra vào cung cấm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-946-52.png
+- year 7 · turn 78 · tuần 0 · buổi 0 · rank 0 · .dlg «Thái hậu bệnh nặng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-947-53.png
+- year 7 · turn 78 · tuần 0 · buổi 1 · rank 0 · .dlg «Sắc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-948-54.png
+- year 7 · turn 78 · tuần 0 · buổi 2 · rank 0 · #modal «Lịch tháng» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2d/m-new-949-55.png
+- year 7 · turn 78 · tuần 0 · buổi 3 · rank 0 · .dlg «tối · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-950-56.png
+- year 7 · turn 78 · tuần 1 · buổi 0 · rank 0 · .dlg «Học Vũ: làm gì?» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2d/m-new-951-57.png
+- year 7 · turn 79 · tuần 0 · buổi 1 · rank 0 · page «Tích Cần viện · Ở đây còn 5 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-960.png
+- year 7 · turn 79 · tuần 1 · buổi 3 · rank 0 · page «Tích Cần viện · Không gặp ai.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc61Tài49Tâm cơ33Đức45Danh5 | Bạc102Sức92/100 | Buổi tối, còn 4 khắc | tuyết nhẹ | Tâm trạngBình thản-11 | Về phòng · shots-flight2-s2d/m-new-966-58.png
+- year 7 · turn 79 · tuần 2 · buổi 0 · rank 0 · .dlg «Đổi chủ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-968-1.png
+- year 7 · turn 79 · tuần 2 · buổi 0 · rank 0 · #modal «Xét phẩm cuối tháng · Cung nữ nhị đẳng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-968-2.png
+- year 7 · turn 80 · tuần 0 · buổi 0 · rank 0 · .dlg «Chủ thưởng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-972-3.png
+- year 7 · turn 80 · tuần 1 · buổi 0 · rank 0 · page «Tích Cần viện · Gia quý phi Yến Tố Nguyệt đi vắng,» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc61Tài49Tâm cơ33Đức45Danh5 | Bạc113Sức100/100 | Buổi sáng, còn 4 khắc | tuyết nhẹ | Tâm trạngBình thản-9 | Về phòng · shots-flight2-s2d/m-new-976-4.png
+- year 7 · turn 80 · tuần 2 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-980.png
+- year 7 · turn 80 · tuần 2 · buổi 0 · rank 0 · .dlg «Học Vũ: ai dạy?» · NEW SCREEN · first time on this screen; buttons: Lui | Nhạc sư Giáo phườngTốn2 khắc · shots-flight2-s2d/m-new-980-5.png
+- year 8 · turn 82 · tuần 0 · buổi 0 · rank 0 · - · ODD · [game] dialog scrolled to the end has no close / next button: #kmrew «» · shots-flight2-s2d/noclose-1795610453730.png
+- year 8 · turn 82 · tuần 0 · buổi 0 · rank 0 · .dlg «Yến đầy tháng công chúa» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-996-6.png
+- year 8 · turn 82 · tuần 1 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1000.png
+- year 8 · turn 82 · tuần 1 · buổi 2 · rank 0 · #modal «Có người đến» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2d/m-new-1001-7.png
+- year 8 · turn 82 · tuần 1 · buổi 2 · rank 0 · .dlg «Có người đến» · NEW SCREEN · first time on this screen; buttons: NhịnRất vữngTốnkhôngĐượcđược | Đáp trả sắc sảoRất vữngTốnkh · shots-flight2-s2d/m-new-1002-8.png
+- year 8 · turn 82 · tuần 2 · buổi 0 · rank 0 · .dlg «Tỉnh thân» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1004-9.png
+- year 8 · turn 83 · tuần 0 · buổi 0 · rank 0 · .dlg «Yến đầy tháng hoàng tử» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1008-10.png
+- year 8 · turn 84 · tuần 0 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1020.png
+- year 8 · turn 84 · tuần 0 · buổi 0 · rank 0 · .dlg «Chương 10: Lời đồn quyến rũ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1020-11.png
+- year 8 · turn 84 · tuần 0 · buổi 2 · rank 0 · .dlg «Xem quan hệ của» · NEW SCREEN · first time on this screen; buttons: Lui | Ta 1 | Chí tôn 2 | Phi tần 16 | Cung nữ tam đẳngTa · shots-flight2-s2d/m-new-1022-12.png
+- year 8 · turn 84 · tuần 1 · buổi 3 · rank 0 · .dlg «Cầm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1027-13.png
+- year 8 · turn 84 · tuần 2 · buổi 2 · rank 0 · .dlg «Học Cầm: ai dạy?» · NEW SCREEN · first time on this screen; buttons: Lui | Nhạc sư Giáo phườngTốn2 khắc · shots-flight2-s2d/m-new-1030-14.png
+- year 8 · turn 85 · tuần 1 · buổi 0 · rank 0 · .dlg «Lễ Phật đản» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1036-15.png
+- year 8 · turn 85 · tuần 1 · buổi 3 · rank 0 · .dlg «Chương 10 · Lời đồn quyến rũ» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh | Đi làm: Làm tròn phận sự hầu | Đi làm: Đi làm quen các nơi | Đi làm: Kết thân một người c · shots-flight2-s2d/m-new-1039-16.png
+- year 8 · turn 85 · tuần 2 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1040.png
+- year 8 · turn 85 · tuần 2 · buổi 3 · rank 0 · #modal «Tin chờ người sai đi» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2d/m-new-1043-17.png
+- year 8 · turn 86 · tuần 0 · buổi 0 · rank 0 · #modal «Chính tuyến · Từ cung nữ đi lên · Chương 10 · Hồi » · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2d/m-new-1044-18.png
+- year 8 · turn 87 · tuần 1 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1060.png
+- year 8 · turn 88 · tuần 0 · buổi 0 · rank 0 · .dlg «Đại án vu cổ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1068-19.png
+- year 8 · turn 89 · tuần 0 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1080.png
+- year 8 · turn 89 · tuần 1 · buổi 2 · rank 0 · #modal «Học Cầm: làm gì?» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2d/m-new-1086-20.png
+- year 8 · turn 89 · tuần 1 · buổi 2 · rank 0 · .dlg «Học Cầm: làm gì?» · NEW SCREEN · first time on this screen; buttons: Lui | Làm | Làm | Làm · shots-flight2-s2d/m-new-1086-21.png
+- year 8 · turn 89 · tuần 1 · buổi 2 · rank 0 · #modal «Khúc «Xuân hiểu»: dùng vật liệu gì?» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2d/m-new-1086-22.png
+- year 8 · turn 90 · tuần 0 · buổi 0 · rank 0 · .dlg «Chương 11: Ánh mắt ấy» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1092-23.png
+- year 8 · turn 90 · tuần 0 · buổi 3 · rank 0 · .dlg «Chương 11 · Ánh mắt ấy» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh | Đi làm: Làm tròn phận sự hầu | Đi làm: Đi làm quen các nơi | Đi làm: Kết thân một người c · shots-flight2-s2d/m-new-1095-24.png
+- year 8 · turn 90 · tuần 2 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1100.png
+- year 8 · turn 90 · tuần 2 · buổi 0 · rank 0 · .dlg «Biếu quà làm lành» · NEW SCREEN · first time on this screen; buttons: Lui | Lễ bạcTốnBạc -48ĐượcHuệ quý | Đồ trong rươngTốnmón đồ −1 ( · shots-flight2-s2d/m-new-1100-25.png
+- year 8 · turn 91 · tuần 1 · buổi 0 · rank 0 · .dlg «Đại hàn, tuyết lớn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1108-26.png
+- year 8 · turn 91 · tuần 1 · buổi 3 · rank 0 · .dlg «Quan hệ với» · NEW SCREEN · first time on this screen; buttons: Lui | Ta 1 | Chí tôn 2 | Phi tần 13 | Hoàng thượng | Thái hậu · shots-flight2-s2d/m-new-1111-27.png
+- year 8 · turn 91 · tuần 2 · buổi 3 · rank 0 · #modal «Biếu quà làm lành» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2d/m-new-1115-28.png
+- year 8 · turn 92 · tuần 1 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1120.png
+- year 8 · turn 92 · tuần 1 · buổi 0 · rank 0 · #modal «Chứng cứ về Thuần hoàng quý phi Diêu Chiêu Hoa» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2d/m-new-1120-29.png
+- year 8 · turn 92 · tuần 1 · buổi 0 · rank 0 · .dlg «Chứng cứ về Thuần hoàng quý phi Diêu Chiêu Hoa» · NEW SCREEN · first time on this screen; buttons: Lui | Tố tội thậtTùy duyênTốn2 khắ | Trình Thái hậuCó cơTốn2 khắc | Uy hiếp đòi bạcHiểmTốn2 khắc | Bán cho phe khácTốn2 khắc·Ch | Trả chứng cứ lấy lòngTốn2 kh · shots-flight2-s2d/m-new-1120-30.png
+- year 8 · turn 93 · tuần 0 · buổi 0 · rank 0 · .dlg «Đại án ngoại thích» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1128-31.png
+- year 8 · turn 93 · tuần 1 · buổi 0 · rank 0 · .dlg «Án mất trộm ngự khố» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1132-32.png
+- year 8 · turn 93 · tuần 1 · buổi 2 · rank 0 · .dlg «Hối lộ người ở Thái y viện» · NEW SCREEN · first time on this screen; buttons: Lui | Xạ hương: sảy thai (trộn vào · shots-flight2-s2d/m-new-1134-33.png
+- year 8 · turn 93 · tuần 1 · buổi 2 · rank 0 · #modal «Nhờ thái giám mua đồ» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2d/m-new-1134-34.png
+- year 8 · turn 93 · tuần 1 · buổi 2 · rank 0 · .dlg «Nhờ thái giám mua đồ» · NEW SCREEN · first time on this screen; buttons: Lui | Trâm ngọc bíchTốnBạc -30Được | Phấn gạoTốnBạc -8ĐượcSon phấ | Áo tơi láTốnBạc -12ĐượcTạp v | Giày thêu hoa maiTốnBạc -15Đ | Hoa điền hoa đàoTốnBạc -30Đư | Hoa phổ «Phú quý»TốnBạc -33Đ | Thực phổ «Mó · shots-flight2-s2d/m-new-1134-35.png
+- year 8 · turn 93 · tuần 1 · buổi 2 · rank 0 · .kmov «» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2d/m-new-1134-36.png
+- year 8 · turn 93 · tuần 2 · buổi 0 · rank 0 · .dlg «Cấm cung giới nghiêm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1136-37.png
+- year 9 · turn 94 · tuần 0 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1140.png
+- year 9 · turn 95 · tuần 0 · buổi 0 · rank 0 · .dlg «Tuyển tú» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1152-38.png
+- year 9 · turn 95 · tuần 0 · buổi 0 · rank 0 · .dlg «Đại tuyển tú nữ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1152-39.png
+- year 9 · turn 95 · tuần 2 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1160.png
+- year 9 · turn 95 · tuần 1 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 7 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1160.png
+- year 9 · turn 96 · tuần 0 · buổi 0 · rank 0 · .dlg «Khép nẻo đời: Từ cung nữ đi lên» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1165-1.png
+- year 9 · turn 96 · tuần 0 · buổi 0 · rank 0 · .dlg «Chương 12: Từ kẻ hầu thành tiểu chủ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1165-2.png
+- year 9 · turn 96 · tuần 2 · buổi 1 · rank 0 · .dlg «Chương 12 · Từ kẻ hầu thành tiểu chủ» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh | Đi làm: Làm tròn phận sự hầu | Đi làm: Đi làm quen các nơi | Đi làm: Kết thân một người c · shots-flight2-s2d/m-new-1174-3.png
+- year 9 · turn 97 · tuần 0 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 15 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1180.png
+- year 9 · turn 98 · tuần 0 · buổi 3 · rank 0 · .dlg «Hôn sự» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1192-4.png
+- year 9 · turn 98 · tuần 2 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 7 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1200.png
+- year 9 · turn 100 · tuần 1 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 9 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1220.png
+- year 9 · turn 102 · tuần 0 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 7 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1240.png
+- year 9 · turn 103 · tuần 0 · buổi 0 · rank 0 · .dlg «Thiên hạ truyền tin» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1249-5.png
+- year 9 · turn 103 · tuần 0 · buổi 0 · rank 0 · .dlg «Sứ đoàn vào triều» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1249-6.png
+- year 9 · turn 103 · tuần 1 · buổi 3 · rank 0 · #modal «Tâm trạng · Ta» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2d/m-new-1256-7.png
+- year 9 · turn 103 · tuần 2 · buổi 0 · rank 0 · page «Thái y viện · Ở đây còn 5 người.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc58Tài49Tâm cơ37Đức43Danh8 | Bạc61Sức77/100 | Buổi sáng, còn 1 khắc | tuyết nhẹ | Tâm trạngBình thản-10 | Về Thái y viện · shots-flight2-s2d/m-new-1257-8.png
+- year 9 · turn 103 · tuần 2 · buổi 2 · rank 0 · .dlg «Ta bắt gặp» · NEW SCREEN · first time on this screen; buttons: Nghe lénKhó lườngTốn1 khắcĐư | Thôi, lui về cungTốn3 khắc đ | Mặc kệTốnkhôngĐượckhôngGhi c · shots-flight2-s2d/m-new-1258-9.png
+- year 9 · turn 103 · tuần 2 · buổi 3 · rank 0 · page «Thái y viện · Ở đây còn 2 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1260.png
+- year 9 · turn 104 · tuần 0 · buổi 0 · rank 0 · .dlg «Lũ lớn, mất mùa» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1261-10.png
+- year 9 · turn 104 · tuần 0 · buổi 0 · rank 0 · .dlg «Ôn dịch» · NEW SCREEN · first time on this screen; buttons: Đóng cửa cung, xông ngảiTốnB | Vẫn đi lại như thườngTốnkhôn · shots-flight2-s2d/m-new-1261-11.png
+- year 9 · turn 104 · tuần 0 · buổi 1 · rank 0 · #modal «Bạc lạ» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2d/m-new-1261-12.png
+- year 9 · turn 104 · tuần 0 · buổi 1 · rank 0 · .dlg «Bạc lạ» · NEW SCREEN · first time on this screen; buttons: Nhận bạc, làm tai mắtRất vữn | Từ chối, bẩm chủRất vữngTốnk | Từ chối, im lặngRất vữngTốnk · shots-flight2-s2d/m-new-1262-13.png
+- year 9 · turn 104 · tuần 0 · buổi 2 · rank 0 · .dlg «Biết chuyện của chủ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1263-14.png
+- year 9 · turn 104 · tuần 2 · buổi 3 · rank 0 · #modal «Cần Chính điện» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1272-15.png
+- year 9 · turn 105 · tuần 0 · buổi 0 · rank 0 · .dlg «Tân Giả khố» · NEW SCREEN · first time on this screen; buttons: Cúi đầu · shots-flight2-s2d/m-new-1273-16.png
+- year 9 · turn 105 · tuần 0 · buổi 0 · rank 0 · .dlg «Đại xá thiên hạ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1273-17.png
+- year 9 · turn 105 · tuần 0 · buổi 0 · rank 0 · page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc58Tài49Tâm cơ37Đức42Danh8 | Bạc73Sức100/100 | Buổi sáng, còn 4 khắc | tuyết nhẹ | Tâm trạngBình thản-6 | Về Tân Giả khố · shots-flight2-s2d/m-new-1273-18.png
+- year 9 · turn 105 · tuần 0 · buổi 1 · rank 0 · .mapsc «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc58Tài49Tâm cơ37Đức42Danh8 | Bạc73Sức100/100 | Buổi trưa, còn 4 khắc | tuyết nhẹ | Tâm trạngBình thản-6 | Tin báo: 2 tin mới · shots-flight2-s2d/m-new-1274-19.png
+- year 9 · turn 105 · tuần 1 · buổi 3 · rank 0 · page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1280.png
+- year 10 · turn 106 · tuần 1 · buổi 1 · rank 0 · #modal «Xét phẩm cuối tháng · Cung nữ tam đẳng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1290-20.png
+- year 10 · turn 106 · tuần 2 · buổi 1 · rank 0 · .dlg «Tân Giả khố 5 tuần» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1294-21.png
+- year 10 · turn 107 · tuần 0 · buổi 3 · rank 0 · page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1300.png
+- year 10 · turn 107 · tuần 1 · buổi 2 · rank 0 · .dlg «Xét phẩm cuối tháng · Cung nữ tam đẳng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1303-22.png
+- year 10 · turn 107 · tuần 1 · buổi 3 · rank 0 · .dlg «Lương tháng giêng bạc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1304-23.png
+- year 10 · turn 108 · tuần 0 · buổi 0 · rank 0 · .dlg «Khoa thi Đình» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1309-24.png
+- year 10 · turn 108 · tuần 1 · buổi 0 · rank 0 · page «Tích Cần viện · Thuần hoàng quý phi Diêu Chiêu Hoa» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc56Tài49Tâm cơ38Đức42Danh9 | Bạc76Sức100/100 | Buổi sáng, còn 4 khắc | trời quang | Tâm trạngHờn tủi-29 | Tin báo: 20 tin mới · shots-flight2-s2d/m-new-1313-25.png
+- year 10 · turn 108 · tuần 2 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 6 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1320.png
+- year 10 · turn 110 · tuần 1 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 2 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1340.png
+- year 10 · turn 112 · tuần 0 · buổi 2 · rank 0 · page «Tích Cần viện · Ở đây còn 2 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1360.png
+- year 10 · turn 113 · tuần 2 · buổi 2 · rank 0 · #modal «Có người đến» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1380.png
+- year 10 · turn 114 · tuần 0 · buổi 0 · rank 0 · .dlg «Đại lễ sắc lập Thái tử» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1382-1.png
+- year 10 · turn 114 · tuần 0 · buổi 0 · rank 0 · .dlg «Lập Hoàng hậu mới» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1382-2.png
+- year 10 · turn 115 · tuần 0 · buổi 0 · rank 0 · .dlg «Hoàng tự trong cung» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1394-3.png
+- year 10 · turn 115 · tuần 1 · buổi 2 · rank 0 · page «Tích Cần viện · Ở đây còn 4 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1400.png
+- year 10 · turn 116 · tuần 0 · buổi 0 · rank 0 · .dlg «Ban hôn» · NEW SCREEN · first time on this screen; buttons: Tạ ơn, xuất giáRất vữngTốnkh | Xin ở lạiRất vữngTốnkhôngĐượ · shots-flight2-s2d/m-new-1406-4.png
+- year 10 · turn 117 · tuần 0 · buổi 2 · rank 0 · page «Tích Cần viện · Ở đây còn 3 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1420.png
+- year 11 · turn 118 · tuần 2 · buổi 2 · rank 0 · page «Tích Cần viện · Ở đây còn 4 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1440.png
+- year 11 · turn 120 · tuần 1 · buổi 1 · rank 0 · page «Tích Cần viện · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1460.png
+- year 11 · turn 120 · tuần 2 · buổi 0 · rank 0 · page «Tích Cần viện · Hoàng hậu Phó Tử Yên đi vắng, đang» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc54Tài49Tâm cơ39Đức41Danh1 | Bạc114Sức86/100 | Buổi sáng, còn 4 khắc | mưa phùn | Tâm trạngBình thản+5 | Về phòng · shots-flight2-s2d/m-new-1463-1.png
+- year 11 · turn 121 · tuần 2 · buổi 2 · rank 0 · page «Vĩnh Thọ cung · Ngưng Tường điện · Ở đây còn 7 ngư» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc54Tài49Tâm cơ39Đức41Danh1 | Bạc117Sức100/100 | Buổi chiều, còn 1 khắc | chiều âm u | Tâm trạngBình thản-15 | Về Vĩnh Thọ cung · shots-flight2-s2d/m-new-1477-2.png
+- year 11 · turn 122 · tuần 0 · buổi 1 · rank 0 · .kfoc «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1480.png
+- year 11 · turn 123 · tuần 0 · buổi 0 · rank 0 · .dlg «Quốc tang» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s2d/m-new-1491-3.png
+- year 11 · turn 123 · tuần 2 · buổi 1 · rank 0 · page «Tích Cần viện · Ở đây còn 10 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1500.png
+- year 11 · turn 124 · tuần 1 · buổi 1 · rank 0 · - · ODD · [game] no way out: no button of the dialog can be reached (all below the screen / clipped, nothing scrolls): .dlg «Tin báo» — lost: Xem lời nhờTốnkhôngĐượck / Để sau · shots-flight2-s2d/nohit-1795624013208.png
+- year 11 · turn 125 · tuần 0 · buổi 0 · rank 0 · - · ODD · [game] no way out: no button of the dialog can be reached (all below the screen / clipped, nothing scrolls): .dlg «Tin báo» — lost: Nghe lệnhTốnkhôngĐượckhô / Để sauTốnkhôngĐượckhông · shots-flight2-s2d/nohit-1795624154393.png
+- year 11 · turn 125 · tuần 0 · buổi 3 · rank 0 · page «Tích Cần viện · Ở đây còn 12 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1520.png
+- year 11 · turn 126 · tuần 2 · buổi 2 · rank 0 · .kfoc «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1540.png
+- year 11 · turn 128 · tuần 1 · buổi 2 · rank 0 · page «Tích Cần viện · Ở đây còn 12 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s2d/m-look-1560.png
+- year 11 · turn 129 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] no way out: no button of the dialog can be reached (all below the screen / clipped, nothing scrolls): .dlg «Tin báo» — lost: Nghe lệnhTốnkhôngĐượckhô / Để sauTốnkhôngĐượckhông · shots-flight2-s2d/nohit-1795624865440.png
+- year 12 · turn 130 · tuần 0 · buổi 0 · rank 0 · .dlg «Kiếp này» · NEW SCREEN · first time on this screen; buttons: Chuyển kiếp · shots-flight2-s2d/m-new-1578-1.png
+- year 12 · turn 130 · tuần 0 · buổi 0 · rank 0 · ending · EVENT · life over: Xuất cung — Xuất cung tuổi 30 · age 30 · buổi 1578 · bugs 4 · stuck 14 · dead buttons 70 · shots-flight2-s2d/end.png
