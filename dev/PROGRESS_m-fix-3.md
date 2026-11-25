@@ -1,6 +1,6 @@
 # PROGRESS m-fix-3 — odds lie / evidence / result seals (robot M4, seed 104, LIVE 0756a05b)
 PRIORITY #1 CHECK: OD 0 | ledger 0 | claims F #12 (this branch) | main: reused j13 fakeIllRisk + chanceW, j1 inner/oi odds path, j22 «Hối lộ Kính sự phòng sửa sổ» card + khBook, j8 pregMonthP, j63 oddsSoft | review/* 0 on fakePreg / Kính sự phòng / result seal (m-fix-1/2 are other M-items) | archive 0.
-Branch review/m-fix-3 on LIVE origin/main 4a8c627b. Worker session_01UV1SzkDurA75A3P5i3ns2w (opus, depth 8).
+Branch review/m-fix-3, merged onto LIVE origin/main 9f72524b (bed1003). Worker session_01UV1SzkDurA75A3P5i3ns2w (opus, depth 8).
 
 ## Root causes
 1. ODDS LIE — the «Giả mang thai» card showed od(Tâm cơ) = the FIRST step only (Tâm cơ 100 → 95 «Rất vững»). The road then rolls a monthly
@@ -57,6 +57,14 @@ Branch review/m-fix-3 on LIVE origin/main 4a8c627b. Worker session_01UV1SzkDurA7
 - python3 dev/tools/delayed-risk-scan.py [--md] → rc 0 (every hit triaged; every DELAYED road shows the road word).
 - Pre-existing, not from this branch: dev/test/rest-cards.js expects Sức +20 (BAL.restDsSuc is 24 on LIVE); shown-odds-scan 5 AFTER paths
   (j10 / jkcco / jkcg / jpma / jstip), none touched here.
+
+## Quickcheck / perf (new = this branch, live = 9f72524b; back to back on this box)
+| run | result | render | tab | buổi | tasks>200ms |
+|---|---|---|---|---|---|
+| 1 (on old base 4a8c627b, 3 runs) | FAIL G1 inline numbers (fixed 2765d09) + perf buổi 2552/1032 (one run 7801 ms) | 255/216 | 408/387 | 2552/1032 | 22/22 |
+| 2 (bed1003, 3 runs) | FAIL perf tab 535/393 only (buổi now 1097/1299) | 230/227 | 535/393 | 1097/1299 | 22/18 |
+| 3 (bed1003, --runs 5) | **PASS**, core gates PASS | 217/215 | 413/469 | 1135/1357 | 23/24 |
+The slow metric changes from run to run and flips sign (buổi then tab, each faster than live in the other run): noise of this shared box, not this change (the new code runs only when the Giả mang thai card is dealt or a fake pregnancy is active).
 
 ## Open for MAIN / owner
 - Rest BẠI on «Rất vững»: true soft fail by the 95 cap (OD 17/11). If she wants rest-type acts exempt (oddsSure), that is her call.
