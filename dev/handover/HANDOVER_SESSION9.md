@@ -3299,3 +3299,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (02:38Z) LIVE 9abd1de2 (offline-fast) 02:37Z; ROLLBACK d6b6fd6f. Next dayq 2b68def3. Told sếp. OFFLINE-FAST 4kPEoVSa to archive.
 - (02:51Z) BIG rv 2EFxJ9Xy PASS day-queue-2 → 49f17d4d (review/day-queue-2-r6 on 7dbfe98a; shots wiped; 131 LOOKED dq4 pair) → GO to LC13 after 7dbfe98a, then e0594561 merge, then makeup. Archive DAYQ-4 + rv after LIVE.
 - (02:52Z) LIVE 2b68def3 (day-queue) 02:47Z; ROLLBACK 9abd1de2. Next minigame 3a3234ff. Queue set: 4232709a → 7dbfe98a → e0594561 → dayq-2 re-merge → makeup.
+- (02:53Z) LC13 order kept (no SWAP): 3a3234ff → 4232709a → 7dbfe98a → 49f17d4d (dayq-2, exact rv sha, FF) → 10da6f9b (r9 e0594561 merged on 49f17d4d, full gates) → makeup.
