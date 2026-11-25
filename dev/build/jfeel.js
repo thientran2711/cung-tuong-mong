@@ -100,9 +100,11 @@ Object.assign(BAL,{feel:{
    vui:"vui",tutin:"vui",tinhtu:"vui",tinhnghich:"vui",hanghai:"vui",chuyentam:"vui",hungkhoi:"vui"},
   kh:{khoc:1,tui:1,sk:1,dapdo:1,mang:1,danh:1,khac:1,pham:1,noi:1,quo:1,boan:4,thu:1,matngu:"buoi",emat:"buoi",soat:2,cau:2,cham:1,thuong:1,khoe:1,tiec:2,hat:2,ban:1,eyen:2,
    tron:"buoi",caobenh:"buoi",bodo:2,bove:2,moi:2,okhoc:1,kquay:1,kbo:2,caugat:1,ngoithu:2,noimoc:1,khoetai:1,treo:1,mach:"buoi",quengio:"buoi",sangtac:2},
-  fx:{tron:{vent:12,danh:1},caobenh:{vent:12,danh:1},bodo:{vent:10,tai:1},bove:{vent:12,rel:5,sung:1},moi:{vent:8,sung:2,ghen:2,oan:2},
-   caugat:{vent:10,loy:3},ngoithu:{vent:8},noimoc:{use:"cham"},khoetai:{vent:8,danh:1,ghen:2,oan:1},treo:{vent:10,rel:2,loy:1},
-   mach:{vent:8,tai:1,suc:3},quengio:{vent:8,tai:2,suc:2},sangtac:{vent:8,tai:1,danh:1}}}}});
+  /* TEMPER-OUTBURST (OD 25/11 ~05:45Z (1), laws 2 + 3): re-tuned to EQUAL VALUE with the jemoact reactions — net ≈ BAL.ea.pick.net bạc (BAL.pm.val),
+     dev/measure/temper-equal.js; ngoithu now costs Sức, sangtac Sức, treo also Danh when no rival is near (the staff laugh: Lòng +) */
+  fx:{tron:{vent:12,danh:2},caobenh:{vent:12,danh:2},bodo:{vent:10,tai:2},bove:{vent:12,rel:5,sung:2},moi:{vent:8,sung:2,ghen:6,oan:2},
+   caugat:{vent:10,loy:4},ngoithu:{vent:8,suc:10},noimoc:{use:"cham"},khoetai:{vent:8,danh:1,ghen:5,oan:1},treo:{vent:10,rel:8,loy:1,danh:3},
+   mach:{vent:8,tai:1,suc:15},quengio:{vent:8,tai:2,suc:20},sangtac:{vent:8,tai:1,danh:1,suc:20}}}}});
 const FEEL_KEY_CHANH="ghen";/* MOOD-MEM keeps the feeling key "ghen", named EMO_GHEN ("Chạnh lòng", jemo); the score v.ghen stays "Ghen" */
 /* VANPHONG names (player words): light / middle name, heavy-level name, level words */
 const FEEL_N={vui:"Vui",tutin:"Tự tin",hanghai:"Hăng hái",tinhtu:"Tình tứ",chuyentam:"Chuyên tâm",hungkhoi:"Hứng khởi",tinhnghich:"Tinh nghịch",binh:"Bình thản",
@@ -245,8 +247,8 @@ function feelLine(p,good){const L=p===S?(BAL.ea.out.v||45):((BAL.ea.npc&&BAL.ea.
 function feelActDur(k){const A=fB().act,now=mkNow();let d=A.kh[k];if(d==null)d=A.def;if(d==="buoi"){const KH=J95.KH;return KH-(now%KH)}return d}
 /* the gains / losses of the new reactions (the old ones: jemoact eaDo) */
 function feelDo(p,r){const me=p===S,F=fB().act.fx[r.k];if(!F)return window.eaDo(p,r);const res=[];let h="",target=null;const add=t=>res.push(t);
- if(F.use){const b=window.EA_REACT.find(x=>x.k===F.use&&x.who==="c");if(!b)return null;return window.eaDo(p,Object.assign({},b,{k:F.use,n:r.n}))}
- const pay=o=>{if(me)apply(o);else ap(p,o);for(const k in o){const lb={danh:"Danh",tai:"Tài",sung:"Sủng",bac:"Bạc",suc:"Sức"}[k];if(o[k]&&lb)add(me?`${lb} ${o[k]>0?"+":"−"}${Math.abs(o[k])}`:"")}};
+ if(F.use){const b=window.EA_REACT.find(x=>x.k===F.use&&x.who==="c");if(!b)return null;return window.eaDo(p,Object.assign({},b,{k:F.use,n:r.n,pv:r.pv,fxPaid:r.fxPaid}))}
+ const pay=o=>{if(me){if(!r.fxPaid)apply(o)}else ap(p,o);/* TEMPER-OUTBURST: her option fx already paid it */for(const k in o){const lb={danh:"Danh",tai:"Tài",sung:"Sủng",bac:"Bạc",suc:"Sức"}[k];if(o[k]&&lb)add(me?`${lb} ${o[k]>0?"+":"−"}${Math.abs(o[k])}`:"")}};
  const Nm2=x=>x===S.emp?"Hoàng thượng":emoName(x);
  switch(r.k){
  case"tron":pay({danh:-F.danh});h=me?"Lòng sợ hãi chưa yên, ngươi đóng cửa tẩm cung, cả buổi không dám bước ra.":`${emoName(p)} đóng cửa trốn trong phòng cả buổi.`;break;
@@ -258,17 +260,17 @@ function feelDo(p,r){const me=p===S,F=fB().act.fx[r.k];if(!F)return window.eaDo(
   h=me?"Lòng xao xuyến, ngươi sai người dâng trà mời Hoàng thượng ghé cung.":`${emoName(p)} sai người mời Hoàng thượng ghé cung.`;break;
  case"caugat":{const L=eaH().staffOf(p);if(!L.length)return null;const m=L[Math.floor(Math.random()*L.length)];eaH().loyAdd(m,-F.loy);if(me)add(`thiện cảm ${m.name||"cung nhân"} −${F.loy}`);try{emoEv(m,"loyalDown","bị chủ nhân cáu gắt")}catch(e){}
   h=me?`Trong lòng bực bội, chuyện nhỏ cũng khiến ngươi cáu gắt với ${m.name||"cung nhân"}.`:`${emoName(p)} cáu gắt với người hầu.`;break}
- case"ngoithu":h=me?"Chuyện vừa qua làm ngươi choáng váng, cứ ngồi thừ người, ai gọi cũng chẳng nghe.":`${emoName(p)} ngồi thừ người, ai gọi cũng chẳng nghe.`;break;
+ case"ngoithu":pay({suc:-F.suc});h=me?"Chuyện vừa qua làm ngươi choáng váng, cứ ngồi thừ người, ai gọi cũng chẳng nghe.":`${emoName(p)} ngồi thừ người, ai gọi cũng chẳng nghe.`;break;
  case"khoetai":pay({danh:F.danh});try{if(me)ghenAll(F.ghen);else for(const x of liveRivals(true))if(x!==p&&x.alive)oanAdd(x,p,F.oan)}catch(e){}if(me)add(`kẻ ganh ghen +${F.ghen}`);
   h=me?"Tự tin đầy lòng, ngươi đàn một khúc trước các phi tần; tiếng khen lẫn tiếng xì xào đều có.":`${emoName(p)} khoe tài trước các phi tần.`;break;
  case"treo":{const t=eaH().rival(p);if(t){target=t;try{affAdd(t,p,-F.rel)}catch(e){}if(me)add(`${Nm2(t)} thiện cảm −${F.rel}`)}
-  else{for(const m of eaH().staffOf(p))eaH().loyAdd(m,F.loy);if(me&&eaH().staffOf(p).length)add(`lòng cung nhân +${F.loy}`)}
+  else{pay({danh:-F.danh})}/* TEMPER-OUTBURST: the staff laugh either way (Lòng +); no rival near → she loses face (Danh −) */for(const m of eaH().staffOf(p))eaH().loyAdd(m,F.loy);if(me&&eaH().staffOf(p).length)add(`lòng cung nhân +${F.loy}`);
   h=me?(t?`Lòng tinh nghịch, ngươi bày trò trêu ${Nm2(t)}; người kia đỏ mặt, không vui.`:"Lòng tinh nghịch, ngươi bày trò trêu đám cung nhân; cả cung cười ồ."):`${emoName(p)} bày trò trêu ${t?(t===S?"ngươi":Nm2(t)):"người hầu"}.`;break}
  case"mach":pay({tai:F.tai,suc:-F.suc});h=me?"Hăng hái trong lòng, ngươi làm một mạch không nghỉ, xong việc thì người rã rời.":`${emoName(p)} làm một mạch không nghỉ.`;break;
  case"quengio":pay({tai:F.tai,suc:-F.suc});h=me?"Ngươi chìm vào việc đang làm, quên cả giờ ăn giờ ngủ.":`${emoName(p)} chìm vào việc, quên cả giờ giấc.`;break;
- case"sangtac":pay({tai:F.tai,danh:F.danh});h=me?"Hứng khởi dâng trào, ngươi sáng tác ngay tại chỗ; bài mới truyền tay khắp cung.":`${emoName(p)} hứng khởi sáng tác ngay tại chỗ.`;break}
- try{if(me)eaH().ventMe((S.mood&&S.mood.v>0?-1:1)*F.vent,r.n);else eaH().ventNpc(p,F.vent)}catch(e){}
- return{h,res:res.filter(Boolean),target}}
+ case"sangtac":pay({tai:F.tai,danh:F.danh,suc:-F.suc});h=me?"Hứng khởi dâng trào, ngươi sáng tác ngay tại chỗ; bài mới truyền tay khắp cung.":`${emoName(p)} hứng khởi sáng tác ngay tại chỗ.`;break}
+ const VV=r.pv?BAL.ea.pick.vent:F.vent;/* TEMPER-OUTBURST: an option of the choice vents the same for all */try{if(me)eaH().ventMe((S.mood&&S.mood.v>0?-1:1)*VV,r.n);else eaH().ventNpc(p,VV)}catch(e){}
+ try{if(r.pv&&window.eaCapAdd)eaCapAdd(p,r)}catch(e){}return{h,res:res.filter(Boolean),target}}
 function feelActTick(p){const A=fB().act;if(!p||feelActNow(p))return;const me=p===S;if(!me&&!feelWorld())return;
  const o=feelSums(p);let k=null;for(const x in A.main)if(feelLvOf(o[x]||0)>=3&&(!k||o[x]>o[k]))k=x;if(!k)return;
  const good=feelGood(k),bar=feelBar(p),L=feelLine(p,good);if(good?bar<L:bar>L)return;
@@ -276,10 +278,16 @@ function feelActTick(p){const A=fB().act;if(!p||feelActNow(p))return;const me=p=
  if(me){const E=eaS2(),w=emoW();if(E.w!==w){E.w=w;E.n=0}if(E.n>=A.meWk)return;if(typeof isSrv==="function"&&isSrv())return}
  let T={k:"even"};try{T=eaTemper(p)}catch(e){}if(!roll(A.o*((BAL.ea.out.t||{})[T.k]||1)))return;
  /* a consort (her too): the ONE act of this feeling; any other role: its own reaction of the group (jemoact R_), the same act face */
- const kd=eaKind(p);let P=null;try{if(kd==="c"){const r=window.EA_REACT.find(x=>x.k===A.main[k]&&x.who==="c"&&(x.k!=="khoc"||x.g==="buon"));if(r&&r.ok(p,T))P={r,T}}
-  else P=eaPick(p,A.g[k])}catch(e){}if(!P)return;
+ /* TEMPER-OUTBURST (OD 25/11 ~05:45Z (1) + ~08:05Z, law 1): a consort's act = one of the options of jemoact eaOpts (this feeling's act + its group,
+    temper-ranked, top BAL.ea.pick.n). HER: the kit event frame with those options, she must pick one (eaMeChoose, no hold-back); an NPC consort
+    picks from the same list by temper weight (npwPick, near-best). Any other role: its own reaction of the group (jemoact R_), the same act face. */
+ const kd=eaKind(p);const fin=(r,out)=>{p.fa={k:r.k,n:r.n,f:k,face:"act-"+k,k0:mkNow(),k1:mkNow()+feelActDur(r.k)};FEEL.stat.act=FEEL.stat.act||{};FEEL.stat.act[k]=(FEEL.stat.act[k]||0)+1};
+ if(kd==="c"&&typeof window.eaOpts==="function"){const O=window.eaOpts(p,k);if(!O.length)return;p.fcd[k]=now+(A.cd[k]||A.cd.def);
+  if(me){eaS2().n++;window.eaMeChoose(O,feelName(k,3).toLowerCase(),{run:feelDo,done:fin,g:k,seal:k});return}
+  const i=npwPick(O.map((r,j)=>j),j=>O[j].w0,{all:1});const r=O[i==null?0:i];let out=null;try{out=feelDo(p,r)}catch(e){console.error("feelDo",e)}if(!out)return;fin(r,out);try{eaSay(p,out.h,out.target===S)}catch(e){}return}
+ let P=null;try{P=eaPick(p,A.g[k])}catch(e){}if(!P)return;
  const r=P.r;let out=null;try{out=feelDo(p,r)}catch(e){console.error("feelDo",e)}if(!out)return;
- p.fa={k:r.k,n:r.n,f:k,face:"act-"+k,k0:now,k1:now+feelActDur(r.k)};p.fcd[k]=now+(A.cd[k]||A.cd.def);FEEL.stat.act=FEEL.stat.act||{};FEEL.stat.act[k]=(FEEL.stat.act[k]||0)+1;
+ fin(r,out);p.fcd[k]=now+(A.cd[k]||A.cd.def);
  if(me){eaS2().n++;feelMeShow(r,out,k)}else try{eaSay(p,out.h,out.target===S)}catch(e){}}
 function eaS2(){S.fa2=S.fa2||{w:-1,n:0};return S.fa2}
 /* her act: the kit event frame (the same shape as every jemoact outburst) with only "Tiếp tục" */
