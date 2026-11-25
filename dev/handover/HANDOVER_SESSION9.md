@@ -3217,3 +3217,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (00:09Z) LC12 FULL FLIGHT STACK GREEN review/lc12-stack 8c7b4068 (1–7; quickcheck PASS tasks 15/15, coop 142/142, one-world 4/4; flight-ui perf no regression). Steps 2/4 need KIT OK r3 (KK24) → LC12 asked Variant C (no 2/4: onecore → sfx → flight-ui → offline → dayq → minigame). Step 9 viecnho = 89ef52f9.
 - (00:12Z) RV day-queue «merge OK» on 8c7b4068 (files identical to 7c819a37) → LC12 stack 1–7 fully cleared except KIT OK for 2/4.
 - (00:14Z) KK24 r3: mucluc-kit 09e7b6e6 (rebuilt; ktop-sticky now FAILs r1/PASSes r3) + tntile 909be531 (rebuilt; kit-skillacts Fold flaky env) → «FOR FOREMAN B» posted 926a3101; LC12 told. KK24 next: B KIT REQUEST kitScene old-fade strips kscn-on.
+- (00:18Z) KK24 KIT READY kit-scene-fade 14e66f43 (B request) → FOREMAN_B_STATUS line. KK24 told SELSCENE-16 replaces 15.
