@@ -255,7 +255,19 @@ function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
  if(S.foe&&!rivals.some(v=>v.name===S.foe)){const v=pick(liveRivals(false).filter(x=>!isF(x)));if(v)S.foe=v.name}
  if(wasSrv&&typeof srvInit==="function"){S.srv=null;quiet=true;try{withoutFriend(()=>srvInit())}catch(e){console.error(e)}quiet=false}
  S.place="home";S.visit={k:"home",people:homePeople(),talked:false};
- try{if(typeof sidN!=="undefined")sidN=Math.max(sidN,...allServ().map(s=>+s.sid||0).filter(n=>n<900),0)}catch(e){}}
+ try{if(typeof sidN!=="undefined")sidN=Math.max(sidN,...allServ().map(s=>+s.sid||0).filter(n=>n<900),0)}catch(e){}
+ try{lifeRekey()}catch(e){console.error("lifeRekey",e)}}
+/* flight-sid-rebirth (law 6b, one key = one person): a new life is built from a fresh seeded run (j52 nlRun: sidN = 0, a fresh S with
+   S.kseq 0), then joins the room's world, which still holds the people of the old lives with their servant ids (s<sid>) and «x<n>» keys
+   (world men, court …). Her new household (maid, servants, children, home family) reused s1, s2 … and the next new world person reused x1 …
+   → two people on one j61 key (coop-e2e host rebirth: s1 «Tố Cầm» / «Tiểu Đào», x33 two men). After the join: both counters continue past
+   every id the world holds, and her own new people that collide get fresh ids. */
+function lifeRekey(){const mine=new Set([S.maid].concat(S.staff||[],S.kids||[],(S.kc&&S.kc.fam)||[]).filter(e=>e&&typeof e==="object"));
+ const wSv=new Map();for(const e of allServ())if(e&&e.sid!=null&&!mine.has(e)&&+e.sid<900)wSv.set(+e.sid,e);
+ if(typeof sidN!=="undefined"){sidN=Math.max(sidN,...wSv.keys(),0);for(const e of mine)if(e.sid!=null&&wSv.has(+e.sid)){T("rekey s"+e.sid);e.sid=++sidN}}
+ const all=typeof k61All==="function"?k61All():[];const kk=new Set();let mx=0;
+ for(const e of all){if(!e||mine.has(e)||typeof e.kk!=="string")continue;kk.add(e.kk);const n=+e.kk.slice(1);if(n>mx)mx=n}
+ S.kseq=Math.max(S.kseq||0,mx);for(const e of mine)if(typeof e.kk==="string"&&kk.has(e.kk)){T("rekey "+e.kk);e.kk="x"+(S.kseq=S.kseq+1)}}
 CW.attach=()=>{const C=CW.dying||CW.base;if(C)attach(C)};
 /* jcoopthin (thin guest, part A) reads the world split and the friend-entry builders from here: one source */
 CW.X={W_KEYS,HOST_ONLY,CM_P,MEN_P,REFF,STAT,mapMe,buildFriend,buildFriendSrv,friendSrv,myBlob,pullFriend,pushFriend,isF,J};
