@@ -116,7 +116,7 @@ function lxNpcCap(v,rec){try{return lxOn()&&v&&v!==S&&!v.coop?lxCapRec(v,rec):re
 /* ---------- the mirror: only the colours she owns (kitSwatches rows filtered), what is missing, mua gấp ---------- */
 function lxColRows(rows){if(!lxOn())return rows;const own={};for(const part of BAL.ration.parts)own[part]=lxBoxes(S,part);
  return rows.map(r=>{if(/^pre-/.test(r.k)){const it=r.items.filter(i=>{const x=TOIL_PRE.find(y=>y[0]===i.k);return x&&BAL.ration.parts.every(part=>own[part].some(e=>e.c===x[4][part]))});return it.length?Object.assign({},r,{items:it}):null}
-  const L=own[r.k];if(!L)return r;const it=r.items.filter(i=>L.some(e=>e.c===i.k)).map(i=>{const E=L.filter(e=>e.c===i.k);const u=E.reduce((a,e)=>a+e.u,0);return Object.assign({},i,{name:`${i.name} · ${E.map(e=>IT[e.k].n).join(", ")}, còn ${u} lần dùng`})});
+  const L=own[r.k];if(!L)return r;const it=r.items.filter(i=>L.some(e=>e.c===i.k)).map(i=>{const E=L.filter(e=>e.c===i.k);const u=E.reduce((a,e)=>a+e.u,0);return Object.assign({},i,{name:`${i.name} · ${E.map(e=>IT[e.k].n).filter((x,j,a)=>a.indexOf(x)===j).join(", ")}, còn ${u} lần dùng`})});
   return it.length?Object.assign({},r,{items:it}):null}).filter(Boolean)}
 function lxColPick(col){if(!lxOn()){delete col.no;return col}const M=lxMiss(S);if(M.length)col.no=M.slice().sort();else delete col.no;for(const part of BAL.ration.parts){const L=lxBoxes(S,part);if(L.length&&!L.some(e=>e.c===col[part]))col[part]=L.slice().sort((a,b)=>b.u-a.u)[0].c}
  if(col.want==="diem"&&!lxColRows([{k:"pre-diem",items:TOIL_PRE.filter(x=>x[2]==="diem").map(x=>({k:x[0]}))}]).length)delete col.want;return col}
@@ -190,7 +190,7 @@ function lxAskHer(v,part){try{if(typeof rcvAsk==="function")rcvAsk("rougeBorrow"
   for(const v of consorts())if(v!==p&&!v.out&&v.alive!==false&&v!==S)ghenUp(v,T.ghen,`thấy ${p===S?"ngươi":p.name} được Hoàng thượng ban cống phẩm`,p)}catch(e){console.error("rt tribute",e)}return r};window.bestow=bestow})();
 /* ---------- item detail: the colour and lượt of each box (kit detail rows' own note line) ---------- */
 (function(){if(typeof kitItemDetailRows!=="function")return;const d0=kitItemDetailRows;kitItemDetailRows=function(ref,o){try{const k=ref&&(typeof ref==="string"?ref:ref.k||(ref.e&&ref.e.k));const r=lxOf(k);
-  if(r){lxFix(S);const E=(S.inv||[]).filter(e=>e&&e.k===k);if(E.length){o=Object.assign({},o||{});o.note=[].concat(o.note||[],E.map(e=>`màu ${lxColName(r.part,e.c)}: còn ${e.u} lần dùng`))}}}catch(e){}return d0.call(this,ref,o)};window.kitItemDetailRows=kitItemDetailRows})();
+  if(r){lxFix(S);const E=(S.inv||[]).filter(e=>e&&e.k===k);if(E.length){o=Object.assign({},o||{});o.note=[].concat(o.note||[],typeof kitUseNote==="function"?kitUseNote(E,{unit:"hộp",pre:e=>`màu ${lxColName(r.part,e.c)}`}):[`còn ${E.reduce((a,e)=>a+(e.u|0),0)} lần dùng`])}}}catch(e){}return d0.call(this,ref,o)};window.kitItemDetailRows=kitItemDetailRows})();
 /* ---------- first sight on load / new life ---------- */
 (function(){for(const f of ["render"]){const g=window[f];if(typeof g!=="function")continue;window[f]=function(){try{if(S&&!S.lxInit)lxInitAll()}catch(e){}return g.apply(this,arguments)}}})();
 window.lxPrice=lxPrice;window.lxKeys=lxKeys;window.lxNpcSpend=lxNpcSpend;window.lxSit=lxSit;window.lxNpcCap=lxNpcCap;window.lxColRows=lxColRows;window.lxColPick=lxColPick;window.lxMirrorNote=lxMirrorNote;window.lxRushBtn=lxRushBtn;window.lxRush=lxRush;window.lxInitAll=lxInitAll;window.lxOf=lxOf;window.lxCount=lxCount;window.lxMiss=lxMiss;window.lxFix=lxFix;

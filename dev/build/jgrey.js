@@ -30,7 +30,7 @@ function kitOffNeed(c,needs){const u=(needs||[]).filter(x=>x&&!x.ok);if(!c||!u.l
 function kitWhenWit(){return "mở lại khi cung nữ thêm tin cẩn"}
 function kitWhenTy(){return "mở lại khi có thái y tâm phúc"}
 function kitOffIf(c,ok,why,when){return ok?c:kitOff(c,why,when)}
-function kitOffBac(c,fee){if(typeof S!=="undefined"&&S&&S.bac<fee)kitOff(c,kitWhyBac(fee),kitWhenBac());return c}
+function kitOffBac(c,fee){if(typeof S!=="undefined"&&S&&S.bac<fee){kitOff(c,kitWhyBac(fee),kitWhenBac());c.off.k="bac"}return c}/* k: held back by bạc alone (jnolock may pay it another way) */
 /* kit sample page entries */
 try{if(typeof KIT_SAMPLES!=="undefined"){
  KIT_SAMPLES.push({id:"§84 greyed option",title:"GREYED OPTION · kitOff (a known option she cannot take: cost / rank / item) — greyed, reason chip in Cần, when it opens again",where:"every dialog option list (VIỆC, visits, place card, teaching); the same ACT CARD frame, disabled",html:()=>`<div style="max-width:560px"><button class="opt" disabled data-kneed="${encodeURIComponent(JSON.stringify([{t:`thiếu ${BAL.kitpage.demo.grey.need-BAL.kitpage.demo.grey.have} bạc (cần ${BAL.kitpage.demo.grey.need}, có ${BAL.kitpage.demo.grey.have}) · mở lại khi đủ bạc`,ok:false}]))}">Ma ma giáo tập<small>tốn: ${BAL.kitpage.demo.grey.k} khắc, Sức -${BAL.kitpage.demo.grey.suc}, Bạc -${BAL.kitpage.demo.grey.need} · thành: tiến bộ +2..3</small></button></div>`});

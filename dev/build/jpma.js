@@ -55,8 +55,8 @@ function pmRaw(p,kind,R){return kg82NpcRaw(p,kind,{occ:"pm",rank:R})}
    playArt scores quick.raw, the sub text prints the same number. No typed fallback. */
 /* a person's MEDIAN board on this tier (her own level): the expected hand, not a draw (pmOddsEst, pmKyNoise) */
 function pmMed(p,kind,R){return mgSkipRaw(mgTier(kind,{occ:"pm",rank:R,p,lv:kg82LvFor(p,kind)}))}
-function pmSk(kind,R){return mgSkipRaw(mgTier(kind,{occ:"pm",rank:R}))}
-function pmQuick(kind,R){const sk=pmSk(kind,R);return{n:"Để tài nghệ quyết định",sub:`tính như người cùng bậc (${sk}/10)`,raw:sk}}
+function pmSk(kind,R){return (typeof kitSkipCap==="function"?kitSkipCap:x=>x)(mgSkipRaw(mgTier(kind,{occ:"pm",rank:R})))}/* m-fix-1: HER quick mark capped (BAL.skip.cap); pmMed (an NPC's own estimate) unchanged */
+function pmQuick(kind,R){const sk=pmSk(kind,R);return{n:"Để tài nghệ quyết định",sub:`tính ${sk}/10, tự thi giỏi thì hơn`,raw:sk}}
 function pmTal(p,kind){try{return kg82Parts(p,kind).total}catch(e){return 0}}
 function pmScore(p,kind,R,raw){return pmTal(p,kind)+Math.round((raw==null?pmRaw(p,kind,R):raw)/10*B().luck)}
 function pmOdds(a,t,kind){const R=pmR(a,t),N=B().oddsN,ta=pmTal(a,kind),tt=pmTal(t,kind),L=B().luck;let w=0;

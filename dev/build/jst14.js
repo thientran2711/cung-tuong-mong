@@ -35,26 +35,26 @@ function f14NhapL(m){const L=F14L();let r=0;try{r=m&&m.r0!=null?m.r0:S.st&&S.st.
 /* tutorial milestones (phase 1): every step is a real state check she can do from her real position (fix r1 item 2: the cung nữ road
    serves first, so its steps are servant steps until she is raised; «Từ kẻ hầu thành tiểu chủ» runs only if she is not raised yet) */
 Object.assign(MS67,{
- nhap14:{t:()=>S.origin.k==="cnv"?"Kẻ hầu mới vào cung":"Nhập cung, đứng vững",lim:()=>S.origin.k==="cnv"?F14L().nhapCnv:f14NhapL(),wait:()=>f14Home(),
+ nhap14:{t:()=>S.origin.k==="cnv"?"Phận tỳ nữ buổi đầu":"Sơ nhập cung môn",lim:()=>S.origin.k==="cnv"?F14L().nhapCnv:f14NhapL(),wait:()=>f14Home(),
   g:()=>S.origin.k==="cnv"?`Mới vào cung làm kẻ hầu: làm tròn phận sự, giữ lòng tin của chủ. Chủ tin lên ${F14G().tin}, hoặc được thăng Đại cung nữ, thì xong chương, có thưởng; qua ${f14Nv(F14L().nhapCnv)} tháng thì chương tự khép, không thưởng.`
    :`Mới vào cung: giữ mình, được Hoàng thượng để mắt. Được tấn phong một bậc thì xong chương, có thưởng; qua ${f14Nv(f14NhapL())} tháng thì chương tự khép, không thưởng.`,
   steps:m=>S.origin.k==="cnv"?[[`Chủ tin ${S.tin||0}/${F14G().tin}`,(S.tin||0)>=F14G().tin],[`Được thăng ${SRK.maid[BAL.srvRk.dai]} (Đại cung nữ)`,!!(S.srv&&S.srv.rk>=BAL.srvRk.dai)],["Được phong Đáp ứng",!!(S.srv&&S.srv.risen)],f14Late(m,F14L().nhapCnv," đầu")]
    :[[`Được tấn phong một bậc (nay ${RANKS[Math.min(S.rank,7)].n})`,S.rank>m.r0],f14Late(m,f14NhapL(m)," đầu")],
   any:1,get fx(){return{danh:F14D().nhap}},end:"Ngươi đã đứng được chân trong cung.",get rw(){return["court",F14R().nhap]}},
- sung14:{t:()=>f14Srv()?"Lọt vào mắt Hoàng thượng":"Lần đầu được sủng",lim:()=>F14L().sung,wait:()=>f14Home(),
+ sung14:{t:()=>f14Srv()?"Một ánh mắt rồng":"Sơ thừa ân sủng",lim:()=>F14L().sung,wait:()=>f14Home(),
   g:()=>f14Srv()?`Kẻ hầu cũng có ngày được Hoàng thượng để mắt: Hoàng thượng để ý lên ${F14G().nt}, hoặc được phong Đáp ứng, thì xong chương, có thưởng. Quá ${f14Nv(F14L().sung)} tháng mà chưa được thì chương tự khép để truyện đi tiếp, không thưởng.`
    :`Được Hoàng thượng để mắt: Sủng ${F14G().sung} hoặc một đêm thị tẩm thì xong chương, có thưởng. Quá ${f14Nv(F14L().sung)} tháng mà chưa được thì chương tự khép để truyện đi tiếp, không thưởng.`,
   steps:m=>f14Srv()?[[`Hoàng thượng để ý ${S.nt||0}/${F14G().nt}`,(S.nt||0)>=F14G().nt],["Được phong Đáp ứng",!!(S.srv&&S.srv.risen)],f14Late(m,F14L().sung)]
    :[[`Sủng ${S.sung}/${F14G().sung}`,S.sung>=F14G().sung],["Một đêm thị tẩm",(S.nights||0)>0],f14Late(m,F14L().sung)],
   any:1,get fx(){return{danh:F14D().sung}},end:"Hoàng thượng đã nhớ đến ngươi.",get rw(){return["court",F14R().sung]}},
- tap14:{t:()=>"Học quy củ trong cung",lim:()=>F14L().tap,wait:()=>f14Home(),
+ tap14:{t:()=>"Học lễ nghi cung cấm",lim:()=>F14L().tap,wait:()=>f14Home(),
   g:()=>`Có người trong cung quý ngươi (thiện cảm ${F14G().rel}) và một môn tài nghệ lên bậc ${F14G().art} thì xong chương, có thưởng. Qua ${f14Nv(F14L().tap)} tháng mà chưa xong thì chương tự khép, không thưởng.`,
   steps:m=>{const G=F14G();const fr=(()=>{try{return liveRivals(true).some(v=>(aff(v,S)||0)>=G.rel)||(isSrv()&&srvColleagues().some(s=>(S.srv.af[s.sid]||0)>=G.rel))}catch(e){return false}})(),ar=(()=>{try{return Object.values(S.arts||{}).some(l=>(l||0)>=G.art)}catch(e){return false}})();
    return [[`Kết thân một người trong cung (thiện cảm ${G.rel})`,fr],[`Học một môn tài nghệ lên bậc ${G.art}`,ar],f14Late(m,F14L().tap)]},
   all2:1,get fx(){return{danh:F14D().tap}},end:"Ngươi đã biết quy củ, có người quen, có nghề trong tay.",get rw(){return["court",F14R().tap]}},
  /* no time limit (as j67 «len»): every later chapter is a consort's chapter that a servant cannot play, so they open only when she is raised;
     if she was raised before this chapter, a shared arc takes its place (chAdvance67 below) */
- len14:{t:()=>"Từ kẻ hầu thành tiểu chủ",
+ len14:{t:()=>"Chim sẻ hóa phượng hoàng",
   g:()=>"Được Hoàng thượng để mắt mà phong Đáp ứng thì xong chương, có thưởng. Đến lúc ấy, các chương sau của đời người mới mở.",
   steps:m=>[[S.srv&&S.srv.risen?"Được phong Đáp ứng":(typeof amOn==="function"&&amOn()?`Được phong Đáp ứng (Hoàng thượng để ý ${S.nt||0})`:`Được phong Đáp ứng (Hoàng thượng để ý ${S.nt||0}/${BAL.ntRise.at})`),!!(S.srv&&S.srv.risen)]],
   any:1,get fx(){return{danh:F14D().len}},end:"Ngươi đã thành tiểu chủ.",get rw(){return["court",F14R().len]}}});

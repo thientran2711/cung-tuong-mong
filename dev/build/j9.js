@@ -85,8 +85,13 @@ var ORDHALF=0;function ordHalf(fn){const h0=ORDHALF;ORDHALF=BAL.road.hp.half;try
    target (spyKnowB via t) — so the word on the card is the odds the roll uses (shown == rolled; dev/test/shown-odds.test.js).
    x = an extra part of one way of doing the act (e.g. plant "tại cung nàng": x.pen, x.here = done in person, no sent-servant pen), the same object on both sides. */
 const ACT_NOSEND=["accuse","vp","xx","gift","steal","road","takeaway"];
-function actCtx(a,t,k,sv,x){const sent=!(x&&x.here)&&!together(a,t)&&!ACT_NOSEND.includes(k);/* x.here: she does it herself on the spot (no servant sent) */if(sent&&sv===undefined)sv=bestSent(a);
- const K0=ACTK;ACTK=k;let pen=0;try{pen=sent?sentPen(sv)-(sv?srk(sv)*3:0):0}finally{ACTK=K0}
+/* DELEGATE-NOMG (owner OD 25/11 ~04:12Z): ACTSEND = she GIVES the act to someone (scheme «Giao cho người làm», jsgame) even while she stands with the
+   target: the act is a sent act — the one sent does it, with the sent one's ability (sendPen: thiện cảm, nết, bậc; j29 sentPen), merit and the risk of being caught */
+let ACTSEND=0;
+function sendPen(sv,k){const K0=ACTK;ACTK=k;try{return sentPen(sv)-(sv?srk(sv)*3:0)}finally{ACTK=K0}}
+function actSent(a,t,k,x){return !(x&&x.here)&&((ACTSEND&&a===S)||!together(a,t))&&!ACT_NOSEND.includes(k)}
+function actCtx(a,t,k,sv,x){const sent=actSent(a,t,k,x);/* x.here: she does it herself on the spot (no servant sent) */if(sent&&sv===undefined)sv=bestSent(a);
+ let pen=0;pen=sent?sendPen(sv,k):0;
  return{a,t,pen:pen+((x&&x.pen)||0)+(ORDHALF||0),dom:ACTDOM[k]}}
 /* the odds an act's own roll will use, for display: ACT[k].o evaluated inside actCtx (then the one odds cap oddsCl) */
 function actOdds(a,t,k,x){const A2=ACT[k];if(!A2||typeof A2.o!=="function")return null;const X0=ACTX,K0=ACTK;ACTK=k;ACTX=actCtx(a,t,k,undefined,x);
@@ -106,7 +111,7 @@ function aOdd(o,a){/* the odds an act's own success uses: the frozen shown odds 
  if(ACTFZ&&(a===undefined||a===S)&&(!ACTX||!ACTX.a||ACTX.a===S))return ACTFZ.o;
  return o}
 function aRoll(o,a){const z=aOdd(o,a);return z>=100||roll(z)}
-function runAct(a,t,k,extra){const A2=ACT[k];if(!A2)return"";const sent=!together(a,t)&&!ACT_NOSEND.includes(k);const where=together(a,t)?placeName(whereOf(a)):"";
+function runAct(a,t,k,extra){const A2=ACT[k];if(!A2)return"";const sent=actSent(a,t,k);const where=together(a,t)?placeName(whereOf(a)):"";
  if(sameHouse(a,t)&&k!=="accuse")return a===S?"Người cùng cung, ngươi không thể ra tay hay lấy lòng. ":"";
  const sv=sent?bestSent(a):null;ACTX=actCtx(a,t,k,sv);if(a===S&&ACTFZ&&(!ACTFZ.k||ACTFZ.k===k)){ACTX.fz=ORDHALF?oddsCl(ACTFZ.o-ORDHALF):ACTFZ.o;ACTFZ=null}/* the odds she saw (fzRun) */let r="";try{r=A2.f(a,t,extra)}finally{ACTX={a:null,pen:0}}
  const harm=!["ally","gift","spy"].includes(k);

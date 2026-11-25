@@ -52,15 +52,23 @@ function open(o){if(CUR)CUR.destroy();const A=area(),K=KIT_FOC,m=kv(),src=(o.fig
  F.setGroup=k=>setGroup(F,k);F.setGroups=G=>setGroups(F,G);F.say=(L,oo)=>say(F,L,oo||{});F.choices=(L,cb)=>choices(F,L,cb);F.play=oo=>playOn(F,oo||{});F.intro=oo=>intro(F,oo||{});F.endPlay=()=>playOff(F);F.hud=(mk,ck)=>hud(F,mk,ck);F.react=r=>react(F,r);
  F.close=()=>close(F);F.destroy=()=>destroy(F);F.figRect=()=>F.img.getBoundingClientRect();F.skipOpen=()=>{F.opening=false;[...F.anims].forEach(a=>{try{a.finish()}catch(e){}})};
  animateOpen(F);return F}
+function stageRect(F){/* the figure's rect on the stage she stands on (live token if still in the DOM, else the rect passed at open) */
+ try{const e=F.o.fig;if(e&&e.getBoundingClientRect&&e.isConnected){const r=e.getBoundingClientRect();if(r.width>20&&r.height>40)return r}}catch(x){}
+ const f=F.o.from;return f&&f.width>20&&f.height>40?f:null}
 function layout(F){const K=KIT_FOC,A=F.A,m=F.m,v=F.body||{t:.02,b:.99,ar:.42,ht:.05},Z=typeof KIT_SIZE==="object"?KIT_SIZE.fig.XL:{h:398,cw:220};
- const H=Z.h*fac(F),ih=H/Math.max(.2,(v.b-v.t)),iw=ih*(v.ar||.42),cx=A.w/2,floor=A.h-K.floorPad[m];let top=floor-v.b*ih;
- const ht=(typeof kitFigTop==="function"?kitFigTop(v):v.t);const need=K.tabH+K.headGap+44;let head=top+ht*ih;if(head<need){top+=need-head;head=need}
- F.geo={cx,floor,ih,iw,top,head,cw:Z.cw,H};
+ /* OWNER 25/11 ~07:00Z: the focus figure is the STAGE figure copied 1:1 — same px size, same feet line, same spot on the painting (never a smaller figure). Only when no stage rect exists (no token) the old standard body applies. */
+ let sr=stageRect(F);if(sr&&(sr.bottom>A.top+A.h+2||sr.top<A.top-2||sr.right<A.left||sr.left>A.left+A.w))sr=null;/* token scrolled out of the focus area: stage standard body instead */let ih,iw,cx,top,floor;
+ if(sr){ih=sr.height;iw=sr.width;cx=sr.left+sr.width/2-A.left;top=sr.top-A.top;floor=top+v.b*ih;F.copy=true}
+ else{const std=typeof KIT_FIG==='object'?Math.min(KIT_FIG.h*A.h,KIT_FIG.maxPx):Z.h,H=std*fac(F);ih=H/Math.max(.2,(v.b-v.t));iw=ih*(v.ar||.42);cx=A.w/2;floor=A.h-K.floorPad[m];top=floor-v.b*ih;F.copy=false}
+ const half=Math.max(Z.cw,iw*Math.max(.3,(v.r||1)-(v.l||0)))/2,minRoom=200;/* both button columns need room: the spot only moves when a column would drop under minRoom (edge person) */
+ if(cx-half-K.colGap-4<minRoom)cx=minRoom+half+K.colGap+4;if(A.w-cx-half-K.colGap-4<minRoom)cx=A.w-minRoom-half-K.colGap-4;
+ const ht=(typeof kitFigTop==="function"?kitFigTop(v):v.t);const need=K.tabH+K.headGap+44;let head=top+ht*ih;if(head<need){top+=need-head;floor+=need-head;head=need}
+ F.geo={cx,floor,ih,iw,top,head,cw:Z.cw,H:ih*(v.b-v.t)};
  const s=F.img.style;s.left=(cx-iw/2)+"px";s.top=top+"px";s.width=iw+"px";s.height=ih+"px";
  const tb=F.tabs.style;tb.left="0";tb.right="0";tb.bottom=(A.h-(head-K.headGap))+"px";
- const cw=Math.min(K.col[m],Math.max(90,cx-(Z.cw/2+K.colGap)-4)),ctop=head-K.headGap+K.colGap-K.headGap;
- for(const [side,c] of [["l",F.cl],["r",F.cr]]){const cs=c.style;cs.width=cw+"px";cs.top=Math.max(0,head+4)+"px";cs.height=Math.max(60,floor-head-4)+"px";
-  if(side==="l")cs.left=(cx-(Z.cw/2+K.colGap)-cw)+"px";else cs.left=(cx+(Z.cw/2+K.colGap))+"px"}
+ const availL=cx-half-K.colGap-4,availR=A.w-cx-half-K.colGap-4;
+ for(const [side,c] of [["l",F.cl],["r",F.cr]]){const cw=Math.min(K.col[m],Math.max(90,side==="l"?availL:availR)),cs=c.style;cs.width=cw+"px";cs.top=Math.max(0,head+4)+"px";cs.height=Math.max(60,floor-head-4)+"px";
+  if(side==="l")cs.left=(cx-half-K.colGap-cw)+"px";else cs.left=(cx+half+K.colGap)+"px"}
  F.plate.style.top=(floor+6)+"px";F.plate.style.left=cx+"px";
  const pl=F.q(".kfoc-play").style;pl.left=Math.max(0,cx-iw/2-40)+"px";pl.width=(iw+80)+"px";pl.top=top+"px";pl.height=ih+"px";
  el_btn(F);if(F.cur)clampMark(F)}
