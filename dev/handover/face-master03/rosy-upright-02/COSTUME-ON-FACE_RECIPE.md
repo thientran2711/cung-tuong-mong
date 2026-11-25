@@ -16,3 +16,6 @@ refs [image jUIwiGBLD0 (= owner's left image, full-res original), image YMSDsAaW
 Prompt = Prompts/FACE-REUSE-ALLURING-AGE16-DUAL-REF-01-RESTORED-UPRIGHT-02.txt with ONLY "Face_Style_Master_No_Text.png" (2x) → "the preferred style portrait". refs [image <original identity upload>, image YMSDsAaWeC]; gpt-2-6 2k auto.
 s18 LwtggCqswO → 6AKGNfaiJO (a* 13.0, b/a 0.79) · s34 P3HNNsi42C → yiF3OvcPW9 (12.7, 1.02) · s58 vQzCEHRa47 → ksXlKMv16B (13.8, 0.81). Style master itself a* 11.5 b/a 1.09.
 Result: painting/skin/pin of the master transferred strongly (rosy, soft, gold-branch pin), source hairstyle and face kept (s58 bun = her source), head upright, mark kept. Sent to owner; awaiting verdict.
+
+## Owner prompt FACE90-ALLURING-S56-DUAL-STYLE-07 (25/11, verbatim) → ksXgjpu16B
+refs [image ksXxjLP16B = original s56, image YMSDsAaWeC = preferred style portrait]; gpt-2-6 2k auto. Cheek a* 13.2, b/a 0.95. Identity kept (bun + loose side locks, mole same side, knowing smile), style/skin of master transferred, head upright, caption "Alluring | S56 | Style test". Sent.
