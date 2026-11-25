@@ -1751,3 +1751,51 @@ j93 kmStage finish(): under reduced motion (kmReduced) the 0 ms auto-finish no l
 - Robots: overlay from 918bfa84 = dev/measure/robot10-coop.js, robot10-in.js, robot10-agg.js, robot10.js + dev/test/coop-bot.js (robot10-coop.js alone crashes «CB.CLR undefined»). `SEED=7 SWAP=0 CAP=1500 WORKER=http://127.0.0.1:8797 node dev/measure/robot10-coop.js 4 4 3 <out>` ≈ 56 min; never next to quickcheck.
 - Known noise on LIVE (jdayq era): coop-night FAILS on LIVE alone (4da55ce8 13 FAIL) → run a LIVE-alone coop-night beside every merged run; km-red-end may flake «overlay none» (a non-nightEnd scene not opened in 15 s) 2/4 runs; coop-e2e SWAP 1 one-off 141/14x (rerun). Two coop-night / e2e runs at once on 4 cores cause false FAILs — run them one by one.
 - Final merge: LIVE moved 4× during one review; assemble.py list conflicts are real (take main's list + the branch's added files), index.html/sw.js just rebuild.
+
+### FIXER fix-3-r5 (opus; session_01N1tNP4UEeF8FP1nPXeqWNV; START_CTX ≈4 % own estimate; Foreman B = session_01N1tNP4KsM72Dzwq4M2stnb (was ROOT 4w3SL22V)) — review/robot-coop-fix-3-r5 **3b004c3e** — SẴN SÀNG KIỂM (A/B completed-room count NOT met: see A/B)
+PRIORITY #1 CHECK ('robot-coop-fix-3'): OD 0 | ledger 0 | claims 8 | main 0 | review/* 2 (r4 b34e4bde = base, robot10-coop harness) | archive 0
+Branch = b34e4bde + merge LIVE 0756a05b (0d46f833) + fix 69d03208 + fix f54ae50d + merge LIVE 9f72524b (3b004c3e; only index.html/sw.js conflicted = generated, rebuilt). Code: dev/build/jcoopworld.js only; test dev/test/coop-house-unit.js (36 → 52 checks).
+#### FAIL 2 (save→load→save R[4].resHall tay→dong, host, ×6) — root cause + family
+The merged week REBUILDS the friend entry from her blob (fromCanon → buildFriend → deser). buildFriend copied only LOOK (pal + resHead) of her house: no resHall / palLone / palWait. The rebuild's own deser palFix then saw her with no hall → an NPC kept / got her side hall; right after, keepFriendPos → friendHouse put her relayed hall back → TWO people in one hall in every save until the next host palFix (map / week end only). The robot's scratch load (deser → palFix, no room) moves the NPC → R[i].resHall diff, repeated every week (= hits 6; r3's dong→tay was the same family seen from the other hall). Fix (one writer of her house = her relay, applied BEFORE any palFix): (a) buildFriend copies the whole HOUSE list (jcoopworld HOUSE) from her blob, then her last relay (CW.fpos.hs, same life); (b) houseSettle: whenever her relayed house changes on this seat (onPos liveStats, keepFriendPos/friendHouse) this seat's palFix runs at once (host: NPC gives way, jcoophl sends the move; guest: her own S gives way, world people stay the host's), never inside a rebuild (CW.inFC) or a thin seat step (CW.ctx). Saved state is now a palFix fixed point.
+#### FAIL 1 (coop-pos «host sees guest at r4, guest is at P:b», SWAP=1) — root cause + family
+houseWire sent her raw S.resHead. Her own seat no longer honoured it (j9 houseOf(S) = her own place: head below Tần / out / dead on her seat, or she heads her own house) — she re-houses only at map / week end, so S.resHead=4 stayed — while on the other seat head 4 still stood → palaceOf(her entry) = r4. Fix: the relay carries the house HER seat resolves: a resHead her houseOf does not honour goes out as none (her own palace). Both seats now read one answer (her seat's).
+#### Family scan (law 11): every writer of resHead/resHall/pal/palLone/palWait (`grep -nE "\.(resHead|resHall|pal|palLone|palWait)=[^=]" dev/build/j*.js`, 36 sites / 13 files)
+| writer | can touch the friend entry? | r5 |
+|---|---|---|
+| jpal palFix (20 sites), j95cCap | no since r4 (coop skipped, players first) | kept |
+| jcoopworld buildFriend (LOOK pal/resHead) | YES — partial house | whole HOUSE + relay (fix a) |
+| jcoopworld houseIn (relay) | YES — the one writer | + houseSettle (fix b); houseWire resolved (FAIL 1) |
+| jcoopworld attach / jcoopthinb/c (new life: resHead==="me"/pid → null) | NPCs only (canon R) | unchanged |
+| j9 assignHouses | replaced by palFix (j27) | — |
+| jbancung bcAsk / bcNpcAsk | NPCs only (`!v.coop`) | — |
+| j27 / j42 / jkc / jkc2 / jkcco / j82 | S (her own seat) or a kc NPC | — (reaches the other seat via houseWire) |
+#### Unit (dev/test/coop-house-unit.js, 52/52) + plants (reverted after each)
+New checks: rebuilt entry carries her whole house (resHall) / her last relay / not another life's relay (host + guest); rebuild → NPC in her hall gives way in the rebuild's palFix; rebuild → save → load palFix = identity; live relay into an NPC's hall → NPC moves at once → load identity; guest: host relayed into my hall → I move at once; houseWire: honoured head out / unhonoured head (below Tần) → none / head out → none / chủ vị → none.
+| plant | result |
+|---|---|
+| P12 no HOUSE copy in buildFriend | CAUGHT 5 FAIL |
+| P13 no relay at build | CAUGHT 3 FAIL |
+| P14 houseSettle no-op | CAUGHT 4 FAIL |
+| P16 houseWire sends raw resHead | CAUGHT 3 FAIL |
+P1–P11 of r4 still in the unit (unchanged).
+#### Gates (local Worker `wrangler dev --local --port 8791` of coop/worker = main; worktree /home/user/wt/f5)
+| gate | 0d46f833+fix f54ae50d (LIVE 0756a05b) | 3b004c3e (LIVE 9f72524b, final) |
+|---|---|---|
+| `node dev/test/coop-house-unit.js` | 52/52 | 52/52 |
+| `node dev/test/coop-keymove-unit.js` | 12/12 | 12/12 |
+| `cd coop/worker && npm test` | — | rc 0 (thin ALL OK) |
+| `node dev/test/coop-e2e.js <out> http://127.0.0.1:8791` (SWAP 0) | 142/142 | 142/142 |
+| `COOP_SWAP=1 node dev/test/coop-e2e.js <out> http://127.0.0.1:8791` | 142/142 | 142/142 |
+| `bash dev/tools/quickcheck.sh` ALONE | run 1 (3 runs) FAIL buổi 3082 vs live 1221 (live itself 1221/4185 between runs = noise) → `--runs 6` PASS old save ok, buổi 2005/1412 | `--runs 6` PASS · old save ok · render 234/212 tab 467/450 buổi 1258/1159 · core gates PASS |
+Branch has no coop/worker change (= main), so bare = merged-with-LIVE for the Worker.
+#### A/B (fix = f54ae50d on LIVE 0756a05b, main = 0756a05b, same local Worker :8791; harness origin/review/robot10-coop 918bfa84 overlay — realtap harness of Foreman F not READY → OLD harness, JS clicks; `SWAP=<s> SEED=1<r> FLUSH=4 CAP=2400 PCAP=3000 POSLOG=1 NEGTRAP=1 WORKER=http://127.0.0.1:8791 node dev/measure/robot10-coop.js 1 1 1 <out>`)
+LOCAL harness patch needed on LIVE (both sides, not committed): the old bot never tapped the new mini-game rules cards (KIT §92.4 kitFocus `.kfoc-introgo`; j82 kgReady «Sẵn sàng» `.kgr-go`) → every room stuck at week 0 on the Điểm trang card. lib/coop-clear.js TAP: tap visible `.kfoc .kfoc-introgo,.kgr-go`, then `.kquick,#kg82skip` («Bỏ qua»), then `.kfoc-skip`. Rounds r1–r2 ran with a wrong selector for the kgReady card (`.kgr .kgr-go`; the button is a sibling of .kgr) — weeks still counted. r1–r4 fix+main in parallel; r5–r6 fix only (CPU: 4 browsers gave turn p95 up to 140 s).
+| side | rounds | rooms | weeks | completed rooms | coop-pos | R[].resHead / resHall save rows |
+|---|---|---|---|---|---|---|
+| fix SWAP 0 | r1 r3 r5 | 10 | 60 | 1 (HQS5 13 w) | **0** | **0** |
+| fix SWAP 1 | r2 r4 r6 | 12 | 42 | 0 | **0** | **0** |
+| main SWAP 0 | r1 r3 | 8 | 39 | 0 | **10** (r1: «guest sees host at r4, host is at r3» buổi 0.1 → 5.0, same family) | 0 |
+| main SWAP 1 | r2 r4 | 8 | 12 | 0 | 0 | 0 |
+NOT MET: «≥5 completed fix rooms per SWAP». On LIVE nearly every room of BOTH sides ends «stuck» in 0–16 weeks (main 16/16 rooms, fix 21/22): one seat holds a card in Q that is never shown (Q ['Hoàng thượng'], ['Kỳ ngộ','Hoàng hậu khen'], ['Xong việc…'] with «Sẵn sàng»/«Chờ hảo hữu…»; jdayq day-queue holds cards behind an activity the old bot does not clear, or the week-end stuck family of fix-4/fix-6) — not this branch (main same rate). Other rows on fix (not this family): save S.logs[] servant-name (namefix/savert), S.suc (FIXER #9), R[].staff[].name / hue (savert), coop-world friend sung/danh/suc at week end, coop-stat, lag. Logs /home/user/wt/f5out (this container only).
+#### Laws
+6b real people: her house = one answer on both seats (her seat's), never two people in one side hall, a save loads to the same houses · 11 whole family: every writer of the 5 house fields scanned (table) · 4 one core: no number added (BAL.res as before) · 1 two-way: both seats run the same rule (host and guest) · 7/9/10/12: no player text / UI touched · no shots in git, no CDN folder.
