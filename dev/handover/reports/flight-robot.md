@@ -226,3 +226,19 @@ Verdict: **PASS — review/flight-e68-season-r d441ab69 FF ca5af050** (= 6b9a0ce
 | coop-e2e plain / SWAP on 29a5c86a; plain on d441ab69 | 142/142 / 142/142; 142/142 |
 | quickcheck 29a5c86a vs 0756a05b; d441ab69 vs ca5af050 | PASS 672 s (buổi 1433/1717); PASS 690 s (buổi 2918/1650 = noise: the same code one merge earlier gave 1433/1717; the change is one filter on load / release), old save ok |
 | laws 4 / 7 / 9 | no number, no new text, no UI |
+
+## REVIEW flight-sid-rebirth (BIG REVIEWER opus, 25/11)
+PRIORITY #1 CHECK ('lifeRekey' / 'k61WKey' / 'S.known' / 'kOf61'): OD 0 | ledger 0 | main: j61 kOf61 / KREG / k61InitNew, jcoopworld attach sidN | review/* this branch only | claims: this review.
+Verdict: **PASS — review/flight-sid-rebirth-r 80e911b7 FF ca5af050** (= f198beab + reviewer fix 92821374 + merge main ca5af050, index/sw/assets rebuilt). LIVE is now ee37ab5f (sansang-music-fix-2): stack-merge by LC13.
+
+| check | result |
+|---|---|
+| (a) lifeRekey root | PASS after the reviewer fix. sidN / S.kseq continue past every id the world holds; only HER new people that collide are rekeyed; world people keep their ids. |
+| REVIEWER FIX 92821374 (was a FAIL item) | jcoopworld's start / nlRun wrappers are outer to j61's (assemble 208 > 125), so attach → lifeRekey runs AFTER k61InitNew wrote her household as known under the OLD keys. A rekeyed servant / «x<n>» kept its level on the old key: her own servant read «Người lạ», the old-world person on that key «Quen biết» (law 6b). Now the S.known / S.nkn entries move with the id (old key deleted, stale KREG slot dropped, K61VER++). New test dev/test/sid-rekey-known.js (solo, CW.lifeRekey hook): before own 0 / world 3 → after own 3 / world 0. |
+| (b) world keys n / o / t / tns / c | PASS. Holders are permanent per world: S.court set once (j10:25), T.H once in trS (j55), T.ns only when missing (jagmin minNs), S.men ids stable → one key = one person. NPC child «c<name>» relies on names one per person (jname). Old saves: k61-wkey-oldsave.js PASS (levels moved x<n> → new keys, no dup). Relations / af keyed by sid stay clean (sidN past every world id, so a new sid is never a world servant's). |
+| coop-e2e COOP_HOSTDIE=1 ×2 on 80e911b7 | 143/143, 143/143 (one j61 key = one person ok both seats, every stage) |
+| coop-e2e plain / COOP_SWAP=1 | 142/142 / 142/142 |
+| quickcheck 80e911b7 vs ca5af050 | PASS 691 s, old save ok, render 279/314, buổi 1548/1883 |
+| sid-rekey-known.js / k61-wkey-oldsave.js | PASS / PASS |
+| laws 4 / 7 / 9 | no number, no text, no UI |
+Note (pre-existing, not this branch): in a HOSTDIE run the reborn host knew every palace servant at 3 (origin «cn» knows rivals' staff in k61InitNew, built against her throwaway world before the join) — worth a look by F: k61InitNew's world-people grants are computed before attach.
