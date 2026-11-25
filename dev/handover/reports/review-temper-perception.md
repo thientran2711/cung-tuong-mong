@@ -33,3 +33,47 @@ N4. HOST gate matches her cards by name («Khiêu khích», «Trút giận», «
 
 ## Verdict
 FAIL — B1, B2. Build on review/temper-perception-rv 3598bce8 (already holds T1). Round 2 = delta + the judged-yes/no scan + the mood-rate numbers + temper-perception.js / temper-outburst.js Fold+iPad + quickcheck.
+
+## ROUND 2 — review/temper-perception-rv ab5d65ee (T1b → T1c; B2 = T2c) — VERDICT: FAIL (2 blocking)
+Reviewer RV3 (successor of session_01D3E3Nb7G3pi5N3uqUqqmAn), 25/11 ~11:40Z.
+PRIORITY #1 CHECK: OD 25/11 ~05:45Z + ~08:05Z «Bộc phát theo tính cách» | main 9f72524b (ancestor of ab5d65ee ✓) | review/temper-outburst now c02602fb (dc1eb6cb + c02602fb = G4 measure-only commits after 6b85187e, not in this branch; not needed for land) | review/temper-perception-rv ab5d65ee base 3598bce8 | claims D: T1c (fixes) / T2c (B2). Rules read: START_CORE (18 laws), START_WORKER, START_REVIEWER, temper-design (c)(d), round 1 above, worker ROUND 2 report.
+
+### Gates (rerun by RV3 on ab5d65ee, own build)
+| Gate | Result |
+|---|---|
+| quickcheck.sh ALONE (nothing else on the CPUs) | **PASS** · open 2423 ms · old save ok · perf new/live render 246/315, tab 648/651, buổi 1694/1625, tasks>200 25/28 · core gates PASS · own build ✓ |
+| temper-perception.js REAL TAPS Fold 755x1000@2 + iPad 1180x820@2 | 7/7 both, dead 0, errors 0. Shots looked at (gateYes/gateNo/label both devices): kit stage + kit pop, no overflow |
+| temper-outburst.js real taps Fold + iPad | PASS both (hot/timid/jfeel/npc/cap/old, dead 0, errs 0) |
+| temper-equal.js / temper-signs.js | 36 rows fail 0, 330 cells / 17 rows wrong 0 |
+| one-core-guard.js | PASS (fails 0) |
+| coop-e2e.js (live Worker) | 142/142 first run |
+| temper-judged.js (worker scan) | 66 rows · not judged 0 — **but see B1-R: the scan's «judged» count is false** |
+| N3 | ✓ «Khiêu khích: thành. Danh 33 → 34. Người chứng kiến: Vu Thanh Từ -1 · Mạnh Hàm Chương -1.» on the card's own line (Fold + iPad logs) |
+| N4 | ✓ HOST keyed by `tw` (j2 talk cards + jtwoway twOpts) |
+
+### FINDINGS — blocking
+**B1-R. For servants, men, ministers, nữ quan and children NOTHING IS JUDGED (law 1 / law 11; round 1 B1 not met for 5 of 8 kinds).** `dev/build/jtperc.js:55` `tpP(k)` resolves an «x…» key with `relMSOf(...)`, but `relMSOf` is declared INSIDE jhc.js's IIFE (`dev/build/jhc.js:10` opens `(function(){`, `:86` defines it, never exported) → in the page `typeof relMSOf==="undefined"`, the try/catch swallows the ReferenceError → `tpP` = null for every relMS doer → `tpJudge` (jtperc.js:105 `if(!X||…)return 0`) returns before anything; `tpUp` (jtperc.js:139 `if(!X)return`) never tells anyone either. RV3 live probe (eyes = her + 2 consorts, the same call the scan makes):
+| doer | tpK | tpP(tpK) | it.j marks | tpJudge ran | state changed |
+|---|---|---|---|---|---|
+| Hoàng thượng (noi) | emp | ✓ | 3 | 3 | yes |
+| Thái hậu (quo) | th | ✓ | 3 | 3 | yes |
+| her maid (cai) | xx1 | **null** | 3 | **0** | **no** |
+| another palace's servant (cai) | xs2 | **null** | 3 | **0** | **no** |
+| a man (mcai) | xm0 | **null** | 3 | **0** | **no** |
+| a minister (qgian) | xx28 | **null** | 3 | **0** | **no** |
+| a child (kquay) | xx16 | **null** | 3 | **0** | **no** |
+Same with real roster (tpAt) over 40 khắc: 40/40 «judged» marks, 0 numbers landed for maid/servant/man/minister/child. (`tpLand(O,X,d)` itself works when called directly: msAffAdd lands.) The scan is green only because it counts `Object.keys(it.j)`, which tpDeed fills BEFORE tpJudge runs (jtperc.js:124).
+Fix: (1) export the resolver (`window.relMSOf=relMSOf` in jhc.js, or resolve through the already-global `window.relPerson`/`k61Ent`/`servById` in jtperc) — and note relKey already gives «x16»-style keys, so tpK makes «xx16»; check `relMSOf("x16")` returns the person; (2) temper-judged.js must count what LANDS (TP.stat.eye delta or tpJudge's return / the onlooker's thiện cảm before→after), not `it.j` keys; add a column per doer kind «numbers landed»; (3) whole group: every place that calls a jhc-closure function from outside (grep jtperc + other modules for relMSOf/relMSFace) — list in the report; (4) rerun the before/after table.
+
+**B2. NPC mood-term rate — still not enough lives to judge.** T2c interim (11:0xZ, build 3119cf02, 1 life per arm, none finished): pass rate on (moodM 10) 29.1 % / off 21.2 % / main 11.8 %; passes owed to mood (counterfactual, same life) 26/244 = 10.7 % overall, by kind provoke 13/95, **frame 8/26 (31 %)**, bribe 3/5, rumor 2/114; NPC gây sự deeds/buổi on .149 vs off .049. n=1 per arm and different life lengths → not conclusive; T2c's fuller table ~11:30Z then final. RV3 reading so far: the within-life counterfactual (+~12 % passes overall) is the honest measure, not on-vs-off; the frame share (31 % of frame passes owed to mood) is the worry — a vu oan is a heavy harm, and her own harms skip the gate (N2), so a mood bonus on NPC frame/poison has no counterpart on her side (law 1 does not demand it there). Suggested tune for D: apply moodM only to the gây sự kinds (provoke / vent / humil / gossip-rumor), the scope the owner ruled (OD ~08:05Z), until N2 is decided; then re-measure. PASS needs the final table (≥3 finished lives per arm, or the counterfactual over ≥2 full lives) showing NPC harm deeds per year not up noticeably.
+
+### Non-blocking
+N5. Design (c) lists a DEED row `cau {Kiệm −}` (Cầu khấn khắp nơi); the build files `cau` as self-only. Defensible (it touches nobody) — D decides; if kept self, note it in temper-design.
+N6. tpDeed's knowledge record writes doer `"v"+xk` → «vemp», «vth», «vx…» for non-consort doers (jtperc.js:120); harmless today (knwUp only compares to «me»/«v<id>»), but give them their own key when fixing B1-R.
+N1 / N2 unchanged (D / MAIN).
+
+### Laws
+1 ✗ (B1-R: the same rule does not reach 5 kinds of doer) · 2/3 ✓ (temper-equal 0 fail) · 4 ✓ (all in BAL.tp, one-core green) · 6 ✓ (eye-witness roster / tellers only) · 7 ✓ (no new player words except existing «Người chứng kiến») · 9 ✓ (no new UI; kit pop/row) · 11 ✗ (B1-R; scan false-green).
+
+### Verdict
+**FAIL — B1-R, B2.** T1c: fix B1-R on review/temper-perception-rv (from ab5d65ee), rerun scan with «landed» column + temper-perception/outburst Fold+iPad + quickcheck alone. T2c: final B2 table (+ D's call on moodM scope). Shots in scratch only, deleted; no CDN review folder used.
