@@ -185,3 +185,16 @@ VERDICT: PASS b4b181f8 (= tip b9311905 for code) — runner SWITCH OK (supersede
 ## BIG REVIEWER #7 — 25/11 ~20:05Z: co-op harness b4b181f8 on NEW LIVE 351122ba («Chọn sổ» room-slot picker) — PASS, no patch needed
 - A-COOP #2 reports b4b181f8 already handles the new picker (no new sha). Own check on LIVE 351122ba (served locally), fresh Fold host / iPad guest profiles, slice 3: host trace «Cùng hảo hữu» → #modal «Chọn sổ» «Mời hảo hữu» → room CWYX; guest typed the code; both through Thân phận to buổi 3; jsClicks 0, exitPick none, stuck 0, dead 0, bugs 0; no «Một mình» / «Bỏ phòng» tap.
 VERDICT: PASS b4b181f8 on LIVE 351122ba — co-op seats may run.
+
+## BIG #7 — FAIL review/robot-realtap 0bd2b621 (EXIT_RE elopement, F #15) — 11/25 ~21:58Z
+Checked: node --check OK; diff = one EXIT_RE line (+ progress). Corpus scan of every LIVE 351122ba dev/build/j*.js tag/option/outcome string (scratch script, new-vs-old EXIT_RE):
+| new alternative | false hits on LIVE | example |
+|---|---|---|
+| bare `bỏ trốn` | prefix of «bỏ trống» (vacant) + ~20 fail-outcome texts | j9.js:162 map tile «Càn Ninh cung · bỏ trống»; jend14.js:101 «Ngôi Trung cung bỏ trống»; jrd_ch «Gian thuốc bỏ trống»; j67.js:295 lx «hắn có thể bỏ trốn» shown on ordinary scheme options as «hỏng: …» (j67.js:138) |
+| `kết:\s*xuất` | arc tag «kết: Xuất quân vội vàng» | jrd_nc.js:912 |
+| `trốn khỏi cung`, `đi theo chàng`, `kết: tự vẫn…` | none beyond true elopement texts | jkc3b.js:104 |
+Effect: EXIT_RE gates choose() (isExit, l.300), deadSuspect test taps (l.240) and the unstick random tap (l.408) → vacant-seat tiles and normal scheme options are skipped while siblings exist, and never tried by unstick. Not a softlock, but wrong play.
+Fix (verified on the same corpus: 0 false hits; «… · kết: Bỏ trốn», «kết: Bỏ trốn», «Bỏ trốn cùng người thương» all match):
+`…|xin ra khỏi cung|^\s*bỏ trốn(?!g)|trốn khỏi cung|đi theo chàng|kết:\s*(bỏ trốn(?!g)|xuất (gia|cung|giá)|tự vẫn|tự tận|quyên sinh|cao chạy|rời cung)/i`
+Only-option rule untouched by the diff (isExit only filters when siblings exist). Fold life slice not run: FAIL on the regex first. Re-review on the fixed sha: corpus scan + node --check + one Fold slice.
+~X% xong / ~Y% chơi được: harness only, no game change.
