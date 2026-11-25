@@ -3283,3 +3283,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (03:18Z) rv 1BBdQ7Qp rolled (ctx 40 %) → SMALL rv r9 = session_01V1ZZH1W8A4mF78b6Hg87vU (sonnet); 1BBdQ7Qp archive attempted.
 - (03:25Z) KK25 KIT READY kit-icon-row 7332bf70 → B kit rv.
 - (03:28Z) RV makeup-fit LAND READY dd200174 (makeup-fit-r6 on 5d4f722f; JSON == CDN, bad 0, quickcheck PASS, shots looked) → GO to LC13 after visitor, full gate set (tier BIG only for generated jhd.js). Archive MAKEUP-FIT + its rv after LIVE.
+- (03:30Z) LIVE d6b6fd6f (flight-ui: Tin báo kit rows + «một vị …») 02:18Z; ROLLBACK 345eb929. Queue after chain: visitor 7dbfe98a → makeup dd200174 → visitor-r9 (after rv).
