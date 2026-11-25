@@ -3347,3 +3347,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (05:19Z) MAIN 132 opened for 133 (depth 8): BIG rv delegate-nomg 22tLFisY, SELSCENE-18 1WL4tMnA, ROBOT-LIFE M1 gzgqJj1X / M2 4epskhw2 / M3 2Mx4HgEV / M4 4FnHKCCf / M5 1n7bESDB (relayed OD 05:20/05:40/05:50Z). ROOT MAIN CHÍNH 134 = session_01V1ZZH27MyRxU8SxKGA7Hjq up → 132 sent it its child list and STOPS.
 - (05:23Z) KK26 = session_01V1ZZH4SPGe7wyGEj1X8j3Y (sonnet, child of 134, handover top of reports/MOCK-STAGE.md c98e6ec6). KK25 archive attempted.
 - (05:24Z) LIVE 0756a05b (sansang-music-fix: «Sẵn sàng» tappable on person-focus mini-games + music no longer stops) 05:23Z; ROLLBACK 4da55ce8. Told sếp. KK26 told TODO (1). Nit: no CHANGE line in menu for sansang.
+- (05:27Z) KK26 KIT READY review/kit-mg-realtap 45c9a58b (real-tap kit-mg-intro test FAIL on 4da55ce8 / PASS on 0756a05b; KIT §92.4 z note + REAL-TAP TEST RULE) → waits B KIT OK with ring5/optinfo-r2/fitfast-r3/map-marker/icon-row.
