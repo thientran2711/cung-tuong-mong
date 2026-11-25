@@ -31,3 +31,36 @@ Note: my first gate round (17:12–17:32Z) is INVALID. It ran on a build assembl
 review/coop-rebirth-stuck = T3 probe commits (test only) + fix commit 6691f760 + merge of LIVE 17dfa64d (no file overlap with 5b7b4cf4 / 17dfa64d). SSK sha + post-rebase confirmation run: see the last line.
 
 SSK review/coop-rebirth-stuck 6199201d = 6691f760 + merge of LIVE 17dfa64d (tree identical to the tested rebase ea68d8c0; build 16191231: dayq-ghost PASS all, coop-e2e alone 143/143) — 17:57Z
+
+## REVIEW (RV-CRS, BIG tier, foreman D) — PASS 9fea1332 (18:55Z)
+PRIORITY #1 CHECK: OD flight priority 25/11 ~16:00Z (MAIN 142/143) | main LIVE 17dfa64d (was dbae89eb at open) | review/* review/coop-rebirth-stuck 6199201d (T3b SSK) | claims RV-CRS.
+**Verdict: PASS 9fea1332** = review/coop-rebirth-stuck-r6 = SSK 6199201d + ONE reviewer build commit (index.html / sw.js rebuilt + its CHANGE line «Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ.»). The SSK sha held no build of its own (quickcheck step 1 needs one). Ancestor: LIVE 17dfa64d → fast-forward.
+
+### Code read (jdayq.js only)
+- Only j6 render() (j6.js:10), jcoopworld lockNext() (:347–352) and the new dqNextHeal write `#next.disabled` (grep of every `.disabled=` in dev/build/j*.js).
+- Solo heal: it enables only when render()'s own rule holds (alive, Q 0, no S.mg) and the button has no coop-wait mark. Any render would enable it in the same state, so the heal adds no new road. Co-op heal: it only calls COOPW.lockNext(), which the co-op render wrapper already calls on every render. Every room / night (nReady) / where / pendBuoi / thin-E (eWait) / gap / frozen / pend lock is kept, together with its words. No path enables a button over a real lock, and both seats stay in step.
+- dqOn / dqShown: no real scene host (.kmov, #kmrew, #kpodov, roulette) starts hidden or at zero size (CSS + code grep), so gate (c) still holds every real activity. The R1 control in dayq-ghost and dayq-hold 46 confirm it.
+- LAW 4: the heal interval is BAL.dayq.wake, with the same fallback as the existing dqWake. LAW 11: scan-next-dead.py lists 57 silent Q removers; the single heal covers all of them, so no site has to be found one by one. The 6 activity lookups are all on-screen only. No UI, no new words, no S key, no random draw (LAWS 7/9 n/a).
+- Out of scope (D): the solo #next.onclick early-captured nextBuoi is pre-existing and parked for MAIN.
+
+### Break probe (D: «try to break it»; real build, Fold): disable #next, wait 2 × BAL.dayq.wake
+| held by | #next after | healed |
+|---|---|---|
+| Q > 0 (hidden card) | disabled ✓ | 0 |
+| S.mg | disabled ✓ | 0 |
+| S.dead | disabled ✓ | 0 |
+| co-op wait mark (data-coopWait) | disabled ✓ | 0 |
+| co-op room, lockNext keeps its lock | disabled ✓ (lockNext called 2×) | 0 |
+| CONTROL: nothing holds it | enabled ✓ | 1 |
+
+### Gates (run ALONE, one at a time, on the merged sha 6199201d / build 9fea1332)
+| gate | LIVE | branch |
+|---|---|---|
+| coop-e2e alone | 142/142 (dbae89eb) | **143/143 · 143/143** (heal check ok both) — also 143/143 ×2 on 6691f760 |
+| dayq-ghost | FAIL 8 (dbae89eb) | PASS all |
+| dayq-hold (46 cases) / dayq-order / dayq-hold-coop | PASS / PASS / 17/17 | PASS / PASS / 17/17 |
+| quickcheck alone | — | old save ok · open 1951 ms · perf new/live render 269/238, tab 526/542, buổi 1269/1452 · G4 90-button-crawl FAIL (see below) |
+| shots Fold 755x1000 + iPad 1180x820: day turn ×3 → «Sang ngày mới» → night (lật thẻ bài flip / night dim) → next buổi | | normal, no visual change, 0 page errors |
+
+**quickcheck G4 90-button-crawl is a LIVE fault, NOT this branch:** «FAIL fold · Ô lưu [#modal.kptitle] · Lui · close button did not close its layer (something else changed)». button-crawl --fast alone ×2 gives the SAME row on LIVE 17dfa64d's index.html and on the branch, ×2 each. It will FAIL golive's quickcheck for ANY sha until fixed or filed in quickcheck.d/button-crawl-known.txt → D/MAIN decide.
+Shots in reviewer scratch only (none in git, none on the CDN, nothing to wipe).
