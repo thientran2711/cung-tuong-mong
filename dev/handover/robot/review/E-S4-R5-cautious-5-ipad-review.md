@@ -1,0 +1,6 @@
+# E-S4 R5-cautious-5 — end-of-life review (evidence limited, see moments)
+1. Summary: cautious, pf/pt_hai, iPad, real taps, jsClicks 0, harness 1ffae8bb→69e41729→b4b181f8 (resumed at buổi 308 and 382, same life), game builds 6a87c26fe0f5 → 4763d410aa0d (KK29) across resumes, 653 buổi, 5 years, age 22, max rank 2, ending «Hồng nhan bạc mệnh — Lao phổi nguy kịch, không qua khỏi» (death, VALID), ≈ 8 h wall, 1 stuck on last segment (17 bug rows total).
+2. Scores: a first 15 min 5 (Tin báo stall) · b loop/pacing 4 · c buttons 3 (queue not draining, duplicate dialogs, dead-end frames #kmrew/.kfoc) · d story 5 · e characters 5 · f choices/fairness 4 (illness death after only «Rất vững» rests; no warning) · g feedback 4 (stipend popup over ending card) · h mini-games n/a · i visuals 7 · j co-op n/a.
+3. Loved: rank climb to 2 felt earned. Hated: stipend popup on the ending; softlocks. Replay: yes.
+4. BUGS: stipend popup stacked on the ending card (3 of 4 endings: cautious-2 fold, lazy-1, cautious-5); dialog queue softlocks; dead-end frames #kmrew/.kfoc; duplicate mood dialogs. KK29 confirmed: «Tân quân lập uy Ch.2» passes on 4763d410aa0d.
+5. Suggestions (parking lot): early warning events before a fatal illness.
