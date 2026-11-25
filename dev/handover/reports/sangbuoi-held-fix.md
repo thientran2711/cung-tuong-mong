@@ -88,3 +88,79 @@ Kit: no UI added (0 style/markup lines in the diff). Law 4 OK (BAL.dayq.rearm). 
 3. (h) a REAL night (buổi tối, real jflip scene, a real «Tin trong cung» card) + «Sang buổi» tapped, Fold 755x1000 + iPad 1180x820, looked at; one pair to img/_review/sangbuoi-held/pair.jpg.
 4. Re-run every gate above on r2 merged onto the newest LIVE.
 Notes: jdfv face-wait 4000 ms typed (law 4) + no cue → MAIN for KK26 (not blocking this branch).
+
+## 8. r2 (worker session_01V1ZZGzWMXPB5U9tSX79ouA) — one entry point for «Sang buổi»; rv FAIL list 1-4
+PRIORITY #1 CHECK: OD 16/11 22:45Z (no dialog under/over the flip scene), OD 11/15 06:45Z (she STAYS where she is when the buổi turns) | main j6.js:97 `$("next").onclick=nextBuoi` (bare j9), jcoopworld.js:1085 co-op route, jdayq.js outermost nextBuoi | review/* sangbuoi-held-fix fdbd44c6 (r1) | claims SANGBUOI-HELD-FIX → this worker.
+Branch `review/sangbuoi-held-fix`: r2 c6500ac1 + merge of LIVE 9f72524b = **7fd80044 (r2 c6500ac1 + merge LIVE 9f72524b b14cef02 + net d3246312 + tests 59d1c5c0/7fd80044)**.
+
+### 8.1 Root + change (LAW 11 family = every path that turns the buổi)
+`git grep` of every `=nextBuoi` binding that is not a wrapper: ONE — j6.js:97 bound the button at load, BEFORE every wrapper file (assemble order j9, j10, j6 …). Every other caller (j6/j25 auto-advance, j9 walk-spill, j77 «Sang buổi» option, jdayq dqWait, jptime, jnf, co-op) calls the GLOBAL `nextBuoi()` at call time = the wrapped chain.
+| file | change |
+|---|---|
+| j6.js:97 | `$("next").onclick=()=>nextBuoi()` — the global (outermost) chain at tap time. jcoopworld's co-op route unchanged (it calls the same global). |
+| jdayq.js button | r1's own paint on the button removed (the outermost jdayq nextBuoi it now reaches paints a hidden queue first — one paint, not two); kept only a re-entry guard: a click dispatched while her tap is still running is dropped (`DQ.stat.tapRe`). |
+| jdayq.js outermost nextBuoi | NEW after-turn paint: a card an inner wrapper queued WITHOUT painting during the turn is painted (`DQ.stat.afterPaint`). Found by case B×10: jagent agDrain (runs first in the chain) pushes «Có người tìm đến», then j9 returns on Q.length → hidden card, «Sang buổi» disabled, painter not armed = softlock (also on LIVE's auto-advance path). |
+| jdayq.js net (d3246312) | whole family «a card pushed into Q with no showModal and no render after it»: a look every BAL.dayq.net (=1000 ms, jbal2.js) arms dqArmModal (which still waits for dawn / activity / night gates). Found by sangbuoi-wrap P setup (iPad: Q=1, modal hidden, «Sang buổi» disabled, no scene). Stat DQ.stat.netTick, last card DQ.netT. |
+| jdayq.js dqWait | rv item: the first exit (`!dqUi()||bkey()!==w`, the buổi turned another way while held) now paints a hidden queue instead of dropping silently. |
+| dev/test/sangbuoi-exit-scan.py | the #next row now checks the r2 wiring (r1 fdbd44c6 → FAIL 2 unsafe, r2 → PASS). |
+| dev/test/sangbuoi-wrap.js (NEW) | instruments every nextBuoi wrapper entry (45, map from dev/build in assemble order, counts must match) + spies wrapper effects; real tap vs auto-advance, Fold + iPad; case P = a tap at a non-home place. |
+| dev/tools/quickcheck.js | BUOI: after its one click, finish what is on screen like a player (#ov hidden, roulette/podium removed as NEWLIFE does, scenes tapped, cards closed) — the tap is now HELD while the old buổi's moment is pending (proved: #ov mini-game screen open + a km-gate scene queued + a #kroul roulette; LIVE advanced the buổi UNDER the open screen). |
+| dev/test/sangbuoi-held.js | F: takes a life where the night choice is on (nfOn). case B: a REAL scene the world queues meanwhile (reward chest) is tapped through like a player, then the card must show by itself; REPEAT=N env (stability gate). |
+Co-op untouched (dqUi solo only; CW.on path was already the wrapped chain). Bots unchanged. jdayq hold (a) now also applies to her tap: a tap while the old buổi's big moment is pending is HELD (DQ.want) — the owner's flight rule, same as auto-advance.
+
+### 8.2 Audit — what a solo tapper LOST on LIVE (tap with khắc left; before = fdbd44c6/LIVE, the tap entered 1/45 = bare j9 only)
+| wrapper (file:line) | effect a solo tap skipped on LIVE |
+|---|---|
+| jdayq.js (outermost) | hold of the turn while the old buổi's big moment is pending (flight rule); hidden-queue paint |
+| jagent.js:207 | agDrain: NPC agents' pending deeds of the buổi never ran |
+| jky.js:277 | npcPass: kỳ ngộ NPC pass at the end of the buổi |
+| jagknow.js:172 | knCarryOut + knTb: knowledge carry and its tin báo |
+| j41.js:77 | __accStay/__accSilent: she must STAY where she is (OD 11/15 06:45Z). PROVEN (sangbuoi-wrap P, before): tap at Ngự hoa viên chiều→tối sent her HOME with a «Ngự hoa viên — Không vào được lúc này: đóng cửa tối · Lẻn vào …» card; auto-advance kept her there |
+| j77.js:258 | «Sang buổi … · ngươi vẫn ở …» stay line |
+| jstagehere.js:82 | stayRoll (a place closed at the new buổi: the sneak roll) |
+| j68.js:177 | evRelease: held events released |
+| jspread.js:100 | sp13Tick: spread of the buổi's cards (D13) |
+| j70.js:475 | thrify70 (warning cards merged) + repaint |
+| jmen.js:157 | men-road watch at her place before the turn |
+| jroute.js:214 | rtRefresh + rtNpcMeet + render |
+| jaudit.js:6 | «Trong cung vừa qua» result card (what changed her numbers while time passed) |
+| jclose.js:33 / :77 | greeting reminder line / wxSync |
+| jweather.js:68 | storm clears to drizzle |
+| jexam.js:197 / :281 | exTick / exSrvTick (exam clocks) |
+| jpromo.js:112 | prNpcScan + prCheck + capSweep (promotions) |
+| jstory.js:83 | pl67Lapse (story beat lapses at its due) |
+| jgift.js:236 | buổi trưa: the consort who seeks the Emperor (seekEmp) |
+| jfe.js:27 | entering buổi tối: the night card flip at once (LIVE fell back to the jfe render hook one tick later) |
+| jint.js:20 | intAll (whole-number stats) |
+| jlooks.js:95 | lkSweep (looks items wear) |
+| jptime.js:123 / :246 | ptTick + ptLedger (palace time) / iwTick (who waits where) |
+| jerr.js:189 | errand scene tick / ledger / sync |
+| jkyc.js:47 | kycMark |
+| j76.js:64 / :121 | long-walk khắc carry into the next buổi / deck reset |
+| j95.js:518 / :583, j95b.js:285, j95c.js:55, jmoodknow.js:268 | roster sync, final renderStage, false-warning purge, visit fix, mood-know step |
+| jlogsync.js:116 | log label «Sang buổi mới» |
+| j42.js:252, jkc.js:304, jkc2.js:176 | servant / khoa cử modes: deal + render on the turn |
+| jcoopworld.js:1077, jcoopone.js:55, jcoopthinc.js:167, jcoopthine.js:252, jagstaff.js:217 | co-op only (pass-through solo; co-op already used the wrapped chain) |
+Proof: sangbuoi-wrap.js before (fdbd44c6) = tap 1/45 wrapper entries vs auto 45; spies on tap: agDrain 0, evRelease 0, knCarryOut 0, ptTick 0, intAll 0, sp13Tick 0, lkSweep 0, rtRefresh 0, rsnap 0 (auto: all ≥1). After (merged build): tap 45/45 wrapper entries = auto 45/45 on Fold and iPad; every always-run effect present on the tap; j9 base entered once per tap (no re-entry); case P: her tap keeps her in Ngự hoa viên (goTo with __accStay=1, no access card) — Fold + iPad PASS.
+
+### 8.3 Results (merged build 7fd80044 (r2 c6500ac1 + merge LIVE 9f72524b b14cef02 + net d3246312 + tests 59d1c5c0/7fd80044))
+| gate | result |
+|---|---|
+| sangbuoi-wrap.js (NEW) Fold + iPad | ALL PASS (before fdbd44c6: FAIL — tap 1/45, P: sent home + «Không vào được lúc này» card, both devices) |
+| sangbuoi-held.js A-F Fold + iPad | ALL PASS (held2, 7fd80044 tests) |
+| sangbuoi-held.js CASES=B REPEAT=10, beside a busy browser (sangbuoi-wrap looping) | **20/20 PASS** (10 Fold + 10 iPad). Before the after-turn paint: 19/20 (the jagent «Có người tìm đến» hidden card) |
+| sangbuoi-exit-scan.py / modal-hold-scan.py | PASS / PASS (fdbd44c6 → exit-scan FAIL 2: button bare) |
+| modal-open-buoi.js Fold / iPad | ALL PASS / ALL PASS |
+| dayq-hold.js / dayq-order.js / time-spill-guard | PASS 46 / PASS / PASS static + runtime |
+| dayq-hold-coop.js both orders | 17/17 · 17/17 |
+| coop-e2e.js / COOP_SWAP=1 | 142/142 · swap run 1: 140/142 (2× K61MAP «Tả đô ngự sử ???» title mask on an hPool person — j61 code came with the LIVE merge, nothing nextBuoi) · swap run 2: 136/144 (co-op step / world-equality / maid names) — NOT YET compared with plain LIVE 9f72524b → see §9 |
+| quickcheck | run 1 FAIL «buổi did not advance» (the held tap, see quickcheck row above) → tool fixed → re-run pending (§9) |
+| REAL night pair | NOT DONE (script night-shot.js timed out on the 2nd device's new-life card) → §9 |
+
+### 9. HANDOVER r2 → r3 (rollover at the context ceiling, 25/11 ~13:50Z)
+Branch pushed: review/sangbuoi-held-fix @ 7fd80044 (contains LIVE 9f72524b). The r2 code is done (§8.1); remaining are GATES only:
+1. quickcheck: `bash dev/tools/quickcheck.sh HEAD` on 7fd80044 (BUOI fix in the tool). If «buổi did not advance» again, probe what holds (dqOldPending: KMQ / #ov / #kpodov / [id^=kroul]) — a pending moment nobody plays in the tool is a tool gap; a KMQ scene with kmFree() true and kmBusy false would be a real softlock.
+2. coop-e2e COOP_SWAP=1: run on 7fd80044 AND on plain LIVE 9f72524b (same machine, serially) 2× each; r2 changes nothing on the co-op path (dqUi solo-only; CW.on already called the global nextBuoi), so a failure present on LIVE too is not this branch.
+3. REAL night pair: scratch script /home/user/wt/sbh2-out/night-shot.js (real taps to buổi tối; shoots the real .kmov.kcf flip, the real «Tin trong cung», before/after the «Sang ngày mới» tap; per night resets if one is missing). Fix: its 2nd context timed out waiting for the new-life [data-nl=ok] card (wait for the title / call start() again). Look at the shots, build one Fold|iPad pair → img/_review/sangbuoi-held/pair.jpg (python3 dev/site/cdn_sync.py img/_review/sangbuoi-held).
+4. Then send «LAND READY r2 <sha>» to MAIN 141 (session_01V1ZZH16HCco55nyV4XdPdw) and BIG rv session_01V1ZZH13YzNeAK6hT1mU9ZN.
+Tools: serve the worktree root (`python3 -m http.server 8731 --bind 127.0.0.1`; ROOT index.html); sangbuoi-wrap.js needs URL ending /index.html (it instruments that route; BEFORE=<html> serves an old build); sangbuoi-held.js env CASES / REPEAT / TRACE.
