@@ -3629,3 +3629,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (19:34Z) LIVE 351122ba (LC16: kit-music-r1 event/festival music; ROLLBACK 08e7d79f; gates PASS, 37 tracks 200, coop-e2e 142/142 ×2). WORKLIST #13 music → strike. Sếp told.
 - (19:36Z) LC16 ROLLED (29.5 %) → lander LC17 = session_01V1ZZH3HziHPxheKTPdH7HQ (LC16's child; handover land-chain-16.md «HANDOVER TO LC17»). LC17 NEEDS sếp's «cho phép đưa lên live» in ITS chat — asked sếp (here + via 144). r4 / BIG rv told to report to LC17. LC16 archive when LC17 confirms.
 - (19:40Z) KIT READY 708056a9 (KK31, via 144): MAIN LOOKED pair OK (7 lines unscrolled both devices) → B kit rv posted; after flight. KK31 still writes to 144 — told again.
+- (20:04Z) B LAND READY = 6ad6631f (not f2216a70) → LC17 stacked eda56acc on r4. D r7 vs r4 both edit jdayq.js heals → D told to build on r4 + one rule. Sếp golive words still NOT in LC17; push notification sent.
