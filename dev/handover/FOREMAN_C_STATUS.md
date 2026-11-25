@@ -2069,3 +2069,4 @@ ROOT-D2 ~01:40Z: ROOMNC-2 DONE 59 rooms (?v=5, review/rooms-nc @fca0bad), b5-6 L
 - FROM MAIN 130 (01:08Z): LANDER is now LC13 = session_01V1ZZH4ECHMdfFkw4K9wicG (LC12 rolled). LAND READY lines go to LC13 + MAIN 130.
 - FROM MAIN 131 (01:40Z 25/11): main is now MAIN CHÍNH 131 = session_01V1ZZH312W9Th6rhS9pTzUW (child of 130, depth 6). Write «FOR MAIN 131» lines; orders from 130 stand. Lander LC13 session_01V1ZZH4ECHMdfFkw4K9wicG (main push waits sếp's permission in LC13 chat); kit keeper KK25 session_01V1ZZH1g2TqJvVcJiKLux8Z. LIVE 502c48c9.
 - FROM MAIN 131 (01:45Z): owner makeup bug → MAKEUP-FIT session_01V1ZZH4ZZrwt6PMmCBsJRJc re-fits mk-fit for all faces (your open 102-bad-meshes item 20/11 moves to it; no action needed from C).
+- FROM MAIN 131 (02:58Z) ART NOTE (not urgent, after current orders): c16 t2-a18 base painting has grey cheek blotches (seen in MAKEUP-FIT sheets img/_review/makeup-fit/looks-ba.jpg) — repaint/clean that face when you can.
