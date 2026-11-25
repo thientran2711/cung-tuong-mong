@@ -1679,3 +1679,33 @@ Main control rows: r1 R[10].resHead 5→2 (guest), 10 coop-pos hits, r2 0 — i.
 
 #### State for the opus fixer
 Code unchanged on b34e4bde. Not done: A/B ≥5 fix rooms (3 completed), merged-with-newer-main rebuild (main did not move). Box tools lost on restart: wrangler /home/user/wt/wr; Worker :8791; worktrees /home/user/wt/{f8,abfix,abmain}; scripts /home/user/wt/f8out/{ab.sh,aball.sh,e2e.sh}. Long jobs = Bash run_in_background.
+
+### FIXER #10 (opus; session_01N1tNP5P5MetjLKWvphzukd; START_CTX ≈4 %, rolled at ≈29 %) — review/robot-coop-fix-5 556c0f57 — SẴN SÀNG KIỂM
+PRIORITY #1 CHECK ('robot-coop-fix-5 / kmStage reduced / kitNightEnd km-done'): OD 0 | ledger 0 | claims 1 (this seat, CLAIMS L1592) | main j93 kmStage (bug), jne kitNightEnd | review/* none on kmStage | reused harness review/robot10-coop 918bfa84, fixer #9 repro recipe.
+Base = review/robot-coop-fix-4-r1 aad22c92 (LAND READY; carries fix-2-r3). Files: dev/build/j93.js (kit), dev/test/km-red-end.js (new family scan), index.html, sw.js.
+**Cause 3 (proven by repro).** Own branch Worker (wrangler dev :8797 from the branch coop/worker), harness 918bfa84 overlay + local instruments (jnf ET/ST trace, j9 NB trace, kmStage creator stamp, calendar watcher; NOT committed). `SEED=1 SWAP=0 node dev/measure/robot10-coop.js 2 2 3` and `SEED=7 … 4 4 3` both re-stuck at w5. Host: S.nfX {st:"mg", me:"road"/"feign", dlg 1}, stealMgBusy() true, #kg82 on its intro (Bắt đầu / Thôi, không chơi) — UNDER a `.kmov.kne-ov.km-red.km-skip` (z 9100) kitNightEnd card created 18 min earlier (day 0) whose «Tiếp tục» was hidden (root never got km-done). Why: kmStage under reduced motion (kmReduced = OS reduce OR OPT.fxon===false → real players too) auto-finishes at 0 ms and finish() cleared T = the scene's own later() beats; jne schedules its km-done/«Tiếp tục» beat with st.later(0) right after kmStage returns → cleared → no way out without a blind tap; kg82 under it never started/skipped → jsmg BUSY → x.st "mg" → jnf endTurn wrapper hold() every night → both seats «night w» for ever (guest waits the host's fin).
+**Fix (kit, one place):** kmStage finish() keeps later() beats when red (no animation to skip); a tap with motion on still skips them. Family = every kmStage scene: `node dev/test/km-red-end.js` (9 public scenes × reduce / full motion: a way out shows without a tap and closes it): bare aad22c92 **kitNightEnd reduce FAIL** (1/18) → 556c0f57 **KM-RED-END PASS 18/18**. Other later() users (flip/edict/gloom sparks) are decorative (kmSpark / kitFxBurst are no-ops under reduce); kitReward / toilReveal / kitPersonReveal use private timers (not cleared by finish).
+**Gates on 556c0f57** (clean build; local Worker :8797 = branch Worker)
+| gate | result |
+|---|---|
+| `COOP_SWAP=0 node dev/test/coop-e2e.js <out> http://127.0.0.1:8797` / `COOP_SWAP=1 …` | 142/142 · 142/142 |
+| coop-e2e no args (LIVE Worker) SWAP 0 / 1 | 142/142 · 142/142 |
+| `node dev/test/coop-night.js <out> http://127.0.0.1:8797` | run 1: 126/127 (FAIL «10: the host still in tối behind his dialog» = random extra dialog, as fix-4 r1 saw in 4b) · run 2: **127/127** |
+| coop-night no args (LIVE Worker) | 126/126 |
+| coop-keymove-unit | 12/12 |
+| `cd coop/worker && npm test` | thin ALL OK · range ok |
+| km-red-end (new) | PASS 18/18 (bare FAIL 1) |
+| `bash dev/tools/quickcheck.sh` ALONE (old save) | QUICKCHECK PASS · core gates PASS · time-spill PASS · old save ok «Tư Mã Lệ Hoa» · render 258/244 · tab 484/419 · buổi 1159/1145 ms · tasks>200 24/23 |
+**Robots on the fix:** same repro pairs (SEED1 p02 ×3 kiếp, SEED7 p04 ×3 kiếp, CAP 1500): **0 stuck** (41 / 44 min; before the fix both stuck at w5).
+**A/B** (harness 918bfa84 overlay both sides, `SEED=7 CAP=300 PCAP=1500 PAR=1 node dev/measure/robot10-coop.js 1 5 2`; fix = 556c0f57 + Worker :8797, main = 502c48c9 + its own Worker :8803, side by side)
+| side | stuck rooms | classes |
+|---|---|---|
+| fix 556c0f57 | 2 (p01 w11, p02 w13) | both **cause 4 (NEW shape, below)** · cause 3 0 · cause 1 0 |
+| main 502c48c9 | 4 (p01 w2, p04 w12, p05 w12, p05 r2 w0) | cause 1 (host ngoW −1) · **cause 3** (host st "mg" busy) · cause 4 · buổi-0 stall at room start (guest pendBuoi, not a night) |
+**Cause 4 (OPEN, on main too, not made by this branch):** guest's own calendar (j8 wk() = S.turn*3+S.tuan, = jnf/jsmg day()) is AHEAD of the room: nfC/nfW 14 at room week 11 (fix p01), 14 at 13 (fix p02), 13 at 12 (main p05), 28 at 27 (pre-fix SEED7 p04 run). Guest asks the host for fin of a day the host never opens → host sent w, waits her `end`; guest «night w» loop, Q 0, nfX null, nfFin null (a fresh life in 3 of 4: she was reborn in that room). Week compare (harness, at each week step) shows no date diff → the jump happens inside the stuck week. Lead: attach() / fromCanon take the date from CW.base.W — when the host has already ended its week (its W pushed with its `end`, date w+1) a guest whose new life attaches then gets w+1 while the room is still w (p02 and SEED7 p04 fit +1; p01 +2..3 does not fully fit). Instrument ready (scratchpad, lost on restart): S.tuan/S.turn setter trap with stack into window.__calSet + calendar watcher window.__calTr, dumped by SCRX — re-run `SEED=7 CAP=300 PCAP=1500 node robot10-coop.js 1 5 2` on the instrumented build until a cause-4 dump comes (2 of 5 pairs). Fix direction: the guest's date must be the room's merged date (attach / fromCanon outside onWeek must not take a W date ahead of COOP.state.week), plus a belt in jnf: a guest whose day() ≠ the host's word day re-asks with the host's day.
+
+### HANDOVER (FIXER #10 → FIXER #11; rollover by context: START_CTX ≈4 %, now ≈29 %)
+- SSK sent: review/robot-coop-fix-5 **556c0f57** (cause 3 = kit reduced-motion scene, above).
+- Next for the cause line: cause 4 (guest calendar ahead) — repro + instrument above; branch it as review/robot-coop-fix-6 from 556c0f57 (or from fix-5 r1 if the reviewer adds a fix).
+- NOT taken (no context left): Foreman B's ask 03:27Z = review/robot-coop-fix-3-r4 b34e4bde → r5 (coop-pos r2 SWAP=1 room AQM6 + save row R[4].resHall host r1 XFQT; report «### FIX-3-r4 FINISHER», handover ea52a257) → needs a fresh opus seat (Foreman B at depth 8 relays to ROOT).
+- Box (lost on restart): wrangler in /home/user/wt/wr; worktrees /home/user/wt/f10 (branch), f10ab (fix + harness), f10main (main + harness, Worker :8803); 4 cores: never quickcheck next to robots.
