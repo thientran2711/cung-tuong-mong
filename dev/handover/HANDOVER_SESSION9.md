@@ -3340,3 +3340,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - LOAD (05:20Z start): main running ~17 (LC13 lander; SANSANG-MUSIC-FIX r2; MAKEUP-NOBOOST (diem/vung tweak OD ~05:30Z); DELEGATE-NOMG + BIG rv 22tLFisY; TAINGHE-OPEN-FIX + BIG rv 2yv2CZAt; VISITOR-FIX + SMALL rv 1W8A4mF7; SELSCENE-18; KK25; ROBOT-LIFE M1–M5; rv makeup-fit/RD5/MD5 idle) | B depth 8 (needs ROOT) | C silent | D ROOT | E depth 8 | F robot round + fixer + crawler | moved: none.
 - (05:50Z) OWNER ORDER OD ~05:50Z robot = player reviewer → template briefs/ROBOT-PLAYER-REVIEW.md; ORDERs B/D/E/F; M1–M5 via 132.
 - (05:55Z) MAIN 133 sees ROOT MAIN 134 = session_01V1ZZH27MyRxU8SxKGA7Hjq (took over ~05:20Z). Full delta since 05:20Z sent to 134. 133 STOPS acting as main; forwards anything late to 134; sếp told to use 134's chat.
+- (05:58Z) OWNER CORRECTION in 133 chat (OD audit row edited in place): JS-click lives with a true end are VALID; real taps only for running/new robots. Relayed to 134 + B/D/E/F STATUS.
