@@ -1,0 +1,620 @@
+{
+ "run": {
+  "tag": "u1p1-r8",
+  "url": "http://127.0.0.1:8080/play.html",
+  "harness": "realtap",
+  "args": {
+   "host": "fold",
+   "guest": "ipad",
+   "kiep": "1",
+   "seed": "108",
+   "tag": "u1p1-r8"
+  },
+  "at": "2026-11-25T08:54:00.790Z"
+ },
+ "pairs": [
+  {
+   "job": {
+    "id": "coop-rt-u1p1-r8",
+    "kiep": 1,
+    "seed": 108
+   },
+   "lives": [
+    {
+     "seat": "guest",
+     "dev": "ipad",
+     "kiep": 1,
+     "extra": false,
+     "room": "NB8G",
+     "life": {
+      "id": "HARNESS",
+      "type": "harness"
+     },
+     "harness": {
+      "kind": "realtap",
+      "sha": "c4163a93",
+      "realtap": true,
+      "jsClicks": 0,
+      "deadButtons": 0,
+      "cap": null,
+      "stuck": 1,
+      "unstick": [
+       {
+        "at": 31,
+        "lvl": 1,
+        "layer": "#modal",
+        "title": "Đợi hảo hữu chọn thân phận"
+       },
+       {
+        "at": 267,
+        "lvl": 1,
+        "layer": "page",
+        "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+       },
+       {
+        "at": 278,
+        "lvl": 1,
+        "layer": "page",
+        "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+       },
+       {
+        "at": 289,
+        "lvl": 1,
+        "layer": "page",
+        "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+       },
+       {
+        "at": 300,
+        "lvl": 1,
+        "layer": "page",
+        "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+       },
+       {
+        "at": 311,
+        "lvl": 1,
+        "layer": "page",
+        "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+       },
+       {
+        "at": 322,
+        "lvl": 1,
+        "layer": "page",
+        "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+       },
+       {
+        "at": 333,
+        "lvl": 1,
+        "layer": "page",
+        "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+       },
+       {
+        "at": 344,
+        "lvl": 1,
+        "layer": "page",
+        "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+       },
+       {
+        "at": 355,
+        "lvl": 1,
+        "layer": "page",
+        "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+       },
+       {
+        "at": 366,
+        "lvl": 1,
+        "layer": "page",
+        "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+       },
+       {
+        "at": 377,
+        "lvl": 1,
+        "layer": "page",
+        "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+       },
+       {
+        "at": 388,
+        "lvl": 1,
+        "layer": "page",
+        "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+       },
+       {
+        "at": 399,
+        "lvl": 1,
+        "layer": "page",
+        "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+       },
+       {
+        "at": 410,
+        "lvl": 1,
+        "layer": "page",
+        "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+       },
+       {
+        "at": 421,
+        "lvl": 1,
+        "layer": "page",
+        "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+       },
+       {
+        "at": 432,
+        "lvl": 1,
+        "layer": "page",
+        "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+       },
+       {
+        "at": 443,
+        "lvl": 1,
+        "layer": "page",
+        "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+       },
+       {
+        "at": 454,
+        "lvl": 1,
+        "layer": "page",
+        "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+       },
+       {
+        "at": 465,
+        "lvl": 1,
+        "layer": "page",
+        "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+       },
+       {
+        "at": 476,
+        "lvl": 1,
+        "layer": "page",
+        "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+       },
+       {
+        "at": 487,
+        "lvl": 1,
+        "layer": "page",
+        "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+       },
+       {
+        "at": 498,
+        "lvl": 1,
+        "layer": "page",
+        "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+       },
+       {
+        "at": 509,
+        "lvl": 1,
+        "layer": "page",
+        "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+       },
+       {
+        "at": 520,
+        "lvl": 1,
+        "layer": "page",
+        "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+       },
+       {
+        "at": 538,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 549,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 559,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 570,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 581,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 591,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 602,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 613,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 624,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 634,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 645,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 656,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 667,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 677,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 688,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 699,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 709,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 720,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 731,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 742,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 752,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 763,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 774,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 784,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 795,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 806,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 817,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 827,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 838,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 849,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 859,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 870,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 881,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 892,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 902,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 913,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 924,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 935,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 945,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 956,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 967,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 978,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 988,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 999,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1010,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1020,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1031,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1042,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1053,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1063,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1074,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1085,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1095,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1106,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1117,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1127,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1128,
+        "lvl": 3,
+        "layer": "#coopfz",
+        "title": ""
+       }
+      ],
+      "slice": null,
+      "areaTaps": 47,
+      "typed": 1
+     },
+     "exitPick": null,
+     "bugs": [
+      {
+       "k": "stuck|no progress 15 min on #coopfz «»",
+       "type": "stuck",
+       "msg": "no progress 15 min on #coopfz «»",
+       "n": 1,
+       "at": 1128,
+       "shot": "/home/user/wt/out/u1/shots-coop-rt-u1p1-r8-guest-k1/stuck-1.png",
+       "save": null,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 2,
+        "age": 19,
+        "rank": 0,
+        "name": "Chân Vân Tịch"
+       },
+       "buttons": [
+        "Chép đường dẫn",
+        "Về màn đầu"
+       ]
+      },
+      {
+       "type": "harness",
+       "msg": "runner error: page.waitForTimeout: Target page, context or browser has been closed",
+       "n": 1
+      }
+     ],
+     "dead": [],
+     "buoi": 7,
+     "saves": []
+    },
+    {
+     "seat": "host",
+     "dev": "fold",
+     "kiep": 1,
+     "extra": false,
+     "room": "NB8G",
+     "life": {
+      "id": "HARNESS",
+      "type": "harness"
+     },
+     "harness": {
+      "kind": "realtap",
+      "sha": "c4163a93",
+      "realtap": true,
+      "jsClicks": 0,
+      "deadButtons": 0,
+      "cap": null,
+      "stuck": 0,
+      "unstick": [
+       {
+        "at": 538,
+        "lvl": 1,
+        "layer": "#modal",
+        "title": "Cung Tường Mộng"
+       }
+      ],
+      "slice": null,
+      "areaTaps": 2305
+     },
+     "exitPick": null,
+     "bugs": [
+      {
+       "type": "harness",
+       "msg": "runner error: touchscreen.tap: Target page, context or browser has been closed",
+       "n": 1
+      }
+     ],
+     "dead": [],
+     "buoi": 8,
+     "saves": []
+    }
+   ],
+   "partial": false,
+   "bugs": []
+  }
+ ]
+}
