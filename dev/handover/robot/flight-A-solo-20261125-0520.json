@@ -1,0 +1,1023 @@
+{
+ "arm": "A",
+ "game": "review/lc12-varC9 4232709a",
+ "harness": "fe3cb80c + true-reload overlay (robot10.js TRUERELOAD=1) ; JS-click lives, INVALID under owner rules 25/11 F-robot-2511",
+ "lives": [
+  {
+   "id": "cnv-cnv_mat-skilled-1",
+   "persona": "skilled",
+   "seed": 3839386041,
+   "run": "cnv/cnv-20261125-0232.json",
+   "end": "CAP",
+   "type": "cap",
+   "age": 35,
+   "year": 17,
+   "buoi": 2781,
+   "reloads": 7,
+   "reloadFail": 0,
+   "reloadLog": [
+    {
+     "n": 1,
+     "buoi": 56,
+     "year": 1,
+     "ms": 4001,
+     "same": true
+    },
+    {
+     "n": 2,
+     "buoi": 382,
+     "year": 3,
+     "ms": 3068,
+     "same": true
+    },
+    {
+     "n": 3,
+     "buoi": 790,
+     "year": 6,
+     "ms": 3981,
+     "same": true
+    },
+    {
+     "n": 4,
+     "buoi": 1233,
+     "year": 8,
+     "ms": 5524,
+     "same": true
+    },
+    {
+     "n": 5,
+     "buoi": 1701,
+     "year": 11,
+     "ms": 5162,
+     "same": true
+    },
+    {
+     "n": 6,
+     "buoi": 2183,
+     "year": 13,
+     "ms": 5735,
+     "same": true
+    },
+    {
+     "n": 7,
+     "buoi": 2636,
+     "year": 16,
+     "ms": 5615,
+     "same": true
+    }
+   ],
+   "nb": {
+    "n": 2954,
+    "p50": 100,
+    "p95": 1009,
+    "max": 9344
+   },
+   "uiLoadMaxMs": 1630,
+   "bugs": [
+    {
+     "type": "lag",
+     "msg": "[fold] tab switch freezes over 400 ms",
+     "detail": "421 ms longest · 1 long tasks @ năm 1 th3 t0 b1 (buổi #1)",
+     "n": 16
+    },
+    {
+     "type": "stuck",
+     "msg": "[fold] after loading her save, «Sang ngày mới» does not move the clock (soft-lock after load)",
+     "detail": "12 presses, night flip S.nfX done @ năm 5 th2 t0 b3 (buổi #614)",
+     "n": 9
+    },
+    {
+     "type": "save",
+     "msg": "save→load→save changes the state",
+     "detail": "save.S.visit.people.3.kind (text differs at char 0): «…npc» → «…srv» (+17 more paths) @ năm 1 th3 t1 b0 (buổi #4)",
+     "n": 12
+    },
+    {
+     "type": "lag",
+     "msg": "one buổi change took over 1.5 s (bot page, render off)",
+     "detail": "1571 ms @ năm 6 th4 t1 b0 (buổi #822) @ năm 6 th4 t1 b0 (buổi #822)",
+     "n": 5
+    },
+    {
+     "type": "stuck",
+     "msg": "no ending within the wall cap (2700 s)",
+     "detail": "state {\"year\":17,\"rank\":3,\"age\":35,\"dead\":false}",
+     "n": 1
+    }
+   ]
+  },
+  {
+   "id": "cnv-cnv_mat-random-1",
+   "persona": "random",
+   "seed": 1508948518,
+   "run": "cnv/cnv-20261125-0232.json",
+   "end": "HARNESS",
+   "type": "harness",
+   "reloads": 0,
+   "reloadFail": 0,
+   "uiLoadMaxMs": 883,
+   "bugs": [
+    {
+     "type": "harness",
+     "msg": "lag probe failed: page.evaluate: Target page, context or browser has been closed",
+     "detail": "",
+     "n": 1
+    },
+    {
+     "type": "harness",
+     "msg": "runner error: page.evaluate: Target page, context or browser has been closed",
+     "detail": "page.evaluate: Target page, context or browser has been closed\n    at life (/home/user/wt/armA/dev/measure/robot10.js:167:50)\n    at async /home/user/wt/armA/dev/measure/robot10.js:298:173\n    at asyn",
+     "n": 1
+    }
+   ]
+  },
+  {
+   "id": "cnv-cnv_mat-greedy-1",
+   "persona": "greedy",
+   "seed": 1037176545,
+   "run": "cnv/cnv-20261125-0232.json",
+   "end": "HARNESS",
+   "type": "harness",
+   "reloads": 0,
+   "reloadFail": 0,
+   "bugs": [
+    {
+     "type": "harness",
+     "msg": "runner error: page.goto: Target page, context or browser has been closed",
+     "detail": "page.goto: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:44573/index.html\", waiting until \"domcontentloaded\"\u001b[22m\n\n    at boot (/home/user/wt/armA/d",
+     "n": 1
+    }
+   ]
+  },
+  {
+   "id": "cnv-cnv_mat-random-1",
+   "persona": "random",
+   "seed": 1508948518,
+   "run": "cnv2/cnv-20261125-0320.json",
+   "end": "Hồng nhan bạc mệnh",
+   "type": "death",
+   "age": 20,
+   "year": 1,
+   "buoi": 60,
+   "reloads": 0,
+   "reloadFail": 0,
+   "nb": {
+    "n": 60,
+    "p50": 30,
+    "p95": 119,
+    "max": 144
+   },
+   "uiLoadMaxMs": 558,
+   "bugs": [
+    {
+     "type": "save",
+     "msg": "save→load→save changes the state",
+     "detail": "save.S.visit.people.0.kind (text differs at char 0): «…elder» → «…srv» (+39 more paths) @ năm 1 th3 t0 b1 (buổi #1)",
+     "n": 31
+    }
+   ]
+  },
+  {
+   "id": "cnv-cnv_mat-greedy-1",
+   "persona": "greedy",
+   "seed": 1037176545,
+   "run": "cnv2/cnv-20261125-0320.json",
+   "end": "Xuất cung",
+   "type": "leave",
+   "age": 30,
+   "year": 12,
+   "buoi": 1628,
+   "reloads": 4,
+   "reloadFail": 0,
+   "reloadLog": [
+    {
+     "n": 1,
+     "buoi": 76,
+     "year": 1,
+     "ms": 3336,
+     "same": true
+    },
+    {
+     "n": 2,
+     "buoi": 545,
+     "year": 4,
+     "ms": 3317,
+     "same": true
+    },
+    {
+     "n": 3,
+     "buoi": 985,
+     "year": 8,
+     "ms": 3334,
+     "same": true
+    },
+    {
+     "n": 4,
+     "buoi": 1356,
+     "year": 10,
+     "ms": 3777,
+     "same": true
+    }
+   ],
+   "nb": {
+    "n": 1628,
+    "p50": 32,
+    "p95": 186,
+    "max": 626
+   },
+   "uiLoadMaxMs": 806,
+   "bugs": [
+    {
+     "type": "lag",
+     "msg": "[fold] tab switch freezes over 400 ms",
+     "detail": "417 ms longest · 1 long tasks @ năm 1 th3 t0 b1 (buổi #1)",
+     "n": 10
+    },
+    {
+     "type": "save",
+     "msg": "save→load→save changes the state",
+     "detail": "save.S.visit.people.4.kind (text differs at char 0): «…srv» → «…elder» (+32 more paths) @ năm 1 th3 t0 b1 (buổi #1)",
+     "n": 48
+    }
+   ]
+  },
+  {
+   "id": "cnv-cnv_mat-cautious-1",
+   "persona": "cautious",
+   "seed": 2866901044,
+   "run": "cnv2/cnv-20261125-0320.json",
+   "end": "Xuất cung",
+   "type": "leave",
+   "age": 30,
+   "year": 12,
+   "buoi": 1584,
+   "reloads": 4,
+   "reloadFail": 0,
+   "reloadLog": [
+    {
+     "n": 1,
+     "buoi": 33,
+     "year": 1,
+     "ms": 3072,
+     "same": true
+    },
+    {
+     "n": 2,
+     "buoi": 493,
+     "year": 4,
+     "ms": 3243,
+     "same": true
+    },
+    {
+     "n": 3,
+     "buoi": 929,
+     "year": 7,
+     "ms": 3415,
+     "same": true
+    },
+    {
+     "n": 4,
+     "buoi": 1365,
+     "year": 10,
+     "ms": 3556,
+     "same": true
+    }
+   ],
+   "nb": {
+    "n": 1584,
+    "p50": 33,
+    "p95": 206,
+    "max": 621
+   },
+   "uiLoadMaxMs": 821,
+   "bugs": [
+    {
+     "type": "lag",
+     "msg": "[fold] tab switch freezes over 400 ms",
+     "detail": "490 ms longest · 1 long tasks @ năm 5 th5 t0 b3 (buổi #603)",
+     "n": 7
+    },
+    {
+     "type": "save",
+     "msg": "save→load→save changes the state",
+     "detail": "save.S.visit.people.0.kind (text differs at char 0): «…elder» → «…srv» (+37 more paths) @ năm 1 th3 t0 b1 (buổi #1)",
+     "n": 12
+    }
+   ]
+  },
+  {
+   "id": "cnv-cnv_mat-schemer-1",
+   "persona": "schemer",
+   "seed": 241163178,
+   "run": "cnv2/cnv-20261125-0320.json",
+   "end": "Hồng nhan bạc mệnh",
+   "type": "death",
+   "age": 27,
+   "year": 8,
+   "buoi": 1315,
+   "reloads": 4,
+   "reloadFail": 0,
+   "reloadLog": [
+    {
+     "n": 1,
+     "buoi": 75,
+     "year": 1,
+     "ms": 3477,
+     "same": true
+    },
+    {
+     "n": 2,
+     "buoi": 341,
+     "year": 3,
+     "ms": 3316,
+     "same": true
+    },
+    {
+     "n": 3,
+     "buoi": 777,
+     "year": 6,
+     "ms": 3565,
+     "same": true
+    },
+    {
+     "n": 4,
+     "buoi": 1241,
+     "year": 8,
+     "ms": 4017,
+     "same": true
+    }
+   ],
+   "nb": {
+    "n": 1429,
+    "p50": 49,
+    "p95": 309,
+    "max": 1330
+   },
+   "uiLoadMaxMs": 936,
+   "bugs": [
+    {
+     "type": "lag",
+     "msg": "[fold] tab switch freezes over 400 ms",
+     "detail": "706 ms longest · 2 long tasks @ năm 3 th1 t2 b3 (buổi #276) (night flip pending)",
+     "n": 6
+    },
+    {
+     "type": "stuck",
+     "msg": "[fold] after loading her save, «Sang ngày mới» does not move the clock (soft-lock after load)",
+     "detail": "12 presses, night flip S.nfX wait @ năm 6 th10 t2 b3 (buổi #911)",
+     "n": 2
+    },
+    {
+     "type": "save",
+     "msg": "save→load→save changes the state",
+     "detail": "save.S.visit.people.2: {\"kind\":\"srv\",\"sk\":\"rv\",\"ref\":{\"$r\":3},\"name\":\"Ngụy Tri Ý\",\" → undefined (+9 more paths) @ năm 1 th3 t0 b1 (buổi #1)",
+     "n": 29
+    }
+   ]
+  },
+  {
+   "id": "thd-thd_tho-skilled-1",
+   "persona": "skilled",
+   "seed": 795064746,
+   "run": "thd/thd-20261125-0233.json",
+   "end": "CAP",
+   "type": "cap",
+   "age": 35,
+   "year": 16,
+   "buoi": 2664,
+   "reloads": 6,
+   "reloadFail": 0,
+   "reloadLog": [
+    {
+     "n": 1,
+     "buoi": 336,
+     "year": 3,
+     "ms": 4110,
+     "same": true
+    },
+    {
+     "n": 2,
+     "buoi": 790,
+     "year": 5,
+     "ms": 4072,
+     "same": true
+    },
+    {
+     "n": 3,
+     "buoi": 1294,
+     "year": 8,
+     "ms": 4816,
+     "same": true
+    },
+    {
+     "n": 4,
+     "buoi": 1736,
+     "year": 11,
+     "ms": 4722,
+     "same": true
+    },
+    {
+     "n": 5,
+     "buoi": 2207,
+     "year": 13,
+     "ms": 5084,
+     "same": true
+    },
+    {
+     "n": 6,
+     "buoi": 2664,
+     "year": 16,
+     "ms": 5420,
+     "same": true
+    }
+   ],
+   "nb": {
+    "n": 2857,
+    "p50": 94,
+    "p95": 795,
+    "max": 4633
+   },
+   "uiLoadMaxMs": 1561,
+   "bugs": [
+    {
+     "type": "lag",
+     "msg": "[fold] tab switch freezes over 400 ms",
+     "detail": "450 ms longest · 2 long tasks @ năm 1 th3 t0 b3 (buổi #3)",
+     "n": 18
+    },
+    {
+     "type": "stuck",
+     "msg": "[fold] after loading her save, «Sang ngày mới» does not move the clock (soft-lock after load)",
+     "detail": "12 presses, night flip S.nfX wait @ năm 2 th1 t2 b3 (buổi #153)",
+     "n": 10
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab act: text over text: span × small.kbk-ts",
+     "detail": "Tuần × Những điều chính của tuần qua @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 1
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab act: text over text: span.kbk-ls × span.krl",
+     "detail": "Tháng tư, năm thứ mười sáu, tr × Tiết @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 1
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab act: text over text: span.kbk-ls × span.ef.n",
+     "detail": "Tháng tư, năm thứ mười sáu, tr × Hạ · giông tố @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 1
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab act: text over text: div.kbk-rh × div.kbk-rh",
+     "detail": "Tuần lục · Tháng tư, năm thứ m × Tuần lục · Tháng tư, năm thứ m @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 3
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab go: text over text: span × small.kbk-ts",
+     "detail": "Tuần × Những điều chính của tuần qua @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 1
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab go: text over text: span.kbk-ls × span.krl",
+     "detail": "Tháng tư, năm thứ mười sáu, tr × Tiết @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 1
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab go: text over text: span.kbk-ls × span.ef.n",
+     "detail": "Tháng tư, năm thứ mười sáu, tr × Hạ · giông tố @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 1
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab go: text over text: div.kbk-rh × div.kbk-rh",
+     "detail": "Tuần lục · Tháng tư, năm thứ m × Tuần lục · Tháng tư, năm thứ m @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 3
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab court: text over text: span × small.kbk-ts",
+     "detail": "Tuần × Những điều chính của tuần qua @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 1
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab court: text over text: span.kbk-ls × span.krl",
+     "detail": "Tháng tư, năm thứ mười sáu, tr × Tiết @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 1
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab court: text over text: span.kbk-ls × span.ef.n",
+     "detail": "Tháng tư, năm thứ mười sáu, tr × Hạ · giông tố @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 1
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab court: text over text: div.kbk-rh × div.kbk-rh",
+     "detail": "Tuần lục · Tháng tư, năm thứ m × Tuần lục · Tháng tư, năm thứ m @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 3
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab rel: text over text: span × small.kbk-ts",
+     "detail": "Tuần × Những điều chính của tuần qua @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 1
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab rel: text over text: span.kbk-ls × span.krl",
+     "detail": "Tháng tư, năm thứ mười sáu, tr × Tiết @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 1
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab rel: text over text: span.kbk-ls × span.ef.n",
+     "detail": "Tháng tư, năm thứ mười sáu, tr × Hạ · giông tố @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 1
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab rel: text over text: div.kbk-rh × div.kbk-rh",
+     "detail": "Tuần lục · Tháng tư, năm thứ m × Tuần lục · Tháng tư, năm thứ m @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 3
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab kid: text over text: span × small.kbk-ts",
+     "detail": "Tuần × Những điều chính của tuần qua @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 1
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab kid: text over text: span.kbk-ls × span.krl",
+     "detail": "Tháng tư, năm thứ mười sáu, tr × Tiết @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 1
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab kid: text over text: span.kbk-ls × span.ef.n",
+     "detail": "Tháng tư, năm thứ mười sáu, tr × Hạ · giông tố @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 1
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab kid: text over text: div.kbk-rh × div.kbk-rh",
+     "detail": "Tuần lục · Tháng tư, năm thứ m × Tuần lục · Tháng tư, năm thứ m @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 3
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab inv: text over text: span × small.kbk-ts",
+     "detail": "Tuần × Những điều chính của tuần qua @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 1
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab inv: text over text: span.kbk-ls × span.krl",
+     "detail": "Tháng tư, năm thứ mười sáu, tr × Tiết @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 1
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab inv: text over text: span.kbk-ls × span.ef.n",
+     "detail": "Tháng tư, năm thứ mười sáu, tr × Hạ · giông tố @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 1
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab inv: text over text: div.kbk-rh × div.kbk-rh",
+     "detail": "Tuần lục · Tháng tư, năm thứ m × Tuần lục · Tháng tư, năm thứ m @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 3
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab art: text over text: span × small.kbk-ts",
+     "detail": "Tuần × Những điều chính của tuần qua @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 1
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab art: text over text: span.kbk-ls × span.krl",
+     "detail": "Tháng tư, năm thứ mười sáu, tr × Tiết @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 1
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab art: text over text: span.kbk-ls × span.ef.n",
+     "detail": "Tháng tư, năm thứ mười sáu, tr × Hạ · giông tố @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 1
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab art: text over text: div.kbk-rh × div.kbk-rh",
+     "detail": "Tuần lục · Tháng tư, năm thứ m × Tuần lục · Tháng tư, năm thứ m @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 3
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab story: text over text: span × small.kbk-ts",
+     "detail": "Tuần × Những điều chính của tuần qua @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 1
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab story: text over text: span.kbk-ls × span.krl",
+     "detail": "Tháng tư, năm thứ mười sáu, tr × Tiết @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 1
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab story: text over text: span.kbk-ls × span.ef.n",
+     "detail": "Tháng tư, năm thứ mười sáu, tr × Hạ · giông tố @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 1
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab story: text over text: div.kbk-rh × div.kbk-rh",
+     "detail": "Tuần lục · Tháng tư, năm thứ m × Tuần lục · Tháng tư, năm thứ m @ năm 16 th4 t0 b3 (buổi #2657)",
+     "n": 3
+    },
+    {
+     "type": "save",
+     "msg": "save→load→save changes the state",
+     "detail": "save.S.visit.tk: {} → undefined @ năm 1 th3 t0 b3 (buổi #3)",
+     "n": 35
+    },
+    {
+     "type": "lag",
+     "msg": "one buổi change took over 1.5 s (bot page, render off)",
+     "detail": "2343 ms @ năm 7 th10 t1 b0 (buổi #1154) @ năm 7 th10 t1 b0 (buổi #1154)",
+     "n": 2
+    },
+    {
+     "type": "stuck",
+     "msg": "no ending within the wall cap (2700 s)",
+     "detail": "state {\"year\":16,\"rank\":7,\"age\":35,\"dead\":false}",
+     "n": 1
+    },
+    {
+     "type": "mem",
+     "msg": "bot page (game, render off) memory keeps growing over the life (leak)",
+     "detail": "JS heap 87 → 255 MB · DOM nodes 3080 → 1364 · listeners 1138 → 601 over 2805 s",
+     "n": 1
+    }
+   ]
+  },
+  {
+   "id": "thd-thd_tho-random-1",
+   "persona": "random",
+   "seed": 1077992375,
+   "run": "thd2/thd-20261125-0321.json",
+   "end": "Xuất gia",
+   "type": "leave",
+   "age": 19,
+   "year": 1,
+   "buoi": 151,
+   "reloads": 0,
+   "reloadFail": 0,
+   "nb": {
+    "n": 173,
+    "p50": 36,
+    "p95": 175,
+    "max": 303
+   },
+   "uiLoadMaxMs": 726,
+   "bugs": [
+    {
+     "type": "stuck",
+     "msg": "[fold] after loading her save, «Sang ngày mới» does not move the clock (soft-lock after load)",
+     "detail": "12 presses, night flip S.nfX open @ năm 1 th3 t0 b3 (buổi #3)",
+     "n": 2
+    },
+    {
+     "type": "lag",
+     "msg": "[fold] tab switch freezes over 400 ms",
+     "detail": "530 ms longest · 2 long tasks @ năm 1 th3 t0 b3 (buổi #3)",
+     "n": 2
+    },
+    {
+     "type": "save",
+     "msg": "save→load→save changes the state",
+     "detail": "save.S.visit.people.3: {\"kind\":\"npc\",\"sid\":15,\"name\":\"Tiểu Tài Tử\",\"ini\":\"T\",\"col\": → undefined (+1 more paths) @ năm 1 th3 t1 b2 (buổi #7)",
+     "n": 20
+    }
+   ]
+  },
+  {
+   "id": "thd-thd_tho-greedy-1",
+   "persona": "greedy",
+   "seed": 372282412,
+   "run": "thd2/thd-20261125-0321.json",
+   "end": "HARNESS",
+   "type": "harness",
+   "reloads": 7,
+   "reloadFail": 0,
+   "reloadLog": [
+    {
+     "n": 1,
+     "buoi": 323,
+     "year": 3,
+     "ms": 3606,
+     "same": true
+    },
+    {
+     "n": 2,
+     "buoi": 841,
+     "year": 6,
+     "ms": 3413,
+     "same": true
+    },
+    {
+     "n": 3,
+     "buoi": 1287,
+     "year": 8,
+     "ms": 3909,
+     "same": true
+    },
+    {
+     "n": 4,
+     "buoi": 1751,
+     "year": 11,
+     "ms": 4723,
+     "same": true
+    },
+    {
+     "n": 5,
+     "buoi": 2183,
+     "year": 13,
+     "ms": 6283,
+     "same": true
+    },
+    {
+     "n": 6,
+     "buoi": 2679,
+     "year": 16,
+     "ms": 6607,
+     "same": true
+    },
+    {
+     "n": 7,
+     "buoi": 3116,
+     "year": 19,
+     "ms": 6633,
+     "same": true
+    }
+   ],
+   "uiLoadMaxMs": 1426,
+   "bugs": [
+    {
+     "type": "lag",
+     "msg": "[fold] tab switch freezes over 400 ms",
+     "detail": "609 ms longest · 1 long tasks @ năm 1 th3 t0 b2 (buổi #2)",
+     "n": 22
+    },
+    {
+     "type": "stuck",
+     "msg": "[fold] after loading her save, «Sang ngày mới» does not move the clock (soft-lock after load)",
+     "detail": "12 presses, night flip S.nfX done @ năm 3 th2 t1 b3 (buổi #323)",
+     "n": 6
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab go: text over text: span.mlab × span.mmeta",
+     "detail": "Hàm An × 3 bóng · @ năm 9 th5 t1 b1 (buổi #1404)",
+     "n": 1
+    },
+    {
+     "type": "ui-text-overlap",
+     "msg": "[fold] tab go: text over text: span.mlab × em",
+     "detail": "Hàm An × đang cấm túc (2 tháng) @ năm 9 th5 t1 b1 (buổi #1404)",
+     "n": 1
+    },
+    {
+     "type": "save",
+     "msg": "[fold] save does not load in the real game: throws: Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.",
+     "detail": "năm 19 th11 t1 b3 (buổi #3269)",
+     "n": 1
+    },
+    {
+     "type": "harness",
+     "msg": "runner error: page.evaluate: TypeError: Cannot read properties of undefined (reading 'turn')",
+     "detail": "page.evaluate: TypeError: Cannot read properties of undefined (reading 'turn')\n    at eval (eval at evaluate (:311:30), <anonymous>:1:5)\n    at eval (<anonymous>)\n    at UtilityScript.evaluate (<anony",
+     "n": 1
+    }
+   ]
+  },
+  {
+   "id": "thd-thd_tho-greedy-1",
+   "persona": "greedy",
+   "seed": 372282412,
+   "run": "thd4/thd-20261125-0419.json",
+   "end": "HARNESS",
+   "type": "harness",
+   "reloads": 7,
+   "reloadFail": 0,
+   "reloadLog": [
+    {
+     "n": 1,
+     "buoi": 332,
+     "year": 3,
+     "ms": 3529,
+     "same": true
+    },
+    {
+     "n": 2,
+     "buoi": 787,
+     "year": 5,
+     "ms": 3639,
+     "same": true
+    },
+    {
+     "n": 3,
+     "buoi": 1279,
+     "year": 8,
+     "ms": 4225,
+     "same": true
+    },
+    {
+     "n": 4,
+     "buoi": 1751,
+     "year": 11,
+     "ms": 4892,
+     "same": true
+    },
+    {
+     "n": 5,
+     "buoi": 2191,
+     "year": 13,
+     "ms": 4789,
+     "same": true
+    },
+    {
+     "n": 6,
+     "buoi": 2629,
+     "year": 16,
+     "ms": 5170,
+     "same": true
+    },
+    {
+     "n": 7,
+     "buoi": 3147,
+     "year": 19,
+     "ms": 5627,
+     "same": true
+    }
+   ],
+   "uiLoadMaxMs": 1684,
+   "saveBytes": [
+    [
+     1,
+     107708,
+     "năm 1 th3 t0 b2 (buổi #2)"
+    ],
+    [
+     2,
+     188996,
+     "năm 1 th3 t1 b3 (buổi #8) (night flip pending)"
+    ],
+    [
+     3,
+     582004,
+     "năm 2 th2 t1 b1 (buổi #158)"
+    ],
+    [
+     4,
+     901777,
+     "năm 3 th1 t1 b3 (buổi #322)"
+    ],
+    [
+     5,
+     1265113,
+     "năm 3 th11 t2 b2 (buổi #474)"
+    ],
+    [
+     6,
+     1510125,
+     "năm 4 th10 t1 b3 (buổi #624)"
+    ],
+    [
+     7,
+     1622587,
+     "năm 5 th8 t2 b3 (buổi #774)"
+    ],
+    [
+     8,
+     1883749,
+     "năm 6 th7 t1 b3 (buổi #932)"
+    ],
+    [
+     9,
+     2126456,
+     "năm 7 th6 t1 b3 (buổi #1095)"
+    ],
+    [
+     10,
+     2315476,
+     "năm 8 th4 t1 b3 (buổi #1246)"
+    ],
+    [
+     11,
+     2501974,
+     "năm 9 th2 t2 b3 (buổi #1396)"
+    ],
+    [
+     12,
+     2723936,
+     "năm 9 th12 t2 b2 (buổi #1546)"
+    ],
+    [
+     13,
+     2906388,
+     "năm 10 th10 t2 b3 (buổi #1696)"
+    ],
+    [
+     14,
+     3153512,
+     "năm 11 th9 t0 b3 (buổi #1846)"
+    ],
+    [
+     15,
+     3353884,
+     "năm 12 th7 t1 b2 (buổi #1998)"
+    ],
+    [
+     16,
+     3511133,
+     "năm 13 th5 t2 b2 (buổi #2149)"
+    ],
+    [
+     17,
+     3703962,
+     "năm 14 th4 t1 b2 (buổi #2302)"
+    ],
+    [
+     18,
+     3912191,
+     "năm 15 th2 t1 b1 (buổi #2452)"
+    ],
+    [
+     19,
+     4098661,
+     "năm 15 th12 t2 b3 (buổi #2606)"
+    ],
+    [
+     20,
+     4412888,
+     "năm 17 th1 t2 b3 (buổi #2795)"
+    ],
+    [
+     21,
+     4696690,
+     "năm 18 th1 t0 b3 (buổi #2961)"
+    ],
+    [
+     22,
+     4925400,
+     "năm 18 th11 t2 b3 (buổi #3118)"
+    ],
+    [
+     23,
+     5116085,
+     "năm 19 th9 t2 b3 (buổi #3270)"
+    ],
+    [
+     24,
+     5382700,
+     "năm 20 th8 t0 b3 (buổi #3424)"
+    ]
+   ],
+   "bugs": [
+    {
+     "type": "lag",
+     "msg": "[fold] tab switch freezes over 400 ms",
+     "detail": "429 ms longest · 2 long tasks @ năm 1 th3 t1 b3 (buổi #8) (night flip pending)",
+     "n": 19
+    },
+    {
+     "type": "stuck",
+     "msg": "[fold] after loading her save, «Sang ngày mới» does not move the clock (soft-lock after load)",
+     "detail": "12 presses, night flip S.nfX wait @ năm 3 th1 t1 b3 (buổi #322)",
+     "n": 13
+    },
+    {
+     "type": "save",
+     "msg": "[fold] save does not load in the real game: throws: Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.",
+     "detail": "năm 20 th8 t0 b3 (buổi #3424)",
+     "n": 1
+    },
+    {
+     "type": "harness",
+     "msg": "runner error: page.evaluate: TypeError: Cannot read properties of undefined (reading 'turn')",
+     "detail": "page.evaluate: TypeError: Cannot read properties of undefined (reading 'turn')\n    at eval (eval at evaluate (:311:30), <anonymous>:1:5)\n    at eval (<anonymous>)\n    at UtilityScript.evaluate (<anony",
+     "n": 1
+    }
+   ]
+  }
+ ]
+}
