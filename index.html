@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"70d27175","t":"2026-11-25T08:15Z","c":"Tin báo không còn hiện «???» cho người chưa quen; nay ghi «một vị» kèm phẩm cấp.","b":"0a8653d01344","h":[{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"}]};
+window.CTM_BI={"s":"36fcdeed+","t":"2026-11-25T08:22Z","c":"Lời dặn và mẹo không có người báo tin chỉ còn tranh sự việc; ma ma chỉ hiện khi đúng việc của bà.","b":"e30c8b7f4b9a","h":[{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -48614,6 +48614,13 @@ window.kitActPicSize=kitActPicSize;try{addEventListener("resize",()=>{clearTimeo
    popup-fullbody-r1 #3, OD:L963). kitPersonDlgFit(root) lays the figure (feet on the column floor, head under the chip). */
 function kitPersonDlg(o){o=o||{};try{
  const kind=o.kind||"guide";const q=o.p||{};
+ /* owner 25/11 ~06:55Z (OD, whole family, law 11): a PERSON (figure + name + «X dặn») only when that person really announces her own business;
+    every other frame (mechanics tips, feature intros, system notices, coach hints) passes noPerson:true = the SAME frame (--kpw x --kph), the SAME two columns,
+    the left column holds the subject / event picture instead of a figure, no name chip, no «ma ma dặn». One kit part, no per-screen variant. */
+ if(o.noPerson){const pic0=o.pic&&o.pic.src?kitSceneArt(o.pic.src,o.pic.lab||"",{shape:"wide",cap:!!o.pic.lab}):"";
+  const btns0=(o.btns||[]).map(b=>`<button type="button" class="kbtn${b.alt?" alt":""}" data-ktut="${b.k}">${b.t}</button>`).join("");
+  return `<div class="dlg kpanel kesdlg kpdlg kpdnp${o.cls?" "+o.cls:""}" data-kind="${kind}" data-kpd="nop">${kpHeader(kind,o.title||"",o.sub||"")}`+
+   `<div class="kpdb"><div class="kpdr">${pic0?`<div class="kdlgart kdpban">${pic0}</div>`:""}<div class="kpdt">${o.html||""}</div></div></div>${btns0?`<div class="kpopts kpdo">${btns0}</div>`:""}</div>`}
  const fig=kitStageFig(q,{src:o.fig,cap:false});
  let nm="";try{nm=o.name||(typeof kitName==="function"&&(q.__kp||q.name!==undefined||q.rank!==undefined)?kitName(q.__kp||q,{cap:true}):"")||""}catch(e){}
  if(!nm&&q.rw)nm=`<b class="kname" style="--rc:${q.col||"#8a7350"}">${q.rw}</b>`;
@@ -48670,6 +48677,9 @@ html body .dlg.kpanel.kpdlg{box-sizing:border-box;width:var(--kpw);min-width:0;m
 .kpdlg{position:relative}.kpdlg>.kpdb{padding-bottom:12px}.kpdlg .kpdr{padding-bottom:var(--kpbh,0px)}
 .kpdlg>.kpopts{position:absolute;z-index:2;right:14px;bottom:12px;left:auto;display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;padding:0;margin:0;min-height:0;max-width:calc(100% - var(--kpdcw,38%) - 40px)}
 .kpdlg>.kpopts .kbtn{min-height:40px;padding:6px 16px;font-size:.86rem}
+/* no-person variant = KIT §8.1 compact: same width, frame height = its content (picture + text + button, no void), capped at --kph (law 10) */
+html body .dlg.kpanel.kpdlg.kpdnp{height:auto;min-height:0;max-height:var(--kph)}
+.kpdlg.kpdnp>.kpdb{flex:0 1 auto;grid-template-columns:minmax(0,1fr);padding-bottom:4px}.kpdlg.kpdnp>.kpopts{position:static;max-width:none;padding:0 14px 12px;justify-content:flex-end}.kpdlg.kpdnp .kpdr{padding-bottom:0}.kpdlg.kpdnp .kdpban>.ksart{height:clamp(120px,calc(24*var(--kvh,1dvh)),230px)}
 /* kv3:.kv1 */:where(.kv1) .kpdlg>.kpdb{grid-template-columns:var(--kpdcw,clamp(84px,32%,140px)) minmax(0,1fr);gap:9px;padding:8px 10px 2px}:where(.kv1) .kpdlg .kpdt{font-size:.84rem}:where(.kv1) .kpdlg>.kpopts{right:10px;bottom:10px}
 `;document.head.appendChild(st)})();
 /* ================= jhall: ONE place-name table for the halls of every palace (owner OD:L1475, 16/11 21:48Z) =================
@@ -57044,8 +57054,8 @@ KIT_SAMPLES.push({id:"§6.2c",title:"Lựa chọn nhắc đến một người �
  return `<div class="kitpg-row"><button type="button" class="kbtn alt" data-kpop="personopt"${ok?"":" disabled"}>Đêm thị tẩm · «Thì thầm nói xấu …»</button></div>`+(ok?"":kitFacts(["Vào một kiếp rồi mở lại trang mẫu để xem pop-up."],{group:false}))}});
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kitpage [data-kpop]");if(!b)return;e.stopPropagation();e.preventDefault();kitPopSample(b.dataset.kpop)},true);
 /* §50.2 kitPersonDlg (owner 16/11 07:35Z, OD:L448): the person pop-up outside #modal — figure left, picture right top, info, buttons; one frame size per event */
-KIT_SAMPLES.push({id:"§50.2",title:"kitPersonDlg: hộp thoại có người ngoài #modal (lời dặn, mẹo)",html:()=>`<div class="kitpg-row"><button type="button" class="kbtn" data-kpd2="tip">Mở lời dặn mẫu (cỡ coach)</button><button type="button" class="kbtn alt" data-kpd2="tour">Mở lời dặn tân thủ (4 trang cùng cỡ)</button></div>`});
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kitpage [data-kpd2]");if(!b)return;e.stopPropagation();e.preventDefault();try{if(b.dataset.kpd2==="tip")kitTip({id:"kitpg",title:"Lời dặn mẫu",html:"<p>Một lời dặn ngắn của ma ma.</p>"});else window.kitTour()}catch(x){console.error(x)}},true);
+KIT_SAMPLES.push({id:"§50.2",title:"kitPersonDlg: hộp thoại có người ngoài #modal (lời dặn, mẹo)",html:()=>`<div class="kitpg-row"><button type="button" class="kbtn" data-kpd2="tip">Mở lời dặn mẫu (cỡ coach)</button><button type="button" class="kbtn" data-kpd2="tip0">Mở lời dặn không người (cùng cỡ)</button><button type="button" class="kbtn alt" data-kpd2="tour">Mở lời dặn tân thủ (4 trang cùng cỡ)</button></div>`});
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kitpage [data-kpd2]");if(!b)return;e.stopPropagation();e.preventDefault();try{if(b.dataset.kpd2==="tip")kitTip({id:"kitpg",person:true,title:"Lời dặn mẫu",html:"<p>Một lời dặn ngắn của ma ma, đúng việc của bà.</p>"});else if(b.dataset.kpd2==="tip0")kitTip({id:"kitpg0",title:"Mưu kế",html:"<p>Lời dặn về cách chơi: chỉ có hình của việc đó, không có người.</p>"});else window.kitTour()}catch(x){console.error(x)}},true);
 
 /* KIT 83.9 danger button + kitConfirm (kit sample) */
 KIT_SAMPLES.push({id:"§83.9",title:"kitDanger · .kbtn.kdanger + kitConfirm",where:"<b>Irreversible actions</b> (delete the cloud sổ, new life, …). Same size as <code>.kbtn</code>; yes = danger button, no = the panel's own quiet button; optional type-to-confirm field. Samples: button, disabled button, and a live pop-up trigger.",
@@ -67130,7 +67140,7 @@ function rectOf(t){try{const el=typeof t==="function"?t():typeof t==="string"?$q
 function clip(r,pad){const vw=innerWidth,vh=innerHeight;const L=Math.max(4,r.left-pad),Tp=Math.max(4,r.top-pad),R=Math.min(vw-4,r.right+pad),B=Math.min(vh-4,r.bottom+pad);
  return{left:L,top:Tp,right:R,bottom:B,width:Math.max(0,R-L),height:Math.max(0,B-Tp)}}
 function kitCoach(spec){const R0=root();CUR=spec;R0.hidden=false;R0.classList.toggle("ktut-mv",!rm());
- const card=kitPersonDlg({kind:"guide",title:spec.title||MMN(),sub:spec.sub||"",p:mmFace(),fig:mmFig(),name:`<b class="kname" style="--rc:#a0584a">${MMN()}</b>`,pic:spec.pic?{src:spec.pic,lab:""}:null,html:`<div class="ktut-say">${spec.html||""}</div>`,btns:spec.btns,cls:"ktut-card"});
+ const card=kitPersonDlg({kind:"guide",title:spec.title||(spec.person?MMN():""),sub:spec.sub||"",noPerson:!spec.person,p:spec.person?mmFace():null,fig:spec.person?mmFig():"",name:spec.person?`<b class="kname" style="--rc:#a0584a">${MMN()}</b>`:"",pic:spec.pic?{src:spec.pic,lab:""}:null,html:`<div class="ktut-say">${spec.html||""}</div>`,btns:spec.btns,cls:"ktut-card"});
  R0.innerHTML=`${spec.target?"":`<div class="ktut-dim"></div>`}<div class="ktut-hole"${spec.target?"":" hidden"}></div><div class="ktut-blks"></div><div class="ktut-marks"></div>${card}`;
  try{kitPersonDlgFit(R0)}catch(e){}
  R0.querySelectorAll("[data-ktut]").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}const k=b.dataset.ktut;if(spec.on)spec.on(k)}));
@@ -67194,7 +67204,7 @@ let TIPEL=null;
 function tipPlace(){if(!TIPEL)return;let top=innerHeight;document.querySelectorAll("#tabs,#next").forEach(e=>{if(!vis(e))return;const r=e.getBoundingClientRect();if(r.height&&r.top>innerHeight*.5)top=Math.min(top,r.top)});
  TIPEL.style.bottom=Math.max(10,Math.round(innerHeight-top+10))+"px"}
 function kitTip(spec){tipOff();const el=document.createElement("div");el.className="ktip"+(rm()?"":" ktut-mv");el.id="ktip";el.setAttribute("role","status");
- el.innerHTML=kitPersonDlg({kind:"guide",title:spec.title,sub:MMN()+" dặn",p:mmFace(),fig:mmFig(),name:`<b class="kname" style="--rc:#a0584a">${MMN()}</b>`,pic:spec.pic?{src:spec.pic,lab:""}:(ia("Hành sự")?{src:ia("Hành sự"),lab:""}:null),html:`<div class="ktut-say">${spec.html}</div>`,btns:[{k:"tip",t:"Đã hiểu"}]});
+ el.innerHTML=kitPersonDlg({kind:"guide",title:spec.title,sub:spec.person?MMN()+" dặn":"Lời dặn",noPerson:!spec.person,p:spec.person?mmFace():null,fig:spec.person?mmFig():"",name:spec.person?`<b class="kname" style="--rc:#a0584a">${MMN()}</b>`:"",pic:spec.pic?{src:spec.pic,lab:""}:((ia(spec.title)||ia("Hành sự"))?{src:ia(spec.title)||ia("Hành sự"),lab:""}:null),html:`<div class="ktut-say">${spec.html}</div>`,btns:[{k:"tip",t:"Đã hiểu"}]});
  document.body.appendChild(el);TIPEL=el;T.tip=spec.id;tipPlace();try{kitPersonDlgFit(el)}catch(e){}
  el.querySelector("[data-ktut=tip]").addEventListener("click",e=>{e.stopPropagation();try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}tipOff();T.tipGap=Date.now()+1500})}
 function tipOff(){if(TIPEL){TIPEL.remove();TIPEL=null}T.tip=null}
@@ -67330,7 +67340,7 @@ function show(prep){const s=STEPS[T.step];if(!s)return;if(busy()){T.paused=true;
  const btns=[{k:"skip",t:"Bỏ qua lời dặn",alt:true}];if(!s.noNext)btns.push({k:"next",t:s.last?"Đã hiểu":"Tiếp"});
  setTimeout(()=>{if(!T.on||STEPS[T.step]!==s)return;if(busy()){T.paused=true;coachOff();return}
   const np=s.pages?s.pages():0,pg=T.page||0;
-  kitCoach({title:typeof s.title==="function"?s.title():s.title,sub:np?`Game này chơi gì · trang ${pg+1}/${np} · lời dặn ${n}/${tot}`:`${MMN()} · lời dặn ${n}/${tot}`,html:typeof s.html==="function"?s.html():s.html,target:s.target,pad:s.pad,interact:s.interact,marks:s.marks,side:s.side,big:s.big,btns,pic:np?introPic(pg):stepPic(s),
+  kitCoach({person:true,title:typeof s.title==="function"?s.title():s.title,sub:np?`Game này chơi gì · trang ${pg+1}/${np} · lời dặn ${n}/${tot}`:`${MMN()} · lời dặn ${n}/${tot}`,html:typeof s.html==="function"?s.html():s.html,target:s.target,pad:s.pad,interact:s.interact,marks:s.marks,side:s.side,big:s.big,btns,pic:np?introPic(pg):stepPic(s),
    on(k){if(k==="skip")return tourEnd("skip");if(k==="next"){if(np&&pg<np-1){T.page=pg+1;show(false);return}T.page=0;next()}}})},prep&&s.prep?560:0)}
 /* the trial act: the step ends when the act's result arrives (result card, or the act opened a dialog of its own) */
 function watchTry(){const s=STEPS[T.step];if(!T.on||!s||s.id!=="thu")return;
@@ -67388,7 +67398,7 @@ function veteran(){try{if(lifeLog&&lifeLog().length)return true}catch(e){}
 /* a sổ past its 2nd week (owner task 16/11): no tour, no ask, no tips; Thiết lập or "Xem lại lời dặn" turn them back on */
 function oldSave(){try{return !T.fresh&&S&&((S.turn||0)*3+(S.tuan||0))>=2}catch(e){return false}}
 function askOnce(){T.ask=true;tipOff();
- kitCoach({title:"Lời dặn tân thủ",sub:MMN(),big:true,html:say(`<p>{M} là ${MMN()}, dạy lễ cho người mới vào cung. {X} đã quen lối trong cung, có muốn nghe {m} dặn lại từ đầu?</p><p>Muốn nghe lúc khác: ☰ rồi chọn <b>Xem lại lời dặn</b>. Lời dặn bật tắt trong Thiết lập.</p>`),
+ kitCoach({person:true,title:"Lời dặn tân thủ",sub:MMN(),big:true,html:say(`<p>{M} là ${MMN()}, dạy lễ cho người mới vào cung. {X} đã quen lối trong cung, có muốn nghe {m} dặn lại từ đầu?</p><p>Muốn nghe lúc khác: ☰ rồi chọn <b>Xem lại lời dặn</b>. Lời dặn bật tắt trong Thiết lập.</p>`),
   btns:[{k:"no",t:"Không cần",alt:true},{k:"yes",t:"Nghe ma ma dặn"}],
   on(k){T.ask=false;REC.asked=1;coachOff();if(k==="yes"){saveRec();tourStart()}else{REC.tour="skip";saveRec();try{OPT.tut=false;saveOpt()}catch(e){}try{if(S&&!coop())S.tutTour=1}catch(e){}}}})}
 
@@ -98333,7 +98343,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="0a8653d01344";window.CTM_BUILD=BUILD;
+const BUILD="e30c8b7f4b9a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
