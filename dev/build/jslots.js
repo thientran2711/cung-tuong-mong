@@ -1,5 +1,5 @@
 /* jslots: TWO separate save sets (owner 16/11, review/save-slots).
-     Solo  = Sổ một / hai / ba     localStorage "hclh-save-v2-<n>" (j6 save/loadSlot, unchanged format)
+     Solo  = Sổ một / hai / ba     localStorage "hclh-save-v2-<n>" (j6 save/loadSlot; packed by j6 slotEnc «CTMZ», plain JSON still loads)
      Co-op = Phòng hảo hữu 1..3    localStorage "ctm-coop-rooms" = [{room, seat, at, name, who, age, date, fr}] (newest first, max 3)
              The room's server (Durable Object) is the real save of a co-op life; the list remembers each room's ám hiệu, the
              friend and her character there, so the menu can show it and "Trở lại phòng" rejoins it (same browser pid = same seat).
