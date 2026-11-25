@@ -1764,3 +1764,5 @@ RV selection-scene r19 BIG delta df156a4c | review/selection-scene-r19 | session
 B FIXER save-unseen-lists r2 (successor of 6vieKxfA; code cards at flip + full reruns) | review/save-unseen-lists | B | session_01N1tNP3E3aTTZkCaTT9NmX8 | RUNNING | 25/11 14:47Z |
 B FIXER coop-presence-reload (seat «đang vắng» after co-op reload) | review/coop-presence-reload | B | session_01N1tNP6ZctXUw4paW68T7um | RUNNING | 25/11 14:50Z |
 | F ROLE B #6 button crawler + fixer (successor of ROLE B #5; fix-6 review answers, fix-7 part 2 after KK29, s9 no-turn, Ô lưu Lui, co-op Lịch tháng / f.rk.split) | review/button-crawl-fix-6..N | F | session_01UV1Szjop2ApbWAAN5CCg38 | RUNNING | 25/11 14:54Z |
+B BIG rv robot-coop-fix-7-r2 86f289e8 | review/robot-coop-fix-7-r2 | B | session_01N1tNP6atYBYSrnARCqzZSo | RUNNING | 25/11 15:15Z |
+B SMALL rv pcport-rk-r2 1fbae7c6 | review/pcport-rk-r2 | B | session_01N1tNP4RNjX5E8znCrETDsE | RUNNING | 25/11 15:15Z |
