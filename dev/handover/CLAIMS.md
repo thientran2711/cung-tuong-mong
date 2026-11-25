@@ -1769,7 +1769,7 @@ B SMALL rv pcport-rk-r2 1fbae7c6 | review/pcport-rk-r2 | B | session_01N1tNP4RNj
 | F LIFE RUNNER s9b (sonnet; one life Fold, new seed/persona ≠ s9, LIVE + harness 594fa1ee, real taps, no cap, no exit road) | dev/handover/robot/flight2-s9b.* | F | (opening) | RUNNING | 25/11 15:17Z |
 | F BIG REVIEWER #6 (successor of #5; harness re-check w/ Tin báo injection, fix-7 part 2, m-fix-3, Tin báo kit softlock) | reports/bc-stack-review.md | F | (opening) | RUNNING | 25/11 15:30Z |
 B FIXER save-unseen-lists r3 (tests gate) | review/save-unseen-lists | B | session_01N1tNP5rythg4fywKyPfyTV | RUNNING | 25/11 15:32Z |
-kitHand Bàn bài | review/kit-hand | session_01V1ZZH24dkpdw8LeZYiyfQf | RUNNING | 2026-11-25T15:52Z
+kitHand Bàn bài | review/kit-hand 8e50f709 | session_01V1ZZH24dkpdw8LeZYiyfQf | HANDOVER (rollover; KK31: videos, perf, plaques) | 2026-11-25T15:52Z
 coop-rebirth-stuck | review/coop-rebirth-stuck | session_01D3E3NahMdBiqkSMSUWYn5q | RUNNING | 2026-11-25 16:11Z (Foreman D)
 coop-rebirth-stuck (T3b, successor of T3) | review/coop-rebirth-stuck | session_01D3E3NXhw1QM9BKQKRBbX1C | RUNNING | 2026-11-25 16:33Z (Foreman D)
 coop-rebirth-stuck BIG review (RV-CRS) | review/coop-rebirth-stuck | session_01D3E3NbALbEXx1QFrEeKvCN | RUNNING | 2026-11-25 17:12Z (Foreman D)
