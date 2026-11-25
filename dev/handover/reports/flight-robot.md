@@ -266,3 +266,14 @@ mk-e2e (new) on LIVE 9f72524b: Fold 755x1000@2 and iPad 1180x820@2 rc 0, 0 DEAD,
 1. Carries test-path-fix FAIL item 1 (toil-overlay Fold hollow green, G2) — see «## REVIEW test-path-fix».
 2. mk-e2e: at setup give her an owned preset (Đào hoa) in the bag, real-tap it, ASSERT the reveal card names it, exit non-zero on a dead tap / missing preset.
 MG12 stale scan (4 hits, none blocked): OK.
+
+## REVIEW test-path-fix-3 (BIG REVIEWER #2 session_01UV1SzhBrzCVc4CVbM2dCsJ, 11/25/2026) — PASS cb67ffba (review/test-path-fix-3-r = LIVE 9f72524b + 101dc29b, test files only)
+PRIORITY #1 CHECK: OD 0 (test-only) | main 9f72524b dev/test/mk-e2e.js (no preset assertion) | review/* test-path-fix-r 003ac0b0 base, robot-realtap realtap.js reused unchanged | claims Foreman F #7/#8.
+| check | Fold 755x1000@2 | iPad 1180x820@2 |
+|---|---|---|
+| mk-e2e on cb67ffba | rc 0 · MK-E2E PASS · pickedPreset daohoa · card «KIỂU \| Đào hoa» · 0 DEAD · 0 errors · reveal shown + ended | same |
+| MUTANT (preset selector → missing) | rc 1 · 3 FAIL lines (not offered / not picked / card «màu tự chọn») | — |
+| quickcheck cb67ffba vs LIVE | PASS (core gates, time-spill, old save ok, perf in noise) | |
+Code: every required step goes through T() = rt.tap; a tap that does not land or a DEAD BUTTON pushes a FAIL; exit code = fail count > 0. Setup puts the Đào hoa boxes in her bag by state (allowed: setup, not a play step). Shots looked at (colour palette with Đào hoa row lit; reveal close card). Laws 4/7/9: not touched (test only).
+Still open, NOT in this item: test-path-fix FAIL item 1 (toil-overlay Fold G1 covered tokens / G2 #mefig layer) — ordered to ROLE B fix-3; landing cb67ffba does not make it worse.
+Observation for a game worker (not this item): on the reveal the face shows scattered red dots on both cheeks + forehead (powder/son stroke rendering?) at 1180x820 — check vs intended look.
