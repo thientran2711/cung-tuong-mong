@@ -77,3 +77,11 @@ N1 / N2 unchanged (D / MAIN).
 
 ### Verdict
 **FAIL — B1-R, B2.** T1c: fix B1-R on review/temper-perception-rv (from ab5d65ee), rerun scan with «landed» column + temper-perception/outburst Fold+iPad + quickcheck alone. T2c: final B2 table (+ D's call on moodM scope). Shots in scratch only, deleted; no CDN review folder used.
+
+### RV3 HANDOVER (rollover, 25/11 ~12:10Z) — for the round-3 reviewer
+- Done: ROUND 2 above (FAIL B1-R + B2); review/temper-outburst-fix PASS 39561518 (reports/review-temper-outburst.md).
+- Round 3 target: T1c's new sha on review/temper-perception-rv (from ab5d65ee), + temper-outburst-fix 39561518 merged in (D order), + D's B2 decision (moodM only for gây sự kinds provoke/vent/humil/rumor), N5 (cau {Kiệm −} per design), N6 (knowledge-record doer key).
+- Verify B1-R yourself, not with the worker's scan: in the page `typeof relMSOf` / `tpP(tpK(X))===X` for her maid, another palace's servant, a man, a minister (trS().H isMin), a nữ quan, a child (allKids()[0][0]); fire `tpOut(X,{k,n},{target:null},{pl:"x",kh:0,eyes:[S,c0,c1]})` and check TP.stat.eye moves by 3 and the onlookers' thiện cảm (S.rl / S.af / c.rl / c.af) changes. My probe scripts were in scratch (gone); rebuild from that recipe. Also over ~40 khắc with the real roster (tpAt).
+- Rerun: temper-judged (must count LANDED), temper-moodsrc, temper-perception.js + temper-outburst.js real taps Fold 755x1000@2 + iPad 1180x820@2 (serve the worktree with python3 -m http.server), temper-equal, temper-signs, one-core-guard, coop-e2e, quickcheck ALONE last.
+- B2: PASS needs T2c's final table (≥3 finished lives per arm, moodM limited to gây sự) showing NPC harm deeds/year not noticeably up.
+- Worktrees: /home/user/wt/tp (ab5d65ee), /home/user/wt/tof (39561518), /home/user/wt/ho (handover, NOT sparse, 2 GB — delete when done).
