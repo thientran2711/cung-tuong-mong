@@ -3271,3 +3271,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (02:22Z) LC13: VARIANT C READY through step 9 (push order 5d4f722f → 345eb929 → d6b6fd6f → 9abd1de2 → 2b68def3 → 3a3234ff → 4232709a); visitor 42af6315 next (GO sent). LIVE 502c48c9, waits sếp permission.
 - (02:25Z) sếp WROTE PERMISSION in LC13 chat. LC13 landing Variant C via golive (step 1 onecore 5d4f722f running) → … → 4232709a → visitor 7dbfe98a (= 42af6315 on 4232709a). Tell sếp each LIVE; ping D + F when LIVE moves.
 - (02:30Z) SELSCENE-16 wording fix b7651fad («một vị tú nữ» whole family, shown-text audit 0 hits) — MAIN LOOKED s16b pairs OK → rv 4LZXJs8b BIG verdict on b7651fad; GO after PASS (re-merge on new LIVE).
+- (02:34Z) MAIN LOOKED rv r8 pairs lo + log: lo OK (Tần thiếp Phi … xin cầu kiến; Miễn lễ). Sổ ghi still «Phi ??? tâu xin …» in prose + iPad row wrap gap → added to VISITOR-FIX SMALL follow-up (with «một vị Thường tại»). 42af6315 GO stands (LC13 7dbfe98a).
