@@ -38,3 +38,12 @@ Stuck dump (main, load run 2, probe): host A at 3:2, #next «Sẵn sàng» enabl
 | coop-e2e alone, fresh assemble | 142/142 ×3 (+1 pre-existing rebirth fail, same on main) |
 | quickcheck ALONE | PASS (old save ok · core gates PASS incl. one-core-guard · perf new/live render 277/281, tab 685/627, buổi 1665/1476 ms) |
 | oldsave / one-core | in quickcheck: old save ok · one-core-guard PASS |
+
+## coop-rebirth-stuck (claimed for T3 by D 16:11Z; FLIGHT play-stopper, LAND READY by ~20:30Z) — HANDOVER
+Branch review/coop-rebirth-stuck = LIVE dbae89eb + 2 test-only probe commits (e6c84f14, ba0e8b4c; dev/test/coop-e2e.js stuck dump). Worktree /home/user/wt/t3main (assembled).
+LIVE already has 2 rebirth co-op fixes vs 9f72524b (jcoopworld.js: lifeRekey; nCheck «host's own gate follows its commit» for buổi tối) — re-measure on LIVE first.
+Symptom (main 9f72524b, ~1 in 3 runs, more under load): after the friend's rebirth (step 12) a seat sits on «Sẵn sàng» ENABLED in a DAY buổi (A 3:2 / B 2:1) while the other already sent bend; the test clicks #next 80× (press(), coop-e2e.js ~L60) and nothing happens.
+Probe facts (hunt-2, main): every co-op gate open (base true, waiting/frozen false, allow/allowN false, wantB null, inLife false, thin-E off, DQ not holding, Q 0, pend false); a DIRECT nextBuoi() call ends the buổi at once (bend false → true). So the BUTTON CLICK does not reach the co-op nextBuoi.
+Ruled out by code read: capture-phase guards jaudit.js:291 (only [data-learn]), jksize.js:656 (needs pointerdown), j41.js:62 (.agrey); #next is static (dev/index.html) and wired j6.js:97 → jcoopworld.js:1085.
+Next step: the click probe (ba0e8b4c) dumps #next count / same element / onclick source / click listener fired / nextBuoi calls / bend before-after. Run: bash /home/user/wt/t3-out/hunt.sh (3× yes load, loops coop-e2e in t3main until «#next enabled»; rows in /home/user/wt/t3-out/hunt.txt, logs hunt-N.log; parse the FAIL «#next enabled» JSON: clickTest, gate, tryNext).
+Then: smallest fix (likely the #next handler / a press gate that drops a click silently — family: every co-op press path must either act or keep the press (wantB) or disable the button), a test that fails on LIVE and passes on the fix, coop-e2e ×3 alone, SSK to Foreman D session_01D3E3Nb7QifDH3EPqUqiELN (BIG reviewer).
