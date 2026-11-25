@@ -1595,3 +1595,4 @@ KIT KEEPER KK25 (successor of KK24) | kit/* | session_01V1ZZH1g2TqJvVcJiKLux8Z |
 kit-woodskin r5 + kit-focus-fig review | review/kit-woodskin, review/kit-focus-fig | session_01N1tNP5TBv4tS6ndrkzL8zu | RUNNING | 25/11 01:09Z (FOREMAN B child7)
 day-queue-2 finish (successor of DAYQ-3) | review/day-queue-2 | session_01V1ZZH4byTxn5sgHRmp7VrK | RUNNING | 2026-11-25T01:18Z (MAIN 130)
 robot-coop-savert r2 fix | review/robot-coop-savert | session_01N1tNP6gyAi55RKzrgUnuYT | RUNNING | 25/11 01:28Z (FOREMAN B child7)
+TAINGHE-OPEN-FIX (Tài nghệ pop-up hidden at buổi 3; LIVE bug; opus) | review/tainghe-open-fix | session_01V1ZZH4uyCCyRueugyGEVwf | RUNNING | 2026-11-25T01:28Z (MAIN 130)
