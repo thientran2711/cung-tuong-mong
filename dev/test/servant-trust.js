@@ -124,13 +124,13 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
    unforce();Q.length=0;const pt0=window.pickTarget;const oT=B.npc.talk;B.npc.talk=100;window.pickTarget=()=>M;Math.random=()=>0;try{svtMonth()}finally{B.npc.talk=oT;window.pickTarget=pt0;Math.random=R0}
    ok(Q.some(q=>q&&q.pid==='svtAsk'),'svtMonth: an NPC (or her servant) goes for HER on the cung-nữ road ('+Q.length+' queued)');Q.length=0}
   // talk-others-people (WORKLIST #26, OD ~07:58Z «hỏi lén»): the covert talk — no bất kính, same gain, heavier loss when seen, NPCs choose it too
-  {const W=liveRivals(true).filter(x=>x.staff&&x.staff.length);const wv=W[W.length-1],ws=wv.staff[wv.staff.length-1];
+  {const W=liveRivals(true).filter(x=>x.staff&&x.staff.length&&!(typeof sameHouse==='function'&&(sameHouse(S,x)||sameHouse(svtHouse(S),x)))&&!svtGuest(S,x)&&svtHouse(S)!==x/* a rival of ANOTHER house: same palace = her own people (svTouch exempt), the flake of r1 */);const wv=W[W.length-1],ws=wv.staff[wv.staff.length-1];
    ok(B.tin.len>B.tin.talk&&B.rel.len>B.rel.talk&&B.kLen>B.k,'«Hỏi lén» costs more when seen and takes longer (law 2/3: tin '+B.tin.len+'>'+B.tin.talk+', khắc '+B.kLen+'>'+B.k+')');
    window.knAt=()=>'same';S.svtG=null;ws.svtK=null;const o1=oan(wv,S),a1=aff(wv,S);force(0,0,0);let r1=svTalk(S,ws,1);
    ok(oan(wv,S)===o1&&aff(wv,S)===a1,'«Hỏi lén» with her master standing there, not greeted: no bất kính, and unseen = no change');ok(/chịu nói chuyện/.test(r1)&&noNum(r1),'«Hỏi lén»: the same gain as the open talk, in words: '+r1.slice(0,90));
    S.svtG=null;ws.svtK=null;const o2=oan(wv,S);force(0,0,0);svTalk(S,ws);ok(oan(wv,S)>o2,'the open talk in the same spot IS bất kính (oán '+o2+'→'+oan(wv,S)+')');
    window.knAt=(id)=>id==='me'?'home':'away'+id;ws.svtK=null;const t3=tinOf(ws),a3=aff(wv,S);force(0,0,1);const r3=svTalk(S,ws,1);
-   ok(tinOf(ws)===Math.max(0,t3-B.tin.len)&&Math.round(aff(wv,S))===Math.max(-100,Math.round(a3-B.rel.len)),'«Hỏi lén» seen: Chủ tin −'+B.tin.len+', her thiện cảm −'+B.rel.len+' (heavier than open)');ok(noNum(r3),'after-line in words: '+r3.replace(/<[^>]*>/g,'').slice(0,110));
+   ok(tinOf(ws)===Math.max(0,t3-B.tin.len)&&Math.round(aff(wv,S))===Math.max(-100,Math.round(a3-B.rel.len)),'«Hỏi lén» seen: Chủ tin −'+B.tin.len+', her thiện cảm −'+B.rel.len+' (heavier than open; r3 «'+String(r3).replace(/<[^>]*>/g,'').slice(0,140)+'» got tin '+t3+'→'+tinOf(ws)+', thiện cảm '+Math.round(a3)+'→'+Math.round(aff(wv,S))+')');ok(noNum(r3),'after-line in words: '+r3.replace(/<[^>]*>/g,'').slice(0,110));
    ws.svtK=null;const t4=tinOf(ws);force(1,0,1);svTalk(S,ws,1);ok(tinOf(ws)===t4,'«Hỏi lén» refused: nothing changes');
    const net1=window.netIs;window.netIs=(p,k)=>k==='sharp'?true:net1(p,k);const hi=svtLenO(wv);window.netIs=(p,k)=>k==='sharp'?false:net1(p,k);const lo=svtLenO(wv);window.netIs=net1;
    ok(hi>=lo&&hi<=100&&lo>=0,'NPC picks «Hỏi lén» by nết (sharp '+hi+' ≥ plain '+lo+')');

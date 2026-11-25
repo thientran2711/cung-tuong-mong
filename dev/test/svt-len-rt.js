@@ -46,7 +46,8 @@ const fail = [], note = [];
   /* «Cung nhân» sits under the «Hậu cung» group tab (j84 TABS + its sub-tab row .ksubb) on the phone bar */
   let sub = await btn(/^Cung nhân$/);
   if (!sub) { const g = await btn(/^Hậu cung$/); if (!g || !(await rt.tap(g, { screen: 'tabs', label: 'Hậu cung' }))) { fail.push('tab «Hậu cung» dead/missing'); await shot('tabs'); return done(b) } await p.waitForTimeout(700); sub = await btn(/^Cung nhân$/) }
-  if (!sub || !(await rt.tap(sub, { screen: 'tabs', label: 'Cung nhân' }))) { fail.push('tab «Cung nhân» dead/missing'); await shot('tabs'); return done(b) }
+  const onStaff = () => p.evaluate(() => [...document.querySelectorAll('#panel .psep')].some(e => /Cung khác/.test(e.textContent)));
+  if (!(await onStaff()) && (!sub || !(await rt.tap(sub, { screen: 'tabs', label: 'Cung nhân' })))) { fail.push('tab «Cung nhân» dead/missing'); await shot('tabs'); return done(b) }
   await p.waitForTimeout(800);
   /* faces of the «Cung khác» group (another house's servants): tap them one by one until one she has met (the stranger gate) */
   const pis = await p.evaluate(() => { const g = [...document.querySelectorAll('#panel .pgrp')]; const i = g.findIndex(x => /Cung khác/.test((x.querySelector('.psep') || {}).textContent || '')); return i < 0 ? [] : g.slice(i).flatMap(x => [...x.querySelectorAll('.pface')].map(f => f.dataset.pi)) });
@@ -81,6 +82,7 @@ const fail = [], note = [];
   if (st1.len !== st0.len + 1) fail.push('SVT.stat.len ' + st0.len + '→' + st1.len + ' (the tap did not reach svTalk len)');
   if (st1.talk !== st0.talk + 1) fail.push('SVT.stat.talk did not move');
   note.push((st1.refuse > st0.refuse ? 'refused' : 'talked') + ' · log: ' + st1.last);
+  if (st1.refuse === st0.refuse && /không được gì/.test(st1.last)) fail.push('talked (learned) but the result card says «không được gì» (LAW 11 ka-know)');
   if (/bất kính/.test(st1.last)) fail.push('«bất kính» after «Hỏi lén» (no greeting owed)');
   if (errs.length) fail.push('page errors: ' + errs.slice(0, 3).join(' / '));
   note.push('taps ' + JSON.stringify(rt.stats ? rt.stats() : {}));
