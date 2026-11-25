@@ -1,0 +1,5230 @@
+{
+ "job": {
+  "id": "flight2-s6d",
+  "origin": "thd",
+  "road": "thd_tho",
+  "bot": "sens",
+  "seed": 795064746,
+  "dev": "ipad",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "63f87747",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 67,
+  "cap": null,
+  "stuck": 4,
+  "unstick": [
+   {
+    "at": 315,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 322,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 330,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 337,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 344,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 352,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 359,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 583,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 591,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 599,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 606,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 771,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 798,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 984,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1462,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1469,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1483,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1490,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1497,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1856,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1863,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2283,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 2295,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 2470,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 2486,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 2511,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 2524,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 2716,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 2944,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 3295,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 3308,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 3378,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 3399,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 3714,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 3879,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 4064,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 4081,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 4094,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 4107,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 4119,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 4181,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 1280,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 1392,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 837,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 893,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Danh hiệu"
+   },
+   {
+    "at": 998,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1031,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1175,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1210,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 150,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 190,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 317,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 350,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 492,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 526,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 684,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 750,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 925,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 981,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Nhờ thái giám tìm thú nuôi"
+   },
+   {
+    "at": 1070,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1129,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Danh hiệu"
+   },
+   {
+    "at": 1143,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 2638,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+   },
+   {
+    "at": 2645,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+   },
+   {
+    "at": 2685,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+   },
+   {
+    "at": 1382,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 1564,
+    "lvl": 2,
+    "layer": "#kg82",
+    "title": ""
+   },
+   {
+    "at": 1652,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+   },
+   {
+    "at": 1674,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+   },
+   {
+    "at": 1679,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người."
+   },
+   {
+    "at": 1906,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người."
+   },
+   {
+    "at": 1912,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người."
+   },
+   {
+    "at": 1919,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người."
+   },
+   {
+    "at": 1926,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người."
+   },
+   {
+    "at": 1933,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người."
+   },
+   {
+    "at": 1939,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người."
+   }
+  ],
+  "slice": null,
+  "areaTaps": 9352,
+  "taps0": 0,
+  "resumed": [
+   {
+    "at": "2026-11-25T07:17:52.990Z",
+    "buoi": 9,
+    "from": "2026-11-25T07:17:44.566Z"
+   },
+   {
+    "at": "2026-11-25T09:06:55.007Z",
+    "buoi": 185,
+    "from": "2026-11-25T08:27:46.813Z"
+   },
+   {
+    "at": "2026-11-25T09:37:15.018Z",
+    "buoi": 231,
+    "from": "2026-11-25T09:37:08.768Z"
+   },
+   {
+    "at": "2026-11-25T09:51:37.153Z",
+    "buoi": 247,
+    "from": "2026-11-25T09:51:30.289Z"
+   },
+   {
+    "at": "2026-11-25T10:14:58.557Z",
+    "buoi": 266,
+    "from": "2026-11-25T10:14:50.779Z"
+   },
+   {
+    "at": "2026-11-25T10:40:28.886Z",
+    "buoi": 289,
+    "from": "2026-11-25T10:40:22.097Z"
+   },
+   {
+    "at": "2026-11-25T11:01:49.148Z",
+    "buoi": 335,
+    "from": "2026-11-25T11:01:24.051Z"
+   },
+   {
+    "at": "2026-11-25T11:22:45.171Z",
+    "buoi": 369,
+    "from": "2026-11-25T11:22:10.714Z"
+   },
+   {
+    "at": "2026-11-25T12:11:14.903Z",
+    "buoi": 434,
+    "from": "2026-11-25T12:11:08.415Z"
+   }
+  ],
+  "dlgClose": 249,
+  "infoTaps": 231,
+  "scrolls": 6993,
+  "loops": 22,
+  "dlgScroll": 275,
+  "taps": 913
+ },
+ "life": {
+  "id": "Xuất gia",
+  "type": "end",
+  "fate": "Xuất gia làm ni cô",
+  "death": false,
+  "age": 20,
+  "year": 3,
+  "rank": 0
+ },
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "dead|close button has no effect: .dlg «Tâm trạng · Tần Lương Vân Yên» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tâm trạng · Tần Lương Vân Yên» «Lui»",
+   "n": 1,
+   "at": 96,
+   "shot": "/home/user/out6d/shots-flight2-s6d/noeffect-1795591168516.png"
+  },
+  {
+   "k": "dead|close button has no effect: .dlg «Tâm trạng · Quý phi Mộ Dung Hàm Yên» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tâm trạng · Quý phi Mộ Dung Hàm Yên» «Lui»",
+   "n": 1,
+   "at": 112,
+   "shot": "/home/user/out6d/shots-flight2-s6d/noeffect-1795591185135.png"
+  },
+  {
+   "k": "dead|close button has no effect: .dlg «Tâm trạng · Phi Điền Tịch Nhan» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tâm trạng · Phi Điền Tịch Nhan» «Lui»",
+   "n": 1,
+   "at": 121,
+   "shot": "/home/user/out6d/shots-flight2-s6d/noeffect-1795591193991.png"
+  },
+  {
+   "k": "dead|close button has no effect: .dlg «Lịch tháng» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Lịch tháng» «Lui»",
+   "n": 1,
+   "at": 754,
+   "shot": "/home/user/out6d/shots-flight2-s6d/noeffect-1795591826624.png"
+  },
+  {
+   "k": "dead|close button has no effect: .dlg «Tin báo» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tin báo» «Lui»",
+   "n": 1,
+   "at": 2495,
+   "shot": "/home/user/out6d/shots-flight2-s6d/noeffect-1795593567745.png"
+  },
+  {
+   "k": "js|page error: f.rk.split is not a function",
+   "type": "js",
+   "msg": "page error: f.rk.split is not a function",
+   "n": 1,
+   "at": 190
+  },
+  {
+   "k": "stuck|no progress 15 min on .dlg «Tin báo»",
+   "type": "stuck",
+   "msg": "no progress 15 min on .dlg «Tin báo»",
+   "n": 4,
+   "at": 1280,
+   "shot": "/home/user/out6d/shots-flight2-s6d/stuck-1.png",
+   "save": "/home/user/out6d/shots-flight2-s6d/stuck-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 24,
+    "w": 0,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   },
+   "buttons": [
+    "Để ta xemTốnkhôngĐượckhông",
+    "Để sauTốnkhôngĐượckhông"
+   ]
+  },
+  {
+   "k": "game|dialog queue holds 20 copies of «Tâm trạng · Quý nhân Đường Hân Duyệt» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 20 copies of «Tâm trạng · Quý nhân Đường Hân Duyệt» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 68,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 26,
+    "w": 2,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 17 copies of «Tâm trạng · Quý nhân Đường Hân Duyệt» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 17 copies of «Tâm trạng · Quý nhân Đường Hân Duyệt» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 73,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 26,
+    "w": 2,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 12 copies of «Tâm trạng · Quý nhân Phó Ngọc Huyền» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 12 copies of «Tâm trạng · Quý nhân Phó Ngọc Huyền» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 86,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 26,
+    "w": 2,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 12 copies of «Tâm trạng · Quý nhân Đường Hân Duyệt» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 12 copies of «Tâm trạng · Quý nhân Đường Hân Duyệt» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 95,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 26,
+    "w": 2,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 6 copies of «Tâm trạng · Quý nhân Phó Ngọc Huyền» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 6 copies of «Tâm trạng · Quý nhân Phó Ngọc Huyền» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 102,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 26,
+    "w": 2,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 8 copies of «Tâm trạng · Quý nhân Đường Hân Duyệt» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 8 copies of «Tâm trạng · Quý nhân Đường Hân Duyệt» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 110,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 26,
+    "w": 2,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 5 copies of «Tâm trạng · Quý nhân Đường Hân Duyệt» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 5 copies of «Tâm trạng · Quý nhân Đường Hân Duyệt» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 115,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 26,
+    "w": 2,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "n": 12,
+   "at": 837,
+   "shot": "/home/user/out6d/shots-flight2-s6d/loop-1.png",
+   "dump": "/home/user/out6d/shots-flight2-s6d/loop-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 29,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   },
+   "buttons": [
+    "Ô lưu",
+    "Xem bản thân",
+    "Sắc50Tài63Tâm cơ34Đức73Danh2Sủng0",
+    "Bạc59Sức100/100",
+    "Buổi tối, còn 0 khắc",
+    "Lãnh cung",
+    "mưa rào",
+    "Quẻ Trung (Con cái)",
+    "Tâm trạngBình thản-6",
+    "Tin báo",
+    "Về Trường Môn viện",
+    "Phế phi · lãnh cungLiêu Ngọc Thù"
+   ],
+   "trace": [
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «mưa rào»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hoàng tự»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm trạngBình thản-6»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Người lạ»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Người lạ»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Người được sai đi»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mục tiêu chương (có mới)»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tin báo: 1 tin mới»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Phế phi · lãnh cungLiêu Ngọc Thù»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hậu cung»"
+   ]
+  },
+  {
+   "k": "game|dialog queue holds 3 copies of «Tin chờ người sai đi» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 3 copies of «Tin chờ người sai đi» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 883,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 29,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on .dlg «Danh hiệu»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on .dlg «Danh hiệu»",
+   "n": 2,
+   "at": 893,
+   "shot": "/home/user/out6d/shots-flight2-s6d/loop-2.png",
+   "dump": "/home/user/out6d/shots-flight2-s6d/loop-2-dump.json",
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 29,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   },
+   "buttons": [
+    "Lui",
+    "Mục tiêu",
+    "Danh hiệu 2/35",
+    "Thiên mệnh",
+    "Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúchọn một: Thêm Sủng hay Sủng d",
+    "Đeo «Khúc nhạc tri âm»TốnkhôngĐượckhôngGhi chúchọn một: Thêm Sắc hay Phi tần quý mến!",
+    "Tháo danh hiệuTốnkhôngĐượcSủng +1"
+   ],
+   "trace": [
+    ".dlg «Tin chờ người sai đi» «Lui»",
+    ".dlg «Tin chờ người sai đi» «Lui»",
+    ".dlg «Tin báo» «Lui»",
+    ".dlg «Chương 4 · Danh hiệu Tài nữ» «Danh hiệu 2/35»",
+    ".dlg «Danh hiệu» «Mục tiêu»",
+    ".dlg «Chương 4 · Danh hiệu Tài nữ» «Mục tiêu»",
+    ".dlg «Chương 4 · Danh hiệu Tài nữ» «Mục tiêu»",
+    ".dlg «Chương 4 · Danh hiệu Tài nữ» «Mục tiêu»",
+    ".dlg «Chương 4 · Danh hiệu Tài nữ» «Thiên mệnh»",
+    ".dlg «Thiên mệnh» «Mục tiêu»",
+    ".dlg «Chương 4 · Danh hiệu Tài nữ» «Danh hiệu 2/35»",
+    ".dlg «Danh hiệu» «Thiên mệnh»",
+    ".dlg «Thiên mệnh» «Danh hiệu 2/35»",
+    ".dlg «Danh hiệu» «Mục tiêu»",
+    ".dlg «Chương 4 · Danh hiệu Tài nữ» «Danh hiệu 2/35»",
+    ".dlg «Danh hiệu» «Thiên mệnh»",
+    ".dlg «Thiên mệnh» «Danh hiệu 2/35»",
+    ".dlg «Danh hiệu» «Danh hiệu 2/35»",
+    ".dlg «Danh hiệu» «Thiên mệnh»",
+    ".dlg «Thiên mệnh» «Danh hiệu 2/35»"
+   ]
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on .dlg «Lịch tháng»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on .dlg «Lịch tháng»",
+   "n": 1,
+   "at": 1210,
+   "shot": "/home/user/out6d/shots-flight2-s6d/loop-6.png",
+   "dump": null,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 30,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   },
+   "buttons": [
+    "Lui",
+    "Tháng trước",
+    "Tháng sau",
+    "mồng 1: Lĩnh bổng lộc (lãnh cung)",
+    "mồng 2",
+    "mồng 3",
+    "mồng 4",
+    "mồng 5",
+    "mồng 6",
+    "mồng 7",
+    "mồng 8",
+    "mồng 9"
+   ],
+   "trace": [
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «mưa rào»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Kính»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Buổi tối, còn 4 khắc»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc66Sức89/100»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tác phẩm»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «1Cung nhân»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Túi đồ»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Y phục 2»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách giải »",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Nghỉ ngơi 1/1»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»",
+    ".dlg «Lịch tháng» «mồng 2»",
+    ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»",
+    ".dlg «Lịch tháng» «ngày 28»",
+    ".dlg «Lịch tháng» «mồng 5»"
+   ]
+  },
+  {
+   "k": "game|dialog queue holds 4 copies of «Tin báo» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 4 copies of «Tin báo» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 190,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 30,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on .dlg «Tin báo»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on .dlg «Tin báo»",
+   "n": 2,
+   "at": 190,
+   "shot": "/home/user/out6d/shots-flight2-s6d/loop-8.png",
+   "dump": null,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 30,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   },
+   "buttons": [
+    "Lui"
+   ],
+   "trace": [
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tin báo»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc56Sức100/100»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc50Tài63Tâm cơ34Đức73Danh3Sủng0»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc50Tài63Tâm cơ34Đức73Danh3Sủng0»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «1Cung nhân»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Túi đồ»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Chọn chính mình»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hoàng tự»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tin báo»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc56Sức100/100»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Phế phi · lãnh cungMã Liễu Nhi»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao thiệpGiao thiệpĐưa cơm áoRất vữngTốn1 khắc·Bạ»",
+    ".dlg «Tin báo» «Lui»",
+    ".dlg «Tin báo» «Lui»",
+    ".dlg «Tin báo» «Lui»"
+   ]
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on .dlg «Nhờ thái giám tìm thú nuôi»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on .dlg «Nhờ thái giám tìm thú nuôi»",
+   "n": 1,
+   "at": 981,
+   "shot": "/home/user/out6d/shots-flight2-s6d/loop-16.png",
+   "dump": null,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 32,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   },
+   "buttons": [
+    "Lui",
+    "Xem Mèo mướp",
+    "Xem Chó nhỏ lông xù",
+    "Xem Chim họa mi",
+    "Xem Thỏ ngọc",
+    "Xem Cá vàng chậu sứ",
+    "Xem Mèo tuyết",
+    "Xem Sáo nói",
+    "Xem Đôi uyên ương",
+    "Xem Cá chép gấm",
+    "Xem Vẹt ngũ sắc",
+    "Xem Linh miêu mắt ngọc"
+   ],
+   "trace": [
+    ".dlg «Lịch tháng» «mồng 1: Hội Phượng: Lĩnh bổng lộc (lãnh cung)»",
+    ".dlg «Lịch tháng» «ngày 19»",
+    ".dlg «Lịch tháng» «Lui»",
+    ".dlg «Chương 4 · Danh hiệu Tài nữ» «Đi làm: Giữ Sức, chờ dịp xin phục vịTốnkhôngĐượctớ»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Cá vàng chậu sứ»",
+    ".kshdc «Lui»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo mướp»",
+    ".kshdc «Lui»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Cá vàng chậu sứ»",
+    ".kshdc «Lui»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Thỏ ngọc»",
+    ".kshdc «Lui»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Chim họa mi»",
+    ".kshdc «Lui»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo tuyết»",
+    ".kshdc «Lui»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo tuyết»",
+    ".kshdc «Lui»",
+    ".dlg «Nhờ thái giám tìm thú nuôi» «Xem Thỏ ngọc»",
+    ".kshdc «Lui»"
+   ]
+  },
+  {
+   "k": "game|dialog queue holds 2 copies of «Lịch tháng» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 2 copies of «Lịch tháng» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 986,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 32,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.»",
+   "n": 1,
+   "at": 2685,
+   "shot": "/home/user/out6d/shots-flight2-s6d/loop-19.png",
+   "dump": null,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 37,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   },
+   "buttons": [
+    "Ô lưu",
+    "Xem bản thân",
+    "Sắc50Tài63Tâm cơ34Đức76Danh0Sủng3",
+    "Bạc48Sức100/100",
+    "Buổi tối, còn 1 khắc",
+    "Hôm nay mặt mộc",
+    "mưa thu",
+    "Quẻ Thượng (Sức khỏe)",
+    "Tâm trạngPhiền muộn-48",
+    "Về phòng",
+    "Tin báo: 1 tin mới",
+    "Cung nữ thân tín tam đẳngNhư Họa"
+   ],
+   "trace": [
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Có thaiRất thấp»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Chí tônPhi tầnNam nhânCung nhân‹Càn Ninh cungThanh»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Đã biết: 11 tin ›»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Quẻ Thượng (Sức khỏe)»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Chứng cứ 3 ›»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Ngọc Huyền»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Người sau»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Phi tần»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Bổng lộcsau 3 tuần»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Bán Hạ»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «mưa thu»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hành sự»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Nghỉ ngơi 3/5»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Nghỉ ngơiNghỉ ngơiKhóc thầmRất vữngĐóng cửa tẩm cu»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Nghỉ ngơiNghỉ ngơiKhóc thầmRất vữngĐóng cửa tẩm cu»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Nghỉ ngơiNghỉ ngơiKhóc thầmRất vữngĐóng cửa tẩm cu»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+   ],
+   "next": {
+    "dis": true,
+    "q": 6,
+    "mg": false,
+    "qt": [
+     "Chứng cứ về Ý quý nhân Mộ Dung Hàm Yên",
+     "Đã biết về Ý quý nhân Mộ Dung Hàm Yên",
+     "Tin báo",
+     "Tin báo",
+     "Nhờ thái giám tìm thú nuôi",
+     "Tin trong cung buổi này"
+    ],
+    "t": "Sang ngày mới"
+   }
+  },
+  {
+   "k": "game|softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=6: Chứng cứ về Ý quý nhân Mộ Dung Hàm Yên / Đã biết về Ý quý nhân Mộ Dung Hàm Yên / Tin báo / Tin báo / Nhờ thái giám tìm thú nuôi / Tin trong cung buổi này)",
+   "type": "game",
+   "msg": "softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=6: Chứng cứ về Ý quý nhân Mộ Dung Hàm Yên / Đã biết về Ý quý nhân Mộ Dung Hàm Yên / Tin báo / Tin báo / Nhờ thái giám tìm thú nuôi / Tin trong cung buổi này)",
+   "n": 1,
+   "at": 2685,
+   "shot": "/home/user/out6d/shots-flight2-s6d/loop-19.png",
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 37,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "game|dialog scrolled to the end has no close / next button: #kmrew «»",
+   "type": "game",
+   "msg": "dialog scrolled to the end has no close / next button: #kmrew «»",
+   "n": 1,
+   "at": 413,
+   "shot": "/home/user/out6d/shots-flight2-s6d/noclose-1795609087321.png",
+   "buttons": [
+    "Thường",
+    "Thường",
+    "Thường",
+    "Thường",
+    "Thường",
+    "Thường",
+    "Thường",
+    "Thường"
+   ]
+  },
+  {
+   "k": "game|dialog scrolled to the end has no close / next button: .dlg «Có người bán tin»",
+   "type": "game",
+   "msg": "dialog scrolled to the end has no close / next button: .dlg «Có người bán tin»",
+   "n": 1,
+   "at": 1422,
+   "shot": "/home/user/out6d/shots-flight2-s6d/noclose-1795610096823.png",
+   "buttons": [
+    "",
+    "Mua tinTốnBạc -45·1 khắcĐượcnghe một tin thật·đáng giá",
+    "Không muaTốnkhôngĐượckhôngGhi chúkhông biết tin ấy!"
+   ]
+  },
+  {
+   "k": "game|dialog scrolled to the end has no close / next button: #kg82 «»",
+   "type": "game",
+   "msg": "dialog scrolled to the end has no close / next button: #kg82 «»",
+   "n": 1,
+   "at": 1440,
+   "shot": "/home/user/out6d/shots-flight2-s6d/noclose-1795610114856.png",
+   "buttons": [
+    "Quay lại",
+    "ThườngVáy sa xanh ngọc",
+    "ThườngThan liễu",
+    "ThườngYên chi giấy",
+    "ThườngPhấn gạo",
+    "ThườngVải bông",
+    "ThườngYên chi giấy",
+    "ThườngPhấn gạo"
+   ]
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on #kg82 «»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on #kg82 «»",
+   "n": 1,
+   "at": 1564,
+   "shot": "/home/user/out6d/shots-flight2-s6d/loop-20.png",
+   "dump": null,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 38,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   },
+   "buttons": [
+    "Quay lại",
+    "Đánh xong"
+   ],
+   "trace": [
+    "#kg82 «ThườngThan liễu»",
+    "#kg82 «ThườngThan liễu»",
+    "#kg82 «ThườngThan liễu»",
+    "#kg82 «ThườngVải bông»",
+    "#kg82 «ThườngTrâm hoa lụa»",
+    "#kg82 «ThườngSon sáp»",
+    "#kg82 «ThườngSon sáp»",
+    "#kg82 «ThườngYên chi giấy»",
+    "#kg82 «ThườngThan liễu»",
+    "#kg82 «ThườngVải bông»",
+    "#kg82 «Tinh phẩmVòng ngọc Hòa Điền»",
+    "#kg82 «ThườngPhấn gạo»",
+    "#kg82 «Ra mắt»",
+    "#kg82 «thanh đại»",
+    "#kg82 «ráng chiều»",
+    "#kg82 «san hô»",
+    "#kg82 «ráng chiều»",
+    "#kg82 «nâu nhạt»",
+    "#kg82 «Trang điểmkẻ mày, đánh phấn, chấm son»",
+    "#kg82 «Kẻ xong»"
+   ],
+   "next": {
+    "dis": true,
+    "q": 1,
+    "mg": false,
+    "qt": [
+     "Tin mua được"
+    ],
+    "t": "Sang buổi"
+   }
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+   "n": 1,
+   "at": 1679,
+   "shot": "/home/user/out6d/shots-flight2-s6d/loop-21.png",
+   "dump": null,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 38,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   },
+   "buttons": [
+    "Ô lưu",
+    "Xem bản thân",
+    "Sắc53Tài63Tâm cơ39Đức78Danh1Sủng18",
+    "Bạc31Sức100/100",
+    "Buổi tối, còn 4 khắc",
+    "Hạn lo liệuhết hạn",
+    "Hôm nay mặt mộc",
+    "đêm sương giá",
+    "Quẻ Thượng (Sức khỏe)",
+    "Tâm trạngBình thản-8",
+    "Về phòng",
+    "Tin báo: 20 tin mới"
+   ],
+   "trace": [
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+   ],
+   "next": {
+    "dis": false,
+    "q": 1,
+    "mg": false,
+    "qt": [
+     "Tin trong cung buổi này"
+    ],
+    "t": "Sang ngày mới"
+   }
+  },
+  {
+   "k": "game|softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Tin trong cung buổi này)",
+   "type": "game",
+   "msg": "softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Tin trong cung buổi này)",
+   "n": 1,
+   "at": 1679,
+   "shot": "/home/user/out6d/shots-flight2-s6d/loop-21.png",
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 38,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.»",
+   "n": 1,
+   "at": 1939,
+   "shot": "/home/user/out6d/shots-flight2-s6d/loop-22.png",
+   "dump": null,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 39,
+    "w": 1,
+    "b": 2,
+    "age": 20,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   },
+   "buttons": [
+    "Ô lưu",
+    "Xem bản thân",
+    "Sắc53Tài63Tâm cơ43Đức78Danh8Sủng28",
+    "Bạc9Sức75/100",
+    "Buổi chiều, còn 4 khắc",
+    "Hôm nay mặt mộc",
+    "tuyết nhẹ",
+    "Quẻ Thượng (Mưu kế)",
+    "Tâm trạngBình thản-4",
+    "Về phòng",
+    "Tin báo: 20 tin mới",
+    "Cung nữ thân tín tam đẳngNhư Họa"
+   ],
+   "trace": [
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+   ],
+   "next": {
+    "dis": false,
+    "q": 2,
+    "mg": false,
+    "qt": [
+     "Có người đến",
+     "Y phục dự Tiết Đông chí"
+    ],
+    "t": "Sang buổi"
+   }
+  },
+  {
+   "k": "game|softlock: «Sang buổi» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=2: Có người đến / Y phục dự Tiết Đông chí)",
+   "type": "game",
+   "msg": "softlock: «Sang buổi» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=2: Có người đến / Y phục dự Tiết Đông chí)",
+   "n": 1,
+   "at": 1939,
+   "shot": "/home/user/out6d/shots-flight2-s6d/loop-22.png",
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 39,
+    "w": 1,
+    "b": 2,
+    "age": 20,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  }
+ ],
+ "dead": [
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Ô lưu",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590465042.png",
+   "dev": "ipad",
+   "at": 131,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Xem bản thân",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590471461.png",
+   "dev": "ipad",
+   "at": 138,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Sắc46Tài60Tâm cơ28Đức40Danh5Sủng5",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590477909.png",
+   "dev": "ipad",
+   "at": 144,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Bạc80Sức100/100",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590484343.png",
+   "dev": "ipad",
+   "at": 150,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Buổi sáng, còn 4 khắc",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590490792.png",
+   "dev": "ipad",
+   "at": 157,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Chưa điểm trang",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590497209.png",
+   "dev": "ipad",
+   "at": 163,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "trời quang",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590503682.png",
+   "dev": "ipad",
+   "at": 170,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Quẻ Thượng (Tài nghệ)",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590510089.png",
+   "dev": "ipad",
+   "at": 176,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tâm trạngVui vẻ+26",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590516506.png",
+   "dev": "ipad",
+   "at": 183,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Về phòng",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590522942.png",
+   "dev": "ipad",
+   "at": 189,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tin báo: 9 tin mới",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590529391.png",
+   "dev": "ipad",
+   "at": 196,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Cung nữ thân tín tam đẳngNhư Họa",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590535808.png",
+   "dev": "ipad",
+   "at": 202,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Chọn chính mình",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590542206.png",
+   "dev": "ipad",
+   "at": 208,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Lịch tháng",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590548604.png",
+   "dev": "ipad",
+   "at": 215,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Mục tiêu chương (có mới)",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590555025.png",
+   "dev": "ipad",
+   "at": 221,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Người được sai đi (có mới)",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590561472.png",
+   "dev": "ipad",
+   "at": 228,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "1Cung nhân",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590567889.png",
+   "dev": "ipad",
+   "at": 234,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "3Chí tôn",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590574310.png",
+   "dev": "ipad",
+   "at": 240,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tai mắt0",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590580756.png",
+   "dev": "ipad",
+   "at": 247,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Có thaiRất thấp",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590587172.png",
+   "dev": "ipad",
+   "at": 253,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Lật thẻKhông có",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590593587.png",
+   "dev": "ipad",
+   "at": 260,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Ân tình (đêm)0",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590599989.png",
+   "dev": "ipad",
+   "at": 266,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Số lần ân thưởng0",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590606405.png",
+   "dev": "ipad",
+   "at": 273,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Bổng lộcsau 2 tuần",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590612840.png",
+   "dev": "ipad",
+   "at": 279,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Nguy hiểm chung: 11",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590618493.png",
+   "dev": "ipad",
+   "at": 285,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Xét phẩm: thiếu 4",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590624921.png",
+   "dev": "ipad",
+   "at": 291,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tất cả 20/21Giao thiệp 3/3Nghỉ ngơi 3/4Học tập · T",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590631320.png",
+   "dev": "ipad",
+   "at": 297,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Giao thiệp 3/3",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590644085.png",
+   "dev": "ipad",
+   "at": 310,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Nghỉ ngơi 3/4",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590650485.png",
+   "dev": "ipad",
+   "at": 317,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Học tập · Tài nghệ 3/3",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590656886.png",
+   "dev": "ipad",
+   "at": 323,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Lễ nghi 3/3",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590663284.png",
+   "dev": "ipad",
+   "at": 329,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Giao thiệpGiao thiệpĐiểm trangNgồi trước gương: ch",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590669685.png",
+   "dev": "ipad",
+   "at": 336,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590676100.png",
+   "dev": "ipad",
+   "at": 342,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Hành sự",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590682501.png",
+   "dev": "ipad",
+   "at": 349,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Dư đồ",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590688932.png",
+   "dev": "ipad",
+   "at": 355,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Hậu cung",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590695368.png",
+   "dev": "ipad",
+   "at": 362,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Giao tình",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590701800.png",
+   "dev": "ipad",
+   "at": 368,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Hoàng tự",
+   "cover": "button.kbtn.kmend in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590708217.png",
+   "dev": "ipad",
+   "at": 374,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tư trang",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590714652.png",
+   "dev": "ipad",
+   "at": 381,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tài nghệ",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590721050.png",
+   "dev": "ipad",
+   "at": 387,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Mệnh truyện",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590727464.png",
+   "dev": "ipad",
+   "at": 394,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Sắc46Tài60Tâm cơ28Đức39Danh6Sủng1",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590912349.png",
+   "dev": "ipad",
+   "at": 579,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "hoa đào bay",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590919788.png",
+   "dev": "ipad",
+   "at": 586,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Quẻ Hạ (Giao thiệp)",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590927193.png",
+   "dev": "ipad",
+   "at": 594,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tâm trạngBình thản+13",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590934469.png",
+   "dev": "ipad",
+   "at": 601,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tin báo: 11 tin mới",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590941898.png",
+   "dev": "ipad",
+   "at": 608,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Lật thẻThấp",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590949258.png",
+   "dev": "ipad",
+   "at": 616,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Bổng lộcsau 1 tuần",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590956788.png",
+   "dev": "ipad",
+   "at": 623,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Nguy hiểm chung: 24",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590962838.png",
+   "dev": "ipad",
+   "at": 629,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Chí tônPhi tầnNam nhânCung nhân‹Hoàng thượngThái h",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590970411.png",
+   "dev": "ipad",
+   "at": 637,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Chí tôn",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590977872.png",
+   "dev": "ipad",
+   "at": 644,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Phi tần",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590985049.png",
+   "dev": "ipad",
+   "at": 652,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Nam nhân",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590992451.png",
+   "dev": "ipad",
+   "at": 659,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Cung nhân",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795590999701.png",
+   "dev": "ipad",
+   "at": 666,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Hoàng thượng",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795591007033.png",
+   "dev": "ipad",
+   "at": 673,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Thái hậu",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795591014482.png",
+   "dev": "ipad",
+   "at": 681,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "?",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795591022008.png",
+   "dev": "ipad",
+   "at": 688,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Xem thêm",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795591029414.png",
+   "dev": "ipad",
+   "at": 696,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Gặp ngài ban ngày 2/5",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795591039908.png",
+   "dev": "ipad",
+   "at": 706,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Việc hôm nay",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795591047210.png",
+   "dev": "ipad",
+   "at": 714,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Điều ngài thích",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795591054601.png",
+   "dev": "ipad",
+   "at": 721,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Giao thiệpGiao thiệpXin yết kiến ở Cần Chính điệnH",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/out6d/shots-flight2-s6d/dead-ipad-1795591062122.png",
+   "dev": "ipad",
+   "at": 728,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tâm trạng · Tần Lương Vân Yên»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/out6d/shots-flight2-s6d/noeffect-1795591168516.png",
+   "at": 96,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 3,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tâm trạng · Quý phi Mộ Dung Hàm Yên»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/out6d/shots-flight2-s6d/noeffect-1795591185135.png",
+   "at": 112,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 3,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tâm trạng · Phi Điền Tịch Nhan»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/out6d/shots-flight2-s6d/noeffect-1795591193991.png",
+   "at": 121,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 3,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Lịch tháng»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/out6d/shots-flight2-s6d/noeffect-1795591826624.png",
+   "at": 754,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 3,
+    "w": 0,
+    "b": 3,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tin báo»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/out6d/shots-flight2-s6d/noeffect-1795593567745.png",
+   "at": 2495,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 9,
+    "w": 2,
+    "b": 3,
+    "age": 18,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  }
+ ],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 391103,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 100,
+   "year": 1,
+   "chars": 560780,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 150,
+   "year": 2,
+   "chars": 590982,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 185,
+   "year": null,
+   "chars": 763353,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 231,
+   "year": null,
+   "chars": 889162,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 247,
+   "year": null,
+   "chars": 826247,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 266,
+   "year": null,
+   "chars": 899787,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 289,
+   "year": null,
+   "chars": 931763,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 335,
+   "year": null,
+   "chars": 1053754,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 369,
+   "year": null,
+   "chars": 1118304,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 419,
+   "year": 3,
+   "chars": 1092648,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 434,
+   "year": null,
+   "chars": 1093328,
+   "key": "hclh-save-v2-1"
+  }
+ ],
+ "buoi": 471,
+ "steps": 41151,
+ "status": [
+  "STATUS flight2-s6d · buổi 165 · year 2 · rank 0 · bugs 5 · stuck 0 · dead buttons 67"
+ ],
+ "_snapAt": 1795610596686,
+ "trace": [
+  [
+   1650,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1651,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1651,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1651,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1651,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1652,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1652,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1652,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1653,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1653,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1653,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1654,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1654,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1654,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1654,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1655,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1655,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1655,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1655,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1656,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1656,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1656,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1656,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1657,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1657,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1657,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1657,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1658,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1658,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1658,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1658,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1659,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1659,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1659,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1659,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1660,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1660,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1660,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1660,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1661,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1661,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1661,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1661,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1662,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1662,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1662,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1662,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1663,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1663,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1663,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1663,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1664,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1664,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1664,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1664,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1665,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1665,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1665,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1665,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1666,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1666,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1666,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1666,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1667,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1667,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1667,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1667,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1668,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1668,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1668,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1668,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1669,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1669,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1669,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1669,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1670,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1670,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1670,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1670,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1670,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1671,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1671,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1671,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1671,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1672,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1672,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1672,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1672,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1673,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1673,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1673,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1673,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1674,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1674,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1675,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1675,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1675,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1675,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1676,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1676,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1676,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1676,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1677,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1677,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1677,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1677,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1678,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1678,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1678,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1678,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1679,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1679,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   1680,
+   "page «unstick Hậu cung»"
+  ],
+  [
+   1683,
+   "title (unstick reload) «chơi một mình»"
+  ],
+  [
+   1685,
+   "title (unstick reload) «chơi tiếp|tiếp tục|vào sổ|^tải$»"
+  ],
+  [
+   1689,
+   ".dlg «Kính sự phòng» «tạmGiữ chân Hoàng thượngKhó lườngTốnkhôngĐượcdựa v»"
+  ],
+  [
+   1689,
+   ".dlg «Kính sự phòng» «tạmGiữ chân Hoàng thượngKhó lườngTốnkhôngĐượcdựa v»"
+  ],
+  [
+   1690,
+   ".dlg «Kính sự phòng» «tạmGiữ chân Hoàng thượngKhó lườngTốnkhôngĐượcdựa v»"
+  ],
+  [
+   1690,
+   ".dlg «Kính sự phòng» «tạmGiữ chân Hoàng thượngKhó lườngTốnkhôngĐượcdựa v»"
+  ],
+  [
+   1691,
+   ".dlg «Kính sự phòng» «Lui»"
+  ],
+  [
+   1693,
+   ".kmov «Chuẩn bị thị tẩm»"
+  ],
+  [
+   1695,
+   "DEAD Chuẩn bị thị tẩm"
+  ],
+  [
+   1696,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1698,
+   ".dlg «Kính sự phòng báo tin» «Cáo bệnhRất vữngTốnkhôngĐượcdưỡng sức, nghỉ trọn m»"
+  ],
+  [
+   1698,
+   ".dlg «Kính sự phòng báo tin» «Tiến cử Cung nữ thân tín tam đẳng Như Họa hầu thay»"
+  ],
+  [
+   1698,
+   ".dlg «Kính sự phòng báo tin» «Cáo bệnhRất vữngTốnkhôngĐượcdưỡng sức, nghỉ trọn m»"
+  ],
+  [
+   1699,
+   ".dlg «Kính sự phòng báo tin» «Tiến cử Cung nữ thân tín tam đẳng Như Họa hầu thay»"
+  ],
+  [
+   1699,
+   ".dlg «Kính sự phòng báo tin» «Cáo bệnhRất vữngTốnkhôngĐượcdưỡng sức, nghỉ trọn m»"
+  ],
+  [
+   1700,
+   ".dlg «Kính sự phòng báo tin» «Cáo bệnhRất vữngTốnkhôngĐượcdưỡng sức, nghỉ trọn m»"
+  ],
+  [
+   1708,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1713,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   1713,
+   ".dlg «Lui»"
+  ],
+  [
+   1714,
+   "#kmrew «Thường»"
+  ],
+  [
+   1715,
+   ".dlg «Lui»"
+  ],
+  [
+   1716,
+   "#kmrew «ThườngThan bạc sươngĐốt sưởi: mùa đông Sức +6, mùa»"
+  ],
+  [
+   1716,
+   ".dlg «Lui»"
+  ],
+  [
+   1718,
+   "#kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»"
+  ],
+  [
+   1718,
+   ".dlg «Lui»"
+  ],
+  [
+   1720,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   1720,
+   ".dlg «Lui»"
+  ],
+  [
+   1721,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   1722,
+   ".dlg «Lui»"
+  ],
+  [
+   1723,
+   "#kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»"
+  ],
+  [
+   1723,
+   ".dlg «Lui»"
+  ],
+  [
+   1725,
+   "#kmrew «Thường»"
+  ],
+  [
+   1725,
+   ".dlg «Lui»"
+  ],
+  [
+   1727,
+   "#kmrew «Thường»"
+  ],
+  [
+   1727,
+   ".dlg «Lui»"
+  ],
+  [
+   1728,
+   "#kmrew «Thường»"
+  ],
+  [
+   1729,
+   ".dlg «Lui»"
+  ],
+  [
+   1730,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   1730,
+   ".dlg «Lui»"
+  ],
+  [
+   1732,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   1732,
+   ".dlg «Lui»"
+  ],
+  [
+   1734,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   1734,
+   ".dlg «Lui»"
+  ],
+  [
+   1735,
+   "#kmrew «ThườngYên chi giấyHộp phấn má dùng khi điểm trang »"
+  ],
+  [
+   1736,
+   ".dlg «Lui»"
+  ],
+  [
+   1737,
+   "#kmrew «ThườngPhấn gạoHộp phấn mắt dùng khi điểm trang: dù»"
+  ],
+  [
+   1737,
+   ".dlg «Lui»"
+  ],
+  [
+   1739,
+   "#kmrew «ThườngVải bôngMay áo: váy sa xanh ngọc (Y phục, Sắ»"
+  ],
+  [
+   1739,
+   ".dlg «Lui»"
+  ],
+  [
+   1741,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   1741,
+   ".dlg «Lui»"
+  ],
+  [
+   1742,
+   "#kmrew «ThườngThan bạc sươngĐốt sưởi: mùa đông Sức +6, mùa»"
+  ],
+  [
+   1743,
+   ".dlg «Lui»"
+  ],
+  [
+   1744,
+   "#kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»"
+  ],
+  [
+   1744,
+   ".dlg «Lui»"
+  ],
+  [
+   1746,
+   "#kmrew «Nhận»"
+  ],
+  [
+   1748,
+   "DEAD ThườngPhấn gạoHộp phấn mắt dùng khi điểm trang: dù"
+  ],
+  [
+   1748,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1748,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1749,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1749,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1749,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1751,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1753,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»"
+  ],
+  [
+   1754,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   1755,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc binh thư, »"
+  ],
+  [
+   1756,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   1757,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Xét phẩm: thiếu 2»"
+  ],
+  [
+   1757,
+   ".dlg «Xét phẩm cuối tháng · Thường tại» «Lui»"
+  ],
+  [
+   1759,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệMúa trong yến »"
+  ],
+  [
+   1760,
+   ".dlg «Ra ngoài khi mặc trung y?» «Vẫn điTốnDanh -2Đượckhông»"
+  ],
+  [
+   1762,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   1764,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   1764,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1769,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1769,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1769,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1770,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1770,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1770,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1772,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1774,
+   ".dlg «Bổng lộc tháng mười» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1774,
+   ".dlg «Điềm báo» «Lui»"
+  ],
+  [
+   1776,
+   ".dlg «Đại hàn, tuyết lớn» «Bỏ bạc mua thêm thanTốnBạc -20Đượcqua mùa rét yên »"
+  ],
+  [
+   1780,
+   ".dlg «Đại lễ tế Giao» «Xin cho các cung nhỏ ăn chay nhẹTốnDanh -3ĐượcSức »"
+  ],
+  [
+   1781,
+   ".dlg «Đại hàn, tuyết lớn» «Tâu xin cung dưới được sưởi chungTốnkhôngĐượcSủng »"
+  ],
+  [
+   1782,
+   ".dlg «Thỉnh bình an mạch» «Lui»"
+  ],
+  [
+   1784,
+   ".dlg «Phụ tuyến · Tân quân lập uy · Chương 5 · Hồi 2/2» «Góp bạc may áo rétRất vữngTốnBạc -25Đượcthêm thể d»"
+  ],
+  [
+   1785,
+   ".dlg «Tiết Đông chí · Lời mời: Thi gói sủi cảo» «Không dựRất vữngTốnkhôngĐượckhôngGợi ýkhông được m»"
+  ],
+  [
+   1786,
+   ".dlg «Đại lễ tế Giao» «Lui»"
+  ],
+  [
+   1788,
+   ".dlg «Quá hạn lo liệu» «Lui»"
+  ],
+  [
+   1790,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc binh thư, »"
+  ],
+  [
+   1791,
+   ".dlg «Danh hiệu mới» «Đeo ngayTốnkhôngĐượckhôngGhi chúchọn một: Thêm Tài»"
+  ],
+  [
+   1792,
+   ".dlg «Đeo «Thư hương»» «Học mau tiếnTốnkhôngĐượcTự học tài nghệ: đôi khi t»"
+  ],
+  [
+   1792,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Học tập · Tài nghệ 2/3»"
+  ],
+  [
+   1793,
+   "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   1861,
+   "DEAD Giao tình"
+  ],
+  [
+   1862,
+   ".kfoc «Tiếp ▸»"
+  ],
+  [
+   1862,
+   ".kfoc «Tiếp ▸»"
+  ],
+  [
+   1862,
+   ".kfoc «Tiếp ▸»"
+  ],
+  [
+   1863,
+   ".kfoc «Hỏi han sức khỏe»"
+  ],
+  [
+   1863,
+   ".kfoc «Tạ lỗi · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1864,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   1864,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   1865,
+   ".kfoc «Mượn son phấn · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1866,
+   ".kfoc «Nhún nhường · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1866,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   1867,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   1868,
+   ".kfoc «Mượn son phấn · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1869,
+   ".kfoc «Mượn son phấn · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1870,
+   ".kfoc «Nhún nhường · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1870,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   1870,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   1872,
+   ".kfoc «Mượn son phấn · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1872,
+   ".kfoc «Hỏi han sức khỏe · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1873,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   1873,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   1874,
+   ".kfoc «Tạ lỗi · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1875,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   1876,
+   ".kfoc «Nhún nhường · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1876,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   1878,
+   ".kfoc «Nhún nhường · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1878,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   1880,
+   ".kfoc «Hỏi han sức khỏe · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1880,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   1881,
+   ".kfoc «Lui»"
+  ],
+  [
+   1883,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Học tập · Tài nghệHọc tập · Tài nghệMúa trong yến »"
+  ],
+  [
+   1885,
+   ".dlg «Ra ngoài khi mặc trung y?» «Vẫn điTốnDanh -2Đượckhông»"
+  ],
+  [
+   1887,
+   ".dlg «Chọn người theo hầu» «Đi một mìnhTốnkhôngĐượcviệc ta làm bên ngoài được »"
+  ],
+  [
+   1888,
+   ".dlg «Ra ngoài khi mặc trung y?» «Ở lạiTốnkhôngĐượckhôngGhi chú(thay y phục trong Tư»"
+  ],
+  [
+   1892,
+   ".kfoc «Lui»"
+  ],
+  [
+   1899,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sắc53Tài63Tâm cơ43Đức78Danh8Sủng28»"
+  ],
+  [
+   1899,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Số lần ân thưởng0»"
+  ],
+  [
+   1900,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1900,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1900,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1900,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1901,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1901,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1901,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1901,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1902,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1902,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1902,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1902,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1903,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1903,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1903,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1903,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1904,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1904,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1904,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1904,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1905,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1905,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1905,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1905,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1906,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1906,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1907,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1907,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1907,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1907,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1908,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1908,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1908,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1908,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1909,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1909,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1909,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1909,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1910,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1910,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1910,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1910,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1911,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1911,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1911,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1911,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1912,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1912,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1912,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1913,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1913,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1913,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1914,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1914,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1914,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1914,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1915,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1915,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1915,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1915,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1916,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1916,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1916,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1916,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1917,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1917,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1917,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1917,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1918,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1918,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1918,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1918,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1919,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1919,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1920,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1920,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1920,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1920,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1921,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1921,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1921,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1921,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1922,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1922,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1922,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1922,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1923,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1923,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1923,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1923,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1924,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1924,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1924,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1924,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1925,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1925,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1925,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1925,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1926,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1926,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1927,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1927,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1927,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1927,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1928,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1928,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1928,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1928,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1929,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1929,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1929,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1929,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1930,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1930,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1930,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1930,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1931,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1931,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1931,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1931,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1932,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1932,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1932,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1932,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1933,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1933,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1934,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1934,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1934,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1934,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1935,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1935,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1935,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1935,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1936,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1936,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1936,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1936,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1937,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1937,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1937,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1937,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1938,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1938,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1938,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1938,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1939,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   1939,
+   "page «unstick Y dược 2/2»"
+  ],
+  [
+   1942,
+   "title (unstick reload) «chơi một mình»"
+  ],
+  [
+   1944,
+   "title (unstick reload) «chơi tiếp|tiếp tục|vào sổ|^tải$»"
+  ],
+  [
+   1946,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   1947,
+   ".dlg «Bổng lộc» «Lui»"
+  ],
+  [
+   1949,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   1949,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ]
+ ],
+ "_ckAt": 1795610609459,
+ "_ckB": 470,
+ "_loopAt": 1795610624370,
+ "rss": [
+  {
+   "buoi": 236,
+   "y": 2,
+   "totalMB": 1888,
+   "rendererMB": 1196
+  },
+  {
+   "buoi": 240,
+   "y": 2,
+   "totalMB": 2256,
+   "rendererMB": 1551
+  },
+  {
+   "buoi": 245,
+   "y": 2,
+   "totalMB": 2245,
+   "rendererMB": 1544
+  },
+  {
+   "buoi": 247,
+   "y": 2,
+   "totalMB": 2185,
+   "rendererMB": 1487
+  },
+  {
+   "buoi": 247,
+   "y": 2,
+   "totalMB": 1843,
+   "rendererMB": 1146
+  },
+  {
+   "buoi": 247,
+   "y": 2,
+   "totalMB": 1534,
+   "rendererMB": 834
+  },
+  {
+   "buoi": 252,
+   "y": 2,
+   "totalMB": 1669,
+   "rendererMB": 1018
+  },
+  {
+   "buoi": 256,
+   "y": 2,
+   "totalMB": 2193,
+   "rendererMB": 1507
+  },
+  {
+   "buoi": 260,
+   "y": 2,
+   "totalMB": 2324,
+   "rendererMB": 1631
+  },
+  {
+   "buoi": 260,
+   "y": 2,
+   "totalMB": 2402,
+   "rendererMB": 1721
+  },
+  {
+   "buoi": 260,
+   "y": 2,
+   "totalMB": 2295,
+   "rendererMB": 1619
+  },
+  {
+   "buoi": 260,
+   "y": 2,
+   "totalMB": 2003,
+   "rendererMB": 1319
+  },
+  {
+   "buoi": 260,
+   "y": 2,
+   "totalMB": 2001,
+   "rendererMB": 1321
+  },
+  {
+   "buoi": 261,
+   "y": 2,
+   "totalMB": 2310,
+   "rendererMB": 1538
+  },
+  {
+   "buoi": 266,
+   "y": 2,
+   "totalMB": 2196,
+   "rendererMB": 1511
+  },
+  {
+   "buoi": 271,
+   "y": 2,
+   "totalMB": 1613,
+   "rendererMB": 954
+  },
+  {
+   "buoi": 276,
+   "y": 2,
+   "totalMB": 2071,
+   "rendererMB": 1393
+  },
+  {
+   "buoi": 281,
+   "y": 2,
+   "totalMB": 2264,
+   "rendererMB": 1564
+  },
+  {
+   "buoi": 285,
+   "y": 2,
+   "totalMB": 1839,
+   "rendererMB": 1156
+  },
+  {
+   "buoi": 285,
+   "y": 2,
+   "totalMB": 1543,
+   "rendererMB": 851
+  },
+  {
+   "buoi": 285,
+   "y": 2,
+   "totalMB": 1423,
+   "rendererMB": 734
+  },
+  {
+   "buoi": 285,
+   "y": 2,
+   "totalMB": 1424,
+   "rendererMB": 736
+  },
+  {
+   "buoi": 285,
+   "y": 2,
+   "totalMB": 1430,
+   "rendererMB": 742
+  },
+  {
+   "buoi": 289,
+   "y": 2,
+   "totalMB": 1853,
+   "rendererMB": 1152
+  },
+  {
+   "buoi": 294,
+   "y": 2,
+   "totalMB": 1541,
+   "rendererMB": 855
+  },
+  {
+   "buoi": 298,
+   "y": 3,
+   "totalMB": 1894,
+   "rendererMB": 1216
+  },
+  {
+   "buoi": 303,
+   "y": 3,
+   "totalMB": 2126,
+   "rendererMB": 1417
+  },
+  {
+   "buoi": 308,
+   "y": 3,
+   "totalMB": 2095,
+   "rendererMB": 1399
+  },
+  {
+   "buoi": 313,
+   "y": 3,
+   "totalMB": 2132,
+   "rendererMB": 1426
+  },
+  {
+   "buoi": 318,
+   "y": 3,
+   "totalMB": 2144,
+   "rendererMB": 1445
+  },
+  {
+   "buoi": 323,
+   "y": 3,
+   "totalMB": 2308,
+   "rendererMB": 1583
+  },
+  {
+   "buoi": 326,
+   "y": 3,
+   "totalMB": 2454,
+   "rendererMB": 1731
+  },
+  {
+   "buoi": 330,
+   "y": 3,
+   "totalMB": 2561,
+   "rendererMB": 1834
+  },
+  {
+   "buoi": 335,
+   "y": 3,
+   "totalMB": 2672,
+   "rendererMB": 1945
+  },
+  {
+   "buoi": 340,
+   "y": 3,
+   "totalMB": 1500,
+   "rendererMB": 837
+  },
+  {
+   "buoi": 345,
+   "y": 3,
+   "totalMB": 2134,
+   "rendererMB": 1459
+  },
+  {
+   "buoi": 348,
+   "y": 3,
+   "totalMB": 2274,
+   "rendererMB": 1581
+  },
+  {
+   "buoi": 352,
+   "y": 3,
+   "totalMB": 2411,
+   "rendererMB": 1722
+  },
+  {
+   "buoi": 356,
+   "y": 3,
+   "totalMB": 2435,
+   "rendererMB": 1742
+  },
+  {
+   "buoi": 361,
+   "y": 3,
+   "totalMB": 2528,
+   "rendererMB": 1826
+  },
+  {
+   "buoi": 366,
+   "y": 3,
+   "totalMB": 2770,
+   "rendererMB": 2068
+  },
+  {
+   "buoi": 369,
+   "y": 3,
+   "totalMB": 2177,
+   "rendererMB": 1491
+  },
+  {
+   "buoi": 374,
+   "y": 3,
+   "totalMB": 1871,
+   "rendererMB": 1171,
+   "heapMB": 133,
+   "dom": 987,
+   "q": 0,
+   "lsK": 1310
+  },
+  {
+   "buoi": 379,
+   "y": 3,
+   "totalMB": 2122,
+   "rendererMB": 1395,
+   "heapMB": 133,
+   "dom": 1242,
+   "q": 1,
+   "lsK": 1310
+  },
+  {
+   "buoi": 384,
+   "y": 3,
+   "totalMB": 2152,
+   "rendererMB": 1435,
+   "heapMB": 133,
+   "dom": 1505,
+   "q": 0,
+   "lsK": 1310
+  },
+  {
+   "buoi": 389,
+   "y": 3,
+   "totalMB": 2313,
+   "rendererMB": 1583,
+   "heapMB": 133,
+   "dom": 1417,
+   "q": 8,
+   "lsK": 1310
+  },
+  {
+   "buoi": 390,
+   "y": 3,
+   "totalMB": 2226,
+   "rendererMB": 1526,
+   "heapMB": 133,
+   "dom": 2039,
+   "q": 1,
+   "lsK": 1310
+  },
+  {
+   "buoi": 390,
+   "y": 3,
+   "totalMB": 1948,
+   "rendererMB": 1244,
+   "heapMB": 133,
+   "dom": 2039,
+   "q": 1,
+   "lsK": 1310
+  },
+  {
+   "buoi": 390,
+   "y": 3,
+   "totalMB": 1804,
+   "rendererMB": 1099,
+   "heapMB": 133,
+   "dom": 2039,
+   "q": 1,
+   "lsK": 1310
+  },
+  {
+   "buoi": 390,
+   "y": 3,
+   "totalMB": 1813,
+   "rendererMB": 1110,
+   "heapMB": 133,
+   "dom": 2039,
+   "q": 1,
+   "lsK": 1310
+  },
+  {
+   "buoi": 390,
+   "y": 3,
+   "totalMB": 1818,
+   "rendererMB": 1115,
+   "heapMB": 133,
+   "dom": 2039,
+   "q": 1,
+   "lsK": 1310
+  },
+  {
+   "buoi": 395,
+   "y": 3,
+   "totalMB": 2350,
+   "rendererMB": 1620,
+   "heapMB": 133,
+   "dom": 1345,
+   "q": 4,
+   "lsK": 1316
+  },
+  {
+   "buoi": 400,
+   "y": 3,
+   "totalMB": 2438,
+   "rendererMB": 1716,
+   "heapMB": 150,
+   "dom": 1669,
+   "q": 0,
+   "lsK": 1322
+  },
+  {
+   "buoi": 403,
+   "y": 3,
+   "totalMB": 2353,
+   "rendererMB": 1639,
+   "heapMB": 150,
+   "dom": 2717,
+   "q": 0,
+   "lsK": 1322
+  },
+  {
+   "buoi": 403,
+   "y": 3,
+   "totalMB": 1538,
+   "rendererMB": 822,
+   "heapMB": 150,
+   "dom": 2724,
+   "q": 0,
+   "lsK": 1322
+  },
+  {
+   "buoi": 408,
+   "y": 3,
+   "totalMB": 2031,
+   "rendererMB": 1302,
+   "heapMB": 150,
+   "dom": 2513,
+   "q": 1,
+   "lsK": 1322
+  },
+  {
+   "buoi": 408,
+   "y": 3,
+   "totalMB": 1647,
+   "rendererMB": 929,
+   "heapMB": 150,
+   "dom": 2555,
+   "q": 0,
+   "lsK": 1322
+  },
+  {
+   "buoi": 408,
+   "y": 3,
+   "totalMB": 1547,
+   "rendererMB": 829,
+   "heapMB": 150,
+   "dom": 2555,
+   "q": 0,
+   "lsK": 1322
+  },
+  {
+   "buoi": 413,
+   "y": 3,
+   "totalMB": 2065,
+   "rendererMB": 1346,
+   "heapMB": 150,
+   "dom": 2386,
+   "q": 0,
+   "lsK": 1322
+  },
+  {
+   "buoi": 417,
+   "y": 3,
+   "totalMB": 2156,
+   "rendererMB": 1431,
+   "heapMB": 150,
+   "dom": 2668,
+   "q": 0,
+   "lsK": 1300
+  },
+  {
+   "buoi": 422,
+   "y": 3,
+   "totalMB": 2462,
+   "rendererMB": 1732,
+   "heapMB": 215,
+   "dom": 3036,
+   "q": 1,
+   "lsK": 1300
+  },
+  {
+   "buoi": 424,
+   "y": 3,
+   "totalMB": 2454,
+   "rendererMB": 1646,
+   "heapMB": 215,
+   "dom": 798,
+   "q": 3,
+   "lsK": 1301
+  },
+  {
+   "buoi": 429,
+   "y": 3,
+   "totalMB": 2379,
+   "rendererMB": 1624,
+   "heapMB": 215,
+   "dom": 2105,
+   "q": 0,
+   "lsK": 1301
+  },
+  {
+   "buoi": 434,
+   "y": 3,
+   "totalMB": 2297,
+   "rendererMB": 1550,
+   "heapMB": 215,
+   "dom": 4139,
+   "q": 0,
+   "lsK": 1301
+  },
+  {
+   "buoi": 439,
+   "y": 3,
+   "totalMB": 2126,
+   "rendererMB": 1442,
+   "heapMB": 104,
+   "dom": 2290,
+   "q": 0,
+   "lsK": 1301
+  },
+  {
+   "buoi": 444,
+   "y": 3,
+   "totalMB": 2304,
+   "rendererMB": 1586,
+   "heapMB": 104,
+   "dom": 2400,
+   "q": 5,
+   "lsK": 1301
+  },
+  {
+   "buoi": 447,
+   "y": 3,
+   "totalMB": 2243,
+   "rendererMB": 1540,
+   "heapMB": 104,
+   "dom": 2237,
+   "q": 0,
+   "lsK": 1367
+  },
+  {
+   "buoi": 452,
+   "y": 3,
+   "totalMB": 2290,
+   "rendererMB": 1548,
+   "heapMB": 104,
+   "dom": 1348,
+   "q": 3,
+   "lsK": 1417
+  },
+  {
+   "buoi": 454,
+   "y": 3,
+   "totalMB": 2236,
+   "rendererMB": 1534,
+   "heapMB": 104,
+   "dom": 2045,
+   "q": 1,
+   "lsK": 1417
+  },
+  {
+   "buoi": 454,
+   "y": 3,
+   "totalMB": 1930,
+   "rendererMB": 1229,
+   "heapMB": 104,
+   "dom": 2045,
+   "q": 1,
+   "lsK": 1417
+  },
+  {
+   "buoi": 454,
+   "y": 3,
+   "totalMB": 1790,
+   "rendererMB": 1090,
+   "heapMB": 104,
+   "dom": 2045,
+   "q": 1,
+   "lsK": 1417
+  },
+  {
+   "buoi": 454,
+   "y": 3,
+   "totalMB": 1796,
+   "rendererMB": 1090,
+   "heapMB": 104,
+   "dom": 2045,
+   "q": 1,
+   "lsK": 1417
+  },
+  {
+   "buoi": 454,
+   "y": 3,
+   "totalMB": 1810,
+   "rendererMB": 1105,
+   "heapMB": 125,
+   "dom": 2045,
+   "q": 1,
+   "lsK": 1417
+  },
+  {
+   "buoi": 456,
+   "y": 3,
+   "totalMB": 2018,
+   "rendererMB": 1298,
+   "heapMB": 125,
+   "dom": 1761,
+   "q": 1,
+   "lsK": 1418
+  },
+  {
+   "buoi": 461,
+   "y": 3,
+   "totalMB": 2239,
+   "rendererMB": 1521,
+   "heapMB": 125,
+   "dom": 837,
+   "q": 0,
+   "lsK": 1389
+  },
+  {
+   "buoi": 466,
+   "y": 3,
+   "totalMB": 2300,
+   "rendererMB": 1533,
+   "heapMB": 125,
+   "dom": 2432,
+   "q": 0,
+   "lsK": 1410
+  },
+  {
+   "buoi": 470,
+   "y": 3,
+   "totalMB": 2022,
+   "rendererMB": 1316,
+   "heapMB": 125,
+   "dom": 2297,
+   "q": 2,
+   "lsK": 1410
+  }
+ ],
+ "_started": true,
+ "dumps": [
+  "/home/user/out6d/shots-flight2-s6d/stuck-1-dump.json",
+  "/home/user/out6d/shots-flight2-s6d/stuck-2-dump.json",
+  "/home/user/out6d/shots-flight2-s6d/loop-1-dump.json",
+  "/home/user/out6d/shots-flight2-s6d/loop-2-dump.json",
+  "/home/user/out6d/shots-flight2-s6d/loop-3-dump.json",
+  "/home/user/out6d/shots-flight2-s6d/loop-4-dump.json",
+  "/home/user/out6d/shots-flight2-s6d/loop-5-dump.json",
+  "/home/user/out6d/shots-flight2-s6d/stuck-3-dump.json",
+  "/home/user/out6d/shots-flight2-s6d/stuck-4-dump.json"
+ ],
+ "_momSeen": [
+  "#klife|",
+  ".dlg|Rời lãnh cung",
+  "page|Ngọc Thanh các · Ở đây còn # người.",
+  ".dlg|Bạc",
+  "#modal|Có người đến",
+  ".dlg|Có người đến",
+  "#kxcatch|",
+  ".kne|",
+  "#dawn|",
+  "#dawn|Tổng lược",
+  ".kbk|Tổng lược",
+  ".dlg|Tin trong cung buổi này",
+  ".dlg|Có thai: Rất thấp",
+  ".mapsc|",
+  ".dlg|chiều · còn",
+  "#modal|Kỳ nguyệt sự",
+  ".dlg|Kỳ nguyệt sự",
+  ".kmov|",
+  ".dlg|Kính sự phòng",
+  "#kg82|",
+  ".dlg|Y phục dự Lễ Vu Lan",
+  "#modal|Lễ Vu Lan · Chuyện bên lề hội",
+  ".dlg|Lễ Vu Lan · Chuyện bên lề hội",
+  "#modal|Lễ Vu Lan · Lễ",
+  ".dlg|Lễ Vu Lan · Lễ",
+  ".dlg|Nhờ thái giám tìm thú nuôi",
+  ".kshdc|",
+  ".dlg|Tin báo",
+  "#modal|Lời mời cùng chơi",
+  ".dlg|Lời mời cùng chơi",
+  ".dlg|Ra ngoài khi mặc trung y?",
+  ".dlg|Chọn người theo hầu",
+  "#kmrew|",
+  ".dlg|",
+  ".dlg|Thái hậu ban thưởng",
+  ".dlg|Tai mắt",
+  ".dlg|Kính sự phòng báo tin",
+  ".dlg|Lãnh cung",
+  ".dlg|Điềm báo",
+  ".dlg|Phụ tuyến · Hòa giải Phi Lưu Lục Châu vớ",
+  "page|Trường Môn viện · Gió lùa qua song cửa m",
+  ".dlg|Lịch tháng",
+  ".dlg|Bổng lộc tháng bảy",
+  ".dlg|Lễ tấn phong Quý phi Vương Bán Hạ",
+  ".dlg|Bị lấy trộm",
+  ".dlg|Nội vụ phủ thu đồ",
+  ".dlg|Đồ cũ trở về",
+  ".dlg|Quẻ Hạ · Sức khỏe",
+  ".dlg|Gieo lại quẻ",
+  ".dlg|Y phục dự Tết Trung thu",
+  "#modal|Tết Trung thu · Đặt cược",
+  ".dlg|Tết Trung thu · Đặt cược",
+  ".dlg|Tiết Vạn thọ · Lời mời: Thi hát chúc thọ",
+  ".dlg|Tết Trung thu · Chuyện bên lề hội",
+  ".dlg|Đại lễ sắc lập Thái tử",
+  ".dlg|Quẻ Thượng · Sức khỏe",
+  "#modal|Kỳ ngộ",
+  ".dlg|Kỳ ngộ",
+  "#modal|Hoàng hậu chê dung nhan",
+  ".dlg|Hoàng hậu chê dung nhan",
+  "#modal|Xét phẩm cuối tháng · Thường tại",
+  ".dlg|Bổng lộc",
+  ".dlg|Chương # · Danh hiệu Tài nữ",
+  "#ktut|",
+  ".dlg|Tâu xin nghiệm thân",
+  ".kfoc|",
+  ".dlg|Ta bắt gặp",
+  ".dlg|Bị ép nộp của",
+  ".dlg|Tết Trung thu · Lời mời: Thi làm bánh tr",
+  "#modal|Nội vụ phủ trả đồ",
+  ".dlg|Lời nhận xét",
+  ".dlg|Trốn trong phòng",
+  ".dlg|Khóc suốt đêm",
+  ".dlg|Tâm trạng · Ta",
+  ".dlg|Yến đầy tháng hoàng tử",
+  ".dlg|Phụ tuyến · Thử trà cống trước buổi chầu",
+  "#modal|Có người bán tin",
+  ".dlg|Có người bán tin",
+  "#modal|Chuẩn bị thị tẩm",
+  ".dlg|Chuẩn bị thị tẩm",
+  "#modal|Đêm thị tẩm",
+  ".dlg|Đêm thị tẩm",
+  ".dlg|Bổng lộc tháng tám",
+  "page|Chung Tú cung · Minh Hòa hiên · Ở đây cò",
+  ".dlg|Thách đấu",
+  "#kievcatch|",
+  ".dlg|Phụ tuyến · Khuyên cung nhân uống thuốc ",
+  ".dlg|Hội phối đồ: báo đề",
+  "#kpinfo|",
+  "page|Chung Tú cung · Minh Hòa hiên · Không gặ",
+  ".dlg|Phi tần khen giản dị",
+  "#modal|Tin trong cung buổi này",
+  ".dlg|Đại án vu cổ",
+  ".dlg|Đã biết về Hoàng hậu Trương Thanh Diên",
+  ".dlg|Lễ tấn phong Quý nhân Lương Vân Yên",
+  ".dlg|Y phục dự Tết Trùng cửu",
+  ".dlg|Tết Trùng cửu · Chuyện bên lề hội",
+  ".dlg|Thỉnh bình an mạch",
+  ".dlg|Phụ tuyến · Tân quân lập uy · Chương # ·",
+  ".dlg|Tết Trùng cửu · Lễ",
+  ".dlg|Sắc",
+  ".dlg|Phụ tuyến · Tìm kẻ làm lọt chuyện trong ",
+  ".dlg|Ân thưởng",
+  ".dlg|Phòng bị",
+  "#modal|Có người tìm đến",
+  ".dlg|Có người tìm đến",
+  "#modal|Chính tuyến · Danh tiếng nhà nho · Chươn",
+  ".dlg|Chính tuyến · Danh tiếng nhà nho · Chươn",
+  ".dlg|Sai Cung nữ thân tín tam đẳng Như Họa đi",
+  "#modal|Một ánh mắt",
+  ".dlg|Một ánh mắt",
+  ".dlg|Tai mắt báo tin",
+  ".dlg|Bộ sưu tập",
+  ".dlg|Bổng lộc tháng chín",
+  ".dlg|Sau vụ mưu hại",
+  ".dlg|Đèn nến trong cung",
+  ".dlg|Bị châm chọc",
+  ".dlg|Quẻ Hạ hạ · Danh",
+  ".dlg|Tâm trạng · Thuần quý nhân Điền Tịch Nha",
+  ".dlg|Y phục dự Thánh thọ Thái hậu",
+  "#modal|Hội phối đồ · Xuân sắc",
+  ".dlg|Hội phối đồ · Xuân sắc",
+  ".kpod|",
+  ".dlg|Tin mua được",
+  ".dlg|Tin chờ người sai đi",
+  ".dlg|Ân tình (đêm)",
+  ".dlg|Phụ tuyến · May áo bông cho cung nhân gi",
+  ".dlg|Kính sự phòng ghi sổ",
+  ".dlg|Xét phẩm cuối tháng · Thường tại",
+  "#modal|Ra ngoài khi mặc trung y?",
+  ".dlg|Bổng lộc tháng mười",
+  ".dlg|Đại hàn, tuyết lớn",
+  "#modal|Đại lễ tế Giao",
+  ".dlg|Đại lễ tế Giao",
+  ".dlg|Tiết Đông chí · Lời mời: Thi gói sủi cảo",
+  ".dlg|Quá hạn lo liệu",
+  ".dlg|Danh hiệu mới",
+  ".dlg|Đeo «Thư hương»",
+  "#modal|Chọn người theo hầu"
+ ],
+ "_momRank": 0,
+ "offers": [
+  {
+   "buoi": 444,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 459,
+   "y": 3,
+   "rank": 0,
+   "screen": ".dlg «Kính sự phòng báo tin»",
+   "label": "Tiến cử Cung nữ thân tín tam đẳng Như Họa hầu thayRất vữngTố",
+   "picked": false
+  },
+  {
+   "buoi": 460,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.»",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 3Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 460,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Chung Tú cung · Minh Hòa hiên · Không gặp ai.»",
+   "label": "Sắc phong",
+   "picked": false
+  },
+  {
+   "buoi": 461,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.»",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 3Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 461,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.»",
+   "label": "Sắc phong",
+   "picked": false
+  },
+  {
+   "buoi": 462,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 3Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 462,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+   "label": "Sắc phong",
+   "picked": false
+  },
+  {
+   "buoi": 463,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 3Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 463,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+   "label": "Sắc phong",
+   "picked": false
+  },
+  {
+   "buoi": 463,
+   "y": 3,
+   "rank": 0,
+   "screen": ".dlg «Kính sự phòng báo tin»",
+   "label": "Tiến cử Cung nữ thân tín tam đẳng Như Họa hầu thayRất vữngTố",
+   "picked": true
+  },
+  {
+   "buoi": 468,
+   "y": 3,
+   "rank": 0,
+   "screen": ".dlg «Đại hàn, tuyết lớn»",
+   "label": "Chịu rét cho quaTốnSức -8Đượcgiữ lại 20 lượng bạcKèmnhiễm ph",
+   "picked": false
+  },
+  {
+   "buoi": 471,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 3Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 471,
+   "y": 3,
+   "rank": 0,
+   "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+   "label": "Sắc phong",
+   "picked": false
+  }
+ ],
+ "t": {
+  "total": 1950196
+ }
+}
