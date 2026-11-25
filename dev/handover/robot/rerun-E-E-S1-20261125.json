@@ -510,6 +510,59 @@
      "n": 36
     }
    ]
+  },
+  {
+   "id": "E-S1-R1-greedy-1-372282412",
+   "origin": "thd",
+   "road": "thd_tho",
+   "round": "R1",
+   "bot": "greedy",
+   "botHarness": "bold",
+   "kiep": 1,
+   "seed": 372282412,
+   "dev": "fold",
+   "harness": {
+    "kind": "realtap",
+    "realtap": true,
+    "jsClicks": 0,
+    "cap": null,
+    "sha": "b4b181f8 → 496b6b66"
+   },
+   "live": "Build 13f84c70f2a3 (5e013076)",
+   "end": "Xuất gia",
+   "type": "death",
+   "fate": "Xuất gia",
+   "death": true,
+   "age": 19,
+   "year": 2,
+   "rank": 0,
+   "buoi": 207,
+   "steps": 1753,
+   "taps": 496,
+   "exitPick": {
+    "label": "Cắt tóc xin đi tuRất vữngTốnkhôngĐượcxuất gia, kiếp này dừng ở cửa chùaGợi ýxuất gia, kiếp",
+    "n": 3,
+    "only": true,
+    "at": 663,
+    "S": {
+     "dead": false,
+     "y": 2,
+     "t": 17,
+     "w": 0,
+     "b": 1,
+     "age": 19,
+     "rank": 0,
+     "name": "Mộ Dung Bích Dao"
+    }
+   },
+   "bugCounts": {},
+   "valid": "VALID",
+   "validWhy": "exit was the only option (3 life-ending cards)",
+   "reviewFiles": [
+    "review/rerun-E-S1-E-S1-R1-greedy-1-372282412-moments.md",
+    "review/rerun-E-S1-E-S1-R1-greedy-1-372282412-review.md"
+   ],
+   "bugs": []
   }
  ],
  "parked": [
@@ -521,7 +574,7 @@
   {
    "id": "E-S1-R1-greedy-1-372282412",
    "dev": "fold",
-   "status": "STUCK-gamebug «Tắm gội chờ giá» (old build 6a87c26fe0f5), not yet rerun"
+   "status": "DONE (VALID, Xuất gia, only option) on Build 13f84c70f2a3: «Tắm gội chờ giá» not seen"
   },
   {
    "id": "E-S1-R1-cautious-1-3360402025",
