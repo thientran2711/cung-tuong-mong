@@ -2089,6 +2089,12 @@ BAL.j68c={on:true,w:{def:.35},seen:.15,cd:999,obKeep:60,rumorTag:" <i>(Lời đ�
      m:{sung:3,danh:3,bac:40,suc:8,mat:1,th:4,hh:4,duc:3,tamco:2,an:2,rel:6},
      l:{sung:5,danh:5,bac:60,suc:12,mat:2,th:6,hh:6,duc:5,tamco:3,an:3,rel:9}},
  need:{poor:30}};
+/* NO HARD LOCK (review/hardlock-choice, laws 2 + 3 + 4; jnolock.js): when every road of a choice card is held back and the card has no ✕,
+   each road held back ONLY by bạc is offered paid with an EQUAL value of her other means: her whole purse, the rest in sub[] order;
+   per[k] = bạc that ONE point of k is worth = the j68c step table (one bạc step == one step of k, tier m);
+   keep[k] = what she always keeps of k; tag = the words added to such a road. */
+BAL.nolock={sub:["suc","danh"],per:{suc:BAL.j68c.fx.m.bac/BAL.j68c.fx.m.suc,danh:BAL.j68c.fx.m.bac/BAL.j68c.fx.m.danh},keep:{suc:1,danh:0},
+ tag:" (thiếu bạc, lấy công sức bù)"};
 /* ORDER THIN P3 (j72c.js composed việc nhờ): on = composed favours live; share = draw weight of one composed seed vs one of the 110 old T7 (1);
    fx[tier] = what ONE gain/loss step of a seed is worth per key (laws 2/3/4: seeds count steps, numbers live here; rel/relb = thiện cảm of A/B,
    an = ân tình); odds = base of a do-step on the j72 ladder (q72Odds adds her skill); khac = khắc of a do-step; wait = tuần of a wait step;
