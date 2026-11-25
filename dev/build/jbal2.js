@@ -1884,7 +1884,7 @@ BAL.ag.min={on:1,gT:[["Tham vọng","quyen"],["Vì gia tộc","nha"],["Vì mình
  ns:{age:[50,15],pow:[45,20],sk:[40,30],afW:.5},npcGift:30,ccMax:45};
 /* TRIỀU ĐÌNH gift deed (j55 tdGift, her and every NPC consort, house heads and the censor alike): giftAf = regard a received gift adds;
    backs = regard from which an official stands behind / spares that consort (tdBacks). Were typed in j55 (+20, 40) — ONE CORE (review minister-agents r1). */
-BAL.tdCourt={giftAf:20,backs:40};
+BAL.tdCourt={giftAf:20,backs:40,/* a daughter promised into a court house: the head of that house warms to her mother (j55 tdKin), [love match «tinh», any other] */wedAf:[12,25],/* a traced tdLeak (j55): the head of her house turns on the one behind it */leakHead:-30};
 /* PERSON MINIGAME ACTS (jpma, owner OD 19/11 ~23:55Z, PARKING_LOT #8; plan dev/handover/reports/person-minigame-acts.md) — «Cùng chơi» + «Thách đấu»
    with any real person (her ↔ NPC ↔ NPC, co-op friend). ONE CORE: every number of jpma lives here.
    occ pm = the board of a person duel / pastime (jmgt mgTier): base + perRank · R, R = the HIGHER rank of the two (one board for both; harder as she climbs, law 5).
@@ -2188,40 +2188,52 @@ BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's n�
    sooner, murder still needs deep hate); T[t].th.act3 overrides that for band 3 (Xảo quyệt waits, then strikes hard).
    HEAT (step 0, §2.1 robot: NPC→her danger p50 112 because ghen sat at 99 for everyone; 88 % of npcAct at band 3): heat.ghenK / heat.affK = the share of
    ghen / dislike (−thiện cảm) that counts as danger (oán counts whole). hostility already halves both. */
-BAL.net.th={quen:10,than:30,than2:50,ky:-10,ghet:-30,oan:15,act:30,thu:45,host:45,tell:40,nguoi:30,repay:1};
+/* review/net-thresholds (WORKLIST #9, net-thresholds.md §3.4 row 2): sign = how readily a person's scheme shows a TELL to watchers (j40 mindTell chance + sign;
+   open nết show their hand early, hidden ones late — the open ones gain elsewhere: they act and forgive sooner; the hidden ones befriend later). */
+BAL.net.th={quen:10,than:30,than2:50,ky:-10,ghet:-30,oan:15,act:30,thu:45,host:45,tell:40,nguoi:30,repay:1,sign:0};
 BAL.net.thFrom={than2:["than",1],ky:["ghet",.5],oan:["act",.5],thu:["act",1],host:["act",1]};
-BAL.net.thClamp={quen:[0,30],than:[15,60],than2:[35,80],ky:[-30,-5],ghet:[-60,-10],oan:[5,30],act:[10,60],thu:[25,75],host:[25,75],tell:[15,70],nguoi:[10,60],repay:[1,3]};
+BAL.net.thClamp={quen:[0,30],than:[15,60],than2:[35,80],ky:[-30,-5],ghet:[-60,-10],oan:[5,30],act:[10,60],thu:[25,75],host:[25,75],tell:[15,70],nguoi:[10,60],repay:[1,3],sign:[-20,20]};
 BAL.net.thK={provoke:.34,humiliate:.6,feign:.67,hostLo:.5,hostMid:.67,hostHi:1.33};
 BAL.net.bandHi=.5;
 BAL.net.heat={ghenK:.45,affK:.6};
+/* review/net-ghen (robot: NPC→her ghen p50 99, 59 % of every rise toward her was CAUSED BY ANOTHER CONSORT (RV4 robot on 96c2859e: 15168 of 25898 ghenUp gain) — «bị X khiêu khích», «thấy X khoe quà»,
+   «bị X giành đêm» — and the fade was a flat −1 a turn): ghenOanK = jealousy caused by another consort becomes oán toward HER × this (j1 ghenUp,
+   jshelf seen luxury; was jshelf npcOanK .5) · ghenCool = the one cooling rule (j28 ghenCool, every holder incl. her v.pg): each turn
+   (fade[not thân, thân] + ghen × k) ÷ persF ghen, at least 1. */
+BAL.net.ghenOanK=.5;
+BAL.net.ghenCool={fade:[1,3],k:.03};/* robot 25/11 (nt-run sens, 3 slots × 900 s alone): before ghen p50/p90 99/100, NPC→her band-3 8.4 %, NPC→NPC 34.0 %, proud÷gentle 2.09 → k .03: ghen 25/96, NPC→her 11.3 %, NPC→NPC 32.0 %, proud÷gentle 2.32 */
+/* review/net-thresholds (WORKLIST #9 (c), net-build §4: NPC→NPC oán saturated, p90 98, band-3 share 43 %): oán COOLS each month by
+   (BAL.oanFade + oán × oanCool) × the holder's persF forgive — a deep grudge cools faster in absolute terms, a Thù dai one still keeps it;
+   the SAME rule for her own oán (S.ro) by her nết (law 1; before: her oán faded flat). */
+BAL.net.oanCool=.10;/* robot 25/11 (nt-run sens, 3 slots alone, 736 weeks): .05 → npcAct band-3 37.2 %, proud÷gentle 3.13; .10 → band-3 16.5 % (≤ 30 %), proud÷gentle 2.13 (≥ 2); NPC→her band-3 stays ghen-driven (top ghen 83 %) */
 /* per-nết offsets (report §3.3; every row keeps a gain and a cost, laws 2/3 — the gain/cost words are the row's own gain/cost in BAL.net.T) */
 (function(){const O={
  "Ân cần":{quen:-5,than:-10,ghet:-15,act:15,nguoi:10},
- "Lạnh lùng":{quen:10,than:12,act:5,tell:15},
- "Nóng nảy":{ghet:10,act:-10,tell:-5,nguoi:10},
- "Điềm tĩnh":{than:3,ghet:-5,act:8,tell:5},
- "Nhiều chuyện":{quen:-5,than:-5,tell:-20},
- "Kín đáo":{quen:5,than:8,tell:25},
- "Kiêu ngạo":{quen:5,than:15,ghet:10,act:-12,nguoi:-15,repay:1},
+ "Lạnh lùng":{quen:10,than:12,act:5,tell:15,sign:-5},
+ "Nóng nảy":{ghet:10,act:-10,tell:-5,nguoi:10,sign:15},
+ "Điềm tĩnh":{than:3,ghet:-5,act:8,tell:5,sign:-8},
+ "Nhiều chuyện":{quen:-5,than:-5,tell:-20,sign:5},
+ "Kín đáo":{quen:5,than:8,tell:25,sign:-12},
+ "Kiêu ngạo":{quen:5,than:15,ghet:10,act:-12,nguoi:-15,repay:1,sign:10},
  "Khiêm nhường":{quen:-5,than:-5,ghet:-10,act:12,tell:5,nguoi:10},
- "Cương trực":{than:5,ghet:5,act:-5},
+ "Cương trực":{than:5,ghet:5,act:-5,sign:10},
  "Xu nịnh":{quen:-8,than:-8,act:5,tell:-5,nguoi:5,repay:1},
- "Thật thà":{quen:-3,act:5,tell:5,nguoi:5},
- "Xảo quyệt":{quen:-5,than:10,act:8,act3:-8,tell:-5,nguoi:-10,repay:1},
+ "Thật thà":{quen:-3,act:5,tell:5,nguoi:5,sign:8},
+ "Xảo quyệt":{quen:-5,than:10,act:8,act3:-8,tell:-5,nguoi:-10,repay:1,sign:-15},
  "Thanh liêm":{act:5,tell:5},
  "Ham lợi":{quen:-5,than:5,tell:-10,repay:1},
  "Rộng lượng":{quen:-5,than:-3,ghet:-15,act:12,tell:5,nguoi:20,repay:1},
  "Thù dai":{quen:5,than:5,ghet:10,act:-8,nguoi:-20,repay:-1},
  "Trọng nghĩa":{than:-3,act:5,tell:10,nguoi:5,repay:-1},
- "Thực dụng":{quen:-5,than:5,tell:-5,repay:1},
- "Tham vọng":{than:5,ghet:5,act:-5,nguoi:-5,repay:1},
+ "Thực dụng":{quen:-5,than:5,tell:-5,repay:1,sign:-3},
+ "Tham vọng":{than:5,ghet:5,act:-5,nguoi:-5,repay:1,sign:3},
  "An phận":{ghet:-5,act:10,nguoi:5},
  "Ham học":{quen:5,than:3,act:3,tell:5},
- "Ham vui":{quen:-8,than:-5,tell:-8,nguoi:5},
+ "Ham vui":{quen:-8,than:-5,tell:-8,nguoi:5,sign:5},
  "Mê tín":{},
  "Thực tế":{quen:5,than:5,tell:5},
  "Vì gia tộc":{act:5},
- "Vì mình":{quen:3,than:8,act:-3,tell:-5,repay:1}};
+ "Vì mình":{quen:3,than:8,act:-3,tell:-5,repay:1,sign:-3}};
  for(const t in BAL.net.T)BAL.net.T[t].th=O[t]||{}})();
 
 /* DELAYED-RISK ROADS (review/m-fix-3, laws 2/3/4/6a/7, robot M4): the numbers of every road whose danger comes LATER, read by the card's

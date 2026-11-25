@@ -10,3 +10,10 @@
    for(const tt of n.concat("_")){if(t===S){push(NT.samp.affS,tt,a);push(NT.samp.oanS,tt,o);push(NT.samp.dangS,tt,d)}else{push(NT.samp.aff,tt,a);push(NT.samp.oan,tt,o);push(NT.samp.dang,tt,d)}push(NT.samp.host,tt,h)}}}};
  const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{take()}catch(e){}return r};
  const x0=window.__bot.extra;window.__bot.extra=function(){let r={};try{r=x0?x0.apply(this,arguments):{}}catch(e){}r.nt=NT;return r}})();
+/* review/net-ghen: (1) npcAct band per TARGET side (S = her, N = an NPC); (2) ghen gain ledger: every ghenUp rise toward her by cause (why, first 3 words)
+   and by who caused it (S = her, N = an NPC); (3) weekly net change of Σ ghen over the live rivals (net − ledger = direct writes + fades) */
+(function(){const NT=window.__nt;NT.bt={};NT.gg={};NT.ggBy={S:0,N:0};NT.gw=[];let led=0;
+ const na1=npcAct;npcAct=function(v,t){try{const b=bandOf(danger(v,t));const k=(t===S?"S":"N")+b;NT.bt[k]=(NT.bt[k]||0)+1}catch(e){}return na1.apply(this,arguments)};
+ const gu=ghenUp;ghenUp=function(v,n,why,by){const d=gu.apply(this,arguments);try{if(d>0&&v!==S){const k=String(why||"?").split(" ").slice(0,3).join(" ");NT.gg[k]=(NT.gg[k]||0)+d;NT.ggBy[(by===undefined||by===S)?"S":"N"]+=d;led+=d}}catch(e){}return d};
+ const sum=()=>{let s=0,n=0;try{for(const v of liveRivals(true)){s+=+v.ghen||0;n++}}catch(e){}return[s,n]};let p=null;
+ const e1=endTurn;endTurn=function(){const a=sum(),l0=led;const r=e1.apply(this,arguments);try{const b=sum();if(NT.gw.length<5000)NT.gw.push([a[0],b[0],b[1],led-l0])}catch(e){}return r}})();

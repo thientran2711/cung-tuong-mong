@@ -98,7 +98,7 @@ if(typeof heirMonth==="function"){const h0=heirMonth;heirMonth=function(){const 
 window.elderTabRows=function(){try{const T=S&&S.thO&&S.thO.staff||[];return T.map((s,j)=>({t:"thh",s,f:pServ(s),name:typeof shortN==="function"?shortN(s.name):s.name,sep:j?"":"Cung Thái hậu"}))}catch(e){return[]}};
 function giaoBtns(st){const p=postOf(st.eid);const t2=typeof whyTime==="function"?whyTime(B().talk||2):"";const g=B().gift||20;
  return [pbtn(`data-elder="bieu" data-eid="${st.eid}"`,"Biếu",`Bạc -${g} · người ấy quý ngươi +${B().giftAf||10}`,S.bac<g?`cần ${g} bạc`:""),
-  pbtn(`data-elder="hoi" data-eid="${st.eid}"${capAt({k:B().talk})}`,"Hỏi chuyện",`${capW()} · ${B().talk} khắc · thành: nghe chuyện ${p.palace}`,t2)]}
+  pbtn(`data-elder="hoi" data-eid="${st.eid}"${capAt({k:B().talk})}`,"Hỏi chuyện",`${capW()} · ${B().talk} khắc · thành: nghe chuyện ${p.palace}, người ấy thiện cảm ${balSg(BAL.eff.jstaff.meAct)}`/* RV5 (LAW 11): elderAct hoi adds af.me meAct — say it, like the court card */,t2)]}
 function dutyRows(st){const p=postOf(st.eid);const m=ownerOf(st);return[["Chức",`${p.title} ${p.palace}`,"t"],["Chủ",masterName(m)+(p.master==="hh"&&m===S.thO?" (giữ thay Hoàng hậu)":p.id==="gt"?" sai đến Nội vụ phủ":""),"t"],["Việc",p.duties.join(", "),"t"]]}
 window.elderGroups=st=>{try{return st&&st.eid&&postOf(st.eid)?[["Chức việc",dutyRows(st)],["Giao thiệp",giaoBtns(st)]]:[]}catch(e){return[]}};
 /* ---------- the stage: where each one works; her card = the kit pcard ---------- */
@@ -151,7 +151,7 @@ if(typeof popCard==="function"){const c0=popCard;popCard=function(p){if(p&&p.kin
 function act(a,id){const st=elderBy(id);if(!st||!S||S.dead||Q.length)return;let r="";const bf=typeof rsnap==="function"?rsnap():null;
  if(a==="bieu"){const g=B().gift||20;if(S.bac<g)return;apply({bac:-g});st.af.me=(st.af.me||0)+(B().giftAf||10);r=`Biếu ${st.call} ${g} lượng: người ấy quý ngươi +${B().giftAf||10}.`}
  if(a==="hoi"){const n=B().talk||2;if(!can(n))return;spend(n);r=elderTalkGain(st)}
- else if((a==="hoi2"||a==="hoi3")&&typeof svTalk==="function"){const n=a==="hoi3"?BAL.svt.kLen:BAL.svt.k;if(!can(n))return;spend(n);r=svTalk(S,st,a==="hoi3")/* N1: the Thái hậu's household, the #26 talk */}
+ else if((a==="hoi2"||a==="hoi3")&&typeof svTalk==="function"){const n=a==="hoi3"?BAL.svt.kLen:BAL.svt.k;if(!can(n))return;spend(n);r=svTalk(S,st,a==="hoi3")/* N1: the Thái hậu's household, the #26 talk */;try{if(typeof kaLearn==="function")kaLearn(`nghe chuyện ${postOf(st.eid).palace}`)}catch(e){}/* NB2: the card's «thành: nghe chuyện …» is listed under Được */}
  if(r){log(r);popMsg=r;render();try{if(bf&&typeof resultShow==="function")resultShow(st.call,bf,null)}catch(e){}/* person-dialog-restore: the result is the bottom result card */}}
 document.addEventListener("click",e=>{const b=e.target&&e.target.closest&&e.target.closest("[data-elder]");if(!b||b.disabled)return;e.stopPropagation();e.preventDefault();act(b.dataset.elder,b.dataset.eid)},true);
 /* ---------- they speak by name in events and the log (LUẬT SỬA CẢ NHÓM: one table for every generic "ma ma" of these offices) ---------- */

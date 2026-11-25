@@ -70,16 +70,28 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-dbsv]");if
    j28). relAdd(a,t,n) also moves oán: n<0 → oán ta +0.6·|n|, n>0 → oán ta −0.3·n. Cards now draw the number with the SAME
    functions; when she does not know all of the target's nết, the card shows the honest range ("oán ta +3 đến +11"). */
 function aaMulRange(t,f){if(!t||t===S||typeof persF!=="function")return[1,1];const T=traitsOf(t),K=typeof trKnown==="function"?trKnown(t):[];
- if(T.every(x=>K.includes(x)))return[persF(t,f,1),persF(t,f,1)];let lo=1,hi=1;for(const x of T){if(K.includes(x)){const v=PERS[x]&&PERS[x][f]!=null?PERS[x][f]:1;lo*=v;hi*=v}else{const vs=Object.values(PERS).map(P=>P[f]!=null?P[f]:1);lo*=Math.min(...vs);hi*=Math.max(...vs)}}return[lo,hi]}
+ if(T.every(x=>K.includes(x)))return[persF(t,f,1),persF(t,f,1)];let lo=1,hi=1;const fv=x=>PERS[x]&&PERS[x][f]!=null?PERS[x][f]:1;
+ /* review/net-ghen: a known nết counts its own factor; each UNKNOWN one ranges over its own group only (one nết per group BAL.net.F, the groups no known
+    nết fills) — was every nết of the pool per unknown one (cards read «+4 đến +41»). Off-pool holders (no group match) keep the whole-pool range. */
+ const G=BAL.net&&BAL.net.F||{},gOf=x=>Object.keys(G).find(g=>G[g].includes(x));const unk=T.filter(x=>!K.includes(x));for(const x of T)if(K.includes(x)){lo*=fv(x);hi*=fv(x)}
+ const free=Object.keys(G).filter(g=>!T.some(x=>K.includes(x)&&gOf(x)===g));const all=Object.keys(PERS).map(fv);
+ for(let k=0;k<unk.length;k++){const g=unk.every(x=>gOf(x))?free[k]:null;const vs=g?G[g].map(fv):all;lo*=Math.min(...vs);hi*=Math.max(...vs)}return[lo,hi]}
 function aaNum(base,t,f){const sg=base<0?-1:1;if(base<=0||!f)return{a:base,b:base};const [lo,hi]=aaMulRange(t,f);return{a:Math.round(base*lo),b:Math.round(base*hi)}}
 function aaSay(lab,r){const s=n=>(n>0?"+":"")+n;return r.a===r.b?`${lab} ${s(r.a)}`:`${lab} ${s(r.a)} đến ${s(r.b)}`}
 /* affAdd(t,S,n): how much she likes you; oanAdd(t,S,n): her grudge */
 /* ONE set of relation words (owner 09:55Z, VANPHONG §1): the value her → you is "thiện cảm" (chip "Nàng → ta: thiện cảm"),
    yours → her "Ta → nàng: thiện cảm"; the grudge stays "oán". Cards: "thiện cảm +10", "oán ta +8". */
 const KIT_REL={aff:"thiện cảm",affThem:"Nàng → ta: thiện cảm",affMe:"Ta → nàng: thiện cảm",oan:"oán ta",unknown:"chưa rõ nàng nghĩ gì"};window.KIT_REL=KIT_REL;
-function pvQuy(t,n){return aaSay(KIT_REL.aff,aaNum(n,t,"trust"))}
-function pvOan(t,n){if(n<0)return `bớt oán ta ${Math.round(-n)}`;const r=aaNum(n,t,"slight");r.a=Math.max(1,Math.round(r.a));r.b=Math.max(r.a,Math.round(r.b));return aaSay(KIT_REL.oan,r)}
-function pvRel(t,n){return n<0?`${pvQuy(t,n)}, ${pvOan(t,-n*.6)}`:`${pvQuy(t,n)}, ${pvOan(t,-n*.3)}`}
+/* review/net-ghen (law 11 family): lab = the words before the number at the call site («nàng oán ngươi», «thiện cảm») — the number is ALWAYS this preview */
+function pvQuy(t,n,lab){if(!t&&n>0)return pvQuyAny(n,lab);return aaSay(lab||KIT_REL.aff,aaNum(n,t,"trust"))}
+function pvOan(t,n,lab){if(n<0)return lab?`${lab} ${balSg(Math.round(n))}`:`bớt oán ta ${Math.round(-n)}`;if(!t)return pvOanAny(n,lab);const r=aaNum(n,t,"slight");r.a=Math.max(1,Math.round(r.a));r.b=Math.max(r.a,Math.round(r.b));return aaSay(lab||KIT_REL.oan,r)}
+/* relAdd's own oán (j9: a fall → oán ×BAL.relOan.hurt, a rise → bớt ×mend) — law 4: the BAL keys, never typed .6 / .3 */
+/* NB-b: oán over several cases (tiers / win-or-caught): L = [[chunk, chunk…] per case] — each chunk is one oanAdd (× nết slight, rounded), no target → every nết */
+function pvOanSet(t,L,lab){const [a,b]=t&&t!==S?aaMulRange(t,"slight"):aaAnyRange("slight");const s=(c,f)=>c.reduce((z,n)=>z+(n>0?Math.round(n*f):0),0);const lo=Math.max(1,Math.min(...L.map(c=>s(c,a)))),hi=Math.max(lo,...L.map(c=>s(c,b)));return aaSay(lab||KIT_REL.oan,{a:lo,b:hi})}
+/* Tát (jface): thiện cảm both ways B.rel[sev], her oán = relAdd ×hurt + B.oan[sev]; tier 1..3 is chosen in the slap game → the range over the tiers */
+function tatRelTxt(t){const B=BAL.slap,k=BAL.relOan.hurt,S3=[1,2,3];const R=S3.map(s=>B.rel[s]);return `${aaSay(KIT_REL.aff,{a:Math.max(...R),b:Math.min(...R)})}, ${pvOanSet(t,S3.map(s=>[-B.rel[s]*k,B.oan[s]||0]),"nàng oán ngươi")}`}
+function pvRel(t,n){const k=BAL.relOan;return n<0?`${pvQuy(t,n)}, ${pvOan(t,-n*k.hurt)}`:`${pvQuy(t,n)}, ${pvOan(t,-n*k.mend)}`}
+
 /* caught by the target's people (j8 caught): evA 2 + relAdd(−10) */
 (function(){if(typeof kaCaughtTxt!=="function")return;const k0=kaCaughtTxt;kaCaughtTxt=function(v,k){const r=k0.apply(this,arguments);try{return r?`${r}, ${pvRel(v,-10)}`:r}catch(e){return r}}})();
 /* consort acts: outcome texts written from the code (j8 ACT.f) with the scaled numbers for the card's target */
@@ -255,7 +267,11 @@ odT=function(a,base){return odA(a,base+(a.tamco||0)/4)};
    const oz=aOdd(o,a);if(typeof rcvJudge==="function")return rcvJudge("trinhhh",a,t,oz);if(roll(oz)){punish(t,"bị Hoàng hậu xét tội theo chứng cứ",1);affAdd(t,a,BAL.eff.jaudit.f_2);return `${j78Who(a)} trình chứng cứ lên Hoàng hậu: ${j78who(t)} bị xét tội. `}affAdd(q,a,BAL.eff.jaudit.f_3);return `Hoàng hậu bác chứng cứ ${j78who(a)} trình về ${j78who(t)}. `}}})();
 
 /* 19. an oán preview when the target is not chosen yet (j55 "Dò la nhà ngoại": relAdd −8 + oán +8 → oán ≈ 12.8 × her nết) */
-function pvOanAny(n){try{const vs=Object.values(PERS).map(P=>P.slight!=null?P.slight:1);const lo=Math.max(1,Math.round(n*Math.min(...vs))),hi=Math.round(n*Math.max(...vs)*Math.max(1,Math.max(...vs)));return lo===hi?`oán ta +${lo}`:`oán ta +${lo} đến +${hi}`}catch(e){return `oán ta +${Math.round(n)}`}}
+/* review/net-ghen: the factor range over ANY person (one nết from each group BAL.net.F, as traitsOf gives): [Π min, Π max] of PERS[x][f] */
+function aaAnyRange(f){let lo=1,hi=1;for(const g in BAL.net.F){const vs=BAL.net.F[g].map(x=>PERS[x]&&PERS[x][f]!=null?PERS[x][f]:1);lo*=Math.min(...vs);hi*=Math.max(...vs)}return[lo,hi]}
+function pvOanAny(n,lab){const L=lab||"oán ta";try{const [a,b]=aaAnyRange("slight");const lo=Math.max(1,Math.round(n*a)),hi=Math.max(lo,Math.round(n*b));return lo===hi?`${L} +${lo}`:`${L} +${lo} đến +${hi}`}catch(e){return `${L} +${Math.round(n)}`}}
+/* review/net-ghen: the thiện cảm twin of pvOanAny — a rise toward her from a person not chosen yet (a static outcome line): the honest range over every nết trust */
+function pvQuyAny(n,lab){const L=lab||KIT_REL.aff;if(!(n>0))return `${L} ${balSg(Math.round(n))}`;try{const [a,b]=aaAnyRange("trust");const lo=Math.round(n*a),hi=Math.max(lo,Math.round(n*b));return lo===hi?`${L} +${lo}`:`${L} +${lo} đến +${hi}`}catch(e){return `${L} +${Math.round(n)}`}}
 
 /* 20. "bị phạt" on cards = what punish() (j8) does: cấm túc N tháng (Hoàng thượng nóng nảy 3, nhân từ 1, thường 2);
    a grave fault (sev 2) may instead cost one rank (nóng nảy: always, nhân từ: 1 in 4, else half the time) */
