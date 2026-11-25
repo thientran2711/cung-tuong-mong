@@ -23,7 +23,7 @@
 const B=()=>BAL.mood;
 window.MOOD_N={wk:0,hist:{},ext:0,hi:0,lo:0,odN:0,odSum:0,odMax:0,comfort:0,lock:0,aff:0,ghen:0,acts:0,pushes:{}};
 function mbOn(){return !!(typeof S!=="undefined"&&S&&!S.dead&&!window.__moodOff)}
-function mbS(){if(!S)return null;if(!S.mood||typeof S.mood!=="object"||typeof S.mood.v!=="number")S.mood={v:0,log:[]};if(!Array.isArray(S.mood.log))S.mood.log=[];return S.mood}
+function mbS(){if(!S)return null;if(!S.mood||typeof S.mood!=="object"||typeof S.mood.v!=="number")S.mood={v:0,log:[]};if(!Array.isArray(S.mood.log))S.mood.log=[];/* ONE source (temper-outburst-fix): with the causes model on, read the bar the same way moodBar does (sync the live causes first), so every band / panel / rest / push reads the shown bar, never a stale S.mood.v */if(!mbS.__in&&typeof mkOn==="function"&&typeof mkSync==="function"&&mkOn()){mbS.__in=1;try{mkSync(S)}catch(e){}finally{mbS.__in=0}}return S.mood}
 function mbW(){try{return wk()}catch(e){return 0}}
 const cl2=(x,a,b)=>Math.max(a,Math.min(b,x));
 /* push the bar; merge pushes of the same cause kind in the same tuần ("Việc thành ×3: Đánh đàn, Làm thơ") */
@@ -51,7 +51,7 @@ window.mbS=mbS;window.mbBand=mbBand;window.mbOdPts=mbOdPts;window.mbAdd=mbAdd;wi
 (function(){if(typeof odA!=="function")return;const o0=odA;odA=function(a,b){const r=o0.apply(this,arguments);try{if(a===S&&mbOn()){const m=mbOdPts();if(m){MOOD_N.odN++;MOOD_N.odSum+=m;MOOD_N.odMax=Math.max(MOOD_N.odMax,Math.abs(m));return oddsCl(r+m)}}}catch(e){}return r}})();
 /* "Vì sao <bậc>?": the real formula re-run with her mood at calm (whyDiff), and the deck cards (static odds) name it too */
 (function(){if(typeof whyDiff!=="function")return;const w0=whyDiff;whyDiff=function(fn,subj){const L=w0.apply(this,arguments);try{if(!mbOn()||!(subj||[]).some(x=>x&&x[0]===S))return L;const M=mbS(),v=M.v;if(!mbOdPts(v))return L;
-  let o0,o1;try{o0=fn();M.v=0;o1=fn()}finally{M.v=v}if(o0!=null&&o1!=null&&o0!==o1)L.push([`Tâm trạng ngươi: ${mbBand(v).name.toLowerCase()}`,o0-o1])}catch(e){}return L}})();
+  let o0,o1;try{o0=fn();mbS.__in=1;M.v=0;o1=fn()}finally{M.v=v;mbS.__in=0}if(o0!=null&&o1!=null&&o0!==o1)L.push([`Tâm trạng ngươi: ${mbBand(v).name.toLowerCase()}`,o0-o1])}catch(e){}return L}})();
 (function(){if(typeof kitWhyHtml!=="function")return;const k0=kitWhyHtml;kitWhyHtml=function(b,lv){let h=k0.apply(this,arguments);try{if(!h||!mbOn()||!b||!b.dataset||b.dataset.i==null)return h;const m=mbOdPts();if(!m||/Tâm trạng ngươi/.test(h))return h;
   const row=`<div class="kpopx"><span class="ef ${m>0?"g":"r"}">Tâm trạng ngươi: ${mbBand().name.toLowerCase()}: ${whyStep(m)}</span></div>`;
   h=h.replace(/<div class="kpopx"><span class="ef n">Cơ may của việc này không đổi theo tư chất[^<]*<\/span><\/div>/,"");const i=h.indexOf("</div>");return i<0?h+row:h.slice(0,i+6)+row+h.slice(i+6)}catch(e){}return h}})();
