@@ -2151,7 +2151,7 @@ BAL.net.heat={ghenK:.45,affK:.6};
    jshelf seen luxury; was jshelf npcOanK .5) · ghenCool = the one cooling rule (j28 ghenCool, every holder incl. her v.pg): each turn
    (fade[not thân, thân] + ghen × k) ÷ persF ghen, at least 1. */
 BAL.net.ghenOanK=.5;
-BAL.net.ghenCool={fade:[1,3],k:.03};
+BAL.net.ghenCool={fade:[1,3],k:.03};/* robot 25/11 (nt-run sens, 3 slots × 900 s alone): before ghen p50/p90 99/100, NPC→her band-3 8.4 %, NPC→NPC 34.0 %, proud÷gentle 2.09 → k .03: ghen 25/96, NPC→her 11.3 %, NPC→NPC 32.0 %, proud÷gentle 2.32 */
 /* review/net-thresholds (WORKLIST #9 (c), net-build §4: NPC→NPC oán saturated, p90 98, band-3 share 43 %): oán COOLS each month by
    (BAL.oanFade + oán × oanCool) × the holder's persF forgive — a deep grudge cools faster in absolute terms, a Thù dai one still keeps it;
    the SAME rule for her own oán (S.ro) by her nết (law 1; before: her oán faded flat). */

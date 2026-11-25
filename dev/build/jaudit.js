@@ -70,7 +70,12 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-dbsv]");if
    j28). relAdd(a,t,n) also moves oán: n<0 → oán ta +0.6·|n|, n>0 → oán ta −0.3·n. Cards now draw the number with the SAME
    functions; when she does not know all of the target's nết, the card shows the honest range ("oán ta +3 đến +11"). */
 function aaMulRange(t,f){if(!t||t===S||typeof persF!=="function")return[1,1];const T=traitsOf(t),K=typeof trKnown==="function"?trKnown(t):[];
- if(T.every(x=>K.includes(x)))return[persF(t,f,1),persF(t,f,1)];let lo=1,hi=1;for(const x of T){if(K.includes(x)){const v=PERS[x]&&PERS[x][f]!=null?PERS[x][f]:1;lo*=v;hi*=v}else{const vs=Object.values(PERS).map(P=>P[f]!=null?P[f]:1);lo*=Math.min(...vs);hi*=Math.max(...vs)}}return[lo,hi]}
+ if(T.every(x=>K.includes(x)))return[persF(t,f,1),persF(t,f,1)];let lo=1,hi=1;const fv=x=>PERS[x]&&PERS[x][f]!=null?PERS[x][f]:1;
+ /* review/net-ghen: a known nết counts its own factor; each UNKNOWN one ranges over its own group only (one nết per group BAL.net.F, the groups no known
+    nết fills) — was every nết of the pool per unknown one (cards read «+4 đến +41»). Off-pool holders (no group match) keep the whole-pool range. */
+ const G=BAL.net&&BAL.net.F||{},gOf=x=>Object.keys(G).find(g=>G[g].includes(x));const unk=T.filter(x=>!K.includes(x));for(const x of T)if(K.includes(x)){lo*=fv(x);hi*=fv(x)}
+ const free=Object.keys(G).filter(g=>!T.some(x=>K.includes(x)&&gOf(x)===g));const all=Object.keys(PERS).map(fv);
+ for(let k=0;k<unk.length;k++){const g=unk.every(x=>gOf(x))?free[k]:null;const vs=g?G[g].map(fv):all;lo*=Math.min(...vs);hi*=Math.max(...vs)}return[lo,hi]}
 function aaNum(base,t,f){const sg=base<0?-1:1;if(base<=0||!f)return{a:base,b:base};const [lo,hi]=aaMulRange(t,f);return{a:Math.round(base*lo),b:Math.round(base*hi)}}
 function aaSay(lab,r){const s=n=>(n>0?"+":"")+n;return r.a===r.b?`${lab} ${s(r.a)}`:`${lab} ${s(r.a)} đến ${s(r.b)}`}
 /* affAdd(t,S,n): how much she likes you; oanAdd(t,S,n): her grudge */
