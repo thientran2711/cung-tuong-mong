@@ -1755,3 +1755,5 @@ SELSCENE-19 merge (selection-scene onto LC15 stack, one k61/sid rule) | review/s
 net-ghen wave 2: bisect coop-e2e co-op advance fail + rc-scan rerun + remaining gates + SSK | review/net-ghen-2 | session_01D3E3NYbT6xQfrCM9WRMW7P (W9, successor of W8 session_01D3E3NZWK4yXecF776eYGPf) | RUNNING | 2026-11-25T13:33Z (Foreman D depth 3)
 SANGBUOI-HELD-FIX r3 (§9 leftovers) | review/sangbuoi-held-fix | session_01V1ZZH1Y4EvZtxtrnsR1sjr | RUNNING | 2026-11-25T13:41Z (MAIN 141)
 | F M-FIX-3 (opus; MAIN 140 order 13:35Z: odds lie on delayed-consequence cards e.g. Giả mang thai «Rất vững» → sure death; verdict text vs real nightLog record; «BẠI» toast after «Rất vững»; whole families) | review/m-fix-3 | session_01UV1SzkDurA75A3P5i3ns2w (FOREMAN F #12) | RUNNING | 2026-11-25T13:47Z |
+B BIG rv save-year-rollback 6d2f5a03 | review/save-year-rollback | B | session_01N1tNP4Qh4SYJR9NA4SX26m | RUNNING | 25/11 13:52Z |
+B FIXER save-unseen-lists (Tin báo/unseen lists in save + co-op snap; new-life first save + 4-s drift) | review/save-unseen-lists | B | session_01N1tNP6vieKxfAL6QRNeoxY | RUNNING | 25/11 13:52Z |
