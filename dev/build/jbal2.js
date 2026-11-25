@@ -587,7 +587,11 @@ BAL.start={
    prizes it (Trọng tài: Cầm/Kỳ/Thi/Họa · Mê sắc: Vũ); side = share of it for passive weights (lật thẻ, mưu kế). stUp = Tài (Vũ/Y: Sắc) at each new
    bậc; danh = Danh at bậc 3 / 5. Old saves keep their bậc (points = floor of that bậc + the old progress share). */
 BAL.art={tier:[0,10,25,45,70,100],nm:["Chưa thạo","Nhập môn","Thuần thục","Tinh thông","Xuất chúng","Tông sư"],
- gain:[1.2,1,.8,.6,.4],odds:[0,4,8,13,18,24],emp:1.5,side:.4,stUp:2,danh:{2:3,3:5,4:6,5:8},care:6 /* review/balance-final: Y thuật care bonus once at BAL.mort.life.careYt (careY) */,
+ gain:[2,1.5,1.1,.9,.8] /* review/balance-pace (owner OD 25/11 ~23:52Z «một lần chơi chỉ được cộng có 2 điểm … bao giờ tao mới lên được bậc»): was [1.2,1,.8,.6,.4]
+   (a good self-study = 2.4 points → Tông sư after ~83 good games of ONE course). Now a good game (raw ≥ BAL.mgTier.lessonPts[2]) of self-study = 6 points at bậc 0:
+   Nhập môn after 2 good games, Tông sư after ~35 (teacher ~26); still slower each bậc. Measured dev/measure/pace.js, report dev/handover/reports/balance-pace.md */,
+ les:{self:1,min:1} /* review/balance-pace: lesson points of ONE play (jbalcore lesG, her lessons and an NPC's): self-study = max(min, round(game points × self)) (was × .6:
+   a Xuất sắc game and a poor one both gave 1–2, so the game score barely mattered); a teacher = max(game points, self-study + BAL.tchMin) */,odds:[0,4,8,13,18,24],emp:1.5,side:.4,stUp:2,danh:{2:3,3:5,4:6,5:8},care:6 /* review/balance-final: Y thuật care bonus once at BAL.mort.life.careYt (careY) */,
  flipX:2 /* Mê sắc: × of Sắc and Vũ in the card-flip chance (j8 nightCh) */,
  score:2.5 /* contest score per odds point (khuê các festival kcFest: score ≥ 60 first, ≥ 40 praised) */,
  fee:[5,5] /* teacher fee = fee[0] + bậc × fee[1] Bạc (artFee) */,

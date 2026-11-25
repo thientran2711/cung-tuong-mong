@@ -218,7 +218,7 @@ crReg("td_cong","stitch",tdWrap(crtStitch,"stitch"));/* the stitch board inside 
 
 /* ---------- the study acts (j85 lessonVir): intro (rules) -> game -> result -> progress ---------- */
 const TD_MODE={self:"Tự học",master:"Học với ma ma"};
-function tdPoints(mode,raw){return mode==="self"?(raw>=9?2:1):(raw>=7?3:2)}
+function tdPoints(mode,raw){const P=BAL.mgTier.lessonPts;return tdPts(mode,raw>=P[2]?3:raw>=P[1]?2:raw>=P[0]?1:0)}/* review/balance-pace: BAL.td.pts (jbalcore tdPts) */
 /* mg-skip-all: a quick lesson ("Để trời định", KIT §13.6) won = the progress of a BAL.skip.raw play (tiến bộ một phần), lost = no progress; TDS.q = that roll (null = played / bot) */
 function tdGain(mode,raw,skipped){return skipped&&TDS.q===false?0:tdPoints(mode,raw)}
 function tdQuality(p){try{const a=(p&&p.vpf&&p.vpf.cong)||[];return a.length?Math.round(a.reduce((x,y)=>x+y,0)/a.length/10*2):0}catch(e){return 0}}
