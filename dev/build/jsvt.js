@@ -28,7 +28,7 @@ function svtNm(a){const A=svtWho(a);return svtIsSv(a)&&A&&A!==a?`${a.name}, ngư
 /* where the act happens: the caller's place (at), else where the actor stands (a servant with her master) */
 function svtPlace(p,at){if(at)return at;try{const kh=j95kh();if(p===S)return knAt("me",kh);const h=svtIsSv(p)?ownerOf(p):p;const id=svtId(h);return id&&typeof knAt==="function"?knAt(id,kh):null}catch(e){return null}}
 function svtNear(a,m,at){try{const x=svtPlace(a,at),y=svtPlace(m);return !!x&&x===y}catch(e){return false}}
-const SVT_COVERT={bribe:1,threat:1,tm:1,plot:1,friend:1};
+const SVT_COVERT={bribe:1,threat:1,tm:1,plot:1,friend:1,len:1};
 /* fix r1 (law 6, the witness rule of newsAdd j28 / npc-purpose G2): the master comes to know ONLY through a real witness — she stands right there, her
    eyes (informants), a talkative servant of her household (nết «talk»), or a witness at the place who chooses to tell her (npcTell). No witness → never. */
 function svtSeen(a,m,kind,at,s){const B=BAL.svt.seen,cv=SVT_COVERT[kind]?B.covert:0;
@@ -55,7 +55,7 @@ function svtEtq(a,m,s,at){if(!svtNear(a,m,at)||svtGreeted(a,m))return"";const B=
  if(a===S)return `${m.name} đứng ngay đó mà ngươi không chào, lại gọi thẳng ${s.name} — ${m.name} cho là ngươi bất kính. `;
  if(m===S)return `${svtNm(a).replace(/,$/,"")} chẳng chào ngươi một tiếng mà gọi thẳng ${s===S?"ngươi":s.name} — thật là bất kính. `;return""}
 /* svTouch: the servant DID engage (talked / took the bạc / took the threat / became eyes): her master may come to know; the servant may let slip */
-const SVT_VERB={friend:"cho người hầu kết thân với",talk:"kéo riêng",chat:"bắt chuyện với",gift:"biếu quà",ask:"dò hỏi chuyện trong cung qua"};
+const SVT_VERB={friend:"cho người hầu kết thân với",talk:"kéo riêng",chat:"bắt chuyện với",gift:"biếu quà",ask:"dò hỏi chuyện trong cung qua",len:"lén kéo riêng"};
 const SVT_NOLEAK={friend:1/* the friend talk carries its own chứng cứ (j10 servMonth / jagstaff chat) */,chat:1,gift:1};
 function svTouch(a,s,kind,at,mv){if(!SVT.on()||!a||!s)return"";const sMv=mv===s;/* d-followups-1 (wording, law 7): mv = who MOVED (came to the other); the after-line names the one who came, never «ngươi tìm gặp X» when X came to her */let m=null;try{m=s===S?(svtSrvMe()?srvM():null)/* law 1: she herself, on the cung-nữ road, is another's servant */:ownerOf(s)}catch(e){}const A=svtWho(a);if(!m||!A||m===A||svtHouse(a)===m)return"";
  try{if(typeof sameHouse==="function"&&sameHouse(svtHouse(a),m))return""}catch(e){}if(svtGuest(A,m))return"";
@@ -68,7 +68,7 @@ function svTouch(a,s,kind,at,mv){if(!SVT.on()||!a||!s)return"";const sMv=mv===s;
   const how=SVT_HOW[W.how](m,W.w);
   if(s===S)r+=sMv?`${how}: ngươi lén tìm gặp ${svtNm(a).replace(/,$/,"")}; từ đó ${m.name} sinh nghi ngươi. `:`${how}: ${svtNm(a)} lén tìm gặp ngươi; từ đó ${m.name} sinh nghi ngươi. `;
   else if(m===S)r+=sMv?`${how}: ${s.name} lén ${kind==="chat"?"sang bắt chuyện với":"tìm gặp"} ${svtNm(a).replace(/,$/,"")}${leak?", nghe đâu còn lỡ miệng chuyện trong cung ngươi":""}. Từ đó ngươi bắt đầu nghi ${s.name}. `
-   :`${how}: ${svtNm(a)} ${SVT_VERB[kind]||"lén tìm gặp"} ${s.name}${kind==="talk"?" ra nói chuyện":""}, ${s.name} không từ chối${leak?", nghe đâu còn lỡ miệng chuyện trong cung ngươi":""}. Từ đó ngươi bắt đầu nghi ${s.name}. `;
+   :`${how}: ${svtNm(a)} ${SVT_VERB[kind]||"lén tìm gặp"} ${s.name}${kind==="talk"||kind==="len"?" ra nói chuyện":""}, ${s.name} không từ chối${leak?", nghe đâu còn lỡ miệng chuyện trong cung ngươi":""}. Từ đó ngươi bắt đầu nghi ${s.name}. `;
   else if(a===S||A===S)r+=sMv?`${how}: ${s.name} tìm gặp ${a===S?"ngươi":svtNm(a).replace(/,$/,"")}; từ đó ${m.name} sinh nghi cả ${a===S?"ngươi":"người ấy"} lẫn ${s.name}. `
    :`${how}: ${a===S?"ngươi":svtNm(a)} tìm gặp ${s.name}; từ đó ${m.name} sinh nghi cả ${a===S?"ngươi":"người ấy"} lẫn ${s.name}. `}
  return r}
@@ -85,12 +85,15 @@ function svtPeer(a,x,kind,ok,at){if(!SVT.on()||!a||!x||a===x)return"";let o=null
  try{if(typeof sameHouse==="function"&&sameHouse(h,o))return""}catch(e){}if(svtGuest(svtWho(a),o))return"";SVT.stat.peer=(SVT.stat.peer||0)+1;
  svtNpcGreet(a,o,at);let r=svtEtq(a,o,x,at);if(!ok)return r;r+=svTouch(a,x,kind,at,a);if(kind==="chat")r+=svTouch(x,a,kind,at,a)/* she talked back: her own master may hear of it too; a is still the one who came (mv) */;return r}
 /* svTalk: the OPEN talk («Hỏi chuyện» with a servant of another house) — her button and the NPC's monthly deed are this one function */
-function svTalk(a,s){if(!SVT.on()||!a||!s)return"";let m=null;try{m=ownerOf(s)}catch(e){}if(!m||m===a)return"";if(svtGuest(a,m))return"";SVT.stat.talk++;
- svtNpcGreet(a,m);let r=svtEtq(a,m,s);
+/* review/talk-others-people (WORKLIST #26, OD 24/11 ~07:58Z «mình sẽ có cái option là hỏi lén … làm trước mặt và làm sau lưng»): len = the COVERT talk «Hỏi lén»:
+   behind the master's back — no greeting owed, so no bất kính; seen less (SVT_COVERT), but when the master does come to know, Chủ tin and her thiện cảm
+   fall harder (BAL.svt.tin/rel.len) and it takes longer (BAL.svt.kLen). Same gain as the open talk. Same choice for every NPC (svtMonth, law 1). */
+function svTalk(a,s,len){if(!SVT.on()||!a||!s)return"";let m=null;try{m=ownerOf(s)}catch(e){}if(!m||m===a)return"";if(svtGuest(a,m))return"";SVT.stat.talk++;if(len)SVT.stat.len=(SVT.stat.len||0)+1;
+ let r="";if(!len){svtNpcGreet(a,m);r=svtEtq(a,m,s)}
  if(roll(svtRefO(s))){SVT.stat.refuse++;/* refused: nothing changes (OD ~08:12Z «nếu như mà họ từ chối thì mình ok, không có gì hết») */
   return r+(a===S?`${s.name} cúi đầu thưa: phận tôi tớ cung ${m.name}, không dám nói chuyện riêng với người cung khác. `:"")}
  if(a===S){let t="";try{t=learnTrait(m,`${s.name} kể`,1)}catch(e){}r+=t?`${s.name} chịu nói chuyện, kể rằng chủ tử ${m.name} là người ${String(t).toLowerCase()}. `:`${s.name} chịu nói chuyện, nhưng chỉ kể những chuyện ai cũng biết. `}
- return r+svTouch(a,s,"talk")}
+ return r+svTouch(a,s,len?"len":"talk")}
 /* the wrappers: the whole family reaches svTouch only when the servant really engaged (spyFor set by THIS act) */
 function svtWrap(f,kind){return function(a,s){const b=s&&s.spyFor;const r=f.apply(this,arguments);
   try{if(s&&a&&s.spyFor===key(a)&&b!==key(a)){const x=svTouch(a,s,kind);if(x)return (r||"")+x}}catch(e){}return r}}
@@ -104,13 +107,15 @@ function svtMet(a,b){try{if(!a||!b||a===b)return;const G=svtGz(),x=svtId(a),y=sv
 (function(){if(typeof chatMark==="function"){const c0=chatMark;chatMark=function(v){const r=c0.apply(this,arguments);svtMet(S,v);return r}}
  if(typeof p3ChatMark==="function"){const p0=p3ChatMark;p3ChatMark=function(p,v){const r=p0.apply(this,arguments);svtMet(p,v);return r}}/* the four talk topics (jagacts3 P3T: her ↔ NPC and NPC ↔ NPC, law 1) */})();
 /* the month: NPC mistresses have someone of another house talked to (law 1: her, the NPCs, NPC ↔ NPC); an NPC master returns the servant she no longer trusts */
+/* the odds an NPC picks «Hỏi lén» over the open talk (her nết: a sharp mind goes behind backs) */
+function svtLenO(p){const B=BAL.svt.npc;return Math.max(0,Math.min(100,B.len+nq(p,"sharp",B.lenSharp)))}
 function svtMonth(){if(!SVT.on())return"";let ev="";const B=BAL.svt;let G=false;try{G=typeof mlGuest==="function"&&mlGuest()}catch(e){}
  for(const p of liveRivals(true)){if(!p||!p.alive||p.out)continue;
   if(roll(B.npc.talk)){const t=pickTarget(p);
    /* fix r1 law 1: on the cung-nữ road SHE is one of her master's servants — the NPC (or a servant the NPC sends, servant ↔ servant) asks HER too */
    if(!G&&svtSrvMe()&&t&&t===srvM()&&t!==p&&!S.dead&&R((t.staff||[]).length+1)===0){const sv=(p.staff||[]).filter(x=>!x.out);const a=sv.length&&roll(B.npc.srvAsk)?pick(sv):null;
     if(!(typeof Q!=="undefined"&&Q.some(q=>q&&q.pid==="svtAsk"))){try{pushDil(mkP("svtAsk",a?{s:a.sid}:{r:p.id}));SVT.stat.askMe=(SVT.stat.askMe||0)+1}catch(e){}}}
-   else if(t&&t!==p&&(t===S||!G)&&t.staff&&t.staff.length){const s=pick(t.staff);if(s&&s.spyFor!==key(p)){const x=svTalk(p,s);if(t===S&&x)ev+=x}}}
+   else if(t&&t!==p&&(t===S||!G)&&t.staff&&t.staff.length){const s=pick(t.staff);if(s&&s.spyFor!==key(p)){const x=svTalk(p,s,roll(svtLenO(p)));if(t===S&&x)ev+=x}}}
   if(G)continue;for(const s of (p.staff||[]).slice()){let t=100;try{t=tinOf(s)}catch(e){}if(t<B.tin.out&&!s.spyFor&&roll(B.tin.outRoll)){try{servDo(p,"doi",s);SVT.stat.out++}catch(e){}}}}
  return ev}
 /* fix r1 (law 1, two-way): «Hỏi chuyện» reaches HER on the cung-nữ road — the same act she does to others' servants. Her choice (no refusal roll for her):
