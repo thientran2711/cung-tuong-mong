@@ -3298,3 +3298,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (02:38Z) SMALL rv 1W8A4mF7 PASS visitor-fix-r9 → e0594561 (r9 on 7dbfe98a + rv fix j65:226 Sổ ghi chips). MAIN LOOKED r9-pair-unnamed + r9-pair-log: no ??? in sentences, «Ta gặp một vị Thường tại.» OK → GO e0594561 to LC13 (replaces 98a29b65). Follow-up SMALL to VISITOR-FIX: sentence-initial capital («Một vị …») whole family.
 - (02:38Z) LIVE 9abd1de2 (offline-fast) 02:37Z; ROLLBACK d6b6fd6f. Next dayq 2b68def3. Told sếp. OFFLINE-FAST 4kPEoVSa to archive.
 - (02:51Z) BIG rv 2EFxJ9Xy PASS day-queue-2 → 49f17d4d (review/day-queue-2-r6 on 7dbfe98a; shots wiped; 131 LOOKED dq4 pair) → GO to LC13 after 7dbfe98a, then e0594561 merge, then makeup. Archive DAYQ-4 + rv after LIVE.
+- (02:52Z) LIVE 2b68def3 (day-queue) 02:47Z; ROLLBACK 9abd1de2. Next minigame 3a3234ff. Queue set: 4232709a → 7dbfe98a → e0594561 → dayq-2 re-merge → makeup.
