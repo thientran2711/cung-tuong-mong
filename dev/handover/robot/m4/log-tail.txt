@@ -1,300 +1,300 @@
-06:39:03 STATUS buổi#12 Buổi chiều | Bạch Nghê Thường Quý nhân 19 tuổi Kiếp thứ nhất Tháng tám · thượng tuần · năm thứ nhất | Sắc 94 Tài 68 Tâm cơ 32 Đức 46 Danh 33 Sủng 17 | Bạc 94 Sức 100/100 | 
-06:39:03 AUTO tap "Nhịn Rất vững TỐN không ĐƯỢC được tiếng hiền đức, nàng ta không có cớ "
-06:39:05 AUTO tap "Chu toàn lễ nghĩa Rất vững TỐN Bạc -10 ĐƯỢC thêm thể diện trong cung ("
-06:39:07 BLIND TAP centre (no candidates)
-06:39:08 AUTO tap "Phạt nặng Rất vững TỐN không ĐƯỢC lấy lại đồ, Cung nữ nhị đẳng Tử Tô s"
-06:39:09 AUTO tap "Nhận"
-06:39:10 AUTO tap "Đến chúc mừng TỐN Sức -5 ĐƯỢC thiện cảm +5·lì xì Bạc +6 !"
-06:39:11 AUTO tap "Tiếp tục Rất vững TỐN không ĐƯỢC không đổi gì thêm !"
-06:39:19 BUOI 11 Buổi chiều|19 tuổi Kiếp thứ nhất Tháng tám · thượng tuần · năm thứ nhất
-06:39:19 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-06:39:20 AUTO tap "✕"
-06:39:29 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
-06:39:30 AUTO tap "Đeo ngay TỐN không ĐƯỢC không !"
-06:39:31 AUTO tap "Thêm Tài TỐN không ĐƯỢC Tài +2"
-06:39:40 AUTO tap "Giao thiệp Trò chuyện với cung nữ Ngồi nghe Cung nữ thân tín tam đẳng "
-06:39:50 AUTO tap "Y dược Sang Thái y viện xin bắt mạch Tự đi, đứng chờ thái y rảnh tay. "
-06:39:51 AUTO tap "✕"
-06:39:56 BLIND TAP centre (no candidates)
-06:39:57 STATUS buổi#13 Buổi tối | Bạch Nghê Thường Quý nhân 19 tuổi Kiếp thứ nhất Tháng tám · thượng tuần · năm thứ nhất | Sắc 94 Tài 70 Tâm cơ 32 Đức 48 Danh 32 Sủng 17 | Bạc 90 Sức 95/100 | 
-06:54:58 BUG STUCK no buổi progress for 15 min {"me":"Bạch Nghê Thường Quý nhân 19 tuổi Kiếp thứ nhất Tháng tám · thượng tuần · năm thứ nhất","when":"Buổi tối","stat":"Sắc 94 Tài 70 Tâm cơ 32 Đức 48 Danh 32 Sủng 17 | Bạc 90 Sức 95/100","mood":""} can
-06:55:14 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:15 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:16 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:16 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:17 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:18 BUG NO-EFFECT tap changed nothing 3x: «Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoàng thượng » (494,890) {"me":"Bạch Nghê Thường Quý nhân 19 tuổi Kiếp thứ nhất Tháng tám · thượng tuần · năm thứ nhất","whe
-06:55:18 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:19 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:20 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:21 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:22 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:23 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:23 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:24 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:25 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:26 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:27 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:28 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:29 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:29 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:30 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:31 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:32 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:33 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:34 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:35 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:36 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:36 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:37 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:38 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:39 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:40 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:41 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:42 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:42 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:55 AUTO tap "Theo Hoàng thượng Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn, Hoà"
-06:55:56 AUTO tap "Không dự Rất vững TỐN không ĐƯỢC không !"
-06:56:04 BUOI 12 Buổi tối|19 tuổi Kiếp thứ nhất Tháng tám · thượng tuần · năm thứ nhất
-06:56:04 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-06:56:15 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
-06:56:16 AUTO tap "Hành sự"
-06:56:17 AUTO tap "Sang ngày mới"
-06:56:17 AUTO tap "Chuẩn bị thị tẩm"
-06:56:18 AUTO tap "tạm Giữ chân Hoàng thượng Tùy duyên TỐN không ĐƯỢC dựa vào ân sủng, nh"
-06:56:19 AUTO tap "tạm Giữ chân Hoàng thượng Tùy duyên TỐN không ĐƯỢC dựa vào ân sủng, nh"
-06:56:20 AUTO tap "✕"
-06:56:21 AUTO tap "✕"
-06:56:24 BLIND TAP centre (no candidates)
-06:56:24 STATUS buổi#14 Buổi sáng | Bạch Nghê Thường Quý nhân 19 tuổi Kiếp thứ nhất Tháng tám · trung tuần · năm thứ nhất | Sắc 94 Tài 70 Tâm cơ 32 Đức 48 Danh 31 Sủng 19 | Bạc 90 Sức 100/100 | 
-06:56:24 AUTO tap "Tiếp theo"
-06:56:25 AUTO tap "›"
-06:56:26 AUTO tap "✕"
-06:56:27 AUTO tap "✕"
-06:56:28 AUTO tap "✕"
-06:56:38 BUOI 13 Buổi sáng| 19 tuổi Kiếp thứ nhất Tháng tám · trung tuần · năm thứ nhất
-06:56:38 AUTO tap "Hành sự"
-06:56:39 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-06:56:49 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
-06:56:51 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-06:57:01 AUTO tap "Giao thiệp Điểm trang Ngồi trước gương: chọn y phục theo dịp hôm nay, "
-06:57:01 MG intro: SKIP (10%)
-06:57:01 AUTO touch-tap Sẵn sàng bắt đầu chơi
-06:57:13 MG: phase never reached play after Sẵn sàng
-06:57:13 AUTO tap "✕"
-06:57:14 AUTO tap "Tiếp theo"
-06:57:15 AUTO tap "Đã hiểu"
-06:57:16 STATUS buổi#15 Buổi trưa | Bạch Nghê Thường Quý nhân 19 tuổi Kiếp thứ nhất Tháng tám · trung tuần · năm thứ nhất | Sắc 94 Tài 70 Tâm cơ 32 Đức 48 Danh 31 Sủng 19 | Bạc 90 Sức 100/100 | 
-06:57:16 BUOI 14 Buổi trưa| 19 tuổi Kiếp thứ nhất Tháng tám · trung tuần · năm thứ nhất
-06:57:16 AUTO tap "Hành sự"
-06:57:17 AUTO tap "Tiếp ▸"
-06:57:18 AUTO tap "Tiếp ▸"
-06:57:19 AUTO tap "✕"
-06:57:20 AUTO tap "Sang buổi"
-06:57:21 AUTO tap "Sang buổi"
-06:57:22 AUTO tap "Sang buổi"
-06:57:22 AUTO tap "Sang buổi"
-06:57:23 AUTO tap "Sang buổi"
-06:57:24 AUTO tap "Sang buổi"
-06:57:25 BUG NO-EFFECT tap changed nothing 3x: «Sang buổi» (709,956) {"me":"Bạch Nghê Thường Quý nhân 19 tuổi Kiếp thứ nhất Tháng tám · trung tuần · năm thứ nhất","when":"Buổi trưa","stat":"Sắc 94 Tài 70 Tâm cơ 32 Đức 48 Danh 31 Sủng 19 | Bạc 90 Sức 10
-06:57:25 AUTO tap "Sang buổi"
-06:57:26 AUTO tap "Sang buổi"
-06:57:27 AUTO tap "Sang buổi"
-06:57:28 AUTO tap "Sang buổi"
-06:57:29 AUTO tap "Sang buổi"
-06:57:29 AUTO tap "Sang buổi"
-06:57:30 AUTO tap "Sang buổi"
-06:58:14 TAP "Dư đồ"
-06:58:32 AUTO tap "Xin một liều thuốc an thần Rất vững TỐN Bạc -20·1 khắc ĐƯỢC người ấy c"
-06:58:33 AUTO tap "✕"
-06:58:41 AUTO tap "Sang buổi"
-06:58:42 STATUS buổi#16 Buổi chiều | Bạch Nghê Thường Quý nhân 19 tuổi Kiếp thứ nhất Tháng tám · trung tuần · năm thứ nhất | Sắc 94 Tài 70 Tâm cơ 32 Đức 48 Danh 31 Sủng 19 | Bạc 70 Sức 100/100 | 
-06:58:42 BUOI 15 Buổi chiều| 19 tuổi Kiếp thứ nhất Tháng tám · trung tuần · năm thứ nhất
-06:58:42 AUTO tap "Hành sự"
-06:58:43 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-06:58:53 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
-06:59:03 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-06:59:13 AUTO tap "Y dược Mời thái y bắt mạch Mời Thái y Trương Nhân Phủ đến tận cung xem"
-06:59:17 STATUS buổi#17 Buổi tối | Bạch Nghê Thường Quý nhân 19 tuổi Kiếp thứ nhất Tháng tám · trung tuần · năm thứ nhất | Sắc 94 Tài 70 Tâm cơ 32 Đức 48 Danh 31 Sủng 19 | Bạc 60 Sức 100/100 | 
-06:59:18 AUTO tap "Không dự Rất vững TỐN không ĐƯỢC không !"
-06:59:19 AUTO tap "✕"
-06:59:20 AUTO tap "✕"
-06:59:28 BUOI 16 Buổi tối| 19 tuổi Kiếp thứ nhất Tháng tám · trung tuần · năm thứ nhất
-06:59:28 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-06:59:29 AUTO tap "✕"
-06:59:38 AUTO tap "Giao thiệp Thả đèn hoa đăng Đêm Tết Trung thu, cung nhân thả đèn trên "
-06:59:39 AUTO tap "Cầu tin tức người nhà TỐN không ĐƯỢC không !"
-06:59:40 MG intro: PLAY
-06:59:40 AUTO touch-tap Sẵn sàng từ lúc này mới tính g
-06:59:42 MG start kind= den
-07:00:00 MG RESULT kind=den «MÀN CHƠI 8/10 · Giỏi»
-07:00:00 MG end kind= den moves= 18 peekNull= 0 peekOk= 244 sample= {"drag":[[384.92180135727534,618.49375],[540.048068876204,618.49375]]} ms= 18616 {"ph":"result","score":null} 
-07:00:00 AUTO tap "✕"
-07:00:01 AUTO tap "Nhận"
-07:00:10 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
-07:00:11 AUTO tap "Hành sự"
-07:00:12 AUTO tap "Sang ngày mới"
-07:00:13 AUTO tap "Báo đúng ngày Rất vững TỐN không ĐƯỢC sổ ghi đúng, không ai bắt bẻ đượ"
-07:00:14 AUTO tap "Ta biết rồi"
-07:00:15 AUTO tap "Tranh sủng Khó lường TỐN không ĐƯỢC dựa vào ân sủng; tài nghệ góp ít ·"
-07:00:16 AUTO tap "Tranh sủng Khó lường TỐN không ĐƯỢC dựa vào ân sủng; tài nghệ góp ít ·"
-07:00:17 MG intro: PLAY
-07:00:17 AUTO touch-tap Sẵn sàng từ lúc này mới tính g
-07:00:18 MG start kind= hat
-07:00:39 MG RESULT kind=hat «KẾT QUẢ 5/10 · Khá: cơ duyên lên Tùy duyên»
-07:00:39 MG end kind= hat moves= 0 peekNull= 7 peekOk= 406 sample= {"hold":true,"x":377.5,"y":515.09375} ms= 20351 {"ph":"result","score":null} 
-07:00:39 AUTO tap "✕"
-07:00:40 AUTO tap "✕"
-07:00:42 BLIND TAP centre (no candidates)
-07:00:42 STATUS buổi#18 Buổi sáng | Bạch Nghê Thường Quý nhân 19 tuổi Kiếp thứ nhất Tháng tám · hạ tuần · năm thứ nhất | Sắc 94 Tài 70 Tâm cơ 32 Đức 47 Danh 30 Sủng 16 | Bạc 50 Sức 100/100 | 
-07:00:43 AUTO tap "Tiếp theo"
-07:00:44 AUTO tap "›"
-07:00:44 AUTO tap "✕"
-07:00:45 AUTO tap "✕"
-07:00:55 BUOI 17 Buổi sáng|hân 19 tuổi Kiếp thứ nhất Tháng tám · hạ tuần · năm thứ nhất
-07:00:55 AUTO tap "Hành sự"
-07:00:56 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-07:01:07 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
-07:01:17 AUTO tap "Giao thiệp Điểm trang Ngồi trước gương: chọn y phục theo dịp hôm nay, "
-07:01:17 MG intro: PLAY
-07:01:17 AUTO touch-tap Sẵn sàng bắt đầu chơi
-07:01:29 MG: phase never reached play after Sẵn sàng
-07:01:29 AUTO tap "✕"
-07:01:30 AUTO tap "Tiếp theo"
-07:01:31 AUTO tap "Đã hiểu"
-07:01:32 AUTO tap "Tiếp ▸"
-07:01:33 AUTO tap "✕"
-07:01:34 AUTO tap "Về phòng"
-07:01:36 AUTO tap "Hành sự"
-07:01:37 AUTO tap "Tiếp chuyện TỐN 1 khắc ĐƯỢC cùng Tần Tạ Nhạn Hồi trải qua khắc này"
-07:01:41 STATUS buổi#19 Buổi trưa | Bạch Nghê Thường Quý nhân 19 tuổi Kiếp thứ nhất Tháng tám · hạ tuần · năm thứ nhất | Sắc 94 Tài 70 Tâm cơ 32 Đức 47 Danh 30 Sủng 16 | Bạc 50 Sức 100/100 | 
-07:01:41 AUTO tap "✕"
-07:01:42 AUTO tap "Mượn bộ diêu vàng (Vàng) của Phi Nghiêm Tố Tuyết Rất vững TỐN 1 khắc Đ"
-07:01:43 AUTO tap "✕"
-07:01:52 BUOI 18 Buổi trưa|hân 19 tuổi Kiếp thứ nhất Tháng tám · hạ tuần · năm thứ nhất
-07:01:52 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-07:02:02 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
-07:02:12 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-07:02:16 STATUS buổi#20 Buổi chiều | Bạch Nghê Thường Quý nhân 19 tuổi Kiếp thứ nhất Tháng tám · hạ tuần · năm thứ nhất | Sắc 94 Tài 70 Tâm cơ 32 Đức 47 Danh 30 Sủng 16 | Bạc 50 Sức 100/100 | 
-07:02:16 AUTO tap "✕"
-07:02:24 BUOI 19 Buổi chiều|hân 19 tuổi Kiếp thứ nhất Tháng tám · hạ tuần · năm thứ nhất
-07:02:24 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-07:02:35 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
-07:02:36 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-07:02:46 AUTO tap "Y dược Mời thái y bắt mạch Mời Thái y Trương Nhân Phủ đến tận cung xem"
-07:02:51 BLIND TAP centre (no candidates)
-07:02:52 STATUS buổi#21 Buổi tối | Bạch Nghê Thường Quý nhân 19 tuổi Kiếp thứ nhất Tháng tám · hạ tuần · năm thứ nhất | Sắc 94 Tài 70 Tâm cơ 32 Đức 47 Danh 30 Sủng 16 | Bạc 40 Sức 100/100 | 
-07:02:52 AUTO tap "Cho mọi người lui, nghe riêng Rất vững TỐN Sức -8·Bạc -20 ĐƯỢC thêm ta"
-07:03:00 BUOI 20 Buổi tối|hân 19 tuổi Kiếp thứ nhất Tháng tám · hạ tuần · năm thứ nhất
-07:03:01 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-07:03:02 AUTO tap "✕"
-07:03:11 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-07:03:11 AUTO tap "Tiếp ▸"
-07:03:12 AUTO tap "✕"
-07:03:21 AUTO tap "Về phòng"
-07:03:22 AUTO tap "Hành sự"
-07:03:23 AUTO tap "Tiếp chuyện TỐN 1 khắc ĐƯỢC cùng Thường tại Lữ Họa Nhi trải qua khắc n"
-07:03:31 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-07:03:35 AUTO tap "Ta biết rồi"
-07:03:37 AUTO tap "Chặn ngự giá Có cơ TỐN không ĐƯỢC dựa vào nhan sắc, ân sủng; tài nghệ "
-07:03:37 MG intro: PLAY
-07:03:37 AUTO touch-tap Sẵn sàng từ lúc này mới tính g
-07:03:39 MG start kind= mua
-07:04:08 MG RESULT kind=mua «THÂN PHẬN môn thường của thân phận này · tay quen Khá · 1/10 → 4/10 KẾT QUẢ 4/10 · Tạm được: cơ duyên giữ nguyên Có cơ»
-07:04:08 MG end kind= mua moves= 8 peekNull= 600 peekOk= 42 sample= {"x":377.5,"y":378.69375} ms= 29472 {"ph":"result","score":null} 
-07:04:09 AUTO tap "✕"
-07:04:12 BLIND TAP centre (no candidates)
-07:04:12 STATUS buổi#22 Buổi sáng | Bạch Nghê Thường Quý nhân 19 tuổi Kiếp thứ nhất Tháng chín · thượng tuần · năm thứ nhất | Sắc 94 Tài 70 Tâm cơ 32 Đức 47 Danh 28 Sủng 7 | Bạc 87 Sức 100/100 | 
-07:04:12 AUTO tap "Tiếp theo"
-07:04:13 AUTO tap "Nhận"
-07:04:14 AUTO tap "›"
-07:04:15 AUTO tap "✕"
-07:04:16 AUTO tap "✕"
-07:04:26 BUOI 21 Buổi sáng|9 tuổi Kiếp thứ nhất Tháng chín · thượng tuần · năm thứ nhất
-07:04:26 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-07:04:36 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-07:04:46 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
-07:04:57 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-07:05:00 STATUS buổi#23 Buổi trưa | Bạch Nghê Thường Quý nhân 19 tuổi Kiếp thứ nhất Tháng chín · thượng tuần · năm thứ nhất | Sắc 94 Tài 70 Tâm cơ 33 Đức 47 Danh 30 Sủng 7 | Bạc 87 Sức 100/100 | 
-07:05:01 AUTO tap "Cho người tra xem ai tung tin Rất vững TỐN Bạc -10·1 khắc ĐƯỢC biết kẻ"
-07:05:02 AUTO tap "Chu toàn lễ nghĩa Rất vững TỐN Bạc -10 ĐƯỢC thêm thể diện trong cung ("
-07:05:03 AUTO tap "✕"
-07:05:11 BUOI 22 Buổi trưa|9 tuổi Kiếp thứ nhất Tháng chín · thượng tuần · năm thứ nhất
-07:05:11 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-07:05:21 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
-07:05:31 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-07:05:35 SAVE EXPORT buoi#24
-07:05:35 STATUS buổi#24 Buổi chiều | Bạch Nghê Thường Quý nhân 19 tuổi Kiếp thứ nhất Tháng chín · thượng tuần · năm thứ nhất | Sắc 94 Tài 70 Tâm cơ 33 Đức 47 Danh 31 Sủng 7 | Bạc 67 Sức 100/100 | 
-07:05:36 AUTO tap "Thưởng vì che chắn cho chủ khi bị xô Rất vững TỐN Bạc -10 ĐƯỢC người ấ"
-07:05:37 AUTO tap "Đến chúc mừng TỐN Sức -5 ĐƯỢC thiện cảm +5·lì xì Bạc +6 !"
-07:05:38 AUTO tap "Mượn bộ diêu vàng (Vàng) của Phi Nghiêm Tố Tuyết Rất vững TỐN 1 khắc Đ"
-07:05:39 AUTO tap "Viết hộ ngay tại chỗ TỐN Sức -8·Danh -3 ĐƯỢC Đức +3·Hoàng hậu → ta: th"
-07:05:40 AUTO tap "Nhận thêu một nửa TỐN Sức -5 ĐƯỢC Đức tần Tạ Nhạn Hồi thiện cảm +2"
-07:05:49 BUOI 23 Buổi chiều|9 tuổi Kiếp thứ nhất Tháng chín · thượng tuần · năm thứ nhất
-07:05:49 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-07:05:59 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
-07:06:09 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-07:06:13 STATUS buổi#25 Buổi tối | Bạch Nghê Thường Quý nhân 19 tuổi Kiếp thứ nhất Tháng chín · thượng tuần · năm thứ nhất | Sắc 94 Tài 70 Tâm cơ 34 Đức 50 Danh 28 Sủng 7 | Bạc 63 Sức 96/100 | 
-07:06:13 AUTO tap "✕"
-07:06:15 AUTO tap "✕"
-07:06:16 AUTO tap "Không cược, chỉ xem Rất vững TỐN không ĐƯỢC không !"
-07:06:24 BUOI 24 Buổi tối|9 tuổi Kiếp thứ nhất Tháng chín · thượng tuần · năm thứ nhất
-07:06:24 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-07:06:34 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
-07:06:35 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-07:06:45 AUTO tap "Nghỉ ngơi Giả bệnh Cáo bệnh để Hoàng thượng thương xót, tránh việc khó"
-07:06:49 AUTO tap "Ta biết rồi"
-07:06:50 AUTO tap "✕"
-07:06:53 BLIND TAP centre (no candidates)
-07:06:53 STATUS buổi#26 Buổi sáng | Bạch Nghê Thường Quý nhân 19 tuổi Kiếp thứ nhất Tháng chín · trung tuần · năm thứ nhất | Sắc 94 Tài 70 Tâm cơ 34 Đức 47 Danh 27 Sủng 8 | Bạc 63 Sức 100/100 | 
-07:06:54 AUTO tap "Tiếp theo"
-07:06:54 AUTO tap "›"
-07:06:55 AUTO tap "✕"
-07:06:56 AUTO tap "✕"
-07:06:57 AUTO tap "✕"
-07:06:58 AUTO tap "✕"
-07:07:08 BUOI 25 Buổi sáng|19 tuổi Kiếp thứ nhất Tháng chín · trung tuần · năm thứ nhất
-07:07:09 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-07:07:19 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
-07:07:20 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-07:07:30 AUTO tap "Giao thiệp Điểm trang Ngồi trước gương: chọn y phục theo dịp hôm nay, "
-07:07:31 MG intro: PLAY
-07:07:31 AUTO touch-tap Sẵn sàng bắt đầu chơi
-07:07:42 MG: phase never reached play after Sẵn sàng
-07:07:42 AUTO tap "✕"
-07:07:43 AUTO tap "Tiếp theo"
-07:07:44 AUTO tap "Đã hiểu"
-07:07:45 AUTO tap "✕"
-07:07:46 AUTO tap "Hành sự"
-07:07:47 AUTO tap "Sang buổi"
-07:07:48 STATUS buổi#27 Buổi trưa | Bạch Nghê Thường Quý nhân 19 tuổi Kiếp thứ nhất Tháng chín · trung tuần · năm thứ nhất | Sắc 94 Tài 70 Tâm cơ 34 Đức 47 Danh 27 Sủng 8 | Bạc 78 Sức 100/100 | 
-07:07:48 BUOI 26 Buổi trưa|19 tuổi Kiếp thứ nhất Tháng chín · trung tuần · năm thứ nhất
-07:07:48 AUTO tap "Hành sự"
-07:07:49 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-07:08:00 AUTO tap "Y dược Mời thái y bắt mạch Mời Thái y Trương Nhân Phủ đến tận cung xem"
-07:08:10 AUTO tap "Giao thiệp Trò chuyện với cung nữ Ngồi nghe Cung nữ thân tín tam đẳng "
-07:08:11 AUTO tap "✕"
-07:08:19 AUTO tap "Y dược Sang Thái y viện xin bắt mạch Tự đi, đứng chờ thái y rảnh tay. "
-07:08:21 AUTO tap "✕"
-07:08:25 STATUS buổi#28 Buổi chiều | Bạch Nghê Thường Quý nhân 19 tuổi Kiếp thứ nhất Tháng chín · trung tuần · năm thứ nhất | Sắc 94 Tài 70 Tâm cơ 34 Đức 47 Danh 27 Sủng 8 | Bạc 68 Sức 95/100 | 
-07:08:25 AUTO tap "Đã hiểu, sẽ chuẩn bị TỐN không ĐƯỢC mua thêm đồ ở Nội vụ phủ hay mượn "
-07:08:26 AUTO tap "Đã hiểu, sẽ chuẩn bị TỐN không ĐƯỢC mua thêm đồ ở Nội vụ phủ hay mượn "
-07:08:27 AUTO tap "Đã hiểu, sẽ chuẩn bị TỐN không ĐƯỢC mua thêm đồ ở Nội vụ phủ hay mượn "
-07:08:28 AUTO tap "Đã hiểu, sẽ chuẩn bị TỐN không ĐƯỢC mua thêm đồ ở Nội vụ phủ hay mượn "
-07:08:29 AUTO tap "Đã hiểu, sẽ chuẩn bị TỐN không ĐƯỢC mua thêm đồ ở Nội vụ phủ hay mượn "
-07:08:29 BUG NO-EFFECT tap changed nothing 3x: «Đã hiểu, sẽ chuẩn bị TỐN không ĐƯỢC mua thêm đồ ở Nội vụ phủ hay mượn của người » (494,925) {"me":"Bạch Nghê Thường Quý nhân 19 tuổi Kiếp thứ nhất Tháng chín · trung tuần · năm thứ nhất"
-07:08:30 AUTO tap "Đã hiểu, sẽ chuẩn bị TỐN không ĐƯỢC mua thêm đồ ở Nội vụ phủ hay mượn "
-07:08:30 AUTO tap "Đã hiểu, sẽ chuẩn bị TỐN không ĐƯỢC mua thêm đồ ở Nội vụ phủ hay mượn "
-07:08:31 AUTO tap "Đã hiểu, sẽ chuẩn bị TỐN không ĐƯỢC mua thêm đồ ở Nội vụ phủ hay mượn "
-07:08:32 AUTO tap "Đã hiểu, sẽ chuẩn bị TỐN không ĐƯỢC mua thêm đồ ở Nội vụ phủ hay mượn "
-07:08:33 AUTO tap "Đã hiểu, sẽ chuẩn bị TỐN không ĐƯỢC mua thêm đồ ở Nội vụ phủ hay mượn "
-07:08:40 AUTO tap "Sai tai mắt dò bên chủ hội Rất vững TỐN chờ 2 khắc ĐƯỢC biết đề chuộng"
-07:08:41 AUTO tap "Nhận lời Rất vững TỐN không ĐƯỢC người ấy có thiện cảm hơn, Thường tại"
-07:08:49 BUOI 27 Buổi chiều|19 tuổi Kiếp thứ nhất Tháng chín · trung tuần · năm thứ nhất
-07:08:50 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-07:09:00 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
-07:09:03 STATUS buổi#29 Buổi tối | Bạch Nghê Thường Quý nhân 19 tuổi Kiếp thứ nhất Tháng chín · trung tuần · năm thứ nhất | Sắc 94 Tài 70 Tâm cơ 34 Đức 47 Danh 27 Sủng 8 | Bạc 53 Sức 100/100 | 
-07:09:04 AUTO tap "Đến ngay Rất vững TỐN 2 khắc·Sức -5 ĐƯỢC Thái hậu hài lòng !"
-07:09:05 AUTO tap "✕"
-07:09:13 BUOI 28 Buổi tối|19 tuổi Kiếp thứ nhất Tháng chín · trung tuần · năm thứ nhất
-07:09:13 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
+07:26:58 AUTO tap "Rất vững"
+07:26:59 AUTO tap "Rất vững"
+07:27:00 AUTO tap "Rất vững"
+07:27:01 AUTO tap "Rất vững"
+07:27:01 AUTO tap "Rất vững"
+07:27:02 BUG NO-EFFECT tap changed nothing 3x: «Rất vững» (557,867) {"me":"Bạch Nghê Thường Thường tại 19 tuổi Kiếp thứ nhất Tháng mười một · hạ tuần · năm thứ nhất","when":"Buổi chiều","stat":"Sắc 94 Tài 69 Tâm cơ 44 Đức 54 Danh 12 Sủng 11 | B
+07:27:02 AUTO tap "Rất vững"
+07:27:03 AUTO tap "Rất vững"
+07:27:04 AUTO tap "Rất vững"
+07:27:05 AUTO tap "Rất vững"
+07:27:16 BLIND TAP (cinematic/tap-to-open)
+07:27:16 AUTO tap "blind-centre"
+07:27:17 BLIND TAP (cinematic/tap-to-open)
+07:27:17 AUTO tap "blind-centre"
+07:27:18 BLIND TAP (cinematic/tap-to-open)
+07:27:18 AUTO tap "blind-centre"
+07:27:19 BLIND TAP (cinematic/tap-to-open)
+07:27:19 AUTO tap "blind-centre"
+07:27:20 BLIND TAP (cinematic/tap-to-open)
+07:27:20 AUTO tap "blind-centre"
+07:27:20 BLIND TAP (cinematic/tap-to-open)
+07:27:21 AUTO tap "blind-centre"
+07:27:21 BLIND TAP (cinematic/tap-to-open)
+07:27:21 AUTO tap "blind-centre"
+07:27:22 BLIND TAP (cinematic/tap-to-open)
+07:27:22 AUTO tap "blind-centre"
+07:27:23 BLIND TAP (cinematic/tap-to-open)
+07:27:23 AUTO tap "blind-centre"
+07:27:24 BLIND TAP (cinematic/tap-to-open)
+07:27:24 AUTO tap "blind-centre"
+07:27:25 BLIND TAP (cinematic/tap-to-open)
+07:27:25 AUTO tap "blind-centre"
+07:27:26 BLIND TAP (cinematic/tap-to-open)
+07:27:26 AUTO tap "blind-centre"
+07:27:27 BLIND TAP (cinematic/tap-to-open)
+07:27:27 AUTO tap "blind-centre"
+07:27:27 BLIND TAP (cinematic/tap-to-open)
+07:27:27 AUTO tap "blind-centre"
+07:27:28 BLIND TAP (cinematic/tap-to-open)
+07:27:28 AUTO tap "blind-centre"
+07:27:29 BLIND TAP (cinematic/tap-to-open)
+07:27:29 AUTO tap "blind-centre"
+07:27:30 BLIND TAP (cinematic/tap-to-open)
+07:27:30 AUTO tap "blind-centre"
+07:27:31 BLIND TAP (cinematic/tap-to-open)
+07:27:31 AUTO tap "blind-centre"
+07:27:32 BLIND TAP (cinematic/tap-to-open)
+07:27:32 AUTO tap "blind-centre"
+07:27:33 BLIND TAP (cinematic/tap-to-open)
+07:27:33 AUTO tap "blind-centre"
+07:27:33 BLIND TAP (cinematic/tap-to-open)
+07:27:34 AUTO tap "blind-centre"
+07:27:34 BLIND TAP (cinematic/tap-to-open)
+07:27:34 AUTO tap "blind-centre"
+07:27:35 BLIND TAP (cinematic/tap-to-open)
+07:27:35 AUTO tap "blind-centre"
+07:27:36 BLIND TAP (cinematic/tap-to-open)
+07:27:36 AUTO tap "blind-centre"
+07:27:37 BLIND TAP (cinematic/tap-to-open)
+07:27:37 AUTO tap "blind-centre"
+07:27:38 BLIND TAP (cinematic/tap-to-open)
+07:27:38 AUTO tap "blind-centre"
+07:27:39 BLIND TAP (cinematic/tap-to-open)
+07:27:39 AUTO tap "blind-centre"
+07:27:40 BLIND TAP (cinematic/tap-to-open)
+07:27:40 AUTO tap "blind-centre"
+07:27:40 BLIND TAP (cinematic/tap-to-open)
+07:27:41 AUTO tap "blind-centre"
+07:27:41 BLIND TAP (cinematic/tap-to-open)
+07:27:41 AUTO tap "blind-centre"
+07:27:42 BLIND TAP (cinematic/tap-to-open)
+07:27:42 AUTO tap "blind-centre"
+07:27:43 BLIND TAP (cinematic/tap-to-open)
+07:27:43 AUTO tap "blind-centre"
+07:27:44 BLIND TAP (cinematic/tap-to-open)
+07:27:44 AUTO tap "blind-centre"
+07:27:45 BLIND TAP (cinematic/tap-to-open)
+07:27:45 AUTO tap "blind-centre"
+07:27:46 BLIND TAP (cinematic/tap-to-open)
+07:27:46 AUTO tap "blind-centre"
+07:27:47 BLIND TAP (cinematic/tap-to-open)
+07:27:47 AUTO tap "blind-centre"
+07:27:47 BLIND TAP (cinematic/tap-to-open)
+07:27:47 AUTO tap "blind-centre"
+07:27:48 BLIND TAP (cinematic/tap-to-open)
+07:27:48 AUTO tap "blind-centre"
+07:27:49 BLIND TAP (cinematic/tap-to-open)
+07:27:49 AUTO tap "blind-centre"
+07:27:50 BLIND TAP (cinematic/tap-to-open)
+07:27:50 AUTO tap "blind-centre"
+07:27:51 BLIND TAP (cinematic/tap-to-open)
+07:27:51 AUTO tap "blind-centre"
+07:27:52 BLIND TAP (cinematic/tap-to-open)
+07:27:52 AUTO tap "blind-centre"
+07:27:53 BLIND TAP (cinematic/tap-to-open)
+07:27:53 AUTO tap "blind-centre"
+07:27:53 BLIND TAP (cinematic/tap-to-open)
+07:27:54 AUTO tap "blind-centre"
+07:27:54 BLIND TAP (cinematic/tap-to-open)
+07:27:54 AUTO tap "blind-centre"
+07:27:55 BLIND TAP (cinematic/tap-to-open)
+07:27:55 AUTO tap "blind-centre"
+07:27:56 BLIND TAP (cinematic/tap-to-open)
+07:27:56 AUTO tap "blind-centre"
+07:27:57 BLIND TAP (cinematic/tap-to-open)
+07:27:57 AUTO tap "blind-centre"
+07:27:58 BLIND TAP (cinematic/tap-to-open)
+07:27:58 AUTO tap "blind-centre"
+07:27:59 BLIND TAP (cinematic/tap-to-open)
+07:27:59 AUTO tap "blind-centre"
+07:28:00 BLIND TAP (cinematic/tap-to-open)
+07:28:00 AUTO tap "blind-centre"
+07:28:00 BLIND TAP (cinematic/tap-to-open)
+07:28:00 AUTO tap "blind-centre"
+07:28:01 BLIND TAP (cinematic/tap-to-open)
+07:28:01 AUTO tap "blind-centre"
+07:28:02 BLIND TAP (cinematic/tap-to-open)
+07:28:02 AUTO tap "blind-centre"
+07:28:03 BLIND TAP (cinematic/tap-to-open)
+07:28:03 AUTO tap "blind-centre"
+07:28:04 BLIND TAP (cinematic/tap-to-open)
+07:28:04 AUTO tap "blind-centre"
+07:28:05 BLIND TAP (cinematic/tap-to-open)
+07:28:05 AUTO tap "blind-centre"
+07:28:06 BLIND TAP (cinematic/tap-to-open)
+07:28:06 AUTO tap "blind-centre"
+07:28:06 BLIND TAP (cinematic/tap-to-open)
+07:28:07 AUTO tap "blind-centre"
+07:28:07 BLIND TAP (cinematic/tap-to-open)
+07:28:07 AUTO tap "blind-centre"
+07:28:08 BLIND TAP (cinematic/tap-to-open)
+07:28:08 AUTO tap "blind-centre"
+07:28:09 BLIND TAP (cinematic/tap-to-open)
+07:28:09 AUTO tap "blind-centre"
+07:28:10 BLIND TAP (cinematic/tap-to-open)
+07:28:10 AUTO tap "blind-centre"
+07:28:11 BLIND TAP (cinematic/tap-to-open)
+07:28:11 AUTO tap "blind-centre"
+07:28:12 BLIND TAP (cinematic/tap-to-open)
+07:28:12 AUTO tap "blind-centre"
+07:28:13 BLIND TAP (cinematic/tap-to-open)
+07:28:13 AUTO tap "blind-centre"
+07:28:13 BLIND TAP (cinematic/tap-to-open)
+07:28:13 AUTO tap "blind-centre"
+07:28:14 BLIND TAP (cinematic/tap-to-open)
+07:28:14 AUTO tap "blind-centre"
+07:28:15 BLIND TAP (cinematic/tap-to-open)
+07:28:15 AUTO tap "blind-centre"
+07:28:16 BLIND TAP (cinematic/tap-to-open)
+07:28:16 AUTO tap "blind-centre"
+07:28:17 BLIND TAP (cinematic/tap-to-open)
+07:28:17 AUTO tap "blind-centre"
+07:28:18 BLIND TAP (cinematic/tap-to-open)
+07:28:18 AUTO tap "blind-centre"
+07:28:19 BLIND TAP (cinematic/tap-to-open)
+07:28:19 AUTO tap "blind-centre"
+07:28:19 BLIND TAP (cinematic/tap-to-open)
+07:28:20 AUTO tap "blind-centre"
+07:28:20 BLIND TAP (cinematic/tap-to-open)
+07:28:20 AUTO tap "blind-centre"
+07:28:21 BLIND TAP (cinematic/tap-to-open)
+07:28:21 AUTO tap "blind-centre"
+07:28:22 BLIND TAP (cinematic/tap-to-open)
+07:28:22 AUTO tap "blind-centre"
+07:28:23 BLIND TAP (cinematic/tap-to-open)
+07:28:23 AUTO tap "blind-centre"
+07:28:24 BLIND TAP (cinematic/tap-to-open)
+07:28:24 AUTO tap "blind-centre"
+07:28:25 BLIND TAP (cinematic/tap-to-open)
+07:28:25 AUTO tap "blind-centre"
+07:28:26 BLIND TAP (cinematic/tap-to-open)
+07:28:26 AUTO tap "blind-centre"
+07:28:26 BLIND TAP (cinematic/tap-to-open)
+07:28:26 AUTO tap "blind-centre"
+07:28:27 BLIND TAP (cinematic/tap-to-open)
+07:28:27 AUTO tap "blind-centre"
+07:28:28 BLIND TAP (cinematic/tap-to-open)
+07:28:28 AUTO tap "blind-centre"
+07:28:29 BLIND TAP (cinematic/tap-to-open)
+07:28:29 AUTO tap "blind-centre"
+07:28:30 BLIND TAP (cinematic/tap-to-open)
+07:28:30 AUTO tap "blind-centre"
+07:28:31 BLIND TAP (cinematic/tap-to-open)
+07:28:31 AUTO tap "blind-centre"
+07:28:32 BLIND TAP (cinematic/tap-to-open)
+07:28:32 AUTO tap "blind-centre"
+07:28:32 BLIND TAP (cinematic/tap-to-open)
+07:28:33 AUTO tap "blind-centre"
+07:28:33 BLIND TAP (cinematic/tap-to-open)
+07:28:33 AUTO tap "blind-centre"
+07:28:34 BLIND TAP (cinematic/tap-to-open)
+07:28:34 AUTO tap "blind-centre"
+07:28:35 BLIND TAP (cinematic/tap-to-open)
+07:28:35 AUTO tap "blind-centre"
+07:28:36 BLIND TAP (cinematic/tap-to-open)
+07:28:36 AUTO tap "blind-centre"
+07:28:37 BLIND TAP (cinematic/tap-to-open)
+07:28:37 AUTO tap "blind-centre"
+07:28:38 BLIND TAP (cinematic/tap-to-open)
+07:28:38 AUTO tap "blind-centre"
+07:28:39 BLIND TAP (cinematic/tap-to-open)
+07:28:39 AUTO tap "blind-centre"
+07:28:39 BLIND TAP (cinematic/tap-to-open)
+07:28:39 AUTO tap "blind-centre"
+07:28:40 BLIND TAP (cinematic/tap-to-open)
+07:28:40 AUTO tap "blind-centre"
+07:28:41 BLIND TAP (cinematic/tap-to-open)
+07:28:41 AUTO tap "blind-centre"
+07:28:42 BLIND TAP (cinematic/tap-to-open)
+07:28:42 AUTO tap "blind-centre"
+07:28:43 BLIND TAP (cinematic/tap-to-open)
+07:28:43 AUTO tap "blind-centre"
+07:28:44 BLIND TAP (cinematic/tap-to-open)
+07:28:44 AUTO tap "blind-centre"
+07:28:45 BLIND TAP (cinematic/tap-to-open)
+07:28:45 AUTO tap "blind-centre"
+07:28:46 BLIND TAP (cinematic/tap-to-open)
+07:28:46 AUTO tap "blind-centre"
+07:28:46 BLIND TAP (cinematic/tap-to-open)
+07:28:46 AUTO tap "blind-centre"
+07:28:47 BLIND TAP (cinematic/tap-to-open)
+07:28:47 AUTO tap "blind-centre"
+07:28:48 BLIND TAP (cinematic/tap-to-open)
+07:28:48 AUTO tap "blind-centre"
+07:28:49 BLIND TAP (cinematic/tap-to-open)
+07:28:49 AUTO tap "blind-centre"
+07:28:50 BLIND TAP (cinematic/tap-to-open)
+07:28:50 AUTO tap "blind-centre"
+07:28:51 BLIND TAP (cinematic/tap-to-open)
+07:28:51 AUTO tap "blind-centre"
+07:28:52 BLIND TAP (cinematic/tap-to-open)
+07:28:52 AUTO tap "blind-centre"
+07:28:52 BLIND TAP (cinematic/tap-to-open)
+07:28:53 AUTO tap "blind-centre"
+07:28:53 BLIND TAP (cinematic/tap-to-open)
+07:28:53 AUTO tap "blind-centre"
+07:28:54 BLIND TAP (cinematic/tap-to-open)
+07:28:54 AUTO tap "blind-centre"
+07:28:55 BLIND TAP (cinematic/tap-to-open)
+07:28:55 AUTO tap "blind-centre"
+07:28:56 BLIND TAP (cinematic/tap-to-open)
+07:28:56 AUTO tap "blind-centre"
+07:28:57 BLIND TAP (cinematic/tap-to-open)
+07:28:57 AUTO tap "blind-centre"
+07:28:58 BLIND TAP (cinematic/tap-to-open)
+07:28:58 AUTO tap "blind-centre"
+07:28:59 BLIND TAP (cinematic/tap-to-open)
+07:28:59 AUTO tap "blind-centre"
+07:28:59 BLIND TAP (cinematic/tap-to-open)
+07:28:59 AUTO tap "blind-centre"
+07:29:00 BLIND TAP (cinematic/tap-to-open)
+07:29:00 AUTO tap "blind-centre"
+07:29:01 BLIND TAP (cinematic/tap-to-open)
+07:29:01 AUTO tap "blind-centre"
+07:29:02 BLIND TAP (cinematic/tap-to-open)
+07:29:02 AUTO tap "blind-centre"
+07:29:03 BLIND TAP (cinematic/tap-to-open)
+07:29:03 AUTO tap "blind-centre"
+07:29:04 BLIND TAP (cinematic/tap-to-open)
+07:29:04 AUTO tap "blind-centre"
+07:29:05 BLIND TAP (cinematic/tap-to-open)
+07:29:05 AUTO tap "blind-centre"
+07:29:05 BLIND TAP (cinematic/tap-to-open)
+07:29:05 AUTO tap "blind-centre"
+07:29:06 BLIND TAP (cinematic/tap-to-open)
+07:29:06 AUTO tap "blind-centre"
+07:29:07 BLIND TAP (cinematic/tap-to-open)
+07:29:07 AUTO tap "blind-centre"
+07:29:08 BLIND TAP (cinematic/tap-to-open)
+07:29:08 AUTO tap "blind-centre"
+07:29:09 BLIND TAP (cinematic/tap-to-open)
+07:29:09 AUTO tap "blind-centre"
+07:29:10 BLIND TAP (cinematic/tap-to-open)
+07:29:10 AUTO tap "blind-centre"
+07:29:11 BLIND TAP (cinematic/tap-to-open)
+07:29:11 AUTO tap "blind-centre"
+07:29:12 BLIND TAP (cinematic/tap-to-open)
+07:29:12 AUTO tap "blind-centre"
+07:29:12 BLIND TAP (cinematic/tap-to-open)
+07:29:12 AUTO tap "blind-centre"
+07:29:13 BLIND TAP (cinematic/tap-to-open)
+07:29:13 AUTO tap "blind-centre"
+07:29:14 BLIND TAP (cinematic/tap-to-open)
+07:29:14 AUTO tap "blind-centre"
+07:29:15 BLIND TAP (cinematic/tap-to-open)
+07:29:15 AUTO tap "blind-centre"
+07:29:16 BLIND TAP (cinematic/tap-to-open)
+07:29:16 AUTO tap "blind-centre"
+07:29:17 BLIND TAP (cinematic/tap-to-open)
+07:29:17 AUTO tap "blind-centre"
+07:29:18 BLIND TAP (cinematic/tap-to-open)
+07:29:18 AUTO tap "blind-centre"
+07:29:18 BLIND TAP (cinematic/tap-to-open)
+07:29:18 AUTO tap "blind-centre"
+07:29:19 BLIND TAP (cinematic/tap-to-open)
+07:29:19 AUTO tap "blind-centre"
+07:29:20 BLIND TAP (cinematic/tap-to-open)
+07:29:20 AUTO tap "blind-centre"
+07:29:21 BLIND TAP (cinematic/tap-to-open)
+07:29:21 AUTO tap "blind-centre"

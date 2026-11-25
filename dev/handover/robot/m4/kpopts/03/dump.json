@@ -1,0 +1,98 @@
+{
+ "buoi": 51,
+ "hud": "Bạch Nghê Thường Thường tại 19 tuổi Kiếp thứ nhất Tháng mười một · trung tuần · năm thứ nhất | Buổi tối",
+ "build": "0756a05b",
+ "at": "2026-11-25T07:25:01.441Z",
+ "dump": {
+  "title": "Tin đồn",
+  "bad": 1,
+  "frameBottom": 898,
+  "dlgClass": "dlg kpsc kpanel kszf ksz3 kszlive",
+  "dlgStyle": "--kdpw: 175px;",
+  "modalClass": "modal",
+  "ksz": [
+   "dlg kpsc kpanel kszf ksz3 kszlive",
+   "kszfig",
+   "kszfs"
+  ],
+  "rects": {
+   "dlg": [
+    97,
+    102,
+    562,
+    796
+   ],
+   "modal": [
+    0,
+    0,
+    755,
+    1000
+   ],
+   "opts": [
+    342,
+    440,
+    304,
+    445
+   ],
+   "kpopts": [
+    342,
+    440,
+    304,
+    445
+   ],
+   "k3right": [
+    342,
+    171,
+    304,
+    714
+   ],
+   "mb": [
+    98,
+    161,
+    560,
+    736
+   ],
+   "body": [
+    98,
+    161,
+    560,
+    736
+   ]
+  },
+  "kpoptsScroll": [
+   0,
+   683,
+   445
+  ],
+  "cards": [
+   [
+    342,
+    440,
+    304,
+    140
+   ],
+   [
+    342,
+    586,
+    304,
+    184
+   ],
+   [
+    342,
+    775,
+    304,
+    167
+   ],
+   [
+    342,
+    949,
+    304,
+    167
+   ]
+  ],
+  "vp": [
+   755,
+   1000
+  ]
+ }
+}
