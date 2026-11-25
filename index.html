@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"e4d86c92","t":"2026-11-25T16:48Z","c":"net-ghen-2 W10 (residual c, LAW 11 whole family): an act card's walk into its place (jstagehere actMove → goTo) no longer runs the Cần Chín…","b":"9bbd8beba719","h":[{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"}]};
+window.CTM_BI={"s":"402dbe43","t":"2026-11-25T17:43Z","c":"LAW 11 act walk family: name familiarity steps that rise after the result card","b":"133f912d4957","h":[{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -29196,22 +29196,43 @@ window.kaLearn=kaLearn;
    against her (evG(h,S)) is a real change of the tap → «<tên>: nắm chứng cứ về ta ±N» (Mất when it rises). Plain numbers by key only. */
 function kaEvHolders(){const L=[].concat(typeof rivals!=="undefined"?rivals:[]);for(const x of kaSrvList())if(!L.includes(x))L.push(x);return L.filter(h=>h&&h!==S)}
 function kaEvKey(h){return rivals.includes(h)?"r"+h.id:"s"+h.sid}
+function kaKnRows(kn0){const per=[];if(kn0&&S&&S.known&&typeof K61STN!=="undefined"&&typeof KREG!=="undefined"){const SV=kaSrvList();
+  for(const k in S.known){const a=+kn0[k]||0,n=+S.known[k]||0;if(!(n>a)||!K61STN[n]||k==="me")continue;const p=KREG[k];if(!p||p===S)continue;
+   const rv=rivals.includes(p),nd=kaNamed(p);let who;
+   if(SV.includes(p))who=nd?(p.call||p.name):"một cung nhân";
+   else if(rv)who=nd?kaWho(p):String(typeof whyWho==="function"?whyWho(p):"Một vị phi tần").replace(/^M/,"m");
+   else{try{who=nd&&typeof k61Title==="function"?k61Title(p):typeof k61Desc==="function"?k61Desc(p):""}catch(e){who=""}if(!who)who=nd?(p.name||"người ấy"):"một người lạ"}
+   per.push([who,[K61STN[n].toLowerCase()],[],""])}}return per}
 function kaMorePeople(before,per,G){const per0=per;per={push(e){const x=per0.find(y=>y[0]===e[0]);if(x){x[1]=x[1].concat(e[1]);x[2]=x[2].concat(e[2])}else per0.push(e)}};/* one row per person */
  if(before.srv){for(const st of kaSrvList()){const b=before.srv[st.sid];if(b==null)continue;const d=Math.round(kaSrvV(st)-b);if(!d)continue;
   const named=kaNamed(st);const who=named?(st.call||st.name):"một cung nhân";per.push([who,d>0?[`thiện cảm ${kaN(d)}`]:[],d<0?[`thiện cảm ${kaN(d)}`]:[],""])}}
  if(before.court)for(const k in (S.court||{})){const x=S.court[k],b=before.court[k];if(!x||!x.af||b==null)continue;const d=Math.round((x.af.me||0)-b);if(d)per.push([x.name,d>0?[`thiện cảm ${kaN(d)}`]:[],d<0?[`thiện cảm ${kaN(d)}`]:[],""])}
  /* W9 (LAW 11): EVERY person whose familiarity step rose (S.known key → the person, KREG of j61): consorts, servants, and also the men,
     the Thái y, the court officials (rc-scan: Thái y viện / Biếu quà, gửi thư were not named). Same who-words as the rows above so one person = one row. */
- if(before.kn&&S.known&&typeof K61STN!=="undefined"&&typeof KREG!=="undefined"){const SV=kaSrvList();
-  for(const k in S.known){const a=+before.kn[k]||0,n=+S.known[k]||0;if(!(n>a)||!K61STN[n]||k==="me")continue;const p=KREG[k];if(!p||p===S)continue;
-   const rv=rivals.includes(p),nd=kaNamed(p);let who;
-   if(SV.includes(p))who=nd?(p.call||p.name):"một cung nhân";
-   else if(rv)who=nd?kaWho(p):String(typeof whyWho==="function"?whyWho(p):"Một vị phi tần").replace(/^M/,"m");
-   else{try{who=nd&&typeof k61Title==="function"?k61Title(p):typeof k61Desc==="function"?k61Desc(p):""}catch(e){who=""}if(!who)who=nd?(p.name||"người ấy"):"một người lạ"}
-   per.push([who,[K61STN[n].toLowerCase()],[],""])}}
+ if(before.kn)for(const e of kaKnRows(before.kn))per.push(e);
  if(before.evOn){for(const h of kaEvHolders()){const b=before.evOn[kaEvKey(h)];if(b==null)continue;const d=Math.round(evG(h,S)-b);if(!d)continue;const rv=rivals.includes(h),nd=kaNamed(h);
   const who=rv?(nd?kaWho(h):String(typeof whyWho==="function"?whyWho(h):"Một vị phi tần").replace(/^M/,"m")):(nd?(h.call||h.name):"một cung nhân");const t=`nắm chứng cứ về ta ${kaN(d)}`;per.push([who,d<0?[t]:[],d>0?[t]:[],""])}}
  if(before.learn!=null)for(const x of (window.__kaLearn||[]))if(x.n>before.learn)G.push(`<span class="ef g">${x.t}</span>`)}
+/* W10b (LAW 11 «shown == applied», act walk family): S.known can rise AFTER an act's result card was built: (1) j61's morning-audience
+   wrapper (Thỉnh an Hoàng hậu / Thái hậu: k61Know of the people named) runs after the base act; (2) jstagehere actMove walks her into the
+   act's place (goTo) and the people met on arrival are known (Múa / Để ý một nam nhân → the man there). resultShow keeps the S.known its
+   card reflects (window.__kaKnAt); the jstagehere act wrapper passes that as kn0. kaWalkKn(kn0,title) names every familiarity step that rose since kn0 with the SAME rows as the card (kaKnRows, KREG + K61STN):
+   the act's card still up → the rows join its «Được» line (one person = one row); the card already closed → the kit result card (§93.8
+   kitResultCard) shows them under the act's title. No number of its own. Returns 0 nothing rose / 1 merged / 2 own card. */
+function kaWalkKn(kn0,title){try{if(!kn0||!S||S.dead)return 0;const per=kaKnRows(kn0);if(!per.length)return 0;
+ const t=document.getElementById("rtoast"),L=window.kaLastResult;
+ if(t&&t.classList.contains("on")&&L&&Array.isArray(L.rows)){let r=L.rows.find(x=>x.k==="duoc");if(!r){L.rows=L.rows.filter(x=>x.k!=="note");r={k:"duoc",label:"Được",items:[]};L.rows.unshift(r)}
+  const kb=t.querySelector(".kb");if(kb){const nt=kb.querySelector(".kr-note");if(nt)nt.remove()}
+  let d=kb&&kb.querySelector(".kr-duoc .krv");if(kb&&!d){kb.insertAdjacentHTML("afterbegin",`<span class="kr kr-duoc"><span class="krl">Được</span><span class="krv"></span></span>`);d=kb.querySelector(".kr-duoc .krv")}
+  for(const [who,gp] of per){const w=gp.join(", "),pw=kaPlain(who)+":";const i=r.items.findIndex(x=>String(x).startsWith(pw+" "));
+   if(i>=0)r.items[i]+=", "+w;else r.items.push(`${pw} ${w}`);
+   const el=d&&[...d.querySelectorAll(".kitem")].find(x=>{const h=x.querySelector(".ef.t");return h&&h.textContent.trim()===pw});
+   if(el){const g=el.querySelector(".ef.g");if(g)g.textContent+=", "+w;else el.insertAdjacentHTML("beforeend",` <span class="ef g">${w}</span>`)}
+   else if(d)d.insertAdjacentHTML("beforeend",`<span class="kitem"><span class="ef t">${who}:</span> <span class="ef g">${w}</span></span>`)}
+  window.__kaKnAt=Object.assign({},S.known||{});clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),9000);return 1}
+ if(window.__bot||typeof kitResultCard!=="function")return 0;
+ kitResultCard({title:title||"",ok:null,rows:[{k:"duoc",label:"Được",items:per.map(([who,gp])=>`<span class="ef t">${who}:</span> <span class="ef g">${gp.join(", ")}</span>`)}]});window.__kaKnAt=Object.assign({},S.known||{});return 2}catch(e){console.error("kaWalkKn",e);return 0}}
+window.kaWalkKn=kaWalkKn;
 function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Set();const WC=kaWhyCl(before);
  const q=typeof queenP==="function"?queenP():null;const R=before.rel||{};
  const per=[];const U={g:[],b:[],d:new Map()};/* [who, goodParts, badParts] */
@@ -29280,6 +29301,7 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
  t.onclick=e=>{const kk=e.target.closest(".kkem");if(kk){e.stopPropagation();const on=!kk.classList.contains("on");kk.classList.toggle("on",on);kk.setAttribute("aria-expanded",String(on));clearTimeout(window.__rtT);return}
   if(e.target.closest(".kalog")){const tb=document.querySelector('[data-tab="log"]');if(tb)tb.click();else{try{tab="log";renderPanel()}catch(x){}}}t.classList.remove("on")};
  const rows=[];if(G.length)rows.push({k:"duoc",label:"Được",items:G});if(B.length)rows.push({k:"mat",label:"Mất",items:B});if(!rows.length&&!(K&&K.length))rows.push({k:"note",label:"Ghi chú",items:['<span class="ef n">ta không được gì, cũng không mất gì</span>']});
+ window.__kaKnAt=Object.assign({},S.known||{});/* W10b: the familiarity this card reflects (kaWalkKn names what rises after it) */
  window.kaLastResult={title,ok,seal,sentence:sen,rows:rows.map(r=>({k:r.k,label:r.label,items:r.items.map(kaPlain)})),kem:(K||[]).filter(x=>Math.round(x.d)).map(x=>`${x.v&&x.v.name||""}: ${x.k} ${kaN(Math.round(x.d))}`)};/* kem: the Kèm line as data (scans) */
  const row=r=>`<span class="kr kr-${r.k}"><span class="krl">${r.label}</span><span class="krv">${r.items.map(x=>`<span class="kitem">${x}</span>`).join("")}</span></span>`;
  t.className="rtoast karesult "+SL.cls;
@@ -92798,9 +92820,17 @@ function actMove(k){try{if(!k||!S||S.dead||S.out||S.confined||S.place===k)return
  if(typeof accGrant==="function")accGrant(S,k);const u=used,q=window.__accSilent;window.__accSilent=1;try{used=0;goTo(k)}finally{used=u;window.__accSilent=q}
  return S.place===k}catch(e){return false}}
 window.actMove=actMove;
-if(typeof act==="function"){const a0=act;act=function(i){const a=typeof deck!=="undefined"&&deck?deck[i]:null;const was=!!(a&&a.done),k=actPlace(a);const r=a0.apply(this,arguments);
- try{if(k&&a&&a.done&&!was){if(Q.length)window.__actPend={k,bk:typeof bkey==="function"?bkey():""};/* goTo waits while the result card is up */
-  else if(actMove(k)&&typeof render==="function")render()}}catch(e){}return r}}
+/* W10b (LAW 11): name the familiarity steps that rose since kn0 (j63 kaWalkKn, the card's own KREG rows) */
+function actKn(kn0,n){try{if(typeof kaWalkKn==="function")kaWalkKn(kn0,n)}catch(e){}}
+window.actKn=actKn;
+/* W10b: knA = S.known before the act; kn0 = what its card reflects (j63 __kaKnAt) or knA when no card was built; the steps that rose after
+   (j61 audience names, the walk's arrival) are named by kaWalkKn: at once when a dialog keeps the walk waiting, else with the walk */
+if(typeof act==="function"){const a0=act;act=function(i){const a=typeof deck!=="undefined"&&deck?deck[i]:null;const was=!!(a&&a.done),k=actPlace(a);
+ let knA=null;try{knA=Object.assign({},(S&&S.known)||{});window.__kaKnAt=null}catch(e){}const r=a0.apply(this,arguments);
+ try{if(a&&a.done&&!was){const sync=!!window.__kaKnAt,nameIt=()=>actKn(window.__kaKnAt||knA,a.n);/* a card built on a timer (jhouse hsvDone) comes first: name one tick later */
+  const kn=()=>{if(sync)nameIt();else setTimeout(nameIt,0)};
+  if(!k||Q.length){kn();if(k)window.__actPend={k,n:a.n,bk:typeof bkey==="function"?bkey():""}/* goTo waits while the result card is up */}
+  else{const m=actMove(k);kn();if(m&&typeof render==="function")render()}}}catch(e){}return r}}
 /* r2 (d) STAYING AFTER CLOSING = LẺN VÀO (MAIN ROOT-55 20:08Z (d), BIG review): at a buổi turn that finds her still inside a place that is
    now closed to her (accessOf says no; not her own palace), the existing «Lẻn vào» caught row is rolled ONCE for that buổi: j41 accSneakO(k)
    odds (the same number the map's Lẻn vào button shows), caught = BAL.sneak.danh + punish (exactly accSneak's fail branch) and the guards
@@ -92816,7 +92846,7 @@ function stayRoll(k,bk0){try{if(!S||S.dead||S.out||S.confined||!k||k==="home"||S
 window.stayRoll=stayRoll;
 if(typeof nextBuoi==="function"){const nb0=nextBuoi;nextBuoi=function(){const k=S&&S.place,bk0=typeof bkey==="function"?bkey():"";const r=nb0.apply(this,arguments);try{stayRoll(k,bk0)}catch(e){}return r}}
 /* the pending trip runs when the act's cards are closed, in the same buổi (a day/buổi turn in between cancels it: she is elsewhere by then) */
-function actPendRun(){try{const P=window.__actPend;if(!P||Q.length)return;window.__actPend=null;if((typeof bkey==="function"?bkey():"")!==P.bk)return;if(actMove(P.k))setTimeout(()=>{try{render()}catch(e){}},0)}catch(e){}}
+function actPendRun(){try{const P=window.__actPend;if(!P||Q.length)return;window.__actPend=null;if((typeof bkey==="function"?bkey():"")!==P.bk)return;const kn0=Object.assign({},S.known||{});const m=actMove(P.k);actKn(kn0,P.n);if(m)setTimeout(()=>{try{render()}catch(e){}},0)}catch(e){}}
 }catch(e){console.error("jstagehere",e)}})();
 /* ---- jplw: two NEW place pictures wired into the existing scene path (j94 season x buổi sets); code hook-up only, no art here.
    nvp               Nội vụ phủ (place "nvp", jact.js; was the Kính sự phòng picture "ksp") -> img/nvp-ha-sang.webp
@@ -98351,7 +98381,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="9bbd8beba719";window.CTM_BUILD=BUILD;
+const BUILD="133f912d4957";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
