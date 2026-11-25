@@ -1825,3 +1825,8 @@ B INVESTIGATOR coop page freeze (guest JS hang at .kfoc, U3c Q4XY; + F s6d famil
 | E91 e-pack-a re-merge (leave-palace-r5, save-growth, fix-6-r, fix-1 → LIVE 5e013076; opus BIG; briefs/E91-land-pack-a.md) | review/e-pack-a | FOREMAN E child5 | session_01DgYSWnB1J8NjTckQ9XmRyR | RUNNING | 25/11 23:20Z |
 | E92 titles-daycard (TITLES2 re-merge + kitChapterTitle hook; opus; briefs/E92-titles-daycard.md) | review/titles2-r3m, review/titles-daycard | FOREMAN E child5 | session_01DgYSWmXnffeXj7ozJBTAs3 | RUNNING | 25/11 23:20Z |
 | E93 parking-rows (moment/scent/parking-rank re-merge + unbuilt rows; opus; briefs/E93-parking-rows.md) | review/e-pack-c, review/parking-rows | FOREMAN E child5 | session_01DgYSWoUqcrQr4c6zerBJkA | RUNNING | 25/11 23:20Z |
+| E90 news-runner-lines (owner bug «Tịch Nguyệt nghe ngóng trở về · thành.» whole family; sonnet; briefs/E90-news-runner-lines.md) | review/news-runner-lines | FOREMAN E child5 | (opening) | RUNNING | 25/11 23:20Z |
+| E91 e-pack-a re-merge (leave-palace-r5, save-growth, fix-6-r, fix-1 → LIVE 5e013076; opus BIG; briefs/E91-land-pack-a.md) | review/e-pack-a | FOREMAN E child5 | (opening) | RUNNING | 25/11 23:20Z |
+| E92 titles-daycard (TITLES2 re-merge + kitChapterTitle hook; opus; briefs/E92-titles-daycard.md) | review/titles2-r3m, review/titles-daycard | FOREMAN E child5 | (opening) | RUNNING | 25/11 23:20Z |
+| E93 parking-rows (moment/scent/parking-rank re-merge + unbuilt rows; opus; briefs/E93-parking-rows.md) | review/e-pack-c, review/parking-rows | FOREMAN E child5 | (opening) | RUNNING | 25/11 23:20Z |
+| C3-VIDEO landing videos c3-farshot | review/c3-farshot | FOREMAN C ROOT 3 | session_01PEhRbwnAUxjQKRyNRgPhpA | DONE | 25/11 23:05Z |
