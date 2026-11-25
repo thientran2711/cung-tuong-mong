@@ -50,7 +50,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   /* what is SHOWN (j84 turns the player's «ngươi» into «ta» on screen): owner 22:14Z «một vị phi tần», cổ trang, never «chưa biết tên» / «chưa quen biết» */
   {const shown=(fn,x)=>{kitKnowFlush();const n0=NT.log.length;reset(x);fn(x);kitKnowFlush();const L=NT.log.slice(n0);return{n:L.length,t:(window.VP&&VP.fix?VP.fix(L[0]||""):L[0]||"")}};
    const f1=shown(x=>k61Know(x,"",true,1),c),f2=shown(x=>k61Know(x,"",true,2),d);
-   R.push({path:"SHOWN stranger notice = «Ta gặp một vị …» (no ngươi / chưa biết tên / thấy mặt)",want:1,got:f1.n,line:f1.t,ok:f1.n===1&&/^Ta gặp một vị /.test(f1.t)&&!/ngươi|chưa biết tên|chưa quen biết|thấy mặt/.test(f1.t)});
+   R.push({path:"SHOWN stranger notice = «Ta gặp một vị …» (no ngươi / chưa biết tên / thấy mặt)",want:1,got:f1.n,line:f1.t,ok:f1.n===1&&/^Ta gặp một vị /.test(f1.t)&&!/áo bậc/.test(f1.t)&&!/ngươi|chưa biết tên|chưa quen biết|thấy mặt/.test(f1.t)});
    R.push({path:"SHOWN name notice = «<Title> xưng danh với ta.»",want:1,got:f2.n,line:f2.t,ok:f2.n===1&&/xưng danh với ta\.$/.test(f2.t)&&!/ngươi|Ngươi biết tên/.test(f2.t)})}
   const note=NT.list.find(x=>x.kind==="know");R.push({path:"notice is a kitNotice kind know in the top-bar box",want:1,got:note?1:0,ok:!!note,line:note?note.line:""});
   R.push({path:"no % / digits-percent in know lines",want:0,got:NT.log.filter(x=>/%/.test(x)).length,ok:!NT.log.some(x=>/%/.test(x))});
