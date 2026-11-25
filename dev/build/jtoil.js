@@ -318,7 +318,9 @@ const TOIL_HOW="Hồi 1: chọn y phục theo dịp hôm nay. Hồi 2–4: tự 
 /* ui-leftover-fold MG12 (KIT §13.7): the game's FIRST screen is the kit rules screen (kgReady: luật + picture of the move + «Sẵn sàng»), then Hồi 1 (the dress). Nothing runs and no khắc go before «Sẵn sàng». */
 function toilRules(){const box=kg82Box();if(!box)return;KG82.setup=1;box.hidden=false;box.innerHTML=`<div class="kg82act"><button type="button" class="${kg82Btn()}" id="toilrdy">Bắt đầu</button></div>`;
  kgReady(box,{n:"Điểm trang",t:"Trước gương đồng",how:TOIL_HOW,tap:"Chọn y phục theo dịp, rồi kẻ mày, đánh phấn, chấm son trên mặt nàng.",win:"toil",e:"drag",go:"#toilrdy",pic:"",timed:false});
- $("toilrdy").addEventListener("click",()=>{box.classList.remove("kgintro");box.innerHTML="";toilDressUI()})}
+ /* KIT §13.9 (button-crawl 25/11, real tap): the kit ✕ «Quay lại» on this rules screen gives up through «Sẵn sàng» with KG82.giveUp set — that must be
+    the mirror's own lose path (KG82.quit = toilFinish(false): «Để mộc», mặc như hôm qua), never the dress screen (the ✕ used to open Hồi 1) */
+ $("toilrdy").addEventListener("click",()=>{if(KG82.giveUp){KG82.giveUp=0;const q=KG82.quit;KG82.quit=null;if(typeof q==="function")q();return}box.classList.remove("kgintro");box.innerHTML="";toilDressUI()})}
 function toilOpen(){if(!S||S.dead)return;if(window.__bot){toilAuto();return}KG82.ctx="hoc";const occ=toilOcc();
  const d=kg82Open({art:"Điểm trang",title:"Trước gương đồng",how:TOIL_HOW});
  if(!d)return;["chai-bg","chai-brow","chai-puff","chai-rouge"].forEach(n=>{try{kg82Img(n)}catch(e){}});try{KIT_VEIL.load()}catch(e){}try{const por=toilPor(),im=new Image();im.decoding="async";im.src=typeof IMG_U==="function"?IMG_U(por.src):por.src;if(im.decode)im.decode().catch(()=>0)}catch(e){}/* warm her face (decode) while she reads the rules / picks the dress */
