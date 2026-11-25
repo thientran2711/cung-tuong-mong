@@ -25,3 +25,11 @@ No rollover needed (low context).
 ## WIRED KEYS (Foreman C msg 22:21Z): code reads SELX_ART on review/selection-scene (dev/build/jselxsc.js; IMG_U("img/<name>.webp")), TODO names selx-tiensanh / selx-so-dong / selx-so-tay / selx-so-bac. Uploaded to CDN at exactly those paths (same pictures as the review ones, 2688x1386 ≥ 2360 for iPad @2):
 - img/selx-tiensanh.webp (key sanh) · img/selx-so-dong.webp (dong) · img/selx-so-tay.webp (tay) · img/selx-so-bac.webp (bac). New keys, nothing overwritten. Only SELX_ART table in jselxsc.js needs its 4 values changed (selection-scene worker).
 - OPEN: key `rooms` (selx-rooms = «sân Dưỡng Tú viện, ma ma chia sở», the yard where the 12 girls line up) is NOT painted by me — it is a yard, same family as C3-EVBG's yard; not in my brief (4 pictures). Foreman C to confirm who paints it.
+
+## FINAL (Foreman C 22:26Z: Tiền sảnh redo)
+- Tiền sảnh redo N25vbuG6D9 → jUITmuqLD0 (135 cr, gpt-2-6 2688x1386): open polished stone floor, no cushions/mats/low table (Japanese read), dais + armchair + peony screen + lanterns + columns + side benches kept. N25vbuG6D9 deleted from review (overwritten). Total ≈ 9 gens ≈ 1,215 cr.
+- FINAL PATH LISTS (CDN, new names only, nothing overwritten):
+  A) selection-scene keys: img/selx-tiensanh.webp · img/selx-so-dong.webp · img/selx-so-tay.webp · img/selx-so-bac.webp
+  B) img/place/duong-tu-dong.webp · duong-tu-tay.webp · duong-tu-bac.webp · duong-tu-tiensanh.webp
+  Review copies (?v=2 for tiensanh): img/_review/c3-dtv/duong-tu-*.webp + duong-tu-sheet.jpg
+- Still open: `rooms` key (yard) not painted by me.
