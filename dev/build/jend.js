@@ -39,6 +39,8 @@ window.KIT_END.names={
   "Chính thất hầu phủ":"Phượng đậu hầu môn","Vợ quan thanh liêm":"Thanh bạch trọn đời","Nữ phu tử":"Đèn sách má hồng","Làm thiếp nhà quyền quý":"Hầu môn sâu tựa biển",
   "Gả xa":"Viễn giá tha hương","Bỏ trốn":"Bỏ gấm theo tình","Công chúa ở lại cố quốc":"Non nước cố hương","Làm người ở nhà lý trưởng":"Phận tôi đòi",
   "Làm thiếp nhà phú hộ":"Lẽ mọn nhà giàu","Ở lại quê nhà":"Ruộng dâu quê cũ",
+  /* tuyển tú (jselx): ban hoa = not chosen, sent home with a flower */
+  "Ban hoa":"Duyên cung lỡ hẹn",
   /* kế vị (j99succ SUCC_END) */
   "Bị ép trả rèm":"Rèm châu cuốn lại","Thái hậu bị giam lỏng":"Cửa son khép chặt","Nữ đế bị phế":"Ngai rồng sụp đổ","Nữ đế thoái vị":"Buông ngai ẩn thân",
   "Nhiếp chính Thái hậu":"Buông rèm nhiếp chính","Thái hoàng thái hậu":"Ba đời mẫu nghi"},
