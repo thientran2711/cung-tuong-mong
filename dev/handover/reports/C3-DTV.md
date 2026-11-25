@@ -33,3 +33,8 @@ No rollover needed (low context).
   B) img/place/duong-tu-dong.webp · duong-tu-tay.webp · duong-tu-bac.webp · duong-tu-tiensanh.webp
   Review copies (?v=2 for tiensanh): img/_review/c3-dtv/duong-tu-*.webp + duong-tu-sheet.jpg
 - Still open: `rooms` key (yard) not painted by me.
+
+## selx-rooms (Foreman C 22:28Z)
+- img/selx-tiensanh.webp + img/place/duong-tu-tiensanh.webp on CDN = the NEW open-floor Tiền sảnh (md5 0490cf50… checked by download; Foreman's message crossed my upload).
+- img/selx-rooms.webp (sân Dưỡng Tú viện, ma ma chia sở): gen nVgb7O5YQD, gpt-2-6 2688x1386 (135 cr), looked: open paved courtyard, front hall with steps, side wings with lattice windows no curtains, peonies/bamboo/tree, empty, Chinese. Size: jselxsc.js states no size; used 2688x1386 like my other 4 (≥2360 for iPad @2); C3-EVBG's 2048x1536 is a different ratio (1.33) — Foreman to decide if bgs must share one ratio (kitScene bg = cover).
+- Total ≈ 10 gens ≈ 1,350 cr.
