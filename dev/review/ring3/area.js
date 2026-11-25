@@ -182,6 +182,21 @@ function lift(b,kind){if(KP){const n=b.closest('.kpk-n');const id=n?n.dataset.id
  b.classList.add('kar-up');
  if(kind==='hang')an(b,[{transform:`translate(${b.__x}px,${b.__y}px)`},{transform:`translate(${b.__x}px,${b.__y-10}px) scale(1.04)`}],{duration:220});
  else if(kind==='rib'){b.__z=b.style.zIndex;b.style.zIndex='40';an(b,[{transform:`translate(${b.__x}px,${b.__y}px) rotate(${b.__ang}deg)`},{transform:`translate(${b.__x+Math.max(0,Math.min(16,D.x1-6-(b.__x+b.offsetWidth*1.05)))}px,${b.__y}px) rotate(0deg) scale(1.05)`}],{duration:260,easing:'cubic-bezier(.2,.8,.25,1.1)'})}}
+/* LAYOUT STUDY (MAIN 130, KK24 §98.12b): the 3 ways to give an EDGE person's 6-plaque band room — mock only, never wired.
+   'cols2'  = two columns of 3 (the kit's own 2-column band, forced by KIT_PLAQUE.pen2 < 0)
+   'above'  = the band above the figure: the SAME kit plaques (.kpk-n) re-flowed into one hanging row across the top, her head stays free
+   'pages3' = at most 3 plaques per page: two kit groups of 3 (the kit tabs = pages) */
+async function pickerOpt(m,opt){await closePk();const gs=pkData(m),acts=gs[0].acts.slice(0,6),K=KIT_PLAQUE;
+ const others=[...L.querySelectorAll('.kar-f')].filter(e=>e!==m.el&&e.style.display!=='none').map(e=>kitPick.rect(e,L));
+ const base={host:L,anchor:kitPick.rect(m.el,L),avoid:others,side:'r',dismiss:false,onPick:id=>{L.dispatchEvent(new CustomEvent('karpick',{detail:id}))}};
+ if(opt==='pages3'){KP=kitPick.open(Object.assign({},base,{groups:[{k:'p1',n:'Việc 1/2',acts:acts.slice(0,3)},{k:'p2',n:'Việc 2/2',acts:acts.slice(3,6)}]}))}
+ else{const p2=K.pen2;K.pen2=-1e7;KP=kitPick.open(Object.assign({},base,{groups:[{k:'g',n:gs[0].n,acts}]}));K.pen2=p2}
+ await wait(1300);
+ if(opt==='above'){/* study row: kit .kfoc-b buttons (the fan's markup, 58 px compact) in a row across the top, above every head; wood skin not applied (mock) */
+  try{KP.close()}catch(e){}KP=null;await wait(250);const row=document.createElement('div');row.className='kar-pk';row.style.cssText='left:0;top:0;width:100%;height:100%;pointer-events:none';L.appendChild(row);PK=row;
+  const per=(D.x1-D.x0)>800?6:3,wN=Math.floor((D.x1-D.x0-12-(per-1)*8)/per);
+  acts.forEach((a,i)=>{const w=document.createElement('div');w.innerHTML=btn(a);const b=w.firstChild;b.classList.add('kar-min');Object.assign(b.style,{width:wN+'px',pointerEvents:'auto',transform:`translate(${D.x0+6+(i%per)*(wN+8)}px,${70+((i/per)|0)*66}px)`});row.appendChild(b)});await wait(300)}
+ return KP}
 /* NPC line (kit bubble) + her own figure steps in on the right (speaker left / her right) */
 async function talk(m,text){await closePk();const me=document.createElement('div');me.className='kar-f';const src=window.__karMe;me.innerHTML=`<img class="l${m.sil?' ksil':''}" alt="" src="${esc(src)}">`;
  const f=m.fx,asp=window.__karMeAsp||.32,room=D.x1-6-(f.x+f.w+8);let h=f.h,w=h*asp;if(w>room){w=Math.max(60,room);h=w/asp}const x=Math.min(D.x1-w-6,Math.max(f.x+f.w+8,D.x1-w-D.W*.06)),y=f.y+f.h-h;Object.assign(me.style,{width:w+'px',height:h+'px',zIndex:31});L.appendChild(me);window.__karMeEl=me;
@@ -191,4 +206,4 @@ function onTap(m){if(window.__karAuto)return;if(!sel||sel!==m.g)pickGroup(m.g);e
 function init(o){css();window.__karOn=1;railWatch();cur=-1;sel=selM=null;G=o.groups;BGSRC=o.bg;fh=o.fh;AREAS=o.areas.map(a=>Object.assign({},a));G.forEach(g=>{g.masters.concat(g.fol).forEach(m=>{m.g=g})});
  G.forEach(gw);mount();assign();
  return {D:[D.x0,D.x1,D.W,D.H].map(Math.round),fh:Math.round(fh),areas:AREAS.map(a=>({k:a.k,n:a.n,want:G.filter(g=>g.want===a.k).length,groups:a.g.map(g=>g.masters.map(m=>m.name).join('+')+(g.fol.length?' (+'+g.fol.length+')':'')+' ['+g.act+']'),people:count(a)}))}}
-return {init,showMap,enter,back,pickGroup,stepOut,picker,lift,talk,unsel,closePk,get areas(){return AREAS},get groups(){return G},get cur(){return cur},get D(){return D}}})();
+return {init,showMap,enter,back,pickGroup,stepOut,picker,pickerOpt,lift,talk,unsel,closePk,get areas(){return AREAS},get groups(){return G},get cur(){return cur},get D(){return D}}})();

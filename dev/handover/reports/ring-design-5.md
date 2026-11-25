@@ -27,3 +27,11 @@ Re-run: cd dev/review/ring3; SAVE=/home/user/wt/ring5-shots/life.json (node meet
 (2) fan/rib: cards never cover her name tag (stack bottom = tag top when the band overlaps the tag; fan gap tightens to 3, rib tilt shrinks to fit); the earlier «hide the tag» hack removed.
 (3) Fold tabs: fan/rib tabs one row (mock .pctabs). kitPick (hang) tabs stack vertically on Fold → KIT REQUEST sent to KK22 (OPEN) together with the lifted-plaque wrap. Mock also clears a stale rail slot (inline left/flex-direction) — the kit 7b fix is flaky (one run showed the rail + head-count chip on the right over the title).
 Videos re-shot; contact sheets fps=12 looked at: settled frames 0 see-through / 0 overlap / name tag visible; scrub only single-sample transient overlaps while the rib/fan/hang open (≤ 1 frame each) and one 6 px frame while my figure slides in.
+
+## Round 3 (MAIN 130: refresh from kit-ring5 e60c3a9c + EDGE-person layout study)
+Merged review/kit-ring5 e60c3a9c (KIT §98.19: tabs one row, lifted plaque small line one line, jrail slot clear). Stills + videos re-shot on it, same page.
+Layout study (page layout.html, mock only, KAR.pickerOpt in area.js + dev/review/ring3/opts.js): edge person, 6 plaques, Fold 755x1000 + iPad 1180x820.
+1. two columns of 3 (kit 2-col forced by KIT_PLAQUE.pen2<0): iPad band laps the neighbour's head; Fold has no room → kit falls back to 1 column.
+2. band above the figure (row of kit .kfoc-b buttons, no wood skin): NOT viable at kit figure scale — heads reach the top of the stage, the row covers the faces on both devices.
+3. ≤3 plaques per page (two kit groups of 3, kit tabs = pages): clear of faces and name tags on both devices. RECOMMENDED (cost: one tap to page 2; all 6 stay reachable). Page labels «Việc 1/2» are placeholders (VANPHONG).
+Study scene on iPad uses grpMax 4 / refSpan 1000 (an iPad area with neighbours); the shipped mock stays device-free.
