@@ -3263,3 +3263,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (02:00Z) 130 fwd: KK25 KIT READY optinfo-r2 a6ca9994 / mg-intro-r2 25ca281d / fitfast-r3 8ae8561b / ring5 e60c3a9c → B KIT OK asked; DECISION: fitfast-r3 replaces 734ce2f9 only if B KIT OK before LC13 reaches that step.
 - (02:02Z) KK25: woodskin row-9 doc fix → review/kit-ring5 f44c657d (B told). K-FITSLICE waits MAIN «start» after flight.
 - (02:04Z) LC13: step 8 3a3234ff quickcheck PASS + mg tests OK + BIG PASS (coop re-runs queued); step 9 = 4232709a (viecnho-r2 on 3a3234ff) tests all OK, coop 142/142 both, quickcheck running. LIVE 502c48c9 (no permission).
+- (02:06Z) LC13: step 9 GREEN review/lc12-varC9 4232709a (quickcheck PASS 191 s) → rv 4x8Bd88A confirm; step 8 coop re-run running.
