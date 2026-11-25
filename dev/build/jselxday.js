@@ -31,9 +31,9 @@ function selxZ(){return S.selx2}
 function selxBy(id){if(id==="me")return S;const Z=S.selx2;return (Z.girls||[]).find(v=>v.id===id)||(Z.keptV||[]).find(v=>v.id===id)||(rivals||[]).find(v=>v.id===id)||null}
 function selxAll(){const Z=S.selx2;return (Z.girls&&Z.girls.length?Z.girls:(Z.keptV||[])).filter(Boolean)}
 function selxMet(v){try{return v===S||!!(S.selx2.met||{})[v.id]||k61Named(v)}catch(e){return false}}
-function selxNm(v){if(v&&v!==S&&!v.tuNu){let k=false;try{k=k61Named(v)}catch(e){}return k&&v.name?v.name:"công công"}/* RV-SELX13 4: the cast eunuch (a real court eunuch, selxEunuch) */return v===S?"ngươi":selxMet(v)?v.name:"một tú nữ lạ mặt"}
-/* RV-SELX (law 7/11): a LIST of girls names the met ones, then counts the strangers in words (was «một tú nữ lạ mặt, một tú nữ lạ mặt, …») */
-function selxNmL(L){const k=L.filter(v=>v===S||selxMet(v)).map(selxNm),n=L.length-k.length;if(n===1)k.push("một tú nữ lạ mặt");else if(n>1)k.push(`${selxNumW(n)} tú nữ lạ mặt`);return k.join(", ")}
+function selxNm(v){if(v&&v!==S&&!v.tuNu){let k=false;try{k=k61Named(v)}catch(e){}return k&&v.name?v.name:"công công"}/* RV-SELX13 4: the cast eunuch (a real court eunuch, selxEunuch) */return v===S?"ngươi":selxMet(v)?v.name:"một vị tú nữ"}/* owner OD 24/11 ~22:14Z (KIT §98.15): an unnamed person = «một vị tú nữ», never «lạ mặt / chưa quen» */
+/* RV-SELX (law 7/11): a LIST of girls names the met ones, then counts the strangers in words (was «một vị tú nữ, một vị tú nữ, …») */
+function selxNmL(L){const k=L.filter(v=>v===S||selxMet(v)).map(selxNm),n=L.length-k.length;if(n===1)k.push("một vị tú nữ");else if(n>1)k.push(`${selxNumW(n)} vị tú nữ`);return k.join(", ")}
 function selxMaMa(){try{const m=elderBy("gt");return m?staffFace(m):null}catch(e){return null}}
 function selxWho(v){try{return v===S?pMe():pv(v)}catch(e){return null}}
 function selxSo(id){const L=(BAL.selx.lodge.so||[]);const x=L.find(s=>s[0]===id);return x?x[1]:id===BAL.selx.lodge.sanh[0]?BAL.selx.lodge.sanh[1]:""}
@@ -76,7 +76,7 @@ function selxD1Gate(){const Z=S.selx2;const L=selxAll();Z.heard=L.map(v=>v.id);
  selxCard(selxDayTitle(1),`<p>Trời vừa hửng, xe đưa tú nữ dừng trước cửa Bắc. Thái giám Nội vụ phủ cầm sổ, đọc tên từng người cùng chức tước của cha: ${L.map(v=>v.name).join(", ")}.</p><p>Tên thì nghe cả, nhưng mặt người nào ứng với tên nào, ngươi chưa biết.</p>`,
   [selxO("Theo thái giám vào cửa viện",()=>{selxSpend(BAL.selx.beat.gate);selxD1Rooms()},{x:selxX(BAL.selx.beat.gate,"vào Dưỡng Tú viện, nhận sở ở")})],(()=>{try{return pMsg()}catch(e){return null}})())}
 function selxD1Rooms(){const Z=S.selx2;const R=(Z.rooms||[])[0]||{so:BAL.selx.lodge.so[0][0],ids:["me"]};Z.home=R.so;Z.at=R.so;const mates=R.ids.filter(i=>i!=="me").map(selxBy).filter(Boolean);
- selxCard(BAL.selx.lodge.n,`<p>Qua cổng ${BAL.selx.lodge.n}, Giáo tập ma ma đứng chờ, tay cầm thước gỗ. Bà chia mỗi sở một phòng, ${selxNumW(BAL.selx.room.perRoom)} người một phòng, ${selxNumW(BAL.selx.room.perBed)} người một giường.</p><p>Ngươi ở <b>${selxSo(R.so)}</b>, cùng phòng với ${selxNumW(mates.length)} tú nữ ngươi chưa quen. Ma ma dặn: «Cất đồ rồi ra ${BAL.selx.lodge.sanh[1]}, học quy củ.»</p>`,
+ selxCard(BAL.selx.lodge.n,`<p>Qua cổng ${BAL.selx.lodge.n}, Giáo tập ma ma đứng chờ, tay cầm thước gỗ. Bà chia mỗi sở một phòng, ${selxNumW(BAL.selx.room.perRoom)} người một phòng, ${selxNumW(BAL.selx.room.perBed)} người một giường.</p><p>Ngươi ở <b>${selxSo(R.so)}</b>, cùng phòng với ${selxNumW(mates.length)} vị tú nữ khác. Ma ma dặn: «Cất đồ rồi ra ${BAL.selx.lodge.sanh[1]}, học quy củ.»</p>`,
   [selxO(`Cất đồ, ra ${BAL.selx.lodge.sanh[1]}`,()=>{selxSpend(BAL.selx.beat.rooms);Z.at=BAL.selx.lodge.sanh[0];selxLesson()},{x:selxX(BAL.selx.beat.rooms,"ra học quy củ với ma ma")})],selxMaMa())}
 /* the drill: effort i (0 = kỹ, 1 = vừa, 2 = qua loa) costs BAL.selx.lesson.k[i] khắc; mark = the same formula for everyone (law 1) */
 function selxLessonMark(p,i){const L=BAL.selx.lesson;const m=L.base+L.duc*(+p.duc||0)+L.eff*(L.k.length-1-i)+R(2*L.r+1)-L.r;const MK=BAL.selx.mark;return Math.max(MK.lo,Math.min(MK.hi,Math.round(m)))}
