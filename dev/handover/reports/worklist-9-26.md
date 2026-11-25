@@ -166,3 +166,23 @@ PRIORITY #1 CHECK: this file W3 HANDOVER + review-temper-outburst.md note A | ma
 1. Real taps Fold 755x1000 + iPad 1180x820 on review/net-ghen: open a consort's card → an option showing «… oán ngươi +a đến +b» (e.g. Tố giác / Uy hiếp / apHostOpts) → tap, check the line in the log and the real oán change; use review/robot-realtap realtap.js from a scratch copy.
 2. Then SẴN SÀNG KIỂM for (1) ghen + (2) wave 1.
 3. Law 11 wave 2 (thiện cảm, 253 sites) + the 25 oán rest: D's call whether it is a new item.
+
+## SEAT W5 (session_01D3E3NX8Jh4APbxeSvZnnBd, 25/11 ~11:35Z–, depth 2, START_CTX ~5 % of 1M) — review/net-ghen
+PRIORITY #1 CHECK: W3/W4 handovers above + review-temper-outburst note A + review-talk-others-people RV2 NB2 | main j1 ghenUp, j8:120 rumor, j28 ghenCool, jaudit §5 pvOan/pvQuy (REUSED) | review/net-ghen 6d7d2da9 on review/net-thresholds 96c2859e; review/robot-realtap realtap.js (REUSED from a scratch copy, not committed) | claims: Foreman D net-ghen line.
+
+### (1) REAL TAPS on review/net-ghen 6d7d2da9 — DONE
+- Harness: realtap.js (review/robot-realtap) driven by a scratch command driver; site served from the branch build; origin tt (consort). No .click()/dispatchEvent; page.evaluate READ only. Shots: CDN img/_review/net-ghen/ (fold-hn, fold-ttd, fold-after-ttd, ipad-hn2, ipad-ttd, ipad-res3).
+| device | taps | page errors | screens with changed text looked at (3×) | shown == applied |
+|---|---|---|---|---|
+| Fold 755x1000@2 touch | 44 (4 «dead» = my own taps under an open dialog / loader / gate, not game) | 0 | Hậu cung › Phi tần › Hại nhỏ cards («oán ta +1 đến +6», «+3 đến +13», «+2 đến +10»), Tung tin đồn dialog, consort panel, Giao tình | Tung tin đồn on Thạch Lạc Tuyết, caught («Kèm … oán ta +3 đến +13»): oán 0 → 6 ✓ in range, 2 chứng cứ ✓ |
+| iPad 1180x820@2 touch | ~30 | 0 | same + Bày mưu dialog, result | Tung tin đồn on HH Viên Vân Yên (delegated, resolved with a «Ra tay ngay» win the same khắc): Danh nàng 64 → 56 ✓ (−8), thiện cảm −10 → −15 ✓ (bại −5), oán 0 → 9 — bại shows +1 đến +6; with the servant-confess kèm the card range sum is +4..+19 ✓, but the j70 «Bày mưu / Ra tay ngay» layer shows NO oán line at all (see NB-a) |
+- ghen: no player-visible ghen text changed on this branch (BAL k + rule only); relation view (Giao tình › Ân oán) opened on both devices — consorts not yet met show no rows (by design).
+
+### Found on the way (NOT this branch; for D / wave 2 family)
+- NB-a (law 11, shown ≠ applied): j70 «Bày mưu» options for Tung tin đồn («Ra tay ngay: tung tin đồn — Được: thêm thể diện») and the Tung tin đồn sub-dialog («Tự ra tay» / «Giao cho người làm») list no bại/kèm (oán, thiện cảm, chứng cứ, Danh ngươi −5); only the parent card does. The Fold fail also applied «Danh ngươi −5» which no line shows. → goes into wave 2 «every result/option card lists what really changes».
+- NB-b (law 11): Hại nhỏ cards «Ngáng chân», «Tát», «Phạt quỳ», «Bỏ phấn lạ» say «nàng oán ta» with NO number (kèm/bại) → wave 2 oán rest (pvOan).
+- NB-c (iPad pointer, harness or game): with mouse.click (robot-realtap's iPad mode) option cards inside #modal often did not react (Tuyển chọn «Cúi đầu chờ xét» 2 of 3 clicks, Tung tin đồn options 0 of 3); hit-test was the card itself. With TOUCH (the real iPad) every tap worked first time. → robot-realtap should run iPad as touch (device.js ipadAir has touch:true).
+- NB-d (kit / text cut): iPad Hại nhỏ card THÀNH row «tin cậy Cung nữ tam đẳng Bá…» clipped at the card's right edge (ipad-hn2) → kit keeper.
+
+### Status
+- «SẴN SÀNG KIỂM review/net-ghen 6d7d2da9» sent to D. Next: wave 2 on review/net-ghen-2.
