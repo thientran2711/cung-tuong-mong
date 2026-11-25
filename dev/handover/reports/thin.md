@@ -1048,11 +1048,51 @@ START_CTX ~6 % (own estimate); finished well under +25 %.
 - LIVE moved to 35647d5e (kframe-heir) after these gates: source merge is clean (only built index.html/sw.js conflict = rebuild). I re-merge on request.
 - **VERDICT r2: PASS 7429bfa3**
 
-## REVIEW thin-p8 r1
-PRIORITY #1 CHECK: reused review/thin-p8 @ce252c43 + LIVE origin/main 68799300; tools dev/test/rdc-play.js / rdseeds_validate.py / rdc-oldsave.js / rdc-shots.js from the branch; no duplicate work found in OWNER_DECISIONS / HANDOVER / PROGRESS / origin/review/*.
-IN PROGRESS (full report follows). Branch review/thin-p8-r1 @4d9f748c (contains LIVE 68799300).
+## REVIEW thin-p8 r1 — PASS
+PRIORITY #1 CHECK: reused review/thin-p8 @ce252c43 + LIVE origin/main (68799300 → ac4790f0 → d521656c → 502c48c9, merged each time); tools dev/test/rdc-play.js / rdseeds_validate.py / rdc-oldsave.js / rdc-shots.js from the branch; no duplicate work found in OWNER_DECISIONS / HANDOVER / PROGRESS / origin/review/*.
+Reviewer: opus BIG reviewer-lander (session_01N1tNP4…). Branch **review/thin-p8-r1 @c69d6ec93d0069920f15c324b358be675b801566** (bare head ce252c43; contains LIVE origin/main 502c48c9). Helper runner session_01N1tNP4b5Pe… played 20 of the 44 roads.
 
-### Road play split (Foreman B 07:07Z: one helper runner takes the second half)
+### Faults found and fixed (whole families, law «sửa cả nhóm»)
+| # | Law | Fault | Fix (commit) |
+|---|---|---|---|
+| 1 | OD:L94 | j67 castRv67 could cast the co-op friend (real player) as a scripted rival in a hồi | `!v.coop` in castRv67 — every j67 arc + old and composed roads (63ad70a8) |
+| 2 | 6b | composed hồi naming Thái hậu / Hoàng hậu played when she was dead (109/142 + 79/86 hồi untagged) | jroadc auto-need th/hh; compose puts parts whose people are alive first; a climax is never skipped (63ad70a8) |
+| 3 | 3/6b | th/hh liking moved in scenes where Thái hậu / Hoàng hậu is absent: 726 option steps + 101 ending keys in 319 rows | → the key the act yields (danh/duc/tamco/mat; same step counts) (63ad70a8) |
+| 4 | 7 (VANPHONG) | cảm ơn, bạn, kiểm tra, xử lý, cơ hội, hồ sơ, ông ấy, anh/anh họ/anh chị em, điểm: 126 hits; 3 named noble houses (họ Triệu/họ Lục) | VANPHONG words / generic houses (63ad70a8) |
+| 5 | 4 | jroadc climax odds fallback typed 50 | reads BAL.road.c.xo (ce07d53b) |
+| 6 | canon | rc-pf-x11 «kinh Đường» (court is Đại Hy) | «kinh thành» (54594f56) |
+| 7 | tools | rdc-play ran ch12–14 tail (renderer OOM, nothing P8 there); rdc-shots had no origin pick | RDC_STOP12=1 stops after the road; RDC_ORIGIN env (54594f56) |
+jrdcsd.js + index.html/sw.js rebuilt; fixed rdseeds_a..d.md also copied to this handover branch (6c2ab1aa).
+
+### Gates (law 11: NO args AND seed args, bare head AND merged head)
+| Gate | Command | Bare ce252c43 | Merged (final c69d6ec9) |
+|---|---|---|---|
+| validator | `python3 dev/test/rdseeds_validate.py` | `RDSEEDS: 627 rows, 0 errors, 0 warnings` | same (36b21e70, a0dde75f, c69d6ec9) |
+| validator seed args | `python3 dev/test/rdseeds_validate.py --min dev/handover/content/thin/rdseeds_{a,b,c,d}.md` | `RDSEEDS: 627 rows, 0 errors, 0 warnings` | same (36b21e70, a0dde75f, c69d6ec9) |
+| rdc-play NO args (fixture tt_fixa/tt_fixb, 2 lives each, ch4–14) | `node dev/test/rdc-play.js` | `RDC PLAY: ALL PASS (59)` (4 lives, 14 ALL) | a0dde75f full to ch14: tt_fixa life 1 `14 ALL 45m` + life 2 `14 ALL 50m`; tt_fixb stalls in the shared ch12–14 tail (see notes). `RDC_STOP12=1 node dev/test/rdc-play.js` (fixture, no other args, stop after the road): a0dde75f `RDC PLAY: ALL PASS (59)`; c69d6ec9: tt_fixa L1 36m fin=Việc lớn thành, L2 36m fin=Hòa cả làng, tt_fixb L1 34m fin=Thế yếu đi (all ch4..11), container restart killed tt_fixb L2 → re-run `RDC_STOP12=1 node dev/test/rdc-play.js dev/test/rdc-fixture.jsonl 2 tt_fixb` → L1 35m, L2 29m (parts met again 16/42) `RDC PLAY: ALL PASS (31)`; 0 FAIL lines |
+| rdc-play seed args, all 44 new roads | `RDC_STOP12=1 node dev/test/rdc-play.js all.jsonl 1 <roads>` | — | 44/44 PASS on 4d9f748c (reviewer 24 + helper 20, every road life 1, ch4..11 all present, see list below); re-smoke on a0dde75f (tt_ruong fin=Ruộng về cho dân, pf_co fin=Y bị đưa về) and on c69d6ec9 (tt_ruong 34m fin=Ruộng về cho dân, pf_co 38m fin=Y ở lại kinh thành) → `RDC PLAY: ALL PASS (31)` each |
+| undef-scan | `node dev/test/undef-scan.js` | PASS (299 names) | `PASS: no unguarded undefined identifier (301 names checked)` |
+| one-core | `node dev/test/one-core-guard.js` / `one-core-text.js` | PASS / PASS | PASS / PASS (c69d6ec9) |
+| old roads + old saves | `node dev/test/rdc-oldsave.js live.html` (`git show origin/main:index.html`; LIVE ac4790f0, d521656c, 502c48c9) | — | each: 44 roads registered; 3 LIVE saves tt/tt_tranh, cnv/cnv_ma, bd/bd_hen load, plan unchanged, no composition added, play a buổi; 0 page errors; `RDC OLDSAVE: ALL PASS` |
+| quickcheck | `bash dev/tools/quickcheck.sh` | — | c69d6ec9: `QUICKCHECK PASS · 293 s · open 2559 ms · old save ok · perf (median of 3, new/live): render 354/329 ms, tab 759/697 ms, buổi 1722/2086 ms, tasks>200ms 27/29 · core gates PASS · build 4 s · total 768 s` (also PASS on 36b21e70 and a0dde75f) |
+| CO-OP GATE | `node dev/test/coop-e2e.js` / `COOP_SWAP=1 node dev/test/coop-e2e.js` | — | `142/142 passed` / `142/142 passed` (on 36b21e70, a0dde75f and c69d6ec9) |
+| mrfoot (new on main) | `node dev/test/mrfoot-scan.js` | — | `drivers with «#mr button»: 59 · covering .k3foot: 59 · stale: 0` |
+| shots | `RDC_ORIGIN=<o> node dev/test/rdc-shots.js <dir> <ch:slot>`: tt_ruong_6:s, bd_lua_9:c, ch_lenhbai_7:x, pf_co_11:x (finale), Fold 755x1000 + iPad 1180x820 | — | errors 0 each; LOOKED 3× (on 36b21e70, again on a0dde75f after KIT framefit and on c69d6ec9 after KIT titleplate/sqopt landed): kit frames only (k3 dialog, kit option rows TỐN/ĐƯỢC/MẤT, kit odds bar), no overflow, no custom chip |
+
+44 roads PASS (life 1, ch4..11): reviewer — tt_ruong, tt_tho, tt_gia, tt_thu, dtq_ngua, dtq_thuong, dtq_hang (alone: `RDC PLAY: ALL PASS (17)`), dtq_ky, thd_dich, thd_uoc, thd_dien, thd_giay, muoi_gia, muoi_thi, muoi_tien, muoi_hoi, cn_chuoi, cn_chuviet, cn_tiec, cn_theo, cnv_kho, cnv_hach, cnv_thu, cnv_tieu; helper — td_daixa, td_monsinh, td_tichbien, td_honuoc, ch_tuyentu, ch_diensan, ch_lenhbai, ch_honngoai, nc_men, nc_nu, nc_kinh, nc_the, bd_luuly, bd_bac, bd_lua, bd_su, pf_co, pf_tra, pf_guong, pf_lich. 0 road FAIL. `page lost … Target crashed` retries = renderer OOM on this box (also on bare), recovered by the runner.
+Not run: road-full on all 48 old roads (~36 h); old roads covered by rdc-oldsave (3 LIVE saves play on), quickcheck old save, and the no-arg fixture to ch14 (old jend14 noi14/hau14/ke14).
+
+### Notes for MAIN 126 (pre-existing, not P8 faults, not fixed here)
+- Old roads / j67 hồi naming Thái hậu / Hoàng hậu lack the need gate fixed here for composed roads (same family, older content) — worth an order.
+- Climax stat th/hh still used for unrelated actors in some old j67 arcs.
+- Many options show «Rất vững»; the climax fail clause shows only at insight lv>=1 (jk2b kitHint, by design); «hên xui» comes from kit KIT_ODDS_TXT (owner-approved).
+- PERF (shared jend14 tail, not P8): on merged LIVE, the no-arg fixture tt_fixb life stalls in ch13 hau14 (renderer 7–9 GB, 100 % CPU, no log 45 m+; CDP pause samples: showModal → kitFrameLive3 → kszLivePick3 → kitOptTier / kitOdFit1 from nextBuoi/endTurn — slow layout per modal, not a loop). Bare ce252c43 played it to ch14 in 42 m. Worth a perf order on kit live3 frame fitting in long lives; RDC_STOP12 keeps the P8 gate off that tail.
+- Option pictures grey/broken in test shots = CDN blocked in this box.
+
+### Verdict
+**PASS** — review/thin-p8-r1 c69d6ec93d0069920f15c324b358be675b801566 (contains LIVE origin/main 502c48c9). 7 fault families fixed (table above); every gate PASS on the final head; co-op gate coop-e2e 142/142 both seat orders. LAND READY line written to FOREMAN_B_STATUS.md for MAIN 126 / LC12.
+
+### Hand-off log (road play split, kept) (Foreman B 07:07Z: one helper runner takes the second half)
 Reviewer cannot send_message the new foreman / helper (permission denied) — this section is the hand-off.
 - Build: `git checkout 4d9f748c` (review/thin-p8-r1), `bash dev/site/build_site.sh`.
 - Rows file: `cat dev/handover/content/thin/rdseeds_{a,b,c,d}.md > /tmp/all.md` (rows already in the build; the file only names the roads).
@@ -1090,8 +1130,6 @@ Batch 3 (helper, 09:55Z; FINAL; same build 4d9f748c / command; the first two run
 - HELPER TOTAL: 20/20 roads PASS (life 1, chapters 4..11 all present), 0 road FAIL. OOM `Target crashed` retries were recovered by the runner each time.
 - REVIEWER roads (24): PASS so far tt_ruong, tt_tho, dtq_ngua, dtq_thuong, thd_dich, thd_uoc, muoi_gia, tt_gia, tt_thu; running muoi_thi, dtq_ky; then cn_chuoi, cn_chuviet, cnv_kho, cnv_hach, thd_dien, thd_giay, muoi_tien, muoi_hoi, cn_tiec, cn_theo, cnv_thu, cnv_tieu; dtq_hang re-run alone (renderer crash ×3 at ch9).
 - Gates already PASS on bare ce252c43 AND merged 4d9f748c: `python3 dev/test/rdseeds_validate.py` (no args) and `--min` + rdseeds_a..d → `RDSEEDS: 627 rows, 0 errors, 0 warnings`; `node dev/test/undef-scan.js` → PASS (299 names); `node dev/test/one-core-guard.js` → PASS; `node dev/test/one-core-text.js` → PASS.
-
-#### helper
 
 ## REVIEW robot-coop-fix-1 (BIG, opus; session_01N1tNP2…; START_CTX ≈6 %) — A FAIL · B FAIL
 PRIORITY #1 CHECK ('coop sync KB / gzip BIG / coop-pos harness'): OD 2204–2205 | main coop/worker/src/index.js (BIG 200000), dev/build/jcoop.js (rxQ + gunz, GZ 8000), dev/test/coop-lag.js | review/* robot-coop-fix-1 889803dc, robot10-coop 2bf6094f, robot10-coop-r1 6a6413db, coop-host-lag-r3 (landed) | claims B (fixer #2 session_01N1tNP3va8MrNMqi1MZLTgt).
