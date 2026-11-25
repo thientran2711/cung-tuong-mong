@@ -1835,3 +1835,4 @@ B INVESTIGATOR coop page freeze (guest JS hang at .kfoc, U3c Q4XY; + F s6d famil
 | REVIEW law1-land 52263f49 (#11; opus BIG, fresh; briefs/b-law1-land-review.md) | review/law1-land(-rv); reports/law1-audit.md | B ROOT 2 | session_01N1tNP4PNwJ48R7BjEw5mTA | RUNNING | 25/11 23:26Z |
 | FAST LANE co-op guest page FREEZE after #kmrew Nhận + Sẵn sàng (G93J, Q4XY, KJ2Z family; opus FIXER; briefs/b-coop-freeze-kmrew.md) | review/coop-freeze-kmrew; reports/coop-freeze-kmrew.md | B ROOT 2 | session_01N1tNP2Ppg85FwQYT2eP9Re | RUNNING | 25/11 23:37Z |
 | E92r REVIEW titles-daycard c39be532 BIG (opus; briefs/E92r-review-titles-daycard.md) | review/titles-daycard-r1 | FOREMAN E child5 | session_01DgYSWqAJU4v2sXYANjRjyQ | RUNNING | 25/11 23:50Z |
+| F10 renderer-memory hunt (game page ~2 GB renderer → year-1 crashes; bisect 6b85187e..LIVE + family fix) | review/renderer-mem | FOREMAN D ROOT 2 / worker session_01D3E3NXAMDj7kxKaa8Df6Qa | RUNNING | 2026-11-25T23:51Z |
