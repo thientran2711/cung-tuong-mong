@@ -39,3 +39,9 @@ seconds late in that worst case (it sounds; before it was silent forever). With 
 
 ## Open (owner question, not decided here)
 - SND_DEFAULT (sound on by default?) is still the OPEN owner question (PROGRESS_result-sfx.md). A home-screen iPad install starts muted.
+
+## Results (this branch)
+- dev/test/audio-ipad.js: ALL PASS (iPad + Fold, SW off / on, offline; audit). LIVE 5e013076: CDN music signal 0 (4 FAIL).
+- kit-music.js ALL PASS · sfx-instant-scan PASS (18/18 ready, first touch sounds) · sansang-music-fix ok both sizes (one 755x1000 «Sẵn sàng» cover was flaky, 2/2 ok on rerun, LIVE same).
+- Videos WITH audio (iPad, one tap, real CDN): https://ctm-img.victoria-tntt.workers.dev/img/_review/audio-ipad/audio-ipad-online.mp4 ·
+  …/audio-ipad-offline.mp4 (network off, reload) · frame sheets …/ipad-on.png, …/ipad-off.png. Audio mean −22 dB in both.
