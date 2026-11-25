@@ -1,0 +1,2146 @@
+{
+ "job": {
+  "id": "flight2-s2e",
+  "origin": "thd",
+  "road": "thd_tho",
+  "bot": "bold",
+  "seed": 2026112517,
+  "dev": "fold",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "64d62d9b",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [
+   {
+    "at": 458,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người"
+   },
+   {
+    "at": 558,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người"
+   }
+  ],
+  "slice": null,
+  "areaTaps": 680,
+  "dlgScroll": 28,
+  "scrolls": 42,
+  "infoTaps": 97,
+  "dlgClose": 31,
+  "taps0": 0,
+  "resumed": [
+   {
+    "at": "2026-11-25T16:54:28.931Z",
+    "buoi": 19,
+    "from": "2026-11-25T16:53:17.716Z"
+   }
+  ],
+  "nextNoTurn": 4,
+  "loops": 2,
+  "kfocVisits": 1
+ },
+ "life": {
+  "id": "HARNESS",
+  "type": "harness"
+ },
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "game|dialog queue holds 4 copies of «Tâm trạng · Quý phi Lương Lăng Ba» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 4 copies of «Tâm trạng · Quý phi Lương Lăng Ba» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 264,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 3,
+    "age": 18,
+    "rank": 0,
+    "name": "Trình Tố Nga"
+   }
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người»",
+   "n": 1,
+   "at": 458,
+   "shot": "/home/user/wt/out3/shots-flight2-s2e/loop-1.png",
+   "dump": "/home/user/wt/out3/shots-flight2-s2e/loop-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 2,
+    "b": 3,
+    "age": 18,
+    "rank": 0,
+    "name": "Trình Tố Nga"
+   },
+   "buttons": [
+    "Ô lưu",
+    "Xem bản thân",
+    "Sắc88Tài95Tâm cơ12Đức35Danh16Sủng8",
+    "Bạc119Sức98/100",
+    "Buổi tối, còn 4 khắc",
+    "Hôm nay mặt mộc",
+    "mưa rào",
+    "Quẻ Thượng thượng (Tài nghệ)",
+    "Tâm trạngBình thản-3",
+    "Về phòng",
+    "Tin báo",
+    "Ân oánPhe pháiĐáp ứngTa▾⇄Hoàng thượng▾Quan hệ giữa ta và Hoàng thượngHoàng thượng → taSủng"
+   ],
+   "trace": [
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nguy hiểm chung: 44»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nguy hiểm chung: 44»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Xét phẩm: thiếu 3»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Sắc88Tài95Tâm cơ12Đức35Danh16Sủng8»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hành sự»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «mưa rào»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nghỉ ngơi 4/4»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Buổi tối, còn 4 khắc»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Sắc88Tài95Tâm cơ12Đức35Danh16Sủng8»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «mưa rào»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Học tập · Tài nghệ 3/3»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Mệnh truyện»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nợ ân 0»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Đang làm 3/4»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Về phòng»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Có thaiRất thấp»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Giao tình»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Ân oán»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «với Hoàng thượng»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Sắc88Tài95Tâm cơ12Đức35Danh16Sủng8»"
+   ],
+   "next": {
+    "dis": true,
+    "q": 10,
+    "mg": false,
+    "qt": [
+     "Quan hệ với",
+     "Tin báo",
+     "Tin báo",
+     "Tin báo",
+     "Dung · Dung nghi",
+     "Tin báo"
+    ],
+    "t": "Sang ngày mới"
+   }
+  },
+  {
+   "k": "game|softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=10: Quan hệ với / Tin báo / Tin báo / Tin báo / Dung · Dung nghi / Tin báo)",
+   "type": "game",
+   "msg": "softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=10: Quan hệ với / Tin báo / Tin báo / Tin báo / Dung · Dung nghi / Tin báo)",
+   "n": 1,
+   "at": 458,
+   "shot": "/home/user/wt/out3/shots-flight2-s2e/loop-1.png",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 2,
+    "b": 3,
+    "age": 18,
+    "rank": 0,
+    "name": "Trình Tố Nga"
+   }
+  },
+  {
+   "k": "game|softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Tin trong cung buổi này)",
+   "type": "game",
+   "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Tin trong cung buổi này)",
+   "n": 1,
+   "at": 558,
+   "shot": "/home/user/wt/out3/shots-flight2-s2e/noturn-2.png",
+   "dump": "/home/user/wt/out3/shots-flight2-s2e/noturn-2-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 3,
+    "w": 0,
+    "b": 3,
+    "age": 18,
+    "rank": 0,
+    "name": "Trình Tố Nga"
+   },
+   "trace": [
+    ".kfoc «Lui»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 5 người» «Lịch tháng»",
+    ".dlg «Lịch tháng» «mồng 2»",
+    ".dlg «Lịch tháng» «Ghi vào sổ»",
+    ".dlg «Lịch tháng» «ngày 23»",
+    ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»",
+    ".dlg «Lịch tháng» «Lui»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 5 người» «Quẻ Thượng (Con cái)»",
+    ".dlg «Quẻ Thượng · Con cái» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»",
+    ".dlg «Gieo lại quẻ» «Lui»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 5 người» «Sang buổi»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nguy hiểm chung: 39»",
+    ".dlg «Nguy hiểm chung» «Lui»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nguy hiểm chung: 39»",
+    ".dlg «Nguy hiểm chung» «Lui»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nguy hiểm chung: 39»",
+    ".dlg «Nguy hiểm chung» «Lui»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Sang ngày mới»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Sang ngày mới»",
+    "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Sang ngày mới»"
+   ]
+  },
+  {
+   "type": "harness",
+   "msg": "runner error: page.waitForTimeout: Target page, context or browser has been closed",
+   "n": 1
+  }
+ ],
+ "dead": [],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 359109,
+   "key": "hclh-save-v2-1"
+  }
+ ],
+ "buoi": 50,
+ "steps": 1559,
+ "status": [],
+ "_loopAt": 1795626254689,
+ "_snapAt": 1795626221759,
+ "trace": [
+  [
+   305,
+   "#kg82 «nâu trầm»"
+  ],
+  [
+   305,
+   "#kg82 «hoa đào»"
+  ],
+  [
+   305,
+   "#kg82 «nâu trầm»"
+  ],
+  [
+   306,
+   "#kg82 «Để mặt mộc»"
+  ],
+  [
+   306,
+   ".kmov «Tiếp theo»"
+  ],
+  [
+   306,
+   ".kmov «Tiếp theo»"
+  ],
+  [
+   306,
+   "#kg82 «Đã hiểu»"
+  ],
+  [
+   307,
+   ".mapsc «Sang buổi»"
+  ],
+  [
+   309,
+   ".dlg «Có người tìm đến» «Tiếp chuyệnTốn1 khắcĐượccùng Đáp ứng Phó Tố Tuyết »"
+  ],
+  [
+   313,
+   ".dlg «Lần đầu gặp mặt» «Đáp trả thẳng thắnKhó lườngTốnkhôngĐượcngười xung »"
+  ],
+  [
+   314,
+   ".dlg «Có người đến» «Chia sẻ bí mậtRất vữngTốnkhôngĐượcngười ấy có thiệ»"
+  ],
+  [
+   316,
+   ".mapsc «Sang buổi»"
+  ],
+  [
+   318,
+   ".dlg «Có người bán tin» «Không muaTốnkhôngĐượckhôngGhi chúkhông biết tin ấy»"
+  ],
+  [
+   320,
+   ".mapsc «‹ Dư đồVĩnh Hòa cung Hoài Nhu điện3 bóng người tạm»"
+  ],
+  [
+   321,
+   ".mapsc «Nguy hiểm chung: 24»"
+  ],
+  [
+   321,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   325,
+   ".mapsc «Nguy hiểm chung: 24»"
+  ],
+  [
+   325,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   329,
+   ".mapsc «Sang buổi»"
+  ],
+  [
+   331,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   333,
+   ".dlg «Kỳ nguyệt sự» «Báo lùi vài hômTùy duyênTốnkhôngĐượctùy duyên; có »"
+  ],
+  [
+   333,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   335,
+   "GONE Ta biết rồi"
+  ],
+  [
+   336,
+   ".dlg «Kính sự phòng» «Tranh sủngTùy duyênTốnkhôngĐượcdựa vào ân sủng; tà»"
+  ],
+  [
+   336,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   336,
+   "AREA 149,601"
+  ],
+  [
+   337,
+   "AREA 398,419"
+  ],
+  [
+   338,
+   "AREA 384,528"
+  ],
+  [
+   338,
+   "AREA 122,644"
+  ],
+  [
+   339,
+   "AREA 331,573"
+  ],
+  [
+   339,
+   "AREA 299,563"
+  ],
+  [
+   339,
+   "AREA 355,443"
+  ],
+  [
+   340,
+   "AREA 463,639"
+  ],
+  [
+   340,
+   "AREA 312,399"
+  ],
+  [
+   340,
+   "AREA 394,595"
+  ],
+  [
+   341,
+   "AREA 260,605"
+  ],
+  [
+   341,
+   "AREA 425,483"
+  ],
+  [
+   341,
+   "AREA 524,429"
+  ],
+  [
+   341,
+   "AREA 474,429"
+  ],
+  [
+   342,
+   "AREA 147,654"
+  ],
+  [
+   342,
+   "AREA 576,470"
+  ],
+  [
+   342,
+   "AREA 139,540"
+  ],
+  [
+   343,
+   "AREA 406,667"
+  ],
+  [
+   343,
+   "AREA 176,591"
+  ],
+  [
+   343,
+   "AREA 145,630"
+  ],
+  [
+   343,
+   "AREA 268,648"
+  ],
+  [
+   344,
+   "AREA 282,387"
+  ],
+  [
+   344,
+   "AREA 357,517"
+  ],
+  [
+   344,
+   "AREA 538,388"
+  ],
+  [
+   345,
+   "AREA 153,495"
+  ],
+  [
+   345,
+   "AREA 339,623"
+  ],
+  [
+   345,
+   "AREA 449,621"
+  ],
+  [
+   346,
+   "AREA 296,557"
+  ],
+  [
+   346,
+   "AREA 246,378"
+  ],
+  [
+   346,
+   "AREA 519,428"
+  ],
+  [
+   346,
+   "AREA 255,567"
+  ],
+  [
+   347,
+   "AREA 148,549"
+  ],
+  [
+   347,
+   "AREA 428,539"
+  ],
+  [
+   347,
+   "AREA 606,600"
+  ],
+  [
+   348,
+   "AREA 366,388"
+  ],
+  [
+   348,
+   "AREA 329,436"
+  ],
+  [
+   348,
+   "AREA 177,384"
+  ],
+  [
+   348,
+   "AREA 578,673"
+  ],
+  [
+   349,
+   "AREA 124,373"
+  ],
+  [
+   349,
+   "AREA 438,373"
+  ],
+  [
+   349,
+   "AREA 171,399"
+  ],
+  [
+   350,
+   "AREA 572,584"
+  ],
+  [
+   350,
+   "AREA 514,550"
+  ],
+  [
+   350,
+   "AREA 473,658"
+  ],
+  [
+   350,
+   "AREA 421,577"
+  ],
+  [
+   351,
+   "AREA 618,567"
+  ],
+  [
+   351,
+   "AREA 168,563"
+  ],
+  [
+   351,
+   "AREA 293,582"
+  ],
+  [
+   352,
+   "AREA 282,531"
+  ],
+  [
+   352,
+   "AREA 399,541"
+  ],
+  [
+   352,
+   "AREA 214,552"
+  ],
+  [
+   352,
+   "AREA 459,352"
+  ],
+  [
+   353,
+   "AREA 479,426"
+  ],
+  [
+   353,
+   "AREA 429,443"
+  ],
+  [
+   353,
+   "AREA 465,369"
+  ],
+  [
+   354,
+   "AREA 353,380"
+  ],
+  [
+   354,
+   "AREA 557,616"
+  ],
+  [
+   354,
+   "AREA 415,578"
+  ],
+  [
+   354,
+   "AREA 241,476"
+  ],
+  [
+   355,
+   "AREA 624,635"
+  ],
+  [
+   355,
+   "AREA 464,422"
+  ],
+  [
+   355,
+   "AREA 213,590"
+  ],
+  [
+   356,
+   "AREA 499,523"
+  ],
+  [
+   356,
+   "AREA 598,661"
+  ],
+  [
+   356,
+   "AREA 184,459"
+  ],
+  [
+   356,
+   "AREA 488,534"
+  ],
+  [
+   357,
+   "AREA 281,582"
+  ],
+  [
+   357,
+   "AREA 439,657"
+  ],
+  [
+   357,
+   "AREA 459,533"
+  ],
+  [
+   358,
+   "AREA 605,521"
+  ],
+  [
+   358,
+   "AREA 155,558"
+  ],
+  [
+   358,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   360,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   363,
+   "AREA 229,582"
+  ],
+  [
+   364,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   364,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   364,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   365,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   365,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   365,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   367,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   368,
+   ".dlg «Lời ra tiếng vào» «Đáp lạiTùy duyênTốnSức -2Đượcđáp khéo thì thêm dan»"
+  ],
+  [
+   371,
+   ".mapsc «Nguy hiểm chung: 48»"
+  ],
+  [
+   371,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   375,
+   ".mapsc «Nguy hiểm chung: 48»"
+  ],
+  [
+   375,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   379,
+   ".mapsc «Giao tình»"
+  ],
+  [
+   379,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Sang buổi»"
+  ],
+  [
+   381,
+   ".dlg «Có người bán tin» «Không muaTốnkhôngĐượckhôngGhi chúkhông biết tin ấy»"
+  ],
+  [
+   384,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nguy hiểm chung: 48»"
+  ],
+  [
+   384,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   388,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «1Cung nhân»"
+  ],
+  [
+   388,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nguy hiểm chung: 48»"
+  ],
+  [
+   388,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   392,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Sang buổi»"
+  ],
+  [
+   394,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Sang buổi»"
+  ],
+  [
+   396,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nguy hiểm chung: 44»"
+  ],
+  [
+   396,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   400,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nguy hiểm chung: 44»"
+  ],
+  [
+   400,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   404,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Sang ngày mới»"
+  ],
+  [
+   406,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Tài nghệ»"
+  ],
+  [
+   406,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Bậc 1 trên 5»"
+  ],
+  [
+   406,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Giao tình»"
+  ],
+  [
+   407,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Phe phái»"
+  ],
+  [
+   407,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Tư trang»"
+  ],
+  [
+   407,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hương liệu 0»"
+  ],
+  [
+   408,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hành sự»"
+  ],
+  [
+   408,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Tất cả 18/21Nghỉ ngơi 4/4Giao thiệp 2/3Học tập · T»"
+  ],
+  [
+   408,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nghỉ ngơi 4/4»"
+  ],
+  [
+   409,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nghỉ ngơiNghỉ ngơiGiả bệnhCáo bệnh để Hoàng thượng»"
+  ],
+  [
+   409,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Về phòng»"
+  ],
+  [
+   409,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nguy hiểm chung: 44»"
+  ],
+  [
+   409,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nguy hiểm chung: 44»"
+  ],
+  [
+   410,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nguy hiểm chung: 44»"
+  ],
+  [
+   410,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nguy hiểm chung: 44»"
+  ],
+  [
+   410,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Sắc88Tài95Tâm cơ12Đức35Danh16Sủng8»"
+  ],
+  [
+   410,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hành sự»"
+  ],
+  [
+   411,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nghỉ ngơiNghỉ ngơiGiả bệnhCáo bệnh để Hoàng thượng»"
+  ],
+  [
+   411,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nghỉ ngơiNghỉ ngơiGiả bệnhCáo bệnh để Hoàng thượng»"
+  ],
+  [
+   411,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hậu cung»"
+  ],
+  [
+   412,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Việc hôm nay»"
+  ],
+  [
+   412,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Phi tần»"
+  ],
+  [
+   413,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Đã biết: 1 tin ›»"
+  ],
+  [
+   413,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Sắc88Tài95Tâm cơ12Đức35Danh16Sủng8»"
+  ],
+  [
+   414,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «PhiUyển Ninh»"
+  ],
+  [
+   414,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Tâm trạngBình thản-3»"
+  ],
+  [
+   415,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Về phòng»"
+  ],
+  [
+   415,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   415,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Quẻ Thượng thượng (Tài nghệ)»"
+  ],
+  [
+   416,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Dư đồ»"
+  ],
+  [
+   416,
+   ".mapsc «Nguy hiểm chung: 44»"
+  ],
+  [
+   416,
+   ".mapsc «Nguy hiểm chung: 44»"
+  ],
+  [
+   417,
+   ".mapsc «Chung Tú7 bóng · 2 khắc · bái kiến»"
+  ],
+  [
+   417,
+   ".mapsc «Danh sách»"
+  ],
+  [
+   418,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Xin yết kiến Mong manh3 khắc»"
+  ],
+  [
+   418,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Xin bái kiến Mong manh3 khắc»"
+  ],
+  [
+   418,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Xin bái kiến Mong manh3 khắc»"
+  ],
+  [
+   418,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Xin yết kiến Mong manh3 khắc»"
+  ],
+  [
+   419,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Lẻn vào Khó lường3 khắc · bắt: Danh -19»"
+  ],
+  [
+   419,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Xin bái kiến Mong manh3 khắc»"
+  ],
+  [
+   419,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Xin bái kiến Mong manh3 khắc»"
+  ],
+  [
+   419,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Xin yết kiến Mong manh3 khắc»"
+  ],
+  [
+   420,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Xin yết kiến Mong manh3 khắc»"
+  ],
+  [
+   420,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Tin báo: 20 tin mới»"
+  ],
+  [
+   420,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Xin yết kiến Mong manh3 khắc»"
+  ],
+  [
+   420,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Xin yết kiến Mong manh3 khắc»"
+  ],
+  [
+   421,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Xin yết kiến Mong manh3 khắc»"
+  ],
+  [
+   421,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Xin yết kiến Mong manh3 khắc»"
+  ],
+  [
+   421,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Xin bái kiến Mong manh3 khắc»"
+  ],
+  [
+   421,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Xin bái kiến Mong manh3 khắc»"
+  ],
+  [
+   422,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Xin bái kiến Mong manh3 khắc»"
+  ],
+  [
+   422,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Xin bái kiến Mong manh3 khắc»"
+  ],
+  [
+   422,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Quẻ Thượng thượng (Tài nghệ)»"
+  ],
+  [
+   422,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Lẻn vào Khó lường3 khắc · bắt: Danh -19»"
+  ],
+  [
+   423,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Lẻn vào Khó lường3 khắc · bắt: Danh -19»"
+  ],
+  [
+   423,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Lẻn vào Khó lường3 khắc · bắt: Danh -19»"
+  ],
+  [
+   423,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Mệnh truyện»"
+  ],
+  [
+   424,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Sổ ghi»"
+  ],
+  [
+   424,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Con gái Đại tướng quân 0/16»"
+  ],
+  [
+   424,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Công chúa hòa thân · Cao Ly 0/16»"
+  ],
+  [
+   424,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hôm nay mặt mộc»"
+  ],
+  [
+   427,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Việc nhờ»"
+  ],
+  [
+   427,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Tìm việc»"
+  ],
+  [
+   427,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Tin báo»"
+  ],
+  [
+   428,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hành sự»"
+  ],
+  [
+   428,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nghỉ ngơiNghỉ ngơiGiả bệnhCáo bệnh để Hoàng thượng»"
+  ],
+  [
+   428,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nghỉ ngơiNghỉ ngơiGiả bệnhCáo bệnh để Hoàng thượng»"
+  ],
+  [
+   429,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Sắc88Tài95Tâm cơ12Đức35Danh16Sủng8»"
+  ],
+  [
+   429,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nghỉ ngơiNghỉ ngơiGiả bệnhCáo bệnh để Hoàng thượng»"
+  ],
+  [
+   429,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Quẻ Thượng thượng (Tài nghệ)»"
+  ],
+  [
+   429,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nghỉ ngơiNghỉ ngơiGiả bệnhCáo bệnh để Hoàng thượng»"
+  ],
+  [
+   430,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Tài nghệ»"
+  ],
+  [
+   430,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   430,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Bậc 0 trên 5»"
+  ],
+  [
+   431,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   431,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Tâm trạngBình thản-3»"
+  ],
+  [
+   431,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Tứ đức 9/9Cầm kỳ thi họa 8/12Vũ · Y · Nữ công 8/12»"
+  ],
+  [
+   431,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Tư trang»"
+  ],
+  [
+   432,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Bạc119Sức98/100»"
+  ],
+  [
+   432,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hành sự»"
+  ],
+  [
+   432,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Tâm trạngBình thản-3»"
+  ],
+  [
+   433,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Tư trang»"
+  ],
+  [
+   433,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hương liệu 0»"
+  ],
+  [
+   433,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Tin báo»"
+  ],
+  [
+   433,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Tất cả 28»"
+  ],
+  [
+   434,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Quẻ Thượng thượng (Tài nghệ)»"
+  ],
+  [
+   434,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Dấu ấn 1»"
+  ],
+  [
+   434,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Quẻ Thượng thượng (Tài nghệ)»"
+  ],
+  [
+   435,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hậu cung»"
+  ],
+  [
+   435,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Trầm Bích»"
+  ],
+  [
+   436,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «ThườngTrâm ngọc bích»"
+  ],
+  [
+   436,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hành sự»"
+  ],
+  [
+   437,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hoàng tự»"
+  ],
+  [
+   437,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hôn sự»"
+  ],
+  [
+   437,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hậu cung»"
+  ],
+  [
+   438,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nam nhân»"
+  ],
+  [
+   438,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nam nhân»"
+  ],
+  [
+   439,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Giao tình»"
+  ],
+  [
+   439,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hậu cung»"
+  ],
+  [
+   439,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Mệnh truyện»"
+  ],
+  [
+   439,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Tâm trạngBình thản-3»"
+  ],
+  [
+   440,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hoàng tự»"
+  ],
+  [
+   440,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hoàng tự trong cung»"
+  ],
+  [
+   440,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hôn sự»"
+  ],
+  [
+   440,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké»"
+  ],
+  [
+   441,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Quẻ Thượng thượng (Tài nghệ)»"
+  ],
+  [
+   441,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Con của ta»"
+  ],
+  [
+   441,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Tư trang»"
+  ],
+  [
+   442,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Giao tình»"
+  ],
+  [
+   442,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Dư đồ»"
+  ],
+  [
+   442,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Sắc88Tài95Tâm cơ12Đức35Danh16Sủng8»"
+  ],
+  [
+   442,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Lẻn vào Khó lường3 khắc · bắt: Danh -19»"
+  ],
+  [
+   443,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hoàng tự»"
+  ],
+  [
+   443,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Kế vị»"
+  ],
+  [
+   443,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Tin báo»"
+  ],
+  [
+   444,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hoàng tử1. Dung»"
+  ],
+  [
+   444,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Quý tộc kén rể · kén dâu»"
+  ],
+  [
+   444,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hoàng tự trong cung»"
+  ],
+  [
+   444,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hôn sự»"
+  ],
+  [
+   445,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hôn sự»"
+  ],
+  [
+   445,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Tin báo»"
+  ],
+  [
+   445,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hôm nay mặt mộc»"
+  ],
+  [
+   448,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Về phòng»"
+  ],
+  [
+   448,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nguy hiểm chung: 44»"
+  ],
+  [
+   448,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nguy hiểm chung: 44»"
+  ],
+  [
+   448,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nguy hiểm chung: 44»"
+  ],
+  [
+   449,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nguy hiểm chung: 44»"
+  ],
+  [
+   449,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Xét phẩm: thiếu 3»"
+  ],
+  [
+   449,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Sắc88Tài95Tâm cơ12Đức35Danh16Sủng8»"
+  ],
+  [
+   449,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hành sự»"
+  ],
+  [
+   450,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «mưa rào»"
+  ],
+  [
+   452,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nghỉ ngơi 4/4»"
+  ],
+  [
+   452,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   453,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Sắc88Tài95Tâm cơ12Đức35Danh16Sủng8»"
+  ],
+  [
+   453,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «mưa rào»"
+  ],
+  [
+   455,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Học tập · Tài nghệ 3/3»"
+  ],
+  [
+   456,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Mệnh truyện»"
+  ],
+  [
+   456,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nợ ân 0»"
+  ],
+  [
+   456,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Đang làm 3/4»"
+  ],
+  [
+   456,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Về phòng»"
+  ],
+  [
+   457,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Có thaiRất thấp»"
+  ],
+  [
+   457,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Giao tình»"
+  ],
+  [
+   457,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Ân oán»"
+  ],
+  [
+   458,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «với Hoàng thượng»"
+  ],
+  [
+   458,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Sắc88Tài95Tâm cơ12Đức35Danh16Sủng8»"
+  ],
+  [
+   458,
+   "page «unstick Tin báo»"
+  ],
+  [
+   461,
+   "title (unstick reload) «chơi một mình»"
+  ],
+  [
+   463,
+   "title (unstick reload) «chơi tiếp|tiếp tục|vào sổ|^tải$»"
+  ],
+  [
+   465,
+   ".dlg «Kính sự phòng» «Tranh sủngKhó lườngTốnkhôngĐượcdựa vào ân sủng; tà»"
+  ],
+  [
+   467,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   467,
+   "AREA 367,480"
+  ],
+  [
+   468,
+   "AREA 230,376"
+  ],
+  [
+   468,
+   "AREA 558,522"
+  ],
+  [
+   469,
+   "AREA 413,602"
+  ],
+  [
+   470,
+   "AREA 276,600"
+  ],
+  [
+   470,
+   "AREA 127,378"
+  ],
+  [
+   471,
+   "AREA 138,376"
+  ],
+  [
+   471,
+   "AREA 513,429"
+  ],
+  [
+   472,
+   "AREA 612,421"
+  ],
+  [
+   472,
+   "AREA 388,557"
+  ],
+  [
+   473,
+   "AREA 493,605"
+  ],
+  [
+   473,
+   "AREA 140,364"
+  ],
+  [
+   473,
+   "AREA 576,477"
+  ],
+  [
+   474,
+   "AREA 136,523"
+  ],
+  [
+   474,
+   "AREA 579,642"
+  ],
+  [
+   475,
+   "AREA 606,533"
+  ],
+  [
+   475,
+   "AREA 499,418"
+  ],
+  [
+   475,
+   "AREA 347,662"
+  ],
+  [
+   476,
+   "AREA 454,609"
+  ],
+  [
+   476,
+   "AREA 549,361"
+  ],
+  [
+   477,
+   "AREA 312,650"
+  ],
+  [
+   477,
+   "AREA 198,416"
+  ],
+  [
+   477,
+   "AREA 559,461"
+  ],
+  [
+   477,
+   "AREA 607,564"
+  ],
+  [
+   478,
+   "AREA 234,425"
+  ],
+  [
+   478,
+   "AREA 193,524"
+  ],
+  [
+   478,
+   "AREA 373,573"
+  ],
+  [
+   479,
+   "AREA 443,413"
+  ],
+  [
+   479,
+   "AREA 404,554"
+  ],
+  [
+   479,
+   "AREA 174,423"
+  ],
+  [
+   480,
+   "AREA 257,452"
+  ],
+  [
+   480,
+   "AREA 539,486"
+  ],
+  [
+   480,
+   "AREA 432,455"
+  ],
+  [
+   481,
+   "AREA 544,373"
+  ],
+  [
+   481,
+   "AREA 343,468"
+  ],
+  [
+   481,
+   "AREA 266,400"
+  ],
+  [
+   482,
+   "AREA 418,429"
+  ],
+  [
+   482,
+   "AREA 209,668"
+  ],
+  [
+   482,
+   "AREA 293,561"
+  ],
+  [
+   483,
+   "AREA 535,489"
+  ],
+  [
+   483,
+   "AREA 192,463"
+  ],
+  [
+   483,
+   "AREA 154,395"
+  ],
+  [
+   484,
+   "AREA 341,621"
+  ],
+  [
+   484,
+   "AREA 581,597"
+  ],
+  [
+   484,
+   "AREA 372,439"
+  ],
+  [
+   485,
+   "AREA 410,473"
+  ],
+  [
+   485,
+   "AREA 321,492"
+  ],
+  [
+   485,
+   "AREA 275,651"
+  ],
+  [
+   486,
+   "AREA 435,510"
+  ],
+  [
+   486,
+   "AREA 363,618"
+  ],
+  [
+   486,
+   "AREA 174,564"
+  ],
+  [
+   487,
+   "AREA 508,423"
+  ],
+  [
+   487,
+   "AREA 438,447"
+  ],
+  [
+   487,
+   "AREA 563,405"
+  ],
+  [
+   488,
+   "AREA 276,465"
+  ],
+  [
+   488,
+   "AREA 525,580"
+  ],
+  [
+   488,
+   "AREA 263,557"
+  ],
+  [
+   489,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   490,
+   ".dlg «Đã biết về Hoàng hậu Thiệu Trầm Bích» «Lui»"
+  ],
+  [
+   492,
+   ".dlg «Công · Nữ công» «Lui»"
+  ],
+  [
+   493,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   497,
+   "AREA 359,739"
+  ],
+  [
+   498,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   498,
+   "#kmrew «Nhận»"
+  ],
+  [
+   500,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   500,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   500,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   501,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   501,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   502,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   506,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nguy hiểm chung: 44»"
+  ],
+  [
+   507,
+   ".dlg «Nguy hiểm chung» «Đóng cửa giữ mìnhTốnSủng -2Được2 tuần: mưu hại nhắ»"
+  ],
+  [
+   509,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nguy hiểm chung: 44»"
+  ],
+  [
+   509,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   513,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nguy hiểm chung: 44»"
+  ],
+  [
+   513,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   517,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Sang buổi»"
+  ],
+  [
+   519,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nguy hiểm chung: 42»"
+  ],
+  [
+   519,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   523,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nguy hiểm chung: 42»"
+  ],
+  [
+   523,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   527,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Sang buổi»"
+  ],
+  [
+   529,
+   ".kfoc «Tiếp ▸»"
+  ],
+  [
+   529,
+   ".kfoc «Tiếp chuyện»"
+  ],
+  [
+   529,
+   ".kfoc «Lui»"
+  ],
+  [
+   533,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 5 người» «Lịch tháng»"
+  ],
+  [
+   534,
+   ".dlg «Lịch tháng» «mồng 2»"
+  ],
+  [
+   534,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   535,
+   ".dlg «Lịch tháng» «ngày 23»"
+  ],
+  [
+   535,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   535,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   537,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 5 người» «Quẻ Thượng (Con cái)»"
+  ],
+  [
+   537,
+   ".dlg «Quẻ Thượng · Con cái» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   537,
+   ".dlg «Gieo lại quẻ» «Lui»"
+  ],
+  [
+   539,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 5 người» «Sang buổi»"
+  ],
+  [
+   541,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nguy hiểm chung: 39»"
+  ],
+  [
+   541,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   545,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nguy hiểm chung: 39»"
+  ],
+  [
+   545,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   549,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Nguy hiểm chung: 39»"
+  ],
+  [
+   549,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   553,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Sang ngày mới»"
+  ],
+  [
+   555,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Sang ngày mới»"
+  ],
+  [
+   557,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Sang ngày mới»"
+  ],
+  [
+   558,
+   "page «unstick Tai mắt0»"
+  ],
+  [
+   560,
+   "title (unstick reload) «chơi một mình»"
+  ],
+  [
+   562,
+   "title (unstick reload) «chơi tiếp|tiếp tục|vào sổ|^tải$»"
+  ],
+  [
+   564,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Hành sự»"
+  ],
+  [
+   565,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Quẻ Thượng thượng (Tài nghệ)»"
+  ],
+  [
+   566,
+   ".dlg «Quẻ Thượng thượng · Tài nghệ» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   566,
+   ".dlg «Gieo lại quẻ» «Lui»"
+  ],
+  [
+   568,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách giải »"
+  ],
+  [
+   571,
+   "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Sang ngày mới»"
+  ],
+  [
+   575,
+   "AREA 491,443"
+  ],
+  [
+   576,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   578,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   578,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   579,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   579,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   580,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   582,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   585,
+   "AREA 458,725"
+  ],
+  [
+   586,
+   "AREA 466,412"
+  ],
+  [
+   586,
+   "#kmrew «Nhận»"
+  ]
+ ],
+ "_started": true,
+ "_ckAt": 1795626232556,
+ "_ckB": 49,
+ "rss": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1198,
+   "rendererMB": 560,
+   "heapMB": 111,
+   "dom": 2817,
+   "q": 4,
+   "lsK": 4
+  },
+  {
+   "buoi": 4,
+   "y": 1,
+   "totalMB": 2188,
+   "rendererMB": 1300,
+   "heapMB": 111,
+   "dom": 816,
+   "q": 0,
+   "lsK": 148
+  },
+  {
+   "buoi": 9,
+   "y": 1,
+   "totalMB": 2407,
+   "rendererMB": 1476,
+   "heapMB": 111,
+   "dom": 1890,
+   "q": 3,
+   "lsK": 157
+  },
+  {
+   "buoi": 14,
+   "y": 1,
+   "totalMB": 2436,
+   "rendererMB": 1509,
+   "heapMB": 111,
+   "dom": 1424,
+   "q": 0,
+   "lsK": 259
+  },
+  {
+   "buoi": 19,
+   "y": 1,
+   "totalMB": 2416,
+   "rendererMB": 1497,
+   "heapMB": 111,
+   "dom": 1266,
+   "q": 0,
+   "lsK": 259
+  },
+  {
+   "buoi": 24,
+   "y": 1,
+   "totalMB": 1535,
+   "rendererMB": 886,
+   "heapMB": 125,
+   "dom": 1794,
+   "q": 0,
+   "lsK": 324
+  },
+  {
+   "buoi": 29,
+   "y": 1,
+   "totalMB": 1956,
+   "rendererMB": 1286,
+   "heapMB": 125,
+   "dom": 1892,
+   "q": 7,
+   "lsK": 320
+  },
+  {
+   "buoi": 34,
+   "y": 1,
+   "totalMB": 2203,
+   "rendererMB": 1516,
+   "heapMB": 125,
+   "dom": 863,
+   "q": 1,
+   "lsK": 370
+  },
+  {
+   "buoi": 39,
+   "y": 1,
+   "totalMB": 2211,
+   "rendererMB": 1512,
+   "heapMB": 125,
+   "dom": 861,
+   "q": 1,
+   "lsK": 370
+  },
+  {
+   "buoi": 44,
+   "y": 1,
+   "totalMB": 2239,
+   "rendererMB": 1550,
+   "heapMB": 125,
+   "dom": 950,
+   "q": 0,
+   "lsK": 412
+  },
+  {
+   "buoi": 49,
+   "y": 1,
+   "totalMB": 2022,
+   "rendererMB": 1340,
+   "heapMB": 125,
+   "dom": 1697,
+   "q": 0,
+   "lsK": 414
+  }
+ ],
+ "_momSeen": [
+  "#klife|",
+  "#kroul|",
+  "#modal|Thân phận kiếp này",
+  ".dlg|Tiền truyện · Con gái thầy đồ nghèo · #/",
+  ".kmov|",
+  ".dlg|Tuyển chọn",
+  "page|Dực Khôn cung · Hòa Sướng hiên · Ở đây c",
+  "#kg82|",
+  ".dlg|Nhập cung",
+  "#kprevov|",
+  ".dlg|Mệnh truyện kiếp này",
+  ".dlg|Chọn cung nữ thân tín",
+  "#kxcatch|",
+  ".dlg|Nguy hiểm chung",
+  "#modal|Tin báo",
+  ".dlg|Tin báo",
+  ".mapsc|",
+  ".dlg|Có người bán tin",
+  ".dlg|Kính sự phòng",
+  ".dlg|Tâm trạng · Quý phi Lương Lăng Ba",
+  ".dlg|Tâm trạng · Ta",
+  ".dlg|Tâm trạng · Đáp ứng Tào Kiều Ân",
+  ".kne|",
+  "#dawn|",
+  ".kbk|Tổng lược",
+  ".dlg|Tin trong cung buổi này",
+  "#modal|Xong việc: Đi một nơi trong cung",
+  ".dlg|Xong việc: Đi một nơi trong cung",
+  "page|Tích Cần viện · Ở đây còn # người.",
+  ".dlg|Tích Cần viện",
+  ".dlg|Kỳ nguyệt sự",
+  ".dlg|Hội phối đồ: báo đề",
+  "#kpinfo|",
+  ".dlg|Quẻ Hạ hạ · Hung",
+  ".dlg|Gieo lại quẻ",
+  ".dlg|Ân thưởng",
+  ".dlg|Ân tình (đêm)",
+  "#kmrew|",
+  ".dlg|Phụ tuyến · Nếm giúp thái y chén thuốc đ",
+  "#modal|Tâm trạng · Ta",
+  ".dlg|Bổng lộc tháng ba",
+  ".dlg|Thỉnh bình an mạch",
+  ".dlg|Phụ tuyến · Tân quân lập uy · Chương # ·",
+  ".dlg|Kính sự phòng báo tin",
+  ".dlg|Biếu quà làm lành",
+  ".dlg|Hội phối đồ · Thanh nhã",
+  ".dlg|Danh hiệu mới",
+  ".dlg|Đeo «Trăng soi rèm ngọc»",
+  ".dlg|Lễ Phật đản",
+  ".dlg|Phụ tuyến · Tâm nguyện Thái hậu (#/#): K",
+  ".dlg|Có thai: Rất thấp",
+  "#modal|Tết Đoan ngọ · Lời mời: Thi gói bánh ú",
+  ".dlg|Tết Đoan ngọ · Lời mời: Thi gói bánh ú",
+  ".dlg|Phụ tuyến · Thư thầy cũ: xin chút bạc dư",
+  ".dlg|Bạc",
+  ".dlg|Thái hậu ban thưởng",
+  "#modal|Chuẩn bị thị tẩm",
+  ".dlg|Chuẩn bị thị tẩm",
+  "#modal|Đêm thị tẩm",
+  ".dlg|Đêm thị tẩm",
+  "#modal|Bổng lộc tháng tư",
+  ".dlg|Bổng lộc tháng tư",
+  ".dlg|Bổng lộc tháng tư · Lễ nghĩa",
+  ".dlg|Tết Đoan ngọ · Thi gói bánh ú",
+  "#modal|sáng · còn",
+  ".dlg|sáng · còn",
+  ".dlg|Có người tìm đến",
+  "#modal|Lần đầu gặp mặt",
+  ".dlg|Lần đầu gặp mặt",
+  ".dlg|Có người đến",
+  ".dlg|Lời ra tiếng vào",
+  ".dlg|Đã biết về Hoàng hậu Thiệu Trầm Bích",
+  ".dlg|Công · Nữ công",
+  ".kfoc|",
+  "#modal|Lịch tháng",
+  ".dlg|Lịch tháng",
+  ".dlg|Quẻ Thượng · Con cái",
+  ".dlg|Quẻ Thượng thượng · Tài nghệ"
+ ],
+ "_momRank": 0,
+ "_scrW": {
+  "#modal|Thân phận kiếp này|594,435": {
+   "left": 221,
+   "n": 1
+  },
+  ".dlg|Kỳ nguyệt sự|494,629": {
+   "left": 124,
+   "n": 3
+  },
+  ".dlg|Phụ tuyến · Tân quân lập uy · Chương # · Hồi #/#|494,709": {
+   "left": 86,
+   "n": 1
+  },
+  ".dlg|Phụ tuyến · Tân quân lập uy · Chương # · Hồi #/#|494,700": {
+   "left": 68,
+   "n": 1
+  },
+  ".dlg|Lễ Phật đản|494,643": {
+   "left": 105,
+   "n": 1
+  },
+  "#modal|Tết Đoan ngọ · Lời mời: Thi gói bánh ú|494,727": {
+   "left": 121,
+   "n": 3
+  },
+  ".dlg|Tết Đoan ngọ · Lời mời: Thi gói bánh ú|494,727": {
+   "left": 121,
+   "n": 1
+  },
+  "#modal|Chuẩn bị thị tẩm|494,639": {
+   "left": 238,
+   "n": 1
+  },
+  "#modal|Đêm thị tẩm|494,634": {
+   "left": 120,
+   "n": 3
+  },
+  ".dlg|Đêm thị tẩm|494,634": {
+   "left": 120,
+   "n": 1
+  },
+  "#modal|Đêm thị tẩm|494,615": {
+   "left": 45,
+   "n": 1
+  },
+  ".dlg|Đêm thị tẩm|494,615": {
+   "left": 45,
+   "n": 1
+  },
+  "#modal|Bổng lộc tháng tư|494,678": {
+   "left": 334,
+   "n": 3
+  },
+  ".dlg|Bổng lộc tháng tư|494,678": {
+   "left": 334,
+   "n": 1
+  },
+  "#kg82||378,500": {
+   "left": 317,
+   "n": 1
+  },
+  "#modal|Lần đầu gặp mặt|494,664": {
+   "left": 142,
+   "n": 3
+  },
+  ".dlg|Lần đầu gặp mặt|494,664": {
+   "left": 142,
+   "n": 1
+  },
+  ".dlg|Có người đến|494,625": {
+   "left": 64,
+   "n": 1
+  }
+ },
+ "offers": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "rank": 0,
+   "screen": "#modal «Thân phận kiếp này»",
+   "label": "Vào cung ngayTốnkhôngĐượcvào cung ngay·phong Đáp ứng·thêm kh",
+   "picked": false
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "rank": 0,
+   "screen": "#modal «Thân phận kiếp này»",
+   "label": "Ở nhà chờ tuyển túTốnkhôngĐượchai năm học tài nghệ·nâng Tư c",
+   "picked": false
+  },
+  {
+   "buoi": 24,
+   "y": 1,
+   "rank": 0,
+   "screen": ".dlg «Kính sự phòng báo tin»",
+   "label": "Tiến cử Cung nữ thân tín tam đẳng Châu Nhi hầu thayRất vữngT",
+   "picked": true
+  },
+  {
+   "buoi": 44,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người»",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 0Triều ",
+   "picked": false
+  },
+  {
+   "buoi": 44,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người»",
+   "label": "Sắc phong",
+   "picked": false
+  }
+ ],
+ "_areaW": {
+  "area|.kmov|": 1
+ },
+ "_areaT": {
+  "area|.kmov|": 1795625326208
+ },
+ "dumps": [
+  "/home/user/wt/out3/shots-flight2-s2e/loop-1-dump.json",
+  "/home/user/wt/out3/shots-flight2-s2e/noturn-2-dump.json"
+ ]
+}

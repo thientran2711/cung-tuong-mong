@@ -1,0 +1,16 @@
+BUG game dialog queue holds 4 copies of «Tâm trạng · Quý phi Lương Lăng Ba» (each close pops one; looks like a dead ✕)
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt/dev/test/robot-rt.js:169:44)
+    at async /home/user/wt/rt/dev/test/robot-rt.js:414:9 {
+  log: []
+}
+RESUME flight2-s2e from 2026-11-25T16:53:17.716Z buổi 19
+BUG stuck no-clock loop: 150 taps without a clock step on page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người»
+BUG game softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=10: Quan hệ với / Tin báo / Tin báo / Tin báo / Dung · Dung nghi / Tin báo)
+BUG game softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Tin trong cung buổi này)
+CP buổi 50 year 1 save 359109 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt/dev/test/robot-rt.js:255:324)
+    at async /home/user/wt/rt/dev/test/robot-rt.js:419:9 {
+  log: []
+}
