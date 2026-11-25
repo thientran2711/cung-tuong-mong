@@ -91,3 +91,44 @@ Commits: 02b218e1 (N2/N3/N5), d0bdb6dc (site rebuilt).
 | real taps Fold + iPad | her Múa card text read from the page on both devices: «Kèm phi tần ghen +4», unchanged ✓; a real TAP on it NOT achieved (in the act-audit 'hau' setup the dealt card sits in a hidden list; Hành sự / Tài nghệ / Học tập taps did not surface it). The NPC dancer text and jshelf have no card she sees. 0 page errors. |
 
 Open for Foreman D: residual c is a real shown ≠ applied on her Múa card (Bại omits Sủng −3) — pre-existing, family «lose row of an act card»; kit request family for a/f; RV4 N4/N6 with the kit keeper.
+
+---
+# ROUND 3 (Foreman D depth 5, 16:43Z: fix residual c, whole family) — review/net-ghen-2 @ a5768ba8 — SSK + ROLLOVER
+PRIORITY #1 CHECK: OD net-ghen LAW 11 wave 2 | main none | review/net-ghen-2 d0bdb6dc | claims W10. Reused: jstagehere actMove/ACT_PLACE, j41 accGrant/accHas, act-audit LIB.
+Commits: e4d86c92 (fix + scan), a5768ba8 (site).
+
+## Root cause (traced with call stacks)
+Residual c was NOT the Múa card's own lose row. After any act card, jstagehere `actMove` walks her into the act's place (ACT_PLACE; Múa trong yến tiệc → thu = Cần Chính điện) through goTo. goTo's door rule (j2:137: Emperor there, Sủng < 40, a hidden roll fails → «bị đuổi về», apply {sung:−3}) ran on that walk although actMove had just given her the place's pass (accGrant). So a separate, unshown roll took Sủng −3 after the result card. The Bạc +15 seen with «Để ý một nam nhân áo gấm» / «Xin rút thẻ bài» / Thỉnh an Thái hậu is the ma ma quest reward (tq14 note «go»), shown by its own «Xong việc» card; not hidden.
+
+## Fix (LAW 11 family = every stat goTo can change on an act walk)
+j2 goTo thu: no chase when she holds a pass for the place (`accHas(S,k)`: an act walked her in, or a summons / Xin yết kiến let her in). A plain map walk with no pass never reaches this rule (j41 access gate stops it first; checked: plain walk Sủng unchanged, blocked by the gate). No BAL number touched.
+
+## Scan: dev/test/actwalk-scan.js (new; every ACT_PLACE act, Emperor + every rival put at the place, rolls forced fail and pass, setter traps name the call site; exit 1 on any hidden change)
+| | acts | walks | walks with a stat change not on any card | quest reward (own card) |
+|---|---|---|---|---|
+| before (d0bdb6dc) | 25 | 50 | 1 — Múa trong yến tiệc → thu, fail: Sủng 20→17 | 1 (Thỉnh an Thái hậu → tn, Bạc +15) |
+| after (a5768ba8) | 25 | 50 | 0 | 1 (same) |
+Ngự hoa viên's «gặp Hoàng thượng: Sủng +3/+1» door rule is in the family too but does not fire on an act walk in this build (scan: 0 for both vuon acts).
+
+rc-scan check of the card: Múa lose now applies Danh −6, Sức −20, Bạc −10 (+15 quest) = card «Mất Danh −6 · Sức −20 · Bạc −10» ✓ (before: Sủng 8→5 hidden).
+
+## Gates on a5768ba8
+| gate | result |
+|---|---|
+| build | OK |
+| one-core ×4 / c6 | PASS / 0 cards |
+| relshow-scan --fail-raw | PASS RAW 0 |
+| relshow-rt / net-build | PASS / PASS |
+| actwalk-scan | PASS 0 (was 1) |
+| rc-scan dau,hau | 780 runs, 417 cards, 0 page errors; not named 45: servant af/loyal 17/17 (= residual a, kit wait), familiarity 7, her stat 4 (all = quest Bạc +15 with its own card); Múa Sủng gone; consort families 0 |
+| quickcheck ALONE | PASS 765 s |
+| coop-e2e fresh alone | 142/142 first run |
+| real taps | NOT done this round: a lose on the Múa card cannot be forced by real taps; the fix is in goTo (no card text changed). |
+
+## Still open — SAME walk family, familiarity (next seat)
+familiarity 7 not named: Thỉnh an Hoàng hậu → kn (kn.r1/r2/r4 None→2) = residual b, and NEW in this scan Múa / Để ý một nam nhân áo gấm → kn.x29 None→1 (a man met on arrival at thu/vuon). Same cause: people met on the act walk raise S.known AFTER the result card was built. Suggested fix (kit rows already exist: W9's KREG familiarity rows in j63): in jstagehere actMove snapshot S.known, and after goTo append the risen steps to kaLastResult (or the pending card when __actPend) through the same j63 familiarity row builder; extend actwalk-scan to S.known (its K list) and expect 0.
+
+## HANDOVER (ROLLOVER: my context is at the roll line)
+1. Worktree: sparse review/net-ghen-2 @ a5768ba8 (`/home/user/wt/w10` may be gone; recipe in nt-w9 §HANDOVER). `python3 dev/build/assemble.py`; before relshow-scan: `node dev/test/relshow-bal.js $PWD/dev/index.html dev/test/relshow-bal.json`.
+2. Do the familiarity walk fix above (LAW 9: use the existing j63 KREG row, no new chip), add S.known to actwalk-scan, re-run every gate in the tables (rc-scan, quickcheck ALONE, coop-e2e alone).
+3. Tools: rc-scan/rc-sum in dev/handover/reports/nt-w8/; robot: dev/measure/nt-run.js (use 3 slots, not 4 — 4-way load hangs the bot).
