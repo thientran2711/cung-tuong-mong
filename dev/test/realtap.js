@@ -89,6 +89,7 @@ function make(page, opt = {}) {
     if (!p.ok && info.wait) { const t0 = Date.now(); while (!p.ok && Date.now() - t0 < info.wait) { await page.waitForTimeout(400); p = await h.evaluate(PROBE).catch(() => ({ gone: true })) } }
     if (p.disabled) { log({ k: 'disabled', screen: info.screen, label: info.label }); return false }
     if (p.gone) { log({ k: 'gone', screen: info.screen, label: info.label }); return false }
+    if (p.zero) { log({ k: 'zero', screen: info.screen, label: info.label }); return false } /* ROLE B #5 (d): a 0×0 target is a hidden element the picker chose (s4d «Hầu hạ», .kmov «?»), not a covered button — never DEAD */
     if (!p.ok && info.confirm && !(await info.confirm().catch(() => true))) { log({ k: 'moved', screen: info.screen, label: info.label }); return false }
     if (!p.ok && p.clip) { log({ k: 'clipped', screen: info.screen, label: info.label, cover: p.cover }); return false }
     if (!p.ok && p.anc) { log({ k: 'clipped', screen: info.screen, label: info.label, cover: p.cover }); return false } /* its own container is on top = clipped / under a scroll edge, not covered by another layer */
