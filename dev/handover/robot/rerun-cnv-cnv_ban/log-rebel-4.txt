@@ -1,0 +1,9 @@
+CP buổi 50 year 1 save 315373 chars
+CP buổi 100 year 1 save 432186 chars
+CP buổi 150 year 2 save 495592 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:182:324)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:312:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-rebel-4 from 2026-11-25T21:11:49.853Z buổi 161

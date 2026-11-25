@@ -18,3 +18,28 @@ CP buổi 452 year 4 save 908485 chars
 STATUS cnv-cnv_ban-random-1 · buổi 471 · year 4 · rank 0 · bugs 1 · stuck 2 · dead buttons 0
 DEAD BUTTON page «Tích Cần viện · Ở đây còn 14 người.» «Hoàng tửHoàng tử Vĩnh Tông» cover zero size
 CP buổi 502 year 4 save 909298 chars
+CP buổi 552 year 4 save 945876 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:157:192)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:312:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-random-1 from 2026-11-25T17:11:58.022Z buổi 555
+CP buổi 555 year null save 962492 chars
+CP buổi 605 year 5 save 971391 chars
+CP buổi 655 year 5 save 994985 chars
+STATUS cnv-cnv_ban-random-1 · buổi 675 · year 5 · rank 0 · bugs 1 · stuck 8 · dead buttons 1
+CP buổi 705 year 6 save 1041725 chars
+CP buổi 755 year 6 save 1172499 chars
+CP buổi 805 year 6 save 1299469 chars
+CP buổi 855 year 7 save 1391800 chars
+CP buổi 905 year 7 save 1474086 chars
+CP buổi 955 year 7 save 1498780 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:157:192)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:312:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-random-1 from 2026-11-25T19:10:15.357Z buổi 963
+CP buổi 963 year null save 1523031 chars
+LIFE DONE cnv-cnv_ban-random-1 Hồng nhan bạc mệnh age 26 · buổi 987 · taps 204 · dead buttons 1 · stuck 9 · bugs 1

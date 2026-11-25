@@ -1,0 +1,49 @@
+CP buổi 50 year 1 save 296131 chars
+CP buổi 100 year 1 save 373815 chars
+CP buổi 150 year 2 save 387756 chars
+CP buổi 200 year 2 save 461786 chars
+CP buổi 250 year 2 save 508593 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:182:324)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:312:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-random-5 from 2026-11-25T17:12:16.764Z buổi 286
+CP buổi 286 year null save 594410 chars
+CP buổi 336 year 3 save 687893 chars
+CP buổi 386 year 3 save 739938 chars
+CP buổi 436 year 4 save 787698 chars
+CP buổi 486 year 4 save 844990 chars
+BUG stuck no progress 15 min on .dlg «Tin báo»
+CP buổi 536 year 4 save 888015 chars
+CP buổi 586 year 5 save 978213 chars
+CP buổi 636 year 5 save 1076124 chars
+STATUS cnv-cnv_ban-random-5 · buổi 639 · year 5 · rank 0 · bugs 1 · stuck 1 · dead buttons 0
+CP buổi 686 year 5 save 1150903 chars
+CP buổi 736 year 6 save 1269741 chars
+CP buổi 786 year 6 save 1322349 chars
+CP buổi 836 year 6 save 1392763 chars
+CP buổi 886 year 7 save 1439361 chars
+touchscreen.tap: Target page, context or browser has been closed
+    at Object.tap (/home/user/wt/rerun-ban/dev/test/realtap.js:90:39)
+    at async Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:179:16)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:312:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-random-5 from 2026-11-25T19:12:32.763Z buổi 922
+CP buổi 922 year null save 1496228 chars
+CP buổi 972 year 7 save 1612071 chars
+CP buổi 1022 year 8 save 1676916 chars
+CP buổi 1072 year 8 save 1748250 chars
+CP buổi 1122 year 8 save 1825228 chars
+CP buổi 1172 year 9 save 1890407 chars
+CP buổi 1222 year 9 save 1966272 chars
+STATUS cnv-cnv_ban-random-5 · buổi 1257 · year 9 · rank 0 · bugs 1 · stuck 4 · dead buttons 0
+CP buổi 1272 year 9 save 2024525 chars
+CP buổi 1322 year 10 save 2074813 chars
+DEAD BUTTON page «Tích Cần viện · Ở đây còn 7 người.» «Lễ nghiLễ nghiKhảo hạch Nội vụ phủRất vữngMa ma Nộ» cover zero size
+CP buổi 1372 year 10 save 2181791 chars
+CP buổi 1422 year 11 save 2260759 chars
+CP buổi 1472 year 11 save 2321516 chars
+CP buổi 1522 year 11 save 2394359 chars
+LIFE DONE cnv-cnv_ban-random-5 Xuất cung age 30 · buổi 1562 · taps 5825 · dead buttons 1 · stuck 4 · bugs 1

@@ -1,0 +1,1869 @@
+{
+ "job": {
+  "id": "cnv-cnv_ban-rebel-4",
+  "origin": "cnv",
+  "road": "cnv_ban",
+  "bot": "bold",
+  "seed": 2595892237,
+  "dev": "fold",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "90a5b0f5",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [],
+  "slice": null,
+  "areaTaps": 130,
+  "infoTaps": 249,
+  "dlgClose": 60,
+  "scrolls": 6
+ },
+ "life": {
+  "id": "HARNESS",
+  "type": "harness"
+ },
+ "exitPick": null,
+ "bugs": [
+  {
+   "type": "harness",
+   "msg": "runner error: page.waitForTimeout: Target page, context or browser has been closed",
+   "n": 1
+  }
+ ],
+ "dead": [],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 315373,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 100,
+   "year": 1,
+   "chars": 432186,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 150,
+   "year": 2,
+   "chars": 495592,
+   "key": "hclh-save-v2-1"
+  }
+ ],
+ "buoi": 165,
+ "steps": 2046,
+ "status": [],
+ "_loopAt": 1795641175087,
+ "_snapAt": 1795641140353,
+ "trace": [
+  [
+   1011,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1012,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1012,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1012,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1014,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1015,
+   "#kmrew «Nhận»"
+  ],
+  [
+   1016,
+   "#kmrew «Nhận»"
+  ],
+  [
+   1016,
+   ".dlg «Tỉnh thân» «Lui»"
+  ],
+  [
+   1018,
+   ".dlg «Đại phóng cung nhân» «Lui»"
+  ],
+  [
+   1019,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 62»"
+  ],
+  [
+   1020,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1022,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 62»"
+  ],
+  [
+   1022,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1024,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 62»"
+  ],
+  [
+   1024,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1027,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1027,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 61»"
+  ],
+  [
+   1027,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1029,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 61»"
+  ],
+  [
+   1030,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1032,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Tư trang»"
+  ],
+  [
+   1032,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1033,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 60»"
+  ],
+  [
+   1033,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1035,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1035,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 60»"
+  ],
+  [
+   1036,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1038,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Giao tình»"
+  ],
+  [
+   1038,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «mưa phùn»"
+  ],
+  [
+   1039,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang ngày mới»"
+  ],
+  [
+   1042,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1042,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1042,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1042,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1043,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1043,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1044,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1046,
+   ".dlg «Đại phóng cung nhân» «Lui»"
+  ],
+  [
+   1048,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1048,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Tai mắt0»"
+  ],
+  [
+   1048,
+   ".dlg «mat» «Lui»"
+  ],
+  [
+   1050,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 58»"
+  ],
+  [
+   1050,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1052,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Tài nghệ»"
+  ],
+  [
+   1053,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1053,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Tin báo: 20 tin mới»"
+  ],
+  [
+   1053,
+   ".dlg «Tin báo» «Để sauTốnkhôngĐượckhông»"
+  ],
+  [
+   1055,
+   ".dlg «Có khách đến chơi» «Từ chốiRất vữngTốnkhôngĐượcthêm thể diện, giữ thể »"
+  ],
+  [
+   1056,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 58»"
+  ],
+  [
+   1056,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1058,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 58»"
+  ],
+  [
+   1058,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1060,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1061,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 57»"
+  ],
+  [
+   1061,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1063,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 57»"
+  ],
+  [
+   1064,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1066,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 57»"
+  ],
+  [
+   1066,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1068,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang ngày mới»"
+  ],
+  [
+   1071,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1071,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1071,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1071,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1072,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1072,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1074,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 58»"
+  ],
+  [
+   1074,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1076,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 58»"
+  ],
+  [
+   1076,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1078,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Hậu cung»"
+  ],
+  [
+   1079,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1079,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 58»"
+  ],
+  [
+   1080,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1082,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «9Đồng liêu»"
+  ],
+  [
+   1082,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1082,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Tin báo: 1 tin mới»"
+  ],
+  [
+   1083,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   1084,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1085,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Hoàng tự»"
+  ],
+  [
+   1085,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Bạc12Sức100/100»"
+  ],
+  [
+   1085,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   1087,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1087,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 56»"
+  ],
+  [
+   1088,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1090,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang ngày mới»"
+  ],
+  [
+   1093,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1094,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1094,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1094,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1095,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1095,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1097,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1098,
+   "#kmrew «Thường»"
+  ],
+  [
+   1098,
+   ".dlg «Lui»"
+  ],
+  [
+   1100,
+   "#kmrew «ThườngVải thô (hàng kém)Hàng kém Nội vụ phủ phát: »"
+  ],
+  [
+   1100,
+   ".dlg «Lui»"
+  ],
+  [
+   1102,
+   "#kmrew «Nhận»"
+  ],
+  [
+   1102,
+   "#kmrew «Nhận»"
+  ],
+  [
+   1102,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 57»"
+  ],
+  [
+   1103,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1105,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Bạc13Sức100/100»"
+  ],
+  [
+   1105,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   1107,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1107,
+   ".dlg «Kỳ ngộ» «ThườngNgọc ấn»"
+  ],
+  [
+   1108,
+   ".dlg «Lui»"
+  ],
+  [
+   1109,
+   ".dlg «Kỳ ngộ» «ThườngNgọc ấn»"
+  ],
+  [
+   1109,
+   ".dlg «Lui»"
+  ],
+  [
+   1111,
+   ".dlg «Kỳ ngộ» «ThườngNgọc ấn»"
+  ],
+  [
+   1111,
+   ".dlg «Lui»"
+  ],
+  [
+   1112,
+   ".dlg «Kỳ ngộ» «ThườngNgọc ấn»"
+  ],
+  [
+   1113,
+   ".dlg «Lui»"
+  ],
+  [
+   1114,
+   ".dlg «Kỳ ngộ» «Lui»"
+  ],
+  [
+   1116,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Ngài để ý5»"
+  ],
+  [
+   1116,
+   ".dlg «Hoàng thượng để ý» «Lui»"
+  ],
+  [
+   1118,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 42»"
+  ],
+  [
+   1118,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1120,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Hoàng tự»"
+  ],
+  [
+   1121,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1121,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Tin báo: 4 tin mới»"
+  ],
+  [
+   1122,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   1123,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1124,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 42»"
+  ],
+  [
+   1124,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1126,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 42»"
+  ],
+  [
+   1126,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1128,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Tân Giả khố5 tuần»"
+  ],
+  [
+   1129,
+   ".dlg «Tân Giả khố 5 tuần» «Lui»"
+  ],
+  [
+   1130,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang ngày mới»"
+  ],
+  [
+   1133,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1133,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1133,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1134,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1134,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1134,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1136,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1137,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 42»"
+  ],
+  [
+   1137,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1139,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 42»"
+  ],
+  [
+   1140,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1142,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 42»"
+  ],
+  [
+   1142,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1144,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1145,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 41»"
+  ],
+  [
+   1145,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1147,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 41»"
+  ],
+  [
+   1147,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1149,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «4Chí tôn»"
+  ],
+  [
+   1149,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1150,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1150,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Mục tiêu chương (có mới)»"
+  ],
+  [
+   1151,
+   ".dlg «Chương 2 · Một ánh mắt rồng» «Đi làm: Đến Ngự hoa viênTốnkhôngĐượckhôngKèmcảm lạ»"
+  ],
+  [
+   1152,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Xem bản đồ hoàng cungGhi chútoàn cảnhĐi gần 1 khắc»"
+  ],
+  [
+   1153,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Mệnh truyện»"
+  ],
+  [
+   1154,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1154,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 40»"
+  ],
+  [
+   1155,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1157,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   1157,
+   ".dlg «tối · còn» «Lui»"
+  ],
+  [
+   1159,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Lịch tháng»"
+  ],
+  [
+   1159,
+   ".dlg «Lịch tháng» «mồng 6: Nguyệt tín»"
+  ],
+  [
+   1159,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   1159,
+   ".dlg «Lịch tháng» «ngày 26»"
+  ],
+  [
+   1160,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   1160,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   1162,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang ngày mới»"
+  ],
+  [
+   1164,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1165,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1165,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1165,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1165,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1166,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1167,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1169,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 40»"
+  ],
+  [
+   1169,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1171,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 40»"
+  ],
+  [
+   1171,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1174,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 40»"
+  ],
+  [
+   1174,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1176,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1176,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 39»"
+  ],
+  [
+   1177,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1179,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 39»"
+  ],
+  [
+   1179,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1181,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 39»"
+  ],
+  [
+   1181,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1184,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1184,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 39»"
+  ],
+  [
+   1184,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1186,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Ngài để ý5»"
+  ],
+  [
+   1187,
+   ".dlg «Hoàng thượng để ý» «Lui»"
+  ],
+  [
+   1188,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 39»"
+  ],
+  [
+   1188,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1191,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1191,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 39»"
+  ],
+  [
+   1191,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1193,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Giao tình»"
+  ],
+  [
+   1193,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Bạc13Sức100/100»"
+  ],
+  [
+   1194,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   1195,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang ngày mới»"
+  ],
+  [
+   1198,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1198,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1199,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1199,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1199,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1199,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1201,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1202,
+   "#kmrew «ThườngVải thô (hàng kém)Hàng kém Nội vụ phủ phát: »"
+  ],
+  [
+   1203,
+   ".dlg «Lui»"
+  ],
+  [
+   1204,
+   "#kmrew «Thường»"
+  ],
+  [
+   1205,
+   ".dlg «Lui»"
+  ],
+  [
+   1206,
+   "#kmrew «Thường»"
+  ],
+  [
+   1206,
+   ".dlg «Lui»"
+  ],
+  [
+   1208,
+   "#kmrew «ThườngVải thô (hàng kém)Hàng kém Nội vụ phủ phát: »"
+  ],
+  [
+   1208,
+   ".dlg «Lui»"
+  ],
+  [
+   1210,
+   "#kmrew «ThườngVải thô (hàng kém)Hàng kém Nội vụ phủ phát: »"
+  ],
+  [
+   1210,
+   ".dlg «Lui»"
+  ],
+  [
+   1211,
+   "#kmrew «ThườngVải thô (hàng kém)Hàng kém Nội vụ phủ phát: »"
+  ],
+  [
+   1212,
+   ".dlg «Lui»"
+  ],
+  [
+   1213,
+   "#kmrew «Thường»"
+  ],
+  [
+   1213,
+   ".dlg «Lui»"
+  ],
+  [
+   1215,
+   "#kmrew «Nhận»"
+  ],
+  [
+   1215,
+   "#kmrew «Nhận»"
+  ],
+  [
+   1216,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 40»"
+  ],
+  [
+   1216,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1218,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 40»"
+  ],
+  [
+   1218,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1220,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 40»"
+  ],
+  [
+   1221,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   1223,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1225,
+   "DEAD Tuyệt phẩmPhượng quan bán giá"
+  ],
+  [
+   1226,
+   ".dlg «Kỳ ngộ» «Giữ lạiRất vữngTốn1 khắcĐượcmón đồ vào rương taGợi»"
+  ],
+  [
+   1226,
+   ".dlg «Kỳ ngộ» «Lui»"
+  ],
+  [
+   1228,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 38»"
+  ],
+  [
+   1229,
+   ".dlg «Nguy hiểm chung» «Biếu quà làm lànhTốnkhôngĐượcHoàng hậu Tiêu Mạn Nh»"
+  ],
+  [
+   1229,
+   ".dlg «Biếu quà làm lành» «Đồ trong rươngTốnmón đồ −1 (rẻ nhất bán được 128 b»"
+  ],
+  [
+   1230,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   1230,
+   ".dlg «Biếu quà làm lành» «Than liễu»"
+  ],
+  [
+   1231,
+   ".dlg «Biếu quà làm lành» «Son sáp»"
+  ],
+  [
+   1231,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   1231,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   1232,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   1232,
+   ".dlg «Biếu quà làm lành» «Phấn gạo»"
+  ],
+  [
+   1232,
+   ".dlg «Biếu quà làm lành» «Than liễu»"
+  ],
+  [
+   1232,
+   ".dlg «Biếu quà làm lành» «Son sáp»"
+  ],
+  [
+   1233,
+   ".dlg «Biếu quà làm lành» «Nến mỡ dê»"
+  ],
+  [
+   1233,
+   ".dlg «Biếu quà làm lành» «Yên chi giấy»"
+  ],
+  [
+   1233,
+   ".dlg «Biếu quà làm lành» «Son sáp»"
+  ],
+  [
+   1234,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   1234,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   1234,
+   ".dlg «Biếu quà làm lành» «Than liễu»"
+  ],
+  [
+   1234,
+   ".dlg «Biếu quà làm lành» «Phấn gạo»"
+  ],
+  [
+   1235,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   1235,
+   ".dlg «Biếu quà làm lành» «Phấn gạo»"
+  ],
+  [
+   1235,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   1236,
+   ".dlg «Biếu quà làm lành» «Lui»"
+  ],
+  [
+   1238,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1238,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Giao tình»"
+  ],
+  [
+   1238,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Ân oánPhe pháiCung nữ Tân Giả khốTa▾⇄Hoàng thượng▾»"
+  ],
+  [
+   1239,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Tin báo: 15 tin mới»"
+  ],
+  [
+   1239,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   1241,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1241,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Tin báo: 1 tin mới»"
+  ],
+  [
+   1241,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   1243,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 38»"
+  ],
+  [
+   1243,
+   ".dlg «Nguy hiểm chung» «Biếu quà làm lànhTốnkhôngĐượcHoàng hậu Tiêu Mạn Nh»"
+  ],
+  [
+   1244,
+   ".dlg «Biếu quà làm lành» «Đồ trong rươngTốnmón đồ −1 (rẻ nhất bán được 128 b»"
+  ],
+  [
+   1245,
+   ".dlg «Biếu quà làm lành» «Phấn gạo»"
+  ],
+  [
+   1245,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   1245,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   1245,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   1246,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   1246,
+   ".dlg «Biếu quà làm lành» «Than liễu»"
+  ],
+  [
+   1246,
+   ".dlg «Biếu quà làm lành» «Son sáp»"
+  ],
+  [
+   1246,
+   ".dlg «Biếu quà làm lành» «Than liễu»"
+  ],
+  [
+   1247,
+   ".dlg «Biếu quà làm lành» «Yên chi giấy»"
+  ],
+  [
+   1247,
+   ".dlg «Biếu quà làm lành» «Nến mỡ dê»"
+  ],
+  [
+   1247,
+   ".dlg «Biếu quà làm lành» «Phấn gạo»"
+  ],
+  [
+   1248,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   1248,
+   ".dlg «Biếu quà làm lành» «Than liễu»"
+  ],
+  [
+   1248,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   1248,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   1249,
+   ".dlg «Biếu quà làm lành» «Son sáp»"
+  ],
+  [
+   1249,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   1249,
+   ".dlg «Biếu quà làm lành» «Than liễu»"
+  ],
+  [
+   1249,
+   ".dlg «Biếu quà làm lành» «Yên chi giấy»"
+  ],
+  [
+   1250,
+   ".dlg «Biếu quà làm lành» «Lui»"
+  ],
+  [
+   1252,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang ngày mới»"
+  ],
+  [
+   1255,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1255,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1255,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1256,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1256,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1256,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1258,
+   ".dlg «Lễ Phật đản» «Lui»"
+  ],
+  [
+   1259,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 37»"
+  ],
+  [
+   1260,
+   ".dlg «Nguy hiểm chung» «Biếu quà làm lànhTốnkhôngĐượcHoàng hậu Tiêu Mạn Nh»"
+  ],
+  [
+   1260,
+   ".dlg «Biếu quà làm lành» «Đồ trong rươngTốnmón đồ −1 (rẻ nhất bán được 128 b»"
+  ],
+  [
+   1261,
+   ".dlg «Biếu quà làm lành» «Nến mỡ dê»"
+  ],
+  [
+   1261,
+   ".dlg «Biếu quà làm lành» «Phượng quan bán giá»"
+  ],
+  [
+   1261,
+   ".dlg «Biếu quà làm lành» «Son sáp»"
+  ],
+  [
+   1261,
+   ".dlg «Biếu quà làm lành» «Than liễu»"
+  ],
+  [
+   1262,
+   ".dlg «Biếu quà làm lành» «Nến mỡ dê»"
+  ],
+  [
+   1262,
+   ".dlg «Biếu quà làm lành» «Nến mỡ dê»"
+  ],
+  [
+   1262,
+   ".dlg «Biếu quà làm lành» «Phượng quan bán giá»"
+  ],
+  [
+   1263,
+   ".dlg «Biếu quà làm lành» «Nến mỡ dê»"
+  ],
+  [
+   1263,
+   ".dlg «Biếu quà làm lành» «Phượng quan bán giá»"
+  ],
+  [
+   1263,
+   ".dlg «Biếu quà làm lành» «Son sáp»"
+  ],
+  [
+   1263,
+   ".dlg «Biếu quà làm lành» «Nến mỡ dê»"
+  ],
+  [
+   1264,
+   ".dlg «Biếu quà làm lành» «Son sáp»"
+  ],
+  [
+   1264,
+   ".dlg «Biếu quà làm lành» «Son sáp»"
+  ],
+  [
+   1264,
+   ".dlg «Biếu quà làm lành» «Yên chi giấy»"
+  ],
+  [
+   1265,
+   ".dlg «Biếu quà làm lành» «Yên chi giấy»"
+  ],
+  [
+   1265,
+   ".dlg «Biếu quà làm lành» «Nến mỡ dê»"
+  ],
+  [
+   1265,
+   ".dlg «Biếu quà làm lành» «Son sáp»"
+  ],
+  [
+   1265,
+   ".dlg «Biếu quà làm lành» «Yên chi giấy»"
+  ],
+  [
+   1266,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   1266,
+   ".dlg «Biếu quà làm lành» «Lui»"
+  ],
+  [
+   1268,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Tai mắt0»"
+  ],
+  [
+   1269,
+   ".dlg «mat» «Lui»"
+  ],
+  [
+   1270,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 37»"
+  ],
+  [
+   1271,
+   ".dlg «Nguy hiểm chung» «Biếu quà làm lànhTốnkhôngĐượcHoàng hậu Tiêu Mạn Nh»"
+  ],
+  [
+   1271,
+   ".dlg «Biếu quà làm lành» «Lui»"
+  ],
+  [
+   1273,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1274,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 37»"
+  ],
+  [
+   1274,
+   ".dlg «Nguy hiểm chung» «Biếu quà làm lànhTốnkhôngĐượcHoàng hậu Tiêu Mạn Nh»"
+  ],
+  [
+   1275,
+   ".dlg «Biếu quà làm lành» «Đồ trong rươngTốnmón đồ −1 (rẻ nhất bán được 128 b»"
+  ],
+  [
+   1275,
+   ".dlg «Biếu quà làm lành» «Phượng quan bán giá»"
+  ],
+  [
+   1275,
+   ".dlg «Biếu quà làm lành» «Phượng quan bán giá»"
+  ],
+  [
+   1276,
+   ".dlg «Biếu quà làm lành» «Nến mỡ dê»"
+  ],
+  [
+   1276,
+   ".dlg «Biếu quà làm lành» «Phượng quan bán giá»"
+  ],
+  [
+   1276,
+   ".dlg «Biếu quà làm lành» «Than liễu»"
+  ],
+  [
+   1277,
+   ".dlg «Biếu quà làm lành» «Nến mỡ dê»"
+  ],
+  [
+   1277,
+   ".dlg «Biếu quà làm lành» «Nến mỡ dê»"
+  ],
+  [
+   1277,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   1277,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   1278,
+   ".dlg «Biếu quà làm lành» «Nến mỡ dê»"
+  ],
+  [
+   1278,
+   ".dlg «Biếu quà làm lành» «Yên chi giấy»"
+  ],
+  [
+   1278,
+   ".dlg «Biếu quà làm lành» «Than liễu»"
+  ],
+  [
+   1278,
+   ".dlg «Biếu quà làm lành» «Nến mỡ dê»"
+  ],
+  [
+   1279,
+   ".dlg «Biếu quà làm lành» «Yên chi giấy»"
+  ],
+  [
+   1279,
+   ".dlg «Biếu quà làm lành» «Than liễu»"
+  ],
+  [
+   1279,
+   ".dlg «Biếu quà làm lành» «Than liễu»"
+  ],
+  [
+   1280,
+   ".dlg «Biếu quà làm lành» «Phượng quan bán giá»"
+  ],
+  [
+   1280,
+   ".dlg «Biếu quà làm lành» «Nến mỡ dê»"
+  ],
+  [
+   1280,
+   ".dlg «Biếu quà làm lành» «Yên chi giấy»"
+  ],
+  [
+   1280,
+   ".dlg «Biếu quà làm lành» «Lui»"
+  ],
+  [
+   1282,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 37»"
+  ],
+  [
+   1283,
+   ".dlg «Nguy hiểm chung» «Biếu quà làm lànhTốnkhôngĐượcHoàng hậu Tiêu Mạn Nh»"
+  ],
+  [
+   1283,
+   ".dlg «Biếu quà làm lành» «Lui»"
+  ],
+  [
+   1285,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Nguy hiểm chung: 37»"
+  ],
+  [
+   1286,
+   ".dlg «Nguy hiểm chung» «Biếu quà làm lànhTốnkhôngĐượcHoàng hậu Tiêu Mạn Nh»"
+  ],
+  [
+   1286,
+   ".dlg «Biếu quà làm lành» «Lui»"
+  ],
+  [
+   1288,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1289,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Mệnh truyện»"
+  ],
+  [
+   1289,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Dư đồ»"
+  ],
+  [
+   1289,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Tẩm cung · 2 khắc»"
+  ],
+  [
+   1290,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang buổi»"
+  ],
+  [
+   1291,
+   "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Sang ngày mới»"
+  ],
+  [
+   1294,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1295,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1295,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1295,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1296,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1296,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1297,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1299,
+   "#kmrew «ThườngHộp điểm tâmĂn: Sức +3 · tặng, chia kẻ hầu»"
+  ],
+  [
+   1299,
+   ".dlg «Lui»"
+  ],
+  [
+   1301,
+   "#kmrew «ThườngVải bôngMay áo: váy sa xanh ngọc (Y phục, Sắ»"
+  ],
+  [
+   1301,
+   ".dlg «Lui»"
+  ],
+  [
+   1303,
+   "#kmrew «Nhận»"
+  ],
+  [
+   1303,
+   "#kmrew «ThườngHộp điểm tâmĂn: Sức +3 · tặng, chia kẻ hầu»"
+  ],
+  [
+   1303,
+   ".dlg «Đổi chủ» «Lui»"
+  ],
+  [
+   1305,
+   ".dlg «Lễ Phật đản» «Lui»"
+  ],
+  [
+   1307,
+   "page «Tích Cần viện · Quý nhân Tiêu Mạn Sương đi vắng, đ» «Nguy hiểm chung: 35»"
+  ],
+  [
+   1307,
+   ".dlg «Nguy hiểm chung» «Nép mình theo hầu chủTốnChủ tin -2Được2 tuần: mưu »"
+  ],
+  [
+   1308,
+   ".dlg «Biếu quà làm lành» «Đồ trong rươngTốnmón đồ −1 (rẻ nhất bán được 128 b»"
+  ],
+  [
+   1309,
+   ".dlg «Biếu quà làm lành» «Yên chi giấy»"
+  ],
+  [
+   1309,
+   ".dlg «Biếu quà làm lành» «Nến mỡ dê»"
+  ],
+  [
+   1309,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   1310,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   1310,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   1310,
+   ".dlg «Biếu quà làm lành» «Than liễu»"
+  ],
+  [
+   1311,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   1311,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   1311,
+   ".dlg «Biếu quà làm lành» «Phấn gạo»"
+  ],
+  [
+   1312,
+   ".dlg «Biếu quà làm lành» «Nến mỡ dê»"
+  ],
+  [
+   1312,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   1312,
+   ".dlg «Biếu quà làm lành» «Nến mỡ dê»"
+  ],
+  [
+   1312,
+   ".dlg «Biếu quà làm lành» «Nước bào hoa»"
+  ],
+  [
+   1313,
+   ".dlg «Biếu quà làm lành» «Son sáp»"
+  ],
+  [
+   1313,
+   ".dlg «Biếu quà làm lành» «Vải thô (hàng kém)»"
+  ],
+  [
+   1313,
+   ".dlg «Biếu quà làm lành» «Than liễu»"
+  ],
+  [
+   1314,
+   ".dlg «Biếu quà làm lành» «Son sáp»"
+  ],
+  [
+   1314,
+   ".dlg «Biếu quà làm lành» «Nến mỡ dê»"
+  ],
+  [
+   1314,
+   ".dlg «Biếu quà làm lành» «Phấn gạo»"
+  ],
+  [
+   1315,
+   ".dlg «Biếu quà làm lành» «Lui»"
+  ],
+  [
+   1317,
+   "page «Tích Cần viện · Quý nhân Tiêu Mạn Sương đi vắng, đ» «Nguy hiểm chung: 35»"
+  ],
+  [
+   1317,
+   ".dlg «Nguy hiểm chung» «Biếu quà làm lànhTốnkhôngĐượcHoàng hậu Tiêu Mạn Nh»"
+  ],
+  [
+   1318,
+   ".dlg «Biếu quà làm lành» «Lui»"
+  ]
+ ],
+ "_started": true,
+ "_ckAt": 1795641109744,
+ "_ckB": 161,
+ "rss": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1102,
+   "rendererMB": 465
+  },
+  {
+   "buoi": 6,
+   "y": 1,
+   "totalMB": 1850,
+   "rendererMB": 1076
+  },
+  {
+   "buoi": 11,
+   "y": 1,
+   "totalMB": 1959,
+   "rendererMB": 1174
+  },
+  {
+   "buoi": 16,
+   "y": 1,
+   "totalMB": 2118,
+   "rendererMB": 1329
+  },
+  {
+   "buoi": 21,
+   "y": 1,
+   "totalMB": 2215,
+   "rendererMB": 1425
+  },
+  {
+   "buoi": 26,
+   "y": 1,
+   "totalMB": 2240,
+   "rendererMB": 1445
+  },
+  {
+   "buoi": 31,
+   "y": 1,
+   "totalMB": 2283,
+   "rendererMB": 1480
+  },
+  {
+   "buoi": 36,
+   "y": 1,
+   "totalMB": 2305,
+   "rendererMB": 1508
+  },
+  {
+   "buoi": 41,
+   "y": 1,
+   "totalMB": 2288,
+   "rendererMB": 1487
+  },
+  {
+   "buoi": 46,
+   "y": 1,
+   "totalMB": 2281,
+   "rendererMB": 1482
+  },
+  {
+   "buoi": 51,
+   "y": 1,
+   "totalMB": 2349,
+   "rendererMB": 1500
+  },
+  {
+   "buoi": 56,
+   "y": 1,
+   "totalMB": 2385,
+   "rendererMB": 1498
+  },
+  {
+   "buoi": 61,
+   "y": 1,
+   "totalMB": 2441,
+   "rendererMB": 1539
+  },
+  {
+   "buoi": 66,
+   "y": 1,
+   "totalMB": 2436,
+   "rendererMB": 1543
+  },
+  {
+   "buoi": 71,
+   "y": 1,
+   "totalMB": 2418,
+   "rendererMB": 1533
+  },
+  {
+   "buoi": 76,
+   "y": 1,
+   "totalMB": 2439,
+   "rendererMB": 1547
+  },
+  {
+   "buoi": 81,
+   "y": 1,
+   "totalMB": 2544,
+   "rendererMB": 1641
+  },
+  {
+   "buoi": 86,
+   "y": 1,
+   "totalMB": 2158,
+   "rendererMB": 1261
+  },
+  {
+   "buoi": 91,
+   "y": 1,
+   "totalMB": 2207,
+   "rendererMB": 1307
+  },
+  {
+   "buoi": 96,
+   "y": 1,
+   "totalMB": 2300,
+   "rendererMB": 1399
+  },
+  {
+   "buoi": 101,
+   "y": 1,
+   "totalMB": 2462,
+   "rendererMB": 1568
+  },
+  {
+   "buoi": 106,
+   "y": 1,
+   "totalMB": 2495,
+   "rendererMB": 1598
+  },
+  {
+   "buoi": 111,
+   "y": 1,
+   "totalMB": 2498,
+   "rendererMB": 1602
+  },
+  {
+   "buoi": 116,
+   "y": 1,
+   "totalMB": 2490,
+   "rendererMB": 1593
+  },
+  {
+   "buoi": 121,
+   "y": 2,
+   "totalMB": 2513,
+   "rendererMB": 1613
+  },
+  {
+   "buoi": 126,
+   "y": 2,
+   "totalMB": 2559,
+   "rendererMB": 1671
+  },
+  {
+   "buoi": 131,
+   "y": 2,
+   "totalMB": 2598,
+   "rendererMB": 1716
+  },
+  {
+   "buoi": 136,
+   "y": 2,
+   "totalMB": 2604,
+   "rendererMB": 1726
+  },
+  {
+   "buoi": 141,
+   "y": 2,
+   "totalMB": 2630,
+   "rendererMB": 1745
+  },
+  {
+   "buoi": 146,
+   "y": 2,
+   "totalMB": 2632,
+   "rendererMB": 1757
+  },
+  {
+   "buoi": 151,
+   "y": 2,
+   "totalMB": 2626,
+   "rendererMB": 1759
+  },
+  {
+   "buoi": 156,
+   "y": 2,
+   "totalMB": 2670,
+   "rendererMB": 1795
+  },
+  {
+   "buoi": 161,
+   "y": 2,
+   "totalMB": 2715,
+   "rendererMB": 1816
+  }
+ ]
+}

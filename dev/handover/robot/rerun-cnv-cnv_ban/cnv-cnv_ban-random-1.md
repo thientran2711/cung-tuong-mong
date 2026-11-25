@@ -1,8 +1,8 @@
-# cnv-cnv_ban-random-1 (real-tap harness 93812531, fold)
+# cnv-cnv_ban-random-1 (real-tap harness 90a5b0f5, fold)
 
 | life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick |
 |---|---|---|---|---|---|---|---|---|
-| cnv-cnv_ban-random-1 | running |  | 509 |  | 1 | 3 | 1 | — |
+| cnv-cnv_ban-random-1 | Hồng nhan bạc mệnh — Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 26 tuổi | 26 | 987 | 204 | 1 | 9 | 1 | — |
 
 ## Dead buttons
 
@@ -10,4 +10,4 @@
 
 ## Bugs
 
-- [stuck] ×3 no progress 15 min on .dlg «Tin báo»
+- [stuck] ×9 no progress 15 min on .dlg «Tin báo»

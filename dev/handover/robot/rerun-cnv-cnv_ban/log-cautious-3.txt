@@ -55,3 +55,5 @@ CP buổi 1248 year 9 save 2019818 chars
 STATUS cnv-cnv_ban-cautious-3 · buổi 1256 · year 9 · rank 0 · bugs 2 · stuck 19 · dead buttons 0
 CP buổi 1298 year 10 save 2069272 chars
 CP buổi 1348 year 10 save 2124588 chars
+CP buổi 1398 year 10 save 2154118 chars
+LIFE DONE cnv-cnv_ban-cautious-3 Xuất cung age 30 · buổi 1420 · taps 1816 · dead buttons 0 · stuck 21 · bugs 2

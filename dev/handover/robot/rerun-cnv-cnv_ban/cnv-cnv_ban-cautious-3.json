@@ -15,7 +15,7 @@
   "jsClicks": 0,
   "deadButtons": 0,
   "cap": null,
-  "stuck": 20,
+  "stuck": 21,
   "unstick": [
    {
     "at": 139,
@@ -394,10 +394,16 @@
     "lvl": 3,
     "layer": ".dlg",
     "title": "Tin báo"
+   },
+   {
+    "at": 5220,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
    }
   ],
   "slice": null,
-  "areaTaps": 30021,
+  "areaTaps": 30034,
   "taps0": 0,
   "resumed": [
    {
@@ -421,11 +427,20 @@
     "from": "2026-11-25T15:11:50.012Z"
    }
   ],
-  "infoTaps": 819,
-  "scrolls": 18529,
-  "dlgClose": 160
+  "infoTaps": 824,
+  "scrolls": 20516,
+  "dlgClose": 172,
+  "taps": 1816
  },
- "life": null,
+ "life": {
+  "id": "Xuất cung",
+  "type": "death",
+  "fate": "Xuất cung tuổi 30",
+  "death": true,
+  "age": 30,
+  "year": 11,
+  "rank": 0
+ },
  "exitPick": null,
  "bugs": [
   {
@@ -456,7 +471,7 @@
    "k": "stuck|no progress 15 min on .dlg «Tin báo»",
    "type": "stuck",
    "msg": "no progress 15 min on .dlg «Tin báo»",
-   "n": 18,
+   "n": 19,
    "at": 1020,
    "shot": "/home/user/wt/rerun-ban/dev/handover/robot/rerun-cnv-cnv_ban/shots-cnv-cnv_ban-cautious-3/stuck-3.png",
    "save": "/home/user/wt/rerun-ban/dev/handover/robot/rerun-cnv-cnv_ban/shots-cnv-cnv_ban-cautious-3/stuck-3-dump.json",
@@ -645,10 +660,16 @@
    "year": 10,
    "chars": 2124588,
    "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 1398,
+   "year": 10,
+   "chars": 2154118,
+   "key": "hclh-save-v2-1"
   }
  ],
- "buoi": 1381,
- "steps": 75660,
+ "buoi": 1420,
+ "steps": 77916,
  "status": [
   "STATUS cnv-cnv_ban-cautious-3 · buổi 325 · year 3 · rank 0 · bugs 1 · stuck 1 · dead buttons 0",
   "STATUS cnv-cnv_ban-cautious-3 · buổi 617 · year 5 · rank 0 · bugs 2 · stuck 3 · dead buttons 0",
@@ -656,828 +677,8 @@
   "STATUS cnv-cnv_ban-cautious-3 · buổi 1026 · year 8 · rank 0 · bugs 2 · stuck 14 · dead buttons 0",
   "STATUS cnv-cnv_ban-cautious-3 · buổi 1256 · year 9 · rank 0 · bugs 2 · stuck 19 · dead buttons 0"
  ],
- "_snapAt": 1795623862270,
+ "_snapAt": 1795624947253,
  "trace": [
-  [
-   3955,
-   "page «Tích Cần viện · Ở đây còn 7 người.» «7Đồng liêu»"
-  ],
-  [
-   3955,
-   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang buổi»"
-  ],
-  [
-   3956,
-   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang buổi»"
-  ],
-  [
-   3956,
-   "page «Tích Cần viện · Ở đây còn 9 người.» «Hoàng tự»"
-  ],
-  [
-   3957,
-   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang buổi»"
-  ],
-  [
-   3958,
-   "page «Tích Cần viện · Ở đây còn 10 người.» «Tài nghệ»"
-  ],
-  [
-   3959,
-   "page «Tích Cần viện · Ở đây còn 10 người.» «Sang ngày mới»"
-  ],
-  [
-   3962,
-   "#dawn «Tiếp theo»"
-  ],
-  [
-   3963,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   3963,
-   ".kbk «Tổng lược» «Trang trước»"
-  ],
-  [
-   3963,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   3963,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   3964,
-   ".kbk «Tổng lược» «Lui»"
-  ],
-  [
-   3965,
-   ".dlg «Tin trong cung buổi này» «Lui»"
-  ],
-  [
-   3967,
-   ".dlg «Chủ thưởng» «Lui»"
-  ],
-  [
-   3969,
-   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Sắc72Tài56Tâm cơ37Đức51Danh100Chủ tin42»"
-  ],
-  [
-   3969,
-   ".dlg «Sắc» «Lui»"
-  ],
-  [
-   3971,
-   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Sang buổi»"
-  ],
-  [
-   3971,
-   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang buổi»"
-  ],
-  [
-   3972,
-   "page «Tích Cần viện · Ở đây còn 8 người.» «Hoàng tự»"
-  ],
-  [
-   3973,
-   "page «Tích Cần viện · Ở đây còn 8 người.» «Sang buổi»"
-  ],
-  [
-   3974,
-   "page «Tích Cần viện · Ở đây còn 11 người.» «Sang ngày mới»"
-  ],
-  [
-   3978,
-   "#dawn «Tiếp theo»"
-  ],
-  [
-   3978,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   3979,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   3979,
-   ".kbk «Tổng lược» «Trang trước»"
-  ],
-  [
-   3979,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   3980,
-   ".kbk «Tổng lược» «Lui»"
-  ],
-  [
-   3981,
-   ".dlg «Tin trong cung buổi này» «Lui»"
-  ],
-  [
-   3983,
-   "#kmrew «Thường»"
-  ],
-  [
-   3983,
-   ".dlg «Lui»"
-  ],
-  [
-   3985,
-   "#kmrew «Thường»"
-  ],
-  [
-   3985,
-   ".dlg «Lui»"
-  ],
-  [
-   3986,
-   "#kmrew «Nhận»"
-  ],
-  [
-   3987,
-   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
-  ],
-  [
-   3987,
-   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Mục tiêu chương»"
-  ],
-  [
-   3987,
-   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
-  ],
-  [
-   3987,
-   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
-  ],
-  [
-   3988,
-   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
-  ],
-  [
-   3988,
-   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
-  ],
-  [
-   3988,
-   ".dlg «Danh hiệu» «Lui»"
-  ],
-  [
-   3991,
-   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Sang buổi»"
-  ],
-  [
-   3991,
-   "page «Tích Cần viện · Ở đây còn 8 người.» «Sang buổi»"
-  ],
-  [
-   3993,
-   ".dlg «Có người đến» «Chia sẻ bí mậtRất vữngTốnkhôngĐượcngười ấy có thiệ»"
-  ],
-  [
-   3993,
-   "page «Tích Cần viện · Ở đây còn 8 người.» «Người được sai đi (có mới)»"
-  ],
-  [
-   3994,
-   ".dlg «Tin chờ người sai đi» «Nghe lệnhTốnkhôngĐượcViệc chủ sai·trả lời trước ng»"
-  ],
-  [
-   3996,
-   ".dlg «Có khách đến chơi» «Tiếp qua loaRất vữngTốnSức -2Đượcngười ấy có thiện»"
-  ],
-  [
-   3997,
-   "page «Tích Cần viện · Ở đây còn 8 người.» «Sang buổi»"
-  ],
-  [
-   3998,
-   "page «Tích Cần viện · Ở đây còn 14 người.» «Giao tình»"
-  ],
-  [
-   3999,
-   "page «Tích Cần viện · Ở đây còn 14 người.» «Sang ngày mới»"
-  ],
-  [
-   4002,
-   "#dawn «Tiếp theo»"
-  ],
-  [
-   4003,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   4003,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   4003,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   4004,
-   ".kbk «Tổng lược» «Trang trước»"
-  ],
-  [
-   4004,
-   ".kbk «Tổng lược» «Lui»"
-  ],
-  [
-   4006,
-   ".dlg «Tin trong cung buổi này» «Lui»"
-  ],
-  [
-   4007,
-   ".dlg «Tin về chủ nhân» «Lui»"
-  ],
-  [
-   4009,
-   ".dlg «Lễ Phật đản» «Lui»"
-  ],
-  [
-   4011,
-   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Hoàng tự»"
-  ],
-  [
-   4011,
-   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Sang buổi»"
-  ],
-  [
-   4011,
-   "page «Tích Cần viện · Ở đây còn 11 người.» «Tâm trạngBình thản-8»"
-  ],
-  [
-   4012,
-   ".dlg «Tâm trạng · Ta» «Lui»"
-  ],
-  [
-   4014,
-   "page «Tích Cần viện · Ở đây còn 10 người.» «Sang buổi»"
-  ],
-  [
-   4014,
-   "page «Tích Cần viện · Ở đây còn 6 người.» «7Đồng liêu»"
-  ],
-  [
-   4014,
-   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang buổi»"
-  ],
-  [
-   4015,
-   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang buổi»"
-  ],
-  [
-   4015,
-   "page «Tích Cần viện · Ở đây còn 9 người.» «Lịch tháng»"
-  ],
-  [
-   4016,
-   ".dlg «Tâm trạng · Ta» «Lui»"
-  ],
-  [
-   4017,
-   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang ngày mới»"
-  ],
-  [
-   4021,
-   "#dawn «Tiếp theo»"
-  ],
-  [
-   4021,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   4021,
-   ".kbk «Tổng lược» «Trang trước»"
-  ],
-  [
-   4022,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   4022,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   4022,
-   ".kbk «Tổng lược» «Lui»"
-  ],
-  [
-   4024,
-   ".dlg «Chủ thưởng» «Lui»"
-  ],
-  [
-   4025,
-   ".dlg «Lễ Phật đản» «Lui»"
-  ],
-  [
-   4027,
-   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Biết chuyện của chủ3»"
-  ],
-  [
-   4027,
-   ".dlg «Biết chuyện của chủ» «Lui»"
-  ],
-  [
-   4029,
-   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Sang buổi»"
-  ],
-  [
-   4029,
-   "page «Tích Cần viện · Ở đây còn 15 người.» «Ngài để ý0»"
-  ],
-  [
-   4030,
-   ".dlg «Hoàng thượng để ý» «Lui»"
-  ],
-  [
-   4032,
-   "page «Tích Cần viện · Ở đây còn 15 người.» «Sang buổi»"
-  ],
-  [
-   4032,
-   "page «Tích Cần viện · Ở đây còn 4 người.» «Bạc501Sức100/100»"
-  ],
-  [
-   4032,
-   ".dlg «Bạc» «Lui»"
-  ],
-  [
-   4034,
-   "page «Tích Cần viện · Ở đây còn 4 người.» «Sang buổi»"
-  ],
-  [
-   4035,
-   "page «Tích Cần viện · Ở đây còn 8 người.» «Lịch tháng»"
-  ],
-  [
-   4036,
-   ".dlg «Lịch tháng» «ngày 28»"
-  ],
-  [
-   4037,
-   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
-  ],
-  [
-   4037,
-   ".dlg «Lịch tháng» «ngày 26»"
-  ],
-  [
-   4037,
-   ".dlg «Lịch tháng» «Luyện đàn»"
-  ],
-  [
-   4038,
-   ".dlg «Lịch tháng» «Lui»"
-  ],
-  [
-   4040,
-   "page «Tích Cần viện · Ở đây còn 8 người.» «Sang ngày mới»"
-  ],
-  [
-   4043,
-   "#dawn «Tiếp theo»"
-  ],
-  [
-   4044,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   4044,
-   ".kbk «Tổng lược» «Trang trước»"
-  ],
-  [
-   4045,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   4045,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   4045,
-   ".kbk «Tổng lược» «Lui»"
-  ],
-  [
-   4047,
-   ".dlg «Tin trong cung buổi này» «Lui»"
-  ],
-  [
-   4048,
-   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
-  ],
-  [
-   4049,
-   ".dlg «Lui»"
-  ],
-  [
-   4050,
-   "#kmrew «Nhận»"
-  ],
-  [
-   4051,
-   "#kmrew «Thường»"
-  ],
-  [
-   4051,
-   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Mục tiêu chương»"
-  ],
-  [
-   4051,
-   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
-  ],
-  [
-   4051,
-   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
-  ],
-  [
-   4052,
-   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
-  ],
-  [
-   4052,
-   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
-  ],
-  [
-   4052,
-   ".dlg «Danh hiệu» «Lui»"
-  ],
-  [
-   4054,
-   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Sang buổi»"
-  ],
-  [
-   4055,
-   "page «Tích Cần viện · Ở đây còn 5 người.» «Biết chuyện của chủ3»"
-  ],
-  [
-   4055,
-   ".dlg «Biết chuyện của chủ» «Lui»"
-  ],
-  [
-   4057,
-   "page «Tích Cần viện · Ở đây còn 5 người.» «Sang buổi»"
-  ],
-  [
-   4057,
-   "page «Tích Cần viện · Ở đây còn 10 người.» «Tư trang»"
-  ],
-  [
-   4058,
-   "page «Tích Cần viện · Ở đây còn 10 người.» «Sang buổi»"
-  ],
-  [
-   4058,
-   "page «Tích Cần viện · Ở đây còn 6 người.» «Ngài để ý0»"
-  ],
-  [
-   4059,
-   ".dlg «Hoàng thượng để ý» «Lui»"
-  ],
-  [
-   4061,
-   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang ngày mới»"
-  ],
-  [
-   4063,
-   "#dawn «Tiếp theo»"
-  ],
-  [
-   4064,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   4064,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   4064,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   4065,
-   ".kbk «Tổng lược» «Trang trước»"
-  ],
-  [
-   4065,
-   ".kbk «Tổng lược» «Lui»"
-  ],
-  [
-   4066,
-   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «6Đồng liêu»"
-  ],
-  [
-   4067,
-   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Sang buổi»"
-  ],
-  [
-   4067,
-   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Sang buổi»"
-  ],
-  [
-   4068,
-   "page «Tích Cần viện · Ở đây còn 6 người.» «Tin báo: 20 tin mới»"
-  ],
-  [
-   4072,
-   ".dlg «Tin báo» «Xem lời nhờTốnkhôngĐượckhôngGhi chúchọn rồi xem kế»"
-  ],
-  [
-   4073,
-   ".dlg «Có khách đến chơi» «Tiếp qua loaRất vữngTốnSức -2Đượcngười ấy có thiện»"
-  ],
-  [
-   4074,
-   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang buổi»"
-  ],
-  [
-   4075,
-   "page «Tích Cần viện · Ở đây còn 16 người.» «Công lao10/10»"
-  ],
-  [
-   4076,
-   ".dlg «Công lao 10/» «Lui»"
-  ],
-  [
-   4077,
-   "page «Tích Cần viện · Ở đây còn 17 người.» «Sang buổi»"
-  ],
-  [
-   4077,
-   "page «Tích Cần viện · Ở đây còn 11 người.» «đêm oi nồng»"
-  ],
-  [
-   4078,
-   "page «Tích Cần viện · Ở đây còn 11 người.» «Sang ngày mới»"
-  ],
-  [
-   4081,
-   "#dawn «Tiếp theo»"
-  ],
-  [
-   4082,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   4082,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   4082,
-   ".kbk «Tổng lược» «Trang trước»"
-  ],
-  [
-   4083,
-   ".kbk «Tổng lược» «Trang trước»"
-  ],
-  [
-   4083,
-   ".kbk «Tổng lược» «Lui»"
-  ],
-  [
-   4084,
-   ".dlg «Tin trong cung buổi này» «Lui»"
-  ],
-  [
-   4086,
-   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Sang buổi»"
-  ],
-  [
-   4087,
-   "page «Tích Cần viện · Ở đây còn 8 người.» «Sang buổi»"
-  ],
-  [
-   4088,
-   ".dlg «Có người đến» «Đáp trả sắc sảoRất vữngTốnkhôngĐượcthêm thể diện t»"
-  ],
-  [
-   4089,
-   "page «Tích Cần viện · Ở đây còn 6 người.» «Biết chuyện của chủ3»"
-  ],
-  [
-   4089,
-   ".dlg «Biết chuyện của chủ» «Lui»"
-  ],
-  [
-   4091,
-   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang buổi»"
-  ],
-  [
-   4091,
-   "page «Tích Cần viện · Ở đây còn 6 người.» «Lịch tháng»"
-  ],
-  [
-   4091,
-   ".dlg «Lịch tháng» «mồng 5: Tết Đoan ngọ»"
-  ],
-  [
-   4092,
-   ".dlg «Lịch tháng» «ngày 30»"
-  ],
-  [
-   4092,
-   ".dlg «Lịch tháng» «Lễ Phật»"
-  ],
-  [
-   4093,
-   ".dlg «Lịch tháng» «ngày 29»"
-  ],
-  [
-   4093,
-   ".dlg «Lịch tháng» «Lui»"
-  ],
-  [
-   4096,
-   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang ngày mới»"
-  ],
-  [
-   4099,
-   "#dawn «Tiếp theo»"
-  ],
-  [
-   4101,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   4102,
-   ".kbk «Tổng lược» «Trang trước»"
-  ],
-  [
-   4102,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   4102,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   4102,
-   ".kbk «Tổng lược» «Lui»"
-  ],
-  [
-   4104,
-   ".dlg «Tin trong cung buổi này» «Lui»"
-  ],
-  [
-   4106,
-   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
-  ],
-  [
-   4106,
-   ".dlg «Lui»"
-  ],
-  [
-   4108,
-   "#kmrew «Thường»"
-  ],
-  [
-   4108,
-   ".dlg «Lui»"
-  ],
-  [
-   4109,
-   "#kmrew «Thường»"
-  ],
-  [
-   4110,
-   ".dlg «Lui»"
-  ],
-  [
-   4111,
-   "#kmrew «Nhận»"
-  ],
-  [
-   4111,
-   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
-  ],
-  [
-   4112,
-   ".dlg «Đại lễ sắc lập Thái tử» «Lui»"
-  ],
-  [
-   4114,
-   ".dlg «Yến đầy tháng hoàng tử» «Lui»"
-  ],
-  [
-   4115,
-   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Người được sai đi (có mới)»"
-  ],
-  [
-   4116,
-   ".dlg «Tin chờ người sai đi» «Xem lời nhờTốnkhôngĐượcCó khách đến chơi·trả lời t»"
-  ],
-  [
-   4118,
-   ".dlg «Có khách đến chơi» «Tiếp rồi đem chuyện đi kể với Hoàng hậuRất vữngTốn»"
-  ],
-  [
-   4119,
-   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Sang buổi»"
-  ],
-  [
-   4120,
-   "page «Tích Cần viện · Ở đây còn 9 người.» «Hậu cung»"
-  ],
-  [
-   4121,
-   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang buổi»"
-  ],
-  [
-   4121,
-   "page «Tích Cần viện · Ở đây còn 5 người.» «Mệnh truyện»"
-  ],
-  [
-   4122,
-   "page «Tích Cần viện · Ở đây còn 5 người.» «Sang buổi»"
-  ],
-  [
-   4123,
-   "page «Tích Cần viện · Ở đây còn 7 người.» «giông tố»"
-  ],
-  [
-   4124,
-   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang ngày mới»"
-  ],
-  [
-   4127,
-   "#dawn «Tiếp theo»"
-  ],
-  [
-   4128,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   4128,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   4129,
-   ".kbk «Tổng lược» «Trang trước»"
-  ],
-  [
-   4129,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   4129,
-   ".kbk «Tổng lược» «Lui»"
-  ],
-  [
-   4131,
-   ".dlg «Tin trong cung buổi này» «Lui»"
-  ],
-  [
-   4133,
-   ".dlg «Yến đầy tháng hoàng tử» «Lui»"
-  ],
-  [
-   4134,
-   ".dlg «Đại lễ sắc lập Thái tử» «Lui»"
-  ],
-  [
-   4136,
-   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Tai mắt0»"
-  ],
-  [
-   4136,
-   ".dlg «mat» «Lui»"
-  ],
-  [
-   4138,
-   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Sang buổi»"
-  ],
-  [
-   4139,
-   "page «Tích Cần viện · Ở đây còn 7 người.» «Lương tháng3 bạc»"
-  ],
-  [
-   4139,
-   ".dlg «Lương tháng ba bạc» «Lui»"
-  ],
-  [
-   4141,
-   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang buổi»"
-  ],
-  [
-   4141,
-   "page «Tích Cần viện · Ở đây còn 5 người.» «4Chí tôn»"
-  ],
-  [
-   4142,
-   "page «Tích Cần viện · Ở đây còn 5 người.» «Sang buổi»"
-  ],
-  [
-   4142,
-   "page «Tích Cần viện · Ở đây còn 5 người.» «Sang buổi»"
-  ],
-  [
-   4142,
-   "page «Tích Cần viện · Ở đây còn 9 người.» «Mục tiêu chương»"
-  ],
-  [
-   4143,
-   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
-  ],
   [
    4143,
    ".dlg «Danh hiệu» «Danh hiệu 0/35»"
@@ -2257,10 +1458,830 @@
   [
    4309,
    "page «Tích Cần viện · Ở đây còn 7 người.» «Sang ngày mới»"
+  ],
+  [
+   4312,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   4312,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4313,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4313,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4313,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4314,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   4315,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   4317,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Bạc516Sức100/100»"
+  ],
+  [
+   4317,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   4319,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Sang buổi»"
+  ],
+  [
+   4319,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang buổi»"
+  ],
+  [
+   4320,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Tin báo: 20 tin mới»"
+  ],
+  [
+   5223,
+   "title (unstick reload) «chơi một mình»"
+  ],
+  [
+   5225,
+   "title (unstick reload) «chơi tiếp|tiếp tục|vào sổ|^tải$»"
+  ],
+  [
+   5228,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Sang buổi»"
+  ],
+  [
+   5230,
+   "page «Tích Cần viện · Ở đây còn 13 người.» «Hoàng tự»"
+  ],
+  [
+   5231,
+   "page «Tích Cần viện · Ở đây còn 13 người.» «Sang ngày mới»"
+  ],
+  [
+   5235,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   5236,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5237,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5238,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5239,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5239,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   5241,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   5245,
+   "#kmrew «Nhận»"
+  ],
+  [
+   5247,
+   "DEAD ThườngVải bôngMay áo: áo lụa thêu hoa nhỏ (Y phục,"
+  ],
+  [
+   5248,
+   ".dlg «Chủ thưởng» «Lui»"
+  ],
+  [
+   5250,
+   ".dlg «Sứ đoàn vào triều» «Lui»"
+  ],
+  [
+   5252,
+   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Dư đồ»"
+  ],
+  [
+   5252,
+   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Sang buổi»"
+  ],
+  [
+   5254,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Tư trang»"
+  ],
+  [
+   5255,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang buổi»"
+  ],
+  [
+   5256,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Hành sự»"
+  ],
+  [
+   5257,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   5259,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Chọn chính mình»"
+  ],
+  [
+   5261,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang ngày mới»"
+  ],
+  [
+   5264,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   5266,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5267,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5268,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5269,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5269,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   5271,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   5273,
+   ".dlg «Sứ đoàn vào triều» «Lui»"
+  ],
+  [
+   5274,
+   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Ngài để ý0»"
+  ],
+  [
+   5275,
+   ".dlg «Hoàng thượng để ý» «Lui»"
+  ],
+  [
+   5277,
+   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Sang buổi»"
+  ],
+  [
+   5278,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Tư trang»"
+  ],
+  [
+   5280,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang buổi»"
+  ],
+  [
+   5282,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Ngài để ý0»"
+  ],
+  [
+   5283,
+   ".dlg «Hoàng thượng để ý» «Lui»"
+  ],
+  [
+   5284,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang buổi»"
+  ],
+  [
+   5285,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Tai mắt0»"
+  ],
+  [
+   5286,
+   ".dlg «mat» «Lui»"
+  ],
+  [
+   5288,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang ngày mới»"
+  ],
+  [
+   5291,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   5291,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5291,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5292,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5292,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5292,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   5294,
+   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Tài nghệ»"
+  ],
+  [
+   5295,
+   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Sang buổi»"
+  ],
+  [
+   5296,
+   ".dlg «Có người đến» «Hỏi han sức khỏeRất vữngTốnkhôngĐượcngười ấy có th»"
+  ],
+  [
+   5298,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Sang buổi»"
+  ],
+  [
+   5298,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Hành sự»"
+  ],
+  [
+   5299,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang buổi»"
+  ],
+  [
+   5300,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang ngày mới»"
+  ],
+  [
+   5303,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   5304,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5305,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5305,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5305,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5305,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   5307,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   5309,
+   "#kmrew «Thường»"
+  ],
+  [
+   5309,
+   ".dlg «Lui»"
+  ],
+  [
+   5310,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   5311,
+   ".dlg «Lui»"
+  ],
+  [
+   5312,
+   "#kmrew «Nhận»"
+  ],
+  [
+   5312,
+   "#kmrew «Thường»"
+  ],
+  [
+   5313,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Tài nghệ»"
+  ],
+  [
+   5313,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Sang buổi»"
+  ],
+  [
+   5314,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Hành sự»"
+  ],
+  [
+   5315,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Sang buổi»"
+  ],
+  [
+   5315,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Dư đồ»"
+  ],
+  [
+   5316,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   5317,
+   "page «Tích Cần viện · Ở đây còn 11 người.» «Dư đồ»"
+  ],
+  [
+   5318,
+   "page «Tích Cần viện · Ở đây còn 11 người.» «Sang ngày mới»"
+  ],
+  [
+   5321,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   5321,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5321,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5321,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5322,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5322,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   5324,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   5325,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Phóng to»"
+  ],
+  [
+   5326,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Sang buổi»"
+  ],
+  [
+   5326,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang buổi»"
+  ],
+  [
+   5327,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Dư đồ»"
+  ],
+  [
+   5328,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   5328,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Thu nhỏ»"
+  ],
+  [
+   5329,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang ngày mới»"
+  ],
+  [
+   5332,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   5332,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5332,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5333,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5333,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5333,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   5335,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Người được sai đi (có mới)»"
+  ],
+  [
+   5336,
+   ".dlg «Tin chờ người sai đi» «Xem lời nhờTốnkhôngĐượcCó khách đến chơi·trả lời t»"
+  ],
+  [
+   5338,
+   ".dlg «Có khách đến chơi» «Tiếp qua loaRất vữngTốnSức -2Đượcngười ấy có thiện»"
+  ],
+  [
+   5339,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Sang buổi»"
+  ],
+  [
+   5340,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Xét phẩm: đủ»"
+  ],
+  [
+   5341,
+   ".dlg «Xét phẩm cuối tháng · Cung nữ nhị đẳng» «Lui»"
+  ],
+  [
+   5342,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang buổi»"
+  ],
+  [
+   5343,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Mục tiêu chương»"
+  ],
+  [
+   5343,
+   ".dlg «Chương 12 · Từ kẻ hầu thành tiểu chủ» «Đi làm: Làm tròn phận sự hầu chủTốnkhôngĐượctới Hà»"
+  ],
+  [
+   5345,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Sang buổi»"
+  ],
+  [
+   5346,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Người được sai đi (có mới)»"
+  ],
+  [
+   5348,
+   ".dlg «Tin chờ người sai đi» «Xem lời nhờTốnkhôngĐượcCó khách đến chơi·trả lời t»"
+  ],
+  [
+   5349,
+   ".kfoc «Tiếp ▸»"
+  ],
+  [
+   5349,
+   ".kfoc «Tiếp đón nồng hậu»"
+  ],
+  [
+   5350,
+   ".kfoc «Hành lễ thỉnh an · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   5350,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   5350,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   5352,
+   ".kfoc «Hành lễ thỉnh an · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   5352,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   5352,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   5354,
+   ".kfoc «Hành lễ thỉnh an · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   5354,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   5354,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   5356,
+   ".kfoc «Hành lễ thỉnh an · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   5356,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   5356,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   5358,
+   ".kfoc «Giao thiệp 1/1»"
+  ],
+  [
+   5358,
+   ".kfoc «Mật báo chuyện của Uông Ngọc Dao · Rất vững · Tốn »"
+  ],
+  [
+   5358,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   5360,
+   ".kfoc «Mật báo chuyện của Uông Ngọc Dao · Rất vững · Tốn »"
+  ],
+  [
+   5360,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   5362,
+   ".kfoc «Mật báo chuyện của Uông Ngọc Dao · Rất vững · Tốn »"
+  ],
+  [
+   5362,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   5363,
+   ".kfoc «Mật báo chuyện của Uông Ngọc Dao · Rất vững · Tốn »"
+  ],
+  [
+   5364,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   5365,
+   ".kfoc «Lễ nghi 1/1»"
+  ],
+  [
+   5365,
+   ".kfoc «Lễ nghi 1/1»"
+  ],
+  [
+   5366,
+   ".kfoc «Lễ nghi 1/1»"
+  ],
+  [
+   5366,
+   ".kfoc «Lễ nghi 1/1»"
+  ],
+  [
+   5366,
+   ".kfoc «Lễ nghi 1/1»"
+  ],
+  [
+   5366,
+   ".kfoc «Lui»"
+  ],
+  [
+   5369,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang ngày mới»"
+  ],
+  [
+   5372,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   5373,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5373,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5373,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5373,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5374,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   5375,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   5377,
+   "#kmrew «Nhận»"
+  ],
+  [
+   5379,
+   "DEAD Nhận"
+  ],
+  [
+   5379,
+   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Sang buổi»"
+  ],
+  [
+   5380,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «4Chí tôn»"
+  ],
+  [
+   5380,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang buổi»"
+  ],
+  [
+   5381,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang buổi»"
+  ],
+  [
+   5382,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Hành sự»"
+  ],
+  [
+   5382,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Sang buổi»"
+  ],
+  [
+   5383,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Giao tình»"
+  ],
+  [
+   5383,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang ngày mới»"
+  ],
+  [
+   5387,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   5387,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5387,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5388,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5388,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5388,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   5390,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   5391,
+   ".dlg «Án mất trộm ngự khố» «Lui»"
+  ],
+  [
+   5393,
+   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Dư đồ»"
+  ],
+  [
+   5394,
+   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Sang buổi»"
+  ],
+  [
+   5394,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «tuyết dày»"
+  ],
+  [
+   5395,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang buổi»"
+  ],
+  [
+   5396,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Ra vào cung cấm»"
+  ],
+  [
+   5397,
+   ".dlg «Ra vào cung cấm» «Lui»"
+  ],
+  [
+   5398,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Sang buổi»"
+  ],
+  [
+   5399,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Giao tình»"
+  ],
+  [
+   5399,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang ngày mới»"
+  ],
+  [
+   5402,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   5402,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5403,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5403,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5403,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5404,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   5405,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   5407,
+   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Giao tình»"
+  ],
+  [
+   5407,
+   "page «Tích Cần viện · Phi Uông Ngọc Dao đi vắng, đang ở » «Sang buổi»"
+  ],
+  [
+   5408,
+   "page «Tích Cần viện · Ở đây còn 8 người.» «Buổi trưa, còn 4 khắc»"
+  ],
+  [
+   5408,
+   ".dlg «trưa · còn» «Lui»"
+  ],
+  [
+   5410,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang buổi»"
+  ],
+  [
+   5410,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Lịch tháng»"
+  ],
+  [
+   5410,
+   ".dlg «Lịch tháng» «ngày 18»"
+  ],
+  [
+   5411,
+   ".dlg «Lịch tháng» «ngày 19»"
+  ],
+  [
+   5411,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   5411,
+   ".dlg «Lịch tháng» «ngày 22»"
+  ],
+  [
+   5411,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   5413,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   5414,
+   "page «Tích Cần viện · Ở đây còn 7 người.» «Sang ngày mới»"
   ]
  ],
- "_ckAt": 1795623867254,
- "_ckB": 1381,
+ "_ckAt": 1795624965211,
+ "_ckB": 1418,
  "dumps": [
   "/home/user/wt/rerun-ban/dev/handover/robot/rerun-cnv-cnv_ban/shots-cnv-cnv_ban-cautious-3/stuck-3-dump.json",
   "/home/user/wt/rerun-ban/dev/handover/robot/rerun-cnv-cnv_ban/shots-cnv-cnv_ban-cautious-3/stuck-4-dump.json",
@@ -2279,9 +2300,10 @@
   "/home/user/wt/rerun-ban/dev/handover/robot/rerun-cnv-cnv_ban/shots-cnv-cnv_ban-cautious-3/stuck-17-dump.json",
   "/home/user/wt/rerun-ban/dev/handover/robot/rerun-cnv-cnv_ban/shots-cnv-cnv_ban-cautious-3/stuck-18-dump.json",
   "/home/user/wt/rerun-ban/dev/handover/robot/rerun-cnv-cnv_ban/shots-cnv-cnv_ban-cautious-3/stuck-19-dump.json",
-  "/home/user/wt/rerun-ban/dev/handover/robot/rerun-cnv-cnv_ban/shots-cnv-cnv_ban-cautious-3/stuck-20-dump.json"
+  "/home/user/wt/rerun-ban/dev/handover/robot/rerun-cnv-cnv_ban/shots-cnv-cnv_ban-cautious-3/stuck-20-dump.json",
+  "/home/user/wt/rerun-ban/dev/handover/robot/rerun-cnv-cnv_ban/shots-cnv-cnv_ban-cautious-3/stuck-21-dump.json"
  ],
- "_loopAt": 1795623867220,
+ "_loopAt": 1795624972149,
  "_started": true,
  "rss": [
   {
@@ -3117,6 +3139,78 @@
    "y": 10,
    "totalMB": 2674,
    "rendererMB": 1950
+  },
+  {
+   "buoi": 1383,
+   "y": 10,
+   "totalMB": 2072,
+   "rendererMB": 1370
+  },
+  {
+   "buoi": 1383,
+   "y": 10,
+   "totalMB": 1692,
+   "rendererMB": 983
+  },
+  {
+   "buoi": 1383,
+   "y": 10,
+   "totalMB": 1694,
+   "rendererMB": 986
+  },
+  {
+   "buoi": 1383,
+   "y": 10,
+   "totalMB": 1651,
+   "rendererMB": 954
+  },
+  {
+   "buoi": 1383,
+   "y": 10,
+   "totalMB": 1706,
+   "rendererMB": 998
+  },
+  {
+   "buoi": 1388,
+   "y": 10,
+   "totalMB": 2186,
+   "rendererMB": 1428
+  },
+  {
+   "buoi": 1393,
+   "y": 10,
+   "totalMB": 2342,
+   "rendererMB": 1591
+  },
+  {
+   "buoi": 1398,
+   "y": 10,
+   "totalMB": 2269,
+   "rendererMB": 1530
+  },
+  {
+   "buoi": 1403,
+   "y": 10,
+   "totalMB": 2375,
+   "rendererMB": 1604
+  },
+  {
+   "buoi": 1408,
+   "y": 10,
+   "totalMB": 2466,
+   "rendererMB": 1690
+  },
+  {
+   "buoi": 1413,
+   "y": 10,
+   "totalMB": 2463,
+   "rendererMB": 1708
+  },
+  {
+   "buoi": 1418,
+   "y": 10,
+   "totalMB": 2552,
+   "rendererMB": 1770
   }
  ],
  "cnvExit": [
@@ -3128,5 +3222,8 @@
     "Xin ở lại"
    ]
   }
- ]
+ ],
+ "t": {
+  "total": 5414510
+ }
 }
