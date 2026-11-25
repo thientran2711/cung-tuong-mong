@@ -9,6 +9,17 @@ review/net-ghen-2 did NOT carry it (merge-base 6d7d2da9). Merged (index.html/sw.
 ## R1 — relshow-scan «RAW 29»: a measurement fault, not code
 - Cause: relshow-scan reads the sign of every `balSg(BAL.x)` from dev/test/relshow-bal.json (gitignored; built by `node dev/test/relshow-bal.js <abs dev/index.html> dev/test/relshow-bal.json`). W9's box never built it → sign 0 → every BAL-path FALL landed in RAW. W5–W8 had the file on their own boxes, so they measured 0. Nothing in the scan or the sites changed.
 - Proof: with the dump built, RAW 0 (oán NEG 13→16, aff NEG 131→168). All 29 sites print falls: BAL values −2…−25 (j24 go_2 −5, go_4 −6, go_8 −3; j25 go_2 −3; j30 f −10; j55 tdProbe −8; j68e ok −5; cv.ngAff.cold −10; j70 ok_3 −3; j71 go_4 −3, ok −2; j72 fn_8 −6, fn_10 −12; j8 f −8, f_6 −20, judge −10, giveTo −25; j78 f −15, f_2 −10, f_3 −5; j9 run_8 −15; jaudit run −3; jpoison found −15; cv.tsBorrow.cost −2; jtsb go_10 −5, go_13 −3). j28 oanAdd/affAdd scale only n>0 → shown == applied.
+RAW before/after (relshow-scan on the same source, 17b66c20; only change = dev/test/relshow-bal.json present):
+| kind | class | without dump (W9) | with fresh dump (W10) |
+|---|---|---|---|
+| oán | NEG | 13 | 16 |
+| oán | WIRED | 79 | 78 |
+| oán | RAW | 2 | 0 |
+| thiện cảm | NEG | 131 | 168 |
+| thiện cảm | LOY / DIRECT / TH | 15 / 66 / 16 | 14 / 59 / 14 |
+| thiện cảm | RAW | 27 | 0 |
+| total sites | | 599 | 599 |
+(The 29 RAW move to NEG; the small LOY/DIRECT/TH/WIRED moves are sites whose BAL sign is negative and now classify as NEG first.)
 - So the 29 were NOT wired through pvQuy (it would print the same number; told Foreman D in an interim message). Instead the gate is fixed so it cannot lie again: relshow-scan exits 1 with the build command when the dump is missing or older than dev/index.html.
 
 ## R2 — kit request
