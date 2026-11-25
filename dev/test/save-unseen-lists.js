@@ -136,7 +136,7 @@ async function flipcards(b,dev,url,seed,flip,wait){return play(b,dev,url,seed,as
   const code=all.filter(m=>m&&m.opts&&m.opts.length&&typeof jqSaveable==='function'&&!jqSaveable(m)).map(m=>String(m.t||'').slice(0,40)+(m.__rkLen?' ra '+m.__rkLen:''));
   /* r3: a card made again from the sổ only BUILDS — every rk card waiting at the flip is remade twice; S (Bạc, Danh, goods, log …), the notice box and Q must not move */
   const fpS=()=>[JSON.stringify(S),typeof NT!=='undefined'?NT.list.length:0,Q.length],rk2=[];{const f0=fpS();for(const m of all.filter(m=>m&&m.rk)){const e={rk:m.rk,ra:JSON.parse(JSON.stringify(m.ra||[]))};const x=rcpMk(e),y=rcpMk(e);if(!x||!y)rk2.push(m.rk+' not remade');const f1=fpS();if(f1.join('\n')!==f0.join('\n')){const A=JSON.parse(f0[0]),B=JSON.parse(f1[0]);rk2.push(m.rk+' moved '+(Object.keys(B).filter(k=>JSON.stringify(A[k])!==JSON.stringify(B[k])).slice(0,6).join(',')||('NT/Q '+f0.slice(1)+' → '+f1.slice(1))));break}}}
-  return{rk2,rkN:all.filter(m=>m&&m.rk).length,sv:__sbr.saved(),dd:window.__dd||null,code,k0,key:__sbr.key(),v:eval(vec)(S),hud:eval(hud)(),L,stat:{sp:typeof SP13!=='undefined'?SP13.stat.unsaved||0:0,jq:typeof JQ!=='undefined'?JQ.stat:{}}}},[FCAL[flip],wait,VEC,HUD,UNSEEN]);
+  return{ksf:typeof KSF!=='undefined'?(KSF.q.length||0)+(KSF.busy?1:0):0,rk2,rkN:all.filter(m=>m&&m.rk).length,sv:__sbr.saved(),dd:window.__dd||null,code,k0,key:__sbr.key(),v:eval(vec)(S),hud:eval(hud)(),L,stat:{sp:typeof SP13!=='undefined'?SP13.stat.unsaved||0:0,jq:typeof JQ!=='undefined'?JQ.stat:{}}}},[FCAL[flip],wait,VEC,HUD,UNSEEN]);
  if(DBGD)console.log((r.dd||[]).slice(-8).map(x=>[x[0],x[1],x[2],x[3]%100000,String(x[4]).split(' < ').filter(y=>!/index.html\?khost=0:(4453|66782):/.test(y)).slice(0,3).join(' < ')].join(' ')).join('\n'));
  const t=await reloadTitle(p,open);let a=null,duty=null;
  if(t.cont){await cont(p);a=await p.evaluate(([vec,hud,uns])=>({key:__sbr.key(),v:eval(vec)(S),hud:eval(hud)(),L:eval(uns),fail:(window.__rcpFail||[]).map(x=>x.slice(0,2).join(':'))}),[VEC,HUD,UNSEEN]);
@@ -147,9 +147,12 @@ async function flipcards(b,dev,url,seed,flip,wait){return play(b,dev,url,seed,as
  const miss=[];if(a){const A=a.L.slice();for(const x of r.L){const i=A.indexOf(x);if(i<0)miss.push(x);else A.splice(i,1)}}
  const dutyOk=!duty||(duty.db===duty.fx.bac||duty.dd<0);
  if(DBGD)console.log('at capture: screen '+r.v.slice(0,40)+' | sổ '+r.sv);
- const pass=t.cont&&a&&a.key===r.key&&a.v===r.v&&a.hud===r.hud&&!miss.length&&dutyOk&&!pe.length&&!r.rk2.length;
+ /* r3: at 0 ms the top bar may still be counting a change in (kitStatFx queue: the cell shows the old number until its label lands) — then the
+    sổ = S check (a.v) is the truth and the HUD is not compared */
+ const hudOk=a&&(a.hud===r.hud||r.ksf>0);
+ const pass=t.cont&&a&&a.key===r.key&&a.v===r.v&&hudOk&&!miss.length&&dutyOk&&!pe.length&&!r.rk2.length;
  return{pass,line:`${flip} ${wait} ms · ${r.k0} → ${r.key} · open/waiting ${r.L.length} (${r.L.filter(x=>x.endsWith('*')).length} with choices): ${r.L.join(' | ')}
-    after reload ${a?a.key:'NO «Tiếp tục»'} · ${a?(miss.length?'LOST '+miss.length+': '+miss.join(' | '):'every card back ('+a.L.length+')'):''}${a&&a.v!==r.v?' · DRIFT '+a.v+' (was '+r.v+')':a?' · same numbers':''}${a&&a.hud!==r.hud?' · HUD '+a.hud+' (was '+r.hud+')':''}${duty?` · Lễ nghĩa after reload: Bạc ${duty.db} (card ${duty.fx.bac})${dutyOk?'':' WRONG'}`:' · no Lễ nghĩa card'}${' · remake ×2 of '+r.rkN+' rk cards: '+(r.rk2.length?'SIDE EFFECT '+r.rk2.join(' | '):'no side effect')}${r.code.length?' · code cards with no generator at the flip: '+r.code.join(' | '):''}${a&&a.fail.length?' · rcpFail '+a.fail.join(','):''}${pe.length?' · pageerror '+pe[0]:''}`}})}
+    after reload ${a?a.key:'NO «Tiếp tục»'} · ${a?(miss.length?'LOST '+miss.length+': '+miss.join(' | '):'every card back ('+a.L.length+')'):''}${a&&a.v!==r.v?' · DRIFT '+a.v+' (was '+r.v+')':a?' · same numbers':''}${a&&a.hud!==r.hud?(r.ksf?' · HUD counting at capture (kitStatFx '+r.ksf+'), not compared':' · HUD '+a.hud+' (was '+r.hud+')'):''}${duty?` · Lễ nghĩa after reload: Bạc ${duty.db} (card ${duty.fx.bac})${dutyOk?'':' WRONG'}`:' · no Lễ nghĩa card'}${' · remake ×2 of '+r.rkN+' rk cards: '+(r.rk2.length?'SIDE EFFECT '+r.rk2.join(' | '):'no side effect')}${r.code.length?' · code cards with no generator at the flip: '+r.code.join(' | '):''}${a&&a.fail.length?' · rcpFail '+a.fail.join(','):''}${pe.length?' · pageerror '+pe[0]:''}`}})}
 
 /* ---------- drift ---------- */
 async function drift(b,dev,url,seed){const one=wait=>play(b,dev,url,seed,async(p,open,pe)=>{await open();
