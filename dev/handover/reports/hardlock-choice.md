@@ -39,3 +39,25 @@ Coverage note: 243 of 550 j68 templates had no cast in the one scan world (their
 ### Notes for Foreman B (not blocking)
 - Data law 2 (content, not a lock any more): j68c-serv-022 / j68c-sea-023 have no non-bạc stance; j72c-craft-007/029/057 + social-013 «pick» steps are both-bạc. The engine now always leaves a road, but a writer pass could give each a non-bạc stance of equal steps.
 - Existing scripts that check `c.fx.bac&&S.bac+c.fx.bac<0` inline (bots/measures, jcooptimer autoRead, j87, jemoact) keep working: after kitNoLock the paid-another-way road is no longer «poor».
+
+## REVIEW r1 — FAIL (BIG reviewer Seat E, b-coop-0045; session_01N1tNP3inDSatM7LPmx51yi)
+PRIORITY #1 CHECK ('altCost|bacTuan|altK|nolock'): OD 1 (OD:L582 bạc road = equal value valued AT HER RANK) | main jstory.js:43–45 altCost / BAL.bacTuan / BAL.altK (used by altOf67, jstory j72 alt :122–124, jeitem eitAlt :126) | review/* hardlock-choice only | claims Seat C fixer 3HWwA785.
+Reviewed ea9cfd51 bare + merged onto newest origin/main 5d4f722f (merge 2d05a78d, clean; site rebuilt, not pushed).
+
+### Gates (all run by the reviewer; outputs)
+| gate | LIVE 502c48c9 | head ea9cfd51 | merged 2d05a78d |
+|---|---|---|---|
+| `node dev/test/hardlock-choice.js` (Fold + iPad) | `HARDLOCK-CHOICE FAIL (12)` (exit 1) | `HARDLOCK-CHOICE ALL PASS` (30 ok) | `HARDLOCK-CHOICE ALL PASS` (30 ok) |
+| `node dev/tools/hardlock-scan.js --turns 40 --md` | `FAIL · 906 cards · HARD LOCKS 2 · PLANT LOCKED` | `PASS · 907 · HARD LOCKS 0 · plant guarded · page errors 0` | `PASS · 907 · HARD LOCKS 0 · plant guarded · page errors 0` |
+| `node dev/test/one-core-guard.js` | – | PASS | PASS |
+| `node dev/test/undef-scan.js` | – | PASS (302 names) | PASS (302 names) |
+| `node dev/test/coop-e2e.js` (Fold host) / `COOP_SWAP=1` (iPad host) | – | – | 142/142 · 142/142 |
+| `bash dev/tools/quickcheck.sh` ALONE | – | – | `QUICKCHECK PASS · old save ok · render 186/206 ms, tab 389/449, buổi 1487/1298, tasks>200ms 21/23 · core gates PASS` |
+Perf: the outer wrapper is two short loops per draw/pick; quickcheck buổi 1487 vs 1298 ms is within run noise of the fixer's own 2097/4534; no concern. Co-op: guest pick + host replay both pass through the wrapper in her context, «Thôi» → closeModal → i:-1; both seat orders pass. Existing affordable cards: untouched (test c, scan).
+
+### FAIL list (fix on review/hardlock-choice, then SẴN SÀNG KIỂM again)
+1. **BLOCKING — the rescue road can kill her (law 3 / law 6, game-breaking).** `kitBacSub` counts what she can give from `S[k]−keep` but ignores the Sức (and Danh) the road ALREADY costs; `fx[k]=(fx[k]||0)+sub[k]` then stacks both. Reviewer probe (Fold, head): forced card 2 × `{bac:-60,suc:-12}`, purse 0, Sức 13, Danh 0 → both roads shown OPEN «Tốn Sức -24», picked → `S.suc 0` (j3:123 `S.suc<=0 → die`). Real card: j68c-serv-022 stances 3 + 4 are `{bac:-60,suc:-12,…}` → at purse 0 with Sức ≤ 24 the offered road drains her to 0. Fix: room left = `S[k] − keep[k] − max(0,−own fx[k])`; a road whose TOTAL fx would take any key below keep is never offered (→ next means, else «Thôi»). Add this case to dev/test/hardlock-choice.js (must FAIL on ea9cfd51).
+2. **Law 2 by OD:L582 + law 13 reuse / law 4 one value.** OD:L582: the non-bạc road «must hurt as much as [the] bạc does at that rank (bạc is scarce at low ranks, so value it by how hard it is to earn at her rank)». The game already has that ONE rule: `altCost(bac,rank)` (BAL.bacTuan + BAL.altK, capped at altK.sucMax). BAL.nolock.per is a second, flat bạc→Sức worth (5 bạc/Sức at every rank, no cap). Same 74 bạc short at rank 3: nolock Sức −15 vs altCost Sức −20; rank 0 and rank 7 also differ; 0 purse vs a 240-bạc road → Sức −48 in one tap (no cap). Fix: price the short part through `altCost(short,S.rank)` (its Sức; Danh only when Sức cannot reach, at a rate derived from the same rule), drop BAL.nolock.per. All roads still change alike (same function) — the law-2 claim keeps.
+3. nit — jnolock header says «at the j68c step rate × the rank price factor»; there is no rank factor in the code. After fix 2 the comment must say what the code does.
+4. not blocking (content, law 2/6): j68c-serv-022 / j68c-sea-023 still have no non-bạc stance; j72c-craft-007/029/057 + social-013 «pick» steps all-bạc (panel has «Bỏ việc», so no lock). Writer pass to give each a non-bạc stance of equal steps — Foreman B to queue.
+Law check: 1 OK (both seats) · 2 FAIL (item 2) · 3 FAIL (item 1) · 4 FAIL (item 2: second rate) · 6 content note (item 4) · 7 OK («Thôi», « (thiếu bạc, lấy công sức bù)», no digits) · 9 OK (kit ✕ / kit option card, no new part) · 11 OK (scan walks PEND + 550 j68 + MF7/FV7/FX7/WORLD/TSA + 40 turns + static seeds + plant; only Q-path cards — panels outside Q, e.g. Việc nhờ, rely on their own leave road; accepted) · 13 FAIL (item 2: altCost not reused).
