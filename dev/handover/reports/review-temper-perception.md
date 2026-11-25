@@ -85,3 +85,40 @@ N1 / N2 unchanged (D / MAIN).
 - Rerun: temper-judged (must count LANDED), temper-moodsrc, temper-perception.js + temper-outburst.js real taps Fold 755x1000@2 + iPad 1180x820@2 (serve the worktree with python3 -m http.server), temper-equal, temper-signs, one-core-guard, coop-e2e, quickcheck ALONE last.
 - B2: PASS needs T2c's final table (≥3 finished lives per arm, moodM limited to gây sự) showing NPC harm deeds/year not noticeably up.
 - Worktrees: /home/user/wt/tp (ab5d65ee), /home/user/wt/tof (39561518), /home/user/wt/ho (handover, NOT sparse, 2 GB — delete when done).
+
+## ROUND 3 — review/temper-perception-rv 97d6ba10 (T1c; B2 = T2c) — VERDICT: PENDING B2 (everything else green)
+Reviewer RV3b = session_01D3E3NYPeSt6UMJaxqBPTqC (successor of RV3), 25/11 ~12:40Z.
+PRIORITY #1 CHECK: ROUND 1 + 2 + RV3 HANDOVER above | main 9f72524b ancestor of 97d6ba10 ✓ | review/temper-outburst-fix 39561518 merged (d0ae8c7d) ✓ | claims RV3b; T1c → T1d (fixer on call), T2c (B2). Rules read: START_CORE (18 laws), START_WORKER, START_REVIEWER.
+
+### B1-R — verified BY HAND (own probe, not temper-judged.js)
+`typeof relMSOf`/`window.relMSOf` = function. tpOut(X,{k,n},{target:null},{pl:"x",kh:0,eyes:[S,c0,c1]}):
+| doer | tpK | tpP(tpK)===X | TP.stat.eye Δ | onlookers' aff before → after |
+|---|---|---|---|---|
+| her maid | xx1 | ✓ | 3 | 0,0,0 → −1,−2,−1 |
+| other palace's servant | xs2 | ✓ | 3 | 0,0,0 → −1,−2,−1 |
+| a man | xm0 | ✓ | 3 | 0,0,0 → −1,−2,−1 |
+| a minister (trS().H isMin) | xx28 | ✓ | 3 | 0,0,0 → −1,−2,−1 |
+| nữ quan (S.court.tq) | xx2 | ✓ | 3 | 0,0,0 → −1,−2,−1 |
+| a child | xx16 | ✓ | 3 | 0,0,0 → −1,−2,−1 |
+5 more shots accumulate (maid / man / child −1,−2,−2 → −9,−15,−15). Real roster (tpAt) over 40 khắc, judged / landed: maid 80/80 · other servant 240/238 · man 40/40 · minister 40/40 · child 240/240.
+Family: every function defined inside the jhc.js IIFE and not exported, called from another module → only `sbar`, and those callers (j53/j54/j55/jagmin/jkidlife) use jtin's own global sbar (different signature); no other closure leak. ✓
+N5 ✓ (cau base +1, DEED {Kiệm −1}) · N6 ✓ (tpAb: me/emp/th, v<id> consort, s<sid> servant, else kOf61).
+B2 code ✓: BAL.tp.moodK = provoke/vent/humil/gossip/rumor; tpMoodM(a,kind) 0 for every other kind; motiveOK passes its kind (her = NPC, law 1).
+
+### Gates (own build = commit except the CTM_BI build line)
+| Gate | Result |
+|---|---|
+| temper-judged.js | 66 rows · self 26 · not judged 0 · judged but no effect 0 · helpers missing 0 · mood term outside gây sự 0 wrong |
+| temper-moodsrc / temper-equal / temper-signs | wrong 0 / 36 rows fail 0, 330 cells / 17 rows wrong 0 |
+| one-core-guard | PASS (fails 0) |
+| temper-perception.js REAL TAPS Fold 755x1000@2 + iPad 1180x820@2 | 7/7 both, dead 0, errors 0; shots looked at (gateYes Fold: Danh 33→34, kit stage; label iPad: «TÍNH NẾT chưa rõ · xem ta: Khẩu xà tâm Phật» on the kit row) |
+| temper-outburst.js real taps Fold + iPad | PASS both (hot/stale/timid/jfeel/npc/cap/old, errs 0, dead 0) |
+| coop-e2e.js | 142/142 |
+| quickcheck.sh ALONE | PASS · open 1974 ms · old save ok · perf new/live render 266/229, tab 645/611, buổi 2051/3570, tasks>200 27/28 · core gates PASS |
+
+### Laws
+1 ✓ (one rule reaches all 8 kinds of doer; mood term same for her and NPCs) · 2/3 ✓ · 4 ✓ (BAL.tp, one-core green) · 6 ✓ · 7 ✓ (no new player words) · 9 ✓ (no new UI) · 11 ✓ (B1-R whole group + scan counts what lands).
+
+### Open
+B2 only: T2c's final run on 97d6ba10 (3 finished lives per arm main / on / off, real-tap robot-rt, counters: gate pass % by kind, passes owed to mood, executed NPC harm acts per year by kind, gây sự deeds) — T2c ETA ~5–6 h from 12:40Z. PASS 97d6ba10 when NPC harm deeds/year are not noticeably up on vs off; else FAIL → T1d / D tune.
+Shots in scratch only, deleted; no CDN review folder used.
