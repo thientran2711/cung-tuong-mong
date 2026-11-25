@@ -1,0 +1,2317 @@
+{
+ "job": {
+  "id": "coop-rt-s115-guest-k1",
+  "origin": null,
+  "road": null,
+  "bot": "sens",
+  "seed": 1252,
+  "dev": "ipad",
+  "url": "http://127.0.0.1:8080/index.html"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "512cfee6",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 1,
+  "unstick": [
+   {
+    "at": 367,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 375,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 382,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 390,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 399,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 421,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 432,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 443,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 454,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 464,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 475,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 486,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 497,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 507,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 518,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 529,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 540,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 550,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 561,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 572,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 583,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 593,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 604,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 615,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 626,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 636,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 647,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 658,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 668,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 679,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 690,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 700,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 711,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 722,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 733,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 743,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 754,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 765,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 776,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 786,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 797,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 808,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 818,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 829,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 840,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 851,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 861,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 872,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 883,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 893,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 905,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 916,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 927,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 937,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 948,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 959,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 969,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 980,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 991,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1001,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1012,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1023,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1034,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1044,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1055,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1066,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1077,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1087,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1098,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1109,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1120,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1130,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1141,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1152,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1162,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1173,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1184,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1195,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1206,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1217,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1227,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1238,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1249,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1253,
+    "lvl": 3,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1272,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1283,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1293,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1304,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1315,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1326,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1337,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1349,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1686,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1693,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1701,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1708,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1715,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1723,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1730,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1739,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1746,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1754,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1761,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1769,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   }
+  ],
+  "slice": null,
+  "areaTaps": 54,
+  "typed": 1,
+  "scrolls": 5
+ },
+ "life": null,
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "ktut-no-target|tutorial open with no tappable target card; tapped its own «Đã hiểu»",
+   "type": "ktut-no-target",
+   "msg": "tutorial open with no tappable target card; tapped its own «Đã hiểu»",
+   "n": 1,
+   "at": 185,
+   "shot": "/home/user/wt/out/u1b/shots-coop-rt-s115-guest-k1/ktut-1.png",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 1,
+    "age": 19,
+    "rank": 2,
+    "name": "Hoa Mạn Ca"
+   },
+   "hole": null,
+   "card": "",
+   "buttons": [
+    "",
+    "Đã hiểu"
+   ]
+  },
+  {
+   "k": "stuck|no progress 15 min on #coopfz «»",
+   "type": "stuck",
+   "msg": "no progress 15 min on #coopfz «»",
+   "n": 1,
+   "at": 1253,
+   "shot": "/home/user/wt/out/u1b/shots-coop-rt-s115-guest-k1/stuck-1.png",
+   "save": "/home/user/wt/out/u1b/shots-coop-rt-s115-guest-k1/stuck-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 2,
+    "name": "Hoa Mạn Ca"
+   },
+   "buttons": [
+    "Chép đường dẫn",
+    "Về màn đầu"
+   ]
+  }
+ ],
+ "dead": [],
+ "saves": [],
+ "buoi": 27,
+ "steps": 4108,
+ "status": [],
+ "_snapAt": 1795611946321,
+ "_un": 0,
+ "trace": [
+  [
+   1538,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 3 ngườ» «Sẵn sàng»"
+  ],
+  [
+   1538,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 3 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   1544,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   1551,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1552,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1552,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1552,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1553,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1553,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1553,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1553,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1554,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1554,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1555,
+   ".kfoc «Tiếp ▸»"
+  ],
+  [
+   1555,
+   ".kfoc «Ghi nhớ làm chứng cứ»"
+  ],
+  [
+   1557,
+   ".dlg «Việc nhờ» «Nhận lờiVữngTốnkhôngĐượcĐức +2·Triệu Hoài Nhân thi»"
+  ],
+  [
+   1559,
+   ".dlg «Sổ hẹn» «Lui»"
+  ],
+  [
+   1560,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1561,
+   ".dlg «Lễ Phật đản» «Lui»"
+  ],
+  [
+   1563,
+   ".dlg «Tuần mới» «Lui»"
+  ],
+  [
+   1571,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 3 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   1580,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 3 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   1590,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 3 ngườ» «Sẵn sàng»"
+  ],
+  [
+   1593,
+   "DEAD Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh"
+  ],
+  [
+   1594,
+   ".dlg «Có người đến» «Lui»"
+  ],
+  [
+   1595,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 3 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   1604,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 3 ngườ» «Giao thiệpGiao thiệpKinh hồng vũVữngĐiệu múa trong»"
+  ],
+  [
+   1613,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   1623,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   1632,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   1635,
+   "DEAD Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh"
+  ],
+  [
+   1636,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 3 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   1645,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 3 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   1654,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 3 ngườ» «Sẵn sàng»"
+  ],
+  [
+   1660,
+   "DEAD Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh"
+  ],
+  [
+   1663,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   1669,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   1672,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1672,
+   "#kmrew «Thường»"
+  ],
+  [
+   1673,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1674,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1674,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1674,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1675,
+   ".dlg «Lui»"
+  ],
+  [
+   1675,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   1676,
+   ".dlg «Lui»"
+  ],
+  [
+   1677,
+   "#kmrew «ThườngYên chi giấyHộp phấn má dùng khi điểm trang »"
+  ],
+  [
+   1677,
+   ".dlg «Lui»"
+  ],
+  [
+   1678,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   1678,
+   ".dlg «Lui»"
+  ],
+  [
+   1679,
+   "#kmrew «ThườngLụa Hàng ChâuMay áo: áo lụa Hàng Châu vân th»"
+  ],
+  [
+   1679,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1679,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1680,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1680,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1680,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1680,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1681,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1681,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1681,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1681,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1682,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1682,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1682,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1682,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1683,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1683,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1683,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1683,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1684,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1684,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1684,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1684,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1685,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1685,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1685,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1686,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1686,
+   ".dlg «unstick ✕»"
+  ],
+  [
+   1686,
+   "#kmrew «ThườngLụa Hàng ChâuMay áo: áo lụa Hàng Châu vân th»"
+  ],
+  [
+   1687,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1687,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1687,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1687,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1688,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1688,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1688,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1688,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1689,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1689,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1689,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1689,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1690,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1690,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1690,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1691,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1691,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1691,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1691,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1692,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1692,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1692,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1692,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1693,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1693,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1693,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1694,
+   ".dlg «unstick ✕»"
+  ],
+  [
+   1694,
+   "#kmrew «Tinh phẩmNến sáp vàngThắp học đêm: buổi tối luyện »"
+  ],
+  [
+   1694,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1695,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1695,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1695,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1695,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1696,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1696,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1696,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1696,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1697,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1697,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1697,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1697,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1698,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1698,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1698,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1698,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1699,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1699,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1699,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1699,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1699,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1700,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1700,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1700,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1700,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1701,
+   ".dlg «unstick ✕»"
+  ],
+  [
+   1701,
+   "#kmrew «Thường»"
+  ],
+  [
+   1702,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1702,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1702,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1702,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1702,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1703,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1703,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1703,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1703,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1704,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1704,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1704,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1704,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1705,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1705,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1705,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1705,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1706,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1706,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1706,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1706,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1707,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1707,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1707,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1707,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1708,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1708,
+   ".dlg «unstick ✕»"
+  ],
+  [
+   1708,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   1709,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1709,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1709,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1709,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1710,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1710,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1710,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1710,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1711,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1711,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1711,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1711,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1712,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1712,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1712,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1712,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1713,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1713,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1713,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1713,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1714,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1714,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1714,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1714,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1715,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1715,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1716,
+   ".dlg «unstick ✕»"
+  ],
+  [
+   1716,
+   "#kmrew «Thường»"
+  ],
+  [
+   1716,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1716,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1717,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1717,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1717,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1717,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1718,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1718,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1718,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1718,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1719,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1719,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1719,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1719,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1720,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1720,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1720,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1720,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1721,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1721,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1721,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1721,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1722,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1722,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1722,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1722,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1723,
+   ".dlg «unstick ✕»"
+  ],
+  [
+   1723,
+   "#kmrew «Tinh phẩmNến sáp vàngThắp học đêm: buổi tối luyện »"
+  ],
+  [
+   1724,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1724,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1724,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1724,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1725,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1725,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1725,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1725,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1726,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1726,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1726,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1726,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1727,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1727,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1727,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1727,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1728,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1728,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1728,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1728,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1729,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1729,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1729,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1729,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1730,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1730,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1731,
+   ".dlg «unstick ✕»"
+  ],
+  [
+   1731,
+   "#kmrew «ThườngBăng đáMùa hạ giải nhiệt: Sức +5 · mùa khác »"
+  ],
+  [
+   1731,
+   ".dlg «Lui»"
+  ],
+  [
+   1732,
+   "#kmrew «Thường»"
+  ],
+  [
+   1732,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1732,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1733,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1733,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1733,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1733,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1734,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1734,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1734,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1734,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1735,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1735,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1735,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1735,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1736,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1736,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1736,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1736,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1737,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1737,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1737,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1737,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1738,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1738,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1738,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1738,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1739,
+   ".dlg «unstick ✕»"
+  ],
+  [
+   1739,
+   "#kmrew «Tinh phẩm»"
+  ],
+  [
+   1740,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1740,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1740,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1740,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1741,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1741,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1741,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1741,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1742,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1742,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1742,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1742,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1743,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1743,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1743,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1743,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1744,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1744,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1744,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1744,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1745,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1745,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1745,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1745,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1746,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1746,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1747,
+   ".dlg «unstick ✕»"
+  ],
+  [
+   1747,
+   "#kmrew «Tinh phẩmNến sáp vàngThắp học đêm: buổi tối luyện »"
+  ],
+  [
+   1747,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1747,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1748,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1748,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1748,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1748,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1749,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1749,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1749,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1749,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1750,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1750,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1750,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1750,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1751,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1751,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1751,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1751,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1752,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1752,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1752,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1753,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1753,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1753,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1753,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1754,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1754,
+   ".dlg «unstick ✕»"
+  ],
+  [
+   1755,
+   "#kmrew «Tinh phẩmNến sáp vàngThắp học đêm: buổi tối luyện »"
+  ],
+  [
+   1755,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1755,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1755,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1756,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1756,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1756,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1756,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1757,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1757,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1757,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1757,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1758,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1758,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1758,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1758,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1759,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1759,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1759,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1759,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1760,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1760,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1760,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1760,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1761,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1761,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1761,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1762,
+   ".dlg «unstick ✕»"
+  ],
+  [
+   1762,
+   "#kmrew «Nhận»"
+  ],
+  [
+   1762,
+   "#kmrew «ThườngYên chi giấyHộp phấn má dùng khi điểm trang »"
+  ],
+  [
+   1762,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1763,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1763,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1763,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1763,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1764,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1764,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1764,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1764,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1765,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1765,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1765,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1766,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1766,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1766,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1766,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1767,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1767,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1767,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1767,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1768,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1768,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1768,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1768,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1769,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1769,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1770,
+   ".dlg «unstick ✕»"
+  ],
+  [
+   1770,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1771,
+   ".dlg «Bổng lộc tháng tư» «Vì sao»"
+  ],
+  [
+   1771,
+   ".dlg «Bổng lộc tháng tư» «Vì sao»"
+  ],
+  [
+   1771,
+   ".dlg «Bổng lộc tháng tư» «Vì sao»"
+  ],
+  [
+   1772,
+   ".dlg «Bổng lộc tháng tư» «Vì sao»"
+  ],
+  [
+   1772,
+   ".dlg «Bổng lộc tháng tư» «Lui»"
+  ],
+  [
+   1773,
+   ".dlg «Thỉnh bình an mạch» «Lui»"
+  ],
+  [
+   1775,
+   ".dlg «Phụ tuyến · Tân quân lập uy · Chương 1 · Hồi 1/2» «Khuyên ngài nhẫn nại chờ thờiRất vữngTốnkhôngĐượcb»"
+  ],
+  [
+   1776,
+   ".dlg «Sứ đoàn vào triều» «Đứng xem rồi vềTốnkhôngĐượckhông»"
+  ],
+  [
+   1778,
+   ".dlg «Sứ đoàn vào triều» «Che rèm cho nàng ta khỏi bị thấyTốnHoàng hậu → ta:»"
+  ],
+  [
+   1784,
+   "DEAD Trang sau"
+  ]
+ ],
+ "_ckAt": 1795611983531,
+ "_ckB": 27,
+ "_kn": 1,
+ "_kb": 6,
+ "dumps": [
+  "/home/user/wt/out/u1b/shots-coop-rt-s115-guest-k1/stuck-1-dump.json"
+ ]
+}

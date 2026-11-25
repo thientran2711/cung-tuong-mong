@@ -1,0 +1,2566 @@
+{
+ "job": {
+  "id": "coop-rt-s115-host-k1",
+  "origin": null,
+  "road": null,
+  "bot": "sens",
+  "seed": 1251,
+  "dev": "fold",
+  "url": "http://127.0.0.1:8080/index.html"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "512cfee6",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 1,
+  "unstick": [
+   {
+    "at": 151,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 161,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 369,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 383,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 390,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 397,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 405,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 412,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 419,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 426,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 433,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 440,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 448,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 455,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 462,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 469,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 476,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 483,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 490,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 497,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 505,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 512,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 519,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 526,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 533,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 540,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 547,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 554,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 562,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 568,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 576,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 583,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 590,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 597,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 604,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 612,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 619,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 626,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 633,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 640,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 647,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 654,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 661,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 668,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 676,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 683,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 690,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 697,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 704,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 711,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 719,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 726,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 733,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 740,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 748,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 755,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 762,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 770,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 777,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 784,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 792,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 799,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 806,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 813,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 820,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 827,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 835,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 842,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 849,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 856,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 864,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 871,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 879,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 886,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 893,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 901,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 909,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 916,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 924,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 931,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 938,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 945,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 952,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 960,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 967,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 974,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 981,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 989,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 996,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1003,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1010,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1017,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1025,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1032,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1039,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1047,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1054,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1061,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1069,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1076,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1083,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1091,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1098,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1105,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1113,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1120,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1127,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1134,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1142,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1149,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1157,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1164,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1171,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1179,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1186,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1193,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1200,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1208,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1215,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1222,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1229,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1236,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1244,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1251,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1251,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng ba · Lễ nghĩa"
+   },
+   {
+    "at": 1690,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1698,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1706,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1713,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1731,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng tư · Lễ nghĩa"
+   },
+   {
+    "at": 1739,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng tư · Lễ nghĩa"
+   },
+   {
+    "at": 1746,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng tư · Lễ nghĩa"
+   },
+   {
+    "at": 1754,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng tư · Lễ nghĩa"
+   },
+   {
+    "at": 1762,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng tư · Lễ nghĩa"
+   },
+   {
+    "at": 1770,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng tư · Lễ nghĩa"
+   },
+   {
+    "at": 1778,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng tư · Lễ nghĩa"
+   },
+   {
+    "at": 1785,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Bổng lộc tháng tư · Lễ nghĩa"
+   }
+  ],
+  "slice": null,
+  "areaTaps": 51
+ },
+ "life": null,
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "ktut-no-target|tutorial open with no tappable target card; tapped its own «Đã hiểu»",
+   "type": "ktut-no-target",
+   "msg": "tutorial open with no tappable target card; tapped its own «Đã hiểu»",
+   "n": 1,
+   "at": 80,
+   "shot": "/home/user/wt/out/u1b/shots-coop-rt-s115-host-k1/ktut-1.png",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 1,
+    "age": 19,
+    "rank": 0,
+    "name": "Hoa Uyển Dung"
+   },
+   "hole": null,
+   "card": "",
+   "buttons": [
+    "",
+    "Đã hiểu"
+   ]
+  },
+  {
+   "k": "dead|close button has no effect: .dlg «Tâm trạng · Ta» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tâm trạng · Ta» «Lui»",
+   "n": 1,
+   "at": 129,
+   "shot": "/home/user/wt/out/u1b/shots-coop-rt-s115-host-k1/noeffect-1795610324763.png"
+  },
+  {
+   "k": "stuck|no progress 15 min on .dlg «Bổng lộc tháng ba · Lễ nghĩa»",
+   "type": "stuck",
+   "msg": "no progress 15 min on .dlg «Bổng lộc tháng ba · Lễ nghĩa»",
+   "n": 1,
+   "at": 1251,
+   "shot": "/home/user/wt/out/u1b/shots-coop-rt-s115-host-k1/stuck-1.png",
+   "save": "/home/user/wt/out/u1b/shots-coop-rt-s115-host-k1/stuck-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Hoa Uyển Dung"
+   },
+   "buttons": [
+    "Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diệnGợi ýgiữ thể diện!",
+    "Bớt lễ nghĩaRất vữngTốnkhôngĐượccó thêm bạcMấtmất thể diệnGợi ýcó thêm bạc; nhưng mất thể "
+   ]
+  },
+  {
+   "k": "dead|close button has no effect: .dlg «Tâm trạng · Tần Phó Phù Dung» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tâm trạng · Tần Phó Phù Dung» «Lui»",
+   "n": 1,
+   "at": 1367,
+   "shot": "/home/user/wt/out/u1b/shots-coop-rt-s115-host-k1/noeffect-1795611563099.png"
+  }
+ ],
+ "dead": [
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tâm trạng · Ta»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/out/u1b/shots-coop-rt-s115-host-k1/noeffect-1795610324763.png",
+   "at": 129,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Hoa Uyển Dung"
+   }
+  },
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tâm trạng · Tần Phó Phù Dung»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/out/u1b/shots-coop-rt-s115-host-k1/noeffect-1795611563099.png",
+   "at": 1367,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Hoa Uyển Dung"
+   }
+  }
+ ],
+ "saves": [],
+ "buoi": 27,
+ "steps": 5003,
+ "status": [],
+ "_snapAt": 1795611953723,
+ "_un": 8,
+ "trace": [
+  [
+   1616,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   1616,
+   ".dlg «Bổng lộc» «Lui»"
+  ],
+  [
+   1617,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Tai mắt0»"
+  ],
+  [
+   1617,
+   ".dlg «Tai mắt» «Lui»"
+  ],
+  [
+   1618,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Người được sai đi (có mới)»"
+  ],
+  [
+   1619,
+   ".dlg «Tin chờ người sai đi» «Xem lời nhờTốnkhôngĐượcCó khách đến chơi·trả lời t»"
+  ],
+  [
+   1620,
+   ".dlg «Có khách đến chơi» «Tiếp rồi đem chuyện đi kể với Hoàng hậuRất vữngTốn»"
+  ],
+  [
+   1627,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Hành sự»"
+  ],
+  [
+   1628,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Tin báo: 6 tin mới»"
+  ],
+  [
+   1628,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   1629,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Buổi chiều, còn 4 khắc»"
+  ],
+  [
+   1630,
+   ".dlg «chiều · còn» «Lui»"
+  ],
+  [
+   1631,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   1631,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Quẻ Thượng thượng (Danh)»"
+  ],
+  [
+   1631,
+   ".dlg «Quẻ Thượng thượng · Danh» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   1632,
+   ".dlg «Gieo lại quẻ» «Lui»"
+  ],
+  [
+   1633,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   1633,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   1634,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sẵn sàng»"
+  ],
+  [
+   1634,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Ân tình (đêm)0»"
+  ],
+  [
+   1634,
+   ".dlg «Ân tình (đêm)» «Lui»"
+  ],
+  [
+   1635,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   1636,
+   ".dlg «Bổng lộc» «Lui»"
+  ],
+  [
+   1637,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Tai mắt0»"
+  ],
+  [
+   1637,
+   ".dlg «Tai mắt» «Lui»"
+  ],
+  [
+   1638,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Hành sự»"
+  ],
+  [
+   1639,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Giao tình»"
+  ],
+  [
+   1639,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Về phòng»"
+  ],
+  [
+   1639,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Có thaiRất thấp»"
+  ],
+  [
+   1639,
+   ".dlg «Có thai: Rất thấp» «Lui»"
+  ],
+  [
+   1640,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   1641,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Hành sự»"
+  ],
+  [
+   1641,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Người được sai đi (có mới)»"
+  ],
+  [
+   1641,
+   ".dlg «Tin chờ người sai đi» «Xem lời nhờTốnkhôngĐượcLời mời cùng chơi·trả lời t»"
+  ],
+  [
+   1643,
+   ".dlg «Lời mời cùng chơi» «Nhận lờiRất vữngTốnSức -6·1 khắcĐượchai bên thêm t»"
+  ],
+  [
+   1644,
+   ".dlg «Ra ngoài khi mặc trung y?» «Vẫn điTốnDanh -2Đượckhông»"
+  ],
+  [
+   1651,
+   "page «Chung Tú cung · Diên Khánh điện · Ở đây còn 2 ngườ» «Tất cả 20/30»"
+  ],
+  [
+   1651,
+   "page «Chung Tú cung · Diên Khánh điện · Ở đây còn 2 ngườ» «Học tậpHọc tậpĐàn hát tự thưởngRất vữngLòng đang v»"
+  ],
+  [
+   1655,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   1658,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   1659,
+   ".dlg «Kính sự phòng» «Chặn ngự giáHiểmTốnkhôngĐượcdựa vào nhan sắc, ân s»"
+  ],
+  [
+   1659,
+   "#kg82 «Trước khi ra tay»"
+  ],
+  [
+   1659,
+   "#kg82 «Trước khi ra tay»"
+  ],
+  [
+   1660,
+   "#kg82 «Trước khi ra tay»"
+  ],
+  [
+   1660,
+   "#kg82 «Trước khi ra tay»"
+  ],
+  [
+   1660,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   1661,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   1662,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1665,
+   ".dlg «Việc khó xử» «Xin Hoàng thượng tra xétCó cơTốnkhôngĐượcthêm thể »"
+  ],
+  [
+   1670,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1671,
+   "#kmrew «ThườngTrà mốc (hàng kém)Trà cũ ẩm mốc Nội vụ phủ p»"
+  ],
+  [
+   1671,
+   ".dlg «Lui»"
+  ],
+  [
+   1672,
+   "#kmrew «ThườngVải thô (hàng kém)Hàng kém Nội vụ phủ phát: »"
+  ],
+  [
+   1673,
+   ".dlg «Lui»"
+  ],
+  [
+   1674,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   1674,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1674,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1675,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1675,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1675,
+   ".dlg «Lui»"
+  ],
+  [
+   1676,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   1676,
+   ".dlg «Lui»"
+  ],
+  [
+   1677,
+   "#kmrew «Thường»"
+  ],
+  [
+   1678,
+   ".dlg «Lui»"
+  ],
+  [
+   1678,
+   "#kmrew «Thường»"
+  ],
+  [
+   1679,
+   ".dlg «Lui»"
+  ],
+  [
+   1680,
+   "#kmrew «Thường»"
+  ],
+  [
+   1680,
+   ".dlg «Lui»"
+  ],
+  [
+   1681,
+   "#kmrew «Thường»"
+  ],
+  [
+   1681,
+   ".dlg «Lui»"
+  ],
+  [
+   1682,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   1682,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1683,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1683,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1683,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1683,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1684,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1684,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1684,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1685,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1685,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1685,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1685,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1686,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1686,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1686,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1687,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1687,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1687,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1688,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1688,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1688,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1688,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1689,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1689,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1689,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1689,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1690,
+   ".dlg «unstick ✕»"
+  ],
+  [
+   1690,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   1691,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1691,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1691,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1691,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1692,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1692,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1692,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1693,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1693,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1693,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1693,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1694,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1694,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1694,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1695,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1695,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1695,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1695,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1696,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1696,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1696,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1696,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1697,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1697,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1697,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1698,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1699,
+   ".dlg «unstick ✕»"
+  ],
+  [
+   1699,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   1699,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1699,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1699,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1700,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1700,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1700,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1700,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1701,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1701,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1701,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1702,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1702,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1702,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1702,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1703,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1703,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1703,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1703,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1704,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1704,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1704,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1704,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1705,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1705,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1705,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1706,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1706,
+   ".dlg «unstick ✕»"
+  ],
+  [
+   1706,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   1707,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1707,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1707,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1708,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1708,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1708,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1708,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1709,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1709,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1709,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1709,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1710,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1710,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1710,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1710,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1711,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1711,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1711,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1711,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1712,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1712,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1712,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1712,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1713,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1713,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1713,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1714,
+   ".dlg «unstick ✕»"
+  ],
+  [
+   1714,
+   "#kmrew «ThườngVải thô (hàng kém)Hàng kém Nội vụ phủ phát: »"
+  ],
+  [
+   1714,
+   ".dlg «Lui»"
+  ],
+  [
+   1715,
+   "#kmrew «ThườngTrà mốc (hàng kém)Trà cũ ẩm mốc Nội vụ phủ p»"
+  ],
+  [
+   1716,
+   ".dlg «Lui»"
+  ],
+  [
+   1716,
+   "#kmrew «Nhận»"
+  ],
+  [
+   1719,
+   "DEAD ThườngTrà mốc (hàng kém)Trà cũ ẩm mốc Nội vụ phủ p"
+  ],
+  [
+   1720,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1723,
+   ".dlg «Bổng lộc tháng tư» «Lót tay thái giám Nội vụ phủRất vữngTốnBạc -8Đượcđ»"
+  ],
+  [
+   1724,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Bớt lễ nghĩaRất vữngTốnkhôngĐượccó thêm bạcMấtmất »"
+  ],
+  [
+   1724,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1724,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1725,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1725,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1725,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1726,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1726,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1726,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1726,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1727,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1727,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1727,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1728,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1728,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1728,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1728,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1729,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1729,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1729,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1730,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1730,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1730,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1730,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1731,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1731,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1732,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1732,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1732,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1733,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1733,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1733,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1734,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1734,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1734,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1734,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1735,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1735,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1735,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1735,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1736,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1736,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1736,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1737,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1737,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1737,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1737,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1738,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1738,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1738,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1739,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1739,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1740,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1740,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1740,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1740,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1741,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1741,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1741,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1742,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1742,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1742,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1742,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1743,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1743,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1743,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1744,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1744,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1744,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1744,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1745,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1745,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1745,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1746,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1746,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1746,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1747,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1747,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1748,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1748,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1748,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1748,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1749,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1749,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1749,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1750,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1750,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1750,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1750,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1751,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1751,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1751,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1752,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1752,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1752,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1753,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1753,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1753,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1753,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1754,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1754,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1755,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1755,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1755,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1756,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1756,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1756,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1757,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1757,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1757,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1757,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1758,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1758,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1758,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1759,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1759,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1759,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1760,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1760,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1760,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1760,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1761,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1761,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1761,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1762,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1762,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1763,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1763,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1763,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1764,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1764,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1764,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1764,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1765,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1765,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1765,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1766,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1766,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1766,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1766,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1767,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1767,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1768,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1768,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1768,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1768,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1769,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1769,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1769,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1770,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1770,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1771,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1771,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1771,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1772,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1772,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1772,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1773,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1773,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1773,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1773,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1774,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1774,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1774,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1774,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1775,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1775,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1775,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1776,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1776,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1776,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1776,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1777,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1777,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1777,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1777,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1778,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1779,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1779,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1779,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1779,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1780,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1780,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1780,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1781,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1781,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1781,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1781,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1782,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1782,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1782,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1782,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1783,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1783,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1783,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1783,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1784,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1784,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1784,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1785,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1785,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1786,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1786,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1786,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1787,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1787,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1787,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1787,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1788,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1788,
+   ".dlg «Bổng lộc tháng tư · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ]
+ ],
+ "_ckAt": 1795611983919,
+ "_ckB": 27,
+ "_kn": 1,
+ "_kb": 2,
+ "dumps": [
+  "/home/user/wt/out/u1b/shots-coop-rt-s115-host-k1/stuck-1-dump.json"
+ ]
+}
