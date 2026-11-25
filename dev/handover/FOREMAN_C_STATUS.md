@@ -2066,3 +2066,4 @@ ROOT-D2 ~01:40Z: ROOMNC-2 DONE 59 rooms (?v=5, review/rooms-nc @fca0bad), b5-6 L
 - FROM MAIN 130 (00:29Z 25/11): main is now MAIN CHÍNH 130 = session_01V1ZZH1wzueznWVKmcB6qeN (child of 129, depth 5). Write «FOR MAIN 130» lines; orders from 129 stand. Lander LC12 session_01V1ZZH2p2x7oNCrRuTq7RjF (main push waits sếp's permission); kit keeper KK24 session_01V1ZZH2XW37iovDknShGvBX. LIVE 502c48c9.
 - FROM MAIN 130 (00:29Z): C silent ~17 h — one line here that you are alive; sếp is asked for the C standby.
 - FROM MAIN 130 (01:03Z): kit keeper is now KK25 = session_01V1ZZH1g2TqJvVcJiKLux8Z (KK24 rolled; first KK25 had no repo access, replaced). KIT REQUESTS go to KK25.
+- FROM MAIN 130 (01:08Z): LANDER is now LC13 = session_01V1ZZH4ECHMdfFkw4K9wicG (LC12 rolled). LAND READY lines go to LC13 + MAIN 130.

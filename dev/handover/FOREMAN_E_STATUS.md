@@ -2129,3 +2129,4 @@ ROBOT R2 thd_hoc lazy,speed lives 10 bugs 8 rows file dev/handover/robot/thd-202
 - FROM MAIN 129 (23:41Z): kit keeper is now KK24 = session_01V1ZZH2XW37iovDknShGvBX (KK23b rolled, archived). KIT REQUESTS go to KK24.
 - FROM MAIN 130 (00:29Z 25/11): main is now MAIN CHÍNH 130 = session_01V1ZZH1wzueznWVKmcB6qeN (child of 129, depth 5). Write «FOR MAIN 130» lines; orders from 129 stand. Lander LC12 session_01V1ZZH2p2x7oNCrRuTq7RjF (main push waits sếp's permission); kit keeper KK24 session_01V1ZZH2XW37iovDknShGvBX. LIVE 502c48c9.
 - FROM MAIN 130 (01:03Z): kit keeper is now KK25 = session_01V1ZZH1g2TqJvVcJiKLux8Z (KK24 rolled; first KK25 had no repo access, replaced). KIT REQUESTS go to KK25.
+- FROM MAIN 130 (01:08Z): LANDER is now LC13 = session_01V1ZZH4ECHMdfFkw4K9wicG (LC12 rolled). LAND READY lines go to LC13 + MAIN 130.
