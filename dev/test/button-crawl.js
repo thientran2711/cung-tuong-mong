@@ -8,7 +8,7 @@
    Screens are explored breadth-first from each START (title screen, a fresh life's home): every button that opens a NEW screen
    (new layer or tab) is followed, up to DEPTH taps deep. Between taps the harness puts the game back (deser(snapshot) + replaying the
    path with real taps) — harness setup only, never a button press.
-   usage: node dev/test/button-crawl.js [--dev fold,ipad] [--depth 3] [--start title,home] [--fast] [--out dir] [--game index.html|URL] [--max N]
+   usage: node dev/test/button-crawl.js [--dev fold,ipad] [--depth 3] [--start title,home,tour,save] [--save robot-dump.json] [--fast] [--out dir] [--game index.html|URL] [--max N]
      --fast  = gate mode for dev/tools/quickcheck.sh: depth 1 from home + title, Fold only; exit 1 on any FAIL
    output: <out>/crawl-<dev>.json (every tap) + <out>/shots/*.jpg (every FAIL; shots never go in git) ; summary line last.
    Report table: node dev/test/button-crawl.js --report <out> > dev/handover/reports/button-crawl.md */
@@ -236,6 +236,11 @@ async function crawlDev(b,URL,dev){
   document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());render()});
   /* the life-start veils (roulette, «Sửa soạn nhập cung») can come a moment later: wait for them, take them down, then snapshot */
   await p.waitForTimeout(2500);await p.evaluate(()=>{document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());Q.length=0;document.getElementById('modal').hidden=true;render();__bc.snap()})};
+ /* START save (--save <robot dump with .ls>): a mid-life robot save (later ranks, more tabs) loaded through the game's own slot loader */
+ const SAVE=opt('save',false);const SAVELS=SAVE?JSON.parse(fs.readFileSync(path.resolve(SAVE),'utf8')).ls:null;
+ startState.save=SAVELS&&(async()=>{await p.evaluate(ls=>{try{localStorage.clear();for(const k in ls)localStorage.setItem(k,ls[k])}catch(e){}try{REC.tour='done';REC.asked=1;saveRec()}catch(e){}
+  const n=+(ls['hclh-slot']||1)||1;const d=loadSlot(n);SLOT=n;try{kmReset&&kmReset()}catch(e){}quiet=true;d.tab='act';deser(d);quiet=false;document.getElementById('title').hidden=true;deal();render();if(S.mg)S.mg=null;/* = j6 data-load handler (setup only) */try{S.tutTour=1;coachOff&&coachOff()}catch(e){}},SAVELS);
+  await p.waitForTimeout(3000);await p.evaluate(()=>{document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn,.kmov').forEach(e=>e.remove());Q.length=0;document.getElementById('modal').hidden=true;render();try{k3Home()}catch(e){}__bc.snap()})});
  for(const st of STARTS){if(st==='tour'){await crawlTour(p,dev,errsRef);continue}if(!startState[st])continue;
   await startState[st]();await p.waitForTimeout(600);
   const withTitle=st==='title';
