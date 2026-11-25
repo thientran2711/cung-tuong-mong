@@ -114,7 +114,7 @@ async function play(p) {
   await p.evaluate(() => { window.__rtEnd = null }).catch(() => {});
   const actsPerBuoi = { sens: 2, rand: 3, cautious: 1, bold: 3, quiet: 0 }[BOT] ?? 2;
   let infoTry = new Map(); let preT = Date.now(), idle = 0, noClose = new Set(), noFx = new Map(), deadSeen = new Set(), acts = 0, lastKey = '', lastProg = Date.now(), repeat = new Map(), sameScr = 0, lastSig = '', started = false, cpAt = 0, statusAt = Date.now();
-  const NEXT_RE = /^sang (buổi|ngày mới)\b/i; const isNext = x => x.id === 'next' || NEXT_RE.test(x.t); let tapsB = 0;
+  const NEXT_RE = /^sang (buổi|ngày mới)\b/i; const UTIL_RE = /lịch tháng|sổ ghi|nhật ký|sổ tay|tư trang|tổng lược|thiết lập|tuần lục|bảng vàng|sổ luân hồi|ghi chú/i; const dlgActs = new Map(); const isNext = x => x.id === 'next' || NEXT_RE.test(x.t); let tapsB = 0;
   const clockKey = s => s ? [s.y, s.t, s.w, s.b].join('.') : 'none';
 
   for (;;) {
@@ -131,7 +131,7 @@ async function play(p) {
     if (sc.S && sc.S.name && !sc.S.dead && !started) { started = true; if (C.onStart) C.onStart() }
     /* progress + checkpoints */
     const key = clockKey(sc.S);
-    if (key !== lastKey) { if (lastKey && sc.S) { R.buoi++; acts = 0; tapsB = 0; repeat.clear() } lastKey = key; lastProg = Date.now();
+    if (key !== lastKey) { if (lastKey && sc.S) { R.buoi++; acts = 0; tapsB = 0; repeat.clear(); dlgActs.clear() } lastKey = key; lastProg = Date.now();
       if (R.buoi - cpAt >= CP) { cpAt = R.buoi; const sz = await p.evaluate(() => { let m = 0, k0 = ''; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (/save/.test(k)) { const n = (localStorage.getItem(k) || '').length; if (n > m) { m = n; k0 = k } } } return { k: k0, n: m } }).catch(() => null); if (sz) { R.saves.push({ buoi: R.buoi, year: sc.S && sc.S.y, chars: sz.n, key: sz.k }); console.log('CP buổi', R.buoi, 'year', sc.S && sc.S.y, 'save', sz.n, 'chars') } } }
     if (started && (Date.now() - (R._ckAt || 0) > 180e3 || R.buoi - (R._ckB || 0) >= 5)) { R._ckAt = Date.now(); R._ckB = R.buoi; const ls = await p.evaluate(() => { const o = {}; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (/^hclh|save|slot/i.test(k)) o[k] = localStorage.getItem(k) } return o }).catch(() => null); if (ls) { try { fs.writeFileSync(CKPT + '.tmp', JSON.stringify({ at: new Date().toISOString(), rs, R, ls })); fs.renameSync(CKPT + '.tmp', CKPT) } catch (e) {} } save() }
     if (SLICE && R.buoi >= SLICE) { R.sliced = true; break }
@@ -166,7 +166,7 @@ async function play(p) {
     /* a close (✕ / Lui) tapped for real 3× and the same dialog is still there = button with no effect → bug + shot */
     if (ok && (ch.x || CLOSE_RE.test(ch.t)) && sc.layer !== 'page') { await p.waitForTimeout(600); const s4 = await p.evaluate(SCAN).catch(() => null); if (s4 && s4.layer === sc.layer && s4.title === sc.title && sc.title) { const k = 'nx|' + sc.layer + '|' + sc.title; noFx.set(k, (noFx.get(k) || 0) + 1); if (noFx.get(k) === 3) { const shot = path.join(SHOTS, 'noeffect-' + Date.now() + '.png'); await p.screenshot({ path: shot }).catch(() => {}); R.dead.push({ k: 'NO EFFECT', screen: sc.layer + ' «' + sc.title + '»', label: ch.t, cover: 'tapped 3× for real, dialog stays', shot, at: sec(), S: sc.S }); bug('dead', 'close button has no effect: ' + sc.layer + ' «' + sc.title + '» «' + ch.t + '»', { shot }) } } }
     if (ok && ch.type) { await p.waitForTimeout(200); await p.keyboard.press('Control+A').catch(() => {}); await p.keyboard.type(String(ch.type), { delay: 80 }); R.harness.typed = (R.harness.typed || 0) + 1 }
-    if (ok && (sc.layer === 'page' || sc.b.some(isNext)) && !ch.next) acts++; if (ok) tapsB++;
+    if (ok && (sc.layer === 'page' || sc.b.some(isNext)) && !ch.next) acts++; if (ok) tapsB++; if (ok && sc.layer !== 'page' && !(ch.x || CLOSE_RE.test(ch.t))) { const dk = sc.layer + '|' + sc.title; dlgActs.set(dk, (dlgActs.get(dk) || 0) + 1) }
     await p.waitForTimeout(ok ? 220 : 400);
 
     function choose(sc, started) {
@@ -192,6 +192,8 @@ async function play(p) {
       /* this buổi is done (persona acts used, or 40+ taps without the clock moving — map rooms «Ở đây còn N người», E-S1 Dư đồ loop): take «Sang buổi / Sang ngày mới» wherever it shows */
       const nx = nonExit.find(isNext); if (nx && started && (acts >= actsPerBuoi || tapsB > 40)) return { ...nx, next: true };
       if (!isPage) {
+        /* a person closes a utility / notebook dialog (Lịch tháng, Sổ ghi, Tư trang …) after a few acts; any dialog after 20 acts with the clock still (s2d «Lịch tháng» 15 min typing notes) */
+        { const n = dlgActs.get(sc.layer + '|' + sc.title) || 0, cl = b.find(close); if (cl && (n >= 4 && UTIL_RE.test(sc.title) || n >= 20)) { R.harness.dlgClose = (R.harness.dlgClose || 0) + 1; return cl } }
         const main = nonExit.filter(x => !LOW_RE.test(x.t) && !/^kéo xuống/i.test(x.t));
         if (main.length) return score(main);
         /* a long dialog (Tin báo …): its ✕ / Đóng / «Đã xem hết» may sit below — scroll its own scroller like a person */
