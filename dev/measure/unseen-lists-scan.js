@@ -30,6 +30,7 @@ const ROWS=[
  ['«Kẻ hầu ăn bớt» pilfer card (jeitem)','jeitem.js',/function eitPilEvent\(X\)/,'UNSEEN',/const eitPilCard=rcpReg\("eitPil"/,'rcpReg eitPil: servant id + piece kind + price (the piece left the chest before)','≈ 40 chars'],
  ['«Kính sự phòng ghi sổ» / «Lời ra tiếng vào» morning card (jne)','jne.js',/function morningAfter\(\)/,'UNSEEN',/const neMornCard=rcpReg\("neMorn"/,'rcpReg neMorn: tier + mocker id (Danh applied before, in the same write)','≈ 30 chars'],
  ['world event cards «Hỏa hoạn lớn», «Sứ đoàn vào triều» … (jworld)','jworld.js',/function startCard\(w\)/,'UNSEEN',/const worldCardK=rcpReg\("world"/,'rcpReg world: the window id (remade from the live window)','≈ 15 chars'],
+ ['composed world cards (jworldc wcCard)','jworldc.js',/function wcCard\(w\)/,'UNSEEN',/const wcCardK=rcpReg\("wc"/,'rcpReg wc: the window id','≈ 10 chars'],
  ['NT.list — «Tin báo» notices (the top-bar «!» box)','jnotice.js',/const NT=window\.NT=\{list:\[\]/,'UNSEEN',/d\.nt=ntSer\(\)/,'ser() nt (≤ BAL.noticeMax rows; go made again from the id)','≈ 3 KB at 20 rows'],
  ['NT.pend — the chip waiting for a dialog to close','jnotice.js',/NT\.pend=it/,'UNSEEN',/d\.nt=ntSer\(\)/,'= an NT.list row: after a load it is in the box (unread), no second chip','0'],
  ['KB — kitKnow batch («Ngươi biết thêm N điều»)','jnotice.js',/const KB=\{m:new Map\(\)/,'NOLIST',null,'flushed into NT.list in the same tick (setTimeout 0)','0'],

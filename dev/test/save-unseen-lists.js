@@ -17,7 +17,7 @@
    the identity card is open, none at once at «Nhận thân phận») — a MUTATE run must FAIL.
    usage: node dev/test/save-unseen-lists.js [page=index.html] [devices=fold,ipadAir] [seed=1]   (serves the repo root = the BUILT site)
    exit 0 = every case PASS. */
-const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs');
+const {chromium}=require('playwright');const DBGD=!!process.env.SUL_DBGD;const D=require('./lib/device');const fs=require('fs');
 const [,,PAGE='index.html',DEVS='fold,ipadAir',SEED='1']=process.argv;
 const ONLY=(process.env.SUL_ONLY||'').split(',').filter(Boolean);const want=n=>!ONLY.length||ONLY.includes(n);const MUT=process.env.SUL_MUTATE||'';
 /* the player helpers of dev/test/save-boundary-reload.js (settle = answer every card / close scenes like a player; newLife; after) — one copy, read from that file */
@@ -36,7 +36,7 @@ async function play(b,dev,url,seed,fn){const ctx=await D.newDeviceContext(b,dev,
  await ctx.route(/\.(webp|png|jpg|jpeg|mp3|ogg|m4a|mp4|webm)(\?|$)/,r=>r.abort());
  const p=await ctx.newPage();p.setDefaultTimeout(240000);const pe=[];p.on('pageerror',e=>pe.push(e.message.slice(0,160)));
  const open=async()=>{await D.openDirect(p,url);await p.waitForFunction(()=>typeof deser==='function'&&typeof start==='function'&&document.querySelector('#slots button'));await p.waitForTimeout(1500);await p.evaluate(H);
-  await p.evaluate(()=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}});if(MUT&&MUTJS[MUT])await p.evaluate(MUTJS[MUT])};
+  await p.evaluate(()=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}});if(MUT&&MUTJS[MUT])await p.evaluate(MUTJS[MUT]);if(DBGD)await p.evaluate(()=>{window.__dbgD=1})};
  try{return await fn(p,open,pe)}finally{await ctx.close()}}
 /* a TRUE reload, then the title: what Sổ 1 offers, and (when it offers it) «Tiếp tục kiếp này» */
 async function reloadTitle(p,open){await p.reload({waitUntil:'domcontentloaded'});await open();
@@ -115,10 +115,12 @@ async function nl4(b,dev,url,seed){return play(b,dev,url,seed,async(p,open,pe)=>
    costs as on the card (LAW 2/3: the cost card cannot be skipped by reload). env SUL_FC=month,year (flips) · SUL_FCW=0,3000 (waits) · SUL_FCS=1,2 (seeds).
    MUTATE rk: the generator remake is dropped (rcpMk → nothing) → must FAIL. */
 const FCAL={month:'S.tuan=2;S.buoi=B4L-1',year:'S.month=12;S.tuan=2;S.buoi=B4L-1'};
-const UNSEEN=`(()=>{const t=m=>String(m&&(m.t||m.title||m.pid)||'').replace(/<[^>]+>/g,'').slice(0,60);const L=[];for(const m of Q)if(!m.nl)L.push(t(m)+(m.opts&&m.opts.length?'*':''));
+const UNSEEN=`(()=>{const t=m=>String(m&&(m.t||m.title||m.pid)||'').replace(/<[^>]+>/g,'').slice(0,60)+(m&&m.rum95?'#'+m.rum95:'');const L=[];for(const m of Q)if(!m.nl)L.push(t(m)+(m.opts&&m.opts.length?'*':''));
  if(typeof SP13!=='undefined')for(const x of SP13.L)L.push(t(x.m)+(x.m.opts&&x.m.opts.length?'*':''));if(typeof EVHOLD!=='undefined')for(const h of EVHOLD)L.push(t(h.m)+(h.m.opts&&h.m.opts.length?'*':''));return L.sort()})()`;
 async function flipcards(b,dev,url,seed,flip,wait){return play(b,dev,url,seed,async(p,open,pe)=>{await open();
  const r=await p.evaluate(async([cal,wait,vec,hud,uns])=>{__sbr.newLife('thd');await __sbr.settle();eval(cal);used=0;render();await __sbr.settle();
+  if(window.__dbgD){Error.stackTraceLimit=80;/* debug (SUL_DBGD=1): every Danh change and every slot write, with a stack */let d=S.danh;const W=window.__dd=[];const S0=S;Object.defineProperty(S0,'danh',{configurable:true,get(){return d},set(v){if(v!==d)W.push(['danh',d,v,Date.now(),new Error().stack.split('\n').slice(2,30).filter(x=>!/at apply \(/.test(x)).map(x=>x.trim().slice(0,90)).join(' < ')]);d=v}});
+   const si=localStorage.setItem.bind(localStorage);localStorage.setItem=(k,v)=>{if(k==='hclh-save-v2-1'){try{W.push(['save',JSON.parse(v).S.danh,0,Date.now(),''])}catch(e){}}return si(k,v)}}
   const sl=t=>new Promise(r=>setTimeout(r,t));const tap=()=>{used=BAL.time.khac;const n=document.getElementById('next');n.disabled=false;n.click()};
   {const k=__sbr.key();tap();await __sbr.after(k)}/* one buổi before the flip (→ tối), answered as a player */
   /* the flip tap (tối of the last tuần): the night before it (Kính sự phòng, the night scene) is answered as a player until the date changes;
@@ -129,7 +131,8 @@ async function flipcards(b,dev,url,seed,flip,wait){return play(b,dev,url,seed,as
    if(__sbr.dawn()){const d=document.getElementById('dawn');const bt=[...d.querySelectorAll('button')].filter(x=>__sbr.vis(x));if(bt.length)bt[bt.length-1].click();else{d.classList.remove('on');d.hidden=true}}
    const sc=document.querySelector('.kmov:not(.km-out) button,#kmrew button');if(sc)sc.click();await sl(100)}
   await sl(wait);const L=eval(uns);const all=Q.concat(typeof SP13!=='undefined'?SP13.L.map(x=>x.m):[],typeof EVHOLD!=='undefined'?EVHOLD.map(h=>h.m):[]);
-  const code=all.filter(m=>m&&m.opts&&m.opts.length&&typeof jqSaveable==='function'&&!jqSaveable(m)).map(m=>String(m.t||'').slice(0,40)+(m.__rkLen?' ra '+m.__rkLen:''));return{code,k0,key:__sbr.key(),v:eval(vec)(S),hud:eval(hud)(),L,stat:{sp:typeof SP13!=='undefined'?SP13.stat.unsaved||0:0,jq:typeof JQ!=='undefined'?JQ.stat:{}}}},[FCAL[flip],wait,VEC,HUD,UNSEEN]);
+  const code=all.filter(m=>m&&m.opts&&m.opts.length&&typeof jqSaveable==='function'&&!jqSaveable(m)).map(m=>String(m.t||'').slice(0,40)+(m.__rkLen?' ra '+m.__rkLen:''));return{sv:__sbr.saved(),dd:window.__dd||null,code,k0,key:__sbr.key(),v:eval(vec)(S),hud:eval(hud)(),L,stat:{sp:typeof SP13!=='undefined'?SP13.stat.unsaved||0:0,jq:typeof JQ!=='undefined'?JQ.stat:{}}}},[FCAL[flip],wait,VEC,HUD,UNSEEN]);
+ if(DBGD)console.log((r.dd||[]).slice(-8).map(x=>[x[0],x[1],x[2],x[3]%100000,String(x[4]).split(' < ').filter(y=>!/index.html\?khost=0:(4453|66782):/.test(y)).slice(0,3).join(' < ')].join(' ')).join('\n'));
  const t=await reloadTitle(p,open);let a=null,duty=null;
  if(t.cont){await cont(p);a=await p.evaluate(([vec,hud,uns])=>({key:__sbr.key(),v:eval(vec)(S),hud:eval(hud)(),L:eval(uns),fail:(window.__rcpFail||[]).map(x=>x.slice(0,2).join(':'))}),[VEC,HUD,UNSEEN]);
   /* the cost card answered after the reload: «Chu toàn lễ nghĩa» pays bạc (or «Bớt lễ nghĩa» costs Danh) as on the card */
@@ -138,6 +141,7 @@ async function flipcards(b,dev,url,seed,flip,wait){return play(b,dev,url,seed,as
    showModal();chooseM(m.opts.indexOf(o));return{fx:o.fx,db:S.bac-b0,dd:S.danh-d0}})}
  const miss=[];if(a){const A=a.L.slice();for(const x of r.L){const i=A.indexOf(x);if(i<0)miss.push(x);else A.splice(i,1)}}
  const dutyOk=!duty||(duty.db===duty.fx.bac||duty.dd<0);
+ if(DBGD)console.log('at capture: screen '+r.v.slice(0,40)+' | sổ '+r.sv);
  const pass=t.cont&&a&&a.key===r.key&&a.v===r.v&&a.hud===r.hud&&!miss.length&&dutyOk&&!pe.length;
  return{pass,line:`${flip} ${wait} ms · ${r.k0} → ${r.key} · open/waiting ${r.L.length} (${r.L.filter(x=>x.endsWith('*')).length} with choices): ${r.L.join(' | ')}
     after reload ${a?a.key:'NO «Tiếp tục»'} · ${a?(miss.length?'LOST '+miss.length+': '+miss.join(' | '):'every card back ('+a.L.length+')'):''}${a&&a.v!==r.v?' · DRIFT '+a.v+' (was '+r.v+')':a?' · same numbers':''}${a&&a.hud!==r.hud?' · HUD '+a.hud:''}${duty?` · Lễ nghĩa after reload: Bạc ${duty.db} (card ${duty.fx.bac})${dutyOk?'':' WRONG'}`:' · no Lễ nghĩa card'}${r.code.length?' · code cards with no generator at the flip: '+r.code.join(' | '):''}${a&&a.fail.length?' · rcpFail '+a.fail.join(','):''}${pe.length?' · pageerror '+pe[0]:''}`}})}
