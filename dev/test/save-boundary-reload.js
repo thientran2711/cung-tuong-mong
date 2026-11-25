@@ -48,6 +48,9 @@ const H=`window.__sbr={
    if(typeof kmBusy!=='undefined'&&kmBusy&&!document.querySelector('.kmov,#kmrew')&&typeof kmReset==='function'){try{kmReset()}catch(e){}}
    await sl(250)}return !this.busy()},
  newLife(origin){localStorage.removeItem('hclh-save-v2-1');SLOT=1;document.getElementById('title').hidden=true;
+  /* TEST SETUP ONLY (r3): j52 nlBegin waits ≤2.5 s for the figure pictures (aborted here) before it makes the life → under CPU load S was not set yet
+     when start() returned (TypeError S.name, LIVE too); the pictures count as ready, the identity card logic itself is unchanged */
+  if(typeof nlFigsReady==='function')nlFigsReady=()=>true;
   for(let i=0;i<80;i++){window.__forceOrigin=origin;start();const want=origin==='cnv';if(!!(typeof isSrv==='function'&&isSrv())===want)break}window.__forceOrigin=null;
   try{if(typeof nlAccept==='function')nlAccept(false)}catch(e){}
   /* the life's opening cards (prologue, entry) are not under test: cleared, as dev/test/spread-e2e.js does */quiet=false;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;
