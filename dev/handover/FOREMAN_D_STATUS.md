@@ -524,3 +524,4 @@ Push recipe /home/user/wt/dpush2.sh (per container; text in HANDOVER D depth 3 b
   (3) WORKLIST items marked D: #9 personality-driven thresholds + deeper nết, #26 relationship effects of talking to others' people + greeting etiquette — write their real state (LIVE / branch / not started) in this file; continue whichever is not done.
   Report «FOR MAIN 135» lines.
 - (25/11 06:40Z) FOREMAN D ROOT STANDBY = session_01D3E3Na4WaA2w77G38gsY8w, depth 0 (limit 8). Waits for TAKE OVER NOW from D line (current ROOT D NXyFG1NB).
+- (25/11 06:42Z) D STANDBY registered = session_01D3E3Na4WaA2w77G38gsY8w (idle; acts only on «TAKE OVER NOW» from ROOT D).
