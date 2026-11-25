@@ -710,7 +710,7 @@ function kitRoulette(o){const done=()=>{try{o.done&&o.done()}catch(e){}};if(!o||
  const rm=matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT&&OPT.fxon===false);
  const old=$("kroul");if(old)old.remove();const ov=document.createElement("div");ov.id="kroul";ov.className="kroul"+(rm?" krrm":"");const land=kitView().pages===2;
  const items=o.items.slice();
- ov.innerHTML=`<div class="krbox"><div class="krhead"><b>Luân hồi</b><small class="krsub">Các thân phận trong vòng luân hồi</small></div>
+ ov.innerHTML=`<div class="krbox"><div class="krhead"><b>Luân hồi</b><small class="krsub">Luân hồi xoay vần, kiếp này ta là ai?</small></div>
   <div class="krgrid">${items.map((it,i)=>`<div class="krt" data-i="${i}" data-k="${it.k}"><div class="krc"><div class="krf">${kitOriginFace(it)}</div><div class="krb" aria-hidden="true"></div></div></div>`).join("")}</div>
   <div class="krbar"><button class="kbtn krgo" type="button">Tiếp</button><button class="kbtn alt krskip" type="button">Bỏ qua</button></div></div>`;
  kitBackdrop(ov,"roulette");document.body.appendChild(ov);kitRouFit(ov);const rf=()=>{if(document.body.contains(ov)&&!picked)kitRouFit(ov)};addEventListener("resize",rf);try{document.fonts&&document.fonts.ready.then(rf)}catch(e){}
