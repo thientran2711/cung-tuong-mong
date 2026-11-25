@@ -1,0 +1,6 @@
+BUG stuck no progress 15 min on .dlg «Kính sự phòng báo tin»
+BUG stuck no progress 15 min on .dlg «Kính sự phòng ghi sổ»
+RESUME flight2-s9 from 2026-11-25T09:57:31.071Z buổi 17
+BUG dead close button has no effect: .dlg «Tâm trạng · Ta» «Lui»
+RESUME flight2-s9 from 2026-11-25T09:57:31.071Z buổi 17
+RESUME flight2-s9 from 2026-11-25T10:12:33.131Z buổi 21

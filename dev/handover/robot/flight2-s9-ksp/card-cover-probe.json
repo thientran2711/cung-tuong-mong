@@ -1,0 +1,82 @@
+[
+ {
+  "x": 349,
+  "y": 566,
+  "tag": "IMG",
+  "src": "ctoria-tntt.workers.dev/img/act-tam-cho-gia-h.webp",
+  "rect": [
+   319,
+   533,
+   66,
+   66
+  ],
+  "pe": "auto",
+  "chain": [
+   "IMG.",
+   "FIGURE.ksart ksart-tall kartf2 kopic ",
+   "SPAN.kaart",
+   "BUTTON.opt ka kart kopt khideout kodw",
+   "DIV.opts kpopts k3btns k3rows k3ti"
+  ]
+ },
+ {
+  "x": 440,
+  "y": 537,
+  "tag": "SPAN",
+  "src": "",
+  "rect": [
+   392,
+   530,
+   173,
+   15
+  ],
+  "pe": "auto",
+  "chain": [
+   "SPAN.kan",
+   "SPAN.kat",
+   "SPAN.kabody",
+   "BUTTON.opt ka kart kopt khideout kodw",
+   "DIV.opts kpopts k3btns k3rows k3ti"
+  ]
+ },
+ {
+  "x": 454,
+  "y": 566,
+  "tag": "SPAN",
+  "src": "",
+  "rect": [
+   392,
+   530,
+   197,
+   38
+  ],
+  "pe": "auto",
+  "chain": [
+   "SPAN.kat",
+   "SPAN.kabody",
+   "BUTTON.opt ka kart kopt khideout kodw",
+   "DIV.opts kpopts k3btns k3rows k3ti",
+   "DIV.k3right"
+  ]
+ },
+ {
+  "x": 540,
+  "y": 566,
+  "tag": "SPAN",
+  "src": "",
+  "rect": [
+   392,
+   530,
+   197,
+   38
+  ],
+  "pe": "auto",
+  "chain": [
+   "SPAN.kat",
+   "SPAN.kabody",
+   "BUTTON.opt ka kart kopt khideout kodw",
+   "DIV.opts kpopts k3btns k3rows k3ti",
+   "DIV.k3right"
+  ]
+ }
+]
