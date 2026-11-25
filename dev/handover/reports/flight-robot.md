@@ -288,3 +288,17 @@ Observation for a game worker (not this item): on the reveal the face shows scat
 | laws 4 / 7 / 9 | no number, no player text, no UI |
 Carries test-path-fix (incl. 003ac0b0 hoa-dien retap = FAIL). OPEN, not blocking this land (says Foreman F #7: it comes from ROLE B #2): toil-overlay Fold hollow green (G1 covered token) + G2 (#mefig layer shown on her hidden figure after a token tap). It is no worse than main's overlay test (red on a false positive).
 PASS sha correction (test-path-fix-3): review/test-path-fix-3-r on origin is cb67ffba (same tree eb293b26 as my tested bfc6ebb6, FF 9f72524b) — land cb67ffba.
+
+## REVIEW harness robot-realtap 5edf09f6..bfe29c95 (BIG REVIEWER #2 session_01UV1SzhBrzCVc4CVbM2dCsJ, 11/25/2026) — PASS bfe29c95 (landable merge on LIVE: review/robot-realtap-r cd89d545, test files only, 5 files)
+PRIORITY #1 CHECK: OD 25/11 ~05:10Z real taps / ~05:15Z no cap / ~05:20Z no bot exit road | main: no realtap.js / robot-rt.js | review/*: test-path-fix-3-r + button-crawl-fix-2-r carry older realtap.js (same API) | claims Foreman F #8.
+Code read (robot-rt.js, robot-rt-coop.js, realtap.js at bfe29c95): 0 .click()/dispatchEvent; keyboard only to TYPE into a text input (ám hiệu / name — a person types); Escape gone from unstick (ladder = tap ✕ → tap a safe non-exit/leave/nav button or bare space outside the top layer → reload + reopen save); no time/buổi cap (cap null); EXIT_RE/LEAVE_RE/NAV_RE kept; a covered target → DEAD BUTTON (R.dead + shot); info layers (#kpzoom/#kpinfo/#kpop/#rtoast when it covers a button) tapped away ≤3×, then NO EFFECT bug + shot; bare taps never on #rtoast/.kkem/.kalog; .kodm/.kgl chips not moves (button-crawl covers them); page crash → crash bug into ckpt + exit 3; COOP_URL web-security flags only when that env is set (own Worker tests).
+Runs on LIVE 9f72524b:
+| run | result |
+|---|---|
+| Fold slice 4 (seed 11) | 29 taps · 0 dead · 0 stuck · 0 bugs |
+| iPad slice 4 (seed 12, run in parallel with Fold) | 130 taps · 0 dead · 1 stuck «life not (re)opened within 5 min on #title» (title with NO buttons, S null, Q 1; shot + dump written) → life went on to buổi 4 |
+| iPad slice 4 again, alone, RTV=1 | 58 taps · 0 dead · 0 stuck: title → Chọn sổ → roulette → Thân phận → Tiền truyện 4/4 → Tuyển chọn → #rtoast tapped away → Sang buổi |
+| crash self-test Fold (RT_TEST_CRASH=2, cp=1) | exit 3 «PAGE CRASHED … rerun with resume=1» → resume=1: same life id, harness.resumed[1], crashes 1, bug type crash kept, buổi 4, exit 0 |
+Not run: co-op room runner (needs a live room); review by code only.
+Watch (not blocking): the parallel-start iPad title with no buttons for 5 min looks like the known first-run loader issue (no 429 / slow-CDN retry, two cold profiles at once) — the harness reported it correctly; if runners see «#title «»» stuck again → game loader item for a worker.
+Landing note: realtap.js add/add with test-path-fix-3-r and button-crawl-fix-2-r — keep THIS one (newest, same API).
