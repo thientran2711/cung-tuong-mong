@@ -335,3 +335,24 @@ F3. CO-NGU-TITLES: poetic name for the «Ban hoa» ending.
 F4. (old F2) day-life perf basis not in perfgate.json.
 ### VERDICT: **BIG PASS 2075b0f4** (the delta; branch review/selection-scene-r19; ancestor = LIVE 9f72524b). 703fad03's invented name = FAIL, reverted (c271484c). NOT go-live ready as a whole: golive / quickcheck core gates are red from the LC15 stack itself (F1 coop rebirth hang, F2 q-softlock + button-crawl) — LC15 / MAIN must clear those on the stack; this delta adds none of them.
 Worktrees /home/user/wt/rv19, rv19m, rvst, rvho removed after this report; scratch shots deleted; no CDN upload by me (s19-pair.jpg left for MAIN).
+
+## SELSCENE-19 r2 — re-merge onto kit pack-4 LIVE (25/11 ~20:30Z) → **LAND READY 8505ecdf** (review/selection-scene-r19; MAIN 145 session_01V1ZZGzUrV4o1JLUwHSreTc)
+- Base: r19 2075b0f4 + review/co-ngu-banhoa 449b058d («Ban hoa» → «Duyên cung lỡ hẹn») + LIVE 08e7d79f (kit pack-4).
+- Conflicts: assemble.py (r19 list incl. jselx*, minus jdeadcard.js, which hardlock-choice r3 merged into jnolock); jksize kszLivePick3_0 → ONE pick rule. The base pick (first qualifying S..XL) comes from the fitfast speed path; hints are the same-frame memo §98.14, then __kszP, then KSZ_PHINT §98.7. **The memo is now a hint too: the size below it is still probed** (EQUIV caught the old memo giving M/L/XL where the full loop gave S). Every pack-4 rule runs on top: #2c body-up, #2b step-down, §56.25 iPad grow. index.html / sw.js rebuilt.
+- EQUIV (kit-fitfast-prof, Fold + iPad, every hint and every memo size): many / choice / two / night bad:[]. «fest» is not repeatable on bare LIVE 08e7 either (2 of 4 runs full-again ≠ ref), so it is a pre-existing pack-4 state/timing issue, sent to KK31.
+- Gates on 8505ecdf:
+
+| gate | result |
+|---|---|
+| kit-faces-opts | 36/36 |
+| kit-opts-touchdrag | 8/8 |
+| kit-notice-action | 16/16 |
+| kit-one-opt-tap | 30/30 ×3; 1 run of 4 had FAIL 1 on ksp-card «LOCKED» (random-life lock) |
+| co-ngu-titles scan | PASS |
+| sid-unique, sid-rekey-known | PASS |
+| k61-key-life, k61-wkey-oldsave | PASS |
+| selx-rules / wire / days / days2 | PASS |
+| selx-map | 4/4 run alone; 1 TypeError (no «Ra Dư đồ» button) in the parallel batch under load |
+| selx-flow Fold + iPad | PASS |
+
+- KK31 (session_01V1ZZH4F57paDBkBCH9PESr) got the jksize hunk (law 9 read). Its verdict is pending.
