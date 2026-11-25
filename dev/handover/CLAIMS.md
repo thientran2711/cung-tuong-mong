@@ -1664,3 +1664,4 @@ selection-scene BIG review | review/selection-scene 9ee4f5bc | session_01V1ZZH1u
 | E RERUN E-C1 (U14-U16; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-C1-* | FOREMAN E (root) | (opening) | RUNNING | 25/11 06:58Z |
 | E RERUN E-C2 (U17-U18; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-C2-* | FOREMAN E (root) | (opening) | RUNNING | 25/11 06:58Z |
 | E RERUN E-C3 (U19-U21; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-C3-* | FOREMAN E (root) | (opening) | RUNNING | 25/11 06:58Z |
+| F flight2 slot 7 runner (thd_tho rand) | dev/handover/robot/flight2-s7.* | session_01UV1Szi98Jr15jEk9h57rXy | RUNNING | 25/11 06:57Z | F |
