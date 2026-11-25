@@ -1754,3 +1754,4 @@ B BIG rv hardlock-choice-r4 9f2522d2 (delta on LC15 top) | review/hardlock-choic
 SELSCENE-19 merge (selection-scene onto LC15 stack, one k61/sid rule) | review/selection-scene-r19 | session_01V1ZZH1gwnq8CYeYJgyTQS2 | RUNNING | 2026-11-25T13:28Z (MAIN 140)
 net-ghen wave 2: bisect coop-e2e co-op advance fail + rc-scan rerun + remaining gates + SSK | review/net-ghen-2 | session_01D3E3NYbT6xQfrCM9WRMW7P (W9, successor of W8 session_01D3E3NZWK4yXecF776eYGPf) | RUNNING | 2026-11-25T13:33Z (Foreman D depth 3)
 SANGBUOI-HELD-FIX r3 (§9 leftovers) | review/sangbuoi-held-fix | session_01V1ZZH1Y4EvZtxtrnsR1sjr | RUNNING | 2026-11-25T13:41Z (MAIN 141)
+| F M-FIX-3 (opus; MAIN 140 order 13:35Z: odds lie on delayed-consequence cards e.g. Giả mang thai «Rất vững» → sure death; verdict text vs real nightLog record; «BẠI» toast after «Rất vững»; whole families) | review/m-fix-3 | (opening, FOREMAN F #12 session_01UV1SzkjNu6H8cD4bN4xqiu) | RUNNING | 2026-11-25T13:47Z |
