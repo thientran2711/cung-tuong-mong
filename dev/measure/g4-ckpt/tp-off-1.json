@@ -1,0 +1,2420 @@
+{
+ "job": {
+  "id": "tp-off-1",
+  "origin": null,
+  "road": null,
+  "bot": "sens",
+  "seed": 1,
+  "dev": "fold",
+  "url": "file:///home/user/wt/tp-g4c/game.html"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "3d86af86",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [
+   {
+    "at": 519,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 9 ng"
+   },
+   {
+    "at": 2240,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+   },
+   {
+    "at": 2767,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Kính sự phòng"
+   },
+   {
+    "at": 330,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Hôn sự"
+   }
+  ],
+  "slice": null,
+  "areaTaps": 75,
+  "infoTaps": 112,
+  "scrolls": 109,
+  "dlgClose": 420,
+  "dlgScroll": 6,
+  "loops": 4,
+  "taps0": 0,
+  "resumed": [
+   {
+    "at": "2026-11-25T11:56:32.820Z",
+    "buoi": 104,
+    "from": "2026-11-25T11:31:45.725Z"
+   },
+   {
+    "at": "2026-11-25T12:25:40.993Z",
+    "buoi": 130,
+    "from": "2026-11-25T12:11:43.662Z"
+   }
+  ]
+ },
+ "life": null,
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "game|dialog queue holds 3 copies of «Tâm trạng · Phi Tống Dao Quang» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 3 copies of «Tâm trạng · Phi Tống Dao Quang» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 81,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Quách Tố Huyên"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 3 copies of «Tâm trạng · Quý phi Thiệu Linh Vận» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 3 copies of «Tâm trạng · Quý phi Thiệu Linh Vận» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 176,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Quách Tố Huyên"
+   }
+  },
+  {
+   "k": "dead|close button has no effect: .dlg «Tâm trạng · Ta» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tâm trạng · Ta» «Lui»",
+   "n": 1,
+   "at": 185,
+   "shot": "/home/user/wt/tp-g4c/shots-tp-off-1/noeffect-1795603426678.png"
+  },
+  {
+   "k": "game|dialog queue holds 2 copies of «Tâm trạng · Đáp ứng Nhâm Tố Nga» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 2 copies of «Tâm trạng · Đáp ứng Nhâm Tố Nga» (each close pops one; looks like a dead ✕)",
+   "n": 2,
+   "at": 349,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Quách Tố Huyên"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 4 copies of «Tâm trạng · Thường tại Lưu Tâm Duyệt» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 4 copies of «Tâm trạng · Thường tại Lưu Tâm Duyệt» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 366,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Quách Tố Huyên"
+   }
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 9 ng»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 9 ng»",
+   "n": 1,
+   "at": 519,
+   "shot": "/home/user/wt/tp-g4c/shots-tp-off-1/loop-1.png",
+   "dump": "/home/user/wt/tp-g4c/shots-tp-off-1/loop-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Quách Tố Huyên"
+   },
+   "buttons": [
+    "Ô lưu",
+    "Xem bản thân",
+    "Sắc91Tài59Tâm cơ41Đức29Danh23Sủng4",
+    "Bạc158Sức100/100",
+    "Buổi tối, còn 3 khắc",
+    "Hôm nay mặt mộc",
+    "mưa rào",
+    "Quẻ Hạ hạ (Hung)",
+    "Tâm trạngBình thản+4",
+    "Về phòng",
+    "Tin báo",
+    "Tất cả 20/29Nghỉ ngơi 4/4Giao thiệp 2/3Học tập · Tài nghệ 3/4Mưu kế 5/5Y dược 2/2Lễ nghi 1"
+   ],
+   "trace": [
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 9 ng» «Hoàng tự»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 9 ng» «Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 9 ng» «Sắc91Tài59Tâm cơ41Đức29Danh23Sủng4»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 9 ng» «Hành sự»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 9 ng» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 9 ng» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 9 ng» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 9 ng» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 9 ng» «Mưu kế 5/5»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 9 ng» «Mưu kếMưu kếXem sổ nguyệt sựRất vữngLót tay thái g»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 9 ng» «Mưu kếMưu kếXem sổ nguyệt sựRất vữngLót tay thái g»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 9 ng» «Mưu kếMưu kếXem sổ nguyệt sựRất vữngLót tay thái g»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 9 ng» «Mưu kếMưu kếXem sổ nguyệt sựRất vữngLót tay thái g»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 9 ng» «Giao thiệp 2/3»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 9 ng» «Giao thiệpGiao thiệpNghe ngóng chungRất vữngCung n»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 9 ng» «Giao thiệpGiao thiệpNghe ngóng chungRất vữngCung n»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 9 ng» «Giao thiệpGiao thiệpNghe ngóng chungRất vữngCung n»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 9 ng» «Giao thiệpGiao thiệpNghe ngóng chungRất vữngCung n»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 9 ng» «mưa rào»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 9 ng» «mưa rào»"
+   ]
+  },
+  {
+   "k": "game|dialog queue holds 7 copies of «Tâm trạng · Đáp ứng Nhâm Tố Nga» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 7 copies of «Tâm trạng · Đáp ứng Nhâm Tố Nga» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 681,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Quách Tố Huyên"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 4 copies of «Tâm trạng · Đáp ứng Nhâm Tố Nga» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 4 copies of «Tâm trạng · Đáp ứng Nhâm Tố Nga» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 686,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Quách Tố Huyên"
+   }
+  },
+  {
+   "k": "dead|close button has no effect: .dlg «Tâm trạng · Đáp ứng Nhâm Tố Nga» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tâm trạng · Đáp ứng Nhâm Tố Nga» «Lui»",
+   "n": 1,
+   "at": 788,
+   "shot": "/home/user/wt/tp-g4c/shots-tp-off-1/noeffect-1795604029788.png"
+  },
+  {
+   "k": "game|dialog queue holds 4 copies of «Tâm trạng · Quý nhân Thôi Chiêu Hoa» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 4 copies of «Tâm trạng · Quý nhân Thôi Chiêu Hoa» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 949,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Quách Tố Huyên"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 3 copies of «Tâm trạng · Quý nhân Lưu Tâm Duyệt» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 3 copies of «Tâm trạng · Quý nhân Lưu Tâm Duyệt» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 1486,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 4,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Quách Tố Huyên"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 5 copies of «Tâm trạng · Quý phi Thiệu Linh Vận» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 5 copies of «Tâm trạng · Quý phi Thiệu Linh Vận» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 1500,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 4,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Quách Tố Huyên"
+   }
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng»",
+   "n": 1,
+   "at": 2240,
+   "shot": "/home/user/wt/tp-g4c/shots-tp-off-1/loop-2.png",
+   "dump": "/home/user/wt/tp-g4c/shots-tp-off-1/loop-2-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 6,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Quách Tố Huyên"
+   },
+   "buttons": [
+    "Ô lưu",
+    "Xem bản thân",
+    "Sắc91Tài59Tâm cơ41Đức19Danh47Sủng2",
+    "Bạc80Sức91/96",
+    "Buổi tối, còn 4 khắc",
+    "Tâm bệnh · nhẹ",
+    "Hôm nay mặt mộc",
+    "trăng thu",
+    "Quẻ Hạ hạ (Sức khỏe)",
+    "Tâm trạngBình thản-4",
+    "Về phòng",
+    "Tin báo"
+   ],
+   "trace": [
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tư trang»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Việc»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tâm trạngBình thản-4»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tin báo»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tài nghệ»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «ⓘ luật Đức»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Học tập · Tài nghệHọc tập · Tài nghệCác lối, sách »",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Vũ · Y · Nữ công 8/12»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Giao tình»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «với Ta»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Hậu cung»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tâm trạngBình thản-4»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tâm trạngBình thản-4»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Mệnh truyện»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Mệnh truyện»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tin báo»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tài nghệ»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tài nghệ»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «trăng thu»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Mệnh truyện»"
+   ]
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on .dlg «Kính sự phòng»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on .dlg «Kính sự phòng»",
+   "n": 1,
+   "at": 2767,
+   "shot": "/home/user/wt/tp-g4c/shots-tp-off-1/loop-3.png",
+   "dump": "/home/user/wt/tp-g4c/shots-tp-off-1/loop-3-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 7,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Quách Tố Huyên"
+   },
+   "buttons": [
+    "Lui",
+    "",
+    "tạmGiữ chân Hoàng thượngKhó lườngTốnkhôngĐượcdựa vào ân sủng, nhan sắc, tài nghệ · thành: "
+   ],
+   "trace": [
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Giao thiệpGiao thiệpLén trả lạiRất vữngTốn1 khắcTh»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Giao thiệpGiao thiệpLén trả lạiRất vữngTốn1 khắcTh»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Giao thiệpGiao thiệpLén trả lạiRất vữngTốn1 khắcTh»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tài nghệ»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tứ đức 8/9Cầm kỳ thi họa 8/12Vũ · Y · Nữ công 8/12»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Hậu cung»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Hoàng tự»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Hôn sự»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tin báo»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Hoàng tự»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tài nghệ»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Dư đồ»",
+    ".mapsc «Buổi tối, còn 2 khắc»",
+    ".mapsc «Lật thẻRất thấp»",
+    ".mapsc «Mệnh truyện»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã q»"
+   ]
+  },
+  {
+   "k": "game|dialog queue holds 4 copies of «Tâm trạng · Gia phi Tống Dao Quang» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 4 copies of «Tâm trạng · Gia phi Tống Dao Quang» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 141,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 8,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Quách Tố Huyên"
+   }
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on .dlg «Hôn sự»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on .dlg «Hôn sự»",
+   "n": 1,
+   "at": 330,
+   "shot": "/home/user/wt/tp-g4c/shots-tp-off-1/loop-4.png",
+   "dump": "/home/user/wt/tp-g4c/shots-tp-off-1/loop-4-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 8,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Quách Tố Huyên"
+   },
+   "buttons": [
+    "Lui",
+    ""
+   ],
+   "trace": [
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 3 ng» «Lẻn vào Vững3 khắc · bắt: Danh -12»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 3 ng» «đang ở đâyTẩm cung · đang ở đây»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 3 ng» «Sắc91Tài59Tâm cơ41Đức21Danh52Sủng0»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 3 ng» «Hành sự»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 3 ng» «Người được sai đi (có mới)»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 3 ng» «Mưu kế 3/5»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 3 ng» «Mưu kếMưu kếXem sổ nguyệt sựRất vữngLót tay thái g»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 3 ng» «Mưu kếMưu kếXem sổ nguyệt sựRất vữngLót tay thái g»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 3 ng» «Mưu kếMưu kếXem sổ nguyệt sựRất vữngLót tay thái g»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 3 ng» «Mưu kếMưu kếXem sổ nguyệt sựRất vữngLót tay thái g»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 3 ng» «Học tập · Tài nghệ 4/4»",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 3 ng» «Học tập · Tài nghệHọc tập · Tài nghệMúa trong yến »",
+    "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 3 ng» «Học tập · Tài nghệHọc tập · Tài nghệMúa trong yến »",
+    ".dlg «Kính sự phòng» «Chặn ngự giáMong manhTốnkhôngĐượcdựa vào nhan sắc,»",
+    "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»",
+    "#kg82 «Quay lại»",
+    "#kg82 «Quay lại»",
+    ".dlg «Tin chờ người sai đi» «Xem lời nhờTốnkhôngĐượcLời thách đấu·trả lời trước»",
+    ".dlg «Tin báo» «Lui»",
+    ".dlg «Tin chờ người sai đi» «Xem lời nhờTốnkhôngĐượcLời thách đấu·trả lời trước»"
+   ]
+  }
+ ],
+ "dead": [
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".kmov",
+   "label": "?",
+   "cover": "zero size",
+   "shot": "/home/user/wt/tp-g4c/shots-tp-off-1/dead-fold-1795603381488.png",
+   "dev": "fold",
+   "at": 140,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Quách Tố Huyên"
+   }
+  },
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tâm trạng · Ta»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/tp-g4c/shots-tp-off-1/noeffect-1795603426678.png",
+   "at": 185,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Quách Tố Huyên"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".kmov",
+   "label": "?",
+   "cover": "zero size",
+   "shot": "/home/user/wt/tp-g4c/shots-tp-off-1/dead-fold-1795603889336.png",
+   "dev": "fold",
+   "at": 648,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Quách Tố Huyên"
+   }
+  },
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tâm trạng · Đáp ứng Nhâm Tố Nga»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/tp-g4c/shots-tp-off-1/noeffect-1795604029788.png",
+   "at": 788,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Quách Tố Huyên"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".kmov",
+   "label": "?",
+   "cover": "zero size",
+   "shot": "/home/user/wt/tp-g4c/shots-tp-off-1/dead-fold-1795604382462.png",
+   "dev": "fold",
+   "at": 1141,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 3,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Quách Tố Huyên"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".kmov",
+   "label": "?",
+   "cover": "zero size",
+   "shot": "/home/user/wt/tp-g4c/shots-tp-off-1/dead-fold-1795605148058.png",
+   "dev": "fold",
+   "at": 1907,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 5,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Quách Tố Huyên"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".kmov",
+   "label": "?",
+   "cover": "img.kfr",
+   "shot": "/home/user/wt/tp-g4c/shots-tp-off-1/dead-fold-1795605809998.png",
+   "dev": "fold",
+   "at": 2568,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 7,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Quách Tố Huyên"
+   }
+  }
+ ],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 379895,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 100,
+   "year": 1,
+   "chars": 467750,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 104,
+   "year": null,
+   "chars": 467750,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 130,
+   "year": null,
+   "chars": 489179,
+   "key": "hclh-save-v2-1"
+  }
+ ],
+ "buoi": 131,
+ "steps": 3795,
+ "status": [],
+ "_loopAt": 1795609554692,
+ "_snapAt": 1795609552938,
+ "trace": [
+  [
+   314,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 3 ng» «Mưu kếMưu kếXem sổ nguyệt sựRất vữngLót tay thái g»"
+  ],
+  [
+   314,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 3 ng» «Mưu kếMưu kếXem sổ nguyệt sựRất vữngLót tay thái g»"
+  ],
+  [
+   315,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 3 ng» «Học tập · Tài nghệ 4/4»"
+  ],
+  [
+   315,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 3 ng» «Học tập · Tài nghệHọc tập · Tài nghệMúa trong yến »"
+  ],
+  [
+   315,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 3 ng» «Học tập · Tài nghệHọc tập · Tài nghệMúa trong yến »"
+  ],
+  [
+   319,
+   ".dlg «Kính sự phòng» «Chặn ngự giáMong manhTốnkhôngĐượcdựa vào nhan sắc,»"
+  ],
+  [
+   322,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   322,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   324,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   326,
+   ".dlg «Tin chờ người sai đi» «Xem lời nhờTốnkhôngĐượcLời thách đấu·trả lời trước»"
+  ],
+  [
+   328,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   330,
+   ".dlg «Tin chờ người sai đi» «Xem lời nhờTốnkhôngĐượcLời thách đấu·trả lời trước»"
+  ],
+  [
+   331,
+   ".dlg «unstick Lui»"
+  ],
+  [
+   333,
+   ".dlg «Tin chờ người sai đi» «Xem lời nhờTốnkhôngĐượcLời thách đấu·trả lời trước»"
+  ],
+  [
+   336,
+   ".dlg «Tin chờ người sai đi» «Xem lời nhờTốnkhôngĐượcLời thách đấu·trả lời trước»"
+  ],
+  [
+   338,
+   ".dlg «Tin chờ người sai đi» «Xem lời nhờTốnkhôngĐượcLời thách đấu·trả lời trước»"
+  ],
+  [
+   340,
+   ".dlg «Tin báo» «Để ta xemTốnkhôngĐượckhông»"
+  ],
+  [
+   343,
+   ".dlg «Tin báo» «Để ta xemTốnkhôngĐượckhông»"
+  ],
+  [
+   345,
+   ".dlg «Chương 2 · Lần đầu được sủng» «Danh hiệu 1/35»"
+  ],
+  [
+   346,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   347,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   347,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   348,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   349,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   350,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   351,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   352,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   353,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Thêm SủngTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   355,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   357,
+   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   358,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   359,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   360,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   361,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   364,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   366,
+   ".dlg «Lời thách đấu» «Nhường bề trênRất vữngTốnkhôngĐượcngười ấy có thiệ»"
+  ],
+  [
+   366,
+   ".dlg «Mất đồ» «Lui»"
+  ],
+  [
+   372,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   375,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   376,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   377,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   378,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   380,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   382,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   384,
+   ".dlg «Y phục dự Tiết Đông chí» «Cứ thế vào dựRất vữngTốnkhôngĐượcvào dự lễ như đan»"
+  ],
+  [
+   386,
+   ".dlg «Tiết Đông chí · Chuyện bên lề hội» «Choàng khăn, ở lại tới cuối hộiTốnSức -5ĐượcDanh +»"
+  ],
+  [
+   388,
+   ".dlg «Tiết Đông chí · Lễ» «Cúng dường bạc dầu đènRất vữngTốnBạc -15Đượcđược t»"
+  ],
+  [
+   389,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Ân tình (đêm)3»"
+  ],
+  [
+   390,
+   ".dlg «Ân tình (đêm)» «Lui»"
+  ],
+  [
+   392,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Số lần ân thưởng0»"
+  ],
+  [
+   394,
+   ".dlg «Ân thưởng» «Lui»"
+  ],
+  [
+   396,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sang buổi»"
+  ],
+  [
+   397,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tâm bệnh · nhẹ»"
+  ],
+  [
+   397,
+   ".dlg «Tâm bệnh · nhẹ» «Lui»"
+  ],
+  [
+   399,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Mệnh truyện»"
+  ],
+  [
+   400,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sang buổi»"
+  ],
+  [
+   401,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sang buổi»"
+  ],
+  [
+   402,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Chọn chính mình»"
+  ],
+  [
+   403,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Người được sai đi (có mới)»"
+  ],
+  [
+   404,
+   ".dlg «Tin chờ người sai đi» «Xem lời nhờTốnkhôngĐượcLời thách đấu·trả lời trước»"
+  ],
+  [
+   407,
+   ".dlg «Lời thách đấu» «Từ chốiRất vữngTốnkhôngĐượcgiữ thì giờ, giữ món cư»"
+  ],
+  [
+   409,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sang ngày mới»"
+  ],
+  [
+   410,
+   ".kmov «»"
+  ],
+  [
+   411,
+   ".kmov «»"
+  ],
+  [
+   412,
+   ".kmov «»"
+  ],
+  [
+   412,
+   ".kmov «»"
+  ],
+  [
+   412,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   417,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   418,
+   ".dlg «Kính sự phòng» «Chặn ngự giáMong manhTốnkhôngĐượcdựa vào nhan sắc,»"
+  ],
+  [
+   422,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   425,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   427,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   429,
+   ".dlg «Tâm trạng · Quý nhân Diêu Lưu Ly» «Lui»"
+  ],
+  [
+   431,
+   ".dlg «Tâm trạng · Tĩnh tần Thôi Chiêu Hoa» «Lui»"
+  ],
+  [
+   433,
+   ".dlg «Tâm trạng · Đáp ứng Nhâm Tố Nga» «Lui»"
+  ],
+  [
+   442,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   448,
+   "#kmrew «ThườngThan liễuHộp màu mày dùng khi điểm trang (kẻ»"
+  ],
+  [
+   449,
+   ".dlg «Lui»"
+  ],
+  [
+   450,
+   "#kmrew «Thường»"
+  ],
+  [
+   451,
+   ".dlg «Lui»"
+  ],
+  [
+   453,
+   "#kmrew «Thường»"
+  ],
+  [
+   454,
+   ".dlg «Lui»"
+  ],
+  [
+   456,
+   "#kmrew «Thường»"
+  ],
+  [
+   457,
+   ".dlg «Lui»"
+  ],
+  [
+   458,
+   "#kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»"
+  ],
+  [
+   459,
+   ".dlg «Lui»"
+  ],
+  [
+   460,
+   "#kmrew «Thường»"
+  ],
+  [
+   461,
+   ".dlg «Lui»"
+  ],
+  [
+   463,
+   "#kmrew «Nhận»"
+  ],
+  [
+   465,
+   "DEAD ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ"
+  ],
+  [
+   466,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   468,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   469,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   471,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   473,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   474,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   477,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Số lần ân thưởng0»"
+  ],
+  [
+   478,
+   ".dlg «Ân thưởng» «Lui»"
+  ],
+  [
+   480,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Hành sự»"
+  ],
+  [
+   482,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sang buổi»"
+  ],
+  [
+   487,
+   ".dlg «Có người bán tin» «Mua tinTốnBạc -40·1 khắcĐượcnghe một tin thật·đáng»"
+  ],
+  [
+   490,
+   ".dlg «Tin mua được» «Lui»"
+  ],
+  [
+   494,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Mục tiêu chương»"
+  ],
+  [
+   495,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   495,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   495,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   497,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   498,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Thêm SủngTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   500,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   502,
+   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   503,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   505,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   506,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   509,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   511,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Sủng dễ lênTốnkhôngĐượcSủng được thêm một phần hai»"
+  ],
+  [
+   513,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   515,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Sủng dễ lên · đang lấyTốnkhôngĐượcSủng được thêm m»"
+  ],
+  [
+   517,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   518,
+   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượckhôngMấtSủng được thêm m»"
+  ],
+  [
+   520,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   521,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Thêm SủngTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   524,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   525,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   525,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   527,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   529,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   533,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   534,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   538,
+   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   540,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   543,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Cung nữ thân tín tam đẳngTiểu Hoàn»"
+  ],
+  [
+   544,
+   ".kfoc «Lui»"
+  ],
+  [
+   546,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sang buổi»"
+  ],
+  [
+   550,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tai mắt0»"
+  ],
+  [
+   550,
+   ".dlg «Tai mắt» «Lui»"
+  ],
+  [
+   552,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Hậu cung»"
+  ],
+  [
+   553,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sang buổi»"
+  ],
+  [
+   554,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tâm trạngBình thản-1»"
+  ],
+  [
+   556,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   557,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Bạc3Sức91/96»"
+  ],
+  [
+   558,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   561,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sang ngày mới»"
+  ],
+  [
+   565,
+   ".dlg «Kỳ nguyệt sự» «Báo sớm, nói đã sạch kỳRất vữngTốnkhôngĐượcthẻ bài»"
+  ],
+  [
+   566,
+   ".kmov «»"
+  ],
+  [
+   567,
+   ".kmov «»"
+  ],
+  [
+   568,
+   ".kmov «»"
+  ],
+  [
+   568,
+   ".kmov «»"
+  ],
+  [
+   568,
+   ".kmov «»"
+  ],
+  [
+   569,
+   ".kmov «»"
+  ],
+  [
+   569,
+   ".kmov «»"
+  ],
+  [
+   570,
+   ".kmov «»"
+  ],
+  [
+   570,
+   ".kmov «»"
+  ],
+  [
+   570,
+   ".kmov «»"
+  ],
+  [
+   571,
+   ".kmov «»"
+  ],
+  [
+   571,
+   ".kmov «»"
+  ],
+  [
+   572,
+   ".kmov «»"
+  ],
+  [
+   573,
+   ".kmov «»"
+  ],
+  [
+   574,
+   ".kmov «»"
+  ],
+  [
+   574,
+   ".kmov «»"
+  ],
+  [
+   574,
+   ".kmov «»"
+  ],
+  [
+   575,
+   ".kmov «»"
+  ],
+  [
+   575,
+   ".kmov «»"
+  ],
+  [
+   576,
+   ".kmov «»"
+  ],
+  [
+   576,
+   ".kmov «»"
+  ],
+  [
+   576,
+   ".kmov «»"
+  ],
+  [
+   577,
+   ".kmov «»"
+  ],
+  [
+   577,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   581,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   582,
+   ".dlg «Kính sự phòng» «Tranh sủngMong manhTốnkhôngĐượcdựa vào ân sủng; tà»"
+  ],
+  [
+   583,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   584,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   585,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   588,
+   ".dlg «Tâm trạng · Huệ quý phi Thiệu Linh Vận» «Lui»"
+  ],
+  [
+   590,
+   ".dlg «Tâm trạng · Huệ quý phi Thiệu Linh Vận» «Lui»"
+  ],
+  [
+   592,
+   ".dlg «Tâm trạng · Uyển phi Đậu Yên Nhiên» «Lui»"
+  ],
+  [
+   595,
+   ".dlg «Tâm trạng · Uyển phi Đậu Yên Nhiên» «Lui»"
+  ],
+  [
+   597,
+   ".dlg «Tâm trạng · Đáp ứng Nhâm Tố Nga» «Lui»"
+  ],
+  [
+   599,
+   ".dlg «Tâm trạng · Gia phi Tống Dao Quang» «Lui»"
+  ],
+  [
+   601,
+   ".dlg «Tâm trạng · Huệ quý phi Thiệu Linh Vận» «Lui»"
+  ],
+  [
+   603,
+   ".dlg «Tâm trạng · Uyển phi Đậu Yên Nhiên» «Lui»"
+  ],
+  [
+   606,
+   ".dlg «Tâm trạng · Tần Lưu Tâm Duyệt» «Lui»"
+  ],
+  [
+   608,
+   ".dlg «Tâm trạng · Gia phi Tống Dao Quang» «Lui»"
+  ],
+  [
+   609,
+   ".dlg «Tâm trạng · Uyển phi Đậu Yên Nhiên» «Lui»"
+  ],
+  [
+   611,
+   ".dlg «Tâm trạng · Uyển phi Đậu Yên Nhiên» «Lui»"
+  ],
+  [
+   614,
+   ".dlg «Tâm trạng · Quý nhân Diêu Lưu Ly» «Lui»"
+  ],
+  [
+   615,
+   ".dlg «Tâm trạng · Tần Lưu Tâm Duyệt» «Lui»"
+  ],
+  [
+   617,
+   ".dlg «Tâm trạng · Tần Lưu Tâm Duyệt» «Lui»"
+  ],
+  [
+   619,
+   ".dlg «Tâm trạng · Gia phi Tống Dao Quang» «Lui»"
+  ],
+  [
+   621,
+   ".dlg «Tâm trạng · Quý nhân Diêu Lưu Ly» «Lui»"
+  ],
+  [
+   624,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   626,
+   ".dlg «Tâm trạng · Quý nhân Diêu Lưu Ly» «Lui»"
+  ],
+  [
+   629,
+   ".dlg «Tâm trạng · Gia phi Tống Dao Quang» «Lui»"
+  ],
+  [
+   630,
+   ".dlg «Tâm trạng · Huệ quý phi Thiệu Linh Vận» «Lui»"
+  ],
+  [
+   632,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   634,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   640,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   641,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   643,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   644,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   645,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   647,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   650,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   653,
+   ".dlg «Bổng lộc tháng mười một» «Bớt lễ nghĩaRất vữngTốnkhôngĐượccó thêm bạcMấtmất »"
+  ],
+  [
+   656,
+   ".dlg «Lễ Lạp bát · Chuyện bên lề hội» «Nhận lời khen, mỉm cườiTốnTâm cơ -2ĐượcĐức +3·Sủng»"
+  ],
+  [
+   657,
+   ".dlg «Điềm báo» «Lui»"
+  ],
+  [
+   660,
+   ".dlg «Thỉnh bình an mạch» «Lui»"
+  ],
+  [
+   662,
+   ".dlg «Bộ sưu tập» «Lui»"
+  ],
+  [
+   664,
+   ".dlg «Lễ Lạp bát · Trò vui» «Từ chối khéoRất vữngTốnkhôngĐượckhôngGợi ýkhông đư»"
+  ],
+  [
+   668,
+   ".dlg «Yến tiệc đầu xuân · Lời mời» «Không dựRất vữngTốnkhôngĐượckhôngGợi ýkhông được m»"
+  ],
+  [
+   669,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Ân tình (đêm)0»"
+  ],
+  [
+   669,
+   ".dlg «Ân tình (đêm)» «Lui»"
+  ],
+  [
+   671,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tư trang»"
+  ],
+  [
+   673,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sang buổi»"
+  ],
+  [
+   674,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Xét phẩm: thiếu 2»"
+  ],
+  [
+   676,
+   ".dlg «Xét phẩm cuối tháng · Thường tại» «Lui»"
+  ],
+  [
+   677,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Mục tiêu chương»"
+  ],
+  [
+   678,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   678,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   679,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   679,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   680,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   681,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Thêm SủngTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   682,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   683,
+   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   685,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   686,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   689,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   690,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   692,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   693,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   694,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   697,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sang buổi»"
+  ],
+  [
+   698,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tai mắt0»"
+  ],
+  [
+   699,
+   ".dlg «Tai mắt» «Lui»"
+  ],
+  [
+   700,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tài nghệ»"
+  ],
+  [
+   701,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sang buổi»"
+  ],
+  [
+   701,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Mệnh truyện»"
+  ],
+  [
+   702,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Mệnh truyện»"
+  ],
+  [
+   702,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sang ngày mới»"
+  ],
+  [
+   703,
+   ".kmov «»"
+  ],
+  [
+   704,
+   ".kmov «»"
+  ],
+  [
+   704,
+   ".kmov «»"
+  ],
+  [
+   705,
+   ".kmov «»"
+  ],
+  [
+   705,
+   ".kmov «»"
+  ],
+  [
+   706,
+   ".kmov «»"
+  ],
+  [
+   706,
+   ".kmov «Chuẩn bị thị tẩm»"
+  ],
+  [
+   709,
+   "DEAD Chuẩn bị thị tẩm"
+  ],
+  [
+   711,
+   ".dlg «Kính sự phòng» «tạmGiữ chân Hoàng thượngHiểmTốnkhôngĐượcdựa vào ân»"
+  ],
+  [
+   711,
+   ".kmov «Chuẩn bị thị tẩm»"
+  ],
+  [
+   713,
+   "DEAD Chuẩn bị thị tẩm"
+  ],
+  [
+   714,
+   ".dlg «Tâm trạng · Uyển phi Đậu Yên Nhiên» «Lui»"
+  ],
+  [
+   716,
+   ".dlg «Tâm trạng · Tần Lưu Tâm Duyệt» «Lui»"
+  ],
+  [
+   718,
+   ".dlg «Tâm trạng · Đáp ứng Nhâm Tố Nga» «Lui»"
+  ],
+  [
+   720,
+   ".dlg «Tâm trạng · Uyển phi Đậu Yên Nhiên» «Lui»"
+  ],
+  [
+   725,
+   ".dlg «Tâm trạng · Uyển phi Đậu Yên Nhiên» «Lui»"
+  ],
+  [
+   727,
+   ".dlg «Kính sự phòng báo tin» «Cáo bệnhRất vữngTốnkhôngĐượcdưỡng sức, nghỉ trọn m»"
+  ],
+  [
+   734,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   738,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   739,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   741,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   743,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   744,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   748,
+   ".dlg «Đại hàn, tuyết lớn» «Chịu rét cho quaRất vữngTốnSức -8Đượccó thêm bạcMấ»"
+  ],
+  [
+   751,
+   ".dlg «Đại hàn, tuyết lớn» «Đóng cửa giữ than cho mìnhTốnDanh -10ĐượcSức +24·B»"
+  ],
+  [
+   752,
+   ".dlg «Phụ tuyến · May áo bông cho cung nhân già · Lời nh» «Khéo từ chốiRất vữngTốnkhôngĐượcdưỡng sức, giữ sức»"
+  ],
+  [
+   754,
+   ".dlg «Đồ thất lạc» «Lui»"
+  ],
+  [
+   756,
+   ".dlg «Sắp tới: Yến tiệc đầu xuân» «Lui»"
+  ],
+  [
+   758,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 3 ng» «Sang buổi»"
+  ],
+  [
+   760,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 2 ng» «Sang buổi»"
+  ],
+  [
+   761,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 3 ng» «Tai mắt0»"
+  ],
+  [
+   762,
+   ".dlg «Tai mắt» «Lui»"
+  ],
+  [
+   763,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 3 ng» «Dư đồ»"
+  ],
+  [
+   765,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 3 ng» «Sang buổi»"
+  ],
+  [
+   766,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Số lần ân thưởng0»"
+  ],
+  [
+   768,
+   ".dlg «Ân thưởng» «Lui»"
+  ],
+  [
+   770,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tài nghệ»"
+  ],
+  [
+   772,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sang ngày mới»"
+  ],
+  [
+   772,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sang ngày mới»"
+  ],
+  [
+   773,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sang ngày mới»"
+  ],
+  [
+   773,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sang ngày mới»"
+  ],
+  [
+   773,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sang ngày mới»"
+  ],
+  [
+   774,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Cung nữ thân tín tam đẳngTiểu Hoàn»"
+  ],
+  [
+   774,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sang ngày mới»"
+  ],
+  [
+   775,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Hậu cung»"
+  ],
+  [
+   776,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Phi tần»"
+  ],
+  [
+   777,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Dùng chứng cứ 0/8»"
+  ],
+  [
+   780,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Giao tình»"
+  ],
+  [
+   780,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tin báo: 20 tin mới»"
+  ],
+  [
+   780,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «với Hoàng thượng»"
+  ],
+  [
+   781,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Hậu cung»"
+  ],
+  [
+   783,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sắc91Tài59Tâm cơ39Đức22Danh46Sủng1»"
+  ],
+  [
+   784,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Hoàng tự»"
+  ],
+  [
+   785,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»"
+  ],
+  [
+   785,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»"
+  ],
+  [
+   786,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»"
+  ],
+  [
+   786,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»"
+  ],
+  [
+   787,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»"
+  ],
+  [
+   787,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Dư đồ»"
+  ],
+  [
+   788,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Lẻn vào Vững3 khắc · bắt: Danh -12»"
+  ],
+  [
+   788,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Lẻn vào Vững3 khắc · bắt: Danh -12»"
+  ],
+  [
+   789,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Mệnh truyện»"
+  ],
+  [
+   789,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sắc91Tài59Tâm cơ39Đức22Danh46Sủng1»"
+  ],
+  [
+   790,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   790,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Giao tình»"
+  ],
+  [
+   790,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tài nghệ»"
+  ],
+  [
+   791,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sắc91Tài59Tâm cơ39Đức22Danh46Sủng1»"
+  ],
+  [
+   791,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Hoàng tự»"
+  ],
+  [
+   792,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Người lạ»"
+  ],
+  [
+   793,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Về phòng»"
+  ],
+  [
+   793,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «1Cung nhân»"
+  ],
+  [
+   793,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Mệnh truyện»"
+  ],
+  [
+   794,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sắc phong»"
+  ],
+  [
+   795,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sắc91Tài59Tâm cơ39Đức22Danh46Sủng1»"
+  ],
+  [
+   795,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Dư đồ»"
+  ],
+  [
+   795,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «trung y · Danh -2Trường Môn viện · 1 khắc»"
+  ],
+  [
+   796,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Lẻn vào Vững3 khắc · bắt: Danh -12»"
+  ],
+  [
+   796,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «trung y · Danh -2Kính sự phòng · 2 khắc»"
+  ],
+  [
+   796,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Lẻn vào Vững3 khắc · bắt: Danh -12»"
+  ],
+  [
+   797,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sắc91Tài59Tâm cơ39Đức22Danh46Sủng1»"
+  ],
+  [
+   797,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Bạc63Sức96/96»"
+  ],
+  [
+   798,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Hậu cung»"
+  ],
+  [
+   800,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Giao tình»"
+  ],
+  [
+   800,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Hậu cung»"
+  ],
+  [
+   802,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tin báo: 1 tin mới»"
+  ],
+  [
+   806,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Hành sự»"
+  ],
+  [
+   807,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Học tập · Tài nghệHọc tập · Tài nghệĐọc binh thư, »"
+  ],
+  [
+   808,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Học tập · Tài nghệHọc tập · Tài nghệĐọc binh thư, »"
+  ],
+  [
+   809,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Học tập · Tài nghệHọc tập · Tài nghệĐọc binh thư, »"
+  ],
+  [
+   809,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Học tập · Tài nghệHọc tập · Tài nghệĐọc binh thư, »"
+  ],
+  [
+   809,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Y dược 1/2»"
+  ],
+  [
+   810,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   810,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Giao tình»"
+  ],
+  [
+   811,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sắc91Tài59Tâm cơ39Đức22Danh46Sủng1»"
+  ],
+  [
+   811,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tin báo»"
+  ],
+  [
+   812,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Hậu cung»"
+  ],
+  [
+   816,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Hải Lan»"
+  ],
+  [
+   818,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tài nghệ»"
+  ],
+  [
+   818,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tứ đức 9/9Cầm kỳ thi họa 8/12Vũ · Y · Nữ công 8/12»"
+  ],
+  [
+   819,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Hậu cung»"
+  ],
+  [
+   821,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Đã biết: 3 tin ›»"
+  ],
+  [
+   823,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Chiêu Hoa»"
+  ],
+  [
+   827,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Cung nhân»"
+  ],
+  [
+   828,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Chí tôn»"
+  ],
+  [
+   829,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Chí tôn»"
+  ],
+  [
+   830,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   832,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Chí tôn»"
+  ],
+  [
+   834,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Chí tôn»"
+  ],
+  [
+   836,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tin báo»"
+  ],
+  [
+   839,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Chí tôn»"
+  ],
+  [
+   840,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Về phòng»"
+  ],
+  [
+   840,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Ân tình (đêm)0»"
+  ],
+  [
+   841,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Lật thẻRất thấp»"
+  ],
+  [
+   841,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «1Cung nhân»"
+  ],
+  [
+   842,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   842,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «tuyết nhẹ»"
+  ],
+  [
+   843,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Xét phẩm: thiếu 2»"
+  ],
+  [
+   843,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «tuyết nhẹ»"
+  ],
+  [
+   844,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Sắc91Tài59Tâm cơ39Đức22Danh46Sủng1»"
+  ],
+  [
+   844,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   846,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tài nghệ»"
+  ],
+  [
+   847,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tin báo»"
+  ],
+  [
+   847,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Cầm kỳ thi họa 8/12»"
+  ],
+  [
+   848,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Học tập · Tài nghệHọc tập · Tài nghệCác lối, sách »"
+  ],
+  [
+   848,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Người được sai đi»"
+  ],
+  [
+   849,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Vũ · Y · Nữ công 8/12»"
+  ],
+  [
+   849,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   850,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Tài nghệ»"
+  ],
+  [
+   850,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Bạc63Sức96/96»"
+  ],
+  [
+   850,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «1Cung nhân»"
+  ],
+  [
+   851,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Bạc63Sức96/96»"
+  ],
+  [
+   851,
+   "page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng» «Bạc63Sức96/96»"
+  ],
+  [
+   860,
+   "DEAD Mệnh truyện"
+  ],
+  [
+   861,
+   ".dlg «Kính sự phòng» «Chặn ngự giáMong manhTốnkhôngĐượcdựa vào nhan sắc,»"
+  ],
+  [
+   862,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   862,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   865,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   867,
+   ".dlg «Tin chờ người sai đi» «Lui»"
+  ],
+  [
+   869,
+   ".dlg «Cầm: các lối» «Lui»"
+  ],
+  [
+   871,
+   ".dlg «Tin báo» «Để ta xemTốnkhôngĐượckhông»"
+  ],
+  [
+   872,
+   ".dlg «Tin báo» «Để ta xemTốnkhôngĐượckhông»"
+  ],
+  [
+   873,
+   ".dlg «Đã biết về Tần Tư Mã Hải Lan» «Lui»"
+  ],
+  [
+   875,
+   ".dlg «Tin báo» «Để sauTốnkhôngĐượckhông»"
+  ],
+  [
+   875,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   877,
+   ".dlg «Quan hệ với» «Chí tôn 2»"
+  ],
+  [
+   878,
+   ".dlg «Quan hệ với» «Thái hậu»"
+  ],
+  [
+   882,
+   ".dlg «Tin báo» «Để sauTốnkhôngĐượckhông»"
+  ],
+  [
+   882,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   890,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   895,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   896,
+   ".dlg «Lui»"
+  ],
+  [
+   898,
+   "#kmrew «Thường»"
+  ],
+  [
+   899,
+   ".dlg «Lui»"
+  ],
+  [
+   901,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   903,
+   ".dlg «Lui»"
+  ],
+  [
+   905,
+   "#kmrew «Thường»"
+  ],
+  [
+   906,
+   ".dlg «Lui»"
+  ],
+  [
+   907,
+   "#kmrew «Thường»"
+  ],
+  [
+   908,
+   ".dlg «Lui»"
+  ],
+  [
+   13,
+   "#modal «Cung Tường Mộng» «Chơi một mìnhTiếp tục: Đáp ứng Quách Tố Huyên · Th»"
+  ],
+  [
+   13,
+   "#modal «Chọn sổ» «Tiếp tục kiếp này»"
+  ]
+ ],
+ "_started": true,
+ "_ckAt": 1795609555605,
+ "_ckB": 131,
+ "rss": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1193,
+   "rendererMB": 640
+  },
+  {
+   "buoi": 6,
+   "y": 1,
+   "totalMB": 1793,
+   "rendererMB": 1229
+  },
+  {
+   "buoi": 11,
+   "y": 1,
+   "totalMB": 2003,
+   "rendererMB": 1416
+  },
+  {
+   "buoi": 16,
+   "y": 1,
+   "totalMB": 1935,
+   "rendererMB": 1342
+  },
+  {
+   "buoi": 20,
+   "y": 1,
+   "totalMB": 2096,
+   "rendererMB": 1491
+  },
+  {
+   "buoi": 24,
+   "y": 1,
+   "totalMB": 2161,
+   "rendererMB": 1563
+  },
+  {
+   "buoi": 29,
+   "y": 1,
+   "totalMB": 2173,
+   "rendererMB": 1567
+  },
+  {
+   "buoi": 34,
+   "y": 1,
+   "totalMB": 2376,
+   "rendererMB": 1756
+  },
+  {
+   "buoi": 39,
+   "y": 1,
+   "totalMB": 2398,
+   "rendererMB": 1781
+  },
+  {
+   "buoi": 44,
+   "y": 1,
+   "totalMB": 2381,
+   "rendererMB": 1759
+  },
+  {
+   "buoi": 49,
+   "y": 1,
+   "totalMB": 2424,
+   "rendererMB": 1795
+  },
+  {
+   "buoi": 54,
+   "y": 1,
+   "totalMB": 2445,
+   "rendererMB": 1829
+  },
+  {
+   "buoi": 59,
+   "y": 1,
+   "totalMB": 2428,
+   "rendererMB": 1819
+  },
+  {
+   "buoi": 64,
+   "y": 1,
+   "totalMB": 2567,
+   "rendererMB": 1945
+  },
+  {
+   "buoi": 69,
+   "y": 1,
+   "totalMB": 2544,
+   "rendererMB": 1935
+  },
+  {
+   "buoi": 74,
+   "y": 1,
+   "totalMB": 2580,
+   "rendererMB": 1976
+  },
+  {
+   "buoi": 79,
+   "y": 1,
+   "totalMB": 2599,
+   "rendererMB": 1992
+  },
+  {
+   "buoi": 84,
+   "y": 1,
+   "totalMB": 2651,
+   "rendererMB": 2026
+  },
+  {
+   "buoi": 85,
+   "y": 1,
+   "totalMB": 2849,
+   "rendererMB": 2187
+  },
+  {
+   "buoi": 89,
+   "y": 1,
+   "totalMB": 2718,
+   "rendererMB": 2125
+  },
+  {
+   "buoi": 94,
+   "y": 1,
+   "totalMB": 3015,
+   "rendererMB": 2374
+  },
+  {
+   "buoi": 99,
+   "y": 1,
+   "totalMB": 2845,
+   "rendererMB": 2223
+  },
+  {
+   "buoi": 104,
+   "y": 1,
+   "totalMB": 2914,
+   "rendererMB": 2293
+  },
+  {
+   "buoi": 105,
+   "y": 1,
+   "totalMB": 1140,
+   "rendererMB": 564
+  },
+  {
+   "buoi": 110,
+   "y": 1,
+   "totalMB": 1870,
+   "rendererMB": 1281
+  },
+  {
+   "buoi": 113,
+   "y": 1,
+   "totalMB": 2077,
+   "rendererMB": 1453
+  },
+  {
+   "buoi": 118,
+   "y": 1,
+   "totalMB": 2245,
+   "rendererMB": 1614
+  },
+  {
+   "buoi": 121,
+   "y": 1,
+   "totalMB": 2104,
+   "rendererMB": 1486
+  },
+  {
+   "buoi": 126,
+   "y": 1,
+   "totalMB": 2253,
+   "rendererMB": 1620
+  },
+  {
+   "buoi": 130,
+   "y": 2,
+   "totalMB": 2374,
+   "rendererMB": 1685
+  },
+  {
+   "buoi": 131,
+   "y": 1,
+   "totalMB": 1154,
+   "rendererMB": 584
+  }
+ ],
+ "dumps": [
+  "/home/user/wt/tp-g4c/shots-tp-off-1/loop-1-dump.json",
+  "/home/user/wt/tp-g4c/shots-tp-off-1/loop-2-dump.json",
+  "/home/user/wt/tp-g4c/shots-tp-off-1/loop-3-dump.json",
+  "/home/user/wt/tp-g4c/shots-tp-off-1/loop-4-dump.json"
+ ]
+}

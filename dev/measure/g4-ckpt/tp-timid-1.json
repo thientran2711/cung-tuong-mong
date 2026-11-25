@@ -1,0 +1,2063 @@
+{
+ "job": {
+  "id": "tp-timid-1",
+  "origin": null,
+  "road": null,
+  "bot": "sens",
+  "seed": 1,
+  "dev": "fold",
+  "url": "file:///home/user/wt/tp-g4c/game.html"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "3d86af86",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 1,
+  "unstick": [
+   {
+    "at": 2009,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 2427,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Công · Nữ công: các lối"
+   }
+  ],
+  "slice": null,
+  "areaTaps": 59,
+  "infoTaps": 87,
+  "dlgClose": 182,
+  "scrolls": 3195,
+  "dlgScroll": 7,
+  "loops": 1,
+  "taps0": 0,
+  "resumed": [
+   {
+    "at": "2026-11-25T11:56:32.754Z",
+    "buoi": 64,
+    "from": "2026-11-25T11:32:28.118Z"
+   },
+   {
+    "at": "2026-11-25T12:25:40.969Z",
+    "buoi": 103,
+    "from": "2026-11-25T12:12:57.110Z"
+   }
+  ]
+ },
+ "life": null,
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "game|dialog queue holds 7 copies of «Tâm trạng · Quý nhân Lư Lạc Anh» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 7 copies of «Tâm trạng · Quý nhân Lư Lạc Anh» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 1062,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 4,
+    "w": 0,
+    "b": 3,
+    "age": 18,
+    "rank": 1,
+    "name": "Lư Ngọc Chiêu"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 4 copies of «Tâm trạng · Quý nhân Lư Lạc Anh» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 4 copies of «Tâm trạng · Quý nhân Lư Lạc Anh» (each close pops one; looks like a dead ✕)",
+   "n": 2,
+   "at": 1068,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 4,
+    "w": 0,
+    "b": 3,
+    "age": 18,
+    "rank": 1,
+    "name": "Lư Ngọc Chiêu"
+   }
+  },
+  {
+   "k": "dead|close button has no effect: .dlg «Tâm trạng · Quý nhân Lư Lạc Anh» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tâm trạng · Quý nhân Lư Lạc Anh» «Lui»",
+   "n": 1,
+   "at": 1074,
+   "shot": "/home/user/wt/tp-g4c/shots-tp-timid-1/noeffect-1795604315925.png"
+  },
+  {
+   "k": "stuck|no progress 15 min on .dlg «Tin báo»",
+   "type": "stuck",
+   "msg": "no progress 15 min on .dlg «Tin báo»",
+   "n": 1,
+   "at": 2009,
+   "shot": "/home/user/wt/tp-g4c/shots-tp-timid-1/stuck-1.png",
+   "save": "/home/user/wt/tp-g4c/shots-tp-timid-1/stuck-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 4,
+    "w": 1,
+    "b": 2,
+    "age": 18,
+    "rank": 1,
+    "name": "Lư Ngọc Chiêu"
+   },
+   "buttons": [
+    "Để ta xemTốnkhôngĐượckhông",
+    "Để sauTốnkhôngĐượckhông"
+   ]
+  },
+  {
+   "k": "game|dialog queue holds 3 copies of «Tâm trạng · Quý nhân Lư Lạc Anh» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 3 copies of «Tâm trạng · Quý nhân Lư Lạc Anh» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 2209,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 4,
+    "w": 0,
+    "b": 3,
+    "age": 18,
+    "rank": 1,
+    "name": "Lư Ngọc Chiêu"
+   }
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on .dlg «Công · Nữ công: các lối»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on .dlg «Công · Nữ công: các lối»",
+   "n": 1,
+   "at": 2427,
+   "shot": "/home/user/wt/tp-g4c/shots-tp-timid-1/loop-1.png",
+   "dump": "/home/user/wt/tp-g4c/shots-tp-timid-1/loop-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 4,
+    "w": 1,
+    "b": 3,
+    "age": 18,
+    "rank": 1,
+    "name": "Lư Ngọc Chiêu"
+   },
+   "buttons": [
+    "Lui"
+   ],
+   "trace": [
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Về phòng»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sắc62Tài71Tâm cơ10Đức29Danh30Sủng9»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Bạc328Sức93/100»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «1Cung nhân»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Hôm nay mặt mộc»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Tài nghệ»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Hành sự»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Tâm trạngBình thản+14»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Học tập · Tài nghệHọc tập · Tài nghệMúa trong yến »",
+    ".dlg «Kính sự phòng» «Chặn ngự giáKhó lườngTốnkhôngĐượcdựa vào nhan sắc,»",
+    "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»",
+    "#kg82 «Quay lại»",
+    "#kg82 «Quay lại»",
+    ".dlg «Tin chờ người sai đi» «Lui»",
+    ".dlg «Mục lục» «Lui»",
+    ".dlg «Công · Nữ công» «Lui»",
+    ".dlg «Công · Nữ công» «Lui»",
+    ".dlg «Tin báo» «Để ta xemTốnkhôngĐượckhông»",
+    ".dlg «Tin báo» «Để ta xemTốnkhôngĐượckhông»",
+    ".dlg «Tin chờ người sai đi» «Lui»"
+   ]
+  }
+ ],
+ "dead": [
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tâm trạng · Quý nhân Lư Lạc Anh»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/tp-g4c/shots-tp-timid-1/noeffect-1795604315925.png",
+   "at": 1074,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 4,
+    "w": 0,
+    "b": 3,
+    "age": 18,
+    "rank": 1,
+    "name": "Lư Ngọc Chiêu"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»",
+   "label": "Người lạNgười lạ",
+   "cover": "zero size",
+   "shot": "/home/user/wt/tp-g4c/shots-tp-timid-1/dead-fold-1795608684411.png",
+   "dev": "fold",
+   "at": 892,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 7,
+    "w": 1,
+    "b": 3,
+    "age": 18,
+    "rank": 1,
+    "name": "Lư Ngọc Chiêu"
+   }
+  }
+ ],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 363928,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 64,
+   "year": null,
+   "chars": 387781,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 103,
+   "year": null,
+   "chars": 477291,
+   "key": "hclh-save-v2-1"
+  }
+ ],
+ "buoi": 109,
+ "steps": 5452,
+ "status": [],
+ "_loopAt": 1795609653914,
+ "_snapAt": 1795609613367,
+ "trace": [
+  [
+   483,
+   ".dlg «Lịch tháng» «ngày 30»"
+  ],
+  [
+   483,
+   ".dlg «Lịch tháng» «mồng 10»"
+  ],
+  [
+   484,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   484,
+   ".dlg «Lịch tháng» «mồng 5»"
+  ],
+  [
+   485,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   487,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   488,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Chọn chính mình»"
+  ],
+  [
+   488,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Quẻ Trung (Giao thiệp)»"
+  ],
+  [
+   489,
+   ".dlg «Quẻ Trung · Giao thiệp» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   491,
+   ".dlg «Gieo lại quẻ» «Lui»"
+  ],
+  [
+   492,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   494,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Quẻ Trung (Giao thiệp)»"
+  ],
+  [
+   495,
+   ".dlg «Quẻ Trung · Giao thiệp» «Lui»"
+  ],
+  [
+   496,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Tư trang»"
+  ],
+  [
+   497,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang ngày mới»"
+  ],
+  [
+   499,
+   ".kmov «»"
+  ],
+  [
+   499,
+   ".kmov «»"
+  ],
+  [
+   500,
+   ".kmov «»"
+  ],
+  [
+   500,
+   ".kmov «»"
+  ],
+  [
+   500,
+   ".kmov «»"
+  ],
+  [
+   501,
+   ".kmov «»"
+  ],
+  [
+   501,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   504,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   504,
+   ".dlg «Tâm trạng · Tần Lư Lạc Anh» «Lui»"
+  ],
+  [
+   508,
+   ".dlg «Tâm trạng · Quý nhân Lâm Uyển Nhi» «Lui»"
+  ],
+  [
+   510,
+   ".dlg «Tâm trạng · Tần Đường Chỉ Lan» «Lui»"
+  ],
+  [
+   512,
+   ".dlg «Tâm trạng · Đáp ứng Nhan Như Yên» «Lui»"
+  ],
+  [
+   514,
+   ".dlg «Tâm trạng · Thường tại Nam Cung Bích Dao» «Lui»"
+  ],
+  [
+   519,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   521,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   523,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   524,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   525,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   526,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   530,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   532,
+   ".dlg «Hội phối đồ: báo đề» «Đã hiểu, sẽ chuẩn bịTốnkhôngĐượcmua thêm đồ ở Nội »"
+  ],
+  [
+   534,
+   ".dlg «Phụ tuyến · Thư cha: xin bạc chuộc lại mảnh vườn ·» «Khéo từ chốiRất vữngTốnkhôngĐượcdưỡng sức, giữ sức»"
+  ],
+  [
+   536,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Người được sai đi (có mới)»"
+  ],
+  [
+   538,
+   ".dlg «Tin chờ người sai đi» «Xem lời nhờTốnkhôngĐượcCó khách đến chơi·trả lời t»"
+  ],
+  [
+   541,
+   ".dlg «Có khách đến chơi» «Tiếp đón nồng hậuRất vữngTốnSức -4Đượcđược lòng ng»"
+  ],
+  [
+   543,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Lịch tháng»"
+  ],
+  [
+   543,
+   ".dlg «Lịch tháng» «ngày 15»"
+  ],
+  [
+   544,
+   ".dlg «Lịch tháng» «ngày 20»"
+  ],
+  [
+   544,
+   ".dlg «Lịch tháng» «ngày 17»"
+  ],
+  [
+   545,
+   ".dlg «Lịch tháng» «ngày 14»"
+  ],
+  [
+   545,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   547,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   549,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Quẻ Thượng (Tài nghệ)»"
+  ],
+  [
+   550,
+   ".dlg «Quẻ Thượng · Tài nghệ» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   550,
+   ".dlg «Gieo lại quẻ» «Lui»"
+  ],
+  [
+   552,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «lá phong rơi»"
+  ],
+  [
+   553,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   555,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   556,
+   ".dlg «Bổng lộc» «Lui»"
+  ],
+  [
+   558,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tâm trạngBình thản-2»"
+  ],
+  [
+   560,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   562,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»"
+  ],
+  [
+   564,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   566,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Bích Dao»"
+  ],
+  [
+   570,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   573,
+   ".dlg «Kỳ nguyệt sự» «Báo đúng ngàyRất vữngTốnkhôngĐượcsổ ghi đúng, khôn»"
+  ],
+  [
+   574,
+   ".kmov «»"
+  ],
+  [
+   575,
+   ".kmov «»"
+  ],
+  [
+   576,
+   ".kmov «»"
+  ],
+  [
+   577,
+   ".kmov «»"
+  ],
+  [
+   578,
+   ".kmov «»"
+  ],
+  [
+   578,
+   ".kmov «»"
+  ],
+  [
+   579,
+   ".kmov «»"
+  ],
+  [
+   579,
+   ".kmov «»"
+  ],
+  [
+   580,
+   ".kmov «»"
+  ],
+  [
+   580,
+   ".kmov «»"
+  ],
+  [
+   581,
+   ".kmov «»"
+  ],
+  [
+   581,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   584,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   586,
+   ".dlg «Tâm trạng · Quý nhân Lâm Uyển Nhi» «Lui»"
+  ],
+  [
+   588,
+   ".dlg «Tâm trạng · Quý nhân Lâm Uyển Nhi» «Lui»"
+  ],
+  [
+   590,
+   ".dlg «Tâm trạng · Thường tại Nam Cung Bích Dao» «Lui»"
+  ],
+  [
+   593,
+   ".dlg «Tâm trạng · Thuần phi Tống Yên Nhiên» «Lui»"
+  ],
+  [
+   595,
+   ".dlg «Tâm trạng · Đáp ứng Nhan Như Yên» «Lui»"
+  ],
+  [
+   597,
+   ".dlg «Tâm trạng · Thường tại Nam Cung Bích Dao» «Lui»"
+  ],
+  [
+   600,
+   ".dlg «Tâm trạng · Thuần phi Tống Yên Nhiên» «Lui»"
+  ],
+  [
+   602,
+   ".dlg «Tâm trạng · Đáp ứng Nhan Như Yên» «Lui»"
+  ],
+  [
+   605,
+   ".dlg «Tâm trạng · Gia tần Vân Doanh Nguyệt» «Lui»"
+  ],
+  [
+   607,
+   ".dlg «Tâm trạng · Đáp ứng Nhan Như Yên» «Lui»"
+  ],
+  [
+   616,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   623,
+   "#kmrew «Thường»"
+  ],
+  [
+   624,
+   ".dlg «Lui»"
+  ],
+  [
+   625,
+   "#kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»"
+  ],
+  [
+   626,
+   ".dlg «Lui»"
+  ],
+  [
+   628,
+   "#kmrew «ThườngSon sápHộp son môi dùng khi điểm trang (tô s»"
+  ],
+  [
+   628,
+   ".dlg «Lui»"
+  ],
+  [
+   631,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   632,
+   ".dlg «Lui»"
+  ],
+  [
+   633,
+   "#kmrew «Thường»"
+  ],
+  [
+   634,
+   ".dlg «Lui»"
+  ],
+  [
+   636,
+   "#kmrew «Nhận»"
+  ],
+  [
+   638,
+   "DEAD ThườngThan liễuHộp màu mày dùng khi điểm trang (kẻ"
+  ],
+  [
+   640,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   641,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   644,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   647,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   649,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   652,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   655,
+   ".dlg «Điềm báo» «Lui»"
+  ],
+  [
+   658,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   661,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Có thaiRất thấp»"
+  ],
+  [
+   663,
+   ".dlg «Có thai: Rất thấp» «Lui»"
+  ],
+  [
+   665,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Quẻ Thượng thượng (Sủng)»"
+  ],
+  [
+   667,
+   ".dlg «Quẻ Thượng thượng · Sủng» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   669,
+   ".dlg «Gieo lại quẻ» «Lui»"
+  ],
+  [
+   671,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   679,
+   "DEAD Dư đồ"
+  ],
+  [
+   680,
+   ".dlg «Có người đến» «Đáp trả sắc sảoRất vữngTốnkhôngĐượcthêm thể diệnMấ»"
+  ],
+  [
+   682,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 5 người.» «Dư đồ»"
+  ],
+  [
+   684,
+   ".mapsc «Thái y viện8 bóng · 2 khắc»"
+  ],
+  [
+   685,
+   ".dlg «Chọn người theo hầu» «Cung nữ thân tín tam đẳngĐào DiệpTốnkhôngĐượckhông»"
+  ],
+  [
+   687,
+   ".dlg «Chọn người theo hầu» «Đi một mìnhTốnkhôngĐượcviệc ta làm bên ngoài được »"
+  ],
+  [
+   691,
+   ".dlg «Kỳ ngộ» «Xin giúp nàng ta một lời với cô côRất vữngTốn2 khắ»"
+  ],
+  [
+   692,
+   ".dlg «Kỳ ngộ» «Lui»"
+  ],
+  [
+   695,
+   "page «Thái y viện · Ở đây còn 8 người.» «Sang buổi»"
+  ],
+  [
+   696,
+   ".dlg «Thái y viện» «Lẻn vàoCó cơTốn3 khắcĐượcvào được buổi nàyBạiDanh »"
+  ],
+  [
+   702,
+   "#kmrew «Tinh phẩm»"
+  ],
+  [
+   702,
+   ".dlg «Lui»"
+  ],
+  [
+   704,
+   "#kmrew «Tinh phẩmYến sàoDùng: Sức +15, Sắc +1»"
+  ],
+  [
+   705,
+   ".dlg «Lui»"
+  ],
+  [
+   706,
+   "#kmrew «Tinh phẩm»"
+  ],
+  [
+   708,
+   ".dlg «Lui»"
+  ],
+  [
+   711,
+   "#kmrew «Tinh phẩmYến sàoDùng: Sức +15, Sắc +1»"
+  ],
+  [
+   711,
+   ".dlg «Lui»"
+  ],
+  [
+   713,
+   "#kmrew «Tinh phẩm»"
+  ],
+  [
+   713,
+   ".dlg «Lui»"
+  ],
+  [
+   715,
+   "#kmrew «Tinh phẩm»"
+  ],
+  [
+   715,
+   ".dlg «Lui»"
+  ],
+  [
+   717,
+   "#kmrew «Tinh phẩmYến sàoDùng: Sức +15, Sắc +1»"
+  ],
+  [
+   717,
+   ".dlg «Lui»"
+  ],
+  [
+   719,
+   "#kmrew «Nhận»"
+  ],
+  [
+   720,
+   ".dlg «Thái hậu ban thưởng» «Lui»"
+  ],
+  [
+   723,
+   ".dlg «Bị bắt» «Lui»"
+  ],
+  [
+   726,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Giao tình»"
+  ],
+  [
+   726,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Về phòng»"
+  ],
+  [
+   727,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   729,
+   ".kmov «»"
+  ],
+  [
+   730,
+   ".kmov «»"
+  ],
+  [
+   730,
+   ".kmov «»"
+  ],
+  [
+   730,
+   ".kmov «»"
+  ],
+  [
+   731,
+   ".kmov «»"
+  ],
+  [
+   732,
+   ".kmov «»"
+  ],
+  [
+   732,
+   ".kmov «»"
+  ],
+  [
+   733,
+   ".kmov «»"
+  ],
+  [
+   734,
+   ".kmov «»"
+  ],
+  [
+   734,
+   ".kmov «»"
+  ],
+  [
+   735,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   737,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   738,
+   ".dlg «Tâm trạng · Tần Lư Lạc Anh» «Lui»"
+  ],
+  [
+   740,
+   ".dlg «Tâm trạng · Quý nhân Nam Cung Bích Dao» «Lui»"
+  ],
+  [
+   741,
+   ".dlg «Tâm trạng · Quý nhân Nam Cung Bích Dao» «Lui»"
+  ],
+  [
+   744,
+   ".dlg «Tâm trạng · Đáp ứng Nhan Như Yên» «Lui»"
+  ],
+  [
+   745,
+   ".dlg «Tâm trạng · Đáp ứng Nhan Như Yên» «Lui»"
+  ],
+  [
+   747,
+   ".dlg «Tâm trạng · Tần Lư Lạc Anh» «Lui»"
+  ],
+  [
+   750,
+   ".dlg «Tâm trạng · Quý nhân Lâm Uyển Nhi» «Lui»"
+  ],
+  [
+   752,
+   ".dlg «Tâm trạng · Quý nhân Nam Cung Bích Dao» «Lui»"
+  ],
+  [
+   754,
+   ".dlg «Tâm trạng · Đáp ứng Nhan Như Yên» «Lui»"
+  ],
+  [
+   760,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   764,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   765,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   769,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   773,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   775,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   778,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   781,
+   ".dlg «Lễ tấn phong Quý nhân Nam Cung Bích Dao» «Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta »"
+  ],
+  [
+   782,
+   ".dlg «Bổng lộc tháng chín» «Lui»"
+  ],
+  [
+   785,
+   ".dlg «Thỉnh bình an mạch» «Lui»"
+  ],
+  [
+   788,
+   ".dlg «Thánh thọ Thái hậu · Lời mời: Thi cắt hoa văn chữ » «Không dựRất vữngTốnkhôngĐượckhôngGợi ýkhông được m»"
+  ],
+  [
+   789,
+   ".dlg «Thánh thọ Thái hậu · Lời mời: Thi cắt hoa văn chữ » «Không dựRất vữngTốnkhôngĐượckhôngGợi ýkhông được m»"
+  ],
+  [
+   790,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Bổng lộcsau 2 tuần»"
+  ],
+  [
+   791,
+   ".dlg «Bổng lộc» «Lui»"
+  ],
+  [
+   792,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tâm trạngBất an-39»"
+  ],
+  [
+   793,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   796,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»"
+  ],
+  [
+   797,
+   ".dlg «Có người tìm đến» «Tiếp chuyệnTốn1 khắcĐượccùng Hoàng hậu Dư Lang Hoa»"
+  ],
+  [
+   798,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 6 người.» «Chọn chính mình»"
+  ],
+  [
+   799,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 6 người.» «Buổi trưa, còn 3 khắc»"
+  ],
+  [
+   799,
+   ".dlg «trưa · còn» «Lui»"
+  ],
+  [
+   802,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 6 người.» «Sang buổi»"
+  ],
+  [
+   808,
+   ".dlg «Có người bán tin» «Mua tinTốnBạc -36·1 khắcĐượcnghe một tin thật·đáng»"
+  ],
+  [
+   809,
+   ".dlg «Ta bắt gặp» «Mặc kệTốnkhôngĐượckhôngGhi chúkhông dính vào chuyệ»"
+  ],
+  [
+   810,
+   ".dlg «Tin mua được» «Lui»"
+  ],
+  [
+   812,
+   ".dlg «Bị ép nộp của» «Không giaoTùy duyênTốnkhôngĐượcnàng ta đành thôi, »"
+  ],
+  [
+   813,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 6 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   814,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 6 người.» «Sang buổi»"
+  ],
+  [
+   815,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Quẻ Trung (Giao thiệp)»"
+  ],
+  [
+   818,
+   ".dlg «Quẻ Trung · Giao thiệp» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   818,
+   ".dlg «Gieo lại quẻ» «Lui»"
+  ],
+  [
+   820,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Xét phẩm: thiếu 5»"
+  ],
+  [
+   822,
+   ".dlg «Xét phẩm cuối tháng · Quý nhân» «Lui»"
+  ],
+  [
+   824,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   824,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   825,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   825,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   826,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Mục tiêu chương (có mới)»"
+  ],
+  [
+   826,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   826,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   827,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   827,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   827,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   828,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   828,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   828,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Cấm túc2 tháng»"
+  ],
+  [
+   829,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Giao tình»"
+  ],
+  [
+   831,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Triều đình»"
+  ],
+  [
+   831,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Cấm túc2 tháng»"
+  ],
+  [
+   832,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Ân oánPhe pháiPhe phái hậu cungTriều đìnhQuốc sựBi»"
+  ],
+  [
+   832,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   834,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Tâm trạngBất an-43»"
+  ],
+  [
+   834,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Hành sự»"
+  ],
+  [
+   837,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc binh thư, »"
+  ],
+  [
+   837,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc binh thư, »"
+  ],
+  [
+   837,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc binh thư, »"
+  ],
+  [
+   838,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc binh thư, »"
+  ],
+  [
+   838,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Tư trang»"
+  ],
+  [
+   839,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Tư trang»"
+  ],
+  [
+   840,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Buổi tối, còn 3 khắc»"
+  ],
+  [
+   840,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Xét phẩm: thiếu 5»"
+  ],
+  [
+   841,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Lật thẻKhông có»"
+  ],
+  [
+   841,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   843,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Quẻ Thượng (Danh)»"
+  ],
+  [
+   845,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   845,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Xét phẩm: thiếu 5»"
+  ],
+  [
+   846,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Cấm túc2 tháng»"
+  ],
+  [
+   846,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   847,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Lật thẻKhông có»"
+  ],
+  [
+   848,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Chọn chính mình»"
+  ],
+  [
+   848,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sắc62Tài71Tâm cơ13Đức31Danh9Sủng0»"
+  ],
+  [
+   848,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Buổi tối, còn 3 khắc»"
+  ],
+  [
+   849,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Tài nghệ»"
+  ],
+  [
+   850,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   851,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Hoàng tự trong cung»"
+  ],
+  [
+   853,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Giao tình»"
+  ],
+  [
+   856,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   857,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Gặp mặt 2/5»"
+  ],
+  [
+   858,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Như Yên»"
+  ],
+  [
+   860,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «đêm sương giá»"
+  ],
+  [
+   862,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Bạc301Sức95/100»"
+  ],
+  [
+   865,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Phi tần»"
+  ],
+  [
+   867,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Chí tônPhi tầnNam nhânCung nhân‹Càn Ninh cungLang »"
+  ],
+  [
+   868,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Gặp mặt 2/5»"
+  ],
+  [
+   870,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Lang Hoa»"
+  ],
+  [
+   872,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Hân Duyệt»"
+  ],
+  [
+   875,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Nam nhân»"
+  ],
+  [
+   876,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   877,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Cấm túc2 tháng»"
+  ],
+  [
+   877,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Bạc301Sức95/100»"
+  ],
+  [
+   878,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Bạc301Sức95/100»"
+  ],
+  [
+   879,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   879,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Ân tình (đêm)0»"
+  ],
+  [
+   880,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Có thaiRất thấp»"
+  ],
+  [
+   880,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Chọn chính mình»"
+  ],
+  [
+   880,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «1Cung nhân»"
+  ],
+  [
+   881,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Tâm trạngBất an-43»"
+  ],
+  [
+   881,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Cấm túc2 tháng»"
+  ],
+  [
+   882,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Lịch tháng»"
+  ],
+  [
+   882,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Xét phẩm: thiếu 5»"
+  ],
+  [
+   882,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Bạc301Sức95/100»"
+  ],
+  [
+   883,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Giao tình»"
+  ],
+  [
+   883,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Phe phái hậu cung»"
+  ],
+  [
+   884,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Phe phái»"
+  ],
+  [
+   884,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   885,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Về phòng»"
+  ],
+  [
+   886,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Tai mắt0»"
+  ],
+  [
+   886,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   887,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «đêm sương giá»"
+  ],
+  [
+   888,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Cung nhân»"
+  ],
+  [
+   889,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Người trước»"
+  ],
+  [
+   892,
+   "DEAD Người lạNgười lạ"
+  ],
+  [
+   893,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   893,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Tài nghệ»"
+  ],
+  [
+   894,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Về phòng»"
+  ],
+  [
+   895,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Hành sự»"
+  ],
+  [
+   896,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «đêm sương giá»"
+  ],
+  [
+   897,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Dư đồ»"
+  ],
+  [
+   898,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Tâm trạngBất an-43»"
+  ],
+  [
+   899,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   901,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Người sau»"
+  ],
+  [
+   902,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Thường Hỷ»"
+  ],
+  [
+   903,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Giao tình»"
+  ],
+  [
+   904,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Phe phái»"
+  ],
+  [
+   904,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Triều đình»"
+  ],
+  [
+   905,
+   ".dlg «Lịch tháng» «ngày 18»"
+  ],
+  [
+   905,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   906,
+   ".dlg «Lịch tháng» «ngày 22: Nguyệt tín»"
+  ],
+  [
+   906,
+   ".dlg «Lịch tháng» «ngày 14: Thiên thu Dư Lang Hoa: nên dâng lễ»"
+  ],
+  [
+   907,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   909,
+   ".dlg «Chương 2 · Lần đầu được sủng» «Danh hiệu 1/35»"
+  ],
+  [
+   909,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   910,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Thêm SủngTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   912,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   914,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Thêm Sủng · đang lấyTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   915,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   915,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Thêm Sủng · đang lấyTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   916,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   917,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Sủng dễ lênTốnkhôngĐượcSủng được thêm một phần hai»"
+  ],
+  [
+   918,
+   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượckhôngMấtSủng được thêm m»"
+  ],
+  [
+   918,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   919,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   920,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   921,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Sủng dễ lênTốnkhôngĐượcSủng được thêm một phần hai»"
+  ],
+  [
+   922,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   922,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Sủng dễ lên · đang lấyTốnkhôngĐượcSủng được thêm m»"
+  ],
+  [
+   923,
+   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượckhôngMấtSủng được thêm m»"
+  ],
+  [
+   924,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   925,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   926,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   927,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Thêm SủngTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   928,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   928,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   929,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   931,
+   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   933,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   933,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   934,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   936,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   943,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   945,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   947,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   948,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   949,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   950,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   952,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   954,
+   ".dlg «Phụ tuyến · May áo bông cho cung nhân già · Lời nh» «Khéo từ chốiRất vữngTốnkhôngĐượcdưỡng sức, giữ sức»"
+  ],
+  [
+   956,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Hành sự»"
+  ],
+  [
+   958,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệMúa trong yến »"
+  ],
+  [
+   962,
+   ".dlg «Có người tìm đến» «Không tiếpTốnkhôngĐượcGia tần Vân Doanh Nguyệt ra »"
+  ],
+  [
+   964,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sang buổi»"
+  ],
+  [
+   966,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Lịch tháng»"
+  ],
+  [
+   967,
+   ".dlg «Lịch tháng» «ngày 25: Nguyệt tín»"
+  ],
+  [
+   967,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   967,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   968,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   969,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   971,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Mục tiêu chương»"
+  ],
+  [
+   973,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   976,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Sủng dễ lênTốnkhôngĐượcSủng được thêm một phần hai»"
+  ],
+  [
+   979,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   981,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Sủng dễ lên · đang lấyTốnkhôngĐượcSủng được thêm m»"
+  ],
+  [
+   12,
+   "#modal «Cung Tường Mộng» «Chơi một mìnhTiếp tục: Thường tại Lư Ngọc Chiêu · »"
+  ],
+  [
+   14,
+   "#modal «Chọn sổ» «Tiếp tục kiếp này»"
+  ],
+  [
+   22,
+   "DEAD Vào cung ngay"
+  ],
+  [
+   23,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   24,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Bạc291Sức80/100»"
+  ],
+  [
+   25,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   28,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   30,
+   ".dlg «Có người bán tin» «Không muaTốnkhôngĐượckhôngGhi chúkhông biết tin ấy»"
+  ],
+  [
+   32,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   36,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   40,
+   ".dlg «Kỳ nguyệt sự» «Báo đúng ngàyRất vữngTốnkhôngĐượcsổ ghi đúng, khôn»"
+  ],
+  [
+   44,
+   "DEAD Lui"
+  ],
+  [
+   44,
+   ".kmov «»"
+  ],
+  [
+   45,
+   ".kmov «»"
+  ],
+  [
+   45,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   48,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   49,
+   ".dlg «Tâm trạng · Quý nhân Lâm Uyển Nhi» «Lui»"
+  ],
+  [
+   51,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   58,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   63,
+   "#kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»"
+  ],
+  [
+   65,
+   ".dlg «Lui»"
+  ],
+  [
+   66,
+   "#kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»"
+  ],
+  [
+   67,
+   ".dlg «Lui»"
+  ],
+  [
+   68,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   69,
+   ".dlg «Lui»"
+  ],
+  [
+   71,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   71,
+   ".dlg «Lui»"
+  ],
+  [
+   73,
+   "#kmrew «Thường»"
+  ],
+  [
+   73,
+   ".dlg «Lui»"
+  ],
+  [
+   75,
+   "#kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»"
+  ],
+  [
+   76,
+   ".dlg «Lui»"
+  ],
+  [
+   78,
+   "#kmrew «Thường»"
+  ],
+  [
+   79,
+   ".dlg «Lui»"
+  ],
+  [
+   81,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   82,
+   ".dlg «Lui»"
+  ],
+  [
+   84,
+   "#kmrew «Thường»"
+  ],
+  [
+   85,
+   ".dlg «Lui»"
+  ],
+  [
+   87,
+   "#kmrew «Thường»"
+  ],
+  [
+   88,
+   ".dlg «Lui»"
+  ],
+  [
+   90,
+   "#kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»"
+  ],
+  [
+   91,
+   ".dlg «Lui»"
+  ],
+  [
+   93,
+   "#kmrew «Nhận»"
+  ],
+  [
+   93,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   94,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   95,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   97,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   98,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   100,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   102,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   104,
+   ".dlg «sáng · còn» «Lui»"
+  ],
+  [
+   105,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   107,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Quẻ Hạ hạ (Sức khỏe)»"
+  ],
+  [
+   108,
+   ".dlg «Quẻ Hạ hạ · Sức khỏe» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   110,
+   ".dlg «Gieo lại quẻ» «Lui»"
+  ],
+  [
+   112,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Tài nghệ»"
+  ],
+  [
+   113,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.» «Sang buổi»"
+  ]
+ ],
+ "_started": true,
+ "_ckAt": 1795609653972,
+ "_ckB": 109,
+ "rss": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1162,
+   "rendererMB": 591
+  },
+  {
+   "buoi": 6,
+   "y": 1,
+   "totalMB": 1667,
+   "rendererMB": 1110
+  },
+  {
+   "buoi": 11,
+   "y": 1,
+   "totalMB": 1846,
+   "rendererMB": 1277
+  },
+  {
+   "buoi": 16,
+   "y": 1,
+   "totalMB": 1969,
+   "rendererMB": 1382
+  },
+  {
+   "buoi": 21,
+   "y": 1,
+   "totalMB": 2106,
+   "rendererMB": 1511
+  },
+  {
+   "buoi": 25,
+   "y": 1,
+   "totalMB": 2141,
+   "rendererMB": 1511
+  },
+  {
+   "buoi": 30,
+   "y": 1,
+   "totalMB": 2140,
+   "rendererMB": 1538
+  },
+  {
+   "buoi": 35,
+   "y": 1,
+   "totalMB": 2212,
+   "rendererMB": 1605
+  },
+  {
+   "buoi": 40,
+   "y": 1,
+   "totalMB": 2387,
+   "rendererMB": 1765
+  },
+  {
+   "buoi": 45,
+   "y": 1,
+   "totalMB": 2326,
+   "rendererMB": 1711
+  },
+  {
+   "buoi": 50,
+   "y": 1,
+   "totalMB": 2323,
+   "rendererMB": 1707
+  },
+  {
+   "buoi": 55,
+   "y": 1,
+   "totalMB": 2310,
+   "rendererMB": 1697
+  },
+  {
+   "buoi": 55,
+   "y": 1,
+   "totalMB": 2240,
+   "rendererMB": 1649
+  },
+  {
+   "buoi": 55,
+   "y": 1,
+   "totalMB": 1788,
+   "rendererMB": 1191
+  },
+  {
+   "buoi": 55,
+   "y": 1,
+   "totalMB": 1411,
+   "rendererMB": 816
+  },
+  {
+   "buoi": 55,
+   "y": 1,
+   "totalMB": 1441,
+   "rendererMB": 846
+  },
+  {
+   "buoi": 56,
+   "y": 1,
+   "totalMB": 1698,
+   "rendererMB": 1099
+  },
+  {
+   "buoi": 60,
+   "y": 1,
+   "totalMB": 2077,
+   "rendererMB": 1458
+  },
+  {
+   "buoi": 64,
+   "y": 1,
+   "totalMB": 2128,
+   "rendererMB": 1514
+  },
+  {
+   "buoi": 64,
+   "y": 1,
+   "totalMB": 1694,
+   "rendererMB": 1095
+  },
+  {
+   "buoi": 64,
+   "y": 1,
+   "totalMB": 1430,
+   "rendererMB": 833
+  },
+  {
+   "buoi": 64,
+   "y": 1,
+   "totalMB": 1320,
+   "rendererMB": 722
+  },
+  {
+   "buoi": 64,
+   "y": 1,
+   "totalMB": 1314,
+   "rendererMB": 716
+  },
+  {
+   "buoi": 65,
+   "y": 1,
+   "totalMB": 1321,
+   "rendererMB": 756
+  },
+  {
+   "buoi": 70,
+   "y": 1,
+   "totalMB": 1737,
+   "rendererMB": 1142
+  },
+  {
+   "buoi": 75,
+   "y": 1,
+   "totalMB": 1941,
+   "rendererMB": 1336
+  },
+  {
+   "buoi": 80,
+   "y": 1,
+   "totalMB": 1980,
+   "rendererMB": 1376
+  },
+  {
+   "buoi": 85,
+   "y": 1,
+   "totalMB": 1935,
+   "rendererMB": 1334
+  },
+  {
+   "buoi": 90,
+   "y": 1,
+   "totalMB": 2138,
+   "rendererMB": 1522
+  },
+  {
+   "buoi": 95,
+   "y": 1,
+   "totalMB": 2136,
+   "rendererMB": 1523
+  },
+  {
+   "buoi": 100,
+   "y": 1,
+   "totalMB": 2238,
+   "rendererMB": 1619
+  },
+  {
+   "buoi": 103,
+   "y": 1,
+   "totalMB": 2289,
+   "rendererMB": 1670
+  },
+  {
+   "buoi": 104,
+   "y": 1,
+   "totalMB": 1139,
+   "rendererMB": 569
+  },
+  {
+   "buoi": 109,
+   "y": 1,
+   "totalMB": 1591,
+   "rendererMB": 1006
+  }
+ ],
+ "dumps": [
+  "/home/user/wt/tp-g4c/shots-tp-timid-1/stuck-1-dump.json",
+  "/home/user/wt/tp-g4c/shots-tp-timid-1/loop-1-dump.json"
+ ]
+}

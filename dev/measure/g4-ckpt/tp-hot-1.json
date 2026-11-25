@@ -1,0 +1,2887 @@
+{
+ "job": {
+  "id": "tp-hot-1",
+  "origin": null,
+  "road": null,
+  "bot": "sens",
+  "seed": 1,
+  "dev": "fold",
+  "url": "file:///home/user/wt/tp-g4c/game.html"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "3d86af86",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [
+   {
+    "at": 298,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+   },
+   {
+    "at": 1227,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1350,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 1667,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 2021,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Tin trong cung buổi này"
+   },
+   {
+    "at": 2293,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Hắt trà"
+   },
+   {
+    "at": 2445,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+   },
+   {
+    "at": 3057,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 383,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Tin chờ người sai đi"
+   },
+   {
+    "at": 536,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Danh hiệu"
+   }
+  ],
+  "slice": null,
+  "areaTaps": 74,
+  "infoTaps": 193,
+  "dlgClose": 364,
+  "scrolls": 38,
+  "loops": 10,
+  "dlgScroll": 2,
+  "taps0": 0,
+  "resumed": [
+   {
+    "at": "2026-11-25T11:56:32.753Z",
+    "buoi": 118,
+    "from": "2026-11-25T11:32:47.655Z"
+   },
+   {
+    "at": "2026-11-25T12:25:40.967Z",
+    "buoi": 153,
+    "from": "2026-11-25T12:13:16.534Z"
+   }
+  ]
+ },
+ "life": null,
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "game|dialog queue holds 5 copies of «Tâm trạng · Quý nhân Diệp Lưu Ly» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 5 copies of «Tâm trạng · Quý nhân Diệp Lưu Ly» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 150,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 4 copies of «Tâm trạng · Quý nhân Diệp Lưu Ly» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 4 copies of «Tâm trạng · Quý nhân Diệp Lưu Ly» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 156,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 3 copies of «Tâm trạng · Quý nhân Diệp Lưu Ly» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 3 copies of «Tâm trạng · Quý nhân Diệp Lưu Ly» (each close pops one; looks like a dead ✕)",
+   "n": 2,
+   "at": 163,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "dead|close button has no effect: .dlg «Tâm trạng · Ta» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tâm trạng · Ta» «Lui»",
+   "n": 2,
+   "at": 171,
+   "shot": "/home/user/wt/tp-g4c/shots-tp-hot-1/noeffect-1795603412344.png"
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.»",
+   "n": 1,
+   "at": 298,
+   "shot": "/home/user/wt/tp-g4c/shots-tp-hot-1/loop-1.png",
+   "dump": "/home/user/wt/tp-g4c/shots-tp-hot-1/loop-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   },
+   "buttons": [
+    "Ô lưu",
+    "Xem bản thân",
+    "Sắc60Tài91Tâm cơ10Đức40Danh7Sủng6",
+    "Bạc60Sức100/100",
+    "Buổi tối, còn 3 khắc",
+    "Hôm nay mặt mộc",
+    "đêm u ám",
+    "Quẻ Thượng thượng (Tài nghệ)",
+    "Tâm trạngBình thản+8",
+    "Về phòng",
+    "Tin báo",
+    "Tất cả 17/21Nghỉ ngơi 4/4Giao thiệp 2/3Học tập · Tài nghệ 2/3Mưu kế 5/5Y dược 2/2Lễ nghi 1"
+   ],
+   "trace": [
+    ".mapsc «Dư đồ»",
+    ".mapsc «Mục tiêu chương»",
+    ".mapsc «Tư trang»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hôm nay mặt mộc»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hoàng tự»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tài nghệ»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «đêm u ám»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hành sự»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Buôn bán 1/1»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Mệnh truyện»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hoàng tự»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hôn sự»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tư trang»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hành sự»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hoàng tự»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hành sự»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Y dược 2/2»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Buổi tối, còn 3 khắc»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Buổi tối, còn 3 khắc»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tin báo»"
+   ]
+  },
+  {
+   "k": "game|dialog queue holds 6 copies of «Tâm trạng · Quý nhân Diệp Lưu Ly» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 6 copies of «Tâm trạng · Quý nhân Diệp Lưu Ly» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 738,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 0,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 4 copies of «Tâm trạng · Quý phi Viên Ngân Chúc» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 4 copies of «Tâm trạng · Quý phi Viên Ngân Chúc» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 763,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 0,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 5 copies of «Tâm trạng · Ý phi Lôi Bích Dao» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 5 copies of «Tâm trạng · Ý phi Lôi Bích Dao» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 943,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 2,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 2 copies of «Tâm trạng · Ý phi Lôi Bích Dao» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 2 copies of «Tâm trạng · Ý phi Lôi Bích Dao» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 949,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 2,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "n": 4,
+   "at": 1227,
+   "shot": "/home/user/wt/tp-g4c/shots-tp-hot-1/loop-2.png",
+   "dump": "/home/user/wt/tp-g4c/shots-tp-hot-1/loop-2-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 4,
+    "w": 0,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   },
+   "buttons": [
+    "Ô lưu",
+    "Xem bản thân",
+    "Sắc60Tài91Tâm cơ10Đức52Danh5Sủng0",
+    "Bạc71Sức88/99",
+    "Buổi tối, còn 4 khắc",
+    "Phong hàn · nhẹ",
+    "Lãnh cung",
+    "mưa rào",
+    "Quẻ Hạ (Danh)",
+    "Tâm trạngPhiền muộn-35",
+    "Về Trường Môn viện",
+    "Tin báo"
+   ],
+   "trace": [
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tin báo»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hậu cung»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Buổi tối, còn 4 khắc»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Y phục 1»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tự chọn đồRất vữngTốn0 khắcThànhthay ngay bộ ta ch»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tự chọn đồRất vữngTốn0 khắcThànhthay ngay bộ ta ch»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tự chọn đồRất vữngTốn0 khắcThànhthay ngay bộ ta ch»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tự chọn đồRất vữngTốn0 khắcThànhthay ngay bộ ta ch»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Phong hàn · nhẹ»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lối riêng 2/2»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Quẻ Hạ (Danh)»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hoàng tự»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Xem thêm»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Buổi tối, còn 4 khắc»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Vải vóc 4»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tự chọn đồRất vữngTốn0 khắcThànhthay ngay bộ ta ch»"
+   ]
+  },
+  {
+   "k": "dead|close button has no effect: .dlg «Tin báo» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tin báo» «Lui»",
+   "n": 1,
+   "at": 1242,
+   "shot": "/home/user/wt/tp-g4c/shots-tp-hot-1/noeffect-1795604483249.png"
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on .dlg «Tin trong cung buổi này»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on .dlg «Tin trong cung buổi này»",
+   "n": 1,
+   "at": 2021,
+   "shot": "/home/user/wt/tp-g4c/shots-tp-hot-1/loop-5.png",
+   "dump": "/home/user/wt/tp-g4c/shots-tp-hot-1/loop-5-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 7,
+    "w": 0,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   },
+   "buttons": [
+    "Lui",
+    ""
+   ],
+   "trace": [
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bậc 0 trên 5»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tứ đức 8/9»",
+    ".dlg «Vũ» «Lui»",
+    ".dlg «Vũ: các lối» «Lui»",
+    ".dlg «Vũ: các lối» «Lui»",
+    ".dlg «Vũ: các lối» «Lui»",
+    ".dlg «Tin báo» «Lui»",
+    ".dlg «Quan hệ với» «Chí tôn 2»",
+    ".dlg «Quan hệ với» «Thái hậu»",
+    ".dlg «Chương 2 · Lần đầu được sủng» «Đi làm: Bán đồ trong rương riêngTốnkhôngĐượctới Tư»",
+    ".dlg «Tin báo» «Lui»",
+    ".dlg «Tin báo» «Lui»",
+    ".dlg «Tin báo» «Lui»",
+    ".dlg «Hôn sự» «Lui»",
+    ".dlg «Lịch tháng» «mồng 8: Nguyệt tín»",
+    ".dlg «Lịch tháng» «Ghi vào sổ»",
+    ".dlg «Lịch tháng» «ngày 21»",
+    ".dlg «Lịch tháng» «ngày 18»",
+    ".dlg «Lịch tháng» «Lui»",
+    ".dlg «Tin báo» «Lui»"
+   ]
+  },
+  {
+   "k": "game|dialog queue holds 4 copies of «Tâm trạng · Đáp ứng Diệp Thu Đồng» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 4 copies of «Tâm trạng · Đáp ứng Diệp Thu Đồng» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 2107,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 7,
+    "w": 1,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "dead|close button has no effect: .dlg «Tâm trạng · Đáp ứng Diệp Thu Đồng» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tâm trạng · Đáp ứng Diệp Thu Đồng» «Lui»",
+   "n": 1,
+   "at": 2114,
+   "shot": "/home/user/wt/tp-g4c/shots-tp-hot-1/noeffect-1795605355039.png"
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on .dlg «Hắt trà»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on .dlg «Hắt trà»",
+   "n": 1,
+   "at": 2293,
+   "shot": "/home/user/wt/tp-g4c/shots-tp-hot-1/loop-6.png",
+   "dump": null,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 7,
+    "w": 2,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   },
+   "buttons": [
+    "",
+    "NéKhó lườngTốnkhôngĐượcnhẹ đi một bậc·nhẹ thì tránh hẳnBạidính trọnKèmmột ván ngắn!",
+    "Đứng yênTốnkhôngĐượcnhẫn nhịn: Đức +1Kèmdính trọn!"
+   ],
+   "trace": [
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Phi tần»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Quẻ Thượng (Giao thiệp)»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Buổi tối, còn 1 khắc»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Nam nhân»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Buổi tối, còn 1 khắc»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Phong hàn · nhẹ»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Học tập · Tài nghệ 1/2»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hậu cung»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sổ ghi»",
+    ".dlg «Tin báo» «Lui»",
+    ".dlg «Tin báo» «Lui»",
+    ".dlg «Đã biết về Tần Diệp Lưu Ly» «Lui»",
+    ".dlg «Tin báo» «Lui»",
+    ".dlg «Tin báo» «Lui»",
+    ".dlg «Tin báo» «Lui»",
+    ".dlg «Tin trong cung buổi này» «Lui»"
+   ]
+  },
+  {
+   "k": "game|dialog queue holds 8 copies of «Tâm trạng · Quý nhân Chung Bích Lạc» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 8 copies of «Tâm trạng · Quý nhân Chung Bích Lạc» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 2764,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 9,
+    "w": 0,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 5 copies of «Tâm trạng · Quý nhân Chung Bích Lạc» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 5 copies of «Tâm trạng · Quý nhân Chung Bích Lạc» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 2770,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 9,
+    "w": 0,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 2 copies of «Tâm trạng · Quý nhân Chung Bích Lạc» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 2 copies of «Tâm trạng · Quý nhân Chung Bích Lạc» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 2776,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 9,
+    "w": 0,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on .dlg «Tin báo»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on .dlg «Tin báo»",
+   "n": 1,
+   "at": 3057,
+   "shot": "/home/user/wt/tp-g4c/shots-tp-hot-1/loop-8.png",
+   "dump": null,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 10,
+    "w": 0,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   },
+   "buttons": [
+    "Lui"
+   ],
+   "trace": [
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Con của ta»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «đêm sương giá»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «đêm sương giá»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tin báo: 1 tin mới»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Đang làm 1/4»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «với Ta»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «đêm sương giá»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Quẻ Hạ hạ (Mưu kế)»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»",
+    ".dlg «Quan hệ với» «Ta 1»",
+    ".dlg «Quan hệ với» «Ta 1»",
+    ".dlg «Quan hệ với» «Phi tần 10»",
+    ".dlg «Quan hệ với» «Ta 1»",
+    ".dlg «Quan hệ với» «Ta 1»",
+    ".dlg «Quan hệ với» «Phế phiTa»"
+   ]
+  },
+  {
+   "k": "game|dialog queue holds 11 copies of «Tâm trạng · Quý nhân Đậu Mi Trang» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 11 copies of «Tâm trạng · Quý nhân Đậu Mi Trang» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 60,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 10,
+    "w": 1,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 12 copies of «Tâm trạng · Quý nhân Đậu Mi Trang» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 12 copies of «Tâm trạng · Quý nhân Đậu Mi Trang» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 69,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 10,
+    "w": 1,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 9 copies of «Tâm trạng · Quý nhân Đậu Mi Trang» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 9 copies of «Tâm trạng · Quý nhân Đậu Mi Trang» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 74,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 10,
+    "w": 1,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 6 copies of «Tâm trạng · Quý nhân Đậu Mi Trang» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 6 copies of «Tâm trạng · Quý nhân Đậu Mi Trang» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 80,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 10,
+    "w": 1,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 3 copies of «Tâm trạng · Quý nhân Đậu Mi Trang» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 3 copies of «Tâm trạng · Quý nhân Đậu Mi Trang» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 85,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 10,
+    "w": 1,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 6 copies of «Tâm trạng · Tần Đậu Mi Trang» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 6 copies of «Tâm trạng · Tần Đậu Mi Trang» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 211,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 11,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 3 copies of «Tâm trạng · Tần Đậu Mi Trang» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 3 copies of «Tâm trạng · Tần Đậu Mi Trang» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 217,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 11,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 7 copies of «Tâm trạng · Uyển phi Kiều Lạc Tuyết» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 7 copies of «Tâm trạng · Uyển phi Kiều Lạc Tuyết» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 229,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 11,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 4 copies of «Tâm trạng · Uyển phi Kiều Lạc Tuyết» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 4 copies of «Tâm trạng · Uyển phi Kiều Lạc Tuyết» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 235,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 11,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "dead|close button has no effect: .dlg «Tâm trạng · Uyển phi Kiều Lạc Tuyết» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tâm trạng · Uyển phi Kiều Lạc Tuyết» «Lui»",
+   "n": 1,
+   "at": 242,
+   "shot": "/home/user/wt/tp-g4c/shots-tp-hot-1/noeffect-1795608034195.png"
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on .dlg «Tin chờ người sai đi»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on .dlg «Tin chờ người sai đi»",
+   "n": 1,
+   "at": 383,
+   "shot": "/home/user/wt/tp-g4c/shots-tp-hot-1/loop-9.png",
+   "dump": null,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 11,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   },
+   "buttons": [
+    "Lui"
+   ],
+   "trace": [
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc60Tài91Tâm cơ11Đức90Danh2Sủng0»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Học tập · Tài nghệ 2/2»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Học tập · Tài nghệHọc tập · Tài nghệThêu khăn bánV»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Học tập · Tài nghệHọc tập · Tài nghệThêu khăn bánV»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Học tập · Tài nghệHọc tập · Tài nghệThêu khăn bánV»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»",
+    ".mapsc «Thu nhỏ»",
+    ".mapsc «Hoàng tự»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Học tập · Tài nghệHọc tập · Tài nghệThêu khăn bánV»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc8Sức98/98»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Buổi tối, còn 4 khắc»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Buổi tối, còn 4 khắc»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «đêm gió lớn»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»",
+    ".dlg «Tin báo» «Lui»",
+    ".dlg «Tin chờ người sai đi» «Lui»"
+   ]
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on .dlg «Danh hiệu»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on .dlg «Danh hiệu»",
+   "n": 1,
+   "at": 536,
+   "shot": "/home/user/wt/tp-g4c/shots-tp-hot-1/loop-10.png",
+   "dump": null,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 11,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   },
+   "buttons": [
+    "Lui",
+    "Mục tiêu",
+    "Danh hiệu 0/35",
+    "Thiên mệnh"
+   ],
+   "trace": [
+    ".mapsc «Mục tiêu chương»",
+    ".mapsc «sương đêm»",
+    ".mapsc «Ra vào cung cấm»",
+    ".mapsc «Lịch tháng»",
+    ".mapsc «Dư đồ»",
+    ".mapsc «Quẻ Hạ hạ (Sức khỏe)»",
+    ".mapsc «Tâm trạngBình thản-7»",
+    ".mapsc «Trường Môn viện1 bóng · đang ở lãnh cung»",
+    ".mapsc «Buổi tối, còn 4 khắc»",
+    ".mapsc «Hậu cung»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»",
+    "DEAD Hậu cung",
+    ".dlg «Lịch tháng» «ngày 15: Tết Nguyên tiêu»",
+    ".dlg «Lịch tháng» «mồng 4: Nguyệt tín»",
+    ".dlg «Lịch tháng» «ngày 27»",
+    ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»",
+    ".dlg «Lịch tháng» «Lui»",
+    ".dlg «Danh hiệu» «Danh hiệu 0/35»",
+    ".dlg «Danh hiệu» «Danh hiệu 0/35»",
+    ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+   ]
+  }
+ ],
+ "dead": [
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tâm trạng · Ta»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/tp-g4c/shots-tp-hot-1/noeffect-1795603412344.png",
+   "at": 171,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tâm trạng · Ta»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/tp-g4c/shots-tp-hot-1/noeffect-1795604264521.png",
+   "at": 1023,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 3,
+    "w": 2,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tin báo»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/tp-g4c/shots-tp-hot-1/noeffect-1795604483249.png",
+   "at": 1242,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 4,
+    "w": 0,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".kmov",
+   "label": "?",
+   "cover": "zero size",
+   "shot": "/home/user/wt/tp-g4c/shots-tp-hot-1/dead-fold-1795604712546.png",
+   "dev": "fold",
+   "at": 1471,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 5,
+    "w": 0,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tâm trạng · Đáp ứng Diệp Thu Đồng»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/tp-g4c/shots-tp-hot-1/noeffect-1795605355039.png",
+   "at": 2114,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 7,
+    "w": 1,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".kmov",
+   "label": "?",
+   "cover": "img.kfr",
+   "shot": "/home/user/wt/tp-g4c/shots-tp-hot-1/dead-fold-1795605995992.png",
+   "dev": "fold",
+   "at": 2754,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 9,
+    "w": 0,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".kmov",
+   "label": "?",
+   "cover": "zero size",
+   "shot": "/home/user/wt/tp-g4c/shots-tp-hot-1/dead-fold-1795607837113.png",
+   "dev": "fold",
+   "at": 45,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 10,
+    "w": 1,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".kmov",
+   "label": "?",
+   "cover": "zero size",
+   "shot": "/home/user/wt/tp-g4c/shots-tp-hot-1/dead-fold-1795607987992.png",
+   "dev": "fold",
+   "at": 195,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 11,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tâm trạng · Uyển phi Kiều Lạc Tuyết»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/tp-g4c/shots-tp-hot-1/noeffect-1795608034195.png",
+   "at": 242,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 11,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".kmov",
+   "label": "?",
+   "cover": "zero size",
+   "shot": "/home/user/wt/tp-g4c/shots-tp-hot-1/dead-fold-1795608633809.png",
+   "dev": "fold",
+   "at": 841,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 12,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".kmov",
+   "label": "?",
+   "cover": "img.kfr",
+   "shot": "/home/user/wt/tp-g4c/shots-tp-hot-1/dead-fold-1795608709172.png",
+   "dev": "fold",
+   "at": 917,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 12,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Trương Dao Quang"
+   }
+  }
+ ],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 389610,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 100,
+   "year": 1,
+   "chars": 528821,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 118,
+   "year": null,
+   "chars": 547724,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 153,
+   "year": null,
+   "chars": 611974,
+   "key": "hclh-save-v2-1"
+  }
+ ],
+ "buoi": 159,
+ "steps": 4433,
+ "status": [],
+ "_loopAt": 1795609610411,
+ "_snapAt": 1795609552620,
+ "trace": [
+  [
+   428,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   430,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Quẻ Hạ hạ (Sức khỏe)»"
+  ],
+  [
+   430,
+   ".dlg «Quẻ Hạ hạ · Sức khỏe» «Lui»"
+  ],
+  [
+   432,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»"
+  ],
+  [
+   433,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   434,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   434,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»"
+  ],
+  [
+   435,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»"
+  ],
+  [
+   436,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Đang làm 1/4»"
+  ],
+  [
+   438,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sổ ghi»"
+  ],
+  [
+   439,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hậu cung»"
+  ],
+  [
+   441,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»"
+  ],
+  [
+   442,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   442,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   442,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   442,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   443,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm trạngBình thản-7»"
+  ],
+  [
+   443,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm trạngBình thản-7»"
+  ],
+  [
+   444,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Người được sai đi (có mới)»"
+  ],
+  [
+   444,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc8Sức98/98»"
+  ],
+  [
+   444,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»"
+  ],
+  [
+   445,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc60Tài91Tâm cơ11Đức91Danh2Sủng0»"
+  ],
+  [
+   445,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   445,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   445,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   446,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   447,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»"
+  ],
+  [
+   447,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Về Trường Môn viện»"
+  ],
+  [
+   448,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Chọn chính mình»"
+  ],
+  [
+   448,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «3Chí tôn»"
+  ],
+  [
+   449,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»"
+  ],
+  [
+   449,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc8Sức98/98»"
+  ],
+  [
+   449,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lịch tháng»"
+  ],
+  [
+   450,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lịch tháng»"
+  ],
+  [
+   450,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc8Sức98/98»"
+  ],
+  [
+   450,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   451,
+   ".mapsc «Quẻ Hạ hạ (Sức khỏe)»"
+  ],
+  [
+   451,
+   ".mapsc «Bạc8Sức98/98»"
+  ],
+  [
+   452,
+   ".mapsc «Lịch tháng»"
+  ],
+  [
+   452,
+   ".mapsc «Hành sự»"
+  ],
+  [
+   453,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Học tập · Tài nghệHọc tập · Tài nghệThêu khăn bánV»"
+  ],
+  [
+   454,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Học tập · Tài nghệHọc tập · Tài nghệThêu khăn bánV»"
+  ],
+  [
+   454,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   455,
+   ".mapsc «Ra vào cung cấm»"
+  ],
+  [
+   455,
+   ".mapsc «Lãnh cung»"
+  ],
+  [
+   456,
+   ".mapsc «Hậu cung»"
+  ],
+  [
+   457,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   457,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Học tập · Tài nghệHọc tập · Tài nghệThêu khăn bánV»"
+  ],
+  [
+   457,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Học tập · Tài nghệHọc tập · Tài nghệThêu khăn bánV»"
+  ],
+  [
+   458,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»"
+  ],
+  [
+   459,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Học tập · Tài nghệHọc tập · Tài nghệCác lối, sách »"
+  ],
+  [
+   459,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»"
+  ],
+  [
+   460,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Đổi chỗ hai người»"
+  ],
+  [
+   460,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc60Tài91Tâm cơ11Đức91Danh2Sủng0»"
+  ],
+  [
+   461,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Về Trường Môn viện»"
+  ],
+  [
+   461,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Chọn chính mình»"
+  ],
+  [
+   462,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Chọn chính mình»"
+  ],
+  [
+   462,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Quẻ Hạ hạ (Sức khỏe)»"
+  ],
+  [
+   463,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Phế phiTần Tú Uyển»"
+  ],
+  [
+   464,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   464,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»"
+  ],
+  [
+   465,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «sương đêm»"
+  ],
+  [
+   465,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   466,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hậu cung»"
+  ],
+  [
+   467,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   467,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   468,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»"
+  ],
+  [
+   469,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc8Sức98/98»"
+  ],
+  [
+   469,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Quẻ Hạ hạ (Sức khỏe)»"
+  ],
+  [
+   469,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc60Tài91Tâm cơ11Đức91Danh2Sủng0»"
+  ],
+  [
+   469,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hoàng tự»"
+  ],
+  [
+   470,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Quý tộc kén rể · kén dâu»"
+  ],
+  [
+   471,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao thiệpGiao thiệpĐang thỉnh tranh…Dò hỏi gia th»"
+  ],
+  [
+   472,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»"
+  ],
+  [
+   472,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»"
+  ],
+  [
+   472,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»"
+  ],
+  [
+   473,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»"
+  ],
+  [
+   473,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Kế vị»"
+  ],
+  [
+   474,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»"
+  ],
+  [
+   475,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Việc»"
+  ],
+  [
+   475,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   475,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   476,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   476,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   477,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hậu cung»"
+  ],
+  [
+   479,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Phi tần»"
+  ],
+  [
+   480,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lạc Tuyết»"
+  ],
+  [
+   482,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Chí tônPhi tầnNam nhânCung nhân‹Càn Ninh cungAnh N»"
+  ],
+  [
+   483,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Cung nhân»"
+  ],
+  [
+   485,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hậu cung»"
+  ],
+  [
+   486,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hoàng tự»"
+  ],
+  [
+   487,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   488,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»"
+  ],
+  [
+   488,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»"
+  ],
+  [
+   488,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tin báo: 8 tin mới»"
+  ],
+  [
+   489,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Chọn chính mình»"
+  ],
+  [
+   489,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm trạngBình thản-7»"
+  ],
+  [
+   489,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mục tiêu chương»"
+  ],
+  [
+   490,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «sương đêm»"
+  ],
+  [
+   490,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»"
+  ],
+  [
+   491,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   491,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   491,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   492,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»"
+  ],
+  [
+   492,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   492,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»"
+  ],
+  [
+   493,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»"
+  ],
+  [
+   493,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hoàng tự»"
+  ],
+  [
+   494,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «sương đêm»"
+  ],
+  [
+   495,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc8Sức98/98»"
+  ],
+  [
+   495,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «sương đêm»"
+  ],
+  [
+   496,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc60Tài91Tâm cơ11Đức91Danh2Sủng0»"
+  ],
+  [
+   496,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tin báo»"
+  ],
+  [
+   497,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»"
+  ],
+  [
+   497,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Đổi chỗ hai người»"
+  ],
+  [
+   497,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Ân oánPhe pháiPhế phiTa▾⇄Hoàng thượng▾Quan hệ giữa»"
+  ],
+  [
+   498,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Xem quan hệ của Ta»"
+  ],
+  [
+   498,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «sương đêm»"
+  ],
+  [
+   499,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Đổi chỗ hai người»"
+  ],
+  [
+   500,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   500,
+   ".mapsc «Cung nhân · chạm để mở danh sách»"
+  ],
+  [
+   501,
+   ".mapsc «Tâm trạngBình thản-7»"
+  ],
+  [
+   501,
+   ".mapsc «Thu nhỏ»"
+  ],
+  [
+   502,
+   ".mapsc «Trường Môn viện1 bóng · đang ở lãnh cung»"
+  ],
+  [
+   502,
+   ".mapsc «Quẻ Hạ hạ (Sức khỏe)»"
+  ],
+  [
+   502,
+   ".mapsc «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   502,
+   ".mapsc «Chí tôn · chạm để mở danh sách»"
+  ],
+  [
+   503,
+   ".mapsc «Về Trường Môn viện»"
+  ],
+  [
+   503,
+   ".mapsc «Chí tôn · chạm để mở danh sách»"
+  ],
+  [
+   504,
+   ".mapsc «Lãnh cung»"
+  ],
+  [
+   504,
+   ".mapsc «Xem bản thân»"
+  ],
+  [
+   504,
+   ".mapsc «Phóng to»"
+  ],
+  [
+   505,
+   ".mapsc «Về Trường Môn viện»"
+  ],
+  [
+   505,
+   ".mapsc «Quẻ Hạ hạ (Sức khỏe)»"
+  ],
+  [
+   506,
+   ".mapsc «Xuân · còn 4 khắc · đi gần 1 khắc, xa 2 · bóng: ng»"
+  ],
+  [
+   506,
+   ".mapsc «Xem bản thân»"
+  ],
+  [
+   506,
+   ".mapsc «Mục tiêu chương»"
+  ],
+  [
+   507,
+   ".mapsc «sương đêm»"
+  ],
+  [
+   508,
+   ".mapsc «Ra vào cung cấm»"
+  ],
+  [
+   508,
+   ".mapsc «Lịch tháng»"
+  ],
+  [
+   509,
+   ".mapsc «Dư đồ»"
+  ],
+  [
+   510,
+   ".mapsc «Quẻ Hạ hạ (Sức khỏe)»"
+  ],
+  [
+   510,
+   ".mapsc «Tâm trạngBình thản-7»"
+  ],
+  [
+   510,
+   ".mapsc «Trường Môn viện1 bóng · đang ở lãnh cung»"
+  ],
+  [
+   511,
+   ".mapsc «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   511,
+   ".mapsc «Hậu cung»"
+  ],
+  [
+   513,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»"
+  ],
+  [
+   521,
+   "DEAD Hậu cung"
+  ],
+  [
+   523,
+   ".dlg «Lịch tháng» «ngày 15: Tết Nguyên tiêu»"
+  ],
+  [
+   525,
+   ".dlg «Lịch tháng» «mồng 4: Nguyệt tín»"
+  ],
+  [
+   527,
+   ".dlg «Lịch tháng» «ngày 27»"
+  ],
+  [
+   528,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   529,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   533,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   534,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   535,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   537,
+   ".dlg «unstick Lui»"
+  ],
+  [
+   538,
+   ".dlg «Xem quan hệ của» «Cung nhân 27»"
+  ],
+  [
+   540,
+   ".dlg «Xem quan hệ của» «Cung nhân 27»"
+  ],
+  [
+   542,
+   ".dlg «Xem quan hệ của» «Cung nữ thân tín tam đẳngBình»"
+  ],
+  [
+   544,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   547,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   548,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   556,
+   ".dlg «Tin báo» «Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu»"
+  ],
+  [
+   557,
+   ".dlg «Tin chờ người sai đi» «Lui»"
+  ],
+  [
+   560,
+   ".dlg «Công · Nữ công: các lối» «Lui»"
+  ],
+  [
+   562,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   565,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   567,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   570,
+   ".dlg «Tin chờ người sai đi» «Lui»"
+  ],
+  [
+   573,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   583,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   595,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   598,
+   ".dlg «Lui»"
+  ],
+  [
+   602,
+   "#kmrew «Thường»"
+  ],
+  [
+   606,
+   ".dlg «Lui»"
+  ],
+  [
+   611,
+   "#kmrew «ThườngThan liễuHộp màu mày dùng khi điểm trang (kẻ»"
+  ],
+  [
+   620,
+   ".dlg «Lui»"
+  ],
+  [
+   624,
+   "#kmrew «Thường»"
+  ],
+  [
+   628,
+   ".dlg «Lui»"
+  ],
+  [
+   633,
+   "#kmrew «Thường»"
+  ],
+  [
+   636,
+   ".dlg «Lui»"
+  ],
+  [
+   641,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   645,
+   ".dlg «Lui»"
+  ],
+  [
+   650,
+   "#kmrew «ThườngVải thô (hàng kém)Hàng kém Nội vụ phủ phát: »"
+  ],
+  [
+   654,
+   ".dlg «Lui»"
+  ],
+  [
+   658,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   663,
+   ".dlg «Lui»"
+  ],
+  [
+   668,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   673,
+   ".dlg «Lui»"
+  ],
+  [
+   679,
+   "#kmrew «Thường»"
+  ],
+  [
+   683,
+   ".dlg «Lui»"
+  ],
+  [
+   686,
+   "#kmrew «ThườngVải thô (hàng kém)Hàng kém Nội vụ phủ phát: »"
+  ],
+  [
+   690,
+   ".dlg «Lui»"
+  ],
+  [
+   692,
+   "#kmrew «ThườngVải thô (hàng kém)Hàng kém Nội vụ phủ phát: »"
+  ],
+  [
+   696,
+   ".dlg «Lui»"
+  ],
+  [
+   700,
+   "#kmrew «ThườngThan liễuHộp màu mày dùng khi điểm trang (kẻ»"
+  ],
+  [
+   703,
+   ".dlg «Lui»"
+  ],
+  [
+   706,
+   "#kmrew «Nhận»"
+  ],
+  [
+   709,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   713,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   716,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   717,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   725,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   730,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   733,
+   ".dlg «Tỉnh thân» «Lui»"
+  ],
+  [
+   736,
+   ".dlg «Hắt trà» «Đứng yênTốnkhôngĐượcnhẫn nhịn: Đức +1Kèmdính trọn!»"
+  ],
+  [
+   739,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Quản kẻ hầu 0/3»"
+  ],
+  [
+   740,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm trạngBực dọc-35»"
+  ],
+  [
+   745,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   748,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   751,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   752,
+   ".mapsc «Danh sách»"
+  ],
+  [
+   755,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   756,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   758,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mục tiêu chương»"
+  ],
+  [
+   760,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   760,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   760,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   761,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   761,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   764,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   769,
+   ".kmov «»"
+  ],
+  [
+   769,
+   ".kmov «»"
+  ],
+  [
+   769,
+   ".kmov «»"
+  ],
+  [
+   771,
+   ".kmov «»"
+  ],
+  [
+   771,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   773,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   774,
+   ".dlg «Tâm trạng · Uyển quý phi Kiều Lạc Tuyết» «Lui»"
+  ],
+  [
+   776,
+   ".dlg «Tâm trạng · Trinh phi Diệp Lưu Ly» «Lui»"
+  ],
+  [
+   778,
+   ".dlg «Tâm trạng · Trinh phi Diệp Lưu Ly» «Lui»"
+  ],
+  [
+   787,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   789,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   790,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   792,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   793,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   795,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   796,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   798,
+   ".dlg «Bổng lộc tháng giêng» «Lui»"
+  ],
+  [
+   801,
+   ".dlg «Tỉnh thân» «Lui»"
+  ],
+  [
+   803,
+   ".dlg «Lời nhận xét» «Lui»"
+  ],
+  [
+   805,
+   ".dlg «Hắt trà» «Đứng yênTốnkhôngĐượcnhẫn nhịn: Đức +1Kèmdính trọn!»"
+  ],
+  [
+   807,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Bạc2Sức99/99»"
+  ],
+  [
+   808,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   810,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Quẻ Hạ (Sủng)»"
+  ],
+  [
+   810,
+   ".dlg «Quẻ Hạ · Sủng» «Lui»"
+  ],
+  [
+   812,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   814,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»"
+  ],
+  [
+   815,
+   ".dlg «Lãnh cung» «Lui»"
+  ],
+  [
+   817,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mục tiêu chương»"
+  ],
+  [
+   818,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   818,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   818,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   819,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   819,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   822,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   822,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «mưa phùn»"
+  ],
+  [
+   824,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   826,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   828,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc60Tài91Tâm cơ11Đức93Danh3Sủng0»"
+  ],
+  [
+   830,
+   ".dlg «Sắc» «Lui»"
+  ],
+  [
+   832,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hành sự»"
+  ],
+  [
+   833,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   841,
+   "DEAD ?"
+  ],
+  [
+   842,
+   ".kmov «»"
+  ],
+  [
+   842,
+   ".kmov «»"
+  ],
+  [
+   843,
+   ".kmov «»"
+  ],
+  [
+   843,
+   ".kmov «»"
+  ],
+  [
+   843,
+   ".kmov «»"
+  ],
+  [
+   844,
+   ".kmov «»"
+  ],
+  [
+   845,
+   ".kmov «»"
+  ],
+  [
+   846,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   848,
+   ".dlg «Tâm trạng · Quý nhân Chung Vân Yên» «Lui»"
+  ],
+  [
+   850,
+   ".dlg «Tâm trạng · Đáp ứng Viên Ngân Chúc» «Lui»"
+  ],
+  [
+   852,
+   ".dlg «Tâm trạng · Trinh phi Diệp Lưu Ly» «Lui»"
+  ],
+  [
+   855,
+   ".dlg «Tâm trạng · Đáp ứng Viên Ngân Chúc» «Lui»"
+  ],
+  [
+   857,
+   ".dlg «Tâm trạng · Quý nhân Chung Vân Yên» «Lui»"
+  ],
+  [
+   859,
+   ".dlg «Tâm trạng · Đáp ứng Viên Ngân Chúc» «Lui»"
+  ],
+  [
+   862,
+   ".dlg «Tâm trạng · Quý nhân Chung Vân Yên» «Lui»"
+  ],
+  [
+   868,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   871,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   873,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   874,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   875,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   876,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   878,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   880,
+   ".dlg «Hắt trà» «NéKhó lườngTốnkhôngĐượcnhẹ đi một bậc·nhẹ thì trán»"
+  ],
+  [
+   882,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   883,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   885,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   887,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm trạngBình thản-6»"
+  ],
+  [
+   887,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   889,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lịch tháng»"
+  ],
+  [
+   889,
+   ".dlg «Lịch tháng» «ngày 25»"
+  ],
+  [
+   890,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   890,
+   ".dlg «Lịch tháng» «ngày 28»"
+  ],
+  [
+   890,
+   ".dlg «Lịch tháng» «ngày 25»"
+  ],
+  [
+   891,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   893,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   895,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hậu cung»"
+  ],
+  [
+   896,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   898,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»"
+  ],
+  [
+   899,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   900,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «1Cung nhân»"
+  ],
+  [
+   901,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   902,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   903,
+   ".kmov «»"
+  ],
+  [
+   903,
+   ".kmov «»"
+  ],
+  [
+   904,
+   ".kmov «»"
+  ],
+  [
+   904,
+   ".kmov «»"
+  ],
+  [
+   905,
+   ".kmov «»"
+  ],
+  [
+   905,
+   ".kmov «»"
+  ],
+  [
+   906,
+   ".kmov «»"
+  ],
+  [
+   907,
+   ".kmov «»"
+  ],
+  [
+   907,
+   ".kmov «»"
+  ],
+  [
+   908,
+   ".kmov «»"
+  ],
+  [
+   908,
+   ".kmov «»"
+  ],
+  [
+   908,
+   ".kmov «»"
+  ],
+  [
+   909,
+   ".kmov «»"
+  ],
+  [
+   909,
+   ".kmov «»"
+  ],
+  [
+   917,
+   "DEAD ?"
+  ],
+  [
+   917,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   919,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   920,
+   ".dlg «Tâm trạng · Đáp ứng Viên Ngân Chúc» «Lui»"
+  ],
+  [
+   922,
+   ".dlg «Tâm trạng · Quý nhân Chung Vân Yên» «Lui»"
+  ],
+  [
+   924,
+   ".dlg «Tâm trạng · Tần Đậu Mi Trang» «Lui»"
+  ],
+  [
+   925,
+   ".dlg «Tâm trạng · Tần Đậu Mi Trang» «Lui»"
+  ],
+  [
+   928,
+   ".dlg «Tâm trạng · Quý nhân Chung Vân Yên» «Lui»"
+  ],
+  [
+   930,
+   ".dlg «Tâm trạng · Quý nhân Chung Vân Yên» «Lui»"
+  ],
+  [
+   932,
+   ".dlg «Tâm trạng · Đáp ứng Viên Ngân Chúc» «Lui»"
+  ],
+  [
+   935,
+   ".dlg «Tâm trạng · Đáp ứng Viên Ngân Chúc» «Lui»"
+  ],
+  [
+   937,
+   ".dlg «Tâm trạng · Tần Đậu Mi Trang» «Lui»"
+  ],
+  [
+   939,
+   ".dlg «Tâm trạng · Đáp ứng Viên Ngân Chúc» «Lui»"
+  ],
+  [
+   941,
+   ".dlg «Tâm trạng · Thường tại Chung Bích Lạc» «Lui»"
+  ],
+  [
+   944,
+   ".dlg «Tâm trạng · Uyển quý phi Kiều Lạc Tuyết» «Lui»"
+  ],
+  [
+   946,
+   ".dlg «Tâm trạng · Tần Đậu Mi Trang» «Lui»"
+  ],
+  [
+   948,
+   ".dlg «Tâm trạng · Đáp ứng Viên Ngân Chúc» «Lui»"
+  ],
+  [
+   954,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   958,
+   "#kmrew «ThườngVải thô (hàng kém)Hàng kém Nội vụ phủ phát: »"
+  ],
+  [
+   959,
+   ".dlg «Lui»"
+  ],
+  [
+   961,
+   "#kmrew «Thường»"
+  ],
+  [
+   963,
+   ".dlg «Lui»"
+  ],
+  [
+   965,
+   "#kmrew «ThườngVải thô (hàng kém)Hàng kém Nội vụ phủ phát: »"
+  ],
+  [
+   966,
+   ".dlg «Lui»"
+  ],
+  [
+   968,
+   "#kmrew «Thường»"
+  ],
+  [
+   970,
+   ".dlg «Lui»"
+  ],
+  [
+   972,
+   "#kmrew «Nhận»"
+  ],
+  [
+   974,
+   "DEAD Thường"
+  ],
+  [
+   975,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   977,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   980,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   981,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   983,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   985,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   988,
+   ".dlg «Bổng lộc tháng hai» «Lui»"
+  ],
+  [
+   991,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Chọn chính mình»"
+  ],
+  [
+   993,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   994,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Buổi trưa, còn 4 khắc»"
+  ],
+  [
+   994,
+   ".dlg «trưa · còn» «Lui»"
+  ],
+  [
+   996,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Người được sai đi (có mới)»"
+  ],
+  [
+   997,
+   ".dlg «Tin chờ người sai đi» «Lui»"
+  ],
+  [
+   999,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   1000,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «mưa phùn»"
+  ],
+  [
+   1002,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   12,
+   "#modal «Cung Tường Mộng» «Chơi một mìnhTiếp tục: Đáp ứng Trương Dao Quang · »"
+  ],
+  [
+   13,
+   "#modal «Chọn sổ» «Tiếp tục kiếp này»"
+  ],
+  [
+   20,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   20,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang ngày mới»"
+  ],
+  [
+   23,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»"
+  ],
+  [
+   25,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   29,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   32,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   35,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   36,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   37,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   39,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   39,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   42,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   44,
+   ".dlg «Yến đầy tháng hoàng tử» «Lui»"
+  ],
+  [
+   46,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «3Chí tôn»"
+  ],
+  [
+   47,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»"
+  ],
+  [
+   47,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   48,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   50,
+   ".mapsc «Hoàng tự»"
+  ],
+  [
+   51,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   52,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sang buổi»"
+  ],
+  [
+   53,
+   "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»"
+  ],
+  [
+   54,
+   ".mapsc «Về Trường Môn viện»"
+  ],
+  [
+   55,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   56,
+   ".kmov «»"
+  ],
+  [
+   57,
+   ".kmov «»"
+  ],
+  [
+   57,
+   ".kmov «»"
+  ],
+  [
+   57,
+   ".kmov «»"
+  ],
+  [
+   58,
+   ".kmov «»"
+  ],
+  [
+   58,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   61,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   62,
+   ".dlg «Tâm trạng · Trinh phi Diệp Lưu Ly» «Lui»"
+  ],
+  [
+   64,
+   ".dlg «Tâm trạng · Tần Đậu Mi Trang» «Lui»"
+  ],
+  [
+   66,
+   ".dlg «Tâm trạng · Tần Nghiêm Hân Duyệt» «Lui»"
+  ],
+  [
+   67,
+   ".dlg «Tâm trạng · Thường tại Viên Ngân Chúc» «Lui»"
+  ]
+ ],
+ "_started": true,
+ "_ckAt": 1795609610549,
+ "_ckB": 159,
+ "rss": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1174,
+   "rendererMB": 606
+  },
+  {
+   "buoi": 6,
+   "y": 1,
+   "totalMB": 1867,
+   "rendererMB": 1292
+  },
+  {
+   "buoi": 11,
+   "y": 1,
+   "totalMB": 1933,
+   "rendererMB": 1351
+  },
+  {
+   "buoi": 16,
+   "y": 1,
+   "totalMB": 2100,
+   "rendererMB": 1476
+  },
+  {
+   "buoi": 21,
+   "y": 1,
+   "totalMB": 2234,
+   "rendererMB": 1614
+  },
+  {
+   "buoi": 26,
+   "y": 1,
+   "totalMB": 2294,
+   "rendererMB": 1665
+  },
+  {
+   "buoi": 29,
+   "y": 1,
+   "totalMB": 2312,
+   "rendererMB": 1706
+  },
+  {
+   "buoi": 34,
+   "y": 1,
+   "totalMB": 2448,
+   "rendererMB": 1823
+  },
+  {
+   "buoi": 39,
+   "y": 1,
+   "totalMB": 2524,
+   "rendererMB": 1896
+  },
+  {
+   "buoi": 44,
+   "y": 1,
+   "totalMB": 2508,
+   "rendererMB": 1881
+  },
+  {
+   "buoi": 48,
+   "y": 1,
+   "totalMB": 2560,
+   "rendererMB": 1940
+  },
+  {
+   "buoi": 53,
+   "y": 1,
+   "totalMB": 2641,
+   "rendererMB": 2005
+  },
+  {
+   "buoi": 58,
+   "y": 1,
+   "totalMB": 2668,
+   "rendererMB": 2034
+  },
+  {
+   "buoi": 63,
+   "y": 1,
+   "totalMB": 2670,
+   "rendererMB": 2037
+  },
+  {
+   "buoi": 68,
+   "y": 1,
+   "totalMB": 2898,
+   "rendererMB": 2261
+  },
+  {
+   "buoi": 73,
+   "y": 1,
+   "totalMB": 2832,
+   "rendererMB": 2209
+  },
+  {
+   "buoi": 78,
+   "y": 1,
+   "totalMB": 2757,
+   "rendererMB": 2136
+  },
+  {
+   "buoi": 83,
+   "y": 1,
+   "totalMB": 2958,
+   "rendererMB": 2332
+  },
+  {
+   "buoi": 88,
+   "y": 1,
+   "totalMB": 2904,
+   "rendererMB": 2277
+  },
+  {
+   "buoi": 90,
+   "y": 1,
+   "totalMB": 2977,
+   "rendererMB": 2343
+  },
+  {
+   "buoi": 95,
+   "y": 1,
+   "totalMB": 2964,
+   "rendererMB": 2340
+  },
+  {
+   "buoi": 100,
+   "y": 1,
+   "totalMB": 2961,
+   "rendererMB": 2335
+  },
+  {
+   "buoi": 104,
+   "y": 1,
+   "totalMB": 2995,
+   "rendererMB": 2377
+  },
+  {
+   "buoi": 109,
+   "y": 1,
+   "totalMB": 2650,
+   "rendererMB": 2037
+  },
+  {
+   "buoi": 114,
+   "y": 1,
+   "totalMB": 2881,
+   "rendererMB": 2256
+  },
+  {
+   "buoi": 118,
+   "y": 1,
+   "totalMB": 2535,
+   "rendererMB": 1899
+  },
+  {
+   "buoi": 119,
+   "y": 1,
+   "totalMB": 1185,
+   "rendererMB": 613
+  },
+  {
+   "buoi": 124,
+   "y": 1,
+   "totalMB": 1634,
+   "rendererMB": 1052
+  },
+  {
+   "buoi": 129,
+   "y": 2,
+   "totalMB": 1795,
+   "rendererMB": 1206
+  },
+  {
+   "buoi": 133,
+   "y": 2,
+   "totalMB": 2062,
+   "rendererMB": 1454
+  },
+  {
+   "buoi": 137,
+   "y": 2,
+   "totalMB": 2032,
+   "rendererMB": 1414
+  },
+  {
+   "buoi": 138,
+   "y": 2,
+   "totalMB": 2101,
+   "rendererMB": 1444
+  },
+  {
+   "buoi": 143,
+   "y": 2,
+   "totalMB": 2132,
+   "rendererMB": 1514
+  },
+  {
+   "buoi": 148,
+   "y": 2,
+   "totalMB": 2175,
+   "rendererMB": 1546
+  },
+  {
+   "buoi": 153,
+   "y": 2,
+   "totalMB": 2206,
+   "rendererMB": 1573
+  },
+  {
+   "buoi": 154,
+   "y": 2,
+   "totalMB": 1069,
+   "rendererMB": 502
+  },
+  {
+   "buoi": 159,
+   "y": 2,
+   "totalMB": 1687,
+   "rendererMB": 1103
+  }
+ ],
+ "dumps": [
+  "/home/user/wt/tp-g4c/shots-tp-hot-1/loop-1-dump.json",
+  "/home/user/wt/tp-g4c/shots-tp-hot-1/loop-2-dump.json",
+  "/home/user/wt/tp-g4c/shots-tp-hot-1/loop-3-dump.json",
+  "/home/user/wt/tp-g4c/shots-tp-hot-1/loop-4-dump.json",
+  "/home/user/wt/tp-g4c/shots-tp-hot-1/loop-5-dump.json"
+ ]
+}
