@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"0aabd2e8+","t":"2026-11-25T07:50Z","c":"Sửa: cảnh lật thẻ ban đêm có lúc chờ mãi không hiện, làm các bảng (ô Tài nghệ…) chạm vào không mở.","b":"0b0d479073cb","h":[{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"}]};
+window.CTM_BI={"s":"fdbd44c6+","t":"2026-11-25T08:49Z","c":"Sửa: cảnh lật thẻ ban đêm có lúc chờ mãi không hiện, làm các bảng (ô Tài nghệ…) chạm vào không mở.","b":"dd2f4c85ed0c","h":[{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -4314,7 +4314,8 @@ $("stage").onclick=e=>{const b=e.target.closest("button");if(!b)return;
  if(b.dataset.o!==undefined&&!b.disabled)talk(+b.dataset.o)};
 $("tabs").onclick=e=>{const b=e.target.closest("button");if(!b)return;tab=b.dataset.tab;render()};
 $("modal").onclick=e=>{const b=e.target.closest("button");if(!b||b.disabled)return;if(b.id==="mclose")closeModal();else if(b.dataset.m!==undefined)chooseM(+b.dataset.m)};
-$("next").onclick=nextBuoi;$("me").onclick=()=>{if(!S.dead&&!Q.length)showSelf()};$("emp").onclick=()=>{if(!S.dead&&!Q.length)showEmp()};
+/* SANGBUOI-HELD r2: the button calls the GLOBAL nextBuoi at tap time = the outermost wrapped chain (every module's nextBuoi wrapper), the same as the khắc-spent auto-advance; wired here before any wrapper, so a bare reference would skip them all */
+$("next").onclick=()=>nextBuoi();$("me").onclick=()=>{if(!S.dead&&!Q.length)showSelf()};$("emp").onclick=()=>{if(!S.dead&&!Q.length)showEmp()};
 $("menu").onclick=()=>{if(Q.length&&!S.dead)return;save();showTitle()};
 try{const H=window.claude&&window.claude.hot;if(H){if(typeof H.snapshot==="function")H.snapshot(()=>S&&!S.dead?ser():null);if(typeof H.ready==="function")H.ready()}}catch(e){}
 (()=>{let s=1;try{s=+localStorage.getItem("hclh-slot")||1}catch(e){}SLOT=s;showTitle()})();
@@ -96246,7 +96247,7 @@ window.kesSample=function(t){try{const T=KE.types[t]?t:"death";const tone=KE.typ
    kmPush (held by kmFree); both gates are here, in one place. Installed LAST (outermost wrappers, after every module's own). No save data, no UI,
    no player-visible text. Numbers: BAL.dayq + BAL.spread.dawnSlot / dawnOpt (jbal2.js). Tests: dev/test/dayq-order.js (day turn), dev/test/dayq-hold.js (every khắc event source × activity), dev/test/dayq-hold-coop.js (gate (c) in a co-op room). Report: dev/handover/reports/day-queue.md
    ===================================================================================================================================== */
-const DQ={want:null,t:0,mt:0,newsHold:0,fo:null,stat:{held:0,ran:0,dropped:0,modalHeld:0,newsFirst:0,kmHeld:0,actHeld:0,pulled:0,actKm:0,painted:0,tapPaint:0,netArm:0,rearm:0,newsLet:0,newsPass:0}};
+const DQ={want:null,t:0,mt:0,newsHold:0,fo:null,stat:{held:0,ran:0,dropped:0,modalHeld:0,newsFirst:0,kmHeld:0,actHeld:0,pulled:0,actKm:0,painted:0,tapPaint:0,netArm:0,rearm:0,newsLet:0,newsPass:0,tapRe:0,afterPaint:0}};
 /* solo only: a co-op room keeps its own gates (jcoopworld reshowQ already waits on the book; night / week gates pace the turn) and its seats must
    draw the same random numbers in the same order — holding cards there would shift j68's draws on one seat (worlds drift) */
 function dqUi(){try{return !window.__bot&&!(window.COOPW&&COOPW.on)&&typeof S!=="undefined"&&!!S&&!S.dead}catch(e){return false}}
@@ -96311,7 +96312,7 @@ function dqNewsPass(){try{if(!DQ.newsHold||!dqUi()||!Q[0]||!dqIsNews(Q[0])||dqDa
   if(typeof kmBusy!=="undefined"&&kmBusy)return false;if(!(typeof window.cfBusy==="function"&&window.cfBusy()))return false;DQ.stat.newsPass++;return true}catch(e){return false}}
 window.dqNewsPass=dqNewsPass;
 /* (a) the held turn runs by itself once the old buổi is finished (same buổi, nothing else open) */
-function dqWait(){if(DQ.t)return;const tick=()=>{DQ.t=0;try{const w=DQ.want;if(!w)return;if(!dqUi()||bkey()!==w){DQ.want=null;DQ.stat.dropped++;return}
+function dqWait(){if(DQ.t)return;const tick=()=>{DQ.t=0;try{const w=DQ.want;if(!w)return;if(!dqUi()||bkey()!==w){DQ.want=null;DQ.stat.dropped++;/* SANGBUOI-HELD r2 (rv): the buổi turned another way while held — cards queued meanwhile are painted, never left hidden */if(dqUi())dqPaintQ();return}
   if(dqOldPending()){dqPaintQ();DQ.t=setTimeout(tick,dqPoll());return}DQ.want=null;if(Q.length||S.mg){DQ.stat.dropped++;try{render()}catch(e){}dqPaintQ();return}DQ.stat.ran++;nextBuoi()}catch(e){console.error("dayq wait",e)}};
  DQ.t=setTimeout(tick,dqPoll())}
 /* (b) a card held while the new-day host is up is painted once it closes */
@@ -96322,11 +96323,14 @@ function dqArmModal(){if(DQ.mt)return;const tick=DQ.mtf=()=>{clearTimeout(DQ.mt)
   if(dqQHidden()){if((DQ.ra=(DQ.ra||0)+1)<=BAL.dayq.rearm){DQ.stat.rearm++;DQ.mt=setTimeout(tick,dqPoll())}}else DQ.ra=0}catch(e){console.error("dayq modal",e)}};DQ.mt=setTimeout(tick,dqPoll())}
 function dqInstall(){
  /* (a) outermost nextBuoi: hold the turn while the old buổi's big moment is pending */
- const nb=nextBuoi;nextBuoi=function(){if(dqUi()&&!dqForced()&&dqQHidden()){DQ.stat.tapPaint++;if(dqPaintQ())return}if(dqUi()&&!dqForced()&&dqOldPending()){if(!DQ.want)DQ.stat.held++;DQ.want=bkey();dqWait();return}return nb.apply(this,arguments)};window.nextBuoi=nextBuoi;
- /* SANGBUOI-HELD: in solo the «Sang buổi» button runs the BARE j9 nextBuoi (j6 wired #next before any wrapper; jcoopworld routes only a co-op room
-    through the wrapped one), which returns silently on Q.length — Robot M4's dead tap. Her tap paints a queue nobody painted, then nothing else
-    changes (the button keeps its old route) */
- try{const n=$("next");if(n){const o=n.onclick;n.onclick=function(e){try{if(dqUi()&&!dqForced()&&dqQHidden()){DQ.stat.tapPaint++;if(dqPaintQ())return}}catch(x){}return o?o.call(this,e):undefined}}}catch(e){console.error("dayq next",e)}
+ const nb=nextBuoi;nextBuoi=function(){if(dqUi()&&!dqForced()&&dqQHidden()){DQ.stat.tapPaint++;if(dqPaintQ())return}if(dqUi()&&!dqForced()&&dqOldPending()){if(!DQ.want)DQ.stat.held++;DQ.want=bkey();dqWait();return}
+  /* r2: a card an inner wrapper queued WITHOUT painting during the turn (jagent agDrain «Có người tìm đến» runs before j9, which then returns on
+     Q.length) is painted after the turn — whichever path ran it (tap, auto-advance, dqWait) */
+  const r=nb.apply(this,arguments);try{if(dqUi()&&!dqForced()&&dqQHidden()){DQ.stat.afterPaint++;dqPaintQ()}}catch(e){}return r};window.nextBuoi=nextBuoi;
+ /* SANGBUOI-HELD r2: the «Sang buổi» button (j6 → jcoopworld co-op route) reaches the GLOBAL nextBuoi = this outermost wrapper, which paints a
+    queue nobody painted first (the M4 dead tap) and otherwise runs every module's nextBuoi wrapper like the auto-advance. Here only a re-entry
+    guard: a click dispatched while her tap is still running (a nested .click()) is dropped — one tap = one turn */
+ try{const n=$("next");if(n){const o=n.onclick;let tapIn=0;n.onclick=function(e){if(tapIn){DQ.stat.tapRe++;return}tapIn=1;try{return o?o.call(this,e):nextBuoi()}finally{tapIn=0}}}}catch(e){console.error("dayq next",e)}
  /* (b) outermost showModal: nothing painted over the title card / book */
  const sm=showModal;showModal=function(){if(dqUiC()&&Q.length&&!DQ.user&&!(dqUi()&&dqDawn())&&dqActBlocks()){DQ.stat.actHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}
   if(dqUi()&&Q.length&&dqDawn()&&!DQ.user){DQ.stat.modalHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}return sm.apply(this,arguments)};window.showModal=showModal;
@@ -98287,7 +98291,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="0b0d479073cb";window.CTM_BUILD=BUILD;
+const BUILD="dd2f4c85ed0c";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

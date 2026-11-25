@@ -80,8 +80,13 @@ const VP=[[755,1000,2],[1180,820,2]];
      const bk0=(await st()).bk;await p.evaluate(()=>{used=BAL.time.khac;advLock=true;nextBuoi()});await sleep(500);await p.evaluate(()=>{advLock=false});const s0=await st();if(!s0.want)return 'setup: turn not held ('+JSON.stringify({scene:s0.scene,want:s0.want,bk:s0.bk})+')';
      await p.evaluate(c=>{Q.push(c[0],c[1]);const M=document.getElementById('modal');Object.getOwnPropertyDescriptor(HTMLElement.prototype,'hidden').set.call(M,true)},[card('Có người đến — thử B'),card('Kỳ ngộ — thử B')]);
      await p.evaluate(()=>{const d=document.getElementById('tstkm');if(d)d.remove();kmBusy=false;try{kmPump()}catch(e){}});
-     const s1=await waitCard(5000);await shot('B1-card');if(!s1.modal)return 'scene closed: NO card painted, Q='+JSON.stringify(s1.Q)+' next='+s1.next+' dropped='+s1.stat.dropped;
-     await drain();return (await advanced(bk0))?'':'cards closed but the buổi did not advance'},
+     /* r2: a REAL scene the world queued meanwhile (a reward chest «Thái hậu ban thưởng» …) is an activity: the cards wait for it, she taps it
+        through like a player, then a card must show by itself (no «Sang buổi» tap) */
+     let s1=await waitCard(5000);for(let i=0;i<8&&!s1.modal&&(s1.scene||s1.dawn);i++){await tapAny();await sleep(400);s1=await waitCard(3000)}
+     await shot('B1-card');if(!s1.modal)return 'scene closed: NO card painted, Q='+JSON.stringify(s1.Q)+' next='+s1.next+' scene='+s1.scene+' dropped='+s1.stat.dropped+' '+JSON.stringify(await diag());
+     /* after her cards the turn goes on by itself (khắc spent: auto-advance) — under load allow 15 s, tapping through what the turn brings */
+     await drain();for(let i=0;i<10;i++){if(await advanced(bk0,1500))return '';await tapAny()}
+     return 'cards closed but the buổi did not advance '+JSON.stringify(await st())+' '+JSON.stringify(await diag())},
    /* C — newsHold: news card unpainted + a queued scene waiting on it */
    C:async()=>{await p.evaluate(c=>{DQ.newsHold=1;used=0;advLock=false;render();Q.unshift(c);Object.getOwnPropertyDescriptor(HTMLElement.prototype,'hidden').set.call(document.getElementById('modal'),true);
        kmPush(done=>{const d=document.createElement('div');d.className='kmov';d.id='tstkc';d.style.cssText='position:fixed;inset:0;z-index:60;background:rgba(40,20,10,.35);display:flex;align-items:center;justify-content:center';
@@ -128,7 +133,8 @@ const VP=[[755,1000,2],[1180,820,2]];
      const bk0=(await st()).bk;await p.tap('#next',{force:true});return (await advanced(bk0))?'':'«Sang buổi» after the night did not advance'},
   };
   console.log(`${W}x${H} life ready`,JSON.stringify(await st()));
-  for(const k of Object.keys(CASES).filter(k=>!process.env.CASES||process.env.CASES.includes(k))){const s=await ensureQuiet();let r;try{r=await CASES[k]()}catch(e){r='threw '+e.message.slice(0,120)}
+  const order=Object.keys(CASES).filter(k=>!process.env.CASES||process.env.CASES.includes(k));const REP=+process.env.REPEAT||1;/* REPEAT=10: each case N times (stability gate) */
+  for(const k of [].concat(...Array(REP).fill(order))){const s=await ensureQuiet();let r;try{r=await CASES[k]()}catch(e){r='threw '+e.message.slice(0,120)}
    rows.push(`${W}x${H} ${k}: ${r?'FAIL '+r:'PASS'}`);console.log(rows[rows.length-1]);if(r)fails++;await drain()}
   if(errs.length){fails++;rows.push(`${W}x${H} page errors: ${errs.slice(0,3).join(' | ')}`)}
   await ctx.close()}

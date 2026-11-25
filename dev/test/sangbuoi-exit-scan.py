@@ -21,7 +21,8 @@ for m in re.finditer(r'(?:const|let|var)?\s*(\w+)\s*=\s*nextBuoi\s*;\s*nextBuoi\
         ctx = flat[max(0, r.start() - 140):r.end()]
         rows.append(('nextBuoi wrapper', re.sub(r'\s+', ' ', ctx)[-200:]))
 base = re.search(r'function nextBuoi\(\)\{if\(!S\|\|S\.dead\|\|Q\.length\|\|S\.mg\)return;', s)
-m = re.search(r'const o=n\.onclick;n\.onclick=function\(e\)\{try\{if\(dqUi\(\)&&!dqForced\(\)&&dqQHidden\(\)\).{0,80}', s)
+# r2: j6 wires the button to the GLOBAL nextBuoi at tap time (= jdayq outermost wrapper, which paints first, then every module wrapper)
+m = re.search(r'\$\("next"\)\.onclick=\(\)=>nextBuoi\(\);', s)
 rows.append(('#next button (solo = BARE j9)', m.group(0) if m else '(no paint on the button: solo #next runs the bare j9 nextBuoi)'))
 rows.append(('j9 base nextBuoi', 'if(!S||S.dead||Q.length||S.mg)return;' if base else '(changed)'))
 # (2) jdayq exits
@@ -36,8 +37,8 @@ m = re.search(r'nextBuoi=function\(\)\{if\(dqUi\(\)&&!dqForced\(\)&&dq.{0,400}',
 rows.append(('jdayq nextBuoi (outermost)', m.group(0)[:300] if m else '(not found)'))
 # verdicts
 def verdict(kind, txt):
-    if kind == '#next button (solo = BARE j9)': return 'SAFE (the button paints a hidden queue first)' if 'dqPaintQ' in txt else 'UNSAFE: solo «Sang buổi» goes straight to the bare j9 nextBuoi (j6 wiring), skipping every wrapper — Robot M4 dead tap'
-    if kind == 'j9 base nextBuoi': return 'SAFE (the #next button + the jdayq outermost wrapper paint a hidden queue before this runs)' if 'dqPaintQ' in dq and 'const o=n.onclick;n.onclick=function(e){try{if(dqUi()' in s else 'UNSAFE: Q.length → silent return, queued cards never painted (Robot M4)'
+    if kind == '#next button (solo = BARE j9)': return 'SAFE (r2: the button calls the global = outermost wrapped nextBuoi: jdayq paints a hidden queue first, then every module wrapper runs)' if 'onclick=()=>nextBuoi()' in txt and 'dqPaintQ' in dq else 'UNSAFE: solo «Sang buổi» goes straight to the bare j9 nextBuoi (j6 wiring), skipping every wrapper — Robot M4 dead tap'
+    if kind == 'j9 base nextBuoi': return 'SAFE (the #next button + the jdayq outermost wrapper paint a hidden queue before this runs)' if 'dqPaintQ' in dq and '$("next").onclick=()=>nextBuoi();' in s else 'UNSAFE: Q.length → silent return, queued cards never painted (Robot M4)'
     if kind == 'jdayq nextBuoi (outermost)': return 'SAFE (paints a hidden queue first: dqPaintQ)' if 'dqPaintQ' in txt else 'UNSAFE: no paint of a hidden queue at the tap'
     if kind == 'jdayq dqWait tick drop': return 'SAFE (paints)' if re.search(r'dqPaintQ|showModal|dqArmModal', txt) else 'UNSAFE: drops the held turn with render() only (Robot M4 root)'
     if kind == 'jdayq render net': return 'SAFE (any render leaving a hidden queue arms dqArmModal)' if 'dqArmModal' in txt else 'UNSAFE'
