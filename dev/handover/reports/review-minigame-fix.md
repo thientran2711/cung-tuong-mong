@@ -74,3 +74,6 @@ LC12 step-8 merge 7df74e84 (review/lc12-varC) = parents 2b68def3 (day-queue step
 
 ### RE-REVIEW review/minigame-fix-2 45ebeae1 (BIG reviewer, 25/11) — PASS 45ebeae1, landing gated on KK24 «KIT OK»
 45ebeae1 = 0b118c6b + mg-intro-2.js (asserts only Chạm + Được open) + KIT.md §13.7 rewritten in place (spec tap/win, open rows); no game code change. Rerun here: mg-intro-2 ALL OK, minigame-family-scan ALL OK 39. Worker quickcheck PASS (old save ok). Items 1 and 2 closed. Item 3 (law 9) is still open: KK24 «KIT OK» on the kgReady change is pending. Land only after it arrives; the review needs no new run unless KK24 changes code.
+
+### STEP-8 CONFIRM mg2 (BIG reviewer, 25/11) — BIG PASS 3a3234ff
+3a3234ff (review/lc12-step8-mg2) = 2b68def3 + 45ebeae1. The diff 2b68def3→3a3234ff on dev/build, dev/kit and dev/test equals 502c48c9→45ebeae1 line for line; only the blob ids and one KIT.md hunk offset differ, both from the lower stack. It supersedes 7df74e84. Valid once LC13 sees the 3a3234ff quickcheck PASS.
