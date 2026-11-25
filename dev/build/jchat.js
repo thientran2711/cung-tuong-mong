@@ -186,7 +186,7 @@ function eavSlots(v,f,kind){const o={};try{
  if(kind==="affair"){const m=typeof manById==="function"&&v.affair?manById(v.affair):null;if(m)o.man=m.name}
  if(kind==="items"){const bad=(v.inv||[]).filter(e=>e.t||(IT[e.k]&&(itm(e.k).il||itm(e.k).mat)));if(bad.length&&typeof iname==="function"){const n=iname(bad[0]);if(n)o.it=n}}/* no real name → the {it} line is skipped, never a blank */
  if(kind==="hate"||kind==="ally"){const m=/để bụng (.+?) nhất|thân với (.+?) nhất/.exec(f.txt||"");if(m)o.h=(m[1]||m[2]||"").trim()}
- if(kind==="trait"){const m=/có nết (.+?)\./.exec(f.txt||"");if(m)o.tr=m[1].toLowerCase()}
+ if(kind==="trait"){const m=/(?:có nết|vốn tính) (.+?)\./.exec(f.txt||"");if(m)o.tr=m[1].toLowerCase()}
  if(kind==="where"){try{o.pl2=placeName(whereOf(v))}catch(e){}}}catch(e){err("eavS",e)}return o}
 CH.eavLines=eavLines;
 /* j9 overhear (wrapped by j78) and j78 maid dò la: append the quoted exchange to the result / Sổ ghi line */

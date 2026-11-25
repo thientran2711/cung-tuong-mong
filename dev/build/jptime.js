@@ -69,6 +69,19 @@ function ptRepFacts(rep,nm){const r=rep||{};nm=String(nm||"");const cl=x=>String
  if(h&&L.some(l=>l===h||l===h+"."))h="";
  if(!h&&!L.length)h=`${nm||"Người được sai"} đã về`;
  return{h:dot(h),L:L.map(dot),k:r.ok===true?"Việc thành.":r.ok===false?"Việc hỏng.":""}}
+/* tinbao-words (owner OD 25/11 ~23:54Z, verbatim: "Cái gì mà câu từ nó cứ lặp tới lặp lui không hiểu nổi luôn."): in a dialog that SHOWS the speaker
+   (figure + name plate: «Tin chờ người sai đi», servant reports) the body never names her again — her report is said in her own voice («Nô tỳ …» /
+   «Nô tài …»), «ta / ngươi» of the narration become «chủ tử». ptVoice(lines, person) → lines; on top of the E90 composer ptRepFacts (jptime ptPanel + jerr errPanel). */
+function ptVoice(L,m){try{if(!m||!m.name)return L;const nm=String(m.name),I=(m.role==="eunuch"||m.role==="eun"||m.male)?"Nô tài":"Nô tỳ";const esc=x=>x.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+ const tit="(?:(?:Cung nữ|Thái giám|Tiểu thái giám|Chưởng sự cô cô|Ma ma|Nữ quan)[\\p{L}\\p{M} ]*? )?";
+ return (L||[]).map(l=>{let s=String(l==null?"":l);
+  s=s.replace(new RegExp(`(^|[.!?:]\\s+)${tit}${esc(nm)}(?![\\p{L}\\p{M}])\\s*`,"gu"),(x,a)=>`${a}${I} `);
+  s=s.replace(new RegExp(`${tit}${esc(nm)}(?![\\p{L}\\p{M}])`,"gu"),I.toLowerCase());
+  s=s.replace(/(?<![\p{L}\p{M}])ta chưa quen/gu,"chủ tử chưa quen").replace(/(?<![\p{L}\p{M}])(với|của|về|cho) (ta|ngươi)(?![\p{L}\p{M}])/gu,"$1 chủ tử").replace(/(?<![\p{L}\p{M}])ngươi(?![\p{L}\p{M}])/gu,"chủ tử");
+  return s.replace(/\s+/g," ").trim()}).filter(Boolean)}catch(e){return L}}
+/* the panel lines of one report: the E90 composer; when its person is the speaker shown, the lines in her voice and no head (she is the plate) */
+function ptRepVoice(rep,nm,p,shown){const f=ptRepFacts(rep,nm);if(!shown||!p)return f;const L=ptVoice([f.h].concat(f.L).filter(Boolean),p);return{h:L[0]||"",L:L.slice(1),k:f.k}}
+window.ptVoice=ptVoice;
 function ptRepText(rep,nm){const f=ptRepFacts(rep,nm);return[f.h].concat(f.L,[f.k]).filter(Boolean).join(" ")}
 function ptLand(a){a.back=1;PT.stat.back++;const fn=a.a&&a.a.npc?PT.run.npc:a.a&&a.a.run?PT.run[a.a.run]:PT.run[a.kind];/* a.run: the button's own runner when it shares a BAL row (kind) with others */if(!fn){a.rep={t:a.lbl||"Đã về",ok:null,L:[`${a.nm} đã về.`],d:[]};return}
  const me=a.by==="me";const b=me&&typeof rsnap==="function"?rsnap():null;const s0=S.logSeq||0;let r=null;
@@ -102,7 +115,7 @@ function ptOrdN(){return S&&Array.isArray(S.ordQ)?S.ordQ.length:0}
 function ptErrOwn(){try{return typeof errIcon==="function"||!!(window.ERR&&typeof window.ERR==="object")||(!ptIconSet&&typeof kitStatusIcon!=="undefined"&&typeof kitStatusIcon.has==="function"&&kitStatusIcon.has("tin"))}catch(e){return false}}
 function ptPanel(){const N=ptNews(),W=ptMine();const facts=[];const OQ=S&&Array.isArray(S.ordQ)?S.ordQ.slice():[];let subj=null;
  for(const o of OQ)facts.push(`${o.byNm} ${ptOrdIs(o)?"có lệnh cho ngươi":"có lời nhờ"}${o.title&&!/^Lệnh của /.test(o.title)?": "+o.title:""}, trả lời trước ${ptWhen(o.due)}; quá hạn coi như từ chối.`);
- for(const a of N){const r=a.rep||{};if(!subj)subj=ptPerson(a.a||{});const f=ptRepFacts(r,a.nm);if(f.h)facts.push(f.h);
+ for(const a of N){const r=a.rep||{},pp=ptPerson(a.a||{});if(!subj)subj=pp;const f=ptRepVoice(r,a.nm,pp,!!pp&&pp===subj);if(f.h)facts.push(f.h);
   if((r.d||[]).length&&typeof kitChips==="function")facts.push({text:"Được · mất: "+kitChips(r.d),kind:"me"});f.L.forEach(l=>facts.push(l));if(f.k)facts.push(f.k);a.read=1}
  for(const a of W){if(!subj)subj=ptPerson(a.a||{});facts.push(`${a.nm} đang ${a.lbl||"đi việc"} · về ${ptWhen(a.due)}.`)}
  if(!facts.length)facts.push("Không có ai đang đi việc.");
@@ -137,7 +150,7 @@ function ptLedger(){if(!S||typeof j95on!=="function"||!j95on())return false;cons
  if(typeof nextBuoi==="function"){const nb0=nextBuoi;nextBuoi=function(){const r=nb0.apply(this,arguments);try{if(ptOn()){ptTick();ptLedger()}}catch(e){ptErr("buoi",e)}return r}}
  if(typeof j95sync==="function"){const js0=j95sync;j95sync=function(){const r=js0.apply(this,arguments);try{if(ptOn()&&ptZ().length)ptLedger()}catch(e){ptErr("j95sync",e)}return r}}
 }catch(e){ptErr("wire",e)}})();
-window.PTIME={repFacts:ptRepFacts,repText:ptRepText,on:ptOn,now:ptNow,/* true while the core lands tasks (its runners call the game's own acts: no new send from them) */landing:()=>ptBusyTick||!!PT.landing,row:ptRow,away:ptAwayOf,busy:ptBusy,lockWhy:ptLockWhy,send:ptSend,tick:ptTick,wait:ptWait,waitOk:ptWaitOk,next:ptNext,news:ptNews,mine:ptMine,when:ptWhen,reg:ptReg,x:ptX,stat:PT.stat,
+window.PTIME={repFacts:ptRepFacts,repText:ptRepText,repVoice:ptRepVoice,on:ptOn,now:ptNow,/* true while the core lands tasks (its runners call the game's own acts: no new send from them) */landing:()=>ptBusyTick||!!PT.landing,row:ptRow,away:ptAwayOf,busy:ptBusy,lockWhy:ptLockWhy,send:ptSend,tick:ptTick,wait:ptWait,waitOk:ptWaitOk,next:ptNext,news:ptNews,mine:ptMine,when:ptWhen,reg:ptReg,x:ptX,stat:PT.stat,
  /* receiver side (OD 18/11 ~21:15Z): orders to her waiting as notices — for the ONE «tin» panel (MAIN errand-scene r2 lists them; no second panel):
     orders() = [{id, pid, byNm, title, due}], ordWhen(o) = "trả lời trước …", answer(id) = open its answer card (4 answers; Việc chủ sai 3) */
  orders:()=>(S&&Array.isArray(S.ordQ)?S.ordQ.map(o=>({id:o.id,pid:o.pid,byNm:o.byNm,title:o.title,due:o.due})):[]),ordWhen:o=>`trả lời trước ${ptWhen(o.due)}`,

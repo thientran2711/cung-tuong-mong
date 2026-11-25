@@ -50,7 +50,7 @@ function spyRoll(a,t,ag){return oddsCl(Math.round(spyRaw(a,t,ag)+lotB(a,"Mưu k�
    opens a kit dialog with every consort she can send the maid to, each with its own odds word and "Vì sao…?" from the same
    formula. j78's knowledge (2 true facts, chứng cứ +1) and failure (maid caught: lòng -5, target oán +5) are kept. */
 function spyKnown(v){try{return typeof k61Named==="function"?k61Named(v):knows(v)}catch(e){return true}}
-function spyWho(v){const r=v.queen?"Hoàng hậu":RANKS[v.rank].n;return spyKnown(v)?`${r} ${v.name}`:`${r} ở ${whyPal(v)} (chưa quen)`}
+function spyWho(v){const r=v.queen?"Hoàng hậu":RANKS[v.rank].n;return spyKnown(v)?`${r} ${v.name}`:`một vị ${r} ta chưa quen`/* tinbao-words: no «(chưa quen)» paren (it stacked with the caller's own «(…)») */}
 function spyList(){return liveRivals(true).filter(v=>!sameHouse(S,v))}
 function spyBk(){try{return typeof bkey==="function"?bkey():0}catch(e){return 0}}
 function spyTarget(){S.mspy=S.mspy||{};const L=spyList();if(!L.length)return null;let t=L.find(v=>v.id===S.mspy.id);
@@ -83,8 +83,13 @@ function spyNewsW(v,m){return 1+Math.max(0,danger(v,S))/15+(whyKnows(m,v)?3:0)+(
 function spyListen(m){spyListen.ok=false;if(!m)return"";if(!aRoll(spyRoll(S,null,m)))return`${m.name} đi nghe ngóng một vòng, chưa nghe được chuyện gì đáng bẩm.`;spyListen.ok=true;return spyNews(m)}
 function spyNews(m){const L=spyList();if(!L.length)return`${m.name} đi một vòng, trong cung yên ắng.`;const W=L.map(v=>spyNewsW(v,m));let r=Math.random()*W.reduce((a,b)=>a+b,0),i=0;while(r>W[i]&&i<L.length-1){r-=W[i];i++}
  const v=L[i];const n=eyes(S)>=3?2:1;let f="";try{f=typeof intelLearn==="function"?intelLearn(v,n,{by:m.name,how:"Nghe ngóng"}):""}catch(e){}
- const why=whyKnows(m,v)?`${m.name} quen người ${whyPal(v)}`:danger(v,S)>=netTh(v,"act")?"nàng đang có chuyện với ngươi":(v.sung||0)>=50?"nàng đang được sủng, ai cũng bàn":"chuyện nghe được ngoài hành lang";
- const t=`${m.name} nghe ngóng được về ${spyWho(v)} (${why}): ${f||"nàng dạo này ít ra ngoài, chưa có gì mới."}`;return t}
+/* tinbao-words (owner OD 25/11 ~23:36Z): ONE report in plain sentences — the doer named once, the person once (then «nàng ta»), the reason as words
+    (no «(…)», no «: …:» chain); the facts' own lead name becomes «Nàng ta» */
+ const who=spyWho(v),WH=(()=>{try{return typeof j78Who==="function"?j78Who(v):""}catch(e){return""}})();
+ const lead=whyKnows(m,v)?`${m.name} nhờ quen người ở ${whyPal(v)} mà nghe ngóng được chuyện về ${who}.`:danger(v,S)>=netTh(v,"act")?`${m.name} nghe ngóng được chuyện về ${who}, người đang có chuyện với ta.`:(v.sung||0)>=50?`${m.name} nghe ngóng được chuyện về ${who}; nàng ta đang được sủng, ai cũng bàn tán.`:`${m.name} nghe ngoài hành lang được chuyện về ${who}.`;
+ let F=String(f||"").trim();const esc=x=>x.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+ if(F&&WH)F=F.replace(new RegExp(`(^|[.!?]\\s+)${esc(WH)}(?:\\s+chưa quen biết)?(?=\\s)`,"g"),"$1Nàng ta");
+ return `${lead} ${F||"Nàng ta dạo này ít ra ngoài, chưa có gì mới."}`}
 /* servant start (j42): the mistress's order "dò la" weighs the target too */
 (function(){if(typeof ordOdds!=="function")return;const o0=ordOdds;ordOdds=function(k,t){if(k!=="spy"||!t)return o0.apply(this,arguments);return oddsCl(Math.round(o0.apply(this,arguments)+BAL.spyCnv+cnvSpyF(t).reduce((s,x)=>s+x[1],0)))}})();
 function cnvSpyF(t){const F=[];const tn=whyNm(t);F.push([`Tâm cơ ${tn}`,-(t.tamco||0)/8]);if((typeof traitsOf==="function"?traitsOf(t):[]).includes("Kín đáo"))F.push([trKnown(t).includes("Kín đáo")?`${tn} đa nghi`:`Nết ${tn} (ngươi chưa rõ)`,-8]);

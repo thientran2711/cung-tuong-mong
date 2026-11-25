@@ -22,9 +22,12 @@ function stClose(){try{if(typeof S==="undefined"||!S||S.dead||S.out)return null;
  return n&&!n.ok?{k,now:false,next:true,why:n.why||""}:null}catch(e){return null}}
 window.stClose=stClose;
 function stayWord(k){try{return typeof accSneakO==="function"&&typeof word==="function"?word(accSneakO(k)):""}catch(e){return ""}}
-function line(c){const p=nm(c.k),w=c.why?` (${c.why})`:"",o=stayWord(c.k),t=o?` Ở lại = như lẻn vào: ${o}.`:"";return (c.now?`${p} đã đóng cửa${w}, ngươi vẫn ở lại.`:`${p} sắp đóng cửa sau khắc này${w}.`)+t}
+/* tinbao-words (owner OD 25/11 ~23:36Z): ONE plain cổ trang sentence — no «=», the stay odds word said once at its end («may rủi: <word>») */
+function line(c){const p=nm(c.k),w=c.why?` (${c.why})`:"",o=stayWord(c.k);
+ if(c.now)return o?`${p} đã đóng cửa${w} mà ta vẫn nán lại, chẳng khác gì lẻn vào; may rủi: ${o}.`:`${p} đã đóng cửa${w} mà ta vẫn nán lại.`;
+ return o?`${p} sắp đóng cửa sau khắc này${w}; nán lại quá giờ thì chẳng khác gì lẻn vào, may rủi: ${o}.`:`${p} sắp đóng cửa sau khắc này${w}.`}
 function key(c){try{return [typeof bkey==="function"?bkey():"",c.k,c.now?1:0].join("|")}catch(e){return ""}}
-function short(c){const p=nm(c.k);return c.now?`${p} đã đóng cửa, ngươi vẫn ở lại`:`${p} sắp đóng cửa sau khắc này`}
+function short(c){const p=nm(c.k);return c.now?`${p} đã đóng cửa, ta vẫn nán lại`:`${p} sắp đóng cửa sau khắc này`}
 /* r4 (ONE NOTICE SYSTEM, owner OD 18/11 ~22:10Z): the closing alert is a kitNotice (top-bar «!» box + top chip + «Tin báo» panel with the place's
    own picture), sticky while it holds; it is dropped when she leaves or the place opens. Was: a stage-rail «!» item + the kitLineToast chip. */
 function chip(c){try{if(typeof kitNotice!=="function")return null;const k=key(c);let pic="";try{const n=SCIMG[placeOf(c.k).sc];pic=n?`img/${n}.webp`:""}catch(e){}

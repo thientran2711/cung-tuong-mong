@@ -66,11 +66,12 @@ function errOrders(){try{return window.PTIME&&typeof PTIME.orders==="function"?(
 function errOrdIs(o){return !!o&&(o.pid==="cnvOrd"||o.pid==="err")}
 function errOrdWhen(o){try{return PTIME.ordWhen(o)}catch(e){return o&&o.due!=null?"trả lời trước "+errWhen(o.due):""}}
 /* E90: ONE sentence per news item — the composer lives in jptime (PTIME.repFacts); fallback = the old head + lines */
-function ptRepFx(r,nm){try{if(window.PTIME&&PTIME.repFacts)return PTIME.repFacts(r,nm)}catch(e){}return{h:r.t||`${nm} đã về.`,L:r.L||[],k:""}}
+function ptRepFx(r,nm,p,shown){try{if(window.PTIME&&PTIME.repVoice)return PTIME.repVoice(r,nm,p,shown);if(window.PTIME&&PTIME.repFacts)return PTIME.repFacts(r,nm)}catch(e){}return{h:r.t||`${nm} đã về.`,L:r.L||[],k:""}}
 function errPanel(){const N=errNews(),W=errMine(),OQ=errOrders();const facts=[],sec=[];let subj=null;
  for(const o of OQ)facts.push(`${o.byNm} ${errOrdIs(o)?"có lệnh cho ngươi":"có lời nhờ"} · ${errOrdWhen(o)} (quá hạn: coi như từ chối).`);
  for(const t of N){const r=t.rep||{},p=errPerson(t.who);if(!subj&&p)subj=p;
-  const f=ptRepFx(r,t.nm);if(f.h)facts.push(f.h);
+  /* tinbao-words (owner OD ~23:54Z): the speaker shown at the left (subject) is never named again in the body — her report in her own voice */
+  const f=ptRepFx(r,t.nm,p,!!p&&p===subj);if(f.h)facts.push(f.h);
   /* gain / loss chips right under the title line (kit chips, visible without scrolling); the lines below are only what she learned */
   if((r.d||[]).length&&typeof kitChips==="function")facts.push({text:"Được · mất: "+kitChips(r.d),kind:"me"});
   f.L.forEach(l=>facts.push(l));if(f.k)facts.push(f.k);errRead(t)}
