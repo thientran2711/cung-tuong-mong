@@ -36,7 +36,7 @@
      if (!cover && t) { const c = t.closest('[id]'); cover = (t.tagName.toLowerCase() + (t.id ? '#' + t.id : '') + (typeof t.className === 'string' && t.className ? '.' + t.className.trim().split(/\s+/).slice(0, 2).join('.') : '') + (c && c !== t ? ' in #' + c.id : '')).slice(0, 80) }
    }
    const off = r.bottom < 0 || r.top > H || r.right < 0 || r.left > W;
-@@ -50,9 +54,9 @@
+@@ -50,37 +54,38 @@
      return target;
    }
    /* bring the element into the viewport like a person: scroll the page / its scroller with the wheel (no DOM calls) */
@@ -48,7 +48,9 @@
        if (p.gone || p.zero || p.ok || !p.off && p.cover !== 'outside viewport') return p;
        const vh = (page.viewportSize() || { height: 800 }).height;
        const dy = p.top > vh ? Math.min(p.top - vh * 0.5, vh * 0.8) : p.bottom < 0 ? Math.max(p.bottom - vh * 0.5, -vh * 0.8) : (p.top > vh / 2 ? vh * 0.4 : -vh * 0.4);
-@@ -61,26 +65,27 @@
+-      const box = await h.evaluate(e => { let s = e.parentElement; while (s && s !== document.body) { const cs = getComputedStyle(s); if (/(auto|scroll)/.test(cs.overflowY) && s.scrollHeight > s.clientHeight) { const r = s.getBoundingClientRect(); return { x: r.left + r.width / 2, y: Math.max(r.top + 10, Math.min(r.bottom - 10, innerHeight / 2)) } } s = s.parentElement } return null }).catch(() => null);
++      const box = await h.evaluate((e, dy) => { /* U1b: the nearest scroller that is VISIBLE (its own rect inside the viewport) and can still move in the wanted direction: a kit panel's option row (div.opts.k3btns) is itself an overflow:auto box that sits off-screen below the news list — the wheel must go over the list the person sees (.k3right) */ let s = e.parentElement; while (s && s !== document.body) { const cs = getComputedStyle(s); if (/(auto|scroll)/.test(cs.overflowY) && s.scrollHeight > s.clientHeight + 1) { const r = s.getBoundingClientRect(), vis = Math.min(r.bottom, innerHeight) - Math.max(r.top, 0); const can = dy > 0 ? s.scrollTop + s.clientHeight < s.scrollHeight - 1 : s.scrollTop > 1; if (vis > 40 && can) return { x: Math.max(1, Math.min(innerWidth - 1, r.left + r.width / 2)), y: Math.max(Math.max(r.top, 0) + 10, Math.min(Math.min(r.bottom, innerHeight) - 10, innerHeight / 2)) } } s = s.parentElement } return null }, dy).catch(() => null);
+       const vw = (page.viewportSize() || { width: 800 }).width;
        await page.mouse.move(box ? box.x : vw / 2, box ? box.y : vh / 2);
        await page.mouse.wheel(0, dy); await page.waitForTimeout(250);
      }
