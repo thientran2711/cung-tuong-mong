@@ -1,0 +1,240 @@
+{
+ "unit": "E-S5",
+ "game": "LIVE github.io",
+ "finished": 1,
+ "lives": [
+  {
+   "life": "E-S5-R5-greedy-1",
+   "dev": "ipad",
+   "bot": "bold",
+   "seed": 2937005677,
+   "origin": "pf",
+   "road": "pt_su",
+   "ending": "Hồng nhan bạc mệnh",
+   "type": "death",
+   "death": true,
+   "age": 20,
+   "buoi": 162,
+   "harness": {
+    "kind": "realtap",
+    "sha": "93812531",
+    "realtap": true,
+    "jsClicks": 0,
+    "deadButtons": 0,
+    "cap": null,
+    "stuck": 1,
+    "unstick": [
+     {
+      "at": 462,
+      "lvl": 2,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ"
+     },
+     {
+      "at": 493,
+      "lvl": 2,
+      "layer": ".mapsc",
+      "title": ""
+     },
+     {
+      "at": 236,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ"
+     },
+     {
+      "at": 243,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ"
+     },
+     {
+      "at": 250,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ"
+     },
+     {
+      "at": 256,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ"
+     },
+     {
+      "at": 263,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ"
+     },
+     {
+      "at": 268,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ"
+     },
+     {
+      "at": 1194,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 1201,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 1207,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 1214,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 1220,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 1221,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 1709,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 1716,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 1722,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 1728,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 1735,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 1740,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 2880,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Tin báo"
+     },
+     {
+      "at": 3032,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 3039,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 3046,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 3052,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 3059,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     },
+     {
+      "at": 3064,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+     }
+    ],
+    "slice": null,
+    "areaTaps": 4001,
+    "scrolls": 228,
+    "infoTaps": 130,
+    "dlgClose": 50,
+    "loops": 6,
+    "taps0": 0,
+    "resumed": [
+     {
+      "at": "2026-11-25T11:53:58.097Z",
+      "buoi": 21,
+      "from": "2026-11-25T11:53:30.032Z"
+     }
+    ],
+    "taps": 1901
+   },
+   "bugs": [
+    {
+     "type": "stuck",
+     "n": 2,
+     "msg": "no-clock loop: 150 taps without a clock step on page «Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ»"
+    },
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no-clock loop: 150 taps without a clock step on .mapsc «»"
+    },
+    {
+     "type": "game",
+     "n": 4,
+     "msg": "softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Tin trong cung buổi này)"
+    },
+    {
+     "type": "stuck",
+     "n": 3,
+     "msg": "no-clock loop: 150 taps without a clock step on page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »"
+    },
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no progress 15 min on .dlg «Tin báo»"
+    }
+   ],
+   "exitPick": null
+  }
+ ],
+ "parked_stuck_gamebug": [
+  "fold 1770537827 pt_su cautious-4: STUCK Kính sự phòng báo tin sole card no-op; rerun after choose-guard LIVE",
+  "c1 fold 2750626096 STUCK Kính sự phòng báo tin Tắm gội chờ giá (game softlock) buoi 101 after 7 stucks; c3 ipad 1302643430 STUCK Tân quân lập uy Chương 2 / Tin báo buoi 310; rerun after fixes"
+ ]
+}
