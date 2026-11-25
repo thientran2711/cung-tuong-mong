@@ -1728,3 +1728,4 @@ d-robot-bugs (robot-found game bugs ×5) | review/d-robot-bugs | session_01D3E3N
 talk-others-people r2 | review/talk-others-people-rv | PASS 25a9a9cc | LAND READY (after dfu) | 2026-11-25T11:34Z (Foreman D)
 PCPORT-RK (f.rk non-string, whole family readers+writers) | review/pcport-rk | session_01N1tNP63faDcCU7EogpnFDG (FOREMAN B) | RUNNING | 2026-11-25T11:38Z
 PCPORT-RK SMALL review | review/pcport-rk cc27f8c7 | session_01N1tNP6mfSahZQYzLZvJBZc (FOREMAN B) | RUNNING | 2026-11-25T11:43Z
+HARDLOCK-CHOICE-R3 BIG review | review/hardlock-choice-r3 87e622fb | session_01N1tNP5U1GkSm12gVTAofGW (FOREMAN B) | RUNNING | 2026-11-25T11:44Z
