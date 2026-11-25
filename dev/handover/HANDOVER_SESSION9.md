@@ -3388,3 +3388,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (07:10Z) OWNER: trungsinh robot research brought nothing on story/endings → TRUNGSINH-STORY = session_01V1ZZGzGFi21WiTptDmEZ45 (opus, child of 134, reports to 135).
 - (06:53Z) via 134: TRUNGSINH-STORY session_01V1ZZGzGFi21WiTptDmEZ45 (opus, reports to 135): ≥5 lives on trungsinhgame.com → dev/research/TRUNGSINH_STORY.md + 8-line VN summary → show sếp when READY (OD ~07:10Z).
 - (07:15Z) OWNER: life can end by story closure, not only death → OD row; TRUNGSINH-STORY told to focus on closure endings.
+- (07:20Z) OWNER ≥20 lives → TS-P2 session_01V1ZZH35iHCDWuAWmcnZJas, TS-P3 session_01V1ZZH3ZStuH5Zz8vbzVK55, TS-P4 session_01V1ZZH23XHUR5bAUAtiqAPv (sonnet, children of 134, report to lead + 135).
