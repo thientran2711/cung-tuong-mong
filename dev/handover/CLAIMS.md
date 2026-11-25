@@ -1830,4 +1830,4 @@ B INVESTIGATOR coop page freeze (guest JS hang at .kfoc, U3c Q4XY; + F s6d famil
 | E92 titles-daycard (TITLES2 re-merge + kitChapterTitle hook; opus; briefs/E92-titles-daycard.md) | review/titles2-r3m, review/titles-daycard | FOREMAN E child5 | (opening) | RUNNING | 25/11 23:20Z |
 | E93 parking-rows (moment/scent/parking-rank re-merge + unbuilt rows; opus; briefs/E93-parking-rows.md) | review/e-pack-c, review/parking-rows | FOREMAN E child5 | (opening) | RUNNING | 25/11 23:20Z |
 | C3-VIDEO landing videos c3-farshot | review/c3-farshot | FOREMAN C ROOT 3 | session_01PEhRbwnAUxjQKRyNRgPhpA | DONE | 25/11 23:05Z |
-| REVIEW robot-coop-fix-7-r3 a32a931d (opus BIG co-op, fresh; briefs/b-fix7-r3-review.md) | review/robot-coop-fix-7-r3(-rv); reports/fix7-r3.md | B ROOT 2 | (opening) | RUNNING | 25/11 23:09Z |
+| REVIEW robot-coop-fix-7-r3 a32a931d (opus BIG co-op, fresh; briefs/b-fix7-r3-review.md) | review/robot-coop-fix-7-r3(-rv); reports/fix7-r3.md | B ROOT 2 | session_01N1tNP2KxFM4UDdFweHAZz1 | RUNNING | 25/11 23:09Z |
