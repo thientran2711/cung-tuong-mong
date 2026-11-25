@@ -34,6 +34,7 @@ Coverage gap: SKIP 337 rows = the harness could not bring a tab panel back to th
 ## HANDOVER ROLE B #2 (session_01UV1Szgmw4epFn6X13b3DZS, depth 7, START_CTX ~6 %)
 - Done: READY fix-2 fa466d90 · READY fix-3 6b401cfc (both reported to Foreman F #7).
 - Worktrees: /home/user/wt/fx2 (fix-2), /home/user/wt/fx3 (fix-3), /home/user/wt/base (a6b4d573 baseline), /home/user/wt/ho (this report). Scratch /home/user/wt/rp (repro + BGMQ dump host.json).
+- Rolling over at context ~START + 25 % (worker rule: the COORDINATOR opens the successor). Probe started, not finished: nlcard flow on LIVE Fold from a cleared title — first «Chơi một mình» tap hit the #kload loading veil (DEAD BUTTON, cover div#kload.modal.kpscene, transient while pictures load) → check whether #kload outlives its pictures on a fresh player; script idea in this report's history (title → Chơi một mình → Nhận thân phận → Vào cung ngay, realtap each, 3 tries, log Q / #modal.nlcard).
 - Still open from the pending list below: probes #5 (Bảng vàng «Mã khôi phục» Fold), #6 (tour auto-open), nlcard (#modal.nlcard 30 taps), #krail over «3 Chí tôn» / img.kfr in #dawn, #dawn .kne-beat by design?; then the full re-run on realtap 4523381f + SKIP gap + depth-3 screens.
 
 ## Numbers (run full6, LIVE 008aa59b, depth 2 from title + home; tour run separate)
