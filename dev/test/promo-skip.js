@@ -34,5 +34,5 @@ ok(r.ghenUp&&r.exTo===4&&r.exGrace!==4,'compensation loss: jealousy; the next ra
 ok(r.gfull===0&&r.gfree===1,'passed grace exam waits for a free seat, then the decree');ok(r.hit>0,'strike-back hits once when due');
 const tx=await p.evaluate(()=>{const o={};
  o.rule=promoRuleTxt();try{tab="story";renderPanel0()}catch(e){}o.gl=[KIT_GLOSS["Khảo hạch tấn phong"]||"",KIT_GLOSS["Ngôi Hoàng hậu"]||""];return o});
-ok(/đầu lòng/.test(tx.rule)&&/hoàng tử sau/.test(tx.rule)&&tx.gl[0].includes(tx.rule)&&!/Sinh hoàng tử: (được ân thi|tấn phong ngay)/.test(tx.gl.join(' ')),'help texts read the one rule text (first prince direct, later prince / princess exam, faction win direct, full seat)');
+ok(/đầu lòng/.test(tx.rule)&&/hoàng tử sau/i.test(tx.rule)&&tx.gl[0].includes(tx.rule)&&!/Sinh hoàng tử: (được ân thi|tấn phong ngay)/.test(tx.gl.join(' ')),'help texts read the one rule text (first prince direct, later prince / princess exam, faction win direct, full seat)');
 ok(!errs.length,'no page errors '+errs.slice(0,2));console.log(F.length?'FAIL':'PASS');await b.close();process.exit(F.length?1:0)})();

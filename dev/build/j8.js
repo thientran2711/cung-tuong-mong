@@ -19,7 +19,7 @@ function malOf(p){return p===S?Math.max(0,70-S.duc):p.malice}
 function wk(){return S.turn*3+S.tuan}
 function ap(p,o){if(p===S)return apply(o);for(const k in o){const v=o[k];if(!v)continue;if(k==="maid"){p.maid.loyal=cl(p.maid.loyal+v,0,100);continue}p[k]=(p[k]||0)+v}
  for(const k of ["sung","danh","suc","sac","tai","tamco","duc","ghen","an"])if(p[k]!=null)p[k]=cl(p[k],0,100);if(p.suc!=null)p.suc=Math.min(p.suc,sucCap(p));p.th=cl(p.th||0,-100,100);p.hh=cl(p.hh||0,-100,100);p.bac=Math.max(0,p.bac||0)}
-function dieIf(p,why){if(p!==S&&p.alive&&p.suc<=0){p.alive=false;if(p.queen)p.queen=false;return `<span class="r">${p.name} ${why}.</span> `}return""}
+function dieIf(p,why){if(p!==S&&p.alive&&p.suc<=0){p.alive=false;dieMk(p,why||"other");if(p.queen)p.queen=false;return `<span class="r">${p.name} ${why}.</span> `}return""}
 /* a rival's full stat block: the same fields the player's formulas read */
 function rstats(v,rank){rank=rank==null?(v.queen?7:v.rank):rank;
  const d=(k,x)=>{if(v[k]==null)v[k]=x};
@@ -92,11 +92,25 @@ function punishDemoP(){return has("nongnay")?100:has("nhantu")?25:50}
 function punish(p,why,sev){if(typeof p==="string"){sev=why;why=p;p=S}
   if(sev>=2&&rkOf(p)>0&&roll(punishDemoP())){seatPut(p,seatDown(p,rkOf(p)-1));log(`<span class="r">${NMc(p)} bị giáng xuống ${rkName(p)} vì ${why}.</span>`);return}
   const m=punishMonths();p.confined=Math.max(p.confined||0,m);log(`<span class="r">${NMc(p)} bị cấm túc ${m} tháng vì ${why}.</span>`)}
+/* DEATH CAUSE (promo-build-2 fix, review FAIL 1; laws 6/8): ONE mark p.dieK on every person who dies (her S.dieK too), set where the death happens.
+   Kinds: crime (xử tử / ban chết / xử trảm / tru di …) · disgrace (tự vẫn, phá thai giấu tội, chết trong lãnh cung, trốn cung …) · ill · birth · age ·
+   murder (bị người hại: độc, đẩy xuống giếng …) · tuan (tuẫn táng) · other; not a death: nun · fled · left · wed · gone. First mark wins.
+   dieKOf(text) reads a death line when a site only has words (over() fates, kill(why), dieIf(why)). Truy phong (jpromob pbTp) refuses crime / disgrace. */
+const DIE_K=["crime","disgrace","ill","birth","age","murder","tuan","other","nun","fled","left","wed","gone"];
+function dieKOf(t){t=String(t||"");if(!t)return"age";
+ if(/ban chết|bị ban|xử tử|xử trảm|chém đầu|tru di|mưu phản|tư thông|khi quân|lụa trắng|rượu độc|bạch lăng|thận hình ti|tra khảo|gián điệp|tội/i.test(t))return"crime";
+ if(/tự vẫn|tự sát|tự tận|tự ải|thắt cổ|phá thai|giả chết|lãnh cung|điên dại|trốn khỏi cung|^phế /i.test(t))return"disgrace";
+ if(/sinh hạ|khó sinh|băng huyết|lâm bồn|sinh nở/i.test(t))return"birth";
+ if(/độc|hại|giếng|đẩy|ám sát|thích khách|bát canh|yến sào|diệt khẩu|đánh chết|đánh trượng/i.test(t))return"murder";
+ if(/bệnh|nguy kịch|nhiễm|sốt|dịch|đậu mùa|lao lực|kiệt sức/i.test(t))return"ill";
+ if(/tuổi trời|tuổi cao|thọ /i.test(t))return"age";return"other"}
+function dieMk(p,k){try{if(p&&p.dieK==null)p.dieK=DIE_K.includes(k)?k:dieKOf(k)}catch(e){}return p}
+window.dieKOf=dieKOf;window.dieMk=dieMk;
 function deathSentence(p,why){if(typeof p==="string"){why=p;p=S}
   if(S.turn<BAL.eff.j8.mercyTurn&&!p.mercy){p.mercy=1;ap(p,{danh:BAL.eff.j8.danhDeathSentence,sung:BAL.eff.j8.sungDeathSentence});if(rkOf(p)>0)seatPut(p,seatDown(p,rkOf(p)-1));p.confined=Math.max(p.confined||0,BAL.eff.j8.mercyConfine);log(`<span class="r">${p===S?"Ngươi":p.name}: ${why.replace(/^Bị /,"suýt bị ")}. Niệm tình mới vào cung, Hoàng thượng tha tội chết: giáng một bậc, cấm túc ${BAL.eff.j8.mercyConfine} tháng, Danh ${balSg(BAL.eff.j8.danhDeathSentence)}, ${sgOf(p,BAL.eff.j8.sungDeathSentence)}. Lần sau sẽ không tha.</span>`);return}
-  if(p===S){if(has("nhantu")&&npcWhy("empMercy",{p}))return cold(`${why}. Hoàng thượng nhân từ tha tội chết, đày ngươi vào lãnh cung`);return die(why)}
+  if(p===S){if(has("nhantu")&&npcWhy("empMercy",{p}))return cold(`${why}. Hoàng thượng nhân từ tha tội chết, đày ngươi vào lãnh cung`);dieMk(S,"crime");return die(why)}
   if(has("nhantu")&&npcWhy("empMercy",{p})){p.out=true;if(p.queen)p.queen=false;log(`<span class="r">${p.name}: ${why}. Hoàng thượng nhân từ, đày vào lãnh cung.</span>`);return}
-  p.alive=false;if(p.queen)p.queen=false;log(`<span class="r">${p.name} bị ban chết: ${why}.</span>`)}
+  p.alive=false;dieMk(p,"crime");if(p.queen)p.queen=false;log(`<span class="r">${p.name} bị ban chết: ${why}.</span>`)}
 /* a proven crime (accusation with evidence) */
 function fall(p,why){if(p===S){if(ACTX.a&&ACTX.a!==S)S.framedBy=key(ACTX.a);if(S.rank>=5||R(2)){cold(`Ngươi ${why}`);return}S.rank=seatDown(S,S.rank-2);apply({sung:-15});log(`<span class="r">Ngươi ${why}, bị giáng xuống ${RANKS[S.rank].n}.</span>`);return}
  if(ACTX.a&&ACTX.a!==p)p.coldBy=key(ACTX.a);if(p.queen||p.rank>=5){p.out=true;p.queen=false;log(`<span class="g">${p.name} ${why}, bị phế vào lãnh cung.</span>`)}
@@ -390,7 +404,7 @@ function pregMonthP(p){if(!p.preg)return"";p.preg++;const me=p===S;
  p.preg=0;p.hidden=false;return ev+birthP(p,false)}
 /* childbirth risk: 1 base, +3 if Sức<40, +0.5 per year over 30; physician -2, Y thuật 2+ -1.5, an thai -1; floor 0.5 */
 function birthP(p,fake){const me=p===S;
- if(!fake&&roll(birthRisk(p))){if(me){die("Khó sinh, băng huyết mà chết");return""}p.alive=false;if(p.queen)p.queen=false;return `<span class="r">${p.name} khó sinh, băng huyết mà chết.</span> `}
+ if(!fake&&roll(birthRisk(p))){if(me){die("Khó sinh, băng huyết mà chết");return""}p.alive=false;dieMk(p,"birth");if(p.queen)p.queen=false;return `<span class="r">${p.name} khó sinh, băng huyết mà chết.</span> `}
  let ev="";
  if(!fake){let plot=p.catplot?byKey(p.catplot):null;p.catplot=null;
   if(!plot){const bad=others(p).filter(x=>x!==S&&rel(x,p)<=netTh(x,"ky")&&(x.malice>50||(p===S&&x.ghen>=60)));const bp=bad.length?npcWhy("birthPlot",{p,bad},()=>roll(npw1B("j8").birthP)):null;if(bp)plot=bp.who}
@@ -410,6 +424,7 @@ function promoReqP(p){if(rkOf(p)>=7)return[];const r=rkOf(p),nx=RANKS[r+1],L=[];
  if(has("hieuthao"))L.push([p.th>=0,`Hoàng thượng hiếu thảo: Thái hậu không được ghét ${me?"ngươi":"nàng"} (Thái hậu quý ${me?"ngươi":"nàng"} ${p.th}, cần từ 0)`]);
  if(r+1===7){const N=hhNeed(p),tn=N.th,nd=N.duc,sn=N.sons;L.push([S.turn>=(p.seatBan||0),p.seatBan>S.turn?`Vừa tố Hoàng hậu, bị nghi tranh ngôi (còn ${p.seatBan-S.turn} tháng)`:"Không bị nghi tranh ngôi"],[!qq,"Ngôi Hoàng hậu bỏ trống"],[p.th>=tn,sn?`Có hoàng tử: Thái hậu quý ${me?"ngươi":"nàng"} ${p.th} (cần ${tn})`:`Chưa có hoàng tử: Thái hậu phải hết lòng, quý ${me?"ngươi":"nàng"} ${p.th} (cần ${tn})`],[p.duc>=nd,`Đức ${p.duc} (cần ${nd}${N.heir?", mẹ Thái tử":""})`])}
  else if(r+1>=5)L.push([p.hh>BAL.hiOppHh||p.th>=BAL.hiOppTh||!qBlock||(facOf(p)&&facStr(facOf(p))>=BAL.hiOppFac),`Hoàng hậu không phản đối, hoặc Thái hậu ${BAL.hiOppTh}, hoặc phe mạnh (thế lực ${BAL.hiOppFac})`]);
+ if(typeof pbKyRow==="function"){const k=pbKyRow(p);if(k)L.push(k)}/* promo-build: the ordinary road is looked at only in a kỳ sắc phong (jpromob) */
  if(p.confined)L.push([false,`Đang cấm túc (${p.confined} tháng)`]);return L}
 function promoReq(){return promoReqP(S)}
 /* the vacant seat is contested: every eligible consort (Quý phi and above) weighs in by favour, Thái hậu, sons and name */
@@ -475,7 +490,7 @@ function rivalsTurn(){const live=liveRivals(true);let ev="";
   let want=((v.malice/100)*(rel(v,t)<0?1:.25)+hostility(v,t)/200)*(rkOf(t)>=rkOf(v)-1||(t===S&&v.ghen>=60)?1:.4);if(t.shield)want*=.5;
   if(roll(want*4)){ev+=seenNPC(v,t,npcAct(v,t));if(S.dead)return ev}}
  if(S.block)S.block--;
- const q=rivals[0];if(qOn()&&R(480)===0){q.alive=false;q.queen=false;ev+=`Hoàng hậu ${q.name} băng hà vì bệnh. Ngôi trung cung bỏ trống. `}
+ const q=rivals[0];if(qOn()&&R(480)===0){q.alive=false;dieMk(q,"ill");q.queen=false;ev+=`Hoàng hậu ${q.name} băng hà vì bệnh. Ngôi trung cung bỏ trống. `}
 if(queenP())S.vacSince=null;
  /* a vacant seat is filled by the Emperor's choice after 3 months of mourning: each week (1 in 8) he weighs every eligible consort, her included (Hoàng quý phi meeting the conditions), by favour, Thái hậu, sons and name */
  if(!queenP()&&S.vacSince==null)S.vacSince=S.turn;
@@ -512,16 +527,16 @@ function doAct(i,k){const v=rivals[i],a=ACT[k];const hk=typeof harmK==="function
  if(k==="plant"||k==="gift"){pushDil(mkP(k==="plant"?"plantpick":"giftpick",{v:v.id}),k==="plant"?"Cài đồ vào rương":"Tặng quà");render();return}
  const fz=ACTFZ&&ACTFZ.k===k?ACTFZ.o:actOdds(S,v,k);/* the odds she saw, read before the spend (j9 fzRun); from the card game (jsgame sgRun) = its result odds */
  /* parallel time (jptime): a deed done by a SENT servant — she pays the order, the servant goes, the deed lands at the due khắc */if(typeof ptHarmSend==="function"&&ptHarmSend(v,k,fz)){spend(hk);render();return}spend(BAL.time.cost.harm);const r=fzRun(fz,k,()=>runAct(S,v,k));if(r)log(r);render()}
-function empAct(i,k){const v=rivals[i];if(!v||S.rank<7||!can(2)||S.dead||Q.length)return;let r="";if(k==="cutpay"){spend(2);v.cutPay=1;v.cutBy="Hoàng hậu";relAdd(S,v,BAL.eff.j8.empAct);log(`Ngươi sai Nội vụ phủ khất bổng lộc của ${v.name} tháng tới.`);render();return}
+function empAct(i,k){const v=rivals[i];if(!v||S.rank<7||!can(BAL.btn.empAct.k)||S.dead||Q.length)return;let r="";if(k==="cutpay"){spend(BAL.btn.empAct.k);v.cutPay=1;v.cutBy="Hoàng hậu";relAdd(S,v,BAL.eff.j8.empAct);log(`Ngươi sai Nội vụ phủ khất bổng lộc của ${v.name} tháng tới.`);render();return}
  if(k==="judge"){if(evG(S,v)<2)return;r=judge(S,v)}
  else if(k==="conf"){const j=v.inv.findIndex(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h);if(j<0)return;if(evG(S,v)<1&&!vpItems(v).length){apply(BAL.tw.confNo);log(`Tịch thu vô cớ: Danh ${BAL.tw.confNo.danh}, Thái hậu ${BAL.tw.confNo.th}.`)}const n=iname(v.inv[j]);v.inv.splice(j,1);relAdd(S,v,-BAL.tw.g.conf[0]);v.hh-=BAL.tw.g.conf[1];r=`Ngươi tịch thu ${n} của ${v.name}.`}
  else if(k==="reward"){if(S.bac<-BAL.tw.reward.bac)return;apply(BAL.tw.reward);relAdd(S,v,BAL.tw.g.reward[0]);v.hh+=BAL.tw.g.reward[1];ap(v,{danh:BAL.tw.g.reward[2]});r=`Ngươi ban thưởng cho ${v.name}.`}
  else if(k==="pardon"){if(!v.confined&&!v.out)return;if(v.out&&!roomFor("consort"))return;if(v.out){v.out=false;v.rank=0}v.confined=0;relAdd(S,v,BAL.eff.j8.empAct_2);apply({duc:BAL.ag.hh.pardonDuc});r=`Ngươi ân xá cho ${v.name}.`}
- else return;spend(2);log(r);render()}
+ else return;spend(BAL.btn.empAct.k);log(r);render()}
 function giftTargets(){const L=[["emp","Hoàng thượng"]];if(!S.thDead)L.push(["th","Thái hậu"]);liveRivals(true).forEach(v=>L.push([v.id,(v.queen?"Hoàng hậu ":"")+v.name]));return L}
 PEND.giftpick=p=>{const e=S.inv[p.ix!=null?p.ix:-1];const L=p.v!=null?[[p.v,(RV(p.v)||{}).name]]:giftTargets();
- if(p.v!=null){const items=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h);return{t:"<p>Chọn món đồ để tặng.</p>",o:items.map(([e,i])=>({n:iname(e)+(e.t?" (đã tẩm)":""),ik:i,fx:{},x:(IT[e.k]||{}).d,go:()=>{spend(2);log(giveTo(S,RV(p.v),i))}})).concat([{n:"Thôi",fx:{}}])}}
- if(!e)return null;return{t:`<p>Tặng <b>${iname(e)}</b> cho ai?</p>`,o:L.map(([id,n])=>({n,fx:{},x:id==="emp"||id==="th"?(e.t?"không thể dâng đồ đã tẩm":giftVal(Object.assign({k:e.k},IT[e.k]),id)>=8?"rất hợp ý":""):"",go:()=>{if((id==="emp"||id==="th")&&e.t)return;spend(2);log(giveTo(S,id==="emp"||id==="th"?id:RV(id),p.ix))}})).concat([{n:"Thôi",fx:{}}])}};
+ if(p.v!=null){const items=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h);return{t:"<p>Chọn món đồ để tặng.</p>",o:items.map(([e,i])=>({n:iname(e)+(e.t?" (đã tẩm)":""),ik:i,fx:{},x:(IT[e.k]||{}).d,go:()=>{spend(BAL.btn.give.k);log(giveTo(S,RV(p.v),i))}})).concat([{n:"Thôi",fx:{}}])}}
+ if(!e)return null;return{t:`<p>Tặng <b>${iname(e)}</b> cho ai?</p>`,o:L.map(([id,n])=>({n,fx:{},x:id==="emp"||id==="th"?(e.t?"không thể dâng đồ đã tẩm":giftVal(Object.assign({k:e.k},IT[e.k]),id)>=8?"rất hợp ý":""):"",go:()=>{if((id==="emp"||id==="th")&&e.t)return;spend(BAL.btn.give.k);log(giveTo(S,id==="emp"||id==="th"?id:RV(id),p.ix))}})).concat([{n:"Thôi",fx:{}}])}};
 PEND.plantpick=p=>{const v=RV(p.v);if(!v)return null;const items=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h);const fx=p.here?{pen:-BAL.actHere.plant,here:1}:null,fz=actOdds(S,v,"plant",fx);/* the odds printed here = the odds rolled (fzRun), read before any spend */
  return{who:pv(v),t:`<p>Sai người lẻn vào cung ${v.name}, cài món gì vào rương nàng?</p><p class="past">${word(oddsCl(fz))} · hỏng: bị bắt, nàng nắm ${balAb(BAL.eff.j8.evPlantItem)} chứng cứ</p>`,o:items.map(([e,i])=>({n:iname(e)+(e.t?" ("+TAINT[e.t].n+")":""),ik:i,fx:{},p:oddsCl(fz)/* law 4: fzRun(fz) */,x:(IT[e.k]||{}).il||(e.t&&TAINT[e.t].il)?"khám ra là có tội":(IT[e.k]||{}).rk>rkOf(v)?"vượt phẩm của nàng":"",go:()=>{spend(2);fzRun(fz,"plant",()=>{if(p.here)plantHereGo(v,i);else log(runAct(S,v,"plant",i))})}})).concat([{n:"Thôi",fx:{}}])}};
 /* «Cài đồ vào rương» at her palace (here): ONE function (coop-thin F3: a co-op guest's choice becomes an intent here; the odds she saw ride along) */
@@ -529,7 +544,7 @@ function plantHereGo(v,i){ACTX=actCtx(S,v,"plant",undefined,{pen:-BAL.actHere.pl
 PEND.taintpick=p=>{const e=S.inv[p.ix];if(!e)return null;const L=Object.entries(TAINT).filter(([k,T])=>T.on.includes(e.k)&&(!T.need||S.inv.some(x=>x.k===T.need&&!x.h)));
  return{t:`<p>Lén làm gì với <b>${iname(e)}</b>?</p>`,o:L.map(([k,T])=>({n:T.n[0].toUpperCase()+T.n.slice(1),fx:T.c?{bac:-T.c,duc:BAL.eff.j8.taintDuc}:{duc:BAL.eff.j8.taintDuc},x:T.hurt+(T.need?" · tốn "+itm(T.need).n:""),go:()=>log(taintItem(S,p.ix,k))})).concat([{n:"Thôi",fx:{}}])}};
 PEND.evpick=p=>({t:"<p>Tập chứng cứ này nói về ai?</p>",o:liveRivals(true).map(v=>({kgt:v,n:v.name,fx:{},go:()=>log(useItem(S,p.ix,v))})).concat([{n:"Thôi",fx:{}}])});
-PEND.itarget=p=>({t:`<p>Dùng ${itm(p.k).n} với ai?</p>`,o:liveRivals(true).map(v=>({kgt:v,n:v.name,fx:{},go:()=>{spend(2);log(useItem(S,p.ix,v))}})).concat([{n:"Thôi",fx:{}}])});
+PEND.itarget=p=>({t:`<p>Dùng ${itm(p.k).n} với ai?</p>`,o:liveRivals(true).map(v=>({kgt:v,n:v.name,fx:{},go:()=>{spend(BAL.btn.itemUse.k);log(useItem(S,p.ix,v))}})).concat([{n:"Thôi",fx:{}}])});
 PEND.shop=()=>({who:pEunCourt("ped"),t:"<p>Thái giám Nội vụ phủ bưng vào một khay đồ mua từ ngoài cung, dâng lên cho ngươi chọn: “Đồ mới mang vào, xin "+kSay({srv:"m"},S,"{goi}")+" xem qua.”</p>",o:S.shop.map(k=>({n:iic(k,20)+itm(k).n,fx:{bac:-itm(k).pr},x:`${itm(k).kd} · ${itm(k).d}`,go:()=>{S.inv.push({k});log(`Mua ${itm(k).n}.`)}})).concat([{n:"Thôi",fx:{}}])});
 PEND.giftin=p=>{const f=byKey(p.f),e=p.e;if(!f)return null;const it=itm(e.k),hi=rkOf(f)>S.rank;
  return{who:pv(f),t:`<p>${f.name} sai người mang <b>${it.n}</b> sang tặng ngươi.</p><p class="past">${it.d}</p>`,o:[
@@ -542,27 +557,27 @@ function itemTest(p,ix){const T=BAL.ag.par3.test;const e=(p.inv||[])[ix];if(!e||
   return p===S?`Thái y phát hiện ${it.n} ${TAINT[e.t].n}${by?`; dấu vết dẫn về ${NM(by)} (chứng cứ ${balSg(BAL.eff.j8.evItemAct)})`:""}.`:`${p.name} đem ${it.n} đi nghiệm, thái y phát hiện đồ bị ${TAINT[e.t].n}`}
  return p===S?`Thái y xét ${it.n}: không thấy gì lạ.`:`${p.name} đem ${it.n} đi nghiệm độc`}
 function itemAct(a,ix){const e=S.inv[ix];if(!e||S.dead||Q.length)return;const it=itm(e.k);
- if(a==="use"){if(it.evi){pushDil(mkP("evpick",{ix}),"Tập chứng cứ");render();return}if(e.k==="botngua"){if(!can(2))return;pushDil(mkP("itarget",{ix,k:e.k}),it.n);render();return}const r=useItem(S,ix);if(r)log(r)}
+ if(a==="use"){if(it.evi){pushDil(mkP("evpick",{ix}),"Tập chứng cứ");render();return}if(e.k==="botngua"){if(!can(BAL.btn.itemUse.k))return;pushDil(mkP("itarget",{ix,k:e.k}),it.n);render();return}const r=useItem(S,ix);if(r)log(r)}
  else if(a==="wear")wear(S,ix);
- else if(a==="gift"){if(!can(2))return;pushDil(mkP("giftpick",{ix}),"Tặng quà")}
+ else if(a==="gift"){if(!can(BAL.btn.give.k))return;pushDil(mkP("giftpick",{ix}),"Tặng quà")}
  else if(a==="sell"){const r=sellItem(S,ix);if(r)log(r)}
  else if(a==="taint")pushDil(mkP("taintpick",{ix}),"Tẩm đồ");
  else if(a==="test"){const r=itemTest(S,ix);if(r)log(r)}
  render()}
 function invAct(a){if(S.dead||Q.length)return;
  if(a==="shop"){pushDil(mkP("shop"),"Nhờ thái giám mua đồ");render();return}
- if(a==="inspect"){if(!can(2))return;spend(2);const f=inspect(S);log(f.length?`Kiểm tra rương đồ, tìm thấy: ${f.join("; ")}.`:"Kiểm tra rương đồ: không thấy gì lạ.");if(f.length)Q.push({t:"Kiểm tra đồ",h:`<p>${f.join("<br>")}</p>`});render()}}
+ if(a==="inspect"){if(!can(BAL.btn.inspect.k))return;spend(BAL.btn.inspect.k);const f=inspect(S);log(f.length?`Kiểm tra rương đồ, tìm thấy: ${f.join("; ")}.`:"Kiểm tra rương đồ: không thấy gì lạ.");if(f.length)Q.push({t:"Kiểm tra đồ",h:`<p>${f.join("<br>")}</p>`});render()}}
 function invHTML(){const wb=wearBonus(S),vp=vpItems(S);const vis=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h);
  const groups=[];for(const [e,i] of vis){const g=groups.find(x=>x.k===e.k&&!!x.t===!!(e.by==="me"&&e.t)&&!x.w&&!e.w);if(g)g.n++;else groups.push({k:e.k,t:e.by==="me"?e.t:null,w:e.w,i,n:1,ext:e.t&&e.by!=="me",from:e.from})}
  const dress=S.dress&&S.dress.until>S.turn?`${itm(S.dress.k).n} (đến tháng ${S.dress.until-S.turn} nữa)`:"không";
  let h=`<div class="ph"><span>Đang mặc: Sắc +${wb.sac-(wb.shSac||0)}${wb.danh?`, Danh +${wb.danh}`:""} · áo mới: ${dress}${vp.length?` · <span class="r">vượt phẩm!</span>`:""}</span><span>Bạc ${S.bac}</span></div>
- <div class="rbtn" style="margin-bottom:6px"><button data-inv="shop">Nhờ thái giám mua đồ<small>thành: xem hàng, mua đồ từ ngoài cung qua thái giám Nội vụ phủ</small></button><button data-inv="inspect" ${!can(2)?"disabled":""}>Kiểm tra đồ<small>${word(oSee(S,true))} · tốn: 2 khắc · thành: tìm ra đồ bị tẩm độc hay bị cài · hỏng: không thấy gì</small></button></div>`;
+ <div class="rbtn" style="margin-bottom:6px"><button data-inv="shop">Nhờ thái giám mua đồ<small>thành: xem hàng, mua đồ từ ngoài cung qua thái giám Nội vụ phủ</small></button><button data-inv="inspect" ${!can(BAL.btn.inspect.k)?"disabled":""}>Kiểm tra đồ<small>${word(oSee(S,true))} · tốn: ${BAL.btn.inspect.k} khắc · thành: tìm ra đồ bị tẩm độc hay bị cài · hỏng: không thấy gì</small></button></div>`;
  if(!groups.length)return h+`<p class="past">Rương trống. Nhờ thái giám mua đồ, hoặc chờ được ban thưởng.</p>`;
  h+=`<div class="cards">`+groups.map(g=>{const it=itm(g.k),i=g.i;const B=[];
   if(it.sl)B.push(`<button data-it="wear" data-ix="${i}">${g.w?"Tháo":"Đeo"}<small>${it.rk>S.rank?"vượt phẩm":"hợp phẩm"}</small></button>`);
   if(it.dr)B.push(`<button data-it="use" data-ix="${i}">May áo<small>${it.rk>S.rank?"vượt phẩm":"3 tháng"}</small></button>`);
-  if(it.use||it.evi||g.k==="botngua")B.push(`<button data-it="use" data-ix="${i}">Dùng<small>${g.k==="botngua"?"tốn 2 khắc":fmt(it.use)||"chọn người"}</small></button>`);
-  if(g.k!=="ngocboi"||g.t)B.push(`<button data-it="gift" data-ix="${i}" ${!can(2)?"disabled":""}>Tặng<small>tốn 2 khắc</small></button>`);
+  if(it.use||it.evi||g.k==="botngua")B.push(`<button data-it="use" data-ix="${i}">Dùng<small>${g.k==="botngua"?`tốn ${BAL.btn.itemUse.k} khắc`:fmt(it.use)||"chọn người"}</small></button>`);
+  if(g.k!=="ngocboi"||g.t)B.push(`<button data-it="gift" data-ix="${i}" ${!can(BAL.btn.give.k)?"disabled":""}>Tặng<small>tốn ${BAL.btn.give.k} khắc</small></button>`);
   if(it.pr)B.push(`<button data-it="sell" data-ix="${i}">Bán<small>Bạc +${Math.floor(it.pr/2)}</small></button>`);
   if(Object.values(TAINT).some(T=>T.on.includes(g.k))&&!g.t)B.push(`<button data-it="taint" data-ix="${i}">Tẩm<small>mưu kế</small></button>`);
   if(g.from&&g.from!=="me"&&g.from!=="emp"&&g.from!=="th")B.push(`<button data-it="test" data-ix="${i}" ${S.bac<BAL.bacFee.itTest?"disabled":""}>Xét nghiệm<small>Bạc -${BAL.bacFee.itTest}</small></button>`);
