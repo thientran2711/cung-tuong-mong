@@ -34,3 +34,11 @@ Checks: build OK, page 0 errors, relshow-scan RAW 0 (oán 103 / aff 412), relsho
 Tools here: sites.js (site list), order.py, cards.py (idempotent hand rewrites), nbb.js (card text + applied check).
 
 ## OPEN (next): (2) NB-a j70 Bày mưu lines, (3) NB2 result cards, (4) all gates.
+
+## (2) NB-a — j70 «Bày mưu» lines, DONE (nba.py, idempotent; check nba.js <index> rumor)
+| option | before | after |
+|---|---|---|
+| Ra tay ngay: <act> | «thành: Danh nàng -8 · hỏng: dễ bị lộ, nàng nắm chứng cứ» | the act card's own line (sgLine → actLineRaw, target v): «tốn · thành: Danh nàng -8 · hỏng: không ai tin: nàng nắm 1 chứng cứ, thiện cảm -5, oán ta +1 đến +6 · bị người của nàng phát giác: … 2 chứng cứ, thiện cảm -10, oán ta +3 đến +13 · kèm: người được sai bị bắt thì khai ra ngươi …» |
+| Bày mưu: <route> | chuẩn bị / lúc ra tay / dấu vết / «có thể phát hiện» | + «thành: <AOUT win>», kèm «ra tay mà hỏng: <AOUT lose>» (exec70 → runAct = the same act), «có thể phát hiện: mưu khó thành hơn, có khi nàng nắm 1 chứng cứ» (step70 p.g+10, evA evTop) |
+The jsgame sub-dialog («Tự ra tay» / «Giao cho người làm») already uses sgLine → actLineRaw = the full line (checked at runtime). W5's «Danh ngươi −5» on a Fold rumor fail: rumor f applies no Danh to the doer — not reproduced here; re-check in the real-tap gate.
+relshow-scan RAW 0, relshow-rt PASS after this.
