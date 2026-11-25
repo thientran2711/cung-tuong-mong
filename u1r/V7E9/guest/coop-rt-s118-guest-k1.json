@@ -1,0 +1,1802 @@
+{
+ "job": {
+  "id": "coop-rt-s118-guest-k1",
+  "origin": null,
+  "road": null,
+  "bot": "sens",
+  "seed": 1282,
+  "dev": "ipad",
+  "url": "http://127.0.0.1:8080/index.html"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "512cfee6",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [
+   {
+    "at": 352,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 1359,
+    "lvl": 1,
+    "layer": ".kfoc",
+    "title": ""
+   },
+   {
+    "at": 1489,
+    "lvl": 1,
+    "layer": ".kfoc",
+    "title": ""
+   },
+   {
+    "at": 1577,
+    "lvl": 1,
+    "layer": "#kchatp",
+    "title": ""
+   }
+  ],
+  "slice": null,
+  "areaTaps": 61,
+  "typed": 1,
+  "popClose": 113,
+  "chipTrap": 11,
+  "scrolls": 5,
+  "reloadDone": 8
+ },
+ "life": null,
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "game|tap on option «Tắm gội chờ giáRất vữngTốnkhôn» opened chip modal «Chuẩn bị thị tẩm» (chip overlaps the card body)",
+   "type": "game",
+   "msg": "tap on option «Tắm gội chờ giáRất vữngTốnkhôn» opened chip modal «Chuẩn bị thị tẩm» (chip overlaps the card body)",
+   "n": 1,
+   "at": 230,
+   "screen": ".dlg «Kính sự phòng báo tin»"
+  },
+  {
+   "k": "game|tap on option «Tắm cánh hoa, xông hươngRất vữ» opened chip modal «Đêm thị tẩm» (chip overlaps the card body)",
+   "type": "game",
+   "msg": "tap on option «Tắm cánh hoa, xông hươngRất vữ» opened chip modal «Đêm thị tẩm» (chip overlaps the card body)",
+   "n": 1,
+   "at": 233,
+   "screen": ".dlg «Chuẩn bị thị tẩm»"
+  },
+  {
+   "k": "game|tap on option «Xin tha cho cung nữ bị phạtRất» opened chip modal «Việc khó xử» (chip overlaps the card body)",
+   "type": "game",
+   "msg": "tap on option «Xin tha cho cung nữ bị phạtRất» opened chip modal «Việc khó xử» (chip overlaps the card body)",
+   "n": 1,
+   "at": 241,
+   "screen": ".dlg «Đêm thị tẩm»"
+  },
+  {
+   "k": "game|tap on option «Sẵn sàng» opened chip modal «Chuyện trong cung» (chip overlaps the card body)",
+   "type": "game",
+   "msg": "tap on option «Sẵn sàng» opened chip modal «Chuyện trong cung» (chip overlaps the card body)",
+   "n": 1,
+   "at": 274,
+   "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.»"
+  },
+  {
+   "k": "game|tap on option «Sẵn sàng» opened chip modal «Có người đến» (chip overlaps the card body)",
+   "type": "game",
+   "msg": "tap on option «Sẵn sàng» opened chip modal «Có người đến» (chip overlaps the card body)",
+   "n": 2,
+   "at": 284,
+   "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.»"
+  },
+  {
+   "k": "game|tap on option «Quẻ Thượng thượng (Danh)» opened chip modal «Quẻ Thượng thượng · Danh» (chip overlaps the card body)",
+   "type": "game",
+   "msg": "tap on option «Quẻ Thượng thượng (Danh)» opened chip modal «Quẻ Thượng thượng · Danh» (chip overlaps the card body)",
+   "n": 1,
+   "at": 393,
+   "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.»"
+  },
+  {
+   "k": "game|tap on option «Sẵn sàng» opened chip modal «Một ánh mắt» (chip overlaps the card body)",
+   "type": "game",
+   "msg": "tap on option «Sẵn sàng» opened chip modal «Một ánh mắt» (chip overlaps the card body)",
+   "n": 1,
+   "at": 451,
+   "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.»"
+  },
+  {
+   "k": "game|tap on option «Xem thêm» opened chip modal «Hoàng thượng» (chip overlaps the card body)",
+   "type": "game",
+   "msg": "tap on option «Xem thêm» opened chip modal «Hoàng thượng» (chip overlaps the card body)",
+   "n": 1,
+   "at": 572,
+   "screen": ".dlg «»"
+  },
+  {
+   "k": "game|tap on option «Lạc Thọ điệnChính điện · vắng » opened chip modal «Trường Xuân cung» (chip overlaps the card body)",
+   "type": "game",
+   "msg": "tap on option «Lạc Thọ điệnChính điện · vắng » opened chip modal «Trường Xuân cung» (chip overlaps the card body)",
+   "n": 1,
+   "at": 658,
+   "screen": ".mapsc «»"
+  },
+  {
+   "k": "game|tap on option «Ta biết rồi» opened chip modal «Kỳ nguyệt sự» (chip overlaps the card body)",
+   "type": "game",
+   "msg": "tap on option «Ta biết rồi» opened chip modal «Kỳ nguyệt sự» (chip overlaps the card body)",
+   "n": 1,
+   "at": 699,
+   "screen": ".kmov «»"
+  },
+  {
+   "k": "js|page error: f.rk.split is not a function",
+   "type": "js",
+   "msg": "page error: f.rk.split is not a function",
+   "n": 1,
+   "at": 729
+  },
+  {
+   "k": "ktut-no-target|tutorial open with no tappable target card; tapped its own «Đã hiểu»",
+   "type": "ktut-no-target",
+   "msg": "tutorial open with no tappable target card; tapped its own «Đã hiểu»",
+   "n": 2,
+   "at": 919,
+   "shot": "/home/user/wt/out/u1b/shots-coop-rt-s118-guest-k1/ktut-1.png",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Yến Tâm Duyệt"
+   },
+   "hole": "Tất cả 0/21Giao thiệp 0/3Nghỉ ngơi 0/4Học tập · Tài nghệ 0/3Lễ nghi 0/3Mưu kế 0/5Y dược 0/",
+   "card": "",
+   "buttons": [
+    "Tất cả 0/21Giao thiệp 0/3Nghỉ ngơi 0/4Học tập · Tài nghệ 0/3Lễ nghi 0/3Mưu kế 0/5Y dược 0/",
+    "",
+    "Đã hiểu"
+   ]
+  }
+ ],
+ "dead": [
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".kmov",
+   "label": "?",
+   "cover": "zero size",
+   "shot": "/home/user/wt/out/u1b/shots-coop-rt-s118-guest-k1/dead-ipad-1795617481806.png",
+   "dev": "ipad",
+   "at": 385,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Yến Tâm Duyệt"
+   }
+  }
+ ],
+ "saves": [],
+ "buoi": 25,
+ "steps": 2445,
+ "status": [],
+ "_snapAt": 1795618795953,
+ "_un": 0,
+ "trace": [
+  [
+   1207,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «nắng gắt»"
+  ],
+  [
+   1209,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hậu cung»"
+  ],
+  [
+   1210,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tin báo: 3 tin mới»"
+  ],
+  [
+   1211,
+   ".dlg «Tin báo» «Để sauTốnkhôngĐượckhông»"
+  ],
+  [
+   1218,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tư trang»"
+  ],
+  [
+   1219,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Túi đồThú cưngViệcTất cả 24Trang sức 1Y phục 2Vải »"
+  ],
+  [
+   1220,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Cung nữ thân tín tam đẳngCẩm Tịch»"
+  ],
+  [
+   1221,
+   ".kfoc «Lui»"
+  ],
+  [
+   1221,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Dư đồ»"
+  ],
+  [
+   1222,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Xem bản đồ hoàng cungGhi chútoàn cảnhĐi gần 1 khắc»"
+  ],
+  [
+   1223,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Về phòng»"
+  ],
+  [
+   1224,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Lật thẻKhông có»"
+  ],
+  [
+   1225,
+   ".dlg «Lật thẻ: Không có» «Lui»"
+  ],
+  [
+   1225,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Thư từ»"
+  ],
+  [
+   1226,
+   "#kchatp «Lui»"
+  ],
+  [
+   1227,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «ⓘ Ra vào cung cấmĐượcai được vào đâuGhi chúlúc nào»"
+  ],
+  [
+   1228,
+   ".dlg «Ra vào cung cấm» «Lui»"
+  ],
+  [
+   1229,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hoàng tự»"
+  ],
+  [
+   1230,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Số lần ân thưởng0»"
+  ],
+  [
+   1231,
+   ".dlg «Ân thưởng» «Lui»"
+  ],
+  [
+   1232,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   1234,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké»"
+  ],
+  [
+   1234,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hoàng tửChương»"
+  ],
+  [
+   1235,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tư trang»"
+  ],
+  [
+   1236,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tin báo»"
+  ],
+  [
+   1237,
+   ".dlg «Tin báo» «Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu»"
+  ],
+  [
+   1238,
+   ".dlg «Tin chờ người sai đi» «Lui»"
+  ],
+  [
+   1245,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Về phòng»"
+  ],
+  [
+   1246,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Buổi trưa, còn 0 khắc»"
+  ],
+  [
+   1247,
+   ".dlg «trưa · còn» «Lui»"
+  ],
+  [
+   1247,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Ân tình (đêm)6»"
+  ],
+  [
+   1248,
+   ".dlg «Ân tình (đêm)» «Lui»"
+  ],
+  [
+   1249,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Số lần ân thưởng0»"
+  ],
+  [
+   1250,
+   ".dlg «Ân thưởng» «Lui»"
+  ],
+  [
+   1251,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Lương Mạn Sương: Đang bận»"
+  ],
+  [
+   1252,
+   ".dlg «<span data-k61skip=\"1\"><b class=\"kname\" style=\"--r» «Lui»"
+  ],
+  [
+   1259,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Thú cưng»"
+  ],
+  [
+   1260,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Quẻ Thượng thượng (Giao thiệp)»"
+  ],
+  [
+   1260,
+   ".dlg «Quẻ Thượng thượng · Giao thiệp» «Lui»"
+  ],
+  [
+   1261,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Thú cưng»"
+  ],
+  [
+   1262,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Chọn chính mình»"
+  ],
+  [
+   1263,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Việc»"
+  ],
+  [
+   1264,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «3Chí tôn»"
+  ],
+  [
+   1264,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tai mắt0»"
+  ],
+  [
+   1265,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Túi đồ»"
+  ],
+  [
+   1266,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Lương Mạn Sương: Đang bận»"
+  ],
+  [
+   1267,
+   ".dlg «<span data-k61skip=\"1\"><b class=\"kname\" style=\"--r» «Lui»"
+  ],
+  [
+   1274,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Về phòng»"
+  ],
+  [
+   1275,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hoàng tự»"
+  ],
+  [
+   1276,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tâm trạngBình thản+17»"
+  ],
+  [
+   1277,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   1278,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «3Chí tôn»"
+  ],
+  [
+   1279,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Cấm túc1 tháng»"
+  ],
+  [
+   1280,
+   ".dlg «Cấm túc 1 tháng» «Lui»"
+  ],
+  [
+   1281,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Ân tình (đêm)6»"
+  ],
+  [
+   1282,
+   ".dlg «Ân tình (đêm)» «Lui»"
+  ],
+  [
+   1283,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Kế vị»"
+  ],
+  [
+   1284,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tâm trạngBình thản+17»"
+  ],
+  [
+   1284,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   1285,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hành sự»"
+  ],
+  [
+   1286,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tâm trạngBình thản+17»"
+  ],
+  [
+   1287,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   1288,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Mục tiêu chương»"
+  ],
+  [
+   1289,
+   ".dlg «Chương 1 · Nhập cung, đứng vững» «Đi làm: Thỉnh an Thái hậu hoặc Hoàng hậuTốnkhôngĐư»"
+  ],
+  [
+   1290,
+   "#ktut «Đã hiểu»"
+  ],
+  [
+   1297,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tin báo»"
+  ],
+  [
+   1298,
+   ".dlg «Tin báo» «Để sauTốnkhôngĐượckhông»"
+  ],
+  [
+   1305,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Y dược 0/2»"
+  ],
+  [
+   1306,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Lịch tháng»"
+  ],
+  [
+   1307,
+   ".dlg «Lịch tháng» «mồng 7»"
+  ],
+  [
+   1307,
+   ".dlg «Lịch tháng» «mồng 3»"
+  ],
+  [
+   1308,
+   ".dlg «Lịch tháng» «ngày 16»"
+  ],
+  [
+   1309,
+   ".dlg «Lịch tháng» «ngày 22: Nguyệt tín»"
+  ],
+  [
+   1310,
+   ".dlg «Lịch tháng» «ngày 27: Nguyệt tín»"
+  ],
+  [
+   1310,
+   ".dlg «Lịch tháng» «ngày 24: Nguyệt tín»"
+  ],
+  [
+   1311,
+   ".dlg «Lịch tháng» «ngày 25: Nguyệt tín»"
+  ],
+  [
+   1312,
+   ".dlg «Lịch tháng» «ngày 21»"
+  ],
+  [
+   1313,
+   ".dlg «Lịch tháng» «ngày 23: Nguyệt tín»"
+  ],
+  [
+   1314,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   1314,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   1316,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   1317,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tư trang»"
+  ],
+  [
+   1318,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hậu cung»"
+  ],
+  [
+   1319,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Cấm túc1 tháng»"
+  ],
+  [
+   1320,
+   ".dlg «Cấm túc 1 tháng» «Lui»"
+  ],
+  [
+   1321,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Mạn Sương»"
+  ],
+  [
+   1322,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Người trước»"
+  ],
+  [
+   1322,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hoàng tự»"
+  ],
+  [
+   1323,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tài nghệ»"
+  ],
+  [
+   1324,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «ⓘ luật Đức»"
+  ],
+  [
+   1325,
+   ".dlg «Đức» «Lui»"
+  ],
+  [
+   1326,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Chọn chính mình»"
+  ],
+  [
+   1327,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tin báo»"
+  ],
+  [
+   1327,
+   ".dlg «Tin báo» «Để sauTốnkhôngĐượckhông»"
+  ],
+  [
+   1334,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Quẻ Thượng thượng (Giao thiệp)»"
+  ],
+  [
+   1335,
+   ".dlg «Quẻ Thượng thượng · Giao thiệp» «Lui»"
+  ],
+  [
+   1336,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «ⓘ luật Đức»"
+  ],
+  [
+   1337,
+   ".dlg «Đức» «Lui»"
+  ],
+  [
+   1338,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Cung nữ thân tín tam đẳngCẩm Tịch»"
+  ],
+  [
+   1339,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1340,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1342,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1343,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1345,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1347,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1348,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1350,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1351,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1353,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1354,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1356,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1358,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1360,
+   ".kfoc «unstick ✕»"
+  ],
+  [
+   1360,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1361,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Xét phẩm: thiếu 4»"
+  ],
+  [
+   1362,
+   ".dlg «Xét phẩm cuối tháng · Thường tại» «Lui»"
+  ],
+  [
+   1363,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tứ đức 0/9Cầm kỳ thi họa 0/12Vũ · Y · Nữ công 0/12»"
+  ],
+  [
+   1364,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «3Chí tôn»"
+  ],
+  [
+   1365,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Xét phẩm: thiếu 4»"
+  ],
+  [
+   1365,
+   ".dlg «Xét phẩm cuối tháng · Thường tại» «Lui»"
+  ],
+  [
+   1366,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Dư đồ»"
+  ],
+  [
+   1367,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tài nghệ»"
+  ],
+  [
+   1368,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Học tập · Tài nghệHọc tập · Tài nghệCác lối, sách »"
+  ],
+  [
+   1369,
+   ".dlg «Công · Nữ công: các lối» «Lui»"
+  ],
+  [
+   1370,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hành sự»"
+  ],
+  [
+   1370,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Cấm túc1 tháng»"
+  ],
+  [
+   1371,
+   ".dlg «Cấm túc 1 tháng» «Lui»"
+  ],
+  [
+   1372,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Chọn chính mình»"
+  ],
+  [
+   1373,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Lật thẻKhông có»"
+  ],
+  [
+   1374,
+   ".dlg «Lật thẻ: Không có» «Lui»"
+  ],
+  [
+   1375,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tin báo»"
+  ],
+  [
+   1375,
+   ".dlg «Tin báo» «Để sauTốnkhôngĐượckhông»"
+  ],
+  [
+   1383,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Bạc28Sức100/100»"
+  ],
+  [
+   1383,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   1384,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tài nghệ»"
+  ],
+  [
+   1385,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tứ đức 0/9»"
+  ],
+  [
+   1386,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Ân tình (đêm)6»"
+  ],
+  [
+   1387,
+   ".dlg «Ân tình (đêm)» «Lui»"
+  ],
+  [
+   1388,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «ⓘ luật Đức»"
+  ],
+  [
+   1389,
+   ".dlg «Đức» «Lui»"
+  ],
+  [
+   1389,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Bậc 0 trên 5»"
+  ],
+  [
+   1390,
+   ".dlg «Công · Nữ công» «Lui»"
+  ],
+  [
+   1391,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Số lần ân thưởng0»"
+  ],
+  [
+   1392,
+   ".dlg «Ân thưởng» «Lui»"
+  ],
+  [
+   1393,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tâm trạngBình thản+17»"
+  ],
+  [
+   1394,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   1395,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Số lần ân thưởng0»"
+  ],
+  [
+   1396,
+   ".dlg «Ân thưởng» «Lui»"
+  ],
+  [
+   1397,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Xét phẩm: thiếu 4»"
+  ],
+  [
+   1397,
+   ".dlg «Xét phẩm cuối tháng · Thường tại» «Lui»"
+  ],
+  [
+   1398,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Số lần ân thưởng0»"
+  ],
+  [
+   1399,
+   ".dlg «Ân thưởng» «Lui»"
+  ],
+  [
+   1400,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Dư đồ»"
+  ],
+  [
+   1401,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Về phòng»"
+  ],
+  [
+   1402,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Bạc28Sức100/100»"
+  ],
+  [
+   1402,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   1403,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Giao tình»"
+  ],
+  [
+   1404,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Cấm túc1 tháng»"
+  ],
+  [
+   1405,
+   ".dlg «Cấm túc 1 tháng» «Lui»"
+  ],
+  [
+   1406,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Mục tiêu chương»"
+  ],
+  [
+   1407,
+   ".dlg «Chương 1 · Nhập cung, đứng vững» «Đi làm: Thay y phục hay trang sức trong Tư trangTố»"
+  ],
+  [
+   1414,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Thư từ 1»"
+  ],
+  [
+   1415,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Thư từ 1»"
+  ],
+  [
+   1416,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Lễ vật 1»"
+  ],
+  [
+   1416,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tâm trạngBình thản+17»"
+  ],
+  [
+   1417,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   1418,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tâm trạngBình thản+17»"
+  ],
+  [
+   1419,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   1420,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Giao tình»"
+  ],
+  [
+   1421,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Cấm túc1 tháng»"
+  ],
+  [
+   1421,
+   ".dlg «Cấm túc 1 tháng» «Lui»"
+  ],
+  [
+   1422,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Lịch tháng»"
+  ],
+  [
+   1423,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   1424,
+   ".dlg «Lịch tháng» «ngày 23: Nguyệt tín»"
+  ],
+  [
+   1425,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   1425,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Quẻ Thượng thượng (Giao thiệp)»"
+  ],
+  [
+   1426,
+   ".dlg «Quẻ Thượng thượng · Giao thiệp» «Lui»"
+  ],
+  [
+   1427,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Xem quan hệ của Người lạ»"
+  ],
+  [
+   1428,
+   ".dlg «Xem quan hệ của» «Người lạTổng quản thái giám Càn Thanh cungNgười lạ»"
+  ],
+  [
+   1429,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tư trang»"
+  ],
+  [
+   1430,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Thư từ 1»"
+  ],
+  [
+   1430,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Lễ vật 1»"
+  ],
+  [
+   1431,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Thư từ 1»"
+  ],
+  [
+   1432,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Mục tiêu chương»"
+  ],
+  [
+   1433,
+   ".dlg «Chương 1 · Nhập cung, đứng vững» «Danh hiệu 1/35»"
+  ],
+  [
+   1434,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   1435,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Thêm SủngTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   1436,
+   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   1437,
+   ".dlg «Danh hiệu» «Thiên mệnh»"
+  ],
+  [
+   1437,
+   ".dlg «Thiên mệnh» «Mục tiêu»"
+  ],
+  [
+   1438,
+   ".dlg «Chương 1 · Nhập cung, đứng vững» «Danh hiệu 1/35»"
+  ],
+  [
+   1439,
+   ".dlg «Danh hiệu» «Mục tiêu»"
+  ],
+  [
+   1440,
+   ".dlg «Chương 1 · Nhập cung, đứng vững» «Thiên mệnh»"
+  ],
+  [
+   1441,
+   ".dlg «Thiên mệnh» «Mục tiêu»"
+  ],
+  [
+   1441,
+   ".dlg «Chương 1 · Nhập cung, đứng vững» «Danh hiệu 1/35»"
+  ],
+  [
+   1442,
+   ".dlg «Danh hiệu» «Thiên mệnh»"
+  ],
+  [
+   1443,
+   ".dlg «Thiên mệnh» «Danh hiệu 1/35»"
+  ],
+  [
+   1444,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   1445,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   1445,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   1446,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   1447,
+   ".dlg «Danh hiệu» «Mục tiêu»"
+  ],
+  [
+   1448,
+   ".dlg «Chương 1 · Nhập cung, đứng vững» «Danh hiệu 1/35»"
+  ],
+  [
+   1449,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   1450,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Thêm SủngTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   1450,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   1451,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   1452,
+   ".dlg «Danh hiệu» «Thiên mệnh»"
+  ],
+  [
+   1453,
+   ".dlg «Thiên mệnh» «Mục tiêu»"
+  ],
+  [
+   1453,
+   ".dlg «Chương 1 · Nhập cung, đứng vững» «Thiên mệnh»"
+  ],
+  [
+   1454,
+   ".dlg «Thiên mệnh» «Mục tiêu»"
+  ],
+  [
+   1455,
+   ".dlg «Chương 1 · Nhập cung, đứng vững» «Mục tiêu»"
+  ],
+  [
+   1456,
+   ".dlg «Chương 1 · Nhập cung, đứng vững» «Đi làm: Thỉnh an Thái hậu hoặc Hoàng hậuTốnkhôngĐư»"
+  ],
+  [
+   1463,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Dư đồ»"
+  ],
+  [
+   1464,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Giao tình»"
+  ],
+  [
+   1465,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sắc45Tài35Tâm cơ35Đức27Danh16Sủng15»"
+  ],
+  [
+   1465,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «3Chí tôn»"
+  ],
+  [
+   1466,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «3Chí tôn»"
+  ],
+  [
+   1467,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «1Cung nhân»"
+  ],
+  [
+   1468,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tai mắt0»"
+  ],
+  [
+   1468,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Cung nữ thân tín tam đẳngCẩm Tịch»"
+  ],
+  [
+   1469,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1471,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1472,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1474,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1475,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1477,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1478,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1480,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1482,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1483,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1485,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1486,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1488,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1490,
+   ".kfoc «unstick ✕»"
+  ],
+  [
+   1490,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1492,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Buổi trưa, còn 0 khắc»"
+  ],
+  [
+   1492,
+   ".dlg «trưa · còn» «Lui»"
+  ],
+  [
+   1493,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Đổi chỗ hai người»"
+  ],
+  [
+   1494,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Về phòng»"
+  ],
+  [
+   1495,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Ân oánPhe pháiĐáp ứngTa▾⇄Người lạTổng quản thái gi»"
+  ],
+  [
+   1496,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «1Cung nhân»"
+  ],
+  [
+   1496,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hành sự»"
+  ],
+  [
+   1497,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Phe phái»"
+  ],
+  [
+   1498,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Số lần ân thưởng0»"
+  ],
+  [
+   1499,
+   ".dlg «Ân thưởng» «Lui»"
+  ],
+  [
+   1500,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tin báo»"
+  ],
+  [
+   1501,
+   ".dlg «Tin báo» «Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu»"
+  ],
+  [
+   1501,
+   ".dlg «Tin chờ người sai đi» «Lui»"
+  ],
+  [
+   1508,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sắc45Tài35Tâm cơ35Đức27Danh16Sủng15»"
+  ],
+  [
+   1509,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Cấm túc1 tháng»"
+  ],
+  [
+   1510,
+   ".dlg «Cấm túc 1 tháng» «Lui»"
+  ],
+  [
+   1511,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hành sự»"
+  ],
+  [
+   1512,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sắc45Tài35Tâm cơ35Đức27Danh16Sủng15»"
+  ],
+  [
+   1513,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Dư đồ»"
+  ],
+  [
+   1513,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Cấm túc1 tháng»"
+  ],
+  [
+   1514,
+   ".dlg «Cấm túc 1 tháng» «Lui»"
+  ],
+  [
+   1515,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tai mắt0»"
+  ],
+  [
+   1516,
+   ".dlg «Tai mắt» «Lui»"
+  ],
+  [
+   1517,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Xem bản đồ hoàng cungGhi chútoàn cảnhĐi gần 1 khắc»"
+  ],
+  [
+   1518,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   1519,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Số lần ân thưởng0»"
+  ],
+  [
+   1520,
+   ".dlg «Ân thưởng» «Lui»"
+  ],
+  [
+   1521,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Lật thẻKhông có»"
+  ],
+  [
+   1522,
+   ".dlg «Lật thẻ: Không có» «Lui»"
+  ],
+  [
+   1523,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «đang ở đâyđang cấm túc (còn 1 tháng)Tẩm cung · đan»"
+  ],
+  [
+   1524,
+   ".mapsc «Tích Cần việnDãy nhà cung nhân · 2 cung nhân của t»"
+  ],
+  [
+   1525,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Tài nghệ»"
+  ],
+  [
+   1526,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Hành sự»"
+  ],
+  [
+   1526,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Chọn chính mình»"
+  ],
+  [
+   1527,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Tất cả 0/21Nghỉ ngơi 0/4Giao thiệp 0/3Học tập · Tà»"
+  ],
+  [
+   1528,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Buổi trưa, còn 0 khắc»"
+  ],
+  [
+   1529,
+   ".dlg «trưa · còn» «Lui»"
+  ],
+  [
+   1530,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Có thaiRất thấp»"
+  ],
+  [
+   1531,
+   ".dlg «Có thai: Rất thấp» «Lui»"
+  ],
+  [
+   1531,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Tâm trạngBình thản+17»"
+  ],
+  [
+   1532,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   1533,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Bạc28Sức100/100»"
+  ],
+  [
+   1534,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   1535,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Nghỉ ngơi 0/4»"
+  ],
+  [
+   1536,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Tai mắt0»"
+  ],
+  [
+   1537,
+   ".dlg «Tai mắt» «Lui»"
+  ],
+  [
+   1537,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Tất cả 0/21Nghỉ ngơi 0/4Giao thiệp 0/3Học tập · Tà»"
+  ],
+  [
+   1538,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Tư trang»"
+  ],
+  [
+   1539,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Thuốc men 0»"
+  ],
+  [
+   1540,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Mục tiêu chương»"
+  ],
+  [
+   1541,
+   ".dlg «Chương 1 · Nhập cung, đứng vững» «Đi làm: Thay y phục hay trang sức trong Tư trangTố»"
+  ],
+  [
+   1548,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Thuốc men 0»"
+  ],
+  [
+   1549,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «3Chí tôn»"
+  ],
+  [
+   1549,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Chọn chính mình»"
+  ],
+  [
+   1550,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Dư đồ»"
+  ],
+  [
+   1551,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Lịch tháng»"
+  ],
+  [
+   1552,
+   ".dlg «Lịch tháng» «ngày 30»"
+  ],
+  [
+   1553,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   1554,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Thư từ»"
+  ],
+  [
+   1554,
+   "#kchatp «Lui»"
+  ],
+  [
+   1555,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Lương Mạn Sương: Đang bận»"
+  ],
+  [
+   1556,
+   ".dlg «<span data-k61skip=\"1\"><b class=\"kname\" style=\"--r» «Lui»"
+  ],
+  [
+   1563,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Số lần ân thưởng0»"
+  ],
+  [
+   1564,
+   ".dlg «Ân thưởng» «Lui»"
+  ],
+  [
+   1565,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Về phòng»"
+  ],
+  [
+   1565,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Thư từ»"
+  ],
+  [
+   1578,
+   "#kchatp «unstick ✕»"
+  ],
+  [
+   1578,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Tâm trạngBình thản+17»"
+  ],
+  [
+   1578,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   1579,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «1Cung nhân»"
+  ],
+  [
+   1580,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Mục tiêu chương»"
+  ],
+  [
+   1581,
+   ".dlg «Chương 1 · Nhập cung, đứng vững» «Thiên mệnh»"
+  ],
+  [
+   1582,
+   ".dlg «Thiên mệnh» «Thiên mệnh»"
+  ],
+  [
+   1582,
+   ".dlg «Thiên mệnh» «Danh hiệu 1/35»"
+  ],
+  [
+   1583,
+   ".dlg «Danh hiệu» «Mục tiêu»"
+  ],
+  [
+   1584,
+   ".dlg «Chương 1 · Nhập cung, đứng vững» «Mục tiêu»"
+  ],
+  [
+   1585,
+   ".dlg «Chương 1 · Nhập cung, đứng vững» «Đi làm: Thỉnh an Thái hậu hoặc Hoàng hậuTốnkhôngĐư»"
+  ],
+  [
+   1592,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Hành sự»"
+  ],
+  [
+   1593,
+   "page «Ngọc Thanh các · Tích Cần viện · Dãy nhà cung nhân» «Cung nữ thân tín tam đẳngCẩm Tịch»"
+  ],
+  [
+   1594,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1598,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1602,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1603,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1605,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1606,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1608,
+   ".kfoc «Giao việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   1610,
+   ".kfoc «Giao việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   1611,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   1612,
+   ".kfoc «Sai đi dò la · Vững · Tốn 1 khắc»"
+  ],
+  [
+   1614,
+   ".kfoc «Sai đi dò la · Vững · Tốn 1 khắc»"
+  ],
+  [
+   1615,
+   ".kfoc «Sai đi dò la · Vững · Tốn 1 khắc»"
+  ],
+  [
+   1617,
+   ".kfoc «Sai đi dò la · Vững · Tốn 1 khắc»"
+  ],
+  [
+   1618,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   1619,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   1620,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   1621,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   1621,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   1622,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   1623,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   1624,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   1624,
+   ".kfoc «Giao việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   1626,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   1627,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   1627,
+   ".kfoc «Giao việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   1629,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   1630,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   1631,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   1632,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   1633,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   1634,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   1635,
+   ".kfoc «Giao thiệp 0/3»"
+  ],
+  [
+   1636,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   1638,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   1639,
+   ".kfoc «Lui»"
+  ],
+  [
+   1640,
+   ".dlg «Việc khó xử» «Hầu bệnh cả thángRất vữngTốnSức -25ĐượcThái hậu hà»"
+  ],
+  [
+   1648,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sẵn sàng»"
+  ],
+  [
+   1650,
+   ".dlg «Có người đến» «Thu làm tai mắtRất vữngTốnBạc -20Đượccó tai mắt tr»"
+  ],
+  [
+   1657,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi dưỡng sứcRất vữngUống »"
+  ],
+  [
+   1668,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   1669,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1673,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1674,
+   "#kmrew «Thường»"
+  ],
+  [
+   1674,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1676,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   1677,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1678,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   1679,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1681,
+   "#kmrew «Thường»"
+  ],
+  [
+   1682,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1683,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   1684,
+   ".dlg «Lui»"
+  ],
+  [
+   1685,
+   "#kmrew «ThườngVải bôngMay áo: váy sa xanh ngọc (Y phục, Sắ»"
+  ],
+  [
+   1686,
+   ".dlg «Lui»"
+  ],
+  [
+   1687,
+   "#kmrew «Thường»"
+  ],
+  [
+   1687,
+   ".dlg «Lui»"
+  ],
+  [
+   1688,
+   "#kmrew «Thường»"
+  ],
+  [
+   1689,
+   ".dlg «Lui»"
+  ],
+  [
+   1690,
+   "#kmrew «ThườngPhấn gạoHộp phấn mắt dùng khi điểm trang: dù»"
+  ],
+  [
+   1691,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1692,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   1693,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1695,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   1696,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1697,
+   "#kmrew «Nhận»"
+  ],
+  [
+   1698,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1699,
+   ".dlg «Bổng lộc tháng tư» «Vì sao»"
+  ],
+  [
+   1702,
+   ".dlg «Thỉnh bình an mạch» «Lui»"
+  ],
+  [
+   1703,
+   ".dlg «Phụ tuyến · Tân quân lập uy · Chương 1 · Hồi 1/2» «Khuyên ngài nhẫn nại chờ thờiRất vữngTốnkhôngĐượcH»"
+  ],
+  [
+   1704,
+   ".dlg «Tết Đoan ngọ · Trò vui» «Từ chối khéoRất vữngTốnkhôngĐượckhôngGợi ýkhông đư»"
+  ],
+  [
+   1705,
+   ".dlg «Lỡ hẹn» «Lui»"
+  ],
+  [
+   1706,
+   ".dlg «Tết Đoan ngọ · Chuyện bên lề hội» «Về cung nghỉ cho đỡ lạnhTốnDanh -2ĐượcSức +5»"
+  ],
+  [
+   1707,
+   ".dlg «Cấm cung giới nghiêm» «Lui»"
+  ],
+  [
+   1709,
+   ".dlg «Cấm cung giới nghiêm» «Dạy nàng ta cách nói để lính nểTốnSức -8·Danh -3Đư»"
+  ],
+  [
+   1712,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1713,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1713,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1714,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1715,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1716,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1717,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1717,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1718,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1719,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Nghỉ ngơiNghỉ ngơiDưỡng nhanRất vữngNgọc trai nghi»"
+  ],
+  [
+   1729,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ]
+ ],
+ "_ckAt": 1795618834263,
+ "_ckB": 25,
+ "_kn": 1,
+ "_kb": 22
+}

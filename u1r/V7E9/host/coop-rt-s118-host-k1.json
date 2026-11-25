@@ -1,0 +1,1735 @@
+{
+ "job": {
+  "id": "coop-rt-s118-host-k1",
+  "origin": null,
+  "road": null,
+  "bot": "sens",
+  "seed": 1281,
+  "dev": "fold",
+  "url": "http://127.0.0.1:8080/index.html"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "512cfee6",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 1,
+  "unstick": [
+   {
+    "at": 352,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Một ánh mắt"
+   },
+   {
+    "at": 506,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 517,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1593,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Phúc ấm đầy nhà"
+   },
+   {
+    "at": 1695,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1707,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   }
+  ],
+  "slice": null,
+  "areaTaps": 62,
+  "popClose": 18,
+  "chipTrap": 4,
+  "reloadDone": 8
+ },
+ "life": null,
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "game|tap on option «Sẵn sàng» opened chip modal «Có người bán tin» (chip overlaps the card body)",
+   "type": "game",
+   "msg": "tap on option «Sẵn sàng» opened chip modal «Có người bán tin» (chip overlaps the card body)",
+   "n": 1,
+   "at": 136,
+   "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.»"
+  },
+  {
+   "k": "game|tap on option «Sẵn sàng» opened chip modal «Một ánh mắt» (chip overlaps the card body)",
+   "type": "game",
+   "msg": "tap on option «Sẵn sàng» opened chip modal «Một ánh mắt» (chip overlaps the card body)",
+   "n": 1,
+   "at": 351,
+   "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.»"
+  },
+  {
+   "k": "game|tap on option «Sẵn sàng» opened chip modal «Thái hậu triệu» (chip overlaps the card body)",
+   "type": "game",
+   "msg": "tap on option «Sẵn sàng» opened chip modal «Thái hậu triệu» (chip overlaps the card body)",
+   "n": 1,
+   "at": 575,
+   "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.»"
+  },
+  {
+   "k": "game|tap on option «Sẵn sàng» opened chip modal «Có người đến» (chip overlaps the card body)",
+   "type": "game",
+   "msg": "tap on option «Sẵn sàng» opened chip modal «Có người đến» (chip overlaps the card body)",
+   "n": 1,
+   "at": 683,
+   "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.»"
+  },
+  {
+   "k": "stuck|no progress 15 min on .dlg «Phúc ấm đầy nhà»",
+   "type": "stuck",
+   "msg": "no progress 15 min on .dlg «Phúc ấm đầy nhà»",
+   "n": 1,
+   "at": 1593,
+   "shot": "/home/user/wt/out/u1b/shots-coop-rt-s118-host-k1/stuck-1.png",
+   "save": "/home/user/wt/out/u1b/shots-coop-rt-s118-host-k1/stuck-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Lương Mạn Sương"
+   },
+   "buttons": [
+    "Lui"
+   ]
+  }
+ ],
+ "dead": [],
+ "saves": [],
+ "buoi": 24,
+ "steps": 2082,
+ "status": [],
+ "_snapAt": 1795618797999,
+ "_un": 0,
+ "trace": [
+  [
+   1268,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1269,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1270,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1271,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1272,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1273,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1274,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1275,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1276,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1277,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1278,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1279,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1280,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1281,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1282,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1283,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1284,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1285,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1286,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1287,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1288,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1289,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1290,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1291,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1292,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1293,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1294,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1295,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1296,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1297,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1298,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1299,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1300,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1301,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1302,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1303,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1304,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1305,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1306,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1307,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1308,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1309,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1310,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1310,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1311,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1313,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1314,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1315,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1316,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1317,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1318,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1318,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1319,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1320,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1321,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1323,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1324,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1325,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1326,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1327,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1327,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1328,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1330,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1330,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1331,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1333,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1333,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1334,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1336,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1336,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1337,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1339,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1340,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1341,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1342,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1343,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1344,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1345,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1346,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1347,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1348,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1349,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1350,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1351,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1352,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1353,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1354,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1355,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1356,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1357,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1358,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1359,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1360,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1361,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1361,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1363,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1364,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1364,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1365,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1366,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1367,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1368,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1369,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1370,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1371,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1372,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1373,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1374,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1375,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1376,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1377,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1378,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1379,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1380,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1382,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1383,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1384,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1385,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1386,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1387,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1388,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1389,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1390,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1391,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1392,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1393,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1394,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1395,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1396,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1397,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1398,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1399,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1400,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1401,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1402,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1403,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1404,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1405,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1406,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1407,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1408,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1409,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1410,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1411,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1412,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1413,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1414,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1415,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1416,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1417,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1418,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1419,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1420,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1421,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1422,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1423,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1424,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1425,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1426,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1428,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1429,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1429,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1430,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1431,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1432,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1434,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1435,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1436,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1437,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1437,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1438,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1439,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1440,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1441,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1442,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1443,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1444,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1445,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1446,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1447,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1448,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1449,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1450,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1451,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1453,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1454,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1455,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1456,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1457,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1458,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1459,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1460,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1461,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1462,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1463,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1464,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1465,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1466,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1467,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1468,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1469,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1470,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1471,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1472,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1473,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1474,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1475,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1476,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1477,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1478,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1479,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1480,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1481,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1482,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1483,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1484,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1485,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1486,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1487,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1488,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1489,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1490,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1491,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1492,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1493,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1494,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1495,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1496,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1497,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1499,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1500,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1501,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1502,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1503,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1504,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1505,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1506,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1507,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1508,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1509,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1510,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1511,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1512,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1513,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1514,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1515,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1517,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1518,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1519,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1520,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1521,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1522,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1523,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1524,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1525,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1526,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1527,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1528,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1529,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1530,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1531,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1532,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1533,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1534,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1535,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1536,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1537,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1538,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1539,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1540,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1541,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1542,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1543,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1544,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1545,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1546,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1547,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1548,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1549,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1551,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1552,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1553,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1554,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1555,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1556,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1557,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1558,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1559,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1560,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1561,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1562,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1563,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1564,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1565,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1566,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1567,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1568,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1569,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1570,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1571,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1572,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1573,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1574,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1575,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1576,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1577,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1578,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1579,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1581,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1582,
+   ".dlg «Sai Thải Bình đi dò la» «Trăng soi rèm ngọcHoàng hậuThạch Tố NgưngTùy duyên»"
+  ],
+  [
+   1583,
+   ".dlg «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   1584,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1584,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1586,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1587,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1588,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1589,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1590,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1591,
+   ".dlg «Phúc ấm đầy nhà» «Lui»"
+  ],
+  [
+   1592,
+   ".dlg «Sai Thải Bình đi dò la» «Phúc ấm đầy nhàQuý phiTôn Nguyệt ThiềnCó cơTốnkhôn»"
+  ],
+  [
+   1594,
+   ".dlg «unstick ✕»"
+  ],
+  [
+   1596,
+   "title (unstick reload) «cùng hảo hữu»"
+  ],
+  [
+   1598,
+   "title (unstick reload) «trở lại phòng|vào lại phòng|về phòng»"
+  ],
+  [
+   1603,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Mục tiêu chương»"
+  ],
+  [
+   1604,
+   ".dlg «Chương 1 · Nhập cung, đứng vững» «Danh hiệu 0/35»"
+  ],
+  [
+   1605,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   1606,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   1607,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   1608,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   1609,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   1617,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «nắng gắt»"
+  ],
+  [
+   1619,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sẵn sàng»"
+  ],
+  [
+   1620,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Mệnh truyện»"
+  ],
+  [
+   1621,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Cấm túc1 tháng»"
+  ],
+  [
+   1621,
+   ".dlg «Cấm túc 1 tháng» «Lui»"
+  ],
+  [
+   1622,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tư trang»"
+  ],
+  [
+   1623,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Vải vóc 1»"
+  ],
+  [
+   1624,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Y phục: Áo lụa thêu hoa nhỏ»"
+  ],
+  [
+   1625,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Thư từ 0»"
+  ],
+  [
+   1626,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Giao tình»"
+  ],
+  [
+   1627,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Phe phái»"
+  ],
+  [
+   1627,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tài nghệ»"
+  ],
+  [
+   1628,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Giao tình»"
+  ],
+  [
+   1629,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Quẻ Hạ hạ (Mưu kế)»"
+  ],
+  [
+   1630,
+   ".dlg «Quẻ Hạ hạ · Mưu kế» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   1631,
+   ".dlg «Gieo lại quẻ» «Lui»"
+  ],
+  [
+   1632,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «nắng gắt»"
+  ],
+  [
+   1633,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tâm trạngBình thản+1»"
+  ],
+  [
+   1634,
+   ".dlg «Danh» «Lui»"
+  ],
+  [
+   1635,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Yến Tâm Duyệt: Đang bận»"
+  ],
+  [
+   1636,
+   ".dlg «Tâm trạng · Đáp ứng Yến Tâm Duyệt» «Lui»"
+  ],
+  [
+   1637,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Tư trang»"
+  ],
+  [
+   1638,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Y phục: Áo lụa thêu hoa nhỏ»"
+  ],
+  [
+   1639,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Việc»"
+  ],
+  [
+   1640,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   1640,
+   ".dlg «Hối lộ người ở Thái y viện» «Xạ hương: sảy thai (trộn vào túi thơm, hương trầm)»"
+  ],
+  [
+   1641,
+   ".kmov «Nhận»"
+  ],
+  [
+   1649,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   1650,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   1658,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   1658,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   1666,
+   "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.» «Sẵn sàng»"
+  ],
+  [
+   1670,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1672,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   1674,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1675,
+   ".dlg «Bổng lộc tháng tư» «Lót tay thái giám Nội vụ phủRất vữngTốnBạc -8Đượcđ»"
+  ],
+  [
+   1676,
+   ".dlg «Thỉnh bình an mạch» «Lui»"
+  ],
+  [
+   1677,
+   ".dlg «Phụ tuyến · Tân quân lập uy · Chương 1 · Hồi 2/2» «Cúi đầu vâng dạRất vữngTốnkhôngĐượcThái hậu hài lò»"
+  ],
+  [
+   1679,
+   ".dlg «Y phục dự Tết Đoan ngọ» «Sai người mua trâm đồng mai hoa (Vàng) ở Nội vụ ph»"
+  ],
+  [
+   1680,
+   ".dlg «Tết Đoan ngọ · Đặt cược» «Không cược, chỉ xemRất vữngTốnkhôngĐượckhôngGợi ýk»"
+  ],
+  [
+   1681,
+   ".dlg «Tết Đoan ngọ · Chuyện bên lề hội» «Cúi đầu ghi nhớ, chờ dịp khácTốnDanh -10·Đức -5Đượ»"
+  ],
+  [
+   1683,
+   ".dlg «Cấm cung giới nghiêm» «Lui»"
+  ],
+  [
+   1684,
+   ".dlg «Cấm cung giới nghiêm» «Dạy nàng ta cách nói để lính nểTốnSức -8·Danh -3Đư»"
+  ],
+  [
+   1710,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1710,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1711,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1712,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1713,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1714,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1715,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1716,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1716,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1717,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1718,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1719,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1720,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1721,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1722,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1723,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1724,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1724,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1725,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1726,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1727,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1728,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1729,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1730,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1730,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1731,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1732,
+   ".kbk «Tổng lược» «Trang sau»"
+  ]
+ ],
+ "_ckAt": 1795618833187,
+ "_ckB": 24,
+ "dumps": [
+  "/home/user/wt/out/u1b/shots-coop-rt-s118-host-k1/stuck-1-dump.json"
+ ]
+}
