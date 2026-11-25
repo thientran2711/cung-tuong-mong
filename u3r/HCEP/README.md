@@ -1,0 +1,4 @@
+# U3 rerun room HCEP (room 9) — game fix-6 c4163a93 + local Worker, harness 5edf09f6 + U1 realtap-B-5edf-patch + U3 unstick escalation
+Cause found: GUEST (iPad) tapped «Ô lưu» (= the ☰ menu button, aria-label "Ô lưu", dev/build/p1.html:485) on .mapsc at t≈102s (buổi 2), then a #modal «Cung Tường Mộng» (slot chooser) appeared; harness 'unstick ✕' closed it at t=113s; afterwards the guest page shows bare #title (COOP.state status 'off', room '', COOPW.on false, titleVisible true) — the seat left the co-op room via the menu. Host (Fold) then waits on #coopfz «Đợi hảo hữu trở lại» (host COOP.state open room HCEP seat a, guest online false) for 15 min → stuck.
+Both dumps = harness stuck-1 dumps (15 min). Both seats then reloaded at t≈973s (harness unstick lvl 3).
+Question for game side: opening ☰ «Ô lưu» mid co-op → slot chooser → ✕ leaves the room silently and leaves a button-less title behind?
