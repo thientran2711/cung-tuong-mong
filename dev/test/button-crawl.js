@@ -100,7 +100,14 @@ const INPAGE=()=>{
    let kg='';try{const g=document.getElementById('kg82')||document.querySelector('#ov .kgame');if(typeof KG82!=='undefined'&&g&&this.vis(g))kg=KG82.phase||(KG82.setup?'setup':'intro')}catch(e){}
    return{roots:roots.sort(),tab,panel,kg,sty,S:sh,txt:txt.length+':'+th,title:!!(document.getElementById('title')&&!document.getElementById('title').hidden),q:(typeof Q!=='undefined'&&Q||[]).length}},
   baseline(){this.base=new Set([...document.body.children]);this.hid=[...document.querySelectorAll('[id]')].filter(e=>this.isFixedRoot(e)).map(e=>[e,e.hidden])},
-  snap(){this.sv=JSON.stringify(ser());this.baseline();this.list();this.homeLive=new Set(this.liveRoots());this.homeSig=JSON.stringify(this.sig().roots.map(r=>r.split(':')[0]))},
+  /* the sub-tab picks of the panes (Tư trang / Dư đồ / Tài nghệ… : KTSUB + localStorage ctm-ktsub-*, KINV_SUB hclh-inv-sub, hclh-kcat-*) are
+     viewer memory, not the save: a restore puts them back too, so a path through a sub-tab replays (fix-1-r3, the SKIP gap of full6) */
+  UIK:/^(ctm-ktsub-|hclh-inv-sub|hclh-kcat-|hclh-kinv-|hclh-kg-|ctm-chonso-tab)/,
+  uiSnap(){const o={};try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(this.UIK.test(k))o[k]=localStorage.getItem(k)}}catch(e){}
+   let kt=null,ki=null;try{kt=JSON.stringify(KTSUB)}catch(e){}try{ki=KINV_SUB}catch(e){}this.ui={ls:o,kt,ki}},
+  uiRestore(){const u=this.ui;if(!u)return;try{const del=[];for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(this.UIK.test(k)&&!(k in u.ls))del.push(k)}del.forEach(k=>localStorage.removeItem(k));for(const k in u.ls)localStorage.setItem(k,u.ls[k])}catch(e){}
+   try{if(u.kt!=null){const o=JSON.parse(u.kt);for(const k of Object.keys(KTSUB))if(!(k in o))delete KTSUB[k];Object.assign(KTSUB,o)}}catch(e){}try{if(u.ki!=null)KINV_SUB=u.ki}catch(e){}},
+  snap(){this.sv=JSON.stringify(ser());this.uiSnap();this.baseline();this.list();this.homeLive=new Set(this.liveRoots());this.homeSig=JSON.stringify(this.sig().roots.map(r=>r.split(':')[0]))},
   /* after a restore: the screen must look like the snapshot's (same live layers) */
   isHome(){this.list();return JSON.stringify(this.sig().roots.map(r=>r.split(':')[0]))===this.homeSig},
   /* harness restore (setup, not a tap): state back to the snapshot, extra layers gone */
@@ -109,6 +116,7 @@ const INPAGE=()=>{
    for(const [e,h] of this.hid)e.hidden=h;
    document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul').forEach(e=>e.remove());
    document.querySelectorAll('.kpop').forEach(e=>{if(this.base.has(e))e.hidden=true;else e.remove()});
+   this.uiRestore();
    if(this.sv){deser(JSON.parse(this.sv));try{if(S)S.mg=null}catch(e){}}
    try{tab='act';K3SH.home=true}catch(e){}
    document.getElementById('modal').hidden=true;
@@ -178,7 +186,7 @@ async function crawlTour(p,dev,ER){
   const hole=t.querySelector('.ktut-hole:not([hidden])');const hr=hole&&hole.getBoundingClientRect();
   return{h,sub,btns:[...c.querySelectorAll('button')].filter(b=>__bc.vis(b)).map(b=>b.innerText.trim()),hole:hr&&hr.width>4?{x:hr.left+hr.width/2,y:hr.top+hr.height/2}:null}});
  if(!(await fresh(true))){await p.screenshot({path:path.join(OUT,'shots',dev+'-tour-none.jpg'),type:'jpeg',quality:50});rows.push({dev,start:'tour',screen:'LỜI DẶN tour',label:'(tour start)',verdict:'FAIL',why:'tour did not open on a first life'});return}
- for(let i=0;i<60;i++){await settle(p,4000);const c=await card();if(!c)break;ER.clr();const screen='LỜI DẶN · '+c.h+' · '+c.sub;
+ for(let i=0;i<60;i++){await settle(p,4000);let c=await card();/* between two lessons the card is down for a short pause (lesson 4/12 → 5/12 on Fold): wait ≤4.2 s */for(let w=0;w<14&&!c;w++){await p.waitForTimeout(300);c=await card()}if(!c)break;ER.clr();const screen='LỜI DẶN · '+c.h+' · '+c.sub;
   const nx=c.btns.find(t=>/^(Tiếp|Đã hiểu)$/.test(t));
   if(nx){const h=await p.evaluateHandle(t=>[...document.querySelectorAll('#ktut .ktut-card button')].find(b=>b.innerText.trim()===t),nx);
    const shot=path.join(OUT,'shots',`${dev}-tour-${i}.jpg`);let dm='';const ok=await tap(p,h.asElement(),{screen,label:nx,shot,log:m=>dm=m});taps++;
@@ -186,6 +194,9 @@ async function crawlTour(p,dev,ER){
    let c2=null,moved=false;for(let w=0;w<12&&!moved;w++){await p.waitForTimeout(300);c2=await card();moved=!c2||c2.h!==c.h||c2.sub!==c.sub}const er=ER.get(); /* the last page of a lesson closes the card and the next lesson comes after a short pause */
    rows.push({dev,start:'tour',screen,label:nx,hit:'ok',verdict:er.length?'FAIL':moved?'PASS':'FAIL',why:er.length?'JS error: '+er[0]:moved?(c2?'next page':'tour closed'):'page did not turn',shot:moved&&!er.length?'':shot});
    if(!moved&&!er.length)await p.screenshot({path:shot,type:'jpeg',quality:55});if(!moved)break;continue}
+  /* a tap lesson (no Tiếp): the lit hole grows from 0×0 to the target over its .28 s move after the lesson scrolls the target in —
+     read it again until it has a size (fix-1-r3: iPad lesson 5/12 «Làm thử một việc» was read mid-move and called «no lit spot») */
+  for(let w=0;w<10&&!c.hole;w++){await p.waitForTimeout(300);const c2=await card();if(!c2||c2.h!==c.h||c2.sub!==c.sub)break;c=c2}
   if(c.hole){ /* tap the lit spot like a player */
    const hit=await p.evaluate(({x,y})=>{const t=document.elementFromPoint(x,y);return t?__bc.desc(t)+' «'+(t.innerText||'').replace(/\s+/g,' ').trim().slice(0,30)+'»':'none'},c.hole);
    const blocked=/ktut-blk|ktut-dim|#ktut/.test(hit);const shot=path.join(OUT,'shots',`${dev}-tour-${i}.jpg`);
