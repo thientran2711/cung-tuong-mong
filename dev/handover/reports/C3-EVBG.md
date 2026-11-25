@@ -58,3 +58,21 @@ Lesson: gpt-2-6 sometimes paints a portrait inset with pale side strips on a 4:3
 # UPDATE 2 — hall redo + size ruling
 - selx-hall v4 (indoors only, flowers in vases; first hall had a cherry branch + peony bush inside): creation 3z1CLpqREY, 2048x1536, 135 cr. Total 1780 credits.
 - SIZE: KIT §93.1 `.kscn-bg` = `background-size:cover; background-position:center` (jkitsel.js:21). Layer is ~3:4 on Fold, ~square on iPad. 4:3 keeps the central ~56% of width on Fold, 2:1 only ~37%. Verdict: cover handles both, keep both sizes; rule for painters: subject inside the central 37% of the width for 2:1 pictures, inside 55% for 4:3.
+
+# FINAL (25/11) — painting DONE, not wired (per Foreman C)
+Family rule from Foreman C: indoor pictures = no growing plants / rocks / branches (vases only). lập hậu v2 (indoors, vases only): creation 9ZbhrPtNYZ, 2048x1536, 135 cr. Total credits 1915.
+## FINAL KEY LIST (all 2048x1536 4:3, CDN img/_review/c3-evbg/<file>; final location img/<file> when landed)
+| key | file | status |
+|---|---|---|
+| selx huong (SELX_ART.huong) | selx-huongnang.webp | PASS |
+| selx banhoa | selx-banhoa.webp | PASS (v3) |
+| selx gate | selx-gate.webp | PASS |
+| selx yard | selx-yard.webp | PASS |
+| selx hall | selx-hall.webp | v4 indoors redo, awaiting look |
+| selx call | selx-call.webp | PASS |
+| tấn phong (no slot yet) | selx-tanphong.webp | PASS |
+| lập hậu / sách phong (no slot yet) | selx-laphau.webp | v2 indoors redo, awaiting look |
+| hòa thân (no slot yet) | selx-hoathan.webp | PASS |
+| thắng trận (no slot yet) | selx-thangtran.webp | PASS |
+KIT REQUEST (for Foreman C → MAIN): scene-bg key per event for tấn phong, lập hậu, hòa thân, thắng trận (kitScene.open({bg}) reads any URL; the 4 events need an evArtCat → bg mapping). Not wired by me; branch review/c3-evbg is empty on purpose.
+Handover: no rollover needed (ctx ~25%).
