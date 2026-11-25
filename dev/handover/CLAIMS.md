@@ -1666,3 +1666,4 @@ selection-scene BIG review | review/selection-scene 9ee4f5bc | session_01V1ZZH1u
 | E RERUN E-C3 (U19-U21; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-C3-* | FOREMAN E (root) | session_01DgYSWkzwHcfbhAVTqTrb5C | RUNNING | 25/11 06:58Z |
 | F flight2 slot 7 runner (thd_tho rand) | dev/handover/robot/flight2-s7.* | session_01UV1Szi98Jr15jEk9h57rXy | RUNNING | 25/11 06:57Z | F |
 | TRUNGSINH TS-P4 (lives 16–20) | dev/research/trungsinh/ | MAIN 134→135 | session_01V1ZZH23XHUR5bAUAtiqAPv | RUNNING | 25/11 06:56Z |
+| TRUNGSINH TS-P2 (lives 06–10) | dev/research/trungsinh/ | MAIN 134→135 | session_01V1ZZH35iHCDWuAWmcnZJas | RUNNING | 25/11 06:56Z |
