@@ -53,6 +53,7 @@ const {chromium}=require('playwright');const [,,URL,WH,N,NB]=process.argv;
   await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!(typeof isSrv==='function'&&isSrv()))break}
    Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;for(let i=0;i<5;i++){try{nextBuoi()}catch(e){}Q.length=0}Q.length=0;m.hidden=true});
   await p.waitForFunction(()=>!(typeof cfBusy==='function'&&cfBusy())||document.querySelector('.kmov.kcf:not(.km-out)'),null,{timeout:20000}).catch(()=>{});
-  const o=await p.evaluate(()=>({buoi:S.buoi,nlp:typeof NLP!=='undefined'&&!!NLP,busy:typeof cfBusy==='function'&&cfBusy(),onScreen:!!document.querySelector('.kmov.kcf:not(.km-out)'),dbg:(window.__cfdbg||[]).join('|')}));
-  const ok=!o.busy||o.onScreen||!/push/.test(o.dbg);console.log(`orphan-NLP life: ${JSON.stringify(o)} ${ok?'PASS':'FAIL (flip scene queued but never on screen)'}`);if(!ok)fails++;await ctx.close()}
+  const o=await p.evaluate(()=>({buoi:S.buoi,nlp:typeof NLP!=='undefined'&&!!NLP,busy:typeof cfBusy==='function'&&cfBusy(),onScreen:!!document.querySelector('.kmov.kcf:not(.km-out)'),ahead:[...document.querySelectorAll('.kmov:not(.km-out),#kpodov,#kmrew,[id^=kroul]')].filter(e=>e.getClientRects().length).map(e=>String(e.className||e.id).slice(0,40)).concat((()=>{const d=document.getElementById('dawn');return d&&!d.hidden&&d.classList.contains('on')?['dawn']:[]})()),dbg:(window.__cfdbg||[]).join('|')}));
+  /* fine: nothing queued, the flip on screen, or a VISIBLE scene / overlay ahead of it in the j93 queue (the player sees it and taps it) */
+  const ok=!o.busy||o.onScreen||o.ahead.length>0;console.log(`orphan-NLP life: ${JSON.stringify(o)} ${ok?'PASS':'FAIL (flip scene queued with nothing on screen)'}`);if(!ok)fails++;await ctx.close()}
  await b.close();console.log(fails?'FAIL '+fails:'ALL PASS');process.exit(fails?1:0)})();
