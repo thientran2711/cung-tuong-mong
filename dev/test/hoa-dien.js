@@ -81,7 +81,7 @@ setTimeout(()=>{console.error('WATCHDOG hoa-dien: no finish in '+(+process.env.T
   ck('no tilt buttons on the board',!(await p.$('#hdl,#hdr')));
   const pk2=await p.evaluate(()=>HD.peek());await p.screenshot({path:`${DIR}/hd-${tag}-2-place${good?'':'-miss'}.jpg`,quality:70});
   await T('#hdok','Dán');
-  /* a person whose tap did nothing taps again (touch-mode flake seen once in 4 runs; counted, not hidden) */
+  /* a tap that did nothing: tap again so the run can go on, but it is COUNTED and FAILS at the end (never hidden) */
   if(!(await p.waitForFunction(()=>S.toilette&&S.toilette.wk===toilWk(),null,{timeout:8000}).then(()=>1,()=>0))){retaps++;console.log('RETAP #hdok (first tap did not register)');if(await p.$('#hdok'))await T('#hdok','Dán (again)')}
   await p.waitForFunction(()=>S.toilette&&S.toilette.wk===toilWk(),null,{timeout:30000});const snap=await p.evaluate(()=>HD.peek());await p.waitForTimeout(1500);
   await p.screenshot({path:`${DIR}/hd-${tag}-3-result${good?'':'-miss'}.jpg`,quality:70});
@@ -133,5 +133,5 @@ setTimeout(()=>{console.error('WATCHDOG hoa-dien: no finish in '+(+process.env.T
   ck('old save loads + migrates the worn hoa điền',!o.e0.length&&o.tram!=='hoadien_bac'&&o.back&&o.n>0,o)}
  /* 6. no horizontal overflow, no page errors */
  const ov=await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);ck('no horizontal overflow',!ov);
- console.log('note  retaps (first tap did not register, tapped again) · '+retaps);ck('no page errors',!errs.length,errs.slice(0,5));
+ ck('«Dán» works on the FIRST real tap (a tap a person makes that does nothing = dead button; REVIEW test-path-fix: was a note only)',!retaps,{retaps});ck('no page errors',!errs.length,errs.slice(0,5));
  console.log(fail?`FAIL ${fail}`:'ALL OK');await b.close();process.exit(fail?1:0)})().catch(e=>{console.error(e);process.exit(2)});
