@@ -13,6 +13,7 @@
                                                                                                           (coop-thin-g-f1 c40d175b; OPEN A of coop-host-lag-r2)
      5. the steal mini-game window kg82 (jsmg, night bundle): «Thôi, không chơi» #kg82skip / the result frame's kit ✕ — was pasted in coop-e2e,
         cn-force, coop-night only; the other bots sat on its intro for ever (x.st "mg": pool-face / room-faces / emo-seat / guest-names r3)
+     5b. any other kg82 board's kit «Bỏ qua» (.kquick, e.g. the «Phối đồ» board #tsdskip — no clock of its own)   (review/coop-night-live)
    tap(o)  → 'x' when it tapped something, '' otherwise (page closed / navigating = '').
    first(o, fn [, arg]) → 'x' after a tap, else the bot's own step o.p.evaluate(fn, arg).
    Count: window.__kfocN = taps of 3 + 4 (coop-room-faces prints it). */
@@ -27,7 +28,11 @@ const TAP=()=>{const vis=x=>!!x&&x.offsetParent!==null&&!x.disabled;
  if(kb){window.__kfocN=(window.__kfocN||0)+1;kb.click();return'x'}
  /* 5. the steal mini-game window (jsmg herGame after «Tranh sủng» / «Chặn ngự giá», kg82): «Thôi, không chơi» on its intro, the result frame's kit ✕
     — never under a full-screen scene (a player touches the scene first) */
- if(![...document.querySelectorAll('.kmov')].some(x=>!x.classList.contains('km-out')&&getComputedStyle(x).display!=='none'&&getComputedStyle(x).visibility!=='hidden')){const kg=[...document.querySelectorAll('#kg82skip')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('[hidden]'))||(typeof KG82!=='undefined'&&KG82.phase==='result'?[...document.querySelectorAll('#ov .kit-x[data-kitx=kgback],#ov .kit-x[data-kitx=ov]')].find(x=>x.offsetParent!==null):null);if(kg){kg.click();return'x'}}
+ if(![...document.querySelectorAll('.kmov')].some(x=>!x.classList.contains('km-out')&&getComputedStyle(x).display!=='none'&&getComputedStyle(x).visibility!=='hidden')){const kg=[...document.querySelectorAll('#kg82skip')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('[hidden]'))||(typeof KG82!=='undefined'&&KG82.phase==='result'?[...document.querySelectorAll('#ov .kit-x[data-kitx=kgback],#ov .kit-x[data-kitx=ov]')].find(x=>x.offsetParent!==null):null);if(kg){kg.click();return'x'}
+  /* 5b. any other kg82 board on screen with its kit «Bỏ qua» (kitQuick .kquick: the «Phối đồ» board #tsdskip, toilette, mưu kế …) — a player who
+     opened a board finishes it; since review/day-queue-2 (DAYQ-3, gate (c) in a room) the room's cards wait while a board is open, so a bot that
+     never closes a board with no clock («không giới hạn») held its seat's cards — and the room's week — for ever (review/coop-night-live) */
+  const kq=[...document.querySelectorAll('#ov .kquick')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('[hidden]')&&x.getClientRects().length);if(kq){kq.click();return'x'}}
  return''};
 async function tap(o){try{return await o.p.evaluate(TAP)}catch(e){return''}}
 async function first(o,fn,arg){if(await tap(o)==='x')return'x';return arg===undefined?o.p.evaluate(fn):o.p.evaluate(fn,arg)}
