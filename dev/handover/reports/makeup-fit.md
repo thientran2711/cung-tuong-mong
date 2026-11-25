@@ -43,3 +43,11 @@ PRIORITY #1 CHECK: reused dev/test/anchor-table.py, dev/art/mkfit/hdanchor.py, f
 - Not checked: every one of the 16 656 pictures by eye (worker also did not; mesh checks only).
 Wipe img/_review/makeup-fit/ with LAND (python3 dev/site/cdn_sync.py --wipe-review makeup-fit) — I did not upload shots.
 ~100 % xong review / ~95 % chơi được
+
+## NO-BOOST — HANDOVER (worker rollover by context, 25/11 ~04:10Z)
+Order from MAIN 132 (session_01V1ZZGzdGzMVPdKEXV8pQRA, 04:06Z), owner row «25/11 ~03:10Z» + shot dev/handover/refs/owner-2511-makeup/m2-nguhoavien-1104.jpg. NOT started: this worker is at 27.8 % context (START_CTX ~4 % + 25 % = 29 % trigger), so it hands over before starting a new task. The COORDINATOR opens the successor.
+Successor starts here:
+- Task = the MAIN 132 message verbatim (measure her scene's LOD step on LIVE; remove every size boost in ONE BAL place: BAL.toil.lod boost/steps/cue, jlooks lkLodMul, BAL.looks.smuFx.big.boost; before/after Fold 755x1000 + iPad 1180x820 of her scene + avatar/card/chip sizes, LOOK at them; branch review/makeup-noboost; LAND READY + one Vietnamese line for sếp; report here under «## NO-BOOST»).
+- Code map (dev/build/jtoil.js, main 502c48c9): toilLodStep(px) ~L907 (BAL.toil.lod fullAt/maxAt/steps); toilStageEl ~L909 (#stage,.kesfi,.kfxf[data-kav] → step 0 = no boost on the stage since 18/11); toilLodPass ~L912 (re-keys img.kmkc by step); toilLodT(T,lod,look) ~L928 (boost × cue per part × BAL.toil.lod.look[look]); toilMkDraw vụng powder dabs also × (1+(boost-1)·lod·cue.vung). jlooks.js: lkLodMul + smudge layer LOD (step ≥ 10 = big faces, BAL.looks.smuFx.big). Simplest one-core fix: BAL.toil.lod.boost = 1 and BAL.looks.smuFx.big.boost = 1 (every curve becomes ×1), keep the code paths.
+- Ready tools on review/makeup-fit dev/art/mkfit/fit2511/: repro.js (live game, swaps her face via figFor/kitFigOf, sets S.toilette look, crops the face + full shots; arg 4 = local fit dir or '-'), sheet.js (contact sheets through toilMkDraw). Measure the step in page: img.kmkc dataset.mkk ends '|L<n>' = step n; layer width/1.6 = face px.
+- Hint from the MAKEUP-FIT run: her stage layer was step 0 already, so the stage «Vụng về» heaviness is likely the vụng recipe itself (TOIL_MKS.vung, or vungB = the heavy 'đánh quá tay' v7 look picked by col.seed with chance BAL.toil.vungB .5) — check which one her save rolls.
