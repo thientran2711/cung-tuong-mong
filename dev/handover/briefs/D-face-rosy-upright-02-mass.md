@@ -1,0 +1,11 @@
+# BRIEF D-FACE-ROSY-UPRIGHT-02-MASS — 445 face portraits, owner prompts RESTORED-UPRIGHT-02 (DRAFT; launch only on owner's batch go)
+PRIORITY #1 CHECK: OD 0 hits ("RESTORED-UPRIGHT") | main none | review/* none | claims none (face-master03 rows done/archived) — redo of face-master03 with the owner's own edited prompts (zip Face_Prompts_Rosy_Skin_Upright, copied to dev/handover/face-master03/rosy-upright-02/ by D8 f515f608).
+OWNER GO (verbatim): <fill when given>
+
+PACKAGE (read in full first): face-master03/rosy-upright-02/README.txt + Runner_Instructions.txt (owner's words — follow exactly); prompts Prompts/*.txt (30 = 6 families × ages 16/26/39/51/63, all < 10 000 chars → paste WHOLE, UNCHANGED, no cut, no rename); jobs Assignments/<Family>_Jobs.json (Alluring 90, Cold 75, Dignified 60, Gentle 70, Proud 75, Sharp 75 = 445).
+SETTINGS (same as owner test D8 jUIwiGBLD0): Magnific images_generate, mode gpt-2-6, resolution 2k, aspect auto, count 1, no extraSettings. references = [ {type:image, identifier:<identity upload of IMAGE 1>}, {type:image, identifier:"UPf76Ptwny"} ] (Face_Style_Master_No_Text, sha 14b67de2…). Never a third ref, never m09.
+IDENTITY UPLOADS: reuse the ids in reports/face-master03-<family>.md ("Identity uploads"); missing → creations_upload_image(url=CDN img/share/face90/<id>.png) and verify sha256 vs image_1_sha256.
+PER JOB: one generation, creations_wait, LOOK (creations_read): identity, target age, head upright/forward/level eyes, rosy-peach skin (not yellow/pale), no text, no makeup look. DONE / NEEDS_REVIEW; at most one retry per job. Cost 135 cr each; stop and report if balance < 60 000.
+OUTPUT: images stay on Magnific (never in git). Report dev/handover/reports/face-rosy02-<family>.md: run-log table (job_id, source_id, age, prompt_id, identity id, output id, status, one-line QC) + one contact sheet per age (original | result) uploaded to CDN img/_review/face-rosy02/<family>/ (repo review-upload recipe). Report to the current Foreman D (FOREMAN_D_STATUS.md) by send_message when done.
+Rollover (OD:L1217): at START_CTX % + 25 %, ceiling 60 % (% = used_tokens / 1 000 000) — write handover in your report, tell Foreman D; Foreman D opens the successor.
+AFTER ALL 6: one gallery worker → one HTML link, sections family × age, each image with person id (owner order 24/11 ~21:40Z).
