@@ -1,0 +1,54 @@
+{
+ "nextText": "Chờ hảo hữu…",
+ "nextDis": true,
+ "coopWait": "1",
+ "buoi": 1,
+ "eW": false,
+ "lv": 0,
+ "eWait": false,
+ "eAsked": false,
+ "nReady": false,
+ "waiting": false,
+ "frozen": false,
+ "base": true,
+ "inLife": false,
+ "lvWas": 0,
+ "nrdy": 5,
+ "wantB": null,
+ "whereKey": "6:1",
+ "rweek": 6,
+ "rbuoi": 1,
+ "wkIn": 6,
+ "coop": {
+  "week": 6,
+  "ended": {
+   "a": false,
+   "b": false
+  },
+  "seats": {
+   "a": {
+    "name": "",
+    "online": true
+   },
+   "b": {
+    "name": "",
+    "online": true
+   }
+  },
+  "status": "open",
+  "seat": "b"
+ },
+ "modal": "",
+ "tr": [
+  "begin f=false",
+  "snap local sv1 f=true",
+  "restored 6.0 u4 f=true",
+  "room 6.0 sent 5 in 6 f=true",
+  "bend 6.0 f=true",
+  "bend 6.0 f=true",
+  "onBuoi 6.1 me 6.0 Q0 f=true",
+  "bend 6.1 f=true",
+  "bend 6.1 f=true"
+ ],
+ "scr": "{\"buoi\":1,\"week\":6,\"bend\":true,\"pendBuoi\":null,\"pend\":false,\"sent\":5,\"Q\":0,\"Qt\":[],\"mh\":true,\"mg\":false,\"dead\":false,\"next\":true,\"title\":false,\"st\":\"open\",\"peer\":true}"
+}
