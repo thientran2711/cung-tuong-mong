@@ -50,3 +50,35 @@ coop/worker with node_modules symlink, remove it before commit), merges newest L
 coop-night LIVE Worker 112/112 · local Worker 111/112 (case 4 «host presses, guest AFK»: host buổi 0, CW.pend true, sent 2, Q carried — the «pend, nothing re-checks» shape the BIG rv found; fixed by rv's tryEnd line, review/coop-night-live-rv 217cbed8) · dayq-hold-coop 23/23 · coop-e2e SWAP0 142/142, SWAP1 142/142 · dayq-hold PASS 46 · dayq-order PASS · quickcheck alone PASS core (G4 coop-one-world «merge differs» once; re-run seeds 7,3 PASS — same flake seen on 02d99eea, 4/4 PASS then).
 Fixer review of rv's tryEnd line (`onBuoi(CW.pendBuoi);soonEnd();return`): cause agreed; no double send (sendEnd guards sent===wk, cyHer, resWait). Risk: onBuoi returns early without clearing pendBuoi when eW() (thin level 5) → soonEnd↔tryEnd setTimeout(0) hot loop → suggested `if(!CW.pendBuoi)soonEnd()`.
 **SẴN SÀNG KIỂM review/coop-night-live aacc248a05bb9caf070a8e8531625ca1213539e2 (jdayq part) — candidate for landing = rv's review/coop-night-live-rv (aacc248a + tryEnd line) FOR FOREMAN B / FOR MAIN 144.**
+
+## REVIEW (BIG reviewer, session_01N1tNP5h1rt4Z5947oiDeqt, opus, depth 5, START_CTX ~6 %) — 25/11 21:40Z
+PRIORITY #1 CHECK ('coop-night-live'): OD 0 | ledger 0 | claims 8 (fixer dE81jb4Q + this seat) | main 0 | review/* review/coop-night-live (this) | archive 0 — reused the fixer report + harness; no rebuild of existing parts.
+
+**VERDICT: PASS on review/coop-night-live-rv eb6e15fed24c686a375c5bbe9c3b0b23d824f629** (aacc248a + one reviewer line). Per Foreman B child 5 it lands ONLY through the union **review/coop-week-wait-rv 8e654ee0** (= robot-coop-fix-6 + eb6e15fe + coop-week-wait); confirmation gates on 8e654ee0 below all PASS.
+
+Reviewer fix (LAW 11, whole family): jcoopworld `tryEnd` returned after `onBuoi(CW.pendBuoi)` without the week-end check → a seat with CW.pend + Q empty sat on «Chờ hảo hữu…» until the next render (my coop-night LIVE #1 on aacc248a: case 5 [5,5,5], last trace `onBuoi 5.1 Q4 → onBuoi 5.1 Q0`; one soonEnd poke merged both; the fixer saw the same shape in case 4 local + case 2/3 earlier). Now `onBuoi(CW.pendBuoi);if(!CW.pendBuoi)soonEnd();return` (guard from the fixer's review: no setTimeout(0) loop when onBuoi returns early on eW / !S). Family scan of tryEnd's returns: resWait re-polls, wantB drops on pend → only member. In the union, fix-6's `Q.every(passive)` condition keeps this guard (8e654ee0 has it once).
+
+Code read: ONE hold rule (law 11) — every gate (c) point in jdayq (showModal, dqPull, dqArmModal tick, observer) uses dqHoldC = dqUiC && !dqRoomOwes; kmFree stays dqUiC (kit scenes never gate the room week — reasoned and gated by e2e). No hold/release of the night or day queue elsewhere (jcoopworld / jcooptimer / worker only read Q). dqRoomOwes reads CW.pend/pendBuoi/bend/nReady/tm.od (overdue = due===myKey||pendBuoi); nit (not blocking): CW.ngoW===wk is not in it, a held card then waits until the room clock runs out (bounded). Solo: dqRoomOwes false outside a room → LIVE's button-crawl-fix-5/6 + m-fix-1 jdayq code unchanged (next-dead / q-softlock / dayq-hold PASS). Save/snap: nothing written by the change. Laws: 1/2/3/5/6 n.a.; 4 no number; 7 no new player words; 9/10 no UI part (the held card shows in its own kit frame); 11 family tables above + fixer's; 12 shots Fold + iPad below.
+
+| gate | bare LIVE 17dfa64d | aacc248a | eb6e15fe | union 8e654ee0 |
+|---|---|---|---|---|
+| coop-night LIVE Worker | FAIL case 4 + 4b cascade (Q 2 held, «Chờ hảo hữu…») | 111/112 (case 5 tryEnd) | 112/112 ×3 | (Foreman B: 127/127) |
+| coop-night local Worker (wrangler :8797) | – | 112/112 | 112/112 ×3 | – |
+| MUTATE dqRoomOwes→false | – | dhc FAIL 2/23 (R both seats); coop-night 111/112 (weak: harness 5b closes boards) | – | – |
+| dayq-hold-coop | FAIL 2/23 (R both) | – | 23/23 SWAP0, 23/23 SWAP1 | 23/23 |
+| coop-e2e | – | – | 142/142 SWAP0, 142/142 SWAP1 | – |
+| keymove | – | 12/12 | 12/12 | – |
+| dayq-hold (solo) | – | – | PASS 46 | – |
+| dayq-order (solo) | FAIL 1 «card painted over the title card» (Fold) | – | FAIL 2 same message (Fold + iPad) | – |
+| next-dead / q-softlock (fix-5/6 solo) | – | – | PASS / PASS | PASS / PASS |
+| quickcheck ALONE | G4 button-crawl same FAIL | – | old save ok, perf new/live render 318/282 tab 606/660 buổi 1643/3157; CORE FAIL only G4 button-crawl «fold · Ô lưu · Lui · close did not close its layer» | – |
+| real 2-seat, 2 nights (reviewer script, not committed) | – | – | – | PASS 18/18 |
+
+Real 2-seat (host Fold 755x1000, guest iPad 1180x820, LIVE Worker): night 1 the guest opens the «Phối đồ» board at tối and leaves it open, host Sẵn sàng («Chờ hảo hữu…»), room clock runs out → the held cards («Áo trái mùa», kit BÁO frame) are painted OVER the open board, she answers them, both reach the next week. Night 2 board open, host ready, guest leaves and rejoins the room mid-night (?room=code, as coop-night case 5) → back at the same tối, presses, both one week on, same date. Shots looked at (N1 card-over-board iPad, N1 host Fold, N2 after-rejoin iPad, N2 after host Fold): no overflow, no cut text, kit frames.
+
+PRE-EXISTING on LIVE (not this branch, FOR MAIN):
+1. quickcheck G4 button-crawl «Ô lưu → Lui does not close its layer» (title screen, solo) — reproduced on bare 17dfa64d; red on every candidate's quickcheck until filed / fixed.
+2. dayq-order «card painted over the title card: Tin trong cung buổi này» — reproduced on bare 17dfa64d (solo).
+3. A seat fully AFK with a card that arrives AFTER her night (CW.pend phase) holds the room for ever: nightAfk needs !CW.pend, sendEnd needs Q empty (jcooptimer / jcoopworld, untouched here). Pre-DAYQ-3 the same; bare LIVE worse (card hidden). Seen in my first 2-seat run (guest strictly AFK 120 s: «Hội phối đồ: báo đề», «Áo trái mùa» on screen, both «Chờ hảo hữu…»). A present player is never stuck. Park for a co-op bound (OD needed: auto-read / carry after the night?).
+4. Plain page reload in a room drops ?room= from the URL → the seat lands in its solo game until it rejoins with the code (coop-night case 5 rejoins the same way).
+Shots: scratch only (none in git, no CDN folder made). Reviewer worktrees + local Worker removed.
