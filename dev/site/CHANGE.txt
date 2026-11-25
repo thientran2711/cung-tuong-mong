@@ -1,1 +1,1 @@
-Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ.
+audio-ipad: CDN music in CORS mode (iPad/iPhone heard silence through the AudioContext) + the 37 CDN music tracks in «Tải hết để chơi offline» and the offline cache

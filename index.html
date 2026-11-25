@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ.","b":"fa8da73cecdc","h":[{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."}]};
+window.CTM_BI={"s":"5e013076+","t":"2026-11-25T20:28Z","c":"audio-ipad: CDN music in CORS mode (iPad/iPhone heard silence through the AudioContext) + the 37 CDN music tracks in «Tải hết để chơi offli…","b":"e701bd592fde","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -4378,7 +4378,13 @@ function saveOpt(){try{localStorage.setItem("hclh-opt",JSON.stringify(OPT))}catc
 /* ---- audio: HTMLAudio, starts after the first tap, missing files fail silently ---- */
 const AU={unlocked:false,cur:null,curName:"",duck:1,cache:{}};
 function auOk(){return AU.unlocked&&OPT.snd&&!OPT.mute&&!document.hidden}
-function mkAudio(n,loop,route){try{const a=new Audio(kmusUrl(n));a.loop=!!loop;a.preload="auto";a.addEventListener("error",()=>{a.dead=1;kmusFail(n,a)});if(route)auRoute(a);return a}catch(e){return null}}
+/* review/audio-ipad (OD 25/11 ~23:30Z «Trên iPad là không thấy nghe tiếng nhạc»): a CDN track (KMUS_NEW, other origin) played through the AudioContext
+   (auRoute → createMediaElementSource) WITHOUT crossOrigin is a tainted source: WebKit (iPad / iPhone Safari) and Chrome without the service worker
+   output pure silence ("MediaElementAudioSource outputs zeroes due to CORS access restrictions"). The CDN sends Access-Control-Allow-Origin: *, so every
+   element whose file is on another origin is made in CORS mode BEFORE its src is set (auSrc: ONE helper for every <audio> of the game). */
+function auSrc(a,u){try{if(new URL(u,location.href).origin!==location.origin)a.crossOrigin="anonymous"}catch(e){}a.src=u;return a}
+window.auSrc=auSrc;
+function mkAudio(n,loop,route){try{const a=auSrc(new Audio(),kmusUrl(n));a.loop=!!loop;a.preload="auto";a.addEventListener("error",()=>{a.dead=1;kmusFail(n,a)});if(route)auRoute(a);return a}catch(e){return null}}
 /* ---- iOS / WebAudio layer (review/result-sfx): iPhone ignores element.volume and only unlocks audio on touchend / click / keydown (not a touch pointerdown).
    AU.ctx = one AudioContext, resumed + a silent buffer played on every real gesture (re-armed after the page was hidden or the phone interrupted it).
    Music (and the heartbeat loop) go through a GainNode and expose the same `volume` property, so the slider, mute and ducking work on iPhone; sfx play from decoded
@@ -6148,7 +6154,7 @@ const VOALIAS={"f-softlaugh":"f-laugh-soft","old-hmph":"old-f-hmph","m-chuckle":
 function voFiles(k){k=VOX[k]?k:(VOALIAS[k]||k);const L=VOX[k];if(L&&L.length)return L.map(f=>/^audio\//.test(f)?f:"audio/"+f);return [1,2].map(n=>`audio/vo-${k}-${n}.mp3`)}
 const VO={cur:null,last:{}};
 function voice(k,force){try{if(!auOk()&&!force)return;if(!force&&Date.now()-(VO.last[k]||0)<6000)return;VO.last[k]=Date.now();const vol=OPT.vo==null?.7:OPT.vo;if(!vol)return;
- if(VO.cur){try{VO.cur.pause()}catch(e){}}const a=new Audio(pick(voFiles(k)));a.volume=vol;VO.cur=a;a.addEventListener("error",()=>{if(VO.cur===a)VO.cur=null});
+ if(VO.cur){try{VO.cur.pause()}catch(e){}}const a=typeof auSrc==="function"?auSrc(new Audio(),pick(voFiles(k))):new Audio(pick(voFiles(k)));a.volume=vol;VO.cur=a;a.addEventListener("error",()=>{if(VO.cur===a)VO.cur=null});
  AU.duck=.6;if(AU.cur)AU.cur.volume=musVol();a.addEventListener("ended",()=>{AU.duck=1;if(AU.cur)AU.cur.volume=musVol();if(VO.cur===a)VO.cur=null});const p=a.play();if(p&&p.catch)p.catch(()=>{})}catch(e){}}
 /* which voice a card calls for: the MEANING of the card first (tone), then the speaker (sex, age).
    Owner 11/15 ("Có người đến": a consort sends back my gift, 'không dám nhận', played a laugh): a word like "tặng" says nothing about the
@@ -53047,7 +53053,8 @@ const mb=n=>(n/1e6<10?(Math.round(n/1e5)/10):Math.round(n/1e6)).toLocaleString("
 /* pictures (img/…) come from Cloudflare (jcdn.js IMG_BASE, dev/art/CDN.md): their key is IMG_BASE+'img/…?h=<md5/16>'; a CDN download is
    marked with &ctmload=1 instead of the x-ctm-load header (a custom header would cost a CORS preflight per file) */
 const CDNB=(typeof IMG_BASE==="string"&&IMG_BASE)||"";
-const keyOf=f=>new URL(f[0]+"?h="+f[1],CDNB&&f[0].startsWith("img/")?CDNB:location.href).href;
+/* review/audio-ipad: a sound that lives only on the CDN (the event / festival music, assets.json 5th field "c") is keyed on the CDN too, as sw.js baseOf does */
+const keyOf=f=>new URL(f[0]+"?h="+f[1],CDNB&&(f[0].startsWith("img/")||f[4]==="c")?CDNB:location.href).href;
 let el=null,shown=false,speed=[],enterCb=[];
 try{KLOAD.paused=localStorage.getItem(LS)==="1"}catch(e){}
 
@@ -53453,7 +53460,7 @@ function allPlan(){if(OFF)return Promise.resolve(false);if(allPlanning)return al
 function oaBase(){const A=ALL;A.have=0;A.total=0;A.files=0;A.left=0;A.skipped=0;let u=0;const L=[];
  for(const f of MAN.files){A.total+=f[2];const k=deadKey(f);if(SEEN.has(k)){A.have+=f[2];A.files++}else if(allDead.has(k))A.skipped++;else{L.push(f);A.left++;if(!NEED.has(k))u++}}
  /* the figures and the effects first: what she is likely to see soonest */
- const rk={core:0,fig:1,fx:2,lazy:3};L.sort((a,b)=>(rk[a[3]]-rk[b[3]]));allList=L;A.unknown=u;A.counting=u>0;
+ const rk={core:0,fig:1,fx:2,lazy:3},rq=f=>f[4]==="c"?-1:rk[f[3]];L.sort((a,b)=>(rq(a)-rq(b)));/* review/audio-ipad: the CDN music (~39 MB) first: offline the game is silent without it */allList=L;A.unknown=u;A.counting=u>0;
  if(!L.length){A.state="done";oaSet({done:MAN.v,on:0})}else if(A.state==="done")A.state="idle"}
 /* the background count (see above): from the end of the list, 2 at a time, a breath every 32 lookups, never while a loading / life screen works */
 async function oaCount(){if(cntOn)return;cntOn=true;try{const c=await caches.open(AC);const L=allList;let j=L.length-1,n=0;
@@ -98912,7 +98919,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="fa8da73cecdc";window.CTM_BUILD=BUILD;
+const BUILD="e701bd592fde";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
