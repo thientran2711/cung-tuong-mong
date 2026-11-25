@@ -1,0 +1,1990 @@
+{
+ "job": {
+  "id": "coop-rt-s117-host-k1",
+  "origin": null,
+  "road": null,
+  "bot": "sens",
+  "seed": 1271,
+  "dev": "fold",
+  "url": "http://127.0.0.1:8080/index.html"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "512cfee6",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [
+   {
+    "at": 215,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người."
+   },
+   {
+    "at": 602,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1441,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1452,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1698,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1709,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2619,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2630,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2641,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2651,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2662,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2673,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2684,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2694,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2705,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2716,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2727,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2737,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2748,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2759,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2769,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2780,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2791,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2802,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2812,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2823,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2834,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2844,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2855,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2866,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2881,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2892,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2903,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2913,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2924,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2935,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2946,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2956,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2967,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2978,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2989,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2999,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3010,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3021,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3031,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   }
+  ],
+  "slice": null,
+  "areaTaps": 259,
+  "popClose": 168,
+  "reloadDone": 8
+ },
+ "life": null,
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "ktut-no-target|tutorial open with no tappable target card; tapped its own «Đã hiểu»",
+   "type": "ktut-no-target",
+   "msg": "tutorial open with no tappable target card; tapped its own «Đã hiểu»",
+   "n": 1,
+   "at": 79,
+   "shot": "/home/user/wt/out/u1b/shots-coop-rt-s117-host-k1/ktut-1.png",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 1,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Lạc Yên"
+   },
+   "hole": null,
+   "card": "",
+   "buttons": [
+    "",
+    "Đã hiểu"
+   ]
+  },
+  {
+   "k": "dead|close button has no effect: .dlg «Tâm trạng · Cung nữ ???» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tâm trạng · Cung nữ ???» «Lui»",
+   "n": 1,
+   "at": 2015,
+   "shot": "/home/user/wt/out/u1b/shots-coop-rt-s117-host-k1/noeffect-1795616003126.png"
+  }
+ ],
+ "dead": [
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 2 người.»",
+   "label": "Giao thiệpGiao thiệpViết thư nhàRất vữngViết thư g",
+   "cover": "zero size",
+   "shot": "/home/user/wt/out/u1b/shots-coop-rt-s117-host-k1/dead-fold-1795615484787.png",
+   "dev": "fold",
+   "at": 1497,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 4,
+    "w": 1,
+    "b": 2,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Lạc Yên"
+   }
+  },
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tâm trạng · Cung nữ ???»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/out/u1b/shots-coop-rt-s117-host-k1/noeffect-1795616003126.png",
+   "at": 2015,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 5,
+    "w": 2,
+    "b": 2,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Lạc Yên"
+   }
+  }
+ ],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 0,
+   "key": ""
+  }
+ ],
+ "buoi": 73,
+ "steps": 6571,
+ "status": [],
+ "_snapAt": 1795617012029,
+ "_un": 15,
+ "trace": [
+  [
+   2285,
+   ".dlg «Tư chất»"
+  ],
+  [
+   2285,
+   ".dlg «Hoa tai»"
+  ],
+  [
+   2285,
+   ".dlg «Tư chất»"
+  ],
+  [
+   2286,
+   ".dlg «Tâm trạng: Hờn tủiTâm trạng: Hờn tủi+1 thân thể kh»"
+  ],
+  [
+   2286,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   2287,
+   ".dlg «Hoa tai»"
+  ],
+  [
+   2287,
+   ".dlg «Tài nghệ»"
+  ],
+  [
+   2287,
+   ".dlg «Tài nghệ»"
+  ],
+  [
+   2288,
+   ".dlg «Theo hầu»"
+  ],
+  [
+   2288,
+   ".dlg «Đeo tay»"
+  ],
+  [
+   2288,
+   ".dlg «Đeo tay»"
+  ],
+  [
+   2288,
+   ".dlg «Xa xỉ9ThườngTrâm đồng mai hoa»"
+  ],
+  [
+   2289,
+   ".dlg «Khăn che mặt»"
+  ],
+  [
+   2289,
+   ".dlg «Theo hầu»"
+  ],
+  [
+   2289,
+   ".dlg «Hoa tai»"
+  ],
+  [
+   2289,
+   ".dlg «Xa xỉ9ThườngTrâm đồng mai hoa»"
+  ],
+  [
+   2290,
+   ".dlg «Xa xỉ9ThườngTrâm đồng mai hoa»"
+  ],
+  [
+   2290,
+   ".dlg «Giày»"
+  ],
+  [
+   2290,
+   ".dlg «Xa xỉ10ThườngÁo lụa thêu hoa nhỏ»"
+  ],
+  [
+   2290,
+   ".dlg «Đeo eo»"
+  ],
+  [
+   2291,
+   ".dlg «Tư chất»"
+  ],
+  [
+   2291,
+   ".dlg «Tư chất»"
+  ],
+  [
+   2291,
+   ".dlg «Giày»"
+  ],
+  [
+   2291,
+   ".dlg «Xa xỉ10ThườngÁo lụa thêu hoa nhỏ»"
+  ],
+  [
+   2292,
+   ".dlg «Hoa tai»"
+  ],
+  [
+   2292,
+   ".dlg «Khăn che mặt»"
+  ],
+  [
+   2292,
+   ".dlg «Xa xỉ10ThườngÁo lụa thêu hoa nhỏ»"
+  ],
+  [
+   2292,
+   ".dlg «Giày»"
+  ],
+  [
+   2293,
+   ".dlg «Khăn che mặt»"
+  ],
+  [
+   2293,
+   ".dlg «Hoa tai»"
+  ],
+  [
+   2293,
+   ".dlg «Giày»"
+  ],
+  [
+   2294,
+   ".dlg «Giày»"
+  ],
+  [
+   2294,
+   ".dlg «Xa xỉ10ThườngÁo lụa thêu hoa nhỏ»"
+  ],
+  [
+   2294,
+   ".dlg «Lui»"
+  ],
+  [
+   2295,
+   ".dlg «Kỳ ngộ» «Ngồi xuống nghe lệ phạtRất vữngTốnSức -4·2 khắcĐượ»"
+  ],
+  [
+   2296,
+   ".dlg «Kỳ ngộ» «Lui»"
+  ],
+  [
+   2303,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Giao tình»"
+  ],
+  [
+   2303,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Dư đồ»"
+  ],
+  [
+   2304,
+   ".mapsc «Sẵn sàng»"
+  ],
+  [
+   2304,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tài nghệ»"
+  ],
+  [
+   2305,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Buổi tối, còn 1 khắc»"
+  ],
+  [
+   2305,
+   ".dlg «tối · còn» «Lui»"
+  ],
+  [
+   2306,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   2307,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   2308,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «trăng rằm»"
+  ],
+  [
+   2310,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Học tập · Tài nghệHọc tập · Tài nghệCác lối, sách »"
+  ],
+  [
+   2310,
+   ".dlg «Vũ: các lối» «Lui»"
+  ],
+  [
+   2311,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tin báo: 2 tin mới»"
+  ],
+  [
+   2311,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   2312,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Cầm kỳ thi họa 0/12»"
+  ],
+  [
+   2312,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Sắc44Tài78Tâm cơ31Đức41Danh53Sủng3»"
+  ],
+  [
+   2313,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Về Kính sự phòng»"
+  ],
+  [
+   2313,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Bạc6Sức93/97»"
+  ],
+  [
+   2313,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   2314,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Lịch tháng»"
+  ],
+  [
+   2314,
+   ".dlg «Lịch tháng» «Tháng trước»"
+  ],
+  [
+   2315,
+   ".dlg «Lịch tháng» «ngày 24: Nguyệt tín»"
+  ],
+  [
+   2315,
+   ".dlg «Lịch tháng» «ngày 30»"
+  ],
+  [
+   2315,
+   ".dlg «Lịch tháng» «mồng 1: Lĩnh bổng lộc · Nội vụ phủ phát đồ»"
+  ],
+  [
+   2316,
+   ".dlg «Lịch tháng» «mồng 2»"
+  ],
+  [
+   2316,
+   ".dlg «Lịch tháng» «mồng 7: Tết Thất tịch: Sinh thần Nhâm Linh Vận»"
+  ],
+  [
+   2317,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Quẻ Trung (Giao thiệp)»"
+  ],
+  [
+   2317,
+   ".dlg «Quẻ Trung · Giao thiệp» «Lui»"
+  ],
+  [
+   2318,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tổng quản Kính sự phòngChân Đức Thọ»"
+  ],
+  [
+   2319,
+   ".kfoc «Giao thiệp 0/1»"
+  ],
+  [
+   2319,
+   ".kfoc «Hỏi sở thích Hoàng thượng · Rất vững · Tốn 1 khắc »"
+  ],
+  [
+   2320,
+   ".kfoc «Hỏi sở thích Hoàng thượng · Rất vững · Tốn 1 khắc »"
+  ],
+  [
+   2321,
+   ".kfoc «Hỏi sở thích Hoàng thượng · Rất vững · Tốn 1 khắc »"
+  ],
+  [
+   2322,
+   ".kfoc «Hỏi sở thích Hoàng thượng · Rất vững · Tốn 1 khắc »"
+  ],
+  [
+   2323,
+   ".kfoc «Mưu kế 1/3»"
+  ],
+  [
+   2323,
+   ".kfoc «Xem sổ nguyệt sự · Rất vững · Tốn 1 khắc · 10 bạc»"
+  ],
+  [
+   2325,
+   ".kfoc «Xem sổ nguyệt sự · Rất vững · Tốn 1 khắc · 10 bạc»"
+  ],
+  [
+   2326,
+   ".kfoc «Xem sổ nguyệt sự · Rất vững · Tốn 1 khắc · 10 bạc»"
+  ],
+  [
+   2327,
+   ".kfoc «Xem sổ nguyệt sự · Rất vững · Tốn 1 khắc · 10 bạc»"
+  ],
+  [
+   2328,
+   ".kfoc «Xem sổ thị tẩm · Tốn 1 khắc»"
+  ],
+  [
+   2328,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   2328,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   2329,
+   ".kfoc «Tranh sủng 0/1»"
+  ],
+  [
+   2329,
+   ".kfoc «Tranh sủng 0/1»"
+  ],
+  [
+   2330,
+   ".kfoc «Đút lót lật thẻ · Tốn 1 khắc · 30 bạc»"
+  ],
+  [
+   2331,
+   ".kfoc «Mưu kế 1/3»"
+  ],
+  [
+   2331,
+   ".kfoc «Tranh sủng 0/1»"
+  ],
+  [
+   2331,
+   ".kfoc «Giao thiệp 0/1»"
+  ],
+  [
+   2331,
+   ".kfoc «Tranh sủng 0/1»"
+  ],
+  [
+   2332,
+   ".kfoc «Tranh sủng 0/1»"
+  ],
+  [
+   2332,
+   ".kfoc «Giao thiệp 0/1»"
+  ],
+  [
+   2332,
+   ".kfoc «Giao thiệp 0/1»"
+  ],
+  [
+   2332,
+   ".kfoc «Mưu kế 1/3»"
+  ],
+  [
+   2333,
+   ".kfoc «Xem sổ thị tẩm · Tốn 1 khắc»"
+  ],
+  [
+   2333,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   2333,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   2334,
+   ".kfoc «Mưu kế 1/3»"
+  ],
+  [
+   2334,
+   ".kfoc «Hầu chuyện, xem lén sổ nguyệt sự · Có cơ · Tốn 2 k»"
+  ],
+  [
+   2335,
+   ".kfoc «Hầu chuyện, xem lén sổ nguyệt sự · Có cơ · Tốn 2 k»"
+  ],
+  [
+   2336,
+   ".kfoc «Tranh sủng 0/1»"
+  ],
+  [
+   2337,
+   ".kfoc «Giao thiệp 0/1»"
+  ],
+  [
+   2337,
+   ".kfoc «Mưu kế 1/3»"
+  ],
+  [
+   2337,
+   ".kfoc «Xem sổ thị tẩm · Tốn 1 khắc»"
+  ],
+  [
+   2337,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   2338,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   2339,
+   ".kfoc «Xem sổ thị tẩm · Tốn 1 khắc»"
+  ],
+  [
+   2339,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   2339,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   2340,
+   ".kfoc «Giao thiệp 0/1»"
+  ],
+  [
+   2340,
+   ".kfoc «Tranh sủng 0/1»"
+  ],
+  [
+   2340,
+   ".kfoc «Đút lót lật thẻ · Tốn 1 khắc · 30 bạc»"
+  ],
+  [
+   2342,
+   ".kfoc «Tranh sủng 0/1»"
+  ],
+  [
+   2342,
+   ".kfoc «Mưu kế 1/3»"
+  ],
+  [
+   2342,
+   ".kfoc «Hầu chuyện, xem lén sổ nguyệt sự · Có cơ · Tốn 2 k»"
+  ],
+  [
+   2343,
+   ".kfoc «Giao thiệp 0/1»"
+  ],
+  [
+   2343,
+   ".kfoc «Mưu kế 1/3»"
+  ],
+  [
+   2344,
+   ".kfoc «Hầu chuyện, xem lén sổ nguyệt sự · Có cơ · Tốn 2 k»"
+  ],
+  [
+   2345,
+   ".kfoc «Mưu kế 1/3»"
+  ],
+  [
+   2345,
+   ".kfoc «Giao thiệp 0/1»"
+  ],
+  [
+   2345,
+   ".kfoc «Giao thiệp 0/1»"
+  ],
+  [
+   2345,
+   ".kfoc «Giao thiệp 0/1»"
+  ],
+  [
+   2346,
+   ".kfoc «Giao thiệp 0/1»"
+  ],
+  [
+   2346,
+   ".kfoc «Tranh sủng 0/1»"
+  ],
+  [
+   2346,
+   ".kfoc «Tranh sủng 0/1»"
+  ],
+  [
+   2346,
+   ".kfoc «Đút lót lật thẻ · Tốn 1 khắc · 30 bạc»"
+  ],
+  [
+   2348,
+   ".kfoc «Mưu kế 1/3»"
+  ],
+  [
+   2348,
+   ".kfoc «Mưu kế 1/3»"
+  ],
+  [
+   2348,
+   ".kfoc «Mưu kế 1/3»"
+  ],
+  [
+   2348,
+   ".kfoc «Tranh sủng 0/1»"
+  ],
+  [
+   2349,
+   ".kfoc «Đút lót lật thẻ · Tốn 1 khắc · 30 bạc»"
+  ],
+  [
+   2350,
+   ".kfoc «Mưu kế 1/3»"
+  ],
+  [
+   2350,
+   ".kfoc «Giao thiệp 0/1»"
+  ],
+  [
+   2350,
+   ".kfoc «Tranh sủng 0/1»"
+  ],
+  [
+   2350,
+   ".kfoc «Lui»"
+  ],
+  [
+   2351,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   2352,
+   ".dlg «Bổng lộc» «Lui»"
+  ],
+  [
+   2353,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tổng quản Kính sự phòngChân Đức Thọ»"
+  ],
+  [
+   2353,
+   ".kfoc «Lui»"
+  ],
+  [
+   2354,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Ân tình (đêm)6»"
+  ],
+  [
+   2354,
+   ".dlg «Ân tình (đêm)» «Lui»"
+  ],
+  [
+   2355,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Thư từ»"
+  ],
+  [
+   2355,
+   ".dlg «Gửi»"
+  ],
+  [
+   2356,
+   ".dlg «Gửi»"
+  ],
+  [
+   2356,
+   ".dlg «Gửi»"
+  ],
+  [
+   2356,
+   ".dlg «Gửi»"
+  ],
+  [
+   2356,
+   ".dlg «Lui»"
+  ],
+  [
+   2357,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Hoàng tự»"
+  ],
+  [
+   2358,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Kế vị»"
+  ],
+  [
+   2358,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Mệnh truyện»"
+  ],
+  [
+   2358,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Buổi tối, còn 1 khắc»"
+  ],
+  [
+   2359,
+   ".dlg «tối · còn» «Lui»"
+  ],
+  [
+   2359,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Mệnh truyệnViệc nhờSổ ghiĐang làm 0/4Tìm việc Nợ â»"
+  ],
+  [
+   2360,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Hậu cung»"
+  ],
+  [
+   2360,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Người lạNgười lạ»"
+  ],
+  [
+   2361,
+   ".dlg «Tâm trạng · Cung nữ ???» «Lui»"
+  ],
+  [
+   2363,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Người sau»"
+  ],
+  [
+   2363,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Chí tônPhi tầnNam nhânCung nhân‹Cung taTranhTrong »"
+  ],
+  [
+   2363,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Hậu cung»"
+  ],
+  [
+   2364,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tư trang»"
+  ],
+  [
+   2364,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Dư đồ»"
+  ],
+  [
+   2364,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Ân tình (đêm)6»"
+  ],
+  [
+   2365,
+   ".dlg «Ân tình (đêm)» «Lui»"
+  ],
+  [
+   2366,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Thu nhỏ»"
+  ],
+  [
+   2366,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Thu nhỏ»"
+  ],
+  [
+   2366,
+   ".mapsc «Tài nghệ»"
+  ],
+  [
+   2367,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Hậu cung»"
+  ],
+  [
+   2368,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Giao tình»"
+  ],
+  [
+   2368,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Hậu cung»"
+  ],
+  [
+   2368,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tin báo»"
+  ],
+  [
+   2369,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   2370,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Mưu kế 0/3»"
+  ],
+  [
+   2370,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tư trang»"
+  ],
+  [
+   2370,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Việc»"
+  ],
+  [
+   2371,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   2372,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   2380,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   2380,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   2388,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   2388,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   2396,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   2397,
+   ".dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»"
+  ],
+  [
+   2405,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   2405,
+   ".dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»"
+  ],
+  [
+   2413,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   2413,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   2421,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   2421,
+   ".dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»"
+  ],
+  [
+   2429,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   2429,
+   ".dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»"
+  ],
+  [
+   2437,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Giao tình»"
+  ],
+  [
+   2437,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «trăng rằm»"
+  ],
+  [
+   2438,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Giao tình»"
+  ],
+  [
+   2439,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Quẻ Trung (Giao thiệp)»"
+  ],
+  [
+   2439,
+   ".dlg «Quẻ Trung · Giao thiệp» «Lui»"
+  ],
+  [
+   2440,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tư trang»"
+  ],
+  [
+   2440,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Túi đồ»"
+  ],
+  [
+   2441,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Dư đồ»"
+  ],
+  [
+   2441,
+   ".mapsc «Sắc44Tài78Tâm cơ31Đức41Danh53Sủng3»"
+  ],
+  [
+   2441,
+   ".mapsc «Chí tôn · chạm để mở danh sách»"
+  ],
+  [
+   2442,
+   ".mapsc «Hoàng thượngBình thản»"
+  ],
+  [
+   2442,
+   ".dlg «Xem thêm»"
+  ],
+  [
+   2443,
+   ".dlg «Hoàng thượng» «Lui»"
+  ],
+  [
+   2443,
+   ".dlg «Dạo này»"
+  ],
+  [
+   2445,
+   ".mapsc «Ân tình (đêm)6»"
+  ],
+  [
+   2445,
+   ".dlg «Ân tình (đêm)» «Lui»"
+  ],
+  [
+   2446,
+   ".mapsc «Lật thẻKhông có»"
+  ],
+  [
+   2446,
+   ".dlg «Lật thẻ: Không có» «Lui»"
+  ],
+  [
+   2447,
+   ".mapsc «Hôm nay mặt mộc»"
+  ],
+  [
+   2448,
+   ".mapsc «Hôm nay mặt mộc»"
+  ],
+  [
+   2450,
+   ".mapsc «Cung nhân · chạm để mở danh sách»"
+  ],
+  [
+   2450,
+   ".mapsc «Tai mắt0»"
+  ],
+  [
+   2450,
+   ".mapsc «Kính sự phòngTa + 3 bóng · còn 1 khắc»"
+  ],
+  [
+   2451,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tổng quản Kính sự phòngChân Đức Thọ»"
+  ],
+  [
+   2452,
+   ".kfoc «Lui»"
+  ],
+  [
+   2453,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Thư từ»"
+  ],
+  [
+   2453,
+   ".dlg «Lui»"
+  ],
+  [
+   2454,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «1Cung nhân»"
+  ],
+  [
+   2454,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Sắc44Tài78Tâm cơ31Đức41Danh53Sủng3»"
+  ],
+  [
+   2454,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Lật thẻKhông có»"
+  ],
+  [
+   2455,
+   ".dlg «Lật thẻ: Không có» «Lui»"
+  ],
+  [
+   2456,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Số lần ân thưởng0»"
+  ],
+  [
+   2456,
+   ".dlg «Ân thưởng» «Lui»"
+  ],
+  [
+   2457,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Số lần ân thưởng0»"
+  ],
+  [
+   2457,
+   ".dlg «Ân thưởng» «Lui»"
+  ],
+  [
+   2458,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Xét phẩm: thiếu 2»"
+  ],
+  [
+   2459,
+   ".dlg «Xét phẩm cuối tháng · Thường tại» «Lui»"
+  ],
+  [
+   2460,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tâm trạngBình thản-3»"
+  ],
+  [
+   2460,
+   ".dlg «Danh» «Lui»"
+  ],
+  [
+   2461,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Thư từ»"
+  ],
+  [
+   2461,
+   ".dlg «Lui»"
+  ],
+  [
+   2462,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Mục tiêu chương»"
+  ],
+  [
+   2463,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   2463,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Thêm Sủng · đang lấyTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   2465,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   2465,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Thêm Sủng · đang lấyTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   2466,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   2467,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   2467,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Thêm Sủng · đang lấyTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   2469,
+   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   2470,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   2470,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   2471,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   2471,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   2472,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   2472,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   2473,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   2473,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Thêm SủngTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   2475,
+   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   2476,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   2476,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Thêm SủngTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   2477,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckh»"
+  ],
+  [
+   2478,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Thêm Sủng · đang lấyTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   2479,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   2479,
+   ".dlg «Danh hiệu» «Danh hiệu 1/35»"
+  ],
+  [
+   2480,
+   ".dlg «Danh hiệu» «Tháo danh hiệuTốnkhôngĐượcSủng +1»"
+  ],
+  [
+   2481,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   2482,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   2483,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   2490,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tài nghệ»"
+  ],
+  [
+   2490,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Mệnh truyện»"
+  ],
+  [
+   2491,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Việc nhờ»"
+  ],
+  [
+   2491,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «trăng rằm»"
+  ],
+  [
+   2492,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Về Kính sự phòng»"
+  ],
+  [
+   2493,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Giao tình»"
+  ],
+  [
+   2493,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Quẻ Trung (Giao thiệp)»"
+  ],
+  [
+   2493,
+   ".dlg «Quẻ Trung · Giao thiệp» «Lui»"
+  ],
+  [
+   2494,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tâm bệnh · nặng»"
+  ],
+  [
+   2495,
+   ".dlg «Tâm bệnh · nặng» «Lui»"
+  ],
+  [
+   2496,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tin báo»"
+  ],
+  [
+   2496,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   2497,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tin báo»"
+  ],
+  [
+   2497,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   2498,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Hành sự»"
+  ],
+  [
+   2499,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   2508,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Về Kính sự phòng»"
+  ],
+  [
+   2509,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tâm trạngBình thản+3»"
+  ],
+  [
+   2509,
+   ".dlg «Danh» «Lui»"
+  ],
+  [
+   2510,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tâm trạngBình thản+3»"
+  ],
+  [
+   2510,
+   ".dlg «Danh» «Lui»"
+  ],
+  [
+   2511,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Số lần ân thưởng0»"
+  ],
+  [
+   2512,
+   ".dlg «Ân thưởng» «Lui»"
+  ],
+  [
+   2513,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   2514,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Hoàng tự»"
+  ],
+  [
+   2514,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Hoàng tử1. Huyên»"
+  ],
+  [
+   2514,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Giao tình»"
+  ],
+  [
+   2515,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Về Kính sự phòng»"
+  ],
+  [
+   2515,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Ân tình (đêm)6»"
+  ],
+  [
+   2515,
+   ".dlg «Ân tình (đêm)» «Lui»"
+  ],
+  [
+   2516,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   2517,
+   ".dlg «Bổng lộc» «Lui»"
+  ],
+  [
+   2518,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «trăng rằm»"
+  ],
+  [
+   2519,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «trăng rằm»"
+  ],
+  [
+   2520,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tài nghệ»"
+  ],
+  [
+   2520,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Buổi tối, còn 0 khắc»"
+  ],
+  [
+   2521,
+   ".dlg «tối · còn» «Lui»"
+  ],
+  [
+   2521,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tác phẩm»"
+  ],
+  [
+   2522,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tứ đức 0/9»"
+  ],
+  [
+   2522,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Về Kính sự phòng»"
+  ],
+  [
+   2522,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «1Cung nhân»"
+  ],
+  [
+   2523,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Ân tình (đêm)6»"
+  ],
+  [
+   2523,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «3Chí tôn»"
+  ],
+  [
+   2523,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Về Dư đồ»"
+  ],
+  [
+   2524,
+   ".mapsc «Số lần ân thưởng0»"
+  ],
+  [
+   2524,
+   ".dlg «Ân thưởng» «Lui»"
+  ],
+  [
+   2525,
+   ".mapsc «Tiết Vạn thọThu · còn 0 khắc · đi gần 1 khắc, xa 2»"
+  ],
+  [
+   2525,
+   ".mapsc «Có thaiRất thấp»"
+  ],
+  [
+   2526,
+   ".dlg «Có thai: Rất thấp» «Lui»"
+  ],
+  [
+   2527,
+   ".mapsc «Có thaiRất thấp»"
+  ],
+  [
+   2527,
+   ".dlg «Có thai: Rất thấp» «Lui»"
+  ],
+  [
+   2528,
+   ".mapsc «Buổi tối, còn 0 khắc»"
+  ],
+  [
+   2528,
+   ".dlg «tối · còn» «Lui»"
+  ],
+  [
+   2529,
+   ".mapsc «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   2530,
+   ".dlg «Bổng lộc» «Lui»"
+  ],
+  [
+   2531,
+   ".mapsc «Về Kính sự phòng»"
+  ],
+  [
+   2531,
+   ".mapsc «Tâm bệnh · nặng»"
+  ],
+  [
+   2531,
+   ".dlg «Tâm bệnh · nặng» «Lui»"
+  ],
+  [
+   2532,
+   ".mapsc «‹ Dư đồHàm An cung Thụy Ngọc điệnvắngTuy Phúc hiên»"
+  ],
+  [
+   2532,
+   ".dlg «Hàm An cung» «Lui»"
+  ],
+  [
+   2533,
+   ".mapsc «Thư từ»"
+  ],
+  [
+   2534,
+   ".dlg «Lui»"
+  ],
+  [
+   2534,
+   ".mapsc «Tâm bệnh · nặng»"
+  ],
+  [
+   2535,
+   ".dlg «Tâm bệnh · nặng» «Lui»"
+  ],
+  [
+   2536,
+   ".mapsc «Nhâm Linh Vận: Đang bận»"
+  ],
+  [
+   2536,
+   ".dlg «<span data-k61skip=\"1\"><b class=\"kname\" style=\"--r» «Lui»"
+  ],
+  [
+   2543,
+   ".mapsc «Xem bản thân»"
+  ],
+  [
+   2544,
+   ".dlg «Hoa tai»"
+  ],
+  [
+   2545,
+   ".dlg «Tư chất»"
+  ],
+  [
+   2545,
+   ".dlg «Hoa tai»"
+  ],
+  [
+   2545,
+   ".dlg «Tư chất»"
+  ],
+  [
+   2546,
+   ".dlg «Tài nghệ»"
+  ],
+  [
+   2546,
+   ".dlg «Xa xỉ9ThườngTrâm đồng mai hoa»"
+  ],
+  [
+   2546,
+   ".dlg «Hoa tai»"
+  ],
+  [
+   2546,
+   ".dlg «Đeo eo»"
+  ],
+  [
+   2547,
+   ".dlg «Hoa tai»"
+  ],
+  [
+   2547,
+   ".dlg «Tài nghệ»"
+  ],
+  [
+   2547,
+   ".dlg «Tài nghệ»"
+  ],
+  [
+   2547,
+   ".dlg «Hoa tai»"
+  ],
+  [
+   2548,
+   ".dlg «Lui»"
+  ],
+  [
+   2549,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Túi đồThú cưngViệcTất cả 54Trang sức 3Y phục 2Vải »"
+  ],
+  [
+   2549,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tin báo»"
+  ],
+  [
+   2549,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   2550,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Cài tóc: Trâm đồng mai hoa»"
+  ],
+  [
+   2550,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tự chọn đồVữngTốn0 khắcThànhthay ngay bộ ta cho là»"
+  ],
+  [
+   2552,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tự chọn đồVữngTốn0 khắcThànhthay ngay bộ ta cho là»"
+  ],
+  [
+   2554,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tự chọn đồVữngTốn0 khắcThànhthay ngay bộ ta cho là»"
+  ],
+  [
+   2556,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tâm bệnh · nặng»"
+  ],
+  [
+   2556,
+   ".dlg «Tâm bệnh · nặng» «Lui»"
+  ],
+  [
+   2557,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Hậu cung»"
+  ],
+  [
+   2557,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tâm»"
+  ],
+  [
+   2558,
+   ".dlg «Tâm trạng · Cung nữ nhị đẳng Huệ Tâm» «Lui»"
+  ],
+  [
+   2559,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Hậu cung»"
+  ],
+  [
+   2559,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «1Cung nhân»"
+  ],
+  [
+   2559,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Ngọc TranhThiện cảm 45»"
+  ],
+  [
+   2560,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Hành sự»"
+  ],
+  [
+   2562,
+   "DEAD Nhâm Linh Vận: Đang bận"
+  ],
+  [
+   2562,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   2564,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Hành sự»"
+  ],
+  [
+   2564,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Mệnh truyện»"
+  ],
+  [
+   2564,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Hoàng tự»"
+  ],
+  [
+   2564,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Sắc44Tài78Tâm cơ31Đức41Danh53Sủng2»"
+  ],
+  [
+   2565,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Sắc44Tài78Tâm cơ31Đức41Danh53Sủng2»"
+  ],
+  [
+   2565,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Về Kính sự phòng»"
+  ],
+  [
+   2565,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tin báo»"
+  ],
+  [
+   2566,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   2566,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Có thaiRất thấp»"
+  ],
+  [
+   2567,
+   ".dlg «Có thai: Rất thấp» «Lui»"
+  ],
+  [
+   2568,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tâm bệnh · nặng»"
+  ],
+  [
+   2568,
+   ".dlg «Tâm bệnh · nặng» «Lui»"
+  ],
+  [
+   2569,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Tài nghệ»"
+  ],
+  [
+   2569,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Học tập · Tài nghệHọc tập · Tài nghệCác lối, sách »"
+  ],
+  [
+   2570,
+   ".dlg «Công · Nữ công: các lối» «Lui»"
+  ],
+  [
+   2570,
+   "page «Kính sự phòng · Ở đây còn 3 người.» «Cầm kỳ thi họa 0/12»"
+  ],
+  [
+   2572,
+   ".dlg «Kỳ nguyệt sự» «Báo đúng ngàyRất vữngTốnkhôngĐượcsổ ghi đúng, khôn»"
+  ],
+  [
+   2575,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   2586,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2587,
+   "#kmrew «ThườngYên chi giấyHộp phấn má dùng khi điểm trang »"
+  ],
+  [
+   2587,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2588,
+   "#kmrew «Thường»"
+  ],
+  [
+   2589,
+   ".dlg «Lui»"
+  ],
+  [
+   2589,
+   "#kmrew «Thường»"
+  ],
+  [
+   2590,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2591,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   2591,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2592,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   2593,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2594,
+   "#kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»"
+  ],
+  [
+   2594,
+   ".dlg «Lui»"
+  ],
+  [
+   2595,
+   "#kmrew «ThườngPhấn gạoHộp phấn mắt dùng khi điểm trang: dù»"
+  ],
+  [
+   2595,
+   ".dlg «Lui»"
+  ],
+  [
+   2596,
+   "#kmrew «ThườngVải bôngMay áo: váy sa xanh ngọc (Y phục, Sắ»"
+  ],
+  [
+   2596,
+   ".dlg «Lui»"
+  ],
+  [
+   2597,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   2598,
+   ".dlg «Lui»"
+  ],
+  [
+   2599,
+   "#kmrew «Thường»"
+  ],
+  [
+   2599,
+   ".dlg «Lui»"
+  ],
+  [
+   2600,
+   "#kmrew «Nhận»"
+  ],
+  [
+   2600,
+   "#kmrew «Thường»"
+  ],
+  [
+   2601,
+   ".dlg «Bổng lộc tháng tám» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   2602,
+   ".dlg «Lễ tấn phong Quách Như Yên» «Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6»"
+  ],
+  [
+   2603,
+   ".dlg «Chương 1 khép lại» «Lui»"
+  ],
+  [
+   2604,
+   ".dlg «Chương 2: Lần đầu được sủng» «Lui»"
+  ],
+  [
+   2605,
+   ".dlg «Lời nhận xét» «Lui»"
+  ],
+  [
+   2607,
+   ".dlg «Tết Trùng cửu · Lễ» «Cúng dường bạc dầu đènRất vữngTốnBạc -15Đượcđược t»"
+  ],
+  [
+   2608,
+   ".dlg «Tết Trùng cửu · Chuyện bên lề hội» «Rót thử trước mặt mọi ngườiTốnSức -24ĐượcDanh +10·»"
+  ],
+  [
+   2608,
+   ".dlg «Có người bán tin» «Không muaTốnkhôngĐượckhôngGhi chúkhông biết tin ấy»"
+  ]
+ ],
+ "_ckAt": 1795617030169,
+ "_ckB": 73,
+ "_kn": 1,
+ "_kb": 2
+}

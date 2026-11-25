@@ -1,0 +1,1712 @@
+{
+ "job": {
+  "id": "coop-rt-s117-guest-k1",
+  "origin": null,
+  "road": null,
+  "bot": "sens",
+  "seed": 1272,
+  "dev": "ipad",
+  "url": "http://127.0.0.1:8080/index.html"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "512cfee6",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 1,
+  "unstick": [
+   {
+    "at": 215,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Nội vụ phủ · Sang buổi tối · ta vẫn ở Nội vụ phủ. "
+   },
+   {
+    "at": 350,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 708,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 719,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1204,
+    "lvl": 1,
+    "layer": ".kfoc",
+    "title": ""
+   },
+   {
+    "at": 2865,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   }
+  ],
+  "slice": null,
+  "areaTaps": 2862,
+  "typed": 1,
+  "reloadDone": 8,
+  "popClose": 77,
+  "scrolls": 1
+ },
+ "life": null,
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "stuck|no progress 15 min on .dlg «Tin báo»",
+   "type": "stuck",
+   "msg": "no progress 15 min on .dlg «Tin báo»",
+   "n": 1,
+   "at": 2865,
+   "shot": "/home/user/wt/out/u1b/shots-coop-rt-s117-guest-k1/stuck-1.png",
+   "save": "/home/user/wt/out/u1b/shots-coop-rt-s117-guest-k1/stuck-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 5,
+    "w": 2,
+    "b": 2,
+    "age": 19,
+    "rank": 0,
+    "name": "Nhâm Linh Vận"
+   },
+   "buttons": [
+    "Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết quả ở bước sau!",
+    "Để sau"
+   ]
+  }
+ ],
+ "dead": [],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 0,
+   "key": ""
+  }
+ ],
+ "buoi": 72,
+ "steps": 6645,
+ "status": [],
+ "_snapAt": 1795616836169,
+ "_un": 0,
+ "trace": [
+  [
+   1704,
+   "#kmrew «ThườngThan liễuHộp màu mày dùng khi điểm trang (kẻ»"
+  ],
+  [
+   1704,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1705,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   1706,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1707,
+   "#kmrew «ThườngSon sápHộp son môi dùng khi điểm trang (tô s»"
+  ],
+  [
+   1707,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1708,
+   "#kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»"
+  ],
+  [
+   1708,
+   ".dlg «Lui»"
+  ],
+  [
+   1709,
+   "#kmrew «Nhận»"
+  ],
+  [
+   1709,
+   "#kmrew «Nhận»"
+  ],
+  [
+   1710,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1711,
+   ".dlg «Bổng lộc tháng bảy» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   1712,
+   ".dlg «Thỉnh bình an mạch» «Lui»"
+  ],
+  [
+   1713,
+   ".dlg «Tết Trung thu · Lời mời: Thi làm bánh trung thu» «Ghi tên dự thi bếp núcMong manhTốnkhôngĐượcđoạt gi»"
+  ],
+  [
+   1714,
+   ".dlg «Kính sự phòng ghi sổ» «Tiếp tụcRất vữngTốnkhôngĐượckhông đổi gì thêmGợi ý»"
+  ],
+  [
+   1722,
+   "DEAD Trang sau"
+  ],
+  [
+   1723,
+   ".dlg «Tuần mới» «Lui»"
+  ],
+  [
+   1723,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1724,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   1725,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   1735,
+   ".dlg «Có người đến» «Lui»"
+  ],
+  [
+   1736,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   1745,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Nghỉ ngơiNghỉ ngơiDưỡng nhanRất vữngNgọc trai nghi»"
+  ],
+  [
+   1754,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   1758,
+   "DEAD Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh"
+  ],
+  [
+   1758,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   1767,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Bạc16Sức100/100»"
+  ],
+  [
+   1768,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   1769,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   1771,
+   "#kmrew «Thường»"
+  ],
+  [
+   1771,
+   ".dlg «Lui»"
+  ],
+  [
+   1772,
+   "#kmrew «Thường»"
+  ],
+  [
+   1772,
+   ".dlg «Lui»"
+  ],
+  [
+   1773,
+   "#kmrew «Nhận»"
+  ],
+  [
+   1774,
+   "#kmrew «Thường»"
+  ],
+  [
+   1774,
+   ".dlg «Lui»"
+  ],
+  [
+   1775,
+   ".dlg «Chuyện trong cung» «Đưa bạc cho xongRất vữngTốnBạc -8Đượcdưỡng sức, đư»"
+  ],
+  [
+   1775,
+   ".dlg «Biến cố» «Lui»"
+  ],
+  [
+   1783,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi dưỡng sứcRất vữngUống »"
+  ],
+  [
+   1790,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   1794,
+   ".dlg «Kính sự phòng» «Chặn ngự giáTùy duyênTốnkhôngĐượcdựa vào nhan sắc,»"
+  ],
+  [
+   1799,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   1801,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   1805,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   1812,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1813,
+   ".dlg «Tết Trung thu · Thi làm bánh trung thu» «Bỏ thiTốnkhôngĐượckhông»"
+  ],
+  [
+   1814,
+   ".dlg «Tiết Vạn thọ · Lời mời: Thi vẽ tranh “Tùng hạc”» «Ghi tên dự thi vẽHiểmTốnkhôngĐượcđoạt giải, bệ hạ »"
+  ],
+  [
+   1815,
+   ".dlg «Tết Trung thu · Chuyện bên lề hội» «Chạy đuổi theo mèo, bắt lại miếng bánhTốnTai mắt -»"
+  ],
+  [
+   1816,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1817,
+   ".dlg «Tết Trung thu · Hội thi bếp núc: kết quả» «Lui»"
+  ],
+  [
+   1820,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1820,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1821,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1821,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1822,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1822,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1822,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1822,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1823,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1823,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1823,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1823,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1824,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1824,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1824,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1825,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1825,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1825,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1825,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1826,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1826,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1826,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1826,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1834,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   1835,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   1844,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   1855,
+   ".dlg «Hoàng thượng» «Cười, đỡ tay ngài chỉnh dâyRất vữngTốnkhôngĐượcthê»"
+  ],
+  [
+   1862,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   1871,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Y dược 1/2»"
+  ],
+  [
+   1872,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   1875,
+   "DEAD Cung nữ thân tín tam đẳngThu Thiền"
+  ],
+  [
+   1875,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «nắng vàng»"
+  ],
+  [
+   1877,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Quẻ Trung (Sức khỏe)»"
+  ],
+  [
+   1877,
+   ".dlg «Quẻ Trung · Sức khỏe» «Lui»"
+  ],
+  [
+   1878,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   1879,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Bổng lộcsau 2 tuần»"
+  ],
+  [
+   1879,
+   ".dlg «Bổng lộc» «Lui»"
+  ],
+  [
+   1880,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «3Chí tôn»"
+  ],
+  [
+   1880,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Mệnh truyện»"
+  ],
+  [
+   1881,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Mệnh truyện»"
+  ],
+  [
+   1881,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Đã qua 0»"
+  ],
+  [
+   1881,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Cung nữ thân tín tam đẳngThu Thiền»"
+  ],
+  [
+   1882,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1882,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   1882,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   1883,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1883,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   1883,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   1884,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1884,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   1885,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   1886,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1886,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   1886,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   1887,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   1887,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   1887,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   1888,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   1888,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   1889,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   1889,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   1889,
+   ".kfoc «Sai đi dò la · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   1890,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Tin báo: 3 tin mới»"
+  ],
+  [
+   1890,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Việc nhờ»"
+  ],
+  [
+   1890,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   1890,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «mưa thu»"
+  ],
+  [
+   1892,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Tư trang»"
+  ],
+  [
+   1892,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Giao tình»"
+  ],
+  [
+   1892,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Về phòng»"
+  ],
+  [
+   1893,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Mục tiêu chương»"
+  ],
+  [
+   1893,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Phe phái»"
+  ],
+  [
+   1893,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «mưa thu»"
+  ],
+  [
+   1894,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Bạc5Sức100/100»"
+  ],
+  [
+   1895,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Chọn chính mình»"
+  ],
+  [
+   1895,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Hành sự»"
+  ],
+  [
+   1895,
+   ".kfoc «Sai đi dò la · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   1896,
+   ".kfoc «Sai đi dò la · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   1896,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   1896,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   1896,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   1896,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   1897,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   1897,
+   ".kfoc «Đổi việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   1897,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   1897,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   1898,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   1898,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   1898,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   1898,
+   ".kfoc «Sai đi dò la · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   1899,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   1899,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   1899,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   1899,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   1900,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   1900,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   1900,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   1900,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   1901,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   1901,
+   ".kfoc «Đổi việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   1901,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   1901,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   1902,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   1902,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   1902,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   1902,
+   ".kfoc «Đổi việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   1902,
+   ".kfoc «Đổi việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   1903,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   1903,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   1903,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   1903,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   1904,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   1904,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   1904,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   1904,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   1905,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   1905,
+   ".kfoc «Lui»"
+  ],
+  [
+   1906,
+   ".dlg «Chương 1 · Nhập cung, đứng vững» «Danh hiệu 2/35»"
+  ],
+  [
+   1906,
+   ".dlg «Danh hiệu» «Mục tiêu»"
+  ],
+  [
+   1906,
+   ".dlg «Chương 1 · Nhập cung, đứng vững» «Đi làm: Thay y phục hay trang sức trong Tư trangTố»"
+  ],
+  [
+   1907,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   1908,
+   ".dlg «Sai Thu Thiền đi dò la» «PhiĐoan Mộc Tố NgaCó cơTốnkhôngĐượcbiết 2 điều thậ»"
+  ],
+  [
+   1918,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   1920,
+   "DEAD Lui"
+  ],
+  [
+   1921,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   1923,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   1923,
+   ".dlg «Kính sự phòng» «Chặn ngự giáTùy duyênTốnkhôngĐượcdựa vào nhan sắc,»"
+  ],
+  [
+   1924,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   1924,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   1925,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   1926,
+   ".dlg «Tin trong cung buổi này» «»"
+  ],
+  [
+   1927,
+   ".dlg «Tâm trạng · Thường tại Thôi Thục Ý» «Lui»"
+  ],
+  [
+   1928,
+   ".dlg «Tin trong cung buổi này» «»"
+  ],
+  [
+   1928,
+   ".dlg «Tâm trạng · Thường tại Thôi Thục Ý» «Lui»"
+  ],
+  [
+   1929,
+   ".dlg «Tin trong cung buổi này» «»"
+  ],
+  [
+   1930,
+   ".dlg «Tâm trạng · Thường tại Thôi Thục Ý» «Lui»"
+  ],
+  [
+   1930,
+   ".dlg «Tin trong cung buổi này» «»"
+  ],
+  [
+   1931,
+   ".dlg «Tâm trạng · Thường tại Thôi Thục Ý» «Lui»"
+  ],
+  [
+   1932,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1936,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1936,
+   ".dlg «Kỳ nguyệt sự» «Báo sớm, nói đã sạch kỳRất vữngTốnkhôngĐượcthẻ bài»"
+  ],
+  [
+   1937,
+   ".dlg «Tiết Vạn thọ · Thi vẽ tranh “Tùng hạc”» «Bỏ thiTốnkhôngĐượckhông»"
+  ],
+  [
+   1938,
+   ".dlg «Tết Trùng cửu · Lời mời: Thi cắm hoa cúc» «Ghi tên dự thi cắm hoaHiểmTốnkhôngĐượcđoạt giải, b»"
+  ],
+  [
+   1938,
+   ".dlg «Tiết Vạn thọ · Chuyện bên lề hội» «Cho nàng ta đứng cạnh, giới thiệu vài ngườiTốnSức »"
+  ],
+  [
+   1939,
+   ".dlg «Xét phẩm cuối tháng · Thường tại» «Lui»"
+  ],
+  [
+   1940,
+   ".dlg «Tiết Vạn thọ · Hội thi vẽ: kết quả» «Lui»"
+  ],
+  [
+   1941,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1941,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1942,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1942,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1942,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1942,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1943,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1943,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1943,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1943,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1943,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1951,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Tin báo: 1 tin mới»"
+  ],
+  [
+   1951,
+   ".dlg «Tin báo» «Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu»"
+  ],
+  [
+   1952,
+   ".dlg «Tin chờ người sai đi» «Lui»"
+  ],
+  [
+   1959,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Lễ vật 1»"
+  ],
+  [
+   1959,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   1960,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Về phòng»"
+  ],
+  [
+   1960,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   1960,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Cung nữ thân tín tam đẳngThu Thiền»"
+  ],
+  [
+   1961,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1961,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   1961,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   1962,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1962,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   1963,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   1963,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1964,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   1964,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   1965,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Lịch tháng»"
+  ],
+  [
+   1966,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   1966,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Thư từ»"
+  ],
+  [
+   1966,
+   "#kchatp «Gửi»"
+  ],
+  [
+   1966,
+   "#kchatp «Gửi»"
+  ],
+  [
+   1967,
+   "#kchatp «Gửi»"
+  ],
+  [
+   1967,
+   "#kchatp «Gửi»"
+  ],
+  [
+   1967,
+   "#kchatp «Lui»"
+  ],
+  [
+   1968,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   1968,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   1968,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   1969,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   1969,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   1969,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Hôm nay mặt mộc»"
+  ],
+  [
+   1970,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   1971,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   1971,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   1971,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Sẵn sàng»"
+  ],
+  [
+   1971,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Thư từ»"
+  ],
+  [
+   1972,
+   "#kchatp «Lui»"
+  ],
+  [
+   1972,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Túi đồ»"
+  ],
+  [
+   1973,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Mệnh truyện»"
+  ],
+  [
+   1973,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Quẻ Thượng thượng (Con cái)»"
+  ],
+  [
+   1973,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Tư trang»"
+  ],
+  [
+   1974,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Thuốc men 0»"
+  ],
+  [
+   1974,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Ân tình (đêm)25»"
+  ],
+  [
+   1974,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Hôm nay mặt mộc»"
+  ],
+  [
+   1975,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Hậu cung»"
+  ],
+  [
+   1976,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Nam nhân»"
+  ],
+  [
+   1976,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Tai mắt0»"
+  ],
+  [
+   1976,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Thư từ»"
+  ],
+  [
+   1977,
+   "#kchatp «Lui»"
+  ],
+  [
+   1977,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Thủ Nhân»"
+  ],
+  [
+   1978,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Tài nghệ»"
+  ],
+  [
+   1978,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Có thaiRất thấp»"
+  ],
+  [
+   1978,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Tin báo»"
+  ],
+  [
+   1979,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «ⓘ luật Đức»"
+  ],
+  [
+   1979,
+   ".dlg «Đức» «Lui»"
+  ],
+  [
+   1980,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Tác phẩm»"
+  ],
+  [
+   1981,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Tâm trạngBình thản-10»"
+  ],
+  [
+   1981,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   1982,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Cầm kỳ thi họa 8/12»"
+  ],
+  [
+   1982,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Vũ · Y · Nữ công 8/12»"
+  ],
+  [
+   1983,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Quẻ Thượng thượng (Con cái)»"
+  ],
+  [
+   1983,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Xét phẩm: thiếu 1»"
+  ],
+  [
+   1983,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Sắc99Tài66Tâm cơ20Đức30Danh28Sủng17»"
+  ],
+  [
+   1983,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Về phòng»"
+  ],
+  [
+   1984,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Xét phẩm: thiếu 1»"
+  ],
+  [
+   1984,
+   "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Dư đồ»"
+  ],
+  [
+   1984,
+   ".mapsc «Hành sự»"
+  ],
+  [
+   1985,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1985,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1986,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1986,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1986,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   1987,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   1987,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   1987,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   1987,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   1987,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   1988,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   1988,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   1988,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   1988,
+   ".kfoc «Đổi việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   1989,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   1989,
+   ".kfoc «Sai đi dò la · Có cơ · Tốn 2 khắc»"
+  ],
+  [
+   1990,
+   ".kfoc «Sai đi dò la · Có cơ · Tốn 2 khắc»"
+  ],
+  [
+   1991,
+   ".kfoc «Sai đi dò la · Có cơ · Tốn 2 khắc»"
+  ],
+  [
+   1992,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   1992,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   1993,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   1993,
+   ".kfoc «Sai đi dò la · Có cơ · Tốn 2 khắc»"
+  ],
+  [
+   1994,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   1994,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   1994,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   1995,
+   ".kfoc «Đổi việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   1995,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   1995,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   1995,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   1996,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   1996,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   1996,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   1996,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   1997,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   1997,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   1997,
+   ".kfoc «Đổi việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   1997,
+   ".kfoc «Đổi việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   1998,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   1998,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   1998,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   1998,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   1999,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   1999,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   1999,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   1999,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   2000,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   2000,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   2000,
+   ".kfoc «Mưu kế 0/1»"
+  ],
+  [
+   2001,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   2001,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   2001,
+   ".kfoc «Buôn bán 1/1»"
+  ],
+  [
+   2001,
+   ".kfoc «Giao thiệp 2/2»"
+  ],
+  [
+   2002,
+   ".kfoc «Lui»"
+  ],
+  [
+   2015,
+   "DEAD Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu"
+  ],
+  [
+   2036,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2050,
+   "DEAD Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu"
+  ],
+  [
+   2092,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2105,
+   "DEAD Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu"
+  ],
+  [
+   2113,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2126,
+   "DEAD Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu"
+  ],
+  [
+   2184,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2198,
+   "DEAD Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu"
+  ],
+  [
+   2208,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2218,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2224,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2230,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2243,
+   "DEAD Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu"
+  ],
+  [
+   2263,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2270,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2276,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2289,
+   "DEAD Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu"
+  ],
+  [
+   2303,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2317,
+   "DEAD Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu"
+  ],
+  [
+   2379,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2392,
+   "DEAD Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu"
+  ],
+  [
+   2412,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2426,
+   "DEAD Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu"
+  ],
+  [
+   2439,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2453,
+   "DEAD Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu"
+  ],
+  [
+   2573,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   2576,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   2577,
+   ".dlg «Kính sự phòng» «Tranh sủngKhó lườngTốnkhôngĐượcdựa vào ân sủng; tà»"
+  ],
+  [
+   2577,
+   "#kg82 «Trước khi ra tay»"
+  ],
+  [
+   2578,
+   "#kg82 «Trước khi ra tay»"
+  ],
+  [
+   2579,
+   "#kg82 «Trước khi ra tay»"
+  ],
+  [
+   2580,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   2581,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   2582,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   2584,
+   "#kmrew «ThườngHoa điền hoa đàoDán trán khi điểm trang: đặt»"
+  ],
+  [
+   2584,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2585,
+   "#kmrew «Thường»"
+  ],
+  [
+   2586,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2587,
+   "#kmrew «Thường»"
+  ],
+  [
+   2587,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2588,
+   "#kmrew «Thường»"
+  ],
+  [
+   2588,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2589,
+   "#kmrew «ThườngHoa điền hoa đàoDán trán khi điểm trang: đặt»"
+  ],
+  [
+   2590,
+   ".dlg «Lui»"
+  ],
+  [
+   2590,
+   "#kmrew «ThườngHoa điền hoa đàoDán trán khi điểm trang: đặt»"
+  ],
+  [
+   2591,
+   ".dlg «Lui»"
+  ],
+  [
+   2592,
+   "#kmrew «Thường»"
+  ],
+  [
+   2592,
+   ".dlg «Lui»"
+  ],
+  [
+   2593,
+   "#kmrew «ThườngHoa điền hoa đàoDán trán khi điểm trang: đặt»"
+  ],
+  [
+   2593,
+   ".dlg «Lui»"
+  ],
+  [
+   2594,
+   "#kmrew «Nhận»"
+  ],
+  [
+   2594,
+   "#kmrew «Nhận»"
+  ],
+  [
+   2600,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2614,
+   "DEAD Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu"
+  ],
+  [
+   2616,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2629,
+   "DEAD Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu"
+  ],
+  [
+   2637,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2641,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2653,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2666,
+   "DEAD Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu"
+  ],
+  [
+   2667,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2675,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2688,
+   "DEAD Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu"
+  ],
+  [
+   2697,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2710,
+   "DEAD Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu"
+  ],
+  [
+   2814,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2828,
+   "DEAD Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu"
+  ],
+  [
+   2834,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2846,
+   "#modal «Trăng soi rèm ngọc» «Lui»"
+  ],
+  [
+   2859,
+   "DEAD Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu"
+  ],
+  [
+   2867,
+   "DEAD unstick ✕"
+  ],
+  [
+   2869,
+   "title (unstick reload) «cùng hảo hữu»"
+  ],
+  [
+   2870,
+   "title (unstick reload) «trở lại phòng|vào lại phòng|về phòng»"
+  ]
+ ],
+ "_ckAt": 1795616860406,
+ "_ckB": 72,
+ "dumps": [
+  "/home/user/wt/out/u1b/shots-coop-rt-s117-guest-k1/stuck-1-dump.json"
+ ]
+}
