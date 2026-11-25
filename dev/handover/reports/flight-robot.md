@@ -96,3 +96,21 @@ jcoopworld.js nCheck: `if(host()&&CW.ngo===w&&CW.ngoW!==w&&nAtNight())CW.ngoW=w;
 Side lead (not fixed here): in the HOSTDIE run after the rebirth, «one j61 key = one person» FAILs ×4 (x33 = two men on one key, after week 3 / rejoin) — a host rebirth mid-room gives a j61 key clash; separate family, not a stall.
 
 READY flight-coop-sync 4cb42b96.
+
+## REVIEW flight-coop-sync (BIG REVIEWER opus, 25/11)
+PRIORITY #1 CHECK ('ngoW' / 'nCheck host' / 'coop-week-stall'): OD 0 | ledger 0 | main: guest-side twin «review/coop-week-stall» (jcoopworld sendMe comment + nOtherEnded line) | review/* this branch only | claims: this review. Reused coop-e2e harness, no new test file.
+Verdict: **PASS — review/flight-coop-sync-r 7902247b** (= 4cb42b96 + merge of origin/main 4da55ce8; conflict index.html/sw.js only, rebuilt with build_site.sh). origin/main 4da55ce8 IS review/flight-modal-deadlock-r 4da55ce8, so the trial merge with it = this merge (clean apart from the built files; all tests below include it).
+
+| check | result |
+|---|---|
+| 1 root, not a patch | PASS. Cause = sendMe (new life) resets nrdy/ngoW, host's commit CW.ngo stays → no line re-opens the host gate. New line opens ngoW only when CW.ngo===w (host already committed this week); in every normal flow nGoNow already set ngoW=w, so it changes nothing else. Seat states: host committed+died+reborn → own night runs once (gate still blocks on CW.sent===w, pend, dialogs) → no double night; host not committed → line inert, old commit rules; guest any state → line is host-only, guest twin unchanged; week change → CW.ngo≠w, inert → no skipped night, no early week step (room week still steps on the server when both ended). |
+| 2 law 11 family (resets of nrdy / ngoW / ngo / sent / pend) | PASS. sendMe :309 (rebirth) — host now fixed, guest by nOtherEnded + nResync rd→go. restore :1453 (rejoin/reload) — snap holds nrdy/sent/pend, refused when sent===wk; ngo/ngoW not restored → fresh host page has ngo≠w → normal commit path (nfr / nOtherEnded / thin E a.b), no shut gate. begin :868 (relink same page) — resets sent only, keeps ngo/ngoW → consistent. stop :877 — leaves room. re-end :886 / :789 / reEnd :1466 — sent only. thin E jcoopthine :100 — guest ngoW from host view. Seat swap / re-host: none exist (host()=seat "a" fixed in every jcoop*.js). No other path leaves a gate shut. |
+| 3a COOP_HOSTDIE=1 on 49f17d4d (test file copied in) | FAIL as expected, SX8M state exactly: ngo 0 / ngoW −1 / nrdy −1, ended {a:false,b:true}, room week 0 stuck |
+| 3b COOP_HOSTDIE=1 on 4cb42b96 | 143/143 (host-reborn ok; j61 checks all ok this run) |
+| 3c COOP_HOSTDIE=1 on 7902247b | 139/143: host-reborn ok; 4 FAIL = side lead below only |
+| 3d coop-e2e plain on 7902247b (host Fold A, guest iPad B) | 142/142 |
+| 3e coop-e2e COOP_SWAP=1 on 7902247b | 142/142 |
+| 3f quickcheck 7902247b vs live 4da55ce8 | QUICKCHECK PASS 645 s, core gates + hooks PASS, old save ok, perf render 317/248, tab 677/640, buổi 1566/1365 ms (noise band; one-line logic change) |
+| laws 4 / 7 / 9 | no number, no player text, no UI touched |
+NOTE (harness, not this branch): coop-e2e's Fold viewport is 686x880@2.2, not 755x1000 — pre-existing in the harness.
+SIDE LEAD (law 6b, NOT a FAIL — F routes it): after a host rebirth «one j61 key = one person» FAILs ×4 on the host seat, key s1 = ["Tố Trân","San Hô"] (j61 key "s"+sid: the new life's staff sid restarts at 1 while the old life's servant sid 1 still lives in the world). Intermittent (0/10 on 4cb42b96, 4/10 on 7902247b). Not caused by this fix (it only opens the night gate; no staff code touched); unreachable on LIVE because LIVE stalls at that very rebirth — the fix unmasks it. Family to route: rebirth staff-id reuse (host and guest seats), j61 key / KREG.
