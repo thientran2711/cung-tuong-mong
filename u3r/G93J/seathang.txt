@@ -1,0 +1,2 @@
+3005:SEATHANG guest 2585s guest seat: no harness step for 5 min at buổi 63 (stage 1) · page.evaluate hung too
+3011:SEATHANG guest 2915s guest seat: no harness step for 5 min at buổi 63 (stage 1) · page.evaluate hung too

@@ -1,0 +1,1 @@
+guest renderer (ipad) RSS 3.86 GB at 100 % CPU while hung, fold renderer 1.58 GB; RSS grew 3.86 -> 4.00 GB in ~10 min
