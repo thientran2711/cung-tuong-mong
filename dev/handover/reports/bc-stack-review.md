@@ -163,3 +163,9 @@ VERDICT: PASS d417d3bb — runners may switch.
 - LIVE dbae89eb, bot sens, slice 10, RT_TEST_UNSTICK=3: Fold + iPad both {layer #rtTestLayer, hit 0, areaTaps 1, err null}; 0 stuck / dead / bugs, exitPick none, jsClicks 0.
 - Nit (not blocking): eslint is resolved from /opt/node-tools (this image); in a container without it require('eslint') throws at start-up (loud crash, not silent) — a try/catch that skips the scope part with a WARN would be kinder. FIXER #8 / later.
 VERDICT: PASS 247c7132 — runners may switch (supersedes d417d3bb).
+
+## BIG REVIEWER #7 — 25/11 ~17:45Z: HARNESS review/robot-realtap 1db0b186 (FIXER #7: failed-close memory, «Thư từ» Lui ×1528) — PASS
+- Diff 247c7132..1db0b186 (robot-rt.js only, + progress): per-dialog memory (layer + title without digits) of closes that left the same dialog open; pickClose (choose) and unstick try untried closes first, kit ✕ before text closes, skip a close after 3 failures; all spent → [game] bug once + level-3 reload; random lvl-2 picks still exclude EXIT/LEAVE/NAV. Env-gated RT_TEST_LUI hook. No .click()/dispatchEvent. robot-lint OK 0 findings.
+- LIVE dbae89eb, bot rand, slice 10, RT_TEST_LUI=3, Fold + iPad identical: A (Lui dead) 1 call closed · B (✕ dead) 2 calls closed · C (both dead) 7 calls + [game] «every close … tapped 3×» + reload, closed; 0 stuck / dead, exitPick none, jsClicks 0 (the one bug = the test's own).
+- Nit (not blocking): the memory is cleared only when a tap closes that dialog — after a reload the spent closes of that title stay spent for the rest of the life (fallback still picks list[0] in choose; unstick goes to a safe button). Consider clearing it on level-3 reload.
+VERDICT: PASS 1db0b186 — runners may switch (supersedes 247c7132).
