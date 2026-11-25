@@ -25,7 +25,8 @@
 const NT=window.NT={list:[],seq:0,chips:0,shown:[],log:[]};
 const $=id=>document.getElementById(id);
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const plain=s=>String(s==null?"":s).replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
+/* a notice is PLAIN prose: html tags are stripped, then the mask runs on the plain text (a «???» that sat inside a protected name chip — <b class="kname">Đáp ứng ???</b> — is bare prose once the tag is gone; owner flight bug 25/11 E-S7: «Đáp ứng ??? bán bớt đồ») */
+const plain=s=>kitNoUnk(String(s==null?"":s).replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim());
 const ms=()=>{try{return BAL.entryToastMs}catch(e){return 5000}};
 const cap=()=>{try{return BAL.noticeMax}catch(e){return 20}};
 const calm=()=>{try{return typeof reducedMotion==="function"&&reducedMotion()}catch(e){return false}};
