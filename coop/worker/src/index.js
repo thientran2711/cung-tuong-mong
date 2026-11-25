@@ -99,6 +99,10 @@ export class Room {
   socks(seat) { return this.ctx.getWebSockets(seat ? "seat-" + seat : undefined).filter(ws => { if (typeof ws.readyState === "number" && ws.readyState > 1) return false; const at = ws.deserializeAttachment && ws.deserializeAttachment(); return !(at && at.gone); }); }
   bury(ws, code, why) { try { const at = ws.deserializeAttachment() || {}; at.gone = 1; ws.serializeAttachment(at); } catch (e) {} try { ws.close(code, why); } catch (e) {} }
   online(seat) { return this.socks(seat).length > 0; }
+  /* review/coop-presence-reload: ONE presence rule. Every message that carries the seats (room, presence) is stamped with ps, a clock that only
+     goes up (wall ms, +1 within one event; it survives hibernation because the wall clock does). The client keeps the newest view only, so a
+     view read earlier but delivered later (a room reply compressed while the friend rejoined) can never undo a newer one. */
+  psNext() { this.psq = Math.max((this.psq || 0) + 1, Date.now()); return this.psq; }
   seatsView() {
     const m = this.meta, o = {};
     for (const x of ["a", "b"]) { const s = m.seats[x]; o[x] = s ? { name: s.name || "", online: this.online(x) } : null; }
@@ -110,7 +114,7 @@ export class Room {
   }
   async bcast(obj, exceptWs) { const s = JSON.stringify(obj); let z = null; if (s.length > BIG) z = await gzipText(s);
     for (const ws of this.socks()) { if (ws === exceptWs) continue; try { ws.send(z || s); } catch (e) {} } }
-  async presence() { await this.bcast({ t: "presence", seats: this.seatsView(), ended: this.endedView(), week: this.meta.week, buoi: this.meta.buoi || 0, bended: this.bendedView() }); }
+  async presence() { await this.bcast({ t: "presence", ps: this.psNext(), seats: this.seatsView(), ended: this.endedView(), week: this.meta.week, buoi: this.meta.buoi || 0, bended: this.bendedView() }); }
   bendedView() { const e = this.meta.bended || {}; return { a: !!e.a, b: !!e.b }; }
   buoiView() { const m = this.meta; return { buoi: m.buoi || 0, bended: this.bendedView(), where: m.where || null, pos: m.pos || {} }; }
   endedView() { const e = this.meta.ended || {}; return { a: !!e.a, b: !!e.b }; }
@@ -147,7 +151,7 @@ export class Room {
       s2.serializeAttachment({ seat, last: Date.now() });
       const C = await this.loadC();
       const mine = await this.seatCopy(seat);
-      await this.send(s2, { t: "room", code: m.code, you: seat, seats: this.seatsView(), week: m.week, ended: this.endedView(), state: C, chat: await this.chatLoad(), ...this.buoiView(), mine, msv: (m.sv && m.sv[seat]) || 0, caps: ["seatd", "thin"], thin: m.thin || 0 });
+      await this.send(s2, { t: "room", code: m.code, you: seat, ps: this.psNext(), seats: this.seatsView(), week: m.week, ended: this.endedView(), state: C, chat: await this.chatLoad(), ...this.buoiView(), mine, msv: (m.sv && m.sv[seat]) || 0, caps: ["seatd", "thin"], thin: m.thin || 0 });
       if (seat === "b" && m.thin && m.hv) await this.snapTo(s2);   /* thin guest: her view = the host's latest snapshot */
       await this.presence();
       await this.ctx.storage.setAlarm(Date.now() + 20000);
@@ -158,11 +162,18 @@ export class Room {
 
   async webSocketMessage(ws, data) {
     let msg; try { const s = typeof data === "string" ? data : await gunzipText(data); if (s.length > 9e6) throw 0; msg = JSON.parse(s); } catch (e) { return this.send(ws, { t: "error", code: "bad", msg: "bad message" }); }
-    const at = ws.deserializeAttachment() || {}; const seat = at.seat; if (!seat || at.gone) return; /* a buried socket (stale / replaced) never writes again */
+    const at = ws.deserializeAttachment() || {}; const seat = at.seat;
+    /* a buried socket (stale / replaced) never writes again. review/coop-presence-reload: it is told so (a page that never got the close frame,
+       e.g. its tab hung while the alarm buried it, kept sending into nothing and its friend read it absent for ever) and closed again */
+    if (!seat || at.gone) { if (seat && !(typeof data === "string" && data === '{"t":"ping"}')) { await this.send(ws, { t: "error", code: "gone" }); try { ws.close(4003, "gone"); } catch (e) {} } return; }
     at.last = Date.now(); ws.serializeAttachment(at);
     const m = await this.loadMeta(); if (!m) return;
     const t = msg.t;
     if (t === "ping") return this.send(ws, { t: "pong" });
+    /* review/coop-presence-reload: "who" = this seat asks for the room's presence now (its view says the friend is away); "here" = a seat that
+       (re)joined and applied its room reply re-announces itself: everybody gets a fresh presence after it */
+    if (t === "who") return this.send(ws, { t: "presence", ps: this.psNext(), seats: this.seatsView(), ended: this.endedView(), week: m.week, buoi: m.buoi || 0, bended: this.bendedView() });
+    if (t === "here") return this.presence();
     if (t === "bend") {
       if (msg.week !== m.week || msg.buoi !== (m.buoi || 0)) return this.send(ws, { t: "error", code: "badbuoi", msg: "tuần " + m.week + " buổi " + (m.buoi || 0) });
       /* buổi per week: 3 (old clients) or what the host said at init (4 since jtime4: sáng, trưa, chiều, tối) */
@@ -354,10 +365,14 @@ export class Room {
     await this.presence();
   }
 
-  async webSocketClose(ws) { try { ws.close(); } catch (e) {} await this.loadMeta(); if (this.meta) await this.presenceSoon(ws); }
+  async webSocketClose(ws) { try { ws.close(); } catch (e) {} await this.loadMeta(); if (!this.meta) return;
+    /* review/coop-presence-reload: the newest socket of a seat wins. An old socket that was already replaced / buried closing late (the reloaded
+       page's socket, a twin abandoned while connecting) never marks the seat absent: nothing changed, nothing is sent */
+    const at = ws.deserializeAttachment && ws.deserializeAttachment(); if (at && at.gone) return;
+    await this.presenceSoon(ws); }
   async webSocketError(ws) { await this.webSocketClose(ws); }
   async presenceSoon(closed) {
-    const s = { t: "presence", seats: this.seatsView(), ended: this.endedView(), week: this.meta.week };
+    const s = { t: "presence", ps: this.psNext(), seats: this.seatsView(), ended: this.endedView(), week: this.meta.week };
     // the closing socket may still be listed; correct it
     const at = closed && closed.deserializeAttachment && closed.deserializeAttachment();
     if (at && at.seat && s.seats[at.seat]) s.seats[at.seat].online = this.socks(at.seat).filter(w => w !== closed).length > 0;
