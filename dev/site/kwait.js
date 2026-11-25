@@ -57,6 +57,8 @@ window.CTM_WAIT=window.CTM_WAIT||{
  coopJoinErr:"Chưa vào được phòng. Xem lại đường xa rồi thử lại.",
  coopCutMe:"Đường xa của ngươi vừa đứt. Đang tự nối lại, không mất gì.",
  coopAway:"đang vắng hay đứt đường xa · hảo hữu mở lại là tự vào lại",
+ /* m-fix-1 (robot M4 25/11): «Sang buổi / Sang ngày mới» held because a card waits behind what she has open (jdayq gate (c): a person view, a mini-game …) */
+ dqHeld:"Có tin đang chờ · xong việc đang làm đã",
  coopWaitPeer:"Chờ hảo hữu…",
  coopWaitPeer2:"Đợi hảo hữu",
  coopWaitBuild:"Đợi cùng bản mới",

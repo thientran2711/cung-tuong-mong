@@ -109,6 +109,19 @@ function kidPickActs(e,ix,pick){const W=typeof WD_ITEMS==="object"?WD_ITEMS:{};c
   const over=it.rk&&it.rk>S.rank;return[pbtn(`data-kinvact="wear" data-ix="${ix}"`,"Đeo",`thành: ${kinvPlain(it.w)}${over?" · kèm: vượt phẩm, dễ bị tố":""}`,"")]}catch(err){return[]}}
 document.addEventListener("keydown",ev=>{const f=document.getElementById("kidfl");if(f&&ev.key==="Escape"){ev.stopPropagation();ev.preventDefault();kitItemCardClose();return}
  if((ev.key==="Enter"||ev.key===" ")&&ev.target&&ev.target.dataset&&ev.target.dataset.kid!=null){ev.preventDefault();ev.target.click()}},true);
+/* m-fix-2 (LUẬT SỬA CẢ NHÓM): the ONE «còn N lần dùng» note builder for the item detail «Ghi chú». It GROUPS the player's entries
+   (bottles, boxes) by what they show: 40 bottles of one oil were 40 lines «còn 6 lần dùng» (robot s5d stuck: the card filled the screen).
+   kitUseNote(E,{unit:"lọ",pre:e=>"màu đỏ"}) → ["mỗi lọ còn 6 lần dùng"] / ["tổng còn 38 lần dùng","5 lọ còn 6 lần dùng","1 lọ còn 2 lần dùng"]; ≤ BAL.itd.useGroups lines. */
+function kitUseNote(E,o){o=o||{};const unit=o.unit||"món",pre=o.pre||null,L=(E||[]).filter(e=>e&&e.u!=null);if(!L.length)return[];
+ if(L.length===1){const e=L[0],p=pre?pre(e):"";return[`${p?p+": ":""}còn ${e.u} lần dùng`]}
+ const cap=Math.max(2,((typeof BAL==="object"&&BAL.itd&&BAL.itd.useGroups)|0)||4),sum=L.reduce((a,e)=>a+(e.u|0),0),G=new Map();
+ /* with a label (box colour): one line per label «màu đỏ: 3 hộp, mỗi hộp còn 6 lần dùng»; without: one line per lượt left «5 lọ còn 6 lần dùng» */
+ for(const e of L){const key=pre?pre(e)||"":String(e.u);const g=G.get(key);if(g){g.n++;g.s+=e.u|0;g.us.add(e.u)}else G.set(key,{p:pre?key:"",u:e.u,n:1,s:e.u|0,us:new Set([e.u])})}
+ const A=[...G.values()];if(!pre)A.sort((a,b)=>b.u-a.u);
+ const line=g=>pre?`${g.p}: ${g.n===1?`còn ${g.s} lần dùng`:g.us.size===1?`${g.n} ${unit}, mỗi ${unit} còn ${g.u} lần dùng`:`${g.n} ${unit}, còn ${g.s} lần dùng`}`:`${g.n} ${unit} còn ${g.u} lần dùng`;
+ if(A.length===1){const g=A[0];return[pre?line(g):`mỗi ${unit} còn ${g.u} lần dùng`]}
+ const out=[`tổng còn ${sum} lần dùng`].concat(A.slice(0,cap).map(line));
+ if(A.length>cap){const r=A.slice(cap).reduce((a,g)=>a+g.n,0);out.push(`và ${r} ${unit} khác`)}return out}
 /* older row builders → the one block (same rows everywhere) */
 if(typeof kitItemRows==="function")kitItemRows=function(k,o){o=o||{};return kitItemDetailRows(o.e?{e:o.e}:{k},o)};
 if(typeof wdItemRowsE==="function")wdItemRowsE=function(e,o){return kitItemDetailRows(e&&e.k?{e}:e,o)};

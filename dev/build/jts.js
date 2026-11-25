@@ -115,7 +115,7 @@ function tsEngSteer(box,env){const C=kg82Canvas(box,1.05,470),{g,W,H}=C;const lv
  raf=requestAnimationFrame(frame);return()=>{stop=true;cancelAnimationFrame(raf)}}
 Object.assign(KG82_ENG,{tspluck:tsEngPluck,tssteer:tsEngSteer});
 /* tsGame({kind, art, title, odds (cơ may thường 0–100), risk, ctx, intro:[rows], onDone(res)}): res {raw 0–10, skipped, guard} */
-function tsGame(o){const odds=oddsCl(Math.round(o.odds||50));const skipRes=()=>{const ok=roll(odds);return{raw:ok?7:3,skipped:true,ok,guard:o.risk?(roll(odds)?1:0):null}};
+function tsGame(o){const odds=oddsCl(Math.round(o.odds||50));const skipRes=()=>{const ok=roll(odds);return{raw:ok?kitSkipCap(BAL.skip.raw):3,skipped:true,ok,/* m-fix-1: a won skip = the capped mark (was 7 = Giỏi, beat a Khá own play) */guard:o.risk?(roll(odds)?1:0):null}};
  if(tsBot()||typeof kg82Open!=="function"){const r=skipRes();setTimeout(()=>o.onDone(r),0);return}
  const K=KG82_KIND[o.kind];KG82.ctx=o.ctx||"hoc";KG82.tsRisk=o.risk||null;KG82.tsGuard=null;try{mgSet(o.kind,{occ:o.occ||"trieu"})}catch(e){KG82.lv=0}kg82Preload(o.kind);
  const d=kg82Open({art:o.art||K.n,title:o.title||K.t,how:K.how,pic:typeof kg82Pic==="function"?kg82Pic(o.kind):""});if(!d){o.onDone(skipRes());return}const box=kg82Box();

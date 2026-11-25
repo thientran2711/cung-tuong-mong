@@ -59,7 +59,7 @@ function kcgFestRes(t,raw,extra,b){const F=BAL.kcg.fest;let txt;
 kcFest=function(t,art,extra){const b=rsnap();const kind=KCFEST[t]||art;
  if(window.__bot||typeof playArt!=="function"||!isKc()){kcgFestRes(t,cl(BAL.kcg.fest.bot[0]+R(BAL.kcg.fest.bot[1]),0,10),extra,b);return}
  let done=0;const fin=raw=>{if(done)return;done=1;kcgFestRes(t,raw,extra,b);try{showModal()}catch(e){}};
- try{playArt({art:kind,occ:"hoi",title:t,note:"Thứ hạng ở hội tính theo màn chơi",quick:{n:"Để tài nghệ quyết định",sub:`tính ${BAL.kcg.fest.skip}/10, như người cùng bậc`},onDone:(raw,o)=>fin(o&&o.skipped?BAL.kcg.fest.skip:raw)})}catch(e){console.error(e);fin(BAL.kcg.fest.skip)}};
+ try{playArt({art:kind,occ:"hoi",title:t,note:"Thứ hạng ở hội tính theo màn chơi",quick:{n:"Để tài nghệ quyết định",sub:`tính ${kitSkipCap(BAL.kcg.fest.skip)}/10, tự thi giỏi thì hơn`},onDone:(raw,o)=>fin(o&&o.skipped?kitSkipCap(BAL.kcg.fest.skip):raw)})}catch(e){console.error(e);fin(kitSkipCap(BAL.kcg.fest.skip))}};
 
 /* ---------- OR08 carry-over at palace entry (OUTSIDE_PLAN §9 table + "Thư nhà" line) ----------
    (1) Sắc/Tài/Tâm cơ/Đức/Sức: each at most BAL.kcg.carry.cap over its value at the start of the home road (S.kc.st0, written at kcInit;
