@@ -902,7 +902,11 @@ function kitOvBtn(){const ov=document.getElementById("ov");if(!ov||ov.hidden)ret
  new MutationObserver(()=>{try{if(ov.hidden)return;if(!live()){ov.hidden=true}}catch(e){}}).observe(ov,{childList:true,attributes:true,attributeFilter:["hidden"],subtree:false});
  if(typeof resumeMG==="function"){const r0=resumeMG;resumeMG=function(){let r;try{r=r0.apply(this,arguments)}catch(e){console.error("resumeMG",e)}try{if(S&&S.mg&&ov.hidden){console.warn("lesson game did not open; S.mg cleared",S.mg);S.mg=null}}catch(e){}return r};window.resumeMG=resumeMG}
  if(typeof kg82Close==="function"){const c0=kg82Close;kg82Close=function(){const r=c0.apply(this,arguments);try{if(!ov.hidden&&!live())ov.hidden=true}catch(e){}return r};window.kg82Close=kg82Close}})();
-function kitOvSync(){try{const b=kitOvBtn();if(!b)return;if(!b.hidden)b.hidden=true;const row=b.parentElement;if(row&&row!==b.closest(".kpanel,.mg")&&![...row.children].some(c=>!c.hidden)&&!row.hidden)row.hidden=true;
+/* m-fix-2 (LUẬT SỬA CẢ NHÓM, robot F M-FIX-2 item 1): only a PLAIN close word («Đã hiểu», «Xong») is hidden — owner OD:L1352 «không cần cái chữ
+   đã hiểu» (info frames close with ✕ / tap outside). A result button that says what comes next («Môn kế tiếp», «Xem kết quả», «Thử môn khác»,
+   «Dừng ở đây») is a step, not a close word: it stays on screen (it was hidden too and the only way on was a ✕ «Quay lại» that went forward). */
+function kitOvPlain(b){return /^(Đã hiểu|Xong)$/.test(String(b&&b.textContent||"").replace(/\s+/g," ").trim())}
+function kitOvSync(){try{const b=kitOvBtn();if(!b)return;if(kitOvPlain(b)){if(!b.hidden)b.hidden=true;const row=b.parentElement;if(row&&row!==b.closest(".kpanel,.mg")&&![...row.children].some(c=>!c.hidden)&&!row.hidden)row.hidden=true}
  const pan=b.closest("#kg82, .mg")||b.closest(".kpanel");if(!pan||pan.querySelector(".kit-x[data-kitx=ov],.kit-x[data-kitx=kgback]"))return;/* §13.9: the game frame already has its kit ✕ «Quay lại» (it presses this button on a result screen) */const h=pan.querySelector(".kph");
  const html=kitXHTML('data-kitx="ov"');if(h){if(getComputedStyle(h).position==="static")h.style.position="relative";h.insertAdjacentHTML("beforeend",html)}else{pan.style.position=pan.style.position||"relative";pan.insertAdjacentHTML("afterbegin",html);pan.firstElementChild.classList.add("kxabs")}
  const x=pan.querySelector(".kit-x[data-kitx=ov]");x.addEventListener("click",e=>{e.stopPropagation();e.preventDefault();const c=kitOvBtn();if(c)c.click()})}catch(e){console.error("kitOvSync",e)}}

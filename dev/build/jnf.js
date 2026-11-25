@@ -264,7 +264,7 @@ const TM={t0:0,id:null,stop(){if(this.id){clearInterval(this.id);this.id=null}th
   this.id=setInterval(()=>{try{const x=X();if(!x||x.me!==undefined){this.stop();return}const left=E-(Date.now()-this.t0);
    const el=document.querySelector("#mb .kchips.kctm");if(el&&typeof kitCoopClock==="function")el.outerHTML=kitCoopClock({left:Math.max(0,left),len:E});   /* the kit text pass drops the wrapper id: find the chip row itself */
    if(left<=0){this.stop();const i=Q.findIndex(m=>m&&m.pid==="nfch");
-    if(i===0&&!$("modal").hidden){const j=Q[0].opts.findIndex(c=>c.n==="Thôi");chooseM(j)}else{if(i>=0)Q.splice(i,1);mine(null);try{showModal();render()}catch(e){}}}}catch(e){console.error(e)}},250)}};
+    const j=i===0&&!$("modal").hidden?Q[0].opts.findIndex(c=>c&&c.n==="Thôi"):-1;/* flight-choose-guard: never chooseM(−1) */if(j>=0)chooseM(j);else{if(i>=0)Q.splice(i,1);mine(null);try{showModal();render()}catch(e){}}}}catch(e){console.error(e)}},250)}};
 if(typeof showModal==="function"){const sm0=showModal;showModal=function(){
  /* the scene just closed and the choice is due: it goes up first (showChoice puts it at the front), never a card queued meanwhile
     (a reward, a person met) in the ≤250 ms before step's next tick (owner OD 16/11 22:45Z: the choice right after the scene) */
