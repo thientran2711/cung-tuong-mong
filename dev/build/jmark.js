@@ -195,6 +195,8 @@ try{new MutationObserver(ms=>{if(ms.every(m=>m.target.closest&&m.target.closest(
 /* KIT §41.2 kitMeMapMark(): the SAME marker (her owned rank marker, same glow + squash-bounce loop) over HER place on the Dư đồ (owner 17/11 ~12:20Z "dấu ấn ta ở đây ở trên dư đồ"); the map label shows it above the place name, in the label's own scale. */
 .kmmapmk{position:absolute;left:50%;bottom:calc(100% - 1px);height:calc(36px * var(--kmm-mapsc,1));aspect-ratio:1;transform:translateX(-50%);z-index:6;pointer-events:none;display:block;--dh:${KMM_GOLD}}
 .mspot .mlab:has(>.kmmapmk){position:relative;overflow:visible!important}
+/* KIT §41.2b (owner 24/11 ~22:00Z): «Ta đang ở đây» is ALWAYS the top layer of every map (Dư đồ, area maps, lazy plaques): her spot is its own stacking context ABOVE every other plaque/label (covering another place's words is fine; hiding her marker is not) */
+html body .mspot.here{z-index:30}
 .kmmapmk>img{display:block;width:100%;height:100%;object-fit:contain;object-position:50% 100%;transform-origin:50% 100%}
 @media (prefers-reduced-motion:no-preference){.kmmapmk.kmmove>img{animation:kmmBob 2.6s linear infinite;will-change:transform}}
 .kmemark{--dh:${KMM_GOLD};position:absolute;z-index:6;pointer-events:none;display:block}
