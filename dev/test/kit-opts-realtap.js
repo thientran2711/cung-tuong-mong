@@ -1,12 +1,12 @@
 /* kit-opts-realtap (KIT BUG #2, MAIN 135 / robot M4 25/11): in every modal option frame the option list box sits fully inside the visible frame, and the LAST option of a long list is reachable by a REAL tap: wheel the list to its end, touchscreen-tap the centre of the last option, elementFromPoint must be that option, and the tap must fire it (modal closes / queue changes). Frames: the 11 reign beats (PEND rg, loaded with a reign state) + night1 + several long PEND lists.
-   usage: node dev/test/kit-opts-realtap.js <index.html> <outdir> [WxH,..]   env MUTATE=1 (clip the frame at 62 % height: must FAIL) */
+   usage: node dev/test/kit-opts-realtap.js <index.html> <outdir> [WxH,..]   env MUTATE=1 (clip the frame at 62 % height AND push the option list 45vh out of it — the frame layout adapts to a clip alone, so the push is what bites: must FAIL on Fold AND iPad) */
 const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'127.0.0.1,localhost'}}:{});let bad=0;
  for(const wh of (SIZES||'755x1000,1180x820').split(',')){const [W,H]=wh.split('x').map(Number);
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});await ctx.addInitScript(()=>{window.__bot=1});
   const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
   await p.goto('file://'+require('path').resolve(SRC),{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function'&&typeof pushDil==='function');await p.waitForTimeout(2500);
-  await p.addStyleTag({content:'#dawn,.kroul,.kmbox,.kne,[class*=kmrew],.kmov,#kxcatch{display:none!important}'+(process.env.MUTATE?'html body #modal .dlg{max-height:62vh!important;overflow:hidden!important;top:5vh!important}':'')});
+  await p.addStyleTag({content:'#dawn,.kroul,.kmbox,.kne,[class*=kmrew],.kmov,#kxcatch{display:none!important}'+(process.env.MUTATE?'html body #modal .dlg{max-height:62vh!important;overflow:hidden!important;top:5vh!important}html body #modal .dlg .opts{transform:translateY(45vh)!important}':'')});
   await p.evaluate(()=>{document.getElementById('title').hidden=true;start();Q.length=0;document.getElementById('modal').hidden=true;S.ps=S.ps||{};S.reign=S.reign||{};window.__snap=JSON.stringify(ser())});
   const specs=await p.evaluate(()=>{const o=[];for(const k of Object.keys(RGBT)){try{const d=mkP('rg',{b:k});if(d)o.push(['rg',{b:k}])}catch(e){}}o.push(['night1',{q:2,vp:0}],['night1',{q:0,vp:0}]);for(const id of ['vlout','prep','pmPick','vlget','rcpacc'])o.push([id,{}]);return o});
   const f=[];let n=0,longN=0,meterN=0;const skipped=[];
