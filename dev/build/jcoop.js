@@ -35,7 +35,7 @@ let ws=null,want=false,tries=0,tmr=0,pinger=0,lastRx=0,pend=null,both=false;
    compressed while the friend rejoined) never overwrites a newer one. whoT = the next "who" (ask the room who is here): every PING tick
    while the friend reads away, every WHO_EVERY otherwise, so a view that went stale for ANY reason heals in seconds. healAt = last time this
    seat reconnected because the room said IT is not here (its socket buried while the page never saw the close): at most once per HEAL_GAP. */
-let psSeen=0,whoT=0,healAt=0;const WHO_EVERY=30000,HEAL_GAP=15000;
+let psSeen=0,whoT=0,healAt=0,lastSig="";const WHO_EVERY=30000,HEAL_GAP=15000;
 function pid(){let p=LS.get("ctm-coop-pid");if(!p){p=(crypto.randomUUID?crypto.randomUUID():Math.random().toString(36).slice(2)+Date.now().toString(36)).replace(/-/g,"").slice(0,24);LS.set("ctm-coop-pid",p)}return p}
 function emit(t,d){(H[t]||[]).slice().forEach(f=>{try{f(d)}catch(e){console.error("COOP",t,e)}})}
 function on(t,f){(H[t]=H[t]||[]).push(f);return f}
@@ -71,7 +71,10 @@ async function rx(ev,s){if(s&&ws!==s)return;lastRx=Date.now();let m;
   if(pend){pend.res({room:st.room,you:st.you});pend=null}
   /* re-announce: everybody gets a fresh presence after this seat's room reply (a newer Worker; an older one ignores "here") */
   if(m.ps!=null){try{s.send('{"t":"here"}')}catch(e){}}}
- else if(m.t==="presence"){if(old)return;set({seats:m.seats,ended:m.ended||st.ended,week:m.week!=null?m.week:st.week})}/* an older view is dropped whole (its buổi / bended too) */
+ else if(m.t==="presence"){if(old)return;/* an older view is dropped whole (its buổi / bended too) */
+  /* a view that says exactly what this seat already holds (the answer to its own "who" most of the time) changes nothing: no game event */
+  const sig=JSON.stringify([m.seats,m.ended,m.week,m.buoi,m.bended]);if(m.ps!=null&&sig===lastSig){whoT=Date.now()+(st.peerOnline?WHO_EVERY:PING/2);return}lastSig=sig;
+  set({seats:m.seats,ended:m.ended||st.ended,week:m.week!=null?m.week:st.week})}
  if((m.t==="room"||m.t==="presence")&&!old){whoT=Date.now()+(st.peerOnline?WHO_EVERY:PING/2);selfCheck(m)}
  else if(m.t==="state")set({C:m.state,week:m.week!=null?m.week:st.week});
  else if(m.t==="week")set({C:m.state,week:m.week,ended:{a:false,b:false}});
@@ -88,7 +91,7 @@ let abandonAt=0;
    rejoin, so the newest socket of the seat is the one the room counts and the friend sees her back */
 function selfCheck(m){const me=st.you&&m.seats&&m.seats[st.you];if(!me||me.online!==false||!want||!ws||ws.readyState!==1)return;
  if(Date.now()-healAt<HEAL_GAP)return;healAt=Date.now();tries=0;connect(st.room)}
-function connect(code){clearTimeout(tmr);psSeen=0;if(ws){try{ws.onclose=null;ws.close()}catch(e){}ws=null;abandonAt=Date.now()}
+function connect(code){clearTimeout(tmr);psSeen=0;lastSig="";if(ws){try{ws.onclose=null;ws.close()}catch(e){}ws=null;abandonAt=Date.now()}
  want=true;both=false;set({status:tries?"retry":"connecting",room:code});
  let s;try{s=new WebSocket(wsURL(code))}catch(e){return drop()}
  s.binaryType="arraybuffer";ws=s;
