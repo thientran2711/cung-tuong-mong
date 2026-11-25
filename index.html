@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"bc713aaa+","t":"2026-11-24T23:52Z","c":"SELSCENE-15: report FIX r5 + handover (co-op stall root causes, kit-fitfast-r2 merged, gates)","b":"5bd2cd3fbad7","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
+window.CTM_BI={"s":"bf88f66a+","t":"2026-11-24T23:57Z","c":"SELSCENE-15: report FIX r5 + handover (co-op stall root causes, kit-fitfast-r2 merged, gates)","b":"7baae41cd698","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -82981,6 +82981,11 @@ window.selxClkSync=selxClkSync;
 (function(){const k0=selxClock;selxClock=function(){if(selxCo()){const Z=S.selx2;Z.clock=1;return}return k0.apply(this,arguments)};window.selxClock=selxClock})();
 /* the room's buổi first moves after the days (both seats ready): a cohort whose host has no tú nữ of its own still enters the world */
 (function(){if(typeof nextBuoi!=="function")return;const n0=nextBuoi;nextBuoi=function(){selxClkSync();try{if(selxCo()&&worldOn()&&!(COOPW&&COOPW.ctx)&&S&&S.selxRm&&!S.selxRm.in&&!selxDaysOn())selxRoomIn()}catch(e){console.error(e)}return n0.apply(this,arguments)};window.nextBuoi=nextBuoi})();
+/* SELSCENE-16 (long-task line, game share): during the 3 days every answer opened the next day card AND redrew the board behind it in the SAME task
+   (jrbatch renderSoon = microtask) — the card is the only thing seen, the board under it is covered. While the days run, the board redraw after a card
+   is its own task (setTimeout 0, the jrbatch flag RB.q still coalesces repeats): same calls, same final screen, one task lighter per card. */
+setTimeout(()=>{try{const rs=window.renderSoon,RB=window.RB;if(typeof rs!=="function"||!RB)return;
+ window.renderSoon=function(){if(!selxDaysOn()||selxCo())return rs.apply(this,arguments);if(RB.q)return;RB.q=1;setTimeout(()=>{if(!RB.q)return;RB.q=0;try{render()}catch(e){console.error("renderSoon",e)}},0)}}catch(e){console.error(e)}},0);
 /* ================= ONE SEAT RULE (review/seatcap, owner OD:L1224 + OD:L1228 + OD:L1267 ONE CORE) =================
    The seat counts are j30 SEATCAP = BAL.seat (copied by jbal; the numbers live only there; Quý nhân and below have no cap). Every road that puts a consort on a rank goes through these three helpers, for her and for every NPC alike:
    - seatHas(p,r): may p sit at rank r (the seat counts everyone else who holds r);
@@ -98810,7 +98815,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5bd2cd3fbad7";window.CTM_BUILD=BUILD;
+const BUILD="7baae41cd698";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

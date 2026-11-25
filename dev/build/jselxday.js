@@ -411,3 +411,8 @@ window.selxClkSync=selxClkSync;
 (function(){const k0=selxClock;selxClock=function(){if(selxCo()){const Z=S.selx2;Z.clock=1;return}return k0.apply(this,arguments)};window.selxClock=selxClock})();
 /* the room's buổi first moves after the days (both seats ready): a cohort whose host has no tú nữ of its own still enters the world */
 (function(){if(typeof nextBuoi!=="function")return;const n0=nextBuoi;nextBuoi=function(){selxClkSync();try{if(selxCo()&&worldOn()&&!(COOPW&&COOPW.ctx)&&S&&S.selxRm&&!S.selxRm.in&&!selxDaysOn())selxRoomIn()}catch(e){console.error(e)}return n0.apply(this,arguments)};window.nextBuoi=nextBuoi})();
+/* SELSCENE-16 (long-task line, game share): during the 3 days every answer opened the next day card AND redrew the board behind it in the SAME task
+   (jrbatch renderSoon = microtask) — the card is the only thing seen, the board under it is covered. While the days run, the board redraw after a card
+   is its own task (setTimeout 0, the jrbatch flag RB.q still coalesces repeats): same calls, same final screen, one task lighter per card. */
+setTimeout(()=>{try{const rs=window.renderSoon,RB=window.RB;if(typeof rs!=="function"||!RB)return;
+ window.renderSoon=function(){if(!selxDaysOn()||selxCo())return rs.apply(this,arguments);if(RB.q)return;RB.q=1;setTimeout(()=>{if(!RB.q)return;RB.q=0;try{render()}catch(e){console.error("renderSoon",e)}},0)}}catch(e){console.error(e)}},0);
