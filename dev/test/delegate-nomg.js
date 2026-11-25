@@ -75,6 +75,16 @@ const SH=process.argv[2]||path.join(__dirname,'../../../dnm-shots');try{fs.mkdir
    const bads=z.filter(x=>x.mg.length||x.intro);ok(z.length>=4&&!bads.length,'runtime scan: '+z.length+' delegated runs, 0 mini-game openers',bads.length?bads:z.map(x=>x.kind+":"+x.n+":"+(x.via||x.cls)));
    /* (4) doer ability moves the odds (one core: spyFactors of the doer) */
    const dz=await g.evaluate(()=>{const m=whyMaidInit(S.maid),l0=m.loyal;m.loyal=20;const lo=spyO(S,null,m);m.loyal=95;const hi=spyO(S,null,m);m.loyal=l0;return{lo,hi}});
-   ok(dz.hi>dz.lo,'doer ability: a more loyal maid has better «Nghe ngóng chung» odds',dz)}
+   ok(dz.hi>dz.lo,'doer ability: a more loyal maid has better «Nghe ngóng chung» odds',dz)
+   /* (5) scheme «Giao cho người làm» = the DOER's odds (MAIN 133 ruling on OD 25/11 ~04:12Z): the act runs as a SENT act (j9 ACTSEND → actCtx sendPen of the one sent) */
+   const gz=await g.evaluate(()=>{const out=[];const v=rivals.find(x=>x&&x.alive&&!x.out);if(!v)return out;const sv=sgDoer();if(!sv)return[{err:"no doer"}];const l0=sv.loyal;
+    for(const k of ["spy","rumor","frame"]){if(!SG.K[k])continue;const J=sgJob({j:"act",v:v.id,k});if(!J)continue;
+     const self=J.p0();sv.loyal=10;const lo=sgDlgO(J);sv.loyal=95;const hi=sgDlgO(J);sv.loyal=l0;const now=sgDlgO(J);const want=oddsCl(Math.round((()=>{ACTSEND=1;try{return actOdds(S,v,k)}finally{ACTSEND=0}})()));
+     const d=mkP("sgpick",{j:"act",v:v.id,k});const opt=d&&d.o.find(x=>x.n==="Giao cho người làm");
+     /* the run: runAct sees a sent act (its ctx pen = the doer's sendPen) */let pen=null;const c0=actCtx;actCtx=function(a,t,kk){const r=c0.apply(this,arguments);if(a===S&&kk===k)pen=r.pen;return r};
+     Q.length=0;used=0;S.bac=Math.max(S.bac||0,999);try{if(opt)opt.go()}catch(e){}actCtx=c0;Q.length=0;
+     out.push({k,self,lo,hi,now,want,x:opt&&String(opt.x).replace(/<[^>]+>/g,"").slice(0,90),pen,sendPen:sendPen(sv,k)})}
+    return out});
+   ok(gz.length>=2&&gz.every(r=>r.now===r.want&&r.hi>=r.lo&&r.pen===r.sendPen&&/giao cho/.test(r.x||"")),'scheme «Giao cho người làm» rolls the doer\'s odds (sent act, sendPen of the one sent; loyal doer ≥ disloyal), card names the doer',gz)}
   ok(!errs.length,dev[0]+': no page errors',errs.slice(0,3));await ctx.close()}
  await b.close();console.log(bad?`FAIL ${bad}`:'PASS');process.exit(bad?1:0)})().catch(e=>{console.error(e);process.exit(2)});
