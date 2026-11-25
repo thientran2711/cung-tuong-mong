@@ -9,6 +9,7 @@
      · robot10 solo array  [ {job,life:{id,type,fate,...},harness?,exitPick?,...}, ... ]  (robot10.js, flight-*, nc/pf/thd/cnv/bd)
      · co-op               { run, pairs:[ {job,lives:[{seat,kiep,life,...}],partial?,harness?} ] }      (coop runner)
      · lives list          [ {seat,kiep,id|life,...} ]                                                (flight-A-coop-repro/guest-cold)
+     · robot-rt LIFE DONE log lines (*.log) when no <life>.json is beside the log
      · robot-rt solo       { job, harness:{kind:'realtap'}, life, exitPick, bugs }  one life per file (flight2-*, robot-rt.js)
      · markdown life tables (only when no same-stem .json exists): header with a «life» column and an «ending|result|end» column.
    A LIFE IS VALID ONLY IF ALL THREE HOLD
@@ -110,7 +111,16 @@ function mdLife(t) {
   return t ? { id: t } : null;
 }
 
-function walk(p, acc) { const s = fs.statSync(p); if (s.isDirectory()) { for (const f of fs.readdirSync(p)) if (f !== 'saves' && f !== 'node_modules') walk(path.join(p, f), acc) } else if (/\.(json|md)$/.test(p)) acc.push(p); return acc }
+/* robot-rt runner logs: «LIFE DONE <life> <ending id> age <n> · buổi <n> · taps …» (printed only by the real-tap harness dev/test/robot-rt.js).
+   Used only when no <life>.json sits beside the log (the json is the full record). A SLICE line is a self-test, not a life. */
+function fromLog(file, txt, out, files) {
+  const dir = path.dirname(file), round = path.relative(process.cwd(), file);
+  for (const m of txt.matchAll(/^LIFE DONE (\S+) (.+?) age (\S+) · buổi (\d+) · taps (\d+)/gm)) {
+    const [, life, id, age, buoi] = m; if (id === 'SLICE') continue; if (files.includes(path.join(dir, life + '.json'))) continue;
+    const L = { id, age: age === '?' ? null : +age, type: /^(\?|HARNESS)$/.test(id) ? (id === '?' ? '?' : 'harness') : '' };
+    const v = verdict({ harness: { kind: 'realtap', realtap: true, jsClicks: 0 } }, L);
+    out.push({ file: round, life, end: endText(L), age: ageText(L), valid: v.valid, why: v.why, cls: v.end.k, note: (v.end.note || v.end.why || '') + ' (from LIFE DONE log line, buổi ' + buoi + ')', sig: [life, endText(L), null, L.age, null, null].join('|') }) } }
+function walk(p, acc) { const s = fs.statSync(p); if (s.isDirectory()) { for (const f of fs.readdirSync(p)) if (f !== 'saves' && f !== 'node_modules') walk(path.join(p, f), acc) } else if (/\.(json|md|log)$/.test(p)) acc.push(p); return acc }
 
 function audit(paths, only) {
   const files = [].concat(...paths.map(p => walk(p, []))).filter(f => !only || only.test(f)).sort();
@@ -119,6 +129,7 @@ function audit(paths, only) {
   for (const f of files) {
     try {
       if (f.endsWith('.json')) { if (/catalog|bal\.json|anim-|SAVES/.test(path.basename(f))) continue; const j = JSON.parse(fs.readFileSync(f, 'utf8')); if (!fromJson(f, j, out)) skipped.push(f + ' (no lives)') }
+      else if (f.endsWith('.log')) fromLog(f, fs.readFileSync(f, 'utf8'), out, files)
       else { const st = path.join(path.dirname(f), stemOf(f)); if (jsonStems.has(st) || fs.existsSync(st) && fs.statSync(st).isDirectory()) continue; if (/^rates-/.test(path.basename(f))) continue; fromMd(f, fs.readFileSync(f, 'utf8'), out) }
     } catch (e) { skipped.push(f + ' (' + e.message.split('\n')[0].slice(0, 60) + ')') }
   }
