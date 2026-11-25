@@ -55,3 +55,12 @@ Total: before 8 wrong / 17 rows → after 0 / 17. eaDo's own line now «X oán n
 
 ## READY round 2
 review/temper-outburst 6b85187e — SẴN SÀNG KIỂM (round 2, same reviewer).
+
+## G4 interim (25/11 ~10:25Z, seat T1b) — build 6b85187e, lives tp-<arm>-1 (year 1)
+| life | buổi | rank (max) | Danh | Sủng | lãnh cung | her outburst frames |
+|---|---|---|---|---|---|---|
+| hot | 94 | 0 (0) | 27 | 5 | no | 0 |
+| timid | 50 | (max 1 at buổi 27) | 40 @27 | – | no | 0 |
+| off | 76 | (max 1 at buổi 44) | 36 @44 | – | no | – |
+| even | 5 | – | – | – | no | 0 |
+Too early for any G4 verdict (all still year 1, no outburst frame yet). tp-even-1 is held by the shared-harness bug (taps the kit odds meter of an event option → «Thang cơ duyên» popup, again and again; reported to F via D 09:13Z). The «live» record now refreshes every 20 s (c02602fb), so the next interim rows are complete.

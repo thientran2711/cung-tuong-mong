@@ -42,3 +42,24 @@ What was tried (all on a fixed seed, both arms):
 2. `dev/measure/runb.js` (bot life runner) + INP2 module `dev/measure/intpmood.js` (counters ready: calls / pass / block / byMood / deeds / byKind; arm off = `XJS='BAL.tp.moodM=0'`): the bot life TIMEOUTs at turns 0 with `S.mg:true` (stuck in a mini-game) — same "robot runner stuck on main" T1 reported.
 Next (successor): either (a) use the real-tap robot (review/robot-realtap `dev/test/robot-rt.js`, as T1's `temper-hh-rt.js` / `intemper-rt.js` on review/temper-outburst do) with `intpmood.js` evaluated after boot, a few lives per arm; or (b) fix the page driver: per step `spend(1)` ×4 (j95sync runs) + resolve the night (set the jnf night done) + clear `S.mg`, then `endTurn`; check the calendar moves (`when()`) in BOTH arms before counting. Early sample (one arm, ~1 tuần): 275 NPC hostile-gate calls, 11 pass, 1 owed to mood — too short to conclude.
 Also still open: wording answers from CO-NGU (routed by ROOT D via FOR MAIN 136 → FOREMAN_D_STATUS.md) → TP_LAB + VANPHONG rows; merge review/temper-outburst when it passes (keep the jemoact eaDo `tpAt` snapshot).
+
+## ROUND 2 — review FAIL B1 + N3 + N4 (seat T1b, worker session_01D3E3NaH1eX32YRAhiQCYnb, order FOREMAN D 09:55Z) — review/temper-perception-rv ab5d65ee
+PRIORITY #1 CHECK: OD 25/11 ~05:45Z + ~08:05Z «Bộc phát theo tính cách» | review-temper-perception.md B1–B2, N1–N4 read in full | jtperc tpOut / tpDeed / tpK / tpP / tpWhere / tpLand / HOST gate, jemoact R_ + eaKind, jfeel BAL.feel.act, j9 relMS / relKey / relOwner, jhc relMSOf, j55 trS | branch from 3598bce8 (T2 3119cf02 + T1 6b85187e); B2 = seat T2c (not touched here).
+
+**B1 (LAW 11 — whole table).** One map `BAL.tp.map` (law 4) sends every outburst reaction of every kind of person (jemoact R_ who c / e / t / s / m / o / q / k + jfeel acts) to the deed it is judged as (`tpDeedOf`: own key → map → jfeel `use`). New deeds with base + DEED virtue tags: soat (Lục soát: Nhân −, Tín −), bove (Lễ −), treo (Lễ −, Nhân −), noi (Long nhan đại nộ: Nhân −), nghi (Nghi kỵ: Tín −, Nhân −), quo (Thái hậu quở trách: Nhân −, Lễ +), cai (cãi nhau: Lễ −), okho (Làm khó các cung: Nhân −, Nghĩa −), qgian (Lễ −), qhac (Khiêm −, Trung +), khon (Đễ −), vuive (Nghĩa +); mapped: kexau / ohoi → ke, caugat → mang, noimoc / mhoi → cham, khoetai → khoe, ban → thuong, eyen / mvui / qvui → tiec, sk / okhoc → khoc, mcai → cai, kquay → dapdo, ovui / kvui → vuive. Harm list (labels) + soat, noi, nghi, quo, okho.
+Same rule for every doer (law 1): `tpK` / `tpP` now know Hoàng thượng («emp»), Thái hậu («th») and the relMS people (servants, men, nữ quan, ministers, children: key `x<relKey>`, `relMSOf`); `tpWhere` puts a doer outside the ONE record where the person he serves stands (`tpAnchor`: servant → mistress, child → mother, nữ quan → Hoàng hậu, minister / man → Hoàng thượng); `tpLand` moves Sủng / Thái hậu regard only when the doer is a consort, otherwise the onlooker's thiện cảm of the doer (relMS store).
+Scan `dev/measure/temper-judged.js` (fires each reaction through `window.tpOut` by a real doer of its kind, onlookers standing there, counts judgments + the doer's place):
+
+| | rows | self-only (nobody touched) | reactions that touch someone | NOT judged | judged but nobody judged live |
+|---|---|---|---|---|---|
+| BEFORE 3598bce8 | 66 | 27 | 39 | **27** | 0 |
+| AFTER ab5d65ee | 66 | 27 | 39 | **0** | 0 |
+
+Not judged before: c soat, kexau, bove, caugat, khoetai, treo · e ban, noi, nghi, eyen · t ban, quo · s cai, sk · m mcai, mhoi, mvui · o okho, okhoc, ohoi, ovui · q qgian, qhac, qvui · k kquay, khon, kvui. Self-only (listed, never judged): nuot, boan, thu, huong, matngu, cau, trang, hat, tho, theu, tron, caobenh, bodo, moi, ngoithu, mach, quengio, sangtac, eruou, emat, tkinh, hang, mbo, mruou, ole, qbo, kbo.
+**N3** — «Người chứng kiến …» now sits on the card's own Sổ line (gateYes log, Fold: «… Khiêu khích: thành. Danh 33 → 34. Người chứng kiến: Diệp Sương Hoa −1 · Doãn Mộng Điệp −1.»); other deeds: the next Sổ line of the step, else its own line at the next khắc. **N4** — HOST gate keyed by the card's deed id (`tw`: provoke / vent / humil on j2 talk cards + jtwoway twOpts), never by name.
+Gates (ab5d65ee): temper-perception.js REAL TAPS Fold 755x1000@2 + iPad 1180x820@2 PASS · temper-outburst.js Fold + iPad PASS · temper-equal 36 rows fail 0, 330 cells ok · temper-signs 0 wrong · one-core-guard PASS · coop-e2e 142/142 · quickcheck alone: see below. Own build (index.html + sw.js).
+quickcheck.sh alone (G4 robot lives paused): **PASS** · open 2176 ms · old save ok · perf median new/live: render 302/250, tab 657/506, buổi 1762/1547, tasks>200 ms 27/26 · core gates PASS.
+B2 (NPC mood-term rate) stays with seat T2c. N1 / N2 unchanged (D / MAIN route).
+
+## READY
+**SẴN SÀNG KIỂM review/temper-perception-rv ab5d65ee** (B1 + N3 + N4; B2 = T2c).
