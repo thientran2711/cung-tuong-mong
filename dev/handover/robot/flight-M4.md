@@ -20,3 +20,8 @@ drv.js (Playwright persistent context, control server :8200, REAL mouse/touchscr
 - Bạc 160→1 within ~2.5 months for a cautious bot.
 - Mini-games played for real so far: mua x3, hat x3, dan x1 (all reach result).
 No DEAD BUTTON / soft-lock / crash / save-loss confirmed yet. True reloads: restarts counted (see log-tail.txt).
+
+## «Bỏ qua» vs played (MAIN 134 question, 25/11 06:29Z) — exact evidence
+- SKIP: 05:26Z, Tuyển chọn · Môn thi · Nấu ăn (Quý nhân promotion exam, tier «Vừa · tuyển tú, tài nghệ bậc 2», odds Rất vững): intro button «Bỏ qua — kết quả xuất sắc, như người cùng bậc» → result card «Tuyển chọn: Môn thi · Nấu ăn  10/10 · Xuất sắc (để tài nghệ quyết định)». Shot: shots/00007-unknown.png in the runner box.
+- PLAYED (skilled-bot port, real taps): kind hat, 06:30:56Z → «KẾT QUẢ 5/10 · Khá: cơ duyên lên Có cơ». Other played kinds so far (mua ×3, hat ×3, dan, den) reached the result screen; score text only captured from 06:30Z on (see log-tail.txt «MG RESULT»).
+- So at least for the Tuyển chọn exam the skip granted 10/10 Xuất sắc while a played game of another kind gave 5/10: a quick skip beat an honest play (breaks «a quick result never beats a good own play» for that exam; other kinds' skip values not yet measured — will sample the 10 % skips).
