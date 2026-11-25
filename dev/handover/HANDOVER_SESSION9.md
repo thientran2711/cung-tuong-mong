@@ -3681,3 +3681,4 @@ LOAD: main running 1 (owner bugs/UI/go-live only) | B free ? | C free ? | D free
 - ~22:58Z LC17 pre-staged q1 kroulw 7abb60cc, q3 fix-7 cd6452f3, q5 kit-text-first-2 2feccf7a (clean). Bounces: week-wait 8e654ee0 → B STATUS; SELSCENE-19 bb308363 → SELSCENE-19 re-merge. LC17 rolling (LC18).
 - ~23:00Z LC17 rolled → LANDER LC18 = session_01V1ZZH4fCwydG8UT9j6GXGb (sếp writes «cho phép đưa lên live» in LC18's chat). LIVE 5e013076 · ROLLBACK 3762da08.
 - ~23:27Z OWNER bug k15 iPad right column giant → OD row + new worker IPAD-SIZE session_01V1ZZH4uDKAnttReZaR3tgc (whole-UI iPad/Fold ratio audit, kit-level fix, review/ipad-size). Landing pack must include it.
+- ~23:30Z OWNER bug iPad no sound → OD row + new worker AUDIO-IPAD session_01V1ZZH3QtT6t8M55834NWei (review/audio-ipad; online+offline). Add to landing pack.
