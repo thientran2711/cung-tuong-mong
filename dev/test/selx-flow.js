@@ -16,6 +16,8 @@ const TXL=new Set();let HIDDEN=0;(async()=>{const b=await chromium.launch();
   const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(240000);
   /* BIG rv FAIL 1: count every red danger pulse (.kmalarm, j93 kitAlarm) shown during the selection days — must be 0 */
   await p.addInitScript(()=>{window.__alarmN=0;new MutationObserver(L=>{for(const m of L)for(const n of m.addedNodes)if(n.classList&&n.classList.contains('kmalarm'))window.__alarmN++}).observe(document,{childList:true,subtree:true})});
+  /* SELSCENE-19 (kit-music-r1, KIT §93.x): the heartbeat / tension music is the other half of «danger» — count every heartLoop(true) during the selection days — must be 0 */
+  await p.addInitScript(()=>{window.__heartN=0;const t=setInterval(()=>{if(window.__ctmBuilt!==1||typeof heartLoop!=='function')return;clearInterval(t);const h0=heartLoop;window.heartLoop=function(on){if(on){window.__heartN++;window.__heartP=(window.__heartP||[]).concat([(typeof Q!=='undefined'&&Q[0]&&Q[0].pid)||'?']).slice(-6)}return h0.apply(this,arguments)}},50)});
   await p.goto('http://localhost:8813/index.html',{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof selxDay==='function',null,{timeout:240000});
   await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}start()});await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.origin,null,{timeout:60000});
   await p.evaluate(()=>{for(let i=0;i<600;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(S&&S.origin&&S.origin.k==="tt")break}S.kcPick="cung";
@@ -56,6 +58,7 @@ const TXL=new Set();let HIDDEN=0;(async()=>{const b=await chromium.launch();
    await p.evaluate(()=>{try{closeModal()}catch(e){}});await p.waitForTimeout(300)}
   await p.waitForTimeout(1200);await shot('sau-chieu');
   {const an=await p.evaluate(()=>window.__alarmN||0);if(an){HIDDEN++;console.log('FAIL danger pulse on selection-day cards',dn,an)}else console.log('ok no danger pulse',dn)}
+  {const hn=await p.evaluate(()=>[window.__heartN||0,window.__heartP||[]]);if(hn[0]){HIDDEN++;console.log('FAIL heartbeat (danger music) on selection-day cards',dn,JSON.stringify(hn))}else console.log('ok no heartbeat',dn)}
   console.log(dn,'shots',n,'errors',errs.length,errs.slice(0,3),'text leaks',TXL.size);const vpath=await p.video().path();await ctx.close();
   const webm=path.join(OUT,dn+'.webm');fs.renameSync(vpath,webm);fs.rmSync(vd,{recursive:true,force:true});
   try{cp.execFileSync('ffmpeg',['-y','-loglevel','error','-i',webm,'-c:v','libx264','-pix_fmt','yuv420p','-movflags','+faststart',path.join(OUT,dn+'.mp4')]);
