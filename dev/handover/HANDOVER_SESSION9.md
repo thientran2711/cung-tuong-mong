@@ -3655,3 +3655,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
   - New LAND READY (B, after flight): review/coop-week-wait-rv 8e654ee0 (BIG co-op rv PASS); review/robot-coop-fix-6-rv 833cd64f (rv 6kBPZT2V PASS; = f5b96b7f + LIVE 351122ba). → LC17 after-flight queue.
   - D rolled → FOREMAN D depth 6 session_01D3E3NYnSQvNs2RbpkGRrhr. E → child4 session_01DgYSWoH3ibXqgiFQYPcvyK.
   - F #15: 5 whole lives with NO promotion (s9b: 593 offers seen, 54 taken, rank 0 for 11 y) → systemic balance bug, owner-bug lane AFTER flight (already in queue «no promotion in a whole life»). F asks LIFE RUNNER s9c (sonnet) after flight.
+- 21:46Z: KK31 KIT READY review/kit-text-first-2 166b3000 (B bar met under load); MAIN LOOKED pair kk31-166b3000-pair-fold-ipad.png → OK; LC17 after-flight queue after SELSCENE-19. KK31: tap family test-only first (OK'd), K-KDTX-BAND in the scan, then G4 «Ô lưu · Lui» as kit item.
