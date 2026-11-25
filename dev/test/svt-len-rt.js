@@ -46,12 +46,21 @@ const fail = [], note = [];
   /* «Cung nhân» sits under the «Hậu cung» group tab (j84 TABS + its sub-tab row .ksubb) on the phone bar */
   let sub = await btn(/^Cung nhân$/);
   if (!sub) { const g = await btn(/^Hậu cung$/); if (!g || !(await rt.tap(g, { screen: 'tabs', label: 'Hậu cung' }))) { fail.push('tab «Hậu cung» dead/missing'); await shot('tabs'); return done(b) } await p.waitForTimeout(700); sub = await btn(/^Cung nhân$/) }
-  if (!sub || !(await rt.tap(sub, { screen: 'tabs', label: 'Cung nhân' }))) { fail.push('tab «Cung nhân» dead/missing'); await shot('tabs'); return done(b) }
+  const onStaff = () => p.evaluate(() => [...document.querySelectorAll('#panel .psep')].some(e => /Cung khác/.test(e.textContent)));
+  if (!(await onStaff()) && (!sub || !(await rt.tap(sub, { screen: 'tabs', label: 'Cung nhân' })))) { fail.push('tab «Cung nhân» dead/missing'); await shot('tabs'); return done(b) }
   await p.waitForTimeout(800);
   /* faces of the «Cung khác» group (another house's servants): tap them one by one until one she has met (the stranger gate) */
   const pis = await p.evaluate(() => { const g = [...document.querySelectorAll('#panel .pgrp')]; const i = g.findIndex(x => /Cung khác/.test((x.querySelector('.psep') || {}).textContent || '')); return i < 0 ? [] : g.slice(i).flatMap(x => [...x.querySelectorAll('.pface')].map(f => f.dataset.pi)) });
   if (!pis.length) { fail.push('no «Cung khác» group in Cung nhân'); await shot('no-other'); return done(b) }
   const rd = () => p.evaluate(() => { const b2 = document.querySelector('#panel [data-sv="hoi2"]'), b3 = document.querySelector('#panel [data-sv="hoi3"]'); const t = e => e ? e.textContent.replace(/\s+/g, ' ').trim() : null; return { hoi2: t(b2), hoi3: t(b3), dis3: b3 ? (b3.disabled || /Cần\s*✗/.test(t(b3))) : null } });
+  /* review N1: the Thái hậu's household named women = others' people → their card has the #26 «Hỏi chuyện» + «Hỏi lén» (data-elder hoi2 / hoi3), no plain elder talk */
+  const thhCheck = async () => { const tp = await p.evaluate(() => { const g = [...document.querySelectorAll('#panel .pgrp')]; const i = g.findIndex(x => /Cung Thái hậu/.test((x.querySelector('.psep') || {}).textContent || '')); return i < 0 ? [] : [...g[i].querySelectorAll('.pface')].map(f => f.dataset.pi) });
+    if (!tp.length) { note.push('no «Cung Thái hậu» group in this save'); return }
+    for (let g = 0; g < 80 && !tp.includes(await cur()); g++) if (!(await next())) { fail.push('«›» dead (Thái hậu)'); return }
+    if (!tp.includes(await cur())) { fail.push('could not reach a Thái hậu card'); return }
+    const c = await p.evaluate(() => { const T = e => e ? e.textContent.replace(/\s+/g, ' ').trim() : null; return { h2: T(document.querySelector('#panel [data-elder="hoi2"]')), h3: T(document.querySelector('#panel [data-elder="hoi3"]')), old: document.querySelectorAll('#panel [data-elder="hoi"]').length } });
+    await shot('thh-card'); note.push('Thái hậu card: «' + c.h2 + '» + «' + c.h3 + '» · plain elder talk ' + c.old);
+    if (!c.h2 || !c.h3) fail.push('N1: Thái hậu household card without the #26 talks'); if (c.old) fail.push('N1: plain elder «Hỏi chuyện» still on a Thái hậu card') };
   let card = null, tried = 0, stranger = 0;
   /* first «Cung khác» face: tap it when the strip shows it (Fold); else page with «›» like a person (iPad strip shows a window) */
   const vis = pi => p.evaluate(pi => { const f = document.querySelector(`#panel .pface[data-pi="${pi}"]`); if (!f) return false; const r = f.getBoundingClientRect(), q = f.closest('.pfaces').getBoundingClientRect(); return r.width > 0 && r.left >= q.left - 1 && r.right <= q.right + 1 }, pi);
@@ -71,7 +80,11 @@ const fail = [], note = [];
   if (!card.hoi3) { fail.push('no «Hỏi lén» on the card'); return done(b) }
   if (!/Hỏi lén/.test(card.hoi3) || !new RegExp(st0.kLen + ' khắc').test(card.hoi3)) fail.push('label wrong: ' + card.hoi3);
   if (/%|\d+\s*%/.test(card.hoi3)) fail.push('a % in the button (law 7)');
-  if (card.dis3) { fail.push('«Hỏi lén» disabled on every Cung khác card of this save (khắc ' + st0.used + '): ' + card.hoi3); return done(b) }
+  /* review N2: a full buổi is not a failure — the button must be locked with ITS OWN khắc reason, and a tap on it changes nothing */
+  if (card.dis3) { if (st0.khac - st0.used < st0.kLen && /khắc/.test(card.hoi3)) { await rt.tap('#panel [data-sv="hoi3"]', { screen: 'staff-card', label: 'Hỏi lén (locked)' }).catch(() => {}); await p.waitForTimeout(600);
+      const sl = await p.evaluate(() => ({ used, len: SVT.stat.len || 0 })); if (sl.used !== st0.used || sl.len !== st0.len) fail.push('locked «Hỏi lén» tap still acted'); note.push('full buổi (khắc ' + st0.used + '/' + st0.khac + '): «Hỏi lén» locked with its own reason «' + card.hoi3 + '» — a tap changes nothing'); await thhCheck(); return done(b) }
+    fail.push('«Hỏi lén» disabled with khắc left or no khắc reason (khắc ' + st0.used + '/' + st0.khac + '): ' + card.hoi3); return done(b) }
+  const tgt = await p.evaluate(() => { const b3 = document.querySelector('#panel [data-sv="hoi3"]'); const s = b3 && servById(+b3.dataset.sid); return s ? { eid: s.eid || null, call: s.call || null, af: (s.af && s.af.me) || 0, sid: s.sid } : null });
   const ok = await rt.tap('#panel [data-sv="hoi3"]', { screen: 'staff-card', label: 'Hỏi lén' });
   if (!ok) { fail.push('DEAD BUTTON «Hỏi lén»'); return done(b) }
   await p.waitForTimeout(1200);
@@ -81,7 +94,12 @@ const fail = [], note = [];
   if (st1.len !== st0.len + 1) fail.push('SVT.stat.len ' + st0.len + '→' + st1.len + ' (the tap did not reach svTalk len)');
   if (st1.talk !== st0.talk + 1) fail.push('SVT.stat.talk did not move');
   note.push((st1.refuse > st0.refuse ? 'refused' : 'talked') + ' · log: ' + st1.last);
+  if (st1.refuse === st0.refuse && /không được gì/.test(st1.last)) fail.push('talked (learned) but the result card says «không được gì» (LAW 11 ka-know)');
   if (/bất kính/.test(st1.last)) fail.push('«bất kính» after «Hỏi lén» (no greeting owed)');
+  /* review B1: a named woman (s.eid) keeps the elder talk gain (thiện cảm + palace news line) when she talks */
+  if (tgt && tgt.eid && st1.refuse === st0.refuse) { const af1 = await p.evaluate(sid => { const s = servById(sid); return (s && s.af && s.af.me) || 0 }, tgt.sid); const meA = await p.evaluate(() => BAL.eff.jstaff.meAct);
+    note.push('named woman ' + tgt.call + ': thiện cảm ' + tgt.af + '→' + af1); if (af1 !== tgt.af + meA) fail.push('B1: the elder talk gain is lost (thiện cảm ' + tgt.af + '→' + af1 + ')') }
+  await thhCheck();
   if (errs.length) fail.push('page errors: ' + errs.slice(0, 3).join(' / '));
   note.push('taps ' + JSON.stringify(rt.stats ? rt.stats() : {}));
   return done(b);

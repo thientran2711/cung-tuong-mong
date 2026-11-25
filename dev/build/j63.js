@@ -294,10 +294,22 @@ document.addEventListener("click",e=>{const b=e.target&&e.target.closest&&e.targ
  if(roll(BAL.odds.hi))return;e.stopImmediatePropagation();e.preventDefault();const k=+b.dataset.cap||0;if(k&&can(k))spend(k);
  const kn=b.querySelector(".kan");const n=String(kn?kn.textContent:(b.childNodes[0]&&b.childNodes[0].nodeType===3?b.childNodes[0].textContent:"")).trim();
  let bf=null;try{bf=rsnap()}catch(x){}oddsSoft(n,{suc:-(+b.dataset.capsuc||0),bac:-(+b.dataset.capbac||0)});try{if(bf)resultShow(n,bf,false)}catch(x){}render()},true);
+/* KNOW IN THE RESULT CARD (LAW 11 family, ROOT D 25/11, review/talk-others-people): what she LEARNS is a gain. Every learned fact passes
+   noteAdd (j21: «every line written in her Sổ is something she learned»), kitKnow (jnotice KNOW-NOTICE) and intelAdd (j78 tin / secrets), also when the act's own card
+   already told it (shown) — so the result card lists those lines under «Được» and never says «ta không được gì» after a talk taught a nết,
+   a secret or a tin. rsnap() marks where the act starts (before.kn); one line per key, the richer text (higher pri) wins. */
+const KAK={L:[],base:0,on:0};
+function kaKnowHook(){if(KAK.on)return;KAK.on=1;const add=(k,p,t)=>{KAK.L.push({k,p,t});if(KAK.L.length>400){KAK.L.splice(0,200);KAK.base+=200}};
+ if(typeof noteAdd==="function"){const n0=noteAdd;noteAdd=function(id,t){const r=n0.apply(this,arguments);try{let v=null;try{v=typeof RV==="function"&&id!=null?RV(+id):null}catch(e){}
+  add("n:"+id,-1,`Sổ ghi thêm${v&&typeof knowWho==="function"?" về "+knowWho(v):""}: ${String(t).replace(/<[^>]+>/g,"")}`)}catch(e){}return r}}
+ if(typeof intelAdd==="function"){const i0=intelAdd;intelAdd=function(v,f){const r=i0.apply(this,arguments);try{if(v&&v!==S&&f&&f.txt)add("i:"+v.id+":"+f.k,1,String(f.txt).replace(/<[^>]+>/g,""))}catch(e){}return r}}/* tin / secrets (j78 S.intel) */
+ if(typeof kitKnow==="function"){const k0=kitKnow;kitKnow=function(o){const r=k0.apply(this,arguments);try{if(o&&o.text)add(String(o.key||o.text),o.pri|0,String(o.text).replace(/<[^>]+>/g,""))}catch(e){}return r}}}
+function kaKnowSince(n){if(n==null)return[];const m=new Map();for(const x of KAK.L.slice(Math.max(0,n-KAK.base))){const e=m.get(x.k);if(!e||x.p>=e.p)m.set(x.k,x)}const T=[...m.values()].map(x=>x.t);return T.filter((t,i)=>!T.some((u,j)=>j!==i&&u!==t&&t.includes(u)))/* a Sổ line that repeats an intel fact gives way to the fact */}
+(function(){const r0=rsnap;rsnap=function(){kaKnowHook();const b=r0.apply(this,arguments);if(b)b.kn=KAK.base+KAK.L.length;return b}})();
 /* KIT PART kitResultSeal(ok) (KIT 7): the result seal — true → THÀNH (.ok), false → BẠI (.bad), no roll → "KẾT QUẢ" (.sure, the kit's grey seal, no stamp) */
 function kitResultSeal(ok){return ok===true?{cls:"ok",t:"THÀNH"}:ok===false?{cls:"bad",t:"BẠI"}:{cls:"sure",t:"KẾT QUẢ"}}
 resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
- const [G,B,K]=kaResultRows(before,title);const n=Math.max(0,(S.logSeq||0)-before.seq);let sen="";try{sen=kaSentence(before)}catch(e){}if(sen&&kaPlain(sen).replace(/[.!…\s]+$/,"").toLowerCase()===kaPlain(title||"").replace(/[.!…\s]+$/,"").toLowerCase())sen="";
+ const [G,B,K]=kaResultRows(before,title);try{for(const t of kaKnowSince(before.kn))G.push(`<span class="ef g">${t}</span>`)}catch(e){}/* knowledge learned by the act (KAK) is a gain */const n=Math.max(0,(S.logSeq||0)-before.seq);let sen="";try{sen=kaSentence(before)}catch(e){}if(sen&&kaPlain(sen).replace(/[.!…\s]+$/,"").toLowerCase()===kaPlain(title||"").replace(/[.!…\s]+$/,"").toLowerCase())sen="";
  const why=S.logs.slice(0,Math.min(n,S.logs.length)).map(plain).join(" ");
  /* the seal follows the outcome FOR HER (net real changes + what the log says), not which branch fired */
  const failTxt=/chặn kịp|phát giác|bị lộ|bị bắt|không thành|hỏng|từ chối|không ai tin|trách ngươi|quở|bị phạt|mắng|thư giả|vu khống|thất bại|không dò ra|không biết gì|cũng không biết|không thấy gì|không tìm ra|chưa duyệt/i.test(why);/* act audit: a failed search/scout read THÀNH */
