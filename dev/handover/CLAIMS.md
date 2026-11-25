@@ -1590,7 +1590,7 @@ kit mucluc r3 review | review/flight-mucluc-kit | session_01N1tNP2WLLioHUbYHsQky
 kit-scene-fade review | review/kit-scene-fade | session_01N1tNP6KvszkfmUqbjSQVxB | RUNNING | 25/11 00:42Z (FOREMAN B child7)
 robot-coop-savert BIG review | review/robot-coop-savert | session_01N1tNP4ZyfP6D8ujXL6neuR | RUNNING | 25/11 00:45Z (FOREMAN B child7)
 robot-coop-fix-5 (stuck cause 3, FIXER #10) | review/robot-coop-fix-5 | session_01N1tNP5P5MetjLKWvphzukd | RUNNING | 25/11 00:45Z (FOREMAN B child7)
-hardlock-choice (no takeable choice, whole family) | review/hardlock-choice | session_01N1tNP3HWwA785d24xRGQTm | RUNNING | 25/11 00:45Z (FOREMAN B child7)
+hardlock-choice (no takeable choice, whole family) | review/hardlock-choice | session_01N1tNP3HWwA785d24xRGQTm | SẴN SÀNG KIỂM ea9cfd51 | 25/11 00:45Z (FOREMAN B child7)
 KIT KEEPER KK25 (successor of KK24) | kit/* | session_01V1ZZH1g2TqJvVcJiKLux8Z | RUNNING | 2026-11-25T01:05Z (MAIN 130)
 kit-woodskin r5 + kit-focus-fig review | review/kit-woodskin, review/kit-focus-fig | session_01N1tNP5TBv4tS6ndrkzL8zu | RUNNING | 25/11 01:09Z (FOREMAN B child7)
 day-queue-2 finish (successor of DAYQ-3) | review/day-queue-2 | session_01V1ZZH4byTxn5sgHRmp7VrK | RUNNING | 2026-11-25T01:18Z (MAIN 130)
