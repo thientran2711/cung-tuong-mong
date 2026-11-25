@@ -47,6 +47,10 @@ function paint(){try{const st=document.getElementById("stage");let el=document.g
  const hud=!live&&dockOn?document.querySelector("header.hud"):null;const inHud=!!(hud&&hud.getClientRects().length);
  const host=live?(onMap?mvh:st):(inHud?hud:document.body);el.classList.toggle("kstdock",!live&&!inHud);el.classList.toggle("khud",inHud);
  if(el.__h!==h){el.innerHTML=h;el.__h=h;el.querySelectorAll(".krailb.kld").forEach(b=>{const i=b.querySelector("img");if(i&&i.complete&&i.naturalWidth)b.classList.remove("kld")})}if(el.parentNode!==host)host.appendChild(el);
+ /* button-crawl-fix-3 (Fold G1): the header slot writes its own inline left/top/flex-direction (hudSlot); a rail that comes back to the stage
+    (focus ✕, a tab back to the room) or to the corner dock drops them, so it stands on its stage spot again — it kept left ≈ 630 px on the
+    Fold stage, j59 then reserved the whole width left of it and put her and every token into ONE slot (tokens under img#mefig, dead) */
+ if(!inHud){el.style.left="";el.style.flexDirection=""}
  if(live){place(el,onMap?mvh:st);el.style.bottom=""}else if(inHud){if(!hudSlot(el,hud)){el.classList.remove("khud");el.classList.add("kstdock");document.body.appendChild(el);el.style.left=el.style.top="";const tb=document.getElementById("tabs");const q=tb&&tb.getClientRects().length?tb.getBoundingClientRect():null;el.style.bottom=q?`${Math.round(innerHeight-q.top+6)}px`:""}}else{el.style.top="";const tb=document.getElementById("tabs");const q=!onTitle&&tb&&tb.getClientRects().length?tb.getBoundingClientRect():null;el.style.bottom=q?`${Math.round(innerHeight-q.top+6)}px`:""}
  /* the stage may collapse / grow a moment after a tab change: look once more when the layout has settled */
  if(!paint.__t){paint.__t=setTimeout(()=>{paint.__t=0;const s2=document.getElementById("stage"),on=!!s2&&s2.getBoundingClientRect().height>40;if(on!==stOn)paint()},450)}}catch(e){console.error("kitStageRail",e)}}

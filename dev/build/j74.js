@@ -143,6 +143,19 @@ const t0=showTitle;showTitle=function(){const was=T.hidden;park();const r=t0.app
 window.showTitle=showTitle;
 const m=$("menu");if(m){const m0=m.onclick;m.onclick=function(){PG="home";return m0&&m0.apply(this,arguments)}}
 new MutationObserver(()=>{if(T.hidden&&(HM||SM))dropAll()}).observe(T,{attributes:true,attributeFilter:["hidden"]});
+/* TITLE NEVER BLANK (robot M1 #2, soft-lock; owner law: every way to reach the title shows its buttons). The home / Chọn sổ panels ARE the title's
+   buttons (#title .tbox is never shown): when the title is up and nothing is on #modal (the home ✕ / Esc / tap outside closed it, a reload landed on
+   a dead life, a fresh profile, a panel closed by another module…) the title was only cover art with 0 tappable elements — only a reload recovered.
+   ONE guard: title up + #modal hidden + empty queue + no loading cover / roulette ⇒ ☰ opened over a live life (✕ = back to it, same path as «Tiếp tục»),
+   otherwise the home panel again. Runs after every closeModal and, as a watchdog, on every #modal / #title visibility change. */
+const tgBlank=()=>{const M=$("modal");return !T.hidden&&(!M||M.hidden)&&!Q.length&&!document.querySelector("#kload,#klife,#kroul")};
+function tgFix(){try{if(!tgBlank())return false;
+  if(typeof S!=="undefined"&&S&&!S.dead&&lastSlot()&&resumeGame())return true;
+  PG="home";go("home",false);return true}catch(e){console.error("title guard",e);return false}}
+let tgT=0;function tgSoon(ms){if(tgT)clearTimeout(tgT);tgT=setTimeout(()=>{tgT=0;tgFix()},ms==null?350:ms)}
+try{new MutationObserver(()=>{if(tgBlank())tgSoon(350)}).observe($("modal"),{attributes:true,attributeFilter:["hidden","class"]});
+ new MutationObserver(()=>{if(!T.hidden)tgSoon(350)}).observe(T,{attributes:true,attributeFilter:["hidden"]})}catch(e){console.error(e)}
+{const cm0=window.closeModal;if(typeof cm0==="function"){window.closeModal=closeModal=function(){const r=cm0.apply(this,arguments);tgSoon(0);return r}}}
 /* after every module has loaded (the kit panel, j79, wraps showModal later in the bundle): wrap outermost, then first paint */
 setTimeout(()=>{try{
  ["wireOpt","wireXio","pdTitle"].forEach(wrapPark);

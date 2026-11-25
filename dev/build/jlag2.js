@@ -21,7 +21,7 @@
  setTimeout(()=>{try{
   if(typeof render==="function"){const r0=render;let d=0;render=function(){d++;window.__rdep=d;try{return r0.apply(this,arguments)}finally{d--;window.__rdep=d;if(!d){raFlush();window.__rendN++}}};window.render=render}
   if(typeof kaNorm1==="function"){const n0=kaNorm1;const SIG=new WeakMap();
-   const sig=b=>b.className+"|"+b.childElementCount+"|"+b.textContent.length+"|"+(b.disabled?1:0)+"|"+b.attributes.length;
+   const sig=b=>(typeof kfCls==="function"?kfCls(b):b.className)+"|"+b.childElementCount+"|"+b.textContent.length+"|"+(b.disabled?1:0)+"|"+b.attributes.length;
    kaNorm1=function(b){if(!b||!b.nodeType)return n0.apply(this,arguments);const inDlg=!!(b.closest&&b.closest("#modal"));
     if(!inDlg){const s=SIG.get(b);if(s!==undefined&&s===sig(b))return}
     const r=n0.apply(this,arguments);if(!inDlg)try{SIG.set(b,sig(b))}catch(e){}return r}}

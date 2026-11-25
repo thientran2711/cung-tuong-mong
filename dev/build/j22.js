@@ -1,7 +1,7 @@
 /* ================= MEN OF THE PALACE AND FORBIDDEN AFFAIRS (adults; man and woman only; fade to black; full consequences) ================= */
 const MROLES=[["Thị vệ","thị vệ",["vuon","thu"],24,8],["Thái y","thái y",["tyv"],29,6],["Vương gia","vương gia",["vuon","tn"],27,6],["Nhạc sư","nhạc sư",["vuon"],31,10],["Sứ thần","sứ thần",["thu","vuon"],34,8],["Họa sư","họa sư",["vuon","tn"],30,10]];
 const MTR=["phong lưu","trung hậu","tham vọng","đa tình","cẩn trọng"];
-FPOOL.man=rng(1,8,i=>"face-man-"+i);
+FPOOL.man=[];/* offline-fast (24/11): face-man-1..8 were never drawn (not on the CDN, not in assets.json): 8 × 404 probes at every start and a broken face offline. Men take their faces from bandKeys("man") = manold / off pools (j17); add files here only once they are on the CDN (dev/test/ref-offline.js checks it). */
 function menInit(){if(!S||S.men)return;S.men=MROLES.map((r,i)=>({id:"m"+i,role:r[0],rw:r[1],haunts:r[2],age:r[3]+R(r[4]),name:`${r[0]} ${nmNew("m")}`,loyal:40+R(50),af:0,tinh:0,letters:0,trysts:0,alive:true,knowsMe:[]}));S.menW={};S.aff={}}
 function manById(id){return (S.men||[]).find(m=>m.id===id&&m.alive)||null}
 function pMan(m){faceFor(m,m.rw==="vương gia"?"royal":"man",m.age);const fb=(AV.emperor||[]).filter((x,i)=>i!==S.emp.face)[Number(m.id.slice(1))%3]||"";return{rk:"off",rw:m.role,src:fsrc(m.fc,fb),hue:0,ini:m.name.split(" ").pop()[0],col:"#6a8aa0"}}
@@ -45,9 +45,22 @@ function trystNpc(m,risk,v){if(roll(risk)){m.alive=false;v.affair=null;log(`<spa
  m.trysts++;mTinhAdd(m,v,10);v.affair=m.id;v.lastTryst=wk();ap(v,{suc:BAL.eff.j22.sucTryst});
  if(!v.preg&&roll(trystCh(v))){v.preg=1;v.hidden=true;v.pregWk=wk();v.trueFather=m.id;const ok=(v.nightLog||[]).some(w=>Math.abs(w-wk())<=1);v.pregMismatch=!ok}
  return `${v.name} lén gặp riêng ${m.name}`}
+/* ONE «Hối lộ Kính sự phòng sửa sổ» card (the affair pregnancy below and the fake one, review/m-fix-3): Tổng quản writes in one night */
+function kspFixCard(go){return {n:"Hối lộ Kính sự phòng sửa sổ",t:"Nhờ Tổng quản ghi thêm một đêm thị tẩm cho khớp ngày.",c:{},o:od(BAL.odb.j22.odO_3+((S.court&&S.court.ksp&&S.court.ksp.af.me)||0)/2),w:{bac:-80},l:{danh:-5}/* bạc only when Tổng quản takes it (canPay keeps the lock) */,x:"sổ khớp ngày, hết bị nghi · hỏng: Tổng quản biết chuyện của ngươi",dom:"Mưu kế",go,fail:()=>{S.ksKnows=1}}}
+/* FAKE PREGNANCY COUNTER-PLAYS (review/m-fix-3, laws 2/3/7: the later exposure has a real way out, each with its own odds and cost):
+   - the book does not match (j8 fpNoRec) → the same «Hối lộ Kính sự phòng sửa sổ» (khBook: the monthly check drops to the physician one);
+   - «Báo sảy thai» any month: the fake ends (Sủng −exitSung); seen through → Danh −exitDanh and cấm túc (never death: getting out costs
+     less than being caught). Its Kèm shows what keeping the fake to the end still risks (j8 fpRoad from this month). NPCs: j8 npcExit. */
+(function(){const d0=deal;deal=function(){d0.apply(this,arguments);if(!S||!S.preg||!S.fake||S.out||S.dead)return;const X=BAL.tw.g.fakeX;
+ if(fpNoRec(S))deck.unshift(kspFixCard(()=>{S.khBook=1}));
+ const keep=fpRoad(S,100,S.preg,fpNoRec(S));
+ deck.unshift({n:"Báo sảy thai",t:"Kêu đau bụng giữa đêm, nhờ thái y báo đứa bé không giữ được.",c:{},o:od(X.exitO+(S.tamco||0)/X.exitTam+(S.doctor?X.exitDoc:0)),w:{sung:-X.exitSung},l:{danh:-X.exitDanh},
+  x:`thoát khỏi thai giả (từ nay yên lòng) · kèm: giữ thai giả đến cùng thì bị ban chết: ${chanceW(100-keep)} · hỏng: bị nhìn thấu thì cấm túc ${punishMonths()} tháng`,dom:"Mưu kế",
+  go:()=>{S.preg=0;S.fake=0;S.hidden=false;S.pregWk=null;log("Ngươi báo sảy thai; cả cung tưởng ngươi mất đứa bé.")},
+  fail:()=>{S.preg=0;S.fake=0;S.hidden=false;S.pregWk=null;punish("giả sảy thai, khi quân",1)}})}})();
 /* pregnancy that the book cannot cover: her roads, each with its odds and cost */
 (function(){const d0=deal;deal=function(){d0.apply(this,arguments);if(!S||!S.preg||!S.pregMismatch||S.out)return;
- deck.unshift({n:"Hối lộ Kính sự phòng sửa sổ",t:"Nhờ Tổng quản ghi thêm một đêm thị tẩm cho khớp ngày.",c:{},o:od(BAL.odb.j22.odO_3+((S.court&&S.court.ksp&&S.court.ksp.af.me)||0)/2),w:{bac:-80},l:{danh:-5}/* bạc only when Tổng quản takes it (canPay keeps the lock) */,x:"sổ khớp ngày, hết bị nghi · hỏng: Tổng quản biết chuyện của ngươi",dom:"Mưu kế",go:()=>{S.pregMismatch=false;S.khBook=1},fail:()=>{S.ksKnows=1}});
+ deck.unshift(kspFixCard(()=>{S.pregMismatch=false;S.khBook=1}));
  deck.unshift({n:"Uống thuốc phá thai",t:"Bài thuốc mạnh, hại thân.",c:{bac:-30},o:od(BAL.odb.j22.odO_4+careY(S)),w:{},l:{suc:BAL.eff.j22.sucL},x:`mất đứa bé, Sức ${balSg(BAL.eff.j22.sucGo)} · hỏng: băng huyết — có thể băng huyết mà chết: ${chanceW(BAL.rk.abortDie)}`,dom:"Sức khỏe",go:()=>{S.preg=0;S.hidden=false;S.pregMismatch=false;S.trueFather=null;apply({suc:BAL.eff.j22.sucGo})},fail:()=>{S.preg=0;S.hidden=false;S.pregMismatch=false;S.trueFather=null;if(roll(BAL.rk.abortDie))die("Uống thuốc phá thai, băng huyết mà chết")}});
  const CF=BAL.confess;deck.unshift({n:"Thú tội với Hoàng thượng",t:"Quỳ trước Dưỡng Hòa điện, nhận hết tội.",c:{},o:oddsCl(Math.round(CF.base+(S.sung||0)/CF.sungDiv+(S.th||0)/CF.thDiv)),w:{},l:{},x:"giữ được mạng (vào lãnh cung), hắn bị xử trảm · hỏng: Hoàng thượng không tha — có thể bị ban chết",dom:"Sủng",go:()=>{const m=manById(S.trueFather);if(m){m.alive=false;log(`${m.name} bị xử trảm.`)}S.pregMismatch=false;cold("Thú tội tư thông")},fail:()=>{const m=manById(S.trueFather);if(m)m.alive=false;S.pregMismatch=false;deathSentence("Thú tội tư thông, Hoàng thượng không tha")}})}})();
 /* each month: the book may be checked; rivals carry on affairs too and can be found out */

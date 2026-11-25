@@ -233,7 +233,11 @@ function cfPlan(){const d=S.nightWhy;if(!d||(typeof wk==="function"&&d.wk!==wk()
  const was=S.tonight;const pick=d.pick||null;const turned=stoleFrom||d.flip0||pick;
  if(!turned&&CF.skipNoPick)return null;return{wk:d.wk,pick,turned,cause:d.cause,pending:typeof window.nfOn==="function"&&window.nfOn()}}   /* pending = the palace night: the flip choice (jnf) follows the scene */
 /* the week panel / Tuần lục book (#dawn, j87 .kbk) or the title cover the screen: the tablet comes after them */
-function busy(){if(typeof NLP!=="undefined"&&NLP)return true;/* the Luân hồi identity card is open: the palace scene waits until she has accepted it (j52 NLP) */
+/* review/tainghe-open-fix: the wait is for the identity card being OPEN (queued in Q or on screen), not for NLP alone: a life whose card left the
+   queue without nlAccept (a harness that empties Q after start(), any future path that drops it) kept NLP set for ever, so this scene never played,
+   jflip cfBusy() stayed true and jnf's showModal gate swallowed EVERY dialog of that night (Tài nghệ pop-up at buổi 3, kit-tntile r4) for up to CAP */
+function nlOpen(){try{if(typeof Q!=="undefined"&&Q.some(m=>m&&m.nl))return true;const M=document.getElementById("modal");return !!(M&&!M.hidden&&M.querySelector(".nlopts,[data-nl]"))}catch(e){return true}}
+function busy(){if(typeof NLP!=="undefined"&&NLP&&nlOpen())return true;/* the Luân hồi identity card is open: the palace scene waits until she has accepted it (j52 NLP) */
  const d=document.getElementById("dawn");if(d&&!d.hidden&&(d.classList.contains("on")||d.classList.contains("kbkdawn")))return true;
  if([...document.querySelectorAll(".kbk")].some(e=>e.offsetParent||e.getClientRects().length))return true;const ti=document.getElementById("title");return !!(ti&&!ti.hidden)}
 const DBG=window.__cfdbg=[];const dbg=x=>{DBG.push(x);if(DBG.length>30)DBG.shift()};
