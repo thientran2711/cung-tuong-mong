@@ -110,7 +110,10 @@ function kmStage(cls,html,o){o=o||{};const red=kmReduced();const ov=document.cre
  const close=()=>{if(phase===2)return;phase=2;T.forEach(clearTimeout);ov.classList.add("km-out");setTimeout(()=>ov.remove(),240);try{o.onEnd&&o.onEnd()}catch(e){console.error(e)}};
  /* KIT 81 SCENE-END BUTTON (owner OD:L1261): a scene never closes by itself. When its animation has played (or was skipped by a tap) the hint is replaced by ONE kit
     button (.kbtn.kmend) whose words fit the event (kitSceneEndLabel); only that button closes the scene. manual scenes carry their own button (Nhận, Chọn…). */
- const finish=()=>{if(phase>0)return;phase=1;T.forEach(clearTimeout);T.length=0;ov.classList.add("km-skip");try{o.onFinal&&o.onFinal()}catch(e){console.error(e)}
+ /* robot-coop-fix-5 (KIT §81 family, km-red-end): a tap skips the animation beats; reduced motion (kmReduced: OS setting / effects off) has no
+    animation to skip, so its auto-finish keeps the scene's own later() beats (kitNightEnd's «Tiếp tục» beat: before, it was cleared at 0 ms
+    and the night card stayed with no way out, over the next steal game: the co-op week never ended) */
+ const finish=()=>{if(phase>0)return;phase=1;if(!red){T.forEach(clearTimeout);T.length=0}ov.classList.add("km-skip");try{o.onFinal&&o.onFinal()}catch(e){console.error(e)}
   if(!o.manual){const b=kitSceneEnd(ov,kitSceneEndLabel(cls,o));if(b)b.setAttribute("data-km-close","")}};
  ov.addEventListener("click",e=>{e.stopPropagation();if(e.target.closest("[data-km-close]")){close();return}if(o.manual)return;if(phase===0)finish()});
  if(red)setTimeout(finish,0);else if(!o.manual)later(o.dur||1600,finish);
