@@ -176,7 +176,7 @@ async function rebirthCase(A,B,X,tag,how){
   ok(st&&r.b===a.b,'9: both seats step (no split)',[r,a.b]);ok(r.look===1&&r.tin===1&&r.shown,'9: her panels are shown again after the step',r)}
  /* 10 the ONE classifier (COOPW.qKind) on the REAL panel producers (law 11 table, run time) + a real choice still holds the clock end */
  if(ON(10)&&await sameDay('10')&&await fresh('10')){const T=await A.p.evaluate(()=>{const out=[];const keep=Q.splice(0);const M=document.getElementById('modal');
-   const one=(name,want,f)=>{const n0=Q.length;let err='';try{f()}catch(e){err=e.message}const x=Q.find((y,i)=>i>=0&&!keep.includes(y));out.push({name,want,got:x?COOPW.qKind(x):'(none'+(err?': '+err.slice(0,40):'')+')'});Q.splice(0)};
+   const one=(name,want,f)=>{const n0=Q.length;let err='';try{f()}catch(e){err=e.message}const x=Q.find((y,i)=>i>=0&&!keep.includes(y));out.push({name,want,got:x?(typeof COOPW.qKind==='function'?COOPW.qKind(x):'no classifier'):'(none'+(err?': '+err.slice(0,40):'')+')'});Q.splice(0)};
    const f=rivals.find(v=>v.alive&&!v.out&&!v.coop)||rivals[0];
    one('Tin báo notice (kitNoticeOpen)','tell',()=>{kitNotice({id:'t10',line:'Tin thử',text:'Một tin.'});kitNoticeOpen('t10')});
    one('Thái y notice (jthaiy shape kind notice)','tell',()=>{Q.push({t:'Thái y bắt mạch',kind:'notice',who:pDoc(),h:'<p>Mạch bình thường.</p>'})});
