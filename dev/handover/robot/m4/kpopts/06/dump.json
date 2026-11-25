@@ -1,11 +1,11 @@
 {
- "buoi": 58,
- "hud": "Bạch Nghê Thường Thường tại 19 tuổi Kiếp thứ nhất Tháng chạp · thượng tuần · năm thứ nhất | Buổi chiều",
+ "buoi": 19,
+ "hud": "Bạch Nghê Thường Quý nhân 20 tuổi Kiếp thứ nhất Tháng mười một · trung tuần · năm thứ hai | Buổi chiều",
  "build": "0756a05b",
- "at": "2026-11-25T07:46:02.732Z",
+ "at": "2026-11-25T11:11:32.089Z",
  "dump": {
-  "title": "Y phục dự Lễ Lạp bát",
-  "bad": 2,
+  "title": "Y phục dự Tiết Đông chí",
+  "bad": 1,
   "frameBottom": 787,
   "dlgClass": "dlg kpsc kpanel kdtx kszf ksz3 kszlive",
   "dlgStyle": "--kdpw: 178px;",
@@ -30,19 +30,19 @@
     288,
     450,
     312,
-    588
+    442
    ],
    "kpopts": [
     288,
     450,
     312,
-    588
+    442
    ],
    "k3right": [
     288,
     282,
     312,
-    755
+    609
    ],
    "mb": [
     144,
@@ -54,13 +54,13 @@
     144,
     272,
     468,
-    777
+    631
    ]
   },
   "kpoptsScroll": [
    0,
-   588,
-   588
+   442,
+   442
   ],
   "cards": [
    [
@@ -78,12 +78,6 @@
    [
     288,
     751,
-    312,
-    140
-   ],
-   [
-    288,
-    897,
     312,
     140
    ]

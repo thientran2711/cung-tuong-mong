@@ -27,3 +27,6 @@ KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/02/ title=Đại x�
 KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/03/ title=Hoàng thượng bad=1
 KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/04/ title=Kỳ nguyệt sự bad=1
 KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/05/ title=Bổng lộc tháng mười bad=3
+11:10 ROOT CAUSE of the 3 «15-min silences» (09:26, 10:27, 10:55 — modals «Điềm báo» ×2, «Tích Cần viện»): HARNESS bug, not a game freeze. The bottom tab bar («Hành sự» cy 936) stays hit-testable under these small info modals, so policy believed it was on the main screen, saw no enabled «Sang buổi» (day button greyed) and returned a silent {wait} forever, ignoring the modal's ✕. Fixed: a visible ✕ means a modal. No PAGE-FREEZE was ever logged.
+Player-facing: «Tích Cần viện» shows «Không vào được lúc này: đêm chỉ cung nhân ra vào … Lên vào: hết khắc buổi này (cần 3)» after the player tapped «Vẫn đi (Danh -5)» — the confirm cost Danh -5 and then the visit was refused (cost without gain?): ODD, law 3 (gain-and-loss): check whether Danh -5 was charged.
+KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/06/ title=Y phục dự Tiết Đông chí bad=1
