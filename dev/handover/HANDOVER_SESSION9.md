@@ -3569,3 +3569,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (15:50Z) create_trigger REFUSED at depth 8 (same limit as create_session): 142 cannot open KK30, seat successors (M2b, LC16…) or its own hourly wake. → wrote TAKEOVER_MAIN_143.md NOW and gave sếp the ROOT paste block in the first reply (she is awake). 142 serves by send_message until 143 announces.
 - (15:51Z) «main is now 142» sent to LC15 (delivered).
 - (15:56Z) «main is now 142» sent to KK29, SELSCENE-19, rv 13gvVZxJ, SANGBUOI r3, BIG rv 13YzNeAK, M2, M3, M5b, CO-NGU (all delivered); idle RD5/MD5/MAMA/NEWS-UNK not woken (credits). FROM MAIN 142 lines in FOREMAN_B–F_STATUS.
+- (16:00Z) OWNER (chat): flight today, fix play-stopping system bugs urgently → FLIGHT PRIORITY order to LC15 (QC+push stack 14–18 first, kit/selscene/sangbuoi = second push), KK29 (final sha ASAP), FOREMAN B/D/E/F STATUS lines. Push still needs her «cho phép đưa lên live» in LC15 chat.
