@@ -39,3 +39,21 @@ PRIORITY #1 CHECK ('kit-opts-pack-4 delta'): delta = 7603d689 vs 084d1b27 (j93 k
 3. quickcheck on the merged build: FAIL core gate G4 `90-button-crawl`: `fold · Ô lưu [div#modal.modal.kptitle] · Lui · close button did not close its layer` (1 sure fault). The crawler itself is unreliable on this box (a standalone `button-crawl.js --fast` run crashed with a 180 s waitForFunction timeout on LIVE dbae89eb AND on c8a58fba), so item 3 is NOT proven to be this pack's fault — rerun the gate once on an idle box; do not land on a red gate.
 PASS (merged c8a58fba unless noted): dialog-fixed all pass; kit-close-reach 2/2 ok (NT=1); kit-endcard-ink 4/0 (incl. reward-over-ending case); kit-notice-action 16/0; quickcheck parts open/old save/perf ok (open 2115 ms, render 264/262, buổi 1608/1509). kit-opts-realtap: MUTATE FAILs Fold+iPad; clean run has the known `vlout` flake (also on LIVE, KK30).
 Not done: scans of real-art shots; KIT.md §56.32b read-through.
+
+---
+# HANDOVER — kit reviewer seat 4 (sonnet) → successor, 11/25/2026 ~17:50Z
+START_CTX ~5 % (estimate); at hand-over ~36 % (get_session used_tokens ≈ 181k/1M at 18 %, extrapolated). Rolled over per Foreman B child 4 order (rule OD:L1217: rollover = CONTEXT, never 30 turns; roll at START+25 %, hard ceiling 60 % of the window; every takeover prompt copies these three lines verbatim).
+## Done (all pushed; STATUS lines in FOREMAN_B_STATUS.md)
+- KIT BUG #3 kit-close-reach d8acb74b: LIVE 14+14 FAIL → head ok; MUTATE bites; flake 1/3 full runs iPad (ksz-lost-tap family). Superseded by packs.
+- KIT FAIL pack-3 f10d269d; **KIT OK 5e3732c9 review/kit-opts-pack-4-rv** (= 084d1b27 + my test-only fix: kit-opts-realtap MUTATE pushes .opts 45vh out); **KIT FAIL 7603d689 review/kit-opts-pack-4** (delta kszTextFirst3: faces-opts iPad text unscrolled 3/4 runs, scan j7c REG, G4 crawl unproven).
+- Merged copy to build on: **review/kit-opts-pack-4-rv2 c8a58fba** (= 7603d689 + realtap fix + origin/main dbae89eb, j15 kitRk kept, index/sw rebuilt).
+## Queue
+1. KK30 fix sha on top of c8a58fba → run: `node dev/test/kit-faces-opts.js <index.html>` 3 consecutive 36/36 (iPad faces0 lines7 opts2 must read unscrolled); opt-frame-scroll-scan Fold+iPad ×3 = 0 FAIL, 0 regressions vs LIVE (`opt-frame-scroll-diff.js live.json branch.json`; j7c must be stable); dialog-fixed file:// ; kit-close-reach ×2 (NT=1); kit-endcard-ink; kit-notice-action; kit-opts-realtap MUTATE=1 FAIL both devices; quickcheck ON AN IDLE BOX (G4 90-button-crawl «Ô lưu · Lui» was a single FAIL, crawler also crashed on LIVE under load). Verdict lines «KIT OK <sha>» + «LAND READY <branch> <sha> FOR MAIN 144 / LC16».
+2. co-ngu-seals r4 (text-only, when posted; LIVE branch review/co-ngu-seals still 73fe03b9): grep kpnote wording (no «mạng», «tải», «dữ liệu», Wi-Fi; VANPHONG: network = «đường xa», tải = «mở lại») + quickcheck.
+3. kit-opts-realtap r2: done via pack-4-rv (MUTATE bites). Non-gating KK30: realtap «vlout last option not fired» flake also on LIVE 1/3; kit-one-opt-tap ksp-card LOCKED tap-pop 4/6 FAIL on Fold.
+## Recipes (scratch, not committed; same as predecessor + these)
+- Worktrees under /home/user/wt (p4b = rv2, kcr-live = detached origin/main): `export NODE_PATH=$(npm root -g)`; tests take PATHS (kit-close-reach, realtap, meter-tap, one-opt-tap, faces-opts, scan, touchdrag, row-tap-size) or file:// URLs (dialog-fixed, focus, focus-fig, close); kit-alarm-scan needs `<index> dev/build/all.js`, kit-waitcue `<index> dev/build/jdfv.js`, kit-tag-collide `<index> WxH,..` (>10 min).
+- Merge LIVE: `git merge origin/main`, `git checkout --theirs index.html sw.js`, resolve source/KIT_REQUESTS, `bash dev/site/build_site.sh`, commit. Run ONE heavy test at a time (CPU load causes flakes); long runs go in background with a Monitor until-loop; 120 s foreground limit.
+- STATUS/report pushes: handover branch moves fast — fetch, rebase, push with 3-4 retries.
+- Known flakes (not branch faults): realtap `vlout` (LIVE too), one-opt-tap ksp LOCKED pop, scan j7c, button-crawl under load, kcr ksz-lost-tap ~1/440.
+- No CDN review folder was created by me (nothing to wipe).
