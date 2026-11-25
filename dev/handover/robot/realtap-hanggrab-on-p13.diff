@@ -1,0 +1,33 @@
+--- a/dev/test/robot-rt-coop.js	2026-11-25 23:28:13.862472437 +0000
++++ b/dev/test/robot-rt-coop.js	2026-11-25 22:26:46.181959608 +0000
+@@ -61,14 +61,29 @@
+     const s = Seat({ url: URL0, out: OUT, dev, bot: A.bot, seed: (+A.seed || 1) * 10 + (who === 'host' ? 1 : 2) + k * 100, life: 'coop-rt-' + TAG + '-' + who + '-k' + k,
+       origin: A[who + 'Origin'], road: A[who + 'Road'], stuckMin: A.stuckMin, slice: A.slice, noBoot: k > 1, coop: true, pre: k === 1 ? (who === 'host' ? hostPre(st) : guestPre(st)) : null });
+     /* patch #11 SEAT-HANG WATCHDOG (J2SH / EUQW: a seat printed nothing 15 min after a «Tuần mới» dialog = an await in the seat loop never returned): no harness step (R.steps) for HANG_MIN min → log + bug row 'seatHang' (buổi, url, layer text), reload the tab like a player (rejects the hung await), 2nd stall → close the page (play throws → seat life ends as harness, not a silent freeze) */
++    /* INVESTIGATOR hang capture (coop-page-freeze): CDP session opened at seat start; at a stall → Debugger.pause stack + heap + renderer RSS */
++    let cdp = null; try { cdp = await p.context().newCDPSession(p) } catch (e) {}
++    const capF = path.join(OUT, 'hangcap-' + who + '.txt'); const capW = t => { try { fs.appendFileSync(capF, '[' + new Date().toISOString() + ' ' + ts() + '] ' + t + '\n') } catch (e) {} };
++    const rss = () => { try { return require('child_process').execSync("ps -eo rss,pcpu,args | grep -E 'type=renderer|type=gpu' | grep -v grep | awk '{printf \"%dMB %s%% %s\\n\", $1/1024, $2, substr($0, index($0,\"--type=\"), 30)}'", { timeout: 5000 }).toString() } catch (e) { return 'ps err ' + e.message } };
++    const memT = setInterval(async () => { const h = cdp ? await Promise.race([cdp.send('Runtime.getHeapUsage').catch(e => 'err'), new Promise(r => setTimeout(() => r('TO'), 5000))]) : null; capW('mem buoi ' + s.R.buoi + ' steps ' + s.R.steps + ' heap ' + JSON.stringify(h && h.usedSize ? Math.round(h.usedSize / 1e6) + '/' + Math.round(h.totalSize / 1e6) + 'MB' : h) + ' | ' + rss().replace(/\n/g, ' ; ')) }, 60e3);
++    const grab = async tag => { if (!cdp) return capW(tag + ' no cdp'); capW(tag + ' START rss: ' + rss().replace(/\n/g, ' ; '));
++      try { await Promise.race([cdp.send('Debugger.enable'), new Promise(r => setTimeout(r, 20000))]); const pz = new Promise(r => cdp.once('Debugger.paused', r)); await cdp.send('Debugger.pause').catch(e => capW('pause err ' + e.message));
++        const e = await Promise.race([pz, new Promise(r => setTimeout(() => r(null), 30000))]); if (!e) return capW(tag + ' PAUSE TIMED OUT (no JS frame reachable: not a JS loop, or renderer wedged)');
++        capW(tag + ' PAUSED reason=' + e.reason + '\n' + e.callFrames.slice(0, 40).map(f => '   at ' + (f.functionName || '(anon)') + ' L' + (f.location.lineNumber + 1) + ':' + (f.location.columnNumber + 1) + ' s' + f.location.scriptId).join('\n'));
++        for (const f of e.callFrames.slice(0, 6)) { try { const src = await cdp.send('Debugger.getScriptSource', { scriptId: f.location.scriptId }); const L = src.scriptSource.split('\n')[f.location.lineNumber] || ''; capW('   SRC ' + (f.functionName || 'anon') + ': ' + L.slice(Math.max(0, f.location.columnNumber - 300), f.location.columnNumber + 200)) } catch (x) {} }
++        /* a 2nd sample 3 s later shows whether it is one loop */ await cdp.send('Debugger.resume').catch(() => {}); await new Promise(r => setTimeout(r, 3000)); const pz2 = new Promise(r => cdp.once('Debugger.paused', r)); await cdp.send('Debugger.pause').catch(() => {}); const e2 = await Promise.race([pz2, new Promise(r => setTimeout(() => r(null), 30000))]);
++        if (e2) capW(tag + ' PAUSED#2\n' + e2.callFrames.slice(0, 25).map(f => '   at ' + (f.functionName || '(anon)') + ' L' + (f.location.lineNumber + 1) + ':' + (f.location.columnNumber + 1)).join('\n')); await cdp.send('Debugger.resume').catch(() => {}); await cdp.send('Debugger.disable').catch(() => {})
++      } catch (x) { capW(tag + ' grab err ' + x.message) } };
+     const HM = (+process.env.HANG_MIN || 5) * 60e3; let hs = -1, hat = Date.now(), hn = 0;
+     const wd = setInterval(async () => { if (!process.env.RT_TEST_HANG && s.R.steps !== hs) { hs = s.R.steps; hat = Date.now(); hn = 0; return } if (Date.now() - hat < HM * (hn + 1)) return; hn++;
+       const info = await Promise.race([p.evaluate(() => ({ u: location.href.slice(0, 80), h: (document.body.innerText || '').replace(/\s+/g, ' ').slice(0, 160) })).catch(() => null), new Promise(r => setTimeout(() => r(null), 5000))]);
+       const b = { type: 'seatHang', msg: who + ' seat: no harness step for ' + Math.round((Date.now() - hat) / 60e3) + ' min at buổi ' + s.R.buoi + ' (stage ' + hn + ')' + (info ? ' · ' + info.u + ' · ' + info.h : ' · page.evaluate hung too'), n: 1, at: new Date().toISOString() };
++      if (!info) await grab('SEATHANG stage ' + hn);
+       s.R.bugs.push(b); s.R.harness.seatHangs = (s.R.harness.seatHangs || 0) + 1; console.log('SEATHANG', who, ts(), b.msg);
+       if (hn === 1) await p.reload({ timeout: 30000 }).catch(() => {}); else await p.close().catch(() => {}) }, 30e3);
++    let slowN = 0, grabbed = 0; const pr = setInterval(async () => { const t0 = Date.now(); const ok = await Promise.race([p.evaluate(() => 1).then(() => 1).catch(() => 2), new Promise(r => setTimeout(() => r(0), 15000))]); if (ok === 0) { slowN++; capW('probe: evaluate > 15 s (n=' + slowN + ') buoi ' + s.R.buoi); if (slowN >= 2 && grabbed < 3) { grabbed++; await grab('PROBE') } } else slowN = 0 }, 30e3);
+     try { await s.play(p) } catch (e) { s.R.bugs.push({ type: 'harness', msg: 'runner error: ' + String(e.message).split('\n')[0], n: 1 }); s.R.life = s.R.life || { id: 'HARNESS', type: 'harness' }; s.save() }
+-    clearInterval(wd);
++    clearInterval(wd); clearInterval(memT); clearInterval(pr);
+     pair.lives.push({ seat: who, dev, kiep: k, extra, room: code, life: s.R.life, harness: s.R.harness, exitPick: s.R.exitPick, bugs: s.R.bugs, dead: s.R.dead, buoi: s.R.buoi, saves: s.R.saves });
+     flush(); console.log('SEAT LIFE DONE', who, 'k' + k, s.R.life && s.R.life.id);
+     if (s.R.life && /HARNESS|SLICE|SEGMENT/.test(s.R.life.id)) break;
