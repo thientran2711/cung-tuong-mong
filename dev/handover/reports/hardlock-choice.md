@@ -110,3 +110,34 @@ LIVE 49f17d4d brought jdayq (solo new-day order) which holds back every card whe
 | viecnho-fix.test.js (main's new Việc nhờ, merge 4232) | – | – | ALL OK |
 Law check: 1 OK · 2 OK (one altCost function for every swapped road; Tốn row shows the real cost before she picks) · 3 OK (never below floor; «Thôi» costs nothing, gains nothing = a leave) · 4 OK · 6 content note (row 4) · 7 OK · 9 OK · 11 OK (scan + plant, fixed for jdayq) · 13 OK.
 Non-blocking: the scan's «N buổi steps» part catches 0 cards from 40 turns on LIVE and head alike (jdayq era) — the static + builder parts carry the coverage; scan keeper may revisit.
+
+## r3 — B FIXER «hardlock-choice-r3» (opus) session_01N1tNP4cyVoeLHp6YVozQ5r — SẴN SÀNG KIỂM review/hardlock-choice-r3 87e622fb
+START_CTX ≈3 % (used_tokens read 0 → estimate) · roll at ≈28 %, ceiling 60 % · finished at ≈12 %.
+PRIORITY #1 CHECK ('jdeadcard'): OD 0 | ledger 0 | claims 5 (hardlock-choice B child7) | main jdeadcard.js (LIVE, flight-modal-deadlock 4da55ce8 DEAD-CARD NET) + j68sd 1f0a491a (serv-022 / sea-023 got a bạc-free stance) + j68seeds_validate gate | review/* review/hardlock-choice (r2 c8a2bb3e) | archive 0. Reused: jnolock (r2), jdeadcard's «Lui» + __deadCards log, kit ✕ (kitCancelIx / kitModalCloser), dead-card.js, hardlock-choice.js, hardlock-scan.js. Nothing new built.
+Base: r2 c8a2bb3e + merge LIVE origin/main 9f72524b (43388f63; only index.html / sw.js conflicted → rebuilt).
+
+### Root of the 8 LC14 stack FAILs
+Not an engine clash: LIVE 1f0a491a (flight-modal-deadlock) fixed the DATA — j68c-serv-022 / sea-023 now have one bạc-free stance (law 2), and BAL gives a one-step road 40 bạc. So at 46 bạc the r2 fixture card was no longer all-bạc: a road was open, jnolock rightly did nothing, and the test's «whole purse 46 / Sức swap / kit ✕ at purse 0» premises were stale. The second fault was real and law 14: LIVE had TWO guards of the same family side by side — jnolock (bạc-only roads paid in Sức/Danh, else a «Thôi» road) and jdeadcard (all-greyed + no cancel → #mclose «Lui»), with two leave words and two «dead» lists.
+
+### Fix — ONE owner module, ONE decision point (law 14)
+- `dev/build/jnolock.js` = the one owner of «a card with no road she can take». `kitNoLock(m)`: (1) a road she can take / a cancel road / a gift back road (kgx, from jdeadcard) → nothing; (2) bạc-only roads paid another way — the r2 rule unchanged (whole purse + altCost(short, rank) Sức, Danh at the j68c step ratio, kitFloorOk never below keep); (3) else ONE leave: the kit close word «Lui» added as the card's cancel road; `kitCancelIx` counts it on open AND forced cards → the kit ✕ everywhere (jdeadcard's look), Esc/tap-out/✕/pick all → closeModal (co-op guest → i:-1), nothing paid; logged once per card in `window.__deadCards` (jdeadcard's robot log).
+- `dev/build/jdeadcard.js` DELETED; removed from assemble.py; quickcheck hook 85 now keys on jnolock.js (old shas with jdeadcard still run); README + BAL.nolock comment say what the code does.
+- No new UI part (kit ✕ / kit option card), no new number (BAL.nolock, altCost), words «Lui» + the r2 tag only (law 7).
+
+### Tests (both suites, intent kept)
+- `dev/test/hardlock-choice.js`: (a)–(d) build the REAL j68c-serv-022 and put back its pre-1f0a491a all-bạc price (the bạc-free road costs the one-step bạc), purse = 14 bạc short of the cheapest road (= the owner's 60 → 46 case); new (a0) the real card now at 46 bạc is untouched (2 open, no tag, no leave); (d)(e)(g) the leave is the kit ✕ «Lui» (forced card too), nothing paid.
+- `dev/test/dead-card.js` part 3 = the one net: (3a) all-bạc card at bạc 2 with Sức → both roads open, paid in Sức, no leave; (3b) nothing to pay with → kit ✕ «Lui» on open + forced card, closes, bạc unchanged, logged. Parts 1/2 unchanged.
+
+### Gates (commands + outputs)
+| gate | LIVE 9f72524b | head 87e622fb | r3 stacked on LC14 base ed82787b (merge, index/sw only conflicted, rebuilt; not pushed) |
+|---|---|---|---|
+| `node dev/test/hardlock-choice.js` (Fold 755x1000 + iPad 1180x820) | `HARDLOCK-CHOICE FAIL (12)` | `HARDLOCK-CHOICE ALL PASS` | `HARDLOCK-CHOICE ALL PASS` |
+| `node dev/test/dead-card.js <url>` | `DEAD-CARD FAIL 3` (3a no swap, 3b leave not «Lui» road) | `DEAD-CARD PASS` (scan n 0 / 318 built; part2 1/4 + 1/4) | `DEAD-CARD PASS` |
+| `node dev/tools/hardlock-scan.js --turns 40 --md` | – | `PASS · 905 cards · HARD LOCKS 0 · not drawn 15 (dead 0) · plant guarded · page errors 0` | – |
+| one-core-guard / undef-scan | – | PASS / PASS (305 names) | – |
+| `node dev/test/coop-e2e.js` Fold host | – | 142/142 (a first run 139/141: WS close 1006 at join, «each sees the other» — network) | – |
+| `COOP_SWAP=1` iPad host | 142/142 | 142/142 (a first run 136/144: buổi 2:3 ready-wait, Q 0, no modal = coop-host-lag sync family, not a card; rerun clean) | – |
+| `bash dev/tools/quickcheck.sh` ALONE | – | `QUICKCHECK PASS · old save ok · render 255/221, tab 642/631, buổi 1941/1788 ms, tasks>200ms 27/27 · core gates PASS · hooks 8` (incl. 85 dead-card) | – |
+SHOTS (scratch only, LOOKED 3×): dead all-bạc card at bạc 2, Sức 1 — open + forced, Fold + iPad: kit VIỆC frame, both roads greyed «Bạc -60», kit ✕ top right, no overflow.
+Law check: 2 OK (one altCost function for every swapped road) · 3 OK (floor kept; leave costs nothing) · 4 OK · 7 OK · 9 OK (kit ✕ only) · 11 OK (scan + plant + dead-card scan) · 14 OK (one rule, jdeadcard gone).
+Note for LC14: replace hardlock-choice-r2 c8a2bb3e with r3 87e622fb (contains LIVE 9f72524b).
