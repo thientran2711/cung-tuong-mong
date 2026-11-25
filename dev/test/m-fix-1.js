@@ -11,9 +11,9 @@ const b=await chromium.launch();for(const dev of ['fold','ipad']){const vp=dev==
  await p.goto('file://'+path.resolve(process.argv[2]||'dev/index.html'));await p.waitForFunction(()=>typeof start==='function'&&typeof dqNextCue==='function',null,{timeout:180000});await p.waitForTimeout(1500);
  const r=await p.evaluate(async()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;start();Q.length=0;document.querySelectorAll('#klife,.kmov,#kroul').forEach(e=>e.remove());render();
   const n=document.getElementById('next'),M=document.getElementById('modal'),w=ms=>new Promise(r=>setTimeout(r,ms));const o={free:[n.disabled,n.textContent]};
-  const ov=document.getElementById('ov');ov.hidden=false;/* an activity is open (jdayq gate (c) dqActEl: the mini-game layer) */
+  const ov=document.createElement('div');ov.className='kmov';document.body.appendChild(ov);/* an activity is open (jdayq gate (c) dqActEl: a kit motion scene) */
   Q.push({t:"<p>Thử</p>",opts:[{n:"Đã hiểu",fx:{},go:()=>{}}]});showModal();render();await w(300);o.held=[n.disabled,n.textContent,n.classList.contains('kcwait'),M.hidden];
-  ov.hidden=true;showModal();render();await w(800);o.shown=[n.disabled,n.textContent,M.hidden];Q.length=0;showModal();render();await w(800);o.after=[n.disabled,n.textContent,n.classList.contains('kcwait')];o.cue=CTM_WAIT.dqHeld;return o});
+  ov.remove();showModal();render();await w(800);o.shown=[n.disabled,n.textContent,M.hidden];Q.length=0;showModal();render();await w(800);o.after=[n.disabled,n.textContent,n.classList.contains('kcwait')];o.cue=CTM_WAIT.dqHeld;return o});
  console.log(dev,JSON.stringify(r));ok(!r.free[0]&&/Sang/.test(r.free[1]),dev+': free → «'+r.free[1]+'» enabled');ok(r.held[0]&&r.held[1]===r.cue&&r.held[2],dev+': held card → disabled + says «'+r.cue+'»');
  ok(r.shown[1]!==r.cue&&!r.shown[2],dev+': card shown → own label back');ok(!r.after[0]&&/Sang/.test(r.after[1])&&!r.after[2],dev+': after → «'+r.after[1]+'»');ok(!errs.length,dev+': no page errors '+errs.slice(0,2).join(' | '));await ctx.close()}
 await b.close();process.exit(F.length?1:0)})();
