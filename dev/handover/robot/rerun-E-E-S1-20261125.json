@@ -387,6 +387,84 @@
      "buoi": 5022
     }
    ]
+  },
+  {
+   "id": "E-S1-R1-lover-4-3774992119",
+   "origin": "thd",
+   "road": "thd_tho",
+   "round": "R1",
+   "bot": "lover",
+   "botHarness": "sens",
+   "kiep": 4,
+   "seed": 3774992119,
+   "dev": "ipad",
+   "harness": {
+    "kind": "realtap",
+    "realtap": true,
+    "jsClicks": 0,
+    "cap": null,
+    "sha": "b4b181f8"
+   },
+   "live": "Build 0dc642a71578 → resumed at buổi 471 on Build 13f84c70f2a3",
+   "end": "Xuất cung",
+   "type": "end",
+   "fate": "Xuất cung về quê",
+   "death": false,
+   "age": 24,
+   "year": 5,
+   "rank": 0,
+   "buoi": 663,
+   "steps": 13510,
+   "taps": 1416,
+   "exitPick": null,
+   "bugCounts": {
+    "game": 5,
+    "stuck": 1,
+    "dead": 1
+   },
+   "valid": "VALID",
+   "validWhy": "game-imposed ending (Hoàng thượng băng hà, tân đế ân xá)",
+   "reviewFiles": [
+    "review/rerun-E-S1-E-S1-R1-lover-4-3774992119-moments.md",
+    "review/rerun-E-S1-E-S1-R1-lover-4-3774992119-review.md"
+   ],
+   "bugs": [
+    {
+     "type": "game",
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Tin trong cung buổi này)",
+     "n": 28
+    },
+    {
+     "type": "stuck",
+     "msg": "no-clock loop: 150 taps without a clock step on page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+     "n": 3
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=13: Chương 2 · Sơ thừa ân sủng / Chương 2 · Sơ thừa ân sủng / Chương 2 · Sơ thừa ân sủng / Đã biết về Phế phi Nghiêm Tuyết Nhạn / Lịch tháng / Chương 2 · Sơ thừa ân sủng)",
+     "n": 1
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=6: Chương 3 · Học lễ nghi cung cấm / Tin báo / Lịch tháng / Chương 3 · Học lễ nghi cung cấm / Phùng Vân Khởi / Tin trong cung buổi này)",
+     "n": 1
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=10: Tin báo / Phùng Vân Khởi / Lịch tháng / Chương 3 · Học lễ nghi cung cấm / Thu Đồng / Đã biết về Thục phi Trình Hải Lan)",
+     "n": 1
+    },
+    {
+     "type": "dead",
+     "msg": "close button has no effect: .dlg «Chương 4 · Danh hiệu Tài nữ» «Lui»",
+     "n": 1
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Lịch tháng / Tin trong cung buổi này)",
+     "n": 1
+    }
+   ]
   }
  ],
  "parked": [
