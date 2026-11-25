@@ -236,7 +236,7 @@ const INTRO=[
    ["Lãnh cung","bị phế vào lãnh cung là mất phẩm vị; còn sống là còn đường về","r"],
    ["Được",srv()?"được phong vị, có người nâng đỡ, đi tới đâu tùy {x}":"ngôi Hoàng hậu; con lên ngôi thì làm Hoàng thái hậu, buông rèm nhiếp chính, hay tự lên ngôi","g"],
    ["Phúc duyên","kiếp sau không mang theo gì; chỉ Phúc duyên tích được để đổi thân phận"],
-   ["Chơi cùng bạn","hai người một hậu cung, mỗi người một thân phận, một mục tiêu riêng"]])+say(`<p>{X} chạm <b>Tiếp</b> để {m} chỉ qua mấy chỗ trên màn.</p>`)}];
+   ["Cùng hảo hữu","hai người một hậu cung, mỗi người một thân phận, một mục tiêu riêng"]])+say(`<p>{X} chạm <b>Tiếp</b> để {m} chỉ qua mấy chỗ trên màn.</p>`)}];
 function introHTML(i){const P=INTRO[i];return P.h()}
 function introPic(i){try{return INTRO[i].p()||""}catch(e){return""}}
 /* the event picture (RIGHT TOP) of a spotlight step: the tab / topic it is about, else the Hành sự picture (kitInfoArt keys) */
@@ -329,7 +329,7 @@ const TIPS={
  "tranhghe":{t:"Tranh ghế",h:"Khi một ghế phẩm vị còn trống, các phi tần thi tài nghệ rồi xét đức hạnh. Ai đứng đầu được tấn phong vào ghế ấy."},
  "lanhcung":{t:"Lãnh cung",h:"Vào lãnh cung là mất phẩm vị. Còn sống là còn đường xin phục vị; giữ Sức và chờ dịp."},
  "luanhoi":{t:"Luân hồi",h:"Chết là hết: kiếp này không mang theo gì của kiếp trước, chỉ Phúc duyên tích được mới đổi được thân phận. Kiếp chưa tròn một năm mà chưa lên Quý nhân là kiếp dở dang, không được Phúc duyên."},
- "coop":{t:"Chơi cùng bạn",h:"Hai người cùng một hậu cung, mỗi người một thân phận. Mỗi người làm việc của mình; tuần mới bắt đầu khi cả hai đã qua đêm."}};
+ "coop":{t:"Cùng hảo hữu",h:"Hai người cùng một hậu cung, mỗi người một thân phận. Mỗi người làm việc của mình; tuần mới bắt đầu khi cả hai đã qua đêm."}};
 window.KTUT_TIPS=TIPS;
 function want(id){if(!TIPS[id]||REC.seen[id])return;T.pend[id]=1}
 function showTip(id){const d=TIPS[id];if(!d)return;REC.seen[id]=1;saveRec();delete T.pend[id];kitTip({id,title:d.t,html:`<p>${say(d.h)}</p>`})}
