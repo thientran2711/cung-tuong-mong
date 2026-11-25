@@ -64,3 +64,8 @@ review/temper-outburst 6b85187e — SẴN SÀNG KIỂM (round 2, same reviewer).
 | off | 76 | (max 1 at buổi 44) | 36 @44 | – | no | – |
 | even | 5 | – | – | – | no | 0 |
 Too early for any G4 verdict (all still year 1, no outburst frame yet). tp-even-1 is held by the shared-harness bug (taps the kit odds meter of an event option → «Thang cơ duyên» popup, again and again; reported to F via D 09:13Z). The «live» record now refreshes every 20 s (c02602fb), so the next interim rows are complete.
+
+## HANDOVER T1b → successor (25/11 ~10:45Z; T1b at its context roll line)
+- G4 lives RUN in T1b's container (session_01D3E3NaH1eX32YRAhiQCYnb, /home/user/wt/tp-g4, build 6b85187e = game.html, lives tp-<arm>-1, resume on). They live only while that container lives; if the successor is a new container, restart there from scratch: build review/temper-outburst (python3 dev/build/assemble.py), copy dev/index.html → <dir>/game.html, then as a TRACKED background task (setsid dies when the session idles): `node dev/measure/temper-hh-rt.js run <dir>/game.html <dir> 3 hot,even,timid,off 4 resume=1` (2 h task cap → relaunch the same command; it resumes). Interim: `node dev/measure/temper-hh-rt.js live <dir>` every ~2 h into this report; final: `… sum <dir>` (PASS rule in the script head). Lives use F's fixed robot-rt.js once it lands (copy into dev/test/robot-rt.js on review/temper-outburst).
+- Never kill lives during quickcheck without TaskStop + pkill; a killed life writes a HARNESS .tp.json that the runner now resumes (dc1eb6cb).
+- review/temper-perception-rv ab5d65ee READY (B1+N3+N4) — reviewer round 2 pending; FAILs come via FOREMAN D.
