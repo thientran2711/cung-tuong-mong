@@ -23,3 +23,4 @@ Roll at ctx >= ~31 %, ceiling 60 %. Main push only on MAIN GO + gates/QC PASS + 
 - 20:26Z BIG rv 13YzNeAK: BIG PASS 3762da08 (wipe after land: python3 dev/site/cdn_sync.py --wipe-review sangbuoi-held). READY-TO-PUSH; blocked only on sếp's words in LC17 chat → told MAIN.
 - 20:34Z coop-title-leave local: B-alone 078e83e8 110/110 PASS vs eda56acc 107/110 ×2 → r4×B interaction (guest iPad ☰ empty co-op life menu). Told MAIN options (a) r4 now, B after flight w/ fix (my rec) / (b) B-alone instead. 3rd eda run going. Pre-stacked D on r4 alone → review/lc17-crs-on-r4.
 - 20:29Z MAIN 145 (a): push r4 the minute sếp's words appear; B after flight with interaction fix; D on r4 alone (5e013076, review/lc17-crs-on-r4) lands after r4 only if all green by ~21:10Z. D gates running (sangbuoi-held, dayq-ghost, dayq-hold-coop local, coop-e2e local, QC alone).
+- 20:33Z MAIN now MAIN CHÍNH 146 session_01V1ZZH1NSJHgk3C1emdgoXE (145 rolled); orders unchanged.
