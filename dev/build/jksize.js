@@ -713,6 +713,9 @@ html body #modal .dlg.kszlive #mb .opts.opts.opts.k3btns.k3btns{display:grid!imp
 #modal .dlg.kszlive>#mb>.opts.k3btns{padding:0 12px 12px;box-sizing:border-box}
 html body #modal .dlg.kszlive #mb .opts.opts.opts.k3btns.k3btns>button{grid-column:span var(--k3s,1)!important;order:0!important;width:auto;min-width:0;max-width:none;margin:0}
 #modal .dlg.kszlive .opts.k3meas>button{grid-column:auto}
+/* KIT BUG #3 (FOREMAN E 25/11 «Tin báo» 33 tin, KK26): a frame whose BODY is the long scroller (M / S frames: #mb scrolls, the option row stands at the END of it) never loses its way out — the option row is pinned to the bottom of the visible body (sticky, opaque), only the text scrolls. A panel with options has no header ✕, so without this the only closer sat below the scroll. */
+html body #modal .dlg.kszlive #mb .opts.opts.opts.k3btns.k3btns{position:sticky!important;bottom:0;z-index:4;background:var(--k-card,#fffaf0)!important;box-shadow:0 -8px 10px -8px rgba(60,30,10,.35)}
+html body #modal .dlg.kszlive #mb .k3right>.opts.opts.opts.k3btns.k3btns{padding-top:8px}
 html body #modal .dlg.kszlive #mb .opts.k3btns>button .kabody{min-width:6.5em}html body #modal .dlg.kszlive #mb .opts.k3btns>button :is(.kan,.kat){word-break:normal;overflow-wrap:normal;hyphens:none}`;document.head.appendChild(st)})();
 /* the #modal .dlg element is reused by every pop-up: the live frame is undone before the next render */
 function kszLiveReset3(){const d=document.querySelector("#modal .dlg");if(!d||!d.__ksz3)return;d.__ksz3=null;d.classList.remove("kszf","ksz3","kszlive");["ksz","pres","focus","lay","narrow"].forEach(k=>delete d.dataset[k]);d.style.removeProperty("--kszfh");d.style.removeProperty("--kszcw")}
