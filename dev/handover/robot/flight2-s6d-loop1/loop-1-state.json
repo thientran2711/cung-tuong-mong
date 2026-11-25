@@ -1,0 +1,54 @@
+{
+ "at": "2026-11-25T10:54:25.752Z",
+ "url": "https://thientran2711.github.io/cung-tuong-mong/",
+ "S": {
+  "name": "Diêu Hải Lan",
+  "year": 3,
+  "turn": 29,
+  "tuan": 1,
+  "buoi": 3,
+  "dead": false,
+  "rank": 0,
+  "place": "lc"
+ },
+ "coop": {
+  "CW": null,
+  "room": null,
+  "seat": {
+   "url": "https://ctm-coop.victoria-tntt.workers.dev",
+   "name": "",
+   "pid": "0b82424bf0cc403ebec7f422",
+   "state": {
+    "status": "off",
+    "room": "",
+    "you": "",
+    "seats": null,
+    "week": 0,
+    "ended": {
+     "a": false,
+     "b": false
+    },
+    "C": null,
+    "mine": null,
+    "msv": 0,
+    "peerOnline": false,
+    "bothIn": false,
+    "playing": false
+   },
+   "code": "",
+   "seat": null,
+   "week": 0,
+   "online": {
+    "a": false,
+    "b": false
+   },
+   "ended": {
+    "a": false,
+    "b": false
+   },
+   "frozen": false,
+   "waiting": false
+  }
+ },
+ "Q": 12
+}
