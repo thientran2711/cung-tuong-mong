@@ -168,14 +168,14 @@ new MutationObserver(()=>{if(T.hidden&&(HM||SM))dropAll()}).observe(T,{attribute
    is up and nothing is on #modal (the home ✕ / Esc / tap outside closed it, a reload landed on a dead life, a fresh profile, jcloud / jcooplobby
    drop() after a pull, a lobby ‹ Lui, a panel closed by another module…) the title was only cover art with 0 tappable elements.
    ONE guard: title up + #modal hidden + empty queue + no visible cover of its own (loading, life card, roulette, co-op freeze panel, move layer)
-   ⇒ a life behind the menu (solo life, or a co-op life whose room is still open on this seat — lifeBehind) goes back to it (same path as
-   «Tiếp tục» / «Trở lại cuộc chơi», a co-op seat stays in its room), otherwise the home panel again.
+   ⇒ a life behind the menu (solo life, or a co-op life whose room is still open on this seat — lifeBehind) goes back to it by backToGame
+   (the same path as the card's ✕ / «Trở lại cuộc chơi»; nothing reloads, a co-op seat stays in its room), otherwise the home panel again.
    Runs after every closeModal and, as a watchdog, on every #modal / #title visibility change. */
 const TG_COVER="#kload,#klife,#kroul,#coopfz,.kmov";
 const tgCover=()=>[...document.querySelectorAll(TG_COVER)].some(x=>x.getClientRects().length>0&&getComputedStyle(x).visibility!=="hidden");/* fixed layers: offsetParent is null */
 const tgBlank=()=>{const M=$("modal");return !T.hidden&&(!M||M.hidden)&&!Q.length&&!tgCover()};
 function tgFix(){try{if(!tgBlank())return false;window.__ctmBare=(window.__ctmBare||0)+1;
-  if(lifeBehind()&&(coopLife()||lastSlot())&&resumeGame())return true;
+  if(backToGame())return true;/* the same «back» path as the home card's ✕ (homeMr) — one way back, with or without a saved sổ */
   PG="home";go("home",false);return true}catch(e){console.error("title guard",e);return false}}
 let tgT=0;function tgSoon(ms){if(tgT)clearTimeout(tgT);tgT=setTimeout(()=>{tgT=0;tgFix()},ms==null?350:ms)}
 try{new MutationObserver(()=>{if(tgBlank())tgSoon(350)}).observe($("modal"),{attributes:true,attributeFilter:["hidden","class"]});

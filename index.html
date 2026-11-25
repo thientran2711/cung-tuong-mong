@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"eaaae7c8+","t":"2026-11-25T11:41Z","c":"Nút nào chạm một lần là ăn, không còn trượt; chạm người ở Hậu cung không còn lỗi; ✕ ở bàn trang điểm lui ra đúng chỗ.","b":"58d65ceed14a","h":[{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"}]};
+window.CTM_BI={"s":"2e7df547+","t":"2026-11-25T12:35Z","c":"Nút nào chạm một lần là ăn, không còn trượt; chạm người ở Hậu cung không còn lỗi; ✕ ở bàn trang điểm lui ra đúng chỗ.","b":"10637cd03351","h":[{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -10090,14 +10090,14 @@ new MutationObserver(()=>{if(T.hidden&&(HM||SM))dropAll()}).observe(T,{attribute
    is up and nothing is on #modal (the home ✕ / Esc / tap outside closed it, a reload landed on a dead life, a fresh profile, jcloud / jcooplobby
    drop() after a pull, a lobby ‹ Lui, a panel closed by another module…) the title was only cover art with 0 tappable elements.
    ONE guard: title up + #modal hidden + empty queue + no visible cover of its own (loading, life card, roulette, co-op freeze panel, move layer)
-   ⇒ a life behind the menu (solo life, or a co-op life whose room is still open on this seat — lifeBehind) goes back to it (same path as
-   «Tiếp tục» / «Trở lại cuộc chơi», a co-op seat stays in its room), otherwise the home panel again.
+   ⇒ a life behind the menu (solo life, or a co-op life whose room is still open on this seat — lifeBehind) goes back to it by backToGame
+   (the same path as the card's ✕ / «Trở lại cuộc chơi»; nothing reloads, a co-op seat stays in its room), otherwise the home panel again.
    Runs after every closeModal and, as a watchdog, on every #modal / #title visibility change. */
 const TG_COVER="#kload,#klife,#kroul,#coopfz,.kmov";
 const tgCover=()=>[...document.querySelectorAll(TG_COVER)].some(x=>x.getClientRects().length>0&&getComputedStyle(x).visibility!=="hidden");/* fixed layers: offsetParent is null */
 const tgBlank=()=>{const M=$("modal");return !T.hidden&&(!M||M.hidden)&&!Q.length&&!tgCover()};
 function tgFix(){try{if(!tgBlank())return false;window.__ctmBare=(window.__ctmBare||0)+1;
-  if(lifeBehind()&&(coopLife()||lastSlot())&&resumeGame())return true;
+  if(backToGame())return true;/* the same «back» path as the home card's ✕ (homeMr) — one way back, with or without a saved sổ */
   PG="home";go("home",false);return true}catch(e){console.error("title guard",e);return false}}
 let tgT=0;function tgSoon(ms){if(tgT)clearTimeout(tgT);tgT=setTimeout(()=>{tgT=0;tgFix()},ms==null?350:ms)}
 try{new MutationObserver(()=>{if(tgBlank())tgSoon(350)}).observe($("modal"),{attributes:true,attributeFilter:["hidden","class"]});
@@ -98550,7 +98550,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="58d65ceed14a";window.CTM_BUILD=BUILD;
+const BUILD="10637cd03351";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
