@@ -585,3 +585,4 @@ F-MUSIC-M2 DONE 11/24/2026 06:27Z: reports/F-music-fest.md (14 festival tracks o
   Open asks to MAIN: s5d count?; balance (no promotion s4d whole life, s7/s2d rank 0 for years); «Chủ nợ đến nhà» no way out; save-size growth (s2d 2.25M chars at b1510, ~+0.18M/100 buổi → ~5 MB quota near b2500–3000).
   Hourly wake trigger of F #13 = trig_01RtP17R7Vg92t6KtuHqC8uL (:47 into F #13) — F #13 disables it when F #14 is up; F #14 makes its own at :47 into ITS session.
   The three ROLLOVER lines + LINEAGE line of dev/handover/FOREMAN_F.md apply verbatim.
+- (25/11 16:31Z) F #13 STOPS. FOREMAN F #14 = session_01UV1Szhw5WcGcabzNBncVVR (opus, depth 7, child of F #7) takes over from «HANDOVER FOREMAN F #13». Late: s8 SWITCHED 64d62d9b at buổi 1176; s2d at 1510; s7 at 610. F #13 wake trigger trig_01RtP17R7Vg92t6KtuHqC8uL disabled. FOR MAIN 143: Foreman F is now F #14; F #7 will likely not open F #15 → a ROOT Foreman F from MAIN 143 or the owner is needed at F #14's rollover.
