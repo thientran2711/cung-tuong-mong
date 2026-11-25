@@ -43,3 +43,9 @@ With today's ration (one random colour per part) she rarely owns all 4 colours o
 - Start (lxInit, every consort incl. NPCs, two-way): one full cool + one full warm set of her level (Kiểu thanh nhã; Kiểu cầu kỳ joins the pool from rank diemRank). Old saves keep their boxes (lxInit runs once).
 - Mirror: sets she can paint first in each row, then the greyed ones with where to get them.
 - Test adds: start ≥2 pickable sets (one cool + one warm), pickable first, 2 months of ration = a whole set. Fold + iPad ALL PASS. Shots: img/_review/makeup-set/start-*.jpg.
+
+## r3 (MAIN 147 look 25/11 23:19Z / 23:24Z)
+- WHITE BOX over her face in the reveal step-in: the portrait patch (.ktrv-pw) faded in before its picture had painted — only its makeup layers showed (a pale square). Now it shows only once the portrait is decoded (class ktrv-pon). Whole family (KIT §60): every face-layer box `.kfxf` stays hidden until the picture beside it has painted (img[data-kld], one global rule `:has(>img:not([data-kld]))>.kfxf`): mirror zoom, reveal figure + patch, stage figures, kitFxPut boxes. A failed picture keeps its layers hidden.
+- The set note is printed ONCE, short: «Bộ mờ: còn thiếu màu, chạm để xem» (LX_SETNOTE); what is missing + «Đường kiếm» only on tap (row header).
+- Tests add: note once and short, why + roads on tap, patch only over a painted picture, layers hidden until painted, portrait failing → no white box. Fold + iPad ALL PASS.
+- Videos r3: img/_review/makeup-set/mirror-set-r3-{fold-755x1000,ipad-1180x820}.mp4.

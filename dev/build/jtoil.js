@@ -1107,6 +1107,14 @@ function kitFaceZoom(p,file){const v=TOIL_FIT.fit&&TOIL_FIT.fit[file];if(!v)retu
  return `<div class="kfzoom" role="img" aria-label="Dung nhan trong gương"><div class="kfzoom-i" style="left:${left.toFixed(2)}%;top:60%;width:${zw.toFixed(2)}%;transform:translateY(-${v[1].toFixed(2)}%)">`+
   `<img src="${IMG_U("img/"+file)}" alt=""><span class="kfxf">${fx}</span></div></div>`}
 window.kitFaceZoom=kitFaceZoom;
+/* KIT §60 FACE LAYERS WAIT FOR THEIR PICTURE (makeup-set, MAIN 147 25/11: a WHITE box over her face in the reveal): the face layers (.kfxf: blush, skin light, colour layers)
+   of ANY picture box stay hidden until the picture under them has painted (img[data-kld]); alone they read as a blank pale patch. One rule for every host (mirror zoom,
+   reveal figure + portrait patch, stage figures, kitFxPut boxes). A picture that fails keeps its layers hidden. */
+(function(){const mk=i=>{try{if(i&&i.tagName==="IMG"&&i.complete&&i.naturalWidth&&!i.dataset.kld)i.dataset.kld=1}catch(e){}};
+ document.addEventListener("load",e=>mk(e.target),true);
+ const scan=r=>{try{if(r.tagName==="IMG")mk(r);else if(r.querySelectorAll)r.querySelectorAll("img:not([data-kld])").forEach(mk)}catch(e){}};
+ const go=()=>{if(!document.body)return setTimeout(go,50);scan(document.body);new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes)if(n.nodeType===1)scan(n)}).observe(document.body,{childList:true,subtree:true})};go();
+ const st=document.createElement("style");st.id="kfxwait-css";st.textContent=`:has(>img:not([data-kld]))>.kfxf{visibility:hidden}`;document.head.appendChild(st)})();
 (function(){const st=document.createElement("style");st.id="kfzoom-css";st.textContent=`
 .kfzoom{position:relative;width:min(200px,100%);aspect-ratio:1;margin:0 auto 6px;border-radius:50%;overflow:hidden;background:#efe0c6;box-shadow:0 0 0 3px var(--gold,#c9a227),0 0 0 6px #8a6a2a,0 3px 10px rgba(60,30,10,.35)}
 .kfzoom-i{position:absolute}
@@ -1124,7 +1132,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§60",title:"kitSw
 function toilColUI(){const st=TOIL.st,box=kg82Box();if(!box||!st)return;KG82.setup=1;box.hidden=false;st.col=toilColFix(st.col||(S.toilette&&S.toilette.col));if(typeof lxColPick==="function")st.col=lxColPick(st.col);const lxF=typeof lxColRows==="function"?lxColRows:(r=>r),lxN=typeof lxCount==="function"?lxCount(S):4;
  TOIL.prev={look:st.col.want==="diem"?"tuyet":"dep",col:st.col};/* makeup-lux: the bold group previews at the top level (Khuynh thành), no overdone level */TOIL.prevUI=toilColUI;const por=toilPor(),me=pMe();
  box.innerHTML=`<div class="toilw"><div class="toilfig"><p class="past">Gương đồng soi trước: điểm trang khéo thì dung nhan mang đúng những màu này. Mỗi mức mang độ xa xỉ riêng như bảng dưới; ${TOIL_STY.diem} hợp dịp lớn. Gặp dịp, xa xỉ của son phấn cộng chung với y phục, trang sức mà xét; quá dịp, quá phẩm thì người ta chê ${TOIL_DV.diem}.${toilTasteNote()}</p><div class="kgr">${kitRows(toilLvRows())}</div></div>`+
-  `<div>${typeof lxMirrorNote==="function"?lxMirrorNote():""}${kitSwatches({key:"toilcol",rows:lxF(toilPreRows(st.col).concat(toilColRows(st.col))),onPick:(r,k)=>{if(/^pre-/.test(r)){const x=TOIL_PRE.find(y=>y[0]===k&&"pre-"+y[2]===r);if(x){st.col=Object.assign({},x[4]);if(x[2]==="diem")st.col.want="diem"}}else st.col[r]=k;toilColUI()}})}</div></div>`+
+  `<div>${typeof lxMirrorNote==="function"?lxMirrorNote():""}${kitSwatches({key:"toilcol",rows:(R=>{/* the set note once: under the last set row that has one (makeup-set r3) */let last=-1;R.forEach((r,i)=>{if(r&&r.note)last=i});return R.map((r,i)=>r&&r.note&&i!==last?Object.assign({},r,{note:""}):r)})(lxF(toilPreRows(st.col).concat(toilColRows(st.col)))),onPick:(r,k)=>{if(/^pre-/.test(r)){const x=TOIL_PRE.find(y=>y[0]===k&&"pre-"+y[2]===r);if(x){st.col=Object.assign({},x[4]);if(x[2]==="diem")st.col.want="diem"}}else st.col[r]=k;toilColUI()}})}</div></div>`+
   `<div class="kg82act">${lxN?`<button class="${kg82Btn()}" id="toilgo">Trang điểm<small>kẻ mày, đánh phấn, chấm son</small></button>${kitQuick({id:"toilquick2",n:"Điểm trang nhanh",win:TOIL_MK.vua,lose:TOIL_MK.vung})}`:""}<button class="${kg82Btn(true)}" id="toilmoc2">Để ${toilMkW("moc")}</button>${typeof lxRushBtn==="function"?lxRushBtn():""}</div>`;
  try{kitGameFigRefresh()}catch(e){}
  if($("toilgo"))$("toilgo").onclick=()=>{TOIL.prev=null;TOIL.prevUI=null;toilMakeup()};if($("toilquick2"))$("toilquick2").onclick=()=>{TOIL.prev=null;TOIL.prevUI=null;toilFinish("quick")};if($("lxrush"))$("lxrush").onclick=()=>{lxRush();toilColUI()};$("toilmoc2").onclick=()=>{TOIL.prev=null;TOIL.prevUI=null;toilFinish(false)}}
@@ -1167,7 +1175,8 @@ function toilReveal(o,done){let fin=false;try{if(typeof kmStage==="function"&&km
   const closeAll=()=>{if(ph===3)return;ph=3;T.forEach(clearTimeout);try{kitFxClear&&kitFxClear()}catch(e){}ov.classList.add("km-out");setTimeout(()=>ov.remove(),240);end()};
   /* KIT 81 scene-end button (owner OD:L1261): the zoomed face ends with ONE kit button; no tap anywhere closes it */
   const showCard=()=>{R.classList.add("ktrv-zoomed");try{if(typeof kitFigHD==="function")setTimeout(()=>kitFigHD(im),400)}catch(e){}/* the zoomed figure gets its HD twin */kitSceneEnd(ov,"Tiếp theo",closeAll);/* the scene-end bar re-lays the overlay: aim the camera again on the settled layout */requestAnimationFrame(()=>{try{camSet()}catch(e){}})};
-  const toZoom=()=>{if(ph>=2)return;ph=2;T.forEach(clearTimeout);T.length=0;if(!R.style.getPropertyValue("--ktsc"))camSet();R.classList.add("ktrv-zin");if(porH)R.classList.add("ktrv-hasp");showCard()};
+  const toZoom=()=>{if(ph>=2)return;ph=2;T.forEach(clearTimeout);T.length=0;if(!R.style.getPropertyValue("--ktsc"))camSet();R.classList.add("ktrv-zin");if(porH){R.classList.add("ktrv-hasp");/* makeup-set (MAIN 147 25/11: a WHITE box over her face): the portrait patch shows only once its picture is decoded (its makeup layers alone read as a blank box) */
+   const pim=fw.querySelector(".ktrv-pw img");const on=()=>{if(ph<3&&pim&&pim.naturalWidth)R.classList.add("ktrv-pon")};if(pim){if(pim.complete&&pim.naturalWidth)on();else if(pim.decode)pim.decode().then(on,()=>{});else pim.addEventListener("load",on)}}showCard()};
   ov.addEventListener("click",e=>{e.stopPropagation();if(ph<2)toZoom()});
   /* THE CAMERA (owner 16/11 21:25Z): no round frame. Plate + figure sit in ONE .ktrv-cam; the camera zooms into HER FACE (clothes still in shot) on the same room painting */
   const camSet=()=>{/* layout metrics (offset*), never rects: rects carry the design-canvas scale and the step-in transform */
@@ -1217,7 +1226,7 @@ window.toilReveal=toilReveal;
 .ktrv-fw>img{display:block;height:100%;width:auto;max-width:none;transition:opacity .6s ease}
 .ktrv-fw>.kfxf{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;transition:opacity .6s ease}
 .ktrv-pw{position:absolute;opacity:0;transition:opacity .6s ease;pointer-events:none}.ktrv-pw>img{display:block;width:100%;height:100%;max-width:none}.ktrv-pw>.kfxf{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
-.ktrv-zin .ktrv-pw{opacity:1}/* owner 17/11: the portrait is only a face patch; its edges FEATHER into the figure picture (never a hard cut line, the figure stays under it) */.ktrv-pw{-webkit-mask-image:linear-gradient(to bottom,#000 80%,transparent),linear-gradient(to right,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(to bottom,#000 80%,transparent),linear-gradient(to right,transparent,#000 7%,#000 93%,transparent);-webkit-mask-composite:source-in;mask-composite:intersect}.ktrv-red .ktrv-pw,.ktrv-red .ktrv-fw>img{transition:none}
+.ktrv-zin.ktrv-pon .ktrv-pw{opacity:1}/* owner 17/11: the portrait is only a face patch; its edges FEATHER into the figure picture (never a hard cut line, the figure stays under it) */.ktrv-pw{-webkit-mask-image:linear-gradient(to bottom,#000 80%,transparent),linear-gradient(to right,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(to bottom,#000 80%,transparent),linear-gradient(to right,transparent,#000 7%,#000 93%,transparent);-webkit-mask-composite:source-in;mask-composite:intersect}.ktrv-red .ktrv-pw,.ktrv-red .ktrv-fw>img{transition:none}
 .ktrv-in .ktrv-fw,.ktrv-zin .ktrv-fw{opacity:1;transform:none}
 .ktrv-wob .ktrv-fw{animation:ktWob .9s ease-in-out 2}
 @keyframes ktWob{0%,100%{transform:none;filter:none}20%{transform:rotate(-1.6deg) skewX(2deg);filter:blur(1.4px)}50%{transform:rotate(1.4deg) skewX(-2deg);filter:blur(.8px)}75%{transform:rotate(-.8deg)}}

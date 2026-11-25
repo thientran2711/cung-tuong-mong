@@ -45,6 +45,7 @@ Object.assign(BAL,{ration:{on:true,
 const LX_KD="Son phấn";
 const LX_N={may:["Than liễu","Thanh đại","Họa mi đại","Loa tử đại"],son:["Son sáp","Son hoa hồng","Son điểm giáng","Son thiên chu cống"],
  ma:["Yên chi giấy","Yên chi bánh","Yên chi hoa hồng","Yên chi tiến cống"],mat:["Phấn gạo","Phấn hoa lài","Phấn ngọc trâm","Phấn trân châu ngự"]};
+const LX_SETNOTE="Bộ mờ: còn thiếu màu, chạm để xem";/* ONE short line under the set rows (shown once); what is missing + the roads only on tap */
 const LX_ROADS="mua gấp ở Nội vụ phủ, hàng rong, mượn phi tần khi đến chơi, xin Hoàng hậu hay Thái hậu";/* where a missing box comes from: ONE line (mirror note + greyed sets) */
 const LX_PART={may:"kẻ mày",son:"tô son",ma:"đánh má",mat:"phấn mắt"};
 /* law C (OD 17/11 08:25Z C): a box costs at least BAL.ration.buyK of the buyer's bổng — high ranks pay as much of their purse as low ranks */
@@ -130,9 +131,9 @@ function lxNpcCap(v,rec){try{return lxOn()&&v&&v!==S&&!v.coop?lxCapRec(v,rec):re
 function lxColRows(rows){if(!lxOn())return rows;const own={};for(const part of BAL.ration.parts)own[part]=lxBoxes(S,part);
  /* makeup-set (owner OD 25/11 ~23:20Z): EVERY preset set stays on the mirror as a block; a set needing a colour she has no box of is greyed with what is missing (never dropped) */
  return rows.map(r=>{if(/^pre-/.test(r.k)){let n=0;const it=r.items.map(i=>{const x=TOIL_PRE.find(y=>y[0]===i.k);if(!x)return i;const miss=BAL.ration.parts.filter(part=>!own[part].some(e=>e.c===x[4][part]));if(!miss.length)return i;n++;
-   return Object.assign({},i,{off:true,why:`thiếu ${miss.map(part=>toilColE(part,x[4][part])[1].toLowerCase()).join(", ")}`})});
+   return Object.assign({},i,{off:true,why:`thiếu ${miss.map(part=>toilColE(part,x[4][part])[1].toLowerCase()).join(", ")}. Đường kiếm: ${LX_ROADS}`})});
    it.sort((a,b)=>(a.off?1:0)-(b.off?1:0));/* the sets she can paint first, then the greyed ones */
-   return Object.assign({},r,{items:it},n?{note:`Bộ mờ là thiếu hộp đúng màu (chạm để xem thiếu gì). Đường kiếm: ${LX_ROADS}.`}:{})}
+   return Object.assign({},r,{items:it},n?{note:LX_SETNOTE}:{})}
   const L=own[r.k];if(!L)return r;const it=r.items.filter(i=>L.some(e=>e.c===i.k)).map(i=>{const E=L.filter(e=>e.c===i.k);const u=E.reduce((a,e)=>a+e.u,0);return Object.assign({},i,{name:`${i.name} · ${E.map(e=>IT[e.k].n).filter((x,j,a)=>a.indexOf(x)===j).join(", ")}, còn ${u} lần dùng`})});
   return it.length?Object.assign({},r,{items:it}):null}).filter(Boolean)}
 function lxColPick(col){if(!lxOn()){delete col.no;return col}const M=lxMiss(S);if(M.length)col.no=M.slice().sort();else delete col.no;for(const part of BAL.ration.parts){const L=lxBoxes(S,part);if(L.length&&!L.some(e=>e.c===col[part]))col[part]=L.slice().sort((a,b)=>b.u-a.u)[0].c}

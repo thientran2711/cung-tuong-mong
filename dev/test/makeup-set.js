@@ -38,7 +38,8 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));let bad=0;const ok=(n,c,x)=>{if(!
   ok('sets: every TOIL_PRE set shown',all.length>=m.pre&&new Set(all.map(i=>i.k)).size===m.pre,{shown:all.length,pre:m.pre});
   ok('sets: each block has 4 colours',all.every(i=>i.n===4),all.filter(i=>i.n!==4).map(i=>i.k));
   ok('sets: only the set name (no tone words)',all.every(i=>!/lạnh|ấm/.test(i.name))&&m.R.every(r=>!/lạnh|ấm/.test(r.label)),all.map(i=>i.name));
-  ok('sets: greyed ones say why + the row says where',all.filter(i=>i.off).every(i=>/^thiếu /.test(i.why))&&m.R.every(r=>r.items.every(i=>!i.off)||/Đường kiếm/.test(r.note)),{off:all.filter(i=>i.off).length});
+  ok('sets: greyed ones say why + where (on tap)',all.filter(i=>i.off).every(i=>/^thiếu /.test(i.why)&&/Đường kiếm/.test(i.why)),{off:all.filter(i=>i.off).length});
+  ok('sets: the short note shown ONCE',m.R.filter(r=>r.note).length<=1&&m.R.every(r=>!r.note||r.note.length<=40),m.R.map(r=>r.note));
   /* 1b. she owns the four colours of «Sương mai» (and oil): the set is live and applies all four */
   const own=await p.evaluate(()=>{const x=TOIL_PRE.find(y=>y[0]==="suongmai");S.inv=S.inv.filter(e=>!lxOf(e.k));for(const part of BAL.ration.parts)S.inv.push({k:lxKey(part,1),c:x[4][part],u:6});try{if(!alHasOil(S))S.inv.push({k:"aldau1",u:6})}catch(e){}return x[4]});
   m=await mirror();let it=m.R.flatMap(r=>r.items).find(i=>i.k==="suongmai");ok('owned set is live',it&&!it.off,it);
@@ -66,7 +67,17 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));let bad=0;const ok=(n,c,x)=>{if(!
   /* 5. the result close-up: no upscale beyond rvUp */
   await p.evaluate(()=>{try{KG82.run&&KG82.run.stop()}catch(e){}TOIL.st.parts={brow:.9,powder:.9,son:.9};S.toilette={day:toilWk()*10,wk:toilWk(),score:95,makeup:true,col:toilColFix(TOIL.st.col),look:"tuyet"};window.__rvd=0;toilReveal({look:"tuyet",made:true,good:true,pre:"Sương mai",manual:true},()=>{window.__rvd=1})});
   await sleep(2500);await p.evaluate(()=>{try{TOIL_REV.zoom()}catch(e){}});await sleep(2500);
+  const pw=await p.evaluate(()=>{const w=document.querySelector('.ktrv-pw'),R=document.querySelector('.ktrv');return w?{op:getComputedStyle(w).opacity,pon:R.classList.contains('ktrv-pon'),ld:!!(w.querySelector('img').naturalWidth)}:null});
+  ok('portrait patch only over a painted picture (no white box)',!pw||(pw.ld?pw.pon&&pw.op==='1':!pw.pon&&pw.op==='0'),pw);
+  const lay=await p.evaluate(()=>[...document.querySelectorAll('.kfxf')].filter(x=>x.parentElement.querySelector(':scope>img')).map(x=>{const im=x.parentElement.querySelector(':scope>img');return{ld:!!(im.complete&&im.naturalWidth),vis:getComputedStyle(x).visibility}}));
+  ok('face layers hidden until their picture painted',lay.every(x=>x.ld?x.vis==='visible':x.vis==='hidden'),lay);
   const rv=await p.evaluate(()=>({sc:TOIL.rvSc,up:BAL.toil.rvUp}));ok('close-up face within its pixels',rv.sc&&rv.sc.src>0&&rv.sc.face<=rv.sc.src*rv.up+2,rv);
   await p.screenshot({path:`${process.env.MKS_SHOTS||'/tmp'}/mks-reveal-${wh}.jpg`,type:'jpeg',quality:70}).catch(()=>{});
+  await p.evaluate(()=>{try{TOIL_REV.close()}catch(e){}});await sleep(600);faceFail=99;
+  await p.evaluate(()=>{const u=new Set();document.querySelectorAll('img').forEach(i=>{if(/\/por-/.test(i.src))u.add(i.src)});toilReveal({look:"tuyet",made:true,good:true,pre:"Sương mai",manual:true},()=>{})});await sleep(800);
+  await p.evaluate(()=>{const w=document.querySelector('.ktrv-pw img');if(w){w.removeAttribute('data-kld');w.src=w.src.split('?')[0]+'?fail='+Date.now()}try{TOIL_REV.zoom()}catch(e){}});await sleep(2500);
+  const pw2=await p.evaluate(()=>{const w=document.querySelector('.ktrv-pw'),R=document.querySelector('.ktrv');return w?{op:getComputedStyle(w).opacity,pon:R.classList.contains('ktrv-pon'),fx:getComputedStyle(w.querySelector('.kfxf')).visibility}:null});
+  ok('portrait missing → no white box over the face',!pw2||(pw2.op==='0'&&!pw2.pon),pw2);faceFail=0;
+  await p.screenshot({path:`${process.env.MKS_SHOTS||'/tmp'}/mks-nopor-${wh}.jpg`,type:'jpeg',quality:70}).catch(()=>{});
   ok('no page errors',!errs.length,errs);await ctx.close()}
  await b.close();if(SV)SV.close();console.log(bad?`FAIL ${bad}`:'ALL PASS');process.exit(bad?1:0)})();

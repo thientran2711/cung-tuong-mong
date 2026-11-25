@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"4e360cd9+","t":"2026-11-25T23:09Z","c":"makeup-set: mirror preset sets back as 4-colour blocks (greyed with why, never dropped); board never plays for her (retry face + points, he…","b":"760f279acc67","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
+window.CTM_BI={"s":"0b5e7339+","t":"2026-11-25T23:24Z","c":"makeup-set r2: the ration and the start give WHOLE preset sets (BAL.ration.set: one set per 2-month period, start = one cool + one warm set…","b":"5ebd12319669","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -60633,6 +60633,14 @@ function kitFaceZoom(p,file){const v=TOIL_FIT.fit&&TOIL_FIT.fit[file];if(!v)retu
  return `<div class="kfzoom" role="img" aria-label="Dung nhan trong gương"><div class="kfzoom-i" style="left:${left.toFixed(2)}%;top:60%;width:${zw.toFixed(2)}%;transform:translateY(-${v[1].toFixed(2)}%)">`+
   `<img src="${IMG_U("https://ctm-img.victoria-tntt.workers.dev/img/"+file)}" alt=""><span class="kfxf">${fx}</span></div></div>`}
 window.kitFaceZoom=kitFaceZoom;
+/* KIT §60 FACE LAYERS WAIT FOR THEIR PICTURE (makeup-set, MAIN 147 25/11: a WHITE box over her face in the reveal): the face layers (.kfxf: blush, skin light, colour layers)
+   of ANY picture box stay hidden until the picture under them has painted (img[data-kld]); alone they read as a blank pale patch. One rule for every host (mirror zoom,
+   reveal figure + portrait patch, stage figures, kitFxPut boxes). A picture that fails keeps its layers hidden. */
+(function(){const mk=i=>{try{if(i&&i.tagName==="IMG"&&i.complete&&i.naturalWidth&&!i.dataset.kld)i.dataset.kld=1}catch(e){}};
+ document.addEventListener("load",e=>mk(e.target),true);
+ const scan=r=>{try{if(r.tagName==="IMG")mk(r);else if(r.querySelectorAll)r.querySelectorAll("img:not([data-kld])").forEach(mk)}catch(e){}};
+ const go=()=>{if(!document.body)return setTimeout(go,50);scan(document.body);new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes)if(n.nodeType===1)scan(n)}).observe(document.body,{childList:true,subtree:true})};go();
+ const st=document.createElement("style");st.id="kfxwait-css";st.textContent=`:has(>img:not([data-kld]))>.kfxf{visibility:hidden}`;document.head.appendChild(st)})();
 (function(){const st=document.createElement("style");st.id="kfzoom-css";st.textContent=`
 .kfzoom{position:relative;width:min(200px,100%);aspect-ratio:1;margin:0 auto 6px;border-radius:50%;overflow:hidden;background:#efe0c6;box-shadow:0 0 0 3px var(--gold,#c9a227),0 0 0 6px #8a6a2a,0 3px 10px rgba(60,30,10,.35)}
 .kfzoom-i{position:absolute}
@@ -60650,7 +60658,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§60",title:"kitSw
 function toilColUI(){const st=TOIL.st,box=kg82Box();if(!box||!st)return;KG82.setup=1;box.hidden=false;st.col=toilColFix(st.col||(S.toilette&&S.toilette.col));if(typeof lxColPick==="function")st.col=lxColPick(st.col);const lxF=typeof lxColRows==="function"?lxColRows:(r=>r),lxN=typeof lxCount==="function"?lxCount(S):4;
  TOIL.prev={look:st.col.want==="diem"?"tuyet":"dep",col:st.col};/* makeup-lux: the bold group previews at the top level (Khuynh thành), no overdone level */TOIL.prevUI=toilColUI;const por=toilPor(),me=pMe();
  box.innerHTML=`<div class="toilw"><div class="toilfig"><p class="past">Gương đồng soi trước: điểm trang khéo thì dung nhan mang đúng những màu này. Mỗi mức mang độ xa xỉ riêng như bảng dưới; ${TOIL_STY.diem} hợp dịp lớn. Gặp dịp, xa xỉ của son phấn cộng chung với y phục, trang sức mà xét; quá dịp, quá phẩm thì người ta chê ${TOIL_DV.diem}.${toilTasteNote()}</p><div class="kgr">${kitRows(toilLvRows())}</div></div>`+
-  `<div>${typeof lxMirrorNote==="function"?lxMirrorNote():""}${kitSwatches({key:"toilcol",rows:lxF(toilPreRows(st.col).concat(toilColRows(st.col))),onPick:(r,k)=>{if(/^pre-/.test(r)){const x=TOIL_PRE.find(y=>y[0]===k&&"pre-"+y[2]===r);if(x){st.col=Object.assign({},x[4]);if(x[2]==="diem")st.col.want="diem"}}else st.col[r]=k;toilColUI()}})}</div></div>`+
+  `<div>${typeof lxMirrorNote==="function"?lxMirrorNote():""}${kitSwatches({key:"toilcol",rows:(R=>{/* the set note once: under the last set row that has one (makeup-set r3) */let last=-1;R.forEach((r,i)=>{if(r&&r.note)last=i});return R.map((r,i)=>r&&r.note&&i!==last?Object.assign({},r,{note:""}):r)})(lxF(toilPreRows(st.col).concat(toilColRows(st.col)))),onPick:(r,k)=>{if(/^pre-/.test(r)){const x=TOIL_PRE.find(y=>y[0]===k&&"pre-"+y[2]===r);if(x){st.col=Object.assign({},x[4]);if(x[2]==="diem")st.col.want="diem"}}else st.col[r]=k;toilColUI()}})}</div></div>`+
   `<div class="kg82act">${lxN?`<button class="${kg82Btn()}" id="toilgo">Trang điểm<small>kẻ mày, đánh phấn, chấm son</small></button>${kitQuick({id:"toilquick2",n:"Điểm trang nhanh",win:TOIL_MK.vua,lose:TOIL_MK.vung})}`:""}<button class="${kg82Btn(true)}" id="toilmoc2">Để ${toilMkW("moc")}</button>${typeof lxRushBtn==="function"?lxRushBtn():""}</div>`;
  try{kitGameFigRefresh()}catch(e){}
  if($("toilgo"))$("toilgo").onclick=()=>{TOIL.prev=null;TOIL.prevUI=null;toilMakeup()};if($("toilquick2"))$("toilquick2").onclick=()=>{TOIL.prev=null;TOIL.prevUI=null;toilFinish("quick")};if($("lxrush"))$("lxrush").onclick=()=>{lxRush();toilColUI()};$("toilmoc2").onclick=()=>{TOIL.prev=null;TOIL.prevUI=null;toilFinish(false)}}
@@ -60693,7 +60701,8 @@ function toilReveal(o,done){let fin=false;try{if(typeof kmStage==="function"&&km
   const closeAll=()=>{if(ph===3)return;ph=3;T.forEach(clearTimeout);try{kitFxClear&&kitFxClear()}catch(e){}ov.classList.add("km-out");setTimeout(()=>ov.remove(),240);end()};
   /* KIT 81 scene-end button (owner OD:L1261): the zoomed face ends with ONE kit button; no tap anywhere closes it */
   const showCard=()=>{R.classList.add("ktrv-zoomed");try{if(typeof kitFigHD==="function")setTimeout(()=>kitFigHD(im),400)}catch(e){}/* the zoomed figure gets its HD twin */kitSceneEnd(ov,"Tiếp theo",closeAll);/* the scene-end bar re-lays the overlay: aim the camera again on the settled layout */requestAnimationFrame(()=>{try{camSet()}catch(e){}})};
-  const toZoom=()=>{if(ph>=2)return;ph=2;T.forEach(clearTimeout);T.length=0;if(!R.style.getPropertyValue("--ktsc"))camSet();R.classList.add("ktrv-zin");if(porH)R.classList.add("ktrv-hasp");showCard()};
+  const toZoom=()=>{if(ph>=2)return;ph=2;T.forEach(clearTimeout);T.length=0;if(!R.style.getPropertyValue("--ktsc"))camSet();R.classList.add("ktrv-zin");if(porH){R.classList.add("ktrv-hasp");/* makeup-set (MAIN 147 25/11: a WHITE box over her face): the portrait patch shows only once its picture is decoded (its makeup layers alone read as a blank box) */
+   const pim=fw.querySelector(".ktrv-pw img");const on=()=>{if(ph<3&&pim&&pim.naturalWidth)R.classList.add("ktrv-pon")};if(pim){if(pim.complete&&pim.naturalWidth)on();else if(pim.decode)pim.decode().then(on,()=>{});else pim.addEventListener("load",on)}}showCard()};
   ov.addEventListener("click",e=>{e.stopPropagation();if(ph<2)toZoom()});
   /* THE CAMERA (owner 16/11 21:25Z): no round frame. Plate + figure sit in ONE .ktrv-cam; the camera zooms into HER FACE (clothes still in shot) on the same room painting */
   const camSet=()=>{/* layout metrics (offset*), never rects: rects carry the design-canvas scale and the step-in transform */
@@ -60743,7 +60752,7 @@ window.toilReveal=toilReveal;
 .ktrv-fw>img{display:block;height:100%;width:auto;max-width:none;transition:opacity .6s ease}
 .ktrv-fw>.kfxf{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;transition:opacity .6s ease}
 .ktrv-pw{position:absolute;opacity:0;transition:opacity .6s ease;pointer-events:none}.ktrv-pw>img{display:block;width:100%;height:100%;max-width:none}.ktrv-pw>.kfxf{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
-.ktrv-zin .ktrv-pw{opacity:1}/* owner 17/11: the portrait is only a face patch; its edges FEATHER into the figure picture (never a hard cut line, the figure stays under it) */.ktrv-pw{-webkit-mask-image:linear-gradient(to bottom,#000 80%,transparent),linear-gradient(to right,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(to bottom,#000 80%,transparent),linear-gradient(to right,transparent,#000 7%,#000 93%,transparent);-webkit-mask-composite:source-in;mask-composite:intersect}.ktrv-red .ktrv-pw,.ktrv-red .ktrv-fw>img{transition:none}
+.ktrv-zin.ktrv-pon .ktrv-pw{opacity:1}/* owner 17/11: the portrait is only a face patch; its edges FEATHER into the figure picture (never a hard cut line, the figure stays under it) */.ktrv-pw{-webkit-mask-image:linear-gradient(to bottom,#000 80%,transparent),linear-gradient(to right,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(to bottom,#000 80%,transparent),linear-gradient(to right,transparent,#000 7%,#000 93%,transparent);-webkit-mask-composite:source-in;mask-composite:intersect}.ktrv-red .ktrv-pw,.ktrv-red .ktrv-fw>img{transition:none}
 .ktrv-in .ktrv-fw,.ktrv-zin .ktrv-fw{opacity:1;transform:none}
 .ktrv-wob .ktrv-fw{animation:ktWob .9s ease-in-out 2}
 @keyframes ktWob{0%,100%{transform:none;filter:none}20%{transform:rotate(-1.6deg) skewX(2deg);filter:blur(1.4px)}50%{transform:rotate(1.4deg) skewX(-2deg);filter:blur(.8px)}75%{transform:rotate(-.8deg)}}
@@ -61071,6 +61080,7 @@ Object.assign(BAL,{ration:{on:true,
 const LX_KD="Son phấn";
 const LX_N={may:["Than liễu","Thanh đại","Họa mi đại","Loa tử đại"],son:["Son sáp","Son hoa hồng","Son điểm giáng","Son thiên chu cống"],
  ma:["Yên chi giấy","Yên chi bánh","Yên chi hoa hồng","Yên chi tiến cống"],mat:["Phấn gạo","Phấn hoa lài","Phấn ngọc trâm","Phấn trân châu ngự"]};
+const LX_SETNOTE="Bộ mờ: còn thiếu màu, chạm để xem";/* ONE short line under the set rows (shown once); what is missing + the roads only on tap */
 const LX_ROADS="mua gấp ở Nội vụ phủ, hàng rong, mượn phi tần khi đến chơi, xin Hoàng hậu hay Thái hậu";/* where a missing box comes from: ONE line (mirror note + greyed sets) */
 const LX_PART={may:"kẻ mày",son:"tô son",ma:"đánh má",mat:"phấn mắt"};
 /* law C (OD 17/11 08:25Z C): a box costs at least BAL.ration.buyK of the buyer's bổng — high ranks pay as much of their purse as low ranks */
@@ -61156,9 +61166,9 @@ function lxNpcCap(v,rec){try{return lxOn()&&v&&v!==S&&!v.coop?lxCapRec(v,rec):re
 function lxColRows(rows){if(!lxOn())return rows;const own={};for(const part of BAL.ration.parts)own[part]=lxBoxes(S,part);
  /* makeup-set (owner OD 25/11 ~23:20Z): EVERY preset set stays on the mirror as a block; a set needing a colour she has no box of is greyed with what is missing (never dropped) */
  return rows.map(r=>{if(/^pre-/.test(r.k)){let n=0;const it=r.items.map(i=>{const x=TOIL_PRE.find(y=>y[0]===i.k);if(!x)return i;const miss=BAL.ration.parts.filter(part=>!own[part].some(e=>e.c===x[4][part]));if(!miss.length)return i;n++;
-   return Object.assign({},i,{off:true,why:`thiếu ${miss.map(part=>toilColE(part,x[4][part])[1].toLowerCase()).join(", ")}`})});
+   return Object.assign({},i,{off:true,why:`thiếu ${miss.map(part=>toilColE(part,x[4][part])[1].toLowerCase()).join(", ")}. Đường kiếm: ${LX_ROADS}`})});
    it.sort((a,b)=>(a.off?1:0)-(b.off?1:0));/* the sets she can paint first, then the greyed ones */
-   return Object.assign({},r,{items:it},n?{note:`Bộ mờ là thiếu hộp đúng màu (chạm để xem thiếu gì). Đường kiếm: ${LX_ROADS}.`}:{})}
+   return Object.assign({},r,{items:it},n?{note:LX_SETNOTE}:{})}
   const L=own[r.k];if(!L)return r;const it=r.items.filter(i=>L.some(e=>e.c===i.k)).map(i=>{const E=L.filter(e=>e.c===i.k);const u=E.reduce((a,e)=>a+e.u,0);return Object.assign({},i,{name:`${i.name} · ${E.map(e=>IT[e.k].n).filter((x,j,a)=>a.indexOf(x)===j).join(", ")}, còn ${u} lần dùng`})});
   return it.length?Object.assign({},r,{items:it}):null}).filter(Boolean)}
 function lxColPick(col){if(!lxOn()){delete col.no;return col}const M=lxMiss(S);if(M.length)col.no=M.slice().sort();else delete col.no;for(const part of BAL.ration.parts){const L=lxBoxes(S,part);if(L.length&&!L.some(e=>e.c===col[part]))col[part]=L.slice().sort((a,b)=>b.u-a.u)[0].c}
@@ -61310,7 +61320,7 @@ function alInitAll(){try{if(!S||S.dead||!alOn())return;if(typeof isSrv==="functi
 /* her mirror: without oil the Kiểu cầu kỳ presets are not offered, the pick falls back, the note says why */
 (function(){if(typeof lxColRows!=="function")return;const r0=lxColRows;lxColRows=function(rows){const R=r0.apply(this,arguments);/* makeup-set (owner OD 25/11 ~23:20Z, LUẬT SỬA CẢ NHÓM): without hair oil the Kiểu cầu kỳ sets stay on the mirror GREYED with why (never hidden) */
  try{if(alOn()&&!alHasOil(S))return R.map(r=>{if(!(r&&/^pre-/.test(r.k)&&(r.items||[]).every(i=>{const x=TOIL_PRE.find(y=>y[0]===i.k);return x&&x[2]==="diem"})))return r;
-  return Object.assign({},r,{items:r.items.map(i=>Object.assign({},i,{off:true,why:i.off&&i.why?`${i.why}, thiếu ${AL_OILW}`:`thiếu ${AL_OILW}`})),note:`Kiểu cầu kỳ cần ${AL_OILW} để vấn tóc cao (chạm để xem thiếu gì). Đường kiếm: ${LX_ROADS}.`})})}catch(e){}return R};window.lxColRows=lxColRows})();
+  return Object.assign({},r,{items:r.items.map(i=>Object.assign({},i,{off:true,why:i.off&&i.why?`thiếu ${AL_OILW}; ${i.why}`:`thiếu ${AL_OILW} để vấn tóc cao. Đường kiếm: ${LX_ROADS}`})),note:LX_SETNOTE})})}catch(e){}return R};window.lxColRows=lxColRows})();
 (function(){if(typeof lxColPick!=="function")return;const p0=lxColPick;lxColPick=function(col){const c=p0.apply(this,arguments);try{if(alOn()&&c&&c.want==="diem"&&!alHasOil(S))delete c.want}catch(e){}return c};window.lxColPick=lxColPick})();
 (function(){if(typeof lxMirrorNote!=="function")return;const n0=lxMirrorNote;lxMirrorNote=function(){const h=n0.apply(this,arguments);try{if(!alOn())return h;const L=alOil(S);const u=L.reduce((a,e)=>a+e.u,0);
   const row=L.length?["Dầu chải tóc",`${L.map(e=>IT[e.k].n).filter((x,i,a)=>a.indexOf(x)===i).join(", ")}, còn ${u} lần dùng`,"n"]:["Dầu chải tóc","hết: không vấn được Kiểu cầu kỳ · mua ở hàng rong, Nội vụ phủ phát đầu tháng","r"];
@@ -98961,7 +98971,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="760f279acc67";window.CTM_BUILD=BUILD;
+const BUILD="5ebd12319669";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
