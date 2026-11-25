@@ -1767,3 +1767,4 @@ B FIXER coop-presence-reload (seat «đang vắng» after co-op reload) | review
 B BIG rv robot-coop-fix-7-r2 86f289e8 | review/robot-coop-fix-7-r2 | B | session_01N1tNP6atYBYSrnARCqzZSo | RUNNING | 25/11 15:15Z |
 B SMALL rv pcport-rk-r2 1fbae7c6 | review/pcport-rk-r2 | B | session_01N1tNP4RNjX5E8znCrETDsE | RUNNING | 25/11 15:15Z |
 | F LIFE RUNNER s9b (sonnet; one life Fold, new seed/persona ≠ s9, LIVE + harness 594fa1ee, real taps, no cap, no exit road) | dev/handover/robot/flight2-s9b.* | F | (opening) | RUNNING | 25/11 15:17Z |
+| F BIG REVIEWER #6 (successor of #5; harness re-check w/ Tin báo injection, fix-7 part 2, m-fix-3, Tin báo kit softlock) | reports/bc-stack-review.md | F | (opening) | RUNNING | 25/11 15:30Z |
