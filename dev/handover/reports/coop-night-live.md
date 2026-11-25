@@ -37,7 +37,9 @@ Same for a REAL player who leaves any no-clock board open (AFK): the room froze 
 | dayq-order (solo) | – | 1 iPad FAIL once («card over title card»), then PASS ×2 |
 | quickcheck alone, old save | – | PASS (core) on earlier head; suite: see below |
 Earlier-head flakes (not seen on 02d99eea so far): coop-night case 2 «guest pend, Q empty» once (same shape seen once on bare LIVE); case 4b «host can't press» once (no jdayq hold involved).
-Suite on 02d99eea still running at 15:42Z: cn-local-3, e2e SWAP0/1, keymove, dayq-hold, dayq-order, dhc SWAP0/1, km-red-end, cal-rebirth, e2e SWAP0 #2, quickcheck (results in /home/user/wt/cnl-out/g4/summary of this container).
+Final suite on 02d99eea (one test at a time): coop-night LIVE Worker 112/112 ×3, local Worker 112/112, 112/112, 111/111 · coop-e2e SWAP0 142/142 ×2 (+2 more 142/142 on the same jdayq), SWAP1 142/142 · keymove 12/12 · dayq-hold PASS 46 · dayq-order PASS · dayq-hold-coop SWAP0 23/23, SWAP1 22/22 · quickcheck ALONE PASS (old save ok, core gates PASS) · km-red-end FAIL 1 (= bare LIVE, fix-5 not on main) · coop-cal-rebirth: fix 13 ok/18 FAIL ×2 vs bare 13/18 and 18/17 — same cause-4 stuck family on both (fix-6 not on main), no difference from this branch.
+
+**SẴN SÀNG KIỂM review/coop-night-live 02d99eeac5e217bd37da25d9798de50123172106 FOR FOREMAN B (FOR MAIN 140)** — main still 9f72524b at 17:2xZ (no merge needed); index.html/sw.js rebuilt. Reviewer: run coop-night ×3 (LIVE + local Worker) beside a bare-LIVE coop-night, dayq-hold-coop bare vs fix, coop-e2e SWAP0/1, dayq-hold/dayq-order (solo unchanged).
 
 ## HANDOVER (ctx ≈31 % > START 4 % + 25 %)
 If this seat stops before the suite ends: successor checks out review/coop-night-live 02d99eea, builds (python3 dev/build/assemble.py; site already rebuilt),
