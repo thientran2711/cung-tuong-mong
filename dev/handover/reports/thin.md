@@ -1851,3 +1851,29 @@ Probe = branch review/robot-coop-fix-6-rvprobe 387da75c, `dev/test/zz-f6probe.js
 1 two-way: onBuoi/nightEnd same code both seats — OK (test only covers the host side; add the guest side). 4 one core: no new numbers — OK. 11 whole family: FAIL (items 1–3: drop vs carry vs hold = three rules on three paths). 7 wording: no new player text — OK. Solo unchanged (all under CW.on) — OK.
 ### Not run (head will change): coop-e2e SWAP 0/1, coop-night, keymove, worker npm test, quickcheck, A/B. Run on the next SSK sha.
 ### Recipe notes (this container): worktree /home/user/wt/f6 (sparse: rank/ is NEEDED by assemble.py — score.js); local Worker :8797 = `cp coop/worker/package*.json /home/user/wt/wr && npm install`, symlink node_modules into the branch's coop/worker, `wrangler dev --port 8797 --ip 127.0.0.1`.
+
+### FIXER #11 — FINAL: review/robot-coop-fix-6 **ff31fee1** — SẴN SÀNG KIỂM
+Commits on 556c0f57: 04a79b8e (cause 4) · d16c5300 (cause 5: look-up panels) · c4163a93 (cause 5 r2: panels that only tell are CARRIED over the step — U3b 6ZB2 «Tin báo» both seats, host «onBuoi 3.2 me 3.1 Q1») · f670d1d8 + ff31fee1 (test only: preconditions = a live week with no pending end, long buổi clock in cases 5/6; one interim helper tweak reverted). Game code = c4163a93 (index.html / sw.js rebuilt there; later commits touch only dev/test/coop-cal-rebirth.js).
+Cause 5 final rule (jcoopworld onBuoi / tryEnd / CW.nightEnd): at the room's buổi step look-up panels (kit look) are dropped from her queue; every other queued panel with nothing to choose (no options, no card pid, not an ending: notice «Tin báo», news, result) is carried (off the queue, step, back on top, shown again); only a real choice or a mini game holds the step (pendBuoi), as before.
+**coop-cal-rebirth** cases 1–6 (6 = «Tin báo» open on the host at the step → he steps, panel still there): bare 556c0f57 1–6 all FAIL (case 6: host 0 / guest 1, pendBuoi, «onBuoi 1.1 me 1.0 Q1» = 6ZB2) · ff31fee1: **53/53 LIVE Worker (no args) · 53/53 local Worker :8797**.
+**Gates (game c4163a93; bare head = worktree f11fix, merged = c4163a93 + LIVE main 0756a05b, only generated-file / module-list conflicts: assemble.py list = union (+jdayq +jdeadcard), jmapc / KIT.md = main's added block, index/sw rebuilt)**
+| gate | bare head (local :8797) | bare head LIVE no-args | merged head (local :8797) |
+|---|---|---|---|
+| `node dev/test/coop-cal-rebirth.js [url]` | 51/51 (c4163a93) → 53/53 (ff31fee1) | 50/51 (press flake, fixed) → 53/53 (ff31fee1) | 51/51 |
+| `COOP_SWAP=0 node dev/test/coop-e2e.js <out> [url]` | 142/142 | 142/142 | 142/142 |
+| `COOP_SWAP=1 …coop-e2e.js` | 142/142 | 142/142 | 142/142 |
+| `node dev/test/coop-night.js <out> [url]` | 127/127 | 126/126 | **FAIL from case 4** («carried card back after the merged week» 0/1, then 4b–11 cascade) — **pre-existing on LIVE main**: main 0756a05b alone + its own Worker :8803 fails the SAME cases (4, 4b, 5, 6, 8 …); fix-6 bare head passes. Not this branch (new main modules vs the fix-1..5 line; for the lander / main line) |
+| `node dev/test/coop-keymove-unit.js` | 12/12 | — | 12/12 |
+| `node dev/test/km-red-end.js` | PASS 18/18 (one earlier run FAIL 1 = kitFlipTablet no-pref «overlay none» under CPU load; no kit change here) | — | PASS |
+| `cd coop/worker && npm test` | ALL OK | — | (same Worker) |
+| `bash dev/tools/quickcheck.sh` ALONE | QUICKCHECK PASS · old save ok · core gates PASS · render 254/208 · tab 400/608 · buổi 1410/2387 ms · tasks>200 22/25 | — | QUICKCHECK PASS · old save ok · render 236/234 · tab 561/506 · buổi 1355/1261 · 25/23 |
+| coop-house-unit (only on review/robot-coop-fix-3-r4) | n/a: hangs on this line (needs the fix-3 code) | | |
+**A/B robots** (harness review/robot10-coop 918bfa84 overlay both sides; `SEED=7 CAP=300 PCAP=1500 PAR=1 node dev/measure/robot10-coop.js 1 5 2 <out>`; fix = c4163a93 + Worker :8797 (branch Worker), main = 0756a05b + its own Worker :8803; side by side)
+| side | pairs | rooms | stuck rooms |
+|---|---|---|---|
+| fix c4163a93 | 5/5 done (20 lives) | 5 | **0** |
+| main 0756a05b | 2/5 (stopped: verdict clear) | 14 | **13** (mostly buổi 0 «pull» loops / day-step waits; main also lacks the fix-1..5 line, so not all are cause 4/5) |
+Real-tap repro (review/robot-realtap c826eca4 + B unstick patch + my in-page dump, LIVE Worker): U3b rooms reached cause-5 shape on main (dumps BGMQ / 6ZB2 from B runners); on c4163a93 the B runners report the year-1 split gone (9YAK / K6TA moved on to a NEW family → FIXER #12 review/robot-coop-fix-7: seat on button-less #title).
+Laws touched: 11 (whole family: every Q kind that can park the room step — look / notice / news / result carried or dropped; real choices keep holding; every path where a seat's own date can leave the room clock: rebirth guest + host, thin-B show, reload) · 6a/real consequences: no choice is skipped or auto-answered, nothing she reads is lost (carried) · 1: same rule both seats · 9: no UI change (no kit part touched) · 4: no number.
+Not done / notes: (1) person-dialog dedupe (25 copies) stays F's review/button-crawl-fix-2; with it, look-up panels are still dropped at the step (one tap reopens). (2) coop-night FAIL on LIVE main from case 4 = main-line, report to the lander. (3) 2GBH = harness loop (agreed). (4) 9YAK Escape → #title: keyboard key, sent to Foreman B as a separate lead; FIXER #12 owns the #title family.
+Box (lost on restart): wrangler /home/user/wt/wr (:8797 branch Worker, :8803 main Worker); worktrees f11 (bare 556c0f57 + harness), f11fix (branch), f11mrg (merged), f11main (main + harness + realtap), f11ab (fix + harness).
