@@ -23,3 +23,4 @@ PRIORITY #1 CHECK: 'real tap|realtap|elementFromPoint|robot-audit' → OD 25/11 
 | co-op host Fold + guest iPad | room VRDG made + joined by taps (guest typed the code), both seats in the palace playing | — | — | — | — | 0 |
 - grep: no `.click(` / `dispatchEvent` in dev/test/realtap.js, robot-rt.js, robot-rt-coop.js (only page.mouse.click / touchscreen.tap at hit-checked points).
 - Not dead buttons by design: hint popups (#kpop), tap-out catcher (#kxcatch), pointer-events:none / disabled options, element gone between scan and tap.
+- 25/11 fix 1 (runner s5 report): tutorial Lời dặn (#ktut, .ktut-blk blockers) = a gate layer: the robot taps the highlighted hole target first, else the tutorial's own buttons; covers inside #ktut are never dead buttons. A cover that CONTAINS the button (its own dialog / scroll edge) = clipped, not dead (s5 «Chương 1 … covered by div.dlg.kpsc»). Re-test Fold 4 buổi: 32 taps, 0 dead, 0 stuck.

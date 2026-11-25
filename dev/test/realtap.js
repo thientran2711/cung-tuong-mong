@@ -19,16 +19,17 @@ const PROBE = (el) => {
   if (r.width < 1 || r.height < 1) return { zero: true, lab };
   if (getComputedStyle(el).pointerEvents === 'none' || el.disabled) return { disabled: true, lab };
   const pts = [[.5, .5], [.5, .3], [.5, .7], [.3, .5], [.7, .5]];
-  let cover = null;
+  let cover = null, anc = false;
   for (const [fx, fy] of pts) {
     const x = r.left + r.width * fx, y = r.top + r.height * fy;
     if (x < 1 || y < 1 || x > W - 1 || y > H - 1) continue;
     const t = document.elementFromPoint(x, y);
     if (t && (t === el || el.contains(t))) return { x, y, lab, ok: true };
+    if (t && t !== el && t.contains(el)) anc = true;
     if (!cover && t) { const c = t.closest('[id]'); cover = (t.tagName.toLowerCase() + (t.id ? '#' + t.id : '') + (typeof t.className === 'string' && t.className ? '.' + t.className.trim().split(/\s+/).slice(0, 2).join('.') : '') + (c && c !== t ? ' in #' + c.id : '')).slice(0, 80) }
   }
   const off = r.bottom < 0 || r.top > H || r.right < 0 || r.left > W;
-  return { lab, off, cover: cover || (off ? 'off-screen' : 'outside viewport'), top: r.top, bottom: r.bottom };
+  return { lab, off, anc, cover: cover || (off ? 'off-screen' : 'outside viewport'), top: r.top, bottom: r.bottom };
 };
 
 function make(page, opt = {}) {
@@ -65,6 +66,7 @@ function make(page, opt = {}) {
     if (p.disabled) { log({ k: 'disabled', screen: info.screen, label: info.label }); return false }
     if (p.gone) { log({ k: 'gone', screen: info.screen, label: info.label }); return false }
     if (!p.ok && info.confirm && !(await info.confirm().catch(() => true))) { log({ k: 'moved', screen: info.screen, label: info.label }); return false }
+    if (!p.ok && p.anc) { log({ k: 'clipped', screen: info.screen, label: info.label, cover: p.cover }); return false } /* its own container is on top = clipped / under a scroll edge, not covered by another layer */
     if (!p.ok && opt.ignoreCover && opt.ignoreCover.test(p.cover || '')) { log({ k: 'popup', screen: info.screen, label: info.label, cover: p.cover }); return false }
     if (!p.ok) return dead(info, p);
     if (touch) await page.touchscreen.tap(p.x, p.y); else await page.mouse.click(p.x, p.y);

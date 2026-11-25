@@ -50,15 +50,18 @@ const SCAN = () => {
   /* visible clip of an element: viewport ∩ every overflow ancestor */
   const clip = e => { let r = e.getBoundingClientRect(), x0 = Math.max(0, r.left), y0 = Math.max(0, r.top), x1 = Math.min(W, r.right), y1 = Math.min(H, r.bottom); let s = e.parentElement; while (s && s !== document.body) { const cs = getComputedStyle(s); if (/(auto|scroll|hidden|clip)/.test(cs.overflow + cs.overflowX + cs.overflowY)) { const q = s.getBoundingClientRect(); x0 = Math.max(x0, q.left); y0 = Math.max(y0, q.top); x1 = Math.min(x1, q.right); y1 = Math.min(y1, q.bottom) } s = s.parentElement } return { x0, y0, x1, y1, full: x0 <= r.left + 1 && y0 <= r.top + 1 && x1 >= r.right - 1 && y1 >= r.bottom - 1, any: x1 - x0 > 4 && y1 - y0 > 4 } };
   const all = [...document.querySelectorAll('button,[role=button],[data-tab],.kcard[data-i],input[type=text],input:not([type])')].filter(vis).filter(e => !e.parentElement.closest('button,[role=button]'));
-  const probe = e => { const c = clip(e); if (!c.any) return { hit: false, clipped: true }; const pts = [[.5, .5], [.5, .3], [.5, .7], [.25, .5], [.75, .5]]; let cover = null; for (const [fx, fy] of pts) { const x = c.x0 + (c.x1 - c.x0) * fx, y = c.y0 + (c.y1 - c.y0) * fy; const t = document.elementFromPoint(x, y); if (t && (t === e || e.contains(t))) return { hit: true }; if (!cover) cover = t } return { hit: false, full: c.full, cover: cover && (cover.tagName.toLowerCase() + (cover.id ? '#' + cover.id : '') + (typeof cover.className === 'string' && cover.className ? '.' + cover.className.trim().split(/\s+/).slice(0, 2).join('.') : '')), foreign: cover && layerOf(cover) !== layerOf(e) && !cover.closest('#kpop,.kpop,#kxcatch') } };
+  const probe = e => { const c = clip(e); if (!c.any) return { hit: false, clipped: true }; const pts = [[.5, .5], [.5, .3], [.5, .7], [.25, .5], [.75, .5]]; let cover = null; for (const [fx, fy] of pts) { const x = c.x0 + (c.x1 - c.x0) * fx, y = c.y0 + (c.y1 - c.y0) * fy; const t = document.elementFromPoint(x, y); if (t && (t === e || e.contains(t))) return { hit: true }; if (!cover) cover = t } return { hit: false, full: c.full, cover: cover && (cover.tagName.toLowerCase() + (cover.id ? '#' + cover.id : '') + (typeof cover.className === 'string' && cover.className ? '.' + cover.className.trim().split(/\s+/).slice(0, 2).join('.') : '')), foreign: cover && !cover.contains(e) && layerOf(cover) !== layerOf(e) && !cover.closest('#kpop,.kpop,#kxcatch,#ktut') } };
   const txt = e => (e.getAttribute('aria-label') || e.textContent || '').replace(/\s+/g, ' ').trim();
   const inLay = e => lay === document.body ? layerOf(e) === document.body : lay.contains(e);
   let btns = all.filter(inLay).map(e => ({ e, p: probe(e) }));
   if (!btns.some(x => x.p.hit)) { const hl = all.map(e => ({ e, p: probe(e) })).filter(x => x.p.hit); if (hl.length) { lay = layerOf(hl[hl.length - 1].e); btns = all.filter(inLay).map(e => ({ e, p: probe(e) })) } }
+  /* tutorial (Lời dặn #ktut): .ktut-blk blocks every card but the highlighted one BY DESIGN → the gate is the layer: its own buttons + the hole target */
+  const tut = document.getElementById('ktut'); let gate = false;
+  if (tut && !tut.hidden && tut.querySelector('.ktut-blk,.ktut-card') && getComputedStyle(tut).display !== 'none') { gate = true; lay = tut; btns = all.map(e => ({ e, p: probe(e) })).filter(x => x.p.hit) }
   window.__rtBtns = btns.map(x => x.e);
   let S0 = null; try { S0 = typeof S !== 'undefined' && S ? { dead: !!S.dead, y: S.year, t: S.turn, w: S.tuan, b: S.buoi || 0, age: S.age, rank: S.rank, name: S.name } : null } catch (e) {}
   return { layer: lay === document.body ? 'page' : (lay.id ? '#' + lay.id : '.' + String(lay.className).split(' ')[0]), title: ((lay.querySelector && lay.querySelector('h2,h3,.kh,.ttl')) || {}).textContent ? lay.querySelector('h2,h3,.kh,.ttl').textContent.trim().slice(0, 50) : '',
-    b: btns.map((x, i) => ({ i, t: txt(x.e).slice(0, 90), id: x.e.id || '', c: String(x.e.className || '').slice(0, 40), d: Object.keys(x.e.dataset).join(','), inp: x.e.tagName === 'INPUT', hit: x.p.hit, deadSuspect: !x.p.hit && x.p.full && x.p.foreign ? x.p.cover : null, x: /kit-x|kclose/.test(x.e.className) || /^(✕|×)$/.test(txt(x.e)) })),
+    b: btns.map((x, i) => ({ i, t: txt(x.e).slice(0, 90), id: x.e.id || '', c: String(x.e.className || '').slice(0, 40), d: Object.keys(x.e.dataset).join(','), inp: x.e.tagName === 'INPUT', hole: gate && !tut.contains(x.e), hit: x.p.hit, deadSuspect: !x.p.hit && x.p.full && x.p.foreign ? x.p.cover : null, x: /kit-x|kclose/.test(x.e.className) || /^(✕|×)$/.test(txt(x.e)) })),
     lr: (() => { const r = (lay === document.body ? document.documentElement : lay).getBoundingClientRect(); return { x: Math.max(0, r.left), y: Math.max(0, r.top), w: Math.min(W, r.right) - Math.max(0, r.left), h: Math.min(H, r.bottom) - Math.max(0, r.top) } })(),
     code: !(S0 && S0.name && !S0.dead) ? ((document.body.innerText || '').match(/Ám hiệu\s*:?\s*([A-Z0-9]{4})(?![A-Za-z0-9])/) || [])[1] || null : null,
     S: S0, end: !!window.__rtEnd };
@@ -67,7 +70,7 @@ const SCAN = () => {
 async function play(p) {
   p.on('pageerror', e => bug('js', 'page error: ' + e.message.split('\n')[0].slice(0, 160)));
   p.on('crash', () => bug('crash', 'tab crashed'));
-  const rt = RT.make(p, { dev: DEV, shots: SHOTS, ignoreCover: /kpop|kxcatch/, touch: DEV !== 'ipad', log: d => { (R.trace = R.trace || []).push([sec(), d.k === 'tap' ? (d.screen || '') + ' «' + d.label + '»' : 'DEAD ' + d.label]); if (R.trace.length > 400) R.trace.shift(); if (process.env.RTV) console.log('TAP', d.screen, '«' + d.label + '»'); if (d.k === 'DEAD BUTTON') { R.dead.push({ ...d, at: sec(), S: lastS }); console.log('DEAD BUTTON', d.screen, '«' + d.label + '»', 'cover', d.cover) } } });
+  const rt = RT.make(p, { dev: DEV, shots: SHOTS, ignoreCover: /kpop|kxcatch|ktut/, touch: DEV !== 'ipad', log: d => { (R.trace = R.trace || []).push([sec(), d.k === 'tap' ? (d.screen || '') + ' «' + d.label + '»' : 'DEAD ' + d.label]); if (R.trace.length > 400) R.trace.shift(); if (process.env.RTV) console.log('TAP', d.screen, '«' + d.label + '»'); if (d.k === 'DEAD BUTTON') { R.dead.push({ ...d, at: sec(), S: lastS }); console.log('DEAD BUTTON', d.screen, '«' + d.label + '»', 'cover', d.cover) } } });
   let lastS = null;
   const boot = async () => {
     if (!C.noBoot) await p.goto(URL0, { waitUntil: 'load', timeout: 0 });
@@ -134,6 +137,7 @@ async function play(p) {
         for (const re of pref) { const f = b.find(x => re.test(x.t)); if (f) return { ...f } }
         const nl = b.find(x => /data-nl|nl/.test(x.d) && /ok/i.test(x.t)); if (nl) return nl;
       }
+      const hole = b.find(x => x.hole && !EXIT_RE.test(x.t)); if (hole) return hole; /* tutorial: tap what it points at */
       const nav = x => NAV_RE.test(x.t);
       const close = x => x.x || CLOSE_RE.test(x.t);
       const opts = b.filter(x => !nav(x) && !close(x) && !x.inp);
