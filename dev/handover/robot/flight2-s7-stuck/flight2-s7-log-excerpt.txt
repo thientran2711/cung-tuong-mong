@@ -1,0 +1,42 @@
+65:RESUME flight2-s7 from 2026-11-25T07:16:15.278Z buổi 17
+69:BUG stuck no progress 15 min on .dlg «Tin báo»
+73:BUG stuck no progress 15 min on .dlg «Kính sự phòng báo tin»
+80:RESUME flight2-s7 from 2026-11-25T08:56:16.840Z buổi 100
+82:BUG crash tab crashed (Page crashed) at buổi 115
+83:PAGE CRASHED flight2-s7 at buổi 115 → exit 3, rerun with resume=1
+85:RESUME flight2-s7 from 2026-11-25T08:59:35.191Z buổi 115
+87:BUG js page error: Cannot read properties of undefined (reading 'off')
+93:RESUME flight2-s7 from 2026-11-25T10:18:38.133Z buổi 120
+--- last 30 trace rows
+[1430, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1431, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1431, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1432, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1433, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1433, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1434, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1435, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1436, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1436, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1437, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1438, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1438, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1439, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1440, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1441, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1441, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1442, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1443, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1444, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1444, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1445, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1446, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1446, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1447, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1448, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1448, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1449, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1450, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+[1451, '.dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»']
+--- rss
+[{'buoi': 116, 'y': 1, 'totalMB': 1273, 'rendererMB': 695}, {'buoi': 120, 'y': 1, 'totalMB': 1958, 'rendererMB': 1308}, {'buoi': 120, 'y': 1, 'totalMB': 1729, 'rendererMB': 1075}, {'buoi': 120, 'y': 1, 'totalMB': 1554, 'rendererMB': 896}, {'buoi': 120, 'y': 1, 'totalMB': 1556, 'rendererMB': 886}, {'buoi': 120, 'y': 1, 'totalMB': 1596, 'rendererMB': 922}, {'buoi': 120, 'y': 1, 'totalMB': 1708, 'rendererMB': 1052}, {'buoi': 120, 'y': 1, 'totalMB': 1719, 'rendererMB': 1058}, {'buoi': 120, 'y': 1, 'totalMB': 1564, 'rendererMB': 906}]
