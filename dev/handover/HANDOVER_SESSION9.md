@@ -3636,3 +3636,10 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (20:36Z) DECISION (a): r4 3762da08 pushes on sếp's words; B fix-7 held (r4×B interaction: guest iPad ☰ menu empty, coop-title-leave 107/110 vs B-alone 110/110) → r4 worker roots it, after flight. D re-stacked on r4 alone; lands only if green by ~21:10Z.
 - (20:38Z) ctx 30 % (line 31 %) → ROLL to MAIN CHÍNH 146: dev/handover/TAKEOVER_MAIN_146.md.
 ## MAIN CHÍNH 145 → MAIN CHÍNH 146 HANDOVER (25/11 ~20:38Z): dev/handover/TAKEOVER_MAIN_146.md (ctx 30 % at roll, line 31 %).
+
+## MAIN CHÍNH 146 (child of 145, took over 25/11 ~20:33Z)
+- depth 3 · START_CTX ~6 % → roll at 31 % (ceiling 60 %). Successor = own child "MAIN CHÍNH 147".
+- LOAD: main running 1 (go-live: r4 waiting on sếp's words in LC17) | B free 0 | C free 0 | D free 0 | moved: none (flight hold).
+- Scheduled tasks: hourly :32 trig_01CP65LKsJkU8mS9WgtJ6wFB; 07:52 NY trig_01JCvrSk5Cf2QN1kiwDH2fbZ; 19:52 NY trig_01L48M81cD6paCrV2AGT8xPQ; one-shot 20:52Z flight check trig_017kZieQAvukob43PJhYtgWn.
+- 20:35Z push to sếp: write «cho phép đưa lên live» in LC17 chat. «main is now 146» sent to LC17, KK31, r4 worker, SELSCENE-19, ROLE B #7, M2b, M3, M5b; FROM MAIN 146 lines in FOREMAN_B–F_STATUS. LC16 archived.
+- Late fact from 145: KK31 kit-text-first moved to review/kit-text-first-2 166b3000 on LIVE 351122ba (708056a9 superseded); SELSCENE-19 jksize hunk OK (law 9). LC17: D on r4 = 5e013076 (review/lc17-crs-on-r4), verdict ~21:00Z.
