@@ -71,17 +71,31 @@ function make(page, opt = {}) {
     }
     return h.evaluate(PROBE).catch(() => ({ gone: true }));
   }
+  /* every handle is DISPOSED after its tap (memory, F #10 11:03Z: s7 renderer grew ~1 GB → 3 GB by buổi 140): an undisposed JSHandle pins its element —
+     and with it the whole detached subtree of every closed dialog / scene — in the renderer for the life of the page (thousands of taps per life).
+     info.keep = true leaves a caller's handle alive (none today). */
   async function tap(target, info = {}) {
-    const h = await handleOf(target);
+    let h = null;
+    try { h = await handleOf(target); return await tap1(h, target, info) }
+    finally { if (!info.keep) { if (h && typeof h.dispose === 'function') await h.dispose().catch(() => {}); if (target && target !== h && typeof target.dispose === 'function') await target.dispose().catch(() => {}) } }
+  }
+  async function tap1(h, target, info) {
     if (!h) { return dead(info, { lab: info.label || String(target), cover: 'not in page' }) }
     let p = await h.evaluate(PROBE).catch(() => ({ gone: true }));
     if (!p.ok) p = await scrollTo(h);
     /* half hidden under a fixed bar (tabs, header): a person scrolls it toward the middle first */
     for (let k = 0; k < 2 && !p.ok && !p.gone && !p.disabled && !p.zero && p.top != null; k++) { const vp = page.viewportSize() || { width: 800, height: 800 }; const box = p.sc || { l: 0, t: 0, r: vp.width, b: vp.height }; const mid = (box.t + Math.min(box.b, vp.height)) / 2; const dy = (p.top + p.bottom) / 2 - mid; if (Math.abs(dy) < 8) break; await page.mouse.move((box.l + Math.min(box.r, vp.width)) / 2, mid); await page.mouse.wheel(0, dy); await page.waitForTimeout(350); p = await h.evaluate(PROBE).catch(() => ({ gone: true })) } /* over ITS scroller, not the screen middle */
+    /* HORIZONTAL tab rows (ROLE B #5 via F #12 14:33Z: 29 false «clipped by its scroller» DEAD rows = .pctabs.kcattabs overflow-x:auto — Tư trang tabs,
+       Mệnh truyện › Sổ ghi origin rows, Danh hiệu list): a person swipes the row sideways; the wheel above only moved vertically */
+    for (let k = 0; k < 6 && !p.ok && !p.gone && !p.disabled && !p.zero; k++) {
+      const hx = await h.evaluate(e => { let s = e.parentElement; while (s && s !== document.body) { const cs = getComputedStyle(s); if (/(auto|scroll)/.test(cs.overflowX) && s.scrollWidth > s.clientWidth + 2) { const q = s.getBoundingClientRect(), r = e.getBoundingClientRect(); const dx = r.left < q.left ? r.left - q.left - 12 : r.right > q.right ? r.right - q.right + 12 : 0; return dx ? { x: q.left + q.width / 2, y: q.top + q.height / 2, dx } : null } s = s.parentElement } return null }).catch(() => null);
+      if (!hx || hx.y < 0 || hx.y > (page.viewportSize() || { height: 800 }).height) break;
+      await page.mouse.move(hx.x, hx.y); await page.mouse.wheel(hx.dx, 0); await page.waitForTimeout(300); p = await h.evaluate(PROBE).catch(() => ({ gone: true })) }
     if (!p.ok && !p.gone && !p.disabled && p.cover && !p.anc && !p.clip) { await page.waitForTimeout(2500); const p2 = await h.evaluate(PROBE).catch(() => ({ gone: true })); if (p2.ok || p2.gone || p2.disabled) p = p2 } /* a scene / dawn frame passing over: settle once */
     if (!p.ok && info.wait) { const t0 = Date.now(); while (!p.ok && Date.now() - t0 < info.wait) { await page.waitForTimeout(400); p = await h.evaluate(PROBE).catch(() => ({ gone: true })) } }
     if (p.disabled) { log({ k: 'disabled', screen: info.screen, label: info.label }); return false }
     if (p.gone) { log({ k: 'gone', screen: info.screen, label: info.label }); return false }
+    if (p.zero) { log({ k: 'zero', screen: info.screen, label: info.label }); return false } /* ROLE B #5 (d): a 0×0 target is a hidden element the picker chose (s4d «Hầu hạ», .kmov «?»), not a covered button — never DEAD */
     if (!p.ok && info.confirm && !(await info.confirm().catch(() => true))) { log({ k: 'moved', screen: info.screen, label: info.label }); return false }
     if (!p.ok && p.clip) { log({ k: 'clipped', screen: info.screen, label: info.label, cover: p.cover }); return false }
     if (!p.ok && p.anc) { log({ k: 'clipped', screen: info.screen, label: info.label, cover: p.cover }); return false } /* its own container is on top = clipped / under a scroll edge, not covered by another layer */
