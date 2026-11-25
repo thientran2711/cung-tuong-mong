@@ -46,7 +46,7 @@ agReg("consort","par4",(v,N,need)=>{const O=[];if(!p4On()||v===S||v.out||!v.aliv
   /* rouge (jration) */
   if(typeof lxOn==="function"&&lxOn()&&!v.confined&&lxMiss(v).length){
    if(nd(X.rouge.g)){const l=p4Lender(v);if(l)P(p4O(v,"rougeBorrow",lxBorrowCard(v,l),N,X.rouge.g,"ally",(kh,vv)=>palaceOf(l),l));
-    const kd=p4BegKind(v);if(kd)P(p4O(v,"rougeBeg",lxBegCard(v,kd),N,X.rouge.g,"self",kd==="th"?()=>"tn":(kh,vv)=>palaceOf(queenP())))}
+    const kd=p4BegKind(v);if(kd)P(p4O(v,"rougeBeg",lxBegCard(v,kd),N,X.rouge.g,"self",kd==="th"?()=>"tn":(kh,vv)=>{const q=queenP();/* robot10 E-FIX-1: the seat may be empty when the act lands */return q?palaceOf(q):"kn"}))}
    if(nd(X.rouge.steal.g)){const t=p4StealT(v);if(t)P(p4O(v,"rougeSteal",lxStealCard(v,t),N,X.rouge.steal.g,"scheme",(kh,vv)=>palaceOf(t),t))}}
   /* đồ cấm (j83): a malicious consort with no poison in her chest, someone to hate, a route open to her */
   if(nd(X.ill.g)&&(v.malice||0)>X.ill.malice&&!p4HasIll(v)&&others(v).some(t=>t&&t!==v&&agSpite(v,t)>0))
