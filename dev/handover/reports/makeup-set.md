@@ -37,3 +37,9 @@ Prior rulings kept: OD L748 (4 cool + 4 warm per group, lips exact), L1515 (set 
 
 ## Open note (not a question to sếp now)
 With today's ration (one random colour per part) she rarely owns all 4 colours of any set, so most sets show greyed. Design follow-up for MAIN if sếp wants sets usually pickable (e.g. ration colours drawn from a set).
+
+## r2 — WHOLE SETS in the ration (MAIN 147 order 25/11 23:03Z)
+- BAL.ration.set {on, pair:2, start:["cool","warm"], diemRank:4}. Nội vụ phủ issues the colours of ONE preset set per `pair` months (the month's parts rotate, so 2 months complete it); any box without a colour (gift, shop, old save) takes its period's set.
+- Start (lxInit, every consort incl. NPCs, two-way): one full cool + one full warm set of her level (Kiểu thanh nhã; Kiểu cầu kỳ joins the pool from rank diemRank). Old saves keep their boxes (lxInit runs once).
+- Mirror: sets she can paint first in each row, then the greyed ones with where to get them.
+- Test adds: start ≥2 pickable sets (one cool + one warm), pickable first, 2 months of ration = a whole set. Fold + iPad ALL PASS. Shots: img/_review/makeup-set/start-*.jpg.

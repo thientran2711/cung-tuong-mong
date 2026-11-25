@@ -37,7 +37,11 @@ Object.assign(BAL,{ration:{on:true,
  steal:{danh:-4,duc:-2,oan:10,cut:1,add:10},/* caught stealing: Danh, Đức, the victim's oán, bổng khất 1 month; odds = plant odds + add */
  npc:{use:3,buy:50},/* NPC month: lượt spent per part; chance to buy when out (borrow / beg / steal / ask her = day-plan choices, jagacts4); (her «Chia» answer: jrcv RCVK.rougeBorrow, the asker quý BAL.rcv.help.af) */
  allergy:{rel:2,chiW:[.3,.45,.25],nguaW:[.2,.45,.35]},/* a tainted box at the sitting → the ONE rash system (jrash rashGive: timed, picture, Thái y): severity weights for pha chì / bột ngứa; the first use of a clean box rolls RASH.cos like any son phấn; rel = her oán toward the one who tainted it */
- tribute:{ch:{promo:60,son:60,contest:35,birthday:50,sinhthan:50,night:5},ghen:3}}});
+ tribute:{ch:{promo:60,son:60,contest:35,birthday:50,sinhthan:50,night:5},ghen:3},
+ /* WHOLE SETS (owner OD 25/11 ~23:20Z «chọn vô là nó sẽ ra một cái cụm đủ 4 màu»; MAIN 147 23:03Z): Nội vụ phủ issues the colours of ONE preset set (TOIL_PRE) per
+    `pair` months (the month's parts rotate, so `pair` issues complete its 4 colours); a box with no colour yet (gift, shop, old save) takes the set of its period too.
+    start = the first issue: one full set of each tone here (cool + warm) of her level; diemRank = from this rank (rkOf) the Kiểu cầu kỳ sets join the pool */
+ set:{on:true,pair:2,start:["cool","warm"],diemRank:4}}});
 const LX_KD="Son phấn";
 const LX_N={may:["Than liễu","Thanh đại","Họa mi đại","Loa tử đại"],son:["Son sáp","Son hoa hồng","Son điểm giáng","Son thiên chu cống"],
  ma:["Yên chi giấy","Yên chi bánh","Yên chi hoa hồng","Yên chi tiến cống"],mat:["Phấn gạo","Phấn hoa lài","Phấn ngọc trâm","Phấn trân châu ngự"]};
@@ -71,8 +75,13 @@ const LX_ART={};
   const s=a0("sonphan");return s?{key:k,src:s.src,src512:s.src512,grade:r.t,gradeName:ITEM_GRADE[r.t],ph:1}:null};window.itemArt=itemArt})();
 /* ---------- a piece: colour + lượt (old saves, gifts, shop, stolen goods: filled on first sight) ---------- */
 function lxHash(s){let h=2166136261;s=String(s);for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
-function lxFix(p){if(!p||!p.inv)return;let i=0;for(const e of p.inv){if(e&&e.k==="sonphan")e.k=lxKey("son",0);const r=e&&lxOf(e.k);if(!r){i++;continue}const L=TOIL_COL[r.part].L;
-  if(!e.c||!L.some(x=>x[0]===e.c))e.c=L[lxHash(`${p.id!=null?p.id:"me"}:${S.turn}:${r.part}:${i}`)%L.length][0];
+/* the set pool of her level (BAL.ration.set): Kiểu thanh nhã always, Kiểu cầu kỳ from diemRank; tone = "cool" / "warm" / any */
+function lxSetPool(p,tone){const B=BAL.ration.set,r=typeof rkOf==="function"?rkOf(p):(p&&p.rank)|0;return TOIL_PRE.filter(x=>(x[2]==="dep"||r>=B.diemRank)&&(!tone||x[3]===tone))}
+function lxSetOf(p,tag,tone){const L=lxSetPool(p,tone);return L.length?L[lxHash(`${p&&p.id!=null?p.id:"me"}:${tag}`)%L.length]:null}
+/* the set of this issue period: `pair` months share one set, so the rotating parts complete it */
+function lxPeriodSet(p){const m=Math.max(0,((S&&S.month)||1)-1);return lxSetOf(p,`set:${(S&&S.year)||0}:${Math.floor(m/BAL.ration.set.pair)}`)}
+function lxFix(p){if(!p||!p.inv)return;let i=0;const ps=BAL.ration.set&&BAL.ration.set.on?lxPeriodSet(p):null;for(const e of p.inv){if(e&&e.k==="sonphan")e.k=lxKey("son",0);const r=e&&lxOf(e.k);if(!r){i++;continue}const L=TOIL_COL[r.part].L;
+  if(!e.c||!L.some(x=>x[0]===e.c))e.c=ps&&L.some(x=>x[0]===ps[4][r.part])?ps[4][r.part]:L[lxHash(`${p.id!=null?p.id:"me"}:${S.turn}:${r.part}:${i}`)%L.length][0];
   if(typeof e.u!=="number"||!(e.u>=0))e.u=BAL.ration.uses[r.t];i++}}
 function lxBoxes(p,part){lxFix(p);return (p&&p.inv||[]).filter(e=>{const r=e&&lxOf(e.k);return r&&r.part===part&&e.u>0&&!e.h})}
 function lxHas(p,part){return lxBoxes(p,part).length>0}
@@ -87,7 +96,10 @@ function lxLines(r,out){const B=BAL.ration;r=Math.max(0,Math.min(7,r|0));const t
 /* NPC month order (review fix 5): the past month's sittings are spent BEFORE the new issue, so a box is not used up the moment it arrives; the roads (buy / borrow / ask / steal) after it */
 (function(){if(typeof stipGoods!=="function")return;const g0=stipGoods;stipGoods=function(p){try{if(p&&p!==S&&lxOn())lxNpcSpend(p)}catch(e){console.error("rt spend",e)}const G=g0.apply(this,arguments);try{lxFix(p);if(p!==S&&lxOn())lxNpcMonth(p)}catch(e){console.error("rt goods",e)}return G};window.stipGoods=stipGoods})();
 /* the first sight (new life, old save): Nội vụ phủ's issue of her rank once, so the mirror is not empty on day one */
-function lxInit(p){if(!p||!lxOn()||p.lxInit)return;p.lxInit=1;p.inv=p.inv||[];for(const [k] of lxLines(rkOf(p),!!p.out))p.inv.push({k,from:"noivu",d:S.turn});
+function lxInit(p){if(!p||!lxOn()||p.lxInit)return;p.lxInit=1;p.inv=p.inv||[];
+ /* WHOLE SETS at the start (BAL.ration.set.start): one full set of each tone of her level, so the mirror opens with sets she can pick */
+ if(BAL.ration.set&&BAL.ration.set.on&&!p.out){const t=BAL.ration.tier[Math.min(7,rkOf(p))];for(const tone of BAL.ration.set.start){const x=lxSetOf(p,"start:"+tone,tone);if(!x)continue;for(const part of BAL.ration.parts)p.inv.push({k:lxKey(part,t),c:x[4][part],from:"noivu",d:S.turn})}lxFix(p);return}
+ for(const [k] of lxLines(rkOf(p),!!p.out))p.inv.push({k,from:"noivu",d:S.turn});
  for(const part of BAL.ration.parts)if(!lxHas(p,part)&&!p.out){const k=lxKey(part,BAL.ration.tier[Math.min(7,rkOf(p))]);p.inv.push({k,from:"noivu",d:S.turn})}lxFix(p)}
 function lxInitAll(){try{if(!S||S.dead||!lxOn())return;if(typeof isSrv==="function"&&isSrv())return;lxInit(S);if(typeof mlGuest==="function"&&mlGuest())return;for(const v of consorts())if(v!==S&&v.alive!==false)lxInit(v)}catch(e){console.error("lxInit",e)}}
 /* ---------- 3. the sitting: cap by the parts she has, spend lượt (her: the colours she picked; NPC / bot: any box of the part) ---------- */
@@ -119,6 +131,7 @@ function lxColRows(rows){if(!lxOn())return rows;const own={};for(const part of B
  /* makeup-set (owner OD 25/11 ~23:20Z): EVERY preset set stays on the mirror as a block; a set needing a colour she has no box of is greyed with what is missing (never dropped) */
  return rows.map(r=>{if(/^pre-/.test(r.k)){let n=0;const it=r.items.map(i=>{const x=TOIL_PRE.find(y=>y[0]===i.k);if(!x)return i;const miss=BAL.ration.parts.filter(part=>!own[part].some(e=>e.c===x[4][part]));if(!miss.length)return i;n++;
    return Object.assign({},i,{off:true,why:`thiếu ${miss.map(part=>toilColE(part,x[4][part])[1].toLowerCase()).join(", ")}`})});
+   it.sort((a,b)=>(a.off?1:0)-(b.off?1:0));/* the sets she can paint first, then the greyed ones */
    return Object.assign({},r,{items:it},n?{note:`Bộ mờ là thiếu hộp đúng màu (chạm để xem thiếu gì). Đường kiếm: ${LX_ROADS}.`}:{})}
   const L=own[r.k];if(!L)return r;const it=r.items.filter(i=>L.some(e=>e.c===i.k)).map(i=>{const E=L.filter(e=>e.c===i.k);const u=E.reduce((a,e)=>a+e.u,0);return Object.assign({},i,{name:`${i.name} · ${E.map(e=>IT[e.k].n).filter((x,j,a)=>a.indexOf(x)===j).join(", ")}, còn ${u} lần dùng`})});
   return it.length?Object.assign({},r,{items:it}):null}).filter(Boolean)}
@@ -195,4 +208,4 @@ function lxAskHer(v,part){try{if(typeof rcvAsk==="function")rcvAsk("rougeBorrow"
   if(r){lxFix(S);const E=(S.inv||[]).filter(e=>e&&e.k===k);if(E.length){o=Object.assign({},o||{});o.note=[].concat(o.note||[],typeof kitUseNote==="function"?kitUseNote(E,{unit:"hộp",pre:e=>`màu ${lxColName(r.part,e.c)}`}):[`còn ${E.reduce((a,e)=>a+(e.u|0),0)} lần dùng`])}}}catch(e){}return d0.call(this,ref,o)};window.kitItemDetailRows=kitItemDetailRows})();
 /* ---------- first sight on load / new life ---------- */
 (function(){for(const f of ["render"]){const g=window[f];if(typeof g!=="function")continue;window[f]=function(){try{if(S&&!S.lxInit)lxInitAll()}catch(e){}return g.apply(this,arguments)}}})();
-window.lxPrice=lxPrice;window.lxKeys=lxKeys;window.lxNpcSpend=lxNpcSpend;window.lxSit=lxSit;window.lxNpcCap=lxNpcCap;window.lxColRows=lxColRows;window.lxColPick=lxColPick;window.lxMirrorNote=lxMirrorNote;window.lxRushBtn=lxRushBtn;window.lxRush=lxRush;window.lxInitAll=lxInitAll;window.lxOf=lxOf;window.lxCount=lxCount;window.lxMiss=lxMiss;window.lxFix=lxFix;
+window.lxPrice=lxPrice;window.lxKeys=lxKeys;window.lxNpcSpend=lxNpcSpend;window.lxSit=lxSit;window.lxNpcCap=lxNpcCap;window.lxColRows=lxColRows;window.lxSetOf=lxSetOf;window.lxPeriodSet=lxPeriodSet;window.lxColPick=lxColPick;window.lxMirrorNote=lxMirrorNote;window.lxRushBtn=lxRushBtn;window.lxRush=lxRush;window.lxInitAll=lxInitAll;window.lxOf=lxOf;window.lxCount=lxCount;window.lxMiss=lxMiss;window.lxFix=lxFix;

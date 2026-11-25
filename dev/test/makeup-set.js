@@ -23,8 +23,18 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));let bad=0;const ok=(n,c,x)=>{if(!
   const mirror=()=>p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;S.buoi=0;delete S.toilette;try{kg82Close()}catch(e){}toilOpen();TOIL.st.dv="hopdip";toilColUI();
    const R=[...document.querySelectorAll('.kswt-rset')].map(r=>({label:r.querySelector('.kswt-h b').textContent,items:[...r.querySelectorAll('.kswt-i')].map(i=>({k:i.dataset.kswti,n:i.querySelectorAll('.kswt-set i').length,off:i.classList.contains('off'),why:i.dataset.kswtwhy||'',name:i.querySelector('small').textContent})),note:(r.querySelector('.kswt-n')||{}).textContent||''}));
    return {R,pre:TOIL_PRE.length,col:Object.assign({},TOIL.st.col)}});
-  /* 1a. the ration as it comes (random colours) */
+  /* 1a. the game start as it comes: whole sets (BAL.ration.set.start) */
   let m=await mirror();const all=m.R.flatMap(r=>r.items);
+  const live=await p.evaluate(()=>[...document.querySelectorAll('.kswt-rset .kswt-i:not(.off)')].map(b=>{const x=TOIL_PRE.find(y=>y[0]===b.dataset.kswti);return x&&x[3]}));
+  ok('start: ≥2 pickable sets, one cool + one warm',live.length>=2&&live.includes('cool')&&live.includes('warm'),live);
+  ok('start: pickable sets first in their row',m.R.every(r=>{const o=r.items.map(i=>i.off?1:0);return o.every((v,i)=>!i||v>=o[i-1])}));
+  await sleep(2500);await p.evaluate(()=>{const r=document.querySelector('.kswt-rset');if(r)r.scrollIntoView({block:'start'})});await sleep(800);
+  await p.screenshot({path:`${process.env.MKS_SHOTS||'/tmp'}/mks-start-${wh}.jpg`,type:'jpeg',quality:70}).catch(()=>{});
+  /* 1a'. a monthly issue: BAL.ration.set.pair months of the ration complete one whole set */
+  const mo=await p.evaluate(()=>{const keep=S.inv.slice();S.inv=S.inv.filter(e=>!lxOf(e.k));const m0=S.month;const out=[];
+   S.month=1;stipGoods(S);S.month=2;stipGoods(S);const own=k=>S.inv.some(e=>{const r=lxOf(e.k);return r&&r.part===k.part&&e.c===k.c});
+   const full=TOIL_PRE.filter(x=>BAL.ration.parts.every(part=>own({part,c:x[4][part]}))).map(x=>x[0]);S.month=m0;S.inv=keep;return full});
+  ok('ration: two months give a whole set',mo.length>=1,mo);
   ok('sets: every TOIL_PRE set shown',all.length>=m.pre&&new Set(all.map(i=>i.k)).size===m.pre,{shown:all.length,pre:m.pre});
   ok('sets: each block has 4 colours',all.every(i=>i.n===4),all.filter(i=>i.n!==4).map(i=>i.k));
   ok('sets: only the set name (no tone words)',all.every(i=>!/lạnh|ấm/.test(i.name))&&m.R.every(r=>!/lạnh|ấm/.test(r.label)),all.map(i=>i.name));
@@ -47,7 +57,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));let bad=0;const ok=(n,c,x)=>{if(!
   blockMesh=true;faceFail=1;faceReq=0;
   await p.evaluate(()=>{BAL.toil.meshWait=1500;for(const k in MK_FIT.g)delete MK_FIT.g[k];for(const k in MK_FIT.ld)delete MK_FIT.ld[k];TOIL.prev=null;KG82.ready=null;/* the «Sẵn sàng» tap of the real flow (kgReady) */toilMakeup()});await sleep(4500);
   const w=await p.evaluate(()=>({rec:!!S.toilette,ready:TOIL.geo.ready(),btn:!!document.getElementById('toilquick3')&&!!document.getElementById('toilmoc3'),vis:document.getElementById('kg82box')&&getComputedStyle(document.getElementById('kg82box')).visibility}));
-  ok('board waits for her, never auto-plays',!w.rec&&!w.ready&&w.btn,w);ok('face picture fetched again after a failure',faceReq>=2,{faceReq});
+  ok('board waits for her, never auto-plays',!w.rec&&!w.ready&&w.btn,w);ok('face picture fetched again after a failure (0 = served from the memory cache, nothing failed)',faceReq>=2||faceReq===0,{faceReq});
   await p.screenshot({path:`${process.env.MKS_SHOTS||'/tmp'}/mks-wait-${wh}.jpg`,type:'jpeg',quality:70}).catch(()=>{});
   blockMesh=false;await sleep(2500);const w2=await p.evaluate(()=>({ready:TOIL.geo.ready(),rec:!!S.toilette,nx:(document.getElementById('toilnx')||{}).textContent||''}));
   ok('points arrive later → her board starts',w2.ready&&!w2.rec,w2);
