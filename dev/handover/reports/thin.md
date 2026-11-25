@@ -1831,3 +1831,8 @@ Same stuck (both at week 3 tối, host 3:3 vs guest 3:0, «Chờ hảo hữu…�
 - savert's family (save→load→save) present on main, ABSENT on fix. stuck / coop-pos both sides (pre-existing; fix-5/6/7 queue). Two extra lag rows on fix (coopActionP95 8507>8000, one buổi 4721 ms) = CPU noise (parallel sides + a debug run alongside), no new family.
 ### Verdict
 PASS. Savert r2 delta correct, whole family, both seats. LAND READY robot-coop-savert-r2 56d3b76fc58d07b529bc72590133ba04a5770e47 (carries fix-4-r1 aad22c92). Land order note: coop-night gate needs review/coop-night-live first (LIVE bug).
+
+### HANDOVER (BIG co-op rv ZyfP6D8u, savert r2 done → next BIG rv for review/robot-coop-fix-6)
+ZyfP6D8u is past its roll line (context compacted once) → does NOT take fix-6; Foreman B opens a fresh opus BIG rv.
+Reusable lessons for fix-6: (1) on any base with LIVE jdayq (ee37ab5f+), coop-night FAILs from case 4 (host week 3 tối held, «Phối đồ» kg82 board on #ov, DQ.stat.actHeld) = LIVE DAYQ-3 until review/coop-night-live lands — prove it with the same merge minus the branch; (2) bots skip jdayq gate (c) (__bot) so robot10-coop A/B is valid on that base; (3) coop-night case 10 «host still in tối behind his dialog» is a ~15–50 % flake on fix-4-r1+LIVE with or without savert; (4) handover/shallow fetch: never rebase on reject — fetch +refspec, checkout --detach, re-append, commit, push; (5) assemble.py list conflicts: union of both sides' modules.
+Local Worker recipe: npm i wrangler@4 in a scratch dir; `wrangler dev --port 8798` from <seat>/coop/worker; pass http://127.0.0.1:8798 as the coop test's 2nd arg.
