@@ -1718,3 +1718,4 @@ d-lander-support (temper pair shot + nc-fix-4 remerge on LC14 stack) | review/ro
 | F HARNESS FIXER #4 (opus; ROLE A successor of HARNESS FIXER #3 session_01UV1Szkrku4AmZLvRzEkhZk; handover end of dev/PROGRESS_robot-realtap.md on review/robot-realtap 93812531; first: perfgate-days verification) | review/robot-realtap | FOREMAN F #8 for F #9 | session_01UV1Szi4VkuLRzUgj7f1FQj | RUNNING | 2026-11-25T10:34Z |
 rv talk-others-people r2 | review/talk-others-people-rv | session_01D3E3NaSsipN1iUZHpNZHje | RUNNING | 2026-11-25T10:37Z (Foreman D)
 | F DIFFICULTY-ENDCARD-TEST (sonnet; ORDER FROM MAIN 138 10:35Z; briefs/F-difficulty-endcard-2511.md) | review/difficulty-endcard-test | FOREMAN F #8 for F #10 | session_01UV1Szhr1fBVnZJ918U1DYJ | RUNNING | 2026-11-25T10:45Z |
+BIG rv robot-coop-fix-7 | review/robot-coop-fix-7 4a62e4d9 | session_01N1tNP2DEvrn63HHg5eMcAz (FOREMAN B) | RUNNING | 2026-11-25T10:44Z
