@@ -43,6 +43,14 @@ if (C.resume && fs.existsSync(CKPT)) { try { ck = JSON.parse(fs.readFileSync(CKP
 const bug = (type, msg, extra) => { const k = type + '|' + msg; const b = R.bugs.find(x => x.k === k); if (b) { b.n++; return b } const n = { k, type, msg, n: 1, at: sec(), ...extra }; R.bugs.push(n); console.log('BUG', type, msg); return n };
 
 /* ---- read-only screen reader: which layer is on top, its buttons (index into a fresh handle list) ---- */
+/* open info layer that a person would tap away: returns a bare point ON it (each of these closes on a tap), or null */
+const INFO = () => { const W = innerWidth, H = innerHeight;
+  const vis = e => { if (!e || e.hidden) return false; const cs = getComputedStyle(e); if (cs.display === 'none' || cs.visibility === 'hidden' || +cs.opacity < 0.05 || cs.pointerEvents === 'none') return false; const r = e.getBoundingClientRect(); return r.width > 4 && r.height > 4 && r.bottom > 0 && r.top < H };
+  for (const sel of ['#kpzoom', '#kpinfo', '#kpop', '#rtoast.on']) { const e = document.querySelector(sel); if (!vis(e)) continue;
+    if (sel === '#rtoast.on') { /* the result toast only matters when it covers a button the player needs */ const blocks = [...document.querySelectorAll('button,[role=button],[data-tab]')].some(b => { if (e.contains(b)) return false; const r = b.getBoundingClientRect(); if (r.width < 2 || r.height < 2) return false; const x = r.left + r.width / 2, y = r.top + r.height / 2; if (x < 0 || y < 0 || x > W || y > H) return false; const t = document.elementFromPoint(x, y); return !!t && e.contains(t) }); if (!blocks) continue }
+    const r = e.getBoundingClientRect(); for (const [fx, fy] of [[.5, .12], [.25, .2], [.75, .2], [.5, .5], [.2, .85]]) { const x = Math.max(2, Math.min(W - 2, r.left + r.width * fx)), y = Math.max(2, Math.min(H - 2, r.top + r.height * fy)); const t = document.elementFromPoint(x, y); if (t && e.contains(t) && !t.closest('.kalog,.kkem,button,[role=button],a,input,select,textarea')) return { sel, x, y } }
+    if (sel === '#kpop') { /* a hint closes on any tap: pick bare space (never a button — the tap goes on through to what is under it) */ for (const [x, y] of [[W / 2, 6], [6, H / 2], [W - 6, H / 2], [W / 2, H - 6], [6, 6]]) { const t = document.elementFromPoint(x, y); if (t && !t.closest('button,[role=button],a,input,select,textarea,[data-tab],[data-tip],[data-kzoom],.kodm,.kgl')) return { sel, x, y } } } }
+  return null };
 const SCAN = () => {
   const LAYER = '#modal,#ov,.modal,.ov,[role=dialog],.dlg,.kpdlg,#dawn,.kne,.kmov,#kroul,.kroul,#kpop,.kpop,#title,.title,#kload,#klife';
   const W = innerWidth, H = innerHeight;
@@ -81,7 +89,7 @@ const SCAN = () => {
 
 async function play(p) {
   p.on('pageerror', e => bug('js', 'page error: ' + e.message.split('\n')[0].slice(0, 160)));
-  p.on('crash', () => bug('crash', 'tab crashed'));
+  p.on('crash', () => { R._crashed = true; R.harness.crashes = (R.harness.crashes || 0) + 1; const os = require('os'); bug('crash', 'tab crashed (Page crashed) at buổi ' + R.buoi, { freeMB: Math.round(os.freemem() / 1048576), totalMB: Math.round(os.totalmem() / 1048576), load: os.loadavg()[0] }) });
   const rt = RT.make(p, { dev: DEV, shots: SHOTS, ignoreCover: /kpop|kxcatch|ktut|#title|#kload|#dawn|kne/, touch: DEV !== 'ipad', log: d => { (R.trace = R.trace || []).push([sec(), d.k === 'tap' ? (d.screen || '') + ' «' + d.label + '»' : 'DEAD ' + d.label]); if (R.trace.length > 400) R.trace.shift(); if (process.env.RTV) console.log('TAP', d.screen, '«' + d.label + '»'); if (d.k === 'DEAD BUTTON') { R.dead.push({ ...d, at: sec(), S: lastS }); console.log('DEAD BUTTON', d.screen, '«' + d.label + '»', 'cover', d.cover) } } });
   let lastS = null;
   /* stuck evidence: every save / slot / co-op key of localStorage + the co-op state (CW / room) + S summary → <shots>/<tag>-dump.json + -save.json */
@@ -105,7 +113,8 @@ async function play(p) {
 
   await p.evaluate(() => { window.__rtEnd = null }).catch(() => {});
   const actsPerBuoi = { sens: 2, rand: 3, cautious: 1, bold: 3, quiet: 0 }[BOT] ?? 2;
-  let preT = Date.now(), idle = 0, noClose = new Set(), noFx = new Map(), deadSeen = new Set(), acts = 0, lastKey = '', lastProg = Date.now(), repeat = new Map(), sameScr = 0, lastSig = '', started = false, cpAt = 0, statusAt = Date.now();
+  let infoTry = new Map(); let preT = Date.now(), idle = 0, noClose = new Set(), noFx = new Map(), deadSeen = new Set(), acts = 0, lastKey = '', lastProg = Date.now(), repeat = new Map(), sameScr = 0, lastSig = '', started = false, cpAt = 0, statusAt = Date.now();
+  const NEXT_RE = /^sang (buổi|ngày mới)\b/i; const isNext = x => x.id === 'next' || NEXT_RE.test(x.t); let tapsB = 0;
   const clockKey = s => s ? [s.y, s.t, s.w, s.b].join('.') : 'none';
 
   for (;;) {
@@ -113,13 +122,20 @@ async function play(p) {
     let sc; try { sc = await p.evaluate(SCAN) } catch (e) { await p.waitForTimeout(1000); continue }
     lastS = sc.S;
     if (sc.end || sc.S && sc.S.dead && started) { break }
+    /* an open info layer (picture zoom #kpzoom, option note #kpinfo, hint #kpop, or the KẾT QUẢ toast #rtoast when it sits over a button) is closed like a person: tap on it (each closes on a tap) */
+    { const inf = await p.evaluate(INFO).catch(() => null);
+      if (inf) { const n = (infoTry.get(inf.sel) || 0) + 1; infoTry.set(inf.sel, n);
+        if (n <= 3) { const x = inf.x, y = inf.y; if (DEV === 'ipad') await p.mouse.click(x, y); else await p.touchscreen.tap(x, y); R.harness.infoTaps = (R.harness.infoTaps || 0) + 1; if (process.env.RTV) console.log('TAP info', inf.sel); await p.waitForTimeout(400); continue }
+        if (n === 4) { const shot = path.join(SHOTS, 'info-noeffect-' + Date.now() + '.png'); await p.screenshot({ path: shot }).catch(() => {}); bug('game', 'NO EFFECT: info layer ' + inf.sel + ' stays open after 3 real taps on it', { shot }) } }
+      else infoTry.clear() }
     if (sc.S && sc.S.name && !sc.S.dead && !started) { started = true; if (C.onStart) C.onStart() }
     /* progress + checkpoints */
     const key = clockKey(sc.S);
-    if (key !== lastKey) { if (lastKey && sc.S) { R.buoi++; acts = 0; repeat.clear() } lastKey = key; lastProg = Date.now();
+    if (key !== lastKey) { if (lastKey && sc.S) { R.buoi++; acts = 0; tapsB = 0; repeat.clear() } lastKey = key; lastProg = Date.now();
       if (R.buoi - cpAt >= CP) { cpAt = R.buoi; const sz = await p.evaluate(() => { let m = 0, k0 = ''; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (/save/.test(k)) { const n = (localStorage.getItem(k) || '').length; if (n > m) { m = n; k0 = k } } } return { k: k0, n: m } }).catch(() => null); if (sz) { R.saves.push({ buoi: R.buoi, year: sc.S && sc.S.y, chars: sz.n, key: sz.k }); console.log('CP buổi', R.buoi, 'year', sc.S && sc.S.y, 'save', sz.n, 'chars') } } }
     if (started && (Date.now() - (R._ckAt || 0) > 180e3 || R.buoi - (R._ckB || 0) >= 5)) { R._ckAt = Date.now(); R._ckB = R.buoi; const ls = await p.evaluate(() => { const o = {}; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (/^hclh|save|slot/i.test(k)) o[k] = localStorage.getItem(k) } return o }).catch(() => null); if (ls) { try { fs.writeFileSync(CKPT + '.tmp', JSON.stringify({ at: new Date().toISOString(), rs, R, ls })); fs.renameSync(CKPT + '.tmp', CKPT) } catch (e) {} } save() }
     if (SLICE && R.buoi >= SLICE) { R.sliced = true; break }
+    if (process.env.RT_TEST_CRASH && R.buoi >= +process.env.RT_TEST_CRASH && !(R.harness.resumed || []).length) { /* self-test of the crash path only */ await p.goto('chrome://crash').catch(() => {}) }
     if (Date.now() - statusAt > 3600e3) { statusAt = Date.now(); const l = 'STATUS ' + LIFE + ' · buổi ' + R.buoi + ' · year ' + (sc.S && sc.S.y) + ' · rank ' + (sc.S && sc.S.rank) + ' · bugs ' + R.bugs.length + ' · stuck ' + R.harness.stuck + ' · dead buttons ' + R.dead.length; R.status.push(l); console.log(l); save() }
     if (Date.now() - (R._snapAt || 0) > 60e3) { R._snapAt = Date.now(); await p.screenshot({ path: path.join(SHOTS, 'now.png') }).catch(() => {}); if (process.env.RTV) console.log('NOW', sc.layer, '«' + sc.title + '»', 'hit', sc.b.filter(x => x.hit).length, 'idle', idle, 'buổi', R.buoi, 'areaTaps', R.harness.areaTaps || 0) }
     /* not in the life yet (title / resume splash / loading) for 5 min = stuck too: bug, reload, go again (a resume re-opens its save) */
@@ -135,7 +151,7 @@ async function play(p) {
     idle = 0;
     /* a button of the top layer, fully on screen, covered by ANOTHER layer → real tap on it → DEAD BUTTON if the cover stays */
     for (const d of started ? sc.b.filter(x => x.deadSuspect) : []) { const ds = sc.layer + '|' + sc.title + '|' + d.t; if (deadSeen.has(ds)) continue; deadSeen.add(ds); await p.waitForTimeout(3000); const s2 = await p.evaluate(SCAN).catch(() => null); const d2 = s2 && s2.b.find(x => x.t === d.t && x.deadSuspect); if (d2) { const h = await p.evaluateHandle(i => window.__rtBtns[i], d2.i); await rt.tap(h, { screen: s2.layer + (s2.title ? ' «' + s2.title + '»' : ''), label: d.t.slice(0, 50) }) } }
-    /* same screen many steps → light unstick (Escape / ✕) — logged, not a stuck bug */
+    /* same screen many steps → light unstick (tap ✕ / another button) — logged, not a stuck bug */
     const sig = sc.layer + '|' + sc.title + '|' + sc.b.map(b => b.t).join('/') + '|' + key;
     if (sig === lastSig) sameScr++; else { sameScr = 0; lastSig = sig }
     if (sameScr > 25) { await unstick(p, rt, sc, sameScr > 60 ? 2 : 1); sameScr = 0; continue }
@@ -150,7 +166,7 @@ async function play(p) {
     /* a close (✕ / Lui) tapped for real 3× and the same dialog is still there = button with no effect → bug + shot */
     if (ok && (ch.x || CLOSE_RE.test(ch.t)) && sc.layer !== 'page') { await p.waitForTimeout(600); const s4 = await p.evaluate(SCAN).catch(() => null); if (s4 && s4.layer === sc.layer && s4.title === sc.title && sc.title) { const k = 'nx|' + sc.layer + '|' + sc.title; noFx.set(k, (noFx.get(k) || 0) + 1); if (noFx.get(k) === 3) { const shot = path.join(SHOTS, 'noeffect-' + Date.now() + '.png'); await p.screenshot({ path: shot }).catch(() => {}); R.dead.push({ k: 'NO EFFECT', screen: sc.layer + ' «' + sc.title + '»', label: ch.t, cover: 'tapped 3× for real, dialog stays', shot, at: sec(), S: sc.S }); bug('dead', 'close button has no effect: ' + sc.layer + ' «' + sc.title + '» «' + ch.t + '»', { shot }) } } }
     if (ok && ch.type) { await p.waitForTimeout(200); await p.keyboard.press('Control+A').catch(() => {}); await p.keyboard.type(String(ch.type), { delay: 80 }); R.harness.typed = (R.harness.typed || 0) + 1 }
-    if (ok && (sc.layer === 'page' || sc.b.some(x => x.id === 'next')) && !ch.next) acts++;
+    if (ok && (sc.layer === 'page' || sc.b.some(isNext)) && !ch.next) acts++; if (ok) tapsB++;
     await p.waitForTimeout(ok ? 220 : 400);
 
     function choose(sc, started) {
@@ -173,6 +189,8 @@ async function play(p) {
       const nonExit = opts.filter(x => !isExit(x));
       const exits = opts.filter(isExit);
       const isPage = sc.layer === 'page' || sc.b.some(x => x.id === 'next');
+      /* this buổi is done (persona acts used, or 40+ taps without the clock moving — map rooms «Ở đây còn N người», E-S1 Dư đồ loop): take «Sang buổi / Sang ngày mới» wherever it shows */
+      const nx = nonExit.find(isNext); if (nx && started && (acts >= actsPerBuoi || tapsB > 40)) return { ...nx, next: true };
       if (!isPage) {
         const main = nonExit.filter(x => !LOW_RE.test(x.t) && !/^kéo xuống/i.test(x.t));
         if (main.length) return score(main);
@@ -185,7 +203,7 @@ async function play(p) {
         return null;
       }
       /* main screen: a few actions per buổi (persona), then «Sang buổi» */
-      const next = b.find(x => x.id === 'next');
+      const next = b.find(isNext);
       const acts0 = nonExit.filter(x => x.id !== 'next' && !/^(menu|me)$/.test(x.id) && !LOW_RE.test(x.t));
       if (acts < actsPerBuoi && acts0.length && rnd() < 0.85) return score(acts0);
       if (next) return { ...next, next: true };
@@ -211,11 +229,15 @@ async function play(p) {
   console.log('LIFE DONE ' + LIFE + ' ' + (R.life.id) + ' age ' + (R.life.age ?? '?') + ' · buổi ' + R.buoi + ' · taps ' + R.harness.taps + ' · dead buttons ' + R.dead.length + ' · stuck ' + R.harness.stuck + ' · bugs ' + R.bugs.length);
 }
 
-/* unstick ladder (all real input): 1 Escape key · 2 tap the top layer ✕ / any close · 3 reload + continue the same save from the title */
+/* unstick ladder (TAPS ONLY — no keyboard, owner real-tap rule 25/11 ~05:10Z; Escape soft-locked co-op on the title, B U3 9YAK): 1 tap the top layer ✕ / close · 2 no close → tap another safe button of the top layer (never exit / leave / nav), else tap bare space outside the top layer · 3 reload + continue the same save from the title */
 async function unstick(p, rt, sc, lvl) {
   R.harness.unstick.push({ at: sec(), lvl, layer: sc.layer, title: sc.title });
-  await p.keyboard.press('Escape').catch(() => {}); await p.waitForTimeout(500);
-  if (lvl >= 2) { const i = sc.b.findIndex(b => b.x || CLOSE_RE.test(b.t)); if (i >= 0) { await p.evaluate(SCAN).catch(() => {}); const h = await p.evaluateHandle(i => window.__rtBtns[i], i); await rt.tap(h, { screen: sc.layer, label: 'unstick ✕' }) } }
+  { const s1 = await p.evaluate(SCAN).catch(() => null) || sc; let i = s1.b.findIndex(b => b.hit && (b.x || CLOSE_RE.test(b.t)));
+    if (i < 0 && lvl >= 2) { const ok = s1.b.map((b, k) => k).filter(k => { const b = s1.b[k]; return b.hit && !EXIT_RE.test(b.t) && !LEAVE_RE.test(b.t) && !NAV_RE.test(b.t) }); if (ok.length) i = ok[Math.floor(rnd() * ok.length)] }
+    if (i >= 0) { const h = await p.evaluateHandle(i => window.__rtBtns[i], i); await rt.tap(h, { screen: s1.layer, label: 'unstick ' + (s1.b[i].t || '✕').slice(0, 30) }) }
+    else if (lvl >= 2 && s1.layer !== 'page' && s1.lr) { /* tap-out: bare space outside the top layer, like a person tapping beside a popup */ const vw = p.viewportSize(); const r = s1.lr; const pts = [[8, 8], [vw.width - 8, 8], [8, vw.height / 2], [vw.width - 8, vw.height / 2]].filter(([x, y]) => x < r.x || x > r.x + r.w || y < r.y || y > r.y + r.h);
+      for (const [x, y] of pts) { const bare = await p.evaluate(([x, y]) => { const t = document.elementFromPoint(x, y); return !!t && !t.closest('button,[role=button],a,input,select,textarea,[data-tab]') }, [x, y]).catch(() => false); if (!bare) continue; if (DEV === 'ipad') await p.mouse.click(x, y); else await p.touchscreen.tap(x, y); R.harness.areaTaps = (R.harness.areaTaps || 0) + 1; break } }
+    await p.waitForTimeout(500) }
   if (lvl >= 3) {
     await p.reload({ waitUntil: 'load' }).catch(() => {}); await p.waitForFunction(() => typeof start === 'function', null, { timeout: 0 }).catch(() => {});
     await p.evaluate(() => { if (!window.__rtOver) { window.__rtOver = 1; const o0 = over; over = function (h, t, fate, alive) { try { if (!S.dead) window.__rtEnd = { id: String(h), fate: String(fate || '').replace(/<[^>]+>/g, ''), alive: !!alive, age: S.age, year: S.year, rank: S.rank } } catch (e) {} return o0.apply(this, arguments) } } }).catch(() => {});
@@ -247,7 +269,10 @@ const seat = Seat({ url: URL0, out: OUT0, dev: DEV, bot: A.bot, seed: A.seed, li
   const ctx = await chromium.launchPersistentContext(path.join(path.resolve(OUT0), 'profile-' + LIFE), { viewport: VP, deviceScaleFactor: 1, hasTouch: DEV !== 'ipad', isMobile: DEV !== 'ipad', serviceWorkers: 'block' });
   const br = { close: () => ctx.close() };
   const p = ctx.pages()[0] || await ctx.newPage();
-  try { await seat.play(p) } catch (e) { seat.R.bugs.push({ type: 'harness', msg: 'runner error: ' + String(e.message).split('\n')[0], n: 1 }); seat.R.life = seat.R.life || { id: 'HARNESS', type: 'harness' }; seat.save(); console.error(e); process.exitCode = 1 }
-  await br.close();
+  try { await seat.play(p) } catch (e) { if (seat.R._crashed) { /* a crashed tab cannot be reused (Playwright: every call → «Page crashed»): like a person, reopen the game — keep the life OPEN, put the crash into the checkpoint, exit 3 → the runner loop (until … resume=1) reopens the SAME life from its last ckpt */
+      const CK = path.join(OUT, LIFE + '.ckpt.json'); try { const ck = JSON.parse(fs.readFileSync(CK, 'utf8')); ck.R = ck.R || {}; ck.R.harness = ck.R.harness || {}; ck.R.harness.crashes = seat.R.harness.crashes; ck.R.bugs = (ck.R.bugs || []).concat(seat.R.bugs.filter(b => b.type === 'crash').slice(-1)); fs.writeFileSync(CK + '.tmp', JSON.stringify(ck)); fs.renameSync(CK + '.tmp', CK) } catch (x) { console.error('crash: no checkpoint yet — the life restarts fresh') }
+      delete seat.R._crashed; seat.save(); console.error('PAGE CRASHED ' + LIFE + ' at buổi ' + seat.R.buoi + ' → exit 3, rerun with resume=1'); process.exitCode = 3 } else {
+    seat.R.bugs.push({ type: 'harness', msg: 'runner error: ' + String(e.message).split('\n')[0], n: 1 }); seat.R.life = seat.R.life || { id: 'HARNESS', type: 'harness' }; seat.save(); console.error(e); process.exitCode = 1 } }
+  await br.close().catch(() => {});
 })();
 }

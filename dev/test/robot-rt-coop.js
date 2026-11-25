@@ -69,7 +69,7 @@ async function seatLoop(ctx, who, dev, other) {
 (async () => {
   /* one cached browser profile per seat (pictures fetched once; see robot-rt.js) */
   const ctxs = [];
-  const mk = async dev => { const c = await chromium.launchPersistentContext(path.join(OUT, 'profile-coop-' + TAG + '-' + dev), { viewport: VPS[dev], deviceScaleFactor: 1, hasTouch: dev !== 'ipad', isMobile: dev !== 'ipad', serviceWorkers: 'block' }); ctxs.push(c); return c };
+  const mk = async dev => { const c = await chromium.launchPersistentContext(path.join(OUT, 'profile-coop-' + TAG + '-' + dev), { viewport: VPS[dev], deviceScaleFactor: 1, hasTouch: dev !== 'ipad', isMobile: dev !== 'ipad', serviceWorkers: 'block', ...(process.env.COOP_URL ? { args: ['--disable-web-security', '--disable-features=PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults'] } : {}) }); if (process.env.COOP_URL) await c.addInitScript(u => { window.COOP_URL = u }, process.env.COOP_URL); /* optional own co-op Worker (B U3b patch) */ ctxs.push(c); return c };
   const br = { close: () => Promise.all(ctxs.map(c => c.close())) };
   const H = { done: false }, G = { done: false };
   const hDev = A.host || 'fold', gDev = A.guest || 'ipad';
