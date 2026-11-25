@@ -132,3 +132,44 @@ familiarity 7 not named: Thỉnh an Hoàng hậu → kn (kn.r1/r2/r4 None→2) =
 1. Worktree: sparse review/net-ghen-2 @ a5768ba8 (`/home/user/wt/w10` may be gone; recipe in nt-w9 §HANDOVER). `python3 dev/build/assemble.py`; before relshow-scan: `node dev/test/relshow-bal.js $PWD/dev/index.html dev/test/relshow-bal.json`.
 2. Do the familiarity walk fix above (LAW 9: use the existing j63 KREG row, no new chip), add S.known to actwalk-scan, re-run every gate in the tables (rc-scan, quickcheck ALONE, coop-e2e alone).
 3. Tools: rc-scan/rc-sum in dev/handover/reports/nt-w8/; robot: dev/measure/nt-run.js (use 3 slots, not 4 — 4-way load hangs the bot).
+
+---
+# ROUND 4 (W10b, Foreman D depth 5: HANDOVER step 2, familiarity on the act walk, whole family) — review/net-ghen-2 @ 80d217ed — SSK
+PRIORITY #1 CHECK: OD net-ghen LAW 11 wave 2 | main none | review/net-ghen-2 a5768ba8 (W10 round 3) | claims W10 → W10b. Reused: j63 KREG familiarity rows (W9, now kaKnRows), §93.8 kitResultCard (jkitsel), jstagehere actMove/ACT_PLACE, actwalk-scan + act-audit LIB, nt-w8 rc-scan/rc-sum.
+Commits: 402dbe43 (fix + scan), 80d217ed (site rebuilt). No new chip, no BAL number, no player text of its own (rows = K61STN words through the same who-words as the card).
+
+## Root cause (two sources, one family «S.known rises after the act's card was built»)
+1. j61 morning-audience act wrapper (Thỉnh an Hoàng hậu: k61Know of the queen + 2 strangers; Thỉnh an Thái hậu) runs AFTER the base act built its result card = residual b (kn.r1/r2/r4 None→2). Not a walk at all, so a fix inside actMove alone would have missed it.
+2. jstagehere actMove → goTo: people met on arrival (the man at thu/vuon/ksp/tn/cnh: kn.x22/x23/x29 None→1; the Thái hậu household at tn).
+
+## Fix
+- j63: kaKnRows(kn0) = the W9 familiarity block of kaMorePeople split out (kaMorePeople calls it; same output). resultShow keeps the S.known its card reflects (window.__kaKnAt). kaWalkKn(kn0,title) names every step risen since kn0: the act's card still up → the rows join its «Được» line (one person = one row; «ta không được gì…» note removed); the card already closed → the §93.8 kit result card under the act's title.
+- jstagehere: the act wrapper takes knA before the act; kn0 = __kaKnAt (card built) or knA (no card); names the rises after the walk (or at once when a dialog keeps the walk pending; actPendRun snapshots before its own walk). For every act, not only ACT_PLACE ones (source 1). A card built on a timer (jhouse hsvDone) → naming waits one tick, so nothing is named twice. actMove itself unchanged.
+
+## Scan: dev/test/actwalk-scan.js extended (exit 1 on any unnamed step)
+Part 1 = every ACT_PLACE act × fail/pass × card path (merge = card up, closed = card gone); part 2 = the REAL act(i) of every ACT_PLACE act dealt in «hau»/«dau» × fail/pass, counting familiarity words on every card the tap made.
+| build | part 1 walks with S.known risen / unnamed | part 2 taps with S.known risen / unnamed | hidden stat on a walk |
+|---|---|---|---|
+| before (a5768ba8 sources, same scan) | 0 / 0 (who stands there is random) | 16 / 12 (Thỉnh an HH r1/r2/r7 ×2; x23 on Hối lộ KSP ×2, Múa ×2, Xem sổ ×2, Xem lén ×1, Cầu tự ×2, Phát bạc ×1 — the last with no card at all) | 0 |
+| after (402dbe43) | 1–5 / 0 | 6–12 / 0 (Thỉnh an HH r1/r5/r4 3/3 ✓, Múa x22 ✓, Để ý x22 ✓, Thái y x5 ✓) | 0 in 15 of 16 runs (below) |
+CAVEAT: 1 of 16 after-runs reported «walks that change a stat (not a quest reward): 1»; the output of that run was not kept (grep summary only), and 15 later runs (6+6+3 loops) never showed it again. W10b changed no stat path (only S.known naming), so I take it as a random roll from round 3's part, not yet traced; the scan prints the act + call site when it hits. Open for the reviewer / next seat.
+
+## Gates on 80d217ed (402dbe43 build)
+| gate | result |
+|---|---|
+| build (assemble + build_site) | OK |
+| one-core-guard / -text / -text-rule / -bind | PASS ×4 (fails 0, DIFF 0, TYPED 0) |
+| c6-cancel-scan | 0 cards |
+| relshow-scan --fail-raw (fresh dump) | PASS, RAW 0 (oán 104 sites, WIRED 79) |
+| relshow-rt | PASS |
+| net-build | PASS |
+| actwalk-scan | PASS 0 (15/16 runs; see caveat) |
+| rc-scan dau,hau + rc-sum | 940 runs, 535 cards, 0 page errors; NOT named 36 = servant af 18 + loyal 18 only (residual a «Đổi người» / Hặc / Tố leaves = kit request, waiting); familiarity 217 changes, 0 not named (was 7); her stat 0; all consort families 0 |
+| quickcheck ALONE | PASS 623 s total (open 2030 ms, old save ok, render 286/250, tab 682/658, buổi 1467/1623, core gates PASS) |
+| coop-e2e fresh assemble, alone | 142/142 first run |
+| real taps | not done: the change is the naming of real deltas through existing kit rows/card; scans read kaLastResult on the real act path |
+
+Open for Foreman D: residual a (servant leaves, kit request), the one-off actwalk stat hit (caveat), RV4 N4/N6 with the kit keeper.
+
+## HANDOVER
+None needed (SSK). Worktree /home/user/wt/w10b (sparse). Before relshow-scan: `python3 dev/build/assemble.py && node dev/test/relshow-bal.js $PWD/dev/index.html dev/test/relshow-bal.json`.
