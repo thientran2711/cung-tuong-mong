@@ -3237,3 +3237,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (00:50Z) MINIGAME-FIX LAND READY minigame-fix-2 45ebeae1 (rv items fixed; KK24 KIT OK 45ebeae1; clean quickcheck PASS, perf = live) → rv 4xEdReni re-check → LC12 replaces step 8. Art note for C later (not now): all 39 playArt kinds share one banner cat:tai-nghe → per-kind banner cat:<kind>.
 - (00:52Z) rv 4xEdReni PASS 45ebeae1 + KK24 KIT OK 45ebeae1 → MAIN GO: replaces step 8 (0506605b) in Variant C.
 - (00:53Z) KK24 KIT READY kit-focus-fig d500b6db (focus figure 398→542 Fold / ~480 iPad, one place jfocus) → B kit rv requested with real Fold+iPad focus shots (KK24 had none).
+- (00:55Z) VIECNHO-FIX LAND READY review/viecnho-fix-r2 518aef86 (= flight-ui 9878230b + viecnho 89ef52f9; owner 22:14Z wording; tags «???» kept; all viecnho/name-mask/duodo/know-notice tests + quickcheck + coop 142/142 PASS; tab 580 vs 490 to watch) → rv 4x8Bd88A re-check; VISITOR-FIX merges 0b4e1e65 on top as r8.
