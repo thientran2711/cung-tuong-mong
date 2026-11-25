@@ -29,3 +29,4 @@ Remaining rows: all U1 rows of the RERUN LIST except the STUCK row; U1 now count
 - Run: `COOP_URL=http://127.0.0.1:8787 RELOAD_AT=8,15 node dev/test/robot-rt-coop.js http://127.0.0.1:8080/index.html /home/user/wt/out/u1b host=fold guest=ipad kiep=1 seed=<n> tag=s<n>`.
 - Segment label: «game = stack 512cfee6 (pre-land), PROVISIONAL».
 - Segment 1 started: room EGEN, seed 115, host Fold / guest iPad. 404 CONSOLE lines = CDN assets absent locally (noise).
+- 25/11 ~13:25Z DHQ8 (seed 115) INVALID: stuck-1 host «Bổng lộc tháng ba · Lễ nghĩa» with #kpop «Thang cơ duyên» open (no #kxcatch for kpPop; old fix needed a visible #kxcatch, never fired). Dumps review/robot10-coop-saves 78a07ffe u1r/DHQ8. Fix = total popup close in robot-rt.js (own ✕ else bare-area tap, verify #kpop gone, harness.popClose/popFail); synthetic test (kpop over a .dlg) closes it. New patch sha256 bde8ce78. DHQ8 killed; next seed 116.
