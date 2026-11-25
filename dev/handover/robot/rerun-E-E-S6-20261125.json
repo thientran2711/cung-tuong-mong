@@ -565,7 +565,7 @@
   "unstickNote": "2 stuck episodes (~900 s and ~1000 s) on .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1» (story text, no option button; GAME bug lane iPad), recovered by level-3 unstick",
   "unit": "E-S6",
   "row": "R6·lazy·1:2176113731",
-  "game": "origin/main 17835565",
-  "audit": "VALID"
+  "game": "local build of origin/main 17835565 (NOT LIVE)",
+  "audit": "ending VALID by robot-audit, NOT COUNTED for the tally (played on a local build of main 17835565, not the LIVE github.io build; Foreman E lesson d 17:30Z). Evidence/review kept; bug-finding only."
  }
 ]
