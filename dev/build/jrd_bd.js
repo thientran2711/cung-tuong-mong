@@ -212,7 +212,7 @@ rdDef("bd_san",8,{t:"Dịch ngựa",w:"emp",sj:"dịch bệnh ở Thượng tứ
   {n:"Sai Bạc Đồ xuống xem rồi về kể",f:"slow",wx:"ngươi không phải vào chuồng dịch",lx:"chậm một ngày",rt:"Bạc Đồ về kể từng dấu bệnh. Ngươi nghĩ ra cách chữa."},
   {n:"Viết thư hỏi thầy ngựa ở {land}",f:"home",wx:"có người biết bệnh thật",lx:"thư đi lâu",rt:"Thư theo người đưa tin của sứ quán đi ngay trong đêm."}]},
  s2:{h:"Binh bộ đổ tội ngựa {land}",w:"v",if:RDW(0),t:"Binh bộ dâng tấu: dịch bắt đầu từ dãy chuồng ngựa {land}. Người nhà {v} trong Binh bộ đòi đem cả đàn ngựa {land} ra đốt.",o:[
-  {n:"Xin Hoàng thượng cho ba ngày chữa",f:"cure",wx:"đàn ngựa còn cơ hội",lx:"nếu thất bại thì tội về ngươi",rt:"Hoàng thượng cho ba ngày.",rf:"Hoàng thượng chỉ cho một ngày."},
+  {n:"Xin Hoàng thượng cho ba ngày chữa",f:"cure",wx:"đàn ngựa còn dịp",lx:"nếu thất bại thì tội về ngươi",rt:"Hoàng thượng cho ba ngày.",rf:"Hoàng thượng chỉ cho một ngày."},
   {n:"Chứng minh dịch bắt đầu từ chuồng khác",f:"proof",wx:"ngựa {land} được rửa tiếng",lx:"phải tìm sổ chuồng",rt:"Sổ chuồng ghi con ngựa gục đầu tiên ở dãy chuồng Đại Hy.",rf:"Sổ chuồng đã bị sửa."},
   {n:"Xin tự bỏ bạc chuộc đàn ngựa ra ngoài thành nuôi riêng",f:"home",wx:"ngựa không bị đốt",lx:"bạc ra nhiều",rt:"Đàn ngựa {land} được dắt ra bãi cỏ ngoài thành."}]},
  c1:{h:"Thú y Thượng tứ viện",w:"emp",t:"Thú y của Thượng tứ viện muốn cho ngựa uống thuốc đắng và trích máu theo sách. Bạc Đồ lắc đầu: ngựa yếu mà trích máu thì chết.",o:[

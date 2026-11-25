@@ -505,7 +505,7 @@ const oaProg=()=>({key:"offall",fresh:true,have:ALL.have,total:ALL.total||1,sub:
 const oaShort=()=>{const left=Math.max(0,ALL.total-ALL.have);return !!oaFree&&!oaDone()&&!ALL.counting&&oaFree.free<left*1.05+50e6};
 function oaNotes(){const s=ALL.state,left=Math.max(0,ALL.total-ALL.have),done=oaDone(),n=[];
  if(!done)n.push(`<div class="kpnote">Nên dùng Wi-Fi: cả bộ tranh vẽ và tiếng nhạc nặng ${oaSize(ALL.counting?ALL.total:left)}. Có thể tạm ngưng, đóng máy, tải tiếp lúc khác; phần đã về vẫn giữ.</div>`);
- if(oaCell()&&!done)n.push(`<div class="kpnote">Máy đang dùng mạng di động hoặc chế độ tiết kiệm dữ liệu. Nên đợi có Wi-Fi rồi hãy tải.</div>`);
+ if(oaCell()&&!done)n.push(`<div class="kpnote">Máy đang dùng mạng di động hoặc chế độ tiết kiệm mạng. Nên đợi có Wi-Fi rồi hãy tải.</div>`);
  if(oaShort())n.push(`<div class="kpnote">Máy chỉ còn trống ${oaSize(oaFree.free)}, chưa đủ chỗ cho ${oaSize(left)}. Vẫn tải được tới khi hết chỗ; muốn đủ cả bộ, dọn bớt chỗ trong máy trước.</div>`);
  if(IOSB&&!done)n.push(`<div class="kpnote">Trên iPad, iPhone: Safari và ứng dụng ở màn hình chính cất tranh riêng. Nên mở từ màn hình chính rồi hãy tải; Safari có thể tự dọn tranh nếu lâu ngày không mở.</div>`);
  if(s==="quota")n.push(`<div class="kpnote">Máy báo hết chỗ cất. Đã cất ${oaSize(ALL.have)}; phần còn lại tranh sẽ về khi chơi tới, hoặc tải tiếp sau khi dọn chỗ.</div>`);

@@ -113,7 +113,7 @@ const BEAT={
   sung14:"Không có nhà sau lưng nên mọi thứ phải tự lo. Bán đồ trong rương, điểm trang, nhờ thái giám Nội vụ phủ mua giúp một món; vài kẻ đồng liêu cũ sẽ nhìn xem {x} chi tiêu ra sao.",
   tap14:"Người cũ biết rõ {x}, người mới còn dò xét. Kết một phi tần, học thêm tài nghệ, thân cận với cung nữ."},
  cnv:{nhap14:"Ngươi mới vào làm kẻ hầu, chủ nhân nhìn việc tay chân trước tiên. Làm xong mấy việc hầu hạ, học lễ nghi, biết lối đi lối về thì khỏi bị mắng oan.",
-  sung14:"Chủ nhân cần một món quà dâng lên bậc trên; ngươi chải chuốt, thêu khăn cho khéo, đi qua Ngự hoa viên lúc ngự giá hay dạo. Việc này làm tốt sẽ được tin cậy, nhưng kẻ bị giành mất cơ hội sẽ oán ngươi.",
+  sung14:"Chủ nhân cần một món quà dâng lên bậc trên; ngươi chải chuốt, thêu khăn cho khéo, đi qua Ngự hoa viên lúc ngự giá hay dạo. Việc này làm tốt sẽ được tin cậy, nhưng kẻ bị giành mất dịp sẽ oán ngươi.",
   tap14:"Đồng liêu nâng nhau thì sống, dìm nhau thì chết. Nói chuyện, biếu quà một người, luyện thêu thùa cho giỏi."}};
 /* bang-words review (E40r, law 6b / 11): BEAT.bd above is the Bắc Địch (old-premise) line; a NEW bd life is the Ba Tư princess
    (owner OD 19/11) and reads the Ba Tư line through THE one switch bdTxtProp (jrd_bd.js). Phù Tang (pf) has its own row. */

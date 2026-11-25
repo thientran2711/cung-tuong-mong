@@ -268,7 +268,7 @@ function kitCoopClock(o){css();o=o||{};const p=Math.max(0,Math.min(1,(o.left||0)
  else if(o.fr==="away")L.push(kitChip(`${nm||"Hảo hữu "}đang vắng`,"r"));
  else L.push(kitChip(o.me?"Hảo hữu đang dở tay, xin đợi":`${nm||"Hảo hữu "}đang hành sự`,o.me?"w":"n"));}
  /* she is ready, the friend not yet: what she can still do meanwhile */
- if(o.me&&o.fr!=="ready")L.push(kitChip("Trong lúc đợi: xem các tab, Tư trang, Sổ ghi","n"));
+ if(o.me&&o.fr!=="ready")L.push(kitChip("Trong lúc đợi: xem các mục, Tư trang, Sổ ghi","n"));
  if(o.btn)L.push(`<button type="button" class="kchip n" data-ctm="hold" aria-label="Tạm dừng cuộc chơi cho cả hai">Tạm dừng</button>`);
  return `<span class="kchips kctm">${L.join("")}</span>`}
 /* the panel over both screens while the game is held (kit panel markup, as the freeze panel #coopfz) */
@@ -306,7 +306,7 @@ function kitCoopFriendPanel(o){css();o=o||{};const s=FST[o.st]||FST.work;const n
  const fw=frWord(o);
  const rows=[["Hảo hữu",`${s[1]} ${fw}`,s[0]],["Buổi này",o.clock==="up"?"hết buổi":o.clock==null?"—":`còn ${fmtT(o.left)}${o.clock==="pz"?" (đồng hồ đang đợi)":""}`,o.clock==="up"?"r":"n"],
   ["Ngươi",o.meRd?"đã sẵn sàng":`còn ${o.myKh||0} khắc`,o.meRd?"g":"n"]];
- const note=o.meRd&&o.st!=="ready"?"Trong lúc đợi: xem các tab, Tư trang, Sổ ghi. Hảo hữu xong là sang buổi ngay.":
+ const note=o.meRd&&o.st!=="ready"?"Trong lúc đợi: xem các mục, Tư trang, Sổ ghi. Hảo hữu xong là sang buổi ngay.":
   o.st==="ready"?"Hảo hữu chờ ngươi. Xong việc thì chạm «Sẵn sàng» (hay hết khắc) là sang buổi cho cả hai.":
   "Cứ làm việc của ngươi. Hết khắc hay chạm «Sẵn sàng» là xong buổi; cả hai xong thì sang buổi ngay, hết giờ thì tự sang.";
  return `<div class="dlg kpanel kpsc" data-kind="notice">${typeof kpHeader==="function"?kpHeader("notice",nm,"Hảo hữu cùng chơi").replace(/<\/div>$/,(typeof kitXHTML==="function"?kitXHTML('data-ctm="frx"',"Đóng"):"")+"</div>"):`<b>${esc(nm)}</b>`}<div class="body" id="kctmpb">${typeof kitRows==="function"?kitRows(rows):""}<p class="kpnote">${note}</p></div>${o.canHold?`<div class="row" id="kctmpr"><button class="kbtn alt" data-ctm="hold" aria-label="Tạm dừng cuộc chơi cho cả hai">Tạm dừng</button></div>`:""}</div>`}

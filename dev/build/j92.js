@@ -310,7 +310,7 @@ function wdFrame(a,t){ap(a,{bac:-40});a.schemes=(a.schemes||0)+1;if(typeof ducAd
  /* item conservation (jil): the very piece is planted (same id) */t.inv=t.inv||[];const P0={k:F.k,h:1,by:key(a),gh:key(a)};if(F.take&&F.take.iu)P0.iu=F.take.iu;t.inv.push(P0);
  if(t===S){S.wdFrame={by:key(a),k:F.k,due:wk()+1+R(2)};
   if(roll(WD.warnBase+eyes(S)*6+(watcher()?15:0))){const w=watcher();const named=roll(WD.traceBase+eyes(S)*WD.traceMat);if(named){S.wdFrame.traced=1;evA(S,a,BAL.eff.j92.evWdFrame_2)}
-   Q.push({t:"Tai mắt báo tin",who:pMe(),h:`<p>${w?w.name:"Người hầu"} thấy ${named?"người của "+wdNm(a):"một kẻ lạ"} lén vào phòng ngươi lúc vắng người.</p><p class="past">Nên kiểm tra đồ trong rương.${named?` Đã ghi vào Sổ ghi (chứng cứ về ${a.name} ${balSg(BAL.eff.j92.evWdFrame_2)}).`:""}</p>`});
+   Q.push({t:"Tai mắt báo tin",who:pMe(),h:`<p>${w?w.name:"Người hầu"} thấy ${named?"người của "+wdNm(a):"một kẻ lạ"} lén vào phòng ngươi lúc vắng người.</p><p class="past">Nên soát đồ trong rương.${named?` Đã ghi vào Sổ ghi (chứng cứ về ${a.name} ${balSg(BAL.eff.j92.evWdFrame_2)}).`:""}</p>`});
    log(`${w?w.name:"Người hầu"} thấy ${named?"người của "+wdNm(a):"một kẻ lạ"} lén vào phòng ngươi.`)}
   return ""}
  return wdFrameResolve(a,t)}

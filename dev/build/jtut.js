@@ -215,7 +215,7 @@ function ia(k){try{const a=kitInfoArt(k);return a&&a.src||""}catch(e){return""}}
 function owide(){try{return typeof kitOriginWide==="function"?kitOriginWide(S.origin.k):kitOriginArt(S.origin.k)}catch(e){return""}}
 const rows=L=>kitRows(L.map(x=>[x[0],say(x[1]),x[2]||""]));
 const INTRO=[
- {t:"Game này là gì",p:()=>owide(),h:()=>say(`<p>{M} là ${MMT()}, phụng mệnh dạy lễ cho {x} những ngày đầu trong cung. Trước hết, {m} xin nói rõ {x} đang bước vào chuyện gì.</p>`)+
+ {t:"Cung Tường Mộng là gì",p:()=>owide(),h:()=>say(`<p>{M} là ${MMT()}, phụng mệnh dạy lễ cho {x} những ngày đầu trong cung. Trước hết, {m} xin nói rõ {x} đang bước vào chuyện gì.</p>`)+
   rows([["Đây là","một kiếp người trong hậu cung: {x} là một cô gái vừa vào cung, mỗi buổi tự chọn việc mà làm để sống sót và đi lên"],
    ["Mỗi kiếp","một thân phận khác (con nhà quyền thế, nhà buôn, cung nữ…), một Hoàng thượng khác, một hậu cung khác"],
    ["Lựa chọn","không có đường định sẵn; việc nào cũng ghi rõ cái được và cái giá"]])},
@@ -296,7 +296,7 @@ function show(prep){const s=STEPS[T.step];if(!s)return;if(busy()){T.paused=true;
  const btns=[{k:"skip",t:"Bỏ qua lời dặn",alt:true}];if(!s.noNext)btns.push({k:"next",t:s.last?"Đã hiểu":"Tiếp"});
  setTimeout(()=>{if(!T.on||STEPS[T.step]!==s)return;if(busy()){T.paused=true;coachOff();return}
   const np=s.pages?s.pages():0,pg=T.page||0;
-  kitCoach({title:typeof s.title==="function"?s.title():s.title,sub:np?`Game này chơi gì · trang ${pg+1}/${np} · lời dặn ${n}/${tot}`:`${MMN()} · lời dặn ${n}/${tot}`,html:typeof s.html==="function"?s.html():s.html,target:s.target,pad:s.pad,interact:s.interact,marks:s.marks,side:s.side,big:s.big,btns,pic:np?introPic(pg):stepPic(s),
+  kitCoach({title:typeof s.title==="function"?s.title():s.title,sub:np?`Cách chơi · trang ${pg+1}/${np} · lời dặn ${n}/${tot}`:`${MMN()} · lời dặn ${n}/${tot}`,html:typeof s.html==="function"?s.html():s.html,target:s.target,pad:s.pad,interact:s.interact,marks:s.marks,side:s.side,big:s.big,btns,pic:np?introPic(pg):stepPic(s),
    on(k){if(k==="skip")return tourEnd("skip");if(k==="next"){if(np&&pg<np-1){T.page=pg+1;show(false);return}T.page=0;next()}}})},prep&&s.prep?560:0)}
 /* the trial act: the step ends when the act's result arrives (result card, or the act opened a dialog of its own) */
 function watchTry(){const s=STEPS[T.step];if(!T.on||!s||s.id!=="thu")return;
@@ -389,7 +389,7 @@ try{const s0=start;start=function(){const r=s0.apply(this,arguments);try{/* not 
 /* ---------- Thiết lập: "Lời dặn tân thủ" switch (kit toggle) ---------- */
 try{const oh=optHTML;optHTML=function(){const h=oh.apply(this,arguments);
   const tg=kitToggle({id:"o-tut",label:"Lời dặn tân thủ",sub:"ma ma chỉ lối, dặn khi gặp việc mới",on:optOn()});
-  const rb=(typeof S!=="undefined"&&S&&!S.dead)?`<button type="button" class="kbtn alt ktutb" data-ktut-replay="1">Xem lại lời dặn<small>Game này chơi gì · ${MMN()} chỉ lối</small></button>`:"";
+  const rb=(typeof S!=="undefined"&&S&&!S.dead)?`<button type="button" class="kbtn alt ktutb" data-ktut-replay="1">Xem lại lời dặn<small>Cách chơi · ${MMN()} chỉ lối</small></button>`:"";
   return h.replace(/<\/div>\s*$/,tg+rb+"</div>")};
  const ow=wireOpt;wireOpt=function(){const r=ow.apply(this,arguments);try{const t=document.getElementById("o-tut");if(t)t.onchange=e=>{OPT.tut=!!e.target.checked;saveOpt();try{if(OPT.tut&&S)S.tutOld=0}catch(x){}if(!OPT.tut){tipOff();T.pend={}}}}catch(e){}return r};
  window.optHTML=optHTML;window.wireOpt=wireOpt}catch(e){console.error(e)}

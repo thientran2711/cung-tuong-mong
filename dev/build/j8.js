@@ -288,7 +288,7 @@ function taintHit(p,e,used){const t=e.t;if(!t)return"";let r="";
  {const E=BAL.eff.j8.taintHit;if(t==="chi")ap(p,Object.assign({},E.chi));if(t==="meo")ap(p,{suc:p.asthma?E.meoAsthma:E.meo});if(t==="bua")ap(p,{suc:E.bua})}return r}
 function itemMonth(p){let r="";for(const e of p.inv.slice())if(e.t)r+=taintHit(p,e,false);
  if(p.inv.some(e=>e.k==="ngocboi"&&!e.t&&!e.h)&&p.sung<BAL.ngocboiSung)p.sung=BAL.ngocboiSung;
- if(p===S&&p.inv.some(e=>e.t&&e.by!=="me")&&roll(oSee(S,true)/BAL.odb.j8.taintFeelDiv))r+=`Ngươi thấy trong người khó chịu từ khi nhận quà; nên kiểm tra đồ. `;
+ if(p===S&&p.inv.some(e=>e.t&&e.by!=="me")&&roll(oSee(S,true)/BAL.odb.j8.taintFeelDiv))r+=`Ngươi thấy trong người khó chịu từ khi nhận quà; nên soát đồ. `;
  return p===S?r:(r?"":"")}
 /* inspection: same detection for everyone */
 function inspect(p){const found=[];const sees=oSee(p,true);
@@ -535,7 +535,7 @@ PEND.giftin=p=>{const f=byKey(p.f),e=p.e;if(!f)return null;const it=itm(e.k),hi=
  return{who:pv(f),t:`<p>${f.name} sai người mang <b>${it.n}</b> sang tặng ngươi.</p><p class="past">${it.d}</p>`,o:[
  {n:"Nhận",fx:{},x:"cất vào rương",go:()=>S.inv.push(Object.assign({},e))},
  {n:"Trả lại quà",fx:{},x:hi?"nàng phẩm cao hơn, sẽ phật ý":"nàng hơi phật ý",go:()=>{/* the gift goes back to her (item ledger jil); co-op friend: the live path has no way back (parked, item-ledger.md) → Nội vụ phủ keeps it, never lost */if(f.coop&&typeof ilGone==="function")ilGone(S,Object.assign({},e),"kho",{own:""});else{f.inv=f.inv||[];f.inv.push(Object.assign({},e))}relAdd(S,f,hi?BAL.eff.j8.go_2[0]:BAL.eff.j8.go_2[1]);if(f.queen)apply({hh:-8})}},
- {n:"Đem đến Thái y viện xét nghiệm",fx:{bac:-BAL.rcv.chk},x:`${word(oddsCl(oSee(S,true)+BAL.rcv.chkSee))} · thành: nếu đồ bị tẩm sẽ biết, ai gửi · hỏng: không thấy gì`,go:()=>{if(e.t&&roll(oddsCl(oSee(S,true)+BAL.rcv.chkSee))){evA(S,f,BAL.eff.j8.evGo);if(typeof ilGone==="function")ilGone(S,Object.assign({},e),"evid",{own:key(f)});log(`Thái y phát hiện ${it.n} của ${f.name} ${TAINT[e.t].n}. Chứng cứ ${f.name} ${balSg(BAL.eff.j8.evGo)}.`)}else{S.inv.push(Object.assign({},e));relAdd(S,f,BAL.eff.j8.go_3);log(`Thái y không thấy gì lạ ở ${it.n}.`)}}}]}};
+ {n:"Đem đến Thái y viện nghiệm độc",fx:{bac:-BAL.rcv.chk},x:`${word(oddsCl(oSee(S,true)+BAL.rcv.chkSee))} · thành: nếu đồ bị tẩm sẽ biết, ai gửi · hỏng: không thấy gì`,go:()=>{if(e.t&&roll(oddsCl(oSee(S,true)+BAL.rcv.chkSee))){evA(S,f,BAL.eff.j8.evGo);if(typeof ilGone==="function")ilGone(S,Object.assign({},e),"evid",{own:key(f)});log(`Thái y phát hiện ${it.n} của ${f.name} ${TAINT[e.t].n}. Chứng cứ ${f.name} ${balSg(BAL.eff.j8.evGo)}.`)}else{S.inv.push(Object.assign({},e));relAdd(S,f,BAL.eff.j8.go_3);log(`Thái y không thấy gì lạ ở ${it.n}.`)}}}]}};
 /* Nghiệm độc: ONE function for her button and an NPC (AG-ALL-2e2 cx3:test) */
 function itemTest(p,ix){const T=BAL.ag.par3.test;const e=(p.inv||[])[ix];if(!e||(p.bac||0)<BAL.bacFee.itTest)return"";const it=itm(e.k);if(p===S)apply({bac:-BAL.bacFee.itTest});else ap(p,{bac:-BAL.bacFee.itTest});e.tested=1;
  if(e.t&&e.by!==key(p)&&roll(oddsCl(oSee(p,true)+T.o))){p.inv.splice(ix,1);const by=byKey(e.by);if(by&&by!==p)/*evok: tainted by (scheme)*/evA(p,by,BAL.eff.j8.evItemAct);
@@ -551,7 +551,7 @@ function itemAct(a,ix){const e=S.inv[ix];if(!e||S.dead||Q.length)return;const it
  render()}
 function invAct(a){if(S.dead||Q.length)return;
  if(a==="shop"){pushDil(mkP("shop"),"Nhờ thái giám mua đồ");render();return}
- if(a==="inspect"){if(!can(2))return;spend(2);const f=inspect(S);log(f.length?`Kiểm tra rương đồ, tìm thấy: ${f.join("; ")}.`:"Kiểm tra rương đồ: không thấy gì lạ.");if(f.length)Q.push({t:"Kiểm tra đồ",h:`<p>${f.join("<br>")}</p>`});render()}}
+ if(a==="inspect"){if(!can(2))return;spend(2);const f=inspect(S);log(f.length?`Soát rương, tìm thấy: ${f.join("; ")}.`:"Soát rương: không thấy gì lạ.");if(f.length)Q.push({t:"Kiểm tra đồ",h:`<p>${f.join("<br>")}</p>`});render()}}
 function invHTML(){const wb=wearBonus(S),vp=vpItems(S);const vis=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h);
  const groups=[];for(const [e,i] of vis){const g=groups.find(x=>x.k===e.k&&!!x.t===!!(e.by==="me"&&e.t)&&!x.w&&!e.w);if(g)g.n++;else groups.push({k:e.k,t:e.by==="me"?e.t:null,w:e.w,i,n:1,ext:e.t&&e.by!=="me",from:e.from})}
  const dress=S.dress&&S.dress.until>S.turn?`${itm(S.dress.k).n} (đến tháng ${S.dress.until-S.turn} nữa)`:"không";

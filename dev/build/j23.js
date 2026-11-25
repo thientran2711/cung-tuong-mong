@@ -1,7 +1,7 @@
 /* ================= LEARNING: three roads, a milestone at every grade, gains shown on the button ================= */
 const ARTDO={cam:"Tài: thơ, đàn, thi tài; dễ được Hoàng thượng để ý",ky:"Tài và Tâm cơ: đánh cờ, đoán ý người",thi:"Tài: làm thơ, bàn chuyện với Hoàng thượng",hoa:"Tài: vẽ tranh dâng tặng, Thái hậu quý",vu:"Sắc: múa ở yến tiệc, được chú ý",y:"Sắc: điều hương, nhận ra độc, chữa bệnh"};
 const ARTMS={
- cam:["Tài {n:art.stUp}; mỗi tháng tự đàn: Sức {n:eff.j23.camSucMonth}","Đánh đàn ở Ngự hoa viên dễ thành hơn (mỗi bậc +4)","Mở «Phượng cầu hoàng»: cơ hội được thị tẩm","Dạy con đàn: mỗi tháng các con Tài {n:eff.j23.talArtMonth}","Danh {n:art.danh.5}; đàn ở yến tiệc dễ được ban thưởng"],
+ cam:["Tài {n:art.stUp}; mỗi tháng tự đàn: Sức {n:eff.j23.camSucMonth}","Đánh đàn ở Ngự hoa viên dễ thành hơn (mỗi bậc +4)","Mở «Phượng cầu hoàng»: thêm dịp được thị tẩm","Dạy con đàn: mỗi tháng các con Tài {n:eff.j23.talArtMonth}","Danh {n:art.danh.5}; đàn ở yến tiệc dễ được ban thưởng"],
  ky:["Tài {n:art.stUp}, Tâm cơ {n:artB.ky.1.tamco}","Tâm cơ {n:artB.ky.2.tamco} (dò la, mưu kế dễ hơn)","Mở «Đánh cờ với Hoàng thượng»","Tâm cơ {n:artB.ky.4.tamco}","Danh {n:art.danh.5}, Tâm cơ {n:artB.ky.5.tamco}"],
  thi:["Tài {n:art.stUp}","Tuyến truyện thơ văn mở thêm lựa chọn","Mỗi tháng thơ đến tay Hoàng thượng: {sgRaw:tho.sung}","Bàn chuyện triều chính khéo hơn (mỗi bậc +3)","Danh {n:art.danh.5}; mỗi tháng {sgRaw:tho.sung5}"],
  hoa:["Tài {n:art.stUp}","Thái hậu: thiện cảm {n:artB.hoa.2.th}","Mở «Vẽ chân dung tặng Thái hậu»","Thái hậu: thiện cảm {n:artB.hoa.4.th}","Danh {n:art.danh.5}, Thái hậu: thiện cảm {n:artB.hoa.5.th}"],

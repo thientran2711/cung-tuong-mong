@@ -37,7 +37,7 @@ function nowRows(e){const R=[];let o=null;try{o=typeof CW.frInfo==="function"?CW
  if(e&&met(e)){const w=placeWord(e);if(w)R.push(["Đang ở",es(w),"n"])}else if(e)R.push(["Đang ở",UNK,"t"]);return R}
 /* the one line of what to do meanwhile (the old chip panel's note, same words) */
 function nowNote(){let o=null;try{o=typeof CW.frInfo==="function"?CW.frInfo():null}catch(x){}if(!o)return"";
- return o.meRd&&o.st!=="ready"?"Trong lúc đợi: xem các tab, Tư trang, Sổ ghi. Hảo hữu xong là sang buổi ngay.":
+ return o.meRd&&o.st!=="ready"?"Trong lúc đợi: xem các mục, Tư trang, Sổ ghi. Hảo hữu xong là sang buổi ngay.":
   o.st==="ready"?"Hảo hữu chờ ngươi. Xong việc thì chạm «Sẵn sàng» (hay hết khắc) là sang buổi cho cả hai.":
   "Cứ làm việc của ngươi. Hết khắc hay chạm «Sẵn sàng» là xong buổi; cả hai xong thì sang buổi ngay, hết giờ thì tự sang."}
 function nowSec(e){const n=nowNote();return {h:"Lúc này",rows:nowRows(e),html:n?`<p class="kpnote">${n}</p>`:""}}
@@ -64,7 +64,7 @@ function spec(){const e=ent(),P=blob();const rows=typeof kitRows==="function"?ki
   return Object.assign({kind:"info",title,sub:"Hảo hữu cùng chơi",sections:sec},who(e,known,title))}
  /* consort road: rank + name (kit rank unit), her palace, stats, health, household, what she does now */
  sec.push({h:"Thân phận",rows:[["Danh vị",nm?nmK(e):UNK,nm?"n":"t"],["Cung",known?es(palWord(e))||UNK:UNK,known?"n":"t"]]});
- sec.push({h:"Chỉ số",html:typeof kitPersonStats==="function"?kitPersonStats(e):""});
+ sec.push({h:"Tư chất",html:typeof kitPersonStats==="function"?kitPersonStats(e):""});
  sec.push({h:"Sức khỏe",rows:healthRows(e)});
  const mai=known&&e.maid&&e.maid.name?`<span data-k61skip="1">${es(e.maid.name)}</span>`/* rv coop-guest-names r1: her maid's copy now holds its own j61 key (g… / h…, one key = one person), unmet on this seat → the DOM mask read «cung nữ ???» over the row the sheet shows once SHE is met (before, the copy shared this seat's own maid key x1 and passed by accident) */:UNK;
  sec.push({h:"Trong cung của nàng",rows:[["Con cái",known?kidsWord(e):UNK,known?"n":"t"],/* OD:L165: unmet = «chưa rõ» (rv hao-huu item 5) */["Cung nữ thân cận",mai,mai===UNK?"t":"n"]]});

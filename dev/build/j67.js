@@ -973,7 +973,7 @@ ARC67.td_tha=arcFx("td_tha",{o:"td",t:"Thù hay tha",w:"foe",sj:"mối thù vớ
  s2:{h:"Nỗi đau của {foe}",w:"foe",t:"Ngươi tình cờ nghe {foe} khóc ở Phụng Tiên điện: cha nàng ép nàng vào cung để làm con tin cho quyền thế của ông.",o:[
   {n:"Bước ra an ủi",f:"mercy",wx:"{foe} mở lòng",lx:"{foe} giận vì bị nghe lén",rt:"{foe} ngẩng lên, ngỡ ngàng rồi òa khóc.",rf:"{foe} quắc mắt bỏ đi."},
   {n:"Lặng lẽ ghi nhớ",lx:"mất dịp làm lành",f:"hate",wx:"biết chỗ yếu của nàng",rt:"Ngươi rời đi không tiếng động."}]},
- c1:{h:"Cơ hội hại {foe}",w:"maid",t:"{maid} thì thầm: có thể bỏ xạ hương vào hương liệu của {foe}, không ai biết.",o:[
+ c1:{h:"Dịp hại {foe}",w:"maid",t:"{maid} thì thầm: có thể bỏ xạ hương vào hương liệu của {foe}, không ai biết.",o:[
   {n:"Ngăn {maid} lại",f:"mercy",wx:"giữ tay sạch",lx:"bỏ lỡ dịp báo thù",rt:"Ngươi giật gói xạ hương ném vào lò."},
   {n:"Chỉ phao tin xấu về {foe}",f:"hate",wx:"{foe} mất mặt",lx:"bị lần ra",go:(A,ok)=>{const v=foe67();if(v&&ok)v.sung=Math.max(0,(v.sung||0)-5)},rt:"{foe} bị Hoàng thượng lạnh nhạt.",rf:"Lời đồn lần ra ngươi."}]},
  c2:{h:"{foed} gửi thư cho con gái",w:"maid",t:"Một bức thư của {foed} gửi {foe} lọt vào tay ngươi. Trong thư có những điều có thể làm chứng.",o:[

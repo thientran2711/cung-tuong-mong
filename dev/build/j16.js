@@ -8,7 +8,7 @@ async function saveCode(json){const u=new TextEncoder().encode(json);
 async function readCode(code){code=String(code||"").replace(/\s+/g,"");const m=/^CTM([12]):([A-Za-z0-9+/=]+)$/.exec(code);if(!m)throw xe("Mã không đúng dạng (phải bắt đầu bằng CTM).");
  let u=b64d(m[2]);if(m[1]==="2"){if(typeof DecompressionStream!=="function")throw xe("Trình duyệt này không giải nén được mã.");u=await zpipe(u,DecompressionStream)}
  const d=JSON.parse(new TextDecoder().decode(u));if(!d||typeof d!=="object"||!d.S||!d.R)throw xe("Mã không chứa ván chơi.");
- if(!(d.v>=2&&d.v<=6))throw xe(`Phiên bản ván (${d.v}) không hợp với bản game này.`);return d}
+ if(!(d.v>=2&&d.v<=6))throw xe(`Bản chép này (${d.v}) không hợp với bản hiện nay.`);return d}
 function xe(m){const e=new Error(m);e.mine=1;return e}
 function filledSlots(){return [1,2,3].filter(n=>loadSlot(n))}
 function xioHTML(){const F=filledSlots();let h=`<div class="xiorow"><button class="btn" id="x-exp" aria-pressed="${XIO.m==="exp"}" ${F.length?"":"disabled"}>Xuất ván<small>${F.length?"chép ván thành mã chữ":"chưa có ván nào"}</small></button><button class="btn" id="x-imp" aria-pressed="${XIO.m==="imp"}">Nhập ván<small>dán mã để nạp ván</small></button></div>`;
