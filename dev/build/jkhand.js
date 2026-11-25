@@ -7,7 +7,7 @@
    - All cards visible, no scroll: one row when they fit at the minimum card width, else 2 (3 on a narrow phone) rows; ONE card size per hand (law 10).
    - Smooth: deal-in, lift and fly are transform/opacity on the CARDS only (never on figures, never a cross-fade of two screens); «Cảnh động» off / reduced motion = no animation (kfStill).
    Numbers: geometry knobs here (KIT_HAND, layout px like KIT_OPT); every game number on the cards comes from the kit card (BAL), nothing typed (law 4). */
-const KIT_HAND={min:2,max:10,gap:[8,12],minW:[88,100],maxW:[128,124],nameFs:[12.5,14],liftK:.13,dealMs:420,dealStep:70,flyMs:260,plateW:560};
+const KIT_HAND={min:2,max:10,gap:[8,12],minW:[88,100],maxW:[128,124],cmpW:[[74,92],[78,92]]/* compact hand [min,max] per view: a long story keeps its text readable */,nameFs:[12.5,14],liftK:.13,dealMs:420,dealStep:70,flyMs:260,plateW:560};
 function kitHandOn(g){try{if(!g||!g.matches||!g.matches("#modal .opts")||g.closest(".pc,.kpdlg"))return false;const bs=kitHandCards(g);return bs.length>=KIT_HAND.min&&bs.length<=KIT_HAND.max&&bs.length===[...g.children].filter(b=>b.tagName==="BUTTON"&&b.getClientRects().length).length}catch(e){return false}}
 function kitHandWants(g){try{if(!g||!g.closest||g.closest(".pc,.kpdlg"))return false;const k=[...g.children].filter(b=>b.tagName==="BUTTON"),c=k.filter(b=>b.matches("button.ka.kopt")&&!b.classList.contains("kcard")&&!b.classList.contains("kbare"));return c.length>=KIT_HAND.min&&c.length<=KIT_HAND.max&&c.length===k.length}catch(e){return false}}
 function kitHandCards(g){return[...g.children].filter(b=>b.matches&&b.matches("button.ka.kopt")&&!b.classList.contains("kcard")&&!b.classList.contains("kbare")&&(b.getClientRects().length||g.classList.contains("khand")))}
@@ -15,14 +15,14 @@ function kitHandWide(){try{return kitView().pages===2?1:0}catch(e){return 0}}/* 
 function kitHandH(){try{return kitView().h||innerHeight}catch(e){return innerHeight}}
 /* layout: slots per card (x, y, rotation) inside the list box; the box gets the hand height; idempotent per (width, count) */
 function kitHandLay(g,quiet){try{const bs=kitHandCards(g),n=bs.length;if(!n)return;const K=KIT_HAND,ip=kitHandWide(),W=g.clientWidth;if(!W)return;
- const sig=W+"|"+n+"|"+kitHandH();if(g.__khSig===sig&&g.classList.contains("khand"))return;g.__khSig=sig;
- const gap=K.gap[ip],side=Math.round(10+K.maxW[ip]*1.5*.045)/* frame padding + what a turned outer card swings out */,fit=Math.max(1,Math.floor((W-2*side+gap)/(K.minW[ip]+gap)));let rows=Math.ceil(n/fit);const per=Math.ceil(n/rows);
- let cw=Math.min(K.maxW[ip],(W-2*side-(per-1)*gap)/per);const fs=cw<100?K.nameFs[0]-.5:K.nameFs[ip];
+ const cm=g.dataset.khc==="1";const sig=W+"|"+n+"|"+kitHandH()+"|"+cm;if(g.__khSig===sig&&g.classList.contains("khand"))return;g.__khSig=sig;
+ const mnW=cm?K.cmpW[ip][0]:K.minW[ip],mxW=cm?K.cmpW[ip][1]:K.maxW[ip],gap=K.gap[ip],side=Math.round(10+mxW*1.5*.045)/* frame padding + what a turned outer card swings out */,fit=Math.max(1,Math.floor((W-2*side+gap)/(mnW+gap)));let rows=Math.ceil(n/fit);const per=Math.ceil(n/rows);
+ let cw=Math.min(mxW,(W-2*side-(per-1)*gap)/per);const fs=cw<100?K.nameFs[0]-.5:K.nameFs[ip];
  const face=h=>Math.round(h-10+fs*1.15*2+22+14);/* picture square (card width − padding) + 2 name lines + the odds meter row + gaps */
  let ch=face(cw);const lift=Math.round(ch*K.liftK);
  /* the hand may take at most ~46 % of the screen height (the story text and the speaker keep the rest; law 10) */
  const cap=Math.round(kitHandH()*(n>(ip?5:6)?.46:(ip?.36:.40)));const need=()=>lift+6+rows*ch+(rows-1)*gap+8;
- while(need()>cap&&cw>K.minW[ip]*.78){cw-=4;ch=face(cw)}
+ while(need()>cap&&cw>mnW*.78){cw-=4;ch=face(cw)}
  g.classList.add("khand");g.dataset.khand=n;g.dataset.khrows=rows;g.style.setProperty("--khw",Math.floor(cw)+"px");g.style.setProperty("--khh",ch+"px");g.style.setProperty("--khfs",fs+"px");g.style.setProperty("--khlift",lift+"px");
  let maxY=0;bs.forEach((b,i)=>{const r=Math.floor(i/per),k=i%per,inRow=r<rows-1?per:n-per*(rows-1),rowW=inRow*cw+(inRow-1)*gap,x=(W-rowW)/2+k*(cw+gap),mid=(inRow-1)/2,d=k-mid;
   const rot=rows===1?d*Math.min(2.4,8/Math.max(1,mid)):d*1.1,arc=d*d*(rows===1?Math.min(2.2,10/Math.max(1,mid*mid)):.6),y=lift+6+r*(ch+gap)+arc;maxY=Math.max(maxY,y+ch);
@@ -91,7 +91,8 @@ html body #modal#modal#modal#modal .opts.khand>button.kopt.klift{--kyo:calc(var(
 html body #modal#modal#modal#modal .opts.khand>button.kopt:disabled{filter:grayscale(.55) brightness(.96)}
 html body #modal#modal#modal#modal .opts.khand>button.kopt:disabled.klift{filter:none}
 #modal .dlg.khdlg{position:relative}
-html body #modal#modal#modal#modal .k3right>.opts.khand{position:sticky!important;bottom:0;z-index:2;background:var(--k-card,#fffaf0);margin-top:auto!important}
+html body #modal#modal#modal#modal .dlg:not(.khmeas) .k3right>.opts.khand,html body #modal#modal#modal#modal .dlg:not(.khmeas) #mb>.opts.khand{position:sticky!important;bottom:0;z-index:2;background:var(--k-card,#fffaf0)}/* the hand never scrolls out of view: a long story scrolls under it */
+html body #modal#modal#modal#modal .k3right>.opts.khand{margin-top:auto!important}
 #modal .dlg>.khplate{position:absolute;z-index:6;display:flex;flex-direction:column;gap:4px;overflow:auto;pointer-events:none;filter:drop-shadow(0 6px 14px rgba(60,30,10,.28))}
 #modal .dlg>.khplate[hidden]{display:none}
 #modal .dlg>.khplate>button.kopinfo{width:100%;margin:0;text-align:left;opacity:1!important;filter:none!important;background:var(--k-card,#fffaf0)!important;color:var(--ink,#2a1a12)!important;cursor:default}
