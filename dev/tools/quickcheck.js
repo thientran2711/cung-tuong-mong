@@ -51,6 +51,7 @@ const BUOI=async()=>{const sl=t=>new Promise(r=>setTimeout(r,t));const k0=JSON.s
  /* sangbuoi-held r2: «Sang buổi» runs the full wrapped turn, so a tap while the old buổi's big moment is pending (a mini-game screen #ov still open,
     a motion scene queued) is HELD until it is done (jdayq flight rule) — finish what is on screen like a player, the held turn then runs */
  for(let i=0;i<60&&JSON.stringify([S.turn,S.buoi,S.month,S.year])===k0&&!S.dead;i++){const ov=document.getElementById('ov');if(ov&&!ov.hidden&&!S.mg)ov.hidden=true;
+  /* the roulette / podium screens are removed here as NEWLIFE does (a later one may open with the first buổi) */document.querySelectorAll('[id^="kroul"],.kroul-ov,#kpodov').forEach(e=>e.remove());try{kmPump()}catch(e){}
   const kb=[...document.querySelectorAll('.kmov:not(.km-out) button,#kmrew button,#kpodov button')].find(b=>b.getClientRects().length&&!b.disabled)||document.querySelector('.kmov:not(.km-out)');if(kb)kb.click();
   for(let j=0;j<12&&Q.length&&!S.dead;j++){const m=Q[0];try{if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}catch(e){Q.shift()}await sl(40)}await sl(200)}
  for(let j=0;j<40&&Q.length&&!S.dead;j++){const m=Q[0];try{if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}catch(e){Q.shift()}await sl(40)}
