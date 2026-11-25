@@ -21,6 +21,7 @@ const G=new RegExp(/q72Offer|q72o|e68c|j7c|kyngo|j70|compCard|jworldc|showModal|
 const EXEMPT={
  'dlgs-play.js':'THE scene test: plays every side-line scene tap by tap on both devices on purpose',
  'dlgs-guard-scan.js':'this scan (reads sources, opens no page)',
+ 'dlgs-encounter.js':'THE scene-vs-room-encounter test: plays one side-line scene tap by tap on purpose, then checks the encounter takes the card',
  'cb-ton.fn.js':'in-page fn file run by cb-shot.js (cb-shot.js is guarded: off)',
  'cb-view.fn.js':'in-page fn file run by cb-shot.js (cb-shot.js is guarded: off)',
  'coop-qtrace.js':'debug init-script module (Q push trace) of the co-op tests; opens no page, shows no card',
