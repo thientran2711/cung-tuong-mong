@@ -308,7 +308,7 @@ function kfLocked(el,e){const now=Date.now();if(now-kfLastNo<350)return;kfLastNo
  const onDown=e=>{if(e.button>0)return;const t=e.target;if(!t||!t.closest)return;
   /* locked: the event target can be the disabled button itself (Chrome, Safari pointer events) */
   const lk=t.closest('button:disabled,.kdis,[aria-disabled="true"]');if(lk&&lk.closest(".khand"))return;/* KIT §101: a locked hand card lifts and shows its why on the plate (jkhand) */if(lk&&lk.closest(KF_TAP)){kfLocked(lk,e);return}
-  const el=kfTapOf(t);if(!el||kfDis(el))return;if(el.matches(KF_FIG))return;down=el;el.classList.add("kfdown");if(!kfStill())kfRipple(el,e)};
+  const el=kfTapOf(t);if(!el||kfDis(el))return;if(el.closest(".khand"))return;/* KIT §101: a hand card answers with its own lift (no ripple / press scale on top of it) */if(el.matches(KF_FIG))return;down=el;el.classList.add("kfdown");if(!kfStill())kfRipple(el,e)};
  const onUp=()=>{const el=down;down=null;if(!el)return;el.classList.remove("kfdown");if(kfStill()||!el.isConnected||!el.animate||el.classList.contains("tok"))return;
   try{el.animate([{scale:".96"},{scale:"1.025",offset:.55},{scale:"1"}],{duration:240,easing:"ease-out"})}catch(x){}};
  document.addEventListener("pointerdown",onDown,{capture:true,passive:true});document.addEventListener("pointerup",onUp,{capture:true,passive:true});document.addEventListener("pointercancel",onUp,{capture:true,passive:true});

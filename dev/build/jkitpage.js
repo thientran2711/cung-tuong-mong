@@ -59,6 +59,11 @@ KIT_SAMPLES.push(
 /* §53 (KIT 28.6 event options + §7 result card parts) (review/opt-render, moved here by reviewer r7 — ONE kit sample page). The event option is the
    game's own modal option markup (button.opt + dilLine) run through kaNorm → kitHideOut (data-khide), so the hint comes from the real kitHint and
    the odds meter is the card's own (a certain option: «Nắm chắc»; owner 19/11 ~01:48Z, kitRisk retired). */
+/* KIT §101 sample: a live event frame whose options become a hand (jkhand) */
+function kitPgHand(n){try{const W=o=>word(o);const N=["Gói bánh ú dâng Thái hậu","Xin ân cho gia đình","Theo cha mưu đại sự","Đứng ngoài, giữ mình","Hỏi Hoàng hậu","Dò la Kính sự phòng","Tặng lễ","Cáo bệnh","Chờ xem thêm","Về cung nghỉ"];
+ const o=N.slice(0,n).map((x,i)=>({n:x,fx:{},x:i%3===2?`${W(20)} · thành: Danh +10 · hỏng: Sủng -4`:i%3===1?`${W(55)} · thành: Danh +3, Bạc +40 · hỏng: Sủng -4`:"tốn: 1 khắc · thành: Thái hậu thiện cảm +4"}));o[n-1].lk=()=>"Chưa đủ Danh";
+ Q.push({t:"Mẫu kit · Bàn bài",h:"<p>Tân quân lên ngôi, triều đình chia ba ngả, mỗi phe đều muốn kéo ngươi về phía mình.</p><p>Ngươi theo ai?</p>",opts:o,who:typeof pEmp==="function"?pEmp():null});showModal()}catch(e){console.error("kitPgHand",e)}}
+window.kitPgHand=kitPgHand;
 function kitPgEvOpts(){const W=o=>word(o);const O=[{n:"Gói bánh ú dâng Thái hậu",fx:{suc:-5,th:4},x:"Thái hậu thiện cảm +4"},
   {n:"Xin ân cho gia đình",fx:{},x:`${W(55)} · thành: Danh +3, Bạc +40 · hỏng: Sủng -4`},
   {n:"Theo cha mưu đại sự",fx:{},x:`${W(20)} · thành: Hoàng hậu bị phế, Danh +10 · hỏng: cả họ bị tru di`}];
@@ -72,6 +77,7 @@ KIT_SAMPLES.push(
  {id:"§7",title:"Result card lines: value · short why (one source = Sổ ghi)",html:kitPgWhy},
  {id:"§53",title:"kitChip tones · option odds meter (kitOdds, 7 steps)",html:()=>`<p>${kitChip("Sủng",3)}${kitChip("Danh",-2)}${kitChip("Thường","n")}${kitChip("cẩn thận","w")}${kitChip("đủ Sức","ok")}${kitChip("thiếu bạc","no")}</p><p>${KIT_ODDS.map(w=>kitOdds(w)).join(" ")}</p>`},
  {id:"§53",title:"Event option in cost mode: odds meter + Tốn + kitHintRow (no Tốn when free; certain = Nắm chắc)",html:kitPgEvOpts},
+ {id:"§101",title:"kitHand «Bàn bài»: 2–10 event options = a hand of cards (tap = lift + plate, tap again = choose; opens a live frame)",html:()=>`<button class="kbtn" data-kitsample="hand" onclick="kitPgHand(5)">Bàn bài · 5 lá</button> <button class="kbtn" data-kitsample="hand8" onclick="kitPgHand(8)">Bàn bài · 8 lá</button>`},
  {id:"§53",title:"kitResultSeal: THÀNH · BẠI · KẾT QUẢ",html:kitPgSeals},
  {id:"§53",title:"kitKemRow (one line per person)",html:kitPgKem});
 /* §27.1 the Tuần lục cover title picture (review/book-title): the real cover label slot of kitBook, at a fixed small size */

@@ -7,7 +7,7 @@
    - All cards visible, no scroll: one row when they fit at the minimum card width, else 2 (3 on a narrow phone) rows; ONE card size per hand (law 10).
    - Smooth: deal-in, lift and fly are transform/opacity on the CARDS only (never on figures, never a cross-fade of two screens); «Cảnh động» off / reduced motion = no animation (kfStill).
    Numbers: geometry knobs here (KIT_HAND, layout px like KIT_OPT); every game number on the cards comes from the kit card (BAL), nothing typed (law 4). */
-const KIT_HAND={min:2,max:10,gap:[8,12],minW:[88,100],maxW:[128,124],cmpW:[[74,92],[78,92]]/* compact hand [min,max] per view: a long story keeps its text readable */,nameFs:[12.5,14],liftK:.13,dealMs:420,dealStep:70,flyMs:260,plateW:560};
+const KIT_HAND={min:2,max:10,gap:[8,12],minW:[88,100],maxW:[128,124],cmpW:[[74,92],[78,92]]/* compact hand [min,max] per view: a long story keeps its text readable */,nameFs:[12.5,14],liftK:.13,dealMs:420,readyMs:700,dealStep:70,flyMs:260,plateW:560};
 function kitHandOn(g){try{if(!g||!g.matches||!g.matches("#modal .opts")||g.closest(".pc,.kpdlg"))return false;if(!kitHandWants(g))return false;const bs=kitHandCards(g);return bs.length>=KIT_HAND.min&&bs.length<=KIT_HAND.max&&bs.length===[...g.children].filter(b=>b.tagName==="BUTTON"&&b.getClientRects().length).length}catch(e){return false}}
 function kitHandWants(g){try{if(!g||!g.closest||g.closest(".pc,.kpdlg"))return false;const k=[...g.children].filter(b=>b.tagName==="BUTTON"),c=k.filter(b=>b.matches("button.ka.kopt")&&!b.classList.contains("kcard")&&!b.classList.contains("kbare"));return c.length>=KIT_HAND.min&&c.length<=KIT_HAND.max&&c.length===k.length&&!c.some(b=>/^face/.test(b.dataset.kopic||"")||b.querySelector(".kopface"))/* a PERSON picker (portrait cards) is not a hand: people are chosen on their own kit (portrait picker / thẻ gỗ treo) */}catch(e){return false}}
 function kitHandCards(g){return[...g.children].filter(b=>b.matches&&b.matches("button.ka.kopt")&&!b.classList.contains("kcard")&&!b.classList.contains("kbare")&&(b.getClientRects().length||g.classList.contains("khand")))}
@@ -49,22 +49,27 @@ let top0=(hd&&hd.getClientRects().length?hd.getBoundingClientRect().bottom:D.top
  if(!kitHandStill())z.animate([{transform:"translateY(10px)"},{transform:"none"}],{duration:160,easing:"ease-out"})}catch(e){console.error("kitHandPlate",e)}}
 function kitHandStill(){try{return typeof kfStill==="function"?kfStill():matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return false}}
 function kitHandDrop(g){if(!g)return;g.querySelectorAll(":scope>button.klift").forEach(x=>{x.classList.remove("klift");x.removeAttribute("aria-pressed")});const dl=g.closest(".dlg"),z=dl&&dl.querySelector(":scope>.khplate");if(z)z.hidden=true}
-function kitHandLift(b){const g=b.parentElement;if(!g||g.__khBusy)return;if(b.classList.contains("klift"))return;kitHandDrop(g);b.classList.add("klift");b.setAttribute("aria-pressed","true");kitHandPlate(b);try{if(typeof sfx==="function")sfx("tick")}catch(e){}}
+function kitHandLift(b){const g=b.parentElement;if(!g||g.__khBusy)return;if(b.classList.contains("klift"))return;kitHandDrop(g);b.classList.add("klift");b.setAttribute("aria-pressed","true");kitHandPlate(b)}
 /* choose: the card flies up a little and fades, the rest sink; then the frame's own choose path (a synthetic click = detail 0, passes the two-tap gate) */
-function kitHandChoose(b){const g=b.parentElement;if(!g||g.__khBusy)return;g.__khBusy=1;const go=()=>{g.__khBusy=0;const z=g.closest(".dlg")&&g.closest(".dlg").querySelector(":scope>.khplate");if(z)z.hidden=true;if(b.isConnected)b.click()};
+function kitHandChoose(b){const g=b.parentElement;if(!g||g.__khBusy)return;g.__khBusy=1;window.__khFlyT=performance.now();const go=()=>{g.__khBusy=0;const z=g.closest(".dlg")&&g.closest(".dlg").querySelector(":scope>.khplate");if(z)z.hidden=true;if(b.isConnected)b.click()};
  if(kitHandStill()||!b.animate){go();return}
  const rot=b.style.getPropertyValue("--kr")||"0deg",lift=parseFloat(getComputedStyle(g).getPropertyValue("--khlift"))||0,ms=KIT_HAND.flyMs;
  b.animate([{transform:`translateY(${-lift}px) rotate(0deg)`,opacity:1},{transform:`translateY(${-lift-46}px) scale(1.12)`,opacity:0}],{duration:ms,easing:"cubic-bezier(.3,.6,.4,1)",fill:"forwards"});
  kitHandCards(g).filter(x=>x!==b).forEach(x=>x.animate([{transform:`translateY(0px) rotate(${x.style.getPropertyValue("--kr")||"0deg"})`,opacity:1},{transform:`translateY(26px) rotate(${x.style.getPropertyValue("--kr")||"0deg"})`,opacity:0}],{duration:ms-40,easing:"ease-in",fill:"forwards"}));
  setTimeout(go,ms)}
 /* deal-in: once per frame card (Q[0]), cards come from below-right to their slots, one by one */
-const KH_DEALT=new WeakSet();
-function kitHandDeal(g,m){try{if(!m||KH_DEALT.has(m))return;KH_DEALT.add(m);if(kitHandStill())return;const bs=kitHandCards(g),G=g.getBoundingClientRect(),K=KIT_HAND;
+const KH_DEALT=new WeakSet(),KH_PEND=new WeakSet();
+function kitHandDeal(g,m){try{if(!m||KH_DEALT.has(m))return;KH_DEALT.add(m);if(kitHandStill())return;
+ /* paint-ready first (MD4 lesson): the frame's own pictures decode and its late re-fits run BEFORE the cards fly (they were long frames in the middle of the deal); cards wait hidden, at most KIT_HAND.readyMs */
+ g.classList.add("khpre");const dl=g.closest(".dlg");const ims=dl?[...dl.querySelectorAll("img")].filter(i=>i.getClientRects().length):[];
+ const ready=Promise.race([Promise.all(ims.map(i=>(i.complete?(i.decode?i.decode():Promise.resolve()):new Promise(r=>{i.addEventListener("load",r,{once:true});i.addEventListener("error",r,{once:true})})).catch(()=>0))),new Promise(r=>setTimeout(r,KIT_HAND.readyMs))]);
+ KH_PEND.add(m);ready.then(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))).then(()=>{KH_PEND.delete(m);/* the frame may have been rebuilt meanwhile (a new list element): deal the hand that is on screen now */const g2=g.isConnected?g:document.querySelector("#modal:not([hidden]) .opts.khand");if(g2&&(typeof Q==="undefined"||Q[0]===m))kitHandDealGo(g2);else if(g2)g2.classList.remove("khpre")})}catch(e){g.classList.remove("khpre");console.error("kitHandDeal",e)}}
+function kitHandDealGo(g){try{const bs=kitHandCards(g),G=g.getBoundingClientRect(),K=KIT_HAND;g.classList.remove("khpre");window.__khDealT=performance.now();/* probe: dev/test/kit-hand-perf.js */
  bs.forEach((b,i)=>{const x=parseFloat(b.style.getPropertyValue("--kx"))||0,rot=b.style.getPropertyValue("--kr")||"0deg",dx=Math.round(G.width-x+20),dy=Math.round(Math.max(60,G.height*1.2));
   b.animate([{transform:`translate(${dx}px,${dy}px) rotate(14deg) scale(.7)`,opacity:0},{transform:`translate(${Math.round(dx*.12)}px,${Math.round(dy*.06)}px) rotate(${rot})`,opacity:1,offset:.75},{transform:`translateY(0px) rotate(${rot})`,opacity:1}],{duration:K.dealMs,delay:i*K.dealStep,easing:"cubic-bezier(.25,.8,.3,1)",fill:"backwards"})})}catch(e){console.error("kitHandDeal",e)}}
 /* apply to the frame on screen: every pass of showModal (outermost wrapper) + late re-layouts (ResizeObserver) */
 function kitHand(M){try{M=M||document.getElementById("modal");if(!M||M.hidden)return;M.querySelectorAll(".opts").forEach(g=>{if(!kitHandOn(g)){if(g.classList.contains("khand")){g.classList.remove("khand");delete g.dataset.khand}return}
-  kitHandLay(g);kitHandDeal(g,typeof Q!=="undefined"?Q[0]:null);
+  kitHandLay(g);const m0=typeof Q!=="undefined"?Q[0]:null;if(m0&&KH_PEND.has(m0))g.classList.add("khpre");/* a rebuilt list while the deal waits stays hidden too */kitHandDeal(g,m0);
   if(!g.__khRO&&typeof ResizeObserver==="function"){g.__khRO=new ResizeObserver(()=>{if(!g.isConnected||g.__khBusy)return;cancelAnimationFrame(g.__khRaf);g.__khRaf=requestAnimationFrame(()=>kitHandLay(g))});g.__khRO.observe(g)}})}catch(e){console.error("kitHand",e)}}
 window.kitHand=kitHand;window.kitHandWants=kitHandWants;window.kitHandLay=kitHandLay;window.KIT_HAND=KIT_HAND;
 (function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const M=document.getElementById("modal");if(M&&!M.hidden){kitHand(M);requestAnimationFrame(()=>kitHand(M))}}catch(e){console.error("kitHand",e)}return r}})();
@@ -79,7 +84,7 @@ document.addEventListener("pointerdown",e=>{try{if(e.button>0)return;const b=e.t
 (function(){const st=document.createElement("style");st.id="kit-hand";st.textContent=`
 html body #modal#modal#modal#modal .opts.khand{display:block!important;position:relative!important;height:var(--khH)!important;min-height:0!important;max-height:none!important;overflow:visible!important;padding:0!important;margin:4px 0 2px!important;flex:none!important;grid-template-columns:none!important;contain:layout}
 html body #modal#modal#modal#modal .opts.khand>button.kopt{position:absolute!important;left:var(--kx)!important;top:var(--ky)!important;width:var(--khw)!important;height:var(--khh)!important;min-height:0!important;max-width:none!important;min-width:0!important;margin:0!important;padding:5px 5px 6px!important;display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:flex-start!important;gap:4px!important;grid-column:auto!important;
- transform:translateY(var(--kyo,0px)) rotate(var(--kr,0deg));transform-origin:50% 115%;transition:transform .18s cubic-bezier(.2,.8,.3,1),box-shadow .18s ease-out;border-radius:10px!important;box-shadow:0 2px 6px rgba(60,30,10,.22);text-align:center!important;overflow:hidden!important;backface-visibility:hidden}
+ transform:translateY(var(--kyo,0px)) rotate(var(--kr,0deg));transform-origin:50% 115%;transition:transform .18s cubic-bezier(.2,.8,.3,1);border-radius:10px!important;box-shadow:0 2px 6px rgba(60,30,10,.22);text-align:center!important;overflow:hidden!important;backface-visibility:hidden}
 html body #modal#modal#modal#modal .opts.khand>button.kopt>.kaart{position:relative!important;flex:none!important;width:100%!important;height:auto!important;aspect-ratio:1/1;margin:0!important;left:auto!important;top:auto!important}
 html body #modal#modal#modal#modal .opts.khand>button.kopt>.kaart>figure{width:100%!important;height:100%!important;margin:0!important}
 html body #modal#modal#modal#modal .opts.khand>button.kopt>.kabody{flex:1 1 auto!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:space-between!important;min-width:0!important;width:100%!important;padding:0!important;margin:0!important;transform:none!important}
@@ -91,11 +96,12 @@ html body #modal#modal#modal#modal .opts.khand>button.kopt.klift{--kyo:calc(var(
 html body #modal#modal#modal#modal .opts.khand>button.kopt:disabled{filter:grayscale(.55) brightness(.96)}
 html body #modal#modal#modal#modal .opts.khand>button.kopt:disabled.klift{filter:none}
 #modal .dlg.khdlg{position:relative}
+html body #modal#modal#modal#modal .opts.khand.khpre>button.kopt{opacity:0}
 html body #modal#modal#modal#modal .dlg:not(.khmeas) .k3right>.opts.khand,html body #modal#modal#modal#modal .dlg:not(.khmeas) #mb>.opts.khand{position:sticky!important;bottom:0;z-index:2;background:var(--k-card,#fffaf0)}/* the hand never scrolls out of view: a long story scrolls under it */
 html body #modal#modal#modal#modal .k3right>.opts.khand{margin-top:auto!important}
-#modal .dlg>.khplate{position:absolute;z-index:6;display:flex;flex-direction:column;gap:4px;overflow:auto;pointer-events:none;filter:drop-shadow(0 6px 14px rgba(60,30,10,.28))}
+#modal .dlg>.khplate{position:absolute;z-index:6;display:flex;flex-direction:column;gap:4px;overflow:auto;pointer-events:none}
 #modal .dlg>.khplate[hidden]{display:none}
-#modal .dlg>.khplate>button.kopinfo{width:100%;margin:0;text-align:left;opacity:1!important;filter:none!important;background:var(--k-card,#fffaf0)!important;color:var(--ink,#2a1a12)!important;cursor:default}
+#modal .dlg>.khplate>button.kopinfo{width:100%;margin:0;box-shadow:0 6px 14px rgba(60,30,10,.28)!important;text-align:left;opacity:1!important;filter:none!important;background:var(--k-card,#fffaf0)!important;color:var(--ink,#2a1a12)!important;cursor:default}
 #modal .dlg>.khplate>button.kopinfo:not(.khlock) .kodds{filter:none!important;opacity:1!important}/* the plate is a disabled COPY: its meter keeps the live colours unless the card is locked */
 #modal .dlg>.khplate>.khtip{align-self:center;font-size:.8rem;padding:2px 12px;border-radius:999px;background:var(--k-card,#fffaf0);color:var(--ink,#2a1a12);box-shadow:0 0 0 1px var(--k-gold,#c9a24a)}
 `;document.head.appendChild(st)})();
