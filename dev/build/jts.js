@@ -20,6 +20,10 @@ function tsSrvRows(){const r=S.srv.rk|0,need=srvMpNeed(r),mx=srvMax(),nx=SRK.mai
  L.push([r<mx,r<mx?`Cung chủ cho lên tới ${SRK.maid[mx]}`:`Cung chủ phẩm này chỉ cho tới ${SRK.maid[mx]||SRK.maid[r]}`]);
  L.push([(S.tin|0)>=BAL.srvx.tinUp,`Chủ tin ${S.tin|0}/${BAL.srvx.tinUp}`]);
  if(S.srv.lau>0)L.push([false,`Đang ở Tân Giả khố (còn ${S.srv.lau} tuần)`]);
+ /* cnv-exit-promo (robots s5d / M1: «Xét phẩm: đủ» for years, never promoted): the Nội vụ phủ exam is the LAST gate of the rung (j42 srvMonth → jexam
+    exSrvGate); it is a row of its own, so the box never says «đủ» while the exam card waits in Hành sự, lapsed, or is on its wait */
+ try{if(typeof exOn==="function"&&exOn()&&typeof exSrvS==="function"){const e=exSrvS(),me=e.to===r+1;
+  L.push([false,me&&e.pend?"Khảo hạch Nội vụ phủ đang dở":me&&e.w1!=null?`Khảo hạch Nội vụ phủ: thẻ ở Hành sự, hạn đến hết ${exDateW(e.w1)}`:me&&e.cd>S.turn?`Khảo hạch Nội vụ phủ: lỡ hoặc trượt, chờ đến ${exDateT(e.cd)} mới được thi`:"Đỗ khảo hạch Nội vụ phủ (mở khi đủ các điều trên)"])}}catch(x){}
  return L}
 /* palace voice: the maid's warning is a pool (jvoice kLine, no repeat within BAL.voice.noRepeat tuần); {V} = who asks around */
 const TS_WARN=["“Dạo này người các cung nhìn {goi} không thiện ý. Nô tỳ nghe bên {V} hỏi giờ giấc cung ta.”","“{Goi}, người bên {V} cứ lảng vảng quanh cửa cung mình. Nô tỳ thấy không yên.”",
@@ -240,7 +244,7 @@ function tsPromoPanel(pre){if(tsSrv()){if(!pre)tsSrvPromoPanel();return}if(!tsOn
 /* cung nữ: the same panel (title, kit rows «Đủ / Thiếu», note) on her next rung */
 function tsSrvPromoPanel(){if(!tsBoxOn()||!tsSrv())return;const nx=tsSrvNext();if(!nx)return;const L=tsSrvRows();const miss=L.filter(x=>!x[0]).length;
  const ex=typeof exOn==="function"&&exOn();
- Q.unshift({t:`Xét phẩm cuối tháng · ${nx}`,h:`<div class="kpsec"><h4 class="kpst">Điều kiện lên ${nx}</h4>${tsRows(L.map(([ok,t])=>[ok?"Đủ":"Thiếu",t,ok?"g":"r"]))}</div>${tsRows([["Ghi chú",(miss?`thiếu ${miss} điều: đủ hết thì cuối tháng Nội vụ phủ ghi công`:"đủ cả: cuối tháng Nội vụ phủ ghi công")+(ex?", rồi ngươi dự khảo hạch Nội vụ phủ (Hành sự); đỗ thì được thăng":", được thăng"),"n"]])}`,btn:"Đã hiểu",tsk:"promo"});showModal()}
+ Q.unshift({t:`Xét phẩm cuối tháng · ${nx}`,h:`<div class="kpsec"><h4 class="kpst">Điều kiện lên ${nx}</h4>${tsRows(L.map(([ok,t])=>[ok?"Đủ":"Thiếu",t,ok?"g":"r"]))}</div>${tsRows([["Ghi chú",ex&&miss===1&&!L.find(x=>!x[0]&&!/khảo hạch/i.test(x[1]))?"đủ công: dự khảo hạch Nội vụ phủ (thẻ ở Hành sự khi mở); đỗ thì được thăng":(miss?`thiếu ${miss} điều: đủ hết thì cuối tháng Nội vụ phủ ghi công`:"đủ cả: cuối tháng Nội vụ phủ ghi công")+(ex?", rồi ngươi dự khảo hạch Nội vụ phủ (Hành sự); đỗ thì được thăng":", được thăng"),"n"]])}`,btn:"Đã hiểu",tsk:"promo"});showModal()}
 if(window.K3_RIGHT)window.K3_RIGHT.push("tsxp");
 (function(){if(typeof renderHud2!=="function")return;const r0=renderHud2;renderHud2=function(){const r=r0.apply(this,arguments);try{const el=$("hud2");if(el&&tsBoxOn()&&tsSrv()&&tsSrvNext()){const miss=tsSrvRows().filter(x=>!x[0]).length;
   el.insertAdjacentHTML("beforeend",`<button class="hc ${miss?"":"ok"}" data-hx="tsxp">Xét phẩm: ${miss?`thiếu ${miss}`:"đủ"}</button>`)}else if(el&&tsOn()&&!S.out&&S.rank<7){const L=promoReqP(S);if(L.length){const miss=L.filter(x=>!x[0]).length;
