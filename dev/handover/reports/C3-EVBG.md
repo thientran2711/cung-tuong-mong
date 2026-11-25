@@ -54,3 +54,7 @@ Crops: crops-batchA.jpg (banhoa+gate+yard+hall+call), crops-batchB.jpg (the othe
 Credits: pilot 160 + redo 270 + banhoa v3 135 + 8 × 135 = 1645 total. (Rejected: banhoa v1 (gauze), v2 (portrait inset); not stored.)
 Not wired: SELX_ART lives on review/selection-scene (not main); the 4 non-selx keys (tanphong/laphau/hoathan/thangtran) have no code slot yet — their events need a kit scene bg key (KIT REQUEST candidate for Foreman C).
 Lesson: gpt-2-6 sometimes paints a portrait inset with pale side strips on a 4:3 canvas; the line «Full-bleed watercolour painting to all four edges, no margins, no borders, no pale side strips» fixed it 9/9.
+
+# UPDATE 2 — hall redo + size ruling
+- selx-hall v4 (indoors only, flowers in vases; first hall had a cherry branch + peony bush inside): creation 3z1CLpqREY, 2048x1536, 135 cr. Total 1780 credits.
+- SIZE: KIT §93.1 `.kscn-bg` = `background-size:cover; background-position:center` (jkitsel.js:21). Layer is ~3:4 on Fold, ~square on iPad. 4:3 keeps the central ~56% of width on Fold, 2:1 only ~37%. Verdict: cover handles both, keep both sizes; rule for painters: subject inside the central 37% of the width for 2:1 pictures, inside 55% for 4:3.
