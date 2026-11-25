@@ -45,3 +45,8 @@ Final suite on 02d99eea (one test at a time): coop-night LIVE Worker 112/112 ×3
 If this seat stops before the suite ends: successor checks out review/coop-night-live 02d99eea, builds (python3 dev/build/assemble.py; site already rebuilt),
 runs the remaining gates above one by one (never two co-op tests at once on 4 cores), local Worker per thin.md fix-5 handover (wrangler dev :8797 from
 coop/worker with node_modules symlink, remove it before commit), merges newest LIVE if main moved, then posts SSK.
+
+## Merged head aacc248a (= 02d99eea + LIVE 17dfa64d; LIVE's jdayq additions are solo-only, no overlap)
+coop-night LIVE Worker 112/112 · local Worker 111/112 (case 4 «host presses, guest AFK»: host buổi 0, CW.pend true, sent 2, Q carried — the «pend, nothing re-checks» shape the BIG rv found; fixed by rv's tryEnd line, review/coop-night-live-rv 217cbed8) · dayq-hold-coop 23/23 · coop-e2e SWAP0 142/142, SWAP1 142/142 · dayq-hold PASS 46 · dayq-order PASS · quickcheck alone PASS core (G4 coop-one-world «merge differs» once; re-run seeds 7,3 PASS — same flake seen on 02d99eea, 4/4 PASS then).
+Fixer review of rv's tryEnd line (`onBuoi(CW.pendBuoi);soonEnd();return`): cause agreed; no double send (sendEnd guards sent===wk, cyHer, resWait). Risk: onBuoi returns early without clearing pendBuoi when eW() (thin level 5) → soonEnd↔tryEnd setTimeout(0) hot loop → suggested `if(!CW.pendBuoi)soonEnd()`.
+**SẴN SÀNG KIỂM review/coop-night-live aacc248a05bb9caf070a8e8531625ca1213539e2 (jdayq part) — candidate for landing = rv's review/coop-night-live-rv (aacc248a + tryEnd line) FOR FOREMAN B / FOR MAIN 144.**
