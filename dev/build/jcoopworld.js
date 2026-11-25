@@ -465,13 +465,7 @@ CW.qKind=qKind;
 const passive=x=>qKind(x)!=="hold";CW.passiveQ=passive;
 const lookKey=x=>{try{const k=x.kit;const sj=k.subject;return (k.kind||"")+"|"+(k.title||x.t||"")+"|"+(sj&&(sj.id!=null?sj.id:sj.name)||"")}catch(e){return null}};
 /* ONE carry routine: true = the step ran (fn), false = held (a real choice / a mini game / an unknown panel is open) */
-/* coop-week-wait (Foreman B fast lane, E room 6ZG9 / F room P89H, LIVE 9f72524b: host «Buổi sáng» + «Đợi hảo hữu xong tuần», guest «Buổi tối»
-   «Chờ hảo hữu…» frozen ≥1 h, guest Q=4 «Tin báo ×3 / Phòng bị» with NO dialog on screen): a seat step held by its queue while #modal is hidden
-   waits for a tap the player cannot see. ONE rule, inside the ONE carry routine: a held step always SHOWS what holds it (reshowQ: shown at once,
-   or as soon as the Tuần lục book / a mini game is closed). */
-function heldShow(why){try{const M=$("modal");if(CW.on&&S&&!S.dead&&Q.length&&M&&M.hidden){T("held "+why+" Q"+Q.length+" hidden");CW.heldShown=(CW.heldShown||0)+1;reshowQ()}}catch(e){console.error(e)}return false}
-CW.heldShow=heldShow;
-function stepQ(why,fn){if(!S||S.mg)return false;if(!Q.length){fn();return true}if(!Q.every(passive))return heldShow(why);
+function stepQ(why,fn){if(!S||S.mg)return false;if(!Q.length){fn();return true}if(!Q.every(passive))return false;
  const seen=new Set();const carry=Q.splice(0).filter(x=>{if(!isLook(x))return true;const k=lookKey(x);if(k==null)return true;if(seen.has(k)){CW.lookDup=(CW.lookDup||0)+1;return false}seen.add(k);return true});
  try{const M=$("modal");if(M)M.hidden=true}catch(e){}T("carry "+carry.length+" "+why);
  try{fn()}finally{if(carry.length){Q.unshift(...carry);CW.carried=(CW.carried||0)+carry.length}try{if(Q.length&&!(S&&S.dead))showModal()}catch(e){console.error(e)}}return true}
@@ -880,7 +874,7 @@ COOP.on("act",onAct);COOP.on("res",onRes);COOP.on("actr",onActr);
 /* my acts on her not yet acknowledged (10 s at most: she may have dropped; the freeze covers that) */
 function resWait(){const n=Date.now();for(const id in CW.rpend)if(n-CW.rpend[id]>10000)delete CW.rpend[id];return Object.keys(CW.rpend).length>0}
 let tryT=0;function tryEnd(){tryT=0;if(CW.on&&CW.pend&&resWait()){tryT=setTimeout(tryEnd,400);return}if(CW.on&&CW.pendBuoi&&S&&!S.mg&&Q.every(passive)){onBuoi(CW.pendBuoi);return}
- if(CW.on&&CW.wantB&&S){if(CW.wantB!==bkey()||S.dead||CW.bend||CW.pend||nReady())CW.wantB=null;else if(!S.mg&&Q.every(passive)&&!needWhere()&&!waiting()&&!frozen()&&CW.base){T("wantB go "+CW.wantB);CW.wantB=null;stepQ("want",nextBuoi);return}}nCheck();if(CW.on&&S&&CW.pend&&!S.mg&&!S.dead&&!frozen()){if(!Q.length)sendEnd();else heldShow("end")}}
+ if(CW.on&&CW.wantB&&S){if(CW.wantB!==bkey()||S.dead||CW.bend||CW.pend||nReady())CW.wantB=null;else if(!S.mg&&Q.every(passive)&&!needWhere()&&!waiting()&&!frozen()&&CW.base){T("wantB go "+CW.wantB);CW.wantB=null;stepQ("want",nextBuoi);return}}nCheck();if(CW.on&&S&&CW.pend&&!Q.length&&!S.mg&&!S.dead&&!frozen())sendEnd()}
 function soonEnd(){if(CW.on&&(CW.pend||CW.pendBuoi||CW.wantB||CW.ngoW===wk()||CW.nrdy===wk())&&!tryT)tryT=setTimeout(tryEnd,0)}
 
 /* ---------- receiving ---------- */
@@ -990,7 +984,9 @@ function nCheck(){if(!CW.on||!S)return;const w=wk();
  if(host()&&CW.ngo===w&&CW.ngoW!==w&&nAtNight())CW.ngoW=w;
  if(CW.ngoW!==w||CW.pend||CW.sent===w||!nAtNight()||S.dead||S.mg||frozen()||!CW.base||needWhere()||CW.inLife)return;
  /* coop-week-wait (law 11, robot-coop-fix-6's ONE carry rule): the committed night is a Q-gated seat step like the room's buổi step / the clock's end:
-    a panel that only tells is carried over it (stepQ), a real choice holds it and is SHOWN (heldShow); before, any queued panel held it, hidden or not */
+    a panel that only tells is carried over it (stepQ) and shown again after it, a real choice still holds it. Before, any queued panel held it: E room 6ZG9 /
+    F room P89H (LIVE 9f72524b) — host «Buổi sáng» + «Đợi hảo hữu xong tuần» (his night ran, his end is out), guest «Buổi tối» «Chờ hảo hữu…» with
+    «Tin báo» panels queued: her committed night waited on a panel with nothing to choose (dev/test/coop-week-wait.js A1) */
  if(!stepQ("night",()=>{T("night "+w);CW.allowN=true;try{nextBuoi()}finally{CW.allowN=false}}))return;
  /* robot-coop-fix-4 (trace only, no behaviour change): the committed night ran nextBuoi and the week did not end (stuck dumps fix-2 r3 / A/B p05:
     «night w» repeating with ngo=ngoW=nfr=w): say once per week which wrapper state held it, so the next stuck dump names the cause */
