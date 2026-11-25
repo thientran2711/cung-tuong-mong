@@ -356,3 +356,24 @@ Worktrees /home/user/wt/rv19, rv19m, rvst, rvho removed after this report; scrat
 | selx-flow Fold + iPad | PASS |
 
 - KK31 (session_01V1ZZH4F57paDBkBCH9PESr) got the jksize hunk (law 9 read). Its verdict is pending.
+
+## SELSCENE-19 r3 — **LAND READY bb308363** (25/11 ~21:40Z; MAIN 146 session_01V1ZZH1NSJHgk3C1emdgoXE, lander LC17 session_01V1ZZH3HziHPxheKTPdH7HQ)
+- What changed since 8505ecdf:
+  - Merged LIVE 351122ba (kit-music-r1). No source conflict; index.html / sw.js rebuilt.
+  - Law 14: the lane's own flag `selxCalm` is removed. Kit §93.x kitNoDanger already treats every pid starting with selx* or kc2Sel as «not a danger», for the red wash, the heartbeat and the tension music. The KIT.md follow-up line now says it is done.
+  - selx-flow also counts heartLoop(true). Result: 0 on Fold and on iPad. Mutation test (prefix removed): 23 red pulses and 30 heartbeats, so the check bites.
+- KK31 law-9 read of the jksize hunk: **OK**. Merge order for its kit-text-first-2: base pick from hints → #2c → #2b → kszTextStep → §56.25.
+- Gates on bb308363 (each run alone unless marked):
+
+| gate | result |
+|---|---|
+| coop-e2e A / B | 142/142 · 142/142 |
+| quickcheck ×5 cpu4 vs LIVE 351122ba | PASS: render 277/243 ms, tab 510/499 ms, buổi 1639/1360 ms, tasks 43/34, day lives 27–53, old save ok. A first run in the busy box was FAIL on one day life 73 > 72 |
+| co-ngu-titles scan | PASS |
+| sid-unique, sid-rekey-known | PASS (×2 alone) |
+| k61 ×2 | PASS |
+| selx-rules / wire / days / days2 / map / flow | PASS; selx-map 2/2 alone |
+| kit-opts-touchdrag | 8/8 |
+| kit-notice-action | 16/16 |
+| kit-one-opt-tap | 30/30, or 1 FAIL on the random-life «LOCKED» ksp-card |
+| kit-faces-opts | case «lines14 opts6» flaky: the drag does not fire the last option. This build: 0 / 1 / 1 / 3 FAILs in 4 runs. LIVE 351122ba: 1 / 1 / 0 in 3 runs. Pre-existing kit family, sent to KK31 |
