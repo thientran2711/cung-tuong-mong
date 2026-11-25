@@ -54,7 +54,7 @@ const ns0=nightScene;nightScene=function(){const n=ntTaken();if(n){log(`${ntReas
 /* the tablet card and the late visit close their 'night' option with the reason when the night is gone */
 function lockFirst(id,re){const p0=PEND[id];if(!p0)return;PEND[id]=function(){const d=p0.apply(this,arguments);try{if(d&&d.o){const o=d.o.find(o=>re.test(o.n||""));if(o)o.lk=()=>ntReason(S)}}catch(e){}return d}}
 lockFirst("ksp",/^Tắm gội chờ giá/);lockFirst("empnight",/^Thắp đèn hầu rượu/);
-const sm0=showModal;showModal=function(){const r=sm0.apply(this,arguments);try{const m=Q[0];const M=$("modal");if(m&&m.opts&&M&&!M.hidden)m.opts.forEach((o,i)=>{if(typeof o.lk!=="function")return;const w=o.lk();const b=M.querySelector(`.opt[data-m="${i}"]`);if(!b)return;if(w){b.disabled=true;const s=b.querySelector("small");if(s)s.innerHTML=`<span class="ef r">${w}</span>`}})}catch(e){}return r};
+const sm0=showModal;showModal=function(){const r=sm0.apply(this,arguments);try{const m=Q[0];const M=$("modal");if(m&&m.opts&&M&&!M.hidden)m.opts.forEach((o,i)=>{if(typeof o.lk!=="function")return;const w=o.lk();const b=M.querySelector(`.opt[data-m="${i}"]`);if(!b)return;if(w){b.disabled=true;const s=b.querySelector("small");if(s)s.innerHTML=`<span class="ef r">${w}</span>`;else if(!b.querySelector(".kwhy"))b.insertAdjacentHTML("beforeend",`<span class="kwhy">${w}</span>`);/* KK28: the kit card (j63 .ka) has no <small>, so the lock reason was never shown and a tap on the locked card did nothing; the reason is now a kit «why» row + data-why for the lock pop (jfx kfLocked) */b.dataset.why=w;b.title=w}})}catch(e){}return r};
 const cm0=chooseM;chooseM=function(i){try{const m=Q[0];const o=m&&m.opts&&m.opts[i];if(o&&typeof o.lk==="function"&&o.lk())return}catch(e){}
  window.__ntDone=0;const r=cm0.apply(this,arguments);
  try{if(window.__ntDone&&window.__nsnap&&S&&!S.dead){const b=window.__nsnap;b.seq=window.__ntSeq!=null?window.__ntSeq:b.seq;window.__nsnap=null;window.__ntDone=0;resultShow("Đêm thị tẩm",b,"sure")}}catch(e){}return r};
@@ -153,7 +153,7 @@ rivalNight=function(v){
  let r=`Đêm qua thẻ bài của ${v.name} được lật${eyes(S)>=2?` (tai mắt nói: ${grade})`:""}. `;
  if(giuBlocked(v)){if(v.bac>=BAL.bacFee.giu&&roll(odA(v,45+v.tamco/3))){ap(v,{bac:-BAL.bacFee.giu});night(v)}}else night(v);
  {let x=null;if(typeof pillowNpc==="function"&&agOn())x=pillowNpc(v,sc);/* AG2: her own choice by her spite need (two-way row 24, one deed BAL.tw.g.pillow) */
-  else if(v.rel<-20&&npcWhy("pillowTalk",{v})){const o=odA(v,30+v.an/2);if(roll(o)){const b=S.sung;apply({sung:-4});x={t:S,ok:1,b}}else if(DG()){ap(v,{sung:-6})}}
+  else if(v.rel<=netTh(v,"ky")&&npcWhy("pillowTalk",{v})){const o=odA(v,30+v.an/2);if(roll(o)){const b=S.sung;apply({sung:-4});x={t:S,ok:1,b}}else if(DG()){ap(v,{sung:-6})}}
   if(x&&x.t===S&&x.ok&&eyes(S)>=2)r+=`Tai mắt nghe được: gối đầu, ${v.name} nói xấu ngươi.${x.b!==S.sung?` Sủng của ta ${x.b} → ${S.sung}.`:""} `}
  if(empGive(v,BAL.odb.j75.rbTop+sc*4,"night"))bestow(v,"night");return r};
 /* (b) the quiet favour is a world act with a cost */

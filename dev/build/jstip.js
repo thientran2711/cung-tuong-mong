@@ -22,7 +22,7 @@ Object.assign(BAL,{stip:{
  coal:[1,1,1,1,2,2,2,3],coldGoods:[["vaitho",1]],coldCoal:1,npcKeep:4,resell:40,
  down:{bangda:"bangvun",gamto:"luahang",luahang:"vaitho",vaibong:"vaitho",trahop:"tramoc",tragoi:"tramoc",thanbac:"thanden",yensao:null,nhansam:null},
  w:{sung:30,fault:35,sup:40,eun:25,maid:20},cap:80,meekAdd:10,spiteAdd:15,
- lowSung:15,dropSung:10,faultM:2,supRank:4,oan:30,safeSung:55,tipM:3,allyLoyal:75,allyTips:3,maidLoyal:35,
+ lowSung:15,dropSung:10,faultM:2,supRank:4,safeSung:55,tipM:3,allyLoyal:75,allyTips:3,maidLoyal:35,
  cutSmall:.15,cutBig:.25,tip:[8,10,12,15,18,22,26,30],greedy:50,punishM:6,
  askBase:30,reportBase:25,remember:20}});
 /* ---------- the items (art: dev/art/ITEM_ART.md §3, 16 icons gpt-2-6) ---------- */
@@ -75,7 +75,7 @@ function stipCauses(p,cut){const B=BAL.stip,st=stipSt(p),C=[],r=rkOf(p);
  if(st.rk0!=null&&r<st.rk0)st.fault=S.turn;
  if(p.confined>0)C.push({k:"fault",txt:"đang bị cấm túc"});else if(st.fault!=null&&S.turn-st.fault<=B.faultM)C.push({k:"fault",txt:st.rk0!=null&&r<st.rk0?"vừa bị giáng phẩm":"vừa phạm lỗi, bị phạt"});
  let sup=null;if(cut){const q=queenP();if(q&&q!==p)sup=q}
- if(!sup){const L=consorts().filter(v=>v!==p&&!v.out&&v.alive!==false&&rkOf(v)>r&&rkOf(v)>=B.supRank&&oan(v,p)>=B.oan).sort((a,b)=>oan(b,p)-oan(a,p));sup=L[0]||null}
+ if(!sup){const L=consorts().filter(v=>v!==p&&!v.out&&v.alive!==false&&rkOf(v)>r&&rkOf(v)>=B.supRank&&oan(v,p)>=netTh(v,"act")).sort((a,b)=>oan(b,p)-oan(a,p));sup=L[0]||null}
  if(sup)C.push({k:"sup",v:sup,txt:`${rkName(sup)} ${sup.name} có oán, sai Nội vụ phủ chèn ép`});
  const W=stipW();const tipped=st.tip!=null&&S.turn-st.tip<B.tipM;const pun=W.pun!=null&&S.turn-W.pun<B.punishM;
  if(W.greedy&&!tipped&&!pun)C.push({k:"eun",txt:"thái giám Nội vụ phủ lo việc phát bổng vốn tham, chưa được lót tay"});
@@ -126,7 +126,7 @@ function stipRestore(p,G,full){let n=0;for(const g of G||[]){if(!g.kem)continue;
   for(let i=0;i<g.n0;i++){const e={k:g.k0,from:"noivu",d:S.turn};p.inv.push(e);g.E.push(e)}g.k=g.k0;g.n=g.n0;g.kem=false;g.lost=false;n++}
  if(p===S&&n)stipReveal([].concat(...G.map(g=>g.E)),{kind:"chest",title:"Nội vụ phủ phát bù",sub:"đồ tốt thay hàng kém"});return n}
 function stipReportTo(SK){const q=queenP();const hhBehind=q&&q!==S&&SK.sup===q;const thOk=!S.thDead;
- if(q&&q!==S&&!hhBehind&&rel(q,S)>-30)return{k:"hh",n:"Hoàng hậu",v:q};if(thOk)return{k:"th",n:"Thái hậu",v:null};return q&&q!==S?{k:"hh",n:"Hoàng hậu",v:q,risky:1}:null}
+ if(q&&q!==S&&!hhBehind&&rel(q,S)>netTh(q,"ghet"))return{k:"hh",n:"Hoàng hậu",v:q};if(thOk)return{k:"th",n:"Thái hậu",v:null};return q&&q!==S?{k:"hh",n:"Hoàng hậu",v:q,risky:1}:null}
 /* robot10 E-FIX-1 (econ card «null.queen»): the one who ordered a khất bổng = the order's own cutBy, else the superior who leaned on Nội vụ phủ, else the Hoàng hậu, else Nội vụ phủ itself — never a person read from an empty seat */
 function stipCutWho(SK){if(SK&&SK.cutBy)return SK.cutBy;const q=SK&&SK.sup||(typeof queenP==="function"?queenP():null);return q?rkName(q):"Nội vụ phủ"}
 function stipEvent(G,SK){const B=BAL.stip,r=rkOf(S),st=stipSt(S),W=stipW();const tip=B.tip[Math.min(7,r)];const eun=stipEunName();

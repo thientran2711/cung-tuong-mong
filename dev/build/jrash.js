@@ -57,7 +57,7 @@ try{AOUT.rash=["nàng nổi mẩn mặt, Sắc giảm 5–16 trong 1–4 tuần"
 try{LACK.rash=t=>S.bac<RASH.actBac?`cần Bạc ${RASH.actBac}`:t&&t.rash?"mặt nàng đang nổi mẩn":""}catch(e){}
 try{ACTDOM.rash="Mưu kế";J78VERB.rash="trộn phấn lạ vào hộp phấn của {t}";HARMK["Bỏ phấn lạ"]="rash"}catch(e){}
 try{if(!BANDS[1][2].includes("rash"))BANDS[1][2].push("rash");const g=RVGRP.find(x=>x[0]==="Hại nhỏ");if(g&&!g[1].includes("rash"))g[1].push("rash")}catch(e){}
-(function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{const b=bandOf(danger(v,t));if(b>=1&&ACT.rash.ok(v,t)){let w=1.2*persW(v,"rash");if((t.sac||0)>(v.sac||0)+8)w*=1.5;if(w>0)O.push(["rash",w])}}catch(e){}return O}})();
+(function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{const b=bandVT(v,t);if(b>=1&&ACT.rash.ok(v,t)){let w=1.2*persW(v,"rash");if((t.sac||0)>(v.sac||0)+8)w*=1.5;if(w>0)O.push(["rash",w])}}catch(e){}return O}})();
 
 /* ---------- picture: KIT_RASH, placed from the veil fit boxes (rash art: nose bridge at RB of a square image) ---------- */
 window.KIT_RASH={ready:true,RB:.47,WX:1.08,src:function(sev){return `img/rash-${cl(sev|0,1,3)}.png`},

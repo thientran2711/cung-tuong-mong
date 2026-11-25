@@ -126,5 +126,9 @@ function resMeHoused(){try{if(!S||S.pal!=null||S.out||S.dead)return null;const r
 (function(){const r0=residents;residents=function(k){const L=r0.apply(this,arguments);try{const r=resMeHoused();if(r&&k!=="home"&&palaceOf(r.head)===k&&!L.includes(S)){L.push(S);L.sort((a,b)=>rkOf(b)-rkOf(a))}}catch(e){}return L}})();
 (function(){const m0=mapSpots;mapSpots=function(){const L=m0.apply(this,arguments);try{const r=resMeHoused();if(!r)return L;const hk=palaceOf(r.head);
   const out=L.filter(x=>x.k!=="home");const sp=out.find(x=>x.k===hk);if(sp){if(!(sp.res||[]).includes(S))sp.res=(sp.res||[]).concat([S]);sp.fn=`${sp.fn} · ngươi ở ${RES_PART_N[r.part]}`}return out}catch(e){return L}}})();
+/* her place on the Dư đồ plan (map-fix-2, law 11: every plan view reads this ONE key): at home while housed = the chủ vị's palace spot (no own spot then),
+   so that spot carries the «ta ở đây» marker, the .here class (j38 mapFit centres the open view on it, the tag solver keeps it home) and her "Ta + N bóng" row */
+function mapHereK(){try{if(S&&S.place==="home"){const r=resMeHoused();if(r)return palaceOf(r.head)}}catch(e){}return S?S.place:null}
+window.mapHereK=mapHereK;
 /* walking: her home is where her phối điện is (the chủ vị's palace), not Ngọc Thanh các */
 (function(){if(typeof mapPos!=="function")return;const m0=mapPos;mapPos=function(k){try{if(k==="home"){const r=resMeHoused();if(r)return m0.call(this,palaceOf(r.head))}}catch(e){}return m0.apply(this,arguments)}})();

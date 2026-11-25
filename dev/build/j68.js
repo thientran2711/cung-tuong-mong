@@ -83,7 +83,7 @@ function e68Pick(L){return npwPick(L,x=>x[1],{all:true})} /* npc-purpose: weight
 function e68Make(s){const e=e68();let p=null;try{p=s.pp?s.pp():{}}catch(x){p=null}if(!p)return null;const V=s.v||[""];
  let all=[...V.keys()];if(s.vf){let ok=null;try{ok=s.vf(p)}catch(x){}if(ok&&ok.length)all=all.filter(i=>ok.includes(i));else if(ok)return null}const used=e.vu[s.id]||[];let pool=all.filter(i=>!used.includes(i));if(!pool.length){pool=all.slice();e.vu[s.id]=(e.vu[s.id]||[]).filter(i=>!all.includes(i))}
  const fresh=pool.filter(i=>!e68Past(s.id+":"+i));p.vi=pick(fresh.length?fresh:pool);
- const d=mkP("e68"+s.id,p);if(!d)return null;e.cd[s.id]=wk();(e.vu[s.id]=e.vu[s.id]||[]).push(p.vi);e.n++;if(s.big)e.bigM=S.turn;e68Mark(s.id+":"+p.vi);return d}
+ const d=mkP("e68"+s.id,p);if(!d)return null;e.cd[s.id]=wk();(e.vu[s.id]=e.vu[s.id]||[]).push(p.vi);e.n++;if(s.big)e.bigM=S.turn;e68Mark(s.id+":"+p.vi);try{if(s.fam==="visit"&&typeof visitSeen==="function"){let first=null;for(const k in p){const q=p[k];if(q&&typeof q==="object"&&q.name&&!first)first=q}if(first&&(rivals||[]).includes(first)){visitSeen(first);if(typeof d.t==="string"&&!d.t.includes("giá đáo")&&!d.t.includes("xin cầu kiến"))d.t=visitArrive(first)+" "+d.t}else if(first&&typeof visitArriveK==="function"&&typeof d.t==="string"&&!d.t.includes("xin cầu kiến"))d.t=visitArriveK(first)+" "+d.t}/* a visitor is known by sight + name, announced by rank / kind (owner 24/11) */}catch(x){}return d}
 function e68Fire(fams,pk){const L=e68Cands(fams);for(let t=0;t<4&&L.length;t++){const x=(pk||e68Pick)(L);if(!x)break;L.splice(L.indexOf(x),1);const d=e68Make(x[0]);if(d)return [d,x[0]]}return null}
 function e68Push(d,s,front){const m={t:s.t||FAM6[s.fam]||"Chuyện trong cung",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp};if(front)Q.unshift(m);else Q.push(m);return m}
 /* follow-ups: a template flagged fu fires on its due tuần (params carried) */
@@ -151,17 +151,25 @@ function evGate(dry){if(!S||S.dead||window.__e68off||!Q.length)return;const sc=e
   const K=evKeys(m);const tl=sc.tpl[K.tpl],kl=sc.key[K.key];
   if((tl!=null&&now-tl<E68S.tpl)||(kl!=null&&now-kl<E68S.key)){Q.splice(i,1);i--;evDropInfo(m);continue}
   const ak=evActorKey(m);
-  const atDayStart=(S.buoi||0)===0&&!m.__held&&(hasMust||roll(50));
-  const block=keepOpt||sc.bk===b||sc.dn>=E68S.day||(ak&&ak===sc.last)||atDayStart;
-  if(block){Q.splice(i,1);i--;if(EVHOLD.length<E68S.hold&&sc.dn<E68S.day+1)EVHOLD.push({m,at:now,K});else evDropInfo(m);continue}
+  const atDayStart=(S.buoi||0)===0&&!m.__held&&(hasMust||roll(BAL.spread.dawnOpt)||BAL.spread.dawnOpt>=100);/* FLIGHT-DAYQ: BAL odds (was roll(50)); roll() caps at BAL.odds.hi, so >=100 = always; roll still drawn exactly as before (co-op seats draw in step) */
+  const other=keepOpt||sc.bk===b||sc.dn>=E68S.day||(ak&&ak===sc.last);const block=other||atDayStart;
+  /* FLIGHT-DAYQ: a card held ONLY because it is the first buổi of a day is never dropped for a full hold (it moves to a later buổi; owner 24/11 (5)) */
+  if(block){Q.splice(i,1);i--;if((EVHOLD.length<E68S.hold&&sc.dn<E68S.day+1)||!other)EVHOLD.push({m,at:now,K});else evDropInfo(m);continue}
   keepOpt=true}
  if(dry)return;
  const m=Q[0];if(m&&m!==EVLAST&&evOptional(m)){const K=evKeys(m);sc.tpl[K.tpl]=now;sc.key[K.key]=now;sc.last=evActorKey(m);sc.bk=b;sc.dn++;try{evHistMark(K.tpl)}catch(e){}}
  if(m)m.__seen=1;EVLAST=m||null}
 /* release one held event at a later buổi, at random, if nothing else is up */
-function evRelease(){if(!S||S.dead||Q.length||S.mg||!EVHOLD.length)return;const sc=evS();const now=wk();EVHOLD=EVHOLD.filter(h=>{if(now-h.at>E68S.stale){evDropInfo(h.m);return false}return true});
+/* flight-e68-season (law 11, held / pending cards): a j68 card is drawn only while its template fits (w(ctx) > 0: month / season / fest / rank
+   needs, j68c needs.month …) but it can wait — EVHOLD up to E68S.stale tuần, or the pending P of a save rebuilt by deserQ — and the month can
+   turn meanwhile: a winter seed (j68c-sea-023, lò sưởi) came out in tháng 2 under a spring opener («Gió xuân lùa…»). On release / rebuild the
+   template must still fit, else the card is dropped like a stale hold. */
+function e68Fits(m){try{const id=m&&typeof m.pid==="string"&&/^e68/.test(m.pid)?m.pid.slice(3):null;if(!id)return true;const s=E68I[id];if(!s||typeof s.w!=="function")return true;return s.w(e68Ctx())>0}catch(e){return true}}
+function evRelease(){if(!S||S.dead||Q.length||S.mg||!EVHOLD.length)return;const sc=evS();const now=wk();EVHOLD=EVHOLD.filter(h=>{if(now-h.at>E68S.stale||!e68Fits(h.m)){evDropInfo(h.m);return false}return true});
  if(!EVHOLD.length||sc.bk===bk6()||(sc.day===now&&sc.dn>=E68S.day)||!roll(65))return;const h=EVHOLD.shift();h.m.__held=1;Q.push(h.m);showModal()}
 (function(){const s0=showModal;showModal=function(){try{evGate()}catch(x){console.error(x)}return s0.apply(this,arguments)}})();
+/* flight-e68-season: a pending j68 card rebuilt from a save (deserQ) must still fit its template now (else dropped, as a stale hold) */
+(function(){if(typeof deserQ!=="function")return;const d0=deserQ;deserQ=function(){const r=d0.apply(this,arguments);try{return Array.isArray(r)?r.filter(m=>e68Fits(m)):r}catch(e){return r}}})();
 /* review/night-ledger-coop-r4 (LAW 11, every store that keeps a card OUTSIDE Q; scan in reports/night-ledger.md «FIX r4»): a held optional
    card (EVHOLD) is page memory that holds the people of the world it was made in. When the world is rebuilt in place (co-op week merge, join,
    rejoin, room level change, snapshot restore: all through deser), it is made again from its data against the new world (pid → mkP,

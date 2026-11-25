@@ -186,7 +186,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  if(ph){try{const t=document.getElementById("sc-t");const tb=t&&t.offsetHeight?t.getBoundingClientRect().bottom-R.top+2:6;st.style.setProperty("--j59kt",Math.max(6,tb).toFixed(0)+"px");
   const kR=document.getElementById("kshR");if(kR&&!kR.hidden&&kR.offsetHeight){const q=kR.getBoundingClientRect();topR=Math.max(topR,Math.min(q.bottom-R.top+4,sH*.3))}}catch(e){}}
  const gL=parseFloat(st.style.getPropertyValue("--kgl"))||0,gR=parseFloat(st.style.getPropertyValue("--kgr"))||0;let rightR=8;
- try{const h2=document.getElementById("hud2");if(!gR&&h2&&h2.offsetHeight&&!h2.classList.contains("khud")){const q=h2.getBoundingClientRect();if(q.bottom>R.top&&q.top<R.bottom&&q.width<sW*.45)rightR=Math.max(rightR,R.right-q.left+6)}}catch(e){}
+ try{const h2=document.getElementById("hud2");if(!gR&&h2&&h2.offsetHeight&&!h2.classList.contains("khud")){const q=h2.getBoundingClientRect();if(q.bottom>R.top&&q.top<R.bottom&&q.width<sW*.45&&(q.left+q.right)/2>R.left+sW*.5/* button-crawl-fix-3: only a panel on the RIGHT side reserves the right strip */)rightR=Math.max(rightR,R.right-q.left+6)}}catch(e){}
  /* KIT 33: women stand KIT_FIG.h; a taller figure (man ×KIT_FIG.man) is CAPPED under the place ribbon (CAP) — it never shrinks the others */
  let CAP=Infinity;const ef=(x,h)=>Math.min(h*x.f,CAP);
  const imgH=(x,h)=>ef(x,h)/(x.b.b-j59bt(x.b)),boxW=(x,h)=>imgH(x,h)*x.ar;
@@ -210,7 +210,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
    if(kR&&!kR.hidden&&kR.offsetHeight){const q=kR.getBoundingClientRect();/* review/stage-side (owner 16/11 fixed slots): the stage area for people = the stage minus the side column, ALWAYS (not only when the column reaches the heads), so the slots never move when the column grows or folds */if((q.left+q.right)/2>R.left+sW*.5){rr=Math.max(rr,R.right-q.left+6);z.rsv=q.bottom-R.top+4<sH-z.fo}}}catch(e){}return rr};
  const NS=kitSlotsN(st)/* KIT 33.12 FIXED SLOT TABLE (owner 16/11 19:54Z + ~20:04Z): the slot count of a view comes from the kit table only (one page = 2: Fold room / Fold place / iPad room page; iPad spread-wide place = 4), never from who stands there */,M=E.length,nAll=M+(me?1:0);
  {}
- const leftFor=(z)=>{let ll=Math.max(8+gL,KIT_SLOTS.rail||0);/* KIT 33.12 rail: the left rail's strip is never a slot (r6 FAIL 1: heads under #krail); fixed, so slots do not move when the rail paints */try{const kr=document.getElementById("krail");if(kr&&kr.parentNode===st&&kr.offsetHeight){const q=kr.getBoundingClientRect();ll=Math.max(ll,q.right-R.left+5)}}catch(e){}try{const kL=document.getElementById("kshL");const head=sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);
+ const leftFor=(z)=>{let ll=Math.max(8+gL,KIT_SLOTS.rail||0);/* KIT 33.12 rail: the left rail's strip is never a slot (r6 FAIL 1: heads under #krail); fixed, so slots do not move when the rail paints */try{const kr=document.getElementById("krail");if(kr&&kr.parentNode===st&&kr.offsetHeight){const q=kr.getBoundingClientRect();/* button-crawl-fix-3: only a rail on the LEFT side reserves the left strip (as kshL); a rail anywhere else never squeezes the slots to one */if((q.left+q.right)/2<R.left+sW*.5)ll=Math.max(ll,q.right-R.left+5)}}catch(e){}try{const kL=document.getElementById("kshL");const head=sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);
    if(kL&&!kL.hidden&&kL.offsetHeight>4){const q=kL.getBoundingClientRect();if(q.bottom-R.top+4>=head&&(q.left+q.right)/2<R.left+sW*.5)ll=Math.max(ll,q.right-R.left+6)}}catch(e){}return ll};
  const FS=st.classList.contains("kplfs");/* KIT 33.10 full-screen place painting (no plaque column) */
  const geo=(N,z)=>{const paged=nAll>N;const CW=0;/* page-chip gutters: 46 px, 34 on phones so two slots still hold a man (KIT 33.7) */const rr=widthFor(z);const lf=leftFor(z);const pL=lf>8+gL,pR=rr>rightR;const x0=lf+CW;/* a reserved right column that ends above the name row holds the "+N" chip under it: no second gutter */const CWR=paged&&z.rsv&&rr>=CW+8?0:CW;const avail=Math.max(40,sW-x0-rr-CWR);/* review/stage-side (owner 16/11): k people stand at 1/(k+1), 2/(k+1)… of the free width, so N people per page need a spacing of avail/(N+1) (1 person = the whole width) */const sw=kitSlotSwE(N,avail);/* KIT 33.7b fixed spots: N equal columns (jkit) — people never overlap, pets may overlap legs */return{N,paged,CW,rr,xl:lf,pL,pR,limL:x0,limR:x0+avail,x0R:CWR?rr:rr-CW,x0,avail,sw}};
@@ -270,7 +270,19 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  st.dataset.j59slots=centres.map(c=>(c+st.clientLeft).toFixed(1)).join(",");st.dataset.j59n=String(N);
  j59petPut(st,usedPets,H,fo,pVH);
  j59chips(st,R,pages>1?{pg,pages,before,after,xl:FS?0:G.xl,xr:FS?0:G.rr,floor:st.clientHeight-fo-4}:null);j59swipe(st);
+ kitTagCollide(st);
  st.__j59here=persons}
+/* KIT 33.10 STAGE NAME-LABEL COLLISION RULE (KK28, FOREMAN D kit request «iPad Hành sự stage: two figure name labels overlap at the left edge», every stage): two name labels never overlap.
+   After the figures are placed (kitSlotIn may push a wide figure away from the stage edge, so neighbouring bodies stand closer than a slot), the visible labels are sorted left to right; a label that overlaps the one
+   before it (same line band) slides RIGHT by the overlap + 4 px while it stays inside the stage, the rest slides the one before it LEFT (never past the stage edge); when even that is not enough the later label goes
+   down onto the second name row (the same stagger the crowded stage already uses). The shift is the CSS variable --j59tdx on the label (margin-left), recomputed from zero on every layout. */
+function kitTagCollide(st){try{const R=e=>e.getBoundingClientRect(),sr=R(st),gap=4;const all=[...st.querySelectorAll("#tokens .tok .tag,#j59metag .tag")];all.forEach(g=>{g.style.removeProperty("--j59tdx");g.style.removeProperty("--j59tdy")});
+ const L=all.filter(g=>g.offsetParent&&R(g).width>2&&R(g).height>2&&R(g).right>sr.left&&R(g).left<sr.right).sort((a,b)=>R(a).left-R(b).left);const lo=sr.left+gap,hi=sr.right-gap;
+ for(let i=1;i<L.length;i++){const a=R(L[i-1]),b=R(L[i]);if(Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)<=1)continue;const ov=a.right+gap-b.left;if(ov<=0)continue;
+  const db=Math.max(0,Math.min(ov,hi-b.right));let da=ov-db;if(da>0)da=Math.max(0,Math.min(da,a.left-lo));
+  if(db)L[i].style.setProperty("--j59tdx",db.toFixed(1)+"px");if(da)L[i-1].style.setProperty("--j59tdx",((parseFloat(L[i-1].style.getPropertyValue("--j59tdx"))||0)-da).toFixed(1)+"px");
+  if(db+da<ov-.5)L[i].style.setProperty("--j59tdy","26px")}}catch(e){console.error("kitTagCollide",e)}}
+window.kitTagCollide=kitTagCollide;
 /* KIT element "rank outline": thin edge glow in --halo (her rank colour) along her own figure only; never an aura; pulse only with Hiệu ứng hình and no reduced motion.
    KIT element "selection outline" (.j59sel): brighter warm-white edge glow #fff3c4 on the one person she has selected (popIdx) or on herself (tap her figure); replaces her rank outline while she is selected */
 const SG=(a,o)=>`url(#kfa) var(--klf,brightness(1)) drop-shadow(0 6px 6px #0005) drop-shadow(0 0 1.5px #fff3c4) drop-shadow(0 0 3px #fff3c4) drop-shadow(0 0 ${a}px rgba(255,236,170,${o}))`;
@@ -295,6 +307,7 @@ html body .stage #sc-t h2 .rt1{display:inline-block!important;padding:1px 10px;b
 .stage.j59{touch-action:pan-y}
 .stage.j59 #mefig,.stage.j59 #tokens img{-webkit-user-drag:none;user-select:none}
 .stage.j59 .tok.fig .tag{margin-top:3px!important}
+html body #stage.j59 #tokens>.tok .tag,html body #stage.j59 #j59metag .tag{margin-left:var(--j59tdx,0px)!important}html body #stage.j59 #tokens>.tok .tag[style*="--j59tdy"],html body #stage.j59 #j59metag .tag[style*="--j59tdy"]{margin-top:calc(3px + var(--j59tdy))!important}
 .stage.j59 .tokens.j59st .tok.fig:nth-child(even) .tag{margin-top:var(--j59m1,26px)!important}
 .stage.j59.j59c .tok .tag{font-size:.72rem;line-height:1.2;max-width:8em;padding:1px 6px;background:color-mix(in srgb,var(--tc,#5a6878) 20%,#fffaf0)!important;border-color:color-mix(in srgb,var(--tc,#5a6878) 70%,#fff)!important;color:var(--ink)}
 .stage.j59.j59c .tok .tag .j59t{display:none}
