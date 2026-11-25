@@ -76,3 +76,23 @@ Verdict: **PASS** — head **4da55ce8** on review/flight-modal-deadlock-r = 1f0a
 
 Reviewer fix (4da55ce8, test only): after merging main 49f17d4d (jdayq day-queue) the hook 85 FAILED 3 — the test's own card on a fresh life was HELD by the day-queue (dawn/activity) and never painted (0/0). dead-card.js parts 2/3 now open the card as a player tap (DQ.user). Game code unchanged.
 Side note (not this branch, pre-existing): the repro card mixes a spring opener («Gió xuân lùa qua hành lang…», Tháng hai) with the winter seed sea-023 («Gió bấc… lò sưởi»); sea seeds may need a month gate (law 6 continuity) — for Foreman F to route.
+
+## flight-coop-sync (FLIGHT ROOT-CAUSE FIXER, 25/11)
+PRIORITY #1 CHECK ('ngoW' / 'host reborn night'): reused jcoopworld night handshake (nCheck / nGoNow), the guest-side fix «review/coop-week-stall» (jcoopworld sendMe comment), dev/test/coop-dbg-hostdeath.js idea, coop-e2e harness (env switch like COOP_RECONNECT); no new mechanism.
+Branch review/flight-coop-sync from LIVE 49f17d4d: e2b5dd4c (fix + test), 4cb42b96 (rebuild).
+
+### Verdict (A-COOP room SX8M wk80 buổi 3)
+GAME bug, not harness; pre-existing on LIVE 49f17d4d (same code; not new in 4232709a). Host trace: «nready 80 → ngo 80 → night 80 → attach → sendMe false → … seatresync → nready 80»: the host committed the night (CW.ngo = 80), its night ran and it died inside it, then a new life began (start/__nlInner → attach + sendMe). sendMe resets CW.nrdy / CW.ngoW = −1 (jcoopworld.js:309) but not CW.ngo, so nCheck never re-commits (the host branch needs CW.ngo !== w; nGoNow is done) and the host's own gate ngoW stays −1 → its night never runs, its week end is never sent. The guest had already ended wk80 (ended.b) → both seats wait for ever; the host button reads «Chờ hảo hữu…» (disabled) → no button for a real player either. The guest-seat version was fixed before (review/coop-week-stall, nOtherEnded line); the host seat was missed.
+
+### Fix
+jcoopworld.js nCheck: `if(host()&&CW.ngo===w&&CW.ngoW!==w&&nAtNight())CW.ngoW=w;` — the host's own gate follows its commit (mirror of the guest line). Family: the only reset of nrdy/ngoW is sendMe (new life); guest reborn after the host's go → host answers her new rd with go (existing); fresh page on the host → CW.ngo empty → normal commit.
+
+### Tests
+| test | before (49f17d4d) | after (4cb42b96) |
+|---|---|---|
+| coop-e2e COOP_HOSTDIE=1 (host dies inside its committed buổi tối, guest ends) | FAIL, exact SX8M state: ngo 0 / ngoW −1 / nrdy −1, room week stuck, then timeout | ok «host reborn inside its own buổi tối: the room week still moves on both seats» |
+| coop-e2e plain (both seats) | — | 142/142 |
+| quickcheck | — | QUICKCHECK PASS 590 s, core gates + hooks PASS, old save ok, perf render 226/223, tab 531/453, buổi 1261/1041 ms (noise band) |
+Side lead (not fixed here): in the HOSTDIE run after the rebirth, «one j61 key = one person» FAILs ×4 (x33 = two men on one key, after week 3 / rejoin) — a host rebirth mid-room gives a j61 key clash; separate family, not a stall.
+
+READY flight-coop-sync 4cb42b96.
