@@ -28,6 +28,7 @@ const VEC=`(o=>${JSON.stringify(KEYS)}.map(k=>k+'='+(typeof o[k]==='number'?Math
 const HUD=`(()=>[...document.querySelectorAll('#kstrow .kst')].map(e=>e.dataset.k+':'+e.textContent.replace(/\\s+/g,'')).join(' '))`;
 /* page-side mutations (applied after every page load) */
 const MUTJS={nt:`(()=>{const s0=ser;ser=function(){const d=s0.apply(this,arguments);if(d)delete d.nt;return d}})()`,
+ rk:`(()=>{rcpMk=function(){return null}})()`,
  evh:`(()=>{const s0=ser;ser=function(){const d=s0.apply(this,arguments);if(d)delete d.evh;return d}})()`,
  /* nl: the life-start write is delayed — nothing written while the identity card is open (yet the buổi marked as written), no at-once write at «Nhận thân phận» */
  nl:`(()=>{window.jqSaveNow=function(){};const s0=save;save=function(){if(typeof NLP!=='undefined'&&NLP&&S&&!S.dead){JQ.k=[S.year,S.month,S.tuan,S.buoi||0,S.name].join('.');JQ.s=S;return}return s0.apply(this,arguments)}})()`};
@@ -106,6 +107,41 @@ async function nl4(b,dev,url,seed){return play(b,dev,url,seed,async(p,open,pe)=>
  const pass=t.cont&&a&&!a.card&&a.v===s.v&&a.hud===s.hud&&!pe.length;
  return{pass,line:`4 s after «Nhận thân phận»: ${s.v} · reload → ${t.cont?'«Tiếp tục kiếp này»':'NO «Tiếp tục»'}${a?` → ${a.v===s.v?'same numbers':'DRIFT '+a.v}${a.hud===s.hud?'':' · HUD '+a.hud+' (was '+s.hud+')'}`:''}${pe.length?' · pageerror '+pe[0]:''}`}})}
 
+/* ---------- flipcards (rv r2 FIX 2, save-year-rollback «## REVIEW r2» probe) ----------
+   The cards of the new buổi are left OPEN at the month / year flip (stipend «Bổng lộc tháng …» + «· Lễ nghĩa», the Nội vụ phủ skim answers, «Danh
+   hiệu mới», «Y phục dự Tết», «Chuyện bên lề», «Có người đến», data cards) for FC_WAIT ms (0 = the instant the step is over, 3000 = what a player who
+   reloads has), then a TRUE reload → «Tiếp tục kiếp này»: every unseen card (Q + SP13.L + EVHOLD, data AND code) comes back, the date is the new one
+   and every top-bar number is the same (no second stipend pay, no second Danh). Then «Chu toàn / Bớt lễ nghĩa» is answered after the reload and
+   costs as on the card (LAW 2/3: the cost card cannot be skipped by reload). env SUL_FC=month,year (flips) · SUL_FCW=0,3000 (waits) · SUL_FCS=1,2 (seeds).
+   MUTATE rk: the generator remake is dropped (rcpMk → nothing) → must FAIL. */
+const FCAL={month:'S.tuan=2;S.buoi=B4L-1',year:'S.month=12;S.tuan=2;S.buoi=B4L-1'};
+const UNSEEN=`(()=>{const t=m=>String(m&&(m.t||m.title||m.pid)||'').replace(/<[^>]+>/g,'').slice(0,60);const L=[];for(const m of Q)if(!m.nl)L.push(t(m)+(m.opts&&m.opts.length?'*':''));
+ if(typeof SP13!=='undefined')for(const x of SP13.L)L.push(t(x.m)+(x.m.opts&&x.m.opts.length?'*':''));if(typeof EVHOLD!=='undefined')for(const h of EVHOLD)L.push(t(h.m)+(h.m.opts&&h.m.opts.length?'*':''));return L.sort()})()`;
+async function flipcards(b,dev,url,seed,flip,wait){return play(b,dev,url,seed,async(p,open,pe)=>{await open();
+ const r=await p.evaluate(async([cal,wait,vec,hud,uns])=>{__sbr.newLife('thd');await __sbr.settle();eval(cal);used=0;render();await __sbr.settle();
+  const sl=t=>new Promise(r=>setTimeout(r,t));const tap=()=>{used=BAL.time.khac;const n=document.getElementById('next');n.disabled=false;n.click()};
+  {const k=__sbr.key();tap();await __sbr.after(k)}/* one buổi before the flip (→ tối), answered as a player */
+  /* the flip tap (tối of the last tuần): the night before it (Kính sự phòng, the night scene) is answered as a player until the date changes;
+     from the moment the date changes nothing is answered */
+  const k0=__sbr.key();const b0=__sbr.busy;__sbr.busy=function(){if(__sbr.key()!==k0)throw 'flip';return b0.call(this)};/* settle stops the instant the date changes */
+  tap();try{for(let i=0;i<240&&__sbr.key()===k0;i++){await __sbr.settle1();await sl(250);if(i%12===11&&__sbr.key()===k0&&!b0.call(__sbr))tap()}}catch(e){if(e!=='flip')throw e}finally{__sbr.busy=b0}
+  for(let i=0;i<200&&((typeof SP13!=='undefined'&&SP13.nb)||__sbr.dawn()||!!document.querySelector('.kmov:not(.km-out) button,#kmrew button'));i++){/* the new-day host / a scene closes (not a card) */
+   if(__sbr.dawn()){const d=document.getElementById('dawn');const bt=[...d.querySelectorAll('button')].filter(x=>__sbr.vis(x));if(bt.length)bt[bt.length-1].click();else{d.classList.remove('on');d.hidden=true}}
+   const sc=document.querySelector('.kmov:not(.km-out) button,#kmrew button');if(sc)sc.click();await sl(100)}
+  await sl(wait);const L=eval(uns);const all=Q.concat(typeof SP13!=='undefined'?SP13.L.map(x=>x.m):[],typeof EVHOLD!=='undefined'?EVHOLD.map(h=>h.m):[]);
+  const code=all.filter(m=>m&&m.opts&&m.opts.length&&typeof jqSaveable==='function'&&!jqSaveable(m)).map(m=>String(m.t||'').slice(0,40)+(m.__rkLen?' ra '+m.__rkLen:''));return{code,k0,key:__sbr.key(),v:eval(vec)(S),hud:eval(hud)(),L,stat:{sp:typeof SP13!=='undefined'?SP13.stat.unsaved||0:0,jq:typeof JQ!=='undefined'?JQ.stat:{}}}},[FCAL[flip],wait,VEC,HUD,UNSEEN]);
+ const t=await reloadTitle(p,open);let a=null,duty=null;
+ if(t.cont){await cont(p);a=await p.evaluate(([vec,hud,uns])=>({key:__sbr.key(),v:eval(vec)(S),hud:eval(hud)(),L:eval(uns),fail:(window.__rcpFail||[]).map(x=>x.slice(0,2).join(':'))}),[VEC,HUD,UNSEEN]);
+  /* the cost card answered after the reload: «Chu toàn lễ nghĩa» pays bạc (or «Bớt lễ nghĩa» costs Danh) as on the card */
+  duty=await p.evaluate(()=>{const all=Q.concat(typeof SP13!=='undefined'?SP13.L.map(x=>x.m):[]);const m=all.find(x=>/· Lễ nghĩa$/.test(String(x.t||''))||(x.opts||[]).some(o=>o.n==='Chu toàn lễ nghĩa'));if(!m)return null;
+   const o=m.opts.find(o=>o.n==='Chu toàn lễ nghĩa');const b0=S.bac,d0=S.danh;const i=Q.indexOf(m);if(i<0){Q.unshift(m);const j=SP13.L.findIndex(x=>x.m===m);if(j>=0)SP13.L.splice(j,1)}else if(i>0){Q.splice(i,1);Q.unshift(m)}
+   showModal();chooseM(m.opts.indexOf(o));return{fx:o.fx,db:S.bac-b0,dd:S.danh-d0}})}
+ const miss=[];if(a){const A=a.L.slice();for(const x of r.L){const i=A.indexOf(x);if(i<0)miss.push(x);else A.splice(i,1)}}
+ const dutyOk=!duty||(duty.db===duty.fx.bac||duty.dd<0);
+ const pass=t.cont&&a&&a.key===r.key&&a.v===r.v&&a.hud===r.hud&&!miss.length&&dutyOk&&!pe.length;
+ return{pass,line:`${flip} ${wait} ms · ${r.k0} → ${r.key} · open/waiting ${r.L.length} (${r.L.filter(x=>x.endsWith('*')).length} with choices): ${r.L.join(' | ')}
+    after reload ${a?a.key:'NO «Tiếp tục»'} · ${a?(miss.length?'LOST '+miss.length+': '+miss.join(' | '):'every card back ('+a.L.length+')'):''}${a&&a.v!==r.v?' · DRIFT '+a.v+' (was '+r.v+')':a?' · same numbers':''}${a&&a.hud!==r.hud?' · HUD '+a.hud:''}${duty?` · Lễ nghĩa after reload: Bạc ${duty.db} (card ${duty.fx.bac})${dutyOk?'':' WRONG'}`:' · no Lễ nghĩa card'}${r.code.length?' · code cards with no generator at the flip: '+r.code.join(' | '):''}${a&&a.fail.length?' · rcpFail '+a.fail.join(','):''}${pe.length?' · pageerror '+pe[0]:''}`}})}
+
 /* ---------- drift ---------- */
 async function drift(b,dev,url,seed){const one=wait=>play(b,dev,url,seed,async(p,open,pe)=>{await open();
  const r=await p.evaluate(async([v])=>{const V=eval(v);__sbr.newLife('thd');await __sbr.settle();S.month=12;S.tuan=2;S.buoi=B4L-1;used=0;render();await __sbr.settle();
@@ -121,6 +157,8 @@ async function drift(b,dev,url,seed){const one=wait=>play(b,dev,url,seed,async(p
 
 (async()=>{const srv=await D.serveRoot();const b=await chromium.launch();const url=srv.url+PAGE;let fail=0,n=0;const seed=+SEED;
  const C=[['tinbao',tinbao],['held',held],['nl-0s',(b,d,u,s)=>nl0(b,d,u,s,false)],['nl-card',nlCardCase],['nl-death',(b,d,u,s)=>nl0(b,d,u,s,true)],['nl-4s',nl4],['drift',drift]];
- for(const dev of DEVS.split(','))for(const [name,fn] of C){if(!want(name))continue;let r;try{r=await fn(b,dev,url,seed)}catch(e){r={pass:false,line:'ERROR '+String(e&&e.message||e).slice(0,200)}}
+ const FCF=(process.env.SUL_FC||'month,year').split(','),FCW=(process.env.SUL_FCW||'0,3000').split(',').map(Number),FCS=(process.env.SUL_FCS||'1,2').split(',').map(Number);
+ for(const f of FCF)for(const w of FCW)for(const s of FCS)C.push([`flip-${f}-${w/1000}s-s${s}`,(b,d,u)=>flipcards(b,d,u,s,f,w)]);
+ for(const dev of DEVS.split(','))for(const [name,fn] of C){if(!want(name)&&!(ONLY.includes('flip')&&name.startsWith('flip-')))continue;let r;try{r=await fn(b,dev,url,seed)}catch(e){r={pass:false,line:'ERROR '+String(e&&e.message||e).slice(0,200)}}
   n++;if(!r.pass)fail++;console.log(`${r.pass?'PASS':'FAIL'} ${dev} ${name} · ${r.line}`)}
  console.log(`${fail?'SAVE-UNSEEN FAIL '+fail+'/'+n:'SAVE-UNSEEN PASS '+n+'/'+n}${MUT?' (MUTATE '+MUT+')':''} · page ${PAGE}`);await b.close();srv.close();process.exit(fail?1:0)})().catch(e=>{console.error(e);process.exit(2)});

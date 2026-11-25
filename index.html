@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"f3a2c8db","t":"2026-11-25T14:42Z","c":"Khi uất ức quá, nàng có lúc không giữ được lòng; mỗi cách phát tiết đều có được có mất.","b":"1cfffd28ad15","h":[{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"}]};
+window.CTM_BI={"s":"aff8d163+","t":"2026-11-25T14:43Z","c":"Khi uất ức quá, nàng có lúc không giữ được lòng; mỗi cách phát tiết đều có được có mất.","b":"85c121f1e770","h":[{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1623,7 +1623,7 @@ const isMenuCard=m=>!!(m&&/\bkptitle\b/.test(m.cls||""));
    it lands in (a save, the co-op week merge that rebuilds S / rivals from JSON, the AFK carry). A person who no longer exists → the card
    LAPSES (no effect, one short log line), never a road whose effect is lost. A choice card with no generator also lapses with the log line
    where the merge / carry would drop it (serQ({lap:1})). The person lookup is the shared one (jemo emoKey / emoByKey). */
-const QRC={};let RCPRE=0;
+const QRC={};let RCPRE=0;const RCP_MAX=4000;/* the carried args of one card (chars) */
 function rcpP(x){try{if(!x||typeof x!=="object"||typeof emoKey!=="function")return null;if(!(x===S||(S&&x===S.emp)||(S&&x===S.thO)||x.id!=null||x.sid!=null))return null;
  const k=emoKey(x);if(!k||/^x\d/.test(k))return null;return emoByKey(k)===x?k:null}catch(e){return null}}
 function rcpEnc(x,d){d=d||0;if(d>4)throw 0;if(x==null||typeof x==="number"||typeof x==="string"||typeof x==="boolean")return x;if(typeof x==="function")throw 0;
@@ -1632,9 +1632,9 @@ function rcpEnc(x,d){d=d||0;if(d>4)throw 0;if(x==null||typeof x==="number"||type
 function rcpDec(x){if(x==null||typeof x!=="object")return x;if(Array.isArray(x))return x.map(rcpDec);
  if("@p" in x){const p=typeof emoByKey==="function"?emoByKey(String(x["@p"])):null;if(!p||p.alive===false||p.dead)throw 0;return p}const o={};for(const i in x)o[i]=rcpDec(x[i]);return o}
 /* wrap a card generator: every choice card it returns carries rk (kind) + ra (its arguments, people as ids); RCPRE = 1 while a card is made again */
-function rcpReg(k,fn){QRC[k]=fn;return function(){const m=fn.apply(this,arguments);try{if(m&&m.opts&&m.opts.length&&!m.pid&&!RCPRE){const a=rcpEnc([...arguments]);const j=JSON.stringify(a);if(j.length<4000){m.rk=k;m.ra=a}}}catch(e){}return m}}
+function rcpReg(k,fn){QRC[k]=fn;return function(){const m=fn.apply(this,arguments);try{if(m&&m.opts&&m.opts.length&&!m.pid&&!RCPRE){const a=rcpEnc([...arguments]);const j=JSON.stringify(a);if(j.length<RCP_MAX){m.rk=k;m.ra=a}else m.__rkLen=j.length}}catch(e){}return m}}
 const QRCF=[];const rcpF=(e,w)=>{QRCF.push([e&&e.rk,w,typeof day==="function"?day():0]);if(QRCF.length>20)QRCF.shift();return null};window.__rcpFail=QRCF;/* debug: why a card could not be made again */
-function rcpMk(e){const fn=QRC[e&&e.rk];if(!fn)return rcpF(e,"no generator");let a;try{a=rcpDec(e.ra||[])}catch(x){return rcpF(e,"person gone "+JSON.stringify(e.ra).slice(0,80))}RCPRE=1;let m=null;try{m=fn.apply(null,a)}catch(x){m=null;rcpF(e,"threw "+(x&&x.message))}finally{RCPRE=0}
+function rcpMk(e){const fn=QRC[e&&e.rk];if(!fn)return rcpF(e,"no generator");let a;try{a=rcpDec(e.ra||[])}catch(x){return rcpF(e,"person gone "+JSON.stringify(e.ra).slice(0,80))}RCPRE=1;let m=null;const Q0=typeof Q!=="undefined"?Q:null,had=new Set(Q0||[]);try{m=fn.apply(null,a)}catch(x){m=null;rcpF(e,"threw "+(x&&x.message))}finally{RCPRE=0;/* save-unseen-lists r2: a generator that queues its own card (kitPanel) hands it back here, never a second copy in Q */try{if(m&&Q0&&Q===Q0&&!had.has(m)){const i=Q.indexOf(m);if(i>=0)Q.splice(i,1)}}catch(x){}}
  if(!m||!m.opts||!m.opts.length)return rcpF(e,"no choice now");m.rk=e.rk;m.ra=e.ra;if(e.t)m.t=e.t;if(e.cls&&!m.cls)m.cls=e.cls;return m}
 const rcpLapse=t=>{try{log(`«${String(t||"Việc khó xử").replace(/</g,"&lt;")}»: việc đã qua, không còn kịp đáp.`)}catch(e){}};
 /* one card in its save form: pid → {pid,pp,t}; a carried generator card → {rk,ra,t,cls}; a notice → its text; a choice with no route → lap (opt.lap) or nothing */
@@ -46867,17 +46867,32 @@ function econStipend(p){const r=rkOf(p),me=p===S,staff=(p.staff||[]).length;let 
    if(bonus)R.push(["Ân thưởng",`+${bonus} bạc`,"g"]);if(home)R.push(["Nhà gửi vào",`${S.origin.n}: +${home} bạc`,"g"]);if(pat)R.push(["Việc vặt",`${rkName(pat.v)} ${pat.v.name} trả công: +${pat.n} bạc`,"g"]);
    R.push(["Còn",`Bạc ${S.bac}`,"n"]);
    const ttl=`Bổng lộc tháng ${econMonthName()}`;const card={ev:1,t:ttl,who:typeof pMe==="function"?pMe():null,h:kitRows(R)};
-   const sk=BAL.dutySkip.danh+Math.floor(Math.min(7,r)/2);const what=[d?`lễ nghĩa (lễ tiết, thưởng người hầu, tiếp khách) ${d} bạc`:"",bt?`ban thưởng phi tần dưới ${bt} bạc`:""].filter(Boolean).join(" · ");
-   const dutyOpts=()=>[{n:"Chu toàn lễ nghĩa",fx:Object.assign({bac:-(d+bt)},d&&BAL.dutyDanh[Math.min(7,rkOf(S))]?{danh:BAL.dutyDanh[Math.min(7,rkOf(S))]}:{}),x:`tốn: Bạc -${d+bt} · thành: giữ thể diện${BAL.dutyDanh[Math.min(7,rkOf(S))]?`, Danh +${BAL.dutyDanh[Math.min(7,rkOf(S))]}`:""}${bt?" · phi tần được thưởng quý ngươi hơn":""}`,go:()=>{const x=econDoDuty(S,true,true);if(x.paid)log(`Ngươi chu toàn lễ nghĩa tháng: Bạc -${d+bt}${x.dg?`, Danh +${x.dg}`:""}.`);else log(`Không đủ bạc lo lễ nghĩa: Danh -${x.dn}${x.du?`, Đức -${x.du}`:""}.`)}},
-     {n:"Bớt lễ nghĩa",fx:{danh:-sk},x:`thành: giữ lại ${d+bt} lượng bạc · mất: Danh -${sk}${BAL.dutySkip.duc?`, Đức -${BAL.dutySkip.duc}`:""}`,go:()=>{econDoDuty(S,false,true);log(`Ngươi bớt lễ nghĩa tháng: Danh -${sk}${BAL.dutySkip.duc?`, Đức -${BAL.dutySkip.duc}`:""}.`)}}];
-   const dutyTxt=`<p class="past">Việc theo phẩm ${rkName(S)} tháng này: ${what}.</p>`;let follow=null;
-   const ev=SK&&typeof stipEvent==="function"?stipEvent(G,SK):null;
-   if(ev&&Array.isArray(ev.opts)&&ev.opts.length){card.h+=`<p class="past">Thái giám Nội vụ phủ đưa bổng lộc tới, mắt không dám nhìn thẳng. Phần bị cắt xén ngươi tính sao?</p>`;card.opts=ev.opts;card.evId=ev.evId;card.bl=1;
-    if(d||bt)follow={ev:1,t:`${ttl} · Lễ nghĩa`,who:card.who,h:dutyTxt,opts:dutyOpts(),bl:1}}
-   else if(d||bt){card.h+=dutyTxt;card.opts=dutyOpts();card.bl=1}
-   else card.h+=`<p class="past">${econNoOpt(S)}</p>`;
+   const sk=BAL.dutySkip.danh+Math.floor(Math.min(7,r)/2);
+   /* save-unseen-lists r2 (rv r2 FIX 1, LAW 2/3/6c): the stipend card and its «· Lễ nghĩa» follow are made by ONE pure builder (econStipCard /
+      econDutyCard, j3 rcpReg) from plain numbers + the skim as data, so a true reload makes them again from the sổ. The money above was applied
+      BEFORE the card; the builders only BUILD (no pay, no goods, no roll): a remake never pays twice and the cost card cannot be skipped by reload. */
+   const A={ttl,h:card.h,d,bt,sk,dd:BAL.dutyDanh[Math.min(7,rkOf(S))]||0,rn:rkName(S),noOpt:econNoOpt(S)};
+   if(SK){A.SK={bac:SK.bac||0,cut:!!SK.cut,why:SK.why||"",items:SK.items||0,sup:SK.sup||null};A.G=typeof ptGLite==="function"?JSON.stringify(ptGLite(G)):null}/* one string: j3 rcpEnc carries 4 levels */
+   let built=null;ECONLV={G,SK};try{built=econStipCard(A)}catch(e){console.error("econ card",e)}finally{ECONLV=null}
+   if(built){Object.assign(card,built);card.h=built.h}
+   const follow=built&&built.__f&&(d||bt)?econDutyCard({ttl,d,bt,sk,dd:A.dd,rn:A.rn}):null;if(built)delete card.__f;
    Q.push(card);if(follow)Q.push(follow);try{if(typeof stipShow==="function")stipShow(G,net,SK,1)}catch(e){console.error("stip show",e)}}else econDoDuty(p,true)}catch(e){console.error("econ card",e)}
  return line};
+/* save-unseen-lists r2: the pure card builders (see econStipend). A = plain data: ttl, h (rows), d / bt (lễ nghĩa / ban thưởng bạc), sk (Danh lost
+   if she cuts it), dd (Danh gained), rn (rank name), noOpt, SK (the skim, sup as a person id) + G (the goods as inventory indexes, jptime ptGLite).
+   ECONLV = the live G / SK on the first build only (the remake rebuilds them from A: ptGBack finds the real pieces again, law 6c). */
+let ECONLV=null;
+function econDutyOpts(A){const d=A.d,bt=A.bt,sk=A.sk,dd=A.dd;
+ return [{n:"Chu toàn lễ nghĩa",fx:Object.assign({bac:-(d+bt)},d&&dd?{danh:dd}:{}),x:`tốn: Bạc -${d+bt} · thành: giữ thể diện${dd?`, Danh +${dd}`:""}${bt?" · phi tần được thưởng quý ngươi hơn":""}`,go:()=>{const x=econDoDuty(S,true,true);if(x.paid)log(`Ngươi chu toàn lễ nghĩa tháng: Bạc -${d+bt}${x.dg?`, Danh +${x.dg}`:""}.`);else log(`Không đủ bạc lo lễ nghĩa: Danh -${x.dn}${x.du?`, Đức -${x.du}`:""}.`)}},
+  {n:"Bớt lễ nghĩa",fx:{danh:-sk},x:`thành: giữ lại ${d+bt} lượng bạc · mất: Danh -${sk}${BAL.dutySkip.duc?`, Đức -${BAL.dutySkip.duc}`:""}`,go:()=>{econDoDuty(S,false,true);log(`Ngươi bớt lễ nghĩa tháng: Danh -${sk}${BAL.dutySkip.duc?`, Đức -${BAL.dutySkip.duc}`:""}.`)}}]}
+function econDutyTxt(A){const what=[A.d?`lễ nghĩa (lễ tiết, thưởng người hầu, tiếp khách) ${A.d} bạc`:"",A.bt?`ban thưởng phi tần dưới ${A.bt} bạc`:""].filter(Boolean).join(" · ");return `<p class="past">Việc theo phẩm ${A.rn} tháng này: ${what}.</p>`}
+const econStipCard=rcpReg("stipCard",A=>{const L=RCPRE?null:ECONLV;const card={ev:1,t:A.ttl,who:typeof pMe==="function"?pMe():null,h:A.h};
+ let ev=null;if(A.SK&&typeof stipEvent==="function"){const SK=L&&L.SK||A.SK;const G=L&&L.G||(typeof ptGBack==="function"&&A.G?ptGBack(JSON.parse(A.G)):[]);ev=stipEvent(G,SK)}
+ if(ev&&Array.isArray(ev.opts)&&ev.opts.length){card.h+=`<p class="past">Thái giám Nội vụ phủ đưa bổng lộc tới, mắt không dám nhìn thẳng. Phần bị cắt xén ngươi tính sao?</p>`;card.opts=ev.opts;card.evId=ev.evId;card.bl=1;card.__f=1}
+ else if(A.d||A.bt){card.h+=econDutyTxt(A);card.opts=econDutyOpts(A);card.bl=1}
+ else card.h+=`<p class="past">${A.noOpt}</p>`;
+ return card});
+const econDutyCard=rcpReg("stipDuty",A=>({ev:1,t:`${A.ttl} · Lễ nghĩa`,who:typeof pMe==="function"?pMe():null,h:econDutyTxt(A),opts:econDutyOpts(A),bl:1}));
 blCard=function(){return `<p>Bổng lộc phát ngày đầu mỗi tháng, theo phẩm vị (mọi phi tần như nhau). Mỗi kẻ hầu ăn công ${BAL.wage} bạc/tháng. Phẩm càng cao, lễ nghĩa càng tốn.</p>${kitRows(BAL.pay.map((b,i)=>[i>=7?"Hoàng hậu":RANKS[i].n,[`<span class="ef t">${b} bạc</span>`,typeof stipRankTxt==="function"?stipRankTxt(i):BLG[i],BAL.duty[i]?`lễ nghĩa ${BAL.duty[i]}`:"",BAL.banThuong[i]?`ban thưởng ${BAL.banThuong[i]}`:""].filter(Boolean),"n"]))}<p class="past">Lãnh cung: chỉ ${BAL.payCold} bạc. Cấm túc: nửa bổng. Hoàng hậu ghét ngươi (thiện cảm dưới -30): mỗi tháng sai Nội vụ phủ khất bổng (bớt 3 phần 10): ${word(20)}. Sinh con, được ân thưởng: cộng thêm một lần.</p>${typeof stipRuleTxt==="function"?stipRuleTxt():""}`};
 /* a good night: Hoàng thượng's thưởng also brings silver (same for every consort). It is the night entry of j20's reward silver (BBAC), so it
    goes through the ONE ân thưởng path: inside bestow, before the tray (j93 kitReward) counts its coins, in the awards ledger (S.awards), the
@@ -64744,16 +64759,20 @@ function mockerOf(){try{const L=(typeof liveRivals==="function"?liveRivals(false
 function morningAfter(){const M=S&&S.neMorn;if(!M||S.dead)return;if(M.d===wk())return;S.neMorn=null;const A=BAL.nightEnd.after;
  const ui=!window.__bot&&!(typeof quiet!=="undefined"&&quiet)&&typeof Q!=="undefined";
  if(M.tier==="warm"){apply({danh:A.warmDanh});if(!ui)return;
-  let who;try{who=typeof pEunCourt==="function"?pEunCourt("ksp"):undefined}catch(e){}
-  Q.push({t:"Kính sự phòng ghi sổ",who,art:"https://ctm-img.victoria-tntt.workers.dev/img/act-tong-quan-ksp-dem-chuyen.webp",hideOut:true,h:`<p>Sáng sớm, tổng quản Kính sự phòng đến cung ngươi, mở sổ ghi: “Đêm qua ${RANKS[S.rank]?RANKS[S.rank].n+" ":""}${S.name} hầu giá, Hoàng thượng rất vừa ý.”</p><p>Chưa đến giờ thỉnh an, cung nữ các cung đã xì xào bàn tán.</p><p class="past">Danh +${A.warmDanh}.</p>`,
-   opts:[{n:"Tiếp tục",fx:{},hideOut:true,hint:"không đổi gì thêm",risk:"an toàn",go:()=>{}}]});return}
- if(M.tier==="cold"){apply({danh:A.coldDanh});if(!ui)return;const m=mockerOf();const v=m&&m.v;const named=v&&m.known;
-  const nm=named?whoOf(v.id,v.name):"một vị phi tần ngươi chưa quen";let who;try{who=named&&typeof pv==="function"?pv(v):undefined}catch(e){}
-  Q.push({t:"Lời ra tiếng vào",who,art:"https://ctm-img.victoria-tntt.workers.dev/img/ev-toil-rival-tease.webp",hideOut:true,h:`<p>${nm.charAt(0).toUpperCase()+nm.slice(1)} che miệng cười khi gặp ngươi lúc thỉnh an: “Nghe nói đêm qua ${v?kSay(v,S,"{goi}",{m:"cool"}):"muội muội"} hầu giá, mà Hoàng thượng chẳng mấy vui lòng?”</p><p>Mấy phi tần khác liếc nhau, khẽ cười.</p><p class="past">Danh ${A.coldDanh}.</p>`,
+  Q.push(neMornCard("warm",null,false));return}
+ if(M.tier==="cold"){apply({danh:A.coldDanh});if(!ui)return;const m=mockerOf();Q.push(neMornCard("cold",m&&m.v||null,!!(m&&m.v&&m.known)))}}
+/* save-unseen-lists r2 (rv r2 FIX 1/3, LAW 11): the morning card is carried as data (j3 rcpReg: tier + the mocker as an id + named); its Danh was
+   applied BEFORE the card (and is in the same write), the remake only rebuilds it (no second Danh) */
+const neMornCard=rcpReg("neMorn",(tier,v,named)=>{const A=BAL.nightEnd.after;
+ if(tier==="warm"){let who;try{who=typeof pEunCourt==="function"?pEunCourt("ksp"):undefined}catch(e){}
+  return {t:"Kính sự phòng ghi sổ",who,art:"https://ctm-img.victoria-tntt.workers.dev/img/act-tong-quan-ksp-dem-chuyen.webp",hideOut:true,h:`<p>Sáng sớm, tổng quản Kính sự phòng đến cung ngươi, mở sổ ghi: “Đêm qua ${RANKS[S.rank]?RANKS[S.rank].n+" ":""}${S.name} hầu giá, Hoàng thượng rất vừa ý.”</p><p>Chưa đến giờ thỉnh an, cung nữ các cung đã xì xào bàn tán.</p><p class="past">Danh +${A.warmDanh}.</p>`,
+   opts:[{n:"Tiếp tục",fx:{},hideOut:true,hint:"không đổi gì thêm",risk:"an toàn",go:()=>{}}]}}
+ const nm=named&&v?whoOf(v.id,v.name):"một vị phi tần ngươi chưa quen";let who;try{who=named&&typeof pv==="function"?pv(v):undefined}catch(e){}
+return {t:"Lời ra tiếng vào",who,art:"https://ctm-img.victoria-tntt.workers.dev/img/ev-toil-rival-tease.webp",hideOut:true,h:`<p>${nm.charAt(0).toUpperCase()+nm.slice(1)} che miệng cười khi gặp ngươi lúc thỉnh an: “Nghe nói đêm qua ${v?kSay(v,S,"{goi}",{m:"cool"}):"muội muội"} hầu giá, mà Hoàng thượng chẳng mấy vui lòng?”</p><p>Mấy phi tần khác liếc nhau, khẽ cười.</p><p class="past">Danh ${A.coldDanh}.</p>`,
    opts:[{n:"Nhẫn nhịn",fx:{duc:A.bearDuc,danh:A.bearDanh},hideOut:true,hint:"giữ tiếng hiền đức, nhưng người ta cho là ngươi yếu thế",risk:"an toàn",go:()=>{log("Ta nhẫn nhịn, không đáp một lời.")}},
     {n:"Cười trừ",fx:{},hideOut:true,hint:"cho qua, không đổi gì",risk:"an toàn",go:()=>{log("Ta cười trừ cho qua.")}},
     {n:"Đáp lại",fx:{suc:A.replySuc},p:BAL.toil.replyWin,hideOut:true,hint:"đáp khéo thì thêm danh tiếng, hên xui, hỏng thì nàng ta càng ghét",risk:"có rủi ro",
-     go:()=>{if(roll(BAL.toil.replyWin)){apply({danh:BAL.toil.replyDanh});log("Ta đáp lại khéo léo, người nghe gật gù.")}else{if(v){try{relAdd(S,v,BAL.eff.jne.go)}catch(e){}ghenUp(v,2,"bị ngươi đáp lời không nể",S)}log("Ta đáp lại, không khí càng gượng.")}}}]})}}
+     go:()=>{if(roll(BAL.toil.replyWin)){apply({danh:BAL.toil.replyDanh});log("Ta đáp lại khéo léo, người nghe gật gù.")}else{if(v){try{relAdd(S,v,BAL.eff.jne.go)}catch(e){}ghenUp(v,2,"bị ngươi đáp lời không nể",S)}log("Ta đáp lại, không khí càng gượng.")}}}]}});
 {const et1=endTurn;endTurn=function(){const r=et1.apply(this,arguments);try{morningAfter()}catch(e){console.error(e)}return r}}
 window.kneMorningAfter=morningAfter;
 
@@ -69915,11 +69934,14 @@ let RUMT=null;
 (function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead)dhSync(S)}catch(e){console.error("dh",e)}return r}})();
 /* ---------- her new title: a kit reward panel, wear it now or later ---------- */
 function dhNotice(key){const o=dhObj(S,key);if(!o||typeof kitPanel!=="function")return;const up=(S.dh[key].i||0)>0;
- if(typeof log==="function")log(up?`Danh hiệu «${o.name}» lên bậc ${KIT_TIER_NAME[Math.min(7,o.tier)]}.`:`Ngươi được danh hiệu «${o.name}».`);
+ if(typeof log==="function"&&!RCPRE)log(up?`Danh hiệu «${o.name}» lên bậc ${KIT_TIER_NAME[Math.min(7,o.tier)]}.`:`Ngươi được danh hiệu «${o.name}».`);
  const worn=wornKey(S)===key;
- kitPanel({kind:"reward",title:up?"Danh hiệu lên bậc":"Danh hiệu mới",sub:o.when,dh:1,
+ return kitPanel({kind:"reward",title:up?"Danh hiệu lên bậc":"Danh hiệu mới",sub:o.when,dh:1,
   sections:[{h:"",html:`<div class="kt3">${kitTitlePlate(o)}</div>`},{h:"",rows:[["Cách có",esc(o.how)],["Khi đeo",esc(chTxt(key,S.dh[key].i)||o.fx||"chỉ để làm đẹp")],["Xem lại","Nhiệm vụ › Danh hiệu"]]}],
   opts:worn?[{n:"Đã hiểu",fx:{},x:"",go:()=>dhApplyFx(S)}]:[{n:"Đeo ngay",fx:{},x:chTxt(key,S.dh[key].i)||o.fx||"tấm danh hiệu trên đầu",go:()=>dhPick(key)},{n:"Để sau",fx:{},x:"",go:()=>{}}]})}
+/* save-unseen-lists r2 (rv r2 FIX 1): «Danh hiệu mới / lên bậc» is carried by its key (j3 rcpReg) and made again on load; the title itself was
+   granted before the card (dhInc), the remake only rebuilds the panel (no second log line, no second grant) */
+dhNotice=rcpReg("dhNotice",dhNotice);
 /* OD 21/11 ~04:14Z (#54): the new-title plate sits ON the event picture (caption at its bottom centre, like the chapter slide title), not as its own band under it.
    Applies to every title dialog (Danh hiệu mới / lên bậc / đeo): the .kt3 plate of the info column moves into the picture (.k3ev). The drawn title art is parked. */
 function kitDhCap(){try{const d=document.querySelector("#modal:not([hidden]) .dlg");if(!d)return;const ev=d.querySelector(".k3right>.k3ev,.k3body>.k3mpic,.k3ev,.k3mpic"),src=[...d.querySelectorAll(".kt3:not(.kdhcap)")].find(e=>!e.closest(".k3ev,.k3mpic")&&e.querySelector(".kdh,.kdh-cap,.j59t"));if(!ev||!src)return;/* kit-titleplate (MAIN 124 G4 #54): the dialog is laid out in TWO shapes depending on timing / device load: picture in .k3right>.k3ev (plate in .k3right) or picture .k3body>.k3mpic (plate in a .kpsec section, no .k3right column). The old selector only knew the first, so on a busy device the plate stayed a band under the picture. Now any plate of the dialog that is not already in the picture moves into the picture. */
@@ -75062,8 +75084,11 @@ function spyOther95b(y){try{return typeof spyIn70==="function"&&spyIn70(S,y)}cat
 function j95bHear(r){const y=RV(r.y);if(!y||!y.alive)return;r.known=1;J95B.stat.heard++;const x=r.x!=null?RV(r.x):null;
  const src=x?`người bên cung ${x.name}`:"có kẻ";const txt=`Nghe đồn ${src} đã rỉ tai ${y.name} rằng ngươi ${r.txt}. Dạo này ${y.name} nhìn ngươi lạnh hẳn đi.`;
  try{noteAdd(y.id,`Nghe đồn: ${src} rỉ tai nàng rằng ngươi ${r.txt} (lời đồn)`,1)}catch(e){}J95B.notes.push(txt);if(J95B.notes.length>100)J95B.notes.splice(0,50);
- Q.push({t:"Nghe đồn",who:pv(y),opt:1,h:`<p>${txt}</p><p><i>(Lời đồn; ngươi chưa thể chắc ai đã nói gì.)</i></p>`,rum95:r.u,
-  opts:j95bRumOpts(r,y,x)})}
+ Q.push(j95bRumCard(r.u))}
+/* save-unseen-lists r2 (rv r2 FIX 1, LAW 11): «Nghe đồn» is carried by the rumour id (j3 rcpReg) and made again from S.j95b.rum on load */
+const j95bRumCard=rcpReg("j95bRum",u=>{const z=j95bZ();const r=z.rum.find(q=>q.u===u);if(!r||r.cleared)return null;const y=RV(r.y);if(!y||!y.alive)return null;const x=r.x!=null?RV(r.x):null;
+ const src=x?`người bên cung ${x.name}`:"có kẻ";const txt=`Nghe đồn ${src} đã rỉ tai ${y.name} rằng ngươi ${r.txt}. Dạo này ${y.name} nhìn ngươi lạnh hẳn đi.`;
+ return{t:"Nghe đồn",who:pv(y),opt:1,h:`<p>${txt}</p><p><i>(Lời đồn; ngươi chưa thể chắc ai đã nói gì.)</i></p>`,rum95:r.u,opts:j95bRumOpts(r,y,x)}});
 /* port 16/11 (owner 11/15 07:15Z): whole Tốn / Được / Mất + odds word on every option */
 function j95bRumOpts(r,y,x){const oc=j95bClearOdds(r),ot=oddsCl(Math.min(35+eyes(S)*8+(S.tamco||0)/4,90));
  return[{n:`Sang gặp ${y.name} giải bày`,fx:{},x:`${word(oc)} · tốn: ${BAL.m95b.k} khắc · thành: hết hiểu lầm, ${y.name} bớt oán ngươi · hỏng: ${y.name} chưa tin, oán ngươi ${balSg(BAL.eff.j95b.j95bClear_3)} · (chuyện có thật thì khó giải, chỉ nguôi một nửa)`,go:()=>j95bClear(r.u,"card")},
@@ -75265,7 +75290,8 @@ const JQ={held:0,stat:{full:0,held:0,flushed:0}};
 function jqData(m){/* the card as plain data, or null when an option (or the card) carries code */try{if(!m||m.pid||!m.opts)return null;
   for(const o of m.opts)for(const k in o)if(typeof o[k]==="function")return null;for(const k in m)if(k!=="who"&&typeof m[k]==="function")return null;
   const c=JSON.parse(JSON.stringify(m,(k,v)=>k==="who"||k==="__b95"||k==="__c95"||k==="__aud95"?undefined:v));c.w=m.who&&m.who.w;c.$full=1;return c}catch(e){return null}}
-function jqSaveable(m){return !m||!!m.pid||!m.opts||!!jqData(m)}
+/* save-unseen-lists r2 (rv r2 FIX 1): a generator card (rk + ra, j3 rcpReg) is written as {rk,ra} and made again on load: saveable, never held / left out */
+function jqSaveable(m){return !m||!!m.pid||!!m.rk||!m.opts||!!jqData(m)}
 (function(){
  /* every card in queue order, each from its own save form (button-crawl-fix-2: the old loop paired cards with the filtered base list by index,
     so a menu card, a look-up panel or a generator card (rk) in the queue shifted every later notice onto the wrong entry) */
@@ -78603,7 +78629,7 @@ function eitPilfer(p,G){if(p===S)EIT_PIL=null;try{if(!p||p.dead||p.out||!G||!G.l
  /* the dearest piece that really arrived this month */
  let best=null;for(const g of G)for(const e of (g.E||[])){const v=(IT[e.k]&&itm(e.k).pr)||0;if(!best||v>best.v)best={g,e,v}}if(!best)return null;
  const i=p.inv.indexOf(best.e);if(i>=0)p.inv.splice(i,1);best.g.E.splice(best.g.E.indexOf(best.e),1);best.g.n=Math.max(0,best.g.n-1);if(!best.g.n)best.g.lost=true;best.g.pil=1;
- hit.pilN=(hit.pilN||0)+1;const X={p,s:hit,k:best.e.k,g:best.g};if(window.agOn&&agOn()&&hit!==p.maid){const v=best.v;X.sold=()=>eitPilSell(hit,v)}/* AG-ALL-2 G6: she sells it, as the maid player does (when unnoticed, or let off with it) */
+ hit.pilN=(hit.pilN||0)+1;const X={p,s:hit,k:best.e.k,g:best.g};if(window.agOn&&agOn()&&hit!==p.maid){const v=best.v;X.sold=()=>eitPilSell(hit,v);X.v=v}/* AG-ALL-2 G6: she sells it, as the maid player does (when unnoticed, or let off with it) */
  if(p!==S){eitPilNpc(X);return X}
  const P=BAL.eit.pil;const see=oddsCl(P.see+eyes(S)*P.seeMat+(S.maid&&S.maid!==hit&&(S.maid.loyal||0)>=BAL.loy.trust?P.seeMaid:0));
  if(roll(see))EIT_PIL=X;else if(X.sold)X.sold();return X}catch(e){console.error("eitPilfer",e);return null}}
@@ -78636,6 +78662,9 @@ function eitPilEvent(X){const s=X.s;const it=IT[X.k]||{n:X.k};const nm=it.n.repl
  const h=`<p>Kiểm lại đồ Nội vụ phủ phát, thiếu một ${STIP_UNIT[X.k]||"món"} ${nm.toLowerCase()}. Hỏi ra mới biết ${role} ${s.name} lén giữ lấy.</p>${kitRows([["Mất",`1 ${STIP_UNIT[X.k]||"món"} ${nm.toLowerCase()}`,"r"],["Gợi ý",`<span class="ef i">thiện cảm của ${s.name} với ngươi ${s.loyal|0}${s.spyFor?", có điều khả nghi":""}${s.pilN>1?`, đã ${s.pilN} lần`:""}.</span>`]])}`;
  const O=eitPilOpts(Object.assign({p:S},X)).map(o=>({n:o.n,fx:{},x:o.x,go:()=>{const r=o.go();if(r)log(r)}}));
  return{ev:1,t:"Kẻ hầu ăn bớt",who,h,opts:O}}
+/* save-unseen-lists r2 (rv r2 FIX 1, LAW 11): «Kẻ hầu ăn bớt» is carried as data (j3 rcpReg: the servant as an id, the piece kind, its price when
+   she would sell it); the piece itself left the chest before the card (eitPilfer) — the remake only rebuilds the answers, it never takes it twice */
+const eitPilCard=rcpReg("eitPil",(s,k,v)=>{if(!s||s.dead||s.alive===false)return null;const X={s,k};if(v!=null)X.sold=()=>eitPilSell(s,v);return eitPilEvent(X)});
 /* an NPC master who notices (eitPilSee) CHOOSES among the same four options (agent: punish / reward weights of her nết, a harsh nết ×harsh;
    BAL.ag.stf2.pilW); loop off → the old rule (harsh, else npcPun %) */
 function eitPilJudge(X){const p=X.p,P=BAL.eit.pil;const harsh=netRx(p,/Xảo quyệt|Kiêu ngạo|Thù dai|Kín đáo/);
@@ -78657,7 +78686,7 @@ function eitPilTake(ok){const m=srvM();const b=eitPilPick(m);if(!m||!b)return"";
  if(ok){const g=eitPilSell(S,b.v);return `Ngươi lén giữ ${nm} của ${m.name}, nhờ thái giám mang ra ngoài bán${g?`: Bạc +${g}`:""}.`}
  const X={p:m,s:S,k:b.e.k,g:null,sold:()=>eitPilSell(S,b.v)};return eitPilJudge(X)||""}
 (function(){if(typeof stipGoods!=="function")return;const g0=stipGoods;stipGoods=function(p,SK){const G=g0.apply(this,arguments);eitPilfer(p,G);return G};window.stipGoods=stipGoods})();
-(function(){if(typeof stipShow!=="function")return;const s0=stipShow;stipShow=function(){const r=s0.apply(this,arguments);try{if(EIT_PIL&&EIT_PIL.p===S)Q.push(eitPilEvent(EIT_PIL))}catch(e){console.error("eit pil ev",e)}EIT_PIL=null;return r};window.stipShow=stipShow})();
+(function(){if(typeof stipShow!=="function")return;const s0=stipShow;stipShow=function(){const r=s0.apply(this,arguments);try{if(EIT_PIL&&EIT_PIL.p===S)Q.push(eitPilCard(EIT_PIL.s,EIT_PIL.k,EIT_PIL.sold?EIT_PIL.v:null))}catch(e){console.error("eit pil ev",e)}EIT_PIL=null;return r};window.stipShow=stipShow})();
 
 /* ---------- 3. XIN CẤP LẠI Y PHỤC ---------- */
 /* how Nội vụ phủ regards her (0..100): rank, Sủng, a recent tip (jstip st.tip) up; every skim cause (thất sủng, a fault, a superior's grudge,
@@ -89610,9 +89639,12 @@ function startCard(w){const E=EVD[w.k];let m=null;try{m=E.card(w)}catch(e){wErr(
   if(sc&&sc.opts&&sc.opts.length){m.h=(m.h||"")+(sc.h||"");m.opts=sc.opts;if(!m.who&&sc.who)m.who=sc.who}}
  /* kit line format "word · tốn: … · thành: …" (j0 kitParse): a sure option has no odds word (ODDS CAP: the ladder has no "sure" word); kitParse reads its first label (thành / kèm) as is */
  return m}
+/* save-unseen-lists r2 (rv r2 FIX 1, LAW 11): a world event card («Hỏa hoạn lớn», «Sứ đoàn vào triều» …) is carried by its window id (j3 rcpReg) and made
+   again from the live window on load (the window over → the card lapses) */
+const worldCardK=rcpReg("world",id=>{let w=null;try{w=(worldWin()||[]).find(x=>x.id===id)}catch(e){}if(!w)return null;const m=startCard(w);if(m){if(!m.who)m.who=pEmp();if(!m.opts)delete m.opts}return m});
 function worldShow(){if(!S||S.dead)return;S.wwSeen=S.wwSeen||{};S.wwEnd=S.wwEnd||{};const A=worldWin(),z=wZ();
  for(const h of (z.H||[])){if(h.id==null||!h.end||S.wwEnd[h.id]||!S.wwSeen[h.id])continue;S.wwEnd[h.id]=1;Q.push({t:h.n||"Tin trong cung",who:pEmp(),h:`<p>${h.end}</p>`})}
- for(const w of A){if(S.wwSeen[w.id])continue;S.wwSeen[w.id]=1;const m=startCard(w);if(m){if(!m.who)m.who=pEmp();if(!m.opts)delete m.opts;Q.push(m)}}
+ for(const w of A){if(S.wwSeen[w.id])continue;S.wwSeen[w.id]=1;const m=worldCardK(w.id);if(m)Q.push(m)}
  const lo=z.seq-20;for(const k in S.wwSeen)if(+k<lo)delete S.wwSeen[k];for(const k in S.wwEnd)if(+k<lo)delete S.wwEnd[k]}
 {const e0=endTurn;endTurn=function(){const t0=S?now():0;const r=e0.apply(this,arguments);try{if(S&&!S.dead&&now()!==t0){worldTick();if(Q.length&&$("modal").hidden)showModal()}}catch(e){wErr("tick",e)}return r}}
 /* co-op guest: cards of windows the host opened */
@@ -90428,6 +90460,8 @@ function compCard(k,c){const sd=CI[c.id];if(!sd)return null;const X={};if(c.b!=n
   return c6(fill(st.text),{c:l.fx,w:g.fx,r:rr,ok:()=>{let tr="";if(o){const j=jc();tr=`${fill(o.name)}: ${fill(st.trace||o.trace)}.`;j.ob.push({sid:sd.id,name:fill(o.name),owner:o.owner==="me"?(S.name||"ngươi"):o.owner==="kho"?"Nội vụ phủ":(X.B?X.B.n:""),trace:fill(st.trace||o.trace),turn:S.turn});if(j.ob.length>Bf().obKeep)j.ob.splice(0,j.ob.length-Bf().obKeep)}
    return [fill((sd.outcomes||{})[id]),tr].filter(Boolean).join(" ")}})});
  return{t:`${fShort7(k)} · Chuyện bên lề hội`,who:X.B?X.B.f:(typeof pMaid==="function"&&S.maid?pMaid():pEmp()),h:`<p>${fill(sd.text)}</p>`,opts}}
+/* save-unseen-lists r2 (rv r2 FIX 1): «<tết> · Chuyện bên lề hội» is carried as data (j3 rcpReg: festival key + {id, b = rival id}) */
+compCard=rcpReg("j71cComp",compCard);
 const PEND7=[];
 if(typeof fDay7==="function"){const d0=fDay7;fDay7=function(k){const j=j7s();const P=j.plans&&j.plans[k];const planned=P&&P.y===S.year?P:null;const vi0=planned?planned.pp.vi:null;const me=planned?planned.me:0;const pp0=planned?planned.pp:null;
  LASTV[k]=null;const m=d0.apply(this,arguments);try{if(m&&on()&&!S.confined&&!(typeof isSrv==="function"&&isSrv())){const vi=vi0!=null?vi0:LASTV[k];const V=vi!=null&&FV7[k]?FV7[k][vi]:null;
@@ -92503,7 +92537,7 @@ function dcGateItem(f,st){const D=BAL.dc;const opts=[];const need=st.missing.len
    /* r3 review (fix-the-group of r2 item 3 on her side): the gate is built in endTurn, the NPCs' own festival loans run right after it (dcWeek) — when
       one of them took this very piece, the road is gone: say so and open the gate again with the roads still there (before: nothing happened, she
       went in lacking the colour, no word) */
-   try{log(`${L.w.n} của ${dcName(L.v)} đã có người mượn trước.`)}catch(e){}const st2=dcStat(S,f.k);if(st2&&(st2.miss||st2.refused))Q.unshift(dcGateItem(f,st2));else dcEnter(f)}});
+   try{log(`${L.w.n} của ${dcName(L.v)} đã có người mượn trước.`)}catch(e){}const st2=dcStat(S,f.k);if(st2&&(st2.miss||st2.refused))Q.unshift(dcGateK(f.k));else dcEnter(f)}});
  const buy=lack.length?dcBuyFit(S,lack):null;/* offered only when she has the silver (a road she can take) */
  if(buy&&S.bac>=buy.pr)opts.push({n:`Sai người mua ${buy.w.n} (${dcFamN(buy.f)}) ở Nội vụ phủ`,fx:{},x:`tốn: ${D.buy.khac} khắc, Bạc -${buy.pr} · thành: có màu ${dcFamN(buy.f)} cho lễ, trâm giữ lại trong rương`,
   go:()=>{if(dcBuy(S,buy)){spend(D.buy.khac);dcHer().ch="chg";try{log(`Mua ${buy.w.n} ở Nội vụ phủ để dự ${f.name}.`)}catch(e){}}dcEnter(f)}});
@@ -92511,11 +92545,14 @@ function dcGateItem(f,st){const D=BAL.dc;const opts=[];const need=st.missing.len
  opts.push({n:"Cáo lỗi, về cung nghỉ",fx:{},x:"thành: về cung nghỉ, không dự lễ",go:()=>dcOut(f)});
  const it={t:`Y phục dự ${f.name}`,h:dcFacts(st,f).map(s=>`<p>${s}</p>`).join(""),opts,ev:"dc",evId:"dc:"+f.k,must:1};
  DC_CUR=it;return it}
+/* save-unseen-lists r2 (rv r2 FIX 1): «Y phục dự <tết>» is carried by the festival key (j3 rcpReg) and made again from the live chest on load;
+   no festival today or nothing missing any more → no card (the gate lapses) */
+const dcGateK=rcpReg("dcGate",k=>{const f=dcFestNow();if(!f||f.k!==k)return null;const st=dcStat(S,k);if(!st||(!st.miss&&!st.refused))return null;return dcGateItem(f,st)});
 /* called by jdc0 inside the endTurn chain, after the new tuần began and before the festival events are queued */
 function dcTurn(){if(!S)return;try{dcMigTs()}catch(e){console.error("dcMigTs",e)}if(!dcOn()){/* r4b: loans come home whatever the dress-code switch (the Hội phối đồ lends through the same book) */try{dcReturn()}catch(e){console.error("dcReturn",e)}return}/* loans come home even in a tuần she dies (the NPCs' loans, and hers into her effects): law 6c */if(!S.dead)try{dcNpcSettle()}catch(e){console.error("dcNpcSettle",e)}/* mocked as they went in, before the pieces go back */try{dcReturn()}catch(e){console.error("dcReturn",e)}if(S.dead)return;
  const f=dcFestNow();if(!f||!dcHerOn())return;const F=dcHer();const key=dcKey(f);if(F.key===key)return;
  const st=dcStat(S,f.k);S.dcF={key,ch:null};if(!st||(!st.miss&&!st.refused)){S.dcF.ch="ok";return}
- Q.push(dcGateItem(f,st))}
+ Q.push(dcGateK(f.k))}
 /* ---------- NPC side + her season (outer endTurn wrapper) ---------- */
 /* NPC roads at a festival = hers (law 1): her own trâm of a missing colour first, else borrow from a consort who likes her (same dcBorrow / dcReturn) */
 function dcNpcFest(v,k){try{const st=dcStat(v,k);if(!st||(!st.miss&&!st.refused)||!st.missing.length)return;const own=dcOwnFit(v,st.missing,"tram")[0];const w=wdOf(v);
@@ -98699,7 +98736,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="1cfffd28ad15";window.CTM_BUILD=BUILD;
+const BUILD="85c121f1e770";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

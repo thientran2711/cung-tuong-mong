@@ -66,17 +66,32 @@ function econStipend(p){const r=rkOf(p),me=p===S,staff=(p.staff||[]).length;let 
    if(bonus)R.push(["Ân thưởng",`+${bonus} bạc`,"g"]);if(home)R.push(["Nhà gửi vào",`${S.origin.n}: +${home} bạc`,"g"]);if(pat)R.push(["Việc vặt",`${rkName(pat.v)} ${pat.v.name} trả công: +${pat.n} bạc`,"g"]);
    R.push(["Còn",`Bạc ${S.bac}`,"n"]);
    const ttl=`Bổng lộc tháng ${econMonthName()}`;const card={ev:1,t:ttl,who:typeof pMe==="function"?pMe():null,h:kitRows(R)};
-   const sk=BAL.dutySkip.danh+Math.floor(Math.min(7,r)/2);const what=[d?`lễ nghĩa (lễ tiết, thưởng người hầu, tiếp khách) ${d} bạc`:"",bt?`ban thưởng phi tần dưới ${bt} bạc`:""].filter(Boolean).join(" · ");
-   const dutyOpts=()=>[{n:"Chu toàn lễ nghĩa",fx:Object.assign({bac:-(d+bt)},d&&BAL.dutyDanh[Math.min(7,rkOf(S))]?{danh:BAL.dutyDanh[Math.min(7,rkOf(S))]}:{}),x:`tốn: Bạc -${d+bt} · thành: giữ thể diện${BAL.dutyDanh[Math.min(7,rkOf(S))]?`, Danh +${BAL.dutyDanh[Math.min(7,rkOf(S))]}`:""}${bt?" · phi tần được thưởng quý ngươi hơn":""}`,go:()=>{const x=econDoDuty(S,true,true);if(x.paid)log(`Ngươi chu toàn lễ nghĩa tháng: Bạc -${d+bt}${x.dg?`, Danh +${x.dg}`:""}.`);else log(`Không đủ bạc lo lễ nghĩa: Danh -${x.dn}${x.du?`, Đức -${x.du}`:""}.`)}},
-     {n:"Bớt lễ nghĩa",fx:{danh:-sk},x:`thành: giữ lại ${d+bt} lượng bạc · mất: Danh -${sk}${BAL.dutySkip.duc?`, Đức -${BAL.dutySkip.duc}`:""}`,go:()=>{econDoDuty(S,false,true);log(`Ngươi bớt lễ nghĩa tháng: Danh -${sk}${BAL.dutySkip.duc?`, Đức -${BAL.dutySkip.duc}`:""}.`)}}];
-   const dutyTxt=`<p class="past">Việc theo phẩm ${rkName(S)} tháng này: ${what}.</p>`;let follow=null;
-   const ev=SK&&typeof stipEvent==="function"?stipEvent(G,SK):null;
-   if(ev&&Array.isArray(ev.opts)&&ev.opts.length){card.h+=`<p class="past">Thái giám Nội vụ phủ đưa bổng lộc tới, mắt không dám nhìn thẳng. Phần bị cắt xén ngươi tính sao?</p>`;card.opts=ev.opts;card.evId=ev.evId;card.bl=1;
-    if(d||bt)follow={ev:1,t:`${ttl} · Lễ nghĩa`,who:card.who,h:dutyTxt,opts:dutyOpts(),bl:1}}
-   else if(d||bt){card.h+=dutyTxt;card.opts=dutyOpts();card.bl=1}
-   else card.h+=`<p class="past">${econNoOpt(S)}</p>`;
+   const sk=BAL.dutySkip.danh+Math.floor(Math.min(7,r)/2);
+   /* save-unseen-lists r2 (rv r2 FIX 1, LAW 2/3/6c): the stipend card and its «· Lễ nghĩa» follow are made by ONE pure builder (econStipCard /
+      econDutyCard, j3 rcpReg) from plain numbers + the skim as data, so a true reload makes them again from the sổ. The money above was applied
+      BEFORE the card; the builders only BUILD (no pay, no goods, no roll): a remake never pays twice and the cost card cannot be skipped by reload. */
+   const A={ttl,h:card.h,d,bt,sk,dd:BAL.dutyDanh[Math.min(7,rkOf(S))]||0,rn:rkName(S),noOpt:econNoOpt(S)};
+   if(SK){A.SK={bac:SK.bac||0,cut:!!SK.cut,why:SK.why||"",items:SK.items||0,sup:SK.sup||null};A.G=typeof ptGLite==="function"?JSON.stringify(ptGLite(G)):null}/* one string: j3 rcpEnc carries 4 levels */
+   let built=null;ECONLV={G,SK};try{built=econStipCard(A)}catch(e){console.error("econ card",e)}finally{ECONLV=null}
+   if(built){Object.assign(card,built);card.h=built.h}
+   const follow=built&&built.__f&&(d||bt)?econDutyCard({ttl,d,bt,sk,dd:A.dd,rn:A.rn}):null;if(built)delete card.__f;
    Q.push(card);if(follow)Q.push(follow);try{if(typeof stipShow==="function")stipShow(G,net,SK,1)}catch(e){console.error("stip show",e)}}else econDoDuty(p,true)}catch(e){console.error("econ card",e)}
  return line};
+/* save-unseen-lists r2: the pure card builders (see econStipend). A = plain data: ttl, h (rows), d / bt (lễ nghĩa / ban thưởng bạc), sk (Danh lost
+   if she cuts it), dd (Danh gained), rn (rank name), noOpt, SK (the skim, sup as a person id) + G (the goods as inventory indexes, jptime ptGLite).
+   ECONLV = the live G / SK on the first build only (the remake rebuilds them from A: ptGBack finds the real pieces again, law 6c). */
+let ECONLV=null;
+function econDutyOpts(A){const d=A.d,bt=A.bt,sk=A.sk,dd=A.dd;
+ return [{n:"Chu toàn lễ nghĩa",fx:Object.assign({bac:-(d+bt)},d&&dd?{danh:dd}:{}),x:`tốn: Bạc -${d+bt} · thành: giữ thể diện${dd?`, Danh +${dd}`:""}${bt?" · phi tần được thưởng quý ngươi hơn":""}`,go:()=>{const x=econDoDuty(S,true,true);if(x.paid)log(`Ngươi chu toàn lễ nghĩa tháng: Bạc -${d+bt}${x.dg?`, Danh +${x.dg}`:""}.`);else log(`Không đủ bạc lo lễ nghĩa: Danh -${x.dn}${x.du?`, Đức -${x.du}`:""}.`)}},
+  {n:"Bớt lễ nghĩa",fx:{danh:-sk},x:`thành: giữ lại ${d+bt} lượng bạc · mất: Danh -${sk}${BAL.dutySkip.duc?`, Đức -${BAL.dutySkip.duc}`:""}`,go:()=>{econDoDuty(S,false,true);log(`Ngươi bớt lễ nghĩa tháng: Danh -${sk}${BAL.dutySkip.duc?`, Đức -${BAL.dutySkip.duc}`:""}.`)}}]}
+function econDutyTxt(A){const what=[A.d?`lễ nghĩa (lễ tiết, thưởng người hầu, tiếp khách) ${A.d} bạc`:"",A.bt?`ban thưởng phi tần dưới ${A.bt} bạc`:""].filter(Boolean).join(" · ");return `<p class="past">Việc theo phẩm ${A.rn} tháng này: ${what}.</p>`}
+const econStipCard=rcpReg("stipCard",A=>{const L=RCPRE?null:ECONLV;const card={ev:1,t:A.ttl,who:typeof pMe==="function"?pMe():null,h:A.h};
+ let ev=null;if(A.SK&&typeof stipEvent==="function"){const SK=L&&L.SK||A.SK;const G=L&&L.G||(typeof ptGBack==="function"&&A.G?ptGBack(JSON.parse(A.G)):[]);ev=stipEvent(G,SK)}
+ if(ev&&Array.isArray(ev.opts)&&ev.opts.length){card.h+=`<p class="past">Thái giám Nội vụ phủ đưa bổng lộc tới, mắt không dám nhìn thẳng. Phần bị cắt xén ngươi tính sao?</p>`;card.opts=ev.opts;card.evId=ev.evId;card.bl=1;card.__f=1}
+ else if(A.d||A.bt){card.h+=econDutyTxt(A);card.opts=econDutyOpts(A);card.bl=1}
+ else card.h+=`<p class="past">${A.noOpt}</p>`;
+ return card});
+const econDutyCard=rcpReg("stipDuty",A=>({ev:1,t:`${A.ttl} · Lễ nghĩa`,who:typeof pMe==="function"?pMe():null,h:econDutyTxt(A),opts:econDutyOpts(A),bl:1}));
 blCard=function(){return `<p>Bổng lộc phát ngày đầu mỗi tháng, theo phẩm vị (mọi phi tần như nhau). Mỗi kẻ hầu ăn công ${BAL.wage} bạc/tháng. Phẩm càng cao, lễ nghĩa càng tốn.</p>${kitRows(BAL.pay.map((b,i)=>[i>=7?"Hoàng hậu":RANKS[i].n,[`<span class="ef t">${b} bạc</span>`,typeof stipRankTxt==="function"?stipRankTxt(i):BLG[i],BAL.duty[i]?`lễ nghĩa ${BAL.duty[i]}`:"",BAL.banThuong[i]?`ban thưởng ${BAL.banThuong[i]}`:""].filter(Boolean),"n"]))}<p class="past">Lãnh cung: chỉ ${BAL.payCold} bạc. Cấm túc: nửa bổng. Hoàng hậu ghét ngươi (thiện cảm dưới -30): mỗi tháng sai Nội vụ phủ khất bổng (bớt 3 phần 10): ${word(20)}. Sinh con, được ân thưởng: cộng thêm một lần.</p>${typeof stipRuleTxt==="function"?stipRuleTxt():""}`};
 /* a good night: Hoàng thượng's thưởng also brings silver (same for every consort). It is the night entry of j20's reward silver (BBAC), so it
    goes through the ONE ân thưởng path: inside bestow, before the tray (j93 kitReward) counts its coins, in the awards ledger (S.awards), the

@@ -318,9 +318,12 @@ function startCard(w){const E=EVD[w.k];let m=null;try{m=E.card(w)}catch(e){wErr(
   if(sc&&sc.opts&&sc.opts.length){m.h=(m.h||"")+(sc.h||"");m.opts=sc.opts;if(!m.who&&sc.who)m.who=sc.who}}
  /* kit line format "word · tốn: … · thành: …" (j0 kitParse): a sure option has no odds word (ODDS CAP: the ladder has no "sure" word); kitParse reads its first label (thành / kèm) as is */
  return m}
+/* save-unseen-lists r2 (rv r2 FIX 1, LAW 11): a world event card («Hỏa hoạn lớn», «Sứ đoàn vào triều» …) is carried by its window id (j3 rcpReg) and made
+   again from the live window on load (the window over → the card lapses) */
+const worldCardK=rcpReg("world",id=>{let w=null;try{w=(worldWin()||[]).find(x=>x.id===id)}catch(e){}if(!w)return null;const m=startCard(w);if(m){if(!m.who)m.who=pEmp();if(!m.opts)delete m.opts}return m});
 function worldShow(){if(!S||S.dead)return;S.wwSeen=S.wwSeen||{};S.wwEnd=S.wwEnd||{};const A=worldWin(),z=wZ();
  for(const h of (z.H||[])){if(h.id==null||!h.end||S.wwEnd[h.id]||!S.wwSeen[h.id])continue;S.wwEnd[h.id]=1;Q.push({t:h.n||"Tin trong cung",who:pEmp(),h:`<p>${h.end}</p>`})}
- for(const w of A){if(S.wwSeen[w.id])continue;S.wwSeen[w.id]=1;const m=startCard(w);if(m){if(!m.who)m.who=pEmp();if(!m.opts)delete m.opts;Q.push(m)}}
+ for(const w of A){if(S.wwSeen[w.id])continue;S.wwSeen[w.id]=1;const m=worldCardK(w.id);if(m)Q.push(m)}
  const lo=z.seq-20;for(const k in S.wwSeen)if(+k<lo)delete S.wwSeen[k];for(const k in S.wwEnd)if(+k<lo)delete S.wwEnd[k]}
 {const e0=endTurn;endTurn=function(){const t0=S?now():0;const r=e0.apply(this,arguments);try{if(S&&!S.dead&&now()!==t0){worldTick();if(Q.length&&$("modal").hidden)showModal()}}catch(e){wErr("tick",e)}return r}}
 /* co-op guest: cards of windows the host opened */

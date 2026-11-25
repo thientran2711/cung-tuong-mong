@@ -204,16 +204,20 @@ function mockerOf(){try{const L=(typeof liveRivals==="function"?liveRivals(false
 function morningAfter(){const M=S&&S.neMorn;if(!M||S.dead)return;if(M.d===wk())return;S.neMorn=null;const A=BAL.nightEnd.after;
  const ui=!window.__bot&&!(typeof quiet!=="undefined"&&quiet)&&typeof Q!=="undefined";
  if(M.tier==="warm"){apply({danh:A.warmDanh});if(!ui)return;
-  let who;try{who=typeof pEunCourt==="function"?pEunCourt("ksp"):undefined}catch(e){}
-  Q.push({t:"Kính sự phòng ghi sổ",who,art:"img/act-tong-quan-ksp-dem-chuyen.webp",hideOut:true,h:`<p>Sáng sớm, tổng quản Kính sự phòng đến cung ngươi, mở sổ ghi: “Đêm qua ${RANKS[S.rank]?RANKS[S.rank].n+" ":""}${S.name} hầu giá, Hoàng thượng rất vừa ý.”</p><p>Chưa đến giờ thỉnh an, cung nữ các cung đã xì xào bàn tán.</p><p class="past">Danh +${A.warmDanh}.</p>`,
-   opts:[{n:"Tiếp tục",fx:{},hideOut:true,hint:"không đổi gì thêm",risk:"an toàn",go:()=>{}}]});return}
- if(M.tier==="cold"){apply({danh:A.coldDanh});if(!ui)return;const m=mockerOf();const v=m&&m.v;const named=v&&m.known;
-  const nm=named?whoOf(v.id,v.name):"một vị phi tần ngươi chưa quen";let who;try{who=named&&typeof pv==="function"?pv(v):undefined}catch(e){}
-  Q.push({t:"Lời ra tiếng vào",who,art:"img/ev-toil-rival-tease.webp",hideOut:true,h:`<p>${nm.charAt(0).toUpperCase()+nm.slice(1)} che miệng cười khi gặp ngươi lúc thỉnh an: “Nghe nói đêm qua ${v?kSay(v,S,"{goi}",{m:"cool"}):"muội muội"} hầu giá, mà Hoàng thượng chẳng mấy vui lòng?”</p><p>Mấy phi tần khác liếc nhau, khẽ cười.</p><p class="past">Danh ${A.coldDanh}.</p>`,
+  Q.push(neMornCard("warm",null,false));return}
+ if(M.tier==="cold"){apply({danh:A.coldDanh});if(!ui)return;const m=mockerOf();Q.push(neMornCard("cold",m&&m.v||null,!!(m&&m.v&&m.known)))}}
+/* save-unseen-lists r2 (rv r2 FIX 1/3, LAW 11): the morning card is carried as data (j3 rcpReg: tier + the mocker as an id + named); its Danh was
+   applied BEFORE the card (and is in the same write), the remake only rebuilds it (no second Danh) */
+const neMornCard=rcpReg("neMorn",(tier,v,named)=>{const A=BAL.nightEnd.after;
+ if(tier==="warm"){let who;try{who=typeof pEunCourt==="function"?pEunCourt("ksp"):undefined}catch(e){}
+  return {t:"Kính sự phòng ghi sổ",who,art:"img/act-tong-quan-ksp-dem-chuyen.webp",hideOut:true,h:`<p>Sáng sớm, tổng quản Kính sự phòng đến cung ngươi, mở sổ ghi: “Đêm qua ${RANKS[S.rank]?RANKS[S.rank].n+" ":""}${S.name} hầu giá, Hoàng thượng rất vừa ý.”</p><p>Chưa đến giờ thỉnh an, cung nữ các cung đã xì xào bàn tán.</p><p class="past">Danh +${A.warmDanh}.</p>`,
+   opts:[{n:"Tiếp tục",fx:{},hideOut:true,hint:"không đổi gì thêm",risk:"an toàn",go:()=>{}}]}}
+ const nm=named&&v?whoOf(v.id,v.name):"một vị phi tần ngươi chưa quen";let who;try{who=named&&typeof pv==="function"?pv(v):undefined}catch(e){}
+return {t:"Lời ra tiếng vào",who,art:"img/ev-toil-rival-tease.webp",hideOut:true,h:`<p>${nm.charAt(0).toUpperCase()+nm.slice(1)} che miệng cười khi gặp ngươi lúc thỉnh an: “Nghe nói đêm qua ${v?kSay(v,S,"{goi}",{m:"cool"}):"muội muội"} hầu giá, mà Hoàng thượng chẳng mấy vui lòng?”</p><p>Mấy phi tần khác liếc nhau, khẽ cười.</p><p class="past">Danh ${A.coldDanh}.</p>`,
    opts:[{n:"Nhẫn nhịn",fx:{duc:A.bearDuc,danh:A.bearDanh},hideOut:true,hint:"giữ tiếng hiền đức, nhưng người ta cho là ngươi yếu thế",risk:"an toàn",go:()=>{log("Ta nhẫn nhịn, không đáp một lời.")}},
     {n:"Cười trừ",fx:{},hideOut:true,hint:"cho qua, không đổi gì",risk:"an toàn",go:()=>{log("Ta cười trừ cho qua.")}},
     {n:"Đáp lại",fx:{suc:A.replySuc},p:BAL.toil.replyWin,hideOut:true,hint:"đáp khéo thì thêm danh tiếng, hên xui, hỏng thì nàng ta càng ghét",risk:"có rủi ro",
-     go:()=>{if(roll(BAL.toil.replyWin)){apply({danh:BAL.toil.replyDanh});log("Ta đáp lại khéo léo, người nghe gật gù.")}else{if(v){try{relAdd(S,v,BAL.eff.jne.go)}catch(e){}ghenUp(v,2,"bị ngươi đáp lời không nể",S)}log("Ta đáp lại, không khí càng gượng.")}}}]})}}
+     go:()=>{if(roll(BAL.toil.replyWin)){apply({danh:BAL.toil.replyDanh});log("Ta đáp lại khéo léo, người nghe gật gù.")}else{if(v){try{relAdd(S,v,BAL.eff.jne.go)}catch(e){}ghenUp(v,2,"bị ngươi đáp lời không nể",S)}log("Ta đáp lại, không khí càng gượng.")}}}]}});
 {const et1=endTurn;endTurn=function(){const r=et1.apply(this,arguments);try{morningAfter()}catch(e){console.error(e)}return r}}
 window.kneMorningAfter=morningAfter;
 

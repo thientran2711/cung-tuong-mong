@@ -53,7 +53,7 @@ function eitPilfer(p,G){if(p===S)EIT_PIL=null;try{if(!p||p.dead||p.out||!G||!G.l
  /* the dearest piece that really arrived this month */
  let best=null;for(const g of G)for(const e of (g.E||[])){const v=(IT[e.k]&&itm(e.k).pr)||0;if(!best||v>best.v)best={g,e,v}}if(!best)return null;
  const i=p.inv.indexOf(best.e);if(i>=0)p.inv.splice(i,1);best.g.E.splice(best.g.E.indexOf(best.e),1);best.g.n=Math.max(0,best.g.n-1);if(!best.g.n)best.g.lost=true;best.g.pil=1;
- hit.pilN=(hit.pilN||0)+1;const X={p,s:hit,k:best.e.k,g:best.g};if(window.agOn&&agOn()&&hit!==p.maid){const v=best.v;X.sold=()=>eitPilSell(hit,v)}/* AG-ALL-2 G6: she sells it, as the maid player does (when unnoticed, or let off with it) */
+ hit.pilN=(hit.pilN||0)+1;const X={p,s:hit,k:best.e.k,g:best.g};if(window.agOn&&agOn()&&hit!==p.maid){const v=best.v;X.sold=()=>eitPilSell(hit,v);X.v=v}/* AG-ALL-2 G6: she sells it, as the maid player does (when unnoticed, or let off with it) */
  if(p!==S){eitPilNpc(X);return X}
  const P=BAL.eit.pil;const see=oddsCl(P.see+eyes(S)*P.seeMat+(S.maid&&S.maid!==hit&&(S.maid.loyal||0)>=BAL.loy.trust?P.seeMaid:0));
  if(roll(see))EIT_PIL=X;else if(X.sold)X.sold();return X}catch(e){console.error("eitPilfer",e);return null}}
@@ -86,6 +86,9 @@ function eitPilEvent(X){const s=X.s;const it=IT[X.k]||{n:X.k};const nm=it.n.repl
  const h=`<p>Kiểm lại đồ Nội vụ phủ phát, thiếu một ${STIP_UNIT[X.k]||"món"} ${nm.toLowerCase()}. Hỏi ra mới biết ${role} ${s.name} lén giữ lấy.</p>${kitRows([["Mất",`1 ${STIP_UNIT[X.k]||"món"} ${nm.toLowerCase()}`,"r"],["Gợi ý",`<span class="ef i">thiện cảm của ${s.name} với ngươi ${s.loyal|0}${s.spyFor?", có điều khả nghi":""}${s.pilN>1?`, đã ${s.pilN} lần`:""}.</span>`]])}`;
  const O=eitPilOpts(Object.assign({p:S},X)).map(o=>({n:o.n,fx:{},x:o.x,go:()=>{const r=o.go();if(r)log(r)}}));
  return{ev:1,t:"Kẻ hầu ăn bớt",who,h,opts:O}}
+/* save-unseen-lists r2 (rv r2 FIX 1, LAW 11): «Kẻ hầu ăn bớt» is carried as data (j3 rcpReg: the servant as an id, the piece kind, its price when
+   she would sell it); the piece itself left the chest before the card (eitPilfer) — the remake only rebuilds the answers, it never takes it twice */
+const eitPilCard=rcpReg("eitPil",(s,k,v)=>{if(!s||s.dead||s.alive===false)return null;const X={s,k};if(v!=null)X.sold=()=>eitPilSell(s,v);return eitPilEvent(X)});
 /* an NPC master who notices (eitPilSee) CHOOSES among the same four options (agent: punish / reward weights of her nết, a harsh nết ×harsh;
    BAL.ag.stf2.pilW); loop off → the old rule (harsh, else npcPun %) */
 function eitPilJudge(X){const p=X.p,P=BAL.eit.pil;const harsh=netRx(p,/Xảo quyệt|Kiêu ngạo|Thù dai|Kín đáo/);
@@ -107,7 +110,7 @@ function eitPilTake(ok){const m=srvM();const b=eitPilPick(m);if(!m||!b)return"";
  if(ok){const g=eitPilSell(S,b.v);return `Ngươi lén giữ ${nm} của ${m.name}, nhờ thái giám mang ra ngoài bán${g?`: Bạc +${g}`:""}.`}
  const X={p:m,s:S,k:b.e.k,g:null,sold:()=>eitPilSell(S,b.v)};return eitPilJudge(X)||""}
 (function(){if(typeof stipGoods!=="function")return;const g0=stipGoods;stipGoods=function(p,SK){const G=g0.apply(this,arguments);eitPilfer(p,G);return G};window.stipGoods=stipGoods})();
-(function(){if(typeof stipShow!=="function")return;const s0=stipShow;stipShow=function(){const r=s0.apply(this,arguments);try{if(EIT_PIL&&EIT_PIL.p===S)Q.push(eitPilEvent(EIT_PIL))}catch(e){console.error("eit pil ev",e)}EIT_PIL=null;return r};window.stipShow=stipShow})();
+(function(){if(typeof stipShow!=="function")return;const s0=stipShow;stipShow=function(){const r=s0.apply(this,arguments);try{if(EIT_PIL&&EIT_PIL.p===S)Q.push(eitPilCard(EIT_PIL.s,EIT_PIL.k,EIT_PIL.sold?EIT_PIL.v:null))}catch(e){console.error("eit pil ev",e)}EIT_PIL=null;return r};window.stipShow=stipShow})();
 
 /* ---------- 3. XIN CẤP LẠI Y PHỤC ---------- */
 /* how Nội vụ phủ regards her (0..100): rank, Sủng, a recent tip (jstip st.tip) up; every skim cause (thất sủng, a fault, a superior's grudge,
