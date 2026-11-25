@@ -1,5 +1,5 @@
 PRIORITY #1 CHECK ('rerun'): OD 4 | ledger 0 | claims 8 (B co-op rerun U1–U3b, D solo cnv share of E's list) | main 3 | review/* review/robot-realtap c826eca4 (F shared harness, READY per MAIN 135 06:45Z) | archive 0. Template reused: briefs/b-root-rerun.md (Foreman B).
-# FOREMAN E ROOT — RERUN RUNNER brief (25/11 06:55Z; Foreman E = session_01DgYSWo1b35QWFNnLY4gddr)
+# FOREMAN E child1 — RERUN RUNNER brief (25/11 06:55Z; Foreman E = session_01DgYSWn76tZi5feyK9Gsapx)
 This brief is your full authority — never ask the owner anything. Report to Foreman E by send_message AND STATUS lines at the END of dev/handover/FOREMAN_E_STATUS.md (handover branch claude/cung-tuong-mong-handover-hj0h8w).
 READ FIRST (handover branch): dev/rules/START_CORE.md (★ 18 LAWS first) + dev/rules/START_WORKER.md; the last 8 rows of dev/OWNER_DECISIONS.md (owner robot rules 25/11 ~05:10Z/05:15Z/05:20Z/05:40Z/05:45Z/05:50Z/05:58Z, verbatim — they win over this brief); dev/handover/briefs/ROBOT-PLAYER-REVIEW.md (EVERY life = player review: moment log + end-of-life review + digest — follow it exactly); dev/handover/reports/robot-audit-E.md «RERUN LIST» (your rows); dev/PROGRESS_robot-realtap.md on review/robot-realtap (harness usage).
 ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
