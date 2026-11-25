@@ -1,0 +1,7 @@
+# flight2-coop1h ROOM VOID (harness 6d3a128f, seed 7003, room AYDC, LIVE, host fold / guest ipad)
+PRIORITY #1 CHECK: coop1g VOID 2f109757 (same family) · F #10 orders 11:05Z/11:07Z.
+- Played 10:22Z-~10:45Z: buổi 1-53, year 1, 1 DEAD BUTTON (zero-size «Hầu hạ» card, Tích Cần viện), 0 exit picks seen.
+- ~10:45Z host (Fold) «BUG stuck no progress 15 min on #coopfz» at buổi 53 (after .mapsc «Công lao 10/10» → «Lui»). Unstick ladder: reload → title «Cùng hảo hữu» → «Trở lại phòng» → opened «Mời hảo hữu» dialog (3/5/8 phút, ám hiệu AYDC, hảo hữu «đang vắng», countdown 0:30) = host WAITS; the guest page stays in-game and has no rejoin step → mutual wait. Ladder then tapped «Chọn sổ» → «Một mình» x5 + «Lui» (BUG: «Một mình» is a leave-the-room tap) → host on buttonless #title (menu panel closed) from ~11:00Z.
+- Manual one-try (copies of both profiles, real touch/mouse taps, 11:08-11:13Z): fresh load shows title menu (save intact, 0 js errors); host «Cùng hảo hữu» → «Trở lại phòng» + guest «Cùng hảo hữu» → «Trở lại phòng» → BOTH re-paired into the same life (host shows «Chờ hảo hữu…», guest in game, Tháng bảy trung tuần năm 1). Screens: manual-*.png. So the room is recoverable, but only if BOTH seats reopen; the harness only reloads one seat.
+- Family (M) «hảo hữu đang vắng» mutual wait (fix = sid-rebirth-r 80e911b7 ⊃ coop-sync-r, not on LIVE). Harness fix needed: when one seat is unstuck by reload, make the other seat also «Cùng hảo hữu → Trở lại phòng»; never tap «Một mình» in the ladder.
+- VOID (stuck-abandoned) 11:2xZ; no co-op resume in the harness.

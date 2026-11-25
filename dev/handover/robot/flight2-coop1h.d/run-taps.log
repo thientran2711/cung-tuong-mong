@@ -1,0 +1,1880 @@
+TAP #modal «Cung Tường Mộng» «Cùng hảo hữuMời hảo hữu · Nhập ám hiệu»
+TAP #modal «Chọn sổ» «Mời hảo hữu»
+HOST WAIT #modal «Mời hảo hữu» Lui | Đường dẫn mời | 3 phút | ✓ 5 phút | 8 phút
+ROOM CODE AYDC
+TAP #modal «Cung Tường Mộng» «Cùng hảo hữuMời hảo hữu · Nhập ám hiệu»
+TAP .dlg «Chọn sổ» «Nhập ám hiệu»
+TAP #modal «Nhập ám hiệu» «Ám hiệu»
+TAP #modal «Nhập ám hiệu» «Vào phòng»
+GUEST WAIT #modal «Nhập ám hiệu» Lui | Ám hiệu | Vào phòng
+GUEST WAIT #modal «Đợi hảo hữu chọn thân phận» 
+TAP #kroul «Tiếp»
+TAP #kroul «Bỏ qua»
+TAP #modal «Thân phận kiếp này» «Vào cung ngayTốnkhôngĐượcvào cung ngay làm cung nữ»
+TAP #modal «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»
+TAP .dlg «Tiền truyện · Cung nữ tuyển vào cung · 1/4» «Tiếp theo»
+TAP .dlg «Tiền truyện · Cung nữ tuyển vào cung · 1/4» «Tiếp theo»
+TAP .dlg «Tiền truyện · Cung nữ tuyển vào cung · 2/4» «Tiếp theo»
+TAP #klife «Vào cung ngay»
+TAP .dlg «Tiền truyện · Cung nữ tuyển vào cung · 3/4» «Tiếp theo»
+TAP #kroul «Tiếp»
+TAP #kroul «Bỏ qua»
+TAP .dlg «Tiền truyện · Cung nữ tuyển vào cung · 4/4» «Theo ma ma»
+TAP .dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»
+TAP .dlg «Tiền truyện · Con gái Đại tướng quân · 1/4» «Tiếp theo»
+TAP .kmov «Theo ma ma»
+TAP .dlg «Tiền truyện · Con gái Đại tướng quân · 1/4» «Tiếp theo»
+TAP .dlg «Tiền truyện · Con gái Đại tướng quân · 2/4» «Tiếp theo»
+TAP .kmov «Theo ma ma»
+TAP .dlg «Tiền truyện · Con gái Đại tướng quân · 3/4» «Tiếp theo»
+TAP .dlg «Tuyển chọn» «Cúi đầu chờ xétRất vữngTốnSức -5Đượckhông thi; tín»
+TAP .dlg «Tiền truyện · Con gái Đại tướng quân · 4/4» «Vào cung»
+TAP .dlg «Nhập cung làm cung nữ» «Tiếp theo»
+TAP .dlg «Hảo hữu vào cung» «Lui»
+TAP .kmov «Vào điện»
+TAP #kprevov «Theo ma ma»
+TAP .kmov «Vào điện»
+TAP #kprevov «Theo ma ma»
+TAP .dlg «Hảo hữu vào cung» «»
+TAP .dlg «Tuyển chọn» «Dâng VũRất vữngTốnSức -5Đượcchơi một màn; làm tốt »
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP #kg82 «Sẵn sàngtừ lúc này mới tính giờ»
+TAP #kg82 «Quay lại»
+TAP .dlg «Hảo hữu vào cung» «»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP #kg82 «Quay lại»
+TAP .dlg «Hảo hữu vào cung» «»
+TAP .dlg «Hảo hữu vào cung» «Lui»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP .dlg «Nội vụ phủ điều người» «Lui»
+TAP .dlg «Hảo hữu vào cung» «»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP .dlg «Hảo hữu vào cung» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «5Đồng liêu»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Thỉnh tranh nhân vật»
+TAP .dlg «Thỉnh tranh nhân vật» «Tạm ngưngTốnkhôngĐượcCho tranh nghỉ chân·muốn thì »
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Hoàng tự»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tư trang»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Cài tóc: Thoa bạc song điệp»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Hoàng tự»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Về phòng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Có thaiRất thấp»
+TAP .dlg «Có thai: Rất thấp» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Hậu cung»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Số lần ân thưởng0»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tai mắt0»
+TAP .dlg «Ân thưởng» «Lui»
+TAP .dlg «mat» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «1Cung nhân»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «5Đồng liêu»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Lật thẻKhông có»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sơn TửThiện cảm 1»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Chí tônPhi tầnNam nhânCung nhân‹Hoàng thượngThái h»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Điều ngài thích»
+TAP .dlg «Tâm trạng · Thái giám Tiểu Sơn Tử» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Hôm nay mặt mộc»
+TAP info #kpop
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Giao tình»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Xem quan hệ của Ta»
+TAP .dlg «Tâm trạng · Thái giám Tiểu Sơn Tử» «Lui»
+TAP .dlg «Xem quan hệ của» «Cung nhân 28»
+TAP .dlg «Xem quan hệ của» «Người trước»
+TAP .dlg «Xem quan hệ của» «Người trước»
+TAP .dlg «Xem quan hệ của» «Cung nhân 28»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»
+TAP .dlg «Xem quan hệ của» «Phi tần 10»
+TAP .dlg «Xem quan hệ của» «Cung nhân 28»
+TAP .dlg «Xem quan hệ của» «Chí tôn 2»
+TAP .dlg «Xem quan hệ của» «Thái hậu»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hậu cung»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Điều ngài thích»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Đồng liêu»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Giao thiệpGiao thiệpBiếu quàRất vữngTốnBạc -5·1 kh»
+TAP .dlg «Kỳ nguyệt sự» «Báo đúng ngàyRất vữngTốnkhôngĐượcsổ ghi đúng, khôn»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Giao thiệpGiao thiệpBiếu quàRất vữngTốnBạc -5·1 kh»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Mệnh truyện»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tin báo: 4 tin mới»
+TAP .dlg «Tin báo» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Giao thiệpGiao thiệpTự họcⓘTốn2 khắc·Sức -15Đượcti»
+TAP .dlg «Tự rèn Công» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tứ đức 8/9Cầm kỳ thi họa 8/12Vũ · Y · Nữ công 8/12»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Thỉnh tranh nhân vật (có mới)»
+TAP .dlg «Thỉnh tranh nhân vật» «Thỉnh tiếpTốnkhôngĐượcCho tranh tiếp tục về máy lú»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Xem quan hệ của Thái hậu»
+TAP .dlg «Xem quan hệ của» «Chí tôn 2»
+TAP .dlg «Xem quan hệ của» «Cung nhân 28»
+TAP .dlg «Xem quan hệ của» «Người lạTổng quản thái giám Càn Thanh cungNgười lạ»
+TAP #dawn «Tiếp theo»
+TAP .dlg «Tần Viên Tĩnh Thù quở mắng» «Cãi lạiRất vữngTốnkhôngĐượcthêm thể diện, đám cung»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP #dawn «Tiếp theo»
+TAP .dlg «Phụ tuyến · Tâm nguyện Tổng quản (1/3): Đứa cháu h» «Khéo từ chốiRất vữngTốnkhôngĐượcdưỡng sức, giữ sức»
+TAP .dlg «Hội phối đồ: báo đề» «Xem thêm»
+TAP info #kpinfo
+TAP .dlg «Hội phối đồ: báo đề» «Đã hiểu, sẽ chuẩn bịTốnkhôngĐượcmua thêm đồ ở Nội »
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Lui»
+TAP .kbk «Tổng lược» «Lui»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Bậc 1 trên 5»
+TAP .dlg «Công · Nữ công» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hành sự»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»
+TAP .dlg «Xong việc: Làm một việc hầu hạ» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tài nghệ»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP .dlg «Hoàng thượng» «Lánh vào trongRất vữngTốnkhôngĐượcdưỡng sức, chủ t»
+TAP info #rtoast.on
+TAP .dlg «Việc khó xử» «Giúp Lâm Ý Hoan một tayRất vữngTốnkhôngĐượcngười ấ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạLĩnh đồ ở Nội vụ phủRất vữngLĩnh than,»
+TAP .dlg «Kỳ ngộ» «Đứng xem bà đo từng đườngRất vữngTốn2 khắcĐượcđược»
+TAP #klearnov «Tiếp theo»
+TAP #klearnov «Tiếp theo»
+TAP .dlg «Kỳ ngộ» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Xét phẩm: thiếu 3»
+TAP info #rtoast.on
+TAP .dlg «Xét phẩm cuối tháng · Thường tại» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Giao tình»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hoàng tự»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»
+TAP .dlg «Hoàng thượng» «Cười thật to, vỗ tay theoRất vữngTốnkhôngĐượcbệ hạ»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Mục tiêu chương (có mới)»
+TAP .dlg «Chương 1 · Kẻ hầu mới vào cung» «Đi làm: Học lễ nghi với cô côTốnkhôngĐượctới Hành »
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hầu hạHầu hạLĩnh đồ ở Nội vụ phủRất vữngLĩnh than,»
+TAP #ktut «Đã hiểu»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Lịch tháng»
+TAP .dlg «Lịch tháng» «mồng 6: Nguyệt tín»
+TAP .dlg «Lịch tháng» «ngày 15»
+TAP .dlg «Lịch tháng» «Luyện đàn»
+TAP .dlg «Lịch tháng» «Dâng quà Thái hậu»
+TAP .dlg «Lịch tháng» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hầu hạHầu hạCanh chừng cung chủRất vữngỞ lại canh »
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «3Chí tôn»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «1Cung nhân»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Bậc 0 trên 5»
+TAP .dlg «Công · Nữ công» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tứ đức 9/9Cầm kỳ thi họa 8/12Vũ · Y · Nữ công 8/12»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Ân tình (đêm)0»
+TAP .dlg «Ân tình (đêm)» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tứ đức 9/9Cầm kỳ thi họa 8/12Vũ · Y · Nữ công 8/12»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Số lần ân thưởng0»
+TAP .dlg «Ân thưởng» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»
+TAP #dawn «Tiếp theo»
+TAP .dlg «Phụ tuyến · Thua một cuộc cờ cho ngài vui · Lời nh» «Khéo từ chốiRất vữngTốnSủng -3Đượcdưỡng sức, giữ s»
+TAP #dawn «Tiếp theo»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Lui»
+TAP .kbk «Tổng lược» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «7Đồng liêu»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tai mắt0»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sắc73Tài61Tâm cơ16Đức30Danh11Chủ tin50»
+TAP .dlg «Sắc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hậu cung»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Chủ tử»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Người lạNgười lạ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Người lạNgười lạ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Người lạNgười lạ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tâm trạngBình thản+2»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP .dlg «Có người đến» «Tận tâm giúp Hoàng hậuRất vữngTốnSức -8ĐượcHoàng h»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hầu hạHầu hạHỏi người hầu: đó là ai?Có cơTốn1 khắc»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hầu hạHầu hạHỏi người hầu: đó là ai?Có cơTốn1 khắc»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Dư đồ»
+TAP .mapsc «Sẵn sàng»
+TAP .mapsc «Lịch tháng»
+TAP .dlg «Lịch tháng» «ngày 18»
+TAP .dlg «Lịch tháng» «mồng 1»
+TAP .dlg «Lịch tháng» «ngày 28»
+TAP .dlg «Lịch tháng» «ngày 23»
+TAP .dlg «Lịch tháng» «Lui»
+TAP .mapsc «Mệnh truyện»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Dư đồ»
+TAP .mapsc «Dư đồ»
+TAP .mapsc «Danh sách»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Chọn chính mình»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tin báo: 3 tin mới»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tứ đức 9/9»
+TAP .dlg «Tin báo» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Hậu cung»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Xét phẩm: thiếu 1»
+TAP .dlg «Xét phẩm cuối tháng · Cung nữ nhị đẳng» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Hôm nay mặt mộc»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Buổi chiều, còn 4 khắc»
+TAP .dlg «chiều · còn» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Có thaiRất thấp»
+TAP .dlg «Có thai: Rất thấp» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Lương tháng3 bạc»
+TAP .dlg «Lương tháng ba bạc» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Xem thêm»
+TAP .dlg «Hoàng thượng» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hậu cung»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Người lạNgười lạ»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tâm trạngBình thản+2»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Lật thẻRất thấp»
+TAP .dlg «Lật thẻ: Rất thấp» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Số lần ân thưởng0»
+TAP .dlg «Ân thưởng» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Dư đồ»
+TAP .mapsc «Xét phẩm: thiếu 3»
+TAP .dlg «Xét phẩm cuối tháng · Thường tại» «Lui»
+TAP .mapsc «1Cung nhân»
+TAP .mapsc «Sắc47Tài34Tâm cơ27Đức25Danh19Sủng0»
+TAP .mapsc «1Cung nhân»
+TAP .mapsc «Giao tình»
+TAP page «Tích Cần viện · Ở đây còn 5 người.» «Bạc4Sức72/100»
+TAP .dlg «Bạc» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Mệnh truyện»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Ân tình (đêm)0»
+TAP .dlg «Ân tình (đêm)» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 5 người.» «Hầu hạHầu hạHỏi người hầu: đó là ai?Có cơTốn1 khắc»
+TAP info #rtoast.on
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Ân tình (đêm)0»
+TAP .dlg «Ân tình (đêm)» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 5 người.» «Sẵn sàng»
+TAP #dawn «Tiếp theo»
+TAP #dawn «Tiếp theo»
+TAP .dlg «Tin về chủ nhân» «Lui»
+TAP #kmrew «ThườngVải thô (hàng kém)Hàng kém Nội vụ phủ phát: »
+TAP .dlg «Lui»
+TAP .dlg «Tin trong cung buổi này» «Lui»
+TAP #kmrew «Thường»
+TAP .dlg «Lui»
+TAP #kmrew «Thường»
+TAP .dlg «Lui»
+TAP #kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»
+TAP .dlg «Lui»
+TAP #kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»
+TAP .dlg «Lui»
+TAP #kmrew «ThườngVải thô (hàng kém)Hàng kém Nội vụ phủ phát: »
+TAP .dlg «Lui»
+TAP #kmrew «Nhận»
+TAP #kmrew «Thường»
+TAP .dlg «Bổng lộc tháng ba» «Lót tay thái giám Nội vụ phủRất vữngTốnBạc -8Đượcđ»
+TAP .dlg «Bổng lộc tháng ba · Lễ nghĩa» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»
+TAP .dlg «Thỉnh bình an mạch» «Lui»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .dlg «Tuần mới» «Lui»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Lui»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP #kmrew «ThườngVải bôngMay áo: áo lụa thêu hoa nhỏ (Y phục,»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .dlg «Lui»
+TAP .kbk «Tổng lược» «Lui»
+TAP #kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»
+TAP #kmrew «Thường»
+TAP .dlg «Lui»
+TAP .dlg «Lui»
+TAP #kmrew «Nhận»
+TAP #kmrew «Thường»
+TAP #kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»
+TAP .dlg «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Giao tình»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tư trang»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Xét phẩm: thiếu 1»
+TAP #kmrew «Nhận»
+TAP .dlg «Xét phẩm cuối tháng · Cung nữ nhị đẳng» «Lui»
+TAP #kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Triều cục»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sắc47Tài34Tâm cơ27Đức25Danh25Sủng0»
+TAP .dlg «Sắc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «4Chí tôn»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Bạc7Sức82/100»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Dư đồ»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Có thaiRất thấp»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Về phòng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tài nghệ»
+TAP .dlg «Có thai: Rất thấp» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tứ đức 8/9»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Giao tình»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Mệnh truyện»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Giao tình»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Mục tiêu chương (có mới)»
+TAP .dlg «Chương 1 · Nhập cung, đứng vững» «Thiên mệnh»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Mệnh truyện»
+TAP .dlg «Thiên mệnh» «Danh hiệu 0/35»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tin báo: 4 tin mới»
+TAP .dlg «Danh hiệu» «Mục tiêu»
+TAP .dlg «Tin báo» «Lui»
+TAP .dlg «Chương 1 · Nhập cung, đứng vững» «Đi làm: Đi một nơi trong cungTốnkhôngĐượctới Dư đồ»
+TAP info #rtoast.on
+TAP .mapsc «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sổ ghi»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hoàng tự»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sắc73Tài61Tâm cơ16Đức30Danh11Chủ tin44»
+TAP .dlg «Có người đến» «Từ chốiRất vữngTốnkhôngĐượccó thêm bạcMấtngười ấy »
+TAP info #rtoast.on
+TAP .dlg «Sắc» «Lui»
+TAP .mapsc «Sắc47Tài34Tâm cơ27Đức25Danh25Sủng0»
+TAP .dlg «Sắc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Con của ta»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Về phòng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Ngài để ý2»
+TAP .mapsc «Dực Khôn2 bóng · 2 khắc · bái kiến»
+TAP .dlg «Hoàng thượng để ý» «Lui»
+TAP .mapsc «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hoàng tự»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Dư đồ»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Công lao4/10»
+TAP .dlg «Công lao 4/» «Lui»
+TAP .dlg «Kỳ nguyệt sự» «Báo đúng ngàyRất vữngTốnkhôngĐượcsổ ghi đúng, khôn»
+TAP info #rtoast.on
+TAP .mapsc «Hành sự»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Ngài để ý2»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP .dlg «Hoàng thượng để ý» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tin báo»
+TAP .dlg «Tin báo» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «giông tố»
+TAP info #kpop
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Mục tiêu chương (có mới)»
+TAP .dlg «Chương 1 · Kẻ hầu mới vào cung» «Đi làm: Đi một nơi trong cungTốnkhôngĐượctới Dư đồ»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hành sự»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hầu hạHầu hạLĩnh đồ ở Nội vụ phủRất vữngLĩnh than,»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP info #rtoast.on
+TAP #dawn «Tiếp theo»
+TAP .dlg «Tin trong cung buổi này» «Lui»
+TAP .dlg «Lễ Phật đản» «Lui»
+TAP #dawn «Tiếp theo»
+TAP .dlg «Hội phối đồ · Xuân sắc» «Tự tay phối đồTốnSức -5Đượcđứng đầu: Sủng +3·Danh »
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Lui»
+TAP #kg82 «ThườngSon sáp»
+TAP #kg82 «ThườngVải bông»
+TAP #kg82 «ThườngYên chi giấy»
+TAP #kg82 «ThườngThan liễu»
+TAP #kg82 «ThườngVải bông»
+TAP #kg82 «ThườngSon sáp»
+TAP #kg82 «ThườngPhấn gạo»
+TAP #kg82 «ThườngSon sáp»
+TAP #kg82 «ThườngThan liễu»
+TAP #kg82 «ThườngPhấn gạo»
+TAP #kg82 «Ra mắt»
+TAP #kg82 «kim sa»
+TAP #kg82 «san hô»
+TAP #kg82 «san hô»
+TAP #kg82 «hổ phách»
+TAP #kg82 «cam quýt»
+TAP #kg82 «san hô»
+TAP #kg82 «đen tuyền»
+TAP #kg82 «Để mặt mộc»
+TAP .kmov «Tiếp theo»
+TAP .kmov «Tiếp theo»
+TAP #kg82 «Đã hiểu»
+TAP .kpod «Tiếp»
+TAP .dlg «Tin trong cung buổi này» «Lui»
+TAP .dlg «Lễ Phật đản» «Chép kinh cầu phúcTốnSức -8ĐượcĐức +2·Thái hậu +2»
+TAP .dlg «Lễ Phật đản» «Đề nghị chia đôi bát cháoTốnBạc -40·Sức -8ĐượcDanh»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .dlg «Tuần mới» «Lui»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạLĩnh đồ ở Nội vụ phủRất vữngLĩnh than,»
+TAP .dlg «Kỳ ngộ» «Xin ma ma cho chép một lốiRất vữngTốnSức -4·1 khắc»
+TAP #klearnov «Tiếp theo»
+TAP #klearnov «Tiếp theo»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «9Đồng liêu»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Buổi sáng, còn 0 khắc»
+TAP .dlg «sáng · còn» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tư trang»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Trâm hoa lụa · Trâm cài»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Dấu ấn Đáp ứng · đang dùng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Y phục 2»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tin báo: 3 tin mới»
+TAP .dlg «Tin báo» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tin báo»
+TAP .dlg «Tin báo» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tâm trạngBình thản-3»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Y phục 2»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Y phục 2»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Giao tình»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Phe phái»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tâm trạngBình thản-3»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Bạc106Sức85/100»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP .dlg «Bạc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Triều đình»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Mệnh truyện»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tư trang»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Mệnh truyện»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tư trang»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «nắng gắt»
+TAP info #kpop
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Váy sa xanh ngọc · Y phục»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Thú cưng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hoàng tự»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hoàng tự trong cung»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hoàng tửKính»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Con của ta»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Mệnh truyện»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tư trang»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tin báo»
+TAP .dlg «Tin báo» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Dư đồ»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sắc73Tài61Tâm cơ16Đức30Danh12Chủ tin48»
+TAP .dlg «Sắc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hậu cung»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Về phòng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Dư đồ»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Xem bản đồ hoàng cungGhi chútoàn cảnhĐi gần 1 khắc»
+TAP page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca» «Hoàng tự»
+TAP .dlg «Xong việc: Đi một nơi trong cung» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Tâm trạngBình thản-3»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP .dlg «Chuyện trong cung» «Nghe và giữ kínRất vữngTốnSức -3Đượcngười ấy có th»
+TAP page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Người được sai đi (có mới)»
+TAP .dlg «Tin chờ người sai đi» «Nghe lệnhTốnkhôngĐượcViệc chủ sai·trả lời trước kh»
+TAP .dlg «Việc chủ sai» «Từ chốiTốnChủ tin -3ĐượckhôngGhi chúkhông tốn khắc»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Sẵn sàng»
+TAP page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «nắng gắt»
+TAP info #kpop
+TAP page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Xét phẩm: thiếu 1»
+TAP .dlg «Xét phẩm cuối tháng · Cung nữ nhị đẳng» «Lui»
+TAP page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «4Chí tôn»
+TAP page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Dư đồ»
+TAP page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Buổi chiều, còn 4 khắc»
+TAP .dlg «chiều · còn» «Lui»
+TAP page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Mệnh truyện»
+TAP page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Về Tân Giả khố»
+TAP page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Chưởng sự cô côHà cô cô»
+TAP .kfoc «Biếu»
+TAP info #kpop
+TAP .kfoc «Hỏi chuyện»
+TAP .kfoc «Sẵn sàngbắt đầu chơi»
+TAP .kfoc «Quay lại»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐánh cờ với Ho»
+TAP page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Giao tình»
+TAP page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Bạc10Sức57/100»
+TAP page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Hành sự»
+TAP .kfoc «Hỏi chuyện»
+TAP .kfoc «Hỏi chuyện»
+TAP .kfoc «Biếu»
+TAP info #kpop
+TAP .kfoc «Hỏi chuyện»
+TAP .kfoc «Biếu»
+TAP info #kpop
+TAP .kfoc «Biếu»
+TAP info #kpop
+TAP .kfoc «Lui»
+TAP .dlg «Bạc» «Lui»
+TAP page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Hầu hạHầu hạLĩnh đồ ở Nội vụ phủRất vữngLĩnh than,»
+TAP info #rtoast.on
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Tân Giả khố · Sang buổi chiều · ta vẫn ở Tân Giả k» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»
+TAP info #rtoast.on
+TAP page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Hầu hạHầu hạLĩnh đồ ở Nội vụ phủRất vữngLĩnh than,»
+TAP info #rtoast.on
+TAP .dlg «Lập công · Cứu giá» «Hô thị vệ, sai người chạy gọiRất vữngTốnkhôngĐượcb»
+TAP page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»
+TAP .dlg «Xong việc: Học lễ nghi với cô cô» «Lui»
+TAP info #rtoast.on
+TAP page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Sẵn sàng»
+TAP page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Tâm trạngBình thản-3»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Tâm trạngBình thản-3»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Dư đồ»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Dư đồ»
+TAP page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Lương tháng3 bạc»
+TAP .dlg «Lương tháng ba bạc» «Lui»
+TAP page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Bạc13Sức33/100»
+TAP .dlg «Bạc» «Lui»
+TAP page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Hoàng tự»
+TAP page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Tài nghệ»
+TAP page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Vũ · Y · Nữ công 0/12»
+TAP page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «giông tố»
+TAP info #kpop
+TAP page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Dư đồ»
+TAP page «Tân Giả khố · Sang buổi tối · ta vẫn ở Tân Giả khố» «Xem bản đồ hoàng cungGhi chútoàn cảnhĐi gần 1 khắc»
+TAP page «Tích Cần viện · Không gặp ai.» «Mệnh truyện»
+TAP page «Tích Cần viện · Không gặp ai.» «Con gái Đại tướng quân 0/16»
+TAP page «Tích Cần viện · Không gặp ai.» «Hậu cung»
+TAP page «Tích Cần viện · Không gặp ai.» «Người lạNgười lạ»
+TAP page «Tích Cần viện · Không gặp ai.» «Người lạNgười lạ»
+TAP page «Tích Cần viện · Không gặp ai.» «Tin báo: 3 tin mới»
+TAP .dlg «Tin báo» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tậpHọc tậpĐàn hát tự thưởngRất vữngLòng đang v»
+TAP info #rtoast.on
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Tích Cần viện · Không gặp ai.» «Nam nhân»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP #dawn «Tiếp theo»
+TAP .dlg «Lễ Phật đản» «Lui»
+TAP #dawn «Tiếp theo»
+TAP .dlg «Tết Đoan ngọ · Lời mời: Thi hát đò đưa trên thuyền» «Không dựRất vữngTốnkhôngĐượckhôngGợi ýkhông được m»
+TAP .dlg «Phụ tuyến · Khéo nhắc ma ma chuyện công của Hoa Tu» «Nhận lờiVữngTốnkhôngĐượcđược tiếng hiền đức, người»
+TAP .dlg «Lễ Phật đản» «Lui»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Lui»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Đồng liêu»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Giao tình»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Ân oánPhe pháiPhe phái hậu cungTriều đìnhQuốc sựBi»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Phe phái hậu cung»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Buổi sáng, còn 4 khắc»
+TAP .dlg «sáng · còn» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tâm trạngBình thản+2»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Triều đình»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Bạc13Sức43/100»
+TAP .dlg «Bạc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Ân oán»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tâm trạngBình thản+2»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Bạc13Sức43/100»
+TAP .dlg «Bạc» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «1Cung nhân»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tin báo: 2 tin mới»
+TAP .dlg «Tin báo» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Bạc13Sức43/100»
+TAP .dlg «Bạc» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tin báo»
+TAP .dlg «Tin báo» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Mệnh truyện»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Về phòng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tâm trạngBình thản+2»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Cầm kỳ thi họa 8/12»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hoàng tự»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «gió nồm»
+TAP info #kpop
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Buổi trưa, còn 4 khắc»
+TAP .dlg «trưa · còn» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Kế vị»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tin báo: 1 tin mới»
+TAP .dlg «Tin báo» «Để sauTốnkhôngĐượckhông»
+TAP .dlg «Việc khó xử» «Mách Hoàng hậuRất vữngTốnkhôngĐượcHoàng hậu hài lò»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hành sự»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sắc73Tài61Tâm cơ16Đức31Danh13Chủ tin47»
+TAP .dlg «Sắc» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Bạc13Sức43/100»
+TAP .dlg «Bạc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Lịch tháng»
+TAP .dlg «Lịch tháng» «ngày 30»
+TAP .dlg «Lịch tháng» «ngày 21»
+TAP .dlg «Lịch tháng» «ngày 24»
+TAP .dlg «Lịch tháng» «ngày 25»
+TAP .dlg «Lịch tháng» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sắc73Tài61Tâm cơ16Đức31Danh13Chủ tin47»
+TAP .dlg «Sắc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Giao tình»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Mệnh truyện»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sổ ghi»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Bạc13Sức43/100»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐánh cờ với Ho»
+TAP .dlg «Bạc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tâm trạngBình thản+2»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sắc73Tài61Tâm cơ16Đức31Danh13Chủ tin47»
+TAP .dlg «Sắc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «nắng gắt»
+TAP info #kpop
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «nắng gắt»
+TAP info #kpop
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Giao tình»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Bạc13Sức43/100»
+TAP .dlg «Bạc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Người được sai đi (có mới)»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP .dlg «Tin chờ người sai đi» «Nghe lệnhTốnkhôngĐượcViệc chủ sai·trả lời trước kh»
+TAP .dlg «Việc chủ sai» «Giúp hết lòngTốn3 khắc (cả đường đi)Đượccông lao +»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP .dlg «Kỳ ngộ» «Xin người dạy lễ nghiRất vữngTốn2 khắcĐượcđược lòn»
+TAP .dlg «Kỳ ngộ» «Lui»
+TAP .dlg «Kẻ hầu» «Nhận luôn việc của Thải VânRất vữngTốnkhôngĐượcchủ»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Xem quan hệ của Ta»
+TAP .dlg «Xem quan hệ của» «Cung nữ tam đẳngTa»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hoàng tự»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Xét phẩm: thiếu 1»
+TAP .dlg «Xét phẩm cuối tháng · Cung nữ nhị đẳng» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «đêm oi nồng»
+TAP info #kpop
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Lương tháng3 bạc»
+TAP .dlg «Lương tháng ba bạc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tâm trạngVui vẻ+45»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Vũ · Y · Nữ công 8/12»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Bạc13Sức43/100»
+TAP .dlg «Bạc» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP #dawn «Tiếp theo»
+TAP #kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»
+TAP .dlg «Lui»
+TAP #kmrew «Thường»
+TAP .dlg «Lui»
+TAP #kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»
+TAP .dlg «Lui»
+TAP #kmrew «ThườngVải bôngMay áo: váy sa xanh ngọc (Y phục, Sắ»
+TAP .dlg «Lui»
+TAP #kmrew «Thường»
+TAP .dlg «Lui»
+TAP #kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»
+TAP .dlg «Lui»
+TAP #kmrew «Thường»
+TAP .dlg «Lui»
+TAP #kmrew «Thường»
+TAP .dlg «Lui»
+TAP #kmrew «Nhận»
+TAP #kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»
+TAP .dlg «Lui»
+TAP .dlg «Tin trong cung buổi này» «Lui»
+TAP .dlg «Bổng lộc tháng tư» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»
+TAP .dlg «Thỉnh bình an mạch» «Lui»
+TAP .dlg «Y phục dự Tết Đoan ngọ» «Sai người mua trâm đồng mai hoa (Vàng) ở Nội vụ ph»
+TAP .dlg «Tết Đoan ngọ · Thi hát đò đưa trên thuyền rồng» «Lui»
+TAP #dawn «Tiếp theo»
+TAP #kmrew «Thường»
+TAP .dlg «Lui»
+TAP .dlg «Tuần mới» «Lui»
+TAP #kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»
+TAP .dlg «Lui»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Lui»
+TAP #kmrew «Thường»
+TAP .dlg «Lui»
+TAP #kmrew «Thường»
+TAP .dlg «Lui»
+TAP #kmrew «Nhận»
+TAP #kmrew «Nhận»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Bạc16Sức53/100»
+TAP .dlg «Bạc» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Lịch tháng»
+TAP .dlg «Lịch tháng» «mồng 10»
+TAP .dlg «Lịch tháng» «Ghi vào sổ»
+TAP .dlg «Lịch tháng» «ngày 22»
+TAP .dlg «Lịch tháng» «ngày 19: Thiên thu Lư Ninh Hương: nên dâng lễ»
+TAP .dlg «Lịch tháng» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tai mắt0»
+TAP .dlg «mat» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tai mắt0»
+TAP .dlg «mat» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «9Đồng liêu»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hoàng tự»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hôn sự»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Giao thiệp 3/3»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hậu cung»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Giao thiệpGiao thiệpBiếu quàRất vữngTốnBạc -5·1 kh»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Giao thiệpGiao thiệpBiếu quàRất vữngTốnBạc -5·1 kh»
+TAP info #rtoast.on
+TAP .dlg «Có người đến» «Nhận lờiRất vữngTốnkhôngĐượcngười ấy có thiện cảm »
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sắc73Tài61Tâm cơ16Đức37Danh14Chủ tin52»
+TAP info #rtoast.on
+TAP .dlg «Sắc» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hành sự»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Lễ nghiLễ nghiKhảo hạch Nội vụ phủRất vữngMa ma Nộ»
+TAP #kg82 «Sẵn sàngtừ lúc này mới tính giờ»
+TAP #kg82 «Xong: chấm phần»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Giao thiệpGiao thiệpNghe ngóng chungRất vữngHoa Tu»
+TAP #kg82 «Quay lại»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Giao thiệpGiao thiệpNghe ngóng chungRất vữngHoa Tu»
+TAP .dlg «Nghe ngóng chung» «Lui»
+TAP #kg82 «Quay lại»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Y dược 2/2»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP #kg82 «Sẵn sàngtừ lúc này mới tính giờ»
+TAP #kg82 «Quay lại»
+TAP #kg82 «Quay lại»
+TAP .dlg «Chuyện lạ cần tra» «Đo dấu giày, tìm ngườiRất vữngTốnSức -8·Bạc -20Đượ»
+TAP #kg82 «Quay lại»
+TAP info #rtoast.on
+TAP .dlg «Kỳ nguyệt sự» «Báo sớm, nói đã sạch kỳRất vữngTốnkhôngĐượcthẻ bài»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Trăng soi rèm ngọcTầnViên Tĩnh Thù»
+TAP .kfoc «Xin chủ cho đi hầu cung khác · Rất vững · Tốn 1 kh»
+TAP .kfoc «Sẵn sàngbắt đầu chơi»
+TAP .kfoc «Quay lại»
+TAP .kfoc «Xin chủ cho đi hầu cung khác · Rất vững · Tốn 1 kh»
+TAP .kfoc «Sẵn sàngbắt đầu chơi»
+TAP .kfoc «Quay lại»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Lật thẻThấp»
+TAP .dlg «Lật thẻ: Thấp» «Lui»
+TAP .kfoc «Xin chủ cho đi hầu cung khác · Rất vững · Tốn 1 kh»
+TAP .kfoc «Sẵn sàngbắt đầu chơi»
+TAP .kfoc «Quay lại»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tất cả 17/21Nghỉ ngơi 4/4Giao thiệp 1/2Học tập · T»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Cung nữ thân tín tam đẳngHoa Tuệ»
+TAP #dawn «Tiếp theo»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Lui»
+TAP .kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»
+TAP info #kpop
+TAP .kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»
+TAP info #kpop
+TAP .kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»
+TAP info #kpop
+TAP .kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»
+TAP info #kpop
+TAP .kfoc «Giao việc phòng bị · Tốn 1 khắc»
+TAP .kfoc «Giao việc phòng bị · Tốn 1 khắc»
+TAP .kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»
+TAP .kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»
+TAP .kfoc «Mưu kế 1/1»
+TAP .kfoc «Sai đi dò la · Rất vững · Tốn 1 khắc»
+TAP .kfoc «Sai đi dò la · Rất vững · Tốn 1 khắc»
+TAP .kfoc «Sai đi dò la · Rất vững · Tốn 1 khắc»
+TAP .kfoc «Sai đi dò la · Rất vững · Tốn 1 khắc»
+TAP .kfoc «Mưu kế 1/1»
+TAP .kfoc «Giao thiệp 2/3»
+TAP .kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»
+TAP .kfoc «Giao việc phòng bị · Tốn 1 khắc»
+TAP .kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»
+TAP .kfoc «Giao thiệp 2/3»
+TAP .kfoc «Giao việc phòng bị · Tốn 1 khắc»
+TAP .kfoc «Lui»
+TAP .dlg «Việc nhờ» «Nhận lờiRất vữngTốnkhôngĐượcthêm tai mắt, Phùng Ti»
+TAP #dawn «Tiếp theo»
+TAP #kmrew «Nhận»
+TAP #kmrew «Thường»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Xét phẩm: đủ»
+TAP .dlg «Xét phẩm cuối tháng · Cung nữ nhị đẳng» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Mục tiêu chương (có mới)»
+TAP .dlg «Chương 1 · Kẻ hầu mới vào cung» «Đi làm: Làm tròn phận sự hầu chủTốnkhôngĐượctới Hà»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hành sự»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạLĩnh đồ ở Nội vụ phủRất vữngLĩnh than,»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Lật thẻThấp»
+TAP .dlg «Lật thẻ: Thấp» «Lui»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Giao thiệp 3/3»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạLĩnh đồ ở Nội vụ phủRất vữngLĩnh than,»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Giao thiệpGiao thiệpNghe ngóng chungRất vữngHoa Tu»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Giao thiệpGiao thiệpNghe ngóng chungRất vữngHoa Tu»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hoàng tự»
+TAP .dlg «Nghe ngóng chung» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hành sự»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»
+TAP info #rtoast.on
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tất cả 17/22»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Bạc8Sức8/100»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP .dlg «Bạc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tin báo: 4 tin mới»
+TAP .dlg «Tin báo» «Lui»
+TAP .dlg «Có người đến» «Khéo từ chối, đứng ngoàiRất vữngTốnkhôngĐượcđược t»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Công lao13/10»
+TAP .dlg «Công lao 13/» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Ngài để ý0»
+TAP .dlg «Hoàng thượng để ý» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Cung nữ tam đẳngThải Vân»
+TAP .kfoc «Biếu quà nhỏ · Rất vững · Tốn 1 khắc · 5 bạc»
+TAP .kfoc «Sẵn sàngbắt đầu chơi»
+TAP .kfoc «Quay lại»
+TAP .kfoc «Biếu quà nhỏ · Rất vững · Tốn 1 khắc · 5 bạc»
+TAP .kfoc «Sẵn sàngbắt đầu chơi»
+TAP .kfoc «Quay lại»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP .kfoc «Biếu quà nhỏ · Rất vững · Tốn 1 khắc · 5 bạc»
+TAP .kfoc «Sẵn sàngbắt đầu chơi»
+TAP .kfoc «Quay lại»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP .kfoc «Biếu quà nhỏ · Rất vững · Tốn 1 khắc · 5 bạc»
+TAP .kfoc «Sẵn sàngbắt đầu chơi»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP .kfoc «Quay lại»
+TAP .kfoc «Biếu quà nhỏ · Rất vững · Tốn 1 khắc · 5 bạc»
+TAP .kfoc «Sẵn sàngbắt đầu chơi»
+TAP .kfoc «Quay lại»
+TAP .kfoc «Biếu quà nhỏ · Rất vững · Tốn 1 khắc · 5 bạc»
+TAP .kfoc «Sẵn sàngbắt đầu chơi»
+TAP .kfoc «Quay lại»
+TAP .kfoc «Trò chuyện · Có cơ · Tốn 1 khắc»
+TAP .kfoc «Quay lại»
+TAP .kfoc «Trò chuyện · Có cơ · Tốn 1 khắc»
+TAP .kfoc «Quay lại»
+TAP .kfoc «Trò chuyện · Có cơ · Tốn 1 khắc»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐánh cờ với Ho»
+TAP .kfoc «Quay lại»
+TAP .kfoc «Trò chuyện · Có cơ · Tốn 1 khắc»
+TAP .kfoc «Quay lại»
+TAP .kfoc «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Bạc8Sức8/100»
+TAP .dlg «Bạc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Lương tháng3 bạc»
+TAP .dlg «Lương tháng ba bạc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hoàng tự»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tâm trạngBình thản0»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP #dawn «Tiếp theo»
+TAP .dlg «Hội Phượng · Lời mời: Thi múa kiếm tiệc tối» «Không dựRất vữngTốnkhôngĐượckhôngGợi ýkhông được m»
+TAP .dlg «Phụ tuyến · Phơi hoa hồng ướp trà cho Thái hậu · L» «Nhận lờiVữngTốnkhôngĐượcThái hậu hài lòng (chút ít»
+TAP .dlg «Tin trong cung buổi này» «Lui»
+TAP #dawn «Tiếp theo»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .dlg «Tuần mới» «Lui»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Lui»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hậu cung»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Giao thiệpGiao thiệpNhờ dò tinRất vữngTốn1 khắcThà»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Lịch tháng»
+TAP .dlg «Lịch tháng» «ngày 12: Nguyệt tín»
+TAP .dlg «Lịch tháng» «mồng 7»
+TAP .dlg «Lịch tháng» «mồng 2»
+TAP .dlg «Lịch tháng» «mồng 6»
+TAP .dlg «Lịch tháng» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hoàng tự»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Kế vị»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hậu cung»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Giao thiệpGiao thiệpNhờ dò tinRất vữngTốn1 khắcThà»
+TAP info #rtoast.on
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Giao thiệpGiao thiệpNhờ dò tinRất vữngTốn1 khắcThà»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Giao thiệpGiao thiệpBiếu quàRất vữngTốnBạc -5·1 kh»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tường Tử»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Quyên»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Đồng liêu»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hành sự»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tác phẩm»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tâm trạngBình thản-19»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Lương tháng3 bạc»
+TAP .dlg «Lương tháng ba bạc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tư trang»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hành sự»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạLĩnh đồ ở Nội vụ phủRất vữngLĩnh than,»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Giao tình»
+TAP .dlg «Có người đến» «Thu làm tai mắtRất vữngTốnBạc -20Đượccó tai mắt tr»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tư trang»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tâm trạngBình thản-19»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hành sự»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tất cả 0/14»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Mệnh truyện»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «mưa rào»
+TAP info #kpop
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Công chúa hòa thân · Cao Ly 0/16»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Việc nhờ»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tìm việc»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Giao tình»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Vũ · Y · Nữ công 0/12»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tài nghệ»
+TAP .dlg «Có người đến» «Đuổi vềRất vữngTốnkhôngĐượckhông dính líuGợi ýkhôn»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tư trang»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Việc»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Việc»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»
+TAP .dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»
+TAP .dlg «Hối lộ người ở Thái y viện» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐánh cờ với Ho»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»
+TAP .dlg «Hối lộ người ở Thái y viện» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»
+TAP .dlg «Hối lộ người ở Thái y viện» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»
+TAP .dlg «Hối lộ người ở Thái y viện» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sắc47Tài35Tâm cơ31Đức27Danh46Sủng21»
+TAP .dlg «Sắc» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»
+TAP #dawn «Tiếp theo»
+TAP .dlg «Tin trong cung buổi này» «Lui»
+TAP #dawn «Tiếp theo»
+TAP #kmrew «ThườngSon sápHộp son môi dùng khi điểm trang (tô s»
+TAP .dlg «Lui»
+TAP #kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»
+TAP .dlg «Lui»
+TAP #kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»
+TAP .dlg «Lui»
+TAP #kmrew «ThườngSon sápHộp son môi dùng khi điểm trang (tô s»
+TAP .dlg «Lui»
+TAP #kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»
+TAP .dlg «Lui»
+TAP #kmrew «Thường»
+TAP .dlg «Lui»
+TAP #kmrew «Thường»
+TAP .dlg «Lui»
+TAP #kmrew «Thường»
+TAP .dlg «Lui»
+TAP #kmrew «Thường»
+TAP .dlg «Lui»
+TAP #kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»
+TAP .dlg «Lui»
+TAP #kmrew «ThườngSon sápHộp son môi dùng khi điểm trang (tô s»
+TAP .dlg «Lui»
+TAP #kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»
+TAP .dlg «Lui»
+TAP #kmrew «ThườngThan liễuHộp màu mày dùng khi điểm trang (kẻ»
+TAP .dlg «Lui»
+TAP #kmrew «ThườngVải bôngMay áo: váy sa xanh ngọc (Y phục, Sắ»
+TAP .dlg «Lui»
+TAP #kmrew «ThườngThan liễuHộp màu mày dùng khi điểm trang (kẻ»
+TAP .dlg «Lui»
+TAP #kmrew «Nhận»
+TAP #kmrew «ThườngVải bôngMay áo: váy sa xanh ngọc (Y phục, Sắ»
+TAP .dlg «Bổng lộc tháng năm» «Bớt lễ nghĩaRất vữngTốnkhôngĐượccó thêm bạcMấtmất »
+TAP .dlg «Thỉnh bình an mạch» «Lui»
+TAP .dlg «Hội Phượng · Thi múa kiếm tiệc tối» «Lui»
+TAP .dlg «Hội Phượng · Lời mời: Thi nướng bánh mang theo cho» «Ghi tên dự thi bếp núcMong manhTốnkhôngĐượcđoạt gi»
+TAP .dlg «Thi tài ngày Thất tịch · Lời mời» «Ghi tên dâng đàn (theo Cầm, Tài)Mong manhTốnkhôngĐ»
+TAP .dlg «Biến cố» «Lui»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Lui»
+TAP .dlg «Tuần mới» «Lui»
+TAP #kmrew «Nhận»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Lui»
+TAP #kmrew «Nhận»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Chọn chính mình»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sắc73Tài61Tâm cơ16Đức40Danh14Chủ tin51»
+TAP .dlg «Sắc» «Lui»
+TAP #kmrew «ThườngHoa điền hoa đàoDán trán khi điểm trang: đặt»
+TAP .dlg «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tai mắt0»
+TAP #kmrew «ThườngHoa điền hoa đàoDán trán khi điểm trang: đặt»
+TAP .dlg «mat» «Lui»
+TAP .dlg «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Lịch tháng»
+TAP #kmrew «Thường»
+TAP .dlg «Lịch tháng» «Tháng trước»
+TAP .dlg «Lui»
+TAP .dlg «Lịch tháng» «ngày 30»
+TAP .dlg «Lịch tháng» «ngày 13: Nguyệt tín»
+TAP .dlg «Lịch tháng» «ngày 11: Nguyệt tín»
+TAP .dlg «Lịch tháng» «Lui»
+TAP #kmrew «Thường»
+TAP .dlg «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Chọn chính mình»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Người được sai đi (có mới)»
+TAP #kmrew «ThườngHoa điền hoa đàoDán trán khi điểm trang: đặt»
+TAP .dlg «Tin chờ người sai đi» «Nghe lệnhTốnkhôngĐượcViệc chủ sai·trả lời trước kh»
+TAP .dlg «Lui»
+TAP .dlg «Việc chủ sai» «Giúp qua loaTốnChủ tin -1·2 khắc (cả đường đi)Được»
+TAP .dlg «Kỳ ngộ» «Dặn nàng ta có chuyện lạ thì báo taRất vữngTốn1 kh»
+TAP #kmrew «Nhận»
+TAP .dlg «Kỳ ngộ» «Lui»
+TAP #kmrew «ThườngHoa điền hoa đàoDán trán khi điểm trang: đặt»
+TAP .dlg «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Lễ nghiLễ nghiKhảo hạch tấn phongVữngHoàng hậu Lư »
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP page «Tích Cần viện · Viên Tĩnh Thù đi vắng, đang ở Ngự » «Công lao11/10»
+TAP .dlg «Công lao 11/» «Lui»
+TAP page «Tích Cần viện · Viên Tĩnh Thù đi vắng, đang ở Ngự » «Tin báo: 8 tin mới»
+TAP .dlg «Tin báo» «Nghe lệnhTốnkhôngĐượckhôngGhi chúchọn rồi xem kết »
+TAP .dlg «Việc chủ sai» «Giúp qua loaTốnChủ tin -1·2 khắc (cả đường đi)Được»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «1Cung nhân»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Giao thiệpGiao thiệpTrò chuyện với cung nữNgồi ngh»
+TAP page «Dực Khôn cung · Hậu Đức điện · Ở đây còn 6 người.» «Sẵn sàng»
+TAP .dlg «Kẻ hầu» «Làm cật lực, không kêu caRất vữngTốnSức -6Đượcchủ »
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sắc73Tài61Tâm cơ16Đức41Danh15Chủ tin53»
+TAP .dlg «Sắc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Buổi chiều, còn 4 khắc»
+TAP .dlg «chiều · còn» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Dư đồ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Xem bản đồ hoàng cungGhi chútoàn cảnh»
+TAP .mapsc «Mục tiêu chương (có mới)»
+TAP .dlg «Chương 1 · Kẻ hầu mới vào cung» «Đi làm: Làm tròn phận sự hầu chủTốnkhôngĐượctới Hà»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»
+TAP info #rtoast.on
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Lễ nghiLễ nghiKhảo hạch tấn phongVữngHoàng hậu Lư »
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»
+TAP #kg82 «Sẵn sàngtừ lúc này mới tính giờ»
+TAP info #rtoast.on
+TAP #kg82 «Gợi ý: chỉ chỗ đúng, bớt một ít phần»
+TAP #kg82 «Gợi ý: chỉ chỗ đúng, bớt một ít phần»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»
+TAP #kg82 «Gợi ý: chỉ chỗ đúng, bớt một ít phần»
+TAP #kg82 «Gợi ý: chỉ chỗ đúng, bớt một ít phần»
+TAP info #rtoast.on
+TAP #kg82 «Quay lại»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»
+TAP info #rtoast.on
+TAP #kg82 «Quay lại»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Buổi chiều, còn 0 khắc»
+TAP .dlg «chiều · còn» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Dư đồ»
+TAP .mapsc «Buổi chiều, còn 0 khắc»
+TAP .dlg «chiều · còn» «Lui»
+TAP .mapsc «Tâm trạngBình thản+4»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP .mapsc «Giao tình»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Ân oánPhe pháiCung nữ tam đẳngTa▾⇄Hoàng thượng▾Qua»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «chiều lộng gió»
+TAP info #kpop
+TAP #kg82 «Sẵn sàngtừ lúc này mới tính giờ»
+TAP #kg82 «Quay lại»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Phe phái»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Ân oán»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sắc73Tài61Tâm cơ16Đức43Danh15Chủ tin52»
+TAP .dlg «Sắc» «Lui»
+TAP #kg82 «Quay lại»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Bạc6Sức0/100»
+TAP .dlg «Bạc» «Lui»
+TAP #kg82 «Quay lại»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Ân oánPhe pháiCung nữ tam đẳngTa▾⇄Hoàng thượng▾Qua»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Mệnh truyện»
+TAP .dlg «Kỳ nguyệt sự» «Báo sớm, nói đã sạch kỳRất vữngTốnkhôngĐượcthẻ bài»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hoàng tự»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Con của ta»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hoàng tự trong cung»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Bạc6Sức0/100»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP .dlg «Bạc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Về phòng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Buổi tối, còn 4 khắc»
+TAP .dlg «tối · còn» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Lịch tháng»
+TAP .dlg «Lịch tháng» «ngày 27»
+TAP .dlg «Lịch tháng» «ngày 20»
+TAP .dlg «Lịch tháng» «ngày 14: Nguyệt tín»
+TAP .dlg «Lịch tháng» «ngày 21: Hội Phượng»
+TAP info #kpop
+TAP .dlg «Lịch tháng» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «mưa rào»
+TAP info #kpop
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sắc73Tài61Tâm cơ16Đức43Danh15Chủ tin52»
+TAP .dlg «Sắc» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐánh cờ với Ho»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Dư đồ»
+TAP .mapsc «Hội Phượng (thi cưỡi ngựa bắn cung)Hạ · còn 4 khắc»
+TAP .mapsc «Tâm trạngBình thản+4»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP .mapsc «Ngự hoa viên2 khắc»
+TAP page «Ngự hoa viên · Không gặp ai.» «Thư từ»
+TAP .dlg «Gửi»
+TAP .dlg «Gửi»
+TAP .dlg «Gửi»
+TAP .dlg «Gửi»
+TAP .dlg «Lui»
+TAP page «Ngự hoa viên · Không gặp ai.» «Bạc6Sức0/100»
+TAP .dlg «Bạc» «Lui»
+TAP page «Ngự hoa viên · Không gặp ai.» «10Đồng liêu»
+TAP page «Ngự hoa viên · Không gặp ai.» «Mục tiêu chương (có mới)»
+TAP .dlg «Chương 1 · Kẻ hầu mới vào cung» «Danh hiệu 0/35»
+TAP .dlg «Danh hiệu» «Danh hiệu 0/35»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP .dlg «Danh hiệu» «Danh hiệu 0/35»
+TAP .dlg «Danh hiệu» «Danh hiệu 0/35»
+TAP .dlg «Danh hiệu» «Danh hiệu 0/35»
+TAP .dlg «Danh hiệu» «Lui»
+TAP #dawn «Tiếp theo»
+TAP .dlg «Lỡ hẹn» «Lui»
+TAP #dawn «Tiếp theo»
+TAP .dlg «Tin trong cung buổi này» «Lui»
+TAP .dlg «Sắp tới: Thi tài ngày Thất tịch» «Lui»
+TAP .dlg «Tin trong cung buổi này» «Lui»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Lui»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Bạc6Sức10/100»
+TAP .dlg «Bạc» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Lịch tháng»
+TAP .dlg «Lịch tháng» «ngày 25»
+TAP .dlg «Lịch tháng» «ngày 25»
+TAP .dlg «Lịch tháng» «ngày 22»
+TAP .dlg «Lịch tháng» «ngày 27»
+TAP .dlg «Lịch tháng» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Buổi sáng, còn 4 khắc»
+TAP .dlg «sáng · còn» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Mục tiêu chương»
+TAP .dlg «Danh hiệu» «Danh hiệu 0/35»
+TAP .dlg «Danh hiệu» «Danh hiệu 0/35»
+TAP .dlg «Danh hiệu» «Danh hiệu 0/35»
+TAP .dlg «Danh hiệu» «Danh hiệu 0/35»
+TAP .dlg «Danh hiệu» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tin báo: 13 tin mới»
+TAP .dlg «Tin báo» «Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu»
+TAP .dlg «Tin chờ người sai đi» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hành sự»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»
+TAP info #rtoast.on
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «4Chí tôn»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Bạc6Sức0/100»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tâm trạngBình thản-9»
+TAP .dlg «Việc khó xử» «Mách Viên Tĩnh ThùRất vữngTốnkhôngĐượcngười ấy có »
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «4Chí tôn»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tất cả 0/14»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Giao thiệp 0/1»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tất cả 0/14Hầu hạ 0/5Học tập · Tài nghệ 0/3Nghỉ ng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tư trang»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Giao tình»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Xem quan hệ của Ta»
+TAP .dlg «Xem quan hệ của» «Cung nữ tam đẳngTa»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Giao tình»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «10Đồng liêu»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Doanh TửThiện cảm 15»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Ngọc»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Buổi trưa, còn 0 khắc»
+TAP .dlg «trưa · còn» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Chí tônChủ tửNam nhânĐồng liêu‹Cùng cungVânSơn TửN»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sơn Tử»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sắc73Tài61Tâm cơ16Đức46Danh15Chủ tin53»
+TAP .dlg «Sắc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Linh»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Dư đồ»
+TAP .mapsc «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tin báo: 11 tin mới»
+TAP .dlg «Tin báo» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệ 4/4»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hành sự»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP .dlg «Chuyện trong cung» «Tặng nàng ta một món nhỏ ngayRất vữngTốnBạc -10Đượ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»
+DEAD BUTTON page «Tích Cần viện · Ở đây còn 3 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà» cover zero size
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Thư từ»
+TAP .dlg «Gửi»
+TAP .dlg «Gửi»
+TAP .dlg «Gửi»
+TAP .dlg «Gửi»
+TAP .dlg «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «10Đồng liêu»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Y dược 0/1»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sắc73Tài61Tâm cơ16Đức46Danh15Chủ tin53»
+TAP .dlg «Sắc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Về phòng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tâm trạngBình thản-9»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐọc binh thư, »
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «nắng gắt»
+TAP info #kpop
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tâm trạngBình thản-9»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sắc73Tài61Tâm cơ16Đức46Danh15Chủ tin53»
+TAP .dlg «Sắc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Người được sai đi (có mới)»
+TAP .dlg «Tin chờ người sai đi» «Nghe lệnhTốnkhôngĐượcViệc chủ sai·trả lời trước kh»
+TAP .dlg «Việc chủ sai» «Từ chốiTốnChủ tin -3ĐượckhôngGhi chúkhông tốn khắc»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐánh cờ với Ho»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tai mắt1»
+TAP .dlg «mat» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tư trang»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»
+TAP .dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệMúa trong yến »
+TAP info #rtoast.on
+TAP .dlg «Kỳ ngộ» «Xin ông kể chuyện thuở trẻRất vữngTốnSức -4·2 khắc»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»
+TAP .dlg «Kỳ ngộ» «Lui»
+TAP .dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»
+TAP .dlg «Xong việc: Đi một nơi trong cung» «Lui»
+TAP #dawn «Tiếp theo»
+TAP .dlg «Viên Tĩnh Thù quở mắng» «Cãi lạiRất vữngTốnkhôngĐượcthêm thể diện trong cun»
+TAP #dawn «Tiếp theo»
+TAP .dlg «Tết Thất tịch · Lời mời: Thi hát khúc Thất tịch» «Không dựRất vữngTốnkhôngĐượckhôngGợi ýkhông được m»
+TAP .dlg «Phụ tuyến · Đặt sớ của nhà Tể tướng Liêu Dực Chi l» «Khéo từ chốiRất vữngTốnkhôngĐượcdưỡng sức, giữ sức»
+TAP .dlg «Xét phẩm cuối tháng · Thường tại» «Lui»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Lui»
+TAP .dlg «Tuần mới» «Lui»
+TAP info #rtoast.on
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»
+TAP .kbk «Tổng lược» «Lui»
+TAP .dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐọc binh thư, »
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»
+TAP .dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sắc73Tài61Tâm cơ16Đức46Danh17Chủ tin42»
+TAP .dlg «Sắc» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Về Dư đồ»
+TAP .mapsc «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hậu cung»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Giao thiệpGiao thiệpBiếu quàRất vữngTốnBạc -5·1 kh»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tư trang»
+TAP .dlg «Hoàng thượng» «Nhắc vạt áo còn phấnRất vữngTốnkhôngĐượcthêm tâm c»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»
+TAP info #rtoast.on
+TAP .mapsc «Chung Tú3 bóng · 3 khắc · bái kiến»
+TAP .dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»
+TAP .mapsc «Số lần ân thưởng0»
+TAP .dlg «Ân thưởng» «Lui»
+TAP .mapsc «Sẵn sàng»
+TAP .dlg «Một ánh mắt» «Giữ bài thơ, đáp lạiRất vữngTốnkhôngĐượcngười ấy t»
+TAP info #rtoast.on
+TAP .mapsc «Lao phổi · nhẹ»
+TAP .dlg «Lao phổi · nhẹ» «Lui»
+TAP .mapsc «Hôm nay mặt mộc»
+TAP info #kpop
+TAP .mapsc «Sẵn sàng»
+TAP .mapsc «Mệnh truyện»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Hành sự»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐánh cờ với Ho»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»
+TAP .dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Thư từ»
+TAP .dlg «Gửi»
+TAP .dlg «Gửi»
+TAP .dlg «Gửi»
+TAP .dlg «Gửi»
+TAP .dlg «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐánh cờ với Ho»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sắc73Tài61Tâm cơ16Đức46Danh17Chủ tin42»
+TAP .dlg «Sắc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hành sự»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Mưu kế 1/1»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Mưu kếMưu kếThường tạiTự đi dò la cho chủCó cơLén »
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệ 2/4»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Mục tiêu chương»
+TAP #kmrew «ThườngHoa điền hoa đàoDán trán khi điểm trang: đặt»
+TAP .dlg «Lui»
+TAP #kmrew «Thường»
+TAP .dlg «Lui»
+TAP #dawn «Tiếp theo»
+TAP #kmrew «Thường»
+TAP .dlg «Lui»
+TAP #kmrew «ThườngHoa điền hoa đàoDán trán khi điểm trang: đặt»
+TAP .dlg «Lui»
+TAP #kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»
+TAP .dlg «Lui»
+TAP #kmrew «Thường»
+TAP .dlg «Lui»
+TAP #kmrew «ThườngVải bôngMay áo: áo lụa thêu hoa nhỏ (Y phục,»
+TAP .dlg «Lui»
+TAP #kmrew «Thường»
+TAP .dlg «Lui»
+TAP #kmrew «Nhận»
+TAP #kmrew «ThườngVải bôngMay áo: áo lụa thêu hoa nhỏ (Y phục,»
+TAP #kmrew «ThườngHoa điền hoa đàoDán trán khi điểm trang: đặt»
+TAP .dlg «Tin trong cung buổi này» «Lui»
+TAP .dlg «Lui»
+TAP #kmrew «Nhận»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP #kmrew «Nhận»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .dlg «Chương 1 · Nhập cung, đứng vững» «Thiên mệnh»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .dlg «Thiên mệnh» «Danh hiệu 0/35»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .dlg «Danh hiệu» «Thiên mệnh»
+TAP .kbk «Tổng lược» «Lui»
+TAP .dlg «Thiên mệnh» «Danh hiệu 0/35»
+TAP .dlg «Danh hiệu» «Mục tiêu»
+TAP .dlg «Chương 1 · Nhập cung, đứng vững» «Danh hiệu 0/35»
+TAP .dlg «Danh hiệu» «Thiên mệnh»
+TAP .dlg «Thiên mệnh» «Mục tiêu»
+TAP .dlg «Chương 1 · Nhập cung, đứng vững» «Đi làm: Thỉnh an Thái hậu hoặc Hoàng hậuTốnkhôngĐư»
+TAP .dlg «Biến cố» «Lui»
+TAP #dawn «Tiếp theo»
+TAP #kmrew «Thường»
+TAP .dlg «Lui»
+TAP #kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»
+TAP .dlg «Lui»
+TAP #kmrew «Thường»
+TAP .dlg «Lui»
+TAP #kmrew «Thường»
+TAP .dlg «Lui»
+TAP #kmrew «Thường»
+TAP .dlg «Lui»
+TAP #kmrew «ThườngYên chi giấyHộp phấn má dùng khi điểm trang »
+TAP .dlg «Lui»
+TAP #kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»
+TAP .dlg «Lui»
+TAP #kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»
+TAP .dlg «Lui»
+TAP #kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»
+TAP .dlg «Lui»
+TAP #kmrew «Nhận»
+TAP #kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»
+TAP .dlg «Lui»
+TAP .dlg «Tin trong cung buổi này» «Lui»
+TAP .dlg «Bổng lộc tháng sáu» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»
+TAP .dlg «Thỉnh bình an mạch» «Lui»
+TAP .dlg «Tết Thất tịch · Thi hát khúc Thất tịch» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Mưu kếMưu kếThường tạiTự đi dò la cho chủCó cơLén »
+TAP .dlg «Tuần mới» «Lui»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Lui»
+TAP info #rtoast.on
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐọc binh thư, »
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «gió heo may»
+TAP info #kpop
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tin báo: 14 tin mới»
+TAP .dlg «Tin báo» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «10Đồng liêu»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Mệnh truyện»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Học tập · Tài nghệHọc tập · Tài nghệCác lối, sách »
+TAP .dlg «Vũ: các lối» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Về phòng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+CP buổi 50 year 1 save 0 chars
+TAP .dlg «Tiệc Thất tịch» «Đứng sau hầu chủRất vữngTốnkhôngĐượcchủ thêm tin d»
+CP buổi 50 year 1 save 0 chars
+TAP .dlg «Có người đến» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐánh cờ với Ho»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Mục tiêu chương (có mới)»
+TAP .dlg «Danh hiệu» «Danh hiệu 0/35»
+TAP .dlg «Danh hiệu» «Danh hiệu 0/35»
+TAP .dlg «Danh hiệu» «Danh hiệu 0/35»
+TAP .dlg «Danh hiệu» «Danh hiệu 0/35»
+TAP .dlg «Danh hiệu» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Giao tình»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Phe phái»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Ân oánPhe pháiPhe phái hậu cungTriều đìnhTa chưa v»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Phe phái»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Chọn chính mình»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «3Chí tôn»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Thư từ»
+TAP #kchatp «Gửi»
+TAP #kchatp «Gửi»
+TAP #kchatp «Gửi»
+TAP #kchatp «Gửi»
+TAP #kchatp «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Giao tình»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «4Chí tôn»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Hôm nay mặt mộc»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP info #kpop
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Lập phe cùng Viên Tĩnh ThùTốn2 khắcGhi chúLắm lời»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tâm trạngBình thản+6»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Mời Thạch Ngọc KhêGhi chúMiễn cưỡng»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hậu cung»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Thư từ»
+TAP .dlg «Gửi»
+TAP .dlg «Gửi»
+TAP .dlg «Gửi»
+TAP .dlg «Gửi»
+TAP .dlg «Kỳ nguyệt sự» «Báo sớm, nói đã sạch kỳRất vữngTốnkhôngĐượcthẻ bài»
+TAP .dlg «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hậu cung»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Giao thiệpGiao thiệpTrò chuyệnCó cơTốn1 khắcThànhn»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Song Tử»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Giao thiệpGiao thiệpTrò chuyệnCó cơTốn1 khắcThànhn»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Giao thiệpGiao thiệpTrò chuyệnCó cơTốn1 khắcThànhn»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Hậu cung»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Sắc73Tài61Tâm cơ16Đức46Danh17Chủ tin40»
+TAP .dlg «Sắc» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sắc46Tài35Tâm cơ40Đức24Danh69Sủng34»
+TAP .dlg «Sắc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Giao tình»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Tâm trạngBình thản-6»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Hôm nay mặt mộc»
+TAP info #kpop
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Tích Cần viện · Ở đây còn 4 người.» «Buổi tối, còn 1 khắc»
+TAP .dlg «tối · còn» «Lui»
+TAP #dawn «Tiếp theo»
+TAP .dlg «Y phục dự Lễ Vu Lan» «Cáo lỗi, về cung nghỉRất vữngTốnkhôngĐượcvề cung n»
+TAP .dlg «Lỡ hẹn» «Lui»
+TAP .dlg «Lỡ hẹn» «Lui»
+TAP .dlg «Lễ Vu Lan · Chuyện bên lề hội» «Choàng khăn, ở lại tới cuối hộiTốnSức -5ĐượcDanh +»
+TAP .dlg «Phi Nhan Thanh Uyển xin mượn trâm» «Khéo từ chốiRất vữngTốnkhôngĐượcThoa bạc song điệp»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP #dawn «Tiếp theo»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .dlg «Tuần mới» «Lui»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Lui»
+TAP .kbk «Tổng lược» «Trang trước»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP .kbk «Tổng lược» «Trang sau»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sẵn sàng»
+TAP .kbk «Tổng lược» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Lương tháng3 bạc»
+TAP .dlg «Lương tháng ba bạc» «Lui»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Lương tháng3 bạc»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Ân oánPhe pháiPhe phái hậu cungTriều đìnhTa thuộc »
+TAP .dlg «Lương tháng ba bạc» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Cung nữ thân tín tam đẳngHoa Tuệ»
+TAP .kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»
+TAP .kfoc «Sẵn sàngbắt đầu chơi»
+TAP .kfoc «Quay lại»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hành sự»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Mưu kế 1/1»
+TAP .kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Y dược 0/1»
+TAP .kfoc «Sẵn sàngbắt đầu chơi»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hành sự»
+TAP .kfoc «Quay lại»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Mệnh truyện»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sổ ghi»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sắc73Tài61Tâm cơ16Đức46Danh17Chủ tin40»
+TAP .kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»
+TAP .dlg «Sắc» «Lui»
+TAP .kfoc «Sẵn sàngbắt đầu chơi»
+TAP .kfoc «Quay lại»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tâm trạngBình thản+2»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP .kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»
+TAP .kfoc «Sẵn sàngbắt đầu chơi»
+TAP .kfoc «Quay lại»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Thân phậnViệc nhờSổ ghiCon gái Tể tướng 0/16Con gá»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tài nghệ»
+TAP .kfoc «Mưu kế 1/1»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Bậc 0 trên 5»
+TAP .kfoc «Sai đi dò la · Vững · Tốn 1 khắc»
+TAP .dlg «Vũ» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sắc46Tài35Tâm cơ40Đức24Danh71Sủng30»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tài nghệ»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tác phẩm»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tài nghệ»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Thư từ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Bậc 0 trên 5»
+TAP #kchatp «Gửi»
+TAP #kchatp «Gửi»
+TAP .dlg «Vũ» «Lui»
+TAP #kchatp «Gửi»
+TAP #kchatp «Gửi»
+TAP #kchatp «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sắc73Tài61Tâm cơ16Đức46Danh17Chủ tin40»
+TAP .dlg «Sắc» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tài nghệ»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tứ đức 9/9»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tin báo: 6 tin mới»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Hoàng tự»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tác phẩm»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Bổng lộcsau 2 tuần»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Ân tình (đêm)0»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hậu cung»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Cung nữ thân tín tam đẳngHoa Tuệ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Giao thiệpGiao thiệpTrò chuyệnVữngTốn1 khắcThànhng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Có thaiThấp»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Lật thẻRất thấp»
+TAP info #rtoast.on
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Bạc146Sức89/98»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Mục tiêu chương»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tư trang»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Giao thiệpGiao thiệpTrò chuyệnVữngTốn1 khắcThànhng»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «3Chí tôn»
+TAP info #rtoast.on
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Hành sự»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tâm trạngBình thản-2»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Giao thiệpGiao thiệpTrò chuyệnVữngTốn1 khắcThànhng»
+TAP info #rtoast.on
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Giao thiệpGiao thiệpTrò chuyệnVữngTốn1 khắcThànhng»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Song Tử»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Thú cưng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hậu cung»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Túi đồ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hành sự»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Phấn gạo ×3 · Son phấn»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Mảnh giấy nhắn · Thư từ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Giao thiệp 0/2»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Quẻ Hạ (Sức khỏe)»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hoàng tự»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Số lần ân thưởng0»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tư trang»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Túi đồThú cưngViệcTất cả 49Trang sức 4Y phục 2Vải »
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hành sự»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tâm trạngBình thản-2»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Dư đồ»
+TAP .mapsc «Hành sự»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tài nghệ»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Cung nữ thân tín tam đẳngHoa Tuệ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Dư đồ»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Giao tình»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Ân tình (đêm)0»
+TAP .mapsc «Phóng to»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Có thaiThấp»
+TAP .mapsc «Tài nghệ»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Số lần ân thưởng0»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Mời Diêu Hi NguyệtGhi chúMiễn cưỡng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tứ đức 0/9Cầm kỳ thi họa 0/12Vũ · Y · Nữ công 0/12»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Mục tiêu chương»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Bổng lộcsau 2 tuần»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tư trang»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tâm trạngBình thản-2»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Buổi sáng, còn 0 khắc»
+TAP .dlg «sáng · còn» «Lui»
+TAP page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Hành sự»
+TAP .kfoc «Sai đi dò la · Vững · Tốn 1 khắc»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Mệnh truyện»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tâm trạngBình thản+2»
+TAP .kfoc «Sai đi dò la · Vững · Tốn 1 khắc»
+TAP .kfoc «Sai đi dò la · Vững · Tốn 1 khắc»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP .kfoc «Mưu kế 1/1»
+TAP .kfoc «Giao thiệp 3/3»
+TAP .kfoc «Mưu kế 1/1»
+TAP .kfoc «Mưu kế 1/1»
+TAP .kfoc «Giao thiệp 3/3»
+TAP .kfoc «Giao thiệp 3/3»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Con gái nhà buôn muối 0/16»
+TAP .kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Buổi sáng, còn 0 khắc»
+TAP .kfoc «Lui»
+TAP .dlg «sáng · còn» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sắc73Tài61Tâm cơ16Đức46Danh17Chủ tin40»
+TAP .dlg «Sắc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Con gái Đại tướng quân 0/16»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Việc nhờ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tư trang»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sắc73Tài61Tâm cơ16Đức46Danh17Chủ tin40»
+TAP .dlg «Sắc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tư trang»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Lương tháng3 bạc»
+TAP .dlg «Lương tháng ba bạc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hoàng tự»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hoàng tửKính»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Quý tộc kén rể · kén dâu»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hoàng tự trong cung»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hoàng tửNghiêm»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tâm trạngBình thản+2»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Mệnh truyện»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Nợ ân 0»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «trời thu trong»
+TAP info #kpop
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Việc nhờ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Nợ ân 0»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hành sự»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hành sự»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Mục tiêu chương (có mới)»
+TAP .dlg «Danh hiệu» «Danh hiệu 0/35»
+TAP .dlg «Danh hiệu» «Danh hiệu 0/35»
+TAP .dlg «Danh hiệu» «Danh hiệu 0/35»
+TAP .dlg «Danh hiệu» «Danh hiệu 0/35»
+TAP .dlg «Danh hiệu» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Mệnh truyện»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Mệnh truyện»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «4Chí tôn»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «trời thu trong»
+TAP info #kpop
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Bạc4Sức30/100»
+TAP .dlg «Bạc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tư trang»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Túi đồ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hậu cung»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tư trang»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Cài tóc: Trâm hoa lụa»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tự chọn đồRất vữngTốn0 khắcThànhthay ngay bộ ta ch»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tự chọn đồRất vữngTốn0 khắcThànhthay ngay bộ ta ch»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tự chọn đồRất vữngTốn0 khắcThànhthay ngay bộ ta ch»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tự chọn đồRất vữngTốn0 khắcThànhthay ngay bộ ta ch»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tự chọn đồRất vữngTốn0 khắcThànhthay ngay bộ ta ch»
+TAP info #rtoast.on
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «ThườngTrâm hoa lụađồ phẩm Đáp ứng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Giao tình»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Sắc73Tài61Tâm cơ16Đức46Danh17Chủ tin40»
+TAP .dlg «Sắc» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Xem quan hệ của Ta»
+TAP .dlg «Xem quan hệ của» «Phi tần 11»
+TAP .dlg «Xem quan hệ của» «Người lạTrinh tầnNgười lạ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Phe phái»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Ân oánPhe pháiPhe phái hậu cungTriều đìnhQuốc sựBi»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tin báo: 5 tin mới»
+TAP .dlg «Tin báo» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Về phòng»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Chọn chính mình»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Xét phẩm: đủ»
+TAP .dlg «Xét phẩm cuối tháng · Cung nữ nhị đẳng» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tâm trạngBình thản+2»
+TAP .dlg «Tâm trạng · Ta» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tai mắt1»
+TAP .dlg «mat» «Lui»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Chọn chính mình»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Tài nghệ»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hoàng tự»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Quý tộc kén rể · kén dâu»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hậu cung»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Quyên»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Hậu cung»
+TAP page «Tích Cần viện · Ở đây còn 3 người.» «Dư đồ»
+TAP .mapsc «Về phòng»
+TAP .mapsc «Công lao10/10»
+TAP .dlg «Công lao 10/» «Lui»
+BUG stuck no progress 15 min on #coopfz «»
+TAP title (unstick reload) «cùng hảo hữu»
+TAP title (unstick reload) «trở lại phòng|vào lại phòng|về phòng»
+TAP #modal «Mời hảo hữu» «3 phút»
+TAP #modal «Mời hảo hữu» «5 phút»
+TAP #modal «Mời hảo hữu» «8 phút»
+TAP #modal «Mời hảo hữu» «5 phút»
+TAP #modal «Mời hảo hữu» «8 phút»
+TAP #modal «Mời hảo hữu» «✓ 8 phút»
+TAP #modal «Mời hảo hữu» «✓ 8 phút»
+TAP #modal «Mời hảo hữu» «3 phút»
+TAP #modal «Mời hảo hữu» «8 phút»
+TAP #modal «Mời hảo hữu» «✓ 8 phút»
+TAP #modal «Mời hảo hữu» «5 phút»
+TAP #modal «Mời hảo hữu» «3 phút»
+TAP #modal «Mời hảo hữu» «5 phút»
+TAP #modal «Mời hảo hữu» «3 phút»
+TAP #modal «Mời hảo hữu» «5 phút»
+TAP #modal «Mời hảo hữu» «8 phút»
+TAP #modal «Mời hảo hữu» «5 phút»
+TAP #modal «Mời hảo hữu» «✓ 5 phút»
+TAP #modal «Mời hảo hữu» «3 phút»
+TAP #modal «Mời hảo hữu» «5 phút»
+TAP #modal «Mời hảo hữu» «Lui»
+TAP #modal «Cùng hảo hữu» «Trở lại phòng»
+TAP #modal «Mời hảo hữu» «Lui»
+TAP #modal «Cùng hảo hữu» «Trở lại phòng»
+TAP #modal «Mời hảo hữu» «Lui»
+TAP #modal «Cùng hảo hữu» «Trở lại phòng»
+TAP #modal «Mời hảo hữu» «Lui»
+TAP #modal «Cùng hảo hữu» «Trở lại phòng»
+TAP #modal «Mời hảo hữu» «✓ 5 phút»
+TAP #modal «Mời hảo hữu» «✓ 5 phút»
+TAP #modal «Mời hảo hữu» «✓ 5 phút»
+TAP #modal «Mời hảo hữu» «8 phút»
+TAP #modal «Mời hảo hữu» «Lui»
+TAP #modal «Cùng hảo hữu» «Lui»
+TAP #modal «Chọn sổ» «Một mình»
+TAP #modal «Chọn sổ» «Một mình»
+TAP #modal «Chọn sổ» «Một mình»
+TAP #modal «Chọn sổ» «Một mình»
+TAP #modal «Chọn sổ» «Một mình»
+TAP #modal «Chọn sổ» «Lui»
+TAP #modal «unstick Lui»
+SEAT LIFE DONE guest k1 HARNESS
+SEAT LIFE DONE host k1 HARNESS
+browserContext.close: Target page, context or browser has been closed
+    at async /home/user/wt/rt3/dev/test/robot-rt-coop.js:80:34 {
+  log: []
+}

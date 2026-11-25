@@ -1,0 +1,1726 @@
+{
+ "job": {
+  "id": "coop-rt-flight2-coop1h-guest-k1",
+  "origin": null,
+  "road": null,
+  "bot": "sens",
+  "seed": 70132,
+  "dev": "ipad",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "6d3a128f",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [],
+  "slice": null,
+  "areaTaps": 59,
+  "typed": 1,
+  "infoTaps": 18,
+  "scrolls": 37,
+  "dlgClose": 16
+ },
+ "life": {
+  "id": "HARNESS",
+  "type": "harness"
+ },
+ "exitPick": null,
+ "bugs": [
+  {
+   "type": "harness",
+   "msg": "runner error: page.waitForTimeout: Target page, context or browser has been closed",
+   "n": 1
+  }
+ ],
+ "dead": [],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 0,
+   "key": ""
+  }
+ ],
+ "buoi": 53,
+ "steps": 1995,
+ "status": [],
+ "_loopAt": 1795603209799,
+ "_snapAt": 1795603165899,
+ "trace": [
+  [
+   460,
+   ".dlg «Bổng lộc tháng tư» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   460,
+   ".dlg «Thỉnh bình an mạch» «Lui»"
+  ],
+  [
+   462,
+   ".dlg «Y phục dự Tết Đoan ngọ» «Sai người mua trâm đồng mai hoa (Vàng) ở Nội vụ ph»"
+  ],
+  [
+   463,
+   ".dlg «Tết Đoan ngọ · Thi hát đò đưa trên thuyền rồng» «Lui»"
+  ],
+  [
+   465,
+   ".dlg «Tuần mới» «Lui»"
+  ],
+  [
+   466,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   466,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   467,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   467,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   467,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   475,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   484,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Giao thiệp 3/3»"
+  ],
+  [
+   484,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   486,
+   ".dlg «Có người đến» «Nhận lờiRất vữngTốnkhôngĐượcngười ấy có thiện cảm »"
+  ],
+  [
+   487,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   490,
+   "DEAD Giao thiệpGiao thiệpNghe ngóng chungRất vữngHoa Tu"
+  ],
+  [
+   491,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Giao thiệpGiao thiệpNghe ngóng chungRất vữngHoa Tu»"
+  ],
+  [
+   491,
+   ".dlg «Nghe ngóng chung» «Lui»"
+  ],
+  [
+   493,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Y dược 2/2»"
+  ],
+  [
+   493,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   496,
+   ".dlg «Chuyện lạ cần tra» «Đo dấu giày, tìm ngườiRất vữngTốnSức -8·Bạc -20Đượ»"
+  ],
+  [
+   499,
+   ".dlg «Kỳ nguyệt sự» «Báo sớm, nói đã sạch kỳRất vữngTốnkhôngĐượcthẻ bài»"
+  ],
+  [
+   506,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Lật thẻThấp»"
+  ],
+  [
+   507,
+   ".dlg «Lật thẻ: Thấp» «Lui»"
+  ],
+  [
+   508,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tất cả 17/21Nghỉ ngơi 4/4Giao thiệp 1/2Học tập · T»"
+  ],
+  [
+   509,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   509,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Cung nữ thân tín tam đẳngHoa Tuệ»"
+  ],
+  [
+   513,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   513,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   513,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   513,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   514,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   514,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   515,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   516,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   517,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   517,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   518,
+   ".kfoc «Giao việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   518,
+   ".kfoc «Giao việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   518,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   519,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   519,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   519,
+   ".kfoc «Sai đi dò la · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   519,
+   ".kfoc «Sai đi dò la · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   520,
+   ".kfoc «Sai đi dò la · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   520,
+   ".kfoc «Sai đi dò la · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   520,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   520,
+   ".kfoc «Giao thiệp 2/3»"
+  ],
+  [
+   521,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   521,
+   ".kfoc «Giao việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   521,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   521,
+   ".kfoc «Giao thiệp 2/3»"
+  ],
+  [
+   522,
+   ".kfoc «Giao việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   522,
+   ".kfoc «Lui»"
+  ],
+  [
+   523,
+   ".dlg «Việc nhờ» «Nhận lờiRất vữngTốnkhôngĐượcthêm tai mắt, Phùng Ti»"
+  ],
+  [
+   533,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Lật thẻThấp»"
+  ],
+  [
+   533,
+   ".dlg «Lật thẻ: Thấp» «Lui»"
+  ],
+  [
+   535,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Giao thiệp 3/3»"
+  ],
+  [
+   535,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   537,
+   "DEAD Giao thiệpGiao thiệpNghe ngóng chungRất vữngHoa Tu"
+  ],
+  [
+   538,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Giao thiệpGiao thiệpNghe ngóng chungRất vữngHoa Tu»"
+  ],
+  [
+   539,
+   ".dlg «Nghe ngóng chung» «Lui»"
+  ],
+  [
+   540,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tất cả 17/22»"
+  ],
+  [
+   540,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   544,
+   ".dlg «Có người đến» «Khéo từ chối, đứng ngoàiRất vữngTốnkhôngĐượcđược t»"
+  ],
+  [
+   551,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   554,
+   "DEAD Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh"
+  ],
+  [
+   555,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   564,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐánh cờ với Ho»"
+  ],
+  [
+   573,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   578,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   578,
+   ".dlg «Hội Phượng · Lời mời: Thi múa kiếm tiệc tối» «Không dựRất vữngTốnkhôngĐượckhôngGợi ýkhông được m»"
+  ],
+  [
+   579,
+   ".dlg «Phụ tuyến · Phơi hoa hồng ướp trà cho Thái hậu · L» «Nhận lờiVữngTốnkhôngĐượcThái hậu hài lòng (chút ít»"
+  ],
+  [
+   579,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   581,
+   ".dlg «Tuần mới» «Lui»"
+  ],
+  [
+   582,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   583,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   583,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   583,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   583,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   591,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   600,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   603,
+   ".dlg «Có người đến» «Thu làm tai mắtRất vữngTốnBạc -20Đượccó tai mắt tr»"
+  ],
+  [
+   610,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   612,
+   ".dlg «Có người đến» «Đuổi vềRất vữngTốnkhôngĐượckhông dính líuGợi ýkhôn»"
+  ],
+  [
+   619,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   629,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐánh cờ với Ho»"
+  ],
+  [
+   638,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   642,
+   "DEAD Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh"
+  ],
+  [
+   642,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   651,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sắc47Tài35Tâm cơ31Đức27Danh46Sủng21»"
+  ],
+  [
+   652,
+   ".dlg «Sắc» «Lui»"
+  ],
+  [
+   653,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   654,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   659,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   659,
+   "#kmrew «ThườngSon sápHộp son môi dùng khi điểm trang (tô s»"
+  ],
+  [
+   659,
+   ".dlg «Lui»"
+  ],
+  [
+   661,
+   "#kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»"
+  ],
+  [
+   661,
+   ".dlg «Lui»"
+  ],
+  [
+   663,
+   "#kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»"
+  ],
+  [
+   663,
+   ".dlg «Lui»"
+  ],
+  [
+   664,
+   "#kmrew «ThườngSon sápHộp son môi dùng khi điểm trang (tô s»"
+  ],
+  [
+   665,
+   ".dlg «Lui»"
+  ],
+  [
+   666,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   666,
+   ".dlg «Lui»"
+  ],
+  [
+   668,
+   "#kmrew «Thường»"
+  ],
+  [
+   668,
+   ".dlg «Lui»"
+  ],
+  [
+   669,
+   "#kmrew «Thường»"
+  ],
+  [
+   670,
+   ".dlg «Lui»"
+  ],
+  [
+   671,
+   "#kmrew «Thường»"
+  ],
+  [
+   671,
+   ".dlg «Lui»"
+  ],
+  [
+   673,
+   "#kmrew «Thường»"
+  ],
+  [
+   673,
+   ".dlg «Lui»"
+  ],
+  [
+   675,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   675,
+   ".dlg «Lui»"
+  ],
+  [
+   676,
+   "#kmrew «ThườngSon sápHộp son môi dùng khi điểm trang (tô s»"
+  ],
+  [
+   677,
+   ".dlg «Lui»"
+  ],
+  [
+   678,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   678,
+   ".dlg «Lui»"
+  ],
+  [
+   680,
+   "#kmrew «ThườngThan liễuHộp màu mày dùng khi điểm trang (kẻ»"
+  ],
+  [
+   680,
+   ".dlg «Lui»"
+  ],
+  [
+   682,
+   "#kmrew «ThườngVải bôngMay áo: váy sa xanh ngọc (Y phục, Sắ»"
+  ],
+  [
+   682,
+   ".dlg «Lui»"
+  ],
+  [
+   683,
+   "#kmrew «ThườngThan liễuHộp màu mày dùng khi điểm trang (kẻ»"
+  ],
+  [
+   683,
+   ".dlg «Lui»"
+  ],
+  [
+   685,
+   "#kmrew «Nhận»"
+  ],
+  [
+   686,
+   "#kmrew «ThườngVải bôngMay áo: váy sa xanh ngọc (Y phục, Sắ»"
+  ],
+  [
+   687,
+   ".dlg «Bổng lộc tháng năm» «Bớt lễ nghĩaRất vữngTốnkhôngĐượccó thêm bạcMấtmất »"
+  ],
+  [
+   687,
+   ".dlg «Thỉnh bình an mạch» «Lui»"
+  ],
+  [
+   689,
+   ".dlg «Hội Phượng · Thi múa kiếm tiệc tối» «Lui»"
+  ],
+  [
+   691,
+   ".dlg «Hội Phượng · Lời mời: Thi nướng bánh mang theo cho» «Ghi tên dự thi bếp núcMong manhTốnkhôngĐượcđoạt gi»"
+  ],
+  [
+   692,
+   ".dlg «Thi tài ngày Thất tịch · Lời mời» «Ghi tên dâng đàn (theo Cầm, Tài)Mong manhTốnkhôngĐ»"
+  ],
+  [
+   692,
+   ".dlg «Biến cố» «Lui»"
+  ],
+  [
+   695,
+   ".dlg «Tuần mới» «Lui»"
+  ],
+  [
+   697,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   697,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   697,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   698,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   698,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   699,
+   "#kmrew «ThườngHoa điền hoa đàoDán trán khi điểm trang: đặt»"
+  ],
+  [
+   700,
+   ".dlg «Lui»"
+  ],
+  [
+   701,
+   "#kmrew «ThườngHoa điền hoa đàoDán trán khi điểm trang: đặt»"
+  ],
+  [
+   701,
+   ".dlg «Lui»"
+  ],
+  [
+   703,
+   "#kmrew «Thường»"
+  ],
+  [
+   703,
+   ".dlg «Lui»"
+  ],
+  [
+   704,
+   "#kmrew «Thường»"
+  ],
+  [
+   705,
+   ".dlg «Lui»"
+  ],
+  [
+   706,
+   "#kmrew «ThườngHoa điền hoa đàoDán trán khi điểm trang: đặt»"
+  ],
+  [
+   706,
+   ".dlg «Lui»"
+  ],
+  [
+   708,
+   "#kmrew «Nhận»"
+  ],
+  [
+   708,
+   "#kmrew «ThườngHoa điền hoa đàoDán trán khi điểm trang: đặt»"
+  ],
+  [
+   708,
+   ".dlg «Lui»"
+  ],
+  [
+   710,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   713,
+   "DEAD Lễ nghiLễ nghiKhảo hạch tấn phongVữngHoàng hậu Lư "
+  ],
+  [
+   714,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   723,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «1Cung nhân»"
+  ],
+  [
+   724,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   724,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   724,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Giao thiệpGiao thiệpTrò chuyện với cung nữNgồi ngh»"
+  ],
+  [
+   734,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   743,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Lễ nghiLễ nghiKhảo hạch tấn phongVữngHoàng hậu Lư »"
+  ],
+  [
+   744,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   744,
+   "#kg82 «Gợi ý: chỉ chỗ đúng, bớt một ít phần»"
+  ],
+  [
+   744,
+   "#kg82 «Gợi ý: chỉ chỗ đúng, bớt một ít phần»"
+  ],
+  [
+   745,
+   "#kg82 «Gợi ý: chỉ chỗ đúng, bớt một ít phần»"
+  ],
+  [
+   745,
+   "#kg82 «Gợi ý: chỉ chỗ đúng, bớt một ít phần»"
+  ],
+  [
+   745,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   747,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   754,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   754,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   756,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   757,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   759,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   763,
+   ".dlg «Kỳ nguyệt sự» «Báo sớm, nói đã sạch kỳRất vữngTốnkhôngĐượcthẻ bài»"
+  ],
+  [
+   770,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   780,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐánh cờ với Ho»"
+  ],
+  [
+   789,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   793,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   794,
+   ".dlg «Lỡ hẹn» «Lui»"
+  ],
+  [
+   795,
+   ".dlg «Sắp tới: Thi tài ngày Thất tịch» «Lui»"
+  ],
+  [
+   797,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   799,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   799,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   800,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   800,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   800,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   808,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   817,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tin báo: 13 tin mới»"
+  ],
+  [
+   818,
+   ".dlg «Tin báo» «Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu»"
+  ],
+  [
+   819,
+   ".dlg «Tin chờ người sai đi» «Lui»"
+  ],
+  [
+   826,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   829,
+   ".dlg «Việc khó xử» «Mách Viên Tĩnh ThùRất vữngTốnkhôngĐượcngười ấy có »"
+  ],
+  [
+   837,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   846,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệ 4/4»"
+  ],
+  [
+   846,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   848,
+   ".dlg «Chuyện trong cung» «Tặng nàng ta một món nhỏ ngayRất vữngTốnBạc -10Đượ»"
+  ],
+  [
+   856,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐọc binh thư, »"
+  ],
+  [
+   865,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐánh cờ với Ho»"
+  ],
+  [
+   875,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệMúa trong yến »"
+  ],
+  [
+   876,
+   ".dlg «Kỳ ngộ» «Xin ông kể chuyện thuở trẻRất vữngTốnSức -4·2 khắc»"
+  ],
+  [
+   876,
+   ".dlg «Kỳ ngộ» «Lui»"
+  ],
+  [
+   878,
+   ".dlg «Xong việc: Đi một nơi trong cung» «Lui»"
+  ],
+  [
+   886,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   886,
+   ".dlg «Tết Thất tịch · Lời mời: Thi hát khúc Thất tịch» «Không dựRất vữngTốnkhôngĐượckhôngGợi ýkhông được m»"
+  ],
+  [
+   887,
+   ".dlg «Phụ tuyến · Đặt sớ của nhà Tể tướng Liêu Dực Chi l» «Khéo từ chốiRất vữngTốnkhôngĐượcdưỡng sức, giữ sức»"
+  ],
+  [
+   888,
+   ".dlg «Xét phẩm cuối tháng · Thường tại» «Lui»"
+  ],
+  [
+   890,
+   ".dlg «Tuần mới» «Lui»"
+  ],
+  [
+   891,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   892,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   892,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   892,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   893,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   900,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐọc binh thư, »"
+  ],
+  [
+   909,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Về Dư đồ»"
+  ],
+  [
+   910,
+   ".mapsc «Sẵn sàng»"
+  ],
+  [
+   913,
+   ".dlg «Hoàng thượng» «Nhắc vạt áo còn phấnRất vữngTốnkhôngĐượcthêm tâm c»"
+  ],
+  [
+   914,
+   ".mapsc «Chung Tú3 bóng · 3 khắc · bái kiến»"
+  ],
+  [
+   915,
+   ".mapsc «Số lần ân thưởng0»"
+  ],
+  [
+   915,
+   ".dlg «Ân thưởng» «Lui»"
+  ],
+  [
+   916,
+   ".mapsc «Sẵn sàng»"
+  ],
+  [
+   917,
+   ".dlg «Một ánh mắt» «Giữ bài thơ, đáp lạiRất vữngTốnkhôngĐượcngười ấy t»"
+  ],
+  [
+   918,
+   ".mapsc «Lao phổi · nhẹ»"
+  ],
+  [
+   918,
+   ".dlg «Lao phổi · nhẹ» «Lui»"
+  ],
+  [
+   920,
+   ".mapsc «Hôm nay mặt mộc»"
+  ],
+  [
+   920,
+   ".mapsc «Sẵn sàng»"
+  ],
+  [
+   921,
+   ".mapsc «Mệnh truyện»"
+  ],
+  [
+   921,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Hành sự»"
+  ],
+  [
+   922,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐánh cờ với Ho»"
+  ],
+  [
+   931,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐánh cờ với Ho»"
+  ],
+  [
+   940,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệ 2/4»"
+  ],
+  [
+   941,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   941,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Mục tiêu chương»"
+  ],
+  [
+   942,
+   "#kmrew «ThườngHoa điền hoa đàoDán trán khi điểm trang: đặt»"
+  ],
+  [
+   943,
+   ".dlg «Lui»"
+  ],
+  [
+   944,
+   "#kmrew «Thường»"
+  ],
+  [
+   944,
+   ".dlg «Lui»"
+  ],
+  [
+   946,
+   "#kmrew «ThườngHoa điền hoa đàoDán trán khi điểm trang: đặt»"
+  ],
+  [
+   946,
+   ".dlg «Lui»"
+  ],
+  [
+   947,
+   "#kmrew «Thường»"
+  ],
+  [
+   948,
+   ".dlg «Lui»"
+  ],
+  [
+   949,
+   "#kmrew «Thường»"
+  ],
+  [
+   949,
+   ".dlg «Lui»"
+  ],
+  [
+   951,
+   "#kmrew «ThườngHoa điền hoa đàoDán trán khi điểm trang: đặt»"
+  ],
+  [
+   951,
+   ".dlg «Lui»"
+  ],
+  [
+   952,
+   "#kmrew «Nhận»"
+  ],
+  [
+   953,
+   "#kmrew «Nhận»"
+  ],
+  [
+   953,
+   ".dlg «Chương 1 · Nhập cung, đứng vững» «Thiên mệnh»"
+  ],
+  [
+   953,
+   ".dlg «Thiên mệnh» «Danh hiệu 0/35»"
+  ],
+  [
+   954,
+   ".dlg «Danh hiệu» «Thiên mệnh»"
+  ],
+  [
+   954,
+   ".dlg «Thiên mệnh» «Danh hiệu 0/35»"
+  ],
+  [
+   954,
+   ".dlg «Danh hiệu» «Mục tiêu»"
+  ],
+  [
+   954,
+   ".dlg «Chương 1 · Nhập cung, đứng vững» «Danh hiệu 0/35»"
+  ],
+  [
+   955,
+   ".dlg «Danh hiệu» «Thiên mệnh»"
+  ],
+  [
+   955,
+   ".dlg «Thiên mệnh» «Mục tiêu»"
+  ],
+  [
+   955,
+   ".dlg «Chương 1 · Nhập cung, đứng vững» «Đi làm: Thỉnh an Thái hậu hoặc Hoàng hậuTốnkhôngĐư»"
+  ],
+  [
+   956,
+   ".dlg «Biến cố» «Lui»"
+  ],
+  [
+   960,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   960,
+   "#kmrew «Thường»"
+  ],
+  [
+   960,
+   ".dlg «Lui»"
+  ],
+  [
+   962,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   962,
+   ".dlg «Lui»"
+  ],
+  [
+   964,
+   "#kmrew «Thường»"
+  ],
+  [
+   964,
+   ".dlg «Lui»"
+  ],
+  [
+   965,
+   "#kmrew «Thường»"
+  ],
+  [
+   966,
+   ".dlg «Lui»"
+  ],
+  [
+   967,
+   "#kmrew «Thường»"
+  ],
+  [
+   967,
+   ".dlg «Lui»"
+  ],
+  [
+   969,
+   "#kmrew «ThườngYên chi giấyHộp phấn má dùng khi điểm trang »"
+  ],
+  [
+   969,
+   ".dlg «Lui»"
+  ],
+  [
+   971,
+   "#kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»"
+  ],
+  [
+   971,
+   ".dlg «Lui»"
+  ],
+  [
+   972,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   973,
+   ".dlg «Lui»"
+  ],
+  [
+   974,
+   "#kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»"
+  ],
+  [
+   974,
+   ".dlg «Lui»"
+  ],
+  [
+   976,
+   "#kmrew «Nhận»"
+  ],
+  [
+   976,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   976,
+   ".dlg «Lui»"
+  ],
+  [
+   978,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   980,
+   ".dlg «Bổng lộc tháng sáu» «Chu toàn lễ nghĩaRất vữngTốnBạc -2Đượcgiữ thể diện»"
+  ],
+  [
+   980,
+   ".dlg «Thỉnh bình an mạch» «Lui»"
+  ],
+  [
+   982,
+   ".dlg «Tết Thất tịch · Thi hát khúc Thất tịch» «Lui»"
+  ],
+  [
+   984,
+   ".dlg «Tuần mới» «Lui»"
+  ],
+  [
+   986,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   986,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   986,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   986,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   987,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   989,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐọc binh thư, »"
+  ],
+  [
+   998,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   1000,
+   ".dlg «Có người đến» «Lui»"
+  ],
+  [
+   1001,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Học tập · Tài nghệHọc tập · Tài nghệĐánh cờ với Ho»"
+  ],
+  [
+   1011,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Giao tình»"
+  ],
+  [
+   1011,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   1011,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Phe phái»"
+  ],
+  [
+   1012,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Ân oánPhe pháiPhe phái hậu cungTriều đìnhTa chưa v»"
+  ],
+  [
+   1012,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Phe phái»"
+  ],
+  [
+   1012,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Chọn chính mình»"
+  ],
+  [
+   1012,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «3Chí tôn»"
+  ],
+  [
+   1013,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Thư từ»"
+  ],
+  [
+   1013,
+   "#kchatp «Gửi»"
+  ],
+  [
+   1013,
+   "#kchatp «Gửi»"
+  ],
+  [
+   1013,
+   "#kchatp «Gửi»"
+  ],
+  [
+   1014,
+   "#kchatp «Gửi»"
+  ],
+  [
+   1014,
+   "#kchatp «Lui»"
+  ],
+  [
+   1015,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Giao tình»"
+  ],
+  [
+   1016,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Hôm nay mặt mộc»"
+  ],
+  [
+   1017,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Lập phe cùng Viên Tĩnh ThùTốn2 khắcGhi chúLắm lời»"
+  ],
+  [
+   1017,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Mời Thạch Ngọc KhêGhi chúMiễn cưỡng»"
+  ],
+  [
+   1017,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   1021,
+   ".dlg «Kỳ nguyệt sự» «Báo sớm, nói đã sạch kỳRất vữngTốnkhôngĐượcthẻ bài»"
+  ],
+  [
+   1028,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sắc46Tài35Tâm cơ40Đức24Danh69Sủng34»"
+  ],
+  [
+   1028,
+   ".dlg «Sắc» «Lui»"
+  ],
+  [
+   1030,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Hôm nay mặt mộc»"
+  ],
+  [
+   1031,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   1034,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1034,
+   ".dlg «Y phục dự Lễ Vu Lan» «Cáo lỗi, về cung nghỉRất vữngTốnkhôngĐượcvề cung n»"
+  ],
+  [
+   1035,
+   ".dlg «Lỡ hẹn» «Lui»"
+  ],
+  [
+   1037,
+   ".dlg «Lỡ hẹn» «Lui»"
+  ],
+  [
+   1038,
+   ".dlg «Lễ Vu Lan · Chuyện bên lề hội» «Choàng khăn, ở lại tới cuối hộiTốnSức -5ĐượcDanh +»"
+  ],
+  [
+   1039,
+   ".dlg «Phi Nhan Thanh Uyển xin mượn trâm» «Khéo từ chốiRất vữngTốnkhôngĐượcThoa bạc song điệp»"
+  ],
+  [
+   1039,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1040,
+   ".dlg «Tuần mới» «Lui»"
+  ],
+  [
+   1042,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1042,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1042,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1042,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1044,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Ân oánPhe pháiPhe phái hậu cungTriều đìnhTa thuộc »"
+  ],
+  [
+   1045,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Cung nữ thân tín tam đẳngHoa Tuệ»"
+  ],
+  [
+   1045,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1045,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   1045,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   1047,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1047,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   1047,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   1049,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1049,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   1049,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   1051,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1051,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   1051,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   1053,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   1053,
+   ".kfoc «Sai đi dò la · Vững · Tốn 1 khắc»"
+  ],
+  [
+   1053,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Sắc46Tài35Tâm cơ40Đức24Danh71Sủng30»"
+  ],
+  [
+   1054,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tài nghệ»"
+  ],
+  [
+   1054,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tác phẩm»"
+  ],
+  [
+   1054,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tài nghệ»"
+  ],
+  [
+   1055,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Thư từ»"
+  ],
+  [
+   1055,
+   "#kchatp «Gửi»"
+  ],
+  [
+   1055,
+   "#kchatp «Gửi»"
+  ],
+  [
+   1055,
+   "#kchatp «Gửi»"
+  ],
+  [
+   1055,
+   "#kchatp «Gửi»"
+  ],
+  [
+   1056,
+   "#kchatp «Lui»"
+  ],
+  [
+   1057,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tài nghệ»"
+  ],
+  [
+   1058,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tứ đức 9/9»"
+  ],
+  [
+   1058,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tin báo: 6 tin mới»"
+  ],
+  [
+   1058,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Hoàng tự»"
+  ],
+  [
+   1058,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Bổng lộcsau 2 tuần»"
+  ],
+  [
+   1059,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Ân tình (đêm)0»"
+  ],
+  [
+   1059,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Cung nữ thân tín tam đẳngHoa Tuệ»"
+  ],
+  [
+   1059,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Có thaiThấp»"
+  ],
+  [
+   1059,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Lật thẻRất thấp»"
+  ],
+  [
+   1060,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Bạc146Sức89/98»"
+  ],
+  [
+   1060,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Mục tiêu chương»"
+  ],
+  [
+   1060,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tư trang»"
+  ],
+  [
+   1061,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «3Chí tôn»"
+  ],
+  [
+   1061,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Hành sự»"
+  ],
+  [
+   1061,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tâm trạngBình thản-2»"
+  ],
+  [
+   1062,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   1063,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Thú cưng»"
+  ],
+  [
+   1063,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Túi đồ»"
+  ],
+  [
+   1064,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Phấn gạo ×3 · Son phấn»"
+  ],
+  [
+   1064,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Mảnh giấy nhắn · Thư từ»"
+  ],
+  [
+   1064,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Quẻ Hạ (Sức khỏe)»"
+  ],
+  [
+   1064,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Số lần ân thưởng0»"
+  ],
+  [
+   1065,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Túi đồThú cưngViệcTất cả 49Trang sức 4Y phục 2Vải »"
+  ],
+  [
+   1065,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tâm trạngBình thản-2»"
+  ],
+  [
+   1065,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   1067,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Cung nữ thân tín tam đẳngHoa Tuệ»"
+  ],
+  [
+   1067,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Giao tình»"
+  ],
+  [
+   1067,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Ân tình (đêm)0»"
+  ],
+  [
+   1068,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Có thaiThấp»"
+  ],
+  [
+   1068,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Số lần ân thưởng0»"
+  ],
+  [
+   1068,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Mời Diêu Hi NguyệtGhi chúMiễn cưỡng»"
+  ],
+  [
+   1068,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Mục tiêu chương»"
+  ],
+  [
+   1069,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Bổng lộcsau 2 tuần»"
+  ],
+  [
+   1069,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Tâm trạngBình thản-2»"
+  ],
+  [
+   1069,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   1071,
+   "page «Trường Xuân cung · Hàm Thu trai · Ở đây còn 2 ngườ» «Hành sự»"
+  ],
+  [
+   1071,
+   ".kfoc «Sai đi dò la · Vững · Tốn 1 khắc»"
+  ],
+  [
+   1072,
+   ".kfoc «Sai đi dò la · Vững · Tốn 1 khắc»"
+  ],
+  [
+   1072,
+   ".kfoc «Sai đi dò la · Vững · Tốn 1 khắc»"
+  ],
+  [
+   1072,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   1072,
+   ".kfoc «Giao thiệp 3/3»"
+  ],
+  [
+   1073,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   1073,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   1073,
+   ".kfoc «Giao thiệp 3/3»"
+  ],
+  [
+   1073,
+   ".kfoc «Giao thiệp 3/3»"
+  ],
+  [
+   1073,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   1074,
+   ".kfoc «Lui»"
+  ]
+ ],
+ "_started": true,
+ "_ckAt": 1795603152505,
+ "_ckB": 51,
+ "rss": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 2910,
+   "rendererMB": 886
+  },
+  {
+   "buoi": 6,
+   "y": 1,
+   "totalMB": 4398,
+   "rendererMB": 1364
+  },
+  {
+   "buoi": 11,
+   "y": 1,
+   "totalMB": 4687,
+   "rendererMB": 1476
+  },
+  {
+   "buoi": 16,
+   "y": 1,
+   "totalMB": 4603,
+   "rendererMB": 1516
+  },
+  {
+   "buoi": 21,
+   "y": 1,
+   "totalMB": 4817,
+   "rendererMB": 1534
+  },
+  {
+   "buoi": 26,
+   "y": 1,
+   "totalMB": 4953,
+   "rendererMB": 1614
+  },
+  {
+   "buoi": 31,
+   "y": 1,
+   "totalMB": 4885,
+   "rendererMB": 1584
+  },
+  {
+   "buoi": 36,
+   "y": 1,
+   "totalMB": 4977,
+   "rendererMB": 1631
+  },
+  {
+   "buoi": 41,
+   "y": 1,
+   "totalMB": 5241,
+   "rendererMB": 1752
+  },
+  {
+   "buoi": 46,
+   "y": 1,
+   "totalMB": 5311,
+   "rendererMB": 1784
+  },
+  {
+   "buoi": 51,
+   "y": 1,
+   "totalMB": 5235,
+   "rendererMB": 1829
+  }
+ ]
+}
