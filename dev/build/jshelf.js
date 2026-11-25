@@ -259,7 +259,7 @@ function shelfSpyTxt(a,t,by){const r=shelfSee(a,t,by);if(!r||a!==S)return"";retu
  if(typeof AGSOC==="object"){AGSOC.call=["call","social","ally",g=>({ally:g.call})];AGACTW.call="ghé chơi"}}catch(e){console.error("shelf call",e)}})();
 /* two-way (OD:L1386): the deed NPCs do to her is also hers — "Ghé chơi" in her talk list (jtwoway topicOpts), same deed, same gain, both see the rooms */
 (function(){if(typeof topicOpts!=="function")return;const t0=topicOpts;topicOpts=function(v){const A=t0.apply(this,arguments);try{const D=TW.call;
- if(S&&v&&D&&!(typeof sameHouse==="function"&&sameHouse(S,v))&&D.req(S,v)&&!A.some(a=>a.n===D.n))A.push({n:D.n,o:100,x:`nàng quý ngươi +${BAL.tw.g.call} · hai bên thấy phòng ốc của nhau`,run:()=>{try{chatMark(v)}catch(e){}return twDo(S,v,"call",true)+"."}})}catch(e){console.error("shelf talk",e)}return A};window.topicOpts=topicOpts})();
+ if(S&&v&&D&&!(typeof sameHouse==="function"&&sameHouse(S,v))&&D.req(S,v)&&!A.some(a=>a.n===D.n))A.push({n:D.n,o:100,x:`nàng ${pvQuy(v,BAL.tw.g.call,"quý ngươi")} · hai bên thấy phòng ốc của nhau`,run:()=>{try{chatMark(v)}catch(e){}return twDo(S,v,"call",true)+"."}})}catch(e){console.error("shelf talk",e)}return A};window.topicOpts=topicOpts})();
 /* the visit happens AT the target's palace (her room / theirs), not wherever she is that khắc */
 (function(){if(typeof agOpts!=="function")return;const o0=agOpts;agOpts=function(){const O=o0.apply(this,arguments);try{for(const o of O)if(o.k==="call")o.at=(kh,vv,tt)=>tt?palaceOf(tt):null}catch(e){}return O}})();
 /* daily life: a consort who keeps her schedule this buổi may drop in on someone (her room weighs more: the player's palace is where life is seen)

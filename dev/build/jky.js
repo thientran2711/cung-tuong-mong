@@ -158,7 +158,20 @@ KY.optBac=optBac;
 const ART_N=k=>{try{const a=ARTS.find(x=>x.k===k);return a?a.n:k}catch(e){return k}};
 /* the third person who grudges her for it: a consort present, else the WHO's own mistress */
 function third(c){try{const L=kyPpl(c.k).filter(w=>w.kind==="rv"&&w.ref!==c.F&&w.ref!==(c.W&&c.W.ref));if(L.length)return L[0].ref;if(c.W&&c.W.own&&c.W.own!==c.F)return c.W.own;const q=liveRivals(true).filter(v=>v!==c.F).sort((a,b)=>oan(b,c.F)-oan(a,c.F));return q[0]||null}catch(e){return null}}
-function relTo(F,W,n){if(!W||!n)return;const r=W.ref;try{if(W.kind==="th"){ap(F,{th:n});return}if(W.kind==="emp"){ap(F,{sung:Math.round(n/KB().relSung)});return}
+/* review/net-ghen-2 (law 11): relTo raises a consort's thiện cảm through relAdd (her nết factor) → the shared preview; anyone else gets n straight */
+function jkyRelW(c,n){const r=c&&c.W&&c.W.ref;return r&&r!==S&&rivals.includes(r)?pvQuy(r,n,"thiện cảm"):`thiện cảm +${n}`}
+/* review/net-ghen-2 (law 11): relTo raises a consort's thiện cảm through relAdd (her nết factor) → the shared preview; anyone else gets n straight */
+function jkyRelW(c,n){const r=c&&c.W&&c.W.ref;return r&&r!==S&&rivals.includes(r)?pvQuy(r,n,"thiện cảm"):`thiện cảm +${n}`}
+/* review/net-ghen-2 (law 11): relTo raises a consort's thiện cảm through relAdd (her nết factor) → the shared preview; anyone else gets n straight */
+function jkyRelW(c,n){const r=c&&c.W&&c.W.ref;return r&&r!==S&&rivals.includes(r)?pvQuy(r,n,"thiện cảm"):`thiện cảm +${n}`}
+/* review/net-ghen-2 (law 11): relTo raises a consort's thiện cảm through relAdd (her nết factor) → the shared preview; anyone else gets n straight */
+function jkyRelW(c,n){const r=c&&c.W&&c.W.ref;return r&&r!==S&&rivals.includes(r)?pvQuy(r,n,"thiện cảm"):`thiện cảm +${n}`}
+/* review/net-ghen-2 (law 11): relTo raises a consort's thiện cảm through relAdd (her nết factor) → the shared preview; anyone else gets n straight */
+function jkyRelW(c,n){const r=c&&c.W&&c.W.ref;return r&&r!==S&&rivals.includes(r)?pvQuy(r,n,"thiện cảm"):`thiện cảm +${n}`}
+/* review/net-ghen-2 (law 11): relTo raises a consort's thiện cảm through relAdd (her nết factor) → the shared preview; anyone else gets n straight */
+function jkyRelW(c,n){const r=c&&c.W&&c.W.ref;return r&&r!==S&&rivals.includes(r)?pvQuy(r,n,"thiện cảm"):`thiện cảm +${n}`}
+function relTo(F,W,n){
+if(!W||!n)return;const r=W.ref;try{if(W.kind==="th"){ap(F,{th:n});return}if(W.kind==="emp"){ap(F,{sung:Math.round(n/KB().relSung)});return}
  if(r&&(r===S||rivals.includes(r))){relAdd(F,r,n);return}
  if(r&&typeof r.af==="number"){if(F===S)r.af=cl(r.af+n,-100,100);return}
  if(r){r.af=r.af&&typeof r.af==="object"?r.af:{};const kk=F===S?"me":(F.id!=null?F.id:"x");r.af[kk]=cl((r.af[kk]||0)+n,-100,100);if(F===S&&W.kind==="sv")r.loyal=cl((r.loyal==null?KB().relLoyal:r.loyal)+Math.round(n/KB().relLoyK),0,100)}}catch(e){kerr("rel",e)}}
@@ -177,7 +190,7 @@ function runOpt(c,i){const F=c.F,E=c.E,O=E.o?E.o[i]:E.plain,G=sc(O.g,c.b),C=sc(O
  const st={};for(const k of ["danh","sung","duc","tamco","th"])if(G[k])st[k]=Math.round(G[k]*(k==="danh"?g:1));if(G.sucR)st.suc=Math.round(KB().sucRest*G.sucR/(KB().V[c.b]||1));
  if(Object.keys(st).length)ap(F,st);
  {const NM={danh:"Danh",sung:"Sủng",duc:"Đức",tamco:"Tâm cơ",th:"Thái hậu thiện cảm",suc:"Sức"};for(const k in st)out.push(`${NM[k]} +${st[k]}`);if(C.suc)out.push(`Sức -${C.suc}`);if(C.bac)out.push(`Bạc -${C.bac}`)}
- if(G.rel&&c.W&&c.W.kind!=="th"&&c.W.kind!=="emp")out.push(`${wName(c.W)||"người ấy"} thiện cảm +${Math.round(G.rel*g)}`);
+ if(G.rel&&c.W&&c.W.kind!=="th"&&c.W.kind!=="emp")out.push(`${wName(c.W)||"người ấy"} ${jkyRelW(c,Math.round(G.rel*g))}`);
  if(G.rel)relTo(F,c.W,Math.round(G.rel*g));
  const ak=O.a||null;if(G.art&&ak){try{addArtP(F,ak,G.art);out.push(`${ART_N(ak)} tiến bộ ${G.art} phần`)}catch(e){kerr("art",e)}}
  if(O.s)try{const r=SPEC[O.s](c,O);if(r)out.push(r)}catch(e){kerr("spec "+O.s,e)}
@@ -225,7 +238,7 @@ const SPEC=KY.SPEC={
 };
 /* ---------- her card ---------- */
 function optX(c,i){const O=c.E.o[i],C=sc(O.c||{},c.b),L=[];if(O.buy||O.s==="item"&&(c.X.box||c.X.rr)){const pr=buyPr(c);if(pr&&!(c.X.box&&i===1))C.bac=(C.bac||0)+pr}if(O.od&&C.seen)L.push(word(seenOd(Object.assign({},c,{oi:i}))));const t=costText(C);if(t)L.push("tốn: "+t);
- const G=sc(O.g,c.b),W=[];if(G.danh)W.push(`Danh +${G.danh}`);if(G.sung)W.push(sgStat(G.sung));if(G.th)W.push(`Thái hậu thiện cảm +${G.th}`);if(G.duc)W.push(`Đức +${G.duc}`);if(G.tamco)W.push(`Tâm cơ +${G.tamco}`);if(G.rel)W.push(`thiện cảm +${G.rel}`);if(G.art&&O.a)W.push(`${ART_N(O.a)} tiến bộ ${G.art} phần`);
+ const G=sc(O.g,c.b),W=[];/* review/net-ghen-2 (law 11): the same numbers runOpt applies — Danh and thiện cảm × the place grade gm(c), thiện cảm of a consort through the nết preview */const gq=gm(c);if(G.danh)W.push(`Danh +${Math.round(G.danh*gq)}`);if(G.sung)W.push(sgStat(G.sung));if(G.th)W.push(`Thái hậu thiện cảm +${G.th}`);if(G.duc)W.push(`Đức +${G.duc}`);if(G.tamco)W.push(`Tâm cơ +${G.tamco}`);if(G.rel)W.push(jkyRelW(c,Math.round(G.rel*gq)));if(G.art&&O.a)W.push(`${ART_N(O.a)} tiến bộ ${G.art} phần`);
  const sw=specW(c,O,i);if(sw)W.push(sw);for(let j=0;j<W.length;j++)W[j]=gW(W[j]);
  if(W.length)L.push("thành: "+W.join(", "));return L.join(" · ")}
 /* the gain words of a special (an option whose gain is a piece / a fact, never "không") */

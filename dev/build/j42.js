@@ -375,7 +375,7 @@ PEND.cnvBribe=pp=>{const m=srvM(),v=RV(pp.r);if(!isSrv()||!m||!v||!v.alive)retur
 function cnvBribeOpts(a,v,m,pay){return [
   {id:"take",n:"Nhận bạc, làm tai mắt",tag:"bribe",fx:{bac:pay},x:a===S?cnvSpyX(m):"",go:()=>{if(a===S){ap(v,{bac:-pay});deedAdd(v,"sbribe",null,1,`mua chuộc người hầu của ${m.name}`);S.srv.spyFor=v.id}else a.spyFor=key(v);affAdd(a,v,BAL.relMS.bribe);return""}},
   {id:"tell",n:"Từ chối, bẩm chủ",tag:"help",fx:{tin:BAL.coopBribe.tin},x:`${m.name} nắm ${balAb(BAL.ag.ev.one)} chứng cứ của ${v.name} · kèm: ${v.name} ghi hận ngươi, thiện cảm ${balSg(-BAL.coopBribe.grudge)}`,go:()=>{cnvBribeAff(v,a,-1);if(a===S)deedAdd(v,"sbribe",null,1,`mua chuộc người hầu của ${m.name}`);/*evok: bribe deed written just before (bribeServ: jtruth)*/evA(m,v,BAL.ag.ev.one);relAdd(m,v,-BAL.ag.ev.rel);return""}},
-  {id:"quiet",n:"Từ chối, im lặng",tag:"work",fx:{},x:`thành: trả lại bạc, giữ hòa khí với ${v.name}, thiện cảm ${balSg(BAL.coopBribe.grudge)}`,go:()=>{cnvBribeAff(v,a,1);return""}}]}
+  {id:"quiet",n:"Từ chối, im lặng",tag:"work",fx:{},x:`thành: trả lại bạc, giữ hòa khí với ${v.name}, ${pvQuy(v,BAL.coopBribe.grudge,"thiện cảm")}`,go:()=>{cnvBribeAff(v,a,1);return""}}]}
 /* law 2 «Bạc lạ» (D #7 19/11): the briber's thiện cảm for the servant who refused — ONE constant BAL.coopBribe.grudge, sign by the answer (an NPC servant without an id: no regard row) */
 function cnvBribeAff(v,a,sg){try{if(v&&a&&(a===S||a.id!=null))affAdd(v,a,sg*BAL.coopBribe.grudge)}catch(e){}}
 PEND.cnvFrame=pp=>{const s=servById(pp.sid),m=srvM();if(!isSrv()||!s||!m)return null;const fr=srvFriendList().length;const item=pick(["cây trâm vàng","chiếc vòng ngọc","hộp phấn ngự ban","túi hương thêu chỉ vàng"]);
@@ -569,7 +569,7 @@ function srvAffairCaught(m,how){if(!isSrv())return;const mis=srvM();const scheme
 (function(){const t0=srvTalk;srvTalk=function(p){const A=t0.apply(this,arguments);try{const mis=srvM();
  const T=(n,o,x,run,more)=>A.push(Object.assign({n,o,w:{},l:{},x,run(){const ok=o>=100||roll(o);const r=run(ok)||"";return `${o<100?(ok?'<span class="g">thành</span>. ':'<span class="r">hỏng</span>. '):""}${r}`}},more||{}));
  if(p.sk==="man"){const m=manById(p.mid);if(!m||!srvAdult(m))return A;const risk=srvRisk(S.place);
-  T("Chào hỏi đúng lễ",100,`hắn quý ngươi +${SRVA.hail.af}`,()=>{relAdd(S,m,SRVA.hail.af);return `${m.name} gật đầu đáp lễ.`});
+  T("Chào hỏi đúng lễ",100,`hắn ${pvQuy(m,SRVA.hail.af,"quý ngươi")}`,()=>{relAdd(S,m,SRVA.hail.af);return `${m.name} gật đầu đáp lễ.`});
   T("Liếc mắt đưa tình",od(SRVA.flirt.o(S)),`tình ý của hắn +${SRVA.flirt.tinh} · có thể bị người thấy: ${chanceW(Math.round(risk/SRVA.flirt.seen))}`,ok=>{if(ok)m.tinh+=SRVA.flirt.tinh+(nv(m,"flirtTinh"));if(roll(risk/SRVA.flirt.seen))srvSeen(m,1);return ok?`${m.name} khẽ cười.`:"Hắn không để ý."});
   if(m.tinh>=SRVA.token.at)T("Trao khăn tay, thư",od(SRVA.token.o(S)),`tình ý +${SRVA.token.tinh} · khăn thư là tang vật nếu bị lục`,ok=>{if(ok){m.tinh+=SRVA.token.tinh;m.letters++}if(roll(risk/SRVA.token.seen))srvSeen(m,1);return ok?"Hắn giấu vội vào tay áo.":"Hắn chần chừ không nhận."});
   if(m.tinh>=SRVA.tryst.at){const fr=srvFriendList();T("Hẹn gặp riêng",fr.length?oddsCl(SRVA.tryst.o(S,m,{risk})):0,`cần bạn canh cửa · đêm kín đáo: Sức +${SRVA.tryst.w.suc}, tình ý +${SRVA.tryst.tinh} · có thai: ${chanceW(SRVA.tryst.preg)} · hỏng: bị bắt, roi vọt, Tân Giả khố hoặc bị đuổi`,ok=>{if(!ok){srvAffairCaught(m,`Đêm ngươi hẹn ${m.name} bị bắt gặp.`);return "Bị bắt gặp."}

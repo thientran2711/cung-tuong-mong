@@ -204,7 +204,7 @@ function rtAdCards(){const T=rtS(),A=[],ad=T.ad;
  const yrs=Math.floor((S.turn-ad.since)/12);
  A.push(rtCard({id:"ad_kinh",r:4,n:"Chép kinh cầu phúc",t:"Chép kinh Kim Cương, dâng lên Phật đường.",art:RT_ART.an,c:{...BAL.route.kinh},k:BAL.route.k.ad_kinh,w:{...BAL.route.kinhW},x:"lòng an",go:()=>{rtEmo("vui",15,"lòng an")}}));
  const weak=liveRivals(false).filter(v=>v!==S&&!v.out).sort((a,b)=>(a.sung+a.rank*10)-(b.sung+b.rank*10))[0];
- if(weak)A.push(rtCard({id:"ad_che",r:4,n:`Che chở ${rtVn(weak)}`,t:"Người yếu nhất trong cung; ngươi đỡ cho nàng một tay.",art:RT_ART.ta,c:{...BAL.route.che},k:BAL.route.k.ad_che,w:{...BAL.route.cheW},x:`${weak.name} thiện cảm +${BAL.route.cheRel}`,go:()=>{relAdd(S,weak,BAL.route.cheRel)}}));
+ if(weak)A.push(rtCard({id:"ad_che",r:4,n:`Che chở ${rtVn(weak)}`,t:"Người yếu nhất trong cung; ngươi đỡ cho nàng một tay.",art:RT_ART.ta,c:{...BAL.route.che},k:BAL.route.k.ad_che,w:{...BAL.route.cheW},x:`${weak.name} ${pvQuy(weak,BAL.route.cheRel,"thiện cảm")}`,go:()=>{relAdd(S,weak,BAL.route.cheRel)}}));
  A.push(rtCard({id:"ad_off",r:4,n:"Mở lại thẻ bài",t:"Trở lại đường tranh sủng.",art:RT_ART.an,k:BAL.route.k.ad_off,x:`thôi ẩn dật (đã ${yrs} năm)`,go:()=>{T.ad.on=0;log("Ngươi xin Kính sự phòng bày lại thẻ bài.")}}));
  return A}
 /* ---------- the deck: «Lối riêng» cards ---------- */
@@ -246,7 +246,7 @@ PEND.rtKid=pp=>{const k=(S.kids||[]).find(x=>x.name===pp.k&&x.alive);if(!k)retur
 PEND.rtNpcEsc=pp=>{const v=RV(pp.v);if(!v||!v.alive||!v.rtEsc)return null;const T=rtS();
  return{ti:"Bóng người đổi áo",t:`<p>Trong bóng tối ở ${rtPlace(S.place)}, ngươi thấy ${rtVn(v)} đang khoác y phục cung nữ, tay ôm một tay nải nhỏ. Nàng định trốn khỏi cung.</p>`,stage:[v],headArt:{src:RT_ART.tc,label:"Trốn cung"},o:[
   rtOpt("Báo Cung Chính ti",{},rtX(100,`Danh +${BAL.route.npcReport.danh} · Thái hậu +${BAL.route.npcReport.th} · ${v.name} sa lưới`,"",`${v.name} và người thân của nàng oán ngươi`),()=>{apply(BAL.route.npcReport);v.rtEsc=null;oanAdd(v,S,BAL.route.oan.report);rtStat("npc_report");if(roll(BAL.route.escDeath))deathSentence(v,"trốn khỏi cung");else{v.out=true;log(`${v.name} bị đày vào lãnh cung.`)}}),
-  rtOpt("Giúp nàng",{...BAL.route.npcHelp},rtX(100,`${v.name} thiện cảm +${BAL.route.npcHelpRel} · nàng chỉ ngươi đường đi và người gác cổng`,"","bị lộ thì ngươi cũng mang tội"),()=>{relAdd(S,v,BAL.route.npcHelpRel);if(!T.tc)T.tc={prep:{},since:S.turn};T.tc.prep.route=1;v.rtEsc.help=1;rtStat("npc_help")}),
+  rtOpt("Giúp nàng",{...BAL.route.npcHelp},rtX(100,`${v.name} ${pvQuy(v,BAL.route.npcHelpRel,"thiện cảm")} · nàng chỉ ngươi đường đi và người gác cổng`,"","bị lộ thì ngươi cũng mang tội"),()=>{relAdd(S,v,BAL.route.npcHelpRel);if(!T.tc)T.tc={prep:{},since:S.turn};T.tc.prep.route=1;v.rtEsc.help=1;rtStat("npc_help")}),
   rtOpt("Uy hiếp nàng",{},rtX(100,`bạc +${BAL.route.npcThreat.bac} · chứng cứ về nàng +${BAL.route.threatEv}`,"",`${v.name} oán ngươi`),()=>{apply(BAL.route.npcThreat);evA(S,v,BAL.route.threatEv);oanAdd(v,S,BAL.route.oan.threat)}),
   rtOpt("Làm như không thấy",{},rtX(100,"không dính dáng","",""),()=>{})]}};
 PEND.rtAn=pp=>{if(!S)return null;return{ti:"Một đời an nhiên",t:`<p>Đã ${Math.floor((S.turn-S.rt.ad.since)/12)} năm ngươi đóng cửa tĩnh dưỡng. Không ai hại ngươi, ngươi cũng không hại ai. Trong Sổ luân hồi, kiếp này đã có một kết an nhiên.</p>`,stage:[S],headArt:{src:RT_ART.an,label:"An nhiên"},o:[

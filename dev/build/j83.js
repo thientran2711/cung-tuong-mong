@@ -105,7 +105,7 @@ function wkGive(a,r,ix,quietLog){const e=a.inv[ix];if(!e||!e.wk)return"";const w
  const ent=Object.assign({},e,{wk:Object.assign({},w,{from:key(a)})});
  if(r===S){pushDil(mkP("giftin",{f:key(a),e:ent}),"Quà tặng");newsAdd(a,"gift",`${by} tặng ngươi ${wn} tự tay làm.`,true);return `${by} sai người mang ${wn} sang tặng ngươi. `}
  r.inv.push(ent);if(a!==S)newsAdd(a,"gift",`${by} tặng ${rkName(r)} ${r.name} ${wn} tự tay làm.`);
- return `${by} tặng ${rkName(r)} ${r.name} ${wn}${ev.notes.length?" ("+ev.notes.join("; ")+")":""}: thiện cảm +${ev.rel}. `}
+ return `${by} tặng ${rkName(r)} ${r.name} ${wn}${ev.notes.length?" ("+ev.notes.join("; ")+")":""}: ${pvQuy(r,ev.rel,"thiện cảm")}. `}
 (function(){const g0=giveTo;giveTo=function(a,r,ix){const e=a&&a.inv&&a.inv[ix];if(e&&e.wk)return wkGive(a,r,ix)||"";return g0.apply(this,arguments)}})();
 /* sell outside the palace: silver, risk of Danh if found out (same odds for every consort) */
 function wkSellVal(w){return 0}/* replaced by jecon (BAL.craftSell) */
@@ -172,10 +172,10 @@ function wkDeckCard(){const k=pick(["mon","bhoa","tho","theu"]),K=WK[k],a=K.a,m=
 /* ---- the chest: works listed with every use and its true gain and cost ---- */
 function wkTargets(a){const L=[["emp","Hoàng thượng"]];if(!S.thDead)L.push(["th","Thái hậu"]);liveRivals(true).forEach(v=>L.push([v.id,`${rkName(v)} ${v.name}`]));if(a.maid)L.push(["maid",`${a.maid.name} (cung nữ thân tín)`]);return L}
 function wkTgt(id){return id==="emp"||id==="th"||id==="maid"?id:RV(+id)}
-function wkGainTxt(ev){const F=[];if(ev.fx.sung)F.push(sgStat(ev.fx.sung)/* SG-CARD marker: drawn once */);if(ev.fx.an)F.push(`Ân tình +${ev.fx.an}`);if(ev.fx.th)F.push(`Thái hậu với ngươi +${ev.fx.th}`);if(ev.fx.danh)F.push(`Danh +${ev.fx.danh}`);if(ev.fx.hh)F.push(`Hoàng hậu với ngươi +${ev.fx.hh}`);if(ev.fx.maid)F.push(`Thiện cảm +${ev.fx.maid}`);if(ev.rel)F.push(`thiện cảm nàng +${ev.rel}`);return F.concat(ev.notes.map(n=>n)).join(" · ")}
+function wkGainTxt(ev,r){const F=[];if(ev.fx.sung)F.push(sgStat(ev.fx.sung)/* SG-CARD marker: drawn once */);if(ev.fx.an)F.push(`Ân tình +${ev.fx.an}`);if(ev.fx.th)F.push(`Thái hậu với ngươi +${ev.fx.th}`);if(ev.fx.danh)F.push(`Danh +${ev.fx.danh}`);if(ev.fx.hh)F.push(`Hoàng hậu với ngươi +${ev.fx.hh}`);if(ev.fx.maid)F.push(`Thiện cảm +${ev.fx.maid}`);if(ev.rel)F.push(pvQuy(r&&typeof r==="object"?r:null,ev.rel,"thiện cảm nàng"));return F.concat(ev.notes.map(n=>n)).join(" · ")}
 PEND.wkgive=p=>{const e=S.inv[p.ix];if(!e||!e.wk)return null;const w=e.wk;const O=[],no=[];
  for(const [id,n] of wkTargets(S)){const r=wkTgt(id);if(!r)continue;const ev=wkEval(S,w,r);if(!ev.ok){if(ev.why)no.push(`${n}: ${ev.why}`);continue}
-  O.push({n,fx:{},x:wkGainTxt(ev),go:()=>{spend(2);log(wkGive(S,r,S.inv.indexOf(e)))}})}
+  O.push({n,fx:{},x:wkGainTxt(ev,r),go:()=>{spend(2);log(wkGive(S,r,S.inv.indexOf(e)))}})}
  if(w.kind==="mon"&&S.inv.some(x=>x.k==="hacdinh"&&!x.h))for(const v of liveRivals(true)){const sp=caughtOdds(S,v,true);
   O.push({n:`Lén bỏ Hạc đỉnh hồng rồi tặng ${rkName(v)} ${v.name}`,fx:{},x:`${word(oPoison(S))} · thành: nàng trúng độc, Sức ${balSg(-BAL.rl.j8.hit.strong)}, thường là chết, dùng hết 1 Hạc đỉnh hồng · hỏng: bị tra ra, ban chết · kèm: Đức ${balSg(ACT.poison.c.duc)} · nàng phát giác trước, nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ: ${chanceW(sp)}`,/* previews: caught (ACT.poison.f, via wkPoison) */go:()=>{spend(2);log(wkPoison(S,v,S.inv.indexOf(e)))}})}
  O.push({n:"Thôi",fx:{}});

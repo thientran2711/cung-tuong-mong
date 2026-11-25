@@ -29,9 +29,9 @@ Object.assign(BAL,{stip:{
 (function(){const N={
  vaibong:{n:"Vải bông",kd:"Vải vóc",d:`May áo thường: Sắc ${balSg(BAL.itFx.vaibong.dr)} trong 3 tháng · tặng, bán được`,pr:8,rk:0,dr:BAL.itFx.vaibong.dr,tg:["rv"]},
  vaitho:{n:"Vải thô (hàng kém)",kd:"Vải vóc",d:`Hàng kém Nội vụ phủ phát: may áo cho cung nữ thân tín, thiện cảm ${balSg(BAL.eff.jstip.maidUse)}`,pr:2,use:{maid:BAL.eff.jstip.maidUse},tg:[]},
- tragoi:{n:"Trà Long Tĩnh",kd:"Trà",d:`Pha mời phi tần đến chơi: thiện cảm +3 · uống: Sức ${balSg(BAL.eff.jstip.sucUse)} · tặng được`,pr:6,use:{suc:BAL.eff.jstip.sucUse},host:3,tg:["rv","th"]},
- trahop:{n:"Trà Quân Sơn ngân châm",kd:"Trà",d:`Trà thượng hạng: mời khách thiện cảm +5 · uống: Sức ${balSg(BAL.eff.jstip.sucUse_2)}, Đức ${balSg(BAL.eff.jstip.ducUse)} · tặng Thái hậu, Hoàng thượng`,pr:25,use:{suc:BAL.eff.jstip.sucUse_2,duc:BAL.eff.jstip.ducUse},host:5,gv:4,tg:["rv","th","emp","hh"]},
- tramoc:{n:"Trà mốc (hàng kém)",kd:"Trà",d:`Trà cũ ẩm mốc Nội vụ phủ phát: mời khách thì bị chê (thiện cảm -2) · uống: Sức ${balSg(BAL.eff.jstip.sucUse_3)}`,pr:0,use:{suc:BAL.eff.jstip.sucUse_3},host:-2,tg:[]},
+ tragoi:{n:"Trà Long Tĩnh",kd:"Trà",d:`Pha mời phi tần đến chơi: {host} · uống: Sức ${balSg(BAL.eff.jstip.sucUse)} · tặng được`,pr:6,use:{suc:BAL.eff.jstip.sucUse},host:3,tg:["rv","th"]},
+ trahop:{n:"Trà Quân Sơn ngân châm",kd:"Trà",d:`Trà thượng hạng: mời khách {host} · uống: Sức ${balSg(BAL.eff.jstip.sucUse_2)}, Đức ${balSg(BAL.eff.jstip.ducUse)} · tặng Thái hậu, Hoàng thượng`,pr:25,use:{suc:BAL.eff.jstip.sucUse_2,duc:BAL.eff.jstip.ducUse},host:5,gv:4,tg:["rv","th","emp","hh"]},
+ tramoc:{n:"Trà mốc (hàng kém)",kd:"Trà",d:`Trà cũ ẩm mốc Nội vụ phủ phát: mời khách thì bị chê ({host}) · uống: Sức ${balSg(BAL.eff.jstip.sucUse_3)}`,pr:0,use:{suc:BAL.eff.jstip.sucUse_3},host:-2,tg:[]},
  thanbac:{n:"Than bạc sương",kd:"Than sưởi",d:`Đốt sưởi: mùa đông Sức ${balSg(BAL.itFx.thanbac.heat[0])}, mùa khác Sức ${balSg(BAL.itFx.thanbac.heat[1])}`,pr:6,heat:BAL.itFx.thanbac.heat,tg:["rv"]},
  thanden:{n:"Than đen (hàng kém)",kd:"Than sưởi",d:`Than khói Nội vụ phủ phát: mùa đông Sức ${balSg(BAL.itFx.thanden.heat[0])}, mùa khác Sức ${balSg(BAL.itFx.thanden.heat[1])}`,pr:1,heat:BAL.itFx.thanden.heat,tg:[]},
  banhtrai:{n:"Hộp điểm tâm",kd:"Điểm tâm",d:`Ăn: Sức ${balSg(BAL.eff.jstip.sucUse_4)} · tặng, chia kẻ hầu`,pr:5,use:{suc:BAL.eff.jstip.sucUse_4},tg:["rv"]},
@@ -43,6 +43,8 @@ Object.assign(BAL,{stip:{
  cungbac:{n:"Cung bạc chạm rồng",kd:"Lễ vật",d:"Tặng Hoàng thượng: hợp ý người mê săn bắn",pr:60,gv:8,tg:["emp"]},
  traicay:{n:"Giỏ trái cây tiến cống",kd:"Điểm tâm",d:`Ăn: Sức ${balSg(BAL.eff.jstip.sucUse_6)} · tặng`,pr:15,use:{suc:BAL.eff.jstip.sucUse_6},tg:["rv","th"]},
  lanquy:{n:"Chậu lan quý",kd:"Lễ vật",d:"Tặng người yêu hoa",pr:40,gv:5,tg:["rv","th","hh"]}};
+ /* review/net-ghen-2 (law 4 + 11): a tea's hosting line prints ITS host value (one number), through the nết preview of an unknown guest (jstip:178 relDo → relAdd) */
+ for(const k in N)if(N[k].d&&N[k].d.includes("{host}")){const it=N[k];let dT=it.d;Object.defineProperty(it,"d",{configurable:true,enumerable:true,get(){try{return dT.replace("{host}",pvQuy(null,it.host||0,"thiện cảm"))}catch(e){return dT.replace("{host}","thiện cảm "+balSg(it.host||0))}},set(v){dT=v}})}
  for(const k in N){if(!IT[k])IT[k]=N[k]}
  /* coal: the use depends on the season (read when shown and when used) */
  for(const k of ["thanbac","thanden"])Object.defineProperty(IT[k],"use",{enumerable:true,configurable:true,get(){let w=false;try{w=SEASON[S.month-1]==="Đông"}catch(e){}return{suc:this.heat[w?0:1]}}});
@@ -175,7 +177,7 @@ window.stipEvItem=stipEvItem;
   const m=stipEvItem(s.id,X);if(m){const [,,k,fr,no]=m;let who="";try{const A=e68X(s,p);who=fr==="A"&&A&&A.A?A.A.n||"":""}catch(e){}
    d.o.forEach((o,i)=>{if(no.includes(i)||!o.go)return;const g0=o.go;o.go=function(){const r=g0.apply(this,arguments);try{const n=goodsGive(S,k,{from:fr==="A"?"story":fr,who});if(n)log(`${n} vào rương.`)}catch(e){console.error(e)}return r};o.x=(o.x?o.x+" · ":"")+`thành: ${itm(k).n} vào rương`/* a gain sits under Được, never on the red Kèm line (choice value, law 3) */})}
   if(s.fam==="visit"&&(s.a||[])[0]==="rv"){const ti=stipTeaIx();let A=null;try{A=e68X(s,p)}catch(e){}if(ti>=0&&A&&A.A){const k=S.inv[ti].k,it=itm(k),n=it.host||0;
-   if(n>=0)/* choice value (law 3): spoiled tea is never offered to a guest (it could only lose) */d.o.push({n:`Pha ${it.n.replace(/ \(hàng kém\)$/,"")} mời khách`,fx:{},x:n>=0?`thành: ${A.A.n||"nàng"} thiện cảm +${n} · kèm: dùng 1 ${STIP_UNIT[k]||"gói"} trà`:`hỏng: trà mốc, ${A.A.n||"nàng"} chê (thiện cảm ${n}) · kèm: dùng 1 gói trà`,
+   if(n>=0)/* choice value (law 3): spoiled tea is never offered to a guest (it could only lose) */d.o.push({n:`Pha ${it.n.replace(/ \(hàng kém\)$/,"")} mời khách`,fx:{},x:n>=0?`thành: ${A.A.n||"nàng"} ${pvQuy(A.A.k==="rv"?A.A.o:null,n,"thiện cảm")} · kèm: dùng 1 ${STIP_UNIT[k]||"gói"} trà`:`hỏng: trà mốc, ${A.A.n||"nàng"} chê (thiện cảm ${n}) · kèm: dùng 1 gói trà`,
     go:()=>{const j=stipTeaIx();if(j>=0)S.inv.splice(j,1);relDo(A.A,n);log(n>=0?`Ngươi pha ${it.n} mời ${A.A.n||"khách"}; nàng khen trà thơm.`:`<span class="r">Trà mốc, ${A.A.n||"khách"} nhấp một ngụm rồi đặt xuống.</span>`)}})}}
  }catch(e){console.error("stip e68",e)}return d}})();
 /* ---------- j67 stories: beat / option / end field gi:[key or [keys], from] ---------- */

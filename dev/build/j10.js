@@ -113,8 +113,8 @@ function courtAct(a,k){const c=S.court[k];if(!c||S.dead||Q.length)return;let r="
  if(r)log(r);render()}
 function tqAf(p){return S.court&&S.court.tq?(S.court.tq.af[key(p)]||0):0}
 /* Biếu quà người trong triều (Tổng quản / Kính sự phòng): ONE function for the player's button (courtAct thuong) and an NPC consort (AG-ALL-2 cx:tqGift) */
-function courtGive(a,k){const c=S.court&&S.court[k];const bac=BAL.bacFee.court,af=BAL.eff.j10.meCourtAct;if(!c||(a.bac||0)<bac)return"";if(a===S)apply({bac:-bac});else ap(a,{bac:-bac});const id=a===S?"me":a.id;c.af[id]=(c.af[id]||0)+af;
- return a===S?`Biếu ${c.name} ${bac} lượng: người ấy quý ngươi ${balSg(af)}.`:`${a.name} biếu ${c.name} ${bac} lượng`}
+function courtGive(a,k){const c=S.court&&S.court[k];const bac=BAL.bacFee.court,af=BAL.eff.j10.meCourtAct;if(!c||(a.bac||0)<bac)return"";if(a===S)apply({bac:-bac});else ap(a,{bac:-bac});const id=a===S?"me":a.id;c.af[id]=(c.af[id]||0)+BAL.eff.j10.meCourtAct;
+ return a===S?`Biếu ${c.name} ${bac} lượng: người ấy quý ngươi ${balSg(BAL.eff.j10.meCourtAct)}.`:`${a.name} biếu ${c.name} ${bac} lượng`}
 /* the old monthly drip (roll 10): off while the day plan runs — an NPC consort's own choice now (jagacts2 cx:tqGift) */
 function npcCourt(v){if(typeof agDOn==="function"&&agDOn())return;if(roll(10)&&v.bac>=BAL.bacFee.court*2&&S.court)courtGive(v,"tq")}
 function staffHTML(){const row=(s,btns)=>`<div class="srow2">${mdH(pServ(s),"sm")}<div class="sinfo"><b>${s.name}</b><span>${srkName(s)} · ${strShow(s)}${s.lover&&(S.knowDT||[]).includes(s.sid)?" · <span class=\"r\">đối thực</span>":""}${s.spyFor==="me"?" · <span class=\"g\">tai mắt của ngươi</span>":""}</span></div><div class="rbtn">${btns}</div></div>`;
