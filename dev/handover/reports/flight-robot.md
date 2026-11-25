@@ -287,3 +287,4 @@ Observation for a game worker (not this item): on the reveal the face shows scat
 | quickcheck bfc6ebb6 vs live 9f72524b | PASS 992 s · core gates PASS · old save ok · perf render 490/418, tab 1065/1068, buổi 2976/2665 |
 | laws 4 / 7 / 9 | no number, no player text, no UI |
 Carries test-path-fix (incl. 003ac0b0 hoa-dien retap = FAIL). OPEN, not blocking this land (says Foreman F #7: it comes from ROLE B #2): toil-overlay Fold hollow green (G1 covered token) + G2 (#mefig layer shown on her hidden figure after a token tap). It is no worse than main's overlay test (red on a false positive).
+PASS sha correction (test-path-fix-3): review/test-path-fix-3-r on origin is cb67ffba (same tree eb293b26 as my tested bfc6ebb6, FF 9f72524b) — land cb67ffba.
