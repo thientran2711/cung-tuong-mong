@@ -30,6 +30,12 @@ const PING=10000,SILENT=25000,BACK=[1000,2000,4000,8000,10000];
 const H={};
 const st={status:"off",room:"",you:"",seats:null,week:0,ended:{a:false,b:false},C:null,mine:null,msv:0,peerOnline:false,bothIn:false,playing:false};
 let ws=null,want=false,tries=0,tmr=0,pinger=0,lastRx=0,pend=null,both=false;
+/* review/coop-presence-reload (U3b R7DR / U1 VZ68: after a reload one seat read «hảo hữu đang vắng» for ever while the friend played on):
+   ONE presence rule on this side. psSeen = the newest presence clock (Worker "ps") applied on this socket: an older view (a room reply
+   compressed while the friend rejoined) never overwrites a newer one. whoT = the next "who" (ask the room who is here): every PING tick
+   while the friend reads away, every WHO_EVERY otherwise, so a view that went stale for ANY reason heals in seconds. healAt = last time this
+   seat reconnected because the room said IT is not here (its socket buried while the page never saw the close): at most once per HEAL_GAP. */
+let psSeen=0,whoT=0,healAt=0,lastSig="";const WHO_EVERY=30000,HEAL_GAP=15000;
 function pid(){let p=LS.get("ctm-coop-pid");if(!p){p=(crypto.randomUUID?crypto.randomUUID():Math.random().toString(36).slice(2)+Date.now().toString(36)).replace(/-/g,"").slice(0,24);LS.set("ctm-coop-pid",p)}return p}
 function emit(t,d){(H[t]||[]).slice().forEach(f=>{try{f(d)}catch(e){console.error("COOP",t,e)}})}
 function on(t,f){(H[t]=H[t]||[]).push(f);return f}
@@ -60,19 +66,36 @@ function rxIn(s,ev){if(ws!==s)return;rxQ=rxQ.then(()=>rx(ev,s)).catch(e=>console
 async function rx(ev,s){if(s&&ws!==s)return;lastRx=Date.now();let m;
  try{const txt=typeof ev.data==="string"?ev.data:await gunz(ev.data instanceof Blob?await ev.data.arrayBuffer():ev.data);m=JSON.parse(txt)}catch(e){console.error("COOP bad frame",e);return}
  if(!m||!m.t||(s&&ws!==s))return;
- if(m.t==="room"){tries=0;LS.set("ctm-coop-room",m.code||st.room);set({status:"open",room:m.code||st.room,you:m.you,seats:m.seats,week:m.week||0,ended:m.ended||st.ended,C:m.state===undefined?st.C:m.state,mine:m.mine||null,msv:m.msv||0,caps:Array.isArray(m.caps)?m.caps:[]});
-  if(pend){pend.res({room:st.room,you:st.you});pend=null}}
- else if(m.t==="presence")set({seats:m.seats,ended:m.ended||st.ended,week:m.week!=null?m.week:st.week});
+ const old=m.ps!=null&&m.ps<psSeen;if(m.ps!=null&&!old)psSeen=m.ps;
+ if(m.t==="room"){tries=0;LS.set("ctm-coop-room",m.code||st.room);set({status:"open",room:m.code||st.room,you:m.you,seats:old?st.seats:m.seats,week:m.week||0,ended:m.ended||st.ended,C:m.state===undefined?st.C:m.state,mine:m.mine||null,msv:m.msv||0,caps:Array.isArray(m.caps)?m.caps:[]});
+  if(pend){pend.res({room:st.room,you:st.you});pend=null}
+  /* re-announce: everybody gets a fresh presence after this seat's room reply (a newer Worker; an older one ignores "here") */
+  if(m.ps!=null){try{s.send('{"t":"here"}')}catch(e){}}}
+ else if(m.t==="presence"){if(old)return;/* an older view is dropped whole (its buổi / bended too) */
+  /* a view that says exactly what this seat already holds (the answer to its own "who" most of the time) changes nothing: no game event */
+  const sig=JSON.stringify([m.seats,m.ended,m.week,m.buoi,m.bended]);if(m.ps!=null&&sig===lastSig){whoT=Date.now()+(st.peerOnline?WHO_EVERY:PING/2);return}/* review/coop-presence-reload-rv: the answer to this seat's own "who" (Worker who:1) is a CHECK, not news. When it shows the same seats /
+     ended / week this seat already holds it fires no game event (its buổi / bended would run nCheck / lockNext / the night timer at a random
+     moment base never had: coop-e2e week 3 after rebirth held the host's «Sẵn sàng»); only a real change (the stale «đang vắng» it heals) is told */
+  if(m.who&&JSON.stringify([m.seats,m.ended||st.ended,m.week!=null?m.week:st.week])===JSON.stringify([st.seats,st.ended,st.week])){whoT=Date.now()+(st.peerOnline?WHO_EVERY:PING/2);selfCheck(m);return}
+  lastSig=sig;
+  set({seats:m.seats,ended:m.ended||st.ended,week:m.week!=null?m.week:st.week})}
+ if((m.t==="room"||m.t==="presence")&&!old){whoT=Date.now()+(st.peerOnline?WHO_EVERY:PING/2);selfCheck(m)}
  else if(m.t==="state")set({C:m.state,week:m.week!=null?m.week:st.week});
  else if(m.t==="week")set({C:m.state,week:m.week,ended:{a:false,b:false}});
- else if(m.t==="error"){if(m.code==="full"||m.code==="noroom"||m.code==="nopid"){want=false;LS.del("ctm-coop-room");if(pend){pend.rej({code:m.code,message:m.msg});pend=null}}}
+ else if(m.t==="error"){if(m.code==="full"||m.code==="noroom"||m.code==="nopid"){want=false;LS.del("ctm-coop-room");if(pend){pend.rej({code:m.code,message:m.msg});pend=null}}
+  /* the room buried this socket (stale / replaced) and this page never got the close: rejoin now (newest socket wins) */
+  else if(m.code==="gone"&&want&&s&&ws===s){tries=0;connect(st.room)}}
  if(COOP.rxWrap)COOP.rxWrap(()=>emit(m.t,m),m);else emit(m.t,m)}/* rxWrap: thin guest part C (jcoopthinc) runs every server message as a sync step */
 /* review/coop-stable: a socket dropped here while still CONNECTING can still reach the Worker AFTER its successor (slow proxy / network):
    the Worker then "replaces" the live one with that abandoned twin (4001) and this device sat on "Ở máy khác" (guest: double join from
    the ?room= link + "Vào phòng"; any reconnect while one was in flight). A 4001 within 30 s of abandoning our own socket is our twin:
    reconnect once instead of giving the seat up. */
 let abandonAt=0;
-function connect(code){clearTimeout(tmr);if(ws){try{ws.onclose=null;ws.close()}catch(e){}ws=null;abandonAt=Date.now()}
+/* the room's view says THIS seat is not here while this socket is open: the Worker does not count it (buried while the page missed the close):
+   rejoin, so the newest socket of the seat is the one the room counts and the friend sees her back */
+function selfCheck(m){const me=st.you&&m.seats&&m.seats[st.you];if(!me||me.online!==false||!want||!ws||ws.readyState!==1)return;
+ if(Date.now()-healAt<HEAL_GAP)return;healAt=Date.now();tries=0;connect(st.room)}
+function connect(code){clearTimeout(tmr);psSeen=0;lastSig="";if(ws){try{ws.onclose=null;ws.close()}catch(e){}ws=null;abandonAt=Date.now()}
  want=true;both=false;set({status:tries?"retry":"connecting",room:code});
  let s;try{s=new WebSocket(wsURL(code))}catch(e){return drop()}
  s.binaryType="arraybuffer";ws=s;
@@ -87,8 +110,14 @@ function drop(){clearInterval(pinger);pinger=0;both=false;
  const d=BACK[Math.min(tries,BACK.length-1)];tries++;set({status:"retry"});emit("lost",{inMs:d});
  if(pend&&tries>=4){pend.rej({code:"net"});pend=null;want=false;set({status:"closed"});return}
  clearTimeout(tmr);tmr=setTimeout(()=>{if(want)connect(st.room)},d)}
-function startPing(){clearInterval(pinger);pinger=setInterval(()=>{if(!ws||ws.readyState!==1)return;
- if(Date.now()-lastRx>SILENT){try{ws.close()}catch(e){}return}try{ws.send('{"t":"ping"}')}catch(e){}},PING)}
+function startPing(){clearInterval(pinger);whoT=Date.now()+PING;pinger=setInterval(()=>{
+ /* a socket that is CLOSED although its close never reached this page (frozen / hung tab when the room buried it): the seat sat «open» on a
+    dead socket and the friend read it away for ever. Rejoin. */
+ if(want&&ws&&ws.readyState>1&&st.status==="open"){tries=0;connect(st.room);return}
+ if(!ws||ws.readyState!==1)return;
+ if(Date.now()-lastRx>SILENT){try{ws.close()}catch(e){}return}try{ws.send('{"t":"ping"}')}catch(e){}
+ /* ask the room who is here (not a keep-alive ping: the Worker itself answers it, so a socket the room buried hears "gone") */
+ if(st.status==="open"&&Date.now()>=whoT){whoT=Date.now()+(st.peerOnline?WHO_EVERY:PING/2);try{ws.send('{"t":"who"}')}catch(e){}}},PING)}
 on("room",startPing);
 function wait(code){return new Promise((res,rej)=>{if(pend)pend.rej({code:"replaced"});pend={res,rej};tries=0;connect(code)})}
 async function create(){const r=await fetch(base()+"/api/room",{method:"POST"}).catch(()=>null);
