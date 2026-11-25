@@ -65,10 +65,10 @@ const DEVS=['fold','ipadAir'];
    else{const fr=await p.evaluate(()=>{const f=document.getElementById('krotf');if(!f)return null;const r=f.getBoundingClientRect();return{l:r.left,t:r.top,w:r.width,h:r.height,iw:f.contentWindow.innerWidth}});
     /* box coords are inside the frame (host mode): map through the frame scale */
     const sc=fr&&fr.iw?fr.w/fr.iw:1;const X=(fr?fr.l:0)+box.x*sc,Y=(fr?fr.t:0)+box.y*sc;await p.touchscreen.tap(X,Y);await sleep(1800);
-    const panel=await g.evaluate(()=>{const m=document.getElementById('modal');const li=[...document.querySelectorAll('#modal .kntl li')].map(x=>x.innerText.replace(/\s+/g,' ').trim());return{open:!!(m&&!m.hidden),title:(document.querySelector('#modal .kptitle,#modal h2,#modal .kpt')||{}).textContent||'',li,txt:m?m.innerText:''}});
+    const panel=await g.evaluate(()=>{const m=document.getElementById('modal');const li=[...document.querySelectorAll('#modal .kntl li')].map(x=>x.innerText.replace(/[ \t]+/g,' ').trim());return{open:!!(m&&!m.hidden),title:(document.querySelector('#modal .kptitle,#modal h2,#modal .kpt')||{}).textContent||'',li,txt:m?m.innerText:''}});
     if(!panel.open||!panel.li.length)rep('T-FAIL',`${dev} the tap on «!» did not open the «Tin báo» dialog (${JSON.stringify(panel).slice(0,120)})`);
     else{await g.evaluate(()=>__nuAll());const hh=await g.evaluate(()=>__nu.hits.slice());hh.forEach(h=>{if(!pre.some(x=>x.surf===h.surf&&x.txt===h.txt))rep('T-???',`${dev} ${h.surf} :: ${h.txt}`)});
-     const q=panel.li.filter(t=>/\?\?\?/.test(t));panel.li.filter(t=>/[a-zà-ỹ,]\s+Một vị/.test(t)).forEach(t=>rep('T-CAP',`${dev} Tin báo row capital «Một vị» mid-sentence :: ${t.slice(0,140)}`));q.forEach(t=>rep('T-???',`${dev} Tin báo row :: ${t}`));
+     const q=panel.li.filter(t=>/\?\?\?/.test(t));panel.li.filter(t=>t.split('\n').some(l=>/[a-zà-ỹ,] Một vị/.test(l))).forEach(t=>rep('T-CAP',`${dev} Tin báo row capital «Một vị» mid-sentence :: ${t.slice(0,140)}`));q.forEach(t=>rep('T-???',`${dev} Tin báo row :: ${t}`));
      rep(q.length?'T-FAIL':'ok',`T ${dev} Tin báo dialog opened by a real tap: ${panel.li.length} rows, «???» rows ${q.length}; sample «${panel.li.slice(0,3).join(' | ').slice(0,200)}»`)}
     if(SHOTS)await p.screenshot({path:path.join(SHOTS,`${dev}.png`)})}
    rep(errs.length?'T-FAIL':'ok',`T ${dev} page errors ${errs.length} ${errs.slice(0,2).join(' ')}`);await ctx.close()}
