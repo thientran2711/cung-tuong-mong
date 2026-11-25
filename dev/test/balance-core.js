@@ -11,7 +11,7 @@ const {chromium}=require('playwright');const path=require('path');
    {const A=originArts(k,S.st&&S.st.f14&&S.st.f14.road),T=BAL.art.tier;ok(`${k}: arts = BAL.orig.art row (one table) at the ladder floor`,ARTS.every(a=>artPts(S,a.k)===(A[a.k]?T[A[a.k]]:0))&&Object.keys(A).filter(a=>!ARTS.some(x=>x.k===a)).every(v=>S.vir[v]===A[v]),{arts:ARTS.map(a=>artPts(S,a.k)),row:A})}}
   go("tt");const v=liveRivals(true)[0];ok("NPC start = LIVE rstats (no origin table, no p.org)",!!v&&!v.org&&v.sac>=40&&v.tai>=30,v&&[v.org,v.sac,v.tai]);
   /* ladder */const P={arts:{cam:0},artp:{cam:0}};let n=0;while(P.arts.cam<5&&n<500){crsPush(P.arts,P.artp,"cam",2);n++}
-  ok("ladder: 2-point lessons to Tông sư take 70–130 lessons (old ladder: 8)",n>=70&&n<=130,n);ok("Tông sư = 100 points",artPts(P,"cam")===100);
+  ok("ladder: 2-point lessons to Tông sư take 40–70 lessons (OD 16/11 23:00Z «lên 100 quá nhanh»: old ladder 8; OD 25/11 23:52Z «bao giờ mới lên bậc»: review/balance-pace curve ~50)",n>=40&&n<=70,n);ok("Tông sư = 100 points",artPts(P,"cam")===100);
   ok("tier names from BAL.art.nm",artNm(3)===BAL.art.nm[3]);ok("artO = BAL.art.odds[bậc]",artO({arts:{y:3}},"y")===BAL.art.odds[3]);
   /* NPC and her: same points for the same lesson */go("muoi");S.arts.ky=0;S.artp.ky=0;const w=liveRivals(true)[1];w.arts.ky=0;w.artp.ky=0;addArt("ky",3);addArtP(w,"ky",3);
   ok("two-way: addArt(her) = addArtP(NPC)",artPts(S,"ky")===artPts(w,"ky"),[artPts(S,"ky"),artPts(w,"ky")]);
