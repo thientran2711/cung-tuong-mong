@@ -1,0 +1,6 @@
+# flight-M2 — one SOLO life, LIVE origin/main, Fold 755x1000, SEED 102, thd_tho (real taps)
+Harness: dev/handover/robot/m2/harness (robot.js engine + policy.js, node, Playwright persistent context, touchscreen taps after elementFromPoint hit-check).
+Save to resume: logs/save_dump_latest.json (localStorage hclh-save-v2-*, slot 2 = this life).
+
+## Hourly progress
+- 08:55Z Y3 T1 age 22 (life real-time 3h45m). 2 true reloads (Y2, Y3) ok; bugs: SOFTLOCK Tin báo clipped options (4 reload escapes), LAYOUT Phụ tuyến clipped, UX odds-chip swallows centre tap. See logs/bugs.jsonl, logs/moments.md

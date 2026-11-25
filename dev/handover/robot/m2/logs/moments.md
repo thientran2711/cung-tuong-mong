@@ -1,0 +1,11 @@
+# M2 moments (persona: thd_tho — Con gái thầy đồ nghèo, road Thơ; skilled-ish plain player; Fold 755x1000; SEED 102)
+- Y1 T3 · title/roulette · CONFUSED · first start: a full-screen art-download card (“Cung Tường Mộng … sắp xong”) covers the title buttons for ~60–90 s on a clean browser; buttons look dead until it ends (covered by loader, not hit-testable).
+- Y1 T3 · Thân phận card · ODD · first tap on “Nhận thân phận” only highlights it (red border); needs a second tap (my first-run taps; later runs worked at once) — watch.
+- Y1 T3 · Tuyển chọn (result toast) · FRUSTRATED · the result card “KẾT QUẢ” sits on a full-screen tap catcher (#kxcatch): the next tap on a button behind it is swallowed (by design KIT 32.10) — a player taps twice for every result.
+- Y1 T4 · Tin báo · CONFUSED · Sang buổi dimmed, all action cards greyed, “khắc ○○○○” at the START of a buổi with no visible reason: the news card is held and only the red “!” badge opens it (shots/pause.png 05:37).
+- Y1 T4 · option cards · FRUSTRATED · tapping the middle of a one-line option (“Tiếp tục … Rất vững”) hits the odds chip and opens the “Thang cơ duyên” legend instead of choosing; the legend then covers the button.
+- Y1 T4 · option cards · ODD · tapping the left of an option opens its thumbnail as a full-screen picture that eats the next taps (needs ✕).
+- Y1 T8 · Phụ tuyến · Tân quân lập uy · FRUSTRATED · the 4 options are clipped below the card (only a ~10 px sliver of option 1 shows) — bug LAYOUT-CLIPPED-OPTIONS, shot evid/layout-phutuyen-options-clipped.png.
+- Y1 T8 · Điểm trang mini-game · BORED · the same makeup mini-game (brow, powder, lips ≈ 25–40 s) is offered as the first act EVERY day.
+- Y1 T8 · mini-games · ODD · after the result card the board still reports phase 'play' with peek()=null (harness-side only).
+- Y2 T4 · Tin báo (24–76 items) · FRUSTRATED · the dialog's buttons «Xem tin / Để sau» sit at y≈1900 inside the card's overflow:clip column; with no «Kéo xuống» hint on this variant (shot evid/tinbao-options-unreachable-clip.png) it takes ≥3 long scrolls to even see them; tapping the backdrop does nothing. A player sees a frozen day (Sang buổi dimmed) — looks like a soft-lock. (A scroll of 650 px ×3–4 gets there; robot needed an escalation ladder for it.)
