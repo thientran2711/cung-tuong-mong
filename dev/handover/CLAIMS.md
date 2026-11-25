@@ -1620,3 +1620,4 @@ selection-scene r7 (successor of SELSCENE-16; co-op 4 failures root cause) | rev
 | FLIGHT ROBOT B-SOLO (sonnet; briefs/F-flight-robot.md; arm B 4232709a+fe3cb80c local) | dev/handover/robot/flight-B-solo-* | F | (opening) | RUNNING | 25/11 02:22Z |
 | FLIGHT ROBOT B-COOP (sonnet; briefs/F-flight-robot.md; arm B 4232709a+fe3cb80c local) | dev/handover/robot/flight-B-coop-* | F | (opening) | RUNNING | 25/11 02:22Z |
 | MAKEUP NO-BOOST (owner bug 25/11 ~03:10Z: same makeup strength at every size) | review/makeup-noboost | MAIN 132 | session_01V1ZZH4ZZrwt6PMmCBsJRJc | RUNNING | 25/11 04:06Z |
+| SANSANG-MUSIC-FIX (owner LIVE bugs 25/11 04:06Z+04:10Z) | review/sansang-music-fix | MAIN 132 | session_01V1ZZH1Z5G4aTpbCaR3rDY7 | RUNNING | 25/11 04:08Z |
