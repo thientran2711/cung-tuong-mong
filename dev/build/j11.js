@@ -14,15 +14,17 @@ function mkAudio(n,loop,route){try{const a=new Audio(`audio/${n}.mp3`);a.loop=!!
    AudioBuffers (jsfx sfx()) through a GainNode too. Everything falls back to plain HTMLAudio when WebAudio is missing. */
 function auRoute(a){try{if(!AU.ctx||AU.ctx.state==="closed"||a.__gain)return;const src=AU.ctx.createMediaElementSource(a),g=AU.ctx.createGain();src.connect(g);g.connect(AU.ctx.destination);let v=1;a.__gain=g;
  Object.defineProperty(a,"volume",{configurable:true,get:()=>v,set:x=>{v=Math.max(0,Math.min(1,+x||0));g.gain.value=v}})}catch(e){}}
-function auBuf(n){if(!AU.ctx)return null;const c=AU.bufs||(AU.bufs={});const e=c[n];if(e)return e.buf||null;const o=c[n]={buf:null,fail:0};
- try{fetch(`audio/${n}.mp3`).then(r=>r.ok?r.arrayBuffer():Promise.reject(new Error(r.status))).then(ab=>new Promise((ok,no)=>{const p=AU.ctx.decodeAudioData(ab,ok,no);if(p&&p.catch)p.catch(no)})).then(b=>{o.buf=b}).catch(()=>{o.fail=1})}catch(e){o.fail=1}return null}
+function auBuf(n){if(!AU.ctx)return null;const c=AU.bufs||(AU.bufs={});const e=c[n];if(e&&!(e.fail&&performance.now()-e.ft>4000))return e.buf||null;const o=c[n]={buf:null,fail:0,ft:0};
+ try{fetch(`audio/${n}.mp3`).then(r=>r.ok?r.arrayBuffer():Promise.reject(new Error(r.status))).then(ab=>new Promise((ok,no)=>{const p=AU.ctx.decodeAudioData(ab,ok,no);if(p&&p.catch)p.catch(no)})).then(b=>{o.buf=b}).catch(()=>{o.fail=1;o.ft=performance.now()})}catch(e){o.fail=1;o.ft=performance.now()}return null}
 const AU_PRELOAD=["sfx-win","sfx-fail","sfx-learn-good","sfx-learn-bad","sfx-seal-stamp","sfx-tap","sfx-expose","sfx-scheme","sfx-rank-new","sfx-podium","sfx-buy","sfx-coin"];
 function auUnlock(){try{const C=window.AudioContext||window.webkitAudioContext;
  if(C&&!AU.ctx){try{AU.ctx=new C({latencyHint:"interactive"})}catch(e){try{AU.ctx=new C()}catch(x){}}}
  try{if(navigator.audioSession&&navigator.audioSession.type!=="playback")navigator.audioSession.type="playback"}catch(e){}
  const c=AU.ctx;if(c&&c.state!=="running"){const p=c.resume();if(p&&p.catch)p.catch(()=>{})}
  if(c&&!AU.silent){AU.silent=1;try{const s=c.createBufferSource();s.buffer=c.createBuffer(1,1,22050);s.connect(c.destination);s.start(0)}catch(e){}if(!AU.pre){AU.pre=1;AU_PRELOAD.forEach(auBuf)}}
- if(!AU.unlocked){AU.unlocked=true;auTick()}}catch(e){if(!AU.unlocked)AU.unlocked=true}}
+ /* review/sfx-instant (OD 24/11 item 2): ONE context for every synth sound too (bell, kg82Pluck fallback, Sổ tuần knock) — a lazily made second context starts suspended outside a gesture = a silent first sound */
+ if(c){if(!window.__bellCtx)window.__bellCtx=c;else if(window.__bellCtx!==c&&window.__bellCtx.state!=="running"){try{const p=window.__bellCtx.resume();if(p&&p.catch)p.catch(()=>{})}catch(e){}}}
+ if(!AU.unlocked){AU.unlocked=true;auTick()}if(AU.onUnlock)AU.onUnlock()}catch(e){if(!AU.unlocked)AU.unlocked=true}}
 window.auUnlock=auUnlock;
 function musVol(){return OPT.mute||!OPT.snd?0:OPT.mus*AU.duck}
 function fadeTo(a,v,ms,done){if(!a)return;const v0=a.volume,t0=performance.now();const st=()=>{const f=Math.min(1,(performance.now()-t0)/ms);try{a.volume=Math.max(0,Math.min(1,v0+(v-v0)*f))}catch(e){}if(f<1)setTimeout(st,60);else if(done)done()};st()}
@@ -36,7 +38,10 @@ function musicCtx(){if(!S)return"bgm-day";if(S.dead)return"bgm-sorrow";if(S.plac
 function auTick(){if(!AU.unlocked)return;const m0=Q[0];if(!(m0&&m0.pid&&musicCtx()==="bgm-tension"))heartLoop(false);if(!OPT.snd||OPT.mute){if(AU.cur)try{AU.cur.volume=0}catch(e){}return}setMusic(musicCtx());if(AU.cur){try{AU.cur.volume=musVol();if(AU.cur.paused&&!document.hidden){const p=AU.cur.play();if(p&&p.catch)p.catch(()=>{})}}catch(e){}}}
 /* real gestures only: touchend / click / pointerup / keydown unlock iOS; pointerdown counts for a mouse (or when WebAudio is missing), a touch pointerdown is not a gesture there */
 for(const ev of ["touchend","click","pointerup","keydown"])document.addEventListener(ev,auUnlock,{capture:true,passive:true});
-document.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse"||!(window.AudioContext||window.webkitAudioContext))auUnlock()},{capture:true,passive:true});
+/* a touch pointerdown once the page already had a real gesture (sticky activation): wake the existing context right at the finger-down, so the tap sound
+   (mini-game strokes play on pointerdown) is not lost to a context that is still resuming at touchend (review/sfx-instant) */
+document.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse"||!(window.AudioContext||window.webkitAudioContext))auUnlock();
+ else if(AU.ctx&&AU.ctx.state!=="running"&&AU.ctx.state!=="closed"){try{const p=AU.ctx.resume();if(p&&p.catch)p.catch(()=>{})}catch(x){}}},{capture:true,passive:true});
 window.addEventListener("pageshow",()=>{AU.silent=0});
 document.addEventListener("visibilitychange",()=>{try{if(document.hidden){if(AU.cur)AU.cur.pause()}else{AU.silent=0;if(AU.ctx&&AU.ctx.state!=="running"){const p=AU.ctx.resume();if(p&&p.catch)p.catch(()=>{})}auTick()}}catch(e){}if(PX.app){try{document.hidden?PX.app.ticker.stop():PX.app.ticker.start()}catch(e){}}});
 /* ---- feedback(kind): sound + haptics + visual, one helper ---- */
