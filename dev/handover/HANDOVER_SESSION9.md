@@ -3465,3 +3465,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (10:06Z) TS-P4b DONE lives 16–20 (review/trungsinh-story; 17 maid health drain 20y; 18 failed elopement 22y; 19 maid xuất cung, lived to 46; 20 first-night pregnancy → khó sinh death 18y11m at 98 HP, no odds shown) → ARCHIVED. Lead 3 merges.
 - (10:22Z) LC14: all 10 READY (… → a72480eb → ed82787b cnv), push held. → told LC14 to gate next: hardlock-r2 → save-growth → D×4 → sansang-test-harden (stack after ed82787b).
 - (10:25Z) LC14: hardlock-r2 c8a2bb3e FAILS 8 when stacked (clash with LIVE jdeadcard.js = same family) → ORDER FOREMAN B HARDLOCK-CHOICE-R3 (rebase + unify one rule). LC14 moves on to save-growth → D×4 → sansang.
+- (10:30Z) LC14: save-growth stacked 19c0a3b0 (gates running); D dfu/law1-gifts/palace merge clean (CHANGE lines sent); nc-fix-4 j15.js rules conflict → ORDER D re-merge keeping BAL.btn.empAct.k.
