@@ -3466,3 +3466,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (10:22Z) LC14: all 10 READY (… → a72480eb → ed82787b cnv), push held. → told LC14 to gate next: hardlock-r2 → save-growth → D×4 → sansang-test-harden (stack after ed82787b).
 - (10:25Z) LC14: hardlock-r2 c8a2bb3e FAILS 8 when stacked (clash with LIVE jdeadcard.js = same family) → ORDER FOREMAN B HARDLOCK-CHOICE-R3 (rebase + unify one rule). LC14 moves on to save-growth → D×4 → sansang.
 - (10:30Z) LC14: save-growth stacked 19c0a3b0 (gates running); D dfu/law1-gifts/palace merge clean (CHANGE lines sent); nc-fix-4 j15.js rules conflict → ORDER D re-merge keeping BAL.btn.empAct.k.
+- (10:35Z) LC14: D dfu/law1-gifts/palace rebuilt c1cd57e2→469b7c01→1330ff35 on save-growth 19c0a3b0; save-growth 3 tests fail on bare too (missing robot save fixtures) → asked FOREMAN E for fixtures; difficulty «Khó death end-card row» FAIL pre-existing on LIVE → ORDER FOREMAN F (stale test or real bug).
