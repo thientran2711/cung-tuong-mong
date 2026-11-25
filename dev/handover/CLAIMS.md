@@ -1671,3 +1671,4 @@ selection-scene BIG review | review/selection-scene 9ee4f5bc | session_01V1ZZH1u
 | E RERUN E-C2 (co-op U17+U18, real taps, robot-audit-E RERUN LIST) | dev/handover/robot/rerun-E-C2-* | FOREMAN E (root) | session_01DgYSWkZEiQ8VEmgjudRCMe | RUNNING | 25/11 07:10Z |
 E co-op RERUN E-C1 (real taps; rounds U14+U15+U16 co-op rows) | dev/handover/robot/rerun-E-C1-20261125.* | FOREMAN E | session_01DgYSWmMzKCCWuhWVkizGrK | RUNNING room U14-s1 (code U2HN) harness c826eca4 LIVE github.io | 25/11 07:10Z
 sangbuoi-held-fix (jdayq dqWait silent exit, whole family) | review/sangbuoi-held-fix | session_01V1ZZH3zq7i35Qgmz3XuUHS (MAIN 135) | RUNNING | 2026-11-25T07:01Z
+| TRUNGSINH-STORY (owner 25/11: learn story + endings of trungsinhgame) | dev/research/TRUNGSINH_STORY.md (review/trungsinh-story) | MAIN 134→135 | session_01V1ZZGzGFi21WiTptDmEZ45 | RUNNING | 25/11 07:10Z |
