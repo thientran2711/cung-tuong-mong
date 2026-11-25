@@ -15,6 +15,13 @@ const PAL_WEST=[["Vĩnh Thọ cung",.303,.222],["Dực Khôn cung",.368,.222]];
 const PAL_GONE=["Trữ Tú cung","Hàm Phúc cung","Thái Cực điện"]; /* names of the old tail slots, only for the save-migration log line */
 PAL_WEST.forEach(([n,x,y],i)=>{
  if(MAPH.rivalSlots.some(s=>s.name===n))return;const s={slot:9+i,name:n,box:{x,y,w:.058,h:.105},anchor:{x:+(x+.029).toFixed(3),y:+(y+.04).toFixed(3)}};MAPH.rivalSlots.push(s);PALN.push(n)});
+/* PALACE PLAN = HISTORY (owner OD 24/11 ~08:45Z «vị trí trên bản đồ … khớp một phần nào đó với lịch sử»; Foreman D order 24/11, review/palace-distance P1):
+   the Tây lục cung courtyards of the Dư đồ art (2 columns × 3 rows west of the axis) hold the palaces that were WEST in the Forbidden City:
+   inner column (nearest Dưỡng Hòa điện) — Vĩnh Thọ (south, next to the Emperor's hall: the favourites' palace) and Dực Khôn (middle), its north courtyard
+   left empty (Trữ Tú, dropped 18/11); outer column — Khải Tường (= Thái Cực, south), Trường Xuân (middle), Hàm An (= Hàm Phúc, north).
+   Names keep their slot INDEX (every save's S.pal / v.pal unchanged); only the place on the plan moves. jbancung bcNear / jpdist pdFar read these anchors. */
+const PAL_PLAN={"Vĩnh Thọ cung":[.368,.455],"Dực Khôn cung":[.368,.338],"Khải Tường cung":[.303,.455],"Trường Xuân cung":[.303,.338],"Hàm An cung":[.303,.222]};
+for(const s of MAPH.rivalSlots){const q=PAL_PLAN[s.name];if(!q)continue;const [x,y]=q;s.box={x,y,w:.058,h:.105};s.anchor={x:+(x+.029).toFixed(3),y:+(y+.04).toFixed(3)}}
 palHeadOK=function(p){return !!p&&(p===S?!S.out&&!S.dead:p.alive&&!p.out)&&!p.queen&&rkOf(p)>=3};
 function palHostOK(p){return palHeadOK(p)&&rkOf(p)<=5&&p.pal!=null}
 function palLive(p){return p===S?!!S&&!S.out&&!S.dead:!!p&&p.alive&&!p.out}

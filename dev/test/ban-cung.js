@@ -30,7 +30,7 @@ const URL=process.argv[2]||'file://'+path.resolve(__dirname,'../../index.html');
   ok(!/%/.test(JSON.stringify(d.opts.map(o=>[o.n,o.x]))),'no % on the cards');
   const al=xs.filter(o=>!o.off);ok(al.length>=1,'allowed asks shown');
   for(const o of al){const i=idx(o.n.replace(/^Xin /,""));ok(o.x.startsWith(word(bcOdds(S,i,HA))+" ·"),`${o.n}: word = ${word(bcOdds(S,i,HA))}`);
-   ok(/hỏng: Sủng -\d+, Danh -\d+/.test(o.x),`${o.n}: refusal price shown`)}
+   ok(/hỏng: Sủng[ \u00a0]-\d+, Danh -\d+/.test(o.x)/* the Sủng shown as applied (his nature) carries the no-break space (j1 SG_NB) */,`${o.n}: refusal price shown`)}
   /* law 2/3 + law 11 scan: EVERY (granted from, allowed i) pair, every rank 3..6: the card has a non-empty gain and shows exactly what bcAsk applies */
   {let pairs=0,bad=[];const keep={rank:S.rank,pal:S.pal,sung:S.sung,danh:S.danh,duc:S.duc};const roll1=roll;const Bf=BAL.banCung.fail;
    for(let rk=3;rk<=6;rk++)for(let f=0;f<PALN.length;f++){if(bcLocked({rank:rk,queen:false},f))continue;for(let i=0;i<PALN.length;i++){if(i===f||bcLocked({rank:rk,queen:false},i))continue;pairs++;
