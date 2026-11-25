@@ -271,3 +271,7 @@ iPad 1180x820, Sổ ghi (journal/notes) rows that carry a small portrait icon: t
 - DONE (order 3) stage name-label collision rule `kitTagCollide` (KIT 33.10). The overlap was not reproducible with real people (0 pairs in 66+ states), so it is a guard, tested with a forced collision. If D sees it again: send the state (place, people, plate) to the kit keeper.
 - DONE (order 4) «Tắm gội chờ giá» one-option card: the card was LOCKED by the game rule (emperor already elsewhere) and showed no reason, a tap did nothing -> reason row + lock pop (KIT 56.29, whole group = every `lk` option).
 - DONE (order 5, verification) «Tin báo / Đã xem hết» long list on iPad: see report (kit-close-reach NT=1).
+
+
+## 25/11 KK29 — DONE (review/kit-opts-pack-4): «not a danger» flag for selection-day cards (SELSCENE-18 asked via MAIN 140)
+Flag name: **`nodanger:1`** on the queue card (`Q.push({…,pid:"selxD3",nodanger:1})`) or on a kit panel spec (`kitPanel({…,nodanger:1})`). Also silent without a flag: pids starting `selx` / `kc2Sel` (`KIT_NODANGER_PRE`, j11) and every act picker in `KIT_ACT_PIDS`. One function `kitNoDanger(card)` decides the red wash (`kitAlarm`), the heartbeat and the tension music. KIT §93.9; scan table `dev/test/kit-alarm-scan.js`.

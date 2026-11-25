@@ -312,7 +312,7 @@ function kmDiff(){if(!kmOn()){return}if(KMS!==S||!KMSNAP){KMS=S;KMSNAP=kmSnap();
  W("over",o=>function(h){const was=S&&S.dead;const r=o.apply(this,arguments);try{/* KIT §91: the ink + white silk of death only on a MOURNING ending; a festive ending (Đại kết cục, rời cung bình an, lên ngôi, kỳ ngộ) has the ending screen's own entrance */const KE=window.KIT_END,T=KE&&S&&S.kesT&&KE.types[S.kesT];if(S&&S.dead&&!was&&!window.__bot&&!(T&&T.tone==="fest"))kitInk({title:h||"Hồng nhan bạc mệnh"})}catch(e){}return r});
  /* the lot shown again (Gieo lại, Phật đường, the HUD chip): play the tube in the panel */
  W("showModal",o=>function(){const r=o.apply(this,arguments);try{const m=document.querySelector("#modal .xam");if(m&&S&&S.lot&&!m.dataset.km){m.dataset.km=1;const x=document.createElement("div");m.replaceWith(x);x.outerHTML=kitXamHTML(S.lot)}
-   const q=typeof Q!=="undefined"&&Q[0];if(q&&q.pid&&kmOn()&&!["ksp","prep","night1","night2","shop","giftpick","plantpick","taintpick","evpick","itarget","plantsv"].includes(q.pid)&&!q.__kmA){try{Object.defineProperty(q,"__kmA",{value:1,enumerable:false})}catch(e){}kitAlarm()}}catch(e){console.error(e)}return r});
+   const q=typeof Q!=="undefined"&&Q[0];if(q&&q.pid&&kmOn()&&!kitNoDanger(q)&&!q.__kmA){try{Object.defineProperty(q,"__kmA",{value:1,enumerable:false})}catch(e){}kitAlarm()}}catch(e){console.error(e)}return r});
  /* the promotion visuals replace j11's stamp (sound and haptics stay) */
  W("feedback",o=>function(k,x){if(k==="promote"&&!kmReduced()){try{if(SFXN[k])sfx(SFXN[k]);vib(k)}catch(e){}return}return o.apply(this,arguments)});
  /* render: state diff + weather chip */
@@ -481,6 +481,8 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 @keyframes kmPet{0%{opacity:0;transform:translate(-50%,-50%) rotate(var(--a)) translateY(0) scale(.5)}30%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) rotate(var(--a)) translateY(calc(var(--v) * -1)) rotate(120deg) scale(1)}}
 .km-inkov{background:transparent}
 .kmink{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+/* KIT BUG #4 (KK29, robot B1 d-robot-bugs report; MAIN 139): the death-ink banner («Hồng nhan bạc mệnh · Mở Sổ luân hồi») is a full-screen scene drawn ABOVE the ending card, so its words sat on the card rows (text on text). The ending card (#modal.end / .kes, every ending host) is held back while the ink scene plays and shows the moment it goes: ONE rule for every mourning ending. */
+body:has(.kmov.km-inkov:not(.km-out)) :is(#modal.end,#modal.kes){visibility:hidden}
 .kmblot{position:absolute;left:50%;top:46%;width:60vmax;height:auto;transform:translate(-50%,-50%) scale(.05);opacity:0;animation:kmInk calc(1.6s*var(--pace)) cubic-bezier(.3,.6,.3,1) both}
 .kmblot.b2{left:38%;top:58%;animation-delay:.25s;width:50vmax}
 .kmicap{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;animation:kmFade calc(.6s*var(--pace)) ease calc(1.1s*var(--pace)) both}
