@@ -35,3 +35,22 @@ Method: static grep (SELX_ART table, evArtCat/KMUS_CAT categories, CDN img/_inde
 - B. tấn phong, lập hậu, hòa thân, thắng trận 4 × 80 = 320
 - Total 13 pictures = 1040 credits; +30% for rejected redos ≈ 1350. Already spent 160 (pilot).
 Waiting for Foreman C's go / list change before painting.
+
+# UPDATE 25/11 — redo + batch (scope per Foreman C: SKIP tiensanh/so-*/rooms = C3-DTV; mine = gate, yard, hall, call, tấn phong, lập hậu, hòa thân, thắng trận)
+All pictures 2048x1536 (4:3, size checked on every return), full-bleed, no figures, no hanging fabric, empty standing spot centre-left, objects inside the Fold-safe centre. CDN review folder img/_review/c3-evbg/ (?v=3). Model gpt-2-6, 2k, 135 credits each. Style ref img/ev-tuyen-tu.webp.
+| key | file | creation |
+|---|---|---|
+| huong (v2 PASS) | selx-huongnang.webp | jUITBx6LD0 |
+| banhoa (v3; v2 was 1200x1536 trimmed, rejected) | selx-banhoa.webp | eI9l4YGdqL |
+| gate | selx-gate.webp | w4CXCFK7EI |
+| yard | selx-yard.webp | aFn9nMHfSh |
+| hall | selx-hall.webp | UPfdf52wny |
+| call | selx-call.webp | gOvpv5nSXO |
+| tấn phong | selx-tanphong.webp | aFn9Y0EfSh |
+| lập hậu | selx-laphau.webp | eI9lNR9dqL |
+| hòa thân | selx-hoathan.webp | rgoc8alxtc |
+| thắng trận | selx-thangtran.webp | p84s9A8ehw |
+Crops: crops-batchA.jpg (banhoa+gate+yard+hall+call), crops-batchB.jpg (the other 4).
+Credits: pilot 160 + redo 270 + banhoa v3 135 + 8 × 135 = 1645 total. (Rejected: banhoa v1 (gauze), v2 (portrait inset); not stored.)
+Not wired: SELX_ART lives on review/selection-scene (not main); the 4 non-selx keys (tanphong/laphau/hoathan/thangtran) have no code slot yet — their events need a kit scene bg key (KIT REQUEST candidate for Foreman C).
+Lesson: gpt-2-6 sometimes paints a portrait inset with pale side strips on a 4:3 canvas; the line «Full-bleed watercolour painting to all four edges, no margins, no borders, no pale side strips» fixed it 9/9.
