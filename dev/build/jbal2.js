@@ -1870,7 +1870,9 @@ Object.assign(BAL.mgTier.occ,{pm:[1,.5]});
 BAL.pm={kc:1,luck:30,minLv:1,
  play:{cut:[4,7],aff:[2,3,5],suc:6,xp:1,fade:1},
  stake:{bac:[6,8,10,12,15,18,22,26],band:.3},
- val:{danhBac:5,affBac:2,oanBac:1,khacBac:6,sucBac:1},eqTol:8,
+ /* TEMPER-OUTBURST (temper-design (b), law 4: ONE exchange table): + loy Lòng of a servant, duc Đức, th Thái hậu regard, hh the Hoàng hậu's thiện cảm,
+    sung Sủng, tai Tài, ghen one point of the rivals' jealousy (ghenAll) — the outburst choice (BAL.ea.pick) prices every option with these */
+ val:{danhBac:5,affBac:2,oanBac:1,khacBac:6,sucBac:1,loyBac:2,ducBac:3,thBac:2,hhBac:2,sungBac:4,taiBac:5,ghenBac:3},eqTol:8,
  duel:{shame:1,shameMax:3,oan:4,yieldK:.7,yieldOan:2},
  refuse:{up:1},
  mem:{pmplay:6,pmwin:10,pmyield:10},
