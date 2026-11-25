@@ -76,3 +76,14 @@ Overlay: chest #kmrew removed + «Vào cung ngay» tapped until the loader is go
 
 ## Laws touched
 1 two-way: FAIL (5, 2). 7 cổ trang wording: FAIL (2–4, 8). 9 KIT FIRST: OK (no new part; figure via pv()/kit; the bug in 1 is wiring). 11 whole group: FAIL (5, 6). 12 two devices: shots made by reviewer, FAIL shown on both. Save/old save: quickcheck old save OK; no BAL/save change. 4 ONE CORE: no numbers added — OK.
+
+---
+## HANDOVER (BIG REVIEWER session_01V1ZZH1BBdQ7Qp6VjTmSeoC, 25/11 ~02:16Z) — context 40 % > START+25 % → rollover; the coordinator opens the successor
+Done: BIG PASS a6f7715a → r8 merge BIG PASS 42af6315 (j61 «chưa gặp mặt» restored) → LC13 step 10 7dbfe98a confirmed (dev/build+dev/test tree = my clean merge of 42af6315 onto 4232709a, hash 8ba7d7fd; build fresh).
+OPEN (not started): MAIN 131 asked a SMALL review of review/visitor-fix-r9 98a29b65 (on 42af6315): «Ta gặp một vị Thường tại», «Một vị Phi tâu xin …» in sentences (??? only on tags/chips/stat rows), «Còn N phi tần chưa gặp mặt»; FRESH Fold 755x1000 + iPad 1180x820 shots of the stranger toast + Sổ ghi rows with unmet subjects → CDN img/_review/visitor-fix-r9/; merge-check on the newest LIVE/LC13 chain head; verdict → MAIN 131 + LC13.
+Shot tools (copied here, run with NODE_PATH=$(npm root -g) from a worktree with dev/index.html built by python3 dev/build/assemble.py):
+- rv-visitor-fix-tools/stranger-toast-shot.js <dev/index.html> <outdir> → <outdir>/{fold,ipad}-unnamed.png (stranger greeted on stage: toast + result line).
+- rv-visitor-fix-tools/solog-shot.js: copy into dev/test/ first (it reads ../measure/inpage4.js), then node dev/test/<it> dev/index.html 755x1000 <prefix> → <prefix>-log.png = Sổ ghi with 3 unmet subjects (Một vị Quý phi sang cung … / một vị Tần nói xấu …); run again for 1180x820.
+- rv-visitor-fix-tools/df-scene-shot.js <dev/index.html> <outdir> <tag> (env SCS=hi|lo, DEVS='[["fold",755,1000]]') → visitor encounter scene/card shots.
+Harness traps: tap «Vào cung ngay» until «Sửa soạn nhập cung» is gone and remove #kmrew (scripts do it); a queued card can vanish when a test closes another modal programmatically — same on main 502c48c9, re-run instead of failing. Pair: convert A -resize x900, B -resize x900, +append; upload with python3 dev/site/cdn_sync.py img/_review/<topic> from a worktree. Pending wipes after LIVE: img/_review/visitor-fix + visitor-fix-r8.
+Open advisory: focus-scene figure ~398 px < stage KIT_FIG (→ KK24); Sổ ghi «Phi ??? tâu xin …» name-chip rows (r9 addresses it).
