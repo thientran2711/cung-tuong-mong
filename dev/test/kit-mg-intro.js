@@ -30,8 +30,10 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
      fxHidden:getComputedStyle(fx).visibility==='hidden',cls:document.documentElement.classList.contains('kfoc-playing')};
     window.__went=()=>went;window.__fx=fx;window.__c=c;window.__go=go;return out});
    try{await p.screenshot({path:OUT+'/intro-'+wh+'.png'})}catch(x){}
-   Object.assign(g,await p.evaluate(()=>{const F=window.__F,o={};window.__go.click();o.went=window.__went();o.removed=!window.__c.isConnected;F.endPlay();o.clsOff=!document.documentElement.classList.contains('kfoc-playing');window.__fx.remove();try{F.close()}catch(e){}return o}));
-   console.log(wh,JSON.stringify(g));const e=[];if(g.err)e.push(g.err);else{if(!g.inLayer)e.push('card outside layer');if(g.clipped)e.push('card clipped');if(!g.titleOneLine||g.titleCut)e.push('title wraps/cut');if(!g.goIn)e.push('go outside');if(!g.skipVisible)e.push('skip missing');if(g.skipOverlap)e.push('skip overlaps card');if(!g.fxHidden)e.push('fx layer not hidden');if(!g.went||!g.removed)e.push('go did not fire/close');if(!g.clsOff)e.push('class not cleared')}
+   const tp=await p.evaluate(()=>{const r=window.__go.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2,e=document.elementFromPoint(x,y);return {x,y,hit:!!e&&(e===window.__go||window.__go.contains(e))}});
+   g.tapHit=tp.hit;await p.touchscreen.tap(tp.x,tp.y);await p.waitForTimeout(300);
+   Object.assign(g,await p.evaluate(()=>{const F=window.__F,o={};o.went=window.__went();o.removed=!window.__c.isConnected;F.endPlay();o.clsOff=!document.documentElement.classList.contains('kfoc-playing');window.__fx.remove();try{F.close()}catch(e){}return o}));
+   console.log(wh,JSON.stringify(g));const e=[];if(g.err)e.push(g.err);else{if(!g.inLayer)e.push('card outside layer');if(g.clipped)e.push('card clipped');if(!g.titleOneLine||g.titleCut)e.push('title wraps/cut');if(!g.goIn)e.push('go outside');if(!g.skipVisible)e.push('skip missing');if(g.skipOverlap)e.push('skip overlaps card');if(!g.fxHidden)e.push('fx layer not hidden');if(!g.tapHit)e.push('real tap on Sẵn sàng hits another element (elementFromPoint)');if(!g.went||!g.removed)e.push('go did not fire/close by real tap');if(!g.clsOff)e.push('class not cleared')}
    return e});
   console.log(wh,f.length?'FAIL '+f.join(' | '):'ok intro',errs.length?'PAGEERR '+errs[0]:'');if(f.length||errs.length)bad=1;await ctx.close()}
  await b.close();process.exit(bad)})();
