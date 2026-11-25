@@ -50,7 +50,7 @@ function kesHead(el,r){const L=KIT_EMOSEAL.lean.head;let H=0;try{const st=(el.__
  if(!H&&el.__fig){const q=el.__fig.getBoundingClientRect();if(q.height>20)H=q.height*(KIT_FIG&&KIT_FIG.h||.79)}}catch(e){}
  return H?H*L.f:Math.min(innerWidth,innerHeight)*L.panel}
 /* STAGE SEALS UNDER A MODAL (ROOT-66 / owner 19/11 ~07:25Z): while ANY dialog / sheet / book page is open (kitDialogOpen = the whole family, body.kbk-open) a seal that is NOT inside it never leans (and a running lean ends); only the seal beside the person in the dialog leans. */
-function kesBlocked(el){try{if(el.closest(KIT_EMOSEAL.lean.modalIn))return false;return(typeof kitDialogOpen==="function"&&kitDialogOpen())||document.body.classList.contains("kbk-open")}catch(e){return false}}
+function kesBlocked(el){try{if(el.closest(KIT_EMOSEAL.lean.modalIn))return false;return(typeof kitDialogOpen==="function"&&kitDialogOpen())||document.body.classList.contains("kbk-open")||!!document.querySelector(".kmov,.krbox")/* owner 24/11 flight (law 11): a reward / gain / scene overlay counts as an open dialog even without role=dialog: no big seal clone (z 9990) above ANY overlay */}catch(e){return false}}
 /* 3-PART SET (KIT_EMOSEAL.three[ak] = {out,back} clip seconds, c0/c1 = the gold circle as a share of the clip frame at the clip's start / end vs in the loop): files <set><ak>-out.webp / <set><ak>.webp / <set><ak>-back.webp.
    "yes" = all three probed present, "no" = a part is missing (single loop / CSS motion), "wait" = still probing (the lean waits, it never starts with the wrong set). */
 /* A seal picture is NEVER swapped inside a displayed <img> (the owner-visible "beige square" for a frame at every part change): each picture is its own <img> inside the big seal's box (span.kemo-big),
@@ -67,7 +67,7 @@ function kesHit(a,b,pad){return a.left-pad<b.right&&a.right+pad>b.left&&a.top-pa
 function kesYield(rect){const el=kesCur;if(!el||!el.__big||!el.classList.contains("kemo-lean"))return false;const cr=el.__big.getBoundingClientRect();if(rect&&!kesHit(cr,rect,KIT_EMOSEAL.lean.bubblePad))return false;kesLeanEnd(el);kesSchedule(el);return true}
 function kesPartsUrl(el,k){const L=KIT_EMOSEAL.lean,ak=KIT_EMOSEAL.animKey[k]||k,set=kesSet(el,k),T=KIT_EMOSEAL.three[set+ak]||KIT_EMOSEAL.three[ak];if(!T)return null;const A=KIT_EMOSEAL.anim+set+ak,P=L.parts;return{T,ak,out:A+P.out+".webp",loop:A+".webp",back:A+P.back+".webp"}}
 function kesPartsState(U){if(!U)return"no";const h=[U.out,U.loop,U.back].map(u=>KES_HAVE[u]);if(h.some(x=>x===false))return"no";if(h.every(x=>x===true))return"yes";return"wait"}
-function kesLean(el,force){el.__ln=0;if(!el.isConnected||!el.classList.contains("kemo-live"))return;
+function kesLean(el,force){el.__ln=0;if(!el.isConnected||!el.classList.contains("kemo-live"))return;if(document.querySelector(".ksht")){el.__ln=setTimeout(()=>kesLean(el,force),600);return}/* owner 24/11 flight: no big seal clone starts while a page is turning (the clone of the old page stayed over the next one) */
  const L=KIT_EMOSEAL.lean,now=performance.now();
  if(kesBlocked(el)){el.__ln=setTimeout(()=>kesLean(el),1500);return}
  {const U=kesPartsUrl(el,kesKey(el));if(kesPartsState(U)==="wait"){if(el.__pre)return;el.__pre=1;let n=0;[U.out,U.loop,U.back].forEach(u=>kesProbe(u,()=>{if(++n===3){el.__pre=0;kesLean(el,force)}}));return}}

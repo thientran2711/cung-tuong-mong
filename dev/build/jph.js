@@ -43,7 +43,7 @@ function kitPhEvReady(){return typeof EVART!=="undefined"&&!!EVART}
 var KPHAR_SRC=null,KPHAR_V=false;
 function kitPhActReady(){try{if(typeof KIT_ACTS==="undefined"||!KIT_ACTS)return false;if(KPHAR_SRC!==KIT_ACTS||KPHAR_SRC.acts!==KPHAR_A){KPHAR_SRC=KIT_ACTS;KPHAR_A=KIT_ACTS.acts;KPHAR_V=!!KIT_ACTS.acts&&Object.keys(KIT_ACTS.acts).length>0}return KPHAR_V}catch(e){return false}}
 var KPHAR_A=null;
-const kitPhOnCdn=src=>{try{if(typeof KIT_CDNHAVE==="undefined"||!KIT_CDNHAVE)return true;return KIT_CDNHAVE.has(String(src).replace(/^.*?(?=img\/)/,""))}catch(e){return true}};
+const kitPhOnCdn=src=>{try{if(typeof KIT_CDNHAVE==="undefined"||!KIT_CDNHAVE){/* offline-fast: CDN index not read yet → the offline set (assets.json) decides when known */const h=typeof kitAssetHas==="function"?kitAssetHas(String(src).replace(/^.*?(?=img\/)/,"")):null;return h===null?true:h}return KIT_CDNHAVE.has(String(src).replace(/^.*?(?=img\/)/,""))}catch(e){return true}};
 /* ---- events ---- */
 function kitPhEvId(m){try{if(typeof kitDlgId==="function"){const i=kitDlgId(m);if(i)return i}}catch(e){}return "title:"+kitPhPlain(m&&m.t)}
 function kitPhEvTone(m){let fam="";try{const pid=String(m.pid||"");if(/^e68[A-Za-z]/.test(pid)&&typeof E68I!=="undefined"&&E68I[pid.slice(3)])fam=E68I[pid.slice(3)].fam||""}catch(e){}
