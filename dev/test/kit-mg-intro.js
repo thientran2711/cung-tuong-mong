@@ -1,5 +1,7 @@
 /* review/kit-mg-intro: kitFocus F.intro rules card in the play layer (KIT §92.4). usage: node dev/test/kit-mg-intro.js <url> <outdir> [WxH,..] */
 const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+/* source scan (MAIN 130 nit): a kit CSS rule never declares z-index twice (.kfoc-intro had 5 and 3; only the last counted) */
+{const fsx=require('fs'),px=require('path');const src=fsx.readFileSync(px.join(__dirname,'..','build','jfocus.js'),'utf8');const bad=[];(src.match(/\.kfoc-intro\{[^}]*\}/g)||[]).forEach(r=>{if((r.match(/z-index/g)||[]).length>1)bad.push(r.slice(0,60))});if(bad.length){console.log('FAIL .kfoc-intro declares z-index twice',bad);process.exit(1)}}
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});let bad=0;
  for(const wh of (SIZES||"755x1000,1180x820").split(",")){const [W,H]=wh.split("x").map(Number);
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});
