@@ -26,7 +26,7 @@
    round trip carry it. A notice's action (go) is code: it is written as g:1 and made again on load from its id (ntGo: errand / Tai mắt / receiver /
    parallel-time lands + orders); an action of an id no rule knows is kept as it was when the notice is still in memory (co-op round trips), else
    the notice comes back without its button (still readable). The list belongs to ONE life (lifeStore: a new life / a loaded slot / the title start
-   empty). S.closeSeen keeps the closing chip once per buổi. Old saves (no nt): the list starts empty, as before. */
+   empty; the sổ's list is put back only into an empty list, so an in-session ser → deser round trip keeps the live one). S.closeSeen keeps the closing chip once per buổi. Old saves (no nt): the list starts empty, as before. */
 (function(){try{
 const NT=window.NT={list:[],seq:0,chips:0,shown:[],log:[]};
 const $=id=>document.getElementById(id);
@@ -205,7 +205,7 @@ function ntDeser(L){const old=new Map(NT.list.map(x=>[x.id,x]));NT.list=L.filter
   go:o.g?((p&&typeof p.go==="function"?p.go:null)||ntGo(o.id)):null,goLabel:o.goLabel||"",t:+o.t||0}});NT.pend=null;const c=$("kntchip");if(c)chipHide(c)}
 try{if(typeof lifeStore==="function")lifeStore("NT.list notices (Tin báo) of that life",()=>{NT.list=[];NT.pend=null;KB.m.clear()})}catch(e){}
 try{const s0=ser;ser=function(){const d=s0.apply(this,arguments);try{if(d&&typeof d==="object")d.nt=ntSer()}catch(e){console.error("nt ser",e)}return d}}catch(e){}
-try{const d0=deser;deser=function(d){const r=d0.apply(this,arguments);try{if(d&&Array.isArray(d.nt))ntDeser(d.nt)}catch(e){console.error("nt deser",e)}return r}}catch(e){}
+try{const d0=deser;deser=function(d){const n0=NT.list.length;const r=d0.apply(this,arguments);try{if(!n0&&d&&Array.isArray(d.nt)&&d.nt.length)ntDeser(d.nt)}catch(e){console.error("nt deser",e)}return r}}catch(e){}/* only into an EMPTY list (a slot load / a fresh page: kmReset emptied it): an in-session rebuild (co-op relens, week merge: ser() → deser() of the same page) keeps the live list and its chip */
 Object.assign(window,{kitNotice,kitNoticeDrop,kitNoticeSeen,kitNoticeList,kitNoticeOpen,kitNoticeBox:boxPaint,kitKnow,kitKnowFlush,kitKnowMany});
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§42.3",title:"kitKnow · «Ta biết thêm N điều» (one kitNotice kind know; same chip, box and Tin báo panel as §42.2)",
  html:()=>`<div class="kitpg-row" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><span class="ktbt" style="position:static;transform:none;white-space:nowrap"><i class="khap" style="margin:0">!</i><span>Ta biết thêm 3 điều</span></span><button type="button" class="btn" onclick="kitKnowMany([{key:'a',text:'Ngươi biết tên: đó là Lệ tần Mai thị.'},{key:'b',text:'Ngươi đã thấy mặt một phi tần áo bậc Tần; chưa biết tên.'},{key:'c',text:'Quý phi Đào Cẩm Tâm nay được tấn phong Hoàng quý phi.'}]);kitNoticeOpen()">Mở khung Tin báo</button></div>`})}catch(e){}

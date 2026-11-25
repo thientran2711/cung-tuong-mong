@@ -64,11 +64,14 @@ async function tinbao(b,dev,url,seed){return play(b,dev,url,seed,async(p,open,pe
 /* ---------- held ---------- */
 async function held(b,dev,url,seed){return play(b,dev,url,seed,async(p,open,pe)=>{await open();
  const r=await p.evaluate(async()=>{__sbr.newLife('thd');await __sbr.settle();
-  const m={t:'Chuyện lạ trong cung',h:'<p>Có người kể chuyện lạ ở Ngự hoa viên (thẻ thử, chưa xem).</p>',opt:1};EVHOLD.push({m,at:wk(),K:evKeys(m)});render();await new Promise(r=>setTimeout(r,400));
+  const m={t:'Chuyện lạ trong cung',h:'<p>Có người kể chuyện lạ ở Ngự hoa viên (thẻ thử, chưa xem).</p>',opt:1};EVHOLD.length=0;/* alone in the hold (the scheduler releases the oldest first) */EVHOLD.push({m,at:wk(),K:evKeys(m)});render();await new Promise(r=>setTimeout(r,400));
   return{n:EVHOLD.length,t:EVHOLD.map(h=>h.m.t)}});
  const t=await reloadTitle(p,open);if(t.cont)await cont(p);
  const a=await p.evaluate(async()=>{const n=typeof EVHOLD!=='undefined'?EVHOLD.length:-1,t=n>0?EVHOLD.map(h=>h.m.t):[];const seen=[];const sm=showModal;showModal=window.showModal=function(){try{if(Q[0])seen.push(String(Q[0].t||''))}catch(e){}return sm.apply(this,arguments)};
-  for(let i=0;i<10&&!seen.includes('Chuyện lạ trong cung');i++){const k=__sbr.key();used=BAL.time.khac;const nx=document.getElementById('next');nx.disabled=false;nx.click();await __sbr.after(k)}
+  /* the scheduler releases a held card right after a step when nothing else is up (j68 evRelease, at random): a player steps on; after each step the
+     screen is cleared and the same release is asked again (as the next step would) */
+  for(let i=0;i<12&&!seen.includes('Chuyện lạ trong cung');i++){const k=__sbr.key();used=BAL.time.khac;const nx=document.getElementById('next');nx.disabled=false;nx.click();await __sbr.after(k);
+   for(let j=0;j<6&&!seen.includes('Chuyện lạ trong cung')&&!Q.length;j++){try{evRelease()}catch(e){}await __sbr.settle()}}
   return{n,t,shown:seen.includes('Chuyện lạ trong cung')}});
  const pass=t.cont&&r.n===1&&a.n===1&&a.t[0]===r.t[0]&&a.shown&&!pe.length;
  return{pass,line:`held before reload ${r.n} «${r.t[0]}» · after reload ${a.n} ${a.t[0]?'«'+a.t[0]+'»':''} · shown at a later buổi: ${a.shown?'yes':'NO'}${pe.length?' · pageerror '+pe[0]:''}`}})}
