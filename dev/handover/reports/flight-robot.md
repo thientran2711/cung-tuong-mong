@@ -183,3 +183,20 @@ attach → lifeRekey(): sidN and S.kseq continue past every id the world holds; 
 2. Scan: k61All() on both seats after each week of coop-e2e (already the «one j61 key = one person» check) + COOP_HOSTDIE=1 + a rejoin; run 3× (intermittent).
 3. Then quickcheck + coop-e2e both seats, report, READY flight-sid-rebirth to F #5.
 Worktrees on this box: /home/user/wt/fsr (task 5), fes (task 4 done), fcg (task 3 done), fcs (task 2 done), fmd (task 1 done), fmd-ho (handover).
+UPDATE (same reviewer, 25/11 ~05:50Z, LIVE moved to 0756a05b): **PASS flight-coop-sync 05a4cbc0 FF 0756a05b** (review/flight-coop-sync-r = 7902247b + merge origin/main 0756a05b, index/sw rebuilt). Gates on 05a4cbc0: coop-e2e plain 142/142; HOSTDIE host-reborn ok, 139/143 = j61 side lead only (this run key x34 = two men after week 3 / rejoin on both seats: x-keys from S.kseq and s-keys from sid both restart at rebirth — one family for the sid-rebirth fixer); quickcheck PASS 660 s, old save ok, render 275/267.
+
+## REVIEW flight-choose-guard (BIG REVIEWER opus, 25/11)
+PRIORITY #1 CHECK ('chooseM opts[i]' / 'eaLockWhy' / 'deadCardIs'): OD 0 | ledger 0 | main: j3 chooseM, jemoact temper lock, jdeadcard net (flight-modal-deadlock, live) | review/* this branch only | claims: this review. Reused dead-card.js.
+Verdict: **PASS — review/flight-choose-guard-r ff0f723f FF 0756a05b** (= d716e6ea + merge origin/main 0756a05b, index/sw rebuilt + one reviewer test fix, below).
+
+| check | result |
+|---|---|
+| 1 chooseM off-card index | PASS. Base now refuses `!c` (card stays, window.__badPick with caller); before = TypeError «reading 'off'» (same no-pick outcome, plus a thrown error mid-handler). A real pick is never swallowed: only an index with no option is refused. jnf timer: no «Thôi» → card spliced + mine(null), the path the non-front branch already took (never chooseM(−1)). Family: 23 wrappers already guard m.opts[i]; direct callers jcoopthin:445 (relayed guest pick on the host: guarded `m.opts[k]`, refused pick → {refused}, both seats unchanged), jcooptimer:205 (index 0 of a 1-option card), jk4/jdfv/jkiep/jts/jtsb own indices — fixer's table verified. |
+| 2 jemoact eaFree / law 2-3 | PASS. eaFree = open by every greying rule (bạc short, off, lock, tsDis, unmet need, lk()); used by the lock rule, the eaLock branch and the bot fallback → the temper lock never greys the last road she can really take (law 2: a usable road stays open; law 3: no cost-only). Note (pre-existing, not this branch): a guest pick relayed to the host is judged by the host's temper in the chooseM wrapper. |
+| 2b jdeadcard screen rule | PASS. jdeadcard wraps showModal last (assemble order 448 > jemoact 354 / jtsb 215 / jgift 220), so it sees every DOM greying; selector `#modal .opts button[data-m]` only (the «!» overlay #kpinfo is outside #modal); kgx (gift back) and kit cancel cards excluded first; a normal card with any enabled option is never touched. Kit «Lui» only (law 9). |
+| 3a dead-card.js on LIVE 0756a05b (test copied in) | DEAD-CARD FAIL 2: part 4 3× «reading 'off'», part 5 0/2 open |
+| 3b dead-card.js on ff0f723f | DEAD-CARD PASS: part 4 refused ×3, card stays; part 5 1/2 open; parts 2/3 PASS |
+| 3c coop-e2e plain / COOP_SWAP=1 on ff0f723f | 142/142 / 142/142 |
+| 3d quickcheck ff0f723f vs live 0756a05b | PASS 668 s (dead-card hook included), old save ok, render 302/305 |
+| reviewer fix (test only) | dead-card.js part 5 passed on «0/2 open + Lui» too — the Lui net alone is not the law-2 fix; now it needs ≥1 payable road open |
+| laws 4 / 7 / 9 | no number; no new player text (the «Cần: …» temper line is the existing one); kit «Lui» only |
