@@ -38,3 +38,9 @@ No rollover needed (low context).
 - img/selx-tiensanh.webp + img/place/duong-tu-tiensanh.webp on CDN = the NEW open-floor Tiền sảnh (md5 0490cf50… checked by download; Foreman's message crossed my upload).
 - img/selx-rooms.webp (sân Dưỡng Tú viện, ma ma chia sở): gen nVgb7O5YQD, gpt-2-6 2688x1386 (135 cr), looked: open paved courtyard, front hall with steps, side wings with lattice windows no curtains, peonies/bamboo/tree, empty, Chinese. Size: jselxsc.js states no size; used 2688x1386 like my other 4 (≥2360 for iPad @2); C3-EVBG's 2048x1536 is a different ratio (1.33) — Foreman to decide if bgs must share one ratio (kitScene bg = cover).
 - Total ≈ 10 gens ≈ 1,350 cr.
+
+## 4:3 REPAINT (Foreman C size ruling 22:33Z: selection bg = KIT §93.1 .kscn-bg cover centre, layer ≈3:4 Fold / ≈square iPad)
+Cover simulation of my 2688x1386 sở: NO bed visible on Fold or iPad → repainted at 2048x1536 (4:3), same rooms recomposed, both beds complete in the central half (~35%/65%). Gens (135 cr each, gpt-2-6, refs = accepted room + tẩm cung style): Đông N25vjEN6D9 · Tây P3Ht1Ca42C · Bắc 9ZbhxHZNYZ · rooms ov3wzi3829 (yard, front hall + steps + open paved floor, no stone lantern). Looked: iPad square crop shows both beds fully in all 3; Fold 3:4 crop shows both beds, edges of the outer curtains slightly cut (ok). Yard hall + open floor central.
+Total ≈ 14 gens ≈ 1,890 cr.
+FINAL PATHS (CDN, overwritten my own earlier files): img/selx-so-dong|tay|bac.webp, img/selx-rooms.webp, img/selx-tiensanh.webp (2688x1386, kept), img/place/duong-tu-dong|tay|bac|tiensanh.webp (sở = 4:3 same pics).
+Old wide 2688x1386 sở kept for reference: img/_review/c3-dtv/wide2688-<dong|tay|bac>.webp. Review sheet (4 pics + Fold/iPad cover crops): img/_review/c3-dtv/duong-tu-sheet.jpg?v=3
