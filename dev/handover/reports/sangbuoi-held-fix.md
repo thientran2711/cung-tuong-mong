@@ -226,3 +226,22 @@ PRIORITY #1 CHECK: OD flight rulings 25/11 | main none (not landed) | review/san
 Notes: the held run with 5223f9ab's own test hung 18 min after «life ready» under quickcheck load (no watchdog in that test); re-run with the r3wip watchdog copy (CASES=ABCDEFGH, one process per device, http server) = ALL PASS. Co-op trace reading: dqUi() is false in co-op (every new jdayq path checks it); jcoopworld:1108 already sends #next to the global nextBuoi in co-op on LIVE (j6 change = no-op there); only the tapIn re-entry guard runs in co-op, and co-op never fires a nested next.click().
 ### r4.3 Next
 JOB 2 after the flight push: r3wip (dqShown-only fix + case I1 paint) rebased on the then-LIVE; night PAIR jpg (new file name) under img/_review/sangbuoi-held/.
+
+## BIG REVIEW r4 (rv session_01V1ZZH13YzNeAK6hT1mU9ZN) — 3762da08 (= 5223f9ab + LIVE 08e7d79f + LIVE 351122ba)
+PRIORITY #1 CHECK: OD 16/11 22:45Z | main j6.js #next, jdayq.js | review/sangbuoi-held-fix 3762da08 (r3wip 3abb8fda not in this land) | claims r4 01V1ZZH4huuzV9rxXCRCtHSW.
+Delta read (vs LIVE 351122ba, game code = 4 files): j6 #next → `()=>nextBuoi()` (global outermost chain at tap time); jdayq outer wrapper paints a hidden queue first, after-turn paint, tap re-entry guard (one tap = one turn), dqWait every exit paints, dqArmModal bounded re-arm (BAL.dayq.rearm), emptied-queue mirror dqNextSync (stale-disabled «Sang buổi» → render), r2 net folded into LIVE's one dqWake (law 13/14); jbal2 dayq {poll,stale,rearm,wake} (law 4 OK, music keys merged clean); jnf night gate dqNewsPass. Committed index.html = rebuild of sources (only CTM_BI stamp differs). No UI added (kit law OK).
+| gate | result (rv's own runs unless marked r4) |
+|---|---|
+| r1 FAIL #1 one entry point | PASS: probe on r2/r3 heads Fold+iPad — tap = auto: outer 1, agDrain 2, evRelease 1, knCarryOut 1, ptTick 1 (LIVE tap 0/0/0/0); sangbuoi-wrap 45/45 = auto 45 both devices (its case P = setup «not at a quiet buổi chiều», test positioning) |
+| r1 FAIL #2 case B stable | r3 47fb23fc B×10 under load: 3 PASS + 2 «setup: turn not held» (test setup, no stuck state), timed out before iPad; r4 report 20/20 under load. Accepted with the test-setup note |
+| r1 FAIL #3 REAL night pair | DONE by rv on the land candidate (5223f9ab+08e7d79f; same game code): Fold — real «Sang ngày mới» tap → real jflip scene, nothing over it → morning «Tin trong cung» alone → «Sang buổi» free; iPad — flip alone → «Sang buổi» free (staleNext 1 = r3 mirror freed a stale button). Looked at. CDN img/_review/sangbuoi-held/pair.jpg |
+| (c) no card over an ON-SCREEN flip | PASS r3: 0 frames over, dqNewsPass 0/30, news 112/57 ms after the scene closes |
+| (d) co-op | dayq-hold-coop 17/17 both orders (r3); coop-e2e 142/142 non-swap (r3) + COOP_SWAP 142/142 (3762da08); coop-one-world PASS; r4: non-swap alone 142/142 (= LIVE 142/142; an earlier 141/146 was load); rv non-swap on 3762da08 beside a held run 141/144 = the 3 load signatures r3 logged on LIVE 9f72524b (#next enabled, buổi 3:x advanced for both, week after rebirth) — pre-existing load flake; new jdayq paths are solo-only (dqUi) |
+| (f) scans | sangbuoi-exit-scan + modal-hold-scan PASS on r3, both FAIL on LIVE |
+| sangbuoi-held | r4 alone A–H ALL PASS Fold+iPad (G1 111/143, H1 2797/2885 ms); rv on 3762da08: G+H ALL PASS Fold+iPad (beside coop-e2e); an earlier run beside 2 browsers: G1 750/807 ms (limit 600), H1 iPad 4099 (limit 4000) = load timing, not a stall |
+| modal-open-buoi | Fold ALL PASS; iPad ALL PASS alone (one FAIL b3 km under load; LIVE passes the same load) |
+| dayq-hold / dayq-order / dead-card / flip-newlife | PASS 46 / PASS / PASS / ALL OK |
+| quickcheck | r4 alone: perf PASS (buổi 1708/4533), old save ok, core only G4 «Ô lưu · Lui» = LIVE fault. rv under load: perf FAIL (load) + G4 dialog-fixed spyPick 538/560 = SAME FAIL on LIVE 351122ba (pre-existing, kit pack-4) |
+Notes for MAIN (not blocking): (n1) modal-open-buoi calls nextBuoi() programmatically with 900 ms per step — a held turn shows as b0×6 / b2×4 on LIVE too (harness, not a stall); (n2) jdfv visitor face-wait types 4000 ms with no cue (pre-existing; law 4 + KK26); (n3) dialog-fixed spyPick 538 vs 560 on LIVE → kit keeper; (n4) r3wip 3abb8fda (case I, Q=7) follows separately.
+
+**VERDICT: BIG PASS 3762da08** (review/sangbuoi-held-fix; ancestor LIVE 351122ba = current main at verdict). r1 FAIL list 1–4 closed. Shots: CDN img/_review/sangbuoi-held/pair.jpg (wipe after land: python3 dev/site/cdn_sync.py --wipe-review sangbuoi-held).
