@@ -262,3 +262,11 @@ Devices: fold + ipad · rows 1587 · PASS 1184 · FAIL 58 (dead 5) · WARN 0 · 
 | ipad | Tư trang › Nguy hiểm chung: 0 [div#modal.modal:Nguy hiểm chung] | 2: Lui · Đóng cửa giữ mình TỐN Sủ |
 | ipad | Tư trang › Xét phẩm: thiếu 4 [div#modal.modal:Xét phẩm cuối tháng · Th | 1: Lui |
 | ipad | Tư trang › Thú cưng [body:☰ Vân Tố Ngưng Đáp ứng 19 tuổi Kiếp thứ ] | 17: Cung nữ thân tín tam đẳn · Lịch tháng · Mục tiêu chương (có mới) · 1 Cung nhân · 3 Chí tôn · Tai mắt 0 · Có thai Rất thấp · Lật thẻ Rất thấp · Ân tình (đêm) 0 · Số lần ân thưởng 0 · Bổng lộc sau 3 tuần · Nguy hiểm chung: 0 · Xét phẩm: thiếu 4 · Túi đồ · Thú cưng · Việc · Nhờ thái giám tìm thú nu |
+
+## PENDING ORDERS for the ROLE B successor (received 05:52–07:21Z, read at rollover, NOT started)
+- Harness: switch dev/test/realtap.js to review/robot-realtap 78af2325 (or newer; #ktut / own-ancestor covers not dead, own-scroller wheel).
+- fix-4 (F #6 06:43Z): «person dialog queue has no dedupe» — header mood bar / person chips stay tappable behind non-modal kitPersonDlg («Tâm trạng · <person>»), every tap queues a duplicate (2.7–2.9k copies in saves). Fix family: dedupe identical pending person dialogs in Q/P + clean poisoned saves on load; block taps behind kitPersonDlg via the KIT (law 9). Base on review/sansang-music-fix-2 a6b4d573 (kpopts z). Real-tap proof Fold+iPad.
+- Confirm (F #6 06:12Z): #krail button.krailb over «3 Chí tôn» (Vinh Hoa cung); img.kfr in #dawn over «Tổng lược» «?» — real if >2.5 s on 78af2325.
+- Confirm (F #6 07:04Z, review/test-path-fix-2 dev/PROGRESS_test-path-fix.md): (A) #tokens .tok covered by img#mefig.j59sz.kfxon after 3–4 token→focus→✕ cycles (Fold); (B) new-life card #modal.nlcard («Vào cung ngay»/«Nhận thân phận») would not close from 30 real taps on Fold.
+- Decide (F #6 07:07Z): #dawn buttons («Tổng lược» «?», «Ô lưu», «Xem bản thân», stat row) covered by div.kne.kne-beat / img.kfr — by design (beat = modal step → tell harness fixer session_01UV1SzhZEs2semzyzA7vwtt) or real overlap (fix family). One line to Foreman F.
+- READY lines format: «READY button-crawl-fix-N <sha> FF <main>» to the current Foreman F (F #7 session_01UV1SzhHkCV76zb6skHhFpV at 07:21Z).
