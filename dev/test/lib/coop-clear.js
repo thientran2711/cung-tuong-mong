@@ -34,7 +34,7 @@ const TAP=()=>{const vis=x=>!!x&&x.offsetParent!==null&&!x.disabled;
      never closes a board with no clock («không giới hạn») held its seat's cards — and the room's week — for ever (review/coop-night-live) */
   const kq=[...document.querySelectorAll('#ov .kquick')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('[hidden]')&&x.getClientRects().length);if(kq){kq.click();return'x'}
   /* 5c. a kg82 board showing ONE road only (its result / notice, e.g. the toilette result «Đã hiểu» #toildone): a player reads it and taps it */
-  const ovb=document.getElementById('ov');if(ovb&&ovb.offsetParent!==null&&!ovb.closest('[hidden]')){const one=[...ovb.querySelectorAll('button')].filter(x=>x.offsetParent!==null&&!x.disabled&&x.getClientRects().length&&!x.classList.contains('kit-x'));if(one.length===1&&/^(Đã hiểu|Xong|Tiếp|Nhận)/.test(one[0].textContent.trim())){one[0].click();return'x'}}}
+  const ovb=document.getElementById('ov');if(ovb&&!ovb.hidden&&ovb.getClientRects().length&&getComputedStyle(ovb).display!=='none'){/* #ov is position:fixed (offsetParent is always null) */const one=[...ovb.querySelectorAll('button')].filter(x=>x.offsetParent!==null&&!x.disabled&&x.getClientRects().length&&!x.classList.contains('kit-x'));if(one.length===1&&/^(Đã hiểu|Xong|Tiếp|Nhận)/.test(one[0].textContent.trim())){one[0].click();return'x'}}}
  return''};
 async function tap(o){try{return await o.p.evaluate(TAP)}catch(e){return''}}
 async function first(o,fn,arg){if(await tap(o)==='x')return'x';return arg===undefined?o.p.evaluate(fn):o.p.evaluate(fn,arg)}
