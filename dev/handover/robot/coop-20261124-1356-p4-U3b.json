@@ -70805,6 +70805,14 @@
     "prev": 40288263,
     "total": 46198013
    },
+     }
+    ]
+   },
+   "rooms": 13,
+   "t": {
+    "total": 35937109
+   },
+   "partial": true,
    "bugs": [
     {
      "type": "save",
@@ -70814,6 +70822,7 @@
      "nNew": 0,
      "sha": "5a65a561",
      "shaNew": "918bfa84",
+     "shaNew": "d4b4408d",
      "at": "coop-p04-S1",
      "saveFile": "saves/coop-20261124-1356-p4-4-ta5rfc.json",
      "lastDetail": "save.R.0.rl.2: 21 → 16"
@@ -70826,6 +70835,7 @@
      "nNew": 0,
      "sha": "5a65a561",
      "shaNew": "918bfa84",
+     "shaNew": "d4b4408d",
      "at": "coop-p04-S1",
      "lastDetail": "save.S.logs.0 (text differs at char 39): «…ss=\"ld\">T1/3 trung tuần</span><b>Tết Nguyên tiêu · Lễ</b>: Xin đứng hầ» → «…ss=\"ld\">T1/3 trung tuần</span>Thường tại Phú Sát Lục Hoán Bích dời san»"
     },
@@ -70839,6 +70849,12 @@
      "shaNew": "918bfa84",
      "at": "coop-p04-S1",
      "lastDetail": "coopTurnP95 131230 > 10000 · game year 3 · room SQ8P · per device {\"fold\":{\"seat\":\"host\",\"kbPerMin\":944.6,\"upKB\":9731,\"dnKB\":1538,\"posFlip\":null,\"resend\":32,\"resendBy\":{\"act\":29,\"pos\":2,\"where\":1},\"longTasksPerMin\":326.3,\"longTaskMax\":1122,\"errs\":0},\"ipad\":{\"seat\":\"guest\",\"kbPerMin\":786.9,\"upKB\":5616,\"dnKB\":3772,\"posFlip\":null,\"resend\":98,\"resendBy\":{\"act\":76,\"pos\":22},\"longTasksPerMin\":318.4,\"longTaskMax\":2010,\"errs\":0}}"
+     "n": 29,
+     "nNew": 4,
+     "sha": "5a65a561",
+     "shaNew": "d4b4408d",
+     "at": "coop-p04-S1",
+     "lastDetail": "coopTurnP95 52331 > 10000 · game year 3 · room RSKR · per device {\"fold\":{\"seat\":\"host\",\"kbPerMin\":2488.8,\"upKB\":55420,\"dnKB\":8615,\"posFlip\":null,\"resend\":58,\"resendBy\":{\"act\":55,\"where\":3},\"longTasksPerMin\":229.8,\"longTaskMax\":1562,\"errs\":0},\"ipad\":{\"seat\":\"guest\",\"kbPerMin\":2041.3,\"upKB\":41136,\"dnKB\":11385,\"posFlip\":null,\"resend\":130,\"resendBy\":{\"act\":127,\"pos\":3},\"longTasksPerMin\":229.5,\"longTaskMax\":2520,\"errs\":1}}"
     },
     {
      "type": "lag",
@@ -70850,6 +70866,12 @@
      "shaNew": "918bfa84",
      "at": "coop-p04-S1",
      "lastDetail": "coopSyncKBMax 302.3 > 100 · game year 3 · room SQ8P · per device {\"fold\":{\"seat\":\"host\",\"kbPerMin\":944.6,\"upKB\":9731,\"dnKB\":1538,\"posFlip\":null,\"resend\":32,\"resendBy\":{\"act\":29,\"pos\":2,\"where\":1},\"longTasksPerMin\":326.3,\"longTaskMax\":1122,\"errs\":0},\"ipad\":{\"seat\":\"guest\",\"kbPerMin\":786.9,\"upKB\":5616,\"dnKB\":3772,\"posFlip\":null,\"resend\":98,\"resendBy\":{\"act\":76,\"pos\":22},\"longTasksPerMin\":318.4,\"longTaskMax\":2010,\"errs\":0}}"
+     "n": 22,
+     "nNew": 3,
+     "sha": "5a65a561",
+     "shaNew": "d4b4408d",
+     "at": "coop-p04-S1",
+     "lastDetail": "coopSyncKBMax 391.7 > 100 · game year 3 · room RSKR · per device {\"fold\":{\"seat\":\"host\",\"kbPerMin\":2488.8,\"upKB\":55420,\"dnKB\":8615,\"posFlip\":null,\"resend\":58,\"resendBy\":{\"act\":55,\"where\":3},\"longTasksPerMin\":229.8,\"longTaskMax\":1562,\"errs\":0},\"ipad\":{\"seat\":\"guest\",\"kbPerMin\":2041.3,\"upKB\":41136,\"dnKB\":11385,\"posFlip\":null,\"resend\":130,\"resendBy\":{\"act\":127,\"pos\":3},\"longTasksPerMin\":229.5,\"longTaskMax\":2520,\"errs\":1}}"
     },
     {
      "type": "lag",
@@ -70861,6 +70883,12 @@
      "shaNew": "918bfa84",
      "at": "coop-p04-S1",
      "lastDetail": "13 of 26 buổi in game year 3"
+     "n": 28,
+     "nNew": 4,
+     "sha": "5a65a561",
+     "shaNew": "d4b4408d",
+     "at": "coop-p04-S1",
+     "lastDetail": "35 of 140 buổi in game year 3"
     },
     {
      "type": "number",
@@ -70872,6 +70900,12 @@
      "shaNew": "918bfa84",
      "at": "coop-p04-S1",
      "lastDetail": "bac=-9 · ipad guest week 49",
+     "n": 50,
+     "nNew": 19,
+     "sha": "5a65a561",
+     "shaNew": "d4b4408d",
+     "at": "coop-p04-S1",
+     "lastDetail": "bac=-17 · ipad guest week 97",
      "saveFile": "saves/coop-20261124-1356-p4-4-14hifwm.json"
     },
     {
@@ -70882,6 +70916,7 @@
      "nNew": 0,
      "sha": "5a65a561",
      "shaNew": "918bfa84",
+     "shaNew": "d4b4408d",
      "at": "coop-p04-S1",
      "shots": [
       "shots/coop-p04-S1-r1-host-stuck.png",
@@ -70900,6 +70935,12 @@
      "shaNew": "918bfa84",
      "at": "coop-p04-S1",
      "lastDetail": "buổi 70.3 host sees guest at r5, guest is at r10 · {\"host\":{\"fpos\":\"70.3 home life5 Triệu Thanh Hoan\",\"me\":\"70.3 home\",\"life\":0,\"f\":\"902 Triệu Thanh Hoan pal r5 where r5\",\"thl\":0,\"h7\":null},\"guest\":{\"fpos\":\"70.3 home life0 Thôi Hân Duyệt\",\"me\":\"70.3 home\",\"life\":5,\"f\":\"901 Thôi Hân Duyệt pal r3 where r3\",\"thl\":0,\"h7\":null}}"
+     "n": 323,
+     "nNew": 183,
+     "sha": "5a65a561",
+     "shaNew": "d4b4408d",
+     "at": "coop-p04-S1",
+     "lastDetail": "buổi 116.3 guest sees host at r20, host is at P:b · {\"host\":{\"fpos\":\"116.3 home life6 Độc Cô Tố Ngưng\",\"me\":\"116.3 r902\",\"life\":0,\"f\":\"902 Độc Cô Tố Ngưng pal r902 where r902\",\"thl\":0,\"h7\":null},\"guest\":{\"fpos\":\"116.3 r902 life0 Tư Mã Ngữ Yên\",\"me\":\"116.3 home\",\"life\":6,\"f\":\"901 Tư Mã Ngữ Yên pal r901 where home\",\"thl\":0,\"h7\":null}}"
     },
     {
      "type": "coop-stat",
@@ -70909,6 +70950,9 @@
      "nNew": 0,
      "sha": "5a65a561",
      "shaNew": "918bfa84",
+     "nNew": 17,
+     "sha": "5a65a561",
+     "shaNew": "d4b4408d",
      "at": "coop-p04-S1",
      "lastDetail": "buổi 116.0: host sees guest 0/13/91 (guest 0/13/91) · guest sees host 36/89/96 (host 36/87/96)"
     },
@@ -70920,6 +70964,7 @@
      "nNew": 0,
      "sha": "5a65a561",
      "shaNew": "918bfa84",
+     "shaNew": "d4b4408d",
      "at": "coop-p04-S1"
     },
     {
@@ -70930,6 +70975,7 @@
      "nNew": 0,
      "sha": "5a65a561",
      "shaNew": "918bfa84",
+     "shaNew": "d4b4408d",
      "at": "coop-p04-S1",
      "lastDetail": "week 29 · host-only [3:Cố Như Ý:3:1:0:] guest-only [3:Cố Như Ý:2:1:0:] · origins td/dtq"
     },
@@ -70943,6 +70989,12 @@
      "shaNew": "918bfa84",
      "at": "coop-p04-S1",
      "lastDetail": "coopActionP95 8291 > 8000 · game year 1 · room SQ8P · per device {\"fold\":{\"seat\":\"host\",\"kbPerMin\":1276.8,\"upKB\":15175,\"dnKB\":2996,\"posFlip\":null,\"resend\":152,\"resendBy\":{\"act\":149,\"bend\":1,\"pos\":2},\"longTasksPerMin\":276.5,\"longTaskMax\":1136,\"errs\":0},\"ipad\":{\"seat\":\"guest\",\"kbPerMin\":1062.8,\"upKB\":10337,\"dnKB\":4787,\"posFlip\":null,\"resend\":157,\"resendBy\":{\"act\":139,\"pos\":18},\"longTasksPerMin\":279.3,\"longTaskMax\":2404,\"errs\":0}}"
+     "n": 10,
+     "nNew": 2,
+     "sha": "5a65a561",
+     "shaNew": "d4b4408d",
+     "at": "coop-p04-S1",
+     "lastDetail": "coopActionP95 8735 > 8000 · game year 2 · room RSKR · per device {\"fold\":{\"seat\":\"host\",\"kbPerMin\":886.7,\"upKB\":49950,\"dnKB\":7376,\"posFlip\":null,\"resend\":193,\"resendBy\":{\"where\":12,\"act\":173,\"pos\":7,\"bend\":1},\"longTasksPerMin\":229.2,\"longTaskMax\":2690,\"errs\":0},\"ipad\":{\"seat\":\"guest\",\"kbPerMin\":731.3,\"upKB\":30848,\"dnKB\":16431,\"posFlip\":null,\"resend\":219,\"resendBy\":{\"act\":165,\"pos\":53,\"bend\":1},\"longTasksPerMin\":270.7,\"longTaskMax\":2739,\"errs\":1}}"
     },
     {
      "type": "number",
@@ -70954,6 +71006,12 @@
      "shaNew": "918bfa84",
      "at": "coop-p04-S1",
      "lastDetail": "sung=-7 · ipad guest week 56",
+     "n": 20,
+     "nNew": 2,
+     "sha": "5a65a561",
+     "shaNew": "d4b4408d",
+     "at": "coop-p04-S1",
+     "lastDetail": "sung=-1 · ipad guest week 116",
      "saveFile": "saves/coop-20261124-1356-p4-4-310db3.json"
     },
     {
@@ -70964,6 +71022,7 @@
      "nNew": 0,
      "sha": "5a65a561",
      "shaNew": "918bfa84",
+     "shaNew": "d4b4408d",
      "at": "coop-p04-S1",
      "shots": [
       "shots/coop-p04-S1-r8-host-stuck.png",
@@ -70980,6 +71039,7 @@
      "nNew": 0,
      "sha": "5a65a561",
      "shaNew": "918bfa84",
+     "shaNew": "d4b4408d",
      "at": "coop-p04-S1",
      "saveFile": "saves/coop-20261124-1356-p4-4-1amynil.json"
     },
@@ -70994,6 +71054,13 @@
      "at": "coop-p04-S1",
      "saveFile": "saves/coop-20261124-1356-p4-4-106byi2.json",
      "lastDetail": "save.R.0.rl.2: 5 → 4"
+     "n": 29,
+     "nNew": 29,
+     "sha": "d4b4408d",
+     "shaNew": "d4b4408d",
+     "at": "coop-p04-S1",
+     "saveFile": "saves/coop-20261124-1356-p4-4-106byi2.json",
+     "lastDetail": "save.R.0.rl.3: 8 → 3"
     },
     {
      "type": "save",
@@ -71005,6 +71072,12 @@
      "shaNew": "918bfa84",
      "at": "coop-p04-S1",
      "lastDetail": "save.R.0.rl.3: 1 → 4"
+     "n": 28,
+     "nNew": 28,
+     "sha": "d4b4408d",
+     "shaNew": "d4b4408d",
+     "at": "coop-p04-S1",
+     "lastDetail": "save.R.0.rl.4: 0 → -1"
     },
     {
      "type": "save",
@@ -71017,6 +71090,12 @@
      "at": "coop-p04-S1",
      "saveFile": "saves/coop-20261124-1356-p4-4-1fxd3ju.json",
      "lastDetail": "save.S.logs.0 (text differs at char 36): «…class=\"ld\">T9/1 hạ tuần</span>Ngươi đốt hết thư từ. Bức tường son vẫn » → «…class=\"ld\">T9/1 hạ tuần</span>Quý nhân La Nhạn Hồi dời sang Dưỡng Xuân»"
+     "n": 1,
+     "nNew": 1,
+     "sha": "d4b4408d",
+     "shaNew": "d4b4408d",
+     "at": "coop-p04-S1",
+     "saveFile": "saves/coop-20261124-1356-p4-4-1fxd3ju.json"
     },
     {
      "type": "coop-world",
@@ -71051,6 +71130,10 @@
      "at": "coop-p04-S1",
      "saveFile": "saves/coop-20261124-1356-p4-4-1tip9pb.json",
      "lastDetail": "save.S.qPool.3.name (text differs at char 0): «…Tưởng Hân Duyệt» → «…Phó Thục Hoa»"
+     "nNew": 1,
+     "sha": "d4b4408d",
+     "shaNew": "d4b4408d",
+     "at": "coop-p04-S1"
     }
    ]
   }
