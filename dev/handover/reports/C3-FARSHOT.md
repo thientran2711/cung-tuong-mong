@@ -79,3 +79,14 @@ NOTE: act-lam-tho-v2 etc. keep live key names → swap = overwrite img/<key>.web
 LAND READY review/c3-farshot 49d7de45 (2 files: dev/build/jksize.js, index.html; CDN pictures already live)
 Rollback: copy img/_backup/c3-farshot/<key>.webp back over img/<key>.webp via cdn_sync + revert the commit.
 Total credits 1,600.
+
+## VIDEOS (C3-VIDEO worker, 25/11 ~23:05Z; MAIN 147 order, Fold + iPad FULL videos for the landing pack)
+PRIORITY #1 CHECK ('far shot|far-shot|chụp xa'): OD 4 | ledger 0 | claims 6 | main 0 | review/* 0 | archive 0.
+Built review/c3-farshot @ 49d7de45 (bash dev/site/build_site.sh, file:// index.html), real new game, real kit frame kszFrame3 (kitFrameApply3, same harness as the reviewer's kit-size7-pics.js) on a plain paper stage; pictures loaded from the live CDN. 7 pictures: ev-hoang-de-vui, ev-fest-phoenix, ev-cung-nu-2, ev-trieu-chinh, ev-yen-tiec, act-thi-tham, act-lam-tho-v2; each shown in notice S, notice XL, news S, news XL (28 frames, ~1.8 s each, caption above the frame). Page errors 0 on both devices.
+LOOKED (contact sheets of all stills, both devices): every picture fills its frame (cover, no pad), subject large and inside the crop, no visible faces, people from behind/turned, only the Emperor in yellow (hoang-de-vui). Nothing cut off in news XL tall crops. PASS.
+Caveat: frames are opened through the kit frame harness, not through a played-out event modal; mp4 "2x" = lanczos upscale of the 1x recording (recording is 1x CSS px).
+URLs (base https://ctm-img.victoria-tntt.workers.dev/img/_review/c3-farshot-video/ , all HTTP 200):
+- c3-farshot-fold-755x1000.mp4 (2.1 MB) · c3-farshot-fold-755x1000-2x.mp4 (6.0 MB)
+- c3-farshot-ipad-1180x820.mp4 (3.3 MB) · c3-farshot-ipad-1180x820-2x.mp4 (9.2 MB)
+- stills (webp): still-<fold-755x1000|ipad-1180x820>-<ev-hoang-de-vui-noticeXL|ev-fest-phoenix-noticeXL|ev-cung-nu-2-noticeXL|ev-trieu-chinh-newsXL|act-thi-tham-newsXL|act-lam-tho-v2-noticeXL>.webp
+Wipe when the landing pack is done: python3 dev/site/cdn_sync.py --wipe-review c3-farshot-video
