@@ -1,0 +1,4744 @@
+{
+ "job": {
+  "id": "nc-nc_gian-greedy-1",
+  "origin": "nc",
+  "road": "nc_gian",
+  "bot": "bold",
+  "seed": 3414306896,
+  "dev": "fold",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "1a29f470",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 7,
+  "cap": null,
+  "stuck": 11,
+  "unstick": [
+   {
+    "at": 435,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 455,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 475,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 496,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 517,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 536,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 721,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 740,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 759,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 777,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 798,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 817,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 836,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 855,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1006,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1026,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1047,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1067,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1223,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1242,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1261,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1281,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1301,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1629,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1650,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1671,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1975,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1996,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2015,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2035,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2055,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2076,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2096,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2115,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2135,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2155,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2176,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2196,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2216,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2236,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2256,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2277,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2924,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2944,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 3486,
+    "lvl": 1,
+    "layer": ".kfoc",
+    "title": ""
+   },
+   {
+    "at": 3768,
+    "lvl": 1,
+    "layer": ".kshdc",
+    "title": ""
+   },
+   {
+    "at": 3787,
+    "lvl": 1,
+    "layer": ".kshdc",
+    "title": ""
+   },
+   {
+    "at": 3807,
+    "lvl": 1,
+    "layer": ".kshdc",
+    "title": ""
+   },
+   {
+    "at": 3825,
+    "lvl": 1,
+    "layer": ".kshdc",
+    "title": ""
+   },
+   {
+    "at": 4065,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4083,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4101,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4119,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4137,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4155,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4173,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4191,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4210,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4228,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4246,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4263,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4282,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4300,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4318,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4336,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4354,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4372,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4390,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4408,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4425,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4443,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4461,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4479,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4496,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4514,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4532,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4550,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4568,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4585,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4603,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4621,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4639,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4656,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4674,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4692,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4710,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4727,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4745,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4763,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4781,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4799,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4817,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4835,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4853,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4870,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4888,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4906,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4916,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4962,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 4982,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5002,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5022,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5041,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5061,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5079,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5098,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5116,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5135,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5153,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5172,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5193,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5212,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5231,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5249,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5267,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5286,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5304,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5322,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5340,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5359,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5377,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5395,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5413,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5431,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5450,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5469,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5487,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5506,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5525,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5543,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5562,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5581,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5600,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5619,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5637,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5656,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5675,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5694,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5712,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5730,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5749,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5768,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5786,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5805,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5824,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5833,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5861,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5879,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5898,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5917,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5935,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5955,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5974,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 5992,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6011,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6031,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6051,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6070,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6089,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6109,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6128,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6147,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6166,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6185,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6203,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6221,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6240,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6258,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6276,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6294,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6312,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6330,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6347,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6365,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6383,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6401,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6419,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6438,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6455,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6473,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6491,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6509,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6527,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6544,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6562,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6580,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6598,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6616,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6633,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6651,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6669,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6687,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6705,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6723,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6732,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6767,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6786,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6804,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6822,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6840,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6859,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6878,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6896,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6914,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6933,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6953,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6972,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 6991,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 7011,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 7030,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 7048,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 7066,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 7085,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 7103,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 61,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Kính sự phòng báo tin"
+   },
+   {
+    "at": 427,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 715,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người."
+   },
+   {
+    "at": 769,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Tin chờ người sai đi"
+   },
+   {
+    "at": 933,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người."
+   },
+   {
+    "at": 1175,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người."
+   },
+   {
+    "at": 1389,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người."
+   },
+   {
+    "at": 1546,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người."
+   },
+   {
+    "at": 1761,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người."
+   },
+   {
+    "at": 2001,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người."
+   },
+   {
+    "at": 2204,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người."
+   },
+   {
+    "at": 2431,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người."
+   },
+   {
+    "at": 3274,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 3570,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người."
+   },
+   {
+    "at": 3899,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người."
+   },
+   {
+    "at": 4220,
+    "lvl": 2,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 4427,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người."
+   },
+   {
+    "at": 5268,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 5520,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người."
+   },
+   {
+    "at": 5751,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người."
+   },
+   {
+    "at": 5944,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người."
+   },
+   {
+    "at": 6788,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 6963,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người."
+   },
+   {
+    "at": 163,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người."
+   },
+   {
+    "at": 302,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người."
+   },
+   {
+    "at": 521,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người."
+   },
+   {
+    "at": 569,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Chương 3 · Học quy củ trong cung"
+   },
+   {
+    "at": 822,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người."
+   },
+   {
+    "at": 1655,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 1830,
+    "lvl": 2,
+    "layer": ".mapsc",
+    "title": ""
+   },
+   {
+    "at": 2668,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 2898,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người."
+   },
+   {
+    "at": 3129,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người."
+   },
+   {
+    "at": 3967,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 4157,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người."
+   },
+   {
+    "at": 4204,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 5002,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 5195,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người."
+   },
+   {
+    "at": 5253,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 5456,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người."
+   },
+   {
+    "at": 6506,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 6650,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người."
+   },
+   {
+    "at": 171,
+    "lvl": 2,
+    "layer": "page",
+    "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người."
+   }
+  ],
+  "slice": null,
+  "areaTaps": 499,
+  "infoTaps": 6571,
+  "taps0": 0,
+  "resumed": [
+   {
+    "at": "2026-11-25T11:12:31.776Z",
+    "buoi": 108,
+    "from": "2026-11-25T11:10:38.346Z"
+   },
+   {
+    "at": "2026-11-25T11:13:50.362Z",
+    "buoi": 109,
+    "from": "2026-11-25T11:13:38.508Z"
+   },
+   {
+    "at": "2026-11-25T13:13:50.429Z",
+    "buoi": 325,
+    "from": "2026-11-25T13:11:29.726Z"
+   },
+   {
+    "at": "2026-11-25T15:13:43.635Z",
+    "buoi": 433,
+    "from": "2026-11-25T15:12:09.420Z"
+   }
+  ],
+  "scrolls": 14874,
+  "dlgClose": 174,
+  "loops": 34,
+  "dlgScroll": 40,
+  "taps": 309
+ },
+ "life": {
+  "id": "Hồng nhan bạc mệnh",
+  "type": "death",
+  "fate": "Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 20 tuổi",
+  "death": true,
+  "age": 20,
+  "year": 3,
+  "rank": 0,
+  "text": "Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 20 tuổi."
+ },
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "dead|close button has no effect: .dlg «Tin báo» «Để sau»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tin báo» «Để sau»",
+   "n": 1,
+   "at": 386,
+   "shot": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/noeffect-1795598319298.png"
+  },
+  {
+   "k": "js|page error: Cannot read properties of undefined (reading 'off')",
+   "type": "js",
+   "msg": "page error: Cannot read properties of undefined (reading 'off')",
+   "n": 3,
+   "at": 642,
+   "stack": [
+    "TypeError: Cannot read properties of undefined (reading 'off')",
+    "at chooseM (https://thientran2711.github.io/cung-tuong-mong/:1649:79)",
+    "at window.<computed> (https://thientran2711.github.io/cung-tuong-mong/:5031:183)",
+    "at chooseM (https://thientran2711.github.io/cung-tuong-mong/:7412:311)",
+    "at chooseM (https://thientran2711.github.io/cung-tuong-mong/:27690:32)",
+    "at chooseM (https://thientran2711.github.io/cung-tuong-mong/:29373:17)"
+   ]
+  },
+  {
+   "k": "stuck|no progress 15 min on .dlg «Kính sự phòng báo tin»",
+   "type": "stuck",
+   "msg": "no progress 15 min on .dlg «Kính sự phòng báo tin»",
+   "n": 3,
+   "at": 4916,
+   "shot": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/stuck-1.png",
+   "save": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/stuck-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 8,
+    "w": 2,
+    "b": 3,
+    "age": 18,
+    "rank": 0,
+    "name": "Trình Nguyệt Thiền"
+   },
+   "buttons": [
+    "",
+    "Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩmGợi ýchuẩn bị thị tẩm!"
+   ]
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người»",
+   "n": 1,
+   "at": 427,
+   "shot": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/loop-1.png",
+   "dump": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/loop-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 10,
+    "w": 1,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Nguyệt Thiền"
+   },
+   "buttons": [
+    "Ô lưu",
+    "Xem bản thân",
+    "Sắc42Tài59Tâm cơ15Đức17Danh33Sủng1",
+    "Bạc99Sức98/100",
+    "Buổi tối, còn 4 khắc",
+    "Đậu mùa · nhẹ",
+    "Cấm túc1 tháng",
+    "Hôm nay mặt mộc",
+    "đêm gió lớn",
+    "Quẻ Thượng thượng (Sủng)",
+    "Tâm trạngBình thản-5",
+    "Tin báo"
+   ],
+   "trace": [
+    "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Con của ta»",
+    "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Quẻ Thượng thượng (Sủng)»",
+    "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Hoàng tự trong cung»",
+    "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Sắc42Tài59Tâm cơ15Đức17Danh33Sủng1»",
+    "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Con của ta»",
+    "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Giao tình»",
+    "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Ân oánPhe pháiĐáp ứngTa▾⇄Hoàng thượng▾Quan hệ giữa»",
+    "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Hoàng tự»",
+    "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Mệnh truyện»",
+    "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Giao tình»",
+    "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Đổi chỗ hai người»",
+    "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Buổi tối, còn 4 khắc»",
+    "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Tâm trạngBình thản-5»",
+    "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Cấm túc1 tháng»",
+    "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Cấm túc1 tháng»",
+    "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Ân oán»",
+    "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Về phòng»",
+    "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Đậu mùa · nhẹ»",
+    "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Nguy hiểm chung: 82»",
+    "page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người» «Nguy hiểm chung: 82»"
+   ]
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.»",
+   "n": 24,
+   "at": 715,
+   "shot": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/loop-2.png",
+   "dump": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/loop-2-dump.json",
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 11,
+    "w": 2,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Nguyệt Thiền"
+   },
+   "buttons": [
+    "Ô lưu",
+    "Xem bản thân",
+    "Sắc42Tài59Tâm cơ15Đức23Danh45Sủng3",
+    "Bạc13Sức99/99",
+    "Buổi tối, còn 4 khắc",
+    "Đậu mùa · nặng",
+    "Hôm nay mặt mộc",
+    "trời trong, sao sáng",
+    "Quẻ Thượng (Con cái)",
+    "Tâm trạngBình thản-4",
+    "Tin báo",
+    "Cung nữ thân tín tam đẳngBảo Châu"
+   ],
+   "trace": [
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tai mắt0»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Cung nữ thân tín tam đẳngBảo Châu»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hoàng tự»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Mệnh truyện»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tâm trạngBình thản-4»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Đậu mùa · nặng»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Buổi tối, còn 4 khắc»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tin báo»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tin báo»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tâm nguyện»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hoàng tự»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tâm trạngBình thản-4»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Mệnh truyện»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Sổ ghi»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Giao tình»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Sắc42Tài59Tâm cơ15Đức23Danh45Sủng3»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Đổi chỗ hai người»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Giao tình»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 92»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Bạc13Sức99/99»"
+   ]
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on .dlg «Tin chờ người sai đi»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on .dlg «Tin chờ người sai đi»",
+   "n": 1,
+   "at": 769,
+   "shot": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/loop-3.png",
+   "dump": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/loop-3-dump.json",
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 11,
+    "w": 2,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Nguyệt Thiền"
+   },
+   "buttons": [
+    "Lui"
+   ],
+   "trace": [
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hậu cung»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Dư đồ»",
+    ".dlg «Tin báo» «Để sauTốnkhôngĐượckhông»",
+    ".dlg «Công · Nữ công: các lối» «Lui»",
+    ".dlg «Xem quan hệ của» «Phi tần 12»",
+    ".dlg «Xem quan hệ của» «Ý tầnChiêu Nghi»",
+    ".dlg «Xem quan hệ của» «Cung nhân 33»",
+    ".dlg «Xem quan hệ của» «Phi tần 12»",
+    ".dlg «Xem quan hệ của» «Đức hoàng quý phiNgưng Hoa»",
+    ".dlg «Tin báo» «Để sauTốnkhôngĐượckhông»",
+    ".dlg «Tin báo» «Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu»",
+    ".dlg «Tin chờ người sai đi» «Lui»",
+    ".dlg «Tin báo» «Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu»",
+    ".dlg «Tin chờ người sai đi» «Lui»",
+    ".dlg «Hôn sự» «Lui»",
+    ".dlg «Tin báo» «Để sauTốnkhôngĐượckhông»",
+    ".dlg «Tin báo» «Để sauTốnkhôngĐượckhông»",
+    ".dlg «Tin báo» «Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu»",
+    ".dlg «Tin chờ người sai đi» «Lui»",
+    ".dlg «Xem quan hệ của» «Hoàng thượng»"
+   ]
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.»",
+   "n": 1,
+   "at": 933,
+   "shot": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/loop-4.png",
+   "dump": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/loop-4-dump.json",
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 12,
+    "w": 1,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Nguyệt Thiền"
+   },
+   "buttons": [
+    "Ô lưu",
+    "Xem bản thân",
+    "Sắc42Tài59Tâm cơ15Đức24Danh43Sủng1",
+    "Bạc32Sức88/98",
+    "Buổi tối, còn 4 khắc",
+    "Đậu mùa · nặng",
+    "Hôm nay mặt mộc",
+    "mưa rào",
+    "Quẻ Thượng (Tài nghệ)",
+    "Tâm trạngBình thản0",
+    "Tin báo",
+    "Cung nữ thân tín tam đẳngBảo Châu"
+   ],
+   "trace": [
+    ".mapsc «Nguy hiểm chung: 86»",
+    ".mapsc «Nguy hiểm chung: 86»",
+    ".mapsc «Lịch tháng»",
+    ".mapsc «Dực Khôn8 bóng · 2 khắc · bái kiến»",
+    ".mapsc «Xem bản thân»",
+    ".mapsc «mưa rào»",
+    ".mapsc «Dư đồ»",
+    ".mapsc «Nguy hiểm chung: 86»",
+    ".mapsc «Nguy hiểm chung: 86»",
+    ".mapsc «Nguy hiểm chung: 86»",
+    ".mapsc «Nguy hiểm chung: 86»",
+    ".mapsc «Dư đồ»",
+    ".mapsc «Thừa Minh3 bóng · 1 khắc»",
+    ".mapsc «Bạc32Sức88/98»",
+    ".mapsc «Bạc32Sức88/98»",
+    ".mapsc «Vĩnh HòaTa + 2 bóng · còn 4 khắc»",
+    ".mapsc «Số lần ân thưởng0»",
+    ".mapsc «Hành sự»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.» «Giao thiệp 3/4»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.» «Hành sự»"
+   ]
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.»",
+   "n": 2,
+   "at": 2204,
+   "shot": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/loop-10.png",
+   "dump": null,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 17,
+    "w": 2,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Nguyệt Thiền"
+   },
+   "buttons": [
+    "Ô lưu",
+    "Xem bản thân",
+    "Sắc42Tài59Tâm cơ20Đức8Danh53Sủng0",
+    "Bạc179Sức98/98",
+    "Buổi tối, còn 4 khắc",
+    "Tâm bệnh · nhẹ",
+    "Cấm túc1 tháng",
+    "Hôm nay mặt mộc",
+    "trăng thu",
+    "Quẻ Hạ (Sức khỏe)",
+    "Tâm trạngBình thản-4",
+    "Về phòng"
+   ],
+   "trace": [
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «Bổng lộcsau 1 tuần»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «Tài nghệ»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «Về phòng»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «3Chí tôn»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «Nguy hiểm chung: 78»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «Giao tình»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «Đổi chỗ hai người»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «Ân oánPhe pháiĐáp ứngTa▾⇄Hoàng thượng▾Quan hệ giữa»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «Hành sự»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «Bạc179Sức98/98»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «Hôm nay mặt mộc»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «Tâm bệnh · nhẹ»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «Tư trang»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «Việc»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «Tài nghệ»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «Tin báo»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «Tin báo»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «Mệnh truyện»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «Quẻ Hạ (Sức khỏe)»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «Quẻ Hạ (Sức khỏe)»"
+   ]
+  },
+  {
+   "k": "stuck|no progress 15 min on .dlg «Tin báo»",
+   "type": "stuck",
+   "msg": "no progress 15 min on .dlg «Tin báo»",
+   "n": 8,
+   "at": 3274,
+   "shot": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/stuck-4.png",
+   "save": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/stuck-4-dump.json",
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 18,
+    "w": 1,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Nguyệt Thiền"
+   },
+   "buttons": [
+    "Để ta xemTốnkhôngĐượckhông",
+    "Để sauTốnkhôngĐượckhông"
+   ]
+  },
+  {
+   "k": "game|dialog queue holds 4 copies of «Tin chờ người sai đi» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 4 copies of «Tin chờ người sai đi» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 3938,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 20,
+    "w": 1,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Nguyệt Thiền"
+   }
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on .mapsc «»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on .mapsc «»",
+   "n": 2,
+   "at": 4220,
+   "shot": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/loop-14.png",
+   "dump": null,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 21,
+    "w": 2,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Nguyệt Thiền"
+   },
+   "buttons": [
+    "Ô lưu",
+    "Xem bản thân",
+    "Sắc42Tài59Tâm cơ26Đức1Danh71Sủng0",
+    "Bạc126Sức100/100",
+    "Buổi tối, còn 4 khắc",
+    "Giả bệnh",
+    "Hôm nay mặt mộc",
+    "mai nở trong tuyết",
+    "Quẻ Trung (Giao thiệp)",
+    "Tâm trạngBình thản+2",
+    "Về phòng",
+    "Tin báo"
+   ],
+   "trace": [
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.» «1Cung nhân»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.» «Nguy hiểm chung: 85»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.» «Ân tình (đêm)0»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.» «Lật thẻRất thấp»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.» «Tâm trạngBình thản+2»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.» «Chọn chính mình»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.» «Số lần ân thưởng0»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.» «Chọn chính mình»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.» «Sắc42Tài59Tâm cơ26Đức1Danh71Sủng0»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.» «1Cung nhân»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.» «Tài nghệ»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.» «Việc nhờ»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.» «Sổ ghi»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.» «Sắc42Tài59Tâm cơ26Đức1Danh71Sủng0»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.» «Bạc126Sức100/100»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.» «Mệnh truyện»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.» «Có thaiRất thấp»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.» «Xét phẩm: thiếu 2»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.» «Dư đồ»",
+    ".mapsc «Mục tiêu chương»"
+   ]
+  },
+  {
+   "k": "game|dialog queue holds 3 copies of «Tin chờ người sai đi» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 3 copies of «Tin chờ người sai đi» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 7014,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 24,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Trình Nguyệt Thiền"
+   }
+  },
+  {
+   "k": "dead|close button has no effect: .dlg «Tin chờ người sai đi» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tin chờ người sai đi» «Lui»",
+   "n": 1,
+   "at": 214,
+   "shot": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/noeffect-1795612644671.png"
+  },
+  {
+   "k": "game|dialog queue holds 3 copies of «Tin báo» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 3 copies of «Tin báo» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 350,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 24,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Trình Nguyệt Thiền"
+   }
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on .dlg «Chương 3 · Học quy củ trong cung»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on .dlg «Chương 3 · Học quy củ trong cung»",
+   "n": 1,
+   "at": 569,
+   "shot": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/loop-23.png",
+   "dump": null,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 25,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Trình Nguyệt Thiền"
+   },
+   "buttons": [
+    "Lui",
+    "Mục tiêu",
+    "Danh hiệu 0/35",
+    "Thiên mệnh",
+    "Đi làm: Học một buổi ở mục Tài nghệTốnkhôngĐượctới Tài nghệ",
+    "Đi làm: Trò chuyện với cung nữ thân cậnTốnkhôngĐượctới Hành sự › thẻ Trò chuyện với cung n"
+   ],
+   "trace": [
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 85»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 85»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Cung nữ thân tín tam đẳngBảo Châu»",
+    ".dlg «Kính sự phòng» «Tranh sủngMong manhTốnkhôngĐượcdựa vào ân sủng; tà»",
+    "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»",
+    "#kg82 «Quay lại»",
+    "#kg82 «Quay lại»",
+    ".dlg «Tin báo» «Lui»",
+    ".dlg «Tin chờ người sai đi» «Lui»",
+    ".dlg «Chương 3 · Học quy củ trong cung» «Danh hiệu 0/35»",
+    ".dlg «Danh hiệu» «Danh hiệu 0/35»",
+    ".dlg «Danh hiệu» «Danh hiệu 0/35»",
+    ".dlg «Danh hiệu» «Danh hiệu 0/35»",
+    ".dlg «Danh hiệu» «Danh hiệu 0/35»",
+    ".dlg «Danh hiệu» «Lui»",
+    ".dlg «Tin báo» «Lui»",
+    ".dlg «Tin báo» «Lui»",
+    ".dlg «Tin báo» «Lui»",
+    ".dlg «Lịch tháng» «Lui»",
+    ".dlg «Chương 3 · Học quy củ trong cung» «Đi làm: Trò chuyện với cung nữ thân cậnTốnkhôngĐượ»"
+   ]
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on .dlg «Lịch tháng»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on .dlg «Lịch tháng»",
+   "n": 1,
+   "at": 4204,
+   "shot": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/loop-29.png",
+   "dump": null,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 28,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Trình Nguyệt Thiền"
+   },
+   "buttons": [
+    "Lui",
+    "Tháng trước",
+    "Tháng sau",
+    "mồng 1: Lĩnh bổng lộc · Nội vụ phủ phát đồ: Nguyệt tín",
+    "mồng 2: Nguyệt tín",
+    "mồng 3: Nguyệt tín",
+    "mồng 4: Nguyệt tín",
+    "mồng 5: Nguyệt tín",
+    "mồng 6: Nguyệt tín",
+    "mồng 7: Tết Thất tịch: Nguyệt tín",
+    "mồng 8",
+    "mồng 9"
+   ],
+   "trace": [
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Chọn chính mình»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 90»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 90»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 90»",
+    "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «1Cung nhân»",
+    ".dlg «Kính sự phòng» «Chặn ngự giáMong manhTốnkhôngĐượcdựa vào nhan sắc,»",
+    ".dlg «Kính sự phòng» «Tranh sủngMong manhTốnkhôngĐượcdựa vào ân sủng; tà»",
+    "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»",
+    "#kg82 «Quay lại»",
+    "#kg82 «Quay lại»",
+    ".dlg «Tin chờ người sai đi» «Lui»",
+    ".dlg «Tin báo» «Để ta xemTốnkhôngĐượckhông»",
+    ".dlg «Công · Nữ công: các lối» «Lui»",
+    ".dlg «Tin báo» «Để ta xemTốnkhôngĐượckhông»",
+    ".dlg «Chương 4 · Mật lệnh cố quốc» «Đi làm: Học một môn tài nghệTốnkhôngĐượctới Tài ng»",
+    ".dlg «Chương 4 · Mật lệnh cố quốc» «Đi làm: Học một môn tài nghệTốnkhôngĐượctới Tài ng»",
+    ".dlg «Lịch tháng» «mồng 8»",
+    ".dlg «Lịch tháng» «ngày 14»",
+    ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»",
+    ".dlg «Lịch tháng» «ngày 27»"
+   ]
+  },
+  {
+   "k": "game|dialog queue holds 2 copies of «Tâm trạng · Thường tại Yến Chỉ Nhược» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 2 copies of «Tâm trạng · Thường tại Yến Chỉ Nhược» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 5095,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 28,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Trình Nguyệt Thiền"
+   }
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on .dlg «Tin báo»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on .dlg «Tin báo»",
+   "n": 1,
+   "at": 5253,
+   "shot": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/loop-31.png",
+   "dump": null,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 28,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Trình Nguyệt Thiền"
+   },
+   "buttons": [
+    "Lui"
+   ],
+   "trace": [
+    "#kg82 «Quay lại»",
+    ".dlg «Tin chờ người sai đi» «Xem lời nhờTốnkhôngĐượcCó khách đến chơi·trả lời t»",
+    ".dlg «Lịch tháng» «ngày 28»",
+    ".dlg «Lịch tháng» «ngày 24»",
+    ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»",
+    ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»",
+    ".dlg «Lịch tháng» «Lui»",
+    ".dlg «Tin chờ người sai đi» «Xem lời nhờTốnkhôngĐượcCó khách đến chơi·trả lời t»",
+    ".dlg «Cầm: các lối» «Lui»",
+    ".dlg «Tin chờ người sai đi» «Xem lời nhờTốnkhôngĐượcCó khách đến chơi·trả lời t»",
+    ".dlg «Tin chờ người sai đi» «Xem lời nhờTốnkhôngĐượcCó khách đến chơi·trả lời t»",
+    ".dlg «Tin chờ người sai đi» «Lui»",
+    ".dlg «Lịch tháng» «Lui»",
+    ".dlg «Tin chờ người sai đi» «Lui»",
+    ".dlg «Tin chờ người sai đi» «Lui»",
+    ".dlg «Cầm: các lối» «Lui»",
+    ".dlg «Cầm» «Lui»",
+    ".dlg «Tin chờ người sai đi» «Lui»",
+    ".dlg «Tin báo» «Lui»",
+    ".dlg «Tin chờ người sai đi» «Xem lời nhờTốnkhôngĐượcCó khách đến chơi·trả lời t»"
+   ]
+  },
+  {
+   "k": "game|dialog queue holds 4 copies of «Tin báo» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 4 copies of «Tin báo» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 5501,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 29,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Trình Nguyệt Thiền"
+   }
+  },
+  {
+   "k": "dead|close button has no effect: .dlg «Tin báo» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tin báo» «Lui»",
+   "n": 2,
+   "at": 5506,
+   "shot": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/noeffect-1795617936796.png"
+  },
+  {
+   "k": "js|page error: f.rk.split is not a function",
+   "type": "js",
+   "msg": "page error: f.rk.split is not a function",
+   "n": 1,
+   "at": 207,
+   "stack": [
+    "TypeError: f.rk.split is not a function",
+    "at pcPort (https://thientran2711.github.io/cung-tuong-mong/:4692:282)",
+    "at pcPort (https://thientran2711.github.io/cung-tuong-mong/:28527:88)",
+    "at pcPort (https://thientran2711.github.io/cung-tuong-mong/:28720:91)",
+    "at pcPort (https://thientran2711.github.io/cung-tuong-mong/:42988:57)",
+    "at pcPort (https://thientran2711.github.io/cung-tuong-mong/:43052:57)"
+   ]
+  }
+ ],
+ "dead": [
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tin báo»",
+   "label": "Để sau",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/noeffect-1795598319298.png",
+   "at": 386,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 3,
+    "age": 18,
+    "rank": 1,
+    "name": "Trình Nguyệt Thiền"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg «Nhờ thái giám tìm thú nuôi»",
+   "label": "Xem Mèo mướp",
+   "cover": "span.kitb in #mb",
+   "shot": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/dead-fold-1795601654884.png",
+   "dev": "fold",
+   "at": 3722,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 8,
+    "w": 1,
+    "b": 3,
+    "age": 18,
+    "rank": 0,
+    "name": "Trình Nguyệt Thiền"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg «Nhờ thái giám tìm thú nuôi»",
+   "label": "Xem Chó nhỏ lông xù",
+   "cover": "b.kidn in #mb",
+   "shot": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/dead-fold-1795601662055.png",
+   "dev": "fold",
+   "at": 3729,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 8,
+    "w": 1,
+    "b": 3,
+    "age": 18,
+    "rank": 0,
+    "name": "Trình Nguyệt Thiền"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".dlg «Nhờ thái giám tìm thú nuôi»",
+   "label": "Xem Chim họa mi",
+   "cover": "b.kidn in #mb",
+   "shot": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/dead-fold-1795601669572.png",
+   "dev": "fold",
+   "at": 3736,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 8,
+    "w": 1,
+    "b": 3,
+    "age": 18,
+    "rank": 0,
+    "name": "Trình Nguyệt Thiền"
+   }
+  },
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tin chờ người sai đi»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/noeffect-1795612644671.png",
+   "at": 214,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 24,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Trình Nguyệt Thiền"
+   }
+  },
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tin báo»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/noeffect-1795617936796.png",
+   "at": 5506,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 29,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Trình Nguyệt Thiền"
+   }
+  },
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tin báo»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/noeffect-1795619136250.png",
+   "at": 6706,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 30,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Trình Nguyệt Thiền"
+   }
+  }
+ ],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 368973,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 100,
+   "year": 1,
+   "chars": 507120,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 108,
+   "year": null,
+   "chars": 538115,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 109,
+   "year": null,
+   "chars": 538115,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 159,
+   "year": 2,
+   "chars": 596096,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 209,
+   "year": 2,
+   "chars": 713153,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 259,
+   "year": 2,
+   "chars": 781501,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 309,
+   "year": 3,
+   "chars": 882554,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 325,
+   "year": null,
+   "chars": 932920,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 375,
+   "year": 3,
+   "chars": 963483,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 425,
+   "year": 3,
+   "chars": 1032066,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 433,
+   "year": null,
+   "chars": 1039915,
+   "key": "hclh-save-v2-1"
+  }
+ ],
+ "buoi": 441,
+ "steps": 45138,
+ "status": [
+  "STATUS nc-nc_gian-greedy-1 · buổi 104 · year 1 · rank 0 · bugs 2 · stuck 0 · dead buttons 1",
+  "STATUS nc-nc_gian-greedy-1 · buổi 247 · year 2 · rank 0 · bugs 9 · stuck 4 · dead buttons 4",
+  "STATUS nc-nc_gian-greedy-1 · buổi 387 · year 3 · rank 0 · bugs 15 · stuck 8 · dead buttons 5"
+ ],
+ "_snapAt": 1795619813640,
+ "trace": [
+  [
+   6651,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Cung nữ được sủng hạnh 0/16»"
+  ],
+  [
+   6651,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Giao tình»"
+  ],
+  [
+   6651,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hành sự»"
+  ],
+  [
+   6652,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tất cả 23/30»"
+  ],
+  [
+   6652,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Mưu kế 5/5»"
+  ],
+  [
+   6652,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   6653,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Y dược 3/3»"
+  ],
+  [
+   6653,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tài nghệ»"
+  ],
+  [
+   6653,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệCác lối, sách »"
+  ],
+  [
+   6653,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   6654,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hành sự»"
+  ],
+  [
+   6654,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   6655,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hành sự»"
+  ],
+  [
+   6655,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Quẻ Thượng thượng (Giao thiệp)»"
+  ],
+  [
+   6655,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tin báo»"
+  ],
+  [
+   6655,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Trọng bệnh · nguy kịch»"
+  ],
+  [
+   6656,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   6656,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Quẻ Thượng thượng (Giao thiệp)»"
+  ],
+  [
+   6657,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   6658,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Thái hậu»"
+  ],
+  [
+   6658,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Bạc98Sức95/95»"
+  ],
+  [
+   6659,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hầu hạHầu hạDâng quà lên Thái hậuⓘTốn2 khắcĐượcmỗi»"
+  ],
+  [
+   6660,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Việc hôm nay 0/2»"
+  ],
+  [
+   6660,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   6662,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tài nghệ»"
+  ],
+  [
+   6662,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tứ đức 9/9»"
+  ],
+  [
+   6662,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tác phẩm»"
+  ],
+  [
+   6663,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tin báo»"
+  ],
+  [
+   6663,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Về phòng»"
+  ],
+  [
+   6663,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «3Chí tôn»"
+  ],
+  [
+   6664,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 85»"
+  ],
+  [
+   6664,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 85»"
+  ],
+  [
+   6664,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 85»"
+  ],
+  [
+   6664,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 85»"
+  ],
+  [
+   6665,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 85»"
+  ],
+  [
+   6665,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «trăng rằm»"
+  ],
+  [
+   6666,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «3Chí tôn»"
+  ],
+  [
+   6666,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 85»"
+  ],
+  [
+   6666,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Quẻ Thượng thượng (Giao thiệp)»"
+  ],
+  [
+   6666,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Mục tiêu chương»"
+  ],
+  [
+   6667,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Số lần ân thưởng0»"
+  ],
+  [
+   6667,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tư trang»"
+  ],
+  [
+   6667,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Dư đồ»"
+  ],
+  [
+   6668,
+   ".mapsc «Xem bản thân»"
+  ],
+  [
+   6668,
+   ".mapsc «Dư đồ»"
+  ],
+  [
+   6668,
+   ".mapsc «Mệnh truyện»"
+  ],
+  [
+   6669,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Giao tình»"
+  ],
+  [
+   6669,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Buổi tối, còn 4 khắc»"
+  ],
+  [
+   6669,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Quẻ Thượng thượng (Giao thiệp)»"
+  ],
+  [
+   6670,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Về phòng»"
+  ],
+  [
+   6670,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tin báo»"
+  ],
+  [
+   6670,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «trăng rằm»"
+  ],
+  [
+   6671,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Trọng bệnh · nguy kịch»"
+  ],
+  [
+   6671,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Bạc98Sức95/95»"
+  ],
+  [
+   6671,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Số lần ân thưởng0»"
+  ],
+  [
+   6672,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Bổng lộcsau 2 tuần»"
+  ],
+  [
+   6672,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tài nghệ»"
+  ],
+  [
+   6672,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tư trang»"
+  ],
+  [
+   6673,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Trọng bệnh · nguy kịch»"
+  ],
+  [
+   6673,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Bạc98Sức95/95»"
+  ],
+  [
+   6674,
+   ".dlg «Kính sự phòng» «Chặn ngự giáMong manhTốnkhôngĐượcdựa vào nhan sắc,»"
+  ],
+  [
+   6674,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   6675,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   6676,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   6678,
+   ".dlg «Kính sự phòng báo tin» «Tắm gội chờ giáRất vữngTốnkhôngĐượcchuẩn bị thị tẩ»"
+  ],
+  [
+   6679,
+   ".dlg «Chuẩn bị thị tẩm» «Đeo trang sức đẹp nhấtRất vữngTốnkhôngĐượcbệ hạ để»"
+  ],
+  [
+   6683,
+   ".dlg «Đêm thị tẩm» «Rót rượu, nũng nịuKhó lườngTốnkhôngĐượcđêm vui, Ho»"
+  ],
+  [
+   6684,
+   ".dlg «Đêm thị tẩm» «Xin ân cho gia đìnhKhó lườngTốnkhôngĐượcthêm thể d»"
+  ],
+  [
+   6684,
+   ".dlg «Giữ hay không giữ» «Cầu xin Hoàng thượngKhó lườngTốnkhôngĐượcđược giữ »"
+  ],
+  [
+   6685,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   6686,
+   ".dlg «Chương 4 · Mật lệnh cố quốc» «Danh hiệu 0/35»"
+  ],
+  [
+   6687,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   6687,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   6687,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   6687,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   6688,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   6689,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   6691,
+   ".dlg «Công · Nữ công: các lối» «Lui»"
+  ],
+  [
+   6692,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   6694,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   6696,
+   ".dlg «Công · Nữ công: các lối» «Lui»"
+  ],
+  [
+   6697,
+   ".dlg «Cầm» «Lui»"
+  ],
+  [
+   6699,
+   ".dlg «Lịch tháng» «ngày 23»"
+  ],
+  [
+   6699,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   6699,
+   ".dlg «Lịch tháng» «ngày 13»"
+  ],
+  [
+   6699,
+   ".dlg «Lịch tháng» «ngày 23»"
+  ],
+  [
+   6700,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   6701,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   6703,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   6705,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   7,
+   "#modal «Cung Tường Mộng» «Chơi một mìnhTiếp tục: Đáp ứng Trình Nguyệt Thiền »"
+  ],
+  [
+   9,
+   "#modal «Chọn sổ» «Tiếp tục kiếp này»"
+  ],
+  [
+   14,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   17,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «Nguy hiểm chung: 86»"
+  ],
+  [
+   19,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   22,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «Nguy hiểm chung: 86»"
+  ],
+  [
+   24,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   26,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «Nguy hiểm chung: 86»"
+  ],
+  [
+   28,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   31,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   34,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 3 người.» «Nguy hiểm chung: 85»"
+  ],
+  [
+   37,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   39,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.» «Nguy hiểm chung: 85»"
+  ],
+  [
+   40,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   43,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.» «Hoàng tự»"
+  ],
+  [
+   44,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 2 người.» «Sang buổi»"
+  ],
+  [
+   44,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Không gặp ai.» «Số lần ân thưởng0»"
+  ],
+  [
+   45,
+   ".dlg «Ân thưởng» «Lui»"
+  ],
+  [
+   47,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Không gặp ai.» «Nguy hiểm chung: 85»"
+  ],
+  [
+   48,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   50,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Không gặp ai.» «Nguy hiểm chung: 85»"
+  ],
+  [
+   51,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   53,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   55,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tư trang»"
+  ],
+  [
+   56,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Trọng bệnh · nguy kịch»"
+  ],
+  [
+   56,
+   ".dlg «Trọng bệnh · nguy kịch» «Lui»"
+  ],
+  [
+   58,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Quẻ Thượng thượng (Giao thiệp)»"
+  ],
+  [
+   59,
+   ".dlg «Quẻ Thượng thượng · Giao thiệp» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   60,
+   ".dlg «Gieo lại quẻ» «Lui»"
+  ],
+  [
+   61,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   63,
+   ".kmov «»"
+  ],
+  [
+   63,
+   ".kmov «»"
+  ],
+  [
+   64,
+   ".kmov «»"
+  ],
+  [
+   64,
+   ".kmov «»"
+  ],
+  [
+   65,
+   ".kmov «»"
+  ],
+  [
+   65,
+   ".kmov «»"
+  ],
+  [
+   65,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   68,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   70,
+   ".dlg «Kính sự phòng» «Chặn ngự giáMong manhTốnkhôngĐượcdựa vào nhan sắc,»"
+  ],
+  [
+   71,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   72,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   73,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   75,
+   ".dlg «Tâm trạng · Tần Trương Mạn Nhu» «Lui»"
+  ],
+  [
+   77,
+   ".dlg «Tâm trạng · Gia phi Tôn Lang Hoa» «Lui»"
+  ],
+  [
+   78,
+   ".dlg «Tâm trạng · Trinh phi Hạ Thanh Hoan» «Lui»"
+  ],
+  [
+   80,
+   ".dlg «Tâm trạng · Quý nhân Thiệu Nhã Như» «Lui»"
+  ],
+  [
+   82,
+   ".dlg «Tâm trạng · Gia phi Tôn Lang Hoa» «Lui»"
+  ],
+  [
+   86,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   87,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   87,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   87,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   88,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   88,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   90,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   91,
+   ".dlg «Tết Trùng cửu · Lời mời: Thi đầu hồ trên đỉnh Cảnh» «Không dựRất vữngTốnkhôngĐượckhôngGợi ýkhông được m»"
+  ],
+  [
+   92,
+   ".dlg «Tiết Vạn thọ · Thi làm bánh thọ đào» «Lui»"
+  ],
+  [
+   94,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 83»"
+  ],
+  [
+   94,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   96,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 83»"
+  ],
+  [
+   97,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   99,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 83»"
+  ],
+  [
+   99,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   101,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   102,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 82»"
+  ],
+  [
+   102,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   104,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 82»"
+  ],
+  [
+   105,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   107,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 82»"
+  ],
+  [
+   107,
+   ".dlg «Nguy hiểm chung» «Lui»"
+  ],
+  [
+   109,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   110,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   111,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   111,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   112,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   113,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Quẻ Thượng thượng (Tài nghệ)»"
+  ],
+  [
+   114,
+   ".dlg «Quẻ Thượng thượng · Tài nghệ» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   115,
+   ".dlg «Gieo lại quẻ» «Lui»"
+  ],
+  [
+   117,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   117,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   117,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   118,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   118,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Sang ngày mới»"
+  ],
+  [
+   118,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   119,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tâm trạngBình thản-2»"
+  ],
+  [
+   119,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Điều ngài thích»"
+  ],
+  [
+   120,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Dư đồ»"
+  ],
+  [
+   121,
+   ".mapsc «Nguy hiểm chung: 82»"
+  ],
+  [
+   121,
+   ".mapsc «Nguy hiểm chung: 82»"
+  ],
+  [
+   122,
+   ".mapsc «Buổi tối, còn 3 khắc»"
+  ],
+  [
+   122,
+   ".mapsc «Lật thẻRất thấp»"
+  ],
+  [
+   122,
+   ".mapsc «Nguy hiểm chung: 82»"
+  ],
+  [
+   122,
+   ".mapsc «Nguy hiểm chung: 82»"
+  ],
+  [
+   123,
+   ".mapsc «Ân tình (đêm)0»"
+  ],
+  [
+   123,
+   ".mapsc «Dư đồ»"
+  ],
+  [
+   123,
+   ".mapsc «Lật thẻRất thấp»"
+  ],
+  [
+   123,
+   ".mapsc «Ra vào cung cấm»"
+  ],
+  [
+   124,
+   ".mapsc «Hôm nay mặt mộc»"
+  ],
+  [
+   124,
+   ".mapsc «Nguy hiểm chung: 82»"
+  ],
+  [
+   125,
+   ".mapsc «gió heo may»"
+  ],
+  [
+   125,
+   ".mapsc «Thu · còn 3 khắc · đi gần 1 khắc, xa 2 · bóng: ngư»"
+  ],
+  [
+   126,
+   ".mapsc «Nguy hiểm chung: 82»"
+  ],
+  [
+   126,
+   ".mapsc «Nguy hiểm chung: 82»"
+  ],
+  [
+   126,
+   ".mapsc «Hoàng tự»"
+  ],
+  [
+   126,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Về phòng»"
+  ],
+  [
+   127,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 82»"
+  ],
+  [
+   127,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 82»"
+  ],
+  [
+   127,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Giao tình»"
+  ],
+  [
+   128,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tâm trạngBình thản-2»"
+  ],
+  [
+   128,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Triều đình»"
+  ],
+  [
+   128,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   129,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   129,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Về phòng»"
+  ],
+  [
+   130,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 82»"
+  ],
+  [
+   130,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Buổi tối, còn 3 khắc»"
+  ],
+  [
+   130,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 82»"
+  ],
+  [
+   130,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Trọng bệnh · nguy kịch»"
+  ],
+  [
+   131,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «1Cung nhân»"
+  ],
+  [
+   131,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 82»"
+  ],
+  [
+   131,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Mục tiêu chương»"
+  ],
+  [
+   132,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Buổi tối, còn 3 khắc»"
+  ],
+  [
+   132,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tài nghệ»"
+  ],
+  [
+   132,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   133,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Về phòng»"
+  ],
+  [
+   133,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Ân tình (đêm)0»"
+  ],
+  [
+   133,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Xét phẩm: thiếu 2»"
+  ],
+  [
+   134,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   134,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké»"
+  ],
+  [
+   134,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tài nghệ»"
+  ],
+  [
+   135,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Sắc42Tài59Tâm cơ30Đức0Danh98Sủng0»"
+  ],
+  [
+   135,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Sắc42Tài59Tâm cơ30Đức0Danh98Sủng0»"
+  ],
+  [
+   135,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   136,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Vũ · Y · Nữ công 8/12»"
+  ],
+  [
+   136,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   136,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Buổi tối, còn 3 khắc»"
+  ],
+  [
+   137,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké»"
+  ],
+  [
+   137,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   138,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Xem thêm»"
+  ],
+  [
+   138,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hoàng thượng»"
+  ],
+  [
+   139,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Dư đồ»"
+  ],
+  [
+   139,
+   ".mapsc «Thu nhỏ»"
+  ],
+  [
+   140,
+   ".mapsc «Thu · còn 3 khắc · đi gần 1 khắc, xa 2 · bóng: ngư»"
+  ],
+  [
+   140,
+   ".mapsc «Hành sự»"
+  ],
+  [
+   141,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tài nghệ»"
+  ],
+  [
+   142,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Quẻ Thượng (Danh)»"
+  ],
+  [
+   142,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tư trang»"
+  ],
+  [
+   143,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   143,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tài nghệ»"
+  ],
+  [
+   143,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Bậc 2 trên 5»"
+  ],
+  [
+   144,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   144,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Bạc98Sức95/95»"
+  ],
+  [
+   144,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Về phòng»"
+  ],
+  [
+   144,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tai mắt0»"
+  ],
+  [
+   145,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   145,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   146,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   146,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tư trang»"
+  ],
+  [
+   146,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Trọng bệnh · nguy kịch»"
+  ],
+  [
+   146,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   147,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   147,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Cung nữ thân tín tam đẳngBảo Châu»"
+  ],
+  [
+   147,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Bạc98Sức95/95»"
+  ],
+  [
+   148,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hành sự»"
+  ],
+  [
+   148,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Túi thơm»"
+  ],
+  [
+   148,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Về phòng»"
+  ],
+  [
+   149,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Chọn chính mình»"
+  ],
+  [
+   149,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 82»"
+  ],
+  [
+   149,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   149,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 82»"
+  ],
+  [
+   150,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 82»"
+  ],
+  [
+   150,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 82»"
+  ],
+  [
+   150,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Cung nữ thân tín tam đẳngBảo Châu»"
+  ],
+  [
+   151,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Mưu kế 1/1»"
+  ],
+  [
+   151,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Túi thơm»"
+  ],
+  [
+   151,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Giao thiệp 3/3»"
+  ],
+  [
+   151,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Túi thơm»"
+  ],
+  [
+   152,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Trọng bệnh · nguy kịch»"
+  ],
+  [
+   152,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Trọng bệnh · nguy kịch»"
+  ],
+  [
+   152,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Khăn che mặt»"
+  ],
+  [
+   152,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   153,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   154,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «ThườngTrâm đồng mai hoa»"
+  ],
+  [
+   154,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Khăn che mặt»"
+  ],
+  [
+   154,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Buổi tối, còn 3 khắc»"
+  ],
+  [
+   154,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Túi thơm»"
+  ],
+  [
+   155,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Giao thiệp 3/3»"
+  ],
+  [
+   155,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   155,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Gặp ngài ban ngày 1/4»"
+  ],
+  [
+   156,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Điều ngài thích»"
+  ],
+  [
+   156,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tin báo: 14 tin mới»"
+  ],
+  [
+   156,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Gặp ngài ban ngày 1/4»"
+  ],
+  [
+   156,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   157,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tin báo»"
+  ],
+  [
+   157,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké»"
+  ],
+  [
+   157,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   158,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Bạc98Sức95/95»"
+  ],
+  [
+   158,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Bạc98Sức95/95»"
+  ],
+  [
+   159,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Buổi tối, còn 3 khắc»"
+  ],
+  [
+   159,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Chí tônPhi tầnNam nhânCung nhân‹Hoàng thượngThái h»"
+  ],
+  [
+   160,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Cung nhân»"
+  ],
+  [
+   161,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Bạc98Sức95/95»"
+  ],
+  [
+   161,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Người sau»"
+  ],
+  [
+   162,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Người lạNgười lạ»"
+  ],
+  [
+   162,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tâm trạngBình thản-2»"
+  ],
+  [
+   162,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Chí tônPhi tầnNam nhânCung nhân‹Cung taChâuTrong c»"
+  ],
+  [
+   162,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Người trước»"
+  ],
+  [
+   163,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tin báo»"
+  ],
+  [
+   163,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Bạc98Sức95/95»"
+  ],
+  [
+   164,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Xem thêm»"
+  ],
+  [
+   165,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Phi tần»"
+  ],
+  [
+   166,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   166,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Buổi tối, còn 3 khắc»"
+  ],
+  [
+   166,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   167,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «gió heo may»"
+  ],
+  [
+   167,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   168,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Quẻ Thượng (Danh)»"
+  ],
+  [
+   168,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hành sự»"
+  ],
+  [
+   169,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Sắc42Tài59Tâm cơ30Đức0Danh98Sủng0»"
+  ],
+  [
+   169,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Trọng bệnh · nguy kịch»"
+  ],
+  [
+   170,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Buôn bán 1/1»"
+  ],
+  [
+   170,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Lễ nghi 1/3»"
+  ],
+  [
+   170,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Buôn bán 1/1»"
+  ],
+  [
+   170,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Buôn bán 1/1»"
+  ],
+  [
+   171,
+   "page «unstick Về phòng»"
+  ],
+  [
+   171,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 82»"
+  ],
+  [
+   172,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 82»"
+  ],
+  [
+   172,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 82»"
+  ],
+  [
+   172,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   172,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Buổi tối, còn 3 khắc»"
+  ],
+  [
+   173,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   173,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «gió heo may»"
+  ],
+  [
+   174,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   174,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   175,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Ân tình (đêm)0»"
+  ],
+  [
+   175,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Nguy hiểm chung: 82»"
+  ],
+  [
+   175,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   175,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «gió heo may»"
+  ],
+  [
+   176,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Bạc98Sức95/95»"
+  ],
+  [
+   176,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Bạc98Sức95/95»"
+  ],
+  [
+   177,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «1Cung nhân»"
+  ],
+  [
+   177,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tư trang»"
+  ],
+  [
+   177,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hành sự»"
+  ],
+  [
+   178,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «gió heo may»"
+  ],
+  [
+   178,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «gió heo may»"
+  ],
+  [
+   179,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   180,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   180,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hoàng tự trong cung»"
+  ],
+  [
+   180,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tư trang»"
+  ],
+  [
+   181,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Dư đồ»"
+  ],
+  [
+   181,
+   ".mapsc «Nguy hiểm chung: 82»"
+  ],
+  [
+   181,
+   ".mapsc «Nguy hiểm chung: 82»"
+  ],
+  [
+   182,
+   ".mapsc «Danh sách»"
+  ],
+  [
+   183,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Xin yết kiến Mong manh3 khắc»"
+  ],
+  [
+   183,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Xin bái kiến Mong manh3 khắc»"
+  ],
+  [
+   184,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Xin bái kiến Mong manh3 khắc»"
+  ],
+  [
+   184,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Xin yết kiến Mong manh3 khắc»"
+  ],
+  [
+   184,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Xin yết kiến Mong manh3 khắc»"
+  ],
+  [
+   184,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Xin bái kiến Mong manh3 khắc»"
+  ],
+  [
+   185,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Xin bái kiến Khó lường3 khắc»"
+  ],
+  [
+   185,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Xin bái kiến Mong manh3 khắc»"
+  ],
+  [
+   185,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Xin yết kiến Mong manh3 khắc»"
+  ],
+  [
+   185,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Xin bái kiến Khó lường3 khắc»"
+  ],
+  [
+   186,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Lẻn vào Khó lường3 khắc · bắt: Danh -19»"
+  ],
+  [
+   186,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   186,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã q»"
+  ],
+  [
+   186,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tin báo»"
+  ],
+  [
+   187,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Bạc98Sức95/95»"
+  ],
+  [
+   187,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Buổi tối, còn 3 khắc»"
+  ],
+  [
+   187,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Sắc42Tài59Tâm cơ30Đức0Danh98Sủng0»"
+  ],
+  [
+   187,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tin báo»"
+  ],
+  [
+   188,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   188,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tư trang»"
+  ],
+  [
+   188,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hành sự»"
+  ],
+  [
+   189,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Sắc42Tài59Tâm cơ30Đức0Danh98Sủng0»"
+  ],
+  [
+   189,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   189,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «gió heo may»"
+  ],
+  [
+   190,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Kế vị»"
+  ],
+  [
+   190,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Con của ta»"
+  ],
+  [
+   191,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hôn sự»"
+  ],
+  [
+   191,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   191,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   192,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Mục lục»"
+  ],
+  [
+   192,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   193,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tin báo»"
+  ],
+  [
+   193,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Sổ ghi»"
+  ],
+  [
+   193,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tài nghệ»"
+  ],
+  [
+   194,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Về phòng»"
+  ],
+  [
+   194,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «1Cung nhân»"
+  ],
+  [
+   194,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Cung nữ thân tín tam đẳng Bảo ChâuThiện cảm 2»"
+  ],
+  [
+   195,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hòa Chi»"
+  ],
+  [
+   195,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Tư trang»"
+  ],
+  [
+   196,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Về phòng»"
+  ],
+  [
+   196,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   196,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   197,
+   "page «Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người.» «Cung nữ thân tín tam đẳngBảo Châu»"
+  ],
+  [
+   198,
+   ".dlg «Kính sự phòng» «Chặn ngự giáMong manhTốnkhôngĐượcdựa vào nhan sắc,»"
+  ],
+  [
+   199,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   199,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   201,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   202,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   204,
+   ".dlg «Mục lục» «Lui»"
+  ],
+  [
+   206,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   207,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   209,
+   ".dlg «Cung nữ thân tín tam đẳng Bảo Châu» «Lui»"
+  ],
+  [
+   210,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   212,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   214,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   215,
+   ".dlg «Vũ» «Lui»"
+  ],
+  [
+   217,
+   ".dlg «Hoàng thượng» «Lui»"
+  ],
+  [
+   218,
+   ".dlg «Chương 4 · Mật lệnh cố quốc» «Đi làm: Học một môn tài nghệTốnkhôngĐượctới Tài ng»"
+  ],
+  [
+   219,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ]
+ ],
+ "_ckAt": 1795619706627,
+ "_ckB": 438,
+ "dumps": [
+  "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/stuck-1-dump.json",
+  "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/stuck-2-dump.json",
+  "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/stuck-3-dump.json",
+  "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/loop-1-dump.json",
+  "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/loop-2-dump.json",
+  "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/loop-3-dump.json",
+  "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/loop-4-dump.json",
+  "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/loop-5-dump.json",
+  "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/stuck-4-dump.json",
+  "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/stuck-5-dump.json",
+  "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/stuck-6-dump.json",
+  "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/stuck-7-dump.json",
+  "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/stuck-8-dump.json",
+  "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/stuck-9-dump.json",
+  "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/stuck-10-dump.json",
+  "/home/user/wt/rt-out/shots-nc-nc_gian-greedy-1/stuck-11-dump.json"
+ ],
+ "_loopAt": 1795619844097,
+ "_started": true,
+ "rss": [
+  {
+   "buoi": 114,
+   "y": 1,
+   "totalMB": 1933,
+   "rendererMB": 1274
+  },
+  {
+   "buoi": 119,
+   "y": 1,
+   "totalMB": 2325,
+   "rendererMB": 1653
+  },
+  {
+   "buoi": 124,
+   "y": 2,
+   "totalMB": 2279,
+   "rendererMB": 1617
+  },
+  {
+   "buoi": 129,
+   "y": 2,
+   "totalMB": 2400,
+   "rendererMB": 1728
+  },
+  {
+   "buoi": 134,
+   "y": 2,
+   "totalMB": 2422,
+   "rendererMB": 1730
+  },
+  {
+   "buoi": 139,
+   "y": 2,
+   "totalMB": 2445,
+   "rendererMB": 1746
+  },
+  {
+   "buoi": 144,
+   "y": 2,
+   "totalMB": 2613,
+   "rendererMB": 1896
+  },
+  {
+   "buoi": 149,
+   "y": 2,
+   "totalMB": 2660,
+   "rendererMB": 1964
+  },
+  {
+   "buoi": 154,
+   "y": 2,
+   "totalMB": 2701,
+   "rendererMB": 2006
+  },
+  {
+   "buoi": 159,
+   "y": 2,
+   "totalMB": 2756,
+   "rendererMB": 2061
+  },
+  {
+   "buoi": 164,
+   "y": 2,
+   "totalMB": 2717,
+   "rendererMB": 2022
+  },
+  {
+   "buoi": 169,
+   "y": 2,
+   "totalMB": 2401,
+   "rendererMB": 1680
+  },
+  {
+   "buoi": 174,
+   "y": 2,
+   "totalMB": 2768,
+   "rendererMB": 2060
+  },
+  {
+   "buoi": 179,
+   "y": 2,
+   "totalMB": 2845,
+   "rendererMB": 2137
+  },
+  {
+   "buoi": 184,
+   "y": 2,
+   "totalMB": 2890,
+   "rendererMB": 2189
+  },
+  {
+   "buoi": 189,
+   "y": 2,
+   "totalMB": 2910,
+   "rendererMB": 2213
+  },
+  {
+   "buoi": 194,
+   "y": 2,
+   "totalMB": 2912,
+   "rendererMB": 2219
+  },
+  {
+   "buoi": 199,
+   "y": 2,
+   "totalMB": 3001,
+   "rendererMB": 2318
+  },
+  {
+   "buoi": 204,
+   "y": 2,
+   "totalMB": 3057,
+   "rendererMB": 2379
+  },
+  {
+   "buoi": 209,
+   "y": 2,
+   "totalMB": 3164,
+   "rendererMB": 2459
+  },
+  {
+   "buoi": 214,
+   "y": 2,
+   "totalMB": 3146,
+   "rendererMB": 2447
+  },
+  {
+   "buoi": 219,
+   "y": 2,
+   "totalMB": 3254,
+   "rendererMB": 2533
+  },
+  {
+   "buoi": 224,
+   "y": 2,
+   "totalMB": 3425,
+   "rendererMB": 2707
+  },
+  {
+   "buoi": 226,
+   "y": 2,
+   "totalMB": 3262,
+   "rendererMB": 2554
+  },
+  {
+   "buoi": 226,
+   "y": 2,
+   "totalMB": 2447,
+   "rendererMB": 1740
+  },
+  {
+   "buoi": 226,
+   "y": 2,
+   "totalMB": 2145,
+   "rendererMB": 1435
+  },
+  {
+   "buoi": 226,
+   "y": 2,
+   "totalMB": 2153,
+   "rendererMB": 1443
+  },
+  {
+   "buoi": 226,
+   "y": 2,
+   "totalMB": 2156,
+   "rendererMB": 1447
+  },
+  {
+   "buoi": 231,
+   "y": 2,
+   "totalMB": 2596,
+   "rendererMB": 1877
+  },
+  {
+   "buoi": 236,
+   "y": 2,
+   "totalMB": 2768,
+   "rendererMB": 2030
+  },
+  {
+   "buoi": 241,
+   "y": 2,
+   "totalMB": 2782,
+   "rendererMB": 2046
+  },
+  {
+   "buoi": 246,
+   "y": 2,
+   "totalMB": 2810,
+   "rendererMB": 2081
+  },
+  {
+   "buoi": 248,
+   "y": 2,
+   "totalMB": 2752,
+   "rendererMB": 2012
+  },
+  {
+   "buoi": 253,
+   "y": 2,
+   "totalMB": 2791,
+   "rendererMB": 2059
+  },
+  {
+   "buoi": 258,
+   "y": 2,
+   "totalMB": 2801,
+   "rendererMB": 2070
+  },
+  {
+   "buoi": 263,
+   "y": 2,
+   "totalMB": 2802,
+   "rendererMB": 2098
+  },
+  {
+   "buoi": 268,
+   "y": 2,
+   "totalMB": 2903,
+   "rendererMB": 2187
+  },
+  {
+   "buoi": 273,
+   "y": 2,
+   "totalMB": 2314,
+   "rendererMB": 1599
+  },
+  {
+   "buoi": 278,
+   "y": 3,
+   "totalMB": 2530,
+   "rendererMB": 1798
+  },
+  {
+   "buoi": 283,
+   "y": 3,
+   "totalMB": 2575,
+   "rendererMB": 1840
+  },
+  {
+   "buoi": 283,
+   "y": 3,
+   "totalMB": 2222,
+   "rendererMB": 1494
+  },
+  {
+   "buoi": 283,
+   "y": 3,
+   "totalMB": 2088,
+   "rendererMB": 1362
+  },
+  {
+   "buoi": 283,
+   "y": 3,
+   "totalMB": 1804,
+   "rendererMB": 1074
+  },
+  {
+   "buoi": 283,
+   "y": 3,
+   "totalMB": 1819,
+   "rendererMB": 1089
+  },
+  {
+   "buoi": 284,
+   "y": 2,
+   "totalMB": 1839,
+   "rendererMB": 1140
+  },
+  {
+   "buoi": 289,
+   "y": 3,
+   "totalMB": 2598,
+   "rendererMB": 1862
+  },
+  {
+   "buoi": 292,
+   "y": 3,
+   "totalMB": 2363,
+   "rendererMB": 1625
+  },
+  {
+   "buoi": 297,
+   "y": 3,
+   "totalMB": 2531,
+   "rendererMB": 1783
+  },
+  {
+   "buoi": 302,
+   "y": 3,
+   "totalMB": 2423,
+   "rendererMB": 1699
+  },
+  {
+   "buoi": 307,
+   "y": 3,
+   "totalMB": 2501,
+   "rendererMB": 1780
+  },
+  {
+   "buoi": 312,
+   "y": 3,
+   "totalMB": 2521,
+   "rendererMB": 1799
+  },
+  {
+   "buoi": 316,
+   "y": 3,
+   "totalMB": 2596,
+   "rendererMB": 1884
+  },
+  {
+   "buoi": 316,
+   "y": 3,
+   "totalMB": 2408,
+   "rendererMB": 1716
+  },
+  {
+   "buoi": 316,
+   "y": 3,
+   "totalMB": 2067,
+   "rendererMB": 1370
+  },
+  {
+   "buoi": 316,
+   "y": 3,
+   "totalMB": 2070,
+   "rendererMB": 1371
+  },
+  {
+   "buoi": 316,
+   "y": 3,
+   "totalMB": 2064,
+   "rendererMB": 1371
+  },
+  {
+   "buoi": 321,
+   "y": 3,
+   "totalMB": 2487,
+   "rendererMB": 1753
+  },
+  {
+   "buoi": 325,
+   "y": 3,
+   "totalMB": 2544,
+   "rendererMB": 1813
+  },
+  {
+   "buoi": 326,
+   "y": 3,
+   "totalMB": 1751,
+   "rendererMB": 1126
+  },
+  {
+   "buoi": 330,
+   "y": 3,
+   "totalMB": 2177,
+   "rendererMB": 1496
+  },
+  {
+   "buoi": 335,
+   "y": 3,
+   "totalMB": 2547,
+   "rendererMB": 1785
+  },
+  {
+   "buoi": 340,
+   "y": 3,
+   "totalMB": 2386,
+   "rendererMB": 1706
+  },
+  {
+   "buoi": 345,
+   "y": 3,
+   "totalMB": 2485,
+   "rendererMB": 1805
+  },
+  {
+   "buoi": 348,
+   "y": 3,
+   "totalMB": 1899,
+   "rendererMB": 1230
+  },
+  {
+   "buoi": 353,
+   "y": 3,
+   "totalMB": 2489,
+   "rendererMB": 1793
+  },
+  {
+   "buoi": 358,
+   "y": 3,
+   "totalMB": 2561,
+   "rendererMB": 1871
+  },
+  {
+   "buoi": 358,
+   "y": 3,
+   "totalMB": 2562,
+   "rendererMB": 1880
+  },
+  {
+   "buoi": 358,
+   "y": 3,
+   "totalMB": 2463,
+   "rendererMB": 1781
+  },
+  {
+   "buoi": 358,
+   "y": 3,
+   "totalMB": 2258,
+   "rendererMB": 1576
+  },
+  {
+   "buoi": 358,
+   "y": 3,
+   "totalMB": 2271,
+   "rendererMB": 1589
+  },
+  {
+   "buoi": 358,
+   "y": 3,
+   "totalMB": 2203,
+   "rendererMB": 1576
+  },
+  {
+   "buoi": 363,
+   "y": 3,
+   "totalMB": 2442,
+   "rendererMB": 1728
+  },
+  {
+   "buoi": 366,
+   "y": 3,
+   "totalMB": 2511,
+   "rendererMB": 1816
+  },
+  {
+   "buoi": 366,
+   "y": 3,
+   "totalMB": 1837,
+   "rendererMB": 1133
+  },
+  {
+   "buoi": 366,
+   "y": 3,
+   "totalMB": 1459,
+   "rendererMB": 765
+  },
+  {
+   "buoi": 366,
+   "y": 3,
+   "totalMB": 1466,
+   "rendererMB": 765
+  },
+  {
+   "buoi": 366,
+   "y": 3,
+   "totalMB": 1436,
+   "rendererMB": 730
+  },
+  {
+   "buoi": 371,
+   "y": 3,
+   "totalMB": 2255,
+   "rendererMB": 1567
+  },
+  {
+   "buoi": 376,
+   "y": 3,
+   "totalMB": 2510,
+   "rendererMB": 1808
+  },
+  {
+   "buoi": 380,
+   "y": 3,
+   "totalMB": 2023,
+   "rendererMB": 1279
+  },
+  {
+   "buoi": 385,
+   "y": 3,
+   "totalMB": 2195,
+   "rendererMB": 1504
+  },
+  {
+   "buoi": 387,
+   "y": 3,
+   "totalMB": 2416,
+   "rendererMB": 1710
+  },
+  {
+   "buoi": 387,
+   "y": 3,
+   "totalMB": 1890,
+   "rendererMB": 1196
+  },
+  {
+   "buoi": 387,
+   "y": 3,
+   "totalMB": 1604,
+   "rendererMB": 914
+  },
+  {
+   "buoi": 387,
+   "y": 3,
+   "totalMB": 1605,
+   "rendererMB": 906
+  },
+  {
+   "buoi": 387,
+   "y": 3,
+   "totalMB": 1600,
+   "rendererMB": 904
+  },
+  {
+   "buoi": 392,
+   "y": 3,
+   "totalMB": 2430,
+   "rendererMB": 1716
+  },
+  {
+   "buoi": 396,
+   "y": 3,
+   "totalMB": 2520,
+   "rendererMB": 1804
+  },
+  {
+   "buoi": 396,
+   "y": 3,
+   "totalMB": 1928,
+   "rendererMB": 1209
+  },
+  {
+   "buoi": 396,
+   "y": 3,
+   "totalMB": 1471,
+   "rendererMB": 750
+  },
+  {
+   "buoi": 396,
+   "y": 3,
+   "totalMB": 1500,
+   "rendererMB": 786
+  },
+  {
+   "buoi": 396,
+   "y": 3,
+   "totalMB": 1519,
+   "rendererMB": 803
+  },
+  {
+   "buoi": 401,
+   "y": 3,
+   "totalMB": 2338,
+   "rendererMB": 1523
+  },
+  {
+   "buoi": 406,
+   "y": 3,
+   "totalMB": 2369,
+   "rendererMB": 1622
+  },
+  {
+   "buoi": 411,
+   "y": 3,
+   "totalMB": 2344,
+   "rendererMB": 1597
+  },
+  {
+   "buoi": 416,
+   "y": 3,
+   "totalMB": 2434,
+   "rendererMB": 1683
+  },
+  {
+   "buoi": 420,
+   "y": 3,
+   "totalMB": 2474,
+   "rendererMB": 1728
+  },
+  {
+   "buoi": 424,
+   "y": 3,
+   "totalMB": 2052,
+   "rendererMB": 1316
+  },
+  {
+   "buoi": 424,
+   "y": 3,
+   "totalMB": 1926,
+   "rendererMB": 1189
+  },
+  {
+   "buoi": 424,
+   "y": 3,
+   "totalMB": 1670,
+   "rendererMB": 933
+  },
+  {
+   "buoi": 424,
+   "y": 3,
+   "totalMB": 1677,
+   "rendererMB": 940
+  },
+  {
+   "buoi": 424,
+   "y": 3,
+   "totalMB": 1680,
+   "rendererMB": 941
+  },
+  {
+   "buoi": 429,
+   "y": 3,
+   "totalMB": 2095,
+   "rendererMB": 1372
+  },
+  {
+   "buoi": 433,
+   "y": 3,
+   "totalMB": 2274,
+   "rendererMB": 1555
+  },
+  {
+   "buoi": 433,
+   "y": 3,
+   "totalMB": 1772,
+   "rendererMB": 1078
+  },
+  {
+   "buoi": 433,
+   "y": 3,
+   "totalMB": 1446,
+   "rendererMB": 763
+  },
+  {
+   "buoi": 438,
+   "y": 3,
+   "totalMB": 1918,
+   "rendererMB": 1223
+  }
+ ],
+ "t": {
+  "total": 220591
+ }
+}
