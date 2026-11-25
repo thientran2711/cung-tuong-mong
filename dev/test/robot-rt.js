@@ -206,6 +206,8 @@ async function play(p) {
       if (!isPage) {
         /* a person closes a utility / notebook dialog (Lịch tháng, Sổ ghi, Tư trang …) after a few acts; any dialog after 20 acts with the clock still (s2d «Lịch tháng» 15 min typing notes) */
         { const n = dlgActs.get(sc.layer + '|' + sc.title) || 0, cl = b.find(close); if (cl && (n >= 4 && UTIL_RE.test(sc.title) || n >= 20)) { R.harness.dlgClose = (R.harness.dlgClose || 0) + 1; return cl } }
+        /* a dialog WITHOUT a close (kit panel with options, e.g. «Tin báo» 70 tin: rows full of tappable names, options «Nghe lệnh / Để sau» at the very bottom): after 8 acts with the clock still, scroll to its end; there take the stay-calm option («Để sau / Đã hiểu / Thôi / Lui») like a person leaving the news for later */
+        { const n = dlgActs.get(sc.layer + '|' + sc.title) || 0; if (n >= 8 && !b.some(close)) { if (sc.scr && sc.scr.left > 4) { R.harness.dlgScroll = (R.harness.dlgScroll || 0) + 1; return { scroll: sc.scr } } const calm = nonExit.find(x => /^(để sau|đã hiểu|thôi|lui|đóng|xong)/i.test(x.t)); if (calm) return calm } }
         const main = nonExit.filter(x => !LOW_RE.test(x.t) && !/^kéo xuống/i.test(x.t));
         if (main.length) return score(main);
         /* a long dialog (Tin báo …): its ✕ / Đóng / «Đã xem hết» may sit below — scroll its own scroller like a person */
