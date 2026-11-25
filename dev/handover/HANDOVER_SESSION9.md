@@ -3383,3 +3383,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (07:01Z) OWNER BUG OD ~07:00Z: focus figure smaller than the stage figure → KK26 (kit part jfocus) fix: copy stage figure size/spot 1:1; d500b6db re-checked. MAMA-ONLY-OWN = session_01V1ZZH4XVMNDnbrc8aMyv9D (sonnet, child of 134, reports to 135).
 - (06:50Z) via 134: OWNER BUGS OD ~06:55Z (Tống ma ma in every Lời dặn → only when her business; worker MAMA-ONLY-OWN session_01V1ZZH4XVMNDnbrc8aMyv9D, reports to 135) + OD ~07:00Z (focus-view figure = stage size/spot 1:1 → KK26 TOP before kit-mg-realtap; needs B KIT OK). Both → MAIN LOOK → GO LC13.
 - (07:06Z) OWNER shared FB post (another game, yêu phi ending) → OD row + PARKING_LOT #14 (sủng phi shield road + abdication ending); 135 told.
+- (06:50Z) SELSCENE-18 LAND READY 9ee4f5bc BIG (co-op sid unique, sid-unique.js) → NEW BIG rv opus session_01V1ZZH1uRsuJLYqG34jcUBM (merge on ee37ab5f → «BIG PASS <sha>»). PARKING #14 yêu phi road (via 134).

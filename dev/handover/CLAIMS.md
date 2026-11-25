@@ -1652,3 +1652,4 @@ B co-op RERUN U2 (real taps, robot-audit-B RERUN LIST) | dev/handover/robot/coop
 B co-op RERUN U3 (real taps, robot-audit-B RERUN LIST) | dev/handover/robot/coop-rerun-U3-* | B | session_01N1tNP64GnUphva1hStHgSV | RUNNING | 25/11 06:15Z |
 B co-op RERUN U3b (real taps, robot-audit-B RERUN LIST) | dev/handover/robot/coop-rerun-U3b-* | B | session_01N1tNP6EaANiCTZTgGFPYfd | RUNNING | 25/11 06:15Z |
 | MAMA-ONLY-OWN (owner bug 25/11 ~06:55Z) | review/mama-only-own | MAIN 134→135 | session_01V1ZZH4XVMNDnbrc8aMyv9D | RUNNING | 25/11 06:45Z |
+selection-scene BIG review | review/selection-scene 9ee4f5bc | session_01V1ZZH1uRsuJLYqG34jcUBM (MAIN 135) | RUNNING | 2026-11-25T06:50Z
