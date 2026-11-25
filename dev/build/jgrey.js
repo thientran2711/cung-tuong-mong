@@ -20,7 +20,22 @@ function kitOffAttr(c){if(!c||!c.off||!c.off.why)return"";const t=c.off.why+(c.o
 function kitTam(standin){return standin?`<span class="ktam" role="note" title="Tranh tạm, sẽ có tranh đúng sau">tạm</span>`:""}
 (function(){const st=document.createElement("style");st.textContent=`
 .ktam{position:absolute;top:6px;right:6px;z-index:5;pointer-events:none;font:600 .68rem/1 var(--body);letter-spacing:.04em;color:#ffe7b0;background:#1a0e08b8;border:1px solid #d2b07188;border-radius:999px;padding:3px 8px}
+.ktam.ktam-tl{right:auto;left:6px}.ktam.ktam-br{top:auto;bottom:6px}.ktam.ktam-bl{top:auto;bottom:6px;right:auto;left:6px}
 `;document.head.appendChild(st)})();
+/* 2b. 'tạm' NEVER COVERS WORDS (owner OD 25/11 ~22:45Z: the chip sat on the stage place name «Khuê phòng»): kitTamFit(root) puts every visible .ktam
+      in the first corner of its picture box (top-right, top-left, bottom-right, bottom-left) where it covers no visible text, button (the stage rail icons too) or name tag;
+      the stage calls it after each paint (renderStage) and on resize. No free corner: it stays top-right (never moved out of its picture). */
+function kitTamFit(root){try{const T=[...(root||document).querySelectorAll(".ktam")].filter(t=>t.offsetParent);if(!T.length)return;
+ const W=[...document.querySelectorAll("h1,h2,h3,button,.rt1,.rmsg,[class*=tag],[class*=name],b,span,small,a,label")].filter(e=>e.offsetParent&&!e.classList.contains("ktam")&&!e.closest(".ktam")&&((e.textContent||"").trim()||e.tagName==="BUTTON")&&getComputedStyle(e).visibility!=="hidden");
+ const hit=(a,e)=>{if(e.contains&&e.contains(a.el))return false;const b=e.getBoundingClientRect();return b.width>0&&b.height>0&&a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top};
+ for(const t of T){const C=["","ktam-tl","ktam-br","ktam-bl"];let ok="";
+  for(const c of C){t.classList.remove("ktam-tl","ktam-br","ktam-bl");if(c)t.classList.add(c);const r=t.getBoundingClientRect();const a={el:t,left:r.left,right:r.right,top:r.top,bottom:r.bottom};
+   if(!W.some(e=>hit(a,e))){ok=c;break}}
+  t.classList.remove("ktam-tl","ktam-br","ktam-bl");if(ok)t.classList.add(ok)}}catch(e){console.error("kitTamFit",e)}}
+window.kitTamFit=kitTamFit;
+(function(){const go=()=>requestAnimationFrame(()=>kitTamFit(document.getElementById("stage")));
+ if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){const x=r0.apply(this,arguments);go();setTimeout(go,400);return x}}
+ addEventListener("resize",go)})();
 /* ONE place that maps an engine need[{t,ok,w?}] (the same shape as the Cần row / data-kneed) to the greyed option:
    the first unmet need becomes the reason chip ("thiếu …"), w (or the item/evidence/rank default) is the "opens again when" line.
    Whole group: item / evidence / rank gated options of the ch70 / evChoice (c6) engine, truth (vu oan), toilette give-back, accuse. */

@@ -242,8 +242,11 @@ wkrTile=function(kind,r,l){const gr=rcpHasR(S,kind,r.id),ok=gr||r.lv<=l,a=ARTS.f
 /* the palace teacher's fee: a share of the learner's monthly bổng (same for every consort: j85 npcStudy reads tchFeeOf) */
 function tchFeeOf(p){return Math.max(BAL.rcp.tFeeMin,Math.round((BAL.pay?BAL.pay[Math.min(7,rkOf(p)|0)]:40)*BAL.rcp.tFeeK))}
 function rcpFeeNq(){return tchFeeOf(S)}
-function rcpTchName(k){return k==="cam"||k==="vu"?"Nhạc sư Giáo phường":k==="theu"||k==="nau"?"Ma ma Thượng công cục":"Nữ quan Thượng nghi cục"}
-function rcpTchCons(k){const l=S.arts[k]||0;return liveRivals(true).filter(v=>v.alive&&!v.out&&!v.confined&&v.arts&&((v.arts[k]||0)>l||(v.arts[k]||0)>=4)&&(rel(v,S)||0)>=BAL.rcp.tRel)
+/* the teacher's name and who may teach come from the ONE place word table (jroad8 placeW; review/ob-ngoaicung: at home no palace office, no consort) */
+function rcpTchName(k){const w=k==="cam"||k==="vu"?"t_mus":k==="theu"||k==="nau"?"t_craft":"t_rite";return typeof placeW==="function"&&placeW(w)||(w==="t_mus"?"Nhạc sư Giáo phường":w==="t_craft"?"Ma ma Thượng công cục":"Nữ quan Thượng nghi cục")}
+function rcpFeeW(){return typeof placeW==="function"&&placeW("t_fee")||"nữ quan"}
+function rcpConsTeach(){return typeof placeW!=="function"||placeW("tch_cons")!=="0"}
+function rcpTchCons(k){const l=S.arts[k]||0;if(!rcpConsTeach())return[];return liveRivals(true).filter(v=>v.alive&&!v.out&&!v.confined&&v.arts&&((v.arts[k]||0)>l||(v.arts[k]||0)>=4)&&(rel(v,S)||0)>=BAL.rcp.tRel)
  .sort((a,b)=>(b.arts[k]||0)-(a.arts[k]||0)).slice(0,3)}
 /* j23 calls these: the fee shown / charged, and the favour paid once the session starts */
 tchFee=function(k){return RCPT.k===k&&rcpTchV()?0:rcpFeeNq()};
@@ -251,9 +254,9 @@ tchPaid=function(k){try{const v=RCPT.k===k?rcpTchV():null;if(v){relAdd(S,v,-BAL.
 function rcpTchAsk(k,then){const a=ARTS.find(x=>x.k===k),fee=rcpFeeNq(),O=[];const t2=whyTime(2);
  O.push(kitOffBac({n:rcpTchName(k),fx:{},x:`tốn: 2 khắc, Sức -${BAL.artLes.tch}, Bạc -${fee} · thành: tiến bộ +2..3, dạy được mọi lối`,go:()=>{RCPT.k=k;RCPT.t="nq";then()}},fee));
  for(const v of rcpTchCons(k))O.push({n:`${rkName(v)} ${v.name} (${a.n} bậc ${v.arts[k]})`,fx:{},x:`tốn: 2 khắc, Sức -${BAL.artLes.tch} · thành: tiến bộ +2..3, dạy các lối nàng ta biết · kèm: nợ nàng ta một ân, thiện cảm -${BAL.rcp.tFavor}, ${BAL.gift.askW} tuần quà tặng nàng ta không thành chân tình`,go:()=>{RCPT.k=k;RCPT.t=String(v.id);then()}});
- if(O.length===0){log(`Chưa có ai dạy: nữ quan cần ${fee} bạc, chưa có phi tần giỏi ${a.n} quý ta (thiện cảm ${BAL.rcp.tRel}).`);return}
+ if(O.length===0){log(`Chưa có ai dạy: ${rcpFeeW()} cần ${fee} bạc${rcpConsTeach()?`, chưa có phi tần giỏi ${a.n} quý ta (thiện cảm ${BAL.rcp.tRel})`:""}.`);return}
  O.push({n:"Thôi",fx:{}});
- Q.push({act:1,t:`Học ${a.n}: ai dạy?`,who:pMe(),h:`<p>Thầy dạy giỏi hơn tự học, và chỉ thầy mới mở được lối mới (tự học chỉ lên bậc).</p><p class="past">${rcpTchName(k)} nhận bạc theo bổng của ta (${fee} bạc${S.bac<fee?", ta chưa đủ":""}). Phi tần giỏi nghề dạy không lấy bạc, nhưng ta nợ nàng ta một ân.${t2?" "+t2:""}</p>`,opts:O});showModal();render()}
+ Q.push({act:1,t:`Học ${a.n}: ai dạy?`,who:pMe(),h:`<p>Thầy dạy giỏi hơn tự học, và chỉ thầy mới mở được lối mới (tự học chỉ lên bậc).</p><p class="past">${rcpTchName(k)} nhận bạc theo bổng của ta (${fee} bạc${S.bac<fee?", ta chưa đủ":""}).${rcpConsTeach()?" Phi tần giỏi nghề dạy không lấy bạc, nhưng ta nợ nàng ta một ân.":""}${t2?" "+t2:""}</p>`,opts:O});showModal();render()}
 (function(){const l0=lessonMode;lessonMode=function(k,mode){if(mode!=="teacher"||RCPT.go||S.mg||Q.length||(S.arts[k]||0)>=5)return l0.apply(this,arguments);
  RCPT.k=null;RCPT.t=null;rcpTchAsk(k,()=>{RCPT.go=1;try{lessonMode(k,"teacher")}finally{RCPT.go=0}})}})();
 (function(){const o0=wkLessonOK;wkLessonOK=function(k,mode){if(mode==="teacher"&&!RCPT.go&&RCPT.k!==k){if(!S||S.dead||Q.length||S.mg||(S.arts[k]||0)>=5)return false;return can(2)&&S.suc>=10}return o0.apply(this,arguments)}})();
@@ -269,7 +272,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
  if(b.dataset.rcpmt)rcpMaster(b.dataset.rcpmt);else if(b.dataset.rcpls)rcpListOpen(b.dataset.rcpls);else rcpAskQ(b.dataset.rcpq)},true);
 /* Tài nghệ cards: the teacher button with its real cost, the new-sub-style teacher at bậc 5, the learnt sub-styles */
 (function(){if(typeof ktArtSkills!=="function")return;const s0=ktArtSkills;ktArtSkills=function(){const L=s0.apply(this,arguments);try{const t2=whyTime(2);for(const s of L){if(s.kind!=="art")continue;const k=s.k,l=S.arts[k]||0;
-  s.acts=s.acts.map(h=>/data-mode="teacher"/.test(h)?pbtn(`data-learn="${k}" data-mode="teacher"`,"Học với thầy",`tốn: 2 khắc, Sức -${BAL.artLes.tch}, Bạc -${rcpFeeNq()} (nữ quan) hoặc nợ một ân (phi tần giỏi nghề) · thành: tiến bộ +2..3, luôn hơn tự học 1, mở được lối mới`,t2||(S.suc<BAL.sucNeed.rcp?"Sức dưới "+BAL.sucNeed.rcp:"")):h);
+  s.acts=s.acts.map(h=>/data-mode="teacher"/.test(h)?pbtn(`data-learn="${k}" data-mode="teacher"`,"Học với thầy",`tốn: 2 khắc, Sức -${BAL.artLes.tch}, Bạc -${rcpFeeNq()} (${rcpFeeW()})${rcpConsTeach()?" hoặc nợ một ân (phi tần giỏi nghề)":""} · thành: tiến bộ +2..3, luôn hơn tự học 1, mở được lối mới`,t2||(S.suc<BAL.sucNeed.rcp?"Sức dưới "+BAL.sucNeed.rcp:"")):h);
   if(l>=5&&rcpNewSt(k))s.acts.push(pbtn(`data-rcpmt="${k}"`,"Học lối mới với thầy",`tốn: 2 khắc, Sức -${BAL.artLes.tch}, Bạc -${rcpFeeNq()} hoặc nợ một ân · thành: mở một lối mới, ra một tác phẩm lối ấy`,t2||(S.suc<BAL.sucNeed.rcp?"Sức dưới "+BAL.sucNeed.rcp:"")));
   if(wkKindsOf(k).some(x=>RCP_ST[x]))s.acts.push(pbtn(`data-rcpls="${k}"`,"Các lối, sách phổ",`thành: xem lối đã học, lối chưa học và cách học`,""))}}catch(e){console.error("rcp skills",e)}return L}})();
 function rcpListOpen(k){const a=ARTS.find(x=>x.k===k);const R=[];for(const kind of wkKindsOf(k).filter(x=>RCP_ST[x]))RCP_ST[kind].forEach((s,i)=>{const kn=rcpKnows(S,kind,s[0]);

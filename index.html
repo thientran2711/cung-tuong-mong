@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ.","b":"fa8da73cecdc","h":[{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."}]};
+window.CTM_BI={"s":"5e013076+","t":"2026-11-25T20:28Z","c":"STACK LAND coop-rebirth-stuck: merge 9fea1332 onto SANGBUOI r4 3762da08 (jdayq dqOn + dqNextHeal beside r4 dqNextSync; tests); rebuilt","b":"0aab16c8ef4d","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1586,7 +1586,7 @@ function talk(oi){if(popIdx==null||!S.visit||S.visit.talked===true||S.dead||Q.le
 
 /* arts */
 function addArt(k,g){const a=ARTS.find(x=>x.k===k);if(!a)return;crsPush(S.arts,S.artp,k,g,l=>{const f={[a.st]:BAL.art.stUp};if(BAL.art.danh[l])f.danh=BAL.art.danh[l];apply(f);
-   log(`<span class="g">${a.n} lên bậc ${l} · ${artNm(l)}.</span> ${fmt(f)}${l===3?" Cả cung nghe danh.":l===5?" Tiếng tăm vang khắp kinh thành.":""}`)})}
+   log(`<span class="g">${a.n} lên bậc ${l} · ${artNm(l)}.</span> ${fmt(f)}${l===3?` ${typeof placeW==="function"&&placeW("fame3")||"Cả cung nghe danh."}`:l===5?" Tiếng tăm vang khắp kinh thành.":""}`)})}
 function lesson(k){const l=S.arts[k],cost=typeof tchFee==="function"?tchFee(k):artFee(l);if(!can(2)||artPts(S,k)>=100||S.bac<cost||S.dead||Q.length||S.mg)return;const open=()=>{render();S.mg={k,l};save();resumeMG()};/* KIT §13.9: charge on «Sẵn sàng» */
   const pay={suc:-BAL.artLes.tch,bac:-cost};/* one typed Sức cost for both paths (one-core: no second copy) */if(typeof kgDefer==="function")kgDefer({...pay,khac:2},open);else{apply(pay);spend(2);open()}}
 function resumeMG(){const m=S.mg;if(!m)return;const a=ARTS.find(x=>x.k===m.k);openMG(m.k,m.l,g=>{S.mg=null;log(`Học ${a.n}. Tiến bộ +${g}.`);addArt(m.k,g);render()})}
@@ -45506,8 +45506,8 @@ function k3crewChip(f,name,loy,tip,lab,cls){const n=+loy;return `<button type="b
 function k3crewList(){if(!S)return"";let h="";
  if(typeof isSrv==="function"&&isSrv()){try{srvColleagues().forEach((s,j)=>{const a=S.srv.af[s.sid]|0;let f="";try{f=mdH(pServ(s),"xs")}catch(e){}
    h+=k3crewChip(f,typeof shortN==="function"?shortN(s.name):s.name,a,srkName(s),"Thiện cảm",a>=BAL.srvx.friendAf?"g":a<0?"r":"n").replace('data-k3go="staff"',`data-k3go="staff" data-k3pi="${j}"`)})}catch(e){}return h}
- if(S.maid){let f="";try{f=mdH(pMaid(),"xs")}catch(e){}h+=k3crewChip(f,S.maid.name,S.maid.loyal|0,"Cung nữ thân tín")}
- (S.staff||[]).forEach(s=>{if(!s||s===S.maid)return;let f="";try{f=mdH(pServ(s),"xs")}catch(e){}h+=k3crewChip(f,typeof shortN==="function"?shortN(s.name):s.name,s.loyal|0,s.role==="eunuch"?"Thái giám":"Cung nữ")});
+ if(S.maid){let f="";try{f=mdH(pMaid(),"xs")}catch(e){}h+=k3crewChip(f,S.maid.name,S.maid.loyal|0,typeof kitMaidTitle==="function"?kitMaidTitle():"Cung nữ thân tín")}
+ (S.staff||[]).forEach(s=>{if(!s||s===S.maid)return;let f="";try{f=mdH(pServ(s),"xs")}catch(e){}h+=k3crewChip(f,typeof shortN==="function"?shortN(s.name):s.name,s.loyal|0,(typeof placeW==="function"&&road8()==="kc"&&placeW("sv_"+s.role))||(s.role==="eunuch"?"Thái giám":"Cung nữ"))});
  return h}
 function k3crewN(){return kgfCount("cn")}
 function k3crew(){return kitGroupFold("cn",kgfLab("cn"),kgfCount("cn"),k3crewList())}
@@ -45543,7 +45543,7 @@ function kgfTags(d){try{document.querySelectorAll(".mspot[data-kgft]").forEach(t
  if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{go();setTimeout(go,350)}catch(e){}return r}}})();
 function kgfRail(){try{if(kgfRail.done||typeof kitStageRail!=="object")return;kgfRail.done=1;
  /* one rail item per label of the ONE label table (jroad8 ROAD8_LAB; the kit rail prints a fixed label): it shows on the road whose word it is */
- ["cn","ct"].forEach((k,o)=>{const T0=window.ROAD8_LAB||{"":{}};const labs=[...new Set(Object.keys(T0).map(r=>(T0[r]||{})[k]||(T0[""]||{})[k]||kgfLab(k)))];
+ ["cn","ct"].forEach((k,o)=>{const T0=window.ROAD8_LAB||{"":{}};const labs=[...new Set(Object.keys(T0).map(r=>typeof placeW==="function"?placeW(k,r):(T0[r]||{})[k]||(T0[""]||{})[k]||kgfLab(k)))];
   labs.forEach((lab,j)=>kitStageRail.add({id:"kgf-"+k+(j?"-"+j:""),order:61+o,label:lab,title:lab+" · chạm để mở danh sách",count:()=>kgfCount(k),active:()=>window.__kgfOpen===k,when:()=>kgfPhoneMap()&&kgfLab(k)===lab&&kgfCount(k)>0,onTap:()=>{window.__kgfOpen=window.__kgfOpen===k?null:k;const R=$$("kshR");if(R)R.dataset.full="";k3Stage();kgfDrop()}}))})}catch(e){}}
 /* a tap on a person IN the open fold goes to that person's card: the fold shuts first (no repaint), so the tab click it sends is not taken as a «tap outside» (maid-8tabs:
    the Cung nhân / Đồng liêu chips and the court rows — Hoàng hậu, her chủ — only closed the fold) */
@@ -54491,9 +54491,12 @@ function giftArt(e){try{const a=typeof itemArt==="function"?itemArt(e&&e.wk?e:e&
 function giftName(e){if(!e)return"";if(e.wk)return e.wk.n;return itm(e.k).n}
 function giftE(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 /* every possible recipient: [group, id, target, label]; groups: ct Chí tôn · pt Phi tần · nn Nam nhân · cn Cung nhân */
-function giftPeople(e){const L=[];L.push(["ct","emp","emp","Hoàng thượng"]);if(!S.thDead)L.push(["ct","th","th","Thái hậu"]);
+function giftPeople(e){const L=[];
+ /* at home before the palace (review/ob-ngoaicung, law 6): the emperor, Thái hậu and the consorts are out of her reach; her maid keeps her own title */
+ if(typeof road8==="function"&&road8()==="kc"){if(e&&e.wk&&S.maid)L.push(["cn","maid","maid",`${S.maid.name} (${kitMaidTitle(null,1)})`]);return L}
+ L.push(["ct","emp","emp","Hoàng thượng"]);if(!S.thDead)L.push(["ct","th","th","Thái hậu"]);
  for(const v of liveRivals(true)){const nm=typeof kitName==="function"?giftPlain(kitName(v)):`${rkName(v)} ${v.name}`;L.push([v.queen?"ct":"pt",String(v.id),v,nm])}
- if(e&&e.wk&&S.maid)L.push(["cn","maid","maid",`${S.maid.name} (cung nữ thân tín)`]);return L}
+ if(e&&e.wk&&S.maid)L.push(["cn","maid","maid",`${S.maid.name} (${typeof kitMaidTitle==="function"?kitMaidTitle(null,1):"cung nữ thân tín"})`]);return L}
 function giftPlain(h){return String(h||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim()}
 /* what giving THIS item to THIS person does: {ok, why, x (kit line), v (value, for sorting)} */
 function giftEval(e,t){const pre="tốn: 2 khắc";
@@ -54559,7 +54562,7 @@ function giftDecorate(){const M=$("modal");const m=Q[0];const gix=giftIxOf(m);if
   if(o.lock){b.disabled=true;b.classList.add("kgiftno")}const c=cnt[b.dataset.kgg]||(cnt[b.dataset.kgg]=[0,0]);c[1]++;if(!o.lock)c[0]++});
  const box=M.querySelector(".opts");if(box&&!M.querySelector(".kgifttabs")){const tabs=GIFT_TABS.filter(([k])=>cnt[k]);
   if(!tabs.some(([k])=>k===GIFT_TAB))GIFT_TAB=(tabs.find(([k])=>cnt[k][0])||tabs[0]||[])[0];
-  if(typeof kitTabRowHTML==="function"&&tabs.length>1)box.insertAdjacentHTML("beforebegin",`<div class="pctabs kcattabs kgifttabs" role="tablist">${kitTabRowHTML(tabs.map(([k,l])=>({k,label:l,n:`${cnt[k][0]}/${cnt[k][1]}`,tip:`tặng được ${cnt[k][0]} trên ${cnt[k][1]} người`})),GIFT_TAB,"data-kgtab")}</div>`);
+  if(typeof kitTabRowHTML==="function"&&tabs.length>1)box.insertAdjacentHTML("beforebegin",`<div class="pctabs kcattabs kgifttabs" role="tablist">${kitTabRowHTML(tabs.map(([k,l])=>({k,label:(typeof placeW==="function"&&road8()==="kc"&&(k==="ct"||k==="cn")&&placeW(k))||l,n:`${cnt[k][0]}/${cnt[k][1]}`,tip:`tặng được ${cnt[k][0]} trên ${cnt[k][1]} người`})),GIFT_TAB,"data-kgtab")}</div>`);
   }
  /* the sub-tab filter runs on EVERY draw (a re-layout of the options — jopic / kitDlgFit — made new buttons that never got filtered: Chí tôn showed the whole harem) */
  if(M.querySelector(".kgifttabs"))giftFilter(M);
@@ -69682,8 +69685,11 @@ wkrTile=function(kind,r,l){const gr=rcpHasR(S,kind,r.id),ok=gr||r.lv<=l,a=ARTS.f
 /* the palace teacher's fee: a share of the learner's monthly bổng (same for every consort: j85 npcStudy reads tchFeeOf) */
 function tchFeeOf(p){return Math.max(BAL.rcp.tFeeMin,Math.round((BAL.pay?BAL.pay[Math.min(7,rkOf(p)|0)]:40)*BAL.rcp.tFeeK))}
 function rcpFeeNq(){return tchFeeOf(S)}
-function rcpTchName(k){return k==="cam"||k==="vu"?"Nhạc sư Giáo phường":k==="theu"||k==="nau"?"Ma ma Thượng công cục":"Nữ quan Thượng nghi cục"}
-function rcpTchCons(k){const l=S.arts[k]||0;return liveRivals(true).filter(v=>v.alive&&!v.out&&!v.confined&&v.arts&&((v.arts[k]||0)>l||(v.arts[k]||0)>=4)&&(rel(v,S)||0)>=BAL.rcp.tRel)
+/* the teacher's name and who may teach come from the ONE place word table (jroad8 placeW; review/ob-ngoaicung: at home no palace office, no consort) */
+function rcpTchName(k){const w=k==="cam"||k==="vu"?"t_mus":k==="theu"||k==="nau"?"t_craft":"t_rite";return typeof placeW==="function"&&placeW(w)||(w==="t_mus"?"Nhạc sư Giáo phường":w==="t_craft"?"Ma ma Thượng công cục":"Nữ quan Thượng nghi cục")}
+function rcpFeeW(){return typeof placeW==="function"&&placeW("t_fee")||"nữ quan"}
+function rcpConsTeach(){return typeof placeW!=="function"||placeW("tch_cons")!=="0"}
+function rcpTchCons(k){const l=S.arts[k]||0;if(!rcpConsTeach())return[];return liveRivals(true).filter(v=>v.alive&&!v.out&&!v.confined&&v.arts&&((v.arts[k]||0)>l||(v.arts[k]||0)>=4)&&(rel(v,S)||0)>=BAL.rcp.tRel)
  .sort((a,b)=>(b.arts[k]||0)-(a.arts[k]||0)).slice(0,3)}
 /* j23 calls these: the fee shown / charged, and the favour paid once the session starts */
 tchFee=function(k){return RCPT.k===k&&rcpTchV()?0:rcpFeeNq()};
@@ -69691,9 +69697,9 @@ tchPaid=function(k){try{const v=RCPT.k===k?rcpTchV():null;if(v){relAdd(S,v,-BAL.
 function rcpTchAsk(k,then){const a=ARTS.find(x=>x.k===k),fee=rcpFeeNq(),O=[];const t2=whyTime(2);
  O.push(kitOffBac({n:rcpTchName(k),fx:{},x:`tốn: 2 khắc, Sức -${BAL.artLes.tch}, Bạc -${fee} · thành: tiến bộ +2..3, dạy được mọi lối`,go:()=>{RCPT.k=k;RCPT.t="nq";then()}},fee));
  for(const v of rcpTchCons(k))O.push({n:`${rkName(v)} ${v.name} (${a.n} bậc ${v.arts[k]})`,fx:{},x:`tốn: 2 khắc, Sức -${BAL.artLes.tch} · thành: tiến bộ +2..3, dạy các lối nàng ta biết · kèm: nợ nàng ta một ân, thiện cảm -${BAL.rcp.tFavor}, ${BAL.gift.askW} tuần quà tặng nàng ta không thành chân tình`,go:()=>{RCPT.k=k;RCPT.t=String(v.id);then()}});
- if(O.length===0){log(`Chưa có ai dạy: nữ quan cần ${fee} bạc, chưa có phi tần giỏi ${a.n} quý ta (thiện cảm ${BAL.rcp.tRel}).`);return}
+ if(O.length===0){log(`Chưa có ai dạy: ${rcpFeeW()} cần ${fee} bạc${rcpConsTeach()?`, chưa có phi tần giỏi ${a.n} quý ta (thiện cảm ${BAL.rcp.tRel})`:""}.`);return}
  O.push({n:"Thôi",fx:{}});
- Q.push({act:1,t:`Học ${a.n}: ai dạy?`,who:pMe(),h:`<p>Thầy dạy giỏi hơn tự học, và chỉ thầy mới mở được lối mới (tự học chỉ lên bậc).</p><p class="past">${rcpTchName(k)} nhận bạc theo bổng của ta (${fee} bạc${S.bac<fee?", ta chưa đủ":""}). Phi tần giỏi nghề dạy không lấy bạc, nhưng ta nợ nàng ta một ân.${t2?" "+t2:""}</p>`,opts:O});showModal();render()}
+ Q.push({act:1,t:`Học ${a.n}: ai dạy?`,who:pMe(),h:`<p>Thầy dạy giỏi hơn tự học, và chỉ thầy mới mở được lối mới (tự học chỉ lên bậc).</p><p class="past">${rcpTchName(k)} nhận bạc theo bổng của ta (${fee} bạc${S.bac<fee?", ta chưa đủ":""}).${rcpConsTeach()?" Phi tần giỏi nghề dạy không lấy bạc, nhưng ta nợ nàng ta một ân.":""}${t2?" "+t2:""}</p>`,opts:O});showModal();render()}
 (function(){const l0=lessonMode;lessonMode=function(k,mode){if(mode!=="teacher"||RCPT.go||S.mg||Q.length||(S.arts[k]||0)>=5)return l0.apply(this,arguments);
  RCPT.k=null;RCPT.t=null;rcpTchAsk(k,()=>{RCPT.go=1;try{lessonMode(k,"teacher")}finally{RCPT.go=0}})}})();
 (function(){const o0=wkLessonOK;wkLessonOK=function(k,mode){if(mode==="teacher"&&!RCPT.go&&RCPT.k!==k){if(!S||S.dead||Q.length||S.mg||(S.arts[k]||0)>=5)return false;return can(2)&&S.suc>=10}return o0.apply(this,arguments)}})();
@@ -69709,7 +69715,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
  if(b.dataset.rcpmt)rcpMaster(b.dataset.rcpmt);else if(b.dataset.rcpls)rcpListOpen(b.dataset.rcpls);else rcpAskQ(b.dataset.rcpq)},true);
 /* Tài nghệ cards: the teacher button with its real cost, the new-sub-style teacher at bậc 5, the learnt sub-styles */
 (function(){if(typeof ktArtSkills!=="function")return;const s0=ktArtSkills;ktArtSkills=function(){const L=s0.apply(this,arguments);try{const t2=whyTime(2);for(const s of L){if(s.kind!=="art")continue;const k=s.k,l=S.arts[k]||0;
-  s.acts=s.acts.map(h=>/data-mode="teacher"/.test(h)?pbtn(`data-learn="${k}" data-mode="teacher"`,"Học với thầy",`tốn: 2 khắc, Sức -${BAL.artLes.tch}, Bạc -${rcpFeeNq()} (nữ quan) hoặc nợ một ân (phi tần giỏi nghề) · thành: tiến bộ +2..3, luôn hơn tự học 1, mở được lối mới`,t2||(S.suc<BAL.sucNeed.rcp?"Sức dưới "+BAL.sucNeed.rcp:"")):h);
+  s.acts=s.acts.map(h=>/data-mode="teacher"/.test(h)?pbtn(`data-learn="${k}" data-mode="teacher"`,"Học với thầy",`tốn: 2 khắc, Sức -${BAL.artLes.tch}, Bạc -${rcpFeeNq()} (${rcpFeeW()})${rcpConsTeach()?" hoặc nợ một ân (phi tần giỏi nghề)":""} · thành: tiến bộ +2..3, luôn hơn tự học 1, mở được lối mới`,t2||(S.suc<BAL.sucNeed.rcp?"Sức dưới "+BAL.sucNeed.rcp:"")):h);
   if(l>=5&&rcpNewSt(k))s.acts.push(pbtn(`data-rcpmt="${k}"`,"Học lối mới với thầy",`tốn: 2 khắc, Sức -${BAL.artLes.tch}, Bạc -${rcpFeeNq()} hoặc nợ một ân · thành: mở một lối mới, ra một tác phẩm lối ấy`,t2||(S.suc<BAL.sucNeed.rcp?"Sức dưới "+BAL.sucNeed.rcp:"")));
   if(wkKindsOf(k).some(x=>RCP_ST[x]))s.acts.push(pbtn(`data-rcpls="${k}"`,"Các lối, sách phổ",`thành: xem lối đã học, lối chưa học và cách học`,""))}}catch(e){console.error("rcp skills",e)}return L}})();
 function rcpListOpen(k){const a=ARTS.find(x=>x.k===k);const R=[];for(const kind of wkKindsOf(k).filter(x=>RCP_ST[x]))RCP_ST[kind].forEach((s,i)=>{const kn=rcpKnows(S,kind,s[0]);
@@ -75677,7 +75683,7 @@ function lockCyc(id,re){const p0=PEND[id];if(!p0)return;PEND[id]=function(){cons
 lockCyc("ksp",/^Tắm gội chờ giá/);lockCyc("empnight",/^Thắp đèn hầu rượu/);
 const fl0=flip;flip=function(){const r=fl0.apply(this,arguments);try{if(!S||S.dead)return r;
   const d=S.nightWhy;if(d&&d.wk===wk()&&Array.isArray(d.rows))for(const row of d.rows){const p=row.id==="me"?S:(rivals||[]).find(v=>v.id===row.id);if(p&&cyTray(p)&&!(row.reasons||[]).some(x=>x.k==="cyc"))(row.reasons=row.reasons||[]).push({k:"cyc",t:"đang kỳ nguyệt sự",pub:p===S})}
-  if(typeof isSrv==="function"&&isSrv())return r;const c=cyb();
+  if(typeof isSrv==="function"&&isSrv())return r;if(typeof isKc==="function"&&isKc())return r;/* at home before the palace: no Kính sự phòng, no thẻ bài (review/ob-ngoaicung) */const c=cyb();
   if(cycOn(S)&&c.nt!==wk()){c.nt=wk();const k=c.rk===wk()?c.rv:"";const ld=cyLdDay()!==undefined;
    log(k==="som"||k==="giau"?"Kỳ nguyệt sự đã đến, mà sổ Kính sự phòng ghi khác: thẻ bài của ngươi vẫn nằm trên khay.":ld?`Kỳ nguyệt sự đã đến (${dName(cyDaysM(S,cyCur()))}): những đêm ấy Kính sự phòng tạm cất thẻ bài của ngươi.`:"Kỳ nguyệt sự đã đến: tuần này Kính sự phòng tạm cất thẻ bài của ngươi.")}
   else if(cyPreg(S)&&S.pregUnk&&(S.tuan||0)===cyBase(S).t&&cycleLate(S)>=1&&c.lt!==wk()){c.lt=wk();log("Tuần này đáng lẽ tới kỳ nguyệt sự, mà chưa thấy.")}
@@ -75688,7 +75694,7 @@ window.cyPhase=cyPhase;
 const cc0=conceiveCh;conceiveCh=function(p){const c=cc0.apply(this,arguments);try{const h=cyPhase(p||S),F=B().fert||{};if(h&&F[h]!=null)return Math.round(c*F[h])}catch(e){}return c};
 /* a tryst / affair (trystCh, jbal): the BAL.trystC floor/cap bound the chance BEFORE the cycle factor, so her cycle tuần stays near nil and the peak still rises */
 trystCh=function(p){p=p||S;const T=BAL.trystC,v=cl_(cc0(p),T[0],T[1]);try{const h=cyPhase(p),F=B().fert||{};if(h&&F[h]!=null)return Math.min(T[1],Math.round(v*F[h]))}catch(e){}return v};
-const flF=flip;flip=function(){const r=flF.apply(this,arguments);try{if(!S||S.dead||(typeof isSrv==="function"&&isSrv()))return r;const c=cyb();
+const flF=flip;flip=function(){const r=flF.apply(this,arguments);try{if(!S||S.dead||(typeof isSrv==="function"&&isSrv())||(typeof isKc==="function"&&isKc()))return r;const c=cyb();
   if(!S.preg&&cyPhase(S)==="peak"&&c.ft!==wk()){c.ft=wk();let w="";try{w=chanceLvl(conceiveCh(S))}catch(e){}log(`Ma ma dặn nhỏ: qua kỳ nguyệt sự chừng mươi ngày, tuần này là lúc dễ đậu thai nhất${w?` (có thai mỗi lần thị tẩm: ${w})`:""}.`)}
  }catch(e){console.error(e)}return r};
 /* Tranh sủng / Chặn ngự giá deck cards (j75 getters): closed with the reason during her cycle */
@@ -75918,18 +75924,18 @@ Object.defineProperty(BAL.rcp,"tFavor",{configurable:true,enumerable:true,get(){
 const TDV={pend:null,tch:null,go:0,fin:0,hit:null,raw:null,skip:0};window.TDV=TDV;
 /* Tứ đức teacher fee: 0 while a consort teaches this lesson */
 (function(){const c0=virCost;virCost=function(l,p){if(TDV.tch&&(!p||p===S)&&(TDV.go||TDV.fin||(window.TDS&&TDS.busy)))return 0;return c0.apply(this,arguments)}})();
-function tdsTchCons(k){const l=virLv(S,k);return liveRivals(true).filter(v=>v.alive&&!v.out&&!v.confined&&v.vir&&(((v.vir[k]||0)>l)||(v.vir[k]||0)>=4)&&(rel(v,S)||0)>=BAL.rcp.tRel)
+function tdsTchCons(k){const l=virLv(S,k);if(typeof rcpConsTeach==="function"&&!rcpConsTeach())return[];return liveRivals(true).filter(v=>v.alive&&!v.out&&!v.confined&&v.vir&&(((v.vir[k]||0)>l)||(v.vir[k]||0)>=4)&&(rel(v,S)||0)>=BAL.rcp.tRel)
  .sort((a,b)=>(b.vir[k]||0)-(a.vir[k]||0)).slice(0,3)}
 function tdsOK(k,mode){if(!S||S.dead||Q.length||S.mg)return false;const l=virLv(S,k);if(mode==="prac")return l>=5&&can(BAL.tds.pracK)&&S.suc>=BAL.tds.pracMin;if(l>=5)return false;
  if(mode==="self")return can(BAL.td.k)&&S.suc>=BAL.td.selfMin;return can(BAL.td.k)&&S.suc>=BAL.td.mMin}
 function tdsReset(){TDV.pend=null;TDV.tch=null;TDV.hit=null;TDV.raw=null;TDV.skip=0;RCPT.k=null;RCPT.t=null}
 function tdsTchAsk(k,then){const V=VIR.find(x=>x.k===k),fee=virCost(virLv(S,k),S),fav=rcpFavorOf(S),O=[];const t2=whyTime(BAL.td.k);
- O.push(kitOffBac({n:"Ma ma giáo tập",fx:{},x:`tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc}, Bạc -${fee} · thành: tiến bộ +2..3, dạy được mọi lối, ra một món`,go:()=>{TDV.tch=null;RCPT.k=k;RCPT.t="nq";then()}},fee));
+ const vt=typeof placeW==="function"&&placeW("t_vir")||"Ma ma giáo tập";O.push(kitOffBac({n:vt,fx:{},x:`tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc}, Bạc -${fee} · thành: tiến bộ +2..3, dạy được mọi lối, ra một món`,go:()=>{TDV.tch=null;RCPT.k=k;RCPT.t="nq";then()}},fee));
  for(const v of tdsTchCons(k))O.push({n:`${rkName(v)} ${v.name} (${V.n} bậc ${v.vir[k]})`,fx:{},x:`tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc} · thành: tiến bộ +2..3, dạy các lối nàng ta biết, ra một món · kèm: nợ nàng ta một ân, thiện cảm -${fav}, ${BAL.gift.askW} tuần quà tặng nàng ta không thành chân tình`,
   go:()=>{TDV.tch=String(v.id);RCPT.k=k;RCPT.t=String(v.id);then()}});
- if(!O.length){log(`Chưa có ai dạy ${V.n}: ma ma cần ${fee} bạc, chưa có phi tần giỏi ${V.n} quý ta (thiện cảm ${BAL.rcp.tRel}).`);return}
+ if(!O.length){log(`Chưa có ai dạy ${V.n}: ${vt.toLowerCase()} cần ${fee} bạc${tdsTchCons(k).length||typeof rcpConsTeach!=="function"||rcpConsTeach()?`, chưa có phi tần giỏi ${V.n} quý ta (thiện cảm ${BAL.rcp.tRel})`:""}.`);return}
  O.push({n:"Thôi",fx:{},go:()=>tdsReset()});
- Q.push({act:1,t:`Học ${V.n} (${V.full}): ai dạy?`,who:pMe(),h:`<p>Có thầy dạy thì tiến nhanh hơn tự học, và mở được lối mới (tự học chỉ lên bậc; bậc 2, 4, 5 tự mở thêm một lối).</p><p class="past">Ma ma giáo tập nhận bạc theo bổng của ta (${fee} bạc${S.bac<fee?", ta chưa đủ":""}). Phi tần giỏi ${V.n} dạy không lấy bạc, nhưng ta nợ nàng ta một ân (thiện cảm -${fav}).${t2?" "+t2:""}</p>`,opts:O});showModal();render()}
+ Q.push({act:1,t:`Học ${V.n} (${V.full}): ai dạy?`,who:pMe(),h:`<p>Có thầy dạy thì tiến nhanh hơn tự học, và mở được lối mới (tự học chỉ lên bậc; bậc 2, 4, 5 tự mở thêm một lối).</p><p class="past">${vt} nhận bạc theo bổng của ta (${fee} bạc${S.bac<fee?", ta chưa đủ":""}).${typeof rcpConsTeach!=="function"||rcpConsTeach()?` Phi tần giỏi ${V.n} dạy không lấy bạc, nhưng ta nợ nàng ta một ân (thiện cảm -${fav}).`:""}${t2?" "+t2:""}</p>`,opts:O});showModal();render()}
 /* the lesson dialog in front: what to make (jwkr grid; teacher mode lets a new lối be picked) */
 (function(){const l0=lessonVir;const W=function(k,mode){if(TDV.go||!tdsIsVir(k)||(mode!=="self"&&mode!=="master")||!tdsOK(k,mode)||typeof wkAsk!=="function")return l0.apply(this,arguments);
   tdsReset();const ask=()=>wkAsk(k,mode==="master"?"teacher":"self",()=>{});if(mode==="master")tdsTchAsk(k,ask);else ask()};
@@ -75975,7 +75981,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
 (function(){if(typeof ktArtSkills!=="function")return;const s0=ktArtSkills;ktArtSkills=function(){const L=s0.apply(this,arguments);try{const t2=whyTime(BAL.td.k);for(const s of L){if(s.kind!=="vir"||!TDS_KIND[s.k])continue;const k=s.k,l=virLv(S,k),kind=TDS_KIND[k],W=WK[kind].w.toLowerCase();
   const fee=virCost(l,S),fav=rcpFavorOf(S),game=s.acts.some(h=>/trò nhỏ/.test(h))?"chơi một trò nhỏ · ":"";
   s.acts=s.acts.map(h=>/data-mode="self"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="self"`,"Tự học",`${game}tốn: ${BAL.td.k} khắc, Sức -${BAL.td.selfSuc} · thành: tiến bộ ${game?"+1..2":"+1"}, ra một món ${W}`,t2||(S.suc<BAL.td.selfMin?`Sức dưới ${BAL.td.selfMin}`:""))
-   :/data-mode="master"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="master"`,"Học với thầy",`${game}tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc}, Bạc -${fee} (ma ma) hoặc nợ một ân, thiện cảm -${fav} (phi tần giỏi ${VIR.find(x=>x.k===k).n}) · thành: tiến bộ +2..3, mở được lối mới, ra một món ${W}`,t2||(S.suc<BAL.td.mMin?`Sức dưới ${BAL.td.mMin}`:"")):h);
+   :/data-mode="master"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="master"`,"Học với thầy",`${game}tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc}, Bạc -${fee} (${(typeof placeW==="function"&&placeW("t_vir")||"ma ma").toLowerCase()})${typeof rcpConsTeach!=="function"||rcpConsTeach()?` hoặc nợ một ân, thiện cảm -${fav} (phi tần giỏi ${VIR.find(x=>x.k===k).n})`:""} · thành: tiến bộ +2..3, mở được lối mới, ra một món ${W}`,t2||(S.suc<BAL.td.mMin?`Sức dưới ${BAL.td.mMin}`:"")):h);
   s.acts.push(pbtn(`data-rcpls="${k}"`,"Các lối, sách phổ",`thành: xem lối đã học, lối chưa học và cách học`,""))}}catch(e){console.error("tds skills",e)}return L}})();
 /* the lối list of a course: lối opened by level are named with their level */
 (function(){const o0=rcpListOpen;rcpListOpen=function(k){if(!TDS_KIND[k])return o0.apply(this,arguments);const V=VIR.find(x=>x.k===k),kind=TDS_KIND[k],R=[];
@@ -79847,7 +79853,22 @@ function kitOffAttr(c){if(!c||!c.off||!c.off.why)return"";const t=c.off.why+(c.o
 function kitTam(standin){return standin?`<span class="ktam" role="note" title="Tranh tạm, sẽ có tranh đúng sau">tạm</span>`:""}
 (function(){const st=document.createElement("style");st.textContent=`
 .ktam{position:absolute;top:6px;right:6px;z-index:5;pointer-events:none;font:600 .68rem/1 var(--body);letter-spacing:.04em;color:#ffe7b0;background:#1a0e08b8;border:1px solid #d2b07188;border-radius:999px;padding:3px 8px}
+.ktam.ktam-tl{right:auto;left:6px}.ktam.ktam-br{top:auto;bottom:6px}.ktam.ktam-bl{top:auto;bottom:6px;right:auto;left:6px}
 `;document.head.appendChild(st)})();
+/* 2b. 'tạm' NEVER COVERS WORDS (owner OD 25/11 ~22:45Z: the chip sat on the stage place name «Khuê phòng»): kitTamFit(root) puts every visible .ktam
+      in the first corner of its picture box (top-right, top-left, bottom-right, bottom-left) where it covers no visible text, button (the stage rail icons too) or name tag;
+      the stage calls it after each paint (renderStage) and on resize. No free corner: it stays top-right (never moved out of its picture). */
+function kitTamFit(root){try{const T=[...(root||document).querySelectorAll(".ktam")].filter(t=>t.offsetParent);if(!T.length)return;
+ const W=[...document.querySelectorAll("h1,h2,h3,button,.rt1,.rmsg,[class*=tag],[class*=name],b,span,small,a,label")].filter(e=>e.offsetParent&&!e.classList.contains("ktam")&&!e.closest(".ktam")&&((e.textContent||"").trim()||e.tagName==="BUTTON")&&getComputedStyle(e).visibility!=="hidden");
+ const hit=(a,e)=>{if(e.contains&&e.contains(a.el))return false;const b=e.getBoundingClientRect();return b.width>0&&b.height>0&&a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top};
+ for(const t of T){const C=["","ktam-tl","ktam-br","ktam-bl"];let ok="";
+  for(const c of C){t.classList.remove("ktam-tl","ktam-br","ktam-bl");if(c)t.classList.add(c);const r=t.getBoundingClientRect();const a={el:t,left:r.left,right:r.right,top:r.top,bottom:r.bottom};
+   if(!W.some(e=>hit(a,e))){ok=c;break}}
+  t.classList.remove("ktam-tl","ktam-br","ktam-bl");if(ok)t.classList.add(ok)}}catch(e){console.error("kitTamFit",e)}}
+window.kitTamFit=kitTamFit;
+(function(){const go=()=>requestAnimationFrame(()=>kitTamFit(document.getElementById("stage")));
+ if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){const x=r0.apply(this,arguments);go();setTimeout(go,400);return x}}
+ addEventListener("resize",go)})();
 /* ONE place that maps an engine need[{t,ok,w?}] (the same shape as the Cần row / data-kneed) to the greyed option:
    the first unmet need becomes the reason chip ("thiếu …"), w (or the item/evidence/rank default) is the "opens again when" line.
    Whole group: item / evidence / rank gated options of the ch70 / evChoice (c6) engine, truth (vu oan), toilette give-back, accuse. */
@@ -85929,7 +85950,7 @@ function knSellNpcBuy(x,s,n){const P=knSB();const price=knSellPrice(n.val,s);if(
 /* refused: the seller tries another buyer with the same news (not the one who refused) */
 function knSellNpc(s,n,skip){for(const x of liveRivals(true)){if(x===skip||x===ownerOf(s)||!x.alive||x.out)continue;const N=knSellNews(x,s).filter(q=>q.id===n.id);if(N.length&&knSellNpcBuy(x,s,N[0]))return x}return null}
 /* once per buổi per buyer: BAL.ag.sell.o % that a seller comes (her: only when the day still has the khắc; not as a maid) */
-function knSellTick(){if(!knOn()||!S||S.dead||S.out)return;const T=knTb();const key=agKey();if(T.sl===key)return;T.sl=key;const P=knSB();/* ag2-perf F1: one memo of the owners' facts for this pass (j95 J78MEMO); a sale drops it (knSellGive) */window.J78MEMO=new Map();try{knSellTick0(P)}finally{window.J78MEMO=null}}
+function knSellTick(){if(!knOn()||!S||S.dead||S.out||(typeof isKc==="function"&&isKc()))return;/* no palace servant reaches her at home (review/ob-ngoaicung) */const T=knTb();const key=agKey();if(T.sl===key)return;T.sl=key;const P=knSB();/* ag2-perf F1: one memo of the owners' facts for this pass (j95 J78MEMO); a sale drops it (knSellGive) */window.J78MEMO=new Map();try{knSellTick0(P)}finally{window.J78MEMO=null}}
 function knSellTick0(P){
  try{if(!(typeof isSrv==="function"&&isSrv())&&dayFit(P.kh)&&roll(agOdd(P.o))){const r=knSellPick(S,npcWhy("knSell",{x:S}));if(r){KN.stat.offer=(KN.stat.offer||0)+1;Q.push(knSellCard(r.s,r.n))}}}catch(e){agErr("knSell",e)}
  for(const x of liveRivals(true)){if(!x.alive||x.out||x.confined)continue;try{if(!roll(agOdd(P.o)))continue;/* npc-purpose G2a: roll = the buổi gives a chance to meet; WHO comes is a seller with a goal */const r=knSellPick(x,npcWhy("knSell",{x}));if(r)knSellNpcBuy(x,r.s,r.n)}catch(e){agErr("knSellNpc",e)}}}
@@ -92639,7 +92660,7 @@ function dcNpcDress(v){/* an NPC changes into a robe of the season: one from her
   if(!nw)return;const old=w.y;if(old)inv.push(old);delete nw.w;w.y=nw}catch(e){console.error("dcNpcDress",e)}}
 function dcWeek(){if(!dcOn()||!S||S.dead)return;const R=typeof rivals!=="undefined"?rivals:[];
  if(dcWorld()){const bad=[];for(const v of R){if(!v||!v.alive||v.out||v.coop)continue;dcNpcDress(v);if(dcSeasonDue(v)){const c=dcSeasonCost(v);const fx={};if(c.danh)fx.danh=-c.danh;if(c.th)fx.th=-c.th;if(Object.keys(fx).length){ap(v,fx);bad.push(v)}}}
-  if(bad.length)try{log(`Trong cung chê ${bad.slice(0,3).map(dcName).join(", ")}${bad.length>3?" và mấy người nữa":""} mặc áo trái mùa.`)}catch(e){}
+  if(bad.length&&!(typeof isKc==="function"&&isKc()))try{log(`Trong cung chê ${bad.slice(0,3).map(dcName).join(", ")}${bad.length>3?" và mấy người nữa":""} mặc áo trái mùa.`)}catch(e){}
   const f=dcFestNow();if(f&&S.dcNk!==dcKey(f)){S.dcNk=dcKey(f);S.dcNp={k:f.k,n:f.name};const out=[];
    for(const v of R){if(!v||!v.alive||v.out||v.confined||v.coop)continue;dcNpcFest(v,f.k);const st=dcStat(v,f.k);if(st&&st.refused)out.push(v)}
    if(out.length)try{log(`${f.name}: ${out.map(dcName).join(", ")} bị chặn ngoài cửa vì y phục không hợp lễ.`)}catch(e){}}}
@@ -96497,9 +96518,59 @@ const ROAD8={
 /* ROAD8_LAB = the ONE label table of the stage right column groups (owner 21/11 ~03:25Z mark #36: "bất kỳ một cái gì thông tin nào ở bên phi tần có thì bên
    cung nữ đều có, nhưng mà mình có thể linh động đổi tên lại … cung nhân ở bên phi tần thì mình có thể đổi lại là đồng liêu ở bên cung nữ … chủ tử").
    Same boxes, same kit parts on every road; only these words change. cn = the household box (kit square button + fold + phone rail), ct = the court box. */
-const ROAD8_LAB={"":{cn:"Cung nhân",ct:"Chí tôn"},srv:{cn:"Đồng liêu"},kc:{}};
-function road8Lab(k){const r=road8();const L=ROAD8_LAB[r]||{};return L[k]||ROAD8_LAB[""][k]||""}
-window.ROAD8_LAB=ROAD8_LAB;window.road8Lab=road8Lab;
+/* PLACE WORDS (owner OD 25/11 ~22:45Z, review/ob-ngoaicung: "Tại sao đang ở ngoài cung mà có cung nhân chí tôn? Phải là người hầu hay gì chứ? Phải dùng từ
+   cho hợp thân phận chứ"): ROAD8_LAB is also THE ONE word table keyed by PLACE CONTEXT (placeCtx): palace words only once she is in the palace.
+   Contexts: "" = in the palace (consort) · srv = cung nữ road · kc = at home before the palace (tiểu thư phủ: khuê phòng, phủ, kinh thành, journeys;
+   isKc) · kc:dan = thôn nữ at home (cnv) · kc:nc = a foreign princess at her own court before the hòa thân (nc / bd / pf). A context falls back
+   kc:x -> kc -> "" word by word. Keys: cn / ct = the two stage head-count groups (her household / the people above her) · maid = her personal
+   maid's title (kitMaidTitle; no palace rank like «tam đẳng» outside) · sv_maid / sv_eunuch = the role word of other servants of her household. */
+const ROAD8_LAB={"":{cn:"Cung nhân",ct:"Chí tôn",t_mus:"Nhạc sư Giáo phường",t_craft:"Ma ma Thượng công cục",t_rite:"Nữ quan Thượng nghi cục",t_vir:"Ma ma giáo tập",t_fee:"nữ quan",tch_cons:"1"},srv:{cn:"Đồng liêu"},
+ kc:{cn:"Người hầu",ct:"Trưởng bối",maid:"Tỳ nữ thân tín",sv_maid:"Tỳ nữ",sv_eunuch:"Gia đinh",
+  /* teachers she can have at home (no palace office, no consort): t_mus = music / dance, t_craft = needlework / cooking, t_rite = letters / rites, t_vir = Tứ đức;
+     tch_cons = 0: no consort teaches her before she is in the palace (law 6: she cannot reach them) */
+  fame3:"Cả phủ nghe danh.",t_mus:"Nhạc sư",t_craft:"Ma ma trong phủ",t_rite:"Nữ sư",t_vir:"Nữ sư",t_fee:"nữ sư",tch_cons:"0"},
+ "kc:dan":{fame3:"Cả xóm nghe danh.",cn:"Người ở",ct:"Gia đình",maid:"Người ở thân tín",sv_maid:"Người ở",sv_eunuch:"Người làm"},"kc:nc":{fame3:"Cả cung nghe danh.",ct:"Vương tộc",t_mus:"Nhạc sư trong cung",t_craft:"Ma ma trong cung",t_rite:"Nữ quan",t_vir:"Ma ma giáo tập",t_fee:"nữ quan"}};
+function placeCtx(){const r=road8();if(r!=="kc")return r;let d="";try{d=typeof kc2D==="function"?kc2D():(S.kc&&S.kc.kd)||""}catch(e){}
+ return d==="dan"?"kc:dan":d?"kc:nc":"kc"}
+/* the word of key k in context c (default: where she is now); "" when no context has one */
+function placeW(k,c){c=c==null?placeCtx():c;const L=[c];if(c.indexOf(":")>0)L.push(c.split(":")[0]);L.push("");
+ for(const x of L){const T=ROAD8_LAB[x];if(T&&T[k])return T[k]}return""}
+function road8Lab(k){return placeW(k)}
+window.ROAD8_LAB=ROAD8_LAB;window.road8Lab=road8Lab;window.placeCtx=placeCtx;window.placeW=placeW;
+/* outside the palace her maid has no palace rank (kitMaidTitle is the ONE maid title: figure tag, person card, group list, gift, relation rows),
+   and the servants of her house are not cung nữ / thái giám (srkName: the ONE servant rank word) */
+/* PLACE GATE for dialogs (owner OD 25/11 ~22:48Z: "Tôi đang ở ngoài cung mà tại sao lại có cung nữ tới báo tin là sao? Những cái thông tin như thế này nó
+   xuất hiện không có đúng thân phận gì hết."; law 6 real people): while she is at home before the palace (road8 kc) no palace person can stand in front
+   of her: a dialog whose speaker is the emperor, the Thái hậu, a consort or a palace servant (figure rk emp / th / c<rank> / cold / sv<rung>, her own
+   maid excepted) is not shown (the palace world goes on; she simply is not there). Her home pools (pid kc…: kcE, kc2Sel, jkc3 …) keep their speakers
+   (the «Chiếu tuyển tú» read by the emperor's edict, the selection days). ONE gate: placeEvOk(m), run by showModal before a dialog is drawn. */
+function placeEvOk(m){try{if(!m||road8()!=="kc")return true;if(/^kc/i.test(String(m.pid||"")))return true;if(m.kind==="news"&&/^Tin trong cung/.test(m.t||""))return false;/* the palace's own news sheet of the buổi */const w=m.who;if(!w||typeof w!=="object")return true;
+ const rk=String(w.rk||"");if(!/^(emp|th|c\d|cold|sv)/.test(rk))return true;
+ if(S.maid&&/^sv/.test(rk)&&typeof pMaid==="function"&&w.src===pMaid().src)return true;return false}catch(e){return true}}
+window.placeEvOk=placeEvOk;
+/* placeSift: drops every queued dialog the place forbids; it runs inside the game's ONE dialog gate (j68 evGate: pacing, dry sifts of jspread) and,
+   for a build without it, in front of showModal */
+function placeSift(){try{if(road8()!=="kc"||!Q.length)return;for(let i=Q.length-1;i>=0;i--)if(!placeEvOk(Q[i]))Q.splice(i,1)}catch(e){console.error("placeSift",e)}}
+window.placeSift=placeSift;
+/* the journal at home: palace-world lines that speak as if she lived in the palace or report the inner palace day by day never reach her sổ
+   (she has her own news there: letters, rumours bought on her home road). ONE pattern list per place context; a line matching one is not written. */
+const PLACE_LOG_DROP={kc:[/sang cung ngươi/,/ghé chơi cung ngươi/,/tròn năm thứ \d+ trong cung/,/^Tin trong cung ·/,/được Hoàng thượng ban/,
+ /^Trong cung (truyền tai nhau|khi ấy)/,/Trong cung khi ấy —/,/^Đêm nay Hoàng thượng/,/giá đáo!/,/^Có người (đến|tìm đến|bán tin)\b/,/^Tin mua được/,
+ /^(Hỏa hoạn lớn|Lễ Phật đản|Sứ đoàn vào triều|Nạn châu chấu|Đại hàn, tuyết lớn|Đại trai đàn|Yến đầy tháng|Tỉnh thân|Thu săn|Đại phóng cung nhân|Đại xá thiên hạ|Lũ lớn, mất mùa|Án mất trộm ngự khố)\b/,
+ / dời sang .*(hiên|các|điện|cung)\b/,/ngự tứ/,/ tát vì /,/thưởng bạc cho cung nhân/,/^Sét đánh trúng mái cung/,/mắc phong hàn/,/được Hoàng thượng (triệu|ban)/,/trong cung, .*Bạc −/,/ báo thị vệ:/,
+ /^(Dãy cung cháy|Lễ Phật đã xong|Sứ đoàn đã lên đường|Gia quyến đã ra về|Tuyết đã tan; Nội vụ phủ)/,/bị cấm túc .* vì /]};
+/* a line written while the palace world runs its own buổi for the home road (jkc kcW: rivals' turns, the night, the palace news) is palace business */
+function placeLogOk(h){try{const L=PLACE_LOG_DROP[road8()];if(!L)return true;if(window.__kcWorld>0)return false;const t=String(h||"").replace(/<[^>]+>/g,"");return !L.some(re=>re.test(t))}catch(e){return true}}
+window.placeLogOk=placeLogOk;
+(function(){if(typeof kcW!=="function")return;const w0=kcW;kcW=function(){window.__kcWorld=(window.__kcWorld||0)+1;try{return w0.apply(this,arguments)}finally{window.__kcWorld--}}})();
+(function(){if(typeof log!=="function")return;const l0=log;log=function(h){if(!placeLogOk(h))return;return l0.apply(this,arguments)}})();
+(function(){if(typeof evGate==="function"){const g0=evGate;evGate=function(){placeSift();return g0.apply(this,arguments)}}
+ /* outermost: installed once every module has wrapped showModal (jdayq holds dialogs in front of the others: the sift must come first) */
+ const wrap=()=>{if(typeof showModal!=="function"||showModal.__place)return;const s0=showModal;showModal=function(){placeSift();return s0.apply(this,arguments)};showModal.__place=1;try{window.showModal=showModal}catch(e){}};
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",wrap);else setTimeout(wrap,0)})();
+(function(){if(typeof kitMaidTitle==="function"){const k0=kitMaidTitle;kitMaidTitle=function(m,lower){const w=road8()==="kc"?placeW("maid"):"";
+  if(!w)return k0.apply(this,arguments);return lower?w.charAt(0).toLowerCase()+w.slice(1):w}}
+ if(typeof srkName==="function"){const s0=srkName;srkName=function(s){const w=road8()==="kc"&&s&&s.role&&(s===S.maid||(S.staff||[]).includes(s))?placeW("sv_"+s.role):"";return w||s0.apply(this,arguments)}}})();
 function road8(){try{if(!S||S.dead)return"";if(typeof isKc==="function"&&isKc())return"kc";if(typeof isSrv==="function"&&isSrv())return"srv"}catch(e){}return""}
 function road8E(k){const r=road8();return r&&ROAD8[r]&&ROAD8[r][k]||null}
 function road8Hide(k){const e=road8E(k);return !!(e&&e.hide)}
@@ -98912,7 +98983,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="fa8da73cecdc";window.CTM_BUILD=BUILD;
+const BUILD="0aab16c8ef4d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
