@@ -198,3 +198,7 @@ Fix (verified on the same corpus: 0 false hits; «… · kết: Bỏ trốn», �
 `…|xin ra khỏi cung|^\s*bỏ trốn(?!g)|trốn khỏi cung|đi theo chàng|kết:\s*(bỏ trốn(?!g)|xuất (gia|cung|giá)|tự vẫn|tự tận|quyên sinh|cao chạy|rời cung)/i`
 Only-option rule untouched by the diff (isExit only filters when siblings exist). Fold life slice not run: FAIL on the regex first. Re-review on the fixed sha: corpus scan + node --check + one Fold slice.
 ~X% xong / ~Y% chơi được: harness only, no game change.
+
+## BIG #7 — PASS review/robot-realtap 496b6b66 (EXIT_RE tightened, F #15) — 11/25 ~22:10Z
+Diff vs 0bd2b621: the EXIT_RE tail only, exactly the regex from the FAIL above. node --check OK. Corpus scan (all LIVE 351122ba dev/build/j*.js tag/option/outcome strings, new vs old EXIT_RE): only true elopement texts match (jkc3b.js «đi theo chàng», «bỏ trốn cùng người thương»; jrd_tt result «Nàng bỏ trốn khỏi cung.»); «bỏ trống», fail-outcome «bỏ trốn», «kết: Xuất quân vội vàng» = 0 hits. Fold slice on LIVE (bot=rand, slice=10): buổi 10, 104 taps, dead 0, stuck 0, bugs 0. Fast-forward on b4b181f8 line. Only-option rule unchanged.
+~X% xong / ~Y% chơi được: harness only, no game change.
