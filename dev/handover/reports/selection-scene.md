@@ -577,3 +577,31 @@ d. Symptom 4 «s1» = «Huệ Tâm» + «Mạch Nhi» (guest): not reproduced in
 e. Symptom 3 (guest start, «err seatresync undefined» + Q 1): «err seatresync … / seatresync N» lines are in GREEN runs too (normal resync); not reproduced.
 f. Then LAND READY BIG to MAIN 133 with Fold 755x1000 + iPad 1180x820 shots (CDN img/_review/selection-scene/), keep perf/day line + selx gates + wording green, re-merge the newest LIVE first.
 Runner (scratch, this container only): /home/user/wt/s17-out/run.sh <tag> <worktree> A B … (sequential; out <tag>-<ord><i>.log). Worktrees: /home/user/wt/selx (branch), /home/user/wt/live (origin/main), /home/user/wt/pre (7a49d619).
+
+## SELSCENE-18 — work + LAND READY (25/11 ~07:10Z; START_CTX ≈5 %; coordinator MAIN CHÍNH 135 session_01V1ZZH2rRpLZa4GLFofPRky, cc MAIN 133/134)
+PRIORITY #1 CHECK: OD co-op rows (L1447, L1641) | main LIVE 0756a05b (merged) | review/tainghe-open-fix 993725c4 NOT on LIVE yet (not duplicated) | claims SELSCENE-17 → SELSCENE-18.
+### Done
+1. (a) Re-run after SELSCENE-17's lib/coop-clear lifeWait fix, this box, LIVE relay, sequential, env COOP_KKTR=1 COOP_QTRACE=1 COOP_LIFETR=1:
+   pre-merge (9879a60d): unforced A 142, B 142, A 142, B 142 · forced tú nữ both seats (COOP_A_ORIGIN=tt COOP_B_ORIGIN=tt) A 142, B 142.
+   merged LIVE 0756a05b (9ad5250e): unforced **A 142, B 142, A 142, B 142** · forced tt B order + COOP_EMOTRACE=1 **B 142, B 142**. 12/12 green, 0 FAIL.
+2. (d) «s1» duplicate sid — ROOT: the lead in 4d was wrong (jstaff already wraps allServ() to include S.thO.staff). Real holes, same family (every place that issues a servant id):
+| place | before | after |
+|---|---|---|
+| jcoopworld attach() (every co-op new life, both seats: first join, rebirth, life ended at the selection) | nlRun sets sidN=0, her household + Nội vụ phủ pool get sids 1..k in the throwaway world, then join the room world whose servants hold 1..n → one sid, two people (servById, S.known «s<n>», af/lover); only sidN was raised afterwards | sidMine(): her people that clash with a world servant (or each other) get fresh sids above every held sid; links between her own people (af keys, lover, bullyBy, S.known s/gs keys) follow; world sids never change (host truth) |
+| j10 staffInit, j95c load staffInit (reload) | max over allServ only — her Nội vụ phủ pool (S.npool) is not in allServ → after a reload the next new servant took a pool servant's sid | sidTop(): allServ (incl. Thái hậu elders) + S.npool + her maid, co-op stand-ins (coop:true, sid = pid 901/902) excluded |
+| jstaff mk (elders) | max over allServ | sidTop() |
+| jcoopask friend servant re-id | ++sidN without re-reading the living | sidN=max(sidN,sidTop()) first |
+| jcoopworld:258 «n<900» filter | — | replaced by sidMine/sidTop (coop:true excluded instead of a number cut) |
+   allServ() unchanged (MAIN ruling). rid (rivals ids) checked: world-only, host-issued, jcoopthinc keeps rid ≥ every id — no change. kk keys: SELSCENE-12 k61 already.
+   Test: dev/test/sid-unique.js (A fresh life unique · B reload never reuses a pool sid (fails on the old staffInit by construction) · C attach with clashing sids → unique, world unchanged, links follow) PASS.
+3. Merge LIVE 0756a05b (dayq, deadcard, sansang-music-fix): conflicts assemble.py (list = LIVE + jselx/jselxd/jselxday/jselxsc), KIT.md (§98.x selx sections + §92.4 both kept), index.html / sw.js rebuilt (build_site.sh).
+### Not reproduced / left as is
+- (b) R#7.emoH world split: 3 forced-tt B runs (tt-B2 + ttemo ×2) «same world» green after weeks 1–3 + rejoin. Code read: the only «phòng ốc bày biện vừa ý» writer is jshelf shelfMood, and shelfWeek on the guest runs for S only (shelfGuest) — no guest write for a world person found. Log only.
+- (c) week-end stall family: 0 stalls in 12 runs; TAINGHE-OPEN-FIX 993725c4 not on LIVE yet — when it lands, a plain LIVE merge picks it up (nothing duplicated here).
+- (e) seatresync: log only, not reproduced.
+### Gates (merged head)
+- coop-e2e 12/12 (above) · sid-unique PASS · selx-rules / selx-wire / selx-days / selx-days2 / selx-map / k61-key-life ALL PASS.
+- quickcheck --runs 5 --cpu 4 vs LIVE 0756a05b: **PASS** · open 2040 ms · old save ok · render 250/211 · tab 510/406 · buổi 2250/1514 · tasks>200 27/30 · rerolls 0 (playable 23.3 s vs 11.1 s = the 3 selection days, by design).
+- dayq-hold (LIVE's own test) times out at page wait on this box on LIVE 0756a05b too (env, not the branch).
+- Shots (selx-flow, Fold 755x1000 + iPad 1180x820, 0 page errors, text leaks = kit stage tags «Người lạ ??? / Tú nữ ???» only, OD:L673), looked at: CDN img/_review/selection-scene/s18-fold-11-the-san-cho.webp, s18-fold-06-canh-viecmot-vi-tu-nu-di-doi-giay.webp, s18-ipad-08-the-san-cho.webp, s18-ipad-13-the-thai-hau.webp.
+### LAND READY (BIG) — review/selection-scene = this commit → MAIN CHÍNH 135.
