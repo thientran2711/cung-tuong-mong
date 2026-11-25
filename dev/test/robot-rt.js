@@ -44,7 +44,7 @@ const bug = (type, msg, extra) => { const k = type + '|' + msg; const b = R.bugs
 
 /* ---- read-only screen reader: which layer is on top, its buttons (index into a fresh handle list) ---- */
 const SCAN = () => {
-  const LAYER = '#modal,#ov,.modal,.ov,[role=dialog],.dlg,.kpdlg,.kmov,#kroul,.kroul,#kpop,.kpop,#title,.title,#kload,#klife';
+  const LAYER = '#modal,#ov,.modal,.ov,[role=dialog],.dlg,.kpdlg,#dawn,.kne,.kmov,#kroul,.kroul,#kpop,.kpop,#title,.title,#kload,#klife';
   const W = innerWidth, H = innerHeight;
   const vis = e => { if (!e.isConnected || e.disabled || e.getAttribute('aria-disabled') === 'true') return false; const r = e.getBoundingClientRect(); if (r.width < 2 || r.height < 2) return false; const cs = getComputedStyle(e); return cs.visibility !== 'hidden' && cs.display !== 'none' && cs.pointerEvents !== 'none' && (e.checkVisibility ? e.checkVisibility({ checkOpacity: true, checkVisibilityCSS: true }) : e.offsetParent !== null || cs.position === 'fixed') };
   /* a layer = a known dialog/scene container, else any fixed/absolute box covering ≥ 40 % of the screen (scene, dawn calendar …) */
@@ -59,7 +59,7 @@ const SCAN = () => {
   /* visible clip of an element: viewport ∩ every overflow ancestor */
   const clip = e => { let r = e.getBoundingClientRect(), x0 = Math.max(0, r.left), y0 = Math.max(0, r.top), x1 = Math.min(W, r.right), y1 = Math.min(H, r.bottom); let s = e.parentElement; while (s && s !== document.body) { const cs = getComputedStyle(s); if (/(auto|scroll|hidden|clip)/.test(cs.overflow + cs.overflowX + cs.overflowY)) { const q = s.getBoundingClientRect(); x0 = Math.max(x0, q.left); y0 = Math.max(y0, q.top); x1 = Math.min(x1, q.right); y1 = Math.min(y1, q.bottom) } s = s.parentElement } return { x0, y0, x1, y1, full: x0 <= r.left + 1 && y0 <= r.top + 1 && x1 >= r.right - 1 && y1 >= r.bottom - 1, any: x1 - x0 > 4 && y1 - y0 > 4 } };
   const all = [...document.querySelectorAll('button,[role=button],[data-tab],.kcard[data-i],input[type=text],input:not([type])')].filter(vis).filter(e => !e.parentElement.closest('button,[role=button]'));
-  const probe = e => { const c = clip(e); if (!c.any) return { hit: false, clipped: true }; const pts = [[.5, .5], [.5, .3], [.5, .7], [.25, .5], [.75, .5]]; let cover = null; for (const [fx, fy] of pts) { const x = c.x0 + (c.x1 - c.x0) * fx, y = c.y0 + (c.y1 - c.y0) * fy; const t = document.elementFromPoint(x, y); if (t && (t === e || e.contains(t))) return { hit: true }; if (!cover) cover = t } return { hit: false, full: c.full, cover: cover && (cover.tagName.toLowerCase() + (cover.id ? '#' + cover.id : '') + (typeof cover.className === 'string' && cover.className ? '.' + cover.className.trim().split(/\s+/).slice(0, 2).join('.') : '')), foreign: cover && !cover.contains(e) && layerOf(cover) !== layerOf(e) && !cover.closest('#kpop,.kpop,#kxcatch,#ktut,#title,#kload') } };
+  const probe = e => { const c = clip(e); if (!c.any) return { hit: false, clipped: true }; const pts = [[.5, .5], [.5, .3], [.5, .7], [.25, .5], [.75, .5]]; let cover = null; for (const [fx, fy] of pts) { const x = c.x0 + (c.x1 - c.x0) * fx, y = c.y0 + (c.y1 - c.y0) * fy; const t = document.elementFromPoint(x, y); if (t && (t === e || e.contains(t))) return { hit: true }; if (!cover) cover = t } return { hit: false, full: c.full, cover: cover && (cover.tagName.toLowerCase() + (cover.id ? '#' + cover.id : '') + (typeof cover.className === 'string' && cover.className ? '.' + cover.className.trim().split(/\s+/).slice(0, 2).join('.') : '')), foreign: cover && !cover.contains(e) && layerOf(cover) !== layerOf(e) && !cover.closest('#kpop,.kpop,#kxcatch,#ktut,#title,#kload,#dawn,.kne') } };
   const txt = e => (e.getAttribute('aria-label') || e.textContent || '').replace(/\s+/g, ' ').trim();
   const inLay = e => lay === document.body ? layerOf(e) === document.body : lay.contains(e);
   let btns = all.filter(inLay).map(e => ({ e, p: probe(e) }));
@@ -81,7 +81,7 @@ const SCAN = () => {
 async function play(p) {
   p.on('pageerror', e => bug('js', 'page error: ' + e.message.split('\n')[0].slice(0, 160)));
   p.on('crash', () => bug('crash', 'tab crashed'));
-  const rt = RT.make(p, { dev: DEV, shots: SHOTS, ignoreCover: /kpop|kxcatch|ktut|#title|#kload/, touch: DEV !== 'ipad', log: d => { (R.trace = R.trace || []).push([sec(), d.k === 'tap' ? (d.screen || '') + ' «' + d.label + '»' : 'DEAD ' + d.label]); if (R.trace.length > 400) R.trace.shift(); if (process.env.RTV) console.log('TAP', d.screen, '«' + d.label + '»'); if (d.k === 'DEAD BUTTON') { R.dead.push({ ...d, at: sec(), S: lastS }); console.log('DEAD BUTTON', d.screen, '«' + d.label + '»', 'cover', d.cover) } } });
+  const rt = RT.make(p, { dev: DEV, shots: SHOTS, ignoreCover: /kpop|kxcatch|ktut|#title|#kload|#dawn|kne/, touch: DEV !== 'ipad', log: d => { (R.trace = R.trace || []).push([sec(), d.k === 'tap' ? (d.screen || '') + ' «' + d.label + '»' : 'DEAD ' + d.label]); if (R.trace.length > 400) R.trace.shift(); if (process.env.RTV) console.log('TAP', d.screen, '«' + d.label + '»'); if (d.k === 'DEAD BUTTON') { R.dead.push({ ...d, at: sec(), S: lastS }); console.log('DEAD BUTTON', d.screen, '«' + d.label + '»', 'cover', d.cover) } } });
   let lastS = null;
   const boot = async () => {
     if (!C.noBoot) await p.goto(URL0, { waitUntil: 'load', timeout: 0 });
