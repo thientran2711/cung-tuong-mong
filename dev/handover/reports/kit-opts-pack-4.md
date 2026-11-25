@@ -1,4 +1,4 @@
-# kit-opts-pack-4 — KK29 (kit keeper) — branch review/kit-opts-pack-4 @ e495556c (base review/kit-opts-pack-3 f10d269d)
+# kit-opts-pack-4 — KK29 (kit keeper) — branch review/kit-opts-pack-4 @ 7603d689 FINAL (base review/kit-opts-pack-3 f10d269d; earlier KIT READYs e495556c, 084d1b27, 8e591b3a are superseded)
 
 PRIORITY #1 CHECK: OD 0 | ledger 0 | claims 0 | main 0 | review/* d-robot-bugs 95eafc6e (same pcPort `.rk` crash fixed there: I applied the IDENTICAL j15/j3 text from 62f5d101 so both merge clean; its qBind/dedupe/#5 CSS NOT taken) | SELSCENE-18 q.__kmA.
 START_CTX: not measured (get_session reads 0); finished in one context, nothing to hand over beyond "Open points".
@@ -26,3 +26,20 @@ Not-danger table (before: all fired wash + heartbeat; after: silent): act picker
 ## Open points
 1. G4 80-dialog-fixed pre-existing FAIL (above). 2. j67 judgement. 3. MAIN 141's exact Hối lộ KSP repro needs the robot save. 4. Land order: d-robot-bugs identical j15/j3 hunk merges clean; its kitPanel dedupe touches j79 near my kitModal edit (different lines).
 Rollover: none needed.
+
+
+## Addendum after the first report (MAIN 141 / 142 orders)
+- **G4 dialog-fixed**: fixed in the TEST (084d1b27): phone column rule reads the kit's data-kol/kot (stacked NL/NM/NS 2 columns for 4+ short options allowed, KIT §56.27). Pass.
+- **iPad «Tân quân lập uy» (M-FIX-1) soft-lock**: reproduced on LIVE with the real frame (`rgFire('c2a')`: iPad list top 814, frame bottom 697); fixed on f10d269d (KK28) so this branch carries it to LIVE. Test `dev/test/kit-faces-opts.js` (faces 0/1 × 2/7/14 lines × 2/4/6 options × Fold+iPad, real tap on the LAST option, finger drag): LIVE FAIL most cases → 36/36. KIT §56.32.
+- **Law 10 text first** (MAIN 141): `kszTextFirst3` (jksize; also called after the option re-layout in jopic.js:322): story text unscrolled; picture strip → min → OUT (overrides the old «never dropped» line of 56.6; MAIN 141 explicitly asked) ; option list floor 112 px scrolls inside; `.kscue` pill floats (no 120 px row). Idempotent while it holds. KIT §56.32b. The test asserts «text unscrolled» when text + 112 fits the column; very long texts (14 lines) keep the scroll window.
+- **Reward over ending (E-S5)**: `kitEndUp()` (j93) blocks `kitReward` while `#modal.end/.kes` is up; test in kit-endcard-ink.js (f10d269d: SHOWN → none). KIT §56.31b.
+- `dev/test/kit-notice-action.js`: Tin báo ≥25 + action notice (LIVE FAIL 4 → 0; already fixed by f10d269d).
+- Scans on the final code: 41-frame Fold + iPad 0 regressions vs LIVE and f10d269d; kit-faces-opts 36/36.
+
+## HANDOVER for KK30 (kitHand «Bàn bài», brief briefs/KK30-kithand.md) — base = review/kit-opts-pack-4 7603d689
+1. Not re-run on 7603d689 (lander / KK30 please): kit-one-opt-tap (1 flaky FAIL once, 0 on rerun), kit-opts-touchdrag, kit-row-tap-size, kit-tag-collide, full `bash dev/tools/quickcheck.sh` (last quickcheck on 1840b31b: PASS except G4, since fixed in the test).
+2. Machine tip: 4 cores; never run more than 2 Playwright scans in parallel (6 in parallel made a 10-min scan take 40 min). Scan tools: `opt-frame-scroll-scan.js` + `opt-frame-scroll-diff.js` (one device per process), `dialog-fixed.js` (~3 min), `kit-faces-opts.js` (~4 min).
+3. Kit helpers added: `kitModalSafe(m)`, `kitRk/kitRkCls` (same text as d-robot-bugs 62f5d101), `kitNoDanger(m)` + `nodanger:1` flag (§93.9), `kitWaitCue()` (§59.3), `kitEndUp()`, `kszTextFirst3`. Selection lane follow-up: jselxday `selxCalm()` → `q.nodanger=1` after both branches land.
+4. Open: j67 judged not a danger (MAIN 141 confirmed); MAIN 141's «Hối lộ Kính sự phòng, 1 thân tín» repro could not be reproduced without the save (same render-throw path, guarded); K-NOTICE-OPTS text lives on bc-stack («leave by scrolling» must go).
+5. Pairs on CDN img/_review/kit-opts-pack-4/ (nested-mood-entpick, endcard-ink, tan-quan-lap-uy, tan-quan-lap-uy-live-vs-new-ipad): wipe with `python3 dev/site/cdn_sync.py --wipe-review kit-opts-pack-4` after the verdict.
+Context: I am at ~45 % of the window; I stop here as ordered.
