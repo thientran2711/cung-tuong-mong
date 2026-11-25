@@ -1,0 +1,68 @@
+{
+ "unit": "U3b",
+ "date": "2026-11-25",
+ "harness": {
+  "realtap": true,
+  "jsClicks": 0
+ },
+ "segments_valid": 0,
+ "segments_closed": 10,
+ "lives_finished": 0,
+ "segments": [
+  {
+   "seg": "r1",
+   "room": "QH9Y",
+   "result": "stuck"
+  },
+  {
+   "seg": "seg2",
+   "room": "WY4C",
+   "result": "stuck"
+  },
+  {
+   "seg": "seg3",
+   "room": "8RZP",
+   "result": "stuck"
+  },
+  {
+   "seg": "seg4",
+   "room": "R7DR",
+   "result": "stuck"
+  },
+  {
+   "seg": "seg5",
+   "room": "H5BW",
+   "result": "stuck"
+  },
+  {
+   "seg": "seg6",
+   "room": "SXDT",
+   "result": "stuck"
+  },
+  {
+   "seg": "seg7b",
+   "room": "HQHB",
+   "result": "stuck"
+  },
+  {
+   "seg": "seg8",
+   "room": "7UGM",
+   "result": "stuck"
+  },
+  {
+   "seg": "seg9",
+   "room": "WQ55",
+   "result": "stuck"
+  },
+  {
+   "seg": "seg10",
+   "room": "VFB6",
+   "result": "stuck"
+  },
+  {
+   "seg": "seg11",
+   "room": "7HVJ",
+   "result": "running"
+  }
+ ]
+}
