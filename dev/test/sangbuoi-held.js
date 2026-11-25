@@ -19,7 +19,7 @@
    H  (r3, Q>0 member) 7 cards hidden in Q, «Sang buổi» greyed, nothing on screen → H1 the first card shows by itself (dqWake) · H2 a real tap on
       the greyed button shows it at once (dqBring); she taps through all 7, then «Sang buổi» advances.
    I  (r3, robot E-S1) a scene left in the page but NOT on screen (I1 zero-size, I2 hidden layer) + 7 kit info panels queued → the first panel shows
-      by itself; I3 control: a scene ON screen holds them (none painted over it for 3 s), they show once it closes; then «Sang buổi» advances.
+      by itself; I3 control: a scene ON screen holds them (none painted over it for 3 s), they show once it closes; I4 (r4) the same with a zero-size scene FIRST in the page; then «Sang buổi» advances.
    usage: node dev/test/sangbuoi-held.js file:///…/index.html [shotDir] */
 const {chromium}=require('playwright');const [,,URL,OUT]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 const VP=[[755,1000,2],[1180,820,2]].filter(v=>!process.env.VP||process.env.VP.split(',').includes(v[0]+'x'+v[1]));/* VP=1180x820: one device */
@@ -151,17 +151,17 @@ const VP=[[755,1000,2],[1180,820,2]].filter(v=>!process.env.VP||process.env.VP.s
        layer → the first kit panel shows by itself (safety net) · I3 control: a scene ON screen still holds them, and they show once it closes */
      const W8=await p.evaluate(()=>(BAL.dayq&&BAL.dayq.wake)||2000);const lim=W8+2*700+900;
      const T=['Công · Nữ công: các lối','Cầm','Xem quan hệ của','Xem quan hệ của','Cầm: các lối','Lịch tháng','Thử bảy'];
-     for(const k of ['I1','I2','I3']){
+     for(const k of ['I1','I2','I3','I4']){
       await p.evaluate(([k,T])=>{const d=document.createElement('div');d.className='kmov km-gate';d.id='tstki';
-        if(k==='I1')d.style.cssText='position:fixed;left:0;top:0;width:0;height:0;overflow:hidden';
+        if(k==='I1'||k==='I4')d.style.cssText='position:fixed;left:0;top:0;right:auto;bottom:auto;width:0;height:0;min-width:0;min-height:0;max-width:0;max-height:0;padding:0;border:0;overflow:hidden';/* r4: .kmov's own CSS (inset / padding / min size) gave the old I1 a real box on screen */
         else if(k==='I2'){const w=document.createElement('div');w.id='tstkw';w.hidden=true;document.body.appendChild(w);w.appendChild(d)}
         else d.style.cssText='position:fixed;inset:0;z-index:60;background:rgba(40,20,10,.35)';
-        if(k!=='I2')document.body.appendChild(d);
+        if(k!=='I2')document.body.appendChild(d);if(k==='I4'){const r=document.createElement('div');r.className='kmov km-gate';r.id='tstkr';r.style.cssText='position:fixed;inset:0;z-index:60;background:rgba(40,20,10,.35)';document.body.appendChild(r)}/* r4 I4: a zero-size scene FIRST in the page + a real one on screen: the real one still holds every card */
         for(const t of T)kitModal({t,h:'<p>Thử: bảng thông tin.</p>'});const M=document.getElementById('modal');M.hidden=true;render();M.hidden=true;window.__t0=Date.now()},[k,T]);
-      if(k==='I3'){await sleep(3000);const s0=await st();if(s0.modal){await p.evaluate(()=>{['tstki','tstkw'].forEach(i=>{const e=document.getElementById(i);e&&e.remove()})});return 'I3 a panel was painted OVER a scene on screen'}
-        await p.evaluate(()=>{document.getElementById('tstki').remove();window.__t0=Date.now()})}
+      if(k==='I3'||k==='I4'){await sleep(3000);const s0=await st();if(s0.modal){await p.evaluate(()=>{['tstki','tstkw','tstkr'].forEach(i=>{const e=document.getElementById(i);e&&e.remove()})});return k+' a panel was painted OVER a scene on screen'}
+        await p.evaluate(k=>{document.getElementById(k==='I4'?'tstkr':'tstki').remove();window.__t0=Date.now()},k)}
       const s1=await waitCard(lim+1500);const ms=await p.evaluate(()=>Date.now()-window.__t0);
-      await p.evaluate(()=>{['tstki','tstkw'].forEach(i=>{const e=document.getElementById(i);e&&e.remove()})});
+      await p.evaluate(()=>{['tstki','tstkw','tstkr'].forEach(i=>{const e=document.getElementById(i);e&&e.remove()})});
       if(!s1.modal)return k+' 7 panels hidden, nothing on screen: NO panel painted in '+(lim+1500)+' ms '+JSON.stringify({Q:s1.Q.length,d:await diag()});
       if(ms>lim)return k+' panel painted too late: '+ms+' ms (limit '+lim+')';
       rows.push(`${W}x${H} ${k} first panel shown after ${ms} ms`);console.log(rows[rows.length-1]);await shot(k+'-panel');await drain();
