@@ -3634,3 +3634,5 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (20:12Z) M2b (old f21a1042): save rollback ~1–2 months on reload + 5 evening softlocks/h → told to switch to LIVE; rollback → B save-unseen-lists 7e01f0f5 rv; softlocks = r4 family.
 - (20:27Z) BIG rv PASS SANGBUOI r4 3762da08 (one entry, case B, night pair LOOKED by rv + MAIN) → LC17 lands on sếp's golive words (still missing; 2nd push notification). B eda56acc on r4: coop-title-leave 107/110 deterministic (guest iPad ☰ menu empty) vs B's own 110/110 → LC17 testing B-alone 078e83e8. r4 earlier 141/146 = load flake (alone 142/142).
 - (20:36Z) DECISION (a): r4 3762da08 pushes on sếp's words; B fix-7 held (r4×B interaction: guest iPad ☰ menu empty, coop-title-leave 107/110 vs B-alone 110/110) → r4 worker roots it, after flight. D re-stacked on r4 alone; lands only if green by ~21:10Z.
+- (20:38Z) ctx 30 % (line 31 %) → ROLL to MAIN CHÍNH 146: dev/handover/TAKEOVER_MAIN_146.md.
+## MAIN CHÍNH 145 → MAIN CHÍNH 146 HANDOVER (25/11 ~20:38Z): dev/handover/TAKEOVER_MAIN_146.md (ctx 30 % at roll, line 31 %).
