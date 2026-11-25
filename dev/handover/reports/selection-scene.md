@@ -291,3 +291,47 @@ PRIORITY #1 CHECK: OD 0 | ledger 0 | claims 0 | main 0 | review/* 0 | archive 0 
 | quickcheck --runs 5 --cpu 4 vs LIVE 9f72524b | PASS 481 s · open 2003 ms · old save ok · render 261/277 · tab 446/491 · buổi 1497/1429 · tasks>200 38/34 (day lives 38,39,29,39,27) |
 Day-2 pair Fold 755x1000 + iPad 1180x820 («Sân chờ», Ngày thứ hai — Điện tuyển): CDN img/_review/selection-scene/s19-pair.jpg — no red wash. Note: shots from selx-flow (scene taps + modal button clicks), not the realtap.js lib.
 ### NEXT: BIG delta review of review/selection-scene-r19 df156a4c (MAIN opens the reviewer). Worktree /home/user/wt/s19 kept until the verdict.
+
+## BIG DELTA REVIEW r19 — reviewer session_01V1ZZH13gvVZxJnXNni3Vg9 (opened by MAIN CHÍNH 141 session_01V1ZZH16HCco55nyV4XdPdw; cc lander LC15 session_01V1ZZH1aWaTnQCXA6E5kXmf); 25/11
+PRIORITY #1 CHECK ('selection-scene'): OD 1 | ledger 0 | claims 8 | main 0 | review/* 4 | archive 0 · branch review/selection-scene-r19 df156a4c = 23e5b84f (LC15 stack) + 29f3b99f (BIG PASS) + 3a210286 merge + 703fad03 + df156a4c · LIVE main 9f72524b (ancestor) · «Hoa ban hồi hương» git grep: only in 703fad03 (not in VANPHONG.md, review/co-ngu-titles dbd77388, review/co-ngu-seals, OD).
+START_CTX ≈ 1 % (1M window, own estimate; context_usage reads 0); finished ≈ 15 %.
+### Scope = merge delta only. Laws checked: 11 (one rule per family / whole family), 14 (one source), 6b (one key = one person), kit-first (no UI in the delta), VANPHONG (player wording).
+### (1) One rule per family — code read + every added line of BOTH parents checked present in the merge (script: lines lost = only the ones folded: bare S.kseq++ keyer, sidMine, old lifeRekey body) — OK
+- j61: ONE keyer. kOf61 = rivals r / coop r / s<sid> / k61WKey (stack: n o t tns c + old-save copy) / else e.kk = k61NewKey() (selection-scene: starts above every held x-key, never a KREG key, guest x<n>b). No bare `S.kseq++` left in dev/build (grep); jcoopworld's rekey also calls k61NewKey (fallback only if j61 absent).
+- jcoopworld: ONE lifeRekey(): own = maid + staff + kids + kc.fam (stack) + S.npool (sidMine); coop stand-ins out; world set = non-coop allServ < 900; sidN ≥ sidTop(); world-clash AND own-vs-own clash → fresh sid; CW.sidFix log; af / lover / bullyBy follow; x-key rekey; S.known + S.nkn move by old→new kOf61 key; KREG cleanup; K61VER++. sidMine deleted, no caller left (grep). The «gs» key sidMine also moved no longer exists anywhere in dev/build → nothing lost.
+- jopic: kitOptTierSig = stack's (kfCls + offsetHeight, button-crawl-fix-4) and kitOptSig kfCls; KOT_MEMO / kitOptMemoKey / settled / again-skip and kitBareNarrow (selection-scene) all kept. jselxd.js identical to 29f3b99f.
+- Note (not failed, same as both parents): own-vs-own clash moves S.known[k0] to the renumbered person, so the one who kept the sid reads from k61Own (her own household is always 3) — no visible effect.
+### Mutation proof (worktree copy, dev/index.html rebuilt each time)
+| mutation | test | result |
+|---|---|---|
+| j61 back to bare `S.kseq++` | k61-key-life | FAIL B (x2 given twice) + C (no «b» namespace) ✔ |
+| lifeRekey without S.npool | sid-unique | FAIL C (sid 2 = two people) ✔ |
+| no S.known / S.nkn move | sid-rekey-known | FAIL (own 0, world 3) ✔ |
+| af not remapped | sid-unique | FAIL C links ✔ |
+| own-vs-own rule dropped | sid-unique (old) | **PASS — test blind** → fixed 5ba238d5 → FAIL (sid 880 ×2) ✔ |
+| lover / bullyBy not remapped | sid-unique (old) | **PASS — test blind** → fixed 5ba238d5 → FAIL C links ✔ |
+### (3) Wording 703fad03 — **FAIL that commit (jend line), reverted in c271484c**
+KIT_END.names «Ban hoa» → «Hoa ban hồi hương» = a merge worker inventing player wording (owner OD:L2478: names / titles are the literature worker's job, CO-NGU-TITLES). Not in VANPHONG.md, not on review/co-ngu-titles / co-ngu-seals, not in OD. Reverted the name line only; kept 703fad03's selx-rules change (reads the title from endName — correct either way). Effect now: the ban hoa end card title = «Ban hoa» (the heading; pre-merge LIVE-less branch showed «Kiếp này»). co-ngu-titles scan → `FAIL plain heading without a poetic name: jselx.js 73 Ban hoa` (scan is not in quickcheck / golive). **→ CO-NGU-TITLES: name the «Ban hoa» ending (jselx.js:73) in KIT_END.names; until then the scan stays red.**
+### Review commits on review/selection-scene-r19 (fast-forward from df156a4c, pushed)
+- 5ba238d5 test: sid-unique C puts the linked pair on world sids + two own servants on one sid (mutation proof above).
+- c271484c revert of the 703fad03 name line (index.html / sw.js rebuilt by build_site.sh).
+- 2075b0f4 test: selx-map closes the «Luân hồi» roulette layers before it shows the card — #kroulw is made on a timer after nlAccept, jdayq held the card, «Ra Dư đồ» button missing → TypeError in 2/4 runs (debug dump: dqActEl = kroulw); same family as SELSCENE-18's selx-flow F3 fix (law 11: selx-days/days2/wire/rules call chooseM, not the #modal DOM → not hit). 6/6 after.
+### (2) Gates (re-run by me)
+| gate | result |
+|---|---|
+| sid-unique / sid-rekey-known / k61-key-life / k61-wkey-oldsave | PASS on df156a4c and on 2075b0f4 (sid-rekey-known 1 crash under 3-job load, then PASS ×2) |
+| selx-rules / wire / days / days2 / map | ×5 ALL PASS on 2075b0f4 (on df156a4c: ×3–4 PASS, selx-map 1 crash = the roulette race above) |
+| selx-flow Fold 755x1000 + iPad 1180x820 (2075b0f4) | PASS: every choice card visible + tapped, 0 page errors, **no danger pulse (kmalarm 0) both**, leaks = kit stage tags only. Looked at all 29 + 24 shots: kit cards, no red wash, no cut text (scratch, deleted). |
+| dead-card | PASS |
+| old-save load | k61-wkey-oldsave PASS; quickcheck old save (LIVE 9f72524b) loads + plays a buổi, 0 errors |
+| co-ngu-titles scan | PASS on df156a4c; 1 FAIL «Ban hoa» after the revert (for CO-NGU, above) |
+| coop-e2e (LIVE relay, this box) | 2075b0f4/df156a4c: A 142 · B 137 (3 jobs load: world diff R#1.staff after wk3, F1 family) · A 141 · B 141 · A 141 · B 142. Every 141 = the SAME 3 checks: after the guest's rebirth the host's «Sẵn sàng» stays (#next enabled / buổi advanced for both / week after rebirth advances). **Control stack 23e5b84f, same box, quiet: A 142 · B 141 with the same 3 checks** → pre-existing in the LC15 stack, not this delta. |
+| quickcheck 2075b0f4 vs LIVE 9f72524b | run 1 FAIL: core G4 button-crawl «Ô lưu · Lui close did not close its layer», look-dedupe «mood seal opens undefined», q-softlock «closing the view shows the waiting card» ×2; perf day life tasks>200 79 > 72 (median 56/35). Controls on this box: q-softlock FAIL on 23e5b84f + df156a4c + 2075b0f4 (same 2 lines); button-crawl same FAIL on 23e5b84f; look-dedupe flaky (FAIL once on 23e5b84f, PASS on 2075b0f4 on re-run) → **all three UI gates = stack faults, not this delta**. Perf: run 1 day lives [56,64,79,45,40] (79 > 72); **run 2 PASS: day lives [33,51,34,31,36], median render 239/243 · tab 515/465 · buổi 1290/1311 · tasks>200 34/32, old save ok** → run 1 = box variance (worker's run 38/34). Run 2 core gates: button-crawl + q-softlock FAIL again (stack faults above), look-dedupe PASS. |
+### (4) s19-pair.jpg — looked: Fold + iPad «Sân chờ» kit card, no red wash, nothing cut. OK.
+### FOLLOW-UP for MAIN / LC15 (not this delta)
+F1. LC15 stack 23e5b84f: coop-e2e «host stuck on Sẵn sàng after the guest's rebirth» (3 checks, ~50 % of runs, both orders) — reproduced on the bare stack.
+F2. LC15 stack 23e5b84f: quickcheck core G4 red here — q-softlock (button-crawl-fix-5's own test) ×2, button-crawl «Ô lưu · Lui», look-dedupe flaky → golive.sh will print FAIL for any sha on this stack.
+F3. CO-NGU-TITLES: poetic name for the «Ban hoa» ending.
+F4. (old F2) day-life perf basis not in perfgate.json.
+### VERDICT: **BIG PASS 2075b0f4** (the delta; branch review/selection-scene-r19; ancestor = LIVE 9f72524b). 703fad03's invented name = FAIL, reverted (c271484c). NOT go-live ready as a whole: golive / quickcheck core gates are red from the LC15 stack itself (F1 coop rebirth hang, F2 q-softlock + button-crawl) — LC15 / MAIN must clear those on the stack; this delta adds none of them.
+Worktrees /home/user/wt/rv19, rv19m, rvst, rvho removed after this report; scratch shots deleted; no CDN upload by me (s19-pair.jpg left for MAIN).
