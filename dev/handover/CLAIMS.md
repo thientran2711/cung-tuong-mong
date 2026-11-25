@@ -1743,3 +1743,6 @@ SAVE-YEAR-ROLLBACK r2 FIXER (successor) | review/save-year-rollback 876415e3 | s
 HARDLOCK-CHOICE-R4 FIXER (port choose-guard into jnolock) | review/hardlock-choice-r4 | session_01N1tNP5EhLGrd9fRXSh5UKk (FOREMAN B) | RUNNING | 2026-11-25T12:43Z
 net-ghen wave 2 cont. (NB-b relAdd order, NB-a, NB2 cards, gates) | review/net-ghen-2 | session_01D3E3NXwfFkmq6kwyzgW5S5 (W7, successor of W6 session_01D3E3NYpxDHwQEUeCUDPFsN) | RUNNING | 2026-11-25T12:50Z (Foreman D depth 2)
 B co-op RERUN U3c (successor of U3, seeds 44+, stack 512cfee6) | dev/handover/robot/coop-rerun-U3c-* | B | session_01N1tNP6q6oiuzPjWAgcdy8j | RUNNING | 25/11 12:56Z |
+HARNESS FIXER #5 (robot harness: picker no-clock loops, #kmrew/«Nhận» false positive, #kpop info popup, memory A/B) | review/robot-realtap 10fbc51c | session_01UV1SzjoqFfBLv1aDrPvf7h (FOREMAN F #11; opened by F #7) | RUNNING | 2026-11-25T12:48Z
+ROLE B #5 BUTTON CRAWLER (successor of #4; gate-b «Tin trong cung» lead, .kmov zero-size, depth-3 re-run) | review/button-crawl-fix-6 | session_01UV1SzjyWfynL199ZMNico8 (FOREMAN F #11; opened by F #7) | RUNNING | 2026-11-25T12:48Z
+F flight2 runner 1R (s1d rerun, cnv_mat skilled Fold) | harness review/robot-realtap 10fbc51c, game LIVE | session_01UV1Szhx44FByLymnnjqdUu (FOREMAN F #11; opened by F #7) | RUNNING | 2026-11-25T12:48Z
