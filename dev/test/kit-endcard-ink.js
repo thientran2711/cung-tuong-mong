@@ -19,6 +19,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=
   /* end the scene by tap (the scene ends on tap / its button), then the card must show */
   await p.evaluate(()=>{const e=document.querySelector('.kmov.km-inkov');if(e)e.click()});await p.waitForTimeout(600);await p.evaluate(()=>{const e=document.querySelector('.kmov.km-inkov [data-km-close]');if(e)e.click()});await p.waitForTimeout(2500);
   const fin=await p.evaluate(()=>{const M=document.getElementById('modal');return {ink:!!document.querySelector('.kmov.km-inkov:not(.km-out)'),vis:!!M&&!M.hidden&&getComputedStyle(M).visibility!=='hidden'}});
-  R.push({dev:W+'x'+H,cause,'ink frames':worst.ink,'card visible while ink':worst.cardWhileInk,'banner on rows':worst.overlap,'after scene: ink gone':!fin.ink,'card shown':fin.vis,FAIL:worst.cardWhileInk>0||worst.overlap>0||fin.ink||!fin.vis});
+  const rew=await p.evaluate(()=>{const M=document.getElementById('modal');if(!(M&&!M.hidden&&(M.classList.contains('end')||M.classList.contains('kes'))))return {skip:1};kitReward({kind:'chest',title:'Rương',items:[{n:'Trâm',d:'',img:'',tier:1}],bac:0});return {over:!!document.querySelector('#kmrew,.kmov.km-reward,.kmrew')}});
+  R.push({dev:W+'x'+H,cause,'reward over ending':rew.skip?'n/a':rew.over?'SHOWN':'none','ink frames':worst.ink,'card visible while ink':worst.cardWhileInk,'banner on rows':worst.overlap,'after scene: ink gone':!fin.ink,'card shown':fin.vis,FAIL:worst.cardWhileInk>0||worst.overlap>0||fin.ink||!fin.vis||rew.over===true});
   await ctx.close()}}
  await b.close();console.table(R);const bad=R.filter(r=>r.FAIL);console.log('cases',R.length,'FAIL',bad.length);process.exit(bad.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});
