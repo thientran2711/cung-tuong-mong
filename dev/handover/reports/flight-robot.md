@@ -211,3 +211,18 @@ Verdict: **PASS — review/flight-choose-guard-r ff0f723f FF 0756a05b** (= d716e
 | reviewer fix (test only) | dead-card.js part 5 passed on «0/2 open + Lui» too — the Lui net alone is not the law-2 fix; now it needs ≥1 payable road open |
 | laws 4 / 7 / 9 | no number; no new player text (the «Cần: …» temper line is the existing one); kit «Lui» only |
 
+## REVIEW flight-e68-season (BIG REVIEWER opus, 25/11)
+PRIORITY #1 CHECK ('e68Fits' / 'EVHOLD' / 'deserQ'): OD 0 | ledger 0 | main: j68 EVHOLD stale drop, j3 deserQ | review/* this branch only | claims: this review. Reused e68-season.js.
+Verdict: **PASS — review/flight-e68-season-r d441ab69 FF ca5af050** (= 6b9a0ce4 + merge main 0756a05b (29a5c86a) + merge main ca5af050 (makeup only), index/sw rebuilt; no code change by the reviewer).
+
+| check | result |
+|---|---|
+| e68Fits = template w(e68Ctx()) > 0 | PASS. w() is a pure weight of month / season / fest / rank / stats (scan of every j68 w: none reads cooldown, history or seen marks — the cooldown is e.cd, set on draw, separate), so a card that fits now is never dropped for having been drawn. Non-j68 cards (pid not «e68…», or no template) → true, untouched. |
+| family of waiting j68 cards (law 11) | PASS. Every path that holds a j68 card off screen goes through one of the two gates: EVHOLD release (evRelease, + stale), EVHOLD rebuild on a world rebuild (j68:172 → deserQ), save P (j6:75 deserQ after normAll, so the restored month is read), co-op carried dialogs across the week merge (jcooptimer carryBack → deserQ: a winter card carried into spring is dropped — intended), spread queue (jspread:121 → deserQ). |
+| no lost forced / story card | PASS. j68 follow-ups (fu6) have no caller; «must» cards are never held (j68:136) and only e68Test sets must; j68 cards are optional situations (evOptional). |
+| old saves with a pending P | PASS: e68-season pendWinter kept in tháng 12; quickcheck old save ok |
+| e68-season.js on LIVE 0756a05b (test copied in) | E68-SEASON FAIL (pendSpring 1, holdShown 1) |
+| e68-season.js on 29a5c86a / d441ab69 | PASS / PASS |
+| coop-e2e plain / SWAP on 29a5c86a; plain on d441ab69 | 142/142 / 142/142; 142/142 |
+| quickcheck 29a5c86a vs 0756a05b; d441ab69 vs ca5af050 | PASS 672 s (buổi 1433/1717); PASS 690 s (buổi 2918/1650 = noise: the same code one merge earlier gave 1433/1717; the change is one filter on load / release), old save ok |
+| laws 4 / 7 / 9 | no number, no new text, no UI |
