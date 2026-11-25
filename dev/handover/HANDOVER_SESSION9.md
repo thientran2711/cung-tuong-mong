@@ -3349,3 +3349,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (05:24Z) LIVE 0756a05b (sansang-music-fix: «Sẵn sàng» tappable on person-focus mini-games + music no longer stops) 05:23Z; ROLLBACK 4da55ce8. Told sếp. KK26 told TODO (1). Nit: no CHANGE line in menu for sansang.
 - (05:27Z) KK26 KIT READY review/kit-mg-realtap 45c9a58b (real-tap kit-mg-intro test FAIL on 4da55ce8 / PASS on 0756a05b; KIT §92.4 z note + REAL-TAP TEST RULE) → waits B KIT OK with ring5/optinfo-r2/fitfast-r3/map-marker/icon-row.
 - (05:31Z) MAKEUP-NOBOOST LAND READY 74068c07 SMALL (OD ~05:42Z final: vung big ×.85, vung small as d8e0381b, diem big ×1, diem small ×.595; BAL.toil.lod.soft). MAIN LOOKED s4-pair (Khuynh thành identical, mean diff 1.0) → GO LC13 + sheet shown sếp.
+- (05:34Z) OWNER OD ~05:33Z: good looks NO small-size boost (same as big); vụng/diêm = 74068c07 approved. → MAKEUP-NOBOOST follow-up sha on top of 74068c07 (74068c07 lands as is).
