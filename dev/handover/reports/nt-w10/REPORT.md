@@ -173,3 +173,75 @@ Open for Foreman D: residual a (servant leaves, kit request), RV4 N4/N6 with the
 
 ## HANDOVER
 None needed (SSK). Worktree /home/user/wt/w10b (sparse). Before relshow-scan: `python3 dev/build/assemble.py && node dev/test/relshow-bal.js $PWD/dev/index.html dev/test/relshow-bal.json`.
+
+---
+# REVIEW RV5 (BIG tier, Foreman D depth 5) — review/net-ghen-2 @ 80d217ed — 25/11 ~18:15Z–22:00Z
+PRIORITY #1 CHECK: OD net-ghen LAW 11 wave 2 | main LIVE 17dfa64d (net-thresholds 96c2859e + net-ghen de69f206 NOT on main: this branch carries the whole stack) | review/net-ghen-2 80d217ed (W5–W10b rounds 1–4; RV4 review-net-ghen.md N1–N6) | claims RV5 session_01D3E3NXw8WVA9KvuPq36f82 (CLAIMS.md:1779). Rules read: START_CORE (18 laws), START_WORKER, START_REVIEWER, this REPORT (all rounds), RV4 review. Reviewer START_CTX ~6 % of 1M.
+
+## VERDICT: PASS 9d3b7b7b (branch review/net-ghen-2-r5; parent chain 80d217ed + merge of LIVE 17dfa64d + 3 small reviewer fixes; origin/main 17dfa64d is an ancestor → fast-forward)
+
+### Merge on LIVE 17dfa64d
+Not clean as-is: dev/kit/KIT_REQUESTS.md (two appended sections, kept both) + index.html/sw.js (rebuilt). Merge commit fe169408. After the merge relshow-scan --fail-raw FAILED (oán RAW 2): two NEW sites from main's temper-outburst (jemoact.js khac / kexau «oán ngươi +${F.oan}» while oanAdd scales by nết slight) — fixed (ff0807e2, pvOan; RAW 0).
+
+### Reviewer fixes (LAW 11 whole family / LAW 4), all text-only, numbers from BAL
+| sha | what | found by |
+|---|---|---|
+| ff0807e2 | jemoact khac/kexau result lines print pvOan (× slight) | relshow-scan on merged build |
+| dca9d064 | Ngáng chân act card (AOUT.trip, j25: typed «Danh nàng -3», BẠI «nàng oán ngươi» with no number — the one family member W7's NB-b missed; Tát/Phạt quỳ/Bỏ phấn lạ had getters) → getter in jface: THÀNH «Danh nàng ‹danhTrip›, thiện cảm −6, oán ta +2 đến +8», BẠI «nàng nắm ‹evTrip› chứng cứ, thiện cảm −12, oán ta +4 đến +15» | real tap Fold: win applied thiện cảm −6 / oán +8 the card never showed; iPad after fix: seen → −12 / +11 / 1 chứng cứ = card |
+| dca9d064 | elder Hỏi chuyện card (jstaff:101) adds «người ấy thiện cảm +‹meAct›» (it applies af.me +1; the court card already says it) | real tap Fold + iPad |
+| dca9d064 | actwalk-scan: a Kỳ ngộ on arrival (jky kyArrive→fireMe, Math.random) with its own «Kỳ ngộ» card printing the gain is classified like the quest reward | W10b's 1/16 hit, reproduced |
+| 9d3b7b7b | Tát card BẠI: «nàng né được: Đức ‹slap.duc[1]›, thiện cảm −5, oán ta +1 đến +6» (was «Tốn công, không được gì»; a dodged slap applies Đức −2 + relAdd missRel) | real tap iPad (tát hụt: Đức −2, thiện cảm −5, oán +2) |
+
+### W10b's «1 of 16 hidden stat change» — reproduced and judged
+Reproduced 2 of 20 actwalk runs: «Thỉnh an Thái hậu → tn: danh 33→35 … cause runOpt<fireMe<kyArrive». It is a Kỳ ngộ on arrival (jky, Math.random, not a forced roll), an encounter with no options that applies its gain at once and pushes its OWN «Kỳ ngộ» card whose text prints «Danh +2». Not a hidden change → not a game fault; the scan now names it (r15 after the patch: «(quest reward / Kỳ ngộ, own card)», exit 0).
+
+### Gates (this box; quickcheck and coop-e2e ALONE)
+| gate | merged ff0807e2/dca9d064 | final 9d3b7b7b |
+|---|---|---|
+| one-core guard / text / text-rule / bind | PASS ×4 | PASS ×4 |
+| c6-cancel-scan | 0 cards | 0 cards |
+| relshow-scan --fail-raw (fresh dump) | RAW 2 (main's jemoact) → fixed → PASS RAW 0 (oán 106 sites, WIRED 81) | PASS RAW 0 |
+| relshow-rt / net-build | PASS / 203/203 | PASS / PASS |
+| actwalk-scan | 16 runs: 0 unshown familiarity; 2 Kỳ ngộ hits (own card) | 3 runs PASS exit 0 (0 hidden stat, 0 unshown familiarity) |
+| rc-scan dau,hau + rc-sum | 662 runs, 343 cards, 0 page errors; NOT named 16 = servant af 6 + loyal 6 (residual a, KNOWN kit wait) + her stat 4 (= ma ma quest Bạc +15, own «Xong việc … Bạc +15» card, jtq14 note/doneCard); familiarity 48/0, court 8/0, maid 14/0, consort ghen/aff/myaff/oán 0 | — |
+| quickcheck ALONE | core PASS except G4 button crawl | same: G4 FAIL «Ô lưu › Lui did not close its layer» = IDENTICAL on LIVE 17dfa64d (crawler run on LIVE build: same row) → pre-existing, not this branch; rest PASS: open 2050 ms, old save ok, render 246/289, tab 644/620, buổi 1647/1861 |
+| coop-e2e fresh, alone | 142/142 first run | 142/142 first run |
+| old save main → branch (two-way-oldsave, 20 wk) | ok, turn 8→28, 0 errors | — |
+
+### Real taps (realtap via nt-w8 drv.js; setup by page.evaluate = act-audit scen «hh» + target placement / court known; every tap a touch tap; 0 page errors on both devices; all shots looked at)
+| card | Fold 755x1000 | iPad 1180x820 |
+|---|---|---|
+| Ngáng chân | win: Danh nàng −3, thiện cảm −6, oán +8, Đức −4 → card lacked rel numbers → FIXED | after fix, seen: −12 / +11 / 1 chứng cứ = card BẠI ✓ (text wraps clean) |
+| Tát (tay nhẹ) | −15 / oán +7 (in +4..+88), Đức −2 ✓ | dodged: Đức −2, −5, +2 → BẠI said nothing → FIXED |
+| Phạt quỳ | −15 / +7 (in +4..+19), Sức nàng −8, Đức −1 ✓ | same ✓ |
+| Bỏ phấn lạ | caught: Danh −8, Bạc −17, Đức −4, −10, 2 chứng cứ, oán +5 — result card names all ✓ | tap landed on a sticky header (harness point choice, click target div.kpstick) — not re-done; Fold covers it |
+| Ban thưởng | Bạc −30, +17 (in +9..+32), bớt oán 6, Danh nàng +3 = act card ✓; NO result card (N-c) | same (+24) ✓; NO result card |
+| Tặng quà | +6 (in +3..+11), oán −2 = result ✓ (N-d) | +12 (in +6..+21), oán −4 ✓ |
+| elder Biếu / Hỏi chuyện | +10 / Bạc −20 ✓; +1 + quen biết + nghe chuyện ✓ (card lacked +1 → FIXED) | Hỏi chuyện after fix: card «thiện cảm +1» = result ✓ |
+| court Biếu | +10 / Bạc −20 ✓ | +10 / Bạc −20 ✓ |
+
+### Laws
+| law | result |
+|---|---|
+| 4 one core | PASS (guard ×4; fixes print BAL keys; RV fixed a typed «-3» in AOUT.trip) |
+| 7 wording | PASS (ranges «+a đến +b», no %) |
+| 9 kit | PASS — j63 kaKnRows reuses W9's KREG/K61STN rows; kaWalkKn writes into the open kit result card's Được row (same .kitem/.ef classes) or §93.8 kitResultCard; no private chip/row |
+| 11 whole family | PASS after the reviewer fixes above; KNOWN residual a / N4 = kit request (not failed) |
+| 1/6 (relAdd doer-first swaps, W7) | PASS — checked j9 relAdd(x,y): x doer; all 13 swaps put the doer first |
+| 2/3 | no option value changed |
+
+### Code read (W10/W10b)
+- j2 goTo thu: chase skipped when accHas(S,k) — right; a summons / Xin yết kiến already let her in, so the extra hidden roll was a double roll.
+- jstagehere act wrapper + actPendRun + j63 kaWalkKn/__kaKnAt: correct for card-up (merge), card-gone (own kit card) and dialog-pending paths. Nit: if an act builds NO card while an OLDER act's card is still up (9 s), the rises are merged into that older card's Được line (title of the older act). Rare, numbers still true. Non-blocking.
+
+### Non-blocking for Foreman D (pre-existing on LIVE unless said)
+- N-a KNOWN: result card has no rows for another consort's Danh/Sủng/Sức (Ngáng chân «Danh nàng −3», Phạt quỳ «Sức −8») and servant leaves = W9 KIT REQUEST (residual a / N4).
+- N-b Hại acts' «bị lộ» line never shows jecon's «Phẩm cao, nhiều mắt nhìn: Danh −n» (jecon:195 caught wrapper) — Bỏ phấn lạ at rank 7: Danh −8 shown only on the result card. Family: kaCaughtTxt.
+- N-c Quyền Hoàng hậu acts (Ban thưởng, …) run through jagacts.js AGHH, which bypasses j19 wrapR → NO kit result card at all (both devices). Family: AGHH queen powers.
+- N-d Past-tense result sentences wired in wave 2 print the PREVIEW range («Ngươi tặng … : thiện cảm +3 đến +11») while the Được row shows the real +6 — suggest result sentences print the applied delta (family: wave-2 pvQuy/pvOan in result strings).
+- N-e Tát card odds «Rất vững» (jface o:()=>100) ignore the target's dodge (BAL.slap.dodgeOdds 75/55/35 lowers the tier; at tay nhẹ a dodge = miss).
+- N-f G4 button crawl «Ô lưu › Lui» fails on LIVE too (button-crawl owner).
+- N-g Fold reward chest (kmrew) list: the «Nhận» button covers the last row's text (kit keeper).
+- RV4 N1/N2/N3/N5 done by W10 round 2; N6 kit keeper.
+
+Shots: scratch only (none uploaded; no CDN review folder used). Worktrees /home/user/wt/rv5, rv5main, rv5ho removed after push.
