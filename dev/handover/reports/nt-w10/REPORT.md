@@ -1,0 +1,46 @@
+# SEAT W10 (successor of W9, 25/11) — review/net-ghen-2 @ b8795da6 — SSK
+PRIORITY #1 CHECK: OD net-ghen / LAW 11 wave 2 (FOREMAN_D_STATUS) | main none (not landed) | review/net-ghen-2 e6c88875 (W5–W9) + review/net-ghen-r1 de69f206 (RV4) | claims W10 (CLAIMS.md by D). Reused: relshow-scan + relshow-bal.js, nt-w8 rc-scan/rc-sum/rt tools, act-audit AA.scen.
+
+Commits: 4586780a (merge de69f206), 17b66c20 (relshow-scan gate fix), b8795da6 (site rebuilt).
+
+## R3 — de69f206 merged
+review/net-ghen-2 did NOT carry it (merge-base 6d7d2da9). Merged (index.html/sw.js conflict → ours, then rebuilt): jration.js:190 now `ghenUp(v,T.ghen,…)`; the built index.html has it (b8795da6).
+
+## R1 — relshow-scan «RAW 29»: a measurement fault, not code
+- Cause: relshow-scan reads the sign of every `balSg(BAL.x)` from dev/test/relshow-bal.json (gitignored; built by `node dev/test/relshow-bal.js <abs dev/index.html> dev/test/relshow-bal.json`). W9's box never built it → sign 0 → every BAL-path FALL landed in RAW. W5–W8 had the file on their own boxes, so they measured 0. Nothing in the scan or the sites changed.
+- Proof: with the dump built, RAW 0 (oán NEG 13→16, aff NEG 131→168). All 29 sites print falls: BAL values −2…−25 (j24 go_2 −5, go_4 −6, go_8 −3; j25 go_2 −3; j30 f −10; j55 tdProbe −8; j68e ok −5; cv.ngAff.cold −10; j70 ok_3 −3; j71 go_4 −3, ok −2; j72 fn_8 −6, fn_10 −12; j8 f −8, f_6 −20, judge −10, giveTo −25; j78 f −15, f_2 −10, f_3 −5; j9 run_8 −15; jaudit run −3; jpoison found −15; cv.tsBorrow.cost −2; jtsb go_10 −5, go_13 −3). j28 oanAdd/affAdd scale only n>0 → shown == applied.
+- So the 29 were NOT wired through pvQuy (it would print the same number; told Foreman D in an interim message). Instead the gate is fixed so it cannot lie again: relshow-scan exits 1 with the build command when the dump is missing or older than dev/index.html.
+
+## R2 — kit request
+Present in dev/kit/KIT_REQUESTS.md (W9: «KIT REQUEST (25/11 W9 …) result card rows for OTHER people's stats and lost servants», line 263; K-EF-REL note line 255). Not hand-built. KNOWN, WAITING ON KIT.
+
+## Gates on b8795da6
+| gate | result |
+|---|---|
+| build (build_site.sh + assemble) | OK |
+| one-core-guard / -text / -text-rule / -bind | PASS ×4 (bind 1524 prints, 0 mismatches) |
+| c6-cancel-scan | 0 cards |
+| relshow-scan --fail-raw (fresh dump) | PASS, RAW 0 (exit 0) |
+| relshow-rt | PASS |
+| net-build | PASS 203/203 |
+| rc-scan dau,hau + rc-sum | 594 runs, 332 cards, 0 page errors; NOT named 36 (below) |
+| two-way-oldsave (old = origin/main 9f72524b) | exit 0, 0 page errors, talk list builds; loop stays at turn 0 (why below) |
+| quickcheck ALONE | PASS 735 s (core gates, time-spill, open 2456 ms, old save ok, perf new/live render 279/320, buổi 1320/1704) |
+| coop-e2e (fresh assemble, alone) | 142/142 on the first run (no re-run needed) |
+| real taps Fold 755x1000 + iPad 1180x820 (IPT) | 0 page errors; see below |
+
+rc-scan NOT named 36 = only the known residuals: (a) «Đổi người» servant leaves — servant af 14 + loyal 14 (= the kit request); (b) familiarity on Thỉnh an Hoàng hậu arrival kn.r1/r3/r4 + Múa kn.x21 (5); (c) Múa LOSE S.sung 8→5 ×2, Múa LOSE Bạc 200→215 (stipend landing in the act, 1). consort ev / oán / aff / ghen / myaff, court af, her maid: 0 not named. «consort evon»: 0 changes occurred in this run (cannot confirm W9's evOn row by scan; same as W9).
+
+two-way-oldsave turn 0: S.turn counts MONTHS (monthTick). The loop clears only Q and S.mg; in week 2 the «Kính sự phòng» card (her thẻ bài night choice) stays pending, so endTurn returns every call (checked: 30 calls, tuần stuck at 1, card «Kính sự phòng» each time). Tool limit, not a game fault; the load + 0 page errors part is valid.
+
+Real taps (shots looked at, kept in scratch, not uploaded):
+- Fold: Hậu cung → Hoàng hậu → Hại nhỏ → Tung tin đồn: both options «Danh nàng ta −8 · tin cậy Cung nữ … +3» fit; Giao cho người làm → life warning → Bày mưu: «Ra tay ngay» shows the act card (Tốn không tốn bạc / Được Danh nàng ta −8 · tin cậy … +3) ✔ (W9 fix). Visitor Hỏi han sức khỏe → result card «Được: Đáp ứng …: thiện cảm +1 · đã chuyện trò 2 lần …» readable ✔.
+- iPad: same rumor flow → Bày mưu dialog: Ra tay ngay true numbers, bày mưu rows Mất «mất một chứng cứ, mất lòng người» ✔. Result after Ra tay ngay: «ta không được gì, cũng không mất gì» while the deed resolves later (= N4 / NB-a known) and the sentence carries the NEXT event «Tần … sai người sang thách đấu ngươi» (= W9 residual f, seen again).
+- Fold night after my test setup would not advance («Sang ngày mới», S.tonight="me"): my harness had removed overlays by hand; not reproduced in quickcheck/coop-e2e (both play buổi/weeks). Not counted as a game fault; next seat may re-tap from a clean start.
+- NOT tapped this seat: Tát, Phạt quỳ, Ngáng chân, Bỏ phấn lạ, Ban thưởng, gift, elder Hỏi chuyện/Biếu, court Biếu (W9's list; W10 changed no card).
+
+## Open for Foreman D
+Kit request (R2) for MAIN/kit keeper; residuals a (= kit request), b, c, f; N4 «ta không được gì» on dispatch (same kit request family); N1/N2/N3/N5/N6 from RV4 untouched by this seat.
+
+## HANDOVER
+None needed (SSK). If FAIL: worktree recipe in nt-w9 §HANDOVER; before relshow-scan run `python3 dev/build/assemble.py && node dev/test/relshow-bal.js $PWD/dev/index.html dev/test/relshow-bal.json`.
