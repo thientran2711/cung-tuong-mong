@@ -14,16 +14,18 @@
       not on screen), «Tin trong cung» sits in Q with DQ.newsHold → before: jdayq kmFree holds the flip for the news card, jnf's night gate holds
       the news card for the flip (~80 s stall). Now: the news card paints within 1 s (time asserted), she taps it closed, the flip scene plays
       right after (≤ 1 s), she taps it, the turn goes on.
+   G  (r3, emptied queue) 2 cards make render() disable «Sang buổi»; the cards are then taken out of Q inside showModal (G1, as j68 evGate
+      does) or with no call at all (G2) → «Sang buổi» comes back by itself (G1 ≤ 600 ms, G2 ≤ BAL.dayq.net + 700 ms), then a real tap advances.
    usage: node dev/test/sangbuoi-held.js file:///…/index.html [shotDir] */
 const {chromium}=require('playwright');const [,,URL,OUT]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
-const VP=[[755,1000,2],[1180,820,2]];
+const VP=[[755,1000,2],[1180,820,2]];let BALNET=1000;
 (async()=>{const b=await chromium.launch();let fails=0;const rows=[];
  for(const [W,H,DS] of VP){
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:OUT?DS:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});
   await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});
   const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.on('crash',()=>console.log('PAGE CRASH'));
   await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));
-  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&window.kitModal&&window.DQ&&DQ.stat,null,{timeout:240000});await p.waitForTimeout(2500);
+  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&window.kitModal&&window.DQ&&DQ.stat,null,{timeout:240000});await p.waitForTimeout(2500);BALNET=await p.evaluate(()=>(BAL.dayq&&BAL.dayq.net)||1000);
   const st=()=>p.evaluate(()=>{const hid=el=>Object.getOwnPropertyDescriptor(HTMLElement.prototype,'hidden').get.call(el);const M=document.getElementById('modal');
    return {bk:(typeof wk==='function'?wk():(S.turn||0))+'.'+(S.buoi||0),buoi:S.buoi||0,used,Q:Q.map(m=>m.t),modal:!hid(M)||!!(window.DF&&DF.encM&&DF.F),mt:document.getElementById('mt').textContent,next:!document.getElementById('next').disabled,
     scene:!!document.querySelector('.kmov:not(.km-out)')||!!(window.DF&&DF.F&&!DF.encM),dawn:(()=>{const d=document.getElementById('dawn');return !!(d&&!hid(d)&&d.classList.contains('on'))})(),want:DQ.want,stat:Object.assign({},DQ.stat)}});
@@ -113,6 +115,18 @@ const VP=[[755,1000,2],[1180,820,2]];
      const s1=await waitCard(5000);const sw=await p.evaluate(()=>{const w=!!window.__swallowed;window.__restoreHid();return w});await shot('E1-card');
      if(!sw)return 'setup: no paint was swallowed';if(!s1.modal)return 'activity closed + swallowed paint: NO card painted (one-shot painter) '+JSON.stringify({Q:s1.Q,mt:await p.evaluate(()=>DQ.mt)});
      await drain();{const b1=(await st()).bk;await p.tap('#next',{force:true});return (await advanced(b1))?'':'cards closed but «Sang buổi» did not advance'}},
+   G:async()=>{/* r3 mirror family «the queue EMPTIED with no render after it» (real nights: j68 evGate held every waiting card inside showModal,
+       j3's empty branch only hid #modal, «Sang buổi» stayed disabled from the last render with nothing on screen, 20 s+, LIVE too).
+       G1 the cards are taken out inside showModal (as evGate does) · G2 taken out with no call at all (any other path: the net) */
+     for(const [k,viaShow,lim] of [['G1',1,600],['G2',0,BALNET+700]]){
+      await p.evaluate(()=>{Q.push({t:'Thử: thẻ một',h:'<p>Thử.</p>'},{t:'Thử: thẻ hai',h:'<p>Thử.</p>'});render();const M=document.getElementById('modal');M.hidden=true});
+      if(!(await p.evaluate(()=>document.getElementById('next').disabled)))return k+' setup: «Sang buổi» not disabled with 2 cards';
+      await p.evaluate(v=>{window.__t0=Date.now();if(v){const s0=window.showModal;window.showModal=function(){Q.splice(0,Q.length);window.showModal=s0;return s0.apply(this,arguments)};showModal()}else Q.splice(0,Q.length)},viaShow);
+      let ms=-1;for(let i=0;i<40;i++){const d=await p.evaluate(()=>({dis:document.getElementById('next').disabled,ms:Date.now()-window.__t0}));if(!d.dis){ms=d.ms;break}await sleep(100)}
+      if(ms<0)return k+' queue emptied: «Sang buổi» still disabled after 4 s, nothing on screen '+JSON.stringify(await diag());
+      if(ms>lim)return k+' «Sang buổi» came back too late: '+ms+' ms (limit '+lim+')';
+      rows.push(`${W}x${H} ${k} «Sang buổi» back after ${ms} ms`);console.log(rows[rows.length-1]);await shot(k+'-back')}
+     const b0=(await st()).bk;await p.tap('#next',{force:true});return (await advanced(b0))?'':'«Sang buổi» back but the tap did not advance'},
    F:async()=>{/* the night choice exists only in a life where jnf is on (not a servant / khoa cử road, not parked): else a fresh life */
      for(let i=0;i<4&&!(await p.evaluate(()=>typeof nfOn==='function'&&nfOn()));i++){await newLife();await ensureQuiet()}
      const r0=await p.evaluate(()=>{used=0;advLock=false;render();S.nfX={d:(typeof wk==='function'?wk():(S.turn*3+(S.tuan||0))),st:'open',at:Date.now()};window.__cf0=window.cfBusy;window.__cfQ=1;window.cfBusy=()=>window.__cfQ===1;
