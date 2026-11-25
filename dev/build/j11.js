@@ -28,14 +28,33 @@ function auUnlock(){try{const C=window.AudioContext||window.webkitAudioContext;
 window.auUnlock=auUnlock;
 function musVol(){return OPT.mute||!OPT.snd?0:OPT.mus*AU.duck}
 function fadeTo(a,v,ms,done){if(!a)return;const v0=a.volume,t0=performance.now();const st=()=>{const f=Math.min(1,(performance.now()-t0)/ms);try{a.volume=Math.max(0,Math.min(1,v0+(v-v0)*f))}catch(e){}if(f<1)setTimeout(st,60);else if(done)done()};st()}
-function startTrack(n){const a=mkAudio(n,false,true);if(!a)return null;a.volume=0;a.addEventListener("timeupdate",()=>{if(AU.curName!==n||a.handoff||!a.duration)return;if(a.currentTime>a.duration-1.6){a.handoff=1;const b=startTrack(n);if(b){AU.cur=b;fadeTo(b,musVol(),1500)}fadeTo(a,0,1500,()=>{try{a.pause()}catch(e){}})}});if(auOk()){const p=a.play();if(p&&p.catch)p.catch(()=>{})}return a}
-function setMusic(n){if(AU.curName===n&&AU.cur)return;AU.curName=n;const old=AU.cur;const a=startTrack(n);AU.cur=a;if(a)fadeTo(a,musVol(),1200);if(old)fadeTo(old,0,1200,()=>{try{old.pause()}catch(e){}})}
+function startTrack(n){const a=mkAudio(n,false,true);if(!a)return null;a.volume=0;
+ /* review/sansang-music-fix (OD 25/11 ~04:10Z «hết nghe nhạc luôn»): a track that ENDS without its hand-off (timeupdate missed the last 1.6 s while a
+    mini-game held the main thread) or ERRORS (network drop / cache miss mid-stream) used to stay AU.cur forever = silence until reload; now it is replaced */
+ a.addEventListener("playing",()=>{if(AU.cur===a)AU.mFail=0});
+ a.addEventListener("ended",()=>{if(AU.cur===a&&!a.handoff)auMusRestart(0)});
+ a.addEventListener("error",()=>{a.dead=1;if(AU.cur===a)auMusRestart(1)});a.addEventListener("timeupdate",()=>{if(AU.curName!==n||a.handoff||!a.duration)return;if(a.currentTime>a.duration-1.6){a.handoff=1;const b=startTrack(n);if(b){AU.cur=b;fadeTo(b,musVol(),1500)}fadeTo(a,0,1500,()=>{try{a.pause()}catch(e){}})}});if(auOk()){const p=a.play();if(p&&p.catch)p.catch(()=>{})}return a}
+function setMusic(n){if(AU.curName===n&&AU.cur&&!AU.cur.dead)return;if((!AU.cur||AU.cur.dead)&&AU.curName===n&&performance.now()<(AU.mNext||0))return;AU.curName=n;const old=AU.cur;const a=startTrack(n);AU.cur=a;if(a)fadeTo(a,musVol(),1200);if(old)fadeTo(old,0,1200,()=>{try{old.pause()}catch(e){}})}
 function heartLoop(on){try{if(on&&auOk()){if(!AU.hb){AU.hb=mkAudio("sfx-heartbeat",true,true)}if(AU.hb&&AU.hb.paused){AU.hb.volume=OPT.sfx*.6;const p=AU.hb.play();if(p&&p.catch)p.catch(()=>{})}}else if(AU.hb&&!AU.hb.paused)AU.hb.pause()}catch(e){}}
 function sfx(n){if(!auOk())return;try{let a=AU.cache[n];if(!a){a=AU.cache[n]=mkAudio(n,false)}if(!a||a.dead)return;const b=a.cloneNode();b.volume=OPT.sfx;const p=b.play();if(p&&p.catch)p.catch(()=>{});
  AU.duck=.45;if(AU.cur)AU.cur.volume=musVol();clearTimeout(AU.dt);AU.dt=setTimeout(()=>{AU.duck=1;if(AU.cur)AU.cur.volume=musVol()},650)}catch(e){}}
 function musicCtx(){if(!S)return"bgm-day";if(S.dead)return"bgm-sorrow";if(S.place==="lc")return"bgm-cold";const m=Q[0];if(m&&(m.pid&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="night1"&&m.pid!=="night2"&&m.pid!=="shop"))return"bgm-tension";
  if(m&&(m.pid==="night1"||m.pid==="night2"||m.cls==="night"))return"bgm-night";if((S.month===1||S.month===7)&&S.tuan===0)return"bgm-festival";return (S.buoi||0)===B4L?"bgm-night":"bgm-day"}
 function auTick(){if(!AU.unlocked)return;const m0=Q[0];if(!(m0&&m0.pid&&musicCtx()==="bgm-tension"))heartLoop(false);if(!OPT.snd||OPT.mute){if(AU.cur)try{AU.cur.volume=0}catch(e){}return}setMusic(musicCtx());if(AU.cur){try{AU.cur.volume=musVol();if(AU.cur.paused&&!document.hidden){const p=AU.cur.play();if(p&&p.catch)p.catch(()=>{})}}catch(e){}}}
+/* music watchdog (review/sansang-music-fix): render() → auTick() is the only other place that wakes the music, and a mini-game / focus view
+   renders nothing for minutes — every 2.5 s while sound is on and the page is visible: a dead / ended / paused current track is restarted, a track
+   whose clock stood still for 3 checks (stalled stream) is replaced, a suspended / interrupted AudioContext (music is routed through it) is resumed.
+   Failures back off 2 s → 4 s → … 30 s (offline with no cached music never spins). */
+function auMusRestart(fail){const old=AU.cur;AU.cur=null;if(old){old.handoff=1;try{old.pause()}catch(e){}}
+ if(fail){AU.mFail=(AU.mFail||0)+1;AU.mNext=performance.now()+Math.min(30000,2000*Math.pow(2,AU.mFail-1))}else AU.mNext=0;
+ const n=AU.curName;AU.curName="";if(!auOk()||performance.now()<(AU.mNext||0)){AU.curName=n;return}try{auTick()}catch(e){}}
+function auWatch(){try{if(!auOk())return;const c=AU.ctx;if(c&&c.state!=="running"&&c.state!=="closed"){const p=c.resume();if(p&&p.catch)p.catch(()=>{})}
+ const a=AU.cur;if(!a){if(performance.now()>=(AU.mNext||0)){AU.curName="";auTick()}return}
+ if(a.dead||a.error){if(performance.now()>=(AU.mNext||0))auMusRestart(1);return}if(a.ended){auMusRestart(0);return}
+ if(a.paused){a.__st=0;const p=a.play();if(p&&p.catch)p.catch(()=>{});return}
+ const t=a.currentTime;/* a stall counts only once the track had data (readyState ≥ 2: a fresh track still loading on a slow phone is not stalled); one that never gets data is replaced after ~20 s */
+ if(t===a.__lt&&!a.seeking){a.__st=(a.__st||0)+1;if((a.readyState>=2&&a.__st>=3)||a.__st>=8){a.__st=0;auMusRestart(1)}}else a.__st=0;a.__lt=t}catch(e){}}
+setInterval(auWatch,2500);
 /* real gestures only: touchend / click / pointerup / keydown unlock iOS; pointerdown counts for a mouse (or when WebAudio is missing), a touch pointerdown is not a gesture there */
 for(const ev of ["touchend","click","pointerup","keydown"])document.addEventListener(ev,auUnlock,{capture:true,passive:true});
 /* a touch pointerdown once the page already had a real gesture (sticky activation): wake the existing context right at the finger-down, so the tap sound

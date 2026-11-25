@@ -126,7 +126,7 @@ function react(F,r){r=r||{};try{if(r.seal&&typeof kitEmoSeal==="object"&&kitEmoS
  (r.deltas||[]).forEach((d,i)=>{const s=document.createElement("span");s.className="kfoc-delta";s.innerHTML=typeof chip==="function"?chip(esc(d.t||d),d.cls||""):esc(d.t||d);const g=F.geo;s.style.left=(g.cx+(i-(r.deltas.length-1)/2)*70)+"px";s.style.top=(g.top+g.ih*.45)+"px";F.el.appendChild(s);
   if(still()||!s.animate){setTimeout(()=>s.remove(),KIT_FOC.reactMs);return}
   const a=s.animate([{opacity:0,transform:"translate(-50%,0)"},{opacity:1,transform:"translate(-50%,-18px)",offset:.2},{opacity:1,transform:"translate(-50%,-46px)",offset:.75},{opacity:0,transform:"translate(-50%,-60px)"}],{duration:KIT_FOC.reactMs,delay:i*120});a.onfinish=()=>s.remove()})}
-function close(F){if(!F.open)return;const K=KIT_FOC;F.open=false;F.skipOpen();
+function close(F){if(!F.open)return;const K=KIT_FOC;F.open=false;F.skipOpen();/* OD 25/11 ~04:15Z «a frame must always be closable»: the focus ✕ also dismisses a ma ma tip (kitTip) shown over it */try{if(typeof window.kitTipOff==="function")window.kitTipOff()}catch(e){}
  if(still()){const a=wa(F,F.el,[{opacity:1},{opacity:0}],{duration:K.fadeMs});if(a)a.onfinish=()=>destroy(F,1);else destroy(F,1);return}
  [...F.el.querySelectorAll(".kfoc-b")].forEach(b=>wa(F,b,[{opacity:1},{opacity:0,transform:"scale(.85)"}],{duration:K.foldCloseMs}));wa(F,F.tabs,[{opacity:1},{opacity:0}],{duration:K.foldCloseMs});wa(F,F.plate,[{opacity:1},{opacity:0}],{duration:K.foldCloseMs});
  const d=feetDelta(F);F.img.style.transformOrigin="50% 100%";
@@ -179,7 +179,7 @@ html.kf-still .kfoc-veil{-webkit-backdrop-filter:none;backdrop-filter:none;backg
 .kfoc-ph{background:repeating-linear-gradient(45deg,#efe3c8,#efe3c8 6px,#e8d9b8 6px,#e8d9b8 12px)}
 .kfoc-t{min-width:0;display:flex;flex-direction:column;justify-content:center;gap:0;line-height:1.1}.kfoc-t b{font-size:.84rem;font-weight:800;white-space:normal;overflow-wrap:break-word;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-height:2.2em}.kfoc-t small{display:block;font-size:.72rem;color:var(--dim,#7a6a58);white-space:normal;overflow:hidden;max-height:2.2em}.kfoc-t small span{white-space:nowrap}.kfoc-b.kfoc-sub3 .kfoc-t small{max-height:3.3em}.kfoc-b.kfoc-sub3 .kfoc-t b{-webkit-line-clamp:1;max-height:1.1em}
 .kfoc-b.kfoc-hasi{padding-right:20px}
-.kfoc-intro{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(92%,460px);max-height:90%;z-index:5;display:flex;flex-direction:column;align-items:center;gap:10px;padding:14px;z-index:3;overflow:auto;box-sizing:border-box;background:var(--k-card,#fffaf0);color:var(--ink,#3a2418);border:1px solid var(--gold,#b8892b);border-radius:14px;box-shadow:0 6px 24px rgba(0,0,0,.35)}
+.kfoc-intro{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(92%,460px);max-height:90%;display:flex;flex-direction:column;align-items:center;gap:10px;padding:14px;z-index:5;overflow:auto;box-sizing:border-box;background:var(--k-card,#fffaf0);color:var(--ink,#3a2418);border:1px solid var(--gold,#b8892b);border-radius:14px;box-shadow:0 6px 24px rgba(0,0,0,.35)}
 .kfoc-intro.kgr{background:var(--k-card,#fffaf0)!important;opacity:1!important}
 .kfoc-intro .kpst{white-space:nowrap;margin:0}
 /* KIT §92.4: the fixed particle / weather / fx layers (z 9440-9470) never cover a rules card or the skip button: hidden while a kitFocus play layer is up (class on <html>, no :has() — it cost tab time) */

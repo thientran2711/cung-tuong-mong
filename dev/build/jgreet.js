@@ -155,4 +155,10 @@ const gmReplyCard=rcpReg("gmReply",(v,prov,G,h1,h2)=>{let opts;if(prov){try{opts
  const at0=agTick;agTick=function(){try{gmTick()}catch(e){}return at0.apply(this,arguments)};
  const w0=agWatch;agWatch=function(){const r=w0.apply(this,arguments);try{gmWatch()}catch(e){}return r};
 })();
+/* a visitor card never opens on the grey loading stand-in (owner 22:08Z, MAIN 132 / LC13 visitor-scene): her full figure is preloaded first (≤ 4 s), then the card shows — every «Có người đến» card with a consort on it, high or low rank */
+(function(){const s0=showModal;showModal=function(){const m=Q[0];
+ try{if(m&&m.t==="Có người đến"&&m.who&&m.who.w&&m.who.w[0]==="r"&&m.__fcW==null&&typeof kitFigOf==="function"){const v=RV(m.who.w[1]);if(v){visitSeen(v);const src=kitFigOf(v);
+   if(src&&!/unknown-fig/.test(src)){const im=new Image();m.__fcW=1;let done=false;const go=()=>{if(done)return;done=true;m.__fcW=2;try{if(typeof renderStage==="function")renderStage()}catch(e){}/* her stage token is now the real figure, not the stand-in */try{showModal()}catch(e){}};im.onload=go;im.onerror=go;im.src=src;
+    if(im.complete){done=true;m.__fcW=2;try{if(typeof renderStage==="function")renderStage()}catch(e){}}else{setTimeout(go,4000);return undefined}}}}}catch(e){}
+ if(m&&m.__fcW===1)return undefined;return s0.apply(this,arguments)}})();
 Object.assign(window,{visitSeen,visitArrive,visitArriveK,grSay,grSelf,grAddr,greetName,grRank,grUniq,gmTick,gmWatch,gmOpts,GM});
