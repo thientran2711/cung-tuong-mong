@@ -1,0 +1,1594 @@
+{
+ "run": {
+  "tag": "flight2-coop1f",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/",
+  "harness": "realtap",
+  "args": {
+   "host": "fold",
+   "guest": "ipad",
+   "kiep": "1",
+   "seed": "7001",
+   "tag": "flight2-coop1f"
+  },
+  "at": "2026-11-25T08:05:52.172Z"
+ },
+ "pairs": [
+  {
+   "job": {
+    "id": "coop-rt-flight2-coop1f",
+    "kiep": 1,
+    "seed": 7001
+   },
+   "lives": [
+    {
+     "seat": "guest",
+     "dev": "ipad",
+     "kiep": 1,
+     "extra": false,
+     "room": "VGPR",
+     "life": {
+      "id": "HARNESS",
+      "type": "harness"
+     },
+     "harness": {
+      "kind": "realtap",
+      "sha": "4523381f",
+      "realtap": true,
+      "jsClicks": 0,
+      "deadButtons": 0,
+      "cap": null,
+      "stuck": 1,
+      "unstick": [
+       {
+        "at": 32,
+        "lvl": 1,
+        "layer": "#modal",
+        "title": "Đợi hảo hữu chọn thân phận"
+       },
+       {
+        "at": 192,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 927,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 934,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 943,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 952,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 962,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 970,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 978,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 996,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1003,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1010,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1017,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1024,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1031,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1038,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1046,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1053,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1060,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1067,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1190,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1630,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1641,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1651,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1662,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2038,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 2045,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 2052,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 2060,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 2085,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 2427,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 2434,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 2453,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2463,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2478,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 2485,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 2492,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 2739,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 2746,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 2754,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 2762,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 2769,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 2776,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 2784,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 2791,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 3627,
+        "lvl": 3,
+        "layer": ".dlg",
+        "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+       },
+       {
+        "at": 3854,
+        "lvl": 1,
+        "layer": "#kchatp",
+        "title": ""
+       },
+       {
+        "at": 3878,
+        "lvl": 1,
+        "layer": "#kchatp",
+        "title": ""
+       },
+       {
+        "at": 3948,
+        "lvl": 1,
+        "layer": "#kchatp",
+        "title": ""
+       },
+       {
+        "at": 3973,
+        "lvl": 1,
+        "layer": "#kchatp",
+        "title": ""
+       },
+       {
+        "at": 3991,
+        "lvl": 1,
+        "layer": "#kchatp",
+        "title": ""
+       },
+       {
+        "at": 4039,
+        "lvl": 1,
+        "layer": "#kchatp",
+        "title": ""
+       },
+       {
+        "at": 4053,
+        "lvl": 1,
+        "layer": "#kchatp",
+        "title": ""
+       },
+       {
+        "at": 4064,
+        "lvl": 1,
+        "layer": "#kchatp",
+        "title": ""
+       },
+       {
+        "at": 4089,
+        "lvl": 1,
+        "layer": "#kchatp",
+        "title": ""
+       },
+       {
+        "at": 4109,
+        "lvl": 1,
+        "layer": "#kchatp",
+        "title": ""
+       },
+       {
+        "at": 4130,
+        "lvl": 1,
+        "layer": "#kchatp",
+        "title": ""
+       },
+       {
+        "at": 4144,
+        "lvl": 1,
+        "layer": "#kchatp",
+        "title": ""
+       },
+       {
+        "at": 4177,
+        "lvl": 1,
+        "layer": "#kchatp",
+        "title": ""
+       },
+       {
+        "at": 4200,
+        "lvl": 1,
+        "layer": "#kchatp",
+        "title": ""
+       },
+       {
+        "at": 4232,
+        "lvl": 1,
+        "layer": "#kchatp",
+        "title": ""
+       }
+      ],
+      "slice": null,
+      "areaTaps": 142,
+      "typed": 1
+     },
+     "exitPick": null,
+     "bugs": [
+      {
+       "k": "dead|close button has no effect: .dlg «Tâm trạng · Tể tướng Tôn Bá Ngôn» «Lui»",
+       "type": "dead",
+       "msg": "close button has no effect: .dlg «Tâm trạng · Tể tướng Tôn Bá Ngôn» «Lui»",
+       "n": 1,
+       "at": 2839,
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1f-guest-k1/noeffect-1795596790897.png"
+      },
+      {
+       "k": "stuck|no progress 15 min on .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1»",
+       "type": "stuck",
+       "msg": "no progress 15 min on .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1»",
+       "n": 1,
+       "at": 3627,
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1f-guest-k1/stuck-1.png",
+       "save": null,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 6,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Bành Ngọc Hành"
+       },
+       "buttons": [
+        "",
+        "",
+        "",
+        "",
+        "Theo Hoàng thượngRất vữngTốnkhôngĐượcbệ hạ để mắt hơn, Hoàng thượng tin ta hơn, trái ý phụ",
+        "Theo Thái hậuRất vữngTốnkhôngĐượcThái hậu hài lòng, Thái hậu che chở ta, phụ thân cùng phe",
+        "Theo Tể tướng Tôn Bá NgônRất vữngTốnkhôngĐượccó thêm bạc, nhà Tể tướng hậu thuẫn ta bằng b",
+        "Đứng ngoài, giữ mìnhRất vữngTốnkhôngĐượcđược tiếng hiền đức (chút ít), không phe nào nợ ta"
+       ]
+      },
+      {
+       "type": "harness",
+       "msg": "runner error: page.waitForTimeout: Target page, context or browser has been closed",
+       "n": 1
+      }
+     ],
+     "dead": [
+      {
+       "k": "NO EFFECT",
+       "screen": ".dlg «Tâm trạng · Tể tướng Tôn Bá Ngôn»",
+       "label": "Lui",
+       "cover": "tapped 3× for real, dialog stays",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1f-guest-k1/noeffect-1795596790897.png",
+       "at": 2839,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 6,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Bành Ngọc Hành"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.»",
+       "label": "Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh",
+       "cover": "zero size",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1f-guest-k1/dead-ipad-1795597653623.png",
+       "dev": "ipad",
+       "at": 3702,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 5,
+        "w": 2,
+        "b": 3,
+        "age": 20,
+        "rank": 0,
+        "name": "Bành Ngọc Hành"
+       }
+      }
+     ],
+     "buoi": 74,
+     "saves": [
+      {
+       "buoi": 50,
+       "year": 1,
+       "chars": 0,
+       "key": ""
+      }
+     ]
+    },
+    {
+     "seat": "host",
+     "dev": "fold",
+     "kiep": 1,
+     "extra": false,
+     "room": "VGPR",
+     "life": {
+      "id": "HARNESS",
+      "type": "harness"
+     },
+     "harness": {
+      "kind": "realtap",
+      "sha": "4523381f",
+      "realtap": true,
+      "jsClicks": 0,
+      "deadButtons": 0,
+      "cap": null,
+      "stuck": 1,
+      "unstick": [
+       {
+        "at": 940,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 951,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 961,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 972,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 983,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 993,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1001,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1627,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1637,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1653,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1664,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1689,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1696,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1703,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1711,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1719,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1726,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1734,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1741,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1748,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1756,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 2063,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2182,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2297,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2430,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 2439,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 2448,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 2458,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 2755,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2765,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2776,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2787,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2798,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2809,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2819,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2830,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2841,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2851,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2862,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2873,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2884,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2894,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2905,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2916,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2926,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2937,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2948,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2959,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2969,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2980,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2991,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3001,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3012,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3023,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3033,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3044,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3055,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3065,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3076,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3087,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3097,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3108,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3119,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3129,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3140,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3151,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3162,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3172,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3183,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3194,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3204,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3215,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3226,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3236,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3247,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3258,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3268,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3279,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3290,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3300,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3311,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3322,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3333,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3343,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3354,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3365,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3375,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3386,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3397,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3407,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3418,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3429,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3439,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3450,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3461,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3471,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3482,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3493,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3504,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3514,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3525,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3535,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3546,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3557,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3568,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3578,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3589,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3600,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3610,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3613,
+        "lvl": 3,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3645,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3657,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3668,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3679,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3692,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3704,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3715,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3728,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3740,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3752,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3763,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3774,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3785,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3797,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3808,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3819,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3830,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3842,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3853,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3864,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3875,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3887,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3898,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3909,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3921,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3933,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3945,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3956,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3968,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3979,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3991,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 4003,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 4015,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 4026,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 4038,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 4050,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 4061,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 4073,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 4084,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 4096,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 4107,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 4119,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 4131,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 4142,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 4154,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 4166,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 4177,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 4189,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 4200,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 4212,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 4224,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 4236,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       }
+      ],
+      "slice": null,
+      "areaTaps": 208
+     },
+     "exitPick": null,
+     "bugs": [
+      {
+       "k": "dead|close button has no effect: .dlg «Tâm trạng · Ta» «Lui»",
+       "type": "dead",
+       "msg": "close button has no effect: .dlg «Tâm trạng · Ta» «Lui»",
+       "n": 1,
+       "at": 173,
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1f-host-k1/noeffect-1795594124706.png"
+      },
+      {
+       "k": "stuck|no progress 15 min on #coopfz «»",
+       "type": "stuck",
+       "msg": "no progress 15 min on #coopfz «»",
+       "n": 1,
+       "at": 3613,
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1f-host-k1/stuck-1.png",
+       "save": null,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 6,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Diệp Mạn Ca"
+       },
+       "buttons": [
+        "Về màn đầu"
+       ]
+      },
+      {
+       "type": "harness",
+       "msg": "runner error: page.waitForTimeout: Target page, context or browser has been closed",
+       "n": 1
+      }
+     ],
+     "dead": [
+      {
+       "k": "DEAD BUTTON",
+       "screen": ".kmov",
+       "label": "?",
+       "cover": "img.kfr",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1f-host-k1/dead-fold-1795594116115.png",
+       "dev": "fold",
+       "at": 164,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 0,
+        "b": 3,
+        "age": 20,
+        "rank": 1,
+        "name": "Diệp Mạn Ca"
+       }
+      },
+      {
+       "k": "NO EFFECT",
+       "screen": ".dlg «Tâm trạng · Ta»",
+       "label": "Lui",
+       "cover": "tapped 3× for real, dialog stays",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1f-host-k1/noeffect-1795594124706.png",
+       "at": 173,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 0,
+        "b": 3,
+        "age": 20,
+        "rank": 1,
+        "name": "Diệp Mạn Ca"
+       }
+      }
+     ],
+     "buoi": 74,
+     "saves": [
+      {
+       "buoi": 50,
+       "year": 1,
+       "chars": 0,
+       "key": ""
+      }
+     ]
+    }
+   ],
+   "partial": false,
+   "bugs": []
+  }
+ ]
+}

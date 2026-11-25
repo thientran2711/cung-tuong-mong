@@ -1,0 +1,2695 @@
+{
+ "job": {
+  "id": "coop-rt-flight2-coop1f-host-k1",
+  "origin": null,
+  "road": null,
+  "bot": "sens",
+  "seed": 70111,
+  "dev": "fold",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "4523381f",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 1,
+  "unstick": [
+   {
+    "at": 940,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 951,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 961,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 972,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 983,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 993,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1001,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1627,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1637,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1653,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1664,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1689,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1696,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1703,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1711,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1719,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1726,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1734,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1741,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1748,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1756,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2063,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2182,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2297,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2430,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2439,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2448,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2458,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2755,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2765,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2776,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2787,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2798,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2809,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2819,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2830,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2841,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2851,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2862,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2873,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2884,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2894,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2905,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2916,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2926,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2937,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2948,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2959,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2969,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2980,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2991,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3001,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3012,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3023,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3033,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3044,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3055,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3065,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3076,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3087,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3097,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3108,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3119,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3129,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3140,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3151,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3162,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3172,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3183,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3194,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3204,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3215,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3226,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3236,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3247,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3258,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3268,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3279,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3290,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3300,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3311,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3322,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3333,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3343,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3354,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3365,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3375,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3386,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3397,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3407,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3418,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3429,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3439,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3450,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3461,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3471,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3482,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3493,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3504,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3514,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3525,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3535,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3546,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3557,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3568,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3578,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3589,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3600,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3610,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3613,
+    "lvl": 3,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3645,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3657,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3668,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3679,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3692,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3704,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3715,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3728,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3740,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3752,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3763,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3774,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3785,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3797,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3808,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3819,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3830,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3842,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3853,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3864,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3875,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3887,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3898,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3909,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3921,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3933,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3945,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3956,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3968,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3979,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 3991,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4003,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4015,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4026,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4038,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4050,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4061,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4073,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4084,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4096,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4107,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4119,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4131,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4142,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4154,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4166,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4177,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4189,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4200,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4212,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4224,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 4236,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   }
+  ],
+  "slice": null,
+  "areaTaps": 208
+ },
+ "life": {
+  "id": "HARNESS",
+  "type": "harness"
+ },
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "dead|close button has no effect: .dlg «Tâm trạng · Ta» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tâm trạng · Ta» «Lui»",
+   "n": 1,
+   "at": 173,
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1f-host-k1/noeffect-1795594124706.png"
+  },
+  {
+   "k": "stuck|no progress 15 min on #coopfz «»",
+   "type": "stuck",
+   "msg": "no progress 15 min on #coopfz «»",
+   "n": 1,
+   "at": 3613,
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1f-host-k1/stuck-1.png",
+   "save": null,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 6,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Diệp Mạn Ca"
+   },
+   "buttons": [
+    "Về màn đầu"
+   ]
+  },
+  {
+   "type": "harness",
+   "msg": "runner error: page.waitForTimeout: Target page, context or browser has been closed",
+   "n": 1
+  }
+ ],
+ "dead": [
+  {
+   "k": "DEAD BUTTON",
+   "screen": ".kmov",
+   "label": "?",
+   "cover": "img.kfr",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1f-host-k1/dead-fold-1795594116115.png",
+   "dev": "fold",
+   "at": 164,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 1,
+    "name": "Diệp Mạn Ca"
+   }
+  },
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tâm trạng · Ta»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1f-host-k1/noeffect-1795594124706.png",
+   "at": 173,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 3,
+    "age": 20,
+    "rank": 1,
+    "name": "Diệp Mạn Ca"
+   }
+  }
+ ],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 0,
+   "key": ""
+  }
+ ],
+ "buoi": 74,
+ "steps": 9518,
+ "status": [
+  "STATUS coop-rt-flight2-coop1f-host-k1 · buổi 73 · year 1 · rank 1 · bugs 1 · stuck 0 · dead buttons 2"
+ ],
+ "_snapAt": 1795598175909,
+ "trace": [
+  [
+   2366,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «lá phong rơi»"
+  ],
+  [
+   2366,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Tài nghệ»"
+  ],
+  [
+   2366,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Buổi chiều, còn 4 khắc»"
+  ],
+  [
+   2367,
+   ".dlg «chiều · còn» «Lui»"
+  ],
+  [
+   2368,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Thủy đậu · nhẹ»"
+  ],
+  [
+   2368,
+   ".dlg «Thủy đậu · nhẹ» «Lui»"
+  ],
+  [
+   2369,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Cầm kỳ thi họa 8/12»"
+  ],
+  [
+   2370,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Hành sự»"
+  ],
+  [
+   2371,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Lối riêngLối riêngMở lại thẻ bàiRất vữngTrở lại đư»"
+  ],
+  [
+   2377,
+   ".dlg «Kẻ hầu xin» «Từ chốiRất vữngTốnkhôngĐượccó thêm bạcMấtngười ấy »"
+  ],
+  [
+   2384,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Lối riêngLối riêngCắt đứt với một vị thị vệRất vữn»"
+  ],
+  [
+   2393,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Lối riêngLối riêngXin rút thẻ bài, đóng cửa tĩnh d»"
+  ],
+  [
+   2403,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   2405,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   2409,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   2413,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2414,
+   "#kmrew «Thường»"
+  ],
+  [
+   2415,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2415,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2415,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2416,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2416,
+   ".dlg «Lui»"
+  ],
+  [
+   2417,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   2418,
+   ".dlg «Lui»"
+  ],
+  [
+   2418,
+   "#kmrew «ThườngThan liễuHộp màu mày dùng khi điểm trang (kẻ»"
+  ],
+  [
+   2419,
+   ".dlg «Lui»"
+  ],
+  [
+   2420,
+   "#kmrew «Thường»"
+  ],
+  [
+   2420,
+   ".dlg «Lui»"
+  ],
+  [
+   2421,
+   "#kmrew «Thường»"
+  ],
+  [
+   2421,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2422,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2422,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2423,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2423,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2423,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2424,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2424,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2424,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2424,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2425,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2425,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2425,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2426,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2426,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2426,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2426,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2427,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2427,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2427,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2428,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2428,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2428,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2429,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2429,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2429,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2430,
+   "#kmrew «Thường»"
+  ],
+  [
+   2431,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2431,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2431,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2431,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2432,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2432,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2432,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2433,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2433,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2433,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2434,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2434,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2434,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2434,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2435,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2435,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2435,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2436,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2436,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2436,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2437,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2437,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2437,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2438,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2438,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2438,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2439,
+   "#kmrew «ThườngThan liễuHộp màu mày dùng khi điểm trang (kẻ»"
+  ],
+  [
+   2440,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2440,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2440,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2441,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2441,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2441,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2442,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2442,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2442,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2442,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2443,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2443,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2443,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2444,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2444,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2444,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2445,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2445,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2445,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2446,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2446,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2446,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2447,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2447,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2447,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2447,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2448,
+   "#kmrew «ThườngTrà Long TĩnhPha mời phi tần đến chơi: thiện»"
+  ],
+  [
+   2449,
+   ".dlg «Lui»"
+  ],
+  [
+   2450,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   2450,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2450,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2451,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2451,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2451,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2452,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2452,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2452,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2452,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2453,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2453,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2453,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2454,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2454,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2454,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2454,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2455,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2455,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2455,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2456,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2456,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2456,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2457,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2457,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2457,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2458,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2458,
+   "#kmrew «Nhận»"
+  ],
+  [
+   2459,
+   "#kmrew «Nhận»"
+  ],
+  [
+   2460,
+   ".dlg «Bổng lộc tháng bảy» «Vì sao»"
+  ],
+  [
+   2460,
+   ".dlg «Bổng lộc tháng bảy» «Vì sao»"
+  ],
+  [
+   2461,
+   ".dlg «Bổng lộc tháng bảy» «Vì sao»"
+  ],
+  [
+   2461,
+   ".dlg «Bổng lộc tháng bảy» «Vì sao»"
+  ],
+  [
+   2462,
+   ".dlg «Bổng lộc tháng bảy» «Lui»"
+  ],
+  [
+   2463,
+   ".dlg «Thỉnh bình an mạch» «Lui»"
+  ],
+  [
+   2465,
+   ".dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1» «Theo Hoàng thượngRất vữngTốnkhôngĐượcbệ hạ để mắt »"
+  ],
+  [
+   2466,
+   ".dlg «Điềm báo» «Lui»"
+  ],
+  [
+   2468,
+   ".dlg «Bị tố bày biện xa xỉ» «Lui»"
+  ],
+  [
+   2469,
+   ".dlg «Có người bán tin» «Không muaTốnkhôngĐượckhôngGhi chúkhông biết tin ấy»"
+  ],
+  [
+   2471,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2472,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2472,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2472,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2473,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2473,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2473,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2474,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2474,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2475,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2475,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2475,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2476,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2476,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2476,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2477,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2477,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2477,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2478,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2478,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2479,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2479,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2479,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2480,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Bạc21Sức93/97»"
+  ],
+  [
+   2481,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   2482,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Lịch tháng»"
+  ],
+  [
+   2483,
+   ".dlg «Lịch tháng» «mồng 2»"
+  ],
+  [
+   2483,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   2483,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   2483,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   2484,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   2484,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   2484,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   2484,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   2485,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   2485,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   2485,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   2486,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   2486,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   2486,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   2486,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   2487,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   2487,
+   ".dlg «Lịch tháng» «Bỏ hẹn»"
+  ],
+  [
+   2487,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   2487,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   2488,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   2488,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   2488,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   2488,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   2489,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   2489,
+   ".dlg «Lịch tháng» «Bỏ hẹn»"
+  ],
+  [
+   2489,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   2489,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   2490,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   2490,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   2490,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   2491,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   2491,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   2491,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   2491,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   2492,
+   ".dlg «Lịch tháng» «Bỏ hẹn»"
+  ],
+  [
+   2492,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   2492,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   2492,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   2493,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   2493,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   2493,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   2494,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   2494,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   2495,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Quẻ Hạ (Sức khỏe)»"
+  ],
+  [
+   2495,
+   ".dlg «Quẻ Hạ · Sức khỏe» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   2496,
+   ".dlg «Gieo lại quẻ» «Lui»"
+  ],
+  [
+   2498,
+   ".dlg «Chuyện lạ cần tra» «Hỏi Lạc Mai ai đã chạm vàoRất vữngTốnkhôngĐượcđược»"
+  ],
+  [
+   2506,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «sương mù»"
+  ],
+  [
+   2506,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Lật thẻKhông có»"
+  ],
+  [
+   2507,
+   ".dlg «Lật thẻ: Không có» «Lui»"
+  ],
+  [
+   2508,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   2509,
+   ".dlg «Có người đến» «Lui»"
+  ],
+  [
+   2510,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Chọn chính mình»"
+  ],
+  [
+   2510,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   2511,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Thư từ»"
+  ],
+  [
+   2511,
+   ".dlg «Gửi»"
+  ],
+  [
+   2511,
+   ".dlg «Gửi»"
+  ],
+  [
+   2511,
+   ".dlg «Gửi»"
+  ],
+  [
+   2512,
+   ".dlg «Gửi»"
+  ],
+  [
+   2512,
+   ".dlg «Lui»"
+  ],
+  [
+   2513,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Bạc11Sức93/97»"
+  ],
+  [
+   2514,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   2515,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «2Cung nhân»"
+  ],
+  [
+   2515,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   2516,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   2517,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Số lần ân thưởng0»"
+  ],
+  [
+   2517,
+   ".dlg «Ân thưởng» «Lui»"
+  ],
+  [
+   2518,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Bành Ngọc Hành: Đang làm việc»"
+  ],
+  [
+   2519,
+   ".dlg «<span data-k61skip=\"1\"><b class=\"kname\" style=\"--r» «Lui»"
+  ],
+  [
+   2524,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   2527,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   2534,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Hoàng tự»"
+  ],
+  [
+   2538,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2539,
+   ".dlg «Phụ tuyến · Tâm nguyện Phế phi họ Tần (1/3): Chuyệ» «Khéo từ chốiRất vữngTốnkhôngĐượcdưỡng sức, giữ sức»"
+  ],
+  [
+   2540,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2541,
+   ".dlg «Kẻ hầu xin đi» «Giáng một bậc, giữ kỷ cươngTốnkhôngĐượchết kiêu·kẻ»"
+  ],
+  [
+   2541,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2550,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2551,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2551,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2551,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2551,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2552,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2552,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2552,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2553,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2553,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2553,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2553,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2554,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2554,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2554,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2554,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2555,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2555,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2555,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2556,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2556,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2556,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2556,
+   ".kbk «Tổng lược» «Vào ngày mới»"
+  ],
+  [
+   2557,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Người được sai đi (có mới)»"
+  ],
+  [
+   2557,
+   ".dlg «Tin chờ người sai đi» «Lui»"
+  ],
+  [
+   2564,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Người lạ»"
+  ],
+  [
+   2564,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   2565,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Có thaiRất thấp»"
+  ],
+  [
+   2566,
+   ".dlg «Có thai: Rất thấp» «Lui»"
+  ],
+  [
+   2567,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Lịch tháng»"
+  ],
+  [
+   2567,
+   ".dlg «Lịch tháng» «mồng 6»"
+  ],
+  [
+   2567,
+   ".dlg «Lịch tháng» «ngày 18»"
+  ],
+  [
+   2567,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   2568,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   2568,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   2568,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   2568,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   2569,
+   ".dlg «Lịch tháng» «Bỏ hẹn»"
+  ],
+  [
+   2569,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   2569,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   2570,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   2570,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   2570,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   2570,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   2571,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   2571,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   2571,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   2571,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   2572,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   2572,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   2572,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   2572,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   2573,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   2573,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   2573,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   2573,
+   ".dlg «Lịch tháng» «Bỏ hẹn»"
+  ],
+  [
+   2574,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   2574,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   2574,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   2575,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   2575,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   2576,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Giao tình»"
+  ],
+  [
+   2576,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Buổi trưa, còn 4 khắc»"
+  ],
+  [
+   2577,
+   ".dlg «trưa · còn» «Lui»"
+  ],
+  [
+   2577,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   2579,
+   ".dlg «Hoàng thượng» «Giúp ngài xếp tấu chươngRất vữngTốnSức -5Đượcthêm »"
+  ],
+  [
+   2586,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «nắng vàng»"
+  ],
+  [
+   2587,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Bổng lộcsau 2 tuần»"
+  ],
+  [
+   2587,
+   ".dlg «Bổng lộc» «Lui»"
+  ],
+  [
+   2588,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   2588,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «nắng vàng»"
+  ],
+  [
+   2588,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Tai mắt0»"
+  ],
+  [
+   2589,
+   ".dlg «Tai mắt» «Lui»"
+  ],
+  [
+   2590,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Giao tình»"
+  ],
+  [
+   2590,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Buổi chiều, còn 4 khắc»"
+  ],
+  [
+   2590,
+   ".dlg «chiều · còn» «Lui»"
+  ],
+  [
+   2591,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Cấm túc1 tháng»"
+  ],
+  [
+   2591,
+   ".dlg «Cấm túc 1 tháng» «Lui»"
+  ],
+  [
+   2592,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Hậu cung»"
+  ],
+  [
+   2595,
+   "DEAD ThườngÁo lụa mộc hồng nhạt"
+  ],
+  [
+   2596,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Bạc11Sức92/97»"
+  ],
+  [
+   2597,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   2599,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Buôn bánBuôn bánĐổi việc phòng bịⓘĐượcđang giữ việ»"
+  ],
+  [
+   2600,
+   ".dlg «Phòng bị» «Canh chừng cungRất vữngTốnkhôngĐượcbắt kẻ lẻn vào »"
+  ],
+  [
+   2608,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Tú Dung»"
+  ],
+  [
+   2609,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Giao thiệpGiao thiệpHỏi chuyệnRất vữngTốn2 khắcThà»"
+  ],
+  [
+   2618,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Giao thiệpGiao thiệpHỏi chuyệnRất vữngTốn2 khắcThà»"
+  ],
+  [
+   2622,
+   ".dlg «Kỳ nguyệt sự» «Báo sớm, nói đã sạch kỳRất vữngTốnkhôngĐượcthẻ bài»"
+  ],
+  [
+   2625,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   2628,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   2635,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2636,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2638,
+   ".dlg «Phụ tuyến · Đọc giúp tấu chương chữ thảo · Lời nhờ» «Khéo từ chốiRất vữngTốnSủng -3Đượcdưỡng sức, giữ s»"
+  ],
+  [
+   2643,
+   "DEAD Trang sau"
+  ],
+  [
+   2645,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2652,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Giao thiệpGiao thiệpHỏi chuyệnRất vữngTốn2 khắcThà»"
+  ],
+  [
+   2662,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Giao thiệpGiao thiệpHỏi chuyệnRất vữngTốn2 khắcThà»"
+  ],
+  [
+   2668,
+   ".dlg «Việc của kẻ hầu» «Thưởng vì che chắn cho chủ khi bị xôRất vữngTốnBạc»"
+  ],
+  [
+   2676,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   2676,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Tài nghệ»"
+  ],
+  [
+   2677,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Giao tình»"
+  ],
+  [
+   2677,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Bành Ngọc Hành: Đang làm việc»"
+  ],
+  [
+   2678,
+   ".dlg «<span data-k61skip=\"1\"><b class=\"kname\" style=\"--r» «Lui»"
+  ],
+  [
+   2685,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Phe phái hậu cung»"
+  ],
+  [
+   2685,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Triều đình»"
+  ],
+  [
+   2686,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Tin báo: 20 tin mới»"
+  ],
+  [
+   2686,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   2688,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Tư trang»"
+  ],
+  [
+   2688,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Túi đồThú cưngViệcTất cả 55Trang sức 2Y phục 2Vải »"
+  ],
+  [
+   2688,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   2689,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Hoàng tự»"
+  ],
+  [
+   2689,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Người lạ»"
+  ],
+  [
+   2690,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Người lạ»"
+  ],
+  [
+   2691,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké»"
+  ],
+  [
+   2691,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Bành Ngọc Hành: Đang làm việc»"
+  ],
+  [
+   2692,
+   ".dlg «<span data-k61skip=\"1\"><b class=\"kname\" style=\"--r» «Lui»"
+  ],
+  [
+   2699,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Bành Ngọc Hành: Đang làm việc»"
+  ],
+  [
+   2699,
+   ".dlg «<span data-k61skip=\"1\"><b class=\"kname\" style=\"--r» «Lui»"
+  ],
+  [
+   2707,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «Sẵn sàng»"
+  ],
+  [
+   2708,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   2709,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   2710,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2713,
+   "page «Diên Huy cung · Chiêu Nhân hiên · Ở đây còn 2 ngườ» «2Cung nhân»"
+  ],
+  [
+   2714,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2716,
+   "#kmrew «Thường»"
+  ],
+  [
+   2717,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2717,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2717,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2718,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   2719,
+   ".dlg «Lui»"
+  ],
+  [
+   2720,
+   "#kmrew «Nhận»"
+  ],
+  [
+   2721,
+   "#kmrew «Nhận»"
+  ],
+  [
+   2723,
+   ".dlg «Bổng lộc tháng tám» «NhịnRất vữngTốnkhôngĐượcđược tiếng hiền đức (chút »"
+  ],
+  [
+   2726,
+   ".dlg «Kẻ hầu ăn bớt» «Răn dạy rồi thaRất vữngTốnkhôngĐượclấy lại đồ, ngư»"
+  ],
+  [
+   2727,
+   ".dlg «Lễ tấn phong Tống Linh Vận» «Đến chúc mừngTốnSức -5Đượcthiện cảm +5·lì xì Bạc +»"
+  ],
+  [
+   2729,
+   ".dlg «Chương 1 khép lại» «Lui»"
+  ],
+  [
+   2730,
+   ".dlg «Chương 2: Lần đầu được sủng» «Lui»"
+  ],
+  [
+   2731,
+   ".dlg «Thỉnh bình an mạch» «Lui»"
+  ],
+  [
+   2733,
+   ".dlg «Y phục dự Tết Trùng cửu» «Cáo lỗi, về cung nghỉRất vữngTốnkhôngĐượcvề cung n»"
+  ],
+  [
+   2734,
+   ".dlg «Tết Trùng cửu · Chuyện bên lề hội» «Gấp lại, giữ trong hộp của khoTốnĐức -3·Sủng -3Đượ»"
+  ],
+  [
+   2735,
+   ".dlg «Sứ đoàn vào triều» «Đứng xem rồi vềTốnkhôngĐượckhông»"
+  ],
+  [
+   2736,
+   ".dlg «Thu săn» «Lui»"
+  ],
+  [
+   2737,
+   ".dlg «Sứ đoàn vào triều» «Thưa Hoàng hậu cho Đào Thục Ý luiTốnkhôngĐượcHoàng»"
+  ],
+  [
+   2738,
+   ".dlg «Thu săn» «Nói bận việc, tránh điTốnkhôngĐượcSức +5MấtThạch L»"
+  ],
+  [
+   2744,
+   "DEAD Trang sau"
+  ],
+  [
+   3618,
+   "title (unstick reload) «cùng hảo hữu»"
+  ],
+  [
+   3619,
+   "title (unstick reload) «trở lại phòng|vào lại phòng|về phòng»"
+  ]
+ ],
+ "_ckAt": 1795598177106,
+ "_ckB": 74
+}

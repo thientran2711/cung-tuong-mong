@@ -1,0 +1,1 @@
+VGPR (flight2-coop1f, harness 4523381f) VOID: stuck 15 min at buoi 73-74 (guest looping on week-book «Tuan» cover with Tam trang dialogs / «Phu tuyen · Tan quan lap uy · Chuong 2 Hoi 1/1» dialog, host waiting «Doi hao huu xong tuan»); unstick reload gave 10 more min no progress. No page saves/dumps (old harness). Dead-button shots not pushed.

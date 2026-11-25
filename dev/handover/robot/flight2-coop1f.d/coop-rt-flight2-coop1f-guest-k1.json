@@ -1,0 +1,2097 @@
+{
+ "job": {
+  "id": "coop-rt-flight2-coop1f-guest-k1",
+  "origin": null,
+  "road": null,
+  "bot": "sens",
+  "seed": 70112,
+  "dev": "ipad",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "4523381f",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 1,
+  "unstick": [
+   {
+    "at": 32,
+    "lvl": 1,
+    "layer": "#modal",
+    "title": "Đợi hảo hữu chọn thân phận"
+   },
+   {
+    "at": 192,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 927,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 934,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 943,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 952,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 962,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 970,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 978,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 996,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1003,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1010,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1017,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1024,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1031,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1038,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1046,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1053,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1060,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1067,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1190,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1630,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1641,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1651,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1662,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2038,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2045,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2052,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2060,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2085,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2427,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2434,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2453,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2463,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2478,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2485,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2492,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2739,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2746,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2754,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2762,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2769,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2776,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2784,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2791,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 3627,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+   },
+   {
+    "at": 3854,
+    "lvl": 1,
+    "layer": "#kchatp",
+    "title": ""
+   },
+   {
+    "at": 3878,
+    "lvl": 1,
+    "layer": "#kchatp",
+    "title": ""
+   },
+   {
+    "at": 3948,
+    "lvl": 1,
+    "layer": "#kchatp",
+    "title": ""
+   },
+   {
+    "at": 3973,
+    "lvl": 1,
+    "layer": "#kchatp",
+    "title": ""
+   },
+   {
+    "at": 3991,
+    "lvl": 1,
+    "layer": "#kchatp",
+    "title": ""
+   },
+   {
+    "at": 4039,
+    "lvl": 1,
+    "layer": "#kchatp",
+    "title": ""
+   },
+   {
+    "at": 4053,
+    "lvl": 1,
+    "layer": "#kchatp",
+    "title": ""
+   },
+   {
+    "at": 4064,
+    "lvl": 1,
+    "layer": "#kchatp",
+    "title": ""
+   },
+   {
+    "at": 4089,
+    "lvl": 1,
+    "layer": "#kchatp",
+    "title": ""
+   },
+   {
+    "at": 4109,
+    "lvl": 1,
+    "layer": "#kchatp",
+    "title": ""
+   },
+   {
+    "at": 4130,
+    "lvl": 1,
+    "layer": "#kchatp",
+    "title": ""
+   },
+   {
+    "at": 4144,
+    "lvl": 1,
+    "layer": "#kchatp",
+    "title": ""
+   },
+   {
+    "at": 4177,
+    "lvl": 1,
+    "layer": "#kchatp",
+    "title": ""
+   },
+   {
+    "at": 4200,
+    "lvl": 1,
+    "layer": "#kchatp",
+    "title": ""
+   },
+   {
+    "at": 4232,
+    "lvl": 1,
+    "layer": "#kchatp",
+    "title": ""
+   }
+  ],
+  "slice": null,
+  "areaTaps": 142,
+  "typed": 1
+ },
+ "life": {
+  "id": "HARNESS",
+  "type": "harness"
+ },
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "dead|close button has no effect: .dlg «Tâm trạng · Tể tướng Tôn Bá Ngôn» «Lui»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tâm trạng · Tể tướng Tôn Bá Ngôn» «Lui»",
+   "n": 1,
+   "at": 2839,
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1f-guest-k1/noeffect-1795596790897.png"
+  },
+  {
+   "k": "stuck|no progress 15 min on .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1»",
+   "type": "stuck",
+   "msg": "no progress 15 min on .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1»",
+   "n": 1,
+   "at": 3627,
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1f-guest-k1/stuck-1.png",
+   "save": null,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 6,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Bành Ngọc Hành"
+   },
+   "buttons": [
+    "",
+    "",
+    "",
+    "",
+    "Theo Hoàng thượngRất vữngTốnkhôngĐượcbệ hạ để mắt hơn, Hoàng thượng tin ta hơn, trái ý phụ",
+    "Theo Thái hậuRất vữngTốnkhôngĐượcThái hậu hài lòng, Thái hậu che chở ta, phụ thân cùng phe",
+    "Theo Tể tướng Tôn Bá NgônRất vữngTốnkhôngĐượccó thêm bạc, nhà Tể tướng hậu thuẫn ta bằng b",
+    "Đứng ngoài, giữ mìnhRất vữngTốnkhôngĐượcđược tiếng hiền đức (chút ít), không phe nào nợ ta"
+   ]
+  },
+  {
+   "type": "harness",
+   "msg": "runner error: page.waitForTimeout: Target page, context or browser has been closed",
+   "n": 1
+  }
+ ],
+ "dead": [
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tâm trạng · Tể tướng Tôn Bá Ngôn»",
+   "label": "Lui",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1f-guest-k1/noeffect-1795596790897.png",
+   "at": 2839,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 6,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Bành Ngọc Hành"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.»",
+   "label": "Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh",
+   "cover": "zero size",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1f-guest-k1/dead-ipad-1795597653623.png",
+   "dev": "ipad",
+   "at": 3702,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 5,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Bành Ngọc Hành"
+   }
+  }
+ ],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 0,
+   "key": ""
+  }
+ ],
+ "buoi": 74,
+ "steps": 8260,
+ "status": [
+  "STATUS coop-rt-flight2-coop1f-guest-k1 · buổi 73 · year 1 · rank 0 · bugs 1 · stuck 0 · dead buttons 1"
+ ],
+ "_snapAt": 1795598147946,
+ "trace": [
+  [
+   3954,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Lật thẻKhông có»"
+  ],
+  [
+   3954,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   3954,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tin báo»"
+  ],
+  [
+   3955,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tất cả 56»"
+  ],
+  [
+   3955,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Túi đồThú cưngViệcTất cả 56Trang sức 5Y phục 2Vải »"
+  ],
+  [
+   3956,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Có thaiRất thấp»"
+  ],
+  [
+   3956,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Ân tình (đêm)13»"
+  ],
+  [
+   3957,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Dư đồ»"
+  ],
+  [
+   3957,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   3957,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Ân tình (đêm)13»"
+  ],
+  [
+   3958,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Chọn chính mình»"
+  ],
+  [
+   3958,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   3958,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Sắc64Tài56Tâm cơ29Đức26Danh48Sủng33»"
+  ],
+  [
+   3959,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   3960,
+   "DEAD Dạo này"
+  ],
+  [
+   3961,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   3961,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   3962,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Thư từ»"
+  ],
+  [
+   3973,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Sắc64Tài56Tâm cơ29Đức26Danh48Sủng33»"
+  ],
+  [
+   3974,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Buổi tối, còn 0 khắc»"
+  ],
+  [
+   3974,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Nam nhân»"
+  ],
+  [
+   3975,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Ân tình (đêm)13»"
+  ],
+  [
+   3975,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   3975,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «1Cung nhân»"
+  ],
+  [
+   3976,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Cung nữ thân tín tam đẳng Xuân LiễuThiện cảm 37»"
+  ],
+  [
+   3976,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Về phòng»"
+  ],
+  [
+   3977,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Số lần ân thưởng2»"
+  ],
+  [
+   3977,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Dư đồ»"
+  ],
+  [
+   3977,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Xét phẩm: thiếu 1»"
+  ],
+  [
+   3978,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «1Cung nhân»"
+  ],
+  [
+   3978,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «trăng rằm»"
+  ],
+  [
+   3978,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Giao tình»"
+  ],
+  [
+   3979,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Triều đình»"
+  ],
+  [
+   3979,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Chọn chính mình»"
+  ],
+  [
+   3979,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Phe phái hậu cung»"
+  ],
+  [
+   3979,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   3980,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Mục tiêu chương»"
+  ],
+  [
+   3980,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tài nghệ»"
+  ],
+  [
+   3980,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Thư từ»"
+  ],
+  [
+   3992,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «1Cung nhân»"
+  ],
+  [
+   3992,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «3Chí tôn»"
+  ],
+  [
+   3992,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Lịch tháng»"
+  ],
+  [
+   3993,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Chọn chính mình»"
+  ],
+  [
+   3993,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   3993,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Ân tình (đêm)13»"
+  ],
+  [
+   3994,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Dư đồ»"
+  ],
+  [
+   3994,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Sắc64Tài56Tâm cơ29Đức26Danh48Sủng33»"
+  ],
+  [
+   3994,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tin báo»"
+  ],
+  [
+   3995,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Lật thẻKhông có»"
+  ],
+  [
+   3995,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Quẻ Hạ hạ (Mưu kế)»"
+  ],
+  [
+   3996,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Xem bản đồ hoàng cungGhi chútoàn cảnh»"
+  ],
+  [
+   3996,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tài nghệ»"
+  ],
+  [
+   3997,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Sắc64Tài56Tâm cơ29Đức26Danh48Sủng33»"
+  ],
+  [
+   3997,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tin báo»"
+  ],
+  [
+   3997,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   3998,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Buổi tối, còn 0 khắc»"
+  ],
+  [
+   3998,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tác phẩm»"
+  ],
+  [
+   3999,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Ân tình (đêm)13»"
+  ],
+  [
+   3999,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tin báo»"
+  ],
+  [
+   3999,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tai mắt0»"
+  ],
+  [
+   4000,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Quẻ Hạ hạ (Mưu kế)»"
+  ],
+  [
+   4000,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Lật thẻKhông có»"
+  ],
+  [
+   4001,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Diệp Mạn Ca: Đã sẵn sàng»"
+  ],
+  [
+   4001,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   4001,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Thừa Ân»"
+  ],
+  [
+   4002,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Về phòng»"
+  ],
+  [
+   4002,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Nam nhân»"
+  ],
+  [
+   4002,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Mục tiêu chương»"
+  ],
+  [
+   4003,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   4003,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Người lạ»"
+  ],
+  [
+   4004,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Xét phẩm: thiếu 1»"
+  ],
+  [
+   4004,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Dư đồ»"
+  ],
+  [
+   4005,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   4005,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «trăng rằm»"
+  ],
+  [
+   4005,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Số lần ân thưởng2»"
+  ],
+  [
+   4006,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tài nghệ»"
+  ],
+  [
+   4006,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   4007,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tai mắt0»"
+  ],
+  [
+   4007,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Bạc67Sức100/100»"
+  ],
+  [
+   4007,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Sắc phong»"
+  ],
+  [
+   4007,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tâm nguyện»"
+  ],
+  [
+   4008,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   4008,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «3Chí tôn»"
+  ],
+  [
+   4008,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «trăng rằm»"
+  ],
+  [
+   4009,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Xét phẩm: thiếu 1»"
+  ],
+  [
+   4009,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Sắc64Tài56Tâm cơ29Đức26Danh48Sủng33»"
+  ],
+  [
+   4009,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Lật thẻKhông có»"
+  ],
+  [
+   4009,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tâm trạngBình thản+1»"
+  ],
+  [
+   4010,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   4010,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Dư đồ»"
+  ],
+  [
+   4010,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Buổi tối, còn 0 khắc»"
+  ],
+  [
+   4011,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Phóng to»"
+  ],
+  [
+   4011,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tai mắt0»"
+  ],
+  [
+   4012,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «3Chí tôn»"
+  ],
+  [
+   4012,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Lịch tháng»"
+  ],
+  [
+   4012,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Xét phẩm: thiếu 1»"
+  ],
+  [
+   4013,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   4013,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tư trang»"
+  ],
+  [
+   4014,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hành sự»"
+  ],
+  [
+   4014,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Về phòng»"
+  ],
+  [
+   4015,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Xét phẩm: thiếu 1»"
+  ],
+  [
+   4016,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   4016,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   4017,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   4017,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Mục tiêu chương»"
+  ],
+  [
+   4018,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   4018,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Số lần ân thưởng2»"
+  ],
+  [
+   4019,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh»"
+  ],
+  [
+   4019,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tin báo»"
+  ],
+  [
+   4020,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Chọn chính mình»"
+  ],
+  [
+   4020,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   4020,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tâm trạngBình thản+1»"
+  ],
+  [
+   4021,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Dư đồ»"
+  ],
+  [
+   4021,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Về phòng»"
+  ],
+  [
+   4021,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Lật thẻKhông có»"
+  ],
+  [
+   4022,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tâm trạngBình thản+1»"
+  ],
+  [
+   4022,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Buổi tối, còn 0 khắc»"
+  ],
+  [
+   4022,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   4023,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Quẻ Hạ hạ (Mưu kế)»"
+  ],
+  [
+   4023,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tài nghệ»"
+  ],
+  [
+   4023,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   4024,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   4024,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tư trang»"
+  ],
+  [
+   4025,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hành sự»"
+  ],
+  [
+   4025,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tin báo»"
+  ],
+  [
+   4026,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Ân tình (đêm)13»"
+  ],
+  [
+   4027,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   4027,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Số lần ân thưởng2»"
+  ],
+  [
+   4028,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Con của ta»"
+  ],
+  [
+   4028,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Sắc64Tài56Tâm cơ29Đức26Danh48Sủng33»"
+  ],
+  [
+   4028,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Thư từ»"
+  ],
+  [
+   4040,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Dư đồ»"
+  ],
+  [
+   4040,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Danh sách»"
+  ],
+  [
+   4041,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Mục tiêu chương»"
+  ],
+  [
+   4041,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Giao tình»"
+  ],
+  [
+   4041,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Triều đình»"
+  ],
+  [
+   4042,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Số lần ân thưởng2»"
+  ],
+  [
+   4042,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Sắc64Tài56Tâm cơ29Đức26Danh48Sủng33»"
+  ],
+  [
+   4042,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Thư từ»"
+  ],
+  [
+   4053,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Thư từ»"
+  ],
+  [
+   4065,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tâm trạngBình thản+1»"
+  ],
+  [
+   4065,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   4066,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   4066,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Nam nhân»"
+  ],
+  [
+   4066,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «1Cung nhân»"
+  ],
+  [
+   4067,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Buổi tối, còn 0 khắc»"
+  ],
+  [
+   4067,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Buổi tối, còn 0 khắc»"
+  ],
+  [
+   4068,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Kính Đường»"
+  ],
+  [
+   4068,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Chọn chính mình»"
+  ],
+  [
+   4068,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Kính Đường»"
+  ],
+  [
+   4068,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Lật thẻKhông có»"
+  ],
+  [
+   4069,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Giao tình»"
+  ],
+  [
+   4069,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Có thaiRất thấp»"
+  ],
+  [
+   4070,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Cung nữ thân tín tam đẳngXuân Liễu»"
+  ],
+  [
+   4070,
+   ".kfoc «Lui»"
+  ],
+  [
+   4071,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tâm trạngBình thản+1»"
+  ],
+  [
+   4071,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «1Cung nhân»"
+  ],
+  [
+   4071,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Cung nữ thân tín tam đẳngXuân Liễu»"
+  ],
+  [
+   4072,
+   ".kfoc «Lui»"
+  ],
+  [
+   4073,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Triều đình»"
+  ],
+  [
+   4073,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tư trang»"
+  ],
+  [
+   4074,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hành sự»"
+  ],
+  [
+   4074,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Sắc64Tài56Tâm cơ29Đức26Danh48Sủng33»"
+  ],
+  [
+   4074,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   4075,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Giao tình»"
+  ],
+  [
+   4075,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   4076,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Bạc67Sức100/100»"
+  ],
+  [
+   4076,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tư trang»"
+  ],
+  [
+   4076,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Xét phẩm: thiếu 1»"
+  ],
+  [
+   4077,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   4077,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   4077,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   4078,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Có thaiRất thấp»"
+  ],
+  [
+   4078,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Xét phẩm: thiếu 1»"
+  ],
+  [
+   4078,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Thư từ»"
+  ],
+  [
+   4090,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tâm trạngBình thản+1»"
+  ],
+  [
+   4090,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Quẻ Hạ hạ (Mưu kế)»"
+  ],
+  [
+   4090,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tài nghệ»"
+  ],
+  [
+   4091,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hành sự»"
+  ],
+  [
+   4091,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Về phòng»"
+  ],
+  [
+   4091,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Số lần ân thưởng2»"
+  ],
+  [
+   4092,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   4093,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Số lần ân thưởng2»"
+  ],
+  [
+   4093,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Nam nhân»"
+  ],
+  [
+   4093,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Nam nhân»"
+  ],
+  [
+   4094,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   4094,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   4094,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «3Chí tôn»"
+  ],
+  [
+   4094,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Diệp Mạn Ca: Đã sẵn sàng»"
+  ],
+  [
+   4095,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Giao tình»"
+  ],
+  [
+   4095,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tin báo»"
+  ],
+  [
+   4096,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Bạc67Sức100/100»"
+  ],
+  [
+   4096,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Sắc64Tài56Tâm cơ29Đức26Danh48Sủng33»"
+  ],
+  [
+   4096,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Xét phẩm: thiếu 1»"
+  ],
+  [
+   4097,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Bạc67Sức100/100»"
+  ],
+  [
+   4097,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Xét phẩm: thiếu 1»"
+  ],
+  [
+   4097,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Chọn chính mình»"
+  ],
+  [
+   4098,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Xét phẩm: thiếu 1»"
+  ],
+  [
+   4098,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «1Cung nhân»"
+  ],
+  [
+   4098,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   4098,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Thư từ»"
+  ],
+  [
+   4110,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Có thaiRất thấp»"
+  ],
+  [
+   4110,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Quẻ Hạ hạ (Mưu kế)»"
+  ],
+  [
+   4111,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Ân tình (đêm)13»"
+  ],
+  [
+   4111,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   4111,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tư trang»"
+  ],
+  [
+   4112,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Lễ vật 0»"
+  ],
+  [
+   4112,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Túi đồ»"
+  ],
+  [
+   4112,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Sắc64Tài56Tâm cơ29Đức26Danh48Sủng33»"
+  ],
+  [
+   4113,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Xét phẩm: thiếu 1»"
+  ],
+  [
+   4113,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Lật thẻKhông có»"
+  ],
+  [
+   4113,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   4114,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hành sự»"
+  ],
+  [
+   4114,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tin báo»"
+  ],
+  [
+   4115,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tư trang»"
+  ],
+  [
+   4116,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tài nghệ»"
+  ],
+  [
+   4116,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Về phòng»"
+  ],
+  [
+   4116,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tin báo»"
+  ],
+  [
+   4117,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Bạc67Sức100/100»"
+  ],
+  [
+   4117,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Sắc64Tài56Tâm cơ29Đức26Danh48Sủng33»"
+  ],
+  [
+   4117,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Cầm kỳ thi họa 0/12»"
+  ],
+  [
+   4117,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   4118,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Về phòng»"
+  ],
+  [
+   4118,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   4118,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Quý tộc kén rể · kén dâu»"
+  ],
+  [
+   4119,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «trăng rằm»"
+  ],
+  [
+   4119,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Người lạ»"
+  ],
+  [
+   4119,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Thư từ»"
+  ],
+  [
+   4131,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tư trang»"
+  ],
+  [
+   4131,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tài nghệ»"
+  ],
+  [
+   4131,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Lật thẻKhông có»"
+  ],
+  [
+   4132,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   4132,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   4133,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tài nghệ»"
+  ],
+  [
+   4133,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Thư từ»"
+  ],
+  [
+   4144,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Bậc 0 trên 5»"
+  ],
+  [
+   4145,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Về phòng»"
+  ],
+  [
+   4145,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   4145,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tứ đức 0/9»"
+  ],
+  [
+   4146,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   4146,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   4146,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Thành Ngọc»"
+  ],
+  [
+   4147,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Quẻ Hạ hạ (Mưu kế)»"
+  ],
+  [
+   4147,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Có thaiRất thấp»"
+  ],
+  [
+   4148,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «3Chí tôn»"
+  ],
+  [
+   4148,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Có thaiRất thấp»"
+  ],
+  [
+   4148,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Buổi tối, còn 0 khắc»"
+  ],
+  [
+   4149,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Chí tônPhi tầnNam nhânCung nhân‹Thành NgọcKính Đườ»"
+  ],
+  [
+   4149,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tài nghệ»"
+  ],
+  [
+   4150,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hành sự»"
+  ],
+  [
+   4150,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tài nghệ»"
+  ],
+  [
+   4150,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «3Chí tôn»"
+  ],
+  [
+   4151,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Giao tình»"
+  ],
+  [
+   4151,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Bạc67Sức100/100»"
+  ],
+  [
+   4151,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Quẻ Hạ hạ (Mưu kế)»"
+  ],
+  [
+   4152,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Sắc64Tài56Tâm cơ29Đức26Danh48Sủng33»"
+  ],
+  [
+   4152,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Triều đình»"
+  ],
+  [
+   4152,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Lịch tháng»"
+  ],
+  [
+   4152,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Sắc64Tài56Tâm cơ29Đức26Danh48Sủng33»"
+  ],
+  [
+   4153,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Quẻ Hạ hạ (Mưu kế)»"
+  ],
+  [
+   4153,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   4153,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Người lạ»"
+  ],
+  [
+   4154,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tài nghệ»"
+  ],
+  [
+   4154,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   4155,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tài nghệ»"
+  ],
+  [
+   4155,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tư trang»"
+  ],
+  [
+   4155,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   4156,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Vải vóc 4»"
+  ],
+  [
+   4156,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «trăng rằm»"
+  ],
+  [
+   4156,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tâm trạngBình thản+1»"
+  ],
+  [
+   4157,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Y phục: Áo gấm hoa mai»"
+  ],
+  [
+   4157,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «3Chí tôn»"
+  ],
+  [
+   4157,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Về phòng»"
+  ],
+  [
+   4157,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tâm trạngBình thản+1»"
+  ],
+  [
+   4158,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Chọn chính mình»"
+  ],
+  [
+   4158,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Dư đồ»"
+  ],
+  [
+   4158,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   4159,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   4159,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Số lần ân thưởng2»"
+  ],
+  [
+   4159,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Xem bản đồ hoàng cungGhi chútoàn cảnhĐi gần 1 khắc»"
+  ],
+  [
+   4160,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Xem bản đồ hoàng cungGhi chútoàn cảnhĐi gần 1 khắc»"
+  ],
+  [
+   4160,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Lịch tháng»"
+  ],
+  [
+   4160,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Bạc67Sức100/100»"
+  ],
+  [
+   4161,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Số lần ân thưởng2»"
+  ],
+  [
+   4161,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Sắc64Tài56Tâm cơ29Đức26Danh48Sủng33»"
+  ],
+  [
+   4161,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «ⓘ Ra vào cung cấmĐượcai được vào đâuGhi chúlúc nào»"
+  ],
+  [
+   4161,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «1Cung nhân»"
+  ],
+  [
+   4162,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Buổi tối, còn 0 khắc»"
+  ],
+  [
+   4162,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Bạc67Sức100/100»"
+  ],
+  [
+   4162,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «ⓘ Ra vào cung cấmĐượcai được vào đâuGhi chúlúc nào»"
+  ],
+  [
+   4163,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   4163,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Đã qua 0»"
+  ],
+  [
+   4163,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Sắc64Tài56Tâm cơ29Đức26Danh48Sủng33»"
+  ],
+  [
+   4163,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã q»"
+  ],
+  [
+   4164,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «3Chí tôn»"
+  ],
+  [
+   4165,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   4166,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Việc nhờ»"
+  ],
+  [
+   4166,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Bạc67Sức100/100»"
+  ],
+  [
+   4166,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tư trang»"
+  ],
+  [
+   4167,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Thư từ»"
+  ],
+  [
+   4178,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tin báo»"
+  ],
+  [
+   4178,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Chọn chính mình»"
+  ],
+  [
+   4179,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Y phục: Áo gấm hoa mai»"
+  ],
+  [
+   4179,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Dư đồ»"
+  ],
+  [
+   4179,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Về phòng»"
+  ],
+  [
+   4179,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Xét phẩm: thiếu 1»"
+  ],
+  [
+   4180,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Lật thẻKhông có»"
+  ],
+  [
+   4180,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Xem bản đồ hoàng cungGhi chútoàn cảnhĐi gần 1 khắc»"
+  ],
+  [
+   4180,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Có thaiRất thấp»"
+  ],
+  [
+   4181,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Số lần ân thưởng2»"
+  ],
+  [
+   4181,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Số lần ân thưởng2»"
+  ],
+  [
+   4181,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tai mắt0»"
+  ],
+  [
+   4182,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «ⓘ Ra vào cung cấmĐượcai được vào đâuGhi chúlúc nào»"
+  ],
+  [
+   4182,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   4182,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Xét phẩm: thiếu 1»"
+  ],
+  [
+   4183,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Về phòng»"
+  ],
+  [
+   4183,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Chí tôn»"
+  ],
+  [
+   4184,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Lịch tháng»"
+  ],
+  [
+   4184,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Lật thẻKhông có»"
+  ],
+  [
+   4185,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Có thaiRất thấp»"
+  ],
+  [
+   4185,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   4186,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Diệp Mạn Ca: Đã sẵn sàng»"
+  ],
+  [
+   4186,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hành sự»"
+  ],
+  [
+   4187,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Y dược 0/2»"
+  ],
+  [
+   4187,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Diệp Mạn Ca: Đã sẵn sàng»"
+  ],
+  [
+   4188,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   4188,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Có thaiRất thấp»"
+  ],
+  [
+   4188,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Lịch tháng»"
+  ],
+  [
+   4189,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   4189,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Thư từ»"
+  ],
+  [
+   4201,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tin báo»"
+  ],
+  [
+   4201,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Mục tiêu chương»"
+  ],
+  [
+   4201,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tư trang»"
+  ],
+  [
+   4202,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   4202,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «3Chí tôn»"
+  ],
+  [
+   4203,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   4203,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Lịch tháng»"
+  ],
+  [
+   4204,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hành sự»"
+  ],
+  [
+   4204,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tài nghệ»"
+  ],
+  [
+   4205,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tác phẩm»"
+  ],
+  [
+   4205,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Chọn chính mình»"
+  ],
+  [
+   4205,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Lật thẻKhông có»"
+  ],
+  [
+   4205,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «3Chí tôn»"
+  ],
+  [
+   4206,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «1Cung nhân»"
+  ],
+  [
+   4206,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Lịch tháng»"
+  ],
+  [
+   4206,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tâm trạngBình thản+1»"
+  ],
+  [
+   4207,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Cầm kỳ thi họa 0/12»"
+  ],
+  [
+   4207,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Ân tình (đêm)13»"
+  ],
+  [
+   4207,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Có thaiRất thấp»"
+  ],
+  [
+   4208,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Bậc 0 trên 5»"
+  ],
+  [
+   4208,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Ân tình (đêm)13»"
+  ],
+  [
+   4209,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Có thaiRất thấp»"
+  ],
+  [
+   4209,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Chọn chính mình»"
+  ],
+  [
+   4209,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Bậc 0 trên 5»"
+  ],
+  [
+   4209,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Buổi tối, còn 0 khắc»"
+  ],
+  [
+   4210,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Số lần ân thưởng2»"
+  ],
+  [
+   4210,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «3Chí tôn»"
+  ],
+  [
+   4210,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Có thaiRất thấp»"
+  ],
+  [
+   4211,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hành sự»"
+  ],
+  [
+   4211,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Chọn chính mình»"
+  ],
+  [
+   4212,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Bổng lộcsau 1 tuần»"
+  ],
+  [
+   4212,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Buổi tối, còn 0 khắc»"
+  ],
+  [
+   4213,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Có thaiRất thấp»"
+  ],
+  [
+   4214,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Về phòng»"
+  ],
+  [
+   4214,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   4214,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hành sự»"
+  ],
+  [
+   4215,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Mục tiêu chương»"
+  ],
+  [
+   4216,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Mục tiêu chương»"
+  ],
+  [
+   4217,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «3Chí tôn»"
+  ],
+  [
+   4217,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   4218,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Mệnh truyện»"
+  ],
+  [
+   4218,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «trăng rằm»"
+  ],
+  [
+   4218,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Lịch tháng»"
+  ],
+  [
+   4219,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Số lần ân thưởng2»"
+  ],
+  [
+   4219,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Sắc64Tài56Tâm cơ29Đức26Danh48Sủng33»"
+  ],
+  [
+   4219,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   4220,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Người trước»"
+  ],
+  [
+   4220,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Dư đồ»"
+  ],
+  [
+   4220,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «3Chí tôn»"
+  ],
+  [
+   4220,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hành sự»"
+  ],
+  [
+   4221,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hoàng tự»"
+  ],
+  [
+   4221,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tai mắt0»"
+  ],
+  [
+   4222,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Thư từ»"
+  ],
+  [
+   4233,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Diệp Mạn Ca: Đã sẵn sàng»"
+  ],
+  [
+   4233,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Người lạ»"
+  ],
+  [
+   4234,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Sắc64Tài56Tâm cơ29Đức26Danh48Sủng33»"
+  ],
+  [
+   4234,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   4234,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tài nghệ»"
+  ],
+  [
+   4235,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Lật thẻKhông có»"
+  ],
+  [
+   4235,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Lịch tháng»"
+  ],
+  [
+   4235,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tâm trạngBình thản+1»"
+  ],
+  [
+   4236,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Tâm trạngBình thản+1»"
+  ],
+  [
+   4236,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hôm nay mặt mộc»"
+  ],
+  [
+   4236,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Hậu cung»"
+  ],
+  [
+   4237,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Chuyện cũ»"
+  ],
+  [
+   4237,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Lịch tháng»"
+  ],
+  [
+   4238,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Buổi tối, còn 0 khắc»"
+  ],
+  [
+   4238,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Chí tôn»"
+  ],
+  [
+   4239,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Xét phẩm: thiếu 1»"
+  ],
+  [
+   4239,
+   "page «Chung Tú cung · Du Thanh trai · Ở đây còn 1 người.» «Thư từ»"
+  ]
+ ],
+ "_ckAt": 1795597688732,
+ "_ckB": 74
+}
