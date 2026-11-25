@@ -1665,13 +1665,13 @@ selection-scene BIG review | review/selection-scene 9ee4f5bc | session_01V1ZZH1u
 | E RERUN E-C2 (U17-U18; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-C2-* | FOREMAN E (root) | session_01DgYSWkZEiQ8VEmgjudRCMe | RUNNING | 25/11 06:58Z |
 | E RERUN E-C3 (U19-U21; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-C3-* | FOREMAN E (root) | session_01DgYSWkzwHcfbhAVTqTrb5C | RUNNING | 25/11 06:58Z |
 | F flight2 slot 7 runner (thd_tho rand) | dev/handover/robot/flight2-s7.* | session_01UV1Szi98Jr15jEk9h57rXy | RUNNING | 25/11 06:57Z | F |
-| TRUNGSINH TS-P4 (lives 16–20) | dev/research/trungsinh/ | MAIN 134→135 | session_01V1ZZH23XHUR5bAUAtiqAPv | RUNNING | 25/11 06:56Z |
-| TRUNGSINH TS-P2 (lives 06–10) | dev/research/trungsinh/ | MAIN 134→135 | session_01V1ZZH35iHCDWuAWmcnZJas | RUNNING | 25/11 06:56Z |
+| TRUNGSINH TS-P4 (lives 16–20) | dev/research/trungsinh/ | MAIN 134→135 | session_01V1ZZH23XHUR5bAUAtiqAPv | DONE abc229b2 (all 20 lives; lead 3 session_01V1ZZH2VnqiGHGJfM3AUXwG) | 25/11 06:56Z |
+| TRUNGSINH TS-P2 (lives 06–10) | dev/research/trungsinh/ | MAIN 134→135 | session_01V1ZZH35iHCDWuAWmcnZJas | DONE abc229b2 (all 20 lives; lead 3 session_01V1ZZH2VnqiGHGJfM3AUXwG) | 25/11 06:56Z |
 | TRUNGSINH TS-P3 (lives 11–15) | dev/research/trungsinh/ | MAIN 134→135 | session_01V1ZZH3ZStuH5Zz8vbzVK55 | DONE | 25/11 06:57Z |
 | E RERUN E-C2 (co-op U17+U18, real taps, robot-audit-E RERUN LIST) | dev/handover/robot/rerun-E-C2-* | FOREMAN E (root) | session_01DgYSWkZEiQ8VEmgjudRCMe | RUNNING | 25/11 07:10Z |
 E co-op RERUN E-C1 (real taps; rounds U14+U15+U16 co-op rows) | dev/handover/robot/rerun-E-C1-20261125.* | FOREMAN E | session_01DgYSWmMzKCCWuhWVkizGrK | RUNNING room U14-s1 (code U2HN) harness c826eca4 LIVE github.io | 25/11 07:10Z
 sangbuoi-held-fix (jdayq dqWait silent exit, whole family) | review/sangbuoi-held-fix | session_01V1ZZH3zq7i35Qgmz3XuUHS (MAIN 135) | RUNNING | 2026-11-25T07:01Z
-| TRUNGSINH-STORY (owner 25/11: learn story + endings of trungsinhgame) | dev/research/TRUNGSINH_STORY.md (review/trungsinh-story) | MAIN 134→135 | session_01V1ZZGzGFi21WiTptDmEZ45 | RUNNING | 25/11 07:10Z |
+| TRUNGSINH-STORY (owner 25/11: learn story + endings of trungsinhgame) | dev/research/TRUNGSINH_STORY.md (review/trungsinh-story) | MAIN 134→135 | session_01V1ZZGzGFi21WiTptDmEZ45 | DONE abc229b2 (all 20 lives; lead 3 session_01V1ZZH2VnqiGHGJfM3AUXwG) | 25/11 07:10Z |
 | CO-NGU-TITLES (owner 25/11 ~07:40Z: literary cổ trang names/titles whole game) | review/co-ngu-titles | MAIN 134→135 | session_01V1ZZH4mHp8bC9LZg8ZFKx6 | LAND READY dbd77388 (P1 3424724f) + KIT READY co-ngu-seals 73fe03b9 | 25/11 07:09Z |
 | F M-FIX-1 (robot findings M1–M5: skip family law, Sang ngày mới cue, Nhận thân phận 2 taps, BẠI on Rất vững, thị tẩm fold, Bạc drain; opus) | review/m-fix-1; briefs/F-mfix-2511.md; reports/m-fix-1.md | FOREMAN F #7 | session_01UV1SzhdHwgvZYvZKWSJpki | RUNNING | 25/11 07:40Z |
 | TEMPER-OUTBURST (temper-design (f) #1+#2+#3+#7) | review/temper-outburst | FOREMAN D ROOT | session_01D3E3NZEbGABqJK79fgHJ5q | READY (review; G4 robot arms blocked by runb TIMEOUT on main) | 2026-11-25T07:23Z |
@@ -1695,7 +1695,7 @@ sangbuoi-held-fix (jdayq dqWait silent exit, whole family) | review/sangbuoi-hel
 | TEMPER G4 robot arms on realtap + review fixes | review/temper-outburst | FOREMAN D ROOT | session_01D3E3NaH1eX32YRAhiQCYnb (T1b) | RUNNING | 2026-11-25T07:56Z |
 BIG rv sideline-dlg r4 (opus; land -3-r1 as one item) | review/sideline-dlg-3-r* | B | session_01N1tNP6Wg2mFj3et8dLjA7c | RUNNING | 25/11 08:00Z |
 | F BIG REVIEWER #2 (successor of session_01UV1SziXSk67Zy3DMXHsCrJ; queue test-path-fix-3 101dc29b → crawl-fix-1-r2 → m-fix-1 → harness) | review/*-r | FOREMAN F #7 | session_01UV1SzhBrzCVc4CVbM2dCsJ | RUNNING | 25/11 08:01Z |
-| TRUNGSINH-STORY lead 2 | review/trungsinh-story | MAIN 136 | session_01V1ZZH2S38RtoBxn9Q5brH4 | RUNNING | 2026-11-25T08:04Z |
+| TRUNGSINH-STORY lead 2 | review/trungsinh-story | MAIN 136 | session_01V1ZZH2S38RtoBxn9Q5brH4 | DONE abc229b2 (all 20 lives; lead 3 session_01V1ZZH2VnqiGHGJfM3AUXwG) | 2026-11-25T08:04Z |
 | F M-FIX-2 (result card «Đã hiểu» hidden after skip family + repeated «còn N lần dùng» hint covering rows; successor of M-FIX-1) | review/m-fix-2; briefs/F-mfix2-2511.md; reports/m-fix-2.md | FOREMAN F #7 | session_01UV1SziaCBht1boyH9gnBYq | RUNNING | 25/11 08:10Z |
 | F HARNESS FIXER #2 (ROLE A successor of session_01UV1SzhZEs2semzyzA7vwtt; handover end of dev/PROGRESS_robot-realtap.md on review/robot-realtap 2aad6849) | review/robot-realtap | FOREMAN F #7 | session_01UV1SzgfHUNkcvKL9Rn8Bz9 | RUNNING | 25/11 08:13Z |
 | F flight2-s8 life (slot 8 thd_tho bold 372282412 ipad, harness 1a29f470; reuses s5 seat) | dev/handover/robot/flight2-s8.* | FOREMAN F #8 | session_01UV1SzjctgUqhWfuo3XVo2r | RUNNING | 2026-11-25T08:37Z |
