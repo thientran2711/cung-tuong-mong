@@ -1,0 +1,4 @@
+# U3 segment 3 room 7S44 — game = stack 512cfee6 (c4163a93 + fix-5-r1 3f672533, pre-land), local Worker, harness 5edf09f6 + U1 patch + U3 hooks; seed 42, host Fold / guest iPad
+Passed the week-2 night (fix-5-r1 works there), reached year 1 month 4 week 3, buổi 17 (~55 min), then stuck 15 min:
+HOST: .dlg «Bị châm chọc» (event card, single option «Tiếp tục») with the odds hint popup «Thang cơ duyên» OPEN over the «Tiếp tục» button (stuck-1.png). COOPW.tr: «night held 3 b3/3 Q1,modal» then «night 3» repeated → the host's open modal holds the room's night; guest (b) already ended, «night 3 / pull» loop.
+Cause = HARNESS trap: the only hit-testable button was the «!» odds chip → harness taps it forever (popup stays open, covers «Tiếp tục»). NOT a game bug (a player taps outside / on the card). Local fix: choose() never taps the '!' chip.
