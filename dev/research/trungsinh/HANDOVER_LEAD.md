@@ -1,3 +1,34 @@
+# HANDOVER — TRUNGSINH-STORY lead 2 (session_01V1ZZH2S38RtoBxn9Q5brH4) → lead 3
+Written 25/11 ~09:32Z at context ~24 % (START_CTX ~3 % + 25 % = roll line 28 %; the merge + report would cross it). Coordinator = **MAIN CHÍNH 137 session_01V1ZZH36pkd4ycXLM8uETb8** (main changed 136 → 137 at ~08:37Z; 136 = session_01V1ZZH3wsXCxXgvsdWmZMZy is old). MAIN opens the successor.
+
+## Rollover lines (copy verbatim into every takeover prompt)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+
+## State at handover (lead 2)
+- LEAD LIVES 01–05 ALL DONE and pushed: 01 illness 17y1 · 02 health after harmed miscarriage 22y7 · 03 careful maid, harm chain 24y5 (38 min) · 04 consort, Empress arc (gift → water ×4 → cat destroys face, Dung 0 forever) → «Bạch nguyệt quang… trở về» → life-sentence lãnh cung = ALIVE closure 22y0, one epithet «Trăng lạnh cô cung» · 05 reckless maid (lowest odds, no heal) = fastest death 7 real min, 17y7, illness.
+- Seats pushed so far on this branch: 06 (P2 partial, closure «Duyên ngoài cửa son» age 60), 07 (P2, maid old age 54y4, «Thọ chung chính tẩm» + 3 legacy epithets), 08 (P2, failed tuyển tú → «Xuất cung» → time-skip epilogue: married a scholar at 20, 3 children, lived to 55), 16, 17 (P4/P4b maid health deaths), 18 (P4b, prince's child born safely, failed elopement 50 % → «Lạc nhau ngoài kinh thành» 22y1).
+- TS-P3 (session_01V1ZZH3ZStuH5Zz8vbzVK55) pushed life-11 (+ said life-12 + ledger-TS-P3.md) to the HANDOVER branch claude/cung-tuong-mong-handover-hj0h8w dev/research/trungsinh/ by mistake (only life-11.md + CATALOG_endings_achievements.md were visible at 09:00Z). P3 said: life 11 = Emperor assassinated while she was pregnant → «Bình yên sau đổi triều»; life 12 = DIED IN CHILDBIRTH with low health («Khó sinh»). Told P3 to push life 13+ to review/trungsinh-story. → Lead 3: copy P3's files from the handover branch into this branch at merge time.
+- Interim death count SENT to MAIN (8 lives) at ~08:50Z. Owner rows read: OD 25/11 ~07:10Z → ~08:10Z (see original handover below for the 4 orders).
+- `OURS_endings_summary.md` (this folder) = our game's endings/closures/end screen/carry-over with file:line (from origin/main), ready for the compare tables. Our death rates: handover branch dev/handover/robot/rates-E-valid-20261125.md (summary in the original handover below).
+- tools-lead/: auto3.py (careful: heal at HP<90, stuck fallback = last button, caro declined), auto5.py (RISK=1 env → lowest odds, no heal), draw-vase.json (a «Bình ngọc cắm cành» drawing that passed as Ngự nữ). Driver notes: the shared page means NEVER call c.sh while an autopilot runs; «Luân hồi · Một kiếp mới» needs "n":-1; close the journal with tap x389 y34; the «Y quan» action = 15 bạc for +3 HP (journal «Mời y quan · −15 bạc»).
+
+## Key cross-life findings to use (lead 2)
+- Death sentence is COMPOSED: «Sức khỏe suy kiệt sau lần bị hãm hại.» + body text of the last harm card. Non-death closures show ONE epithet; deaths show cause epithet + legacy epithet; old age showed 4 epithets (P2 life 07).
+- Health is the main killer (7 of the first 10 deaths/ends): monthly forced cards −4…−18 HP vs healer +3 for 15 bạc. Careful lives last 6–8 game years (33–41 min); reckless 1.6 years (7 min); maids who avoid everything can live to 54 (P2).
+- Story arcs are templates with NAMED, rank-climbing NPCs (bully Vệ Nhã Tâm Thải nữ → Bảo lâm; Empress Thẩm Yên Chi escalation). Drama trope cards close lives («Bạch nguyệt quang»).
+- Every end (death or closure, not forced quit / not failed selection) pays +1 luân hồi point; restart = 1 tap; Sổ luân hồi keeps 60 past lives + all achievements/endings → collection loop.
+- Forced quit = Sổ luân hồi → «Cưỡng ép luân hồi» → confirm (no point, everything lost).
+
+## Next steps for lead 3
+1. Wait for / collect lives 09–10 (P2 session_01V1ZZH35iHCDWuAWmcnZJas), 11–15 (P3), 19–20 (P4b session_01V1ZZH3JPH5vFbkWy4r4uSG). Send each seat «lead is now <your id>». Fetch this branch + the handover branch (P3 files) under flock.
+2. To keep context low, have ONE helper agent read all 20 life files and return the per-life table (seat, start, end age, real min, END TYPE, exact cause/ending, pregnancies + outcomes, odds/warnings) + counts (death-cause %, childbirth deaths per pregnancy, median minutes, closure endings seen + triggers).
+3. Write dev/research/TRUNGSINH_STORY.md per the original brief below (VN summary ≤8 lines at top; machinery; ending catalog incl. CLOSURE endings with triggers/epilogue length; compare with OURS (OURS_endings_summary.md + rates file); WHY PEOPLE REPLAY; DEATH & LIFE LENGTH table vs ours; TOP 10 own-design recommendations for PARKING_LOT, each with size + laws touched; closure endings OUR roads should get with trigger conditions from our real stats/roads). STUDY ONLY — no game build (vacation freeze; owner OD 25/11 ~07:55Z/~08:10Z). Then send MAIN 137 «TRUNGSINH DONE <sha>» + the 8-line Vietnamese summary.
+
+---
+(Original lead-1 handover follows; its "MAIN 136" now means MAIN 137.)
+
 # HANDOVER — TRUNGSINH-STORY lead (session_01V1ZZGzGFi21WiTptDmEZ45) → successor lead
 Written 25/11 ~08:05Z at context ~28 % (START_CTX ~3 % + 25 % → worker rollover). Coordinator = MAIN CHÍNH 136 session_01V1ZZH3wsXCxXgvsdWmZMZy (opens the successor; 134/135 stopped).
 
