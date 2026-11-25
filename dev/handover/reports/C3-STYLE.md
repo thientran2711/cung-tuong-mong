@@ -69,3 +69,25 @@ STYLE TABLE READY. ~85 % xong / the style fix itself ~0 % chơi được (audit 
 ## 8. PILOT 1 of the 15 gaps (Foreman C GO 25/11 ~22:25Z) — vinh-hoa-cung-tan (Vĩnh Hòa Tần reception)
 Model gpt-2-6 2k 2688x1386, creation iGkfr603uK, 135 cr, folder ba4aecfe…. Prompt = rooms-nc khai-tuong-cung-tan.txt verbatim with ONLY: palace signature swapped to Vĩnh Hòa (camellia, orioles on bamboo, jichimu, official's-hat armchairs, gourd doorway; from vinh-hoa-cung-phi), image 1 text «the bedroom» → «a palace room», FLOOR line → honey matte floor + «LOOK (like image 1): airy light warm, cream/peach walls, never dark brown-grey». Refs: image 1 = the s16 anchor khai-tuong-cung-dong-phoi-ha-sang (uploaded, SyaeCuVUb8) instead of the tẩm cung; image 2 EbYJzsMuuO, image 3 4RFIyNR9Aa as in the original. Prompt file: C3-STYLE/pilot_vinh-hoa-cung-tan.txt. room_gate / keep_check NOT run (those scripts live on review/rooms-nc; prompt is not a rooms-nc sidecar).
 LOOKED full size: light warm pink room, honey matte floor with lattice light, no carpet, windows = bare lattice onto bamboo (no drape), gourd doorway + official's-hat chairs + camellia screens, empty, Chinese, open floor strip at the bottom. Lighter than the B room (khai-tuong-cung-tan: dark brown walls). Faults: furniture row is frontal/flat (same as B); screen flowers read as peonies. Compare: https://ctm-img.victoria-tntt.workers.dev/img/_review/c3-style/pilot/pilot-compare.jpg?v=1 · file …/pilot/vinh-hoa-cung-tan.webp?v=1 (not wired; key for RANKROOM = vinh-hoa-cung-tan).
+
+## 9. THE 14 OTHER GAPS (Foreman C GO ~22:31Z) — all generated, LOOKED, my verdict PASS (waiting for Foreman C's look)
+Same method as the pilot (donor prompt of the same rank/kind from another palace, palace signature/flower/animal/wood/door swapped by gen.py, FLOOR→honey matte + «LOOK like image 1», image 1 = s16 anchor SyaeCuVUb8, other refs as the donor). gpt-2-6 2k 2688x1386, 135 cr each. Generation was delegated to a sonnet sub-agent running the prompt files verbatim; I looked every result myself. Total with the pilot: 15 pictures = 2 025 cr.
+Prompts + donor table + generator: dev/handover/reports/C3-STYLE/gap/ (gen.py, jobs.json, <key>.txt). Pictures (not in git): https://ctm-img.victoria-tntt.workers.dev/img/_review/c3-style/gap/<key>.webp?v=1 (+ pilot vinh-hoa-cung-tan at …/pilot/vinh-hoa-cung-tan.webp). Sheets: gap/g1.jpg (canh-phuc ×6), g2.jpg (chung-tu, dien-huy, ham-an, vinh-hoa -ngu), g3.jpg (thua-minh dong-phoi + ngu).
+| key | creation | look |
+|---|---|---|
+| vinh-hoa-cung-tan (pilot) | iGkfr603uK | PASS (Foreman C looked) |
+| canh-phuc-cung-tan | CqW6MIkEEy | PASS: pink, bats + crabapple, moon gate |
+| canh-phuc-cung-tan-ngu | 3z1ClI1REY | PASS: bed under pink bed curtains in the moon gate (bed curtains allowed) |
+| canh-phuc-cung-phi | yiFIkCUPW9 | PASS: lavender |
+| canh-phuc-cung-phi-ngu | w4CXq1k7EI | PASS: lavender canopy bed |
+| canh-phuc-cung-quyphi | VXOxidwMMU | PASS: orange/gold |
+| canh-phuc-cung-quyphi-ngu | 1lBWvier4r | PASS: orange canopy bed |
+| chung-tu-cung-tan | JNuoKmhOq4 | PASS: plum + magpies, cracked-ice partition |
+| chung-tu-cung-tan-ngu | s7mMuHdl8e | PASS |
+| dien-huy-cung-tan | YMS54TgWeC | PASS: chrysanthemum + swallows, octagon door |
+| dien-huy-cung-tan-ngu | 8aR7W1sIrU | PASS |
+| ham-an-cung-tan | LwtVuDZswO | PASS: orchid + butterflies, lobed door |
+| vinh-hoa-cung-tan-ngu | cpwkNPf0eP | PASS: orioles, gourd door |
+| thua-minh-cung-dong-phoi | Xm6SnaTBfo | PASS: blue/cream, osmanthus + ducks, gauze at the arch door only |
+| thua-minh-cung-dong-phoi-ngu | iGkfScp3uK | PASS: two beds |
+Checked on all: no window fabric (bare lattice), no foreground carpet, honey matte floor, empty, bottom strip clear. Not checked: room_gate/keep_check (scripts on review/rooms-nc). Known: furniture rows frontal like B (Foreman C accepted). The Tần bedrooms are a bit richer in bed drapery than their reception rooms (bed curtains are allowed by L30).

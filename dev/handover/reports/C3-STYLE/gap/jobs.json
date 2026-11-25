@@ -1,0 +1,136 @@
+{
+ "canh-phuc-cung-tan": {
+  "refs": [
+   "SyaeCuVUb8",
+   "EbYJzsMuuO",
+   "4RFIyNR9Aa"
+  ],
+  "donor": "khai-tuong-cung-tan",
+  "len": 7929
+ },
+ "canh-phuc-cung-tan-ngu": {
+  "refs": [
+   "SyaeCuVUb8",
+   "EbYJzsMuuO",
+   "cpS5YIl0eP",
+   "1lduM4wr4r"
+  ],
+  "donor": "thua-minh-cung-tan-ngu",
+  "len": 8784
+ },
+ "canh-phuc-cung-phi": {
+  "refs": [
+   "SyaeCuVUb8",
+   "EbYJzsMuuO",
+   "4RFIyNR9Aa",
+   "nVlcVgLYQD"
+  ],
+  "donor": "thua-minh-cung-phi",
+  "len": 8512
+ },
+ "canh-phuc-cung-phi-ngu": {
+  "refs": [
+   "SyaeCuVUb8",
+   "EbYJzsMuuO",
+   "1ldYySkr4r",
+   "nVlcVgLYQD"
+  ],
+  "donor": "khai-tuong-cung-phi-ngu",
+  "len": 8641
+ },
+ "canh-phuc-cung-quyphi": {
+  "refs": [
+   "SyaeCuVUb8",
+   "EbYJzsMuuO",
+   "8aiwqQTIrU",
+   "EbWFgREuuO"
+  ],
+  "donor": "khai-tuong-cung-quyphi",
+  "len": 8682
+ },
+ "canh-phuc-cung-quyphi-ngu": {
+  "refs": [
+   "SyaeCuVUb8",
+   "EbYJzsMuuO",
+   "cpS5YIl0eP",
+   "EbWFgREuuO"
+  ],
+  "donor": "thua-minh-cung-quyphi-ngu",
+  "len": 9039
+ },
+ "chung-tu-cung-tan": {
+  "refs": [
+   "SyaeCuVUb8",
+   "EbYJzsMuuO",
+   "4RFIyNR9Aa"
+  ],
+  "donor": "khai-tuong-cung-tan",
+  "len": 7971
+ },
+ "chung-tu-cung-tan-ngu": {
+  "refs": [
+   "SyaeCuVUb8",
+   "EbYJzsMuuO",
+   "cpS5YIl0eP",
+   "1lduM4wr4r"
+  ],
+  "donor": "thua-minh-cung-tan-ngu",
+  "len": 8787
+ },
+ "dien-huy-cung-tan": {
+  "refs": [
+   "SyaeCuVUb8",
+   "EbYJzsMuuO",
+   "4RFIyNR9Aa"
+  ],
+  "donor": "khai-tuong-cung-tan",
+  "len": 8028
+ },
+ "dien-huy-cung-tan-ngu": {
+  "refs": [
+   "SyaeCuVUb8",
+   "EbYJzsMuuO",
+   "cpS5YIl0eP",
+   "1lduM4wr4r"
+  ],
+  "donor": "thua-minh-cung-tan-ngu",
+  "len": 8843
+ },
+ "ham-an-cung-tan": {
+  "refs": [
+   "SyaeCuVUb8",
+   "EbYJzsMuuO",
+   "4RFIyNR9Aa"
+  ],
+  "donor": "khai-tuong-cung-tan",
+  "len": 7976
+ },
+ "vinh-hoa-cung-tan-ngu": {
+  "refs": [
+   "SyaeCuVUb8",
+   "EbYJzsMuuO",
+   "cpS5YIl0eP",
+   "1lduM4wr4r"
+  ],
+  "donor": "thua-minh-cung-tan-ngu",
+  "len": 8846
+ },
+ "thua-minh-cung-dong-phoi": {
+  "refs": [
+   "SyaeCuVUb8",
+   "EbYJzsMuuO",
+   "cpS5YIl0eP"
+  ],
+  "donor": "ham-an-cung-dong-phoi",
+  "len": 7513
+ },
+ "thua-minh-cung-dong-phoi-ngu": {
+  "refs": [
+   "SyaeCuVUb8",
+   "EbYJzsMuuO",
+   "8aiwqQTIrU"
+  ],
+  "donor": "ham-an-cung-dong-phoi-ngu",
+  "len": 8172
+ }
+}
