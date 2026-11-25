@@ -1770,3 +1770,4 @@ B SMALL rv pcport-rk-r2 1fbae7c6 | review/pcport-rk-r2 | B | session_01N1tNP4RNj
 | F BIG REVIEWER #6 (successor of #5; harness re-check w/ Tin báo injection, fix-7 part 2, m-fix-3, Tin báo kit softlock) | reports/bc-stack-review.md | F | (opening) | RUNNING | 25/11 15:30Z |
 B FIXER save-unseen-lists r3 (tests gate) | review/save-unseen-lists | B | session_01N1tNP5rythg4fywKyPfyTV | RUNNING | 25/11 15:32Z |
 kitHand Bàn bài | review/kit-hand | session_01V1ZZH24dkpdw8LeZYiyfQf | RUNNING | 2026-11-25T15:52Z
+coop-rebirth-stuck | review/coop-rebirth-stuck | session_01D3E3NahMdBiqkSMSUWYn5q | RUNNING | 2026-11-25 16:11Z (Foreman D)
