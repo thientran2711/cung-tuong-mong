@@ -1,0 +1,5 @@
+# «Tâm trạng · <person>» ✕ «Lui» needs many taps (U3, game c4163a93, harness 5edf09f6+patches)
+Room 10 (seed 39), host Fold 755x1000, ~buổi 25, Dư đồ → page «Dực Khôn cung · Hòa Sướng hiên». Real taps only (hit-checked).
+Trace (room10-host-tap-trace.txt, in tap order): tap person row «Lưu Tâm Duyệt: Đang làm việc» → 4 taps on the ✕ of .dlg «Tâm trạng · Đáp ứng Lưu Tâm Duyệt» (label empty) → 3 more taps «Lui» → harness BUG «dead close button has no effect» → 2 more «Lui» → finally back on the page. ~9 ✕ taps to leave ONE look-up panel = looks like the same panel is re-queued / stacked after each close (no dedupe), not a dead ✕.
+Room 8 (seed 37), host Fold, ~buổi 4: same family on «Tâm trạng · Ta» with a Tài nghệ intro card (.kmov) behind. (trace lost: out dir wiped.)
+Shots (local only, never in git per owner rule; description): Tâm trạng dialog fully drawn, centred, ✕ top-right visible; background map «Dư đồ» with plaques «đang cấm túc (1 tháng)», top bar «Buổi sáng ○○○○ Cấm túc 1 tháng», bottom-right button «Chờ hảo hữu…».

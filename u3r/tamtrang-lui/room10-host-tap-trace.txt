@@ -1,0 +1,25 @@
+TAP .dlg «Lịch tháng» «Luyện đàn»
+TAP .dlg «Lịch tháng» «Lễ Phật»
+TAP .dlg «Lịch tháng» «Dâng quà Thái hậu»
+TAP .dlg «Lịch tháng» «Dâng quà Thái hậu»
+TAP .dlg «Lịch tháng» «Bỏ hẹn»
+TAP .dlg «Lịch tháng» «Luyện đàn»
+TAP .dlg «Lịch tháng» «Luyện đàn»
+TAP .dlg «Lịch tháng» «Dâng quà Thái hậu»
+TAP .dlg «Lịch tháng» «Lui»
+TAP page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Xét phẩm: thiếu 4»
+TAP .dlg «Xét phẩm cuối tháng · Quý nhân» «Lui»
+TAP page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Lưu Tâm Duyệt: Đang làm việc»
+TAP .dlg «Tâm trạng · Đáp ứng Lưu Tâm Duyệt» «»
+TAP .dlg «Tâm trạng · Đáp ứng Lưu Tâm Duyệt» «»
+TAP .dlg «Tâm trạng · Đáp ứng Lưu Tâm Duyệt» «»
+TAP .dlg «Tâm trạng · Đáp ứng Lưu Tâm Duyệt» «»
+TAP .dlg «Tâm trạng · Đáp ứng Lưu Tâm Duyệt» «Lui»
+TAP .dlg «Tâm trạng · Đáp ứng Lưu Tâm Duyệt» «Lui»
+TAP .dlg «Tâm trạng · Đáp ứng Lưu Tâm Duyệt» «Lui»
+BUG dead close button has no effect: .dlg «Tâm trạng · Đáp ứng Lưu Tâm Duyệt» «Lui»
+TAP .dlg «Tâm trạng · Đáp ứng Lưu Tâm Duyệt» «Lui»
+TAP .dlg «Tâm trạng · Đáp ứng Lưu Tâm Duyệt» «Lui»
+TAP page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Tai mắt0»
+TAP .dlg «Tai mắt» «Lui»
+TAP page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người» «Y phục hợp phẩm · mặt mộc»
