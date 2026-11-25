@@ -28,3 +28,8 @@ No rule value or behaviour changed beyond moving code: every gate is LIVE's netT
 No rule value or behaviour changed: gates = LIVE BAL/netTh reads, text = branch BAL.payCut.
 
 ## STATUS: TRAIN DONE (24/11). Worktrees /home/user/wt/rml* removed after push.
+
+## ROUND 2 — re-merge onto LIVE 49f17d4d (order from D ROOT 25/11 04:15Z)
+| branch | PASS sha | merge sha | conflicts | gates |
+|---|---|---|---|---|
+| review/d-followups-1-rv | 563d336b | ef247cd3 | index.html/sw.js + assemble.py module-list union | promo-build 48/48, servant-trust 80/80 ×2, net-build 189, svt-scan 67/0, coop-hh-decu 25/25 ×2, one-core ×4, oldsave ok, npcmind ERRS [], coop-e2e 142/142, quickcheck PASS |
