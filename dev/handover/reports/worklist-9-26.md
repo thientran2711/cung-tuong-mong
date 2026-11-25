@@ -74,3 +74,36 @@ PRIORITY #1 CHECK: this report + D-temper-robot-0725 «SEAT W» | main 9f72524b 
 
 ### HANDOVER (W2 rolled at START_CTX + 25 %)
 Successor: (1) rerun `cand/c10.html` (= w9 build with `BAL.net.oanCool=.10`) ×3 slots ALONE on the box (no other robots; `./slot.sh C10a|b|c <html>`), nt-sum / nt-norm vs N1–3; if band-3 ≤ 30 % and proud÷gentle ≥ 2 → set BAL.net.oanCool=.10 in jbal2.js:2152, rebuild site, net-build.js + one-core ×4 + quickcheck + coop-e2e, push, SẴN SÀNG KIỂM to D. Else report the ghen share to D. Summaries + slot.sh: dev/handover/reports/nt-w2/ (raw json not kept). c10.html = `sed "s/BAL.net.oanCool=.05;/BAL.net.oanCool=.10;/" dev/index.html` of the w9 build.
+
+## SEAT W3 (session_01D3E3NbdM3P7qSzPcC9ZE7u, 25/11 ~09:05Z–) — START_CTX ≈ 4 %
+PRIORITY #1 CHECK: this report (W2 HANDOVER) + D-temper-robot-0725 «SEAT W» + review-talk-others-people.md (FAIL B1/B2/B3, N1/N2) + D ROOT order 09:09Z | main 9f72524b | review/net-thresholds 9d214d54, review/talk-others-people 8b288d9e, -rv 98f093b3, review/robot-realtap (robot-rt.js, used from a scratch copy, not committed) | claims: this seat.
+
+### review/net-thresholds → 96c2859e SẴN SÀNG KIỂM
+- Fresh container: w9 worktree rebuilt; c10 = `sed s/oanCool=.05/oanCool=.10/` of the 9d214d54 build; `slot.sh` from nt-w2; 3 slots × 900 s ALONE (no other robot / gate on the box).
+| build | weeks | npcAct band-3 share | proud÷gentle harm | NPC→NPC oán p50/p90 | NPC→her top driver ghen/oán/−aff |
+|---|---|---|---|---|---|
+| live main 9f72524b ×3 (W2) | 733 | 719/1313 = 54.8 % | 3.42 | 15/96 | — |
+| oanCool .05 ×3 (W2) | 690 | 404/1086 = 37.2 % | 3.13 | 11/75 | 93 % / 2 % / 6 % |
+| **oanCool .10 ×3 (W3, alone)** | **736** | **174/1056 = 16.5 %** | **2.13** | **8/54** | 83 % / 1 % / 16 % |
+- Pick: BAL.net.oanCool = .10 (jbal2.js:2152; band-3 ≤ 30 % ✓, proud÷gentle ≥ 2 ✓ — Kiêu ngạo harm 13.9 / Rộng lượng 3.2 per 100 hw). Tables: reports/nt-w3/sumC10x3.md, normC10x3.md.
+- Harness: 11 «read hang» parts over the 3 slots even alone (fresh life restarts in the slot; same as W2 saw on live) — harness, not branch.
+- Gates on 96c2859e: net-build PASS, one-core-guard/-bind/-text/-text-rule PASS, two-way-oldsave (main 9f72524b save → new build, 40 weeks) ok 0 errors, coop-e2e 142/142, quickcheck PASS (render 291/237, tab 607/669, buổi 1823/1514, tasks>200 28/24, core gates PASS).
+- NOT widened (report + proposal): NPC→her band-3 is ghen-driven (ghen p50 99, top driver 83 %); oanCool cannot touch it. Proposal for D/MAIN: one item «ghen saturation» (BAL.net.heat.ghenK / a ghen fade like oán) measured with the same nt-run.
+
+### review/talk-others-people-rv → r2 (B1/B2/N1/N2; B3 = W2's 8b288d9e merged)
+- Base: -rv 98f093b3 (R1 whyTime fix) + merge of review/talk-others-people 8b288d9e (B3 «Được» knowledge hook, ka-know 6/6).
+- B1 (law 16): jstaff `elderTalkGain(st)` = the ONE elder talk gain (thiện cảm meAct + k61Meet + palace news line); elder «hoi» and jsvt svTalk (open and lén, when not refused) both call it (`svtElderGain`). Real tap Fold: «ĐƯỢC … Sổ ghi thêm …: Diệp Thanh Hòa kể: biết nàng ta Ân cần · Ta đã quen biết ma ma Diệp Thanh Hòa», thiện cảm 0→1.
+- B2 (law 1): svtMonth rolls svtLenO(NPC) for PEND.svtAsk too (pp.len); covert card «… lén tìm đến lúc vắng người, kéo ngươi ra nói chuyện riêng …»; talk → no svtEtq (no bất kính), her master's suspicion through svTouch "len" (SVT_COVERT); the asker's own master: the same chat touch as the open road; refusing a covert ask owes no greeting either.
+- N1 (D: Thái hậu household = others' people, law 11): card t:"thh" = svtGiao(elderGroups + «Hỏi chuyện» data-elder="hoi2" + «Hỏi lén» "hoi3"), plain elder talk dropped; jstaff act hoi2/hoi3 → svTalk → `svtThhTalk`: refusal svtRefO, elder gain when she talks, Thái hậu learns only through a real witness (a talkative woman of that household, BAL.svt.seen.talk − covert) → Chủ tin −BAL.svt.tin[kind], Thái hậu favour (th) −BAL.svt.rel[kind]. Gap noted (not built): NPCs do not talk to the Thái hậu's women (svtMonth targets consorts only); bất kính for the Thái hậu needs her place (no knAt for her) — open talk there has no bất kính.
+- N2: svt-len-rt passes a full buổi as «locked with its own khắc reason, a tap changes nothing»; also re-finds «Cung nhân» before each tap (the live handle went «gone» on re-render), pages «‹» when «›» ends, checks B1 gain + N1 Thái hậu card.
+| check | result |
+|---|---|
+| servant-trust (+12 cases B1/B2/N1) | 101/101 |
+| ka-know | 6/6 |
+| svt-scan | 69 sites, 0 UNWIRED |
+| one-core ×4 | PASS |
+| coop-e2e | 142/142 |
+| svt-len-rt REAL TAPS, robot-rt sliced save (30 buổi, Fold) | Fold PASS (talked, B1 gain), iPad PASS (refused); Thái hậu card both: one «Giao thiệp», «Hỏi chuyện» + «Hỏi lén», locked «Cần ✗ hết khắc trong ngày», plain talk 0; 0 dead, 0 jsClicks |
+| quickcheck | PASS (render 277/292, tab 708/731, buổi 2943/2089 ms — one 3-run median while nothing else ran after it; W2's -rv run was 1627/2073, watch it in round 2), core gates PASS |
+- Found by the robot-rt slice (not this branch, for D): dead close «Lui» on .dlg «Tin chờ người sai đi» (tapped 3×, dialog stays) + stuck 15 min on .dlg «Kính sự phòng ghi sổ».
+- PUSHED: review/talk-others-people-rv 25a9a9cc SẴN SÀNG KIỂM (reviewer session_01D3E3Nb7G3pi5N3uqUqqmAn, round 2).
