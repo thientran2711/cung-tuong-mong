@@ -25,3 +25,5 @@ HELD-DUMP 2026-11-25T10:23:36.615Z {"when":"Buổi trưa","Q":["Có người đ�
 KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/01/ title=Chọn người theo hầu bad=1
 KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/02/ title=Đại xá thiên hạ bad=1
 KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/03/ title=Hoàng thượng bad=1
+KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/04/ title=Kỳ nguyệt sự bad=1
+KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/05/ title=Bổng lộc tháng mười bad=3
