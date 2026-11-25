@@ -56,6 +56,8 @@ async function playMG(){
   else if(q.x!=null){await touchTap(q.x+G()*s,q.y+G()*s)}
   moves++;nx=Date.now()+BOT.think*(.6+.8*rnd())}
  const res=await page.evaluate(()=>({ph:KG82.phase,score:window.__hudS||null})).catch(()=>({}));
+ const resTxt=await page.evaluate(()=>{const r=document.getElementById('kg82box-res');return r?r.innerText.replace(/\s+/g,' ').slice(0,200):''}).catch(()=>'');
+ log('MG RESULT kind='+kind+' «'+resTxt+'»');
  log('MG end kind=',kind,'moves=',moves,'peekNull=',nNull,'peekOk=',nPk,'sample=',sample,'ms=',Date.now()-t0,JSON.stringify(res),lastErr?'peekErr='+lastErr:'');
  if(Date.now()-t0>=240000)bug('MG-STUCK','mini-game still in play after 240 s',kind);
 }
@@ -78,33 +80,33 @@ async function shot(tag){const f=OUT+'/shots/'+String(++nShot).padStart(5,'0')+'
 async function text(){return page.evaluate(()=>{const e=document.elementFromPoint(innerWidth/2,innerHeight/2);return document.body.innerText.replace(/\s+/g,' ').slice(0,1500)})}
 
 const EXIT=/xuất gia|xin xuất cung|xuất cung|tự phế|bỏ cuộc|tự vẫn|tự tận|thoái vị|rời cung|từ bỏ|kiếp mới/i;
-let UNK=0,EMPTY=0,AUTO=false,stepN=0,lastSig='',same=0;
+let STEP='',LASTIT=Date.now(),UNK=0,EMPTY=0,AUTO=false,stepN=0,lastSig='',same=0;
 async function decide(cs){const f=require.resolve('./policy.js');delete require.cache[f];return require('./policy.js')(cs,{EXIT,page,log})}
 const hudOf=()=>page.evaluate(()=>{const t=s=>((document.querySelector(s)||{}).innerText||'').replace(/\s+/g,' ').trim();return {me:t('.me'),when:t('.k3time'),stat:t('.kstg-tc')+' | '+t('.kstg-res'),mood:t('.hud-mood')}}).catch(()=>({}));
 const sigOf=()=>page.evaluate(()=>document.body.innerText.replace(/\s+/g,' ').length+':'+document.body.innerText.slice(0,200)).catch(()=>'');
 let lastProg=Date.now(),lastYear='',reloads=0,nbuoi=0,lastBuoiKey='',noeff={};
 async function trueReload(){
- const before=await hudOf();log('TRUE RELOAD #'+(++reloads)+' before',JSON.stringify(before));
+ let dly=4000;try{dly=+fs.readFileSync('/home/user/wt/m4/reload_delay.txt','utf8')}catch(e){}if(!(dly>=0))dly=4000;if(dly)await page.waitForTimeout(dly);log('RELOAD delay ms='+dly);const before=await hudOf();log('TRUE RELOAD #'+(++reloads)+' before',JSON.stringify(before));
  await open(true);await page.waitForTimeout(25000);
  for(const t of ['Chơi một mình','Tiếp tục kiếp này']){const cs=await cands();const c=cs.find(c=>c.txt.startsWith(t));if(!c){bug('RELOAD','title button «'+t+'» not found after reload',JSON.stringify(cs.map(x=>x.txt)));await shot('reload-fail');return}await realTap(c);await page.waitForTimeout(3000)}
  await page.waitForTimeout(4000);const after=await hudOf();
- const same=before.me===after.me&&before.stat===after.stat;log('RELOAD after',JSON.stringify(after),same?'SAME':'DRIFT');
+ const same=before.me===after.me&&before.stat===after.stat;log('RELOAD after (delay '+dly+' ms)',JSON.stringify(after),same?'SAME':'DRIFT');try{fs.appendFileSync(OUT+'/../m4-reload-results.txt',new Date().toISOString()+' reload#'+reloads+' delay='+dly+'ms '+(same?'SAME':'DRIFT')+' before='+JSON.stringify(before)+' after='+JSON.stringify(after)+'\n');if(dly===0)fs.writeFileSync('/home/user/wt/m4/reload_delay.txt','4000')}catch(e){}
  if(!same)bug('RELOAD-DRIFT','HUD differs after true reload',JSON.stringify({before,after}))}
 async function autoloop(maxSteps){AUTO=true;let k=0;
- while(AUTO&&k++<maxSteps){const cs=await cands();
+ while(AUTO&&k++<maxSteps){STEP='top';LASTIT=Date.now();const tE=Date.now();const cs=await cands();const dE=Date.now()-tE;if(dE>4000){bug('PAGE-FREEZE','page.evaluate (cands) took '+Math.round(dE/1000)+' s',JSON.stringify(cs.map(x=>x.txt.slice(0,30))));await shot('freeze')}
   if(!cs.length){if(++EMPTY>=3){EMPTY=0;await realTap({cx:378,cy:500,txt:'blind-centre'});log('BLIND TAP centre (no candidates)')}else await page.waitForTimeout(700);continue}EMPTY=0;
-  const h=await hudOf();const yr=(h.me.match(/năm thứ (\S+)/)||[])[1]||'';const bk=h.when+'|'+h.me.slice(-40);
-  if(bk!==lastBuoiKey){lastBuoiKey=bk;nbuoi++;lastProg=Date.now();if(nbuoi%1===0)log('STATUS buổi#'+nbuoi,h.when,'|',h.me,'|',h.stat,'|',h.mood)}
+  const tH=Date.now();const h=await hudOf();if(Date.now()-tH>4000)bug('PAGE-FREEZE','hudOf took '+Math.round((Date.now()-tH)/1000)+' s','');const yr=(h.me.match(/năm thứ (\S+)/)||[])[1]||'';const bk=h.when+'|'+h.me.slice(-40);
+  if(bk!==lastBuoiKey){lastBuoiKey=bk;nbuoi++;lastProg=Date.now();if(nbuoi%24===0){try{const v=await page.evaluate(()=>JSON.stringify(Object.fromEntries(Object.keys(localStorage).filter(k=>/hclh/i.test(k)).map(k=>[k,localStorage.getItem(k)]))));fs.writeFileSync(OUT+'/localStorage-saves.json',v);log('SAVE EXPORT buoi#'+nbuoi)}catch(e){}}if(nbuoi%1===0)log('STATUS buổi#'+nbuoi,h.when,'|',h.me,'|',h.stat,'|',h.mood)}
   if(yr&&yr!==lastYear&&lastYear!==''){lastYear=yr;await trueReload();continue}if(yr&&!lastYear)lastYear=yr;
   if(Date.now()-lastProg>15*60e3){bug('STUCK','no buổi progress for 15 min',JSON.stringify(h)+' cands='+JSON.stringify(cs.map(x=>x.txt.slice(0,40))));await shot('stuck');lastProg=Date.now();
     await page.keyboard.press('Escape');await realTap({cx:378,cy:500,txt:'unstick-centre'});continue}
-  const c=await decide(cs);
+  STEP='decide';const c=await decide(cs);STEP='after-decide';
   if(c&&c.wait){await page.waitForTimeout(c.wait);continue}
   if(c&&c.scroll){await page.mouse.move(494,600);await page.mouse.wheel(0,c.scroll);await page.waitForTimeout(300);continue}
   if(!c&&++UNK<4){await page.waitForTimeout(1200);continue}
   if(c)UNK=0;
   if(!c){UNK=0;log('UNKNOWN SCREEN',JSON.stringify(cs.map(x=>x.txt.slice(0,60)+'@'+x.cx+','+x.cy)));await shot('unknown');AUTO=false;break}
-  const s0=await sigOf();if(/^Sẵn sàng/.test(c.txt||'')){await touchTap(c.cx,c.cy);log('AUTO touch-tap',c.txt.slice(0,30));await page.waitForTimeout(1500);for(let w=0;w<20&&(await page.evaluate(()=>KG82.phase))!=='play';w++)await page.waitForTimeout(500);if((await page.evaluate(()=>KG82.phase))==='play'){try{await playMG()}catch(e){bug('MG-HARNESS',String(e).slice(0,200))}}else log('MG: phase never reached play after Sẵn sàng');continue}await realTap(c);log('AUTO tap',JSON.stringify((c.txt||'').slice(0,70)));await page.waitForTimeout(800);
+  STEP='sig0 '+(c.txt||'').slice(0,40);const s0=await sigOf();STEP='tap';if(/^Sẵn sàng/.test(c.txt||'')){await touchTap(c.cx,c.cy);log('AUTO touch-tap',c.txt.slice(0,30));await page.waitForTimeout(1500);for(let w=0;w<20&&(await page.evaluate(()=>KG82.phase))!=='play';w++)await page.waitForTimeout(500);if((await page.evaluate(()=>KG82.phase))==='play'){try{await playMG()}catch(e){bug('MG-HARNESS',String(e).slice(0,200))}}else log('MG: phase never reached play after Sẵn sàng');continue}await realTap(c);log('AUTO tap',JSON.stringify((c.txt||'').slice(0,70)));await page.waitForTimeout(800);
   const s1=await sigOf();if(s0===s1&&c.txt&&!/blind/.test(c.txt)){const key=c.txt.slice(0,40);noeff[key]=(noeff[key]||0)+1;if(noeff[key]===5){bug('NO-EFFECT','tap changed nothing 3x: «'+c.txt.slice(0,80)+'» ('+c.cx+','+c.cy+')',JSON.stringify(h));await shot('noeffect')}}}
  AUTO=false}
 (async()=>{await serve();await open(false);log('opened');
@@ -118,9 +120,12 @@ async function autoloop(maxSteps){AUTO=true;let k=0;
   else if(p==='/shot'){res=await shot(u.searchParams.get('t')||'x')}
   else if(p==='/text'){res=await text()}
   else if(p==='/eval'){res=await page.evaluate(u.searchParams.get('js'))}
+  else if(p==='/restore'){const d=JSON.parse(fs.readFileSync(u.searchParams.get('f'),'utf8'));await page.evaluate(d=>{for(const k in d)localStorage.setItem(k,typeof d[k]==='string'?d[k]:JSON.stringify(d[k]))},d);res='restored '+Object.keys(d).length}
   else if(p==='/reopen'){await open(true);res='ok'}
   else res='?';
   r.writeHead(200,{'content-type':'application/json'});r.end(JSON.stringify(res===undefined?null:res))}catch(e){r.writeHead(500);r.end(String(e))}});
  srv.listen(8200,'127.0.0.1');log('control :8200')})();
 
 process.on('uncaughtException',e=>{try{log('UNCAUGHT',String(e).slice(0,300))}catch(x){}});process.on('unhandledRejection',e=>{try{log('UNHANDLED',String(e).slice(0,300))}catch(x){}});
+
+setInterval(()=>{if(AUTO&&Date.now()-LASTIT>60000){try{log('WATCHDOG loop iteration running '+Math.round((Date.now()-LASTIT)/1000)+' s in step «'+STEP+'»')}catch(e){}}},30000);

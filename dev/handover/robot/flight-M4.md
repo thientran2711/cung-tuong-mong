@@ -1,27 +1,31 @@
-# flight-M4 — ROBOT-LIFE-M4 (solo, Fold 755x1000, SEED=104, profile cautious) — IN PROGRESS
-PRIORITY #1 CHECK: OD robot rows 25/11 | main dev/measure/robot10.js (in-page bot; NOT used: M4 plays REAL taps via a Playwright driver) | review/* none | claims Foreman F flight robot round.
-Reports to MAIN 134 (root session_01V1ZZH27MyRxU8SxKGA7Hjq).
+# flight-M4 — ROBOT-LIFE-M4 FINAL (solo, Fold 755x1000, SEED=104, profile cautious, REAL taps)
+PRIORITY #1 CHECK: OD robot rows 25/11 | main dev/measure/robot10.js (not used: M4 = own Playwright real-tap driver) | review/* none | claims Foreman F flight robot round. Reports to MAIN 140.
 
-## Life
-Origin: Cháu gái Thái hậu (roulette, seed 104). Bạch Nghê Thường → Quý nhân (19 tuổi). Game build: origin/main 0756a05b (started on 4da55ce8, switched at ~05:48Z; save loaded fine across builds).
-Last status line: 06:26:21 STATUS buổi#11 Buổi chiều | Bạch Nghê Thường Quý nhân 19 tuổi Kiếp thứ nhất Tháng bảy · thượng tuần · năm thứ nhất | Sắc 94 Tài 66 Tâm cơ 27 Đức 40 Danh 35 Sủng 20 | Bạc 37 Sức 100/100 | 
-Life is NOT finished (year 1). A life = ~40 s real per buổi incl. mini-games; a full life is many hours.
+## RESULT
+- Life: Cháu gái Thái hậu (roulette, seed 104) → Quý nhân Bạch Nghê Thường. Builds: origin/main 4da55ce8 (to 05:48Z) then 0756a05b.
+- **END: she died/was ended at 21 tuổi, Quý nhân, year 3 (Tháng tư hạ tuần, Buổi tối), 0 kids**, journal line in Sổ luân hồi: «Sổ Kính sự phòng không ghi đêm thị tẩm nào trước khi có 'thai', giả mang thai bị lật tẩy, tội khi quân · Danh hiệu «Tích bảo» · Kiếp này: Vừa». Foes listed: Nghiêm Tố Tuyết, Tạ Nhạn Hồi, Trình Nguyệt Thiền.
+- Real time: 05:18Z → 12:36Z (~7.3 h), ≈ 300 buổi (324 STATUS lines incl. repeats after driver restarts), ~40 mini-games with a result card, 4 true reloads (year 2,3,3,4-label), 1179 blind/cinematic taps, 2 restarts of the build (4da55ce8 → 0756a05b mid-life: save loaded fine).
+- After the ending the game rolled straight into Kiếp thứ hai (Vu Yên La, 18 tuổi); the robot stopped there (one life ordered). Evidence of the ending cinematic itself was NOT captured live (the robot tapped through «Ta biết rồi → Nhận → Tiếp theo» in 3 s); a replay of the 12:31 save (saves-life1-buoi24-1231.json) diverged (no death within 40 min), so the death is path/random dependent.
+- Cause chain (from the log + save): the cautious picker tapped the Hành sự card «Y dược · Giả mang thai — Rất vững — Mua chuộc thái y, độn bụng, chờ tháng…» (10:02Z and 10:54Z) because it showed odds «Rất vững» in the safe-looking Y dược category. Save S.fake=1, S.preg=5..7, S.recorded=false, S.nights=21 (nightLog has 21 nights!) → ~14 months later the fake pregnancy was exposed = tội khi quân = end. **Player-review point: a card whose odds word says «Rất vững» (safest) leads to certain death months later with no further warning/choice** (law 2/3 fairness; law 6a real evidence: she had 21 real nights in nightLog / HUD «Ân tình (đêm)» up to 29, yet the verdict says the book recorded none).
 
-## Harness (dev/handover/robot/m4/)
-drv.js (Playwright persistent context, control server :8200, REAL mouse/touchscreen taps after elementFromPoint hit-check, mini-game player = port of mg-bots.js skilled logic via KG82.peek oracle with real taps/holds/drags, true reload each in-game year via title buttons, stuck detector 15 min, NO-EFFECT detector), policy.js (hot-reloaded picker: cautious = highest KIT_ODDS rank, exit roads blacklisted, mini-games PLAY with 10% Bỏ qua, keeps Bạc>=60), tt.py/c.sh (manual helpers). Run: NODE_PATH=$(npm root -g) node drv.js ; tap title «Chơi một mình» → «Tiếp tục kiếp này» ; GET :8200/auto?n=100000. Save lives in the runner box profile (saves are NOT pushed: SAVES_NOT_IN_GIT.md); the life is container-bound.
+## GAME BUGS / WRONG-EFFECT / STUCK (with repro)
+1. **.kpopts option cards clipped by the modal frame (layout, common)**: story/news modals with 2+ options («Tân quân lập uy» Ch.2, «Bổng lộc tháng chín/mười một», «Kỳ nguyệt sự», «Tin đồn», «Sau vụ mưu hại», «Y phục dự Lễ Lạp bát», «Lời cảnh báo», «Chọn người theo hầu», «Yến tiệc đầu xuân»): the option list is its own scroll box (e.g. 112 px visible, scrollHeight 625), the modal frame ends before the card centres (frame bottom ≈ 790–897), a real tap at a card centre hits the frame = nothing; best option often below the fold under «Kéo xuống». 6 captures: dev/handover/robot/m4/kpopts/01..06 (dump.json, save.json, shot.png) for KK26. Cost the bot 4×15 min in stuck.
+2. **«Sang buổi/Sang ngày mới» greyed with no cue**: (a) away from room — needs tiny «Về phòng»; (b) guided overlay «Tiếp ▸/✕»; (c) a timed 80 s news wait (S.nfX open, «đang đi nghe ngóng…», cfBusy true, Q held, #modal hidden) — resolves itself at nfX.myAt = at+80 s; looks like a freeze (BIG rv has dumps; deadlock jdayq newsHold↔jnf gate theory still open: first Tháng tám case was >40 s watched, not proven permanent).
+3. **True-reload drift / rollback**: reload#1 (year 2) Danh 4→6; reload#2 at year-3 flip with 0 s delay: one buổi lost (Tháng giêng thượng tuần Sáng → back to Tháng chạp hạ tuần Tối, Bạc 56→7); reload#3 with 4 s delay: same buổi but Danh 33→30, Sủng 9→19, Bạc 56→74. Reload at the year-4 flip (0 s) hit the new-life state: title showed only «Bắt đầu kiếp mới» (no «Tiếp tục kiếp này») — the new life's save was not yet written (0 s after the life changed) → **a 0 s reload right after a new life starts loses that life's save**. (m4-reload-results.txt)
+4. Mini-game «Bỏ qua» = 10/10 Xuất sắc (Tuyển chọn · Nấu ăn, build 4da55ce8) vs played hat 5–6/10 Khá; main says fixed in m-fix-1-r (BAL.skip.cap). Played mini-game result cards for «mua» show «THÂN PHẬN môn thường của thân phận này · tay quen Tạm được» regardless of play (always «Tạm được» in 11 plays?) — check whether play quality counts.
+5. «Nhận thân phận» must be tapped twice (wheel result card + card).
+6. «Nghỉ ngơi một lát» (odds Rất vững) shows a BẠI toast «ta không được gì, cũng không mất gì».
+7. Option card taps on the card art open a full-screen picture zoom; taps on the top-right odds chip open the «Thang cơ duyên» legend covering the options.
+8. Demotion Quý nhân→Thường tại «giáng phẩm (giả bệnh khi quân)» (year 1 Tháng mười) came from the bot choosing «Nghỉ ngơi · Giả bệnh (Cáo bệnh)» — card text doesn't warn of the demotion risk.
+9. Economy squeeze: Bạc 160→1 within 2.5 months on a cautious bot (Mời thái y, bổng lộc cắt xén −18 by a foe's Nội vụ phủ); first option of «Sau vụ mưu hại» greyed (thiếu 19 bạc) — OK by design.
+10. «Tích Cần viện»: after «Vẫn đi (Danh -5)» the visit is refused «đêm chỉ cung nhân ra vào» — cost shown, visit refused (check whether Danh -5 is charged; HUD Danh 17→22 over that stretch, unproven).
+11. Day-end «Điềm báo» modal (identical text in every season, ✕ only) appears repeatedly (6 times) — repetitive; harness silence bug there (see below).
 
-## Findings so far (details + shots: moments.md, notes.txt)
-- NOT game bugs (harness): NO-EFFECT x3 were my picker tapping the .kpopts container.
-- Mini-game «Bỏ qua» gives 10/10 Xuất sắc for free (law 2/5 smell).
-- «Sang ngày mới» disabled with no cue: needs «Về phòng» tap (away from room) or dismissing the guided overlay «Tiếp ▸/✕» (kfoc); newcomer dead end.
-- «Nhận thân phận» must be tapped twice at start.
-- «Nghỉ ngơi một lát» Rất vững shows BẠI toast.
-- Đêm thị tẩm: option list scrolls («Kéo xuống»); best option below fold.
-- Bạc 160→1 within ~2.5 months for a cautious bot.
-- Mini-games played for real so far: mua x3, hat x3, dan x1 (all reach result).
-No DEAD BUTTON / soft-lock / crash / save-loss confirmed yet. True reloads: restarts counted (see log-tail.txt).
+## HARNESS notes (not game bugs)
+- ≈ 8 harness mis-taps fixed (kpopts container, ADV regex on option cards, disabled kdis cards, odds chip/art taps, item chip loop, tab bar under info modals). 4 «15-min silences» after modal «Điềm báo»/«Tích Cần viện»: root cause NOT fully found (no PAGE-FREEZE, no WATCHDOG; tab-bar fix did not cure the 4th) — suspect policy {wait}/scroll branch loop; later drivers should add a per-iteration decision ring buffer.
+- Files: dev/handover/robot/m4/{drv.js,policy.js,tt.py,notes.txt,moments.md,log-tail.txt,saves-life1-buoi24-1231.json,localStorage-saves.json,kpopts/01..06}.
 
-## «Bỏ qua» vs played (MAIN 134 question, 25/11 06:29Z) — exact evidence
-- SKIP: 05:26Z, Tuyển chọn · Môn thi · Nấu ăn (Quý nhân promotion exam, tier «Vừa · tuyển tú, tài nghệ bậc 2», odds Rất vững): intro button «Bỏ qua — kết quả xuất sắc, như người cùng bậc» → result card «Tuyển chọn: Môn thi · Nấu ăn  10/10 · Xuất sắc (để tài nghệ quyết định)». Shot: shots/00007-unknown.png in the runner box.
-- PLAYED (skilled-bot port, real taps): kind hat, 06:30:56Z → «KẾT QUẢ 5/10 · Khá: cơ duyên lên Có cơ». Other played kinds so far (mua ×3, hat ×3, dan, den) reached the result screen; score text only captured from 06:30Z on (see log-tail.txt «MG RESULT»).
-- So at least for the Tuyển chọn exam the skip granted 10/10 Xuất sắc while a played game of another kind gave 5/10: a quick skip beat an honest play (breaks «a quick result never beats a good own play» for that exam; other kinds' skip values not yet measured — will sample the 10 % skips).
+## PLAYER REVIEW (persona cautious planner; full moment log: m4/moments.md) — scores 1–10
+a First 15 min 4 (roulette + 2× Nhận thân phận, guided overlay needs «Tiếp ▸», Sang ngày mới greyed). b Loop/pacing 5 (≈40 s/buổi incl. 20–30 s mini-games; Nghỉ ngơi/Học tập repeat; Điềm báo repeats). c Buttons/UI 3 (clipped option cards, tiny «Về phòng», art/chip tap traps, no 80 s wait cue). d Story 6 (Tiền truyện, phụ tuyến Mời trà/Hội phối đồ are nice; ending cause hidden). e Characters 6 (Sơ Tuyết, Hoàng hậu schemes felt alive: Sau vụ mưu hại). f Choices/fairness 3 («Giả mang thai — Rất vững» → death; odds word hides long-term lethal outcome; many options all «Mong manh»). g Feedback 5 (BẠI on Rất vững rest; stat pops fine). h Mini-games 6 (hat/dan/mua/den/ne playable by oracle; result text for mua generic). i Visuals/sound 8 (art lovely; sound not testable headless). j Co-op n/a.
+TOP 3 loved: art/room scenes; hậu cung intrigue cards (Sau vụ mưu hại, Lời cảnh báo); mini-game variety. TOP 3 hated: option cards clipped/scroll boxes; greyed day button without reason; a «Rất vững» card that kills her. Would play another life: yes, if modals fit the screen.
+Suggestions (parking lot): countdown/spinner on timed waits; show «nguy hiểm: khi quân» on fraud cards; one OK button on report modals; ending cinematic should be reachable/replayable from Sổ luân hồi.
