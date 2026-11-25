@@ -126,3 +126,7 @@ Only 2 delegated acts opened a game (maid + servant «Nghe ngóng chung»); afte
 - jsgame: «Giao cho người làm» (the choice and the skip button inside the game's rules card) runs `J.runDlg` = fzRun(doer odds, sent act). Nghe lén / Mua chuộc: the job odds minus the doer's sendPen. The option reads «giao cho <tên> · <odds word> · …».
 - Before → after (sample, rival not together): Dò la her 63 → giao: disloyal doer 52 / loyal 69; Tung tin đồn 49 → 43/52; Vu oan 10 → 5/13. Before: «Giao» always rolled HER odds.
 - Tests r2 (sha 1785c176 + report): delegate-nomg.js PASS incl. (5) doer loyalty moves the Giao odds, the run's ctx pen = the doer's sendPen, card names the doer · quickcheck PASS · coop-e2e 142/142 both orders · shown-odds-spend 52/52 · schemegames PASS · schemesave ok · duodo-focus-data/games PASS. Pre-existing, identical on untouched main: shown-odds.test 87/90 (plant-here ×3), schemewire crashes (stale locator), duodo-focus-view 5a–5d.
+
+## Merges onto LIVE main (FF)
+- 4da55ce8 (flight-modal-deadlock) and 0756a05b (sansang-music-fix): built files only (index.html/sw.js), rebuilt. Re-run on the merges: delegate-nomg PASS ×3, quickcheck PASS (incl. new hook 85 dead-card), coop-e2e 142/142 both orders.
+- sansang-music-fix.js under file:// shows the same FAILs on untouched 0756a05b (music not back; «Sẵn sàng» covered at one size, varies per run) = env/flaky, not this branch. My jdfv lines (dfTap E branch, dfLast) do not touch the intro handler.
