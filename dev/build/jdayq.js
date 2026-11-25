@@ -40,11 +40,11 @@ function dqHidden(el){try{return DQ_HID&&DQ_HID.get?DQ_HID.get.call(el):el.hidde
 function dqOldPending(){try{
   /* a scene being prepared (kitNightEnd preloads its picture before kmStage) counts too; a busy flag with no scene in the page for longer than
      BAL.dayq.stale ms is stale (never blocks the day) */
-  if(typeof kmBusy!=="undefined"&&kmBusy){if(document.querySelector(".kmov:not(.km-out),#kmrew")){DQ.bz=0;return true}const n=Date.now();if(!DQ.bz)DQ.bz=n;if(n-DQ.bz<((BAL.dayq&&BAL.dayq.stale)||10000))return true}else DQ.bz=0;
+  if(typeof kmBusy!=="undefined"&&kmBusy){if(dqOn(".kmov:not(.km-out),#kmrew")){DQ.bz=0;return true}const n=Date.now();if(!DQ.bz)DQ.bz=n;if(n-DQ.bz<((BAL.dayq&&BAL.dayq.stale)||10000))return true}else DQ.bz=0;
   if(typeof KMQ!=="undefined"&&KMQ.length)return true;
   /* the other old-buổi screens of the family: a mini-game screen / its result (#ov), the podium (j90), the roulette */
-  const ov=document.getElementById("ov");if(ov&&!dqHidden(ov))return true;
-  if(document.getElementById("kpodov")||document.querySelector('[id^="kroul"],.kroul-ov'))return true}catch(e){}return false}
+  const ov=document.getElementById("ov");if(ov&&!dqHidden(ov)&&dqShown(ov))return true;
+  if(dqOn('#kpodov,[id^="kroul"],.kroul-ov'))return true}catch(e){}return false}/* only what is on screen (dqOn): a ghost host never holds the turn */
 /* (b) the new-day host (#dawn: kitNewDay title card, then the Tuần lục book) is on screen */
 function dqDawn(){try{const vis=el=>!!(el&&!dqHidden(el)&&el.getBoundingClientRect().width>0&&getComputedStyle(el).display!=="none");
   /* only a host that is REALLY on screen with its content (a leftover class / empty host after a new life never holds a card) */
@@ -59,9 +59,13 @@ function dqNewsFirst(){try{const M=$("modal");if(!Q.length||(M&&!dqHidden(M)))re
 function dqPoll(){return BAL.dayq.poll}
 /* (c) she is inside an activity: the root element of it (null = free). Mini-game screen, kit motion scene ON SCREEN (a queued one is not an
    activity yet), podium, roulette, the jdfv person view she opened herself or its on-figure game (an encounter scene opened by a card is the card) */
-function dqActEl(){try{const ov=document.getElementById("ov");if(ov&&!dqHidden(ov))return ov;
+/* coop-rebirth-stuck / FAST LANE F1 (25/11): only an element that is REALLY ON SCREEN is an activity. A scene / podium / roulette / reward host left in
+   the page but not rendered (display:none, [hidden], zero size: a reset, a rebirth, a closed screen) held a queued card for ever — Q kept it, #modal
+   stayed hidden, «Sang ngày mới» / «Sẵn sàng» was dead with nothing on screen, and the safety net (dqFreeScreen) never fired either. */
+function dqOn(sel){try{for(const e of document.querySelectorAll(sel))if(dqShown(e))return e}catch(e){}return null}
+function dqActEl(){try{const ov=document.getElementById("ov");if(ov&&!dqHidden(ov)&&dqShown(ov))return ov;
   /* the podium a card opens for ITSELF (j90 wiring 2, «podium first, then the panel»: Q[0].__podDone) is part of that card, not an activity over it */
-  const own=Q[0]&&Q[0].__podDone;const k=document.querySelector(own?".kmov:not(.km-out),#kmrew,[id^=\"kroul\"],.kroul-ov":".kmov:not(.km-out),#kmrew,#kpodov,[id^=\"kroul\"],.kroul-ov");if(k)return k;
+  const own=Q[0]&&Q[0].__podDone;const k=dqOn(own?".kmov:not(.km-out),#kmrew,[id^=\"kroul\"],.kroul-ov":".kmov:not(.km-out),#kmrew,#kpodov,[id^=\"kroul\"],.kroul-ov");if(k)return k;
   /* button-crawl-fix-5 (F #10 25/11 11:01Z, robot s6d: «Sang ngày mới» greyed, Q = 12 cards, NOTHING on screen): the person view is an activity
      only while it is ON SCREEN. A tap on another tab parks it (jdfv dfTabLayers: .kfoc hidden, DF.F kept) — she is no longer inside it, so the
      waiting card shows on the tab she is on; a view whose layer is gone (no .kfoc) holds nothing either (it used to return document.body = held for ever) */
@@ -138,6 +142,16 @@ function dqWake(){try{const M=document.getElementById("modal");const m=Q[0];
   if(now-DQ.wk.at<W*(1+DQ.wk.n))return;DQ.wk.n++;DQ.stat.woke=(DQ.stat.woke||0)+1;showModal()}catch(e){console.error("dayq wake",e)}}
 setTimeout(()=>setTimeout(()=>{try{setInterval(dqWake,700)}catch(e){}},0),0);
 window.dqWake=dqWake;
+/* coop-rebirth-stuck (25/11, co-op e2e host «Sẵn sàng» dead at buổi 2:1 / 3:2 with Q 0, every co-op gate open, bend false; solo F1 same family):
+   only j6 render() and jcoopworld lockNext() write #next.disabled, and both run on events. A disabled #next whose reason is gone (the card closed,
+   the mini-game ended, a co-op lock cleared) with no render / lockNext after it stayed dead for ever. HEAL: every BAL.dayq.wake ms, a disabled
+   #next while nothing holds it (alive, Q empty, no mini-game) is looked at again by its OWN rule — co-op: lockNext() (keeps every room lock and its
+   words); solo: render()'s rule (no co-op wait on it). Never enables a button a real reason holds. Paint only: no S key, no draw, no message. */
+function dqNextHeal(){try{const n=document.getElementById("next");if(!n||!n.disabled||typeof S==="undefined"||!S||S.dead||Q.length||S.mg)return;
+ const c=window.COOPW;if(c&&c.on){if(typeof c.lockNext==="function"){c.lockNext();if(!n.disabled)DQ.stat.healed=(DQ.stat.healed||0)+1}return}
+ if(n.dataset.coopWait)return;n.disabled=false;DQ.stat.healed=(DQ.stat.healed||0)+1;dqNextCue()}catch(e){console.error("dayq heal",e)}}
+setTimeout(()=>setTimeout(()=>{try{setInterval(dqNextHeal,(BAL.dayq&&BAL.dayq.wake)||2000)}catch(e){}},0),0);
+window.dqNextHeal=dqNextHeal;
 window.DQ=DQ;
 /* button-crawl-fix-6 (F #12 25/11 12:53Z; BIG REVIEWER #4 bc-stack-review.md @3b8ed32e; robot s4d no-clock loops y8/y11, handover 37cfc029):
    «Sang buổi / Sang ngày mới» greyed while NOTHING on screen shows what it waits for — two more members of the fix-5 family:

@@ -375,6 +375,13 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
  {const r=await A.p.evaluate(()=>{const f=(rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null);return{ok:!!f&&(k61St(f)===0||f.id==null/* servant-origin friend (random life): same acceptance as the start check, test-flaky-sure */),srv:f&&f.id==null,st:f&&k61St(f),here:f&&f.id!=null&&whereOf(f),me:S.place,tr:COOPW.tr.slice(-12)}});
   ok(r.ok,'reborn friend is a stranger again (Người lạ)',r.ok?undefined:r)}
  await clear(A);await clear(B);await shot(A,'12-reborn-seen');await shot(B,'12-reborn');
+ /* coop-rebirth-stuck (25/11 host «Sẵn sàng» dead after rebirth, Q 0, every gate open, bend false): a #next left disabled with no reason any more
+    (no render / lockNext after the reason cleared) comes back by itself (jdayq dqNextHeal → lockNext) within 2 × BAL.dayq.wake; a real lock keeps it */
+ {const free=await untilC(A,()=>{const n=document.getElementById('next');return !!S&&!S.dead&&!Q.length&&!S.mg&&!n.disabled&&!n.dataset.coopWait},null,30000);
+  if(free){const r=await A.p.evaluate(async()=>{const n=document.getElementById('next');n.disabled=true;const W=(BAL.dayq&&BAL.dayq.wake)||2000;await new Promise(f=>setTimeout(f,2*W+600));
+    return{back:!n.disabled||!!n.dataset.coopWait,dis:n.disabled,txt:n.textContent,Q:Q.length,healed:window.DQ&&DQ.stat.healed}});
+   ok(r.back,'host: a #next left disabled with no reason comes back (heal)',r.back?undefined:r)}
+  else ok(false,'host: a free moment to check the #next heal',await A.p.evaluate(()=>({Q:Q.length,mg:!!S.mg,dis:document.getElementById('next').disabled,txt:document.getElementById('next').textContent})))}
  /* 6 one more week after rebirth */
  {const wk=(await C(A)).week;await weekBoth(A,B,1);const adv=await untilC(B,x=>__co().week===x+1,wk,90000);
   const dump=o=>o.p.evaluate(()=>({co:__co(),k:wk()+':'+(S.buoi||0),used,Q:Q.length,mg:!!S.mg,dead:!!S.dead,next:document.getElementById('next').textContent,dis:document.getElementById('next').disabled,bend:COOPW.bend,pend:COOPW.pend,sent:COOPW.sent,rb:[COOPW.rweek,COOPW.rbuoi],tm:S.toMorning,tr:COOPW.tr.slice(-20)})).catch(e=>e.message);
