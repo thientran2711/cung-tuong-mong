@@ -1,0 +1,1767 @@
+{
+ "job": {
+  "id": "coop-rt-u3c48-guest-k1",
+  "origin": null,
+  "road": null,
+  "bot": "sens",
+  "seed": 582,
+  "dev": "ipad",
+  "url": "http://127.0.0.1:8732/index.html"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "5edf09f6",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [
+   {
+    "at": 347,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 883,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Tích Cần viện · Ở đây còn 5 người."
+   },
+   {
+    "at": 929,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1024,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1035,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1045,
+    "lvl": 2,
+    "layer": "#coopfz",
+    "title": ""
+   }
+  ],
+  "slice": null,
+  "areaTaps": 65,
+  "typed": 1,
+  "popClose": 12,
+  "chipTrap": 2,
+  "reloads": [
+   20
+  ],
+  "reloadDone": 20,
+  "taps": 860,
+  "noFreePoint": 0,
+  "chipCover": [
+   {
+    "screen": "#ktut",
+    "label": "Khóc lóc xin tha",
+    "chip": "div.ktut-blk",
+    "pct": 39,
+    "vw": 1180
+   },
+   {
+    "screen": "#ktut",
+    "label": "Ban thưởng 0/1",
+    "chip": "div.kpdb + div.kpdt",
+    "pct": 89,
+    "vw": 1180
+   },
+   {
+    "screen": "page «Tích Cần viện · Ở đây còn 4 người.»",
+    "label": "Học tập · Tài nghệHọc tập · Tài nghệHọc ",
+    "chip": "div.kpbar + span.kaart",
+    "pct": 47,
+    "vw": 1180
+   },
+   {
+    "screen": "page «Tích Cần viện · Ở đây còn 4 người.»",
+    "label": "Học tập · Tài nghệHọc tập · Tài nghệHọc ",
+    "chip": "button.pct + span.kaart",
+    "pct": 31,
+    "vw": 1180
+   }
+  ]
+ },
+ "life": {
+  "id": "Hồng nhan bạc mệnh",
+  "type": "death",
+  "fate": "Quỳ phạt đến kiệt sức mà chết",
+  "death": true,
+  "age": 20,
+  "year": 1,
+  "rank": 0
+ },
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "game|tap on option «Sẵn sàng» opened chip modal «Xong việc: Đi một nơi trong cung» (chip class button#next.main overlaps the card body)",
+   "type": "game",
+   "msg": "tap on option «Sẵn sàng» opened chip modal «Xong việc: Đi một nơi trong cung» (chip class button#next.main overlaps the card body)",
+   "n": 1,
+   "at": 83,
+   "screen": "page «Tân Giả khố · Nước giặt lạnh buốt, chậu gỗ chất ca»"
+  },
+  {
+   "k": "game|tap on option «Thiên mệnh» opened chip modal «Thiên mệnh» (chip class button.pct overlaps the card body)",
+   "type": "game",
+   "msg": "tap on option «Thiên mệnh» opened chip modal «Thiên mệnh» (chip class button.pct overlaps the card body)",
+   "n": 1,
+   "at": 153,
+   "screen": ".dlg «Chương 1 · Kẻ hầu mới vào cung»"
+  },
+  {
+   "k": "ktut-no-target|tutorial open with no tappable target card; tapped its own «Đã hiểu»",
+   "type": "ktut-no-target",
+   "msg": "tutorial open with no tappable target card; tapped its own «Đã hiểu»",
+   "n": 1,
+   "at": 847,
+   "shot": "/home/user/wt/out48/shots-coop-rt-u3c48-guest-k1/ktut-1.png",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 1,
+    "b": 1,
+    "age": 20,
+    "rank": 0,
+    "name": "Cao Dung Âm"
+   },
+   "hole": null,
+   "card": "",
+   "buttons": [
+    "",
+    "Đã hiểu"
+   ]
+  }
+ ],
+ "dead": [],
+ "saves": [],
+ "buoi": 30,
+ "steps": 2012,
+ "status": [],
+ "_snapAt": 1795621658026,
+ "_un": 0,
+ "trace": [
+  [
+   638,
+   ".dlg «Lịch tháng» «ngày 24»"
+  ],
+  [
+   639,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   640,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   641,
+   ".dlg «Lịch tháng» «ngày 24»"
+  ],
+  [
+   642,
+   ".dlg «Lịch tháng» «ngày 13»"
+  ],
+  [
+   642,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   643,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   644,
+   ".dlg «Lịch tháng» «ngày 16: Đến thăm Hoàng hậu: Nguyệt tín»"
+  ],
+  [
+   645,
+   ".dlg «Lịch tháng» «ngày 24»"
+  ],
+  [
+   645,
+   ".dlg «Lịch tháng» «ngày 22»"
+  ],
+  [
+   646,
+   ".dlg «Lịch tháng» «ngày 24»"
+  ],
+  [
+   647,
+   ".dlg «Lịch tháng» «ngày 13: Dâng quà Thái hậu»"
+  ],
+  [
+   648,
+   ".dlg «Lịch tháng» «ngày 25»"
+  ],
+  [
+   649,
+   ".dlg «Lịch tháng» «ngày 23»"
+  ],
+  [
+   649,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   650,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   651,
+   ".dlg «Lịch tháng» «ngày 28: Dâng quà Thái hậu»"
+  ],
+  [
+   652,
+   ".dlg «Lịch tháng» «ngày 15: Nguyệt tín»"
+  ],
+  [
+   652,
+   ".dlg «Lịch tháng» «ngày 23: Luyện đàn»"
+  ],
+  [
+   653,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   654,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   655,
+   ".dlg «Lịch tháng» «ngày 30»"
+  ],
+  [
+   656,
+   ".dlg «Lịch tháng» «ngày 27»"
+  ],
+  [
+   656,
+   ".dlg «Lịch tháng» «ngày 20»"
+  ],
+  [
+   657,
+   ".dlg «Lịch tháng» «ngày 13: Dâng quà Thái hậu»"
+  ],
+  [
+   658,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   659,
+   ".dlg «Lịch tháng» «ngày 28: Dâng quà Thái hậu»"
+  ],
+  [
+   659,
+   ".dlg «Lịch tháng» «ngày 19»"
+  ],
+  [
+   660,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   661,
+   ".dlg «Lịch tháng» «ngày 16: Đến thăm Hoàng hậu: Nguyệt tín»"
+  ],
+  [
+   662,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   662,
+   ".dlg «Lịch tháng» «ngày 26»"
+  ],
+  [
+   663,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   664,
+   ".dlg «Lịch tháng» «ngày 30»"
+  ],
+  [
+   665,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   666,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   666,
+   ".dlg «Lịch tháng» «ngày 14: Nguyệt tín»"
+  ],
+  [
+   667,
+   ".dlg «Lịch tháng» «ngày 18: Nguyệt tín»"
+  ],
+  [
+   668,
+   ".dlg «Lịch tháng» «ngày 13: Dâng quà Thái hậu»"
+  ],
+  [
+   669,
+   ".dlg «Lịch tháng» «ngày 24»"
+  ],
+  [
+   669,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   670,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   671,
+   ".dlg «Lịch tháng» «ngày 24»"
+  ],
+  [
+   672,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   673,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   673,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   674,
+   ".dlg «Lịch tháng» «ngày 21»"
+  ],
+  [
+   675,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   676,
+   ".dlg «Lịch tháng» «ngày 13: Dâng quà Thái hậu»"
+  ],
+  [
+   676,
+   ".dlg «Lịch tháng» «ngày 24»"
+  ],
+  [
+   677,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   678,
+   ".dlg «Lịch tháng» «ngày 25»"
+  ],
+  [
+   679,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   680,
+   ".dlg «Lịch tháng» «ngày 18: Nguyệt tín»"
+  ],
+  [
+   680,
+   ".dlg «Lịch tháng» «ngày 13: Dâng quà Thái hậu»"
+  ],
+  [
+   681,
+   ".dlg «Lịch tháng» «Bỏ hẹn»"
+  ],
+  [
+   682,
+   ".dlg «Lịch tháng» «ngày 22»"
+  ],
+  [
+   683,
+   ".dlg «Lịch tháng» «ngày 17: Nguyệt tín»"
+  ],
+  [
+   683,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   684,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   685,
+   ".dlg «Lịch tháng» «ngày 18: Nguyệt tín»"
+  ],
+  [
+   686,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   686,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   687,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   688,
+   ".dlg «Lịch tháng» «ngày 13»"
+  ],
+  [
+   689,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   689,
+   ".dlg «Lịch tháng» «ngày 26»"
+  ],
+  [
+   690,
+   ".dlg «Lịch tháng» «ngày 14: Nguyệt tín»"
+  ],
+  [
+   691,
+   ".dlg «Lịch tháng» «ngày 30»"
+  ],
+  [
+   692,
+   ".dlg «Lịch tháng» «ngày 19»"
+  ],
+  [
+   693,
+   ".dlg «Lịch tháng» «ngày 15: Nguyệt tín»"
+  ],
+  [
+   693,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   694,
+   ".dlg «Lịch tháng» «ngày 25»"
+  ],
+  [
+   695,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   696,
+   ".dlg «Lịch tháng» «ngày 21»"
+  ],
+  [
+   696,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   697,
+   ".dlg «Lịch tháng» «ngày 27»"
+  ],
+  [
+   698,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   699,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   700,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   700,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   701,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   702,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   703,
+   ".dlg «Lịch tháng» «ngày 17: Nguyệt tín»"
+  ],
+  [
+   703,
+   ".dlg «Lịch tháng» «ngày 20»"
+  ],
+  [
+   704,
+   ".dlg «Lịch tháng» «ngày 23: Luyện đàn»"
+  ],
+  [
+   705,
+   ".dlg «Lịch tháng» «ngày 16: Đến thăm Hoàng hậu: Nguyệt tín»"
+  ],
+  [
+   706,
+   ".dlg «Lịch tháng» «ngày 28: Dâng quà Thái hậu»"
+  ],
+  [
+   706,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   707,
+   ".dlg «Lịch tháng» «ngày 28: Dâng quà Thái hậu»"
+  ],
+  [
+   708,
+   ".dlg «Lịch tháng» «ngày 13»"
+  ],
+  [
+   709,
+   ".dlg «Lịch tháng» «ngày 16: Đến thăm Hoàng hậu: Nguyệt tín»"
+  ],
+  [
+   710,
+   ".dlg «Lịch tháng» «ngày 27»"
+  ],
+  [
+   710,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   711,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   712,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   713,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   713,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   714,
+   ".dlg «Lịch tháng» «ngày 15: Nguyệt tín»"
+  ],
+  [
+   715,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   716,
+   ".dlg «Lịch tháng» «ngày 28: Dâng quà Thái hậu»"
+  ],
+  [
+   716,
+   ".dlg «Lịch tháng» «ngày 18: Nguyệt tín»"
+  ],
+  [
+   717,
+   ".dlg «Lịch tháng» «ngày 23: Luyện đàn»"
+  ],
+  [
+   718,
+   ".dlg «Lịch tháng» «Bỏ hẹn»"
+  ],
+  [
+   719,
+   ".dlg «Lịch tháng» «ngày 15: Nguyệt tín»"
+  ],
+  [
+   719,
+   ".dlg «Lịch tháng» «ngày 25»"
+  ],
+  [
+   720,
+   ".dlg «Lịch tháng» «ngày 24»"
+  ],
+  [
+   721,
+   ".dlg «Lịch tháng» «ngày 22»"
+  ],
+  [
+   722,
+   ".dlg «Lịch tháng» «ngày 20»"
+  ],
+  [
+   723,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   723,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   724,
+   ".dlg «Lịch tháng» «ngày 26»"
+  ],
+  [
+   725,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   726,
+   ".dlg «Lịch tháng» «ngày 24»"
+  ],
+  [
+   726,
+   ".dlg «Lịch tháng» «ngày 27»"
+  ],
+  [
+   727,
+   ".dlg «Lịch tháng» «ngày 21»"
+  ],
+  [
+   728,
+   ".dlg «Lịch tháng» «ngày 17: Nguyệt tín»"
+  ],
+  [
+   729,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   730,
+   ".dlg «Lịch tháng» «ngày 19»"
+  ],
+  [
+   730,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   731,
+   ".dlg «Lịch tháng» «ngày 19»"
+  ],
+  [
+   732,
+   ".dlg «Lịch tháng» «ngày 25»"
+  ],
+  [
+   733,
+   ".dlg «Lịch tháng» «ngày 15: Nguyệt tín»"
+  ],
+  [
+   733,
+   ".dlg «Lịch tháng» «ngày 22»"
+  ],
+  [
+   734,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   735,
+   ".dlg «Lịch tháng» «ngày 21»"
+  ],
+  [
+   736,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   737,
+   ".dlg «Lịch tháng» «ngày 23»"
+  ],
+  [
+   737,
+   ".dlg «Lịch tháng» «ngày 14: Nguyệt tín»"
+  ],
+  [
+   738,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   739,
+   ".dlg «Lịch tháng» «ngày 16: Đến thăm Hoàng hậu: Nguyệt tín»"
+  ],
+  [
+   740,
+   ".dlg «Lịch tháng» «ngày 30»"
+  ],
+  [
+   740,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   741,
+   ".dlg «Lịch tháng» «ngày 28: Dâng quà Thái hậu»"
+  ],
+  [
+   742,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   743,
+   ".dlg «Lịch tháng» «ngày 24»"
+  ],
+  [
+   743,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   744,
+   ".dlg «Lịch tháng» «ngày 13»"
+  ],
+  [
+   745,
+   ".dlg «Lịch tháng» «ngày 14: Nguyệt tín»"
+  ],
+  [
+   746,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   747,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   747,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   748,
+   ".dlg «Lịch tháng» «ngày 26»"
+  ],
+  [
+   749,
+   ".dlg «Lịch tháng» «ngày 19»"
+  ],
+  [
+   750,
+   ".dlg «Lịch tháng» «ngày 15: Nguyệt tín»"
+  ],
+  [
+   750,
+   ".dlg «Lịch tháng» «ngày 28: Dâng quà Thái hậu»"
+  ],
+  [
+   751,
+   ".dlg «Lịch tháng» «ngày 28: Dâng quà Thái hậu»"
+  ],
+  [
+   752,
+   ".dlg «Lịch tháng» «ngày 21»"
+  ],
+  [
+   753,
+   ".dlg «Lịch tháng» «ngày 27»"
+  ],
+  [
+   754,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   754,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   755,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   756,
+   ".dlg «Lịch tháng» «ngày 23»"
+  ],
+  [
+   757,
+   ".dlg «Lịch tháng» «ngày 28: Dâng quà Thái hậu»"
+  ],
+  [
+   757,
+   ".dlg «Lịch tháng» «ngày 30»"
+  ],
+  [
+   758,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   759,
+   ".dlg «Lịch tháng» «ngày 26»"
+  ],
+  [
+   760,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   760,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   761,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   762,
+   ".dlg «Lịch tháng» «ngày 27»"
+  ],
+  [
+   763,
+   ".dlg «Lịch tháng» «ngày 27»"
+  ],
+  [
+   764,
+   ".dlg «Lịch tháng» «ngày 22»"
+  ],
+  [
+   764,
+   ".dlg «Lịch tháng» «ngày 20»"
+  ],
+  [
+   765,
+   ".dlg «Lịch tháng» «ngày 26»"
+  ],
+  [
+   766,
+   ".dlg «Lịch tháng» «ngày 15: Nguyệt tín»"
+  ],
+  [
+   767,
+   ".dlg «Lịch tháng» «ngày 24»"
+  ],
+  [
+   767,
+   ".dlg «Lịch tháng» «ngày 21»"
+  ],
+  [
+   768,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   769,
+   ".dlg «Lịch tháng» «ngày 25»"
+  ],
+  [
+   770,
+   ".dlg «Lịch tháng» «ngày 14: Đến thăm Hoàng hậu: Nguyệt tín»"
+  ],
+  [
+   770,
+   ".dlg «Lịch tháng» «ngày 25»"
+  ],
+  [
+   771,
+   ".dlg «Lịch tháng» «ngày 16: Đến thăm Hoàng hậu: Nguyệt tín»"
+  ],
+  [
+   772,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «ⓘ luật Đức»"
+  ],
+  [
+   773,
+   ".dlg «Đức» «Lui»"
+  ],
+  [
+   774,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc với thầyⓘT»"
+  ],
+  [
+   775,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Tứ đức 8/9»"
+  ],
+  [
+   776,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «nắng gắt»"
+  ],
+  [
+   777,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Mệnh truyện»"
+  ],
+  [
+   778,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Về phòng»"
+  ],
+  [
+   779,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Việc nhờ»"
+  ],
+  [
+   780,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Tài nghệ»"
+  ],
+  [
+   781,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Giao tình»"
+  ],
+  [
+   781,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Đổi chỗ hai người»"
+  ],
+  [
+   782,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Tâm trạngBình thản-3»"
+  ],
+  [
+   783,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   784,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Lương tháng3 bạc»"
+  ],
+  [
+   785,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Ngài để ý0»"
+  ],
+  [
+   785,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Tai mắt0»"
+  ],
+  [
+   786,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Tai mắt0»"
+  ],
+  [
+   787,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Chọn chính mình»"
+  ],
+  [
+   788,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Chọn chính mình»"
+  ],
+  [
+   789,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Quý phiThạch Nhạn Hồi»"
+  ],
+  [
+   789,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Mục tiêu chương»"
+  ],
+  [
+   790,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Tài nghệ»"
+  ],
+  [
+   791,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Ngài để ý0»"
+  ],
+  [
+   792,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Tác phẩm»"
+  ],
+  [
+   793,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Tai mắt0»"
+  ],
+  [
+   793,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Sắc70Tài73Tâm cơ27Đức30Danh3Chủ tin39»"
+  ],
+  [
+   794,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Hoàng tự»"
+  ],
+  [
+   795,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Kế vị»"
+  ],
+  [
+   796,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «6Đồng liêu»"
+  ],
+  [
+   797,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Tai mắt0»"
+  ],
+  [
+   797,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Hoàng tử2. Tuyên»"
+  ],
+  [
+   798,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Về phòng»"
+  ],
+  [
+   799,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Xét phẩm: thiếu 1»"
+  ],
+  [
+   800,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Hoàng tự trong cung»"
+  ],
+  [
+   801,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Thư từ»"
+  ],
+  [
+   801,
+   "#kchatp «Gửi»"
+  ],
+  [
+   802,
+   "#kchatp «Gửi»"
+  ],
+  [
+   803,
+   "#kchatp «Gửi»"
+  ],
+  [
+   803,
+   "#kchatp «Gửi»"
+  ],
+  [
+   804,
+   "#kchatp «Lui»"
+  ],
+  [
+   805,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Tâm trạngBình thản-3»"
+  ],
+  [
+   806,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   807,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Buổi trưa, còn 4 khắc»"
+  ],
+  [
+   808,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Chọn chính mình»"
+  ],
+  [
+   808,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «6Đồng liêu»"
+  ],
+  [
+   809,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Ngài để ý0»"
+  ],
+  [
+   810,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Quý tộc kén rể · kén dâu»"
+  ],
+  [
+   811,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»"
+  ],
+  [
+   812,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»"
+  ],
+  [
+   812,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»"
+  ],
+  [
+   813,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»"
+  ],
+  [
+   814,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Hoàng tự»"
+  ],
+  [
+   815,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Người lạ»"
+  ],
+  [
+   816,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Tai mắt0»"
+  ],
+  [
+   816,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «4Chí tôn»"
+  ],
+  [
+   817,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»"
+  ],
+  [
+   818,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Kế vị»"
+  ],
+  [
+   819,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Con của ta»"
+  ],
+  [
+   820,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Hoàng tự»"
+  ],
+  [
+   821,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Dư đồ»"
+  ],
+  [
+   821,
+   ".mapsc «6Đồng liêu»"
+  ],
+  [
+   822,
+   ".mapsc «Lương tháng3 bạc»"
+  ],
+  [
+   823,
+   ".mapsc «6Đồng liêu»"
+  ],
+  [
+   824,
+   ".mapsc «Tai mắt0»"
+  ],
+  [
+   825,
+   ".mapsc «Hành sự»"
+  ],
+  [
+   825,
+   ".kfoc «Biếu quà nhỏ · Rất vững · Tốn 1 khắc · 5 bạc»"
+  ],
+  [
+   826,
+   ".kfoc «Biếu quà nhỏ · Rất vững · Tốn 1 khắc · 5 bạc»"
+  ],
+  [
+   827,
+   ".kfoc «Biếu quà nhỏ · Rất vững · Tốn 1 khắc · 5 bạc»"
+  ],
+  [
+   828,
+   ".kfoc «Biếu quà nhỏ · Rất vững · Tốn 1 khắc · 5 bạc»"
+  ],
+  [
+   828,
+   ".kfoc «Trò chuyện · Vững · Tốn 1 khắc»"
+  ],
+  [
+   829,
+   ".kfoc «Trò chuyện · Vững · Tốn 1 khắc»"
+  ],
+  [
+   830,
+   ".kfoc «Trò chuyện · Vững · Tốn 1 khắc»"
+  ],
+  [
+   831,
+   ".kfoc «Trò chuyện · Vững · Tốn 1 khắc»"
+  ],
+  [
+   831,
+   ".kfoc «Lui»"
+  ],
+  [
+   832,
+   ".dlg «Chương 1 · Kẻ hầu mới vào cung» «Thiên mệnh»"
+  ],
+  [
+   833,
+   ".dlg «Thiên mệnh» «Thiên mệnh»"
+  ],
+  [
+   834,
+   ".dlg «Thiên mệnh» «Danh hiệu 0/35»"
+  ],
+  [
+   835,
+   ".dlg «Danh hiệu» «Thiên mệnh»"
+  ],
+  [
+   835,
+   ".dlg «Thiên mệnh» «Mục tiêu»"
+  ],
+  [
+   836,
+   ".dlg «Chương 1 · Kẻ hầu mới vào cung» «Mục tiêu»"
+  ],
+  [
+   837,
+   ".dlg «Chương 1 · Kẻ hầu mới vào cung» «Danh hiệu 0/35»"
+  ],
+  [
+   838,
+   ".dlg «Danh hiệu» «Thiên mệnh»"
+  ],
+  [
+   838,
+   ".dlg «Thiên mệnh» «Thiên mệnh»"
+  ],
+  [
+   839,
+   ".dlg «Thiên mệnh» «Danh hiệu 0/35»"
+  ],
+  [
+   840,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   841,
+   ".dlg «Danh hiệu» «Danh hiệu 0/35»"
+  ],
+  [
+   841,
+   ".dlg «Danh hiệu» «Thiên mệnh»"
+  ],
+  [
+   842,
+   ".dlg «Thiên mệnh» «Mục tiêu»"
+  ],
+  [
+   843,
+   ".dlg «Chương 1 · Kẻ hầu mới vào cung» «Mục tiêu»"
+  ],
+  [
+   844,
+   ".dlg «Chương 1 · Kẻ hầu mới vào cung» «Mục tiêu»"
+  ],
+  [
+   845,
+   ".dlg «Chương 1 · Kẻ hầu mới vào cung» «Mục tiêu»"
+  ],
+  [
+   845,
+   ".dlg «Chương 1 · Kẻ hầu mới vào cung» «Đi làm: Học lễ nghi với cô côTốnkhôngĐượctới Hành »"
+  ],
+  [
+   846,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   847,
+   "#ktut «Đã hiểu»"
+  ],
+  [
+   848,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   849,
+   ".dlg «Chương 1 · Kẻ hầu mới vào cung» «Danh hiệu 0/35»"
+  ],
+  [
+   850,
+   ".dlg «Danh hiệu» «Mục tiêu»"
+  ],
+  [
+   851,
+   ".dlg «Chương 1 · Kẻ hầu mới vào cung» «Đi làm: Học lễ nghi với cô côTốnkhôngĐượctới Hành »"
+  ],
+  [
+   852,
+   ".kfoc «Tiếp ▸»"
+  ],
+  [
+   852,
+   "#ktut «Khóc lóc xin tha»"
+  ],
+  [
+   853,
+   "#ktut «Ban thưởng 0/1»"
+  ],
+  [
+   855,
+   "#ktut «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   855,
+   ".dlg «Xong việc: Học lễ nghi với cô cô» «Lui»"
+  ],
+  [
+   863,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   872,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   881,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»"
+  ],
+  [
+   885,
+   "title (unstick reload) «cùng hảo hữu»"
+  ],
+  [
+   887,
+   "title (unstick reload) «trở lại phòng|vào lại phòng|về phòng»"
+  ],
+  [
+   893,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»"
+  ],
+  [
+   902,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Hầu hạHầu hạLĩnh đồ ở Nội vụ phủRất vữngLĩnh than,»"
+  ],
+  [
+   912,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Sẵn sàng»"
+  ],
+  [
+   916,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   917,
+   ".dlg «Sổ hẹn» «Lui»"
+  ],
+  [
+   918,
+   ".dlg «Lễ Phật đản» «Lui»"
+  ],
+  [
+   941,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   942,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   943,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   944,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   944,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   945,
+   ".kbk «Tổng lược» «Vào ngày mới»"
+  ],
+  [
+   946,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»"
+  ],
+  [
+   947,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Hầu hạHầu hạLĩnh đồ ở Nội vụ phủRất vữngLĩnh than,»"
+  ],
+  [
+   949,
+   ".dlg «Kỳ ngộ» «Xin ma ma cho chép một lốiRất vữngTốnSức -4·1 khắc»"
+  ],
+  [
+   949,
+   "#klearnov «Tiếp theo»"
+  ],
+  [
+   950,
+   ".dlg «Kỳ ngộ» «Lui»"
+  ],
+  [
+   954,
+   ".dlg «Hoàng thượng» «Cúi đầu đúng phépRất vữngTốnkhôngĐượcđược tiếng hi»"
+  ],
+  [
+   961,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   971,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Sẵn sàng»"
+  ],
+  [
+   973,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   982,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»"
+  ],
+  [
+   991,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»"
+  ],
+  [
+   993,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»"
+  ],
+  [
+   1002,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   1011,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Sẵn sàng»"
+  ],
+  [
+   1052,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1053,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   1053,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1055,
+   "#kmrew «Thường»"
+  ],
+  [
+   1056,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1057,
+   "#kmrew «Thường»"
+  ],
+  [
+   1058,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1060,
+   "#kmrew «Thường»"
+  ],
+  [
+   1060,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1062,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   1063,
+   ".dlg «Lui»"
+  ],
+  [
+   1064,
+   "#kmrew «Thường»"
+  ],
+  [
+   1064,
+   ".dlg «Lui»"
+  ],
+  [
+   1065,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   1066,
+   ".dlg «Lui»"
+  ],
+  [
+   1067,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   1068,
+   ".dlg «Lui»"
+  ],
+  [
+   1068,
+   "#kmrew «Nhận»"
+  ],
+  [
+   1069,
+   ".dlg «Sứ đoàn vào triều» «Lui»"
+  ],
+  [
+   1070,
+   ".dlg «Sứ đoàn vào triều» «Lui»"
+  ],
+  [
+   1071,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1072,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1073,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1073,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1074,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1075,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1076,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1077,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1077,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1078,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1079,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1080,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1080,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1081,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1082,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1083,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1083,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1084,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1085,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1086,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1086,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1087,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1088,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1089,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1090,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1090,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1091,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1093,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1093,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1094,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1095,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1096,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Hầu hạHầu hạLĩnh đồ ở Nội vụ phủRất vữngLĩnh than,»"
+  ],
+  [
+   1097,
+   "#klearnov «Tiếp theo»"
+  ],
+  [
+   1098,
+   ".dlg «Kỳ ngộ» «Lui»"
+  ],
+  [
+   1106,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»"
+  ],
+  [
+   1115,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»"
+  ],
+  [
+   1116,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»"
+  ],
+  [
+   1125,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Sẵn sàng»"
+  ],
+  [
+   1126,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»"
+  ],
+  [
+   1136,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   1145,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»"
+  ],
+  [
+   1154,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Sẵn sàng»"
+  ],
+  [
+   1155,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   1164,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»"
+  ],
+  [
+   1174,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Sẵn sàng»"
+  ],
+  [
+   1175,
+   "page «Tích Cần viện · Ở đây còn 5 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   1178,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1179,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1180,
+   ".dlg «Sứ đoàn vào triều» «Lui»"
+  ],
+  [
+   1184,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1185,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1186,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1187,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1188,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1188,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1189,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1190,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1191,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1191,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1192,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1193,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1194,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1194,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1195,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   1196,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1197,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1198,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   1198,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   1199,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Hầu hạHầu hạQuét sân, lau điệnRất vữngQuét lá ngoà»"
+  ],
+  [
+   1209,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Học tập · Tài nghệHọc tập · Tài nghệHọc lễ nghi vớ»"
+  ],
+  [
+   1218,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Sẵn sàng»"
+  ],
+  [
+   1219,
+   ".kfoc «Tiếp ▸»"
+  ],
+  [
+   1220,
+   ".kfoc «Cãi lại»"
+  ]
+ ],
+ "_ckAt": 1795621562970,
+ "_ckB": 26,
+ "_kn": 1,
+ "_kb": 18,
+ "t": {
+  "total": 1220892
+ }
+}
