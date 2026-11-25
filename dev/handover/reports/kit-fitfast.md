@@ -10,3 +10,18 @@ Heads: bare c03add44 (index.html/sw.js NOT BUILT, stale); origin/main 502c48c9 i
 - Quickcheck ALONE on the built head: `QUICKCHECK PASS · 223 s · open 1914 ms · old save ok · perf (median of 3, new/live): render 257/225 ms, tab 479/484 ms, buổi 1328/1476 ms, tasks>200ms 26/23 · core gates PASS`.
 - Shots Fold 755x1000 + iPad 1180x820 (DSF 2, looked 3x, dialog «Có người đến»): layout identical to LIVE by the rect table. Pre-existing on LIVE too (not this branch): in this visit dialog the figure sits behind the text block (crown/hair under «Hoàng hậu Mộ Dung Khê Nguyệt sang chơi», iPad figure edge touches the thị tẩm avatars). Worth a separate kit order.
 - Law 11 table: kit part touched = frame pick (§56 kszLivePick3_0) only; before = full S..XL loop (2.95 layouts), after = hinted (1.96); sizes 28/28 same.
+
+## REVIEW r2 (small kit reviewer, seat FITFAST, 25/11) — review/kit-fitfast-r2 734ce2f9becfa46b00d2507cb75f81fda183364c — PASS
+PRIORITY #1 CHECK: brief b-kit-r2-tntile-fitfast.md | r1 17b1291f PASS | head already contains newest origin/main 502c48c9 (bare head == merged head).
+Laws touched: 4 (no new number), 7 (no wording change), 11 (family scan below), 16 (final layouts unchanged).
+(1) Re-fits per open, origin/main vs head (kit-fitfast-prof copy counting kitFrameApplyLive3 / kszFigFit; CDN pictures make counts noisy, runs repeated; applyLive base → head):
+ 755x1000: many 52,19,19 → 18,14 | choice 4 → 4 | two 8 → 4 | night 4 → 3 | man 9 → 5
+ 1180x820: many 26,11 → 19,13 | choice 36,4 → 13,5 | two 22,8 → 6 | night 4 → 3
+ 412x1058 (NL): 1-6 → 1-5. Layout trials (kszLiveLay3) e.g. choice 1180 13 → 8, fest 80 → 36-51.
+ Residual: «fest» (Thanh minh) still ~104-143 applyLive per open (base 119-135) and kszFigFit 143 → 208-257 (cheap, ~0.6 ms each); picks 20 → 40-49 but layouts per pick 4 → ~1. Not the 24–38 stacked-listener chain; follow-up for KK (find what re-fires 100+ times on that dialog), not blocking.
+(2) Frame sizes vs main, 8 kinds × 4 viewports, 27 comparable cases, ksz tier identical in all (L/XL/NL). One rect difference: 1180x820 fest, 1.5 s after open head 860x560 vs main 860x548 (stable over 3 runs) — a transient: after settle the two screenshots are identical (frame 265..1735 px, same picture strip 166 px, same cards); main is the slower one (strip still 56 px at 1.5 s). Other rect diffs = random event content (main vs main differs the same way). Fest 1180 final: 860x548 both.
+(3) Tests on bare head (= merged head), no args + args: kit-ton-row PASS 14; dialog-fixed all pass (no args; 755x1000@2,1180x820@2); kit-opt-title-wrap 1180 PASS (bad=0); ksz-late-tap-real missed 0 of 6 (both); opt-card-scan runs, no errors; kit-selscene: PASSES on head (run 2) but FAILS «ipad pair layout A» (cards:1) in ~half the runs on BOTH main and head (random event pair) = flaky, NOT this branch. EQUIV test in dev/test/kit-fitfast-prof.js not re-run (head-only code). Gap: K-BARE-GRID (kitBareNarrow) has no dedicated test; bare card hint guard covered by kit-ton-row + code (one rule on .kbare for every card). KK should add a test.
+(4) Built files: build_site.sh on head → only the window.CTM_BI build-line differs in index.html (sha/time, expected); sw.js identical (shell 4f0888bfd6c9). OK.
+(5) Quickcheck ALONE on 734ce2f9 vs live 502c48c9: QUICKCHECK PASS 219 s, open 2021 ms, old save ok, perf new/live: render 238/240, tab 505/510, buổi 1282/1420, tasks>200ms 25/25; core gates PASS.
+(6) Law 11: kitHideOut guard is on b.classList «kbare» (every bare card, one function); listener de-dup is per image for every picture dialog (the 8 kinds measured).
+Shots 755x1000 + 1180x820 of the fest dialog looked 3× (identical main/head). VERDICT: KIT OK r2.
