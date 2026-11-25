@@ -1624,4 +1624,4 @@ selection-scene r7 (successor of SELSCENE-16; co-op 4 failures root cause) | rev
 | DELEGATE-NOMG (owner rule 25/11 04:12Z: no mini-game for servant-done acts) | review/delegate-nomg | MAIN 132 | session_01V1ZZH3fnPTQoZv6e7HPqN9 | RUNNING | 25/11 04:09Z |
 | FLIGHT ROOT-CAUSE FIXER task 2 (same session, opus): A-COOP room SX8M wk80 co-op sync stuck (host never sends wk80, no card open) | review/flight-coop-sync | F | session_01UV1Szh5s5kJv1XUm846FEX | READY 4cb42b96 → BIG review | 25/11 05:10Z |
 | FLIGHT ROOT-CAUSE FIXER task 3 (same session, opus, after task 2): host JS «Cannot read properties of undefined (reading 'off')» in j3 chooseM (stale/out-of-range co-op pick) — root + guard whole family | review/flight-choose-guard | F | session_01UV1Szh5s5kJv1XUm846FEX | QUEUED | 25/11 04:50Z |
-| BIG REVIEW flight-coop-sync 4cb42b96 (opus; briefs/F-review-flight-coop-sync.md) | review/flight-coop-sync-r | F | (opening) | RUNNING | 25/11 05:10Z |
+| BIG REVIEW flight-coop-sync 4cb42b96 (opus; briefs/F-review-flight-coop-sync.md) | review/flight-coop-sync-r | F | session_01UV1SzjP6j1oYfGJF9Gcjb6 | RUNNING | 25/11 05:10Z |
