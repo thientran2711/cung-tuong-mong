@@ -3690,3 +3690,4 @@ LOAD: main running 1 (owner bugs/UI/go-live only) | B free ? | C free ? | D free
 - ~23:52Z OWNER balance order (k19 skills 2/100 per session; time to Hoàng hậu) → OD row + BALANCE-PACE session_01V1ZZH2xHnePtdE8gX8y2wU (on top of review/promo-root). ~23:54Z k20 servant-report repeats → TINBAO-WORDS.
 - ~23:18Z LC18: q1 kroulw 7abb60cc READY-TO-PUSH (rv PASS, QC PASS); coop Worker rollback id 83eb2dbb-f417-4a0d-b60f-3519042bf854. Waiting sếp's words in LC18 chat + B LAND READY (co-op chain, fix-7 r3, thin-p8-r2) + KIT verdict q5.
 - ~23:22Z MAKEUP-SET 4e360cd9 LOOKED: sets/mirror/sharp OK; sent back: white box over face in transition, start kit + ration whole sets (only 1/16 pickable), duplicate long note. Not landable yet.
+- ~23:24Z ART-SLOTS 7f22c202 LOOKED: painted gates ✓ (232/232 slots); fix: iPad stage too small → re-video, then queue to LC18 (code + CDN files land together).
