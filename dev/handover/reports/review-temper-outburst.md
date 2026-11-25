@@ -62,3 +62,18 @@ C. G4 arms (temper-hh-rt.js on the real-tap harness) are running on T1b's box on
 D. Seen in passing (iPad Hành sự stage, not this branch): two figure name labels overlap at the left edge («Cung nữ … / Mã Anh Ninh»).
 
 PASS sha: 6b85187e (ancestor = origin/main 9f72524b, fast-forward ready).
+
+## REVIEW — review/temper-outburst-fix 39561518 (T1c; eaOptX / vent read the shown bar) — VERDICT: PASS 39561518
+Reviewer RV3 (BIG tier), 25/11 ~12:20Z. PRIORITY #1 CHECK: D order 11:30Z (MAIN 139 holds temper-outburst 6b85187e until this fix lands with it) | main 9f72524b ancestor of 39561518 ✓ | parent = 6b85187e (round-1 PASS) | review/temper-outburst c02602fb holds only G4 measure commits (dc1eb6cb, c02602fb), not in this sha, not needed for land.
+Change: jemoact `eaMV()` = kitMoodVal (moodBar(S)) feeds eaOptX row text, eaDo vent sign, pillow lock, hold lock, weekly fallback gate; jfeel feelDo vent; jmood `mbS()` syncs the live causes (mkSync, re-entry guarded `mbS.__in`, whyDiff guarded) so every band / panel / tile / rest / push reads the shown bar.
+| Gate | Result |
+|---|---|
+| family scan dev/measure/temper-moodsrc.js (stale state: causes bar < 0, raw S.mood.v +40) | BEFORE (ab5d65ee build, same rule) 9/11 readers WRONG (row text «lòng vui lắng xuống», band, panel, tile, rest, eaMine, saturation, eaDo vent −15, feelDo vent −15) → AFTER 0/11 wrong. Raw-reader grep outside jmood/jmoodknow: none left |
+| temper-outburst.js REAL TAPS Fold 755x1000@2 + iPad 1180x820@2 | PASS both: hot / **stale** / timid / jfeel / npc / cap / old, errs 0, dead 0. stale: bar −92 → −77 after the tap (vent up 15), every row «thành/Được: giải tỏa tâm trạng». Shots looked at: Fold stale dialog (4 kit option rows, all «giải tỏa tâm trạng»); iPad stale shot caught the dialog mid-fade (DOM checks pass) — test nit, non-blocking |
+| temper-equal / temper-signs | 36 rows fail 0, 330 cells / 17 rows wrong 0 |
+| one-core-guard | PASS |
+| quickcheck ALONE | PASS · open 2510 ms · old save ok · perf new/live render 288/299, tab 584/642, buổi 1745/1688, tasks>200 27/25 · core gates PASS · own build ✓ |
+| coop-e2e (live Worker) | 142/142 first run |
+Laws: 3 ✓ (the gain «giải tỏa tâm trạng» is what really happens) · 4 ✓ (one bar source) · 11 ✓ (family scan + before/after) · 9 ✓ (no UI change) · 7 ✓ (no new words) · 1 ✓ (NPC path unchanged: ventNpc).
+Non-blocking: N1 the iPad «stale» shot is taken before the dialog's fade ends (add a wait for .modal opacity 1).
+**PASS 39561518** — FF-able from main 9f72524b; it carries temper-outburst 6b85187e. Shots in scratch, deleted.
