@@ -1,0 +1,3 @@
+# U3 rerun room 9YAK (room 4) — game fix-6 d16c5300, local Worker (wrangler dev --local), harness robot-realtap 4523381f + U3b dump patch
+Host (Fold) = waiting card «Đợi hảo hữu trở lại / Hảo hữu đang vắng» from ~buổi 5-6 on; stuck-1 dump at 15 min (host-stuck-dump.json: ls = localStorage incl. ctm-coop-wk week 1 buoi 0, g = COOPW.tr tail).
+Guest (iPad) = left the room: its page sat on #title / #modal «Cung Tường Mộng» with 0 tappable buttons (hit 0, idle 3000+ area taps, ~50 min) after a light unstick (Escape) on .dlg «Lịch tháng» at t=254s and #modal at t=355s. Guest state NOT dumped (killed before I knew the dump trigger is stuck-only; honest miss). Shots local only.
