@@ -66,6 +66,17 @@ function ptLand(a){a.back=1;PT.stat.back++;const fn=a.a&&a.a.npc?PT.run.npc:a.a&
  a.rep={t:(r&&r.t)||a.lbl||"Tin báo",ok,L:L.length?L:[(r&&r.txt)||`${a.nm} đã về.`],d};
  try{if(typeof window.kitNoticeDrop==="function")window.kitNoticeDrop("pt:go:"+a.id)}catch(e){}
  ptNote({id:"pt:back:"+a.id,line:`${a.nm} đã về, có tin báo.`,text:ptRepText(a).join(" "),go:ptOpenTin,goLabel:"Xem tin"})}
+/* tinbao-words 2nd case (owner OD 25/11 ~23:54Z, verbatim: "Cái gì mà câu từ nó cứ lặp tới lặp lui không hiểu nổi luôn."): in a dialog that SHOWS the
+   speaker (figure + name plate: «Tin chờ người sai đi», servant reports) the body never names her again — her report is said in her own voice («Nô tỳ …» /
+   «Nô tài …»), «ta / ngươi» of the narration become «chủ tử», no head line repeated. ptVoice(lines, person) → lines. Used by jptime ptPanel + jerr errPanel. */
+function ptVoice(L,m){try{if(!m||!m.name)return L;const nm=String(m.name),I=(m.role==="eunuch"||m.role==="eun"||m.male)?"Nô tài":"Nô tỳ";const esc=x=>x.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+ const tit="(?:(?:Cung nữ|Thái giám|Tiểu thái giám|Chưởng sự cô cô|Ma ma|Nữ quan)[\\p{L}\\p{M} ]*? )?";
+ return (L||[]).map(l=>{let s=String(l==null?"":l);
+  s=s.replace(new RegExp(`(^|[.!?:]\\s+)${tit}${esc(nm)}(?![\\p{L}\\p{M}])\\s*`,"gu"),(x,a)=>`${a}${I} `);
+  s=s.replace(new RegExp(`${tit}${esc(nm)}(?![\\p{L}\\p{M}])`,"gu"),I.toLowerCase());
+  s=s.replace(/(?<![\p{L}\p{M}])ta chưa quen/gu,"chủ tử chưa quen").replace(/(?<![\p{L}\p{M}])(với|của|về|cho) (ta|ngươi)(?![\p{L}\p{M}])/gu,"$1 chủ tử").replace(/(?<![\p{L}\p{M}])ngươi(?![\p{L}\p{M}])/gu,"chủ tử");
+  return s.replace(/\s+/g," ").trim()}).filter(Boolean)}catch(e){return L}}
+window.ptVoice=ptVoice;
 /* tinbao-words (owner OD 25/11 ~23:36Z «tùm lum chữ lặp tới lặp lui»): ONE report = plain sentences, the doer named once. The head «<người> … trở về»
    says the outcome in words («, việc đã thành.» / «, việc không thành.»), never the « · thành» glue; when the report's own first line already starts
    with the doer («Xạ Nguyệt nghe ngóng được chuyện về …») the head is dropped (it would say the same thing twice). Returns the sentences (rows). */
@@ -94,7 +105,10 @@ function ptOrdN(){return S&&Array.isArray(S.ordQ)?S.ordQ.length:0}
 function ptErrOwn(){try{return typeof errIcon==="function"||!!(window.ERR&&typeof window.ERR==="object")||(!ptIconSet&&typeof kitStatusIcon!=="undefined"&&typeof kitStatusIcon.has==="function"&&kitStatusIcon.has("tin"))}catch(e){return false}}
 function ptPanel(){const N=ptNews(),W=ptMine();const facts=[];const OQ=S&&Array.isArray(S.ordQ)?S.ordQ.slice():[];let subj=null;
  for(const o of OQ)facts.push(`${o.byNm} ${ptOrdIs(o)?"có lệnh cho ngươi":"có lời nhờ"}${o.title&&!/^Lệnh của /.test(o.title)?": "+o.title:""}, trả lời trước ${ptWhen(o.due)}; quá hạn coi như từ chối.`);
- for(const a of N){const r=a.rep||{};if(!subj)subj=ptPerson(a.a||{});const RT=ptRepText(a);facts.push(RT[0]||`${a.nm} đã về.`);
+ for(const a of N){const r=a.rep||{},pp=ptPerson(a.a||{});if(!subj)subj=pp;let RT=ptRepText(a);
+  /* the speaker is shown (subject) → her report in her voice, without the head line «<tên> … trở về» when her own lines say it */
+  if(pp&&pp===subj){const L=(r.L||[]).filter(Boolean);RT=ptVoice(L.length?L:RT,pp)}
+  facts.push(RT[0]||`${a.nm} đã về.`);
   if((r.d||[]).length&&typeof kitChips==="function")facts.push({text:"Được · mất: "+kitChips(r.d),kind:"me"});RT.slice(1).forEach(l=>facts.push(l));a.read=1}
  for(const a of W){if(!subj)subj=ptPerson(a.a||{});facts.push(`${a.nm} đang ${a.lbl||"đi việc"} · về ${ptWhen(a.due)}.`)}
  if(!facts.length)facts.push("Không có ai đang đi việc.");

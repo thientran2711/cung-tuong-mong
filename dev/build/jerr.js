@@ -68,10 +68,14 @@ function errOrdWhen(o){try{return PTIME.ordWhen(o)}catch(e){return o&&o.due!=nul
 function errPanel(){const N=errNews(),W=errMine(),OQ=errOrders();const facts=[],sec=[];let subj=null;
  for(const o of OQ)facts.push(`${o.byNm} ${errOrdIs(o)?"có lệnh cho ngươi":"có lời nhờ"} · ${errOrdWhen(o)} (quá hạn: coi như từ chối).`);
  for(const t of N){const r=t.rep||{},p=errPerson(t.who);if(!subj&&p)subj=p;
-  facts.push(r.t||`${t.nm} đã về.`);
+  /* tinbao-words 2nd case (owner OD 25/11 ~23:54Z): the speaker shown at the left (subject) is never named again in the body — her lines in her own
+     voice (jptime ptVoice), and no head line «<tên> … trở về» before lines that already say it; another person's report keeps its plain sentences */
+  const mine=!!(p&&p===subj&&typeof ptVoice==="function");let L=(r.L||[]).filter(Boolean);
+  const head=typeof ptRepText==="function"?ptRepText({nm:t.nm,rep:r}):[r.t||`${t.nm} đã về.`];
+  if(mine){L=ptVoice(L.length?L:head,p);facts.push(L[0]||`${t.nm} đã về.`);L=L.slice(1)}else{facts.push(head[0]||`${t.nm} đã về.`);L=head.slice(1)}
   /* gain / loss chips right under the title line (kit chips, visible without scrolling); the lines below are only what she learned */
   if((r.d||[]).length&&typeof kitChips==="function")facts.push({text:"Được · mất: "+kitChips(r.d),kind:"me"});
-  (r.L||[]).forEach(l=>facts.push(l));errRead(t)}
+  L.forEach(l=>facts.push(l));errRead(t)}
  for(const t of W){const p=errPerson(t.who);if(!subj&&p)subj=p;facts.push(`${t.nm} đang ${t.lbl||"đi việc"} · về ${errWhen(t.due)}.`)}
  if(!facts.length)facts.push("Không có ai đang đi việc.");
  const opts=OQ.map(o=>({n:errOrdIs(o)?"Nghe lệnh":"Xem lời nhờ",x:`${o.title||("Lệnh của "+o.byNm)} · ${errOrdWhen(o)}, quá hạn coi như từ chối`,fx:{},go:()=>{setTimeout(()=>{try{PTIME.answer(o.id)}catch(e){console.error(e)}},0)}}));

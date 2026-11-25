@@ -56,3 +56,11 @@ Remaining NEWS hits after: kỳ-ngộ rows (innerText of kit stat chips «A: Dan
 
 ## Shots (CDN)
 https://ctm-img.victoria-tntt.workers.dev/img/_review/tinbao-words/tb2511-before-fold.jpg · tb2511-after-fold.jpg · tb2511-before-ipad.jpg · tb2511-after-ipad.jpg · tb2511-before-ipad.webm · tb2511-after-ipad.webm
+
+## Round 2 — speaker shown, body never names her (owner OD 25/11 ~23:54Z, verbatim: "Cái gì mà câu từ nó cứ lặp tới lặp lui không hiểu nổi luôn.")
+Shot k20-ipad-tinchonguoisai-repeat.jpg: «Tin chờ người sai đi» (jerr errPanel; fallback jptime ptPanel) with the maid's figure + plate at the left, body «Cung nữ … Xạ Nguyệt nghe ngóng trở về» / «… trở về: Xạ Nguyệt nghe ngóng được …».
+- jptime `ptVoice(lines, person)`: her report in her own voice («Nô tỳ …» / «Nô tài …»), her title+name removed, «ta / ngươi» → «chủ tử»; no head line before lines that already say it. Used by jerr errPanel and jptime ptPanel for the report of the person shown (another person's report keeps plain sentences).
+- After: «Nô tỳ nghe ngoài hành lang được chuyện về một vị Đáp ứng chủ tử chưa quen. / Nàng ta thích tác phẩm Vũ.» (before: the owner's exact repeat, reproduced on main).
+- Every speaker dialog: scan.js (4) checks every pushModal({who: X …}) body for `${X.name}` → 2 hits fixed (jact / jagharm gossip «ngươi nghe nàng ta to nhỏ…»); main = FAIL. shots.js reads the «Tin chờ người sai đi» body and exits 1 when the speaker's name is in it (after: nameInBody false on Fold + iPad).
+- Shots: tb2511b-{before,after}-{fold,ipad}.jpg (Tin báo), tb2511b-{before,after}-{fold,ipad}-tin.jpg (Tin chờ người sai đi), tb2511b-{before,after}-ipad.webm.
+- jstagehere: PLACE-RULES owns the file (review/place-rules, adds an entry line); I sent them my words for all 3 lines (no «=», «may rủi: X» at the end). On merge their file wins and carries my wording; my jstagehere hunk can be dropped.

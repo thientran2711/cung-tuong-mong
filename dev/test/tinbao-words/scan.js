@@ -35,5 +35,10 @@ no('jptime.js','" · thành":','errand report glue');has('jptime.js','function p
 no('jwhy.js','(chưa quen)`','spyWho stacked paren');no('jwhy.js','nghe ngóng được về ${spyWho(v)} (${why})','spyNews chain');
 no('j78.js','có nết ${T[0]}','raw trait label');no('jagent.js','`${w} · ${o}`','agWhy dot glue');no('jagent.js','nghe lén: nàng ${p.act} — ${p.why}','nghe lén note chain');
 has('jopic.js','if(free){ton.remove();gain.remove()','free choice card without «không» rows');has('jaudit.js','ONE title per person per block','one title per block');
+/* (4) 2nd owner case (OD ~23:54Z): a dialog that shows the speaker (who: X / subject) never names X in its body; errand panels speak in her voice */
+has('jptime.js','function ptVoice(','servant voice helper');has('jerr.js','ptVoice(L.length?L:head,p)','errPanel speaker voice');has('jptime.js','RT=ptVoice(','ptPanel speaker voice');
+for(const f of fs.readdirSync(D).filter(f=>/^j.*\.js$/.test(f)&&f!=='all.js')){const t=fs.readFileSync(path.join(D,f),'utf8');const re=/pushModal\(\{/g;let m;
+ while((m=re.exec(t))){const c=t.slice(m.index,m.index+900);const w=/who:\s*(?:pv\()?([A-Za-z_$][\w$.]*)/.exec(c);if(!w)continue;const v=w[1].replace(/\.$/,'');
+  if(c.includes('${'+v+'.name}')){rows.push([f+':'+t.slice(0,m.index).split('\n').length,'pushModal who','body names the shown speaker '+v,'speakerName']);bad(`${f}: dialog shows ${v} (who) and names ${v}.name in its body`)}}}
 if(MD){console.log('| where | builder | text (X = a value) | pattern |\n|---|---|---|---|');for(const r of rows)console.log(`| ${r[0]} | ${r[1]} | ${r[2].replace(/\|/g,'/')} | ${r[3]} |`)}
 console.log(`tinbao-words scan: ${rows.length} rows · ${fail?fail+' FAIL':'PASS'}`);process.exit(fail?1:0);
