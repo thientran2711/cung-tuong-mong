@@ -1435,3 +1435,42 @@ Other rows (not this branch): bạc/danh < 0 guest both sides (fix 2, main 2 →
 11 FAIL (items 1, 3, 4: dead/duplicate rules for one fact) · 6b real people: improved (house relay) but item 6 residual · 4 one core: no numbers added · identity: item 5 open · 7/9/10/12: no player text / UI touched.
 
 ### For fixer #7 (r4): drop the roster parts (1) + the extra whereOf wrap (3) or prove them live; one HOUSE list (4); host palFix identity test (5); trace item 6; then coop-e2e both orders + quickcheck alone + A/B ≥10 weeks (expect coop-pos ≈0 vs main ≈1 per 2 weeks).
+
+## REVIEW robot-coop-fix-4 r1 (BIG co-op, opus; session_01N1tNP4YCWFxwH8G7dAKzjE; depth 7; START_CTX ≈2 %) — PASS (+1 small reviewer fix)
+PRIORITY #1 CHECK ('robot-coop-fix-4 / night gate / ngoW / new room / thin E asks'): OD 0 | ledger 0 | claims 3 (fixer #5 → #6b → #7) | main 502c48c9 jcoopworld.js sendMe/nCheck/begin (no fix) | review/* robot-coop-fix-4 2d4d646f (this), robot-coop-fix-2-r3 71076b61 (LAND READY, merged here), harness robot10-coop d4b4408d, saves robot10-coop-saves af7c3fb5 | brief briefs/b-robot-coop-fix-4-review.md.
+Reviewed: review/robot-coop-fix-4 **2d4d646f** (ancestor = LIVE origin/main 502c48c9, unchanged at start and at verdict). Bare rebuild (build_site.sh): only the CTM_BI build line differs, sw.js identical. **Merged head = review/robot-coop-fix-4-r1 aad22c92d540405bcabcb420f99a2bc2842349de** = 2d4d646f + merge fix-2-r3 71076b61 (2f6f27e0; only conflicts index.html + sw.js = generated, rebuilt) + reviewer fix aad22c92. gen_coop_ranges --check «ranges.gen.js = BAL» on the merged head.
+### (1) causes — real cause + whole family (law 11)
+| # | claim | read / test | result |
+|---|---|---|---|
+| 1 | host's commit survives his rebirth (sendMe cleared ngoW, kept ngo → nGoNow/forceNight refuse) | sendMe callers = new-life paths only (jcoopworld:1134/1136, jcoopthinb:178, jkc:114); only sendMe ever clears ngoW; guest never sets CW.ngo → clearing it there is a no-op (law 1 symmetric). After the clear the host's next Sẵn sàng re-commits via nOtherEnded() and re-sends go; the guest ignores it (ngoW already = w). nCheck «ngo self» = belt for any future ngoW-only clear. case 10 ok on bare + merged. A/B: main 3 of 5 stuck rooms have this exact dump (ngo w / ngoW −1: p02 w4, p04 r2 w1, p04 r3 w1) | REAL, FIXED |
+| 2 | night gate + thin E asks keyed by week only, carried into a NEW room | begin() runs on both seats (COOP.on start); COOP.state.room set by the room msg before start; first room (nRoom undefined) and same-room reconnect keep values. case 11 ok | REAL, FIXED — but family incomplete (below) |
+| family scan | every module/CW value keyed by week / week:buổi that lives outside S (grep `=wk()`, `=COOP.state.week`, E.*, RS/RW, NA.*) | **missed (host, thin E)**: E.rd (her stored ready {w,b}: check() treats her as ready when the new room reaches the same w:b → steps both on his press = runs ahead), E.owe (her owed step → old room's where in the catch-up), E.nk (her night once per week → skipped), E.cyA (her Kỳ nguyệt ask key = S.turn*3+tuan → skipped). Not live today (thin E = dev flag ctm-thin ≥ 5; live rooms run lvl 0) but same family as E.mine/hr/forced the fixer cleared | **REVIEWER FIX aad22c92**: begin() new-room branch also clears E.rd={} E.owe=null E.nk/E.cyA=undefined; coop-night case 11 row «host, new room: her old stored ready / owed step / night / cycle ask are cleared»: bare 2d4d646f **FAIL** {"rd":true,"owe":{"old":1},"nk":0,"cyA":7} → r1 **ok** |
+| family, not changed | RS/RW (TH.rng room rng cache, keyed by week; seed has the room) — TH.rng/R/pick have NO caller; NA.said (one «Quá giờ chờ» toast per week); CW.nHeld (trace) ; CW.rbuoi/rweek re-set by the room msg; CW.sent/pend/cyHold/ssvWk reset in begin; jcoopthin SENT / E.bs/pn/last reset on `room` | note only (unused / cosmetic) |
+| 3 | committed night that does not end the week — NOT fixed, trace only | — | open (fixer #7) |
+### (2) trace line «night held w b<buổi>/<last> …» — behaviour-free
+Runs only after nextBuoi in nCheck, guarded `!CW.pend && CW.sent!==w && nAtNight() && CW.nHeld!==w` (endTurn's wrapper sets CW.pend=true synchronously → a normal night never logs it: 0 lines in every passing run). Every getter pure (Q.length, S.mg, waiting(), frozen(), eW(), isKc(), isSrv(), S.succ.on, #modal.hidden); each in its own try; writes only CW.nHeld + T() (CW.tr ring, max 80). No player text, no state, once per week → no perf cost (quickcheck below). **It works**: r1 coop-night no-arg run #1 (LIVE Worker) hit a random-draw hold in case 4b and the dump named it: «night held 4 b3/3 Q1» = host Q ["tsgiftpick"] «Biếu quà làm lành» with no piece to give (only the kit ✕; the test's clear() did not close it; a player's ✕ closes it — solo probe: ✕ → Q 0). Run #2 same head 127/127. → evidence for fixer #7 (cause 3 = a dialog the robot never closes?).
+### (3)(4) host/guest + Worker
+Law 1: both seats run begin/nCheck/sendMe; host-only vars (ngo, nfr, nforce, E.hr/forced/rd/owe/nk/cyA) and guest-only (E.mine) cleared where they live. Worker: fix-4 diff = jcoopworld.js + coop-night.js + index.html + sw.js only — Worker unchanged (coop/worker/src identical to main); merged head's Worker = fix-2-r3's.
+### (5) fix-2-r3 71076b61 merged: no source conflict (only generated index.html/sw.js), every gate below on the merged head.
+### Ran (commands + outputs). Local wrangler dev :8801 = fix-4 Worker (= main), :8802 = merged Worker (fix-2-r3), :8803 = main 502c48c9 Worker
+| gate | bare 2d4d646f | merged 2f6f27e0 | final r1 aad22c92 |
+|---|---|---|---|
+| `node dev/test/coop-night.js <out> http://127.0.0.1:880x` | 125 ok / 0 FAIL | 125 / 0 | **127 / 0** (+ new row) |
+| `node dev/test/coop-night.js` (no args, LIVE Worker) | — | — | run 1: 111 / 12 (case 4b random hold, see (2), all later rows cascade from the same stuck room) · run 2: **127 / 0** |
+| `COOP_SWAP=0 node dev/test/coop-e2e.js <out> <local>` | 142/142 | 142/142 | 142/142 |
+| `COOP_SWAP=1 …` (iPad host) | 142/142 | 142/142 | 142/142 |
+| coop-e2e no args (LIVE Worker = old Worker, old-client/deploy case) SWAP 0 / 1 | — | — | 142/142 · 142/142 |
+| `node dev/test/coop-keymove-unit.js` | 12/12 | 12/12 | 12/12 |
+| `cd coop/worker && npm test` | exit 0 (thin ALL OK) | exit 0 (thin ALL OK · range ok) | exit 0 |
+| `bash dev/tools/quickcheck.sh` ALONE (old save) | — | — | run 1 FAIL perf only (buổi 2905/1173, live runs themselves 969–4224 = noise) → `--runs 6`: **QUICKCHECK PASS** · core gates PASS · time-spill PASS · old save ok «Cao Thải Vi» · render 237/231 · tab 420/400 · buổi 1212/1170 ms · tasks>200 22/22 |
+### A/B (harness review/robot10-coop d4b4408d overlay on both sides: robot10-coop.js, robot10-in.js, coop-bot(-x).js, coop-lag.js, lib/coop-lag-hooks.js, lib/playperf.js; `SEED=7 CAP=300 PCAP=1500 PAR=1 node dev/measure/robot10-coop.js 1 5 2 <out>`; fix = 2d4d646f + Worker :8801, main = 502c48c9 + Worker :8803, run side by side)
+| side | stuck rooms | stuck dumps | lives | wall per pair (min) |
+|---|---|---|---|---|
+| fix 2d4d646f | **0 / 5 pairs** | — | 21 | 14.1 · 10.8 · 10.8 · 15.3 · 13.8 |
+| main 502c48c9 | **5** (p02 w4, p03 w10, p04 r1 w4, p04 r2 w1, p04 r3 w1) | cause 1 ×3 (host ngo w / ngoW −1: p02 w4, p04 r2 w1, p04 r3 w1) · cause-3 shape ×2 (ngo=ngoW=nfr=w, both b3: p04 r1 w4; host sent / guest ngoW 10 b3: p03 w10) | 22 | 10.7 · 12.4 · 17.4 · 20.5 · 13.5 |
+Other rows (both sides, not this branch's family): number bạc (fix bare has no fix-2 clamp; main sung + bạc), save round-trip, coop-pos, coop-stat, lag; main only: js «reading 'off'» (host), coop-world consorts differ. pageerror none on fix.
+### Laws touched
+1 two-way: PASS (both seats symmetric). 4 one core: no number. 11 whole family: PASS after the reviewer fix (scan table above). 6/7/9/10/12: no text / UI / art / option change (trace only, no player text). 2/3/5: no choice touched.
+### For fixer #7 (cause 3, open)
+Probe confirmed working (case 4b dump above). Main A/B p04 r1 w4 + p03 w10 = cause-3 shape (files container-local /home/user/wt/out/ab/main/stuck/). Runners on fix-4 LIVE will get «night held …» in each stuck dump.
+Verdict: **PASS aad22c92d540405bcabcb420f99a2bc2842349de** (review/robot-coop-fix-4-r1; ancestor = origin/main 502c48c9; carries fix-2-r3 71076b61 → landing r1 lands both). No CDN review folder used; no shots in git.
