@@ -39,3 +39,7 @@ map 2 + scenes 10 + Non bộ redo 2 + map states 15 + scene states 76 (75 kept +
 ## Not done / next
 - Festival map/scene states: not now (MAIN 22:29Z).
 - hotspots.json + wiring = NHV-BUILD.
+
+## ROLLOVER / HANDOVER (25/11 ~23:45Z) — context ≈ 45 % (> START 0 % + 25 %)
+NHV job DONE (96 files live, sheet3 kept for sếp). MAIN 148 (session_01V1ZZH2sHQhqUaYCB6kPJxt) assigned a NEW job at 23:41Z: KK33 ART LIST (review/kit-stage de4e9fa8) — 27 event cards on the shared stand-in + 14 repeated-picture event frames (adStroll, cmLand, cmTd, cmTt, ge1, j70def, pmLad ×9, pmPick ×5, rcpacc …; list in dev/handover/reports/kit-hand.md) + thbirthday banquet bg (too busy on iPad behind dialogue). NOT STARTED here (rollover). Successor: coordinate slot names with KK34 session_01V1ZZH3nSVWSX8V85rPYz4G (kitEvBg §102.1); gpt-2-6 only, folder ba4aecfe…; CDN NEW file names; contact sheets Fold+iPad to MAIN 148.
+Method that worked here (reuse): reference = an approved game painting uploaded via creations_upload_image from its CDN URL; prompt "Paint in EXACTLY the same painterly style … / Repaint this exact picture: identical composition … only change …"; download render.png, LOOK at grids, encode webp ≤255 KB (dev/site/cdn_sync.py from a sparse main worktree with only /dev/site/), edge-correlation check for state alignment. Scripts used: /home/user/wt/nhv/{grid.py,agrid.py,encs.py,enc.py} (scratch, not in git).
