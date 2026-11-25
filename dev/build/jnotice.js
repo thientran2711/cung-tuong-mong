@@ -129,7 +129,7 @@ function ntRow(t,drop){try{const m=/^Nghe nói (.+?) gặp kỳ ngộ(?: với (
  if(m[3])m[3].split(/;\s*/).forEach(pt=>{const q=/^(.*?)\s*(Danh|Đức|Sủng|Bạc|Tài|Sắc|Tâm cơ|Sức|thiện cảm|oán|ghen|tin cậy)\s*([+−-])\s?(\d+(?:[.,]\d+)?)$/i.exec(pt.trim());
   if(q&&typeof kitChip==="function"){const v=(q[3]==="+"?1:-1)*parseFloat(q[4].replace(",","."));const who=cap((q[1]||m[1]).trim());let g=G.find(x=>x.w===who);if(!g)G.push(g={w:who,c:[]});g.c.push(kitChip(q[2],v))}else if(pt.trim())words.push(pt.trim())});
  /* owner 24/11 ~21:57Z (OD): every change = ONE short line «<Tên>: thiện cảm +30»; a stat without its own subject belongs to the one who met (A) */
- return `${drop?"":"Nghe nói "}${esc(cap(m[1]))} gặp kỳ ngộ${m[2]?" với "+esc(m[2]):""}${words.length?": "+esc(words.join("; ")):""}${G.map(g=>`<span class="kntg">${esc(g.w)}: <span class="kchips kntch">${g.c.join(" ")}</span></span>`).join("")}`}catch(e){return esc(t)}}
+ return `${drop?"":"Nghe nói "}${esc(drop?cap(m[1]):String(m[1]).replace(/^Một vị /,"một vị "))} gặp kỳ ngộ${m[2]?" với "+esc(m[2]):""}${words.length?": "+esc(words.join("; ")):""}${G.map(g=>`<span class="kntg">${esc(g.w)}: <span class="kchips kntch">${g.c.join(" ")}</span></span>`).join("")}`}catch(e){return esc(t)}}
 function kitNoticeOpen(id){try{if(typeof kitPanel!=="function")return null;const one=id!=null?NT.list.find(x=>x.id===id):null;
  const U=unread();const L=one?[one]:(U.length?U:NT.list.slice(0,6));if(!L.length)return null;
  const lead=L[0];/* plain kit text rows (kpsec html), not kitFacts: no person figure is guessed from the words — the panel stays SMALL */

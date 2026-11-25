@@ -25,10 +25,11 @@ const HELP=`(function(){
  window.__nu={hits:[],seen:{}};const NAME=".kname,.kti,.krname,.kptag,.ktag,.kpname,.kprank,.kname2,.kan,.knr,.knr-n,.krn";
  const strip=x=>{const d=document.createElement("div");d.innerHTML=String(x==null?"":x);d.querySelectorAll(NAME).forEach(e=>e.remove());return d.textContent.replace(/\\s+/g," ").trim()};
  window.__nuAdd=(surf,txt)=>{if(String(txt).indexOf("???")<0)return;const k=surf+"|"+String(txt).slice(0,90);if(__nu.seen[k])return;__nu.seen[k]=1;__nu.hits.push({surf,txt:strip(txt).slice(0,150)})};
+ window.__nuCap=(surf,txt)=>{const t=String(txt).replace(/\s+/g," ");const m=/[a-zà-ỹ,]\s+Một vị/.exec(t);if(m)__nuAdd(surf+" CAP","??? "+t.slice(Math.max(0,m.index-20),m.index+40))};
  window.__nuDom=(surf,root)=>{try{if(!root||!root.getClientRects().length)return;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){if(n.nodeValue.indexOf("???")<0)continue;const e=n.parentElement;if(!e||e.closest(NAME))continue;const cs=getComputedStyle(e);if(cs.display==="none"||cs.visibility==="hidden")continue;__nuAdd(surf+" <"+e.tagName+"."+String(e.className).slice(0,30)+" < "+(e.parentElement?e.parentElement.tagName+"."+String(e.parentElement.className).slice(0,30):"")+">",(e.closest("li,p,div,button")||e).textContent)}}catch(x){}};
  window.__nuAll=()=>{try{
-  (typeof kitNoticeList==="function"?kitNoticeList():[]).forEach(x=>{__nuAdd("notice.line",strip(x.line));__nuAdd("notice.text",strip(x.text));(x.items||[]).forEach(t=>__nuAdd("notice.items",strip(t)))});
-  (typeof S!=="undefined"&&S&&S.logs||[]).slice(0,12).forEach(t=>__nuAdd("S.logs",strip(t)));
+  (typeof kitNoticeList==="function"?kitNoticeList():[]).forEach(x=>{__nuAdd("notice.line",strip(x.line));__nuCap("notice.line",strip(x.line));__nuCap("notice.text",strip(x.text));__nuAdd("notice.text",strip(x.text));(x.items||[]).forEach(t=>{__nuAdd("notice.items",strip(t));__nuCap("notice.items",strip(t))})});
+  (typeof S!=="undefined"&&S&&S.logs||[]).slice(0,12).forEach(t=>__nuAdd("S.logs",strip(t)));(S.logs||[]).slice(0,12).forEach(t=>__nuCap("S.logs",strip(t)));
   for(const [s,sel] of [["#modal","#modal"],["#panel","#panel"],["#kntchip","#kntchip"],["#kntbox","#kntbox"],["#log","#log"],["#book","#kbook,#kbk,.kbook"],["toast",".ktbt,.ktoast"]])document.querySelectorAll(sel).forEach(r=>__nuDom(s,r))}catch(x){}};
 })();`;
 const prep=async g=>{await g.evaluate(HELP)};
@@ -64,10 +65,10 @@ const DEVS=['fold','ipadAir'];
    else{const fr=await p.evaluate(()=>{const f=document.getElementById('krotf');if(!f)return null;const r=f.getBoundingClientRect();return{l:r.left,t:r.top,w:r.width,h:r.height,iw:f.contentWindow.innerWidth}});
     /* box coords are inside the frame (host mode): map through the frame scale */
     const sc=fr&&fr.iw?fr.w/fr.iw:1;const X=(fr?fr.l:0)+box.x*sc,Y=(fr?fr.t:0)+box.y*sc;await p.touchscreen.tap(X,Y);await sleep(1800);
-    const panel=await g.evaluate(()=>{const m=document.getElementById('modal');const li=[...document.querySelectorAll('#modal .kntl li')].map(x=>x.textContent.trim());return{open:!!(m&&!m.hidden),title:(document.querySelector('#modal .kptitle,#modal h2,#modal .kpt')||{}).textContent||'',li,txt:m?m.innerText:''}});
+    const panel=await g.evaluate(()=>{const m=document.getElementById('modal');const li=[...document.querySelectorAll('#modal .kntl li')].map(x=>x.innerText.replace(/\s+/g,' ').trim());return{open:!!(m&&!m.hidden),title:(document.querySelector('#modal .kptitle,#modal h2,#modal .kpt')||{}).textContent||'',li,txt:m?m.innerText:''}});
     if(!panel.open||!panel.li.length)rep('T-FAIL',`${dev} the tap on «!» did not open the «Tin báo» dialog (${JSON.stringify(panel).slice(0,120)})`);
     else{await g.evaluate(()=>__nuAll());const hh=await g.evaluate(()=>__nu.hits.slice());hh.forEach(h=>{if(!pre.some(x=>x.surf===h.surf&&x.txt===h.txt))rep('T-???',`${dev} ${h.surf} :: ${h.txt}`)});
-     const q=panel.li.filter(t=>/\?\?\?/.test(t));q.forEach(t=>rep('T-???',`${dev} Tin báo row :: ${t}`));
+     const q=panel.li.filter(t=>/\?\?\?/.test(t));panel.li.filter(t=>/[a-zà-ỹ,]\s+Một vị/.test(t)).forEach(t=>rep('T-CAP',`${dev} Tin báo row capital «Một vị» mid-sentence :: ${t.slice(0,140)}`));q.forEach(t=>rep('T-???',`${dev} Tin báo row :: ${t}`));
      rep(q.length?'T-FAIL':'ok',`T ${dev} Tin báo dialog opened by a real tap: ${panel.li.length} rows, «???» rows ${q.length}; sample «${panel.li.slice(0,3).join(' | ').slice(0,200)}»`)}
     if(SHOTS)await p.screenshot({path:path.join(SHOTS,`${dev}.png`)})}
    rep(errs.length?'T-FAIL':'ok',`T ${dev} page errors ${errs.length} ${errs.slice(0,2).join(' ')}`);await ctx.close()}
