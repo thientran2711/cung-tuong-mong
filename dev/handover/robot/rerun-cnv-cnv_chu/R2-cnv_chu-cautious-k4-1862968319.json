@@ -1,0 +1,1975 @@
+{
+ "job": {
+  "id": "R2-cnv_chu-cautious-k4-1862968319",
+  "origin": "cnv",
+  "road": "cnv_chu",
+  "bot": "cautious",
+  "seed": 1862968319,
+  "dev": "fold",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "4523381f",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 1,
+  "cap": null,
+  "stuck": 10,
+  "unstick": [
+   {
+    "at": 380,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 785,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 805,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1946,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 2043,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2973,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 3055,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 3386,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 4291,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 4391,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 5372,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 6692,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 1010,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 1114,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 1159,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1179,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1200,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1221,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2384,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 2652,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2672,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 2737,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": "Lịch tháng"
+   },
+   {
+    "at": 3735,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 5505,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   },
+   {
+    "at": 6743,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Tin báo"
+   }
+  ],
+  "slice": null,
+  "areaTaps": 31869,
+  "taps0": 0,
+  "resumed": [
+   {
+    "at": "2026-11-25T08:26:22.556Z",
+    "buoi": 51,
+    "from": "2026-11-25T07:32:06.937Z"
+   },
+   {
+    "at": "2026-11-25T08:32:57.289Z",
+    "buoi": 102,
+    "from": "2026-11-25T08:31:17.162Z"
+   },
+   {
+    "at": "2026-11-25T10:33:03.002Z",
+    "buoi": 405,
+    "from": "2026-11-25T10:31:35.776Z"
+   }
+  ],
+  "infoTaps": 787,
+  "scrolls": 5,
+  "taps": 4240
+ },
+ "life": {
+  "id": "Hồng nhan bạc mệnh",
+  "type": "death",
+  "fate": "Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 23 tuổi",
+  "death": true,
+  "age": 23,
+  "year": 5,
+  "rank": 0
+ },
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "stuck|no progress 15 min on .dlg «Tin báo»",
+   "type": "stuck",
+   "msg": "no progress 15 min on .dlg «Tin báo»",
+   "n": 10,
+   "at": 1946,
+   "shot": "/home/user/wt/r2h/dev/handover/robot/rerun-cnv-cnv_chu/shots-R2-cnv_chu-cautious-k4-1862968319/stuck-1.png",
+   "save": "/home/user/wt/r2h/dev/handover/robot/rerun-cnv-cnv_chu/shots-R2-cnv_chu-cautious-k4-1862968319/stuck-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 16,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 0,
+    "name": "Tư Mã Kiều Nguyệt"
+   },
+   "buttons": [
+    "Xem lời nhờTốnkhôngĐượckhôngGhi chúchọn rồi xem kết quả ở bước sau!",
+    "Để sauTốnkhôngĐượckhông"
+   ]
+  }
+ ],
+ "dead": [
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Tích Cần viện · Ở đây còn 6 người.»",
+   "label": "Tâm trạngBình thản+1",
+   "cover": "span in #kntchip",
+   "shot": "/home/user/wt/r2h/dev/handover/robot/rerun-cnv-cnv_chu/shots-R2-cnv_chu-cautious-k4-1862968319/dead-fold-1795595398445.png",
+   "dev": "fold",
+   "at": 216,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 6,
+    "w": 1,
+    "b": 1,
+    "age": 19,
+    "rank": 0,
+    "name": "Tư Mã Kiều Nguyệt"
+   }
+  }
+ ],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 320520,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 51,
+   "year": null,
+   "chars": 329798,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 101,
+   "year": 1,
+   "chars": 406954,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 102,
+   "year": null,
+   "chars": 406475,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 152,
+   "year": 2,
+   "chars": 461178,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 202,
+   "year": 2,
+   "chars": 520349,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 252,
+   "year": 2,
+   "chars": 518768,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 302,
+   "year": 3,
+   "chars": 583916,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 352,
+   "year": 3,
+   "chars": 630007,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 402,
+   "year": 3,
+   "chars": 683235,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 405,
+   "year": null,
+   "chars": 671525,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 455,
+   "year": 4,
+   "chars": 718059,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 505,
+   "year": 4,
+   "chars": 730922,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 555,
+   "year": 4,
+   "chars": 787405,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 605,
+   "year": 5,
+   "chars": 832816,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 655,
+   "year": 5,
+   "chars": 894478,
+   "key": "hclh-save-v2-1"
+  }
+ ],
+ "buoi": 663,
+ "steps": 44324,
+ "status": [
+  "STATUS R2-cnv_chu-cautious-k4-1862968319 · buổi 294 · year 3 · rank 0 · bugs 1 · stuck 2 · dead buttons 1",
+  "STATUS R2-cnv_chu-cautious-k4-1862968319 · buổi 551 · year 4 · rank 0 · bugs 1 · stuck 7 · dead buttons 1"
+ ],
+ "_snapAt": 1795609542651,
+ "trace": [
+  [
+   5719,
+   ".dlg «Lịch tháng» «ngày 22: Luyện đàn: Nguyệt tín»"
+  ],
+  [
+   5719,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   5719,
+   ".dlg «Lịch tháng» «ngày 27»"
+  ],
+  [
+   5720,
+   ".dlg «Lịch tháng» «ngày 15: Tết Trung thu»"
+  ],
+  [
+   5720,
+   ".dlg «Lịch tháng» «ngày 14»"
+  ],
+  [
+   5721,
+   ".dlg «Lịch tháng» «mồng 7»"
+  ],
+  [
+   5721,
+   ".dlg «Lịch tháng» «mồng 3»"
+  ],
+  [
+   5721,
+   ".dlg «Lịch tháng» «ngày 26: Nguyệt tín»"
+  ],
+  [
+   5721,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   5722,
+   ".dlg «Lịch tháng» «ngày 23: Nguyệt tín»"
+  ],
+  [
+   5722,
+   ".dlg «Lịch tháng» «ngày 25: Tiết Vạn thọ: Nguyệt tín»"
+  ],
+  [
+   5723,
+   ".dlg «Lịch tháng» «ngày 19»"
+  ],
+  [
+   5723,
+   ".dlg «Lịch tháng» «mồng 5»"
+  ],
+  [
+   5723,
+   ".dlg «Lịch tháng» «Tiết Vạn thọ»"
+  ],
+  [
+   5724,
+   ".dlg «Lịch tháng» «mồng 1»"
+  ],
+  [
+   5724,
+   ".dlg «Lịch tháng» «mồng 3»"
+  ],
+  [
+   5724,
+   ".dlg «Lịch tháng» «ngày 27»"
+  ],
+  [
+   5725,
+   ".dlg «Lịch tháng» «ngày 14»"
+  ],
+  [
+   5725,
+   ".dlg «Lịch tháng» «ngày 23: Nguyệt tín»"
+  ],
+  [
+   5725,
+   ".dlg «Lịch tháng» «ngày 14»"
+  ],
+  [
+   5725,
+   ".dlg «Lịch tháng» «mồng 6»"
+  ],
+  [
+   5726,
+   ".dlg «Lịch tháng» «mồng 2»"
+  ],
+  [
+   5726,
+   ".dlg «Lịch tháng» «mồng 9»"
+  ],
+  [
+   5726,
+   ".dlg «Lịch tháng» «ngày 13»"
+  ],
+  [
+   5727,
+   ".dlg «Lịch tháng» «ngày 17»"
+  ],
+  [
+   5727,
+   ".dlg «Lịch tháng» «ngày 19»"
+  ],
+  [
+   5727,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   5727,
+   ".dlg «Lịch tháng» «ngày 23: Nguyệt tín»"
+  ],
+  [
+   5728,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   5728,
+   ".dlg «Lịch tháng» «Tết Trung thu»"
+  ],
+  [
+   5729,
+   ".dlg «Lịch tháng» «ngày 28»"
+  ],
+  [
+   5729,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   5729,
+   ".dlg «Lịch tháng» «ngày 14»"
+  ],
+  [
+   5730,
+   ".dlg «Lịch tháng» «ngày 17»"
+  ],
+  [
+   5730,
+   ".dlg «Lịch tháng» «mồng 7»"
+  ],
+  [
+   5730,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   5730,
+   ".dlg «Lịch tháng» «ngày 18»"
+  ],
+  [
+   5731,
+   ".dlg «Lịch tháng» «ngày 25: Tiết Vạn thọ: Nguyệt tín»"
+  ],
+  [
+   5731,
+   ".dlg «Lịch tháng» «ngày 21»"
+  ],
+  [
+   5732,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   5732,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   5732,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   5732,
+   ".dlg «Lịch tháng» «ngày 19»"
+  ],
+  [
+   5733,
+   ".dlg «Lịch tháng» «mồng 4»"
+  ],
+  [
+   5733,
+   ".dlg «Lịch tháng» «mồng 10»"
+  ],
+  [
+   5733,
+   ".dlg «Lịch tháng» «ngày 21»"
+  ],
+  [
+   5734,
+   ".dlg «Lịch tháng» «ngày 26: Nguyệt tín»"
+  ],
+  [
+   5734,
+   ".dlg «Lịch tháng» «ngày 14»"
+  ],
+  [
+   5734,
+   ".dlg «Lịch tháng» «Tết Trung thu»"
+  ],
+  [
+   5735,
+   ".dlg «Lịch tháng» «ngày 27»"
+  ],
+  [
+   5735,
+   ".dlg «Lịch tháng» «ngày 22: Luyện đàn: Nguyệt tín»"
+  ],
+  [
+   5735,
+   ".dlg «Lịch tháng» «ngày 14»"
+  ],
+  [
+   5736,
+   ".dlg «Lịch tháng» «ngày 30»"
+  ],
+  [
+   5736,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   5736,
+   ".dlg «Lịch tháng» «Tết Trung thu»"
+  ],
+  [
+   5737,
+   ".dlg «Lịch tháng» «mồng 10»"
+  ],
+  [
+   5737,
+   ".dlg «Lịch tháng» «ngày 24: Nguyệt tín»"
+  ],
+  [
+   5738,
+   ".dlg «Lịch tháng» «ngày 21»"
+  ],
+  [
+   5738,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   5738,
+   ".dlg «Lịch tháng» «ngày 18»"
+  ],
+  [
+   5738,
+   ".dlg «Lịch tháng» «ngày 24: Nguyệt tín»"
+  ],
+  [
+   5739,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   5739,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   5739,
+   ".dlg «Lịch tháng» «ngày 24: Dâng quà Thái hậu: Nguyệt tín»"
+  ],
+  [
+   5739,
+   ".dlg «Lịch tháng» «ngày 18»"
+  ],
+  [
+   5740,
+   ".dlg «Lịch tháng» «ngày 24: Dâng quà Thái hậu: Nguyệt tín»"
+  ],
+  [
+   5740,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   5740,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   5741,
+   ".dlg «Lịch tháng» «ngày 14»"
+  ],
+  [
+   5741,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   5741,
+   ".dlg «Lịch tháng» «ngày 18»"
+  ],
+  [
+   5741,
+   ".dlg «Lịch tháng» «ngày 30»"
+  ],
+  [
+   5742,
+   ".dlg «Lịch tháng» «ngày 23: Nguyệt tín»"
+  ],
+  [
+   5742,
+   ".dlg «Lịch tháng» «ngày 24: Dâng quà Thái hậu: Nguyệt tín»"
+  ],
+  [
+   5742,
+   ".dlg «Lịch tháng» «ngày 22: Luyện đàn: Nguyệt tín»"
+  ],
+  [
+   5742,
+   ".dlg «Lịch tháng» «ngày 13»"
+  ],
+  [
+   5743,
+   ".dlg «Lịch tháng» «ngày 28»"
+  ],
+  [
+   5743,
+   ".dlg «Lịch tháng» «ngày 15: Tết Trung thu»"
+  ],
+  [
+   5744,
+   ".dlg «Lịch tháng» «ngày 16»"
+  ],
+  [
+   5744,
+   ".dlg «Lịch tháng» «ngày 24: Dâng quà Thái hậu: Nguyệt tín»"
+  ],
+  [
+   5744,
+   ".dlg «Lịch tháng» «ngày 30»"
+  ],
+  [
+   5745,
+   ".dlg «Lịch tháng» «ngày 26: Nguyệt tín»"
+  ],
+  [
+   5745,
+   ".dlg «Lịch tháng» «ngày 24: Dâng quà Thái hậu: Nguyệt tín»"
+  ],
+  [
+   5745,
+   ".dlg «Lịch tháng» «ngày 24: Dâng quà Thái hậu: Nguyệt tín»"
+  ],
+  [
+   5745,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   5746,
+   ".dlg «Lịch tháng» «ngày 18»"
+  ],
+  [
+   5746,
+   ".dlg «Lịch tháng» «ngày 21»"
+  ],
+  [
+   5746,
+   ".dlg «Lịch tháng» «ngày 30»"
+  ],
+  [
+   5746,
+   ".dlg «Lịch tháng» «ngày 28»"
+  ],
+  [
+   5747,
+   ".dlg «Lịch tháng» «ngày 20»"
+  ],
+  [
+   5747,
+   ".dlg «Lịch tháng» «ngày 18»"
+  ],
+  [
+   5747,
+   ".dlg «Lịch tháng» «ngày 23: Nguyệt tín»"
+  ],
+  [
+   5748,
+   ".dlg «Lịch tháng» «ngày 15: Tết Trung thu»"
+  ],
+  [
+   5748,
+   ".dlg «Lịch tháng» «ngày 23: Nguyệt tín»"
+  ],
+  [
+   5749,
+   ".dlg «Lịch tháng» «ngày 21»"
+  ],
+  [
+   5749,
+   ".dlg «Lịch tháng» «ngày 17»"
+  ],
+  [
+   5749,
+   ".dlg «Lịch tháng» «ngày 24: Dâng quà Thái hậu: Nguyệt tín»"
+  ],
+  [
+   5749,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   5750,
+   ".dlg «Lịch tháng» «ngày 20»"
+  ],
+  [
+   5750,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   5750,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   5751,
+   ".dlg «Lịch tháng» «ngày 25: Tiết Vạn thọ: Nguyệt tín»"
+  ],
+  [
+   5751,
+   ".dlg «Lịch tháng» «ngày 28»"
+  ],
+  [
+   5752,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   5752,
+   ".dlg «Lịch tháng» «ngày 21»"
+  ],
+  [
+   5752,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   5752,
+   ".dlg «Lịch tháng» «ngày 21»"
+  ],
+  [
+   5753,
+   ".dlg «Lịch tháng» «ngày 19»"
+  ],
+  [
+   5753,
+   ".dlg «Lịch tháng» «ngày 22: Luyện đàn: Nguyệt tín»"
+  ],
+  [
+   5753,
+   ".dlg «Lịch tháng» «ngày 23: Nguyệt tín»"
+  ],
+  [
+   5753,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   5754,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   5754,
+   ".dlg «Lịch tháng» «ngày 23: Nguyệt tín»"
+  ],
+  [
+   5754,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   5755,
+   ".dlg «Lịch tháng» «ngày 27»"
+  ],
+  [
+   5755,
+   ".dlg «Lịch tháng» «ngày 13»"
+  ],
+  [
+   5755,
+   ".dlg «Lịch tháng» «ngày 20»"
+  ],
+  [
+   5755,
+   ".dlg «Lịch tháng» «ngày 19»"
+  ],
+  [
+   5756,
+   ".dlg «Lịch tháng» «ngày 22: Luyện đàn: Nguyệt tín»"
+  ],
+  [
+   5756,
+   ".dlg «Lịch tháng» «ngày 27»"
+  ],
+  [
+   5756,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   5756,
+   ".dlg «Lịch tháng» «ngày 23: Nguyệt tín»"
+  ],
+  [
+   5757,
+   ".dlg «Lịch tháng» «ngày 27»"
+  ],
+  [
+   5757,
+   ".dlg «Lịch tháng» «ngày 19»"
+  ],
+  [
+   5757,
+   ".dlg «Lịch tháng» «ngày 19»"
+  ],
+  [
+   5757,
+   ".dlg «Lịch tháng» «ngày 20»"
+  ],
+  [
+   5758,
+   ".dlg «Lịch tháng» «ngày 28»"
+  ],
+  [
+   5758,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   5758,
+   ".dlg «Lịch tháng» «ngày 21»"
+  ],
+  [
+   5759,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   5759,
+   ".dlg «Lịch tháng» «ngày 28»"
+  ],
+  [
+   5759,
+   ".dlg «Lịch tháng» «ngày 28»"
+  ],
+  [
+   5760,
+   ".dlg «Lịch tháng» «ngày 22: Luyện đàn: Nguyệt tín»"
+  ],
+  [
+   5760,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   5760,
+   ".dlg «Lịch tháng» «ngày 13»"
+  ],
+  [
+   5760,
+   ".dlg «Lịch tháng» «ngày 25: Tiết Vạn thọ: Nguyệt tín»"
+  ],
+  [
+   5761,
+   ".dlg «Lịch tháng» «ngày 21»"
+  ],
+  [
+   5761,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   5762,
+   ".dlg «Lịch tháng» «ngày 22: Luyện đàn: Nguyệt tín»"
+  ],
+  [
+   5762,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   5762,
+   ".dlg «Lịch tháng» «ngày 25: Tiết Vạn thọ: Nguyệt tín»"
+  ],
+  [
+   5763,
+   ".dlg «Lịch tháng» «ngày 16»"
+  ],
+  [
+   5763,
+   ".dlg «Lịch tháng» «ngày 28»"
+  ],
+  [
+   5764,
+   ".dlg «Lịch tháng» «ngày 14»"
+  ],
+  [
+   5764,
+   ".dlg «Lịch tháng» «ngày 16»"
+  ],
+  [
+   5764,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   5764,
+   ".dlg «Lịch tháng» «ngày 17»"
+  ],
+  [
+   5765,
+   ".dlg «Lịch tháng» «Tết Trung thu»"
+  ],
+  [
+   5765,
+   ".dlg «Lịch tháng» «ngày 18»"
+  ],
+  [
+   5766,
+   ".dlg «Lịch tháng» «ngày 23: Nguyệt tín»"
+  ],
+  [
+   5766,
+   ".dlg «Lịch tháng» «ngày 26: Nguyệt tín»"
+  ],
+  [
+   5766,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   5767,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   5767,
+   ".dlg «Lịch tháng» «ngày 23: Nguyệt tín»"
+  ],
+  [
+   5767,
+   ".dlg «Lịch tháng» «ngày 25: Tiết Vạn thọ: Nguyệt tín»"
+  ],
+  [
+   5768,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   5768,
+   ".dlg «Lịch tháng» «Tết Trung thu»"
+  ],
+  [
+   5769,
+   ".dlg «Lịch tháng» «ngày 27»"
+  ],
+  [
+   5769,
+   ".dlg «Lịch tháng» «ngày 30»"
+  ],
+  [
+   5769,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   5770,
+   ".dlg «Lịch tháng» «ngày 25: Tiết Vạn thọ: Nguyệt tín»"
+  ],
+  [
+   5770,
+   ".dlg «Lịch tháng» «ngày 16»"
+  ],
+  [
+   5771,
+   ".dlg «Lịch tháng» «ngày 23: Nguyệt tín»"
+  ],
+  [
+   5771,
+   ".dlg «Lịch tháng» «ngày 25: Tiết Vạn thọ: Nguyệt tín»"
+  ],
+  [
+   5772,
+   ".dlg «Lịch tháng» «ngày 17»"
+  ],
+  [
+   5772,
+   ".dlg «Lịch tháng» «ngày 14»"
+  ],
+  [
+   5772,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   5773,
+   ".dlg «Lịch tháng» «ngày 13»"
+  ],
+  [
+   5773,
+   ".dlg «Lịch tháng» «ngày 20»"
+  ],
+  [
+   5773,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   5773,
+   ".dlg «Lịch tháng» «ngày 23: Nguyệt tín»"
+  ],
+  [
+   5774,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   5774,
+   ".dlg «Lịch tháng» «ngày 24: Dâng quà Thái hậu: Nguyệt tín»"
+  ],
+  [
+   5774,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   5774,
+   ".dlg «Lịch tháng» «ngày 15: Tết Trung thu»"
+  ],
+  [
+   5775,
+   ".dlg «Lịch tháng» «ngày 28»"
+  ],
+  [
+   5775,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   5776,
+   ".dlg «Lịch tháng» «ngày 14»"
+  ],
+  [
+   5776,
+   ".dlg «Lịch tháng» «ngày 13»"
+  ],
+  [
+   5776,
+   ".dlg «Lịch tháng» «ngày 21»"
+  ],
+  [
+   5777,
+   ".dlg «Lịch tháng» «ngày 27»"
+  ],
+  [
+   5777,
+   ".dlg «Lịch tháng» «ngày 30»"
+  ],
+  [
+   5777,
+   ".dlg «Lịch tháng» «ngày 14»"
+  ],
+  [
+   5777,
+   ".dlg «Lịch tháng» «ngày 30»"
+  ],
+  [
+   5778,
+   ".dlg «Lịch tháng» «ngày 14»"
+  ],
+  [
+   5778,
+   ".dlg «Lịch tháng» «Tết Trung thu»"
+  ],
+  [
+   5779,
+   ".dlg «Lịch tháng» «ngày 30»"
+  ],
+  [
+   5779,
+   ".dlg «Lịch tháng» «ngày 15: Tết Trung thu»"
+  ],
+  [
+   5780,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   5780,
+   ".dlg «Lịch tháng» «ngày 24: Dâng quà Thái hậu: Nguyệt tín»"
+  ],
+  [
+   5780,
+   ".dlg «Lịch tháng» «ngày 30»"
+  ],
+  [
+   5781,
+   ".dlg «Lịch tháng» «ngày 17»"
+  ],
+  [
+   5781,
+   ".dlg «Lịch tháng» «ngày 21»"
+  ],
+  [
+   5781,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   5781,
+   ".dlg «Lịch tháng» «ngày 30»"
+  ],
+  [
+   5782,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   5782,
+   ".dlg «Lịch tháng» «ngày 22: Luyện đàn: Nguyệt tín»"
+  ],
+  [
+   5782,
+   ".dlg «Lịch tháng» «ngày 14»"
+  ],
+  [
+   5782,
+   ".dlg «Lịch tháng» «ngày 27»"
+  ],
+  [
+   5783,
+   ".dlg «Lịch tháng» «ngày 19»"
+  ],
+  [
+   5783,
+   ".dlg «Lịch tháng» «ngày 28»"
+  ],
+  [
+   5783,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   5784,
+   ".dlg «Lịch tháng» «ngày 17»"
+  ],
+  [
+   5784,
+   ".dlg «Lịch tháng» «ngày 30»"
+  ],
+  [
+   5784,
+   ".dlg «Lịch tháng» «ngày 13»"
+  ],
+  [
+   5784,
+   ".dlg «Lịch tháng» «Tết Trung thu»"
+  ],
+  [
+   5785,
+   ".dlg «Lịch tháng» «ngày 26: Nguyệt tín»"
+  ],
+  [
+   5785,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   5786,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   5786,
+   ".dlg «Lịch tháng» «ngày 26: Nguyệt tín»"
+  ],
+  [
+   5786,
+   ".dlg «Lịch tháng» «ngày 22: Luyện đàn: Nguyệt tín»"
+  ],
+  [
+   5787,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   5787,
+   ".dlg «Lịch tháng» «Tiết Vạn thọ»"
+  ],
+  [
+   5787,
+   ".dlg «Lịch tháng» «Tiết Vạn thọ»"
+  ],
+  [
+   5788,
+   ".dlg «Lịch tháng» «ngày 17»"
+  ],
+  [
+   5788,
+   ".dlg «Lịch tháng» «Tiết Vạn thọ»"
+  ],
+  [
+   5789,
+   ".dlg «Lịch tháng» «ngày 17»"
+  ],
+  [
+   5789,
+   ".dlg «Lịch tháng» «ngày 22: Luyện đàn: Nguyệt tín»"
+  ],
+  [
+   5790,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   5790,
+   ".dlg «Lịch tháng» «ngày 13»"
+  ],
+  [
+   5790,
+   ".dlg «Lịch tháng» «ngày 27»"
+  ],
+  [
+   5791,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   5791,
+   ".dlg «Lịch tháng» «ngày 26: Nguyệt tín»"
+  ],
+  [
+   5791,
+   ".dlg «Lịch tháng» «ngày 25: Tiết Vạn thọ: Nguyệt tín»"
+  ],
+  [
+   5792,
+   ".dlg «Lịch tháng» «ngày 14»"
+  ],
+  [
+   5792,
+   ".dlg «Lịch tháng» «ngày 27»"
+  ],
+  [
+   5792,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   5793,
+   ".dlg «Lịch tháng» «ngày 15: Tết Trung thu»"
+  ],
+  [
+   5793,
+   ".dlg «Lịch tháng» «ngày 30»"
+  ],
+  [
+   5794,
+   ".dlg «Lịch tháng» «ngày 28»"
+  ],
+  [
+   5794,
+   ".dlg «Lịch tháng» «ngày 27»"
+  ],
+  [
+   5794,
+   ".dlg «Lịch tháng» «ngày 24: Dâng quà Thái hậu: Nguyệt tín»"
+  ],
+  [
+   5795,
+   ".dlg «Lịch tháng» «ngày 22: Luyện đàn: Nguyệt tín»"
+  ],
+  [
+   5795,
+   ".dlg «Lịch tháng» «ngày 22: Luyện đàn: Nguyệt tín»"
+  ],
+  [
+   5795,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   5795,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   5796,
+   ".dlg «Lịch tháng» «ngày 25: Tiết Vạn thọ: Nguyệt tín»"
+  ],
+  [
+   5796,
+   ".dlg «Lịch tháng» «Tiết Vạn thọ»"
+  ],
+  [
+   5797,
+   ".dlg «Lịch tháng» «ngày 24: Dâng quà Thái hậu: Nguyệt tín»"
+  ],
+  [
+   5797,
+   ".dlg «Lịch tháng» «ngày 20»"
+  ],
+  [
+   5798,
+   ".dlg «Lịch tháng» «ngày 13»"
+  ],
+  [
+   5798,
+   ".dlg «Lịch tháng» «ngày 26: Nguyệt tín»"
+  ],
+  [
+   5798,
+   ".dlg «Lịch tháng» «ngày 17»"
+  ],
+  [
+   5799,
+   ".dlg «Lịch tháng» «ngày 13»"
+  ],
+  [
+   5799,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   5799,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   5799,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   5800,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   5800,
+   ".dlg «Lịch tháng» «ngày 22: Luyện đàn: Nguyệt tín»"
+  ],
+  [
+   5800,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   5801,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   5801,
+   ".dlg «Lịch tháng» «ngày 17»"
+  ],
+  [
+   5801,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   5801,
+   ".dlg «Lịch tháng» «ngày 11»"
+  ],
+  [
+   5802,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   5802,
+   ".dlg «Lịch tháng» «ngày 19»"
+  ],
+  [
+   5802,
+   ".dlg «Lịch tháng» «ngày 21»"
+  ],
+  [
+   5803,
+   ".dlg «Lịch tháng» «ngày 19»"
+  ],
+  [
+   5803,
+   ".dlg «Lịch tháng» «ngày 19»"
+  ],
+  [
+   5803,
+   ".dlg «Lịch tháng» «ngày 14»"
+  ],
+  [
+   5804,
+   ".dlg «Lịch tháng» «ngày 15: Tết Trung thu»"
+  ],
+  [
+   5804,
+   ".dlg «Lịch tháng» «Tết Trung thu»"
+  ],
+  [
+   5805,
+   ".dlg «Lịch tháng» «ngày 20»"
+  ],
+  [
+   5805,
+   ".dlg «Lịch tháng» «ngày 25: Tiết Vạn thọ: Nguyệt tín»"
+  ],
+  [
+   5806,
+   ".dlg «Lịch tháng» «ngày 16»"
+  ],
+  [
+   5806,
+   ".dlg «Lịch tháng» «ngày 13»"
+  ],
+  [
+   5807,
+   ".dlg «Lịch tháng» «ngày 15: Tết Trung thu»"
+  ],
+  [
+   5807,
+   ".dlg «Lịch tháng» «ngày 26: Nguyệt tín»"
+  ],
+  [
+   5808,
+   ".dlg «Lịch tháng» «ngày 16»"
+  ],
+  [
+   5808,
+   ".dlg «Lịch tháng» «ngày 20»"
+  ],
+  [
+   5809,
+   ".dlg «Lịch tháng» «ngày 15: Tết Trung thu»"
+  ],
+  [
+   5810,
+   ".dlg «Lịch tháng» «ngày 27»"
+  ],
+  [
+   5810,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   5810,
+   ".dlg «Lịch tháng» «Tiết Vạn thọ»"
+  ],
+  [
+   5811,
+   ".dlg «Lịch tháng» «ngày 14»"
+  ],
+  [
+   5811,
+   ".dlg «Lịch tháng» «ngày 16»"
+  ],
+  [
+   5811,
+   ".dlg «Lịch tháng» «ngày 16»"
+  ],
+  [
+   5812,
+   ".dlg «Lịch tháng» «ngày 16»"
+  ],
+  [
+   5812,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   5813,
+   "page «Tích Cần viện · Hoàng quý phi Phú Sát Như Ý đi vắn» «Sang buổi»"
+  ],
+  [
+   5814,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Hậu cung»"
+  ],
+  [
+   5814,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Sang buổi»"
+  ],
+  [
+   5815,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Sang buổi»"
+  ],
+  [
+   5816,
+   "page «Tích Cần viện · Ở đây còn 6 người.» «Sang ngày mới»"
+  ],
+  [
+   5819,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   5820,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5820,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5820,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5820,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5821,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5821,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5821,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5822,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5822,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5822,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5822,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5823,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5823,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5823,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5824,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5824,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5824,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5824,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5825,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5825,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5825,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5826,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5826,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   5827,
+   "#kmrew «Thường»"
+  ],
+  [
+   5827,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   5828,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   5829,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   5829,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   5830,
+   ".dlg «Lui»"
+  ],
+  [
+   5831,
+   "#kmrew «ThườngNước bào hoaChải tóc vấn Kiểu cầu kỳ: mỗi lầ»"
+  ],
+  [
+   5831,
+   ".dlg «Lui»"
+  ],
+  [
+   5832,
+   "#kmrew «Nhận»"
+  ],
+  [
+   5833,
+   "#kmrew «Nhận»"
+  ],
+  [
+   5833,
+   ".dlg «Sứ đoàn vào triều» «Lui»"
+  ],
+  [
+   5834,
+   ".dlg «Thu săn» «Lui»"
+  ],
+  [
+   5835,
+   "page «Tích Cần viện · Hoàng quý phi Phú Sát Như Ý đi vắn» «Giao tình»"
+  ],
+  [
+   5836,
+   "page «Tích Cần viện · Hoàng quý phi Phú Sát Như Ý đi vắn» «Sang buổi»"
+  ],
+  [
+   5836,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Tâm trạngBình thản-3»"
+  ],
+  [
+   5837,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   5838,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Sang buổi»"
+  ],
+  [
+   5839,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Lương tháng3 bạc»"
+  ],
+  [
+   5839,
+   ".dlg «Lương tháng ba bạc» «Lui»"
+  ],
+  [
+   5840,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Sang buổi»"
+  ],
+  [
+   5841,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Tư trang»"
+  ],
+  [
+   5841,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Sang ngày mới»"
+  ],
+  [
+   5844,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   5845,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5845,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5845,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5845,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5846,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5846,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5846,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5847,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5847,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   5847,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   5847,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   5848,
+   ".dlg «Sứ đoàn vào triều» «Lui»"
+  ],
+  [
+   5849,
+   "page «Tích Cần viện · Hoàng quý phi Phú Sát Như Ý đi vắn» «Tin báo: 20 tin mới»"
+  ],
+  [
+   5865,
+   "DEAD Xem lời nhờTốnkhôngĐượckhôngGhi chúchọn rồi xem kế"
+  ],
+  [
+   6746,
+   "title (unstick reload) «chơi một mình»"
+  ],
+  [
+   6748,
+   "title (unstick reload) «chơi tiếp|tiếp tục|vào sổ|^tải$»"
+  ],
+  [
+   6750,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Sang buổi»"
+  ],
+  [
+   6751,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Buổi trưa, còn 4 khắc»"
+  ],
+  [
+   6752,
+   ".dlg «trưa · còn» «Lui»"
+  ],
+  [
+   6753,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Sang buổi»"
+  ],
+  [
+   6756,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Mục tiêu chương (có mới)»"
+  ],
+  [
+   6758,
+   ".dlg «Chương 6 · Kẻ dò hỏi» «Đi làm: Đi làm quen các nơi được đếnTốnkhôngĐượctớ»"
+  ],
+  [
+   6762,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Sang buổi»"
+  ],
+  [
+   6764,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Sang ngày mới»"
+  ],
+  [
+   6768,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   6771,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   6771,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   6772,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   6773,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   6774,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   6775,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   6776,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   6777,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   6777,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   6778,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   6779,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   6779,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   6780,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   6780,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   6780,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   6781,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   6781,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   6782,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   6782,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   6783,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   6784,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   6784,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   6784,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   6785,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   6785,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   6786,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   6786,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   6787,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   6787,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   6788,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   6790,
+   "DEAD Trang sau"
+  ],
+  [
+   6790,
+   ".kbk «Tổng lược» «Vào ngày mới»"
+  ],
+  [
+   6791,
+   ".dlg «Thu săn» «Lui»"
+  ],
+  [
+   6792,
+   "page «Tích Cần viện · Hoàng quý phi Phú Sát Như Ý đi vắn» «Ra vào cung cấm»"
+  ],
+  [
+   6792,
+   ".dlg «Ra vào cung cấm» «Lui»"
+  ],
+  [
+   6793,
+   "page «Tích Cần viện · Hoàng quý phi Phú Sát Như Ý đi vắn» «Sang buổi»"
+  ],
+  [
+   6795,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Biết chuyện của chủ3»"
+  ],
+  [
+   6795,
+   ".dlg «Biết chuyện của chủ» «Lui»"
+  ],
+  [
+   6797,
+   "page «Tích Cần viện · Ở đây còn 1 người.» «Sang buổi»"
+  ],
+  [
+   6797,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Buổi chiều, còn 4 khắc»"
+  ],
+  [
+   6798,
+   ".dlg «chiều · còn» «Lui»"
+  ],
+  [
+   6799,
+   "page «Tích Cần viện · Ở đây còn 2 người.» «Sang buổi»"
+  ],
+  [
+   6800,
+   "page «Tích Cần viện · Ở đây còn 4 người.» «Dư đồ»"
+  ],
+  [
+   6801,
+   "page «Tích Cần viện · Ở đây còn 3 người.» «Sang ngày mới»"
+  ]
+ ],
+ "_ckAt": 1795609577058,
+ "_ckB": 661,
+ "dumps": [
+  "/home/user/wt/r2h/dev/handover/robot/rerun-cnv-cnv_chu/shots-R2-cnv_chu-cautious-k4-1862968319/stuck-1-dump.json",
+  "/home/user/wt/r2h/dev/handover/robot/rerun-cnv-cnv_chu/shots-R2-cnv_chu-cautious-k4-1862968319/stuck-2-dump.json",
+  "/home/user/wt/r2h/dev/handover/robot/rerun-cnv-cnv_chu/shots-R2-cnv_chu-cautious-k4-1862968319/stuck-3-dump.json",
+  "/home/user/wt/r2h/dev/handover/robot/rerun-cnv-cnv_chu/shots-R2-cnv_chu-cautious-k4-1862968319/stuck-4-dump.json",
+  "/home/user/wt/r2h/dev/handover/robot/rerun-cnv-cnv_chu/shots-R2-cnv_chu-cautious-k4-1862968319/stuck-5-dump.json",
+  "/home/user/wt/r2h/dev/handover/robot/rerun-cnv-cnv_chu/shots-R2-cnv_chu-cautious-k4-1862968319/stuck-6-dump.json",
+  "/home/user/wt/r2h/dev/handover/robot/rerun-cnv-cnv_chu/shots-R2-cnv_chu-cautious-k4-1862968319/stuck-7-dump.json",
+  "/home/user/wt/r2h/dev/handover/robot/rerun-cnv-cnv_chu/shots-R2-cnv_chu-cautious-k4-1862968319/stuck-8-dump.json",
+  "/home/user/wt/r2h/dev/handover/robot/rerun-cnv-cnv_chu/shots-R2-cnv_chu-cautious-k4-1862968319/stuck-9-dump.json",
+  "/home/user/wt/r2h/dev/handover/robot/rerun-cnv-cnv_chu/shots-R2-cnv_chu-cautious-k4-1862968319/stuck-10-dump.json"
+ ],
+ "t": {
+  "total": 6801934
+ }
+}

@@ -1,0 +1,7 @@
+# Review — R2-cnv_chu-cautious-k4-1862968319
+Honest scope: this is an automated robot driven by me; I looked at 2 screens (Tin báo stuck, ending) + the harness tables. Scores below are only for what I could judge; others = n/a.
+1. Summary: persona cautious (careful planner) · cnv / cnv_chu · age 23 (5 game years, 663 buổi, 4240 taps) · max rank 0 (Cung nữ tam đẳng) · ending Hồng nhan bạc mệnh (illness, game-imposed, real death) · no exit pick · harness 4523381f→1a29f470 (resumed) · real minutes ≈ several hours incl. restarts.
+2. Scores: a first 15 min n/a · b loop/pacing 4/10: 663 buổi with zero rank progress; Tin báo piles up to 45 items · c buttons/UI 4/10: 1 dead button (Tâm trạng chip covered, y4), Tin báo dialog stuck 10× (harness-side stuck family, fixed in harness 1a29f470) · d story n/a · e characters 5/10: lots of NPC feuds in Tin báo (alive) but none addressed to me · f choices n/a · g feedback 5/10: ending frame readable except overlap · h n/a · i visuals 5/10: end-frame title overlaps rows · j n/a.
+3. Loved: NPC feud news reads alive · figure art in ending · clear ending text. Hated: 45-item Tin báo wall · overlapping ending title · dead chip. Another life? yes, to see if rank can move.
+4. BUGS: (1) DEAD BUTTON «Tâm trạng +1» covered by span in #kntchip (Tích Cần viện, y4) shots-.../dead-fold-1795595398445.png. (2) Ending frame title overlaps rows (end.png). (3) Tin báo 45-news dialog: stuck family, already handled by F (1a29f470).
+5. Suggestions (parked, law 18): Tin báo grouping/limit; rank progress hint for cautious play.
