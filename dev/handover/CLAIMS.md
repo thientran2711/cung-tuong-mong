@@ -1701,7 +1701,7 @@ BIG rv sideline-dlg r4 (opus; land -3-r1 as one item) | review/sideline-dlg-3-r*
 | F flight2-s8 life (slot 8 thd_tho bold 372282412 ipad, harness 1a29f470; reuses s5 seat) | dev/handover/robot/flight2-s8.* | FOREMAN F #8 | session_01UV1SzjctgUqhWfuo3XVo2r | DONE (LIFE DONE 12:59Z age 30, VALID) | 2026-11-25T08:37Z |
 cnv-exit-promo (F s5d: Xin ở lại→xuất cung 25 + cnv promotion reachability) | review/cnv-exit-promo | session_01V1ZZH11so2W4LCBezeHWT4 | DONE (LIFE DONE 12:59Z age 30, VALID) | 2026-11-25T08:40Z (MAIN 137)
 robot-bugs-m1 (M1+M3: title blank 0-tappable, death/reload JS errs, exam strip no board, HUD Kiếp thứ hai) | review/robot-bugs-m1 | session_01V1ZZGzi8hGNhxUQKvbGBbx | DONE (LIFE DONE 12:59Z age 30, VALID) | 2026-11-25T08:45Z (MAIN 137)
-coop-night LIVE regression (jdayq in co-op rooms) | review/coop-night-live | session_01N1tNP4dE81jb4QnAnmVdTX (FOREMAN B) | DONE (LIFE DONE 12:59Z age 30, VALID) | 2026-11-25T09:16Z
+coop-night LIVE regression (jdayq in co-op rooms) | review/coop-night-live | session_01N1tNP4dE81jb4QnAnmVdTX (FOREMAN B) | DONE + ARCHIVED 25/11 21:36Z (lands via union coop-week-wait-rv 8e654ee0) | 2026-11-25T09:16Z
 | F flight2-coop1g co-op pair life (host Fold / guest iPad, seed 7002, harness d5545202; successor of A-COOP session_01UV1Szhju4ofdVDmJdWCiJk, VGPR VOID) | dev/handover/robot/flight2-coop1g.* | FOREMAN F #8 | session_01UV1SziX7QGW5M2nktXq8Av | DONE (LIFE DONE 12:59Z age 30, VALID) | 2026-11-25T09:18Z |
 | F flight2-s9 life (slot 9 thd_tho cautious 2866901045, Fold, harness d5545202; reuses s1d seat) | dev/handover/robot/flight2-s9.* | FOREMAN F #9 | session_01UV1SziCUE23TBF3kKE65D9 | DONE (LIFE DONE 12:59Z age 30, VALID) | 2026-11-25T09:30Z |
 BIG rv robot-coop-fix-3-r5 | review/robot-coop-fix-3-r5 3b004c3e | session_01N1tNP3UkcirSSZknExE71G (FOREMAN B) | DONE (LIFE DONE 12:59Z age 30, VALID) | 2026-11-25T09:31Z
@@ -1729,7 +1729,7 @@ talk-others-people r2 | review/talk-others-people-rv | PASS 25a9a9cc | LAND READ
 PCPORT-RK (f.rk non-string, whole family readers+writers) | review/pcport-rk | session_01N1tNP63faDcCU7EogpnFDG (FOREMAN B) | DONE (LIFE DONE 12:59Z age 30, VALID) | 2026-11-25T11:38Z
 PCPORT-RK SMALL review | review/pcport-rk cc27f8c7 | session_01N1tNP6mfSahZQYzLZvJBZc (FOREMAN B) | DONE (LIFE DONE 12:59Z age 30, VALID) | 2026-11-25T11:43Z
 HARDLOCK-CHOICE-R3 BIG review | review/hardlock-choice-r3 87e622fb | session_01N1tNP5U1GkSm12gVTAofGW (FOREMAN B) | DONE (LIFE DONE 12:59Z age 30, VALID) | 2026-11-25T11:44Z
-robot-coop-fix-6 BIG review | review/robot-coop-fix-6 (c4163a93→SSK sha) | session_01N1tNP6kBPZT2V6sqFFkLDF (FOREMAN B) | DONE (LIFE DONE 12:59Z age 30, VALID) | 2026-11-25T11:49Z
+robot-coop-fix-6 BIG review | review/robot-coop-fix-6 (c4163a93→SSK sha) | session_01N1tNP6kBPZT2V6sqFFkLDF (FOREMAN B) | DONE + ARCHIVED 25/11 21:36Z (lands via union coop-week-wait-rv 8e654ee0) | 2026-11-25T11:49Z
 net-ghen wave 2 (LAW11 thiện cảm/oán rest + NB2 cards + NB-a/NB-b) | review/net-ghen-2 | W6 (opening, successor of W5 session_01D3E3NX8Jh4APbxeSvZnnBd) | DONE (LIFE DONE 12:59Z age 30, VALID) | 2026-11-25T12:15Z (Foreman D depth 2)
 rv temper-perception r3 | review/temper-perception-rv | RV3b (opening, successor of RV3 session_01D3E3NaXCgiiLt5mmGzecJp) | DONE (LIFE DONE 12:59Z age 30, VALID) | 2026-11-25T12:15Z (Foreman D depth 2)
 robot-coop-fix-6 r2 FIXER (cause 5 one carry rule) | review/robot-coop-fix-6 | session_01N1tNP4sTtF2bBoDXbsGoD2 (FOREMAN B) | DONE (LIFE DONE 12:59Z age 30, VALID) | 2026-11-25T12:08Z
@@ -1777,7 +1777,7 @@ net-ghen-2 step 2 (W10b, successor of W10) | review/net-ghen-2 | session_01D3E3N
 coop-presence-reload BIG review (opus) | review/coop-presence-reload | session_01N1tNP2N8xkKLq6Len7PMr9 | RUNNING | 2026-11-25 18:05Z (Foreman B child 4)
 KK31 kitHand + iPad text-first | review/kit-hand | session_01V1ZZH4F57paDBkBCH9PESr | RUNNING | 25/11 17:56Z (MAIN 144; successor of KK30)
 net-ghen-2 BIG review (RV5) | review/net-ghen-2 80d217ed | session_01D3E3NXw8WVA9KvuPq36f82 | PASS 9d3b7b7b 20:40Z (archived) | 2026-11-25 18:12Z (Foreman D)
-coop-night-live BIG review (opus, pre-opened) | review/coop-night-live | session_01N1tNP5h1rt4Z5947oiDeqt | RUNNING | 2026-11-25 18:24Z (Foreman B child 4)
+coop-night-live BIG review (opus, pre-opened) | review/coop-night-live | session_01N1tNP5h1rt4Z5947oiDeqt | DONE + ARCHIVED 25/11 21:36Z (lands via union coop-week-wait-rv 8e654ee0) | 2026-11-25 18:24Z (Foreman B child 4)
 coop-week-wait (6ZG9 calendar divergence + #coopfz stuck) | review/coop-week-wait | session_01N1tNP5Jp8P2taMCSxWvUFo | RUNNING | 2026-11-25 18:27Z (Foreman B child 4)
 coop-week-wait BIG review (opus, pre-opened) | review/coop-week-wait | session_01N1tNP4hMB3ucUiaZYuWHBr | DONE PASS 8e654ee0 + ARCHIVED 25/11 21:05Z | 2026-11-25 19:14Z (Foreman B child 4)
 save-unseen-lists BIG review (opus) | review/save-unseen-lists | session_01N1tNP2NAx6v2HeVEvroSiE | RUNNING | 2026-11-25 19:26Z (Foreman B child 4)
