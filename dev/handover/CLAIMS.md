@@ -1799,3 +1799,9 @@ B INVESTIGATOR coop page freeze (guest JS hang at .kfoc, U3c Q4XY; + F s6d famil
 | C3-FARSHOT (Foreman C ROOT 3; briefs/C3-FARSHOT.md) | review/c3-farshot; reports/C3-FARSHOT.md | FOREMAN C ROOT 3 | (opening) | RUNNING | 25/11 22:13Z |
 | C3-STYLE (Foreman C ROOT 3; briefs/C3-STYLE.md) | review/c3-style; reports/C3-STYLE.md | FOREMAN C ROOT 3 | (opening) | RUNNING | 25/11 22:13Z |
 | C3-RANKROOM (Foreman C ROOT 3; briefs/C3-RANKROOM.md) | review/c3-rankroom; reports/C3-RANKROOM.md | FOREMAN C ROOT 3 | (opening) | RUNNING | 25/11 22:13Z |
+| C3-DTV (Foreman C ROOT 3; briefs/C3-DTV.md) | review/c3-dtv; reports/C3-DTV.md | FOREMAN C ROOT 3 | session_01PEhRbtont5yu1mMNV22x2y | RUNNING | 25/11 22:15Z |
+| C3-EVBG (Foreman C ROOT 3; briefs/C3-EVBG.md) | review/c3-evbg; reports/C3-EVBG.md | FOREMAN C ROOT 3 | session_01PEhRbuboLzTgAkeajs8Fh2 | RUNNING | 25/11 22:15Z |
+| C3-FARSHOT (Foreman C ROOT 3; briefs/C3-FARSHOT.md) | review/c3-farshot; reports/C3-FARSHOT.md | FOREMAN C ROOT 3 | session_01PEhRbwKGy6hKyQ8HiDuAyu | RUNNING | 25/11 22:15Z |
+| C3-STYLE (Foreman C ROOT 3; briefs/C3-STYLE.md) | review/c3-style; reports/C3-STYLE.md | FOREMAN C ROOT 3 | session_01PEhRbu2XrQrJ2juJpi5wqP | RUNNING | 25/11 22:15Z |
+| C3-RANKROOM (Foreman C ROOT 3; briefs/C3-RANKROOM.md) | review/c3-rankroom; reports/C3-RANKROOM.md | FOREMAN C ROOT 3 | session_01PEhRbxbXoExVGJWpq6cy5D | RUNNING | 25/11 22:15Z |
+| C3-SEALS (Foreman C ROOT 3; briefs/C3-SEALS.md) | review/c3-seals; reports/C3-SEALS.md | FOREMAN C ROOT 3 | session_01PEhRbuDj3G9XdAmaourSm7 | RUNNING | 25/11 22:15Z |
