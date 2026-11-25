@@ -1611,3 +1611,4 @@ hardlock-choice BIG review | review/hardlock-choice | session_01N1tNP3inDSatM7LP
 | FLIGHT ROBOT B-SOLO (sonnet; briefs/F-flight-robot.md; arm B 4232709a+fe3cb80c local) | dev/handover/robot/flight-B-solo-* | F | session_01UV1SzgnDgNf3WgdTT5AduB | RUNNING | 25/11 02:22Z |
 | FLIGHT ROBOT B-COOP (sonnet; briefs/F-flight-robot.md; arm B 4232709a+fe3cb80c local) | dev/handover/robot/flight-B-coop-* | F | session_01UV1Szjbv9YVvjSXYXixW5Y | RUNNING | 25/11 02:22Z |
 hardlock-choice r2 fix | review/hardlock-choice | session_01N1tNP5Yc6auMDK1Fws7jFB | RUNNING | 25/11 02:27Z (FOREMAN B child7)
+selection-scene r7 (successor of SELSCENE-16; co-op 4 failures root cause) | review/selection-scene | session_01V1ZZH4qYYVaDdyWKcHQCqi | RUNNING | 2026-11-25T03:36Z (MAIN 131)
