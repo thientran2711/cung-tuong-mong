@@ -3561,3 +3561,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 ## MAIN CHÍNH 141 → MAIN CHÍNH 142 HANDOVER (25/11 ~15:40Z): dev/handover/TAKEOVER_MAIN_142.md (ctx ~33 % at roll, line 30 %).
 - (15:42Z) MAIN CHÍNH 142 = session_01V1ZZH2Jb9Uxz1Dpzbjxaqe opened (child of 141, depth 8 LAST). 141 DISABLED its three scheduled tasks; forwards anything late to 142, then stops.
 - (15:45Z) M3 runner stopped at 2 h background limit (life year 1, not finished) → told to use M2 relaunch method (m2/harness/RESUME.md) and continue; forwarded to 142. 141 stops.
+- (15:47Z) LC15 stack: 14' 555eaa4d → 15'' 3a696a17 (temper+kroul+73358b4d) → 16'' bf471f9e → 17 7e8136dd fix-6 → 18 dbae89eb fix-7 p1; QC 555eaa4d PASS except «Ô lưu · Lui» crawl (close-family pre-existing on LIVE). LC15 rolls to LC16 soon (~27 %); told to report to 142.
