@@ -160,18 +160,7 @@ const ART_N=k=>{try{const a=ARTS.find(x=>x.k===k);return a?a.n:k}catch(e){return
 function third(c){try{const L=kyPpl(c.k).filter(w=>w.kind==="rv"&&w.ref!==c.F&&w.ref!==(c.W&&c.W.ref));if(L.length)return L[0].ref;if(c.W&&c.W.own&&c.W.own!==c.F)return c.W.own;const q=liveRivals(true).filter(v=>v!==c.F).sort((a,b)=>oan(b,c.F)-oan(a,c.F));return q[0]||null}catch(e){return null}}
 /* review/net-ghen-2 (law 11): relTo raises a consort's thiện cảm through relAdd (her nết factor) → the shared preview; anyone else gets n straight */
 function jkyRelW(c,n){const r=c&&c.W&&c.W.ref;return r&&r!==S&&rivals.includes(r)?pvQuy(r,n,"thiện cảm"):`thiện cảm +${n}`}
-/* review/net-ghen-2 (law 11): relTo raises a consort's thiện cảm through relAdd (her nết factor) → the shared preview; anyone else gets n straight */
-function jkyRelW(c,n){const r=c&&c.W&&c.W.ref;return r&&r!==S&&rivals.includes(r)?pvQuy(r,n,"thiện cảm"):`thiện cảm +${n}`}
-/* review/net-ghen-2 (law 11): relTo raises a consort's thiện cảm through relAdd (her nết factor) → the shared preview; anyone else gets n straight */
-function jkyRelW(c,n){const r=c&&c.W&&c.W.ref;return r&&r!==S&&rivals.includes(r)?pvQuy(r,n,"thiện cảm"):`thiện cảm +${n}`}
-/* review/net-ghen-2 (law 11): relTo raises a consort's thiện cảm through relAdd (her nết factor) → the shared preview; anyone else gets n straight */
-function jkyRelW(c,n){const r=c&&c.W&&c.W.ref;return r&&r!==S&&rivals.includes(r)?pvQuy(r,n,"thiện cảm"):`thiện cảm +${n}`}
-/* review/net-ghen-2 (law 11): relTo raises a consort's thiện cảm through relAdd (her nết factor) → the shared preview; anyone else gets n straight */
-function jkyRelW(c,n){const r=c&&c.W&&c.W.ref;return r&&r!==S&&rivals.includes(r)?pvQuy(r,n,"thiện cảm"):`thiện cảm +${n}`}
-/* review/net-ghen-2 (law 11): relTo raises a consort's thiện cảm through relAdd (her nết factor) → the shared preview; anyone else gets n straight */
-function jkyRelW(c,n){const r=c&&c.W&&c.W.ref;return r&&r!==S&&rivals.includes(r)?pvQuy(r,n,"thiện cảm"):`thiện cảm +${n}`}
-function relTo(F,W,n){
-if(!W||!n)return;const r=W.ref;try{if(W.kind==="th"){ap(F,{th:n});return}if(W.kind==="emp"){ap(F,{sung:Math.round(n/KB().relSung)});return}
+function relTo(F,W,n){if(!W||!n)return;const r=W.ref;try{if(W.kind==="th"){ap(F,{th:n});return}if(W.kind==="emp"){ap(F,{sung:Math.round(n/KB().relSung)});return}
  if(r&&(r===S||rivals.includes(r))){relAdd(F,r,n);return}
  if(r&&typeof r.af==="number"){if(F===S)r.af=cl(r.af+n,-100,100);return}
  if(r){r.af=r.af&&typeof r.af==="object"?r.af:{};const kk=F===S?"me":(F.id!=null?F.id:"x");r.af[kk]=cl((r.af[kk]||0)+n,-100,100);if(F===S&&W.kind==="sv")r.loyal=cl((r.loyal==null?KB().relLoyal:r.loyal)+Math.round(n/KB().relLoyK),0,100)}}catch(e){kerr("rel",e)}}
