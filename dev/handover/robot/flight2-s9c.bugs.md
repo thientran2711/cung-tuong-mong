@@ -1,0 +1,2 @@
+# flight2-s9c bugs
+Life flight2-s9c (iPad 1180x820, bot=bold, seed 2026112521, LIVE 5e013076, harness 496b6b66): 0 bugs, 0 dead buttons, 0 real stuck (1 harness unstick at step 38, dlg "Than phan kiep nay"). Ending "Nu phu tu" age 20, buoi 278, 1817 taps, exitPick null. Final choice at "Tra the bai" among: marry Theory-heir house / stay single and open a school / cut hair to become a nun; bot took the school option (not on the exit blacklist). Shots not in git (92 MB local).
