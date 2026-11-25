@@ -175,3 +175,9 @@ VERDICT: PASS 1db0b186 — runners may switch (supersedes 247c7132).
 - Own real co-op room on LIVE dbae89eb (Fold host / iPad guest): fresh room X9ZE slice 3 → resume=1 room=X9ZE slice 6: both seats RESUMED into the same room to buổi 6, jsClicks 0, exitPick none, stuck 0, dead 0. One [stuck] row on the guest «no-clock loop: 150 taps without a clock step on .dlg «Lịch tháng»» (existing loop rule, unstuck in the same life; same family as FOREMAN E 16:10Z «150 taps» reports — guest waits on the shared clock; not from this diff).
 - Solo Fold resume=1 (rt-any-rand-fold-920216 from buổi 6 → 14): resumed, 0 stuck / dead, jsClicks 0.
 VERDICT: PASS 7ca6b369 — runner SWITCH OK (supersedes 1db0b186).
+
+## BIG REVIEWER #7 — 25/11 ~18:25Z: HARNESS review/robot-realtap b4b181f8 (FIXER #7: co-op in-game «Lui» + reload resets failed-close memory) — PASS
+- Diff 7ca6b369..b4b181f8 (robot-rt.js): co-op COOP_BAN bans plain «Lui» only on lobby/title (COOP_LOBBY_RE title, #title, or lobby buttons visible); «‹ Lui» always banned; level-3 reload clears the failed-close memory (only the escalation count kept, ≤2 reloads per dialog) — my 1db0b186 nit; env-gated RT_TEST_LICH hook. lint OK 0 findings. Tip b9311905 = progress/handover only.
+- Own LIVE co-op room CHUM (Fold host / iPad guest, slice 6, RT_TEST_LICH=2): «Lịch tháng» opened by real tap on both seats → left by «Lui» after 5 taps each (trace), both seats stayed in the room and played on to buổi 6; jsClicks 0, exitPick none, stuck 0, bugs 0 (7ca6b369 run: guest «150 taps … Lịch tháng»).
+- Solo iPad RT_TEST_LUI=3: A 1 / B 2 / C 7 + bug + reload, all closed; 0 stuck / dead.
+VERDICT: PASS b4b181f8 (= tip b9311905 for code) — runner SWITCH OK (supersedes 7ca6b369).
