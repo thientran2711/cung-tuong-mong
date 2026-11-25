@@ -71,7 +71,9 @@ index ca3839c8..b40432fc 100644
      if (sig === lastSig) sameScr++; else { sameScr = 0; lastSig = sig }
 @@ -154,7 +172,7 @@ async function play(p) {
      /* same screen many steps → light unstick (Escape / ✕) — logged, not a stuck bug */
-@@ -154,7 +170,7 @@ async function play(p) {
+     const sig = sc.layer + '|' + sc.title + '|' + sc.b.map(b => b.t).join('/') + '|' + key;
+     if (sig === lastSig) sameScr++; else { sameScr = 0; lastSig = sig }
+@@ -154,7 +172,7 @@ async function play(p) {
      await p.waitForTimeout(ok ? 220 : 400);
  
      function choose(sc, started) {
