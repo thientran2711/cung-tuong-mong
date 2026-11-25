@@ -61,3 +61,10 @@ Re-review: after 1–3 are fixed (with «KIT OK <sha>» for 1–2), send the new
 - Gates: quickcheck PASS (core gates, time-spill, old save ok, perf new/live render 276/301, tab 570/626, buổi 1794/1551, tasks>200ms 27/25: within run noise, the live median moved 24→25 between runs); coop-e2e 142/142; minigame-fix, minigame-family-scan, duodo-focus-view, duodo-focus-games, kit-mg-intro (755x1000 + 1180x820), kit-focus ALL PASS.
 - Shots looked at (real CDN art), Fold 755x1000 + iPad 1180x820: the Lời hay rules card is centred and readable on both, the title is on one line, «Bỏ qua · kết quả thường» shows under it, no fx specks over the card; Điểm trang mirror shows her face (Fold, slow proxy: veiled at 40 ms, face at 600 ms; iPad face at 40 ms).
 - Nit (kit keeper, not blocking): jfocus `.kfoc-intro` sets z-index twice (5 then 3), so only 3 applies; keep one.
+
+### REVIEW review/minigame-fix-2 0b118c6b (BIG reviewer, 25/11) — FAIL (small, 3 items)
+Diff vs 0506605b: j82 kgReady gets two OPEN kit rows «Chạm» (KG82_TAP per kind / caller tap / first sentence of how) + «Được» (KG82_WIN / mgWord(5) from BAL); callers pass win:"thi"/"hoc"/"toil" (j5, j82 startContest, jentry, jexam, jtoil). Text/UI rows only: no BAL, no logic, no skip path change → SMALL in content. Tests: minigame-family-scan ALL OK 39, mg-noword-kit PASS, minigame-fix ALL OK.
+1. dev/test/mg-intro-2.js now FAILS on all 39 playArt kinds (it asserts `!r.kb`: no open kit rows inside .kgr; 0506605b = ALL OK). Update the assertion: inside .kgr, only the two rows Chạm + Được are open, everything else stays behind «!».
+2. LAW 14 canon overwrite: KIT.md §13.7 (line ~655) still says the rules block = heading + «!» only. Rewrite that line in place: two open rows Chạm/Được (kgTapRow/kgWinRow, KG82_TAP, KG82_WIN, spec tap/win), with the rest behind «!».
+3. LAW 9: kgReady is a kit part (KIT §13.7). Get «KIT OK» from KK23b on this change, or a written waiver from MAIN 130 in this report.
+Then send the clean quickcheck sha; I will confirm PASS quickly (no full re-run needed beyond quickcheck + mg-intro-2 + family scan).
