@@ -3391,3 +3391,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (07:20Z) OWNER ≥20 lives → TS-P2 session_01V1ZZH35iHCDWuAWmcnZJas, TS-P3 session_01V1ZZH3ZStuH5Zz8vbzVK55, TS-P4 session_01V1ZZH23XHUR5bAUAtiqAPv (sonnet, children of 134, report to lead + 135).
 - (06:55Z) via 134: sếp wants ≥20 trungsinh lives → TS-P2 session_01V1ZZH35iHCDWuAWmcnZJas (06–10), TS-P3 session_01V1ZZH3ZStuH5Zz8vbzVK55 (11–15), TS-P4 session_01V1ZZH23XHUR5bAUAtiqAPv (16–20); lead TRUNGSINH-STORY 01–05 + merge (OD ~07:20Z).
 - (06:58Z) M4 bug: modal choice list .kpopts overflows modal frame on Fold (Tân quân lập uy, Đêm thị tẩm; option centres untappable) → KK26 KIT BUG #2 (whole group, after focus-figure).
+- (07:00Z) MAKEUP-NOBOOST LAND READY 8325d13f SMALL (good looks boost 1) → MAIN LOOKED final-fold-ipad.jpg OK → GO LC13 FIRST.
