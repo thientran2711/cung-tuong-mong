@@ -1,0 +1,159 @@
+[
+ {
+  "job": {
+   "id": "R8-cautious-2",
+   "origin": "bd",
+   "road": "bd_hen",
+   "bot": "cautious",
+   "seed": 3596068797,
+   "dev": "ipad",
+   "url": "https://thientran2711.github.io/cung-tuong-mong/"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "f39770cd",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 2,
+   "cap": null,
+   "stuck": 0,
+   "unstick": [
+    {
+     "at": 968,
+     "lvl": 1,
+     "layer": ".dlg",
+     "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+    },
+    {
+     "at": 979,
+     "lvl": 1,
+     "layer": ".dlg",
+     "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+    },
+    {
+     "at": 990,
+     "lvl": 1,
+     "layer": ".dlg",
+     "title": "Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1"
+    },
+    "…55 total"
+   ],
+   "slice": null,
+   "areaTaps": 155,
+   "dlgClose": 38,
+   "infoTaps": 53,
+   "scrolls": 1395,
+   "taps0": 0,
+   "resumed": [
+    {
+     "at": "2026-11-25T09:53:22.295Z",
+     "buoi": 65,
+     "from": "2026-11-25T09:51:41.990Z"
+    }
+   ],
+   "taps": 97
+  },
+  "life": {
+   "id": "Hồng nhan bạc mệnh",
+   "type": "death",
+   "fate": "Lao phổi nguy kịch, không qua khỏi",
+   "death": true,
+   "age": 19,
+   "year": 1,
+   "rank": 1,
+   "text": "Lao phổi nguy kịch, không qua khỏi."
+  },
+  "exitPick": null,
+  "bugs": [
+   {
+    "k": "dead|close button has no effect: .dlg «Lịch tháng» «Lui»",
+    "type": "dead",
+    "msg": "close button has no effect: .dlg «Lịch tháng» «Lui»",
+    "n": 1,
+    "at": 590,
+    "shot": "/home/user/wt/outE7/shots-R8-cautious-2/noeffect-1795599305645.png"
+   },
+   {
+    "k": "dead|close button has no effect: .dlg «Tin báo» «Lui»",
+    "type": "dead",
+    "msg": "close button has no effect: .dlg «Tin báo» «Lui»",
+    "n": 1,
+    "at": 758,
+    "shot": "/home/user/wt/outE7/shots-R8-cautious-2/noeffect-1795599473969.png"
+   }
+  ],
+  "dead": [
+   {
+    "k": "NO EFFECT",
+    "screen": ".dlg «Lịch tháng»",
+    "label": "Lui",
+    "cover": "tapped 3× for real, dialog stays",
+    "shot": "/home/user/wt/outE7/shots-R8-cautious-2/noeffect-1795599305645.png",
+    "at": 590,
+    "S": {
+     "dead": false,
+     "y": 1,
+     "t": 3,
+     "w": 2,
+     "b": 3,
+     "age": 18,
+     "rank": 0,
+     "name": "Khổng Lăng Ba"
+    }
+   },
+   {
+    "k": "NO EFFECT",
+    "screen": ".dlg «Tin báo»",
+    "label": "Lui",
+    "cover": "tapped 3× for real, dialog stays",
+    "shot": "/home/user/wt/outE7/shots-R8-cautious-2/noeffect-1795599473969.png",
+    "at": 758,
+    "S": {
+     "dead": false,
+     "y": 1,
+     "t": 4,
+     "w": 0,
+     "b": 3,
+     "age": 18,
+     "rank": 0,
+     "name": "Khổng Lăng Ba"
+    }
+   }
+  ],
+  "saves": [
+   {
+    "buoi": 50,
+    "year": 1,
+    "chars": 487368,
+    "key": "hclh-save-v2-1"
+   },
+   {
+    "buoi": 65,
+    "year": null,
+    "chars": 487368,
+    "key": "hclh-save-v2-1"
+   }
+  ],
+  "buoi": 73,
+  "steps": 3828,
+  "status": [],
+  "_started": true,
+  "rss": [
+   {
+    "buoi": 70,
+    "y": 1,
+    "totalMB": 1950,
+    "rendererMB": 1241
+   },
+   {
+    "buoi": 73,
+    "y": 1,
+    "totalMB": 1699,
+    "rendererMB": 986
+   }
+  ],
+  "t": {
+   "total": 313235
+  }
+ }
+]
