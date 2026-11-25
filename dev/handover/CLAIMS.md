@@ -1672,10 +1672,10 @@ selection-scene BIG review | review/selection-scene 9ee4f5bc | session_01V1ZZH1u
 E co-op RERUN E-C1 (real taps; rounds U14+U15+U16 co-op rows) | dev/handover/robot/rerun-E-C1-20261125.* | FOREMAN E | session_01DgYSWmMzKCCWuhWVkizGrK | RUNNING room U14-s1 (code U2HN) harness c826eca4 LIVE github.io | 25/11 07:10Z
 sangbuoi-held-fix (jdayq dqWait silent exit, whole family) | review/sangbuoi-held-fix | session_01V1ZZH3zq7i35Qgmz3XuUHS (MAIN 135) | RUNNING | 2026-11-25T07:01Z
 | TRUNGSINH-STORY (owner 25/11: learn story + endings of trungsinhgame) | dev/research/TRUNGSINH_STORY.md (review/trungsinh-story) | MAIN 134→135 | session_01V1ZZGzGFi21WiTptDmEZ45 | RUNNING | 25/11 07:10Z |
-| CO-NGU-TITLES (owner 25/11 ~07:40Z: literary cổ trang names/titles whole game) | review/co-ngu-titles | MAIN 134→135 | session_01V1ZZH4mHp8bC9LZg8ZFKx6 | LAND READY dbd77388 (P1 3424724f) | 25/11 07:09Z |
+| CO-NGU-TITLES (owner 25/11 ~07:40Z: literary cổ trang names/titles whole game) | review/co-ngu-titles | MAIN 134→135 | session_01V1ZZH4mHp8bC9LZg8ZFKx6 | LAND READY dbd77388 (P1 3424724f) + KIT READY co-ngu-seals 4406fe66 | 25/11 07:09Z |
 | F M-FIX-1 (robot findings M1–M5: skip family law, Sang ngày mới cue, Nhận thân phận 2 taps, BẠI on Rất vững, thị tẩm fold, Bạc drain; opus) | review/m-fix-1; briefs/F-mfix-2511.md; reports/m-fix-1.md | FOREMAN F #7 | session_01UV1SzhdHwgvZYvZKWSJpki | RUNNING | 25/11 07:40Z |
-| TEMPER-OUTBURST (temper-design (f) #1+#2+#3+#7) | review/temper-outburst | FOREMAN D ROOT | session_01D3E3NZEbGABqJK79fgHJ5q | RUNNING | 2026-11-25T07:23Z |
-| TEMPER-PERCEPTION (temper-design (f) #4 + #5 Option A + #6) | review/temper-perception | FOREMAN D ROOT | session_01D3E3NXiL5b2gpJr54JfiQN | RUNNING | 2026-11-25T07:23Z |
+| TEMPER-OUTBURST (temper-design (f) #1+#2+#3+#7) | review/temper-outburst | FOREMAN D ROOT | session_01D3E3NZEbGABqJK79fgHJ5q | READY (review; G4 robot arms blocked by runb TIMEOUT on main) | 2026-11-25T07:23Z |
+| TEMPER-PERCEPTION (temper-design (f) #4 + #5 Option A + #6) | review/temper-perception | FOREMAN D ROOT | session_01D3E3NXHBzCXzeBgy8pfZyB (T2b; T2 NXiL5b2g rolled) | RUNNING | 2026-11-25T07:23Z |
 | WORKLIST #9 + #26 (state + build) | review/net-thresholds, review/talk-others-people | FOREMAN D ROOT | session_01D3E3NYFRLosstH2Jpw3nQP (W2; W NbRg56gb rolled) | RUNNING | 2026-11-25T07:23Z |
 | ROBOT AUDIT D + reruns of D's invalid lives | reports/robot-audit-D.md | FOREMAN D ROOT | session_01D3E3NZM1yXd1hK7K488mpj | RUNNING | 2026-11-25T07:23Z |
 | RERUN E solo cnv_ban (19) | robot/rerun-cnv-cnv_ban | FOREMAN D ROOT | session_01D3E3NYS8WzxRCCsyM2wEAk | RUNNING | 2026-11-25T07:23Z |
@@ -1691,3 +1691,8 @@ sangbuoi-held-fix (jdayq dqWait silent exit, whole family) | review/sangbuoi-hel
 | D RERUN nc_gian (13 invalid lives: lazy-1 x2, random-1, greedy-1/2, cautious-1, lover-1/2, scholar-1, speed-1/2, lazy-2; real taps robot-rt.js) | dev/handover/robot/rerun-nc-nc_gian/ | FOREMAN D ROOT / SEAT A | session_01D3E3NZM1yXd1hK7K488mpj | RUNNING | 2026-11-25T07:28Z |
 | A4 RERUN LIFE IDS nc_vuong (10 lives, real-tap harness, one at a time): nc-nc_vuong-rebel-1 · skilled-1 (3126901994) · skilled-2 (2618117995) · random-1 (4202423543) · random-2 (2045016998) · cautious-2 (2794858932) · lover-1 (2738757676) · lazy-1 (668752162) · speed-1 (2920246405) · speed-2 (3907738672) | dev/handover/robot/rerun-nc_vuong/ ; reports/rerun-nc_vuong.md | FOREMAN D ROOT | session_01D3E3NXAacf9VAWMenB1PV9 | RUNNING | 2026-11-25T07:35Z |
 | NEWS-UNK-FIX («???» in prose, whole family) | review/news-unk-fix | MAIN 136 | session_01V1ZZH3S1Qc4vphvFKAkMjL | RUNNING | 2026-11-25T07:38Z |
+| REVIEW temper-outburst 394e6ea6 (BIG) | reports/review-temper-outburst.md | FOREMAN D ROOT | session_01D3E3Nb7G3pi5N3uqUqqmAn | RUNNING | 2026-11-25T07:56Z |
+| TEMPER G4 robot arms on realtap + review fixes | review/temper-outburst | FOREMAN D ROOT | session_01D3E3NaH1eX32YRAhiQCYnb (T1b) | RUNNING | 2026-11-25T07:56Z |
+BIG rv sideline-dlg r4 (opus; land -3-r1 as one item) | review/sideline-dlg-3-r* | B | session_01N1tNP6Wg2mFj3et8dLjA7c | RUNNING | 25/11 08:00Z |
+| F BIG REVIEWER #2 (successor of session_01UV1SziXSk67Zy3DMXHsCrJ; queue test-path-fix-3 101dc29b → crawl-fix-1-r2 → m-fix-1 → harness) | review/*-r | FOREMAN F #7 | session_01UV1SzhBrzCVc4CVbM2dCsJ | RUNNING | 25/11 08:01Z |
+| TRUNGSINH-STORY lead 2 | review/trungsinh-story | MAIN 136 | session_01V1ZZH2S38RtoBxn9Q5brH4 | RUNNING | 2026-11-25T08:04Z |

@@ -1,0 +1,5058 @@
+{
+ "run": {
+  "tag": "flight2-coop1e",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/",
+  "harness": "realtap",
+  "args": {
+   "host": "fold",
+   "guest": "ipad",
+   "kiep": "1",
+   "seed": "7001",
+   "tag": "flight2-coop1e"
+  },
+  "at": "2026-11-25T07:05:57.738Z"
+ },
+ "pairs": [
+  {
+   "job": {
+    "id": "coop-rt-flight2-coop1e",
+    "kiep": 1,
+    "seed": 7001
+   },
+   "lives": [
+    {
+     "seat": "guest",
+     "dev": "ipad",
+     "kiep": 1,
+     "extra": false,
+     "room": "KEH9",
+     "life": {
+      "id": "HARNESS",
+      "type": "harness"
+     },
+     "harness": {
+      "kind": "realtap",
+      "sha": "63f87747",
+      "realtap": true,
+      "jsClicks": 0,
+      "deadButtons": 0,
+      "cap": null,
+      "stuck": 0,
+      "unstick": [
+       {
+        "at": 662,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 673,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 683,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 694,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 705,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 906,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 914,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 921,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 928,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 936,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 943,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 950,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 957,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 965,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 972,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 979,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 987,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1283,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1293,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1304,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1315,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1325,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1336,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1347,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1357,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1368,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1494,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1517,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1528,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1538,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1549,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1560,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1570,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1581,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1592,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1603,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1613,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1624,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1634,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1645,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1656,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1666,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1677,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1688,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1958,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1968,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1979,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       }
+      ],
+      "slice": null,
+      "areaTaps": 139,
+      "typed": 1
+     },
+     "exitPick": null,
+     "bugs": [
+      {
+       "type": "harness",
+       "msg": "runner error: page.waitForTimeout: Target page, context or browser has been closed",
+       "n": 1
+      }
+     ],
+     "dead": [
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Ô lưu",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590504385.png",
+       "dev": "ipad",
+       "at": 147,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Xem bản thân",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590510828.png",
+       "dev": "ipad",
+       "at": 153,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Sắc45Tài51Tâm cơ25Đức29Danh33Sủng14",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590517280.png",
+       "dev": "ipad",
+       "at": 159,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Bạc210Sức100/100",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590523705.png",
+       "dev": "ipad",
+       "at": 166,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Buổi sáng, còn 4 khắc",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590530136.png",
+       "dev": "ipad",
+       "at": 172,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Chưa điểm trang",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590536583.png",
+       "dev": "ipad",
+       "at": 179,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "trời quang",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590542988.png",
+       "dev": "ipad",
+       "at": 185,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Quẻ Hạ (Sức khỏe)",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590549367.png",
+       "dev": "ipad",
+       "at": 192,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tâm trạngBình thản+21",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590555764.png",
+       "dev": "ipad",
+       "at": 198,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Về phòng",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590562131.png",
+       "dev": "ipad",
+       "at": 204,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tin báo: 3 tin mới",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590571516.png",
+       "dev": "ipad",
+       "at": 214,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Cung nữ thân tín tam đẳngỶ Thúy",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590577880.png",
+       "dev": "ipad",
+       "at": 220,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Lịch tháng",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590584283.png",
+       "dev": "ipad",
+       "at": 226,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Thư từ",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590590665.png",
+       "dev": "ipad",
+       "at": 233,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Mục tiêu chương (có mới)",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590597055.png",
+       "dev": "ipad",
+       "at": 239,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "2Cung nhân",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590603478.png",
+       "dev": "ipad",
+       "at": 246,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "3Chí tôn",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590609878.png",
+       "dev": "ipad",
+       "at": 252,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tai mắt0",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590616279.png",
+       "dev": "ipad",
+       "at": 258,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Có thaiRất thấp",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590622679.png",
+       "dev": "ipad",
+       "at": 265,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Lật thẻThấp",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590629112.png",
+       "dev": "ipad",
+       "at": 271,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Ân tình (đêm)0",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590635511.png",
+       "dev": "ipad",
+       "at": 278,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Số lần ân thưởng0",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590641911.png",
+       "dev": "ipad",
+       "at": 284,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Bổng lộcsau 2 tuần",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590648303.png",
+       "dev": "ipad",
+       "at": 291,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Nguy hiểm chung: 0",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590653960.png",
+       "dev": "ipad",
+       "at": 296,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Xét phẩm: thiếu 3",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590660346.png",
+       "dev": "ipad",
+       "at": 303,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Chọn chính mình",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590666727.png",
+       "dev": "ipad",
+       "at": 309,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Ân oánPhe pháiThường tạiTa▾⇄Hoàng thượng▾Quan hệ g",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590673161.png",
+       "dev": "ipad",
+       "at": 315,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Ân oán",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590679561.png",
+       "dev": "ipad",
+       "at": 322,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Phe phái",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590685976.png",
+       "dev": "ipad",
+       "at": 328,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Xem quan hệ của Ta",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590692375.png",
+       "dev": "ipad",
+       "at": 335,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Đổi chỗ hai người",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590698759.png",
+       "dev": "ipad",
+       "at": 341,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "với Hoàng thượng",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590705179.png",
+       "dev": "ipad",
+       "at": 347,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Hành sự",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590711594.png",
+       "dev": "ipad",
+       "at": 354,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Dư đồ",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590717979.png",
+       "dev": "ipad",
+       "at": 360,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Hậu cung",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590724440.png",
+       "dev": "ipad",
+       "at": 367,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Giao tình",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590730898.png",
+       "dev": "ipad",
+       "at": 373,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Hoàng tự",
+       "cover": "button.kbtn.kmend in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590737354.png",
+       "dev": "ipad",
+       "at": 380,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tư trang",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590743740.png",
+       "dev": "ipad",
+       "at": 386,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tài nghệ",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590750157.png",
+       "dev": "ipad",
+       "at": 392,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Mệnh truyện",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590756505.png",
+       "dev": "ipad",
+       "at": 399,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Sắc45Tài51Tâm cơ28Đức24Danh36Sủng24",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590931980.png",
+       "dev": "ipad",
+       "at": 574,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Bạc170Sức100/100",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590938418.png",
+       "dev": "ipad",
+       "at": 581,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "hoa đào bay",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590944819.png",
+       "dev": "ipad",
+       "at": 587,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Quẻ Thượng (Con cái)",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590951270.png",
+       "dev": "ipad",
+       "at": 594,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tâm trạngVui vẻ+38",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590957746.png",
+       "dev": "ipad",
+       "at": 600,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tin báo: 5 tin mới",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590967597.png",
+       "dev": "ipad",
+       "at": 610,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Thể Hòa điệnChính điện · vắng ngườiNgười ở: Phi Di",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590977102.png",
+       "dev": "ipad",
+       "at": 619,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Dưỡng Xuân hiênĐông phối điện · 1 bóng ngườiNgười ",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590983497.png",
+       "dev": "ipad",
+       "at": 626,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Về Dư đồ",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590992916.png",
+       "dev": "ipad",
+       "at": 635,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Lật thẻKhông có",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590999334.png",
+       "dev": "ipad",
+       "at": 642,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Bổng lộcsau 1 tuần",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591005720.png",
+       "dev": "ipad",
+       "at": 648,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Sắc45Tài51Tâm cơ28Đức21Danh37Sủng24",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591160561.png",
+       "dev": "ipad",
+       "at": 803,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Bạc57Sức100/100",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591166975.png",
+       "dev": "ipad",
+       "at": 809,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "ve kêu râm ran",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591173391.png",
+       "dev": "ipad",
+       "at": 816,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Quẻ Hạ hạ (Hung)",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591179804.png",
+       "dev": "ipad",
+       "at": 822,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tâm trạngBình thản+1",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591186241.png",
+       "dev": "ipad",
+       "at": 828,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tin báo: 7 tin mới",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591192650.png",
+       "dev": "ipad",
+       "at": 835,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Người được sai đi (có mới)",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591199073.png",
+       "dev": "ipad",
+       "at": 841,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Bổng lộcsau 3 tuần",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591205473.png",
+       "dev": "ipad",
+       "at": 848,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Túi đồThú cưngViệcTất cả 22Trang sức 1Y phục 1Vải ",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591211842.png",
+       "dev": "ipad",
+       "at": 854,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Túi đồ",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591218255.png",
+       "dev": "ipad",
+       "at": 860,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Thú cưng",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591224644.png",
+       "dev": "ipad",
+       "at": 867,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Việc",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591231057.png",
+       "dev": "ipad",
+       "at": 873,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Buôn bánBuôn bánNhờ thái giám mua đồⓘĐượcxem hàng·",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591237450.png",
+       "dev": "ipad",
+       "at": 880,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Đi lạiĐi lạiSoát đồHiểmTốn2 khắcThànhtìm ra đồ bị ",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591243838.png",
+       "dev": "ipad",
+       "at": 886,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591250254.png",
+       "dev": "ipad",
+       "at": 892,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Sắc45Tài51Tâm cơ28Đức20Danh36Sủng19",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591435220.png",
+       "dev": "ipad",
+       "at": 1077,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "nắng sớm oi ả",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591441675.png",
+       "dev": "ipad",
+       "at": 1084,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Quẻ Hạ (Mưu kế)",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591448097.png",
+       "dev": "ipad",
+       "at": 1090,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tâm trạngBình thản-2",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591454531.png",
+       "dev": "ipad",
+       "at": 1097,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tin báo: 9 tin mới",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591461018.png",
+       "dev": "ipad",
+       "at": 1103,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Lật thẻRất thấp",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591467500.png",
+       "dev": "ipad",
+       "at": 1110,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "?",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591473971.png",
+       "dev": "ipad",
+       "at": 1116,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Sắc45Tài51Tâm cơ28Đức16Danh33Sủng14",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591588073.png",
+       "dev": "ipad",
+       "at": 1230,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Bạc6Sức100/100",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591594489.png",
+       "dev": "ipad",
+       "at": 1237,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "trời trong mát",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591600908.png",
+       "dev": "ipad",
+       "at": 1243,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Quẻ Thượng thượng (Giao thiệp)",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591607307.png",
+       "dev": "ipad",
+       "at": 1250,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tâm trạngBình thản+2",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591613740.png",
+       "dev": "ipad",
+       "at": 1256,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tin báo: 13 tin mới",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591620157.png",
+       "dev": "ipad",
+       "at": 1262,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Túi đồThú cưngViệcTất cả 24Trang sức 1Y phục 1Vải ",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591626559.png",
+       "dev": "ipad",
+       "at": 1269,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Sắc45Tài51Tâm cơ28Đức12Danh34Sủng9",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591813358.png",
+       "dev": "ipad",
+       "at": 1456,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Bạc82Sức100/100",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591819846.png",
+       "dev": "ipad",
+       "at": 1462,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Quẻ Thượng (Giao thiệp)",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591826349.png",
+       "dev": "ipad",
+       "at": 1469,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tin báo: 14 tin mới",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591832782.png",
+       "dev": "ipad",
+       "at": 1475,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Túi đồThú cưngViệcTất cả 32Trang sức 1Y phục 1Vải ",
+       "cover": "div.kpnote in #coopfz",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591839228.png",
+       "dev": "ipad",
+       "at": 1481,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Sắc45Tài51Tâm cơ28Đức8Danh34Sủng4",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795592270233.png",
+       "dev": "ipad",
+       "at": 1912,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Bạc0Sức100/100",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795592276615.png",
+       "dev": "ipad",
+       "at": 1919,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tâm trạngBình thản0",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795592282997.png",
+       "dev": "ipad",
+       "at": 1925,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tin báo: 1 tin mới",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795592289396.png",
+       "dev": "ipad",
+       "at": 1932,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Túi đồThú cưngViệcTất cả 35Trang sức 2Y phục 1Vải ",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795592295807.png",
+       "dev": "ipad",
+       "at": 1938,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Chăm conChăm conNhờ thái giám tìm thú nuôiⓘTốn1 kh",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795592302204.png",
+       "dev": "ipad",
+       "at": 1944,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 1,
+        "name": "Phương Tĩnh Thù"
+       }
+      }
+     ],
+     "buoi": 29,
+     "saves": []
+    },
+    {
+     "seat": "host",
+     "dev": "fold",
+     "kiep": 1,
+     "extra": false,
+     "room": "KEH9",
+     "life": {
+      "id": "HARNESS",
+      "type": "harness"
+     },
+     "harness": {
+      "kind": "realtap",
+      "sha": "63f87747",
+      "realtap": true,
+      "jsClicks": 0,
+      "deadButtons": 0,
+      "cap": null,
+      "stuck": 1,
+      "unstick": [
+       {
+        "at": 377,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 387,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 398,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 918,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 936,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 947,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 958,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 968,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 979,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 990,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1538,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1546,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1556,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1565,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1573,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1581,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1589,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1611,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1619,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1626,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1633,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1643,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1651,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1658,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1665,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1673,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1680,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 1688,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": ""
+       },
+       {
+        "at": 2103,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2113,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2124,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2135,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2145,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2156,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2167,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2177,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2188,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2198,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2209,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2220,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2230,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2241,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2252,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2262,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2273,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2284,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2305,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2316,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2326,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2337,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2348,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2358,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2369,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2380,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2390,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2401,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2412,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2422,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2433,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2444,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2454,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2465,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2475,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2486,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2497,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2507,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2518,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2529,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2546,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2557,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2567,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2578,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2589,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2599,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2610,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2621,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2631,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2642,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2653,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2663,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2674,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2684,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2695,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2706,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2717,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2727,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2738,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2748,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2759,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2770,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2780,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2791,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2802,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2812,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2823,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2834,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2844,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2855,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2865,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2876,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2887,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2897,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2904,
+        "lvl": 3,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2936,
+        "lvl": 1,
+        "layer": "#modal",
+        "title": "Mời hảo hữu"
+       },
+       {
+        "at": 2948,
+        "lvl": 1,
+        "layer": "#modal",
+        "title": "Cung Tường Mộng"
+       },
+       {
+        "at": 2959,
+        "lvl": 1,
+        "layer": "#modal",
+        "title": "Mời hảo hữu"
+       }
+      ],
+      "slice": null,
+      "areaTaps": 2436
+     },
+     "exitPick": null,
+     "bugs": [
+      {
+       "k": "dead|close button has no effect: .dlg «Tâm trạng · Ta» «Lui»",
+       "type": "dead",
+       "msg": "close button has no effect: .dlg «Tâm trạng · Ta» «Lui»",
+       "n": 1,
+       "at": 142,
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/noeffect-1795590499718.png"
+      },
+      {
+       "k": "stuck|no progress 15 min on #coopfz «»",
+       "type": "stuck",
+       "msg": "no progress 15 min on #coopfz «»",
+       "n": 1,
+       "at": 2904,
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/stuck-1.png",
+       "save": null,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 1,
+        "b": 1,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       },
+       "buttons": [
+        "Chép đường dẫn",
+        "Về màn đầu"
+       ]
+      },
+      {
+       "type": "harness",
+       "msg": "runner error: page.waitForTimeout: Target page, context or browser has been closed",
+       "n": 1
+      }
+     ],
+     "dead": [
+      {
+       "k": "NO EFFECT",
+       "screen": ".dlg «Tâm trạng · Ta»",
+       "label": "Lui",
+       "cover": "tapped 3× for real, dialog stays",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/noeffect-1795590499718.png",
+       "at": 142,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 0,
+        "b": 3,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Ô lưu",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590520750.png",
+       "dev": "fold",
+       "at": 163,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Xem bản thân",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590527134.png",
+       "dev": "fold",
+       "at": 169,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Sắc48Tài44Tâm cơ28Đức30Danh8Sủng4",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590533534.png",
+       "dev": "fold",
+       "at": 176,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Bạc355Sức73/100",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590539953.png",
+       "dev": "fold",
+       "at": 182,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Buổi sáng, còn 4 khắc",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590546383.png",
+       "dev": "fold",
+       "at": 189,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Chưa điểm trang",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590552783.png",
+       "dev": "fold",
+       "at": 195,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "trời quang",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590559151.png",
+       "dev": "fold",
+       "at": 201,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Quẻ Thượng (Con cái)",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590565532.png",
+       "dev": "fold",
+       "at": 208,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tâm trạngBình thản+13",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590571898.png",
+       "dev": "fold",
+       "at": 214,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Về phòng",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590578300.png",
+       "dev": "fold",
+       "at": 221,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tin báo: 14 tin mới",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590584683.png",
+       "dev": "fold",
+       "at": 227,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Người được sai đi (có mới)",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590597332.png",
+       "dev": "fold",
+       "at": 240,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Thỉnh tranh nhân vật (có mới)",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590603718.png",
+       "dev": "fold",
+       "at": 246,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tứ đức 9/9Cầm kỳ thi họa 8/12Vũ · Y · Nữ công 8/12",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590610096.png",
+       "dev": "fold",
+       "at": 252,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tứ đức 9/9",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590616480.png",
+       "dev": "fold",
+       "at": 259,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Cầm kỳ thi họa 8/12",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590622865.png",
+       "dev": "fold",
+       "at": 265,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Vũ · Y · Nữ công 8/12",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590629250.png",
+       "dev": "fold",
+       "at": 271,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tác phẩm",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590635629.png",
+       "dev": "fold",
+       "at": 278,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "ⓘ luật Đức",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590642017.png",
+       "dev": "fold",
+       "at": 284,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Bậc 0 trên 5",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590648420.png",
+       "dev": "fold",
+       "at": 291,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Giao thiệpGiao thiệpTự họcⓘTốn2 khắc·Sức -15Đượcti",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590654796.png",
+       "dev": "fold",
+       "at": 297,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Học tập · Tài nghệHọc tập · Tài nghệCác lối, sách ",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590667461.png",
+       "dev": "fold",
+       "at": 310,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Hành sự",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590673828.png",
+       "dev": "fold",
+       "at": 316,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Dư đồ",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590680193.png",
+       "dev": "fold",
+       "at": 322,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Hậu cung",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590686544.png",
+       "dev": "fold",
+       "at": 329,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Giao tình",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590692895.png",
+       "dev": "fold",
+       "at": 335,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Hoàng tự",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590699277.png",
+       "dev": "fold",
+       "at": 341,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tư trang",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590705659.png",
+       "dev": "fold",
+       "at": 348,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tài nghệ",
+       "cover": "button.kbtn.kmend in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590712026.png",
+       "dev": "fold",
+       "at": 354,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Mệnh truyện",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590718409.png",
+       "dev": "fold",
+       "at": 361,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Sắc48Tài44Tâm cơ28Đức25Danh10Sủng3",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590931454.png",
+       "dev": "fold",
+       "at": 574,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Bạc350Sức91/100",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590938610.png",
+       "dev": "fold",
+       "at": 581,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "hoa đào bay",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590945687.png",
+       "dev": "fold",
+       "at": 588,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Quẻ Hạ (Danh)",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590952989.png",
+       "dev": "fold",
+       "at": 595,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tâm trạngBình thản-6",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590960231.png",
+       "dev": "fold",
+       "at": 603,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tin báo: 18 tin mới",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590967362.png",
+       "dev": "fold",
+       "at": 610,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Chí tônPhi tầnNam nhânCung nhân‹Hoàng thượngThái h",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590974685.png",
+       "dev": "fold",
+       "at": 617,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Chí tôn",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590981806.png",
+       "dev": "fold",
+       "at": 624,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Phi tần",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590989129.png",
+       "dev": "fold",
+       "at": 632,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Nam nhân",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795590996324.png",
+       "dev": "fold",
+       "at": 639,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Cung nhân",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591003660.png",
+       "dev": "fold",
+       "at": 646,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Hoàng thượng",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591011134.png",
+       "dev": "fold",
+       "at": 654,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Thái hậu",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591018248.png",
+       "dev": "fold",
+       "at": 661,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "?",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591025372.png",
+       "dev": "fold",
+       "at": 668,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Xem thêm",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591032582.png",
+       "dev": "fold",
+       "at": 675,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Gặp ngài ban ngày 2/5",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591043173.png",
+       "dev": "fold",
+       "at": 686,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Việc hôm nay 1/2",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591050357.png",
+       "dev": "fold",
+       "at": 693,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Điều ngài thích",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591057604.png",
+       "dev": "fold",
+       "at": 700,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Giao thiệpGiao thiệpXin yết kiến ở Cần Chính điệnH",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591064629.png",
+       "dev": "fold",
+       "at": 707,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Sắc48Tài44Tâm cơ28Đức21Danh22Sủng0",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591162793.png",
+       "dev": "fold",
+       "at": 805,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Bạc327Sức100/100",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591169156.png",
+       "dev": "fold",
+       "at": 811,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "ve kêu râm ran",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591175528.png",
+       "dev": "fold",
+       "at": 818,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Quẻ Thượng (Tài nghệ)",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591181890.png",
+       "dev": "fold",
+       "at": 824,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tâm trạngVui vẻ+25",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591188262.png",
+       "dev": "fold",
+       "at": 830,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tin báo: 8 tin mới",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591194642.png",
+       "dev": "fold",
+       "at": 837,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tất cả 23/29Học tập · Tài nghệ 4/4Giao thiệp 3/3Ng",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591201025.png",
+       "dev": "fold",
+       "at": 843,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tất cả 23/29",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591207391.png",
+       "dev": "fold",
+       "at": 850,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Học tập · Tài nghệ 4/4",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591213772.png",
+       "dev": "fold",
+       "at": 856,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Giao thiệp 3/3",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591220140.png",
+       "dev": "fold",
+       "at": 862,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Nghỉ ngơi 3/4",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591226540.png",
+       "dev": "fold",
+       "at": 869,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Lễ nghi 3/3",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591232924.png",
+       "dev": "fold",
+       "at": 875,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Mưu kế 5/5",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591239340.png",
+       "dev": "fold",
+       "at": 882,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Y dược 2/2",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591245743.png",
+       "dev": "fold",
+       "at": 888,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Học tậpHọc tậpĐàn hát tự thưởngRất vữngLòng đang v",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591252121.png",
+       "dev": "fold",
+       "at": 894,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Giao thiệpGiao thiệpĐiểm trangNgồi trước gương: ch",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591258524.png",
+       "dev": "fold",
+       "at": 901,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Sắc48Tài44Tâm cơ28Đức21Danh23Sủng0",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591435902.png",
+       "dev": "fold",
+       "at": 1078,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Bạc277Sức100/100",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591443281.png",
+       "dev": "fold",
+       "at": 1086,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "nắng sớm oi ả",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591450460.png",
+       "dev": "fold",
+       "at": 1093,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tâm trạngBình thản-2",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591457810.png",
+       "dev": "fold",
+       "at": 1100,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tin báo: 4 tin mới",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591465279.png",
+       "dev": "fold",
+       "at": 1108,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Giao thiệpGiao thiệpXin yết kiến ở Cần Chính điệnM",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591472501.png",
+       "dev": "fold",
+       "at": 1115,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Sắc48Tài44Tâm cơ28Đức21Danh14Sủng1",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591584507.png",
+       "dev": "fold",
+       "at": 1227,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Bạc272Sức100/100",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591590872.png",
+       "dev": "fold",
+       "at": 1233,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Cấm túc3 tháng",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591597495.png",
+       "dev": "fold",
+       "at": 1240,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "trời trong mát",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591603890.png",
+       "dev": "fold",
+       "at": 1246,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Quẻ Hạ (Giao thiệp)",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591610324.png",
+       "dev": "fold",
+       "at": 1253,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tin báo: 9 tin mới",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591619756.png",
+       "dev": "fold",
+       "at": 1262,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Cung nữ thân tín tam đẳngPhục Linh",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591629168.png",
+       "dev": "fold",
+       "at": 1271,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Chọn chính mình",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591635642.png",
+       "dev": "fold",
+       "at": 1278,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "1Cung nhân",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591642094.png",
+       "dev": "fold",
+       "at": 1284,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "3Chí tôn",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591648520.png",
+       "dev": "fold",
+       "at": 1291,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tai mắt0",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591654904.png",
+       "dev": "fold",
+       "at": 1297,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Có thaiRất thấp",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591661319.png",
+       "dev": "fold",
+       "at": 1304,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Lật thẻKhông có",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591667704.png",
+       "dev": "fold",
+       "at": 1310,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Ân tình (đêm)0",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591674088.png",
+       "dev": "fold",
+       "at": 1316,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Số lần ân thưởng0",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591680451.png",
+       "dev": "fold",
+       "at": 1323,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Bổng lộcsau 1 tuần",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591686839.png",
+       "dev": "fold",
+       "at": 1329,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Nguy hiểm chung: 8",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591693253.png",
+       "dev": "fold",
+       "at": 1335,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Xét phẩm: thiếu 4",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591699607.png",
+       "dev": "fold",
+       "at": 1342,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Về Dư đồ",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591705997.png",
+       "dev": "fold",
+       "at": 1348,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Lịch tháng",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591712403.png",
+       "dev": "fold",
+       "at": 1355,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Thư từ",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591718769.png",
+       "dev": "fold",
+       "at": 1361,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Mục tiêu chương",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591725153.png",
+       "dev": "fold",
+       "at": 1367,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 1,
+        "w": 2,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Sắc48Tài44Tâm cơ28Đức21Danh15Sủng0",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591813335.png",
+       "dev": "fold",
+       "at": 1456,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Bạc312Sức100/100",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591819748.png",
+       "dev": "fold",
+       "at": 1462,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Cấm túc2 tháng",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591826151.png",
+       "dev": "fold",
+       "at": 1468,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Quẻ Thượng thượng (Mưu kế)",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591832532.png",
+       "dev": "fold",
+       "at": 1475,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tâm trạngBất an-28",
+       "cover": "div#coopfz.modal.kpscene",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591838932.png",
+       "dev": "fold",
+       "at": 1481,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tin báo: 19 tin mới",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591845376.png",
+       "dev": "fold",
+       "at": 1488,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tất cả 23/29Lễ nghi 4/4Giao thiệp 3/3Nghỉ ngơi 3/4",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591851767.png",
+       "dev": "fold",
+       "at": 1494,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Lễ nghi 4/4",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591858173.png",
+       "dev": "fold",
+       "at": 1500,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Học tập · Tài nghệ 3/3",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591864543.png",
+       "dev": "fold",
+       "at": 1507,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Y dược 1/2",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591870963.png",
+       "dev": "fold",
+       "at": 1513,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Lễ nghiLễ nghiThắp hương cầu anRất vữngThắp hương ",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795591877381.png",
+       "dev": "fold",
+       "at": 1520,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 0,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Sắc48Tài44Tâm cơ30Đức22Danh15Sủng0",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795592249821.png",
+       "dev": "fold",
+       "at": 1892,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Bạc288Sức100/100",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795592256229.png",
+       "dev": "fold",
+       "at": 1898,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Quẻ Thượng thượng (Con cái)",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795592262628.png",
+       "dev": "fold",
+       "at": 1905,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tâm trạngBình thản-1",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795592269047.png",
+       "dev": "fold",
+       "at": 1911,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tin báo: 3 tin mới",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795592275430.png",
+       "dev": "fold",
+       "at": 1918,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Hạ · còn 4 khắc · đi gần 1 khắc, xa 2 · bóng: ngườ",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795592281815.png",
+       "dev": "fold",
+       "at": 1924,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Thu nhỏ",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795592288198.png",
+       "dev": "fold",
+       "at": 1930,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Phóng to",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795592294579.png",
+       "dev": "fold",
+       "at": 1937,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Ra vào cung cấm",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795592300977.png",
+       "dev": "fold",
+       "at": 1943,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Danh sách",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795592307388.png",
+       "dev": "fold",
+       "at": 1950,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Cung nhân · chạm để mở danh sách",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795592313760.png",
+       "dev": "fold",
+       "at": 1956,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Chí tôn · chạm để mở danh sách",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795592320195.png",
+       "dev": "fold",
+       "at": 1962,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Tai mắt1",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795592326561.png",
+       "dev": "fold",
+       "at": 1969,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Bổng lộcsau 2 tuần",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795592332926.png",
+       "dev": "fold",
+       "at": 1975,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "#dawn",
+       "label": "Nguy hiểm chung: 7",
+       "cover": "div.kne.kne-beat in #dawn",
+       "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-host-k1/dead-fold-1795592339309.png",
+       "dev": "fold",
+       "at": 1982,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 2,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 0,
+        "name": "Trưởng Tôn Thanh Từ"
+       }
+      }
+     ],
+     "buoi": 30,
+     "saves": []
+    }
+   ],
+   "partial": false,
+   "bugs": []
+  }
+ ]
+}
