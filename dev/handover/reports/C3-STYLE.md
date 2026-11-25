@@ -58,7 +58,7 @@ Wiring is NOT mine: C3-RANKROOM (branch from main + review/rankroom 810e926a + r
 
 ## 5. Stage clips MAIN 117 asked (kit §93.1-4 + §95 dialogue demo)
 Status: branches EXIST, not live. review/kit-evframe 0b548a91 («§93.4 layout A relayout») is SUPERSEDED: kit-evframe-r1 298ba4e4 → r2 e067900f → r3 3e27d76f (LAND READY FOR MAIN 126 / LC12, FOREMAN_B_STATUS); main 5e013076 does not contain `kscn-tr` (jkitsel.js), r3 has it. §95 lives in review/kit-dialogue-vn (-r2 3aa58798, LAND READY). CDN img/_review/kit-scene/ does not exist. → clips would be recorded from r3 + dialogue-vn-r2 (Playwright video, Fold 755x1000 + iPad 1180x820, mp4 + 2×); I report the time of that follow-up below and do not claim it done here.
-CLIPS: PENDING (see end of file).
+CLIPS DONE for §93.4 (from r3 3e27d76f, via dev/test/kit-evframe.js with recordVideo; test ALL PASS, 0 page errors): https://ctm-img.victoria-tntt.workers.dev/img/_review/kit-scene/ — evframe-r3-fold.mp4 / -fold-x2.mp4 (755x1000), evframe-r3-ipad.mp4 / -ipad-x2.mp4 (1180x820), stills kef-{choice,nochoice}-{fold,ipad}.png (append ?v=1). Each clip ~19 s: load, then choice case, then no-choice case. "x2" = 2× pixel size. NOT done: the §95 dialogue demo (review/kit-dialogue-vn-r2 3aa58798) — needs its own driver script; say so if MAIN still wants it. Clips are screen recordings of the test harness, not hand-checked frame by frame beyond the stills.
 
 ## 6. Evidence + scripts
 dev/handover/reports/C3-STYLE/sheet.py (CDN thumbnail → contact sheet), the sheet list above; keys from img/_index.json; rank mapping from origin/review/rankroom:dev/art/place-rank/rank_rooms.json (65 rows) + CDN rooms-nc listing (59). No gen, no game file touched, no branch review/c3-style needed.
