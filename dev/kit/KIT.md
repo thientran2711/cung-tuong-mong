@@ -1015,6 +1015,7 @@ ladder words from the real formulas; "có thể gặp người" → real words.
 - RIGHT: kicker (small, e.g. "Chương 2", "Điều kiện sắc phong"), name + **kitSteps** (`max` segments + "<word> l/max"; with `stepsAttr` the steps are a
   button that opens the levels, e.g. `data-v85tab`), one desc line, tiến bộ bar `kitBar` (`.kskp`) or `kchip g "Đã tinh thông"` (`bar:false` = none),
   next unlock `kchip n "<word> n mở"` + what it gives (`next`, else `levels[level]`).
+- **kit-need (review/s3e-display-fix, robot «Công lao 11/10»)**: EVERY «have/need» progress text (kitBar's number, Công lao, Tiến bộ, Chứng cứ, gate rows Sủng/Đức/Chủ tin/Hoàng thượng để ý, Lễ nghi, thân thiết …) is written by ONE helper `kitNeed(cur,need)` (j79): the have shown never passes its need (a met need reads `need/need`); never a hand-written `${a}/${b}` for a progress-to-a-need. Counters (Hồi x/y, trang x/y, rank n/N, x/10 scores, seats/caps) are not progress-to-a-need and keep their own text. Guard `dev/test/s3e-display-fix.js`.
 - BELOW: act cards (`pbtn`) in `.kskacts.pcb`, each in its own `.kpanec` cell (auto-fit grid, min 240 px): narrow cells give the compact act of §43
   (own act picture only). `can:false` dims a card (nothing to do); lists put doable cards first, mastered last.
 - Deleted: the old per-level list (`.ksls`), the 170 px art column, review/tabs-kit's `kitSkillHead` / `.ksk2` duplicate. Sample: trang mẫu kit (§47).
