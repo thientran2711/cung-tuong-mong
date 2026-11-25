@@ -1653,15 +1653,15 @@ B co-op RERUN U3 (real taps, robot-audit-B RERUN LIST) | dev/handover/robot/coop
 B co-op RERUN U3b (real taps, robot-audit-B RERUN LIST) | dev/handover/robot/coop-rerun-U3b-* | B | session_01N1tNP6EaANiCTZTgGFPYfd | RUNNING | 25/11 06:15Z |
 | MAMA-ONLY-OWN (owner bug 25/11 ~06:55Z) | review/mama-only-own | MAIN 134→135 | session_01V1ZZH4XVMNDnbrc8aMyv9D | RUNNING | 25/11 06:45Z |
 selection-scene BIG review | review/selection-scene 9ee4f5bc | session_01V1ZZH1uRsuJLYqG34jcUBM (MAIN 135) | RUNNING | 2026-11-25T06:50Z
-| E RERUN E-S1 (thd_tho; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-S1-* | FOREMAN E (root) | (opening) | RUNNING | 25/11 06:58Z |
-| E RERUN E-S2 (thd_tro; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-S2-* | FOREMAN E (root) | (opening) | RUNNING | 25/11 06:58Z |
-| E RERUN E-S3 (thd_hoc; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-S3-* | FOREMAN E (root) | (opening) | RUNNING | 25/11 06:58Z |
-| E RERUN E-S4 (pt_hai; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-S4-* | FOREMAN E (root) | (opening) | RUNNING | 25/11 06:58Z |
-| E RERUN E-S5 (pt_su; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-S5-* | FOREMAN E (root) | (opening) | RUNNING | 25/11 06:58Z |
-| E RERUN E-S6 (pt_tang; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-S6-* | FOREMAN E (root) | (opening) | RUNNING | 25/11 06:58Z |
-| E RERUN E-S7 (bd_hen; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-S7-* | FOREMAN E (root) | (opening) | RUNNING | 25/11 06:58Z |
-| E RERUN E-S8 (bd_san+bd_tuyet; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-S8-* | FOREMAN E (root) | (opening) | RUNNING | 25/11 06:58Z |
-| E RERUN E-C1 (U14-U16; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-C1-* | FOREMAN E (root) | (opening) | RUNNING | 25/11 06:58Z |
-| E RERUN E-C2 (U17-U18; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-C2-* | FOREMAN E (root) | (opening) | RUNNING | 25/11 06:58Z |
-| E RERUN E-C3 (U19-U21; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-C3-* | FOREMAN E (root) | (opening) | RUNNING | 25/11 06:58Z |
+| E RERUN E-S1 (thd_tho; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-S1-* | FOREMAN E (root) | session_01DgYSWpfx9EuQ7nBDWNiLL4 | RUNNING | 25/11 06:58Z |
+| E RERUN E-S2 (thd_tro; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-S2-* | FOREMAN E (root) | session_01DgYSWmjYr7RwJDsctw9oY2 | RUNNING | 25/11 06:58Z |
+| E RERUN E-S3 (thd_hoc; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-S3-* | FOREMAN E (root) | session_01DgYSWpEFpEHSJyMrZVwG9W | RUNNING | 25/11 06:58Z |
+| E RERUN E-S4 (pt_hai; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-S4-* | FOREMAN E (root) | session_01DgYSWpN3dDzQf4UbZcWfrP | RUNNING | 25/11 06:58Z |
+| E RERUN E-S5 (pt_su; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-S5-* | FOREMAN E (root) | session_01DgYSWkftZYbrnY4BZqN1FM | RUNNING | 25/11 06:58Z |
+| E RERUN E-S6 (pt_tang; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-S6-* | FOREMAN E (root) | session_01DgYSWkTerinUkng7Zpnn7v | RUNNING | 25/11 06:58Z |
+| E RERUN E-S7 (bd_hen; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-S7-* | FOREMAN E (root) | session_01DgYSWq6znChRtAvXZM2Shw | RUNNING | 25/11 06:58Z |
+| E RERUN E-S8 (bd_san+bd_tuyet; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-S8-* | FOREMAN E (root) | session_01DgYSWp8cEnQPhuhTaeHgrZ | RUNNING | 25/11 06:58Z |
+| E RERUN E-C1 (U14-U16; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-C1-* | FOREMAN E (root) | session_01DgYSWmMzKCCWuhWVkizGrK | RUNNING | 25/11 06:58Z |
+| E RERUN E-C2 (U17-U18; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-C2-* | FOREMAN E (root) | session_01DgYSWkZEiQ8VEmgjudRCMe | RUNNING | 25/11 06:58Z |
+| E RERUN E-C3 (U19-U21; sonnet; briefs/E-rerun-runner.md) | dev/handover/robot/rerun-E-E-C3-* | FOREMAN E (root) | session_01DgYSWkzwHcfbhAVTqTrb5C | RUNNING | 25/11 06:58Z |
 | F flight2 slot 7 runner (thd_tho rand) | dev/handover/robot/flight2-s7.* | session_01UV1Szi98Jr15jEk9h57rXy | RUNNING | 25/11 06:57Z | F |
