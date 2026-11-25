@@ -79,15 +79,17 @@ function j95except(a,t){/* a recorded reason to act against her own affection */
  for(const h of liveRivals(true)){if(h===a||h===t)continue;if(evG(h,a)>=BAL.evFirm&&hostility(h,t)>=netTh(h,"host"))return `bị khống chế: ${h.name} nắm thóp bằng chứng cứ, ép ra tay`}
  const f=facOf(a);const L=f&&facLeader(f);if(L&&L!==a&&L!==t&&L!==S&&hostility(L,t)>=netThK(L,"host","hostHi")&&aff(a,L)>=netTh(a,"than"))return `vâng lệnh chủ phe ${L.name}`;
  const r=a.j95rum&&a.j95rum[key(t)];if(r&&wk()-r.w<=8)return `nghe tin đồn (${r.txt}) nên hiểu lầm`}catch(e){}return ""}
-function motiveOK(a,t,kind){if(!a||!t||a===S||a===t)return{ok:true,why:a===S?"người chơi tự chọn":""};
- if(typeof a!=="object"||a.rel==null)return{ok:true,why:""};
+/* temper-perception (OD 25/11 ~08:05Z, design (d) OPTION A): her own gây sự cards pass the SAME gate (me = 1, jtperc motiveMe); other callers keep
+   "người chơi tự chọn" for her. Every doer's motive adds her heavy angry / jealous mood (jtperc tpMoodM, BAL.tp.moodM). */
+function motiveOK(a,t,kind,me){if(!a||!t||a===t||(a===S&&!me))return{ok:true,why:a===S?"người chơi tự chọn":""};
+ if(a!==S&&(typeof a!=="object"||a.rel==null))return{ok:true,why:""};
  const af=aff(a,t),oa=oan(a,t),gh=t===S?(a.ghen||0):Math.max(0,Math.round(((t.sung||0)-(a.sung||0))/2));
  let ef=false;try{const f=facOf(a),g=facOf(t);ef=!!(f&&g&&f!==g)}catch(e){}
- if(H95.has(kind)){const ex=j95except(a,t);const mot=Math.max(oa,gh,-af)+(ef?10:0)+(nv(a,"motive"));
+ if(H95.has(kind)){const ex=j95except(a,t);const md=typeof tpMoodM==="function"?tpMoodM(a):0;const mot=Math.max(oa,gh,-af)+(ef?10:0)+(nv(a,"motive"))+md;
   if(af>=40&&!ex)return{ok:false,why:`thiện cảm ${af} với ${t===S?"ngươi":t.name}`};
   if(mot<30&&!ex)return{ok:false,why:`động cơ yếu (oán ${oa}, ghen ${gh}, thiện cảm ${af})`};
   if(ex)return{ok:true,why:ex,ex:1};
-  const parts=[];if(oa>=20)parts.push(`oán ${oa}`);if(gh>=20)parts.push(`ghen ${gh}`);if(af<=-20)parts.push(`ghét (thiện cảm ${af})`);if(ef)parts.push("khác phe");if(hasT(a,"Xảo quyệt"))parts.push("tính xảo quyệt");
+  const parts=[];if(oa>=20)parts.push(`oán ${oa}`);if(gh>=20)parts.push(`ghen ${gh}`);if(af<=-20)parts.push(`ghét (thiện cảm ${af})`);if(ef)parts.push("khác phe");if(md)parts.push("lòng đang bức bối");if(hasT(a,"Xảo quyệt"))parts.push("tính xảo quyệt");
   return{ok:true,why:parts.join(", ")||`động cơ ${mot}`}}
  if(F95.has(kind)){let fr=false;try{fr=!!(facOf(a)&&facOf(a)===facOf(t))}catch(e){}if(af<-20&&oa>=40&&!fr)return{ok:false,why:`ghét ${t===S?"ngươi":t.name} (thiện cảm ${af}, oán ${oa})`};
   return{ok:true,why:fr?"cùng phe":af>=10?`thiện cảm ${af}`:"lấy lòng vì lợi"}}
