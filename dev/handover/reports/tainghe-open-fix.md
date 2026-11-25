@@ -48,4 +48,4 @@ Scratch /home/user/wt/tnopen-scratch/shots (not in git): b3-pop-755x1000-0.jpg, 
 Note for kit-tntile (not this fix): on the Fold shot an older «TÀI NGHỆ · Luật chơi · Tuyển chọn…» side panel stays open UNDER the pop-up (left from the life; the driver does not close side panels). Their reviewer may want to check pop-up over side-panel stacking.
 
 ## 7. LAND READY
-LAND READY 144e2af2 (tier SMALL per tier.js) — READY build commit; branch head 1aef4771 adds only tests + this report (no build change).
+LAND READY 84a62610 (tier SMALL per tier.js on the head) — head of review/tainghe-open-fix; the build (index.html/sw.js) is the one made at 144e2af2, later commits add only tests + this report.
