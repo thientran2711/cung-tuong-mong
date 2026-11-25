@@ -3393,3 +3393,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (06:58Z) M4 bug: modal choice list .kpopts overflows modal frame on Fold (Tân quân lập uy, Đêm thị tẩm; option centres untappable) → KK26 KIT BUG #2 (whole group, after focus-figure).
 - (07:00Z) MAKEUP-NOBOOST LAND READY 8325d13f SMALL (good looks boost 1) → MAIN LOOKED final-fold-ipad.jpg OK → GO LC13 FIRST.
 - (07:02Z) M4 SOFT-LOCK «Sang buổi» dead tap (Q 2 cards, #modal hidden, DQ.newsHold 1; dqWait returns on Q.length) → TAINGHE-OPEN-FIX worker: check ef1082ff, else whole-family fix + real-tap test; rv 2yv2CZAt told to gate it.
+- (07:31Z) OWNER IDEA «Nhân vật kỳ ngộ» (her real face NPC) → OD row + PARKING_LOT #15; MAIN recommendation in chat; asked her for photos.
