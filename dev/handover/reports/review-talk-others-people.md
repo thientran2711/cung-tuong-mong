@@ -39,3 +39,10 @@ N2. svt-len-rt.js needs a save with ≥ 3 khắc free; let it pick a buổi with
 
 ## Verdict
 FAIL — B1, B2, B3. W2 builds on review/talk-others-people-rv 98f093b3 (has R1). Round 2 = delta check + servant-trust + svt-len-rt Fold/iPad + quickcheck. LIVE has not moved (origin/main 9f72524b); this branch lands only after d-followups-1-rv anyway.
+
+## ROUND 2 — 8b288d9e (W2, sent 09:02Z, before the r1 verdict reached W2) — VERDICT: FAIL (still B1, B2 + R1 not merged)
+- B3 FIXED: j63 KAK hook (noteAdd / kitKnow / intelAdd since the act's rsnap) lists what she learned under «Được»; reviewer reran dev/test/ka-know.js → 6/6 PASS incl. the control (nothing learned → «không được gì»); servant-trust 89/89.
+- R1 NOT MERGED: 8b288d9e is built on b7604887, not on review/talk-others-people-rv 98f093b3 → the dead «Hỏi lén» (lock reason whyTime(2)) is back. Merge 98f093b3 (j15 only, no conflict expected with j63).
+- B1 OPEN (merged «Hỏi chuyện» on named women loses the elder talk gains: meAct thiện cảm, k61Meet, palace news line).
+- B2 OPEN (PEND.svtAsk has no covert variant for an NPC approaching HER on the cung-nữ road).
+Round 3 = merge 98f093b3 + B1 + B2, then servant-trust, ka-know, svt-len-rt Fold+iPad, one-core, coop-e2e, quickcheck.
