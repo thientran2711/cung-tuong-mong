@@ -18,7 +18,7 @@ function queenP(){return S.rank>=7?S:(qOn()?rivals[0]:null)}
 function malOf(p){return p===S?Math.max(0,70-S.duc):p.malice}
 function wk(){return S.turn*3+S.tuan}
 function ap(p,o){if(p===S)return apply(o);for(const k in o){const v=o[k];if(!v)continue;if(k==="maid"){p.maid.loyal=cl(p.maid.loyal+v,0,100);continue}p[k]=(p[k]||0)+v}
- for(const k of ["sung","danh","suc","sac","tai","tamco","duc","ghen","an"])if(p[k]!=null)p[k]=cl(p[k],0,100);if(p.suc!=null)p.suc=Math.min(p.suc,sucCap(p));p.th=cl(p.th||0,-100,100);p.hh=cl(p.hh||0,-100,100);p.bac=Math.max(0,p.bac||0)}
+ for(const k of BAL.personRange.core){const al=k==="th"||k==="hh"||k==="bac";if(p[k]!=null||al)p[k]=prCl(k,al?p[k]||0:p[k])}if(p.suc!=null)p.suc=Math.min(p.suc,sucCap(p))/* ONE CORE: BAL.personRange (jbalpr.js) */}
 function dieIf(p,why){if(p!==S&&p.alive&&p.suc<=0){p.alive=false;if(p.queen)p.queen=false;return `<span class="r">${p.name} ${why}.</span> `}return""}
 /* a rival's full stat block: the same fields the player's formulas read */
 function rstats(v,rank){rank=rank==null?(v.queen?7:v.rank):rank;

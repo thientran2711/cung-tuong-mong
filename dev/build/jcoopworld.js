@@ -306,7 +306,7 @@ function sendEnd(){if(!CW.on||!S||S.dead||CW.sent===wk()||CW.cyHold!=null/* the 
 /* P0 (co-op thin part B, jcoopthinb): the person the HOST built for her (her Luân hồi on the host); sent as it is, never re-serialized here */
 function sendMe(P0){T("sendMe "+(S&&S.dead));if(!CW.on||!S||S.dead)return;
  /* a new life: the old life's pending / sent week end is void (the server drops my sent end on `me`); she ends this week herself */
- if(CW.base){CW.pend=false;if(CW.sent===wk())CW.sent=-1;CW.bend=false;CW.nrdy=-1;CW.ngoW=-1}
+ if(CW.base){CW.pend=false;if(CW.sent===wk())CW.sent=-1;CW.bend=false;CW.nrdy=-1;CW.ngoW=-1;if(CW.ngo===wk())CW.ngo=-1}/* robot-coop-fix-4 (week-end stuck): the host's night commit goes with its run (ngoW): kept alone, a new life's ready could never commit again (nGoNow / forceNight refuse a week already committed) and his night never ran while her `end` was out */
  const C=P0&&CW.base?null:toCanon();CW.dying=null;
  if(!CW.base){/* host's first world */COOP.send({t:"init",state:C,nb:typeof B4N==="number"?B4N:3});CW.base=C}else{const Pm=P0||C.P[CW.seat];COOP.send({t:"me",P:Pm});CW.base.P=CW.base.P||{};CW.base.P[CW.seat]=J(Pm)}
  try{if(CW.base&&CW.base.P&&CW.base.P[fs()]&&!friendEntry())placeFriend(CW.base.P[fs()])}catch(e){console.error(e)}
@@ -865,7 +865,12 @@ function onState(m){T("state");if(!CW.on||!m.state)return;const C=m.state;
    pushModal({t:home?"Hảo hữu chọn thân phận":"Hảo hữu vào cung",h:`<p>Hảo hữu ngươi ${old?"đã đầu thai, ":"đã chọn xong thân phận, "}${home?"nay còn ở nhà cha chờ kỳ tuyển tú, chưa vào cung":"nay ở trong cung"+(friendSrv(P)?", làm cung nữ":", phong "+esc(RANKS[P.rank]?RANKS[P.rank].n:""))}. Mặt mũi, tên tuổi kiếp này ra sao, phải gặp mới biết.</p>`+(home?`<p class="past">Qua kỳ tuyển tú, nàng sẽ vào cung; khi ấy hai người mới gặp được nhau.</p>`:`<p class="past">Muốn gặp nhau: hai người cùng đến một nơi trên Dư đồ trong cùng một buổi, rồi chạm vào người kia và chọn Chào hỏi.</p>`)})}
   showModal();render()}}
 function newLife(){CW.inLife=true;CW.newLife=true;try{start()}catch(e){console.error(e)}}
-function begin(d){T("begin");CW.on=true;CW.cyHold=null;CW.cyK="";clearTimeout(CW.cyT);CW.cyT=null;CW.cyTo=null;CW.seat=d.you||COOP.state.you;CW.ssv=COOP.state.msv||0;CW.ssvWk=wk();CW.seatOld=false;const C=d.state||COOP.state.C;CW.base=C?J(C):null;CW.sent=-1;CW.pend=false;CW.wkIn=C&&typeof C.week==="number"?C.week:undefined;
+function begin(d){T("begin");CW.on=true;
+ /* robot-coop-fix-4 (week-end stuck family, law 11): the night gate (nrdy/ngo/ngoW/nfr/nforce) and thin E's asks (E.mine/hr/forced) are keyed by
+    week / week:buổi only — a NEW room (left one room, opened or joined another without a reload) starts at week 0 again, so the old room's
+    values would hit the same week of the new one (host: «already committed» → no go; guest: «already asked» → no ready) = both #next locked.
+    A reconnect to the SAME room keeps them (his commit / her ready stand). */
+ {const rm=COOP.state.room||"";if(CW.nRoom!==rm){if(CW.nRoom!==undefined){T("new room "+rm);CW.nrdy=CW.ngo=CW.ngoW=CW.nfr=CW.nforce=-1;try{const E=CW.thin&&CW.thin.E;if(E){E.mine="";E.hr="";E.forced="";/* r1 reviewer (law 11, same family): the host's copy of her ready, her owed step, her night and her Kỳ nguyệt ask are keyed by week / week:buổi too */E.rd={};E.owe=null;E.nk=undefined;E.cyA=undefined}}catch(e){}}CW.nRoom=rm}}CW.cyHold=null;CW.cyK="";clearTimeout(CW.cyT);CW.cyT=null;CW.cyTo=null;CW.seat=d.you||COOP.state.you;CW.ssv=COOP.state.msv||0;CW.ssvWk=wk();CW.seatOld=false;const C=d.state||COOP.state.C;CW.base=C?J(C):null;CW.sent=-1;CW.pend=false;CW.wkIn=C&&typeof C.week==="number"?C.week:undefined;
  const s=COOP.state;
  if(C&&C.P&&C.P[CW.seat]&&!C.P[CW.seat].dead){fromCanon(C);CW.fWasHome=friendHome(C.P[fs()]);/* a fresh page (came back by link / reload) has no hand of cards yet: deal it, as loading a sổ does */if(!deck||!deck.length)try{deal()}catch(e){console.error(e)}if(s.ended&&s.ended[CW.seat])CW.sent=wk();
   /* rejoin / reload (owner 16/11: "khắc và việc đã làm bị mất"): her own week as it stood (snapLoad), never the week start again */
@@ -919,10 +924,15 @@ function nightReady(){if(CW.nrdy===wk()){nCheck();return}CW.nrdy=wk();T("nready 
 function nGoNow(){if(!host()||CW.ngo===wk())return;CW.ngo=wk();T("ngo "+wk());nsay("go");CW.ngoW=wk();if(eW())try{CW.thin.flush()}catch(e){}/* thin E: the go rides the view (o.e.go): out before his week end */}
 /* host: commit when both are ready (or forced); every seat: run the committed night once free */
 function nCheck(){if(!CW.on||!S)return;const w=wk();
+ if(host()&&CW.ngo===w&&CW.ngoW!==w&&CW.sent!==w&&nAtNight()){T("ngo self "+w);CW.ngoW=w}/* robot-coop-fix-4: the host's own commit IS his go (one rule for every path that clears ngoW) */
  if(host()&&CW.ngo!==w&&nAtNight()&&((CW.nrdy===w&&(CW.nfr===w||nOtherGone()))||CW.nforce===w||nOtherEnded()))nGoNow();
  if(!host()&&CW.ngoW!==w&&nAtNight()&&nOtherEnded()&&COOP.state.week===w)CW.ngoW=w;   /* the host's end is out: it committed */
  if(CW.ngoW!==w||CW.pend||CW.sent===w||!nAtNight()||S.dead||Q.length||S.mg||frozen()||!CW.base||needWhere()||CW.inLife)return;
- T("night "+w);CW.allowN=true;try{nextBuoi()}finally{CW.allowN=false}}
+ T("night "+w);CW.allowN=true;try{nextBuoi()}finally{CW.allowN=false}
+ /* robot-coop-fix-4 (trace only, no behaviour change): the committed night ran nextBuoi and the week did not end (stuck dumps fix-2 r3 / A/B p05:
+    «night w» repeating with ngo=ngoW=nfr=w): say once per week which wrapper state held it, so the next stuck dump names the cause */
+ try{if(!CW.pend&&CW.sent!==w&&nAtNight()&&CW.nHeld!==w){CW.nHeld=w;const g=(n,f)=>{try{return f()?n:""}catch(e){return n+"!"}};
+  T("night held "+w+" b"+(S.buoi||0)+"/"+LASTB()+" "+[g("Q"+Q.length,()=>Q.length),g("mg",()=>S.mg),g("wait",waiting),g("frz",frozen),g("eW",eW),g("kc",()=>typeof isKc==="function"&&isKc()),g("srv",()=>typeof isSrv==="function"&&isSrv()),g("succ",()=>S.succ&&S.succ.on),g("modal",()=>!$("modal").hidden)].filter(Boolean).join(","))}}catch(e){}}
 CW.nCheck=()=>nCheck();CW.nightReady=()=>nightReady();CW.mapPlace=mapPlace;CW.refreshHere=()=>refreshHere();
 CW.forceNight=()=>{if(!CW.on||!host()||!nAtNight()||CW.ngo===wk())return false;CW.nforce=wk();nCheck();return true};
 CW.nReady=nReady;
