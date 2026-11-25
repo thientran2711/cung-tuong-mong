@@ -12,10 +12,10 @@ function crtStitch(box,env){const C=kg82Canvas(box,(box.clientWidth||300)<420?1.
  const NP=CRT_PCS.length,BEAT=L("beat"),WIN=L("win"),NEAR=L("near"),ALIKE=Math.round(L("alike")),SWAY=L("sway"),PEEK=L("peek"),ST=Math.max(1,Math.round(L("st"))),LIM=L("lim"),wC=L("wC"),wS=L("wS");
  /* the hoop above, the spool rows below it (two rows when crowded), never overlapping */
  const R0=Math.min(W*.34,H*.27),HX=W*.5,HY=H*.36,SY=H*.85;const pops=[];
- let pi=-1,P=null,phase="",pts=0,done=false,t0=0,stop=null;
+ let pi=-1,P=null,phase="",pts=0,done=false,t0=0,stop=null;const TDU=[];
  const hx=now=>HX+SWAY*W*Math.sin(now/1100);
  function piece(){if(done)return;pi++;if(pi>=NP){done=true;phase="end";return crLater(()=>env.end(pts),300)}
-  const [pet,b0,dk,lt]=CRT_PCS[pi];const n=b0+mgMore(env);const col=i=>crMix(dk,lt,n>1?i/(n-1):0);
+  const PC=CRT_PCS[pi],TI=typeof mgpOne==="function"?mgpOne("td_cong",TDU,x=>x.slot===pi):null;/* ORDER THIN P1: one composed piece (petals × palette; band count stays the slot's), drawn through the no-repeat memory */const [pet,b0,dk,lt]=TI?[TI.pet,PC[1],TI.dk,TI.lt]:PC;const n=b0+mgMore(env);const col=i=>crMix(dk,lt,n>1?i/(n-1):0);
   /* spools: every band's shade + decoys half a step off (the hardest look-alikes: next to the darkest bands) */
   const sp=[...Array(n).keys()].map(i=>({c:col(i),b:i}));for(let k=0;k<Math.min(ALIKE,n-1);k++)sp.push({c:crMix(col(k),col(k+1),.5),b:-1});
   P={pet,n,col,sp:kg82Shuf(sp),band:0,ph:"pick",cols:[],q:[],k:0,used:-1,ok:0,start:crNow(),pk:null,dip0:0};phase="play";t0=P.start;layout()}

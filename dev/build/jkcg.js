@@ -52,10 +52,10 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
    BAL.kcg.fest. Bots (window.__bot) and a missing mini-game get the same quick score as the Phúc tuyển seam. */
 const KCFEST={"Hội thơ":"tho","Ngắm hoa":"dan","Thượng nguyên":"doden","Thất tịch":"kim"};
 function kcgFestRes(t,raw,extra,b){const F=BAL.kcg.fest;let txt;
- if(raw>=F.top){S.danh+=F.danh[0];S.kap+=BAL.eff.jkc.kapKcFest;txt=`${t}: ngươi đứng đầu, cả kinh thành nhắc tên.`;S.kc.fTop=(S.kc.fTop||0)+1;
+ if(raw>=F.top){statSet(S,"danh",(S.danh||0)+F.danh[0]);S.kap+=BAL.eff.jkc.kapKcFest;txt=`${t}: ngươi đứng đầu, cả kinh thành nhắc tên.`;S.kc.fTop=(S.kc.fTop||0)+1;
   if(!S.kc.ev.vp&&S.danh>=BAL.danhG.kcVihanh&&S.sac>=BAL.kcg.vpSac&&kcRare("kcR3",BAL.kcg.vpRare)){S.kc.ev.vp=1;pushDil(mkP("kcE",{e:"vihanh"}),"Khách lạ ở chùa")}}
- else if(raw>=F.ok){S.danh+=F.danh[1];txt=`${t}: ngươi được khen.`}else{S.danh=Math.max(0,S.danh-F.danh[2]);txt=`${t}: ngươi không nổi bật.`}
- const mu=kcR("muoi");if(mu&&roll(F.sisP))mu.danh+=raw<F.ok?F.sis[0]:F.sis[1];const x=extra?extra():"";kcRes(t,b,txt+(x?" "+x:""))}
+ else if(raw>=F.ok){statSet(S,"danh",(S.danh||0)+F.danh[1]);txt=`${t}: ngươi được khen.`}else{S.danh=Math.max(0,S.danh-F.danh[2]);txt=`${t}: ngươi không nổi bật.`}
+ const mu=kcR("muoi");if(mu&&roll(F.sisP))statSet(mu,"danh",(mu.danh||0)+(raw<F.ok?F.sis[0]:F.sis[1]));const x=extra?extra():"";kcRes(t,b,txt+(x?" "+x:""))}
 kcFest=function(t,art,extra){const b=rsnap();const kind=KCFEST[t]||art;
  if(window.__bot||typeof playArt!=="function"||!isKc()){kcgFestRes(t,cl(BAL.kcg.fest.bot[0]+R(BAL.kcg.fest.bot[1]),0,10),extra,b);return}
  let done=0;const fin=raw=>{if(done)return;done=1;kcgFestRes(t,raw,extra,b);try{showModal()}catch(e){}};

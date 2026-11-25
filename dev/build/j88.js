@@ -53,7 +53,7 @@ figFor=function(p,kind){try{if(!FIGS.length||!p||!S)return"";const who=figWho(p)
  if(kind==="por")return figPath(f.por||f.file||f.src);return figPath(f.file||f.src)}catch(e){return""}};
 /* maid faces still needed by servants (young maids without a face yet) + a margin, so they never run dry */
 function f88Reserve(){let n=4;try{const L=(typeof allServ==="function"?allServ():[]).concat(S&&S.maid?[S.maid]:[]);
- for(const s of L)if(s&&!s.fid&&(s===S.maid||s.role==="maid")&&(s.age||18)<36)n++}catch(e){}return n}
+ for(const s of L)if(s&&!s.fid&&(s===S.maid||s.role==="maid")&&(s.age||BAL.ageMin)<BAL.ageBand[1])n++}catch(e){}return n}
 function f88Take(who,k){who.fid=k;const U=figUsed();if(!U.includes(k))U.push(k);return k}
 function f88FreeMaid(age){const U=new Set(figUsed());const fm=f88Keys("maid").filter(k=>!U.has(k));if(!fm.length)return null;
  return fm[Math.floor(Math.random()*fm.length)%fm.length]}
@@ -75,7 +75,7 @@ function f88Carry(n,m){try{if(!n)return;let k=null;
  if(m&&m.fid&&f88Src(m.fid)==="maid"&&f88List(m.fid).length)k=m.fid;
  if(!k&&m&&typeof FIGS!=="undefined"&&FIGS.length&&typeof m==="object"&&!m.fid){try{const r=figRoles(m);if(r.includes("maid")&&!r.includes("mama")){const kk=figPick(m);if(f88Src(kk)==="maid")k=kk}}catch(e){}}
  if(!k&&typeof FIGS!=="undefined"&&FIGS.length)k=f88FreeMaid(m&&m.age);
- if(k){f88Take(n,k);n.fromMaid=k;if(m&&m.age>=18&&m.age<60)n.age=m.age;
+ if(k){f88Take(n,k);n.fromMaid=k;if(m&&m.age>=BAL.ageMin&&m.age<60)n.age=m.age;
   const U=figUsed();const seen=new Set();S.fidUsed=U.filter(x=>seen.has(x)?false:(seen.add(x),true))}}catch(e){console.error("f88carry",e)}}
 if(typeof servRanks==="function"){const s0=servRanks;servRanks=function(){let before=null;try{before=new Set(allServ())}catch(e){}
  const nr0=newRival,done=new Set();

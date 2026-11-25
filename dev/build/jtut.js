@@ -60,7 +60,7 @@ function mmFace(){const g=GD();if(g&&g.face){try{const f=g.face;if(typeof f==="o
   if(M&&S){let k=S.tutFid&&M[S.tutFid]?S.tutFid:null;
    if(!k){const used=new Set(typeof figUsed==="function"?figUsed():[]);const ks=Object.keys(M).sort();k=ks.find(x=>!used.has(x))||ks[0];
     if(k&&!coop()){S.tutFid=k;try{if(!used.has(k))figUsed().push(k)}catch(e){}}}
-   const L=M[k]||[];const f=L.find(x=>x.ageBand==="a51")||L.find(x=>x.ageBand==="a36")||L[0];if(f&&f.por)src=figPath(f.por)}}catch(e){}
+   const L=M[k]||[];const f=L.find(x=>x.ageBand===BAL.ageArt[3])||L.find(x=>x.ageBand===BAL.ageArt[2])||L[0];if(f&&f.por)src=figPath(f.por)}}catch(e){}
  return{src,ini:"Quế",col:(typeof kitServCol==="function"?kitServCol("maid",3):"#a0584a"),rw:MMN(),__kr:{role:"mama",rank:3,origin:null,sex:"f",kid:false}}}
 function mmFig(){try{const f=mmFace();const s=String(f.src||"");return s.replace(/\/por-/,"/fig-")}catch(e){return""}}
 

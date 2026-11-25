@@ -171,14 +171,14 @@ window.mckStat=()=>Object.assign({},MCK.stat);
 /* ================= KHÓC + HỜN (owner OD 17/11 ~18:00Z: "biểu tượng cảm xúc khóc"; hờn from her 16:20Z (g) list) — two more moods in the ONE jemo bar =================
    KHÓC (khoc): a strong sad / grief / fear / humiliation feeling (buồn, đau khổ, sợ ≥ BAL.emo2.khoc.v, from the events in BAL.emo2.khoc.ev) turns into tears by odds
      (BAL.emo2.khoc.o + traits tr, clamped BAL.odds.lo/hi); a SLAP (jface slapGive) brings tears by its severity (BAL.emo2.khoc.slap[sev]); short timer (BAL.mood2.dur.k.khoc).
-   HỜN (hon): a slight / scolding / punishment / neglect from someone she is CLOSE to (thiện cảm ≥ BAL.emo2.hon.aff; her own master for a servant; Hoàng thượng for
+   HỜN (hon): a slight / scolding / punishment / neglect from someone she is CLOSE to (thiện cảm ≥ her netTh «than»; her own master for a servant; Hoàng thượng for
      a consort) turns into sulking AT that person (emo.t) by odds (BAL.emo2.hon.o + traits): friendly acts toward that person are refused while it lasts (motive gate).
    Same rule for her, every consort, servant, the Emperor; the cause stays the true event (why) and feeds moodCauseKnown. Seal art keys: emo-khoc, emo-hon (kit). */
 (function(){try{EMO.hon="Hờn dỗi";/* FEELINGS-18: khóc is an ACT now (jfeel feelActTick), not a feeling */const B=BAL.emo2;Object.assign(EMO_W,B.w);Object.assign(EMO_OD,B.od);Object.assign(EMO_LOY,B.loy);EMO_NIGHT.khoc=1;EMO_NIGHT.hon=1;EMO_DECAY.khoc=EMO_DECAY.hon=Number.MIN_VALUE}catch(e){}})();
 const EMO2={n:{khoc:0,hon:0,slap:0}};
 function emo2On(){try{return !!BAL.emo2&&!window.__emo2Off}catch(e){return false}}
 function emo2Tr(p,T){let d=0;try{for(const t of emoTraits(p))d+=T[t]||0}catch(e){}return d}
-function emo2Close(p,t){try{if(!t||t===p)return false;if(t===S.emp)return p!==S.emp&&!(p.sid!=null);const o=p.sid!=null||p===S.maid?ownerOf(p)||(p===S.maid?S:null):null;if(o&&o===t)return true;return aff(p,t)>=BAL.emo2.hon.aff}catch(e){return false}}
+function emo2Close(p,t){try{if(!t||t===p)return false;if(t===S.emp)return p!==S.emp&&!(p.sid!=null);const o=p.sid!=null||p===S.maid?ownerOf(p)||(p===S.maid?S:null):null;if(o&&o===t)return true;return aff(p,t)>=netTh(p,"than")}catch(e){return false}}
 function emo2Who(p,ev,t){try{if(t!=null){const x=emoByKey(String(t));if(x)return x}if(ev==="neglect"&&p!==S.emp)return S.emp;if(p.sid!=null||p===S.maid)return ownerOf(p)||(p===S.maid?S:null);if(ev==="punished")return S.emp}catch(e){}return null}
 /* old path (__mkOff): the mood box history row of this cause follows the turned feeling (review r1) */
 function emo2Row(q,e,k0){try{const w=String(e.why||"").slice(0,90);const h=(q.emoH||[]).find(x=>x.why===w&&x.k===k0);if(h)h.k=e.k}catch(x){}}

@@ -17,7 +17,7 @@ function rvBtns(i){const ck=S.turn+'_'+S.tuan+'_'+(S.buoi||0)+'_'+used+'_'+S.suc
 function rvBtns0(i){const v=rivals[i];const d=document.createElement('div');d.innerHTML=rvButtons(v,i);return [...d.querySelectorAll('button[data-r]')].filter(b=>!b.disabled).map(b=>b.dataset.a)}
 function modalStep(sens){
   {const k=q('#kg82ok');const ovOn=q('#ov')&&!q('#ov').hidden;/* kit-close (KIT 32.10) hides the result's close-only button behind ✕: press it while the result shows */if(k&&(k.offsetParent!==null||(k.isConnected&&ovOn))){k.click();return true}const sk=q('#kg82skip');if(sk&&sk.offsetParent!==null){sk.click();return true}}
-  if(!q('#ov').hidden){const ok=q('#mgok')||q('#kg92ok');if(ok){ok.click();return true}const sk=q('#mgskip');if(sk&&!sk.hidden){sk.click();return true}return true}
+  if(!q('#ov').hidden){const ok=q('#mgok')||q('#kg92ok');if(ok){ok.click();return true}const sk=q('#mgskip');if(sk&&!sk.hidden){sk.click();return true}if(window.__ovX){const kx=q('#ov .kit-x');if(kx&&kx.offsetParent!==null){kx.click();return true}}/* robot10: a game with no Xong / Bỏ qua — leave it with the kit ✕ as she would */return true}
   if(Q.length){
     const m=Q[0];
     if(m.opts&&m.opts.length){
@@ -27,6 +27,7 @@ function modalStep(sens){
       if(!sens)pickI=rpick(okIdx)[1];
       else{let best=-1e9;pickI=okIdx[0][1];okIdx.forEach(([o,i])=>{const f=o.fx||{};let v=(f.sung||0)*1.5+(f.danh||0)*1.2+(f.hh||0)*.4+(f.th||0)*.4+(f.maid||0)*.1+(f.suc||0)*.2+(f.tamco||0)*.3+(f.bac||0)*.04;
         if((f.duc||0)<0)v+=(f.duc||0)*6;else v+=(f.duc||0)*1.5;if(o.x&&/chứng cứ/.test(o.x))v+=2;if(o.x&&/nhân chứng|rửa oan|lật án|phong tước|giữ được/.test(o.x))v+=4;if(/tú nữ/.test(o.n))v-=.5;if(o.x&&/được phong/.test(o.x))v+=20;if(o.x&&/kết thúc kiếp này/.test(o.x))v-=20;if(o.x&&/Hoàng thượng để ý \+/.test(o.x))v+=3;if(o.x&&/bị giết|đánh chết|dìm|mất mạng/.test(o.x))v-=12;v+=(f.tin||0)*.15+(f.nt||0)*.5;/* diff-remeasure (16/11): a sensible player reads what the card shows: the side costs after "kèm:" / "hỏng:" count at half weight, and the risk label (OD:L477) */{const km=String(o.x||"").split(/kèm:|hỏng:/).slice(1).join(" ");const W={"Sủng":1.5,"Danh":1.2,"Đức":1.5};km.replace(/(Sủng|Danh|Đức) -(\d+)/g,(m,k,n)=>{v-=W[k]*(+n)*.5;return m});if(o.risk==="liều")v-=1;else if(o.risk==="có rủi ro")v-=.3}v+=Math.random()*.01;if(v>best){best=v;pickI=i}})}
+      try{if(window.__persPick){const r=window.__persPick(okIdx,m);if(r!=null)pickI=r}}catch(e){}/* robot10 personality */
       note("dilemma");chooseM(pickI);if(Q[0]===m){for(const [,i] of okIdx){if(i===pickI)continue;chooseM(i);if(Q[0]!==m)break}if(Q[0]===m)Q.shift()}/* still refused: another option, else drop the card */return true}
     /* diff-remeasure: kit pick dialogs (tuduc-sub "Học X: làm gì?" / "… dùng vật liệu gì?", KIT shop grid): a player taps the first item she can make */
     if(m.kit&&m.kit.pick&&!window.__noPick){try{showModal()}catch(e){}const b=[...document.querySelectorAll('#ov [data-kwrgo],[data-kwrgo]')].find(x=>!x.disabled&&x.offsetParent!==null);if(b){note("pick");b.click();return true}}
@@ -55,10 +56,10 @@ function randomStep(){
 // ---- SENSIBLE
 function needs(){const nx=S.rank<7?RANKS[S.rank+1]:{s:70,d:70};return{ws:1+Math.max(0,nx.s-S.sung)/12,wd:1+Math.max(0,nx.d-S.danh)/8}}
 const BAD=/Mật báo chuyện|Giả mang thai|Gửi mật thư|Theo cha mưu đại sự|Diệt khẩu|Trung với cố quốc|Khiêu khích|Trút giận|Cài đồ|giấu|xạ hương|độc|Đẩy con nàng xuống hồ|Đẩy nàng xuống hồ sen|Đẩy xuống hồ sen|Ngáng chân/i;
-function valW(w,N){w=w||{};return (w.nt||0)*.6+(w.tin||0)*.25+(w.sung?sg(w.sung):0)*N.ws+(w.danh||0)*N.wd+(w.th||0)*.3+(w.hh||0)*.25+(w.duc||0)*(S.duc<45?1.2:.4)+(w.maid||0)*.1+(w.mat||0)*.8+(w.tamco||0)*.3+(w.tai||0)*.2+(w.sac||0)*.5+(w.bac||0)*(S.bac<60?.08:.03)+(w.suc||0)*(S.suc<50?.3:.05)}
+function valW(w,N){w=w||{};const P=window.__pw||{};/* robot10 personality weights (default 1) */const m=k=>P[k]==null?1:P[k];return (w.nt||0)*.6+(w.tin||0)*.25+(w.sung?sg(w.sung):0)*N.ws*m('sung')+(w.danh||0)*N.wd*m('danh')+(w.th||0)*.3+(w.hh||0)*.25+(w.duc||0)*(S.duc<45?1.2:.4)*m('duc')+(w.maid||0)*.1+(w.mat||0)*.8+(w.tamco||0)*.3*m('tamco')+(w.tai||0)*.2*m('tai')+(w.sac||0)*.5+(w.bac||0)*(S.bac<60?.08:.03)*m('bac')+(w.suc||0)*(S.suc<50?.3:.05)*m('suc')}
 function costW(c){c=c||{};return (c.suc||0)*(S.suc<50?.35:.08)+(c.bac||0)*(S.bac<60?.09:.035)+(c.duc?c.duc*3:0)+(c.sung||0)+(c.danh||0)}
 function scoreAct(a,N,cost){
-  if(BAD.test(a.n))return -1e9;
+  if(BAD.test(a.n)&&!window.__allowBad)return -1e9;
   if(S.suc+((a.c&&a.c.suc)||0)<20&&a.n!=="Nghỉ ngơi dưỡng sức")return -1e9;
   if(a.c&&a.c.duc<0&&S.duc<50)return -1e9;
   if(a.j67&&!window.__noStory)return 6; /* a sensible player opens the next Mệnh truyện beat when it is ready */
@@ -74,7 +75,7 @@ function scoreAct(a,N,cost){
   if(/Cầu tự/.test(a.n)&&!S.preg&&S.sung>=30)v+=2;
   return v/Math.sqrt(cost)}
 function talkScore(t,N){const{p,a}=t;
-  if(BAD.test(a.n)||a.open)return -1e9;
+  if((BAD.test(a.n)&&!window.__allowBad)||a.open)return -1e9;
   if(S.suc+((a.c&&a.c.suc)||0)<20)return -1e9;
   const o=a.o==null?1:cl(a.o,5,100)/100;
   let v=o*valW(a.w,N)+(1-o)*valW(a.l,N)-costW(a.c);
@@ -120,8 +121,9 @@ function sensibleStep(){
   if(!HS)pls.forEach(p=>opts.push({L:"g"+p.k,s:p.s,f:()=>{note("go",p.k);goTo(p.k)}}));
   try{if(window.__xOpts)for(const o of window.__xOpts(N))opts.push(o)}catch(e){}/* danh-p1 intn.js: Tài nghệ options */
   const tk=S.turn+'_'+S.tuan+'_'+(S.buoi||0)+'_'+used+'_'+S.place;if(window.__btk!==tk){window.__btk=tk;window.__ban={}}
+  try{if(window.__persOpts)window.__persOpts(opts,N)}catch(e){}/* robot10 personality: add / boost options */
   const op2=opts.filter(o=>!o.L||(window.__ban[o.L]||0)<3);op2.sort((a,b)=>b.s-a.s);
-  if(op2.length&&op2[0].s>0.35){if(op2[0].L)window.__ban[op2[0].L]=(window.__ban[op2[0].L]||0)+1;op2[0].f();return}
+  if(op2.length&&op2[0].s>(window.__minS==null?0.35:window.__minS)){if(op2[0].L)window.__ban[op2[0].L]=(window.__ban[op2[0].L]||0)+1;op2[0].f();return}
   window.__buoi++;if(used<=1)window.__idle++;nextBuoi()}
 window.__bot={step:(mode,n)=>{
   for(let i=0;i<n;i++){if(window.__vtPump)window.__vtPump(5);/* run_rep.js virtual clock (vclock.js): game timers advance 5 ms per bot step */window.__iter++;window.__lifeIter++;

@@ -38,7 +38,7 @@ function egHauWin(){const R=BAL.road.end;try{if(S.rank>=EG_HH()){S.shield=Math.m
 /* ch14 win: her son. No Thái tử yet and he is dear enough to Hoàng thượng → he is set (j1 setHeir); else his weight grows (j67 e67heir). */
 function egKeWin(){const R=BAL.road.end;try{const s=son67();if(!s){apply({danh:R.keDanh});return `Danh +${R.keDanh}: lục cung gọi ngươi là mẹ hiền.`}
  if(egHeirMine())return e67heir(R.keHeir);
- if(egHeirNone()&&(s.fond||0)>=R.keFond&&typeof setHeir==="function"){setHeir(s,null);return `<b class="g">${s.name} được lập làm Thái tử.</b>`}
+ if(egHeirNone()&&(s.fond||0)>=R.keFond&&typeof setHeir==="function"){const d0=S.danh||0;setHeir(s,null);const dd=(S.danh||0)-d0;/* law 4 (review/j51-heir-danh): the Danh the jkidlife setHeir wrap really applied (BAL.kid.heirDanh; 0 when her own son already held it), as j3 / j51 print it */return `<b class="g">${s.name} được lập làm Thái tử.</b>${dd?` Danh ${balSg(dd)}.`:""}`}
  return e67heir(R.keHeir)}catch(e){console.error(e)}return""}
 
 /* ---------- ch12x · noi14 · Người nối dõi (no living child) ---------- */

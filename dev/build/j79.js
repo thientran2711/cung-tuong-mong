@@ -628,7 +628,9 @@ KP_SEAL.game="TÀI NGHỆ";
    the odds WORD of BAL.skip.od (word(od(...)), VANPHONG ladder, no %; none when sure) · "thành: <win>" · "hỏng: <lose>". sub = a game whose quick choice keeps
    its own rule (contests: the mark of a girl of her level; acts: the act's own odds) gives its line itself, still in this part. kitQuickRoll() = THE roll. */
 function kitQuickSub(o){o=o||{};if(o.sub!=null)return o.sub;const w=o.sure?"":word(od(BAL.skip.od));return [w,o.win?`thành: ${o.win}`:"",!o.sure&&o.lose?`hỏng: ${o.lose}`:""].filter(Boolean).join(" · ")}
-function kitQuick(o){o=o||{};const sb=kitQuickSub(o);return `<button type="button" class="${typeof kg82Btn==="function"?kg82Btn(true):"kbtn alt"} kquick" id="${o.id||"kg82skip"}"${o.data?" "+o.data:""}>${o.n||"Để trời định"}${sb?`<small>${sb}</small>`:""}</button>`}
+/* owner 24/11 (MAIN 128): ONE skip wording in every mini-game: «Bỏ qua» + what happens in plain words (numbers-as-text "5/10" become the mark word, jmgt mgWord) */
+function kitQuickWords(t){return String(t||"").replace(/(?:tính\s+)?(\d+)\/10(\s+phần)?(?:\s*\(\+\d+\))?/g,(m,n)=>{try{return typeof mgWord==="function"?"kết quả "+String(mgWord(+n)).toLowerCase():"kết quả thường"}catch(e){return"kết quả thường"}})}
+function kitQuick(o){o=o||{};const sb=kitQuickWords(kitQuickSub(o))||"kết quả thường";return `<button type="button" class="${typeof kg82Btn==="function"?kg82Btn(true):"kbtn alt"} kquick" id="${o.id||"kg82skip"}"${o.data?" "+o.data:""}>Bỏ qua<small>${sb}</small></button>`}
 function kitQuickRoll(){return roll(od(BAL.skip.od))}
 window.kitQuick=kitQuick;window.kitQuickSub=kitQuickSub;window.kitQuickRoll=kitQuickRoll;
 (function(){const st=document.createElement("style");st.id="kquick-css";/* ONE look wherever the quick button sits (inside .kg82act, in the j5 #ov lesson panel, under the care frames) */
@@ -746,7 +748,7 @@ function kitGameResult(r){r=r||{};const rows=[];
 `;document.head.appendChild(st)})();
 
 /* a "; " inside a price line joins two different values (a gain and a risk): split them so each lands in its own row and colour */
-(function(){if(typeof kitParse!=="function")return;const k0=kitParse;kitParse=function(str){let s=String(str==null?"":str);if(!/class="kb/.test(s))s=s.split(/(<[^>]+>)/).map(x=>x&&x[0]==="<"?x:x.replace(/;\s+/g," · ")).join("");return k0.call(this,s)}})();
+(function(){if(typeof kitParse!=="function")return;const k0=kitParse;kitParse=function(str){let s=String(str==null?"":str);if(typeof kitNoUnk==="function")s=kitNoUnk(s);if(!/class="kb/.test(s))s=s.split(/(<[^>]+>)/).map(x=>x&&x[0]==="<"?x:x.replace(/;\s+/g," · ")).join("");return k0.call(this,s)}})();
 /* words that read as a gain / a risk for her even without a number */
 (function(){if(typeof kcls!=="function")return;const k0=kcls;kcls=function(t){const s=String(t==null?"":t).replace(/<[^>]+>/g,"").trim();
  if(/(có thể |dễ )?(bị )?(lật tẩy|phát giác|bị lộ|bị bắt|bị phạt|bị nghi)/i.test(s)&&!/\+\s?\d/.test(s))return"r";if(/^(dễ được|được (thăm|ban|thưởng|sủng|để ý|gặp|mời))/i.test(s))return"g";return k0.apply(this,arguments)}})();
@@ -808,7 +810,7 @@ if(typeof kaTimeNeeds==="function"){kaTimeNeeds=function(c,bacCost,sucCost){cons
 /* "có thể gặp người" (Lĩnh đồ, j42 srvMeet: 25 % bị bắt nạt Sức -5, else quen một người mới if anyone is left) -> real ladder words */
 (function(){if(typeof srvCards!=="function")return;const c0=srvCards;srvCards=function(){const D=c0.apply(this,arguments);try{for(const a of D||[]){if(!a||!/có thể gặp người/.test(a.x||""))continue;
  let left=0;try{const m=srvM();left=allServ().filter(s=>ownerOf(s)!==m&&!S.srv.met.includes(s.sid)).length}catch(e){}
- a.x=a.x.replace(/có thể gặp người/,left?`quen một người mới: ${chanceW(75)}`:"không còn ai mới để quen")+` · kèm: bị bắt nạt, Sức -5: ${chanceW(25)}`}}catch(e){}return D}})();
+ a.x=a.x.replace(/có thể gặp người/,left?`quen một người mới: ${chanceW(100-SRVA.nvp.bully)}`:"không còn ai mới để quen")+` · kèm: bị bắt nạt, Sức ${balSg(BAL.rl.j42.sucSrvMeet)}: ${chanceW(SRVA.nvp.bully)}`}}catch(e){}return D}})();
 
 /* ---------- ACT ART SLOT (kit 6.1): square illustration left of every act card, rows right ----------
    Manifest img/ACTS.json {acts:{"<card title>|<slug>":"<key>"}, have:["act-cat-hoc-tap", ...]} -> img/act-<key>.webp;
@@ -893,7 +895,7 @@ if(typeof LACK==="object"){const bac=n=>S.bac<n?`Bạc ${n} (có ${S.bac})`:"";c
  steal:t=>tonightOf()===t?"":"tối nay nàng được lật thẻ",road:t=>tonightOf()===t?"":"tối nay nàng được lật thẻ",
  tocao:t=>!realCrime(t)?"nàng có tội thật (ngươi biết)":evG(S,t)<1?`1 chứng cứ về nàng (có ${evG(S,t)})`:"",
  expose:t=>!hasScandal(t)?"nàng có chuyện tư tình (ngươi biết)":evG(S,t)<2?`2 chứng cứ về nàng (có ${evG(S,t)})`:"",
- xinhh:t=>{const q=queenP();return bac(30)||(!q||q===S?"có Hoàng hậu (không phải ngươi)":q===t?"nàng không phải Hoàng hậu":aff(q,S)<40?`Hoàng hậu quý ngươi ≥40 (có ${aff(q,S)})`:rkOf(t)<1?"nàng từ Thường tại trở lên":"")},
+ xinhh:t=>{const q=queenP();return bac(30)||(!q||q===S?"có Hoàng hậu (không phải ngươi)":q===t?"nàng không phải Hoàng hậu":aff(q,S)<netTh(q,"than")?`Hoàng hậu quý ngươi ≥40 (có ${aff(q,S)})`:rkOf(t)<1?"nàng từ Thường tại trở lên":"")},
  pushp:t=>whereOf(S)!=="vuon"?"ngươi đang ở Ngự hoa viên":!together(S,t)?"nàng ở cùng chỗ với ngươi":"",trip:t=>together(S,t)?"":"nàng ở cùng chỗ với ngươi"})}
 
 /* ================= wiring j78 (intel + evidence data) to the kit ================= */
@@ -1247,8 +1249,8 @@ function kitTgt(){try{if(typeof J78==="object"&&J78.cardV)return J78.cardV}catch
  D("poison",v=>v?[`nàng trúng độc · ${kpDeathWord(kpDeathP("poison",v),"nàng")}`,fail("poison")]:null);
  D("kpoison",v=>{const p=v&&kpDeathP("kpoison",v);return p==null?null:[`con nàng trúng độc · ${kpDeathWord(p,"con nàng")}`,fail("kpoison")]});
  D("pond",v=>v?[`con nàng rơi xuống hồ · ${kpDeathWord(kpDeathP("pond",v),"con nàng")}`,fail("pond")]:null);
- D("kframe",v=>{if(!v||typeof sonsOf!=="function")return null;const k=sonsOf(v).filter(k=>k.age>=6).sort((x,y)=>(+y.heir)-(+x.heir))[0];if(!k)return null;
-  return[`Hoàng thượng thương ${k.name} -35, Danh nàng -10, nàng bị phạt${k.heir?`, ${k.name} bị phế ngôi Thái tử`:""}`,fail("kframe")]});
+ D("kframe",v=>{if(!v||typeof sonsOf!=="function")return null;const k=sonsOf(v).filter(k=>k.age>=BAL.eff.j8.kframeAge).sort((x,y)=>(+y.heir)-(+x.heir))[0];if(!k)return null;
+  return[`Hoàng thượng thương ${k.name} ${balSg(-BAL.eff.j8.fondF)}, Danh nàng ${balSg(BAL.eff.j8.kframeDanh)}, nàng bị phạt${k.heir?`, ${k.name} bị phế ngôi Thái tử (Danh nàng thêm ${balSg(-BAL.kid.heirDanh)})`:""}`,fail("kframe")]});
  D("trip",v=>[`nàng vấp ngã: Danh nàng -3${v&&v.preg&&!v.hidden?` · nàng động thai: ${chanceW(25)}`:""}`,fail("trip")]);
  D("pushp",v=>[`nàng rơi xuống hồ sen: Sức nàng -25${v&&v.preg&&!v.hidden?` · nàng sảy thai: ${chanceW(60)}`:""}`,fail("pushp")]);
  if(typeof actLineRaw==="function"){const a0=actLineRaw;actLineRaw=function(k,w,c){let r=a0.apply(this,arguments);try{const CW=typeof caughtW==="function"?caughtW():null;if(CW&&String(r).includes(CW)){/* previews: caught */const v=kitTgt();const t=v&&kaCaughtTxt(v,k);r=String(r).split(CW).join(t||`kèm: bị người của nàng phát giác, nàng nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ`)}}catch(e){}return r}}})();

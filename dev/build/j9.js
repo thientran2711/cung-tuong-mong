@@ -28,9 +28,11 @@ function msAffAdd(x,y,n){const c=v=>cl(v,-100,100);if(relMaster(x,y)&&!(y===S&&t
 function msOan(x,y){if(relMS(x)){if(y===S)return +x.oan||0;return (x.ro&&+x.ro[relHk(x,y)])||0}const M=x===S?S.ro:x.ro;return (M&&M[relKey(y)])||0}
 function msOanAdd(x,y,n){const c=v=>cl(Math.round(v),0,100);if(relMS(x)){if(y===S){x.oan=c((+x.oan||0)+n);return}const M=relMap(x,"ro"),k=relHk(x,y);M[k]=c((+M[k]||0)+n);return}
  const M=x===S?S.ro:relMap(x,"ro"),k=relKey(y);M[k]=c((M[k]||0)+n)}
-function aff(x,y){if(x===y)return 0;if(relMS(x)||relMS(y))return msAff(x,y);if(x===S)return S.rl[y.id]||0;if(y===S)return x.rel;return x.rl[y.id]||0}
+/* range on read (review/net-build step 0): every writer of .rel / .rl / .ro / .oan is clamped here too, BAL.linkRange */
+function relCl(v,R){return typeof v==="number"&&isFinite(v)?Math.max(R[0],Math.min(R[1],v)):0}
+function aff(x,y){if(x===y)return 0;if(relMS(x)||relMS(y))return msAff(x,y);const R=BAL.linkRange.rl;if(x===S)return relCl(S.rl[y.id],R);if(y===S)return relCl(x.rel,R);return relCl(x.rl[y.id],R)}
 function affAdd(x,y,n){if(!x||!y||x===y)return;if(relMS(x)||relMS(y))return msAffAdd(x,y,n);const R=BAL.linkRange.rl;/* ONE CORE (rv coop-flakes) */if(x===S){S.rl[y.id]=cl((S.rl[y.id]||0)+n,R[0],R[1]);return}if(y===S){x.rel=cl(x.rel+n,R[0],R[1]);return}x.rl[y.id]=cl((x.rl[y.id]||0)+n,R[0],R[1])}
-function oan(x,y){if(!x||!y||x===y)return 0;if(relMS(x)||relMS(y))return msOan(x,y);if(x===S)return S.ro[y.id]||0;if(y===S)return x.oan||0;return x.ro[y.id]||0}
+function oan(x,y){if(!x||!y||x===y)return 0;if(relMS(x)||relMS(y))return msOan(x,y);const R=BAL.linkRange.ro;if(x===S)return relCl(S.ro[y.id],R);if(y===S)return relCl(x.oan,R);return relCl(x.ro[y.id],R)}
 function oanAdd(x,y,n){if(!x||!y||x===y)return;if(relMS(x)||relMS(y))return msOanAdd(x,y,n);const R=BAL.linkRange.ro,c=v=>cl(Math.round(v),R[0],R[1]);if(x===S){S.ro[y.id]=c((S.ro[y.id]||0)+n);return}if(y===S){x.oan=c((x.oan||0)+n);return}x.ro[y.id]=c((x.ro[y.id]||0)+n)}
 /* every man and servant who can hold a relation (the oán fade, the old-save fill, the Ân oán groups) */
 function relMSAll(){const L=[],add=p=>{if(p&&typeof p==="object"&&!L.includes(p))L.push(p)};if(!S)return L;(S.men||[]).forEach(add);add(S.maid);(S.staff||[]).forEach(add);
@@ -123,10 +125,10 @@ function topicOpts(v){const f=chatF(v),g=n=>Math.max(1,Math.round(n*f)),third=li
  /* AG-ALL-2e: the four talk topics are built ONCE by P3T.<k>(speaker, listener) (jagacts3) — her talk and an NPC↔NPC talk run the same card */
  const TK=BAL.talk;A.push(P3T.health(S,v));A.push(P3T.praise(S,v));if(third)A.push(P3T.gossip(S,v,third));A.push(P3T.secret(S,v));
  A.push({n:"Nhờ giúp đỡ",o:100,inner:1,x:typeof rcvWord==="function"?`${rcvWord(v,S)} · nàng có thể giúp hết lòng, làm qua loa, từ chối, hoặc đem chuyện đi mách`:"",run:()=>{chatMark(v);return helpAsk(S,v).r}});
- const foe=liveRivals(true).filter(x=>x!==v&&oan(x,v)>=TK.warn.foe)[0];
+ const foe=liveRivals(true).filter(x=>x!==v&&oan(x,v)>=netTh(x,"act"))[0];
  A.push({n:"Cảnh báo nàng",o:100,x:foe?`có kẻ đang oán nàng: nàng quý ngươi +${g(TK.warn.hit)}`:`không có căn cứ: nàng quý ngươi -${TK.warn.miss}`,run:()=>{chatMark(v);if(foe){affAdd(v,S,g(TK.warn.hit));oanAdd(v,foe,TK.warn.oan);return `Ngươi nhắc ${v.name} coi chừng ${foe.name}. Nàng quý ngươi +${g(TK.warn.hit)}.`}affAdd(v,S,-TK.warn.miss);return `${v.name} nghi ngươi gây chia rẽ. Nàng quý ngươi -${TK.warn.miss}.`}});
- if(oan(v,S)>0){A.push({n:"Tạ lỗi",o:100,c:{danh:-1},x:`oán ${balSg(BAL.eff.j9.run_8)}`,run:()=>{oanAdd(v,S,BAL.eff.j9.run_8);chatMark(v);return `Ngươi hạ mình tạ lỗi. ${v.name} oán ${balSg(BAL.eff.j9.run_8)}.`}});
-  A.push({n:"Nhún nhường",o:100,c:{...BAL.ag.cx.humble.c},x:`oán -${BAL.ag.cx.humble.oanDown} · nàng quý ngươi +${BAL.ag.cx.humble.aff}`,run:()=>{oanAdd(v,S,-BAL.ag.cx.humble.oanDown);affAdd(v,S,BAL.ag.cx.humble.aff);chatMark(v);return `Ngươi nhún nhường trước ${v.name}. Oán -${BAL.ag.cx.humble.oanDown}, nàng quý ngươi +${BAL.ag.cx.humble.aff}.`}})}
+ if(oan(v,S)>0){A.push({n:"Tạ lỗi",o:100,c:{danh:-1},x:`thành: oán ${balSg(BAL.eff.j9.run_8)}`,run:()=>{chatMark(v);if(!netForgive(v,S))return netRefused(S,v,"hạ mình tạ lỗi với")+".";oanAdd(v,S,BAL.eff.j9.run_8);return `Ngươi hạ mình tạ lỗi. ${v.name} oán ${balSg(BAL.eff.j9.run_8)}.`}});
+  A.push({n:"Nhún nhường",o:100,c:{...BAL.ag.cx.humble.c},x:`thành: oán -${BAL.ag.cx.humble.oanDown} · nàng quý ngươi +${BAL.ag.cx.humble.aff}`,run:()=>{if(!netForgive(v,S)){chatMark(v);return netRefused(S,v,"nhún nhường trước")+"."}oanAdd(v,S,-BAL.ag.cx.humble.oanDown);affAdd(v,S,BAL.ag.cx.humble.aff);chatMark(v);return `Ngươi nhún nhường trước ${v.name}. Oán -${BAL.ag.cx.humble.oanDown}, nàng quý ngươi +${BAL.ag.cx.humble.aff}.`}})}
  A.push({n:"Giúp đỡ nàng",c:{bac:-20},o:100,x:`nàng quý ngươi ${balSg(BAL.eff.j9.run_11)} · oán ${balSg(BAL.eff.j9.run_12)}`,run:()=>{relAdd(S,v,BAL.eff.j9.run_11);oanAdd(v,S,BAL.eff.j9.run_12);chatMark(v);return `Ngươi giúp ${v.name} việc khó. Nàng quý ngươi ${balSg(BAL.eff.j9.run_11)}.`}});
  if(same)return A.filter(a=>["Hỏi han sức khỏe","Bàn tán về "+(third?third.name:""),"Tạ lỗi","Nhún nhường"].includes(a.n)).concat([{n:"Cùng cung",o:100,fix:1,lock:true,t:"không thể lấy lòng hay ra tay",x:""}]);
  return A}
@@ -136,11 +138,11 @@ function placeHarms(v,k){const H=[];if(sameHouse(S,v))return H;
  const act=(key2,n,x)=>{const a=ACT[key2];if(a&&a.ok(S,v))H.push({n,o:a.o?actOdds(S,v,key2):100,act:1,x:[a.x||"",fmt(a.c)].filter(Boolean).join(" · "),run:()=>runAct(S,v,key2)})};
  act("spy","Dò la");act("rumor","Tung tin đồn");
  if(FOOD.includes(k)||k[0]==="r"){act("poison","Bỏ độc vào trà nàng");act("musk","Bỏ xạ hương vào thuốc nàng")}
- if(k==="vuon"){H.push({n:"Đẩy nàng xuống hồ sen",o:odA(S,40+S.tamco/4),act:1,x:"Đức -12 · lộ: bị phạt",run:()=>pushPond(S,v)});act("pond","Đẩy con nàng xuống hồ")}
+ if(k==="vuon"){H.push({n:"Đẩy nàng xuống hồ sen",o:odA(S,40+S.tamco/4),act:1,x:`Đức ${balSg(BAL.eff.j9.ducPushPond)} · lộ: bị phạt`,run:()=>pushPond(S,v)});act("pond","Đẩy con nàng xuống hồ")}
  H.push({n:"Ngáng chân nàng",o:odA(S,50+S.tamco/5),act:1,x:v.preg&&!v.hidden?"nàng đang có thai":"nàng bẽ mặt",run:()=>trip(S,v)});
  act("frame","Vu oan");act("vp","Tố vượt phẩm");act("xx","Tố xa xỉ");
  return H}
-function pushPond(a,t){ap(a,{duc:-12});a.schemes=(a.schemes||0)+1;const c=caught(a,t,false,"đẩy "+NM(t)+" xuống hồ sen");if(c)return c;
+function pushPond(a,t){ap(a,{duc:BAL.eff.j9.ducPushPond});a.schemes=(a.schemes||0)+1;const c=caught(a,t,false,"đẩy "+NM(t)+" xuống hồ sen");if(c)return c;
  if(aRoll(odA(a,40+a.tamco/4),a)){ap(t,{suc:-25});if(t.preg&&!t.fake&&roll(60)){t.preg=0;t.hidden=false}relAdd(a,t,BAL.eff.j9.pushPond);return (t===S?"<span class=\"r\">Ngươi bị đẩy xuống hồ sen</span>":`${t.name} trượt chân rơi xuống hồ sen`)+`, ướt sũng, nhiễm lạnh. Sức ${balSg(BAL.eff.j9.pushPond_2)}${t.preg===0?"":""}. `+dieIf(t,"nhiễm lạnh mà mất")}
  ap(a,{danh:-8});relAdd(a,t,BAL.eff.j9.pushPond_2);punish(a,"xô ngã phi tần",2);return `<span class="r">${NMc(a)} xô ${NM(t)} bị người thấy.</span> `}
 function trip(a,t){ap(a,{duc:-4});if(aRoll(odA(a,50+a.tamco/5),a)){ap(t,{danh:BAL.eff.j9.danhTrip});let r=`${NMc(t)} vấp ngã giữa chốn đông người. Danh ${balSg(BAL.eff.j9.danhTrip)}. `;if(t.preg&&!t.fake&&roll(25)){t.preg=0;t.hidden=false;ap(t,{suc:-15});r+=`<span class="r">${NMc(t)} động thai.</span> `}relAdd(a,t,BAL.eff.j9.trip);return r}
@@ -205,5 +207,5 @@ function nextBuoi(){if(!S||S.dead||Q.length||S.mg)return;if((S.buoi||0)>=B4L){S.
  S.buoi=(S.buoi||0)+1;used=0;const ev=b4NpcActs()?rivalsBuoi():"";if(S.dead){render();return}placeWhere();popIdx=null;popMsg="";
  if(S.out)coldVisit();else if(S.place!=="home"){const k=S.place;S.place="home";const u=used;/* review stage-here r4 (OD 18/11 ~19:45Z: her room comes back only at a new day or when she walks home): a card the buổi turn already queued (rivalsBuoi) must not make goTo refuse and leave her at home — hold the queue aside for this refresh, then put it back first */const q0=Q.splice(0);try{goTo(k)}finally{Q.unshift(...q0)}used=u}else S.visit={k:"home",people:homePeople(),talked:false,tk:{}};
  if(ev)Q.push({t:"Tin trong cung buổi này",kind:"news",h:`<p class="past">${when()} · ${BUOI[S.buoi]}</p><p>${ev}</p>`});curtain();render()}
-A("pushp","Đẩy xuống hồ sen",{c:{duc:-12},ok:(a,t)=>whereOf(a)==="vuon"&&together(a,t),o:a=>odA(a,40+a.tamco/4),f:(a,t)=>pushPond(a,t)});
+A("pushp","Đẩy xuống hồ sen",{c:{get duc(){return BAL.eff.j9.ducPushPond}},ok:(a,t)=>whereOf(a)==="vuon"&&together(a,t),o:a=>odA(a,40+a.tamco/4),f:(a,t)=>pushPond(a,t)});
 A("trip","Ngáng chân",{c:{duc:-4},ok:(a,t)=>together(a,t),o:a=>odA(a,50+a.tamco/5),f:(a,t)=>trip(a,t)});

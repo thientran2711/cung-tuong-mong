@@ -20,7 +20,16 @@ function dfData(i){return (dfActs(i)||[]).map(g=>({k:g.k,n:g.n,can:g.can,tot:g.t
 function dfHud(F,o){try{const T=BAL.df.rawTop;if(!F||!o)return;F.hud(o.score!=null?o.score+"/"+T:null,o.time!=null?o.time+" giây":null)}catch(e){}}
 function dfSetGroups(F,G){try{F.setGroups(G)}catch(e){}}
 /* the kit play layer (K-FOCUS-1 r2): ONE kit skip button «Làm luôn» + ◂ = onBack (cancel, no act) — nothing drawn here */
-function dfPlay(F,onSkip,onBack){return F.play({skip:{n:"Làm luôn",sub:"không chơi: như thường",onSkip},onBack})}
+function dfPlay(F,onSkip,onBack){return F.play({skip:{n:"Bỏ qua",sub:"kết quả thường",onSkip},onBack})}
+/* owner 24/11 ~22:02Z item 6: EVERY on-figure game first shows its rules (kit «Luật chơi» block, same words as the Điểm trang rules screen) and starts only on «Sẵn sàng» */
+const DF_RULE={
+ swipe:["Vuốt","Vòng đỏ lướt qua mặt nàng: vuốt ngón tay ngang qua nó, vuốt càng nhanh càng nặng tay.","Trúng và nhanh thì thành hẳn; hụt thì hỏng."],
+ tug:["Chạm liên tục","Chạm nhanh để đẩy thanh lên đầy; nàng kéo ngược lại.","Thanh đầy trước khi kịp tụt thì thành."],
+ bow:["Chạm đúng nhịp","Vòng khép dần quanh nàng: chạm đúng lúc vòng chuyển xanh, ba nhịp.","Đúng nhịp càng nhiều càng thành."],
+ drag:["Kéo","Kéo vật vào đôi tay nàng đang đưa qua lại; thả đúng lúc tay ở vòng xanh.","Trúng giữa vòng thì trọn vẹn."],
+ ear:["Giữ","Giữ ngón tay ở bên tai nàng; buông khi người bên cạnh liếc sang (thanh đỏ), giữ lại khi họ quay đi.","Giữ đủ lâu mà không bị bắt gặp thì thành."],
+ words:["Chạm dấu","Dấu trôi lên: chạm dấu ✓ xanh (lời hợp ý), tránh dấu ✗ đỏ (lời hỏng).","Chạm đúng nhiều dấu ✓ thì thành; chạm nhầm dấu ✗ thì mất điểm."],
+ stare:["Giữ ngón tay","Giữ ngón tay để thanh áp lực nằm trong dải xanh; nàng đẩy lại nên buông và giữ cho khéo.","Ở trong dải xanh càng lâu càng thành."]};
 function dfUnplay(F){try{if(F.playing)F.endPlay()}catch(e){}}
 function dfLast(){try{const t=document.getElementById("rtoast");return t&&t.classList.contains("on")?t.innerText.trim().split("\n")[0]:""}catch(e){return""}}
 /* the focus holds the PERSON (DF.p), never a frozen index: S.visit.people can shift while it is up (co-op refreshHere unshifts the Emperor,
@@ -40,9 +49,13 @@ function dfTap(id){const F=DF.F;if(!F||S.dead||Q.length||DF.play)return;const i=
  const run=res=>{const j=dfHere();if(j<0)return;dfRun(j,id,res);dfAfter(a,res)};
  if(a.cls==="D"){run();return}
  const layer=dfPlay(F,()=>{if(DF.play)DF.play.skip()},()=>{const h=DF.play;DF.play=null;if(h)h.destroy()});if(!layer){run();return}
- DF.play=dfGame(a.eng,{box:layer,fig:dfFigBox(F,layer),rank:typeof rkOf==="function"?rkOf(S):S.rank,at:/Ngáng chân/.test(a.n)?"feet":null,hud:o=>dfHud(F,o),
+ const go=()=>{DF.play=dfGame(a.eng,{box:layer,fig:dfFigBox(F,layer),rank:typeof rkOf==="function"?rkOf(S):S.rank,at:/Ngáng chân/.test(a.n)?"feet":null,hud:o=>dfHud(F,o),
   onDone:res=>{DF.play=null;dfUnplay(F);run(res)}});
- if(!DF.play){dfUnplay(F);run()}}
+  if(!DF.play){dfUnplay(F);run()}};
+ /* intro first: DF.play is a stub (skip = the quick result) until «Sẵn sàng» */
+ DF.play={skip(){DF.play=null;dfUnplay(F);run({raw:null,skipped:true})},destroy(){}};
+ const R=DF_RULE[a.eng]||DF_RULE.words,nm=String(a.n||"").replace(/<[^>]+>/g,"");/* KIT §92.4: the kit rules card (kitFocus F.intro); nothing drawn here */
+ if(!F.intro({title:R[0],rows:[["Việc",nm,"t"],["Chạm",R[1],"t"],["Được",R[2],"t"]],go:"Sẵn sàng",sub:"bắt đầu chơi",onGo:()=>{DF.play=null;go()}})){DF.play=null;go()}}
 function dfAfter(a,res){const F=DF.F;if(!F)return;const i=dfIdx();if(i<0){dfGone();return}try{const ln=dfLast();F.react({line:ln?ln.slice(0,BAL.df.reactChars):"",seal:true})}catch(e){}dfSetGroups(F,dfData(i))}
 /* the old pop-up stays hidden under the focus view (the global [hidden] rule; no CSS of its own) */
 (function(){const r0=renderStage;renderStage=function(){if(DF.p&&DF.F&&!DF.play){const k=dfIdx();if(k<0){setTimeout(()=>{if(DF.p&&dfIdx()<0)dfGone()},0)}else{DF.i=k;popIdx=k}}
@@ -53,7 +66,10 @@ document.addEventListener("click",e=>{try{if(!dfViewOn()||typeof S==="undefined"
 /* (3) NPC-initiated: the top person card whose speaker stands here */
 function dfWhoIdx(m){try{const w=m&&m.who&&m.who.w;if(!w||w[0]!=="r")return -1;return curPeople().findIndex(p=>p.ref&&p.ref.id===w[1])}catch(e){return -1}}
 function dfEncOn(){return dfViewOn()&&BAL.df.npc&&typeof tab!=="undefined"&&tab==="act"&&!!S&&!!S.visit&&!S.out}
-(function(){const s0=showModal;showModal=function(){const m=Q[0];/* the same card is already playing in the scene (say / choices): a repeated showModal (render, timers) keeps the centre modal hidden */
+(function(){const s0=showModal;showModal=function(){const m=Q[0];/* a visitor is known BEFORE the encounter scene opens (rv-visitor-fix 1): her stage token is refreshed and the scene waits (≤ 4 s) until her real face has loaded, so the focus figure is HER, never the grey silhouette / loading stand-in */
+if(m&&m.__dfWait===1)return undefined;
+try{const w=m&&m.t==="Có người đến"&&m.who&&m.who.w;if(w&&w[0]==="r"&&typeof visitSeen==="function"&&m.__dfWait==null){const v=RV(w[1]);if(v){visitSeen(v);const bad=f=>!f||f.tagName!=="IMG"||!f.complete||!(f.currentSrc||f.getAttribute("src"))||f.classList.contains("j59sil")||/unknown-fig/.test(f.currentSrc||f.src||"");
+ const i0=dfWhoIdx(m);if(i0>=0&&dfEncOn()&&bad(dfFig(i0))){try{renderStage()}catch(e){}m.__dfWait=1;const t0=Date.now();const poll=()=>{const i2=dfWhoIdx(m);if(!bad(i2>=0?dfFig(i2):null)||Date.now()-t0>4000){m.__dfWait=2;try{showModal()}catch(e){}}else setTimeout(poll,150)};setTimeout(poll,150);return undefined}}}}catch(e){}/* the same card is already playing in the scene (say / choices): a repeated showModal (render, timers) keeps the centre modal hidden */
  if(m&&m.dfSeen&&DF.encM===m&&DF.F){try{const M=document.getElementById("modal");if(M)M.hidden=true}catch(e){}return undefined}const i=m&&!m.dfSeen&&m.opts&&m.opts.length&&dfEncOn()?dfWhoIdx(m):-1;if(i<0||!dfHasFig(i))return s0.apply(this,arguments);
  m.dfSeen=1;DF.encM=m;const p=curPeople()[i],fig=dfFig(i);try{const M=document.getElementById("modal");if(M)M.hidden=true}catch(e){}
  if(DF.F&&!dfSame(DF.p,p)){const o=DF.F;DF.F=null;DF.tk=null;try{o.destroy()}catch(e){}}DF.p=p;DF.i=i;popIdx=i;let F=DF.F;if(!F){const tk={};DF.tk=tk;F=kitFocus.open({p,person:p,fig,from:fig&&fig.getBoundingClientRect(),groups:[],encounter:true,onAct:id=>dfTap(id),onClose:()=>dfClosed(tk)})}DF.F=F;
@@ -81,3 +97,11 @@ function dfMoodNext(first){const I=BAL.df.idle;return first?I.first:I.every[0]+M
  const arm=first=>{if(tm)clearTimeout(tm);tm=setTimeout(tick,dfMoodNext(first))};
  const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{if(S&&S.place!==plc){plc=S.place;arm(true)}}catch(e){}return r}})();
 window.dfMoodPick=dfMoodPick;
+/* robot10 nc-fix (text over text, Fold story / rel tabs): the focus layer and the mood bubble are drawn on #game over the STAGE, but a tap on another
+   tab (the tab bar stays free under the focus) left them standing over that tab's panel. They belong to «Hành sự» only: hidden while another tab
+   is up (the open focus — a talk, an encounter or a mini-game on it — comes back as it was when she returns), the short mood bubble just goes. */
+function dfTabLayers(){try{const off=typeof tab!=="undefined"&&tab!=="act";const F=typeof kitFocus==="object"&&kitFocus&&kitFocus.current?kitFocus.current():null;
+ if(F&&F.el&&F.open){if(F.el.hidden!==off){F.el.hidden=off;if(!off&&kitFocus.reposition)kitFocus.reposition()}}
+ if(off)document.querySelectorAll("#game>.kfoc-mood,body>.kfoc-mood").forEach(b=>b.remove())}catch(e){console.error("dfTabLayers",e)}}
+(function(){const r0=window.renderPanel;if(typeof r0!=="function")return;window.renderPanel=renderPanel=function(){const r=r0.apply(this,arguments);dfTabLayers();return r}})();/* renderPanel: every tab change draws the panel (render() and the j63 log jump) */
+window.dfTabLayers=dfTabLayers;

@@ -32,7 +32,7 @@ function lmDraw(g,cx,cy,w,h,shape,col,lit,st,sway){const C=LM_COL[col];g.save();
  g.strokeStyle=C[0];g.lineWidth=2;g.beginPath();g.moveTo(0,by+bh*.97+5);g.lineTo(0,by+bh*.97+h*.16);g.stroke();g.restore()}
 function lmShuf(a){return kg82Shuf(a.slice())}
 function k92Lamp(box,env){const C=kg82Canvas(box,1.25,560,innerHeight<BAL.lantern.short.h?BAL.lantern.short.min:0),{g,W,H}=C;const tier=lmTier(env),B=BAL.lantern,LIM=B.lim[tier],IDLE=B.idle[tier];
- let rd=-1,pts=0,R=null,t0=0,tAct=0,done=false,wait=0;const pops=[];const hb=k91Btns(box,[["k92hint","?","","Gợi ý: bớt một ít phần"]]);
+ const LDU=[];let rd=-1,pts=0,R=null,t0=0,tAct=0,done=false,wait=0;const pops=[];const hb=k91Btns(box,[["k92hint","?","","Gợi ý: bớt một ít phần"]]);
  const dm=k91DemoCard(box,"doden2",{title:"CÁCH CHƠI: THẮP ĐÈN",done:()=>{hb.hidden=false;t0=tAct=performance.now();setTimeout(fit,50)},
   lines:["Ba hồi, hồi nào cũng làm theo cái đang hiện sẵn trên màn.","Hồi 1: chạm mọi chiếc đèn giống đèn mẫu (cùng dáng, cùng màu). Hồi 2: chạm để thắp đèn cho giống hình mẫu. Hồi 3: chạm đèn theo đúng thứ tự dải mẫu.","Chạm nhầm thì đèn tối đi, chạm lại. Chưa rõ thì chạm Gợi ý, chỉ tốn một ít phần."]});
  if(dm)hb.hidden=true;
@@ -49,7 +49,7 @@ function k92Lamp(box,env){const C=kg82Canvas(box,1.25,560,innerHeight<BAL.lanter
    o.T=Array(n).fill(0);idx.forEach(i=>o.T[i]=1);o.P=Array(n).fill(0);o.cols=cols;o.rows=rows;o.need=lit;o.sc=lmShuf([0,1,2,3]).slice(0,1)[0]}
   else{const m=B.seq[tier];const pairs=lmShuf([0,1,2,3].flatMap(s=>[0,1,2].map(c=>({s,c})))).slice(0,m);o.S=pairs;o.tray=lmShuf(pairs.map((p,i)=>({...p,i,used:0,bad:0})));o.k=0;o.need=m}
   return o}
- function next(){rd++;if(rd>=3){done=true;return setTimeout(()=>env.end(cl(pts,0,10)),400)}R=mk(rd);t0=tAct=performance.now()}
+ function next(){rd++;if(rd>=3){done=true;return setTimeout(()=>env.end(cl(pts,0,10)),400)}{const LI=typeof mgpOne==="function"?mgpOne("doden",LDU,x=>x.type===rd):null;/* ORDER THIN P1b: one lamp round (type × seed), the same generator on the item's seed */R=LI?mgpWith(LI,()=>mk(rd)):mk(rd)}t0=tAct=performance.now()}
  function fin(timeout){if(R.fin)return;const now=performance.now(),sp=mgPace(env,"doden",now-t0,LIM)/* review/mg-tune: the ONE time part (was its own speed share) */,base=B.pts[R.type];let p;
   const frac=R.type===0?R.found/R.need:R.type===1?R.P.filter((v,i)=>v===R.T[i]).length/R.P.length:R.k/R.need;
   p=timeout?base*frac*B.timeout:base*sp;p=Math.max(0,p-R.miss*base*B.miss-R.cost);if(timeout)p=Math.min(p,base*frac*B.timeout);pts+=p;R.fin=now;

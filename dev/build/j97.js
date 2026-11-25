@@ -19,9 +19,10 @@ const R97X={};                 /* kết hiếm của mô-đun khác (j96…): id
 const R97NT=["nt_nhuy","nt_haiduong","nt_dongchau","ngocboi","bienngu"];
 /* ---------- helpers for conditions and effects ---------- */
 function r97v(A,k){try{return rv67(A,k||"v")}catch(e){return null}}
-function r97vRel(A,k){const v=r97v(A,k);return v?(v.rel||0):-99}
+/* rv r2 (law 4): «{v} thân với ngươi» = her own «than» level (netTh), not a per-road bar */
+function r97vThan(A,k){const v=r97v(A,k);return !!v&&aff(v,S)>=netTh(v,"than")}
 function r97has(k){return (S.inv||[]).some(e=>e&&e.k===k&&!e.h)}
-function r97allies(n){try{return liveRivals(true).filter(v=>(v.rel||0)>=n).length}catch(e){return 0}}
+function r97allies(){try{return liveRivals(true).filter(v=>aff(v,S)>=netTh(v,"than")).length}catch(e){return 0}}
 function r97art(k){return (S.arts&&S.arts[k])||0}
 function r97srv(){return typeof isSrv==="function"&&isSrv()}
 function r97son(){try{return son67()}catch(e){return null}}
@@ -82,7 +83,7 @@ const R97L=[
  t:"Năm sau được mùa, dân Giang Nam góp gạch dựng một sinh từ thờ ngươi khi còn sống. Ngự sử về tâu, Hoàng thượng cười mà phong cho ngươi chữ “Nhân” làm phong hiệu. Mỗi lần ngươi qua cổng, người ta thắp hương mà khấn tên ngươi.",
  go:(_A,_ok,G)=>e67kho(G[0]),rw:"bienngu",ti:"Phong hiệu Nhân"},
 {a:"muoi_no",tag:"Kim lan trước Phụng Tiên điện",w:"v",n:"Trả sổ nợ cho {v}, rồi xin cùng nàng kết nghĩa",
- path:["Xóa nợ, kết ơn","Cho vay không điều kiện","Không bán, báo cho {v}","Đứng ra nói đó là quà","Cho thêm hạn","Nhắc khéo {v}"],bad:["Bán","Đòi bằng được","Cho vay, kèm điều kiện"],x:[A=>r97vRel(A)>=AR("muoi_no").bar,`{v} có thiện cảm với ngươi từ ${AR("muoi_no").bar}`],
+ path:["Xóa nợ, kết ơn","Cho vay không điều kiện","Không bán, báo cho {v}","Đứng ra nói đó là quà","Cho thêm hạn","Nhắc khéo {v}"],bad:["Bán","Đòi bằng được","Cho vay, kèm điều kiện"],x:[A=>r97vThan(A),`{v} thân với ngươi`],
  t:"{v} cầm sổ nợ mà khóc. Trước bàn thờ Phụng Tiên điện, hai người thắp ba nén hương, kết làm tỷ muội kim lan. Từ hôm ấy, mọi lời {v} nói với Hoàng thượng đều có một câu nhắc đến ngươi, và phe nàng thành phe ngươi.",
  go:(A,_ok,G)=>e67ally(r97v(A),G[0]),rw:"nt_nhuy",ti:"Tỷ muội kim lan"},
 /* ===== Cung nữ được sủng (cn) ===== */
@@ -147,7 +148,7 @@ const R97L=[
  t:"Chén thuốc của Thái y viện đổi màu trong tay lương y. Cả điện quỳ rạp. Thái hậu khỏi bệnh, việc đầu tiên bà làm là đòi phượng ấn về Đức Thọ cung, rồi trao tạm vào tay ngươi: “Chừng nào ai gia còn sống, lục cung có chuyện thì hỏi con.”",
  rw:"nt_haiduong",ti:"Nhiếp lục cung sự"},
 {a:"ch_ho",tag:"Song phượng Đức Thọ cung",w:"th",n:"Nắm tay {v}, cùng quỳ trước Thái hậu",
- path:["Nhường {v} dâng trước","Đề nghị họ ủng hộ cả hai","Gặp Thái hậu giải thích","Xin bà cứu {v}","Nhường {v}","Bắt tay"],bad:["Thưa: để nàng tự chịu","Từ chối"],x:[A=>r97vRel(A)>=AR("ch_ho").bar,`{v} có thiện cảm với ngươi từ ${AR("ch_ho").bar}`],
+ path:["Nhường {v} dâng trước","Đề nghị họ ủng hộ cả hai","Gặp Thái hậu giải thích","Xin bà cứu {v}","Nhường {v}","Bắt tay"],bad:["Thưa: để nàng tự chịu","Từ chối"],x:[A=>r97vThan(A),`{v} thân với ngươi`],
  t:"Thái hậu nhìn hai đứa cháu quỳ cạnh nhau, bật cười lần đầu sau nhiều năm: “Ai gia sợ nhà mình chia hai, hóa ra lại được đôi phượng.” Bà xin Hoàng thượng ban cho hai người phong hiệu cặp đôi, cùng ra vào Đức Thọ cung. Từ đó trong cung, đụng một người là đụng cả hai.",
  go:(A,_ok,G)=>e67ally(r97v(A),G[0]),rw:"nt_nhuy",ti:"Song phượng Đức Thọ cung"},
 {a:"ch_bi",tag:"Người phi tần năm xưa còn sống",w:"th",need:"th",n:"Đưa lão cung nữ đến gặp Thái hậu lúc không có ai",
@@ -218,14 +219,14 @@ const R97L=[
  t:"Trước lúc nhắm mắt, lão Tổng quản dặn từng người một: các thái giám ở mười hai cung, ba cửa thành, Ngự thiện phòng, Kính sự phòng. “Từ nay các ngươi nghe nàng.” Tai mắt ba đời vua của ông, nay là của ngươi.",
  rw:"nt_haiduong",ti:"Người kế thừa lão Tổng quản"},
 {a:"s_ban",tag:"Kim lan lật đổ {v2}",w:"v",n:"Hẹn {v} uống rượu thề dưới gốc hải đường",
- path:["Đỡ lời cho cả {v}","Báo cho {v}","Mời trà, nói chuyện thật lòng","Giúp {v} bắt kẻ gài","Đỡ lời","Bắt tay"],bad:["Chỉ lo cho mình","Giữ kín","Tiếp khách sáo","Mặc kệ","Từ chối"],x:[A=>r97vRel(A)>=AR("s_ban").bar,`{v} có thiện cảm với ngươi từ ${AR("s_ban").bar}`],
+ path:["Đỡ lời cho cả {v}","Báo cho {v}","Mời trà, nói chuyện thật lòng","Giúp {v} bắt kẻ gài","Đỡ lời","Bắt tay"],bad:["Chỉ lo cho mình","Giữ kín","Tiếp khách sáo","Mặc kệ","Từ chối"],x:[A=>r97vThan(A),`{v} thân với ngươi`],
  t:"Dưới gốc hải đường, hai người từng là kẻ thù uống chung một chén rượu thề. Ba tháng sau, mọi mưu của {v2} bị chính hai người lật ra trước mặt Hoàng thượng. Cả hậu cung kháo nhau: chọc vào một người là chọc vào cả đôi.",
  go:(A,_ok,G)=>{const v2=r97v(A,"v2");return [e67ally(r97v(A),G[0]),v2?e67drop(v2,"bị vạch mưu"):""].filter(Boolean).join(" ")},rw:"nt_nhuy",ti:"Tỷ muội kim lan"},
 /* ===== Giữa đời ===== */
 {a:"st_the",tag:"Một hô trăm ứng",w:"emp",n:"Mở tiệc ở cung ngươi, mời mọi người từng chịu ơn ngươi",
- path:["Nhận lời kết nghĩa","Chăm lo cho họ","Đáp lễ, hứa nâng đỡ","Gặp từng người giải thích","Chia cho kẻ hầu và đồng minh","Đứng ra bảo vệ"],bad:["Giữ lại","Để luật xử"],x:[()=>r97allies(AR("st_the").bar[0])>=AR("st_the").bar[1],`ít nhất ${AR("st_the").bar[1]} phi tần có thiện cảm với ngươi từ ${AR("st_the").bar[0]}`],
+ path:["Nhận lời kết nghĩa","Chăm lo cho họ","Đáp lễ, hứa nâng đỡ","Gặp từng người giải thích","Chia cho kẻ hầu và đồng minh","Đứng ra bảo vệ"],bad:["Giữ lại","Để luật xử"],x:[()=>r97allies()>=AR("st_the").bar,`ít nhất ${AR("st_the").bar} phi tần thân với ngươi`],
  t:"Tiệc đêm ấy đông đến mức phải bày thêm bàn ra sân. Phi tần, cung nữ, thái giám, cả người nhà các quan đều đến. Hoàng thượng đi ngang, đứng ở cửa nhìn rất lâu, rồi cười: “Trẫm chưa từng thấy ai có nhiều người thương đến vậy.” Từ đó, việc gì trong cung ngươi nói một câu là có trăm người làm.",
- go:(_A,_ok,G)=>{let n=0;liveRivals(true).filter(v=>(v.rel||0)>=30).slice(0,4).forEach(v=>{relAdd(S,v,G[0]);n++});return n?`${n} người trong phe ngươi thêm thiện cảm (+15).`:""},rw:"nt_haiduong",ti:"Chủ một phe lục cung"},
+ go:(_A,_ok,G)=>{let n=0;liveRivals(true).filter(v=>aff(v,S)>=netTh(v,"than")).slice(0,4).forEach(v=>{relAdd(S,v,G[0]);n++});return n?`${n} người trong phe ngươi thêm thiện cảm (${balSg(G[0])}).`:""},rw:"nt_haiduong",ti:"Chủ một phe lục cung"},
 {a:"st_con",tag:"Hoàng thượng tự tay dạy con",w:"kid",need:"kid",n:"Để con tự dâng Hoàng thượng bài văn nó viết",
  path:["Lão Hàn lâm nghiêm khắc","Tiến sĩ trẻ","Tự thức canh","Tăng người canh","Đêm trước kèm con","Để chúng chơi","Xin Hoàng thượng làm lễ nhỏ","Tìm kẻ tung tin"],bad:["Cấm"],x:[()=>{const s=r97son();return !!s&&(s.fond||0)>=AR("st_con").bar},`có hoàng tử được Hoàng thượng thương từ ${AR("st_con").bar}`],
  t:"Hoàng thượng đọc bài văn của {k}, rồi gác cả tấu chương, tự tay cầm bút sửa từng chữ cho con. Từ hôm ấy, mỗi tối ngài gọi {k} vào ngự thư phòng. Triều thần nhìn nhau: chưa hoàng tử nào được vua tự dạy như thế.",
@@ -233,7 +234,7 @@ const R97L=[
 {a:"st_dong",tag:"Mật chiếu sau biển Chính đại quang minh",w:"emp",need:"kid",n:"Đêm ấy không xin gì, chỉ ngồi nghe ngài nói về giang sơn",
  path:["Thưa: chọn người hiền","Nhận lời","Cho con cưỡi ngựa bắn cung","Đưa con đến hầu Thái hậu","Dâng lễ lên Đức Thọ cung","Mời thầy giỏi kèm riêng","Tự dạy con","Đổi người nấu, giăng bẫy","Tự nấu cho con"],bad:["Lật lại chuyện con nàng"],x:[()=>{const s=r97son();return !!s&&(s.fond||0)>=AR("st_dong").bar[0]&&S.sung>=AR("st_dong").bar[1]},`có hoàng tử được thương từ ${AR("st_dong").bar[0]}, Sủng từ ${AR("st_dong").bar[1]}`],
  t:"Canh tư, Hoàng thượng một mình trèo lên điện Càn Thanh, đặt một hộp gấm sau tấm biển “Chính đại quang minh”. Sáng ra ngài chỉ nói với ngươi: “{Goi} đã nghe trẫm cả đêm mà không xin gì. Trẫm biết phải viết tên ai.” Tên trong mật chiếu là {k}.",
- go:(_A,_ok,G)=>{const s=r97son();if(s&&typeof setHeir==="function"&&!(S.heir&&S.heir.k===s)){setHeir(s,null);return `${s.name} được lập làm Thái tử.`}return e67heir(G[0])},rw:"nt_dongchau",ti:"Mẫu thân của Thái tử trong mật chiếu"}
+ go:(_A,_ok,G)=>{const s=r97son();if(s&&typeof setHeir==="function"&&!(S.heir&&S.heir.k===s)){const d0=S.danh||0;setHeir(s,null);const dd=(S.danh||0)-d0;/* law 4 (review/j51-heir-danh): the Danh the jkidlife setHeir wrap really applied (BAL.kid.heirDanh; 0 when her own son already held it), as j3 / j51 print it */return `${s.name} được lập làm Thái tử.${dd?` Danh ${balSg(dd)}.`:""}`}return e67heir(G[0])},rw:"nt_dongchau",ti:"Mẫu thân của Thái tử trong mật chiếu"}
 ];
 /* ONE CORE (OD:L1267): an entry's numbers live in BAL.arc.rare[a] (jbalarc.js); AR(a) reads them (its x text prints AR(a).bar) */
 function arcRare(d){const R=AR(d.a);if(!R)return d;for(const k of ["p","np","sc","c","fx"])if(R[k]!=null)d[k]=R[k];if(R.g&&d.go){const f=d.go,G=R.g;d.go=function(A,ok){return f(A,ok,G)}}return d}
