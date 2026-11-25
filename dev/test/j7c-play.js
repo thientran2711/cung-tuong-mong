@@ -12,7 +12,8 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;console.log((c?'ok   ':'FAIL ')+m)};
   J7SEEDS.push(...FIX);S.rank=Math.max(S.rank,2);const out={};
   /* give two living consorts the wanted nết so the cast is real */
   const L=liveRivals(false);out.rivals=L.length;
-  const R=j7cReady();out.ready=R.map(x=>x.sd.id);
+  let R=j7cReady();out.forced=0;/* thin-p6 r2 (law 11, same family as wc/j70c/j71c-play): a fresh random world may hold no consort with the wanted nết -> force it, reported as forced (as wc-play does), instead of failing at random */
+  if(!R.length){const ALLN=[].concat(...Object.values(BAL.net.F),...Object.values(BAL.net.M));tr6=v=>ALLN.slice();out.forced=1;R=j7cReady()}out.ready=R.map(x=>x.sd.id);
   const d=mkP("j7c",{});out.card=!!d;if(!d)return out;out.text=d.t;out.opts=d.o.map(o=>o.n+' | '+o.x);out.pp=JSON.parse(JSON.stringify(d.pp));
   const sd=J7I[d.pp.sid];out.castOk=Object.entries(d.pp.c).every(([role,c])=>{if(c.k!=='rv')return true;const v=RV(c.id);const rr=sd.roles[role];return v&&v.alive!==false&&(j7cFit(v,rr)||(BAL.j7c.loose&&j7cFit(v,rr,true)))});/* review r1: the engine's own rule (nết AND lòng; BAL.j7c.loose = any one listed) — the old check ignored loose and failed at random */
   out.unfilled=/\{[a-z]+\}/.test(d.t+d.o.map(o=>o.n).join());out.marked=nrNow('j7',d.pp.sid);
@@ -24,4 +25,4 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;console.log((c?'ok   ':'FAIL ')+m)};
  ok(r.card,'a composed card is built ('+(r.pp&&r.pp.sid)+')');ok(r.castOk,'cast = living consorts with the wanted nết');ok(!r.unfilled,'every placeholder filled with a real name');
  ok(r.opts&&r.opts.length===4,'4 stances');ok(r.marked,'jnorep marks j7:'+(r.pp&&r.pp.sid));ok(r.rebuilt,'card rebuilds from saved pp (reload)');ok(r.changed,'choice applies real changes');
  ok(!r.again,'same seed rests in this life');ok(errs.length===0,'0 page errors '+(errs[0]||''));
- console.log(fail?`J7C PLAY: ${fail} FAIL`:'J7C PLAY: ALL PASS');await b.close();srv.close();process.exit(fail?1:0)})().catch(e=>{console.log('FAIL',e.message);process.exit(1)});
+ console.log(fail?`J7C PLAY: ${fail} FAIL`:`J7C PLAY: ALL PASS${r.forced?' (forced nết)':''}`);await b.close();srv.close();process.exit(fail?1:0)})().catch(e=>{console.log('FAIL',e.message);process.exit(1)});

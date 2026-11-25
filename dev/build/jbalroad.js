@@ -79,7 +79,7 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
  td_tha_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{duc:10,danh:10,sung:4},bar:45,g:[50]},
  ch_co_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,sung:6,tamco:2},bar:40},
  ch_benh_11:{p:.12,np:2,sc:2,c:{suc:-5},fx:{danh:12,sung:5,mat:2}},
- ch_ho_11:{p:.12,np:3,sc:2,c:{suc:-4},fx:{th:12,danh:10,duc:3},bar:30,g:[40]},
+ ch_ho_11:{p:.12,np:3,sc:2,c:{suc:-4},fx:{th:12,danh:10,duc:3},g:[40]},
  ch_bi_11:{p:.12,np:3,sc:2,c:{suc:-4},fx:{th:15,danh:10,duc:6},bar:40,th:40},
  tt_co_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,sung:6},bar:40,g:[4]}, /* x: duc ≥ bar */
  tt_oan_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,duc:4},bar:45,g:[8]}, /* x: duc ≥ bar */
@@ -101,7 +101,7 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
  cnv_ban_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:10,duc:4},bar:35,bar2:2,g:[10,12,8]}, /* x: duc ≥ bar or mat ≥ bar2 */
  cnv_chu_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,duc:4},bar:40,g:[30,12,20]}, /* x: duc ≥ bar */
  cnv_ma_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:10,mat:2,duc:3},bar:35}, /* x: duc ≥ bar and the wooden box */
- cnv_mat_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:10,duc:4},bar:20,g:[20]}, /* x: old mistress rel ≥ bar */
+ cnv_mat_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:10,duc:4},g:[20]}, /* x: old mistress thân with her (netTh «than», rv r2) */
  thd_hoc_11:{p:.1,np:3,sc:2,c:{suc:-4},fx:{danh:12,sung:4},bar:45,g:[15]}, /* x: duc ≥ bar */
  thd_sach_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:14,sung:5,duc:4},bar:50}, /* x: danh ≥ bar */
  thd_tho_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:14,sung:6,tai:2},bar:45}, /* x: tai ≥ bar */

@@ -153,9 +153,9 @@ function ptNoRunner(){return"không còn ai rảnh để sai (người hầu đa
 ptReg("spy",a=>{const t=RV(a.a.v);const m=ptPerson(a.a);if(!m)return{txt:`Người được sai đi dò la không trở về.`,ok:false};if(!t||!t.alive){log(`${m.name} trở về: người cần dò la không còn trong cung.`);return{ok:null}}
  PT.landing=1;try{const ok=spyMaidRun(t,a.a.sid!=null?m:undefined);return{ok:!!ok,t:`${m.name} dò la ${t.name} trở về`}}finally{PT.landing=0}});
 /* ---- 2. Nghe ngóng chung ---- */
-function ptListen(m){if(!ptOn()||PT.landing)return spyNews(m);const a=ptSend({who:ptPid(m),nm:m.name,kind:"listen",paid:ptRow("listen").o,place:"cnh",a:{sid:m.sid!=null?m.sid:null},lbl:"đi nghe ngóng"});
- return a?`${m.name} đi nghe ngóng, về ${ptWhen(a.due)}.`:spyNews(m)}
-ptReg("listen",a=>{const m=ptPerson(a.a);if(!m)return{txt:"Người được sai đi nghe ngóng không trở về.",ok:false};const r=spyNews(m);if(r)log(`${m.name} nghe ngóng trở về: ${r}`);return{ok:true,t:`${m.name} nghe ngóng trở về`}});
+function ptListen(m){if(!ptOn()||PT.landing)return spyListen(m);const a=ptSend({who:ptPid(m),nm:m.name,kind:"listen",paid:ptRow("listen").o,place:"cnh",a:{sid:m.sid!=null?m.sid:null},lbl:"đi nghe ngóng"});
+ return a?`${m.name} đi nghe ngóng, về ${ptWhen(a.due)}.`:spyListen(m)}
+ptReg("listen",a=>{const m=ptPerson(a.a);if(!m)return{txt:"Người được sai đi nghe ngóng không trở về.",ok:false};const r=spyListen(m);if(r)log(`${m.name} nghe ngóng trở về: ${r}`);return{ok:!!spyListen.ok,t:`${m.name} nghe ngóng trở về`}});
 /* the two options on her maid's / a servant's pop-up (talkOpts kinds maid / serv): order khắc, "chờ N khắc", busy lock */
 (function(){try{const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(!ptOn()||!p||!Array.isArray(A)||(p.kind!=="maid"&&p.kind!=="serv"))return A;
   const m=p.kind==="serv"?p.ref:S.maid;if(!m)return A;const why=ptLockWhy(ptPid(m));

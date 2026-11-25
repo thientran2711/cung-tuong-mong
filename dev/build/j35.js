@@ -1,8 +1,8 @@
 /* ================= ONE IDENTITY FOR LIFE, FOUR AGE BANDS FOR ALL, SMALL AGE EFFECTS ================= */
-/* bands for every group: 18-25 / 26-35 / 36-50 / 51-64 / 65+ (BAL.ageBand; the labels below are refilled from it in jbal.js) */
+/* bands for every group: BAL.ageMin + BAL.ageBand (jbal.js); BAND4N = their labels, filled from BAL when jbal.js loads */
 function band4(a){return ageBandIx(a)}
-const BAND4N=["18-25","26-35","36-50","51+"];
-function tagBand(x){const s=String(x==null?"":x).toLowerCase();const m=s.match(/\d+/);if(m)return band4(+m[0]);return /old|lao|51/.test(s)?3:/mid|trung|36/.test(s)?2:/adult|26/.test(s)?1:0}
+const BAND4N=[];
+function tagBand(x){const i=ageArtIx(x);if(i>=0)return i;const s=String(x==null?"":x).toLowerCase();const m=s.match(/\d+/);if(m)return band4(+m[0]);return /old|lao/.test(s)?3:/mid|trung/.test(s)?2:/adult/.test(s)?1:0}
 /* faces stay for life: once drawn, kept across promotions and ageing (children still grow) */
 (function(){const ff=faceFor;faceFor=function(o,kind,age){if(o&&o.fc&&o.fcKeep)return;const r=ff.apply(this,arguments);if(o&&o.fc)o.fcKeep=1;return r}})();
 /* figures: each person gets one identity and keeps it; no two people in one game ever share one (a dead woman's identity is not reused until a new game) */
@@ -16,16 +16,16 @@ function identityOf(p,role){const who=p.ref||p;if(who.idn!=null)return who.idn;c
     their REAL age (owner 11/15: Thái hậu showed the a18 picture because the stub had no age) */
  if(S&&who.kind==="th"&&!who.ref){S.thO=S.thO||{};who=S.thO}else if(S&&who.kind==="emp"&&!who.ref&&S.emp)who=S.emp;
  const idn=identityOf(who===S.emp?{ref:S.emp,trait:""}:who,role);if(idn==null)return f0.apply(this,arguments);
- const ag=who===S?(S.age||18):who===S.thO?(S.thAge||55):(who.age||20);
+ const ag=who===S?(S.age||BAL.ageMin):who===S.thO?(S.thAge||55):(who.age||20);
  const tier=who===S?(S.out?0:S.rank):who.queen?7:(who.rank||0);const ab=band4(ag);const isPor=f=>/(^|\/)por-/.test(f.file||f.src);
  const L=FIGS.filter(f=>String(f.identity)===String(idn)&&norm(f.role)===norm(role)&&(kind==="por"?isPor(f):!isPor(f)));if(!L.length)return f0.apply(this,arguments);
  const tn=f=>{const t=+String(f.tier).replace(/\D/g,"");return isNaN(t)?0:t};const sc=f=>Math.abs(tn(f)-tier)+Math.abs(tagBand(f.ageBand)-ab)*1.5;L.sort((a,b)=>sc(a)-sc(b));const src=L[0].file||L[0].src;return /^img\//.test(src)?src:"img/"+src}})();
 /* age effects, the same for everyone: Sắc -1 a year after 30 (soft floor 35), Tâm cơ +1 a year of court life up to +10 */
-(function(){const a0=ageYear;ageYear=function(){S.age=S.age||18;const r=a0.apply(this,arguments);try{for(const p of [S].concat(rivals||[])){if(p!==S&&!p.alive)continue;const ag=p===S?S.age:p.age;if(ag>30&&(p.sac||0)>35){p.sac--;p.sacAge=(p.sacAge||0)+1}if((p.tcAge||0)<10){p.tamco=Math.min(100,(p.tamco||0)+1);p.tcAge=(p.tcAge||0)+1}}}catch(e){}return r}})();
+(function(){const a0=ageYear;ageYear=function(){S.age=S.age||BAL.ageMin;const r=a0.apply(this,arguments);try{for(const p of [S].concat(rivals||[])){if(p!==S&&!p.alive)continue;const ag=p===S?S.age:p.age;if(ag>30&&(p.sac||0)>35){p.sac--;p.sacAge=(p.sacAge||0)+1}if((p.tcAge||0)<10){p.tamco=Math.min(100,(p.tamco||0)+1);p.tcAge=(p.tcAge||0)+1}}}catch(e){}return r}})();
 function ageLine(p){const ag=p===S?S.age:p.age;const b=[];if(p.sacAge)b.push(`Sắc -${p.sacAge} (tuổi)`);if(p.tcAge)b.push(`Tâm cơ +${p.tcAge} (từng trải)`);const ag2=ag>35?`sinh nở thêm nguy (${Math.round((ag-35)*3)})`:"";const il=ag>50?"dễ ốm hơn":"";return `Tuổi <b>${ag}</b> · ${BAND4N[band4(ag)]}${b.length?" · "+b.join(", "):""}${ag2?" · "+ag2:""}${il?" · "+il:""}`}
 function tuoi(n){return n>0?`Tuổi <b>${n}</b> <span class="past">(${BAND4N[band4(n)]})</span>`:""}
 /* the Emperor who loves beauty weighs youth */
-(function(){const n0=nightCh;nightCh=function(p){const c=n0.apply(this,arguments);if(!c||!has("mesac"))return c;const ag=(p||S)===S?S.age:p.age;return Math.round(c*(ag<=25?1.15:ag>35?.8:1))}})();
+(function(){const n0=nightCh;nightCh=function(p){const c=n0.apply(this,arguments);if(!c||!has("mesac"))return c;const ag=(p||S)===S?S.age:p.age;return Math.round(c*(ag<BAL.ageBand[0]?1.15:ag>=BAL.ageBand[1]?.8:1))}})();
 /* illness rises after 50 */
 (function(){const i0=illMonthP;illMonthP=function(p){let ev=i0.apply(this,arguments);try{const ag=p===S?S.age:p.age;if(ag>50&&!illOf(p)&&roll((ag-50)*.5))ev+=catchIll(p,pick(["lao","phonghan"]))||""}catch(e){}return ev}})();
 /* after a birth the body rests: ở cữ = BAL.kh.ocuMo month(s) before she can conceive again (everyone alike; owner 16/11 18:10Z: 1 month, as history —

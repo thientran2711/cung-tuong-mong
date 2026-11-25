@@ -306,7 +306,7 @@ function kpPop(anchor,html,o){o=o||{};let p=document.getElementById("kpop");if(!
  let x=Math.max(o.inside?4:12,Math.min(innerWidth-W-(o.inside?4:12),r.left+r.width/2-W/2));p.style.left=x+"px";p.style.top="0px";const h=p.offsetHeight;
  if(o.inside){const vt=Math.max(r.top,8),vb=Math.min(r.bottom,innerHeight-8);/* the visible part of the card */let y=vt+Math.max(4,(vb-vt-h)/2);if(h>r.height-8)y=r.top+4;p.style.top=Math.max(4,y)+"px";return}
  let y=r.bottom+6;if(y+h>innerHeight-8)y=Math.max(8,r.top-h-6);p.style.top=y+"px"}
-document.addEventListener("click",e=>{const p=document.getElementById("kpop");const od=e.target.closest(".kodm"),gl=e.target.closest(".kgl");
+document.addEventListener("click",e=>{const p=document.getElementById("kpop");let od=e.target.closest(".kodm"),gl=e.target.closest(".kgl");/* OWNER-ish rule (MAIN 136 25/11, robot M2/M3 + KIT BUG #2a): a tap ANYWHERE on an option card chooses it — the odds meter / a glossary word inside the card must not steal the tap; the explanation stays on the kit help («!» / legend) */if((od||gl)&&e.target.closest("button.opt,button.kopt,.opts>button,.kpopts>button,.k3btns>button,.kfoc-b,#mr>button,.kszopts>button")&&!e.target.closest(".kopinfo")){od=null;gl=null}/* inside the «!» card overlay (.kopinfo, disabled copy) the meter still opens the ladder: that is where the explanation lives */
  if(od||gl){e.stopPropagation();e.preventDefault();if(od)kpPop(od,kitOddsLadder(+od.dataset.kodds));else if(gl.dataset.kfx!=null)kpPop(gl,kitFactTipHtml(gl));else kpPop(gl,`<div class="kpopt">${gl.dataset.kgl}</div><div class="kpopx">${kitGlossText(gl.dataset.kgl)}</div>`);return}
  if(p&&!p.hidden)p.hidden=true},true);
 /* the HUD standing chances (Có thai, Lật thẻ) read on the chance scale Rất thấp…Rất cao (j64 + chanceLvl in j1), never the act ladder */
@@ -315,6 +315,11 @@ document.addEventListener("click",e=>{const p=document.getElementById("kpop");co
 /* kitPanel({kind, title, sub, subject:person|face, sections:[{h, html}|{h, facts}|{h, rows}], facts, rows, opts, btn, cls, onClose}) -> pushed to the modal queue.
    kind: rule | info | news | notice | choice | result | night | end | intel | threat | evidence | reward.  Returns the queue item. */
 function kitPanel(spec,front){const m={t:spec.title||"",h:"",kit:spec,opts:spec.opts,btn:spec.btn,cls:spec.cls,who:spec.subject&&(spec.subject.src!==undefined?spec.subject:kitFace(spec.subject))||null,onClose:spec.onClose};
+ /* button-crawl-fix-2 (whole family: every look-up panel, spec.look): ONE panel per title in the queue. Opening the same look-up again
+    replaces the waiting copy with the fresh one (no pile of «Tâm trạng · X» to close N times; a co-op save held 1998 copies) */
+ /* button-crawl-fix-5 (robots s6d/s7/s9: 3× «Tin chờ người sai đi», 4×/7× «Tin báo» waiting in Q): a VIEW panel (spec.view: a status panel built from
+    the live state — kitStatusIcon «Tin chờ / Tin báo», the «Tin báo» notice list, «Lịch tháng») is one per title too; the fresh copy replaces the waiting one */
+ if((spec.look||spec.view)&&m.t){for(let i=Q.length-1;i>=0;i--){const q=Q[i];if(q&&q.kit&&(q.kit.look||q.kit.view)&&q.t===m.t)Q.splice(i,1)}}
  if(front)Q.unshift(m);else Q.push(m);return m}
 /* KIT §51.1 ONE BLOCK = ONE LABEL COLUMN (owner 15/11 "Hàng trên hàng dưới chưa alignment"): kit tables (.kpkb) that read as one block
    are joined into ONE grid, so the widest label of the block sets the column and every value starts on one vertical line:
@@ -330,7 +335,9 @@ function kitRowsAlign(root){if(!root)return;const KB=e=>e&&e.matches&&e.matches(
    if(e.parentElement===par)prev=e}})}
 /* KP18 (review/kit-modal-spin): a kit dialog opened while the title screen (#title) is up sits on the TITLE layer (class kptitle = .modal.kptitle z 55, j74) — one rule here, so kitConfirm / notice / pick work from any title sub-panel
    and no caller patches it (the jcloud dropAsk patch is gone). Nothing else changes: kptitle is the existing "a screen of the title, not an event" mark (isMenuCard, saves). */
-function kitModal(spec){const m=kitPanel(spec,true);try{const t0=document.getElementById("title");if(t0&&!t0.hidden&&!/\bkptitle\b/.test(m.cls||""))m.cls=((m.cls||"")+" kptitle").trim()}catch(e){}showModal();return m}
+/* KIT BUG #5 (KK29, robot M5): a layer opened on top of a modal whose render throws (a half-built frame: no button, no ✕) must never be the end of the screen — the failed layer leaves the queue and the layer under it is shown again (kitModalSafe) */
+function kitModalSafe(m){try{showModal()}catch(e){console.error("kitModal render",e);try{const i=Q.indexOf(m);if(i>=0)Q.splice(i,1)}catch(x){}try{showModal()}catch(x){console.error("kitModal restore",x);try{Q.length=0;document.getElementById("modal").hidden=true}catch(y){}}}}
+function kitModal(spec){const m=kitPanel(spec,true);try{const t0=document.getElementById("title");if(t0&&!t0.hidden&&!/\bkptitle\b/.test(m.cls||""))m.cls=((m.cls||"")+" kptitle").trim()}catch(e){}kitModalSafe(m);return m}
 /* ================= KIT 83.9 · DANGER BUTTON + kitConfirm (kit request cloud-del / Foreman D, s18) =================
    `.kbtn.kdanger` = the button for an IRREVERSIBLE action: same size and shape as `.kbtn`, but charcoal with a cinnabar rim (never the lacquer red of `.kbtn`).
    `kitConfirm({title, lines:[…], yes, no, type?, onYes, onNo})` = a centre pop-up on kitModal: the lines, optional "type <code> to confirm" field (kitInput; the danger button stays
@@ -503,7 +510,7 @@ html body .kbtn,html body .kbtn *{word-break:normal!important;overflow-wrap:norm
 .kodm.oc{background:none!important;border:0!important;padding:0!important;margin:0}
 button.ka .kodds .kodm{flex-direction:row}
 .hc.khc{display:inline-flex;align-items:center;gap:4px}.hc.khc .kodm b{font-size:.68rem}
-.kpop{position:fixed;z-index:9995;/* above the big emotion avatar (.kemo-big, 9990/9991) — rv kit-ghichu-sections: a kit popup is never covered by a picture */background:var(--k-card);border:1px solid var(--gold);border-radius:var(--k-rad);box-shadow:0 0 0 3px #f6ead6,0 10px 30px #2a1a1250;padding:8px 10px;font-size:.82rem;color:var(--ink)}
+.kpop{position:fixed;z-index:9995;/* above the big emotion avatar (.kemo-big, 9990/9991) — rv kit-ghichu-sections: a kit popup is never covered by a picture */background:var(--k-card);border:1px solid var(--gold);border-radius:var(--k-rad);box-shadow:0 0 0 3px #f6ead6,0 10px 30px #2a1a1250;padding:8px 10px;font-size:.82rem;color:var(--ink);/* m-fix-2: a tip never covers its own dialog (robot s5d: a 40-line «Ghi chú» filled the Fold): at most half the screen, scrolls inside */max-height:calc(50*var(--kvh,1dvh) - 16px);overflow-y:auto;overscroll-behavior:contain;box-sizing:border-box}
 .kpopt{font-family:var(--display);font-weight:700;color:var(--gold);border-bottom:1px solid var(--k-hair);padding-bottom:3px;margin-bottom:4px}
 .kpopx{line-height:1.4}
 .kpopr{display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:6px;align-items:center;padding:3px 4px;border-radius:5px}.kpopr.on{background:#f0d07055;box-shadow:inset 0 0 0 1px var(--gold)}.kpopr b{font-size:.78rem;white-space:nowrap}.kpopr small{color:var(--dim);font-size:.72rem}
@@ -628,9 +635,13 @@ KP_SEAL.game="TÀI NGHỆ";
    the odds WORD of BAL.skip.od (word(od(...)), VANPHONG ladder, no %; none when sure) · "thành: <win>" · "hỏng: <lose>". sub = a game whose quick choice keeps
    its own rule (contests: the mark of a girl of her level; acts: the act's own odds) gives its line itself, still in this part. kitQuickRoll() = THE roll. */
 function kitQuickSub(o){o=o||{};if(o.sub!=null)return o.sub;const w=o.sure?"":word(od(BAL.skip.od));return [w,o.win?`thành: ${o.win}`:"",!o.sure&&o.lose?`hỏng: ${o.lose}`:""].filter(Boolean).join(" · ")}
-function kitQuick(o){o=o||{};const sb=kitQuickSub(o);return `<button type="button" class="${typeof kg82Btn==="function"?kg82Btn(true):"kbtn alt"} kquick" id="${o.id||"kg82skip"}"${o.data?" "+o.data:""}>${o.n||"Để trời định"}${sb?`<small>${sb}</small>`:""}</button>`}
+/* owner 24/11 (MAIN 128): ONE skip wording in every mini-game: «Bỏ qua» + what happens in plain words (numbers-as-text "5/10" become the mark word, jmgt mgWord) */
+function kitQuickWords(t){return String(t||"").replace(/(?:tính\s+)?(\d+)\/10(\s+phần)?(?:\s*\(\+\d+\))?/g,(m,n)=>{try{return typeof mgWord==="function"?"kết quả "+String(mgWord(+n)).toLowerCase():"kết quả thường"}catch(e){return"kết quả thường"}})}
+function kitQuick(o){o=o||{};const sb=kitQuickWords(kitQuickSub(o))||"kết quả thường";return `<button type="button" class="${typeof kg82Btn==="function"?kg82Btn(true):"kbtn alt"} kquick" id="${o.id||"kg82skip"}"${o.data?" "+o.data:""}>Bỏ qua<small>${sb}</small></button>`}
 function kitQuickRoll(){return roll(od(BAL.skip.od))}
-window.kitQuick=kitQuick;window.kitQuickSub=kitQuickSub;window.kitQuickRoll=kitQuickRoll;
+/* m-fix-1: THE cap of every quick / skip / not-played mark (BAL.skip.cap): a quick result never beats a good own play (owner OD 18/11 ~05:55Z) */
+function kitSkipCap(raw){const c=BAL.skip&&BAL.skip.cap!=null?BAL.skip.cap:5;raw=+raw;return isFinite(raw)?Math.max(0,Math.min(Math.round(raw),c)):c}
+window.kitQuick=kitQuick;window.kitQuickSub=kitQuickSub;window.kitQuickRoll=kitQuickRoll;window.kitSkipCap=kitSkipCap;
 (function(){const st=document.createElement("style");st.id="kquick-css";/* ONE look wherever the quick button sits (inside .kg82act, in the j5 #ov lesson panel, under the care frames) */
  st.textContent=`button.kquick{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
 #ov button.kquick small,button.kquick small{display:block;font-weight:400;font-family:var(--body);font-size:.72rem;opacity:.9}`;document.head.appendChild(st)})();
@@ -746,7 +757,7 @@ function kitGameResult(r){r=r||{};const rows=[];
 `;document.head.appendChild(st)})();
 
 /* a "; " inside a price line joins two different values (a gain and a risk): split them so each lands in its own row and colour */
-(function(){if(typeof kitParse!=="function")return;const k0=kitParse;kitParse=function(str){let s=String(str==null?"":str);if(!/class="kb/.test(s))s=s.split(/(<[^>]+>)/).map(x=>x&&x[0]==="<"?x:x.replace(/;\s+/g," · ")).join("");return k0.call(this,s)}})();
+(function(){if(typeof kitParse!=="function")return;const k0=kitParse;kitParse=function(str){let s=String(str==null?"":str);if(typeof kitNoUnk==="function")s=kitNoUnk(s);if(!/class="kb/.test(s))s=s.split(/(<[^>]+>)/).map(x=>x&&x[0]==="<"?x:x.replace(/;\s+/g," · ")).join("");return k0.call(this,s)}})();
 /* words that read as a gain / a risk for her even without a number */
 (function(){if(typeof kcls!=="function")return;const k0=kcls;kcls=function(t){const s=String(t==null?"":t).replace(/<[^>]+>/g,"").trim();
  if(/(có thể |dễ )?(bị )?(lật tẩy|phát giác|bị lộ|bị bắt|bị phạt|bị nghi)/i.test(s)&&!/\+\s?\d/.test(s))return"r";if(/^(dễ được|được (thăm|ban|thưởng|sủng|để ý|gặp|mời))/i.test(s))return"g";return k0.apply(this,arguments)}})();
@@ -808,7 +819,7 @@ if(typeof kaTimeNeeds==="function"){kaTimeNeeds=function(c,bacCost,sucCost){cons
 /* "có thể gặp người" (Lĩnh đồ, j42 srvMeet: 25 % bị bắt nạt Sức -5, else quen một người mới if anyone is left) -> real ladder words */
 (function(){if(typeof srvCards!=="function")return;const c0=srvCards;srvCards=function(){const D=c0.apply(this,arguments);try{for(const a of D||[]){if(!a||!/có thể gặp người/.test(a.x||""))continue;
  let left=0;try{const m=srvM();left=allServ().filter(s=>ownerOf(s)!==m&&!S.srv.met.includes(s.sid)).length}catch(e){}
- a.x=a.x.replace(/có thể gặp người/,left?`quen một người mới: ${chanceW(75)}`:"không còn ai mới để quen")+` · kèm: bị bắt nạt, Sức -5: ${chanceW(25)}`}}catch(e){}return D}})();
+ a.x=a.x.replace(/có thể gặp người/,left?`quen một người mới: ${chanceW(100-SRVA.nvp.bully)}`:"không còn ai mới để quen")+` · kèm: bị bắt nạt, Sức ${balSg(BAL.rl.j42.sucSrvMeet)}: ${chanceW(SRVA.nvp.bully)}`}}catch(e){}return D}})();
 
 /* ---------- ACT ART SLOT (kit 6.1): square illustration left of every act card, rows right ----------
    Manifest img/ACTS.json {acts:{"<card title>|<slug>":"<key>"}, have:["act-cat-hoc-tap", ...]} -> img/act-<key>.webp;
@@ -893,7 +904,7 @@ if(typeof LACK==="object"){const bac=n=>S.bac<n?`Bạc ${n} (có ${S.bac})`:"";c
  steal:t=>tonightOf()===t?"":"tối nay nàng được lật thẻ",road:t=>tonightOf()===t?"":"tối nay nàng được lật thẻ",
  tocao:t=>!realCrime(t)?"nàng có tội thật (ngươi biết)":evG(S,t)<1?`1 chứng cứ về nàng (có ${evG(S,t)})`:"",
  expose:t=>!hasScandal(t)?"nàng có chuyện tư tình (ngươi biết)":evG(S,t)<2?`2 chứng cứ về nàng (có ${evG(S,t)})`:"",
- xinhh:t=>{const q=queenP();return bac(30)||(!q||q===S?"có Hoàng hậu (không phải ngươi)":q===t?"nàng không phải Hoàng hậu":aff(q,S)<40?`Hoàng hậu quý ngươi ≥40 (có ${aff(q,S)})`:rkOf(t)<1?"nàng từ Thường tại trở lên":"")},
+ xinhh:t=>{const q=queenP();return bac(30)||(!q||q===S?"có Hoàng hậu (không phải ngươi)":q===t?"nàng không phải Hoàng hậu":aff(q,S)<netTh(q,"than")?`Hoàng hậu quý ngươi ≥40 (có ${aff(q,S)})`:rkOf(t)<1?"nàng từ Thường tại trở lên":"")},
  pushp:t=>whereOf(S)!=="vuon"?"ngươi đang ở Ngự hoa viên":!together(S,t)?"nàng ở cùng chỗ với ngươi":"",trip:t=>together(S,t)?"":"nàng ở cùng chỗ với ngươi"})}
 
 /* ================= wiring j78 (intel + evidence data) to the kit ================= */
@@ -901,11 +912,11 @@ if(typeof j78when==="function"){j78when=function(){return kitDate(S.month,S.year
 function kitEvidencePanel(v){if(!v||typeof evidenceOf!=="function")return;const E=evidenceOf(v);if(!E)return;
  const items=E.items.length?E.items.map(e=>kitEvidence({what:e.proves,how:e.how,when:e.when})).join(""):`<div class="kpnote">Ngươi chưa giữ chứng cứ nào về nàng.</div>`;
  const acts=(E.acts||[]).map(a=>`<button class="opt" data-kev="${v.id}" data-kevact="${a.k}"${a.why?" disabled":""}>${a.n||(ACT[a.k]?ACT[a.k].n:a.k)}<small>${a.why?`<span class="kwhy">${a.why}</span> `:""}${kitParse(a.line||"")}</small></button>`).join("");
- const m=kitPanel({kind:"evidence",look:1,title:`Chứng cứ về ${kpPlain(kitName(v))}`,sub:`Đang giữ: ${E.count}`,subject:v,sections:[{h:`Chứng cứ đang giữ (${E.count})`,html:`<div class="kevs">${items}</div>`},E.rumours?{h:`Tin đồn (${E.rumours})`,html:`<div class="kevs">${kitEvidence({what:`${E.rumours} tin đồn chưa ai chứng thực`,proves:"Không có việc thật nào đứng sau: không dùng để tố được",how:"Nghe từ trước khi sổ chứng cứ đối chiếu việc thật"})}</div>`}:null,acts?{h:"Dùng chứng cứ",html:`<div class="opts">${acts}</div>`}:null]},true);m.evd=1;showModal()}
+ const m=kitPanel({kind:"evidence",look:1,title:`Chứng cứ về ${kpPlain(kitName(v))}`,sub:`Đang giữ: ${E.count}`,subject:v,sections:[{h:`Chứng cứ đang giữ (${E.count})`,html:`<div class="kevs">${items}</div>`},E.rumours?{h:`Tin đồn (${E.rumours})`,html:`<div class="kevs">${kitEvidence({what:`${E.rumours} tin đồn chưa ai chứng thực`,proves:"Không có việc thật nào đứng sau: không dùng để tố được",how:"Nghe từ trước khi sổ chứng cứ đối chiếu việc thật"})}</div>`}:null,acts?{h:"Dùng chứng cứ",html:`<div class="opts">${acts}</div>`}:null]},true);m.evd=1;kitModalSafe(m)}
 function kitIntelPanel(v){if(!v)return;const L=typeof intelOf==="function"?intelOf(v):[];const old=(S.notes&&S.notes[v.id])||[];
  const list=L.map(x=>({about:null,fact:x.fact+(x.current===false?` <span class="kchip n">nay đã khác</span>`:""),src:x.by?(typeof x.by==="object"?x.by:String(x.by)):"tai mắt",week:[x.how,x.when].filter(Boolean).join(" · ")}));
  old.forEach(t=>{if(!L.some(x=>kpPlain(x.fact).includes(kpPlain(t))))list.push({fact:t,src:"nghe được",week:""})});
- const m=kitPanel({kind:"intel",look:1,title:`Đã biết về ${kpPlain(kitName(v))}`,sub:`${list.length} tin`,subject:v,sections:[{html:kitIntel(list,{empty:"Ngươi chưa biết gì thêm về nàng. Dò la để biết."})}]},true);showModal()}
+ const m=kitPanel({kind:"intel",look:1,title:`Đã biết về ${kpPlain(kitName(v))}`,sub:`${list.length} tin`,subject:v,sections:[{html:kitIntel(list,{empty:"Ngươi chưa biết gì thêm về nàng. Dò la để biết."})}]},true);kitModalSafe(m)}
 /* person card: the evidence chip and the "Đã biết" line open the kit panels */
 (function(){if(typeof rvCard!=="function")return;const r0=rvCard;rvCard=function(v,i){let h=r0.apply(this,arguments);try{
   h=h.replace(/<span class="chip hot">((?:<img[^>]*>)?Chứng cứ \d+)<\/span>/,`<button class="chip hot kchipb" data-kev="${v.id}" title="Xem chứng cứ">$1 ›</button>`);
@@ -1224,7 +1235,7 @@ button.ka.kcard.kart{border-left:4px solid var(--kcc0,var(--line))!important}
 #hud2 .khsh .khx{min-height:32px;padding:2px 12px;border:1px solid var(--line);border-radius:6px;background:var(--k-card,#fffaf0);font:inherit;font-size:.8rem;color:var(--ink);cursor:pointer}
 #hud2 .khc{display:flex;flex-direction:column;gap:2px;min-width:0;padding:4px 6px;border:1px solid var(--k-hair);border-radius:8px;background:#fffdf8}
 #hud2 .khc .hc[data-hx="date"]{display:none!important}
-#hud2 .khc .hc{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto;justify-items:start;align-items:center;column-gap:5px;border:0!important;background:none!important;padding:1px 0!important;min-height:0!important;border-radius:0!important;text-align:left;white-space:normal;font-size:.76rem}
+#hud2 .khc .hc{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto;justify-items:start;align-items:center;column-gap:5px;border:0!important;background:none!important;padding:1px 0!important;min-height:var(--k3rowh,44px)!important;border-radius:0!important;text-align:left;white-space:normal;font-size:.76rem}/* KIT 56.28: same kit row height as .ksh .k3r */
 #hud2 .khc .hc+.hc{border-top:1px dotted var(--k-hair)!important}
 #hud2 .khc .hc>b,#hud2 .khc .hc>.kodm{grid-column:3;justify-self:end;text-align:right;white-space:normal}
 .stop .scene-t,.stop .scene-t *{white-space:normal!important;overflow-wrap:anywhere}#hud2 .khc .hc>img{grid-column:1}
@@ -1247,8 +1258,8 @@ function kitTgt(){try{if(typeof J78==="object"&&J78.cardV)return J78.cardV}catch
  D("poison",v=>v?[`nàng trúng độc · ${kpDeathWord(kpDeathP("poison",v),"nàng")}`,fail("poison")]:null);
  D("kpoison",v=>{const p=v&&kpDeathP("kpoison",v);return p==null?null:[`con nàng trúng độc · ${kpDeathWord(p,"con nàng")}`,fail("kpoison")]});
  D("pond",v=>v?[`con nàng rơi xuống hồ · ${kpDeathWord(kpDeathP("pond",v),"con nàng")}`,fail("pond")]:null);
- D("kframe",v=>{if(!v||typeof sonsOf!=="function")return null;const k=sonsOf(v).filter(k=>k.age>=6).sort((x,y)=>(+y.heir)-(+x.heir))[0];if(!k)return null;
-  return[`Hoàng thượng thương ${k.name} -35, Danh nàng -10, nàng bị phạt${k.heir?`, ${k.name} bị phế ngôi Thái tử`:""}`,fail("kframe")]});
+ D("kframe",v=>{if(!v||typeof sonsOf!=="function")return null;const k=sonsOf(v).filter(k=>k.age>=BAL.eff.j8.kframeAge).sort((x,y)=>(+y.heir)-(+x.heir))[0];if(!k)return null;
+  return[`Hoàng thượng thương ${k.name} ${balSg(-BAL.eff.j8.fondF)}, Danh nàng ${balSg(BAL.eff.j8.kframeDanh)}, nàng bị phạt${k.heir?`, ${k.name} bị phế ngôi Thái tử (Danh nàng thêm ${balSg(-BAL.kid.heirDanh)})`:""}`,fail("kframe")]});
  D("trip",v=>[`nàng vấp ngã: Danh nàng -3${v&&v.preg&&!v.hidden?` · nàng động thai: ${chanceW(25)}`:""}`,fail("trip")]);
  D("pushp",v=>[`nàng rơi xuống hồ sen: Sức nàng -25${v&&v.preg&&!v.hidden?` · nàng sảy thai: ${chanceW(60)}`:""}`,fail("pushp")]);
  if(typeof actLineRaw==="function"){const a0=actLineRaw;actLineRaw=function(k,w,c){let r=a0.apply(this,arguments);try{const CW=typeof caughtW==="function"?caughtW():null;if(CW&&String(r).includes(CW)){/* previews: caught */const v=kitTgt();const t=v&&kaCaughtTxt(v,k);r=String(r).split(CW).join(t||`kèm: bị người của nàng phát giác, nàng nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ`)}}catch(e){}return r}}})();

@@ -10,7 +10,7 @@ window.kitRenderSoon=kitRenderSoon;
 const FIGF=["img/FIGURES.json","img/FIGURES-servants.json","img/FIGURES-others.json"];
 let FIGIX={},FIGSIG="";
 function figList(j){return (Array.isArray(j)?j:j&&(j.figures||j.files||j.items)||[]).filter(f=>f&&(f.file||f.src))}
-function figAge(t){const s=String(t==null?"":t).toLowerCase();const m=s.match(/\d+/g);if(m){const a=+m[0],b=m[1]?+m[1]:a;return (a+b)/2}return /old|lao|gia/.test(s)?56:/mid|trung/.test(s)?32:/young|tre/.test(s)?20:null}
+function figAge(t){const i=(BAL.ageArt||[]).indexOf(String(t==null?"":t).toLowerCase().trim());if(i>=0)return i?BAL.ageBand[i-1]:BAL.ageMin;/* an art tag = the first age of its band */const s=String(t==null?"":t).toLowerCase();const m=s.match(/\d+/g);if(m){const a=+m[0],b=m[1]?+m[1]:a;return (a+b)/2}return /old|lao|gia/.test(s)?56:/mid|trung/.test(s)?32:/young|tre/.test(s)?20:null}
 function figTier(t){if(t==null||t==="")return null;if(/cold|lanh/i.test(String(t)))return -1;const n=parseInt(String(t).replace(/[^\d-]/g,""),10);return isNaN(n)?null:n}
 function figPath(s){return !s?"":/^img\//.test(s)?s:"img/"+s}
 function figKey(f){const r=norm(f.role);if(f.identity!=null&&f.identity!=="")return r+":"+f.identity;if(f.variant!=null)return r+":v"+f.variant;return r+":"+String(f.file||f.src)}
@@ -25,10 +25,10 @@ function figWho(p){if(!p)return null;if(p===S)return S;const k=p.kind;if(k==="em
 function figRoles(who){if(!who)return[];if(who===S)return["player","heroine"];if(who===S.emp)return["emperor"];if(who===S.thO)return["thaihau"];
  const C=S.court||{};if(who===C.ty)return["physician"];if(who===C.tq||who===C.ksp||who===C.ped)return["eunuch"];
  if((S.men||[]).includes(who))return who.rw==="thái y"?["man","physician"]:["man"];
- if(who===S.maid||who.role==="maid")return (who.age||18)>=36||who.old?["mama","maid"]:["maid"];
+ if(who===S.maid||who.role==="maid")return (who.age||BAL.ageMin)>=BAL.ageBand[1]||who.old?["mama","maid"]:["maid"];
  if(who.role==="eunuch"||who.role==="eun")return["eunuch"];
  if((rivals||[]).includes(who))return["consort"];return[]}
-function figAgeOf(who){return who===S?S.age||18:who===S.thO?S.thAge||55:who.age||20}
+function figAgeOf(who){return who===S?S.age||BAL.ageMin:who===S.thO?S.thAge||55:who.age||20}
 function figTierOf(who){if(who===S)return S.out?-1:S.rank;if((rivals||[]).includes(who))return who.out?-1:who.queen?7:who.rank||0;return null}
 /* the closest file inside one identity: nearest tier, then nearest age */
 function figDist(f,tier,age){const ft=figTier(f.tier),fa=figAge(f.ageBand);return (tier!=null&&ft!=null?Math.abs(ft-tier)*2:0)+(fa!=null?Math.abs(fa-age)/8:0)}

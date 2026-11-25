@@ -58,7 +58,7 @@ function exScore(P,raws){const avg=raws.reduce((a,b)=>a+b,0)/Math.max(1,raws.len
 function exRaw(lv,rnd,k,p,rank){if(typeof mg2On==="function"&&mg2On())return mgNpcRaw(k,p||S,{occ:"exam",rank,lv,rnd});/* AG-ALL-2b mg2: the exam board she gets (occ exam, rank = the target) */
  const r=(rnd()+rnd()+rnd())/3;return cl(Math.round(kg82NpcMean(lv)+(r-.5)*8),0,10)}
 /* "Để tài nghệ quyết định" of one round (her skip, an aborted round): mg2 = her median on that board (jmgt mgSkipRaw), else the old level mean */
-function exSkipRaw(P,k){const lv=exLv(S,k);return typeof mg2On==="function"&&mg2On()?mgSkipRaw(mgNpcTier(k,S,{occ:"exam",rank:P.to,lv})):Math.round(kg82NpcMean(lv))}
+function exSkipRaw(P,k){const lv=exLv(S,k);return (typeof kitSkipCap==="function"?kitSkipCap:x=>x)(typeof mg2On==="function"&&mg2On()?mgSkipRaw(mgNpcTier(k,S,{occ:"exam",rank:P.to,lv})):Math.round(kg82NpcMean(lv)))}/* m-fix-1: capped (BAL.skip.cap): a skipped / aborted round never beats a good own play */
 function exSim(p,rnd){rnd=rnd||Math.random;const P=exPlan(p);const raws=P.rounds.map(k=>exRaw(exLv(p,k),rnd,k,p,P.to));return Object.assign(exScore(P,raws),{P,raws})}
 /* ODDS CAP: an exam decided by the score draw alone (an NPC, or her auto run) keeps its pass inside the one cap (capRes); her own play is her skill */
 function exSimC(p){const r=exSim(p);try{const ok=capRes(r.pass,exChance(p));if(ok!==r.pass){r.pass=ok;r.total=ok?Math.max(r.total,r.P.bar):Math.min(r.total,r.P.bar-1)}}catch(e){console.error(e)}return r}
@@ -215,8 +215,8 @@ function exRun(P,e,done){e.pend={raws:[],sk:[]};const raws=e.pend.raws,sks=e.pen
   const box=kg82Box();const SK=exSkipRaw(P,k);
   const exRows=[["Giám khảo",exExTxt(P),"t"],["Môn thi",`${i+1}/${n}: ${K.n} · ${K.t}`,"t"],["Độ khó",mgDiffTxt(KG82.tier,k),"n"],["Mức đỗ",`${exBarTxt(P)}, tính cả ${n} môn cùng Tứ đức và tài nghệ`,"n"]];/* mg-intro-2: Độ khó + Mức đỗ shown, the rest behind the kit «!» */
   box.innerHTML=kgBangRows(`Khảo hạch ${P.srv?"lên":"tấn phong"} ${P.rk}`,exRows,[exRows[2],exRows[3]])+
-   `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button>${kitQuick({id:"kg82skip",n:"Để tài nghệ quyết định",sub:`môn này tính ${SK}/10, như người cùng bậc`})}</div>`;
-  kgReady(box,{kind:k,ev:"sys:thi-tam"});/* KIT §13.7 */
+   `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button>${kitQuick({id:"kg82skip",n:"Để tài nghệ quyết định",sub:`môn này tính ${SK}/10, tự thi giỏi thì hơn`})}</div>`;
+  kgReady(box,{kind:k,win:"thi",ev:"sys:thi-tam"});/* KIT §13.7 */
   $("kg82go").onclick=()=>kg82Play(k,raw=>after(raw,false));$("kg82skip").onclick=()=>after(SK,true)};
  const after=(raw,sk)=>{raws.push(raw);sks.push(!!sk);i++;const last=i>=n;try{save()}catch(x){}
   kg82ShowRes(kg82Rows([[`Môn ${i}`,`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">${last?"Xem kết quả":"Môn kế tiếp"}</button></div>`,raw>=5);
@@ -267,7 +267,7 @@ function exSrvDone(r){const e=exSrvS(),to=e.to;e.n=(e.n||0)+1;e.last={s:r.total,
  if(to==="mama")log("Không được ở lại làm ma ma; đến tuổi thì xuất cung theo lệ.")}
 function exSrvStart(){const e=exSrvS();const P=exSrvPlan(e.to);if(window.__exAuto||typeof kg82Open!=="function"||!document.getElementById("ov")){exSrvDone(exSrvSim(P));return}exRun(P,e,exSrvDone)}
 function exSrvCard(){const e=exSrvS(),P=exSrvPlan(e.to),o=oddsCl(exSrvChance(P));const names=P.rounds.map(k=>KG82_KIND[k].n.toLowerCase()).join(", ");
- return{n:"Khảo hạch Nội vụ phủ",exam:2,exLbl:`Dự khảo hạch ${exSrvName(e.to)}.`,cdN:P.cdN,t:`Ma ma Nội vụ phủ khảo ngươi trước khi cho ${e.to==="mama"?"ở lại làm ma ma":"lên "+exSrvName(e.to)}: ${names}. Cơ may tính như người cùng bậc tài nghệ; tự thi giỏi thì dễ đỗ hơn.`,
+ return{n:"Khảo hạch Nội vụ phủ",exam:2,exLbl:`Dự khảo hạch ${exSrvName(e.to)}.`,cdN:P.cdN,t:`Ma ma Nội vụ phủ khảo ngươi trước khi cho ${e.to==="mama"?"ở lại làm ma ma":"lên "+exSrvName(e.to)}: ${names}. Cơ may tính theo tài nghệ (không tự thi thì cao nhất là ${typeof mgWord==="function"?mgWord(BAL.skip.cap):"Khá"}); tự thi giỏi thì dễ đỗ hơn.`,
   c:{suc:-BAL.ex.suc},k:BAL.ex.k,o,dom:"Khảo hạch",w:{},l:{},x:e.to==="mama"?"được ở lại cung làm ma ma":`thăng ${exSrvName(e.to)}`,go:()=>exSrvStart()}}
 function exSrvAdd(){try{if(Array.isArray(deck)&&!deck.some(a=>a&&a.exam===2))deck.unshift(exSrvCard())}catch(e){}}
 function exSrvDrop(){try{if(Array.isArray(deck))deck=deck.filter(a=>!(a&&a.exam===2))}catch(e){}}

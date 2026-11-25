@@ -162,7 +162,7 @@ function dhNotice(key){const o=dhObj(S,key);if(!o||typeof kitPanel!=="function")
   opts:worn?[{n:"Đã hiểu",fx:{},x:"",go:()=>dhApplyFx(S)}]:[{n:"Đeo ngay",fx:{},x:chTxt(key,S.dh[key].i)||o.fx||"tấm danh hiệu trên đầu",go:()=>dhPick(key)},{n:"Để sau",fx:{},x:"",go:()=>{}}]})}
 /* OD 21/11 ~04:14Z (#54): the new-title plate sits ON the event picture (caption at its bottom centre, like the chapter slide title), not as its own band under it.
    Applies to every title dialog (Danh hiệu mới / lên bậc / đeo): the .kt3 plate of the info column moves into the picture (.k3ev). The drawn title art is parked. */
-function kitDhCap(){try{const d=document.querySelector("#modal:not([hidden]) .dlg");if(!d)return;const ev=d.querySelector(".k3right>.k3ev,.k3body>.k3mpic"),src=d.querySelector(".k3right .kt3:not(.kdhcap)");if(!ev||!src||!src.querySelector(".kdh,.kdh-cap,.j59t"))return;
+function kitDhCap(){try{const d=document.querySelector("#modal:not([hidden]) .dlg");if(!d)return;const ev=d.querySelector(".k3right>.k3ev,.k3body>.k3mpic,.k3ev,.k3mpic"),src=[...d.querySelectorAll(".kt3:not(.kdhcap)")].find(e=>!e.closest(".k3ev,.k3mpic")&&e.querySelector(".kdh,.kdh-cap,.j59t"));if(!ev||!src)return;/* kit-titleplate (MAIN 124 G4 #54): the dialog is laid out in TWO shapes depending on timing / device load: picture in .k3right>.k3ev (plate in .k3right) or picture .k3body>.k3mpic (plate in a .kpsec section, no .k3right column). The old selector only knew the first, so on a busy device the plate stayed a band under the picture. Now any plate of the dialog that is not already in the picture moves into the picture. */
  if(!ev.querySelector(":scope>.kdhcap")){const c=src.cloneNode(true);c.classList.add("kdhcap");c.style.display="";ev.appendChild(c)}src.style.display="none";kdhCapFit(ev.querySelector(":scope>.kdhcap"))}catch(e){}}
 /* K-DH-CAPFIT (KIT §82.2): the caption plate on the picture never cuts its name. The plate wraps between words (jtitle .kdh rule); here, on the narrow event
    picture (Fold / iPad 120 px column), it keeps to TWO lines: font steps .74 → .66 → .6 rem until the name takes ≤ 2 lines (KDH_CAP_FS); never smaller, never cut. */
@@ -175,7 +175,7 @@ window.kitDhCap=kitDhCap;window.kdhCapFit=kdhCapFit;
    loader / a modal opened without showModal), and the plate then stays a band under the picture. ONE observer on #modal re-runs the idempotent kitDhCap
    on the next frame after any change, for EVERY title dialog (new / up / wear: any .k3ev picture with a .kt3 plate). */
 (function(){let q=0;const run=()=>{q=0;kitDhCap()};const go=()=>{const m=document.getElementById("modal");if(!m)return setTimeout(go,500);
- try{new MutationObserver(()=>{if(q||m.hidden)return;if(!m.querySelector(".k3ev"))return;q=requestAnimationFrame(run)}).observe(m,{childList:true,subtree:true,attributes:true,attributeFilter:["hidden"]})}catch(e){}};go()})();
+ try{new MutationObserver(()=>{if(q||m.hidden)return;if(!m.querySelector(".k3ev,.k3mpic"))return;q=requestAnimationFrame(run)}).observe(m,{childList:true,subtree:true,attributes:true,attributeFilter:["hidden"]})}catch(e){}};go()})();
 /* ---------- the bonus picker: wear a title and choose its ONE bonus (kit info panel + option cards) ---------- */
 function dhPick(key,back){const o=dhObj(S,key);if(!o)return;const e=S.dh[key],L=choices(key,e.i);
  if(L.length<2){if(L.length)e.pick=L[0];dhWear(S,key);if(back)dhPanel();return}
@@ -185,7 +185,7 @@ function dhPick(key,back){const o=dhObj(S,key);if(!o)return;const e=S.dh[key],L=
  opts.push({n:back?"Quay lại":"Để sau",fx:{},x:"",go:()=>{if(back)dhPanel()}});
  kitPanel({kind:"info",title:`Đeo «${o.name}»`,sub:"Mỗi lần chỉ đeo một danh hiệu, lấy một phần thưởng",dh:1,
   sections:[{h:"",html:`<div class="kt3">${kitTitlePlate(o)}</div>`},{h:"",rows:[["Cách có",esc(o.how)],["Khi đeo","chọn một phần thưởng bên dưới; tháo ra thì mất"]]}],opts},true);showModal()}
-window.dhPick=dhPick;
+window.dhPick=dhPick;window.dhNotice=dhNotice;window.DHKEYS=()=>Object.keys(DH);/* test hooks (dev/test/kit-titleplate.js) */
 /* ---------- NHIỆM VỤ › Danh hiệu ---------- */
 let DHTAB="goal";
 function tabsHTML(cur){const n=earned(S).length;const L=[];if(typeof kitGoalNow==="function"&&kitGoalNow())L.push({k:"goal",label:"Mục tiêu"});

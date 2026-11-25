@@ -43,7 +43,7 @@ function nowNote(){let o=null;try{o=typeof CW.frInfo==="function"?CW.frInfo():nu
 function nowSec(e){const n=nowNote();return {h:"Lúc này",rows:nowRows(e),html:n?`<p class="kpnote">${n}</p>`:""}}
 /* the figure on the panel: met = her own entry (full body, kit stage); unmet = the kit stranger figure as a stage pseudo person ({__fig,__cap}, the kitShop seller form, jinv),
    never her entry: the stage would resolve her real art and name from it */
-function who(e,known,title){return known?{subject:e}:{stage:[{__fig:"img/kit/unknown-fig-f.webp",__cap:title,__role:"",age:e&&e.age||18}]}}
+function who(e,known,title){return known?{subject:e}:{stage:[{__fig:"img/kit/unknown-fig-f.webp",__cap:title,__role:"",age:e&&e.age||BAL.ageMin}]}}
 function spec(){const e=ent(),P=blob();const rows=typeof kitRows==="function"?kitRows:(()=>"");const sec=[];
  const known=!!e&&met(e),nm=!!e&&named(e);
  /* rv r2 A: her name comes from HER entity through the kit name path (kitName = rank + name in the rank colours, owner 15/11 "phẩm và tên

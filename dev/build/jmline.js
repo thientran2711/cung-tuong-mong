@@ -61,7 +61,7 @@ function mlCaught(p,t,k,w,x,ord,own){const B=mlB();mlC("caught_"+k);if(own&&p!==
 /* 3. maids of hostile palaces harm each other */
 function mlFeud(p){const B=mlB();let ev="";const G=mlGuest();if(G&&p===S)return"";/* co-op guest: her maid's harm to an NPC maid is world state (host) */
  if((typeof asSelfOn==="function"&&asSelfOn(p)))return"";/* AG-ALL B: a maid harms a colleague only by her chosen "Tố lỗi với chủ" (jagstaff) */const M=(p.staff||[]).filter(s=>s.role==="maid");if(!M.length||!roll(B.feud))return"";
- const foes=others(p).filter(t=>t&&(!G||t===S)&&(t.staff||[]).some(x=>x.role==="maid")&&hostility(p,t)>=B.feudHost);if(!foes.length)return"";
+ const foes=others(p).filter(t=>t&&(!G||t===S)&&(t.staff||[]).some(x=>x.role==="maid")&&hostility(p,t)>=netThK(p,"host","hostLo"));if(!foes.length)return"";
  const t=pick(foes),a=pick(M),b=pick(t.staff.filter(x=>x.role==="maid"));if(!a||!b)return"";{const g=typeof cmGuard==="function"?cmGuard(t,p):"";if(g)return g}/* jcmaid: a martial close maid (dtq) stands in the way */const see=mlSee(p,t);const k=roll(B.feudPoison)?"poison":roll(B.feudFrame)?"frame":"fight";mlC("feud_"+k);
  if(k==="fight"){a.loyal=cl(a.loyal+B.fightLoy,0,100);b.loyal=cl(b.loyal+B.fightLoy,0,100);const l=roll(B.fightLose)?a:b;/* the loser of the scuffle is slapped: either side */mlFx(typeof slapGive==="function"?slapGive:null,l,l===a?t:p,"cãi nhau giành việc");
   if(see)ev+=`${a.name} (cung ${NM(p)}) và ${b.name} (cung ${NM(t)}) giành việc ở Nội vụ phủ, cào cấu nhau giữa sân; ${l.name} bị tát. `}

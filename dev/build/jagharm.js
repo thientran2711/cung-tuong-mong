@@ -77,9 +77,9 @@ function haOpts(v,N,need){if(!v||v===S)return[];const C=HA.oc=HA.oc||{};const k=
 function haOpts0(v,N,need){const O=[];if(!haOn()||v===S||v.coop||v.confined)return O;const H=haB();if(need&&!H.needs.includes(need))return O;
  const road=BAL.ag.road[agOrg(v)]||BAL.ag.road._;
  /* her scheme on one person (she waits for a big scheme already in hand: v.plan) */
- const C=v.plan?[]:haTargets(v).filter(x=>bandOf(danger(v,x))>=1);const t=C.length?mindPickBy(C,x=>haScoreT(v,x,need),v):null;const g=t?motiveOK(v,t,"frame"):{ok:false};
+ const C=v.plan?[]:haTargets(v).filter(x=>bandVT(v,x)>=1);const t=C.length?mindPickBy(C,x=>haScoreT(v,x,need),v):null;const g=t?motiveOK(v,t,"frame"):{ok:false};
  const N2=Object.assign({},N);if(t)N2.spite=agSpN(agSpite(v,t),haB().spiteD)*road.spite;
- if(t&&g.ok){const allow=new Set(BANDS.slice(1,bandOf(danger(v,t))+1).flatMap(x=>x[2]));
+ if(t&&g.ok){const allow=new Set(BANDS.slice(1,bandVT(v,t)+1).flatMap(x=>x[2]));
   for(const vk in HA_VAR)if(allow.has(HA_VAR[vk]))allow.add(vk);
   for(const k of allow){if(HA_NO.has(k))continue;const A=ACT[k];if(!A)continue;const gn=haGain(k);if(need&&gn.g[need]==null)continue;
    if(!HA_TOG.has(k)){let ok=false;try{ok=A.ok(v,t)}catch(e){}if(!ok)continue}

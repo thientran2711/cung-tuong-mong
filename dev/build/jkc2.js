@@ -131,7 +131,7 @@ function kc2Init(d){const sur=tdSur(S.name);const fam=[];const gm=()=>nmNew("m",
   /* Xuân Đào: the girl from the same village who enters the palace in the same draft (j67 cnv_ban names her) — one person, one name */
   /* the palace has no other Xuân Đào: a palace maid who drew that name gets another one (j61 hides strangers' names in any text) */
   try{const used=new Set(k61All().map(e=>e.name));for(const e of k61All())if(e&&e!==S&&/(^| )Xuân Đào$/.test(String(e.name||""))){e.name=nmNew("maid",{more:[{name:"Xuân Đào"}]});used.add(e.name)}}catch(e){console.error("kc2 xd name",e)}
-  fam.push(T("xd","Xuân Đào","Xuân Đào",18+R(2),"consort",["Ân cần","Khiêm nhường","Nóng nảy","Ham vui"],35+R(30),{out:1}));
+  fam.push(T("xd","Xuân Đào","Xuân Đào",BAL.ageMin+R(2),"consort",["Ân cần","Khiêm nhường","Nóng nảy","Ham vui"],35+R(30),{out:1}));
   fam.push(T("ly","Lý trưởng",gx(),50+R(10),"official",["Ham lợi","Cương trực","Xu nịnh","Kín đáo"],R(30),{out:1}));
   fam.push(T("ba","Bà Tư",`Bà Tư ${gmo()}`,62+R(8),"mama",["Lạnh lùng","Ân cần","Nhiều chuyện"],30+R(20),{out:1}));
  }else{const L=kc2L(),bd=kc2Br()==="bd",pf=kc2Br()==="pf";
@@ -139,12 +139,12 @@ function kc2Init(d){const sur=tdSur(S.name);const fam=[];const gm=()=>nmNew("m",
   fam.push(T("me",L.mom,pf?`${L.tx.momN} ${gf()}`:bd?(fn=>bdTxt(`Khả đôn ${fn}`,`Vương hậu ${fn}`))(gf()):`Vương hậu ${gf()}`,42+R(6),"mama",["Ân cần","Khiêm nhường","Kín đáo","Cương trực"],50+R(30)));
   if(bd){fam.push(T("huynh","Trưởng huynh",gv(),26+R(4),"man",["Tham vọng","cương trực","nóng nảy"],30+R(30)));fam.push(T("huynh2","Nhị huynh",gv(),23+R(3),"man",["Tham vọng","Kín đáo","Ham vui"],30+R(30)))}
   else{fam.push(T("huynh",pf?L.tx.huynh:"Thế tử huynh",gm(),25+R(4),"man",["Tham vọng","trung hậu","Kín đáo","nóng nảy"],35+R(30)));fam.push(T("thuc",pf?L.tx.thuc:"Vương thúc",gm(),46+R(8),"official",["Tham vọng","Kín đáo","Cương trực"],R(30),{out:0}))}
-  const mu=T("muoi",kc2Muoi(),(bd?gf():nmNew("f",{sur,more:fam})),18,"consort",["Kiêu ngạo","Tham vọng","Khiêm nhường","Ân cần"],10+R(40));mu.sac=40+R(50);mu.tai=30+R(50);fam.push(mu);
+  const mu=T("muoi",kc2Muoi(),(bd?gf():nmNew("f",{sur,more:fam})),BAL.ageMin,"consort",["Kiêu ngạo","Tham vọng","Khiêm nhường","Ân cần"],10+R(40));mu.sac=40+R(50);mu.tai=30+R(50);fam.push(mu);
   fam.push(T("sx","Sứ thần Đại Hy",gx(),45+R(10),"official",["Kín đáo","Cương trực","Điềm tĩnh","Kín đáo"],20+R(20),{out:1,hide:1}))}
  S.kc={v:3,kd:d,fam,at:{},once:{},ev:{},ch:{o:0},suit:[],intel:[],proof:{},le:0,kim:0,ds:0,g7:-99,ldSeen:0,r0:S.rank,staff0:S.staff||[],y0:S.year,t0:S.turn||0,end:null,tt:null,log:[],vil:d==="dan"?pick(KC2VIL):""};
  S.kc.due=kc2Due();kc2Words();
- if(d==="dan"){S.kgt=BAL.kc2.st.dan.kgt[0]+R(BAL.kc2.st.dan.kgt[1]);S.kap=BAL.kc2.st.dan.kap[0]+R(BAL.kc2.st.dan.kap[1]);S.khm=0;S.kld=0;S.kgtu=BAL.kc2.st.dan.kgtu;S.age=18;S.bac=Math.min(S.bac||0,8)}
- else{S.kgt=BAL.kc2.st.nc.kgt[0]+R(BAL.kc2.st.nc.kgt[1])+(kc2Br()==="bd"?BAL.kc2.st.nc.kgtBr[0]:BAL.kc2.st.nc.kgtBr[1]);S.kap=BAL.kc2.st.nc.kap[0]+R(BAL.kc2.st.nc.kap[1]);S.khm=kc2Br()==="bd"?BAL.kc2.st.nc.khm[0]:BAL.kc2.st.nc.khm[1];S.kld=0;S.kgtu=BAL.kc2.st.nc.kgtu;S.age=18;S.bac=Math.min(S.bac||0,60)}
+ if(d==="dan"){S.kgt=BAL.kc2.st.dan.kgt[0]+R(BAL.kc2.st.dan.kgt[1]);S.kap=BAL.kc2.st.dan.kap[0]+R(BAL.kc2.st.dan.kap[1]);S.khm=0;S.kld=0;S.kgtu=BAL.kc2.st.dan.kgtu;S.age=BAL.ageMin;S.bac=Math.min(S.bac||0,8)}
+ else{S.kgt=BAL.kc2.st.nc.kgt[0]+R(BAL.kc2.st.nc.kgt[1])+(kc2Br()==="bd"?BAL.kc2.st.nc.kgtBr[0]:BAL.kc2.st.nc.kgtBr[1]);S.kap=BAL.kc2.st.nc.kap[0]+R(BAL.kc2.st.nc.kap[1]);S.khm=kc2Br()==="bd"?BAL.kc2.st.nc.khm[0]:BAL.kc2.st.nc.khm[1];S.kld=0;S.kgtu=BAL.kc2.st.nc.kgtu;S.age=BAL.ageMin;S.bac=Math.min(S.bac||0,60)}
  S.rank=0;S.sung=0;S.danh=Math.min(S.danh||0,d==="nc"?12:3);S.staff=[];S.place=kc2P(d==="dan"?"nha":"tam");S.pal=null;S.tonight=null;
  if(S.maid)S.maid.kcTy=1;
  kcWhere();Q=Q.filter(m=>m.nl);S.nightWhy=null;
@@ -316,7 +316,7 @@ Object.assign(KCE,{
   kc2H(kcO(kc2Br()==="pf"?KC2LAND.pf.tx.hoi:kc2Br()==="bd"?bdTxt("Ra sân đua ngựa","Ra sân đánh mã cầu"):"Múa dưới rừng đèn",{suc:BAL.kc2.n_hoi_o_suc},()=>{const b=rsnap();const raw=((S.arts||{}).vu||0)*12+S.sac/3+(kc2Br()==="bd"?S.suc/4:0)+R(30);let t;if(raw>=55){S.kgt+=BAL.eff.jkc2.kgtO_8;apply({danh:BAL.kc2.n_hoi_o_danh});if(sx)kcAf(sx,BAL.eff.jkc2.o_26);t="Cả hội reo hò; sứ thần ghi tên ngươi vào thư gửi về Đại Hy."}else{apply({danh:BAL.kc2.n_hoi_o_danh2});t="Ngươi vấp một nhịp; người ta vẫn vỗ tay, vì ngươi là công chúa."}kcRes(KC2LAND[kc2Br()].fest[0],b,t)}),"làm tốt thì sứ thần nhớ ngươi, hòa ước thêm nặng","có rủi ro"),
   kc2H(kcO("Ngồi cạnh mẫu thân xem hội",{},kc2Go(KC2LAND[kc2Br()].fest[0],()=>{const me=kcR("me");if(me)kcAf(me,BAL.eff.jkc2.o_27);return"Một đêm hội cuối cùng ở cố quốc."})),"mẹ vui lòng","an toàn")]}}},
  n_muoi:{get t(){const m=kcR("muoi");return `${m?m.t:kc2Muoi()} tranh phần`},b:()=>{const mu=kcR("muoi");S.kc.ev.n_muoi=1;return{who:kcFace(mu),t:`<p>${mu.t} ${mu.name} lén gặp sứ thần Đại Hy, nói rằng nàng mới là người đáng đi hòa thân.</p>`,o:[
-  kc2H(kcO("Mặc nàng",{},kc2Go(kc2Muoi(),()=>{S.kgt-=BAL.eff.jkc2.kgtO_9;mu.danh=(mu.danh||5)+4;return`Sứ thần bắt đầu hỏi han về ${kc2Muoi().toLowerCase()}.`})),"thế của ngươi trong hòa ước yếu đi","an toàn"),
+  kc2H(kcO("Mặc nàng",{},kc2Go(kc2Muoi(),()=>{S.kgt-=BAL.eff.jkc2.kgtO_9;statSet(mu,"danh",(mu.danh||5)+4);return`Sứ thần bắt đầu hỏi han về ${kc2Muoi().toLowerCase()}.`})),"thế của ngươi trong hòa ước yếu đi","an toàn"),
   kc2H(kcO("Nói chuyện thẳng với nàng",{suc:BAL.kc2.n_muoi_o_suc},kc2Go(kc2Muoi(),()=>{if(roll(BAL.kc2.noiChuyenThangVoi_rb+mu.af/2+nv(mu,"kc2MuTalk"))){kcAf(mu,BAL.eff.jkc2.o_28);return"Nàng khóc: nàng chỉ sợ bị gả cho một tộc trưởng già. Hai chị em làm lành."}mu.oan+=BAL.eff.jkc2.oanO_3;kcAf(mu,BAL.eff.jkc2.o_29);return"Nàng cười lạnh, bỏ đi."})),"tùy lòng nàng mà hóa giải hay thành thù","có rủi ro"),
   kc2H(kcO("Tâu với phụ thân",{},kc2Go(kc2Muoi(),()=>{const c=kcR("cha");if(c&&roll(BAL.kc2.tauVoiPhuThan_rb+c.af/3)){mu.oan+=BAL.eff.jkc2.oanO_4;kcAf(mu,BAL.eff.jkc2.o_30);S.kgt+=BAL.eff.jkc2.kgtO_10;return"Nàng bị cấm túc; sứ thần thôi hỏi han."}S.kgt-=BAL.eff.jkc2.kgtO_11;if(c)kcAf(c,BAL.eff.jkc2.o_31);return"Phụ thân gạt đi: ‘Chuyện con gái, tự giải quyết.’"})),"có thể dẹp yên, có thể bị gạt","có rủi ro")]}}},
  n_benh:{get t(){return `${kc2L().dad} ngã bệnh`},b:()=>{const c=kcR("cha");S.kc.ev.n_benh=1;const L=kc2L();return{who:kcFace(c),t:`<p>${L.dad} ngã bệnh giữa mùa. Phe chủ chiến xì xào: nếu ngài không qua khỏi, hòa ước cũng thôi.</p>`,o:[
@@ -368,7 +368,7 @@ for(const k in KC2CH)KCE[k]={get t(){try{return kc2ChT()}catch(x){return""}},b:K
    TODO(selection-minigame): when that worker ships, it sets window.kcEntryExam; until then the round is playArt (the same engine as Phúc tuyển). */
 function kc2Play(art,title,note,fin){if(window.__bot||typeof playArt!=="function"){fin(entBotRaw());return}
  if(typeof window.kcEntryExam==="function"){try{window.kcEntryExam((S.kc&&S.kc.kd)||S.origin.k,fin,{art,origin:S.origin&&S.origin.k,title,note});return}catch(e){console.error(e)}}
- try{playArt({art,title,note,quick:{n:"Để tài nghệ quyết định",sub:`tính ${entSkipRaw()}/10, như người cùng bậc`},onDone:(raw,o)=>fin(o&&o.skipped?entSkipRaw():raw)})}catch(e){console.error(e);fin(entSkipRaw())}}
+ try{playArt({art,title,note,quick:{n:"Để tài nghệ quyết định",sub:`tính ${entSkipRaw()}/10, tự thi giỏi thì hơn`},onDone:(raw,o)=>fin(o&&o.skipped?entSkipRaw():raw)})}catch(e){console.error(e);fin(entSkipRaw())}}
 Object.assign(KCE,{
  d_tuyen:{t:"Ngày tuyển cung nữ",b:()=>{const K=S.kc;const ly=kcR("ly");if(K.gach)return{who:kcFace(ly||K.fam[0]),t:`<p>Thái giám Nội vụ phủ về huyện đường; con gái các xã xếp hàng trước cổng. Tên ngươi đã bị gạch khỏi sổ. Xuân Đào đứng trong hàng, ngoái lại nhìn ngươi.</p>`,o:[
    kc2H(kcO("Ở lại quê nhà",{},()=>kc2End("Ở lại quê nhà",`Nàng ở lại ${K.vil}. Hai năm sau nàng lấy một anh thợ mộc làng bên; nợ nhà trả dần trong mười năm.`)),"không vào cung; kiếp này dừng ở quê","an toàn"),
@@ -378,14 +378,14 @@ Object.assign(KCE,{
  d_thi:{t:"Ngày tuyển cung nữ",b:()=>({who:pMe(),t:`<p>Ma ma Nội vụ phủ nhìn ngươi từ đầu đến chân, rồi chỉ vào một rổ kim chỉ và một chiếc ghế: ngươi chọn cách nào để tỏ mình?</p>`,o:[
    kc2H(kcO("Làm bài khéo tay",{suc:BAL.kc2.d_thi_o_suc},()=>kc2Exam("kim")),`chơi màn Khéo tay; khéo tay ở nhà (${S.kc.kim}/5) cộng thêm`,"có rủi ro"),
    kc2H(kcO("Thêu một mảnh khăn",{suc:BAL.kc2.d_thi_o_suc},()=>kc2Exam("theu")),`chơi màn Thêu; khéo tay ở nhà (${S.kc.kim}/5) cộng thêm`,"có rủi ro"),
-   kc2H(kcO("Cúi đầu chờ ma ma xét",{suc:BAL.kc2.d_thi_o_suc},()=>kc2Exam("")),"không thi; tính như người cùng bậc tài nghệ","an toàn")]})},
+   kc2H(kcO("Cúi đầu chờ ma ma xét",{suc:BAL.kc2.d_thi_o_suc},()=>kc2Exam("")),`không thi; tính theo tài nghệ, cao nhất là ${typeof mgWord==="function"?mgWord(BAL.skip.cap):"Khá"}`,"an toàn")]})},
  n_send:{t:"Hòa ước ký xong",b:()=>{const L=kc2L();const c=kcR("cha");return{who:kcFace(c||S.kc.fam[0]),t:`<p>Hòa ước đã ký. Sáng nay kiệu hoa đỏ dừng trước cổng ${L.court}; ${kc2Br()==="pf"?L.tx.gifts:kc2Br()==="bd"?bdTxt("ba trăm con ngựa","những xe bạc, thảm và lưu ly"):"xe lễ vật"} xếp hàng sau sứ đoàn Đại Hy. ${L.mom} đứng ở bậc thềm, không khóc trước mặt ai.</p>`+
    kitRows([[NAMES.kgt,S.kgt,"t"],["Lễ nghi Đại Hy",`${S.kc.le}/5`,"t"],[NAMES.khm,kitChip("Bạc",S.khm,"n"),"t"]]),o:[
    kc2H(kcO("Lên kiệu hoa",{},()=>pushDil(mkP("kcE",{e:"n_ramat"}),"Lễ ra mắt")),"sang Đại Hy; Lễ ra mắt định phẩm vị","an toàn")]}}},
  n_ramat:{t:"Lễ ra mắt",b:()=>{const r0=RANKS[(S.origin&&S.origin.r)||0].n;return{who:pEmp(),t:`<p>Điện Thái Hòa. Hoàng thượng ngồi trên, Thái hậu ngồi bên, bá quan hai hàng. Công chúa ${kc2L().land} dâng lễ ra mắt. Lễ hôm nay quyết định ngươi được phong tới đâu (cao nhất ${r0}).</p>`,o:[
    kc2H(kcO(kc2Br()==="bd"?bdTxt("Dâng điệu múa thảo nguyên","Dâng điệu múa Ba Tư"):"Dâng điệu múa cố quốc",{suc:BAL.kc2.n_ramat_o_suc},()=>kc2Exam("mua")),"chơi màn Múa; tài múa và dung mạo cộng thêm","có rủi ro"),
    kc2Br()==="bd"?kc2H(kcO("Bắn cung trước điện",{suc:BAL.kc2.n_ramat_o_suc},()=>kc2Exam("ban")),"chơi màn Bắn cung; dung mạo và lễ nghi học ở nhà cộng thêm","có rủi ro"):kc2H(kcO("Dâng khúc đàn cố quốc",{suc:BAL.kc2.n_ramat_o_suc},()=>kc2Exam("cam")),"chơi màn Đàn; tài đàn và lễ nghi học ở nhà cộng thêm","có rủi ro"),
-   kc2H(kcO("Để sứ thần đọc lời chúc thay",{suc:BAL.kc2.n_ramat_o_suc2},()=>kc2Exam("")),"không thi; tính như người cùng bậc tài nghệ","an toàn")]}}}});
+   kc2H(kcO("Để sứ thần đọc lời chúc thay",{suc:BAL.kc2.n_ramat_o_suc2},()=>kc2Exam("")),`không thi; tính theo tài nghệ, cao nhất là ${typeof mgWord==="function"?mgWord(BAL.skip.cap):"Khá"}`,"an toàn")]}}}});
 function kc2Exam(art){const K=S.kc;if(!isKc()||K.ex&&K.ex.done)return;K.ex={art,play:1};
  if(!art){kc2ExamEnd(entSkipRaw());return}/* entry-exam: the same value as "Để tài nghệ quyết định" */kc2ExamGame(art)}
 /* co-op thin F6b: the game part (opened on HER phone when the start ran in her context on the host) and the ONE named end (the host runs it) */
@@ -512,8 +512,8 @@ if(typeof bdTxtProp==="function")bdTxtProp(KC2DART.bd[0],1,KC2DART.bd[0][1],"Dâ
 function kc2SelArts(){const k=S.origin.k;if(KC2DART[k])return KC2DART[k];const L=entArts().slice(0,2);return (L.length?L:[["cam",0,"Cầm"]]).map(([a,,n])=>[a,`Dâng ${n}`])}
 function kc2SelOn(){return !!(S&&S.origin&&(S.origin.k==="cnv"?!!S.srv:true))}/* entry-exam: every origin meets the selection (ceiling Đáp ứng: gain / loss only, BAL.entry.fx) */
 PEND.kc2Sel=pp=>{if(!S||S.dead||!S.selx||S.selx.done)return null;const srv=S.origin.k==="cnv";const top=RANKS[S.origin.r||0].n;
- const o=kc2SelArts().map(([art,n])=>kc2H(kcO(n,{suc:BAL.kc2.kc2SelOn_o_suc},()=>kc2SelPlay(art)),art?"chơi một màn; làm tốt thì được trọng":"không thi; tính như người cùng bậc tài nghệ","có rủi ro"));
- o.push(kc2H(kcO("Cúi đầu chờ xét",{suc:BAL.kc2.kc2SelOn_o_suc},()=>kc2SelPlay("")),"không thi; tính như người cùng bậc tài nghệ","an toàn"));
+ const o=kc2SelArts().map(([art,n])=>kc2H(kcO(n,{suc:BAL.kc2.kc2SelOn_o_suc},()=>kc2SelPlay(art)),art?"chơi một màn; làm tốt thì được trọng":`không thi; tính theo tài nghệ, cao nhất là ${typeof mgWord==="function"?mgWord(BAL.skip.cap):"Khá"}`,"có rủi ro"));
+ o.push(kc2H(kcO("Cúi đầu chờ xét",{suc:BAL.kc2.kc2SelOn_o_suc},()=>kc2SelPlay("")),`không thi; tính theo tài nghệ, cao nhất là ${typeof mgWord==="function"?mgWord(BAL.skip.cap):"Khá"}`,"an toàn"));
  return{who:srv?pMe():pEmp(),t:srv?`<p>Nội vụ phủ chọn cung nữ. Ma ma xem dung mạo, khéo tay, lễ nghi; người tốt được chia về hầu các vị nương nương bậc cao, người kém phải giặt đồ ở Tân Giả khố trước.</p>`
   :(S.origin.r||0)>0?`<p>Trước ngày phong, Hoàng thượng và Thái hậu cho gọi ngươi ra mắt. Thân phận cho ngươi được phong tới <b>${top}</b>; được hay không là ở buổi hôm nay.</p>`
   :`<p>Trước ngày phong, Hoàng thượng và Thái hậu cho gọi ngươi ra mắt. Ngươi sẽ được phong <b>${top}</b>; buổi hôm nay định Hoàng thượng và Thái hậu nhìn ngươi thế nào.</p>`,o}};

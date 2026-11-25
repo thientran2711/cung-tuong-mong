@@ -7,36 +7,95 @@ function saveOpt(){try{localStorage.setItem("hclh-opt",JSON.stringify(OPT))}catc
 /* ---- audio: HTMLAudio, starts after the first tap, missing files fail silently ---- */
 const AU={unlocked:false,cur:null,curName:"",duck:1,cache:{}};
 function auOk(){return AU.unlocked&&OPT.snd&&!OPT.mute&&!document.hidden}
-function mkAudio(n,loop,route){try{const a=new Audio(`audio/${n}.mp3`);a.loop=!!loop;a.preload="auto";a.addEventListener("error",()=>{a.dead=1});if(route)auRoute(a);return a}catch(e){return null}}
+function mkAudio(n,loop,route){try{const a=new Audio(kmusUrl(n));a.loop=!!loop;a.preload="auto";a.addEventListener("error",()=>{a.dead=1;kmusFail(n,a)});if(route)auRoute(a);return a}catch(e){return null}}
 /* ---- iOS / WebAudio layer (review/result-sfx): iPhone ignores element.volume and only unlocks audio on touchend / click / keydown (not a touch pointerdown).
    AU.ctx = one AudioContext, resumed + a silent buffer played on every real gesture (re-armed after the page was hidden or the phone interrupted it).
    Music (and the heartbeat loop) go through a GainNode and expose the same `volume` property, so the slider, mute and ducking work on iPhone; sfx play from decoded
    AudioBuffers (jsfx sfx()) through a GainNode too. Everything falls back to plain HTMLAudio when WebAudio is missing. */
 function auRoute(a){try{if(!AU.ctx||AU.ctx.state==="closed"||a.__gain)return;const src=AU.ctx.createMediaElementSource(a),g=AU.ctx.createGain();src.connect(g);g.connect(AU.ctx.destination);let v=1;a.__gain=g;
  Object.defineProperty(a,"volume",{configurable:true,get:()=>v,set:x=>{v=Math.max(0,Math.min(1,+x||0));g.gain.value=v}})}catch(e){}}
-function auBuf(n){if(!AU.ctx)return null;const c=AU.bufs||(AU.bufs={});const e=c[n];if(e)return e.buf||null;const o=c[n]={buf:null,fail:0};
- try{fetch(`audio/${n}.mp3`).then(r=>r.ok?r.arrayBuffer():Promise.reject(new Error(r.status))).then(ab=>new Promise((ok,no)=>{const p=AU.ctx.decodeAudioData(ab,ok,no);if(p&&p.catch)p.catch(no)})).then(b=>{o.buf=b}).catch(()=>{o.fail=1})}catch(e){o.fail=1}return null}
+function auBuf(n){if(!AU.ctx)return null;const c=AU.bufs||(AU.bufs={});const e=c[n];if(e&&!(e.fail&&performance.now()-e.ft>4000))return e.buf||null;const o=c[n]={buf:null,fail:0,ft:0};
+ try{fetch(`audio/${n}.mp3`).then(r=>r.ok?r.arrayBuffer():Promise.reject(new Error(r.status))).then(ab=>new Promise((ok,no)=>{const p=AU.ctx.decodeAudioData(ab,ok,no);if(p&&p.catch)p.catch(no)})).then(b=>{o.buf=b}).catch(()=>{o.fail=1;o.ft=performance.now()})}catch(e){o.fail=1;o.ft=performance.now()}return null}
 const AU_PRELOAD=["sfx-win","sfx-fail","sfx-learn-good","sfx-learn-bad","sfx-seal-stamp","sfx-tap","sfx-expose","sfx-scheme","sfx-rank-new","sfx-podium","sfx-buy","sfx-coin"];
 function auUnlock(){try{const C=window.AudioContext||window.webkitAudioContext;
  if(C&&!AU.ctx){try{AU.ctx=new C({latencyHint:"interactive"})}catch(e){try{AU.ctx=new C()}catch(x){}}}
  try{if(navigator.audioSession&&navigator.audioSession.type!=="playback")navigator.audioSession.type="playback"}catch(e){}
  const c=AU.ctx;if(c&&c.state!=="running"){const p=c.resume();if(p&&p.catch)p.catch(()=>{})}
  if(c&&!AU.silent){AU.silent=1;try{const s=c.createBufferSource();s.buffer=c.createBuffer(1,1,22050);s.connect(c.destination);s.start(0)}catch(e){}if(!AU.pre){AU.pre=1;AU_PRELOAD.forEach(auBuf)}}
- if(!AU.unlocked){AU.unlocked=true;auTick()}}catch(e){if(!AU.unlocked)AU.unlocked=true}}
+ /* review/sfx-instant (OD 24/11 item 2): ONE context for every synth sound too (bell, kg82Pluck fallback, Sổ tuần knock) — a lazily made second context starts suspended outside a gesture = a silent first sound */
+ if(c){if(!window.__bellCtx)window.__bellCtx=c;else if(window.__bellCtx!==c&&window.__bellCtx.state!=="running"){try{const p=window.__bellCtx.resume();if(p&&p.catch)p.catch(()=>{})}catch(e){}}}
+ if(!AU.unlocked){AU.unlocked=true;auTick()}if(AU.onUnlock)AU.onUnlock()}catch(e){if(!AU.unlocked)AU.unlocked=true}}
 window.auUnlock=auUnlock;
 function musVol(){return OPT.mute||!OPT.snd?0:OPT.mus*AU.duck}
 function fadeTo(a,v,ms,done){if(!a)return;const v0=a.volume,t0=performance.now();const st=()=>{const f=Math.min(1,(performance.now()-t0)/ms);try{a.volume=Math.max(0,Math.min(1,v0+(v-v0)*f))}catch(e){}if(f<1)setTimeout(st,60);else if(done)done()};st()}
-function startTrack(n){const a=mkAudio(n,false,true);if(!a)return null;a.volume=0;a.addEventListener("timeupdate",()=>{if(AU.curName!==n||a.handoff||!a.duration)return;if(a.currentTime>a.duration-1.6){a.handoff=1;const b=startTrack(n);if(b){AU.cur=b;fadeTo(b,musVol(),1500)}fadeTo(a,0,1500,()=>{try{a.pause()}catch(e){}})}});if(auOk()){const p=a.play();if(p&&p.catch)p.catch(()=>{})}return a}
-function setMusic(n){if(AU.curName===n&&AU.cur)return;AU.curName=n;const old=AU.cur;const a=startTrack(n);AU.cur=a;if(a)fadeTo(a,musVol(),1200);if(old)fadeTo(old,0,1200,()=>{try{old.pause()}catch(e){}})}
+function startTrack(n){const a=mkAudio(n,false,true);if(!a)return null;a.volume=0;
+ /* review/sansang-music-fix (OD 25/11 ~04:10Z «hết nghe nhạc luôn»): a track that ENDS without its hand-off (timeupdate missed the last 1.6 s while a
+    mini-game held the main thread) or ERRORS (network drop / cache miss mid-stream) used to stay AU.cur forever = silence until reload; now it is replaced */
+ a.addEventListener("playing",()=>{if(AU.cur===a)AU.mFail=0});
+ a.addEventListener("ended",()=>{if(AU.cur===a&&!a.handoff)auMusRestart(0)});
+ a.addEventListener("error",()=>{a.dead=1;if(AU.cur===a)auMusRestart(1)});a.addEventListener("timeupdate",()=>{if(AU.curName!==n||a.handoff||!a.duration)return;if(a.currentTime>a.duration-1.6){a.handoff=1;const b=startTrack(n);if(b){AU.cur=b;fadeTo(b,musVol(),1500)}fadeTo(a,0,1500,()=>{try{a.pause()}catch(e){}})}});if(auOk()){const p=a.play();if(p&&p.catch)p.catch(()=>{})}return a}
+function setMusic(n){if(AU.curName===n&&AU.cur&&!AU.cur.dead)return;if((!AU.cur||AU.cur.dead)&&AU.curName===n&&performance.now()<(AU.mNext||0))return;AU.curName=n;const old=AU.cur;const a=startTrack(n);AU.cur=a;if(a)fadeTo(a,musVol(),1200);if(old)fadeTo(old,0,1200,()=>{try{old.pause()}catch(e){}})}
 function heartLoop(on){try{if(on&&auOk()){if(!AU.hb){AU.hb=mkAudio("sfx-heartbeat",true,true)}if(AU.hb&&AU.hb.paused){AU.hb.volume=OPT.sfx*.6;const p=AU.hb.play();if(p&&p.catch)p.catch(()=>{})}}else if(AU.hb&&!AU.hb.paused)AU.hb.pause()}catch(e){}}
 function sfx(n){if(!auOk())return;try{let a=AU.cache[n];if(!a){a=AU.cache[n]=mkAudio(n,false)}if(!a||a.dead)return;const b=a.cloneNode();b.volume=OPT.sfx;const p=b.play();if(p&&p.catch)p.catch(()=>{});
  AU.duck=.45;if(AU.cur)AU.cur.volume=musVol();clearTimeout(AU.dt);AU.dt=setTimeout(()=>{AU.duck=1;if(AU.cur)AU.cur.volume=musVol()},650)}catch(e){}}
-function musicCtx(){if(!S)return"bgm-day";if(S.dead)return"bgm-sorrow";if(S.place==="lc")return"bgm-cold";const m=Q[0];if(m&&(m.pid&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="night1"&&m.pid!=="night2"&&m.pid!=="shop"))return"bgm-tension";
- if(m&&(m.pid==="night1"||m.pid==="night2"||m.cls==="night"))return"bgm-night";if((S.month===1||S.month===7)&&S.tuan===0)return"bgm-festival";return (S.buoi||0)===B4L?"bgm-night":"bgm-day"}
-function auTick(){if(!AU.unlocked)return;const m0=Q[0];if(!(m0&&m0.pid&&musicCtx()==="bgm-tension"))heartLoop(false);if(!OPT.snd||OPT.mute){if(AU.cur)try{AU.cur.volume=0}catch(e){}return}setMusic(musicCtx());if(AU.cur){try{AU.cur.volume=musVol();if(AU.cur.paused&&!document.hidden){const p=AU.cur.play();if(p&&p.catch)p.catch(()=>{})}}catch(e){}}}
+/* KIT §93.x «not a danger» (KK29, SELSCENE-18 request, MAIN 140): the red whole-screen wash (kitAlarm), the heartbeat and the tension music mean DANGER. A card is NOT a danger when it has a pid and any of: (1) `nodanger:1` on the card (m.nodanger, or kit panel spec.nodanger) — the per-card flag any scene sets; (2) its pid is an act picker she opened herself (KIT_ACT_PIDS, jk2b); (3) its pid starts with a KIT_NODANGER_PRE prefix (selection day: selx*, kc2Sel); (4) it is on the routine / story / invitation list KIT_NODANGER_PIDS (ksp prep night1 night2 shop nfch nfsum kyngo j71i j67 …). The older internal «already alarmed» mark q.__kmA keeps working (kitAlarm fires once per card). ONE function for the alarm (j93), the heartbeat (here) and the music (here); no other place keeps its own skip list. */
+const KIT_NODANGER_PRE=["selx","kc2Sel"];const KIT_NODANGER_PIDS=["ksp","prep","night1","night2","shop","giftpick","plantpick","taintpick","evpick","itarget","plantsv","nfch","nfsum","kyngo","j71i","j67"];/* nfch / nfsum = Kính sự phòng night report + flip choice (as ksp), kyngo = a kỳ ngộ (happy encounter), j71i = Hoàng thượng's invitation (Lời mời), j67 = a story chapter she is walking (Chính tuyến / Phụ tuyến): none is a sudden threat (SELSCENE-18 list, MAIN 140) */
+function kitNoDanger(m){try{if(!m||!m.pid)return true;if(m.nodanger||m.kit&&m.kit.nodanger)return true;const p=String(m.pid);if(KIT_NODANGER_PIDS.includes(p))return true;if(typeof KIT_ACT_PIDS!=="undefined"&&KIT_ACT_PIDS.has(p))return true;return KIT_NODANGER_PRE.some(x=>p.indexOf(x)===0)}catch(e){return false}}
+window.kitNoDanger=kitNoDanger;
+/* ================= KIT MUSIC (KK18, KIT §96; owner OD 24/11 ~09:45Z: a music group per event family, popups switch the music, tabs are not one loop) =================
+   ONE chooser: musicCtx() returns "bgm-<key>"; jpres kpresPlan asks kmusEvent() for a card's key (its group->mus strings stay as the old-six fallback).
+   Keys = reports/F-music.md §3-§5. New keys (KMUS_NEW) are served from the CDN (IMG_BASE+"audio/bgm-<key>.mp3", never git); the old six stay local.
+   A missing file falls back along KMUS_FB, never silence. An event track holds >= BAL.kmus.holdMs before the base returns (two chained cards do not flap). */
+const KMUS_NEW=new Set("day-xuan day-ha day-thu day-dong day-sang day-chieu night-2 tension-2 joy sad mourning romance thitam contest banquet conferral daile sel-nhapcung sel-dientuyen sel-chochieu end end-grand end-kyngo".split(" ").concat("newyear nguyentieu thanhminh doanngo phoenix thattich vulan trungthu vantho trungcuu thanhtho dongchi lapbat giaothua".split(" ").map(x=>"fest-"+x)));
+const KMUS_FB=(()=>{const f={"joy":"day","night-2":"night","romance":"night","thitam":"night","tension-2":"tension","sad":"sorrow","mourning":"sorrow","end":"sorrow","contest":"festival","banquet":"festival","conferral":"festival","daile":"festival","sel-nhapcung":"festival","sel-dientuyen":"festival","sel-chochieu":"festival","end-grand":"festival","end-kyngo":"festival","lanhcung":"cold"};["xuan","ha","thu","dong","sang","chieu"].forEach(x=>f["day-"+x]="day");KMUS_NEW.forEach(k=>{if(/^fest-/.test(k))f[k]="festival"});return f})();
+/* card category (jpres evArtCat) -> key; "a|b" alternates per card. Group table below is the fallback for a category not listed. */
+const KMUS_CAT={"lu-lut":"tension","han-han":"tension","bien-ai":"tension","tham-quan":"tension","thang-tran":"joy","duoc-mua":"joy","dai-xa":"joy","hoa-than":"mourning","quoc-tang":"mourning","tang-le":"mourning","te-le":"mourning","hoang-de-vui":"joy","tu-tinh":"romance","mat-uoc":"romance","hoang-de-dem":"thitam","di-san":"sad","hoang-de-gian":"tension|tension-2","hinh-phat":"tension|tension-2","hoa-hoan":"tension|tension-2","lanh-cung":"cold","yen-tiec":"banquet","tan-phong":"conferral","tuyen-tu":"sel-nhapcung","sinh-no":"joy","con-tre":"joy","chuyen-la":"night-2","qua-tang":"joy","hao-huu":"joy","tai-nghe":"contest","dieu-troi":"night-2","dieu-lanh":"joy","benh-tat":"sad","dich-benh":"sad","tranh-sung":"tension|tension-2","tin-don":"tension|tension-2","tai-mat":"tension|tension-2","mat-bao":"tension|tension-2","am-muu":"tension|tension-2","vu-oan":"tension|tension-2","hoi-lo":"tension|tension-2","dau-doc":"tension-2","hai-thai":"tension-2","kyngo":"joy"};
+const KMUS_GRP={"trung-phat":"tension|tension-2","muu-ke":"tension|tension-2","hai-nguoi":"tension-2","cham-con":"joy","hoc-tap":"contest"};
+function kmusUrl(n){const k=String(n).replace(/^bgm-/,"");const cdn=/^bgm-/.test(n)&&KMUS_NEW.has(k)&&!AU.kmusLocal;return(cdn&&typeof IMG_BASE==="string"?IMG_BASE:"")+"audio/"+n+".mp3"}
+function kmusFail(n,a){try{const k=String(n).replace(/^bgm-/,""),f=KMUS_FB[k];if(!f||AU.curName!==n||AU.cur!==a)return;const fn="bgm-"+f;AU.curName=fn;const b=startTrack(fn);AU.cur=b;if(b)fadeTo(b,musVol(),1200)}catch(e){}}
+function kmusEvent(c,g,P,m){try{let v=KMUS_CAT[c]||(/^fest/.test(c||"")?"fest":"")||KMUS_GRP[g]||"";if(!v)return"";if(v==="fest"){const f=festToday();return f&&KMUS_NEW.has("fest-"+f.k)?"fest-"+f.k:"festival"}
+ if(v.indexOf("|")>0){const o=v.split("|");if(m&&m.__mk)return m.__mk;AU.alt=(AU.alt||0)+1;v=o[AU.alt%o.length];if(m)m.__mk=v}return v}catch(e){return""}}
+function kmusBase(){const b=S.buoi||0,night=b>=B4L;let c;
+ if(typeof isKc==="function"&&isKc()){return S.kc.tt&&S.kc.tt.done?"sel-chochieu":"sel-nhapcung"}
+ if(night)c=["night","night-2"];else{const se="day-"+(SEAK[SEASON[(S.month||1)-1]]||"xuan");c=b===0?["day-sang",se]:b===2?["day-chieu",se]:[se,"day"]}
+ const sig=b+"|"+(S.month||0)+"|"+(typeof tab==="string"?tab:"");const st=AU.kb||(AU.kb={sig:"",k:"",n:0});
+ if(st.sig!==sig||!c.includes(st.k)){const odd=/^(go|rel|men|staff|inv|story)$/.test(typeof tab==="string"?tab:"")?1:0;st.n++;let k=c[(st.n+odd)%c.length];if(k===st.k)k=c[(c.indexOf(k)+1)%c.length];st.k=k;st.sig=sig}
+ return st.k}
+function kmusKey(){if(!S)return"day-xuan";const m=Q[0];let et="";try{et=typeof kitEndType==="function"?kitEndType(m):""}catch(e){}
+ if(et)return et==="grand"||et==="throne"?"end-grand":et==="rare"||et==="fate"?"end-kyngo":"end";
+ if(S.dead)return"end";if(S.place==="lc")return"cold";
+ if(m){if(m.__presMus&&(m.pid||m.evId))return m.__presMus.replace(/^bgm-/,"");
+  if(m.pid==="night1"||m.pid==="night2"||m.cls==="night")return"thitam";
+  if(m.pid==="kcE"&&m.pp){const e=m.pp.e;if(e==="so")return"sel-nhapcung";if(e==="phuc")return"contest";if(e==="dien")return"sel-dientuyen"}
+  if(m.pid&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="shop"&&!m.nodanger&&!(m.kit&&m.kit.nodanger)&&!KIT_NODANGER_PRE.some(x=>String(m.pid).indexOf(x)===0))return"tension"}/* LC16 merge: KIT §93.9 not-a-danger cards keep the base music (rule from kit-opts-pack-4) */
+ if(S.mg||document.getElementById("kg82"))return"contest";
+ const f=festToday();if(f)return KMUS_NEW.has("fest-"+f.k)?"fest-"+f.k:"festival";
+ return kmusBase()}
+function musicCtx(){if(!S)return"bgm-day";const k=kmusKey(),t=performance.now(),H=(BAL.kmus&&BAL.kmus.holdMs)||6000,h=AU.mk||(AU.mk={k:"",t:0,ev:0});
+ const ev=!!(Q[0]||S.dead||S.place==="lc"||S.mg||festToday());
+ if(h.k&&h.k!==k&&h.ev&&!ev&&t-h.t<H){clearTimeout(AU.mkt);AU.mkt=setTimeout(()=>{try{auTick()}catch(e){}},H-(t-h.t)+60);return"bgm-"+h.k}
+ if(h.k!==k){h.k=k;h.t=t}h.ev=ev;return"bgm-"+k}
+function auTick(){if(!AU.unlocked)return;const m0=Q[0];if(!(m0&&m0.pid&&/^bgm-tension/.test(musicCtx())))heartLoop(false);if(!OPT.snd||OPT.mute){if(AU.cur)try{AU.cur.volume=0}catch(e){}return}setMusic(musicCtx());if(AU.cur){try{AU.cur.volume=musVol();if(AU.cur.paused&&!document.hidden){const p=AU.cur.play();if(p&&p.catch)p.catch(()=>{})}}catch(e){}}}
+/* music watchdog (review/sansang-music-fix): render() → auTick() is the only other place that wakes the music, and a mini-game / focus view
+   renders nothing for minutes — every 2.5 s while sound is on and the page is visible: a dead / ended / paused current track is restarted, a track
+   whose clock stood still for 3 checks (stalled stream) is replaced, a suspended / interrupted AudioContext (music is routed through it) is resumed.
+   Failures back off 2 s → 4 s → … 30 s (offline with no cached music never spins). */
+function auMusRestart(fail){const old=AU.cur;AU.cur=null;if(old){old.handoff=1;try{old.pause()}catch(e){}}
+ if(fail){AU.mFail=(AU.mFail||0)+1;AU.mNext=performance.now()+Math.min(30000,2000*Math.pow(2,AU.mFail-1))}else AU.mNext=0;
+ const n=AU.curName;AU.curName="";if(!auOk()||performance.now()<(AU.mNext||0)){AU.curName=n;return}try{auTick()}catch(e){}}
+function auWatch(){try{if(!auOk())return;const c=AU.ctx;if(c&&c.state!=="running"&&c.state!=="closed"){const p=c.resume();if(p&&p.catch)p.catch(()=>{})}
+ const a=AU.cur;if(!a){if(performance.now()>=(AU.mNext||0)){AU.curName="";auTick()}return}
+ if(a.dead||a.error){if(performance.now()>=(AU.mNext||0))auMusRestart(1);return}if(a.ended){auMusRestart(0);return}
+ if(a.paused){a.__st=0;const p=a.play();if(p&&p.catch)p.catch(()=>{});return}
+ const t=a.currentTime;/* a stall counts only once the track had data (readyState ≥ 2: a fresh track still loading on a slow phone is not stalled); one that never gets data is replaced after ~20 s */
+ if(t===a.__lt&&!a.seeking){a.__st=(a.__st||0)+1;if((a.readyState>=2&&a.__st>=3)||a.__st>=8){a.__st=0;auMusRestart(1)}}else a.__st=0;a.__lt=t}catch(e){}}
+setInterval(auWatch,2500);
 /* real gestures only: touchend / click / pointerup / keydown unlock iOS; pointerdown counts for a mouse (or when WebAudio is missing), a touch pointerdown is not a gesture there */
 for(const ev of ["touchend","click","pointerup","keydown"])document.addEventListener(ev,auUnlock,{capture:true,passive:true});
-document.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse"||!(window.AudioContext||window.webkitAudioContext))auUnlock()},{capture:true,passive:true});
+/* a touch pointerdown once the page already had a real gesture (sticky activation): wake the existing context right at the finger-down, so the tap sound
+   (mini-game strokes play on pointerdown) is not lost to a context that is still resuming at touchend (review/sfx-instant) */
+document.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse"||!(window.AudioContext||window.webkitAudioContext))auUnlock();
+ else if(AU.ctx&&AU.ctx.state!=="running"&&AU.ctx.state!=="closed"){try{const p=AU.ctx.resume();if(p&&p.catch)p.catch(()=>{})}catch(x){}}},{capture:true,passive:true});
 window.addEventListener("pageshow",()=>{AU.silent=0});
 document.addEventListener("visibilitychange",()=>{try{if(document.hidden){if(AU.cur)AU.cur.pause()}else{AU.silent=0;if(AU.ctx&&AU.ctx.state!=="running"){const p=AU.ctx.resume();if(p&&p.catch)p.catch(()=>{})}auTick()}}catch(e){}if(PX.app){try{document.hidden?PX.app.ticker.stop():PX.app.ticker.start()}catch(e){}}});
 /* ---- feedback(kind): sound + haptics + visual, one helper ---- */
@@ -74,7 +133,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 
  W("goTo",o=>function(k){const r=o.apply(this,arguments);if(S&&S.place===k&&k!=="home")feedback("step");if(k==="lc")feedback("ash");return r});
  W("over",o=>function(){const r=o.apply(this,arguments);auTick();return r});
- W("showModal",o=>function(){const r=o.apply(this,arguments);const m=Q[0];if(m){if(m.pid&&!["ksp","prep","night1","night2","shop","giftpick","plantpick","taintpick","evpick","itarget","plantsv"].includes(m.pid)){feedback("heart");heartLoop(true)}else sfx("sfx-open");if(m.cls==="night"||m.pid==="night1"||m.pid==="night2")nightFade()}auTick();return r});
+ W("showModal",o=>function(){const r=o.apply(this,arguments);const m=Q[0];if(m){if(m.pid&&!kitNoDanger(m)){feedback("heart");heartLoop(true)}else sfx("sfx-open");if(m.cls==="night"||m.pid==="night1"||m.pid==="night2")nightFade()}auTick();return r});
  W("apply",o=>function(fx){const b=S&&S.bac;const r=o.apply(this,arguments);if(S&&!quiet&&S.bac>b)feedback("coin",{n:S.bac-b});return r});
  W("openMG",o=>function(k,lv,cb){return o.call(this,k,lv,g=>{feedback(g>=2?"good":"bad");cb(g)})});
  const P=ACT.poison.f;ACT.poison.f=function(a,t){const r=P.apply(this,arguments);if(t===S||a===S)feedback(t===S?"poison":"ink");return r};

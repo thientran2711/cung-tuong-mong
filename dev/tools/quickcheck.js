@@ -45,11 +45,29 @@ const NEWLIFE=()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;docu
  ['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});return S.name};
 const SETTLE=()=>{try{for(let j=0;j<8&&Q.length&&!S.dead;j++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}}catch(e){try{Q.shift()}catch(x){}}
  const n=document.getElementById('next');return !!n&&!n.disabled&&!Q.length&&!S.dead};
-const BUOI=async()=>{const sl=t=>new Promise(r=>setTimeout(r,t));const k0=JSON.stringify([S.turn,S.buoi,S.month,S.year]);const t0=performance.now();
+const BUOI=async(mode)=>{let slept=0,cards=0;const sl=t=>{slept+=t;return new Promise(r=>setTimeout(r,t))};
+ /* sangbuoi-held r3: buoiMs = the game's work, not this tool's pacing: the sleeps it asks for (40 ms per card it closes, 200 ms per look) are taken out
+    (a sleep stretched by a long task still counts — only the asked-for time is removed). The fixed tap runs the whole wrapped turn, which queues the
+    cards LIVE's bare tap skipped (agents, events, «Trong cung vừa qua» …): at 40 ms each the tool's own pacing alone made the gap. cards = closed after the turn. */
+
+ /* sangbuoi-held r3: finish what the new life left on screen (#ov intro, roulette / podium, a queued scene) BEFORE the clock starts — LIVE's bare tap
+    turned the buổi UNDER that screen (~160 ms) while the fixed tap holds it (flight rule) and waited ~1.2 s here: buoiMs timed the screen, not the turn
+    (probe: live auto-advance 1206 ms = new tap 1489 ms, held 4/4; live tap 163 ms, held 0/4). Untimed, both builds then time the same turn. */
+ const pend=()=>{const ov=document.getElementById('ov');return (ov&&!ov.hidden&&!S.mg)||!!document.querySelector('[id^="kroul"],.kroul-ov,#kpodov,.kmov:not(.km-out)')||(typeof KMQ!=='undefined'&&KMQ.length)||Q.length};
+ for(let i=0;i<30&&pend()&&!S.dead;i++){const ov=document.getElementById('ov');if(ov&&!ov.hidden&&!S.mg)ov.hidden=true;document.querySelectorAll('[id^="kroul"],.kroul-ov,#kpodov').forEach(e=>e.remove());try{kmPump()}catch(e){}
+  const kb=[...document.querySelectorAll('.kmov:not(.km-out) button,#kmrew button,#kpodov button')].find(b=>b.getClientRects().length&&!b.disabled)||document.querySelector('.kmov:not(.km-out)');if(kb)kb.click();
+  for(let j=0;j<12&&Q.length&&!S.dead;j++){const m=Q[0];try{if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}catch(e){Q.shift()}await sl(40)}await sl(250)}
+ const k0=JSON.stringify([S.turn,S.buoi,S.month,S.year]);slept=0;const t0=performance.now();
  for(let i=0;i<40;i++){for(let j=0;j<12&&Q.length&&!S.dead;j++){const m=Q[0];try{if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}catch(e){Q.shift()}await sl(40)}
-  const n=document.getElementById('next');if(n&&!n.disabled){n.click();await sl(300);break}await sl(200)}
- for(let j=0;j<40&&Q.length&&!S.dead;j++){const m=Q[0];try{if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}catch(e){Q.shift()}await sl(40)}
- return {ms:Math.round(performance.now()-t0),moved:JSON.stringify([S.turn,S.buoi,S.month,S.year])!==k0,dead:!!S.dead}};
+  const n=document.getElementById('next');if(n&&!n.disabled){if(mode==='global')nextBuoi();else n.click();await sl(300);break}await sl(200)}
+ /* sangbuoi-held r2: «Sang buổi» runs the full wrapped turn, so a tap while the old buổi's big moment is pending (a mini-game screen #ov still open,
+    a motion scene queued) is HELD until it is done (jdayq flight rule) — finish what is on screen like a player, the held turn then runs */
+ for(let i=0;i<60&&JSON.stringify([S.turn,S.buoi,S.month,S.year])===k0&&!S.dead;i++){const ov=document.getElementById('ov');if(ov&&!ov.hidden&&!S.mg)ov.hidden=true;
+  /* the roulette / podium screens are removed here as NEWLIFE does (a later one may open with the first buổi) */document.querySelectorAll('[id^="kroul"],.kroul-ov,#kpodov').forEach(e=>e.remove());try{kmPump()}catch(e){}
+  const kb=[...document.querySelectorAll('.kmov:not(.km-out) button,#kmrew button,#kpodov button')].find(b=>b.getClientRects().length&&!b.disabled)||document.querySelector('.kmov:not(.km-out)');if(kb)kb.click();
+  for(let j=0;j<12&&Q.length&&!S.dead;j++){const m=Q[0];try{if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}catch(e){Q.shift()}await sl(40)}await sl(200)}
+ for(let j=0;j<40&&Q.length&&!S.dead;j++){cards++;const m=Q[0];try{if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}catch(e){Q.shift()}await sl(40)}
+ return {ms:Math.round(performance.now()-t0-slept),wall:Math.round(performance.now()-t0),slept,cards,moved:JSON.stringify([S.turn,S.buoi,S.month,S.year])!==k0,dead:!!S.dead}};
 async function page(b,dev){const ctx=await D.newDeviceContext(b,dev,{deviceScaleFactor:1,reducedMotion:'reduce'});
  await ctx.addInitScript(()=>{window.COOP_URL='http://127.0.0.1:9/';window.__qcErr=[];addEventListener('error',e=>{try{window.__qcErr.push(String(e.message||e.error))}catch(x){}});
   addEventListener('unhandledrejection',e=>{try{const r=e.reason;const m=String(r&&r.message||r);if(!/Failed to fetch|NetworkError|net::|Load failed|aborted/i.test(m))window.__qcErr.push('unhandled: '+m)}catch(x){}})});
@@ -88,19 +106,26 @@ const errsOf=async(g,errs)=>errs.concat(await g.evaluate(()=>window.__qcErr||[])
   /* tab ms = median over the tabs of each tab's faster of its 2 visits (noise on a shared box only ever adds time) */
   const per={};for(const t of tabs.filter(Boolean))per[t.tab]=Math.min(per[t.tab]??1e9,t.ms);
   await g.evaluate(()=>{const t=document.querySelector('#tabs [data-tab="act"]');if(t)t.click()});await sl(300);
-  const bu=await within(60e3,g.evaluate(BUOI),'buổi');await sl(500);
-  const lt=await g.evaluate(()=>window.__lt.slice());   /* long tasks counted up to here: the render() repeats below are not part of play */
+  /* sangbuoi-held r3: perf times the SAME entry on both builds = the global (outermost, wrapped) nextBuoi — what the fixed «Sang buổi» tap runs (j6.js)
+   and what auto-advance runs on both; LIVE's tap entered the bare j9 only (1/45 wrappers, the bug fixed here), so tap-vs-tap compared two code paths.
+   The old-save step below still uses the REAL tap. */
+  const bu=await within(60e3,g.evaluate(BUOI,'global'),'buổi');await sl(500);
+  const lt=await g.evaluate(()=>window.__lt.slice());
+  const day=!!(PG.dayLife&&await g.evaluate(f=>{try{return !!eval(f)}catch(e){return false}},PG.dayLife.flag));   /* MAIN 130: tú nữ selection-days life → its own long-task basis (perfgate.json dayLife) */   /* long tasks counted up to here: the render() repeats below are not part of play */
   const rend=await g.evaluate(async n=>{const o=[];for(let i=0;i<n;i++){const t0=performance.now();render();o.push(Math.round(performance.now()-t0));await new Promise(r=>setTimeout(r,60))}return o},PG.renderReps);
   const e=await errsOf(g,errs);
-  return {openMs,playableMs:playable,tabs,tabMs:med(Object.values(per)),render:rend,renderMs:Math.min(...rend),buoi:bu,buoiMs:bu.ms,longTasks200:lt.filter(x=>x>200).length,longTaskMaxMs:lt.length?Math.max(...lt):0,longTasks50:lt.length,errors:e.slice(0,5)}}finally{await ctx.close()}}
+  return {day,openMs,playableMs:playable,tabs,tabMs:med(Object.values(per)),render:rend,renderMs:Math.min(...rend),buoi:bu,buoiMs:bu.ms,longTasks200:lt.filter(x=>x>200).length,longTaskMaxMs:lt.length?Math.max(...lt):0,longTasks50:lt.length,errors:e.slice(0,5)}}finally{await ctx.close()}}
  try{const NR=[],OR=[];const haveOld=OLD&&fs.existsSync(OLD);
   for(let i=0;i<PG.runs;i++){NR.push(await perf('new'));if(haveOld)OR.push(await perf('old').catch(e=>({err:e.message})))}
-  const N=robust(NR),O=haveOld?robust(OR.filter(x=>!x.err)):null;R.steps.perf=N;R.steps.perfLive=O;R.steps.perfRuns={new:NR.map(brief),live:OR.map(x=>x.err?{err:x.err}:brief(x))};
+  /* MAIN 130: day lives (tú nữ 3 selection days) are judged alone vs perfgate.json dayLife ceilings; the medians / live comparison use the NON-day runs (all runs when every run is a day life) */
+  const dayR=NR.filter(x=>x.day),nonR=NR.filter(x=>!x.day);if(dayR.length)log('perf day lives',dayR.length+'/'+NR.length,'tasks>200',JSON.stringify(dayR.map(x=>x.longTasks200)));
+  for(const x of dayR)for(const [k,c] of Object.entries((PG.dayLife||{}).ceilings||{}))if(x[k]>c)fail('perf',`day life ${k} ${x[k]} > day ceiling ${c}`);
+  const N=robust(nonR.length?nonR:NR),O=haveOld?robust(OR.filter(x=>!x.err&&!x.day)):null;const dayOnly=!nonR.length;R.steps.perf=N;R.steps.perfLive=O;R.steps.perfRuns={new:NR.map(brief),live:OR.map(x=>x.err?{err:x.err}:brief(x))};
   log('perf new  runs',JSON.stringify(R.steps.perfRuns.new));if(haveOld)log('perf live runs',JSON.stringify(R.steps.perfRuns.live));
   log('perf new  median',JSON.stringify(brief(N)));if(O)log('perf live median',JSON.stringify(brief(O)));
-  const C=PG.ceilings;for(const k of Object.keys(C))if(N[k]>C[k])fail('perf',`${k} ${N[k]} > ceiling ${C[k]}`);
+  const C=PG.ceilings,DC=(PG.dayLife||{}).ceilings||{};for(const k of Object.keys(C))if(!(dayOnly&&k in DC)&&N[k]>C[k])fail('perf',`${k} ${N[k]} > ceiling ${C[k]}`);
   if(haveOld&&!O)fail('perf','the live build could not be measured ('+(OR[0]&&OR[0].err)+')');
-  if(O)for(const [k,g] of Object.entries(PG.gate)){const add=g.addMs??g.add;const lim=O[k]+Math.max(add,O[k]*g.ratio);if(N[k]>lim)fail('perf',`${k} ${N[k]} vs live ${O[k]} (limit ${Math.round(lim)})`)}
+  if(O)for(const [k,g] of Object.entries(PG.gate)){if(dayOnly&&k in DC)continue;const add=g.addMs??g.add;const lim=O[k]+Math.max(add,O[k]*g.ratio);if(N[k]>lim)fail('perf',`${k} ${N[k]} vs live ${O[k]} (limit ${Math.round(lim)})`)}
   if(!N.buoiMoved)fail('perf','buổi did not advance');if(N.tabsOk<3)fail('perf','fewer than 3 tabs to change');
   const pe=NR.flatMap(x=>x.errors||[]);if(pe.length)fail('perf',pe.length+' page errors: '+pe[0])}catch(e){fail('perf',e.message)}
  await b.close();srv.close();R.totalMs=Date.now()-T0;R.pass=!R.fails.length;fs.writeFileSync(path.join(OUT,'quickcheck.json'),JSON.stringify(R,null,1));
