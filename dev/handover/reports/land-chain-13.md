@@ -14,3 +14,23 @@ Roll at ctx >= ~29 %, ceiling 60 %. Blocker unchanged: LIVE = 502c48c9; main pus
 - hoa-dien.js hangs (>11 min) on bare 49f17d4d too = pre-existing, not a makeup blocker.
 - Coordinators: MAIN 131 → 132 (01:5xZ… 02:32Z) → 133 (04:36Z) → ROOT MAIN 134 session_01V1ZZH27MyRxU8SxKGA7Hjq (05:15Z).
 - 05:25Z makeup dd200174 on LIVE 0756a05b = 008aa59b; gates new vs base (toilette, toil-overlay, makeup-places, coop-toil-look) + coop ×2 + one-world ×2 → auto-land if no new-only fail (gates15.sh).
+- 05:57Z LIVE 008aa59b makeup-fit-r6 (dd200174 on 0756a05b); gates new vs base identical (toilette.js «#kg82 .toilw» timeout + toil-overlay 1/33 «mefig hidden» fail on BOTH = pre-existing). 06:08Z LIVE ca5af050 makeup-noboost 74068c07. 06:24Z LIVE ee37ab5f sansang-music-fix-2 a6b4d573 (iPad sansang 1/4 test artifact .kmbox-o; worker made test-only fix 6a438eb5).
+- CORRECTION: hoa-dien «hang» was my harness (python http.server without charset). Serve with charset utf-8 (u8srv.py).
+- 06:45Z visitor-fix-r10 acc5a965 on ee37ab5f = 9f72524b: visitor-scene 6/6 Fold + 3/3 iPad, name-sentence PASS (name-mask cut by my own 900 s timeout; rv PASS on acc5a965) → golive running.
+
+## HANDOVER TO LC14 (LC13 rolls at ctx 37.5 % > START 4 % + 25 %)
+### BLOCKER (read first)
+sếp's go-live permission was written in LC13's chat («Tôi cho phép đẩy các bản đã duyệt lên main (golive) trong phiên này.»). It does NOT carry to LC14: the classifier will deny LC14's main push until sếp writes her permission in LC14's OWN chat. MAIN must ask her. Never try other push paths. Also denied for LC13 (need her words): cdn_sync --wipe-review, rollback.sh (even dry run), an auto chain that merges+lands without gates.
+### TOOLS (copies in dev/handover/reports/lc13-tools/ on this branch)
+golive-lc13.sh = dev/tools/golive.sh with the baseline-tag push replaced by «ROLLBACK <old> before <new>» appended to a rollback file (live tag push after FF still 403 → WARN only); push failure stops. landchain.sh <sha...> = golive-lc13 --yes per sha, 2nd try only on quickcheck FAIL (perf flakes under load: never run test suites while a quickcheck runs). u8srv.py <dir> <port> = static server with charset utf-8 (needed for dayq-hold, hoa-dien). Merge recipe: worktree on LIVE, git merge --no-commit --no-ff <sha>, git checkout --theirs index.html sw.js, bash dev/site/build_site.sh (regenerates index/sw/assets.json), git add, commit «STACK LAND …». Tests needing dev/index.html: run build_site.sh once in the worktree (dev/index.html is ignored+generated).
+### STATE
+LIVE = ee37ab5f, or 9f72524b if the r10 golive finished (check git ls-remote origin refs/heads/main). Today LC13 landed 15 builds; ROLLBACK chain: 502c48c9→5d4f722f→345eb929→d6b6fd6f→9abd1de2→2b68def3→3a3234ff→4232709a→7dbfe98a→49f17d4d→4da55ce8→0756a05b→008aa59b→ca5af050→ee37ab5f(→9f72524b).
+### QUEUE (MAIN CHÍNH 135 session_01V1ZZH2rRpLZa4GLFofPRky; all GO given)
+1. delegate-nomg BIG: merge 7654e510 (= 70ae8c73 on 9f72524b) pushed review/lc13-delegate-on-r10; needs full gates (delegate-nomg.js, delegate-nomg-audit.js, dayq-hold on utf-8, one-world ×2, coop-e2e ×2) then send sha to rv session_01V1ZZH22tLFisY7pahB4wKi for «merge OK», then golive. If LIVE is not 9f72524b, rebuild on LIVE.
+2. hardlock-choice-r2 c8a2bb3e BIG (B): my merge c2a4b41c on ee37ab5f (review/lc13-hardlock-on-live) — hardlock-choice.js FAIL (8) on it; NOT yet compared with bare c8a2bb3e → do that first; then re-merge on LIVE, gates, «FOR FOREMAN B» line in FOREMAN_B_STATUS asking rv «merge OK».
+3. save-growth e573b9b8 BIG (E): my merge 6162a594 (on hardlock step) is stale; re-merge on LIVE after hardlock; gates cloud-save, difficulty <url>, live-servants.test, one-world ×2, coop ×2, quickcheck; «FOR FOREMAN E» line for «merge OK».
+4. D ×4 BIG (FF of ca5af050): dfu cc4fed89 → law1-gifts 99faeb2b → palace 9849ca5f → nc-fix-4 5f23c140, each re-merged on the previous with full gates; source conflict → back to D.
+5. sansang-test-harden 6a438eb5 SMALL test-only — any slot.
+HELD/WAITING: tainghe-open-fix (rv 2yv2CZAt, base a3845896 on 49f17d4d → re-merge), 3rd makeup sha (sếp's pick), visitor-r9 superseded by r10.
+### CDN WIPES OWED (someone allowed must do): img/_review/visitor-fix, -r8, -r9, -r10, makeup-fit.
+### REPORT every LIVE + ROLLBACK line to MAIN 135 at once; mark gate tests that still use JS .click() (owner OD 25/11 ~05:10Z).
