@@ -1,5 +1,6 @@
---- a/dev/test/realtap.js
-+++ b/dev/test/realtap.js
+diff -ruN a/dev/test/realtap.js b/dev/test/realtap.js
+--- a/dev/test/realtap.js	2026-11-25 20:29:45.228610425 +0000
++++ b/dev/test/realtap.js	2026-11-25 20:29:45.236862331 +0000
 @@ -12,7 +12,7 @@
  const path = require('path');
  
@@ -93,8 +94,50 @@
 +  return { tap, last: () => st.last, stats: () => ({ ...st, deadList: st.deadList.slice(-200) }), touch, PROBE };
  }
  module.exports = { make, PROBE };
---- a/dev/test/robot-rt.js
-+++ b/dev/test/robot-rt.js
+diff -ruN a/dev/test/robot-rt-coop.js b/dev/test/robot-rt-coop.js
+--- a/dev/test/robot-rt-coop.js	2026-11-25 20:29:45.242367139 +0000
++++ b/dev/test/robot-rt-coop.js	2026-11-25 20:29:45.247298947 +0000
+@@ -51,14 +51,27 @@
+ 
+ async function seatLoop(ctx, who, dev, other) {
+   const p = await ctx.newPage(); const st = {}; let k = 0;
++  const T0 = Date.now(), ts = () => Math.round((Date.now() - T0) / 1000) + 's';
++  p.on('framenavigated', f => { if (f === p.mainFrame()) console.log('NAV', who, ts(), f.url().slice(0, 100)) });
++  p.on('pageerror', e => console.log('PAGEERR', who, ts(), String(e.message).slice(0, 160)));
++  p.on('console', m => { if (/reload|build|swreg|controller|Trở lại|rejoin|leave|COOP|429/i.test(m.text()) || m.type() === 'error') console.log('CONSOLE', who, ts(), m.type(), m.text().slice(0, 160)) });
++  p.on('crash', () => console.log('CRASH', who, ts())); p.on('close', () => console.log('PAGECLOSE', who, ts()));
+   for (;;) {
+     k++; const extra = k > KIEP;
+     const s = Seat({ url: URL0, out: OUT, dev, bot: A.bot, seed: (+A.seed || 1) * 10 + (who === 'host' ? 1 : 2) + k * 100, life: 'coop-rt-' + TAG + '-' + who + '-k' + k,
+       origin: A[who + 'Origin'], road: A[who + 'Road'], stuckMin: A.stuckMin, slice: A.slice, noBoot: k > 1, coop: true, pre: k === 1 ? (who === 'host' ? hostPre(st) : guestPre(st)) : null });
++    /* patch #11 SEAT-HANG WATCHDOG (J2SH / EUQW: a seat printed nothing 15 min after a «Tuần mới» dialog = an await in the seat loop never returned): no harness step (R.steps) for HANG_MIN min → log + bug row 'seatHang' (buổi, url, layer text), reload the tab like a player (rejects the hung await), 2nd stall → close the page (play throws → seat life ends as harness, not a silent freeze) */
++    const HM = (+process.env.HANG_MIN || 5) * 60e3; let hs = -1, hat = Date.now(), hn = 0;
++    const wd = setInterval(async () => { if (!process.env.RT_TEST_HANG && s.R.steps !== hs) { hs = s.R.steps; hat = Date.now(); hn = 0; return } if (Date.now() - hat < HM * (hn + 1)) return; hn++;
++      const info = await Promise.race([p.evaluate(() => ({ u: location.href.slice(0, 80), h: (document.body.innerText || '').replace(/\s+/g, ' ').slice(0, 160) })).catch(() => null), new Promise(r => setTimeout(() => r(null), 5000))]);
++      const b = { type: 'seatHang', msg: who + ' seat: no harness step for ' + Math.round((Date.now() - hat) / 60e3) + ' min at buổi ' + s.R.buoi + ' (stage ' + hn + ')' + (info ? ' · ' + info.u + ' · ' + info.h : ' · page.evaluate hung too'), n: 1, at: new Date().toISOString() };
++      s.R.bugs.push(b); s.R.harness.seatHangs = (s.R.harness.seatHangs || 0) + 1; console.log('SEATHANG', who, ts(), b.msg);
++      if (hn === 1) await p.reload({ timeout: 30000 }).catch(() => {}); else await p.close().catch(() => {}) }, 30e3);
+     try { await s.play(p) } catch (e) { s.R.bugs.push({ type: 'harness', msg: 'runner error: ' + String(e.message).split('\n')[0], n: 1 }); s.R.life = s.R.life || { id: 'HARNESS', type: 'harness' }; s.save() }
++    clearInterval(wd);
+     pair.lives.push({ seat: who, dev, kiep: k, extra, room: code, life: s.R.life, harness: s.R.harness, exitPick: s.R.exitPick, bugs: s.R.bugs, dead: s.R.dead, buoi: s.R.buoi, saves: s.R.saves });
+     flush(); console.log('SEAT LIFE DONE', who, 'k' + k, s.R.life && s.R.life.id);
+-    if (s.R.life && /HARNESS|SLICE/.test(s.R.life.id)) break;
++    if (s.R.life && /HARNESS|SLICE|SEGMENT/.test(s.R.life.id)) break;
+     if (k >= KIEP && other.done) break;
+     if (k >= KIEP && !extra && other.done) break;
+     if (k >= KIEP + 20) break; /* safety net: 20 extra lives while the friend is still in the same life = runaway */
+@@ -69,7 +82,7 @@
+ (async () => {
+   /* one cached browser profile per seat (pictures fetched once; see robot-rt.js) */
+   const ctxs = [];
+-  const mk = async dev => { const c = await chromium.launchPersistentContext(path.join(OUT, 'profile-coop-' + TAG + '-' + dev), { viewport: VPS[dev], deviceScaleFactor: 1, hasTouch: dev !== 'ipad', isMobile: dev !== 'ipad', serviceWorkers: 'block' }); ctxs.push(c); return c };
++  const mk = async dev => { const c = await chromium.launchPersistentContext(path.join(OUT, 'profile-coop-' + TAG + '-' + dev), { viewport: VPS[dev], deviceScaleFactor: 1, hasTouch: dev !== 'ipad', isMobile: dev !== 'ipad', serviceWorkers: 'block', args: process.env.COOP_URL ? ['--disable-web-security', '--disable-features=PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults'] : [] }); if (process.env.COOP_URL) await c.addInitScript(u => { window.COOP_URL = u }, process.env.COOP_URL); ctxs.push(c); return c };
+   const br = { close: () => Promise.all(ctxs.map(c => c.close())) };
+   const H = { done: false }, G = { done: false };
+   const hDev = A.host || 'fold', gDev = A.guest || 'ipad';
+diff -ruN a/dev/test/robot-rt.js b/dev/test/robot-rt.js
+--- a/dev/test/robot-rt.js	2026-11-25 20:29:45.236862331 +0000
++++ b/dev/test/robot-rt.js	2026-11-25 20:29:45.242367139 +0000
 @@ -40,6 +40,7 @@
  /* RESUME (container restart): <out>/<life>.ckpt.json holds R + the game's localStorage save + rng state; resume=1 continues the SAME life */
  const CKPT = path.join(OUT, LIFE + '.ckpt.json'); let ck = null;
@@ -232,35 +275,3 @@
    if (lvl >= 3) {
      await p.reload({ waitUntil: 'load' }).catch(() => {}); await p.waitForFunction(() => typeof start === 'function', null, { timeout: 0 }).catch(() => {});
      await p.evaluate(() => { if (!window.__rtOver) { window.__rtOver = 1; const o0 = over; over = function (h, t, fate, alive) { try { if (!S.dead) window.__rtEnd = { id: String(h), fate: String(fate || '').replace(/<[^>]+>/g, ''), alive: !!alive, age: S.age, year: S.year, rank: S.rank } } catch (e) {} return o0.apply(this, arguments) } } }).catch(() => {});
---- a/dev/test/robot-rt-coop.js
-+++ b/dev/test/robot-rt-coop.js
-@@ -51,6 +51,11 @@
- 
- async function seatLoop(ctx, who, dev, other) {
-   const p = await ctx.newPage(); const st = {}; let k = 0;
-+  const T0 = Date.now(), ts = () => Math.round((Date.now() - T0) / 1000) + 's';
-+  p.on('framenavigated', f => { if (f === p.mainFrame()) console.log('NAV', who, ts(), f.url().slice(0, 100)) });
-+  p.on('pageerror', e => console.log('PAGEERR', who, ts(), String(e.message).slice(0, 160)));
-+  p.on('console', m => { if (/reload|build|swreg|controller|Trở lại|rejoin|leave|COOP|429/i.test(m.text()) || m.type() === 'error') console.log('CONSOLE', who, ts(), m.type(), m.text().slice(0, 160)) });
-+  p.on('crash', () => console.log('CRASH', who, ts())); p.on('close', () => console.log('PAGECLOSE', who, ts()));
-   for (;;) {
-     k++; const extra = k > KIEP;
-     const s = Seat({ url: URL0, out: OUT, dev, bot: A.bot, seed: (+A.seed || 1) * 10 + (who === 'host' ? 1 : 2) + k * 100, life: 'coop-rt-' + TAG + '-' + who + '-k' + k,
-@@ -58,7 +63,7 @@
-     try { await s.play(p) } catch (e) { s.R.bugs.push({ type: 'harness', msg: 'runner error: ' + String(e.message).split('\n')[0], n: 1 }); s.R.life = s.R.life || { id: 'HARNESS', type: 'harness' }; s.save() }
-     pair.lives.push({ seat: who, dev, kiep: k, extra, room: code, life: s.R.life, harness: s.R.harness, exitPick: s.R.exitPick, bugs: s.R.bugs, dead: s.R.dead, buoi: s.R.buoi, saves: s.R.saves });
-     flush(); console.log('SEAT LIFE DONE', who, 'k' + k, s.R.life && s.R.life.id);
--    if (s.R.life && /HARNESS|SLICE/.test(s.R.life.id)) break;
-+    if (s.R.life && /HARNESS|SLICE|SEGMENT/.test(s.R.life.id)) break;
-     if (k >= KIEP && other.done) break;
-     if (k >= KIEP && !extra && other.done) break;
-     if (k >= KIEP + 20) break; /* safety net: 20 extra lives while the friend is still in the same life = runaway */
-@@ -69,7 +74,7 @@
- (async () => {
-   /* one cached browser profile per seat (pictures fetched once; see robot-rt.js) */
-   const ctxs = [];
--  const mk = async dev => { const c = await chromium.launchPersistentContext(path.join(OUT, 'profile-coop-' + TAG + '-' + dev), { viewport: VPS[dev], deviceScaleFactor: 1, hasTouch: dev !== 'ipad', isMobile: dev !== 'ipad', serviceWorkers: 'block' }); ctxs.push(c); return c };
-+  const mk = async dev => { const c = await chromium.launchPersistentContext(path.join(OUT, 'profile-coop-' + TAG + '-' + dev), { viewport: VPS[dev], deviceScaleFactor: 1, hasTouch: dev !== 'ipad', isMobile: dev !== 'ipad', serviceWorkers: 'block', args: process.env.COOP_URL ? ['--disable-web-security', '--disable-features=PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults'] : [] }); if (process.env.COOP_URL) await c.addInitScript(u => { window.COOP_URL = u }, process.env.COOP_URL); ctxs.push(c); return c };
-   const br = { close: () => Promise.all(ctxs.map(c => c.close())) };
-   const H = { done: false }, G = { done: false };
-   const hDev = A.host || 'fold', gDev = A.guest || 'ipad';
