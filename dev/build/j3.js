@@ -47,9 +47,24 @@ function rcpMk(e){const fn=QRC[e&&e.rk];if(!fn)return rcpF(e,"no generator");let
  if(!m||!m.opts||!m.opts.length)return rcpF(e,"no choice now");m.rk=e.rk;m.ra=e.ra;if(e.t)m.t=e.t;if(e.cls&&!m.cls)m.cls=e.cls;return m}
 const rcpLapse=t=>{try{log(`«${String(t||"Việc khó xử").replace(/</g,"&lt;")}»: việc đã qua, không còn kịp đáp.`)}catch(e){}};
 /* one card in its save form: pid → {pid,pp,t}; a carried generator card → {rk,ra,t,cls}; a notice → its text; a choice with no route → lap (opt.lap) or nothing */
-function serM(m,opt){return isMenuCard(m)?null:m.pid?{pid:m.pid,pp:m.pp,t:m.t}:m.rk?{rk:m.rk,ra:m.ra,t:m.t,cls:m.cls}:m.opts?(opt&&opt.lap?{lap:1,t:m.t}:null):{t:m.t,h:m.h,cls:m.cls,btn:m.btn,w:m.who&&m.who.w}}
+/* button-crawl-fix-2 (owner OD 25/11 ~05:10Z, flight2 saves: 1998 copies of an EMPTY «Tâm trạng · X» card in one co-op save):
+   (1) a LOOK-UP panel (kit spec.look: Tâm trạng · X, Đã biết về X, Chứng cứ về X, Thỉnh tranh nhân vật) is a screen she opens herself, built from the
+       live world: it is never saved (it came back as a bare title with an empty body, and every save round trip carried the copies on);
+   (2) any other kit card (its body lives in m.kit, m.h is empty) is saved WITH its kit spec (people as ids, code left out), so it comes back whole;
+   (3) old saves: empty notices (no body, no kit) and repeats of the same notice are dropped on load (deserQ). */
+const isLookCard=m=>!!(m&&m.kit&&(m.kit.look||m.kit.view));/* button-crawl-fix-5: a view panel (spec.view, live status) is not saved either */
+const LOOK_T=/^(Tâm trạng · |Đã biết về |Chứng cứ về |Thỉnh tranh nhân vật)/;
+function kqEnc(x,d){d=d||0;if(d>7)throw 0;if(x==null||typeof x==="number"||typeof x==="string"||typeof x==="boolean")return x;if(typeof x==="function")return undefined;
+ const k=rcpP(x);if(k!=null)return {"@p":k};if(Array.isArray(x))return x.map(y=>{const v=kqEnc(y,d+1);return v===undefined?null:v});
+ if(Object.getPrototypeOf(x)!==Object.prototype)throw 0;const o={};for(const i in x){if(i==="onClose"||i==="opts")continue;const v=kqEnc(x[i],d+1);if(v!==undefined)o[i]=v}return o}
+function kqKit(m){try{if(!m||!m.kit||m.h||m.opts||isLookCard(m))return undefined;const o=kqEnc(m.kit);const j=JSON.stringify(o);return j&&j.length<24000?o:undefined}catch(e){return undefined}}
+function kqDec(x){if(x==null||typeof x!=="object")return x;if(Array.isArray(x))return x.map(kqDec);if("@p" in x){const p=typeof emoByKey==="function"?emoByKey(String(x["@p"])):null;return p&&p.alive!==false&&!p.dead?p:null}
+ const o={};for(const i in x)o[i]=kqDec(x[i]);return o}
+function serM(m,opt){return isMenuCard(m)||isLookCard(m)?null:m.pid?{pid:m.pid,pp:m.pp,t:m.t}:m.rk?{rk:m.rk,ra:m.ra,t:m.t,cls:m.cls}:m.opts?(opt&&opt.lap?{lap:1,t:m.t}:null):(k=>k?{t:m.t,h:m.h,cls:m.cls,btn:m.btn,w:m.who&&m.who.w,kit:k}:{t:m.t,h:m.h,cls:m.cls,btn:m.btn,w:m.who&&m.who.w})(kqKit(m))}
 function serQ(opt){return Q.map(m=>serM(m,opt)).filter(Boolean)}
-function deserQ(L){const out=[];for(const e of L||[]){try{if(e.lap){rcpLapse(e.t);continue}if(e.rk){const m=rcpMk(e);if(m)out.push(m);else rcpLapse(e.t);continue}if(e.pid){const d=mkP(e.pid,e.pp);if(d)out.push({t:e.t||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls})}else if(!isMenuCard(e))out.push({t:e.t,h:e.h,cls:e.cls,btn:e.btn,who:WHO(e.w)})}catch(x){}}return out}
+function deserQ(L){const out=[],seen=new Set();for(const e of L||[]){try{if(e.lap){rcpLapse(e.t);continue}if(e.rk){const m=rcpMk(e);if(m)out.push(m);else rcpLapse(e.t);continue}if(e.pid){const d=mkP(e.pid,e.pp);if(d)out.push({t:e.t||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls})}else if(e.kit){const sp=kqDec(e.kit);if(sp&&typeof sp==="object"){const sub=sp.subject;if(sub==null)delete sp.subject;out.push({t:e.t||sp.title||"",h:"",kit:sp,btn:e.btn||sp.btn,cls:e.cls,who:sub?(sub.src!==undefined?sub:(typeof kitFace==="function"?kitFace(sub):null)):WHO(e.w)})}}
+  else if(!isMenuCard(e)){if(!String(e.h||"").replace(/<[^>]*>/g,"").trim()&&!/\bpcm\b/.test(e.cls||""))continue;/* (3) an empty notice (an old look-up panel or kit card saved without its body) */
+   const sig=JSON.stringify([e.t,e.h,e.cls,e.btn]);if(seen.has(sig))continue;seen.add(sig);out.push({t:e.t,h:e.h,cls:e.cls,btn:e.btn,who:WHO(e.w)})}}catch(x){}}return out}
 /* KIT 32.10: a dialog option that only closes ("Thôi" / "Lui" / "Đóng" / "Đã hiểu", no effect) is never drawn as a button: the dialog
    gets the kit ✕ instead (jk4 kitCloseSync), and ✕ / a tap outside / Esc run that option. A dialog with options and no such option is
    a forced choice: no ✕, no tap-outside, no Esc. */
@@ -62,10 +77,13 @@ function showModal(){const M=$("modal");if(!Q.length){M.hidden=true;return}const
   $("mr").innerHTML=m.opts?"":`<button class="main" id="mclose">${m.btn||"Đã rõ"}</button>`;
   kitFix(M);M.hidden=false;const f=M.querySelector(".opt:not(:disabled),#mclose");if(f)f.focus({preventScroll:true})}
 function closeModal(){const m=Q.shift();if(m&&m.onClose){if(m.nl&&window.renderHold)renderHold(m.onClose,m,[],false);else m.onClose()}if(!S.dead||Q.length)showModal();if(m&&m.entI&&!m.onClose&&Q.length&&!S.dead)return;if(Q.length&&!S.dead&&window.renderSoon)renderSoon();else render()}/* an origin story panel (jentry/joi entI: text + picture, no effect, no onClose) followed by another card: the board did not change, no redraw *//* the life card (m.nl): its nlAccept chain renders once, here (jrbatch); another card follows: the board under it is drawn at the end of this task (jrbatch renderSoon) */
-function chooseM(i){const m=Q[0];if(!m||!m.opts)return;const c=m.opts[i];if(c.off||c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)return;Q.shift();
+function chooseM(i){const m=Q[0];if(!m||!m.opts)return;const c=m.opts[i];if(!c){chooseBad(i,m);return}if(c.off||c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)return;Q.shift();
   const b0=snapReal(),s0=S.logSeq||0;
   /* ODDS CAP: a formerly-sure CHANCE option (cap = its khắc) rolls at the cap; a failure is the one soft failure (j63 oddsSoft), its go never runs */
   if(c.cap!=null&&!roll(BAL.odds.hi)){if(c.cap&&can(c.cap))spend(c.cap);oddsSoft("",c.fx)}else{apply(c.fx||{});if(c.go)c.go()}try{logChoice(m,c,b0,s0)}catch(e){console.error(e)}showModal();if(Q.length&&!S.dead&&window.renderSoon)renderSoon();else render()}/* a card follows (result, next event): the board under it at the end of this task (jrbatch renderSoon) */
+/* flight-choose-guard (arm B co-op H77P host «Cannot read properties of undefined (reading 'off')»): a pick whose index is not on the
+   card in front (a stale / relayed / scripted index, a findIndex −1) is refused, the card stays; logged with its caller for the robots. */
+function chooseBad(i,m){try{(window.__badPick=window.__badPick||[]).push({i,t:m&&m.t||"",pid:m&&m.pid||"",n:m&&m.opts?m.opts.length:0,st:String(new Error().stack||"").split("\n").slice(2,7).join(" < ")});console.warn("chooseM: no option",i,"on",m&&(m.pid||m.t))}catch(e){}}
 /* the log keeps one line per choice: "<event>: <choice> → <what really happened>" (owner 11/15: bare "Mặc kệ." lines with no context).
    The lines the choice's own effects wrote are folded into it, and the real changes of her numbers are added (before → after). */
 function logChoice(m,c,b0,s0){const n=Math.max(0,Math.min((S.logSeq||0)-s0,S.logs.length));const L=S.logs.splice(0,n).reverse().map(x=>String(x).replace(/^<span class="ld">[^<]*<\/span>/,"").trim()).filter(Boolean);S.logSeq=s0;

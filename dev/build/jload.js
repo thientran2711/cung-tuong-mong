@@ -76,6 +76,7 @@ const STANDALONE=(window.matchMedia&&matchMedia("(display-mode: standalone)").ma
    a kit notice asks where she will play (add to Home Screen = download once, in the app; or play in the browser = download there, once more later).
    Her choice is remembered (localStorage 'ctm-ios-browser'). Android / desktop / the installed app: unchanged. */
 const IOSB=IOS&&!STANDALONE,CHOICE="ctm-ios-browser";
+const KLOAD_STALL=20000;/* ms of no finished file before the loading cover offers «Vào cung ngay» */
 let askMode="ask";
 const chosen=()=>{try{return localStorage.getItem(CHOICE)==="1"}catch(e){return false}};
 const hasSave=()=>{try{for(let n=1;n<=3;n++)if(localStorage.getItem("hclh-save-v2-"+n))return true}catch(e){}return false};
@@ -110,8 +111,11 @@ function paint(msg){if(!el)return;if(KLOAD.phase==="ask"){paintAsk();return}
  /* kit-progress-run: the bar is built once and updated in place; the notes are rewritten only when their text changes */
  if(b.querySelector(".kprog")&&b.dataset.kpn!==undefined){kitProgressSet(b,po);if(b.dataset.kpn!==notes){b.dataset.kpn=notes;b.querySelectorAll(":scope > .kpnote").forEach(e=>e.remove());b.insertAdjacentHTML("beforeend",notes)}}
  else{KPMAX.core=0;/* a (re)built cover = a new load: forward-only starts again */b.dataset.kpn=notes;b.innerHTML=kitProgress(po)+notes}
- const stuck=KLOAD.err&&KLOAD.phase!=="done";
- o.innerHTML=stuck?`<button class="kbtn alt" data-kl="go">Vào cung ngay</button>${navigator.onLine!==false?`<button class="kbtn" data-kl="retry">Thỉnh tiếp</button>`:""}`:"";}
+ /* TITLE NEVER BLANK (robot M1 #2 / M3: a first screen of cover art + bar and no button for ≥9 min): a download that STALLS without raising an error (a hung
+    request, a captive network) left no button at all. After KLOAD_STALL ms with no file finished, «Vào cung ngay» shows too (no «Thỉnh tiếp»: the pool is still running). */
+ const stall=!KLOAD.err&&KLOAD.phase==="core"&&KLOAD.lastAt&&Date.now()-KLOAD.lastAt>KLOAD_STALL;
+ const stuck=(KLOAD.err||stall)&&KLOAD.phase!=="done";
+ o.innerHTML=stuck?`<button class="kbtn alt" data-kl="go">Vào cung ngay</button>${KLOAD.err&&navigator.onLine!==false?`<button class="kbtn" data-kl="retry">Thỉnh tiếp</button>`:""}`:"";}
 function close(){if(!el)return;const e=el;el=null;e.classList.add("out");setTimeout(()=>e.remove(),500);enterCb.splice(0).forEach(f=>{try{f()}catch(x){}})}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kl]");if(!b)return;e.stopPropagation();
  const kl=b.dataset.kl;
@@ -127,7 +131,7 @@ async function getOne(c,f,grp){const g=KLOAD[grp];let got=0;const k0=keyOf(f);FL
  for(let t=0;t<4;t++){try{
    const k=keyOf(f),r=await (CDNB&&k.startsWith(CDNB)?fetch(k+"&ctmload=1",{cache:"no-cache",mode:"cors",credentials:"omit"}):fetch(k,{headers:{"x-ctm-load":"1"},cache:"no-cache"}));if(!r.ok){const x=new Error("http "+r.status);if(grp==="all"&&(r.status===404||r.status===403||r.status===410))x.dead=true;throw x}
    await c.put(keyOf(f),r);  /* the browser streams it into the cache; no page script per chunk (keeps the game smooth) */
-   g.have+=f[2]-got;g.left--;g.files++;if(grp==="all")ALL.got=(ALL.got||0)+1;/* test hook: files «Tải hết» itself brought */oaSeen(f);tick(grp);return true}
+   KLOAD.lastAt=Date.now();g.have+=f[2]-got;g.left--;g.files++;if(grp==="all")ALL.got=(ALL.got||0)+1;/* test hook: files «Tải hết» itself brought */oaSeen(f);tick(grp);return true}
   catch(e){g.have-=got;got=0;if(e&&e.name==="QuotaExceededError"){setErr(grp,"quota");throw e}
    if(e&&e.dead){setErr(grp,"dead");throw e}
    if(navigator.onLine===false){setErr(grp,"offline");throw e}
@@ -181,7 +185,7 @@ async function moveCdn(c){if(!CDNB)return;/* entry-blank-r3: a whole-cache walk 
   await c.delete(q)}KLOAD.moved=n}catch(e){}}
 
 async function runCore(){if(!coreList.length){KLOAD.phase="done";close();startBg();return}
- KLOAD.phase="core";screen();paint();
+ KLOAD.phase="core";KLOAD.lastAt=Date.now();screen();paint();const stT=setInterval(()=>{if(!el||KLOAD.phase!=="core"){clearInterval(stT);return}paint()},4000);/* the stall check above runs on a timer too: no file finishing = no tick */
  try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{})}catch(e){}
  try{await pool(coreList,6,"core");coreList=[];KLOAD.phase="done";paint("Đã thỉnh đủ · mời nhập cung");setTimeout(()=>{close();startBg()},700)}
  catch(e){await new Promise(ok=>setTimeout(ok,300));await refresh("core");

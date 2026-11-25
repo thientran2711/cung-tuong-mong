@@ -15,17 +15,17 @@
       the news card for the flip (~80 s stall). Now: the news card paints within 1 s (time asserted), she taps it closed, the flip scene plays
       right after (≤ 1 s), she taps it, the turn goes on.
    G  (r3, emptied queue) 2 cards make render() disable «Sang buổi»; the cards are then taken out of Q inside showModal (G1, as j68 evGate
-      does) or with no call at all (G2) → «Sang buổi» comes back by itself (G1 ≤ 600 ms, G2 ≤ BAL.dayq.net + 700 ms), then a real tap advances.
+      does) or with no call at all (G2) → «Sang buổi» comes back by itself (G1 ≤ 600 ms, G2 ≤ 1500 ms: the 700 ms safety-net tick dqWake), then a real tap advances.
    usage: node dev/test/sangbuoi-held.js file:///…/index.html [shotDir] */
 const {chromium}=require('playwright');const [,,URL,OUT]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
-const VP=[[755,1000,2],[1180,820,2]];let BALNET=1000;
+const VP=[[755,1000,2],[1180,820,2]];
 (async()=>{const b=await chromium.launch();let fails=0;const rows=[];
  for(const [W,H,DS] of VP){
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:OUT?DS:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});
   await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});
   const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.on('crash',()=>console.log('PAGE CRASH'));
   await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));
-  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&window.kitModal&&window.DQ&&DQ.stat,null,{timeout:240000});await p.waitForTimeout(2500);BALNET=await p.evaluate(()=>(BAL.dayq&&BAL.dayq.net)||1000);
+  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&window.kitModal&&window.DQ&&DQ.stat,null,{timeout:240000});await p.waitForTimeout(2500);
   const st=()=>p.evaluate(()=>{const hid=el=>Object.getOwnPropertyDescriptor(HTMLElement.prototype,'hidden').get.call(el);const M=document.getElementById('modal');
    return {bk:(typeof wk==='function'?wk():(S.turn||0))+'.'+(S.buoi||0),buoi:S.buoi||0,used,Q:Q.map(m=>m.t),modal:!hid(M)||!!(window.DF&&DF.encM&&DF.F),mt:document.getElementById('mt').textContent,next:!document.getElementById('next').disabled,
     scene:!!document.querySelector('.kmov:not(.km-out)')||!!(window.DF&&DF.F&&!DF.encM),dawn:(()=>{const d=document.getElementById('dawn');return !!(d&&!hid(d)&&d.classList.contains('on'))})(),want:DQ.want,stat:Object.assign({},DQ.stat)}});
@@ -118,7 +118,7 @@ const VP=[[755,1000,2],[1180,820,2]];let BALNET=1000;
    G:async()=>{/* r3 mirror family «the queue EMPTIED with no render after it» (real nights: j68 evGate held every waiting card inside showModal,
        j3's empty branch only hid #modal, «Sang buổi» stayed disabled from the last render with nothing on screen, 20 s+, LIVE too).
        G1 the cards are taken out inside showModal (as evGate does) · G2 taken out with no call at all (any other path: the net) */
-     for(const [k,viaShow,lim] of [['G1',1,600],['G2',0,BALNET+700]]){
+     for(const [k,viaShow,lim] of [['G1',1,600],['G2',0,1500]]){
       await p.evaluate(()=>{Q.push({t:'Thử: thẻ một',h:'<p>Thử.</p>'},{t:'Thử: thẻ hai',h:'<p>Thử.</p>'});render();const M=document.getElementById('modal');M.hidden=true});
       if(!(await p.evaluate(()=>document.getElementById('next').disabled)))return k+' setup: «Sang buổi» not disabled with 2 cards';
       await p.evaluate(v=>{window.__t0=Date.now();if(v){const s0=window.showModal;window.showModal=function(){Q.splice(0,Q.length);window.showModal=s0;return s0.apply(this,arguments)};showModal()}else Q.splice(0,Q.length)},viaShow);
