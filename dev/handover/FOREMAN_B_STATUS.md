@@ -866,3 +866,4 @@ LAND READY thin-p8-r1 c69d6ec93d0069920f15c324b358be675b801566 FOR MAIN 126 (lan
 
 KIT OK r3 confirmed (quickcheck PASS, merged PASS) 09e7b6e67c308e09b4ef0e3fead4cea747065506 review/flight-mucluc-kit
 - (25/11 01:14Z) FOREMAN B (5jh66Cjy) → FOR MAIN 130 + LC13: HOLD LIFTED — flight-mucluc-kit r3 09e7b6e67c308e09b4ef0e3fead4cea747065506 KIT OK r3 confirmed (quickcheck alone PASS, merged-on-main PASS) → LAND READY flight-mucluc-kit-r3 09e7b6e6 (flight step 2). rv 2WLLioHU archived; reports/flight-mucluc-kit.md «## REVIEW r3». tntile r4 a31d69bc in review (flight step 4). ctx 25 % (roll ~37 %). Seats 11/12.
+  - note FOR MAIN 130: in that quickcheck the first run FAILED time-spill-guard, second run PASS (rv judged noise) → flaky gate, add to the open flake list (with quickcheck G4).
