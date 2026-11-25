@@ -14,12 +14,12 @@ if(cmd==='life'){ /* one life in this process */
  const seat=Seat({url,out:OUT,dev:'fold',bot:'sens',seed:SEED,life,slice:K.slice,stuckMin:K.stuckMin,resume:K.resume==='1'});
  (async()=>{const br=await chromium.launch();const ctx=await br.newContext({viewport:{width:755,height:1000},deviceScaleFactor:1,hasTouch:true,isMobile:true,serviceWorkers:'block'});const p=await ctx.newPage();
   const inj=()=>p.evaluate(([A,s])=>{window.__tArm=A;(0,eval)(s)},[ARM,src]).catch(()=>{});p.on('load',()=>{p.waitForFunction(()=>typeof endTurn==='function'&&typeof BAL!=='undefined',null,{timeout:0}).then(inj).catch(()=>{})});
-  let tp=null;const grab=async()=>{try{const t=await p.evaluate(()=>window.__tp&&JSON.parse(JSON.stringify(window.__tp)));if(t)tp=t}catch(e){}};const iv=setInterval(grab,20e3);
+  let tp=null;const grab=async()=>{try{const t=await p.evaluate(()=>window.__tp&&JSON.parse(JSON.stringify(window.__tp)));if(t){tp=t;fs.writeFileSync(path.join(OUT,life+'.tp-live.json'),JSON.stringify({arm:ARM,seed:+SEED,at:new Date().toISOString(),buoi:seat.R.buoi,tp,dead:seat.R.dead.length,stuck:seat.R.harness.stuck}))}}catch(e){}};const iv=setInterval(grab,20e3);
   try{await seat.play(p)}catch(e){seat.R.bugs.push({type:'harness',msg:'runner error: '+String(e.message).split('\n')[0],n:1});seat.R.life=seat.R.life||{id:'HARNESS',type:'harness'};console.error(e)}
   clearInterval(iv);await grab();seat.R.tp=tp;seat.save();fs.writeFileSync(path.join(OUT,life+'.tp.json'),JSON.stringify({arm:ARM,seed:+SEED,life:seat.R.life,buoi:seat.R.buoi,sliced:!!seat.R.sliced,tp,dead:seat.R.dead.length,stuck:seat.R.harness.stuck,bugs:seat.R.bugs.length,taps:seat.R.harness.taps}));
   console.log('TP DONE',life,JSON.stringify(tp),'life',seat.R.life&&seat.R.life.id);await br.close()})()}
 else if(cmd==='run'){const [URL0,OUT,N0,ARMS,PAR,...KV]=a;const n=+N0||4,arms=(ARMS||'hot,even,timid,off').split(','),par=+PAR||3;fs.mkdirSync(OUT,{recursive:true});
- const q=[];for(let i=1;i<=n;i++)for(const A of arms)if(!fs.existsSync(path.join(OUT,`tp-${A}-${i}.tp.json`)))q.push([A,i]);let run=0;
+ const q=[];for(let i=1;i<=n;i++)for(const A of arms){const f=path.join(OUT,`tp-${A}-${i}.tp.json`);let done=false;try{const r=JSON.parse(fs.readFileSync(f));done=!!(r.life&&!/HARNESS|\?/.test(r.life.id))}catch(e){}if(!done)q.push([A,i])}/* a killed / harness-error life is resumed (resume=1), never counted as done */let run=0;
  const next=()=>{while(run<par&&q.length){const [A,i]=q.shift();run++;const c=spawn('node',[__filename,'life',URL0,OUT,A,String(i),...KV],{stdio:['ignore','pipe','pipe']});
   const lg=fs.createWriteStream(path.join(OUT,`tp-${A}-${i}.log`));c.stdout.pipe(lg);c.stderr.pipe(lg);c.on('exit',x=>{run--;console.log('life',A,i,'exit',x,'left',q.length,'running',run);next()})}};next()}
 else if(cmd==='sum'){const OUT=a[0];const st=v=>{const m=v.reduce((t,x)=>t+x,0)/Math.max(1,v.length);const sd=Math.sqrt(v.reduce((t,x)=>t+(x-m)**2,0)/Math.max(1,v.length-1));return{m:+m.toFixed(2),se:+(sd/Math.sqrt(Math.max(1,v.length))).toFixed(2)}};
@@ -32,4 +32,7 @@ else if(cmd==='sum'){const OUT=a[0];const st=v=>{const m=v.reduce((t,x)=>t+x,0)/
  const off=rows.find(r=>r.arm==='off');let bad=0;if(off)for(const r of rows.filter(r=>r.arm!=='off')){const se=Math.hypot(r.maxRank.se,off.maxRank.se),sH=Math.hypot(r.hh.se,off.hh.se),sE=Math.hypot(r.early.se,off.early.se);
   const ok=r.maxRank.m>=off.maxRank.m-se&&r.hh.m>=off.hh.m-sH&&r.early.m<=off.early.m+sE;if(!ok)bad++;console.log(`${r.arm}: ${ok?'PASS':'FAIL'} (max rank Δ ${(r.maxRank.m-off.maxRank.m).toFixed(2)} vs SE ${se.toFixed(2)}; HH Δ ${(r.hh.m-off.hh.m).toFixed(2)} vs ${sH.toFixed(2)}; early Δ ${(r.early.m-off.early.m).toFixed(2)} vs ${sE.toFixed(2)})`)}
  process.exitCode=bad?1:0}
+else if(cmd==='live'){const OUT=a[0];console.log('| life | at | buổi | year | rank (max) | Danh | Sủng | lãnh cung | choice frames | outbursts | temper |');console.log('|---|---|---|---|---|---|---|---|---|---|---|');
+ for(const f of fs.readdirSync(OUT).filter(f=>/\.tp-live\.json$/.test(f)).sort()){const r=JSON.parse(fs.readFileSync(path.join(OUT,f)));const t=r.tp||{};const n=Object.values(t.out||{}).reduce((s,v)=>s+v,0);
+  console.log(`| ${f.replace('.tp-live.json','')} | ${r.at.slice(11,16)}Z | ${r.buoi} | ${(t.year||0)-(t.y0||0)+1} | ${t.rank} (${t.maxRank}) | ${t.danh} | ${t.sung} | ${t.coldPalace?'yes':'no'} | ${t.choice} | ${n} ${JSON.stringify(t.out||{})} | ${t.temper} |`)}}
 else{console.error('usage: run <url> <out> <n> [arms] [par] [k=v..] | sum <out>');process.exit(2)}
