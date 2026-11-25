@@ -1,0 +1,1009 @@
+{
+ "head": "AUDIT D total 110 valid 48 invalid 62 (cap 35 / timeout+stuck 16 / harness-error 2 / exit 9 / jsclick-ignored, per OD 25/11 ~05:58Z)",
+ "lives": [
+  {
+   "file": "dev/handover/robot/nc-20261123-2126.md",
+   "life": "nc-nc_gian-skilled-1",
+   "end": "Hồng nhan bạc mệnh [death: Kẻ thù còn sống: Chung Anh Ninh, Lục Mạn Châu, Lưu]",
+   "sig": "dev/handover/robot/nc-20261123-2126.mdnc-nc_gian-skilled-1Hồng nhan bạc mệnh [death: Kẻ thù còn sống: Chung Anh Ninh, Lục Mạn Châu, Lưu]",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/nc-20261123-2126.md",
+   "life": "nc-nc_su-random-1",
+   "end": "TIMEOUT [no ending]",
+   "sig": "dev/handover/robot/nc-20261123-2126.mdnc-nc_su-random-1TIMEOUT [no ending]",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-20261123-2126.md",
+   "life": "nc-nc_tuc-greedy-1",
+   "end": "HARNESS [no ending]",
+   "sig": "dev/handover/robot/nc-20261123-2126.mdnc-nc_tuc-greedy-1HARNESS [no ending]",
+   "valid": false,
+   "reasons": [
+    "harness error (no life)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-20261123-2126.md",
+   "life": "nc-nc_vuong-cautious-1",
+   "end": "Hồng nhan bạc mệnh [death: Kẻ thù còn sống: Phương Ý Hoan, Thẩm Mạn Châu, Tưở]",
+   "sig": "dev/handover/robot/nc-20261123-2126.mdnc-nc_vuong-cautious-1Hồng nhan bạc mệnh [death: Kẻ thù còn sống: Phương Ý Hoan, Thẩm Mạn Châu, Tưở]",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/nc-20261123-2126.md",
+   "life": "nc-nc_gian-schemer-1",
+   "end": "Hồng nhan bạc mệnh [death: Kẻ thù còn sống: Sử Hàm Hương, Doãn Thanh Uyển, Vâ]",
+   "sig": "dev/handover/robot/nc-20261123-2126.mdnc-nc_gian-schemer-1Hồng nhan bạc mệnh [death: Kẻ thù còn sống: Sử Hàm Hương, Doãn Thanh Uyển, Vâ]",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/nc-20261123-2126.md",
+   "life": "nc-nc_su-lover-1",
+   "end": "HARNESS [no ending]",
+   "sig": "dev/handover/robot/nc-20261123-2126.mdnc-nc_su-lover-1HARNESS [no ending]",
+   "valid": false,
+   "reasons": [
+    "harness error (no life)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-20261123-2126.md",
+   "life": "nc-nc_tuc-scholar-1",
+   "end": "Hồng nhan bạc mệnh [death: Kẻ thù còn sống: Ôn Vân Tịch, Trương Tâm Duyệt, Cố]",
+   "sig": "dev/handover/robot/nc-20261123-2126.mdnc-nc_tuc-scholar-1Hồng nhan bạc mệnh [death: Kẻ thù còn sống: Ôn Vân Tịch, Trương Tâm Duyệt, Cố]",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/nc-20261123-2126.md",
+   "life": "nc-nc_vuong-rebel-1",
+   "end": "CAP [no ending]",
+   "sig": "dev/handover/robot/nc-20261123-2126.mdnc-nc_vuong-rebel-1CAP [no ending]",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-20261123-2126.md",
+   "life": "nc-nc_gian-lazy-1",
+   "end": "TIMEOUT [no ending]",
+   "sig": "dev/handover/robot/nc-20261123-2126.mdnc-nc_gian-lazy-1TIMEOUT [no ending]",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-20261123-2126.md",
+   "life": "nc-nc_su-speed-1",
+   "end": "TIMEOUT [no ending]",
+   "sig": "dev/handover/robot/nc-20261123-2126.mdnc-nc_su-speed-1TIMEOUT [no ending]",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-20261123-2308.md",
+   "life": "nc-nc_gian-skilled-1",
+   "end": "Hồng nhan bạc mệnh [death: Hoàng thượng niên hiệu Chính Đức băng hà, thọ 30 t]",
+   "sig": "dev/handover/robot/nc-20261123-2308.mdnc-nc_gian-skilled-1Hồng nhan bạc mệnh [death: Hoàng thượng niên hiệu Chính Đức băng hà, thọ 30 t]",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/nc-20261123-2308.md",
+   "life": "nc-nc_su-random-1",
+   "end": "TIMEOUT [no ending]",
+   "sig": "dev/handover/robot/nc-20261123-2308.mdnc-nc_su-random-1TIMEOUT [no ending]",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-20261123-2308.md",
+   "life": "nc-nc_tuc-greedy-1",
+   "end": "CAP [no ending]",
+   "sig": "dev/handover/robot/nc-20261123-2308.mdnc-nc_tuc-greedy-1CAP [no ending]",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-20261123-2308.md",
+   "life": "nc-nc_vuong-cautious-1",
+   "end": "Hồng nhan bạc mệnh [death: Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 2]",
+   "sig": "dev/handover/robot/nc-20261123-2308.mdnc-nc_vuong-cautious-1Hồng nhan bạc mệnh [death: Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 2]",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/nc-20261123-2308.md",
+   "life": "nc-nc_gian-schemer-1",
+   "end": "Hồng nhan bạc mệnh [death: Kiết lỵ nguy kịch, không qua khỏi]",
+   "sig": "dev/handover/robot/nc-20261123-2308.mdnc-nc_gian-schemer-1Hồng nhan bạc mệnh [death: Kiết lỵ nguy kịch, không qua khỏi]",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/nc-20261123-2308.md",
+   "life": "nc-nc_su-lover-1",
+   "end": "CAP [no ending]",
+   "sig": "dev/handover/robot/nc-20261123-2308.mdnc-nc_su-lover-1CAP [no ending]",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-20261123-2308.md",
+   "life": "nc-nc_tuc-scholar-1",
+   "end": "CAP [no ending]",
+   "sig": "dev/handover/robot/nc-20261123-2308.mdnc-nc_tuc-scholar-1CAP [no ending]",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-20261123-2308.md",
+   "life": "nc-nc_vuong-rebel-1",
+   "end": "Hồng nhan bạc mệnh [death: Giả mang thai bị thái y khác bắt mạch phát hiện, t]",
+   "sig": "dev/handover/robot/nc-20261123-2308.mdnc-nc_vuong-rebel-1Hồng nhan bạc mệnh [death: Giả mang thai bị thái y khác bắt mạch phát hiện, t]",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/nc-20261123-2308.md",
+   "life": "nc-nc_gian-lazy-1",
+   "end": "TIMEOUT [no ending]",
+   "sig": "dev/handover/robot/nc-20261123-2308.mdnc-nc_gian-lazy-1TIMEOUT [no ending]",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-20261123-2308.md",
+   "life": "nc-nc_su-speed-1",
+   "end": "TIMEOUT [no ending]",
+   "sig": "dev/handover/robot/nc-20261123-2308.mdnc-nc_su-speed-1TIMEOUT [no ending]",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-B-tuc/nc-20261124-0057.json",
+   "life": "nc-nc_tuc-skilled-1",
+   "end": "CAP",
+   "sig": "nc-nc_tuc-skilled-1|CAP||31|1815139|1103809447",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-B-tuc/nc-20261124-0057.json",
+   "life": "nc-nc_tuc-skilled-2",
+   "end": "CAP",
+   "sig": "nc-nc_tuc-skilled-2|CAP||32|1840449|3241370198",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-B-tuc/nc-20261124-0057.json",
+   "life": "nc-nc_tuc-random-1",
+   "end": "Xuất gia",
+   "sig": "nc-nc_tuc-random-1|Xuất gia|0.58|18|69885|4180392236",
+   "valid": false,
+   "reasons": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-B-tuc/nc-20261124-0057.json",
+   "life": "nc-nc_tuc-random-2",
+   "end": "Xuất gia",
+   "sig": "nc-nc_tuc-random-2|Xuất gia|0.58|19|68271|3192899969",
+   "valid": false,
+   "reasons": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-B-tuc/nc-20261124-0057.json",
+   "life": "nc-nc_tuc-greedy-2",
+   "end": "Hồng nhan bạc mệnh — Năm 11, Hoàng thượng niên hiệu Vĩnh An băng hà, thọ 33 tuổi. Tân Thái hậu Thôi Tương Quân xét lại chuyện cũ (khả năng: vừa), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",
+   "sig": "nc-nc_tuc-greedy-2|Hồng nhan bạc mệnh — Năm 11, Hoàng thượng niên hiệu Vĩnh An băng hà, thọ 33 tuổi. Tân Thái hậu Thôi Tương Quân xét lại chuyện cũ (khả năng: vừa), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế|10.42|28|1108980|382041330",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/nc-B-tuc/nc-20261124-0057.json",
+   "life": "nc-nc_tuc-greedy-1",
+   "end": "CAP",
+   "sig": "nc-nc_tuc-greedy-1|CAP||34|1824576|2020792563",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-B-tuc/nc-20261124-0057.json",
+   "life": "nc-nc_tuc-cautious-1",
+   "end": "Mẫu hậu Hoàng thái hậu",
+   "sig": "nc-nc_tuc-cautious-1|Mẫu hậu Hoàng thái hậu|13.33|37|1709193|2140731578",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/nc-B-tuc/nc-20261124-0057.json",
+   "life": "nc-nc_tuc-cautious-2",
+   "end": "CAP",
+   "sig": "nc-nc_tuc-cautious-2|CAP||32|1809150|3758694459",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-B-tuc/nc-20261124-0057.json",
+   "life": "nc-nc_tuc-schemer-2",
+   "end": "Hồng nhan bạc mệnh — Lao phổi nguy kịch, không qua khỏi",
+   "sig": "nc-nc_tuc-schemer-2|Hồng nhan bạc mệnh — Lao phổi nguy kịch, không qua khỏi|1.58|21|142624|1727482985",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/nc-B-tuc/nc-20261124-0057.json",
+   "life": "nc-nc_tuc-schemer-1",
+   "end": "Lãnh cung — Phát điên trong lãnh cung",
+   "sig": "nc-nc_tuc-schemer-1|Lãnh cung — Phát điên trong lãnh cung|8.5|27|1258023|3251859060",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/nc-B-tuc/nc-20261124-0057.json",
+   "life": "nc-nc_tuc-lover-1",
+   "end": "CAP",
+   "sig": "nc-nc_tuc-lover-1|CAP||32|1807930|1379876621",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-B-tuc/nc-20261124-0057.json",
+   "life": "nc-nc_tuc-lover-2",
+   "end": "CAP",
+   "sig": "nc-nc_tuc-lover-2|CAP||31|1826182|2367368888",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-B-tuc/nc-20261124-0057.json",
+   "life": "nc-nc_tuc-scholar-1",
+   "end": "CAP",
+   "sig": "nc-nc_tuc-scholar-1|CAP||30|1842121|4239854445",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-B-tuc/nc-20261124-0057.json",
+   "life": "nc-nc_tuc-rebel-1",
+   "end": "Hồng nhan bạc mệnh — Sổ Kính sự phòng không ghi đêm thị tẩm nào trước khi có 'thai', giả mang thai bị lật tẩy, tội khi quân",
+   "sig": "nc-nc_tuc-rebel-1|Hồng nhan bạc mệnh — Sổ Kính sự phòng không ghi đêm thị tẩm nào trước khi có 'thai', giả mang thai bị lật tẩy, tội khi quân|5.08|25|384521|1234469163",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/nc-B-tuc/nc-20261124-0057.json",
+   "life": "nc-nc_tuc-scholar-2",
+   "end": "CAP",
+   "sig": "nc-nc_tuc-scholar-2|CAP||33|1870687|3059023128",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-B-tuc/nc-20261124-0057.json",
+   "life": "nc-nc_tuc-rebel-2",
+   "end": "Hồng nhan bạc mệnh — Sổ Kính sự phòng không ghi đêm thị tẩm nào trước khi có 'thai', giả mang thai bị lật tẩy, tội khi quân",
+   "sig": "nc-nc_tuc-rebel-2|Hồng nhan bạc mệnh — Sổ Kính sự phòng không ghi đêm thị tẩm nào trước khi có 'thai', giả mang thai bị lật tẩy, tội khi quân|3.58|21|337044|1743253162",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/nc-B-tuc/nc-20261124-0057.json",
+   "life": "nc-nc_tuc-lazy-2",
+   "end": "TIMEOUT",
+   "sig": "nc-nc_tuc-lazy-2|TIMEOUT||18|311099|3336481980",
+   "valid": false,
+   "reasons": [
+    "stuck / timeout (abandoned)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-B-tuc/nc-20261124-0057.json",
+   "life": "nc-nc_tuc-speed-1",
+   "end": "TIMEOUT",
+   "sig": "nc-nc_tuc-speed-1|TIMEOUT||19|125311|3376192488",
+   "valid": false,
+   "reasons": [
+    "stuck / timeout (abandoned)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-B-tuc/nc-20261124-0057.json",
+   "life": "nc-nc_tuc-speed-2",
+   "end": "Xuất gia",
+   "sig": "nc-nc_tuc-speed-2|Xuất gia|0.17|19|111407|2388700221",
+   "valid": false,
+   "reasons": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-B-tuc/nc-20261124-0057.json",
+   "life": "nc-nc_tuc-lazy-1",
+   "end": "TIMEOUT",
+   "sig": "nc-nc_tuc-lazy-1|TIMEOUT||18|905536|2348989713",
+   "valid": false,
+   "reasons": [
+    "stuck / timeout (abandoned)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-B-vuong/nc-20261124-0354.json",
+   "life": "nc-nc_vuong-skilled-1",
+   "end": "CAP",
+   "sig": "nc-nc_vuong-skilled-1|CAP||32|1824383|3126901994",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-B-vuong/nc-20261124-0354.json",
+   "life": "nc-nc_vuong-skilled-2",
+   "end": "CAP",
+   "sig": "nc-nc_vuong-skilled-2|CAP||31|1819615|2618117995",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-B-vuong/nc-20261124-0354.json",
+   "life": "nc-nc_vuong-random-1",
+   "end": "Xuất gia",
+   "sig": "nc-nc_vuong-random-1|Xuất gia|1.08|21|88575|4202423543",
+   "valid": false,
+   "reasons": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-B-vuong/nc-20261124-0354.json",
+   "life": "nc-nc_vuong-random-2",
+   "end": "Xuất gia",
+   "sig": "nc-nc_vuong-random-2|Xuất gia|0.67|18|76376|2045016998",
+   "valid": false,
+   "reasons": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-B-vuong/nc-20261124-0354.json",
+   "life": "nc-nc_vuong-greedy-1",
+   "end": "Hồng nhan bạc mệnh — Khó sinh, băng huyết mà chết",
+   "sig": "nc-nc_vuong-greedy-1|Hồng nhan bạc mệnh — Khó sinh, băng huyết mà chết|8.83|28|1110892|680057964",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/nc-B-vuong/nc-20261124-0354.json",
+   "life": "nc-nc_vuong-greedy-2",
+   "end": "Lãnh cung — Phát điên trong lãnh cung",
+   "sig": "nc-nc_vuong-greedy-2|Lãnh cung — Phát điên trong lãnh cung|10|28|1202467|3987532993",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/nc-B-vuong/nc-20261124-0354.json",
+   "life": "nc-nc_vuong-cautious-1",
+   "end": "Hồng nhan bạc mệnh — Năm 14, Hoàng thượng niên hiệu Thiên Hựu băng hà, thọ 38 tuổi. Tân Thái hậu Tăng Uyển Hề xét lại chuyện cũ (khả năng: vừa), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",
+   "sig": "nc-nc_vuong-cautious-1|Hồng nhan bạc mệnh — Năm 14, Hoàng thượng niên hiệu Thiên Hựu băng hà, thọ 38 tuổi. Tân Thái hậu Tăng Uyển Hề xét lại chuyện cũ (khả năng: vừa), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế|13.17|31|1655585|1270482857",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/nc-B-vuong/nc-20261124-0354.json",
+   "life": "nc-nc_vuong-cautious-2",
+   "end": "CAP",
+   "sig": "nc-nc_vuong-cautious-2|CAP||33|1811610|2794858932",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-B-vuong/nc-20261124-0354.json",
+   "life": "nc-nc_vuong-schemer-1",
+   "end": "Hồng nhan bạc mệnh — Lao phổi nguy kịch, không qua khỏi",
+   "sig": "nc-nc_vuong-schemer-1|Hồng nhan bạc mệnh — Lao phổi nguy kịch, không qua khỏi|2.33|20|255718|3031605",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/nc-B-vuong/nc-20261124-0354.json",
+   "life": "nc-nc_vuong-schemer-2",
+   "end": "Hồng nhan bạc mệnh — Bị ban chết vì đầu độc Công chúa Thục Gia",
+   "sig": "nc-nc_vuong-schemer-2|Hồng nhan bạc mệnh — Bị ban chết vì đầu độc Công chúa Thục Gia|6.33|24|682107|990523872",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/nc-B-vuong/nc-20261124-0354.json",
+   "life": "nc-nc_vuong-lover-1",
+   "end": "CAP",
+   "sig": "nc-nc_vuong-lover-1|CAP||31|1835758|2738757676",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-B-vuong/nc-20261124-0354.json",
+   "life": "nc-nc_vuong-lover-2",
+   "end": "Hồng nhan bạc mệnh — Trúng độc, không qua khỏi",
+   "sig": "nc-nc_vuong-lover-2|Hồng nhan bạc mệnh — Trúng độc, không qua khỏi|12.83|33|1748498|1751265409",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/nc-B-vuong/nc-20261124-0354.json",
+   "life": "nc-nc_vuong-scholar-1",
+   "end": "Hồng nhan bạc mệnh — Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 26 tuổi",
+   "sig": "nc-nc_vuong-scholar-1|Hồng nhan bạc mệnh — Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 26 tuổi|6.92|26|916800|3018727368",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/nc-B-vuong/nc-20261124-0354.json",
+   "life": "nc-nc_vuong-rebel-1",
+   "end": "Hồng nhan bạc mệnh — Giả mang thai bị thái y khác bắt mạch phát hiện, tội khi quân",
+   "sig": "nc-nc_vuong-rebel-1|Hồng nhan bạc mệnh — Giả mang thai bị thái y khác bắt mạch phát hiện, tội khi quân|1.58|20|143928|454280370",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/nc-B-vuong/nc-20261124-0354.json",
+   "life": "nc-nc_vuong-rebel-2",
+   "end": "Hồng nhan bạc mệnh — Sổ Kính sự phòng không ghi đêm thị tẩm nào trước khi có 'thai', giả mang thai bị lật tẩy, tội khi quân",
+   "sig": "nc-nc_vuong-rebel-2|Hồng nhan bạc mệnh — Sổ Kính sự phòng không ghi đêm thị tẩm nào trước khi có 'thai', giả mang thai bị lật tẩy, tội khi quân|1.92|22|204512|2093031603",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/nc-B-vuong/nc-20261124-0354.json",
+   "life": "nc-nc_vuong-scholar-2",
+   "end": "Mẫu hậu Hoàng thái hậu",
+   "sig": "nc-nc_vuong-scholar-2|Mẫu hậu Hoàng thái hậu|11.33|35|1557705|2031235101",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/nc-B-vuong/nc-20261124-0354.json",
+   "life": "nc-nc_vuong-lazy-2",
+   "end": "Hồng nhan bạc mệnh — Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 20 tuổi",
+   "sig": "nc-nc_vuong-lazy-2|Hồng nhan bạc mệnh — Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 20 tuổi|1.17|20|119031|2286715043",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/nc-B-vuong/nc-20261124-0354.json",
+   "life": "nc-nc_vuong-lazy-1",
+   "end": "TIMEOUT",
+   "sig": "nc-nc_vuong-lazy-1|TIMEOUT||18|1044266|668752162",
+   "valid": false,
+   "reasons": [
+    "stuck / timeout (abandoned)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-B-vuong/nc-20261124-0354.json",
+   "life": "nc-nc_vuong-speed-1",
+   "end": "TIMEOUT",
+   "sig": "nc-nc_vuong-speed-1|TIMEOUT||18|93570|2920246405",
+   "valid": false,
+   "reasons": [
+    "stuck / timeout (abandoned)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/nc-B-vuong/nc-20261124-0354.json",
+   "life": "nc-nc_vuong-speed-2",
+   "end": "TIMEOUT",
+   "sig": "nc-nc_vuong-speed-2|TIMEOUT||18|86554|3907738672",
+   "valid": false,
+   "reasons": [
+    "stuck / timeout (abandoned)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/ncA/nc-20261124-0057.json",
+   "life": "nc-nc_gian-skilled-2",
+   "end": "Hồng nhan bạc mệnh — Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 27 tuổi",
+   "sig": "nc-nc_gian-skilled-2|Hồng nhan bạc mệnh — Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 27 tuổi|7.33|27|1030696|1110561575",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/ncA/nc-20261124-0057.json",
+   "life": "nc-nc_gian-random-1",
+   "end": "TIMEOUT",
+   "sig": "nc-nc_gian-random-1|TIMEOUT||20|90301|3737971003",
+   "valid": false,
+   "reasons": [
+    "stuck / timeout (abandoned)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/ncA/nc-20261124-0057.json",
+   "life": "nc-nc_gian-random-2",
+   "end": "Hồng nhan bạc mệnh — Bị ban chết vì đầu độc Công chúa Hòa Duyệt",
+   "sig": "nc-nc_gian-random-2|Hồng nhan bạc mệnh — Bị ban chết vì đầu độc Công chúa Hòa Duyệt|0.92|20|103896|2120008122",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/ncA/nc-20261124-0057.json",
+   "life": "nc-nc_gian-skilled-1",
+   "end": "Hồng nhan bạc mệnh — Năm 11, Hoàng thượng niên hiệu Khang Định băng hà, thọ 30 tuổi. Tân Thái hậu Tư Mã Hàn Yên xét lại chuyện cũ (khả năng: vừa), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",
+   "sig": "nc-nc_gian-skilled-1|Hồng nhan bạc mệnh — Năm 11, Hoàng thượng niên hiệu Khang Định băng hà, thọ 30 tuổi. Tân Thái hậu Tư Mã Hàn Yên xét lại chuyện cũ (khả năng: vừa), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế|10.58|28|1545646|3248122326",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/ncA/nc-20261124-0057.json",
+   "life": "nc-nc_gian-greedy-1",
+   "end": "CAP",
+   "sig": "nc-nc_gian-greedy-1|CAP||32|1813879|3414306896",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/ncA/nc-20261124-0057.json",
+   "life": "nc-nc_gian-greedy-2",
+   "end": "CAP",
+   "sig": "nc-nc_gian-greedy-2|CAP||31|1832799|2426814629",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/ncA/nc-20261124-0057.json",
+   "life": "nc-nc_gian-cautious-2",
+   "end": "Hồng nhan bạc mệnh — Khó sinh, băng huyết mà chết",
+   "sig": "nc-nc_gian-cautious-2|Hồng nhan bạc mệnh — Khó sinh, băng huyết mà chết|6.25|26|724164|3065996664",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/ncA/nc-20261124-0057.json",
+   "life": "nc-nc_gian-cautious-1",
+   "end": "CAP",
+   "sig": "nc-nc_gian-cautious-1|CAP||30|1815463|2078504397",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/ncA/nc-20261124-0057.json",
+   "life": "nc-nc_gian-schemer-2",
+   "end": "Hồng nhan bạc mệnh — Bị ban chết vì vu Hoàng tử Vĩnh Bích trù ẻo thánh thượng",
+   "sig": "nc-nc_gian-schemer-2|Hồng nhan bạc mệnh — Bị ban chết vì vu Hoàng tử Vĩnh Bích trù ẻo thánh thượng|3.25|21|382407|3781810644",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/ncA/nc-20261124-0057.json",
+   "life": "nc-nc_gian-schemer-1",
+   "end": "Hồng nhan bạc mệnh — Bị ban chết vì vu Hoàng tử Vĩnh Kỳ trù ẻo thánh thượng",
+   "sig": "nc-nc_gian-schemer-1|Hồng nhan bạc mệnh — Bị ban chết vì vu Hoàng tử Vĩnh Kỳ trù ẻo thánh thượng|11|31|1647442|110002505",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/ncA/nc-20261124-0057.json",
+   "life": "nc-nc_gian-lover-1",
+   "end": "CAP",
+   "sig": "nc-nc_gian-lover-1|CAP||32|1824819|1241369544",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/ncA/nc-20261124-0057.json",
+   "life": "nc-nc_gian-lover-2",
+   "end": "CAP",
+   "sig": "nc-nc_gian-lover-2|CAP||29|1819077|253877277",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/ncA/nc-20261124-0057.json",
+   "life": "nc-nc_gian-scholar-2",
+   "end": "Hồng nhan bạc mệnh — Năm 4, Hoàng thượng niên hiệu Cảnh Hòa băng hà, thọ 24 tuổi. Tân Thái hậu Thạch Dung Âm xét lại chuyện cũ (khả năng: vừa), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",
+   "sig": "nc-nc_gian-scholar-2|Hồng nhan bạc mệnh — Năm 4, Hoàng thượng niên hiệu Cảnh Hòa băng hà, thọ 24 tuổi. Tân Thái hậu Thạch Dung Âm xét lại chuyện cũ (khả năng: vừa), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế|3.42|21|385989|3839821545",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/ncA/nc-20261124-0057.json",
+   "life": "nc-nc_gian-rebel-1",
+   "end": "Hồng nhan bạc mệnh — Sổ Kính sự phòng không ghi đêm thị tẩm nào trước khi có 'thai', giả mang thai bị lật tẩy, tội khi quân",
+   "sig": "nc-nc_gian-rebel-1|Hồng nhan bạc mệnh — Sổ Kính sự phòng không ghi đêm thị tẩm nào trước khi có 'thai', giả mang thai bị lật tẩy, tội khi quân|1.42|20|172628|2986273990",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/ncA/nc-20261124-0057.json",
+   "life": "nc-nc_gian-rebel-2",
+   "end": "Hồng nhan bạc mệnh — Sổ Kính sự phòng không ghi đêm thị tẩm nào trước khi có 'thai', giả mang thai bị lật tẩy, tội khi quân",
+   "sig": "nc-nc_gian-rebel-2|Hồng nhan bạc mệnh — Sổ Kính sự phòng không ghi đêm thị tẩm nào trước khi có 'thai', giả mang thai bị lật tẩy, tội khi quân|2.92|22|351817|869501591",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/ncA/nc-20261124-0057.json",
+   "life": "nc-nc_gian-lazy-1",
+   "end": "TIMEOUT",
+   "sig": "nc-nc_gian-lazy-1|TIMEOUT||20|319566|2270595614",
+   "valid": false,
+   "reasons": [
+    "stuck / timeout (abandoned)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/ncA/nc-20261124-0057.json",
+   "life": "nc-nc_gian-scholar-1",
+   "end": "CAP",
+   "sig": "nc-nc_gian-scholar-1|CAP||31|1855272|1069230324",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/ncA/nc-20261124-0057.json",
+   "life": "nc-nc_gian-speed-1",
+   "end": "TIMEOUT",
+   "sig": "nc-nc_gian-speed-1|TIMEOUT||18|86223|3268533737",
+   "valid": false,
+   "reasons": [
+    "stuck / timeout (abandoned)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/ncA/nc-20261124-0057.json",
+   "life": "nc-nc_gian-lazy-2",
+   "end": "Xuất gia — Xuất gia làm ni cô",
+   "sig": "nc-nc_gian-lazy-2|Xuất gia — Xuất gia làm ni cô|3.17|22|264136|3891118351",
+   "valid": false,
+   "reasons": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/ncA/nc-20261124-0057.json",
+   "life": "nc-nc_gian-speed-2",
+   "end": "TIMEOUT",
+   "sig": "nc-nc_gian-speed-2|TIMEOUT||18|115787|497942516",
+   "valid": false,
+   "reasons": [
+    "stuck / timeout (abandoned)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/ncA/su1/nc-20261124-0329.json",
+   "life": "nc-nc_su-skilled-1",
+   "end": "CAP",
+   "sig": "nc-nc_su-skilled-1|CAP||30|1831497|2983290377",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/ncA/su1/nc-20261124-0329.json",
+   "life": "nc-nc_su-skilled-2",
+   "end": "Xuất gia — Xuất gia làm ni cô",
+   "sig": "nc-nc_su-skilled-2|Xuất gia — Xuất gia làm ni cô|12.42|30|1825348|2360131220",
+   "valid": false,
+   "reasons": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/ncA/su1/nc-20261124-0329.json",
+   "life": "nc-nc_su-random-1",
+   "end": "TIMEOUT",
+   "sig": "nc-nc_su-random-1|TIMEOUT||19|115413|3857262870",
+   "valid": false,
+   "reasons": [
+    "stuck / timeout (abandoned)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/ncA/su1/nc-20261124-0329.json",
+   "life": "nc-nc_su-random-2",
+   "end": "Hồng nhan bạc mệnh — Bị ban chết vì đầu độc Hoàng tử Vĩnh Diễm",
+   "sig": "nc-nc_su-random-2|Hồng nhan bạc mệnh — Bị ban chết vì đầu độc Hoàng tử Vĩnh Diễm|1.33|19|188632|1719702119",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/ncA/su1/nc-20261124-0329.json",
+   "life": "nc-nc_su-greedy-2",
+   "end": "Thái phi — Thành Thái phi",
+   "sig": "nc-nc_su-greedy-2|Thái phi — Thành Thái phi|10.67|30|1416283|1395688604",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/ncA/su1/nc-20261124-0329.json",
+   "life": "nc-nc_su-greedy-1",
+   "end": "CAP",
+   "sig": "nc-nc_su-greedy-1|CAP||31|1882454|428984689",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/ncA/su1/nc-20261124-0329.json",
+   "life": "nc-nc_su-cautious-1",
+   "end": "Xuất gia — Xuất gia làm ni cô",
+   "sig": "nc-nc_su-cautious-1|Xuất gia — Xuất gia làm ni cô|12.67|30|1867015|3483776388",
+   "valid": false,
+   "reasons": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/ncA/su1/nc-20261124-0329.json",
+   "life": "nc-nc_su-cautious-2",
+   "end": "CAP",
+   "sig": "nc-nc_su-cautious-2|CAP||33|1832759|1959400313",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/ncA/su1/nc-20261124-0329.json",
+   "life": "nc-nc_su-schemer-2",
+   "end": "Lãnh cung — Phát điên trong lãnh cung",
+   "sig": "nc-nc_su-schemer-2|Lãnh cung — Phát điên trong lãnh cung|7|26|617968|1129972699",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/ncA/su1/nc-20261124-0329.json",
+   "life": "nc-nc_su-schemer-1",
+   "end": "Hồng nhan bạc mệnh — Bị ban chết vì vu Hoàng tử Vĩnh Mẫn trù ẻo thánh thượng",
+   "sig": "nc-nc_su-schemer-1|Hồng nhan bạc mệnh — Bị ban chết vì vu Hoàng tử Vĩnh Mẫn trù ẻo thánh thượng|6.67|26|978512|1638756698",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/ncA/su2/nc-20261124-0533.json",
+   "life": "nc-nc_su-lover-1",
+   "end": "Hồng nhan bạc mệnh — Bị ban chết vì tư thông với Thị vệ Vân Trường Khanh",
+   "sig": "nc-nc_su-lover-1|Hồng nhan bạc mệnh — Bị ban chết vì tư thông với Thị vệ Vân Trường Khanh|7.25|25|944457|3411297707",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/ncA/su2/nc-20261124-0533.json",
+   "life": "nc-nc_su-lover-2",
+   "end": "Hồng nhan bạc mệnh — Bị ban chết vì tư thông với Thị vệ Ôn Thủ Chuyết",
+   "sig": "nc-nc_su-lover-2|Hồng nhan bạc mệnh — Bị ban chết vì tư thông với Thị vệ Ôn Thủ Chuyết|7.58|26|1076350|3920081706",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/ncA/su2/nc-20261124-0533.json",
+   "life": "nc-nc_su-scholar-1",
+   "end": "Hồng nhan bạc mệnh — Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 21 tuổi",
+   "sig": "nc-nc_su-scholar-1|Hồng nhan bạc mệnh — Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 21 tuổi|0.92|21|167669|247413007",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/ncA/su2/nc-20261124-0533.json",
+   "life": "nc-nc_su-rebel-1",
+   "end": "Hồng nhan bạc mệnh — Giả mang thai bị thái y khác bắt mạch phát hiện, tội khi quân",
+   "sig": "nc-nc_su-rebel-1|Hồng nhan bạc mệnh — Giả mang thai bị thái y khác bắt mạch phát hiện, tội khi quân|4.17|23|442085|3105988605",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/ncA/su2/nc-20261124-0533.json",
+   "life": "nc-nc_su-rebel-2",
+   "end": "Hồng nhan bạc mệnh — Khó sinh, băng huyết mà chết",
+   "sig": "nc-nc_su-rebel-2|Hồng nhan bạc mệnh — Khó sinh, băng huyết mà chết|2.25|20|257904|4093480872",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/ncA/su2/nc-20261124-0533.json",
+   "life": "nc-nc_su-lazy-1",
+   "end": "TIMEOUT",
+   "sig": "nc-nc_su-lazy-1|TIMEOUT||20|347099|375028379",
+   "valid": false,
+   "reasons": [
+    "stuck / timeout (abandoned)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/ncA/su2/nc-20261124-0533.json",
+   "life": "nc-nc_su-scholar-2",
+   "end": "CAP",
+   "sig": "nc-nc_su-scholar-2|CAP||32|1830962|2921857566",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/ncA/su2/nc-20261124-0533.json",
+   "life": "nc-nc_su-speed-1",
+   "end": "TIMEOUT",
+   "sig": "nc-nc_su-speed-1|TIMEOUT||18|85736|1086252990",
+   "valid": false,
+   "reasons": [
+    "stuck / timeout (abandoned)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/ncA/su2/nc-20261124-0533.json",
+   "life": "nc-nc_su-speed-2",
+   "end": "TIMEOUT",
+   "sig": "nc-nc_su-speed-2|TIMEOUT||20|143699|559343663",
+   "valid": false,
+   "reasons": [
+    "stuck / timeout (abandoned)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/ncA/su2/nc-20261124-0533.json",
+   "life": "nc-nc_su-lazy-2",
+   "end": "TIMEOUT",
+   "sig": "nc-nc_su-lazy-2|TIMEOUT||20|1383822|883812378",
+   "valid": false,
+   "reasons": [
+    "stuck / timeout (abandoned)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/round-nc-20261124/nc-20261123-2316-lives1-5.json",
+   "life": "nc-nc_su-random-1",
+   "end": "Xuất gia",
+   "sig": "nc-nc_su-random-1|Xuất gia|0.83|18|145296|3857262870",
+   "valid": false,
+   "reasons": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/round-nc-20261124/nc-20261123-2316-lives1-5.json",
+   "life": "nc-nc_gian-skilled-1",
+   "end": "Thái phi — Thành Thái phi",
+   "sig": "nc-nc_gian-skilled-1|Thái phi — Thành Thái phi|6.58|24|711902|3248122326",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/round-nc-20261124/nc-20261123-2316-lives1-5.json",
+   "life": "nc-nc_tuc-greedy-1",
+   "end": "CAP",
+   "sig": "nc-nc_tuc-greedy-1|CAP||34|1861043|2020792563",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/round-nc-20261124/nc-20261123-2316-lives1-5.json",
+   "life": "nc-nc_gian-schemer-1",
+   "end": "Hồng nhan bạc mệnh — Bị ban chết vì vu Hoàng tử Vĩnh Bích trù ẻo thánh thượng",
+   "sig": "nc-nc_gian-schemer-1|Hồng nhan bạc mệnh — Bị ban chết vì vu Hoàng tử Vĩnh Bích trù ẻo thánh thượng|2.25|20|202791|110002505",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/round-nc-20261124/nc-20261123-2316-lives1-5.json",
+   "life": "nc-nc_vuong-cautious-1",
+   "end": "Hồng nhan bạc mệnh — Năm 14, Hoàng thượng niên hiệu Thiên Hựu băng hà, thọ 38 tuổi. Tân Thái hậu Liêu Cẩm Tâm xét lại chuyện cũ (khả năng: thấp), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",
+   "sig": "nc-nc_vuong-cautious-1|Hồng nhan bạc mệnh — Năm 14, Hoàng thượng niên hiệu Thiên Hựu băng hà, thọ 38 tuổi. Tân Thái hậu Liêu Cẩm Tâm xét lại chuyện cũ (khả năng: thấp), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế|13.17|33|1568362|1270482857",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/round-nc-20261124/part2-nc-20261124-0007.json",
+   "life": "nc-nc_su-lover-1",
+   "end": "CAP",
+   "sig": "nc-nc_su-lover-1|CAP||27|1822408|3411297707",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/round-nc-20261124/part2-nc-20261124-0007.json",
+   "life": "nc-nc_su-speed-1",
+   "end": "TIMEOUT",
+   "sig": "nc-nc_su-speed-1|TIMEOUT||20|71638|1086252990",
+   "valid": false,
+   "reasons": [
+    "stuck / timeout (abandoned)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/round-nc-20261124/part2b-nc-20261124-0007.json",
+   "life": "nc-nc_tuc-scholar-1",
+   "end": "CAP",
+   "sig": "nc-nc_tuc-scholar-1|CAP||33|1815546|4239854445",
+   "valid": false,
+   "reasons": [
+    "wall cap (no ending)"
+   ]
+  },
+  {
+   "file": "dev/handover/robot/round-nc-20261124/part2c-nc-20261124-0039.json",
+   "life": "nc-nc_vuong-rebel-1",
+   "end": "Hồng nhan bạc mệnh — Sổ Kính sự phòng không ghi đêm thị tẩm nào trước khi có 'thai', giả mang thai bị lật tẩy, tội khi quân",
+   "sig": "nc-nc_vuong-rebel-1|Hồng nhan bạc mệnh — Sổ Kính sự phòng không ghi đêm thị tẩm nào trước khi có 'thai', giả mang thai bị lật tẩy, tội khi quân|3.67|23|449959|454280370",
+   "valid": true,
+   "reasons": []
+  },
+  {
+   "file": "dev/handover/robot/round-nc-20261124/part2d-nc-20261124-0039.json",
+   "life": "nc-nc_gian-lazy-1",
+   "end": "Hồng nhan bạc mệnh — Năm 12, Hoàng thượng niên hiệu Gia Thịnh băng hà, thọ 33 tuổi. Tân Thái hậu Đường Quân Dao xét lại chuyện cũ (khả năng: rất thấp), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế",
+   "sig": "nc-nc_gian-lazy-1|Hồng nhan bạc mệnh — Năm 12, Hoàng thượng niên hiệu Gia Thịnh băng hà, thọ 33 tuổi. Tân Thái hậu Đường Quân Dao xét lại chuyện cũ (khả năng: rất thấp), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế|11.08|31|1077423|2270595614",
+   "valid": true,
+   "reasons": []
+  }
+ ]
+}
