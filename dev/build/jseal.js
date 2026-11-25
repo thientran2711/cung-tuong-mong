@@ -88,13 +88,13 @@ function kitSealOcc(dlg,seal){const L=[];const add=r=>{if(r.width>0.5&&r.height>
  return L}
 function kitSealEvPlace(){const M=document.getElementById("modal");const dlg=M&&!M.hidden?M.querySelector(".dlg"):null;
  document.querySelectorAll("#modal .kseal-ev").forEach(x=>{if(!dlg||x.parentNode!==dlg)x.remove()});if(!dlg)return;const m=Q[0];
- let s=dlg.querySelector(":scope > .kseal-ev");if(!kitSealEvIs(m,dlg)){if(s)s.remove();dlg.classList.remove("kseal-room");dlg.__ksM=null;return}
- if(dlg.__ksM!==m){dlg.__ksM=m;dlg.classList.remove("kseal-room")}
+ let s=dlg.querySelector(":scope > .kseal-ev");if(!kitSealEvIs(m,dlg)){if(s)s.remove();(dlg.classList.contains("kseal-room")&&dlg.classList.remove("kseal-room"));dlg.__ksM=null;return}
+ if(dlg.__ksM!==m){dlg.__ksM=m;(dlg.classList.contains("kseal-room")&&dlg.classList.remove("kseal-room"))}
  if(!s){dlg.insertAdjacentHTML("beforeend",kitSeal({cls:"kseal-ev"}));s=dlg.querySelector(":scope > .kseal-ev")}
  if(getComputedStyle(dlg).position==="static")dlg.style.position="relative";
  /* OWNER 21/11 ~03:47Z (#44): "chỗ có, chỗ không" — ONE rule, ONE place, ONE size on EVERY dialog frame, Fold + iPad: the TOP-RIGHT corner of the frame's header bar (.kph),
     size KSEAL_EV.fix; the header reserves the room (padding-right), so it never covers a word. No measuring, no corner search, no bottom strip. */
- dlg.classList.remove("kseal-room");s.style.setProperty("--kseal",KSEAL_EV.fix+"px");s.style.left="auto";s.style.bottom="auto";s.style.right=KSEAL_EV.padR+"px";s.style.top=KSEAL_EV.padT+"px";s.dataset.c="tr";s.dataset.sz=KSEAL_EV.fix}
+ (dlg.classList.contains("kseal-room")&&dlg.classList.remove("kseal-room"));s.style.setProperty("--kseal",KSEAL_EV.fix+"px");s.style.left="auto";s.style.bottom="auto";s.style.right=KSEAL_EV.padR+"px";s.style.top=KSEAL_EV.padT+"px";s.dataset.c="tr";s.dataset.sz=KSEAL_EV.fix}
 window.kitSealEvPlace=kitSealEvPlace;
 (function(){let tm=0;const later=()=>{if(tm)return;tm=setTimeout(()=>{tm=0;try{kitSealEvPlace()}catch(e){}},90)};window.__ksealLater=later;
  if(typeof showModal==="function"){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{requestAnimationFrame(()=>{try{kitSealEvPlace()}catch(e){}});setTimeout(later,400);setTimeout(later,1200)}catch(e){}return r}}

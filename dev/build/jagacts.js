@@ -42,12 +42,12 @@ agReg("consort","shop",(v,N,need)=>{if(need&&need!=="sung"&&need!=="ally"&&need!
  const i=v.inv.findIndex(e=>e&&!e.h&&IT[e.k]&&itm(e.k).gv&&!e.t);
  if(i>=0){const T=[];if(!need||need==="sung")T.push(["emp",N.sung||0,"sung"]);if(!S.thDead&&(!need||need==="th"))T.push(["th",N.th||0,"th"]);
   for(const [t,w,n] of T){const u=agcU(v,N,100,{[n]:X.gift.g},{},"help");if(u>0)O.push({k:"cx:gift",t:t==="emp"?S.emp:"th",u,tag:"help",act:t==="emp"?"dâng quà lên Hoàng thượng":"dâng quà lên Thái hậu",at:(kh)=>t==="emp"?agEmpAt(kh):agThAt(kh),gt:t})}
-  if(!need||need==="ally"){const fr=others(v).filter(t=>t&&t!==v&&(t===S||t.alive)&&aff(v,t)>=BAL.ag.goal.friend);if(fr.length){const t=mindPickBy(fr,x=>BAL.mind.pick.ag.base+aff(v,x),v);const u=agcU(v,N,100,{ally:X.gift.g},{},"help");if(t&&u>0)O.push({k:"cx:gift",t,u,tag:"help",act:"đem quà sang tặng",at:(kh,vv,tt)=>tt===S?"home":agAt(tt,kh)})}}}
+  if(!need||need==="ally"){const fr=others(v).filter(t=>t&&t!==v&&(t===S||t.alive)&&aff(v,t)>=netTh(v,"than"));if(fr.length){const t=mindPickBy(fr,x=>BAL.mind.pick.ag.base+aff(v,x),v);const u=agcU(v,N,100,{ally:X.gift.g},{},"help");if(t&&u>0)O.push({k:"cx:gift",t,u,tag:"help",act:"đem quà sang tặng",at:(kh,vv,tt)=>tt===S?"home":agAt(tt,kh)})}}}
  return O});
 agRunReg("cx:buy",(v)=>{const L=(S.shop||[]).filter(k=>IT[k]&&itm(k).gv&&!itm(k).il&&(v.bac||0)>=itm(k).pr+BAL.ag.cx.buy.keep);if(!L.length)return"";const k=npwPick(L,x=>itm(x).pr);return buy(v,k)?`${v.name} mua ${itm(k).n} ở Nội vụ phủ`:""});
 agRunReg("cx:gift",(v,t)=>{const i=v.inv.findIndex(e=>e&&!e.h&&IT[e.k]&&itm(e.k).gv&&!e.t);if(i<0||!t)return"";const r=giveTo(v,t===S.emp?"emp":t,i);return r?String(r).replace(/\.\s*$/,""):""});
 /* Kết giao (ACT.ally: the player's act, its cost and odds) */
-agReg("consort","ally",(v,N,need)=>{if(need&&need!=="ally")return[];if(!ACT.ally||(v.bac||0)<BAL.ag.cx.ally.bac)return[];const fr=others(v).filter(t=>t&&t!==v&&(t===S||t.alive)&&rel(v,t)>BAL.ag.cx.ally.rel);if(!fr.length)return[];
+agReg("consort","ally",(v,N,need)=>{if(need&&need!=="ally")return[];if(!ACT.ally||(v.bac||0)<BAL.ag.cx.ally.bac)return[];const fr=others(v).filter(t=>t&&t!==v&&(t===S||t.alive)&&rel(v,t)>=netTh(v,"quen"));if(!fr.length)return[];
  const t=mindPickBy(fr,x=>BAL.mind.pick.ag.base+Math.max(0,rel(v,x)),v);if(!t)return[];const o=ACT.ally.o?ACT.ally.o(v,t):100;const u=agcU(v,N,o||100,{ally:BAL.ag.cx.ally.g},{bac:-BAL.ag.cx.ally.bac},"help");
  return u>0?[{k:"cx:ally",t,u,tag:"help",act:"sang kết giao",at:(kh,vv,tt)=>tt===S?"home":agAt(tt,kh)}]:[]});
 agRunReg("cx:ally",(v,t)=>{if(!t||(v.bac||0)<BAL.ag.cx.ally.bac)return"";return String(ACT.ally.f(v,t)||"").replace(/\.\s*$/,"")});
@@ -56,11 +56,11 @@ agRunReg("cx:ally",(v,t)=>{if(!t||(v.bac||0)<BAL.ag.cx.ally.bac)return"";return 
 agReg("consort","more",(v,N,need)=>{const O=[];const X=BAL.ag.cx;
  if(!S.thDead&&(v.arts&&v.arts.hoa||0)>=X.portrait.hoa&&(!need||need==="th")&&agcCan(v,X.portrait.c)){let aw=0;try{aw=artW2(v,"hoa")}catch(e){}const o=odA(v,X.portrait.o+aw*X.portrait.k);
   const u=agcU(v,N,o,{th:X.portrait.w.th},X.portrait.c,"art",{th:-X.portrait.l.th});if(u>0)O.push({k:"cx:portrait",t:null,u,tag:"art",act:"vẽ chân dung dâng Thái hậu",at:kh=>{const k=agThAt(kh);return k==="tn"?k:null}})}
- if((!need||need==="safe")&&(v.danh||0)>=-X.humble.c.danh){const L=others(v).filter(t=>t&&t!==v&&(t===S||t.alive)&&oan(t,v)>=X.humble.oan);if(L.length){const t=mindPickBy(L,x=>BAL.mind.pick.ag.base+oan(x,v),v);
+ if((!need||need==="safe")&&(v.danh||0)>=-X.humble.c.danh){const L=others(v).filter(t=>t&&t!==v&&(t===S||t.alive)&&oan(t,v)>=netTh(t,"oan"));if(L.length){const t=mindPickBy(L,x=>BAL.mind.pick.ag.base+oan(x,v),v);
   const u=agcU(v,N,100,{safe:X.humble.g},X.humble.c,"help");if(t&&u>0)O.push({k:"cx:humble",t,u,tag:"help",act:"sang nhún nhường",at:(kh,vv,tt)=>tt===S?"home":agAt(tt,kh)})}}
  return O});
 agRunReg("cx:portrait",(v)=>{const X=BAL.ag.cx.portrait;if(!agcCan(v,X.c))return"";let aw=0;try{aw=artW2(v,"hoa")}catch(e){}const o=odA(v,X.o+aw*X.k);const ok=agTry(o);if(!ok&&agSoft(o))return agSoftTxt(v,"",X.c);/* soft: rolled before paying, only its Sức share (j63 oddsSoftCost) */agcPay(v,X.c);if(ok){ap(v,X.w);return `${v.name} vẽ chân dung dâng Thái hậu, Thái hậu rất vui`}ap(v,X.l);return `${v.name} vẽ chân dung dâng Thái hậu, Thái hậu chê không giống`});
-agRunReg("cx:humble",(v,t)=>{const X=BAL.ag.cx.humble;if(!t)return"";ap(v,X.c);oanAdd(t,v,-X.oanDown);affAdd(t,v,X.aff);return `${v.name} nhún nhường trước ${agcNm(t)}`});
+agRunReg("cx:humble",(v,t)=>{const X=BAL.ag.cx.humble;if(!t)return"";ap(v,X.c);if(!netForgive(t,v))return netRefused(v,t,"nhún nhường trước");oanAdd(t,v,-X.oanDown);affAdd(t,v,X.aff);return `${v.name} nhún nhường trước ${agcNm(t)}`});
 /* ---------------- 2. HOÀNG HẬU: the player-as-Empress buttons (empAct: Xử tội / Tịch thu / Ban thưởng / Ân xá / Khất bổng lộc) ---------------- */
 /* ONE function for her and the NPC Empress (empAct calls it for the player) */
 function hhAct(a,v,k){const me=a===S;const nm=me?"Ngươi":`Hoàng hậu ${a.name}`;
@@ -73,8 +73,8 @@ function hhAct(a,v,k){const me=a===S;const nm=me?"Ngươi":`Hoàng hậu ${a.nam
 const AGHH={judge:{act:"xử tội",n:"spite"},conf:{act:"tịch thu trang sức",n:"spite"},reward:{act:"ban thưởng",n:"ally"},pardon:{act:"ân xá",n:"ally"},cutpay:{act:"khất bổng lộc",n:"spite"}};
 /* the gate of each of her buttons (the player-as-Empress sees the same: empAct below) — ONE list read by her options and by her duty need */
 const AGHHG={judge:(q,p)=>!p.out&&evG(q,p)>=BAL.ag.ev.judge&&rel(q,p)<0,conf:(q,p)=>!p.out&&(p.hh||0)<=BAL.ag.hh.confHh&&p.inv.some(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h),
- reward:(q,p)=>!p.out&&(p.hh||0)>=BAL.ag.hh.rewardHh&&(q.bac||0)>=-BAL.tw.reward.bac,cutpay:(q,p)=>!p.out&&rel(q,p)<BAL.ag.hh.cutRelMax&&!p.cutPay,
- pardon:(q,p)=>(p.confined||p.out)&&aff(q,p)>=BAL.ag.hh.pardonAff};
+ reward:(q,p)=>!p.out&&(p.hh||0)>=BAL.ag.hh.rewardHh&&(q.bac||0)>=-BAL.tw.reward.bac,cutpay:(q,p)=>!p.out&&rel(q,p)<=netTh(q,"ghet")&&!p.cutPay,
+ pardon:(q,p)=>(p.confined||p.out)&&aff(q,p)>=netTh(q,"than")};
 /* AG-ALL r1 F5: the Empress's DUTY need "order" (keeping the inner palace in order): grows with the cases her buttons can act on now
    (min(1, cases / BAL.ag.hh.orderN) × orderW); every Empress act also serves it. Before, her acts served only spite / ally, which a seated
    Empress with friends rarely needs → ~0 acts per 60 days. */

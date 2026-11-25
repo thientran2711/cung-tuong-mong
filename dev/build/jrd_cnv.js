@@ -884,7 +884,7 @@ rdDef("cnv_mat",11,{t:"Ánh mắt ấy",w:"emp",sj:"điều ánh mắt ấy tr�
   lose:{tag:"Ánh mắt khép lại",t:MATT("Ngài thôi nhìn về phía hậu viện. Ngươi vẫn là cung nữ, vẫn pha trà, vẫn sống. Con đường còn dài, chỉ không còn chiếc ô năm ấy.",
    "Ngài thôi đến. Ngươi vẫn là tiểu chủ, vẫn có cung riêng, chỉ không còn ai nhìn ngươi như chiều mưa năm ấy."),go:()=>[matSrv(rdGo("cnv_mat_11",5)),matCon(rdGo("cnv_mat_11",6))].join(" ")}}});
 RD97L.push(rdRare({a:"cnv_mat_11",tag:"Chủ cũ thành tỷ muội",w:"mis",n:"Xin {mis} cùng đứng dưới mái hiên",
- path:["Quỳ lạy {mis}","Thưa: là tỷ muội","Xin ơn cho {mis}","Gặp {v}, xin hòa","Thôi ngóng"],bad:["Thưa: là người từng hầu","Đem chuyện gói bùa"],x:[()=>{const m=CNV_MIS();return !!(m&&m.alive&&!m.out&&(m.rel||0)>=RR("cnv_mat_11").bar)},"Chủ cũ thương ngươi (giao tình từ "+RR("cnv_mat_11").bar+")"],
+ path:["Quỳ lạy {mis}","Thưa: là tỷ muội","Xin ơn cho {mis}","Gặp {v}, xin hòa","Thôi ngóng"],bad:["Thưa: là người từng hầu","Đem chuyện gói bùa"],x:[()=>{const m=CNV_MIS();return !!(m&&m.alive&&!m.out&&aff(m,S)>=netTh(m,"than"))},"Chủ cũ thương ngươi (thân với ngươi)"],
  t:"Ngươi sai người mời {mis} ra mái hiên. Hoàng thượng thấy hai người đứng chung một chiếc ô, bật cười: “Hóa ra người trẫm nhìn năm ấy, là người nàng dạy ra.” Từ đó, cung {mis} và cung ngươi đi chung một đường, ai động đến người này là động đến cả hai.",
  go:(_A,G)=>{matMis(G[0]);return [matSrv(rdGo("cnv_mat_11",7)),matCon(rdGo("cnv_mat_11",8))].join(" ")},rw:"nt_nhuy",ti:"Chủ tớ thành tỷ muội"}));
 CNV_QFIX("cnv_mat");

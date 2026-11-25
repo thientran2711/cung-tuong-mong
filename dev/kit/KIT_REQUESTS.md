@@ -227,25 +227,29 @@ K-FOCUS-1b SPEC (append to kitFocus; pure display, no numbers of its own, knobs 
 ## 17/11 — KIT REQUEST — card flip: the tassel crosses the rank line of the picked card's name tag (night-final #6)
 | date | from | need | where | who | status |
 |---|---|---|---|---|---|
-| 17/11 | night-final #6 (session_01UV1SzkcuhnxeSAywiQC2hz) | The picked card's name tag (`.kcf-pick .kcf-tag.kcf-tag-l{top:79%}`, KIT §48 kitNameRank on the tray) sits ON the jade tassel by design ("over the tassel"), so the tassel cord runs through the rank word (e.g. "Quý nhân"). Needs a kit answer: tag below the tassel end, or the tassel behind a paper backing. Not night-final code (jflip.js / §48 from main) — not changed here. | jflip.js final still, Fold 755x1000 + iPad 1180x820 | kit keeper | open |
+| 17/11 | night-final #6 (session_01UV1SzkcuhnxeSAywiQC2hz) | The picked card's name tag (`.kcf-pick .kcf-tag.kcf-tag-l{top:79%}`, KIT §48 kitNameRank on the tray) sits ON the jade tassel by design ("over the tassel"), so the tassel cord runs through the rank word (e.g. "Quý nhân"). Needs a kit answer: tag below the tassel end, or the tassel behind a paper backing. Not night-final code (jflip.js / §48 from main) — not changed here. | jflip.js final still, Fold 755x1000 + iPad 1180x820 | kit keeper | **DONE** KK16 review/kit-framefit (KIT §48.1: paper backing, tassel behind the tag) |
 
 ## 17/11 — KIT REQUEST — live v3 frame at phone portrait 390x844: info column too narrow for option cards (night-final-r1 reviewer)
 | date | from | need | where | who | status |
 |---|---|---|---|---|---|
-| 17/11 | night-final-r1 reviewer (session_01964izDUxnFjybggNj6Ukev) | At 390x844 (secondary device) the live v3 frame (`kszlive`, lay L) gives the figure most of the width and the right info column only ~146 px; compact option cards (§43, `button.ka.kart.kopt`, 84 px picture) are then 146 px wide: name wraps per word, the odds ladder chip and the Được/Mất values run past the card edge. Pre-existing on live main 6c4f21c3 (there the name is squeezed to 0 px); §43.0a makes it better (name 30 px) but cannot fix the column width. Fold 755x1000 + iPad 1180x820 are fine. Ask: a kit rule for the v3 frame at phone width (figure column narrower / option cards below the figure, full width). | kitFrameLive3 / KIT_SIZE.v3 (jksize.js), every person/event dialog with options at ≤ 420 px wide | kit keeper | open |
+| 17/11 | night-final-r1 reviewer (session_01964izDUxnFjybggNj6Ukev) | At 390x844 (secondary device) the live v3 frame (`kszlive`, lay L) gives the figure most of the width and the right info column only ~146 px; compact option cards (§43, `button.ka.kart.kopt`, 84 px picture) are then 146 px wide: name wraps per word, the odds ladder chip and the Được/Mất values run past the card edge. Pre-existing on live main 6c4f21c3 (there the name is squeezed to 0 px); §43.0a makes it better (name 30 px) but cannot fix the column width. Fold 755x1000 + iPad 1180x820 are fine. Ask: a kit rule for the v3 frame at phone width (figure column narrower / option cards below the figure, full width). | kitFrameLive3 / KIT_SIZE.v3 (jksize.js), every person/event dialog with options at ≤ 420 px wide | kit keeper | **CLOSED, moot** (KK16): 390x844 portrait is no longer a reviewed layout (KIT §0: narrow portrait is pre-rotated to 1180x820; owner 11/15); Fold + iPad fine |
 
 ## 21/11 ending-screens-land (OPUS worker session_01N1tNP6MabVX7Umpx2XWEzo for Foreman B ROOT-5) — KIT REQUEST «one figure slot per frame size» (kit keeper; jksize.js v3 live frame)
 - Found by the law-11 figure table in dev/test/ending-screens.js after the ending frame took the plain kit XL size: in the SAME frame size (XL 562x770 Fold / 860x548 iPad) the kit figure (`.kszfig .kszfs`) is shorter when the dialog has (a) a footer button row `#mr` (button-only dialogs: `m.btn` / «Đã rõ», e.g. the life end card of `over()`: figure 220x608 vs 220x666 Fold, 220x386 vs 220x445 iPad) or (b) a taller / shorter header `.kph` (Bảng Thiên mệnh header +16 px → figure @107 h650; rare result header −2 px → @88 h669). The kit takes the header + footer from the figure column for EVERY dialog, not only endings.
 - Also (c): inside the same slot the picture `.kszfs` is shorter when the kit name plate `.kt3` has two lines (rank + name, 36 px) than one line (17 px): Bảng Thiên mệnh 220x650 @107 vs rare result 220x669 @88 (slot `.kszfig` is the same 69/688 in both). The test therefore compares the SLOT `.kszfig`, grouped by header + footer height.
 - Ask: the kit keeper decides ONE figure slot per frame size (e.g. the footer button sits under the right column like `.opts`, header height fixed per frame size) so owner rule (f) «same figure in every dialog of the same frame size» holds for button-only dialogs too; dialog-fixed.js (f) today only measures option dialogs.
-- Status: OPEN (ending screens add no size of their own; they follow whatever the kit decides).
+- Status: **DONE** KK16 review/kit-framefit (KIT §56.21): one header height + footer button in the info column; figure slot 220x688 Fold / 220x466 iPad for every ending (tests/ending-screens.js 268/268).
 
 ## 23/11 MG10A (worker session_01D3E3NXyH16AHsWYAvBwd5N for ROOT-C7) — KIT REQUEST «painted board backdrop slot for DOM mini-games thu_tam, thu_choi, tuoi, co7»
 - These four boards (Chải lông thú, Chơi với thú, Tưới cây, Cờ năm quân; engines petc*/shelfWaterGame/kgGomoku) are DOM / plain cream with no `kg82Bg` call, so the painted backdrops are on the CDN but nothing reads them: `img/kit/mg-thu_tam-bg.webp`, `mg-thu_choi-bg.webp`, `mg-tuoi-bg.webp`, `mg-co7-bg.webp` (1024x768, ≤ 257 KB).
 - Ask: kit keeper gives these boards the same backdrop part as canvas boards (cover-fit picture + soft veil behind the play area, kg82Bg look), keyed `mg-<kind>-bg`. MG10A did not style it by hand.
-- Status: OPEN.
+- Status: **DONE** — KIT-MGBG ce2f2289 + 9f9d318c (on main; KK16 verified by git grep `kitBoardBg` j79.js).
 
 - MG-SKIN (MAIN 113 22:39Z; owner OD 23/11 ~23:05Z real): «skin» slot on the kg82 frame {bg picture, board/piece art keys, button palette}, ≥4 palettes from the kit palette, Fold + iPad readable → DONE by KIT KEEPER #14 on review/kit-mgskin (KIT.md §MG-SKIN, test dev/test/kit-mgskin.js). Art: Foreman C paints img/mg/<kind>-<id>.webp (+ img/mg/<sprite>-<id>.webp); wiring: THIN P1 (kitMgSkinAdd + KG82.preSkin).
+
+## 24/11 KK16 audit (MAIN 116 order: mark built requests DONE)
+- K-BADGE-HAOHUU → DONE KIT §77b kitStBadge (jrail.js, on main). K-ICO-HAOHUU → DONE (KIT §69.2). `kitColDot` → DONE KIT §60.1 (review/kit-e-rows). KR home-stat rows / «quý nhau» / «thế lực nhà» → DONE (review/kit-cost-rows-home 3332c63b, KIT §13.14–15). K-PM-1 `kitGameVs` → DONE (KIT §13.8, kit-gamevs.js). K-GE-1 `kitBranchMap` → DONE (kit-ge.js). K-FOCUS-1/1b kitFocus + kitIdle + kitMoodSay → DONE (KIT §92). chapter-card kitSlide → on main. MG-SKIN → DONE (kit-mgskin). K-DH-CAPFIT → PASS 9b487835 (LC9).
+- «Chủ tin» / «Hoàng thượng để ý» hint words → DONE KIT §13.16 (review/kit-framefit). Timed choice countdown (night-final) → DONE KIT §32.5c/§69.4.
 
 - K-EF-REL (24/11, REVIEW thin-p6 r1): **a person's relation chip in kit option rows is clipped on Fold 755x1000.** The kit renders a relation effect as ONE `.ef.kef1` chip «<rank> <name> thiện cảm ±N», and `.kef1` is `white-space:nowrap` (j63.js:179/181, so a unit never splits). With a long rank+name (e.g. «Đáp ứng La Uyển Thanh thiện cảm +4», «Tần Thẩm Mộng Dao thiện cảm -2») the chip is 6–100 px wider than the option body in the 2-column card on Fold and the NUMBER is cut off (she cannot see how much). iPad 1180x820 is fine. WHOLE GROUP: every card that passes a relation effect to the kit option (`r:[[person,n]]`): j7c intrigue (LIVE), jworldc world reactions + j71c festival complications (thin-p6), j70 threat options, any `opt.r`. Ask: one kit rule for the relation chip — e.g. the name part may wrap/ellipsis while «thiện cảm ±N» stays whole, or the chip drops to its own line when wider than the row. Not restyled by the reviewer (KIT FIRST). Repro: `node dev/test/p6-shots.js <dir> wc-tang-001 j70c-frame-001` → fold-wc-tang-001.png. Status: OPEN.
 ## 24/11 KIT KEEPER #15 — K-DH-CAPFIT «title plate on the event picture clips long names» (filed by E55 on review/titles2 537091a1)
@@ -261,3 +265,60 @@ K-FOCUS-1b SPEC (append to kitFocus; pure display, no numbers of its own, knobs 
 - Found: KIT §844 says the card's «!» (`kitOptInfo(b)`, jopic.js) opens the whole card, every row. But kitOptInfo clones the button and sets `c.disabled=true`, and j63 CSS `button.ka:disabled .kr-mat, button.ka:disabled .kr-kem, button.ka:disabled .kr-bai{display:none}` (the rule for a really disabled option) then hides the Kèm / Bại / Mất rows inside the overlay. Every option card in the game with a folded Kèm/Bại/Mất row loses it in its «!» view (e.g. «Lót tay họa sư»: the card's own markup holds `kr-kem` «bị đồn đút lót họa sư · Danh -1: khả năng vừa», the overlay shows only Tốn / Được / Ghi chú; shots Fold + iPad, report moment.md FIX r1).
 - Need (kit keeper only): the overlay shows every row — e.g. `#kpinfo button.ka.kopinfo:disabled .kr-kem/.kr-bai/.kr-mat{display:revert}` or mark the clone inert without `disabled`; then a scan over every dialog option with a folded row.
 - Status: OPEN. jmoment does not touch the kit; its rumour risk is in the card data (Kèm row) and shows as soon as the overlay is fixed.
+- (24/11 Foreman F via MAIN 116) KIT REQUEST «kinh / may have no painted board slot» → DONE KK16 review/kit-mgboardof (KIT MG-SKIN.1 KG82_BOARDOF: they take the «ve» board + its skins).
+
+## KIT REQUEST (VISITOR-FIX, MAIN 131 24/11 ~23:00Z) — Sổ ghi / note row with a portrait icon wraps badly on iPad
+iPad 1180x820, Sổ ghi (journal/notes) rows that carry a small portrait icon: the text wraps with a big gap beside the icon and leaves an orphan last word («… Trường Xuân / cung.»). Wanted: the kit note row (icon + text) wraps text under itself with no gap, no orphan word (text-wrap:pretty / the icon floated or a grid with the text column min-width 0). This is a kit row (LUẬT KIT TRƯỚC): kit keeper KK25 builds / fixes it in KIT.md + the kit sample page; no per-screen CSS. Worker did NOT touch the row.
+
+## 25/11 BUTTON CRAWL (ROLE B, session_01UV1Szkf6fjnVAUPGXkqZ7j for Foreman F #5) — KIT REQUEST K-KDTX-BAND «text cap squeezes the head-art band over the first rows (Fold)»
+- Real-tap crawl, LIVE 008aa59b, Fold 755x1000: rail «Mục tiêu chương» → chapter panel (kitGoalDetail → kitPanel kind info + headArt). The tab row «Mục tiêu · Danh hiệu n/35 · Thiên mệnh» (jdh tabsHTML, first section) is DEAD: elementFromPoint at each tab = the band picture (img, 518x286).
+- Cause (kit): KIT 32.5b kitDlgText (jk4.js:318) caps `.kpb` (`max-height:290px`, `.kdtx`), and `.modal .dlg.kdscroll.kdtx > #mb > .kpb.kphas{grid-template-rows:minmax(0,1fr)}` / the stacked `…kpinfo:has(> .kpsubj.kpiart.kpev){grid-template-rows:auto auto}` let the cap squeeze BOTH rows to 140px, while the band keeps `height:calc(var(--kah)*1.5)` (298px, jkslide.js:49, sticky) → the band lies over the first ~150px of `.kpmain`. Whole family: every kitPanel with a head-art band whose text is long enough to be capped (kdtx) on a phone-width frame — the first text rows (tabs, first kit rows) sit under the picture.
+- Ask: kit keeper makes the stacked band + capped text work as ONE part (e.g. band row keeps its height and `.kpmain` row = the rest and scrolls inside, or the band shrinks to the room left), Fold + iPad; the crawler (`node dev/test/button-crawl.js --dev fold --start home`) re-checks the tabs. Not styled by hand by the crawler worker.
+## KIT REQUEST (M-FIX-1, Foreman F #7, 25/11 ~08:30Z; robot M4 06:22Z + 06:55Z) — choice cards: every option of a 3–5 option card must fit without a sub-scroll
+Robot M4 (Fold 755x1000, real taps): «Đêm thị tẩm» showed 3 of 4 options, the best one below the fold behind «Kéo xuống»; «Tân quân lập uy · Chương 2»
+gave its option list a 112 px scroll box under a long text (half an option visible, the card centre outside the frame = a dead tap zone).
+Scan (m-fix-1, every PEND card with ≥3 options opened through pushFront + showModal, option rows .opt.kopt in .opts.kpopts.k3btns.k3rows, measured
+fully visible inside every clipping ancestor; LIVE origin/main 9f72524b + m-fix-1): Fold 16 of 26 cards hide options, iPad 12 of 26:
+| card | Fold shown/all | iPad shown/all |
+|---|---|---|
+| night1 (Đêm thị tẩm) | 3/4 | 4/4 |
+| night2 | 3/4 | 2/4 |
+| prep (chuẩn bị thị tẩm) | 3/5 | 2/5 |
+| vnight | 3/4 | 4/4 |
+| j7c | 2/4 | 1/4 |
+| vulan | 2/3 | 2/3 |
+| ge1 | 3/4 | 4/4 |
+| cyrep | 3/4 | 2/4 |
+| vlget / vlcraft / vlout | 4/5 · 2/3 · 3/6 | 2/5 · 3/3 · 4/6 |
+| pick lists (shop 12–14, evpick 10, itarget 10, plantsv 8, pmLad 9) | scroll (fine: lists) | scroll |
+Root: one option row = 140 px (Fold) / 132 px (iPad) (.k3rows card with picture), the option column gets what the text leaves (Fold prep: 492 px for
+730 px of options; iPad prep 265 px for 408 px). Wanted (law 10 FRAME → LAYOUT → BUTTON SIZE, kit keeper only): a CHOICE card (≤ 5 options, not a pick
+list) always shows ALL its options at once on both devices — e.g. the option column takes priority over the text (text scrolls, options never), or the
+k3rows option switches to the compact/2-column layout when the options do not fit; the «Kéo xuống» cue stays only for long pick lists. Order is NOT
+the fix (law 2: no option is «the best»; the list keeps its order). Re-scan (before/after): node dev/test/opt-fit-scan.js dev/index.html all.
+
+## KIT REQUEST K-NOTICE-OPTS (button-crawl-fix-5, ROLE B #4 for Foreman F #10, 25/11 ~11:45Z; robots s9 / s1d Fold) — «Tin báo» list: its only way out scrolls away
+Real taps, Fold 755x1000 + iPad 1180x820 (m-fix-2-r 240f549a; same on LIVE 9f72524b): «Tin báo» (jnotice kitNoticeOpen, kitPanel kind notice) with a long list
+(20 notices shown, measured with 138 unread) AND an action notice (an errand «Để ta xem», a Tai mắt news) shows the list + «Kéo xuống»; its two options «Để ta xem» / «Để sau» lie BELOW
+the frame (Fold y 785 of a frame ending at 787, iPad 695 of 697 — elementFromPoint = #modal), there is no ✕ (review r4: a panel with options has none) and a
+tap outside does NOT close it. A player can only leave by scrolling the panel to its end. KIT §2071 says the event frame's buttons never scroll away.
+Without an action notice the same list shows the kit ✕ (Lui) top-right, hittable — fine.
+Wanted (kit keeper only, law 9/10): in a notice / info panel with options, the notice list (the section body) is the scroll area and the option row stays
+in view (like the event frame: two scroll areas, buttons fixed), or the ✕ stays on a panel whose options are only «go / later». Not ours: the list's
+wording (5 of 12 lines one template sentence, s9) → MAIN. Probe: /home/user/wt/probe4/tb.js on the ROLE B #4 box (138 notices, go on each).
+## KK27 25/11 — still open from the KK26 list (not built)
+- K3 status boxes («Xét phẩm», «Nguy hiểm chung» …, `#hud2 .khc .hc`, j79.js:1229 `min-height:0;padding:1px 0`): the tappable row is ~17 px tall (kit row >= 44 px, §A). Fix = the K3 row gets the kit row height, K3 right column re-measured on Fold + iPad (rows are adjacent, so a hit-area trick is not enough). Scan: dev/test/kit-row-tap-size.js (ALL=1 lists the rows; must be shown on the screen that has the K3 boxes).
+- iPad 1180x820 Hành sự stage: two figure name labels overlap at the left edge (name-label collision, every stage) — needs a stage-label collision rule in the stage kit.
+- One-option card «Tắm gội chờ giá» (E-S1, Kính sự phòng báo tin): add a ONE-option card to kit-opt-meter-tap (tap anywhere chooses except the «!»).
+- «Tin báo / Đã xem hết» long list on iPad: ✕ in view with the real E state (§56.22 header ✕ covers option-less panels; verify with the real list).
+
+## KK28 25/11 — DONE on review/kit-opts-pack-3 (base review/kit-opts-pack-2 2815c46d)
+- DONE (MAIN 138 order 1) Fold 4-6 options: step-down §56.24 switched ON, stacked NL/NM/NS frames get the full screen height + strip step (KIT 56.27). 12 of the 14 Fold frames that scrolled now show every card without scroll; 2 long-text frames (j70def, j7c) still scroll 40 / 9 px WITH the «Kéo xuống» cue. «First finger drag right after a Fold modal opens scrolls 0»: NOT reproduced (kit-opts-touchdrag: every case scrolls).
+- DONE (order 2) K3 side-column rows `.ksh .k3r` + `#hud2 .khc .hc` = kit row height 44 px (KIT 56.28). NOT changed: the top-bar status chips (Buổi / Chưa điểm trang / Quẻ, 18 px, `.k3tt`) — chips in the top bar, not rows; if she wants a bigger tap target there, it is a top-bar redesign (KIT REQUEST for a foreman/owner decision).
+- DONE (order 3) stage name-label collision rule `kitTagCollide` (KIT 33.10). The overlap was not reproducible with real people (0 pairs in 66+ states), so it is a guard, tested with a forced collision. If D sees it again: send the state (place, people, plate) to the kit keeper.
+- DONE (order 4) «Tắm gội chờ giá» one-option card: the card was LOCKED by the game rule (emperor already elsewhere) and showed no reason, a tap did nothing -> reason row + lock pop (KIT 56.29, whole group = every `lk` option).
+- DONE (order 5, verification) «Tin báo / Đã xem hết» long list on iPad: see report (kit-close-reach NT=1).
+
+
+## 25/11 KK29 — DONE (review/kit-opts-pack-4): «not a danger» flag for selection-day cards (SELSCENE-18 asked via MAIN 140)
+Flag name: **`nodanger:1`** on the queue card (`Q.push({…,pid:"selxD3",nodanger:1})`) or on a kit panel spec (`kitPanel({…,nodanger:1})`). Also silent without a flag: pids starting `selx` / `kc2Sel` (`KIT_NODANGER_PRE`, j11) and every act picker in `KIT_ACT_PIDS`. One function `kitNoDanger(card)` decides the red wash (`kitAlarm`), the heartbeat and the tension music. KIT §93.9; scan table `dev/test/kit-alarm-scan.js`.

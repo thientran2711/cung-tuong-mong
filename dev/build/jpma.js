@@ -55,8 +55,8 @@ function pmRaw(p,kind,R){return kg82NpcRaw(p,kind,{occ:"pm",rank:R})}
    playArt scores quick.raw, the sub text prints the same number. No typed fallback. */
 /* a person's MEDIAN board on this tier (her own level): the expected hand, not a draw (pmOddsEst, pmKyNoise) */
 function pmMed(p,kind,R){return mgSkipRaw(mgTier(kind,{occ:"pm",rank:R,p,lv:kg82LvFor(p,kind)}))}
-function pmSk(kind,R){return mgSkipRaw(mgTier(kind,{occ:"pm",rank:R}))}
-function pmQuick(kind,R){const sk=pmSk(kind,R);return{n:"Để tài nghệ quyết định",sub:`tính như người cùng bậc (${sk}/10)`,raw:sk}}
+function pmSk(kind,R){return (typeof kitSkipCap==="function"?kitSkipCap:x=>x)(mgSkipRaw(mgTier(kind,{occ:"pm",rank:R})))}/* m-fix-1: HER quick mark capped (BAL.skip.cap); pmMed (an NPC's own estimate) unchanged */
+function pmQuick(kind,R){const sk=pmSk(kind,R);return{n:"Để tài nghệ quyết định",sub:`tính ${sk}/10, tự thi giỏi thì hơn`,raw:sk}}
 function pmTal(p,kind){try{return kg82Parts(p,kind).total}catch(e){return 0}}
 function pmScore(p,kind,R,raw){return pmTal(p,kind)+Math.round((raw==null?pmRaw(p,kind,R):raw)/10*B().luck)}
 function pmOdds(a,t,kind){const R=pmR(a,t),N=B().oddsN,ta=pmTal(a,kind),tt=pmTal(t,kind),L=B().luck;let w=0;
@@ -215,7 +215,7 @@ function pmOddsEst(a,t,kind){const R=pmR(a,t),L=B().luck;const med=p=>pmMed(p,ki
 if(typeof agReg==="function"&&typeof p3O==="function"){
  agReg("consort","pm",(v,N,need)=>{const O=[];try{if(!(typeof p3On==="function"&&p3On())||v===S||!live(v)||v.confined||v.coop||!pmFree(v))return O;const G=B().npc.g;
   const L=others(v).filter(x=>x&&x!==v&&live(x)&&!x.confined&&(x!==S||(pmMeFree()&&!isSrvSafe()&&!S.confined)));if(!L.length)return O;
-  if(!need||G.play[need]!=null){const F=L.filter(x=>aff(v,x)>=B().npc.minAff);const t=F.length?pmPickBy(F,x=>BAL.mind.pick.ag.base+Math.max(0,aff(v,x)),v,"play"):null;
+  if(!need||G.play[need]!=null){const F=L.filter(x=>aff(v,x)>=0);const t=F.length?pmPickBy(F,x=>BAL.mind.pick.ag.base+Math.max(0,aff(v,x)),v,"play"):null;
    if(t){const x=p3O(v,"pmPlay",{n:"Cùng chơi",c:{},o:100,k:B().kc},N,G.play,"social",pmAt(t),t);if(x)O.push(x)}}
   if(!need||G.duel[need]!=null){const F=L.filter(x=>(typeof agSpite==="function"?agSpite(v,x):-aff(v,x))>=B().npc.spite);const t=F.length?pmPickBy(F,x=>BAL.mind.pick.ag.base+Math.max(0,typeof agSpite==="function"?agSpite(v,x):-aff(v,x)),v,"duel"):null;
    if(t&&pmStakes(v,t).some(z=>z.ok)){const x=p3O(v,"pmDuel",{n:"Thách đấu",c:{},o:pmOddsEst(v,t,pmX(v,t,"duel").kind),k:B().kc},N,G.duel,"social",pmAt(t),t);if(x)O.push(x)}}
@@ -245,7 +245,7 @@ function pmEyeTxt(L){return L.map(p=>p===S?"ngươi":p.name).join(", ")}
 function pmEyeFx(win,lose,x,place){const E=B().eye,L=pmEyes(win,lose,place);if(!L.length)return"";const d=Math.min(E.danhMax,E.danh*L.length);
  apx(win,{danh:d});apx(lose,{danh:-d});const env=[],res=[];
  for(const w of L){const sp=typeof agSpite==="function"&&w!==S?agSpite(w,win):Math.max(0,-aff(w,win));
-  if(aff(w,win)>=E.likeMin){affAdd(w,win,E.kinh);res.push(w)}/* one who likes the winner respects her; else one who resents her envies her */
+  if(aff(w,win)>=netTh(w,"than")){affAdd(w,win,E.kinh);res.push(w)}/* one who likes the winner respects her; else one who resents her envies her */
   else if(sp>=E.spite){if(win===S&&w!==S){if(typeof ghenUp==="function")ghenUp(w,E.ghen,"thấy ngươi thắng trước mặt mọi người",S)}else oanAdd(w,win,E.oan);env.push(w)}
   pmMem(w,win,"pmsaw",x.n)}
  if(win!==S&&lose!==S&&!L.includes(S)){try{newsAdd(win,"pmwin",`${win.name} thắng ${lose.name} một ván ${x.n} trước mặt ${L.length} người`)}catch(e){}}

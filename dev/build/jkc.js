@@ -532,7 +532,7 @@ function kcPhucD(){const k=kcBestArt();const A=ARTS.find(a=>a.k===k);return{who:
 function kcPhucPlay(k,skip){if(!isKc()||!S.kc.tt||S.kc.tt.done)return;/* r2-r1: a stale Phúc tuyển card answered after the round never opens the mini-game */S.kc.tt.play=1;const fin=raw=>{if(S.kc.tt.done)return;S.kc.tt.done=1;S.kc.tt.raw=raw;S.kc.tt.art=k;pushDil(mkP("kcE",{e:"dien"}),"Điện tuyển");try{showModal()}catch(e){}};
  if(skip||window.__bot||typeof playArt!=="function"){fin(skip?entSkipRaw():entBotRaw());return}/* fix: the ONE exam seam (jkc2 kc2Play contract) — kind = origin key, info.art = the art she offered, info.phuc = this is the tiểu thư Phúc tuyển */
  if(typeof window.kcEntryExam==="function"){try{window.kcEntryExam(S.origin&&S.origin.k,raw=>fin(raw),{art:k,origin:S.origin&&S.origin.k,title:"Phúc tuyển",note:"Điểm màn chơi cộng vào Điện tuyển",phuc:1});return}catch(e){console.error(e)}}
- try{playArt({art:k,occ:"tuyen",title:"Phúc tuyển",note:"Điểm màn chơi cộng vào Điện tuyển",quick:{n:"Để tài nghệ quyết định",sub:`tính ${entSkipRaw()}/10, như người cùng bậc`},onDone:(raw,o)=>fin(o&&o.skipped?entSkipRaw():raw)})}catch(e){console.error(e);fin(entSkipRaw())}}
+ try{playArt({art:k,occ:"tuyen",title:"Phúc tuyển",note:"Điểm màn chơi cộng vào Điện tuyển",quick:{n:"Để tài nghệ quyết định",sub:`tính ${entSkipRaw()}/10, tự thi giỏi thì hơn`},onDone:(raw,o)=>fin(o&&o.skipped?entSkipRaw():raw)})}catch(e){console.error(e);fin(entSkipRaw())}}
 /* review/podium-wire (OR09): the Phúc tuyển of the thứ muội + khuê hữu. Each girl is a real record with her OWN marks (law 6b), drawn once
    from her own stats through BAL.entry.phuc (ONE CORE), kept on the record and read again by kcEnter (Điện tuyển). */
 function kcRivalsTT(){return((S.kc&&S.kc.fam)||[]).filter(x=>x&&x.alive&&(x.r==="muoi"||/^ban/.test(x.r)))}
@@ -543,7 +543,7 @@ function kcPhucMark(m){const P=BAL.entry.phuc;if(m.praw==null){const r=(Math.ran
  if(m.pduc==null)m.pduc=P.duc[0]+R(P.duc[1]);if(m.ppow==null)m.ppow=m.r==="muoi"?null:P.pow[0]+R(P.pow[1]);return m.praw}
 /* law 1 two-way: a thứ muội who holds a grudge does to her what she can do to the thứ muội (Ngáng chân) — once, in the Phúc tuyển week */
 function kcFoulBack(){const F=BAL.entry.phuc.foul;const mu=kcRivalsTT().find(x=>x.r==="muoi");if(!mu||S.kc.tt.foul!=null)return null;S.kc.tt.foul=0;
- if((mu.oan||0)<F.oan||!roll(F.od+(mu.oan||0)/F.oanDiv))return null;S.kc.tt.foul=1;S.sac=Math.max(0,S.sac-F.sac);S.danh=Math.max(0,S.danh-F.danh);
+ if((mu.oan||0)<netTh(mu,"oan")||!roll(F.od+(mu.oan||0)/F.oanDiv))return null;S.kc.tt.foul=1;S.sac=Math.max(0,S.sac-F.sac);S.danh=Math.max(0,S.danh-F.danh);
  log(`Phúc tuyển: ${mu.name} lén đổi hộp phấn, giấu trâm của ngươi. Sắc -${F.sac} · Danh -${F.danh}.`);return mu}
 /* the ONE podium result: her mark + each girl's mark, places by mark (tie: higher Sắc, then her) — stored in S.kc.tt.pod, read by every place */
 function kcPhucPod(){const T=S.kc.tt;if(T.pod)return T.pod;const L=[{id:"me",raw:T.raw,sac:S.sac}].concat(kcRivalsTT().map(m=>({id:m.id,raw:kcPhucMark(m),sac:m.sac||0})));
