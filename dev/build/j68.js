@@ -160,9 +160,16 @@ function evGate(dry){if(!S||S.dead||window.__e68off||!Q.length)return;const sc=e
  const m=Q[0];if(m&&m!==EVLAST&&evOptional(m)){const K=evKeys(m);sc.tpl[K.tpl]=now;sc.key[K.key]=now;sc.last=evActorKey(m);sc.bk=b;sc.dn++;try{evHistMark(K.tpl)}catch(e){}}
  if(m)m.__seen=1;EVLAST=m||null}
 /* release one held event at a later buổi, at random, if nothing else is up */
-function evRelease(){if(!S||S.dead||Q.length||S.mg||!EVHOLD.length)return;const sc=evS();const now=wk();EVHOLD=EVHOLD.filter(h=>{if(now-h.at>E68S.stale){evDropInfo(h.m);return false}return true});
+/* flight-e68-season (law 11, held / pending cards): a j68 card is drawn only while its template fits (w(ctx) > 0: month / season / fest / rank
+   needs, j68c needs.month …) but it can wait — EVHOLD up to E68S.stale tuần, or the pending P of a save rebuilt by deserQ — and the month can
+   turn meanwhile: a winter seed (j68c-sea-023, lò sưởi) came out in tháng 2 under a spring opener («Gió xuân lùa…»). On release / rebuild the
+   template must still fit, else the card is dropped like a stale hold. */
+function e68Fits(m){try{const id=m&&typeof m.pid==="string"&&/^e68/.test(m.pid)?m.pid.slice(3):null;if(!id)return true;const s=E68I[id];if(!s||typeof s.w!=="function")return true;return s.w(e68Ctx())>0}catch(e){return true}}
+function evRelease(){if(!S||S.dead||Q.length||S.mg||!EVHOLD.length)return;const sc=evS();const now=wk();EVHOLD=EVHOLD.filter(h=>{if(now-h.at>E68S.stale||!e68Fits(h.m)){evDropInfo(h.m);return false}return true});
  if(!EVHOLD.length||sc.bk===bk6()||(sc.day===now&&sc.dn>=E68S.day)||!roll(65))return;const h=EVHOLD.shift();h.m.__held=1;Q.push(h.m);showModal()}
 (function(){const s0=showModal;showModal=function(){try{evGate()}catch(x){console.error(x)}return s0.apply(this,arguments)}})();
+/* flight-e68-season: a pending j68 card rebuilt from a save (deserQ) must still fit its template now (else dropped, as a stale hold) */
+(function(){if(typeof deserQ!=="function")return;const d0=deserQ;deserQ=function(){const r=d0.apply(this,arguments);try{return Array.isArray(r)?r.filter(m=>e68Fits(m)):r}catch(e){return r}}})();
 /* review/night-ledger-coop-r4 (LAW 11, every store that keeps a card OUTSIDE Q; scan in reports/night-ledger.md «FIX r4»): a held optional
    card (EVHOLD) is page memory that holds the people of the world it was made in. When the world is rebuilt in place (co-op week merge, join,
    rejoin, room level change, snapshot restore: all through deser), it is made again from its data against the new world (pid → mkP,
