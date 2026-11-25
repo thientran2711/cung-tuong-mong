@@ -3384,3 +3384,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (06:50Z) via 134: OWNER BUGS OD ~06:55Z (Tống ma ma in every Lời dặn → only when her business; worker MAMA-ONLY-OWN session_01V1ZZH4XVMNDnbrc8aMyv9D, reports to 135) + OD ~07:00Z (focus-view figure = stage size/spot 1:1 → KK26 TOP before kit-mg-realtap; needs B KIT OK). Both → MAIN LOOK → GO LC13.
 - (07:06Z) OWNER shared FB post (another game, yêu phi ending) → OD row + PARKING_LOT #14 (sủng phi shield road + abdication ending); 135 told.
 - (06:50Z) SELSCENE-18 LAND READY 9ee4f5bc BIG (co-op sid unique, sid-unique.js) → NEW BIG rv opus session_01V1ZZH1uRsuJLYqG34jcUBM (merge on ee37ab5f → «BIG PASS <sha>»). PARKING #14 yêu phi road (via 134).
+- (06:52Z) DELEGATE-NOMG-2 LAND READY 71e150b4 (70ae8c73 + LIVE merge + n3 ask-someone family no mini-game) → rv 22tLFisY reviews 71e150b4 → LC13 lands it instead of its own 70ae8c73 merge.
