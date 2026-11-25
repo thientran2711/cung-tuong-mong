@@ -6,7 +6,7 @@ usage: python3 dev/test/j68seeds_validate.py [files…] [--min] [--fams day,visi
 Checks: id unique (j68c-<fam>-…), type open|comp, fam; open: a kind, text 1 line, placeholders {A}{M}{S}{W}{P} ({A} only when a≠any), needs.month only;
 comp: tag K|D + src, tone, tier, roles A/B (kind, nết/lòng only for rv/sv, names in BAL.net F/M, need known and allowed for the kind), text,
 object null or {name,owner A|B|me|kho,clue,trace} (law 6c), exactly 4 stances {text,gain,loss[,trace]} with Σgain == Σloss == tier steps (s1 m2 l3),
-gain ≥1 and loss ≥1 (laws 2/3), keys = her stats + rel.A/rel.B (rel.B only with role B; no rel for emp/th; no 'an' in loss), no key both sides;
+gain ≥1 and loss ≥1 (laws 2/3), ≥1 stance without bạc loss (law 2, no dead card), keys = her stats + rel.A/rel.B (rel.B only with role B; no rel for emp/th; no 'an' in loss), no key both sides;
 outcomes for the same 4 ids; placeholders {A}{B}{M}{O}{S}{W}{P} only ({B} needs B, {O} needs object, {A} needs A); every opener-joinable comp of a
 family with role A kind K has ≥1 opener a=K or any (warn); VANPHONG scan (no %, digits, odds words, modern words); no comp text ≈ an old j68 wording."""
 import json,re,sys,os,glob,difflib
@@ -147,6 +147,7 @@ for r in rows:
             else:phs(i,s["trace"],allowed-{"O"},f"stance {sid}.trace")
         for x in s:
             if x not in("text","gain","loss","trace"):err(f"{i} stance {sid} unknown field {x}")
+    if st and all("bac" in ((s or {}).get("loss") or {}) for s in st.values()):err(f"{i} every stance loses bạc: a bạc-free road must exist (law 2; at low bạc every option greys and the card has no way out = soft-lock, flight-modal-deadlock 25/11)")
     oc=r.get("outcomes") or {}
     if set(oc)!=set(st):err(f"{i} outcomes ids must equal stance ids")
     for k,v in oc.items():phs(i,v,allowed,f"outcome {k}")
