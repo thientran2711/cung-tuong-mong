@@ -565,3 +565,4 @@ LAND READY waiting LC14: d-followups-1-rv cc4fed89 · law1-gifts-rv 99faeb2b · 
 AUDIT D: 110 / 48 valid / 62 rerun (reports/robot-audit-D.md). Rates rebuild from valid lives when reruns end.
 ART: D8 session_01D3E3NYVxDQJ9mC1H8jFXgG = owner art tests (idle when she sleeps). Face batch DRAFT briefs/D-face-rosy-upright-02-mass.md — launch ONLY on her «chạy»; rebuild from face-master03/style07-notext/D_NOTE.md (style master n01 YMSDsAaWeC, CORR02 + jet-black/ink line; old-age wording unapproved; roster 91).
 STANDBY: session_01D3E3Na4WaA2w77G38gsY8w (root standby; acts only on TAKE OVER NOW).
+- (25/11 09:25Z) D ROOT ROLLED OVER → **FOREMAN D (depth 1) = session_01D3E3NXtegKzeWTw3Dz2tR2**. ROOT hourly wake deleted; child tells every seat once and makes its own wake. ROOT stops.
