@@ -1975,7 +1975,7 @@ BAL.dc={on:1,
    Law 2 (review r1): writeBac 5→15, askAf 3→1 — writing (af +, a letter item Sức+10/Đức+2, true intel) dominated asking (af −, one gift item worth 6–30 bạc).
    title = «Khuê các» titles: tier, rare tier, quyRank (Quý nhân), carry (worn again in later lives). */
 BAL.kcg={fest:{top:8,ok:5,danh:[4,2,1],skip:5,bot:[3,6],sisP:50,sis:[3,1]},vpSac:80,vpRare:.4,
- carry:{cap:0,ldOld:40,dad:{mid:50,k:.3},danhK:.6,danhMax:30,bacMax:400,sung:[8,5]},
+ carry:{cap:0,ldOld:40,rel:{af:.5,me:.5,oan:1}/* ob-phu: sister / khuê hữu who pass tuyển tú → consort: share of af (them→her), me (her→them), Oán carried (af .5 = the old typed /2) */,dad:{mid:50,k:.3},danhK:.6,danhMax:30,bacMax:400,sung:[8,5]},
  home:{p:8,mid:50,khac:1,pk:.2,giftShare:30,writeO:70,giftO:60,k:.3,writeBac:15,writeAf:4,lostDanh:1,askAf:1,know:2,keep:12,gifts:["tuithom","luahang","huongtram","khantay"]},
  ld:{p:6,own:{danh:4,duc:2},witBac:10,witO:55,witFoe:4,witOan:6,witLose:6,wait:{danh:2,tamco:1}},
  title:{tier:4,rare:6,quyRank:2,carry:1}};
