@@ -108,7 +108,12 @@ function dqInstall(){
   /* a scene posted inside a tap waits one pump (kmPump retries in 250 ms): the tap may be opening an activity (her «Điểm trang» tap spends the
      khắc first, then opens the mirror) — a scene of the khắc never starts before / under that screen */
   const ev=window.event;if(ev&&/click|pointer|touch|key|mouse/.test(ev.type)&&!DQ.kmTap){DQ.kmTap=1;setTimeout(()=>{DQ.kmTap=0},0);DQ.stat.actKm++;return false}}}catch(e){}
- try{if(DQ.newsHold){if(dqUi()&&Q.some(dqIsNews)){DQ.stat.kmHeld++;return false}DQ.newsHold=0}}catch(e){}return true}})();
+ /* button-crawl-fix-8 (robot s9 replay, LIVE + fix-6: «Sang ngày mới» dead ~80 s at the end of tối, Q = 1 «Tin trong cung», nothing on screen):
+    the hold is for the MORNING of the new day only (the first buổi, right after the book). A newsHold set at dawn and never released (no motion
+    scene that day) still held at night: «Sang ngày mới» queued the night flip scene (jflip kmPush) while j9 mckMorning had put a «Tin trong cung»
+    card in Q → the flip waited for the news card, and jnf held every card (the news too) until the flip scene had played = deadlock until
+    jflip's cfDrop after BAL.steal.choice.waitMs. Any later buổi releases the hold. */
+ try{if(DQ.newsHold){if(dqUi()&&(S.buoi||0)===0&&Q.some(dqIsNews)){DQ.stat.kmHeld++;return false}DQ.newsHold=0}}catch(e){}return true}})();
 (function(){if(typeof dawn!=="function")return;const d0=dawn;dawn=function(){try{if(dqUi())DQ.newsHold=1}catch(e){}return d0.apply(this,arguments)}})();
 /* a new life / a loaded slot drops what the old one held — but a card already HELD for an activity (dqArmModal armed) is not dropped with it: the
    reset removes the scene / podium, so the held card is painted at the next tick (else it stayed hidden in Q for ever and the turn never came) */
