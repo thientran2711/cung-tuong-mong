@@ -1600,3 +1600,5 @@ TAINGHE-OPEN-FIX (Tài nghệ pop-up hidden at buổi 3; LIVE bug; opus) | revie
 robot-coop-fix-3-r4 finish gates | review/robot-coop-fix-3-r4 | session_01N1tNP4P7Kdk8Vh2qUtb1je | RUNNING | 25/11 01:34Z (FOREMAN B child7)
 | COUNT-1 (owner 25/11: count every job done/not done + robot status + flight readiness; sonnet, read-only; briefs/main131-count.md) | reports/count-1.md | MAIN 131 | session_01V1ZZH4ot5qcwHKPHBdb5T8 | RUNNING | 25/11 01:50Z |
 | MAP-MARKER (owner bug 24/11 ~22:00Z: her «ta đang ở đây» marker hidden behind plaques; kit fix whole family) | review/kit-map-marker | MAIN 131 → KK25 | session_01V1ZZH1g2TqJvVcJiKLux8Z | RUNNING | 25/11 02:14Z |
+KK25 kit batch SEAT 1 (fitfast-r3, ring5/woodskin) | review/kit-fitfast-r3, review/kit-ring5 | session_01N1tNP6eJB8HCBbK9nnNgvC | RUNNING | 25/11 01:42Z (FOREMAN B child7)
+KK25 kit batch SEAT 2 (optinfo-r2, mg-intro-r2) | review/kit-optinfo-r2, review/kit-mg-intro-r2 | session_01N1tNP2uMgHHxyaNrXA1VZC | RUNNING | 25/11 01:42Z (FOREMAN B child7)
