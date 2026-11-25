@@ -2094,7 +2094,7 @@ BAL.j68c={on:true,w:{def:.35},seen:.15,cd:999,obKeep:60,rumorTag:" <i>(Lời đ�
      m:{sung:3,danh:3,bac:40,suc:8,mat:1,th:4,hh:4,duc:3,tamco:2,an:2,rel:6},
      l:{sung:5,danh:5,bac:60,suc:12,mat:2,th:6,hh:6,duc:5,tamco:3,an:3,rel:9}},
  need:{poor:30}};
-/* NO HARD LOCK (review/hardlock-choice, laws 2 + 3 + 4; jnolock.js): when every road of a choice card is held back and the card has no ✕,
+/* NO DEAD CARD (review/hardlock-choice r3, laws 2 + 3 + 4; jnolock.js = the one owner): when every road of a choice card is held back and the card has no ✕,
    each road held back ONLY by bạc is offered paid with an EQUAL value of her other means: her whole purse, the rest priced in Sức by the
    ONE bạc→Sức rule altCost (jstory: BAL.bacTuan + BAL.altK; floor = least Sức such a swap ever costs), taken in sub[] order;
    of[k] = how many points of k ONE Sức is worth = the j68c step table (one Sức step == one step of k, tier m);

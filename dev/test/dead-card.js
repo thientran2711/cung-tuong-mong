@@ -1,8 +1,10 @@
 /* DEAD-CARD regression test (flight-modal-deadlock 25/11, law 11). Part 1 scan: every #modal option card the game can build — is there a state where ALL its options are disabled
    and no cancel exists (no ✕ / Esc / tap-out) = deadlock? Builds every PEND builder (E68 templates incl. composed j68c via pp, j7 EV via pp, other PEND via {})
    at bạc 0 and ranks 0/3/6, and counts cards whose every option is greyed (c.off / poor bạc / lk() / lock).
-   Part 2: j68c-sea-023 / j68c-serv-022 at bạc 2 keep ≥1 option she can press; Part 3: the jdeadcard net — a synthetic all-greyed card shows
-   the kit «Lui» button, pressing it closes the card (no soft-lock). Exit 1 on any failure.
+   Part 2: j68c-sea-023 / j68c-serv-022 at bạc 2 keep ≥1 option she can press; Part 3: the ONE no-dead-card net (jnolock; jdeadcard merged into it,
+   hardlock-choice r3 25/11, law 14) — a synthetic all-bạc card at bạc 2: (3a) with Sức to spare its roads open, paid in Sức (no leave);
+   (3b) nothing to pay with → the kit ✕ «Lui» (the card's cancel road, open card and forced card alike), pressing it closes the card, nothing
+   paid, logged in window.__deadCards (no soft-lock). Exit 1 on any failure.
    Parts 2/3 open the card as a player tap would (DQ.user, jdayq day-queue 25/11: otherwise a fresh life's dawn / activity holds the card unpainted).
    usage: node dev/test/dead-card.js <page url> [out.json]   (serve the repo root, e.g. python3 -m http.server) */
 const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT]=process.argv;
@@ -31,7 +33,14 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT]=
  const P2=await p.evaluate(()=>{window.__e68off=1;const SM=()=>{const D=typeof DQ!=='undefined'?DQ:null;if(D)D.user=(D.user||0)+1;try{showModal()}finally{if(D)D.user--}};const out={};S.bac=2;S.month=12;for(const id of ['j68c-sea-023','j68c-serv-022']){const s=E68I['c:'+id];let d=null;for(let t=0;t<6&&!d;t++){let pp=null;try{pp=s.pp()}catch(e){}if(pp){pp.vi=0;d=mkP('e68c:'+id,pp)}}
   if(!d){out[id]='not cast';continue}Q.length=0;Q.push({t:'Thời tiết',h:d.t,opts:d.o,pid:d.pid,pp:d.pp});SM();const B=[...document.querySelectorAll('#modal .opts button[data-m]')];out[id]=B.filter(b=>!b.disabled).length+'/'+B.length;Q.length=0;SM()}return out});
  for(const [k,v] of Object.entries(P2)){console.log('part2',k,'pressable',v);if(v!=='not cast'&&/^0\//.test(v))fail++}
- const P3=await p.evaluate(()=>{const SM=()=>{const D=typeof DQ!=='undefined'?DQ:null;if(D)D.user=(D.user||0)+1;try{showModal()}finally{if(D)D.user--}};S.bac=2;Q.length=0;Q.push({t:'Thử',h:'<p>thử</p>',opts:[{n:'Trả bạc',fx:{bac:-60}},{n:'Trả bạc nữa',fx:{bac:-60}}]});SM();
-  const c=document.getElementById('mclose');const r={lui:c?c.textContent:null,net:(window.__deadCards||[]).length};if(c)c.click();r.after=Q.length;r.hidden=document.getElementById('modal').hidden;return r});
- console.log('part3',JSON.stringify(P3));if(P3.lui!=='Lui'||P3.after!==0)fail++;
+ const P3=await p.evaluate(()=>{const SM=()=>{const D=typeof DQ!=='undefined'?DQ:null;if(D)D.user=(D.user||0)+1;try{showModal()}finally{if(D)D.user--}};const out={};
+  const card=f=>({t:'Thử',h:'<p>thử</p>',mustChoose:f,opts:[{n:'Trả bạc',fx:{bac:-60}},{n:'Trả bạc nữa',fx:{bac:-60}}]});
+  S.bac=2;S.suc=60;S.danh=30;Q.length=0;Q.push(card(0));SM();{const m=Q[0];const B=[...document.querySelectorAll('#modal .opts button[data-m]')];
+   out.a={open:B.filter(b=>!b.disabled&&!b.hidden).length,leave:m.opts.some(c=>c.__nlAdd),paid:m.opts.filter(c=>c.__nl).length}}
+  for(const f of [0,1]){S.bac=2;S.suc=1;S.danh=0;Q.length=0;Q.push(card(f));const n0=(window.__deadCards||[]).length;SM();const m=Q[0];const lv=m.opts.find(c=>c.__nlAdd);
+   const B=[...document.querySelectorAll('#modal .opts button[data-m]')];const r={lui:lv?lv.n:null,x:!!kitModalCloser(),open:B.filter(b=>!b.disabled&&!b.hidden).length,net:(window.__deadCards||[]).length-n0};
+   kitModalClose();r.after=Q.length;r.hidden=document.getElementById('modal').hidden;r.bac=S.bac;out[f?'forced':'open']=r}
+  Q.length=0;SM();return out});
+ console.log('part3',JSON.stringify(P3));if(!(P3.a.open===2&&!P3.a.leave&&P3.a.paid===2))fail++;
+ for(const k of ['open','forced']){const r=P3[k];if(!(r.lui==='Lui'&&r.x&&r.open===0&&r.net===1&&r.after===0&&r.bac===2))fail++}
  if(OUT)fs.writeFileSync(OUT,JSON.stringify(Object.assign(R,{P2,P3}),null,1));console.log(fail?'DEAD-CARD FAIL '+fail:'DEAD-CARD PASS');await b.close();process.exit(fail?1:0)})();
