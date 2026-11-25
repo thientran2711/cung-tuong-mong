@@ -12,7 +12,7 @@ Rows: U3 pair 3 (host kiếp 1,3–10; guest kiếp 1,3–12,14–17). Rule now 
 | S1 | QWGM | 40 | Fold/iPad | c4163a93 | 5edf09f6+B+U3 | INVALID stuck week 2 night (cause 3, known-fixed-pending-land) u3r/QWGM @b27d5585 |
 | S2 | T6BR | 41 | Fold/iPad | c4163a93 | same | INVALID stuck week 2 night (same) u3r/T6BR @dd6abff8 |
 | S3 | 7S44 | 42 | Fold/iPad | stack 512cfee6 | same | INVALID stuck year 1 m4 w3: «Bị châm chọc» + «Thang cơ duyên» popup (known harness, fixed in shared patch) u3r/7S44 @be307c0a |
-| S4 | (room 15, seed 43) | 43 | Fold/iPad | stack 512cfee6 | 5edf09f6 + shared patch 3f4ceacd + U3 RELOAD_AT=20,45 | RUNNING (started 12:34Z, seg close at 120 min or year 2) |
+| S4 | room 15 (code not recorded) | 43 | Fold/iPad | stack 512cfee6 (pre-land, accepted MAIN 140) | 5edf09f6 + shared patch 3f4ceacd + U3 RELOAD_AT=20,45 | RUNNING, cut at 12:50Z by roll-over (not finished, NOT valid): 16 min in, buổi ~20 year 1, 0 stuck, 0 dead buttons, popup-close taps 4; host reload fired at buổi 20 (RELOAD line), rejoin result not yet read; container will be archived → room lost. Successor U3c restarts at seed 44. |
 Valid segments U3: 0 so far.
 
 ## Bugs / findings (all reported to Foreman B)
