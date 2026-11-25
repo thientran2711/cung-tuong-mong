@@ -102,6 +102,8 @@ function chanceLo(n){return chanceLvl(n).toLowerCase()}
 function chanceW(n){return n<=0?"không có khả năng":"khả năng "+chanceLo(n)}
 const CHW=/khả năng (rất thấp|thấp|vừa|cao|rất cao)|không có khả năng/;
 function cl(v,a,b){return Math.max(a,Math.min(b,v))}
+/* ONE CORE (robot-coop-fix-2 r2): a person's number kept in ITS range, BAL.personRange.stat (jbalpr.js; same table as the co-op Worker merge) */
+function prCl(k,v){const r=BAL.personRange.stat[k];if(!r)return v;return Math.max(r[0]==null?-Infinity:r[0],Math.min(r[1]==null?Infinity:r[1],v))}
 /* ODDS CAP (owner 17/11 ~17:00Z + 17:35Z "Trần 95%, việc chắc ăn mà hỏng thì chỉ hỏng nhẹ"): nothing rolled is ever sure. ONE cap in BAL:
    BAL.odds.lo / hi (5 / 95). roll(o) = THE roll every chance in the game uses (hers and NPCs'): it never passes above hi. oddsCl(o) = an act's
    odds clamped to [lo, hi] (odA and every act odds). An act that used to be sure (o 100 or no o) now rolls at the cap (oddsOf) and fails
@@ -171,12 +173,11 @@ function apply(o){const pops=[];
   for(const k in o){let v=o[k];if(!v)continue;
     if(k==="maid"){S.maid.loyal=cl(S.maid.loyal+v,0,100);pops.push([k,v]);continue}
     if(k==="sung")v=sg(v);S[k]=(S[k]||0)+v;if(NAMES[k])pops.push([k,v])}
-  for(const k of ["sung","danh","suc","sac","tai","tamco","duc"])S[k]=cl(S[k],0,100);S.suc=Math.min(S.suc,sucCap(S));
-  S.th=cl(S.th,-100,100);S.hh=cl(S.hh,-100,100);S.bac=Math.max(0,S.bac);/* 2f2: mat = the real list (jagknow tmInstall), no clamp */
+  for(const k of BAL.personRange.core)if(S[k]!=null||k==="th"||k==="hh"||k==="bac")S[k]=prCl(k,S[k]);S.suc=Math.min(S.suc,sucCap(S));/* ONE CORE: BAL.personRange (jbalpr.js) *//* 2f2: mat = the real list (jagknow tmInstall), no clamp */
   if(!quiet)pops.forEach(([k,v],i)=>popNum(k,v,i))}
 /* fix-kframe-heir (LAW 11, robot10 «Danh 101»): a direct write to a person's 0..100 stat outside apply / ap goes through the SAME clamp they use
    (0..100, Sức also under sucCap; Thân / Hận −100..100); returns the value really set. dev/test/scan-stat-clamp.py lists every write. */
-function statSet(p,k,v){if(["sung","danh","suc","sac","tai","tamco","duc","ghen","an"].includes(k))v=cl(v,0,100);else if(k==="th"||k==="hh")v=cl(v,-100,100);p[k]=v;if(k==="suc"&&typeof sucCap==="function")p.suc=Math.min(p.suc,sucCap(p));return p[k]}
+function statSet(p,k,v){if(BAL.personRange.core.includes(k))v=prCl(k,v);/* ONE CORE: BAL.personRange (jbalpr.js) */p[k]=v;if(k==="suc"&&typeof sucCap==="function")p.suc=Math.min(p.suc,sucCap(p));return p[k]}
 /* the screen of THIS phone (effects, scenes, sounds, floaters): off for bots, quiet code paths, and while a co-op host runs the other seat's
    turn (COOPW.ctx). coop-thin F2 r2: her intents run on the host with quiet off (her cards reach her through her Q, her floaters / effects are
    captured and play on HER phone, jcoopthin uiCap); every screen gate reads this ONE rule, so nothing of hers draws on the host's screen */
