@@ -13,7 +13,7 @@ for ln in open(sys.argv[1],encoding='utf8'):
   cards+=1
   items=" ".join(" ".join(x['items']) for x in kr.get('rows',[]))
   toast=res.get('toast','');kem=toast.split('Kèm',1)[1] if 'Kèm' in toast else ''
-  txt=items+" "+kem
+  txt=items+" "+kem+" "+" ".join(kr.get('kem') or [])
   for k,(a,b) in (r.get('d') or {}).items():
     if SKIP.match(k) or a==b: continue
     if isinstance(a,(int,float)) and isinstance(b,(int,float)) and round(b-a)==0: continue
