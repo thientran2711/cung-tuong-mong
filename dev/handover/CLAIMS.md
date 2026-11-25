@@ -1771,3 +1771,4 @@ B SMALL rv pcport-rk-r2 1fbae7c6 | review/pcport-rk-r2 | B | session_01N1tNP4RNj
 B FIXER save-unseen-lists r3 (tests gate) | review/save-unseen-lists | B | session_01N1tNP5rythg4fywKyPfyTV | RUNNING | 25/11 15:32Z |
 kitHand Bàn bài | review/kit-hand | session_01V1ZZH24dkpdw8LeZYiyfQf | RUNNING | 2026-11-25T15:52Z
 coop-rebirth-stuck | review/coop-rebirth-stuck | session_01D3E3NahMdBiqkSMSUWYn5q | RUNNING | 2026-11-25 16:11Z (Foreman D)
+coop-rebirth-stuck (T3b, successor of T3) | review/coop-rebirth-stuck | session_01D3E3NXhw1QM9BKQKRBbX1C | RUNNING | 2026-11-25 16:33Z (Foreman D)
