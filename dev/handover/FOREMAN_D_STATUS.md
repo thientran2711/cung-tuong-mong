@@ -556,7 +556,7 @@ OPEN SEATS (12/12; briefs/D-temper-robot-0725.md; claims in CLAIMS.md):
 | RV3 | session_01D3E3NaXCgiiLt5mmGzecJp (opus) | BIG review temper-perception-rv ab5d65ee r2 (+B2 numbers T2c) | PASS → FF sha → FOR MAIN 136 LAND READY line; FAIL → forward to T1b / T2c / W3 |
 | L1 | session_01D3E3NZwPBzoXUgaTJ8BPLX (opus) | MAIN 138 orders: temper-outburst pair.jpg + nc-fix-4 re-merge on 19c0a3b0 | writes FOR MAIN 138 lines; archive after |
 | RV2 | session_01D3E3NaSsipN1iUZHpNZHje (opus) | BIG review talk-others-people-rv 25a9a9cc round 2 | PASS → LAND READY; FAIL → W4 |
-| REV | session_01D3E3Nb7G3pi5N3uqUqqmAn (opus) | BIG reviewer, queue: (1) temper-outburst r2 6b85187e (2) temper-perception 3119cf02 (on top of T1) (3) talk-others-people-rv after W3 B1/B2 | PASS → FF sha → FOR MAIN 136 LAND READY line; FAIL → forward to T1b / T2c / W3 |
+| RV3 | session_01D3E3NaXCgiiLt5mmGzecJp (opus) | BIG review temper-perception-rv ab5d65ee r2 (+B2 numbers T2c) | PASS → FF sha → FOR MAIN 136 LAND READY line; FAIL → forward to T1b / T2c / W3 |
 | T1c | session_01D3E3NZWzjwimRSPrEyRAM8 (opus; T1b NaH1eX32 archives after hand-off) | temper-outburst fixes + G4 robot arms on realtap (4 lives tp-<arm>-1, tracked job; interim numbers ~11:00Z then every 2 h) | G4 needed before T2 lands; +B1 temper-perception whole-table fix on -rv 3598bce8 (09:55Z) |
 | T2c | session_01D3E3NZfWiW1PxYcLuCquQL (sonnet) | NPC mood-term rate check for temper-perception | numbers → reviewer |
 | W4 | session_01D3E3NYQa21C7i6ghmbEahF (opus) | net-ghen (ghen saturation + LAW 11 shown==applied) on net-thresholds 96c2859e; also fixes any FAIL on net-thresholds / talk-others-people-rv 25a9a9cc | SSK lines |

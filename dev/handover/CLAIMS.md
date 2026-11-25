@@ -1732,3 +1732,4 @@ rv talk-others-people r2 | review/talk-others-people-rv | session_01D3E3NaSsipN1
 BIG rv robot-coop-fix-7 | review/robot-coop-fix-7 4a62e4d9 | session_01N1tNP2DEvrn63HHg5eMcAz (FOREMAN B) | RUNNING | 2026-11-25T10:44Z
 | F BIG REVIEWER #4 (opus; successor of BIG REVIEWER #3 session_01UV1Szk4zpF7PEfrXMmy9L8 — blocked: local http server denied; queue button-crawl-fix-3 6b401cfc → harness bfe29c95..93812531; briefs/F-bigrev4-2511.md) | review/*-r | FOREMAN F #8 for F #10 | session_01UV1Szh4xkQ1qFN3jffTKyr | RUNNING | 2026-11-25T10:45Z |
 SAVE-YEAR-ROLLBACK (whole family: every time-advance path persists the save) | review/save-year-rollback | session_01N1tNP37vyD6UhgHmsLgow9 (FOREMAN B) | RUNNING | 2026-11-25T10:58Z
+rv temper-perception r2 | review/temper-perception-rv | session_01D3E3NaXCgiiLt5mmGzecJp | RUNNING | 2026-11-25T10:46Z (Foreman D)
