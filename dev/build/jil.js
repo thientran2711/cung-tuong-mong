@@ -16,6 +16,34 @@
 /* S.il.at (the last census) is NOT saved (non-enumerable: ser() and the co-op canon skip it); a loaded save takes a fresh census — save size bounded (reviewer r1) */
 function ilS(){if(!S.il||typeof S.il!=="object")S.il={};const I=S.il;I.seq=I.seq||0;I.log=I.log||[];I.box=I.box||[];I.net=I.net||0;
  const d=Object.getOwnPropertyDescriptor(I,"at");if(!d||d.enumerable)Object.defineProperty(I,"at",{value:(d&&d.value)||null,writable:true,enumerable:false,configurable:true});return I}
+/* robot10 E-FIX-3 (E round 1 R1 «save exceeded the quota» at year 17; nc-B save = 4.97 M chars at year 14, S.il.box 2.08 M = 15 808 «kho» pieces):
+   allotment CONSUMABLES (candles, hair oil, son phấn boxes) piled up in the Nội vụ phủ store one record each. Law 6c (every piece traceable, a piece
+   with uses left never dropped), two cases:
+   (1) USED UP (a candle burnt, hair oil / a son phấn box spent to its last use): the spender marks it ilUsedUp(e,p) before taking it out, so no
+       guard routes it to the store and the census never «nets» it; the ledger keeps the count: S.il.used[owner][item] (like tea / medicine /
+       charcoal, IL_USED_KD, but counted).
+   (2) RETURNED WITH USES LEFT (an NPC's or a servant's surplus beyond the keep: unburnt candles, oil with lượt left): Nội vụ phủ takes them back
+       into its COUNTED stock S.il.stock[item(.lượt)] (fungible goods, one number per kind, not one record per piece) and hands them out again
+       first when it issues that item to an NPC (ilStockTake in jstip). The stock is real and findable (law 6c), and the save stays small. */
+const IL_USED=new Set();
+function ilEnd(e){try{Object.defineProperty(e,"used",{value:1,writable:true,enumerable:false,configurable:true})}catch(z){e.used=1}if(e.iu)IL_USED.add(e.iu)}
+function ilUsedUp(e,p,own){if(!e||typeof e!=="object"||!e.k)return;ilEnd(e);try{const I=ilS();I.used=I.used||{};const o=own!=null?String(own):ilKey(p)||"?";const m=I.used[o]=I.used[o]||{};m[e.k]=(m[e.k]||0)+1}catch(z){}}
+function ilStockKey(e){return e.k+(e.u>=0&&/^aldau/.test(e.k)?"."+e.u:"")}
+function ilStock(e,n,p){if(!e||typeof e!=="object"||!e.k)return;/* E-FIX-3 r4: an EMPTY bottle (0 lượt) is spent, not stock → counted used up for its holder */if(/^aldau/.test(e.k)&&e.u!=null&&!(e.u>0)){ilUsedUp(e,p,p?null:"kho");return}ilEnd(e);try{const I=ilS();I.stock=I.stock||{};const s=ilStockKey(e);I.stock[s]=(I.stock[s]||0)+(n||1)}catch(z){}}
+/* one FULL piece of item k out of the counted stock → the piece to issue, or null (mint a new one as before).
+   E-FIX-3 r4 (E81r r2 item 2, law 1: ONE rule for her and every NPC): an issue is always a full piece — a whole candle, a bottle with all its
+   lượt (BAL.allot.oil.uses) — exactly what her own monthly issue mints. Part-used bottles stay COUNTED in the stock (law 6c: real, findable),
+   never handed out as a month's share. */
+function ilStockTake(k){try{const I=ilS();const T=I.stock;if(!T)return null;const full=BAL.allot&&BAL.allot.oil&&BAL.allot.oil.uses;let best=null;for(const s in T){if(!(T[s]>0))continue;const [kk,u]=s.split(".");if(kk!==k)continue;if(u==null||(full>0&&+u>=full)){best=s;break}}
+ if(!best)return null;if(!--T[best])delete T[best];const e={k};const u=best.split(".")[1];if(u!=null)e.u=+u;return e}catch(z){return null}}
+window.ilUsedUp=ilUsedUp;window.ilStock=ilStock;window.ilStockTake=ilStockTake;
+/* old saves: an allotment consumable already sitting in the store as «kho» / «net» record (owner not her, or her spent remains) is moved to the
+   counted ledger once per loaded ledger: spent → S.il.used[owner] ; with uses left → S.il.stock. Her own pieces with uses left stay as records. */
+function ilOldStock(x){try{const e=x&&x.e;if(!e||x.at!=="nvp"||(x.why!=="kho"&&x.why!=="net")||x.dh)return 0;const al=typeof alOf==="function"&&alOf(e.k),lx=typeof lxOf==="function"&&lxOf(e.k);if(!al&&!lx)return 0;
+ const spent=x.why==="net"/* vanished without a route: every unguarded splice of these is a spend site (scan r10e-consume-scan) */||(lx||al.kind==="dau")&&!(e.u>0);
+ if(spent)return 1;return x.own==="me"||lx?0:2/* a son phấn box with lượt left keeps its record (colour, lượt) */}catch(z){return 0}}
+function ilOldMove(I){let used=0,stock=0;I.box=I.box.filter(x=>{const c=ilOldStock(x);if(!c)return true;if(c===1){ilUsedUp(x.e,null,x.own||"kho");used++}else{ilStock(x.e);stock++}if(x.e.iu&&I.at)delete I.at[x.e.iu];return false});
+ if(used||stock){I.conv=I.conv||[];I.conv.push([typeof wk==="function"?wk():0,used,stock])}return {used,stock}}
 function ilKey(p){return p===S?"me":(p&&p.id)||""}
 function ilP(k){if(k==="me")return S;try{return typeof RV==="function"?RV(k):null}catch(e){return null}}
 function ilAlive(p){return !!p&&(p===S?!S.dead:p.alive!==false)}
@@ -64,7 +92,7 @@ function ilLog(e,f,t,how){const I=ilS();I.log.push([typeof wk==="function"?wk():
 function ilRng(a){return a[0]+R(a[1]-a[0]+1)}
 /* ---- the ONE rule: where a piece goes when it leaves p's hands ---- */
 const IL_HOW={sell:"bán",pawn:"cầm cố quá hạn",conf:"bị tịch thu",evid:"tang vật",fix:"đem sửa",burn:"cháy, đem sửa",pil:"kẻ hầu bớt xén",lost:"thất lạc",maid:"tặng cung nữ",emp:"dâng Hoàng thượng",th:"dâng Thái hậu",dead:"di vật",kho:"trả Nội vụ phủ",net:"Nội vụ phủ nhặt được",demote:"thu khi giáng phẩm"};
-function ilGone(p,e,how,o){if(!e||typeof e!=="object"||!e.k)return null;if(ilAt(e))return null;{const f=ilToFriend(e);if(f){/* E44g T6: an NPC's piece that landed in her entry (a gift outside the host's diffed calls) goes to her seat (jcoopworld npcToFriend), logged from THAT giver */if(p&&p!==S&&typeof COOPW==="object"&&COOPW.npcToFriend)try{COOPW.npcToFriend(p,e,f)}catch(z){console.error(z)}ilSent(e,f,p);return null}}o=o||{};const I=ilS();const B=BAL.il;const own=o.own||ilKey(p);
+function ilGone(p,e,how,o){if(!e||typeof e!=="object"||!e.k)return null;if(e.used)return null;/* E-FIX-3: used up or counted into the stock (S.il.used / S.il.stock), not lost */if(ilAt(e))return null;{const f=ilToFriend(e);if(f){/* E44g T6: an NPC's piece that landed in her entry (a gift outside the host's diffed calls) goes to her seat (jcoopworld npcToFriend), logged from THAT giver */if(p&&p!==S&&typeof COOPW==="object"&&COOPW.npcToFriend)try{COOPW.npcToFriend(p,e,f)}catch(z){console.error(z)}ilSent(e,f,p);return null}}o=o||{};const I=ilS();const B=BAL.il;const own=o.own||ilKey(p);
  if(how!=="sell"&&how!=="pawn"&&!ilDur(e))return null;if((how==="sell"||how==="pawn")&&e.wk&&e.wk.p!=null)return null;
  if(how==="lost"&&p&&ilAlive(p)&&typeof loLoseE==="function"){const c=loLoseE(p,e,o.cause);if(c){ilUid(e);ilLog(e,own,"lo"+c.id,"thất lạc");return c}}
  for(const f of ["w","h","lo","gh","by"])if(how!=="lost")delete e[f];
@@ -104,16 +132,17 @@ function ilCensus(){if(!S)return;const I=ilS();const now={};const seen=new Set()
  for(const c of ilCases()){ilUid(c.e);seen.add(c.e.iu);now[c.e.iu]=[c.e.k,"lo"+c.id,0]}
  /* a gift on its way (a dialog still waiting for her answer) */
  try{for(const m of (typeof Q!=="undefined"?Q:[])){const e=m&&m.pp&&m.pp.e;if(e&&typeof e==="object"&&e.k&&e.iu){seen.add(e.iu);now[e.iu]=[e.k,"dlg",0]}}}catch(z){}
- if(I.at)for(const id in I.at){if(seen.has(+id))continue;const [k,h,wkf]=I.at[id];const e0={k,iu:+id};if(wkf||!ilDur(e0))continue;if(IL_DH.includes(k))continue;/* jdh2 census keeps one book + one seal per hiệu (drops copies, recreates a missing one) */if(ilCoop()&&h!=="me"&&!IL_BOXES.includes(h)&&!/^lo/.test(h))continue;
+ if(I.at)for(const id in I.at){if(seen.has(+id))continue;if(IL_USED.has(+id))continue;/* E-FIX-3: used up */const [k,h,wkf]=I.at[id];const e0={k,iu:+id};if(wkf||!ilDur(e0))continue;if(IL_DH.includes(k))continue;/* jdh2 census keeps one book + one seal per hiệu (drops copies, recreates a missing one) */if(ilCoop()&&h!=="me"&&!IL_BOXES.includes(h)&&!/^lo/.test(h))continue;
   /* vanished without a route: the piece is still in the game (Nội vụ phủ found it); ilAudit counts these (bot audit target 0) */
   I.net++;I.box.push({e:e0,at:"nvp",why:"net",own:h,w:wk()});ilLog(e0,h,"nvp","net");now[id]=[k,"nvp",0]}
- I.at=now}
+ I.at=now;IL_USED.clear()}
 function ilOut(p,e){const i=(p.inv||[]).indexOf(e);if(i>=0){p.inv.splice(i,1);return}const w=p.wd;if(w)for(const sl of ["tram","y"])if(w[sl]===e){w[sl]=null;return}if(p.vl===e){p.vl=null;return}
  if(p.wdPawn){const j=p.wdPawn.findIndex(P=>P&&P.e===e);if(j>=0)p.wdPawn.splice(j,1)}}
 /* ---- weekly: the box moves on (returns, ransom, atonement, mending, resale) ---- */
 function ilWant(v,x,o,pr){const W=BAL.ag.why.g2il;if(!v||v===o||(v.bac||0)<(pr!=null?pr:x.pr)+W.spare)return 0;const has=(v.inv||[]).some(e=>e&&e.k===x.e.k);
  return (has?0:W.lack)+(o&&o!==v?Math.max(0,hostility(v,o))*W.hostW:0)}
 function ilWeek(){if(!S||S.dead)return;const I=ilS(),B=BAL.il;let ask=false,askF=false;
+ /* E-FIX-3: once per loaded ledger, an old save's allotment consumable records in the store move to the counted ledger (ilOldMove) */if(ilWeek.m!==I){ilWeek.m=I;ilOldMove(I)}
  for(const x of I.box.slice()){const o=ilP(x.own);const live=o&&ilAlive(o)&&!(o!==S&&o.out);
   if(x.at==="mkt"){
    if(live&&o===S){if(!x.shop&&roll(B.shopP)){x.shop=1;log(`Thái giám Nội vụ phủ báo: khay đồ mua ngoài cung có ${ilNm(x.e)}, giống đồ cũ của ngươi.`)}

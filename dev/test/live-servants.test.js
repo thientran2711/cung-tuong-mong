@@ -28,7 +28,7 @@ for(let seed=1;seed<=LIVES;seed++){const p=await b.newPage();const errs=[];p.on(
  const saves=[];
  /* play a few buổi; save at khắc 1 and 3 of some of them (T5 self-check on real saves) */
  for(let i=0;i<6;i++){const sv=await p.evaluate(i=>{const out=[];Q.length=0;S.mg=0;try{placeWhere();if(typeof agFlush==='function')agFlush()}catch(e){}
-   for(let k=0;k<4&&!S.dead;k++){try{j95sync(false,true)}catch(e){}if(i%2===0&&(k===0||k===2)){try{save()}catch(e){}out.push(localStorage.getItem("hclh-save-v2-4"))}const kh=j95kh();try{spend(1)}catch(e){}if(j95kh()===kh)break}
+   for(let k=0;k<4&&!S.dead;k++){try{j95sync(false,true)}catch(e){}if(i%2===0&&(k===0||k===2)){try{save()}catch(e){}out.push((window.slotGet?slotGet("hclh-save-v2-4"):localStorage.getItem("hclh-save-v2-4")))}const kh=j95kh();try{spend(1)}catch(e){}if(j95kh()===kh)break}
    try{nextBuoi()}catch(e){}Q.length=0;return out},i);saves.push(...sv.filter(Boolean))}
  const r=await p.evaluate(()=>{const bad=[],note=[];const R=S.roster;if(!R)return{bad:["no record"]};
   const busy=x=>j95sBusy(x);
@@ -132,7 +132,7 @@ for(let seed=1;seed<=LIVES;seed++){const p=await b.newPage();const errs=[];p.on(
  /* T5 */
  saves.forEach((sv,i)=>{const f=path.join(TMP,`s${seed}-${i}.json`);fs.writeFileSync(f,sv);const x=cp.spawnSync('node',[ROSTER,f],{encoding:'utf8'});if(x.status!==0)fails.push(`life ${seed} save ${i}: roster.js exit ${x.status}: ${(x.stdout||'').split('\n').filter(l=>/LỖI| - /.test(l)).slice(0,4).join(' / ')}${x.stderr?' '+x.stderr.slice(0,200):''}`)});
  notes.push(`life ${seed}: roster.js self-check on ${saves.length} saves`);
- const last=path.join(TMP,`s${seed}-last.json`);const se=await p.evaluate(()=>{try{quiet=false;localStorage.setItem(SK(SLOT),JSON.stringify(ser()));return""}catch(e){return String(e&&e.message||e)}});if(se)fails.push(`life ${seed}: last save failed: ${se}`);fs.writeFileSync(last,await p.evaluate(()=>localStorage.getItem("hclh-save-v2-4")));
+ const last=path.join(TMP,`s${seed}-last.json`);const se=await p.evaluate(()=>{try{quiet=false;localStorage.setItem(SK(SLOT),JSON.stringify(ser()));return""}catch(e){return String(e&&e.message||e)}});if(se)fails.push(`life ${seed}: last save failed: ${se}`);fs.writeFileSync(last,await p.evaluate(()=>(window.slotGet?slotGet("hclh-save-v2-4"):localStorage.getItem("hclh-save-v2-4"))));
  const w=cp.spawnSync('node',[ROSTER,last,'--who','cung nữ của ta'],{encoding:'utf8'});
  if(w.status!==0||!/now: .+, khắc \d of buổi .+ \(week \d+\), doing .+, because .+/.test(w.stdout)||!/timeline/.test(w.stdout))fails.push(`life ${seed}: --who "cung nữ của ta" answer: ${w.stdout.slice(0,300)} ${w.stderr.slice(0,200)}`);
  const wj=cp.spawnSync('node',[ROSTER,last,'--who','mm:me','--json','--all'],{encoding:'utf8'});let J=null;try{J=JSON.parse(wj.stdout)}catch(e){}

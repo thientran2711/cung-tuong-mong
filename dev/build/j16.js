@@ -18,7 +18,7 @@ function xioHTML(){const F=filledSlots();let h=`<div class="xiorow"><button clas
   ${d?`<p class="past">Ván: <b>${d.S.name}</b> · ${RANKS[d.S.rank]?RANKS[d.S.rank].n:""} · năm ${d.S.year}, tháng ${d.S.month}. Ghi vào ô nào?</p><div class="srow">${[1,2,3].map(n=>{const o=loadSlot(n);return `<button class="btn" data-xt="${n}" aria-pressed="${n===XIO.to}">Ô ${n}<small>${o?"đè: "+o.S.name:"trống"}</small></button>`}).join("")}</div>
   ${XIO.to?`<div class="srow"><button class="main" id="x-write">${XIO.ask?"Chắc chắn ghi":"Ghi vào Ô "+XIO.to}</button>${XIO.ask?`<span class="r">Ô ${XIO.to} đang có ván ${loadSlot(XIO.to).S.name}, sẽ mất.</span>`:""}<button class="btn" id="x-cancel">Không ghi</button></div>`:""}`:""}</div>`}
  return h}
-async function xioExport(n){XIO.slot=n;XIO.msg="";XIO.code="";try{const raw=localStorage.getItem(SK(n));XIO.code=raw?await saveCode(raw):"";XIO.msg=XIO.code?`${XIO.code.length} ký tự`:"Ô trống"}catch(e){XIO.msg="Không đọc được ô này."}wireXio()}
+async function xioExport(n){XIO.slot=n;XIO.msg="";XIO.code="";try{const raw=slotGet(SK(n));XIO.code=raw?await saveCode(raw):"";XIO.msg=XIO.code?`${XIO.code.length} ký tự`:"Ô trống"}catch(e){XIO.msg="Không đọc được ô này."}wireXio()}
 function wireXio(){const T=$("title");if(!T||T.hidden)return;let w=T.querySelector(".xiowrap");if(!w){w=document.createElement("div");w.className="xiowrap";const s=$("slots");s.parentNode.insertBefore(w,s.nextSibling)}
  const keep=XIO.m==="imp"&&$("x-in")?$("x-in").value:"";w.innerHTML=xioHTML();if(keep&&$("x-in"))$("x-in").value=keep;
  w.onclick=async e=>{const b=e.target.closest("button");if(!b||b.disabled)return;
@@ -31,7 +31,7 @@ function wireXio(){const T=$("title");if(!T||T.hidden)return;let w=T.querySelect
   else if(b.id==="x-chk"){XIO.to=0;XIO.ask=0;try{XIO.imp=await readCode($("x-in").value);XIO.msg="Mã hợp lệ."}catch(x){XIO.imp=null;XIO.msg=`<span class="r">${x.mine?x.message:"Mã hỏng hoặc thiếu."}</span>`}}
   else if(b.dataset.xt){XIO.to=+b.dataset.xt;XIO.ask=0}
   else if(b.id==="x-cancel"){XIO.to=0;XIO.ask=0}
-  else if(b.id==="x-write"&&XIO.imp&&XIO.to){if(loadSlot(XIO.to)&&!XIO.ask){XIO.ask=1}else{try{localStorage.setItem(SK(XIO.to),JSON.stringify(XIO.imp));XIO.msg=`Đã ghi vào Ô ${XIO.to}. Bấm “Tiếp tục kiếp này” để chơi.`;XIO.m="imp";XIO.imp=null;XIO.to=0;XIO.ask=0;showTitle();return}catch(x){XIO.msg='<span class="r">'+CTM_WAIT.saveBlocked+'</span>'}}}
+  else if(b.id==="x-write"&&XIO.imp&&XIO.to){if(loadSlot(XIO.to)&&!XIO.ask){XIO.ask=1}else{try{slotPut(SK(XIO.to),JSON.stringify(XIO.imp));XIO.msg=`Đã ghi vào Ô ${XIO.to}. Bấm “Tiếp tục kiếp này” để chơi.`;XIO.m="imp";XIO.imp=null;XIO.to=0;XIO.ask=0;showTitle();return}catch(x){XIO.msg='<span class="r">'+CTM_WAIT.saveBlocked+'</span>'}}}
   wireXio()}}
 (function(){const o=window.showTitle;if(typeof o==="function")window.showTitle=function(){const r=o.apply(this,arguments);try{wireXio()}catch(e){}return r}})();
 try{if(!$("title").hidden){wireXio();if(!$("title").querySelector(".optwrap")&&typeof wireOpt==="function")wireOpt()}}catch(e){}

@@ -31,7 +31,7 @@ const SCAN=()=>{const M=document.querySelector('#modal:not([hidden])');if(!M)ret
   for(const n of [1,2]){await p.evaluate(n=>{SLOT=n;$("title").hidden=true;start()},n);await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name,null,{timeout:60000});await p.waitForTimeout(400);
    await p.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw').forEach(e=>e.remove());try{nlAccept()}catch(e){}while(Q.length)Q.shift();try{closeModal()}catch(e){}try{render()}catch(e){}save()});}
   /* ??? trap: slot 1 carries the name of a palace person the life now loaded does not know yet (j61 name mask must not touch a slot summary) */
-  await p.evaluate(()=>{const r=rivals.find(v=>v.alive)||rivals[0];const k=SK(1);const d=JSON.parse(localStorage.getItem(k));d.S.name="Bạch "+r.name.split(" ").slice(-2).join(" ");localStorage.setItem(k,JSON.stringify(d));try{S.known=S.known||{};for(const v of rivals)delete S.known[v.id]}catch(e){}});
+  await p.evaluate(()=>{const r=rivals.find(v=>v.alive)||rivals[0];const k=SK(1);const d=JSON.parse((window.slotGet?slotGet(k):localStorage.getItem(k)));d.S.name="Bạch "+r.name.split(" ").slice(-2).join(" ");localStorage.setItem(k,JSON.stringify(d));try{S.known=S.known||{};for(const v of rivals)delete S.known[v.id]}catch(e){}});
   const info=await p.evaluate(()=>[1,2].map(n=>{const d=loadSlot(n);return d&&{name:d.S.name,rank:d.S.rank,srv:!!d.S.srv,who:window.CTM_SLOTWHO&&CTM_SLOTWHO(d.S)}}));
   await p.evaluate(()=>{while(Q.length)Q.shift();try{closeModal()}catch(e){}$("title").hidden=false;showTitle()});await p.waitForTimeout(500);
   await p.evaluate(()=>{const b=document.querySelector('#modal [data-tgo="slots"]');if(b)b.click()});await p.waitForSelector('#modal #slots .kslot',{timeout:10000});await p.waitForTimeout(500);
