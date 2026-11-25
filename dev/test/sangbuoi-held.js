@@ -16,6 +16,8 @@
       right after (≤ 1 s), she taps it, the turn goes on.
    G  (r3, emptied queue) 2 cards make render() disable «Sang buổi»; the cards are then taken out of Q inside showModal (G1, as j68 evGate
       does) or with no call at all (G2) → «Sang buổi» comes back by itself (G1 ≤ 600 ms, G2 ≤ 1500 ms: the 700 ms safety-net tick dqWake), then a real tap advances.
+   H  (r3, Q>0 member) 7 cards hidden in Q, «Sang buổi» greyed, nothing on screen → H1 the first card shows by itself (dqWake) · H2 a real tap on
+      the greyed button shows it at once (dqBring); she taps through all 7, then «Sang buổi» advances.
    usage: node dev/test/sangbuoi-held.js file:///…/index.html [shotDir] */
 const {chromium}=require('playwright');const [,,URL,OUT]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 const VP=[[755,1000,2],[1180,820,2]];
@@ -127,6 +129,21 @@ const VP=[[755,1000,2],[1180,820,2]];
       if(ms>lim)return k+' «Sang buổi» came back too late: '+ms+' ms (limit '+lim+')';
       rows.push(`${W}x${H} ${k} «Sang buổi» back after ${ms} ms`);console.log(rows[rows.length-1]);await shot(k+'-back')}
      const b0=(await st()).bk;await p.tap('#next',{force:true});return (await advanced(b0))?'':'«Sang buổi» back but the tap did not advance'},
+   H:async()=>{/* r3 (MAIN 143, robot E on LIVE dbae89eb 17:17Z: «Có tin đang chờ» greyed, nothing on screen, Q = 7 hidden): the Q>0 member of the
+       same family. 7 cards in Q, #modal hidden, render() greys the button, nothing else on screen →
+       H1 the safety net shows the first card by itself (dqWake: BAL.dayq.wake + its 700 ms tick) · H2 a REAL tap on the greyed button shows it at once (dqBring);
+       then she taps through all 7 and «Sang buổi» advances */
+     const W8=await p.evaluate(()=>(BAL.dayq&&BAL.dayq.wake)||2000);
+     for(const [k,tapIt,lim] of [['H1',0,W8+2*700+600],['H2',1,900]]){
+      await p.evaluate(()=>{for(let i=1;i<=7;i++)Q.push({t:'Thử: thẻ chờ '+i,h:'<p>Thử.</p>'});const M=document.getElementById('modal');M.hidden=true;render();M.hidden=true;window.__t0=Date.now()});
+      if(!(await p.evaluate(()=>document.getElementById('next').disabled)))return k+' setup: «Sang buổi» not greyed with 7 cards';
+      if(tapIt){const c=await p.evaluate(()=>{const r=document.getElementById('next').getBoundingClientRect();return [r.x+r.width/2,r.y+r.height/2]});await p.evaluate(()=>window.__t0=Date.now());await p.touchscreen.tap(c[0],c[1])}
+      const s1=await waitCard(lim+1500);const ms=await p.evaluate(()=>Date.now()-window.__t0);
+      if(!s1.modal)return k+' 7 cards hidden, greyed button: NO card painted in '+(lim+1500)+' ms '+JSON.stringify({Q:s1.Q.length,d:await diag()});
+      if(ms>lim)return k+' card painted too late: '+ms+' ms (limit '+lim+')';
+      rows.push(`${W}x${H} ${k} card shown after ${ms} ms`);console.log(rows[rows.length-1]);await shot(k+'-card');await drain();
+      const left=await p.evaluate(()=>Q.filter(m=>/^Thử: thẻ chờ/.test(m.t||'')).length);if(left)return k+' '+left+' test cards left after tapping through'}
+     const b0=(await st()).bk;await p.tap('#next',{force:true});return (await advanced(b0))?'':'cards closed but «Sang buổi» did not advance'},
    F:async()=>{/* the night choice exists only in a life where jnf is on (not a servant / khoa cử road, not parked): else a fresh life */
      for(let i=0;i<4&&!(await p.evaluate(()=>typeof nfOn==='function'&&nfOn()));i++){await newLife();await ensureQuiet()}
      const r0=await p.evaluate(()=>{used=0;advLock=false;render();S.nfX={d:(typeof wk==='function'?wk():(S.turn*3+(S.tuan||0))),st:'open',at:Date.now()};window.__cf0=window.cfBusy;window.__cfQ=1;window.cfBusy=()=>window.__cfQ===1;
