@@ -1638,3 +1638,4 @@ selection-scene r7 (successor of SELSCENE-16; co-op 4 failures root cause) | rev
 | F BUTTON CRAWLER (opus; briefs/F-robot-2511.md ROLE B): real-tap every button Fold+iPad → reports/button-crawl.md + fix families review/button-crawl-fix-N + quickcheck fast crawl | review/button-crawl | F | (opening) | RUNNING | 25/11 05:30Z |
 | FLIGHT ROOT-CAUSE FIXER task 2 (same session, opus): A-COOP room SX8M wk80 co-op sync stuck (host never sends wk80, no card open) | review/flight-coop-sync | F | session_01UV1Szh5s5kJv1XUm846FEX | RUNNING | 25/11 04:12Z |
 | FLIGHT ROOT-CAUSE FIXER task 3 (same session, opus, after task 2): host JS «Cannot read properties of undefined (reading 'off')» in j3 chooseM (stale/out-of-range co-op pick) — root + guard whole family | review/flight-choose-guard | F | session_01UV1Szh5s5kJv1XUm846FEX | QUEUED | 25/11 04:50Z |
+| KIT KEEPER KK26 (successor of KK25) | kit/* | MAIN 134 | session_01V1ZZH4SPGe7wyGEj1X8j3Y | RUNNING | 25/11 05:23Z |
