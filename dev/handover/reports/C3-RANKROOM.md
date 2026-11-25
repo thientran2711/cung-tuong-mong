@@ -14,4 +14,12 @@ PRIORITY #1 CHECK: reused C8-RANKROOM table/script/jres.js lookup + D1-ROOMNC pi
 ph07 doorway right half; ph15 doorway inward; ph16 right chair pair gone; ph17 guqin gone; ph23 chairs bigger/forward + footstool; ph29 right arch -> robe rack; ph30 scroll -> horizontal painting; ph35 lattice window behind bed; ph36 doorway like shelf niche; (also ph44, ph48, ph52, ph56, ph60, ph61, ph64 per D1-ROOMNC). Revert one: remove it from ok list and rerun --revert flow (backups kept).
 Open: bedroom trigger = buoi toi (C8 assumption), unchanged.
 ~90% xong / ~85% choi duoc
-LAND READY review/c3-rankroom 16679f5c
+
+
+## Round 2 (Foreman C ROOT 3 order): +15 gap rooms from C3-STYLE
+- Added rows gp01..gp15 to rank_rooms.json (src img/_review/c3-style/gap/<key>.webp, pilot vinh-hoa-cung-tan from .../pilot/). 14 new keys wired; thua-minh-cung-dong-phoi = live slot, swapped on all 16 mua/buoi keys (old copies backed up). Merged block (RANK_ROOM = 64 bases) and manifest (live 256, new 64) by hand because the script rewrites them per run; ran the 15 gap ids only so the earlier backups were not overwritten.
+- Rebuilt; stage test fold + ipadAir: 0 page errors; table 192 lookups, fall back to old picture 80 (was 97).
+- Per-palace Tan/Phi/Quy phi coverage is now whatever the table has; remaining fallbacks = rooms with no picture (Hoang quy phi etc.).
+- OLD-SAVE LOAD TEST: NOT RUN. dev/test/palace-oldsave.js needs old and new builds on one origin; my local http.server on a shared port was refused by the auto-mode classifier (twice), I did not work around it. Please run: node dev/test/palace-oldsave.js <old main index url> <new index url> 755x1000@1 <outdir> with both builds under one server, or allow the server command. Change touches only art keys + the resBase lookup (falls back to old keys), no save fields.
+~90% xong / ~88% choi duoc
+LAND READY review/c3-rankroom d8ed8090 (old-save test pending)
