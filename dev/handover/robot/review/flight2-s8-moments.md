@@ -6,5 +6,479 @@
 - Same dialog · ODD · Line «giao cho cung nữ ??? việc canh chừng cung» shows «???» for a person's name again (same pattern as the «bị Tần ??? làm nhục» seen in s5). Also long unbroken news paragraphs with many coloured names, hard to read at a glance.
 - Year 1 tháng sáu, buổi ~55-60 · «Lịch tháng» dialog (iPad) · FRUSTRATED (2nd «dead close button has no effect» in 11 s; first was «Tin báo») · The dialog shows only a ✕ at top right and no button literally called «Lui»; the harness reads the ✕ as «Lui» and the dialog was still open right after the tap. The calendar itself is nice (three tuần rows, «Hội Phượng» days marked, today ring). shot: shots-flight2-s8/noeffect-1795596997264.png
 - Year 1 tháng chín trung tuần, buổi ~90 (harness 64cd9fcf) · «Tâm trạng · Thường tại Trưởng Tôn Cẩm Sắt» (iPad) · ODD · The person mood panel lists SỢ / TÌNH TỬ / BUỒN / CHẠNH LÒNG each with «Nguyên do chưa rõ · còn N khắc»: 4 of 5 rows say the cause is unknown, so the panel tells me she is in pain but never why (nothing for a schemer to use). The portrait is crying, the dialog is bare of any next step. First «dead close button has no effect» on 64cd9fcf is this dialog (1 in a row so far). shot: shots-flight2-s8/noeffect-1795598927894.png
-- year 3 tháng ba, trung tuần · Giao tình/Phe phái screen (iPad shot) · DELIGHTED/ODD · Layout is roomy and readable on iPad; faction cards (phe Lữ gia, Càn Ninh, Khương gia) are clear and the two-figure lãnh cung scene looks good. Odd: Sủng 0 and Danh 1 after 297 buổi in lãnh cung, the player has no road forward besides «gửi thư ra ngoài»; feels stuck/BORED. Shot: runner only (now.png).
-- buổi ~290-297 · Tin báo / Lịch tháng / Chương 4 Danh hiệu Tài nữ dialogs · FRUSTRATED · 150 taps without a clock step on 4 different screens (stuck no-clock loop bug ×4, harness 93812531). Dialogs repeat instead of letting the day pass. Shots: runner only.
+
+## Harness-written moment log (from harness 95718760 onward, resumed runner s8 #2)
+
+- year 3 · turn 30 · tuần 1 · buổi 3 · rank 0 · #klife «» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-326-1.png
+- year 3 · turn 30 · tuần 1 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc74Tài54Tâm cơ32Đức12Danh2 | Bạc9Sức95/95 | Buổi tối, còn 4 khắc | Lãnh cung | đêm u ám | Quẻ Hạ hạ (Sức khỏe) · shots-flight2-s8/m-new-326-2.png
+- year 3 · turn 30 · tuần 1 · buổi 3 · rank 0 · #modal «Tin trong cung buổi này» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-326-3.png
+- year 3 · turn 30 · tuần 1 · buổi 3 · rank 0 · .dlg «Tin trong cung buổi này» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-326-4.png
+- year 3 · turn 30 · tuần 1 · buổi 3 · rank 0 · .dlg «Lịch tháng» · NEW SCREEN · first time on this screen; buttons: Lui | Tháng trước | Tháng sau | mồng 1: Lĩnh bổng lộc (lãnh | mồng 2 | mồng 3 | mồng 4: Nguyệt tín | mồng 5: Tiết Thanh minh: Ngu · shots-flight2-s8/m-new-326-5.png
+- year 3 · turn 30 · tuần 2 · buổi 0 · rank 0 · .kne «» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-326-6.png
+- year 3 · turn 30 · tuần 2 · buổi 0 · rank 0 · #dawn «» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-flight2-s8/m-new-327-7.png
+- year 3 · turn 30 · tuần 2 · buổi 0 · rank 0 · #dawn «Tổng lược» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-327-8.png
+- year 3 · turn 30 · tuần 2 · buổi 1 · rank 0 · .dlg «Chương 4 · Danh hiệu Tài nữ» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh | Đi làm: Giữ Sức, chờ dịp xin · shots-flight2-s8/m-new-328-9.png
+- year 3 · turn 30 · tuần 2 · buổi 1 · rank 0 · #kxcatch «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc74Tài54Tâm cơ32Đức12Danh2 | Bạc9Sức95/95 | Buổi trưa, còn 4 khắc | Lãnh cung | nắng dịu | Quẻ Thượng thượng (Giao thiệ · shots-flight2-s8/m-new-328-10.png
+- year 3 · turn 30 · tuần 2 · buổi 1 · rank 0 · .mapsc «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc74Tài54Tâm cơ32Đức12Danh2 | Bạc9Sức95/95 | Buổi trưa, còn 4 khắc | Lãnh cung | nắng dịu | Quẻ Thượng thượng (Giao thiệ · shots-flight2-s8/m-new-328-11.png
+- year 3 · turn 30 · tuần 2 · buổi 2 · rank 0 · .dlg «Sắc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-329-12.png
+- year 3 · turn 30 · tuần 2 · buổi 3 · rank 0 · .dlg «Tin báo» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-330-13.png
+- year 3 · turn 30 · tuần 2 · buổi 3 · rank 0 · .kfoc «» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-330-14.png
+- year 3 · turn 30 · tuần 2 · buổi 3 · rank 0 · .dlg «Hôn sự» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-330-15.png
+- year 3 · turn 30 · tuần 2 · buổi 3 · rank 0 · .dlg «Đã biết về Phế phi Thôi Lan Âm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-330-16.png
+- year 3 · turn 31 · tuần 0 · buổi 0 · rank 0 · #kmrew «» · NEW SCREEN · first time on this screen; buttons: Thường | Thường | Thường | ThườngVải thô (hàng kém)Hàng | ThườngYên chi giấyHộp phấn m | ThườngNến mỡ dêThắp học đêm: | Nhận · shots-flight2-s8/m-new-331-17.png
+- year 3 · turn 31 · tuần 0 · buổi 0 · rank 0 · .dlg «» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-331-18.png
+- year 3 · turn 31 · tuần 0 · buổi 0 · rank 0 · .kbk «Tổng lược» · NEW SCREEN · first time on this screen; buttons: Trang sau | Lui · shots-flight2-s8/m-new-331-19.png
+- year 3 · turn 31 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng ba» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-331-20.png
+- year 3 · turn 31 · tuần 0 · buổi 0 · rank 0 · .dlg «Lãnh cung» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-331-21.png
+- year 3 · turn 31 · tuần 0 · buổi 2 · rank 0 · #modal «Càn Ninh cung» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-333-22.png
+- year 3 · turn 31 · tuần 0 · buổi 3 · rank 0 · .dlg «Ra vào cung cấm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-334-23.png
+- year 3 · turn 31 · tuần 0 · buổi 3 · rank 0 · .kmov «» · NEW SCREEN · first time on this screen; buttons: Ta biết rồi · shots-flight2-s8/m-new-334-24.png
+- year 3 · turn 31 · tuần 1 · buổi 0 · rank 0 · .dlg «Tâm trạng · Ta» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-335-25.png
+- year 3 · turn 31 · tuần 1 · buổi 3 · rank 0 · .dlg «Bạc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-338-26.png
+- year 3 · turn 31 · tuần 2 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-340.png
+- year 3 · turn 31 · tuần 2 · buổi 2 · rank 0 · .dlg «chiều · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-341-27.png
+- year 3 · turn 31 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=17: Lịch tháng / Chương 4 · Danh hiệu Tài nữ / Chương 4 · Danh hiệu Tài nữ / Tin báo / Chương 4 · Danh hiệu Tài nữ / Chương 4 · Danh hiệu Tài nữ) · shots-flight2-s8/loop-22.png
+- year 3 · turn 31 · tuần 2 · buổi 3 · rank 0 · .dlg «Đã biết về Hoàng hậu Hàn Mặc Lan» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-342-28.png
+- year 3 · turn 32 · tuần 0 · buổi 3 · rank 0 · #modal «Chương 4 · Danh hiệu Tài nữ» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-346-29.png
+- year 3 · turn 32 · tuần 0 · buổi 3 · rank 0 · - · FRUSTRATED · [stuck] no-clock loop: 150 taps without a clock step on .dlg «Đã biết về Phế phi Thôi Lan Âm» · shots-flight2-s8/loop-24.png
+- year 3 · turn 32 · tuần 0 · buổi 3 · rank 0 · .dlg «Thiên mệnh» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh · shots-flight2-s8/m-new-346-30.png
+- year 3 · turn 32 · tuần 0 · buổi 3 · rank 0 · .dlg «Danh hiệu» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh · shots-flight2-s8/m-new-346-31.png
+- year 3 · turn 32 · tuần 0 · buổi 3 · rank 0 · .dlg «Xem quan hệ của» · NEW SCREEN · first time on this screen; buttons: Lui | Ta 1 | Chí tôn 2 | Phi tần 14 | Cung nhân 30 | Phế phiTa · shots-flight2-s8/m-new-346-32.png
+- year 3 · turn 32 · tuần 1 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng tư» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-347-33.png
+- year 3 · turn 32 · tuần 1 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=13: Chương 4 · Danh hiệu Tài nữ / Tin báo / Lịch tháng / Đã biết về Phế phi Thôi Lan Âm / Chương 4 · Danh hiệu Tài nữ / Tin báo) · shots-flight2-s8/loop-26.png
+- year 3 · turn 32 · tuần 2 · buổi 2 · rank 0 · .dlg «Quẻ Hạ · Danh» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-353-34.png
+- year 3 · turn 33 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng năm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-355-35.png
+- year 3 · turn 33 · tuần 0 · buổi 3 · rank 0 · .dlg «Hoàng thượng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-358-36.png
+- year 3 · turn 33 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=13: Tin báo / Nhờ thái giám tìm thú nuôi / Chương 4 · Danh hiệu Tài nữ / Tin báo / Đã biết về Phế phi Thôi Lan Âm / Chương 4 · Danh hiệu Tài nữ) · shots-flight2-s8/loop-29.png
+- year 3 · turn 33 · tuần 1 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-360.png
+- year 3 · turn 33 · tuần 2 · buổi 2 · rank 0 · .dlg «Quẻ Thượng · Mưu kế» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-flight2-s8/m-new-365-37.png
+- year 3 · turn 33 · tuần 2 · buổi 2 · rank 0 · .dlg «Gieo lại quẻ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-365-38.png
+- year 3 · turn 33 · tuần 2 · buổi 3 · rank 0 · #modal «Có người đến» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-366-39.png
+- year 3 · turn 33 · tuần 2 · buổi 3 · rank 0 · .dlg «Có người đến» · NEW SCREEN · first time on this screen; buttons: Chia chăn, ngồi cùng nàng ta | Nghe chuyện cũ, dò tin lục c | Đóng cửa, giữ sức mìnhRất vữ | Pha trà Long Tĩnh mời kháchR · shots-flight2-s8/m-new-366-40.png
+- year 3 · turn 34 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng sáu» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-367-41.png
+- year 3 · turn 34 · tuần 0 · buổi 2 · rank 0 · #modal «Việc khó xử» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-368-42.png
+- year 3 · turn 34 · tuần 0 · buổi 2 · rank 0 · .dlg «Việc khó xử» · NEW SCREEN · first time on this screen; buttons: Nhận tội thay nàng taRất vữn | Để nàng ta chịu đònRất vữngT · shots-flight2-s8/m-new-369-43.png
+- year 3 · turn 34 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=1: Tin trong cung buổi này) · shots-flight2-s8/loop-33.png
+- year 3 · turn 35 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng bảy» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-379-44.png
+- year 3 · turn 35 · tuần 0 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-380.png
+- year 3 · turn 35 · tuần 0 · buổi 1 · rank 0 · .dlg «trưa · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-380-45.png
+- year 3 · turn 35 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Hoàng hậu Hàn Mặc Lan» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-382-46.png
+- year 3 · turn 35 · tuần 1 · buổi 0 · rank 0 · .dlg «Quẻ Trung · Giao thiệp» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-flight2-s8/m-new-383-47.png
+- year 3 · turn 35 · tuần 1 · buổi 3 · rank 0 · #modal «Tâm trạng · Thường tại Kiều Mặc Nhi» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-386-48.png
+- year 3 · turn 35 · tuần 1 · buổi 3 · rank 0 · .dlg «Tâm trạng · Thường tại Kiều Mặc Nhi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-386-49.png
+- year 3 · turn 36 · tuần 2 · buổi 0 · rank 0 · .dlg «Rời lãnh cung» · NEW SCREEN · first time on this screen; buttons: Tạ ơn · shots-flight2-s8/m-new-391-50.png
+- year 3 · turn 36 · tuần 2 · buổi 3 · rank 0 · .dlg «Học Công (Nữ công): ai dạy?» · NEW SCREEN · first time on this screen; buttons: Lui | Ma ma giáo tậpTốn2 khắc·Sức  · shots-flight2-s8/m-new-394-51.png
+- year 3 · turn 36 · tuần 2 · buổi 3 · rank 0 · .dlg «Học Công: làm gì?» · NEW SCREEN · first time on this screen; buttons: Lui | Làm | Làm | Học lối này | Học lối này | Làm | Học lối này | Học lối này · shots-flight2-s8/m-new-394-52.png
+- year 3 · turn 36 · tuần 2 · buổi 3 · rank 0 · .dlg «Túi thơm thêu sen: dùng vật liệu gì?» · NEW SCREEN · first time on this screen; buttons: Lui | Xem thêm | Túi thơm thêu sen · vải, chỉ | Túi thơm thêu sen · lụa, chỉ | Túi thơm thêu sen · gấm, chỉ · shots-flight2-s8/m-new-394-53.png
+- year 3 · turn 36 · tuần 2 · buổi 3 · rank 0 · #kg82 «» · NEW SCREEN · first time on this screen; buttons: Quay lại | Sẵn sàngtừ lúc này mới tính | Hướng dẫnchơi thử một hồi dễ | Bỏ quaKhó lường · thành: tiế | Thôi, để lúc kháckhông tốn g · shots-flight2-s8/m-new-394-54.png
+- year 3 · turn 36 · tuần 2 · buổi 3 · rank 0 · .dlg «Quẻ Hạ hạ · Hung» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-394-55.png
+- year 3 · turn 37 · tuần 2 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng tám» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-395-56.png
+- year 3 · turn 37 · tuần 2 · buổi 0 · rank 0 · .dlg «Đức» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-395-57.png
+- year 3 · turn 37 · tuần 2 · buổi 3 · rank 0 · .dlg «Quẻ Thượng thượng · Tài nghệ» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-flight2-s8/m-new-398-58.png
+- year 3 · turn 38 · tuần 0 · buổi 0 · rank 0 · .dlg «Lễ tấn phong Thường tại Thôi Lan Âm» · NEW SCREEN · first time on this screen; buttons: Đến chúc mừngTốnSức -5Đượcth | Không đếnTốnkhôngĐượcSức +3K · shots-flight2-s8/m-new-399-59.png
+- year 3 · turn 38 · tuần 0 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-400.png
+- year 3 · turn 38 · tuần 0 · buổi 1 · rank 0 · .dlg «Danh hiệu mới» · NEW SCREEN · first time on this screen; buttons: Đeo ngayTốnkhôngĐượckhôngGhi | Để sauTốnkhôngĐượckhông · shots-flight2-s8/m-new-400-60.png
+- year 3 · turn 38 · tuần 0 · buổi 1 · rank 0 · .dlg «Đeo «Thư hương»» · NEW SCREEN · first time on this screen; buttons: Thêm TàiTốnkhôngĐượcTài +1 | Học mau tiếnTốnkhôngĐượcTự h | Để sau · shots-flight2-s8/m-new-400-61.png
+- year 3 · turn 38 · tuần 1 · buổi 0 · rank 0 · .dlg «Thu săn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-403-62.png
+- year 3 · turn 38 · tuần 1 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=18: Danh hiệu / Lịch tháng / Lịch tháng / Lịch tháng / Lịch tháng / Kế vị) · shots-flight2-s8/loop-38.png
+- year 3 · turn 38 · tuần 2 · buổi 1 · rank 0 · #modal «Danh hiệu» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-408-63.png
+- year 3 · turn 39 · tuần 0 · buổi 0 · rank 0 · .dlg «sáng · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-411-64.png
+- year 3 · turn 39 · tuần 1 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng chín» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-415-65.png
+- year 3 · turn 39 · tuần 1 · buổi 0 · rank 0 · .dlg «Yến đầy tháng công chúa» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-415-66.png
+- year 3 · turn 39 · tuần 1 · buổi 0 · rank 0 · #modal «Chứng cứ về Hoàng hậu Hàn Mặc Lan» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-415-67.png
+- year 3 · turn 39 · tuần 1 · buổi 0 · rank 0 · .dlg «Chứng cứ về Hoàng hậu Hàn Mặc Lan» · NEW SCREEN · first time on this screen; buttons: Lui | Tố tội thậtTùy duyênTốn2 khắ | Uy hiếp đòi bạcHiểmTốn2 khắc | Bán cho phe khácTốn2 khắc·Ch | Trả chứng cứ lấy lòngTốn2 kh · shots-flight2-s8/m-new-415-68.png
+- year 3 · turn 39 · tuần 2 · buổi 0 · rank 0 · .dlg «Đại thọ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-419-69.png
+- year 3 · turn 39 · tuần 2 · buổi 0 · rank 0 · .dlg «Mục lục» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-419-70.png
+- year 3 · turn 39 · tuần 2 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-420.png
+- year 3 · turn 40 · tuần 1 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng mười» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-427-71.png
+- year 3 · turn 40 · tuần 1 · buổi 0 · rank 0 · .dlg «Đại lễ tế Giao» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-427-72.png
+- year 3 · turn 40 · tuần 1 · buổi 0 · rank 0 · .dlg «Đại hàn, tuyết lớn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-427-73.png
+- year 3 · turn 40 · tuần 1 · buổi 3 · rank 0 · #modal «Tâm trạng · Ta» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-430-74.png
+- year 3 · turn 41 · tuần 0 · buổi 0 · rank 0 · .dlg «Đại phóng cung nhân» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-435-75.png
+- year 3 · turn 41 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=19: Tin báo / Tin báo / Tin báo / Danh hiệu / Lịch tháng / Danh hiệu) · shots-flight2-s8/loop-43.png
+- year 3 · turn 41 · tuần 1 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng mười một» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-439-76.png
+- year 3 · turn 41 · tuần 1 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-440.png
+- year 3 · turn 41 · tuần 1 · buổi 3 · rank 0 · .kmov · FRUSTRATED · dead button «?» covered by zero size · shots-flight2-s8/dead-ipad-1795608186560.png
+- year 3 · turn 41 · tuần 1 · buổi 3 · rank 0 · .dlg «Tâm trạng · Ý quý nhân Diệp Cẩm Sương» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-442-77.png
+- year 3 · turn 41 · tuần 1 · buổi 3 · rank 0 · .dlg «Tâm trạng · Phi Vương Yên Nhiên» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-442-78.png
+- year 3 · turn 41 · tuần 1 · buổi 3 · rank 0 · .dlg «Tâm trạng · Thường tại Thôi Lan Âm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-442-79.png
+- year 3 · turn 41 · tuần 1 · buổi 3 · rank 0 · .dlg «Tâm trạng · Đáp ứng Đoan Mộc Nhu Tắc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-442-80.png
+- year 3 · turn 41 · tuần 1 · buổi 3 · rank 0 · .dlg «Tâm trạng · Thục thường tại Niên Ninh Hương» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-442-81.png
+- year 3 · turn 41 · tuần 2 · buổi 0 · rank 0 · .dlg «Án mất trộm ngự khố» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-443-82.png
+- year 3 · turn 41 · tuần 2 · buổi 3 · rank 0 · - · FRUSTRATED · [stuck] no-clock loop: 150 taps without a clock step on .mapsc «» · shots-flight2-s8/loop-44.png
+- year 3 · turn 41 · tuần 2 · buổi 3 · rank 0 · #modal «Lịch tháng» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-446-83.png
+- year 3 · turn 41 · tuần 2 · buổi 3 · rank 0 · .dlg «Đã biết về Phế phi Kiều Ngọc Hành» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-446-84.png
+- year 3 · turn 41 · tuần 2 · buổi 3 · rank 0 · - · FRUSTRATED · [stuck] no-clock loop: 150 taps without a clock step on .dlg «Đã biết về Phế phi Kiều Ngọc Hành» · shots-flight2-s8/loop-45.png
+- year 4 · turn 42 · tuần 0 · buổi 3 · rank 0 · .dlg «Quẻ Thượng · Sức khỏe» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-flight2-s8/m-new-450-85.png
+- year 4 · turn 42 · tuần 1 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng chạp» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-451-86.png
+- year 4 · turn 42 · tuần 2 · buổi 0 · rank 0 · .dlg «Quẻ Thượng · Giao thiệp» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-455-87.png
+- year 4 · turn 43 · tuần 0 · buổi 0 · rank 0 · .dlg «Tỉnh thân» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-459-88.png
+- year 4 · turn 43 · tuần 0 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-460.png
+- year 4 · turn 43 · tuần 1 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng giêng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-463-89.png
+- year 4 · turn 43 · tuần 1 · buổi 0 · rank 0 · .dlg «Lời nhận xét» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-463-90.png
+- year 4 · turn 43 · tuần 2 · buổi 0 · rank 0 · .dlg «Quẻ Thượng thượng · Sủng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-467-91.png
+- year 4 · turn 43 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=9: Chương 4 · Danh hiệu Tài nữ / Lịch tháng / Chương 4 · Danh hiệu Tài nữ / Chương 4 · Danh hiệu Tài nữ / Tin báo / Chương 4 · Danh hiệu Tài nữ) · shots-flight2-s8/loop-50.png
+- year 4 · turn 44 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng hai» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-471-92.png
+- year 4 · turn 44 · tuần 0 · buổi 0 · rank 0 · .dlg «Quẻ Hạ · Mưu kế» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-flight2-s8/m-new-471-93.png
+- year 4 · turn 44 · tuần 0 · buổi 3 · rank 0 · .dlg «tối · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-474-94.png
+- year 4 · turn 44 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=15: Tin báo / Đã biết về Phế phi Kiều Ngọc Hành / Đã biết về Phế phi Kiều Ngọc Hành / Lịch tháng / Chương 4 · Danh hiệu Tài nữ / Tin báo) · shots-flight2-s8/loop-52.png
+- year 4 · turn 44 · tuần 0 · buổi 3 · rank 0 · .dlg «Nhờ thái giám tìm thú nuôi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-474-95.png
+- year 4 · turn 44 · tuần 1 · buổi 0 · rank 0 · #modal «Nổi mẩn» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-475-96.png
+- year 4 · turn 44 · tuần 1 · buổi 0 · rank 0 · .dlg «Nổi mẩn» · NEW SCREEN · first time on this screen; buttons: Tự sắc thuốc thảo mộcKhó lườ | Tìm mạng che mặtRất vữngTốnk | Để tự khỏiRất vữngTốnkhôngĐư · shots-flight2-s8/m-new-475-97.png
+- year 4 · turn 44 · tuần 1 · buổi 0 · rank 0 · .dlg «Khoa thi Đình» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-475-98.png
+- year 4 · turn 44 · tuần 1 · buổi 2 · rank 0 · .dlg «Quan hệ với» · NEW SCREEN · first time on this screen; buttons: Lui | Chí tôn 2 | Phi tần 14 | Cung nhân 29 | Hoàng thượng | Thái hậu · shots-flight2-s8/m-new-477-99.png
+- year 4 · turn 44 · tuần 2 · buổi 0 · rank 0 · #klife «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-480.png
+- year 4 · turn 44 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] dialog scrolled to the end has no close / next button: .kmov «» · shots-flight2-s8/noclose-1795608989045.png
+- year 4 · turn 44 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Phi Khương Hồng Ngọc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-483-1.png
+- year 4 · turn 44 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 24 copies of «Tâm trạng · Phi Khương Hồng Ngọc» (each close pops one; looks like a dead ✕) · -
+- year 4 · turn 44 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 25 copies of «Tâm trạng · Phi Khương Hồng Ngọc» (each close pops one; looks like a dead ✕) · -
+- year 4 · turn 44 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 22 copies of «Tâm trạng · Phi Khương Hồng Ngọc» (each close pops one; looks like a dead ✕) · -
+- year 4 · turn 44 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 19 copies of «Tâm trạng · Phi Khương Hồng Ngọc» (each close pops one; looks like a dead ✕) · -
+- year 4 · turn 44 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 16 copies of «Tâm trạng · Phi Khương Hồng Ngọc» (each close pops one; looks like a dead ✕) · -
+- year 4 · turn 44 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 13 copies of «Tâm trạng · Phi Khương Hồng Ngọc» (each close pops one; looks like a dead ✕) · -
+- year 4 · turn 44 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 10 copies of «Tâm trạng · Phi Khương Hồng Ngọc» (each close pops one; looks like a dead ✕) · -
+- year 4 · turn 44 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 6 copies of «Tâm trạng · Phi Khương Hồng Ngọc» (each close pops one; looks like a dead ✕) · -
+- year 4 · turn 44 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 6 copies of «Tâm trạng · Thường tại Thôi Lan Âm» (each close pops one; looks like a dead ✕) · -
+- year 4 · turn 44 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 3 copies of «Tâm trạng · Thường tại Thôi Lan Âm» (each close pops one; looks like a dead ✕) · -
+- year 4 · turn 44 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Đáp ứng Trưởng Tôn Cẩm Sắt» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-483-2.png
+- year 4 · turn 44 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Thường tại Nhan Lăng Ba» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-483-3.png
+- year 4 · turn 45 · tuần 2 · buổi 0 · rank 0 · .dlg «Lễ Phật đản» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-492-4.png
+- year 4 · turn 45 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Tin trong cung buổi này) · shots-flight2-s8/loop-53.png
+- year 4 · turn 46 · tuần 1 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-500.png
+- year 4 · turn 46 · tuần 1 · buổi 1 · rank 0 · #modal «Học Cầm: làm gì?» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-501-5.png
+- year 4 · turn 46 · tuần 1 · buổi 1 · rank 0 · .dlg «Học Cầm: làm gì?» · NEW SCREEN · first time on this screen; buttons: Lui | Làm | Làm | Làm · shots-flight2-s8/m-new-501-6.png
+- year 4 · turn 46 · tuần 2 · buổi 1 · rank 0 · #modal «Quẻ Thượng thượng · Sủng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-505-7.png
+- year 4 · turn 46 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Ý thường tại Diệp Cẩm Sương» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-507-8.png
+- year 4 · turn 46 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Hiền tần Lữ Hi Nguyệt» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-507-9.png
+- year 4 · turn 47 · tuần 0 · buổi 3 · rank 0 · .kshdc «» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-511-10.png
+- year 4 · turn 47 · tuần 2 · buổi 0 · rank 0 · .dlg «Cấm cung giới nghiêm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-516-11.png
+- year 4 · turn 48 · tuần 0 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-520.png
+- year 4 · turn 48 · tuần 1 · buổi 0 · rank 0 · .dlg «Ngự giá thân chinh» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-524-12.png
+- year 4 · turn 48 · tuần 1 · buổi 0 · rank 0 · .dlg «Quẻ Thượng thượng · Con cái» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-flight2-s8/m-new-524-13.png
+- year 4 · turn 48 · tuần 2 · buổi 0 · rank 0 · .dlg «Đại xá thiên hạ» · NEW SCREEN · first time on this screen; buttons: Đứng cạnh Hoàng hậu Hàn Mặc | TầnKéo Tần Lục Như Sương đi | Thưa Hoàng hậu chuyện hai nà | Lặng lẽ tránh đi nơi khácTốn · shots-flight2-s8/m-new-528-14.png
+- year 4 · turn 48 · tuần 2 · buổi 0 · rank 0 · page «Ngọc Thanh các · Ở đây còn 1 người.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc74Tài54Tâm cơ33Đức7Danh3S | Bạc8Sức100/100 | Buổi sáng, còn 4 khắc | Chưa điểm trang | nắng vàng | Quẻ Hạ hạ (Hung) · shots-flight2-s8/m-new-528-15.png
+- year 4 · turn 48 · tuần 2 · buổi 3 · rank 0 · #modal «Nguy hiểm chung» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-531-16.png
+- year 4 · turn 48 · tuần 2 · buổi 3 · rank 0 · .dlg «Nguy hiểm chung» · NEW SCREEN · first time on this screen; buttons: Lui | Đóng cửa giữ mìnhTốnSủng -2Đ · shots-flight2-s8/m-new-531-17.png
+- year 4 · turn 48 · tuần 2 · buổi 3 · rank 0 · .dlg «Kính sự phòng» · NEW SCREEN · first time on this screen; buttons: Lui | Tranh sủngMong manhTốnkhôngĐ | Chặn ngự giáMong manhTốnkhôn · shots-flight2-s8/m-new-531-18.png
+- year 4 · turn 50 · tuần 0 · buổi 0 · rank 0 · - · ODD · [game] dialog scrolled to the end has no close / next button: #kmrew «» · shots-flight2-s8/noclose-1795609806997.png
+- year 4 · turn 50 · tuần 0 · buổi 0 · rank 0 · #modal «Bổng lộc tháng bảy» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-536-19.png
+- year 4 · turn 50 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng bảy · Lễ nghĩa» · NEW SCREEN · first time on this screen; buttons: Chu toàn lễ nghĩaRất vữngTốn | Bớt lễ nghĩaRất vữngTốnkhông · shots-flight2-s8/m-new-536-20.png
+- year 4 · turn 50 · tuần 1 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-540.png
+- year 4 · turn 50 · tuần 2 · buổi 2 · rank 0 · #modal «Rời lãnh cung» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-546-21.png
+- year 4 · turn 50 · tuần 2 · buổi 3 · rank 0 · - · FRUSTRATED · [stuck] no-clock loop: 150 taps without a clock step on page «Ngọc Thanh các · Ở đây còn 3 người.» · shots-flight2-s8/loop-58.png
+- year 4 · turn 51 · tuần 2 · buổi 0 · rank 0 · - · FRUSTRATED · [dead] close button has no effect: .dlg «Tâm trạng · Ta» «Lui» · shots-flight2-s8/noeffect-1795610159010.png
+- year 4 · turn 52 · tuần 0 · buổi 0 · rank 0 · #modal «Bổng lộc tháng tám» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-552-22.png
+- year 4 · turn 52 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng tám · Lễ nghĩa» · NEW SCREEN · first time on this screen; buttons: Chu toàn lễ nghĩaRất vữngTốn | Bớt lễ nghĩaRất vữngTốnkhông · shots-flight2-s8/m-new-552-23.png
+- year 4 · turn 52 · tuần 0 · buổi 0 · rank 0 · .dlg «Kẻ hầu ăn bớt» · NEW SCREEN · first time on this screen; buttons: Phạt nặngRất vữngTốnkhôngĐượ | Răn dạy rồi thaRất vữngTốnkh | Làm ngơRất vữngTốnkhôngĐượcn · shots-flight2-s8/m-new-552-24.png
+- year 4 · turn 52 · tuần 0 · buổi 0 · rank 0 · page «Ngọc Thanh các · Không gặp ai.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc74Tài54Tâm cơ33Đức8Danh4S | Bạc15Sức94/100 | Buổi sáng, còn 4 khắc | Chưa điểm trang | nắng vàng | Quẻ Thượng thượng (Danh) · shots-flight2-s8/m-new-552-25.png
+- year 4 · turn 52 · tuần 0 · buổi 3 · rank 0 · .dlg «Ân tình (đêm)» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-555-26.png
+- year 4 · turn 52 · tuần 0 · buổi 3 · rank 0 · #modal «Kỳ nguyệt sự» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-555-27.png
+- year 4 · turn 52 · tuần 0 · buổi 3 · rank 0 · .dlg «Kỳ nguyệt sự» · NEW SCREEN · first time on this screen; buttons: Báo đúng ngàyRất vữngTốnkhôn | Báo lùi vài hômTùy duyênTốnk | Báo sớm, nói đã sạch kỳRất v | Giấu, không báoRất vữngTốnkh · shots-flight2-s8/m-new-555-28.png
+- year 4 · turn 52 · tuần 1 · buổi 0 · rank 0 · .dlg «Tết Trùng cửu · Chuyện bên lề hội» · NEW SCREEN · first time on this screen; buttons: Hỏi Cung nữ thân tín tam đẳn | Choàng áo cho nàng taTốnSức | Bảo cả hai về cungTốnDanh -2 | Đứng ngắm mưa trong im lặngT · shots-flight2-s8/m-new-556-29.png
+- year 4 · turn 52 · tuần 1 · buổi 0 · rank 0 · .dlg «Thỉnh bình an mạch» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-556-30.png
+- year 4 · turn 52 · tuần 1 · buổi 0 · rank 0 · .dlg «Phụ tuyến · Tân quân lập uy · Chương 1 · Hồi 2/2» · NEW SCREEN · first time on this screen; buttons: Cúi đầu vâng dạRất vữngTốnkh | Thưa rằng thần thiếp chỉ lo | Nhắc khéo rằng bệ hạ cũng cầ · shots-flight2-s8/m-new-556-31.png
+- year 4 · turn 52 · tuần 1 · buổi 0 · rank 0 · .dlg «Tâm trạng · Tể tướng Hạ Quý Ngọc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-556-32.png
+- year 4 · turn 52 · tuần 1 · buổi 0 · rank 0 · .dlg «Tâm trạng · Thái hậu» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-556-33.png
+- year 4 · turn 52 · tuần 1 · buổi 0 · rank 0 · .dlg «Tâm trạng · Hoàng thượng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-556-34.png
+- year 4 · turn 52 · tuần 1 · buổi 0 · rank 0 · - · ODD · [game] dialog queue holds 2 copies of «Tâm trạng · Tể tướng Hạ Quý Ngọc» (each close pops one; looks like a dead ✕) · -
+- year 4 · turn 52 · tuần 1 · buổi 0 · rank 0 · - · ODD · [game] dialog scrolled to the end has no close / next button: .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1» · shots-flight2-s8/noclose-1795610338741.png
+- year 4 · turn 52 · tuần 1 · buổi 0 · rank 0 · - · FRUSTRATED · [stuck] no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Hoàng thượng» · shots-flight2-s8/loop-59.png
+- year 4 · turn 52 · tuần 1 · buổi 0 · rank 0 · - · FRUSTRATED · [stuck] no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Thái hậu» · shots-flight2-s8/loop-60.png
+- year 4 · turn 52 · tuần 1 · buổi 0 · rank 0 · - · FRUSTRATED · [stuck] no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Tể tướng Hạ Quý Ngọc» · shots-flight2-s8/loop-62.png
+- year 4 · turn 52 · tuần 1 · buổi 0 · rank 0 · - · FRUSTRATED · [stuck] no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Ta» · shots-flight2-s8/loop-63.png
+- year 4 · turn 52 · tuần 1 · buổi 0 · rank 0 · - · FRUSTRATED · [stuck] no progress 15 min on .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1» · shots-flight2-s8/stuck-2.png
+- year 4 · turn 51 · tuần 2 · buổi 2 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-560.png
+- year 4 · turn 52 · tuần 1 · buổi 0 · rank 0 · .dlg «Ý chỉ tiết kiệm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-566-35.png
+- year 4 · turn 52 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Tần Lục Như Sương» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-573-36.png
+- year 4 · turn 52 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 7 copies of «Tâm trạng · Tần Lục Như Sương» (each close pops one; looks like a dead ✕) · -
+- year 4 · turn 52 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Trinh thường tại Nhan Lăng Ba» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-573-37.png
+- year 4 · turn 52 · tuần 2 · buổi 3 · rank 0 · - · FRUSTRATED · [dead] close button has no effect: .dlg «Tâm trạng · Thường tại Thôi Lan Âm» «Lui» · shots-flight2-s8/noeffect-1795611466600.png
+- year 4 · turn 52 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Thường tại Lữ Hi Nguyệt» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-573-38.png
+- year 4 · turn 53 · tuần 1 · buổi 0 · rank 0 · .dlg «Lật thẻ: Rất thấp» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-578-39.png
+- year 4 · turn 53 · tuần 1 · buổi 2 · rank 0 · page «Ngọc Thanh các · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-580.png
+- year 4 · turn 53 · tuần 1 · buổi 3 · rank 0 · .dlg «Kính sự phòng báo tin» · NEW SCREEN · first time on this screen; buttons: Tắm gội chờ giáRất vữngTốnkh | Tiến cử Cung nữ thân tín tam | Cáo bệnhRất vữngTốnkhôngĐược · shots-flight2-s8/m-new-581-40.png
+- year 4 · turn 53 · tuần 2 · buổi 0 · rank 0 · .dlg «Có người bán tin» · NEW SCREEN · first time on this screen; buttons: Không muaTốnkhôngĐượckhôngGh · shots-flight2-s8/m-new-582-41.png
+- year 4 · turn 53 · tuần 2 · buổi 0 · rank 0 · #modal «Thánh thọ Thái hậu · Chuyện bên lề hội» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-582-42.png
+- year 4 · turn 53 · tuần 2 · buổi 0 · rank 0 · .dlg «Thánh thọ Thái hậu · Chuyện bên lề hội» · NEW SCREEN · first time on this screen; buttons: Bế bé lên, dỗ bé nínTốnSức - | Tự đưa bé về cung của nhũ mẫ | Sai Thư Nhi dẫn bé về, ta ở  · shots-flight2-s8/m-new-582-43.png
+- year 4 · turn 53 · tuần 2 · buổi 0 · rank 0 · .dlg «Hội phối đồ · Xuân sắc» · NEW SCREEN · first time on this screen; buttons: Tự tay phối đồTốnSức -5Đượcđ | Cáo bệnh, không dựTốnDanh -1 · shots-flight2-s8/m-new-582-44.png
+- year 4 · turn 53 · tuần 2 · buổi 0 · rank 0 · #modal «Thánh thọ Thái hậu · Lễ» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-582-45.png
+- year 4 · turn 53 · tuần 2 · buổi 0 · rank 0 · .dlg «Thánh thọ Thái hậu · Lễ» · NEW SCREEN · first time on this screen; buttons: Xin đứng hầu gần hương ánKhó | Lặng lẽ cầu cho gia đìnhRất  · shots-flight2-s8/m-new-582-46.png
+- year 4 · turn 53 · tuần 2 · buổi 3 · rank 0 · - · FRUSTRATED · [stuck] no-clock loop: 150 taps without a clock step on page «Ngọc Thanh các · Ở đây còn 1 người.» · shots-flight2-s8/loop-68.png
+- year 4 · turn 53 · tuần 2 · buổi 3 · rank 0 · #modal «Kính sự phòng» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-585-47.png
+- year 4 · turn 54 · tuần 2 · buổi 0 · rank 0 · #modal «Phụ tuyến · Lo áo bông cho quân biên ải · Lời nhờ » · NEW SCREEN · first time on this screen; buttons: Nhận lờiTùy duyênTốnkhôngĐượ | Khéo từ chốiRất vữngTốnkhông · shots-flight2-s8/m-new-586-48.png
+- year 4 · turn 54 · tuần 2 · buổi 0 · rank 0 · .dlg «Phụ tuyến · Lo áo bông cho quân biên ải · Lời nhờ » · NEW SCREEN · first time on this screen; buttons: Nhận lờiTùy duyênTốnkhôngĐượ | Khéo từ chốiRất vữngTốnkhông · shots-flight2-s8/m-new-586-49.png
+- year 4 · turn 54 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Đáp ứng Kiều Ngọc Hành» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-589-50.png
+- year 4 · turn 54 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 8 copies of «Tâm trạng · Phi Khương Hồng Ngọc» (each close pops one; looks like a dead ✕) · -
+- year 4 · turn 54 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Huệ quý phi Vương Yên Nhiên» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-589-51.png
+- year 4 · turn 55 · tuần 0 · buổi 0 · rank 0 · .dlg «Chương 4 sắp hết hạn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-590-52.png
+- year 4 · turn 55 · tuần 0 · buổi 0 · rank 0 · .dlg «Nội vụ phủ thu đồ» · NEW SCREEN · first time on this screen; buttons: ThườngVáy sa xanh ngọc | Tuân chỉ · shots-flight2-s8/m-new-590-53.png
+- year 4 · turn 55 · tuần 1 · buổi 0 · rank 0 · .dlg «Chương 4 khép lại» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-594-54.png
+- year 4 · turn 55 · tuần 1 · buổi 0 · rank 0 · .dlg «Chương 5: Lời thơ vượt tường cung» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-594-55.png
+- year 4 · turn 55 · tuần 1 · buổi 1 · rank 0 · #modal «Khóc suốt đêm» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-594-56.png
+- year 4 · turn 55 · tuần 1 · buổi 1 · rank 0 · .dlg «Khóc suốt đêm» · NEW SCREEN · first time on this screen; buttons: Tiếp tụcRất vữngTốnkhôngĐược · shots-flight2-s8/m-new-595-57.png
+- year 4 · turn 55 · tuần 1 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 6 copies of «Tâm trạng · Thường tại Kiều Mặc Nhi» (each close pops one; looks like a dead ✕) · -
+- year 4 · turn 55 · tuần 2 · buổi 0 · rank 0 · .dlg «Cấm túc 1 tháng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-598-58.png
+- year 4 · turn 55 · tuần 2 · buổi 2 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-600.png
+- year 4 · turn 56 · tuần 1 · buổi 1 · rank 0 · #modal «Thú nuôi» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-607-59.png
+- year 4 · turn 56 · tuần 1 · buổi 1 · rank 0 · .dlg «Thú nuôi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-607-60.png
+- year 4 · turn 56 · tuần 1 · buổi 3 · rank 0 · .dlg «Chương 5 · Lời thơ vượt tường cung» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 1/35 | Thiên mệnh | Đi làm: Giữ Sức, chờ dịp xin · shots-flight2-s8/m-new-609-61.png
+- year 4 · turn 56 · tuần 1 · buổi 3 · rank 0 · - · ODD · [game] dialog scrolled to the end has no close / next button: .mapsc «» · shots-flight2-s8/noclose-1795612440078.png
+- year 4 · turn 56 · tuần 1 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=23: Lịch tháng / Chương 5 · Lời thơ vượt tường cung / Tin báo / Tin báo / Lịch tháng / Tin báo) · shots-flight2-s8/loop-70.png
+- year 4 · turn 56 · tuần 2 · buổi 2 · rank 0 · .dlg «Quẻ Hạ hạ · Sức khỏe» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-flight2-s8/m-new-612-62.png
+- year 5 · turn 57 · tuần 1 · buổi 2 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-620.png
+- year 5 · turn 57 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Thường tại Kiều Ngọc Hành» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-625-63.png
+- year 5 · turn 57 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Thường tại Khổng Hàm Hương» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-625-64.png
+- year 5 · turn 57 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 9 copies of «Tâm trạng · Trinh thường tại Nhan Lăng Ba» (each close pops one; looks like a dead ✕) · -
+- year 5 · turn 57 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 10 copies of «Tâm trạng · Trinh thường tại Nhan Lăng Ba» (each close pops one; looks like a dead ✕) · -
+- year 5 · turn 57 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 6 copies of «Tâm trạng · Thường tại Khổng Hàm Hương» (each close pops one; looks like a dead ✕) · -
+- year 5 · turn 57 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 3 copies of «Tâm trạng · Thường tại Khổng Hàm Hương» (each close pops one; looks like a dead ✕) · -
+- year 5 · turn 57 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 4 copies of «Tâm trạng · Phi Khương Hồng Ngọc» (each close pops one; looks like a dead ✕) · -
+- year 5 · turn 57 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Đáp ứng Lữ Hi Nguyệt» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-625-65.png
+- year 5 · turn 58 · tuần 0 · buổi 3 · rank 0 · .dlg «Thời cơ» · NEW SCREEN · first time on this screen; buttons: Lui | Tự ra tay: Thời cơMong manhT | Giao cho người làmMong manhT · shots-flight2-s8/m-new-629-66.png
+- year 5 · turn 58 · tuần 1 · buổi 0 · rank 0 · .dlg «Sứ đoàn vào triều» · NEW SCREEN · first time on this screen; buttons: Đứng xem rồi vềTốnkhôngĐượck · shots-flight2-s8/m-new-630-67.png
+- year 5 · turn 58 · tuần 1 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=23: Tin báo / Nhờ thái giám tìm thú nuôi / Chương 5 · Lời thơ vượt tường cung / Chương 5 · Lời thơ vượt tường cung / Đã biết về Thường tại Thôi Lan Âm / Chươ · shots-flight2-s8/loop-73.png
+- year 5 · turn 58 · tuần 2 · buổi 0 · rank 0 · .dlg «Đồ cũ trở về» · NEW SCREEN · first time on this screen; buttons: Chuộc vềRất vữngTốnBạc -4Đượ | Thôi, không chuộcRất vữngTốn · shots-flight2-s8/m-new-634-68.png
+- year 5 · turn 58 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Trinh đáp ứng Nhan Lăng Ba» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-637-69.png
+- year 5 · turn 59 · tuần 0 · buổi 2 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-640.png
+- year 5 · turn 60 · tuần 1 · buổi 3 · rank 0 · #modal «Chương 5 · Lời thơ vượt tường cung» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-657-70.png
+- year 5 · turn 60 · tuần 2 · buổi 2 · rank 0 · .mapsc «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-660.png
+- year 5 · turn 61 · tuần 1 · buổi 2 · rank 0 · .dlg «Đã biết về Huệ quý phi Vương Yên Nhiên» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-668-71.png
+- year 5 · turn 61 · tuần 1 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=13: Tin báo / Tin báo / Lịch tháng / Chương 5 · Lời thơ vượt tường cung / Lịch tháng / Tin báo) · shots-flight2-s8/loop-80.png
+- year 5 · turn 61 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm bệnh · nhẹ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-673-72.png
+- year 5 · turn 62 · tuần 0 · buổi 3 · rank 0 · #modal «Chuyện trong cung» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-676-73.png
+- year 5 · turn 62 · tuần 0 · buổi 3 · rank 0 · .dlg «Chuyện trong cung» · NEW SCREEN · first time on this screen; buttons: Dúi bạc cho người của Tổng q | Chia phần ít ỏi cho người hầ | Nhịn đói, chép kinh qua ngày · shots-flight2-s8/m-new-677-74.png
+- year 5 · turn 62 · tuần 1 · buổi 2 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-680.png
+- year 5 · turn 62 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Đáp ứng Vân Chu Nguyệt Quế» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-686-1.png
+- year 5 · turn 62 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Đáp ứng Kiều Mặc Nhi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-686-2.png
+- year 5 · turn 63 · tuần 0 · buổi 0 · rank 0 · #modal «Quẻ Thượng thượng · Mưu kế» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-flight2-s8/m-new-687-3.png
+- year 5 · turn 63 · tuần 0 · buổi 0 · rank 0 · .dlg «Quẻ Thượng thượng · Mưu kế» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-flight2-s8/m-new-687-4.png
+- year 5 · turn 63 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=16: Lịch tháng / Chương 5 · Lời thơ vượt tường cung / Lịch tháng / Hoàng tự trong cung / Chương 5 · Lời thơ vượt tường cung / Chương 5 · Lời thơ vượt tường c · shots-flight2-s8/loop-82.png
+- year 5 · turn 63 · tuần 1 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Tin trong cung buổi này) · shots-flight2-s8/noturn-83.png
+- year 5 · turn 64 · tuần 0 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-700.png
+- year 5 · turn 64 · tuần 2 · buổi 0 · rank 0 · .dlg «Tai mắt» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-707-5.png
+- year 5 · turn 65 · tuần 2 · buổi 0 · rank 0 · .dlg «Tiết Vạn thọ · Chuyện bên lề hội» · NEW SCREEN · first time on this screen; buttons: Mở ra xem tại chỗTốnSức -8Đư | Bảo Cung nữ thân tín tam đẳn | Đem tới Nội vụ phủ xin ghi s | Cất kín, chờ xem ai nhắc tới · shots-flight2-s8/m-new-711-6.png
+- year 5 · turn 65 · tuần 2 · buổi 0 · rank 0 · #modal «Tiết Vạn thọ · Dâng lễ» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-711-7.png
+- year 5 · turn 65 · tuần 2 · buổi 0 · rank 0 · .dlg «Tiết Vạn thọ · Dâng lễ» · NEW SCREEN · first time on this screen; buttons: Tự tay làm lễ vật (theo Họa, | Không dâng lễRất vữngTốnkhôn · shots-flight2-s8/m-new-711-8.png
+- year 5 · turn 65 · tuần 2 · buổi 0 · rank 0 · .dlg «Lỡ hẹn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-711-9.png
+- year 5 · turn 65 · tuần 2 · buổi 0 · rank 0 · #modal «Nội vụ phủ trả đồ» · NEW SCREEN · first time on this screen; buttons: Lui | ThườngVáy sa xanh ngọc · shots-flight2-s8/m-new-711-10.png
+- year 5 · turn 66 · tuần 0 · buổi 0 · rank 0 · .dlg «Đại án vu cổ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-715-11.png
+- year 5 · turn 66 · tuần 0 · buổi 0 · rank 0 · .dlg «Đại lễ sắc lập Thái tử» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-715-12.png
+- year 5 · turn 66 · tuần 1 · buổi 0 · rank 0 · .dlg «Quốc tang» · NEW SCREEN · first time on this screen; buttons: Quỳ túc trực, tụng kinhTốnSứ | Thắp nén hương rồi luiTốnkhô · shots-flight2-s8/m-new-719-13.png
+- year 5 · turn 66 · tuần 1 · buổi 1 · rank 0 · .dlg «Khóc suốt đêm» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-720.png
+- year 5 · turn 67 · tuần 1 · buổi 1 · rank 0 · .dlg «Quẻ Hạ · Giao thiệp» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-732-14.png
+- year 5 · turn 68 · tuần 0 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-740.png
+- year 5 · turn 68 · tuần 1 · buổi 1 · rank 0 · .dlg «Đã biết về Thục thường tại Niên Ninh Hương» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-744-15.png
+- year 5 · turn 68 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Quý nhân Vân Chu Nguyệt Quế» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-750-16.png
+- year 5 · turn 69 · tuần 2 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-760.png
+- year 5 · turn 69 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 6 copies of «Lịch tháng» (each close pops one; looks like a dead ✕) · -
+- year 5 · turn 69 · tuần 2 · buổi 3 · rank 0 · .dlg «Chứng cứ về Đáp ứng Kiều Mặc Nhi» · NEW SCREEN · first time on this screen; buttons: Lui | Tố giácVữngTốn2 khắc·Chứng c | Trình Thái hậuKhó lườngTốn2 | Uy hiếp đòi bạcHiểmTốn2 khắc | Bán cho phe khácTốn2 khắc·Ch | Trả chứng cứ lấy lòngTốn2 kh · shots-flight2-s8/m-new-762-17.png
+- year 5 · turn 69 · tuần 2 · buổi 3 · rank 0 · .dlg «Quý tộc kén rể · kén dâu» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-762-18.png
+- year 6 · turn 70 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=22: Tin báo / Chương 5 · Lời thơ vượt tường cung / Chương 5 · Lời thơ vượt tường cung / Tin báo / Lịch tháng / Tin báo) · shots-flight2-s8/loop-89.png
+- year 6 · turn 72 · tuần 0 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-780.png
+- year 6 · turn 72 · tuần 0 · buổi 1 · rank 0 · .dlg «Quẻ Trung · Sủng» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-flight2-s8/m-new-780-19.png
+- year 6 · turn 72 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=14: Tin báo / Danh hiệu / Quan hệ với / Danh hiệu / Lịch tháng / Quan hệ với) · shots-flight2-s8/loop-90.png
+- year 6 · turn 72 · tuần 1 · buổi 0 · rank 0 · .dlg «Tuyển tú» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-783-20.png
+- year 6 · turn 72 · tuần 1 · buổi 0 · rank 0 · .dlg «Đại tuyển tú nữ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-783-21.png
+- year 6 · turn 72 · tuần 1 · buổi 3 · rank 0 · .dlg «Tâm trạng · Hiền đáp ứng Lữ Hi Nguyệt» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-786-22.png
+- year 6 · turn 73 · tuần 2 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-800.png
+- year 6 · turn 74 · tuần 2 · buổi 0 · rank 0 · .dlg «Nhật thực, sao chổi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-811-23.png
+- year 6 · turn 75 · tuần 0 · buổi 2 · rank 0 · #modal «Thư hương» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-817-24.png
+- year 6 · turn 75 · tuần 0 · buổi 2 · rank 0 · .dlg «Bổng lộc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-817-25.png
+- year 6 · turn 75 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Tần Vương Yên Nhiên» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-818-26.png
+- year 6 · turn 75 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Thường tại Vân Chu Nguyệt Quế» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-818-27.png
+- year 6 · turn 75 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Đáp ứng Thôi Lan Âm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-818-28.png
+- year 6 · turn 75 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Đáp ứng Khổng Hàm Hương» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-818-29.png
+- year 6 · turn 75 · tuần 1 · buổi 1 · rank 0 · page «Ngọc Thanh các · Ở đây còn 1 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-820.png
+- year 6 · turn 75 · tuần 1 · buổi 1 · rank 0 · .dlg «Có thai: Rất thấp» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-824-30.png
+- year 6 · turn 76 · tuần 2 · buổi 0 · rank 0 · #modal «Hội Phượng · Lời mời: Thi thắt dây cương tua cờ» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-831-31.png
+- year 6 · turn 76 · tuần 2 · buổi 0 · rank 0 · .dlg «Hội Phượng · Lời mời: Thi thắt dây cương tua cờ» · NEW SCREEN · first time on this screen; buttons: Ghi tên dự thi khéo tayCó cơ | Ghi tên, bỏ bạc mời thầy kèm | Không dựRất vữngTốnkhôngĐược · shots-flight2-s8/m-new-831-32.png
+- year 6 · turn 77 · tuần 0 · buổi 0 · rank 0 · .dlg «Lễ tấn phong Thường tại Lục Như Sương» · NEW SCREEN · first time on this screen; buttons: Đến chúc mừngTốnSức -5Đượcth | Gửi lễ mừngTốnBạc -15Đượcthi | Không đếnTốnkhôngĐượcSức +3K · shots-flight2-s8/m-new-835-33.png
+- year 6 · turn 77 · tuần 0 · buổi 0 · rank 0 · .dlg «Bị thu hiệu ban» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-835-34.png
+- year 6 · turn 77 · tuần 1 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-840.png
+- year 6 · turn 77 · tuần 2 · buổi 1 · rank 0 · .dlg «Quẻ Thượng · Danh» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-flight2-s8/m-new-844-35.png
+- year 6 · turn 79 · tuần 0 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-860.png
+- year 6 · turn 79 · tuần 0 · buổi 2 · rank 0 · .dlg «Quẻ Hạ · Con cái» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-flight2-s8/m-new-861-36.png
+- year 6 · turn 80 · tuần 0 · buổi 2 · rank 0 · .dlg «Trốn trong phòng» · NEW SCREEN · first time on this screen; buttons: Tiếp tụcRất vữngTốnkhôngĐược · shots-flight2-s8/m-new-872-37.png
+- year 6 · turn 80 · tuần 0 · buổi 2 · rank 0 · .dlg «Học Vũ: ai dạy?» · NEW SCREEN · first time on this screen; buttons: Lui | Nhạc sư Giáo phườngTốn2 khắc · shots-flight2-s8/m-new-873-38.png
+- year 6 · turn 80 · tuần 1 · buổi 2 · rank 0 · .dlg «Kế vị» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-877-39.png
+- year 6 · turn 80 · tuần 2 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-880.png
+- year 6 · turn 81 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=16: Tin báo / Lịch tháng / Chương 5 · Lời thơ vượt tường cung / Chương 5 · Lời thơ vượt tường cung / Chương 5 · Lời thơ vượt tường cung / Tin báo) · shots-flight2-s8/loop-104.png
+- year 6 · turn 82 · tuần 1 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-900.png
+- year 6 · turn 82 · tuần 1 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=16: Tin báo / Chương 5 · Lời thơ vượt tường cung / Lịch tháng / Tin báo / Tin báo / Chương 5 · Lời thơ vượt tường cung) · shots-flight2-s8/loop-105.png
+- year 6 · turn 82 · tuần 2 · buổi 0 · rank 0 · .dlg «Quẻ Hạ hạ · Danh» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-flight2-s8/m-new-903-40.png
+- year 6 · turn 83 · tuần 0 · buổi 0 · rank 0 · .dlg «Chương 6: Tập nháp bị trộm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-907-41.png
+- year 6 · turn 83 · tuần 1 · buổi 2 · rank 0 · #modal «Nghe đồn» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-912-42.png
+- year 6 · turn 83 · tuần 1 · buổi 2 · rank 0 · .dlg «Nghe đồn» · NEW SCREEN · first time on this screen; buttons: Sang gặp Quý nhân Tư Mã Tố N | Cho người tra xem ai tung ti | Mặc kệTốnkhôngĐượcSức +3·giữ · shots-flight2-s8/m-new-913-43.png
+- year 6 · turn 83 · tuần 2 · buổi 0 · rank 0 · .dlg «Quẻ Hạ hạ · Mưu kế» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-flight2-s8/m-new-915-44.png
+- year 7 · turn 84 · tuần 0 · buổi 1 · rank 0 · .mapsc «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-920.png
+- year 7 · turn 84 · tuần 0 · buổi 1 · rank 0 · .dlg «Chương 6 · Tập nháp bị trộm» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh | Đi làm: Giữ Sức, chờ dịp xin · shots-flight2-s8/m-new-920-45.png
+- year 7 · turn 84 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=16: Xem quan hệ của / Tin báo / Tin báo / Tin báo / Tin báo / Lịch tháng) · shots-flight2-s8/loop-109.png
+- year 7 · turn 84 · tuần 1 · buổi 3 · rank 0 · .dlg «Quẻ Thượng · Tài nghệ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-926-46.png
+- year 7 · turn 85 · tuần 2 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-940.png
+- year 7 · turn 86 · tuần 0 · buổi 3 · rank 0 · .dlg «Thủy đậu · nhẹ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-946-47.png
+- year 7 · turn 86 · tuần 1 · buổi 0 · rank 0 · .dlg «Quẻ Trung · Mưu kế» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-947-48.png
+- year 7 · turn 87 · tuần 1 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-960.png
+- year 7 · turn 88 · tuần 1 · buổi 2 · rank 0 · .dlg «Ra ngoài khi mặc trung y?» · NEW SCREEN · first time on this screen; buttons: Vẫn điTốnDanh -2Đượckhông | Ở lạiTốnkhôngĐượckhôngGhi ch · shots-flight2-s8/m-new-973-49.png
+- year 7 · turn 88 · tuần 2 · buổi 0 · rank 0 · .dlg «Lập Hoàng hậu mới» · NEW SCREEN · first time on this screen; buttons: Giữ khoảng cáchTốnkhôngĐượck · shots-flight2-s8/m-new-975-50.png
+- year 7 · turn 88 · tuần 2 · buổi 0 · rank 0 · #modal «Lập Hoàng hậu mới» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-975-51.png
+- year 7 · turn 88 · tuần 2 · buổi 3 · rank 0 · .dlg «Xét phẩm cuối tháng · Thường tại» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-978-52.png
+- year 7 · turn 89 · tuần 2 · buổi 0 · rank 0 · #modal «Hội Phượng · Lời mời: Thi đầu hồ trong lều xem hội» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-979-53.png
+- year 7 · turn 89 · tuần 2 · buổi 0 · rank 0 · .dlg «Hội Phượng · Lời mời: Thi đầu hồ trong lều xem hội» · NEW SCREEN · first time on this screen; buttons: Ghi tên dự thi đầu hồMong ma | Ghi tên, bỏ bạc mời thầy kèm | Không dựRất vữngTốnkhôngĐược · shots-flight2-s8/m-new-979-54.png
+- year 7 · turn 89 · tuần 2 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-980.png
+- year 7 · turn 90 · tuần 0 · buổi 0 · rank 0 · #modal «Bổng lộc tháng năm» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-983-55.png
+- year 7 · turn 90 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng năm · Lễ nghĩa» · NEW SCREEN · first time on this screen; buttons: Chu toàn lễ nghĩaRất vữngTốn | Bớt lễ nghĩaRất vữngTốnkhông · shots-flight2-s8/m-new-983-56.png
+- year 7 · turn 90 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=14: Tin báo / Lịch tháng / Chương 6 · Tập nháp bị trộm / Đã biết về Phế phi Nhan Lăng Ba / Lịch tháng / Tin báo) · shots-flight2-s8/loop-113.png
+- year 7 · turn 91 · tuần 1 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1000.png
+- year 7 · turn 92 · tuần 1 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Chương 6 · Tập nháp bị trộm / Tin trong cung buổi này) · shots-flight2-s8/noturn-117.png
+- year 7 · turn 92 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=23: Chương 6 · Tập nháp bị trộm / Chương 6 · Tập nháp bị trộm / Chứng cứ về Phế phi Đoan Mộc Nhu Tắc / Tin báo / Lịch tháng / Đã biết về Phế phi Đoan Mộc Nhu · shots-flight2-s8/loop-118.png
+- year 7 · turn 92 · tuần 2 · buổi 3 · rank 0 · .dlg «Đã biết về Phế phi Đoan Mộc Nhu Tắc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1018-57.png
+- year 7 · turn 93 · tuần 0 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1020.png
+- year 7 · turn 93 · tuần 1 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=25: Tin báo / Chương 6 · Tập nháp bị trộm / Chương 6 · Tập nháp bị trộm / Lịch tháng / Tin báo / Lịch tháng) · shots-flight2-s8/loop-120.png
+- year 7 · turn 94 · tuần 2 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1040.png
+- year 7 · turn 95 · tuần 0 · buổi 0 · rank 0 · .dlg «Tâm trạng · Quý nhân Kiều Ngọc Hành» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1043-58.png
+- year 7 · turn 95 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=25: Lịch tháng / Chứng cứ về Phế phi Đoan Mộc Nhu Tắc / Chương 6 · Tập nháp bị trộm / Đã biết về Phế phi Đoan Mộc Nhu Tắc / Chứng cứ về Phế phi Đoan Mộc Nhu  · shots-flight2-s8/loop-124.png
+- year 7 · turn 96 · tuần 1 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1060.png
+- year 7 · turn 96 · tuần 1 · buổi 1 · rank 0 · .dlg «Phong hàn · nhẹ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1060-59.png
+- year 7 · turn 96 · tuần 1 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=14: Cầm / Lịch tháng / Tin báo / Tin báo / Chương 6 · Tập nháp bị trộm / Lịch tháng) · shots-flight2-s8/loop-126.png
+- year 8 · turn 97 · tuần 1 · buổi 2 · rank 0 · .dlg «Long nhan đại nộ» · NEW SCREEN · first time on this screen; buttons: Tiếp tụcRất vữngTốnkhôngĐược · shots-flight2-s8/m-new-1072-60.png
+- year 8 · turn 98 · tuần 0 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1080.png
+- year 8 · turn 99 · tuần 0 · buổi 2 · rank 0 · .dlg «Cầm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1093-61.png
+- year 8 · turn 99 · tuần 1 · buổi 3 · rank 0 · #modal «Nhờ thái giám mua đồ» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-1098-62.png
+- year 8 · turn 99 · tuần 1 · buổi 3 · rank 0 · .dlg «Nhờ thái giám mua đồ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1098-63.png
+- year 8 · turn 99 · tuần 1 · buổi 3 · rank 0 · .dlg «Tin chờ người sai đi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1098-64.png
+- year 8 · turn 99 · tuần 2 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1100.png
+- year 8 · turn 99 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Ý đáp ứng Diệp Cẩm Sương» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1102-65.png
+- year 8 · turn 99 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Quý nhân Lục Như Sương» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1102-66.png
+- year 8 · turn 99 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Tần Kiều Ngọc Hành» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1102-67.png
+- year 8 · turn 100 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=21: Lịch tháng / Lịch tháng / Tin báo / Chương 6 · Tập nháp bị trộm / Tin báo / Lịch tháng) · shots-flight2-s8/loop-131.png
+- year 8 · turn 101 · tuần 1 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1120.png
+- year 8 · turn 101 · tuần 2 · buổi 0 · rank 0 · .dlg «Học Cầm: ai dạy?» · NEW SCREEN · first time on this screen; buttons: Lui | Nhạc sư Giáo phườngTốn2 khắc · shots-flight2-s8/m-new-1123-68.png
+- year 8 · turn 102 · tuần 0 · buổi 0 · rank 0 · .dlg «Lũ lớn, mất mùa» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1127-69.png
+- year 8 · turn 102 · tuần 1 · buổi 2 · rank 0 · .dlg «Quẻ Thượng thượng · Giao thiệp» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1133-70.png
+- year 8 · turn 103 · tuần 0 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1140.png
+- year 8 · turn 103 · tuần 1 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=3: Chương 6 · Tập nháp bị trộm / Tin báo / Tin trong cung buổi này) · shots-flight2-s8/noturn-135.png
+- year 8 · turn 104 · tuần 0 · buổi 3 · rank 0 · #modal «Ôn dịch» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-1154-1.png
+- year 8 · turn 104 · tuần 0 · buổi 3 · rank 0 · .dlg «Ôn dịch» · NEW SCREEN · first time on this screen; buttons: Vẫn đi lại như thườngTốnkhôn · shots-flight2-s8/m-new-1155-2.png
+- year 8 · turn 104 · tuần 1 · buổi 0 · rank 0 · .dlg «Đại trai đàn cầu phúc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1156-3.png
+- year 8 · turn 104 · tuần 2 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1160.png
+- year 8 · turn 105 · tuần 1 · buổi 0 · rank 0 · .dlg «Ân thưởng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1168-4.png
+- year 8 · turn 105 · tuần 2 · buổi 2 · rank 0 · page «Ngọc Thanh các · Ở đây còn 1 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1180.png
+- year 8 · turn 106 · tuần 2 · buổi 1 · rank 0 · .dlg «Chương 7 · Vòng thi Ngự hoa viên» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh | Đi làm: Giữ Sức, chờ dịp xin · shots-flight2-s8/m-new-1183-1.png
+- year 8 · turn 107 · tuần 0 · buổi 0 · rank 0 · #modal «Bổng lộc tháng chín» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-1186-2.png
+- year 8 · turn 107 · tuần 0 · buổi 0 · rank 0 · .dlg «Chương 7: Vòng thi Ngự hoa viên» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1186-3.png
+- year 8 · turn 107 · tuần 0 · buổi 0 · rank 0 · .dlg «Yến đầy tháng hoàng tử» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1186-4.png
+- year 8 · turn 107 · tuần 1 · buổi 0 · rank 0 · .dlg «Phiên vương nhập triều» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1190-5.png
+- year 8 · turn 108 · tuần 0 · buổi 2 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1200.png
+- year 8 · turn 109 · tuần 2 · buổi 2 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1220.png
+- year 9 · turn 111 · tuần 1 · buổi 2 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1240.png
+- year 9 · turn 113 · tuần 0 · buổi 2 · rank 0 · .mapsc «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1260.png
+- year 9 · turn 113 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Quý nhân Khương Hồng Ngọc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1269-6.png
+- year 9 · turn 113 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Đức đáp ứng Bạch Linh Lung» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1269-7.png
+- year 9 · turn 113 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Đáp ứng Giang Mộng Dao» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1269-8.png
+- year 9 · turn 114 · tuần 1 · buổi 3 · rank 0 · .dlg «Tâm trạng · Huệ đáp ứng Vương Yên Nhiên» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1277-9.png
+- year 9 · turn 114 · tuần 1 · buổi 3 · rank 0 · .dlg «Tâm trạng · Tĩnh thường tại Nhâm Ngữ Yên» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1277-10.png
+- year 9 · turn 114 · tuần 2 · buổi 2 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1280.png
+- year 9 · turn 114 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=21: Xem quan hệ của / Tin báo / Chương 7 · Vòng thi Ngự hoa viên / Xem quan hệ của / Chương 7 · Vòng thi Ngự hoa viên / Tin báo) · shots-flight2-s8/loop-149.png
+- year 9 · turn 115 · tuần 1 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=10: Mục lục / Lịch tháng / Chương 7 · Vòng thi Ngự hoa viên / Chương 7 · Vòng thi Ngự hoa viên / Chương 7 · Vòng thi Ngự hoa viên / Chương 7 · Vòng thi Ngự h · shots-flight2-s8/loop-151.png
+- year 9 · turn 116 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Quý nhân Tư Mã Tố Ngưng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1298-1.png
+- year 9 · turn 116 · tuần 1 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1300.png
+- year 9 · turn 117 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=12: Lịch tháng / Tin báo / Lịch tháng / Lịch tháng / Lịch tháng / Cầm) · shots-flight2-s8/loop-153.png
+- year 9 · turn 117 · tuần 1 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=11: Chương 7 · Vòng thi Ngự hoa viên / Tin báo / Chương 7 · Vòng thi Ngự hoa viên / Chương 7 · Vòng thi Ngự hoa viên / Chương 7 · Vòng thi Ngự hoa viên / Lịc · shots-flight2-s8/loop-154.png
+- year 9 · turn 117 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 3 copies of «Tâm trạng · Đức đáp ứng Bạch Linh Lung» (each close pops one; looks like a dead ✕) · -
+- year 9 · turn 118 · tuần 0 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1320.png
+- year 9 · turn 119 · tuần 1 · buổi 2 · rank 0 · .dlg «Vũ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1337-2.png
+- year 9 · turn 119 · tuần 1 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=3: Tin báo / Vũ / Tin trong cung buổi này) · shots-flight2-s8/noturn-157.png
+- year 9 · turn 119 · tuần 2 · buổi 1 · rank 0 · page «Ngọc Thanh các · Ở đây còn 2 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1340.png
+- year 9 · turn 121 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Có tin đang chờ · xo» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Tin trong cung buổi này) · shots-flight2-s8/noturn-158.png
+- year 9 · turn 122 · tuần 2 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1360.png
+- year 9 · turn 123 · tuần 0 · buổi 0 · rank 0 · #modal «Bổng lộc tháng mười một» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-1363-3.png
+- year 9 · turn 123 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng mười một · Lễ nghĩa» · NEW SCREEN · first time on this screen; buttons: Chu toàn lễ nghĩaRất vữngTốn | Bớt lễ nghĩaRất vữngTốnkhông · shots-flight2-s8/m-new-1363-4.png
+- year 9 · turn 123 · tuần 0 · buổi 0 · rank 0 · .dlg «Lễ tấn phong Đáp ứng Vân Chu Nguyệt Quế» · NEW SCREEN · first time on this screen; buttons: Đến chúc mừngTốnSức -5Đượcth | Gửi lễ mừngTốnBạc -15Đượcthi | Không đếnTốnkhôngĐượcSức +3K · shots-flight2-s8/m-new-1363-5.png
+- year 10 · turn 124 · tuần 1 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1380.png
+- year 10 · turn 126 · tuần 0 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1400.png
+- year 10 · turn 126 · tuần 0 · buổi 2 · rank 0 · #modal «Cung nữ thân tín tam đẳng Lữ Thu Văn» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-1401-6.png
+- year 10 · turn 126 · tuần 0 · buổi 2 · rank 0 · .dlg «Cung nữ thân tín tam đẳng Lữ Thu Văn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1401-7.png
+- year 10 · turn 126 · tuần 0 · buổi 2 · rank 0 · .dlg «Quẻ Hạ · Sức khỏe» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-flight2-s8/m-new-1401-8.png
+- year 10 · turn 126 · tuần 2 · buổi 0 · rank 0 · .dlg «Quẻ Hạ · Sủng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1407-9.png
+- year 10 · turn 127 · tuần 2 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1420.png
+- year 10 · turn 129 · tuần 1 · buổi 1 · rank 0 · .mapsc «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1440.png
+- year 10 · turn 130 · tuần 1 · buổi 0 · rank 0 · .dlg «Chương 8 · Lời vu đạo thơ» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh | Đi làm: Giữ Sức, chờ dịp xin · shots-flight2-s8/m-new-1451-10.png
+- year 10 · turn 130 · tuần 2 · buổi 0 · rank 0 · .dlg «Chương 8: Lời vu đạo thơ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1455-11.png
+- year 10 · turn 130 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Phi Kiều Ngọc Hành» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1458-12.png
+- year 10 · turn 130 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Quý nhân Lâm Ngưng Sương» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1458-13.png
+- year 10 · turn 130 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Thường tại Ôn Tuyết Nhạn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1458-14.png
+- year 10 · turn 130 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Đáp ứng Khương Hồng Ngọc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1458-15.png
+- year 10 · turn 130 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Đáp ứng Diệp Cẩm Sương» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1458-16.png
+- year 10 · turn 131 · tuần 0 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1460.png
+- year 10 · turn 132 · tuần 2 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1480.png
+- year 10 · turn 134 · tuần 0 · buổi 2 · rank 0 · .dlg «Lòng không giữ được» · NEW SCREEN · first time on this screen; buttons: Trốn trong phòngRất vữngTốnk | Thức trắng đêmRất vữngTốnSức | Cầu khấn khắp nơiRất vữngTốn · shots-flight2-s8/m-new-1496-17.png
+- year 10 · turn 134 · tuần 1 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1500.png
+- year 10 · turn 134 · tuần 2 · buổi 2 · rank 0 · .dlg «Công · Nữ công: các lối» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1505-18.png
+- year 10 · turn 135 · tuần 1 · buổi 3 · rank 0 · .dlg «Hà bao uyên ương: dùng vật liệu gì?» · NEW SCREEN · first time on this screen; buttons: Lui | Xem thêm | Hà bao uyên ương · vải, chỉ | Hà bao uyên ương · lụa, chỉ | Hà bao uyên ương · gấm, chỉ  · shots-flight2-s8/m-new-1514-19.png
+- year 10 · turn 135 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Lịch tháng / Tin trong cung buổi này) · shots-flight2-s8/noturn-178.png
+- year 11 · turn 136 · tuần 0 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1520.png
+- year 11 · turn 136 · tuần 1 · buổi 2 · rank 0 · .dlg «Đai lưng thêu mây: dùng vật liệu gì?» · NEW SCREEN · first time on this screen; buttons: Lui | Xem thêm | Đai lưng thêu mây · vải, chỉ | Đai lưng thêu mây · lụa, chỉ | Đai lưng thêu mây · gấm, chỉ · shots-flight2-s8/m-new-1529-20.png
+- year 11 · turn 136 · tuần 1 · buổi 2 · rank 0 · #kpinfo «» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-1529-21.png
+- year 11 · turn 136 · tuần 2 · buổi 2 · rank 0 · .dlg «Ta bắt gặp» · NEW SCREEN · first time on this screen; buttons: Nghe lénKhó lườngTốn1 khắcĐư | Thôi, lui về cungTốn0 khắc đ | Mặc kệTốnkhôngĐượckhôngGhi c · shots-flight2-s8/m-new-1532-22.png
+- year 11 · turn 138 · tuần 0 · buổi 0 · rank 0 · .dlg «Lễ tấn phong Phi Lâm Ngưng Sương» · NEW SCREEN · first time on this screen; buttons: Đến chúc mừngTốnSức -5Đượcth | Gửi lễ mừngTốnBạc -15Đượcthi | Không đếnTốnkhôngĐượcSức +3K · shots-flight2-s8/m-new-1539-23.png
+- year 11 · turn 138 · tuần 0 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1540.png
+- year 11 · turn 138 · tuần 2 · buổi 2 · rank 0 · #modal «Bổng lộc tháng giêng» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-1548-24.png
+- year 11 · turn 139 · tuần 2 · buổi 0 · rank 0 · #modal «Quẻ Thượng thượng · Giao thiệp» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-flight2-s8/m-new-1559-25.png
+- year 11 · turn 139 · tuần 2 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1560.png
+- year 11 · turn 141 · tuần 2 · buổi 1 · rank 0 · #modal «Bổng lộc tháng tư» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-1575-26.png
+- year 11 · turn 141 · tuần 2 · buổi 3 · rank 0 · #modal «Cung nữ thân tín tam đẳng Liễu Bảo Châu» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-1578-27.png
+- year 11 · turn 141 · tuần 2 · buổi 3 · rank 0 · .dlg «Cung nữ thân tín tam đẳng Liễu Bảo Châu» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1578-28.png
+- year 11 · turn 142 · tuần 0 · buổi 0 · rank 0 · .dlg «Hỏa hoạn lớn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1579-29.png
+- year 11 · turn 142 · tuần 0 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1580.png
+- year 11 · turn 143 · tuần 1 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=7: Đã biết về Phế phi Thôi Lan Âm / Danh hiệu / Danh hiệu / Danh hiệu / Lịch tháng / Danh hiệu) · shots-flight2-s8/loop-188.png
+- year 11 · turn 143 · tuần 2 · buổi 1 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1600.png
+- year 11 · turn 144 · tuần 0 · buổi 1 · rank 0 · #modal «Có người bán tin» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-1605-1.png
+- year 11 · turn 144 · tuần 1 · buổi 3 · rank 0 · #modal «Lời thách đấu» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-1615-2.png
+- year 11 · turn 144 · tuần 1 · buổi 3 · rank 0 · .dlg «Lời thách đấu» · NEW SCREEN · first time on this screen; buttons: Nhận lời thách đấuMong manhT | Từ chốiRất vữngTốnkhôngĐượcg · shots-flight2-s8/m-new-1615-3.png
+- year 11 · turn 144 · tuần 1 · buổi 3 · rank 0 · .dlg «Chọn người theo hầu» · NEW SCREEN · first time on this screen; buttons: Lui | Cung nữ thân tín tam đẳngLiễ | Đi một mìnhTốnkhôngĐượcviệc  · shots-flight2-s8/m-new-1615-4.png
+- year 11 · turn 145 · tuần 2 · buổi 0 · rank 0 · #kmrew «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1620.png
+- year 11 · turn 147 · tuần 2 · buổi 0 · rank 0 · .dlg «Chứng mất ngủ · nặng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1636-1.png
+- year 11 · turn 147 · tuần 2 · buổi 1 · rank 0 · .dlg «Quẻ Trung · Con cái» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-flight2-s8/m-new-1637-2.png
+- year 11 · turn 148 · tuần 2 · buổi 0 · rank 0 · #kmrew «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1640.png
+- year 11 · turn 149 · tuần 0 · buổi 0 · rank 0 · .dlg «Lễ tấn phong Thường tại Vân Chu Nguyệt Quế» · NEW SCREEN · first time on this screen; buttons: Đến chúc mừngTốnSức -5Đượcth | Gửi lễ mừngTốnBạc -15Đượcthi | Không đếnTốnkhôngĐượcSức +3K · shots-flight2-s8/m-new-1644-3.png
+- year 11 · turn 149 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=11: Thiên mệnh / Tin báo / Đã biết về Hoàng hậu Phú Sát Nguyệt Hoa / Lịch tháng / Thiên mệnh / Thiên mệnh) · shots-flight2-s8/loop-190.png
+- year 11 · turn 150 · tuần 1 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1660.png
+- year 11 · turn 152 · tuần 0 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1680.png
+- year 11 · turn 152 · tuần 0 · buổi 1 · rank 0 · .dlg «Chứng mất ngủ · nguy kịch» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1681-4.png
+- year 11 · turn 152 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=10: Tin báo / Chương 8 · Lời vu đạo thơ / Chương 8 · Lời vu đạo thơ / Chứng cứ về Phế phi Kiều Mặc Nhi / Lịch tháng / Chương 8 · Lời vu đạo thơ) · shots-flight2-s8/loop-192.png
+- year 12 · turn 153 · tuần 2 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1700.png
+- year 12 · turn 155 · tuần 1 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1720.png
+- year 12 · turn 155 · tuần 1 · buổi 0 · rank 0 · #modal «Cung nữ thân tín tam đẳng Thạch Lục Châu» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-1720-5.png
+- year 12 · turn 155 · tuần 1 · buổi 0 · rank 0 · .dlg «Cung nữ thân tín tam đẳng Thạch Lục Châu» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1720-6.png
+- year 12 · turn 155 · tuần 1 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=3: Tin báo / Chương 8 · Lời vu đạo thơ / Tin trong cung buổi này) · shots-flight2-s8/noturn-195.png
+- year 12 · turn 155 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Đáp ứng Lục Như Sương» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1727-7.png
+- year 12 · turn 155 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Đáp ứng Tống Thư Nhi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1727-8.png
+- year 12 · turn 155 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Thường tại Trưởng Tôn Cẩm Sắt» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1727-9.png
+- year 12 · turn 155 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Đáp ứng Lâm Ngưng Sương» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1727-10.png
+- year 12 · turn 155 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Quý nhân Ôn Tuyết Nhạn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1727-11.png
+- year 12 · turn 156 · tuần 1 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=6: Chương 8 · Lời vu đạo thơ / Lịch tháng / Tin báo / Chương 8 · Lời vu đạo thơ / Đã biết về Phế phi Khổng Hàm Hương / Tin trong cung buổi này) · shots-flight2-s8/loop-197.png
+- year 12 · turn 157 · tuần 0 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1740.png
+- year 12 · turn 157 · tuần 0 · buổi 1 · rank 0 · .dlg «Chương 9 · Chứng minh» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh | Đi làm: Giữ Sức, chờ dịp xin · shots-flight2-s8/m-new-1741-12.png
+- year 12 · turn 157 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=13: Chương 9 · Chứng minh / Lịch tháng / Đã biết về Hoàng hậu Hàn Mặc Lan / Chứng cứ về Hoàng hậu Hàn Mặc Lan / Tin báo / Chương 9 · Chứng minh) · shots-flight2-s8/loop-199.png
+- year 12 · turn 157 · tuần 1 · buổi 0 · rank 0 · .dlg «Chương 9: Chứng minh» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1744-13.png
+- year 12 · turn 157 · tuần 1 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=8: Tin báo / Lịch tháng / Đã biết về Phế phi Khổng Hàm Hương / Chương 9 · Chứng minh / Chương 9 · Chứng minh / Chương 9 · Chứng minh) · shots-flight2-s8/loop-200.png
+- year 12 · turn 157 · tuần 2 · buổi 0 · rank 0 · .dlg «Sốt rét · nhẹ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1748-14.png
+- year 12 · turn 158 · tuần 2 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1760.png
+- year 12 · turn 159 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Đáp ứng Bạch Linh Lung» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1767-15.png
+- year 12 · turn 159 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Thường tại Lâm Ngưng Sương» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1767-16.png
+- year 12 · turn 160 · tuần 1 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1780.png
+- year 12 · turn 162 · tuần 2 · buổi 0 · rank 0 · .dlg «Lễ tấn phong Quý nhân Ôn Tuyết Nhạn» · NEW SCREEN · first time on this screen; buttons: Đến chúc mừngTốnSức -5Đượcth | Gửi lễ mừngTốnBạc -15Đượcthi | Không đếnTốnkhôngĐượcSức +3K · shots-flight2-s8/m-new-1792-17.png
+- year 12 · turn 164 · tuần 0 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1800.png
+- year 12 · turn 165 · tuần 1 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=9: Kế vị / Thiên mệnh / Lịch tháng / Tin báo / Đã biết về Phế phi Khổng Hàm Hương / Thiên mệnh) · shots-flight2-s8/loop-207.png
+- year 12 · turn 165 · tuần 2 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1820.png
+- year 12 · turn 167 · tuần 0 · buổi 0 · rank 0 · #modal «Tâm trạng · Đáp ứng Giang Mộng Dao» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1836-18.png
+- year 12 · turn 167 · tuần 1 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1840.png
+- year 13 · turn 169 · tuần 0 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1860.png
+- year 13 · turn 170 · tuần 2 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1880.png
+- year 13 · turn 172 · tuần 1 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1900.png
+- year 13 · turn 172 · tuần 1 · buổi 0 · rank 0 · .dlg «Long thể bất an» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s8/m-new-1900-19.png
+- year 13 · turn 173 · tuần 0 · buổi 2 · rank 0 · #modal «Long thể bất an» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s8/m-new-1909-20.png
+- year 13 · turn 173 · tuần 1 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=12: Đã biết về Phế phi Khổng Hàm Hương / Chương 9 · Chứng minh / Tin báo / Hoàng thượng / Lịch tháng / Chương 9 · Chứng minh) · shots-flight2-s8/loop-219.png
+- year 13 · turn 174 · tuần 0 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s8/m-look-1920.png
+- year 13 · turn 175 · tuần 0 · buổi 0 · rank 0 · ending · EVENT · life over: Hồng nhan bạc mệnh — Năm 13, Hoàng thượng niên hiệu Vĩnh An băng hà, thọ 34 tuổi. Tân Thái hậu Vương Yên Nhiên xét lại chuyện cũ (khả năng: rất thấp), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế · age 32 · buổi 1931 · bugs 97  · shots-flight2-s8/end.png
+- year 3 · Hồng nhan ending night scene fade (m-look-1920, iPad) · ODD · the previous dialog («Bổng lộc tháng bảy» text and Nhận button) shows as a faint ghost on top of the night bedroom scene during the fade, text stays readable under the caption «Đêm không được triệu». Looks like a leftover layer. shot: runner only

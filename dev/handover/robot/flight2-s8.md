@@ -1,8 +1,8 @@
-# flight2-s8 (real-tap harness 6d3a128f, ipad)
+# flight2-s8 (real-tap harness b4b181f8, ipad)
 
 | life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick |
 |---|---|---|---|---|---|---|---|---|
-| flight2-s8 | HARNESS |  | 172 |  | 7 | 1 | 9 | — |
+| flight2-s8 | Hồng nhan bạc mệnh — Năm 13, Hoàng thượng niên hiệu Vĩnh An băng hà, thọ 34 tuổi. Tân Thái hậu Vương Yên Nhiên xét lại chuyện cũ (khả năng: rất thấp), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế | 32 | 1931 | 3641 | 16 | 5 | 97 | — |
 
 ## Dead buttons
 
@@ -13,27 +13,112 @@
 - .dlg «Tâm trạng · Tần Nhan Lăng Ba» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795599823474.png
 - .dlg «Tâm trạng · Phi Kiều Ngọc Hành» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795601791970.png
 - .dlg «Tâm trạng · Thuần phi Thôi Lan Âm» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795601849543.png
+- .dlg «Tâm trạng · Quý phi Lữ Hi Nguyệt» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795602145290.png
+- .dlg «Tâm trạng · Quý phi Lữ Hi Nguyệt» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795602181955.png
+- .dlg «Tâm trạng · Tần Niên Ninh Hương» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795602197302.png
+- .dlg «Tin báo» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795603419874.png
+- .kmov «?» covered by zero size · dead-ipad-1795608186560.png
+- .dlg «Tâm trạng · Ta» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795610159010.png
+- .dlg «Tâm trạng · Thường tại Thôi Lan Âm» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795611466600.png
+- .dlg «Tâm trạng · Ta» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795611994689.png
+- .dlg «Lịch tháng» «Lui» covered by tapped 3× for real, dialog stays · noeffect-1795613363049.png
 
 ## Bugs
 
-- [dead] ×1 close button has no effect: .dlg «Tin báo» «Lui»
-- [dead] ×2 close button has no effect: .dlg «Lịch tháng» «Lui»
+- [dead] ×2 close button has no effect: .dlg «Tin báo» «Lui»
+- [dead] ×3 close button has no effect: .dlg «Lịch tháng» «Lui»
 - [game] ×1 dialog scrolled to the end has no close / next button: .dlg «Lịch tháng»
 - [dead] ×1 close button has no effect: .dlg «Tâm trạng · Thường tại Trưởng Tôn Cẩm Sắt» «Lui»
 - [dead] ×1 close button has no effect: .dlg «Tâm trạng · Tần Nhan Lăng Ba» «Lui»
-- [stuck] ×1 no progress 15 min on .dlg «Tin báo»
+- [stuck] ×4 no progress 15 min on .dlg «Tin báo»
 - [dead] ×1 close button has no effect: .dlg «Tâm trạng · Phi Kiều Ngọc Hành» «Lui»
 - [dead] ×1 close button has no effect: .dlg «Tâm trạng · Thuần phi Thôi Lan Âm» «Lui»
-- [harness] ×1 runner error: page.waitForTimeout: Target page, context or browser has been closed
-## HANDOVER s8 (runner session context rule, 25/11 ~10:20Z)
-- Life NOT finished. Harness: review/robot-realtap 6d3a128f (head ece651b0). LIVE game = origin/main (github.io). Same life id: flight2-s8.
-- Persona/seed/device: bold · origin thd road thd_tho · seed 372282412 · iPad 1180x820 · character Thạch Tú Uyển (Phế phi · lãnh cung, age 21).
-- Checkpoint: dev/handover/robot/flight2-s8-ckpt/flight2-s8.ckpt.json (written 2026-11-25T10:18:01Z, buổi 169, year 2 tháng ba). Results so far: dev/handover/robot/flight2-s8.json. The runner's out dir was /home/user/wt/s8/out (ephemeral, not available to the successor).
-- Resume (successor): create a sparse worktree on review/robot-realtap 6d3a128f (or newer head the foreman names), mkdir out, copy the ckpt to out/flight2-s8.ckpt.json, then run in an until-loop:
-  `setsid nohup bash -c 'until node dev/test/robot-rt.js https://thientran2711.github.io/cung-tuong-mong/ out dev=ipad origin=thd road=thd_tho bot=bold seed=372282412 life=flight2-s8 resume=1; do sleep 5; done' > out/flight2-s8.log 2>&1 &`
-  When the life ends (LIFE DONE) STOP the loop at once and never run resume=1 again; copy the results JSON aside first (F #9 warning).
-- Harness switches so far on this life: 1a29f470 (start) → 64cd9fcf (buổi 86) → 1ffae8bb (buổi 116) → 6d3a128f (buổi 164). Rate after 64cd9fcf ~2-3 buổi/min.
-- Bugs/stuck so far (8 entries in results JSON): 1 stuck (no progress 15 min on .dlg «Tin báo», 62 tin mới, no ✕ in view, year 2 tháng ba, buổi ~166; evidence flight2-s8-ckpt/stuck-1-dump.json; shots + save only on the runner machine); 1 «dialog scrolled to the end has no close/next button: .dlg «Lịch tháng»» (probably harness false positive, ✕ visible); «dead close button has no effect» ×6: Tin báo, Lịch tháng, and person «Tâm trạng» dialogs of Thường tại Trưởng Tôn Cẩm Sắt, Tần Nhan Lăng Ba, Phi Kiều Ngọc Hành, Thuần phi Thôi Lan Âm (4 different persons, plausible real game bug: person mood dialog close; sent to ROLE B #3 session_01UV1Szis6w42ZQrVFshkBo8 by F #9). Shots (NOT in git) are on the runner only: /home/user/wt/s8/out/shots-flight2-s8/.
-- Dead buttons (real taps covered): 0 so far. JS clicks 0. Unstick ladder used 42 times, mostly Lịch tháng loop on 1a29f470 (fixed in later harness).
-- Player review files: moments at dev/handover/robot/review/flight2-s8-moments.md (pushed with this handover). The end-of-life review flight2-s8-review.md is still to be written by the successor from these moments + what it sees. Notes so far: iPad layout is clear and roomy; Tâm trạng panel lists «Nguyên do chưa rõ» for 4 of 5 rows; names shown as «???» in Tin báo text; Danh 0, Sủng 0, Bạc ~0-22, rank 0 (lãnh cung), schemes 2.
-- Reports go to Foreman F #9 session_01UV1SzgyYZztEVKbPNwpyMf (or successor in FOREMAN_F_STATUS.md). Hourly one line: life · buổi · year · rank · bugs · stuck · dead buttons.
+- [dead] ×2 close button has no effect: .dlg «Tâm trạng · Quý phi Lữ Hi Nguyệt» «Lui»
+- [dead] ×1 close button has no effect: .dlg «Tâm trạng · Tần Niên Ninh Hương» «Lui»
+- [game] ×1 dialog queue holds 4 copies of «Tâm trạng · Thuần phi Thôi Lan Âm» (each close pops one; looks like a dead ✕)
+- [stuck] ×85 no-clock loop: 150 taps without a clock step on page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on .dlg «Tin báo»
+- [stuck] ×2 no-clock loop: 150 taps without a clock step on .dlg «Lịch tháng»
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on .dlg «Chương 4 · Danh hiệu Tài nữ»
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on .dlg «Thiên mệnh»
+- [game] ×1 dialog queue holds 3 copies of «Tin báo» (each close pops one; looks like a dead ✕)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=17: Lịch tháng / Chương 4 · Danh hiệu Tài nữ / Chương 4 · Danh hiệu Tài nữ / Tin báo / Chương 4 · Danh hiệu Tài nữ / Chương 4 · Danh hiệu Tài nữ)
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on .dlg «Đã biết về Phế phi Thôi Lan Âm»
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=13: Chương 4 · Danh hiệu Tài nữ / Tin báo / Lịch tháng / Đã biết về Phế phi Thôi Lan Âm / Chương 4 · Danh hiệu Tài nữ / Tin báo)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=13: Tin báo / Nhờ thái giám tìm thú nuôi / Chương 4 · Danh hiệu Tài nữ / Tin báo / Đã biết về Phế phi Thôi Lan Âm / Chương 4 · Danh hiệu Tài nữ)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=1: Tin trong cung buổi này)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=18: Danh hiệu / Lịch tháng / Lịch tháng / Lịch tháng / Lịch tháng / Kế vị)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=19: Tin báo / Tin báo / Tin báo / Danh hiệu / Lịch tháng / Danh hiệu)
+- [stuck] ×6 no-clock loop: 150 taps without a clock step on .mapsc «»
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on .dlg «Đã biết về Phế phi Kiều Ngọc Hành»
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=9: Chương 4 · Danh hiệu Tài nữ / Lịch tháng / Chương 4 · Danh hiệu Tài nữ / Chương 4 · Danh hiệu Tài nữ / Tin báo / Chương 4 · Danh hiệu Tài nữ)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=15: Tin báo / Đã biết về Phế phi Kiều Ngọc Hành / Đã biết về Phế phi Kiều Ngọc Hành / Lịch tháng / Chương 4 · Danh hiệu Tài nữ / Tin báo)
+- [game] ×21 dialog scrolled to the end has no close / next button: .kmov «»
+- [game] ×1 dialog queue holds 24 copies of «Tâm trạng · Phi Khương Hồng Ngọc» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 25 copies of «Tâm trạng · Phi Khương Hồng Ngọc» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 22 copies of «Tâm trạng · Phi Khương Hồng Ngọc» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 19 copies of «Tâm trạng · Phi Khương Hồng Ngọc» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 16 copies of «Tâm trạng · Phi Khương Hồng Ngọc» (each close pops one; looks like a dead ✕)
+- [game] ×2 dialog queue holds 13 copies of «Tâm trạng · Phi Khương Hồng Ngọc» (each close pops one; looks like a dead ✕)
+- [game] ×2 dialog queue holds 10 copies of «Tâm trạng · Phi Khương Hồng Ngọc» (each close pops one; looks like a dead ✕)
+- [game] ×3 dialog queue holds 6 copies of «Tâm trạng · Phi Khương Hồng Ngọc» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 6 copies of «Tâm trạng · Thường tại Thôi Lan Âm» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 3 copies of «Tâm trạng · Thường tại Thôi Lan Âm» (each close pops one; looks like a dead ✕)
+- [game] ×15 softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Tin trong cung buổi này)
+- [game] ×1 dialog scrolled to the end has no close / next button: #kmrew «»
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on page «Ngọc Thanh các · Ở đây còn 3 người.»
+- [dead] ×2 close button has no effect: .dlg «Tâm trạng · Ta» «Lui»
+- [game] ×1 dialog queue holds 2 copies of «Tâm trạng · Tể tướng Hạ Quý Ngọc» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog scrolled to the end has no close / next button: .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1»
+- [stuck] ×2 no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Hoàng thượng»
+- [stuck] ×2 no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Thái hậu»
+- [stuck] ×2 no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Tể tướng Hạ Quý Ngọc»
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Ta»
+- [stuck] ×1 no progress 15 min on .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1»
+- [game] ×1 dialog queue holds 7 copies of «Tâm trạng · Tần Lục Như Sương» (each close pops one; looks like a dead ✕)
+- [dead] ×1 close button has no effect: .dlg «Tâm trạng · Thường tại Thôi Lan Âm» «Lui»
+- [stuck] ×1 no-clock loop: 150 taps without a clock step on page «Ngọc Thanh các · Ở đây còn 1 người.»
+- [game] ×1 dialog queue holds 8 copies of «Tâm trạng · Phi Khương Hồng Ngọc» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 6 copies of «Tâm trạng · Thường tại Kiều Mặc Nhi» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog scrolled to the end has no close / next button: .mapsc «»
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=23: Lịch tháng / Chương 5 · Lời thơ vượt tường cung / Tin báo / Tin báo / Lịch tháng / Tin báo)
+- [game] ×1 dialog queue holds 9 copies of «Tâm trạng · Trinh thường tại Nhan Lăng Ba» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 10 copies of «Tâm trạng · Trinh thường tại Nhan Lăng Ba» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 6 copies of «Tâm trạng · Thường tại Khổng Hàm Hương» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 3 copies of «Tâm trạng · Thường tại Khổng Hàm Hương» (each close pops one; looks like a dead ✕)
+- [game] ×1 dialog queue holds 4 copies of «Tâm trạng · Phi Khương Hồng Ngọc» (each close pops one; looks like a dead ✕)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=23: Tin báo / Nhờ thái giám tìm thú nuôi / Chương 5 · Lời thơ vượt tường cung / Chương 5 · Lời thơ vượt tường cung / Đã biết về Thường tại Thôi Lan Âm / Chương 5 · Lời thơ vượt tường cung)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=13: Tin báo / Tin báo / Lịch tháng / Chương 5 · Lời thơ vượt tường cung / Lịch tháng / Tin báo)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=16: Lịch tháng / Chương 5 · Lời thơ vượt tường cung / Lịch tháng / Hoàng tự trong cung / Chương 5 · Lời thơ vượt tường cung / Chương 5 · Lời thơ vượt tường cung)
+- [game] ×105 softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Tin trong cung buổi này)
+- [game] ×1 dialog queue holds 6 copies of «Lịch tháng» (each close pops one; looks like a dead ✕)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=22: Tin báo / Chương 5 · Lời thơ vượt tường cung / Chương 5 · Lời thơ vượt tường cung / Tin báo / Lịch tháng / Tin báo)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=14: Tin báo / Danh hiệu / Quan hệ với / Danh hiệu / Lịch tháng / Quan hệ với)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=16: Tin báo / Lịch tháng / Chương 5 · Lời thơ vượt tường cung / Chương 5 · Lời thơ vượt tường cung / Chương 5 · Lời thơ vượt tường cung / Tin báo)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=16: Tin báo / Chương 5 · Lời thơ vượt tường cung / Lịch tháng / Tin báo / Tin báo / Chương 5 · Lời thơ vượt tường cung)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=16: Xem quan hệ của / Tin báo / Tin báo / Tin báo / Tin báo / Lịch tháng)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=14: Tin báo / Lịch tháng / Chương 6 · Tập nháp bị trộm / Đã biết về Phế phi Nhan Lăng Ba / Lịch tháng / Tin báo)
+- [game] ×1 softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Chương 6 · Tập nháp bị trộm / Tin trong cung buổi này)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=23: Chương 6 · Tập nháp bị trộm / Chương 6 · Tập nháp bị trộm / Chứng cứ về Phế phi Đoan Mộc Nhu Tắc / Tin báo / Lịch tháng / Đã biết về Phế phi Đoan Mộc Nhu Tắc)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=25: Tin báo / Chương 6 · Tập nháp bị trộm / Chương 6 · Tập nháp bị trộm / Lịch tháng / Tin báo / Lịch tháng)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=25: Lịch tháng / Chứng cứ về Phế phi Đoan Mộc Nhu Tắc / Chương 6 · Tập nháp bị trộm / Đã biết về Phế phi Đoan Mộc Nhu Tắc / Chứng cứ về Phế phi Đoan Mộc Nhu Tắc / Đã biết về Phế phi Đoan Mộc Nhu Tắc)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=14: Cầm / Lịch tháng / Tin báo / Tin báo / Chương 6 · Tập nháp bị trộm / Lịch tháng)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=21: Lịch tháng / Lịch tháng / Tin báo / Chương 6 · Tập nháp bị trộm / Tin báo / Lịch tháng)
+- [game] ×1 softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=3: Chương 6 · Tập nháp bị trộm / Tin báo / Tin trong cung buổi này)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=21: Xem quan hệ của / Tin báo / Chương 7 · Vòng thi Ngự hoa viên / Xem quan hệ của / Chương 7 · Vòng thi Ngự hoa viên / Tin báo)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=10: Mục lục / Lịch tháng / Chương 7 · Vòng thi Ngự hoa viên / Chương 7 · Vòng thi Ngự hoa viên / Chương 7 · Vòng thi Ngự hoa viên / Chương 7 · Vòng thi Ngự hoa viên)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=12: Lịch tháng / Tin báo / Lịch tháng / Lịch tháng / Lịch tháng / Cầm)
+- [game] ×1 softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=11: Chương 7 · Vòng thi Ngự hoa viên / Tin báo / Chương 7 · Vòng thi Ngự hoa viên / Chương 7 · Vòng thi Ngự hoa viên / Chương 7 · Vòng thi Ngự hoa viên / Lịch tháng)
+- [game] ×1 dialog queue holds 3 copies of «Tâm trạng · Đức đáp ứng Bạch Linh Lung» (each close pops one; looks like a dead ✕)
+- [game] ×1 softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=3: Tin báo / Vũ / Tin trong cung buổi này)
+- [game] ×1 softlock: «Có tin đang chờ · xo» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Tin trong cung buổi này)
+- [game] ×2 softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Lịch tháng / Tin trong cung buổi này)
+- [game] ×1 softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=7: Đã biết về Phế phi Thôi Lan Âm / Danh hiệu / Danh hiệu / Danh hiệu / Lịch tháng / Danh hiệu)
+- [game] ×1 softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=11: Thiên mệnh / Tin báo / Đã biết về Hoàng hậu Phú Sát Nguyệt Hoa / Lịch tháng / Thiên mệnh / Thiên mệnh)
+- [game] ×1 softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=10: Tin báo / Chương 8 · Lời vu đạo thơ / Chương 8 · Lời vu đạo thơ / Chứng cứ về Phế phi Kiều Mặc Nhi / Lịch tháng / Chương 8 · Lời vu đạo thơ)
+- [game] ×1 softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=3: Tin báo / Chương 8 · Lời vu đạo thơ / Tin trong cung buổi này)
+- [game] ×1 softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=6: Chương 8 · Lời vu đạo thơ / Lịch tháng / Tin báo / Chương 8 · Lời vu đạo thơ / Đã biết về Phế phi Khổng Hàm Hương / Tin trong cung buổi này)
+- [game] ×1 softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=13: Chương 9 · Chứng minh / Lịch tháng / Đã biết về Hoàng hậu Hàn Mặc Lan / Chứng cứ về Hoàng hậu Hàn Mặc Lan / Tin báo / Chương 9 · Chứng minh)
+- [game] ×1 softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=8: Tin báo / Lịch tháng / Đã biết về Phế phi Khổng Hàm Hương / Chương 9 · Chứng minh / Chương 9 · Chứng minh / Chương 9 · Chứng minh)
+- [game] ×1 softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=9: Kế vị / Thiên mệnh / Lịch tháng / Tin báo / Đã biết về Phế phi Khổng Hàm Hương / Thiên mệnh)
+- [game] ×1 softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=12: Đã biết về Phế phi Khổng Hàm Hương / Chương 9 · Chứng minh / Tin báo / Hoàng thượng / Lịch tháng / Chương 9 · Chứng minh)
