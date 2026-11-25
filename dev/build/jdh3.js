@@ -291,10 +291,16 @@ function cpMisc(p){try{if(p!==S)return;const j=S.j71;const r=rep(S);if(j&&j.brb!
 /* ORDER MAIN 117 (05:15Z; OD 24/11 ~07:45Z, DAY TITLE CARD): READ-ONLY hook for KK16's day card on the j79 dawn panel — her CURRENT main-story chapter as
    «Chương N — <name>», from the SAME source as the goal line (j67 d("goal"): S.st.ch / S.st.M = the open ARC67 chapter (rdDef road chapters included) /
    S.st.ms = a milestone chapter); no typed text, nothing written. "" when no chapter is open (old v1 story, before the first chapter, co-op friend entry). */
-function chapterTitle(p){try{p=p||S;if(!p||p!==S||!p.st||!p.st.v2||!p.st.ch)return "";const st=p.st;let n,t;
+/* chapterInfo(p) → {n,name} of the same chapter (null when none); chapterTitle(p) = its «Chương N — <name>» line. */
+function chapterInfo(p){try{p=p||S;if(!p||p!==S||!p.st||!p.st.v2||!p.st.ch)return null;const st=p.st;let n,t;
  if(st.ms&&typeof MS67==="object"&&MS67[st.ms.id]){n=st.ch.n;t=MS67[st.ms.id].t()}
- else if(st.M&&ARC67[st.M.a]){n=st.M.chap||1;const a=ARC67[st.M.a];t=typeof fill67==="function"?fill67(a.t,st.M):a.t}else return "";
- t=plainT(t);return t&&n?`Chương ${n} — ${t}`:""}catch(e){return ""}}
-window.chapterTitle=chapterTitle;
+ else if(st.M&&ARC67[st.M.a]){n=st.M.chap||1;const a=ARC67[st.M.a];t=typeof fill67==="function"?fill67(a.t,st.M):a.t}else return null;
+ t=plainT(t);return t&&n?{n,name:t}:null}catch(e){return null}}
+function chapterTitle(p){const c=chapterInfo(p);return c?`Chương ${c.n} — ${c.name}`:""}
+window.chapterTitle=chapterTitle;window.chapterInfo=chapterInfo;
+/* KIT §94b DAY TITLE CARD hook (MAIN 117 05:47Z; E92): window.kitChapterTitle() → {n,name} of HER current main-road chapter (every road / origin, milestone or
+   ARC67 road chapter incl. rdDef .t; a new life / rebirth reads the new S; a co-op seat reads its own S), null = no open chapter = line 2 hidden. Installed
+   whatever the load order: this module sets it over the j79 stub (j79 before), and j79 only installs its stub when none exists (j79 after). Read-only. */
+window.kitChapterTitle=function(){return chapterInfo(typeof S!=="undefined"?S:null)};window.kitChapterTitle.e92=1;
 window.TITLES2={RP,ROADT,ROADC,ARCT,VNT,VNC,MHT,MHOLD,MG70,MHG,LCT,LCWHY,LCW,LCA,fxW,heldIds,sumK,deed,snap,sideOf,cpMisc,arcKey,chName,vnName};
 }catch(e){console.error("jdh3",e)}})();
