@@ -184,6 +184,19 @@ async function play(p) {
       const s0 = await p.evaluate(SCAN); const a0 = R.harness.areaTaps || 0; let err = null; try { await unstick(p, rt, s0, 2) } catch (e) { err = e.message }
       R.harness.testUnstick = { layer: s0.layer, buttons: s0.b.length, areaTaps: (R.harness.areaTaps || 0) - a0, err }; console.log('RT_TEST_UNSTICK ' + JSON.stringify(R.harness.testUnstick));
       await p.evaluate(() => { const d = document.getElementById('rtTestLayer'); if (d) d.remove() }) }
+    if (process.env.RT_TEST_LUI && R.buoi >= +process.env.RT_TEST_LUI && !R._luiT) { /* self-test of the failed-close memory only (FIXER #7, «Thư từ» Lui ×1528): test dialog with «Lui» + kit ✕; variant A: Lui dead, ✕ closes (✕ is tried first); variant B: ✕ dead, Lui closes (a failed close goes behind untried ones, skipped after 3); variant C both dead: after 3 failures each → [game] bug + level 3 reload of the same save */ R._luiT = 1; R.harness.testLui = [];
+      for (const dead of ['Lui', '✕', 'both']) {
+        await p.evaluate(dead => { const d = document.createElement('div'); d.id = 'rtTestDlg'; d.style.cssText = 'display:block;pointer-events:auto;position:fixed;left:10px;top:10px;right:10px;bottom:10px;background:#fff;z-index:2147483000';
+          const l = document.createElement('button'); l.textContent = 'Lui'; l.style.cssText = 'position:absolute;left:40%;top:60%;width:120px;height:48px'; const x = document.createElement('button'); x.className = 'kit-x'; x.textContent = '✕'; x.style.cssText = 'position:absolute;right:12px;top:12px;width:48px;height:48px';
+          if (dead !== 'both') (dead === 'Lui' ? x : l).addEventListener('click', () => d.remove()); const h = document.createElement('h3'); h.textContent = 'Thư từ (thử)'; d.append(h, l, x); document.body.appendChild(d) }, dead);
+        let n = 0, open = true; for (; n < 9 && open; n++) { const s0 = await p.evaluate(SCAN); await unstick(p, rt, s0, 1); open = await p.evaluate(() => !!document.getElementById('rtTestDlg')).catch(() => false) }
+        const r = { dead, calls: n, closed: !open, closeSpent: R.harness.closeSpent || 0 }; R.harness.testLui.push(r); console.log('RT_TEST_LUI ' + JSON.stringify(r));
+        await p.evaluate(() => { const d = document.getElementById('rtTestDlg'); if (d) d.remove() }) } }
+    if (process.env.RT_TEST_LICH && R.buoi >= +process.env.RT_TEST_LICH && !R._lichT) { /* self-test only (FIXER #7): open «Lịch tháng» with a real tap, record its closes (hit / clipped), then normal play must leave it without the 150-tap rule */
+      const s0 = await p.evaluate(SCAN); const k = s0.b.findIndex(x => x.hit && /^lịch tháng/i.test(x.t));
+      if (k >= 0) { R._lichT = 1; const h = await p.evaluateHandle(i => window.__rtBtns[i], k); await rt.tap(h, { screen: s0.layer, label: 'TEST Lịch tháng' }); await p.waitForTimeout(800);
+        const s1 = await p.evaluate(SCAN); R.harness.testLich = { layer: s1.layer, title: s1.title, closes: s1.b.filter(x => x.x || CLOSE_RE.test(x.t)).map(x => x.t + (x.hit ? ' hit' : x.cl ? ' clipped' : ' covered')), n: s1.b.length, at: R.trace.length };
+        console.log('RT_TEST_LICH ' + JSON.stringify(R.harness.testLich)) } }
     if (process.env.RT_TEST_CRASH && R.buoi >= +process.env.RT_TEST_CRASH && !(R.harness.resumed || []).length) { /* self-test of the crash path only */ await p.goto('chrome://crash').catch(() => {}) }
     if (Date.now() - statusAt > 3600e3) { statusAt = Date.now(); const l = 'STATUS ' + LIFE + ' · buổi ' + R.buoi + ' · year ' + (sc.S && sc.S.y) + ' · rank ' + (sc.S && sc.S.rank) + ' · bugs ' + R.bugs.length + ' · stuck ' + R.harness.stuck + ' · dead buttons ' + R.dead.length; R.status.push(l); console.log(l); save() }
     if (Date.now() - (R._snapAt || 0) > 60e3) { R._snapAt = Date.now(); await p.screenshot({ path: path.join(SHOTS, 'now.png') }).catch(() => {}); if (process.env.RTV) console.log('NOW', sc.layer, '«' + sc.title + '»', 'hit', sc.b.filter(x => x.hit).length, 'idle', idle, 'buổi', R.buoi, 'areaTaps', R.harness.areaTaps || 0) }
@@ -257,7 +270,7 @@ async function play(p) {
     const ok = await rt.tap(h, { screen: sc.layer + (sc.title ? ' «' + sc.title + '»' : ''), label: ch.t.slice(0, 50), wait: started ? 1500 : 8000, confirm: async () => { const s3 = await p.evaluate(SCAN); return s3.layer === sc.layer && s3.title === sc.title } });
     const rk = sig + '#' + ch.t; repeat.set(rk, (repeat.get(rk) || 0) + (ok ? 1 : 5)); if (ok) tried.set(rk, (tried.get(rk) || 0) + 1); /* tried = REAL taps only: a covered tap (run 303 .kmov «Chuẩn bị thị tẩm» under the card-flip still) is not «tried» for the dead-end verdict */
     /* a close (✕ / Lui) tapped for real 3× and the same dialog is still there = button with no effect → bug + shot */
-    if (ok && (ch.x || CLOSE_RE.test(ch.t)) && sc.layer !== 'page') { /* NO EFFECT = 3 taps IN A ROW on the close and the same dialog still open after its close animation (counter resets as soon as it closes once — s8 false alarms counted closes over the whole life) */ const k = 'nx|' + sc.layer + '|' + sc.title; await p.waitForTimeout(1200); const s4 = await p.evaluate(SCAN).catch(() => null); if (!(s4 && s4.layer === sc.layer && s4.title === sc.title)) noFx.delete(k); else if (sc.title) { noFx.set(k, (noFx.get(k) || 0) + 1); if (noFx.get(k) === 3) { /* the close DID work when the game holds several copies of this dialog in its queue (Q): each tap pops one, the next copy looks the same («Tâm trạng · X» s8/s10) → game bug «duplicate queued dialog», not a dead ✕ */ const dup = await p.evaluate(t => { try { return Q.filter(m => m && String(m.t || '').replace(/<[^>]+>/g, '').trim().startsWith(t)).length } catch (e) { return -1 } }, sc.title.trim()).catch(() => -1);
+    if (ok && (ch.x || CLOSE_RE.test(ch.t)) && sc.layer !== 'page') { /* NO EFFECT = 3 taps IN A ROW on the close and the same dialog still open after its close animation (counter resets as soon as it closes once — s8 false alarms counted closes over the whole life) */ const k = 'nx|' + sc.layer + '|' + sc.title; await p.waitForTimeout(1200); const s4 = await p.evaluate(SCAN).catch(() => null); if (!(s4 && s4.layer === sc.layer && s4.title === sc.title)) { noFx.delete(k); delete (R._unsFail || {})[uKeyOf(sc)] } else { { const m = uMem(sc), lb = (ch.t || '✕').slice(0, 40); m[lb] = (m[lb] || 0) + 1 } } if (s4 && s4.layer === sc.layer && s4.title === sc.title && sc.title) { noFx.set(k, (noFx.get(k) || 0) + 1); if (noFx.get(k) === 3) { /* the close DID work when the game holds several copies of this dialog in its queue (Q): each tap pops one, the next copy looks the same («Tâm trạng · X» s8/s10) → game bug «duplicate queued dialog», not a dead ✕ */ const dup = await p.evaluate(t => { try { return Q.filter(m => m && String(m.t || '').replace(/<[^>]+>/g, '').trim().startsWith(t)).length } catch (e) { return -1 } }, sc.title.trim()).catch(() => -1);
           if (dup > 1) { noFx.delete(k); bug('game', 'dialog queue holds ' + dup + ' copies of «' + sc.title + '» (each close pops one; looks like a dead ✕)', { S: sc.S }) } else { const shot = path.join(SHOTS, 'noeffect-' + Date.now() + '.png'); await p.screenshot({ path: shot }).catch(() => {}); R.dead.push({ k: 'NO EFFECT', screen: sc.layer + ' «' + sc.title + '»', label: ch.t, cover: 'tapped 3× for real, dialog stays', shot, at: sec(), S: sc.S }); bug('dead', 'close button has no effect: ' + sc.layer + ' «' + sc.title + '» «' + ch.t + '»', { shot }) } } } }
     /* SANG-BUỔI-NO-TURN (F #11 11:52Z family, s9 «Sang buổi ↔ Người được sai đi ↔ Tin chờ người sai đi ↔ Ân thưởng», s7/s4d wanders): «Sang buổi» really tapped, the page comes back and the clock did not move; the picker then wanders through rail icons / panels between the taps, so the «5 of the last 10 taps» softlock rule never fired and only the 150-tap rule (light unstick, ~1 buổi/min) moved on. Now: 3 such taps in one buổi = GAME softlock (Q / S.mg evidence + dump) → a person reloads the game (lvl 3, same save) */
     if (ok && ch.next && started) { await p.waitForTimeout(1500); const s5 = await p.evaluate(SCAN).catch(() => null);
@@ -276,22 +289,25 @@ async function play(p) {
       if (started && sc.kshdet) { const inDet = hb.filter(x => x.det); const xb = inDet.find(x => x.x || CLOSE_RE.test(x.t)); kshN++; if (kshN > 2 && xb) { kshN = 0; return xb } const act = inDet.filter(x => !(x.x || CLOSE_RE.test(x.t)) && !EXIT_RE.test(x.t)); if (act.length && kshN === 1) return score(act); if (xb) { kshN = 0; return xb } } else kshN = 0;
       /* CO-OP LOBBY (coop1h AYDC, F #10 11:05Z): «Trở lại phòng» = jcooplobby resume() → the WAIT page, whose title is «Mời hảo hữu» like a new room (same HEAD.wait); its «‹ Lui» = back() → COOP.leave() FORGETS the room.
          So in a room the seat never taps «‹ Lui / Về màn đầu / Một mình / Mời hảo hữu / Chọn sổ / Bỏ phòng» in the lobby: only «Trở lại phòng / Vào lại phòng / Thử lại / Cùng hảo hữu», else it waits for the friend */
-      if (started && C.coop) { const COOP_BAN = /một mình|mời hảo hữu|chọn sổ|về màn đầu|bỏ phòng|^‹?\s*lui$/i; b = b.filter(x => !COOP_BAN.test(x.t));
+      if (started && C.coop) { /* «Lui» is banned ONLY on the lobby / title (its «‹ Lui» = COOP.leave() forgets the room). In-game dialogs keep their «Lui»
+           (FIXER #7: banning it everywhere left co-op seats without their close — «Lịch tháng» ×144 taps until the 150-tap rule, «Thư từ» #kchatp Lui ×1528 via unstick only) */
+        const lobbyish = COOP_LOBBY_RE.test(sc.title || '') || sc.layer === '#title' || hb.some(x => /^(chơi một mình|trở lại phòng|vào lại phòng|bỏ phòng|mời hảo hữu|nhập ám hiệu)/i.test(x.t));
+        const COOP_BAN = lobbyish ? /một mình|mời hảo hữu|chọn sổ|về màn đầu|bỏ phòng|^‹?\s*lui$/i : /một mình|mời hảo hữu|chọn sổ|về màn đầu|bỏ phòng|^‹\s*lui$/i; b = b.filter(x => !COOP_BAN.test(x.t) || /^cùng hảo hữu/i.test(x.t));
         if (COOP_LOBBY_RE.test(sc.title)) { const go = hb.find(x => /^(trở lại phòng|vào lại phòng|thử lại)/i.test(x.t)) || (sc.title && /^cùng hảo hữu/i.test(sc.title) ? null : hb.find(x => /^cùng hảo hữu/i.test(x.t))); R.harness.lobbyWait = (R.harness.lobbyWait || 0) + (go ? 0 : 1); return go || null }
         if (!b.length) return null }
       if (started && MG_RE.test(sc.layer) && sc.mgPh !== 'result' && !mgLong()) { b = b.filter(x => !isMgBack(x)); if (!b.length) return null } /* on the RESULT screen the ✕ is the way on (j82 kit §13.9 (2): it presses the result button) */
       if (started && MGASK_RE.test(sc.title)) { const keep = hb.find(x => /^chơi tiếp/i.test(x.t)); if (keep && !mgLong()) return keep; const y = hb.find(x => /^(bỏ cuộc|quay lại)$/i.test(x.t)); if (y && mgLong()) { R.harness.mgGiveUp = (R.harness.mgGiveUp || 0) + 1; mgAt = 0; bug('harness', 'mini-game not finished by real board taps within ' + MG_GIVEUP_MS / 60e3 + ' min → given up (0/10), the life goes on'); return { ...y, mgGiveUp: true } } if (keep) return keep }
       const isExit = x => EXIT_RE.test(x.t) && !(!started && /kiếp mới/i.test(x.t) && sc.layer !== 'page');
       /* back on the title after the life started (room dropped / reload): co-op seat rejoins its room or waits; solo continues its sổ */
-      if (started && hb.some(x => /^chơi một mình/i.test(x.t))) { const back = hb.find(x => /trở lại phòng|vào lại phòng|về phòng/i.test(x.t)); if (back) return back; if (C.pre || C.coop) { R.titleBack = (R.titleBack || 0) + 1;
+      if (process.env.RTV2) console.log('CHOOSE', started, sc.layer, hb.map(x => x.t.slice(0, 18)).join('|').slice(0, 160)); if (started && hb.some(x => /^chơi một mình/i.test(x.t))) { const back = hb.find(x => /trở lại phòng|vào lại phòng|về phòng/i.test(x.t)); if (back) return back; if (C.pre || C.coop) { R.titleBack = (R.titleBack || 0) + 1;
           /* E (M) «host away»: a co-op seat dropped to the title mid-room reopens its room like a person: Cùng hảo hữu → Chọn sổ → «Trở lại phòng» (the friend sees «Đợi hảo hữu trở lại» until then); never «Bỏ phòng» */
-          if (C.coop) { const ch = b.find(x => /^cùng hảo hữu/i.test(x.t)); if (ch) { R.harness.rejoin = (R.harness.rejoin || 0) + 1; if (R.harness.rejoin === 1 || R.harness.rejoin % 20 === 0) bug('coop', 'seat dropped to the title mid-room → rejoined by taps (Cùng hảo hữu → Trở lại phòng)'); return ch } } return null } }
+          if (C.coop) { const ch = hb.find(x => /^cùng hảo hữu/i.test(x.t)); if (ch) { R.harness.rejoin = (R.harness.rejoin || 0) + 1; if (R.harness.rejoin === 1 || R.harness.rejoin % 20 === 0) bug('coop', 'seat dropped to the title mid-room → rejoined by taps (Cùng hảo hữu → Trở lại phòng)'); return ch } } return null } }
       if (started && C.coop) { const back = b.find(x => /^trở lại phòng|^vào lại phòng/i.test(x.t)); if (back && !b.some(x => x.hit && /^(sang buổi|sang ngày mới)/i.test(x.t))) return back }
       /* #kload «Lần đầu nhập cung · thỉnh tranh vẽ» (s4d hang, FIXER #6): the resume list above had no «Vào cung ngay», so a resumed seat waited 5 min →
          prestart-stuck reload → the same panel again, for ever (repro LIVE 9f72524b, s7 save: download stalls «Đường xa chập chờn», no request for 2 min).
          A person lets the pictures come ~20 s, then enters (the panel itself says pictures follow later). Never «Thỉnh tiếp» in a loop. Solo, co-op, resumed or not. */
       if (sc.layer === '#kload') { kloadT = kloadT || Date.now(); const go = b.find(x => /^vào cung ngay/i.test(x.t)); if (go && Date.now() - kloadT > 20e3) { R.harness.kloadEnter = (R.harness.kloadEnter || 0) + 1; kloadT = 0; return go } return null } else kloadT = 0;
-      if (!started && ck) { for (const re of [/tiếp tục kiếp này|tiếp tục kiếp|chơi tiếp/i, /^chơi một mình/i, /^tiếp tục/i, /^bỏ qua$/i, /^tiếp$/i]) { const f = b.find(x => re.test(x.t) && !/kiếp mới|bắt đầu/i.test(x.t)); if (f) return f }
+      if (!started && ck) { if (C.coop && C.pre) { const r0 = C.pre(sc, b); if (r0 === 'wait') return null; if (r0) return r0 } for (const re of [/tiếp tục kiếp này|tiếp tục kiếp|chơi tiếp/i, C.coop ? /^\b$/ : /^chơi một mình/i, /^tiếp tục/i, /^bỏ qua$/i, /^tiếp$/i]) { const f = b.find(x => re.test(x.t) && !/kiếp mới|bắt đầu/i.test(x.t)); if (f) return f }
         /* D (3) A2 nc_su: a ckpt taken at buổi ≤ 1 can hold no game save yet (the sổ is written later) → Chọn sổ offers only «Bắt đầu kiếp mới» and the resume waited 5 min. Nothing of that life was played: start it again under the SAME life id (logged), never for a life past buổi 1 */
         if (R.buoi <= 1 && b.some(x => /^bắt đầu kiếp mới$/i.test(x.t)) && !b.some(x => /tiếp tục/i.test(x.t)) && Date.now() - preT > 45e3) { R.harness.resumeFresh = (R.harness.resumeFresh || 0) + 1; console.log('RESUME: no saved sổ for a buổi-' + R.buoi + ' ckpt → the unplayed life starts again (same id)'); ck = null; return null }
         return null /* resume: only continue the saved life — never «Kiếp mới» / «Bắt đầu kiếp mới»; wait for the right button */ }
@@ -314,7 +330,7 @@ async function play(p) {
       const nx = nonExit.find(isNext); if (nx && started && (acts >= actsPerBuoi || tapsB > 40)) return { ...nx, next: true };
       if (!isPage) {
         /* a person closes a utility / notebook dialog (Lịch tháng, Sổ ghi, Tư trang …) after a few acts; any dialog after 20 acts with the clock still (s2d «Lịch tháng» 15 min typing notes) */
-        { const n = dlgActs.get(dKey(sc)) || 0, cl = b.find(close) || (LOOK_RE.test(sc.title) ? b.find(x => /^(đã rõ|đã hiểu)$/i.test(x.t)) : null); if (cl && (LOOK_RE.test(sc.title) || n >= 4 && UTIL_RE.test(sc.title) || n >= 3 && sc.layer === '.kfoc' || n >= 20 || tapsB > 60)) { R.harness.dlgClose = (R.harness.dlgClose || 0) + 1; return cl } }
+        { const n = dlgActs.get(dKey(sc)) || 0, cl = pickClose(b.filter(close), sc) || (LOOK_RE.test(sc.title) ? b.find(x => /^(đã rõ|đã hiểu)$/i.test(x.t)) : null); if (cl && (LOOK_RE.test(sc.title) || n >= 4 && UTIL_RE.test(sc.title) || n >= 3 && sc.layer === '.kfoc' || n >= 20 || tapsB > 60)) { R.harness.dlgClose = (R.harness.dlgClose || 0) + 1; return cl } }
         /* a dialog WITHOUT a close (kit panel with options, e.g. «Tin báo» 70 tin: rows full of tappable names, options «Nghe lệnh / Để sau» at the very bottom): after 8 acts with the clock still, scroll to its end; there take the stay-calm option («Để sau / Đã hiểu / Thôi / Lui») like a person leaving the news for later */
         { const n = dlgActs.get(dKey(sc)) || 0; if (n >= 8 && !b.some(close)) { if (sc.scr && sc.scr.left > 4) { R.harness.dlgScroll = (R.harness.dlgScroll || 0) + 1; return { scroll: sc.scr } } const calm = nonExit.find(x => /^(để sau|đã hiểu|thôi|lui|đóng|xong)/i.test(x.t)); if (calm) return calm;
           /* no close, no calm option, nothing left to scroll, but the panel runs past the screen edge (E (J) bottom clipped): a person drags / wheels over the panel a few times; still nothing → «no close» game bug once (then the 150-tap loop rule unsticks) */
@@ -331,7 +347,7 @@ async function play(p) {
         /* a long dialog (Tin báo …): its ✕ / Đóng / «Đã xem hết» may sit below — scroll its own scroller like a person */
         if (!b.some(close) && sc.scr && sc.scr.left > 4) return { scroll: sc.scr };
         if (!b.some(close) && !nonExit.some(x => !/^kéo xuống/i.test(x.t)) && sc.scr && sc.scr.left <= 4 && !noClose.has(sc.layer + sc.title)) { const af = areaFirst(); if (af) return af; noClose.add(sc.layer + sc.title); return { noclose: true } }
-        const cl = b.find(close); if (cl) return cl; /* ✕ / Lui before help / empty-label icons (portrait re-opens the same dialog) */
+        const cl = pickClose(b.filter(close), sc); if (cl) return cl; /* ✕ / Lui before help / empty-label icons (portrait re-opens the same dialog) */
         if (nonExit.length) return score(nonExit);
         if (exits.length) { const e = score(exits); return { ...e, exit: true, n: opts.length, only: true } }
         return null;
@@ -342,7 +358,7 @@ async function play(p) {
       if (acts < actsPerBuoi && acts0.length && rnd() < 0.85) return score(acts0);
       if (next) return { ...next, next: true };
       if (acts0.length) return score(acts0);
-      const cl = b.find(close); return cl || null;
+      const cl = pickClose(b.filter(close), sc); return cl || null;
     }
     function score(list) {
       if (BOT === 'rand' || list.length === 1) return pick(list);
@@ -367,18 +383,40 @@ async function play(p) {
 }
 
 /* unstick ladder (TAPS ONLY — no keyboard, owner real-tap rule 25/11 ~05:10Z; Escape soft-locked co-op on the title, B U3 9YAK): 1 tap the top layer ✕ / close · 2 no close → tap another safe button of the top layer (never exit / leave / nav), else tap bare space outside the top layer · 3 reload + continue the same save from the title */
+/* FAILED-CLOSE MEMORY shared by choose() and unstick() (F #14 17:07Z «Thư từ» Lui ×1528): key = layer + title without digits; label → taps that left
+   the same dialog open. pickClose: untried closes first, kit ✕ before text closes, a close with 3 failures is skipped while another remains. */
+const uKeyOf = sc => sc.layer + '|' + String(sc.title || '').replace(/\d+/g, '#');
+const uMem = sc => { const k = uKeyOf(sc); return ((R._unsFail = R._unsFail || {})[k] = R._unsFail[k] || {}) };
+const pickClose = (list, sc) => { const m = uMem(sc), n = x => m[(x.t || '✕').slice(0, 40)] || 0; const live = list.filter(x => n(x) < 3);
+  if (!live.length) return list[0] || null; return live.slice().sort((a, b) => (n(a) ? 1 : 0) - (n(b) ? 1 : 0) || (b.x ? 1 : 0) - (a.x ? 1 : 0))[0] };
 async function unstick(p, rt, sc, lvl, fromPeer) {
   if (C.coop && lvl < 3 && /^(mời hảo hữu|nhập ám hiệu|cùng hảo hữu|đợi hảo hữu|chưa vào được phòng)/i.test(sc.title || '')) { R.harness.unstick.push({ at: sec(), lvl, layer: sc.layer, title: sc.title, skipped: 'co-op lobby: wait for the friend, never «Lui»' }); return }
   R.harness.unstick.push({ at: sec(), lvl, layer: sc.layer, title: sc.title });
-  { const s1 = await p.evaluate(SCAN).catch(() => null) || sc; let i = s1.b.findIndex(b => b.hit && (b.x || CLOSE_RE.test(b.t)));
-    if (i < 0 && lvl >= 2) { const ok = s1.b.map((b, k) => k).filter(k => { const b = s1.b[k]; return b.hit && !EXIT_RE.test(b.t) && !LEAVE_RE.test(b.t) && !NAV_RE.test(b.t) }); if (ok.length) i = ok[Math.floor(rnd() * ok.length)] }
-    if (i >= 0) { const h = await p.evaluateHandle(i => window.__rtBtns[i], i); await rt.tap(h, { screen: s1.layer, label: 'unstick ' + (s1.b[i].t || '✕').slice(0, 30) }) }
+  { const s1 = await p.evaluate(SCAN).catch(() => null) || sc;
+    /* FAILED-CLOSE MEMORY (F #14 17:07Z, A-COOP #2 guest iPad: «Thư từ» #kchatp, unstick tapped «Lui» 1528× without closing while the ✕ sat
+       top-right): per dialog (layer + title without digits) every close / safe button that was tapped and left the SAME dialog open counts one
+       failure; after 3 it is skipped, so the next close of the top layer (kit ✕ first) is tried; when every close is spent → [game] bug once
+       and the ladder goes straight to level 3 (reload the same save). Solo and co-op (both seats run this unstick). */
+    const uKey = uKeyOf(s1), uF = uMem(s1);
+    const spent = b => (uF[(b.t || '✕').slice(0, 40)] || 0) >= 3;
+    const closes = s1.b.map((b, k) => k).filter(k => { const b = s1.b[k]; return b.hit && (b.x || CLOSE_RE.test(b.t)) });
+    const live = closes.filter(k => !spent(s1.b[k])); live.sort((a, b) => (uF[(s1.b[a].t || '✕').slice(0, 40)] ? 1 : 0) - (uF[(s1.b[b].t || '✕').slice(0, 40)] ? 1 : 0) || (s1.b[b].x ? 1 : 0) - (s1.b[a].x ? 1 : 0));
+    let i = live.length ? live[0] : -1;
+    if (closes.length && !live.length && lvl < 3 && (uF.__esc || 0) < 2) { uF.__esc = (uF.__esc || 0) + 1; R.harness.closeSpent = (R.harness.closeSpent || 0) + 1;
+      bug('game', 'every close of «' + (s1.title || s1.layer) + '» was tapped 3× and the dialog stayed (' + closes.map(k => s1.b[k].t || '✕').join(' / ') + ')', { screen: s1.layer });
+      return unstick(p, rt, sc, 3, fromPeer) }
+    if (i < 0 && lvl >= 2) { const ok = s1.b.map((b, k) => k).filter(k => { const b = s1.b[k]; return b.hit && !spent(b) && !EXIT_RE.test(b.t) && !LEAVE_RE.test(b.t) && !NAV_RE.test(b.t) }); if (ok.length) i = ok[Math.floor(rnd() * ok.length)] }
+    if (i >= 0) { const lab = (s1.b[i].t || '✕').slice(0, 40); const h = await p.evaluateHandle(i => window.__rtBtns[i], i); await rt.tap(h, { screen: s1.layer, label: 'unstick ' + lab.slice(0, 30) });
+      await p.waitForTimeout(400); const s2 = await p.evaluate(SCAN).catch(() => null);
+      if (s2 && uKeyOf(s2) === uKey) uF[lab] = (uF[lab] || 0) + 1; else delete R._unsFail[uKey] }
     else if (lvl >= 2 && s1.layer !== 'page' && s1.lr) { /* tap-out: bare space outside the top layer, like a person tapping beside a popup */ const vw = p.viewportSize(); const r = s1.lr; const pts = [[8, 8], [vw.width - 8, 8], [8, vw.height / 2], [vw.width - 8, vw.height / 2]].filter(([x, y]) => x < r.x || x > r.x + r.w || y < r.y || y > r.y + r.h);
       for (const [x, y] of pts) { const bare = await bareTapOn(p, x, y); if (!bare) continue; break } }
     await p.waitForTimeout(500) }
   if (lvl >= 3) {
     /* CO-OP: a room re-pairs only if BOTH seats reopen «Cùng hảo hữu → Trở lại phòng» (A-COOP coop1h by hand, F #10 11:09Z) → ask the friend seat to rejoin too */
     if (C.coop && C.coopLink && !fromPeer) C.coopLink.other.want = Date.now();
+    /* BIG #7 nit 17:34Z: a reload is a fresh game screen → spent closes are tried again (only the escalation count per dialog is kept, ≤2 reloads per dialog) */
+    if (R._unsFail) for (const k of Object.keys(R._unsFail)) R._unsFail[k] = R._unsFail[k].__esc ? { __esc: R._unsFail[k].__esc } : {};
     await p.reload({ waitUntil: 'load' }).catch(() => {}); await p.waitForFunction(() => typeof start === 'function', null, { timeout: 0 }).catch(() => {});
     await p.evaluate(() => { if (!window.__rtOver) { window.__rtOver = 1; const o0 = over; over = function (h, t, fate, alive) { try { if (!S.dead) window.__rtEnd = { card: (() => { try { const m = document.querySelector('#modal'); return m ? [...m.querySelectorAll('button')].filter(b => b.offsetParent).slice(0, 8).map(b => (b.disabled || b.hasAttribute('disabled') ? '[off] ' : '') + b.innerText.replace(/\s+/g, ' ').slice(0, 60)) : null } catch (e) { return null } })(), duringArea: window.__rtBare > Date.now(), id: String(h), fate: String(fate || '').replace(/<[^>]+>/g, ''), alive: !!alive, age: S.age, year: S.year, rank: S.rank } } catch (e) {} return o0.apply(this, arguments) } } }).catch(() => {});
     for (const re of (C.coop ? [/cùng hảo hữu/i, /trở lại phòng|vào lại phòng|về phòng/i] : [/chơi một mình/i, /chơi tiếp|tiếp tục|vào sổ|^tải$/i])) { for (let k = 0; k < 30; k++) { const s2 = await p.evaluate(SCAN).catch(() => null); let i = s2 ? s2.b.findIndex(b => re.test(b.t) || re.source.includes('chơi tiếp') && /load/.test(b.d)) : -1; /* co-op: «Trở lại phòng» of THIS room's sổ (data-room = the stored code), never another room */ if (i >= 0 && C.coop && C.roomCode && C.roomCode() && /trở lại phòng/.test(re.source)) { const want = C.roomCode(); const j = await p.evaluate(([w, n]) => { const L = window.__rtBtns || []; for (let k = 0; k < L.length; k++) if (L[k] && L[k].dataset && L[k].dataset.room === w) return k; return -1 }, [want, s2.b.length]).catch(() => -1); if (j >= 0) i = j; else { bug('coop', 'rejoin: no «Trở lại phòng» for room ' + want + ' on the room list (only other rooms) — waiting'); i = -1 } } if (i >= 0) { const h = await p.evaluateHandle(i => window.__rtBtns[i], i); await rt.tap(h, { screen: 'title (unstick reload)', label: re.source }); await p.waitForTimeout(1500); break } await p.waitForTimeout(500) } }
@@ -399,7 +437,7 @@ const [, , URL0, OUT0, ...KV] = process.argv;
 if (!URL0 || !OUT0) { console.error('usage: node dev/test/robot-rt.js <url> <out-dir> [dev=fold|ipad] [origin=..] [road=..] [bot=..] [seed=..] [life=..] [slice=..]'); process.exit(2) }
 const A = Object.fromEntries(KV.map(s => s.split('=')));
 /* STATIC SELF-TEST first (robot-lint.js: node --check + undeclared names outside page code); a FAIL never starts a life (lint=0 skips) */
-if (A.lint !== '0') { const LR = require('./robot-lint.js').run(require('./robot-lint.js').DEFAULT); if (!LR.ok) { console.error('HARNESS LINT FAIL — no life started:\n' + LR.rep.join('\n')); process.exit(2) } }
+if (A.lint !== '0') { const LR = require('./robot-lint.js').run(require('./robot-lint.js').DEFAULT); if (LR.warn) console.log('HARNESS LINT WARN: ' + LR.warn); if (!LR.ok) { console.error('HARNESS LINT FAIL — no life started:\n' + LR.rep.join('\n')); process.exit(2) } }
 const DEV = A.dev || 'fold', VP = DEV === 'ipad' ? { width: 1180, height: 820 } : { width: 755, height: 1000 };
 const BOT = A.bot || 'sens', SEED = +A.seed || 1, LIFE = A.life || ['rt', A.origin || 'any', BOT, DEV, SEED].join('-');
 const STUCK_MS = (+A.stuckMin || 15) * 60e3, SLICE = +A.slice || 0, CP = +A.cp || 50;
