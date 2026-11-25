@@ -52,7 +52,8 @@ function auWatch(){try{if(!auOk())return;const c=AU.ctx;if(c&&c.state!=="running
  const a=AU.cur;if(!a){if(performance.now()>=(AU.mNext||0)){AU.curName="";auTick()}return}
  if(a.dead||a.error){if(performance.now()>=(AU.mNext||0))auMusRestart(1);return}if(a.ended){auMusRestart(0);return}
  if(a.paused){a.__st=0;const p=a.play();if(p&&p.catch)p.catch(()=>{});return}
- const t=a.currentTime;if(t===a.__lt&&!a.seeking){if((a.__st=(a.__st||0)+1)>=3){a.__st=0;auMusRestart(1)}}else a.__st=0;a.__lt=t}catch(e){}}
+ const t=a.currentTime;/* a stall counts only once the track had data (readyState ≥ 2: a fresh track still loading on a slow phone is not stalled); one that never gets data is replaced after ~20 s */
+ if(t===a.__lt&&!a.seeking){a.__st=(a.__st||0)+1;if((a.readyState>=2&&a.__st>=3)||a.__st>=8){a.__st=0;auMusRestart(1)}}else a.__st=0;a.__lt=t}catch(e){}}
 setInterval(auWatch,2500);
 /* real gestures only: touchend / click / pointerup / keydown unlock iOS; pointerdown counts for a mouse (or when WebAudio is missing), a touch pointerdown is not a gesture there */
 for(const ev of ["touchend","click","pointerup","keydown"])document.addEventListener(ev,auUnlock,{capture:true,passive:true});

@@ -126,7 +126,7 @@ function react(F,r){r=r||{};try{if(r.seal&&typeof kitEmoSeal==="object"&&kitEmoS
  (r.deltas||[]).forEach((d,i)=>{const s=document.createElement("span");s.className="kfoc-delta";s.innerHTML=typeof chip==="function"?chip(esc(d.t||d),d.cls||""):esc(d.t||d);const g=F.geo;s.style.left=(g.cx+(i-(r.deltas.length-1)/2)*70)+"px";s.style.top=(g.top+g.ih*.45)+"px";F.el.appendChild(s);
   if(still()||!s.animate){setTimeout(()=>s.remove(),KIT_FOC.reactMs);return}
   const a=s.animate([{opacity:0,transform:"translate(-50%,0)"},{opacity:1,transform:"translate(-50%,-18px)",offset:.2},{opacity:1,transform:"translate(-50%,-46px)",offset:.75},{opacity:0,transform:"translate(-50%,-60px)"}],{duration:KIT_FOC.reactMs,delay:i*120});a.onfinish=()=>s.remove()})}
-function close(F){if(!F.open)return;const K=KIT_FOC;F.open=false;F.skipOpen();
+function close(F){if(!F.open)return;const K=KIT_FOC;F.open=false;F.skipOpen();/* OD 25/11 ~04:15Z «a frame must always be closable»: the focus ✕ also dismisses a ma ma tip (kitTip) shown over it */try{if(typeof window.kitTipOff==="function")window.kitTipOff()}catch(e){}
  if(still()){const a=wa(F,F.el,[{opacity:1},{opacity:0}],{duration:K.fadeMs});if(a)a.onfinish=()=>destroy(F,1);else destroy(F,1);return}
  [...F.el.querySelectorAll(".kfoc-b")].forEach(b=>wa(F,b,[{opacity:1},{opacity:0,transform:"scale(.85)"}],{duration:K.foldCloseMs}));wa(F,F.tabs,[{opacity:1},{opacity:0}],{duration:K.foldCloseMs});wa(F,F.plate,[{opacity:1},{opacity:0}],{duration:K.foldCloseMs});
  const d=feetDelta(F);F.img.style.transformOrigin="50% 100%";
