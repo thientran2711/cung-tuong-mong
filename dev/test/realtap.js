@@ -18,10 +18,14 @@ const PROBE = (el) => {
   const lab = (el.getAttribute('aria-label') || el.textContent || el.title || '').replace(/\s+/g, ' ').trim().slice(0, 60);
   if (r.width < 1 || r.height < 1) return { zero: true, lab };
   if (getComputedStyle(el).pointerEvents === 'none' || el.disabled) return { disabled: true, lab };
-  const pts = [[.5, .5], [.5, .3], [.5, .7], [.3, .5], [.7, .5]];
+  /* the part a person can SEE: viewport ∩ every clipping (overflow) ancestor; probe points lie inside it */
+  let x0 = Math.max(0, r.left), y0 = Math.max(0, r.top), x1 = Math.min(W, r.right), y1 = Math.min(H, r.bottom), sc = null;
+  for (let s = el.parentElement; s && s !== document.body; s = s.parentElement) { const cs = getComputedStyle(s); if (/(auto|scroll|hidden|clip)/.test(cs.overflow + cs.overflowX + cs.overflowY)) { const q = s.getBoundingClientRect(); x0 = Math.max(x0, q.left); y0 = Math.max(y0, q.top); x1 = Math.min(x1, q.right); y1 = Math.min(y1, q.bottom); if (!sc && /(auto|scroll)/.test(cs.overflowY) && s.scrollHeight > s.clientHeight) sc = { l: q.left, t: q.top, r: q.right, b: q.bottom } } }
+  const pts = [[.5, .5], [.5, .3], [.5, .7], [.3, .5], [.7, .5], [.5, .12], [.5, .88]];
   let cover = null, anc = false;
+  if (x1 - x0 < 3 || y1 - y0 < 3) return { lab, clip: true, sc, top: r.top, bottom: r.bottom, cover: 'clipped by its scroller / off-screen', off: r.bottom < 0 || r.top > H };
   for (const [fx, fy] of pts) {
-    const x = r.left + r.width * fx, y = r.top + r.height * fy;
+    const x = x0 + (x1 - x0) * fx, y = y0 + (y1 - y0) * fy;
     if (x < 1 || y < 1 || x > W - 1 || y > H - 1) continue;
     const t = document.elementFromPoint(x, y);
     if (t && (t === el || el.contains(t))) return { x, y, lab, ok: true };
@@ -29,7 +33,7 @@ const PROBE = (el) => {
     if (!cover && t) { const c = t.closest('[id]'); cover = (t.tagName.toLowerCase() + (t.id ? '#' + t.id : '') + (typeof t.className === 'string' && t.className ? '.' + t.className.trim().split(/\s+/).slice(0, 2).join('.') : '') + (c && c !== t ? ' in #' + c.id : '')).slice(0, 80) }
   }
   const off = r.bottom < 0 || r.top > H || r.right < 0 || r.left > W;
-  return { lab, off, anc, cover: cover || (off ? 'off-screen' : 'outside viewport'), top: r.top, bottom: r.bottom };
+  return { lab, off, anc, sc, cover: cover || (off ? 'off-screen' : 'outside viewport'), top: r.top, bottom: r.bottom };
 };
 
 function make(page, opt = {}) {
@@ -61,11 +65,13 @@ function make(page, opt = {}) {
     let p = await h.evaluate(PROBE).catch(() => ({ gone: true }));
     if (!p.ok) p = await scrollTo(h);
     /* half hidden under a fixed bar (tabs, header): a person scrolls it toward the middle first */
-    if (!p.ok && !p.gone && !p.disabled && !p.zero && p.top != null) { const vh = (page.viewportSize() || { height: 800 }).height; const dy = (p.top + p.bottom) / 2 - vh / 2; if (Math.abs(dy) > 20) { const vw = (page.viewportSize() || { width: 800 }).width; await page.mouse.move(vw / 2, vh / 2); await page.mouse.wheel(0, dy); await page.waitForTimeout(350); p = await h.evaluate(PROBE).catch(() => ({ gone: true })) } }
+    for (let k = 0; k < 2 && !p.ok && !p.gone && !p.disabled && !p.zero && p.top != null; k++) { const vp = page.viewportSize() || { width: 800, height: 800 }; const box = p.sc || { l: 0, t: 0, r: vp.width, b: vp.height }; const mid = (box.t + Math.min(box.b, vp.height)) / 2; const dy = (p.top + p.bottom) / 2 - mid; if (Math.abs(dy) < 8) break; await page.mouse.move((box.l + Math.min(box.r, vp.width)) / 2, mid); await page.mouse.wheel(0, dy); await page.waitForTimeout(350); p = await h.evaluate(PROBE).catch(() => ({ gone: true })) } /* over ITS scroller, not the screen middle */
+    if (!p.ok && !p.gone && !p.disabled && p.cover && !p.anc && !p.clip) { await page.waitForTimeout(2500); const p2 = await h.evaluate(PROBE).catch(() => ({ gone: true })); if (p2.ok || p2.gone || p2.disabled) p = p2 } /* a scene / dawn frame passing over: settle once */
     if (!p.ok && info.wait) { const t0 = Date.now(); while (!p.ok && Date.now() - t0 < info.wait) { await page.waitForTimeout(400); p = await h.evaluate(PROBE).catch(() => ({ gone: true })) } }
     if (p.disabled) { log({ k: 'disabled', screen: info.screen, label: info.label }); return false }
     if (p.gone) { log({ k: 'gone', screen: info.screen, label: info.label }); return false }
     if (!p.ok && info.confirm && !(await info.confirm().catch(() => true))) { log({ k: 'moved', screen: info.screen, label: info.label }); return false }
+    if (!p.ok && p.clip) { log({ k: 'clipped', screen: info.screen, label: info.label, cover: p.cover }); return false }
     if (!p.ok && p.anc) { log({ k: 'clipped', screen: info.screen, label: info.label, cover: p.cover }); return false } /* its own container is on top = clipped / under a scroll edge, not covered by another layer */
     if (!p.ok && opt.ignoreCover && opt.ignoreCover.test(p.cover || '')) { log({ k: 'popup', screen: info.screen, label: info.label, cover: p.cover }); return false }
     if (!p.ok) return dead(info, p);
