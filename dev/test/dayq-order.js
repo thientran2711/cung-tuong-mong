@@ -9,7 +9,7 @@
      R5 answer the cards: the morning (buổi 0) shows no optional (j68) event and no unslotted world event; no page error.
    Shots (looked at, not in git): <out>/<vp>-R1.png … R4.png
    usage: node dev/test/dayq-order.js <baseURL> <path> <outDir>   e.g. http://127.0.0.1:8765 dev/index.html /home/user/wt/dayq/shots/after */
-const {chromium}=require('playwright');const fs=require('fs');const [,,BASE,PATH,OUT]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('tap');const fs=require('fs');const [,,BASE,PATH,OUT]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 const VP=[[755,1000,2],[1180,820,2]];const i0=x=>!x;
 const NEWLIFE=`(function(){localStorage.removeItem('hclh-opt');SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){window.__forceOrigin='thd';window.__nlInner=1;start();window.__nlInner=0;if(!(typeof isSrv==='function'&&isSrv()))break}
  quiet=false;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;['kroul','kload','kpodov'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});const d=document.getElementById('dawn');if(d){d.hidden=true;d.className='dawn';d.innerHTML=''}document.body.classList.remove('kbk-open');render();return S.name})()`;
