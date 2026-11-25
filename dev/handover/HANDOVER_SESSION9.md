@@ -3380,3 +3380,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (06:50Z) OWNER PICK makeup good looks ×1.0 (no boost) → MAKEUP-NOBOOST 1410bac9 (boost=1) finalize LAND READY → 135 LOOK + GO LC13 (she said live directly).
 - (06:47Z) sếp picked good looks ×1.0 (OD 06:50Z, via 134 chat) → MAKEUP-NOBOOST told boost=1 → LAND READY → MAIN LOOK → GO LC13 (no sheets to sếp; ≤1 simple picture).
 - (06:56Z) OWNER BUG OD ~06:55Z: Tống ma ma in every Lời dặn/tip frame → person only when it is truly her business; else event/subject picture only. MAIN opens MAMA-ONLY-OWN (sonnet) child of 134, reports to 135.
+- (07:01Z) OWNER BUG OD ~07:00Z: focus figure smaller than the stage figure → KK26 (kit part jfocus) fix: copy stage figure size/spot 1:1; d500b6db re-checked. MAMA-ONLY-OWN = session_01V1ZZH4XVMNDnbrc8aMyv9D (sonnet, child of 134, reports to 135).
