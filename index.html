@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"3da4822d+","t":"2026-11-25T12:56Z","c":"net-ghen-2 NB-b: relAdd doer-first order fixed at 13 sites (law 1/6/11 scan of all 250), Tát/Phạt quỳ/Ngáng chân/Bỏ phấn lạ/chăm thú cards …","b":"d1f227ee028b","h":[{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"}]};
+window.CTM_BI={"s":"b80010e5+","t":"2026-11-25T12:59Z","c":"net-ghen-2: W7 report + handover (NB-b, NB-a done; NB2 + gates open)","b":"eea3185d61c3","h":[{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -29181,6 +29181,24 @@ function kaWhyWho(C,v,named,title){try{const nm=v&&v.name;const subj=named&&nm?n
  }catch(e){}
  return ""}
 function kaWhyHtml(r){return r?`<span class="kwy"> · ${r}</span>`:""}
+/* NB2 (W8, LAW 11 whole family): a result card names EVERY real change of the tap, not only hers + the consorts' — every servant's
+   thiện cảm (own staff: loyal; others, the named elders and the Thái hậu household: af.me = aff(c,S)), the court (S.court af.me),
+   the familiarity step she reached (S.known, K61STN word) and what she learned (kaLearn(text): an act that hands her news/knowledge
+   says so once, listed under Được). rsnap keeps plain numbers only (co-op / saves never carry object references). */
+function kaSrvList(){const L=[];try{L.push(...allServ())}catch(e){}try{if(S.thO&&S.thO.staff)for(const x of S.thO.staff)if(!L.includes(x))L.push(x)}catch(e){}return L.filter(x=>x&&x.sid!=null&&x!==S.maid)}
+function kaSrvV(st){let v=(st.af&&st.af.me)||0;try{if(typeof ownerOf==="function"&&ownerOf(st)===S&&typeof st.loyal==="number")v+=st.loyal}catch(e){}return v}
+window.__kaLearnN=window.__kaLearnN||0;window.__kaLearn=window.__kaLearn||[];
+function kaLearn(t){if(!t)return;window.__kaLearnN++;window.__kaLearn.push({n:window.__kaLearnN,t:String(t)});if(window.__kaLearn.length>12)window.__kaLearn.shift()}
+window.kaLearn=kaLearn;
+(function(){const rs=rsnap;rsnap=function(){const b=rs.apply(this,arguments);if(b&&S)try{const o={};for(const st of kaSrvList())o[st.sid]=kaSrvV(st);b.srv=o;
+ const c={};for(const k in (S.court||{})){const x=S.court[k];if(x&&x.af)c[k]=x.af.me||0}b.court=c;b.kn=Object.assign({},S.known||{});b.learn=window.__kaLearnN}catch(e){}return b}})();
+function kaMorePeople(before,per,G){const per0=per;per={push(e){const x=per0.find(y=>y[0]===e[0]);if(x){x[1]=x[1].concat(e[1]);x[2]=x[2].concat(e[2])}else per0.push(e)}};/* one row per person */
+ if(before.srv){for(const st of kaSrvList()){const b=before.srv[st.sid];if(b==null)continue;const d=Math.round(kaSrvV(st)-b);if(!d)continue;
+  const named=kaNamed(st);const who=named?(st.call||st.name):"một cung nhân";per.push([who,d>0?[`thiện cảm ${kaN(d)}`]:[],d<0?[`thiện cảm ${kaN(d)}`]:[],""])}}
+ if(before.court)for(const k in (S.court||{})){const x=S.court[k],b=before.court[k];if(!x||!x.af||b==null)continue;const d=Math.round((x.af.me||0)-b);if(d)per.push([x.name,d>0?[`thiện cảm ${kaN(d)}`]:[],d<0?[`thiện cảm ${kaN(d)}`]:[],""])}
+ if(before.kn&&S.known&&typeof kOf61==="function"&&typeof K61STN!=="undefined"){const P=[].concat(typeof rivals!=="undefined"?rivals:[],kaSrvList());const seen=new Set();
+  for(const p of P){let k="";try{k=kOf61(p)}catch(e){}if(!k||seen.has(k))continue;seen.add(k);const a=+before.kn[k]||0,n=+S.known[k]||0;if(n>a&&K61STN[n]){const rv=rivals.includes(p),nd=kaNamed(p);const who=nd?(rv?kaWho(p):(p.call||p.name)):rv?String(typeof whyWho==="function"?whyWho(p):"Một vị phi tần").replace(/^M/,"m"):"một cung nhân";per.push([who,[K61STN[n].toLowerCase()],[],""])}}}
+ if(before.learn!=null)for(const x of (window.__kaLearn||[]))if(x.n>before.learn)G.push(`<span class="ef g">${x.t}</span>`)}
 function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Set();const WC=kaWhyCl(before);
  const q=typeof queenP==="function"?queenP():null;const R=before.rel||{};
  const per=[];const U={g:[],b:[],d:new Map()};/* [who, goodParts, badParts] */
@@ -29197,6 +29215,7 @@ function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Se
   if(k==="th"||k==="hh"){const who=k==="th"?"Thái hậu":(q&&q!==S?kaWho(q):"Hoàng hậu");per.push([who,d>0?[`thiện cảm ${kaN(d)}`]:[],d<0?[`thiện cảm ${kaN(d)}`]:[],kaWhyWho(WC,k==="th"?{name:"Thái hậu"}:(q&&q!==S?q:{name:"Hoàng hậu"}),true,title)]);continue}
   {const up=typeof kGood==="function"?kGood(k,d):d>0;(up?G:B).push(`<span class="ef ${up?"g":"r"}">${nm} ${kaN(d)}</span>`+kaWhyHtml(kaWhyStat(WC,nm,d,title,k)))}}
  if(S.maid&&before.maid!=null&&S.maid.loyal!==before.maid){const d=S.maid.loyal-before.maid;(d>0?G:B).push(`<span class="ef ${d>0?"g":"r"}">${S.maid.name}: thiện cảm ${kaN(d)}</span>`+kaWhyHtml(kaWhyStat(WC,"Thiện cảm",d,title,"maid")))}
+ try{kaMorePeople(before,per,G)}catch(e){console.error(e)}
  for(const [who,gp,bp,why] of per){const W=kaWhyHtml(why);if(gp.length)G.push(`<span class="ef t">${who}:</span> <span class="ef g">${gp.join(", ")}</span>${W}`);if(bp.length)B.push(`<span class="ef t">${who}:</span> <span class="ef r">${bp.join(", ")}</span>${W}`)}
  K.why=WC;K.ttl=title;
  return [G,B,K]}
@@ -32659,12 +32678,14 @@ PEND.j70start=pp=>{const v=RV(pp.v),A=ACT[pp.k];if(!v||!A||!S)return null;const 
  const AO=(()=>{const pv=J78.cardV;J78.cardV=v;try{const L=AOUT[k];return L?[L[0]||"",L[1]||""]:["",""]}catch(e){return["",""]}finally{J78.cardV=pv}})();
  const busyOwn=!canNew70("me",v.id);
  for(const m of OWN70[k]){const M=M70[m];for(const r of M.R){if(O.length>=5)break;if(r.acc==="tsv"&&!(v.staff||[]).length)continue;const o1=oddsOf70(S,v,M.k,J70CFG.prep+6+(r.acc?8:0));
-   const pw=payWin70(M,r);const c=ch70(`Bày mưu: ${r.n.toLowerCase()}`,{c:r.bac&&!pw?{bac:-r.bac}:{},need:pw?[{t:`cần ${r.bac} bạc`,ok:(S.bac||0)>=r.bac}]:undefined,wt:[G70(`chuẩn bị ${r.need} tuần, chờ ${OPP70[M.opp[0]].n}`),G70(o1!=null?`lúc ra tay: ${word(o1)}`:"dễ thành hơn")].concat(AO[0]?[G70(`thành: ${AO[0]}`)]:[]),k:(AO[1]?[R70(`ra tay mà hỏng: ${AO[1]}`)]:[]).concat([R70(`dấu vết: ${r.tl[0].replace(/nạn nhân/g,v.name)}`),R70(`${v.name} có thể phát hiện: mưu khó thành hơn, có khi nàng nắm ${balAb(BAL.eff.j70.evTop)} chứng cứ`)]).concat(pw?[R70(`Bạc -${r.bac} chỉ khi ${r.win?"mưu thành":"người ấy nhận"}`)]:[])});
+   const pw=payWin70(M,r);const c=ch70(`Bày mưu: ${r.n.toLowerCase()}`,{c:r.bac&&!pw?{bac:-r.bac}:{},need:pw?[{t:`cần ${r.bac} bạc`,ok:(S.bac||0)>=r.bac}]:undefined,wt:[G70(`chuẩn bị ${r.need} tuần, chờ ${OPP70[M.opp[0]].n}`),G70(o1!=null?`lúc ra tay: ${word(o1)}`:"dễ thành hơn")].concat(AO[0]?[G70(`thành: ${AO[0]}`)]:[]),k:(AO[1]?[R70(`ra tay mà hỏng: ${AO[1]}`)]:[]).concat([R70(`dấu vết: ${r.tl[0].replace(/nạn nhân/g,v.name)}`),R70(`${v.name} có thể phát hiện: mưu khó thành hơn, có khi nàng nắm ${balAb(seeEv70())} chứng cứ`)]).concat(pw?[R70(`Bạc -${r.bac} chỉ khi ${r.win?"mưu thành":"người ấy nhận"}`)]:[])});
    c.go=()=>{if(!canNew70("me",v.id)){log("Ngươi đang theo đuổi đủ mưu rồi.");return}spend(2);const p=newPlot70(S,v,m,r.id,"own");if(p&&!p.end)log(`Ngươi bắt đầu bày mưu ${M.n.toLowerCase()} nhắm vào ${v.name}: ${r.n.toLowerCase()}.`);if(p&&p.pend==="ownfail"){push70(p,true)}};if(!busyOwn)O.push(c)}}
  O.push(ch70("Thôi",{ok:()=>"Ngươi gác lại ý định."}));
  return{t:`<p>Ngươi định ${A.n.toLowerCase()} ${v.name}.</p><p class="past">Ra tay ngay thì nhanh mà dễ hỏng; bày mưu từ từ thì dễ thành hơn, nhưng mỗi tuần chuẩn bị là thêm một lần người của nàng có thể bắt gặp.${busyOwn?" Ngươi đang theo đuổi đủ mưu, chỉ có thể ra tay ngay.":""}</p>`,o:O,who:pv(v)}};
 /* her pending decision on a held plot comes back when the awaited moment arrives (or after a while) */
-(function(){const s0=step70;step70=function(p){if(p.a==="me"&&p.st==="wait"&&!p.end&&!p.pend){const t=pt70(p);if(!alive70(t)){abandon70(p,"gone");return}p.wt++;if(t!==S&&roll(npcSee70(p))){p.g+=10;if(roll(25))evA(t,S,BAL.eff.j70.evTop)}
+/* W8: the one amount of «nàng phát giác mưu đang chờ» (the step70 rule below) and the Bày mưu line that prints it (one-core-bind: one reader) */
+function seeEv70(){return BAL.eff.j70.evTop}
+(function(){const s0=step70;step70=function(p){if(p.a==="me"&&p.st==="wait"&&!p.end&&!p.pend){const t=pt70(p);if(!alive70(t)){abandon70(p,"gone");return}p.wt++;if(t!==S&&roll(npcSee70(p))){p.g+=10;if(roll(25))evA(t,S,seeEv70())}
   if(!inQ70(p)&&(!p.hold||OPP70[p.hold].ok(p,t)||p.wt>=6)){p.hold=null;p.pend="when"}return}return s0.apply(this,arguments)}})();
 
 /* ---------- testing helpers (in page) ---------- */
@@ -73703,7 +73724,7 @@ window.elderCardHTML=st=>{try{return cardHTML(typeof st==="string"?elderBy(st):s
 if(typeof popCard==="function"){const c0=popCard;popCard=function(p){if(p&&p.kind==="elder"&&p.ref)return cardHTML(p.ref);return c0.apply(this,arguments)}}
 function act(a,id){const st=elderBy(id);if(!st||!S||S.dead||Q.length)return;let r="";const bf=typeof rsnap==="function"?rsnap():null;
  if(a==="bieu"){const g=B().gift||20;if(S.bac<g)return;apply({bac:-g});st.af.me=(st.af.me||0)+(B().giftAf||10);r=`Biếu ${st.call} ${g} lượng: người ấy quý ngươi +${B().giftAf||10}.`}
- if(a==="hoi"){const n=B().talk||2;if(!can(n))return;spend(n);st.af.me=(st.af.me||0)+BAL.eff.jstaff.meAct;try{if(typeof k61Meet==="function"&&k61St(st)<3)k61Meet(st,"trò chuyện",3)}catch(e){}r=`${st.call}: ${talkLine(st)}`}
+ if(a==="hoi"){const n=B().talk||2;if(!can(n))return;spend(n);st.af.me=(st.af.me||0)+BAL.eff.jstaff.meAct;try{if(typeof k61Meet==="function"&&k61St(st)<3)k61Meet(st,"trò chuyện",3)}catch(e){}r=`${st.call}: ${talkLine(st)}`;try{if(typeof kaLearn==="function")kaLearn(`nghe chuyện ${postOf(st.eid).palace}`)}catch(e){}/* NB2: the card's «thành: nghe chuyện …» is listed under Được */}
  if(r){log(r);popMsg=r;render();try{if(bf&&typeof resultShow==="function")resultShow(st.call,bf,null)}catch(e){}/* person-dialog-restore: the result is the bottom result card */}}
 document.addEventListener("click",e=>{const b=e.target&&e.target.closest&&e.target.closest("[data-elder]");if(!b||b.disabled)return;e.stopPropagation();e.preventDefault();act(b.dataset.elder,b.dataset.eid)},true);
 /* ---------- they speak by name in events and the log (LUẬT SỬA CẢ NHÓM: one table for every generic "ma ma" of these offices) ---------- */
@@ -98326,7 +98347,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d1f227ee028b";window.CTM_BUILD=BUILD;
+const BUILD="eea3185d61c3";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -303,12 +303,14 @@ PEND.j70start=pp=>{const v=RV(pp.v),A=ACT[pp.k];if(!v||!A||!S)return null;const 
  const AO=(()=>{const pv=J78.cardV;J78.cardV=v;try{const L=AOUT[k];return L?[L[0]||"",L[1]||""]:["",""]}catch(e){return["",""]}finally{J78.cardV=pv}})();
  const busyOwn=!canNew70("me",v.id);
  for(const m of OWN70[k]){const M=M70[m];for(const r of M.R){if(O.length>=5)break;if(r.acc==="tsv"&&!(v.staff||[]).length)continue;const o1=oddsOf70(S,v,M.k,J70CFG.prep+6+(r.acc?8:0));
-   const pw=payWin70(M,r);const c=ch70(`Bày mưu: ${r.n.toLowerCase()}`,{c:r.bac&&!pw?{bac:-r.bac}:{},need:pw?[{t:`cần ${r.bac} bạc`,ok:(S.bac||0)>=r.bac}]:undefined,wt:[G70(`chuẩn bị ${r.need} tuần, chờ ${OPP70[M.opp[0]].n}`),G70(o1!=null?`lúc ra tay: ${word(o1)}`:"dễ thành hơn")].concat(AO[0]?[G70(`thành: ${AO[0]}`)]:[]),k:(AO[1]?[R70(`ra tay mà hỏng: ${AO[1]}`)]:[]).concat([R70(`dấu vết: ${r.tl[0].replace(/nạn nhân/g,v.name)}`),R70(`${v.name} có thể phát hiện: mưu khó thành hơn, có khi nàng nắm ${balAb(BAL.eff.j70.evTop)} chứng cứ`)]).concat(pw?[R70(`Bạc -${r.bac} chỉ khi ${r.win?"mưu thành":"người ấy nhận"}`)]:[])});
+   const pw=payWin70(M,r);const c=ch70(`Bày mưu: ${r.n.toLowerCase()}`,{c:r.bac&&!pw?{bac:-r.bac}:{},need:pw?[{t:`cần ${r.bac} bạc`,ok:(S.bac||0)>=r.bac}]:undefined,wt:[G70(`chuẩn bị ${r.need} tuần, chờ ${OPP70[M.opp[0]].n}`),G70(o1!=null?`lúc ra tay: ${word(o1)}`:"dễ thành hơn")].concat(AO[0]?[G70(`thành: ${AO[0]}`)]:[]),k:(AO[1]?[R70(`ra tay mà hỏng: ${AO[1]}`)]:[]).concat([R70(`dấu vết: ${r.tl[0].replace(/nạn nhân/g,v.name)}`),R70(`${v.name} có thể phát hiện: mưu khó thành hơn, có khi nàng nắm ${balAb(seeEv70())} chứng cứ`)]).concat(pw?[R70(`Bạc -${r.bac} chỉ khi ${r.win?"mưu thành":"người ấy nhận"}`)]:[])});
    c.go=()=>{if(!canNew70("me",v.id)){log("Ngươi đang theo đuổi đủ mưu rồi.");return}spend(2);const p=newPlot70(S,v,m,r.id,"own");if(p&&!p.end)log(`Ngươi bắt đầu bày mưu ${M.n.toLowerCase()} nhắm vào ${v.name}: ${r.n.toLowerCase()}.`);if(p&&p.pend==="ownfail"){push70(p,true)}};if(!busyOwn)O.push(c)}}
  O.push(ch70("Thôi",{ok:()=>"Ngươi gác lại ý định."}));
  return{t:`<p>Ngươi định ${A.n.toLowerCase()} ${v.name}.</p><p class="past">Ra tay ngay thì nhanh mà dễ hỏng; bày mưu từ từ thì dễ thành hơn, nhưng mỗi tuần chuẩn bị là thêm một lần người của nàng có thể bắt gặp.${busyOwn?" Ngươi đang theo đuổi đủ mưu, chỉ có thể ra tay ngay.":""}</p>`,o:O,who:pv(v)}};
 /* her pending decision on a held plot comes back when the awaited moment arrives (or after a while) */
-(function(){const s0=step70;step70=function(p){if(p.a==="me"&&p.st==="wait"&&!p.end&&!p.pend){const t=pt70(p);if(!alive70(t)){abandon70(p,"gone");return}p.wt++;if(t!==S&&roll(npcSee70(p))){p.g+=10;if(roll(25))evA(t,S,BAL.eff.j70.evTop)}
+/* W8: the one amount of «nàng phát giác mưu đang chờ» (the step70 rule below) and the Bày mưu line that prints it (one-core-bind: one reader) */
+function seeEv70(){return BAL.eff.j70.evTop}
+(function(){const s0=step70;step70=function(p){if(p.a==="me"&&p.st==="wait"&&!p.end&&!p.pend){const t=pt70(p);if(!alive70(t)){abandon70(p,"gone");return}p.wt++;if(t!==S&&roll(npcSee70(p))){p.g+=10;if(roll(25))evA(t,S,seeEv70())}
   if(!inQ70(p)&&(!p.hold||OPP70[p.hold].ok(p,t)||p.wt>=6)){p.hold=null;p.pend="when"}return}return s0.apply(this,arguments)}})();
 
 /* ---------- testing helpers (in page) ---------- */

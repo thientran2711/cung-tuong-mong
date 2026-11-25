@@ -246,6 +246,24 @@ function kaWhyWho(C,v,named,title){try{const nm=v&&v.name;const subj=named&&nm?n
  }catch(e){}
  return ""}
 function kaWhyHtml(r){return r?`<span class="kwy"> · ${r}</span>`:""}
+/* NB2 (W8, LAW 11 whole family): a result card names EVERY real change of the tap, not only hers + the consorts' — every servant's
+   thiện cảm (own staff: loyal; others, the named elders and the Thái hậu household: af.me = aff(c,S)), the court (S.court af.me),
+   the familiarity step she reached (S.known, K61STN word) and what she learned (kaLearn(text): an act that hands her news/knowledge
+   says so once, listed under Được). rsnap keeps plain numbers only (co-op / saves never carry object references). */
+function kaSrvList(){const L=[];try{L.push(...allServ())}catch(e){}try{if(S.thO&&S.thO.staff)for(const x of S.thO.staff)if(!L.includes(x))L.push(x)}catch(e){}return L.filter(x=>x&&x.sid!=null&&x!==S.maid)}
+function kaSrvV(st){let v=(st.af&&st.af.me)||0;try{if(typeof ownerOf==="function"&&ownerOf(st)===S&&typeof st.loyal==="number")v+=st.loyal}catch(e){}return v}
+window.__kaLearnN=window.__kaLearnN||0;window.__kaLearn=window.__kaLearn||[];
+function kaLearn(t){if(!t)return;window.__kaLearnN++;window.__kaLearn.push({n:window.__kaLearnN,t:String(t)});if(window.__kaLearn.length>12)window.__kaLearn.shift()}
+window.kaLearn=kaLearn;
+(function(){const rs=rsnap;rsnap=function(){const b=rs.apply(this,arguments);if(b&&S)try{const o={};for(const st of kaSrvList())o[st.sid]=kaSrvV(st);b.srv=o;
+ const c={};for(const k in (S.court||{})){const x=S.court[k];if(x&&x.af)c[k]=x.af.me||0}b.court=c;b.kn=Object.assign({},S.known||{});b.learn=window.__kaLearnN}catch(e){}return b}})();
+function kaMorePeople(before,per,G){const per0=per;per={push(e){const x=per0.find(y=>y[0]===e[0]);if(x){x[1]=x[1].concat(e[1]);x[2]=x[2].concat(e[2])}else per0.push(e)}};/* one row per person */
+ if(before.srv){for(const st of kaSrvList()){const b=before.srv[st.sid];if(b==null)continue;const d=Math.round(kaSrvV(st)-b);if(!d)continue;
+  const named=kaNamed(st);const who=named?(st.call||st.name):"một cung nhân";per.push([who,d>0?[`thiện cảm ${kaN(d)}`]:[],d<0?[`thiện cảm ${kaN(d)}`]:[],""])}}
+ if(before.court)for(const k in (S.court||{})){const x=S.court[k],b=before.court[k];if(!x||!x.af||b==null)continue;const d=Math.round((x.af.me||0)-b);if(d)per.push([x.name,d>0?[`thiện cảm ${kaN(d)}`]:[],d<0?[`thiện cảm ${kaN(d)}`]:[],""])}
+ if(before.kn&&S.known&&typeof kOf61==="function"&&typeof K61STN!=="undefined"){const P=[].concat(typeof rivals!=="undefined"?rivals:[],kaSrvList());const seen=new Set();
+  for(const p of P){let k="";try{k=kOf61(p)}catch(e){}if(!k||seen.has(k))continue;seen.add(k);const a=+before.kn[k]||0,n=+S.known[k]||0;if(n>a&&K61STN[n]){const rv=rivals.includes(p),nd=kaNamed(p);const who=nd?(rv?kaWho(p):(p.call||p.name)):rv?String(typeof whyWho==="function"?whyWho(p):"Một vị phi tần").replace(/^M/,"m"):"một cung nhân";per.push([who,[K61STN[n].toLowerCase()],[],""])}}}
+ if(before.learn!=null)for(const x of (window.__kaLearn||[]))if(x.n>before.learn)G.push(`<span class="ef g">${x.t}</span>`)}
 function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Set();const WC=kaWhyCl(before);
  const q=typeof queenP==="function"?queenP():null;const R=before.rel||{};
  const per=[];const U={g:[],b:[],d:new Map()};/* [who, goodParts, badParts] */
@@ -262,6 +280,7 @@ function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Se
   if(k==="th"||k==="hh"){const who=k==="th"?"Thái hậu":(q&&q!==S?kaWho(q):"Hoàng hậu");per.push([who,d>0?[`thiện cảm ${kaN(d)}`]:[],d<0?[`thiện cảm ${kaN(d)}`]:[],kaWhyWho(WC,k==="th"?{name:"Thái hậu"}:(q&&q!==S?q:{name:"Hoàng hậu"}),true,title)]);continue}
   {const up=typeof kGood==="function"?kGood(k,d):d>0;(up?G:B).push(`<span class="ef ${up?"g":"r"}">${nm} ${kaN(d)}</span>`+kaWhyHtml(kaWhyStat(WC,nm,d,title,k)))}}
  if(S.maid&&before.maid!=null&&S.maid.loyal!==before.maid){const d=S.maid.loyal-before.maid;(d>0?G:B).push(`<span class="ef ${d>0?"g":"r"}">${S.maid.name}: thiện cảm ${kaN(d)}</span>`+kaWhyHtml(kaWhyStat(WC,"Thiện cảm",d,title,"maid")))}
+ try{kaMorePeople(before,per,G)}catch(e){console.error(e)}
  for(const [who,gp,bp,why] of per){const W=kaWhyHtml(why);if(gp.length)G.push(`<span class="ef t">${who}:</span> <span class="ef g">${gp.join(", ")}</span>${W}`);if(bp.length)B.push(`<span class="ef t">${who}:</span> <span class="ef r">${bp.join(", ")}</span>${W}`)}
  K.why=WC;K.ttl=title;
  return [G,B,K]}
