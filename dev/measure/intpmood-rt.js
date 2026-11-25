@@ -7,8 +7,9 @@
  const hasTp=()=>{try{return !!(BAL&&BAL.tp)}catch(e){return false}};
  if(ARM==='off'&&hasTp())BAL.tp.moodM=0;
  const C0=()=>({calls:0,pass:0,block:0,byMood:0,deeds:0,byKind:{},arm:ARM});
- const cc=()=>{try{if(!S||typeof S!=='object')return null;return S.__tpm||(S.__tpm=C0())}catch(e){return null}};
+ const cc=()=>{try{if(!S||typeof S!=='object')return null;const C=S.__tpm||(S.__tpm=C0());if(C.y0==null&&S.year!=null)C.y0=S.year;if(S.year!=null)C.y=S.year;if(!C.deedsBy)C.deedsBy={};return C}catch(e){return null}};
  const m0=window.motiveOK;if(typeof m0==='function'){window.motiveOK=motiveOK=function(a,t,kind){const g=m0.apply(this,arguments);try{const C=cc();if(C&&a!==S&&H.has(kind)){C.calls++;const K=C.byKind[kind]=C.byKind[kind]||[0,0,0];K[0]++;
    if(g.ok){C.pass++;K[1]++;if(hasTp()&&BAL.tp.moodM&&typeof tpMoodM==='function'&&tpMoodM(a,kind)>0){const M=BAL.tp.moodM;BAL.tp.moodM=0;let g2;try{g2=m0.apply(this,arguments)}finally{BAL.tp.moodM=M}if(!g2.ok){C.byMood++;K[2]++}}}else C.block++}}catch(e){}return g}}
- const d0=window.tpDeed;if(typeof d0==='function')window.tpDeed=tpDeed=function(X,d){try{const C=cc();if(C&&X!==S&&/^(provoke|humil|vent)$/.test(d))C.deeds++}catch(e){}return d0.apply(this,arguments)};
+ const d0=window.tpDeed;if(typeof d0==='function')window.tpDeed=tpDeed=function(X,d){try{const C=cc();if(C&&X!==S&&typeof BAL!=='undefined'&&BAL.tp&&BAL.tp.base&&BAL.tp.base[d]){C.deedsBy[d]=(C.deedsBy[d]||0)+1;if(!/^(good|kind|gift|visit)/.test(d))C.deeds++}}catch(e){}return d0.apply(this,arguments)};
+ const r0=window.runAct;if(typeof r0==='function')window.runAct=runAct=function(a,t,k){const r=r0.apply(this,arguments);try{const C=cc();if(C&&a!==S&&r&&H.has(k)){C.act=C.act||{};C.act[k]=(C.act[k]||0)+1}}catch(e){}return r};
  window.__tpmGet=()=>{const C=cc();return C?JSON.parse(JSON.stringify(C)):null}})();
