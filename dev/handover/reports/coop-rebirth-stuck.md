@@ -68,3 +68,13 @@ Shots in reviewer scratch only (none in git, none on the CDN, nothing to wipe).
 ### REVIEW r7 (final merge, D 19:41Z: LIVE moved to 351122ba) — **PASS feefe4af** (20:08Z)
 review/coop-rebirth-stuck-r7 feefe4af = r6 9fea1332 merged onto LIVE 351122ba (fast-forward from 351122ba). Only index.html / sw.js / CHANGE.txt conflicted; they were rebuilt and the fix's CHANGE line kept. No source overlap: the diff against main is jdayq.js + dayq-ghost.js + scan-next-dead.py + coop-e2e.js.
 ALONE on feefe4af: coop-e2e 143/143 (heal check ok) · dayq-ghost PASS all · dayq-hold-coop 17/17 · quickcheck: old save ok, open 1983 ms, perf new/live render 251/252, tab 630/547, buổi 1345/1578 ms, tasks>200ms 25/25. The only fail is the known pre-existing G4 row «Ô lưu · Lui» (LIVE fault, above).
+
+### ROLLOVER RV-CRS (20:25Z, context at the roll line) — HANDOVER for the next BIG reviewer
+State: the fix is LAND READY (r7 feefe4af PASS; MAIN 145 has lander LC17 stack 9fea1332 on SANGBUOI r4 + B). Nothing of mine is open: the r6/r7 branches are pushed and the worktrees are removed.
+Next job (D 20:23Z): BIG review of T3b's coming SSK «jdayq.js one-rule cleanup» (dqNextHeal solo → dqNextSync; co-op keeps COOPW.lockNext).
+Recipe that worked (all ALONE, one at a time):
+- Build: `bash dev/site/build_site.sh` in a sparse worktree. If the SSK has no build commit, add one (index.html/sw.js + CHANGE line) on review/<topic>-rN; quickcheck needs it.
+- Local server for dayq-hold / dayq-order: python http.server sends no charset and breaks dev/index.html, so use a UTF-8 server (`.html`/`.js` → `charset=utf-8`), then `node dev/test/dayq-hold.js http://127.0.0.1:PORT dev/index.html <out>`. dayq-ghost / dayq-hold-coop / coop-e2e take no URL (coop-serve.js).
+- Break probe (re-run it on the cleanup): disable #next, wait 2 × BAL.dayq.wake; it must stay disabled for Q>0 / S.mg / S.dead / data-coopWait / co-op lockNext holding, and come back in the control. A copy is in the RV-CRS scratchpad (break.js); rewrite it from this line if that is gone.
+- Code-read anchor: only j6 render(), jcoopworld lockNext() and the jdayq heal write #next.disabled (grep `.disabled=`). A solo sync must equal render()'s rule exactly (S.dead||Q.length||S.mg).
+- Known: quickcheck G4 «Ô lưu · Lui» fails on LIVE too (pre-existing, not a FAIL for branch work). Solo #next.onclick using the early nextBuoi is parked for MAIN (out of scope).
