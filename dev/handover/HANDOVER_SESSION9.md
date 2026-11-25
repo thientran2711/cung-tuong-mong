@@ -3668,3 +3668,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - 22:34Z WAKE. LOAD: main running 6 (KK33 stage+dialogue · NHV-BUILD · ART-NHV states · PROMO-ROOT · LC17 lander · SELSCENE-19 idle) + robots M2b/M3/M5b, ROLE B #7 | B ROOT 2 session_01N1tNP3oeufPEZL2RqPYKuK busy (express orders) | C ROOT 3 session_01PEhRbx9FkVqsBXcHZZeDmJ busy (art #14–17) | D ROOT 2 session_01D3E3NaCjS2HPpbV9vyoqqF busy | E child4 busy | F #16 session_01UV1SziaACjZPNBEEB1EeL2 busy | moved: NHV art C→ART-NHV; promotion root→PROMO-ROOT. LIVE 5e013076.
   - C KIT REQUEST (scene bg slot for tấn phong / lập hậu / hòa thân / thắng trận, pictures c3-evbg) → KK33 (stage bg lookup).
   - B U1c: review/robot-coop-stack-u4 7959f1b5 PROVISIONAL (LIVE + week-wait …) — watch for LAND READY.
+- 22:46Z ROLL: MAIN 146 at its context line → TAKEOVER_MAIN_147.md written; MAIN CHÍNH 147 = session_01V1ZZH4NKh63eG3ZU7sdD59 (depth 4). 146's 4 scheduled tasks DISABLED (147 recreates incl. 02:35Z landing pack). 146 stops.
