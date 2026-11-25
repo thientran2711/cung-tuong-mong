@@ -201,6 +201,8 @@ async function play(p) {
     if (cnvF && ch && ch.t) { try { const d = JSON.parse(fs.readFileSync(cnvF, 'utf8')); if (!d.picked) { d.picked = ch.t; d.pickedExit = !!ch.exit; fs.writeFileSync(cnvF, JSON.stringify(d)); console.log('CNV EXIT CHOICE picked «' + ch.t.slice(0, 40) + '»' + (ch.exit ? ' (EXIT — only option)' : '')) } } catch (e) {} }
     if (!ch) { await p.waitForTimeout(400); continue }
     if (ch.scroll) { await p.mouse.move(ch.scroll.x, ch.scroll.y); await p.mouse.wheel(0, Math.min(400, ch.scroll.left + 20)); await p.waitForTimeout(400); R.harness.scrolls = (R.harness.scrolls || 0) + 1; continue }
+    /* s10 13:10Z: a frame already logged as a dead end is never tapped inside again (portrait ping-pong ~8 min a buổi): reload the same save at once (the frame lives only in the in-memory Q; a reload drops it) */
+    if (started && sc.layer !== 'page' && noClose.has('dead' + dKey(sc))) { R.harness.deadFrameReload = (R.harness.deadFrameReload || 0) + 1; await unstick(p, rt, sc, 3); lastProg = Date.now(); tapsB = 0; continue }
     if (ch.noclose) { const shot = path.join(SHOTS, 'noclose-' + Date.now() + '.png'); await p.screenshot({ path: shot }).catch(() => {}); bug('game', (ch.clip ? 'dialog runs past the screen edge (bottom clipped, no scroller) and shows no close / calm option: ' : 'dialog scrolled to the end has no close / next button: ') + sc.layer + ' «' + sc.title + '»', { shot, buttons: sc.b.map(x => x.t).slice(0, 8) }); continue }
     if (ch.exit) { R.exitPick = { label: ch.t, n: ch.n, only: ch.only, at: sec(), S: sc.S }; console.log('EXIT ROAD', ch.only ? '(only option — real ending)' : '', '«' + ch.t + '»') }
     const h = await p.evaluateHandle(i => window.__rtBtns[i], ch.i);
