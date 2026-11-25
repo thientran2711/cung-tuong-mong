@@ -7,7 +7,7 @@
       every kit row (.kr) — label/value do not intersect
    T5 real tap on the popup ✕ closes it, the tab is still Tài nghệ
    usage: node dev/test/tainghe-info.js [index.html|URL] [outdir] [WxH,...]  (VIDEO=1 records a .webm per device into outdir) */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');const RT=require('./realtap.js');
+const {chromium}=require('playwright');const fs=require('fs');const path=require('path');const cp=require('child_process');const cdn={};const RT=require('./realtap.js');
 const A=process.argv.slice(2);const URL0=A[0]||path.resolve(__dirname,'../../index.html');const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+path.resolve(URL0);
 const OUT=A[1]||'/tmp/tainghe-info';fs.mkdirSync(OUT,{recursive:true});const SIZES=(A[2]||'755x1000,1180x820').split(',');
 const SETUP=()=>{try{window.__kbootHostDrop&&window.__kbootHostDrop()}catch(e){}document.querySelectorAll('#kroul,#kroulw,#kload,#kboot,#klife,.kroul,.kmov').forEach(e=>e.remove());
@@ -20,6 +20,10 @@ const CLEAN=()=>{document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,
  for(const wh of SIZES){const [W,H]=wh.split('x').map(Number);const dev=W<1000?'fold':'ipad';
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce',...(process.env.VIDEO?{recordVideo:{dir:OUT,size:{width:W,height:H}}}:{})});
   await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll('.krskip').forEach(b=>b.click())},300)});
+  /* CTM_CURL_CDN=1: CDN pictures fetched with curl so the real paintings show (as kit-info-tap.js) */
+  if(process.env.CTM_CURL_CDN)await ctx.route(/ctm-img\.victoria-tntt\.workers\.dev/,r=>{const u=r.request().url();try{if(!cdn[u])cdn[u]=cp.execFileSync('curl',['-sSf','-m','30',u],{maxBuffer:60e6});r.fulfill({status:200,body:cdn[u],contentType:u.endsWith('.json')?'application/json':u.endsWith('.webp')?'image/webp':'application/octet-stream',headers:{'access-control-allow-origin':'*'}})}catch(e){r.fulfill({status:404,body:''})}});
+  /* VIDEO: a dot shows where each real tap lands (drawing only, pointer-events none) */
+  if(process.env.VIDEO)await ctx.addInitScript(()=>{addEventListener('pointerdown',e=>{const d=document.createElement('i');d.style.cssText=`position:fixed;left:${e.clientX-14}px;top:${e.clientY-14}px;width:28px;height:28px;border-radius:50%;background:rgba(220,40,40,.45);border:2px solid #c00;z-index:2147483647;pointer-events:none`;document.documentElement.appendChild(d);setTimeout(()=>d.remove(),700)},true)});
   const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   if(!/^https?:/.test(URL))await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function',null,{timeout:240000});await p.waitForTimeout(2000);
@@ -42,7 +46,7 @@ const CLEAN=()=>{document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,
     await p.evaluate(CLEAN);
     const sel=`#panel .kskill[data-skill="${sk}"] .kskn`;const nm=await p.evaluate(s=>{const e=document.querySelector(s);return e?e.innerText.replace(/ⓘ/g,'').replace(/\s+/g,' ').trim():''},sel);
     if(!nm){bad++;rows.push([wh,sv,sk,'T3 no name target','FAIL']);continue}
-    const t=await rt.tap(sel,{screen:'art/'+sv,label:nm});await p.waitForTimeout(900);
+    const t=await rt.tap(sel,{screen:'art/'+sv,label:nm});await p.waitForTimeout(process.env.VIDEO?1800:900);
     const q=await p.evaluate(nm=>{const M=document.getElementById('modal');if(!M||M.hidden)return {open:false};const dlg=M.querySelector('.dlg');const tt=(M.querySelector('.kpt,.kph h3,h3,.kptitle')||dlg||M).innerText||'';
      const inter=(a,b)=>!(a.right<=b.left+.5||b.right<=a.left+.5||a.bottom<=b.top+.5||b.bottom<=a.top+.5);
      const txt=e=>{const r=document.createRange();r.selectNodeContents(e);const L=[...r.getClientRects()].filter(x=>x.width>0&&x.height>0);if(!L.length)return null;return {left:Math.min(...L.map(x=>x.left)),right:Math.max(...L.map(x=>x.right)),top:Math.min(...L.map(x=>x.top)),bottom:Math.max(...L.map(x=>x.bottom))}};
@@ -50,7 +54,7 @@ const CLEAN=()=>{document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,
      M.querySelectorAll('.kr').forEach((r,i)=>{const k=r.querySelector('.krl'),v=r.querySelector('.krv');if(!k||!v)return;const a=txt(k),c=txt(v);if(a&&c&&inter(a,c))ov.push('row'+(i+1))});
      return {open:true,title:(M.innerText||'').slice(0,80).replace(/\s+/g,' '),has:(M.innerText||'').includes(nm.split(' · ')[0]),tiers:M.querySelectorAll('.ktier').length,ov}},nm);
     let closed=false;
-    if(q.open){await p.waitForTimeout(400);const xs=await p.evaluate(()=>{const M=document.getElementById('modal');const c=[...M.querySelectorAll('button')].find(b=>/^(✕|×|x)$/i.test((b.innerText||b.textContent||'').trim())||/Đóng/.test(b.getAttribute('aria-label')||''));if(!c)return null;c.dataset.tix='1';return 1});
+    if(q.open){await p.waitForTimeout(process.env.VIDEO?1200:400);const xs=await p.evaluate(()=>{const M=document.getElementById('modal');const c=[...M.querySelectorAll('button')].find(b=>/^(✕|×|x)$/i.test((b.innerText||b.textContent||'').trim())||/Đóng/.test(b.getAttribute('aria-label')||''));if(!c)return null;c.dataset.tix='1';return 1});
      if(xs)await rt.tap('#modal [data-tix="1"]',{screen:'popup',label:'✕'});await p.waitForTimeout(600);
      closed=await p.evaluate(()=>{const M=document.getElementById('modal');return (!M||M.hidden)&&tab==='art'})}
     const ok=t&&q.open&&q.has&&!q.ov.length&&closed;if(!ok)bad++;
