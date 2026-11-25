@@ -49,3 +49,11 @@ Note for kit-tntile (not this fix): on the Fold shot an older «TÀI NGHỆ · L
 
 ## 7. LAND READY
 LAND READY 993725c4 (tier SMALL per tier.js on the head) — head of review/tainghe-open-fix (84a62610 + report text only); the build (index.html/sw.js) is the one made at 144e2af2, later commits add only tests + this report.
+
+## 8. HANDOVER (rollover, 11/25 ~07:00Z) — new order from MAIN 135: dayq soft-lock (Robot M4)
+Worker is past its rollover budget (START_CTX + 25 %); successor to be opened by the coordinator.
+- NOT covered by this branch: 993725c4 / rv merge ef1082ff only change jflip busy() (NLP). The M4 lock is a different gate: **dev/build/jdayq.js:77-78** on LIVE ee37ab5f.
+- Path: nextBuoi() → `if(dqUi()&&!dqForced()&&dqOldPending()){DQ.want=bkey();dqWait();return}` → dqWait tick: when dqOldPending() turns false → `DQ.want=null; if(Q.length||S.mg){DQ.stat.dropped++;render();return}` → the queued cards (Q.length=2, #modal hidden, DQ.newsHold=1, DQ.stat.modalHeld=74) are never shown and the buổi never advances; «Sang buổi» taps do nothing; another tab tap paints the card.
+- Suggested fix (whole family, LAW 11): every silent exit of the dayq hold with Q non-empty must call showModal() when #modal is hidden (and not S.mg) instead of only render(); audit every DQ exit path (dqWait tick, newsHold release, modalHeld counter) with a scan like dev/test/modal-hold-scan.py (on review/tainghe-open-fix), and add a real-tap test (state: 4 khắc spent, Q with 2 cards, #modal hidden, tap «Sang buổi» → a card shows; after closing them, the next tap advances). Repro: Robot M4 notes dev/handover/robot/m4/notes.txt (build 0756a05b, Fold, solo seed 104, Tháng tám trung tuần năm 1, Buổi trưa).
+- Tools to reuse: dev/test/modal-open-buoi.js (real life + drain helper), the tag-trace trick (regex push into every `showModal=function(){` in a copy of index.html).
+- Branch to build on: review/tainghe-open-fix 993725c4 (or the rv merge ef1082ff on ee37ab5f, as MAIN 135 asks).
