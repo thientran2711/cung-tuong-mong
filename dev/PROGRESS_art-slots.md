@@ -25,6 +25,7 @@ PASS: all 232 reachable art slots are on the CDN. kit-entry-gate.js PASS 134/134
 - Spend: 24 gens × 80 + 4 upscales × 72 = 2,208 credits.
 
 ## Code
+- j93 (fix 2, MAIN 147 look): the gate stage fills the screen (.kmeg width min(94vw,(100dvh-128px)*4/3), .km-gate .kmst no 760 cap): iPad 877x657, Fold 710x532, Fold landscape 803x602; scenes re-exported 1536-1600 px, leaves 420/300 px.
 - j93: kitEntryGate painted-only (no .kmeg-glow, no .kmeg-dp leaves), leaves placed in the measured doorway (KEG.gate), scene + leaves push together (.kmeg-scn),
   stage waits for the scene picture (skip on error/4 s), kegDoors(kind); kegPic url fix.
 - j82: kg82Pic url fix; KG82_MGBG maps kinh/may to the ve board backdrop. jcraft: CR_SLOTS (all 15 craft sprite names) = CR_HAVE.

@@ -352,7 +352,8 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 .kmov.km-out{animation:kmFadeOut .24s ease forwards}
 .kmst{position:relative;width:100%;max-width:760px;max-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
 .km-gate{background:radial-gradient(ellipse at 50% 38%,#3a2418,#150c08 80%)}
-.kmeg{position:relative;width:min(92vw,560px,calc((100dvh - 190px)*4/3));aspect-ratio:4/3;overflow:hidden;border:1px solid var(--gold);border-radius:var(--k-rad,8px);box-shadow:0 0 0 3px #f6ead655,0 14px 40px #000a;background:#120a07;perspective:900px;margin:0 auto}
+.km-gate .kmst{max-width:none}/* review/art-slots (MAIN 147 look): the painted gate fills the screen on iPad too (≥ 85 % of the shorter side), 4:3 kept, button under it */
+.kmeg{position:relative;width:min(94vw,calc((100dvh - 128px)*4/3));aspect-ratio:4/3;overflow:hidden;border:1px solid var(--gold);border-radius:var(--k-rad,8px);box-shadow:0 0 0 3px #f6ead655,0 14px 40px #000a;background:#120a07;perspective:900px;margin:0 auto}
 .kmeg-scn{position:absolute;inset:0;perspective:900px;transform-origin:50% 60%;animation:kmegPush calc(3.4s*var(--pace,1)) ease-out both}
 .kmeg-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .kmeg-gate{position:absolute;display:flex;transform-style:preserve-3d}
