@@ -3,17 +3,17 @@
 PRIORITY #1 CHECK: OD 25/11 ~07:10Z–08:10Z (≥20 lives, closure endings, why replay, death/life length, morning report) | main: dev/RARE_ENDINGS.md, j32.js over(), jroute.js, j99succ.js, jmort.js (ours, read-only) | review/* review/trungsinh-story (this) | claims TRUNGSINH lead + TS-P2/P3/P4b.
 STUDY ONLY — no game build (feature freeze, law 18). Every recommendation goes to PARKING_LOT for sếp's pick. Nothing of theirs (art, text, assets) is copied into our game; Vietnamese names below are quoted only to identify what we saw.
 Sources: dev/research/trungsinh/life-NN.md (one file per life, real taps), endings_catalog.txt (their 32 endings), ach_catalog.txt (33 achievements), CATALOG_endings_achievements.md, ledger-TS-P3.md, OURS_endings_summary.md, our robot rates (handover branch dev/handover/robot/rates-E-valid-20261125.md, 314 lives).
-LIVES IN THIS VERSION: 13 of 20 (01–08, 11, 12, 16, 17, 18). Lives 09–10 (TS-P2), 13–15 (TS-P3), 19–20 (TS-P4b) are still being played; tables are re-counted when they land.
+LIVES IN THIS VERSION: 17 (01–12, 16–20). Lives 13–15 (TS-P3) are still being played; tables are re-counted when they land. TS-P2 (06–10) and TS-P4b (16–20) are done.
 
 ## Tóm tắt cho sếp (≤8 dòng)
-1. Trùng Sinh chết nhanh thật: 13 kiếp đã chơi, 9 chết (69 %), giữa 33 phút thật, tuổi chết giữa 22; 6/9 chết vì MỘT thanh sức khỏe bị thẻ hãm hại hàng tháng rút dần (−4…−18), chữa chỉ +3.
-2. Sinh nở: 6 lần mang thai → 4 lần sinh, 1 chết khi sinh (25 %/lần sinh), 1 sảy thai vì bị hại — đúng cảm giác "năm ăn năm thua". Game mình: 14,4 %/lần sinh (robot 314 kiếp).
-3. Kết cục KHÉP LẠI (không chết) chiếm 31 %: ra cung lấy chồng, dưỡng thai ở biệt cung khi vua bị ám sát, lãnh cung trọn đời, trượt tuyển về quê sống tới 55 — mỗi cái chỉ 1 đoạn văn + 1 thẻ kết.
+1. Trùng Sinh chết nhanh thật: 17 kiếp đã chơi, 11 chết (65 %), giữa 33 phút thật, tuổi chết giữa 20; 6/11 chết vì MỘT thanh sức khỏe bị thẻ hãm hại hàng tháng rút dần (−4…−18), chữa chỉ +3.
+2. Sinh nở: 7 lần mang thai → 5 lần sinh, 2 chết khi sinh (40 %/lần sinh; 1 lần sức khỏe 98 vẫn chết, không báo trước, không lựa chọn), 1 sảy thai vì bị hại. Chỉ «An Thai Hoàn» 1000 bạc mới chắc an toàn. Game mình: 14,4 %/lần sinh.
+3. Kết cục KHÉP LẠI (không chết) chiếm 35 %: ra cung lấy chồng, cung nữ 25 tuổi ra cung, vua băng → vào chùa, dưỡng thai biệt cung khi vua bị ám sát, lãnh cung trọn đời, trượt tuyển về quê sống tới 55 — mỗi cái 1 đoạn văn + 1 thẻ kết. Vua băng mà không có con thì bị tuẫn táng.
 4. Vì sao người ta chơi lại: kiếp ngắn (7–40 phút), bấm 1 lần là kiếp mới (~5 giây), thẻ kết có danh hiệu (nguyên nhân + để lại tiếng), sưu tập 32 kết cục + 33 thành tựu, giữ 60 kiếp.
 5. Game mình đã có nhiều kết cục hơn hẳn (176 đại kết cục, 83 hiếm, 14 lối riêng) nhưng kiếp dài, vào lại 2 chạm + mở đầu, chưa có danh hiệu trên thẻ kết, chưa có thẻ chia sẻ.
 6. TOP 10 đề xuất (đưa vào PARKING_LOT, sếp chọn): thẻ kết 2 danh hiệu, "vua thoái vị cùng nàng du ngoạn", "dưỡng thai biệt cung khi đổi triều", lời kết tua nhanh cả đời, chuyển kiếp 1 chạm…
 7. Không sao chép gì của họ; chỉ học cách làm.
-~100% xong phần nghiên cứu 13 kiếp / ~65% đủ 20 kiếp (đang chờ 7 kiếp cuối)
+~85% xong (17/20 kiếp, chờ 3 kiếp của P3) / 0% chơi được (chỉ nghiên cứu)
 
 ## 1 · Their story machinery
 - **One body, one meter.** A single health meter (HP 0–100) decides almost every death. Each game month brings ~1 modal; about 1 in 3 is a forced loss (water splash, swapped tea, night shift in rain, rumours, chép sổ, kneeling) costing −4…−18 HP. The healer gives +3 HP for 15 bạc. When HP hits 0 the life ends with a COMPOSED sentence: a fixed head («Sức khỏe suy kiệt sau biến cố tháng này / sau lần bị hãm hại») + the body text of the last harm card. No death warning is ever shown.
@@ -22,6 +22,10 @@ LIVES IN THIS VERSION: 13 of 20 (01–08, 11, 12, 16, 17, 18). Lives 09–10 (TS
 - **Template arcs with NAMED, rank-climbing NPCs.** A bully maid climbs Thải nữ → Bảo lâm; the Empress escalates gift box → water ×4 → cat attack (Dung set to 0 forever, blocking every later exam). Harm chains: «Sóng ngầm sau cửa son» → «Chén trà sau lời gièm» → «Đêm dài chịu phạt» kill even a maid who never met the Emperor. A defence chain exists (evidence wins: «Mật thư lộ nét giả», envy −8…−11; or «Chứng cứ thành cạm bẫy», −16 HP).
 - **Ladders.** Tuyển tú drawing (85 Bảo lâm / 70 Ngự nữ / 50 Thải nữ / <50 fail → go home or become a maid, no point). «Đại khảo nội đình» every 24 months (3 stat thresholds + drawing), caps at Tiệp dư; above that only the Emperor's grace («đặc cách thăng một phẩm» after a pleased night). Maids: memory-pair exam every 2 years (Cung nữ thường → trưởng → Nữ quan), one-off «Một lần đặc tuyển» drawing jumps a maid to consort, and at 25 «Cửa cung mở» offers to leave.
 - **Emperor favour engine.** Per-NPC Thiện cảm (50 unlocks random events, cap 100); gifts once per person per month (a crafted sachet +18), talk +6; all from the same 5 actions a month. Minigames with the Emperor: cổ cầm rhythm 30 s (<25 = favour loss, a fail sent one life to Lãnh cung 15 months), caro, boat trip, fishing (score 90 → chest or the night).
+- **Childbirth is a hidden roll, not a health check.** Life 20 conceived on the first night and died in labour at HP 98 with all stats 100: one card «Khó sinh · Không giữ được con … Sức khỏe −30 … không còn khả năng mang thai», then death; no odds, no choice. The only protection is the shop item «An Thai Hoàn» (1000 bạc, once per 5 years, guarantees a safe pregnancy/birth) — a money gate, not a skill gate.
+- **Disfigurement blocks the whole favour road.** A rival's cat/lynx scratch sets Dung to 0; every later summons is refused at the door («đã bị hủy dung, gương mặt gớm ghiếc, liền đuổi về», 16 and 20 refusals in lives 09/10) until «Dịch Dung đan» (500 bạc) is bought — one bought it at 32.
+- **No heir = buried with the late Emperor.** When the Emperor dies of old age and she has no child: «Lệnh tuẫn táng được ban xuống» (life 10, 39y6). With no child but a gentler roll: royal temple for life (life 09, 35y11).
+- **Maid exit at 25.** «Hai mươi lăm tuổi · Cửa cung mở»: leave (epilogue: never married, lived to 46) or stay by passing exams; the head-maid career reaches Tổng quản ma ma at 24 (life 19).
 - **Pregnancy.** Only from «lật thẻ bài» nights (accept / «Cáo bệnh xin khất» → night dress → «Có tin thai» or not), not tied to love (conceived at favour −23). Chip «Mang thai (tháng 6/9)»; sex and grade («Tư chất») revealed at birth; birth = rank +1 edict, outfit, Ân điển +12, achievement. No child-raising seen; children outlive the mother in «hồ sơ con cái».
 - **Reign change for everyone.** Each life has its own Emperor and cast; old Emperors die and a 23–25-year-old successor takes over (rank and exam progress carry over); an assassination can close the life.
 - **Yearly rhythm.** Mùng Một feast (outfit, 3 blessings, lottery), fashion festival in month 6 (Hoa khôi wins the night; skip for 50 bạc), «Chiếu thăng phẩm» news of rivals, rivals' long «ĐẠI LỄ SẮC PHONG».
@@ -37,8 +41,9 @@ End card: «KIẾP THỨ N · ĐÃ KHÉP LẠI» / «Một kiếp phù sinh» / 
 |---|---|---|---|
 | Hoa rụng vì bệnh | death | illness | 01, 05 |
 | Áo vải bạc màu | death / tag | worn out (HP drain) | 02, 03, 16, 17 |
-| Khó sinh | death | dies in childbirth (child saved, posthumous rank + thụy hiệu) | 12 |
+| Khó sinh | death | dies in childbirth (child saved + posthumous rank in 12; child also lost in 20, at HP 98) | 12, 20 |
 | Thọ chung chính tẩm | death | old age timer | 07 |
+| Khép cùng tiên đế (tuẫn táng) | death | Emperor dies of old age, she has no child | 10 |
 | Hương độc sau rèm | death | poison | — |
 | Án dưới cửa son | death | verdict | — |
 | Một đêm biến cố | death | sudden accident | — |
@@ -46,20 +51,19 @@ End card: «KIẾP THỨ N · ĐÃ KHÉP LẠI» / «Một kiếp phù sinh» / 
 | Sóng dữ ngự hồ | death | dies with the Emperor in the lake attack | — |
 | Tranh ngôi thất bại · Ban chết | death | loses the succession fight | — |
 | Ám sát vì thù cũ / Bóng dao đoạt mệnh | death | revenge / sudden assassination | — |
-| Khép cùng tiên đế | death (closure-bad) | buried with the late Emperor | — |
 | Lạc nhau ngoài kinh thành | death-like closure | failed elopement, lover named on card | 18 |
 | Trăng lạnh cô cung | closure-bad / tag | life sentence to lãnh cung («Bạch nguyệt quang… trở về») | 04 (+ tag 02) |
 | Mật thư bại lộ | closure-bad | elopement found out → lãnh cung | — |
 | Bình yên sau đổi triều | closure-good | Emperor dies; mother + child sent to a detached palace / fief | 11 |
 | Mẫu nghi tân triều | closure-good | her son crowned, she becomes Thái hậu | — |
 | Cùng người du ngoạn thiên hạ | closure-good | Emperor abdicates to the Crown Prince, travels with her | — |
-| Tiếng chuông cuối đời | closure | late Emperor dies, she enters the royal temple | — |
+| Tiếng chuông cuối đời | closure | late Emperor dies (old age), no heir, she enters the royal temple | 09 |
 | Rời cung khi đổi triều | closure | new court sends staff home | — |
 | Duyên nơi chân trời | closure-good | elopement succeeds, new name | — |
 | Duyên ngoài cửa son | closure-good | granted a marriage, leaves with her soulmate | 06 |
-| Ngoài bức tường son | closure-good | lives out her life outside the palace | 06 |
+| Ngoài bức tường son | closure-good | lives out her life outside the palace (maid exit at 25 → epilogue to 46) | 06, 19 |
 | Tự chọn luân hồi | forced quit | player ends it (no point, all lost) | button only |
-| Phượng ghi sử sách · Một đời chưởng sự · Mực thơm còn mãi · Người giữ lòng lành · Bóng người sau rèm · Gấm vóc đầy rương · Một đời vô danh | legacy tags | Empress · head maid · talent · good deeds · schemer · fortune · nameless | Mực thơm 18; lòng lành/sau rèm/gấm vóc 07; vô danh 01/03/05/16/17 |
+| Phượng ghi sử sách · Một đời chưởng sự · Mực thơm còn mãi · Người giữ lòng lành · Bóng người sau rèm · Gấm vóc đầy rương · Một đời vô danh | legacy tags | Empress · head maid · talent · good deeds · schemer · fortune · nameless | Mực thơm 09/10/18; chưởng sự 19; lòng lành/sau rèm/gấm vóc 07; vô danh 01/03/05/16/17 |
 | (extra) Trượt tuyển tú · Xuất cung | closure, no point | failed drawing → home; epilogue to 55 | 08 |
 
 ### Closure endings — why they satisfy
@@ -91,7 +95,7 @@ End card: «KIẾP THỨ N · ĐÃ KHÉP LẠI» / «Một kiếp phù sinh» / 
 - **Low loss:** outfits/items are lost, but achievements, endings and points stay; even a 7-minute death pays.
 - Ours: our lives are far longer (robot pace model median 576 min, uncalibrated) and richer, but restart costs an intro + tutorial and an early quit costs −30. Our replay hook (Thiên mệnh n/352) is strong but not shown as a title on the end card.
 
-## 5 · Death & life length (13 of 20 lives; re-counted when 09–10, 13–15, 19–20 land)
+## 5 · Death & life length (17 of 20 lives; re-counted when 13–15 land)
 | Life | Seat / style | Start | End age | Real min | End type | Exact cause / ending (+ epithets) | Pregnancies → outcome | Warning / odds before the end |
 |---|---|---|---|---|---|---|---|---|
 | 01 | lead · obedient | tú nữ, Huyện úy | 17y1 | ~20 | death | illness, free self-care failed · Hoa rụng vì bệnh + Một đời vô danh | 0 | self-care 18 %; no warning |
@@ -102,22 +106,26 @@ End card: «KIẾP THỨ N · ĐÃ KHÉP LẠI» / «Một kiếp phù sinh» / 
 | 06 | P2 · schemer maid | maid, farmer | 60 | ~30 | closure-good | left the palace · Ngoài bức tường son + Duyên ngoài cửa son | 0 | — |
 | 07 | P2 · safe maid | maid, weaver | 54y4 | ~70 | death (old age) | Thọ chung chính tẩm + Người giữ lòng lành + Bóng người sau rèm + Gấm vóc đầy rương | 0 | none (HP 76) |
 | 08 | P2 · blank drawing | tú nữ, Huyện lệnh | 16 (epilogue 55) | ~8 | failed selection → closure | Xuất cung, married a scholar, 3 children, lived to 55 (no point) | 0 | score bands only |
+| 09 | P2 · consort | tú nữ, Ngự nữ → Bảo lâm | 35y11 | ~25 | closure | Emperor died of old age, no heir → royal temple · Tiếng chuông cuối đời + Mực thơm còn mãi | 0 (16 summons refused: disfigured) | none |
+| 10 | P2 · consort | tú nữ, Ngự nữ → Bảo lâm | 39y6 | 49 | death (by order) | «…băng hà vì tuổi cao. Lệnh tuẫn táng được ban xuống. Không có hoàng tự che chở…» · Khép cùng tiên đế + Mực thơm còn mãi | 0 (3 nights; disfigured 17–32) | none |
 | 11 | P3 · favourite | maid → Tài nhân | ~31 | ~120 | closure-good | Emperor assassinated → biệt cung dưỡng thai · Bình yên sau đổi triều | 3: princess born safe · princess born safe · 3rd pregnant at end | none |
 | 12 | P3 · favourite | tú nữ, Huyện lệnh | 19y11 | ~35 | death (childbirth) | «Cơn khó sinh lấy đi sinh mạng…», son saved, posthumous Bảo lâm · Khó sinh | 1: son born, mother died | none at the birth; HP ~49 at conception |
 | 16 | P4 · maid → consort | maid, fisherman | 19y3 | ~18 | death | HP drain · Áo vải bạc màu + Một đời vô danh | 0 | none; HP 37–40 for months |
 | 17 | P4b · studious maid | maid, kitchen | 20y2 | ~17 | death | HP drain · Áo vải bạc màu + Một đời vô danh | 0 | none |
 | 18 | P4b · favourite + prince lover | tú nữ, Huyện lệnh | 22y1 | ~52 | death-like closure | failed elopement with the Thân vương · Lạc nhau ngoài kinh thành + Mực thơm còn mãi | 1: princess born safe 21y2 | «Thành công 50 %», 3 named outcomes |
-| 09, 10, 13, 14, 15, 19, 20 | — | — | pending | — | — | — | — | — |
+| 19 | P4b · career maid | maid, kitchen → Tổng quản ma ma | 25y0 (card: lived to 46) | ~40 | closure | «Cửa cung mở» → left: never married, no child, lived to 46 · Ngoài bức tường son + Một đời chưởng sự | 0 | choice card only |
+| 20 | P4b · favourite, heals | tú nữ, Ngự nữ | 18y11 | ~8 | death (childbirth) | «Cơn khó sinh lấy đi sinh mạng của nàng. Hoàng tự cũng không qua khỏi.» · Khó sinh | 1: first night 18y2 → mother + child died | NONE: no odds, no choice, HP 98, all stats 100 |
+| 13, 14, 15 | P3 | — | pending | — | — | — | — | — |
 
-**Counts (13 lives):** deaths 9 (69 %) · closures 4 (31 %). Death causes (n = 9): HP drain/illness 6 (67 %) · old age 1 (11 %) · childbirth 1 (11 %) · failed elopement 1 (11 %). Pregnancies 6 → births 4 → childbirth deaths 1 (**25 % per birth, 17 % per pregnancy**) · miscarriage by harm 1 (17 %) · still pregnant 1. Real minutes: median 33 (7–120). End age: median 22y0 (16–60); deaths cluster 17–24.
+**Counts (17 lives):** deaths 11 (65 %) · closures 6 (35 %). Death causes (n = 11): HP drain/illness 6 (55 %) · childbirth 2 (18 %) · old age 1 (9 %) · tuẫn táng 1 (9 %) · failed elopement 1 (9 %). Pregnancies 7 → births 5 → childbirth deaths 2 (**40 % per birth, 29 % per pregnancy**; tiny n) · miscarriage by harm 1 (14 %) · still pregnant at end 1. Real minutes: median 33 (7–120). End age: median 22y1 (16–60); age at death median 20y2, deaths cluster 17–24.
 
-| Measure | Trùng Sinh (13 lives, real play) | Ours (robot, 314 valid lives, short-life bias) |
+| Measure | Trùng Sinh (17 lives, real play) | Ours (robot, 314 valid lives, short-life bias) |
 |---|---|---|
-| Lives that die | 69 % | 78 % |
-| Top cause | HP drain / illness 67 % | execution 36 % (illness only 8 %) |
-| Childbirth deaths | 25 % per birth (1/4, tiny n) | 14.4 % per birth (24/167) vs target 8–12 % |
-| Pregnancies per life | 0.46 | 0.5 |
-| Median life | 33 real min, age 22 | 6.5 game years avg; pace-model median 576 min (uncalibrated) |
+| Lives that die | 65 % | 78 % |
+| Top cause | HP drain / illness 55 % | execution 36 % (illness only 8 %) |
+| Childbirth deaths | 40 % per birth (2/5, tiny n; one at HP 98) | 14.4 % per birth (24/167) vs target 8–12 % |
+| Pregnancies per life | 0.41 | 0.5 |
+| Median life | 33 real min, age 22 (death age 20) | 6.5 game years avg; pace-model median 576 min (uncalibrated) |
 | Warnings before death | almost none | omens (jmort omenSt), framing shown, odds words |
 
 Reading: the owner's feeling is right — their lives die fast and young, mostly from a silent health drain, and childbirth is a coin-flip-feeling event with tiny n. Ours dies about as often but from more varied, more "caused" deaths, and lives far longer in real time.
@@ -132,7 +140,7 @@ Sizes: S ≤ 1 worker-day · M 2–4 · L 5+. Laws touched listed per item.
 6. **One-tap rebirth after the first life.** From the end card go straight to the identity card; skip P0 intro/tutorial ch1–3 once seen (setting). Size S. Laws 9, 16 (Kiếp dở dang −30 stays unless sếp changes it).
 7. **Lãnh cung for life as a CLOSURE** (alive, one title) instead of the slow «Lãnh cung» death (10 robot lives), when she is sentenced with Sủng at the floor and no ally; keep the death for the cold-and-hunger branch (j14:43). Size S. Laws 6a, 14.
 8. **Ending collection page with "Đã gặp N lần" + milestones** (5/10 lives, 8 endings, outfits across lives) on top of Thiên mệnh n/352 and rare x/y, each paying Phúc duyên. Size M. Laws 4, 9.
-9. **Childbirth tuning + visible omen.** Our rate is 14.4 % per birth vs the 8–12 % target (robot rec: BAL.mort.birth.hardDie 45 → 31). Add one omen line during late pregnancy (health/age/poison) so a childbirth death is never silent — their silent 25 % feels unfair. Size S. Laws 4, 6a, 7.
+9. **Childbirth tuning + visible omen.** Our rate is 14.4 % per birth vs the 8–12 % target (robot rec: BAL.mort.birth.hardDie 45 → 31). Add one omen line during late pregnancy (health/age/poison) so a childbirth death is never silent — their silent roll killed a full-health girl on her first pregnancy (life 20), and only a 1000-bạc pill protects; ours must let health, care and allies matter (law 2: a paid safety road needs an equal unpaid one). Size S. Laws 4, 6a, 7.
 10. **Shareable end card image** (name, age · rank, the two titles, kiếp number, a pretty frame from the kit) — their «Kiếp 467» culture comes from showing the card. Size M. Laws 9, 10, 12 (Fold + iPad first).
 
 ### Closure endings OUR roads should get (trigger conditions from our stats/roads)
