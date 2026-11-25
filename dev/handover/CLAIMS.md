@@ -1674,3 +1674,11 @@ sangbuoi-held-fix (jdayq dqWait silent exit, whole family) | review/sangbuoi-hel
 | TRUNGSINH-STORY (owner 25/11: learn story + endings of trungsinhgame) | dev/research/TRUNGSINH_STORY.md (review/trungsinh-story) | MAIN 134→135 | session_01V1ZZGzGFi21WiTptDmEZ45 | RUNNING | 25/11 07:10Z |
 | CO-NGU-TITLES (owner 25/11 ~07:40Z: literary cổ trang names/titles whole game) | review/co-ngu-titles | MAIN 134→135 | session_01V1ZZH4mHp8bC9LZg8ZFKx6 | RUNNING | 25/11 07:09Z |
 | F M-FIX-1 (robot findings M1–M5: skip family law, Sang ngày mới cue, Nhận thân phận 2 taps, BẠI on Rất vững, thị tẩm fold, Bạc drain; opus) | review/m-fix-1; briefs/F-mfix-2511.md; reports/m-fix-1.md | FOREMAN F #7 | (opening) | RUNNING | 25/11 07:40Z |
+| TEMPER-OUTBURST (temper-design (f) #1+#2+#3+#7) | review/temper-outburst | FOREMAN D ROOT | session_01D3E3NZEbGABqJK79fgHJ5q | RUNNING | 2026-11-25T07:23Z |
+| TEMPER-PERCEPTION (temper-design (f) #4 + #5 Option A + #6) | review/temper-perception | FOREMAN D ROOT | session_01D3E3NXiL5b2gpJr54JfiQN | RUNNING | 2026-11-25T07:23Z |
+| WORKLIST #9 + #26 (state + build) | review/net-thresholds, review/talk-others-people | FOREMAN D ROOT | session_01D3E3NbRg56gb2yfm5JFnCP | RUNNING | 2026-11-25T07:23Z |
+| ROBOT AUDIT D + reruns of D's invalid lives | reports/robot-audit-D.md | FOREMAN D ROOT | session_01D3E3NZM1yXd1hK7K488mpj | RUNNING | 2026-11-25T07:23Z |
+| RERUN E solo cnv_ban (19) | robot/rerun-cnv-cnv_ban | FOREMAN D ROOT | session_01D3E3NYS8WzxRCCsyM2wEAk | RUNNING | 2026-11-25T07:23Z |
+| RERUN E solo cnv_chu (16) | robot/rerun-cnv-cnv_chu | FOREMAN D ROOT | session_01D3E3Nai33jwr5kqmwLTbNq | RUNNING | 2026-11-25T07:23Z |
+| RERUN E solo cnv_ma (17) | robot/rerun-cnv-cnv_ma | FOREMAN D ROOT | session_01D3E3NajqCAuMUwA1Bb7zSK | RUNNING | 2026-11-25T07:23Z |
+| RERUN E solo cnv_mat (20) | robot/rerun-cnv-cnv_mat | FOREMAN D ROOT | session_01D3E3NZu9GBnxeKcN2G3BK1 | RUNNING | 2026-11-25T07:23Z |
