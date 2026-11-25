@@ -23,7 +23,9 @@ const PRE=__PRE__;
 const IMG='__IMG__';
 let HOSTR=null;  /* {t, r}: the index.html response last given to a top-level host page (network or saved copy) (see the iframe branch in the fetch handler) */
 let MAN=null;
-function man(){if(MAN)return MAN;MAN=caches.open(SHELL).then(c=>c.match('assets.json')).then(r=>r?r:fetch('assets.json',{cache:'no-store'})).then(r=>r.json()).then(j=>{const m=new Map();for(const f of j.files)m.set(f[0],f[1]);return m}).catch(e=>{MAN=null;return new Map()});return MAN}
+/* review/audio-ipad: CDNF = paths outside img/ that live on the CDN (assets.json 5th field "c": the event / festival music) — baseOf keys them on IMG */
+const CDNF=new Set();
+function man(){if(MAN)return MAN;MAN=caches.open(SHELL).then(c=>c.match('assets.json')).then(r=>r?r:fetch('assets.json',{cache:'no-store'})).then(r=>r.json()).then(j=>{const m=new Map();for(const f of j.files){m.set(f[0],f[1]);if(f[4]==='c')CDNF.add(f[0])}return m}).catch(e=>{MAN=null;return new Map()});return MAN}
 self.addEventListener('install',e=>{e.waitUntil(caches.open(SHELL).then(c=>c.addAll(PRE.map(u=>new Request(u,{cache:'reload'})))).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil((async()=>{
  const ks=await caches.keys();const olds=ks.filter(k=>k.startsWith('ctm-shell-')&&k!==SHELL);
@@ -44,14 +46,14 @@ self.addEventListener('activate',e=>{e.waitUntil((async()=>{
    first screen; never retried per fetch. */
 const PRUNE='ctm-prune.json',PRUNE_WAIT=15000;
 let pruned=false,pruneT=0;
-async function prune(){if(pruned)return;pruned=true;try{const sh=await caches.open(SHELL);const r=await sh.match(PRUNE);if(!r)return;const todo=await r.json();const c=await caches.open(ASSETS);
+async function prune(){if(pruned)return;pruned=true;try{await man();const sh=await caches.open(SHELL);const r=await sh.match(PRUNE);if(!r)return;const todo=await r.json();const c=await caches.open(ASSETS);
  for(const [p,h] of todo){try{await c.delete(new URL(p+'?h='+h,baseOf(p)).href)}catch(err){}}
  await sh.delete(PRUNE)}catch(e){}}
 /* a page may ask a waiting worker to take over (swreg.js), or ask which build answers it (tests) */
 self.addEventListener('message',e=>{const d=e.data||{};if(d.ctm==='skip')self.skipWaiting();else if(d.ctm==='v'&&e.source)e.source.postMessage({ctm:'v',v:V})});
 function scopePath(){return new URL(self.registration.scope).pathname}
 function relPath(u){if(IMG&&u.href.startsWith(IMG))return decodeURIComponent(u.pathname.slice(new URL(IMG).pathname.length));if(u.origin!==location.origin)return null;const s=scopePath();return u.pathname.startsWith(s)?decodeURIComponent(u.pathname.slice(s.length)):null}
-function baseOf(p){return IMG&&p.startsWith('img/')?IMG:self.registration.scope}
+function baseOf(p){return IMG&&(p.startsWith('img/')||CDNF.has(p))?IMG:self.registration.scope}
 const CORS={mode:'cors',credentials:'omit'};
 /* Range requests (<audio> elements) get a 206 cut from the cached whole file */
 async function ranged(req,res){const rg=req.headers.get('range');if(!rg||!res||res.status!==200)return res;
