@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"a1b6f61b+","t":"2026-11-24T22:42Z","c":"robot-coop-fix-3 r4: one cause (her HOUSE), one rule; dead roster parts removed","b":"bc7a36bb263d","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
+window.CTM_BI={"s":"85a44f69+","t":"2026-11-24T22:55Z","c":"robot-coop-fix-3 r4b: the friend is housed by her own seat only; players claim palace + side hall first (round «b» R[].resHead / R[].resHal…","b":"b4e5cb8ada99","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -36383,10 +36383,14 @@ palFix=function(){if(!S||!rivals)return;rivals.forEach(ensureT2);const all=[S].c
     houseWire/houseIn): like S, this seat never writes her housing (never takes her palace, evicts, re-houses, spreads or logs her); her palace
     and her side hall are claimed FIRST, so an NPC sharing one gives way (solo: no coop entry and S is already first — nothing changes) */
  const pl1=p=>p===S||p.coop;
+ /* two PLAYERS on one palace / side hall (A/B r3 host save: S and the friend both in hall «dong» of head 4): the same answer on both seats —
+    the host's player (seat a) keeps it, the guest's player moves (on the guest's seat her own S moves and her pos relay tells the host) */
+ const gSeat=!!(typeof COOPW==="object"&&COOPW&&COOPW.on&&COOPW.seat==="b"),hostP=p=>p.coop?gSeat:p===S&&!gSeat;
+ const byP=L=>L.filter(hostP).concat(L.filter(p=>pl1(p)&&!hostP(p)),L.filter(p=>!pl1(p)));
  for(const v of rivals)if(!v.coop&&v.pal!=null&&!(palHeadOK(v)||(v.palLone&&palLive(v)&&rkOf(v)<3))){v.pal=null;v.palLone=0}
  for(const v of rivals)if(!v.coop&&(v.pal==null||rkOf(v)>=3))v.palLone=0;
  const occ={};const heads=all.filter(palHeadOK);
- for(const p of heads.filter(pl1).concat(heads.filter(p=>!pl1(p))))if(p.pal!=null){if(occ[p.pal]!=null){if(!p.coop)p.pal=null}else occ[p.pal]=key(p)}
+ for(const p of byP(heads))if(p.pal!=null){if(occ[p.pal]!=null){if(!p.coop)p.pal=null}else occ[p.pal]=key(p)}
  for(const v of rivals.filter(v=>v.coop).concat(rivals.filter(v=>!v.coop)))if(v.palLone&&v.pal!=null){if(occ[v.pal]!=null){if(!v.coop){v.pal=null;v.palLone=0}}else occ[v.pal]=key(v)}
  const free=()=>PALN.findIndex((_,i)=>occ[i]==null);const moved=[];
  for(const p of heads.slice().sort((a,b)=>rkOf(b)-rkOf(a)))if(p.pal==null&&!p.coop){let f=typeof bcGrantIx==="function"?bcGrantIx(p,occ):-1;if(f<0)f=free();/* ban-cung: the decree follows the palace locks + her favour (jbancung), one rule for all */
@@ -36400,10 +36404,11 @@ palFix=function(){if(!S||!rivals)return;rivals.forEach(ensureT2);const all=[S].c
  const hs=all.filter(palHostOK);const S0=S.resHead||null;
  const mates=h=>all.filter(y=>y!==h&&palLive(y)&&!y.queen&&y.resHead===key(h)&&!(rkOf(y)>=3&&y.pal!=null)&&!(y===S&&sv));
  const cnt=h=>mates(h).length;
- /* players first (pl1): a player keeps her side hall, an NPC sharing it moves (round «b» R[].resHall: the friend + an NPC in hall «tay» of head 2) */
- const hallFix=h=>{const M0=mates(h),M=M0.filter(pl1).concat(M0.filter(y=>!pl1(y)));const n={};for(const x of HL)n[x]=0;const keep=[],redo=[];
-  for(const y of M){if(HL.includes(y.resHall)&&n[y.resHall]<BAL.res.side){n[y.resHall]++;keep.push(y)}else redo.push(y)}
-  for(const y of redo){const f=HL.find(x=>n[x]<BAL.res.side);y.resHall=f||HL[HL.length-1];if(f)n[f]++}};
+ /* players first (byP): a player keeps her side hall, an NPC sharing it moves (round «b» R[].resHall: the friend + an NPC in hall «tay» of head 2);
+    the friend's hall is never written here (her seat moves her): she holds the hall she relayed */
+ const hallFix=h=>{const M=byP(mates(h));const n={};for(const x of HL)n[x]=0;const keep=[],redo=[];
+  for(const y of M){if(HL.includes(y.resHall)&&(n[y.resHall]<BAL.res.side||y.coop)){n[y.resHall]++;keep.push(y)}else redo.push(y)}
+  for(const y of redo){if(y.coop)continue;const f=HL.find(x=>n[x]<BAL.res.side);y.resHall=f||HL[HL.length-1];if(f)n[f]++}};
  /* out of the palace (lãnh cung, dead): her side-hall room is given up, so a consort brought back later (đại xá, ân xá, petition) is housed
     fresh here and never walks back into a room someone else now holds (re-merge 18/11: jworld đại xá ran after the month's palFix) */
  for(const p of rivals)if(!palLive(p)&&!p.coop&&(p.resHead!=null||p.resHall!=null)){p.resHead=null;p.resHall=null}
@@ -78719,7 +78724,9 @@ const AGWHY={sung:"muốn được Hoàng thượng để ý hơn",th:"muốn đ
 
 /* ---------------- OPTIONS: the deeds she could tap if she were the player ---------------- */
 /* place of a person at khắc kh: the ledger when there is one, else her home */
-function agAt(p,kh){const R=agRec();const id=p===S?"me":ledgerId(p);if(R&&id&&R.P[id]&&R.P[id][kh])return R.P[id][kh][0];if(p===S)return"home";if(S.emp&&p===S.emp)return"dtd";if(p==="th")return"tn";return p.out?"lc":palaceOf(p)}
+/* co-op (robot-coop-fix-3 r4, A/B r3 «host sees guest at tn, guest is at tyv»: an NPC's face-to-face harm landed on the friend at the place
+   of HER NPC day plan): the friend is a player — where she is = whereOf (her relayed place, jcoopworld keepFriendPos), never a plan row */
+function agAt(p,kh){if(p&&p.coop&&p!==S)return whereOf(p);const R=agRec();const id=p===S?"me":ledgerId(p);if(R&&id&&R.P[id]&&R.P[id][kh])return R.P[id][kh][0];if(p===S)return"home";if(S.emp&&p===S.emp)return"dtd";if(p==="th")return"tn";return p.out?"lc":palaceOf(p)}
 function agEmpAt(kh){const R=agRec();return R&&R.P.emp?R.P.emp[kh][0]:"dtd"}
 function agThAt(kh){const R=agRec();return R&&R.P.th?R.P.th[kh][0]:"tn"}
 /* the deeds of TW she does for herself (target fixed by the deed) */
@@ -83426,7 +83433,7 @@ function agDaySlot(id,b){const D=agDz();if(D.d!==wk())return null;const L=D.P[id
  const e0=agEmpAt,t0=agThAt,a0=agAt;
  agEmpAt=function(kh){if(AG.cB!=null){const s=agDaySlot("emp",AG.cB);if(s)return s.pl}return e0.apply(this,arguments)};
  agThAt=function(kh){if(AG.cB!=null){const s=agDaySlot("th",AG.cB);if(s)return s.pl}return t0.apply(this,arguments)};
- agAt=function(p,kh){if(AG.cB!=null&&p&&p!==S){const id=ledgerId(p);const s=id&&agDaySlot(id,AG.cB);if(s)return s.pl}return a0.apply(this,arguments)};
+ agAt=function(p,kh){if(AG.cB!=null&&p&&p!==S&&!p.coop/* the co-op friend: jagent agAt (her real place) */){const id=ledgerId(p);const s=id&&agDaySlot(id,AG.cB);if(s)return s.pl}return a0.apply(this,arguments)};
 })();
 /* the options of a person's group: the registered providers (+ the consort's jagent options) */
 function agOptsG(p,N,need){const g=agGrp(p);let O=[];
@@ -97920,7 +97927,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="bc7a36bb263d";window.CTM_BUILD=BUILD;
+const BUILD="b4e5cb8ada99";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

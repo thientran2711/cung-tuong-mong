@@ -34,10 +34,14 @@ palFix=function(){if(!S||!rivals)return;rivals.forEach(ensureT2);const all=[S].c
     houseWire/houseIn): like S, this seat never writes her housing (never takes her palace, evicts, re-houses, spreads or logs her); her palace
     and her side hall are claimed FIRST, so an NPC sharing one gives way (solo: no coop entry and S is already first — nothing changes) */
  const pl1=p=>p===S||p.coop;
+ /* two PLAYERS on one palace / side hall (A/B r3 host save: S and the friend both in hall «dong» of head 4): the same answer on both seats —
+    the host's player (seat a) keeps it, the guest's player moves (on the guest's seat her own S moves and her pos relay tells the host) */
+ const gSeat=!!(typeof COOPW==="object"&&COOPW&&COOPW.on&&COOPW.seat==="b"),hostP=p=>p.coop?gSeat:p===S&&!gSeat;
+ const byP=L=>L.filter(hostP).concat(L.filter(p=>pl1(p)&&!hostP(p)),L.filter(p=>!pl1(p)));
  for(const v of rivals)if(!v.coop&&v.pal!=null&&!(palHeadOK(v)||(v.palLone&&palLive(v)&&rkOf(v)<3))){v.pal=null;v.palLone=0}
  for(const v of rivals)if(!v.coop&&(v.pal==null||rkOf(v)>=3))v.palLone=0;
  const occ={};const heads=all.filter(palHeadOK);
- for(const p of heads.filter(pl1).concat(heads.filter(p=>!pl1(p))))if(p.pal!=null){if(occ[p.pal]!=null){if(!p.coop)p.pal=null}else occ[p.pal]=key(p)}
+ for(const p of byP(heads))if(p.pal!=null){if(occ[p.pal]!=null){if(!p.coop)p.pal=null}else occ[p.pal]=key(p)}
  for(const v of rivals.filter(v=>v.coop).concat(rivals.filter(v=>!v.coop)))if(v.palLone&&v.pal!=null){if(occ[v.pal]!=null){if(!v.coop){v.pal=null;v.palLone=0}}else occ[v.pal]=key(v)}
  const free=()=>PALN.findIndex((_,i)=>occ[i]==null);const moved=[];
  for(const p of heads.slice().sort((a,b)=>rkOf(b)-rkOf(a)))if(p.pal==null&&!p.coop){let f=typeof bcGrantIx==="function"?bcGrantIx(p,occ):-1;if(f<0)f=free();/* ban-cung: the decree follows the palace locks + her favour (jbancung), one rule for all */
@@ -51,10 +55,11 @@ palFix=function(){if(!S||!rivals)return;rivals.forEach(ensureT2);const all=[S].c
  const hs=all.filter(palHostOK);const S0=S.resHead||null;
  const mates=h=>all.filter(y=>y!==h&&palLive(y)&&!y.queen&&y.resHead===key(h)&&!(rkOf(y)>=3&&y.pal!=null)&&!(y===S&&sv));
  const cnt=h=>mates(h).length;
- /* players first (pl1): a player keeps her side hall, an NPC sharing it moves (round «b» R[].resHall: the friend + an NPC in hall «tay» of head 2) */
- const hallFix=h=>{const M0=mates(h),M=M0.filter(pl1).concat(M0.filter(y=>!pl1(y)));const n={};for(const x of HL)n[x]=0;const keep=[],redo=[];
-  for(const y of M){if(HL.includes(y.resHall)&&n[y.resHall]<BAL.res.side){n[y.resHall]++;keep.push(y)}else redo.push(y)}
-  for(const y of redo){const f=HL.find(x=>n[x]<BAL.res.side);y.resHall=f||HL[HL.length-1];if(f)n[f]++}};
+ /* players first (byP): a player keeps her side hall, an NPC sharing it moves (round «b» R[].resHall: the friend + an NPC in hall «tay» of head 2);
+    the friend's hall is never written here (her seat moves her): she holds the hall she relayed */
+ const hallFix=h=>{const M=byP(mates(h));const n={};for(const x of HL)n[x]=0;const keep=[],redo=[];
+  for(const y of M){if(HL.includes(y.resHall)&&(n[y.resHall]<BAL.res.side||y.coop)){n[y.resHall]++;keep.push(y)}else redo.push(y)}
+  for(const y of redo){if(y.coop)continue;const f=HL.find(x=>n[x]<BAL.res.side);y.resHall=f||HL[HL.length-1];if(f)n[f]++}};
  /* out of the palace (lãnh cung, dead): her side-hall room is given up, so a consort brought back later (đại xá, ân xá, petition) is housed
     fresh here and never walks back into a room someone else now holds (re-merge 18/11: jworld đại xá ran after the month's palFix) */
  for(const p of rivals)if(!palLive(p)&&!p.coop&&(p.resHead!=null||p.resHall!=null)){p.resHead=null;p.resHall=null}

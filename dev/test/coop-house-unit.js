@@ -69,6 +69,23 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
   {const f=setup("a");const nh=npcs().find(v=>rkOf(v)<3&&!v.queen&&v.resHead!=="me");const hs={resHead:nh?nh.id:5,resHall:BAL.res.halls[1],pal:null,palLone:0,palWait:0};
    CW.fpos={name:f.name,hs:J(hs),week:0,buoi:0,place:"home"};CW.houseIn(f,J(hs));const n0=npcSig();palFix();
    ck('host: her head is no head here: her entry stays as relayed, no NPC moved for her',f.resHead===hs.resHead&&f.resHall===hs.resHall&&npcSig()===n0,{f:hsOf(f)});rivals.splice(rivals.indexOf(f),1)}
+  /* TWO PLAYERS in one side hall of an NPC head (A/B r3 host save: S + the friend both in «dong» of head 4): the host's player keeps it, the
+     guest's player moves — the same answer on both seats; the friend's hall is never written by this seat */
+  for(const seat of ["a","b"]){const f=setup(seat);const SEAT=seat==="a"?"host":"guest";const rk0=S.rank,pal0=S.pal;
+   const hd=npcs().find(v=>v.pal!=null&&rkOf(v)>=3&&!v.queen&&palHostOK(v));
+   if(!hd){ck(SEAT+': two players: an NPC head to live with',false,null);rivals.splice(rivals.indexOf(f),1);S.rank=rk0;S.pal=pal0;continue}
+   for(const v of rivals)if(v!==f&&v.resHead===key(hd))v.resHead=null;/* her house: only the two players */
+   S.rank=0;S.pal=null;S.resHead=key(hd);S.resHall=BAL.res.halls[0];f.resHead=key(hd);f.resHall=BAL.res.halls[0];
+   CW.fpos={name:f.name,hs:{resHead:hd.id,resHall:BAL.res.halls[0],pal:null,palLone:0,palWait:0},week:0,buoi:0,place:"home"};palFix();
+   if(seat==="a")ck('host: two players one hall: I (host) keep it, her entry is not written (her seat moves her)',S.resHead===key(hd)&&S.resHall===BAL.res.halls[0]&&f.resHall===BAL.res.halls[0],{S:hsOf(S),f:hsOf(f)});
+   else ck('guest: two players one hall: the host keeps it, I (guest) move to the other hall of the same house',f.resHall===BAL.res.halls[0]&&S.resHead===key(hd)&&S.resHall===BAL.res.halls[1],{S:hsOf(S),f:hsOf(f)});
+   if(seat==="a"){f.resHall=null;palFix();ck('host: her hall not given yet (her seat picks it): this seat writes none',f.resHall==null,hsOf(f))}
+   rivals.splice(rivals.indexOf(f),1);S.rank=rk0;S.pal=pal0;S.resHead=null;S.resHall=null}
+  /* the agents' «where is she at khắc kh» (jagent agAt / jagday day plan) for the friend = her real place (whereOf), never her NPC day plan:
+     A/B r3 «host sees guest at tn, guest is at tyv» = an NPC harm landing on her at her plan's place */
+  {const f=setup("a");S.where=S.where||{};S.where[f.id]="tyv";const cb=typeof AG==="object"&&AG?AG.cB:undefined;const r0=typeof agAt==="function"?agAt(f,0):null;
+   if(typeof AG==="object"&&AG){AG.cB=S.buoi||0}const r1=typeof agAt==="function"?agAt(f,0):null;if(typeof AG==="object"&&AG)AG.cB=cb;
+   ck('agAt(friend) = whereOf(friend) = her relayed place (also inside a day-plan buổi)',r0==="tyv"&&r1==="tyv",{r0,r1,w:whereOf(f)});rivals.splice(rivals.indexOf(f),1)}
   /* a co-op SAVE loaded (deser → palFix, COOPW not on: the robot save round-trip, a reload): she and an NPC share a hall of my house */
   {const f=setup("a");CW.on=false;f.resHead="me";f.resHall=BAL.res.halls[0];const L=npcs().filter(v=>rkOf(v)<3&&!v.queen&&v!==f).slice(0,resCap());for(const v of L){v.resHead="me";v.resHall=f.resHall;v.pal=null;v.palLone=0}/* my house over the cap with her last in the list */palFix();
    const n={};for(const y of rivals.filter(y=>y&&y.alive&&!y.out&&y.resHead==="me"&&!(rkOf(y)>=3&&y.pal!=null)))n[y.resHall]=(n[y.resHall]||0)+1;
