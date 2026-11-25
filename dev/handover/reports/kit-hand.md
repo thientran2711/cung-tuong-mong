@@ -30,3 +30,8 @@ START_CTX ~5 % (get_session reads 0; estimate). Stopped at ~30 % (START + 25 %) 
 4. «No event frame first»: the hand deals INSIDE the existing kit event frame (speaker left, text, her hand). MAIN to judge whether the frame itself needs an entry move.
 5. hardlock-scan / button-crawl / q-softlock: ask MAIN where they live.
 Worktree /home/user/wt/kithand (sparse); scratch /home/user/wt/kk30-shots (probe.js, prof.js, rec.js, perf2.js).
+
+## ADDENDUM 17:58Z — MAIN messages read late (queued 15:53Z–17:41Z, read 17:55Z)
+KK31, do these FIRST (MAIN 144 = session_01V1ZZH3PV7kr8kWB89YiVN7; 7603d689 ships ~18:30Z):
+1. MAIN 143 FLIGHT PRIORITY (not done by KK30): base 7603d689, iPad 1180x820 law-10 FAIL in kit-faces-opts faces1 lines7 opts4 — strip ok, 4 options in view, but the 7 story lines sit under the faces row behind «Kéo xuống». Fix the family in kszTextFirst3: on iPad the faces row steps down too (small chips / one row beside the strip) and/or options 1 column narrower; if impossible, text keeps first place and the option list scrolls (floor 112). Repro: FACES='[1]' LINES='[7]' NO='[4]' node dev/test/kit-faces-opts.js index.html <out> (shot BEFORE the tap). Re-run kit-faces-opts all + 41-frame scan + kit-notice-action, Fold+iPad pair (NEW CDN name), KIT READY <sha> to MAIN 144 + a FOR MAIN/B KIT line in FOREMAN_B_STATUS.md. Then port to review/kit-hand.
+2. MAIN 143 FYIs to check in the scan: (a) iPad «Tâm trạng · Cung nữ thân tín tam đẳng …» dialog with no close/continue even scrolled to the end = no-button card family → kitModalSafe / every kit dialog has an exit; (b) «Bổng lộc tháng chín» reward over the END card = kitEndUp (pack-4) confirm covered; (c) kpopTrap/odds chip in card tap zone = harness-only, optional.
