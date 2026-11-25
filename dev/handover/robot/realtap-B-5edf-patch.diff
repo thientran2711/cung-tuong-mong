@@ -1,6 +1,6 @@
 diff -ruN a/dev/test/realtap.js b/dev/test/realtap.js
 --- a/dev/test/realtap.js	2026-11-25 20:29:45.228610425 +0000
-+++ b/dev/test/realtap.js	2026-11-25 20:29:45.236862331 +0000
++++ b/dev/test/realtap.js	2026-11-25 20:53:58.704761134 +0000
 @@ -12,7 +12,7 @@
  const path = require('path');
  
@@ -37,7 +37,7 @@ diff -ruN a/dev/test/realtap.js b/dev/test/realtap.js
      if (!cover && t) { const c = t.closest('[id]'); cover = (t.tagName.toLowerCase() + (t.id ? '#' + t.id : '') + (typeof t.className === 'string' && t.className ? '.' + t.className.trim().split(/\s+/).slice(0, 2).join('.') : '') + (c && c !== t ? ' in #' + c.id : '')).slice(0, 80) }
    }
    const off = r.bottom < 0 || r.top > H || r.right < 0 || r.left > W;
-@@ -50,37 +54,38 @@
+@@ -50,37 +54,44 @@
      return target;
    }
    /* bring the element into the viewport like a person: scroll the page / its scroller with the wheel (no DOM calls) */
@@ -56,7 +56,13 @@ diff -ruN a/dev/test/realtap.js b/dev/test/realtap.js
        await page.mouse.wheel(0, dy); await page.waitForTimeout(250);
      }
 -    return h.evaluate(PROBE).catch(() => ({ gone: true }));
-+    return h.evaluate(PROBE, info.avoid || null).catch(() => ({ gone: true }));
++    let pe = await h.evaluate(PROBE, info.avoid || null).catch(() => ({ gone: true }));
++    /* U1c #12 (7HVJ «Để sau» at y 2046, viewport 1000: no wheel-scrollable ancestor moves it): a person with a keyboard Tabs to the button = focus() scrolls EVERY ancestor box so it shows. Used only after the wheel failed; logged as a kit reach row (the option sits where no touch scroll reaches it) */
++    if (!pe.ok && !pe.gone && !pe.zero && !pe.disabled && (pe.off || pe.cover === 'outside viewport')) {
++      const vh2 = (page.viewportSize() || { height: 800 }).height; (st.reachRows = st.reachRows || []).push({ screen: (info.screen || '').slice(0, 60), label: (info.label || pe.lab || '').slice(0, 40), top: Math.round(pe.top), vh: vh2 }); if (st.reachRows.length > 40) st.reachRows.shift(); st.reachFocus = (st.reachFocus || 0) + 1;
++      await h.evaluate(e => { try { e.focus({ preventScroll: false }) } catch (x) {} if (e.getBoundingClientRect().top > innerHeight || e.getBoundingClientRect().bottom < 0) e.scrollIntoView({ block: 'center' }) }).catch(() => {}); await page.waitForTimeout(400);
++      pe = await h.evaluate(PROBE, info.avoid || null).catch(() => ({ gone: true })) }
++    return pe;
    }
    async function tap(target, info = {}) {
      const h = await handleOf(target);
@@ -86,7 +92,7 @@ diff -ruN a/dev/test/realtap.js b/dev/test/realtap.js
      return true;
    }
    async function dead(info, p) {
-@@ -89,6 +94,6 @@
+@@ -89,6 +100,6 @@
      const d = { k: 'DEAD BUTTON', screen: info.screen || '?', label: info.label || (p && p.lab) || '?', cover: p && (p.gone ? 'element gone' : p.zero ? 'zero size' : p.cover) || '?', shot, dev: opt.dev };
      st.deadList.push(d); log(d); return false;
    }
@@ -96,7 +102,7 @@ diff -ruN a/dev/test/realtap.js b/dev/test/realtap.js
  module.exports = { make, PROBE };
 diff -ruN a/dev/test/robot-rt-coop.js b/dev/test/robot-rt-coop.js
 --- a/dev/test/robot-rt-coop.js	2026-11-25 20:29:45.242367139 +0000
-+++ b/dev/test/robot-rt-coop.js	2026-11-25 20:29:45.247298947 +0000
++++ b/dev/test/robot-rt-coop.js	2026-11-25 20:53:58.708132959 +0000
 @@ -51,14 +51,27 @@
  
  async function seatLoop(ctx, who, dev, other) {
@@ -137,7 +143,7 @@ diff -ruN a/dev/test/robot-rt-coop.js b/dev/test/robot-rt-coop.js
    const hDev = A.host || 'fold', gDev = A.guest || 'ipad';
 diff -ruN a/dev/test/robot-rt.js b/dev/test/robot-rt.js
 --- a/dev/test/robot-rt.js	2026-11-25 20:29:45.236862331 +0000
-+++ b/dev/test/robot-rt.js	2026-11-25 20:29:45.242367139 +0000
++++ b/dev/test/robot-rt.js	2026-11-25 20:53:58.706198631 +0000
 @@ -40,6 +40,7 @@
  /* RESUME (container restart): <out>/<life>.ckpt.json holds R + the game's localStorage save + rng state; resume=1 continues the SAME life */
  const CKPT = path.join(OUT, LIFE + '.ckpt.json'); let ck = null;
@@ -260,7 +266,7 @@ diff -ruN a/dev/test/robot-rt.js b/dev/test/robot-rt.js
    if (R.exitPick && R.life) R.life.exitPick = R.exitPick;
    await p.screenshot({ path: path.join(SHOTS, 'end.png') }).catch(() => {});
 -  R.harness.deadButtons = R.dead.length; R.harness.taps = (R.harness.taps0 || 0) + rt.stats().taps; R.t = { total: Date.now() - T0 };
-+  R.harness.deadButtons = R.dead.length; R.harness.taps = (R.harness.taps0 || 0) + rt.stats().taps; R.harness.noFreePoint = rt.stats().noFreePoint || 0; R.harness.chipCover = rt.stats().chipCover || []; R.t = { total: Date.now() - T0 };
++  R.harness.deadButtons = R.dead.length; R.harness.taps = (R.harness.taps0 || 0) + rt.stats().taps; R.harness.noFreePoint = rt.stats().noFreePoint || 0; R.harness.reachFocus = rt.stats().reachFocus || 0; R.harness.reachRows = rt.stats().reachRows; R.harness.chipCover = rt.stats().chipCover || []; R.t = { total: Date.now() - T0 };
    save();
    console.log('LIFE DONE ' + LIFE + ' ' + (R.life.id) + ' age ' + (R.life.age ?? '?') + ' · buổi ' + R.buoi + ' · taps ' + R.harness.taps + ' · dead buttons ' + R.dead.length + ' · stuck ' + R.harness.stuck + ' · bugs ' + R.bugs.length);
  }
