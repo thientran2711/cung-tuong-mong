@@ -512,13 +512,13 @@ function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.on
  const title=o.title||"Hội thi";const artLabel=o.artName?o.artName[0].toUpperCase()+o.artName.slice(1):K.n;
  const d=kg82Open({art:artLabel,title:`${title} · ${K.t}`,how:K.how,pic:kg82Pic(kind)});if(!d){if(o.onDone)o.onDone(null);return}
  const box=kg82Box();const tRows=partsOk?me.parts.map(([l,v])=>[l,kg82Chip("cộng",v,"g")]):[["Tài nghệ",kg82Chip(`cộng${o.talentBy?` (${o.talentBy})`:""}`,talent,"g")]];
- const SK=typeof mg2On==="function"&&mg2On()?mgSkipRaw(KG82.tier):R.some(x=>x&&x.score!=null)?5:Math.round(kg82NpcMean(KG82.tier.lv));/* mg2: her median on this board, the curve the rivals are drawn from */
+ const SK=kitSkipCap(typeof mg2On==="function"&&mg2On()?mgSkipRaw(KG82.tier):R.some(x=>x&&x.score!=null)?5:Math.round(kg82NpcMean(KG82.tier.lv)));/* m-fix-1: capped, never beats a good own play (BAL.skip.cap) *//* mg2: her median on this board, the curve the rivals are drawn from */
  const intro=()=>{KG82.phase="intro";box.classList.add("kgintro");
   /* mg-intro-2 (owner OD 21/11 ~04:17Z): short essentials only — «Độ khó» + one «Phần của ngươi» line; every part / every rival detail behind the kit «!» */
   const allRows=[["Màn thi",`tự chơi 0–10 phần, quy ra 0–${luck} (đối thủ thi theo tài nghệ cùng luật)`,"t"],["Độ khó",mgDiffTxt(KG82.tier,kind),"n"]].concat(tRows,prep?[["Chuẩn bị",kg82Chip("cộng",prep,"g")]]:[]);
   box.innerHTML=kgBangRows("Phần của ngươi",allRows,[["Gồm",`tài nghệ ${talent}${prep?` + chuẩn bị ${prep}`:""} + tự chơi 0–${luck}`,"t"],["Độ khó",mgDiffTxt(KG82.tier,kind),"n"]])+
   (rows.length?`<h4 class="kpst">${kgBang(`<p class="kpnote">Phần của mỗi đối thủ = tài nghệ + chuẩn bị + màn thi chưa rõ (0–${luck}).</p>`+kg82Facts(rows.map(r=>({who:r.p||r.face,auto:false,text:`${kg82Name(r.p,r.name)}<small>tài nghệ ${r.t}${r.pr?` + chuẩn bị ${r.pr}`:""} + màn thi chưa rõ (0–${luck})</small>`}))),"Đối thủ")}</h4><div class="kgrv kgrv-c">`+kg82Facts(rows.map(r=>({who:r.p||r.face,auto:false,text:`${kg82Name(r.p,r.name)}<small>tài nghệ ${r.t+r.pr}</small>`})))+`</div>`:"")+
-  `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button>${kitQuick({id:"kg82skip",n:"Để tài nghệ quyết định",sub:`màn thi tính ${SK}/10 phần (+${Math.round(SK/10*luck)}), như người cùng bậc tài nghệ`})}</div>`;
+  `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button>${kitQuick({id:"kg82skip",n:"Để tài nghệ quyết định",sub:`màn thi tính ${SK}/10 phần (+${Math.round(SK/10*luck)}), tự thi giỏi thì hơn`})}</div>`;
   kgReady(box,{kind,win:"thi",ev:o.ev||(o.fk?"fest:"+o.fk:"cat:tai-nghe")});/* KIT §13.7: rules + «Sẵn sàng» / «Hướng dẫn»; the clock starts only on «Sẵn sàng» */
   $("kg82go").onclick=()=>{if(o.onGo)try{o.onGo(rows)}catch(e){console.error(e)}/* jpmc split board: the rivals' raws drawn ONCE above are the ones shown live and scored */kg82Play(kind,raw=>finish(raw,false))};$("kg82skip").onclick=()=>finish(SK,true)};
  const finish=(raw,skipped)=>{KG82.phase="result";const skill=Math.round(raw/10*luck),score=talent+prep+skill;
@@ -562,7 +562,7 @@ function playArt(o){o=o||{};const kind=kg82Kind(o.art,o.artName,true),EG=o.eng&&
  KG82.phase="intro";if(o.rows)box.classList.add("kgintro");
  box.innerHTML=(o.rows?kgBangRows(o.rowsHead||"Phần của ngươi",o.rows,o.rows.slice(0,2)):"")+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">${o.go||"Bắt đầu"}</button>${kitQuick(QK)}</div>`;
  kgReady(box,EG?{kind,ev:o.ev,n:K.n,t:K.t,how:K.how,e:K.e,timed:K.timed!==false,tutor:KG82_ENG[K.e]}:{kind,ev:o.ev});/* KIT §13.7 */
- $("kg82go").onclick=()=>{if(EG)KG82.engX=K.e;if(o.onGo)try{o.onGo()}catch(e){console.error(e)}kg82Play(kind,raw=>done(raw,false))};$("kg82skip").onclick=()=>QK.roll?done(0,true,kitQuickRoll()):done(o.quick&&o.quick.raw!=null?o.quick.raw:o.quick&&o.quick.sub==null?0:5,true)}/* o.quick.raw (jpma pmQuick): the caller's one value, the same number its sub text prints */
+ $("kg82go").onclick=()=>{if(EG)KG82.engX=K.e;if(o.onGo)try{o.onGo()}catch(e){console.error(e)}kg82Play(kind,raw=>done(raw,false))};$("kg82skip").onclick=()=>QK.roll?done(0,true,kitQuickRoll()):done(kitSkipCap(o.quick&&o.quick.raw!=null?o.quick.raw:o.quick&&o.quick.sub==null?0:BAL.skip.raw),true)}/* o.quick.raw (jpma pmQuick): the caller's one value, the same number its sub text prints */
 window.startContest=startContest;window.playArt=playArt;
 
 /* =============== KIT §13.7 RULES SCREEN «Sẵn sàng» + GUIDED TUTORIAL «Hướng dẫn» (owner OD 20/11 ~00:20Z, review/mg-ready-guide) ===============

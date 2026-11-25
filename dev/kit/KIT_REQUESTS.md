@@ -258,3 +258,26 @@ K-FOCUS-1b SPEC (append to kitFocus; pure display, no numbers of its own, knobs 
 
 ## KIT REQUEST (VISITOR-FIX, MAIN 131 24/11 ~23:00Z) — Sổ ghi / note row with a portrait icon wraps badly on iPad
 iPad 1180x820, Sổ ghi (journal/notes) rows that carry a small portrait icon: the text wraps with a big gap beside the icon and leaves an orphan last word («… Trường Xuân / cung.»). Wanted: the kit note row (icon + text) wraps text under itself with no gap, no orphan word (text-wrap:pretty / the icon floated or a grid with the text column min-width 0). This is a kit row (LUẬT KIT TRƯỚC): kit keeper KK25 builds / fixes it in KIT.md + the kit sample page; no per-screen CSS. Worker did NOT touch the row.
+
+## KIT REQUEST (M-FIX-1, Foreman F #7, 25/11 ~08:30Z; robot M4 06:22Z + 06:55Z) — choice cards: every option of a 3–5 option card must fit without a sub-scroll
+Robot M4 (Fold 755x1000, real taps): «Đêm thị tẩm» showed 3 of 4 options, the best one below the fold behind «Kéo xuống»; «Tân quân lập uy · Chương 2»
+gave its option list a 112 px scroll box under a long text (half an option visible, the card centre outside the frame = a dead tap zone).
+Scan (m-fix-1, every PEND card with ≥3 options opened through pushFront + showModal, option rows .opt.kopt in .opts.kpopts.k3btns.k3rows, measured
+fully visible inside every clipping ancestor; LIVE origin/main 9f72524b + m-fix-1): Fold 16 of 26 cards hide options, iPad 12 of 26:
+| card | Fold shown/all | iPad shown/all |
+|---|---|---|
+| night1 (Đêm thị tẩm) | 3/4 | 4/4 |
+| night2 | 3/4 | 2/4 |
+| prep (chuẩn bị thị tẩm) | 3/5 | 2/5 |
+| vnight | 3/4 | 4/4 |
+| j7c | 2/4 | 1/4 |
+| vulan | 2/3 | 2/3 |
+| ge1 | 3/4 | 4/4 |
+| cyrep | 3/4 | 2/4 |
+| vlget / vlcraft / vlout | 4/5 · 2/3 · 3/6 | 2/5 · 3/3 · 4/6 |
+| pick lists (shop 12–14, evpick 10, itarget 10, plantsv 8, pmLad 9) | scroll (fine: lists) | scroll |
+Root: one option row = 140 px (Fold) / 132 px (iPad) (.k3rows card with picture), the option column gets what the text leaves (Fold prep: 492 px for
+730 px of options; iPad prep 265 px for 408 px). Wanted (law 10 FRAME → LAYOUT → BUTTON SIZE, kit keeper only): a CHOICE card (≤ 5 options, not a pick
+list) always shows ALL its options at once on both devices — e.g. the option column takes priority over the text (text scrolls, options never), or the
+k3rows option switches to the compact/2-column layout when the options do not fit; the «Kéo xuống» cue stays only for long pick lists. Order is NOT
+the fix (law 2: no option is «the best»; the list keeps its order). Re-scan (before/after): node dev/test/opt-fit-scan.js dev/index.html all.
