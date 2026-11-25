@@ -1769,3 +1769,4 @@ B SMALL rv pcport-rk-r2 1fbae7c6 | review/pcport-rk-r2 | B | session_01N1tNP4RNj
 | F LIFE RUNNER s9b (sonnet; one life Fold, new seed/persona ≠ s9, LIVE + harness 594fa1ee, real taps, no cap, no exit road) | dev/handover/robot/flight2-s9b.* | F | (opening) | RUNNING | 25/11 15:17Z |
 | F BIG REVIEWER #6 (successor of #5; harness re-check w/ Tin báo injection, fix-7 part 2, m-fix-3, Tin báo kit softlock) | reports/bc-stack-review.md | F | (opening) | RUNNING | 25/11 15:30Z |
 B FIXER save-unseen-lists r3 (tests gate) | review/save-unseen-lists | B | session_01N1tNP5rythg4fywKyPfyTV | RUNNING | 25/11 15:32Z |
+kitHand Bàn bài | review/kit-hand | session_01V1ZZH24dkpdw8LeZYiyfQf | RUNNING | 2026-11-25T15:52Z
