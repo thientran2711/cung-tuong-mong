@@ -2,7 +2,9 @@
 
 PRIORITY #1 CHECK: OD rows «24/11 ~21:50Z / ~21:57Z / ~22:00Z / ~22:14Z real» (read verbatim) | claims VIECNHO-FIX session_01V1ZZH4XjjV9xGrojVNGZpc | review/viecnho-fix b9865381 | kit KK23b «KIT OK ad4884b6».
 
-## VERDICT: **FAIL** (one blocking item, small; everything else PASSES)
+## FINAL VERDICT (re-review 89ef52f9): **BIG PASS 89ef52f9** — F1, N1, N2 fixed; see «Re-review» at the end. (Round 1 on b9865381 was FAIL F1, text below kept as history.)
+
+## Round 1: FAIL (one blocking item, small; everything else PASSES)
 
 ### Tier claim
 Diff 502c48c9..b9865381 read hunk by hunk (j61/j63/j72/j93/jk2b/jk4/jmapc/jreign/jtabs/jwhyn + KIT.md + 3 tests). Claim VERIFIED: text builders + CSS + sub-tab only. No BAL / jbal*.js / save-schema / co-op / time change; no new RNG; `whyWho("emp")` now «Hoàng thượng» (text only). BIG by script only because of text hunks.
@@ -35,3 +37,11 @@ Fix (whole family, not only Sủng): every Được/Mất stat row = `<stat> <si
 `pair-popA.png` (BẠI, shows F1) · `pair-popB-thanh.png` (THÀNH, shows F1; Thái hậu/Hoàng hậu rows + Kèm fine) · `pair-popC-trong.png` · `pair-pp-staff.png` (Cung nhân panel, PASS) · `pair-pp-kvo.png`. iPad harness shots sometimes show a chest/achievement dialog from the bot run — harness artefact, not the build.
 
 ~90% xong / ~85% chơi được (after F1).
+
+
+## Re-review 89ef52f9992b45c3271b5f3c24c4e2cdc7b268d7 → **BIG PASS 89ef52f9**
+Diff b9865381..89ef52f9 = j63.js (kaWhyStat no title/filler, stat rows «<stat> ±N», strangers one signed line each), name-mask-scan regex, viecnho-fix.test.js (+ scan of ALL .kitem rows of real BẠI + THÀNH). Text only; still no BAL/save/co-op/time change.
+- F1 fixed: real popups now `MẤT Sủng −5 / Bạc −20 · một vị Tần: thiện cảm −5 · KÈM Quý phi X: oán +18 · một vị Phi: oán +18`; `ĐƯỢC Sủng +4 / Danh +2 / Bạc +30 · <nữ quan>: thiện cảm +3 · Thái hậu: thiện cảm +6`. No a→b, no (±N), no title copy, no filler. Also seen in my own harness popups (Fold+iPad) and worker shots `{fold|ipad}-after-3-ket-qua-{bai|thanh}`.
+- N1/N2 fixed. Runs: viecnho-fix.test ALL OK · viecnho-scan CLEAN · viecnho-map 31 places ALL OK · name-mask-scan PASS 0 hits (0 page errors) · quickcheck PASS 235 s (old save ok, render 256/264, tab 465/585, buổi 1642/1642) · coop-e2e 142/142.
+- Open for main/owner only (not blocking): N4 portrait-narrowing trade-off vs OD 18/11 (law 16).
+~92% xong / ~88% chơi được.
