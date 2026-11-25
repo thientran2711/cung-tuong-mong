@@ -7,6 +7,8 @@
       next load cut it (jkh deser khFit). The ONE year step every calendar runs (j17 ageYear: j3 / j42 / jkc / jkc2) now refits S + every
       living rival, the same rule the load applies.
    3. identity: a fresh life played some buổi, and the same life marked co-op with a friend entry, survive save → load → save unchanged.
+   4. law 6a (r2): a fact the lazy ledger finds reacts at the next in-play sweep — play on and save → load → sweep give the same Thái hậu.
+   5. (r2) the in-room host rebuild still sweeps names; a servant friend's co-op save off-room is not swept (jslots coopOffLoad).
    usage: node dev/test/save-rt-coop.js [dev/index.html]   → exit 1 on FAIL or page error */
 const {chromium}=require('playwright');const path=require('path');const HTML=process.argv[2]||'dev/index.html';
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
@@ -35,17 +37,36 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    if(S.suc>sucCap(S))L.push('S age '+S.age+' suc '+S.suc+'>'+sucCap(S));(rivals||[]).forEach((v,j)=>{if(v&&v.alive&&typeof v.suc==='number'&&v.suc>sucCap(v))L.push('R'+j+' age '+v.age+' '+v.suc+'>'+sucCap(v))})}
   out.overCap=L.slice(0,6);out.age=S.age;out.cap=sucCap(S);
   const sucs=()=>[S.suc].concat((rivals||[]).map(v=>v&&v.suc));const s0=sucs();rt();const s1=sucs();out.idYear=s0.map((v,i)=>v===s1[i]?null:i+': '+v+' → '+s1[i]).filter(Boolean);
-  /* 4. the ledger load sweep (jtruth) writes facts the world shows; it is not a new wrong: no Thái hậu roll (jcmaid ch) on load */
-  try{S.maid.src='th';S.thDead=false;S.th=40;const m=(S.men||[])[0];out.hasMan=!!m;if(m){m.trysts=1;S.dkeys=(S.dkeys||[]).filter(k=>!/^tr:/.test(k))}
-   const r0=Math.random;Math.random=()=>0;try{const th0=S.th,lg0=(S.logs||[]).length;rt();out.thLoad=[th0,S.th];out.dk=(S.dkeys||[]).includes('tr:1');
+  /* 4. law 6a (savert r2): a wrong the world shows but the lazy ledger has not written yet (a tryst) reaches Thái hậu through her maid the
+     SAME way whether she plays on or saves → loads first: the load itself rolls nothing (S.th unchanged right after it), the reaction is
+     queued and runs at the next in-play sweep (evTruthSweep = endTurn's sweep). r1 dropped it (B stayed 40). Dice forced to hit. */
+  try{S.maid.src='th';S.thDead=false;S.th=40;delete S.deedQ;const m=(S.men||[])[0];out.hasMan=!!m;if(m){m.trysts=1;S.dkeys=(S.dkeys||[]).filter(k=>!/^tr:/.test(k));(S.wrongs||[]).splice(0)}
+   const snap=JSON.stringify(ser());const r0=Math.random;Math.random=()=>0;
+   try{evTruthSweep();out.thA=S.th;
+    deser(JSON.parse(snap));out.thB0=S.th;out.dk=(S.dkeys||[]).includes('tr:1');out.q=(S.deedQ||[]).length;
+    const d1=ser();delete d1.at;deser(JSON.parse(JSON.stringify(d1)));out.thB0b=S.th;/* save → load again before the sweep keeps the queue */out.q2=(S.deedQ||[]).length;
+    evTruthSweep();out.thB=S.th;out.qAfter=(S.deedQ||[]).length;evTruthSweep();out.thB2=S.th;/* reacts once */
     const th1=S.th;deedAdd(S,'plot');out.thLive=[th1,S.th]}finally{Math.random=r0}}catch(e){out.thErr=e.message}
+  /* 5. FAIL 1 of r1: the room's own load sweep stays. (a) the HOST's merged-week rebuild (a deser in the room: COOPW on, seat a) with the friend
+     as an in-palace CONSORT (coop entry in rivals) still renames a name that must not be held twice; (b) a SERVANT friend's co-op save
+     (coop entry in a mistress's staff) loaded OFF-ROOM is not swept (her own pool candidate keeps her name). */
+  try{const W=window.COOPW;const on0=W.on,seat0=W.seat;const fr=rivals.find(v=>v&&v.alive&&!v.coop);const o3=rivals.find(v=>v&&v.alive&&v!==fr);
+   fr.coop=1;S.coopRoom='TEST1';S.qPool[0].name=o3.name;out.hostWas=o3.name;W.on=true;W.seat='a';
+   try{rt()}finally{W.on=on0;W.seat=seat0}out.hostAfter=S.qPool[0].name;out.hostCoop=!!(rivals.find(v=>v&&v.id===fr.id)||{}).coop;
+   const F2=rivals.find(v=>v&&v.id===fr.id);delete F2.coop;delete S.coopRoom;
+   const mis=rivals.find(v=>v&&v.alive&&Array.isArray(v.staff)&&v.staff.length);out.hasStaff=!!mis;
+   if(mis){const sv=mis.staff[0];const sv0=sv.name;sv.coop=1;sv.name='Giang Mộng Dao';S.qPool[0].name='Thượng Quan Mộng Dao';S.coopRoom='TEST1';out.srvWas=S.qPool[0].name;
+    rt();out.srvAfter=S.qPool[0].name;const m2=rivals.find(v=>v&&v.id===mis.id);if(m2&&m2.staff[0]){delete m2.staff[0].coop;m2.staff[0].name=sv0}delete S.coopRoom}}catch(e){out.hlErr=e.message}
   return out});
  ok(!r.idSolo.length,'identity: a fresh solo life (10 buổi) survives save → load → save',r.idSolo);
  ok(!r.idCoop.length&&r.pool1===r.pool0,'co-op guest save: her pool candidate keeps her name on load («'+r.pool0+'» next to the friend «Giang Mộng Dao»), no person renamed',{after:r.pool1,diff:r.idCoop});
  ok(r.poolSolo!==r.poolSoloWas,'control: a SOLO save is still swept on load (a pool candidate holding a living consort\'s full name is renamed)',{was:r.poolSoloWas,after:r.poolSolo});
  ok(!r.overCap.length,'Sức never sits over its ceiling after a year passes (S + every living rival, 40 years up to age '+r.age+', cap now '+r.cap+')',r.overCap);
  ok(!r.idYear.length,'after the years a load has no Sức left to cut (S + every rival: save → load keeps each Sức)',r.idYear);
- ok(r.hasMan&&r.dk&&r.thLoad&&r.thLoad[0]===r.thLoad[1],'a load that writes a shown wrong into the ledger (tryst → dkeys tr:1) leaves Thái hậu\'s favour alone (dice forced to hit)',{thLoad:r.thLoad,dk:r.dk,err:r.thErr});
- ok(r.thLive&&r.thLive[1]<r.thLive[0],'control: a NEW wrong she does (deedAdd plot) still reaches Thái hậu through her maid',{thLive:r.thLive});
+ ok(r.hasMan&&r.dk&&r.thB0===40&&r.thB0b===40&&r.q>0&&r.q2===r.q,'law 6a: a save → load that writes a shown wrong into the ledger (tryst → dkeys tr:1) rolls nothing at load; the reaction waits in the queue (also across a 2nd save → load)',{thB0:r.thB0,thB0b:r.thB0b,dk:r.dk,q:r.q,q2:r.q2,err:r.thErr});
+ ok(r.thA===36&&r.thB===36&&r.thB2===36&&r.qAfter===0,'law 6a: Thái hậu learns the same either way — play on 40→'+r.thA+', save → load → next sweep 40→'+r.thB+' (once: next sweep '+r.thB2+')',{thA:r.thA,thB:r.thB,thB2:r.thB2,qAfter:r.qAfter});
+ ok(r.thLive&&r.thLive[1]<r.thLive[0],'control: a NEW wrong she does (deedAdd plot) still reaches Thái hậu through her maid at once',{thLive:r.thLive});
+ ok(r.hostCoop&&r.hostAfter!==r.hostWas,'in the room: the HOST\'s merged-week rebuild with the friend as consort still sweeps (a pool candidate holding a living consort\'s full name is renamed)',{was:r.hostWas,after:r.hostAfter,err:r.hlErr});
+ ok(r.hasStaff&&r.srvAfter===r.srvWas,'off-room: a SERVANT friend\'s co-op save is not swept on load (her pool candidate «'+r.srvWas+'» keeps her name)',{after:r.srvAfter,err:r.hlErr});
  ok(!errs.length,'no page errors',errs.slice(0,3));await b.close();
  const pass=res.every(Boolean);console.log(pass?'SAVE-RT-COOP PASS':'SAVE-RT-COOP FAIL');process.exit(pass?0:1)})();

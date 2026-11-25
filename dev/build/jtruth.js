@@ -20,17 +20,26 @@ const DEEDW={poison:2,kpoison:2,slowpoison:2,pgift:2,musk:2,catswap:2,pond:2,pus
 const DEEDX={plot:"bày mưu hại người",sbribe:"mua chuộc người hầu của người khác",sthreat:"dọa người hầu của người khác",illbuy:"lén mua đồ cấm",
  flirt:"liếc mắt đưa tình với nam nhân",mangift:"lén nhận quà của nam nhân",story:"việc xấu trong quá khứ",old:"từng bày mưu hại người"};
 function deedTxt(k,t){try{if(ACT[k]&&t)return j78act(k,t)}catch(e){}return DEEDX[k]||(ACT[k]?ACT[k].n.toLowerCase():"việc sai trái")}
-function deedAdd(p,k,t,w,x){if(!p||!S)return null;const d={k,t:t?key(t):null,w:w||DEEDW[k]||1,at:wk(),x:x||deedTxt(k,t)};p.wrongs=p.wrongs||[];p.wrongs.push(d);if(p.wrongs.length>30)p.wrongs.shift();p.dw=(p.dw||0)+d.w;return d}
+/* REACTIONS to a wrong (law 6a, savert r2): deedReact(p,d) is the one hook every reaction wraps (jcmaid: Thái hậu learns through her maid).
+   A wrong she DOES now (runAct, plots, bribes, jcycle …) reacts at once. A fact the LAZY ledger finds (deedSync: trysts, affair, contraband,
+   over-rank dress, a pregnancy that does not match the record — the deed was done earlier and only written now) is queued in S.deedQ and
+   reacts at the next IN-PLAY sweep (evTruthSweep from endTurn), never inside a load: play on and save → load give the same result (the load
+   no longer rolls dice, and the reaction is not lost). */
+function deedReact(p,d){return d}
+function deedAdd(p,k,t,w,x,q){if(!p||!S)return null;const d={k,t:t?key(t):null,w:w||DEEDW[k]||1,at:wk(),x:x||deedTxt(k,t)};p.wrongs=p.wrongs||[];p.wrongs.push(d);if(p.wrongs.length>30)p.wrongs.shift();p.dw=(p.dw||0)+d.w;
+ if(q){S.deedQ=S.deedQ||[];S.deedQ.push({p:key(p),k:d.k,x:d.x})}else deedReact(p,d);return d}
+let TRUTH_LOAD=0;
+function deedDrain(){if(TRUTH_LOAD||!S||!Array.isArray(S.deedQ))return;const L=S.deedQ;delete S.deedQ;for(const e of L){try{const p=e&&byKey(e.p);if(p)deedReact(p,e)}catch(x){}}}
 function deedUndo(p,d){if(!p||!d)return;const i=(p.wrongs||[]).indexOf(d);if(i>=0){p.wrongs.splice(i,1);p.dw=Math.max(0,(p.dw||0)-d.w)}}
-function deedOnce(p,id,k,w,x){p.dkeys=p.dkeys||[];if(p.dkeys.includes(id))return;p.dkeys.push(id);if(p.dkeys.length>60)p.dkeys.shift();deedAdd(p,k,null,w,x)}
+function deedOnce(p,id,k,w,x,q){p.dkeys=p.dkeys||[];if(p.dkeys.includes(id))return;p.dkeys.push(id);if(p.dkeys.length>60)p.dkeys.shift();deedAdd(p,k,null,w,x,q)}
 /* the wrongs the world already shows, written into the ledger once (so the cap never drops when the thing is hidden again) */
 function deedSync(p){if(!p||!S)return;try{
- if(p===S){const n=Math.min(3,(S.men||[]).reduce((a,m)=>a+(m.trysts||0),0));for(let i=1;i<=n;i++)deedOnce(p,"tr:"+i,"tryst",2,"tư thông với nam nhân")}
- else{if(p.scandal)deedOnce(p,"sc","tryst",2,"tư thông");if(p.affair){let m=null;try{m=manById(p.affair)}catch(e){}deedOnce(p,"af:"+p.affair,"tryst",2,`tư thông${m?" với "+m.name:""}`)}}
- if(p.pregMismatch)deedOnce(p,"pm:"+((p.kids||[]).length),"pm",2,"có thai không khớp đêm thị tẩm nào trong sổ Kính sự phòng");
- for(const e of (p.inv||[])){if(!e||!IT[e.k])continue;const planted=(e.by&&e.by!==key(p))||e.gh;if(planted)continue;if(itm(e.k).il)deedOnce(p,"il:"+e.k,"il",1,`giấu đồ cấm (${(IT[e.k]||{}).n}) trong rương`)}
- if(typeof vpItems==="function")for(const e of vpItems(p))deedOnce(p,"vp:"+e.k,"vp",1,`dùng đồ vượt phẩm (${itm(e.k).n})`);
- if(p!==S&&p.plan&&p.plan.k){const t=byKey(p.plan.t);deedOnce(p,p.plan.j70?"pl:j70:"+p.plan.j70:"pl:"+p.plan.k+":"+p.plan.t+":"+p.plan.due,"plot",1,`bày mưu ${deedTxt(p.plan.k,t)}`)}
+ if(p===S){const n=Math.min(3,(S.men||[]).reduce((a,m)=>a+(m.trysts||0),0));for(let i=1;i<=n;i++)deedOnce(p,"tr:"+i,"tryst",2,"tư thông với nam nhân",1)}
+ else{if(p.scandal)deedOnce(p,"sc","tryst",2,"tư thông",1);if(p.affair){let m=null;try{m=manById(p.affair)}catch(e){}deedOnce(p,"af:"+p.affair,"tryst",2,`tư thông${m?" với "+m.name:""}`,1)}}
+ if(p.pregMismatch)deedOnce(p,"pm:"+((p.kids||[]).length),"pm",2,"có thai không khớp đêm thị tẩm nào trong sổ Kính sự phòng",1);
+ for(const e of (p.inv||[])){if(!e||!IT[e.k])continue;const planted=(e.by&&e.by!==key(p))||e.gh;if(planted)continue;if(itm(e.k).il)deedOnce(p,"il:"+e.k,"il",1,`giấu đồ cấm (${(IT[e.k]||{}).n}) trong rương`,1)}
+ if(typeof vpItems==="function")for(const e of vpItems(p))deedOnce(p,"vp:"+e.k,"vp",1,`dùng đồ vượt phẩm (${itm(e.k).n})`,1);
+ if(p!==S&&p.plan&&p.plan.k){const t=byKey(p.plan.t);deedOnce(p,p.plan.j70?"pl:j70:"+p.plan.j70:"pl:"+p.plan.k+":"+p.plan.t+":"+p.plan.due,"plot",1,`bày mưu ${deedTxt(p.plan.k,t)}`,1)}
 }catch(e){}}
 /* how much true evidence can exist against p (each holder separately) */
 function deedCap(p){if(!p)return 0;deedSync(p);const s=(p.dws||0);return (p.dw||0)+Math.max(0,(p.schemes||0)-s)*2}
@@ -44,11 +53,11 @@ function rumA(h,t,n){if(!h||!t||h===t||!n)return;if(h===S)t.evR=Math.max(0,(t.ev
 function evTruthSweep(){if(!S||!rivals)return 0;let moved=0;const P=[S].concat(rivals.filter(v=>v));
  for(const t of P){if(t!==S&&!t.alive&&!t.out)continue;const cap=deedCap(t);
   for(const h of P){if(h===t)continue;const g=evG(h,t);if(g>cap){const x=g-cap;if(h===/*evok: sweep*/S)t.ev=cap;else h.evm[key(t)]=cap;rumA(h,t,x);moved+=x}}}
- if(moved)try{window.__evSwept=(window.__evSwept||0)+moved}catch(e){}return moved}
-/* save round-trip family (fixer #9): the load sweep only writes the ledger (facts the world already shows); window.__truthLoad tells the
-   reactions to a NEW wrong (jcmaid: Thái hậu learns through her maid, a roll that lowers S.th) that this is bookkeeping, not a deed she
-   does now — else a plain save → load rolled the dice and changed Thái hậu's favour (robot10-coop save.S.th 66 → 62 + a log line) */
-(function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);window.__truthLoad=1;try{if(S&&rivals&&!S.dead){if(!S.truthV){/* first load of an old save */for(const p of [S].concat(rivals))deedSync(p);S.truthV=1}evTruthSweep()}}catch(e){console.error("truth load",e)}finally{window.__truthLoad=0}return r}})();
+ if(moved)try{window.__evSwept=(window.__evSwept||0)+moved}catch(e){}deedDrain()/* after the syncs above: a fact found by this sweep reacts in this sweep */;return moved}
+/* save round-trip family (fixer #9 + savert r2, law 6a): the load sweep only writes the ledger; TRUTH_LOAD spans the whole load (inner
+   wrappers too), so the facts it finds are queued (S.deedQ) and their reactions run at the next in-play sweep — the load rolls no dice
+   (robot10-coop save.S.th 66 → 62 + a log line on a plain save → load) and the reaction is still there afterwards */
+(function(){const d0=deser;deser=function(){TRUTH_LOAD=1;try{const r=d0.apply(this,arguments);try{if(S&&rivals&&!S.dead){if(!S.truthV){/* first load of an old save */for(const p of [S].concat(rivals))deedSync(p);S.truthV=1}evTruthSweep()}}catch(e){console.error("truth load",e)}return r}finally{TRUTH_LOAD=0}}})();
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead){S.truthV=1;evTruthSweep()}}catch(e){}return r}})();
 /* new lives start already "swept" */
 (function(){if(typeof start!=="function")return;const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S)S.truthV=1}catch(e){}return r}})();

@@ -38,7 +38,11 @@ function mark(){if(CW.on&&S&&typeof S==="object"&&!S.coopRoom&&!SOLO.has(S)&&roo
 function solo(){try{if(S&&typeof S==="object"){delete S.coopRoom;SOLO.add(S)}}catch(e){}}
 /* a life built in a room belongs to the room */
 ["start","nlRun"].forEach(n=>{const f=window[n];if(typeof f!=="function")return;window[n]=function(){const s0=S;const r=f.apply(this,arguments);try{if(S!==s0){if(CW.on)mark();else solo()}}catch(e){}return r}});
-(function(){const f=deser;deser=function(){const r=f.apply(this,arguments);try{if(CW.on)mark();else solo()}catch(e){}return r}})();
+/* OFF = a co-op life (its save carries S.coopRoom) loaded while no room is open (a scratch page, a test, any off-room load): the ONE
+   «is a co-op save loaded off-room» test for every load-time writer (savert r2, law 11): window.coopOffLoad(). In a room (host's merged-week
+   rebuild, CW.restore rejoin) COOPW.on is true → not off-room, the room's own rules (host sweeps, guest follows) stay as they are. */
+const OFF=new WeakSet();window.coopOffLoad=()=>{try{return !!(S&&typeof S==="object"&&OFF.has(S))}catch(e){return false}};
+(function(){const f=deser;deser=function(d){const cr=!!(d&&d.S&&d.S.coopRoom);const r=f.apply(this,arguments);try{if(CW.on)mark();else{solo();if(cr&&S&&typeof S==="object")OFF.add(S)}}catch(e){}return r}})();
 /* save(): a co-op life never goes into a solo sổ; in a room, remember the room's line for the menu */
 (function(){const f=save;save=function(){try{if(CW.on&&(CW.base||CW.inLife))mark()}catch(e){}
  if(S&&S.coopRoom){if(CW.on){const r=f.apply(this,arguments);try{record()}catch(e){}return r}return}
