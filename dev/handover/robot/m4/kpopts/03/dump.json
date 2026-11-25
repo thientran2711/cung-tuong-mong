@@ -1,14 +1,14 @@
 {
- "buoi": 8,
- "hud": "Bạch Nghê Thường Quý nhân 20 tuổi Kiếp thứ nhất Tháng mười · trung tuần · năm thứ hai | Buổi tối",
+ "buoi": 10,
+ "hud": "Bạch Nghê Thường Quý nhân 21 tuổi Kiếp thứ nhất Tháng giêng · hạ tuần · năm thứ ba | Buổi chiều",
  "build": "0756a05b",
- "at": "2026-11-25T10:49:27.727Z",
+ "at": "2026-11-25T11:49:14.235Z",
  "dump": {
-  "title": "Hoàng thượng",
+  "title": "Tỉnh thân",
   "bad": 1,
   "frameBottom": 898,
   "dlgClass": "dlg kpsc kpanel kszf ksz3 kszlive",
-  "dlgStyle": "--kdpw: 170px;",
+  "dlgStyle": "--kdpw: 175px;",
   "modalClass": "modal",
   "ksz": [
    "dlg kpsc kpanel kszf ksz3 kszlive",
@@ -30,15 +30,15 @@
    ],
    "opts": [
     342,
-    384,
+    440,
     304,
-    501
+    445
    ],
    "kpopts": [
     342,
-    384,
+    440,
     304,
-    501
+    445
    ],
    "k3right": [
     342,
@@ -61,33 +61,33 @@
   },
   "kpoptsScroll": [
    0,
-   677,
-   501
+   662,
+   445
   ],
   "cards": [
    [
     342,
-    384,
+    440,
     304,
-    167
+    195
    ],
    [
     342,
-    557,
+    640,
     304,
-    151
+    163
    ],
    [
     342,
-    714,
+    809,
     304,
-    151
+    140
    ],
    [
     342,
-    871,
+    955,
     304,
-    184
+    140
    ]
   ],
   "vp": [

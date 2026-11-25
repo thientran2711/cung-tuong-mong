@@ -1,14 +1,14 @@
 {
- "buoi": 4,
- "hud": "Bạch Nghê Thường Quý nhân 20 tuổi Kiếp thứ nhất Tháng mười · thượng tuần · năm thứ hai | Buổi tối",
+ "buoi": 8,
+ "hud": "Bạch Nghê Thường Quý nhân 21 tuổi Kiếp thứ nhất Tháng giêng · trung tuần · năm thứ ba | Buổi tối",
  "build": "0756a05b",
- "at": "2026-11-25T10:45:51.606Z",
+ "at": "2026-11-25T11:48:06.659Z",
  "dump": {
-  "title": "Đại xá thiên hạ",
+  "title": "Kỳ nguyệt sự",
   "bad": 1,
   "frameBottom": 898,
   "dlgClass": "dlg kpsc kpanel kszf ksz3 kszlive",
-  "dlgStyle": "--kdpw: 175px;",
+  "dlgStyle": "--kdpw: 201px;",
   "modalClass": "modal",
   "ksz": [
    "dlg kpsc kpanel kszf ksz3 kszlive",
@@ -30,15 +30,15 @@
    ],
    "opts": [
     342,
-    402,
+    374,
     304,
-    483
+    511
    ],
    "kpopts": [
     342,
-    402,
+    374,
     304,
-    483
+    511
    ],
    "k3right": [
     342,
@@ -61,33 +61,33 @@
   },
   "kpoptsScroll": [
    0,
-   584,
-   483
+   635,
+   511
   ],
   "cards": [
    [
     342,
-    402,
+    374,
     304,
     140
    ],
    [
     342,
-    548,
+    520,
     304,
-    140
+    151
    ],
    [
     342,
-    694,
+    677,
     304,
-    140
+    151
    ],
    [
     342,
-    840,
+    835,
     304,
-    140
+    168
    ]
   ],
   "vp": [
