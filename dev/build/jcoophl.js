@@ -32,7 +32,7 @@ const NOADD=new Set(["mood","rank","buoi","tuan","month","year","turn","age","er
    authors it: the guest's own palFix (deser / render / month) leaves every world person's housing as it was (her own S housing is hers), her
    week end carries the room base's housing (so m3 never adds two seats' resHead ids: R#11.resHead A=2 B=3 → 4 = a third consort), and the
    host sends its housing writes at once (numbers included: the guest never moves them, nothing is counted twice) */
-const HOUSE=["resHead","resHall","pal","palLone","palWait"],HSET=new Set(HOUSE);
+const HOUSE=X.HOUSE,HSET=new Set(HOUSE);/* ONE list: jcoopworld (the pos relay houseWire/houseIn uses the same) */
 /* r3 (coop-e2e 3/7 STUCK NIGHT, guest week n buổi 3): the room CLOCK (year / month / tuần / turn = jnf / jnight / nCheck's day() = S.turn*3+S.tuan)
    moves ONLY with the merged week, never as a live op. Before: the host's endTurn moved its tuần, its check sent ["s",["S","tuan"],n+1]
    (NOADD = "the host's value"), the guest still in her tối of day n jumped to day n+1 → jnf asked the host's word for a day the host had not
