@@ -21,6 +21,8 @@ let SHA = ''; try { SHA = execSync('git -C ' + JSON.stringify(__dirname) + ' rev
 const EXIT_RE = /xuất gia|xuất cung|về quê|thứ dân|bỏ cuộc|kiếp mới|luân hồi|an nhiên|giả chết|cao chạy|kết thúc kiếp|xuất giá|thành thân|vương phủ|tự vẫn|tự tận|quyên sinh|bắt đầu lại|chơi lại|rời cung|xin ra khỏi cung/i;
 const CLOSE_RE = /^(✕|×|x|đóng|lui|thôi|quay lại|trở về|để sau|bỏ qua)$/i;
 const LOW_RE = /hướng dẫn|luật chơi|về luật|^bỏ qua|xem đầy đủ|^\?$|^$/i; /* help / skip / empty icons: only when nothing else */
+/* leaving a co-op room / going back to the title is NEVER a robot move (not a game ending): never tapped, the robot waits instead */
+const LEAVE_RE = /màn đầu|bỏ phòng|rời phòng|thoát phòng|rời khỏi danh sách|chép đường dẫn|gửi đường dẫn|chép mã|về trang đầu/i;
 const NAV_RE = /thiết lập|sổ luân hồi|bảng vàng|cùng hảo hữu|hảo hữu|☰|giữ sổ|nối sổ|ám hiệu|xóa|xoá|âm thanh|nhạc/i;
 const ODDS = { 'mong manh': 0, 'hiểm': 1, 'khó lường': 2, 'tùy duyên': 3, 'có cơ': 4, 'vững': 5, 'rất vững': 6, 'liều': 0, 'khó': 1, 'năm ăn năm thua': 3, 'khá chắc': 4, 'chắc': 5, 'rất chắc': 6, 'nắm chắc': 6 };
 
@@ -128,9 +130,11 @@ async function play(p) {
     await p.waitForTimeout(ok ? 220 : 400);
 
     function choose(sc, started) {
-      const hb = sc.b.filter(x => x.hit); let b = hb.filter(x => (repeat.get(sig + '#' + x.t) || 0) < 4);
+      const hb = sc.b.filter(x => x.hit && !LEAVE_RE.test(x.t) && !(started && /^(cfz|coop)$/.test(x.d))); let b = hb.filter(x => (repeat.get(sig + '#' + x.t) || 0) < 4);
       if (!b.length) b = hb;
       const isExit = x => EXIT_RE.test(x.t) && !(!started && /kiếp mới/i.test(x.t) && sc.layer !== 'page');
+      /* back on the title after the life started (room dropped / reload): co-op seat rejoins its room or waits; solo continues its sổ */
+      if (started && b.some(x => /^chơi một mình/i.test(x.t))) { const back = b.find(x => /trở lại phòng|vào lại phòng|về phòng/i.test(x.t)); if (back) return back; if (C.pre || C.coop) { R.titleBack = (R.titleBack || 0) + 1; return null } }
       if (!started && C.pre) { const r = C.pre(sc, b); if (r === 'wait') return null; if (r) return r }
       if (!started) { /* title → solo → new life in slot 1 → skip roulette → accept identity */
         const pref = [/chơi một mình/i, /^bắt đầu kiếp mới$/i, /bỏ qua/i, /nhận thân phận/i, /^(vào cung|bắt đầu|nhập cung)/i];
@@ -187,7 +191,7 @@ async function unstick(p, rt, sc, lvl) {
   if (lvl >= 3) {
     await p.reload({ waitUntil: 'load' }).catch(() => {}); await p.waitForFunction(() => typeof start === 'function', null, { timeout: 0 }).catch(() => {});
     await p.evaluate(() => { if (!window.__rtOver) { window.__rtOver = 1; const o0 = over; over = function (h, t, fate, alive) { try { if (!S.dead) window.__rtEnd = { id: String(h), fate: String(fate || '').replace(/<[^>]+>/g, ''), alive: !!alive, age: S.age, year: S.year, rank: S.rank } } catch (e) {} return o0.apply(this, arguments) } } }).catch(() => {});
-    for (const re of [/chơi một mình/i, /chơi tiếp|tiếp tục|vào sổ|^tải$/i]) { for (let k = 0; k < 30; k++) { const s2 = await p.evaluate(SCAN).catch(() => null); const i = s2 ? s2.b.findIndex(b => re.test(b.t) || re.source.includes('chơi tiếp') && /load/.test(b.d)) : -1; if (i >= 0) { const h = await p.evaluateHandle(i => window.__rtBtns[i], i); await rt.tap(h, { screen: 'title (unstick reload)', label: re.source }); await p.waitForTimeout(1500); break } await p.waitForTimeout(500) } }
+    for (const re of (C.coop ? [/cùng hảo hữu/i, /trở lại phòng|vào lại phòng|về phòng/i] : [/chơi một mình/i, /chơi tiếp|tiếp tục|vào sổ|^tải$/i])) { for (let k = 0; k < 30; k++) { const s2 = await p.evaluate(SCAN).catch(() => null); const i = s2 ? s2.b.findIndex(b => re.test(b.t) || re.source.includes('chơi tiếp') && /load/.test(b.d)) : -1; if (i >= 0) { const h = await p.evaluateHandle(i => window.__rtBtns[i], i); await rt.tap(h, { screen: 'title (unstick reload)', label: re.source }); await p.waitForTimeout(1500); break } await p.waitForTimeout(500) } }
   }
 }
 function save() { const f = path.join(OUT, LIFE + '.json'); fs.writeFileSync(f, JSON.stringify(R, null, 1));

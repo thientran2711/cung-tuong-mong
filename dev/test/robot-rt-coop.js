@@ -54,7 +54,7 @@ async function seatLoop(ctx, who, dev, other) {
   for (;;) {
     k++; const extra = k > KIEP;
     const s = Seat({ url: URL0, out: OUT, dev, bot: A.bot, seed: (+A.seed || 1) * 10 + (who === 'host' ? 1 : 2) + k * 100, life: 'coop-rt-' + TAG + '-' + who + '-k' + k,
-      origin: A[who + 'Origin'], road: A[who + 'Road'], stuckMin: A.stuckMin, slice: A.slice, noBoot: k > 1, pre: k === 1 ? (who === 'host' ? hostPre(st) : guestPre(st)) : null });
+      origin: A[who + 'Origin'], road: A[who + 'Road'], stuckMin: A.stuckMin, slice: A.slice, noBoot: k > 1, coop: true, pre: k === 1 ? (who === 'host' ? hostPre(st) : guestPre(st)) : null });
     try { await s.play(p) } catch (e) { s.R.bugs.push({ type: 'harness', msg: 'runner error: ' + String(e.message).split('\n')[0], n: 1 }); s.R.life = s.R.life || { id: 'HARNESS', type: 'harness' }; s.save() }
     pair.lives.push({ seat: who, dev, kiep: k, extra, room: code, life: s.R.life, harness: s.R.harness, exitPick: s.R.exitPick, bugs: s.R.bugs, dead: s.R.dead, buoi: s.R.buoi, saves: s.R.saves });
     flush(); console.log('SEAT LIFE DONE', who, 'k' + k, s.R.life && s.R.life.id);
