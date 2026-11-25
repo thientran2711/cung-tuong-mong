@@ -63,7 +63,7 @@ function plan(){const E=entries();const h=kh();const R=rec();const key=(R?R.key:
  CACHE={key,areas:AR,groups:G,kh:h};return CACHE}
 function count(a){return a.g.reduce((s,g)=>s+g.ms.length+g.fol.length,0)}
 function areaKeyOfEntry(id){const P=plan();for(const g of P.groups)if(g.ms.concat(g.fol).some(e=>e.id===id))return g.area;return null}
-function isArea(k){try{return !!plan().areas.find(a=>a.k===k)}catch(e){return false}}
+function isArea(k){if(typeof k!=="string"||!(/^loidi\d+$/.test(k)||(AB().vuon||[]).some(a=>a.k===k)))return false;/* cheap name test first: hallName / hallRole are asked for every room of the game */try{return !!plan().areas.find(a=>a.k===k)}catch(e){return false}}
 function areaByK(k){return plan().areas.find(a=>a.k===k)||null}
 
 /* ---------- 2. who in curPeople is which record entry ---------- */
@@ -75,10 +75,21 @@ function entryOfP(p,E){if(!p)return null;E=E||entries();if(p.lid){const e=E.find
 /* the area of a person on the place list; someone the record does not hold stands with the master named in her line («… của X»), else in the first area that has people */
 function areaOfP(p,E){const e=entryOfP(p,E);if(e)return areaKeyOfEntry(e.id);const nm=(String(p.info||p.role||"").match(/của (.+?)(?:\s·|$)/)||[])[1];if(nm){const m=(E||entries()).find(x=>x.name===nm);if(m)return areaKeyOfEntry(m.id)}
  const a=plan().areas.find(x=>x.g.length);return a?a.k:"vuonhoa"}
-function hall(){try{const h=S.hall;if(!h||h.k!==K||S.place!==K||h.t!==kpmStamp()||!isArea(h.part))return null;return h}catch(e){return null}}
+function hall(){try{if(S.place!==K)return null;let h=S.hall;if(h&&h.k===K&&h.t===kpmStamp()&&isArea(h.part))return h;
+ /* she stands in the garden but her area belongs to another buổi (time passed) or she came another way: she stays in the same area if it still has people, else the fullest one */
+ if(!on()||S.dead)return null;const P=plan();let best=h&&h.k===K&&P.areas.find(a=>a.k===h.part&&count(a)>0);if(!best){best=P.areas[0];P.areas.forEach(a=>{if(count(a)>count(best))best=a})}
+ if(!best)return null;S.hall={k:K,part:best.k,t:kpmStamp(),place:0};return S.hall}catch(e){return null}}
 
 /* ---------- 3. the garden map = kitPalaceMap §76 for slot "p:vuon" ---------- */
-function mapSrc(){const B=AB();if(B.art&&B.art.map)return B.art.map;try{return "img/"+SCIMG.vuon+".webp"}catch(e){return "img/ngu-hoa-vien.webp"}}
+/* painted pictures (ART-NHV): {s}=mùa {b}=buổi of now; the map has all 16 states; a scene state not yet painted falls back to <area>-xuan-<buổi> → <area>-xuan-sang
+   (probed once per path at run time, so a newly painted state shows by itself) and the scene carries the kit «tạm» chip (kitTam) while it stands in */
+function sb(){let s="xuan",b="sang";try{s=kpmSeason();b=kpmBuoiW()}catch(e){}return{s,b}}
+const fill=(p,s,b)=>p.replace("{s}",s).replace("{b}",b);
+const HAVE={};function probe(u){if(u in HAVE)return HAVE[u];HAVE[u]=null;try{const im=new Image();im.onload=()=>{HAVE[u]=true;try{if(CUR&&BG&&CUR.want===u){BG.style.backgroundImage=`url("${u}")`;CUR.tam=false;tamPut()}}catch(e){}};im.onerror=()=>{HAVE[u]=false};im.src=u}catch(e){HAVE[u]=false}return null}
+function mapSrc(){const B=AB(),A=B.art||{};if(A.map){const {s,b}=sb();return fill(A.map,s,b)}try{return "img/"+SCIMG.vuon+".webp"}catch(e){return "img/ngu-hoa-vien.webp"}}
+function areaArt(k){const A=AB().art||{},p=A.area&&A.area[k];if(!p)return null;const {s,b}=sb(),have=A.areaHave||[];const L=[s+"-"+b,"xuan-"+b,"xuan-sang"].filter((x,i,a)=>a.indexOf(x)===i);
+ const exact=fill(p,s,b);let use=null;for(const st of L){const u=fill(p,...st.split("-"));if(have.includes(st)||HAVE[u]===true){use=u;break}}if(!use)use=fill(p,"xuan","sang");
+ if(use!==exact&&HAVE[exact]!==false)probe(exact);return{src:use,want:exact,tam:use!==exact}}
 function syncSpots(){try{const P=plan();KPM_DATA.spots.nhv={};P.areas.forEach(a=>{KPM_DATA.spots.nhv[a.k]=a.hs});KPM_HALLS.nhv=P.areas.map(a=>a.k)}catch(e){}}
 (function(){
  const pa=kpmParts;kpmParts=function(slot,k,nm){if(slot===SLOT&&on())return plan().areas.map(a=>[a.k,a.n]);return pa.apply(this,arguments)};
@@ -138,14 +149,15 @@ function shape(g){const B=AB(),gp=B.folGap||.05,Sf=B.folS||.66,P=[];const all=g.
  const wm=g.ms.map(m=>m.w0),tot=wm.reduce((a,b)=>a+b,0)+gp*(g.ms.length-1);let x=-tot/2;g.ms.forEach((m,i)=>{P.push({m,ux:x+wm[i]/2,s:1,z:3,flip:g.ms.length===2&&i===1});x+=wm[i]+gp});
  let lx=-tot/2,rx=tot/2;g.fol.forEach((f,i)=>{const w=f.w0*Sf;if(i%2){P.push({m:f,ux:rx+gp+w/2,s:Sf,z:1});rx+=gp+w}else{P.push({m:f,ux:lx-gp-w/2,s:Sf,z:1});lx-=gp+w}});
  g.P=P;g.wU=rx-lx;g.cU=(rx+lx)/2;return g.wU}
-function layout(re){if(!CUR||!L)return;const D=CUR.D=geo(),B=AB(),G=CUR.G;G.forEach(shape);
+function layout(re){if(!CUR||!L)return;const D0=geo();if(D0.H<80||D0.W<80){/* the stage is hidden or not laid out yet (a focus / tab switch): place everyone once it has its size */clearTimeout(window.__nhvLT);window.__nhvLT=setTimeout(()=>{try{if(CUR&&L&&L.isConnected)layout(true)}catch(e){}},150);return}const D=CUR.D=D0,B=AB(),G=CUR.G;G.forEach(shape);
  const span=D.x1-D.x0,need=G.reduce((s,g)=>s+g.wU,0);let fh=D.fh;const gapMin=12;if(need*fh+gapMin*(G.length+1)>span)fh=Math.max(D.H*.34,(span-gapMin*(G.length+1))/need);CUR.fh=fh;
  const gap=(span-need*fh)/(G.length+1);let x=D.x0+gap;
  G.forEach(g=>{const cx=x+g.wU*fh/2;g.cx=cx;g.top=1e9;g.P.forEach(p=>{const m=p.m,h=fh*p.s,w=h*m.w0,mx=cx+(p.ux-g.cU)*fh;m.x=mx-w/2;m.y=D.feet-h;m.w=w;m.h=h;m.z=p.z;m.g=g;
    const t=`translate(${m.x}px,${m.y}px)`;Object.assign(m.el.style,{width:w+"px",height:h+"px",zIndex:String(10+p.z)});if(!(SELM===m||(SEL===g&&SELM)))m.el.style.transform=t;m.el.__t=t;m.img.style.transform=p.flip?"scaleX(-1)":"";g.top=Math.min(g.top,m.y)});
   x+=g.wU*fh+gap;capPut(g)});
  bgPut();tagsFix()}
-function bgPut(){if(!BG||!CUR)return;const D=CUR.D,a=CUR.a,z=(AB().zoom||{})[kv()]||1;let bw=Math.max(D.W*z,D.H*16/9),bh=bw*9/16;if(bh<D.H){bh=D.H;bw=D.H*16/9}
+function tamPut(){try{if(!L)return;let e=L.querySelector(".nhv-tam");if(CUR&&CUR.tam&&typeof kitTam==="function"){if(!e){e=document.createElement("div");e.className="nhv-tam";e.innerHTML=kitTam(true);L.appendChild(e)}}else if(e)e.remove()}catch(x){}}
+function bgPut(){if(!BG||!CUR)return;const D=CUR.D,painted=!!areaArt(CUR.a.k),a=painted?{x:(AB().art||{}).x==null?.5:AB().art.x}:CUR.a,z=painted?1:((AB().zoom||{})[kv()]||1);let bw=Math.max(D.W*z,D.H*16/9),bh=bw*9/16;if(bh<D.H){bh=D.H;bw=D.H*16/9}
  BG.style.width=bw+"px";BG.style.height=bh+"px";BG.style.transform=`translate(${-(bw-D.W)*(a.x==null?.5:a.x)}px,${-(bh-D.H)}px)`}
 function capPut(g){if(!g.cap)return;if(!g.capEl||!g.capEl.isConnected){g.capEl=document.createElement("div");g.capEl.className="nhv-cap";g.capEl.innerHTML=`<span class="kchip n">${esc(g.cap)}</span>`;L.appendChild(g.capEl)}
  const D=CUR.D;g.capEl.style.left=Math.max(D.x0+60,Math.min(D.x1-60,g.cx))+"px";g.capEl.style.top=Math.max(4,g.top-6)+"px"}
@@ -162,17 +174,17 @@ html.nhvon .kfoc-mood:not(.nhv-say),html.nhvon #stage .khead.ksay{display:none!i
 #nhv .nhv-f{position:absolute;left:0;top:0;transform-origin:50% 100%;cursor:pointer;contain:layout}
 #nhv .nhv-f>img{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;object-fit:contain;object-position:50% 100%}
 #nhv .nhv-tag{position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:-6px;z-index:2;white-space:nowrap;pointer-events:none}
+#nhv .nhv-tam{position:absolute;left:8px;bottom:6px;z-index:41;pointer-events:none}
 #nhv .nhv-cap{position:absolute;transform:translate(-50%,-100%);white-space:nowrap;z-index:40;pointer-events:none}
 #nhv .nhv-cap .kchip{font-size:13px;padding:3px 10px;box-shadow:0 2px 8px #0005}
 .kpmv.nhv-map .kpm-list .nhv-do{font-style:italic}
 `;document.head.appendChild(c)}
-function bgSrc(a){const B=AB();if(B.art&&B.art.area&&B.art.area[a.k])return B.art.area[a.k];try{const si=document.getElementById("scimg");const u=si&&(si.style.backgroundImage||getComputedStyle(si).backgroundImage)||"";const m=/url\(["']?([^"')]+)["']?\)/.exec(u);if(m)return m[1]}catch(e){}return mapSrc()}
+function bgSrc(a){const P=areaArt(a.k);if(P){if(CUR)Object.assign(CUR,{want:P.want,tam:P.tam});return P.src}if(CUR)Object.assign(CUR,{want:null,tam:true});try{const si=document.getElementById("scimg");const u=si&&(si.style.backgroundImage||getComputedStyle(si).backgroundImage)||"";const m=/url\(["']?([^"')]+)["']?\)/.exec(u);if(m)return m[1]}catch(e){}return mapSrc()}
 function mount(a){css();const s=st();if(!s)return false;let l=document.getElementById("nhv");const key=plan().key+"|"+a.k+"|"+curPeople().length;
- if(l&&l.parentNode===s&&CUR&&CUR.key===key){if(Math.abs(CUR.D.W-s.getBoundingClientRect().width)>2||Math.abs(CUR.D.H-s.getBoundingClientRect().height)>2)layout(true);return false}
+ if(l&&l.parentNode===s&&CUR&&CUR.key===key){if(!CUR.D||Math.abs(CUR.D.W-s.getBoundingClientRect().width)>2||Math.abs(CUR.D.H-s.getBoundingClientRect().height)>2)layout(true);return false}
  const fresh=!l||!CUR||CUR.a.k!==a.k;if(l)l.remove();closePk(true);SEL=SELM=null;try{kitDim.off()}catch(e){}
  L=l=document.createElement("div");l.id="nhv";l.className=kv();s.appendChild(l);document.documentElement.classList.add("nhvon");
- BG=document.createElement("div");BG.className="nhv-bg";BG.style.backgroundImage=`url("${bgSrc(a)}")`;l.appendChild(BG);
- const G=sceneGroups(a);CUR={a,G,key,D:geo()};G.forEach(g=>{g.ms.forEach(m=>mkFig(m,1));g.fol.forEach(f=>mkFig(f,0))});
+ const G=sceneGroups(a);CUR={a,G,key,D:geo()};BG=document.createElement("div");BG.className="nhv-bg";BG.style.backgroundImage=`url("${bgSrc(a)}")`;l.appendChild(BG);tamPut();G.forEach(g=>{g.ms.forEach(m=>mkFig(m,1));g.fol.forEach(f=>mkFig(f,0))});
  l.addEventListener("click",()=>{if(SEL)unsel()});layout();
  if(fresh&&!still()){l.style.transformOrigin="50% 92%";an(l,[{transform:"scale(1.06)"},{transform:"none"}],{duration:AB().enterMs||560});G.forEach(g=>g.capEl&&an(g.capEl,[{opacity:0},{opacity:1}],{duration:260,delay:380}))}
  return true}
@@ -186,12 +198,18 @@ function back(m,quick){const g=m.g;SELM=null;an(m.el,[{transform:m.el.__t}],{dur
  CUR.G.forEach(x=>{if(x.capEl)x.capEl.style.visibility=""});tagsFix()}
 /* step out: she walks to the talk spot (speaker-left rule); her followers stand beside her on the left with a gap, the plaque band keeps her right side free */
 async function stepOut(m){const g=m.g;if(SEL!==g)pickGroup(g);if(SELM&&SELM!==m)back(SELM,true);SELM=m;const B=AB(),D=CUR.D,k=B.stepK||1.12,gp=(B.folGap||.05)*CUR.fh;
- const fo=g.P.filter(p=>p.m!==m).map(p=>p.m),band=(B.band||{})[kv()]||150;let nFit=0,need=0;for(const q of fo){if(D.x0+4+need+q.w+gp+m.w*k+band<=D.x1){need+=q.w+gp;nFit++}else break}
- const tcx=D.x0+(D.x1-D.x0)*((B.spot||{})[kv()]||.24);const tx=Math.max(D.x0+4+need,Math.min(tcx-m.w*k/2,D.x1-band-m.w*k)),ty=Math.min(D.H-m.h*k-40,m.y+(B.stepY||.045)*D.H);
- const to=`translate(${tx+(m.w*(k-1))/2}px,${ty+m.h*(k-1)}px) scale(${k})`;m.el.style.zIndex="30";m.fx={x:tx,y:ty,w:m.w*k,h:m.h*k};
+ /* her followers stand BEHIND-beside her on the left, in one row with a gap (never on her shoulder, never on each other — MAIN 127 FAIL 3); a smaller scale = further back.
+    She keeps the right side free for the thẻ gỗ band (BAL.area.band, two plaque columns on the phone) */
+ const fo=g.P.filter(p=>p.m!==m).map(p=>p.m),band=(B.band||{})[kv()]||150,W=m.w*k;
+ const tcx=D.x0+(D.x1-D.x0)*((B.spot||{})[kv()]||.24),maxX=D.x1-band-W;
+ const fw=fo.reduce((s,q)=>s+q.w,0);let tx=Math.min(maxX,Math.max(tcx-W/2,D.x0+4+(fo.length?Math.min(fw+gp*fo.length,(maxX-D.x0)*.62):0)));
+ const room=tx-D.x0-4-gp*fo.length,sF=fo.length&&fw>room?Math.max(B.folMin||.55,room/fw):1;
+ const ty=Math.min(D.H-m.h*k-40,m.y+(B.stepY||.045)*D.H);
+ const to=`translate(${tx+(m.w*(k-1))/2}px,${ty+m.h*(k-1)}px) scale(${k})`;m.el.style.zIndex="30";m.fx={x:tx,y:ty,w:W,h:m.h*k};
  CUR.G.forEach(x=>{if(x.capEl)x.capEl.style.visibility="hidden"});
  const mid=`translate(${(m.x+tx)/2}px,${(m.y+ty)/2-8}px) scale(${(1+k)/2})`;an(m.el,[{transform:m.el.__t},{transform:mid,offset:.5},{transform:to}],{duration:still()?1:(B.walkMs||700)});
- let acc=0;fo.forEach((q,j)=>{if(j>=nFit){an(q.el,[{transform:q.el.__t}],{duration:200});return}acc+=q.w+gp;const t3=`translate(${tx-acc}px,${ty+m.h*k-q.h}px)`;q.el.style.zIndex="29";an(q.el,[{transform:q.el.__t},{transform:t3}],{duration:still()?1:520})});
+ const feet=ty+m.h*k-(B.folBack||.02)*D.H;let x=tx-gp;fo.forEach(q=>{const w=q.w*sF;x-=w;const cx=x+w/2;x-=gp;const t3=`translate(${cx-q.w/2}px,${feet-q.h}px) scale(${sF.toFixed(3)})`;q.el.style.zIndex="29";
+  an(q.el,[{transform:q.el.__t},{transform:t3}],{duration:still()?1:520})});
  await wait(still()?30:(B.walkMs||700)+40);tagsFix()}
 /* THẺ GỖ TREO = kit §98.1 kitPick, fed by the real act list of this person (jdfv dfData) */
 function closePk(now){const k=KP;KP=null;if(!k)return;try{now?k.destroy():k.close()}catch(e){}}
@@ -209,7 +227,7 @@ function runAct(m,id){closePk(true);const p=curPeople()[m.i];if(!p||typeof kitFo
 (function(){if(typeof dfAfter!=="function")return;const a0=dfAfter;dfAfter=function(){const r=a0.apply(this,arguments);try{if(window.__nhvAct&&DF.F){const F=DF.F;setTimeout(()=>{try{if(DF.F===F&&!DF.play&&!Q.length)F.close()}catch(e){}},BAL.df&&BAL.df.reactMs||1400)}}catch(e){}return r};window.dfAfter=dfAfter})();
 /* the scene follows the stage: mounted after every stage paint while she stands in an area, gone everywhere else */
 (function(){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const h=on()&&typeof tab!=="undefined"&&tab==="act"&&!S.out?hall():null;
-  if(h){const a=areaByK(h.part);if(a)mount(a)}else if(document.getElementById("nhv")||document.documentElement.classList.contains("nhvon"))unmount()}catch(e){console.error("nhv stage",e)}return r};window.renderStage=renderStage})();
+  if(h){const a=areaByK(h.part);if(a)mount(a)}else if(document.getElementById("nhv")||document.documentElement.classList.contains("nhvon"))unmount()}catch(e){console.error("nhv stage",e);(window.__nhvErr=window.__nhvErr||[]).push(String(e&&e.stack||e).slice(0,300))}return r};window.renderStage=renderStage})();
 addEventListener("resize",()=>{clearTimeout(window.__nhvRz);window.__nhvRz=setTimeout(()=>{try{if(CUR)layout(true)}catch(e){}},140)});
 /* arriving in the garden another way (followed someone, an event, a road): she stands in the area with the most people, so the place is never shown unsplit */
 (function(){const g0=goTo;goTo=function(k){const r=g0.apply(this,arguments);try{if(on()&&k===K&&S.place===K&&!hall()){const P=plan();let best=P.areas[0];P.areas.forEach(a=>{if(count(a)>count(best))best=a});S.hall={k:K,part:best.k,t:kpmStamp(),place:0}}}catch(e){}return r};window.goTo=goTo})();
