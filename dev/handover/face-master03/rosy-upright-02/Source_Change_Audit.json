@@ -1,0 +1,952 @@
+[
+  {
+    "family": "Proud",
+    "age": 16,
+    "id": "FACE-REUSE-PROUD-AGE16-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "b85d146e060fb900c0264bffd814814ee4e59b7d937a1f04e9567949c15fbd75",
+    "parent_pre_bareface_id": "FACE-REUSE-PROUD-AGE16-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "8ee3fa7398aba7ce02ba724b050cf267ead9afd08606a7b63879ba283f6dea22",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ],
+      [
+        "self-possessed selective attention,a small assured chin lift and composed mouth.",
+        "self-possessed selective attention and composed mouth."
+      ],
+      [
+        "Keep her own feminine features and natural bearing.",
+        "Keep her own feminine features and self-assured expression."
+      ]
+    ]
+  },
+  {
+    "family": "Proud",
+    "age": 26,
+    "id": "FACE-REUSE-PROUD-AGE26-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "011735022fe8b44d42a26e4e514e32404a71f050f12566bb44a0a8e6ad2e5006",
+    "parent_pre_bareface_id": "FACE-REUSE-PROUD-AGE26-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "a551721a5ba8ab39c297f74be89eb1102e9bf4510d54462fc323cced9e570f1f",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ],
+      [
+        "self-possessed selective attention,a small assured chin lift and composed mouth.",
+        "self-possessed selective attention and composed mouth."
+      ],
+      [
+        "Keep her own feminine features and natural bearing.",
+        "Keep her own feminine features and self-assured expression."
+      ]
+    ]
+  },
+  {
+    "family": "Proud",
+    "age": 39,
+    "id": "FACE-REUSE-PROUD-AGE39-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "6f84b824c26ce02260ce57f61952f59319910d802d973c8a518598ca042f7f4b",
+    "parent_pre_bareface_id": "FACE-REUSE-PROUD-AGE39-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "baf0f8b6657089e193efa0c6e67d84324e3dc23999be540c9152557198057813",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ],
+      [
+        "self-possessed selective attention,a small assured chin lift and composed mouth.",
+        "self-possessed selective attention and composed mouth."
+      ],
+      [
+        "Keep her own feminine features and natural bearing.",
+        "Keep her own feminine features and self-assured expression."
+      ]
+    ]
+  },
+  {
+    "family": "Proud",
+    "age": 51,
+    "id": "FACE-REUSE-PROUD-AGE51-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "d53eec5adb3ed167ba3a48dd9d614810357b453b83e3519700d566306a3b90ca",
+    "parent_pre_bareface_id": "FACE-REUSE-PROUD-AGE51-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "a2f269b3bb7333de17709a087dbce05622e5ff7d5c0b863de13c1d88db4dfd1e",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ],
+      [
+        "self-possessed selective attention,a small assured chin lift and composed mouth.",
+        "self-possessed selective attention and composed mouth."
+      ],
+      [
+        "Keep her own feminine features and natural bearing.",
+        "Keep her own feminine features and self-assured expression."
+      ]
+    ]
+  },
+  {
+    "family": "Proud",
+    "age": 63,
+    "id": "FACE-REUSE-PROUD-AGE63-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "2faae715fb01ca4e41e350336fb29b8e09e03dd9077b7fb5fc178b610f2772cd",
+    "parent_pre_bareface_id": "FACE-REUSE-PROUD-AGE63-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "6f85e386db53ad4d6a4fa741a9f7294455c6d46571cf77f8f2674e31942fa810",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ],
+      [
+        "self-possessed selective attention,a small assured chin lift and composed mouth.",
+        "self-possessed selective attention and composed mouth."
+      ],
+      [
+        "Keep her own feminine features and natural bearing.",
+        "Keep her own feminine features and self-assured expression."
+      ]
+    ]
+  },
+  {
+    "family": "Sharp",
+    "age": 16,
+    "id": "FACE-REUSE-SHARP-AGE16-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "46313173a435bef3d64b9b0a40165a570692281c1da816c9b22fe00eb78b9ced",
+    "parent_pre_bareface_id": "FACE-REUSE-SHARP-AGE16-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "b6a70321bc8b8a3ef1d1ef84188ccb392996296c80766be871f3ff9048a33d96",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ]
+    ]
+  },
+  {
+    "family": "Sharp",
+    "age": 26,
+    "id": "FACE-REUSE-SHARP-AGE26-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "08649e0459e8a7fcfaa6346e359941d9d89f88c3399825af3547ab3b57ed6ff4",
+    "parent_pre_bareface_id": "FACE-REUSE-SHARP-AGE26-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "5b66705536dc5c8a4910e0b70753e6aff6cf578ab9310d9fb4ca17d768658f5a",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ]
+    ]
+  },
+  {
+    "family": "Sharp",
+    "age": 39,
+    "id": "FACE-REUSE-SHARP-AGE39-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "1dd2a151739effdb99464c5c8d255e59d227655a5ffff5e7b3df8fe8a7eb6ca6",
+    "parent_pre_bareface_id": "FACE-REUSE-SHARP-AGE39-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "f87070e08214ce611b678aa3503a8099d357bfbab0b6595d73f05dfc9dbfb3d6",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ]
+    ]
+  },
+  {
+    "family": "Sharp",
+    "age": 51,
+    "id": "FACE-REUSE-SHARP-AGE51-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "5d1a2264e6eb9630b395c618ec37a9da3c59d741a69074e34458ee375c0496c0",
+    "parent_pre_bareface_id": "FACE-REUSE-SHARP-AGE51-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "15b7e4010ec8f42b1260d35b73b6ff89803daca287b4706094676c0d83a1e1be",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ]
+    ]
+  },
+  {
+    "family": "Sharp",
+    "age": 63,
+    "id": "FACE-REUSE-SHARP-AGE63-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "7e5394750df7f42bb6cb7d0aabea80604c083238e49df0ccfe4b4100539e23d7",
+    "parent_pre_bareface_id": "FACE-REUSE-SHARP-AGE63-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "eb71f2f2578e9c4bb15a21a862ed35380da15ed1322922fb6ab4d98cdda5e6f6",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ]
+    ]
+  },
+  {
+    "family": "Cold",
+    "age": 16,
+    "id": "FACE-REUSE-COLD-AGE16-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "53079a3b90537e004fd1a30d9f37b143278cc73afdf07f9751b8e15c0b6ebdc1",
+    "parent_pre_bareface_id": "FACE-REUSE-COLD-AGE16-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "01cc0f89944a07158e4e7671c39d7f7da2162d8749937d92b2833c27b4e58179",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ]
+    ]
+  },
+  {
+    "family": "Cold",
+    "age": 26,
+    "id": "FACE-REUSE-COLD-AGE26-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "bb34fdd412390b098c9e04ed9857f8dba99a7a5a89f1f51d6746acc6ba0bca5e",
+    "parent_pre_bareface_id": "FACE-REUSE-COLD-AGE26-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "04cf673c781499d6d5d7d0bc6cb93d4039296d57eea4be58ffa4f84bc99100c2",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ]
+    ]
+  },
+  {
+    "family": "Cold",
+    "age": 39,
+    "id": "FACE-REUSE-COLD-AGE39-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "3cec7efdc443018700f6718b6f5ef30b1219f80f5bb6719c66ec103bc8635df5",
+    "parent_pre_bareface_id": "FACE-REUSE-COLD-AGE39-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "8a741402a4fecde63bd362fa8722cf35909da7dd687de4d624f5bccd19809dfe",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ]
+    ]
+  },
+  {
+    "family": "Cold",
+    "age": 51,
+    "id": "FACE-REUSE-COLD-AGE51-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "5413b2f9e7f9ad662418805e39b109a876fad4c5136df8a8cdd060aa05572a62",
+    "parent_pre_bareface_id": "FACE-REUSE-COLD-AGE51-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "58261fac34cb87c0cfa9ea9d9907054d18e634093c03f8342d8edb5658b8a407",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ]
+    ]
+  },
+  {
+    "family": "Cold",
+    "age": 63,
+    "id": "FACE-REUSE-COLD-AGE63-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "85357eba28232e09a3d5bc5d1baa45707d1db7b4e99f6420e5f622fd881eb490",
+    "parent_pre_bareface_id": "FACE-REUSE-COLD-AGE63-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "9c4eee276cbd349212fac17258d4f1a7019685aec549b0d6250411781712454d",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ]
+    ]
+  },
+  {
+    "family": "Alluring",
+    "age": 16,
+    "id": "FACE-REUSE-ALLURING-AGE16-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "c6cf26776cd2e74fa6a1acbd38ab2f409c0a79edfdbbb5d1fe195e751182f09f",
+    "parent_pre_bareface_id": "FACE-REUSE-ALLURING-AGE16-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "340c46a70aa1ee7e4fe11189cb22039a40b3f75e226b7f68a6ca884757399289",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ],
+      [
+        "eye design,lip shape and natural head tilt.",
+        "eye design and lip shape."
+      ]
+    ]
+  },
+  {
+    "family": "Alluring",
+    "age": 26,
+    "id": "FACE-REUSE-ALLURING-AGE26-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "ade5da20ecf3cc28e91f98a70c777daf40a9a3e378825686604fc6fe266d43ba",
+    "parent_pre_bareface_id": "FACE-REUSE-ALLURING-AGE26-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "aa23c5dd50824c98a3e06a95cc24f6304b6695d4b0c0551cd022c618f341e060",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ],
+      [
+        "eye design,lip shape and natural head tilt.",
+        "eye design and lip shape."
+      ]
+    ]
+  },
+  {
+    "family": "Alluring",
+    "age": 39,
+    "id": "FACE-REUSE-ALLURING-AGE39-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "bfb7aa8e0ac80913a4ef78dcdef26334ae10021ba648689c5549e32f56e919fa",
+    "parent_pre_bareface_id": "FACE-REUSE-ALLURING-AGE39-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "f34d40c7411e00caf2c35b2ce8f68b50b26c65772f491f5e68c7da9145a2c4d0",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ],
+      [
+        "eye design,lip shape and natural head tilt.",
+        "eye design and lip shape."
+      ]
+    ]
+  },
+  {
+    "family": "Alluring",
+    "age": 51,
+    "id": "FACE-REUSE-ALLURING-AGE51-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "896ead939d11b7fdbf6931cd67e6c70e7af6db86f00e3fae7da0c59711847bf1",
+    "parent_pre_bareface_id": "FACE-REUSE-ALLURING-AGE51-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "dfe734adfcecbefe6d56f33598c0f3ec695bb8d40a7faaf197483395017540bb",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ],
+      [
+        "eye design,lip shape and natural head tilt.",
+        "eye design and lip shape."
+      ]
+    ]
+  },
+  {
+    "family": "Alluring",
+    "age": 63,
+    "id": "FACE-REUSE-ALLURING-AGE63-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "e58d99cd2a1c521e2be944a1a2ca653ad0532af6c58a7a6d23e65e1d2696ef80",
+    "parent_pre_bareface_id": "FACE-REUSE-ALLURING-AGE63-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "c69be91bcb622bc13885c92426d2647d785d5c343f634bb09ef48b60919f8a4e",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ],
+      [
+        "eye design,lip shape and natural head tilt.",
+        "eye design and lip shape."
+      ]
+    ]
+  },
+  {
+    "family": "Gentle",
+    "age": 16,
+    "id": "FACE-REUSE-GENTLE-AGE16-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "0e98a56715259efdf24bcb15d0573d06911121716848300b95ee0ed6f4e77025",
+    "parent_pre_bareface_id": "FACE-REUSE-GENTLE-AGE16-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "cd6eaf279d5e71d12cdeef2a1e5279b79b06fded802b0cb0079d7cf5bf539e61",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ],
+      [
+        "responsive gaze and naturally inclined head when consistent with her source bearing.",
+        "responsive gaze."
+      ]
+    ]
+  },
+  {
+    "family": "Gentle",
+    "age": 26,
+    "id": "FACE-REUSE-GENTLE-AGE26-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "6acfda1db5e742739da701f64dc2766577e57aab9f1b9d807f9fb529b2d527ae",
+    "parent_pre_bareface_id": "FACE-REUSE-GENTLE-AGE26-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "2e77d96e61c131a4d486c3fd0ae2ac0377668dadd79bcb2d8510596923ae54d9",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ],
+      [
+        "responsive gaze and naturally inclined head when consistent with her source bearing.",
+        "responsive gaze."
+      ]
+    ]
+  },
+  {
+    "family": "Gentle",
+    "age": 39,
+    "id": "FACE-REUSE-GENTLE-AGE39-DUAL-REF-04-RESTORED-UPRIGHT-02",
+    "sha256": "7af27a3193b6e86698d2e0a3b4e2c4456914a2ca6309d61c3ec713cfc0c368c4",
+    "parent_pre_bareface_id": "FACE-REUSE-GENTLE-AGE39-DUAL-REF-04",
+    "parent_pre_bareface_sha256": "7b0287661c27f4a0a54af54eee9cb2aa1a1f5b99d3eb690050e8a73b1f49e95f",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ],
+      [
+        "responsive gaze and naturally inclined head when consistent with her source bearing.",
+        "responsive gaze."
+      ]
+    ]
+  },
+  {
+    "family": "Gentle",
+    "age": 51,
+    "id": "FACE-REUSE-GENTLE-AGE51-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "164251ab939661eafbc2ce1a94aeb45a8ce3d24400c03b0014f640182dbe4c84",
+    "parent_pre_bareface_id": "FACE-REUSE-GENTLE-AGE51-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "437a5ee3acb68304caabd2633bf92e98f0c54d04aebae508cbe98a811c8645f5",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ],
+      [
+        "responsive gaze and naturally inclined head when consistent with her source bearing.",
+        "responsive gaze."
+      ]
+    ]
+  },
+  {
+    "family": "Gentle",
+    "age": 63,
+    "id": "FACE-REUSE-GENTLE-AGE63-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "93db61d3c6cf216d6fc5cbd5820d3c12acbe4a279d75e5a3e2a10b7276f31036",
+    "parent_pre_bareface_id": "FACE-REUSE-GENTLE-AGE63-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "5c23eeee685d1fc682b448439d554d88a67524c82eff748a74b3da8f94aafb84",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ],
+      [
+        "responsive gaze and naturally inclined head when consistent with her source bearing.",
+        "responsive gaze."
+      ]
+    ]
+  },
+  {
+    "family": "Dignified",
+    "age": 16,
+    "id": "FACE-REUSE-DIGNIFIED-AGE16-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "733286b9fc682952437fe1cb64893a16dac657655f79219bc378b08534884c3d",
+    "parent_pre_bareface_id": "FACE-REUSE-DIGNIFIED-AGE16-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "ccb46a363125305f784f8dc50fd9af267b0e2dc79dd999d891f351b5d9b2643a",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ]
+    ]
+  },
+  {
+    "family": "Dignified",
+    "age": 26,
+    "id": "FACE-REUSE-DIGNIFIED-AGE26-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "83d98d923cf4bc21009b8b018fc90ee7a2aec1b9077ce4faa7d0ae80889ddebf",
+    "parent_pre_bareface_id": "FACE-REUSE-DIGNIFIED-AGE26-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "d0c4ce55d53cf4f7ca00fe18d71fc935008a2fc6addce1aec50c9f197523e4ee",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ]
+    ]
+  },
+  {
+    "family": "Dignified",
+    "age": 39,
+    "id": "FACE-REUSE-DIGNIFIED-AGE39-DUAL-REF-04-RESTORED-UPRIGHT-02",
+    "sha256": "d607461901e29b5a7299d1ce4c0a3c6041363207ab48c317e905dd47178e09c4",
+    "parent_pre_bareface_id": "FACE-REUSE-DIGNIFIED-AGE39-DUAL-REF-04",
+    "parent_pre_bareface_sha256": "1af4c77ff978bcab63ad3bdca910a86fedfc140707c857e109c994d8569fa810",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ]
+    ]
+  },
+  {
+    "family": "Dignified",
+    "age": 51,
+    "id": "FACE-REUSE-DIGNIFIED-AGE51-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "d3d650efbb1c07ceb146c8268c39b471bde939fc981eb65c6bac41ffa09635f6",
+    "parent_pre_bareface_id": "FACE-REUSE-DIGNIFIED-AGE51-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "4af6ffb55c3b21179265bc859374b898517e0a4e6f269f2744e1fda288888b6c",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ]
+    ]
+  },
+  {
+    "family": "Dignified",
+    "age": 63,
+    "id": "FACE-REUSE-DIGNIFIED-AGE63-DUAL-REF-01-RESTORED-UPRIGHT-02",
+    "sha256": "2725f1b3b36c4351eb44d6d916414bad72a2c473e0254795b043dadf27c8b1aa",
+    "parent_pre_bareface_id": "FACE-REUSE-DIGNIFIED-AGE63-DUAL-REF-01",
+    "parent_pre_bareface_sha256": "18b527062ffae338d3f755eb0590d3e40d9add612ad582d633138c2ae1ab3580",
+    "exact_parent_reversal": true,
+    "changed_from_pre_bareface": [
+      "head-alignment terms",
+      "tracking ID"
+    ],
+    "restored_original_painting_skin_block_exactly": true,
+    "rendered": false,
+    "scoped_replacements": [
+      [
+        "natural asymmetry and recognizable head bearing",
+        "natural asymmetry"
+      ],
+      [
+        "Keep the independent person and natural head bearing from IMAGE 1.",
+        "Keep the independent facial identity from IMAGE 1; do not copy its head angle."
+      ],
+      [
+        "Preserve her natural head/shoulder angle.",
+        "Head upright, face forward, eyes level, chin neutral, neck relaxed. No head tilt or chin lift. Relaxed shoulders; personality stays in expression."
+      ]
+    ]
+  }
+]
