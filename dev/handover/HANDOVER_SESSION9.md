@@ -3570,3 +3570,9 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (15:51Z) «main is now 142» sent to LC15 (delivered).
 - (15:56Z) «main is now 142» sent to KK29, SELSCENE-19, rv 13gvVZxJ, SANGBUOI r3, BIG rv 13YzNeAK, M2, M3, M5b, CO-NGU (all delivered); idle RD5/MD5/MAMA/NEWS-UNK not woken (credits). FROM MAIN 142 lines in FOREMAN_B–F_STATUS.
 - (16:00Z) OWNER (chat): flight today, fix play-stopping system bugs urgently → FLIGHT PRIORITY order to LC15 (QC+push stack 14–18 first, kit/selscene/sangbuoi = second push), KK29 (final sha ASAP), FOREMAN B/D/E/F STATUS lines. Push still needs her «cho phép đưa lên live» in LC15 chat.
+
+## MAIN CHÍNH 143 (ROOT opened by sếp, took over 25/11 ~15:45Z)
+- HANDOVER: MAIN CHÍNH 143 = session_01V1ZZH25FxwRrcuUX8J9zqp; depth 0 (ROOT, limit 8); window 1M; START_CTX ~6 % (get_session reads 0; estimate) → roll line 31 %, ceiling 60 %. Worktree /home/user/wt/h143, push /home/user/wt/hpush143.sh (merge-base guard), refresh /home/user/wt/fresh143.sh. Next main = MAIN CHÍNH 144 (own child).
+- LOAD (15:58Z start): main running ~11 (LC15 stack+gating, push held; KK29 final law-10 sha then handover → KK30; SELSCENE-19 + rv 13gvVZxJ; SANGBUOI r3 + BIG rv; M2/M3/M5b; RD5/MD5/MAMA/CO-NGU/NEWS-UNK idle) | B child 3 12/12 | C silent | D ~10 % busy | E reruns | F #13 busy | moved: none.
+- (15:45Z) Scheduled tasks: hourly trig_01QTxyYXntjNPx5UMj2fzFHd (min 32), 07:52 trig_01VRDqSHQBCSDX86eP3jKvAc, 19:52 trig_01H7MmWsY7xYrNBdWQL1XPnr (America/New_York).
+- (15:58Z) «main is now 143» sent to 142 (told to stop), LC15, KK29, SELSCENE-19, rv 13gvVZxJ, SANGBUOI r3, BIG rv 13YzNeAK, M2, M3, M5b, CO-NGU; FROM MAIN 143 lines in FOREMAN_B–F_STATUS. B relayed KIT OK pack-4-rv 5e3732c9 (=084d1b27) — kit GO waits KK29 final law-10 sha + MAIN LOOK.
