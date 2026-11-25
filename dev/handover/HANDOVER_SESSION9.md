@@ -3661,3 +3661,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - 21:52Z OWNER: «Bàn bài» frameless kit still not LIVE → OD row added; KK32 top priority = kitHand frameless stage for every event-choice screen (pair + video of «Tân quân lập uy · Chương 2» first).
 - 22:01Z M2b: on 351122ba 20:23–22:00Z only 2 evening SOFTLOCK-RELOADs (21:01Z Y13 m1 w1 b3; 21:59Z Y14 m1 w0 b3) vs 5/h on f21a1042; no save rollback since switch. Now on LIVE 5e013076 (r4) → evening softlocks from here = r4 data.
 - 22:05Z: OWNER: NHV full + videos by landing (~03:00Z). Opened ART-NHV session_01V1ZZH4P2cD99JL9Qr4NF5Y + NHV-BUILD session_01V1ZZH11unC8raKPPDux51Y (opus, MAIN children). KK32 videos by ~02:30Z.
+- 22:04Z: PROMO-ROOT session_01V1ZZGzXMYdRFgHB23g5qvC (opus) opened for F's «no promotion in whole lives» (root + whole-family fix or 2 options for sếp), due ~03:00Z. Landing-pack check trig_01DQhTJFZ56mmEgiSiXG8wyu at 02:35Z.
