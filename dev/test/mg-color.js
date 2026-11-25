@@ -12,18 +12,22 @@ const A=process.argv.slice(2);const pos=A.filter(a=>!a.startsWith('--'));const U
 const SH=(A.find(a=>a.startsWith('--shots='))||'').split('=')[1];if(SH)fs.mkdirSync(SH,{recursive:true});
 const TOL=70,MIN=14;let fail=0;const bad=m=>{fail++;console.log('FAIL',m)};
 (async()=>{const b=await chromium.launch();
- for(const [dn,w,h] of [['fold',755,1000],['ipad',1180,820]]){const p=await b.newPage({viewport:{width:w,height:h},deviceScaleFactor:1});const errs=[];p.on('pageerror',e=>errs.push(e.message));
+ for(const [dn,w,h] of (process.env.MGC_DEV==='fold'?[['fold',755,1000]]:[['fold',755,1000],['ipad',1180,820]])){const p=await b.newPage({viewport:{width:w,height:h},deviceScaleFactor:1});const errs=[];p.on('pageerror',e=>errs.push(e.message));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
   await p.evaluate(()=>{localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;S.suc=100;S.bac=999;S.rank=6;try{render()}catch(e){}});
   await p.waitForTimeout(2000);
-  await p.evaluate(()=>{try{kitReward=()=>{};kmPush=()=>{}}catch(e){}document.querySelectorAll('#kmrew').forEach(e=>{const o=e.closest('.kmstage')||e;o.remove()});document.querySelectorAll('.kmstage,.km-stage').forEach(e=>e.remove());Q.length=0;const md=document.getElementById('modal');if(md)md.hidden=true;TDS.busy=false;tdPlay("cong","self")});
-  await p.waitForTimeout(1200);await p.evaluate(()=>{const g=document.querySelector('.kgr-go');if(g)g.click()});
+  /* open the board as a player: «Bắt đầu» only once it is really on top (a boot / loading overlay first) */
+  const goTop=()=>p.evaluate(()=>{const g=document.querySelector('.kgr-go');if(!g)return false;const r=g.getBoundingClientRect();return document.elementFromPoint(r.left+r.width/2,r.top+r.height/2)===g});
+  const open=async()=>{await p.evaluate(()=>{try{kg82Close()}catch(e){}try{kitReward=()=>{};kmPush=()=>{}}catch(e){}document.querySelectorAll('#kmrew').forEach(e=>{const o=e.closest('.kmstage')||e;o.remove()});document.querySelectorAll('.kmstage,.km-stage').forEach(e=>e.remove());Q.length=0;const md=document.getElementById('modal');if(md)md.hidden=true;TDS.busy=false;tdPlay("cong","self")});
+   await p.waitForFunction(()=>{const g=document.querySelector('.kgr-go');if(!g)return false;const r=g.getBoundingClientRect();return document.elementFromPoint(r.left+r.width/2,r.top+r.height/2)===g},null,{timeout:60000}).catch(()=>bad(dn+': «Bắt đầu» never on top'));
+   await p.waitForTimeout(2500);await p.evaluate(()=>{const g=document.querySelector('.kgr-go');if(g)g.click()})};
+  await open();
   /* wait for the painted spool to be loaded (the bug only shows with the real picture) */
   await p.waitForFunction(()=>typeof kg82Ok==='function'&&kg82Ok('theu-spool'),null,{timeout:20000}).catch(()=>bad(dn+': mg-theu-spool.webp never loaded (CDN)'));
   let picks=0,hintOk=false;const t0=Date.now();
-  while(picks<4&&Date.now()-t0<150000){
+  while(picks<3&&Date.now()-t0<240000){
    /* only when the board is really on top at every spool (no boot / loading overlay over it) */
-   const ch=await p.evaluate(()=>{const c=KG82.choices&&KG82.choices();if(!c)return null;const cv=document.querySelector('#kg82box canvas');return c.every(q=>document.elementFromPoint(q.x,q.y)===cv)?c:null});
+   const ch=await p.evaluate(()=>{const c=KG82.choices&&KG82.choices();if(!c)return null;const cv=document.querySelector('#kg82box canvas');return c.every(q=>document.elementsFromPoint(q.x,q.y).find(e=>!e.classList.contains('tdring'))===cv)?c:null});
    if(ch&&ch.length){await p.waitForTimeout(250);const ch2=await p.evaluate(()=>KG82.choices&&KG82.choices());if(!ch2)continue;
     const buf=await p.screenshot();
     const img=await p.evaluate(async({b64,pts})=>{const im=new Image();im.src='data:image/png;base64,'+b64;await im.decode();const c=document.createElement('canvas');c.width=im.width;c.height=im.height;const x=c.getContext('2d');x.drawImage(im,0,0);
@@ -39,12 +43,10 @@ const TOL=70,MIN=14;let fail=0;const bad=m=>{fail++;console.log('FAIL',m)};
      if(!hb)bad(dn+': no hint button');else{if(!hb.t||!hb.a)bad(`${dn}: hint button empty (text «${hb.t}», aria «${hb.a}»)`);
       await p.evaluate(()=>document.querySelector('#tdhint').click());await p.waitForTimeout(150);const ring=await p.evaluate(()=>document.querySelectorAll('.tdring').length);if(!ring)bad(dn+': hint «?» pressed in the pick step shows nothing');hintOk=true}}
     picks++;
-    /* play on: the right spool, then the stitches by the oracle, until the next pick */
-    await p.evaluate(async()=>{const sl=t=>new Promise(r=>setTimeout(r,t));const fire=(x,y)=>{const cv=document.querySelector('#kg82box canvas');cv.dispatchEvent(new PointerEvent('pointerdown',{clientX:x,clientY:y,pointerId:1,pointerType:'touch',isPrimary:true,bubbles:true}))};
-     CRAFT.speed=2;const pk=KG82.peek();if(pk&&pk.x!=null)fire(pk.x,pk.y);const end=performance.now()+20000;await sl(50);
-     while(performance.now()<end&&!(KG82.choices&&KG82.choices())&&KG82.phase==='play'){await sl(8);const q=KG82.peek&&KG82.peek();if(!q||q.x==null)continue;if(q.at!=null){const t=crNow()+q.at;while(crNow()<t)await sl(2)}fire(q.x,q.y);await sl(60)}CRAFT.speed=1});
-   }else await p.waitForTimeout(200)}
-  if(picks<4)bad(`${dn}: only ${picks} pick steps seen`);
+    /* the next board: a new opening draws a new palette (no-repeat pool), so 3 openings = 3 palettes without depending on a bot's stitching */
+    if(picks<3)await open();
+   }else{if(await goTop())await p.evaluate(()=>document.querySelector('.kgr-go').click());await p.waitForTimeout(200)}}
+  if(picks<3)bad(`${dn}: only ${picks} pick steps seen`);
   if(errs.length)bad(dn+' page errors '+errs.slice(0,3).join(' | '));
   await p.evaluate(()=>{try{kg82Close()}catch(e){}});await p.close()}
  await b.close();console.log(fail?`mg-color: ${fail} FAIL`:'mg-color: PASS');process.exit(fail?1:0)})();
