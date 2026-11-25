@@ -3219,3 +3219,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (00:14Z) KK24 r3: mucluc-kit 09e7b6e6 (rebuilt; ktop-sticky now FAILs r1/PASSes r3) + tntile 909be531 (rebuilt; kit-skillacts Fold flaky env) → «FOR FOREMAN B» posted 926a3101; LC12 told. KK24 next: B KIT REQUEST kitScene old-fade strips kscn-on.
 - (00:18Z) KK24 KIT READY kit-scene-fade 14e66f43 (B request) → FOREMAN_B_STATUS line. KK24 told SELSCENE-16 replaces 15.
 - (00:23Z) RV viecnho BIG PASS 89ef52f9 (coop 142/142, quickcheck PASS, name-mask 0) → LC12 step 9. Open for sếp only: portrait narrowing vs OD 18/11 «figure never shrinks» (asked her 23:55Z).
+## MAIN CHÍNH 129 → MAIN CHÍNH 130 HANDOVER (25/11 ~00:25Z): dev/handover/TAKEOVER_MAIN_130.md (ctx 36 % at roll)
