@@ -96,7 +96,7 @@ function k61Kind(e){if(!S||!e)return"";if((rivals||[]).includes(e))return"consor
  if((S.men||[]).includes(e))return"man";if(e.isMin)return"off";if(allKids().some(([k])=>k===e))return"kid";
  if(e.role==="maid"||(rivals||[]).some(v=>v.maid===e)||e===S.maid)return(e.age||BAL.ageMin)>=BAL.ageBand[1]||e.old?"mama":"maid";if(e.role==="eunuch"||e.role==="eun")return"eun";return"other"}
 function k61Desc(e){const k=k61Kind(e);
- if(k==="consort"){if(e.out)return"một vị phế phi";if(e.queen)return"Hoàng hậu";return`một vị phi tần áo bậc ${RANKS[e.rank].n}`}
+ if(k==="consort"){if(e.out)return"một vị phế phi";if(e.queen)return"Hoàng hậu";return`một vị ${RANKS[e.rank].n}`}/* owner 22:14Z: the rank title she sees — «một vị Thường tại», never «chưa quen biết» / «áo bậc» */
  if(k==="emp")return"một nam nhân áo vàng";if(k==="th")return"một quý phụ mặc phượng bào";if(k==="tq")return"một vị thái giám áo bậc Tổng quản";
  if(k==="eun")return"một vị thái giám";if(k==="phys")return"một vị thái y";if(k==="maid")return"một vị cung nữ";if(k==="mama")return"một vị ma ma";if(k==="off")return"một vị quan";
  if(k==="kid")return e.sex==="m"?"một hoàng tử":"một công chúa";
@@ -211,7 +211,7 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-k61]");if(
 function k61Hide(fn,st){const L0=liveRivals;liveRivals=function(q){return L0(q).filter(v=>k61St(v)>=st)};try{return fn()}finally{liveRivals=L0}}
 function k61Unknown(st){return (rivals||[]).filter(v=>v.alive&&!v.out&&k61St(v)<(st||2))}
 (function(){const r0=relHTML;relHTML=function(){if(!S||!S.known)return r0.apply(this,arguments);const h=k61Hide(()=>r0.apply(this,arguments),3);const n=k61Unknown(3).length;
- return h+(n?`<p class="past">Còn ${n} phi tần ngươi chưa gặp mặt: chưa xem được quan hệ. Gặp mặt trò chuyện, hỏi người hầu hoặc dò la để biết.</p>`:"")}})();
+ return h+(n?`<p class="past">Còn ${n} phi tần chưa gặp mặt: chưa xem được quan hệ. Gặp mặt trò chuyện, hỏi người hầu hoặc dò la để biết.</p>`:"")}})();
 (function(){if(typeof facHTML!=="function")return;const f0=facHTML;facHTML=function(){if(!S||!S.known)return f0.apply(this,arguments);return k61Hide(()=>f0.apply(this,arguments),2)}})();
 /* ---- ways she gets to know people ---- */
 /* someone speaking to her in an event (a dialog she must answer) */
