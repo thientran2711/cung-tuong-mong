@@ -1703,3 +1703,4 @@ cnv-exit-promo (F s5d: Xin ở lại→xuất cung 25 + cnv promotion reachabili
 robot-bugs-m1 (M1+M3: title blank 0-tappable, death/reload JS errs, exam strip no board, HUD Kiếp thứ hai) | review/robot-bugs-m1 | session_01V1ZZGzi8hGNhxUQKvbGBbx | RUNNING | 2026-11-25T08:45Z (MAIN 137)
 coop-night LIVE regression (jdayq in co-op rooms) | review/coop-night-live | session_01N1tNP4dE81jb4QnAnmVdTX (FOREMAN B) | RUNNING | 2026-11-25T09:16Z
 | F flight2-coop1g co-op pair life (host Fold / guest iPad, seed 7002, harness d5545202; successor of A-COOP session_01UV1Szhju4ofdVDmJdWCiJk, VGPR VOID) | dev/handover/robot/flight2-coop1g.* | FOREMAN F #8 | session_01UV1SziX7QGW5M2nktXq8Av | RUNNING | 2026-11-25T09:18Z |
+| F flight2-s9 life (slot 9 thd_tho cautious 2866901045, Fold, harness d5545202; reuses s1d seat) | dev/handover/robot/flight2-s9.* | FOREMAN F #9 | session_01UV1SziCUE23TBF3kKE65D9 | RUNNING | 2026-11-25T09:30Z |
