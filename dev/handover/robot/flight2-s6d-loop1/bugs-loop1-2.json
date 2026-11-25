@@ -1,0 +1,329 @@
+{
+ "life": "flight2-s6d",
+ "harness": "63f87747",
+ "bugs": [
+  {
+   "k": "game|dialog queue holds 20 copies of «Tâm trạng · Quý nhân Đường Hân Duyệt» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 20 copies of «Tâm trạng · Quý nhân Đường Hân Duyệt» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 68,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 26,
+    "w": 2,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 17 copies of «Tâm trạng · Quý nhân Đường Hân Duyệt» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 17 copies of «Tâm trạng · Quý nhân Đường Hân Duyệt» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 73,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 26,
+    "w": 2,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 12 copies of «Tâm trạng · Quý nhân Phó Ngọc Huyền» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 12 copies of «Tâm trạng · Quý nhân Phó Ngọc Huyền» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 86,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 26,
+    "w": 2,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 12 copies of «Tâm trạng · Quý nhân Đường Hân Duyệt» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 12 copies of «Tâm trạng · Quý nhân Đường Hân Duyệt» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 95,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 26,
+    "w": 2,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 6 copies of «Tâm trạng · Quý nhân Phó Ngọc Huyền» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 6 copies of «Tâm trạng · Quý nhân Phó Ngọc Huyền» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 102,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 26,
+    "w": 2,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 8 copies of «Tâm trạng · Quý nhân Đường Hân Duyệt» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 8 copies of «Tâm trạng · Quý nhân Đường Hân Duyệt» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 110,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 26,
+    "w": 2,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "game|dialog queue holds 5 copies of «Tâm trạng · Quý nhân Đường Hân Duyệt» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 5 copies of «Tâm trạng · Quý nhân Đường Hân Duyệt» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 115,
+   "S": {
+    "dead": false,
+    "y": 2,
+    "t": 26,
+    "w": 2,
+    "b": 3,
+    "age": 19,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+   "n": 1,
+   "at": 837,
+   "shot": "/home/user/out6d/shots-flight2-s6d/loop-1.png",
+   "dump": "/home/user/out6d/shots-flight2-s6d/loop-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 29,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   },
+   "buttons": [
+    "Ô lưu",
+    "Xem bản thân",
+    "Sắc50Tài63Tâm cơ34Đức73Danh2Sủng0",
+    "Bạc59Sức100/100",
+    "Buổi tối, còn 0 khắc",
+    "Lãnh cung",
+    "mưa rào",
+    "Quẻ Trung (Con cái)",
+    "Tâm trạngBình thản-6",
+    "Tin báo",
+    "Về Trường Môn viện",
+    "Phế phi · lãnh cungLiêu Ngọc Thù"
+   ],
+   "trace": [
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lãnh cung»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «mưa rào»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hoàng tự»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tâm trạngBình thản-6»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Người lạ»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao thiệpGiao thiệpDò hỏi gia thếRất vữngTốn1 khắ»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Người lạ»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Người được sai đi»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mục tiêu chương (có mới)»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tin báo: 1 tin mới»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Dư đồ»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Phế phi · lãnh cungLiêu Ngọc Thù»",
+    "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Hậu cung»"
+   ]
+  },
+  {
+   "k": "game|dialog queue holds 3 copies of «Tin chờ người sai đi» (each close pops one; looks like a dead ✕)",
+   "type": "game",
+   "msg": "dialog queue holds 3 copies of «Tin chờ người sai đi» (each close pops one; looks like a dead ✕)",
+   "n": 1,
+   "at": 883,
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 29,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   }
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on .dlg «Danh hiệu»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on .dlg «Danh hiệu»",
+   "n": 1,
+   "at": 893,
+   "shot": "/home/user/out6d/shots-flight2-s6d/loop-2.png",
+   "dump": "/home/user/out6d/shots-flight2-s6d/loop-2-dump.json",
+   "S": {
+    "dead": false,
+    "y": 3,
+    "t": 29,
+    "w": 1,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Diêu Hải Lan"
+   },
+   "buttons": [
+    "Lui",
+    "Mục tiêu",
+    "Danh hiệu 2/35",
+    "Thiên mệnh",
+    "Đổi phần thưởng «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúchọn một: Thêm Sủng hay Sủng d",
+    "Đeo «Khúc nhạc tri âm»TốnkhôngĐượckhôngGhi chúchọn một: Thêm Sắc hay Phi tần quý mến!",
+    "Tháo danh hiệuTốnkhôngĐượcSủng +1"
+   ],
+   "trace": [
+    ".dlg «Tin chờ người sai đi» «Lui»",
+    ".dlg «Tin chờ người sai đi» «Lui»",
+    ".dlg «Tin báo» «Lui»",
+    ".dlg «Chương 4 · Danh hiệu Tài nữ» «Danh hiệu 2/35»",
+    ".dlg «Danh hiệu» «Mục tiêu»",
+    ".dlg «Chương 4 · Danh hiệu Tài nữ» «Mục tiêu»",
+    ".dlg «Chương 4 · Danh hiệu Tài nữ» «Mục tiêu»",
+    ".dlg «Chương 4 · Danh hiệu Tài nữ» «Mục tiêu»",
+    ".dlg «Chương 4 · Danh hiệu Tài nữ» «Thiên mệnh»",
+    ".dlg «Thiên mệnh» «Mục tiêu»",
+    ".dlg «Chương 4 · Danh hiệu Tài nữ» «Danh hiệu 2/35»",
+    ".dlg «Danh hiệu» «Thiên mệnh»",
+    ".dlg «Thiên mệnh» «Danh hiệu 2/35»",
+    ".dlg «Danh hiệu» «Mục tiêu»",
+    ".dlg «Chương 4 · Danh hiệu Tài nữ» «Danh hiệu 2/35»",
+    ".dlg «Danh hiệu» «Thiên mệnh»",
+    ".dlg «Thiên mệnh» «Danh hiệu 2/35»",
+    ".dlg «Danh hiệu» «Danh hiệu 2/35»",
+    ".dlg «Danh hiệu» «Thiên mệnh»",
+    ".dlg «Thiên mệnh» «Danh hiệu 2/35»"
+   ]
+  }
+ ],
+ "trace_tail": [
+  [
+   888,
+   ".dlg «Danh hiệu» «Mục tiêu»"
+  ],
+  [
+   889,
+   ".dlg «Chương 4 · Danh hiệu Tài nữ» «Mục tiêu»"
+  ],
+  [
+   889,
+   ".dlg «Chương 4 · Danh hiệu Tài nữ» «Mục tiêu»"
+  ],
+  [
+   889,
+   ".dlg «Chương 4 · Danh hiệu Tài nữ» «Mục tiêu»"
+  ],
+  [
+   889,
+   ".dlg «Chương 4 · Danh hiệu Tài nữ» «Thiên mệnh»"
+  ],
+  [
+   890,
+   ".dlg «Thiên mệnh» «Mục tiêu»"
+  ],
+  [
+   890,
+   ".dlg «Chương 4 · Danh hiệu Tài nữ» «Danh hiệu 2/35»"
+  ],
+  [
+   890,
+   ".dlg «Danh hiệu» «Thiên mệnh»"
+  ],
+  [
+   891,
+   ".dlg «Thiên mệnh» «Danh hiệu 2/35»"
+  ],
+  [
+   891,
+   ".dlg «Danh hiệu» «Mục tiêu»"
+  ],
+  [
+   891,
+   ".dlg «Chương 4 · Danh hiệu Tài nữ» «Danh hiệu 2/35»"
+  ],
+  [
+   891,
+   ".dlg «Danh hiệu» «Thiên mệnh»"
+  ],
+  [
+   892,
+   ".dlg «Thiên mệnh» «Danh hiệu 2/35»"
+  ],
+  [
+   892,
+   ".dlg «Danh hiệu» «Danh hiệu 2/35»"
+  ],
+  [
+   892,
+   ".dlg «Danh hiệu» «Thiên mệnh»"
+  ],
+  [
+   893,
+   ".dlg «Thiên mệnh» «Danh hiệu 2/35»"
+  ],
+  [
+   893,
+   ".dlg «unstick Lui»"
+  ],
+  [
+   894,
+   ".dlg «Tin chờ người sai đi» «Lui»"
+  ],
+  [
+   895,
+   ".dlg «Tin báo» «Lui»"
+  ],
+  [
+   897,
+   ".dlg «Lịch tháng» «Lui»"
+  ]
+ ]
+}
