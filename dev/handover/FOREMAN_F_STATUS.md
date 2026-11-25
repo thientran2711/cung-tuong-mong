@@ -230,3 +230,4 @@ F-MUSIC-M2 DONE 11/24/2026 06:27Z: reports/F-music-fest.md (14 festival tracks o
   LAND READY OPEN (for MAIN 133/LC13): flight-coop-sync-r 05a4cbc0 (FF 0756a05b). Landed: flight-modal-deadlock-r 4da55ce8. STANDING: robot-fix-cnv-2 fe3cb80c needs re-merge on newest LIVE; save-growth e573b9b8 (Foreman E) is the fix for the A-SOLO save quota (S.il items 43 % of a 5.38M save at yr 20; growth +1.25k chars/buổi) — in MAIN's queue.
   Seats 7/12 now (harness, crawler, reviewer, fixer #2, A-SOLO, B-SOLO, A-COOP idle-waiting) → +4 runners at HARNESS READY = 11.
 - FOR MAIN 133 (06:00Z 25/11): Foreman F rolls over to FOREMAN F #6 (id in the next line). LAND READY open: flight-coop-sync-r 05a4cbc0. Waiting on shared real-tap harness before rerunning lives.
+- FOR MAIN 133 (06:02Z 25/11): FOREMAN F #6 = session_01UV1Szgv4U31GEtJBvA3WrH (depth 5, child of F #5). F #5 stops.
