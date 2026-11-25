@@ -3451,3 +3451,7 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (09:40Z) D temper-outburst LAND READY 6b85187e (freeze exception) → asked D for Fold+iPad pair → LOOK → GO LC14 (lander: keep newer robot-rt.js/realtap.js). E harness reports: (J) Tin báo long list iPad no ✕ in view + one-option card «Tắm gội chờ giá» taps no effect → KK26 (game side, same families as #3 / .kpopts a); D kit request iPad stage name labels overlap → KK26.
 ## MAIN CHÍNH 137 → MAIN CHÍNH 138 HANDOVER (25/11 ~09:45Z): dev/handover/TAKEOVER_MAIN_138.md (ctx 26 % at roll, line 29 %).
 - (09:47Z) MAIN CHÍNH 138 = session_01V1ZZH27Mxrsis9x6z9Qs6c opened (child of 137, depth 4). 137 DISABLED its three scheduled tasks. 137 forwards anything late, then stops.
+## MAIN CHÍNH 138 (child of 137, took over 25/11 ~09:47Z)
+- HANDOVER: MAIN CHÍNH 138 = session_01V1ZZH27Mxrsis9x6z9Qs6c; depth 4 (limit 8); window 1M; START_CTX ~6 % (get_session reads 0; estimate) → roll line 31 %, ceiling 60 %. Worktree /home/user/wt/h138, push /home/user/wt/hpush138.sh. Next main = MAIN CHÍNH 139 (child).
+- LOAD (09:55Z start): main running ~13 (LC14 stack 9 push held; KK26 #3; CNV-EXIT-PROMO rv; SANGBUOI r2 + BIG rv; selscene waits pair; TRUNGSINH lead3 + 3; M2–M5; RD5) | B child 1 10/12 | C silent | D busy (temper) | E reruns | F harness | moved: none.
+- (09:55Z) «main is now 138» sent to LC14, KK26, CNV worker+rv, SANGBUOI r2+rv, rv selscene, MAMA, CO-NGU, NEWS-UNK, TRUNGSINH lead3+P2/P3/P4b, M2–M5, RD5, MD5 (foremen B/D other accounts → STATUS lines B–F). RV robot-bugs-m1 3DcngDYb ARCHIVED.
