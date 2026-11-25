@@ -61,7 +61,7 @@ KIT_SAMPLES.push(
    the odds meter is the card's own (a certain option: «Nắm chắc»; owner 19/11 ~01:48Z, kitRisk retired). */
 /* KIT §101 sample: a live event frame whose options become a hand (jkhand) */
 function kitPgHand(n){try{const W=o=>word(o);const N=["Gói bánh ú dâng Thái hậu","Xin ân cho gia đình","Theo cha mưu đại sự","Đứng ngoài, giữ mình","Hỏi Hoàng hậu","Dò la Kính sự phòng","Tặng lễ","Cáo bệnh","Chờ xem thêm","Về cung nghỉ"];
- const o=N.slice(0,n).map((x,i)=>({n:x,fx:{},x:i%3===2?`${W(20)} · thành: Danh +10 · hỏng: Sủng -4`:i%3===1?`${W(55)} · thành: Danh +3, Bạc +40 · hỏng: Sủng -4`:"tốn: 1 khắc · thành: Thái hậu thiện cảm +4"}));o[n-1].lk=()=>"Chưa đủ Danh";
+ const o=N.slice(0,n).map((x,i)=>({n:x,fx:{},x:i%3===2?`${W(20)} · thành: danh vọng lên · hỏng: mất sủng`:i%3===1?`${W(55)} · thành: được lòng Thái hậu · hỏng: bị nghi`:`${W(80)} · thành: yên ổn qua buổi`/* words only: the sample types no rule number (one-core guard, law 4) */}));o[n-1].lk=()=>"Chưa đủ Danh";
  Q.push({t:"Mẫu kit · Bàn bài",h:"<p>Tân quân lên ngôi, triều đình chia ba ngả, mỗi phe đều muốn kéo ngươi về phía mình.</p><p>Ngươi theo ai?</p>",opts:o,who:typeof pEmp==="function"?pEmp():null});showModal()}catch(e){console.error("kitPgHand",e)}}
 window.kitPgHand=kitPgHand;
 function kitPgEvOpts(){const W=o=>word(o);const O=[{n:"Gói bánh ú dâng Thái hậu",fx:{suc:-5,th:4},x:"Thái hậu thiện cảm +4"},

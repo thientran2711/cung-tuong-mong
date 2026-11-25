@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"d2847f24+","t":"2026-11-25T16:53Z","c":"kitHand: person pickers (portrait cards) stay pickers; dialog-fixed reads §101 hands (rows on the plate, Fold stacked N frame); scans 0 reg…","b":"822b3d773924","h":[{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"}]};
+window.CTM_BI={"s":"be559f81+","t":"2026-11-25T17:21Z","c":"kitHand KIT §101 + kit page sample (kitPgHand); paint-ready deal (decoded pictures first, survives a frame rebuild); no ripple/seal re-plac…","b":"252efa4efcd4","h":[{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -56921,7 +56921,7 @@ KIT_SAMPLES.push(
    the odds meter is the card's own (a certain option: «Nắm chắc»; owner 19/11 ~01:48Z, kitRisk retired). */
 /* KIT §101 sample: a live event frame whose options become a hand (jkhand) */
 function kitPgHand(n){try{const W=o=>word(o);const N=["Gói bánh ú dâng Thái hậu","Xin ân cho gia đình","Theo cha mưu đại sự","Đứng ngoài, giữ mình","Hỏi Hoàng hậu","Dò la Kính sự phòng","Tặng lễ","Cáo bệnh","Chờ xem thêm","Về cung nghỉ"];
- const o=N.slice(0,n).map((x,i)=>({n:x,fx:{},x:i%3===2?`${W(20)} · thành: Danh +10 · hỏng: Sủng -4`:i%3===1?`${W(55)} · thành: Danh +3, Bạc +40 · hỏng: Sủng -4`:"tốn: 1 khắc · thành: Thái hậu thiện cảm +4"}));o[n-1].lk=()=>"Chưa đủ Danh";
+ const o=N.slice(0,n).map((x,i)=>({n:x,fx:{},x:i%3===2?`${W(20)} · thành: danh vọng lên · hỏng: mất sủng`:i%3===1?`${W(55)} · thành: được lòng Thái hậu · hỏng: bị nghi`:`${W(80)} · thành: yên ổn qua buổi`/* words only: the sample types no rule number (one-core guard, law 4) */}));o[n-1].lk=()=>"Chưa đủ Danh";
  Q.push({t:"Mẫu kit · Bàn bài",h:"<p>Tân quân lên ngôi, triều đình chia ba ngả, mỗi phe đều muốn kéo ngươi về phía mình.</p><p>Ngươi theo ai?</p>",opts:o,who:typeof pEmp==="function"?pEmp():null});showModal()}catch(e){console.error("kitPgHand",e)}}
 window.kitPgHand=kitPgHand;
 function kitPgEvOpts(){const W=o=>word(o);const O=[{n:"Gói bánh ú dâng Thái hậu",fx:{suc:-5,th:4},x:"Thái hậu thiện cảm +4"},
@@ -96486,6 +96486,7 @@ function kitHandDrop(g){if(!g)return;g.querySelectorAll(":scope>button.klift").f
 function kitHandLift(b){const g=b.parentElement;if(!g||g.__khBusy)return;if(b.classList.contains("klift"))return;kitHandDrop(g);b.classList.add("klift");b.setAttribute("aria-pressed","true");kitHandPlate(b)}
 /* choose: the card flies up a little and fades, the rest sink; then the frame's own choose path (a synthetic click = detail 0, passes the two-tap gate) */
 function kitHandChoose(b){const g=b.parentElement;if(!g||g.__khBusy)return;g.__khBusy=1;window.__khFlyT=performance.now();const go=()=>{g.__khBusy=0;const z=g.closest(".dlg")&&g.closest(".dlg").querySelector(":scope>.khplate");if(z)z.hidden=true;if(b.isConnected)b.click()};
+ {const z0=g.closest(".dlg")&&g.closest(".dlg").querySelector(":scope>.khplate");if(z0)z0.hidden=true}/* the plate leaves with the choice (it stayed up during the fly) */
  if(kitHandStill()||!b.animate){go();return}
  const rot=b.style.getPropertyValue("--kr")||"0deg",lift=parseFloat(getComputedStyle(g).getPropertyValue("--khlift"))||0,ms=KIT_HAND.flyMs;
  b.animate([{transform:`translateY(${-lift}px) rotate(0deg)`,opacity:1},{transform:`translateY(${-lift-46}px) scale(1.12)`,opacity:0}],{duration:ms,easing:"cubic-bezier(.3,.6,.4,1)",fill:"forwards"});
@@ -98452,7 +98453,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="822b3d773924";window.CTM_BUILD=BUILD;
+const BUILD="252efa4efcd4";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

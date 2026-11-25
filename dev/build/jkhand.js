@@ -52,6 +52,7 @@ function kitHandDrop(g){if(!g)return;g.querySelectorAll(":scope>button.klift").f
 function kitHandLift(b){const g=b.parentElement;if(!g||g.__khBusy)return;if(b.classList.contains("klift"))return;kitHandDrop(g);b.classList.add("klift");b.setAttribute("aria-pressed","true");kitHandPlate(b)}
 /* choose: the card flies up a little and fades, the rest sink; then the frame's own choose path (a synthetic click = detail 0, passes the two-tap gate) */
 function kitHandChoose(b){const g=b.parentElement;if(!g||g.__khBusy)return;g.__khBusy=1;window.__khFlyT=performance.now();const go=()=>{g.__khBusy=0;const z=g.closest(".dlg")&&g.closest(".dlg").querySelector(":scope>.khplate");if(z)z.hidden=true;if(b.isConnected)b.click()};
+ {const z0=g.closest(".dlg")&&g.closest(".dlg").querySelector(":scope>.khplate");if(z0)z0.hidden=true}/* the plate leaves with the choice (it stayed up during the fly) */
  if(kitHandStill()||!b.animate){go();return}
  const rot=b.style.getPropertyValue("--kr")||"0deg",lift=parseFloat(getComputedStyle(g).getPropertyValue("--khlift"))||0,ms=KIT_HAND.flyMs;
  b.animate([{transform:`translateY(${-lift}px) rotate(0deg)`,opacity:1},{transform:`translateY(${-lift-46}px) scale(1.12)`,opacity:0}],{duration:ms,easing:"cubic-bezier(.3,.6,.4,1)",fill:"forwards"});
