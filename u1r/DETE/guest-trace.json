@@ -1,0 +1,3307 @@
+{
+ "job": {
+  "id": "coop-rt-u1p1-r7-guest-k1",
+  "origin": null,
+  "road": null,
+  "bot": "sens",
+  "seed": 1172,
+  "dev": "ipad",
+  "url": "http://127.0.0.1:8080/play.html"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "c4163a93",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 1,
+  "unstick": [
+   {
+    "at": 170,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 195,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 207,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 217,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 228,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 239,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 250,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 261,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 272,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 283,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 294,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 305,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 316,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 327,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 338,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 349,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 360,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 371,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 382,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 393,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 404,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 415,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 426,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 437,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 448,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 459,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 487,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 501,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 512,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 523,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 534,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 545,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 556,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 567,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 578,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 589,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 600,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 613,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 624,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 639,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 650,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 661,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 672,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 683,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 694,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 705,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 716,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 727,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 738,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 749,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 760,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dực Khôn cung · Mặc Hương trai · Ở đây còn 1 người"
+   },
+   {
+    "at": 795,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 802,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 808,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 815,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 822,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 828,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 835,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 841,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 848,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 855,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 862,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 868,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 875,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 882,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 888,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 895,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 902,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 908,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 915,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 922,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 928,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 935,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 942,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 948,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 955,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 961,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 968,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 975,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 982,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 988,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 995,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1002,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1008,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1015,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1022,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1028,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1035,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1042,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1048,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1055,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1062,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1076,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1082,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1089,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1096,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1102,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1109,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1116,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1122,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1129,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1136,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1143,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1149,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1156,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1162,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1169,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1176,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1182,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1189,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1195,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1203,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1209,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1216,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1223,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1229,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1236,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1242,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1249,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1256,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1262,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1269,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1276,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1282,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1289,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1296,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1302,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1309,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1315,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1322,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1329,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1335,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1342,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1349,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1355,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1362,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1368,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1376,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1387,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1394,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1400,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1407,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1414,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1420,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1427,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1434,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1440,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1447,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1454,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1461,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1467,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1474,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1480,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1487,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1493,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1500,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1507,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1514,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1520,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1527,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1533,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1540,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1546,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1553,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1559,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1566,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1573,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1579,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1586,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1592,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1599,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1606,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1612,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1619,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1625,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1632,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1639,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1645,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1652,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1658,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1665,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1672,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1678,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1685,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1692,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1698,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1705,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1712,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1718,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1725,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1731,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1738,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1744,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1751,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1758,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1764,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1771,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1777,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1784,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1791,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1797,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1804,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1811,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1817,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1824,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1830,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1837,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1844,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1850,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1857,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1863,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1870,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1877,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1883,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1890,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1896,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1903,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1909,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1916,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1923,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1929,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1936,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1943,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1949,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1956,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1962,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1969,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1976,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1982,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1989,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 1996,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2002,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2009,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2015,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2022,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2029,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2035,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2042,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2048,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2055,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2062,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2068,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2075,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2082,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2088,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2095,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2102,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2108,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2115,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2122,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2128,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2135,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2142,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2148,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2155,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2161,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2168,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2175,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2181,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2188,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2195,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2201,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2208,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2214,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2221,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2228,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2234,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2241,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2248,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2254,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2261,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2267,
+    "lvl": 1,
+    "layer": "#ktut",
+    "title": ""
+   },
+   {
+    "at": 2281,
+    "lvl": 3,
+    "layer": "#ktut",
+    "title": ""
+   }
+  ],
+  "slice": null,
+  "areaTaps": 45,
+  "typed": 1
+ },
+ "life": {
+  "id": "HARNESS",
+  "type": "harness"
+ },
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "stuck|no progress 15 min on #ktut «»",
+   "type": "stuck",
+   "msg": "no progress 15 min on #ktut «»",
+   "n": 1,
+   "at": 2281,
+   "shot": "/home/user/wt/out/u1/shots-coop-rt-u1p1-r7-guest-k1/stuck-1.png",
+   "save": null,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Doãn Nghiên Thu"
+   },
+   "buttons": [
+    ""
+   ]
+  },
+  {
+   "type": "harness",
+   "msg": "runner error: page.waitForTimeout: Target page, context or browser has been closed",
+   "n": 1
+  }
+ ],
+ "dead": [],
+ "saves": [],
+ "buoi": 9,
+ "steps": 7590,
+ "status": [],
+ "_snapAt": 1795596711042,
+ "trace": [
+  [
+   2174,
+   "#ktut «»"
+  ],
+  [
+   2174,
+   "#ktut «»"
+  ],
+  [
+   2174,
+   "#ktut «»"
+  ],
+  [
+   2175,
+   "#ktut «»"
+  ],
+  [
+   2175,
+   "#ktut «»"
+  ],
+  [
+   2176,
+   "#ktut «»"
+  ],
+  [
+   2176,
+   "#ktut «»"
+  ],
+  [
+   2176,
+   "#ktut «»"
+  ],
+  [
+   2176,
+   "#ktut «»"
+  ],
+  [
+   2177,
+   "#ktut «»"
+  ],
+  [
+   2177,
+   "#ktut «»"
+  ],
+  [
+   2177,
+   "#ktut «»"
+  ],
+  [
+   2177,
+   "#ktut «»"
+  ],
+  [
+   2177,
+   "#ktut «»"
+  ],
+  [
+   2178,
+   "#ktut «»"
+  ],
+  [
+   2178,
+   "#ktut «»"
+  ],
+  [
+   2178,
+   "#ktut «»"
+  ],
+  [
+   2178,
+   "#ktut «»"
+  ],
+  [
+   2179,
+   "#ktut «»"
+  ],
+  [
+   2179,
+   "#ktut «»"
+  ],
+  [
+   2179,
+   "#ktut «»"
+  ],
+  [
+   2179,
+   "#ktut «»"
+  ],
+  [
+   2180,
+   "#ktut «»"
+  ],
+  [
+   2180,
+   "#ktut «»"
+  ],
+  [
+   2180,
+   "#ktut «»"
+  ],
+  [
+   2180,
+   "#ktut «»"
+  ],
+  [
+   2181,
+   "#ktut «»"
+  ],
+  [
+   2181,
+   "#ktut «»"
+  ],
+  [
+   2181,
+   "#ktut «»"
+  ],
+  [
+   2182,
+   "#ktut «»"
+  ],
+  [
+   2182,
+   "#ktut «»"
+  ],
+  [
+   2182,
+   "#ktut «»"
+  ],
+  [
+   2183,
+   "#ktut «»"
+  ],
+  [
+   2183,
+   "#ktut «»"
+  ],
+  [
+   2183,
+   "#ktut «»"
+  ],
+  [
+   2183,
+   "#ktut «»"
+  ],
+  [
+   2184,
+   "#ktut «»"
+  ],
+  [
+   2184,
+   "#ktut «»"
+  ],
+  [
+   2184,
+   "#ktut «»"
+  ],
+  [
+   2184,
+   "#ktut «»"
+  ],
+  [
+   2185,
+   "#ktut «»"
+  ],
+  [
+   2185,
+   "#ktut «»"
+  ],
+  [
+   2185,
+   "#ktut «»"
+  ],
+  [
+   2185,
+   "#ktut «»"
+  ],
+  [
+   2186,
+   "#ktut «»"
+  ],
+  [
+   2186,
+   "#ktut «»"
+  ],
+  [
+   2186,
+   "#ktut «»"
+  ],
+  [
+   2186,
+   "#ktut «»"
+  ],
+  [
+   2186,
+   "#ktut «»"
+  ],
+  [
+   2187,
+   "#ktut «»"
+  ],
+  [
+   2187,
+   "#ktut «»"
+  ],
+  [
+   2187,
+   "#ktut «»"
+  ],
+  [
+   2187,
+   "#ktut «»"
+  ],
+  [
+   2188,
+   "#ktut «»"
+  ],
+  [
+   2188,
+   "#ktut «»"
+  ],
+  [
+   2189,
+   "#ktut «»"
+  ],
+  [
+   2189,
+   "#ktut «»"
+  ],
+  [
+   2189,
+   "#ktut «»"
+  ],
+  [
+   2189,
+   "#ktut «»"
+  ],
+  [
+   2190,
+   "#ktut «»"
+  ],
+  [
+   2190,
+   "#ktut «»"
+  ],
+  [
+   2190,
+   "#ktut «»"
+  ],
+  [
+   2190,
+   "#ktut «»"
+  ],
+  [
+   2191,
+   "#ktut «»"
+  ],
+  [
+   2191,
+   "#ktut «»"
+  ],
+  [
+   2191,
+   "#ktut «»"
+  ],
+  [
+   2191,
+   "#ktut «»"
+  ],
+  [
+   2192,
+   "#ktut «»"
+  ],
+  [
+   2192,
+   "#ktut «»"
+  ],
+  [
+   2192,
+   "#ktut «»"
+  ],
+  [
+   2192,
+   "#ktut «»"
+  ],
+  [
+   2193,
+   "#ktut «»"
+  ],
+  [
+   2193,
+   "#ktut «»"
+  ],
+  [
+   2193,
+   "#ktut «»"
+  ],
+  [
+   2193,
+   "#ktut «»"
+  ],
+  [
+   2194,
+   "#ktut «»"
+  ],
+  [
+   2194,
+   "#ktut «»"
+  ],
+  [
+   2194,
+   "#ktut «»"
+  ],
+  [
+   2194,
+   "#ktut «»"
+  ],
+  [
+   2195,
+   "#ktut «»"
+  ],
+  [
+   2195,
+   "#ktut «»"
+  ],
+  [
+   2196,
+   "#ktut «»"
+  ],
+  [
+   2196,
+   "#ktut «»"
+  ],
+  [
+   2196,
+   "#ktut «»"
+  ],
+  [
+   2196,
+   "#ktut «»"
+  ],
+  [
+   2197,
+   "#ktut «»"
+  ],
+  [
+   2197,
+   "#ktut «»"
+  ],
+  [
+   2197,
+   "#ktut «»"
+  ],
+  [
+   2197,
+   "#ktut «»"
+  ],
+  [
+   2198,
+   "#ktut «»"
+  ],
+  [
+   2198,
+   "#ktut «»"
+  ],
+  [
+   2198,
+   "#ktut «»"
+  ],
+  [
+   2198,
+   "#ktut «»"
+  ],
+  [
+   2198,
+   "#ktut «»"
+  ],
+  [
+   2199,
+   "#ktut «»"
+  ],
+  [
+   2199,
+   "#ktut «»"
+  ],
+  [
+   2199,
+   "#ktut «»"
+  ],
+  [
+   2199,
+   "#ktut «»"
+  ],
+  [
+   2200,
+   "#ktut «»"
+  ],
+  [
+   2200,
+   "#ktut «»"
+  ],
+  [
+   2200,
+   "#ktut «»"
+  ],
+  [
+   2200,
+   "#ktut «»"
+  ],
+  [
+   2201,
+   "#ktut «»"
+  ],
+  [
+   2201,
+   "#ktut «»"
+  ],
+  [
+   2202,
+   "#ktut «»"
+  ],
+  [
+   2202,
+   "#ktut «»"
+  ],
+  [
+   2202,
+   "#ktut «»"
+  ],
+  [
+   2202,
+   "#ktut «»"
+  ],
+  [
+   2203,
+   "#ktut «»"
+  ],
+  [
+   2203,
+   "#ktut «»"
+  ],
+  [
+   2203,
+   "#ktut «»"
+  ],
+  [
+   2203,
+   "#ktut «»"
+  ],
+  [
+   2204,
+   "#ktut «»"
+  ],
+  [
+   2204,
+   "#ktut «»"
+  ],
+  [
+   2204,
+   "#ktut «»"
+  ],
+  [
+   2204,
+   "#ktut «»"
+  ],
+  [
+   2205,
+   "#ktut «»"
+  ],
+  [
+   2205,
+   "#ktut «»"
+  ],
+  [
+   2205,
+   "#ktut «»"
+  ],
+  [
+   2205,
+   "#ktut «»"
+  ],
+  [
+   2206,
+   "#ktut «»"
+  ],
+  [
+   2206,
+   "#ktut «»"
+  ],
+  [
+   2206,
+   "#ktut «»"
+  ],
+  [
+   2206,
+   "#ktut «»"
+  ],
+  [
+   2207,
+   "#ktut «»"
+  ],
+  [
+   2207,
+   "#ktut «»"
+  ],
+  [
+   2207,
+   "#ktut «»"
+  ],
+  [
+   2207,
+   "#ktut «»"
+  ],
+  [
+   2207,
+   "#ktut «»"
+  ],
+  [
+   2208,
+   "#ktut «»"
+  ],
+  [
+   2208,
+   "#ktut «»"
+  ],
+  [
+   2209,
+   "#ktut «»"
+  ],
+  [
+   2209,
+   "#ktut «»"
+  ],
+  [
+   2209,
+   "#ktut «»"
+  ],
+  [
+   2209,
+   "#ktut «»"
+  ],
+  [
+   2210,
+   "#ktut «»"
+  ],
+  [
+   2210,
+   "#ktut «»"
+  ],
+  [
+   2210,
+   "#ktut «»"
+  ],
+  [
+   2210,
+   "#ktut «»"
+  ],
+  [
+   2211,
+   "#ktut «»"
+  ],
+  [
+   2211,
+   "#ktut «»"
+  ],
+  [
+   2211,
+   "#ktut «»"
+  ],
+  [
+   2211,
+   "#ktut «»"
+  ],
+  [
+   2212,
+   "#ktut «»"
+  ],
+  [
+   2212,
+   "#ktut «»"
+  ],
+  [
+   2212,
+   "#ktut «»"
+  ],
+  [
+   2212,
+   "#ktut «»"
+  ],
+  [
+   2213,
+   "#ktut «»"
+  ],
+  [
+   2213,
+   "#ktut «»"
+  ],
+  [
+   2213,
+   "#ktut «»"
+  ],
+  [
+   2213,
+   "#ktut «»"
+  ],
+  [
+   2214,
+   "#ktut «»"
+  ],
+  [
+   2214,
+   "#ktut «»"
+  ],
+  [
+   2214,
+   "#ktut «»"
+  ],
+  [
+   2215,
+   "#ktut «»"
+  ],
+  [
+   2215,
+   "#ktut «»"
+  ],
+  [
+   2215,
+   "#ktut «»"
+  ],
+  [
+   2216,
+   "#ktut «»"
+  ],
+  [
+   2216,
+   "#ktut «»"
+  ],
+  [
+   2216,
+   "#ktut «»"
+  ],
+  [
+   2216,
+   "#ktut «»"
+  ],
+  [
+   2217,
+   "#ktut «»"
+  ],
+  [
+   2217,
+   "#ktut «»"
+  ],
+  [
+   2217,
+   "#ktut «»"
+  ],
+  [
+   2217,
+   "#ktut «»"
+  ],
+  [
+   2218,
+   "#ktut «»"
+  ],
+  [
+   2218,
+   "#ktut «»"
+  ],
+  [
+   2218,
+   "#ktut «»"
+  ],
+  [
+   2218,
+   "#ktut «»"
+  ],
+  [
+   2219,
+   "#ktut «»"
+  ],
+  [
+   2219,
+   "#ktut «»"
+  ],
+  [
+   2219,
+   "#ktut «»"
+  ],
+  [
+   2219,
+   "#ktut «»"
+  ],
+  [
+   2220,
+   "#ktut «»"
+  ],
+  [
+   2220,
+   "#ktut «»"
+  ],
+  [
+   2220,
+   "#ktut «»"
+  ],
+  [
+   2220,
+   "#ktut «»"
+  ],
+  [
+   2221,
+   "#ktut «»"
+  ],
+  [
+   2221,
+   "#ktut «»"
+  ],
+  [
+   2222,
+   "#ktut «»"
+  ],
+  [
+   2222,
+   "#ktut «»"
+  ],
+  [
+   2222,
+   "#ktut «»"
+  ],
+  [
+   2222,
+   "#ktut «»"
+  ],
+  [
+   2223,
+   "#ktut «»"
+  ],
+  [
+   2223,
+   "#ktut «»"
+  ],
+  [
+   2223,
+   "#ktut «»"
+  ],
+  [
+   2223,
+   "#ktut «»"
+  ],
+  [
+   2223,
+   "#ktut «»"
+  ],
+  [
+   2224,
+   "#ktut «»"
+  ],
+  [
+   2224,
+   "#ktut «»"
+  ],
+  [
+   2224,
+   "#ktut «»"
+  ],
+  [
+   2224,
+   "#ktut «»"
+  ],
+  [
+   2225,
+   "#ktut «»"
+  ],
+  [
+   2225,
+   "#ktut «»"
+  ],
+  [
+   2225,
+   "#ktut «»"
+  ],
+  [
+   2225,
+   "#ktut «»"
+  ],
+  [
+   2226,
+   "#ktut «»"
+  ],
+  [
+   2226,
+   "#ktut «»"
+  ],
+  [
+   2226,
+   "#ktut «»"
+  ],
+  [
+   2226,
+   "#ktut «»"
+  ],
+  [
+   2227,
+   "#ktut «»"
+  ],
+  [
+   2227,
+   "#ktut «»"
+  ],
+  [
+   2227,
+   "#ktut «»"
+  ],
+  [
+   2227,
+   "#ktut «»"
+  ],
+  [
+   2228,
+   "#ktut «»"
+  ],
+  [
+   2228,
+   "#ktut «»"
+  ],
+  [
+   2229,
+   "#ktut «»"
+  ],
+  [
+   2229,
+   "#ktut «»"
+  ],
+  [
+   2229,
+   "#ktut «»"
+  ],
+  [
+   2229,
+   "#ktut «»"
+  ],
+  [
+   2230,
+   "#ktut «»"
+  ],
+  [
+   2230,
+   "#ktut «»"
+  ],
+  [
+   2230,
+   "#ktut «»"
+  ],
+  [
+   2230,
+   "#ktut «»"
+  ],
+  [
+   2231,
+   "#ktut «»"
+  ],
+  [
+   2231,
+   "#ktut «»"
+  ],
+  [
+   2231,
+   "#ktut «»"
+  ],
+  [
+   2231,
+   "#ktut «»"
+  ],
+  [
+   2232,
+   "#ktut «»"
+  ],
+  [
+   2232,
+   "#ktut «»"
+  ],
+  [
+   2232,
+   "#ktut «»"
+  ],
+  [
+   2232,
+   "#ktut «»"
+  ],
+  [
+   2233,
+   "#ktut «»"
+  ],
+  [
+   2233,
+   "#ktut «»"
+  ],
+  [
+   2233,
+   "#ktut «»"
+  ],
+  [
+   2233,
+   "#ktut «»"
+  ],
+  [
+   2234,
+   "#ktut «»"
+  ],
+  [
+   2234,
+   "#ktut «»"
+  ],
+  [
+   2234,
+   "#ktut «»"
+  ],
+  [
+   2235,
+   "#ktut «»"
+  ],
+  [
+   2235,
+   "#ktut «»"
+  ],
+  [
+   2235,
+   "#ktut «»"
+  ],
+  [
+   2236,
+   "#ktut «»"
+  ],
+  [
+   2236,
+   "#ktut «»"
+  ],
+  [
+   2236,
+   "#ktut «»"
+  ],
+  [
+   2236,
+   "#ktut «»"
+  ],
+  [
+   2237,
+   "#ktut «»"
+  ],
+  [
+   2237,
+   "#ktut «»"
+  ],
+  [
+   2237,
+   "#ktut «»"
+  ],
+  [
+   2237,
+   "#ktut «»"
+  ],
+  [
+   2238,
+   "#ktut «»"
+  ],
+  [
+   2238,
+   "#ktut «»"
+  ],
+  [
+   2238,
+   "#ktut «»"
+  ],
+  [
+   2238,
+   "#ktut «»"
+  ],
+  [
+   2239,
+   "#ktut «»"
+  ],
+  [
+   2239,
+   "#ktut «»"
+  ],
+  [
+   2239,
+   "#ktut «»"
+  ],
+  [
+   2239,
+   "#ktut «»"
+  ],
+  [
+   2240,
+   "#ktut «»"
+  ],
+  [
+   2240,
+   "#ktut «»"
+  ],
+  [
+   2240,
+   "#ktut «»"
+  ],
+  [
+   2240,
+   "#ktut «»"
+  ],
+  [
+   2241,
+   "#ktut «»"
+  ],
+  [
+   2241,
+   "#ktut «»"
+  ],
+  [
+   2242,
+   "#ktut «»"
+  ],
+  [
+   2242,
+   "#ktut «»"
+  ],
+  [
+   2242,
+   "#ktut «»"
+  ],
+  [
+   2242,
+   "#ktut «»"
+  ],
+  [
+   2243,
+   "#ktut «»"
+  ],
+  [
+   2243,
+   "#ktut «»"
+  ],
+  [
+   2243,
+   "#ktut «»"
+  ],
+  [
+   2243,
+   "#ktut «»"
+  ],
+  [
+   2243,
+   "#ktut «»"
+  ],
+  [
+   2244,
+   "#ktut «»"
+  ],
+  [
+   2244,
+   "#ktut «»"
+  ],
+  [
+   2244,
+   "#ktut «»"
+  ],
+  [
+   2244,
+   "#ktut «»"
+  ],
+  [
+   2245,
+   "#ktut «»"
+  ],
+  [
+   2245,
+   "#ktut «»"
+  ],
+  [
+   2245,
+   "#ktut «»"
+  ],
+  [
+   2245,
+   "#ktut «»"
+  ],
+  [
+   2246,
+   "#ktut «»"
+  ],
+  [
+   2246,
+   "#ktut «»"
+  ],
+  [
+   2246,
+   "#ktut «»"
+  ],
+  [
+   2246,
+   "#ktut «»"
+  ],
+  [
+   2247,
+   "#ktut «»"
+  ],
+  [
+   2247,
+   "#ktut «»"
+  ],
+  [
+   2247,
+   "#ktut «»"
+  ],
+  [
+   2247,
+   "#ktut «»"
+  ],
+  [
+   2248,
+   "#ktut «»"
+  ],
+  [
+   2248,
+   "#ktut «»"
+  ],
+  [
+   2249,
+   "#ktut «»"
+  ],
+  [
+   2249,
+   "#ktut «»"
+  ],
+  [
+   2249,
+   "#ktut «»"
+  ],
+  [
+   2249,
+   "#ktut «»"
+  ],
+  [
+   2250,
+   "#ktut «»"
+  ],
+  [
+   2250,
+   "#ktut «»"
+  ],
+  [
+   2250,
+   "#ktut «»"
+  ],
+  [
+   2250,
+   "#ktut «»"
+  ],
+  [
+   2251,
+   "#ktut «»"
+  ],
+  [
+   2251,
+   "#ktut «»"
+  ],
+  [
+   2251,
+   "#ktut «»"
+  ],
+  [
+   2251,
+   "#ktut «»"
+  ],
+  [
+   2252,
+   "#ktut «»"
+  ],
+  [
+   2252,
+   "#ktut «»"
+  ],
+  [
+   2252,
+   "#ktut «»"
+  ],
+  [
+   2252,
+   "#ktut «»"
+  ],
+  [
+   2252,
+   "#ktut «»"
+  ],
+  [
+   2253,
+   "#ktut «»"
+  ],
+  [
+   2253,
+   "#ktut «»"
+  ],
+  [
+   2253,
+   "#ktut «»"
+  ],
+  [
+   2253,
+   "#ktut «»"
+  ],
+  [
+   2254,
+   "#ktut «»"
+  ],
+  [
+   2254,
+   "#ktut «»"
+  ],
+  [
+   2255,
+   "#ktut «»"
+  ],
+  [
+   2255,
+   "#ktut «»"
+  ],
+  [
+   2255,
+   "#ktut «»"
+  ],
+  [
+   2255,
+   "#ktut «»"
+  ],
+  [
+   2256,
+   "#ktut «»"
+  ],
+  [
+   2256,
+   "#ktut «»"
+  ],
+  [
+   2256,
+   "#ktut «»"
+  ],
+  [
+   2256,
+   "#ktut «»"
+  ],
+  [
+   2257,
+   "#ktut «»"
+  ],
+  [
+   2257,
+   "#ktut «»"
+  ],
+  [
+   2257,
+   "#ktut «»"
+  ],
+  [
+   2257,
+   "#ktut «»"
+  ],
+  [
+   2258,
+   "#ktut «»"
+  ],
+  [
+   2258,
+   "#ktut «»"
+  ],
+  [
+   2258,
+   "#ktut «»"
+  ],
+  [
+   2258,
+   "#ktut «»"
+  ],
+  [
+   2259,
+   "#ktut «»"
+  ],
+  [
+   2259,
+   "#ktut «»"
+  ],
+  [
+   2259,
+   "#ktut «»"
+  ],
+  [
+   2259,
+   "#ktut «»"
+  ],
+  [
+   2260,
+   "#ktut «»"
+  ],
+  [
+   2260,
+   "#ktut «»"
+  ],
+  [
+   2260,
+   "#ktut «»"
+  ],
+  [
+   2260,
+   "#ktut «»"
+  ],
+  [
+   2261,
+   "#ktut «»"
+  ],
+  [
+   2261,
+   "#ktut «»"
+  ],
+  [
+   2262,
+   "#ktut «»"
+  ],
+  [
+   2262,
+   "#ktut «»"
+  ],
+  [
+   2262,
+   "#ktut «»"
+  ],
+  [
+   2262,
+   "#ktut «»"
+  ],
+  [
+   2263,
+   "#ktut «»"
+  ],
+  [
+   2263,
+   "#ktut «»"
+  ],
+  [
+   2263,
+   "#ktut «»"
+  ],
+  [
+   2263,
+   "#ktut «»"
+  ],
+  [
+   2264,
+   "#ktut «»"
+  ],
+  [
+   2264,
+   "#ktut «»"
+  ],
+  [
+   2264,
+   "#ktut «»"
+  ],
+  [
+   2264,
+   "#ktut «»"
+  ],
+  [
+   2264,
+   "#ktut «»"
+  ],
+  [
+   2265,
+   "#ktut «»"
+  ],
+  [
+   2265,
+   "#ktut «»"
+  ],
+  [
+   2265,
+   "#ktut «»"
+  ],
+  [
+   2265,
+   "#ktut «»"
+  ],
+  [
+   2266,
+   "#ktut «»"
+  ],
+  [
+   2266,
+   "#ktut «»"
+  ],
+  [
+   2266,
+   "#ktut «»"
+  ],
+  [
+   2266,
+   "#ktut «»"
+  ],
+  [
+   2267,
+   "#ktut «»"
+  ],
+  [
+   2267,
+   "#ktut «»"
+  ],
+  [
+   2267,
+   "#ktut «»"
+  ],
+  [
+   2268,
+   "#ktut «»"
+  ],
+  [
+   2268,
+   "#ktut «»"
+  ],
+  [
+   2268,
+   "#ktut «»"
+  ],
+  [
+   2269,
+   "#ktut «»"
+  ],
+  [
+   2269,
+   "#ktut «»"
+  ],
+  [
+   2269,
+   "#ktut «»"
+  ],
+  [
+   2269,
+   "#ktut «»"
+  ],
+  [
+   2270,
+   "#ktut «»"
+  ],
+  [
+   2270,
+   "#ktut «»"
+  ],
+  [
+   2270,
+   "#ktut «»"
+  ],
+  [
+   2270,
+   "#ktut «»"
+  ],
+  [
+   2271,
+   "#ktut «»"
+  ],
+  [
+   2271,
+   "#ktut «»"
+  ],
+  [
+   2271,
+   "#ktut «»"
+  ],
+  [
+   2271,
+   "#ktut «»"
+  ],
+  [
+   2272,
+   "#ktut «Hảo hữu của ta: Đang vắng»"
+  ],
+  [
+   2272,
+   "#ktut «Hảo hữu của ta: Đang vắng»"
+  ],
+  [
+   2273,
+   "#ktut «Hảo hữu của ta: Đang vắng»"
+  ],
+  [
+   2273,
+   "#ktut «Hảo hữu của ta: Đang vắng»"
+  ],
+  [
+   2273,
+   "#ktut «Hảo hữu của ta: Đang vắng»"
+  ],
+  [
+   2273,
+   "#ktut «Hảo hữu của ta: Đang vắng»"
+  ],
+  [
+   2274,
+   "#ktut «Hảo hữu của ta: Đang vắng»"
+  ],
+  [
+   2274,
+   "#ktut «Hảo hữu của ta: Đang vắng»"
+  ],
+  [
+   2274,
+   "#ktut «Hảo hữu của ta: Đang vắng»"
+  ],
+  [
+   2275,
+   "#ktut «Hảo hữu của ta: Đang vắng»"
+  ],
+  [
+   2275,
+   "#ktut «Hảo hữu của ta: Đang vắng»"
+  ],
+  [
+   2275,
+   "#ktut «Hảo hữu của ta: Đang vắng»"
+  ],
+  [
+   2275,
+   "#ktut «Hảo hữu của ta: Đang vắng»"
+  ],
+  [
+   2276,
+   "#ktut «Hảo hữu của ta: Đang vắng»"
+  ],
+  [
+   2276,
+   "#ktut «Hảo hữu của ta: Đang vắng»"
+  ],
+  [
+   2276,
+   "#ktut «Hảo hữu của ta: Đang vắng»"
+  ],
+  [
+   2276,
+   "#ktut «Hảo hữu của ta: Đang vắng»"
+  ],
+  [
+   2277,
+   "#ktut «»"
+  ],
+  [
+   2277,
+   "#ktut «»"
+  ],
+  [
+   2278,
+   "#ktut «»"
+  ],
+  [
+   2278,
+   "#ktut «»"
+  ],
+  [
+   2278,
+   "#ktut «»"
+  ],
+  [
+   2278,
+   "#ktut «»"
+  ],
+  [
+   2279,
+   "#ktut «»"
+  ],
+  [
+   2279,
+   "#ktut «»"
+  ],
+  [
+   2279,
+   "#ktut «»"
+  ],
+  [
+   2279,
+   "#ktut «»"
+  ],
+  [
+   2280,
+   "#ktut «»"
+  ],
+  [
+   2280,
+   "#ktut «»"
+  ],
+  [
+   2280,
+   "#ktut «»"
+  ],
+  [
+   2280,
+   "#ktut «»"
+  ]
+ ],
+ "_ckAt": 1795596305942,
+ "_ckB": 9
+}
