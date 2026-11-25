@@ -17,6 +17,8 @@ const { Seat } = require('./robot-rt.js');
 const [, , URL0, OUT0, ...KV] = process.argv;
 if (!URL0 || !OUT0) { console.error('usage: node dev/test/robot-rt-coop.js <url> <out-dir> [host=fold] [guest=ipad] [kiep=1] [tag=..] ...'); process.exit(2) }
 const A = Object.fromEntries(KV.map(s => s.split('=')));
+/* STATIC SELF-TEST first (robot-lint.js: node --check + undeclared names outside page code); a FAIL never starts a life (lint=0 skips) */
+if (A.lint !== '0') { const LR = require('./robot-lint.js').run(require('./robot-lint.js').DEFAULT); if (!LR.ok) { console.error('HARNESS LINT FAIL — no life started:\n' + LR.rep.join('\n')); process.exit(2) } }
 const TAG = A.tag || 'p' + (A.seed || 1) + '-' + new Date().toISOString().slice(0, 16).replace(/[-:T]/g, '');
 const KIEP = +A.kiep || 1, OUT = path.resolve(OUT0); fs.mkdirSync(OUT, { recursive: true });
 const VPS = { fold: { width: 755, height: 1000 }, ipad: { width: 1180, height: 820 } };
