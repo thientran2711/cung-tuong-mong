@@ -27,7 +27,7 @@ const rcvKw=i=>{const K=BAL.road.hp.kw;return [K.full,K.half,K.no,K.lk][i]};
    the chance the asker sees through it → the asker's liking of the receiver − help.fail (as an open refusal) and her oán + road.hp.sab.oan.
    rcvSeen(p,t) rolls it once (her card and an NPC the same roll) → true when seen; rcvSeenX(p,t) = the words on the card (chanceW, never %) */
 function rcvSeen(p,t){const H=BAL.road.hp,F=BAL.ag.cx2.help.fail;if(!roll(H.half))return false;affAdd(p,t,-F);oanAdd(p,t,H.sab.oan);(window.__rcvN=window.__rcvN||{}).seen=((window.__rcvN||{}).seen||0)+1;return true}
-function rcvSeenX(p,t){const H=BAL.road.hp,F=BAL.ag.cx2.help.fail,pn=p===S?"ngươi":p.name;return `bị nhìn thấu (${chanceW(H.half)}): ${pn} quý ${t===S?"ngươi":t.name} ${balSg(-F)}, oán ${balSg(H.sab.oan)}`}
+function rcvSeenX(p,t){const H=BAL.road.hp,F=BAL.ag.cx2.help.fail,pn=p===S?"ngươi":p.name;return `bị nhìn thấu (${chanceW(H.half)}): ${pn} quý ${t===S?"ngươi":t.name} ${balSg(-F)}, ${pvOan(p,H.sab.oan,"oán")}`}
 /* ---- Nhờ giúp đỡ: the 4 answers of the receiver t to the asker p (one list for her card and the NPC's pick) ---- */
 function rcvHelpOpts(p,t){const X=BAL.ag.cx2.help,R=BAL.rcv.help,H=BAL.road.hp,q=queenP(),me=t===S,half=Math.round(X.bac*R.half);
  const pay=(n)=>{if((me?S.bac:t.bac||0)<n)return false;if(me)apply({bac:-n});else ap(t,{bac:-n});if(p===S)apply({bac:n});else ap(p,{bac:n});return true};
@@ -85,7 +85,7 @@ function rcvNoO(p,t,o){const F=BAL.ag.cx2.help.fail,me=t===S;
   go:()=>{if(!me&&o.fx)rcvAp(t,o.fx);affAdd(t,p,-F);affAdd(p,t,-F);if(o.go)o.go();return{ok:0,r:o.r}}}}
 function rcvSabO(p,t,o){const H=BAL.road.hp,R=BAL.rcv.help,me=t===S,tq=rcvQ(p,t),pn=p===S?"ngươi":p.name;
  return{i:3,id:"sab",n:(o.n||rcvKw(3))+(tq?` với ${rcvQn(tq)}`:""),fx:{duc:-H.sab.duc},
-  x:`được: ${tq?rcvQn(tq)+" quý "+(me?"ngươi":t.name)+" "+balSg(R.qAf):o.g} · mất: Đức ${balSg(-H.sab.duc)}, ${pn} oán ${balSg(H.sab.oan)} · ${p===S?"ngươi":pn} mang tiếng: Danh ${balSg(-R.danh)}`,
+  x:`được: ${tq?rcvQn(tq)+" quý "+(me?"ngươi":t.name)+" "+balSg(R.qAf):o.g} · mất: Đức ${balSg(-H.sab.duc)}, ${pvOan(p,H.sab.oan,`${pn} oán`)} · ${p===S?"ngươi":pn} mang tiếng: Danh ${balSg(-R.danh)}`,
   go:()=>{if(!me)ap(t,{duc:-H.sab.duc});if(tq&&tq!==S)affAdd(tq,t,R.qAf);oanAdd(p,t,H.sab.oan);rcvAp(p,{danh:-R.danh});if(o.go)o.go();return{ok:0,r:typeof o.r==="function"?o.r(tq):o.r}}}}
 /* the asks: RCVK[k] = {t card title, kind (BAL.rcv.k), line(p,x) her card text, ok(p,t,x) still possible, opts(p,t,x) the 4 answers}.
    rcvAsk(k, asker, receiver, x): an NPC receiver answers now (rcvPick); HER card comes as a queued dialog (PEND.rcvAsk, saved with the game) */

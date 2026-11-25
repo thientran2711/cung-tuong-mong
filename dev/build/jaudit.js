@@ -77,8 +77,9 @@ function aaSay(lab,r){const s=n=>(n>0?"+":"")+n;return r.a===r.b?`${lab} ${s(r.a
 /* ONE set of relation words (owner 09:55Z, VANPHONG §1): the value her → you is "thiện cảm" (chip "Nàng → ta: thiện cảm"),
    yours → her "Ta → nàng: thiện cảm"; the grudge stays "oán". Cards: "thiện cảm +10", "oán ta +8". */
 const KIT_REL={aff:"thiện cảm",affThem:"Nàng → ta: thiện cảm",affMe:"Ta → nàng: thiện cảm",oan:"oán ta",unknown:"chưa rõ nàng nghĩ gì"};window.KIT_REL=KIT_REL;
-function pvQuy(t,n){return aaSay(KIT_REL.aff,aaNum(n,t,"trust"))}
-function pvOan(t,n){if(n<0)return `bớt oán ta ${Math.round(-n)}`;const r=aaNum(n,t,"slight");r.a=Math.max(1,Math.round(r.a));r.b=Math.max(r.a,Math.round(r.b));return aaSay(KIT_REL.oan,r)}
+/* review/net-ghen (law 11 family): lab = the words before the number at the call site («nàng oán ngươi», «thiện cảm») — the number is ALWAYS this preview */
+function pvQuy(t,n,lab){if(!t&&n>0)return pvQuyAny(n,lab);return aaSay(lab||KIT_REL.aff,aaNum(n,t,"trust"))}
+function pvOan(t,n,lab){if(n<0)return lab?`${lab} ${balSg(Math.round(n))}`:`bớt oán ta ${Math.round(-n)}`;if(!t)return pvOanAny(n,lab);const r=aaNum(n,t,"slight");r.a=Math.max(1,Math.round(r.a));r.b=Math.max(r.a,Math.round(r.b));return aaSay(lab||KIT_REL.oan,r)}
 function pvRel(t,n){return n<0?`${pvQuy(t,n)}, ${pvOan(t,-n*.6)}`:`${pvQuy(t,n)}, ${pvOan(t,-n*.3)}`}
 /* caught by the target's people (j8 caught): evA 2 + relAdd(−10) */
 (function(){if(typeof kaCaughtTxt!=="function")return;const k0=kaCaughtTxt;kaCaughtTxt=function(v,k){const r=k0.apply(this,arguments);try{return r?`${r}, ${pvRel(v,-10)}`:r}catch(e){return r}}})();
@@ -255,7 +256,11 @@ odT=function(a,base){return odA(a,base+(a.tamco||0)/4)};
    const oz=aOdd(o,a);if(typeof rcvJudge==="function")return rcvJudge("trinhhh",a,t,oz);if(roll(oz)){punish(t,"bị Hoàng hậu xét tội theo chứng cứ",1);affAdd(t,a,BAL.eff.jaudit.f_2);return `${j78Who(a)} trình chứng cứ lên Hoàng hậu: ${j78who(t)} bị xét tội. `}affAdd(q,a,BAL.eff.jaudit.f_3);return `Hoàng hậu bác chứng cứ ${j78who(a)} trình về ${j78who(t)}. `}}})();
 
 /* 19. an oán preview when the target is not chosen yet (j55 "Dò la nhà ngoại": relAdd −8 + oán +8 → oán ≈ 12.8 × her nết) */
-function pvOanAny(n){try{const vs=Object.values(PERS).map(P=>P.slight!=null?P.slight:1);const lo=Math.max(1,Math.round(n*Math.min(...vs))),hi=Math.round(n*Math.max(...vs)*Math.max(1,Math.max(...vs)));return lo===hi?`oán ta +${lo}`:`oán ta +${lo} đến +${hi}`}catch(e){return `oán ta +${Math.round(n)}`}}
+/* review/net-ghen: the factor range over ANY person (one nết from each group BAL.net.F, as traitsOf gives): [Π min, Π max] of PERS[x][f] */
+function aaAnyRange(f){let lo=1,hi=1;for(const g in BAL.net.F){const vs=BAL.net.F[g].map(x=>PERS[x]&&PERS[x][f]!=null?PERS[x][f]:1);lo*=Math.min(...vs);hi*=Math.max(...vs)}return[lo,hi]}
+function pvOanAny(n,lab){const L=lab||"oán ta";try{const [a,b]=aaAnyRange("slight");const lo=Math.max(1,Math.round(n*a)),hi=Math.max(lo,Math.round(n*b));return lo===hi?`${L} +${lo}`:`${L} +${lo} đến +${hi}`}catch(e){return `${L} +${Math.round(n)}`}}
+/* review/net-ghen: the thiện cảm twin of pvOanAny — a rise toward her from a person not chosen yet (a static outcome line): the honest range over every nết trust */
+function pvQuyAny(n,lab){const L=lab||KIT_REL.aff;if(!(n>0))return `${L} ${balSg(Math.round(n))}`;try{const [a,b]=aaAnyRange("trust");const lo=Math.round(n*a),hi=Math.max(lo,Math.round(n*b));return lo===hi?`${L} +${lo}`:`${L} +${lo} đến +${hi}`}catch(e){return `${L} +${Math.round(n)}`}}
 
 /* 20. "bị phạt" on cards = what punish() (j8) does: cấm túc N tháng (Hoàng thượng nóng nảy 3, nhân từ 1, thường 2);
    a grave fault (sev 2) may instead cost one rank (nóng nảy: always, nhân từ: 1 in 4, else half the time) */

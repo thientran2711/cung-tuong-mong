@@ -114,10 +114,10 @@ function promoCost(p,src){const B=BAL.psk,me=p===S;let t="";try{
  if(src==="son1"){const q=typeof queenP==="function"?queenP():null;if(q&&q!==p)oanAdd(q,p,B.son1.hhOan);
   let n=0;for(const v of liveRivals(true))if(v!==p&&v!==q&&!v.out&&typeof sonsOf==="function"&&sonsOf(v).length){oanAdd(v,p,B.son1.momOan);n++}
   if(p!==S&&S!==q&&!S.out&&typeof sonsOf==="function"&&sonsOf(S).length)oanAdd(S,p,B.son1.momOan);
-  if(me)t=`Hoàng hậu${n?` và ${n} vị có hoàng tử`:""} thấy ngươi thành mối lo (oán ngươi +${B.son1.hhOan}${n?`, +${B.son1.momOan}`:""}). `}
+  if(me)t=`Hoàng hậu${n?` và ${n} vị có hoàng tử`:""} thấy ngươi thành mối lo (${pvOan(q,B.son1.hhOan,"oán ngươi")}${n?`, ${pvOanAny(B.son1.momOan,"các vị ấy")}`:""}). `}
  else if(src==="emp"){if(me)apply({th:-B.emp.th});let n=0;
   for(const v of liveRivals(true)){const s=typeof rgSideOf==="function"?rgSideOf(v):null;if(s&&s!=="emp"){oanAdd(v,p,B.emp.oan);n++}}
-  if(me)t=`Thái hậu lạnh nhạt (Thái hậu quý ngươi −${B.emp.th}); ${n?`${n} phi tần phe thua`:"phe thua"} để bụng ngươi (oán +${B.emp.oan}). `}
+  if(me)t=`Thái hậu lạnh nhạt (Thái hậu quý ngươi −${B.emp.th}); ${n?`${n} phi tần phe thua`:"phe thua"} để bụng ngươi (${pvOanAny(B.emp.oan,"oán")}). `}
  else if(src==="th"){if(me){apply({sung:-B.th.sung});S.psErr={n:B.th.errN,at:wk()+B.th.errAt};
   t=`Bệ hạ coi ngươi là người của Thái hậu (${sgStat(-B.th.sung)}); Thái hậu sẽ còn sai ngươi làm việc (${B.th.errN} việc nhờ). `}}
  else if(src==="quyen"){if(me){apply({danh:-B.quyen.danh});S.psStrike={at:S.turn+B.quyen.after,p:B.quyen.p,n:0};

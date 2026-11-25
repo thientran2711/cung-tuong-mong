@@ -469,7 +469,7 @@ function npcMonthly(v){let ev="";const cost=k=>artFee(v.arts[k]);const agd=windo
 function rivalsTurn(){const live=liveRivals(true);let ev="";
  for(const v of live){if(!v.alive||v.out)continue;v.sung=cl(v.sung+R(3)-1,0,100);if(v.block)v.block--;
   if(S.sung>v.sung-10&&!v.queen&&roll(33))v.rel-=1;if(v.queen&&S.rank>=4&&roll(50))v.rel-=1;
-  if(S.sac>75)ghenUp(v,1,"thấy nhan sắc ngươi hơn người",S);v.ghen=cl(v.ghen-(v.rel>=netTh(v,"than")?3:1),0,100);v.pg=Math.max(0,v.pg-1);
+  if(S.sac>75)ghenUp(v,1,"thấy nhan sắc ngươi hơn người",S);v.ghen=ghenCool(v,v.ghen||0,v.rel>=netTh(v,"than"));v.pg=ghenCool(S,v.pg||0,rel(S,v)>=netTh(S,"than"));/* review/net-ghen: one cooling rule (j28 ghenCool); was −3/−1 for NPCs, −1 flat for her */
   if(v.queen&&!v.coop/* E44j (c) T9 family: her entry as Hoàng hậu never judges by an NPC roll (a target stays a target: law 1) */&&!(window.agDOn&&agDOn())){const g=mindPickBy(others(v).filter(p=>evG(v,p)>=BAL.ag.ev.judge&&rel(v,p)<0),p=>evG(v,p)*BAL.mind.pick.j8ev.ev-rel(v,p)/BAL.mind.pick.j8ev.rel,v);if(g&&roll(35*mindW(v,"punish")))/* npc-mind: was FIRST + flat 35 */{ev+=seenNPC(v,g,judge(v,g));if(S.dead)return ev;continue}}
   const t=pickTarget(v);if(!t)continue;
   let want=((v.malice/100)*(rel(v,t)<0?1:.25)+hostility(v,t)/200)*(rkOf(t)>=rkOf(v)-1||(t===S&&v.ghen>=60)?1:.4);if(t.shield)want*=.5;

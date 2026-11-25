@@ -14,7 +14,7 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-ladder]");
 function stat(){S.stat=S.stat||{un:0,act:0};return S.stat}
 (function(){const sp=spend;spend=function(n){try{if(S&&!S.dead)stat().act++}catch(e){}return sp.apply(this,arguments)}})();
 /* her two answers to a taunt (the weekly visit at her door and AG-MEET at a place share them, jgreet) */
-function apHostOpts(v){return[{n:"Nhịn",fx:{duc:2},x:"nàng ghen +3",go:()=>{ghenUp(v,3,"thấy ngươi nhịn mà vẫn được lòng người",S)}},{n:"Đáp trả sắc sảo",fx:{danh:1},x:`nàng oán +${balAb(BAL.eff.j24.go_5)}`,go:()=>relAdd(S,v,BAL.eff.j24.go_5)}]}
+function apHostOpts(v){return[{n:"Nhịn",fx:{duc:2},x:"nàng ghen +3",go:()=>{ghenUp(v,3,"thấy ngươi nhịn mà vẫn được lòng người",S)}},{n:"Đáp trả sắc sảo",fx:{danh:1},x:`${pvOan(v,-BAL.eff.j24.go_5*BAL.relOan.hurt,"nàng oán")}`,go:()=>relAdd(S,v,BAL.eff.j24.go_5)}]}
 /* npc-purpose G1 (owner OD 18/11 ~04:08Z): who comes to her door = the person with a reason this tuần (kinds apFriend… in jagwhy1, BAL.ag.why.ap);
    npwPick chooses among the goal-valid top options; the gift (what she brings) is weighed among the four (all valid); no reason → nobody comes */
 const AP_K=["apFriend","apTaunt","apSorry","empTea","thCall","svAsk","maidWarn","manPoem","svDefect"];

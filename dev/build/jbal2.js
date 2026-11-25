@@ -2146,6 +2146,12 @@ BAL.net.thClamp={quen:[0,30],than:[15,60],than2:[35,80],ky:[-30,-5],ghet:[-60,-1
 BAL.net.thK={provoke:.34,humiliate:.6,feign:.67,hostLo:.5,hostMid:.67,hostHi:1.33};
 BAL.net.bandHi=.5;
 BAL.net.heat={ghenK:.45,affK:.6};
+/* review/net-ghen (robot: NPC→her ghen p50 99, 42 % of every rise toward her was CAUSED BY ANOTHER CONSORT — «bị X khiêu khích», «thấy X khoe quà»,
+   «bị X giành đêm» — and the fade was a flat −1 a turn): ghenOanK = jealousy caused by another consort becomes oán toward HER × this (j1 ghenUp,
+   jshelf seen luxury; was jshelf npcOanK .5) · ghenCool = the one cooling rule (j28 ghenCool, every holder incl. her v.pg): each turn
+   (fade[not thân, thân] + ghen × k) ÷ persF ghen, at least 1. */
+BAL.net.ghenOanK=.5;
+BAL.net.ghenCool={fade:[1,3],k:.03};
 /* review/net-thresholds (WORKLIST #9 (c), net-build §4: NPC→NPC oán saturated, p90 98, band-3 share 43 %): oán COOLS each month by
    (BAL.oanFade + oán × oanCool) × the holder's persF forgive — a deep grudge cools faster in absolute terms, a Thù dai one still keeps it;
    the SAME rule for her own oán (S.ro) by her nết (law 1; before: her oán faded flat). */

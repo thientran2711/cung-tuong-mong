@@ -103,7 +103,7 @@ function twFollowT(v){const L=liveRivals(true).filter(x=>x!==v&&rkOf(x)>rkOf(v)+
   const g=G();
   add("visit",`nàng quý ngươi +${g.visit[0]} · Sức nàng +${g.visit[1]}`);
   {const x=twFoeOf(S,v);if(x)add("mediate",`nàng bớt oán ${x.name} ${g.mediate}`)}
-  add("humil",`nàng oán ngươi +${g.humil[0]} · Danh nàng -${g.humil[1]}`);
+  add("humil",`${pvOanAny(g.humil[0],"nàng oán ngươi")} · Danh nàng -${g.humil[1]}`);
   add("test",`thành: ngươi tin nàng hơn +${g.test[0]} · hỏng: ngờ vực ${g.test[1]}`);
   add("drop",`ngươi lạnh với nàng -${g.drop}`);
   add("follow",`nàng quý ngươi +${g.follow}`);

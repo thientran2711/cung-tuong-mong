@@ -47,6 +47,9 @@ function npcAct(v,t){const b=bandVT(v,t);if(!b)return"";const allow=BANDS.slice(
 (function(){const a0=affAdd;affAdd=function(x,y,n){/* AG-ALL-2 G12 (one rule both ways): her trust trait slows how fast she warms to ANYONE, the player or an NPC */if(n>0&&x&&x!==S&&y&&y!==x)n*=persF(x,"trust",1);return a0.call(this,x,y,Math.round(n))}})();
 /* review/net-thresholds: ONE cooling rule for every holder (her included, law 1): (oanFade + oán × BAL.net.oanCool) × her/his nết forgive */
 function oanCool(h,x){return x>0?Math.max(0,x-Math.round((BAL.oanFade+x*BAL.net.oanCool)*persF(h,"forgive",1))):x}
+/* review/net-ghen: ONE jealousy cooling rule for every holder (NPC → her v.ghen, her → a consort v.pg; law 1): each turn
+   (fade[close] + ghen × k) ÷ the holder's persF ghen — a fresh flare cools fast, a jealous nết (Nóng nảy, Tham vọng) keeps it longer; close = thân. */
+function ghenCool(h,x,close){if(!(x>0))return 0;const C=BAL.net.ghenCool;return Math.max(0,x-Math.max(1,Math.round((C.fade[close?1:0]+x*C.k)/persF(h,"ghen",1))))}
 function oanMonth(){for(const v of rivals){v.oan=oanCool(v,v.oan||0);for(const k in v.ro)v.ro[k]=oanCool(v,v.ro[k])}for(const k in S.ro)S.ro[k]=oanCool(S,S.ro[k]);
  /* rel-men-servants: men and servants forget by the same rule (their nết, j28 persF) */
  for(const h of relMSAll()){if(h.oan)h.oan=oanCool(h,h.oan);if(h.ro&&typeof h.ro==="object")for(const k in h.ro)h.ro[k]=oanCool(h,h.ro[k])}}
