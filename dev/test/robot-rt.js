@@ -91,7 +91,7 @@ async function play(p) {
 
   await p.evaluate(() => { window.__rtEnd = null }).catch(() => {});
   const actsPerBuoi = { sens: 2, rand: 3, cautious: 1, bold: 3, quiet: 0 }[BOT] ?? 2;
-  let idle = 0, deadSeen = new Set(), acts = 0, lastKey = '', lastProg = Date.now(), repeat = new Map(), sameScr = 0, lastSig = '', started = false, cpAt = 0, statusAt = Date.now();
+  let idle = 0, noFx = new Map(), deadSeen = new Set(), acts = 0, lastKey = '', lastProg = Date.now(), repeat = new Map(), sameScr = 0, lastSig = '', started = false, cpAt = 0, statusAt = Date.now();
   const clockKey = s => s ? [s.y, s.t, s.w, s.b].join('.') : 'none';
 
   for (;;) {
@@ -128,6 +128,8 @@ async function play(p) {
     const h = await p.evaluateHandle(i => window.__rtBtns[i], ch.i);
     const ok = await rt.tap(h, { screen: sc.layer + (sc.title ? ' «' + sc.title + '»' : ''), label: ch.t.slice(0, 50), wait: 1500, confirm: async () => { const s3 = await p.evaluate(SCAN); return s3.layer === sc.layer && s3.title === sc.title } });
     const rk = sig + '#' + ch.t; repeat.set(rk, (repeat.get(rk) || 0) + (ok ? 1 : 5));
+    /* a close (✕ / Lui) tapped for real 3× and the same dialog is still there = button with no effect → bug + shot */
+    if (ok && (ch.x || CLOSE_RE.test(ch.t)) && sc.layer !== 'page') { await p.waitForTimeout(600); const s4 = await p.evaluate(SCAN).catch(() => null); if (s4 && s4.layer === sc.layer && s4.title === sc.title && sc.title) { const k = 'nx|' + sc.layer + '|' + sc.title; noFx.set(k, (noFx.get(k) || 0) + 1); if (noFx.get(k) === 3) { const shot = path.join(SHOTS, 'noeffect-' + Date.now() + '.png'); await p.screenshot({ path: shot }).catch(() => {}); R.dead.push({ k: 'NO EFFECT', screen: sc.layer + ' «' + sc.title + '»', label: ch.t, cover: 'tapped 3× for real, dialog stays', shot, at: sec(), S: sc.S }); bug('dead', 'close button has no effect: ' + sc.layer + ' «' + sc.title + '» «' + ch.t + '»', { shot }) } } }
     if (ok && ch.type) { await p.waitForTimeout(200); await p.keyboard.press('Control+A').catch(() => {}); await p.keyboard.type(String(ch.type), { delay: 80 }); R.harness.typed = (R.harness.typed || 0) + 1 }
     if (ok && (sc.layer === 'page' || sc.b.some(x => x.id === 'next')) && !ch.next) acts++;
     await p.waitForTimeout(ok ? 220 : 400);
@@ -154,8 +156,8 @@ async function play(p) {
       if (!isPage) {
         const main = nonExit.filter(x => !LOW_RE.test(x.t));
         if (main.length) return score(main);
+        const cl = b.find(close); if (cl) return cl; /* ✕ / Lui before help / empty-label icons (portrait re-opens the same dialog) */
         if (nonExit.length) return score(nonExit);
-        const cl = b.find(close); if (cl) return cl;
         if (exits.length) { const e = score(exits); return { ...e, exit: true, n: opts.length, only: true } }
         return null;
       }
