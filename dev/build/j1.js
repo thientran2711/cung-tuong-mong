@@ -216,7 +216,7 @@ function setHeir(k,v){allKids().forEach(([x])=>x.heir=false);k.heir=true;S.heir=
 /* fix-kframe-heir: the ONE road that puts a living Thái tử aside with no new one named (j8 kframe). m = his mother (S = her, or an NPC / co-op entry).
    S.heir is cleared only when it is that son. Her / an NPC mother's Danh loss (BAL.kid.heirDanh, two-way) is jkidlife's deposeHeir wrap, as setHeir. */
 function deposeHeir(k,m){if(!k||!k.heir)return false;k.heir=false;if(S.heir&&S.heir.k===k)S.heir=null;return true}
-function kidDie(k,why,mine){k.alive=false;const wasH=k.heir;if(wasH){k.heir=false;if(S.heir&&S.heir.k===k)S.heir=null}/* fix-kframe-heir: only when it is that son */if(mine)apply({suc:-15});
+function kidDie(k,why,mine){k.alive=false;dieMk(k,why||"ill");const wasH=k.heir;if(wasH){k.heir=false;if(S.heir&&S.heir.k===k)S.heir=null}/* fix-kframe-heir: only when it is that son */if(mine)apply({suc:-15});
   return `<span class="r">${k.name} ${why}.</span>${mine?" Ngươi đau đớn khôn nguôi.":""}${wasH?" Ngôi Đông cung bỏ trống.":""} `}
 /* ghenN(n) = the jealousy one "every consort ghen +n" really adds (Hoàng thượng đa tình ×BAL.ghen.datinh). ONE CORE (OD:L1267): ghenAll applies it and every text that shows that gain prints ghenN(n). */
 function ghenN(n){let k=1;try{if(has("datinh"))k=BAL.ghen.datinh}catch(e){}return Math.round(n*k)}

@@ -301,7 +301,7 @@ function toilChipPaint(){try{const tt=document.getElementById("k3tt");if(!tt)ret
 window.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest('[data-k3="toil"],[data-hx="toil"]');if(!b)return;e.stopImmediatePropagation();e.preventDefault();
  if(toilCanStart()){const i=Array.isArray(deck)?deck.findIndex(a=>a&&a.toil&&!a.done):-1;if(i>=0){act(i);return}if(!can(BAL.toil.khac))return;spend(BAL.toil.khac);toilOpen();return}
  const rec=toilToday(S);try{kpPop(b,rec?`<p>Sáng nay ta điểm trang: y phục ${TOIL_DV[rec.dv]}, ${rec.makeup?"dung nhan "+toilMkW(toilMk(rec)):"để "+toilMkW("moc")}.</p><p class="past">Người gặp ta hôm nay nhìn theo nết mình; thẻ việc ghi trước.</p>`
-  :`<p>Hôm nay ta chưa điểm trang: mặc như hôm qua, ${toilMkW("moc")}.</p><p class="past">Mỗi buổi sáng có việc “Điểm trang” trong Hành sự (1 khắc).</p>`)}catch(x){}},true);
+  :`<p>Hôm nay ta chưa điểm trang: mặc như hôm qua, ${toilMkW("moc")}.</p><p class="past">Mỗi buổi sáng có việc “Điểm trang” trong Hành sự (${BAL.toil.khac} khắc).</p>`)}catch(x){}},true);
 
 /* ---------- the mini-games ---------- */
 const TOIL={st:null,geo:null};window.TOIL=TOIL;

@@ -114,8 +114,8 @@ function addVir(p,k,g){vNorm(p);const V=VIR.find(x=>x.k===k);if(!V)return;
   if(f)withDeed(`${V.n} lên bậc ${l}`,()=>{if(p===S)apply(f);else ap(p,f)});
   if(p===S)log(`<span class="g">${V.n} (${V.full}) lên bậc ${l} · ${artNm(l)}.</span> ${VIRFX[k][l-1]}`)})}
 function lessonVir(k,mode){if(!S||S.dead||Q.length||S.mg)return;vNorm(S);const l=S.vir[k],cost=virCost(l),V=VIR.find(x=>x.k===k);if(!V||l>=5)return;
- if(mode==="self"){if(!can(2)||S.suc<BAL.sucNeed.self)return;apply({suc:-BAL.td.selfSuc});spend(2);addVir(S,k,1);log(`Tự học ${V.n}. Tiến bộ +1.`)}
- else{if(!can(2)||S.bac<cost)return;apply({suc:-BAL.td.mSuc,bac:-cost});spend(2);const g=2+R(2);addVir(S,k,g);log(`Học ${V.n} với ma ma giáo tập. Tiến bộ +${g}.`)}
+ if(mode==="self"){if(!can(BAL.btn.virLes.k)||S.suc<BAL.sucNeed.self)return;apply({suc:-BAL.td.selfSuc});spend(BAL.btn.virLes.k);addVir(S,k,1);log(`Tự học ${V.n}. Tiến bộ +1.`)}
+ else{if(!can(BAL.btn.virLes.k)||S.bac<cost)return;apply({suc:-BAL.td.mSuc,bac:-cost});spend(BAL.btn.virLes.k);const g=2+R(2);addVir(S,k,g);log(`Học ${V.n} với ma ma giáo tập. Tiến bộ +${g}.`)}
  save();render()}
 window.lessonVir=lessonVir;
 /* ONE act, two doors (danh-p1, owner P1 16/11): Tài nghệ · Tứ đức button (here) and the Hành sự card (jact adCharityCard);
@@ -178,20 +178,20 @@ function v85DucPanel(){const d=S.duc,bad=ducDeedList();
    {h:`Cách tính (ngươi: Đức ${d})`,rows:[["Nguy hiểm",`(${BAL.ducF.mid} − Đức) ÷ ${BAL.ducF.danger} cộng`+" vào mức nguy hiểm của người ra tay: "+`${ducDanger(S)>=0?"+":""}${ducDanger(S)}`,"t"],["Tố giác",`(Đức − ${BAL.ducF.mid}) ÷ ${BAL.ducF.odds} cộng`+" vào phần thắng của người tố: "+`${ducOdds(S)>=0?"+":""}${ducOdds(S)}`,"t"],["Bị vu oan",`kẻ vu oan, tung tin đồn về ngươi được cộng (${BAL.ducF.mid} − Đức) ÷ ${BAL.ducF.shield}: `+`${-ducShield(S)>=0?"+":""}${-ducShield(S)}`,"t"],["Kẻ hầu",`(${BAL.ducF.mid} − Đức) ÷ ${BAL.ducF.betray} cộng`+" vào việc mua chuộc kẻ hầu của ngươi: "+`${ducBetray(S)>=0?"+":""}${ducBetray(S)}`,"t"],["Người khác","Đức của họ chỉ thấy khi ngươi đã biết nết họ hoặc nắm chứng cứ; Danh là tiếng ngoài, kẻ ác giấu mặt vẫn giữ Danh cao đến khi bị lộ","t"]]},
    {h:"Việc làm Đức giảm",rows:bad.map(([n,v])=>[n,`<span class="ef r">Đức ${v}</span>`,"r"])},
    {h:"Việc làm Đức tăng",rows:[["Phát bạc cứu giúp cung nhân",`<span class="ef g">Đức +${BAL.charity.duc}, Danh +${BAL.charity.danh}</span>`,"g"],["Xin tha cho cung nữ bị phạt",`<span class="ef g">Đức ${balSg(BAL.rl.j8.ducGo)}</span>`,"g"],["Ân xá người ở lãnh cung",`<span class="ef g">Đức ${balSg(BAL.ag.hh.pardonDuc)}</span>`,"g"],["Nhịn lời mỉa mai",`<span class="ef g">Đức ${balSg(apHostOpts(null)[0].fx.duc)}</span>`,"g"],["Học Hạnh",`<span class="ef g">Đức ${balSg(VIRB.hanh[1].duc)} mỗi bậc; từ bậc 3 mỗi tháng ${balSg(BAL.rl.j85.hanhDucMonth)}</span>`,"g"]]}],btn:"Đã hiểu"})}
-artTabHTML=function(){vNormAll();const t2=whyTime(2);
+artTabHTML=function(){vNormAll();const t2=whyTime(BAL.artLes.k),tv2=whyTime(BAL.btn.virLes.k);
  const card=(nm,img,l,prog,need,head,fx,B,k)=>`<div class="v85s"><div class="art"><b>${img?ic(img,20):""}${nm} · Bậc ${l}/5 <button class="lnk ladi" data-v85tab="${k}" title="Năm bậc" aria-label="Xem năm bậc của ${nm}">ⓘ năm bậc</button></b><span class="u">${head}</span>${l<5?`<span class="lv">Tiến bộ ${prog}/${need}</span><div class="mini"><u style="width:${Math.min(100,prog/need*100)}%"></u></div>`:""}${lvRows(fx,l)}</div><div class="pcb">${B.join("")}</div></div>`;
- let h=`<div class="ph"><span>Mỗi buổi học tốn 2 khắc. Học với thầy tốn bạc, tiến nhanh; tự học không tốn bạc, tiến chậm. Phi tần khác cũng học theo cùng luật.</span>${S.master?`<span class="g">Danh sư còn dạy ${S.master} tháng</span>`:""}</div>`;
+ let h=`<div class="ph"><span>Mỗi buổi học tốn ${BAL.artLes.k} khắc. Học với thầy tốn bạc, tiến nhanh; tự học không tốn bạc, tiến chậm. Phi tần khác cũng học theo cùng luật.</span>${S.master?`<span class="g">Danh sư còn dạy ${S.master} tháng</span>`:""}</div>`;
  h+=`<div class="ph"><span><b>Tứ đức</b> · bốn môn của nữ nhi trong cung, không phải thanh số: mỗi bậc đổ vào Sắc, Đức, phần thắng và phẩm đồ tự làm.</span><span><button class="lnk ladi" data-v85tab="duc" title="Luật Đức" aria-label="Xem luật Đức">ⓘ luật Đức</button></span></div><div>`;
  h+=VIR.map(V=>{const l=S.vir[V.k],cost=virCost(l);const B=l>=5?[`<span class="ef g">${artNm(5)}</span>`]:[
-   pbtn(`data-vlearn="${V.k}" data-mode="self"`,"Tự học",`tốn: 2 khắc, Sức ${balSg(-BAL.td.selfSuc)} · thành: tiến bộ một phần`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
-   pbtn(`data-vlearn="${V.k}" data-mode="master"`,"Học với ma ma",`tốn: 2 khắc, Bạc -${cost}, Sức ${balSg(-BAL.td.mSuc)} · thành: tiến bộ hai ba phần`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:""))];
+   pbtn(`data-vlearn="${V.k}" data-mode="self"`,"Tự học",`tốn: ${BAL.btn.virLes.k} khắc, Sức ${balSg(-BAL.td.selfSuc)} · thành: tiến bộ một phần`,tv2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
+   pbtn(`data-vlearn="${V.k}" data-mode="master"`,"Học với ma ma",`tốn: ${BAL.btn.virLes.k} khắc, Bạc -${cost}, Sức ${balSg(-BAL.td.mSuc)} · thành: tiến bộ hai ba phần`,tv2||(S.bac<cost?`thiếu bạc (cần ${cost})`:""))];
   if(V.k==="hanh")B.push(pbtn(`data-charity="1"${capAt({k:BAL.charity.khac},BAL.charity.bac)}`,"Phát bạc cứu giúp cung nhân nghèo",`${capW()} · tốn: ${BAL.charity.khac} khắc, Bạc -${BAL.charity.bac} · thành: Đức +${BAL.charity.duc}, Danh +${BAL.charity.danh} (mỗi tháng một lần)`,whyTime(BAL.charity.khac)||(S.bac<BAL.charity.bac?`thiếu bạc (cần ${BAL.charity.bac})`:S.charM===S.turn?"tháng này đã làm":"")));
   return card(`${V.n} · ${V.full}`,"",l,S.virp[V.k],l+2,V.d,VIRFX[V.k],B,V.k)}).join("")+`</div>`;
  h+=`<div class="ph"><span><b>Tài nghệ</b> · cầm, kỳ, thi, họa, vũ, y, thêu, nấu.</span></div><div>`;
  h+=ARTS.map(a=>{const l=S.arts[a.k],need=l+2,cost=artFee(l);
-  const B=l>=5?[`<span class="ef g">${artNm(5)}</span>`]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`tốn: 2 khắc, Sức ${balSg(-BAL.artLes.self)} · thành: tiến bộ một hai phần`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
-   pbtn(`data-learn="${a.k}" data-mode="teacher"`,"Học với thầy",`tốn: 2 khắc, Bạc -${cost}, Sức ${balSg(-BAL.artLes.tch)} · thành: tiến bộ hai ba phần, luôn hơn tự học 1, có khi nghe chuyện`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:"")),
-   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Học với Thái hậu",`tốn: 2 khắc, Sức ${balSg(-BAL.artLes.th)} · thành: tiến bộ một đến ba phần, Thái hậu +3`,t2||(S.th<40?"cần Thái hậu thương 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))];
+  const B=l>=5?[`<span class="ef g">${artNm(5)}</span>`]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`tốn: ${BAL.artLes.k} khắc, Sức ${balSg(-BAL.artLes.self)} · thành: tiến bộ một hai phần`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
+   pbtn(`data-learn="${a.k}" data-mode="teacher"`,"Học với thầy",`tốn: ${BAL.artLes.k} khắc, Bạc -${cost}, Sức ${balSg(-BAL.artLes.tch)} · thành: tiến bộ hai ba phần, luôn hơn tự học 1, có khi nghe chuyện`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:"")),
+   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Học với Thái hậu",`tốn: ${BAL.artLes.k} khắc, Sức ${balSg(-BAL.artLes.th)} · thành: tiến bộ một đến ba phần, Thái hậu +3`,t2||(S.th<40?"cần Thái hậu thương 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))];
   const extra=(a.k==="theu"||a.k==="nau")?` · phẩm đồ tự làm ${artBonus(S,a.k).q}/100, bậc phẩm ${artBonus(S,a.k).tier}`:"";
   return card(a.n,AIMG[a.k],l,S.artp[a.k],need,(ARTDO[a.k]||"")+extra,ARTFX[a.k]||[],B,a.k)}).join("")+`</div>`;
  return h};

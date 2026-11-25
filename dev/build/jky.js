@@ -219,7 +219,7 @@ const SPEC=KY.SPEC={
   if(F===S){const f=intelLearn(v,KB().intelN,{by:wName(c.W),how:"Kỳ ngộ"});return `biết thêm chuyện của ${v.name}${f?": "+String(f).replace(/<[^>]+>/g,""):""}`}evA(F,v,KB().evStep);return""},
  ev:c=>{const F=c.F;if(c.X.pl){const n=evA(F,c.X.pl.a,KB().evStep);return `chứng cứ về ${nm(c.X.pl.a)} +${n||KB().evStep}`}
   if(c.X.lc){const L=c.X.lc;const x=kyLc(L);if(x)lostReturn(x,"kyngo");{const lc=kyLive(L)||L;lc.cev=(lc.cev||0)+KB().evStep}return x?`${loNm(L.k)} về lại rương, thêm một manh mối`:"thêm một manh mối"}return""},
- spy:c=>{const s=c.W.ref;s.spyFor=key(c.F);return `${s.name} thành tai mắt của ${nm(c.F)} trong cung ${nm(c.W.own)}`},
+ spy:c=>{const s=c.W.ref;s.spyFor=key(c.F);try{if(typeof svTouch==="function"){const x=svTouch(c.F,s,"tm");if(x&&(c.F===S||ownerOf(s)===S))log(x)}}catch(e){}/* servant-trust (jsvt) */return `${s.name} thành tai mắt của ${nm(c.F)} trong cung ${nm(c.W.own)}`},
  cure:c=>{const F=c.F;const i=typeof illOf==="function"?illOf(F):null;if(i){F.ill=null;return "bệnh cũ dứt hẳn"}ap(F,{suc:Math.round(KB().sucRest)});return `bồi bổ, Sức +${Math.round(KB().sucRest)}`},
  rk:c=>{try{if(S.srv&&!S.srv.risen){const old=S.srv.rk||0;S.srv.rk=Math.max(old,Math.min(BAL.srvRk.nq,old+KB().rkStep));if(S.srv.rk>old)return `được thăng ${SRK.maid[S.srv.rk]}`}}catch(e){}return""}
 };
