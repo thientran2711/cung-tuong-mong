@@ -64,6 +64,8 @@ const SCAN = () => {
   const inLay = e => lay === document.body ? layerOf(e) === document.body : lay.contains(e);
   let btns = all.filter(inLay).map(e => ({ e, p: probe(e) }));
   if (!btns.some(x => x.p.hit)) { const hl = all.map(e => ({ e, p: probe(e) })).filter(x => x.p.hit); if (hl.length) { lay = layerOf(hl[hl.length - 1].e); btns = all.filter(inLay).map(e => ({ e, p: probe(e) })) } }
+  /* a big screen panel that is not a dialog (Dư đồ map .mapsc, scenes in the page) sits IN the page: tabs / «Sang buổi» stay valid moves */
+  if (lay !== document.body && !lay.matches(LAYER)) { btns = all.filter(e => { const l = layerOf(e); return l === lay || l === document.body }).map(e => ({ e, p: probe(e) })) }
   /* tutorial (Lời dặn #ktut): .ktut-blk blocks every card but the highlighted one BY DESIGN → the gate is the layer: its own buttons + the hole target */
   const tut = document.getElementById('ktut'); let gate = false;
   if (tut && !tut.hidden && tut.querySelector('.ktut-blk,.ktut-card') && getComputedStyle(tut).display !== 'none') { gate = true; lay = tut; btns = all.map(e => ({ e, p: probe(e) })).filter(x => x.p.hit) }
