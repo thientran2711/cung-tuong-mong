@@ -1,0 +1,2 @@
+141:BUG game softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Tin trong cung buổi này)
+152:BUG game softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=17: Lịch tháng / Tin báo / Tin báo / Đã biết về Hoàng hậu Thẩm Nhã Như / Tin báo / Dung · Dung nghi)
