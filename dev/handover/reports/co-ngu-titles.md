@@ -172,3 +172,35 @@ START_CTX ~3 % (1M window); finished at ~15 %. Worktree /home/user/wt/cnt (revie
 Branch review/co-ngu-seals from LIVE main 9f72524b (NOT stacked on dbd77388). KP_SEAL (j79, one table): LUẬT→CUNG QUY · TIN→PHONG THANH · ĐÊM→CANH KHUYA · CẢNH GIÁC→HIỂM HỌA · CHỨNG CỨ→VẬT CHỨNG · BAN THƯỞNG→ÂN THƯỞNG. Kept: ĐIỀU, BÁO, VIỆC, KẾT QUẢ, KIẾP, NGƯỜI (MAIN 136).
 Family: jksize KSZ3_NAME was a SECOND copy of the seal words → now reads KP_SEAL; KIT.md seal list + every doc mention; kit-size3/4-compose.py sheet labels. Tests/VP: no test or VP regex reads these six words (grep dev/test dev/tools dev/build).
 Fit (measured, Fold 755x1000 + iPad 1180x820): every seal one line, scrollWidth = clientWidth, header no overflow, no page overflow; widths 80–110 px (old BAN THƯỞNG 101). Shot: CDN img/_review/co-ngu-titles/seal-pair.webp (before | after, both devices; iPad «LUẬT» before cell could not be cropped on main — same word as Fold). QUICKCHECK PASS 4406fe66 (core gates incl. kit-conform PASS). Needs Foreman B «KIT OK».
+
+## 9. r2 + r3 on review/co-ngu-seals (MAIN 136 adds) — KIT READY 73fe03b9
+- r2 363522b2: mid-sentence UI words quoted + «bấm»→«chạm» (25 strings / 13 files): Mưu kế tip «…được nhiều, nhưng hiểm họa ghi rõ ở dòng «Kèm».», «trong dòng «Được»», «chạm «Gợi ý»/«Sẵn sàng»/«Dâng hương»/«Dán»/«Ngỏ giá»/«Kiếp mới»/«Gửi đường dẫn»/«Tiếp tục»».
+- r3 73fe03b9: VANPHONG-banned modern words fixed at the SOURCE (j84 VP already patched most on screen; sources now clean):
+| file | now | new | n |
+|---|---|---|---|
+| j52.js | tải lại trang, chọn ô khác hay | mở lại, chọn sổ khác hay | 1 |
+| jhc.js | n:"Để game tự chọn" | n:"Chọn người hợp nhất" | 1 |
+| jhaohuu.js | sec.push({h:"Chỉ số" | sec.push({h:"Tư chất" | 1 |
+| jtut.js | {t:"Game này là gì" | {t:"Cung Tường Mộng là gì" | 1 |
+| jtut.js | Game này chơi gì · trang | Cách chơi · trang | 1 |
+| jtut.js | <small>Game này chơi gì · | <small>Cách chơi · | 1 |
+| j16.js | Phiên bản ván (${d.v}) không hợp với bản game này. | Bản chép này (${d.v}) không hợp với bản hiện nay. | 1 |
+| j19.js | >không đổi chỉ số</span> | >không đổi gì</span> | 1 |
+| j25.js | >không đổi chỉ số</span> | >không đổi gì</span> | 1 |
+| j23.js | cơ hội được thị tẩm | thêm dịp được thị tẩm | 1 |
+| j13.js | cơ hội lớn. | cơ duyên lớn. | 1 |
+| j67.js | Cơ hội hại {foe} | Dịp hại {foe} | 1 |
+| j79.js | <div class="kpopt">Thang cơ hội</div> | <div class="kpopt">Thang cơ duyên</div> | 1 |
+| j79.js | "Thang cơ hội, từ thấp lên cao: " | "Thang cơ duyên, từ thấp lên cao: " | 1 |
+| jrd_bd.js | còn cơ hội | còn dịp | 1 |
+| jtq14.js | giành mất cơ hội | giành mất dịp | 1 |
+| j8.js | Thái y viện xét nghiệm | Thái y viện nghiệm độc | 1 |
+| j8.js | Kiểm tra rương đồ, tìm thấy: | Soát rương, tìm thấy: | 1 |
+| j8.js | Kiểm tra rương đồ: không thấy gì lạ. | Soát rương: không thấy gì lạ. | 1 |
+| j8.js | nên kiểm tra đồ. | nên soát đồ. | 1 |
+| j92.js | Nên kiểm tra đồ trong rương. | Nên soát đồ trong rương. | 1 |
+| jcooptimer.js | xem các tab, | xem các mục, | 2 |
+| jhaohuu.js | xem các tab, | xem các mục, | 1 |
+| jload.js | chế độ tiết kiệm dữ liệu | chế độ tiết kiệm mạng | 1 |
+KEPT (reason): act names «Kiểm tra đồ» etc. (keys of acts/tools role-parity-scan; VP shows «Soát» on screen) · j72sd «kiểm tra» (GENERATED from handover content/thin/j72seeds*.md — fix there, not by hand; VP shows «soát») · «Tải hết để chơi offline» (owner's own wording OD 24/11 ~17:57Z; offline-all.js) · «điểm» (343 hits: mostly trang điểm/địa điểm/thời điểm; VP turns score-«điểm» into «phần») · «lưu» (all = lưu ở/lưu danh/names, none = save) · j84 VP table, kit sample page, comments.
+Scans: /home/user/wt/cns-shots/{capscan,modscan}.py. QUICKCHECK PASS 73fe03b9 (core gates PASS; buổi 1674/2204 ms).
