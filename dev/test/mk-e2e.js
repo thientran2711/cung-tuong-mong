@@ -1,10 +1,11 @@
 /* Điểm trang buổi sáng (review/toilette, dev/build/jtoil.js): the morning card + top-bar chip, the dress game (kitInvGrid), the makeup game
    played with real pointer moves, the effect on the Thỉnh an Thái hậu / Hoàng hậu cards by nết, skipping does not block, an old save loads.
    (mk-e2e variant: picks the preset Đào hoa and stops at the reveal) usage: node dev/test/mk-e2e.js <url> <WxH@dpr> <shotdir> [oldsave.json] */
-const {chromium}=require('./lib/pw-roulette');const fs=require('fs');
+const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const RT=require('./realtap.js'),TR=require('./lib/toilrules');
 const [,,URL,VP,DIR,OLD]=process.argv;const m=/(\d+)x(\d+)@([\d.]+)/.exec(VP||'755x1000@2');const W=+m[1],H=+m[2],DPR=+m[3];const tag=`${W}x${H}`;
 fs.mkdirSync(DIR,{recursive:true});
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:DPR,serviceWorkers:'block'});await ctx.route(u=>/ctmload=1|x-ctm-load/.test(String(u)),r=>r.abort());const p=await ctx.newPage();
+ const rt=RT.make(p,{dev:'mk-e2e',touch:false,log:x=>{if(x.k==='DEAD BUTTON')console.log(JSON.stringify(x))}});
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(180000);const out={vp:VP};
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(1500);
  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;new MutationObserver(()=>document.querySelectorAll('.kroul,#kload').forEach(e=>e.remove())).observe(document.body,{childList:true})});
@@ -25,13 +26,13 @@ fs.mkdirSync(DIR,{recursive:true});
  out.before=await cardTxt();
   await p.screenshot({path:`${DIR}/toil-${tag}-0-morning.jpg`,quality:70});
  /* 2. tap the chip → the dress game */
- await p.click('#k3tt [data-k3="toil"]');await p.waitForSelector('#kg82 .toilw');await p.waitForFunction(()=>[...document.querySelectorAll('#kg82 img')].every(i=>i.complete),null,{timeout:90000}).catch(()=>{});await p.waitForTimeout(600);
+ await rt.tap('#k3tt [data-k3="toil"]',{screen:'mk-e2e',label:'chip Điểm trang',wait:4000});await TR.passRules(p,rt);await p.waitForSelector('#kg82 .toilw');await p.waitForFunction(()=>[...document.querySelectorAll('#kg82 img')].every(i=>i.complete),null,{timeout:90000}).catch(()=>{});await p.waitForTimeout(600);
  await p.screenshot({path:`${DIR}/toil-${tag}-1-dress.jpg`,quality:70});
  /* put on something from the bag if any (tap the first non-worn item) */
  out.bag=await p.evaluate(()=>document.querySelectorAll('#kg82 [data-kinvkey="toil"][data-kinvi]').length);
- await p.click('#toilok');await p.waitForTimeout(400);out.dress=await p.evaluate(()=>TOIL.st&&TOIL.st.dv);
+ await rt.tap('#toilok',{screen:'mk-e2e',label:'Mặc bộ này',wait:4000});await p.waitForTimeout(400);out.dress=await p.evaluate(()=>TOIL.st&&TOIL.st.dv);
  await p.screenshot({path:`${DIR}/toil-${tag}-2-verdict.jpg`,quality:70});
- await p.evaluate(()=>{TOIL.clock=+(new URLSearchParams(location.search).get('clock')||12)});await p.click('#toilmk');await p.waitForSelector('#kg82 .kswt');
+ await p.evaluate(()=>{TOIL.clock=+(new URLSearchParams(location.search).get('clock')||12)});await rt.tap('#toilmk',{screen:'mk-e2e',label:'Điểm trang',wait:4000});await p.waitForSelector('#kg82 .kswt');
  /* §60 colour pick: the face file's anchors from the local file (before the CDN upload), pick son đỏ thắm + phấn tử vi + mày thanh đại */
  await p.evaluate(()=>{const f=String((document.querySelector('#kg82 .kfzoom-i>img')||document.querySelector('#kg82 img.kpor')||{}).src||'').split('/').pop().split('?')[0];window.__mkf=f});
  try{const f=await p.evaluate(()=>window.__mkf);const g=await p.evaluate(f=>MK_FIT.face(f),f);if(g&&fs.existsSync(`img/mk-fit/${g}.json`))await p.evaluate(([g,j])=>{MK_FIT.g[g]=JSON.parse(j);MK_FIT.ld[g]=1;TOIL.prevUI&&TOIL.prevUI()},[g,fs.readFileSync(`img/mk-fit/${g}.json`,'utf8')])}catch(e){}
@@ -45,12 +46,12 @@ fs.mkdirSync(DIR,{recursive:true});
  const geo=await p.evaluate(()=>({b:TOIL.geo.brows()}));
  for(const L of geo.b){await p.mouse.move(L[0].x,L[0].y);await p.mouse.down();for(const q of L.filter((_,i)=>i%2===0||i===L.length-1))await p.mouse.move(q.x,q.y,{steps:2});await p.mouse.up()}
  await p.waitForTimeout(300);await p.screenshot({path:`${DIR}/toil-${tag}-3-brow.jpg`,quality:70});
- if(await p.evaluate(()=>!!document.getElementById('toilnx')))await p.click('#toilnx');await p.waitForTimeout(300);
+ if(await p.evaluate(()=>!!document.getElementById('toilnx')))await rt.tap('#toilnx',{screen:'mk-e2e',label:'Tiếp',wait:4000});await p.waitForTimeout(300);
  /* đánh phấn: rest the puff on each point for ~0.6 s */
  const ch=await p.evaluate(()=>TOIL.geo.cheeks());
  for(const q of ch){await p.mouse.move(q.x,q.y);await p.mouse.down();await p.waitForTimeout(450*12);await p.mouse.up()}
  await p.waitForTimeout(200);await p.screenshot({path:`${DIR}/toil-${tag}-4-powder.jpg`,quality:70});
- if(await p.evaluate(()=>!!document.getElementById('toilnx')))await p.click('#toilnx');await p.waitForTimeout(300);
+ if(await p.evaluate(()=>!!document.getElementById('toilnx')))await rt.tap('#toilnx',{screen:'mk-e2e',label:'Tiếp',wait:4000});await p.waitForTimeout(300);
  /* chấm son: tap when the ring closes on the lip */
  for(let k=0;k<10&&await p.evaluate(()=>!!TOIL.geo.lip());k++){for(let t=0;t<400;t++){const l=await p.evaluate(()=>TOIL.geo.lip());if(!l)break;if(Math.abs(l.ring-1)<.2){await p.mouse.click(l.x,l.y);break}await p.waitForTimeout(15)}}
  await p.waitForTimeout(1300);await p.screenshot({path:`${DIR}/toil-${tag}-5-result.jpg`,quality:70});
@@ -60,11 +61,11 @@ fs.mkdirSync(DIR,{recursive:true});
  for(let i=0;i<60&&!(await p.$('.ktrv'));i++){await p.evaluate(()=>{const b=document.querySelector('.kmov .kmend,.kmend');if(b)b.click()});await p.waitForTimeout(400)}
  await p.waitForSelector('.ktrv',{timeout:60000});out.revShown=true;
  await p.waitForTimeout(1500);await p.screenshot({path:`${DIR}/e2e-${tag}-rev1.jpg`,quality:60});
- await p.click('.ktrv-ov');await p.waitForTimeout(2500);
+ await rt.tap('.ktrv-ov',{screen:'mk-e2e',label:'reveal skip',wait:4000});await p.waitForTimeout(2500);
  out.card=await p.evaluate(()=>{const c=document.querySelector('.ktrv-card');return c?c.innerText.replace(/\n/g,' | '):null});
  await p.screenshot({path:`${DIR}/e2e-${tag}-rev2.jpg`,quality:60});
- for(let i=0;i<3&&await p.$('.ktrv');i++){await p.click('.ktrv-ov .kmend').catch(()=>{});await p.waitForTimeout(900)}
+ for(let i=0;i<3&&await p.$('.ktrv');i++){await rt.tap('.ktrv-ov .kmend',{screen:'mk-e2e',label:'scene end',wait:4000});await p.waitForTimeout(900)}
  out.revGone=!(await p.$('.ktrv'));
  await p.waitForSelector('#toildone');out.resultCard=await p.evaluate(()=>document.querySelector('#toildone').closest('#kg82,.kg82,body').innerText.slice(0,300));
  await p.screenshot({path:`${DIR}/e2e-${tag}-result.jpg`,quality:60});
- await p.click('#toildone');await p.waitForTimeout(500);out.look=await p.evaluate(()=>S.toilette&&S.toilette.look);out.errs=errs;console.log(JSON.stringify(out));await b.close()})();
+ await rt.tap('#toildone',{screen:'mk-e2e',label:'toildone',wait:4000});await p.waitForTimeout(500);out.look=await p.evaluate(()=>S.toilette&&S.toilette.look);out.errs=errs;console.log(JSON.stringify(out));await b.close()})();

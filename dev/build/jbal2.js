@@ -134,7 +134,7 @@ BAL.linkRange={rl:[-100,100],ro:[0,100]};
    and mark "quá hạn mức" when wearing the piece would take her over it (coordinator 15/11 design "xa xỉ value vs her rank allowance", after the
    owner's 23:05Z dress-contest ruling; the older 08:10Z ruling hid the allowance — set false to hide it again, the row keeps "món này N · Bên mình N → M").
    Reviewer r1 (coordinator ruling 15/11): owner rule 08:10Z wins -> false (no allowance, no "quá hạn mức"). */
-Object.assign(BAL,{itd:{allow:false}});
+Object.assign(BAL,{itd:{allow:false,useGroups:4/* m-fix-2: most «N lọ còn U lần dùng» lines in one item note (jitd kitUseNote) */}});
 
 /* per-person dislikes (jdis, review/pcard-dislikes): n = how many each person has [min,max]; aff = her thiện cảm lost after a wrong gift; sung = Emperor's Sủng lost;
    refuse = chance (0-100) a wrong gift is refused and stays in the chest (then refAff / refSung are lost instead); talk = chance a talk reveals one;
@@ -554,7 +554,7 @@ Object.assign(BAL,{spread:{cap:2,maxWait:4,codeWait:2}});
 /* FLIGHT-DAYQ (owner 24/11 ~18:05Z (5): "Mới sáng sớm là có sự kiện tới tìm liền ngay lập tức"): the FIRST buổi of a day (right after the title card + Tuần lục + Tin trong cung)
    brings no event that has no fitting morning slot: dawnSlot = the buổi an unslotted world card moves to (1 = trưa); dawnOpt = odds (0..100) that an optional
    j68 event is held at day start (was a hard-coded roll(50) in j68 evGate: half of them came at dawn). jdayq: poll = ms between looks while a turn / card is held; stale = ms a busy motion queue with no scene on screen may hold the turn. */
-Object.assign(BAL.spread,{dawnSlot:1,dawnOpt:100});Object.assign(BAL,{dayq:{poll:300,stale:10000}});
+Object.assign(BAL.spread,{dawnSlot:1,dawnOpt:100});Object.assign(BAL,{dayq:{poll:300,stale:10000,wake:2000/* button-crawl-fix-5: a card left in Q with nothing on screen is shown after this many ms (jdayq dqWake) */}});
 /* NIGHT STEALING (Tranh sủng / Chặn ngự giá) — ONE CORE for the act (her and every NPC alike) and for the NPC agent's choice (jsteal.js).
    act: cost = what one try costs (feign: Đức, road: Sức); failSung = Sủng lost on a failed try; rel = thiện cảm lost both ways on a win
    (relAdd: the robbed one also gains oán rel×BAL.relOan.hurt); ghen = jealousy of the robbed consort.
@@ -1742,7 +1742,10 @@ Object.assign(BAL.ag.why,{
    care = the share (0..1) of a care game's gain a won quick roll gives (pet care, watering): half of a good play, never more.
    Outcome table (a quick result never beats a good own play): lessons won = tiến bộ một phần, lost = 0 · works / crafts = never a product ·
    makeup won = the middle tier (Đoan trang, BAL.toil.tier[0]), lost = Vụng về · care won = BAL.skip.care of the gain, lost = 0. */
-Object.assign(BAL,{skip:{od:40,raw:5,care:.5}});
+/* cap = the highest play mark ANY quick / skip / "Để tài nghệ quyết định" / not-played round may count as (m-fix-1, owner OD 18/11 ~05:55Z
+   "a quick result never beats a good own play"; robot M4 25/11: an exam skip gave 10/10 Xuất sắc while a skilled own play gave 5/10): the middle
+   word Khá (BAL.mgTier.word[1]), like makeup's middle tier — a good own play (Giỏi, word[2], and up) always beats it. Read through kitSkipCap (j79). */
+Object.assign(BAL,{skip:{od:40,raw:5,care:.5,cap:5}});
 /* FACE REVEAL motion (owner 18/11 ~06:20Z, KIT §79 jreveal.js): ms = the grey veil clears from the face outward; lite = Gọn / reduced motion short fade;
    win = how long after a face is learned every place that first draws it (frame, avatar, stage figure) still plays its one reveal */
 Object.assign(BAL,{faceReveal:{ms:Math.round(1000*BAL.pace),lite:350,win:8000}});
