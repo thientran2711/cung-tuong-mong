@@ -1782,3 +1782,4 @@ coop-week-wait (6ZG9 calendar divergence + #coopfz stuck) | review/coop-week-wai
 coop-week-wait BIG review (opus, pre-opened) | review/coop-week-wait | session_01N1tNP4hMB3ucUiaZYuWHBr | RUNNING | 2026-11-25 19:14Z (Foreman B child 4)
 save-unseen-lists BIG review (opus) | review/save-unseen-lists | session_01N1tNP2NAx6v2HeVEvroSiE | RUNNING | 2026-11-25 19:26Z (Foreman B child 4)
 SANGBUOI r4 (successor of r3) | review/sangbuoi-held-fix | session_01V1ZZH4huuzV9rxXCRCtHSW | RUNNING | 2026-11-25 19:28Z (MAIN 145)
+kit-text-first KIT review (sonnet, B kit rv seat 5) | review/kit-text-first | session_01N1tNP5GSFx4pfuY3L8zQeD | RUNNING | 2026-11-25 19:42Z (Foreman B child 4)
