@@ -205,3 +205,24 @@ r3.4 OPEN: case I1 FAILS on 3abb8fda (Fold): «NO panel painted in 5800 ms», di
 LIVE moved to 17dfa64d (m-fix-3-r6 + two-way-oldsave test): merge it (index.html/sw.js conflicts → rebuild: python3 dev/build/assemble.py && bash dev/site/build_site.sh).
 Then on the final head, in order: (1) sangbuoi-held ALL cases Fold+iPad; `VP=1180x820 CASES=B REPEAT=10` beside a busy browser (loop sangbuoi-wrap.js); (2) case I on LIVE = must FAIL (before) / branch PASS; (3) coop-e2e alone ×1 + COOP_SWAP ×1 (compare LIVE if red); (4) quickcheck `bash dev/tools/quickcheck.sh HEAD` (check origin/main ref is current first: a stale local origin/main gave a wrong live base); (5) dayq-hold/order served with utf-8 (python server with 'text/html; charset=utf-8'); (6) REAL night pair: `node dev/test/sangbuoi-night.js http://127.0.0.1:PORT/index.html <outdir>` (VP / STUCK / LIVES env) → look 3× → one Fold|iPad pair (rows flip / news / after) → img/_review/sangbuoi-held/pair.jpg via python3 dev/site/cdn_sync.py; (7) write «## r4», send «LAND READY <sha>» to MAIN 145 AND BIG rv 13YzNeAK (BIG: run delta-first = cases G H I + COOP_SWAP + quickcheck).
 Serve: `python3 -m http.server 8731 --bind 127.0.0.1` from the worktree root works for /index.html (has charset meta); /dev/index.html needs a utf-8 server.
+
+## r4 (worker session_01V1ZZH4huuzV9rxXCRCtHSW, 25/11 19:28Z–) — flight land of 5223f9ab on the newest LIVE
+PRIORITY #1 CHECK: OD flight rulings 25/11 | main none (not landed) | review/sangbuoi-held-fix 5223f9ab, -r3wip 3abb8fda | claims SANGBUOI r3 → r4.
+### r4.1 Commits (review/sangbuoi-held-fix)
+| sha | what |
+|---|---|
+| 78af179d | merge LIVE 08e7d79f (kit pack-4); only index.html/sw.js conflicted → rebuilt (assemble.py + build_site.sh) |
+| 3762da08 | merge LIVE 351122ba (kit-music-r1); same; j11.js identical to main (kmusKey/musicCtx/kitNoDanger/watchdog untouched). **LAND READY 20:12Z** |
+### r4.2 Gates on 3762da08
+| gate | result |
+|---|---|
+| quickcheck | perf PASS new/live: render 194/233, tab 525/594, buổi 1708/4533 ms; open 1826 ms; old save ok. Core: only G4 button-crawl «Ô lưu · Lui close did not close its layer» (fold) = known LIVE fault |
+| sangbuoi-held A–H Fold | ALL PASS (G1 111 / G2 658 ms; H1 2797 / H2 80 ms; F news 158 / flip 159 ms) |
+| sangbuoi-held A–H iPad | ALL PASS (G1 143 / G2 732; H1 2885 / H2 230; F 181 / 187) |
+| dayq-hold (utf-8 server) | PASS 46 |
+| flip-newlife Fold / iPad | ALL OK / ALL OK |
+| coop-e2e non-swap ALONE | run 1 (right after quickcheck + held): 141/146 (fold #next «Sẵn sàng» ×2, buổi 3:1/3:2 for both, week after rebirth); LIVE 351122ba alone 142/142; run 2 alone: **142/142** → load flake |
+| night PAIR jpg | deferred until after the flight push (MAIN 145 order 20:01Z) |
+Notes: the held run with 5223f9ab's own test hung 18 min after «life ready» under quickcheck load (no watchdog in that test); re-run with the r3wip watchdog copy (CASES=ABCDEFGH, one process per device, http server) = ALL PASS. Co-op trace reading: dqUi() is false in co-op (every new jdayq path checks it); jcoopworld:1108 already sends #next to the global nextBuoi in co-op on LIVE (j6 change = no-op there); only the tapIn re-entry guard runs in co-op, and co-op never fires a nested next.click().
+### r4.3 Next
+JOB 2 after the flight push: r3wip (dqShown-only fix + case I1 paint) rebased on the then-LIVE; night PAIR jpg (new file name) under img/_review/sangbuoi-held/.
