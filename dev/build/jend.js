@@ -34,7 +34,7 @@ window.KIT_END.names={
   "Hoàng thái hậu":"Thiên tử từ mẫu","Mẫu hậu Hoàng thái hậu":"Đích mẫu tôn vinh","Tư thông bị phát giác":"Tình lụy thân vong","Ma ma":"Tóc bạc cung sâu",
   "Xuất cung":"Lồng son mở cửa","Xuất cung về quê":"Mây trắng cố hương","Xuất giá":"Tơ hồng ngoài cung","Được ban hôn":"Thánh chỉ se duyên","Vào vương phủ":"Hoa dời vương phủ",
   "Thành thân":"Bách niên giai lão","Bị đuổi khỏi cung":"Bèo dạt mây trôi","Cao chạy xa bay":"Song túc song phi","Trốn khỏi cung":"Cánh chim sổ lồng",
-  "Phế làm thứ dân":"Phượng gãy cánh","Ban hoa":"Hoa ban hồi hương"/* tuyển tú: not kept at the selection (jselx selxBanHoa; SELSCENE-19 merge) */,"Một đời an nhiên":"Gió mát trăng thanh","Ban chết":"Ba thước lụa trắng","Tân đế đăng cơ":"Rồng mới phượng xưa","Lãnh cung":"Xuân tàn lãnh cung",
+  "Phế làm thứ dân":"Phượng gãy cánh","Một đời an nhiên":"Gió mát trăng thanh","Ban chết":"Ba thước lụa trắng","Tân đế đăng cơ":"Rồng mới phượng xưa","Lãnh cung":"Xuân tàn lãnh cung",
   /* ngoài cung (jkc / jkc2) */
   "Chính thất hầu phủ":"Phượng đậu hầu môn","Vợ quan thanh liêm":"Thanh bạch trọn đời","Nữ phu tử":"Đèn sách má hồng","Làm thiếp nhà quyền quý":"Hầu môn sâu tựa biển",
   "Gả xa":"Viễn giá tha hương","Bỏ trốn":"Bỏ gấm theo tình","Công chúa ở lại cố quốc":"Non nước cố hương","Làm người ở nhà lý trưởng":"Phận tôi đòi",
