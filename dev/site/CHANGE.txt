@@ -1,1 +1,1 @@
-Bảng tra cứu (Tâm trạng, Đã biết về…) không còn hiện chồng nhiều bản; sau mỗi môn có nút bước tiếp; ghi chú «còn N lần dùng» gộp gọn.
+Bảng trang điểm trên Fold: mọi nút đều bấm được.
