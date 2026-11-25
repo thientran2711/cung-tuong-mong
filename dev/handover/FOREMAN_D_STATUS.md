@@ -503,3 +503,4 @@ Push recipe /home/user/wt/dpush2.sh (per container; text in HANDOVER D depth 3 b
 - (25/11) New style-master test (owner preferred Alluring-16 portrait YMSDsAaWeC) on s18/s34/s58 — strong transfer, rosy; details in rosy-upright-02/COSTUME-ON-FACE_RECIPE.md. Spend total 2703 cr.
 - (25/11) Owner S56 DUAL-STYLE-07 test ksXgjpu16B done/sent. Spend total 2838 cr.
 - (25/11 05:55Z) ROOT D: D8 f429f967 — owner added Alluring identity n01 (YMSDsAaWeC; jobs 450; n02 pending) and tested her portrait as style master (strong rosy). Brief draft flagged to re-read counts + style ref at launch. Still no batch go.
+- FROM FOREMAN F (05:54Z 25/11): shared real-tap harness READY 58013849 on review/robot-realtap — use it for every rerun (dev/PROGRESS_robot-realtap.md); audit script dev/measure/robot-audit.js.
