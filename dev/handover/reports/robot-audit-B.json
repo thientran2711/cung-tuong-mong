@@ -1,0 +1,2188 @@
+{
+ "at": "2026-11-25T05:30:38.015Z",
+ "counts": {
+  "total": 157,
+  "valid": 14,
+  "invalid": 143,
+  "reasons": {
+   "bot-chosen exit road «…»": 143
+  },
+  "byEnd": {
+   "exit": 143,
+   "death": 14
+  }
+ },
+ "lives": [
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p01-S1 host k1 cn/cn_ban",
+   "end": "Xuất gia",
+   "age": "age 20 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 host k1 cn/cn_ban|Xuất gia|0.75|20||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p01-S1 guest k1 tt/tt_co",
+   "end": "Xuất gia",
+   "age": "age 20 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 guest k1 tt/tt_co|Xuất gia|0.08|20||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p01-S1 host k2 ch/ch_bi",
+   "end": "Được ban hôn — Được ban hôn cho Tống Tư Viễn",
+   "age": "age 20 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Được ban hôn» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Được ban hôn»",
+   "sig": "coop-p01-S1 host k2 ch/ch_bi|Được ban hôn — Được ban hôn cho Tống Tư Viễn|0.17|20||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p01-S1 host k3 pf/pt_hai",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 20 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p01-S1 host k3 pf/pt_hai|Phế làm thứ dân — Phế làm thứ dân, xuất cung|0.42|20||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p01-S1 guest k2 muoi/muoi_lau",
+   "end": "Xuất gia",
+   "age": "age 18 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 guest k2 muoi/muoi_lau|Xuất gia|0.5|18||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p01-S1 host k4 dtq/dtq_vu",
+   "end": "Xuất gia",
+   "age": "age 20 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 host k4 dtq/dtq_vu|Xuất gia|0.17|20||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p01-S1 guest k3 nc/nc_tuc",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 19 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p01-S1 guest k3 nc/nc_tuc|Phế làm thứ dân — Phế làm thứ dân, xuất cung|0.42|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p01-S1 guest k4 ch/ch_bi",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 20 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p01-S1 guest k4 ch/ch_bi|Phế làm thứ dân — Phế làm thứ dân, xuất cung|0.42|20||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p01-S1 host k5 nc/nc_tuc",
+   "end": "Xuất gia",
+   "age": "age 19 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 host k5 nc/nc_tuc|Xuất gia|1.67|19||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p01-S1 host k6 thd/thd_hoc",
+   "end": "Xuất gia",
+   "age": "age 22 y6",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 host k6 thd/thd_hoc|Xuất gia|5.08|22||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p01-S1 host k7 bd/bd_san",
+   "end": "Xuất gia",
+   "age": "age 18 y7",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 host k7 bd/bd_san|Xuất gia|5.83|18||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p01-S1 host k8 muoi/muoi_lau",
+   "end": "Hồng nhan bạc mệnh — Bị ban chết vì trốn khỏi cung",
+   "age": "age 21 y2",
+   "valid": true,
+   "why": [],
+   "cls": "death",
+   "note": "",
+   "sig": "coop-p01-S1 host k8 muoi/muoi_lau|Hồng nhan bạc mệnh — Bị ban chết vì trốn khỏi cung|1.25|21||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p01-S1 host k9 td/td_song",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 20 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p01-S1 host k9 td/td_song|Phế làm thứ dân — Phế làm thứ dân, xuất cung|1.33|20||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p01-S1 guest k5 cnv/cnv_chu",
+   "end": "Hồng nhan bạc mệnh — Bị Tôn Nhu Tắc sai đánh trượng đến chết",
+   "age": "age 22 y4",
+   "valid": true,
+   "why": [],
+   "cls": "death",
+   "note": "",
+   "sig": "coop-p01-S1 guest k5 cnv/cnv_chu|Hồng nhan bạc mệnh — Bị Tôn Nhu Tắc sai đánh trượng đến chết|3.58|22||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p01-S1 guest k6 bd/bd_soi",
+   "end": "Xuất cung về quê",
+   "age": "age 19 y4",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất cung về quê» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất cung về quê»",
+   "sig": "coop-p01-S1 guest k6 bd/bd_soi|Xuất cung về quê|3.67|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p01-S1 guest k7 dtq/dtq_binh",
+   "end": "Xuất gia",
+   "age": "age 21 y5",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 guest k7 dtq/dtq_binh|Xuất gia|4.25|21||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p01-S1 guest k8 cn/cn_than",
+   "end": "Xuất cung về quê",
+   "age": "age 19 y6",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất cung về quê» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất cung về quê»",
+   "sig": "coop-p01-S1 guest k8 cn/cn_than|Xuất cung về quê|5.33|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p01-S1 guest k9 td/td_an",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 22 y9",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p01-S1 guest k9 td/td_an|Phế làm thứ dân — Phế làm thứ dân, xuất cung|8.25|22||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p01-S1 guest k10 thd/thd_sach",
+   "end": "Xuất gia",
+   "age": "age 19 y9",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 guest k10 thd/thd_sach|Xuất gia|8.67|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p01-S1 guest k11 pf/pt_tang",
+   "end": "Xuất cung về quê",
+   "age": "age 19 y9",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất cung về quê» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất cung về quê»",
+   "sig": "coop-p01-S1 guest k11 pf/pt_tang|Xuất cung về quê|8.75|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p01-S1 guest k12 tt/tt_mat",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 19 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p01-S1 guest k12 tt/tt_mat|Phế làm thứ dân — Phế làm thứ dân, xuất cung|0.92|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p01-S1 host k10 cnv/cnv_ma",
+   "end": "Được ban hôn — Được Lưu Nghiên Thu ban hôn cho Tiến sĩ họ Tô vừa đỗ khoa này",
+   "age": "age 21 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Được ban hôn» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Được ban hôn»",
+   "sig": "coop-p01-S1 host k10 cnv/cnv_ma|Được ban hôn — Được Lưu Nghiên Thu ban hôn cho Tiến sĩ họ Tô vừa đỗ khoa này|1.75|21||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 guest k1 dtq/dtq_bien",
+   "end": "Xuất gia",
+   "age": "age 18 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 guest k1 dtq/dtq_bien|Xuất gia|0.08|18||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 guest k2 cn/cn_tinh",
+   "end": "Xuất gia",
+   "age": "age 20 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 guest k2 cn/cn_tinh|Xuất gia|0.25|20||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 guest k3 td/td_song",
+   "end": "Xuất gia",
+   "age": "age 19 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 guest k3 td/td_song|Xuất gia|0.33|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 guest k4 thd/thd_hoc",
+   "end": "Xuất gia",
+   "age": "age 18 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 guest k4 thd/thd_hoc|Xuất gia|1|18||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 guest k5 pf/pt_hai",
+   "end": "Xuất gia",
+   "age": "age 19 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 guest k5 pf/pt_hai|Xuất gia|1.58|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 guest k6 tt/tt_oan",
+   "end": "Xuất gia",
+   "age": "age 18 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 guest k6 tt/tt_oan|Xuất gia|1.75|18||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 guest k7 muoi/muoi_doi",
+   "end": "Xuất gia",
+   "age": "age 21 y3",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 guest k7 muoi/muoi_doi|Xuất gia|1.92|21||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 guest k8 nc/nc_vuong",
+   "end": "Hồng nhan bạc mệnh — Bị ban chết vì trốn khỏi cung",
+   "age": "age 19 y3",
+   "valid": true,
+   "why": [],
+   "cls": "death",
+   "note": "",
+   "sig": "coop-p02-S1 guest k8 nc/nc_vuong|Hồng nhan bạc mệnh — Bị ban chết vì trốn khỏi cung|2|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 guest k9 ch/ch_co",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 19 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p02-S1 guest k9 ch/ch_co|Phế làm thứ dân — Phế làm thứ dân, xuất cung|0.83|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 host k1 nc/nc_tuc",
+   "end": "Hồng nhan bạc mệnh — Tráo con bị bắt quả tang, tội khi quân",
+   "age": "age 23 y5",
+   "valid": true,
+   "why": [],
+   "cls": "death",
+   "note": "",
+   "sig": "coop-p02-S1 host k1 nc/nc_tuc|Hồng nhan bạc mệnh — Tráo con bị bắt quả tang, tội khi quân|4.67|23||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 host k2 thd/thd_hoc",
+   "end": "Xuất gia",
+   "age": "age 20 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 host k2 thd/thd_hoc|Xuất gia|1|20||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 host k3 bd/bd_san",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 20 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p02-S1 host k3 bd/bd_san|Phế làm thứ dân — Phế làm thứ dân, xuất cung|1.17|20||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 host k4 muoi/muoi_lau",
+   "end": "Xuất gia",
+   "age": "age 19 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 host k4 muoi/muoi_lau|Xuất gia|1.75|19||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 host k5 td/td_song",
+   "end": "Hồng nhan bạc mệnh — Bà đỡ quỳ ngoài điện: ngươi khó sinh, chỉ giữ được một. Thái y đoán là hoàng tử. Hoàng thượng lặng đi hồi lâu rồi phán: “Giữ con.” Ngươi gắng sinh hạ hài nhi rồi nhắm mắt",
+   "age": "age 21 y3",
+   "valid": true,
+   "why": [],
+   "cls": "death",
+   "note": "",
+   "sig": "coop-p02-S1 host k5 td/td_song|Hồng nhan bạc mệnh — Bà đỡ quỳ ngoài điện: ngươi khó sinh, chỉ giữ được một. Thái y đoán là hoàng tử. Hoàng thượng lặng đi hồi lâu rồi phán: “Giữ con.” Ngươi gắng sinh hạ hài nhi rồi nhắm mắt|2.75|21||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 host k6 cnv/cnv_ma",
+   "end": "Hồng nhan bạc mệnh — Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 25 tuổi",
+   "age": "age 25 y6",
+   "valid": true,
+   "why": [],
+   "cls": "death",
+   "note": "",
+   "sig": "coop-p02-S1 host k6 cnv/cnv_ma|Hồng nhan bạc mệnh — Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 25 tuổi|5.17|25||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 host k7 tt/tt_co",
+   "end": "Hồng nhan bạc mệnh — Sổ Kính sự phòng không ghi đêm thị tẩm nào trước khi có 'thai', giả mang thai bị lật tẩy, tội khi quân",
+   "age": "age 22 y4",
+   "valid": true,
+   "why": [],
+   "cls": "death",
+   "note": "",
+   "sig": "coop-p02-S1 host k7 tt/tt_co|Hồng nhan bạc mệnh — Sổ Kính sự phòng không ghi đêm thị tẩm nào trước khi có 'thai', giả mang thai bị lật tẩy, tội khi quân|3|22||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 host k8 cn/cn_tinh",
+   "end": "Dâng biểu xuất gia — Xuất gia",
+   "age": "age 19 y3",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Dâng biểu xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Dâng biểu xuất gia»",
+   "sig": "coop-p02-S1 host k8 cn/cn_tinh|Dâng biểu xuất gia — Xuất gia|2|19||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 host k9 ch/ch_ho",
+   "end": "Xuất cung về quê",
+   "age": "age 19 y3",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất cung về quê» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất cung về quê»",
+   "sig": "coop-p02-S1 host k9 ch/ch_ho|Xuất cung về quê|2.25|19||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 host k10 pf/pt_dang",
+   "end": "Xuất gia",
+   "age": "age 19 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 host k10 pf/pt_dang|Xuất gia|0.42|19||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 host k11 dtq/dtq_bien",
+   "end": "Xuất gia",
+   "age": "age 18 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 host k11 dtq/dtq_bien|Xuất gia|0.58|18||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 host k12 nc/nc_su",
+   "end": "Hồng nhan bạc mệnh — Sổ Kính sự phòng không ghi đêm thị tẩm nào trước khi có 'thai', giả mang thai bị lật tẩy, tội khi quân",
+   "age": "age 22 y3",
+   "valid": true,
+   "why": [],
+   "cls": "death",
+   "note": "",
+   "sig": "coop-p02-S1 host k12 nc/nc_su|Hồng nhan bạc mệnh — Sổ Kính sự phòng không ghi đêm thị tẩm nào trước khi có 'thai', giả mang thai bị lật tẩy, tội khi quân|2|22||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 host k13 thd/thd_tro",
+   "end": "Xuất gia",
+   "age": "age 19 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 host k13 thd/thd_tro|Xuất gia|0.33|19||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 host k14 bd/bd_hen",
+   "end": "Xuất gia",
+   "age": "age 18 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 host k14 bd/bd_hen|Xuất gia|0.83|18||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 host k15 muoi/muoi_tuoc",
+   "end": "Xuất gia",
+   "age": "age 19 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 host k15 muoi/muoi_tuoc|Xuất gia|1.75|19||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 host k16 td/td_ke",
+   "end": "Xuất cung về quê",
+   "age": "age 19 y3",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất cung về quê» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất cung về quê»",
+   "sig": "coop-p02-S1 host k16 td/td_ke|Xuất cung về quê|2|19||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 host k17 cnv/cnv_mat",
+   "end": "Xuất cung về quê",
+   "age": "age 21 y4",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất cung về quê» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất cung về quê»",
+   "sig": "coop-p02-S1 host k17 cnv/cnv_mat|Xuất cung về quê|3|21||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2-s.json",
+   "life": "coop-p02-S1 host k18 tt/tt_mat",
+   "end": "Xuất cung — Xuất cung, mở tiệm nhỏ ở kinh thành",
+   "age": "age 25 y11",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất cung về quê» (option) (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất cung về quê» (option)",
+   "sig": "coop-p02-S1 host k18 tt/tt_mat|Xuất cung — Xuất cung, mở tiệm nhỏ ở kinh thành|9.83|25||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p01-S1 guest k1 cn/cn_ban",
+   "end": "Xuất gia",
+   "age": "age 20 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 guest k1 cn/cn_ban|Xuất gia|0.58|20||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p01-S1 host k1 tt/tt_co",
+   "end": "Xuất gia",
+   "age": "age 20 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 host k1 tt/tt_co|Xuất gia|0.67|20||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p01-S1 guest k2 ch/ch_bi",
+   "end": "Xuất gia",
+   "age": "age 20 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 guest k2 ch/ch_bi|Xuất gia|0.83|20||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p01-S1 guest k3 pf/pt_hai",
+   "end": "Xuất gia",
+   "age": "age 18 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 guest k3 pf/pt_hai|Xuất gia|1.17|18||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p01-S1 guest k4 dtq/dtq_vu",
+   "end": "Xuất gia",
+   "age": "age 20 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 guest k4 dtq/dtq_vu|Xuất gia|1.33|20||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p01-S1 guest k5 nc/nc_tuc",
+   "end": "Xuất gia",
+   "age": "age 18 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 guest k5 nc/nc_tuc|Xuất gia|1.67|18||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p01-S1 host k2 muoi/muoi_lau",
+   "end": "Xuất gia",
+   "age": "age 22 y3",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 host k2 muoi/muoi_lau|Xuất gia|2.42|22||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p01-S1 guest k6 thd/thd_hoc",
+   "end": "Xuất gia",
+   "age": "age 21 y3",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 guest k6 thd/thd_hoc|Xuất gia|2.5|21||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p01-S1 host k3 nc/nc_tuc",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 20 y3",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p01-S1 host k3 nc/nc_tuc|Phế làm thứ dân — Phế làm thứ dân, xuất cung|2.5|20||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p01-S1 guest k7 bd/bd_san",
+   "end": "Xuất gia",
+   "age": "age 18 y3",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 guest k7 bd/bd_san|Xuất gia|2.67|18||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p01-S1 host k4 ch/ch_bi",
+   "end": "Được ban hôn — Được ban hôn cho Đậu Bác Văn",
+   "age": "age 19 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Được ban hôn» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Được ban hôn»",
+   "sig": "coop-p01-S1 host k4 ch/ch_bi|Được ban hôn — Được ban hôn cho Đậu Bác Văn|0|19||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p01-S1 guest k8 muoi/muoi_lau",
+   "end": "Xuất gia",
+   "age": "age 20 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 guest k8 muoi/muoi_lau|Xuất gia|0.42|20||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p01-S1 host k5 cnv/cnv_chu",
+   "end": "Hồng nhan bạc mệnh — Bị Đoan Mộc Tĩnh Uyển sai đánh trượng đến chết",
+   "age": "age 18 y1",
+   "valid": true,
+   "why": [],
+   "cls": "death",
+   "note": "",
+   "sig": "coop-p01-S1 host k5 cnv/cnv_chu|Hồng nhan bạc mệnh — Bị Đoan Mộc Tĩnh Uyển sai đánh trượng đến chết|0.67|18||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p01-S1 guest k9 td/td_song",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 20 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p01-S1 guest k9 td/td_song|Phế làm thứ dân — Phế làm thứ dân, xuất cung|0.25|20||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p01-S1 host k6 bd/bd_soi",
+   "end": "Xuất gia",
+   "age": "age 20 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 host k6 bd/bd_soi|Xuất gia|0.42|20||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p01-S1 guest k10 cnv/cnv_ma",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 18 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p01-S1 guest k10 cnv/cnv_ma|Phế làm thứ dân — Phế làm thứ dân, xuất cung|0.42|18||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p01-S1 guest k11 tt/tt_co",
+   "end": "Xuất gia",
+   "age": "age 19 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 guest k11 tt/tt_co|Xuất gia|0.25|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p01-S1 guest k12 cn/cn_tinh",
+   "end": "Xuất gia",
+   "age": "age 19 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 guest k12 cn/cn_tinh|Xuất gia|0.42|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p01-S1 guest k13 ch/ch_ho",
+   "end": "Xuất gia",
+   "age": "age 20 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 guest k13 ch/ch_ho|Xuất gia|0.83|20||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p01-S1 guest k14 pf/pt_dang",
+   "end": "Xuất gia",
+   "age": "age 19 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 guest k14 pf/pt_dang|Xuất gia|0.17|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p01-S1 guest k15 dtq/dtq_bien",
+   "end": "Xuất gia",
+   "age": "age 19 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 guest k15 dtq/dtq_bien|Xuất gia|0.5|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p01-S1 host k7 dtq/dtq_binh",
+   "end": "Xuất gia",
+   "age": "age 19 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 host k7 dtq/dtq_binh|Xuất gia|0.58|19||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p01-S1 host k8 cn/cn_than",
+   "end": "Xuất gia",
+   "age": "age 20 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 host k8 cn/cn_than|Xuất gia|0.83|20||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p01-S1 host k9 td/td_an",
+   "end": "Xuất gia",
+   "age": "age 18 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 host k9 td/td_an|Xuất gia|1.25|18||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p01-S1 host k10 thd/thd_sach",
+   "end": "Xuất gia",
+   "age": "age 20 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p01-S1 host k10 thd/thd_sach|Xuất gia|0.17|20||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p02-S1 host k1 dtq/dtq_bien",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 18 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p02-S1 host k1 dtq/dtq_bien|Phế làm thứ dân — Phế làm thứ dân, xuất cung|0.25|18||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p02-S1 host k2 cn/cn_tinh",
+   "end": "Xuất gia",
+   "age": "age 20 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 host k2 cn/cn_tinh|Xuất gia|0.5|20||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p02-S1 host k3 td/td_song",
+   "end": "Xuất gia",
+   "age": "age 18 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 host k3 td/td_song|Xuất gia|0.92|18||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p02-S1 host k4 thd/thd_hoc",
+   "end": "Xuất gia",
+   "age": "age 19 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 host k4 thd/thd_hoc|Xuất gia|1.17|19||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p02-S1 host k5 pf/pt_hai",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 18 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p02-S1 host k5 pf/pt_hai|Phế làm thứ dân — Phế làm thứ dân, xuất cung|1.33|18||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p02-S1 guest k1 nc/nc_tuc",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 19 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p02-S1 guest k1 nc/nc_tuc|Phế làm thứ dân — Phế làm thứ dân, xuất cung|1.42|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p02-S1 guest k2 thd/thd_hoc",
+   "end": "Xuất gia",
+   "age": "age 20 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 guest k2 thd/thd_hoc|Xuất gia|1.67|20||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p02-S1 guest k3 bd/bd_san",
+   "end": "Xuất gia",
+   "age": "age 19 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 guest k3 bd/bd_san|Xuất gia|1.75|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p02-S1 guest k4 muoi/muoi_lau",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 20 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p02-S1 guest k4 muoi/muoi_lau|Phế làm thứ dân — Phế làm thứ dân, xuất cung|0.17|20||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p02-S1 guest k5 td/td_song",
+   "end": "Xuất gia",
+   "age": "age 19 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 guest k5 td/td_song|Xuất gia|0.33|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p02-S1 guest k6 cnv/cnv_ma",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 20 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p02-S1 guest k6 cnv/cnv_ma|Phế làm thứ dân — Phế làm thứ dân, xuất cung|0.42|20||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p02-S1 guest k7 tt/tt_co",
+   "end": "Xuất gia",
+   "age": "age 18 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 guest k7 tt/tt_co|Xuất gia|0.17|18||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p02-S1 host k6 tt/tt_oan",
+   "end": "Xuất gia",
+   "age": "age 20 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 host k6 tt/tt_oan|Xuất gia|0.25|20||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p02-S1 guest k8 cn/cn_tinh",
+   "end": "Xuất gia",
+   "age": "age 19 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 guest k8 cn/cn_tinh|Xuất gia|0.5|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p02-S1 host k7 muoi/muoi_doi",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 18 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p02-S1 host k7 muoi/muoi_doi|Phế làm thứ dân — Phế làm thứ dân, xuất cung|0.58|18||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p02-S1 guest k9 ch/ch_ho",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 19 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p02-S1 guest k9 ch/ch_ho|Phế làm thứ dân — Phế làm thứ dân, xuất cung|1.42|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p02-S1 guest k10 pf/pt_dang",
+   "end": "Xuất gia",
+   "age": "age 20 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 guest k10 pf/pt_dang|Xuất gia|1.67|20||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p02-S1 guest k11 dtq/dtq_bien",
+   "end": "Xuất gia",
+   "age": "age 19 y3",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 guest k11 dtq/dtq_bien|Xuất gia|1.83|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p02-S1 guest k12 nc/nc_su",
+   "end": "Xuất gia",
+   "age": "age 19 y3",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 guest k12 nc/nc_su|Xuất gia|2|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p02-S1 guest k13 thd/thd_tro",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 18 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p02-S1 guest k13 thd/thd_tro|Phế làm thứ dân — Phế làm thứ dân, xuất cung|0.17|18||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p02-S1 guest k14 bd/bd_hen",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 18 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p02-S1 guest k14 bd/bd_hen|Phế làm thứ dân — Phế làm thứ dân, xuất cung|0.5|18||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p1-2.json",
+   "life": "coop-p02-S1 guest k15 muoi/muoi_tuoc",
+   "end": "Xuất gia",
+   "age": "age 20 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p02-S1 guest k15 muoi/muoi_tuoc|Xuất gia|0.83|20||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 host k1 muoi/muoi_tuoc",
+   "end": "Xuất gia",
+   "age": "age 20 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p03-S1 host k1 muoi/muoi_tuoc|Xuất gia|0.17|20||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 guest k1 td/td_song",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 20 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p03-S1 guest k1 td/td_song|Phế làm thứ dân — Phế làm thứ dân, xuất cung|0.08|20||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 guest k2 cnv/cnv_ma",
+   "end": "Hồng nhan bạc mệnh — Bị Tôn Kiều Nguyệt sai đánh trượng đến chết",
+   "age": "age 22 y5",
+   "valid": true,
+   "why": [],
+   "cls": "death",
+   "note": "",
+   "sig": "coop-p03-S1 guest k2 cnv/cnv_ma|Hồng nhan bạc mệnh — Bị Tôn Kiều Nguyệt sai đánh trượng đến chết|4|22||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 guest k3 tt/tt_co",
+   "end": "Xuất gia",
+   "age": "age 19 y5",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p03-S1 guest k3 tt/tt_co|Xuất gia|4.58|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 guest k4 cn/cn_tinh",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 18 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p03-S1 guest k4 cn/cn_tinh|Phế làm thứ dân — Phế làm thứ dân, xuất cung|0.33|18||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 guest k5 ch/ch_ho",
+   "end": "Xuất gia",
+   "age": "age 20 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p03-S1 guest k5 ch/ch_ho|Xuất gia|0.58|20||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 guest k6 pf/pt_dang",
+   "end": "Xuất gia",
+   "age": "age 19 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p03-S1 guest k6 pf/pt_dang|Xuất gia|0.25|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 guest k7 dtq/dtq_bien",
+   "end": "Xuất gia",
+   "age": "age 19 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p03-S1 guest k7 dtq/dtq_bien|Xuất gia|0.58|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 guest k8 nc/nc_su",
+   "end": "Xuất gia",
+   "age": "age 20 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p03-S1 guest k8 nc/nc_su|Xuất gia|0.33|20||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 guest k9 thd/thd_tro",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 18 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p03-S1 guest k9 thd/thd_tro|Phế làm thứ dân — Phế làm thứ dân, xuất cung|0.5|18||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 guest k10 bd/bd_hen",
+   "end": "Xuất gia",
+   "age": "age 18 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p03-S1 guest k10 bd/bd_hen|Xuất gia|0.75|18||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 guest k11 muoi/muoi_tuoc",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 21 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p03-S1 guest k11 muoi/muoi_tuoc|Phế làm thứ dân — Phế làm thứ dân, xuất cung|1|21||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 guest k12 td/td_ke",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 20 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p03-S1 guest k12 td/td_ke|Phế làm thứ dân — Phế làm thứ dân, xuất cung|1.58|20||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 host k2 nc/nc_su",
+   "end": "Hồng nhan bạc mệnh — Sổ Kính sự phòng không ghi đêm thị tẩm nào trước khi có 'thai', giả mang thai bị lật tẩy, tội khi quân",
+   "age": "age 24 y5",
+   "valid": true,
+   "why": [],
+   "cls": "death",
+   "note": "",
+   "sig": "coop-p03-S1 host k2 nc/nc_su|Hồng nhan bạc mệnh — Sổ Kính sự phòng không ghi đêm thị tẩm nào trước khi có 'thai', giả mang thai bị lật tẩy, tội khi quân|4.5|24||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 host k3 ch/ch_ho",
+   "end": "Xuất gia",
+   "age": "age 23 y6",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p03-S1 host k3 ch/ch_ho|Xuất gia|5.75|23||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 host k4 cnv/cnv_ma",
+   "end": "Xuất cung về quê",
+   "age": "age 20 y7",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất cung về quê» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất cung về quê»",
+   "sig": "coop-p03-S1 host k4 cnv/cnv_ma|Xuất cung về quê|6.17|20||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 guest k13 cnv/cnv_mat",
+   "end": "Hồng nhan bạc mệnh — Bị Vu Chỉ Nhược sai đánh trượng đến chết",
+   "age": "age 19 y1",
+   "valid": true,
+   "why": [],
+   "cls": "death",
+   "note": "",
+   "sig": "coop-p03-S1 guest k13 cnv/cnv_mat|Hồng nhan bạc mệnh — Bị Vu Chỉ Nhược sai đánh trượng đến chết|0.33|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 host k5 bd/bd_san",
+   "end": "Xuất gia",
+   "age": "age 19 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p03-S1 host k5 bd/bd_san|Xuất gia|1.25|19||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 host k6 dtq/dtq_vu",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 20 y3",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p03-S1 host k6 dtq/dtq_vu|Phế làm thứ dân — Phế làm thứ dân, xuất cung|2.25|20||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 host k7 cn/cn_ban",
+   "end": "Xuất cung về quê",
+   "age": "age 20 y4",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất cung về quê» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất cung về quê»",
+   "sig": "coop-p03-S1 host k7 cn/cn_ban|Xuất cung về quê|2.83|20||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 host k8 td/td_tha",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 19 y5",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p03-S1 host k8 td/td_tha|Phế làm thứ dân — Phế làm thứ dân, xuất cung|4|19||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 host k9 thd/thd_tho",
+   "end": "Xuất cung về quê",
+   "age": "age 23 y8",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất cung về quê» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất cung về quê»",
+   "sig": "coop-p03-S1 host k9 thd/thd_tho|Xuất cung về quê|7.75|23||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 guest k14 tt/tt_mat",
+   "end": "Xuất cung — Xuất cung về quê",
+   "age": "age 26 y9",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất cung về quê» (option) (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất cung về quê» (option)",
+   "sig": "coop-p03-S1 guest k14 tt/tt_mat|Xuất cung — Xuất cung về quê|8.67|26||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 guest k15 cn/cn_chu",
+   "end": "Xuất gia",
+   "age": "age 18 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p03-S1 guest k15 cn/cn_chu|Xuất gia|0.5|18||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 guest k16 ch/ch_benh",
+   "end": "Xuất gia",
+   "age": "age 18 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p03-S1 guest k16 ch/ch_benh|Xuất gia|0.75|18||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 guest k17 pf/pt_tang",
+   "end": "Xuất gia",
+   "age": "age 19 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p03-S1 guest k17 pf/pt_tang|Xuất gia|0.92|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-0723-p3-4.json",
+   "life": "coop-p03-S1 host k10 pf/pt_su",
+   "end": "Xuất gia",
+   "age": "age 21 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p03-S1 host k10 pf/pt_su|Xuất gia|1|21||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 host k1 cn/cn_chu",
+   "end": "Xuất gia",
+   "age": "age 19 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p04-S1 host k1 cn/cn_chu|Xuất gia|0.33|19||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 guest k1 ch/ch_ho",
+   "end": "Xuất gia",
+   "age": "age 19 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p04-S1 guest k1 ch/ch_ho|Xuất gia|0.08|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 guest k2 pf/pt_dang",
+   "end": "Xuất gia",
+   "age": "age 18 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p04-S1 guest k2 pf/pt_dang|Xuất gia|0.5|18||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 guest k3 dtq/dtq_bien",
+   "end": "Xuất gia",
+   "age": "age 20 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p04-S1 guest k3 dtq/dtq_bien|Xuất gia|0.83|20||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 guest k4 nc/nc_su",
+   "end": "Xuất gia",
+   "age": "age 20 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p04-S1 guest k4 nc/nc_su|Xuất gia|1.75|20||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 guest k5 thd/thd_tro",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 20 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p04-S1 guest k5 thd/thd_tro|Phế làm thứ dân — Phế làm thứ dân, xuất cung|0.17|20||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 guest k6 bd/bd_hen",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 20 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p04-S1 guest k6 bd/bd_hen|Phế làm thứ dân — Phế làm thứ dân, xuất cung|0.42|20||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 guest k7 muoi/muoi_tuoc",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 19 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p04-S1 guest k7 muoi/muoi_tuoc|Phế làm thứ dân — Phế làm thứ dân, xuất cung|0.83|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 host k2 td/td_ke",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 19 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p04-S1 host k2 td/td_ke|Phế làm thứ dân — Phế làm thứ dân, xuất cung|0.92|19||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 host k3 thd/thd_tro",
+   "end": "Hồng nhan bạc mệnh — Bị ban chết vì trốn khỏi cung",
+   "age": "age 19 y2",
+   "valid": true,
+   "why": [],
+   "cls": "death",
+   "note": "",
+   "sig": "coop-p04-S1 host k3 thd/thd_tro|Hồng nhan bạc mệnh — Bị ban chết vì trốn khỏi cung|1.33|19||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 guest k8 td/td_ke",
+   "end": "Xuất gia",
+   "age": "age 18 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p04-S1 guest k8 td/td_ke|Xuất gia|1.42|18||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 guest k9 cnv/cnv_mat",
+   "end": "Xuất gia",
+   "age": "age 20 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p04-S1 guest k9 cnv/cnv_mat|Xuất gia|1.58|20||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 host k4 pf/pt_dang",
+   "end": "Hồng nhan bạc mệnh — Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 19 tuổi",
+   "age": "age 19 y2",
+   "valid": true,
+   "why": [],
+   "cls": "death",
+   "note": "",
+   "sig": "coop-p04-S1 host k4 pf/pt_dang|Hồng nhan bạc mệnh — Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 19 tuổi|1.75|19||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 guest k10 tt/tt_mat",
+   "end": "Xuất gia",
+   "age": "age 19 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p04-S1 guest k10 tt/tt_mat|Xuất gia|0.08|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 guest k11 cn/cn_chu",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 19 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p04-S1 guest k11 cn/cn_chu|Phế làm thứ dân — Phế làm thứ dân, xuất cung|0.17|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 host k5 tt/tt_co",
+   "end": "Xuất gia",
+   "age": "age 20 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p04-S1 host k5 tt/tt_co|Xuất gia|0.83|20||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 guest k12 ch/ch_benh",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 19 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p04-S1 guest k12 ch/ch_benh|Phế làm thứ dân — Phế làm thứ dân, xuất cung|1.08|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 guest k13 pf/pt_tang",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 18 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p04-S1 guest k13 pf/pt_tang|Phế làm thứ dân — Phế làm thứ dân, xuất cung|1.42|18||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 host k6 muoi/muoi_lau",
+   "end": "Xuất gia",
+   "age": "age 21 y3",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p04-S1 host k6 muoi/muoi_lau|Xuất gia|2|21||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 guest k14 dtq/dtq_huynh",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 20 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p04-S1 guest k14 dtq/dtq_huynh|Phế làm thứ dân — Phế làm thứ dân, xuất cung|0.58|20||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 guest k15 nc/nc_gian",
+   "end": "Xuất gia",
+   "age": "age 19 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p04-S1 guest k15 nc/nc_gian|Xuất gia|1.67|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 guest k16 thd/thd_sach",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 19 y3",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p04-S1 guest k16 thd/thd_sach|Phế làm thứ dân — Phế làm thứ dân, xuất cung|2.08|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 guest k17 bd/bd_tuyet",
+   "end": "Xuất gia",
+   "age": "age 19 y3",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p04-S1 guest k17 bd/bd_tuyet|Xuất gia|2.42|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 guest k18 muoi/muoi_no",
+   "end": "Xuất gia",
+   "age": "age 19 y4",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p04-S1 guest k18 muoi/muoi_no|Xuất gia|3.17|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 guest k19 td/td_an",
+   "end": "Xuất gia",
+   "age": "age 18 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p04-S1 guest k19 td/td_an|Xuất gia|0.17|18||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 guest k20 cnv/cnv_ban",
+   "end": "Xuất gia",
+   "age": "age 19 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p04-S1 guest k20 cnv/cnv_ban|Xuất gia|0.58|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 host k7 nc/nc_tuc",
+   "end": "Xuất gia",
+   "age": "age 21 y3",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p04-S1 host k7 nc/nc_tuc|Xuất gia|2.58|21||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 host k8 ch/ch_bi",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 21 y5",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p04-S1 host k8 ch/ch_bi|Phế làm thứ dân — Phế làm thứ dân, xuất cung|3.83|21||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 host k9 cnv/cnv_chu",
+   "end": "Xuất cung về quê",
+   "age": "age 18 y5",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất cung về quê» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất cung về quê»",
+   "sig": "coop-p04-S1 host k9 cnv/cnv_chu|Xuất cung về quê|4.17|18||",
+   "seat": "host"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 guest k21 tt/tt_tranh",
+   "end": "Xuất gia",
+   "age": "age 18 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p04-S1 guest k21 tt/tt_tranh|Xuất gia|0.17|18||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 guest k22 cn/cn_than",
+   "end": "Xuất gia",
+   "age": "age 18 y1",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p04-S1 guest k22 cn/cn_than|Xuất gia|0.67|18||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 guest k23 ch/ch_co",
+   "end": "Phế làm thứ dân — Phế làm thứ dân, xuất cung",
+   "age": "age 19 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Phế làm thứ dân» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Phế làm thứ dân»",
+   "sig": "coop-p04-S1 guest k23 ch/ch_co|Phế làm thứ dân — Phế làm thứ dân, xuất cung|1.17|19||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 guest k24 pf/pt_su",
+   "end": "Xuất gia",
+   "age": "age 20 y2",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất gia» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất gia»",
+   "sig": "coop-p04-S1 guest k24 pf/pt_su|Xuất gia|1.75|20||",
+   "seat": "guest"
+  },
+  {
+   "file": "dev/handover/robot/coop-20261124-1356-p4-U3b.json",
+   "life": "coop-p04-S1 host k10 bd/bd_soi",
+   "end": "Xuất cung về quê",
+   "age": "age 21 y3",
+   "valid": false,
+   "why": [
+    "bot-chosen exit road «Xuất cung về quê» (no proof it was the only option)"
+   ],
+   "cls": "exit",
+   "note": "exit road «Xuất cung về quê»",
+   "sig": "coop-p04-S1 host k10 bd/bd_soi|Xuất cung về quê|2|21||",
+   "seat": "host"
+  }
+ ],
+ "skipped": []
+}
