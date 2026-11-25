@@ -109,7 +109,9 @@ function geResolve(r2,force){const s=geS();if(!s||s.done)return null;if(r2!=null
 window.geResolve=geResolve;
 /* the whole answer in one call (bots, tests): r1, r2 indexes; force = true/false skips the roll */
 window.geAnswer=(r1,r2,force)=>{const s=geS();if(!s||s.done)return null;s.r1=r1;return geResolve(r2,force)};
-function geLifeNo(){try{return (typeof lifeLog==="function"?lifeLog().length:0)+1}catch(e){return 1}}
+/* the number of the life she is living / has just lived (the one source of the «Kiếp thứ …» chip, KCT, GE results). A life is written to lifeLog the moment it ends (j32 over → record),
+   so once S.dead the log ALREADY holds this life: count it, do not add one more (robot M1 #9: the first life showed «Kiếp thứ hai» on its ending screen). */
+function geLifeNo(){try{const n=typeof lifeLog==="function"?lifeLog().length:0;return n+(typeof S!=="undefined"&&S&&S.dead&&n>0?0:1)}catch(e){return 1}}
 /* ---------- reward / loss ---------- */
 const STATK=["danh","sung","bac","mat","duc","tai","tamco","sac","th","hh","maid","suc"];
 function geRank(n){if(!n||(typeof isSrv67==="function"&&isSrv67()))return"";const top=RANKS.length-2;const r0=S.rank;

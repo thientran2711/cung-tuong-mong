@@ -30,7 +30,8 @@ const MEAS=`(()=>{const M=document.getElementById('modal');if(!M||M.hidden)retur
    if(m.oc.length){chk(`${tag} ${name}: odds on the title row (${m.oc.filter(c=>c.hasOdd).length}/${m.oc.length} cards have odds)`,m.oc.every(c=>!c.hasOdd||c.odd||c.kodrow),m.oc.map(c=>c.odd));
     chk(`${tag} ${name}: option picture is the SQUARE tier picture (KIT §6.2c, never stretched to the card)`,m.oc.every(c=>!c.pic||(Math.abs(c.pic.w-c.pic.h)<=1&&c.pic.h<=c.B.h)),m.oc.map(c=>[c.pic&&c.pic.w,c.pic&&c.pic.h,c.B.h]));
     if(z.w>=1100&&m.oc.length>=3)chk(`${tag} ${name}: iPad option cards in 2 columns (layout ${m.kol})`,m.kol[0]==='2',m.kol);
-    if(z.w<800)chk(`${tag} ${name}: phone option cards in 1 column (layout ${m.kol})`,m.kol[0]==='1',m.kol)}
+    if(z.w<800){/* KK29 (G4, MAIN 141): the column count is the KIT's by-text choice (data-kol / data-kot, law 10), not a typed rule. 1 column is the phone default; the ONE exception is the stacked step-down frame (NL/NM/NS, KIT §56.24/56.27: 4+ options on the Fold that would scroll) which lays SHORT-text cards in 2 columns. Anything else with 2 columns, or long text (L/M kot) in 2 columns, fails. */
+    const st=/^N/.test(m.ksz)&&m.kol[0]==='2'&&m.kol[1]==='S'&&m.oc.length>=4;chk(`${tag} ${name}: phone option cards in 1 column, or the kit's stacked 2-column step-down for 4+ short options (layout ${m.kol}, frame ${m.ksz}, ${m.oc.length} cards)`,m.kol[0]==='1'||st,m.kol)}if(process.env.DBGKOL)console.log('KOL',name,m.ksz,m.kol,JSON.stringify(m.oc.map(c=>[c.B.w,c.B.h])),m.D.w,m.D.h)}
    /* (e) seal */
    chk(`${tag} ${name}: exactly one seal, top-right of the header`,m.sealN===1&&m.seal&&m.seal.c==='tr'&&m.kph&&m.seal.y<m.kph.y+m.kph.h&&m.seal.x+m.seal.w>m.D.x+m.D.w-110&&m.seal.w===34,{n:m.sealN,seal:m.seal,kph:m.kph,D:m.D});
    /* (d) only the option list scrolls: scroll every scroller down, the figure / event picture / info must not move */

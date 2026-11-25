@@ -15,8 +15,8 @@ function deathChain(fate){const L=[];const f=String(fate||"");
  else if(/tiên đế băng|Tuẫn táng|Thái phi/.test(f)){L.push("Hoàng thượng băng hà; số phận theo con trai và ngôi vị lúc ấy.")}
  const foes=liveRivals(true).filter(v=>oan(v,S)>=netTh(v,"thu")||bandVT(v,S)>=2).map(v=>v.name);if(foes.length)L.push(`Kẻ thù còn sống: ${foes.slice(0,4).join(", ")}.`);return L}
 function lifeLog(){const p=store.get("cung-luanhoi")||[];return p}
-function lifeSave(fate){const p=lifeLog();const kids=S.kids.filter(k=>k.alive).length;const maxR=Math.max(S.rank,S.maxRank||0);p.unshift({n:S.name,o:S.origin.n,r:maxR>=7?"Hoàng hậu":RANKS[maxR].n,age:S.age,y:S.year,kids,fc:S.fc||"",f:fate,foes:liveRivals(true).filter(v=>oan(v,S)>=netTh(v,"thu")).map(v=>v.name).slice(0,3)});store.set("cung-luanhoi",p.slice(0,40))}
-/* over(h,t,fate[,alive]): the end card. "Chết vì" only when she died; a living ending (thoái vị, xuất cung, xuất gia…) says "Kết cục".
+function lifeSave(fate){const p=lifeLog();const kids=S.kids.filter(k=>k.alive).length;const maxR=Math.max(S.rank,S.maxRank||0);p.unshift({n:S.name,o:S.origin.n,r:maxR>=7?"Hoàng hậu":RANKS[maxR].n,age:S.age,y:S.year,kids,fc:S.fc||"",f:fate,nm:S.kend||"",foes:liveRivals(true).filter(v=>oan(v,S)>=netTh(v,"thu")).map(v=>v.name).slice(0,3)});store.set("cung-luanhoi",p.slice(0,40))}
+/* over(h,t,fate[,alive]): the end card. "Mệnh tận" only when she died; a living ending (thoái vị, xuất cung, xuất gia…) says "Kết cục".
    Callers may pass alive=true/false; otherwise it is read from the fate wording (kit owner #2, group fix for every ending). */
 function overAlive(fate,a){if(a===true||a===false)return a;return /thoái vị|xuất cung|ra khỏi cung|xuất gia|về quê|ẩn cư|an hưởng|còn sống|trốn khỏi cung|tự do|nhường ngôi/i.test(String(fate||""))&&!/chết|qua đời|tự vẫn|băng hà|ban chết|xử tử/i.test(String(fate||""))}
 /* owner 16/11 (Q12, D32): every ending card shows the fitting ALREADY-APPROVED event picture (no new art); ev-quoc-tang ONLY when the Emperor's death is what ends the life.
@@ -29,7 +29,9 @@ function endArt(h,t,fate,live){const s=String(h||""),f=String(fate||""),x=String
  for(const [re,id] of END_ART){if(re.test(s)||re.test(f)||(id==="quoc-tang"&&re.test(x))){k=id;break}}
  if(!k)k=live?"le-xuan":"tang-le";return `img/ev-${k}.webp`}
 window.endArt=endArt;
-function over(h,t,fate,alive){if(S.dead)return"";const live=overAlive(fate,alive);S.dead=true;S.fate=fate;record(fate);lifeSave(fate);const ms=mySons().length,md=myDaus().length;const ch=deathChain(fate);
+function over(h,t,fate,alive){if(S.dead)return"";const live=overAlive(fate,alive);S.dead=true;S.fate=fate;
+ /* the poetic name of this ending (jend KIT_END.names, one table): the card title, the ink caption, the Sổ luân hồi line */
+ const nm=typeof endName==="function"?endName(h,t,fate,live):String(h||"");S.kend=nm;const NC=(window.KIT_END&&KIT_END.names&&KIT_END.names.close)||null;record(fate);lifeSave(fate);const ms=mySons().length,md=myDaus().length;const ch=deathChain(fate);
  /* kit sections + kit rows (KIT 9: h4.kpst + kitRows), no boxed panels (owner 15/11). Chain lines "Nhãn: lời" become labelled rows. */
  const chR=ch.map(x=>{const m=String(x).match(/^([^:.]{2,26}):\s*(.+)$/);return m?[m[1],m[2],"t"]:["Nguyên do",x,"t"]});
  const maxR=Math.max(S.rank,S.maxRank||0);
@@ -38,12 +40,12 @@ function over(h,t,fate,alive){if(S.dead)return"";const live=overAlive(fate,alive
  /* a life that ended at home before she ever entered (jkc tiểu thư road): no «Sống trong cung / Phẩm cao nhất / Con cái» rows — she had none of them */
  const pre=!!(S.kc&&!S.kc.inPal);
  const epH=ep?`<div class="kpsec kend-after"><p><b>Về sau · ${ep.ti}.</b> ${ep.txt}</p></div>`:"";/* rows go into «Kiếp này» below (iPad 1180x820: the card must fit with no clip) */
- Q=[{t:"Kiếp này",cls:"end",art:endArt(h,t,fate,live),who:pMe(),h:`<h3>${h}</h3><p>${t}</p>${epH}${chR.length?`<div class="kpsec kend-why">${kitRows(chR)}</div>`:""}
-  <div class="kpsec kend-life"><h4 class="kpst">Kiếp này</h4>${kitRows((pre?[["Thân phận",`${S.name} · ${S.origin.n}`,"t"]]:[["Thân phận",`${S.name} · ${S.origin.n}`,"t"],["Sống trong cung",`${S.year} năm · ${S.age} tuổi`,"t"],["Phẩm cao nhất",maxR>=7?"Hoàng hậu":RANKS[maxR].n,"t"],["Con cái",`${ms} hoàng tử, ${md} công chúa`,"t"]]).concat([[live?"Kết cục":"Chết vì",fate,"t"]]).concat(ep?lpvRows(ep):[]))}</div>
-  <p class="past">${live?"Kiếp này khép lại.":"Chết là hết."} Kiếp sau bắt đầu lại từ đầu, chỉ còn tên trong Sổ luân hồi.</p>`,btn:"Chuyển kiếp",onClose:start}];
+ Q=[{t:nm||"Kiếp này",kend:1,endH:h,cls:"end",art:endArt(h,t,fate,live),who:pMe(),h:`${String(h||"").replace(/<[^>]+>/g,"").trim()!==nm?`<h3>${h}</h3>`:""}<p>${t}</p>${epH}${chR.length?`<div class="kpsec kend-why">${kitRows(chR)}</div>`:""}
+  <div class="kpsec kend-life"><h4 class="kpst">Một kiếp nhìn lại</h4>${kitRows((pre?[["Thân phận",`${S.name} · ${S.origin.n}`,"t"]]:[["Thân phận",`${S.name} · ${S.origin.n}`,"t"],["Năm tháng",`${S.year} năm · ${S.age} tuổi`,"t"],["Phẩm cao nhất",maxR>=7?"Hoàng hậu":RANKS[maxR].n,"t"],["Con cái",`${ms} hoàng tử, ${md} công chúa`,"t"]]).concat([[live?"Kết cục":"Mệnh tận",fate,"t"]]).concat(ep?lpvRows(ep):[]))}</div>
+  <p class="past kend-close">${NC?`${NC[live?"live":"dead"]} ${NC.tail}`:""}</p>`,btn:"Chuyển kiếp",onClose:start}];
  showModal();render();return""}
 /* the highest rank this life reached */
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S)S.maxRank=Math.max(S.maxRank||0,S.rank)}catch(e){}return r}})();
 /* Sổ luân hồi on the title screen and in the log */
 function pastHTML(){const p=lifeLog();if(!p.length){const o=store.get("cung-kiep")||[];return o.length?`<h3>Sổ luân hồi</h3><div class="past">`+o.map((k,i)=>`Kiếp ${o.length-i}: ${k.n}, ${k.o}, ${k.r}, ${k.age} tuổi. ${k.f}.`).join("<br>")+`</div>`:""}
- return `<h3>Sổ luân hồi</h3>${kitRows(p.slice(0,12).map((k,i)=>[`<span class="md xs" style="--c:#b08a5a">${k.fc?`<img src="${fsrc(k.fc,"")}" alt="" onerror="this.remove()">`:""}</span>Kiếp ${p.length-i}: ${k.n}`,`${k.o} · ${k.r} · ${k.y} năm · ${k.kids} con · ${k.f}`,"n"]))}`}
+ return `<h3>Sổ luân hồi</h3>${kitRows(p.slice(0,12).map((k,i)=>[`<span class="md xs" style="--c:#b08a5a">${k.fc?`<img src="${fsrc(k.fc,"")}" alt="" onerror="this.remove()">`:""}</span>${typeof kpLife==="function"?kpLife(p.length-i):`Kiếp ${p.length-i}`}: ${k.n}`,`${k.nm?`«${k.nm}» · `:""}${k.o} · ${k.r} · ${k.y} năm · ${k.kids} con · ${k.f}`,"n"]))}`}

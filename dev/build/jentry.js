@@ -39,7 +39,7 @@ function entOdds(road,raw,art,t){const b=entBase(road,raw,art),n=BAL.entry.noise
 function entWord(p){return word(p)}
 /* no game played: the mark of a girl of her level in her best art (= the frame's "Để tài nghệ quyết định") */
 function entBotRaw(){const b=BAL.entry.bot;return cl(b.min+R(b.r),0,b.max)}/* review/errand-bal: one bot / broken-round score (BAL.entry.bot) */
-function entSkipRaw(){try{const k=entKind(entBest()),lv=entArtLv(k);/* cal-p2c N1: the skip is her identity level on this board, like j82 / jexam (mgSkipRaw) */return typeof mg2On==="function"&&mg2On()&&typeof mgSkipRaw==="function"?mgSkipRaw(mgTier(k,{occ:"tuyen",lv})):Math.round(kg82NpcMean(lv))}catch(e){return 4}}
+function entSkipRaw(){try{const k=entKind(entBest()),lv=entArtLv(k);/* cal-p2c N1: the skip is her identity level on this board, like j82 / jexam (mgSkipRaw) */return (typeof kitSkipCap==="function"?kitSkipCap:x=>x)(typeof mg2On==="function"&&mg2On()&&typeof mgSkipRaw==="function"?mgSkipRaw(mgTier(k,{occ:"tuyen",lv})):Math.round(kg82NpcMean(lv)))}catch(e){return 4}}/* m-fix-1: capped (BAL.skip.cap) */
 function entFx(t){const f=BAL.entry.fx[t];if(f&&Object.keys(f).length)try{apply(f)}catch(e){console.error(e)}}
 /* who judges, what the top result is called, per road */
 function entCtx(o){const road=entRoad();const k=S.origin&&S.origin.k;const top=(S.origin&&S.origin.r)||0;const srv=k==="cnv";
@@ -50,7 +50,7 @@ function entCtx(o){const road=entRoad();const k=S.origin&&S.origin.k;const top=(
 /* ---------- 1. the exam round ---------- */
 function entExam(o,fin){o=o||{};let art=o.art||"";let k=entKind(art);if(!k||entWordy(k)){art=entBest();k=entKind(art)}
  const K=KG82_KIND[k];const lv=entArtLv(k);let t=null;try{t=mgSet(k,{occ:"tuyen",lv})}catch(e){KG82.lv=lv}KG82.ctx="thi";try{kg82Preload(k)}catch(e){}
- const SK=t&&typeof mg2On==="function"&&mg2On()&&typeof mgSkipRaw==="function"?mgSkipRaw(t):Math.round(kg82NpcMean(lv));/* cal-p2c N1 */let over=false;const end=raw=>{if(over)return;over=true;try{fin(raw,{art,kind:k})}catch(e){console.error(e)}};
+ const SK=(typeof kitSkipCap==="function"?kitSkipCap:x=>x)(t&&typeof mg2On==="function"&&mg2On()&&typeof mgSkipRaw==="function"?mgSkipRaw(t):Math.round(kg82NpcMean(lv)));/* cal-p2c N1 */let over=false;const end=raw=>{if(over)return;over=true;try{fin(raw,{art,kind:k})}catch(e){console.error(e)}};
  const X=entCtx(o);/* review/origin-intros: the frame names the selection of this road (Lễ ra mắt, Xét phong danh phận, Tuyển cung nữ…) */
  const d=kg82Open({art:String(X.head||"Tuyển chọn").replace(/ trước ngày phong$/,""),title:`Môn thi · ${K.n}`,how:K.how,round:"Vòng",roundV:"1/1",pic:kg82Pic(k)});if(!d){end(SK);return}
  const rows=[["Giám khảo",X.judge,"t"],["Môn thi",`${K.n} · ${K.t}`,"t"],["Độ khó",t?mgDiffTxt(t,k):`bậc ${lv}`,"n"],["Xét thêm",X.also,"n"]];
@@ -59,11 +59,11 @@ function entExam(o,fin){o=o||{};let art=o.art||"";let k=entKind(art);if(!k||entW
  const box=kg82Box();KG82.phase="intro";
  const keepN=rows.filter(r=>r[0]==="Độ khó"||/^(Lên tới|Được để mắt|Về hầu)/.test(r[0]));/* mg-intro-2: Độ khó + the road row; the rest behind the kit «!» */
  box.innerHTML=kgBangRows(X.head,rows,keepN.length?keepN:rows.slice(0,2))+
-  `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button>${kitQuick({id:"kg82skip",n:"Để tài nghệ quyết định",sub:`tính ${SK}/10, như người cùng bậc`})}</div>`;
+  `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button>${kitQuick({id:"kg82skip",n:"Để tài nghệ quyết định",sub:`tính ${SK}/10, tự thi giỏi thì hơn`})}</div>`;
  const after=(raw,sk)=>{KG82.phase="result";kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");
   kg82ShowRes(kg82Rows([["Màn chơi",`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"],["Kết quả",o.note||"tính cùng Sắc, Tài, Đức","n"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`);
   $("kg82ok").onclick=()=>{kg82Close();end(raw)}};
- kgReady(box,{kind:k,ev:"sys:tuyen-tu"});/* KIT §13.7 */
+ kgReady(box,{kind:k,win:"thi",ev:"sys:tuyen-tu"});/* KIT §13.7 */
  $("kg82go").onclick=()=>kg82Play(k,raw=>after(raw,false));$("kg82skip").onclick=()=>after(SK,true)}
 /* the ONE seam (contract set by review/kc-roads-cn-nc-r1 at jkc2 kc2Play): kcEntryExam(kind, done(raw 0..10), info{art,origin,title,note}) */
 window.kcEntryExam=function(kind,fin,info){if(kind&&typeof kind==="object"){const o=kind;kind=null;info=o}info=info||{};entExam(Object.assign({},info,{kind}),fin)};

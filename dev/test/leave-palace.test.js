@@ -53,7 +53,7 @@ const T=[
   for(const [h,f,al,k,site] of T){deser(JSON.parse(snap));Q.length=0;S.dead=false;S.lvEp=null;if(S.kc)S.kc.inPal=1;
    const m=(S.men||[]).find(x=>x.rw==="vương gia"),th=(S.men||[]).find(x=>x.rw==="thị vệ");
    const fate=f.replace("{m}",m.name).replace("{t}",th.name),t=`${S.name} ${fate}.`;
-   over(h,t,fate,al);const html=(Q[0]&&Q[0].h)||"";R.push({site,k,got:S.lvEp?S.lvEp.k:"",dead:!!S.dead,card:Q[0]&&Q[0].t==="Kiếp này",after:/kend-after/.test(html)&&/Về sau/.test(html),ep:S.lvEp,partner:S.lvEp&&S.lvEp.m,want:/\{[mt]\}/.test(f)?(f.includes("{m}")?m.name:th.name):""})}
+   over(h,t,fate,al);const html=(Q[0]&&Q[0].h)||"";R.push({site,k,got:S.lvEp?S.lvEp.k:"",dead:!!S.dead,card:!!(Q[0]&&Q[0].kend),after:/kend-after/.test(html)&&/Về sau/.test(html),ep:S.lvEp,partner:S.lvEp&&S.lvEp.m,want:/\{[mt]\}/.test(f)?(f.includes("{m}")?m.name:th.name):""})}
   deser(JSON.parse(snap));Q.length=0;return R},T);
  for(const r of out){ok(r.dead&&r.card,`${r.site}: life ends on the «Kiếp này» end card`,r);
   ok(r.got===r.k&&r.after===!!r.k,`${r.site}: «Về sau» ${r.k?`kind ${r.k}`:"absent (inside the palace / death)"}`,{got:r.got,after:r.after});
@@ -106,7 +106,7 @@ const T=[
     the one-per-life death warning (jkiep kpGate) does not stop a «giả chết» LEAVE choice; no «(sẽ hỏi lại)» anywhere in the build */
  const nc=await p.evaluate(()=>{const snap=JSON.stringify(ser());const R={xg:typeof xgConfirm};
   Q.length=0;S.dead=false;S.lvEp=null;if(S.kc)S.kc.inPal=1;cold("Thử");Q.length=0;const a=coldActs().find(x=>x.n==="Xuất gia");R.act=!!a;R.actX=a&&a.x;
-  if(a){a.go();R.dead=!!S.dead;R.fate=S.fate;R.q=Q.map(m=>m&&m.t);R.k=S.lvEp&&S.lvEp.k}
+  if(a){a.go();R.dead=!!S.dead;R.fate=S.fate;R.q=Q.map(m=>m&&(m.kend?"Kiếp này":m.t));R.k=S.lvEp&&S.lvEp.k}
   deser(JSON.parse(snap));Q.length=0;S.dead=false;S.lvEp=null;
   /* kpGate on every own-choice leave option text (both «giả chết» leave choices + a plain one), and one real death word as the control */
   const G=[["✦ Giả chết, theo chàng rời cung","kết thúc kiếp này"],["Xin thuốc giả chết","ra khỏi cung · kết thúc kiếp này"],["Tìm một bài thuốc giả chết",""],["Xuất gia","kết thúc kiếp này, yên ổn"]];R.gate=[];
@@ -129,14 +129,14 @@ const T=[
   if(!(S&&S.kc&&!S.kc.inPal))return{err:"no tiểu thư life in 80 starts",o:S&&S.origin&&S.origin.k};
   R.lv=S.kc.lv;const snap=JSON.stringify(ser());
   const run=(lab,f,old)=>{deser(JSON.parse(snap));Q.length=0;S.dead=false;S.lvEp=null;if(old)delete S.kc.lv;let e=null;try{f()}catch(er){e=er.message}
-   const c=Q.find(m=>m&&m.t==="Kiếp này"),h=(c&&c.h)||"";R.rows.push({lab,e,dead:!!S.dead,fate:S.fate,ep:S.lvEp,after:/Về sau/.test(h),chet:/Chết vì/.test(h),pal:S.lvEp?LPV_PAL.test(S.lvEp.txt):false})};
+   const c=Q.find(m=>m&&m.kend),h=(c&&c.h)||"";R.rows.push({lab,e,dead:!!S.dead,fate:S.fate,ep:S.lvEp,after:/Về sau/.test(h),chet:/Chết vì|Mệnh tận/.test(h),pal:S.lvEp?LPV_PAL.test(S.lvEp.txt):false})};
   const opt=(i)=>{const d=kcTraveD();R.n=d.o.map(o=>o.n);d.o[i].go()};
   run("gả",()=>opt(0));R.suit=S.kc.suit&&S.kc.suit[0]&&S.kc.suit[0].n;
   run("dạy chữ (Tài 70)",()=>{S.tai=70;opt(1)});
   run("xuất gia",()=>opt(2));
   run("✦ hòa thân",()=>{kcTraveD();kcEnd("kcR5")});
-  run("gả · đa tình thám hoa",()=>{S.kc.suit=[{n:"Thám hoa khoa này",k:"than",q:60,net:["Nhiều chuyện","Xảo quyệt","Ham vui"]}];S.kgt=0;opt(0)});R.dt=(Q.find(m=>m&&m.t==="Kiếp này")||{}).h||"";
-  run("gả · một lòng thám hoa",()=>{S.kc.suit=[{n:"Thám hoa khoa này",k:"than",q:60,net:["Ân cần","Trọng nghĩa","An phận"]}];S.kgt=0;opt(0)});R.ch=(Q.find(m=>m&&m.t==="Kiếp này")||{}).h||"";
+  run("gả · đa tình thám hoa",()=>{S.kc.suit=[{n:"Thám hoa khoa này",k:"than",q:60,net:["Nhiều chuyện","Xảo quyệt","Ham vui"]}];S.kgt=0;opt(0)});R.dt=(Q.find(m=>m&&m.kend)||{}).h||"";
+  run("gả · một lòng thám hoa",()=>{S.kc.suit=[{n:"Thám hoa khoa này",k:"than",q:60,net:["Ân cần","Trọng nghĩa","An phận"]}];S.kgt=0;opt(0)});R.ch=(Q.find(m=>m&&m.kend)||{}).h||"";
   run("old save: gả",()=>opt(0),true);
   run("no tablet returned (home road ending before Điện tuyển)",()=>{S.kc.trv=0;kcEnd("tu")});
   deser(JSON.parse(snap));Q.length=0;S.dead=false;S.lvEp=null;return R});
