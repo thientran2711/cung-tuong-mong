@@ -34,3 +34,13 @@ Borderline-OK (medium, backs): ev-hao-huu, ev-vi-hanh, ev-han-han, ev-thinh-an, 
 
 ## Step 2 — pilot (pending): ev-thang-tran, ev-trieu-chinh, ev-fest-vantho; old prompt with TAIL replaced by close-shot tail; same gpt-2-6 3:4 1k, style ref cplQijT0eP, folder ba4aecfe.
 Cost basis (PROGRESS_event): 40 credits/picture 1k → tier 1 = 14 × 40 = 560 credits (+ retries ~30% ≈ 730); tier 2 adds 440.
+
+## Step 2 — PILOT RESULT (3 pictures, looked at old-vs-new sheet, no faces, no hands visible, people large)
+Prompt = old ev_data scene rewritten as CLOSE shot + HEAD/BR from prompt.py + new tail: "People are LARGE and close in the frame, seen from behind or turned away, no visible faces, any visible hands correct with five fingers or hidden in sleeves, only the Emperor wears yellow." gpt-2-6, 3:4, 1k, style ref cplQijT0eP, folder ba4aecfe.
+| key | Magnific creation | credits | verdict |
+|---|---|---|---|
+| ev-thang-tran | LwtVBN0swO | 80 | PASS (general large from behind, no face) |
+| ev-trieu-chinh | 1lBWp4tr4r | 80 | PASS (3 kneeling officials large, backs) |
+| ev-yen-tiec | xS80diEjfW | 80 | PASS (two ladies from behind; tiny Emperor in yellow at the back, correct) |
+Spent 240 credits. NOTE: simulate_cost says 80 credits per 1k picture NOW (PROGRESS_event said 40) → batch estimate: 11 remaining tier-1 × 80 = 880 (+~30% retries ≈ 1,150). Tier 2 (11) would add 880.
+Review: https://ctm-img.victoria-tntt.workers.dev/img/_review/c3-farshot/ev-thang-tran.webp?v=1 (also ev-trieu-chinh, ev-yen-tiec). Files ~250–290 KB at q82 → final upload recompressed ≤250 KB. Live swap NOT done (waits Foreman C GO).
