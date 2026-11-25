@@ -632,8 +632,8 @@ function kszLiveLay3(dlg,K){const X=dlg.__ksz3;if(!X||!kszLive3Ok(dlg))return;co
  if(X.opts){if(pres==="one"||nar)X.mb.appendChild(X.opts);else right.appendChild(X.opts);/* narrow: option cards BELOW the figure row, full width; else kit-option-rows r2: stack label over value when the column is too narrow */const bs=[...X.opts.querySelectorAll(":scope>button")],w=X.opts.clientWidth;X.opts.classList.remove("kszstk")}
  /* KIT 56.19: an option card's picture sits in its fixed kit box (.kaart, KIT_OPT tier sizes), so its late (lazy) load changes no frame size and must not re-pick
     the frame: scrolling the list revealed lazy card pictures, their load re-picked the frame in the middle of her wheel and the wheel was lost */
- body.querySelectorAll("img").forEach(im=>{if(!im.complete&&!im.closest(".opts"))im.addEventListener("load",()=>kszLiveRepick3(dlg),{once:true})});
- right.querySelectorAll(":scope>.k3ev img:not(.ksart-mark)").forEach(im=>{if(!im.complete)im.addEventListener("load",()=>kszKeep3(dlg,()=>kitFrameApplyLive3(dlg)),{once:true})});
+ body.querySelectorAll("img").forEach(im=>{if(!im.complete&&!im.closest(".opts")&&!im.__kszLd2){im.__kszLd2=1;im.addEventListener("load",()=>{im.__kszLd2=0;kszLiveRepick3(dlg)},{once:true})}});
+ /* KIT §98.18 (freeze hunt): kszLiveLay3 runs on every size trial; one load listener PER IMAGE (not per layout) — before, N trials on a not-yet-loaded picture stacked N listeners and the load fired N full re-fits (24–38 kitFrameApplyLive3 / kszFigFit in one open) */right.querySelectorAll(":scope>.k3ev img:not(.ksart-mark)").forEach(im=>{if(!im.complete&&!im.__kszLd){im.__kszLd=1;im.addEventListener("load",()=>{im.__kszLd=0;/* pictures that load in the same moment re-fit the frame ONCE */clearTimeout(dlg.__kszApT);dlg.__kszApT=setTimeout(()=>{if(dlg.isConnected)kszKeep3(dlg,()=>kitFrameApplyLive3(dlg))},0)},{once:true})}});
  kszListCols3(dlg);kitFrameApplyLive3(dlg)}
 /* NARROW T3 (owner 17/11, 412x1058 Fold cover / 390x844 phone): at a frame width where even the smallest figure column (the M figure column) would leave the right column
    under the kit minimum (V.narrow.minRight = the option-card minimum, kitOptFit0), the frame STACKS: a reduced figure (+ the picture strip and text) on top,
@@ -657,8 +657,20 @@ function kszStaleMark3(dlg,L){const t=performance.now();kszStale3=L.length?{dlg,
  document.addEventListener("pointercancel",()=>{kszRemap3=null},true)})();
 function kszLivePick3(dlg){const SNAP=kszStaleSnap3(dlg);const SC=[];try{const mb=document.getElementById("mb");[...dlg.querySelectorAll(".opts,.k3right,.k3body"),mb].forEach(e=>{if(e&&e.scrollTop>0)SC.push([e,e.scrollTop])})}catch(e){}
  const P=kszLivePick3_0(dlg);SC.forEach(([e,t])=>{if(e.isConnected&&e.scrollTop!==t)e.scrollTop=t});kszStaleMark3(dlg,SNAP);return P}
+const KSZ_PHINT={},KSZ_SAME=new Map();window.KSZ_SAME=KSZ_SAME;
+function kszSameKey3(dlg){try{const t=dlg.querySelector('.kdh,.k3title,h2,h3'),bs=[...dlg.querySelectorAll('.opts>button,.k3btns>button')];return dlg.dataset.kind+'|'+innerWidth+'x'+innerHeight+'|'+document.documentElement.className+'|'+(t?t.textContent:'')+'|'+(dlg.querySelector('.kszfig,.k3mpor,.k3mitem,.k3ev')?1:0)+'|'+bs.map(b=>b.textContent).join('¦')}catch(e){return''}}
 function kszLivePick3_0(dlg){dlg.__kszFill=0;if(kszNarrow3(dlg)){for(const K of["NL","NM","NS"]){kszLiveLay3(dlg,K);if(K==="NS"||kitFrameFitsLive3(dlg))return K}}
- let P="XL";for(const K of ["S","M","L","XL"]){kszLiveLay3(dlg,K);if(kitFrameFitsLive3(dlg)&&(K==="XL"||!kszListWantsWide3(dlg))){P=K;break}}
+ /* KIT §98.7 (review/kit-fitfast): «fits and does not want wide» only gets truer as the frame grows (a bigger frame never fits less), so the FIRST qualifying size can be found from a HINT (the size this dialog / this dialog kind + viewport got last time)
+   without trying every smaller size: lay the size just BELOW the hint — it must NOT qualify — then walk up from the hint. If it does qualify (the inputs changed: a picture came in) the full loop from S runs exactly as before. Same size, fewer forced layouts. */
+ const ORD=["S","M","L","XL"],ok=K=>{kszLiveLay3(dlg,K);return kitFrameFitsLive3(dlg)&&(K==="XL"||!kszListWantsWide3(dlg))};
+ const hk=dlg.dataset.kind+"|"+innerWidth+"x"+innerHeight+"|"+document.documentElement.className;let hi=ORD.indexOf(dlg.__kszP||KSZ_PHINT[hk]);let from=0;
+ /* KIT §98.14 (fitfast r2, K-SAMEFRAME): the SAME frame shown again (same kind, title, speaker, option texts, viewport: the day-card menu after a talk) keeps the size it was picked at: only that size is laid out and checked, no lower-size probe */
+ const sk=kszSameKey3(dlg),sp=sk&&KSZ_SAME.get(sk);let P=null;
+ if(sp&&ok(sp))P=sp;
+ else{if(hi>0&&!ok(ORD[hi-1]))from=hi;
+ P="XL";for(let i=from;i<4;i++){const K=ORD[i];if(ok(K)){P=K;break}}}
+ if(sk){if(KSZ_SAME.size>=60)KSZ_SAME.delete(KSZ_SAME.keys().next().value);KSZ_SAME.set(sk,P)}
+ dlg.__kszP=P;KSZ_PHINT[hk]=P;
  /* KIT 56.17: the size is picked; now the figure fills the frame body (every later re-apply keeps it) */dlg.__kszFill=1;kitFrameApplyLive3(dlg);return P}
 /* KIT §56.20 (ksz-lost-tap, owner LIVE fault 21/11): a re-pick (late picture, resize) moves the figure and the option block (kszLiveLay3 detaches + re-appends the same nodes), so a tap whose finger
    is DOWN on an option card when the re-pick runs loses its click (the node is detached between touch-down and touch-up). The re-pick therefore never runs while a pointer is down inside the modal:

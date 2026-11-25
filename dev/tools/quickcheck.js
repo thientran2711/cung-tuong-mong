@@ -43,8 +43,20 @@ const within=(ms,p,what)=>Promise.race([p,new Promise((_,rej)=>setTimeout(()=>re
    cung nữ looped 40 identical start() calls in one task (27–33 s 'long task', seen on new AND live; fix oi-perf 11/17, same idiom as origin-intros/flow.js) */
 const NEWLIFE=()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<40;i++){if(i)try{store.set(NL_KEY,null)}catch(e){}start();if(!(S.origin&&S.origin.k==='cnv')&&!(window.isSrv&&isSrv()))break}
  ['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});return S.name};
-const SETTLE=()=>{try{for(let j=0;j<8&&Q.length&&!S.dead;j++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}}catch(e){try{Q.shift()}catch(x){}}
+/* SELSCENE-12: ONE card per poll (was up to 8 in one evaluate = one JS task): a tú nữ's 3 days put several heavy cards (contest, entry) into that one
+   task — longTaskMaxMs 13.5 s under the 4× throttle, while the slowest single card is ~0.9 s unthrottled (~3.6 s throttled); a player answers one card per
+   task. Same driver for the new and the live build. */
+const SETTLE=()=>{try{for(let j=0;j<1&&Q.length&&!S.dead;j++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}}catch(e){try{Q.shift()}catch(x){}}
  const n=document.getElementById('next');return !!n&&!n.disabled&&!Q.length&&!S.dead};
+/* MAIN 121 (24/11 ~09:42Z, review/selection-scene): a new tú nữ life plays her 3 selection days (option 0 driver, no game bypass); a life that ENDS at
+   the selection (ban hoa, owner rule: the life ends) can never settle → reroll a new life, same idiom as the cung nữ reroll above; counted, capped. */
+const BANHOA=()=>!!(S&&S.dead&&S.fate==='Bị ban hoa, xuất cung');
+const SELX_REROLL_MAX=5;let selxRerolls=0;
+/* SELSCENE-12: SETTLE_MS = the bot playing a tú nữ's whole 3 days (option-0 driver) under the perf CPU throttle: 15–35 s unthrottled on this box (ea3cf4ac and this branch alike) ×4 cpu ⇒ up to ~140 s; 60 s failed whenever a tú nữ life came up. Only this wait; the gated perf numbers are unchanged. */
+const SETTLE_MS=180e3;
+async function settleNew(g,what){for(let k=0;;k++){await within(SETTLE_MS,g.waitForFunction('('+SETTLE.toString()+')()||('+BANHOA.toString()+')()',null,{polling:150,timeout:SETTLE_MS}),what);/* timeout = the within() limit (Playwright's default 30 s fired first: a tú nữ's 3 days under the perf CPU throttle) */
+  if(!await g.evaluate(BANHOA))return;if(k>=SELX_REROLL_MAX)throw new Error(what+': '+(k+1)+' new lives in a row ended at the selection (ban hoa) — reroll cap '+SELX_REROLL_MAX+' reached');
+  selxRerolls++;console.log('  selection: life ended in ban hoa → reroll '+(k+1)+'/'+SELX_REROLL_MAX);await g.evaluate(NEWLIFE)}}
 const BUOI=async()=>{const sl=t=>new Promise(r=>setTimeout(r,t));const k0=JSON.stringify([S.turn,S.buoi,S.month,S.year]);const t0=performance.now();
  for(let i=0;i<40;i++){for(let j=0;j<12&&Q.length&&!S.dead;j++){const m=Q[0];try{if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}catch(e){Q.shift()}await sl(40)}
   const n=document.getElementById('next');if(n&&!n.disabled){n.click();await sl(300);break}await sl(200)}
@@ -82,7 +94,7 @@ const errsOf=async(g,errs)=>errs.concat(await g.evaluate(()=>window.__qcErr||[])
  async function perf(ver){await fetch(srv.url+'__ver/'+ver);const {ctx,p,errs}=await page(b,'ipadAir');try{const t0=Date.now();const g=await within(150e3,open(p,srv.url),ver+' perf open');const openMs=Date.now()-t0;
   if(CPUX>1){try{const cdp=await ctx.newCDPSession(p);await cdp.send('Emulation.setCPUThrottlingRate',{rate:CPUX})}catch(e){}}  /* phone-like CPU (perf.js uses 4x too) */
   await g.evaluate(()=>{window.__lt=[];try{new PerformanceObserver(l=>{for(const e of l.getEntries())window.__lt.push(Math.round(e.duration))}).observe({type:'longtask',buffered:false})}catch(e){}});
-  const t1=Date.now();await g.evaluate(NEWLIFE);await within(60e3,g.waitForFunction(SETTLE,null,{polling:150}),'first turn');const playable=Date.now()-t1;
+  const t1=Date.now();await g.evaluate(NEWLIFE);await settleNew(g,'first turn');const playable=Date.now()-t1;
   const tabs=[];for(let i=0;i<2*PG.tabs;i++){const r=await g.evaluate(async i=>{const ts=[...document.querySelectorAll('#tabs [data-tab]')].filter(x=>x.getClientRects().length);const t=ts[(i+1)%ts.length];if(!t)return null;
     const t0=performance.now();t.click();await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));return {tab:t.dataset.tab,ms:Math.round(performance.now()-t0)}},i%PG.tabs);tabs.push(r);await sl(250)}
   /* tab ms = median over the tabs of each tab's faster of its 2 visits (noise on a shared box only ever adds time) */
@@ -110,4 +122,5 @@ const errsOf=async(g,errs)=>errs.concat(await g.evaluate(()=>window.__qcErr||[])
  await b.close();srv.close();R.totalMs=Date.now()-T0;R.pass=!R.fails.length;fs.writeFileSync(path.join(OUT,'quickcheck.json'),JSON.stringify(R,null,1));
  const o=R.steps.open||{},pf=R.steps.perf||{};
  const pl=R.steps.perfLive||{};console.log(`QUICKCHECK ${R.pass?'PASS':'FAIL'} · ${Math.round(R.totalMs/1000)} s · open ${o.ms||'-'} ms · old save ${R.steps.old&&R.steps.old.load?(R.steps.old.load.ok?'ok':'FAIL'):(R.steps.old&&R.steps.old.skipped?'skipped':'FAIL')} · perf (median of ${PG.runs}, new/live): render ${pf.renderMs??'-'}/${pl.renderMs??'-'} ms, tab ${pf.tabMs??'-'}/${pl.tabMs??'-'} ms, buổi ${pf.buoiMs??'-'}/${pl.buoiMs??'-'} ms, tasks>200ms ${pf.longTasks200??'-'}/${pl.longTasks200??'-'}${R.fails.length?' · '+R.fails.join(' | '):''}`);
+ console.log('selection rerolls (ban hoa → new life, cap '+SELX_REROLL_MAX+' per new life): '+selxRerolls);
  process.exit(R.pass?0:1)})().catch(e=>{console.error(e);console.log('QUICKCHECK FAIL · crashed: '+e.message);process.exit(1)});
