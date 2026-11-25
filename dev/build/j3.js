@@ -103,7 +103,7 @@ PEND.loveletter=p=>{const v=RV(p.v);if(!v)return null;const m=p.m!=null&&typeof 
    thin…) weigh BAL.ag.why.dil.world; npwPick chooses among the goal-valid top options. A card at most every BAL.ag.why.dil.gap tuần (no dice gate). */
 let DILX=null;
 const DIL_P={vase:"hhMe",coldletter:"coldAsk",embezzle:"hhGreed",tuyen:"empAsk",loveletter:"loveFound"};
-const DIL_PP={vase:X=>({y:X.why}),coldletter:X=>{const v=liveRivals(false).filter(x=>aff(x,X.who)>=BAL.ag.why.dil.coldFriend).sort((a,b)=>aff(b,X.who)-aff(a,X.who))[0];return{f:X.who.id,v:v?v.id:null,y:X.why}},
+const DIL_PP={vase:X=>({y:X.why}),coldletter:X=>{const v=liveRivals(false).filter(x=>aff(x,X.who)>=netTh(x,"than")).sort((a,b)=>aff(b,X.who)-aff(a,X.who))[0];return{f:X.who.id,v:v?v.id:null,y:X.why}},
  embezzle:X=>({y:X.why}),tuyen:X=>({y:X.why}),loveletter:X=>({v:X.who.id,m:X.tgt?X.tgt.id:null})};
 function makeDil(){if(!npwOn())return null;const D=BAL.ag.why.dil,O=[];
   for(const id in DIL_P)for(const o of npwAsk(DIL_P[id],{id}))O.push({id,o,s:o.s});

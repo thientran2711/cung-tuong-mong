@@ -149,9 +149,10 @@ RCVK.call={t:"Có khách đến chơi",act:"ghé chơi cung",kind:"help",
 /* Hòa giải (TW mediate): the receiver holds oán against x; the mediator asks her to let it go (oán − BAL.tw.g.mediate); x = key of the foe */
 RCVK.mediate={t:"Lời hòa giải",act:"đứng ra hòa giải với",kind:"help",ok:(p,t,x)=>!!byKey(x),
  line:(p,x)=>{const f=byKey(x);return `<p>${p.name} sang: “Oan gia nên giải không nên kết. ${f?f.name:"Nàng ấy"} cũng đã biết lỗi, xin người bỏ qua.”</p>`},
- opts:(p,t,x)=>{const f=byKey(x),me=t===S,m=BAL.tw.g.mediate,mh=Math.round(m*BAL.rcv.help.half),fn=f?NM(f):"";return[
-  rcvYesO(p,t,0,{n:"Nghe lời, bỏ qua",g:`oán ${fn} ${balSg(-m)}`,go:()=>{if(f)oanAdd(t,f,-m);return `${NMc(p)} đứng ra hòa giải giữa ${NM(t)} và ${fn}`}}),
-  rcvYesO(p,t,1,{n:"Nguôi một nửa",g:`oán ${fn} ${balSg(-mh)}`,go:()=>{if(f)oanAdd(t,f,-mh);return `${me?"Ngươi":t.name} nguôi giận ${fn} một nửa`}}),
+ /* fix 2 (law 1): an NPC receiver whose oán toward x is at or over her own «nguoi» level cannot pick the yes answers (netForgive); her own answer stays her choice */
+ opts:(p,t,x)=>{const f=byKey(x),me=t===S,m=BAL.tw.g.mediate,mh=Math.round(m*BAL.rcv.help.half),fn=f?NM(f):"",no=!me&&!t.coop&&f&&!netForgive(t,f);return[
+  no?null:rcvYesO(p,t,0,{n:"Nghe lời, bỏ qua",g:`oán ${fn} ${balSg(-m)}`,go:()=>{if(f)oanAdd(t,f,-m);return `${NMc(p)} đứng ra hòa giải giữa ${NM(t)} và ${fn}`}}),
+  no?null:rcvYesO(p,t,1,{n:"Nguôi một nửa",g:`oán ${fn} ${balSg(-mh)}`,go:()=>{if(f)oanAdd(t,f,-mh);return `${me?"Ngươi":t.name} nguôi giận ${fn} một nửa`}}),
   rcvNoO(p,t,{g:`giữ thể diện, Danh ${balSg(BAL.rcv.prop.danh)}`,fx:{danh:BAL.rcv.prop.danh},r:`${me?"Ngươi":t.name} không nghe lời hòa giải của ${NM(p)}`}),
   rcvSabO(p,t,{g:"giữ mối oán",r:tq=>`${me?"Ngươi":t.name} đem chuyện ${NM(p)} hòa giải đi kể${tq?" với "+rcvQn(tq):""}`})]}};
 /* Nhờ ơn người quen rút thẻ bài (jecon ACT.blockf): the receiver is the acquaintance who owes the asker; x = key of the target.

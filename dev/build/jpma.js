@@ -215,7 +215,7 @@ function pmOddsEst(a,t,kind){const R=pmR(a,t),L=B().luck;const med=p=>pmMed(p,ki
 if(typeof agReg==="function"&&typeof p3O==="function"){
  agReg("consort","pm",(v,N,need)=>{const O=[];try{if(!(typeof p3On==="function"&&p3On())||v===S||!live(v)||v.confined||v.coop||!pmFree(v))return O;const G=B().npc.g;
   const L=others(v).filter(x=>x&&x!==v&&live(x)&&!x.confined&&(x!==S||(pmMeFree()&&!isSrvSafe()&&!S.confined)));if(!L.length)return O;
-  if(!need||G.play[need]!=null){const F=L.filter(x=>aff(v,x)>=B().npc.minAff);const t=F.length?pmPickBy(F,x=>BAL.mind.pick.ag.base+Math.max(0,aff(v,x)),v,"play"):null;
+  if(!need||G.play[need]!=null){const F=L.filter(x=>aff(v,x)>=0);const t=F.length?pmPickBy(F,x=>BAL.mind.pick.ag.base+Math.max(0,aff(v,x)),v,"play"):null;
    if(t){const x=p3O(v,"pmPlay",{n:"Cùng chơi",c:{},o:100,k:B().kc},N,G.play,"social",pmAt(t),t);if(x)O.push(x)}}
   if(!need||G.duel[need]!=null){const F=L.filter(x=>(typeof agSpite==="function"?agSpite(v,x):-aff(v,x))>=B().npc.spite);const t=F.length?pmPickBy(F,x=>BAL.mind.pick.ag.base+Math.max(0,typeof agSpite==="function"?agSpite(v,x):-aff(v,x)),v,"duel"):null;
    if(t&&pmStakes(v,t).some(z=>z.ok)){const x=p3O(v,"pmDuel",{n:"Thách đấu",c:{},o:pmOddsEst(v,t,pmX(v,t,"duel").kind),k:B().kc},N,G.duel,"social",pmAt(t),t);if(x)O.push(x)}}
@@ -245,7 +245,7 @@ function pmEyeTxt(L){return L.map(p=>p===S?"ngươi":p.name).join(", ")}
 function pmEyeFx(win,lose,x,place){const E=B().eye,L=pmEyes(win,lose,place);if(!L.length)return"";const d=Math.min(E.danhMax,E.danh*L.length);
  apx(win,{danh:d});apx(lose,{danh:-d});const env=[],res=[];
  for(const w of L){const sp=typeof agSpite==="function"&&w!==S?agSpite(w,win):Math.max(0,-aff(w,win));
-  if(aff(w,win)>=E.likeMin){affAdd(w,win,E.kinh);res.push(w)}/* one who likes the winner respects her; else one who resents her envies her */
+  if(aff(w,win)>=netTh(w,"than")){affAdd(w,win,E.kinh);res.push(w)}/* one who likes the winner respects her; else one who resents her envies her */
   else if(sp>=E.spite){if(win===S&&w!==S){if(typeof ghenUp==="function")ghenUp(w,E.ghen,"thấy ngươi thắng trước mặt mọi người",S)}else oanAdd(w,win,E.oan);env.push(w)}
   pmMem(w,win,"pmsaw",x.n)}
  if(win!==S&&lose!==S&&!L.includes(S)){try{newsAdd(win,"pmwin",`${win.name} thắng ${lose.name} một ván ${x.n} trước mặt ${L.length} người`)}catch(e){}}

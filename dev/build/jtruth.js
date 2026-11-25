@@ -142,7 +142,7 @@ function evStory(t,n,x){if(!t||!S)return 0;deedAdd(t,"story",null,n,x||DEEDX.sto
    Vu oan act: caught / odds / defence / exposure exactly as for the player. */
 (function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{const T=BAL.truth;
  if(O.length&&t&&ACT.frame&&!accOK(v,t)){let has=false;for(const x of O)if(x[0]==="frame"||x[0]==="plant"){x[1]*=T.frameW;if(x[0]==="frame")has=true}
-  if(!has&&bandOf(danger(v,t))===1&&T.frameW1>0){let ok=false;try{ok=ACT.frame.ok(v,t)}catch(e){}const w=T.frameW1*(typeof persW==="function"?persW(v,"frame"):1);if(ok&&w>0)O.push(["frame",w])}}}catch(e){}return O}})();
+  if(!has&&bandVT(v,t)===1&&T.frameW1>0){let ok=false;try{ok=ACT.frame.ok(v,t)}catch(e){}const w=T.frameW1*(typeof persW==="function"?persW(v,"frame"):1);if(ok&&w>0)O.push(["frame",w])}}}catch(e){}return O}})();
 function tFrameV(a,L){return L.filter(t=>t!==a&&!(typeof sameHouse==="function"&&sameHouse(a,t))&&((t.sung||0)>(a.sung||0)||rkOf(t)>rkOf(a))&&!accOK(a,t))}
 function npcFrame(){const T=BAL.truth;const L=liveRivals(false).filter(v=>v&&v.alive&&!v.out&&!v.coop&&!v.confined);if(L.length<2)return"";
  const A=L.filter(v=>(v.malice||0)>=T.npcFrameMal&&!v.plan);if(!A.length)return"";

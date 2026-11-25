@@ -17,7 +17,7 @@
       a favour: her thiện cảm −BAL.rcp.tFavor, no chân tình gift to her for BAL.gift.askW weeks). ================= */
 Object.assign(BAL,{rcp:{likeV:2,neutral:.6,hateV:3,fatW:8,fat:[1,.6,.3,0],bored:{emp:1,th:2,rel:3},hateP:70,alP:35,alSuc:15,
  accP:55,accKnew:30,defB:45,defTy:25,tFeeK:.08,tFeeMin:3,tFavor:4,tRel:25,bookPr:[0,18,30,45],bookAdd:[0,12,20,30],mamaK:.15,mamaMin:12,sheetPr:8,shopN:2,gossipP:25,
- tyFeeK:.05,spyO:60,alEv:30,giftRel:40,giftP:6,thGiftP:4}});
+ tyFeeK:.05,spyO:60,alEv:30,giftP:6,thGiftP:4}});
 /* sub-styles per kind: [id, name, recipes] — the first is known from the start; every kind has exactly 4 (owner 15/11 ~21:50Z) */
 const RCP_ST={
 mon:[["s1","Cơm canh món mặn",["r01","r02","r05"]],["s2","Bánh trái, chè ngọt",["r03","r06","r08"]],["s3","Hấp, tần bổ dưỡng",["r04","r07","r10"]],["s4","Món chua ngọt",["r09"]]],
@@ -306,7 +306,7 @@ function rcpSpyO(){return oddsCl(Math.round(BAL.rcp.spyO+((S.maid&&S.maid.loyal)
 (function(){const m0=monthTick;monthTick=function(){const ev=m0.apply(this,arguments);try{if(S&&!S.dead&&!S.out){
   if(S.maid&&npcWhy("rcpGos",{p:S.maid},()=>roll(BAL.rcp.gossipP))){const P=rcpPeople().filter(r=>rcpUnknown(r).length);const r=npwPick(P,rcpCare);if(r){const t=rcpLearn(r,npwPick(rcpUnknown(r),()=>1),`${S.maid.name} nghe cung nhân kể`);if(t)log(t)}}/* npc-purpose G2c: a loyal maid asks about the people her mistress most needs to please */
   /* a friendly consort sends a copied sheet of a sub-style she knows and her friend does not; Thái hậu gives a sutra or embroidery copy */
-  for(const v of liveRivals(true)){if(!v.alive||v.out||(rel(v,S)||0)<BAL.rcp.giftRel)continue;const L=[];
+  for(const v of liveRivals(true)){if(!v.alive||v.out||(rel(v,S)||0)<netTh(v,"than"))continue;const L=[];
    for(const kind in RCP_ST){const sc=WK[kind].a===wkBestArt(v)?BAL.ag.why.g2rcp.best:BAL.ag.why.g2rcp.other;RCP_ST[kind].forEach((s,i)=>{if(i&&rcpNpcKnows(v,kind,s[0])&&!rcpKnows(S,kind,s[0]))L.push({k:rcpBookK(kind,s[0],1),s:sc})})}
    if(L.length&&npcWhy("rcpGift",{p:v},()=>roll(BAL.rcp.giftP))){const g=npwPick(L,x=>x.s);pushDil(mkP("giftin",{f:key(v),e:{k:g.k,from:key(v)}}),"Quà tặng");break}}/* npc-purpose G2c: a friend shares what she knows best */
   if(!S.thDead&&(S.th||0)>=60&&npcWhy("rcpTh",{},()=>roll(BAL.rcp.thGiftP))){const L=[];for(const kind of ["kinh","theu"])RCP_ST[kind].forEach((s,i)=>{if(i&&!rcpKnows(S,kind,s[0]))L.push({k:rcpBookK(kind,s[0],1),s:kind==="kinh"?BAL.ag.why.g2rcp.thKinh:BAL.ag.why.g2rcp.thTheu})});

@@ -300,7 +300,7 @@ function sgPlay(J){const G=J.G;if(typeof S==="undefined"||!S||S.dead){try{render
   const html=kitGameResult({parts,note:note+" Chạm «Ra tay»: việc làm theo cơ may này, kết quả hiện ở thẻ kết quả."})+kitRows(xr)+
    `<div class="kg82act"><button class="${kg82Btn()}" id="sgdo">Ra tay</button></div>`;
   kg82ShowRes(html,st>0?true:st<0?false:null);/* merge-train-4: result sound (result-sfx): odds up = win, down = lose */kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");$("sgdo").onclick=()=>{kg82Close();J.run(m)};KG82.quit=null;/* §13.9: the ✕ never acts silently: it asks first; «Ra tay» stays the only way on (the pay is spent), «Ở lại» keeps this card */
-  KG82.xdo=()=>kg82Ask([`Ra tay ngay: việc làm theo cơ may ${word(p1)}.`,"Kết quả hiện ở thẻ kết quả."],"Ra tay",()=>{const b=$("sgdo");if(b)b.click()},"Ra tay?","Ở lại");const dd=kg82El();if(dd)dd.scrollTop=0};
+  KG82.xdo=()=>{const b=$("sgdo");if(b)b.click()};const dd=kg82El();if(dd)dd.scrollTop=0};
  intro()}
 function sgEng(G,v,onEnd){const box=kg82Box();box.innerHTML="";const res=$("kg82box-res");if(res){res.hidden=true;res.innerHTML=""}KG82.phase="play";let done=false,dead=false,stop=null;
  KG82.peekBad=null;const env=KG82.cur={v,kind:G.g,lv:mgPlayLv(G.g),hud:o=>{for(const k in o)kg82Set(k,kg82Cap(o[k]))},end:(raw,info)=>{if(done)return;done=true;clearTimeout(guard);KG82.peek=()=>null;KG82.peekBad=null;const st=stop;KG82.run=null;try{if(st)st()}catch(e){}onEnd(cl(Math.round(raw),0,10),info||{})}};

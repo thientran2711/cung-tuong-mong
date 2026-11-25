@@ -91,7 +91,7 @@ const CASES=[
    chk(`${N}: no page errors`,!errs.length,errs.slice(0,4));
    await ctx.close()}}
  /* law 11 family: every ending of one device in the same kit frame size (and the same kit header / footer-button height, which the KIT size system takes from the figure column for every dialog — KIT_REQUESTS ending-screens-land) = the same left figure slot (size + place in the frame) */
- const G={};FIGS.filter(f=>f[2]&&f[3]).forEach(f=>{const k=f[0].split(' ')[0]+' '+f[1]+' header '+f[7]+' footer '+f[8];(G[k]=G[k]||[]).push(f)});
+ const G={};FIGS.filter(f=>f[2]&&f[3]).forEach(f=>{const k=f[0].split(' ')[0]+' '+f[1]+' (KIT 56.21: one slot per frame size, whatever the header / footer)';(G[k]=G[k]||[]).push(f)});
  for(const k in G){const L=G[k],r=L[0];chk(`${k}: every ending shows the same kit figure slot (${L.length} endings, ${r[3]} @${r[4]},${r[5]})`,L.every(f=>f[3]===r[3]&&Math.abs(f[4]-r[4])<=2&&Math.abs(f[5]-r[5])<=2),L)}
  console.log('figure table [case, ksz, kit live frame, figure slot (.kszfig), fig top in frame, fig left in frame, frame, header h, footer h]');FIGS.forEach(f=>console.log(JSON.stringify(f)));
  await b.close();const nb=ok.filter(x=>!x[1]).length;console.log(`ending-screens: ${ok.length-nb}/${ok.length} pass${NOART?' (no art)':''}`);process.exit(nb?1:0)})();

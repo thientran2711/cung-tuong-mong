@@ -155,7 +155,7 @@ for(const k in LK_ACT){const D=LK_ACT[k];
   if(lv<=0)return `<span class="g">${NMc(a)} ${D.verb.replace("{t}",NM(t))}, nhưng ${t===S?"ngươi":"nàng"} né kịp.</span> `;
   const L=D.give(t,lv,a).filter(Boolean);return `<span class="${t===S?"r":"g"}">${NMc(a)} ${D.verb.replace("{t}",NM(t))} giữa chốn đông người.</span> ${L.length?lkSay(t,L):""}`}});
  try{AOUT[k]=[D.x,"nàng biết là ngươi, oán ngươi"];ACTDOM[k]="Mưu kế";J78VERB[k]=D.verb;HARMK[D.n]=k;if(!BANDS[1][2].includes(k))BANDS[1][2].push(k);const g=RVGRP.find(x=>x[0]==="Hại nhỏ");if(g&&!g[1].includes(k))g[1].push(k)}catch(e){}}
-(function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{const b=bandOf(danger(v,t));
+(function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{const b=bandVT(v,t);
  if(b>=1)for(const k in LK_ACT)if(ACT[k].ok(v,t)){const w=lkB().act[k].w*persW(v,k);if(w>0)O.push([k,w])}}catch(e){}return O}})();
 /* her throw: the bar decides the level (skip = nhẹ) */
 (function(){if(typeof doAct!=="function")return;const d0=doAct;doAct=function(i,k){

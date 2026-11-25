@@ -76,8 +76,8 @@ const F95=new Set(["ally","gift","tieuhuy","visit"]);
 /* port 16/11, whole family: every act the game groups as harm (RVGRP, j9 + jecon/jtsb/jpoison/jpet…) passes the gate; "Giao thiệp" acts are friendly */
 try{if(typeof RVGRP!=="undefined")for(const [g,L] of RVGRP)for(const k of L){if(g==="Giao thiệp"||k==="tieuhuy")F95.add(k);else H95.add(k)}}catch(e){}
 function j95except(a,t){/* a recorded reason to act against her own affection */try{
- for(const h of liveRivals(true)){if(h===a||h===t)continue;if(evG(h,a)>=2&&hostility(h,t)>=50)return `bị khống chế: ${h.name} nắm thóp bằng chứng cứ, ép ra tay`}
- const f=facOf(a);const L=f&&facLeader(f);if(L&&L!==a&&L!==t&&L!==S&&hostility(L,t)>=60&&aff(a,L)>=30)return `vâng lệnh chủ phe ${L.name}`;
+ for(const h of liveRivals(true)){if(h===a||h===t)continue;if(evG(h,a)>=BAL.evFirm&&hostility(h,t)>=netTh(h,"host"))return `bị khống chế: ${h.name} nắm thóp bằng chứng cứ, ép ra tay`}
+ const f=facOf(a);const L=f&&facLeader(f);if(L&&L!==a&&L!==t&&L!==S&&hostility(L,t)>=netThK(L,"host","hostHi")&&aff(a,L)>=netTh(a,"than"))return `vâng lệnh chủ phe ${L.name}`;
  const r=a.j95rum&&a.j95rum[key(t)];if(r&&wk()-r.w<=8)return `nghe tin đồn (${r.txt}) nên hiểu lầm`}catch(e){}return ""}
 function motiveOK(a,t,kind){if(!a||!t||a===S||a===t)return{ok:true,why:a===S?"người chơi tự chọn":""};
  if(typeof a!=="object"||a.rel==null)return{ok:true,why:""};
@@ -136,7 +136,7 @@ function j95week(){const z=j95z();if(z.itWk===wk())return;z.itWk=wk();if(z.mo!==
  for(const id in z.meK){const m=z.meK[id];if(!z.me[m.c+":"+m.k]||z.me[m.c+":"+m.k]<1.5)delete z.meK[id]}
  z.it={};z.sec=[];const cs=j95cs();z.mood={};for(const v of rivals)z.mood[v.id]=j95moodF(v);z.nb={};for(const v of liveRivals(true)){const L=liveRivals(true).filter(x=>x!==v&&!sameHouse(v,x));const n=[];for(let i=0;i<2&&L.length;i++){/* NPC-PURPOSE G3: her neighbours = the two she likes best (near-best), not a shuffle */const x=npwPick(L,y=>1+Math.max(0,aff(v,y)));if(!x)break;n.push(x.id);L.splice(L.indexOf(x),1)}z.nb[v.id]=n}
  for(const v of liveRivals(true)){if(v.confined)continue;j95hab(v);
-  if(pat&&!z.meK[v.id]&&hostility(v,S)>=45){let sp=false;try{sp=spyIn70(v,S)}catch(e){}if(j95dice(BAL.odb.j95.dcJ95week+eyes(v)*BAL.odb.j95.dcJ95weekEye+(sp?BAL.odb.j95.dcJ95weekSpy:0))){const [c,k]=pat[0].split(":");z.meK[v.id]={c:+c,k,w:wk()}}}
+  if(pat&&!z.meK[v.id]&&hostility(v,S)>=netTh(v,"host")){let sp=false;try{sp=spyIn70(v,S)}catch(e){}if(j95dice(BAL.odb.j95.dcJ95week+eyes(v)*BAL.odb.j95.dcJ95weekEye+(sp?BAL.odb.j95.dcJ95weekSpy:0))){const [c,k]=pat[0].split(":");z.meK[v.id]={c:+c,k,w:wk()}}}
   const it=j95intent(v,cs);if(it)z.it[v.id]=it;
   /* lovers meet in hidden corners, mostly at night */
   const m=v.affair&&manById(v.affair);if(m&&!j95men()){const n=j95dice(BAL.odb.j95.dcN)?2:1;
@@ -192,7 +192,7 @@ function j95dist(v,c,it){const own=palaceOf(v);const M={};const add=(k,w,a,why)=
  add(own,J95.OWN[c]/((j95z().mood||{})[v.id]||1),["read","eat","rest","sleep"][c],"ở cung mình");
  try{if(qOn()&&!v.queen&&c===0)add("kn",30,"greet","lệ thỉnh an Hoàng hậu buổi sáng")}catch(e){}
  for(const h of j95hab(v)){const k=j95res(v,h.k);let w=h.s[c]*2;if(k==="vuon")w*=j95seaV(c);add(k,w,h.a,"thói quen: "+ACT95[h.a])}
- if(c>=1){/* evenings and afternoons: calls on neighbours she does not dislike (the week's company) */const N=(j95z().nb||{})[v.id]||[];for(const id of N){const x=RV(id);if(!x||!x.alive||x.out||sameHouse(v,x)||!motiveOK(v,x,"visit").ok||hostility(v,x)>=30)continue;add(palaceOf(x),c===3?14:9,"visit","sang chơi, trò chuyện với "+x.name)}}
+ if(c>=1){/* evenings and afternoons: calls on neighbours she does not dislike (the week's company) */const N=(j95z().nb||{})[v.id]||[];for(const id of N){const x=RV(id);if(!x||!x.alive||x.out||sameHouse(v,x)||!motiveOK(v,x,"visit").ok||hostility(v,x)>=netTh(v,"act"))continue;add(palaceOf(x),c===3?14:9,"visit","sang chơi, trò chuyện với "+x.name)}}
  if(v.preg||(v.suc||80)<50){add("tyv",15,"heal",v.preg?"đang có thai, đi bắt mạch":"yếu sức, đi uống thuốc");if(M[own])M[own].w*=1.4}
  if((v.sung||0)<15&&M[own])M[own].w*=1.8;
  if(it&&it.k==="avoid"){const f=byKey(it.t);const fk=f&&j95likely(f,c);if(fk&&fk!==own&&M[fk]){M[fk].w*=.2}}
@@ -453,8 +453,8 @@ function j95npcCatch(m){const R=S.roster;if(!R)return;const kh=j95kh();const k=S
   if(out==="one"){evA(v,S,BAL.eff.j95.evJ95npcCatch_2);continue}evA(v,S,BAL.eff.j95.evJ95npcCatch_3);v.j95saw={w:wk(),m:m.id};
   if(out==="rev")Q.push({t:"Có người thấy",who:pv(v),h:`<p>Lúc trở ra, ngươi thấy bóng ${v.name} khuất sau cửa. Nàng đã thấy ngươi đi cùng ${m.name}.</p>`});
   const hard=motiveOK(v,S,"expose");
-  if(hard.ok&&hostility(v,S)>=40&&evG(v,S)>=2&&npwPick(["tell","hold"],x=>x==="tell"?hostility(v,S):Math.max(0,100-hostility(v,S)))==="tell"){/* G3: she accuses when her grudge outweighs keeping the card for later */const o=oddsCl(Math.min(25+evG(v,S)*15,90));if(j95dice(o)){affairExposed(m,`${v.name} tố giác:`);return}/* two-way law: a failed accusation costs the accuser what it costs her (Danh -8, resentment +25, regard -20, punishment) */ap(v,{danh:-BAL.tw.g.accFail[0]});oanAdd(S,v,BAL.tw.g.accFail[1]);affAdd(S,v,-BAL.tw.g.accFail[2]);punish(v,"vu cáo người khác tư thông",1)}
-  else if(aff(v,S)>=20){j95z().owe["by:"+v.id]=wk()}}}
+  if(hard.ok&&hostility(v,S)>=netTh(v,"host")&&evG(v,S)>=BAL.evFirm&&npwPick(["tell","hold"],x=>x==="tell"?hostility(v,S):Math.max(0,100-hostility(v,S)))==="tell"){/* G3: she accuses when her grudge outweighs keeping the card for later */const o=oddsCl(Math.min(25+evG(v,S)*15,90));if(j95dice(o)){affairExposed(m,`${v.name} tố giác:`);return}/* two-way law: a failed accusation costs the accuser what it costs her (Danh -8, resentment +25, regard -20, punishment) */ap(v,{danh:-BAL.tw.g.accFail[0]});oanAdd(S,v,BAL.tw.g.accFail[1]);affAdd(S,v,-BAL.tw.g.accFail[2]);punish(v,"vu cáo người khác tư thông",1)}
+  else if(aff(v,S)>=netTh(v,"than")){j95z().owe["by:"+v.id]=wk()}}}
 
 /* ---------------- 8. DATA FOR THE KIT: habits she knows ---------------- */
 function habitsKnown(p){if(!S||!p||p===S)return[];const z=j95z();const O=z.obs[p.id]||{};const R=[];
