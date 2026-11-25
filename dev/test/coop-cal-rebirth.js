@@ -105,7 +105,7 @@ async function rebirthCase(A,B,X,tag,how){
  if(ON(5)){const LAST=await A.p.evaluate(()=>typeof B4L==='number'?B4L:2);
   ok(await play(A,B,async()=>{const a=await D(A),c=await D(B);return await alive(A)&&await alive(B)&&a.w===c.w&&a.b===c.b&&a.b<LAST},120000),'5: both live in one day buổi');
   for(let i=0;i<6;i++){await CLR.tap(A).catch(()=>'');await CLR.tap(B).catch(()=>'');await sleep(200)}
-  const a0=await D(A);const nx=o=>o.p.evaluate(()=>{const n=document.getElementById('next');if(!n||n.disabled||!document.getElementById('modal').hidden)return false;n.click();return true});
+  const a0=await D(A);const nx=o=>o.p.evaluate(()=>{if(COOPW.bend)return true;/* already ended this buổi (the clock / an earlier tap): counts as pressed */const n=document.getElementById('next');if(!n||n.disabled||!document.getElementById('modal').hidden)return false;n.click();return true});
   let hp=false;for(let i=0;i<20&&!hp;i++){hp=await nx(A);if(!hp){await clr(A);await sleep(300)}}ok(hp,'5: host presses Hết buổi',a0);await sleep(800);
   ok(await A.p.evaluate(()=>{for(let i=0;i<3;i++)emoBox(emoKey(S));return !document.getElementById('modal').hidden&&Q.length>=1}),'5: host has «Tâm trạng · Ngươi» open (queued '+await A.p.evaluate(()=>Q.length)+')');
   let pr=false;for(let i=0;i<20&&!pr;i++){pr=await nx(B);if(!pr){await clr(B);await sleep(300)}}ok(pr,'5: guest presses Hết buổi',pr?undefined:[await B.p.evaluate(()=>{const n=document.getElementById('next');return {t:n&&n.textContent,dis:n&&n.disabled,modal:!document.getElementById('modal').hidden&&(document.getElementById('mt')||{}).textContent,Q:Q.length,b:S.buoi,tr:COOPW.tr.slice(-4)}}),await A.p.evaluate(()=>({Q:Q.length,b:S.buoi,tr:COOPW.tr.slice(-4)}))]);
@@ -123,7 +123,7 @@ async function rebirthCase(A,B,X,tag,how){
  /* 6 CAUSE 5 r2 (U3b room 6ZB2 on d16c5300: both seats had «Tin báo» open, host «onBuoi 3.2 me 3.1 Q1» parked): a panel that only TELLS
     (the «Tin báo» notice panel she opened, no choice) is carried over the room's step: his seat steps with the room and the panel is still
     on his screen after it (nothing she was reading is lost) */
- if(ON(6)){const LAST=await A.p.evaluate(()=>typeof B4L==='number'?B4L:2);const nx=o=>o.p.evaluate(()=>{const n=document.getElementById('next');if(!n||n.disabled||!document.getElementById('modal').hidden)return false;n.click();return true});
+ if(ON(6)){const LAST=await A.p.evaluate(()=>typeof B4L==='number'?B4L:2);const nx=o=>o.p.evaluate(()=>{if(COOPW.bend)return true;/* already ended this buổi (the clock / an earlier tap): counts as pressed */const n=document.getElementById('next');if(!n||n.disabled||!document.getElementById('modal').hidden)return false;n.click();return true});
   ok(await play(A,B,async()=>{const a=await D(A),c=await D(B);return await alive(A)&&await alive(B)&&a.w===c.w&&a.b===c.b&&a.b<LAST},120000),'6: both live in one day buổi');
   let hp=false;for(let i=0;i<30&&!hp;i++){hp=await nx(A);if(!hp){await clr(A);await sleep(300)}}const a0=await D(A);ok(hp,'6: host presses Hết buổi',a0);await sleep(800);
   ok(await A.p.evaluate(()=>{kitNotice({id:'t6',line:'Tin thử ca 6',text:'Một tin để đọc, không có gì phải chọn.'});kitNoticeOpen('t6');return !document.getElementById('modal').hidden&&Q.length===1&&/Tin báo/.test((document.getElementById('mt')||{}).textContent||'')}),'6: host has «Tin báo» open (a notice, no choice)');
