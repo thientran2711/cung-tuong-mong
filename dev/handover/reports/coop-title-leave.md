@@ -42,3 +42,12 @@ Files: dev/build/j74.js, dev/build/jslots.js, dev/build/jcooplobby.js, dev/test/
 ## Notes
 - XKG7 (Foreman B 09:40Z): its dumps show `COOPW` null on the bare title (the game globals not there) = the page had not booted (loader / CDN 429, F 5edf09f6) — no game code can draw a menu then. Where the game did boot, C8 shows a reload mid-room comes back to the room.
 - Rebase: if fix-6 lands first, `git cherry-pick` of the two commits applies clean (proved on tmp worktree).
+
+### HANDOVER (FIXER #12 → successor)
+- Branch review/robot-coop-fix-7 on LIVE main 9f72524b: d678328f (code + test), be6c1159 (index.html/sw.js rebuilt), 4a62e4d9 (this report). SẴN SÀNG KIỂM sent to FOREMAN B; reviewer = session_01N1tNP2DEvrn63HHg5eMcAz. Take any FAIL items from Foreman B.
+- Changed files: dev/build/j74.js (lifeBehind, homeMr, backToGame, go("game"/"leave"), resumeGame in a co-op life, bareCheck guard), dev/build/jslots.js (☰ no longer leaves; CTM_ROOM_LIFE menu/ask/askThen/leave; BYE "ctm:roi-phong" via COOP.send("say")), dev/build/jcooplobby.js (addBtn skips data-coop-life menu; FZT.left + LEFT flag from "said"; freeze «Về màn đầu» → confirm with HOLD), dev/test/coop-title-leave.js (new), index.html, sw.js.
+- If fix-6 lands first: rebase / cherry-pick d678328f onto it (applies clean, proved), then rebuild with bash dev/site/build_site.sh and commit index.html + sw.js.
+- Local Worker: `cp -r coop/worker /home/user/wt/wr && cd /home/user/wt/wr && npm install`, then in the worktree's coop/worker: `ln -s /home/user/wt/wr/node_modules node_modules; node_modules/.bin/wrangler dev --local --port 8791 --ip 127.0.0.1`.
+- Run: `python3 dev/build/assemble.py && node dev/test/coop-title-leave.js http://127.0.0.1:8791` (env COOP_SWAP=1 iPad hosts; CTL_SOLO=0 skips the solo part; CTL_ROOT=<main worktree> serves another build = bare FAIL proof; CTL_OUT=<dir> shots). ~6–8 min per run.
+- Gates done: coop-title-leave main 45/112 FAIL → fix 82/82 (SWAP0, SWAP1, on fix-6) + solo 30/30; coop-e2e SWAP0 142/142 (1 run 141/144 rebirth-calendar, rerun 142/142) SWAP1 142/142 (`node dev/test/coop-e2e.js <outdir> http://127.0.0.1:8791`); coop-cal-rebirth 51/51 (fix-6 test, on fix-6 + fix-7); keymove 12/12; quickcheck PASS.
+- Worktrees deleted; nothing local left.
