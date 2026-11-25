@@ -270,7 +270,19 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  st.dataset.j59slots=centres.map(c=>(c+st.clientLeft).toFixed(1)).join(",");st.dataset.j59n=String(N);
  j59petPut(st,usedPets,H,fo,pVH);
  j59chips(st,R,pages>1?{pg,pages,before,after,xl:FS?0:G.xl,xr:FS?0:G.rr,floor:st.clientHeight-fo-4}:null);j59swipe(st);
+ kitTagCollide(st);
  st.__j59here=persons}
+/* KIT 33.10 STAGE NAME-LABEL COLLISION RULE (KK28, FOREMAN D kit request «iPad Hành sự stage: two figure name labels overlap at the left edge», every stage): two name labels never overlap.
+   After the figures are placed (kitSlotIn may push a wide figure away from the stage edge, so neighbouring bodies stand closer than a slot), the visible labels are sorted left to right; a label that overlaps the one
+   before it (same line band) slides RIGHT by the overlap + 4 px while it stays inside the stage, the rest slides the one before it LEFT (never past the stage edge); when even that is not enough the later label goes
+   down onto the second name row (the same stagger the crowded stage already uses). The shift is the CSS variable --j59tdx on the label (margin-left), recomputed from zero on every layout. */
+function kitTagCollide(st){try{const R=e=>e.getBoundingClientRect(),sr=R(st),gap=4;const all=[...st.querySelectorAll("#tokens .tok .tag,#j59metag .tag")];all.forEach(g=>{g.style.removeProperty("--j59tdx");g.style.removeProperty("--j59tdy")});
+ const L=all.filter(g=>g.offsetParent&&R(g).width>2&&R(g).height>2&&R(g).right>sr.left&&R(g).left<sr.right).sort((a,b)=>R(a).left-R(b).left);const lo=sr.left+gap,hi=sr.right-gap;
+ for(let i=1;i<L.length;i++){const a=R(L[i-1]),b=R(L[i]);if(Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)<=1)continue;const ov=a.right+gap-b.left;if(ov<=0)continue;
+  const db=Math.max(0,Math.min(ov,hi-b.right));let da=ov-db;if(da>0)da=Math.max(0,Math.min(da,a.left-lo));
+  if(db)L[i].style.setProperty("--j59tdx",db.toFixed(1)+"px");if(da)L[i-1].style.setProperty("--j59tdx",((parseFloat(L[i-1].style.getPropertyValue("--j59tdx"))||0)-da).toFixed(1)+"px");
+  if(db+da<ov-.5)L[i].style.setProperty("--j59tdy","26px")}}catch(e){console.error("kitTagCollide",e)}}
+window.kitTagCollide=kitTagCollide;
 /* KIT element "rank outline": thin edge glow in --halo (her rank colour) along her own figure only; never an aura; pulse only with Hiệu ứng hình and no reduced motion.
    KIT element "selection outline" (.j59sel): brighter warm-white edge glow #fff3c4 on the one person she has selected (popIdx) or on herself (tap her figure); replaces her rank outline while she is selected */
 const SG=(a,o)=>`url(#kfa) var(--klf,brightness(1)) drop-shadow(0 6px 6px #0005) drop-shadow(0 0 1.5px #fff3c4) drop-shadow(0 0 3px #fff3c4) drop-shadow(0 0 ${a}px rgba(255,236,170,${o}))`;
@@ -295,6 +307,7 @@ html body .stage #sc-t h2 .rt1{display:inline-block!important;padding:1px 10px;b
 .stage.j59{touch-action:pan-y}
 .stage.j59 #mefig,.stage.j59 #tokens img{-webkit-user-drag:none;user-select:none}
 .stage.j59 .tok.fig .tag{margin-top:3px!important}
+html body #stage.j59 #tokens>.tok .tag,html body #stage.j59 #j59metag .tag{margin-left:var(--j59tdx,0px)!important}html body #stage.j59 #tokens>.tok .tag[style*="--j59tdy"],html body #stage.j59 #j59metag .tag[style*="--j59tdy"]{margin-top:calc(3px + var(--j59tdy))!important}
 .stage.j59 .tokens.j59st .tok.fig:nth-child(even) .tag{margin-top:var(--j59m1,26px)!important}
 .stage.j59.j59c .tok .tag{font-size:.72rem;line-height:1.2;max-width:8em;padding:1px 6px;background:color-mix(in srgb,var(--tc,#5a6878) 20%,#fffaf0)!important;border-color:color-mix(in srgb,var(--tc,#5a6878) 70%,#fff)!important;color:var(--ink)}
 .stage.j59.j59c .tok .tag .j59t{display:none}

@@ -13,10 +13,10 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,SRC]=proc
   await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;for(const e of [...document.body.querySelectorAll('*')]){const cs=getComputedStyle(e);if(cs.position==='fixed'&&/Luân hồi/.test(e.textContent||''))e.remove()}document.getElementById('modal').hidden=true});
   await p.waitForFunction(()=>typeof EVART!=='undefined'&&EVART&&EVART.categories,null,{timeout:60000}).catch(()=>{});await p.waitForFunction(()=>!/Sửa soạn nhập cung/.test(document.body.innerText),null,{timeout:90000}).catch(()=>{});await p.waitForTimeout(2500);const cdp=await ctx.newCDPSession(p);
   const long=k=>'<p>'+('Một đoạn dài nói về chuyện trong cung và nhiều điều khác nữa. '.repeat(k))+'</p>';
-  for(const [nm,n,k] of [['5 opts',5,3],['5 opts again',5,3],['6 opts',6,3],['5 opts long',5,12]]){
+  for(const [nm,n,k] of [['5 opts',5,3],['5 opts again',5,3],['6 opts',6,3],['5 opts long',5,12]].filter(c=>!process.env.CASE||new RegExp(process.env.CASE).test(c[0]))){/* CASE=regex: run only these cases, e.g. CASE=long = the FIRST modal after the game start is a scrolling list */
    await p.evaluate(()=>{document.querySelectorAll('#dawn,.kroul,.kmbox,.kne,.kmrew').forEach(e=>e.remove())});
    await p.evaluate(([n,k])=>{window.__tap=0;Q.length=0;Q.push({ev:1,t:'Tranh ghế',who:pMe(),h:('<p>'+('Một đoạn dài nói về chuyện trong cung và nhiều điều khác nữa. '.repeat(k))+'</p>'),opts:Array.from({length:n},(_,i)=>({n:'Lựa chọn '+i,fx:{}}))});showModal()},[n,k]);
-   await p.waitForTimeout(1500);
+   await p.waitForTimeout(+process.env.DELAY||1500);/* DELAY=ms: the finger lands that long after the modal opened («first finger drag right after a Fold modal opens scrolls 0») */
    if(process.env.SHOT)await p.screenshot({path:process.env.SHOT+'/'+W+'x'+H+'-'+nm.replace(/\W/g,'_')+'.png'});
    const info=await p.evaluate(()=>{const d=document.querySelector('#modal:not([hidden]) .dlg');const o=d&&d.querySelector('.opts');if(!o)return null;const r=o.getBoundingClientRect();
     window.__ch=0;o.addEventListener('click',()=>{window.__ch++},true);return {ksz:d.dataset.ksz||'',sc:o.scrollHeight-o.clientHeight,top:o.scrollTop,x:r.left+r.width/2,y:r.top+r.height/2,h:r.height,ta:getComputedStyle(o).touchAction,ov:getComputedStyle(o).overflowY}});

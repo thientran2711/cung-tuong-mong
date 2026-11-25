@@ -264,3 +264,10 @@ iPad 1180x820, Sổ ghi (journal/notes) rows that carry a small portrait icon: t
 - iPad 1180x820 Hành sự stage: two figure name labels overlap at the left edge (name-label collision, every stage) — needs a stage-label collision rule in the stage kit.
 - One-option card «Tắm gội chờ giá» (E-S1, Kính sự phòng báo tin): add a ONE-option card to kit-opt-meter-tap (tap anywhere chooses except the «!»).
 - «Tin báo / Đã xem hết» long list on iPad: ✕ in view with the real E state (§56.22 header ✕ covers option-less panels; verify with the real list).
+
+## KK28 25/11 — DONE on review/kit-opts-pack-3 (base review/kit-opts-pack-2 2815c46d)
+- DONE (MAIN 138 order 1) Fold 4-6 options: step-down §56.24 switched ON, stacked NL/NM/NS frames get the full screen height + strip step (KIT 56.27). 12 of the 14 Fold frames that scrolled now show every card without scroll; 2 long-text frames (j70def, j7c) still scroll 40 / 9 px WITH the «Kéo xuống» cue. «First finger drag right after a Fold modal opens scrolls 0»: NOT reproduced (kit-opts-touchdrag: every case scrolls).
+- DONE (order 2) K3 side-column rows `.ksh .k3r` + `#hud2 .khc .hc` = kit row height 44 px (KIT 56.28). NOT changed: the top-bar status chips (Buổi / Chưa điểm trang / Quẻ, 18 px, `.k3tt`) — chips in the top bar, not rows; if she wants a bigger tap target there, it is a top-bar redesign (KIT REQUEST for a foreman/owner decision).
+- DONE (order 3) stage name-label collision rule `kitTagCollide` (KIT 33.10). The overlap was not reproducible with real people (0 pairs in 66+ states), so it is a guard, tested with a forced collision. If D sees it again: send the state (place, people, plate) to the kit keeper.
+- DONE (order 4) «Tắm gội chờ giá» one-option card: the card was LOCKED by the game rule (emperor already elsewhere) and showed no reason, a tap did nothing -> reason row + lock pop (KIT 56.29, whole group = every `lk` option).
+- DONE (order 5, verification) «Tin báo / Đã xem hết» long list on iPad: see report (kit-close-reach NT=1).

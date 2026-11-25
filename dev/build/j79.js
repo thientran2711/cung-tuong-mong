@@ -1226,7 +1226,7 @@ button.ka.kcard.kart{border-left:4px solid var(--kcc0,var(--line))!important}
 #hud2 .khsh .khx{min-height:32px;padding:2px 12px;border:1px solid var(--line);border-radius:6px;background:var(--k-card,#fffaf0);font:inherit;font-size:.8rem;color:var(--ink);cursor:pointer}
 #hud2 .khc{display:flex;flex-direction:column;gap:2px;min-width:0;padding:4px 6px;border:1px solid var(--k-hair);border-radius:8px;background:#fffdf8}
 #hud2 .khc .hc[data-hx="date"]{display:none!important}
-#hud2 .khc .hc{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto;justify-items:start;align-items:center;column-gap:5px;border:0!important;background:none!important;padding:1px 0!important;min-height:0!important;border-radius:0!important;text-align:left;white-space:normal;font-size:.76rem}
+#hud2 .khc .hc{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto;justify-items:start;align-items:center;column-gap:5px;border:0!important;background:none!important;padding:1px 0!important;min-height:var(--k3rowh,44px)!important;border-radius:0!important;text-align:left;white-space:normal;font-size:.76rem}/* KIT 56.28: same kit row height as .ksh .k3r */
 #hud2 .khc .hc+.hc{border-top:1px dotted var(--k-hair)!important}
 #hud2 .khc .hc>b,#hud2 .khc .hc>.kodm{grid-column:3;justify-self:end;text-align:right;white-space:normal}
 .stop .scene-t,.stop .scene-t *{white-space:normal!important;overflow-wrap:anywhere}#hud2 .khc .hc>img{grid-column:1}
