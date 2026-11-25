@@ -114,10 +114,11 @@ async function newLifeCase(b,dev,url,seed){return play(b,dev,url,seed,async(p,op
   r.loaded=await reloadLoad(p,open);r.pass=r.free&&r.newLife&&r.loaded===r.shown;r.pe=pe.slice(0,3);if(pe.length)r.pass=false;return r})}
 async function oldSaveCase(b,dev,seed){/* a sổ written by the OLD build (plain JSON, its own jspread rules) → loaded by the NEW build, one step, reload */
  let o;await play(b,dev,BASEURL+OLD,seed,async(p,open)=>{await open();o=await p.evaluate(async()=>{__sbr.newLife('thd');await __sbr.settle();for(let i=0;i<5;i++){used=BAL.time.khac;nextBuoi();await __sbr.settle()}save();
-  const L={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);L[k]=localStorage.getItem(k)}return{L,k:__sbr.key()}})});
+  const L={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);L[k]=localStorage.getItem(k)}return{L,k:__sbr.key(),sk:__sbr.saved()}})});
  return play(b,dev,BASEURL+NEW,seed,async(p,open,pe)=>{await open();await p.evaluate(L=>{localStorage.clear();for(const k in L)localStorage.setItem(k,L[k])},o.L);
   const k1=await reloadLoad(p,open);const r=await p.evaluate(async()=>{await __sbr.settle();used=BAL.time.khac;const k0=__sbr.key();document.getElementById('next').click();const ok=await __sbr.after(k0);return{shown:__sbr.full(),free:ok}});
-  r.oldKey=o.k;r.loadedOld=k1;r.loaded=await reloadLoad(p,open);r.pass=k1.startsWith(o.k+' ')&&r.free&&r.loaded===r.shown;r.pe=pe.slice(0,3);if(pe.length)r.pass=false;return r})}
+  /* the new build must load exactly what the OLD build wrote (o.sk); the old build itself may have held its last save (its own bug) → o.oldLag */
+  const dk=x=>String(x).replace(/ k\d+ b-?\d+$/,'');r.oldKey=o.k;r.oldSaved=o.sk;r.oldLag=dk(o.sk)!==o.k;r.loadedOld=k1;r.loaded=await reloadLoad(p,open);r.pass=dk(k1)===dk(o.sk)&&r.free&&r.loaded===r.shown;r.pe=pe.slice(0,3);if(pe.length)r.pass=false;return r})}
 (async()=>{const srv=await D.serveRoot();const b=await chromium.launch();BASEURL=srv.url;const url=srv.url+NEW;let fail=0;const rows=[];
  const seeds=SEEDS.split(',').map(Number);
  for(const dev of DEVS.split(',')){
@@ -132,5 +133,5 @@ async function oldSaveCase(b,dev,seed){/* a sổ written by the OLD build (plain
   if(want('newlife')){const r=await newLifeCase(b,dev,url,seeds[0]);rows.push([dev,'newlife',seeds[0],r]);if(!r.pass)fail++;
    console.log(`${r.pass?'PASS':'FAIL'} ${dev} newlife · old ${r.n0} · on screen ${r.shown} · sổ ${r.saved} · after reload ${r.loaded}${r.newLife?'':' · NO NEW LIFE '+JSON.stringify(r.picked)}${r.pe.length?' · pageerror '+r.pe[0]:''}`)}
   if(OLD&&want('oldsave')){const r=await oldSaveCase(b,dev,seeds[0]);rows.push([dev,'oldsave',seeds[0],r]);if(!r.pass)fail++;
-   console.log(`${r.pass?'PASS':'FAIL'} ${dev} oldsave · old build ${r.oldKey} · loaded ${r.loadedOld} · on screen ${r.shown} · after reload ${r.loaded}${r.pe.length?' · pageerror '+r.pe[0]:''}`)}}
+   console.log(`${r.pass?'PASS':'FAIL'} ${dev} oldsave · old build ${r.oldKey} (its sổ ${r.oldSaved}${r.oldLag?' = OLD build held its save':''}) · loaded ${r.loadedOld} · on screen ${r.shown} · after reload ${r.loaded}${r.pe.length?' · pageerror '+r.pe[0]:''}`)}}
  console.log(fail?`SAVE-BOUNDARY FAIL ${fail}/${rows.length}`:`SAVE-BOUNDARY PASS ${rows.length}/${rows.length}`);await b.close();srv.close();process.exit(fail?1:0)})().catch(e=>{console.error(e);process.exit(2)});
