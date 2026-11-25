@@ -553,8 +553,8 @@ Object.assign(BAL,{led:{court:2,cnt:"now"}});
 Object.assign(BAL,{spread:{cap:2,maxWait:4,codeWait:2}});
 /* FLIGHT-DAYQ (owner 24/11 ~18:05Z (5): "Mới sáng sớm là có sự kiện tới tìm liền ngay lập tức"): the FIRST buổi of a day (right after the title card + Tuần lục + Tin trong cung)
    brings no event that has no fitting morning slot: dawnSlot = the buổi an unslotted world card moves to (1 = trưa); dawnOpt = odds (0..100) that an optional
-   j68 event is held at day start (was a hard-coded roll(50) in j68 evGate: half of them came at dawn). jdayq: poll = ms between looks while a turn / card is held; stale = ms a busy motion queue with no scene on screen may hold the turn; rearm = how many more looks (x poll ms, ~3 min) the held-card painter takes while an inner gate keeps swallowing its paint (review/sangbuoi-held-fix). */
-Object.assign(BAL.spread,{dawnSlot:1,dawnOpt:100});Object.assign(BAL,{dayq:{poll:300,stale:10000,rearm:600}});
+   j68 event is held at day start (was a hard-coded roll(50) in j68 evGate: half of them came at dawn). jdayq: poll = ms between looks while a turn / card is held; stale = ms a busy motion queue with no scene on screen may hold the turn; net = ms between the last-resort looks for a queue nobody painted (a card pushed with no showModal and no render after it, SANGBUOI-HELD r2); rearm = how many more looks (x poll ms, ~3 min) the held-card painter takes while an inner gate keeps swallowing its paint (review/sangbuoi-held-fix). */
+Object.assign(BAL.spread,{dawnSlot:1,dawnOpt:100});Object.assign(BAL,{dayq:{poll:300,stale:10000,rearm:600,net:1000}});
 /* NIGHT STEALING (Tranh sủng / Chặn ngự giá) — ONE CORE for the act (her and every NPC alike) and for the NPC agent's choice (jsteal.js).
    act: cost = what one try costs (feign: Đức, road: Sức); failSung = Sủng lost on a failed try; rel = thiện cảm lost both ways on a win
    (relAdd: the robbed one also gains oán rel×BAL.relOan.hurt); ghen = jealousy of the robbed consort.

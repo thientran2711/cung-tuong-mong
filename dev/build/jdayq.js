@@ -24,7 +24,7 @@
    kmPush (held by kmFree); both gates are here, in one place. Installed LAST (outermost wrappers, after every module's own). No save data, no UI,
    no player-visible text. Numbers: BAL.dayq + BAL.spread.dawnSlot / dawnOpt (jbal2.js). Tests: dev/test/dayq-order.js (day turn), dev/test/dayq-hold.js (every khắc event source × activity), dev/test/dayq-hold-coop.js (gate (c) in a co-op room). Report: dev/handover/reports/day-queue.md
    ===================================================================================================================================== */
-const DQ={want:null,t:0,mt:0,newsHold:0,fo:null,stat:{held:0,ran:0,dropped:0,modalHeld:0,newsFirst:0,kmHeld:0,actHeld:0,pulled:0,actKm:0,painted:0,tapPaint:0,netArm:0,rearm:0,newsLet:0,newsPass:0,tapRe:0,afterPaint:0}};
+const DQ={want:null,t:0,mt:0,newsHold:0,fo:null,stat:{held:0,ran:0,dropped:0,modalHeld:0,newsFirst:0,kmHeld:0,actHeld:0,pulled:0,actKm:0,painted:0,tapPaint:0,netArm:0,rearm:0,newsLet:0,newsPass:0,tapRe:0,afterPaint:0,netTick:0}};
 /* solo only: a co-op room keeps its own gates (jcoopworld reshowQ already waits on the book; night / week gates pace the turn) and its seats must
    draw the same random numbers in the same order — holding cards there would shift j68's draws on one seat (worlds drift) */
 function dqUi(){try{return !window.__bot&&!(window.COOPW&&COOPW.on)&&typeof S!=="undefined"&&!!S&&!S.dead}catch(e){return false}}
@@ -117,6 +117,9 @@ function dqInstall(){
  /* SANGBUOI-HELD net: any render that leaves a queue nobody paints (cards pushed without showModal, a gate that dropped its arm) arms the
     painter; it waits on #dawn / an activity like every held card (solo; a co-op room keeps reshowQ / wantB) */
  if(typeof render==="function"){const rd=render;render=function(){const r=rd.apply(this,arguments);try{if(dqUi()&&!DQ.mt&&dqQHidden()){DQ.stat.netArm++;dqArmModal()}}catch(e){}return r};window.render=render}
+ /* r2 net, the whole family «a card pushed into Q with no showModal and no render after it» (jagent «Có người tìm đến», …): a light look every
+    BAL.dayq.net ms arms the painter (dqArmModal: still waits for the dawn host / an activity / the night gates on screen-visible terms) */
+ setInterval(()=>{try{if(dqUi()&&!DQ.mt&&dqQHidden()){DQ.stat.netTick++;DQ.netT=Q[0]&&Q[0].t;dqArmModal()}}catch(e){}},BAL.dayq.net);
  /* (c) the person view she opens herself (jdfv dfOpen, a tap on a person) is an activity; one opened by a card (encounter) is that card */
  if(typeof dfOpen==="function"){const fo=dfOpen;dfOpen=function(){const r=fo.apply(this,arguments);try{DQ.fo=window.DF&&DF.tk||null}catch(e){}return r};window.dfOpen=dfOpen}
  /* (c) an activity appears (mini-game screen shown, a scene / podium / roulette / person view added): a card painted in the same tap is taken back */

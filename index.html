@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"c6500ac1+","t":"2026-11-25T12:06Z","c":"Sửa: cảnh lật thẻ ban đêm có lúc chờ mãi không hiện, làm các bảng (ô Tài nghệ…) chạm vào không mở.","b":"b6b5130457e6","h":[{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"}]};
+window.CTM_BI={"s":"b14cef02+","t":"2026-11-25T12:07Z","c":"Sửa: cảnh lật thẻ ban đêm có lúc chờ mãi không hiện, làm các bảng (ô Tài nghệ…) chạm vào không mở.","b":"ef8ea3fdf8e8","h":[{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -37144,8 +37144,8 @@ Object.assign(BAL,{led:{court:2,cnt:"now"}});
 Object.assign(BAL,{spread:{cap:2,maxWait:4,codeWait:2}});
 /* FLIGHT-DAYQ (owner 24/11 ~18:05Z (5): "Mới sáng sớm là có sự kiện tới tìm liền ngay lập tức"): the FIRST buổi of a day (right after the title card + Tuần lục + Tin trong cung)
    brings no event that has no fitting morning slot: dawnSlot = the buổi an unslotted world card moves to (1 = trưa); dawnOpt = odds (0..100) that an optional
-   j68 event is held at day start (was a hard-coded roll(50) in j68 evGate: half of them came at dawn). jdayq: poll = ms between looks while a turn / card is held; stale = ms a busy motion queue with no scene on screen may hold the turn; rearm = how many more looks (x poll ms, ~3 min) the held-card painter takes while an inner gate keeps swallowing its paint (review/sangbuoi-held-fix). */
-Object.assign(BAL.spread,{dawnSlot:1,dawnOpt:100});Object.assign(BAL,{dayq:{poll:300,stale:10000,rearm:600}});
+   j68 event is held at day start (was a hard-coded roll(50) in j68 evGate: half of them came at dawn). jdayq: poll = ms between looks while a turn / card is held; stale = ms a busy motion queue with no scene on screen may hold the turn; net = ms between the last-resort looks for a queue nobody painted (a card pushed with no showModal and no render after it, SANGBUOI-HELD r2); rearm = how many more looks (x poll ms, ~3 min) the held-card painter takes while an inner gate keeps swallowing its paint (review/sangbuoi-held-fix). */
+Object.assign(BAL.spread,{dawnSlot:1,dawnOpt:100});Object.assign(BAL,{dayq:{poll:300,stale:10000,rearm:600,net:1000}});
 /* NIGHT STEALING (Tranh sủng / Chặn ngự giá) — ONE CORE for the act (her and every NPC alike) and for the NPC agent's choice (jsteal.js).
    act: cost = what one try costs (feign: Đức, road: Sức); failSung = Sủng lost on a failed try; rel = thiện cảm lost both ways on a win
    (relAdd: the robbed one also gains oán rel×BAL.relOan.hurt); ghen = jealousy of the robbed consort.
@@ -96254,7 +96254,7 @@ window.kesSample=function(t){try{const T=KE.types[t]?t:"death";const tone=KE.typ
    kmPush (held by kmFree); both gates are here, in one place. Installed LAST (outermost wrappers, after every module's own). No save data, no UI,
    no player-visible text. Numbers: BAL.dayq + BAL.spread.dawnSlot / dawnOpt (jbal2.js). Tests: dev/test/dayq-order.js (day turn), dev/test/dayq-hold.js (every khắc event source × activity), dev/test/dayq-hold-coop.js (gate (c) in a co-op room). Report: dev/handover/reports/day-queue.md
    ===================================================================================================================================== */
-const DQ={want:null,t:0,mt:0,newsHold:0,fo:null,stat:{held:0,ran:0,dropped:0,modalHeld:0,newsFirst:0,kmHeld:0,actHeld:0,pulled:0,actKm:0,painted:0,tapPaint:0,netArm:0,rearm:0,newsLet:0,newsPass:0,tapRe:0,afterPaint:0}};
+const DQ={want:null,t:0,mt:0,newsHold:0,fo:null,stat:{held:0,ran:0,dropped:0,modalHeld:0,newsFirst:0,kmHeld:0,actHeld:0,pulled:0,actKm:0,painted:0,tapPaint:0,netArm:0,rearm:0,newsLet:0,newsPass:0,tapRe:0,afterPaint:0,netTick:0}};
 /* solo only: a co-op room keeps its own gates (jcoopworld reshowQ already waits on the book; night / week gates pace the turn) and its seats must
    draw the same random numbers in the same order — holding cards there would shift j68's draws on one seat (worlds drift) */
 function dqUi(){try{return !window.__bot&&!(window.COOPW&&COOPW.on)&&typeof S!=="undefined"&&!!S&&!S.dead}catch(e){return false}}
@@ -96347,6 +96347,9 @@ function dqInstall(){
  /* SANGBUOI-HELD net: any render that leaves a queue nobody paints (cards pushed without showModal, a gate that dropped its arm) arms the
     painter; it waits on #dawn / an activity like every held card (solo; a co-op room keeps reshowQ / wantB) */
  if(typeof render==="function"){const rd=render;render=function(){const r=rd.apply(this,arguments);try{if(dqUi()&&!DQ.mt&&dqQHidden()){DQ.stat.netArm++;dqArmModal()}}catch(e){}return r};window.render=render}
+ /* r2 net, the whole family «a card pushed into Q with no showModal and no render after it» (jagent «Có người tìm đến», …): a light look every
+    BAL.dayq.net ms arms the painter (dqArmModal: still waits for the dawn host / an activity / the night gates on screen-visible terms) */
+ setInterval(()=>{try{if(dqUi()&&!DQ.mt&&dqQHidden()){DQ.stat.netTick++;DQ.netT=Q[0]&&Q[0].t;dqArmModal()}}catch(e){}},BAL.dayq.net);
  /* (c) the person view she opens herself (jdfv dfOpen, a tap on a person) is an activity; one opened by a card (encounter) is that card */
  if(typeof dfOpen==="function"){const fo=dfOpen;dfOpen=function(){const r=fo.apply(this,arguments);try{DQ.fo=window.DF&&DF.tk||null}catch(e){}return r};window.dfOpen=dfOpen}
  /* (c) an activity appears (mini-game screen shown, a scene / podium / roulette / person view added): a card painted in the same tap is taken back */
@@ -98298,7 +98301,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b6b5130457e6";window.CTM_BUILD=BUILD;
+const BUILD="ef8ea3fdf8e8";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

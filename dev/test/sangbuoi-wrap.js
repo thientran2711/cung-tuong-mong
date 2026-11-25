@@ -73,7 +73,7 @@ const VP=[[755,1000],[1180,820]];
      11/15 06:45Z «she STAYS where she is»); the bare tap re-entered the place through the access check («Không vào được lúc này» + home) */
   const P=await (async()=>{let why='';
     for(let at=0;at<8;at++){await drain();let s=await st();if(s.Q&&!s.modal&&s.next){await p.tap('#next',{force:true});await sleep(800);continue}/* a queue nobody painted: her tap paints it (r1) */
-     if(s.buoi!==2||s.Q||s.modal||s.scene){why='not at a quiet buổi chiều '+JSON.stringify(s);if(s.buoi>2||s.buoi<1)break;await sleep(1500);continue}
+     if(s.buoi!==2||s.Q||s.modal||s.scene){why='not at a quiet buổi chiều '+JSON.stringify(s)+' Q0 '+JSON.stringify(await p.evaluate(()=>({t:Q.map(m=>m.t),net:DQ.stat.netTick,mt:DQ.mt})));if(s.buoi>2||s.buoi<1)break;await sleep(1500);continue}
      await p.evaluate(()=>{used=0;const a=window.__accSilent;window.__accSilent=1;window.__walkFree=1;try{goTo('vuon')}finally{window.__accSilent=a;window.__walkFree=0}});await sleep(1200);await drain();
      s=await st();const pl=await p.evaluate(()=>{used=0;advLock=false;render();return S.place});await sleep(300);s=await st();
      if(pl==='vuon'&&s.buoi===2&&s.next&&!s.Q&&!s.modal&&!s.scene){why='';break}why='not in Ngự hoa viên with «Sang buổi» free ('+pl+' '+JSON.stringify(s)+')'}
