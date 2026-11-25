@@ -1,143 +1,3 @@
-09:11:41 AUTO tap "✕"
-09:11:42 AUTO tap "Vẫn đi TỐN Danh -5 ĐƯỢC không"
-09:11:45 STATUS buổi#132 Buổi chiều | Bạch Nghê Thường Thường tại 20 tuổi Kiếp thứ nhất Tháng sáu · thượng tuần · năm thứ hai | Sắc 94 Tài 78 Tâm cơ 78 Đức 92 Danh 15 Sủng 3 | Bạc 30 Sức 95/100 | 
-09:11:45 AUTO tap "Chuẩn bị một món lễ dâng Thái hậu Rất vững TỐN Bạc -20·Sức -8 ĐƯỢC Thá"
-09:11:47 AUTO tap "Nhịn Rất vững TỐN không ĐƯỢC được tiếng hiền đức (chút ít) MẤT có thể "
-09:11:48 AUTO tap "Chu toàn lễ nghĩa Rất vững TỐN Bạc -4 ĐƯỢC giữ thể diện !"
-09:11:50 BLIND TAP centre (no candidates)
-09:11:52 AUTO tap "Phạt nặng Rất vững TỐN không ĐƯỢC lấy lại đồ, Cung nữ tam đẳng Ngân Li"
-09:11:52 AUTO tap "Nhận"
-09:11:54 AUTO tap "Nhẫn nhịn Rất vững TỐN không ĐƯỢC giữ tiếng hiền đức, MẤT người ta cho"
-09:11:55 AUTO tap "Bớt chi dùng trong cung TỐN không ĐƯỢC Đức +1"
-09:11:56 AUTO tap "Dẫn cả hai đi tâu cùng TỐN Sức -8 ĐƯỢC Sủng +2·Danh +3 MẤT Quý nhân Th"
-09:12:04 BUOI 130 Buổi chiều| 20 tuổi Kiếp thứ nhất Tháng sáu · thượng tuần · năm thứ hai
-09:12:05 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-09:12:08 STATUS buổi#133 Buổi tối | Bạch Nghê Thường Thường tại 20 tuổi Kiếp thứ nhất Tháng sáu · thượng tuần · năm thứ hai | Sắc 94 Tài 78 Tâm cơ 78 Đức 95 Danh 17 Sủng 5 | Bạc 6 Sức 85/100 | 
-09:12:09 AUTO tap "Khen một câu Rất vững TỐN không ĐƯỢC người ấy có thiện cảm hơn !"
-09:12:11 BLIND TAP centre (no candidates)
-09:12:12 AUTO tap "Ghi tên dâng đàn (theo Cầm, Tài) Mong manh TỐN không ĐƯỢC đứng đầu, Ho"
-09:12:13 AUTO tap "✕"
-09:12:22 BUOI 131 Buổi tối| 20 tuổi Kiếp thứ nhất Tháng sáu · thượng tuần · năm thứ hai
-09:12:22 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-09:12:32 AUTO tap "Học tập Đàn hát tự thưởng Rất vững Lòng đang vui, ôm đàn hát một khúc "
-09:12:42 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-09:12:52 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
-09:12:56 AUTO tap "Chuẩn bị thị tẩm"
-09:12:58 AUTO tap "tạm Giữ chân Hoàng thượng Khó lường TỐN không ĐƯỢC dựa vào ân sủng, nh"
-09:12:59 AUTO tap "tạm Giữ chân Hoàng thượng Khó lường TỐN không ĐƯỢC dựa vào ân sủng, nh"
-09:13:00 AUTO tap "Chuẩn bị thị tẩm"
-09:13:01 AUTO tap "Tắm gội chờ giá Rất vững TỐN không ĐƯỢC được thị tẩm, gần Hoàng thượng"
-09:13:02 AUTO tap "Điểm trang lộng lẫy Rất vững TỐN Bạc -5 ĐƯỢC Hoàng thượng để mắt hơn; "
-09:13:05 BLIND TAP centre (no candidates)
-09:13:06 AUTO tap "Bàn thơ văn, cầm kỳ Tùy duyên TỐN không ĐƯỢC đêm vui, Hoàng thượng để "
-09:13:07 AUTO tap "Xin tha cho cung nữ bị phạt Rất vững TỐN không ĐƯỢC được tiếng hiền đứ"
-09:13:10 BLIND TAP centre (no candidates)
-09:13:10 AUTO tap "Tiếp tục"
-09:13:12 STATUS buổi#134 Buổi sáng | Bạch Nghê Thường Thường tại 20 tuổi Kiếp thứ nhất Tháng sáu · trung tuần · năm thứ hai | Sắc 94 Tài 79 Tâm cơ 78 Đức 98 Danh 17 Sủng 8 | Bạc 1 Sức 100/100 | 
-09:13:13 AUTO tap "›"
-09:13:13 AUTO tap "✕"
-09:13:14 AUTO tap "✕"
-09:13:24 BUOI 132 Buổi sáng|i 20 tuổi Kiếp thứ nhất Tháng sáu · trung tuần · năm thứ hai
-09:13:25 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-09:13:35 AUTO tap "Học tập Đàn hát tự thưởng Rất vững Lòng đang vui, ôm đàn hát một khúc "
-09:13:45 AUTO tap "Giao thiệp Điểm trang Ngồi trước gương: chọn y phục theo dịp hôm nay, "
-09:13:46 MG intro: PLAY
-09:13:46 AUTO touch-tap Sẵn sàng bắt đầu chơi
-09:13:57 MG: phase never reached play after Sẵn sàng
-09:13:58 AUTO tap "✕"
-09:13:58 AUTO tap "Tiếp theo"
-09:13:59 AUTO tap "Đã hiểu"
-09:14:01 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
-09:14:01 AUTO tap "Hành sự"
-09:14:02 AUTO tap "Sang buổi"
-09:14:03 STATUS buổi#135 Buổi trưa | Bạch Nghê Thường Thường tại 20 tuổi Kiếp thứ nhất Tháng sáu · trung tuần · năm thứ hai | Sắc 94 Tài 80 Tâm cơ 78 Đức 98 Danh 17 Sủng 8 | Bạc 1 Sức 100/100 | 
-09:14:03 BUOI 133 Buổi trưa|i 20 tuổi Kiếp thứ nhất Tháng sáu · trung tuần · năm thứ hai
-09:14:04 AUTO tap "Hành sự"
-09:14:05 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-09:14:15 AUTO tap "Y dược Sang Thái y viện xin bắt mạch Tự đi, đứng chờ thái y rảnh tay. "
-09:14:17 AUTO tap "Xin cho nàng ta vào uống nước ấm Có cơ TỐN 2 khắc ĐƯỢC được tiếng hiền"
-09:14:18 AUTO tap "✕"
-09:14:19 AUTO tap "✕"
-09:14:20 AUTO tap "Vẫn đi TỐN Danh -5 ĐƯỢC không"
-09:14:23 BLIND TAP centre (no candidates)
-09:14:27 STATUS buổi#136 Buổi chiều | Bạch Nghê Thường Thường tại 20 tuổi Kiếp thứ nhất Tháng sáu · trung tuần · năm thứ hai | Sắc 94 Tài 80 Tâm cơ 78 Đức 100 Danh 17 Sủng 8 | Bạc 1 Sức 95/100 | 
-09:14:27 AUTO tap "Đến ngay Rất vững TỐN 2 khắc·Sức -5 ĐƯỢC Thái hậu hài lòng !"
-09:14:29 AUTO tap "Chép kinh cầu phúc TỐN Sức -8 ĐƯỢC Đức +2·Thái hậu +2"
-09:14:30 AUTO tap "Quỳ cùng nàng ta suốt buổi TỐN Sức -8·Danh -3 ĐƯỢC Đức +3·Hoàng hậu Tr"
-09:14:33 STATUS buổi#137 Buổi tối | Bạch Nghê Thường Thường tại 20 tuổi Kiếp thứ nhất Tháng sáu · trung tuần · năm thứ hai | Sắc 94 Tài 80 Tâm cơ 78 Đức 100 Danh 14 Sủng 8 | Bạc 1 Sức 74/100 | 
-09:14:34 AUTO tap "Bày kế phản gián Rất vững TỐN không ĐƯỢC nắm thêm chứng cứ về Đức tần "
-09:14:35 AUTO tap "Tiếp chuyện TỐN 1 khắc ĐƯỢC cùng Hiền quý phi Nghiêm Tố Tuyết trải qua"
-09:14:43 BUOI 134 Buổi tối|i 20 tuổi Kiếp thứ nhất Tháng sáu · trung tuần · năm thứ hai
-09:14:43 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-09:14:54 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-09:15:04 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
-09:15:08 AUTO tap "Báo đúng ngày Rất vững TỐN không ĐƯỢC sổ ghi đúng, không ai bắt bẻ đượ"
-09:15:09 AUTO tap "Ta biết rồi"
-09:15:18 AUTO tap "Giao thiệp Trò chuyện với cung nữ Ngồi nghe Cung nữ thân tín tam đẳng "
-09:15:20 BLIND TAP centre (no candidates)
-09:15:20 STATUS buổi#138 Buổi sáng | Bạch Nghê Thường Thường tại 20 tuổi Kiếp thứ nhất Tháng sáu · hạ tuần · năm thứ hai | Sắc 94 Tài 80 Tâm cơ 78 Đức 100 Danh 16 Sủng 8 | Bạc 1 Sức 100/100 | 
-09:15:21 AUTO tap "Tiếp theo"
-09:15:22 AUTO tap "›"
-09:15:23 AUTO tap "✕"
-09:15:24 AUTO tap "Nhận lời Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn (chút ít), th"
-09:15:25 AUTO tap "✕"
-09:15:35 BUOI 135 Buổi sáng| tại 20 tuổi Kiếp thứ nhất Tháng sáu · hạ tuần · năm thứ hai
-09:15:35 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-09:15:45 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
-09:15:55 AUTO tap "Giao thiệp Điểm trang Ngồi trước gương: chọn y phục theo dịp hôm nay, "
-09:15:56 MG intro: PLAY
-09:15:56 AUTO touch-tap Sẵn sàng bắt đầu chơi
-09:16:08 MG: phase never reached play after Sẵn sàng
-09:16:08 AUTO tap "✕"
-09:16:09 AUTO tap "Tiếp theo"
-09:16:10 AUTO tap "Đã hiểu"
-09:16:11 AUTO tap "Y dược Sang Thái y viện xin bắt mạch Tự đi, đứng chờ thái y rảnh tay. "
-09:16:12 AUTO tap "✕"
-09:16:14 AUTO tap "✕"
-09:16:15 AUTO tap "Vẫn đi TỐN Danh -5 ĐƯỢC không"
-09:16:17 AUTO tap "Đi một mình TỐN không ĐƯỢC việc ta làm bên ngoài được giữ kín·mọi ngườ"
-09:16:18 AUTO tap "Ở lại TỐN không ĐƯỢC không !"
-09:16:22 STATUS buổi#139 Buổi trưa | Bạch Nghê Thường Thường tại 20 tuổi Kiếp thứ nhất Tháng sáu · hạ tuần · năm thứ hai | Sắc 94 Tài 80 Tâm cơ 78 Đức 100 Danh 17 Sủng 8 | Bạc 1 Sức 95/100 | 
-09:16:22 AUTO tap "✕"
-09:16:30 BUOI 136 Buổi trưa| tại 20 tuổi Kiếp thứ nhất Tháng sáu · hạ tuần · năm thứ hai
-09:16:31 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-09:16:31 AUTO tap "Tiếp ▸"
-09:16:32 AUTO tap "✕"
-09:16:41 AUTO tap "Về phòng"
-09:16:42 AUTO tap "Hành sự"
-09:16:43 AUTO tap "Nghe lén Có cơ TỐN 1 khắc ĐƯỢC biết rõ nàng ta ép nộp của ta vì đâu·ch"
-09:16:44 AUTO tap "Không giao Tùy duyên TỐN không ĐƯỢC nàng ta đành thôi, nàng ta Danh -2"
-09:16:48 STATUS buổi#140 Buổi chiều | Bạch Nghê Thường Thường tại 20 tuổi Kiếp thứ nhất Tháng sáu · hạ tuần · năm thứ hai | Sắc 94 Tài 80 Tâm cơ 78 Đức 100 Danh 18 Sủng 8 | Bạc 1 Sức 100/100 | 
-09:16:51 BUOI 137 Buổi chiều| tại 20 tuổi Kiếp thứ nhất Tháng sáu · hạ tuần · năm thứ hai
-09:16:52 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-09:17:02 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
-09:17:03 AUTO tap "Nhận"
-09:17:04 AUTO tap "✕"
-09:17:12 AUTO tap "Giao thiệp Trò chuyện với cung nữ Ngồi nghe Cung nữ thân tín tam đẳng "
-09:17:23 AUTO tap "Học tập · Tài nghệ Đọc binh thư, sử sách Rất vững Học mưu kế người xưa"
-09:17:26 STATUS buổi#141 Buổi tối | Bạch Nghê Thường Thường tại 20 tuổi Kiếp thứ nhất Tháng sáu · hạ tuần · năm thứ hai | Sắc 94 Tài 80 Tâm cơ 80 Đức 100 Danh 18 Sủng 8 | Bạc 1 Sức 95/100 | 
-09:17:33 BUOI 138 Buổi tối| tại 20 tuổi Kiếp thứ nhất Tháng sáu · hạ tuần · năm thứ hai
-09:17:33 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-09:17:43 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
-09:17:54 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
-09:17:57 AUTO tap "Chuẩn bị thị tẩm"
-09:17:58 AUTO tap "tạm Giữ chân Hoàng thượng Khó lường TỐN không ĐƯỢC dựa vào ân sủng, nh"
-09:18:00 AUTO tap "tạm Giữ chân Hoàng thượng Khó lường TỐN không ĐƯỢC dựa vào ân sủng, nh"
-09:18:01 AUTO tap "Chuẩn bị thị tẩm"
-09:18:02 AUTO tap "Đuổi đi cho yên Rất vững TỐN không ĐƯỢC dưỡng sức (chút ít) MẤT Cung n"
-09:18:03 AUTO tap "Tắm gội chờ giá Rất vững TỐN không ĐƯỢC được thị tẩm, gần Hoàng thượng"
-09:18:04 AUTO tap "Đeo trang sức đẹp nhất Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt hơn"
-09:18:07 BLIND TAP centre (no candidates)
-09:18:08 AUTO tap "Bàn thơ văn, cầm kỳ Tùy duyên TỐN không ĐƯỢC đêm vui, Hoàng thượng để "
-09:18:09 AUTO tap "Xin tha cho cung nữ bị phạt Rất vững TỐN không ĐƯỢC được tiếng hiền đứ"
-09:18:11 BLIND TAP centre (no candidates)
-09:18:11 AUTO tap "Tiếp tục"
-09:18:15 STATUS buổi#142 Buổi sáng | Bạch Nghê Thường Thường tại 20 tuổi Kiếp thứ nhất Tháng bảy · thượng tuần · năm thứ hai | Sắc 94 Tài 80 Tâm cơ 81 Đức 100 Danh 18 Sủng 11 | Bạc 53 Sức 100/100 | 
-09:18:15 AUTO tap "Nhận"
-09:18:16 AUTO tap "›"
-09:18:17 AUTO tap "✕"
-09:18:18 AUTO tap "✕"
-09:18:28 BUOI 139 Buổi sáng| 20 tuổi Kiếp thứ nhất Tháng bảy · thượng tuần · năm thứ hai
 09:18:29 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
 09:18:39 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
 09:18:40 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
@@ -298,3 +158,143 @@
 09:26:53 AUTO tap "Lên đường TỐN không ĐƯỢC 1 người theo (Cung nữ tam đẳng Ngân Linh)·thấ"
 09:26:54 AUTO tap "Ở lại TỐN không ĐƯỢC không !"
 09:26:57 STATUS buổi#151 Buổi trưa | Bạch Nghê Thường Thường tại 20 tuổi Kiếp thứ nhất Tháng bảy · hạ tuần · năm thứ hai | Sắc 94 Tài 84 Tâm cơ 84 Đức 100 Danh 19 Sủng 16 | Bạc 38 Sức 95/100 | 
+09:41:58 BUG STUCK no buổi progress for 15 min {"me":"Bạch Nghê Thường Thường tại 20 tuổi Kiếp thứ nhất Tháng bảy · hạ tuần · năm thứ hai","when":"Buổi trưa","stat":"Sắc 94 Tài 84 Tâm cơ 84 Đức 100 Danh 19 Sủng 16 | Bạc 38 Sức 95/100","mood":""} cand
+09:42:09 BUOI 148 Buổi trưa| tại 20 tuổi Kiếp thứ nhất Tháng bảy · hạ tuần · năm thứ hai
+09:42:10 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
+09:42:14 STATUS buổi#152 Buổi chiều | Bạch Nghê Thường Thường tại 20 tuổi Kiếp thứ nhất Tháng bảy · hạ tuần · năm thứ hai | Sắc 94 Tài 84 Tâm cơ 84 Đức 100 Danh 18 Sủng 16 | Bạc 38 Sức 100/100 | 
+09:42:14 AUTO tap "Khéo từ chối Rất vững TỐN không ĐƯỢC dưỡng sức, giữ sức, không mắc thê"
+09:42:22 BUOI 149 Buổi chiều| tại 20 tuổi Kiếp thứ nhất Tháng bảy · hạ tuần · năm thứ hai
+09:42:23 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
+09:42:33 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
+09:42:43 AUTO tap "Giao thiệp Trò chuyện với cung nữ Ngồi nghe Cung nữ thân tín tam đẳng "
+09:42:53 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
+09:42:57 STATUS buổi#153 Buổi tối | Bạch Nghê Thường Thường tại 20 tuổi Kiếp thứ nhất Tháng bảy · hạ tuần · năm thứ hai | Sắc 94 Tài 84 Tâm cơ 84 Đức 100 Danh 17 Sủng 16 | Bạc 38 Sức 100/100 | 
+09:43:03 BUOI 150 Buổi tối| tại 20 tuổi Kiếp thứ nhất Tháng bảy · hạ tuần · năm thứ hai
+09:43:03 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
+09:43:13 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
+09:43:14 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
+09:43:24 AUTO tap "Giao thiệp Trò chuyện với cung nữ Ngồi nghe Cung nữ thân tín tam đẳng "
+09:43:28 AUTO tap "Chuẩn bị thị tẩm"
+09:43:29 AUTO tap "tạm Giữ chân Hoàng thượng Khó lường TỐN không ĐƯỢC dựa vào ân sủng, nh"
+09:43:30 AUTO tap "tạm Giữ chân Hoàng thượng Khó lường TỐN không ĐƯỢC dựa vào ân sủng, nh"
+09:43:31 AUTO tap "Chuẩn bị thị tẩm"
+09:43:33 AUTO tap "Tắm gội chờ giá Rất vững TỐN không ĐƯỢC được thị tẩm, gần Hoàng thượng"
+09:43:34 AUTO tap "Tắm cánh hoa, xông hương Rất vững TỐN Bạc -15 ĐƯỢC Hoàng thượng để mắt"
+09:43:36 BLIND TAP centre (no candidates)
+09:43:37 AUTO tap "Bàn thơ văn, cầm kỳ Tùy duyên TỐN không ĐƯỢC đêm vui, Hoàng thượng để "
+09:43:38 AUTO tap "Xin tha cho cung nữ bị phạt Rất vững TỐN không ĐƯỢC được tiếng hiền đứ"
+09:43:41 BLIND TAP centre (no candidates)
+09:43:41 AUTO tap "Tiếp tục"
+09:43:44 STATUS buổi#154 Buổi sáng | Bạch Nghê Thường Thường tại 20 tuổi Kiếp thứ nhất Tháng tám · thượng tuần · năm thứ hai | Sắc 94 Tài 84 Tâm cơ 84 Đức 100 Danh 17 Sủng 19 | Bạc 105 Sức 100/100 | 
+09:43:44 AUTO tap "Nhận"
+09:43:45 AUTO tap "›"
+09:43:46 AUTO tap "✕"
+09:43:47 AUTO tap "✕"
+09:43:57 BUOI 151 Buổi sáng| 20 tuổi Kiếp thứ nhất Tháng tám · thượng tuần · năm thứ hai
+09:43:57 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
+09:44:07 AUTO tap "Học tập Đàn hát tự thưởng Rất vững Lòng đang vui, ôm đàn hát một khúc "
+09:44:18 AUTO tap "Giao thiệp Điểm trang Ngồi trước gương: chọn y phục theo dịp hôm nay, "
+09:44:18 MG intro: PLAY
+09:44:18 AUTO touch-tap Sẵn sàng bắt đầu chơi
+09:44:30 MG: phase never reached play after Sẵn sàng
+09:44:30 AUTO tap "✕"
+09:44:31 AUTO tap "Tiếp theo"
+09:44:32 AUTO tap "Đã hiểu"
+09:44:33 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
+09:44:37 STATUS buổi#155 Buổi trưa | Bạch Nghê Thường Thường tại 20 tuổi Kiếp thứ nhất Tháng tám · thượng tuần · năm thứ hai | Sắc 94 Tài 85 Tâm cơ 85 Đức 100 Danh 16 Sủng 19 | Bạc 105 Sức 100/100 | 
+09:44:37 AUTO tap "Chu toàn lễ nghĩa Rất vững TỐN Bạc -4 ĐƯỢC giữ thể diện !"
+09:44:38 AUTO tap "✕"
+09:44:47 BUOI 152 Buổi trưa| 20 tuổi Kiếp thứ nhất Tháng tám · thượng tuần · năm thứ hai
+09:44:47 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
+09:44:57 AUTO tap "Học tập Đàn hát tự thưởng Rất vững Lòng đang vui, ôm đàn hát một khúc "
+09:45:07 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
+09:45:18 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
+09:45:18 AUTO tap "Hành sự"
+09:45:20 AUTO tap "Sang buổi"
+09:45:20 STATUS buổi#156 Buổi chiều | Bạch Nghê Thường Thường tại 20 tuổi Kiếp thứ nhất Tháng tám · thượng tuần · năm thứ hai | Sắc 94 Tài 86 Tâm cơ 85 Đức 100 Danh 16 Sủng 19 | Bạc 101 Sức 100/100 | 
+09:45:20 BUOI 153 Buổi chiều| 20 tuổi Kiếp thứ nhất Tháng tám · thượng tuần · năm thứ hai
+09:45:21 AUTO tap "Hành sự"
+09:45:22 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
+09:45:32 AUTO tap "Nghỉ ngơi Giả bệnh Cáo bệnh để Hoàng thượng thương xót, tránh việc khó"
+09:45:42 AUTO tap "Giao thiệp Trò chuyện với cung nữ Ngồi nghe Cung nữ thân tín tam đẳng "
+09:45:52 AUTO tap "Y dược Mời thái y bắt mạch Mời Thái y Trương Nhân Phủ đến tận cung xem"
+09:45:56 STATUS buổi#157 Buổi tối | Bạch Nghê Thường Thường tại 20 tuổi Kiếp thứ nhất Tháng tám · thượng tuần · năm thứ hai | Sắc 94 Tài 86 Tâm cơ 85 Đức 97 Danh 16 Sủng 21 | Bạc 93 Sức 100/100 | 
+09:45:56 AUTO tap "Gửi tiền giúp người ấy tự lo Rất vững TỐN Bạc -30 ĐƯỢC được tiếng hiền"
+09:45:57 AUTO tap "Đọc kỹ, chỉ ra chỗ khuất Rất vững TỐN không ĐƯỢC Hoàng thượng để mắt h"
+09:45:59 AUTO tap "Ra lệnh phòng bị Rất vững TỐN không ĐƯỢC giữ được mình: chọn kẻ hầu ca"
+09:46:00 AUTO tap "Giao việc: canh chừng cung Rất vững TỐN không ĐƯỢC giữ được cung: bắt "
+09:46:01 AUTO tap "Cung nữ thân tín tam đẳng Sơ Tuyết (thiện cảm 98) Rất vững TỐN không Đ"
+09:46:02 AUTO tap "Không dự Rất vững TỐN không ĐƯỢC không !"
+09:46:11 BUOI 154 Buổi tối| 20 tuổi Kiếp thứ nhất Tháng tám · thượng tuần · năm thứ hai
+09:46:11 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
+09:46:12 AUTO tap "✕"
+09:46:21 AUTO tap "Học tập Đàn hát tự thưởng Rất vững Lòng đang vui, ôm đàn hát một khúc "
+09:46:31 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
+09:46:41 AUTO tap "Giao thiệp Trò chuyện với cung nữ Ngồi nghe Cung nữ thân tín tam đẳng "
+09:46:45 AUTO tap "Chuẩn bị thị tẩm"
+09:46:47 AUTO tap "tạm Giữ chân Hoàng thượng Có cơ TỐN không ĐƯỢC dựa vào ân sủng, nhan s"
+09:46:48 AUTO tap "Chuẩn bị thị tẩm"
+09:46:49 AUTO tap "Tắm gội chờ giá Rất vững TỐN không ĐƯỢC được thị tẩm, gần Hoàng thượng"
+09:46:50 AUTO tap "Tắm cánh hoa, xông hương Rất vững TỐN Bạc -15 ĐƯỢC Hoàng thượng để mắt"
+09:46:52 BLIND TAP centre (no candidates)
+09:46:54 AUTO tap "Bàn thơ văn, cầm kỳ Rất vững TỐN không ĐƯỢC đêm vui, Hoàng thượng để m"
+09:46:55 AUTO tap "Xin tha cho cung nữ bị phạt Rất vững TỐN không ĐƯỢC được tiếng hiền đứ"
+09:46:57 BLIND TAP centre (no candidates)
+09:46:57 AUTO tap "Nhận"
+09:47:00 STATUS buổi#158 Buổi sáng | Bạch Nghê Thường Thường tại 20 tuổi Kiếp thứ nhất Tháng tám · trung tuần · năm thứ hai | Sắc 94 Tài 87 Tâm cơ 86 Đức 100 Danh 18 Sủng 24 | Bạc 68 Sức 100/100 | 
+09:47:00 AUTO tap "›"
+09:47:01 AUTO tap "✕"
+09:47:02 AUTO tap "✕"
+09:47:03 AUTO tap "Dặn giữ đèn nến cẩn thận Rất vững TỐN 1 khắc ĐƯỢC hiểm họa cháy giảm h"
+09:47:13 BUOI 155 Buổi sáng|i 20 tuổi Kiếp thứ nhất Tháng tám · trung tuần · năm thứ hai
+09:47:13 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
+09:47:23 AUTO tap "Học tập Đàn hát tự thưởng Rất vững Lòng đang vui, ôm đàn hát một khúc "
+09:47:33 AUTO tap "Giao thiệp Điểm trang Ngồi trước gương: chọn y phục theo dịp hôm nay, "
+09:47:34 MG intro: PLAY
+09:47:34 AUTO touch-tap Sẵn sàng bắt đầu chơi
+09:47:46 MG: phase never reached play after Sẵn sàng
+09:47:46 AUTO tap "✕"
+09:47:47 AUTO tap "Tiếp theo"
+09:47:48 AUTO tap "Đã hiểu"
+09:47:49 STATUS buổi#159 Buổi trưa | Bạch Nghê Thường Thường tại 20 tuổi Kiếp thứ nhất Tháng tám · trung tuần · năm thứ hai | Sắc 94 Tài 88 Tâm cơ 86 Đức 100 Danh 18 Sủng 24 | Bạc 68 Sức 100/100 | 
+09:47:49 AUTO tap "Tiếp tục Rất vững TỐN không ĐƯỢC không đổi gì thêm !"
+09:47:50 AUTO tap "✕"
+09:47:59 BUOI 156 Buổi trưa|i 20 tuổi Kiếp thứ nhất Tháng tám · trung tuần · năm thứ hai
+09:47:59 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
+09:48:09 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
+09:48:10 AUTO tap "Giao thiệp Trò chuyện với cung nữ Ngồi nghe Cung nữ thân tín tam đẳng "
+09:48:11 AUTO tap "Y dược Mời thái y bắt mạch Mời Thái y Trương Nhân Phủ đến tận cung xem"
+09:48:15 STATUS buổi#160 Buổi chiều | Bạch Nghê Thường Thường tại 20 tuổi Kiếp thứ nhất Tháng tám · trung tuần · năm thứ hai | Sắc 94 Tài 88 Tâm cơ 86 Đức 100 Danh 18 Sủng 24 | Bạc 60 Sức 100/100 | 
+09:48:15 AUTO tap "✕"
+09:48:24 BUOI 157 Buổi chiều|i 20 tuổi Kiếp thứ nhất Tháng tám · trung tuần · năm thứ hai
+09:48:24 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
+09:48:25 AUTO tap "✕"
+09:48:33 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
+09:48:35 AUTO tap "Giao thiệp Trò chuyện với cung nữ Ngồi nghe Cung nữ thân tín tam đẳng "
+09:48:36 AUTO tap "Y dược Sang Thái y viện xin bắt mạch Tự đi, đứng chờ thái y rảnh tay. "
+09:48:37 AUTO tap "✕"
+09:48:38 AUTO tap "Vẫn đi TỐN Danh -5 ĐƯỢC không"
+09:48:39 AUTO tap "Cung nữ tam đẳng Ngân Linh TỐN không ĐƯỢC không !"
+09:48:41 AUTO tap "Lên đường TỐN không ĐƯỢC 1 người theo (Cung nữ tam đẳng Ngân Linh)·thấ"
+09:48:42 AUTO tap "Ở lại TỐN không ĐƯỢC không !"
+09:48:46 STATUS buổi#161 Buổi tối | Bạch Nghê Thường Thường tại 20 tuổi Kiếp thứ nhất Tháng tám · trung tuần · năm thứ hai | Sắc 94 Tài 88 Tâm cơ 86 Đức 100 Danh 18 Sủng 24 | Bạc 60 Sức 95/100 | 
+09:48:46 AUTO tap "Thu làm tai mắt Rất vững TỐN Bạc -20 ĐƯỢC có tai mắt trong cung Hoàng "
+09:48:54 BUOI 158 Buổi tối|i 20 tuổi Kiếp thứ nhất Tháng tám · trung tuần · năm thứ hai
+09:48:54 AUTO tap "Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ trong tẩm cung, uống ché"
+09:49:05 AUTO tap "Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn sử, đọc vài trang b"
+09:49:10 AUTO tap "Báo đúng ngày Rất vững TỐN không ĐƯỢC sổ ghi đúng, không ai bắt bẻ đượ"
+09:49:11 AUTO tap "✕"
+09:49:12 AUTO tap "Ta biết rồi"
+09:49:13 AUTO tap "Chặn ngự giá Có cơ TỐN không ĐƯỢC dựa vào nhan sắc, ân sủng; tài nghệ "
+09:49:14 MG intro: PLAY
+09:49:14 AUTO touch-tap Sẵn sàng từ lúc này mới tính g
+09:49:15 MG start kind= mua
+09:49:44 MG RESULT kind=mua «THÂN PHẬN môn thường của thân phận này · tay quen Tạm được · 0/10 → 4/10 KẾT QUẢ 4/10 · Tạm được: cơ duyên giữ nguyên Có cơ»
+09:49:44 MG end kind= mua moves= 6 peekNull= 648 peekOk= 19 sample= {"x":377.5,"y":651.49375} ms= 29084 {"ph":"result","score":null} 
+09:49:45 AUTO tap "✕"
+09:49:46 AUTO tap "Chuẩn bị thị tẩm"
+09:49:47 AUTO tap "Tắm gội chờ giá Rất vững TỐN không ĐƯỢC chuẩn bị thị tẩm !"
+09:49:48 AUTO tap "Tắm cánh hoa, xông hương Rất vững TỐN Bạc -15 ĐƯỢC Hoàng thượng để mắt"
+09:49:50 BLIND TAP centre (no candidates)
+09:49:51 AUTO tap "Bàn thơ văn, cầm kỳ Vững TỐN không ĐƯỢC đêm vui, Hoàng thượng để mắt h"
+09:49:52 AUTO tap "Xin tha cho cung nữ bị phạt Rất vững TỐN không ĐƯỢC được tiếng hiền đứ"
