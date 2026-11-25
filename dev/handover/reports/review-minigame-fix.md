@@ -51,3 +51,13 @@ Re-review: after 1–3 are fixed (with «KIT OK <sha>» for 1–2), send the new
 
 ### RE-REVIEW 66edf06f (BIG reviewer) — FAIL
 66edf06f = dbd5ea4d + dev/test/mg-noword-kit.js only (assert restored to the fixture's own «Để trời định» button) → item 3 closed. Items 1 (private dfIntro frame, inline bg/border/radius/shadow) and 2 (dfintro-css body:has fx rule in jdfv) are unchanged in jdfv.js → still FAIL; no step-8 merge sha judged (nothing to land). Needs KK23b «KIT OK» for the focus-layer rules card, then a new sha.
+
+### RE-REVIEW 0506605b (BIG reviewer, 25/11) — BIG PASS 0506605b (branch; step-8 merge sha to be confirmed)
+0506605b = 66edf06f + r4 nits (6c57a758) + kit e716092a (KK23b KIT READY, kitFocus F.intro, KIT §92.4) merged; parent chain on live main 502c48c9.
+- Item 1 CLOSED: jdfv calls kit `F.intro({title,rows,go,sub,onGo})`; dfIntro and its inline frame deleted. The card is kit `.kgr` + `.kpst «Luật chơi · …»` + kg82Rows + `.kgr-go` on `--k-card`, the same parts as the Điểm trang kgReady rules screen (law 9 consistency OK: heading, rows, button and card colour match; the focus card shows its 3 rows openly where kgReady keeps «Môn/Luật» behind «!». These three rows are the essentials, so that is accepted).
+- Item 2 CLOSED: fx layers are hidden by `html.kfoc-playing` (kit jfocus, no :has); the class is removed in playOff + destroy.
+- Item 3 + notes CLOSED: mg-noword-kit PASS (odds/quick stay words, 39 kinds 0 words); result line «Bỏ qua, N/10»; family scan waits for Sẵn sàng (ALL OK 39); veil assert real.
+- Skip result identical: playArt default QK label only; the skip raw is still `o.quick…?…:5` (no change); the F.intro stub skip = {raw:null,skipped:true}.
+- Gates: quickcheck PASS (core gates, time-spill, old save ok, perf new/live render 276/301, tab 570/626, buổi 1794/1551, tasks>200ms 27/25: within run noise, the live median moved 24→25 between runs); coop-e2e 142/142; minigame-fix, minigame-family-scan, duodo-focus-view, duodo-focus-games, kit-mg-intro (755x1000 + 1180x820), kit-focus ALL PASS.
+- Shots looked at (real CDN art), Fold 755x1000 + iPad 1180x820: the Lời hay rules card is centred and readable on both, the title is on one line, «Bỏ qua · kết quả thường» shows under it, no fx specks over the card; Điểm trang mirror shows her face (Fold, slow proxy: veiled at 40 ms, face at 600 ms; iPad face at 40 ms).
+- Nit (kit keeper, not blocking): jfocus `.kfoc-intro` sets z-index twice (5 then 3), so only 3 applies; keep one.
