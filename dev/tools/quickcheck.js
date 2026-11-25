@@ -57,11 +57,29 @@ const SETTLE_MS=180e3;
 async function settleNew(g,what){for(let k=0;;k++){await within(SETTLE_MS,g.waitForFunction('('+SETTLE.toString()+')()||('+BANHOA.toString()+')()',null,{polling:150,timeout:SETTLE_MS}),what);/* timeout = the within() limit (Playwright's default 30 s fired first: a tú nữ's 3 days under the perf CPU throttle) */
   if(!await g.evaluate(BANHOA))return;if(k>=SELX_REROLL_MAX)throw new Error(what+': '+(k+1)+' new lives in a row ended at the selection (ban hoa) — reroll cap '+SELX_REROLL_MAX+' reached');
   selxRerolls++;console.log('  selection: life ended in ban hoa → reroll '+(k+1)+'/'+SELX_REROLL_MAX);await g.evaluate(NEWLIFE)}}
-const BUOI=async()=>{const sl=t=>new Promise(r=>setTimeout(r,t));const k0=JSON.stringify([S.turn,S.buoi,S.month,S.year]);const t0=performance.now();
+const BUOI=async(mode)=>{let slept=0,cards=0;const sl=t=>{slept+=t;return new Promise(r=>setTimeout(r,t))};
+ /* sangbuoi-held r3: buoiMs = the game's work, not this tool's pacing: the sleeps it asks for (40 ms per card it closes, 200 ms per look) are taken out
+    (a sleep stretched by a long task still counts — only the asked-for time is removed). The fixed tap runs the whole wrapped turn, which queues the
+    cards LIVE's bare tap skipped (agents, events, «Trong cung vừa qua» …): at 40 ms each the tool's own pacing alone made the gap. cards = closed after the turn. */
+
+ /* sangbuoi-held r3: finish what the new life left on screen (#ov intro, roulette / podium, a queued scene) BEFORE the clock starts — LIVE's bare tap
+    turned the buổi UNDER that screen (~160 ms) while the fixed tap holds it (flight rule) and waited ~1.2 s here: buoiMs timed the screen, not the turn
+    (probe: live auto-advance 1206 ms = new tap 1489 ms, held 4/4; live tap 163 ms, held 0/4). Untimed, both builds then time the same turn. */
+ const pend=()=>{const ov=document.getElementById('ov');return (ov&&!ov.hidden&&!S.mg)||!!document.querySelector('[id^="kroul"],.kroul-ov,#kpodov,.kmov:not(.km-out)')||(typeof KMQ!=='undefined'&&KMQ.length)||Q.length};
+ for(let i=0;i<30&&pend()&&!S.dead;i++){const ov=document.getElementById('ov');if(ov&&!ov.hidden&&!S.mg)ov.hidden=true;document.querySelectorAll('[id^="kroul"],.kroul-ov,#kpodov').forEach(e=>e.remove());try{kmPump()}catch(e){}
+  const kb=[...document.querySelectorAll('.kmov:not(.km-out) button,#kmrew button,#kpodov button')].find(b=>b.getClientRects().length&&!b.disabled)||document.querySelector('.kmov:not(.km-out)');if(kb)kb.click();
+  for(let j=0;j<12&&Q.length&&!S.dead;j++){const m=Q[0];try{if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}catch(e){Q.shift()}await sl(40)}await sl(250)}
+ const k0=JSON.stringify([S.turn,S.buoi,S.month,S.year]);slept=0;const t0=performance.now();
  for(let i=0;i<40;i++){for(let j=0;j<12&&Q.length&&!S.dead;j++){const m=Q[0];try{if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}catch(e){Q.shift()}await sl(40)}
-  const n=document.getElementById('next');if(n&&!n.disabled){n.click();await sl(300);break}await sl(200)}
- for(let j=0;j<40&&Q.length&&!S.dead;j++){const m=Q[0];try{if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}catch(e){Q.shift()}await sl(40)}
- return {ms:Math.round(performance.now()-t0),moved:JSON.stringify([S.turn,S.buoi,S.month,S.year])!==k0,dead:!!S.dead}};
+  const n=document.getElementById('next');if(n&&!n.disabled){if(mode==='global')nextBuoi();else n.click();await sl(300);break}await sl(200)}
+ /* sangbuoi-held r2: «Sang buổi» runs the full wrapped turn, so a tap while the old buổi's big moment is pending (a mini-game screen #ov still open,
+    a motion scene queued) is HELD until it is done (jdayq flight rule) — finish what is on screen like a player, the held turn then runs */
+ for(let i=0;i<60&&JSON.stringify([S.turn,S.buoi,S.month,S.year])===k0&&!S.dead;i++){const ov=document.getElementById('ov');if(ov&&!ov.hidden&&!S.mg)ov.hidden=true;
+  /* the roulette / podium screens are removed here as NEWLIFE does (a later one may open with the first buổi) */document.querySelectorAll('[id^="kroul"],.kroul-ov,#kpodov').forEach(e=>e.remove());try{kmPump()}catch(e){}
+  const kb=[...document.querySelectorAll('.kmov:not(.km-out) button,#kmrew button,#kpodov button')].find(b=>b.getClientRects().length&&!b.disabled)||document.querySelector('.kmov:not(.km-out)');if(kb)kb.click();
+  for(let j=0;j<12&&Q.length&&!S.dead;j++){const m=Q[0];try{if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}catch(e){Q.shift()}await sl(40)}await sl(200)}
+ for(let j=0;j<40&&Q.length&&!S.dead;j++){cards++;const m=Q[0];try{if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}catch(e){Q.shift()}await sl(40)}
+ return {ms:Math.round(performance.now()-t0-slept),wall:Math.round(performance.now()-t0),slept,cards,moved:JSON.stringify([S.turn,S.buoi,S.month,S.year])!==k0,dead:!!S.dead}};
 async function page(b,dev){const ctx=await D.newDeviceContext(b,dev,{deviceScaleFactor:1,reducedMotion:'reduce'});
  await ctx.addInitScript(()=>{window.COOP_URL='http://127.0.0.1:9/';window.__qcErr=[];addEventListener('error',e=>{try{window.__qcErr.push(String(e.message||e.error))}catch(x){}});
   addEventListener('unhandledrejection',e=>{try{const r=e.reason;const m=String(r&&r.message||r);if(!/Failed to fetch|NetworkError|net::|Load failed|aborted/i.test(m))window.__qcErr.push('unhandled: '+m)}catch(x){}})});
@@ -100,7 +118,10 @@ const errsOf=async(g,errs)=>errs.concat(await g.evaluate(()=>window.__qcErr||[])
   /* tab ms = median over the tabs of each tab's faster of its 2 visits (noise on a shared box only ever adds time) */
   const per={};for(const t of tabs.filter(Boolean))per[t.tab]=Math.min(per[t.tab]??1e9,t.ms);
   await g.evaluate(()=>{const t=document.querySelector('#tabs [data-tab="act"]');if(t)t.click()});await sl(300);
-  const bu=await within(60e3,g.evaluate(BUOI),'buổi');await sl(500);
+  /* sangbuoi-held r3: perf times the SAME entry on both builds = the global (outermost, wrapped) nextBuoi — what the fixed «Sang buổi» tap runs (j6.js)
+   and what auto-advance runs on both; LIVE's tap entered the bare j9 only (1/45 wrappers, the bug fixed here), so tap-vs-tap compared two code paths.
+   The old-save step below still uses the REAL tap. */
+  const bu=await within(60e3,g.evaluate(BUOI,'global'),'buổi');await sl(500);
   const lt=await g.evaluate(()=>window.__lt.slice());
   const day=!!(PG.dayLife&&await g.evaluate(f=>{try{return !!eval(f)}catch(e){return false}},PG.dayLife.flag));   /* MAIN 130: tú nữ selection-days life → its own long-task basis (perfgate.json dayLife) */   /* long tasks counted up to here: the render() repeats below are not part of play */
   const rend=await g.evaluate(async n=>{const o=[];for(let i=0;i<n;i++){const t0=performance.now();render();o.push(Math.round(performance.now()-t0));await new Promise(r=>setTimeout(r,60))}return o},PG.renderReps);
