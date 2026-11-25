@@ -63,3 +63,15 @@ B2 (NPC mood-term rate) stays with seat T2c. N1 / N2 unchanged (D / MAIN route).
 
 ## READY
 **SẴN SÀNG KIỂM review/temper-perception-rv ab5d65ee** (B1 + N3 + N4; B2 = T2c).
+
+## T2c — NPC mood-term rate check (B2), INTERIM 25/11 11:28Z
+Route 1: real-tap robot-rt lives (review/robot-realtap d5545202, unpatched), bot sens, Fold, seed = life no. Arms: main 4a8c627b · on = 3119cf02 (BAL.tp.moodM 10) · off = same build with BAL.tp.moodM=0. NOTE: not the reviewer base 3598bce8 (3119cf02 + T1); final table will be re-measured on T1c's sha, ≥3 lives per arm. Driver: dev/measure/temper-perc-mood-rt.js + intpmood-rt.js on review/temper-perception (937e5181; measure files only). Counters: NPC doers only, every motiveOK call on a hostile kind. n = 1 life per arm, NONE finished (lives are long), so NOT conclusive.
+| arm | lives (done) | buổi | NPC hostile gate calls | pass | pass % | passes owed to mood | gây sự deeds (tpDeed) | pass / buổi | deeds / buổi |
+|---|---|---|---|---|---|---|---|---|---|
+| main (main) | 1 (0) | 50 | 820 | 172 | 21.0 | 0 | 0 | 3.440 | 0.000 |
+| off (off) | 1 (0) | 83 | 2021 | 505 | 25.0 | 0 | 5 | 6.084 | 0.060 |
+| on (on) | 1 (0) | 53 | 837 | 241 | 28.8 | 26 | 7 | 4.547 | 0.132 |
+main byKind [calls,pass,mood] {"provoke":[390,73,0],"frame":[187,39,0],"bribe":[144,0,0],"rumor":[99,60,0]}
+off byKind [calls,pass,mood] {"provoke":[766,184,0],"frame":[534,72,0],"bribe":[441,14,0],"rumor":[277,234,0],"spy":[1,0,0],"plant":[2,1,0]}
+on byKind [calls,pass,mood] {"provoke":[362,92,13],"spy":[18,0,0],"frame":[175,26,8],"bribe":[144,5,3],"rumor":[134,114,2],"plant":[4,4,0]}
+Reading so far: the mood term accounts for 26 of 241 NPC hostile passes (10.8 %, mostly provoke 13/92 and frame 8/26); pass % on vs off differs by +3.8 pp but the lives differ in length and course (n=1), so no rate verdict yet. main shows no mood term by construction.
