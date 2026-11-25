@@ -179,6 +179,11 @@ async function play(p) {
     if (SLICE && R.buoi >= SLICE) { R.sliced = true; break }
     if (process.env.RT_TEST_FREEZE && R.buoi >= +process.env.RT_TEST_FREEZE && !(R.harness.resumed || []).length) { /* self-test of the watchdog only */ await p.evaluate(() => { for (;;) {} }) }
     if (process.env.RT_TEST_TINBAO && R.buoi >= +process.env.RT_TEST_TINBAO && !R._tbT) { /* self-test of the no-hit dialog rule only (FIXER #6): 61 unread notices, open «Tin báo» */ R._tbT = 1; await p.evaluate(() => { try { Q.length = 0; closeModal() } catch (e) {} for (let i = 0; i < 61; i++) kitNotice({ line: 'Tin thử số ' + i + ': Quý nhân ' + i + ' lên Phụng Tiên điện thắp hương cầu tự, gặp người quen và trò chuyện rất lâu bên hồ sen' }); kitNotice({ line: 'Tin thử có việc: có người chờ ở Ngự hoa viên', go: () => {}, goLabel: 'Xem tin' }); kitNoticeOpen() }).catch(e => console.log('TINBAO setup', e.message)) }
+    if (process.env.RT_TEST_UNSTICK && R.buoi >= +process.env.RT_TEST_UNSTICK && !R._usT) { /* self-test of the unstick tap-out branch only (FIXER #7, s2d «bareTap is not defined»): a test layer with NO button → ladder level 2 must tap bare space outside it */ R._usT = 1;
+      await p.evaluate(() => { const d = document.createElement('div'); d.id = 'rtTestLayer'; d.style.cssText = 'display:block;pointer-events:auto;position:fixed;left:10px;top:10px;right:10px;bottom:10px;background:#fff;z-index:2147483000'; d.textContent = 'RT_TEST_UNSTICK layer'; document.body.appendChild(d) });
+      const s0 = await p.evaluate(SCAN); const a0 = R.harness.areaTaps || 0; let err = null; try { await unstick(p, rt, s0, 2) } catch (e) { err = e.message }
+      R.harness.testUnstick = { layer: s0.layer, buttons: s0.b.length, areaTaps: (R.harness.areaTaps || 0) - a0, err }; console.log('RT_TEST_UNSTICK ' + JSON.stringify(R.harness.testUnstick));
+      await p.evaluate(() => { const d = document.getElementById('rtTestLayer'); if (d) d.remove() }) }
     if (process.env.RT_TEST_CRASH && R.buoi >= +process.env.RT_TEST_CRASH && !(R.harness.resumed || []).length) { /* self-test of the crash path only */ await p.goto('chrome://crash').catch(() => {}) }
     if (Date.now() - statusAt > 3600e3) { statusAt = Date.now(); const l = 'STATUS ' + LIFE + ' · buổi ' + R.buoi + ' · year ' + (sc.S && sc.S.y) + ' · rank ' + (sc.S && sc.S.rank) + ' · bugs ' + R.bugs.length + ' · stuck ' + R.harness.stuck + ' · dead buttons ' + R.dead.length; R.status.push(l); console.log(l); save() }
     if (Date.now() - (R._snapAt || 0) > 60e3) { R._snapAt = Date.now(); await p.screenshot({ path: path.join(SHOTS, 'now.png') }).catch(() => {}); if (process.env.RTV) console.log('NOW', sc.layer, '«' + sc.title + '»', 'hit', sc.b.filter(x => x.hit).length, 'idle', idle, 'buổi', R.buoi, 'areaTaps', R.harness.areaTaps || 0) }
@@ -393,6 +398,8 @@ if (require.main === module) {
 const [, , URL0, OUT0, ...KV] = process.argv;
 if (!URL0 || !OUT0) { console.error('usage: node dev/test/robot-rt.js <url> <out-dir> [dev=fold|ipad] [origin=..] [road=..] [bot=..] [seed=..] [life=..] [slice=..]'); process.exit(2) }
 const A = Object.fromEntries(KV.map(s => s.split('=')));
+/* STATIC SELF-TEST first (robot-lint.js: node --check + undeclared names outside page code); a FAIL never starts a life (lint=0 skips) */
+if (A.lint !== '0') { const LR = require('./robot-lint.js').run(require('./robot-lint.js').DEFAULT); if (!LR.ok) { console.error('HARNESS LINT FAIL — no life started:\n' + LR.rep.join('\n')); process.exit(2) } }
 const DEV = A.dev || 'fold', VP = DEV === 'ipad' ? { width: 1180, height: 820 } : { width: 755, height: 1000 };
 const BOT = A.bot || 'sens', SEED = +A.seed || 1, LIFE = A.life || ['rt', A.origin || 'any', BOT, DEV, SEED].join('-');
 const STUCK_MS = (+A.stuckMin || 15) * 60e3, SLICE = +A.slice || 0, CP = +A.cp || 50;
