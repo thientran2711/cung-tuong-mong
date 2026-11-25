@@ -35,3 +35,20 @@ Exit 1 before, PASS after.
 - Build: `bash dev/site/build_site.sh` re-run, index.html/sw.js regenerated in the branch.
 
 ~100% fix / ~100% playable (reader total; writer for the live blob not individually identified — if a console error ever shows again it is now silent and the figure simply has no rank ground, never a crash).
+
+## r2 — extras re-based on F's pcPort fix (opus FIXER, brief b-fix7-remerge-pcport-extra.md)
+PRIORITY #1 CHECK ('pcport rk'): OD 0 | ledger 0 | claims 0 | main 0 | review/* review/pcport-rk cc27f8c7, F review/bc-stack-r 5c062a05 (= LC15 eaaae7c8) → reuse both; nothing new.
+BASE: review/lc15-bcstack-on-mfix2 eaaae7c8 (LC15 READY 15; contains robot-bugs-m1 a72480eb + F's pcPort String(f.rk)). Branch review/pcport-rk-r2.
+- What F already has: pcPort no longer throws (local `String(f.rk)`).
+- What F lacks (kept here): ONE reader `rkStr` used everywhere — pcPort (F's local String() cast REPLACED by rkStr, law 14: one helper, not two), mdH (j3), kitRoleOfFace (j60), jerr subject; writers `rkCanon` in pv / pMe (j3) and pServ (j10); dev/measure/rk-scan.js; dev/test/pcport-rk.js.
+- Why it matters beyond "no throw": `String()` of a non-string paints a junk rank class (`rk-[object`, `rk-c1,x`, `rk-3`, `rk-NaN`, `rk-true`) and a bare servant (role maid + numeric rk) gets no sv ground; rkStr gives "" or the right `sv<N>` / `eu<N>`.
+- Test made sharper: pcport-rk now also FAILs on junk rank classes, so it FAILs on F's fix alone.
+- S.rk check (brief): S.rk is the jrank rank-TRACKER object on the player PERSON (S), not a figure field; every figure of her is built by pMe (rkCanon string). S reaches a reader raw only if handed as a face object, and kitIsFaceObj(S) is false (no ini/src) → kitFace → pMe. jcoopthinb.js:177 only calls rkTrack(). Not a real figure writer → not renamed (renaming would break saves / ranking); rkStr returns "" for an object anyway.
+
+| gate | result |
+|---|---|
+| rk-scan on base eaaae7c8 | FAIL 8 (5 raw readers incl. F's String(f.rk) / String(p.rk) in j15, 3 rkOfFace writers) |
+| rk-scan on r2 | PASS (0) |
+| pcport-rk r2 (Fold 755x1000 + iPad 1180x820) | PASS, 0 page errors |
+| pcport-rk MUTATE rkStr := String(f.rk) (= F alone) | FAIL both sizes (20 cases: junk classes, no sv2) |
+| quickcheck ALONE (old save) | open 0 errors, old save ok, perf ok; ONE core-gate FAIL G4 90-button-crawl «Ô lưu [Cung Tường Mộng] · Lui did not close its layer» = PRE-EXISTING on base eaaae7c8 (same fault crawling the base build alone; m1 guard reopens the home card) — fixed by review/robot-coop-fix-7-r2 (crawl PASS there) |
