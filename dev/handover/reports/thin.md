@@ -1923,3 +1923,35 @@ Commits on ff31fee1: **5d97d15e** (game: jcoopworld cause 5 r2 + coop-cal-rebirt
 Every stuck room on BOTH sides = one seat dead on its «Kiếp này» end card (the robot's 300 s life cap) that the old bot never closes on the LIVE build (Qt ['Kiếp này'], dead, pendBuoi null) — harness, not a step split; no stuck dump on either side has a carried / held panel. Target metric = same within noise (no regression). Earlier same-day A/B on the BARE line (no LIVE; fix 5d97d15e / prev ff31fee1 / main, sides run in parallel = overloaded): fix 5 rooms 86 weeks 0 stuck · prev 5 rooms 107 weeks 0 stuck · main 15 rooms 52 weeks 10 stuck; coop-pos / resHall there come from the bare line lacking fix-3-r5 (on LIVE), so the merged table above is the judged one.
 Laws touched: 11 (one classifier + one carry over all four Q-gated steps; 542-producer scan + run-time table) · 14 (drop path deleted, comment overwritten in place) · 6c spirit (nothing she opened is lost: carried and shown again) · 1 two-way (same code both seats; host + guest rows, both seat orders) · 4 no number · 7/9/10/12 no player text, no UI/kit change · solo untouched (all under CW.on).
 Notes: (1) merged-week keepQ (fromCanon) is a separate owner rule (L680), not changed. (2) coop-pos/resHead on LIVE = fix-3-r5 family (equal on both sides). (3) old bot + LIVE: «Kiếp này» end card not closed after the life cap → stuck rows (harness; realtap harness of Foreman F).
+
+## REVIEW robot-coop-fix-3-r5 (BIG co-op, opus; session_01N1tNP3UkcirSSZknExE71G; depth 2; START_CTX ≈4 %) — PASS
+PRIORITY #1 CHECK ('robot-coop-fix-3-r5'): OD 0 | ledger 0 | claims 5 | main 0 | review/* 1 | archive 0
+**LAND READY review/robot-coop-fix-3-r5-rv 3e761843b39368537f0991d0bbe8359621cc4227 FOR MAIN 144 / LC16 (BIG co-op)** = fixer head 3b004c3e + my merge of LIVE 17dfa64d (only index.html / sw.js conflicted = generated, rebuilt; assemble.py auto-merged = main's list). No coop/worker change on the branch → deploy NO Worker; no dependency on another review branch (fix-3 r1–r5 all ride this head).
+### Code (root cause + whole family)
+- FAIL 1 (coop-pos, stale resHead on the wire): houseWire now sends the house HER seat resolves (j9 houseOf); an unhonoured head (below Tần / out / dead / she is a chủ vị) goes out as none. Real cause: the other seat's palaceOf(her entry) read a raw resHead her own seat no longer honoured.
+- FAIL 2 (save→load→save R[].resHall): buildFriend copied only LOOK (pal / resHead) → the merged-week rebuild's deser palFix gave an NPC her side hall. Now the whole HOUSE list + her last same-life relay are on the entry BEFORE any palFix, and houseSettle runs this seat's palFix at once on a relayed house change (not inside fromCanon / CW.ctx). Host palFix → jcoophl soon("house") sends the NPC move; guest palFix keeps every world person's housing (jcoophl wrapper) and moves only her own S → both seats converge.
+- Family (law 11): my own `grep -nE "\.(resHead|resHall|pal|palLone|palWait)=[^=]" dev/build/j*.js` = 36 sites / 13 files, same as the fixer's table; no other writer reaches the friend entry (jbancung NPC asks `!v.coop`, j9 assignHouses → palFix, jkcco join = her own S → houseWire).
+- Nit (not blocking): «same life» for the relay at build is checked by name only (m.name===v.name); a reborn friend with the same name would take one stale relay until her next pos (overwritten at once).
+### Plants (bare-FAIL / fix-PASS; jcoopworld.js edited, assemble, unit, reverted)
+P12 no HOUSE copy → 48/52 (4 FAIL) · P13 no relay at build → 50/52 · P14 houseSettle no-op → 46/52 · P16 raw resHead on the wire → 49/52 · restored → 52/52.
+### Gates (local Worker = coop/worker of the branch = main, wrangler dev --local :8791)
+| gate | bare 3b004c3e (on LIVE 9f72524b) | merged 3e761843 (LIVE 17dfa64d) | LIVE alone |
+|---|---|---|---|
+| coop-house-unit | 52/52 | 52/52 | – |
+| coop-keymove-unit | 12/12 | 12/12 | – |
+| coop/worker npm test | ALL OK | ALL OK | – |
+| sid-rekey-known (LIVE's new jcoopworld lifeRekey) | – | PASS | – |
+| coop-e2e SWAP 0 / 1 | 142/142 · 142/142 | 142/142 · 142/142 | – |
+| coop-night (full) | 70/98 | 70/98 | 9f72524b: killed at case 11 (same FAIL lines up to there); 17dfa64d: 70/98, FAIL set IDENTICAL to merged |
+| coop-night ONLY=4 ×2 / ONLY=12,13,14 | 72/72 ×2 (carried 1 → back 1) / 72/72 | – | 72/72 ×2 / 70/74 (6, 9) |
+| quickcheck --runs 6 ALONE | PASS · old save ok · core gates PASS · render 262/293 tab 666/693 buổi 1707/1825 | 2 runs: old save ok, perf ok (render 256/273 tab 552/587 buổi 1505/2587) · CORE GATES FAIL G4 90-button-crawl «fold · Ô lưu · Lui · close button did not close its layer» | coregates on 17dfa64d alone: SAME G4 fault → LIVE regression, not this branch |
+### A/B (target metric per Foreman B ruling; harness 918bfa84 overlay + fixer's local kgReady/kfoc tap patch in lib/coop-clear.js; `SWAP=<s> SEED=1<r> FLUSH=4 CAP=2400 PCAP=3000 POSLOG=1 NEGTRAP=1 WORKER=http://127.0.0.1:8791 node dev/measure/robot10-coop.js 1 1 1 <out>`; fix = 3b004c3e, main = 9f72524b, same Worker, same seed per round; X = Fold 755x1000, Y = iPad 1180x820, SWAP 0/1 = both seats on both devices)
+| side | rounds | rooms | weeks | coop-pos hits | R[].resHead/resHall save rows |
+|---|---|---|---|---|---|
+| fix | r1–r10 | 37 | 172 | 2 (r5, r7: 1 hit each, both buổi 6.0; the receiver's S.where already = her real place at the dump → relay arrived > 5 s late under turn p95 ≈ 50 s = lag family, not house) | **0** |
+| main | r1–r4 | 15 | 58 | **35** (4/4 rounds; «host sees guest at r5, guest is at r2», relay home → wrong palace = the house family) | 2 (R.10.resHead 5→3, 2→5) |
+Rooms still stick on LIVE families on both sides (held Q / week-end / coop-night LIVE), as the ruling expected.
+### Laws
+6b real people (one house, one answer on both seats, save = palFix fixed point) ✔ · 11 family scan ✔ · 1 two-way (same rule host + guest, plants on both seats) ✔ · 4 one core (no number added) ✔ · 7/9/10 no player text / UI touched ✔ · 12 devices: robot pairs + e2e on Fold 755x1000 + iPad 1180x820, both seats ✔ · no shots in git, no CDN folder.
+### NEW FINDING for Foreman B (LIVE, not this branch)
+LIVE 17dfa64d: quickcheck core gate G4 90-button-crawl FAILs alone — «fold · Ô lưu [#modal.kptitle] · Lui · close button did not close its layer» (save-slot dialog from the title). Blocks every quickcheck PASS on LIVE until fixed. Also: coop-pos relay-lag at a week's first buổi (2 hits / 172 weeks) — low, park unless it grows.
