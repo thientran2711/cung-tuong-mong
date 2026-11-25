@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"2ed5c542+","t":"2026-11-25T05:11Z","c":"DELEGATE-NOMG r2: report","b":"160773c3cb9e","h":[{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"}]};
+window.CTM_BI={"s":"9b38be2c+","t":"2026-11-25T05:32Z","c":"DELEGATE-NOMG: report — merges onto LIVE 0756a05b","b":"85b2b65edd5e","h":[{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -95947,7 +95947,7 @@ const DF_RULE={
 function dfUnplay(F){try{if(F.playing)F.endPlay()}catch(e){}}
 function dfLast(){try{const t=document.getElementById("rtoast");const tt=t&&t.classList.contains("on")?t.innerText.trim().split("\n")[0]:"";if(tt)return tt;
  /* DELEGATE-NOMG: an act with no result toast (a run act: «Nghe ngóng chung» → «<tên> đi nghe ngóng, về khắc N.») says its own short line, the one the pop-up note shows (popMsg) */
- if(typeof popMsg==="string"&&popMsg){const d=document.createElement("div");d.innerHTML=popMsg;return d.textContent.replace(/\s+/g," ").trim()}return""}catch(e){return""}}
+ if(typeof popMsg==="string"&&popMsg){/* only the act's OWN first line: popMsg can carry other news after <br> / <span class="past"> (BIG rv delegate-nomg) */const d=document.createElement("div");d.innerHTML=String(popMsg).split(/<br\s*\/?>|<span class="past"/i)[0];return d.textContent.replace(/\s+/g," ").trim()}return""}catch(e){return""}}
 /* the focus holds the PERSON (DF.p), never a frozen index: S.visit.people can shift while it is up (co-op refreshHere unshifts the Emperor,
    people leave); her index is looked up at every use, and if she is gone the focus closes (rv duodo-focus 43bc4ba2 #1) */
 function dfSame(a,b){return !!a&&!!b&&(a===b||(!!a.ref&&a.ref===b.ref)||(!a.ref&&!b.ref&&a.kind===b.kind&&a.name===b.name))}
@@ -98280,7 +98280,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="160773c3cb9e";window.CTM_BUILD=BUILD;
+const BUILD="85b2b65edd5e";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -33,7 +33,7 @@ const DF_RULE={
 function dfUnplay(F){try{if(F.playing)F.endPlay()}catch(e){}}
 function dfLast(){try{const t=document.getElementById("rtoast");const tt=t&&t.classList.contains("on")?t.innerText.trim().split("\n")[0]:"";if(tt)return tt;
  /* DELEGATE-NOMG: an act with no result toast (a run act: «Nghe ngóng chung» → «<tên> đi nghe ngóng, về khắc N.») says its own short line, the one the pop-up note shows (popMsg) */
- if(typeof popMsg==="string"&&popMsg){const d=document.createElement("div");d.innerHTML=popMsg;return d.textContent.replace(/\s+/g," ").trim()}return""}catch(e){return""}}
+ if(typeof popMsg==="string"&&popMsg){/* only the act's OWN first line: popMsg can carry other news after <br> / <span class="past"> (BIG rv delegate-nomg) */const d=document.createElement("div");d.innerHTML=String(popMsg).split(/<br\s*\/?>|<span class="past"/i)[0];return d.textContent.replace(/\s+/g," ").trim()}return""}catch(e){return""}}
 /* the focus holds the PERSON (DF.p), never a frozen index: S.visit.people can shift while it is up (co-op refreshHere unshifts the Emperor,
    people leave); her index is looked up at every use, and if she is gone the focus closes (rv duodo-focus 43bc4ba2 #1) */
 function dfSame(a,b){return !!a&&!!b&&(a===b||(!!a.ref&&a.ref===b.ref)||(!a.ref&&!b.ref&&a.kind===b.kind&&a.name===b.name))}

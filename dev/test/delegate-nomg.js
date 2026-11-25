@@ -54,6 +54,11 @@ const SH=process.argv[2]||path.join(__dirname,'../../../dnm-shots');try{fs.mkdir
    last:(S.logs||[]).slice(0,2).map(x=>String(x).replace(/<[^>]+>/g,'').slice(0,120)),busy:typeof ptLockWhy==="function"?ptLockWhy(ptPid(S.maid)):""}));
   ok(!r.mg.length&&!r.intro&&!r.cur&&!r.play,dev[0]+': tapping it opens NO mini-game (no rules card, no game layer, no opener call)',r);
   ok(r.last.some(x=>/Nghe ngóng chung|nghe ngóng/.test(x))||!!r.busy,dev[0]+': the order is given (her maid goes / the result is logged)',r.last);
+  /* BIG rv: the figure line is the act's OWN line only (no other news glued after <br>/<span class="past">) */
+  {const own=await g.evaluate(()=>{const d=document.createElement("div");d.innerHTML=String(popMsg).split(/<br\s*\/?>|<span class="past"/i)[0];return d.textContent.replace(/\s+/g," ").trim()});
+   const rl=(r.react||[]).filter(Boolean).pop()||"";ok(rl&&rl===own.slice(0,rl.length)&&/đi nghe ngóng, về khắc \d+\.$/.test(rl),dev[0]+': the react line on the figure is the act\'s own line only',{rl,own})}
+  /* the same on a popMsg that carries other news: dfLast keeps only the first line */
+  {const t=await g.evaluate(()=>{const p0=popMsg;popMsg='A đi nghe ngóng, về khắc 3.<br><span class="past">B sai người sang</span>';const x=dfLast();popMsg=p0;return x});ok(t==='A đi nghe ngóng, về khắc 3.',dev[0]+': dfLast drops the news after <br>',t)}
   /* the result when she comes back: let the khắc pass and land the send */
   const land=await g.evaluate(async()=>{try{if(typeof ptTick==="function"){for(let k=0;k<4;k++){used++;ptTick()}}}catch(e){}await new Promise(r=>setTimeout(r,600));return{mg:__MG.slice(),last:(S.logs||[]).slice(0,3).map(x=>String(x).replace(/<[^>]+>/g,'').slice(0,140))}});
   ok(!land.mg.length,dev[0]+': her maid comes back, still no mini-game',land);

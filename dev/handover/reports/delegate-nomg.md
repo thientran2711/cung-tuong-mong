@@ -130,3 +130,7 @@ Only 2 delegated acts opened a game (maid + servant «Nghe ngóng chung»); afte
 ## Merges onto LIVE main (FF)
 - 4da55ce8 (flight-modal-deadlock) and 0756a05b (sansang-music-fix): built files only (index.html/sw.js), rebuilt. Re-run on the merges: delegate-nomg PASS ×3, quickcheck PASS (incl. new hook 85 dead-card), coop-e2e 142/142 both orders.
 - sansang-music-fix.js under file:// shows the same FAILs on untouched 0756a05b (music not back; «Sẵn sàng» covered at one size, varies per run) = env/flaky, not this branch. My jdfv lines (dfTap E branch, dfLast) do not touch the intro handler.
+
+## r3 — BIG rv item (dfLast)
+- jdfv dfLast fallback now takes only the act's OWN first line of popMsg (split on `<br>` / `<span class="past">` before textContent): the figure bubble no longer glues other news («…về khắc 3.Tần Kiều … sai người s»). It is the only popMsg consumer this branch added.
+- delegate-nomg.js: asserts the react line == the act's own line (both devices) and that dfLast drops news after `<br>`. PASS.
