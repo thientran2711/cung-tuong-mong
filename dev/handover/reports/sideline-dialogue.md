@@ -269,3 +269,30 @@ Root cause (diag): a GAME kit motion scene comes up while the side-line scene pl
 2. On the head to land: validator --strict --cover, quickcheck ALONE, coop-e2e default + COOP_SWAP=1, DLGS_STEP=4 fold,ipadAir, wave-2 DLGS_ONLY (ids: every "id" in content/dlg/j68_old, j7_ky_old, j70_old = 199, parse as JSON — spacing differs), nr units, F4 stress, family plays no-arg + fixture, norep vs LIVE, dead-card/dayq-hold/dayq-order. Pin the last 1/5464 hold (diag: add dqActEl()/DQ.stat/kmBusy to the «card shows» check JSON).
 3. Shots Fold 755x1000 + iPad 1180x820 of ≥6 scenes (incl. ≥2 nr) looked 3× (outside git) — not done by r3.
 4. Check LIVE again before LAND READY (it moved twice during r3).
+
+## REVIEW r4 (BIG rv session_01N1tNP6Wg2mFj3et8dLjA7c, depth 1, 11/25/2026; START_CTX ~5 %) — review/sideline-dlg-3-r2 **02842ca29952cd477abff526d7b465ceaa3fbb06** → PASS = LAND READY (ONE BIG item: wave 1 + wave 2 + wave 3 NRASK, 2076 scenes; it carries -2-r1 260b4380 + -3-r1 49f884d7)
+PRIORITY #1 CHECK: r3 NEXT (this file) | main 0756a05b → LIVE 9f72524b (makeup-noboost, sansang-music-fix-2, visitor-fix-r10) | review/sideline-dlg-2-r1 260b4380, -3-r1 49f884d7 | claims: lead #6 archived (Foreman B 10:40Z).
+Foreman B ruling: land -3-r1 as the ONE item → no cherry-pick to -2-r1.
+### Commits on -3-r2 (= 49f884d7 + 3)
+- c0dbfca3 merge LIVE 9f72524b (conflicts index.html/sw.js only → rebuilt; assets.json put back).
+- 409fcc65 law 11 (F3 family): LIVE's 2 new tests frame-tap-scan.js + person-frame-tap.js drive nextBuoi and open a #modal card → lib/dlgs-off 'off' (kit frame / card tests). dlgs-guard-scan UNGUARDED 2 → 0 (676 files: off 320, tap 90, libs 58, exempt 208).
+- 02842ca2 ROOT CAUSE of the post-merge dlgs-play mass FAIL (TEST, game right): LIVE visitor-fix r10 jgreet wraps showModal — a «Có người đến» card with a consort waits ≤4 s for her full figure (m.__fcW 1→2) before it shows, then calls showModal again. jdlgs (outer wrapper) plays the scene only for a card really shown → on the 2nd call the scene plays (right, and on the real figure). dlgs-play judged at once after the 1st call → j68 visit units «no scene resolved» (13 in a 13-id sample on 49f884d7 vs 9f72524b: pre-merge ALL PASS 431, post 3 FAIL), and the late 2nd showModal fired under the NEXT unit → cascade (first STEP=4 run: 668 FAIL, mostly Fold, all families). Fix: the cast returns {fcw:1}, the test waits (≤8 s) for the scene of the 2nd showModal, then judges. After: sample ALL PASS 472; full runs below 0 FAIL.
+- r3's «card held by a game motion scene under LIVE jdayq» = closed by r3's 49f884d7 (kmFree waits while DLGS.playing): wave-2 now 0 FAIL (r3 15), STEP=4 0 FAIL (r3 3).
+### Gates (merged head; game code = c0dbfca3, later commits test-only)
+| gate | result |
+|---|---|
+| dlgs_validate.py --strict --cover | 2076 scenes 0 errors 0 flat; 12 rows 100 % (nr 644/644); jdlgsd_build.py rebuild = no diff |
+| quickcheck.sh ALONE | 409fcc65 run 1 FAIL perf longTaskMaxMs 4038 vs live 2358 only (live itself 4510 in run 2 = noise) · run 2 PASS · **02842ca2 PASS** (render 208/217, tab 537/562, buổi 1272/2302, tasks>200 22/27, open 2273, old save ok, core gates PASS incl. kit-conform) |
+| dlgs-guard-scan | PASS (UNGUARDED 0) |
+| DLGS_STEP=4 fold,ipadAir (2076) | **ALL PASS 40248** |
+| wave-2 DLGS_ONLY 199 ids fold,ipadAir | **ALL PASS 15526** |
+| F4 stress DLGS_REP=20 pushp-002 + craft-062 fold,ipadAir | ALL PASS 3124 |
+| 7 family plays no-arg + fixture (j72c j68c kyc j70c j71c wc j7c) | 14/14 ALL PASS |
+| norep-oldsave vs LIVE 9f72524b index.html | ALL PASS |
+| coop-e2e default / COOP_SWAP=1 | 142/142 · run 1 141/144 (ipad #next «Sẵn sàng» at 3:2, one moment) → rerun 142/142 |
+| LIVE's new/changed tests with scenes on: frame-tap-scan, person-frame-tap, visitor-scene Fold + iPad, name-sentence, dead-card, dayq-order, dayq-hold (46), sansang-music-fix | all PASS |
+| bare head 49f884d7 (13-id sample incl. visit units) | ALL PASS 431 |
+Shots (outside git, /home/user/wt/rv4-out/sh + s4b): Fold 755x1000 + iPad 1180x820 of 9 units (j72 court, j68 serv, ky, j70, j71, wc, j7, nr dtq_vu_9#0, nr tt_oan_9#0) looked at 3×: speaker lit / other dimmed, title = speaker, narration line untitled, kit §95 box, place background painted (no black), the card after the scene = the same ask (nr Quý phi «Bức thư mưu phản» Chương 9 with choices).
+Laws: 9 kit PASS (jdlgs draws nothing of its own) · 4 PASS (0 digits, BAL.dlgs) · 7 PASS (validator: no %, modern «bạn» banned, xưng hô rules) · 6b PASS (unresolved role ⇒ no scene; wave-2/nr cast real people) · 1 PASS (watch scenes) · 11 PASS (guard scan family + visit-card fix family-wide in the one test).
+Notes (not blocking): the handover copies of content/dlg/*.md are OLDER than the code branch for 27 lines (r2/r3 reviewer fixes: «bạn», xưng hô) — the code branch is the source; whoever edits content next starts from the code branch copy. The topbar notice «… xưng danh với ta.» is LIVE jgreet wording, not this branch. r3 content notes (nr one 5-line shape, stock lines, Từ Ninh ×4 vs Đức Thọ) stay for a polish slice.
+LAND READY review/sideline-dlg-3-r2 02842ca29952cd477abff526d7b465ceaa3fbb06 (parent LIVE 9f72524b merged in; lander: fast-forward or STACK LAND onto newer LIVE + rebuild index/sw).
