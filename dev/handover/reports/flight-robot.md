@@ -242,3 +242,21 @@ Verdict: **PASS — review/flight-sid-rebirth-r 80e911b7 FF ca5af050** (= f198be
 | sid-rekey-known.js / k61-wkey-oldsave.js | PASS / PASS |
 | laws 4 / 7 / 9 | no number, no text, no UI |
 Note (pre-existing, not this branch): in a HOSTDIE run the reborn host knew every palace servant at 3 (origin «cn» knows rivals' staff in k61InitNew, built against her throwaway world before the join) — worth a look by F: k61InitNew's world-people grants are computed before attach.
+
+## REVIEW test-path-fix (big reviewer session_01UV1SziXSk67Zy3DMXHsCrJ, 11/25/2026) — FAIL 9fd1a445 (fix commit on review/test-path-fix-r 003ac0b0)
+PRIORITY #1 CHECK: OD 0 (test-only) | main ee37ab5f dev/test/toilette.js, toil-overlay.js, hoa-dien.js | review/* robot-realtap (realtap.js reused unchanged) | claims Foreman F #6.
+Branch = ee37ab5f + test files only (FF ok, index.html identical to LIVE). Every new test ran against LIVE (built root index.html, charset-less python server), old tests too, plus a mutant (CSS forces `.kfxf` shown while #mefig is hidden).
+| check | Fold 755x1000@2 | iPad 1180x820@2 |
+|---|---|---|
+| OLD toilette.js on LIVE | rc 1, timeout `#kg82 .toilw` (cause #1 confirmed) | — |
+| NEW toilette.js on LIVE | rc 0, 0 errors (swatches: all 3 «first», wanted colours not owned; test has no assertions, report only) | rc 0 |
+| NEW hoa-dien.js on LIVE | 39/39, retaps 0 | 39/39, retaps 0 |
+| OLD toil-overlay on LIVE | rc 1: false «mefig hidden» (only the .kpor avatar layer shown — cause #2 confirmed) + `0 tok … mid: picture hidden` | rc 1, same false positive |
+| MUTANT (layer kept on hidden #mefig) with NEW overlay | rc 1, caught | rc 1, caught → new assertion NOT weaker |
+| NEW toil-overlay, run 1 (load ~9) | **rc 1: 6 BAD `tok … mid: picture hidden`** (layer of #mefig shown while #mefig hidden, 300 ms after a token tap), DEAD 1 | rc 0, DEAD 1 (move 0, token entry bob, not a DEAD BUTTON) |
+| NEW toil-overlay, runs 2+3 (alone) | rc 0 but **DEAD 7 / 8 of 14 moves** (token covered by img#mefig, G1) | — |
+Real taps: no el.click()/evaluate-click in the 3 tests (grep); setup by state + function (start/render/kg82Play «Thử tay») stays, as documented.
+FAIL reasons:
+1. toil-overlay on Fold proves nothing when green: with G1 7–8 of the 14 moves are dead, so the layer-follow checks after a person's tap mostly never run, and exit stays 0. When the taps do land (run 1) Fold is RED with a real fault: the #mefig layer stays shown on her hidden figure after a token tap (G2, game candidate; the OLD test on LIVE saw it too: `0 tok fig bob … picture hidden`). Fix: a covered token (DEAD BUTTON, not a transient bob/disabled) must fail the test, or reach the move another real way; report G2 with G1 to Foreman F for a game worker. Do NOT relax the `mid` check.
+2. hoa-dien «Dán» retap was a note only (a tap that does nothing passed). Fixed by me on review/test-path-fix-r 003ac0b0 (counted retap = FAIL check; Fold 40/40 ok after). Take it.
+3. Not blocking: toilette/hoa-dien/rules-screen fixes are right; mk-e2e still fails (stale preset `pre-dep`) — not worse than before; laws 4/7/9 not touched.
