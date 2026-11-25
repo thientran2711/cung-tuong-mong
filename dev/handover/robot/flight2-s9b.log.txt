@@ -1,0 +1,137 @@
+BUG game dialog queue holds 5 copies of «Tâm trạng · Quý phi Tống Chỉ Lan» (each close pops one; looks like a dead ✕)
+BUG game dialog queue holds 2 copies of «Tâm trạng · Quý phi Tống Chỉ Lan» (each close pops one; looks like a dead ✕)
+BUG stuck no-clock loop: 150 taps without a clock step on page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »
+BUG game softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=10: Xem quan hệ của / Quan hệ với / Xem quan hệ của / Tin báo / Tin báo / Công · Nữ công: các lối)
+BUG game softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Tin trong cung buổi này)
+CP buổi 50 year 1 save 357196 chars
+CP buổi 100 year 1 save 467298 chars
+BUG game softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=5: Tin báo / Tin báo / Quan hệ với / Xem quan hệ của / Tin trong cung buổi này)
+BUG game softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=11: Dung · Dung nghi / Đức / Tin báo / Quan hệ với / Chương 2 · Lần đầu được sủng / Lịch tháng)
+BUG game dialog queue holds 3 copies of «Tâm trạng · Thường tại Diêu Tố Nga» (each close pops one; looks like a dead ✕)
+BUG game softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=9: Dung · Dung nghi / Tin báo / Tin báo / Tin báo / Đã biết về Hoàng hậu Lương Hàn Tuyết / Đức)
+CP buổi 150 year 2 save 576108 chars
+BUG game dialog queue holds 5 copies of «Tâm trạng · Quý nhân Diệp Lưu Ly» (each close pops one; looks like a dead ✕)
+BUG game dialog queue holds 2 copies of «Tâm trạng · Quý nhân Diệp Lưu Ly» (each close pops one; looks like a dead ✕)
+BUG game softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=13: Công · Nữ công: các lối / Công · Nữ công: các lối / Tin báo / Tin báo / Tin báo / Tin báo)
+CP buổi 200 year 2 save 626314 chars
+BUG game dialog scrolled to the end has no close / next button: .kmov «»
+CP buổi 250 year 2 save 625043 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt/dev/test/robot-rt.js:215:324)
+    at async /home/user/wt/rt/dev/test/robot-rt.js:372:9 {
+  log: []
+}
+RESUME flight2-s9b from 2026-11-25T16:15:54.221Z buổi 271
+CP buổi 271 year null save 721594 chars
+BUG js page error: f.rk.split is not a function
+BUG game dialog queue holds 5 copies of «Tâm trạng · Phi Nhâm Tuyết Dao» (each close pops one; looks like a dead ✕)
+BUG game dialog queue holds 6 copies of «Tâm trạng · Phi Nhâm Tuyết Dao» (each close pops one; looks like a dead ✕)
+BUG game dialog queue holds 3 copies of «Tâm trạng · Phi Nhâm Tuyết Dao» (each close pops one; looks like a dead ✕)
+CP buổi 321 year 3 save 823960 chars
+CP buổi 371 year 3 save 927433 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt/dev/test/robot-rt.js:244:13)
+    at async /home/user/wt/rt/dev/test/robot-rt.js:398:9 {
+  log: []
+}
+RESUME flight2-s9b from 2026-11-25T16:36:52.772Z buổi 371
+CP buổi 371 year null save 927433 chars
+CP buổi 421 year 3 save 963758 chars
+BUG game softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=14: Tin báo / Tin báo / Vũ / Chương 4 · Thuyền muối đêm / Tin báo / Hôn sự)
+BUG game dialog queue holds 10 copies of «Tâm trạng · Thường tại Diệp Lưu Ly» (each close pops one; looks like a dead ✕)
+BUG game dialog queue holds 7 copies of «Tâm trạng · Thường tại Diệp Lưu Ly» (each close pops one; looks like a dead ✕)
+BUG game dialog queue holds 4 copies of «Tâm trạng · Thường tại Diệp Lưu Ly» (each close pops one; looks like a dead ✕)
+BUG dead close button has no effect: .dlg «Tâm trạng · Thường tại Diệp Lưu Ly» «Lui»
+BUG game softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=10: Quan hệ với / Xem quan hệ của / Tin báo / Tin báo / Tin báo / Tin báo)
+CP buổi 471 year 4 save 1059064 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt/dev/test/robot-rt.js:250:324)
+    at async /home/user/wt/rt/dev/test/robot-rt.js:414:9 {
+  log: []
+}
+RESUME flight2-s9b from 2026-11-25T16:58:51.302Z buổi 471
+CP buổi 471 year null save 1059064 chars
+BUG game softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=3: Danh hiệu / Tin báo / Tin trong cung buổi này)
+BUG game softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=7: Tin báo / Tin báo / Tin báo / Tin báo / Tin báo / Tin báo)
+BUG game softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Danh hiệu / Tin trong cung buổi này)
+CP buổi 521 year 4 save 1071164 chars
+BUG game softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=7: Kế vị / Tin báo / Xem quan hệ của / Danh hiệu / Quan hệ với / Xem quan hệ của)
+BUG game softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Chương 5 · Sổ thuyền / Tin trong cung buổi này)
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo mướp» cover span.kitb in #mb
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chó nhỏ lông xù» cover b.kidn in #mb
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chim họa mi» cover b.kidn in #mb
+BUG dead close button has no effect: .dlg «Nhờ thái giám tìm thú nuôi» «Lui»
+CP buổi 571 year 4 save 1130983 chars
+BUG game softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=7: Vũ / Kế vị / Tin báo / Nhờ thái giám tìm thú nuôi / Nhờ thái giám tìm thú nuôi / Nhờ thái giám tìm thú nuôi)
+BUG game softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=8: Tin báo / Chân Bão Cầm / Chân Bão Cầm / Chương 5 · Sổ thuyền / Công · Nữ công: các lối / Quan hệ với)
+CP buổi 621 year 5 save 1183136 chars
+BUG game softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=8: Xem quan hệ của / Tin báo / Nhờ thái giám tìm thú nuôi / Hôn sự / Cầm: các lối / Cầm)
+CP buổi 671 year 5 save 1242406 chars
+BUG game softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=9: Chương 5 · Sổ thuyền / Chương 5 · Sổ thuyền / Đã biết về Phế phi Trình Lạc Anh / Dung · Dung nghi / Tin báo / Xem quan hệ của)
+BUG stuck no-clock loop: 150 taps without a clock step on page «Ngọc Thanh các · Ở đây còn 1 người.»
+BUG game softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=6: Hoàng tự trong cung / Hoàng tự trong cung / Công · Nữ công / Lịch tháng / Quan hệ với / Tin trong cung buổi này)
+CP buổi 721 year 5 save 1272258 chars
+STATUS flight2-s9b · buổi 768 · year 6 · rank 0 · bugs 35 · stuck 0 · dead buttons 5
+CP buổi 771 year 6 save 1498949 chars
+BUG game softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=6: Lịch tháng / Công · Nữ công / Tin báo / Xem quan hệ của / Xem quan hệ của / Tin trong cung buổi này)
+BUG game softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Chương 6 · Kẻ hãm hại / Tin trong cung buổi này)
+BUG game softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=4: Tin báo / Công · Nữ công: các lối / Quan hệ với / Tin trong cung buổi này)
+CP buổi 821 year 6 save 1563157 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt/dev/test/robot-rt.js:258:45)
+    at async /home/user/wt/rt/dev/test/robot-rt.js:419:9 {
+  log: []
+}
+RESUME flight2-s9b from 2026-11-25T18:11:40.270Z buổi 821
+CP buổi 821 year null save 1563157 chars
+BUG game no way out: no button of the dialog can be reached (all below the screen / clipped, nothing scrolls): .dlg «Tin báo» — lost: Để ta xemTốnkhôngĐượckhô / Để sauTốnkhôngĐượckhông
+BUG game softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=8: Quan hệ với / Chương 6 · Kẻ hãm hại / Tin báo / Cầm / Cầm / Cầm: các lối)
+BUG game softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=6: Tin báo / Nhờ thái giám tìm thú nuôi / Kế vị / Cầm / Cầm / Tin trong cung buổi này)
+CP buổi 871 year 6 save 1670073 chars
+touchscreen.tap: Target page, context or browser has been closed
+    at tap1 (/home/user/wt/rt/dev/test/realtap.js:104:39)
+    at async Object.tap (/home/user/wt/rt/dev/test/realtap.js:79:46)
+    at async Object.play (/home/user/wt/rt/dev/test/robot-rt.js:265:16)
+    at async /home/user/wt/rt/dev/test/robot-rt.js:454:9 {
+  log: []
+}
+RESUME flight2-s9b from 2026-11-25T18:24:36.249Z buổi 871
+CP buổi 871 year null save 1670073 chars
+BUG game softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=9: Tin báo / Xem quan hệ của / Quan hệ với / Đức / Cầm / Cầm)
+CP buổi 921 year 7 save 1744470 chars
+BUG game softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=5: Chứng cứ về Tần Kiều Hàn Yên / Tin báo / Quan hệ với / Chương 6 · Kẻ hãm hại / Tin trong cung buổi này)
+CP buổi 971 year 7 save 1765684 chars
+BUG game softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=3: Chương 6 · Kẻ hãm hại / Lịch tháng / Tin trong cung buổi này)
+CP buổi 1021 year 7 save 1877877 chars
+BUG game softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=4: Tin báo / Vũ: các lối / Mục lục / Tin trong cung buổi này)
+CP buổi 1071 year 8 save 1932878 chars
+BUG game softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=8: Cầm: các lối / Hoàng tự trong cung / Lịch tháng / Tin báo / Đã biết về Phế phi Trình Lạc Anh / Hoàng thượng)
+CP buổi 1121 year 8 save 1999295 chars
+BUG game softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Chương 7 · Muối quan, muối lậu / Tin trong cung buổi này)
+STATUS flight2-s9b · buổi 1154 · year 8 · rank 0 · bugs 47 · stuck 0 · dead buttons 5
+CP buổi 1171 year 8 save 2071744 chars
+BUG game softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=3: Tin báo / Chương 7 · Muối quan, muối lậu / Tin trong cung buổi này)
+BUG game softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=3: Tin báo / Lịch tháng / Tin trong cung buổi này)
+CP buổi 1221 year 9 save 2200683 chars
+BUG game softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=12: Tin báo / Nhờ thái giám tìm thú nuôi / Mục lục / Mục lục / Mục lục / Danh hiệu)
+BUG game softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Tin báo / Tin trong cung buổi này)
+CP buổi 1271 year 9 save 2277029 chars
+BUG game softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=8: Xem quan hệ của / Tin báo / Xem quan hệ của / Quan hệ với / Hoàng tự trong cung / Dung · Dung nghi)
+BUG game softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=6: Tin báo / Đức / Vũ: các lối / Kỳ / Đã biết về Quý nhân Tống Chỉ Lan / Tin trong cung buổi này)
+CP buổi 1321 year 9 save 2384654 chars
+BUG game softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Lịch tháng / Tin trong cung buổi này)
+CP buổi 1371 year 10 save 2452440 chars
+CP buổi 1421 year 10 save 2494741 chars
+BUG game softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Tin chờ người sai đi / Tin trong cung buổi này)
+BUG game softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=8: Tin báo / Đã biết về Phế phi Trình Lạc Anh / Tin chờ người sai đi / Thiệu Đông Tuyết / Lịch tháng / Xem quan hệ của)
+STATUS flight2-s9b · buổi 1449 · year 10 · rank 0 · bugs 56 · stuck 0 · dead buttons 5
+BUG game softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=7: Tin báo / Nhờ thái giám tìm thú nuôi / Đã biết về Phế phi Trình Lạc Anh / Dung · Dung nghi / Đức / Danh hiệu)
+CP buổi 1471 year 10 save 2635230 chars
+BUG game softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=7: Công · Nữ công: các lối / Chứng cứ về Phế phi Trình Lạc Anh / Tin báo / Hoàng thượng / Quý tộc kén rể · kén dâu / Nhờ thái giám tìm thú nuôi)
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Mèo mướp» cover span.kitb in #mb
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chó nhỏ lông xù» cover b.kidn in #mb
+DEAD BUTTON .dlg «Nhờ thái giám tìm thú nuôi» «Xem Chim họa mi» cover b.kidn in #mb
+CP buổi 1521 year 11 save 2723299 chars
+BUG game softlock: «Có tin đang chờ · xo» disabled with no dialog on screen (dialog queue Q=10: Danh hiệu / Danh hiệu / Cầm / Danh hiệu / Tin báo / Kế vị)
+CP buổi 1571 year 11 save 2790670 chars
+LIFE DONE flight2-s9b Hồng nhan bạc mệnh age 29 · buổi 1581 · taps 8207 · dead buttons 9 · stuck 0 · bugs 59
