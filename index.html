@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"0d46f833+","t":"2026-11-25T05:30Z","c":"robot-coop-fix-3 r4c: two players in one hall get one answer on both seats; the agents read the friend's real place (A/B r3 rows)","b":"42cecea7991a","h":[{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"}]};
+window.CTM_BI={"s":"69d03208+","t":"2026-11-25T05:39Z","c":"robot-coop-fix-3 r5: the friend's whole house rides her rebuilt entry + her relay before any palFix; a relayed house change re-houses this …","b":"7550b17a134c","h":[{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -50771,7 +50771,12 @@ function sendPos(){if(CW.ctx||!CW.on||!CW.p2||!S||S.dead)return;const st={};for(
    rides the pos relay like her live stats (canon ids: "me" = her pid; the reader maps its own pid to "me"); no seat's palFix writes her entry's
    housing (jpal / j95cCap: a player, like S, claimed first); her last relayed house is put back at every keepFriendPos (a merged week rebuilds
    her entry from her blob). Display only: the week write-back never sends a house back (jcoophl keeps the room base's housing). */
-function houseWire(){const o={};for(const x of HOUSE)o[x]=S[x]==null?null:J(S[x]);return mapMe(o,true,me())}
+/* r5 (A/B r2 SWAP=1 coop-pos «host sees guest at r4, guest is at P:b»: her S.resHead still named head 4 while HER seat no longer honoured it —
+   houseOf(S) = her own place (head gone / out / below Tần on her seat, or she is a chủ vị herself) — and the raw id went out: the other seat,
+   where head 4 still stands, housed her at r4). ONE rule for both seats: the relay carries the house her own seat resolves (j9 houseOf); a
+   resHead her seat does not honour goes out as none (her own palace), so palaceOf(her entry) on the other seat = where she really lives */
+function houseWire(){const o={};for(const x of HOUSE)o[x]=S[x]==null?null:J(S[x]);
+ try{if(o.resHead!=null&&houseOf(S)===key(S)){o.resHead=null;o.resHall=null}}catch(e){}return mapMe(o,true,me())}
 function houseIn(f,hs){if(!hs||typeof hs!=="object")return false;const o=mapMe(J(hs),false,me());let ch=false;
  for(const x of HOUSE){if(!(x in o))continue;if(JSON.stringify(f[x]==null?null:f[x])!==JSON.stringify(o[x])){if(o[x]==null)delete f[x];else f[x]=o[x];ch=true}}return ch}
 /* her last relayed house onto her entry again (after anything on this seat re-housed it); same life only (a reborn friend has a new entry) */
@@ -98295,7 +98300,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="42cecea7991a";window.CTM_BUILD=BUILD;
+const BUILD="7550b17a134c";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

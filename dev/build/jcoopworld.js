@@ -406,7 +406,12 @@ function sendPos(){if(CW.ctx||!CW.on||!CW.p2||!S||S.dead)return;const st={};for(
    rides the pos relay like her live stats (canon ids: "me" = her pid; the reader maps its own pid to "me"); no seat's palFix writes her entry's
    housing (jpal / j95cCap: a player, like S, claimed first); her last relayed house is put back at every keepFriendPos (a merged week rebuilds
    her entry from her blob). Display only: the week write-back never sends a house back (jcoophl keeps the room base's housing). */
-function houseWire(){const o={};for(const x of HOUSE)o[x]=S[x]==null?null:J(S[x]);return mapMe(o,true,me())}
+/* r5 (A/B r2 SWAP=1 coop-pos «host sees guest at r4, guest is at P:b»: her S.resHead still named head 4 while HER seat no longer honoured it —
+   houseOf(S) = her own place (head gone / out / below Tần on her seat, or she is a chủ vị herself) — and the raw id went out: the other seat,
+   where head 4 still stands, housed her at r4). ONE rule for both seats: the relay carries the house her own seat resolves (j9 houseOf); a
+   resHead her seat does not honour goes out as none (her own palace), so palaceOf(her entry) on the other seat = where she really lives */
+function houseWire(){const o={};for(const x of HOUSE)o[x]=S[x]==null?null:J(S[x]);
+ try{if(o.resHead!=null&&houseOf(S)===key(S)){o.resHead=null;o.resHall=null}}catch(e){}return mapMe(o,true,me())}
 function houseIn(f,hs){if(!hs||typeof hs!=="object")return false;const o=mapMe(J(hs),false,me());let ch=false;
  for(const x of HOUSE){if(!(x in o))continue;if(JSON.stringify(f[x]==null?null:f[x])!==JSON.stringify(o[x])){if(o[x]==null)delete f[x];else f[x]=o[x];ch=true}}return ch}
 /* her last relayed house onto her entry again (after anything on this seat re-housed it); same life only (a reborn friend has a new entry) */

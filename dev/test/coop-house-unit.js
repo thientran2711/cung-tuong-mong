@@ -123,6 +123,16 @@ const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.
      const pp=()=>JSON.stringify([hsOf(S),hsOf(g)]);const a1=pp();CW.on=false;palFix();ck('guest: live relay → save → load: palFix keeps both players where they are (world people are the host\'s, not tested here)',S.resHall===HL[1]&&g.resHall===HL[0]&&pp()===a1,{S:hsOf(S),g:hsOf(g)});CW.on=true}
     else ck('guest: an NPC head to live with',false,null);S.resHead=null;S.resHall=null;S.rank=Math.max(S.rank,3)}
    rivals.splice(rivals.indexOf(g),1)}
+  /* r5 (A/B r2 SWAP=1 «host sees guest at r4, guest is at P:b»): the relay carries the house HER seat honours (houseOf), never a raw resHead her seat
+     no longer lives by — else the other seat (head still standing there) houses her at r<head> */
+  {CW.on=true;CW.seat="a";const rk0=S.rank,pal0=S.pal,rh0=S.resHead,rl0=S.resHall;S.rank=0;S.pal=null;
+   const hd=npcs().find(v=>v.pal!=null&&rkOf(v)>=3&&!v.queen&&palHostOK(v)),low=npcs().find(v=>rkOf(v)<3&&!v.queen);
+   S.resHead=hd&&key(hd);S.resHall=BAL.res.halls[0];const w1=CW.houseWire();
+   ck('houseWire: a head my seat honours goes out (her id, my hall)',!!hd&&w1.resHead===hd.id&&w1.resHall===BAL.res.halls[0],w1);
+   S.resHead=low&&key(low);const w2=CW.houseWire();ck('houseWire: a resHead my seat does not honour (head below Tần) goes out as none = my own palace',!!low&&w2.resHead==null&&w2.resHall==null,w2);
+   if(hd){const o0=hd.out;hd.out=true;S.resHead=key(hd);const w3=CW.houseWire();hd.out=o0;ck('houseWire: my head is out (lãnh cung) on my seat → none',w3.resHead==null,w3)}
+   S.rank=3;S.resHead=hd&&key(hd);const w4=CW.houseWire();ck('houseWire: I am a chủ vị (own house) → no resHead out',w4.resHead==null,w4);
+   S.rank=rk0;S.pal=pal0;S.resHead=rh0;S.resHall=rl0}
   /* solo: no coop entry → palFix exactly as before (no friend, CW.on false): identity on a settled world */
   CW.on=false;CW.seat=seat0;palFix();const s1=npcSig();palFix();ck('solo: palFix identity (no coop entry, nothing moves)',npcSig()===s1,null);
   CW.on=on0;CW.seat=seat0;CW.fpos=fpos0;log=log0;return out});
