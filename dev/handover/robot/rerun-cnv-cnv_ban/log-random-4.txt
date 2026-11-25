@@ -51,3 +51,5 @@ page.waitForTimeout: Target page, context or browser has been closed
   log: []
 }
 RESUME cnv-cnv_ban-random-4 from 2026-11-25T21:12:25.771Z buổi 1406
+CP buổi 1406 year null save 1922007 chars
+LIFE DONE cnv-cnv_ban-random-4 Xuất cung age 30 · buổi 1419 · taps 101 · dead buttons 1 · stuck 7 · bugs 2

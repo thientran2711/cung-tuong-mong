@@ -2,7 +2,7 @@
 
 | life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick |
 |---|---|---|---|---|---|---|---|---|
-| cnv-cnv_ban-random-4 | HARNESS |  | 1410 |  | 1 | 7 | 3 | — |
+| cnv-cnv_ban-random-4 | Xuất cung — Xuất cung tuổi 30 | 30 | 1419 | 101 | 1 | 7 | 2 | — |
 
 ## Dead buttons
 
@@ -12,4 +12,3 @@
 
 - [stuck] ×1 life not (re)opened within 5 min on #title «»
 - [stuck] ×6 no progress 15 min on .dlg «Tin báo»
-- [harness] ×1 runner error: page.waitForTimeout: Target page, context or browser has been closed

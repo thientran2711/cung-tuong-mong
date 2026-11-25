@@ -2,11 +2,11 @@
 
 | life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick |
 |---|---|---|---|---|---|---|---|---|
-| cnv-cnv_ban-rebel-4 | HARNESS |  | 165 |  | 0 | 0 | 1 | — |
+| cnv-cnv_ban-rebel-4 | HARNESS |  | 1022 |  | 0 | 0 | 1 | — |
 
 ## Dead buttons
 
 
 ## Bugs
 
-- [harness] ×1 runner error: page.waitForTimeout: Target page, context or browser has been closed
+- [harness] ×1 runner error: touchscreen.tap: Target page, context or browser has been closed

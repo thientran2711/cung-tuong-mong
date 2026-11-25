@@ -2,7 +2,7 @@
 
 | life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick |
 |---|---|---|---|---|---|---|---|---|
-| cnv-cnv_ban-rebel-1 | HARNESS |  | 820 |  | 0 | 0 | 1 | — |
+| cnv-cnv_ban-rebel-1 | HARNESS |  | 1634 |  | 0 | 0 | 1 | — |
 
 ## Dead buttons
 

@@ -21,3 +21,29 @@ page.waitForTimeout: Target page, context or browser has been closed
   log: []
 }
 RESUME cnv-cnv_ban-rebel-1 from 2026-11-25T21:11:50.892Z buổi 816
+CP buổi 816 year null save 1149910 chars
+CP buổi 866 year 7 save 1233920 chars
+CP buổi 916 year 7 save 1290863 chars
+CP buổi 966 year 7 save 1366661 chars
+CNV EXIT CHOICE buổi 1010 → /home/user/wt/rerun-ban/dev/handover/robot/rerun-cnv-cnv_ban/shots-cnv-cnv_ban-rebel-1/cnvexit-1010.json opts ["Xuất cung về quê","Xin ở lại"]
+CNV EXIT CHOICE picked «Xin ở lạiRất vữngTốnkhôngĐượcở lại đến b»
+CP buổi 1016 year 8 save 1425740 chars
+CP buổi 1066 year 8 save 1458513 chars
+CP buổi 1116 year 8 save 1498337 chars
+CP buổi 1166 year 9 save 1671942 chars
+CP buổi 1216 year 9 save 1717038 chars
+STATUS cnv-cnv_ban-rebel-1 · buổi 1222 · year 9 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+CP buổi 1266 year 9 save 1815568 chars
+CP buổi 1316 year 10 save 1876305 chars
+CP buổi 1366 year 10 save 1957650 chars
+CP buổi 1416 year 10 save 2052565 chars
+CP buổi 1466 year 11 save 2101727 chars
+CP buổi 1516 year 11 save 2171794 chars
+CP buổi 1566 year 12 save 2232350 chars
+CP buổi 1616 year 12 save 2340097 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rerun-ban/dev/test/robot-rt.js:158:755)
+    at async /home/user/wt/rerun-ban/dev/test/robot-rt.js:312:9 {
+  log: []
+}
+RESUME cnv-cnv_ban-rebel-1 from 2026-11-25T23:12:12.289Z buổi 1631
