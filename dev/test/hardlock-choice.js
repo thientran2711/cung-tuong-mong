@@ -1,8 +1,11 @@
 /* NO HARD LOCK test (review/hardlock-choice; laws 2 + 3). node dev/test/hardlock-choice.js [shotDir]   (after dev/site/build_site.sh; run from the repo root)
    Fold 755x1000 + iPad 1180x820. The owner's case: j68c «VIỆC · Kẻ hầu» j68c-serv-022 (4 stances, all cost bạc) at 46 bạc must leave a road she can
-   take (FAILS on LIVE 502c48c9: every road greyed, no ✕). Also: (b) the road taken pays her purse + the rest in Sức at the BAL.nolock rate (j68c steps: one bạc step == one Sức step) and
-   the card goes; (c) enough bạc → the card is untouched (no tag, no added road); (d) purse 0 and no Sức / Danh to pay with → a ✕ «Thôi» leave;
-   (e) a forced card (mustChoose) whose every road is greyed by rank → a plain «Thôi» road; (f) a greyed road by rank is never paid another way. */
+   take (FAILS on LIVE 502c48c9: every road greyed, no ✕). Also: (b) the road taken pays her purse + the rest in Sức priced by the ONE bạc→Sức rule altCost(short, rank) (jstory BAL.bacTuan/altK), on top of
+   the road's own Sức, and the card goes; (c) enough bạc → the card is untouched (no tag, no added road); (d) purse 0 and no Sức / Danh to pay with → a ✕ «Thôi» leave;
+   (e) a forced card (mustChoose) whose every road is greyed by rank → a plain «Thôi» road; (f) a greyed road by rank is never paid another way;
+   (g) r1 BIG review probe: forced card 2 × {bac:-60,suc:-12}, purse 0, Sức 13, Danh 0 → no swapped road may take her Sức to 0 (FAILS on r1 ea9cfd51:
+   both roads open «Sức -24», picked → Sức 0 = death); only «Thôi»; (h) same card at Sức 40 → road open, own Sức + altCost Sức, she keeps Sức ≥ 1;
+   (i) Sức too low for the swap but Danh there → the rest in Danh at the j68c step ratio, Sức never below its floor. */
 const {chromium}=require('playwright');const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
 const ROOT=path.resolve(process.cwd());const SHOT=process.argv[2]||null;
 const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http://x').pathname);if(p==='/')p='/index.html';const f=path.join(ROOT,p);if(!fs.existsSync(f)||fs.statSync(f).isDirectory()){r.statusCode=404;return r.end()}fs.createReadStream(f).pipe(r)});
@@ -28,10 +31,10 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;console.log((c?'ok   ':'FAIL ')+m)};
   if(SHOT){fs.mkdirSync(SHOT,{recursive:true});await g.evaluate(()=>{document.querySelectorAll('#kmrew,.kmrew').forEach(e=>e.remove())});await p.screenshot({path:path.join(SHOT,`serv022-46-${dev}.png`)})}
   // (b) take it: purse paid, the rest in Sức, the card gone
   const r=await g.evaluate(()=>{const m=Q[0];if(!m)return null;const i=m.opts.findIndex(c=>typeof kitTakeable==='function'?kitTakeable(c,m):!c.off&&!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0));if(i<0)return null;const c=m.opts[i];const fx=Object.assign({},c.fx),s0={bac:S.bac,suc:S.suc,danh:S.danh};
-   const short=-((c.__nl&&c.__nl.fx.bac)||0)-s0.bac;chooseM(i);return{fx,s0,s1:{bac:S.bac,suc:S.suc,danh:S.danh},short,gone:Q[0]!==m,per:BAL.nolock?BAL.nolock.per.suc:0,tag:BAL.nolock?c.n.endsWith(BAL.nolock.tag):false}});
+   const short=-((c.__nl&&c.__nl.fx.bac)||0)-s0.bac;chooseM(i);return{fx,s0,s1:{bac:S.bac,suc:S.suc,danh:S.danh},short,gone:Q[0]!==m,own:(c.__nl&&c.__nl.fx.suc)||0,alt:typeof altCost==='function'?altCost(short,S.rank,(BAL.nolock||{}).floor||0,0).suc:null,tag:BAL.nolock?c.n.endsWith(BAL.nolock.tag):false}});
   ok(r&&r.gone,`${dev}: the road is taken and the card goes`);
   if(r){ok(r.s1.bac>=0&&r.fx.bac===-46,`${dev}: her whole purse paid (${r.s0.bac} → ${r.s1.bac}), never below 0`);
-   ok(r.fx.suc<0&&Math.abs(r.fx.suc)>=Math.ceil(r.short/r.per)&&r.tag,`${dev}: the rest (${r.short} bạc) paid as Sức ${r.fx.suc} at ${r.per} bạc / Sức (BAL.nolock = the j68c step rate), road tagged`)}
+   ok(r.fx.suc<0&&r.alt>0&&-(r.fx.suc-r.own)===r.alt&&r.tag,`${dev}: the rest (${r.short} bạc) paid as Sức ${r.fx.suc} = own ${r.own} + altCost ${r.alt ==null?'none':-r.alt} (the one bạc→Sức rule at her rank), road tagged`)}
   // (c) enough bạc: untouched
   e=await serv(5000);ok(!e,`${dev}: rebuilt (${e||'ok'})`);const c3=await g.evaluate(()=>!Q[0]?{tag:'gone',add:'gone'}:({tag:Q[0].opts.some(c=>BAL.nolock&&String(c.n).endsWith(BAL.nolock.tag)),add:Q[0].opts.some(c=>c.__nlAdd)}));
   ok(L.en===4&&!c3.tag&&!c3.add,`${dev}: with enough bạc the card is untouched (${L.en} open, tag ${c3.tag}, added ${c3.add})`);
@@ -46,5 +49,18 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;console.log((c?'ok   ':'FAIL ')+m)};
   L=f.L;ok(f.n===3&&f.last==='Thôi'&&L.en===1&&!L.x,`${dev}: forced card greyed by rank → one plain «Thôi» road (${L.names.join(' | ')})`);
   ok(f.aBac===-50&&f.aOff,`${dev}: a road greyed by rank keeps its price and its grey (never paid another way)`);
   const f2=await g.evaluate(()=>{const m=Q[0];chooseM(m.opts.length-1);return Q[0]!==m});ok(f2,`${dev}: «Thôi» leaves the forced card`);
+  // (g)(h)(i) the swap never stacks past her floor (r1 BIG review probe)
+  const probe=(suc,danh)=>g.evaluate(([suc,danh])=>{Q.length=0;$('modal').hidden=true;S.bac=0;S.suc=suc;S.danh=danh;
+   Q.push({t:'Thử',h:'<p>thử</p>',mustChoose:1,opts:[{n:'Đường A',fx:{bac:-60,suc:-12},x:''},{n:'Đường B',fx:{bac:-60,suc:-12},x:''}]});showModal();
+   const m=Q[0],Lk=window.__hlLook();const tk=c=>typeof kitTakeable==='function'?kitTakeable(c,m):!c.off&&!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0);const i=m.opts.findIndex(c=>!c.__nlAdd&&tk(c));const fx=i>=0?Object.assign({},m.opts[i].fx):null;
+   const alt=altCost(60,S.rank,(BAL.nolock||{}).floor||0,0).suc;if(i>=0)chooseM(i);else if(m.opts[m.opts.length-1].__nlAdd)chooseM(m.opts.length-1);
+   const out={L:Lk,i,fx,alt,suc:S.suc,danh:S.danh,gone:Q[0]!==m,last:m.opts[m.opts.length-1].n};Q.length=0;$('modal').hidden=true;return out},[suc,danh]);
+  let P=await probe(13,0);
+  ok(P.i<0&&P.last==='Thôi'&&P.suc===13&&P.gone,`${dev}: (g) 2×{bac:-60,suc:-12}, purse 0, Sức 13, Danh 0 → no swapped road open, only «Thôi»; Sức stays ${P.suc} (r1: Sức -24 → 0 = death) — ${P.L.names.join(' | ')}`);
+  P=await probe(40,0);
+  ok(P.i>=0&&P.fx.suc===-12-P.alt&&P.suc===40-12-P.alt&&P.suc>=1,`${dev}: (h) Sức 40 → road open, Sức ${P.fx&&P.fx.suc} = own -12 + altCost -${P.alt}; she keeps Sức ${P.suc} ≥ 1`);
+  P=await probe(14,30);
+  ok(P.i>=0&&P.suc>=1&&P.fx.danh<0&&P.danh===30+P.fx.danh,`${dev}: (i) Sức 14, Danh 30 → the rest in Danh (${JSON.stringify(P.fx)}); Sức ${P.suc} ≥ 1, Danh ${P.danh}`);
+  await g.evaluate(()=>{S.suc=60;S.danh=30});
   ok(!errs.length,`${dev}: 0 page errors ${errs.slice(0,3).join(' / ')}`);await ctx.close()}
  await b.close();srv.close();console.log(fail?`HARDLOCK-CHOICE FAIL (${fail})`:'HARDLOCK-CHOICE ALL PASS');process.exit(fail?1:0)})().catch(e=>{console.error(e);process.exit(2)});

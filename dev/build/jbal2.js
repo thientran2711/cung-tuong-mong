@@ -2090,10 +2090,11 @@ BAL.j68c={on:true,w:{def:.35},seen:.15,cd:999,obKeep:60,rumorTag:" <i>(Lời đ�
      l:{sung:5,danh:5,bac:60,suc:12,mat:2,th:6,hh:6,duc:5,tamco:3,an:3,rel:9}},
  need:{poor:30}};
 /* NO HARD LOCK (review/hardlock-choice, laws 2 + 3 + 4; jnolock.js): when every road of a choice card is held back and the card has no ✕,
-   each road held back ONLY by bạc is offered paid with an EQUAL value of her other means: her whole purse, the rest in sub[] order;
-   per[k] = bạc that ONE point of k is worth = the j68c step table (one bạc step == one step of k, tier m);
-   keep[k] = what she always keeps of k; tag = the words added to such a road. */
-BAL.nolock={sub:["suc","danh"],per:{suc:BAL.j68c.fx.m.bac/BAL.j68c.fx.m.suc,danh:BAL.j68c.fx.m.bac/BAL.j68c.fx.m.danh},keep:{suc:1,danh:0},
+   each road held back ONLY by bạc is offered paid with an EQUAL value of her other means: her whole purse, the rest priced in Sức by the
+   ONE bạc→Sức rule altCost (jstory: BAL.bacTuan + BAL.altK; floor = least Sức such a swap ever costs), taken in sub[] order;
+   of[k] = how many points of k ONE Sức is worth = the j68c step table (one Sức step == one step of k, tier m);
+   keep[k] = what she always keeps of k after the WHOLE road (Sức 1: Sức 0 is death); tag = the words added to such a road. */
+BAL.nolock={sub:["suc","danh"],of:{suc:1,danh:BAL.j68c.fx.m.danh/BAL.j68c.fx.m.suc},keep:{suc:1,danh:0},floor:1,
  tag:" (thiếu bạc, lấy công sức bù)"};
 /* ORDER THIN P3 (j72c.js composed việc nhờ): on = composed favours live; share = draw weight of one composed seed vs one of the 110 old T7 (1);
    fx[tier] = what ONE gain/loss step of a seed is worth per key (laws 2/3/4: seeds count steps, numbers live here; rel/relb = thiện cảm of A/B,
