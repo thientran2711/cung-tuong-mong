@@ -97,7 +97,7 @@
  /* RESUME (container restart): <out>/<life>.ckpt.json holds R + the game's localStorage save + rng state; resume=1 continues the SAME life */
  const CKPT = path.join(OUT, LIFE + '.ckpt.json'); let ck = null;
  if (C.resume && fs.existsSync(CKPT)) { try { ck = JSON.parse(fs.readFileSync(CKPT, 'utf8')); Object.assign(R, ck.R); rs = ck.rs >>> 0 || rs; R.harness.taps0 = R.harness.taps || 0; R.harness.resumed = (R.harness.resumed || []).concat([{ at: new Date().toISOString(), buoi: R.buoi, from: ck.at }]); console.log('RESUME', LIFE, 'from', ck.at, 'buổi', R.buoi) } catch (e) { console.log('RESUME failed: ' + e.message); ck = null } }
-+const ktutSeen = new Set(), ktutTry = new Map(), chipAvoid = new Map();
++const ktutSeen = new Set(), ktutTry = new Map(), chipAvoid = new Map(), lockedKeys = new Set(), nfCount = new Map();
  const bug = (type, msg, extra) => { const k = type + '|' + msg; const b = R.bugs.find(x => x.k === k); if (b) { b.n++; return b } const n = { k, type, msg, n: 1, at: sec(), ...extra }; R.bugs.push(n); console.log('BUG', type, msg); return n };
  
  /* ---- read-only screen reader: which layer is on top, its buttons (index into a fresh handle list) ---- */
@@ -110,7 +110,7 @@
      if (Date.now() - statusAt > 3600e3) { statusAt = Date.now(); const l = 'STATUS ' + LIFE + ' · buổi ' + R.buoi + ' · year ' + (sc.S && sc.S.y) + ' · rank ' + (sc.S && sc.S.rank) + ' · bugs ' + R.bugs.length + ' · stuck ' + R.harness.stuck + ' · dead buttons ' + R.dead.length; R.status.push(l); console.log(l); save() }
      if (Date.now() - (R._snapAt || 0) > 60e3) { R._snapAt = Date.now(); await p.screenshot({ path: path.join(SHOTS, 'now.png') }).catch(() => {}); if (process.env.RTV) console.log('NOW', sc.layer, '«' + sc.title + '»', 'hit', sc.b.filter(x => x.hit).length, 'idle', idle, 'buổi', R.buoi, 'areaTaps', R.harness.areaTaps || 0) }
      /* not in the life yet (title / resume splash / loading) for 5 min = stuck too: bug, reload, go again (a resume re-opens its save) */
-@@ -127,25 +130,67 @@
+@@ -127,25 +130,70 @@
      /* stuck: no clock progress for STUCK_MS → bug + shot + save, unstick, SAME life continues */
      if (started && Date.now() - lastProg > STUCK_MS) { R.harness.stuck++; const shot = path.join(SHOTS, 'stuck-' + R.harness.stuck + '.png'); await p.screenshot({ path: shot }).catch(() => {});
        const svf = await dumpStuck('stuck-' + R.harness.stuck); const sv = !!svf; /* evidence FIRST, then the unstick ladder */
@@ -176,21 +176,27 @@
 +    /* U1b chip trap: the tap on a choice card opened an unrelated one-button modal (a chip / title seal inside the card, e.g. «Trăng soi rèm ngọc») → remember that point for this card, the next tap picks another point; harness.chipTrap counts, bug row names the chip modal */
 +    if (ok && started && ch.i != null && !ch.x && !CLOSE_RE.test(ch.t)) { await p.waitForTimeout(500); const s6 = await p.evaluate(SCAN).catch(() => null), xy = rt.last && rt.last(), kpOpen = await p.evaluate(() => { const k = document.getElementById('kpop'); return !!(k && !k.hidden && getComputedStyle(k).display !== 'none' && k.getBoundingClientRect().width > 2) }).catch(() => false);
 +      /* #7: the tap opened a hint popup (#kpop «Thang cơ duyên» / glossary): the point was on an odds bar / glossary trigger inside the card → avoid it for this card, bug row at once (a choose-tap never legitimately opens #kpop) */
-+      if (kpOpen && xy) { chipAvoid.set(rkA, (chipAvoid.get(rkA) || []).concat([xy])); R.harness.kpopTrap = (R.harness.kpopTrap || 0) + 1; bug('game', 'tap on option «' + ch.t.slice(0, 30) + '» opened a hint popup (#kpop) — trigger class ' + (xy.cls || '?') + ' sits on the card body', { screen: sc.layer + ' «' + sc.title + '»' }) }
++      const lk = kpOpen ? await h.evaluate(e => !!(e.closest('.kitoff,[class*=kfoc-off],[aria-disabled=true],.locked') || /kitoff|-off\b|locked/.test(typeof e.className === 'string' ? e.className : ''))).catch(() => false) : false;
++      if (kpOpen && lk) { lockedKeys.add(ch.t); R.harness.lockedSkip = (R.harness.lockedSkip || 0) + 1 } /* greyed card: its tap legitimately opens the reason popup */
++      else if (kpOpen && xy) { chipAvoid.set(rkA, (chipAvoid.get(rkA) || []).concat([xy])); R.harness.kpopTrap = (R.harness.kpopTrap || 0) + 1; bug('game', 'tap on option «' + ch.t.slice(0, 30) + '» opened a hint popup (#kpop) — trigger class ' + (xy.cls || '?') + ' sits on the card body', { screen: sc.layer + ' «' + sc.title + '»' }) }
 +      if (s6 && xy && s6.layer !== 'page' && s6.title && s6.title !== sc.title && s6.b.length <= 2 && s6.b.every(b => CLOSE_RE.test(b.t) || b.x)) { const again = chipAvoid.has(rkA); chipAvoid.set(rkA, (chipAvoid.get(rkA) || []).concat([xy])); if (again) { R.harness.chipTrap = (R.harness.chipTrap || 0) + 1; bug('game', 'tap on option «' + ch.t.slice(0, 30) + '» opened chip modal «' + s6.title + '» (chip class ' + (xy.cls || '?') + ' overlaps the card body; 2nd tap on the same card also opened a modal)', { screen: sc.layer + ' «' + sc.title + '»' }) } } } /* 1st occurrence = may be a legit info modal (Sẵn sàng → event card): only avoid the point, no bug row */
++    if (!ok) { const nf = rt.stats().noFreePoint || 0; if (nf > (R._nfp || 0)) { R._nfp = nf; const k = (nfCount.get(rkA) || 0) + 1; nfCount.set(rkA, k); if (k >= 3) { lockedKeys.add(ch.t); R.harness.noFreeSkip = (R.harness.noFreeSkip || 0) + 1 } } } /* #9: 3× no free point on one card → skip it this buổi (log row stays in R.dead = kit hit-area evidence) */
      const rk = sig + '#' + ch.t; repeat.set(rk, (repeat.get(rk) || 0) + (ok ? 1 : 5));
      /* a close (✕ / Lui) tapped for real 3× and the same dialog is still there = button with no effect → bug + shot */
      if (ok && (ch.x || CLOSE_RE.test(ch.t)) && sc.layer !== 'page') { await p.waitForTimeout(600); const s4 = await p.evaluate(SCAN).catch(() => null); if (s4 && s4.layer === sc.layer && s4.title === sc.title && sc.title) { const k = 'nx|' + sc.layer + '|' + sc.title; noFx.set(k, (noFx.get(k) || 0) + 1); if (noFx.get(k) === 3) { const shot = path.join(SHOTS, 'noeffect-' + Date.now() + '.png'); await p.screenshot({ path: shot }).catch(() => {}); R.dead.push({ k: 'NO EFFECT', screen: sc.layer + ' «' + sc.title + '»', label: ch.t, cover: 'tapped 3× for real, dialog stays', shot, at: sec(), S: sc.S }); bug('dead', 'close button has no effect: ' + sc.layer + ' «' + sc.title + '» «' + ch.t + '»', { shot }) } } }
-@@ -154,7 +199,7 @@
+@@ -154,7 +202,10 @@
      await p.waitForTimeout(ok ? 220 : 400);
  
      function choose(sc, started) {
 -      const hb = sc.b.filter(x => x.hit && !LEAVE_RE.test(x.t) && !(started && /^(cfz|coop)$/.test(x.d))); let b = started ? hb.filter(x => (repeat.get(sig + '#' + x.t) || 0) < 4) : hb; /* before the life opens: keep retrying the start / continue button */
++      /* #9: locked cards (their tap only opens the «why locked» popup) and cards with no free tap point are skipped for the rest of this buổi; a person does not keep poking a greyed card */
++      if (R._lkB !== R.buoi) { lockedKeys.clear(); R._lkB = R.buoi }
++      if (lockedKeys.size) sc = { ...sc, b: sc.b.filter(x => x.x || !lockedKeys.has(x.t)) };
 +      const hb = sc.b.filter(x => x.hit && !LEAVE_RE.test(x.t) && !(started && C.coop && /^Ô lưu$/i.test(x.t)) /* U3: ☰ menu leaves the co-op room (HCEP) */ && !(started && C.coop && /ô lưu/i.test(x.t) && (R.harness.oluSkip = (R.harness.oluSkip || 0) + 1, true)) && !(started && /^(cfz|coop)$/.test(x.d))); let b = started ? hb.filter(x => (repeat.get(sig + '#' + x.t) || 0) < 4) : hb; /* before the life opens: keep retrying the start / continue button */
        if (!b.length) b = hb;
        const isExit = x => EXIT_RE.test(x.t) && !(!started && /kiếp mới/i.test(x.t) && sc.layer !== 'page');
        /* back on the title after the life started (room dropped / reload): co-op seat rejoins its room or waits; solo continues its sổ */
-@@ -169,7 +214,7 @@
+@@ -169,7 +220,7 @@
        const hole = b.find(x => x.hole && !EXIT_RE.test(x.t)); if (hole) return hole; /* tutorial: tap what it points at */
        const nav = x => NAV_RE.test(x.t);
        const close = x => x.x || CLOSE_RE.test(x.t);
@@ -199,7 +205,7 @@
        const nonExit = opts.filter(x => !isExit(x));
        const exits = opts.filter(isExit);
        const isPage = sc.layer === 'page' || sc.b.some(x => x.id === 'next');
-@@ -202,11 +247,12 @@
+@@ -202,11 +253,12 @@
    /* life over → read the ending (the game's own over() args) */
    const end = await p.evaluate(() => window.__rtEnd || null).catch(() => null);
    if (end) { const death = !end.alive; R.life = { id: end.id, type: death ? 'death' : 'end', fate: end.fate, death, age: end.age, year: end.year, rank: end.rank, text: end.text } }
@@ -213,7 +219,7 @@
    save();
    console.log('LIFE DONE ' + LIFE + ' ' + (R.life.id) + ' age ' + (R.life.age ?? '?') + ' · buổi ' + R.buoi + ' · taps ' + R.harness.taps + ' · dead buttons ' + R.dead.length + ' · stuck ' + R.harness.stuck + ' · bugs ' + R.bugs.length);
  }
-@@ -214,8 +260,8 @@
+@@ -214,8 +266,8 @@
  /* unstick ladder (all real input): 1 Escape key · 2 tap the top layer ✕ / any close · 3 reload + continue the same save from the title */
  async function unstick(p, rt, sc, lvl) {
    R.harness.unstick.push({ at: sec(), lvl, layer: sc.layer, title: sc.title });
