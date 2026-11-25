@@ -36,12 +36,14 @@ fs.mkdirSync(DIR,{recursive:true});
  /* §60 colour pick: the face file's anchors from the local file (before the CDN upload), pick son đỏ thắm + phấn tử vi + mày thanh đại */
  await p.evaluate(()=>{const f=String((document.querySelector('#kg82 .kfzoom-i>img')||document.querySelector('#kg82 img.kpor')||{}).src||'').split('/').pop().split('?')[0];window.__mkf=f});
  try{const f=await p.evaluate(()=>window.__mkf);const g=await p.evaluate(f=>MK_FIT.face(f),f);if(g&&fs.existsSync(`img/mk-fit/${g}.json`))await p.evaluate(([g,j])=>{MK_FIT.g[g]=JSON.parse(j);MK_FIT.ld[g]=1;TOIL.prevUI&&TOIL.prevUI()},[g,fs.readFileSync(`img/mk-fit/${g}.json`,'utf8')])}catch(e){}
- for(const [r,k] of [['pre-dep','daohoa']])await p.$eval(`#kg82 [data-kswtr="${r}"][data-kswti="${k}"]`,e=>e.click());/* DOM click: a loaded machine paints ~2 fps */
+ /* presets and colours are filtered by what she OWNS (lxF): tap Đào hoa if it is offered, else the first offered preset, else the first colour of each row; real taps */
+ {const sels=['#kg82 [data-kswtr="pre-dep"][data-kswti="daohoa"]','#kg82 [data-kswtr^="pre-"]'];let pick=null;for(const q of sels)if(await p.$(q)){pick=q;break}
+  if(pick)await rt.tap(pick,{screen:'mk-e2e',label:'preset',wait:4000});else for(const r of ['mat','ma','son','may'])if(await p.$(`#kg82 [data-kswtr="${r}"]`))await rt.tap(`#kg82 [data-kswtr="${r}"]`,{screen:'mk-e2e',label:'colour '+r,wait:4000});out.pickedPreset=pick||'colours'}
  await p.waitForFunction(()=>[...document.querySelectorAll('#kg82 img.kmkc')].every(i=>!/^data:image\/gif/.test(i.src)),null,{timeout:60000}).catch(()=>{});await p.waitForTimeout(500);
  out.palette=await p.evaluate(()=>({rows:document.querySelectorAll('#kg82 .kswt-r').length,sw:document.querySelectorAll('#kg82 .kswt-i').length,on:[...document.querySelectorAll('#kg82 .kswt-i.on')].map(e=>e.title),layer:document.querySelectorAll('#kg82 img.kmkc').length,file:window.__mkf,
   clip:[...document.querySelectorAll('#kg82 .kswt-i small')].some(e=>e.scrollWidth>e.clientWidth+1),hov:(()=>{const d=document.querySelector('#kg82');return d?d.scrollWidth>d.clientWidth+1:false})()}));
  await p.screenshot({path:`${DIR}/toil-${tag}-2b-colour.jpg`,quality:70});
- await p.$eval('#toilgo',e=>e.click());await p.waitForFunction(()=>{const i=kg82Img('chai-bg');return i.complete&&i.naturalWidth},null,{timeout:90000}).catch(()=>{});await p.waitForTimeout(2500);
+ await rt.tap('#toilgo',{screen:'mk-e2e',label:'Vào soi gương',wait:4000});await p.waitForFunction(()=>{const i=kg82Img('chai-bg');return i.complete&&i.naturalWidth},null,{timeout:90000}).catch(()=>{});await p.waitForTimeout(2500);
  /* 3. kẻ mày: drag along each guide */
  const geo=await p.evaluate(()=>({b:TOIL.geo.brows()}));
  for(const L of geo.b){await p.mouse.move(L[0].x,L[0].y);await p.mouse.down();for(const q of L.filter((_,i)=>i%2===0||i===L.length-1))await p.mouse.move(q.x,q.y,{steps:2});await p.mouse.up()}
@@ -58,7 +60,7 @@ fs.mkdirSync(DIR,{recursive:true});
  out.rec=await p.evaluate(()=>S.toilette);
  /* reveal e2e: real minigame -> real preset -> the reveal appears; the close card names the preset; tap skips */
  /* main's kit scenes now end with the KIT 81 button: tap any .kmend that stands in front of the reveal */
- for(let i=0;i<60&&!(await p.$('.ktrv'));i++){await p.evaluate(()=>{const b=document.querySelector('.kmov .kmend,.kmend');if(b)b.click()});await p.waitForTimeout(400)}
+ for(let i=0;i<60&&!(await p.$('.ktrv'));i++){if(await p.$('.kmov .kmend,.kmend'))await rt.tap('.kmov .kmend,.kmend',{screen:'mk-e2e',label:'kmend',wait:2000});await p.waitForTimeout(400)}
  await p.waitForSelector('.ktrv',{timeout:60000});out.revShown=true;
  await p.waitForTimeout(1500);await p.screenshot({path:`${DIR}/e2e-${tag}-rev1.jpg`,quality:60});
  await rt.tap('.ktrv-ov',{screen:'mk-e2e',label:'reveal skip',wait:4000});await p.waitForTimeout(2500);
