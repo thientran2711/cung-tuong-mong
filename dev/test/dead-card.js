@@ -3,6 +3,7 @@
    at bạc 0 and ranks 0/3/6, and counts cards whose every option is greyed (c.off / poor bạc / lk() / lock).
    Part 2: j68c-sea-023 / j68c-serv-022 at bạc 2 keep ≥1 option she can press; Part 3: the jdeadcard net — a synthetic all-greyed card shows
    the kit «Lui» button, pressing it closes the card (no soft-lock). Exit 1 on any failure.
+   Parts 2/3 open the card as a player tap would (DQ.user, jdayq day-queue 25/11: otherwise a fresh life's dawn / activity holds the card unpainted).
    usage: node dev/test/dead-card.js <page url> [out.json]   (serve the repo root, e.g. python3 -m http.server) */
 const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT]=process.argv;
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:900,height:900}});
@@ -27,10 +28,10 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT]=
   return{n:res.length,built:Object.keys(built).length,pend:Object.keys(PEND).length,e68:E68.length,ev:EV.length,res}});
  console.log(JSON.stringify({n:R.n,built:R.built,pend:R.pend,e68:R.e68,ev:R.ev}));for(const r of R.res)console.log(`| ${r.k} | ${r.src} | ${r.ranks} | ${r.why} |`);
  let fail=R.n;
- const P2=await p.evaluate(()=>{window.__e68off=1;const out={};S.bac=2;S.month=12;for(const id of ['j68c-sea-023','j68c-serv-022']){const s=E68I['c:'+id];let d=null;for(let t=0;t<6&&!d;t++){let pp=null;try{pp=s.pp()}catch(e){}if(pp){pp.vi=0;d=mkP('e68c:'+id,pp)}}
-  if(!d){out[id]='not cast';continue}Q.length=0;Q.push({t:'Thời tiết',h:d.t,opts:d.o,pid:d.pid,pp:d.pp});showModal();const B=[...document.querySelectorAll('#modal .opts button[data-m]')];out[id]=B.filter(b=>!b.disabled).length+'/'+B.length;Q.length=0;showModal()}return out});
+ const P2=await p.evaluate(()=>{window.__e68off=1;const SM=()=>{const D=typeof DQ!=='undefined'?DQ:null;if(D)D.user=(D.user||0)+1;try{showModal()}finally{if(D)D.user--}};const out={};S.bac=2;S.month=12;for(const id of ['j68c-sea-023','j68c-serv-022']){const s=E68I['c:'+id];let d=null;for(let t=0;t<6&&!d;t++){let pp=null;try{pp=s.pp()}catch(e){}if(pp){pp.vi=0;d=mkP('e68c:'+id,pp)}}
+  if(!d){out[id]='not cast';continue}Q.length=0;Q.push({t:'Thời tiết',h:d.t,opts:d.o,pid:d.pid,pp:d.pp});SM();const B=[...document.querySelectorAll('#modal .opts button[data-m]')];out[id]=B.filter(b=>!b.disabled).length+'/'+B.length;Q.length=0;SM()}return out});
  for(const [k,v] of Object.entries(P2)){console.log('part2',k,'pressable',v);if(v!=='not cast'&&/^0\//.test(v))fail++}
- const P3=await p.evaluate(()=>{S.bac=2;Q.length=0;Q.push({t:'Thử',h:'<p>thử</p>',opts:[{n:'Trả bạc',fx:{bac:-60}},{n:'Trả bạc nữa',fx:{bac:-60}}]});showModal();
+ const P3=await p.evaluate(()=>{const SM=()=>{const D=typeof DQ!=='undefined'?DQ:null;if(D)D.user=(D.user||0)+1;try{showModal()}finally{if(D)D.user--}};S.bac=2;Q.length=0;Q.push({t:'Thử',h:'<p>thử</p>',opts:[{n:'Trả bạc',fx:{bac:-60}},{n:'Trả bạc nữa',fx:{bac:-60}}]});SM();
   const c=document.getElementById('mclose');const r={lui:c?c.textContent:null,net:(window.__deadCards||[]).length};if(c)c.click();r.after=Q.length;r.hidden=document.getElementById('modal').hidden;return r});
  console.log('part3',JSON.stringify(P3));if(P3.lui!=='Lui'||P3.after!==0)fail++;
  if(OUT)fs.writeFileSync(OUT,JSON.stringify(Object.assign(R,{P2,P3}),null,1));console.log(fail?'DEAD-CARD FAIL '+fail:'DEAD-CARD PASS');await b.close();process.exit(fail?1:0)})();
