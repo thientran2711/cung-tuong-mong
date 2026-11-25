@@ -6,15 +6,15 @@
                 place notices with their buttons), 15 read → total 20 / unread 5 → reload → the same 20 ids in the same order, the same 5 unread, the
                 box badge «5», the buttons back (go), a notice's panel opens.
      held       a held optional card (j68 EVHOLD, she has not seen it) waits → reload → still waiting, and shown at a later buổi as before.
-     nl-0s      title «Bắt đầu kiếp mới» → «Thân phận kiếp này» → «Nhận thân phận» → reload at 0 ms → «Tiếp tục kiếp này» with her name, no identity card
+     nl-0s      title «Bắt đầu kiếp mới» (+ one code card waiting behind the identity card, the robot's life) → «Thân phận kiếp này» → «Nhận thân phận» → reload at 0 ms → «Tiếp tục kiếp này» with her name, no identity card
                 again, Danh / Sủng / Bạc (every top-bar number) exactly as on screen at the tap.
      nl-card    reload while the identity card is open → «Tiếp tục kiếp này» → the SAME card again (same name, same roll) → «Nhận thân phận» works.
      nl-death   a life dies → «Chuyển kiếp» → the new life's card → «Nhận thân phận» → reload at 0 ms → «Tiếp tục kiếp này» (the dead life's slot was empty).
      nl-4s      after «Nhận thân phận» she answers what comes for 4 s → reload → every top-bar number + date exactly as on screen.
      drift      a seeded life, taps over the new year with one act after each: after every moment the sổ equals the screen (Danh, Sủng, Bạc, Đức, Tài, Sắc,
                 Tâm cơ, Sức, Thái hậu, date); reload 0 s and 4 s after the last tap → the same numbers.
-   env SUL_ONLY=tinbao,nl-0s · SUL_MUTATE=nt (the sổ loses the notice list) | evh (loses the held cards) | nl (the life-start write is delayed: no
-   at-once write at «Nhận thân phận») — a MUTATE run must FAIL.
+   env SUL_ONLY=tinbao,nl-0s · SUL_MUTATE=nt (the sổ loses the notice list) | evh (loses the held cards) | nl (the life-start write is delayed: none while
+   the identity card is open, none at once at «Nhận thân phận») — a MUTATE run must FAIL.
    usage: node dev/test/save-unseen-lists.js [page=index.html] [devices=fold,ipadAir] [seed=1]   (serves the repo root = the BUILT site)
    exit 0 = every case PASS. */
 const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs');
@@ -29,7 +29,8 @@ const HUD=`(()=>[...document.querySelectorAll('#kstrow .kst')].map(e=>e.dataset.
 /* page-side mutations (applied after every page load) */
 const MUTJS={nt:`(()=>{const s0=ser;ser=function(){const d=s0.apply(this,arguments);if(d)delete d.nt;return d}})()`,
  evh:`(()=>{const s0=ser;ser=function(){const d=s0.apply(this,arguments);if(d)delete d.evh;return d}})()`,
- nl:`(()=>{window.jqSaveNow=function(){}})()`};
+ /* nl: the life-start write is delayed — nothing written while the identity card is open (yet the buổi marked as written), no at-once write at «Nhận thân phận» */
+ nl:`(()=>{window.jqSaveNow=function(){};const s0=save;save=function(){if(typeof NLP!=='undefined'&&NLP&&S&&!S.dead){JQ.k=[S.year,S.month,S.tuan,S.buoi||0,S.name].join('.');JQ.s=S;return}return s0.apply(this,arguments)}})()`};
 async function play(b,dev,url,seed,fn){const ctx=await D.newDeviceContext(b,dev,{serviceWorkers:'block'});await ctx.addInitScript(seedInit,seed);
  await ctx.route(/\.(webp|png|jpg|jpeg|mp3|ogg|m4a|mp4|webm)(\?|$)/,r=>r.abort());
  const p=await ctx.newPage();p.setDefaultTimeout(240000);const pe=[];p.on('pageerror',e=>pe.push(e.message.slice(0,160)));
@@ -40,7 +41,13 @@ async function play(b,dev,url,seed,fn){const ctx=await D.newDeviceContext(b,dev,
 async function reloadTitle(p,open){await p.reload({waitUntil:'domcontentloaded'});await open();
  return p.evaluate(()=>{const s=document.getElementById('slots');const b=s.querySelector('button[data-load="1"]');return{cont:!!(b&&/Tiếp tục kiếp này/.test(b.textContent)),slot:(s.querySelector('.slot')||{}).innerText||''}})}
 async function cont(p){await p.evaluate(()=>document.querySelector('#slots button[data-load="1"]').click());await p.waitForTimeout(2500)}
-const titleNew=async p=>{await p.evaluate(()=>document.querySelector('#slots button[data-new="1"]').click());
+/* the new life's origin (SUL_NLO, default td «Con gái tội thần»: Tiền truyện panels). The robot M4 life had a CODE card waiting behind the identity
+   card when she tapped «Nhận thân phận» (an opening visitor «Có người đến»: its options run code, it cannot be written down — random, a few lives in
+   ten): on LIVE that card held the first write of the whole life (jqsave marked the buổi as written by the save j52 had dropped). The case puts ONE
+   such card behind the identity card (a visitor with a code option, as the game makes them) so the moment is the robot's every run. */
+const NLO=process.env.SUL_NLO||'td';
+const codeCard=p=>p.evaluate(()=>{Q.push({t:'Có người đến',who:null,h:'<p>Một cung nữ đứng ngoài cửa xin vào.</p>',opts:[{n:'Cho vào',fx:{},go:()=>{log('Cung nữ vào thưa chuyện.')}},{n:'Bảo về',fx:{},go:()=>{}}]})});
+const titleNew=async p=>{await p.evaluate(o=>{window.__forceOrigin=o;document.querySelector('#slots button[data-new="1"]').click()},NLO);
  await p.waitForFunction(()=>typeof NLP!=='undefined'&&NLP&&Q.some(m=>m.nl),null,{timeout:90000});await p.waitForTimeout(400)};
 const acceptTap=p=>p.evaluate(()=>{const b=document.querySelector('button[data-nl="ok"]');if(b&&b.offsetParent)b.click();else nlAccept(false)});
 const snap=p=>p.evaluate(([v,h])=>({v:eval(v)(S),hud:eval(h)(),nl:!!(typeof NLP!=='undefined'&&NLP),card:Q.some(m=>m.nl)}),[VEC,HUD]);
@@ -82,18 +89,18 @@ async function nl0(b,dev,url,seed,death){return play(b,dev,url,seed,async(p,open
   for(let i=0;i<80;i++){const st=await p.evaluate(()=>{if(typeof NLP!=='undefined'&&NLP&&Q.some(m=>m.nl))return 'card';if(Q.length){const m=Q[0];const o=m.opts||[];const j=o.findIndex(x=>/kiếp mới|luân hồi|đầu thai|chuyển kiếp/i.test(String(x.n||'')));try{if(o.length)chooseM(j<0?0:j);else closeModal()}catch(e){Q.shift()}return 'q'}
    const bt=[...document.querySelectorAll('#modal button,#title button')].find(x=>x.offsetParent&&/kiếp mới|luân hồi|bắt đầu|chuyển kiếp/i.test(x.textContent));if(bt){bt.click();return 'b'}return 'none'});if(st==='card')break;await p.waitForTimeout(300)}}
  else await titleNew(p);
- const slotAtCard=await p.evaluate(()=>!!localStorage.getItem('hclh-save-v2-1'));
- await acceptTap(p);const s=await snap(p);/* 0 ms: reload at once */
+ await codeCard(p);const slotAtCard=await p.evaluate(()=>!!localStorage.getItem('hclh-save-v2-1'));
+ await acceptTap(p);const s=await snap(p);/* 0 ms: reload at once */const code=await p.evaluate(()=>Q.filter(m=>typeof jqSaveable==='function'?!jqSaveable(m):!!(m.opts&&!m.pid)).length);if(process.env.SUL_DEBUG)console.log(await p.evaluate(()=>JSON.stringify({Q:Q.map(m=>[String(m.t).slice(0,30),typeof jqSaveable==="function"?jqSaveable(m):"-",!!m.onClose]),jq:typeof JQ!=="undefined"?JQ.stat:0,org:S.origin.k})));
  const t=await reloadTitle(p,open);let a=null;if(t.cont){await cont(p);a=await snap(p)}
  const pass=t.cont&&a&&!a.card&&!a.nl&&a.v===s.v&&a.hud===s.hud&&!pe.length;
- return{pass,line:`${death?'old life '+old+' died · ':''}slot at the card: ${slotAtCard?'yes':'empty'} · at the tap ${s.v} · reload 0 ms → title ${t.cont?'«Tiếp tục kiếp này»':'NO «Tiếp tục» ('+t.slot.replace(/\s+/g,' ').slice(0,60)+')'}${a?` → ${a.card?'IDENTITY CARD AGAIN · ':''}${a.v===s.v?'same numbers':'DRIFT '+a.v}${a.hud===s.hud?'':' · HUD '+a.hud}`:''}${pe.length?' · pageerror '+pe[0]:''}`}})}
+ return{pass,line:`${death?'old life '+old+' died · ':''}slot at the card: ${slotAtCard?'yes':'empty'} · ${code} opening code card(s) open · at the tap ${s.v} · reload 0 ms → title ${t.cont?'«Tiếp tục kiếp này»':'NO «Tiếp tục» ('+t.slot.replace(/\s+/g,' ').slice(0,60)+')'}${a?` → ${a.card?'IDENTITY CARD AGAIN · ':''}${a.v===s.v?'same numbers':'DRIFT '+a.v}${a.hud===s.hud?'':' · HUD '+a.hud}`:''}${pe.length?' · pageerror '+pe[0]:''}`}})}
 async function nlCardCase(b,dev,url,seed){return play(b,dev,url,seed,async(p,open,pe)=>{await open();await titleNew(p);
  const s=await p.evaluate(()=>({name:S.name,seed:NLP.seed}));const t=await reloadTitle(p,open);let a=null;
  if(t.cont){await cont(p);a=await p.evaluate(()=>({name:S.name,nl:!!NLP,seed:NLP&&NLP.seed,card:Q.some(m=>m.nl),shown:!document.getElementById('modal').hidden&&!!document.querySelector('#modal button[data-nl="ok"]')}));
   await acceptTap(p);await p.waitForTimeout(500);a.after=await p.evaluate(()=>({nl:!!NLP,card:Q.some(m=>m.nl)}))}
  const pass=t.cont&&a&&a.name===s.name&&a.nl&&a.seed===s.seed&&a.card&&a.shown&&!a.after.nl&&!a.after.card&&!pe.length;
  return{pass,line:`card open: ${s.name} · reload → title ${t.cont?'«Tiếp tục kiếp này»':'NO «Tiếp tục»'}${a?` → ${a.card&&a.shown?'the same card':'NO CARD'} (${a.name}${a.seed===s.seed?', same roll':', OTHER ROLL'}) → Nhận thân phận ${!a.after.nl&&!a.after.card?'ok':'STUCK'}`:''}${pe.length?' · pageerror '+pe[0]:''}`}})}
-async function nl4(b,dev,url,seed){return play(b,dev,url,seed,async(p,open,pe)=>{await open();await titleNew(p);await acceptTap(p);
+async function nl4(b,dev,url,seed){return play(b,dev,url,seed,async(p,open,pe)=>{await open();await titleNew(p);await codeCard(p);await acceptTap(p);
  await p.evaluate(async()=>{const t0=Date.now();while(Date.now()-t0<4000){await __sbr.settle1();await new Promise(r=>setTimeout(r,200))}});const s=await snap(p);
  const t=await reloadTitle(p,open);let a=null;if(t.cont){await cont(p);a=await snap(p)}
  const pass=t.cont&&a&&!a.card&&a.v===s.v&&a.hud===s.hud&&!pe.length;
