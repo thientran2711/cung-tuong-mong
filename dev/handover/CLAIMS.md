@@ -1618,6 +1618,7 @@ selection-scene r7 (successor of SELSCENE-16; co-op 4 failures root cause) | rev
 | BIG REVIEW tainghe-open-fix 993725c4 (opus) | review/tainghe-open-fix | MAIN 132 | session_01V1ZZH2yv2CZAtHKPPbvjSU | RUNNING | 25/11 03:06Z |
 | BIG REVIEW flight-modal-deadlock 6b931401 (opus; briefs/F-review-flight-modal-deadlock.md) | review/flight-modal-deadlock-r | F | session_01UV1SzkaDEN9mF5gfvUCGBG | PASS 4da55ce8 → LAND READY (archived) | 25/11 04:55Z |
 | BIG REVIEW flight-modal-deadlock 6b931401 (opus; briefs/F-review-flight-modal-deadlock.md) | review/flight-modal-deadlock-r | F | session_01UV1SzkaDEN9mF5gfvUCGBG | RUNNING | 25/11 03:50Z |
+| BIG REVIEW flight-modal-deadlock 6b931401 (opus; briefs/F-review-flight-modal-deadlock.md) | review/flight-modal-deadlock-r | F | | session_01UV1SzkaDEN9mF5gfvUCGBG | RUNNING | 25/11 03:50Z |
 | FLIGHT ROBOT A-SOLO (sonnet; briefs/F-flight-robot.md; arm A 4232709a) | dev/handover/robot/flight-A-solo-*; reports/flight-robot.md | F | (opening) | RUNNING | 25/11 02:22Z |
 | FLIGHT ROBOT A-COOP (sonnet; briefs/F-flight-robot.md; arm A 4232709a) | dev/handover/robot/flight-A-coop-* | F | (opening) | RUNNING | 25/11 02:22Z |
 | FLIGHT ROBOT B-SOLO (sonnet; briefs/F-flight-robot.md; arm B 4232709a+fe3cb80c local) | dev/handover/robot/flight-B-solo-* | F | (opening) | RUNNING | 25/11 02:22Z |
