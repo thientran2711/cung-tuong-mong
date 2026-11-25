@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ.","b":"fa8da73cecdc","h":[{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."}]};
+window.CTM_BI={"s":"5e013076+","t":"2026-11-25T20:28Z","c":"STACK LAND coop-rebirth-stuck: merge 9fea1332 onto SANGBUOI r4 3762da08 (jdayq dqOn + dqNextHeal beside r4 dqNextSync; tests); rebuilt","b":"313d4a0043db","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -29735,7 +29735,8 @@ function kitReqSplit(t){t=String(t||"").trim();let m=t.match(/^([^(\d:]+?)(?::\s
  m=t.match(/^([^:(]+?):\s+([\s\S]+)$/);if(m)return [m[1],m[2]];m=t.match(/^([^(]+?)\s*\(([\s\S]+)\)$/);if(m)return [m[1],m[2]];return [t,""]}
 function kitReqRows(list){return kitRows((list||[]).filter(Boolean).map(([ok,t])=>{const [l,v]=kitReqSplit(t);return [l,`${ok?"✓":"✗"} ${v||(ok?"đủ":"chưa đủ")}`,ok?"g":"r"]}))}
 /* tiers / ladders: [{k:"30–59", n:"hại nhỏ", d:"Tung tin đồn, Dò la", on:true, c:"r"}] */
-function kitTiers(list,o){o=o||{};const N=list.length;return `<div class="ktiers">${list.map((t,i)=>`<div class="ktier${t.on?" on":""}" style="--lv:${(i+1)/N}"><span class="ktk">${t.k}</span><span class="ktb"><b class="${t.c||""}">${t.n}</b>${t.d?`<small>${t.d}</small>`:""}</span>${t.on?`<span class="kchip n">${o.here||"đang ở"}</span>`:""}</div>`).join("")}</div>`}
+function kitTiers(list,o){o=o||{};const N=list.length;/* tainghe-info: a label longer than the 5.2rem column («Bậc 1 · Nhập môn · 10 phần») stacks the row: label (+ «đang ở») on line 1, the text under it; never drawn over the text */
+ const stk=o.stack!=null?o.stack:list.some(t=>String(t.k||"").replace(/<[^>]+>/g,"").length>9);return `<div class="ktiers${stk?" kstk":""}">${list.map((t,i)=>`<div class="ktier${t.on?" on":""}" style="--lv:${(i+1)/N}"><span class="ktk">${t.k}</span><span class="ktb"><b class="${t.c||""}">${t.n}</b>${t.d?`<small>${t.d}</small>`:""}</span>${t.on?`<span class="kchip n">${o.here||"đang ở"}</span>`:""}</div>`).join("")}</div>`}
 
 /* ---------- facts: one fact per row (never a run-on paragraph) ---------- */
 /* split an HTML run into sentences, keeping inline tags balanced across the cut */
@@ -30119,6 +30120,7 @@ html body #modal:not(.pcm) .dlg.kpanel .kpb.kpshort .kpmain{align-items:center}
 /* tiers */
 .ktiers{display:flex;flex-direction:column;gap:4px}
 .ktier{display:grid;grid-template-columns:5.2rem minmax(0,1fr) auto;gap:8px;align-items:center;padding:5px 8px;border:1px solid var(--k-hair);border-radius:var(--k-rad);background:linear-gradient(90deg,rgba(194,59,34,calc(var(--lv)*.16)),transparent 70%),var(--k-card)}
+.ktiers.kstk .ktier{grid-template-columns:minmax(0,1fr) auto;row-gap:2px}.ktiers.kstk .ktk{white-space:normal;grid-column:1;grid-row:1}.ktiers.kstk .ktier>.kchip{grid-column:2;grid-row:1}.ktiers.kstk .ktb{grid-column:1/-1;grid-row:2}
 .ktier.on{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
 .ktk{font-weight:700;font-size:.8rem;color:var(--ink);white-space:nowrap}.ktb{display:flex;flex-direction:column;min-width:0}.ktb b{font-size:.86rem}.ktb b.r{color:var(--bad)}.ktb b.g{color:var(--good)}.ktb small{font-size:.74rem;color:var(--dim);overflow-wrap:anywhere}
 /* cards inside panels (evidence, threat) */
@@ -30948,6 +30950,11 @@ function kitSkillArt(kind,k,name){const key=`${kind}-${k}`;const have=(KIT_INFOM
 function kitSteps(l,max,attr,word){max=max||5;word=word||"Bậc";const seg=Array.from({length:max},(_,i)=>`<i class="${i<l?"on":""}"></i>`).join("");
  return `<${attr?"button type=\"button\"":"span"} class="ksteps" ${attr||""} aria-label="${word} ${l} trên ${max}"><span class="kstepd">${seg}</span><b>${word} ${l}/${max}</b></${attr?"button":"span"}>`}
 function kitBar(label,cur,need){return `<div class="kskp"><span>${label}</span><span class="kskb"><u style="width:${need?Math.min(100,Math.round(cur/need*100)):0}%"></u></span><b>${cur}/${need}</b></div>`}
+/* tainghe-info (owner OD 25/11 ~23:48Z «Bấm vào dung nghi thì không ra gì hết … không biết bấm vô cái gì mở ra cái khung này»): the card's info
+   opens from ONE visible labelled target = the NAME, drawn as the kit info link (ⓘ + dotted underline, the §kitInfo look of «ⓘ Cách học»).
+   o.info (or the old o.stepsAttr) = the attribute that opens it (e.g. data-v85tab="cam"). The «Bậc l/max» steps are never a hidden button. */
+function kitSkillName(o){const a=o.info||o.stepsAttr||"";const n=o.name||"";if(!a||!n)return `<b>${n}</b>`;
+ return `<button type="button" class="kskn" ${a} aria-label="Xem luật ${kpPlain?kpPlain(n):n}"><i class="kskni" aria-hidden="true">ⓘ</i><b>${n}</b></button>`}
 function kitSkillCard(o){o=o||{};const l=o.level||0,max=o.max!=null?o.max:((o.levels||[]).length||5);
  const pr=Array.isArray(o.prog)?o.prog:[o.prog||0,o.need||0];const [cur,need]=pr;
  const img=o.img!=null?o.img:(o.k?kitSkillArt(o.kind||"art",o.k,o.name):"");
@@ -30957,7 +30964,7 @@ function kitSkillCard(o){o=o||{};const l=o.level||0,max=o.max!=null?o.max:((o.le
  /* chapter-card (owner 21/11 marks #26/#27): o.big = the BIG card of the Mệnh truyện sub-tabs: the picture at the big Hành sự act-card size (3:4, --kbw),
    title/steps/o.body (kit rows) in the column right of it. No big picture = the small one, as before. */
  return `<div class="kskill${o.can===false?" kdone":""}${o.big?" kbig":""}" data-skill="${o.kind||"art"}-${o.k||""}"><div class="kskh2">${img?kitSceneArt(img,o.name||"",o.big?{shape:"tall",cap:false,cls:"kbigart"}:{shape:"tall",size:"thumb",cap:false}):""}`+
-  `<div class="kskinfo">${o.kicker?`<small class="kskk">${o.kicker}</small>`:""}<div class="kskh"><b>${o.name||""}</b>${max?kitSteps(l,max,o.stepsAttr,o.word):""}</div>${o.desc?`<div class="kskdo">${o.desc}</div>`:""}${bar}`+
+  `<div class="kskinfo">${o.kicker?`<small class="kskk">${o.kicker}</small>`:""}<div class="kskh">${kitSkillName(o)}${max?kitSteps(l,max,"",o.word):""}</div>${o.desc?`<div class="kskdo">${o.desc}</div>`:""}${bar}`+
   `${max&&l<max&&next?`<span class="kskx"><span class="kchip n">${o.word||"Bậc"} ${l+1} mở</span> ${next}</span>`:""}${o.body||""}</div></div>`+
   `${acts.length?`<div class="kskacts pcb">${acts.map(a=>`<div class="kpanec">${a}</div>`).join("")}</div>`:""}${o.note?`<div class="kpnote">${o.note}</div>`:""}</div>`}
 /* kitEmpty(title,lines,o) = THE empty state (owner 21/11 "Nhìn cái trang cho nó đỡ trống"; the form of «Ta chưa có con»): the topic's painted picture LEFT
@@ -30989,6 +30996,7 @@ function kitEmptyTab(title,lines,o,acts){return kitEmpty(title,lines,o)+(acts?`<
 .kskdo{font-size:.82rem;color:var(--dim);line-height:1.35}.kskx{display:flex;flex-wrap:wrap;align-items:center;gap:4px;font-size:.8rem}
 .kskp{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;font-size:.78rem;color:var(--k-lab)}.kskp b{color:var(--ink)}
 .kskb{height:8px;border-radius:5px;background:#eadfca;overflow:hidden}.kskb u{display:block;height:100%;background:linear-gradient(90deg,#c9a24a,#8f5f0c)}
+.kskn{display:inline-flex;align-items:baseline;gap:.3em;border:0;background:none;padding:2px 0;margin:0;font:inherit;color:var(--gold);cursor:pointer;text-align:left;min-height:32px}.kskn>b{border-bottom:1px dotted currentColor}.kskni{font-style:normal;font-size:.9rem;font-weight:600}
 .ksteps{display:inline-flex;align-items:center;gap:6px;border:0;background:none;padding:0;font:inherit;color:inherit;cursor:default}button.ksteps{cursor:pointer}
 .kstepd{display:inline-flex;gap:3px}.kstepd i{width:14px;height:8px;border-radius:4px;background:var(--k-hair,#e6d3ac);box-shadow:inset 0 0 0 1px #5a3a2018}.kstepd i.on{background:var(--gold,#b8862b)}
 .ksteps b{font-size:.78rem;color:var(--dim);font-weight:600;white-space:nowrap}
@@ -56622,7 +56630,7 @@ function ktWorksHTML(){if(typeof wkKindsOf!=="function"||typeof WK!=="object")re
  const L=ARTS.map(a=>{const l=S.arts[a.k],ks=wkKindsOf(a.k);if(!ks.length)return null;const img=kitSkillArt("art",a.k,a.n)||(typeof AIMG==="object"&&AIMG[a.k]?AIMG[a.k]:"");
   const acts=l>=5?[pbtn(`data-wk="prac" data-art="${a.k}"`,"Tự học, làm tác phẩm",`tốn: Sức -${BAL.artLes.prac}, 2 khắc · thành: một tác phẩm, ${wkOddsTxt(S,ks[0],0)}`,why)]:[];
   const kinds=ks.map(k=>`<span class="kchip n">${WK[k].w}${WK[k].per?" · để 1 tuần":""}</span>`).join(" ");
-  return{kind:"wk",k:a.k,name:a.n,kicker:artNm(l),level:l,prog:[artPts(S,a.k),100],bar:l>=5?false:undefined,desc:`${kinds} <span class="kchip g">phẩm +${wkLvQ(S,a.k)}</span><br>${wkTierTxt(S,ks[0],0)}`,next:"",acts,img,can:!!(acts.length&&!why)}}).filter(Boolean);
+  return{kind:"wk",k:a.k,name:a.n,kicker:artNm(l),level:l,prog:[artPts(S,a.k),100],bar:l>=5?false:undefined,desc:`${kinds} <span class="kchip g">phẩm +${wkLvQ(S,a.k)}</span><br>${wkTierTxt(S,ks[0],0)}`,next:"",acts,img,info:`data-v85tab="${a.k}"`,can:!!(acts.length&&!why)}}).filter(Boolean);
  L.sort((a,b)=>(b.can-a.can)||(b.level-a.level));return L.map(kitSkillCard).join("")}
 KIT_GLOSS["Tác phẩm"]="Mỗi buổi học hay tự học mà tự tay chơi trò tài nghệ thì ra một tác phẩm (Học nhanh: không ra thành phẩm), cất vào rương để dâng, tặng, bán, bày ở yến tiệc. Phẩm = phần chơi trò tài nghệ (từ 0 đến 10) + chút bậc tài nghệ + vật liệu. Đồ mua bằng bạc vẫn quý hơn. Môn đạt "+BAL.art.nm[5]+" thì tự học là ra tác phẩm ngay.";
 artTabHTML=function(){return ktArtHTML()};
@@ -75986,7 +75994,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
 (function(){if(typeof ktWorksHTML!=="function")return;const w0=ktWorksHTML;ktWorksHTML=function(){let h=w0.apply(this,arguments);try{const why=whyTime(BAL.tds.pracK)||(S.suc<BAL.tds.pracMin?`Sức dưới ${BAL.tds.pracMin}`:"");
   const C=VIR.filter(V=>TDS_KIND[V.k]).map(V=>{const k=V.k,l=virLv(S,k),kind=TDS_KIND[k],K=WK[kind],kn=rcpKnown()[kind].length;
    const acts=l>=5?[pbtn(`data-tdsprac="${k}"`,"Tự học, làm đồ",`tốn: Sức -${BAL.tds.pracSuc}, ${BAL.tds.pracK} khắc · thành: một món ${K.w.toLowerCase()}, ${wkOddsTxt(S,kind,0)}`,why)]:[];
-   return{kind:"wk",k,name:`${V.n} · ${V.full}`,level:l,prog:S.virp[k],need:l+2,desc:`<span class="kchip n">lối đã học ${kn}/${RCP_ST[kind].length}</span> <span class="kchip n">${K.w}${K.fin?" · "+wkFinTxt(K):""}</span> <span class="kchip g">phẩm +${wkLvQ(S,k)}</span><br>${wkOddsTxt(S,kind,0)}`,next:"",acts,img:kitSkillArt("vir",k,V.n),can:!!(acts.length&&!why)}});
+   return{kind:"wk",k,name:`${V.n} · ${V.full}`,level:l,prog:S.virp[k],need:l+2,desc:`<span class="kchip n">lối đã học ${kn}/${RCP_ST[kind].length}</span> <span class="kchip n">${K.w}${K.fin?" · "+wkFinTxt(K):""}</span> <span class="kchip g">phẩm +${wkLvQ(S,k)}</span><br>${wkOddsTxt(S,kind,0)}`,next:"",acts,img:kitSkillArt("vir",k,V.n),info:`data-v85tab="${k}"`,can:!!(acts.length&&!why)}});
   const tail=h.indexOf(`data-skill="wk-taste"`);const cards=C.map(kitSkillCard).join("");
   if(tail>0){const i=h.lastIndexOf("<div",tail);h=h.slice(0,i)+cards+h.slice(i)}else h+=cards}catch(e){console.error("tds works",e)}return h}})();
 if(typeof KIT_GLOSS==="object")KIT_GLOSS["Lối Tứ đức"]="Mỗi môn Tứ đức làm ra một loại đồ (Công: đồ kim chỉ; Dung: phấn son tự chế; Ngôn: thư từ, lời chúc; Hạnh: vật cầu phúc, việc thiện), chia bốn lối. Lối đầu biết sẵn; bậc 2, 4, 5 mỗi bậc tự mở thêm một lối; thầy dạy hay sách phổ mở sớm hơn. Mỗi buổi học ra một món, đem tặng, dâng, bán như tác phẩm tài nghệ; quà đúng lối người nhận thích mới được trọn.";
@@ -98912,7 +98920,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="fa8da73cecdc";window.CTM_BUILD=BUILD;
+const BUILD="313d4a0043db";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
