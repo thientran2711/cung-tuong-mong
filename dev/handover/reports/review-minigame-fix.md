@@ -71,3 +71,6 @@ Then send the clean quickcheck sha; I will confirm PASS quickly (no full re-run 
 
 ### STEP-8 CONFIRM (BIG reviewer, 25/11) — BIG PASS 7df74e84
 LC12 step-8 merge 7df74e84 (review/lc12-varC) = parents 2b68def3 (day-queue step) + 0506605b; checked by diff: the change 2b68def3→7df74e84 in dev/build is line-for-line the change 502c48c9→0506605b (224 diff lines each); on the minigame files the only differences from 0506605b come from the lower stack (j79 kitParse+kitNoUnk, jbal2 +4 lines, KIT.md +1), with no conflict and kitQuickWords/kitQuick kept. LC12 gates on 7df74e84: minigame-fix ALL OK, family scan ALL OK 39, duodo-focus-view ALL OK, mg-noword-kit 0 words, coop-one-world 4/4. Valid as long as LC12's per-step quickcheck for 7df74e84 passes (LC12 lands only on that PASS).
+
+### RE-REVIEW review/minigame-fix-2 45ebeae1 (BIG reviewer, 25/11) — PASS 45ebeae1, landing gated on KK24 «KIT OK»
+45ebeae1 = 0b118c6b + mg-intro-2.js (asserts only Chạm + Được open) + KIT.md §13.7 rewritten in place (spec tap/win, open rows); no game code change. Rerun here: mg-intro-2 ALL OK, minigame-family-scan ALL OK 39. Worker quickcheck PASS (old save ok). Items 1 and 2 closed. Item 3 (law 9) is still open: KK24 «KIT OK» on the kgReady change is pending. Land only after it arrives; the review needs no new run unless KK24 changes code.
