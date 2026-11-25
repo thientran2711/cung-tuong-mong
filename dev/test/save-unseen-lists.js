@@ -187,7 +187,7 @@ const FAMJS=`(()=>{const R=liveRivals(true).filter(v=>v&&v.alive&&!v.out);const 
  mk('toilPop',()=>toilPopCard({k:'th-scold',host:'th',n:-3,name:'Thái hậu',line:'áo trái mùa: Thái hậu thiện cảm -3',say:'Áo này không hợp mùa.',ctx:{}},''));
  mk('facAsk',()=>{const l=R.find(x=>facOf(x));return l?facAskCard(l,'cùng chung kẻ thù'):null});mk('dcAsk',()=>dcAskCard(v));
  mk('shelfWither',()=>{const z=shelfOf(S);const g=z&&z.g&&Object.keys(z.g)[0];return g!=null?shelfWitherCard(g):null});
- mk('j34Between',()=>typeof ct==='function'&&ct()?j34BetweenCard():null);
+ mk('j34Between',()=>typeof ct==='function'&&ct()?j34BetweenCard():null);mk('mbComfort',()=>K('mbComfort',v));
  return out})()`;
 const LISTJS=`(()=>[...Q,...(typeof SP13!=='undefined'?SP13.L.map(x=>x.m):[]),...(typeof EVHOLD!=='undefined'?EVHOLD.map(h=>h.m):[])].filter(m=>m&&m.rk).map(m=>m.rk+'|'+String(m.t||'').replace(/<[^>]+>/g,'')+'|'+(m.opts?m.opts.length:0)).sort())()`;
 async function family(b,dev,url,seed){return play(b,dev,url,seed,async(p,open,pe)=>{await open();
