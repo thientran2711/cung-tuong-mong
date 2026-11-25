@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"6c57a758+","t":"2026-11-24T23:16Z","c":"minigame-fix r4: review nits (skip result wording, mg-noword-kit fixture, scan waits for Sẵn sàng, real veil assert)","b":"57a8b6c107a1","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
+window.CTM_BI={"s":"0506605b+","t":"2026-11-24T23:23Z","c":"minigame-fix r4: review nits (skip result wording, mg-noword-kit fixture, scan waits for Sẵn sàng, real veil assert)","b":"221c07dab139","h":[{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"},{"s":"aea1baec+","t":"2026-11-24T05:54Z","c":"Phản ứng thế gian, mưu kế j70 và lễ hội ghép mới (THIN P6)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1902,7 +1902,7 @@ function openMG(k,lv,cb){const [t,h,fn]=MG[k];$("mgt").textContent=t;$("mgh").te
     fallback (j83 routes every lesson with S.mg to playArt, which has the full rules screen + «Hướng dẫn»); its old engines have no hint hook, so no guided round here */
  const mb=$("mgb"),run=()=>{mb.innerHTML="";mgStop=fn(mb,lv,p=>fin(p,false))};
  if(typeof kgReady!=="function"){run();return}
- mb.innerHTML=`<div class="kg82act"><button type="button" class="kbtn" id="mgready">Bắt đầu</button></div>`;kgReady(mb,{n:String(t).split(":")[0],t:String(t).split(":").slice(1).join(":").trim(),how:h,go:"#mgready",pic:""});
+ mb.innerHTML=`<div class="kg82act"><button type="button" class="kbtn" id="mgready">Bắt đầu</button></div>`;kgReady(mb,{win:"hoc",n:String(t).split(":")[0],t:String(t).split(":").slice(1).join(":").trim(),how:h,go:"#mgready",pic:""});
  $("mgready").onclick=run}
 function gCam(b,lv,end){const L=["Cung","Thương","Giốc","Chủy"],N=16,fall=Math.max(1100,2200-lv*220),gap=Math.max(450,800-lv*60);
  b.innerHTML=`<div class="lanes" id="lanes">${L.map((n,i)=>`<div class="lane" data-l="${i}"></div>`).join("")}<div class="hitline" id="hitl"></div></div><div class="lbtns">${L.map((n,i)=>`<button data-l="${i}">${n}</button>`).join("")}</div><p class="mgsc" id="mgsc">Trúng 0/${N}</p>`;
@@ -33508,7 +33508,7 @@ function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.on
   box.innerHTML=kgBangRows("Phần của ngươi",allRows,[["Gồm",`tài nghệ ${talent}${prep?` + chuẩn bị ${prep}`:""} + tự chơi 0–${luck}`,"t"],["Độ khó",mgDiffTxt(KG82.tier,kind),"n"]])+
   (rows.length?`<h4 class="kpst">${kgBang(`<p class="kpnote">Phần của mỗi đối thủ = tài nghệ + chuẩn bị + màn thi chưa rõ (0–${luck}).</p>`+kg82Facts(rows.map(r=>({who:r.p||r.face,auto:false,text:`${kg82Name(r.p,r.name)}<small>tài nghệ ${r.t}${r.pr?` + chuẩn bị ${r.pr}`:""} + màn thi chưa rõ (0–${luck})</small>`}))),"Đối thủ")}</h4><div class="kgrv kgrv-c">`+kg82Facts(rows.map(r=>({who:r.p||r.face,auto:false,text:`${kg82Name(r.p,r.name)}<small>tài nghệ ${r.t+r.pr}</small>`})))+`</div>`:"")+
   `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button>${kitQuick({id:"kg82skip",n:"Để tài nghệ quyết định",sub:`màn thi tính ${SK}/10 phần (+${Math.round(SK/10*luck)}), như người cùng bậc tài nghệ`})}</div>`;
-  kgReady(box,{kind,ev:o.ev||(o.fk?"fest:"+o.fk:"cat:tai-nghe")});/* KIT §13.7: rules + «Sẵn sàng» / «Hướng dẫn»; the clock starts only on «Sẵn sàng» */
+  kgReady(box,{kind,win:"thi",ev:o.ev||(o.fk?"fest:"+o.fk:"cat:tai-nghe")});/* KIT §13.7: rules + «Sẵn sàng» / «Hướng dẫn»; the clock starts only on «Sẵn sàng» */
   $("kg82go").onclick=()=>{if(o.onGo)try{o.onGo(rows)}catch(e){console.error(e)}/* jpmc split board: the rivals' raws drawn ONCE above are the ones shown live and scored */kg82Play(kind,raw=>finish(raw,false))};$("kg82skip").onclick=()=>finish(SK,true)};
  const finish=(raw,skipped)=>{KG82.phase="result";const skill=Math.round(raw/10*luck),score=talent+prep+skill;
   const all=rows.map(r=>({who:r.p||r.face,p:r.p,id:r.id,name:r.name,score:r.score,sub:`tài nghệ ${r.t}${r.pr?` + chuẩn bị ${r.pr}`:""} + màn thi ${r.lk}`}));
@@ -33581,6 +33581,12 @@ const KG82_HAND=`<svg viewBox="0 0 48 56" aria-hidden="true"><path d="M20 4a4 4 
 function kgBang(html,title){return html?`${title||"Thông tin"}${kitNoteBang(html,title||"Thông tin")}`:String(title||"")}
 function kgBangRows(head,all,shown,extra){return `<h4 class="kpst">${kgBang(kg82Rows(all)+(extra||""),head)}</h4>`+(shown&&shown.length?kg82Rows(shown):"")}
 window.kgBang=kgBang;window.kgBangRows=kgBangRows;
+/* owner 24/11 ~22:02Z item 6 (+ 21/11 rule: extras behind «!»): the TWO essential rows every «Luật chơi» shows OPEN: «Chạm» (what to tap / do) and «Được» (what a good play gives). Text, no typed numbers; the mark word comes from BAL (mgWord). */
+const KG82_TAP={dan:"Chạm vào dây khi hoa mai chạm vạch son.",hat:"Giữ ngón tay để lên giọng, buông để xuống giọng; giữ hoa trong dải vàng.",co:"Chạm vào chỗ trống duy nhất của nhóm quân trắng để ăn nhóm.",dauho:"Kéo ngược về sau rồi buông để ném tên vào bình.",ban:"Chạm khi ngắm ở giữa hồng tâm.",tho:"Kéo bút theo nét mờ, từng nét theo số thứ tự.",doi:"Kéo nét trong khay vào ô phải, lật gương nét bên trái.",doden:"Chạm đèn giống mẫu đang hiện sẵn.",ve:"Kéo núi, nước, thuyền, tùng đặt lên lụa đúng chỗ như mẫu.",hoa:"Chạm đúng hoa của mùa, cắt cành cho dài đúng so với bình.",theu:"Chạm lại đúng những ô có mũi thêu vừa hiện.",kim:"Kéo hình kéo cắt lên tờ gấp rồi chạm ✓ để mở giấy.",mua:"Xem các bước sáng lên rồi chạm lại đúng thứ tự.",banh:"Giữ Quạt lửa cho lửa vào vùng xanh, kéo nguyên liệu vào nồi đúng thứ tự.",huong:"Kéo ba thanh trượt cho khói giống hương mẫu rồi chạm Dâng hương.",td_cong:"Chạm cuộn chỉ cùng sắc với dải sáng, rồi chạm khung khi kim chúc xuống.",td_dung:"Bát nghiêng bên nào, giữ nửa khung bên kia để đỡ.",td_ngon:"Vòng xanh sáng thì giữ Thưa, buông khi tiếng vào dải xanh.",td_hanh:"Chạm + hoặc − chia phần cho đủ số chấm của mỗi người, rồi chạm ✓.",chai:"Chạm khi kim vào dải xanh.",le:"Kéo từng vật đến đúng chỗ như bàn lễ mẫu.",tc:"Kéo từng món vào kho có hàng mẫu cùng loại.",xa:"Chạm người có áo và vật mang theo khớp vật chứng.",thq:"Kéo từng người vào ghế: phẩm cao ngồi gần Thái hậu.",hoadien:"Kéo hoa điền vào giữa hai đầu mày rồi bấm Dán.",duho:"Chạm đóa sen khi nó trôi vào khoảng vàng sát mạn thuyền.",den:"Kéo ngón tay để đèn đi giữa dòng sáng, tránh hoa sen.",tat:"Chạm khi kim lướt qua giữa vùng đỏ.",ne:"Chạm khi kim vào vùng xanh.",kinh:"Đưa bút theo nét mờ của bản kinh, từng nét theo số thứ tự.",may:"Đưa kim theo đường may mờ, từng đường theo số thứ tự.",nghe:"Chạm Nép giữ bóng trong dải xanh, rồi chạm câu có từ cần nghe.",truyen:"Chạm từng người từ «Ngươi» tới «Cung nàng».",mac:"Kéo thanh giá, chạm Ngỏ giá; lời đáp cho biết xa hay gần.",thoico:"Chạm Ra tay lúc người canh chú ý thấp nhất.",thu_tam:"Vuốt dọc lông thú năm lần cho đều tay.",thu_choi:"Chạm đúng ô đang sáng.",tuoi:"Chạm Dừng tưới khi nước vừa đủ.",co7:"Lần lượt đặt quân; năm quân liền một hàng trước thì thắng."};
+function kgTapRow(s){let t=s.tap||(s.kind&&KG82_TAP[s.kind])||"";if(!t&&s.how){const m=String(s.how).replace(/<[^>]+>/g,"").match(/^[^.!?]*[.!?]/);t=m?m[0]:String(s.how).slice(0,90)}return t}
+const KG82_WIN={thi:"Phần chơi càng cao, thứ hạng càng cao.",hoc:"",toil:"Kẻ mày, đánh phấn, chấm son càng khớp, dung nhan càng đẹp."};
+function kgWinRow(s){if(s.win){if(s.win==="hoc"){let w5="";try{w5=String(mgWord(5)).toLowerCase()}catch(e){}return w5?`Đạt mức «${w5}» trở lên thì môn này tiến bộ.`:"Chơi khá thì môn này tiến bộ."}return KG82_WIN[s.win]||s.win}
+ let w5="";try{w5=String(mgWord(5)).toLowerCase()}catch(e){}return w5?`Đạt mức «${w5}» trở lên là thành; càng cao càng được nhiều phần.`:"Chơi càng khá càng được nhiều phần."}
 function kgReadySpec(s){s=typeof s==="string"?{kind:s}:Object.assign({},s||{});const K=(s.kind&&KG82_KIND[s.kind])||{};
  s.n=s.n||K.n||"";s.t=s.t||K.t||"";s.how=s.how!=null?s.how:(K.how||"");s.e=s.e||K.e||"";s.go=s.go||"#kg82go";s.timed=s.timed!==false;return s}
 function kgReadyCan(s){return !!(s.tutor||(s.kind&&KG82_KIND[s.kind]&&typeof KG82_ENG[KG82_KIND[s.kind].e]==="function"))}
@@ -33590,7 +33596,8 @@ function kgReady(box,spec){box=box||kg82Box();if(!box)return false;const s=kgRea
  /* mg-intro-2 (owner OD 21/11 ~04:17Z): the picture on top is the EVENT's (festival / contest scene, evArtOf), never the picture of the move; the rules sit behind the kit «!» */
  let evp="";try{const id=s.ev===false?"":(s.ev||"cat:tai-nghe");evp=id&&typeof evArtOf==="function"?evArtOf(id,s.n):""}catch(e){}
  const note=`<p class="kpnote">${s.timed?"Đọc kỹ luật; chưa tính giờ. Chạm «Sẵn sàng» thì ván mới bắt đầu và mới tính giờ.":"Đọc kỹ luật. Chạm «Sẵn sàng» thì ván mới bắt đầu."}</p>`;
- const html=`<div class="kgr">${evp?`<div class="kgr-ev"><img src="${evp}" alt="" draggable="false" onerror="this.parentNode.remove()"></div>`:""}<h4 class="kpst">${kgBang(kg82Rows(rows)+note,`Luật chơi · ${s.n}`)}</h4></div>`;
+ const tapT=kgTapRow(s),open=[tapT?["Chạm",tapT,"t"]:null,["Được",kgWinRow(s),"t"]].filter(Boolean);/* the two essentials stay OPEN; Môn / the full Luật / steps / the note sit behind the kit «!» */
+ const html=`<div class="kgr">${evp?`<div class="kgr-ev"><img src="${evp}" alt="" draggable="false" onerror="this.parentNode.remove()"></div>`:""}<h4 class="kpst">${kgBang(kg82Rows(rows)+note,`Luật chơi · ${s.n}`)}</h4>${kg82Rows(open)}</div>`;
  box.insertAdjacentHTML("afterbegin",html);box.classList.add("kgintro");
  const go=box.querySelector(s.go);
  if(go){if(!go.dataset.kgrLabel)go.dataset.kgrLabel=go.textContent;go.innerHTML=`Sẵn sàng<small>${s.timed?"từ lúc này mới tính giờ":"bắt đầu chơi"}</small>`;go.classList.add("kgr-go");
@@ -56623,7 +56630,7 @@ function exRun(P,e,done){e.pend={raws:[]};const raws=e.pend.raws;let i=0;const n
   const exRows=[["Giám khảo",exExTxt(P),"t"],["Môn thi",`${i+1}/${n}: ${K.n} · ${K.t}`,"t"],["Độ khó",mgDiffTxt(KG82.tier,k),"n"],["Mức đỗ",`${exBarTxt(P)}, tính cả ${n} môn cùng Tứ đức và tài nghệ`,"n"]];/* mg-intro-2: Độ khó + Mức đỗ shown, the rest behind the kit «!» */
   box.innerHTML=kgBangRows(`Khảo hạch ${P.srv?"lên":"tấn phong"} ${P.rk}`,exRows,[exRows[2],exRows[3]])+
    `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button>${kitQuick({id:"kg82skip",n:"Để tài nghệ quyết định",sub:`môn này tính ${SK}/10, như người cùng bậc`})}</div>`;
-  kgReady(box,{kind:k,ev:"sys:thi-tam"});/* KIT §13.7 */
+  kgReady(box,{kind:k,win:"thi",ev:"sys:thi-tam"});/* KIT §13.7 */
   $("kg82go").onclick=()=>kg82Play(k,raw=>after(raw,false));$("kg82skip").onclick=()=>after(SK,true)};
  const after=(raw,sk)=>{raws.push(raw);i++;const last=i>=n;try{save()}catch(x){}
   kg82ShowRes(kg82Rows([[`Môn ${i}`,`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">${last?"Xem kết quả":"Môn kế tiếp"}</button></div>`,raw>=5);
@@ -59449,7 +59456,7 @@ function toilBackX(){try{KG82.quit=()=>toilFinish(false)}catch(e){}}
 const TOIL_HOW="Hồi 1: chọn y phục theo dịp hôm nay. Hồi 2–4: tự tay kẻ mày lên đúng chân mày, đánh phấn hồng lên hai gò má, chấm son đúng chỗ khi vòng khép vừa môi. Có hoa điền thì chọn một chiếc, kéo vào giữa trán, nghiêng cho cân rồi dán. Không có đường chỉ: tay vụng thì mặt vụng.";
 /* ui-leftover-fold MG12 (KIT §13.7): the game's FIRST screen is the kit rules screen (kgReady: luật + picture of the move + «Sẵn sàng»), then Hồi 1 (the dress). Nothing runs and no khắc go before «Sẵn sàng». */
 function toilRules(){const box=kg82Box();if(!box)return;KG82.setup=1;box.hidden=false;box.innerHTML=`<div class="kg82act"><button type="button" class="${kg82Btn()}" id="toilrdy">Bắt đầu</button></div>`;
- kgReady(box,{n:"Điểm trang",t:"Trước gương đồng",how:TOIL_HOW,e:"drag",go:"#toilrdy",pic:"",timed:false});
+ kgReady(box,{n:"Điểm trang",t:"Trước gương đồng",how:TOIL_HOW,tap:"Chọn y phục theo dịp, rồi kẻ mày, đánh phấn, chấm son trên mặt nàng.",win:"toil",e:"drag",go:"#toilrdy",pic:"",timed:false});
  $("toilrdy").addEventListener("click",()=>{box.classList.remove("kgintro");box.innerHTML="";toilDressUI()})}
 function toilOpen(){if(!S||S.dead)return;if(window.__bot){toilAuto();return}KG82.ctx="hoc";const occ=toilOcc();
  const d=kg82Open({art:"Điểm trang",title:"Trước gương đồng",how:TOIL_HOW});
@@ -82067,7 +82074,7 @@ function entExam(o,fin){o=o||{};let art=o.art||"";let k=entKind(art);if(!k||entW
  const after=(raw,sk)=>{KG82.phase="result";kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");
   kg82ShowRes(kg82Rows([["Màn chơi",`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"],["Kết quả",o.note||"tính cùng Sắc, Tài, Đức","n"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`);
   $("kg82ok").onclick=()=>{kg82Close();end(raw)}};
- kgReady(box,{kind:k,ev:"sys:tuyen-tu"});/* KIT §13.7 */
+ kgReady(box,{kind:k,win:"thi",ev:"sys:tuyen-tu"});/* KIT §13.7 */
  $("kg82go").onclick=()=>kg82Play(k,raw=>after(raw,false));$("kg82skip").onclick=()=>after(SK,true)}
 /* the ONE seam (contract set by review/kc-roads-cn-nc-r1 at jkc2 kc2Play): kcEntryExam(kind, done(raw 0..10), info{art,origin,title,note}) */
 window.kcEntryExam=function(kind,fin,info){if(kind&&typeof kind==="object"){const o=kind;kind=null;info=o}info=info||{};entExam(Object.assign({},info,{kind}),fin)};
@@ -97934,7 +97941,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="57a8b6c107a1";window.CTM_BUILD=BUILD;
+const BUILD="221c07dab139";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
