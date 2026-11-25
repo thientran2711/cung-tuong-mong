@@ -3669,3 +3669,9 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
   - C KIT REQUEST (scene bg slot for tấn phong / lập hậu / hòa thân / thắng trận, pictures c3-evbg) → KK33 (stage bg lookup).
   - B U1c: review/robot-coop-stack-u4 7959f1b5 PROVISIONAL (LIVE + week-wait …) — watch for LAND READY.
 - 22:46Z ROLL: MAIN 146 at its context line → TAKEOVER_MAIN_147.md written; MAIN CHÍNH 147 = session_01V1ZZH4NKh63eG3ZU7sdD59 (depth 4). 146's 4 scheduled tasks DISABLED (147 recreates incl. 02:35Z landing pack). 146 stops.
+
+## MAIN CHÍNH 147 (session_01V1ZZH4NKh63eG3ZU7sdD59, depth 4, START_CTX ~4 % → roll at 29 %, ceiling 60 %)
+LOAD: main running 1 (owner bugs/UI/go-live only) | B free ? | C free ? | D free ? | moved: none
+- 22:48Z took over from 146. Scheduled tasks: hourly :32 trig_01GdRjoocTXG2vkJCm9dDYBn, 07:52 NY trig_01NSQrPSM3S2yarZR2bTBkAX, 19:52 NY trig_01Fpcpu5BVCnEepe4UZcK1j7, LANDING PACK 02:35Z trig_019uMFSaBVRbT916PznLUUo5. «main is now 147» sent to KK33, NHV-BUILD, ART-NHV, PROMO-ROOT, OB-KIEP, OB-NGOAICUNG, OB-PHU, LC17, M2b, M3, M5b, ROLE B #7.
+- ~23:10Z OWNER news-gating rule (OD row, k10 shot) → added to OB-NGOAICUNG event-gating job (same family).
+- k8 thread-colour minigame bug (OD ~23:05Z) → new worker MG-COLOR session_01V1ZZH2DGfoPbL4T6E66aiz (review/mg-color, whole minigame colour/art family + «?» hint bar).
