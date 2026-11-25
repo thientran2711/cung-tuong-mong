@@ -1818,4 +1818,4 @@ B INVESTIGATOR coop page freeze (guest JS hang at .kfoc, U3c Q4XY; + F s6d famil
 | F BIG REVIEW s3e-display-fix 290b3bf6 (opus) | review/s3e-display-fix | FOREMAN F #16 | session_01UV1Szk5Kuc4NRRabmCRSNx | RUNNING | 2026-11-25T22:35Z |
 | REVIEW c3-farshot 49d7de45 | review/c3-farshot | FOREMAN C ROOT 3 | session_01PEhRbvrqFY7tXWkmrnJhCD | DONE PASS 49d7de45 | 25/11 22:40Z |
 | CO-OP RERUN U1d = ONE PATCH EDITOR (sonnet; successor of U1c 655QXzbU; stack u4 7959f1b5 + #15; briefs/b-coop-rerun-U1d.md) | review/robot-coop-stack-u4 (no code) | B ROOT 2 | (opening) | RUNNING | 25/11 22:50Z |
-| REVIEW thin-p8-r2 0348e07a (opus BIG, fresh; briefs/b-thin-p8-r2-review.md) | review/thin-p8-r2(-rv); reports/thin.md «## REVIEW thin-p8 r2» | B ROOT 2 | (opening) | RUNNING | 25/11 22:54Z |
+| REVIEW thin-p8-r2 0348e07a (opus BIG, fresh; briefs/b-thin-p8-r2-review.md) | review/thin-p8-r2(-rv); reports/thin.md «## REVIEW thin-p8 r2» | B ROOT 2 | session_01N1tNP3yP4QQnSWk3tnY93B | RUNNING | 25/11 22:54Z |
