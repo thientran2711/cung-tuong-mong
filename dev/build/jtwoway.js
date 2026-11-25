@@ -99,7 +99,7 @@ function twFollowT(v){const L=liveRivals(true).filter(x=>x!==v&&rkOf(x)>rkOf(v)+
    else if(a.n==="Tạ lỗi"){a.c=twCost("apol");a.x=`thành: oán -${G().apol}`;a.run=()=>{chatMark(v);return twDo(S,v,"apol",true)+"."}}}
   if(sameHouse(S,v))return A;
   const add=(k,x)=>{const D=TW[k];if(!D||(D.req&&!D.req(S,k==="mediate"?v:v)))return;const c=twCost(k);
-   A.push({n:D.n,c:Object.keys(c).length?c:undefined,o:D.o?D.o(S,v):100,x,run:()=>{chatMark(v);return twDo(S,v,k,true)+"."}})};
+   A.push({n:D.n,tw:k,c:Object.keys(c).length?c:undefined,o:D.o?D.o(S,v):100,x,run:()=>{chatMark(v);return twDo(S,v,k,true)+"."}})};
   const g=G();
   add("visit",`nàng ${pvQuy(v,g.visit[0],"quý ngươi")} · Sức nàng +${g.visit[1]}`);
   {const x=twFoeOf(S,v);if(x)add("mediate",`nàng bớt oán ${x.name} ${g.mediate}`)}

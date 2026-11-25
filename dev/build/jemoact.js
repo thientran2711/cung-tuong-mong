@@ -400,7 +400,9 @@ function eaPick(p,g){const T=eaTemper(p),kd=eaKind(p);/* TEMPER-OUTBURST law 1: 
 window.eaPick=eaPick;
 /* ======================= (3) OUTBURSTS: what each reaction does ======================= */
 /* returns {h: story lines, past: the real numbers} for her event; NPC: applies and returns a news line */
-function eaDo(p,r){const F=BAL.ea.fx[r.k]||{vent:BAL.ea.ventDef},me=p===S,res=[];let h="",target=null;const add=(t)=>res.push(t);
+/* jtperc (temper perception, seat T2): every outburst passes the ONE onlooker rule (window.tpOut) after it lands */
+function eaDo(p,r){const at=typeof window.tpAt==="function"?window.tpAt(p,null):null;/* who stood there when it started */const o=eaDo0(p,r);try{if(o&&typeof window.tpOut==="function")window.tpOut(p,r,o,at)}catch(e){}return o}
+function eaDo0(p,r){const F=BAL.ea.fx[r.k]||{vent:BAL.ea.ventDef},me=p===S,res=[];let h="",target=null;const add=(t)=>res.push(t);
  /* the outburst spends the feeling: her bar moves toward calm (down from joy, up from a low mood); TEMPER-OUTBURST: an option of the choice (r.pv) vents BAL.ea.pick.vent, the same for all */
  const VV=r.pv?BAL.ea.pick.vent:F.vent;const vent=()=>{if(me){const d=ventMe((eaMV()>0?-1:1)*VV,lc1(r.n));if(d)add(`tâm trạng ${sgn(d)}`)}else ventNpc(p,VV)};
  const pay=(o)=>{if(me){if(!r.fxPaid)apply(o)}else ap(p,o);/* TEMPER-OUTBURST: her option row's fx already paid her own stats (j3 chooseM applies fx, then go) */for(const k in o){const lb=EA_LB[k]||(typeof NAMES!=="undefined"&&NAMES[k]);if(o[k]&&lb)add(me?`${lb} ${sgn(o[k])}`:eaN(p,lb,o[k]))}};
