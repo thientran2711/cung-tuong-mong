@@ -41,6 +41,12 @@ const [,,URL0,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const U
    const has=d.opts&&d.opts.some(o=>/^Đập đồ/.test(o.t));const tapped=has&&await tapOpt(/^Đập đồ/,'hot');await p.waitForTimeout(700);const s1=await st();const d1=await dlg();
    const ok=F.temper==="hot"&&d.modal&&d.opts.length>=2&&d.opts.length<=F.n&&noHold(d.opts)&&rowsOk&&tapped&&s0.bac-s1.bac===F.fx.bac&&s0.danh-s1.danh===F.fx.danh&&s1.mood-s0.mood>=F.v-1&&!(d1.modal&&/Lòng không giữ/.test(d1.title));
    res.hot={ok,opts:d.opts&&d.opts.map(o=>o.t.slice(0,90)),rows:d.opts&&d.opts.map(o=>o.rows.join("/")),s0,s1,hscroll:d.hscroll,over:d.over};if(!ok||d.hscroll||d.over.length)bad++}
+  /* stale (temper-outburst-fix, D 25/11 11:08Z): raw S.mood.v (+40) ≠ the shown bar (causes, low) — every row must say «giải tỏa tâm trạng» and the tap must vent UP */
+  await fresh("Kiêu ngạo");await p.evaluate(()=>{for(const kd of ["s-gian1","s-gian2","s-gian3","s-gian4"])mkAdd(S,{kd,k:"gian",s:95,why:"bị làm nhục"},60);S.emo={k:"gian",v:80,why:"thử",w:wk()};moodBar(S);S.mood.v=40;window.__bot=0;eaMeOut("gian");S.mood.v=40;showModal()});await p.waitForTimeout(600);
+  {const d=await dlg();await shot('stale');const s0=await st();const V=await p.evaluate(()=>BAL.ea.pick.vent);const T=(d.opts||[]).map(o=>o.t+" "+o.rows.join(" "));
+   const txtOk=T.length>=2&&T.every(t=>/giải tỏa tâm trạng/.test(t)&&!/lòng vui lắng xuống/.test(t));const first=d.opts&&d.opts[0]&&d.opts[0].t.slice(0,12);
+   const tapped=!!first&&await tapOpt(new RegExp('^'+first.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')),'stale');await p.waitForTimeout(700);const s1=await st();
+   const ok=d.modal&&s0.mood<0&&txtOk&&tapped&&s1.mood-s0.mood>=V-1;res.stale={ok,bar0:s0.mood,bar1:s1.mood,opts:T.map(t=>t.slice(0,110))};if(!ok||d.hscroll||d.over.length)bad++}
   /* timid */
   await fresh("Khiêm nhường");await p.evaluate(()=>{S.mood.v=-80;S.emo={k:"gian",v:80,why:"thử",w:wk()};window.__bot=0;eaMeOut("gian");showModal()});await p.waitForTimeout(600);
   {const d=await dlg();await shot('timid');const s0=await st();const T=d.opts.map(o=>o.t).join(" | ");const tapped=await tapOpt(/^Nuốt giận chép kinh/,'timid');await p.waitForTimeout(700);const s1=await st();const F=await p.evaluate(()=>BAL.ea.fx.nuot);

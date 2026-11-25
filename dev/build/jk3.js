@@ -296,7 +296,8 @@ html body .kshR{position:absolute;top:8px;right:8px;width:var(--kgrw,150px);min-
 .ksh .k3p,.ksh .k3c{pointer-events:auto;background:var(--k3pl);border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 4px #3a20101f;backdrop-filter:blur(2px)}
 .ksh .k3p{display:flex;flex-direction:column;padding:3px 6px;gap:0}
 .ksh .k3h{font-family:var(--display);font-size:.7rem;color:var(--gold);letter-spacing:.03em;border-bottom:1px solid var(--k-hair,#e6d3ac);margin-bottom:1px}
-.ksh .k3r{display:flex!important;align-items:center;gap:4px;border:0;background:none;padding:1px 0;margin:0;font:inherit;font-size:.75rem;line-height:1.25;color:var(--ink);text-align:left;cursor:pointer;min-height:0;width:100%}
+.ksh .k3r{display:flex!important;align-items:center;gap:4px;border:0;background:none;padding:1px 0;margin:0;font:inherit;font-size:.75rem;line-height:1.25;color:var(--ink);text-align:left;cursor:pointer;min-height:var(--k3rowh,44px);width:100%}/* KIT 56.28 (KK28): the whole row is the tap target, kit row >= 44 px (was min-height:0 = 17 px rows, adjacent, no hit-area trick possible) */
+.ksh .k3r+.k3r{border-top:1px dotted var(--k-hair,#e6d3ac)}
 .ksh .k3r .k3l{flex:1 1 auto;min-width:0;white-space:normal}
 .ksh .k3r>b{font-weight:700;white-space:nowrap;margin-left:auto}
 .ksh .k3r img.ic{width:14px;height:14px;flex:0 0 auto}

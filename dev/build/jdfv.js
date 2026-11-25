@@ -31,7 +31,9 @@ const DF_RULE={
  words:["Chạm dấu","Dấu trôi lên: chạm dấu ✓ xanh (lời hợp ý), tránh dấu ✗ đỏ (lời hỏng).","Chạm đúng nhiều dấu ✓ thì thành; chạm nhầm dấu ✗ thì mất điểm."],
  stare:["Giữ ngón tay","Giữ ngón tay để thanh áp lực nằm trong dải xanh; nàng đẩy lại nên buông và giữ cho khéo.","Ở trong dải xanh càng lâu càng thành."]};
 function dfUnplay(F){try{if(F.playing)F.endPlay()}catch(e){}}
-function dfLast(){try{const t=document.getElementById("rtoast");return t&&t.classList.contains("on")?t.innerText.trim().split("\n")[0]:""}catch(e){return""}}
+function dfLast(){try{const t=document.getElementById("rtoast");const tt=t&&t.classList.contains("on")?t.innerText.trim().split("\n")[0]:"";if(tt)return tt;
+ /* DELEGATE-NOMG: an act with no result toast (a run act: «Nghe ngóng chung» → «<tên> đi nghe ngóng, về khắc N.») says its own short line, the one the pop-up note shows (popMsg) */
+ if(typeof popMsg==="string"&&popMsg){/* only the act's OWN first line: popMsg can carry other news after <br> / <span class="past"> (BIG rv delegate-nomg) */const d=document.createElement("div");d.innerHTML=String(popMsg).split(/<br\s*\/?>|<span class="past"/i)[0];return d.textContent.replace(/\s+/g," ").trim()}return""}catch(e){return""}}
 /* the focus holds the PERSON (DF.p), never a frozen index: S.visit.people can shift while it is up (co-op refreshHere unshifts the Emperor,
    people leave); her index is looked up at every use, and if she is gone the focus closes (rv duodo-focus 43bc4ba2 #1) */
 function dfSame(a,b){return !!a&&!!b&&(a===b||(!!a.ref&&a.ref===b.ref)||(!a.ref&&!b.ref&&a.kind===b.kind&&a.name===b.name))}
@@ -47,7 +49,7 @@ function dfFind(i,id){for(const g of dfActs(i)||[])for(const a of g.acts)if(a.id
 function dfTap(id){const F=DF.F;if(!F||S.dead||Q.length||DF.play)return;const i=dfHere();if(i<0)return;const a=dfFind(i,id);if(!a||a.off)return;
  /* run = the act on HER index at the moment it lands (the game takes seconds; the list may shift meanwhile) */
  const run=res=>{const j=dfHere();if(j<0)return;dfRun(j,id,res);dfAfter(a,res)};
- if(a.cls==="D"){run();return}
+ if(a.cls==="D"||a.cls==="E"){run();return}/* E = delegated (jdf dfDlg, owner OD 25/11 ~04:12Z): the one she sends does it, no game: plain odds */
  const layer=dfPlay(F,()=>{if(DF.play)DF.play.skip()},()=>{const h=DF.play;DF.play=null;if(h)h.destroy()});if(!layer){run();return}
  const go=()=>{DF.play=dfGame(a.eng,{box:layer,fig:dfFigBox(F,layer),rank:typeof rkOf==="function"?rkOf(S):S.rank,at:/Ngáng chân/.test(a.n)?"feet":null,hud:o=>dfHud(F,o),
   onDone:res=>{DF.play=null;dfUnplay(F);run(res)}});
@@ -69,7 +71,7 @@ function dfEncOn(){return dfViewOn()&&BAL.df.npc&&typeof tab!=="undefined"&&tab=
 (function(){const s0=showModal;showModal=function(){const m=Q[0];/* a visitor is known BEFORE the encounter scene opens (rv-visitor-fix 1): her stage token is refreshed and the scene waits (≤ 4 s) until her real face has loaded, so the focus figure is HER, never the grey silhouette / loading stand-in */
 if(m&&m.__dfWait===1)return undefined;
 try{const w=m&&m.t==="Có người đến"&&m.who&&m.who.w;if(w&&w[0]==="r"&&typeof visitSeen==="function"&&m.__dfWait==null){const v=RV(w[1]);if(v){visitSeen(v);const bad=f=>!f||f.tagName!=="IMG"||!f.complete||!(f.currentSrc||f.getAttribute("src"))||f.classList.contains("j59sil")||/unknown-fig/.test(f.currentSrc||f.src||"");
- const i0=dfWhoIdx(m);if(i0>=0&&dfEncOn()&&bad(dfFig(i0))){try{renderStage()}catch(e){}m.__dfWait=1;const t0=Date.now();const poll=()=>{const i2=dfWhoIdx(m);if(!bad(i2>=0?dfFig(i2):null)||Date.now()-t0>4000){m.__dfWait=2;try{showModal()}catch(e){}}else setTimeout(poll,150)};setTimeout(poll,150);return undefined}}}}catch(e){}/* the same card is already playing in the scene (say / choices): a repeated showModal (render, timers) keeps the centre modal hidden */
+ const i0=dfWhoIdx(m);if(i0>=0&&dfEncOn()&&bad(dfFig(i0))){try{renderStage()}catch(e){}m.__dfWait=1;const t0=Date.now();const cue=typeof kitWaitCue==="function"?kitWaitCue():null;/* KK29: the wait shows the kit wait cue (a small «Đang thỉnh tranh…» pill), never a silent frozen screen */const poll=()=>{const i2=dfWhoIdx(m);if(!bad(i2>=0?dfFig(i2):null)||Date.now()-t0>BAL.df.faceWaitMs){m.__dfWait=2;try{cue&&cue()}catch(e){}try{showModal()}catch(e){}}else setTimeout(poll,150)};setTimeout(poll,150);return undefined}}}}catch(e){}/* the same card is already playing in the scene (say / choices): a repeated showModal (render, timers) keeps the centre modal hidden */
  if(m&&m.dfSeen&&DF.encM===m&&DF.F){try{const M=document.getElementById("modal");if(M)M.hidden=true}catch(e){}return undefined}const i=m&&!m.dfSeen&&m.opts&&m.opts.length&&dfEncOn()?dfWhoIdx(m):-1;if(i<0||!dfHasFig(i))return s0.apply(this,arguments);
  m.dfSeen=1;DF.encM=m;const p=curPeople()[i],fig=dfFig(i);try{const M=document.getElementById("modal");if(M)M.hidden=true}catch(e){}
  if(DF.F&&!dfSame(DF.p,p)){const o=DF.F;DF.F=null;DF.tk=null;try{o.destroy()}catch(e){}}DF.p=p;DF.i=i;popIdx=i;let F=DF.F;if(!F){const tk={};DF.tk=tk;F=kitFocus.open({p,person:p,fig,from:fig&&fig.getBoundingClientRect(),groups:[],encounter:true,onAct:id=>dfTap(id),onClose:()=>dfClosed(tk)})}DF.F=F;

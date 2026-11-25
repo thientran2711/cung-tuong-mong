@@ -258,3 +258,56 @@ K-FOCUS-1b SPEC (append to kitFocus; pure display, no numbers of its own, knobs 
 
 ## KIT REQUEST (VISITOR-FIX, MAIN 131 24/11 ~23:00Z) — Sổ ghi / note row with a portrait icon wraps badly on iPad
 iPad 1180x820, Sổ ghi (journal/notes) rows that carry a small portrait icon: the text wraps with a big gap beside the icon and leaves an orphan last word («… Trường Xuân / cung.»). Wanted: the kit note row (icon + text) wraps text under itself with no gap, no orphan word (text-wrap:pretty / the icon floated or a grid with the text column min-width 0). This is a kit row (LUẬT KIT TRƯỚC): kit keeper KK25 builds / fixes it in KIT.md + the kit sample page; no per-screen CSS. Worker did NOT touch the row.
+
+## 25/11 BUTTON CRAWL (ROLE B, session_01UV1Szkf6fjnVAUPGXkqZ7j for Foreman F #5) — KIT REQUEST K-KDTX-BAND «text cap squeezes the head-art band over the first rows (Fold)»
+- Real-tap crawl, LIVE 008aa59b, Fold 755x1000: rail «Mục tiêu chương» → chapter panel (kitGoalDetail → kitPanel kind info + headArt). The tab row «Mục tiêu · Danh hiệu n/35 · Thiên mệnh» (jdh tabsHTML, first section) is DEAD: elementFromPoint at each tab = the band picture (img, 518x286).
+- Cause (kit): KIT 32.5b kitDlgText (jk4.js:318) caps `.kpb` (`max-height:290px`, `.kdtx`), and `.modal .dlg.kdscroll.kdtx > #mb > .kpb.kphas{grid-template-rows:minmax(0,1fr)}` / the stacked `…kpinfo:has(> .kpsubj.kpiart.kpev){grid-template-rows:auto auto}` let the cap squeeze BOTH rows to 140px, while the band keeps `height:calc(var(--kah)*1.5)` (298px, jkslide.js:49, sticky) → the band lies over the first ~150px of `.kpmain`. Whole family: every kitPanel with a head-art band whose text is long enough to be capped (kdtx) on a phone-width frame — the first text rows (tabs, first kit rows) sit under the picture.
+- Ask: kit keeper makes the stacked band + capped text work as ONE part (e.g. band row keeps its height and `.kpmain` row = the rest and scrolls inside, or the band shrinks to the room left), Fold + iPad; the crawler (`node dev/test/button-crawl.js --dev fold --start home`) re-checks the tabs. Not styled by hand by the crawler worker.
+## KIT REQUEST (M-FIX-1, Foreman F #7, 25/11 ~08:30Z; robot M4 06:22Z + 06:55Z) — choice cards: every option of a 3–5 option card must fit without a sub-scroll
+Robot M4 (Fold 755x1000, real taps): «Đêm thị tẩm» showed 3 of 4 options, the best one below the fold behind «Kéo xuống»; «Tân quân lập uy · Chương 2»
+gave its option list a 112 px scroll box under a long text (half an option visible, the card centre outside the frame = a dead tap zone).
+Scan (m-fix-1, every PEND card with ≥3 options opened through pushFront + showModal, option rows .opt.kopt in .opts.kpopts.k3btns.k3rows, measured
+fully visible inside every clipping ancestor; LIVE origin/main 9f72524b + m-fix-1): Fold 16 of 26 cards hide options, iPad 12 of 26:
+| card | Fold shown/all | iPad shown/all |
+|---|---|---|
+| night1 (Đêm thị tẩm) | 3/4 | 4/4 |
+| night2 | 3/4 | 2/4 |
+| prep (chuẩn bị thị tẩm) | 3/5 | 2/5 |
+| vnight | 3/4 | 4/4 |
+| j7c | 2/4 | 1/4 |
+| vulan | 2/3 | 2/3 |
+| ge1 | 3/4 | 4/4 |
+| cyrep | 3/4 | 2/4 |
+| vlget / vlcraft / vlout | 4/5 · 2/3 · 3/6 | 2/5 · 3/3 · 4/6 |
+| pick lists (shop 12–14, evpick 10, itarget 10, plantsv 8, pmLad 9) | scroll (fine: lists) | scroll |
+Root: one option row = 140 px (Fold) / 132 px (iPad) (.k3rows card with picture), the option column gets what the text leaves (Fold prep: 492 px for
+730 px of options; iPad prep 265 px for 408 px). Wanted (law 10 FRAME → LAYOUT → BUTTON SIZE, kit keeper only): a CHOICE card (≤ 5 options, not a pick
+list) always shows ALL its options at once on both devices — e.g. the option column takes priority over the text (text scrolls, options never), or the
+k3rows option switches to the compact/2-column layout when the options do not fit; the «Kéo xuống» cue stays only for long pick lists. Order is NOT
+the fix (law 2: no option is «the best»; the list keeps its order). Re-scan (before/after): node dev/test/opt-fit-scan.js dev/index.html all.
+
+## KIT REQUEST K-NOTICE-OPTS (button-crawl-fix-5, ROLE B #4 for Foreman F #10, 25/11 ~11:45Z; robots s9 / s1d Fold) — «Tin báo» list: its only way out scrolls away
+Real taps, Fold 755x1000 + iPad 1180x820 (m-fix-2-r 240f549a; same on LIVE 9f72524b): «Tin báo» (jnotice kitNoticeOpen, kitPanel kind notice) with a long list
+(20 notices shown, measured with 138 unread) AND an action notice (an errand «Để ta xem», a Tai mắt news) shows the list + «Kéo xuống»; its two options «Để ta xem» / «Để sau» lie BELOW
+the frame (Fold y 785 of a frame ending at 787, iPad 695 of 697 — elementFromPoint = #modal), there is no ✕ (review r4: a panel with options has none) and a
+tap outside does NOT close it. A player can only leave by scrolling the panel to its end. KIT §2071 says the event frame's buttons never scroll away.
+Without an action notice the same list shows the kit ✕ (Lui) top-right, hittable — fine.
+Wanted (kit keeper only, law 9/10): in a notice / info panel with options, the notice list (the section body) is the scroll area and the option row stays
+in view (like the event frame: two scroll areas, buttons fixed), or the ✕ stays on a panel whose options are only «go / later». Not ours: the list's
+wording (5 of 12 lines one template sentence, s9) → MAIN. Probe: /home/user/wt/probe4/tb.js on the ROLE B #4 box (138 notices, go on each).
+## KK27 25/11 — still open from the KK26 list (not built)
+- K3 status boxes («Xét phẩm», «Nguy hiểm chung» …, `#hud2 .khc .hc`, j79.js:1229 `min-height:0;padding:1px 0`): the tappable row is ~17 px tall (kit row >= 44 px, §A). Fix = the K3 row gets the kit row height, K3 right column re-measured on Fold + iPad (rows are adjacent, so a hit-area trick is not enough). Scan: dev/test/kit-row-tap-size.js (ALL=1 lists the rows; must be shown on the screen that has the K3 boxes).
+- iPad 1180x820 Hành sự stage: two figure name labels overlap at the left edge (name-label collision, every stage) — needs a stage-label collision rule in the stage kit.
+- One-option card «Tắm gội chờ giá» (E-S1, Kính sự phòng báo tin): add a ONE-option card to kit-opt-meter-tap (tap anywhere chooses except the «!»).
+- «Tin báo / Đã xem hết» long list on iPad: ✕ in view with the real E state (§56.22 header ✕ covers option-less panels; verify with the real list).
+
+## KK28 25/11 — DONE on review/kit-opts-pack-3 (base review/kit-opts-pack-2 2815c46d)
+- DONE (MAIN 138 order 1) Fold 4-6 options: step-down §56.24 switched ON, stacked NL/NM/NS frames get the full screen height + strip step (KIT 56.27). 12 of the 14 Fold frames that scrolled now show every card without scroll; 2 long-text frames (j70def, j7c) still scroll 40 / 9 px WITH the «Kéo xuống» cue. «First finger drag right after a Fold modal opens scrolls 0»: NOT reproduced (kit-opts-touchdrag: every case scrolls).
+- DONE (order 2) K3 side-column rows `.ksh .k3r` + `#hud2 .khc .hc` = kit row height 44 px (KIT 56.28). NOT changed: the top-bar status chips (Buổi / Chưa điểm trang / Quẻ, 18 px, `.k3tt`) — chips in the top bar, not rows; if she wants a bigger tap target there, it is a top-bar redesign (KIT REQUEST for a foreman/owner decision).
+- DONE (order 3) stage name-label collision rule `kitTagCollide` (KIT 33.10). The overlap was not reproducible with real people (0 pairs in 66+ states), so it is a guard, tested with a forced collision. If D sees it again: send the state (place, people, plate) to the kit keeper.
+- DONE (order 4) «Tắm gội chờ giá» one-option card: the card was LOCKED by the game rule (emperor already elsewhere) and showed no reason, a tap did nothing -> reason row + lock pop (KIT 56.29, whole group = every `lk` option).
+- DONE (order 5, verification) «Tin báo / Đã xem hết» long list on iPad: see report (kit-close-reach NT=1).
+
+
+## 25/11 KK29 — DONE (review/kit-opts-pack-4): «not a danger» flag for selection-day cards (SELSCENE-18 asked via MAIN 140)
+Flag name: **`nodanger:1`** on the queue card (`Q.push({…,pid:"selxD3",nodanger:1})`) or on a kit panel spec (`kitPanel({…,nodanger:1})`). Also silent without a flag: pids starting `selx` / `kc2Sel` (`KIT_NODANGER_PRE`, j11) and every act picker in `KIT_ACT_PIDS`. One function `kitNoDanger(card)` decides the red wash (`kitAlarm`), the heartbeat and the tension music. KIT §93.9; scan table `dev/test/kit-alarm-scan.js`.

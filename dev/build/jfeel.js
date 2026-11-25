@@ -269,7 +269,7 @@ function feelDo(p,r){const me=p===S,F=fB().act.fx[r.k];if(!F)return window.eaDo(
  case"mach":pay({tai:F.tai,suc:-F.suc});h=me?"Hăng hái trong lòng, ngươi làm một mạch không nghỉ, xong việc thì người rã rời.":`${emoName(p)} làm một mạch không nghỉ.`;break;
  case"quengio":pay({tai:F.tai,suc:-F.suc});h=me?"Ngươi chìm vào việc đang làm, quên cả giờ ăn giờ ngủ.":`${emoName(p)} chìm vào việc, quên cả giờ giấc.`;break;
  case"sangtac":pay({tai:F.tai,danh:F.danh,suc:-F.suc});h=me?"Hứng khởi dâng trào, ngươi sáng tác ngay tại chỗ; bài mới truyền tay khắp cung.":`${emoName(p)} hứng khởi sáng tác ngay tại chỗ.`;break}
- const VV=r.pv?BAL.ea.pick.vent:F.vent;/* TEMPER-OUTBURST: an option of the choice vents the same for all */try{if(me)eaH().ventMe((S.mood&&S.mood.v>0?-1:1)*VV,r.n);else eaH().ventNpc(p,VV)}catch(e){}
+ const VV=r.pv?BAL.ea.pick.vent:F.vent;/* TEMPER-OUTBURST: an option of the choice vents the same for all */try{if(me)eaH().ventMe(((typeof eaMV==="function"?eaMV():S.mood&&S.mood.v)>0?-1:1)*VV,r.n);else eaH().ventNpc(p,VV)}catch(e){}
  try{if(r.pv&&window.eaCapAdd)eaCapAdd(p,r)}catch(e){}return{h,res:res.filter(Boolean),target}}
 function feelActTick(p){const A=fB().act;if(!p||feelActNow(p))return;const me=p===S;if(!me&&!feelWorld())return;
  const o=feelSums(p);let k=null;for(const x in A.main)if(feelLvOf(o[x]||0)>=3&&(!k||o[x]>o[k]))k=x;if(!k)return;

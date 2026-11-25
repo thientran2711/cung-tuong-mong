@@ -152,6 +152,9 @@ function liveC(){try{return liveRivals(true).filter(v=>!v.coop)}catch(e){return[
 function byKey(k){try{return typeof emoByKey==="function"?emoByKey(k):null}catch(e){return null}}
 function eaWho(p){try{if(p===S)return undefined;if(p===S.maid)return pMaid();if(p&&p.id!=null&&typeof pv==="function"&&(rivals||[]).includes(p))return pv(p)}catch(e){}return undefined}
 /* her mood move (+ toward calm for a low mood) and the feeling seal */
+/* her mood bar as shown (kitMoodVal = moodBar(S), causes synced) — every outburst text AND effect reads this one number */
+function eaMV(){try{if(typeof kitMoodVal==="function")return kitMoodVal()}catch(e){}return S&&S.mood&&typeof S.mood.v==="number"?S.mood.v:0}
+window.eaMV=eaMV;
 function ventMe(n,why,emoN){let r=0;try{r=typeof mbAdd==="function"?mbAdd(n,why,"ea:"+why):0}catch(e){}
  try{if(emoN){const m=S.emo;if(m&&m.k!=="vui"&&m.v>=BAL.eff.jemo.floor&&n>0){m.v=Math.max(0,m.v-emoN);if(typeof emoSync==="function")emoSync(S)}}}catch(e){}return r}
 function ventNpc(p,n){try{const e=p&&p.emo;if(e&&e.v)e.v=Math.max(0,e.v-n);if(e&&e.v<BAL.eff.jemo.floor)p.emo=null}catch(e){}}
@@ -387,7 +390,7 @@ function eaOpts(p,fk,g,T0){/* T0: a temper given by the measure (dev/measure/tem
 const EA_OWN={"Bạc":"bac","Sức":"suc","Danh":"danh","Đức":"duc","Sủng":"sung","Tài":"tai"};
 function eaOptFx(p,r){const P=eaPx(p,r),o={};for(const x of P.G)if(EA_OWN[x[0]]&&x[1])o[EA_OWN[x[0]]]=(o[EA_OWN[x[0]]]||0)+x[1];for(const x of P.L)if(EA_OWN[x[0]]&&x[1])o[EA_OWN[x[0]]]=(o[EA_OWN[x[0]]]||0)-x[1];
  if(o.bac&&o.bac<0)o.bac=-Math.min(-o.bac,Math.max(0,S.bac||0));return o}
-function eaOptX(p,r){const P=eaPx(p,r),vv=BAL.ea.pick.vent;const up=!(S.mood&&S.mood.v>0);
+function eaOptX(p,r){const P=eaPx(p,r),vv=BAL.ea.pick.vent;const up=!(eaMV()>0);/* ONE source (law 3 / law 11): the bar she sees (moodBar via kitMoodVal), never the raw S.mood.v that lags the causes */
  const gs=(up?["giải tỏa tâm trạng"]:[]).concat(P.G.filter(x=>!EA_OWN[x[0]]).map(x=>/−$/.test(x[0])?`${x[0]}${x[1]}`:`${x[0]} +${x[1]}`));
  const ls=(up?[]:["lòng vui lắng xuống"]).concat(P.L.filter(x=>(x[1]||x[6])&&!EA_OWN[x[0]]).map(x=>x[6]||`${x[0]} ${x[5]?"+":"−"}${x[1]}`));const pm=P.L.find(x=>x[0]==="cấm túc");if(pm)ls.push(`có thể bị cấm túc (${word(pm[4])})`);
  return[gs.length?`thành: ${gs.join(", ")}`:"",ls.length?`kèm: ${ls.join(", ")}`:""].filter(Boolean).join(" · ")}
@@ -399,7 +402,7 @@ window.eaPick=eaPick;
 /* returns {h: story lines, past: the real numbers} for her event; NPC: applies and returns a news line */
 function eaDo(p,r){const F=BAL.ea.fx[r.k]||{vent:BAL.ea.ventDef},me=p===S,res=[];let h="",target=null;const add=(t)=>res.push(t);
  /* the outburst spends the feeling: her bar moves toward calm (down from joy, up from a low mood); TEMPER-OUTBURST: an option of the choice (r.pv) vents BAL.ea.pick.vent, the same for all */
- const VV=r.pv?BAL.ea.pick.vent:F.vent;const vent=()=>{if(me){const d=ventMe((S.mood&&S.mood.v>0?-1:1)*VV,lc1(r.n));if(d)add(`tâm trạng ${sgn(d)}`)}else ventNpc(p,VV)};
+ const VV=r.pv?BAL.ea.pick.vent:F.vent;const vent=()=>{if(me){const d=ventMe((eaMV()>0?-1:1)*VV,lc1(r.n));if(d)add(`tâm trạng ${sgn(d)}`)}else ventNpc(p,VV)};
  const pay=(o)=>{if(me){if(!r.fxPaid)apply(o)}else ap(p,o);/* TEMPER-OUTBURST: her option row's fx already paid her own stats (j3 chooseM applies fx, then go) */for(const k in o){const lb=EA_LB[k]||(typeof NAMES!=="undefined"&&NAMES[k]);if(o[k]&&lb)add(me?`${lb} ${sgn(o[k])}`:eaN(p,lb,o[k]))}};
  const ml=maidOf(p);const M=ml.length?eaVictim(ml):null;
  switch(r.k){
@@ -638,7 +641,7 @@ const QUO_E={hot:"Hoàng thượng đập bàn quát lớn",even:"Hoàng thượ
  try{if(!eaOn()||!d||!Array.isArray(d.o)||typeof nx!=="function")return d;const M=eaMine();if(!M.b||!M.i)return d;const P=BAL.ea.pillow,T=eaTemper(S),band=M.b.name.toLowerCase();
   for(const o of d.o){const quiet=/^Lặng lẽ/.test(o.n),lively=/^(Bàn thơ văn|Rót rượu)/.test(o.n);let adj=0;
    if(M.i>=1){if(lively)adj=P.up}else if(!quiet)adj=-(M.i<=-2?P.dn2:P.dn);
-   if(T.k==="hot"&&M.g==="gian"&&S.mood&&S.mood.v<=-E().out.v&&/^Rót rượu/.test(o.n))o.eaLock=`ngươi đang ${band}, tính nóng, không nũng nịu nổi`;
+   if(T.k==="hot"&&M.g==="gian"&&S.mood&&eaMV()<=-E().out.v&&/^Rót rượu/.test(o.n))o.eaLock=`ngươi đang ${band}, tính nóng, không nũng nịu nổi`;
    if(!adj)continue;const b=(o.od||0)+adj,g0=o.go;const w=String(nx(b,"")).split(" · ")[0];
    o.x=String(o.x||"").replace(/^[^·]+·/,w+" ·")+` · lòng ngươi đang ${band} (${adj>0?"dễ":"khó"} hơn)`;o.od=b;
    o.go=function(){pp.q=(pp.q||0)+adj;try{return g0.apply(this,arguments)}finally{pp.q-=adj}};cnt(EA_N,"pillow")}}catch(e){}return d}})();
@@ -647,7 +650,7 @@ function eaWeek(){if(!eaOn())return;EA_N.wk++;const A=eaS(),w=W();if(A.wk===w)re
  try{eaHoi()}catch(e){console.error(e)}
  try{eaExtMe()}catch(e){console.error(e)}
  /* her outburst (FEELINGS-18: per buổi in jfeel feelActTick — heavy level + this bar line — while jfeel is on; this weekly path is the off-switch fallback) */
- try{if(!eaActsJfeel()){const M=eaMine(),O=E().out;const v=S.mood?Math.abs(S.mood.v):0;if(M.g&&v>=O.v&&(A.ocd||0)<=w&&!(typeof isSrv==="function"&&isSrv())){const T=eaTemper(S);if(roll(O.ch*(O.t[T.k]||1))){if(eaMeOut(M.g)){A.ocd=w+O.cd;EA_N.outWk++}}}}}catch(e){console.error(e)}
+ try{if(!eaActsJfeel()){const M=eaMine(),O=E().out;const v=S.mood?Math.abs(eaMV()):0;if(M.g&&v>=O.v&&(A.ocd||0)<=w&&!(typeof isSrv==="function"&&isSrv())){const T=eaTemper(S);if(roll(O.ch*(O.t[T.k]||1))){if(eaMeOut(M.g)){A.ocd=w+O.cd;EA_N.outWk++}}}}}catch(e){console.error(e)}
  try{eaNpcWeek()}catch(e){console.error(e)}}
 window.eaWeek=eaWeek;
 (function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const w0=W();const r=e0.apply(this,arguments);try{if(S&&!S.dead&&W()!==w0)eaWeek()}catch(e){console.error(e)}return r}})();
@@ -659,16 +662,19 @@ window.eaWeek=eaWeek;
    button (disabled, as when bạc is short), no new part. NPCs already pick by trait (persW) and feeling (jemo emoMul). */
 const EA_HOLD=/^(Nhịn|Nhẫn nhịn|Nhịn cho êm|Nhịn lời mỉa mai|Im lặng|Im lặng ghi nhớ|Làm ngơ|Lờ đi|Cúi đầu nhận lỗi|Cúi đầu tránh đi|Cúi đầu đi qua như người lạ)$/;
 const EA_HIT=/^(Đáp trả|Cãi lại|Mắng thẳng mặt|Đối chất|Vặn lại)/;
-function eaLockWhy(c,m){try{if(!eaOn()||!c||!m||!m.opts)return"";if(c.eaLock)return m.opts.some(o=>o!==c&&!o.eaLock)?c.eaLock:"";const n=String(c.n||"").replace(/<[^>]+>/g,"").trim();const M=eaMine();if(!M.b)return"";const T=eaTemper(S);
+/* flight-choose-guard (law 11): an answer counts as open only when NO greying rule closes it (bạc short, kitOff, lock, lk(), tsDis, unmet need),
+   else her temper could grey the last open road (arm B co-op H77P: every option of a «Kẻ hầu» card greyed with bạc 117) */
+function eaFree(o){try{if(!o)return false;if(o.fx&&o.fx.bac&&S.bac+o.fx.bac<0)return false;if(o.off||o.lock||o.tsDis)return false;if(o.need&&o.need.some(n=>n&&!n.ok))return false;if(typeof o.lk==="function"&&o.lk())return false;return true}catch(e){return false}}
+function eaLockWhy(c,m){try{if(!eaOn()||!c||!m||!m.opts)return"";if(c.eaLock)return m.opts.some(o=>o&&o!==c&&!o.eaLock&&eaFree(o))?c.eaLock:"";const n=String(c.n||"").replace(/<[^>]+>/g,"").trim();const M=eaMine();if(!M.b)return"";const T=eaTemper(S);
   /* another answer she can really take (bạc enough) of the wanted kind must stay open: never a dead end (bot r3: "Làm ngơ" greyed while
      the only other answer cost bạc she lacked → stuck) */
-  const usable=o=>o&&o!==c&&!(o.fx&&o.fx.bac&&S.bac+o.fx.bac<0);const nmO=o=>String(o.n||"").replace(/<[^>]+>/g,"").trim();
-  if(T.k==="hot"&&M.g==="gian"&&M.hv&&S.mood.v<=-E().out.v&&EA_HOLD.test(n)&&m.opts.some(o=>usable(o)&&EA_HIT.test(nmO(o))))return`ngươi đang ${M.b.name.toLowerCase()}, tính nóng, không nhịn nổi`;
+  const usable=o=>o&&o!==c&&eaFree(o);const nmO=o=>String(o.n||"").replace(/<[^>]+>/g,"").trim();
+  if(T.k==="hot"&&M.g==="gian"&&M.hv&&eaMV()<=-E().out.v&&EA_HOLD.test(n)&&m.opts.some(o=>usable(o)&&EA_HIT.test(nmO(o))))return`ngươi đang ${M.b.name.toLowerCase()}, tính nóng, không nhịn nổi`;
   if(T.k==="timid"&&M.i<=-2&&M.g&&M.hv&&EA_HIT.test(n)&&m.opts.some(o=>usable(o)&&!EA_HIT.test(nmO(o))))return`ngươi đang ${M.b.name.toLowerCase()}, tính nhút nhát, không dám`;}catch(e){}return""}
 window.eaLockWhy=eaLockWhy;
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const m=Q[0];if(m&&m.opts)document.querySelectorAll("#modal .opts > button.opt[data-m]").forEach(b=>{const c=m.opts[+b.dataset.m];const why=eaLockWhy(c,m);if(!why)return;
   b.disabled=true;const sm=b.querySelector("small");if(sm)sm.textContent="Cần: "+why;if(!c.__eaN){c.__eaN=1;cnt(EA_N,"lock")}})}catch(e){}return r}})();
-(function(){if(typeof chooseM!=="function")return;const c0=chooseM;chooseM=function(i){try{const m=Q[0];if(m&&m.opts&&eaLockWhy(m.opts[i],m)){/* the button is disabled; a script call (bots) takes the answer her temper allows */const j=m.opts.findIndex(o=>o&&!eaLockWhy(o,m)&&!(o.fx&&o.fx.bac&&S.bac+o.fx.bac<0));if(j<0||j===i)return;arguments[0]=i=j}}catch(e){}return c0.apply(this,arguments)}})();
+(function(){if(typeof chooseM!=="function")return;const c0=chooseM;chooseM=function(i){try{const m=Q[0];if(m&&m.opts&&eaLockWhy(m.opts[i],m)){/* the button is disabled; a script call (bots) takes the answer her temper allows */const j=m.opts.findIndex(o=>o&&!eaLockWhy(o,m)&&eaFree(o));if(j<0||j===i)return;arguments[0]=i=j}}catch(e){}return c0.apply(this,arguments)}})();
 window.eaDo=eaDo;window.eaKeyOf=eaKeyOf;window.eaSay=eaSay;window.eaExtNpc=eaExtNpc;window.eaPeople=eaPeople;window.eaNpcWeek=eaNpcWeek;
 window.eaStat=function(){return JSON.parse(JSON.stringify(EA_N))};
 })();
