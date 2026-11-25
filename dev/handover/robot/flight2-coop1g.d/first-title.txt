@@ -1,0 +1,9 @@
+1195-TAP .dlg «Gửi»
+1196-TAP .dlg «Lui»
+1197-TAP page «Đức Thọ cung · Ở đây còn 4 người.» «Quẻ Trung (Mưu kế)»
+1198-TAP page «Đức Thọ cung · Ở đây còn 4 người.» «Tâm trạngBình thản+6»
+1199-TAP .dlg «Tâm trạng · Ta» «Lui»
+1200-TAP .dlg «Tâm trạng · Cung nữ thân tín tam đẳng Tố Trân» «Lui»
+1201-TAP .mapsc «Ô lưu»
+1202-TAP #modal «unstick Lui»
+1203:NOW #title «» hit 0 idle 18 buổi 22 areaTaps 62

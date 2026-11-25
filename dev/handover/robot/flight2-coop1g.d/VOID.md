@@ -1,0 +1,6 @@
+# flight2-coop1g ROOM VOID (harness 1ffae8bb, seed 7002, LIVE, host fold / guest ipad)
+PRIORITY #1 CHECK: coop1g -> d5545202 part (buoi 0-6, 09:19-09:40Z) VOID by F #9 order, restarted fresh on 1ffae8bb 09:40Z.
+- Room played buoi 1-22 in ~11 min wall (09:40-~09:51Z), 0 stuck, 3 DEAD BUTTON (pet dialog «Nhờ thái giám tìm thú nuôi»: «Xem Chó nhỏ lông xù/Chim họa mi/Thỏ ngọc» covered by span.kitb/b.kidn in #mb), 1 BUG js page error `f.rk.split is not a function` (run-taps.log).
+- ~09:51Z host (buoi 22): tap .mapsc «Ô lưu» then ladder «unstick Lui» in #modal -> host on #title (art only, NO buttons) and stays there. Guest (iPad) shows «Đợi hảo hữu trở lại — ám hiệu XECQ, hảo hữu đang vắng» (guest-now.png, host-now.png).
+- ~10:10Z guest also on #title with no buttons; ladder only reaches «Chọn sổ» / «Cùng hảo hữu» → «Trở lại phòng» → «Chưa vào được phòng» (x4+) and «Một mình» taps. Room never recovered; no progress 30 min after ladder -> VOID at 10:22Z.
+- Likely family: (1) #title without buttons after leaving a room (known first-run loader / A-COOP 7GWV «co-op room → #title»); (2) «Trở lại phòng» rejoin fails «Chưa vào được phòng». Both seats' seat jsons + ckpts + run logs in this folder. No exit-road pick recorded by the harness (see jsons exitPick).
