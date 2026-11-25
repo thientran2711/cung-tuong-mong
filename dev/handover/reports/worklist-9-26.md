@@ -39,3 +39,38 @@ START_CTX ≈ 4.5 % (ceiling 29.5 %).
 
 ## HANDOVER (rollover: context at the ceiling)
 Both branches pushed. Open for a successor: (1) net-thresholds robot gate + full gates; (2) talk-others-people real-tap via the harness + shots + full gates; then BIG review each. Not touched: ring/vòng-nhóm UI (MAIN/KK); T1/T2 temper seats read BAL.net — no second threshold copy made. Worktrees /home/user/wt/w9, /home/user/wt/w26 kept for the successor (scratch /home/user/wt/w9-out, w26-out).
+
+## SEAT W2 (session_01D3E3NYFRLosstH2Jpw3nQP, 25/11 ~07:40–09:20Z) — START_CTX ≈ 6 %
+PRIORITY #1 CHECK: this report + D-temper-robot-0725 «SEAT W» | main 9f72524b (base of net-thresholds; d-followups-1-rv cc4fed89 still NOT in main) | review/net-thresholds 9d214d54, review/talk-others-people 89fd188a, review/robot-realtap 4523381f | claims: this seat.
+
+### review/talk-others-people → 8b288d9e (SẴN SÀNG KIỂM, reviewer session_01D3E3Nb7G3pi5N3uqUqqmAn per D)
+- b7604887: real-tap test `dev/test/svt-len-rt.js <url> <robot-rt ckpt.json> <out> fold|ipad` (realtap.js copied byte-identical from review/robot-realtap; mid-game save = robot-rt.js sliced life 30 buổi, `slice=30 cp=10`). Fold + iPad PASS, 0 dead, 0 jsClicks. FOUND+FIXED: a named woman of another house (s.eid) showed two «Giao thiệp» tabs + two «Hỏi chuyện» (jstaff elderGroups + jsvt) → j15 `svtGiao`: one group = Biếu + jsvt «Hỏi chuyện» + «Hỏi lén» (elder's own «Hỏi chuyện» dropped on other-house cards only).
+- 8b288d9e (D order, LAW 11): result card said «ta không được gì, cũng không mất gì» after a talk that taught a nết. ONE hook in the result kit (j63 `KAK`): every knowledge line written since the act's rsnap through the three hubs noteAdd (j21 Sổ) / kitKnow (jnotice) / intelAdd (j78 tin/secrets) is listed under «Được». Family = all 56 noteAdd + 30 kitKnow + 9 intelAdd call sites (learnTrait, trait-by-deed j28:82, k61Know, intelLearn, jmen/j92/j95/jagknow). kitResultCard (jkitsel 93.8) gets explicit rows from its callers — not touched.
+
+| case (dev/test/ka-know.js) | BEFORE (b7604887) | AFTER (8b288d9e) |
+|---|---|---|
+| learnTrait shown («Hỏi chuyện» / «Hỏi lén») | Ghi chú: không được gì — FAIL | Được: Sổ ghi thêm về X: … biết nàng Kiêu ngạo |
+| learnTrait with notice | FAIL | Được: Ngươi biết nết X: kiêu ngạo. |
+| noteAdd shown | FAIL | Được: Sổ ghi thêm về X: … |
+| intelLearn (tin / secret) | FAIL | Được: <the fact> (Sổ duplicate folded) |
+| kitKnow only | FAIL | Được: <notice text> |
+| CONTROL nothing learned | Ghi chú (correct) | Ghi chú (correct) |
+| total | 1/6 | 6/6 |
+- Real UI after fix (Fold, talked): «KẾT QUẢ … là người nóng nảy. ĐƯỢC Sổ ghi thêm về Hoàng hậu Từ Anh Ninh: Khâu Lưu Ly kể: biết nàng ta Nóng nảy».
+- servant-trust flake fixed (the «Hỏi lén» seen case picked a rival of her own palace → svTouch exempt): 89/89 ×8 stable. svt-scan 68/0, one-core ×4 PASS, coop-e2e 142/142 (b7604887), quickcheck PASS on b7604887 and on 8b288d9e (render 302/291 ms, buổi 1958/1662 ms, tasks>200ms 27/27).
+
+### review/net-thresholds 9d214d54 — NOT ready (tuning open)
+- Gates PASS: one-core ×4, two-way-oldsave (main save → 40 weeks, 0 errors). net-build 203/203 (W).
+- Robot band-3 (nt-run sens, 900 s slots, hang → fresh life in the same slot, `dev/measure` + /home/user/wt/w9-out/slot.sh):
+| build | weeks | npcAct band-3 share | proud÷gentle harm | NPC→NPC oán p50/p90 |
+|---|---|---|---|---|
+| live main 9f72524b ×3 | 733 | 719/1313 = 54.8 % | 3.42 | 15/96 |
+| net-thresholds oanCool .05 ×3 | 690 | 404/1086 = 37.2 % | 3.13 | 11/75 |
+| cand oanCool .10 ×1 (starved, early weeks only) | 109 | 31/213 = 14.6 % | 4.20 | 13/60 |
+| cand .15 ×1 (starved) | 134 | 12/173 = 6.9 % | 2.35 | 4/38 |
+| cand .20 ×1 (starved) | 173 | 13/265 = 4.9 % | 1.94 ✗ | 3/28 |
+- The candidate rows are NOT comparable (14 «bot step hang» under CPU load, early game only; band-3 grows with weeks). The «bot step hang >120s» also hits live and new alike (harness/life hang, not branch-specific).
+- NPC→her band-3 is ghen-driven (ghen p50 99, top driver 93–97 %) — oanCool cannot move that part; if .10 does not reach ≤ 30 % on a clean run, the rest is ghen saturation → D/MAIN call, not oanCool.
+
+### HANDOVER (W2 rolled at START_CTX + 25 %)
+Successor: (1) rerun `cand/c10.html` (= w9 build with `BAL.net.oanCool=.10`) ×3 slots ALONE on the box (no other robots; `./slot.sh C10a|b|c <html>`), nt-sum / nt-norm vs N1–3; if band-3 ≤ 30 % and proud÷gentle ≥ 2 → set BAL.net.oanCool=.10 in jbal2.js:2152, rebuild site, net-build.js + one-core ×4 + quickcheck + coop-e2e, push, SẴN SÀNG KIỂM to D. Else report the ghen share to D. Summaries + slot.sh: dev/handover/reports/nt-w2/ (raw json not kept). c10.html = `sed "s/BAL.net.oanCool=.05;/BAL.net.oanCool=.10;/" dev/index.html` of the w9 build.
