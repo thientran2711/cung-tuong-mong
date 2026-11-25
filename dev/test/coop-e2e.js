@@ -87,6 +87,16 @@ async function spillWalkA(A){return A.p.evaluate(()=>{if(S.dead||Q.length||S.mg|
    the server, but every frame relayed to it meanwhile is lost; it wakes after > 3 s and jcoop's wake() reconnects at once, so the friend
    never sees a peer drop. The seat must catch up from the room snapshot / a resync, never sit on "Chờ hảo hữu…". */
 const RECON=+process.env.COOP_RECONNECT||0;
+/* COOP_HOSTDIE=1 (flight-coop-sync, A-COOP room SX8M wk80): in week 0's buổi tối both press, the host commits the night and DIES inside it
+   (rebirth at the week end) while the guest ends the week. Before the fix the reborn host sat on «Chờ hảo hữu…» for ever (sendMe reset its
+   night gate ngoW, its commit ngo stayed, nCheck never re-opened it) = both seats stuck, no button. The room week must still move. */
+const HOSTDIE=+process.env.COOP_HOSTDIE||0;
+async function hostDieNight(A,B){const w0=(await C(A)).week;await clear(A);await clear(B);
+ await A.p.evaluate(()=>{const nb=nextBuoi;nextBuoi=function(){if(COOPW.allowN&&!window.__hdDied&&S&&!S.dead){window.__hdDied=1;die('Thử: trúng gió');return}return nb.apply(this,arguments)}});
+ await press(A,'n');await press(B,'n');
+ const moved=await untilC(A,w0=>!!window.__hdDied&&typeof S!=='undefined'&&S&&!S.dead&&!COOPW.inLife&&__co().week>w0,w0,120000);
+ const mb=await untilC(B,w0=>__co().week>w0,w0,30000);
+ ok(moved&&mb,'host reborn inside its own buổi tối: the room week still moves on both seats (flight-coop-sync)',moved&&mb?undefined:await A.p.evaluate(()=>({died:!!window.__hdDied,co:__co(),sent:COOPW.sent,ngo:COOPW.ngo,ngoW:COOPW.ngoW,nrdy:COOPW.nrdy,next:document.getElementById('next').textContent,tr:COOPW.tr.slice(-16)})))}
 const netDown=o=>o.p.evaluate(()=>{if(!window.__visHook){window.__visHook=1;Object.defineProperty(document,'visibilityState',{configurable:true,get:()=>window.__vis||'visible'})}
   window.__vis='hidden';document.dispatchEvent(new Event('visibilitychange'));window.__wsDeaf=true});
 const netUp=async o=>{const n0=await o.p.evaluate(()=>{window.__wsDeaf=false;window.__vis='visible';const n=(window.__wsLog||[]).length;document.dispatchEvent(new Event('visibilitychange'));return n});
@@ -103,7 +113,7 @@ async function buoiBoth(A,B,shotWait){const k0=await A.p.evaluate(()=>__co().wee
     return true}await clear(A);await clear(B);await sleep(250)}
   const dbg=o=>o.p.evaluate(()=>({k:__co().week+':'+(S.buoi||0),used,Q:Q.length,mg:!!S.mg,next:document.getElementById('next').textContent,dis:document.getElementById('next').disabled,bend:COOPW.bend,pend:COOPW.pend,sent:COOPW.sent,tm:S.toMorning,nf:typeof nfDebug==='function'?(()=>{const d=nfDebug();return Object.assign(d,{ntr:window.__nfTr,dtr:window.__dayTr,last:S.nfLast?{d:S.nfLast.d,fin:S.nfLast.fin,ph:S.nfLast.ph}:null,W:S.nfW})})():null,tr:COOPW.tr.slice(-14)})).catch(e=>e.message);
   ok(false,'buổi '+k0+' advanced for both',{A:await dbg(A),B:await dbg(B),sA:await A.p.evaluate(require('./lib/coop-clear.js').SCR).catch(e=>e.message),sB:await B.p.evaluate(require('./lib/coop-clear.js').SCR).catch(e=>e.message)});return false}
-async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='number'?B4N:3);/* buổi per week: 4 since jtime4 */for(let k=0;k<n;k++){if(RECON&&w===0&&k===n-1){await nightGap(A,B);continue}await buoiBoth(A,B,w===0&&k===0?'06-waiting-friend':null)}}
+async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='number'?B4N:3);/* buổi per week: 4 since jtime4 */for(let k=0;k<n;k++){if(RECON&&w===0&&k===n-1){await nightGap(A,B);continue}if(HOSTDIE&&w===0&&k===n-1){await hostDieNight(A,B);continue}await buoiBoth(A,B,w===0&&k===0?'06-waiting-friend':null)}}
 /* the night handshake while the HOST is offline: the guest's "ready" (ctm-nr rd) reaches nobody; the host comes back on a fast reconnect
    (the guest never sees a peer drop) and presses: the night must still go (before: both sat on "Chờ hảo hữu…" until the room clock) */
 async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await clear(B);await netDown(A);await sleep(800);await press(B,'n');await sleep(3500);
