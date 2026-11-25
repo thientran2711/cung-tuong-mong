@@ -46,3 +46,43 @@ FAIL — B1, B2, B3. W2 builds on review/talk-others-people-rv 98f093b3 (has R1)
 - B1 OPEN (merged «Hỏi chuyện» on named women loses the elder talk gains: meAct thiện cảm, k61Meet, palace news line).
 - B2 OPEN (PEND.svtAsk has no covert variant for an NPC approaching HER on the cung-nữ road).
 Round 3 = merge 98f093b3 + B1 + B2, then servant-trust, ka-know, svt-len-rt Fold+iPad, one-core, coop-e2e, quickcheck.
+
+## ROUND 2 (RV2, session_01D3E3NaSsipN1iUZHpNZHje, Foreman D's BIG-tier reviewer, 25/11) — review/talk-others-people-rv 25a9a9cc (W3) — VERDICT: PASS 25a9a9cc
+PRIORITY #1 CHECK: OD 24/11 ~07:58Z/~08:08Z/~08:12Z (#26) via this file r1 | main 9f72524b | review/talk-others-people-rv 25a9a9cc = -rv 98f093b3 (R1) + 8b288d9e (B3) + 08eaa416/25a9a9cc (B1/B2/N1/N2) | base: d-followups-1-rv cc4fed89 (on ca5af050), NOT yet on main | claims: Foreman D, W3→W4.
+Rules read: START_CORE (18 laws), START_WORKER, START_REVIEWER, worklist-9-26 «SEAT W3».
+
+### Gates (rerun by the reviewer, worktree /home/user/wt/rv2 at 25a9a9cc, index.html = a fresh assemble, no diff)
+| Gate | Result |
+|---|---|
+| servant-trust.js | 101/101 PASS |
+| ka-know.js | 6/6 PASS (incl. control «không được gì») |
+| svt-scan.py | 69 sites, 0 UNWIRED |
+| one-core guard / bind / text / text-rule | PASS ×4 |
+| coop-e2e.js | 142/142 |
+| quickcheck ×3, ALONE on the box (perf new/live, median of 3 each) | PASS ×3 · buổi 1576/1487, 1360/3404, 1349/1271 ms · render 274/273, 258/241, 278/248 · tab 586/610, 562/621, 635/554 · old save ok ×3 · core gates PASS. W3's 2943 ms does NOT reproduce; the buổi number is noisy on BOTH sides (live 3404 once). No slowdown caused by the branch. |
+| svt-len-rt REAL TAPS, robot save flight2-s8.ckpt.json (handover branch; year 2, Phế phi lãnh cung) | Fold PASS (talked «Hỏi lén» Tiểu Phong Tử: ĐƯỢC learned nết + MẤT Hoàng hậu thiện cảm −10, seen) · iPad PASS 4/6 runs; 2/6 FAIL «›» realtap «gone» only when run right after a Fold run (harness timing; standalone 4/4 PASS); 0 dead, 0 jsClicks in every PASS |
+| reviewer probe (scratch copy of svt-len-rt + real taps) Thái hậu card «Hỏi chuyện» (Hà Tú Dung) Fold + iPad | tap works both: 2 khắc spent, SVT.stat.thh +1, «Hà Tú Dung chịu nói chuyện. Hà cô cô: “…”» (palace news line), thiện cảm 0→1, «Ta đã quen biết ma ma Hà Tú Dung» → B1 gain + N1 path real |
+Shots looked at 3× (Fold 755x1000@2 + iPad 1180x820@2: other-house servant card before/after, Thái hậu card before/after): one «Giao thiệp» group, kit pbtn cards «Hỏi chuyện · Tốn 2 khắc» / «Hỏi lén · Tốn 3 khắc», «Cần ✓ … (sang buổi chiều)» spill line, no plain elder talk on Thái hậu cards, kit result card. Shots in scratch only, none in git/CDN.
+Note: robot save flight2-s9.ckpt.json cannot be used by svt-len-rt (opens on a must-choose Kính sự phòng card; the close loop only taps ✕/Lui) — harness, not branch.
+
+### Round-1/2 findings
+- R1 (dead «Hỏi lén»): MERGED (j15 whyTime(BAL.svt.kLen / k)); thh card uses the same.
+- B1 FIXED: jstaff `elderTalkGain(st)` is the ONE elder gain; elder «hoi» and svTalk (a===S, named woman, not refused) call it; refused → no gain (servant-trust control). Real tap confirmed (above).
+- B2 FIXED: svtMonth rolls svtLenO(p) for PEND.svtAsk (pp.len); covert card «… lén tìm đến lúc vắng người, kéo ngươi ra nói chuyện riêng …»; talk → no svtEtq (no bất kính) and her master hears through svTouch "len"; refuse owes no greeting. Old saves: PEND without len = the open ask (unchanged).
+- B3 FIXED (r2, 8b288d9e).
+- N1 DONE: Thái hậu household card = svtGiao(elderGroups + «Hỏi chuyện»/«Hỏi lén» data-elder hoi2/hoi3) → svtThhTalk (refusal, elder gain, witness-only suspicion → Chủ tin −BAL.svt.tin, th −BAL.svt.rel).
+- N2 DONE.
+
+### Laws
+1 two-way: OK for her↔others (NPC masters ask her servants / her on the cung-nữ road, open AND covert). Known gap «NPCs don't talk to the Thái hậu's women» = NPC↔NPC parity, and the Thái hậu herself never sends people to her servants — both PRE-EXISTING (the old plain elder talk had no reverse either); this branch does not make it worse → NOT blocking; file as a follow-up item for D.
+2 equal value: OK (open 2 khắc / higher seen / bất kính where the master stands; covert 3 khắc / lower seen / heavier loss; same gain). On the Thái hậu card the open talk has no bất kính (no place for her) → open vs covert differ by khắc, seen odds, loss size — still a fair trade.
+3 gain+loss: OK. 4 one core: OK (BAL.svt.*, BAL.eff.jstaff.meAct; one-core ×4 green). 6a/6b: OK (real witness, real named women). 7 wording: cổ trang, no numbers in after-lines (servant-trust noNum). 9 kit: OK (pbtn/pcard/svtGiao/result card, no new part). 11 family: R1 scan (r1) + B3 ka-know family + N1 extends #26 to the Thái hậu household.
+
+### Non-blocking (for D's list)
+NB1. jsvt.js svtThhTalk comment says «or the Thái hậu's own presence for the open talk» — the code has only the talkative-woman witness. Fix the comment or build it with the bất kính follow-up.
+NB2. Result card after an elder talk (old «hoi» and the merged talk) lists «quen biết» but not the thiện cảm +1 nor the news line under ĐƯỢC (thiện cảm of elders is not in rsnap) — pre-existing on main; LAW 11 family candidate with the KAK hook.
+NB3. svt-len-rt iPad «›» «gone» flake right after a Fold run (wait for the strip before paging).
+NB4. Law-1 follow-up above (NPCs ↔ Thái hậu's women; Thái hậu's people ↔ her servants).
+
+### Verdict
+PASS 25a9a9cc. NOT fast-forwardable on main 9f72524b: it stacks on review/d-followups-1-rv cc4fed89 (LAND READY, not landed). Land after d-followups-1-rv; a trial merge of 25a9a9cc onto 9f72524b is clean in source (dev/build/*.js, dev/test/*) — only index.html / sw.js / assets.json conflict → take either, rebuild (dev/site/build_site.sh), commit. No reviewer commits on the -rv branch this round.
