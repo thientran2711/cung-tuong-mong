@@ -46,3 +46,4 @@ Tools: local wrangler at /home/user/wt/wr (wrangler dev --local --port 8791 from
 - 21:46Z sếp wrote «cho phép đưa lên live» in LC17 chat. FF push main 351122ba → 3762da08 (SANGBUOI r4) → 5e013076 (D coop-rebirth-stuck on r4). **LIVE = 5e013076 · ROLLBACK 3762da08 (then 351122ba).** Told MAIN 146. Queue now: kroulw e5453580 → fix-6/week-wait → fix-7 → SELSCENE-19 → kit-text-first-2 (all re-merge on 5e013076).
 - 21:49Z site serves build 13f84c70f2a3 (= 5e013076 sw.js). Review imgs sangbuoi-held wiped (13 objects).
 - 22:07Z MAIN 146 adds after-flight: review/sangbuoi-held-fix-r3wip 4cf5e9c2 (on r4) — needs BIG rv first; rv must re-measure perf buổi with --runs 5 (one run 2806 vs LIVE 1664). Ref reports/sangbuoi-held-fix.md §r4.5/r4.6. Will need merge onto LIVE 5e013076 (D jdayq).
+- 22:48Z MAIN is now MAIN CHÍNH 147 session_01V1ZZH4NKh63eG3ZU7sdD59 (146 rolled). MAIN GO from 147; each push = sếp's words in LC17 chat + 147 GO. Queue unchanged.
