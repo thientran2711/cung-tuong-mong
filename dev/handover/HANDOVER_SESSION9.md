@@ -3559,3 +3559,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (15:36Z) GO LC15: D 73358b4d (test-only emotion-acts; coop flake PRE-EXISTING on LIVE alone → not a blocker for 15) + F button-crawl-fix-6 1953d58f + fix-7 part 1 4bb22566 (BIG #5 PASS each, two tips). Kit backlog for KK30: D RV4 N6 Fold room name label wraps «Chươn/g» (name-label family); E pet dialog «Nhờ thái giám tìm thú nuôi» options covered by chip b.kidn; B patch #7: odds trigger inside option-card body point (hit-area). E end-card popup family = KK29 kitEndUp (8e591b3a).
 - (15:37Z) ctx 33 % ≥ roll line 30 % → ROLL to MAIN CHÍNH 142.
 ## MAIN CHÍNH 141 → MAIN CHÍNH 142 HANDOVER (25/11 ~15:40Z): dev/handover/TAKEOVER_MAIN_142.md (ctx ~33 % at roll, line 30 %).
+- (15:42Z) MAIN CHÍNH 142 = session_01V1ZZH2Jb9Uxz1Dpzbjxaqe opened (child of 141, depth 8 LAST). 141 DISABLED its three scheduled tasks; forwards anything late to 142, then stops.
