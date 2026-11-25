@@ -8,8 +8,9 @@
    - the event's own picture (the band of the frame, `.k3ev` / `.kdlgart`) is the BACKGROUND of the whole layer (clear, bright; a soft shade only
      under the hand); no picture → the warm kit stage colour;
    - the SPEAKER (the frame's figure `.kszfig`) stands full body on the LEFT, HER figure (kitFigOf(S)) full body on the RIGHT (layout A, §93.4);
-   - the title = a small plaque on top; the story (faces row + lines, `.kpmain`) = the kit speech box between the two figures (iPad) or under
-     their faces (Fold); it scrolls inside itself when long; it never covers a face (owner OD 24/11 ~15:15Z (d));
+   - the title = a small plaque on top; the story (faces row + lines, `.kpmain`) = a LIGHT speech box (soft paper, thin edge, no heavy panel) between
+     the two figures (iPad); on one page (Fold) a slim band that never covers a face or the upper half of a body: «foot» = just above the hand,
+     «top» = under the plaque with the figures below it (KIT_STAGE.fold); it scrolls inside itself when long (owner OD 24/11 ~15:15Z (d), 25/11 ~21:50Z);
    - the hand lies at the foot of the layer across the whole width (kitHand lays the cards for that width); the details plate sits above the
      lifted card, under the faces.
    - Motion (transform / opacity only, kitHandStill = none): the picture settles, the speaker walks in from the left, she from the right, the
@@ -17,7 +18,7 @@
    Data / taps are unchanged: the same #modal, the same buttons, the same choose path (chooseM). Numbers: geometry knobs only (KIT_STAGE). */
 const KIT_STAGE={pad:8,fig:[.98,.98]/* figure height share of the room [fold,ipad] */,feetIn:.30/* share of the hand height the feet may stand behind the cards */,
  faceK:.19/* the face band = top share of the painted figure */,midMin:420/* px between the figures for the speech box beside them (else it goes under the faces) */,
- boxMaxW:[720,760],plateW:560,inMs:[620,520,300],veil:"linear-gradient(to bottom,rgba(20,12,8,0) 55%,rgba(20,12,8,.34) 100%)"};
+ boxMaxW:[720,760],plateW:560,fold:"foot"/* one-page (Fold) speech place: "foot" = a slim subtitle band over the figures' lower half, just above the hand | "top" = a slim band under the title plaque, the figures stand below it (owner 25/11 ~21:50Z «chỉ là hình nhân vật xuất hiện cùng với những cái thông tin»; MAIN 146 picks; html[data-kstfold] overrides for the review pair) */,bodyK:.5/* the speech never covers the top half of a painted figure (one page) */,topCap:.30/* "top": the band takes at most this share of the layer */,inMs:[620,520,300],veil:"linear-gradient(to bottom,rgba(20,12,8,0) 55%,rgba(20,12,8,.34) 100%)"};
 (function(){try{const st=document.createElement("style");st.id="kit-stage";st.textContent=`
 html body #modal.kstg{background:transparent!important}
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage{position:fixed!important;left:var(--kstL)!important;top:var(--kstT)!important;width:var(--kstW)!important;height:var(--kstH)!important;max-width:none!important;max-height:none!important;min-height:0!important;
@@ -41,7 +42,7 @@ html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kstg-fig>img{position
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kstg-fig>.kt3{position:absolute!important;left:50%!important;top:var(--tagy,0px)!important;transform:translate(-50%,-100%)!important;width:max-content!important;max-width:14em!important;z-index:3;margin:0!important}
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kt3 .knr{background:#fffaf0e8;border:1px solid var(--gold,#b8901f);border-radius:8px;padding:1px 8px;box-shadow:0 2px 6px #0003}
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain{position:absolute!important;z-index:4;left:var(--bx)!important;top:var(--by)!important;width:var(--bw)!important;max-height:var(--bh)!important;height:auto!important;min-height:0!important;margin:0!important;
- overflow-y:auto!important;overscroll-behavior:contain;padding:10px 14px!important;background:#fbf1e6f2!important;border:1px solid var(--gold,#b8901f)!important;border-radius:12px!important;box-shadow:0 6px 22px rgba(0,0,0,.38)!important;display:block!important;flex:none!important}
+ overflow-y:auto!important;overscroll-behavior:contain;padding:8px 14px!important;background:#fbf1e6d6!important;border:1px solid #b8901f99!important;border-radius:12px!important;box-shadow:0 2px 10px rgba(0,0,0,.18)!important;display:block!important;flex:none!important;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain>.faces{display:flex!important;flex-wrap:wrap!important;gap:6px 14px!important;justify-content:flex-start!important;align-items:center!important;margin:0 0 6px!important;height:auto!important;min-height:0!important}
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain>.faces>figure{display:flex!important;max-width:none!important;flex:0 0 auto!important;height:auto!important;flex-direction:row!important;align-items:center!important;gap:6px!important;width:auto!important;min-width:0!important;margin:0!important}
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain>.faces .pframe,html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain>.faces .pfwrap{--kffw:34px;width:34px!important;height:auto!important;flex:0 0 34px!important}
@@ -49,7 +50,9 @@ html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain>.faces figcapt
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain>.faces img{max-width:34px!important;max-height:46px!important}
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain>.faces .pfnm,html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain>.faces .pcname,html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain>.faces .kfnm{font-size:.82rem!important;text-align:left!important;margin:0!important}
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .opts.khand{position:absolute!important;z-index:5;left:0!important;right:0!important;bottom:4px!important;top:auto!important;width:auto!important;margin:0!important;max-height:none!important;overflow:visible!important;background:none!important;border:0!important;box-shadow:none!important}
-html body #modal#modal#modal#modal#modal.kstg .dlg.kstage>.khplate{z-index:7}`;document.head.appendChild(st)}catch(e){}})();
+html body #modal#modal#modal#modal#modal.kstg .dlg.kstage>.khplate{z-index:7}
+html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain{transition:opacity .16s ease-out}
+html body #modal#modal#modal#modal#modal.kstg .dlg.kstage:has(>.khplate:not([hidden])) .kpmain.kstg-foot{opacity:0;visibility:hidden;pointer-events:none}/* one page «foot»: the lifted card's plate takes the band's place (✕ brings the story back) */`;document.head.appendChild(st)}catch(e){}})();
 function kstgWants(dl,g){try{if(!(dl&&dl.matches&&dl.matches("#modal .dlg")&&!dl.closest(".pc,.kpdlg")))return false;if(g)return g.closest(".dlg")===dl&&kitHandWants(g);return !!dl.querySelector(":scope>#mb .opts.khand")}catch(e){return false}}
 function kstgGeo(){try{if(typeof kscnGeo==="function")return kscnGeo()}catch(e){}return{t:0,H:innerHeight,L:0,R:0,w:innerWidth}}
 function kstgPic(dl){try{const im=dl.querySelector(".k3ev img,.kdlgart img,.kpiart img");return im&&(im.currentSrc||im.src)||""}catch(e){return""}}
@@ -78,18 +81,24 @@ function kstgPlace(dl){try{if(!dl||!dl.classList.contains("kstage"))return;const
  const hd=dl.querySelector(":scope>.kph"),sl=dl.querySelector(":scope>.kseal");const T0=(hd&&hd.getClientRects().length?hd.offsetTop+hd.offsetHeight:K.pad)+6;
  if(sl){sl.style.setProperty("right",K.pad+"px","important");sl.style.setProperty("left","auto","important");sl.style.setProperty("top",K.pad+"px","important")}
  const hH=g.offsetHeight||parseFloat(getComputedStyle(g).getPropertyValue("--khH"))||0,handTop=H-4-hH;
- const figBot=Math.min(H-4,handTop+Math.round(hH*K.feetIn)),fh=Math.max(120,Math.round((figBot-T0)*K.fig[ip]));const fy=figBot-fh;
+ const figBot=Math.min(H-4,handTop+Math.round(hH*K.feetIn));let fh=Math.max(120,Math.round((figBot-T0)*K.fig[ip])),fy=figBot-fh;
  const sp=mb.querySelector(":scope>.kstg-sp"),me=mb.querySelector(":scope>.kstg-me");let faceBot=T0,midL=K.pad,midR=W-K.pad;
  const put=(el,side)=>{if(!el)return;const im=el.querySelector("img");const nw=im&&im.naturalWidth||420,nh=im&&im.naturalHeight||1000,ob=kstgOb(im)||{l:.08,r:.92,t:.02,b:1};
   const fw=Math.round(fh*nw/nh);/* the painted part sits fully inside the layer; speaker hugs the left edge, she the right */
   let fx=side<0?Math.round(K.pad-ob.l*fw):Math.round(W-K.pad-ob.r*fw);el.style.setProperty("--fx",fx+"px");el.style.setProperty("--fy",fy+"px");el.style.setProperty("--fw",fw+"px");el.style.setProperty("--fh",fh+"px");
   const top=fy+ob.t*fh;el.style.setProperty("--tagy",Math.max(T0+16-fy,Math.round(ob.t*fh-2))+"px");faceBot=Math.max(faceBot,Math.round(top+K.faceK*fh*(ob.b-ob.t)));
   if(side<0)midL=Math.max(midL,Math.round(fx+ob.r*fw)+6);else midR=Math.min(midR,Math.round(fx+ob.l*fw)-6)};
- put(sp,-1);put(me,1);
- const pm=mb.querySelector(".kpmain");if(pm){let bx,bw,by;const roomMid=midR-midL;
-  if(roomMid>=K.midMin){bw=Math.min(K.boxMaxW[ip],roomMid);bx=Math.round(midL+(roomMid-bw)/2);by=T0+(ip?10:6)}/* between the two figures, beside their faces */
-  else{bw=Math.min(K.boxMaxW[ip],W-2*K.pad-8);bx=Math.round((W-bw)/2);by=faceBot+6}/* narrow screen: over their bodies, under their faces */
-  const bh=Math.max(90,handTop-by-(hH?Math.round(hH*.0):0)-10);pm.style.setProperty("--bx",bx+"px");pm.style.setProperty("--by",by+"px");pm.style.setProperty("--bw",bw+"px");pm.style.setProperty("--bh",bh+"px");dl.__kstBox={bx,by,bw,bh}}
+ const pm=mb.querySelector(".kpmain");const fm=document.documentElement.dataset.kstfold||K.fold;
+ const box=(bx,by,bw,bh)=>{pm.style.setProperty("--bx",bx+"px");pm.style.setProperty("--by",by+"px");pm.style.setProperty("--bw",bw+"px");pm.style.setProperty("--bh",bh+"px");dl.__kstBox={bx,by,bw,bh}};
+ /* one page, «top»: the slim band goes first under the plaque; the figures stand from under it to the hand (their faces never under the band) */
+ if(pm&&!ip&&fm==="top"){const bw=Math.min(K.boxMaxW[ip],W-2*K.pad-8),bx=Math.round((W-bw)/2),cap=Math.round(H*K.topCap);box(bx,T0,bw,cap);const bb=T0+Math.min(cap,pm.offsetHeight)+6;
+  fh=Math.max(120,figBot-bb);fy=figBot-fh;put(sp,-1);put(me,1);pm.classList.add("kstg-top");pm.classList.remove("kstg-foot")}
+ else{put(sp,-1);put(me,1);
+ if(pm){let bx,bw,by;const roomMid=midR-midL;pm.classList.remove("kstg-top","kstg-foot");
+  if(roomMid>=K.midMin){bw=Math.min(K.boxMaxW[ip],roomMid);bx=Math.round(midL+(roomMid-bw)/2);by=T0+(ip?10:6);box(bx,by,bw,Math.max(90,handTop-by-10))}/* between the two figures, beside their faces */
+  else{/* one page, «foot»: a slim subtitle band just above the hand, over the figures' LOWER half only (faces + upper bodies stay clear); long text scrolls inside */
+   bw=Math.min(K.boxMaxW[ip],W-2*K.pad-8);bx=Math.round((W-bw)/2);const lim=Math.round(Math.max(faceBot+6,fy+fh*K.bodyK)),bot=handTop-6,bh=Math.max(90,bot-lim);box(bx,lim,bw,bh);
+   const h=Math.min(bh,pm.offsetHeight);box(bx,bot-h,bw,bh);pm.classList.add("kstg-foot")}}}
  dl.__kstFace=faceBot;dl.__kstHandTop=handTop;
  if(dl.__kstNew){dl.__kstNew=0;kstgIn(dl)}}catch(e){console.error("kstgPlace",e)}}
 /* entrance: picture settles, speaker in from the left, she from the right, the speech box drops in (cards: kitHand deal) */

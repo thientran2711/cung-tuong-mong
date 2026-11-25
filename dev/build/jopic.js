@@ -148,9 +148,17 @@ function kitOptPic(title,b){const t=kitOptPlain(title);const tryKey=(k,how)=>{if
  if(t)for(const [re,k] of KIT_OPT_TAM)if(re.test(t)){const own=tryKey(typeof kitActKey==="function"?kitActKey(t):"","act");if(own)return own;const r2=tryKey(k,"tam");if(r2){r2.tam=true;return r2}break}
  /* a picture the option already carries: that picture, in the slot */
  if(b){const im=b.querySelector(".kan .md img, .kan img, .kitem img");const s=im&&(im.getAttribute("src")||"");if(s&&!/\/ph-(?:act-|event-|[plws]-)/.test(s))return{src:s,key:"",how:"own",face:!!im.closest(".md")}}
+ /* KK33 (owner 25/11 via MAIN 146 «each card's picture must differ and fit its option»): an option with no picture of its own that NAMES a person — one of the frame's
+    faction faces (Q[0].faces: by name or by role «Tể tướng»), Hoàng thượng / bệ hạ, Thái hậu — shows THAT person's portrait (real art), never the shared stand-in.
+    how = "lead" (a side / a person the choice follows), NOT a person picker: the hand (§101) keeps it. */
+ if(t){const L=kitOptLead(t);if(L)return L}
  if(typeof KIT_PH!=="undefined"&&(typeof kitPhActReady!=="function"||kitPhActReady())&&(typeof kitPhEventLike!=="function"||typeof Q==="undefined"||!Q[0]||!b||!b.closest("#modal")||kitPhEventLike(Q[0]))){/* review/kpanel-compact: no placeholder picture on a menu / confirm / picker option */const tone=typeof kitPhTone==="function"?kitPhTone(t):"light";
   try{if(typeof kitPhNote==="function")kitPhNote("opt",t.slice(0,60),tone,"")}catch(e){}return{src:KIT_PH.act[tone],key:"",how:"ph",tone}}
  return{src:"",key:"",how:"none"}}
+function kitOptLead(t){try{const C=[];const m=typeof Q!=="undefined"&&Q[0];
+  if(m&&Array.isArray(m.faces))m.faces.forEach(x=>{const w=x&&x[0];if(w&&w.src)C.push([w,[x[1],w.rw].filter(Boolean)])});
+  if(typeof pEmp==="function")C.push([pEmp(),["Hoàng thượng","bệ hạ","Bệ hạ"]]);if(typeof pTH==="function"&&!(typeof S!=="undefined"&&S.thDead))C.push([pTH(),["Thái hậu"]]);
+  for(const [w,ns] of C)if(w&&w.src&&ns.some(n=>n&&n.length>2&&kitOptHit(new RegExp(n.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),"i"),t)))return{src:w.src,key:w.rk||"",how:"lead",lead:true}}catch(e){}return null}
 /* the dialog option groups this applies to (every event / dilemma / night / reaction / servant / co-op dialog) */
 /* not: the identity card's approved pinned pair (.nlopts, KIT 31.16 "owner approved") */
 const KIT_OPT_SEL="#modal .opts:not(.nlopts) > button.ka, .kpscopts:not(.nlopts) > button.ka, .kitpg-opts > button.ka";/* r1: j79 kpIdentity moves the .nlopts pair into .kpscopts — still not a picture card */
@@ -199,7 +207,7 @@ function kpOptArt(b){if(!b||b.classList.contains("kcard"))return;if(b.dataset.ko
   ar.innerHTML="";ar.appendChild(c);ar.classList.add("kaav");try{kitOptStackTitle(kan)}catch(e){}
   b.dataset.kopt="1";b.dataset.kopic="face:chip";b.classList.add("kart","kopt","kopav");return}
  if(p.face)try{kitOptStackTitle(kan)}catch(e){}
- art.innerHTML=kitArtFrame(p.src,"","kopic"+(p.face?" kopface":""),"")+(p.tam&&typeof kitTam==="function"?kitTam(true):"");
+ art.innerHTML=kitArtFrame(p.src,"","kopic"+(p.face?" kopface":p.lead?" koplead":""),"")+(p.tam&&typeof kitTam==="function"?kitTam(true):"");
  if(col)b.style.setProperty("--kcc0",col);b.dataset.kopt="1";b.dataset.kopic=p.how+(p.key?":"+p.key:"");b.classList.add("kart","kopt")}
 window.kitOptPic=kitOptPic;window.kpOptArt=kpOptArt;window.KIT_OPT_RULES=KIT_OPT_RULES;window.KIT_OPT_TAM=KIT_OPT_TAM;
 (function(){if(typeof kaNorm1!=="function")return;const n0=kaNorm1;kaNorm1=function(b){const r=n0.apply(this,arguments);try{if(b&&b.matches&&b.classList.contains("ka")&&b.matches(KIT_OPT_SEL))kpOptArt(b)}catch(e){}return r}})();
@@ -218,7 +226,7 @@ button.ka .kr.kwinrow>.krv>.ef.r:not(.kdup)::after{content:" khi thành";font-we
 #kpzoom .kpzf{width:min(78vw,calc(calc(82*var(--kvh,1vh)) * 3 / 4),506px)}
 html body #modal button.ka.kopt.kopav>.kaart.kaav,html body button.ka.kopt.kopav>.kaart.kaav{overflow:visible!important;background:none!important;box-shadow:none!important;border-radius:0!important;display:flex!important;align-items:center;justify-content:center}
 html body button.ka.kopt.kopav>.kaart.kaav>span.md.kmini.kmini{width:100%!important;max-width:100%}
-button.ka.kopt>.kaart .ksart.kopface>img{object-position:50% 12%}
+button.ka.kopt>.kaart .ksart.kopface>img,button.ka.kopt>.kaart .ksart.koplead>img{object-position:50% 12%}
 button.ka .kan .kanx{display:block;font-size:.82em;font-weight:600;opacity:.85;line-height:1.25}
 button.ka .kan .knr{display:flex;flex-direction:column;align-items:flex-start;text-align:left;padding:0;margin:0;line-height:1.2}
 button.ka .kan .knr-n{font-size:1em}

@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"c40d95e5+","t":"2026-11-25T22:21Z","c":"KIT §102 kitStage: every event-choice frame that holds a hand (kitHand §101) is a frameless stage — event picture as the scene, speaker ful…","b":"895d921f721d","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
+window.CTM_BI={"s":"889f03f7+","t":"2026-11-25T22:30Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ.","b":"168d48ec9c5c","h":[{"s":"087e886c+","t":"2026-11-24T01:37Z","c":"Mini-game đủ 39 loại, mỗi loại nhiều đề và bộ hình"},{"s":"ae3e1884+","t":"2026-11-24T01:08Z","c":"Sửa kẹt buổi tối khi tải lại lúc đang chọn"},{"s":"b83b86ae","t":"2026-11-24T02:00Z","c":"Máy chơi thử — chỉ công cụ thử"},{"s":"d9386531+","t":"2026-11-24T01:07Z","c":"Nhân vật nhớ việc cũ; lời thoại sự kiện đa dạng hơn"},{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -69125,9 +69125,17 @@ function kitOptPic(title,b){const t=kitOptPlain(title);const tryKey=(k,how)=>{if
  if(t)for(const [re,k] of KIT_OPT_TAM)if(re.test(t)){const own=tryKey(typeof kitActKey==="function"?kitActKey(t):"","act");if(own)return own;const r2=tryKey(k,"tam");if(r2){r2.tam=true;return r2}break}
  /* a picture the option already carries: that picture, in the slot */
  if(b){const im=b.querySelector(".kan .md img, .kan img, .kitem img");const s=im&&(im.getAttribute("src")||"");if(s&&!/\/ph-(?:act-|event-|[plws]-)/.test(s))return{src:s,key:"",how:"own",face:!!im.closest(".md")}}
+ /* KK33 (owner 25/11 via MAIN 146 «each card's picture must differ and fit its option»): an option with no picture of its own that NAMES a person — one of the frame's
+    faction faces (Q[0].faces: by name or by role «Tể tướng»), Hoàng thượng / bệ hạ, Thái hậu — shows THAT person's portrait (real art), never the shared stand-in.
+    how = "lead" (a side / a person the choice follows), NOT a person picker: the hand (§101) keeps it. */
+ if(t){const L=kitOptLead(t);if(L)return L}
  if(typeof KIT_PH!=="undefined"&&(typeof kitPhActReady!=="function"||kitPhActReady())&&(typeof kitPhEventLike!=="function"||typeof Q==="undefined"||!Q[0]||!b||!b.closest("#modal")||kitPhEventLike(Q[0]))){/* review/kpanel-compact: no placeholder picture on a menu / confirm / picker option */const tone=typeof kitPhTone==="function"?kitPhTone(t):"light";
   try{if(typeof kitPhNote==="function")kitPhNote("opt",t.slice(0,60),tone,"")}catch(e){}return{src:KIT_PH.act[tone],key:"",how:"ph",tone}}
  return{src:"",key:"",how:"none"}}
+function kitOptLead(t){try{const C=[];const m=typeof Q!=="undefined"&&Q[0];
+  if(m&&Array.isArray(m.faces))m.faces.forEach(x=>{const w=x&&x[0];if(w&&w.src)C.push([w,[x[1],w.rw].filter(Boolean)])});
+  if(typeof pEmp==="function")C.push([pEmp(),["Hoàng thượng","bệ hạ","Bệ hạ"]]);if(typeof pTH==="function"&&!(typeof S!=="undefined"&&S.thDead))C.push([pTH(),["Thái hậu"]]);
+  for(const [w,ns] of C)if(w&&w.src&&ns.some(n=>n&&n.length>2&&kitOptHit(new RegExp(n.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),"i"),t)))return{src:w.src,key:w.rk||"",how:"lead",lead:true}}catch(e){}return null}
 /* the dialog option groups this applies to (every event / dilemma / night / reaction / servant / co-op dialog) */
 /* not: the identity card's approved pinned pair (.nlopts, KIT 31.16 "owner approved") */
 const KIT_OPT_SEL="#modal .opts:not(.nlopts) > button.ka, .kpscopts:not(.nlopts) > button.ka, .kitpg-opts > button.ka";/* r1: j79 kpIdentity moves the .nlopts pair into .kpscopts — still not a picture card */
@@ -69176,7 +69184,7 @@ function kpOptArt(b){if(!b||b.classList.contains("kcard"))return;if(b.dataset.ko
   ar.innerHTML="";ar.appendChild(c);ar.classList.add("kaav");try{kitOptStackTitle(kan)}catch(e){}
   b.dataset.kopt="1";b.dataset.kopic="face:chip";b.classList.add("kart","kopt","kopav");return}
  if(p.face)try{kitOptStackTitle(kan)}catch(e){}
- art.innerHTML=kitArtFrame(p.src,"","kopic"+(p.face?" kopface":""),"")+(p.tam&&typeof kitTam==="function"?kitTam(true):"");
+ art.innerHTML=kitArtFrame(p.src,"","kopic"+(p.face?" kopface":p.lead?" koplead":""),"")+(p.tam&&typeof kitTam==="function"?kitTam(true):"");
  if(col)b.style.setProperty("--kcc0",col);b.dataset.kopt="1";b.dataset.kopic=p.how+(p.key?":"+p.key:"");b.classList.add("kart","kopt")}
 window.kitOptPic=kitOptPic;window.kpOptArt=kpOptArt;window.KIT_OPT_RULES=KIT_OPT_RULES;window.KIT_OPT_TAM=KIT_OPT_TAM;
 (function(){if(typeof kaNorm1!=="function")return;const n0=kaNorm1;kaNorm1=function(b){const r=n0.apply(this,arguments);try{if(b&&b.matches&&b.classList.contains("ka")&&b.matches(KIT_OPT_SEL))kpOptArt(b)}catch(e){}return r}})();
@@ -69195,7 +69203,7 @@ button.ka .kr.kwinrow>.krv>.ef.r:not(.kdup)::after{content:" khi thành";font-we
 #kpzoom .kpzf{width:min(78vw,calc(calc(82*var(--kvh,1vh)) * 3 / 4),506px)}
 html body #modal button.ka.kopt.kopav>.kaart.kaav,html body button.ka.kopt.kopav>.kaart.kaav{overflow:visible!important;background:none!important;box-shadow:none!important;border-radius:0!important;display:flex!important;align-items:center;justify-content:center}
 html body button.ka.kopt.kopav>.kaart.kaav>span.md.kmini.kmini{width:100%!important;max-width:100%}
-button.ka.kopt>.kaart .ksart.kopface>img{object-position:50% 12%}
+button.ka.kopt>.kaart .ksart.kopface>img,button.ka.kopt>.kaart .ksart.koplead>img{object-position:50% 12%}
 button.ka .kan .kanx{display:block;font-size:.82em;font-weight:600;opacity:.85;line-height:1.25}
 button.ka .kan .knr{display:flex;flex-direction:column;align-items:flex-start;text-align:left;padding:0;margin:0;line-height:1.2}
 button.ka .kan .knr-n{font-size:1em}
@@ -96985,9 +96993,10 @@ document.addEventListener("pointerup",e=>{try{const n=e.target&&e.target.closest
 window.dqBring=dqBring;
 /* ===== KIT §101 kitHand «BÀN BÀI» — event choices as a HAND OF CARDS (owner 24/11 ~15:15Z mẫu 1 GO + 25/11 ~15:12Z «cho kiểu animation game đi»; KK30, review/kit-hand)
    ONE place, every event-choice frame: an option list (`#modal .opts`) of 2–10 kit option cards (`button.ka.kopt`, jopic §6.2b) becomes a hand.
-   - Card face = the option's own act picture (.kaart) + its short name (.kan) + the kit odds meter (.kodds, BAL odds words) — the Tốn / Được / Mất rows are NOT on the face.
+   - Card face = the option's own picture (.kaart) + its SHORT name (.kan) ONLY (owner 24/11 ~15:15Z b, restated via MAIN 146 25/11 ~22:40Z): no odds meter, no Tốn / Được / Mất on the face —
+     the odds word + Gợi ý + rows show only in the lifted card's details plate.
    - Tap 1 = the card lifts a little + its details plate shows (the SAME kit card clone the «!» overlay shows: Tốn · Được · Mất · odds word · Gợi ý; a locked card shows its kit «why»).
-   - Tap 2 on the lifted card = choose (the card flies up, then the frame's own choose path runs: #modal onclick → chooseM, unchanged).
+   - The lifted card carries green ✓ (choose: the card flies up, then the frame's own choose path runs: #modal onclick → chooseM, unchanged) + ✕ (put back); a body tap again does nothing (owner 25/11 ~21:55Z).
    - Keyboard / robot / synthetic clicks (event.detail === 0) choose at once, as before (data-m and every data attribute the tests and the harness read stay on the same buttons).
    - All cards visible, no scroll: one row when they fit at the minimum card width, else 2 (3 on a narrow phone) rows; ONE card size per hand (law 10).
    - Smooth: deal-in, lift and fly are transform/opacity on the CARDS only (never on figures, never a cross-fade of two screens); «Cảnh động» off / reduced motion = no animation (kfStill).
@@ -96996,14 +97005,20 @@ const KIT_HAND={min:2,max:10,gap:[8,12],minW:[88,100],maxW:[128,124],cmpW:[[74,9
 function kitHandOn(g){try{if(!g||!g.matches||!g.matches("#modal .opts")||g.closest(".pc,.kpdlg"))return false;if(!kitHandWants(g))return false;const bs=kitHandCards(g);return bs.length>=KIT_HAND.min&&bs.length<=KIT_HAND.max&&bs.length===[...g.children].filter(b=>b.tagName==="BUTTON"&&b.getClientRects().length).length}catch(e){return false}}
 function kitHandWants(g){try{if(!g||!g.closest||g.closest(".pc,.kpdlg"))return false;const k=[...g.children].filter(b=>b.tagName==="BUTTON"),c=k.filter(b=>b.matches("button.ka.kopt")&&!b.classList.contains("kcard")&&!b.classList.contains("kbare"));return c.length>=KIT_HAND.min&&c.length<=KIT_HAND.max&&c.length===k.length&&!c.some(b=>/^face/.test(b.dataset.kopic||"")||b.querySelector(".kopface"))/* a PERSON picker (portrait cards) is not a hand: people are chosen on their own kit (portrait picker / thẻ gỗ treo) */}catch(e){return false}}
 function kitHandCards(g){return[...g.children].filter(b=>b.matches&&b.matches("button.ka.kopt")&&!b.classList.contains("kcard")&&!b.classList.contains("kbare")&&(b.getClientRects().length||g.classList.contains("khand")))}
+/* SHORT name on the face (owner 24/11 ~15:15Z b): a person named by role + name shows the role only («Theo Tể tướng»), a bracket tail goes
+   («Theo phụ thân»); the full title stays in the plate (the parts are only hidden on the face, the plate clone shows them) */
+function kitHandShort(b){try{const kan=b.querySelector(".kan");if(!kan)return;/* idempotent: later passes may rewrite the title, so it runs on every lay + title change */
+ kan.querySelectorAll(".kname").forEach(k=>{const ti=k.querySelector(":scope>.kti");if(!ti)return;[...k.childNodes].forEach(n=>{if(n!==ti&&!(n.classList&&n.classList.contains("khnx"))&&(n.nodeType===3?n.textContent.trim():1)){const w=document.createElement("span");w.className="khnx";k.insertBefore(w,n);w.appendChild(n)}})});
+ const tw=document.createTreeWalker(kan,NodeFilter.SHOW_TEXT);const tx=[];while(tw.nextNode())tx.push(tw.currentNode);
+ tx.forEach(n=>{if(n.parentNode&&n.parentNode.closest&&n.parentNode.closest(".khnx"))return;const m=/\s*\([^()]{1,40}\)\s*$/.exec(n.textContent);if(!m||!n.textContent.slice(0,m.index).trim()&&n===tx[0])return;const w=document.createElement("span");w.className="khnx";w.textContent=m[0];n.textContent=n.textContent.slice(0,m.index);n.parentNode.insertBefore(w,n.nextSibling)})}catch(e){}}
 function kitHandWide(){try{return kitView().pages===2?1:0}catch(e){return 0}}/* KIT §0: one page (Fold) / two pages (iPad), never a width breakpoint */
 function kitHandH(){try{return kitView().h||innerHeight}catch(e){return innerHeight}}
 /* layout: slots per card (x, y, rotation) inside the list box; the box gets the hand height; idempotent per (width, count) */
-function kitHandLay(g,quiet){try{const bs=kitHandCards(g),n=bs.length;if(!n)return;const K=KIT_HAND,ip=kitHandWide(),W=g.clientWidth;if(!W)return;
+function kitHandLay(g,quiet){try{const bs=kitHandCards(g),n=bs.length;if(!n)return;bs.forEach(kitHandShort);const K=KIT_HAND,ip=kitHandWide(),W=g.clientWidth;if(!W)return;
  const cm=g.dataset.khc==="1";const sig=W+"|"+n+"|"+kitHandH()+"|"+cm;if(g.__khSig===sig&&g.classList.contains("khand"))return;g.__khSig=sig;
  const mnW=cm?K.cmpW[ip][0]:K.minW[ip],mxW=cm?K.cmpW[ip][1]:K.maxW[ip],gap=K.gap[ip],side=Math.round(10+mxW*1.5*.045)/* frame padding + what a turned outer card swings out */,fit=Math.max(1,Math.floor((W-2*side+gap)/(mnW+gap)));let rows=Math.ceil(n/fit);const per=Math.ceil(n/rows);
  let cw=Math.min(mxW,(W-2*side-(per-1)*gap)/per);const fs=cw<100?K.nameFs[0]-.5:K.nameFs[ip];
- const face=h=>Math.round(h-10+fs*1.15*2+22+14);/* picture square (card width − padding) + 2 name lines + the odds meter row + gaps */
+ const face=h=>Math.round(h-10+fs*1.15*3+12);/* picture square (card width − padding) + up to 3 name lines + gaps (no odds meter on the face) */
  let ch=face(cw);const lift=Math.round(ch*K.liftK);
  /* the hand may take at most ~46 % of the screen height (the story text and the speaker keep the rest; law 10) */
  const cap=Math.round(kitHandH()*(n>(ip?5:6)?.46:(ip?.36:.40)));const need=()=>lift+6+rows*ch+(rows-1)*gap+8;
@@ -97066,6 +97081,7 @@ function kitHandDealGo(g){try{const bs=kitHandCards(g),G=g.getBoundingClientRect
 /* apply to the frame on screen: every pass of showModal (outermost wrapper) + late re-layouts (ResizeObserver) */
 function kitHand(M){try{M=M||document.getElementById("modal");if(!M||M.hidden)return;M.querySelectorAll(".opts").forEach(g=>{if(!kitHandOn(g)){if(g.classList.contains("khand")){g.classList.remove("khand");delete g.dataset.khand}return}
   kitHandLay(g);const m0=typeof Q!=="undefined"?Q[0]:null;if(m0&&KH_PEND.has(m0))g.classList.add("khpre");/* a rebuilt list while the deal waits stays hidden too */kitHandDeal(g,m0);
+  if(!g.__khMO&&typeof MutationObserver==="function"){g.__khMO=new MutationObserver(()=>{try{g.__khMO.disconnect();kitHandCards(g).forEach(kitHandShort)}finally{g.__khMO.observe(g,{subtree:true,childList:true,characterData:true})}});g.__khMO.observe(g,{subtree:true,childList:true,characterData:true})}
   if(!g.__khRO&&typeof ResizeObserver==="function"){g.__khRO=new ResizeObserver(()=>{if(!g.isConnected||g.__khBusy)return;cancelAnimationFrame(g.__khRaf);g.__khRaf=requestAnimationFrame(()=>kitHandLay(g))});g.__khRO.observe(g)}})}catch(e){console.error("kitHand",e)}}
 window.kitHand=kitHand;window.kitHandWants=kitHandWants;window.kitHandLay=kitHandLay;window.KIT_HAND=KIT_HAND;
 (function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const M=document.getElementById("modal");if(M&&!M.hidden){kitHand(M);requestAnimationFrame(()=>kitHand(M))}}catch(e){console.error("kitHand",e)}return r}})();
@@ -97088,8 +97104,9 @@ html body #modal#modal#modal#modal .opts.khand>button.kopt>.kaart{position:relat
 html body #modal#modal#modal#modal .opts.khand>button.kopt>.kaart>figure{width:100%!important;height:100%!important;margin:0!important}
 html body #modal#modal#modal#modal .opts.khand>button.kopt>.kabody{flex:1 1 auto!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:space-between!important;min-width:0!important;width:100%!important;padding:0!important;margin:0!important;transform:none!important}
 html body #modal#modal#modal#modal .opts.khand>button.kopt .kat{display:flex!important;flex-direction:column!important;align-items:center!important;gap:4px!important;min-height:0!important;width:100%!important;padding:0!important}
-html body #modal#modal#modal#modal .opts.khand>button.kopt .kan{font-size:var(--khfs)!important;line-height:1.15!important;text-align:center!important;white-space:normal!important;display:-webkit-box!important;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden!important;max-width:100%!important;width:auto!important;flex:none!important}
-html body #modal#modal#modal#modal .opts.khand>button.kopt .kodds{margin:0!important;max-width:100%!important;flex:none!important;transform:scale(.92);transform-origin:50% 0}
+html body #modal#modal#modal#modal .opts.khand>button.kopt .kan{font-size:var(--khfs)!important;line-height:1.15!important;text-align:center!important;white-space:normal!important;display:-webkit-box!important;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden!important;max-width:100%!important;width:auto!important;flex:none!important}
+html body #modal#modal#modal#modal .opts.khand>button.kopt .kodds{display:none!important}
+html body #modal#modal#modal#modal .opts.khand>button.kopt .khnx{display:none!important}/* face = picture + short name only; the odds word lives in the plate */
 html body #modal#modal#modal#modal .opts.khand>button.kopt .kb,html body #modal#modal#modal#modal .opts.khand>button.kopt>.kobang,html body #modal#modal#modal#modal .opts.khand>button.kopt .kwhy,html body #modal#modal#modal#modal .opts.khand>button.kopt small:not(.kodds *){display:none!important}
 html body #modal#modal#modal#modal .opts.khand>button.kopt.klift{--kyo:calc(var(--khlift) * -1);--kr:0deg;z-index:3;box-shadow:0 0 0 2px var(--k-gold,#c9a24a),0 10px 20px rgba(60,30,10,.32)}
 html body #modal#modal#modal#modal .opts.khand>button.kopt:disabled{filter:grayscale(.55) brightness(.96)}
@@ -97120,8 +97137,9 @@ html body #modal#modal#modal#modal .k3right>.opts.khand{margin-top:auto!importan
    - the event's own picture (the band of the frame, `.k3ev` / `.kdlgart`) is the BACKGROUND of the whole layer (clear, bright; a soft shade only
      under the hand); no picture → the warm kit stage colour;
    - the SPEAKER (the frame's figure `.kszfig`) stands full body on the LEFT, HER figure (kitFigOf(S)) full body on the RIGHT (layout A, §93.4);
-   - the title = a small plaque on top; the story (faces row + lines, `.kpmain`) = the kit speech box between the two figures (iPad) or under
-     their faces (Fold); it scrolls inside itself when long; it never covers a face (owner OD 24/11 ~15:15Z (d));
+   - the title = a small plaque on top; the story (faces row + lines, `.kpmain`) = a LIGHT speech box (soft paper, thin edge, no heavy panel) between
+     the two figures (iPad); on one page (Fold) a slim band that never covers a face or the upper half of a body: «foot» = just above the hand,
+     «top» = under the plaque with the figures below it (KIT_STAGE.fold); it scrolls inside itself when long (owner OD 24/11 ~15:15Z (d), 25/11 ~21:50Z);
    - the hand lies at the foot of the layer across the whole width (kitHand lays the cards for that width); the details plate sits above the
      lifted card, under the faces.
    - Motion (transform / opacity only, kitHandStill = none): the picture settles, the speaker walks in from the left, she from the right, the
@@ -97129,7 +97147,7 @@ html body #modal#modal#modal#modal .k3right>.opts.khand{margin-top:auto!importan
    Data / taps are unchanged: the same #modal, the same buttons, the same choose path (chooseM). Numbers: geometry knobs only (KIT_STAGE). */
 const KIT_STAGE={pad:8,fig:[.98,.98]/* figure height share of the room [fold,ipad] */,feetIn:.30/* share of the hand height the feet may stand behind the cards */,
  faceK:.19/* the face band = top share of the painted figure */,midMin:420/* px between the figures for the speech box beside them (else it goes under the faces) */,
- boxMaxW:[720,760],plateW:560,inMs:[620,520,300],veil:"linear-gradient(to bottom,rgba(20,12,8,0) 55%,rgba(20,12,8,.34) 100%)"};
+ boxMaxW:[720,760],plateW:560,fold:"foot"/* one-page (Fold) speech place: "foot" = a slim subtitle band over the figures' lower half, just above the hand | "top" = a slim band under the title plaque, the figures stand below it (owner 25/11 ~21:50Z «chỉ là hình nhân vật xuất hiện cùng với những cái thông tin»; MAIN 146 picks; html[data-kstfold] overrides for the review pair) */,bodyK:.5/* the speech never covers the top half of a painted figure (one page) */,topCap:.30/* "top": the band takes at most this share of the layer */,inMs:[620,520,300],veil:"linear-gradient(to bottom,rgba(20,12,8,0) 55%,rgba(20,12,8,.34) 100%)"};
 (function(){try{const st=document.createElement("style");st.id="kit-stage";st.textContent=`
 html body #modal.kstg{background:transparent!important}
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage{position:fixed!important;left:var(--kstL)!important;top:var(--kstT)!important;width:var(--kstW)!important;height:var(--kstH)!important;max-width:none!important;max-height:none!important;min-height:0!important;
@@ -97153,7 +97171,7 @@ html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kstg-fig>img{position
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kstg-fig>.kt3{position:absolute!important;left:50%!important;top:var(--tagy,0px)!important;transform:translate(-50%,-100%)!important;width:max-content!important;max-width:14em!important;z-index:3;margin:0!important}
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kt3 .knr{background:#fffaf0e8;border:1px solid var(--gold,#b8901f);border-radius:8px;padding:1px 8px;box-shadow:0 2px 6px #0003}
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain{position:absolute!important;z-index:4;left:var(--bx)!important;top:var(--by)!important;width:var(--bw)!important;max-height:var(--bh)!important;height:auto!important;min-height:0!important;margin:0!important;
- overflow-y:auto!important;overscroll-behavior:contain;padding:10px 14px!important;background:#fbf1e6f2!important;border:1px solid var(--gold,#b8901f)!important;border-radius:12px!important;box-shadow:0 6px 22px rgba(0,0,0,.38)!important;display:block!important;flex:none!important}
+ overflow-y:auto!important;overscroll-behavior:contain;padding:8px 14px!important;background:#fbf1e6d6!important;border:1px solid #b8901f99!important;border-radius:12px!important;box-shadow:0 2px 10px rgba(0,0,0,.18)!important;display:block!important;flex:none!important;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain>.faces{display:flex!important;flex-wrap:wrap!important;gap:6px 14px!important;justify-content:flex-start!important;align-items:center!important;margin:0 0 6px!important;height:auto!important;min-height:0!important}
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain>.faces>figure{display:flex!important;max-width:none!important;flex:0 0 auto!important;height:auto!important;flex-direction:row!important;align-items:center!important;gap:6px!important;width:auto!important;min-width:0!important;margin:0!important}
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain>.faces .pframe,html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain>.faces .pfwrap{--kffw:34px;width:34px!important;height:auto!important;flex:0 0 34px!important}
@@ -97161,7 +97179,9 @@ html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain>.faces figcapt
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain>.faces img{max-width:34px!important;max-height:46px!important}
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain>.faces .pfnm,html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain>.faces .pcname,html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain>.faces .kfnm{font-size:.82rem!important;text-align:left!important;margin:0!important}
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .opts.khand{position:absolute!important;z-index:5;left:0!important;right:0!important;bottom:4px!important;top:auto!important;width:auto!important;margin:0!important;max-height:none!important;overflow:visible!important;background:none!important;border:0!important;box-shadow:none!important}
-html body #modal#modal#modal#modal#modal.kstg .dlg.kstage>.khplate{z-index:7}`;document.head.appendChild(st)}catch(e){}})();
+html body #modal#modal#modal#modal#modal.kstg .dlg.kstage>.khplate{z-index:7}
+html body #modal#modal#modal#modal#modal.kstg .dlg.kstage .kpmain{transition:opacity .16s ease-out}
+html body #modal#modal#modal#modal#modal.kstg .dlg.kstage:has(>.khplate:not([hidden])) .kpmain.kstg-foot{opacity:0;visibility:hidden;pointer-events:none}/* one page «foot»: the lifted card's plate takes the band's place (✕ brings the story back) */`;document.head.appendChild(st)}catch(e){}})();
 function kstgWants(dl,g){try{if(!(dl&&dl.matches&&dl.matches("#modal .dlg")&&!dl.closest(".pc,.kpdlg")))return false;if(g)return g.closest(".dlg")===dl&&kitHandWants(g);return !!dl.querySelector(":scope>#mb .opts.khand")}catch(e){return false}}
 function kstgGeo(){try{if(typeof kscnGeo==="function")return kscnGeo()}catch(e){}return{t:0,H:innerHeight,L:0,R:0,w:innerWidth}}
 function kstgPic(dl){try{const im=dl.querySelector(".k3ev img,.kdlgart img,.kpiart img");return im&&(im.currentSrc||im.src)||""}catch(e){return""}}
@@ -97190,18 +97210,24 @@ function kstgPlace(dl){try{if(!dl||!dl.classList.contains("kstage"))return;const
  const hd=dl.querySelector(":scope>.kph"),sl=dl.querySelector(":scope>.kseal");const T0=(hd&&hd.getClientRects().length?hd.offsetTop+hd.offsetHeight:K.pad)+6;
  if(sl){sl.style.setProperty("right",K.pad+"px","important");sl.style.setProperty("left","auto","important");sl.style.setProperty("top",K.pad+"px","important")}
  const hH=g.offsetHeight||parseFloat(getComputedStyle(g).getPropertyValue("--khH"))||0,handTop=H-4-hH;
- const figBot=Math.min(H-4,handTop+Math.round(hH*K.feetIn)),fh=Math.max(120,Math.round((figBot-T0)*K.fig[ip]));const fy=figBot-fh;
+ const figBot=Math.min(H-4,handTop+Math.round(hH*K.feetIn));let fh=Math.max(120,Math.round((figBot-T0)*K.fig[ip])),fy=figBot-fh;
  const sp=mb.querySelector(":scope>.kstg-sp"),me=mb.querySelector(":scope>.kstg-me");let faceBot=T0,midL=K.pad,midR=W-K.pad;
  const put=(el,side)=>{if(!el)return;const im=el.querySelector("img");const nw=im&&im.naturalWidth||420,nh=im&&im.naturalHeight||1000,ob=kstgOb(im)||{l:.08,r:.92,t:.02,b:1};
   const fw=Math.round(fh*nw/nh);/* the painted part sits fully inside the layer; speaker hugs the left edge, she the right */
   let fx=side<0?Math.round(K.pad-ob.l*fw):Math.round(W-K.pad-ob.r*fw);el.style.setProperty("--fx",fx+"px");el.style.setProperty("--fy",fy+"px");el.style.setProperty("--fw",fw+"px");el.style.setProperty("--fh",fh+"px");
   const top=fy+ob.t*fh;el.style.setProperty("--tagy",Math.max(T0+16-fy,Math.round(ob.t*fh-2))+"px");faceBot=Math.max(faceBot,Math.round(top+K.faceK*fh*(ob.b-ob.t)));
   if(side<0)midL=Math.max(midL,Math.round(fx+ob.r*fw)+6);else midR=Math.min(midR,Math.round(fx+ob.l*fw)-6)};
- put(sp,-1);put(me,1);
- const pm=mb.querySelector(".kpmain");if(pm){let bx,bw,by;const roomMid=midR-midL;
-  if(roomMid>=K.midMin){bw=Math.min(K.boxMaxW[ip],roomMid);bx=Math.round(midL+(roomMid-bw)/2);by=T0+(ip?10:6)}/* between the two figures, beside their faces */
-  else{bw=Math.min(K.boxMaxW[ip],W-2*K.pad-8);bx=Math.round((W-bw)/2);by=faceBot+6}/* narrow screen: over their bodies, under their faces */
-  const bh=Math.max(90,handTop-by-(hH?Math.round(hH*.0):0)-10);pm.style.setProperty("--bx",bx+"px");pm.style.setProperty("--by",by+"px");pm.style.setProperty("--bw",bw+"px");pm.style.setProperty("--bh",bh+"px");dl.__kstBox={bx,by,bw,bh}}
+ const pm=mb.querySelector(".kpmain");const fm=document.documentElement.dataset.kstfold||K.fold;
+ const box=(bx,by,bw,bh)=>{pm.style.setProperty("--bx",bx+"px");pm.style.setProperty("--by",by+"px");pm.style.setProperty("--bw",bw+"px");pm.style.setProperty("--bh",bh+"px");dl.__kstBox={bx,by,bw,bh}};
+ /* one page, «top»: the slim band goes first under the plaque; the figures stand from under it to the hand (their faces never under the band) */
+ if(pm&&!ip&&fm==="top"){const bw=Math.min(K.boxMaxW[ip],W-2*K.pad-8),bx=Math.round((W-bw)/2),cap=Math.round(H*K.topCap);box(bx,T0,bw,cap);const bb=T0+Math.min(cap,pm.offsetHeight)+6;
+  fh=Math.max(120,figBot-bb);fy=figBot-fh;put(sp,-1);put(me,1);pm.classList.add("kstg-top");pm.classList.remove("kstg-foot")}
+ else{put(sp,-1);put(me,1);
+ if(pm){let bx,bw,by;const roomMid=midR-midL;pm.classList.remove("kstg-top","kstg-foot");
+  if(roomMid>=K.midMin){bw=Math.min(K.boxMaxW[ip],roomMid);bx=Math.round(midL+(roomMid-bw)/2);by=T0+(ip?10:6);box(bx,by,bw,Math.max(90,handTop-by-10))}/* between the two figures, beside their faces */
+  else{/* one page, «foot»: a slim subtitle band just above the hand, over the figures' LOWER half only (faces + upper bodies stay clear); long text scrolls inside */
+   bw=Math.min(K.boxMaxW[ip],W-2*K.pad-8);bx=Math.round((W-bw)/2);const lim=Math.round(Math.max(faceBot+6,fy+fh*K.bodyK)),bot=handTop-6,bh=Math.max(90,bot-lim);box(bx,lim,bw,bh);
+   const h=Math.min(bh,pm.offsetHeight);box(bx,bot-h,bw,bh);pm.classList.add("kstg-foot")}}}
  dl.__kstFace=faceBot;dl.__kstHandTop=handTop;
  if(dl.__kstNew){dl.__kstNew=0;kstgIn(dl)}}catch(e){console.error("kstgPlace",e)}}
 /* entrance: picture settles, speaker in from the left, she from the right, the speech box drops in (cards: kitHand deal) */
@@ -99212,7 +99238,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="895d921f721d";window.CTM_BUILD=BUILD;
+const BUILD="168d48ec9c5c";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

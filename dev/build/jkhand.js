@@ -1,8 +1,9 @@
 /* ===== KIT §101 kitHand «BÀN BÀI» — event choices as a HAND OF CARDS (owner 24/11 ~15:15Z mẫu 1 GO + 25/11 ~15:12Z «cho kiểu animation game đi»; KK30, review/kit-hand)
    ONE place, every event-choice frame: an option list (`#modal .opts`) of 2–10 kit option cards (`button.ka.kopt`, jopic §6.2b) becomes a hand.
-   - Card face = the option's own act picture (.kaart) + its short name (.kan) + the kit odds meter (.kodds, BAL odds words) — the Tốn / Được / Mất rows are NOT on the face.
+   - Card face = the option's own picture (.kaart) + its SHORT name (.kan) ONLY (owner 24/11 ~15:15Z b, restated via MAIN 146 25/11 ~22:40Z): no odds meter, no Tốn / Được / Mất on the face —
+     the odds word + Gợi ý + rows show only in the lifted card's details plate.
    - Tap 1 = the card lifts a little + its details plate shows (the SAME kit card clone the «!» overlay shows: Tốn · Được · Mất · odds word · Gợi ý; a locked card shows its kit «why»).
-   - Tap 2 on the lifted card = choose (the card flies up, then the frame's own choose path runs: #modal onclick → chooseM, unchanged).
+   - The lifted card carries green ✓ (choose: the card flies up, then the frame's own choose path runs: #modal onclick → chooseM, unchanged) + ✕ (put back); a body tap again does nothing (owner 25/11 ~21:55Z).
    - Keyboard / robot / synthetic clicks (event.detail === 0) choose at once, as before (data-m and every data attribute the tests and the harness read stay on the same buttons).
    - All cards visible, no scroll: one row when they fit at the minimum card width, else 2 (3 on a narrow phone) rows; ONE card size per hand (law 10).
    - Smooth: deal-in, lift and fly are transform/opacity on the CARDS only (never on figures, never a cross-fade of two screens); «Cảnh động» off / reduced motion = no animation (kfStill).
@@ -11,14 +12,20 @@ const KIT_HAND={min:2,max:10,gap:[8,12],minW:[88,100],maxW:[128,124],cmpW:[[74,9
 function kitHandOn(g){try{if(!g||!g.matches||!g.matches("#modal .opts")||g.closest(".pc,.kpdlg"))return false;if(!kitHandWants(g))return false;const bs=kitHandCards(g);return bs.length>=KIT_HAND.min&&bs.length<=KIT_HAND.max&&bs.length===[...g.children].filter(b=>b.tagName==="BUTTON"&&b.getClientRects().length).length}catch(e){return false}}
 function kitHandWants(g){try{if(!g||!g.closest||g.closest(".pc,.kpdlg"))return false;const k=[...g.children].filter(b=>b.tagName==="BUTTON"),c=k.filter(b=>b.matches("button.ka.kopt")&&!b.classList.contains("kcard")&&!b.classList.contains("kbare"));return c.length>=KIT_HAND.min&&c.length<=KIT_HAND.max&&c.length===k.length&&!c.some(b=>/^face/.test(b.dataset.kopic||"")||b.querySelector(".kopface"))/* a PERSON picker (portrait cards) is not a hand: people are chosen on their own kit (portrait picker / thẻ gỗ treo) */}catch(e){return false}}
 function kitHandCards(g){return[...g.children].filter(b=>b.matches&&b.matches("button.ka.kopt")&&!b.classList.contains("kcard")&&!b.classList.contains("kbare")&&(b.getClientRects().length||g.classList.contains("khand")))}
+/* SHORT name on the face (owner 24/11 ~15:15Z b): a person named by role + name shows the role only («Theo Tể tướng»), a bracket tail goes
+   («Theo phụ thân»); the full title stays in the plate (the parts are only hidden on the face, the plate clone shows them) */
+function kitHandShort(b){try{const kan=b.querySelector(".kan");if(!kan)return;/* idempotent: later passes may rewrite the title, so it runs on every lay + title change */
+ kan.querySelectorAll(".kname").forEach(k=>{const ti=k.querySelector(":scope>.kti");if(!ti)return;[...k.childNodes].forEach(n=>{if(n!==ti&&!(n.classList&&n.classList.contains("khnx"))&&(n.nodeType===3?n.textContent.trim():1)){const w=document.createElement("span");w.className="khnx";k.insertBefore(w,n);w.appendChild(n)}})});
+ const tw=document.createTreeWalker(kan,NodeFilter.SHOW_TEXT);const tx=[];while(tw.nextNode())tx.push(tw.currentNode);
+ tx.forEach(n=>{if(n.parentNode&&n.parentNode.closest&&n.parentNode.closest(".khnx"))return;const m=/\s*\([^()]{1,40}\)\s*$/.exec(n.textContent);if(!m||!n.textContent.slice(0,m.index).trim()&&n===tx[0])return;const w=document.createElement("span");w.className="khnx";w.textContent=m[0];n.textContent=n.textContent.slice(0,m.index);n.parentNode.insertBefore(w,n.nextSibling)})}catch(e){}}
 function kitHandWide(){try{return kitView().pages===2?1:0}catch(e){return 0}}/* KIT §0: one page (Fold) / two pages (iPad), never a width breakpoint */
 function kitHandH(){try{return kitView().h||innerHeight}catch(e){return innerHeight}}
 /* layout: slots per card (x, y, rotation) inside the list box; the box gets the hand height; idempotent per (width, count) */
-function kitHandLay(g,quiet){try{const bs=kitHandCards(g),n=bs.length;if(!n)return;const K=KIT_HAND,ip=kitHandWide(),W=g.clientWidth;if(!W)return;
+function kitHandLay(g,quiet){try{const bs=kitHandCards(g),n=bs.length;if(!n)return;bs.forEach(kitHandShort);const K=KIT_HAND,ip=kitHandWide(),W=g.clientWidth;if(!W)return;
  const cm=g.dataset.khc==="1";const sig=W+"|"+n+"|"+kitHandH()+"|"+cm;if(g.__khSig===sig&&g.classList.contains("khand"))return;g.__khSig=sig;
  const mnW=cm?K.cmpW[ip][0]:K.minW[ip],mxW=cm?K.cmpW[ip][1]:K.maxW[ip],gap=K.gap[ip],side=Math.round(10+mxW*1.5*.045)/* frame padding + what a turned outer card swings out */,fit=Math.max(1,Math.floor((W-2*side+gap)/(mnW+gap)));let rows=Math.ceil(n/fit);const per=Math.ceil(n/rows);
  let cw=Math.min(mxW,(W-2*side-(per-1)*gap)/per);const fs=cw<100?K.nameFs[0]-.5:K.nameFs[ip];
- const face=h=>Math.round(h-10+fs*1.15*2+22+14);/* picture square (card width − padding) + 2 name lines + the odds meter row + gaps */
+ const face=h=>Math.round(h-10+fs*1.15*3+12);/* picture square (card width − padding) + up to 3 name lines + gaps (no odds meter on the face) */
  let ch=face(cw);const lift=Math.round(ch*K.liftK);
  /* the hand may take at most ~46 % of the screen height (the story text and the speaker keep the rest; law 10) */
  const cap=Math.round(kitHandH()*(n>(ip?5:6)?.46:(ip?.36:.40)));const need=()=>lift+6+rows*ch+(rows-1)*gap+8;
@@ -81,6 +88,7 @@ function kitHandDealGo(g){try{const bs=kitHandCards(g),G=g.getBoundingClientRect
 /* apply to the frame on screen: every pass of showModal (outermost wrapper) + late re-layouts (ResizeObserver) */
 function kitHand(M){try{M=M||document.getElementById("modal");if(!M||M.hidden)return;M.querySelectorAll(".opts").forEach(g=>{if(!kitHandOn(g)){if(g.classList.contains("khand")){g.classList.remove("khand");delete g.dataset.khand}return}
   kitHandLay(g);const m0=typeof Q!=="undefined"?Q[0]:null;if(m0&&KH_PEND.has(m0))g.classList.add("khpre");/* a rebuilt list while the deal waits stays hidden too */kitHandDeal(g,m0);
+  if(!g.__khMO&&typeof MutationObserver==="function"){g.__khMO=new MutationObserver(()=>{try{g.__khMO.disconnect();kitHandCards(g).forEach(kitHandShort)}finally{g.__khMO.observe(g,{subtree:true,childList:true,characterData:true})}});g.__khMO.observe(g,{subtree:true,childList:true,characterData:true})}
   if(!g.__khRO&&typeof ResizeObserver==="function"){g.__khRO=new ResizeObserver(()=>{if(!g.isConnected||g.__khBusy)return;cancelAnimationFrame(g.__khRaf);g.__khRaf=requestAnimationFrame(()=>kitHandLay(g))});g.__khRO.observe(g)}})}catch(e){console.error("kitHand",e)}}
 window.kitHand=kitHand;window.kitHandWants=kitHandWants;window.kitHandLay=kitHandLay;window.KIT_HAND=KIT_HAND;
 (function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const M=document.getElementById("modal");if(M&&!M.hidden){kitHand(M);requestAnimationFrame(()=>kitHand(M))}}catch(e){console.error("kitHand",e)}return r}})();
@@ -103,8 +111,9 @@ html body #modal#modal#modal#modal .opts.khand>button.kopt>.kaart{position:relat
 html body #modal#modal#modal#modal .opts.khand>button.kopt>.kaart>figure{width:100%!important;height:100%!important;margin:0!important}
 html body #modal#modal#modal#modal .opts.khand>button.kopt>.kabody{flex:1 1 auto!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:space-between!important;min-width:0!important;width:100%!important;padding:0!important;margin:0!important;transform:none!important}
 html body #modal#modal#modal#modal .opts.khand>button.kopt .kat{display:flex!important;flex-direction:column!important;align-items:center!important;gap:4px!important;min-height:0!important;width:100%!important;padding:0!important}
-html body #modal#modal#modal#modal .opts.khand>button.kopt .kan{font-size:var(--khfs)!important;line-height:1.15!important;text-align:center!important;white-space:normal!important;display:-webkit-box!important;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden!important;max-width:100%!important;width:auto!important;flex:none!important}
-html body #modal#modal#modal#modal .opts.khand>button.kopt .kodds{margin:0!important;max-width:100%!important;flex:none!important;transform:scale(.92);transform-origin:50% 0}
+html body #modal#modal#modal#modal .opts.khand>button.kopt .kan{font-size:var(--khfs)!important;line-height:1.15!important;text-align:center!important;white-space:normal!important;display:-webkit-box!important;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden!important;max-width:100%!important;width:auto!important;flex:none!important}
+html body #modal#modal#modal#modal .opts.khand>button.kopt .kodds{display:none!important}
+html body #modal#modal#modal#modal .opts.khand>button.kopt .khnx{display:none!important}/* face = picture + short name only; the odds word lives in the plate */
 html body #modal#modal#modal#modal .opts.khand>button.kopt .kb,html body #modal#modal#modal#modal .opts.khand>button.kopt>.kobang,html body #modal#modal#modal#modal .opts.khand>button.kopt .kwhy,html body #modal#modal#modal#modal .opts.khand>button.kopt small:not(.kodds *){display:none!important}
 html body #modal#modal#modal#modal .opts.khand>button.kopt.klift{--kyo:calc(var(--khlift) * -1);--kr:0deg;z-index:3;box-shadow:0 0 0 2px var(--k-gold,#c9a24a),0 10px 20px rgba(60,30,10,.32)}
 html body #modal#modal#modal#modal .opts.khand>button.kopt:disabled{filter:grayscale(.55) brightness(.96)}
