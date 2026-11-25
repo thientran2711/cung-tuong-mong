@@ -24,7 +24,8 @@ const [,,ROOT,OUT,TAG,VID]=process.argv;
    await w(300);o.n=NT.list.length;kitNoticeOpen();await w(1600);try{kitRankNamePaint(document.getElementById('modal'))}catch(e){}
    o.rows=[...document.querySelectorAll('#modal .kntl li')].map(li=>li.innerText.replace(/\s+/g,' ').trim());
    o.cards=[...document.querySelectorAll('#modal .opts > button')].map(bt=>bt.innerText.replace(/\s+/g,' ').trim());return o});
-  await p.waitForTimeout(1500);await p.screenshot({path:`${OUT}/${TAG}-${dev==='fold'?'fold':'ipad'}.jpg`,type:'jpeg',quality:82});
+  await p.evaluate(()=>{const f=()=>document.querySelectorAll('#kroul,#kroulw,.kroul,#kload').forEach(r=>r.remove());f();setInterval(f,200)});/* host page covers too */
+  await p.waitForTimeout(3000);await p.screenshot({path:`${OUT}/${TAG}-${dev==='fold'?'fold':'ipad'}.jpg`,type:'jpeg',quality:82});
   if(VID&&dev==='ipadAir'){await p.waitForTimeout(2500);await g.evaluate(()=>{const c=[...document.querySelectorAll('#modal .opts > button')].find(b=>/Xem tin/.test(b.innerText));if(c)c.click()});await p.waitForTimeout(3000)}
   info.errs=errs.slice(0,5);res[dev]=info;const v=p.video&&p.video();await ctx.close();if(v){try{fs.renameSync(await v.path(),`${OUT}/${TAG}-ipad.webm`)}catch(e){}}}
  fs.writeFileSync(`${OUT}/${TAG}-rows.json`,JSON.stringify(res,null,1));console.log(JSON.stringify(res,null,1).slice(0,3000));await b.close();srv.close()})().catch(e=>{console.error(e);process.exit(2)});

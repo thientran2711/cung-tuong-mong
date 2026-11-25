@@ -64,6 +64,8 @@ function kitSay(x){if(typeof x!=="string"||!x)return x;let s=x.replace(/\s+/g," 
  /* «a: b: c» chain → the first colon stays, later ones in the same sentence become commas */
  /* «X trở về: X nghe ngóng được …» — the part after the colon names the same subject again → that part alone */
  s=s.split(/(?<=[.!?])\s+/).map(q=>{const i=q.indexOf(": ");if(i<0)return q;const w=q.slice(0,i).split(" ").slice(0,2).join(" ");return w.length>3&&/^[A-ZÀ-Ỹ]/.test(w)&&q.slice(i+2).indexOf(w+" ")===0?q.slice(i+2):q}).join(" ");
+ /* the same «title + name» printed again in one notice → the bare name after the first (title once; owner: «tên đầy đủ một lần») */
+ {const seen=new Set();s=s.replace(/(?<![\p{L}\p{M}])((?:Hoàng quý phi|Hoàng hậu|Quý phi|Quý nhân|Thường tại|Đáp ứng|(?:[A-ZÀ-Ỹ][\p{Ll}\p{M}]+ )?(?:phi|tần)|Phi|Tần) )([A-ZÀ-Ỹ][\p{Ll}\p{M}]+(?: [A-ZÀ-Ỹ][\p{Ll}\p{M}]+){1,2})(?![\p{L}\p{M}])/gu,(m,t,n)=>{if(seen.has(n))return n;seen.add(n);return m})}
  s=s.split(/(?<=[.!?])\s+/).map(q=>{let n=0;return q.replace(/: (Một|Nàng|Ngươi|Ta|Hắn|Y)?(?=\s|$)?/g,(m,w,i)=>{const pre=q.slice(0,i);if((pre.match(/\(/g)||[]).length>(pre.match(/\)/g)||[]).length)return m;/* a colon inside «(…)» is not part of the chain */return ++n===1?m:", "+(w?w.toLowerCase():"")})}).join(" ");
  return s}
 window.kitSay=kitSay;

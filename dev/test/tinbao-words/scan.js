@@ -34,6 +34,6 @@ no('jstagehere.js','Ở lại = như lẻn vào','closing alert «=»');has('jst
 no('jptime.js','" · thành":','errand report glue');has('jptime.js','function ptRepText(','errand report one sentence');
 no('jwhy.js','(chưa quen)`','spyWho stacked paren');no('jwhy.js','nghe ngóng được về ${spyWho(v)} (${why})','spyNews chain');
 no('j78.js','có nết ${T[0]}','raw trait label');no('jagent.js','`${w} · ${o}`','agWhy dot glue');no('jagent.js','nghe lén: nàng ${p.act} — ${p.why}','nghe lén note chain');
-has('jopic.js','classList.add("kfree")','free choice card without «không» rows');has('jaudit.js','ONE title per person per block','one title per block');
+has('jopic.js','if(free){ton.remove();gain.remove()','free choice card without «không» rows');has('jaudit.js','ONE title per person per block','one title per block');
 if(MD){console.log('| where | builder | text (X = a value) | pattern |\n|---|---|---|---|');for(const r of rows)console.log(`| ${r[0]} | ${r[1]} | ${r[2].replace(/\|/g,'/')} | ${r[3]} |`)}
 console.log(`tinbao-words scan: ${rows.length} rows · ${fail?fail+' FAIL':'PASS'}`);process.exit(fail?1:0);
