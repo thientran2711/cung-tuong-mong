@@ -290,8 +290,10 @@ async function crawlDev(b,URL,dev){
     const rootH=await el.evaluateHandle(e=>__bc.root(e));const selfSt=e=>e.isConnected?e.className+'|'+(e.getAttribute('aria-pressed')||'')+'|'+(e.getAttribute('aria-expanded')||'')+'|'+(e.innerText||'').slice(0,40):'gone';
     const self0=await el.evaluate(e=>e.isConnected?e.className+'|'+(e.getAttribute('aria-pressed')||'')+'|'+(e.getAttribute('aria-expanded')||'')+'|'+(e.innerText||'').slice(0,40):'gone').catch(()=>'');
     const shot=path.join(OUT,'shots',`${dev}-${String(rows.length).padStart(4,'0')}.jpg`);
+    let waited=0;const isDis=()=>el.evaluate(e=>e.isConnected&&(getComputedStyle(e).pointerEvents==='none'||e.disabled||e.getAttribute('aria-disabled')==='true'||/(^|\s)(kdis|disabled)(\s|$)/.test(e.className))).catch(()=>false);
+    for(;waited<3200&&await isDis();waited+=400)await p.waitForTimeout(400); /* a short lock after a card opens is not a dead Lui: wait up to 3.2 s */
     let dead=null;const ok=await tap(p,el,{screen,label:bt.label,shot,log:m=>{dead=m}});taps++;
-    if(!ok){const d=JSON.parse(dead.replace(/^DEAD BUTTON /,''));if(/^(disabled|gone|popup)$/.test(d.why)){rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,hit:d.why,verdict:'WARN',why:d.why==='disabled'?'greyed out (not tappable now)':d.why==='gone'?'left the page before the tap':'under a hint popup '+d.cover});continue}rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,hit:'DEAD',verdict:'FAIL',why:'dead button: '+d.why+(d.cover?' under '+d.cover+(d.coverText?' «'+d.coverText+'»':''):''),shot});continue}
+    if(!ok){const d=JSON.parse(dead.replace(/^DEAD BUTTON /,''));if(/^(disabled|gone|popup)$/.test(d.why)){rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,hit:d.why,verdict:'WARN',why:d.why==='disabled'?'greyed out for '+(waited+400)+' ms+ (not tappable now)':d.why==='gone'?'left the page before the tap':'under a hint popup '+d.cover});continue}rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,hit:'DEAD',verdict:'FAIL',why:'dead button: '+d.why+(d.cover?' under '+d.cover+(d.coverText?' «'+d.coverText+'»':''):''),shot});continue}
     await p.waitForTimeout(450);await settle(p,4000);
     let post,closedOwn=false;
     try{const isClose=bt.x||/^(Đóng|Thôi|Bỏ qua|Quay lại|Trở về|Về|Hủy|Huỷ|Để sau|Xong|Đã hiểu|Biết rồi|Lui)$/i.test(bt.label);
