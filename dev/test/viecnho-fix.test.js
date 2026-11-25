@@ -1,6 +1,6 @@
 /* review/viecnho-fix (owner 24/11 ~21:50Z real): (1) Việc nhờ «Tìm việc» sub-tab + Đang làm order, (2) person-panel scroll (kit §6.4), (3) «Vì sao» wording.
    node dev/test/viecnho-fix.test.js [outdir]   (after dev/site/build_site.sh; shots go to outdir, never git). exit 1 on any FAIL */
-const {chromium}=require('playwright');const path=require('path'),fs=require('fs');const ROOT=path.resolve(__dirname,'../..');const OUT=process.argv[2]||'/tmp/viecnho-fix';fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=require('./lib/dlgs-off').pw('off');const path=require('path'),fs=require('fs');const ROOT=path.resolve(__dirname,'../..');const OUT=process.argv[2]||'/tmp/viecnho-fix';fs.mkdirSync(OUT,{recursive:true});
 let fails=0;const ok=(c,m)=>{if(!c){fails++;console.log('FAIL',m)}else console.log('ok  ',m)};
 (async()=>{const b=await chromium.launch();
  for(const [name,w,h] of [['fold',755,1000],['ipad',1180,820]]){const p=await b.newPage({viewport:{width:w,height:h},deviceScaleFactor:1});const errs=[];p.on('pageerror',e=>errs.push(e.message));

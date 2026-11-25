@@ -1,6 +1,6 @@
 /* review/viecnho-fix family scans (LUẬT SỬA CẢ NHÓM): node dev/test/viecnho-scan.js <outdir>
    A) every tab / sub-tab: is an «open new …» act (.ktacts/.kpanec outside a person card) rendered ABOVE the main content (.pgwrap / .pc / list)?  B) every person card (.pc[data-k2]) on every tab: kit §6.4 shape (kpwide ⇒ .kplscr, card never scrolls, fixed height). Prints before/after-style table. */
-const {chromium}=require('playwright');const path=require('path'),fs=require('fs');const ROOT=path.resolve(__dirname,'../..');const OUT=process.argv[2]||'/tmp/viecnho-scan';fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=require('./lib/dlgs-off').pw('off');const path=require('path'),fs=require('fs');const ROOT=path.resolve(__dirname,'../..');const OUT=process.argv[2]||'/tmp/viecnho-scan';fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch();const rows=[];
  for(const [name,w,h] of [['fold',755,1000],['ipad',1180,820]]){const p=await b.newPage({viewport:{width:w,height:h},deviceScaleFactor:1});
   await p.route(u=>/^https?:/.test(u.href)&&!/cdn|r2.dev|workers.dev|pages.dev/.test(u.host),r=>r.abort());await p.goto('file://'+path.join(ROOT,'index.html'));await p.waitForTimeout(2500);

@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"1fd0334c+","t":"2026-11-25T03:59Z","c":"review r2: guard the two LIVE tests merged in (dayq-order, kit-mg-intro: turn drive → lib/dlgs-off tap); dlgs-guard-scan PASS","b":"076588bd3107","h":[{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"}]};
+window.CTM_BI={"s":"c82ebd54+","t":"2026-11-25T05:02Z","c":"review r2: guard the two LIVE tests merged in (dayq-order, kit-mg-intro: turn drive → lib/dlgs-off tap); dlgs-guard-scan PASS","b":"bbf9d12bd277","h":[{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -97924,13 +97924,14 @@ window.DQ=DQ;
    gift lock) and that has no cancel road (kitCancelIx −1: no ✕, no Esc, no tap-out, no timer) leaves her nothing to press = soft-lock
    (arm A co-op 9B2G wk35: j68c-sea-023 at bạc 2; solo too). Authors keep a road she can take (law 2; gates: dev/test/j68seeds_validate.py,
    dev/test/dead-card.js scans every buildable card at bạc 0). This is the last guard for a card the scan cannot build: the kit close button
-   (#mr .main, the kit close word «Lui», KIT_CLOSE_W) appears and the card passes with no effect; logged in window.__deadCards for the robots. */
+   (#mr .main, the kit close word «Lui», KIT_CLOSE_W) appears and the card passes with no effect (also on a card that waits hidden under its side-line
+   dialogue scene, jdlgs: DLGS.playing — the net is put on before the scene, so the card shows with «Lui» after the last line); logged in window.__deadCards for the robots. */
 function deadCardOff(c){if(!c)return true;if(c.off)return true;if(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)return true;if(c.lock)return true;
  if(typeof c.lk==="function"){try{if(c.lk())return true}catch(e){}}return false}
 function deadCardIs(m){if(!m||!Array.isArray(m.opts)||!m.opts.length)return false;if(m.opts.some(c=>c&&c.kgx))return false;
  const ci=typeof kitCancelIx==="function"?kitCancelIx(m):-1;if(ci>=0)return false;return m.opts.every(deadCardOff)}
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{
- const M=$("modal"),m=Q[0],mr=$("mr");if(!M||M.hidden||!mr||mr.querySelector("#mclose")||!deadCardIs(m))return r;
+ const M=$("modal"),m=Q[0],mr=$("mr");if(!M||(M.hidden&&!(typeof DLGS!=="undefined"&&DLGS.playing))||!mr||mr.querySelector("#mclose")||!deadCardIs(m))return r;
  mr.innerHTML=`<button class="main" id="mclose">Lui</button>`;if(typeof kitFix==="function")kitFix(mr);
  (window.__deadCards=window.__deadCards||[]).push({pid:m.pid||"",t:m.t||"",bac:S.bac,turn:S.turn});console.warn("dead card net:",m.pid||m.t)}catch(e){console.error(e)}return r}})();
 
@@ -99846,7 +99847,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="076588bd3107";window.CTM_BUILD=BUILD;
+const BUILD="bbf9d12bd277";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

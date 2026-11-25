@@ -5,7 +5,7 @@
    the kit «Lui» button, pressing it closes the card (no soft-lock). Exit 1 on any failure.
    Parts 2/3 open the card as a player tap would (DQ.user, jdayq day-queue 25/11: otherwise a fresh life's dawn / activity holds the card unpainted).
    usage: node dev/test/dead-card.js <page url> [out.json]   (serve the repo root, e.g. python3 -m http.server) */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT]=process.argv;
+const {chromium}=require('./lib/dlgs-off').pw('tap');const fs=require('fs');const [,,URL,OUT]=process.argv;
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:900,height:900}});
  await p.addInitScript(()=>{let s=7*7919+12345;Math.random=()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}});
  await p.route(/\.(webp|png|jpe?g|mp3|ogg|m4a)(\?|$)/i,r=>r.abort());
