@@ -150,7 +150,7 @@ async function crawlTour(p,dev,ER){
  const fresh=async(log)=>{await p.evaluate(()=>{try{localStorage.clear();localStorage.setItem('hclh-tut-test','1')/* jtut autoOk(): a webdriver page gets the tour only with the test flag (a real phone has no webdriver) */}catch(e){}try{REC.tour='';REC.asked=0}catch(e){}document.querySelectorAll('#kload,#klife').forEach(e=>e.remove());
    document.getElementById('modal').hidden=true;const T=document.getElementById('title');T.hidden=false;showTitle()});
   const PRIM=/^(Chơi một mình|Tiếp|Vào cung|Nhập cung|Bắt đầu|Quay|Gieo|Xem|Được|Đã hiểu|Nhận|Đi|Vào)/;
-  let last='';const tried={};for(let k=0;k<40;k++){await settle(p,6000);await p.waitForTimeout(300);
+  let last='';const tried={};for(let k=0;k<90;k++){await settle(p,6000);await p.waitForTimeout(300);
    if(await p.evaluate(()=>{const t=document.getElementById('ktut');return !!t&&!t.hidden&&!!t.querySelector('.ktut-card')}))return true;
    let L=await p.evaluate(()=>__bc.list());
    /* a screen one tap deeper: tap only what is NEW on it (the new frame's buttons; for a new tab, the buttons of its panel) —
@@ -197,6 +197,7 @@ async function crawlTour(p,dev,ER){
   /* a tap lesson (no Tiếp): the lit hole grows from 0×0 to the target over its .28 s move after the lesson scrolls the target in —
      read it again until it has a size (fix-1-r3: iPad lesson 5/12 «Làm thử một việc» was read mid-move and called «no lit spot») */
   for(let w=0;w<10&&!c.hole;w++){await p.waitForTimeout(300);const c2=await card();if(!c2||c2.h!==c.h||c2.sub!==c.sub)break;c=c2}
+  if(c.hole){for(let w=0;w<8;w++){await p.waitForTimeout(350);const c2=await card();if(!c2||!c2.hole||c2.h!==c.h||c2.sub!==c.sub)break;const same=JSON.stringify(c2.hole)===JSON.stringify(c.hole);c=c2;if(same)break}} /* hole still moving (.28 s grow from its old spot): read it again until it holds still */
   if(c.hole){ /* tap the lit spot like a player */
    const hit=await p.evaluate(({x,y})=>{const t=document.elementFromPoint(x,y);return t?__bc.desc(t)+' «'+(t.innerText||'').replace(/\s+/g,' ').trim().slice(0,30)+'»':'none'},c.hole);
    const blocked=/ktut-blk|ktut-dim|#ktut/.test(hit);const shot=path.join(OUT,'shots',`${dev}-tour-${i}.jpg`);
