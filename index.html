@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…","b":"84c2828d40da","h":[{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"},{"s":"c87a40e1+","t":"2026-11-24T07:46Z","c":"map-fix-2: dev/test/map-here-scan.js (law 11 scan: her place on the Dư đồ plan, every rank x home/away x size: one .here = mapHereK, one «t…"}]};
+window.CTM_BI={"s":"49f17d4d+","t":"2026-11-25T02:23Z","c":"RV DAYQ-4 (BIG): merge review/day-queue-2 38290f61 onto LIVE-next 7dbfe98a (index.html/sw.js conflict only: rebuilt)","b":"f3a6d87259c1","h":[{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -54907,9 +54907,13 @@ function spyPick(refund,ag){const m=ag||whyMaidInit(S.maid),L=spyList();const cu
  A[i]={n:"Sai đi dò la",dom:"Mưu kế",o:spyO(S,t,m),x:`nhắm: ${spyWho(t)} (chạm để đổi) · biết 2 điều thật về nàng · chứng cứ ${balSg(BAL.eff.j78.evN)}`,/* previews: j78maidSpy */l:{maid:-5},risk:`nàng đoán ra: ${typeof pvOan==="function"?pvOan(t,BAL.eff.j78.j78maidFail):`oán ta ${balSg(BAL.eff.j78.j78maidFail)}`}`,
   why:()=>spyFactors(S,t,m),act:1,open:()=>spyPick(2)};
  /* (2) "Nghe ngóng chung": no target, 1 khắc, one true piece of palace news; who it is about is weighted by real causes */
- A.splice(i+1,0,{n:"Nghe ngóng chung",o:100,x:`${m.name} đi nghe ngóng: biết 1 điều thật trong cung (về kẻ gây chuyện hoặc người ${m.name} quen)${eyes(S)>=3?" · Tai mắt nhiều: thêm 1 điều":""}`,
-  run:()=>{const r=spyNews(m);return r}});return A}})();
+ A.splice(i+1,0,{n:"Nghe ngóng chung",o:spyO(S,null,m),why:()=>spyFactors(S,null,m),x:`${m.name} đi nghe ngóng: biết 1 điều thật trong cung (về kẻ gây chuyện hoặc người ${m.name} quen)${eyes(S)>=3?" · Tai mắt nhiều: thêm 1 điều":""}`,
+  run:()=>spyListen(m)});return A}})();
 function spyNewsW(v,m){return 1+Math.max(0,danger(v,S))/15+(whyKnows(m,v)?3:0)+((v.sung||0)>=50?1:0)+(v.preg?1:0)+((S.met&&S.met[v.id]!=null)?0:.5)}
+/* DELEGATE-NOMG (owner OD 25/11 ~04:12Z): «Nghe ngóng chung» is done by the one she sends, never by her: NO mini-game; the doer's own ability decides it —
+   the same no-target dò la odds every sent agent has (spyRoll(S,null,m): her eyes / tâm cơ / tài + «phải sai đi» + the doer's thiện cảm, nết, bậc; BAL.spy*),
+   shown on the card as the ladder word (spyO). A miss = a round with nothing worth reporting (time spent, nothing else lost). */
+function spyListen(m){spyListen.ok=false;if(!m)return"";if(!aRoll(spyRoll(S,null,m)))return`${m.name} đi nghe ngóng một vòng, chưa nghe được chuyện gì đáng bẩm.`;spyListen.ok=true;return spyNews(m)}
 function spyNews(m){const L=spyList();if(!L.length)return`${m.name} đi một vòng, trong cung yên ắng.`;const W=L.map(v=>spyNewsW(v,m));let r=Math.random()*W.reduce((a,b)=>a+b,0),i=0;while(r>W[i]&&i<L.length-1){r-=W[i];i++}
  const v=L[i];const n=eyes(S)>=3?2:1;let f="";try{f=typeof intelLearn==="function"?intelLearn(v,n,{by:m.name,how:"Nghe ngóng"}):""}catch(e){}
  const why=whyKnows(m,v)?`${m.name} quen người ${whyPal(v)}`:danger(v,S)>=netTh(v,"act")?"nàng đang có chuyện với ngươi":(v.sung||0)>=50?"nàng đang được sủng, ai cũng bàn":"chuyện nghe được ngoài hành lang";
@@ -75731,7 +75735,7 @@ function adSrv(){try{return !!(S&&(S.out||(S.srv&&!S.srv.risen)||(typeof isSrv==
 function adMaidCards(){if(!S||S.out||!S.maid)return[];const A=[];let O=[];try{O=talkOpts({kind:"maid"})||[]}catch(e){return A}
  const sp=O.find(a=>a&&a.n==="Sai đi dò la"),ng=O.find(a=>a&&a.n==="Nghe ngóng chung");
  if(sp)A.push({n:"Sai cung nữ đi dò la",t:`Sai ${S.maid.name} đi dò la một phi tần (chọn người khi sai đi).`,k:typeof ptK==="function"?ptK("spy",2):2,c:{},o:sp.o==null?100:sp.o,dom:sp.dom||"Mưu kế",x:sp.x||"",lock:!!sp.lock,adT:sp.t,why:sp.why,adOpen:sp.open,ad:1});
- if(ng)A.push({n:"Nghe ngóng chung",t:`${S.maid.name} đi một vòng nghe ngóng chuyện trong cung.`,k:typeof ptK==="function"?ptK("listen",1):1,c:{},o:100,dom:"Giao thiệp",x:ng.x||"",adRun:ng.run,ad:1});
+ if(ng)A.push({n:"Nghe ngóng chung",t:`${S.maid.name} đi một vòng nghe ngóng chuyện trong cung.`,k:typeof ptK==="function"?ptK("listen",1):1,c:{},o:ng.o==null?100:ng.o,dom:"Giao thiệp",x:ng.x||"",why:ng.why,adRun:ng.run,ad:1});
  return A}
 /* the Tài nghệ charity as a Hành sự card (danh-p1, owner P1 16/11: "shared Hành sự door"): the same act (j85 charityFx), the same
    monthly lock (S.charM); khắc spent by the card path above, like the maid cards */
@@ -77022,7 +77026,7 @@ function hsvActs(s){const A=[],H=BAL.house;if(!s||!(S.staff||[]).includes(s))ret
  try{whyMaidInit(s);const t=spyTarget();
   if(!t)A.push({n:"Sai đi dò la",dom:"Mưu kế",lock:true,t:"không còn phi tần nào để dò",o:0});
   else A.push({n:"Sai đi dò la",dom:"Mưu kế",o:spyO(S,t,s),x:`nhắm: ${spyWho(t)} (chạm để chọn người khác) · biết 2 điều thật về nàng · chứng cứ ${balSg(BAL.eff.j78.evN)}`,/* previews: j78maidSpy */l:{},risk:`${nm} bị bắt gặp thì sợ hãi (thiện cảm -${balAb(BAL.eff.jwhy.loyalSpyMaidRun)}) · nàng đoán ra: ${typeof pvOan==="function"?pvOan(t,5):"oán ta +5"}`,why:()=>spyFactors(S,t,s),act:1,open:()=>spyPick(2,s)});
-  A.push({n:"Nghe ngóng chung",dom:"Mưu kế",o:100,x:`${nm} đi nghe ngóng: biết 1 điều thật trong cung (hay về người đang gây chuyện, người ${nm} quen bên ấy)${eyes(S)>=3?" · Tai mắt nhiều: thêm 1 điều":""}`,run:()=>spyNews(s)})}catch(e){console.error(e)}
+  A.push({n:"Nghe ngóng chung",dom:"Mưu kế",o:spyO(S,null,s),why:()=>spyFactors(S,null,s),x:`${nm} đi nghe ngóng: biết 1 điều thật trong cung (hay về người đang gây chuyện, người ${nm} quen bên ấy)${eyes(S)>=3?" · Tai mắt nhiều: thêm 1 điều":""}`,run:()=>spyListen(s)})}catch(e){console.error(e)}
  /* 2. the Cung nhân tab's acts for this servant (same functions, same costs); on the stage they also take the khắc the card shows
     (1, Hỏi chuyện 2 — j25 opens them without paying, so each pays here once it has run) */
  const pay=n=>{try{S.payOnPick=0;if(n)spend(n)}catch(e){}};
@@ -87310,9 +87314,9 @@ function ptNoRunner(){return"không còn ai rảnh để sai (người hầu đa
 ptReg("spy",a=>{const t=RV(a.a.v);const m=ptPerson(a.a);if(!m)return{txt:`Người được sai đi dò la không trở về.`,ok:false};if(!t||!t.alive){log(`${m.name} trở về: người cần dò la không còn trong cung.`);return{ok:null}}
  PT.landing=1;try{const ok=spyMaidRun(t,a.a.sid!=null?m:undefined);return{ok:!!ok,t:`${m.name} dò la ${t.name} trở về`}}finally{PT.landing=0}});
 /* ---- 2. Nghe ngóng chung ---- */
-function ptListen(m){if(!ptOn()||PT.landing)return spyNews(m);const a=ptSend({who:ptPid(m),nm:m.name,kind:"listen",paid:ptRow("listen").o,place:"cnh",a:{sid:m.sid!=null?m.sid:null},lbl:"đi nghe ngóng"});
- return a?`${m.name} đi nghe ngóng, về ${ptWhen(a.due)}.`:spyNews(m)}
-ptReg("listen",a=>{const m=ptPerson(a.a);if(!m)return{txt:"Người được sai đi nghe ngóng không trở về.",ok:false};const r=spyNews(m);if(r)log(`${m.name} nghe ngóng trở về: ${r}`);return{ok:true,t:`${m.name} nghe ngóng trở về`}});
+function ptListen(m){if(!ptOn()||PT.landing)return spyListen(m);const a=ptSend({who:ptPid(m),nm:m.name,kind:"listen",paid:ptRow("listen").o,place:"cnh",a:{sid:m.sid!=null?m.sid:null},lbl:"đi nghe ngóng"});
+ return a?`${m.name} đi nghe ngóng, về ${ptWhen(a.due)}.`:spyListen(m)}
+ptReg("listen",a=>{const m=ptPerson(a.a);if(!m)return{txt:"Người được sai đi nghe ngóng không trở về.",ok:false};const r=spyListen(m);if(r)log(`${m.name} nghe ngóng trở về: ${r}`);return{ok:!!spyListen.ok,t:`${m.name} nghe ngóng trở về`}});
 /* the two options on her maid's / a servant's pop-up (talkOpts kinds maid / serv): order khắc, "chờ N khắc", busy lock */
 (function(){try{const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(!ptOn()||!p||!Array.isArray(A)||(p.kind!=="maid"&&p.kind!=="serv"))return A;
   const m=p.kind==="serv"?p.ref:S.maid;if(!m)return A;const why=ptLockWhy(ptPid(m));
@@ -95700,8 +95704,17 @@ try{BAL.mgTier.occ.df=BAL.mgTier.occ.df||[0,.3];for(const k of ["df_swipe","df_t
    popIdx stays the source of truth (talk(), the log sync popMsg, co-op) — the focus view sets it on open and clears it on close.
    Co-op: everything here is her local view; acts go the existing runAct / jcoopworld path. ===================================================== */
 const DF={i:null,step:0,cls:{}};window.DF=DF;
-/* class of a talk option: D = opens its own flow, A = rolled, C = sure */
-function dfCls(a){if(!a)return"C";if(a.open)return"D";if(a.pm)return"D";const o=typeof oddsOf==="function"?oddsOf(a):(a.o==null?100:a.o);return o<100&&!a.lock?"A":"C"}
+/* DELEGATE-NOMG (owner OD 25/11 ~04:12Z, canon overwrite of OD:L192/L195 for delegated acts): «Khi nào mà tôi là người tự làm thì mới có thể làm mini game
+   cho tôi.» An act SHE ORDERS someone else to do never opens a mini-game: the doer's ability + the BAL odds decide it (law 4/7). ONE rule, by meaning:
+   (1) the option carries a parallel-time send kind (jptime pk: every button where she sends ANOTHER person, BAL.ptime.kinds), or
+   (2) it is an act done from afar / by others for her (jstagehere ACT_REMOTE), or
+   (3) its name says she sends someone (Sai …, Nghe ngóng chung, Truyền / Mời thái y …, Nhờ thái giám …, Cài tai mắt / người hầu).
+   Scan + before/after table: dev/test/delegate-nomg-audit.js, dev/handover/reports/delegate-nomg.md. */
+const DF_DLG=/^(Sai |Nghe ngóng chung$|Truyền (thái y|họa sư|nhạc sư)|Mời thái y|Nhờ thái giám|Cài (tai mắt|người hầu))/;
+function dfDlg(a){if(!a)return false;const n=String(a.n||"").replace(/<[^>]+>/g,"").trim();return !!(a.pk||(typeof ACT_REMOTE==="object"&&ACT_REMOTE&&ACT_REMOTE[n])||DF_DLG.test(n))}
+window.dfDlg=dfDlg;
+/* class of a talk option: D = opens its own flow, E = delegated (someone else does it: no game, plain odds), A = rolled, C = sure */
+function dfCls(a){if(!a)return"C";if(a.open)return"D";if(dfDlg(a))return"E";if(a.pm)return"D";const o=typeof oddsOf==="function"?oddsOf(a):(a.o==null?100:a.o);return o<100&&!a.lock?"A":"C"}
 /* the engine of an act name (the act table, §PLAN 2): one rule by meaning, no per-person variant */
 const DF_ENG=[
  [/^Tát$|^Hắt nước$|^Hắt trà$|^Quạt mực$/,"swipe"],[/Ngáng chân/,"swipe"],[/Đẩy nàng xuống hồ sen|Đẩy xuống hồ sen/,"tug"],
@@ -95899,7 +95912,9 @@ const DF_RULE={
  words:["Chạm dấu","Dấu trôi lên: chạm dấu ✓ xanh (lời hợp ý), tránh dấu ✗ đỏ (lời hỏng).","Chạm đúng nhiều dấu ✓ thì thành; chạm nhầm dấu ✗ thì mất điểm."],
  stare:["Giữ ngón tay","Giữ ngón tay để thanh áp lực nằm trong dải xanh; nàng đẩy lại nên buông và giữ cho khéo.","Ở trong dải xanh càng lâu càng thành."]};
 function dfUnplay(F){try{if(F.playing)F.endPlay()}catch(e){}}
-function dfLast(){try{const t=document.getElementById("rtoast");return t&&t.classList.contains("on")?t.innerText.trim().split("\n")[0]:""}catch(e){return""}}
+function dfLast(){try{const t=document.getElementById("rtoast");const tt=t&&t.classList.contains("on")?t.innerText.trim().split("\n")[0]:"";if(tt)return tt;
+ /* DELEGATE-NOMG: an act with no result toast (a run act: «Nghe ngóng chung» → «<tên> đi nghe ngóng, về khắc N.») says its own short line, the one the pop-up note shows (popMsg) */
+ if(typeof popMsg==="string"&&popMsg){const d=document.createElement("div");d.innerHTML=popMsg;return d.textContent.replace(/\s+/g," ").trim()}return""}catch(e){return""}}
 /* the focus holds the PERSON (DF.p), never a frozen index: S.visit.people can shift while it is up (co-op refreshHere unshifts the Emperor,
    people leave); her index is looked up at every use, and if she is gone the focus closes (rv duodo-focus 43bc4ba2 #1) */
 function dfSame(a,b){return !!a&&!!b&&(a===b||(!!a.ref&&a.ref===b.ref)||(!a.ref&&!b.ref&&a.kind===b.kind&&a.name===b.name))}
@@ -95915,7 +95930,7 @@ function dfFind(i,id){for(const g of dfActs(i)||[])for(const a of g.acts)if(a.id
 function dfTap(id){const F=DF.F;if(!F||S.dead||Q.length||DF.play)return;const i=dfHere();if(i<0)return;const a=dfFind(i,id);if(!a||a.off)return;
  /* run = the act on HER index at the moment it lands (the game takes seconds; the list may shift meanwhile) */
  const run=res=>{const j=dfHere();if(j<0)return;dfRun(j,id,res);dfAfter(a,res)};
- if(a.cls==="D"){run();return}
+ if(a.cls==="D"||a.cls==="E"){run();return}/* E = delegated (jdf dfDlg, owner OD 25/11 ~04:12Z): the one she sends does it, no game: plain odds */
  const layer=dfPlay(F,()=>{if(DF.play)DF.play.skip()},()=>{const h=DF.play;DF.play=null;if(h)h.destroy()});if(!layer){run();return}
  const go=()=>{DF.play=dfGame(a.eng,{box:layer,fig:dfFigBox(F,layer),rank:typeof rkOf==="function"?rkOf(S):S.rank,at:/Ngáng chân/.test(a.n)?"feet":null,hud:o=>dfHud(F,o),
   onDone:res=>{DF.play=null;dfUnplay(F);run(res)}});
@@ -98219,7 +98234,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="84c2828d40da";window.CTM_BUILD=BUILD;
+const BUILD="f3a6d87259c1";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

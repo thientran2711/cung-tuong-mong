@@ -10,8 +10,17 @@
    popIdx stays the source of truth (talk(), the log sync popMsg, co-op) — the focus view sets it on open and clears it on close.
    Co-op: everything here is her local view; acts go the existing runAct / jcoopworld path. ===================================================== */
 const DF={i:null,step:0,cls:{}};window.DF=DF;
-/* class of a talk option: D = opens its own flow, A = rolled, C = sure */
-function dfCls(a){if(!a)return"C";if(a.open)return"D";if(a.pm)return"D";const o=typeof oddsOf==="function"?oddsOf(a):(a.o==null?100:a.o);return o<100&&!a.lock?"A":"C"}
+/* DELEGATE-NOMG (owner OD 25/11 ~04:12Z, canon overwrite of OD:L192/L195 for delegated acts): «Khi nào mà tôi là người tự làm thì mới có thể làm mini game
+   cho tôi.» An act SHE ORDERS someone else to do never opens a mini-game: the doer's ability + the BAL odds decide it (law 4/7). ONE rule, by meaning:
+   (1) the option carries a parallel-time send kind (jptime pk: every button where she sends ANOTHER person, BAL.ptime.kinds), or
+   (2) it is an act done from afar / by others for her (jstagehere ACT_REMOTE), or
+   (3) its name says she sends someone (Sai …, Nghe ngóng chung, Truyền / Mời thái y …, Nhờ thái giám …, Cài tai mắt / người hầu).
+   Scan + before/after table: dev/test/delegate-nomg-audit.js, dev/handover/reports/delegate-nomg.md. */
+const DF_DLG=/^(Sai |Nghe ngóng chung$|Truyền (thái y|họa sư|nhạc sư)|Mời thái y|Nhờ thái giám|Cài (tai mắt|người hầu))/;
+function dfDlg(a){if(!a)return false;const n=String(a.n||"").replace(/<[^>]+>/g,"").trim();return !!(a.pk||(typeof ACT_REMOTE==="object"&&ACT_REMOTE&&ACT_REMOTE[n])||DF_DLG.test(n))}
+window.dfDlg=dfDlg;
+/* class of a talk option: D = opens its own flow, E = delegated (someone else does it: no game, plain odds), A = rolled, C = sure */
+function dfCls(a){if(!a)return"C";if(a.open)return"D";if(dfDlg(a))return"E";if(a.pm)return"D";const o=typeof oddsOf==="function"?oddsOf(a):(a.o==null?100:a.o);return o<100&&!a.lock?"A":"C"}
 /* the engine of an act name (the act table, §PLAN 2): one rule by meaning, no per-person variant */
 const DF_ENG=[
  [/^Tát$|^Hắt nước$|^Hắt trà$|^Quạt mực$/,"swipe"],[/Ngáng chân/,"swipe"],[/Đẩy nàng xuống hồ sen|Đẩy xuống hồ sen/,"tug"],
