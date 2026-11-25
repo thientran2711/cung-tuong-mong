@@ -49,3 +49,9 @@ With today's ration (one random colour per part) she rarely owns all 4 colours o
 - The set note is printed ONCE, short: «Bộ mờ: còn thiếu màu, chạm để xem» (LX_SETNOTE); what is missing + «Đường kiếm» only on tap (row header).
 - Tests add: note once and short, why + roads on tap, patch only over a painted picture, layers hidden until painted, portrait failing → no white box. Fold + iPad ALL PASS.
 - Videos r3: img/_review/makeup-set/mirror-set-r3-{fold-755x1000,ipad-1180x820}.mp4.
+
+## r4 (MAIN 148 25/11 ~23:39Z): black band on Fold
+- Cause: r1 capped the result zoom (rvUp) → a smaller scale; the camera still moved the face to 36 % of the screen height, pulling the room plate's top edge into view → the dark overlay showed as a ~90 px band (Fold; thinner on iPad). Fix: the camera move is clamped so the scaled .ktrv-cam always covers the screen edge to edge. The reveal also waits for the room plate (no opening on the bare dark backdrop).
+- Whole family (KIT 81b .km-full scenes): dev/test/fullscene-band.js measures the top + bottom 60 px on Fold + iPad: makeup reveal step-in, reveal zoom, «Học thành tài» (kitLearn, KIT 81c picture) — ALL PASS. Lật thẻ (jflip) is a dark-tray scene by design (its edge fades into the dark), not measured.
+- «✓ + word»: unchanged (r1 state) pending MAIN 148's answer (A revert / B keep).
+- Videos r4: img/_review/makeup-set/mirror-set-r4-{fold-755x1000,ipad-1180x820}.mp4.

@@ -1156,7 +1156,7 @@ const TOIL_PLATE={w:1200,h:800,bx:.52,gx:630/1200};/* gx = the mirror axis of sy
 /* the face mesh (img/mk-fit) of a file must be loaded BEFORE its colour layers are built: the layer is baked into the reveal markup and is not redrawn when the mesh arrives
    (r2 FAIL 17/11: a lip patch on the chin = the fallback lip oval from the old fit row, drawn while the mesh was still loading). Waits up to ~2.5 s, then goes on (the mesh-less fallback below draws no lips). */
 function toilMkReady(files,cb){let n=0;const need=()=>files.filter(f=>f&&MK_FIT.face(f)&&!MK_FIT.get(f));const go=()=>{if(!need().length||++n>31)return cb();setTimeout(go,80)};go()}
-function toilReveal(o,done){let fin=false;try{if(typeof kmStage==="function"&&kmOn()&&S&&TOIL_FIT.fit&&!o.mkWait){const f0=toilFigAt(),p0=toilPor();if(f0&&p0.src){o.mkWait=1;return toilMkReady([kitFile(f0),kitFile(p0.src)],()=>kitPicArLoad([kitFile(f0),kitFile(p0.src)],()=>toilReveal(o,done)))}}}catch(e){}
+function toilReveal(o,done){let fin=false;try{if(typeof kmStage==="function"&&kmOn()&&S&&TOIL_FIT.fit&&!o.mkWait){const f0=toilFigAt(),p0=toilPor();if(f0&&p0.src){o.mkWait=1;return toilMkReady([kitFile(f0),kitFile(p0.src)],()=>kitPicArLoad([kitFile(f0),kitFile(p0.src),"toil-mirror-room.webp"/* makeup-set r4: the room plate too, so the scene never opens on the bare dark backdrop */],()=>toilReveal(o,done)))}}}catch(e){}
  const end=()=>{if(fin)return;fin=true;try{done()}catch(e){console.error(e)}};
  try{if(typeof kmStage!=="function"||!kmOn()||!S||!TOIL_FIT.fit)return end();const fig=toilFigAt(),por=toilPor();if(!fig||!por.src)return end();
   const ff=kitFile(fig),pf=kitFile(por.src),v=toilRow(ff);if(!v)return end();const A=v[8]||1.3,red=kmReduced(),look=o.look;
@@ -1192,7 +1192,9 @@ function toilReveal(o,done){let fin=false;try{if(typeof kmStage==="function"&&km
       the face may be drawn at most BAL.toil.rvUp x its source pixels on THIS screen (device pixels incl. the design-canvas scale) */
    try{const pim=fw.querySelector(".ktrv-pw img"),pv=toilRow(pf);const srcP=pim&&pim.naturalWidth&&pv?pv[6]/100*pim.naturalWidth:0;const hd=window.KFHD&&KFHD.map&&KFHD.map[ff];const srcF=v[6]/100*(hd&&!KFHD.bad[ff]?hd[1]:(im.naturalWidth||0));
     const src=Math.max(srcP,srcF);const ks=(R.getBoundingClientRect().width/(R.offsetWidth||1))||1,dpr=(window.devicePixelRatio||1)*ks;if(src>0){const cap=src*BAL.toil.rvUp/(fwpx*dpr);sc=Math.max(1,Math.min(sc,cap))}TOIL.rvSc={sc,src:Math.round(src),face:Math.round(fwpx*sc*dpr)}}catch(e){}
-   R.style.setProperty("--kto",`${fx0.toFixed(1)}px ${fy0.toFixed(1)}px`);R.style.setProperty("--ktx",`${(RW/2-fx0).toFixed(1)}px`);R.style.setProperty("--kty",`${(RH*.36-fy0).toFixed(1)}px`);R.style.setProperty("--ktsc",sc.toFixed(2))};
+   R.style.setProperty("--kto",`${fx0.toFixed(1)}px ${fy0.toFixed(1)}px`);/* makeup-set r4 (MAIN 148: a BLACK BAND at the top on Fold): the camera never pulls the room plate off the screen — the move is clamped so the scaled .ktrv-cam (= R's box) still covers R edge to edge */
+   const cl=(v,a,b)=>Math.max(a,Math.min(b,v)),k=1-sc;let tx=RW/2-fx0,ty=RH*.36-fy0;tx=cl(tx,RW-fx0*k-RW*sc,-fx0*k);ty=cl(ty,RH-fy0*k-RH*sc,-fy0*k);
+   R.style.setProperty("--ktx",`${tx.toFixed(1)}px`);R.style.setProperty("--kty",`${ty.toFixed(1)}px`);R.style.setProperty("--ktsc",sc.toFixed(2))};
   const goZoom=()=>{if(ph>=2)return;ph=1.5;camSet();R.classList.add("ktrv-go");later(1500,toZoom)};
   if(red){camSet();R.classList.add("ktrv-red");toZoom();return}
   /* step in, effect, zoom */
