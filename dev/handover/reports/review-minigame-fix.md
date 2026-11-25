@@ -68,3 +68,6 @@ Diff vs 0506605b: j82 kgReady gets two OPEN kit rows «Chạm» (KG82_TAP per ki
 2. LAW 14 canon overwrite: KIT.md §13.7 (line ~655) still says the rules block = heading + «!» only. Rewrite that line in place: two open rows Chạm/Được (kgTapRow/kgWinRow, KG82_TAP, KG82_WIN, spec tap/win), with the rest behind «!».
 3. LAW 9: kgReady is a kit part (KIT §13.7). Get «KIT OK» from KK23b on this change, or a written waiver from MAIN 130 in this report.
 Then send the clean quickcheck sha; I will confirm PASS quickly (no full re-run needed beyond quickcheck + mg-intro-2 + family scan).
+
+### STEP-8 CONFIRM (BIG reviewer, 25/11) — BIG PASS 7df74e84
+LC12 step-8 merge 7df74e84 (review/lc12-varC) = parents 2b68def3 (day-queue step) + 0506605b; checked by diff: the change 2b68def3→7df74e84 in dev/build is line-for-line the change 502c48c9→0506605b (224 diff lines each); on the minigame files the only differences from 0506605b come from the lower stack (j79 kitParse+kitNoUnk, jbal2 +4 lines, KIT.md +1), with no conflict and kitQuickWords/kitQuick kept. LC12 gates on 7df74e84: minigame-fix ALL OK, family scan ALL OK 39, duodo-focus-view ALL OK, mg-noword-kit 0 words, coop-one-world 4/4. Valid as long as LC12's per-step quickcheck for 7df74e84 passes (LC12 lands only on that PASS).
