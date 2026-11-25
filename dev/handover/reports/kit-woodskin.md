@@ -96,3 +96,7 @@ PRIORITY #1 CHECK: OD (woodskin rows 4/7/8 of «## REVIEW r3») | main none | re
 - Not run: quickcheck alone (row 9 FAIL is doc-only; the code is byte-identical to r4 apart from the stamp, so run it ONCE on r6). Shots: kit-pick.js shots looked at 3× (pick-a, pick-b, title) both devices, no veil.
 ### Next (r6)
 Fix row 9 only → LAND READY after: build identical, kit-pick.js both devices + quickcheck alone once on the r6 head.
+
+## REVIEW r5 (small kit reviewer SEAT 1, 25/11) — row 9 of r5 FAIL (02e4c520) — review/kit-ring5 f44c657d440ac20f870294b7445c032916571dca — PASS
+PRIORITY #1 CHECK: brief b-kit-0145-batch.md | B KIT FAIL 02e4c520 row 9 | head merge-base = newest origin/main 502c48c9.
+Row 9 (law 14, doc names code that does not exist): KIT.md §98.12b (line 4686) no longer CLAIMS KIT_PLAQUE.headBox / overHead; it says they do NOT exist (tried and reverted). git grep headBox/overHead (non-built): only that one KIT.md line, no code, no test. PASS. Nit: the line still names the two reverted identifiers + a history note; deleting the names would be cleaner under law 14 (not a fail).

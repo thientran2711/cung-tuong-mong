@@ -33,3 +33,15 @@ Kit parts that darken a whole screen (report only): kitScene veil rgba(20,12,8,.
 Law 8: palace-drama/etiquette check on the page (from memory, K/D tagged; needs an expert to confirm).
 Open points: stranger silhouettes drawn by kit only for stage 0; real life seeds in this run had few people so the «hôm nay» room frame shows few; iPad videos show the real spread layout (stage left + panel right).
 Code: review/ring-design dev/review/ring/r2. ~Design 100 % / playable 0 %.
+
+## REVIEW ring5 (small kit reviewer SEAT 1, 25/11) — review/kit-ring5 f44c657d440ac20f870294b7445c032916571dca (= e60c3a9c RING-DESIGN-5 + doc fix f44c657d) — KIT OK
+PRIORITY #1 CHECK: brief b-kit-0145-batch.md | MAIN 131 «mock only, not wired».
+Laws: 9 (kit parts only), 10/11/12 (Fold+iPad), 14 (KIT §98.19 written in place), 4 (no new number).
+(1) NOT WIRED: git grep kitPick / kitDim in dev/build outside jkpick.js = 0 call sites (kitDim only a comment in jbal2); KIT.md §98 STATUS line «STAGED, NOT WIRED» present; only reachable from the console. Note: the same branch also carries LIVE changes that are not mock: jplst railW (place title vs rail chip), jrail §98.4/§98.19c stale-slot clearing, j59 .j59sil opacity .92→1 + .ksil class, kitFocus.btn export, BAL.kdim — all tested below.
+(2) Tests (bare head = merged head, merge-base is main 502c48c9): kit-pick.js no args + 755x1000,1180x820: ALL PASS (incl. tabs1row, liftsmall, title scan 4 titles × count 117); 412x1058 ALL PASS; 390x844 FAIL «plaque outside the stage 1» + liftsmall a1-a5 (2-line small line / a5 leaves the stage) — secondary device, KIT §98 already lists 390x844 with 6 acts in one group as known; not blocking (law 12 = Fold+iPad). kit-rail-stale.js 755x1000 + 1180x820 ALL PASS (rail stale 0).
+(3) Non-vacuous: previous round review/kit-woodskin 02e4c520: kit-pick.js FAIL Fold (tabs1row 3 rows, liftsmall 2 lines) + iPad (tabs1row 2/3 rows, liftsmall); kit-rail-stale FAIL on 02e4c520 AND on origin/main (stale slot kept left 600px / right 20px / flex row). main has no kitPick (kit-pick.js hangs/terminates).
+(4) Built files: build_site.sh on head → git status clean (index.html + sw.js identical).
+(5) Quickcheck ALONE --runs 5: QUICKCHECK PASS 385 s, open 2075 ms, old save ok, render 299/282, tab 495/516, buổi 1792/1475, tasks>200ms 26/26, core gates PASS.
+(6) Shots Fold 755x1000 + iPad 1180x820 (pick-lift, title) looked 3×: plaques wood skin, lifted plaque small line on ONE line, place title wraps clear of the rail chip, nothing over faces/right column.
+(7) Law 11: title/rail changes are in the one jplst/jrail code path for every place stage (title scan 4 titles); stand-in opacity is the one .j59sil class.
+VERDICT: KIT OK.
