@@ -38,7 +38,7 @@ const ROOT=path.resolve(__dirname,'..');const PAGE=process.argv[2]||'index.html'
   /* lodging plan: rooms of 4, beds of 2, her room first */
   const plan=selxRoomPlan(liveRivals(true).slice(0,7));out.plan=plan.length===2&&plan[0].girls[0]===S&&plan[0].beds.length===2&&plan[0].beds.every(b=>b.length===2)&&plan[1].girls.length===4;
   /* ban hoa: the life ends alive, epilogue by origin, recorded */
-  const k=S.origin.k;selxBanHoa();out.ban={dead:S.dead,fate:S.fate,card:(Q[0]&&Q[0].t)||"",epi:String((Q[0]&&Q[0].h)||"").includes(selxEpi(k).slice(0,20)),alive:overAlive(S.fate)};
+  const k=S.origin.k;selxBanHoa();out.ban={dead:S.dead,fate:S.fate,card:(Q[0]&&Q[0].t)||"",want:typeof endName==="function"?endName("Ban hoa","",S.fate,true):"Kiếp này",epi:String((Q[0]&&Q[0].h)||"").includes(selxEpi(k).slice(0,20)),alive:overAlive(S.fate)};
   return out});
  ok(r.bal,'BAL.selx present (one core)');ok(r.wHalf&&r.wMini,'weights mini ½ / đối đáp ¼ / hành xử ¼');
  ok(JSON.stringify(r.steps)==='["ban",-1,0,1]',`result steps ban / −1 / 0 / +1 ${JSON.stringify(r.steps)}`);
@@ -47,6 +47,6 @@ const ROOT=path.resolve(__dirname,'..');const PAGE=process.argv[2]||'index.html'
  ok(r.worst===-1,`worst kept result is −1 (${r.worst})`);ok(r.same,'one formula for her and a tú nữ (law 1)');
  ok(r.nGirls,'the other tú nữ are real people (BAL.selx.yard.n incl. her)');ok(r.keptN===BAL_K(r)&&r.herKept&&r.sorted,`contest keeps the top BAL.selx.yard.kept by score (${r.keptN})`);ok(r.herBan,'not in the top = HER ban hoa; the places go to the girls');ok(r.npcScored,'every tú nữ scored on the same tests by the same formula (law 1)');
  ok(r.npc,'tú nữ marks within 0..10');ok(r.intake,'intake min..max from BAL (j27 too)');ok(r.plan,'lodging: rooms of 4, 2 beds × 2, her room first');
- ok(r.ban.dead&&r.ban.alive&&r.ban.card==='Kiếp này'&&r.ban.epi,`ban hoa ends the life alive with the origin epilogue ${JSON.stringify(r.ban)}`);
+ ok(r.ban.dead&&r.ban.alive&&r.ban.card===r.ban.want/* the end card shows the ending's poetic name (co-ngu-titles KIT_END.names) */&&r.ban.epi,`ban hoa ends the life alive with the origin epilogue ${JSON.stringify(r.ban)}`);
  ok(!errs.length,`no page errors ${JSON.stringify(errs.slice(0,3))}`);await b.close();console.log(bad?`FAILED ${bad}`:'ALL PASS');process.exit(bad?1:0)})();
 function BAL_K(r){return r.K}
