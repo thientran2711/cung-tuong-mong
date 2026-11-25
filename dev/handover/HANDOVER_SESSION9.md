@@ -3362,3 +3362,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (06:03Z) SANSANG-2 LAND READY a6b4d573 SMALL (Lời dặn «Đã hiểu»/✕ live, tap sfx → soft tick, kitPodium «Tiếp» iPad) → MAIN LOOKED loidan-after pair → GO LC13 after noboost ca5af050. hoa-dien hang = LC13 harness (no charset), F order item (3) void. SANSANG-MUSIC-FIX done → archive after LIVE.
 - (06:09Z) LIVE ca5af050 (makeup-noboost: vụng/diêm per OD ~05:42Z) 06:08Z; ROLLBACK 008aa59b. Told sếp. Next sansang-2 ee37ab5f.
 - (06:25Z) LIVE ee37ab5f (sansang-2: Lời dặn «Đã hiểu»/✕ work, soft tap sfx, kitPodium iPad) 06:24Z; ROLLBACK ca5af050. Told sếp. GO hardlock-choice-r2 c8a2bb3e + save-growth e573b9b8 (BIG, FF-only; else re-merge by B/E reviewers). SANSANG worker: test-only harden branch, then archive.
+- (06:26Z) hardlock c8a2bb3e + save-growth e573b9b8 not FF (index/sw only conflict) → LC13 option (b): builds merges on ee37ab5f + full gates, asks B/E reviewer «merge OK» via STATUS, golive on OK.
