@@ -227,9 +227,9 @@ async function crawlDev(b,URL,dev){
  await open();
  const startState={};
  /* START title: the title screen as she sees it on opening (first-load picture dialog removed = second visit) */
- startState.title=async()=>{await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.querySelectorAll('#kload,#kroul,#kroulw,#klife').forEach(e=>e.remove());__bc.sv=null;__bc.baseline();__bc.restore(true)})};
+ startState.title=async()=>{await p.evaluate(()=>{if(window.__tRoul0){kitRoulette=window.__tRoul0;window.__tRoul0=null}/* the title crawl starts lives by real taps: the real roulette is part of what is checked */try{localStorage.clear()}catch(e){}document.querySelectorAll('#kload,#kroul,#kroulw,#klife').forEach(e=>e.remove());__bc.sv=null;__bc.baseline();__bc.restore(true)})};
  /* START home: a fresh life (solo), first buổi, home screen */
- startState.home=async()=>{await p.evaluate(()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
+ startState.home=async()=>{await p.evaluate(()=>{if(typeof kitRoulette==='function'&&!window.__tRoul0){window.__tRoul0=kitRoulette;kitRoulette=function(o){try{o&&o.done&&o.done()}catch(e){}}}/* TEST SETUP ONLY (lc15 QC, #kroul race): the new-life roulette waits for its pictures (≤8 s) before it builds #kroul, so under CPU load it landed AFTER this setup removed the veils and covered the home screen (false «dead button under div#kroul»); a JS-started life skips it */try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
   /* the first-life LỜI DẶN tour is crawled on its own (START tour); here it counts as already seen */
   try{REC.tour='done';REC.asked=1;saveRec()}catch(e){}
   for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}try{S.tutTour=1;coachOff&&coachOff()}catch(e){}Q.length=0;document.getElementById('modal').hidden=true;

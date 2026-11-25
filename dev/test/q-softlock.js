@@ -15,7 +15,7 @@ const GAME=process.argv[2]||path.join(__dirname,'../../index.html');const DEVS={
 function serve(file){const root=path.dirname(path.resolve(file)),idx=path.basename(file);const T={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'application/json','.css':'text/css'};
  return new Promise(res=>{const sv=http.createServer((q,r)=>{let u=decodeURIComponent(q.url.split('?')[0]);if(u==='/')u='/'+idx;const f=path.join(root,u);if(!f.startsWith(root)){r.writeHead(403);return r.end()}fs.readFile(f,(e,d)=>{if(e){r.writeHead(404);return r.end()}r.writeHead(200,{'content-type':T[path.extname(f)]||'application/octet-stream'});r.end(d)})});sv.listen(0,'127.0.0.1',()=>{sv.unref();res('http://127.0.0.1:'+sv.address().port+'/'+idx)})})}
 let fails=0;const ok=(c,msg)=>{console.log((c?'PASS ':'FAIL ')+msg);if(!c)fails++};
-const FRESH=()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;try{REC.tour='done';REC.asked=1;saveRec()}catch(e){}
+const FRESH=()=>{if(typeof kitRoulette==='function'&&!window.__tRoul0){window.__tRoul0=kitRoulette;kitRoulette=function(o){try{o&&o.done&&o.done()}catch(e){}}}/* TEST SETUP ONLY (lc15 QC, #kroul race): the new-life roulette waits for its pictures (≤8 s) before it builds #kroul, so under CPU load it landed AFTER this setup removed the veils and covered the home screen (false «dead button under div#kroul»); a JS-started life skips it */try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;try{REC.tour='done';REC.asked=1;saveRec()}catch(e){}
  for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}try{S.tutTour=1}catch(e){}Q.length=0;document.getElementById('modal').hidden=true;document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());render()};
 const CLEAN=()=>{document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());if(Q.length){Q.length=0;document.getElementById('modal').hidden=true;render()}};
 const POST=t=>setTimeout(()=>{kitPanel({kind:'news',title:t,facts:['Một tin trong cung.'],btn:'Đã rõ'});showModal();render()},0);
@@ -36,7 +36,7 @@ const POST=t=>setTimeout(()=>{kitPanel({kind:'news',title:t,facts:['Một tin tr
   await p.evaluate(POST,'Thử tin 1');await p.waitForTimeout(1600);let s=await st();
   ok(t1&&s.foc==='shown'&&s.q===1&&!s.modal,`${dev}: inside a person view on screen the card waits (view ${s.foc}, Q ${s.q}, card shown ${s.modal})`);
   const fx=await p.evaluateHandle(()=>[...document.querySelectorAll('.kfoc button')].find(b=>/kit-x|kfoc-x|close/i.test(b.className+' '+(b.getAttribute('aria-label')||''))&&b.getBoundingClientRect().width>3)||null);
-  const t1b=await rt.tap(fx,{label:'✕ person view',screen:'person view'});await p.waitForTimeout(1500);s=await st();
+  const t1b=await rt.tap(fx,{label:'✕ person view',screen:'person view'});await p.waitForTimeout(1500);s=await st();for(let k=0;k<12&&!s.modal;k++){await p.waitForTimeout(500);s=await st()}/* under CPU load the view's close + the queue wake take longer than 1.5 s (lc15 QC flake): wait up to 6 s more — the rule checked is «it shows», not its speed */
   ok(t1b&&s.modal&&s.t==='Thử tin 1',`${dev}: closing the view (real ✕) shows the waiting card (${JSON.stringify(s)})`);
   /* 2 */
   await fresh();await openView();
