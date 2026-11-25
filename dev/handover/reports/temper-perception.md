@@ -128,3 +128,63 @@ on years 0 executed NPC harm acts (runAct) by kind {} per year {}
 main byKind [calls,pass,mood] {"provoke":[1109,423,0],"frame":[357,267,0],"spy":[8,1,0],"plant":[123,118,0],"bribe":[78,7,0],"rumor":[10,3,0]}
 off byKind [calls,pass,mood] {"provoke":[720,211,0],"spy":[29,7,0],"frame":[466,83,0],"bribe":[402,29,0],"rumor":[292,226,0],"plant":[1,1,0]}
 on byKind [calls,pass,mood] {"provoke":[677,276,24],"frame":[585,148,0],"rumor":[312,283,11],"bribe":[495,67,0],"spy":[18,11,0],"plant":[10,10,0]}
+
+## B2 interim 3 — dead closes (T2c, for RV3b's hand reproduction)
+Source: robot-rt «NO EFFECT» records (the harness taps the close button 3× for real with the dialog still open after 1.2 s; the screenshot is taken at that moment). Build 97d6ba10 (`review/temper-perception-rv`), robot-rt d5545202, Fold 755x1000, bot sens, seed = life no., real taps only (0 JS clicks). The harness does NOT record the Q titles stack or the `#modal` className at that moment — only screen title («…»), button text, buổi, and the PNG (container-local, not pushed). The close control the harness taps is labelled «Lui»; the screenshot of the on-1 case shows the dialog's ✕ at top-right and the page behind it, with the dialog still open.
+Counts: on-1 10 · off-1 42 (cumulative over restarts) · main-1 0 · main-2 0.
+(3) «Seen and closed» is NOT measured: the harness logs only failed closes, not successful ones. The last-400-step trace of each life has 40 «Tâm trạng» mentions in off-1 and 4 in each of on-1, main-1, main-2, so no per-life open count for main exists — a 0 in main means «no failed close», not «opened and closed N times».
+Stuck point (2): save + harness records at on-1 buổi 126 → `dev/handover/reports/tp-stuck/on-1-save-buoi125.json` (key `ls` = the game's localStorage entries; the life stalled 11 × 15 min on «Kính sự phòng báo tin» (buổi 68–125), «Bị châm chọc», and a Tâm trạng dialog).
+| life | at | dialog | button | harness note |
+|---|---|---|---|---|
+| on-1 | buổi 98 | .dlg «Tâm trạng · Tần Khổng Uyển Dung» | «Lui» | tapped 3× for real, dialog stays |
+| on-1 | buổi 336 | .dlg «Hối lộ người ở Thái y viện» | «Lui» | tapped 3× for real, dialog stays |
+| on-1 | buổi 425 | .dlg «Tâm trạng · Đáp ứng Nghiêm Mộc Cận» | «Lui» | tapped 3× for real, dialog stays |
+| on-1 | buổi 441 | .dlg «Tâm trạng · Quý nhân Mã Thục Ý» | «Lui» | tapped 3× for real, dialog stays |
+| on-1 | buổi 747 | .dlg «Tâm trạng · Quý nhân Tô Kiều Ân» | «Lui» | tapped 3× for real, dialog stays |
+| on-1 | buổi 1898 | .dlg «Tâm trạng · Gia quý phi Niên Như Yên» | «Lui» | tapped 3× for real, dialog stays |
+| on-1 | buổi 2116 | .dlg «Tâm trạng · Đáp ứng Nghiêm Mộc Cận» | «Lui» | tapped 3× for real, dialog stays |
+| on-1 | buổi 2151 | .dlg «Tâm trạng · Thường tại Đoan Mộc Tư Dao» | «Lui» | tapped 3× for real, dialog stays |
+| on-1 | buổi 4631 | .dlg «Tâm trạng · Thường tại Diêu San Hô» | «Lui» | tapped 3× for real, dialog stays |
+| on-1 | buổi 4842 | .dlg «Sai cung nữ thân tín mua lén ngoài cung» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 1214 | .dlg «Tâm trạng · Ta» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 1247 | .dlg «Tâm trạng · Tần Đoan Mộc Mạn Sương» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 1262 | .dlg «Tâm trạng · Tần Đoan Mộc Mạn Sương» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 330 | .dlg «Tâm trạng · Ta» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 360 | .dlg «Tâm trạng · Đáp ứng Phó Kinh Hồng» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 376 | .dlg «Tâm trạng · Đáp ứng Phó Kinh Hồng» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 1034 | .dlg «Tâm trạng · Thường tại Phó Kinh Hồng» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 3042 | .dlg «Tâm trạng · Quý nhân Nam Cung Hàn Tuyết» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 3066 | .dlg «Tâm trạng · Thường tại Phó Kinh Hồng» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 3647 | .kmov | «?» | img.kfr |
+| off-1 | buổi 4035 | .kmov | «?» | zero size |
+| off-1 | buổi 5782 | .dlg «Tin chờ người sai đi» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 6118 | .dlg «Tâm trạng · Ta» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 6468 | .dlg «Danh hiệu» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 7075 | .dlg «Tin báo» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 35 | .kmov | «?» | zero size |
+| off-1 | buổi 99 | .dlg «Tâm trạng · Quý nhân Phú Sát Hạnh Nhi» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 374 | .dlg «Tin báo» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 783 | .dlg «Tâm trạng · Huệ phi Đoan Mộc Vân Thường» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 798 | .dlg «Tâm trạng · Huệ phi Đoan Mộc Vân Thường» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 909 | .kmov | «?» | zero size |
+| off-1 | buổi 954 | .kmov | «?» | zero size |
+| off-1 | buổi 969 | .dlg «Tâm trạng · Đức quý nhân Nam Cung Hàn Tuyết» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 1206 | .kmov | «?» | zero size |
+| off-1 | buổi 1235 | .dlg «Tâm trạng · Huệ phi Đoan Mộc Vân Thường» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 1618 | .kmov | «?» | zero size |
+| off-1 | buổi 2358 | .kmov | «?» | img.kfr |
+| off-1 | buổi 2386 | .dlg «Tâm trạng · Huệ phi Đoan Mộc Vân Thường» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 2405 | .dlg «Tâm trạng · Tần Đoan Mộc Mạn Sương» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 2697 | .dlg «Tin báo» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 2769 | .dlg «Tâm trạng · Thuần hoàng quý phi Lôi Lạc Y» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 2790 | .dlg «Tâm trạng · Ý quý phi Đào Ngọc Dao» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 2828 | .dlg «Tâm trạng · Huệ phi Đoan Mộc Vân Thường» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 3163 | .dlg «Tin báo» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 3448 | .dlg «Tin báo» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 3551 | .kmov | «?» | zero size |
+| off-1 | buổi 3570 | .dlg «Tâm trạng · Quý nhân Tề Thải Vi» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 4350 | .dlg «Tin báo» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 4547 | .dlg «Tâm trạng · Tần Phó Kinh Hồng» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 5385 | .dlg «Tin báo» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 6826 | .dlg «Tâm trạng · Đáp ứng Phú Sát Hạnh Nhi» | «Lui» | tapped 3× for real, dialog stays |
+| off-1 | buổi 43 | .dlg «Tâm trạng · Quý nhân Tô Vãn Tình» | «Lui» | tapped 3× for real, dialog stays |
