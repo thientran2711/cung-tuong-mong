@@ -1,0 +1,2 @@
+# U3 segment 2 room T6BR — stuck at year 1 month 3 week 2 again (game c4163a93, local Worker, harness 5edf09f6 + patches), seed 41, host Fold / guest iPad
+~buổi 13 (35 min). Same place as QWGM (week 2 night): host COOPW.tr «night 2 f=true» repeated, host on .dlg «Kính sự phòng ghi sổ»; guest tr «nready 2 / nr go 2 / night 2 / night held 2 b3/3 Q1 / night 2…» (night held by a Q panel), COOP.state week 2 ended {a:false,b:true} on both. Tag: known-fixed-pending-land (cause 3, fix-5-r1) per Foreman B.
