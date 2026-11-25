@@ -49,12 +49,14 @@ function guestPre(st) { return (sc, b) => {
   if (process.env.RTV && sc.title !== st.lastT) { st.lastT = sc.title; console.log('GUEST WAIT', sc.layer, '«' + sc.title + '»', b.map(x => x.t.slice(0, 30)).join(' | ')) }
   return 'wait' } }
 
+/* both seats rejoin together: a seat that reloads (unstick lvl 3) sets the friend's want → the friend reloads + «Trở lại phòng» too */
+const LINK = { host: { want: 0 }, guest: { want: 0 } };
 async function seatLoop(ctx, who, dev, other) {
   const p = await ctx.newPage(); const st = {}; let k = 0;
   for (;;) {
     k++; const extra = k > KIEP;
     const s = Seat({ url: URL0, out: OUT, dev, bot: A.bot, seed: (+A.seed || 1) * 10 + (who === 'host' ? 1 : 2) + k * 100, life: 'coop-rt-' + TAG + '-' + who + '-k' + k,
-      origin: A[who + 'Origin'], road: A[who + 'Road'], stuckMin: A.stuckMin, slice: A.slice, noBoot: k > 1, coop: true, pre: k === 1 ? (who === 'host' ? hostPre(st) : guestPre(st)) : null });
+      origin: A[who + 'Origin'], road: A[who + 'Road'], stuckMin: A.stuckMin, slice: A.slice, noBoot: k > 1, coop: true, roomCode: () => code, coopLink: { me: LINK[who], other: LINK[who === 'host' ? 'guest' : 'host'] }, pre: k === 1 ? (who === 'host' ? hostPre(st) : guestPre(st)) : null });
     try { await s.play(p) } catch (e) { s.R.bugs.push({ type: 'harness', msg: 'runner error: ' + String(e.message).split('\n')[0], n: 1 }); s.R.life = s.R.life || { id: 'HARNESS', type: 'harness' }; s.save() }
     pair.lives.push({ seat: who, dev, kiep: k, extra, room: code, life: s.R.life, harness: s.R.harness, exitPick: s.R.exitPick, bugs: s.R.bugs, dead: s.R.dead, buoi: s.R.buoi, saves: s.R.saves });
     flush(); console.log('SEAT LIFE DONE', who, 'k' + k, s.R.life && s.R.life.id);
