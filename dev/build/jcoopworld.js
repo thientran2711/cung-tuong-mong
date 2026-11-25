@@ -1113,8 +1113,17 @@ function presAll(force){try{if(!CW.on||CW.ctx||!S)return;
  keepFriendPos();refreshHere();CW.thin.withSeat(o,()=>{keepFriendPos();refreshHere()});CW.presK=K()}catch(e){console.error(e)}}
 CW.presAll=presAll;
 (function(){const f=save;save=function(){if(!CW.on)return f.apply(this,arguments);try{if(S&&!S.dead&&CW.base)localStorage.setItem("ctm-coop-last",JSON.stringify({room:COOP.state.room,at:Date.now()}))}catch(e){}}})();
+/* robot-coop-fix-6 (week-end stuck CAUSE 4, law 11 whole family): the room's DATE is the merged week's (CW.base.W.S), never a seat's own
+   calendar. A seat can die after its own night already moved its date (j3 endTurn: tuần +1, or monthTick's S.turn++ and then a death in
+   the month roll = +3; or dead after her end went out while the merge is pending): the dying snapshot then held a date AHEAD of the room,
+   the new life was attached into it (attach / thin B show → fromCanon takes the date from C.W.S), her day() (jnf / jsmg) ran ahead of the
+   room week, she asked the host for a night he never opens and both seats waited for ever. The world otherwise stays as it was at her death. */
+const CAL=["year","month","tuan","turn"];CW.CAL=CAL;
+function roomDate(){const b=CW.base&&CW.base.W&&CW.base.W.S;if(!b)return null;const o={};for(const k of CAL)if(typeof b[k]==="number")o[k]=b[k];return CAL.every(k=>k in o)?o:null}
+const calN=o=>o?o.turn*3+o.tuan:NaN;CW.roomDate=roomDate;
 (function(){const f=over;over=function(){if(CW.on&&S&&!S.dead){/* keep the world as it stands at her death; the new life is put into it */
-  try{S.dead=true;CW.dying=toCanon();S.dead=false}catch(e){console.error(e)}}return f.apply(this,arguments)}})();
+  try{S.dead=true;CW.dying=toCanon();S.dead=false;const rd=roomDate(),dS=CW.dying&&CW.dying.W&&CW.dying.W.S;
+   if(rd&&dS&&CAL.some(k=>dS[k]!==rd[k])){T("dying date "+calN(dS)+" -> room "+calN(rd));CW.calFix=(CW.calFix||0)+1;Object.assign(dS,rd)}}catch(e){console.error(e)}}return f.apply(this,arguments)}})();
 /* never leave a queued dialog unseen (a rebuild from the room can drop the open panel): the turn would wait on it forever */
 /* a queued dialog is never left hidden (lander #3): while the Tuần lục book (or a mini game) is up it waits and LOOKS AGAIN; before, it gave up
    once and, as onPos does not render while Q is full, the host sat with Q hidden and the week end never went out ("Chờ hảo hữu" for both) */
@@ -1454,7 +1463,9 @@ CW.snap=()=>{if(!CW.on||!S||S.dead||!CW.base||CW.inLife)return null;let d;try{d=
  return {room:COOP.state.room,seat:CW.seat,week:wk(),buoi:S.buoi||0,used,d,c:{nrdy:CW.nrdy,sent:CW.sent,pend:CW.pend,whereKey:CW.whereKey,lastWhere:CW.lastWhere,fpos:CW.fpos,mine:CW.mine||null,life:CW.life||0,p2:CW.p2,news:CW.news||"",thl:(CW.thin&&CW.thin.lvl)||0}}};
 /* thin E (room level 5, also when the level message has not arrived yet: the snapshot's own level): the server's buổi stays at the week's
    start, the host's own copy is the room's buổi (his snapshot wins; her buổi is adopted from the host's view, jcoopthine gView) */
-CW.restore=o=>{if(!o||!o.d||!CW.on||o.seat!==CW.seat||o.week!==wk()||o.c.pend||o.c.sent===wk()||(!(eW()||(o.c.thl|0)>=5)&&CW.rweek===wk()&&typeof CW.rbuoi==="number"&&CW.rbuoi<o.buoi))return false;
+/* robot-coop-fix-6 (CAUSE 4 family: reload / resume): a snapshot whose own date is not the room's merged date (taken after her night moved
+   her calendar, before the merge) is not this week's buổi: never restored (the room's week start from fromCanon stands) */
+CW.restore=o=>{if(!o||!o.d||!CW.on||o.seat!==CW.seat||o.week!==wk()||o.c.pend||o.c.sent===wk()||(()=>{const rd=CW.roomDate(),dS=o.d&&o.d.S;if(rd&&dS&&CW.CAL.some(k=>dS[k]!==rd[k])){T("restore: date ahead");return true}return false})()||(!(eW()||(o.c.thl|0)>=5)&&CW.rweek===wk()&&typeof CW.rbuoi==="number"&&CW.rbuoi<o.buoi))return false;
  quiet=true;try{if(o.d)o.d.tab="act";/* owner 16/11: rejoin opens her room (Hành sự) */deser(o.d)}finally{quiet=false}used=o.used||0;try{deal()}catch(e){}  /* the hand of acts is not in a sổ: dealt again, as the title's Tiếp tục does */
  Object.assign(CW,o.c);CW.bend=false;CW.pendBuoi=null;CW.posKey="";CW.inLife=false;
  /* her "Sẵn sàng" of this buổi survives too: the room still holds her bend (the night's ready is re-sent by nResync) */
