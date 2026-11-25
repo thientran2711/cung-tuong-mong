@@ -13,6 +13,9 @@ const path = require('path');
 
 /* read-only probe: centre + hit test of the element (runs in the page, changes nothing) */
 const PROBE = (el) => {
+  /* option card = the kit's own list of cards whose meter / glossary word never steals the tap (LIVE kit tap guard: button.opt, button.kopt, .opts>button,
+     .kpopts>button, .k3btns>button, .kfoc-b, #mr>button, .kszopts>button); its only no-tap spots: the «!» corner chip .kobang and the «!» overlay .kopinfo */
+  const CARD_SEL = 'button.opt,button.kopt,.opts>button,.kpopts>button,.k3btns>button,.kfoc-b,#mr>button,.kszopts>button', CARD_NOGO = '.kobang,.kopinfo,[data-leg],[class*=legend],.khelp,.kqm,input,select,textarea';
   if (!el || !el.isConnected) return { gone: true };
   const r = el.getBoundingClientRect(), W = innerWidth, H = innerHeight;
   const lab = (el.getAttribute('aria-label') || el.textContent || el.title || '').replace(/\s+/g, ' ').trim().slice(0, 60);
@@ -22,12 +25,24 @@ const PROBE = (el) => {
   let x0 = Math.max(0, r.left), y0 = Math.max(0, r.top), x1 = Math.min(W, r.right), y1 = Math.min(H, r.bottom), sc = null;
   for (let s = el.parentElement; s && s !== document.body; s = s.parentElement) { const cs = getComputedStyle(s); if (/(auto|scroll|hidden|clip)/.test(cs.overflow + cs.overflowX + cs.overflowY)) { const q = s.getBoundingClientRect(); x0 = Math.max(x0, q.left); y0 = Math.max(y0, q.top); x1 = Math.min(x1, q.right); y1 = Math.min(y1, q.bottom); if (!sc && /(auto|scroll)/.test(cs.overflowY) && s.scrollHeight > s.clientHeight) sc = { l: q.left, t: q.top, r: q.right, b: q.bottom } } }
   /* label side first (odds chip «Rất vững» / «!» / legend triggers usually sit on the right or centre) */
-  const pts = [[.14, .5], [.5, .5], [.3, .5], [.86, .5], [.5, .3], [.5, .7], [.7, .5], [.5, .12], [.5, .88], [.3, .85], [.7, .85], [.3, .15], [.7, .15]];
+  let pts = [[.14, .5], [.5, .5], [.3, .5], [.86, .5], [.5, .3], [.5, .7], [.7, .5], [.5, .12], [.5, .88], [.3, .85], [.7, .85], [.3, .15], [.7, .15]];
+  /* OPTION CARDS (HARNESS FIXER #8, FOREMAN E 20:15Z: LIVE pack-4 2-column cards, iPad «Phụ tuyến · Đổi ơn… · Lời nhờ», 40+ min stuck): on LIVE a REAL tap
+     anywhere on an option card chooses it — its picture (.kaart/figure.ksart), odds meter (.kodds/.kodm/.kseg), name (.kan/.kname), rows (.krv) — measured
+     tap by tap (dev/test/rt-optcard-spots.js); ONLY the corner «!» (.kobang «Xem thêm») opens its own panel. So a card is probed on its OWN rect: the card
+     centre first, then the centre of every descendant, then the fractions; a point counts when it lands in the card and not on / within NEAR px of the «!». */
+  const card = el.matches(CARD_SEL);
+  if (card) { const q = (x, y) => [(x - x0) / Math.max(1, x1 - x0), (y - y0) / Math.max(1, y1 - y0)]; const dp = [];
+    /* the TITLE first (option name .kan / title row .kat: where a person taps, and the spot that chose in every LIVE frame measured — iPad PEND:plantsv rows
+       / card centre did NOT choose on a real tap, reported as a kit bug), then the card centre, then every other descendant */
+    for (const d of el.querySelectorAll('.kan,.kat,.kopn,.kon')) { if (d.closest(CARD_NOGO)) continue; const b = d.getBoundingClientRect(); if (b.width >= 4 && b.height >= 4) dp.push(q(b.left + b.width / 2, b.top + b.height / 2)) }
+    dp.push(q((r.left + r.right) / 2, (r.top + r.bottom) / 2));
+    for (const d of el.querySelectorAll('*')) { if (d.closest(CARD_NOGO)) continue; const b = d.getBoundingClientRect(); if (b.width < 4 || b.height < 4) continue; dp.push(q(b.left + b.width / 2, b.top + b.height / 2)); if (dp.length > 40) break }
+    pts = [...dp.filter(([fx, fy]) => fx > 0 && fx < 1 && fy > 0 && fy < 1), ...pts] }
   let cover = null, anc = false, chip = false;
   /* TOUCH ADJUSTMENT (s7/s9 «Kính sự phòng báo tin» loop, 25/11): on a touch screen the browser snaps a tap to the nearest clickable inside the finger
      radius — a tap on the option NAME next to the odds chip «Rất vững» (.kodm role=button) opened the odds legend every time. A person's finger lands
      clear of the small chips: probe points closer than NEAR px to a nested clickable / chip are skipped (fall back to them only if nothing else). */
-  const NEAR = 24, kids = [...el.querySelectorAll('button,[role=button],a,[data-tip],[data-help],[data-leg],[data-kzoom],.kaart,figure.ksart,.ksart,.kodds,.kodm,.kgl,.kchip,.kqm,.khelp,[class*=odds],[class*=legend]')].filter(c => c !== el).map(c => c.getBoundingClientRect()).filter(q => q.width > 0 && q.height > 0);
+  const NEAR = 24, kids = [...el.querySelectorAll(card ? CARD_NOGO : 'button,[role=button],a,[data-tip],[data-help],[data-leg],[data-kzoom],.kaart,figure.ksart,.ksart,.kodds,.kodm,.kgl,.kchip,.kqm,.khelp,[class*=odds],[class*=legend]')].filter(c => c !== el).map(c => c.getBoundingClientRect()).filter(q => q.width > 0 && q.height > 0);
   const near = (x, y) => kids.some(q => x > q.left - NEAR && x < q.right + NEAR && y > q.top - NEAR && y < q.bottom + NEAR);
   let nearOk = null;
   if (x1 - x0 < 3 || y1 - y0 < 3) return { lab, clip: true, sc, top: r.top, bottom: r.bottom, cover: 'clipped by its scroller / off-screen', off: r.bottom < 0 || r.top > H };
@@ -36,12 +51,15 @@ const PROBE = (el) => {
     if (x < 1 || y < 1 || x > W - 1 || y > H - 1) continue;
     const t = document.elementFromPoint(x, y);
     if (t && (t === el || el.contains(t))) { /* never land on a nested info chip / legend trigger inside the button (it opens its own popup) */
-      const inner = t.closest('button,[role=button],a,[data-tip],[data-help],[data-leg],[data-kzoom],.kaart,figure.ksart,.ksart,.kodds,.kchip,.kqm,.khelp,[class*=odds],[class*=legend]');
+      const inner = t.closest(card ? CARD_NOGO : 'button,[role=button],a,[data-tip],[data-help],[data-leg],[data-kzoom],.kaart,figure.ksart,.ksart,.kodds,.kchip,.kqm,.khelp,[class*=odds],[class*=legend]');
       if (inner && inner !== el && el.contains(inner)) { chip = true; continue }
       if (near(x, y)) { if (!nearOk) nearOk = { x, y, lab, ok: true, near: true }; continue }
       return { x, y, lab, ok: true } }
     if (t && t !== el && t.contains(el)) anc = true;
-    if (!cover && t) { const c = t.closest('[id]'); cover = (t.tagName.toLowerCase() + (t.id ? '#' + t.id : '') + (typeof t.className === 'string' && t.className ? '.' + t.className.trim().split(/\s+/).slice(0, 2).join('.') : '') + (c && c !== t ? ' in #' + c.id : '')).slice(0, 80) }
+    if (!cover && t) { const c = t.closest('[id]'); /* s8b (F #16 23:06Z) «Xem Mèo mướp» DEAD «covered by span.kitb / b.kidn in #mb»: the cover was a CHILD of the open kitShop detail card (.kshdet/.kshdc, a
+        by-design cover in opt.ignoreCover) but only the child + #mb were named, so ignoreCover never matched → name the by-design layer the hit sits in */
+      const byd = t.closest('.kshdet,.kshdc,#kpop,.kpop,#kxcatch,#ktut,#kpzoom,.kpzoom'); const bn = byd && byd !== t ? ' under ' + (byd.id ? '#' + byd.id : '.' + String(byd.className).trim().split(/\s+/)[0]) : '';
+      cover = (t.tagName.toLowerCase() + (t.id ? '#' + t.id : '') + (typeof t.className === 'string' && t.className ? '.' + t.className.trim().split(/\s+/).slice(0, 2).join('.') : '') + (c && c !== t ? ' in #' + c.id : '')).slice(0, 80) + bn }
   }
   if (nearOk) return nearOk;
   const off = r.bottom < 0 || r.top > H || r.right < 0 || r.left > W;
