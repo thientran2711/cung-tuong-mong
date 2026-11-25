@@ -1753,3 +1753,4 @@ net-ghen wave 2 finish (NB2 result cards + all gates + SSK) | review/net-ghen-2 
 B BIG rv hardlock-choice-r4 9f2522d2 (delta on LC15 top) | review/hardlock-choice-r4 | B | session_01N1tNP2Ax24R2W5DqPrjgvP | RUNNING | 25/11 13:27Z |
 SELSCENE-19 merge (selection-scene onto LC15 stack, one k61/sid rule) | review/selection-scene-r19 | session_01V1ZZH1gwnq8CYeYJgyTQS2 | RUNNING | 2026-11-25T13:28Z (MAIN 140)
 net-ghen wave 2: bisect coop-e2e co-op advance fail + rc-scan rerun + remaining gates + SSK | review/net-ghen-2 | session_01D3E3NYbT6xQfrCM9WRMW7P (W9, successor of W8 session_01D3E3NZWK4yXecF776eYGPf) | RUNNING | 2026-11-25T13:33Z (Foreman D depth 3)
+SANGBUOI-HELD-FIX r3 (§9 leftovers) | review/sangbuoi-held-fix | session_01V1ZZH1Y4EvZtxtrnsR1sjr | RUNNING | 2026-11-25T13:41Z (MAIN 141)
