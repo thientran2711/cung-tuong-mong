@@ -167,8 +167,3 @@ Blocker: ≥10 tests (kit-conform, opt-render, panel-size, dlg-clip, coop-play�
 
 ## 7. HANDOVER / NEXT
 START_CTX ~3 % (1M window); finished at ~15 %. Worktree /home/user/wt/cnt (review/co-ngu-titles). Next if ordered: P3 seal chips (§4) + every test that matches seal words; wipe CDN review folder after verdict: `python3 dev/site/cdn_sync.py --wipe-review co-ngu-titles`.
-
-## 8. P3 BUILT (MAIN 136 GO, subset) — KIT READY co-ngu-seals 4406fe66
-Branch review/co-ngu-seals from LIVE main 9f72524b (NOT stacked on dbd77388). KP_SEAL (j79, one table): LUẬT→CUNG QUY · TIN→PHONG THANH · ĐÊM→CANH KHUYA · CẢNH GIÁC→HIỂM HỌA · CHỨNG CỨ→VẬT CHỨNG · BAN THƯỞNG→ÂN THƯỞNG. Kept: ĐIỀU, BÁO, VIỆC, KẾT QUẢ, KIẾP, NGƯỜI (MAIN 136).
-Family: jksize KSZ3_NAME was a SECOND copy of the seal words → now reads KP_SEAL; KIT.md seal list + every doc mention; kit-size3/4-compose.py sheet labels. Tests/VP: no test or VP regex reads these six words (grep dev/test dev/tools dev/build).
-Fit (measured, Fold 755x1000 + iPad 1180x820): every seal one line, scrollWidth = clientWidth, header no overflow, no page overflow; widths 80–110 px (old BAN THƯỞNG 101). Shot: CDN img/_review/co-ngu-titles/seal-pair.webp (before | after, both devices; iPad «LUẬT» before cell could not be cropped on main — same word as Fold). QUICKCHECK PASS 4406fe66 (core gates incl. kit-conform PASS). Needs Foreman B «KIT OK».

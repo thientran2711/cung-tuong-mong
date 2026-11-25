@@ -1,0 +1,13 @@
+--- a/dev/test/robot-rt.js
++++ b/dev/test/robot-rt.js
+@@ -200,8 +200,8 @@
+ /* unstick ladder (all real input): 1 Escape key · 2 tap the top layer ✕ / any close · 3 reload + continue the same save from the title */
+ async function unstick(p, rt, sc, lvl) {
+   R.harness.unstick.push({ at: sec(), lvl, layer: sc.layer, title: sc.title });
+-  await p.keyboard.press('Escape').catch(() => {}); await p.waitForTimeout(500);
+-  if (lvl >= 2) { const i = sc.b.findIndex(b => b.x || CLOSE_RE.test(b.t)); if (i >= 0) { await p.evaluate(SCAN).catch(() => {}); const h = await p.evaluateHandle(i => window.__rtBtns[i], i); await rt.tap(h, { screen: sc.layer, label: 'unstick ✕' }) } }
++  await p.waitForTimeout(500); /* U3 no-Esc patch: a keyboard key is not a real tap (owner rule); close with a hit-checked tap on ✕/Lui only */
++  if (lvl >= 1) { const i = sc.b.findIndex(b => b.x || CLOSE_RE.test(b.t)); if (i >= 0) { await p.evaluate(SCAN).catch(() => {}); const h = await p.evaluateHandle(i => window.__rtBtns[i], i); await rt.tap(h, { screen: sc.layer, label: 'unstick ✕' }) } }
+   if (lvl >= 3) {
+     await p.reload({ waitUntil: 'load' }).catch(() => {}); await p.waitForFunction(() => typeof start === 'function', null, { timeout: 0 }).catch(() => {});
+     await p.evaluate(() => { if (!window.__rtOver) { window.__rtOver = 1; const o0 = over; over = function (h, t, fate, alive) { try { if (!S.dead) window.__rtEnd = { id: String(h), fate: String(fate || '').replace(/<[^>]+>/g, ''), alive: !!alive, age: S.age, year: S.year, rank: S.rank } } catch (e) {} return o0.apply(this, arguments) } } }).catch(() => {});

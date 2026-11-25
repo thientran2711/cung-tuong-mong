@@ -260,9 +260,3 @@ FAIL reasons:
 1. toil-overlay on Fold proves nothing when green: with G1 7–8 of the 14 moves are dead, so the layer-follow checks after a person's tap mostly never run, and exit stays 0. When the taps do land (run 1) Fold is RED with a real fault: the #mefig layer stays shown on her hidden figure after a token tap (G2, game candidate; the OLD test on LIVE saw it too: `0 tok fig bob … picture hidden`). Fix: a covered token (DEAD BUTTON, not a transient bob/disabled) must fail the test, or reach the move another real way; report G2 with G1 to Foreman F for a game worker. Do NOT relax the `mid` check.
 2. hoa-dien «Dán» retap was a note only (a tap that does nothing passed). Fixed by me on review/test-path-fix-r 003ac0b0 (counted retap = FAIL check; Fold 40/40 ok after). Take it.
 3. Not blocking: toilette/hoa-dien/rules-screen fixes are right; mk-e2e still fails (stale preset `pre-dep`) — not worse than before; laws 4/7/9 not touched.
-
-## REVIEW test-path-fix-2 (big reviewer session_01UV1SziXSk67Zy3DMXHsCrJ, 11/25/2026) — FAIL 9f49083d (FF 9f72524b ok, test files only)
-mk-e2e (new) on LIVE 9f72524b: Fold 755x1000@2 and iPad 1180x820@2 rc 0, 0 DEAD, reveal shown + closed, 0 errors — but pickedPreset = 'colours' on both, card «KIỂU | màu tự chọn»: the preset path that the test's header promises («real preset → the close card names the preset») is never run; the test has no assertion and ignores rt.tap results.
-1. Carries test-path-fix FAIL item 1 (toil-overlay Fold hollow green, G2) — see «## REVIEW test-path-fix».
-2. mk-e2e: at setup give her an owned preset (Đào hoa) in the bag, real-tap it, ASSERT the reveal card names it, exit non-zero on a dead tap / missing preset.
-MG12 stale scan (4 hits, none blocked): OK.
