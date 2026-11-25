@@ -265,10 +265,14 @@ function dcWeek(){if(!dcOn()||!S||S.dead)return;const R=typeof rivals!=="undefin
  /* two-way borrow: a consort who lacks a colour asks to borrow her trâm (her seat; the piece moves for real) */
  const f=dcFestNow();if(f&&dcHerOn()&&dcLend()&&S.dcAk!==dcKey(f)){S.dcAk=dcKey(f);
   for(const v of R){if(!v||!v.alive||v.out||v.coop||aff(v,S)<netTh(v,"than"))continue;const st=dcStat(v,f.k);if(!st||(!st.miss&&!st.refused)||!st.missing.length)continue;
-   const c=dcOwnFit(S,st.missing,"tram")[0];if(!c)continue;
-   Q.push({t:`${dcName(v)} xin mượn trâm`,who:v,ev:"dc",evId:"dc:ask",h:`<p>${v.name} thiếu màu ${dcFamList(st.missing)} cho ${f.name}, sai cung nữ sang xin mượn ${c.w.n} của ngươi, qua tuần sau trả.</p>`,
+   const c=dcOwnFit(S,st.missing,"tram")[0];if(!c)continue;dcAskCard(v);break}}}
+/* save-unseen-lists r4 (LAW 11 / 6c): «<tên> xin mượn trâm» (made at the turn of the tuần) is BUILT by a registered generator from the asker (id):
+   the festival, what she lacks and the piece in her chest are found again from the live state (the piece is never a copy: dcBorrow moves the real
+   one); the ask mark (S.dcAk) is set before, once — written into the sổ and made again on load */
+const dcAskCard=rcpReg("dcAsk",v=>{const f=dcFestNow();if(!f||!v||!v.alive)return null;const st=dcStat(v,f.k);if(!st||!st.missing||!st.missing.length)return null;const c=dcOwnFit(S,st.missing,"tram")[0];if(!c)return null;
+   const m={t:`${dcName(v)} xin mượn trâm`,who:v,ev:"dc",evId:"dc:ask",h:`<p>${v.name} thiếu màu ${dcFamList(st.missing)} cho ${f.name}, sai cung nữ sang xin mượn ${c.w.n} của ngươi, qua tuần sau trả.</p>`,
     opts:[{n:`Cho mượn ${c.w.n}`,fx:{},x:`tốn: ${c.w.n} rời rương đến tuần sau · thành: ${dcRelW(v,BAL.dc.bor.thanks)}`,go:()=>{if(dcBorrow(v,S,c.e)){try{log(`Cho ${dcName(v)} mượn ${c.w.n} dự ${f.name}.`)}catch(e){}}else try{log(`${c.w.n} không còn trong rương, không cho ${dcName(v)} mượn được.`)}catch(e){}}},
-     {n:"Khéo từ chối",fx:{},x:`thành: ${c.w.n} vẫn ở trong rương`,go:()=>{try{log(`Từ chối cho ${dcName(v)} mượn trâm.`)}catch(e){}}}]});break}}}
+     {n:"Khéo từ chối",fx:{},x:`thành: ${c.w.n} vẫn ở trong rương`,go:()=>{try{log(`Từ chối cho ${dcName(v)} mượn trâm.`)}catch(e){}}}]};Q.push(m);return m});
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{dcWeek()}catch(e){console.error("dcWeek",e)}return r}})();
 /* ---------- the shared contest formula and the guest list (j71) ---------- */
 (function(){if(typeof SC7!=="object")return;for(const kd of Object.keys(SC7)){const o=SC7[kd];if(!o||typeof o.f!=="function"||o.f.__dc)continue;const f0=o.f;

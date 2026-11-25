@@ -283,13 +283,16 @@ function feelActTick(p){const A=fB().act;if(!p||feelActNow(p))return;const me=p=
     picks from the same list by temper weight (npwPick, near-best). Any other role: its own reaction of the group (jemoact R_), the same act face. */
  const kd=eaKind(p);const fin=(r,out)=>{p.fa={k:r.k,n:r.n,f:k,face:"act-"+k,k0:mkNow(),k1:mkNow()+feelActDur(r.k)};FEEL.stat.act=FEEL.stat.act||{};FEEL.stat.act[k]=(FEEL.stat.act[k]||0)+1};
  if(kd==="c"&&typeof window.eaOpts==="function"){const O=window.eaOpts(p,k);if(!O.length)return;p.fcd[k]=now+(A.cd[k]||A.cd.def);
-  if(me){eaS2().n++;window.eaMeChoose(O,feelName(k,3).toLowerCase(),{run:feelDo,done:fin,g:k,seal:k});return}
+  if(me){eaS2().n++;window.eaMeChoose(O,feelName(k,3).toLowerCase(),{run:feelDo,done:fin,g:k,seal:k,mode:"feel"});return}
   const i=npwPick(O.map((r,j)=>j),j=>O[j].w0,{all:1});const r=O[i==null?0:i];let out=null;try{out=feelDo(p,r)}catch(e){console.error("feelDo",e)}if(!out)return;fin(r,out);try{eaSay(p,out.h,out.target===S)}catch(e){}return}
  let P=null;try{P=eaPick(p,A.g[k])}catch(e){}if(!P)return;
  const r=P.r;let out=null;try{out=feelDo(p,r)}catch(e){console.error("feelDo",e)}if(!out)return;
  fin(r,out);p.fcd[k]=now+(A.cd[k]||A.cd.def);
  if(me){eaS2().n++;feelMeShow(r,out,k)}else try{eaSay(p,out.h,out.target===S)}catch(e){}}
 function eaS2(){S.fa2=S.fa2||{w:-1,n:0};return S.fa2}
+/* save-unseen-lists r4: the «after her act ran» step of feelActTick by name, so her outburst card made again from the sổ (jemoact eaMeCard, mode "feel")
+   finishes the same way (her act face + the counter) */
+window.feelActFin=function(p,k,r,out){p.fa={k:r.k,n:r.n,f:k,face:"act-"+k,k0:mkNow(),k1:mkNow()+feelActDur(r.k)};FEEL.stat.act=FEEL.stat.act||{};FEEL.stat.act[k]=(FEEL.stat.act[k]||0)+1};
 /* her act: the kit event frame (the same shape as every jemoact outburst) with only "Tiếp tục" */
 function feelMeShow(r,o,k){try{log(`${r.n}: ${o.h}${o.res.length?` (${o.res.join(", ")})`:""}`)}catch(e){}if(window.__bot||typeof Q==="undefined")return;
  Q.push({t:r.n,emoSeal:{k,who:"me"},art:`img/act-${r.art||"xa-huong"}.webp`,hideOut:true,h:`<p>${o.h}</p><p>Vì ${feelName(k,3).toLowerCase()} quá nên lòng không giữ được; muốn tránh thì nên giữ lòng bình thản từ sớm.</p>${o.res.length?`<p class="past">${o.res.join(" · ")}</p>`:""}`,

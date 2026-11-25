@@ -19,7 +19,7 @@ function mdH(p,cls){return `<span class="md ${cls||""}${kitRkCls(p)}" style="--c
 function newMaid(name,loyal,age){return{name,loyal,age:age||16+R(7),fc:""}}
 
 /* modal queue */
-function pushModal(m){Q.push(m);}
+function pushModal(m){Q.push(m);return m}/* save-unseen-lists r4: hands the card back (a registered generator returns it) */
 /* saveable pending choices: a modal with opts is stored as {pid,pp,t}; PEND[pid](pp) rebuilds text and handlers */
 const PEND={};const RV=id=>rivals.find(x=>x.id===id)||null;
 function mkP(id,pp){pp=pp||{};const d=PEND[id]&&PEND[id](pp);if(!d)return null;d.pid=id;d.pp=pp;return d}

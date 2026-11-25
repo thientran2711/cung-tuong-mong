@@ -110,19 +110,25 @@ function slapNpcTier(a){if(typeof mg2On==="function"&&mg2On())return slapNpcDraw
 window.slapNpcTier=slapNpcTier;
 (function(){const r0=runAct;runAct=function(a,t,k,extra){
  if(k!=="tat"||t!==S||!a||a===S||SLAPG.npcDone)return r0.apply(this,arguments);
- const sev=slapNpcTier(a),self=this,B=BAL.slap;
+ const sev=slapNpcTier(a),B=BAL.slap;
  const bot=typeof window.__bot!=="undefined"||typeof kg82Open!=="function"||typeof pushModal!=="function"||typeof tsRows!=="function";
+ if(bot)return slapFin(r0,a,t,k,extra,sev,this);slapCard(a,k,extra,sev);return""};
+/* save-unseen-lists r4 (LAW 11 / 6c): «Bị tát» (an NPC's act on her, also at the first khắc of a buổi) is BUILT by a registered generator from the
+   slapper (id), the act and its drawn tier: nothing is applied until she answers — written into the sổ and made again on load */
+function slapFin(r0,a,t,k,extra,sev,self){const B=BAL.slap;let r="";SLAPG.npcDone=1;try{if(sev<=0){if(typeof ducAdd==="function")ducAdd(a,B.duc[1],"tát hụt");r=`<span class="g">${NMc(a)} giơ tay tát ngươi nhưng ngươi né kịp, cái tát hụt.</span> `;relAdd(S,a,B.missRel)}
+   else{SLAP.next=sev;try{r=r0.call(self,a,t,k,extra)}finally{SLAP.next=0}}}finally{SLAPG.npcDone=0}return r}
+const slapCard=rcpReg("slapNpc",(a,k,extra,sev)=>{if(!a||a.alive===false)return null;const r0=SLAP_R0,t=S,self=null,B=BAL.slap;
  const fin=(s)=>{let r="";SLAPG.npcDone=1;try{if(s<=0){if(typeof ducAdd==="function")ducAdd(a,B.duc[1],"tát hụt");r=`<span class="g">${NMc(a)} giơ tay tát ngươi nhưng ngươi né kịp, cái tát hụt.</span> `;relAdd(S,a,B.missRel)}
    else{SLAP.next=s;try{r=r0.call(self,a,t,k,extra)}finally{SLAP.next=0}}}finally{SLAPG.npcDone=0}return r};
- if(bot)return fin(sev);
  const who=typeof pv==="function"?pv(a):undefined;const show=r=>{if(r){log(r);pushModal({t:"Bị tát",who,h:`<p>${r}</p>`});showModal();render()}};
  const nm=a.name||"Nàng";
- pushModal({t:"Bị tát",who:typeof pv==="function"?pv(a):undefined,h:`<p>${nm} bước tới, giơ cao bàn tay. Ngươi có kịp né không?</p>`,opts:[
+ return pushModal({t:"Bị tát",who:typeof pv==="function"?pv(a):undefined,h:`<p>${nm} bước tới, giơ cao bàn tay. Ngươi có kịp né không?</p>`,opts:[
   Object.assign(tsOpt({n:"Né đòn",odds:B.dodgeOdds[slapMg(true,a).tier],later:1,duoc:["cái tát nhẹ đi một bậc","tát nhẹ thì hụt hẳn"],mat:["chịu trọn cái tát"],kem:[`một ván ngắn chừng ${slapSec(B.dodge.ms)}`],go:()=>{
     slapGame({dodge:true,by:a,title:"Né đòn",go:"Né",skip:"Chịu đòn",skipSub:"không né",rows:[["Né kịp","cái tát nhẹ đi một bậc; tát nhẹ thì hụt hẳn","g"],["Không né","nhận trọn cái tát","r"]],
      onDone:res=>show(fin(res.skipped||res.raw<B.raw[3]?sev:sev-1))})}}),{}),
-  tsOpt({n:"Chịu đòn",odds:null,kem:["không né, nhận trọn cái tát"],go:()=>{const r=fin(sev);if(r){log(r);pushModal({t:"Bị tát",who,h:`<p>${r}</p>`})}}})]});
- return""}})();
+  tsOpt({n:"Chịu đòn",odds:null,kem:["không né, nhận trọn cái tát"],go:()=>{const r=fin(sev);if(r){log(r);pushModal({t:"Bị tát",who,h:`<p>${r}</p>`})}}})]})});
+ window.SLAP_R0=r0})();
+var SLAP_R0;
 /* ---------- co-op: the tier of a slap on the friend rides on the existing "res" message ---------- */
 (function(){try{if(typeof COOP==="undefined"||!COOP.send||!COOP.on)return;const s0=COOP.send;
  COOP.send=function(m){try{if(m&&m.t==="res"&&m.k==="tat"&&window.__slapLast)m.slap=window.__slapLast}catch(e){}return s0.apply(this,arguments)};

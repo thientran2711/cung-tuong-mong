@@ -9,8 +9,12 @@
    Old saves load as before (entries without $full use the old path). Off switch for measuring: window.__jqoff=1.
    ===================================================================================================================== */
 const JQ={held:0,stat:{full:0,held:0,flushed:0}};
+/* save-unseen-lists r4 (LAW 11, ONE rule for the whole family): an option whose go does NOTHING (`go:()=>{}`, the «Tiếp tục» of a card whose
+   effects were applied before it was shown: Bị châm chọc, Thái hậu quở trách, Lỡ lời, Điềm báo …) is not code — the card is plain data, written
+   whole and shown again on load (JSON leaves the empty go out; chooseM runs an option without go as fx only, the same as before) */
+const jqNoop=f=>/^(?:\(\s*\)|[\w$]+)\s*=>\s*\{\s*\}$|^function\s*[\w$]*\s*\(\s*\)\s*\{\s*\}$/.test(String(f).trim());
 function jqData(m){/* the card as plain data, or null when an option (or the card) carries code */try{if(!m||m.pid||!m.opts)return null;
-  for(const o of m.opts)for(const k in o)if(typeof o[k]==="function")return null;for(const k in m)if(k!=="who"&&typeof m[k]==="function")return null;
+  for(const o of m.opts)for(const k in o)if(typeof o[k]==="function"&&!(k==="go"&&jqNoop(o[k])))return null;for(const k in m)if(k!=="who"&&typeof m[k]==="function")return null;
   const c=JSON.parse(JSON.stringify(m,(k,v)=>k==="who"||k==="__b95"||k==="__c95"||k==="__aud95"?undefined:v));c.w=m.who&&m.who.w;c.$full=1;return c}catch(e){return null}}
 /* save-unseen-lists r2 (rv r2 FIX 1): a generator card (rk + ra, j3 rcpReg) is written as {rk,ra} and made again on load: saveable, never held / left out */
 function jqSaveable(m){return !m||!!m.pid||!!m.rk||!m.opts||!!jqData(m)}

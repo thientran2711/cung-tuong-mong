@@ -499,10 +499,13 @@ function eaOwner(s){if(s===S.maid||(S.staff||[]).includes(s))return S;for(const 
 /* at most ONE event a tuần from other people's outbursts (BAL.ea.npc.meWk); the rest go to the log */
 function eaMeSlot(){const A=eaS(),w=W();if(A.hitW===w&&(A.hitN||0)>=E().npc.meWk)return false;if(A.hitW!==w){A.hitW=w;A.hitN=0}A.hitN++;return true}
 function eaHitMine(p,m){try{if(!m)return;const lower=rkOf(p)<S.rank&&!S.out;loyAdd(m,-E().hoi.hitLoy);EA_N.hoiMe++;
-  if(lower&&eaMeSlot()){Q.push({ev:1,t:"Cung nữ bị ức hiếp",emoSeal:{k:"gian",who:emoKey(p)},who:eaWho(p),art:"img/act-phat-vo-co-h.webp",h:`<p>${m.name} chạy về, mắt đỏ hoe: ${nm(p)} gặp nàng ở hành lang, trút giận mắng nàng một trận chẳng vì lỗi gì.</p><p>${Nm(p)} phẩm vị thấp hơn ngươi.</p>`,
-   opts:[{n:`Sang hỏi tội ${nm(p)}`,risk:"an toàn",hint:"giữ thể diện cho cung mình",x:`thành: Danh +${E().hoi.go.danh}, thiện cảm ${m.name} +${E().hoi.go.loy} · kèm: ${nm(p)} oán ngươi +${E().hoi.go.oan}`,fx:{danh:E().hoi.go.danh},go:()=>{loyAdd(m,E().hoi.go.loy);oanAdd(p,S,E().hoi.go.oan);log(`Ngươi sang hỏi tội ${nm(p)}; nàng đành cúi đầu nhận lỗi.`)}},
-    {n:"Bỏ qua",risk:"an toàn",hint:"giữ hòa khí",x:`thành: Đức +${E().hoi.let.duc} · kèm: thiện cảm ${m.name} −${E().hoi.let.loy}`,fx:{duc:E().hoi.let.duc},go:()=>{loyAdd(m,-E().hoi.let.loy);log(`Ngươi bảo ${m.name} nhịn đi cho êm chuyện.`)}}]})}
+  if(lower&&eaMeSlot())eaHitMineCard(p,m);
   else{log(`${Nm(p)} mắng cung nữ ${m.name} của ngươi; ${Nm(p)} phẩm vị cao hơn, ngươi đành nuốt giận.`);try{emoEv(S,"slight",`${nm(p)} mắng cung nữ của ngươi`,emoKey(p))}catch(e){}}}catch(e){}}
+/* save-unseen-lists r4 (LAW 11 / 6c): the card is BUILT by a registered generator (j3 rcpReg: the scolder + her maid as ids); the maid's loyalty loss
+   and the counters happen before, once — it is written into the sổ and made again on load */
+const eaHitMineCard=rcpReg("eaHitMine",(p,m)=>{if(!p||!m)return null;const c={ev:1,t:"Cung nữ bị ức hiếp",emoSeal:{k:"gian",who:emoKey(p)},who:eaWho(p),art:"img/act-phat-vo-co-h.webp",h:`<p>${m.name} chạy về, mắt đỏ hoe: ${nm(p)} gặp nàng ở hành lang, trút giận mắng nàng một trận chẳng vì lỗi gì.</p><p>${Nm(p)} phẩm vị thấp hơn ngươi.</p>`,
+   opts:[{n:`Sang hỏi tội ${nm(p)}`,risk:"an toàn",hint:"giữ thể diện cho cung mình",x:`thành: Danh +${E().hoi.go.danh}, thiện cảm ${m.name} +${E().hoi.go.loy} · kèm: ${nm(p)} oán ngươi +${E().hoi.go.oan}`,fx:{danh:E().hoi.go.danh},go:()=>{loyAdd(m,E().hoi.go.loy);oanAdd(p,S,E().hoi.go.oan);log(`Ngươi sang hỏi tội ${nm(p)}; nàng đành cúi đầu nhận lỗi.`)}},
+    {n:"Bỏ qua",risk:"an toàn",hint:"giữ hòa khí",x:`thành: Đức +${E().hoi.let.duc} · kèm: thiện cảm ${m.name} −${E().hoi.let.loy}`,fx:{duc:E().hoi.let.duc},go:()=>{loyAdd(m,-E().hoi.let.loy);log(`Ngươi bảo ${m.name} nhịn đi cho êm chuyện.`)}}]};Q.push(c);return c});
 function eaHitMe(p,k,o){try{o=o||{};cnt(EA_N.hitMe,k);const F=BAL.ea.fx[k]||{};const tk=o.tk||"even";
  if(!eaMeSlot())return;
  const quoH={hot:"Thái hậu đang giận, lúc thỉnh an đập tay xuống án, quở mắng ngươi nặng lời trước mặt mọi người.",even:"Thái hậu đang không vui, lúc thỉnh an nghiêm giọng quở trách ngươi mấy câu trước mặt mọi người.",timid:"Thái hậu đang không vui, lúc thỉnh an thở dài, khẽ trách ngươi mấy câu."}[tk];
@@ -526,19 +529,31 @@ function eaMeChoose(O,why,o){o=o||{};const run=o.run||eaDo;const go1=(r,only)=>{
  if(!O||!O.length)return false;
  if(window.__bot||typeof Q==="undefined"){const i=npwPick(O.map((r,j)=>j),j=>O[j].w0,{all:1});return !!go1(O[i==null?0:i])}
  EA_N.choice=(EA_N.choice||0)+1;
- Q.push({ev:1,eaOut:1,t:o.t||"Lòng không giữ được",emoSeal:{k:o.seal||O[0].g,who:"me"},art:`img/act-${O[0].art||"trut-gian-h"}.webp`,
+ eaMeCard(O.map(r=>[r.k,r.g,r.w0]),why,o.mode||"",o.g||"",o.seal||"",o.t||"");return true}
+/* save-unseen-lists r4 (LAW 11 / 6c): her outburst card (made at the turn of a buổi / tuần: jfeel feelActTick, eaWeek) is BUILT by a registered
+   generator from plain data — each option as its reaction key + group + weight (the reaction rows R_ are code tables, looked up again), the runner
+   by name (mode "feel" = jfeel feelDo + feelActFin, else eaDo) — so it is written into the sổ and made again on load; nothing runs before the pick */
+const eaMeCard=rcpReg("eaMe",(K,why,mode,g,seal,t)=>{const O=(K||[]).map(([k,gg,w0])=>{const r=R_.find(x=>x.k===k&&x.who==="c"&&x.g===gg)||R_.find(x=>x.k===k&&x.who==="c");return r?Object.assign({},r,{pv:1,w0}):null}).filter(Boolean);if(!O.length)return null;
+ const feel=mode==="feel"&&typeof feelDo==="function"&&typeof window.feelActFin==="function";const run=feel?feelDo:eaDo,done=feel?(r,out)=>window.feelActFin(S,g,r,out):null;
+ const go1=(r,only)=>{let out=null;try{out=run(S,r)}catch(e){console.error("eaMeChoose",e)}
+  if(!out&&!only){for(const x of O){if(x.k===r.k)continue;try{out=run(S,x)}catch(e){}if(out){r=x;break}}}if(!out)return null;cnt(EA_N.out,r.k);cnt(EA_N.outT,eaTemper(S).k+":"+(g||r.g));
+  log(`${r.n}: ${out.h}${out.res.length?` (${out.res.join(", ")})`:""}`);try{if(done)done(r,out)}catch(e){}return out};
+ const c={ev:1,eaOut:1,t:t||"Lòng không giữ được",emoSeal:{k:seal||O[0].g,who:"me"},art:`img/act-${O[0].art||"trut-gian-h"}.webp`,
   h:`<p>Vì ${why} quá nên lòng không giữ được, ngươi phải trút ra một cách.</p><p class="past">Chọn một trong ${O.length} cách; muốn tránh thì nên giữ lòng bình thản từ sớm.</p>`,
-  opts:O.map(r=>{const fx=eaOptFx(S,r);return{n:r.n,x:eaOptX(S,r),fx,go:()=>{const r2=Object.assign({},r,{fxPaid:1});if(!go1(r2,1)){/* the reaction could not run (its target is gone): her fx back, another option runs */const u={};for(const k in fx)u[k]=-fx[k];apply(u);go1(r)}}}})});return true}
+  opts:O.map(r=>{const fx=eaOptFx(S,r);return{n:r.n,x:eaOptX(S,r),fx,go:()=>{const r2=Object.assign({},r,{fxPaid:1});if(!go1(r2,1)){/* the reaction could not run (its target is gone): her fx back, another option runs */const u={};for(const k in fx)u[k]=-fx[k];apply(u);go1(r)}}}})};Q.push(c);return c});
 window.eaMeChoose=eaMeChoose;
 function eaMeOut(g){const O=eaOpts(S,null,g);if(!O.length)return false;
  const why={gian:"giận",buon:"buồn",so:"lo âu",ghen:EMO_GHEN.toLowerCase(),vui:"vui"}[g];return eaMeChoose(O,why,{g,seal:g})}
 /* hỏi tội: the higher-rank mistress whose maid she scolded comes the next tuần (a real choice, gain and loss each) */
-function eaHoi(){const A=eaS();if(!A.hoi.length)return;const x=A.hoi.shift();const v=(rivals||[]).find(r=>r.id===x.id&&r.alive&&!r.out);if(!v||S.out)return;const H=E().hoi;EA_N.hoi++;
+function eaHoi(){const A=eaS();if(!A.hoi.length)return;const x=A.hoi.shift();const v=(rivals||[]).find(r=>r.id===x.id&&r.alive&&!r.out);if(!v||S.out)return;EA_N.hoi++;eaHoiCard(v)}
+/* save-unseen-lists r4: «… đến hỏi tội» (made at the turn of the tuần) is BUILT by a registered generator from the visitor (id); the queue entry is
+   taken (A.hoi.shift) before, once */
+const eaHoiCard=rcpReg("eaHoi",v=>{if(!v||v.alive===false)return null;const H=E().hoi;
  const vk=eaTemper(v).k;const o=oddsCl(H.try+(S.rank-rkOf(v))*H.rk+Math.round((S.danh||0)/H.dn)+(Q6().tryT[vk]||0));const ttl=v.queen?"Hoàng hậu":nm(v);
  const opts=[{n:"Tạ lỗi, đền bạc",risk:"an toàn",hint:"êm chuyện, nhưng mất thể diện",x:`thành: ${ttl} thiện cảm +${H.aff}, nguôi giận`,fx:{bac:-H.bac,danh:-H.danh},go:()=>{affAdd(v,S,H.aff);/* fix 2: the same forgiveness rule (netForgive); the silver still pleases her */if(!netForgive(v,S)){log(`Ngươi tạ lỗi với ${ttl}, đền bạc cho cung nữ của nàng; nàng nhận bạc nhưng chưa nguôi giận.`);return}oanAdd(v,S,-H.oan);log(`Ngươi tạ lỗi với ${ttl}, đền bạc cho cung nữ của nàng.`)}}];
  if(S.maid)opts.push({n:"Đổ lỗi cho cung nữ hỗn hào",risk:"an toàn",hint:"giữ thể diện, cung nữ chịu tội thay",x:`thành: giữ thể diện · kèm: thiện cảm ${S.maid.name} −${H.loy}`,fx:{},go:()=>{loyAdd(S.maid,-H.loy);log(`Ngươi đổ cho ${S.maid.name} hỗn hào; ${S.maid.name} quỳ chịu tội thay.`)}});
  opts.push({n:"Cãi lý",risk:"liều",hint:"có thể giữ được thể diện, có thể chuốc họa",x:`${word(o)} · thành: Danh +${H.win} · hỏng: Danh −${H.lose}, ${ttl} oán +${H.oan}`,fx:{},go:()=>{if(roll(o)){apply({danh:H.win});log(`Ngươi cãi lý với ${ttl}: cung nữ kia hỗn trước. ${ttl} đành bỏ qua.`)}else{apply({danh:-H.lose});oanAdd(v,S,H.oan);log(`<span class="r">Ngươi cãi lý với ${ttl}, không ai bênh; chuyện lan khắp hậu cung.</span>`)}}});
- Q.push({ev:1,t:`${ttl} đến hỏi tội`,emoSeal:{k:"gian",who:emoKey(v)},who:eaWho(v),art:"img/act-xu-toi-h.webp",h:`<p>${{hot:`${ttl} dẫn theo cung nữ hôm trước xông vào cung ngươi, đập tay xuống án: “Đánh chó còn phải nhìn mặt chủ. Người của bản cung, muội muội cũng dám mắng?”`,even:`${ttl} dẫn theo cung nữ hôm trước đến cung ngươi, nghiêm giọng: “Đánh chó còn phải nhìn mặt chủ. Người của bản cung làm gì sai mà muội muội phải mắng?”`,timid:`${ttl} dẫn theo cung nữ hôm trước đến cung ngươi, khẽ nói: “Muội muội, người của ta có chỗ nào thất lễ, muội cứ bảo ta dạy lại. Mắng giữa hành lang thế, người ngoài cười cả hai cung.”`}[vk]}</p><p>Cung nữ kia đứng sau, mắt còn đỏ.</p>`,opts})}
+ const c={ev:1,t:`${ttl} đến hỏi tội`,emoSeal:{k:"gian",who:emoKey(v)},who:eaWho(v),art:"img/act-xu-toi-h.webp",h:`<p>${{hot:`${ttl} dẫn theo cung nữ hôm trước xông vào cung ngươi, đập tay xuống án: “Đánh chó còn phải nhìn mặt chủ. Người của bản cung, muội muội cũng dám mắng?”`,even:`${ttl} dẫn theo cung nữ hôm trước đến cung ngươi, nghiêm giọng: “Đánh chó còn phải nhìn mặt chủ. Người của bản cung làm gì sai mà muội muội phải mắng?”`,timid:`${ttl} dẫn theo cung nữ hôm trước đến cung ngươi, khẽ nói: “Muội muội, người của ta có chỗ nào thất lễ, muội cứ bảo ta dạy lại. Mắng giữa hành lang thế, người ngoài cười cả hai cung.”`}[vk]}</p><p>Cung nữ kia đứng sau, mắt còn đỏ.</p>`,opts};Q.push(c);return c});
 window.eaHoi=eaHoi;window.eaHitMe=eaHitMe;window.eaMeOut=eaMeOut;window.eaS=eaS;/* test hooks: dev/test/mood-seal-ev.js */
 /* ======================= (2) EXTREME MOOD ======================= */
 function eaExtMe(){const M=eaMine(),A=eaS(),X=E().ext,w=W();const ext=Math.abs(M.i)>=2&&M.hv?M.g:null;

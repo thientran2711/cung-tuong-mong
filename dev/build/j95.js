@@ -420,9 +420,15 @@ function j95caught(s){const v=RV(+s.a.slice(1));if(!v||!v.alive)return;const m=s
  if(out==="rev"){z.wit[v.id]={w:wk(),k:s.kind};const g=motiveOK(v,S,"harm");
   if(g.ok&&(v.malice||0)>=55){oanAdd(v,S,BAL.eff.j95.j95caught);affAdd(v,S,BAL.eff.j95.j95caught_2);noteAdd(v.id,"biết ngươi đã thấy chuyện kín của nàng; phải đề phòng nàng diệt khẩu")}
   else{v.j95bribe=wk()}}
- Q.push({t:out==="rev"?"Bắt gặp, và bị thấy":"Bắt gặp",who:pv(v),h:`<p>Ở ${W}, ngươi thấy rõ ${v.name} ${what}.</p>${out==="rev"?`<p class="r">Nàng ngẩng lên, bắt gặp ánh mắt ngươi. Nàng biết ngươi đã thấy.</p>`:""}`,opts:j95catchOpts(v,m,s,out)});
- if(out==="rev"&&v.j95bribe===wk()){const g=Math.min(60,Math.max(10,Math.floor((v.bac||0)/3)));Q.push({t:"Lời nhờ cậy",who:pv(v),h:`<p>Tối ấy cung nữ của ${v.name} lén mang sang một hộp gấm, trong có ${g} lượng bạc: “Chủ tử nhà nô tỳ xin ${kSay({srv:"f"},S,"{goi}")} coi như chưa thấy gì.”</p>`,
-  opts:[{n:"Nhận lễ, giữ im lặng",fx:{},x:`thành: Bạc +${g} · nàng quý ngươi ${balSg(BAL.eff.j95.j95bribeTake)} · nàng nợ ngươi một ân tình · kèm: nhận lễ là đã hứa giữ kín`,go:()=>j95bribeTake(v,g)},{n:"Trả lại hộp gấm",fx:{},x:`thành: không mắc nợ nàng · kèm: nàng oán ngươi ${balSg(BAL.eff.j95.go)}`,go:()=>{oanAdd(v,S,BAL.eff.j95.go);log(`Ngươi trả lại lễ của ${v.name}.`)}}]})}}
+ j95CaughtCard(v,s,out,what);
+ if(out==="rev"&&v.j95bribe===wk())j95BribeCard(v,Math.min(60,Math.max(10,Math.floor((v.bac||0)/3))))}
+/* save-unseen-lists r4 (LAW 11 / 6c): «Bắt gặp» and «Lời nhờ cậy» (made where she stands, also at the first khắc of a new buổi) are BUILT by
+   registered generators from the consort (id), the secret record (plain data; the man found again by id), the roll's outcome and the bribe; every
+   effect (notes, evidence, grudge, the bribe mark) happens before, once — written into the sổ and made again on load */
+const j95CaughtCard=rcpReg("j95Caught",(v,s,out,what)=>{if(!v||!s)return null;const m=s.kind==="tryst"?manById(s.b):null;const W=s.spot;
+ const c={t:out==="rev"?"Bắt gặp, và bị thấy":"Bắt gặp",who:pv(v),h:`<p>Ở ${W}, ngươi thấy rõ ${v.name} ${what}.</p>${out==="rev"?`<p class="r">Nàng ngẩng lên, bắt gặp ánh mắt ngươi. Nàng biết ngươi đã thấy.</p>`:""}`,opts:j95catchOpts(v,m,s,out)};Q.push(c);return c});
+const j95BribeCard=rcpReg("j95Bribe",(v,g)=>{if(!v)return null;const c={t:"Lời nhờ cậy",who:pv(v),h:`<p>Tối ấy cung nữ của ${v.name} lén mang sang một hộp gấm, trong có ${g} lượng bạc: “Chủ tử nhà nô tỳ xin ${kSay({srv:"f"},S,"{goi}")} coi như chưa thấy gì.”</p>`,
+  opts:[{n:"Nhận lễ, giữ im lặng",fx:{},x:`thành: Bạc +${g} · nàng quý ngươi ${balSg(BAL.eff.j95.j95bribeTake)} · nàng nợ ngươi một ân tình · kèm: nhận lễ là đã hứa giữ kín`,go:()=>j95bribeTake(v,g)},{n:"Trả lại hộp gấm",fx:{},x:`thành: không mắc nợ nàng · kèm: nàng oán ngươi ${balSg(BAL.eff.j95.go)}`,go:()=>{oanAdd(v,S,BAL.eff.j95.go);log(`Ngươi trả lại lễ của ${v.name}.`)}}]};Q.push(c);return c});
 function j95bribeTake(v,g){const n=Math.min(g,Math.floor(v.bac||0));v.bac=Math.max(0,(v.bac||0)-n);apply({bac:n});relAdd(v,S,BAL.eff.j95.j95bribeTake);j95z().owe[v.id]=(j95z().owe[v.id]||0)+1;log(`Nhận ${n} lượng bạc của ${v.name}, hứa giữ kín.`)}
 /* port 16/11 (owner 11/15 07:15Z): every option shows its whole Tốn / Được / Mất and the odds word, split by " · " for the kit rows (jmen format) */
 function j95accO(v,to){const pr=evG(S,v);const q=queenP();return to==="emp"?oddsCl(Math.min(20+pr*15+(S.sung||0)/5,90)):S.rank>=7?oddsCl(40+pr*15):oddsCl(Math.min(25+pr*15+(q?aff(q,S)/4:0),90))}

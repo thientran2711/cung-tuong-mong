@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"9037e5a9+","t":"2026-11-25T20:12Z","c":"rv probe: save-residue-probe — lists unseen code cards a real slot write leaves out (LAW 11 / 6c residue)","b":"2476e73cbe32","h":[{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."}]};
+window.CTM_BI={"s":"60f9f6a7+","t":"2026-11-25T20:20Z","c":"rv probe: save-residue-probe — lists unseen code cards a real slot write leaves out (LAW 11 / 6c residue)","b":"a303bb354635","h":[{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1619,7 +1619,7 @@ function mdH(p,cls){return `<span class="md ${cls||""}${kitRkCls(p)}" style="--c
 function newMaid(name,loyal,age){return{name,loyal,age:age||16+R(7),fc:""}}
 
 /* modal queue */
-function pushModal(m){Q.push(m);}
+function pushModal(m){Q.push(m);return m}/* save-unseen-lists r4: hands the card back (a registered generator returns it) */
 /* saveable pending choices: a modal with opts is stored as {pid,pp,t}; PEND[pid](pp) rebuilds text and handlers */
 const PEND={};const RV=id=>rivals.find(x=>x.id===id)||null;
 function mkP(id,pp){pp=pp||{};const d=PEND[id]&&PEND[id](pp);if(!d)return null;d.pid=id;d.pp=pp;return d}
@@ -5623,7 +5623,10 @@ Object.assign(ITIMG,{tramngoc:"tram-phuong",vongvang:"vong-ngoc",gamvang:"gam-to
 /* each rival palace looks a little different (tint of the shared hall art by owner rank) */
 (function(){const r0=renderStage;renderStage=function(){r0.apply(this,arguments);try{const st=$("stage");const k=S.place;st.classList.remove("rp0","rp1","rp2","rp3","day","night");if(k&&k[0]==="r"){const v=RV(+k.slice(1));if(v)st.classList.add("rp"+(v.rank>=5?3:v.rank>=3?2:v.rank>=1?1:0))}st.classList.add((S.buoi||0)===B4L?"night":"day")}catch(e){}}})();
 /* a faction may ask her to join (two-way) */
-(function(){const a1=approachOne;approachOne=function(){if(!facOf(S)&&(S.facs||[]).length&&roll(BAL.cv.facAsk)){const oa=npcWhy("facAsk",{minAff:0});/* npc-purpose G2: the leader who most needs her (liking, a shared foe, a thin faction) */const l=oa&&oa.who,f=l&&facOf(l);if(l&&f&&l!==S)return{ev:1,t:"Có người đến",who:pv(l),h:`<p>${l.name}, người đứng đầu ${f.name}, mời ngươi vào phe (${oa.why}).</p>`,opts:[{n:"Nhận lời vào phe",fx:{},x:`nàng quý ngươi ${balSg(BAL.eff.j25.go)} · kẻ thù của phe oán ngươi`,go:()=>{f.m.push(key(S));relAdd(S,l,BAL.eff.j25.go)}},{n:"Khéo từ chối",fx:{suc:BAL.cv.rest},x:`giữ sức, không dính vào phe ai · nàng quý ngươi ${balSg(BAL.eff.j25.go_2)}`,go:()=>relAdd(S,l,BAL.eff.j25.go_2)}]}}return a1.apply(this,arguments)}})();
+(function(){const a1=approachOne;approachOne=function(){if(!facOf(S)&&(S.facs||[]).length&&roll(BAL.cv.facAsk)){const oa=npcWhy("facAsk",{minAff:0});/* npc-purpose G2: the leader who most needs her (liking, a shared foe, a thin faction) */const l=oa&&oa.who,f=l&&facOf(l);if(l&&f&&l!==S){const m=facAskCard(l,String(oa.why||""));if(m)return m}}return a1.apply(this,arguments)}})();
+/* save-unseen-lists r4 (LAW 11 / 6c): the faction invitation «Có người đến» (an approach, made at the step) is BUILT by a registered generator from the
+   leader (id) and the reason; her faction is found again from the live state — written into the sổ and made again on load */
+const facAskCard=rcpReg("facAsk",(l,why)=>{const f=l&&facOf(l);if(!f||l===S||facOf(S))return null;return{ev:1,t:"Có người đến",who:pv(l),h:`<p>${l.name}, người đứng đầu ${f.name}, mời ngươi vào phe (${why}).</p>`,opts:[{n:"Nhận lời vào phe",fx:{},x:`nàng quý ngươi ${balSg(BAL.eff.j25.go)} · kẻ thù của phe oán ngươi`,go:()=>{f.m.push(key(S));relAdd(S,l,BAL.eff.j25.go)}},{n:"Khéo từ chối",fx:{suc:BAL.cv.rest},x:`giữ sức, không dính vào phe ai · nàng quý ngươi ${balSg(BAL.eff.j25.go_2)}`,go:()=>relAdd(S,l,BAL.eff.j25.go_2)}]}});
 /* card sub-tabs: one group at a time, remembered per role */
 document.addEventListener("click",e=>{const b=e.target.closest("[data-pct]");if(!b)return;e.stopPropagation();e.preventDefault();window.__pcTab=window.__pcTab||{};window.__pcTab[b.dataset.role]=b.dataset.pct;const c=b.closest(".pcr");c.querySelectorAll(".pct").forEach(x=>x.classList.toggle("on",x===b));c.querySelectorAll(".pcg").forEach(g=>g.classList.toggle("on",g.dataset.g===b.dataset.pct))},true);
 /* consort faces by DRESS TIER (picked by rank), reviewed by eye: only serene, slim, adult, approved-style faces; stern, plump, sad or childlike ones are left out */
@@ -5701,8 +5704,11 @@ function houseLine(p,me){me=me||"ta";const c=houseCung(p);if(typeof S==="undefin
 (function(){const p0=placeOf;placeOf=function(k){if(k==="home"){const R2=residents("home").filter(x=>x!==S);return{k,n:palName("home"),fn:"tẩm cung của ngươi",d:`Cung nữ và các con ở đây.${R2.length?" Thiên điện: "+kitNameList(R2)+".":""}`,sc:"home"}}return p0.apply(this,arguments)}})();
 /* the ceremony card when she first heads a palace: the Emperor grants the best empty one; she may ask for another */
 function palCeremony(){if(!S||!S.palCer||S.dead)return;S.palCer=0;const occ={};[S].concat(rivals).forEach(p=>{if(p.pal!=null&&(p===S||p.alive))occ[p.pal]=1});const free=PALN.map((n,i)=>i).filter(i=>!occ[i]);
- Q.push({ev:1,t:"Ban cung",who:pEmp(),h:`<p>Thánh chỉ: ${RANKS[S.rank].n} ${S.name} được ban <b>${PALN[S.pal]}</b>, làm chủ vị một cung. Cung nhân dọn từ ${HOMEN} sang trong ngày.</p>`,
-  opts:[{n:`Nhận ${PALN[S.pal]}`,fx:{},x:"tạ ơn, dọn sang",go:()=>log(`Dọn sang ${PALN[S.pal]}.`)}].concat(free.slice(0,3).map(i=>({n:`Xin ${PALN[i]}`,fx:{},x:"tâu xin cung khác còn trống",go:()=>{S.pal=i;log(`Tâu xin, được dời sang ${PALN[i]}.`)}})))});log(`Được ban ${PALN[S.pal]}.`)}
+ palCerCard(free);log(`Được ban ${PALN[S.pal]}.`)}
+/* save-unseen-lists r4 (LAW 11 / 6c): «Ban cung» is BUILT by a registered generator from the free palaces (indexes); the grant (S.pal, S.palCer) is
+   made before, once — written into the sổ and made again on load */
+const palCerCard=rcpReg("palCer",free=>{if(!S||S.pal==null)return null;const m={ev:1,t:"Ban cung",who:pEmp(),h:`<p>Thánh chỉ: ${RANKS[S.rank].n} ${S.name} được ban <b>${PALN[S.pal]}</b>, làm chủ vị một cung. Cung nhân dọn từ ${HOMEN} sang trong ngày.</p>`,
+  opts:[{n:`Nhận ${PALN[S.pal]}`,fx:{},x:"tạ ơn, dọn sang",go:()=>log(`Dọn sang ${PALN[S.pal]}.`)}].concat(free.slice(0,3).map(i=>({n:`Xin ${PALN[i]}`,fx:{},x:"tâu xin cung khác còn trống",go:()=>{S.pal=i;log(`Tâu xin, được dời sang ${PALN[i]}.`)}})))};Q.push(m);return m});
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead){palFix();palCeremony();tuyenTu();if(Q.length&&$("modal").hidden)showModal()}}catch(e){}return r}})();
 /* TUYỂN TÚ: every third spring, 3-5 young consorts enter at Đáp ứng / Thường tại; living consorts (her too) capped at BAL.harem.cap */
 function tuyenTu(){if(!S||S.month!==2||S.tuan!==0||S.ttDone===S.year)return;if(S.year%3!==0&&liveRivals(true).length>=8)return;S.ttDone=S.year;const live=liveRivals(true).length+1;let n=Math.min(3+R(3),BAL.harem.cap-live);const L=[];
@@ -5906,10 +5912,13 @@ function fireServ(p,s,quietly){const me=p===S;const cost=BAL.house.swapBac;if(p.
  if(!me){const tl=npcTell(p,{from:liveRivals(true).filter(x=>x!==p&&eyes(x)>0)});/* npc-purpose G2a: the news goes round only when someone with tai mắt has a reason to spread it */if(tl&&roll(25))S.news&&newsAdd(p,"fire",`${p.name} đuổi ${s.name} khỏi cung (${tl.who.name} ${tl.why}, đem chuyện đi kể)`,false)}
  return me?`Trả ${s.name} về Nội vụ phủ. Bạc -${cost}, Danh -${harsh?3:1}${harsh?" (tiếng khắc nghiệt)":""}. ${n?`Nội vụ phủ đưa ${n.name} đến thay (nết chưa rõ).`:"Nội vụ phủ chưa có người thay."}${leak} `:leak}
 (function(){const s0=servAct;servAct=function(a,id){if(a==="doi"){const s=servById(id);if(!s||ownerOf(s)!==S||S.dead||Q.length||S.bac<BAL.house.swapBac)return;log(fireServ(S,s));render();return}return s0.apply(this,arguments)}})();
+/* save-unseen-lists r4 (LAW 11 / 6c): «Hàng chợ đen» (made at the month step) is BUILT by a registered generator (the servant as id + the piece key):
+   written into the sổ and made again on load; nothing happens until she answers */
+const svMarketCard=rcpReg("svMarket",(s,k)=>{if(!s||!IT[k])return null;const c={shop:1,t:"Hàng chợ đen",who:pServ(s),h:`<p>${s.name} lén mang đến <b>${itm(k).n}</b>, mua từ chợ đen ngoài cung.</p>`,opts:[{n:"Mua",fx:{bac:-Math.round((itm(k).pr||40)*.7)},x:"rẻ hơn hàng rong · đồ cấm, bị lục ra là tội",go:()=>{S.inv.push({k});servLearn(s,"Mang hàng chợ đen")}},{n:"Không mua",fx:{},x:"không dính líu"}]};Q.push(c);return c});
 /* trait events each month: upsides and downsides happen, and show the trait */
 function servTraitMonth(){let ev="";for(const p of consorts()){for(const s of (p.staff||[]).slice()){if(s.spyFor)continue;const me=p===S;
   if(netIs(s,"greed")){if(npcWhy("svSteal",{s},()=>roll(10))){/* npc-purpose G2a: a greedy, not loyal servant chooses to steal; roll = the chance comes */const n=5+R(10);ap(p,{bac:-n});if(me&&roll(40)){servLearn(s,"Bắt được ăn cắp");ev+=`${s.name} lấy trộm ${n} lượng bạc. `}}
-   if(me&&npcWhy("svMarket",{s},()=>roll(10))){const L=Object.keys(IT).filter(k=>itm(k).il);const k=npwPick(L,k=>S.bac>=Math.round((itm(k).pr||40)*.7)?(itm(k).pr||40):0)/* npc-purpose G2a: he brings the dearest thing she can pay for */;if(k){Q.push({shop:1,t:"Hàng chợ đen",who:pServ(s),h:`<p>${s.name} lén mang đến <b>${itm(k).n}</b>, mua từ chợ đen ngoài cung.</p>`,opts:[{n:"Mua",fx:{bac:-Math.round((itm(k).pr||40)*.7)},x:"rẻ hơn hàng rong · đồ cấm, bị lục ra là tội",go:()=>{S.inv.push({k});servLearn(s,"Mang hàng chợ đen")}},{n:"Không mua",fx:{},x:"không dính líu"}]})}}}
+   if(me&&npcWhy("svMarket",{s},()=>roll(10))){const L=Object.keys(IT).filter(k=>itm(k).il);const k=npwPick(L,k=>S.bac>=Math.round((itm(k).pr||40)*.7)?(itm(k).pr||40):0)/* npc-purpose G2a: he brings the dearest thing she can pay for */;if(k)svMarketCard(s,k)}}
   if(netIs(s,"sharp")){if(me&&npcWhy("svSpy",{s},()=>roll(12))){const v=npwPick(liveRivals(true).filter(x=>traitsOf(x).some(t=>!trKnown(x).includes(t))),x=>1+Math.max(0,danger(x,S)))/* npc-purpose G2a: he spies on the one who threatens his mistress most */;if(v){const t=learnTrait(v,`${s.name} dò được`);if(t){servLearn(s,"Mang tin về");ev+=`${s.name} dò được nết của ${v.name}: ${t}. `}}}
    /* ambition: if her rank has stalled a year he may ask to serve a higher palace */
    if(me&&S.turn-(S.lastPromo||0)>=12&&s.loyal<75&&npcWhy("svLeave",{s},()=>roll(5))){const v=npwPick(liveRivals(true).filter(x=>rkOf(x)>S.rank),x=>rkOf(x)-S.rank+(x.sung||0)*BAL.ag.why.sv.leaveSung)/* npc-purpose G2a: the highest, most favoured palace */;if(v){S.staff.splice(S.staff.indexOf(s),1);(v.staff=v.staff||[]).push(s);ev+=`${s.name} xin chuyển sang hầu ${v.name}, cung có phẩm cao hơn. `}}}
@@ -6001,7 +6010,10 @@ const FESTEV={
  giaothua:()=>({ev:"fest",t:"Đêm Giao thừa",h:"<p>Đêm cuối năm, cung đình đốt pháo, Hoàng thượng ban yến đón giao thừa.</p>",opts:[{n:"Thức đón giao thừa bên ngài",fx:{suc:-10},x:`${word(od(BAL.odb.j31.odX_5+S.sung/2))} · thành: Sủng ${balSg(BAL.eff.j31.sungGo_4)}, Ân tình ${balSg(BAL.eff.j31.anGo_4)}`,go:()=>{if(roll(od(BAL.odb.j31.odX_5+S.sung/2))){apply({sung:BAL.eff.j31.sungGo_4});S.an=cl((S.an||0)+BAL.eff.j31.anGo_4,0,100)}}},{n:"Viết câu đối mới cho cung",fx:{},x:`${word(od(BAL.odb.j31.odX_6+S.tai/2))} · thành: Danh ${balSg(BAL.eff.j31.danhGo_5)}`,go:()=>{if(roll(od(BAL.odb.j31.odX_6+S.tai/2)))apply({danh:BAL.eff.j31.danhGo_5})}},{n:"Ngủ sớm",fx:{suc:10},x:"không ai để ý ngươi"}]}),
  phoenix:()=>({ev:"fest",t:"Hội Phượng",h:"<p>Hội thi cưỡi ngựa bắn cung ở sân tàu ngựa phía tây, cả lục cung ra xem.</p>",opts:[{n:"Xin thử một mũi tên",fx:{suc:-10},x:`${word(od(BAL.odb.j31.odX_7+S.suc/3))} · thành: Danh ${balSg(BAL.eff.j31.danhGo_6)}, Sủng ${balSg(BAL.eff.j31.sungGo_5)} · hỏng: Danh ${balSg(BAL.eff.j31.danhGo_7)}`,go:()=>{if(roll(od(BAL.odb.j31.odX_7+S.suc/3)))apply({danh:BAL.eff.j31.danhGo_6,sung:BAL.eff.j31.sungGo_5});else apply({danh:BAL.eff.j31.danhGo_7})}},{n:"Đặt cược tay thiện xạ",fx:{bac:-20},x:`${word(50)} · thắng: Bạc ${balSg(BAL.eff.j31.bacGo)}`,go:()=>{if(roll(50))apply({bac:BAL.eff.j31.bacGo})}},{n:"Ngồi xem",fx:{},x:"không được không mất"}]}),
  lapbat:()=>({ev:"fest",t:"Lễ Lạp bát",h:"<p>Mồng tám tháng chạp, cung nấu cháo lạp bát, ban phát cho cung nhân.</p>",opts:[{n:"Tự tay nấu cháo phát cho cung nhân",fx:{suc:-10},x:`Đức ${balSg(BAL.eff.j31.ducGo_4)}, Thiện cảm của cung nữ +6`,go:()=>apply({duc:BAL.eff.j31.ducGo_4,maid:6})},{n:"Dâng cháo lên Hoàng thượng",fx:{},x:`${word(60)} · thành: Sủng ${balSg(BAL.eff.j31.sungGo_6)}`,go:()=>{if(roll(60))apply({sung:BAL.eff.j31.sungGo_6})}},{n:"Bỏ qua",fx:{},x:"không được không mất"}]})};
-(function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead&&!S.out){const f=festToday();const key=f&&`${S.year}-${f.k}`;if(f&&FESTEV[f.k]&&S.festDone!==key){S.festDone=key;Q.push(Object.assign({who:pEmp(),ev:"fest",evId:"fest:"+f.k,headArt:{src:`https://ctm-img.victoria-tntt.workers.dev/img/ev-fest-${f.k}-b.webp`,label:f.name}},FESTEV[f.k]()));log(`${f.name}.`);if($("modal").hidden)showModal()}}}catch(e){}return r}})();
+/* save-unseen-lists r4 (LAW 11 / 6c): the festival card (made at the turn of the tuần) is BUILT by a registered generator from the festival key; the
+   «done» mark (S.festDone) is set before, once — written into the sổ and made again on load */
+const festEvCard=rcpReg("festEv",(k,name)=>{if(!FESTEV[k])return null;const m=Object.assign({who:pEmp(),ev:"fest",evId:"fest:"+k,headArt:{src:`https://ctm-img.victoria-tntt.workers.dev/img/ev-fest-${k}-b.webp`,label:name}},FESTEV[k]());Q.push(m);return m});
+(function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead&&!S.out){const f=festToday();const key=f&&`${S.year}-${f.k}`;if(f&&FESTEV[f.k]&&S.festDone!==key){S.festDone=key;festEvCard(f.k,f.name);log(`${f.name}.`);if($("modal").hidden)showModal()}}}catch(e){}return r}})();
 /* ================= DEATH IS PART OF THE GAME: readable deaths, the reincarnation loop, Sổ luân hồi ================= */
 /* childbirth: dangerous per birth, lowered by her own physician, Y thuật and a loyal midwife; raised if a rival bribed the midwife */
 function birthRisk(p){const me=p===S;const ag=p.age||20;let r=9+(p.suc<40?4:0)+Math.max(0,Math.min(ag,35)-30)*.5+Math.max(0,ag-35)*3;const why=[];
@@ -6085,19 +6097,25 @@ function npcContestAct(p){const c=ct();const R2=c.c.map(byKey).filter(x=>x&&x!==
 function sabotage(a,t){const c=ct();const o=oddsCl(Math.min(40+(a.tamco||0)/4-(t===S&&S.maid&&S.maid.loyal>=BAL.loy.trust?10:0),90));persCount(a,"contest:scheme");
  if(roll(o)){const cut=c.cut=c.cut||{};cut[key(t)]=(cut[key(t)]||0)+BAL.eff.j34.sabCut;const m=t===S?`Đàn của ngươi bị cắt dây trước buổi diễn (vòng sau -${BAL.eff.j34.sabCut}).`:`${a===S?"Ngươi":a.name} phá ${t.name}: vòng sau nàng -${BAL.eff.j34.sabCut}.`;if(t===S||a===S)log(m);return m}
  if(roll(BAL.rk.caught)){c.dq.push(key(a));ap(a,{danh:BAL.eff.j34.danhSabotage,sung:BAL.eff.j34.sungSabotage});const m=`${a===S?"Ngươi":a.name} ra tay với ${NM(t)} bị bắt quả tang: bị loại khỏi cuộc tranh ghế, Danh ${balSg(BAL.eff.j34.danhSabotage)}, ${sgOf(a,BAL.eff.j34.sungSabotage)}.`;log(m);return m}return `${a===S?"Ngươi":a.name} định ra tay nhưng không thành.`}
-function myBetween(){if(quiet)return;const c=ct();const R2=c.c.map(byKey).filter(x=>x&&x!==S&&!c.dq.includes(key(x)));const top=R2.sort((a,b)=>(b.sung||0)-(a.sung||0))[0];
- Q.push({ev:1,t:"Tranh ghế: giữa các vòng",who:pMe(),h:`<p>Còn ${3-c.round} vòng. Ngươi dùng mấy ngày này thế nào?</p>${scoreTable()}`,opts:[{n:"Luyện tập",fx:{suc:-10},x:`vòng Tài nghệ +${balDec(BAL.eff.j34.meGo*BAL.eff.j34.prW)}`,go:()=>{c.pr.me=(c.pr.me||0)+BAL.eff.j34.meGo}},{n:"Vận động người đỡ đầu",fx:{bac:-30},x:`${word(55)} · thành: thêm một người đứng sau (Thế lực +${BAL.eff.j34.backerPt})`,go:()=>{if(roll(55))ctBackerAdd(c,"me",pick(["một vị thượng thư","Tổng quản thái giám","một vị vương phi"]))}},top?{n:`Ra tay với ${top.name}`,fx:{},x:`${word(oddsCl(Math.min(40+S.tamco/4,90)))} · thành: nàng mất ${BAL.eff.j34.sabCut} phần · hỏng: bị bắt quả tang, loại khỏi cuộc tranh ghế, Danh ${balSg(BAL.eff.j34.danhSabotage)}, ${sgStat(BAL.eff.j34.sungSabotage)}: ${chanceW(BAL.rk.caught)}`,go:()=>sabotage(S,top)}:null].filter(Boolean)})}
+function myBetween(){if(quiet)return;j34BetweenCard()}
+/* save-unseen-lists r4 (LAW 11 / 6c): the three contest cards (made at the turn of the tuần) are BUILT by registered generators from the contest
+   on S (S.contest: rounds, scores) — written into the sổ and made again on load; the round counter moves before, once */
+const j34BetweenCard=rcpReg("j34Between",()=>{const c=ct();if(!c)return null;const R2=c.c.map(byKey).filter(x=>x&&x!==S&&!c.dq.includes(key(x)));const top=R2.sort((a,b)=>(b.sung||0)-(a.sung||0))[0];
+ const m={ev:1,t:"Tranh ghế: giữa các vòng",who:pMe(),h:`<p>Còn ${3-c.round} vòng. Ngươi dùng mấy ngày này thế nào?</p>${scoreTable()}`,opts:[{n:"Luyện tập",fx:{suc:-10},x:`vòng Tài nghệ +${balDec(BAL.eff.j34.meGo*BAL.eff.j34.prW)}`,go:()=>{c.pr.me=(c.pr.me||0)+BAL.eff.j34.meGo}},{n:"Vận động người đỡ đầu",fx:{bac:-30},x:`${word(55)} · thành: thêm một người đứng sau (Thế lực +${BAL.eff.j34.backerPt})`,go:()=>{if(roll(55))ctBackerAdd(c,"me",pick(["một vị thượng thư","Tổng quản thái giám","một vị vương phi"]))}},top?{n:`Ra tay với ${top.name}`,fx:{},x:`${word(oddsCl(Math.min(40+S.tamco/4,90)))} · thành: nàng mất ${BAL.eff.j34.sabCut} phần · hỏng: bị bắt quả tang, loại khỏi cuộc tranh ghế, Danh ${balSg(BAL.eff.j34.danhSabotage)}, ${sgStat(BAL.eff.j34.sungSabotage)}: ${chanceW(BAL.rk.caught)}`,go:()=>sabotage(S,top)}:null].filter(Boolean)};Q.push(m);return m});
 /* talking to the Emperor or the Thái hậu during a contest shows which answer they prize */
 (function(){const t1=talk;talk=function(oi){const p=S&&curPeople()[popIdx];const r=t1.apply(this,arguments);try{if(ct()&&p&&(p.kind==="emp"||p.kind==="th")&&!ct().hint){ct().hint=1;log(`Qua chuyện trò, ngươi đoán được ${p.kind==="emp"?"Hoàng thượng":"Thái hậu"} trọng ${({nhan:"lòng nhân",le:"lễ phép",tri:"sự sáng suốt"})[judgeVirtue()]}.`)}}catch(e){}return r}})();
 function scoreTable(){const c=ct();if(!c)return"";return kitRows(c.c.map(byKey).filter(Boolean).map(p=>{const s=c.sc[key(p)]||[];const tot=s.reduce((a,b,i)=>a+b*crW(i),0);return [`${mdH(p===S?pMe():pv(p),"xs")}${p===S?"Ngươi":p.name}${c.dq.includes(key(p))?' <span class="ef r">bị loại</span>':""}`,`${s.map((x,i)=>`${CR[i][0]}${x}`).join(" · ")||"-"}${s.length?` = ${Math.round(tot*10)/10}`:""}`,"t"]}))}
 function runRound(){const c=ct();const i=c.round;const C=c.c.map(byKey).filter(p=>p&&(p===S||p.alive)&&!c.dq.includes(key(p)));
  for(const p of C){if(p===S)continue;const s=c.sc[key(p)]=c.sc[key(p)]||[];s[i]=i===0?tScore(p,bestArtOf(p)):i===1?dScore(p,roll(BAL.odb.j34.rbI+(p.tamco||0)/2)?judgeVirtue():pick(["nhan","le","tri"])):fScore(p)}
  if(C.includes(S)){const s=c.sc.me=c.sc.me||[];
-  if(i===0){const arts=["cam","ky","thi","hoa","vu"].sort((a,b)=>(S.arts[b]||0)-(S.arts[a]||0));if(quiet){s[0]=tScore(S,arts[0]);}else Q.push({ev:1,t:"Vòng 1: Tài nghệ",who:pEmp(),h:`<p>Trước Hoàng thượng, ngươi trình diễn môn nào?</p>`,opts:arts.map(a=>({n:(ARTS.find(x=>x.k===a)||{n:a}).n,fx:{},x:`bậc ${S.arts[a]||0} · phần = bậc + màn diễn${(c.pr.me||0)?` + luyện tập ${balDec(c.pr.me*BAL.eff.j34.prW)}`:""}`,go:()=>{const done=g=>{s[0]=tScore(S,a,Math.min(3,g));log(`Vòng Tài nghệ: ngươi được ${s[0]}/10.`);};if(window.__bot||typeof openMG!=="function")done(R(4));else openMG(a,S.arts[a]||0,g=>done(g))}}))});}
+  if(i===0){const arts=["cam","ky","thi","hoa","vu"].sort((a,b)=>(S.arts[b]||0)-(S.arts[a]||0));if(quiet){s[0]=tScore(S,arts[0]);}else j34R1Card(arts);}
   else if(i===1){const D=pick(DILEMMAS);const hint=c.hint?`<p class="past">Ngươi đoán người xét trọng ${({nhan:"lòng nhân",le:"lễ phép",tri:"sự sáng suốt"})[judgeVirtue()]}.</p>`:`<p class="past">Chưa rõ người xét trọng điều gì (chuyện trò với Hoàng thượng hoặc Thái hậu trước để đoán).</p>`;
-   if(quiet)s[1]=dScore(S,pick(["nhan","le","tri"]));else Q.push({ev:1,t:"Vòng 2: Đức hạnh",who:pTH(),h:`<p>${D[0]}</p>${hint}`,opts:D[1].map(([v,n])=>({n,fx:{},x:`phần theo ý người xét + Đức ${S.duc}, Tâm cơ ${S.tamco}`,go:()=>{s[1]=dScore(S,v);log(`Vòng Đức hạnh: ngươi được ${s[1]}/10.`)}}))})}
+   if(quiet)s[1]=dScore(S,pick(["nhan","le","tri"]));else j34R2Card(DILEMMAS.indexOf(D))}
   else{s[2]=fScore(S);log(`Vòng Thế lực: ${backers(S).join(", ")||"không ai"} đứng sau ngươi: ${s[2]}/10.`)}}
  c.round++}
+const j34R1Card=rcpReg("j34R1",arts=>{const c=ct();if(!c)return null;const s=c.sc.me=c.sc.me||[];const m={ev:1,t:"Vòng 1: Tài nghệ",who:pEmp(),h:`<p>Trước Hoàng thượng, ngươi trình diễn môn nào?</p>`,opts:arts.map(a=>({n:(ARTS.find(x=>x.k===a)||{n:a}).n,fx:{},x:`bậc ${S.arts[a]||0} · phần = bậc + màn diễn${(c.pr.me||0)?` + luyện tập ${balDec(c.pr.me*BAL.eff.j34.prW)}`:""}`,go:()=>{const done=g=>{s[0]=tScore(S,a,Math.min(3,g));log(`Vòng Tài nghệ: ngươi được ${s[0]}/10.`);};if(window.__bot||typeof openMG!=="function")done(R(4));else openMG(a,S.arts[a]||0,g=>done(g))}}))};Q.push(m);return m});
+const j34R2Card=rcpReg("j34R2",di=>{const c=ct();const D=DILEMMAS[di];if(!c||!D)return null;const s=c.sc.me=c.sc.me||[];const hint=c.hint?`<p class="past">Ngươi đoán người xét trọng ${({nhan:"lòng nhân",le:"lễ phép",tri:"sự sáng suốt"})[judgeVirtue()]}.</p>`:`<p class="past">Chưa rõ người xét trọng điều gì (chuyện trò với Hoàng thượng hoặc Thái hậu trước để đoán).</p>`;
+ const m={ev:1,t:"Vòng 2: Đức hạnh",who:pTH(),h:`<p>${D[0]}</p>${hint}`,opts:D[1].map(([v,n])=>({n,fx:{},x:`phần theo ý người xét + Đức ${S.duc}, Tâm cơ ${S.tamco}`,go:()=>{s[1]=dScore(S,v);log(`Vòng Đức hạnh: ngươi được ${s[1]}/10.`)}}))};Q.push(m);return m});
 function contestEnd(){const c=ct();const C=c.c.map(byKey).filter(p=>p&&(p===S||p.alive)&&!p.out&&!c.dq.includes(key(p))&&rkOf(p)===c.r-1);S.contest=null;if(!C.length)return"";
  const tot=p=>(c.sc[key(p)]||[]).reduce((a,b,i)=>a+(b||0)*crW(i),0);C.sort((a,b)=>tot(b)-tot(a)||(b.sung||0)-(a.sung||0));const w=C[0];
  let res;if(!seatHas(w,c.r)){const cp=seatComp(w);res=`${w===S?"Ngươi":w.name} thắng, nhưng ghế ${c.r>=7?"Hoàng hậu":RANKS[c.r].n} đã có người ngồi trước`;if(cp)log(cp)}else if(c.r===7){if(w===S){S.rank=7;S.justCrowned=1;S.lastPromo=S.turn;ghenAll(BAL.ghen.rankUp,"ngươi được tấn phong")}else{w.rank=6;w.queen=true;rivals.splice(rivals.indexOf(w),1);rivals.unshift(w)}w.lastPromo=S.turn;res=`${w===S?"Ngươi":w.name} được lập làm Hoàng hậu`}else{window.__seatPick=1;try{res=promoteP(w)}finally{window.__seatPick=0}if(!res){seatUp(w,c.r)}res=`${w===S?"Ngươi":w.name} được phong ${RANKS[Math.min(6,rkOf(w))].n}`}
@@ -27101,12 +27119,18 @@ function fPlan7(){const n=nextT7();const f=festAt7(n.m,n.t);if(!f||!FV7[f.k])ret
  const vi=fvPick(f.k);if(vi==null)return null;const pp=fPP7(f.k,vi);if(!pp)return null;pp.y=n.y;fMark7(f.k,vi);j.plans[f.k]={y:n.y,pp,me:0};
  return FV7[f.k][vi][0]==="C"&&!S.confined?fInv7(f.k,pp,true):null}
 /* the festival day */
+/* save-unseen-lists r4 (LAW 11 / 6c): her festival-day contest card (made at the turn of the tuần) is BUILT by a registered generator from the festival
+   key: the plan (j.plans[k]: variant, entrants, her preparation) stays on S, its «held» mark (P.y) is set before, once — written into the sổ and
+   made again on load. Queued by its caller (not pushed here). */
+const fDayCard7=rcpReg("j71Day",k=>{const j=j7s();const P=j.plans&&j.plans[k];if(!P||!P.pp||!FV7[k])return null;const pp=P.pp,V=FV7[k][pp.vi];if(!V||V[0]!=="C")return null;
+  const E=[S].concat(ents7(pp));const meB=(P.me===2?J71.prep:0)+(P.pb||0);
+  return {t:`${fShort7(k)} · ${fTitle7(k,pp.vi)}`,h:`<p>${V[2]}</p><p>Ngươi đã ghi tên. Phần của ngươi = phần tự chơi, cộng thêm theo tài nghệ (${det7(V[1],S)}) và chuẩn bị +${meB}.</p>`,who:pEmp(),must:1,
+   opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-J71.cost},x:`đoạt giải, ${pz7(prize7(k))}, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh ${balSg(BAL.rl.j71.danhCRun7)} và quà nhỏ · hỏng: đứng chót thì Danh ${balSg(BAL.rl.j71.danhCRun7_2)} · kèm: thắng thì các phi tần ghen +${ghenN(BAL.ghen.contest)}`,go:()=>mgRun7({title:fName7(k),big:FBIG7.includes(k),fk:k,art:V[1],E,kindOf:()=>V[1],pr:pp.pr||[],meB,stakes:stk7(prize7(k),30),done:(L,sh)=>cFin7(k,V[1],L,sh)})},
+    {n:"Bỏ thi",fx:{},x:"không được không mất",go:()=>{const L=mgX7(FBIG7.includes(k),()=>cScore7(E.filter(p=>p!==S),()=>V[1],pp.pr||[],0));if(L.length)cFin7(k,V[1],L)}}]}});
 function fDay7(k){const j=j7s();const P=j.plans&&j.plans[k];if(P&&P.y===S.year){const pp=P.pp,V=FV7[k][pp.vi];P.y=-1;
   if(V[0]!=="C")return fMake7(k,null,false,pp);
   const E=[S].concat(ents7(pp));const meIn=P.me>0&&present7(S);const meB=(P.me===2?J71.prep:0)+(P.pb||0);
-  if(meIn&&mgOn7())return{t:`${fShort7(k)} · ${fTitle7(k,pp.vi)}`,h:`<p>${V[2]}</p><p>Ngươi đã ghi tên. Phần của ngươi = phần tự chơi, cộng thêm theo tài nghệ (${det7(V[1],S)}) và chuẩn bị +${meB}.</p>`,who:pEmp(),must:1,
-   opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-J71.cost},x:`đoạt giải, ${pz7(prize7(k))}, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh ${balSg(BAL.rl.j71.danhCRun7)} và quà nhỏ · hỏng: đứng chót thì Danh ${balSg(BAL.rl.j71.danhCRun7_2)} · kèm: thắng thì các phi tần ghen +${ghenN(BAL.ghen.contest)}`,go:()=>mgRun7({title:fName7(k),big:FBIG7.includes(k),fk:k,art:V[1],E,kindOf:()=>V[1],pr:pp.pr||[],meB,stakes:stk7(prize7(k),30),done:(L,sh)=>cFin7(k,V[1],L,sh)})},
-    {n:"Bỏ thi",fx:{},x:"không được không mất",go:()=>{const L=mgX7(FBIG7.includes(k),()=>cScore7(E.filter(p=>p!==S),()=>V[1],pp.pr||[],0));if(L.length)cFin7(k,V[1],L)}}]};
+  if(meIn&&mgOn7())return fDayCard7(k);
   if(meIn)apply({suc:-J71.cost});window.__j71rows="";const r=cRun7(k,V[1],E,pp.pr||[],meB,meIn);if(!r)return null;log(`${fName7(k)}: ${r}`);
   return{t:`${fShort7(k)} · ${fTitle7(k,pp.vi)}`,h:`<p>${V[2]}</p>${meIn?"":"<p>Ngươi không ghi tên, chỉ đứng xem.</p>"}${window.__j71rows||""}`,who:pEmp(),must:1}}
  return fMake7(k,null,true)}
@@ -27145,13 +27169,17 @@ PEND.j71x=pp=>{if(!S)return null;const F=FX7[pp.kk];if(!F)return null;const n=li
  return{who:pEmp(),t:`<p class="past">Lời mời · ${F.n} (đầu tháng ${F.m===1?"giêng":"bảy"})</p><p>Hoàng thượng cho các cung ghi tên dâng nghệ trong ${F.n}; ${n} phi tần khác sẽ dự, mỗi người chọn tài nghệ giỏi nhất của mình. Bậc may rủi dưới đây tính theo tài nghệ hiện nay; từ giờ tới ngày hội luyện thêm thì phần thi cao hơn; mỗi lần luyện tập (Luyện cầm kỳ thi họa, Làm thơ dâng lên, Đánh đàn ở ngự hoa viên, Múa trong yến tiệc) thêm +3 phần chuẩn bị, tối đa +12.${mgOn7()?" Ngày hội ngươi tự chơi phần thi; tài nghệ được cộng phần.":""}</p>`,o}};
 function fxInvite7(){const j=j7s();for(const kk in FX7){const F=FX7[kk];const m0=F.m===1?12:F.m-1;if(S.month!==m0||S.tuan!==0)continue;const y=F.m===1?S.year+1:S.year;j.fxi=j.fxi||{};if(j.fxi[F.f]===y)continue;j.fxi[F.f]=y;
   const d=mkP("j71x",{kk,y,sd:1+R(1e6)});if(d)return{t:`${F.n} · Lời mời`,h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,must:1}}return null}
+/* save-unseen-lists r4 (LAW 11 / 6c): her festival contest card (made on the festival day, at the step) is BUILT by a registered generator from the
+   festival (title, key), the entrants (people as ids) and her preparation; her entry is marked done before, once — written into the sổ and made again on load */
+const j71FestCard=rcpReg("j71Fest",(title,kk,E,meB)=>{const F=FX7[kk];if(!F)return null;const j=j7s();const me=j.fx&&j.fx[F.f];if(!me||me.a==null)return null;
+ const m={ev:1,t:`${title}`,h:`<p>Ngày ${title}. Ngươi đã ghi tên dâng ${SC7[me.a].n}; phần của ngươi = phần tự chơi, cộng thêm theo tài nghệ (${det7(me.a,S)}) và chuẩn bị +${meB}.</p>`,who:pEmp(),must:1,
+    opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-J71.cost},x:`đứng đầu, Sủng ${balSg(BAL.eff.j71.sungStakes)}, Danh ${balSg(BAL.eff.j71.danhStakes)}, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh ${balSg(BAL.eff.j71.danhFxRank)} và quà nhỏ · hỏng: đứng chót thì Danh ${balSg(BAL.rl.j71.danhFxFin7)} · kèm: đứng đầu thì các phi tần ghen +${ghenN(BAL.ghen.contestTop)}`,go:()=>mgRun7({title,big:true,fk:F.f,art:me.a,E,kindOf:p=>p===S?me.a:fxBest7(p,F.arts),pr:[],meB,stakes:stk7({sung:BAL.eff.j71.sungStakes,danh:BAL.eff.j71.danhStakes},50),done:(L,sh)=>fxFin7(title,L,sh)})},
+     {n:"Bỏ thi",fx:{},x:"không được không mất",go:()=>fxFin7(title,mgX7(true,()=>cScore7(E.filter(p=>p!==S),p=>fxBest7(p,F.arts),[],0)))}]};Q.push(m);return m});
 (function(){if(typeof festival!=="function")return;const f0=festival;festival=function(title,kk){try{const F=FX7[kk];if(!F||!S||S.dead||window.__j71off||!j7On())return f0.apply(this,arguments);
   const j=j7s();const me=j.fx&&j.fx[F.f]&&j.fx[F.f].y===S.year&&j.fx[F.f].a&&present7(S)?j.fx[F.f]:null;
   const E=liveRivals(true).filter(present7);if(me)E.unshift(S);if(E.length<2)return "";if(me)me.done=1;
   const meB=me?(me.pr?J71.prep:0)+(me.pb||0):0;
-  if(me&&mgOn7()){Q.push({ev:1,t:`${title}`,h:`<p>Ngày ${title}. Ngươi đã ghi tên dâng ${SC7[me.a].n}; phần của ngươi = phần tự chơi, cộng thêm theo tài nghệ (${det7(me.a,S)}) và chuẩn bị +${meB}.</p>`,who:pEmp(),must:1,
-    opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-J71.cost},x:`đứng đầu, Sủng ${balSg(BAL.eff.j71.sungStakes)}, Danh ${balSg(BAL.eff.j71.danhStakes)}, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh ${balSg(BAL.eff.j71.danhFxRank)} và quà nhỏ · hỏng: đứng chót thì Danh ${balSg(BAL.rl.j71.danhFxFin7)} · kèm: đứng đầu thì các phi tần ghen +${ghenN(BAL.ghen.contestTop)}`,go:()=>mgRun7({title,big:true,fk:F.f,art:me.a,E,kindOf:p=>p===S?me.a:fxBest7(p,F.arts),pr:[],meB,stakes:stk7({sung:BAL.eff.j71.sungStakes,danh:BAL.eff.j71.danhStakes},50),done:(L,sh)=>fxFin7(title,L,sh)})},
-     {n:"Bỏ thi",fx:{},x:"không được không mất",go:()=>fxFin7(title,mgX7(true,()=>cScore7(E.filter(p=>p!==S),p=>fxBest7(p,F.arts),[],0)))}]});return ""}
+  if(me&&mgOn7()){j71FestCard(title,kk,E,meB);return ""}
   if(me)apply({suc:-J71.cost});
   const L=capRank7(cScore7(E,p=>p===S?me.a:fxBest7(p,F.arts),[],meB));const w=L[0].p;ap(w,win7());if(empGive(w,50,"contest"))try{bestow(w,"contest")}catch(e){}
   let r="";const mi=L.findIndex(x=>x.p===S);
@@ -36748,7 +36776,10 @@ function bcChoices(p,from){const B=BAL.banCung;const occ=bcOcc(p);const L=PALN.m
  const nLk=Math.min(lk.length,B.lockMax,Math.max(lk.length?1:0,B.opts-ok.length)),out=ok.slice(0,B.opts-nLk).concat(lk.slice(0,nLk));
  return out.map(i=>({i,locked:bcLocked(p,i),odds:bcLocked(p,i)?0:bcOdds(p,i,from)}))}
 /* THE CEREMONY (replaces j27): the decree's palace, «Nhận» (sure, Đức +), «Xin <cung>» with real odds, or locked with the reason */
-palCeremony=function(){if(!S||!S.palCer||S.dead)return;S.palCer=0;const from=S.pal;if(from==null)return;const B=BAL.banCung;
+palCeremony=function(){if(!S||!S.palCer||S.dead)return;S.palCer=0;const from=S.pal;if(from==null)return;bcCard(from);log(`Được ban ${PALN[from]}.`)};
+/* save-unseen-lists r4 (LAW 11 / 6c): «Ban cung» (made at the turn of the tuần) is BUILT by a registered generator from the granted palace (index);
+   the grant (S.pal, S.palCer) is made before, once — written into the sổ and made again on load */
+const bcCard=rcpReg("banCung",from=>{if(!S||from==null||!PALN[from])return null;const B=BAL.banCung;
  const st=i=>bcDanh(i)-bcDanh(from);
  const opts=[{n:`Nhận ${PALN[from]}`,fx:{duc:B.ok.ducTake},x:"tạ ơn, dọn sang",go:()=>log(`Dọn sang ${PALN[from]}.`)}];
  for(const c of bcChoices(S,from)){const i=c.i;
@@ -36757,8 +36788,7 @@ palCeremony=function(){if(!S||!S.palCer||S.dead)return;S.palCer=0;const from=S.p
   const gain=`, ${bcGainTxt(bcGain(i,from))}`;
   const loss=`${sgStat(-(B.fail.sung+B.fail.sungStep*up))}, Danh ${balSg(-(B.fail.danh+B.fail.danhStep*up))}${top&&up>0?`, ${top.name} sinh oán`:""}`;
   opts.push({n:`Xin ${PALN[i]}`,fx:{},x:`${word(c.odds)} · thành: dời sang ${PALN[i]}${gain} · hỏng: ${loss}`,go:()=>{bcAsk(S,i,from)}})}
- Q.push({ev:1,t:"Ban cung",who:pEmp(),h:`<p>Thánh chỉ: ${RANKS[S.rank].n} ${S.name} được ban <b>${PALN[from]}</b>, làm chủ vị một cung. Cung nhân dọn từ ${HOMEN} sang trong ngày.</p><p>Cung càng gần ngự tẩm, càng danh giá, càng nhiều người muốn; tâu xin quá phận thì khó được chuẩn.</p>`,opts});
- log(`Được ban ${PALN[from]}.`)};
+ Q.push({ev:1,t:"Ban cung",who:pEmp(),h:`<p>Thánh chỉ: ${RANKS[S.rank].n} ${S.name} được ban <b>${PALN[from]}</b>, làm chủ vị một cung. Cung nhân dọn từ ${HOMEN} sang trong ngày.</p><p>Cung càng gần ngự tẩm, càng danh giá, càng nhiều người muốn; tâu xin quá phận thì khó được chuẩn.</p>`,opts});return Q[Q.length-1]});
 /* NPC parity (law 1): a consort newly made chủ vị may petition the same way (host only in co-op: one roll for the world) */
 function bcNpcAsk(v){const B=BAL.banCung,from=v.pal;if(from==null)return;
  const C=bcChoices(v,from).filter(c=>!c.locked&&bcDanh(c.i)>bcDanh(from)&&oddsLv(c.odds)>=B.npcLv);if(!C.length)return;
@@ -50315,12 +50345,15 @@ window.thyCardLines=function(){if(!S)return[];const z=thy();const L=[];const r=z
 /* ---------- 3. nausea: a hint before the physician finds it ---------- */
 (function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const w0=S&&!S.dead?wk():null;const r=e0.apply(this,arguments);try{
   if(S&&!S.dead&&w0!=null&&wk()!==w0&&!off()){const z=thy();const w=wksPreg();
-   if(w>=2&&S.pregUnk&&z.nz!==S.pregWk&&roll(T().nausea)){z.nz=S.pregWk;const m=S.maid?`Cung nữ ${S.maid.name}`:"Cung nữ";
-    Q.push({t:"Trong người khác lạ",kind:"notice",h:`<p class="past">${when()}</p><p>Mấy hôm nay ngươi biếng ăn, sáng ra hay buồn nôn, ngửi mùi tanh là khó chịu.</p><p>${m} thì thầm: hay là mời thái y xem mạch?</p>`,
+   if(w>=2&&S.pregUnk&&z.nz!==S.pregWk&&roll(T().nausea)){z.nz=S.pregWk;nauseaCard();
+    try{if($("modal").hidden)showModal()}catch(e){}}}}catch(e){console.error(e)}return r};window.endTurn=endTurn})();
+/* save-unseen-lists r4 (LAW 11 / 6c): «Trong người khác lạ» (made at the turn of the tuần) is BUILT by a registered generator from the live state
+   (no argument: the mark z.nz is set before, once) — written into the sổ and made again on load */
+const nauseaCard=rcpReg("thNausea",()=>{if(!S||!S.pregUnk)return null;const m=S.maid?`Cung nữ ${S.maid.name}`:"Cung nữ";
+    const c={t:"Trong người khác lạ",kind:"notice",h:`<p class="past">${when()}</p><p>Mấy hôm nay ngươi biếng ăn, sáng ra hay buồn nôn, ngửi mùi tanh là khó chịu.</p><p>${m} thì thầm: hay là mời thái y xem mạch?</p>`,
      opts:[{n:"Mời thái y bắt mạch",fx:{},x:`tốn: Bạc -${cost()} · ${xLine("pay")}`,lk:()=>why("pay"),go:()=>{setTimeout(()=>req("pay"),0)}},
            {n:"Sang Thái y viện xin bắt mạch",fx:{},x:`tốn: Sức -${T().sucSelf} · ${xLine("self")}`,lk:()=>why("self"),go:()=>{setTimeout(()=>req("self"),0)}},
-           {n:"Đợi thêm ít hôm",fx:{},x:"thái y sẽ tự nhận ra khi đến thỉnh bình an mạch",go:()=>{}}]});
-    try{if($("modal").hidden)showModal()}catch(e){}}}}catch(e){console.error(e)}return r};window.endTurn=endTurn})();
+           {n:"Đợi thêm ít hôm",fx:{},x:"thái y sẽ tự nhận ra khi đến thỉnh bình an mạch",go:()=>{}}]};Q.push(c);return c});
 
 /* ---------- 4 + NPCs: bribes, the monthly visit of every consort (host only in co-op) ---------- */
 function npcMonth(){let ev="";const c=doc();if(!c)return ev;c.af=c.af||{};
@@ -60229,7 +60262,14 @@ function toilAns(p,r,c){const B=BAL.toil;if(c==="sorry"){toilBack(r.host,Math.ce
  if(!me)ap(p,{suc:B.replySuc})/* replySuc = the Sức change (main: −2); her own is the option fx */;if(roll(B.replyWin)){if(me)apply({danh:B.replyDanh});else ap(p,{danh:B.replyDanh});return true}
  toilBack(r.host,-B.replyLose,p);if(r.v){if(me)ghenUp(r.v,B.replyGhen,"bị ngươi đáp lời không nể",S);else affAdd(r.v,p,-B.replyGhen)}return false}
 function toilFlush(){if(!TOIL_POP.length||!S||S.dead)return;const L=TOIL_POP.splice(0).sort((a,b)=>Math.abs(b.n)-Math.abs(a.n));const top=L.slice(0,BAL.toil.popMax),rest=L.slice(BAL.toil.popMax);
- top.forEach((r,i)=>{const bad=r.n<0;const who=toilWho(r.host==null?null:r.host)||"";const more=i===top.length-1&&rest.length?`<p class="past">Còn: ${rest.map(x=>`${x.name||toilWho(x.host)} — ${x.line}`).join(" · ")}.</p>`:"";
+ top.forEach((r,i)=>{const more=i===top.length-1&&rest.length?`<p class="past">Còn: ${rest.map(x=>`${x.name||toilWho(x.host)} — ${x.line}`).join(" · ")}.</p>`:"";
+  /* save-unseen-lists r4 (LAW 11 / 6c): each reaction card (thỉnh an / the crowd, also at the turn of a buổi) is BUILT by a registered generator from
+     the reaction record (plain data, the host / consort as ids; its line was drawn before) — written into the sổ and made again on load */
+  const r1=Object.assign({},r);delete r1.who;toilPopCard(r1,more)});
+ try{render()}catch(e){}}
+const toilPopCard=rcpReg("toilPop",(r,more)=>{if(!r||!S)return null;r=Object.assign({},r);if(r.host&&typeof r.host==="object"&&r.host.alive===false)return null;
+  r.who=r.host==="th"?pTH():r.host==="emp"?pEmp():r.host&&typeof r.host==="object"?pv(r.host):null;
+  const bad=r.n<0;const who=toilWho(r.host==null?null:r.host)||"";
   const h=`<p>${r.say!=null?r.say:toilSay(r.k,Object.assign({host:r.host},r.ctx))}</p><p class="past">${toilLit(r)}</p>${more}`;
   const back=Math.ceil(Math.abs(r.n)*BAL.toil.sorryBack);
   /* cost mode (KIT 28.6 / §53 kitHint): the options' fx are empty (the change happens in go), so each says its own true hint */
@@ -60245,8 +60285,7 @@ function toilFlush(){if(!TOIL_POP.length||!S||S.dead)return;const L=TOIL_POP.spl
     {n:"Cười trừ",fx:{},hideOut:true,hint:"cho qua, không đổi gì",risk:"an toàn",go:()=>{log("Ta cười trừ cho qua.")}},
     {n:"Đáp lại",fx:{suc:BAL.toil.replySuc},p:BAL.toil.replyWin,hideOut:true,hint:lv=>lv?`đáp khéo thì thêm danh tiếng, hên xui, hỏng thì ${nm} càng phật ý${r.v?", nàng ta càng ghen":""}`:"có thể thêm danh tiếng, cũng có thể mất lòng",risk:"có rủi ro",go:()=>{if(toilAns(S,r,"reply"))log("Ta đáp lại khéo léo, người nghe gật gù.");else log("Ta đáp lại, không khí càng gượng.")}}]
    :[{n:r.host==="emp"||r.host==="th"||(r.host&&r.host.queen)?"Tạ ơn":"Cảm tạ",fx:{},hideOut:true,hint:"nhận lời khen, không đổi gì",risk:"an toàn",go:()=>{}}];
-  Q.push({t:TOIL_EV[r.k]||"Dung nhan",who:r.who,h,opts,hideOut:true,toilEv:r.k,art:`https://ctm-img.victoria-tntt.workers.dev/img/ev-toil-${r.k}.webp`/* banner by ab06, 640×480 */})});
- try{render()}catch(e){}}
+  const m={t:TOIL_EV[r.k]||"Dung nhan",who:r.who,h,opts,hideOut:true,toilEv:r.k,art:`https://ctm-img.victoria-tntt.workers.dev/img/ev-toil-${r.k}.webp`/* banner by ab06, 640×480 */};Q.push(m);return m});
 /* hook the three places that apply a reaction */
 (function(){const ap1=aaThieuLeApply;aaThieuLeApply=function(host,f0){const L=leAttire(S,"",host);const s0=S.logSeq||0;const r=ap1.apply(this,arguments);try{const t=L.toil;const f=f0||L.delta;const n=f.aff||0;
   if(t&&n){const k=host==="th"?(n>0?"th-praise":"th-scold"):host==="emp"?(n>0?"emp-like":"emp-dislike"):host&&host.queen?(n>0?"hh-praise":"hh-scold"):null;
@@ -65264,8 +65303,11 @@ if(window.K3_RIGHT)window.K3_RIGHT.push("tsnh");
   el.insertAdjacentHTML("beforeend",`<button class="hc ${D.n>=BAL.tsDanger.hot?"hot":D.n<BAL.tsDanger.calm?"ok":""}" data-hx="tsnh">Nguy hiểm chung: ${D.n}</button>`)}}catch(e){}return r}})();
 document.addEventListener("click",e=>{const b=e.target.closest('[data-hx="tsnh"],[data-k3="tsnh"]');if(!b||!tsBoxOn())return;e.stopPropagation();e.preventDefault();if(Q.length)return;tsDangerPanel()},true);
 function tsDangerOmen(){const s=tsS();const D=tsDangerOf(S,true);const st=TS_DW.filter(x=>D.n>=x[0]).length-1;const was=s.dStep||0;s.dStep=st;if(st<=was||st<2||!D.top.length)return;
- const x=D.top[0];tsPanel({t:"Lời cảnh báo",who:pMaid(),h:`<p>${S.maid.name} khẽ thưa: ${kLine("ts:warn",kTP("ts:warn")||TS_WARN,{sp:{srv:"f"},ls:S,t:kToneSt(S.maid,S.maid&&S.maid.name)}).replace(/\{V\}/g,x.v.name)}</p>${tsRows([["Nguy hiểm chung",`${D.n} · ${tsDWord(D.n)}`,"r"]])}`,
-  opts:[tsOptGuard(),tsOptGifts(D),tsOpt({n:"Ghi nhớ, cứ như thường",duoc:[`Sức +${BAL.cv.rest}`],kem:["kẻ muốn hại vẫn rình"],go:()=>apply({suc:BAL.cv.rest})})].filter(Boolean)})}
+ tsWarnCard(D.top[0].v)}
+/* save-unseen-lists r4 (LAW 11 / 6c): the card is BUILT by a registered generator (j3 rcpReg) from the warned-of rival only — the step mark (s.dStep)
+   is set before it — so it is written into the sổ as {rk,ra} and made again on load (before: a code card a step write left out = lost on reload) */
+const tsWarnCard=rcpReg("tsWarn",xv=>{if(!xv||!S.maid)return null;const D=tsDangerOf(S,true);return tsPanel({t:"Lời cảnh báo",who:pMaid(),h:`<p>${S.maid.name} khẽ thưa: ${kLine("ts:warn",kTP("ts:warn")||TS_WARN,{sp:{srv:"f"},ls:S,t:kToneSt(S.maid,S.maid&&S.maid.name)}).replace(/\{V\}/g,xv.name)}</p>${tsRows([["Nguy hiểm chung",`${D.n} · ${tsDWord(D.n)}`,"r"]])}`,
+  opts:[tsOptGuard(),tsOptGifts(D),tsOpt({n:"Ghi nhớ, cứ như thường",duoc:[`Sức +${BAL.cv.rest}`],kem:["kẻ muốn hại vẫn rình"],go:()=>apply({suc:BAL.cv.rest})})].filter(Boolean)})});
 
 /* =============== Ý 5 · NGƯỠNG XÉT PHẨM HIỆN TRƯỚC (promoReqP j8: cùng điều kiện cho mọi phi tần) =============== */
 function tsPromoRows(){const L=promoReqP(S);return L.map(([ok,t])=>[ok?"Đủ":"Thiếu",t,ok?"g":"r"])}
@@ -65301,20 +65343,23 @@ function tsLeHost(p,to){const me=p===S;if(me){const G=tsGuests(S).filter(x=>x!==
   const lines=warm.slice(0,2).map(([v,w])=>({who:v,text:`${kitName(v)} ${w[1]}.`})).concat(cold.slice(0,2).map(([v,w])=>({who:v,text:`${kitName(v)} ${w[1]}.`})));
   if(pol.length)lines.push(`${pol.length} vị khác chúc theo lễ, lời lẽ chừng mực.`);if(warm.length+cold.length>4)lines.push(`Còn ${warm.length+cold.length-4} vị nữa, xem trong Sổ ghi.`);
   const gifts=G.filter(v=>aff(v,S)>=netTh(v,"than")&&v.inv&&v.inv.length).slice(0,2);const gl=[];for(const v of gifts){const k=pick(["tuithom","demgam","lxson0","huongtram"]);S.inv.push({k,from:v.id});try{if(typeof lxFix==="function")lxFix(S)}catch(e){}gl.push(`${v.name}: ${itm(k).n}`)}
-  const n=G.length,hi=8*n,lo=4*n;const s=tsS();s.leN=(s.leN||0)+1;
-  tsPanel({t:`Lễ tấn phong · ${RANKS[to].n}`,who:pMe(),h:`<p>Thánh chỉ vừa tuyên, ${n} vị phi tần sang cung ngươi dự lễ chúc mừng.</p>${tsFacts(lines)}${gl.length?tsRows([["Quà mừng",gl.join(" · "),"g"]]):""}<p class="past">Theo lệ, chủ lễ phát lì xì cho khách. Phát hậu thì lòng người êm; không phát dễ mang tiếng keo kiệt.</p>`,
-   opts:[tsOpt({n:"Phát lì xì hậu",fx:{bac:-hi},need:[tsNeedBac(hi)],duoc:[`${n} vị khách bớt ghen 6`,"khách: thiện cảm +4",`Danh ${balSg(BAL.eff.jts.danhGo)}`],go:()=>{G.forEach(v=>{v.ghen=cl((v.ghen||0)-6,0,100);tsAff(v,4)});apply({danh:BAL.eff.jts.danhGo});log(`Lễ tấn phong: ngươi phát lì xì hậu cho ${n} vị khách.`)}}),
-    tsOpt({n:"Phát lì xì vừa phải",fx:{bac:-lo},need:[tsNeedBac(lo)],duoc:[`${n} vị khách bớt ghen 3`,"khách: thiện cảm +2"],go:()=>{G.forEach(v=>{v.ghen=cl((v.ghen||0)-3,0,100);tsAff(v,2)});log(`Lễ tấn phong: ngươi phát lì xì cho ${n} vị khách.`)}}),
-    tsOpt({n:"Không phát",mat:[`Danh ${balSg(BAL.eff.jts.danhGo_2)}`,"người đang ghen: ghen +3 (chê keo kiệt)"],go:()=>{apply({danh:BAL.eff.jts.danhGo_2});G.forEach(v=>{if((v.ghen||0)>=40)ghenUp(v,3,"chê ngươi keo kiệt ngày tấn phong",S)});log("Lễ tấn phong: ngươi không phát lì xì; có người xì xào chê keo kiệt.")}})]});
-  return}
+  const s=tsS();s.leN=(s.leN||0)+1;tsLeMeCard(to,G,lines,gl);return}
  /* an NPC host: the same rite, she is a guest */
  if(!tsOn()||S.out||S.confined)return;const s=tsS();if(s.leWk===wk())return;s.leWk=wk();const [k]=tsWish(S,p);
  /* the invitation names the host: she is known from now on (name + face) */
- try{if(typeof k61Meet==="function")k61Meet(p,"Nhân lễ tấn phong, ngươi được thấy người.")}catch(e){}const rich=(p.bac||0)>=40;
- tsPanel({t:`Lễ tấn phong ${p.name}`,who:pv(p),h:`<p>${p.name} vừa được tấn phong ${RANKS[cl(to,0,7)].n}. Cung nàng mở tiệc, mời lục cung sang chúc.</p>${tsRows([[kitRel("them",KIT_REL.affThem),knows(p)?`${tsQuy(aff(p,S))} · ${aff(p,S)}`:KIT_REL.unknown,aff(p,S)>netTh(p,"quen")?"g":aff(p,S)<netTh(p,"ky")?"r":"n"],["Lì xì",rich?"nhà nàng có của, hẳn phát cho khách":"nàng không dư dả, chưa chắc có lì xì","n"]])}`,
+ try{if(typeof k61Meet==="function")k61Meet(p,"Nhân lễ tấn phong, ngươi được thấy người.")}catch(e){}tsLeNpcCard(p,to,k,(p.bac||0)>=40)}
+/* save-unseen-lists r4: the two rite cards are BUILT by registered generators (guests / lines / gifts / host as data, people as ids); every effect
+   (k61Meet, the gifts into her chest, s.leN / s.leWk) happens before, once — a remake on load builds only */
+const tsLeMeCard=rcpReg("tsLeMe",(to,G,lines,gl)=>{const n=G.length,hi=8*n,lo=4*n;
+  return tsPanel({t:`Lễ tấn phong · ${RANKS[to].n}`,who:pMe(),h:`<p>Thánh chỉ vừa tuyên, ${n} vị phi tần sang cung ngươi dự lễ chúc mừng.</p>${tsFacts(lines)}${gl.length?tsRows([["Quà mừng",gl.join(" · "),"g"]]):""}<p class="past">Theo lệ, chủ lễ phát lì xì cho khách. Phát hậu thì lòng người êm; không phát dễ mang tiếng keo kiệt.</p>`,
+   opts:[tsOpt({n:"Phát lì xì hậu",fx:{bac:-hi},need:[tsNeedBac(hi)],duoc:[`${n} vị khách bớt ghen 6`,"khách: thiện cảm +4",`Danh ${balSg(BAL.eff.jts.danhGo)}`],go:()=>{G.forEach(v=>{v.ghen=cl((v.ghen||0)-6,0,100);tsAff(v,4)});apply({danh:BAL.eff.jts.danhGo});log(`Lễ tấn phong: ngươi phát lì xì hậu cho ${n} vị khách.`)}}),
+    tsOpt({n:"Phát lì xì vừa phải",fx:{bac:-lo},need:[tsNeedBac(lo)],duoc:[`${n} vị khách bớt ghen 3`,"khách: thiện cảm +2"],go:()=>{G.forEach(v=>{v.ghen=cl((v.ghen||0)-3,0,100);tsAff(v,2)});log(`Lễ tấn phong: ngươi phát lì xì cho ${n} vị khách.`)}}),
+    tsOpt({n:"Không phát",mat:[`Danh ${balSg(BAL.eff.jts.danhGo_2)}`,"người đang ghen: ghen +3 (chê keo kiệt)"],go:()=>{apply({danh:BAL.eff.jts.danhGo_2});G.forEach(v=>{if((v.ghen||0)>=40)ghenUp(v,3,"chê ngươi keo kiệt ngày tấn phong",S)});log("Lễ tấn phong: ngươi không phát lì xì; có người xì xào chê keo kiệt.")}})]})});
+const tsLeNpcCard=rcpReg("tsLeNpc",(p,to,k,rich)=>{if(!p||p.alive===false)return null;
+ return tsPanel({t:`Lễ tấn phong ${p.name}`,who:pv(p),h:`<p>${p.name} vừa được tấn phong ${RANKS[cl(to,0,7)].n}. Cung nàng mở tiệc, mời lục cung sang chúc.</p>${tsRows([[kitRel("them",KIT_REL.affThem),knows(p)?`${tsQuy(aff(p,S))} · ${aff(p,S)}`:KIT_REL.unknown,aff(p,S)>netTh(p,"quen")?"g":aff(p,S)<netTh(p,"ky")?"r":"n"],["Lì xì",rich?"nhà nàng có của, hẳn phát cho khách":"nàng không dư dả, chưa chắc có lì xì","n"]])}`,
   opts:[tsOpt({n:"Đến chúc mừng",fx:{suc:-5},need:[tsNeedSuc(5)],duoc:["thiện cảm +5",rich?`lì xì Bạc ${balSg(BAL.eff.jts.bacGo)}`:"nàng nhớ ngươi đến"],kem:k==="gượng"?["ngươi đang ghen với nàng, khó giấu nét mặt"]:[],go:()=>{tsAff(p,5);if(rich){apply({bac:BAL.eff.jts.bacGo});p.bac=(p.bac||0)-6}log(`Ngươi sang dự lễ tấn phong của ${p.name}.`)}}),
    tsOpt({n:"Gửi lễ mừng",fx:{bac:-15},need:[tsNeedBac(15)],duoc:["thiện cảm +6"],go:()=>{tsAff(p,6);p.bac=(p.bac||0)+15;log(`Ngươi gửi lễ mừng ${p.name}.`)}}),
-   tsOpt({n:"Không đến",duoc:[`Sức +${BAL.cv.rest}`],kem:[`thiện cảm -${BAL.cv.skipAff}`,`oán ta ${balSg(BAL.eff.jts.go)}`],go:()=>{apply({suc:BAL.cv.rest});tsAff(p,-BAL.cv.skipAff);oanAdd(p,S,BAL.eff.jts.go);log(`Ngươi không sang dự lễ tấn phong của ${p.name}.`)}})]})}
+   tsOpt({n:"Không đến",duoc:[`Sức +${BAL.cv.rest}`],kem:[`thiện cảm -${BAL.cv.skipAff}`,`oán ta ${balSg(BAL.eff.jts.go)}`],go:()=>{apply({suc:BAL.cv.rest});tsAff(p,-BAL.cv.skipAff);oanAdd(p,S,BAL.eff.jts.go);log(`Ngươi không sang dự lễ tấn phong của ${p.name}.`)}})]})});
 /* other NPC guests at an NPC rite follow the same rule silently: lì xì from a rich host lowers their envy a little */
 function tsLeNpc(p){const G=tsGuests(p).filter(x=>x!==S);if((p.bac||0)<4*G.length)return;p.bac-=4*G.length;for(const v of G){if(v.rl)v.rl[p.id]=cl((v.rl[p.id]||0)+2,-100,100)}}
 (function(){const p0=promoteP;promoteP=function(p){const r0=rkOf(p),al=p===S||p.alive;const r=p0.apply(this,arguments);try{if(al&&rkOf(p)>r0&&!quiet&&!(typeof NLP!=="undefined"&&NLP)){if(p===S){if(tsOn()&&!S.out)tsLeHost(S,S.rank)}else{tsLeNpc(p);tsLeHost(p,rkOf(p))}}}catch(e){console.error("tsLe",e)}return r}})();
@@ -65363,11 +65408,14 @@ function tsSummonMe(k){const E=S.emp;/* a private summons: she is face to face w
    if(res.guard!=null){if(res.guard){apply({sung:BAL.eff.jts.sungOnDone,danh:BAL.eff.jts.danhOnDone});S.an=cl((S.an||0)+BAL.eff.jts.anOnDone,0,100);L.push(`Lau sậy động, ngươi kêu hộ giá kịp lúc; cấm quân bắt được kẻ lạ. Ngài nhớ ơn ngươi (${sgStat(BAL.eff.jts.sungOnDone)}, Danh ${balSg(BAL.eff.jts.danhOnDone)}, Ân tình ${balSg(BAL.eff.jts.anOnDone)}).`)}else{apply({suc:-8});L.push("Lau sậy động, cấm quân xông tới trước; kẻ lạ bị bắt. Ngươi kinh hãi.")}}
    log(L.join(" "));tsRes(`Hoàng thượng triệu ${nm}`,b,res.raw>=5||res.guard===1);render()}})};
  const g7=tsSummonGain(8),g3=tsSummonGain(3);
- tsPanel({t:`Hoàng thượng triệu ${nm}`,who:pEmp(),art:k==="duho"?"https://ctm-img.victoria-tntt.workers.dev/img/ev-le-ha.webp":k==="co"?"https://ctm-img.victoria-tntt.workers.dev/img/ev-hoang-de-vui-2.webp":"https://ctm-img.victoria-tntt.workers.dev/img/ev-tai-nghe.webp",
+ return tsPanel({t:`Hoàng thượng triệu ${nm}`,who:pEmp(),art:k==="duho"?"https://ctm-img.victoria-tntt.workers.dev/img/ev-le-ha.webp":k==="co"?"https://ctm-img.victoria-tntt.workers.dev/img/ev-hoang-de-vui-2.webp":"https://ctm-img.victoria-tntt.workers.dev/img/ev-tai-nghe.webp",
   h:`<p>Thái giám Càn Thanh cung đến truyền: “Hoàng thượng rảnh việc triều chính, cho mời ${tsGoi()} sang ${nm}.”${likes}</p>`,
   opts:[tsOpt({n:`Vâng chỉ, sang ${nm}`,fx:{suc:-BAL.rcv.sumSuc},need:[tsNeedSuc(BAL.rcv.sumSuc)],odds,duoc:[sgRange(g3.sung,g7.sung),`Ân tình +${g3.an} đến +${g7.an}`]/* r2 sg-card: both ends as applied (onDone apply → sg); «..» is code wording → «đến» (VANPHONG) */,mat:[`ngài lơ đãng: chỉ ${sgStat(tsSummonGain(0).sung)}`],kem:kem,note:"thành bại theo trò nhỏ hoặc theo cơ may khi bỏ qua",later:1,go}),
    reb?tsOpt({n:"Xin ngài đổi sang ngắm hoa trong vườn",fx:{suc:-3},duoc:[`Sủng ${balSg(BAL.eff.jts.sungGo)}`],note:"tránh hồ khi có tin loạn đảng",go:()=>{apply({sung:BAL.eff.jts.sungGo});log("Ngươi khéo xin Hoàng thượng đổi sang ngắm hoa trong ngự hoa viên.")}}):null,
    tsOpt({n:"Cáo bệnh",fx:{sung:BAL.eff.jts.sungGo_2}/* a sure loss = Tốn (applied with the option) */,duoc:[`Sức +${BAL.cv.decl.suc}`],go:()=>{apply({suc:BAL.cv.decl.suc});log(`Ngươi cáo bệnh, không sang ${nm}, ở lại nghỉ cho lại sức.`)}})].filter(Boolean)})}
+/* save-unseen-lists r4: «Hoàng thượng triệu» (a weekly summons, made at the step) is a registered generator (k = dan / co / duho); its only effect
+   before the card (k61Meet with the Emperor) runs once — on a remake he is already named */
+tsSummonMe=rcpReg("tsSummon",tsSummonMe);
 
 /* =============== Ý 14 · THẢ ĐÈN HOA ĐĂNG (Nguyên tiêu, Thất tịch, Trung thu): điều cầu gắn với nguyên nhân thật =============== */
 const TS_DEN=["nguyentieu","thattich","trungthu"];
@@ -65433,9 +65481,13 @@ function tsNpcDress(p,th){const P={};const inv=(p.inv||[]).map(e=>e.k);const sma
  for(const [sl,,fit] of TS_SLOT){const c=inv.filter(fit);if(c.length)P[sl]=pick(c)}return P}
 function tsDressAnnounce(){tsTagsFresh();const s=tsS();const th=pick(Object.keys(TS_THEME));s.dress={th,m:S.month%12+1,y:S.month===12?S.year+1:S.year};const T=TS_THEME[th];const H=tsDressHost();
  /* the Hoàng hậu announces it at the morning greeting: she sees her face (no named grey figure) */try{if(H&&typeof k61Meet==="function")k61Meet(H,"Buổi thỉnh an, ngươi được thấy người.")}catch(e){}
+ tsDressAnnCard(th,s.dress.m)}
+/* save-unseen-lists r4: the announcement card is BUILT by a registered generator from the đề (th) and its month; the draw of the đề (s.dress) and
+   the meeting happen before, once */
+const tsDressAnnCard=rcpReg("tsDressAnn",(th,dm)=>{const T=TS_THEME[th];if(!T)return null;const H=tsDressHost();
  const have=TS_SLOT.filter(([sl,,fit])=>S.inv.some(e=>fit(e.k)&&T.tags.includes(e.k))).length;
- tsPanel({t:"Hội phối đồ: báo đề",who:H?pv(H):pTH(),art:"https://ctm-img.victoria-tntt.workers.dev/img/ev-yen-tiec.webp",h:`<p>${H?`Hoàng hậu ${H.name}`:"Thái hậu"} truyền: trung tuần tháng sau mở hội phối đồ trong ngự hoa viên. Đề năm nay: <b>${T.n}</b> (${T.d}).</p>${tsRows([["Bốn chỗ","Cài tóc · Đeo tay · Áo · Hương, phấn","n"],["Ngươi có",`${have}/4 chỗ có đồ hợp đề`,have>=2?"g":"r"]])}${kitNumBox(tsRows([["Xa xỉ",`đề ${T.n} chuộng cả bộ khoảng ${T.r?T.r[0]:40} đến ${T.r?T.r[1]:120}: thấp quá là quá giản dị, cao quá là phô trương`,"n"],["Lưu ý","quá phẩm vị của mình thì bị trừ nặng, dù hợp đề","n"],tsMkRow(th,s.dress.m)]))}`,
-  opts:tsBorrowOpts(th).concat(tsMkScoutOpts(th,s.dress.m),[tsOpt({n:"Đã hiểu, sẽ chuẩn bị",duoc:["mua thêm đồ ở Nội vụ phủ hay mượn của người thân trước hội"]})])})}
+ return tsPanel({t:"Hội phối đồ: báo đề",who:H?pv(H):pTH(),art:"https://ctm-img.victoria-tntt.workers.dev/img/ev-yen-tiec.webp",h:`<p>${H?`Hoàng hậu ${H.name}`:"Thái hậu"} truyền: trung tuần tháng sau mở hội phối đồ trong ngự hoa viên. Đề năm nay: <b>${T.n}</b> (${T.d}).</p>${tsRows([["Bốn chỗ","Cài tóc · Đeo tay · Áo · Hương, phấn","n"],["Ngươi có",`${have}/4 chỗ có đồ hợp đề`,have>=2?"g":"r"]])}${kitNumBox(tsRows([["Xa xỉ",`đề ${T.n} chuộng cả bộ khoảng ${T.r?T.r[0]:40} đến ${T.r?T.r[1]:120}: thấp quá là quá giản dị, cao quá là phô trương`,"n"],["Lưu ý","quá phẩm vị của mình thì bị trừ nặng, dù hợp đề","n"],tsMkRow(th,dm)]))}`,
+  opts:tsBorrowOpts(th).concat(tsMkScoutOpts(th,dm),[tsOpt({n:"Đã hiểu, sẽ chuẩn bị",duoc:["mua thêm đồ ở Nội vụ phủ hay mượn của người thân trước hội"]})])})});
 /* r4b (F1, law 6c + 14): the Hội phối đồ «Mượn» is a loan of THE ONE LOAN RULE (jdc dcBorrow / loan book / co-op dcout-dcin), its tuần = the
    contest's; before it had its own mark (e.tsB) and return, no book, and on the co-op guest it spliced her copy of the NPC (the host never knew).
    Only a piece its holder may lend (dcFree: not on loan, not a lost case's, not hidden); not from the other co-op player; not where a loan cannot
@@ -65448,21 +65500,26 @@ function tsBorrowOpts(th){const T=TS_THEME[th];const s=tsS();if(s.borrow)return[
 /* the contest is over: what she borrowed for it goes home now through the one loan return (dcGiveBack: the lender's book, the co-op «dcin», the ledger when the lender is gone) */
 function tsDressReturn(){const s=tsS();s.borrow=0;try{if(typeof dcMigTs==="function")dcMigTs()}catch(e){}if(typeof dcGiveBack!=="function")return;
  for(const e of S.inv.slice()){if(!e||!e.bor||e.bor.why!=="ts")continue;const o=dcGiveBack(S,e,"inv");log(o&&o!==S?`Ngươi trả ${itm(e.k).n} cho ${o.name}.`:`${itm(e.k).n} không còn chủ để trả, đã nộp về Nội vụ phủ.`)}}
-function tsDressHold(){tsTagsFresh();const s=tsS();const D=s.dress;if(!D||D.m!==S.month||D.y!==S.year)return;s.dress=null;const th=D.th,T=TS_THEME[th];
+function tsDressHold(){tsTagsFresh();const s=tsS();const D=s.dress;if(!D||D.m!==S.month||D.y!==S.year)return;s.dress=null;
+ if(!tsOn()||S.out||S.confined||S.rank>=7){tsDressFinish(D.th,D.m,D.y,null);return}tsDressCard(D.th,D.m,D.y)}
+/* save-unseen-lists r4 (LAW 11 / 6c, rv FIX 4): the contest card is BUILT by a registered generator from the đề (th, month, year) — before, a reload
+   while it waited lost the contest for good, and with it the return of what she had borrowed for it (dcBorrow loans: tsDressReturn runs in
+   finish). The rivals' outfits are drawn when the contest is judged (finish), not when the card is made, so a remake draws nothing. */
+function tsDressFinish(th,dm,dy,mine){const T=TS_THEME[th];
  /* makeup-theme (OD:L1514): every entrant's face is scored against the đề's hidden makeup want (jmkt tsMkPts; rivals by their own scouting) */
- const W=tsMkWant(th,D.m),cid=D.y+"-"+D.m;
+ const W=tsMkWant(th,dm),cid=dy+"-"+dm;
  const C=liveRivals(true).filter(v=>!v.confined&&!v.out);const R=C.map(v=>{const P=tsNpcDress(v,th);const mr=tsMkNpc(v,W,cid);const d=tsDressPts(v,P,th,mr);const mk=tsMkPts(mr,W);return{p:v,raw:d.raw,vp:d.vp,lux:d.lux,st:d.st,mk,score:tsDressTotal(v,d.raw)+mk.add}});
- const finish=(mine)=>{const all=R.concat(mine?[mine]:[]).sort((a,b)=>b.score-a.score);all.forEach((x,i)=>x.place=i+1);const b=tsPre();const L=[];
+ const all=R.concat(mine?[mine]:[]).sort((a,b)=>b.score-a.score);all.forEach((x,i)=>x.place=i+1);const b=tsPre();const L=[];
   for(const x of all){if(x.vp.length)ap(x.p,{danh:BAL.eff.jts.dressVp});if(x.st==="photruong")ap(x.p,{duc:(BAL.lux&&BAL.lux.ctDuc)||-1});if(x.place===1){ap(x.p,{sung:BAL.eff.jts.dressSung,danh:BAL.eff.jts.dressDanh});bestow(x.p,"contest")}else if(x.place<=3)ap(x.p,{danh:BAL.eff.jts.dressTop3})}
   if(mine){const x=mine;L.push(`Hội phối đồ (${T.n}): ngươi đứng thứ ${x.place}/${all.length}.`);if(x.lux!=null)L.push(`Bộ đồ Xa xỉ ${x.lux}${x.mkLux?` (son phấn ${x.mkLux})`:""}: ${x.st==="hop"?`hợp đề ${T.n}`:x.st==="giandi"?"quá giản dị so với đề":x.st==="photruong"?`phô trương, người ta chê xa xỉ. Đức ${(BAL.lux&&BAL.lux.ctDuc)||-1}`:"quá phẩm vị của ngươi"}.`);
    if(x.vp.length)L.push(`${tsDressHost()?"Hoàng hậu":"Thái hậu"} nhắc: ${x.vp.join(", ")} vượt phẩm vị. Danh ${balSg(BAL.eff.jts.dressVp)}.`);L.push(tsMkLine(x,W,th))}
   else L.push(`Hội phối đồ (${T.n}): ${all[0].p.name} đứng đầu.`);log(L.join(" "));tsDressReturn();
   const show=()=>{tsRes(`Hội phối đồ · ${T.n}`,b,mine?mine.place<=3:null);render()};
-  if(mine&&typeof kitPodiumShow==="function"&&!tsBot()&&all.length>=2)kitPodiumShow(all.slice(0,Math.max(3,all.length)).map(x=>({who:x.p,score:x.score,place:x.place})),{title:`Hội phối đồ · ${T.n}`,sub:T.d,onNext:show});else show()};
- if(!tsOn()||S.out||S.confined||S.rank>=7){finish(null);return}
- tsPanel({t:`Hội phối đồ · ${T.n}`,art:S.month>=7?"https://ctm-img.victoria-tntt.workers.dev/img/ev-le-thu-3.webp":"https://ctm-img.victoria-tntt.workers.dev/img/ev-dieu-lanh.webp",who:tsDressHost()?pv(tsDressHost()):pTH(),h:`<p>Ngự hoa viên bày bình phong gấm. Lục cung lần lượt ra mắt theo đề <b>${T.n}</b> (${T.d}).</p>`,opts:[
-  tsOpt({n:"Tự tay phối đồ",fx:{suc:-5},need:[tsNeedSuc(5)],duoc:[`đứng đầu: ${sgStat(BAL.eff.jts.dressSung)}, Danh +${BAL.eff.jts.dressDanh}, một món ban thưởng`,`vào ba người đầu: Danh ${balSg(BAL.eff.jts.dressTop3)}`],mat:[`đồ vượt phẩm vị: Danh ${balSg(BAL.eff.jts.dressVp)}`,`bộ đồ quá đề (phô trương): Đức ${(BAL.lux&&BAL.lux.ctDuc)||-1}`],note:`tự phối đồ hoặc để cung nữ chọn giúp, rồi ngồi trước gương điểm trang; đề chuộng Xa xỉ ${T.r?T.r[0]:40} đến ${T.r?T.r[1]:120}`,later:1,go:()=>tsDressGame(th,(P,sk)=>tsMkSit(th,D.m,()=>{const d=tsDressPts(S,P,th,toilToday(S));const mk=tsMkPts(toilToday(S),W);finish({p:S,raw:d.raw,vp:d.vp,lux:d.lux,mkLux:d.mkLux,st:d.st,mk,score:tsDressTotal(S,d.raw)+mk.add})}))}),
-  tsOpt({n:"Cáo bệnh, không dự",fx:{danh:BAL.eff.jts.danhGo_3},duoc:[`Sức +${BAL.cv.rest}`],go:()=>{apply({suc:BAL.cv.rest});finish(null)}})]})}
+  if(mine&&typeof kitPodiumShow==="function"&&!tsBot()&&all.length>=2)kitPodiumShow(all.slice(0,Math.max(3,all.length)).map(x=>({who:x.p,score:x.score,place:x.place})),{title:`Hội phối đồ · ${T.n}`,sub:T.d,onNext:show});else show()}
+const tsDressCard=rcpReg("tsDress",(th,dm,dy)=>{const T=TS_THEME[th];if(!T)return null;const W=tsMkWant(th,dm);const finish=mine=>tsDressFinish(th,dm,dy,mine);
+ return tsPanel({t:`Hội phối đồ · ${T.n}`,art:S.month>=7?"https://ctm-img.victoria-tntt.workers.dev/img/ev-le-thu-3.webp":"https://ctm-img.victoria-tntt.workers.dev/img/ev-dieu-lanh.webp",who:tsDressHost()?pv(tsDressHost()):pTH(),h:`<p>Ngự hoa viên bày bình phong gấm. Lục cung lần lượt ra mắt theo đề <b>${T.n}</b> (${T.d}).</p>`,opts:[
+  tsOpt({n:"Tự tay phối đồ",fx:{suc:-5},need:[tsNeedSuc(5)],duoc:[`đứng đầu: ${sgStat(BAL.eff.jts.dressSung)}, Danh +${BAL.eff.jts.dressDanh}, một món ban thưởng`,`vào ba người đầu: Danh ${balSg(BAL.eff.jts.dressTop3)}`],mat:[`đồ vượt phẩm vị: Danh ${balSg(BAL.eff.jts.dressVp)}`,`bộ đồ quá đề (phô trương): Đức ${(BAL.lux&&BAL.lux.ctDuc)||-1}`],note:`tự phối đồ hoặc để cung nữ chọn giúp, rồi ngồi trước gương điểm trang; đề chuộng Xa xỉ ${T.r?T.r[0]:40} đến ${T.r?T.r[1]:120}`,later:1,go:()=>tsDressGame(th,(P,sk)=>tsMkSit(th,dm,()=>{const d=tsDressPts(S,P,th,toilToday(S));const mk=tsMkPts(toilToday(S),W);finish({p:S,raw:d.raw,vp:d.vp,lux:d.lux,mkLux:d.mkLux,st:d.st,mk,score:tsDressTotal(S,d.raw)+mk.add})}))}),
+  tsOpt({n:"Cáo bệnh, không dự",fx:{danh:BAL.eff.jts.danhGo_3},duoc:[`Sức +${BAL.cv.rest}`],go:()=>{apply({suc:BAL.cv.rest});finish(null)}})]})});
 /* the dressing board: tap item tiles into four slots, then present; skip = her maid picks (by her loyalty) */
 function tsDressGame(th,done){tsTagsFresh();const T=TS_THEME[th];const P={};const inv=S.inv.map((e,i)=>({e,i})).filter(({e})=>TS_SLOT.some(([,,fit])=>fit(e.k)));
  const maidPick=()=>{const good=roll(S.maid?S.maid.loyal:50);const keys=inv.map(x=>x.e.k);if(good)return tsDressBest(S,keys,th);const Q2={};for(const [sl,,fit] of TS_SLOT){const c=keys.filter(fit);if(c.length)Q2[sl]=pick(c)}return Q2};
@@ -65794,19 +65851,25 @@ function slapNpcTier(a){if(typeof mg2On==="function"&&mg2On())return slapNpcDraw
 window.slapNpcTier=slapNpcTier;
 (function(){const r0=runAct;runAct=function(a,t,k,extra){
  if(k!=="tat"||t!==S||!a||a===S||SLAPG.npcDone)return r0.apply(this,arguments);
- const sev=slapNpcTier(a),self=this,B=BAL.slap;
+ const sev=slapNpcTier(a),B=BAL.slap;
  const bot=typeof window.__bot!=="undefined"||typeof kg82Open!=="function"||typeof pushModal!=="function"||typeof tsRows!=="function";
+ if(bot)return slapFin(r0,a,t,k,extra,sev,this);slapCard(a,k,extra,sev);return""};
+/* save-unseen-lists r4 (LAW 11 / 6c): «Bị tát» (an NPC's act on her, also at the first khắc of a buổi) is BUILT by a registered generator from the
+   slapper (id), the act and its drawn tier: nothing is applied until she answers — written into the sổ and made again on load */
+function slapFin(r0,a,t,k,extra,sev,self){const B=BAL.slap;let r="";SLAPG.npcDone=1;try{if(sev<=0){if(typeof ducAdd==="function")ducAdd(a,B.duc[1],"tát hụt");r=`<span class="g">${NMc(a)} giơ tay tát ngươi nhưng ngươi né kịp, cái tát hụt.</span> `;relAdd(S,a,B.missRel)}
+   else{SLAP.next=sev;try{r=r0.call(self,a,t,k,extra)}finally{SLAP.next=0}}}finally{SLAPG.npcDone=0}return r}
+const slapCard=rcpReg("slapNpc",(a,k,extra,sev)=>{if(!a||a.alive===false)return null;const r0=SLAP_R0,t=S,self=null,B=BAL.slap;
  const fin=(s)=>{let r="";SLAPG.npcDone=1;try{if(s<=0){if(typeof ducAdd==="function")ducAdd(a,B.duc[1],"tát hụt");r=`<span class="g">${NMc(a)} giơ tay tát ngươi nhưng ngươi né kịp, cái tát hụt.</span> `;relAdd(S,a,B.missRel)}
    else{SLAP.next=s;try{r=r0.call(self,a,t,k,extra)}finally{SLAP.next=0}}}finally{SLAPG.npcDone=0}return r};
- if(bot)return fin(sev);
  const who=typeof pv==="function"?pv(a):undefined;const show=r=>{if(r){log(r);pushModal({t:"Bị tát",who,h:`<p>${r}</p>`});showModal();render()}};
  const nm=a.name||"Nàng";
- pushModal({t:"Bị tát",who:typeof pv==="function"?pv(a):undefined,h:`<p>${nm} bước tới, giơ cao bàn tay. Ngươi có kịp né không?</p>`,opts:[
+ return pushModal({t:"Bị tát",who:typeof pv==="function"?pv(a):undefined,h:`<p>${nm} bước tới, giơ cao bàn tay. Ngươi có kịp né không?</p>`,opts:[
   Object.assign(tsOpt({n:"Né đòn",odds:B.dodgeOdds[slapMg(true,a).tier],later:1,duoc:["cái tát nhẹ đi một bậc","tát nhẹ thì hụt hẳn"],mat:["chịu trọn cái tát"],kem:[`một ván ngắn chừng ${slapSec(B.dodge.ms)}`],go:()=>{
     slapGame({dodge:true,by:a,title:"Né đòn",go:"Né",skip:"Chịu đòn",skipSub:"không né",rows:[["Né kịp","cái tát nhẹ đi một bậc; tát nhẹ thì hụt hẳn","g"],["Không né","nhận trọn cái tát","r"]],
      onDone:res=>show(fin(res.skipped||res.raw<B.raw[3]?sev:sev-1))})}}),{}),
-  tsOpt({n:"Chịu đòn",odds:null,kem:["không né, nhận trọn cái tát"],go:()=>{const r=fin(sev);if(r){log(r);pushModal({t:"Bị tát",who,h:`<p>${r}</p>`})}}})]});
- return""}})();
+  tsOpt({n:"Chịu đòn",odds:null,kem:["không né, nhận trọn cái tát"],go:()=>{const r=fin(sev);if(r){log(r);pushModal({t:"Bị tát",who,h:`<p>${r}</p>`})}}})]})});
+ window.SLAP_R0=r0})();
+var SLAP_R0;
 /* ---------- co-op: the tier of a slap on the friend rides on the existing "res" message ---------- */
 (function(){try{if(typeof COOP==="undefined"||!COOP.send||!COOP.on)return;const s0=COOP.send;
  COOP.send=function(m){try{if(m&&m.t==="res"&&m.k==="tat"&&window.__slapLast)m.slap=window.__slapLast}catch(e){}return s0.apply(this,arguments)};
@@ -74751,9 +74814,15 @@ function j95caught(s){const v=RV(+s.a.slice(1));if(!v||!v.alive)return;const m=s
  if(out==="rev"){z.wit[v.id]={w:wk(),k:s.kind};const g=motiveOK(v,S,"harm");
   if(g.ok&&(v.malice||0)>=55){oanAdd(v,S,BAL.eff.j95.j95caught);affAdd(v,S,BAL.eff.j95.j95caught_2);noteAdd(v.id,"biết ngươi đã thấy chuyện kín của nàng; phải đề phòng nàng diệt khẩu")}
   else{v.j95bribe=wk()}}
- Q.push({t:out==="rev"?"Bắt gặp, và bị thấy":"Bắt gặp",who:pv(v),h:`<p>Ở ${W}, ngươi thấy rõ ${v.name} ${what}.</p>${out==="rev"?`<p class="r">Nàng ngẩng lên, bắt gặp ánh mắt ngươi. Nàng biết ngươi đã thấy.</p>`:""}`,opts:j95catchOpts(v,m,s,out)});
- if(out==="rev"&&v.j95bribe===wk()){const g=Math.min(60,Math.max(10,Math.floor((v.bac||0)/3)));Q.push({t:"Lời nhờ cậy",who:pv(v),h:`<p>Tối ấy cung nữ của ${v.name} lén mang sang một hộp gấm, trong có ${g} lượng bạc: “Chủ tử nhà nô tỳ xin ${kSay({srv:"f"},S,"{goi}")} coi như chưa thấy gì.”</p>`,
-  opts:[{n:"Nhận lễ, giữ im lặng",fx:{},x:`thành: Bạc +${g} · nàng quý ngươi ${balSg(BAL.eff.j95.j95bribeTake)} · nàng nợ ngươi một ân tình · kèm: nhận lễ là đã hứa giữ kín`,go:()=>j95bribeTake(v,g)},{n:"Trả lại hộp gấm",fx:{},x:`thành: không mắc nợ nàng · kèm: nàng oán ngươi ${balSg(BAL.eff.j95.go)}`,go:()=>{oanAdd(v,S,BAL.eff.j95.go);log(`Ngươi trả lại lễ của ${v.name}.`)}}]})}}
+ j95CaughtCard(v,s,out,what);
+ if(out==="rev"&&v.j95bribe===wk())j95BribeCard(v,Math.min(60,Math.max(10,Math.floor((v.bac||0)/3))))}
+/* save-unseen-lists r4 (LAW 11 / 6c): «Bắt gặp» and «Lời nhờ cậy» (made where she stands, also at the first khắc of a new buổi) are BUILT by
+   registered generators from the consort (id), the secret record (plain data; the man found again by id), the roll's outcome and the bribe; every
+   effect (notes, evidence, grudge, the bribe mark) happens before, once — written into the sổ and made again on load */
+const j95CaughtCard=rcpReg("j95Caught",(v,s,out,what)=>{if(!v||!s)return null;const m=s.kind==="tryst"?manById(s.b):null;const W=s.spot;
+ const c={t:out==="rev"?"Bắt gặp, và bị thấy":"Bắt gặp",who:pv(v),h:`<p>Ở ${W}, ngươi thấy rõ ${v.name} ${what}.</p>${out==="rev"?`<p class="r">Nàng ngẩng lên, bắt gặp ánh mắt ngươi. Nàng biết ngươi đã thấy.</p>`:""}`,opts:j95catchOpts(v,m,s,out)};Q.push(c);return c});
+const j95BribeCard=rcpReg("j95Bribe",(v,g)=>{if(!v)return null;const c={t:"Lời nhờ cậy",who:pv(v),h:`<p>Tối ấy cung nữ của ${v.name} lén mang sang một hộp gấm, trong có ${g} lượng bạc: “Chủ tử nhà nô tỳ xin ${kSay({srv:"f"},S,"{goi}")} coi như chưa thấy gì.”</p>`,
+  opts:[{n:"Nhận lễ, giữ im lặng",fx:{},x:`thành: Bạc +${g} · nàng quý ngươi ${balSg(BAL.eff.j95.j95bribeTake)} · nàng nợ ngươi một ân tình · kèm: nhận lễ là đã hứa giữ kín`,go:()=>j95bribeTake(v,g)},{n:"Trả lại hộp gấm",fx:{},x:`thành: không mắc nợ nàng · kèm: nàng oán ngươi ${balSg(BAL.eff.j95.go)}`,go:()=>{oanAdd(v,S,BAL.eff.j95.go);log(`Ngươi trả lại lễ của ${v.name}.`)}}]};Q.push(c);return c});
 function j95bribeTake(v,g){const n=Math.min(g,Math.floor(v.bac||0));v.bac=Math.max(0,(v.bac||0)-n);apply({bac:n});relAdd(v,S,BAL.eff.j95.j95bribeTake);j95z().owe[v.id]=(j95z().owe[v.id]||0)+1;log(`Nhận ${n} lượng bạc của ${v.name}, hứa giữ kín.`)}
 /* port 16/11 (owner 11/15 07:15Z): every option shows its whole Tốn / Được / Mất and the odds word, split by " · " for the kit rows (jmen format) */
 function j95accO(v,to){const pr=evG(S,v);const q=queenP();return to==="emp"?oddsCl(Math.min(20+pr*15+(S.sung||0)/5,90)):S.rank>=7?oddsCl(40+pr*15):oddsCl(Math.min(25+pr*15+(q?aff(q,S)/4:0),90))}
@@ -75421,8 +75490,12 @@ window.__j95c=()=>({stat:J95C.stat,errs:J95C.errs,j95fix:J95.stat.fix||0});
    Old saves load as before (entries without $full use the old path). Off switch for measuring: window.__jqoff=1.
    ===================================================================================================================== */
 const JQ={held:0,stat:{full:0,held:0,flushed:0}};
+/* save-unseen-lists r4 (LAW 11, ONE rule for the whole family): an option whose go does NOTHING (`go:()=>{}`, the «Tiếp tục» of a card whose
+   effects were applied before it was shown: Bị châm chọc, Thái hậu quở trách, Lỡ lời, Điềm báo …) is not code — the card is plain data, written
+   whole and shown again on load (JSON leaves the empty go out; chooseM runs an option without go as fx only, the same as before) */
+const jqNoop=f=>/^(?:\(\s*\)|[\w$]+)\s*=>\s*\{\s*\}$|^function\s*[\w$]*\s*\(\s*\)\s*\{\s*\}$/.test(String(f).trim());
 function jqData(m){/* the card as plain data, or null when an option (or the card) carries code */try{if(!m||m.pid||!m.opts)return null;
-  for(const o of m.opts)for(const k in o)if(typeof o[k]==="function")return null;for(const k in m)if(k!=="who"&&typeof m[k]==="function")return null;
+  for(const o of m.opts)for(const k in o)if(typeof o[k]==="function"&&!(k==="go"&&jqNoop(o[k])))return null;for(const k in m)if(k!=="who"&&typeof m[k]==="function")return null;
   const c=JSON.parse(JSON.stringify(m,(k,v)=>k==="who"||k==="__b95"||k==="__c95"||k==="__aud95"?undefined:v));c.w=m.who&&m.who.w;c.$full=1;return c}catch(e){return null}}
 /* save-unseen-lists r2 (rv r2 FIX 1): a generator card (rk + ra, j3 rcpReg) is written as {rk,ra} and made again on load: saveable, never held / left out */
 function jqSaveable(m){return !m||!!m.pid||!!m.rk||!m.opts||!!jqData(m)}
@@ -78142,10 +78215,13 @@ function spAsk(o,s){if(!o||!s)return"";if(s===S)S.srv.lvCd=S.turn+BAL.ag.stf2.le
  const W=BAL.ag.stf2.lvW,O=spLeaveOpts(o,s).filter(x=>!x.lock);const mw=t=>{try{return typeof agMW==="function"?agMW(o,t):1}catch(e){return 1}};
  const c=mindPick(O.map(x=>[x,(W[x.id]||0)*mw(x.tag)]),o)||O[O.length-1];try{const N=window.__stf2N=window.__stf2N||{};N["leave_"+c.id]=(N["leave_"+c.id]||0)+1}catch(e){}return c.go()||""}
 function spLeaveCard(s){const B=BAL.sp;const O=spLeaveOpts(S,s);const [K,D,L]=O;const v=K.v,keep=K.keep;
- tsPanel({t:"Kẻ hầu xin đi",who:pServ(s),h:`<p>${s.name} thưa rằng ${v?`bên ${tsNm(v)} muốn có ${s.role==="maid"?"nàng":"hắn"} sang hầu`:"muốn xin về Nội vụ phủ"}, xin ${tsGoi()} cho đi.</p>`,
+ return tsPanel({t:"Kẻ hầu xin đi",who:pServ(s),h:`<p>${s.name} thưa rằng ${v?`bên ${tsNm(v)} muốn có ${s.role==="maid"?"nàng":"hắn"} sang hầu`:"muốn xin về Nội vụ phủ"}, xin ${tsGoi()} cho đi.</p>`,
   opts:[tsOpt({n:K.n,fx:{},need:[tsNeedBac(keep)],duoc:[`thiện cảm +${B.keepGain}`,"giữ người, giữ chức"],mat:[`mất ${keep} bạc`],kem:[`kiêu thêm ${B.keepMo} tháng`],go:()=>{const r=K.go();if(r)log(r)}}),
    tsOpt({n:D.n,duoc:["hết kiêu",`kẻ hầu khác thiện cảm +${B.demoteOthers}`],mat:[`${s.name} xuống ${SRK[s.role][srk(s)-1]}`,`thiện cảm -${B.demoteLoy}`],kem:[`thiện cảm dưới ${BAL.loy.out} thì có khi bán mình cho cung khác`],go:()=>{const r=D.go();if(r)log(r)}}),
    tsOpt({n:L.n,duoc:[`kẻ hầu khác thiện cảm +${B.letOthers}`,"bớt một miệng ăn"],mat:[`mất ${s.name}`],kem:v?[`${s.name} mang chuyện cung ngươi sang bên ${tsNm(v)} (người ấy nắm thêm ${balAb(BAL.ag.ev.one)} chứng cứ)`]:[],go:()=>{const r=L.go();if(r)log(r)}})]})}
+/* save-unseen-lists r4 (LAW 11 / 6c): «Kẻ hầu xin đi» (made at the month step) is a registered generator (the servant as id): it only builds the card
+   from the live household (spLeaveOpts is deterministic; the leave cooldown is set before, in spAsk) — written into the sổ and made again on load */
+spLeaveCard=rcpReg("spLeave",spLeaveCard);
 /* monthly: pride runs its course for every household (hers and the NPCs'), after the merit promotions */
 function spMonth(){let ev="";const B=BAL.sp;for(const o of consorts()){if(!o||o.dead||(o!==S&&!o.alive))continue;for(const s of (o.staff||[]).slice()){if(!s.proud||s.coop)continue;
  if(s.proud<=S.turn){s.proud=0;if(o===S)ev+=`${s.name} đã bớt kiêu. `;continue}
@@ -81383,10 +81459,13 @@ function eaOwner(s){if(s===S.maid||(S.staff||[]).includes(s))return S;for(const 
 /* at most ONE event a tuần from other people's outbursts (BAL.ea.npc.meWk); the rest go to the log */
 function eaMeSlot(){const A=eaS(),w=W();if(A.hitW===w&&(A.hitN||0)>=E().npc.meWk)return false;if(A.hitW!==w){A.hitW=w;A.hitN=0}A.hitN++;return true}
 function eaHitMine(p,m){try{if(!m)return;const lower=rkOf(p)<S.rank&&!S.out;loyAdd(m,-E().hoi.hitLoy);EA_N.hoiMe++;
-  if(lower&&eaMeSlot()){Q.push({ev:1,t:"Cung nữ bị ức hiếp",emoSeal:{k:"gian",who:emoKey(p)},who:eaWho(p),art:"https://ctm-img.victoria-tntt.workers.dev/img/act-phat-vo-co-h.webp",h:`<p>${m.name} chạy về, mắt đỏ hoe: ${nm(p)} gặp nàng ở hành lang, trút giận mắng nàng một trận chẳng vì lỗi gì.</p><p>${Nm(p)} phẩm vị thấp hơn ngươi.</p>`,
-   opts:[{n:`Sang hỏi tội ${nm(p)}`,risk:"an toàn",hint:"giữ thể diện cho cung mình",x:`thành: Danh +${E().hoi.go.danh}, thiện cảm ${m.name} +${E().hoi.go.loy} · kèm: ${nm(p)} oán ngươi +${E().hoi.go.oan}`,fx:{danh:E().hoi.go.danh},go:()=>{loyAdd(m,E().hoi.go.loy);oanAdd(p,S,E().hoi.go.oan);log(`Ngươi sang hỏi tội ${nm(p)}; nàng đành cúi đầu nhận lỗi.`)}},
-    {n:"Bỏ qua",risk:"an toàn",hint:"giữ hòa khí",x:`thành: Đức +${E().hoi.let.duc} · kèm: thiện cảm ${m.name} −${E().hoi.let.loy}`,fx:{duc:E().hoi.let.duc},go:()=>{loyAdd(m,-E().hoi.let.loy);log(`Ngươi bảo ${m.name} nhịn đi cho êm chuyện.`)}}]})}
+  if(lower&&eaMeSlot())eaHitMineCard(p,m);
   else{log(`${Nm(p)} mắng cung nữ ${m.name} của ngươi; ${Nm(p)} phẩm vị cao hơn, ngươi đành nuốt giận.`);try{emoEv(S,"slight",`${nm(p)} mắng cung nữ của ngươi`,emoKey(p))}catch(e){}}}catch(e){}}
+/* save-unseen-lists r4 (LAW 11 / 6c): the card is BUILT by a registered generator (j3 rcpReg: the scolder + her maid as ids); the maid's loyalty loss
+   and the counters happen before, once — it is written into the sổ and made again on load */
+const eaHitMineCard=rcpReg("eaHitMine",(p,m)=>{if(!p||!m)return null;const c={ev:1,t:"Cung nữ bị ức hiếp",emoSeal:{k:"gian",who:emoKey(p)},who:eaWho(p),art:"https://ctm-img.victoria-tntt.workers.dev/img/act-phat-vo-co-h.webp",h:`<p>${m.name} chạy về, mắt đỏ hoe: ${nm(p)} gặp nàng ở hành lang, trút giận mắng nàng một trận chẳng vì lỗi gì.</p><p>${Nm(p)} phẩm vị thấp hơn ngươi.</p>`,
+   opts:[{n:`Sang hỏi tội ${nm(p)}`,risk:"an toàn",hint:"giữ thể diện cho cung mình",x:`thành: Danh +${E().hoi.go.danh}, thiện cảm ${m.name} +${E().hoi.go.loy} · kèm: ${nm(p)} oán ngươi +${E().hoi.go.oan}`,fx:{danh:E().hoi.go.danh},go:()=>{loyAdd(m,E().hoi.go.loy);oanAdd(p,S,E().hoi.go.oan);log(`Ngươi sang hỏi tội ${nm(p)}; nàng đành cúi đầu nhận lỗi.`)}},
+    {n:"Bỏ qua",risk:"an toàn",hint:"giữ hòa khí",x:`thành: Đức +${E().hoi.let.duc} · kèm: thiện cảm ${m.name} −${E().hoi.let.loy}`,fx:{duc:E().hoi.let.duc},go:()=>{loyAdd(m,-E().hoi.let.loy);log(`Ngươi bảo ${m.name} nhịn đi cho êm chuyện.`)}}]};Q.push(c);return c});
 function eaHitMe(p,k,o){try{o=o||{};cnt(EA_N.hitMe,k);const F=BAL.ea.fx[k]||{};const tk=o.tk||"even";
  if(!eaMeSlot())return;
  const quoH={hot:"Thái hậu đang giận, lúc thỉnh an đập tay xuống án, quở mắng ngươi nặng lời trước mặt mọi người.",even:"Thái hậu đang không vui, lúc thỉnh an nghiêm giọng quở trách ngươi mấy câu trước mặt mọi người.",timid:"Thái hậu đang không vui, lúc thỉnh an thở dài, khẽ trách ngươi mấy câu."}[tk];
@@ -81410,19 +81489,31 @@ function eaMeChoose(O,why,o){o=o||{};const run=o.run||eaDo;const go1=(r,only)=>{
  if(!O||!O.length)return false;
  if(window.__bot||typeof Q==="undefined"){const i=npwPick(O.map((r,j)=>j),j=>O[j].w0,{all:1});return !!go1(O[i==null?0:i])}
  EA_N.choice=(EA_N.choice||0)+1;
- Q.push({ev:1,eaOut:1,t:o.t||"Lòng không giữ được",emoSeal:{k:o.seal||O[0].g,who:"me"},art:`https://ctm-img.victoria-tntt.workers.dev/img/act-${O[0].art||"trut-gian-h"}.webp`,
+ eaMeCard(O.map(r=>[r.k,r.g,r.w0]),why,o.mode||"",o.g||"",o.seal||"",o.t||"");return true}
+/* save-unseen-lists r4 (LAW 11 / 6c): her outburst card (made at the turn of a buổi / tuần: jfeel feelActTick, eaWeek) is BUILT by a registered
+   generator from plain data — each option as its reaction key + group + weight (the reaction rows R_ are code tables, looked up again), the runner
+   by name (mode "feel" = jfeel feelDo + feelActFin, else eaDo) — so it is written into the sổ and made again on load; nothing runs before the pick */
+const eaMeCard=rcpReg("eaMe",(K,why,mode,g,seal,t)=>{const O=(K||[]).map(([k,gg,w0])=>{const r=R_.find(x=>x.k===k&&x.who==="c"&&x.g===gg)||R_.find(x=>x.k===k&&x.who==="c");return r?Object.assign({},r,{pv:1,w0}):null}).filter(Boolean);if(!O.length)return null;
+ const feel=mode==="feel"&&typeof feelDo==="function"&&typeof window.feelActFin==="function";const run=feel?feelDo:eaDo,done=feel?(r,out)=>window.feelActFin(S,g,r,out):null;
+ const go1=(r,only)=>{let out=null;try{out=run(S,r)}catch(e){console.error("eaMeChoose",e)}
+  if(!out&&!only){for(const x of O){if(x.k===r.k)continue;try{out=run(S,x)}catch(e){}if(out){r=x;break}}}if(!out)return null;cnt(EA_N.out,r.k);cnt(EA_N.outT,eaTemper(S).k+":"+(g||r.g));
+  log(`${r.n}: ${out.h}${out.res.length?` (${out.res.join(", ")})`:""}`);try{if(done)done(r,out)}catch(e){}return out};
+ const c={ev:1,eaOut:1,t:t||"Lòng không giữ được",emoSeal:{k:seal||O[0].g,who:"me"},art:`https://ctm-img.victoria-tntt.workers.dev/img/act-${O[0].art||"trut-gian-h"}.webp`,
   h:`<p>Vì ${why} quá nên lòng không giữ được, ngươi phải trút ra một cách.</p><p class="past">Chọn một trong ${O.length} cách; muốn tránh thì nên giữ lòng bình thản từ sớm.</p>`,
-  opts:O.map(r=>{const fx=eaOptFx(S,r);return{n:r.n,x:eaOptX(S,r),fx,go:()=>{const r2=Object.assign({},r,{fxPaid:1});if(!go1(r2,1)){/* the reaction could not run (its target is gone): her fx back, another option runs */const u={};for(const k in fx)u[k]=-fx[k];apply(u);go1(r)}}}})});return true}
+  opts:O.map(r=>{const fx=eaOptFx(S,r);return{n:r.n,x:eaOptX(S,r),fx,go:()=>{const r2=Object.assign({},r,{fxPaid:1});if(!go1(r2,1)){/* the reaction could not run (its target is gone): her fx back, another option runs */const u={};for(const k in fx)u[k]=-fx[k];apply(u);go1(r)}}}})};Q.push(c);return c});
 window.eaMeChoose=eaMeChoose;
 function eaMeOut(g){const O=eaOpts(S,null,g);if(!O.length)return false;
  const why={gian:"giận",buon:"buồn",so:"lo âu",ghen:EMO_GHEN.toLowerCase(),vui:"vui"}[g];return eaMeChoose(O,why,{g,seal:g})}
 /* hỏi tội: the higher-rank mistress whose maid she scolded comes the next tuần (a real choice, gain and loss each) */
-function eaHoi(){const A=eaS();if(!A.hoi.length)return;const x=A.hoi.shift();const v=(rivals||[]).find(r=>r.id===x.id&&r.alive&&!r.out);if(!v||S.out)return;const H=E().hoi;EA_N.hoi++;
+function eaHoi(){const A=eaS();if(!A.hoi.length)return;const x=A.hoi.shift();const v=(rivals||[]).find(r=>r.id===x.id&&r.alive&&!r.out);if(!v||S.out)return;EA_N.hoi++;eaHoiCard(v)}
+/* save-unseen-lists r4: «… đến hỏi tội» (made at the turn of the tuần) is BUILT by a registered generator from the visitor (id); the queue entry is
+   taken (A.hoi.shift) before, once */
+const eaHoiCard=rcpReg("eaHoi",v=>{if(!v||v.alive===false)return null;const H=E().hoi;
  const vk=eaTemper(v).k;const o=oddsCl(H.try+(S.rank-rkOf(v))*H.rk+Math.round((S.danh||0)/H.dn)+(Q6().tryT[vk]||0));const ttl=v.queen?"Hoàng hậu":nm(v);
  const opts=[{n:"Tạ lỗi, đền bạc",risk:"an toàn",hint:"êm chuyện, nhưng mất thể diện",x:`thành: ${ttl} thiện cảm +${H.aff}, nguôi giận`,fx:{bac:-H.bac,danh:-H.danh},go:()=>{affAdd(v,S,H.aff);/* fix 2: the same forgiveness rule (netForgive); the silver still pleases her */if(!netForgive(v,S)){log(`Ngươi tạ lỗi với ${ttl}, đền bạc cho cung nữ của nàng; nàng nhận bạc nhưng chưa nguôi giận.`);return}oanAdd(v,S,-H.oan);log(`Ngươi tạ lỗi với ${ttl}, đền bạc cho cung nữ của nàng.`)}}];
  if(S.maid)opts.push({n:"Đổ lỗi cho cung nữ hỗn hào",risk:"an toàn",hint:"giữ thể diện, cung nữ chịu tội thay",x:`thành: giữ thể diện · kèm: thiện cảm ${S.maid.name} −${H.loy}`,fx:{},go:()=>{loyAdd(S.maid,-H.loy);log(`Ngươi đổ cho ${S.maid.name} hỗn hào; ${S.maid.name} quỳ chịu tội thay.`)}});
  opts.push({n:"Cãi lý",risk:"liều",hint:"có thể giữ được thể diện, có thể chuốc họa",x:`${word(o)} · thành: Danh +${H.win} · hỏng: Danh −${H.lose}, ${ttl} oán +${H.oan}`,fx:{},go:()=>{if(roll(o)){apply({danh:H.win});log(`Ngươi cãi lý với ${ttl}: cung nữ kia hỗn trước. ${ttl} đành bỏ qua.`)}else{apply({danh:-H.lose});oanAdd(v,S,H.oan);log(`<span class="r">Ngươi cãi lý với ${ttl}, không ai bênh; chuyện lan khắp hậu cung.</span>`)}}});
- Q.push({ev:1,t:`${ttl} đến hỏi tội`,emoSeal:{k:"gian",who:emoKey(v)},who:eaWho(v),art:"https://ctm-img.victoria-tntt.workers.dev/img/act-xu-toi-h.webp",h:`<p>${{hot:`${ttl} dẫn theo cung nữ hôm trước xông vào cung ngươi, đập tay xuống án: “Đánh chó còn phải nhìn mặt chủ. Người của bản cung, muội muội cũng dám mắng?”`,even:`${ttl} dẫn theo cung nữ hôm trước đến cung ngươi, nghiêm giọng: “Đánh chó còn phải nhìn mặt chủ. Người của bản cung làm gì sai mà muội muội phải mắng?”`,timid:`${ttl} dẫn theo cung nữ hôm trước đến cung ngươi, khẽ nói: “Muội muội, người của ta có chỗ nào thất lễ, muội cứ bảo ta dạy lại. Mắng giữa hành lang thế, người ngoài cười cả hai cung.”`}[vk]}</p><p>Cung nữ kia đứng sau, mắt còn đỏ.</p>`,opts})}
+ const c={ev:1,t:`${ttl} đến hỏi tội`,emoSeal:{k:"gian",who:emoKey(v)},who:eaWho(v),art:"https://ctm-img.victoria-tntt.workers.dev/img/act-xu-toi-h.webp",h:`<p>${{hot:`${ttl} dẫn theo cung nữ hôm trước xông vào cung ngươi, đập tay xuống án: “Đánh chó còn phải nhìn mặt chủ. Người của bản cung, muội muội cũng dám mắng?”`,even:`${ttl} dẫn theo cung nữ hôm trước đến cung ngươi, nghiêm giọng: “Đánh chó còn phải nhìn mặt chủ. Người của bản cung làm gì sai mà muội muội phải mắng?”`,timid:`${ttl} dẫn theo cung nữ hôm trước đến cung ngươi, khẽ nói: “Muội muội, người của ta có chỗ nào thất lễ, muội cứ bảo ta dạy lại. Mắng giữa hành lang thế, người ngoài cười cả hai cung.”`}[vk]}</p><p>Cung nữ kia đứng sau, mắt còn đỏ.</p>`,opts};Q.push(c);return c});
 window.eaHoi=eaHoi;window.eaHitMe=eaHitMe;window.eaMeOut=eaMeOut;window.eaS=eaS;/* test hooks: dev/test/mood-seal-ev.js */
 /* ======================= (2) EXTREME MOOD ======================= */
 function eaExtMe(){const M=eaMine(),A=eaS(),X=E().ext,w=W();const ext=Math.abs(M.i)>=2&&M.hv?M.g:null;
@@ -86923,13 +87014,16 @@ function feelActTick(p){const A=fB().act;if(!p||feelActNow(p))return;const me=p=
     picks from the same list by temper weight (npwPick, near-best). Any other role: its own reaction of the group (jemoact R_), the same act face. */
  const kd=eaKind(p);const fin=(r,out)=>{p.fa={k:r.k,n:r.n,f:k,face:"act-"+k,k0:mkNow(),k1:mkNow()+feelActDur(r.k)};FEEL.stat.act=FEEL.stat.act||{};FEEL.stat.act[k]=(FEEL.stat.act[k]||0)+1};
  if(kd==="c"&&typeof window.eaOpts==="function"){const O=window.eaOpts(p,k);if(!O.length)return;p.fcd[k]=now+(A.cd[k]||A.cd.def);
-  if(me){eaS2().n++;window.eaMeChoose(O,feelName(k,3).toLowerCase(),{run:feelDo,done:fin,g:k,seal:k});return}
+  if(me){eaS2().n++;window.eaMeChoose(O,feelName(k,3).toLowerCase(),{run:feelDo,done:fin,g:k,seal:k,mode:"feel"});return}
   const i=npwPick(O.map((r,j)=>j),j=>O[j].w0,{all:1});const r=O[i==null?0:i];let out=null;try{out=feelDo(p,r)}catch(e){console.error("feelDo",e)}if(!out)return;fin(r,out);try{eaSay(p,out.h,out.target===S)}catch(e){}return}
  let P=null;try{P=eaPick(p,A.g[k])}catch(e){}if(!P)return;
  const r=P.r;let out=null;try{out=feelDo(p,r)}catch(e){console.error("feelDo",e)}if(!out)return;
  fin(r,out);p.fcd[k]=now+(A.cd[k]||A.cd.def);
  if(me){eaS2().n++;feelMeShow(r,out,k)}else try{eaSay(p,out.h,out.target===S)}catch(e){}}
 function eaS2(){S.fa2=S.fa2||{w:-1,n:0};return S.fa2}
+/* save-unseen-lists r4: the «after her act ran» step of feelActTick by name, so her outburst card made again from the sổ (jemoact eaMeCard, mode "feel")
+   finishes the same way (her act face + the counter) */
+window.feelActFin=function(p,k,r,out){p.fa={k:r.k,n:r.n,f:k,face:"act-"+k,k0:mkNow(),k1:mkNow()+feelActDur(r.k)};FEEL.stat.act=FEEL.stat.act||{};FEEL.stat.act[k]=(FEEL.stat.act[k]||0)+1};
 /* her act: the kit event frame (the same shape as every jemoact outburst) with only "Tiếp tục" */
 function feelMeShow(r,o,k){try{log(`${r.n}: ${o.h}${o.res.length?` (${o.res.join(", ")})`:""}`)}catch(e){}if(window.__bot||typeof Q==="undefined")return;
  Q.push({t:r.n,emoSeal:{k,who:"me"},art:`https://ctm-img.victoria-tntt.workers.dev/img/act-${r.art||"xa-huong"}.webp`,hideOut:true,h:`<p>${o.h}</p><p>Vì ${feelName(k,3).toLowerCase()} quá nên lòng không giữ được; muốn tránh thì nên giữ lòng bình thản từ sớm.</p>${o.res.length?`<p class="past">${o.res.join(" · ")}</p>`:""}`,
@@ -91449,8 +91543,12 @@ function shelfPlantWeek(p){const P=BAL.shelf.plant,z=shelfOf(p),me=p===S;const s
   if(was&&e.pc<P.wither)out.push(["wither",g])}
  if(me&&out.length&&!(typeof tsbBot==="function"&&tsbBot()))for(const [w,g,n0,W0] of out){if(w==="spent"){log(`${n0} bày trong phòng đã tàn.`);continue}
   if(w==="dead"){log(`<span class="r">${n0} bày trong phòng bị bỏ bê lâu ngày, ${W0.died}.</span>`);continue}
-  const e=z.g[g],W=shelfWord(e),n=shelfNm(e);Q.push({t:`${n} ${W.bad}`,who:typeof pMe==="function"?pMe():null,h:`<p>${n} bày trong phòng ${W.bad}${s?`: ${s.name} chăm chưa khéo`:", không ai chăm"}. Để lâu thì ${W.died}; khách đến thấy cũng chê.</p>`,
-   opts:[{n:"Tự tay chăm",fx:{},x:`tốn: ${P.khacSelf} khắc · thành: ${W.fresh}`,go:()=>setTimeout(()=>{try{shelfPlantOpen(g)}catch(e){}},60)},{n:"Để người hầu lo",fx:{},x:s?`${s.name} chăm tiếp, khéo vụng tùy lòng`:`không ai chăm: ${W.bad} thêm`}]})}return out}
+  shelfWitherCard(g)}return out}
+/* save-unseen-lists r4 (LAW 11 / 6c): «<cây> héo» (made at the turn of the tuần) is BUILT by a registered generator from the shelf slot (g); the
+   decay is applied before, once — written into the sổ and made again on load */
+const shelfWitherCard=rcpReg("shelfWither",g=>{const P=BAL.shelf.plant,z=shelfOf(S),s=shelfSrvBest(S);const e=z&&z.g&&z.g[g];if(!e)return null;const W=shelfWord(e),n=shelfNm(e);
+  const c={t:`${n} ${W.bad}`,who:typeof pMe==="function"?pMe():null,h:`<p>${n} bày trong phòng ${W.bad}${s?`: ${s.name} chăm chưa khéo`:", không ai chăm"}. Để lâu thì ${W.died}; khách đến thấy cũng chê.</p>`,
+   opts:[{n:"Tự tay chăm",fx:{},x:`tốn: ${P.khacSelf} khắc · thành: ${W.fresh}`,go:()=>setTimeout(()=>{try{shelfPlantOpen(g)}catch(e){}},60)},{n:"Để người hầu lo",fx:{},x:s?`${s.name} chăm tiếp, khéo vụng tùy lòng`:`không ai chăm: ${W.bad} thêm`}]};Q.push(c);return c});
 function shelfMood(p){if(typeof emoSet!=="function")return;const x=Object.assign({},shelfLux(p)),M=BAL.shelf.mood;if(p!==S&&shelfTaste(p)<0&&x.lv>=2)x.lv=1;/* a frugal owner takes no joy in show */
  if(x.wither)emoSet(p,"buon",M.wither,"cây cảnh, chim cá trong phòng bỏ bê");else if(x.lv>=2)emoSet(p,"vui",M.lux,"phòng ốc bày biện lộng lẫy");else if(x.lv===1)emoSet(p,"vui",M.fit,"phòng ốc bày biện vừa ý")}
 function shelfRumour(){const B=BAL.shelf.rum;const P=[S].concat(liveRivals(true)).filter(p=>p&&p.alive!==false&&!p.out);let heardMe=0;
@@ -91839,17 +91937,20 @@ for(const k in LK_ACT){const D=LK_ACT[k];
 /* an NPC throws at her: level rolled (slap rank table), she may dodge (one level less; nhẹ = miss) */
 (function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(a,t,k,extra){
  if(!LK_ACT[k]||t!==S||!a||a===S||LKG.npcDone)return r0.apply(this,arguments);
- const sev=typeof slapNpcTier==="function"?slapNpcTier(a):1,self=this,D=LK_ACT[k];
- const fin=s=>{let r="";LKG.npcDone=1;LKG.next=s>0?s:-1;try{r=r0.call(self,a,t,k,extra)}finally{LKG.next=0;LKG.npcDone=0}return r};
+ const sev=typeof slapNpcTier==="function"?slapNpcTier(a):1,self=this;
  const bot=typeof window.__bot!=="undefined"||typeof slapGame!=="function"||typeof kg82Open!=="function"||typeof pushModal!=="function"||typeof tsOpt!=="function";
- if(bot)return fin(sev);
+ if(bot){let r="";LKG.npcDone=1;LKG.next=sev>0?sev:-1;try{r=r0.call(self,a,t,k,extra)}finally{LKG.next=0;LKG.npcDone=0}return r}
+ lkCard(a,k,extra,sev);return""};
+/* save-unseen-lists r4 (LAW 11 / 6c): an NPC's look act on her («… bước tới, định …», also at the first khắc of a buổi) is BUILT by a registered
+   generator from the actor (id), the act and its drawn tier: nothing is applied until she answers — written into the sổ and made again on load */
+const lkCard=rcpReg("lkNpc",(a,k,extra,sev)=>{const D=LK_ACT[k];if(!a||a.alive===false||!D)return null;const t=S,self=null;
+ const fin=s=>{let r="";LKG.npcDone=1;LKG.next=s>0?s:-1;try{r=r0.call(self,a,t,k,extra)}finally{LKG.next=0;LKG.npcDone=0}return r};
  const who=typeof pv==="function"?pv(a):undefined;const show=r=>{if(r){log(r);pushModal({t:D.n,who,h:`<p>${r}</p>`});showModal();render()}};
- pushModal({t:D.n,who,h:`<p>${a.name||"Nàng"} bước tới, định ${D.verb.replace("{t}","ngươi")}. Ngươi có kịp né không?</p>`,opts:[
+ return pushModal({t:D.n,who,h:`<p>${a.name||"Nàng"} bước tới, định ${D.verb.replace("{t}","ngươi")}. Ngươi có kịp né không?</p>`,opts:[
   Object.assign(tsOpt({n:"Né",odds:BAL.slap.dodgeOdds[slapMg(true,a).tier],later:1,duoc:["nhẹ đi một bậc","nhẹ thì tránh hẳn"],mat:["dính trọn"],kem:["một ván ngắn"],go:()=>{
    slapGame({dodge:true,by:a,title:"Né",go:"Né",skip:"Đứng yên",skipSub:"không né",rows:[["Né kịp","nhẹ đi một bậc; nhẹ thì tránh hẳn","g"],["Không né","dính trọn","r"]],
     onDone:res=>show(fin(res.skipped||res.raw<BAL.slap.raw[3]?sev:sev-1))})}}),{}),
-  tsOpt({n:"Đứng yên",odds:null,duoc:[`nhẫn nhịn: Đức +${BAL.cv.duc}`],kem:["dính trọn"],go:()=>{apply({duc:BAL.cv.duc});const r=fin(sev);if(r){log(r);pushModal({t:D.n,who,h:`<p>${r}</p>`})}}})]});
- return""}})();
+  tsOpt({n:"Đứng yên",odds:null,duoc:[`nhẫn nhịn: Đức +${BAL.cv.duc}`],kem:["dính trọn"],go:()=>{apply({duc:BAL.cv.duc});const r=fin(sev);if(r){log(r);pushModal({t:D.n,who,h:`<p>${r}</p>`})}}})]})})})();
 /* ---------- thủy đậu + đậu mùa (j13 rulebook) ---------- */
 try{const X=lkB().pox.thuydau;if(typeof ILL==="object"&&!ILL.thuydau)ILL.thuydau={n:"Thủy đậu",sea:X.sea,cont:X.cont,die:X.die}}catch(e){}
 (function(){if(typeof catchIll!=="function")return;const c0=catchIll;catchIll=function(p,k){const r=c0.apply(this,arguments);
@@ -92743,10 +92844,14 @@ function dcWeek(){if(!dcOn()||!S||S.dead)return;const R=typeof rivals!=="undefin
  /* two-way borrow: a consort who lacks a colour asks to borrow her trâm (her seat; the piece moves for real) */
  const f=dcFestNow();if(f&&dcHerOn()&&dcLend()&&S.dcAk!==dcKey(f)){S.dcAk=dcKey(f);
   for(const v of R){if(!v||!v.alive||v.out||v.coop||aff(v,S)<netTh(v,"than"))continue;const st=dcStat(v,f.k);if(!st||(!st.miss&&!st.refused)||!st.missing.length)continue;
-   const c=dcOwnFit(S,st.missing,"tram")[0];if(!c)continue;
-   Q.push({t:`${dcName(v)} xin mượn trâm`,who:v,ev:"dc",evId:"dc:ask",h:`<p>${v.name} thiếu màu ${dcFamList(st.missing)} cho ${f.name}, sai cung nữ sang xin mượn ${c.w.n} của ngươi, qua tuần sau trả.</p>`,
+   const c=dcOwnFit(S,st.missing,"tram")[0];if(!c)continue;dcAskCard(v);break}}}
+/* save-unseen-lists r4 (LAW 11 / 6c): «<tên> xin mượn trâm» (made at the turn of the tuần) is BUILT by a registered generator from the asker (id):
+   the festival, what she lacks and the piece in her chest are found again from the live state (the piece is never a copy: dcBorrow moves the real
+   one); the ask mark (S.dcAk) is set before, once — written into the sổ and made again on load */
+const dcAskCard=rcpReg("dcAsk",v=>{const f=dcFestNow();if(!f||!v||!v.alive)return null;const st=dcStat(v,f.k);if(!st||!st.missing||!st.missing.length)return null;const c=dcOwnFit(S,st.missing,"tram")[0];if(!c)return null;
+   const m={t:`${dcName(v)} xin mượn trâm`,who:v,ev:"dc",evId:"dc:ask",h:`<p>${v.name} thiếu màu ${dcFamList(st.missing)} cho ${f.name}, sai cung nữ sang xin mượn ${c.w.n} của ngươi, qua tuần sau trả.</p>`,
     opts:[{n:`Cho mượn ${c.w.n}`,fx:{},x:`tốn: ${c.w.n} rời rương đến tuần sau · thành: ${dcRelW(v,BAL.dc.bor.thanks)}`,go:()=>{if(dcBorrow(v,S,c.e)){try{log(`Cho ${dcName(v)} mượn ${c.w.n} dự ${f.name}.`)}catch(e){}}else try{log(`${c.w.n} không còn trong rương, không cho ${dcName(v)} mượn được.`)}catch(e){}}},
-     {n:"Khéo từ chối",fx:{},x:`thành: ${c.w.n} vẫn ở trong rương`,go:()=>{try{log(`Từ chối cho ${dcName(v)} mượn trâm.`)}catch(e){}}}]});break}}}
+     {n:"Khéo từ chối",fx:{},x:`thành: ${c.w.n} vẫn ở trong rương`,go:()=>{try{log(`Từ chối cho ${dcName(v)} mượn trâm.`)}catch(e){}}}]};Q.push(m);return m});
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{dcWeek()}catch(e){console.error("dcWeek",e)}return r}})();
 /* ---------- the shared contest formula and the guest list (j71) ---------- */
 (function(){if(typeof SC7!=="object")return;for(const kd of Object.keys(SC7)){const o=SC7[kd];if(!o||typeof o.f!=="function"||o.f.__dc)continue;const f0=o.f;
@@ -98966,7 +99071,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="2476e73cbe32";window.CTM_BUILD=BUILD;
+const BUILD="a303bb354635";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

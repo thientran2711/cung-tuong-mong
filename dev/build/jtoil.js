@@ -665,7 +665,14 @@ function toilAns(p,r,c){const B=BAL.toil;if(c==="sorry"){toilBack(r.host,Math.ce
  if(!me)ap(p,{suc:B.replySuc})/* replySuc = the Sức change (main: −2); her own is the option fx */;if(roll(B.replyWin)){if(me)apply({danh:B.replyDanh});else ap(p,{danh:B.replyDanh});return true}
  toilBack(r.host,-B.replyLose,p);if(r.v){if(me)ghenUp(r.v,B.replyGhen,"bị ngươi đáp lời không nể",S);else affAdd(r.v,p,-B.replyGhen)}return false}
 function toilFlush(){if(!TOIL_POP.length||!S||S.dead)return;const L=TOIL_POP.splice(0).sort((a,b)=>Math.abs(b.n)-Math.abs(a.n));const top=L.slice(0,BAL.toil.popMax),rest=L.slice(BAL.toil.popMax);
- top.forEach((r,i)=>{const bad=r.n<0;const who=toilWho(r.host==null?null:r.host)||"";const more=i===top.length-1&&rest.length?`<p class="past">Còn: ${rest.map(x=>`${x.name||toilWho(x.host)} — ${x.line}`).join(" · ")}.</p>`:"";
+ top.forEach((r,i)=>{const more=i===top.length-1&&rest.length?`<p class="past">Còn: ${rest.map(x=>`${x.name||toilWho(x.host)} — ${x.line}`).join(" · ")}.</p>`:"";
+  /* save-unseen-lists r4 (LAW 11 / 6c): each reaction card (thỉnh an / the crowd, also at the turn of a buổi) is BUILT by a registered generator from
+     the reaction record (plain data, the host / consort as ids; its line was drawn before) — written into the sổ and made again on load */
+  const r1=Object.assign({},r);delete r1.who;toilPopCard(r1,more)});
+ try{render()}catch(e){}}
+const toilPopCard=rcpReg("toilPop",(r,more)=>{if(!r||!S)return null;r=Object.assign({},r);if(r.host&&typeof r.host==="object"&&r.host.alive===false)return null;
+  r.who=r.host==="th"?pTH():r.host==="emp"?pEmp():r.host&&typeof r.host==="object"?pv(r.host):null;
+  const bad=r.n<0;const who=toilWho(r.host==null?null:r.host)||"";
   const h=`<p>${r.say!=null?r.say:toilSay(r.k,Object.assign({host:r.host},r.ctx))}</p><p class="past">${toilLit(r)}</p>${more}`;
   const back=Math.ceil(Math.abs(r.n)*BAL.toil.sorryBack);
   /* cost mode (KIT 28.6 / §53 kitHint): the options' fx are empty (the change happens in go), so each says its own true hint */
@@ -681,8 +688,7 @@ function toilFlush(){if(!TOIL_POP.length||!S||S.dead)return;const L=TOIL_POP.spl
     {n:"Cười trừ",fx:{},hideOut:true,hint:"cho qua, không đổi gì",risk:"an toàn",go:()=>{log("Ta cười trừ cho qua.")}},
     {n:"Đáp lại",fx:{suc:BAL.toil.replySuc},p:BAL.toil.replyWin,hideOut:true,hint:lv=>lv?`đáp khéo thì thêm danh tiếng, hên xui, hỏng thì ${nm} càng phật ý${r.v?", nàng ta càng ghen":""}`:"có thể thêm danh tiếng, cũng có thể mất lòng",risk:"có rủi ro",go:()=>{if(toilAns(S,r,"reply"))log("Ta đáp lại khéo léo, người nghe gật gù.");else log("Ta đáp lại, không khí càng gượng.")}}]
    :[{n:r.host==="emp"||r.host==="th"||(r.host&&r.host.queen)?"Tạ ơn":"Cảm tạ",fx:{},hideOut:true,hint:"nhận lời khen, không đổi gì",risk:"an toàn",go:()=>{}}];
-  Q.push({t:TOIL_EV[r.k]||"Dung nhan",who:r.who,h,opts,hideOut:true,toilEv:r.k,art:`img/ev-toil-${r.k}.webp`/* banner by ab06, 640×480 */})});
- try{render()}catch(e){}}
+  const m={t:TOIL_EV[r.k]||"Dung nhan",who:r.who,h,opts,hideOut:true,toilEv:r.k,art:`img/ev-toil-${r.k}.webp`/* banner by ab06, 640×480 */};Q.push(m);return m});
 /* hook the three places that apply a reaction */
 (function(){const ap1=aaThieuLeApply;aaThieuLeApply=function(host,f0){const L=leAttire(S,"",host);const s0=S.logSeq||0;const r=ap1.apply(this,arguments);try{const t=L.toil;const f=f0||L.delta;const n=f.aff||0;
   if(t&&n){const k=host==="th"?(n>0?"th-praise":"th-scold"):host==="emp"?(n>0?"emp-like":"emp-dislike"):host&&host.queen?(n>0?"hh-praise":"hh-scold"):null;

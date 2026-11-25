@@ -10,9 +10,12 @@ const H=eval(SBR.match(/const H=(`[\s\S]*?`);\n/)[1]);const seedInit=eval(SBR.ma
  const url=`http://127.0.0.1:${srv.address().port}/${PAGE}`;const b=await chromium.launch();const ALL={};
  for(const seed of SEEDS.split(',').map(Number)){const ctx=await D.newDeviceContext(b,DEV,{serviceWorkers:'block'});await ctx.addInitScript(seedInit,seed);
   await ctx.route(/\.(webp|png|jpg|jpeg|mp3|ogg|m4a|mp4|webm)(\?|$)/,r=>r.abort());const p=await ctx.newPage();p.setDefaultTimeout(600000);const pe=[];p.on('pageerror',e=>pe.push(e.message.slice(0,120)));
-  await D.openDirect(p,url);await p.waitForFunction(()=>typeof deser==='function'&&typeof start==='function'&&document.querySelector('#slots button'));await p.waitForTimeout(1500);await p.evaluate(H);
+  await D.openDirect(p,url);await p.waitForFunction(()=>typeof deser==='function'&&typeof start==='function'&&document.querySelector('#slots button'));await p.waitForTimeout(1500);await p.evaluate(H);if(process.env.RP_STACK)await p.evaluate(()=>{window.__rpStack=1});
   const r=await p.evaluate(async(NB)=>{__sbr.newLife();const seen=new WeakSet();const lost={};const T=m=>String(m&&(m.t||m.pid)||'?').replace(/\d+/g,'#').slice(0,40);
-   const add=(m,src)=>{if(!m||seen.has(m))return;seen.add(m);const k=src+': '+T(m);lost[k]=(lost[k]||0)+1};let writes=0;
+   const add=(m,src)=>{if(!m||seen.has(m))return;seen.add(m);const k=src+': '+T(m)+(m.__rpSt?' @ '+m.__rpSt:'');lost[k]=(lost[k]||0)+1};let writes=0;
+   /* where each code card was made (env RP_STACK=1): the first game frames of the stack when it entered Q, for the fixer */
+   if(window.__rpStack){const tag=(a)=>{for(const m of a)try{if(m&&typeof m==='object'&&m.opts&&!m.__rpSt&&m.opts.some(o=>o&&Object.values(o).some(v=>typeof v==='function'))){const st=String(new Error().stack).split('\n').slice(2).map(l=>(l.match(/at ([\w$.<>]+) /)||[])[1]).filter(f=>f&&!/^(Array|Object|Function|new|eval)\b/.test(f)).slice(0,6).join('<');m.__rpSt=st}}catch(e){}};
+    const P0=Array.prototype.push,U0=Array.prototype.unshift,S0=Array.prototype.splice;Array.prototype.push=function(...a){if(this===Q)tag(a);return P0.apply(this,a)};Array.prototype.unshift=function(...a){if(this===Q)tag(a);return U0.apply(this,a)};Array.prototype.splice=function(...a){if(this===Q&&a.length>2)tag(a.slice(2));return S0.apply(this,a)}}
    const s0=save;save=function(){const n0=SAVE_N;const r=s0.apply(this,arguments);if(SAVE_N!==n0){writes++;
      try{for(const m of Q)if(typeof jqSaveable==='function'&&!jqSaveable(m))add(m,'Q')}catch(e){}
      try{for(const x of SP13.L)if(x.code)add(x.m,'SP13')}catch(e){}

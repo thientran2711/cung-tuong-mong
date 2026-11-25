@@ -346,8 +346,12 @@ function shelfPlantWeek(p){const P=BAL.shelf.plant,z=shelfOf(p),me=p===S;const s
   if(was&&e.pc<P.wither)out.push(["wither",g])}
  if(me&&out.length&&!(typeof tsbBot==="function"&&tsbBot()))for(const [w,g,n0,W0] of out){if(w==="spent"){log(`${n0} bày trong phòng đã tàn.`);continue}
   if(w==="dead"){log(`<span class="r">${n0} bày trong phòng bị bỏ bê lâu ngày, ${W0.died}.</span>`);continue}
-  const e=z.g[g],W=shelfWord(e),n=shelfNm(e);Q.push({t:`${n} ${W.bad}`,who:typeof pMe==="function"?pMe():null,h:`<p>${n} bày trong phòng ${W.bad}${s?`: ${s.name} chăm chưa khéo`:", không ai chăm"}. Để lâu thì ${W.died}; khách đến thấy cũng chê.</p>`,
-   opts:[{n:"Tự tay chăm",fx:{},x:`tốn: ${P.khacSelf} khắc · thành: ${W.fresh}`,go:()=>setTimeout(()=>{try{shelfPlantOpen(g)}catch(e){}},60)},{n:"Để người hầu lo",fx:{},x:s?`${s.name} chăm tiếp, khéo vụng tùy lòng`:`không ai chăm: ${W.bad} thêm`}]})}return out}
+  shelfWitherCard(g)}return out}
+/* save-unseen-lists r4 (LAW 11 / 6c): «<cây> héo» (made at the turn of the tuần) is BUILT by a registered generator from the shelf slot (g); the
+   decay is applied before, once — written into the sổ and made again on load */
+const shelfWitherCard=rcpReg("shelfWither",g=>{const P=BAL.shelf.plant,z=shelfOf(S),s=shelfSrvBest(S);const e=z&&z.g&&z.g[g];if(!e)return null;const W=shelfWord(e),n=shelfNm(e);
+  const c={t:`${n} ${W.bad}`,who:typeof pMe==="function"?pMe():null,h:`<p>${n} bày trong phòng ${W.bad}${s?`: ${s.name} chăm chưa khéo`:", không ai chăm"}. Để lâu thì ${W.died}; khách đến thấy cũng chê.</p>`,
+   opts:[{n:"Tự tay chăm",fx:{},x:`tốn: ${P.khacSelf} khắc · thành: ${W.fresh}`,go:()=>setTimeout(()=>{try{shelfPlantOpen(g)}catch(e){}},60)},{n:"Để người hầu lo",fx:{},x:s?`${s.name} chăm tiếp, khéo vụng tùy lòng`:`không ai chăm: ${W.bad} thêm`}]};Q.push(c);return c});
 function shelfMood(p){if(typeof emoSet!=="function")return;const x=Object.assign({},shelfLux(p)),M=BAL.shelf.mood;if(p!==S&&shelfTaste(p)<0&&x.lv>=2)x.lv=1;/* a frugal owner takes no joy in show */
  if(x.wither)emoSet(p,"buon",M.wither,"cây cảnh, chim cá trong phòng bỏ bê");else if(x.lv>=2)emoSet(p,"vui",M.lux,"phòng ốc bày biện lộng lẫy");else if(x.lv===1)emoSet(p,"vui",M.fit,"phòng ốc bày biện vừa ý")}
 function shelfRumour(){const B=BAL.shelf.rum;const P=[S].concat(liveRivals(true)).filter(p=>p&&p.alive!==false&&!p.out);let heardMe=0;

@@ -65,10 +65,13 @@ function spAsk(o,s){if(!o||!s)return"";if(s===S)S.srv.lvCd=S.turn+BAL.ag.stf2.le
  const W=BAL.ag.stf2.lvW,O=spLeaveOpts(o,s).filter(x=>!x.lock);const mw=t=>{try{return typeof agMW==="function"?agMW(o,t):1}catch(e){return 1}};
  const c=mindPick(O.map(x=>[x,(W[x.id]||0)*mw(x.tag)]),o)||O[O.length-1];try{const N=window.__stf2N=window.__stf2N||{};N["leave_"+c.id]=(N["leave_"+c.id]||0)+1}catch(e){}return c.go()||""}
 function spLeaveCard(s){const B=BAL.sp;const O=spLeaveOpts(S,s);const [K,D,L]=O;const v=K.v,keep=K.keep;
- tsPanel({t:"Kẻ hầu xin đi",who:pServ(s),h:`<p>${s.name} thưa rằng ${v?`bên ${tsNm(v)} muốn có ${s.role==="maid"?"nàng":"hắn"} sang hầu`:"muốn xin về Nội vụ phủ"}, xin ${tsGoi()} cho đi.</p>`,
+ return tsPanel({t:"Kẻ hầu xin đi",who:pServ(s),h:`<p>${s.name} thưa rằng ${v?`bên ${tsNm(v)} muốn có ${s.role==="maid"?"nàng":"hắn"} sang hầu`:"muốn xin về Nội vụ phủ"}, xin ${tsGoi()} cho đi.</p>`,
   opts:[tsOpt({n:K.n,fx:{},need:[tsNeedBac(keep)],duoc:[`thiện cảm +${B.keepGain}`,"giữ người, giữ chức"],mat:[`mất ${keep} bạc`],kem:[`kiêu thêm ${B.keepMo} tháng`],go:()=>{const r=K.go();if(r)log(r)}}),
    tsOpt({n:D.n,duoc:["hết kiêu",`kẻ hầu khác thiện cảm +${B.demoteOthers}`],mat:[`${s.name} xuống ${SRK[s.role][srk(s)-1]}`,`thiện cảm -${B.demoteLoy}`],kem:[`thiện cảm dưới ${BAL.loy.out} thì có khi bán mình cho cung khác`],go:()=>{const r=D.go();if(r)log(r)}}),
    tsOpt({n:L.n,duoc:[`kẻ hầu khác thiện cảm +${B.letOthers}`,"bớt một miệng ăn"],mat:[`mất ${s.name}`],kem:v?[`${s.name} mang chuyện cung ngươi sang bên ${tsNm(v)} (người ấy nắm thêm ${balAb(BAL.ag.ev.one)} chứng cứ)`]:[],go:()=>{const r=L.go();if(r)log(r)}})]})}
+/* save-unseen-lists r4 (LAW 11 / 6c): «Kẻ hầu xin đi» (made at the month step) is a registered generator (the servant as id): it only builds the card
+   from the live household (spLeaveOpts is deterministic; the leave cooldown is set before, in spAsk) — written into the sổ and made again on load */
+spLeaveCard=rcpReg("spLeave",spLeaveCard);
 /* monthly: pride runs its course for every household (hers and the NPCs'), after the merit promotions */
 function spMonth(){let ev="";const B=BAL.sp;for(const o of consorts()){if(!o||o.dead||(o!==S&&!o.alive))continue;for(const s of (o.staff||[]).slice()){if(!s.proud||s.coop)continue;
  if(s.proud<=S.turn){s.proud=0;if(o===S)ev+=`${s.name} đã bớt kiêu. `;continue}
