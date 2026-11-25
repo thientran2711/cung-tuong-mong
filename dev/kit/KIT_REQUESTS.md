@@ -281,3 +281,13 @@ Root: one option row = 140 px (Fold) / 132 px (iPad) (.k3rows card with picture)
 list) always shows ALL its options at once on both devices — e.g. the option column takes priority over the text (text scrolls, options never), or the
 k3rows option switches to the compact/2-column layout when the options do not fit; the «Kéo xuống» cue stays only for long pick lists. Order is NOT
 the fix (law 2: no option is «the best»; the list keeps its order). Re-scan (before/after): node dev/test/opt-fit-scan.js dev/index.html all.
+
+## KIT REQUEST K-NOTICE-OPTS (button-crawl-fix-5, ROLE B #4 for Foreman F #10, 25/11 ~11:45Z; robots s9 / s1d Fold) — «Tin báo» list: its only way out scrolls away
+Real taps, Fold 755x1000 + iPad 1180x820 (m-fix-2-r 240f549a; same on LIVE 9f72524b): «Tin báo» (jnotice kitNoticeOpen, kitPanel kind notice) with a long list
+(20 notices shown, measured with 138 unread) AND an action notice (an errand «Để ta xem», a Tai mắt news) shows the list + «Kéo xuống»; its two options «Để ta xem» / «Để sau» lie BELOW
+the frame (Fold y 785 of a frame ending at 787, iPad 695 of 697 — elementFromPoint = #modal), there is no ✕ (review r4: a panel with options has none) and a
+tap outside does NOT close it. A player can only leave by scrolling the panel to its end. KIT §2071 says the event frame's buttons never scroll away.
+Without an action notice the same list shows the kit ✕ (Lui) top-right, hittable — fine.
+Wanted (kit keeper only, law 9/10): in a notice / info panel with options, the notice list (the section body) is the scroll area and the option row stays
+in view (like the event frame: two scroll areas, buttons fixed), or the ✕ stays on a panel whose options are only «go / later». Not ours: the list's
+wording (5 of 12 lines one template sentence, s9) → MAIN. Probe: /home/user/wt/probe4/tb.js on the ROLE B #4 box (138 notices, go on each).

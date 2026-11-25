@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"2858393f+","t":"2026-11-25T09:08Z","c":"m-fix-2 report: item 2 confirmed on the real s5d save (34 bottles → one line)","b":"7e3dd5b1e04b","h":[{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"}]};
+window.CTM_BI={"s":"240f549a+","t":"2026-11-25T09:28Z","c":"m-fix-2-r: mfix2-resbtn/usenote set up by state (title walk was label-bound and passed silently when stuck), assert every row, exit 1 on an…","b":"8001847b471f","h":[{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1640,7 +1640,7 @@ const rcpLapse=t=>{try{log(`«${String(t||"Việc khó xử").replace(/</g,"&lt;
        live world: it is never saved (it came back as a bare title with an empty body, and every save round trip carried the copies on);
    (2) any other kit card (its body lives in m.kit, m.h is empty) is saved WITH its kit spec (people as ids, code left out), so it comes back whole;
    (3) old saves: empty notices (no body, no kit) and repeats of the same notice are dropped on load (deserQ). */
-const isLookCard=m=>!!(m&&m.kit&&m.kit.look);
+const isLookCard=m=>!!(m&&m.kit&&(m.kit.look||m.kit.view));/* button-crawl-fix-5: a view panel (spec.view, live status) is not saved either */
 const LOOK_T=/^(Tâm trạng · |Đã biết về |Chứng cứ về |Thỉnh tranh nhân vật)/;
 function kqEnc(x,d){d=d||0;if(d>7)throw 0;if(x==null||typeof x==="number"||typeof x==="string"||typeof x==="boolean")return x;if(typeof x==="function")return undefined;
  const k=rcpP(x);if(k!=null)return {"@p":k};if(Array.isArray(x))return x.map(y=>{const v=kqEnc(y,d+1);return v===undefined?null:v});
@@ -29819,7 +29819,9 @@ document.addEventListener("click",e=>{const p=document.getElementById("kpop");co
 function kitPanel(spec,front){const m={t:spec.title||"",h:"",kit:spec,opts:spec.opts,btn:spec.btn,cls:spec.cls,who:spec.subject&&(spec.subject.src!==undefined?spec.subject:kitFace(spec.subject))||null,onClose:spec.onClose};
  /* button-crawl-fix-2 (whole family: every look-up panel, spec.look): ONE panel per title in the queue. Opening the same look-up again
     replaces the waiting copy with the fresh one (no pile of «Tâm trạng · X» to close N times; a co-op save held 1998 copies) */
- if(spec.look&&m.t){for(let i=Q.length-1;i>=0;i--){const q=Q[i];if(q&&q.kit&&q.kit.look&&q.t===m.t)Q.splice(i,1)}}
+ /* button-crawl-fix-5 (robots s6d/s7/s9: 3× «Tin chờ người sai đi», 4×/7× «Tin báo» waiting in Q): a VIEW panel (spec.view: a status panel built from
+    the live state — kitStatusIcon «Tin chờ / Tin báo», the «Tin báo» notice list, «Lịch tháng») is one per title too; the fresh copy replaces the waiting one */
+ if((spec.look||spec.view)&&m.t){for(let i=Q.length-1;i>=0;i--){const q=Q[i];if(q&&q.kit&&(q.kit.look||q.kit.view)&&q.t===m.t)Q.splice(i,1)}}
  if(front)Q.unshift(m);else Q.push(m);return m}
 /* KIT §51.1 ONE BLOCK = ONE LABEL COLUMN (owner 15/11 "Hàng trên hàng dưới chưa alignment"): kit tables (.kpkb) that read as one block
    are joined into ONE grid, so the widest label of the block sets the column and every value starts on one vertical line:
@@ -37168,7 +37170,7 @@ Object.assign(BAL,{spread:{cap:2,maxWait:4,codeWait:2}});
 /* FLIGHT-DAYQ (owner 24/11 ~18:05Z (5): "Mới sáng sớm là có sự kiện tới tìm liền ngay lập tức"): the FIRST buổi of a day (right after the title card + Tuần lục + Tin trong cung)
    brings no event that has no fitting morning slot: dawnSlot = the buổi an unslotted world card moves to (1 = trưa); dawnOpt = odds (0..100) that an optional
    j68 event is held at day start (was a hard-coded roll(50) in j68 evGate: half of them came at dawn). jdayq: poll = ms between looks while a turn / card is held; stale = ms a busy motion queue with no scene on screen may hold the turn. */
-Object.assign(BAL.spread,{dawnSlot:1,dawnOpt:100});Object.assign(BAL,{dayq:{poll:300,stale:10000}});
+Object.assign(BAL.spread,{dawnSlot:1,dawnOpt:100});Object.assign(BAL,{dayq:{poll:300,stale:10000,wake:2000/* button-crawl-fix-5: a card left in Q with nothing on screen is shown after this many ms (jdayq dqWake) */}});
 /* NIGHT STEALING (Tranh sủng / Chặn ngự giá) — ONE CORE for the act (her and every NPC alike) and for the NPC agent's choice (jsteal.js).
    act: cost = what one try costs (feign: Đức, road: Sức); failSung = Sủng lost on a failed try; rel = thiện cảm lost both ways on a win
    (relAdd: the robbed one also gains oán rel×BAL.relOan.hurt); ghen = jealousy of the robbed consort.
@@ -65750,7 +65752,7 @@ function mcPopHTML(k,o){const mm=mcMY(o).m;const f=mcFests(mm).find(x=>x.k===k);
  return `<div class="kpopt">${mcEsc(f.name)}</div><div class="kpopx kmc-px"><div class="kmc-pw">${mcDaysName(f.days)} ${mcMonName(mm)} · ${T} · <b>${mcLeftText(o,f)}</b></div>`+
   `<div>${MCAL.line[k]||""}</div>`+(A.C.length?`<div><b>Có thể thi:</b> ${A.C.join(", ")}</div>`:"")+(A.O.length?`<div><b>Còn có:</b> ${A.O.join(", ")}</div>`:"")+
   (A.C.length&&pz?`<div><b>Thắng thi:</b> ${pz}</div>`:"")+(P.length?`<div><b>Sửa soạn:</b> ${ok}/${P.length} đã sẵn</div>`:"")+`</div>`}
-function kitMonthCalOpen(){try{if(typeof kitModal!=="function")return;kitModal({kind:"cal",title:"Lịch tháng",sub:`Nay là ${typeof k3Date==="function"?k3Date():""}. Lịch ghi lễ hội hằng năm và những ngày ngươi đã biết.`,html:kitMonthCal({o:0}),cls:"kmc-modal"})}catch(e){console.error(e)}}
+function kitMonthCalOpen(){try{if(typeof kitModal!=="function")return;kitModal({kind:"cal",view:1/* button-crawl-fix-5: one «Lịch tháng» in Q, never saved */,title:"Lịch tháng",sub:`Nay là ${typeof k3Date==="function"?k3Date():""}. Lịch ghi lễ hội hằng năm và những ngày ngươi đã biết.`,html:kitMonthCal({o:0}),cls:"kmc-modal"})}catch(e){console.error(e)}}
 try{KP_SEAL.cal="LỊCH"}catch(e){}
 window.kitMonthCal=kitMonthCal;window.kitMonthCalOpen=kitMonthCalOpen;
 /* re-draw the calendar in place (month tab, tapped day, a note saved), keeping the tab row's scroll */
@@ -68021,7 +68023,7 @@ function set(id,o){if(!id||!o)return;M.set(id,o);if(window.kitStageRail)kitStage
 function refresh(){if(window.kitStageRail)kitStageRail.paint()}
 function remove(id){M.delete(id);if(window.kitStageRail)kitStageRail.remove("st-"+id)}
 function open(id){const o=M.get(id);if(o&&typeof o.onTap==="function"){o.onTap();return}if(!o||typeof o.panel!=="function")return;let sp=null;try{sp=o.panel()}catch(e){console.error("kitStatusIcon panel",e)}if(!sp)return;
- sp=Object.assign({kind:"info"},sp);sp.opts=(sp.opts||[]).concat([{n:"Đóng",fx:{},go:()=>{}}]);/* "Đóng" = the close option → kit ✕ + tap outside + Esc (32.10); never "Đã hiểu" */
+ sp=Object.assign({kind:"info"},sp,{view:1});/* button-crawl-fix-5: a status panel = a live view, one per title in Q, never saved */sp.opts=(sp.opts||[]).concat([{n:"Đóng",fx:{},go:()=>{}}]);/* "Đóng" = the close option → kit ✕ + tap outside + Esc (32.10); never "Đã hiểu" */
  try{kitPanel(sp,true);showModal()}catch(e){console.error("kitStatusIcon open",e)}}
 window.kitStatusIcon={set,refresh,remove,open,has:id=>M.has(id),items:()=>[...M.keys()]};/* has(id): a module that must not overwrite another owner of the same id asks first (jerr owns «tin») */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77.1",title:"kitStatusIcon · icon trạng thái (đang chạy · xong · cần chú ý), chạm → bảng thông tin",
@@ -93373,7 +93375,7 @@ function kitNoticeOpen(id){try{if(typeof kitPanel!=="function")return null;const
  const rows=[];for(const x of L){const seen=!one&&x.seen?" <small>(đã xem)</small>":"";const A=x.items&&x.items.length?x.items:[x.text];const nR=A.filter(t=>/^Nghe nói /.test(t)).length;if(nR>=2&&!rows.some(r=>/kntrh/.test(r)))rows.push('<li class="kntrh"><b>Nghe nói:</b></li>');A.forEach((t,i)=>rows.push(`<li>${ntRow(t,nR>=2)}${i===A.length-1?seen:""}</li>`))}
  const html=`<ul class="kbl kntl">${rows.join("")}</ul>`;
  const go=L.find(x=>typeof x.go==="function");const opts=go?[{n:go.goLabel||"Để ta xem",fx:{},go:()=>{try{go.go()}catch(e){}boxPaint()}},{n:"Để sau",fx:{},go:()=>{boxPaint()}}]:undefined;/* review r4: a kit panel with options has no ✕ (jksize) — «Để sau» always lets her close it without being sent to Dư đồ */
- const m=kitPanel({kind:"notice",title:"Tin báo",sub:one&&rows.length<2?"":(U.length||(one&&rows.length>1)?`${rows.length} tin mới`:"Đã xem hết"),sections:[{html}],opts,onClose:()=>boxPaint()},true);m.__ntc=lead;showModal();picSwap(document,lead);for(const t of [0,150,400,800,1500])setTimeout(()=>{if(NT.open===m){picSwap(document,lead);try{kitNoUnkDom(document.querySelector("#modal .kntl")||document.getElementById("modal"),true)}catch(e){}}},t);NT.open=m;
+ const m=kitPanel({kind:"notice",view:1/* button-crawl-fix-5: one «Tin báo» in Q, never saved */,title:"Tin báo",sub:one&&rows.length<2?"":(U.length||(one&&rows.length>1)?`${rows.length} tin mới`:"Đã xem hết"),sections:[{html}],opts,onClose:()=>boxPaint()},true);m.__ntc=lead;showModal();picSwap(document,lead);for(const t of [0,150,400,800,1500])setTimeout(()=>{if(NT.open===m){picSwap(document,lead);try{kitNoUnkDom(document.querySelector("#modal .kntl")||document.getElementById("modal"),true)}catch(e){}}},t);NT.open=m;
  for(const x of L)x.seen=true;const c=$("kntchip");if(c)chipHide(c);setTimeout(boxPaint,0);return m}catch(e){console.error("kitNoticeOpen",e);return null}}
 /* the panel's picture = the notice's own (the kit info panel puts kitInfoArt("Tin báo") there; a notice with a picture swaps it in the same kit frame) */
 function picSwap(M,it){try{const src=picOf(it);if(!src)return;const im=M.querySelector("#mb figure.ksart img, #mb .ksart img");if(im&&im.getAttribute("src")!==src)im.setAttribute("src",src)}catch(e){}}
@@ -96335,7 +96337,13 @@ function dqPoll(){return BAL.dayq.poll}
 function dqActEl(){try{const ov=document.getElementById("ov");if(ov&&!dqHidden(ov))return ov;
   /* the podium a card opens for ITSELF (j90 wiring 2, «podium first, then the panel»: Q[0].__podDone) is part of that card, not an activity over it */
   const own=Q[0]&&Q[0].__podDone;const k=document.querySelector(own?".kmov:not(.km-out),#kmrew,[id^=\"kroul\"],.kroul-ov":".kmov:not(.km-out),#kmrew,#kpodov,[id^=\"kroul\"],.kroul-ov");if(k)return k;
-  const D=window.DF;if(D&&D.F&&(D.play||(DQ.fo&&D.tk===DQ.fo))){const f=document.querySelector(".kfoc");return f||document.body}}catch(e){}return null}
+  /* button-crawl-fix-5 (F #10 25/11 11:01Z, robot s6d: «Sang ngày mới» greyed, Q = 12 cards, NOTHING on screen): the person view is an activity
+     only while it is ON SCREEN. A tap on another tab parks it (jdfv dfTabLayers: .kfoc hidden, DF.F kept) — she is no longer inside it, so the
+     waiting card shows on the tab she is on; a view whose layer is gone (no .kfoc) holds nothing either (it used to return document.body = held for ever) */
+  const D=window.DF;if(D&&D.F&&(D.play||(DQ.fo&&D.tk===DQ.fo))){const f=document.querySelector(".kfoc");if(f&&dqShown(f))return f;
+   if(D.play&&!f&&(typeof tab==="undefined"||tab==="act"))return document.body/* an on-figure game drawn on the stage itself */;return null}}catch(e){}return null}
+function dqShown(el){try{if(!el||!el.isConnected||dqHidden(el))return false;for(let e=el;e&&e!==document.body;e=e.parentElement)if(e.hidden)return false;
+  const cs=getComputedStyle(el);if(cs.display==="none"||cs.visibility==="hidden")return false;const r=el.getBoundingClientRect();return r.width>0&&r.height>0}catch(e){return false}}
 /* the call comes from her own tap INSIDE the activity (a card / panel she opens there) */
 function dqInside(a){try{const ev=window.event;if(!ev||!/click|pointer|touch|key|mouse/.test(ev.type))return false;const t=ev.target;return !!(t&&t.nodeType===1&&(a===document.body||a.contains(t)))}catch(e){return false}}
 /* the top card is the one already playing in the jdfv stage scene (its own repeated showModal) */
@@ -96394,6 +96402,17 @@ setTimeout(()=>setTimeout(()=>{try{if(typeof render==="function"){const r0=rende
  setInterval(dqNextCue,700)/* the hold releases on a close that may not render */;
  try{const n=document.getElementById("next");if(n)new MutationObserver(()=>dqNextCue()).observe(n,{childList:true,characterData:true,subtree:true,attributes:true,attributeFilter:["disabled"]})}catch(e){}/* an inner render (a wrapper's saved r0) rewrites the label: put the cue back at once, no flicker; idempotent (no write when equal) */}catch(e){console.error("dayq cue",e)}},0),0);
 window.dqNextCue=dqNextCue;
+/* button-crawl-fix-5 SAFETY NET (F #10: «never a disabled #next with nothing on screen»): a card waiting in Q while #modal is hidden, no mini-game /
+   motion scene / person view / new-day host / title on screen, for BAL.dayq.wake ms → the waiting card is shown (showModal: every module's own gate
+   still runs, so a card a gate holds on purpose stays held). Solo only (dqUi; a co-op room paces Q with its own gates). Paint only: no S key, no draw. */
+function dqFreeScreen(){try{if(dqActEl()||dqDawn()||(typeof S!=="undefined"&&S&&S.mg))return false;
+  for(const sel of [".kfoc","#ov","#title","#kload","#kpodov","#kmrew",".kmov:not(.km-out)",".kroul-ov","[id^=\"kroul\"]","#ktut .ktut-card"]){const e=document.querySelector(sel);if(e&&dqShown(e))return false}return true}catch(e){return false}}
+function dqWake(){try{const M=document.getElementById("modal");const m=Q[0];
+  if(!dqUi()||!Q.length||!M||!dqHidden(M)||!dqFreeScreen()){DQ.wk=null;return}
+  const now=Date.now(),W=(BAL.dayq&&BAL.dayq.wake)||2000;if(!DQ.wk||DQ.wk.m!==m){DQ.wk={m,at:now,n:0};return}
+  if(now-DQ.wk.at<W*(1+DQ.wk.n))return;DQ.wk.n++;DQ.stat.woke=(DQ.stat.woke||0)+1;showModal()}catch(e){console.error("dayq wake",e)}}
+setTimeout(()=>setTimeout(()=>{try{setInterval(dqWake,700)}catch(e){}},0),0);
+window.dqWake=dqWake;
 window.DQ=DQ;
 /* DEAD-CARD NET (flight-modal-deadlock 25/11, law 11). A VIỆC card with options whose EVERY option is greyed (bạc short in j3, kitOff, j75 lk(),
    gift lock) and that has no cancel road (kitCancelIx −1: no ✕, no Esc, no tap-out, no timer) leaves her nothing to press = soft-lock
@@ -98321,7 +98340,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="7e3dd5b1e04b";window.CTM_BUILD=BUILD;
+const BUILD="8001847b471f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

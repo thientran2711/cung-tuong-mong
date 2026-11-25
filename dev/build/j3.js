@@ -52,7 +52,7 @@ const rcpLapse=t=>{try{log(`«${String(t||"Việc khó xử").replace(/</g,"&lt;
        live world: it is never saved (it came back as a bare title with an empty body, and every save round trip carried the copies on);
    (2) any other kit card (its body lives in m.kit, m.h is empty) is saved WITH its kit spec (people as ids, code left out), so it comes back whole;
    (3) old saves: empty notices (no body, no kit) and repeats of the same notice are dropped on load (deserQ). */
-const isLookCard=m=>!!(m&&m.kit&&m.kit.look);
+const isLookCard=m=>!!(m&&m.kit&&(m.kit.look||m.kit.view));/* button-crawl-fix-5: a view panel (spec.view, live status) is not saved either */
 const LOOK_T=/^(Tâm trạng · |Đã biết về |Chứng cứ về |Thỉnh tranh nhân vật)/;
 function kqEnc(x,d){d=d||0;if(d>7)throw 0;if(x==null||typeof x==="number"||typeof x==="string"||typeof x==="boolean")return x;if(typeof x==="function")return undefined;
  const k=rcpP(x);if(k!=null)return {"@p":k};if(Array.isArray(x))return x.map(y=>{const v=kqEnc(y,d+1);return v===undefined?null:v});
