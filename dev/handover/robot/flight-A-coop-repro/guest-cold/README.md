@@ -1,0 +1,1 @@
+Per-life records (guest kiep 1-4, arm A pair1 SEED=1) with cold/demote counters. The harness keeps repro saves only per bug, not per life end, so no life-end saves exist; ending text is not recorded. Row «guest cold+demote in year 1»: kiep 2,3,4 = 3 of 4 (kiep 1 none).
