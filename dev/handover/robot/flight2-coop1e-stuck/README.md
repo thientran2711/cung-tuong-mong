@@ -1,0 +1,1 @@
+STUCK room KEH9 (coop1e) buoi 30: host modal «Doi hao huu tro lai» (hao huu dang vang) vs guest in-game waiting; ladder (Cung hao huu → Tro lai phong) 10+ min no recovery; page saves not retrievable (harness 'saves' arrays empty, browser closed on stop); DEAD shots (190, 301 MB) not pushed.

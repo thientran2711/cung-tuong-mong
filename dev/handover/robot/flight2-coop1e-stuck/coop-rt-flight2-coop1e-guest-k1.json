@@ -1,0 +1,3659 @@
+{
+ "job": {
+  "id": "coop-rt-flight2-coop1e-guest-k1",
+  "origin": null,
+  "road": null,
+  "bot": "sens",
+  "seed": 70112,
+  "dev": "ipad",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "63f87747",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [
+   {
+    "at": 662,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 673,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 683,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 694,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 705,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 906,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 914,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 921,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 928,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 936,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 943,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 950,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 957,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 965,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 972,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 979,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 987,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1283,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1293,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1304,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1315,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1325,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1336,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1347,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1357,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1368,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1494,
+    "lvl": 1,
+    "layer": ".dlg",
+    "title": ""
+   },
+   {
+    "at": 1517,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1528,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1538,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1549,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1560,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1570,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1581,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1592,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1603,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1613,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1624,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1634,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1645,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1656,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1666,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1677,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1688,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1958,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1968,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1979,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   }
+  ],
+  "slice": null,
+  "areaTaps": 139,
+  "typed": 1
+ },
+ "life": {
+  "id": "HARNESS",
+  "type": "harness"
+ },
+ "exitPick": null,
+ "bugs": [
+  {
+   "type": "harness",
+   "msg": "runner error: page.waitForTimeout: Target page, context or browser has been closed",
+   "n": 1
+  }
+ ],
+ "dead": [
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Ô lưu",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590504385.png",
+   "dev": "ipad",
+   "at": 147,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Xem bản thân",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590510828.png",
+   "dev": "ipad",
+   "at": 153,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Sắc45Tài51Tâm cơ25Đức29Danh33Sủng14",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590517280.png",
+   "dev": "ipad",
+   "at": 159,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Bạc210Sức100/100",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590523705.png",
+   "dev": "ipad",
+   "at": 166,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Buổi sáng, còn 4 khắc",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590530136.png",
+   "dev": "ipad",
+   "at": 172,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Chưa điểm trang",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590536583.png",
+   "dev": "ipad",
+   "at": 179,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "trời quang",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590542988.png",
+   "dev": "ipad",
+   "at": 185,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Quẻ Hạ (Sức khỏe)",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590549367.png",
+   "dev": "ipad",
+   "at": 192,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tâm trạngBình thản+21",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590555764.png",
+   "dev": "ipad",
+   "at": 198,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Về phòng",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590562131.png",
+   "dev": "ipad",
+   "at": 204,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tin báo: 3 tin mới",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590571516.png",
+   "dev": "ipad",
+   "at": 214,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Cung nữ thân tín tam đẳngỶ Thúy",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590577880.png",
+   "dev": "ipad",
+   "at": 220,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Lịch tháng",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590584283.png",
+   "dev": "ipad",
+   "at": 226,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Thư từ",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590590665.png",
+   "dev": "ipad",
+   "at": 233,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Mục tiêu chương (có mới)",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590597055.png",
+   "dev": "ipad",
+   "at": 239,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "2Cung nhân",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590603478.png",
+   "dev": "ipad",
+   "at": 246,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "3Chí tôn",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590609878.png",
+   "dev": "ipad",
+   "at": 252,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tai mắt0",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590616279.png",
+   "dev": "ipad",
+   "at": 258,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Có thaiRất thấp",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590622679.png",
+   "dev": "ipad",
+   "at": 265,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Lật thẻThấp",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590629112.png",
+   "dev": "ipad",
+   "at": 271,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Ân tình (đêm)0",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590635511.png",
+   "dev": "ipad",
+   "at": 278,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Số lần ân thưởng0",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590641911.png",
+   "dev": "ipad",
+   "at": 284,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Bổng lộcsau 2 tuần",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590648303.png",
+   "dev": "ipad",
+   "at": 291,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Nguy hiểm chung: 0",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590653960.png",
+   "dev": "ipad",
+   "at": 296,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Xét phẩm: thiếu 3",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590660346.png",
+   "dev": "ipad",
+   "at": 303,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Chọn chính mình",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590666727.png",
+   "dev": "ipad",
+   "at": 309,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Ân oánPhe pháiThường tạiTa▾⇄Hoàng thượng▾Quan hệ g",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590673161.png",
+   "dev": "ipad",
+   "at": 315,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Ân oán",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590679561.png",
+   "dev": "ipad",
+   "at": 322,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Phe phái",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590685976.png",
+   "dev": "ipad",
+   "at": 328,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Xem quan hệ của Ta",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590692375.png",
+   "dev": "ipad",
+   "at": 335,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Đổi chỗ hai người",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590698759.png",
+   "dev": "ipad",
+   "at": 341,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "với Hoàng thượng",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590705179.png",
+   "dev": "ipad",
+   "at": 347,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Hành sự",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590711594.png",
+   "dev": "ipad",
+   "at": 354,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Dư đồ",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590717979.png",
+   "dev": "ipad",
+   "at": 360,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Hậu cung",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590724440.png",
+   "dev": "ipad",
+   "at": 367,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Giao tình",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590730898.png",
+   "dev": "ipad",
+   "at": 373,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Hoàng tự",
+   "cover": "button.kbtn.kmend in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590737354.png",
+   "dev": "ipad",
+   "at": 380,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tư trang",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590743740.png",
+   "dev": "ipad",
+   "at": 386,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tài nghệ",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590750157.png",
+   "dev": "ipad",
+   "at": 392,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Mệnh truyện",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590756505.png",
+   "dev": "ipad",
+   "at": 399,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Sắc45Tài51Tâm cơ28Đức24Danh36Sủng24",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590931980.png",
+   "dev": "ipad",
+   "at": 574,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Bạc170Sức100/100",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590938418.png",
+   "dev": "ipad",
+   "at": 581,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "hoa đào bay",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590944819.png",
+   "dev": "ipad",
+   "at": 587,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Quẻ Thượng (Con cái)",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590951270.png",
+   "dev": "ipad",
+   "at": 594,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tâm trạngVui vẻ+38",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590957746.png",
+   "dev": "ipad",
+   "at": 600,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tin báo: 5 tin mới",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590967597.png",
+   "dev": "ipad",
+   "at": 610,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Thể Hòa điệnChính điện · vắng ngườiNgười ở: Phi Di",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590977102.png",
+   "dev": "ipad",
+   "at": 619,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Dưỡng Xuân hiênĐông phối điện · 1 bóng ngườiNgười ",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590983497.png",
+   "dev": "ipad",
+   "at": 626,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Về Dư đồ",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590992916.png",
+   "dev": "ipad",
+   "at": 635,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Lật thẻKhông có",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795590999334.png",
+   "dev": "ipad",
+   "at": 642,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Bổng lộcsau 1 tuần",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591005720.png",
+   "dev": "ipad",
+   "at": 648,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Sắc45Tài51Tâm cơ28Đức21Danh37Sủng24",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591160561.png",
+   "dev": "ipad",
+   "at": 803,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Bạc57Sức100/100",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591166975.png",
+   "dev": "ipad",
+   "at": 809,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "ve kêu râm ran",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591173391.png",
+   "dev": "ipad",
+   "at": 816,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Quẻ Hạ hạ (Hung)",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591179804.png",
+   "dev": "ipad",
+   "at": 822,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tâm trạngBình thản+1",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591186241.png",
+   "dev": "ipad",
+   "at": 828,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tin báo: 7 tin mới",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591192650.png",
+   "dev": "ipad",
+   "at": 835,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Người được sai đi (có mới)",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591199073.png",
+   "dev": "ipad",
+   "at": 841,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Bổng lộcsau 3 tuần",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591205473.png",
+   "dev": "ipad",
+   "at": 848,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Túi đồThú cưngViệcTất cả 22Trang sức 1Y phục 1Vải ",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591211842.png",
+   "dev": "ipad",
+   "at": 854,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Túi đồ",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591218255.png",
+   "dev": "ipad",
+   "at": 860,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Thú cưng",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591224644.png",
+   "dev": "ipad",
+   "at": 867,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Việc",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591231057.png",
+   "dev": "ipad",
+   "at": 873,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Buôn bánBuôn bánNhờ thái giám mua đồⓘĐượcxem hàng·",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591237450.png",
+   "dev": "ipad",
+   "at": 880,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Đi lạiĐi lạiSoát đồHiểmTốn2 khắcThànhtìm ra đồ bị ",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591243838.png",
+   "dev": "ipad",
+   "at": 886,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591250254.png",
+   "dev": "ipad",
+   "at": 892,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Sắc45Tài51Tâm cơ28Đức20Danh36Sủng19",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591435220.png",
+   "dev": "ipad",
+   "at": 1077,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "nắng sớm oi ả",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591441675.png",
+   "dev": "ipad",
+   "at": 1084,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Quẻ Hạ (Mưu kế)",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591448097.png",
+   "dev": "ipad",
+   "at": 1090,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tâm trạngBình thản-2",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591454531.png",
+   "dev": "ipad",
+   "at": 1097,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tin báo: 9 tin mới",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591461018.png",
+   "dev": "ipad",
+   "at": 1103,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Lật thẻRất thấp",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591467500.png",
+   "dev": "ipad",
+   "at": 1110,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "?",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591473971.png",
+   "dev": "ipad",
+   "at": 1116,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Sắc45Tài51Tâm cơ28Đức16Danh33Sủng14",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591588073.png",
+   "dev": "ipad",
+   "at": 1230,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Bạc6Sức100/100",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591594489.png",
+   "dev": "ipad",
+   "at": 1237,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "trời trong mát",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591600908.png",
+   "dev": "ipad",
+   "at": 1243,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Quẻ Thượng thượng (Giao thiệp)",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591607307.png",
+   "dev": "ipad",
+   "at": 1250,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tâm trạngBình thản+2",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591613740.png",
+   "dev": "ipad",
+   "at": 1256,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tin báo: 13 tin mới",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591620157.png",
+   "dev": "ipad",
+   "at": 1262,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Túi đồThú cưngViệcTất cả 24Trang sức 1Y phục 1Vải ",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591626559.png",
+   "dev": "ipad",
+   "at": 1269,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 1,
+    "w": 2,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Sắc45Tài51Tâm cơ28Đức12Danh34Sủng9",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591813358.png",
+   "dev": "ipad",
+   "at": 1456,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Bạc82Sức100/100",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591819846.png",
+   "dev": "ipad",
+   "at": 1462,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Quẻ Thượng (Giao thiệp)",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591826349.png",
+   "dev": "ipad",
+   "at": 1469,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tin báo: 14 tin mới",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591832782.png",
+   "dev": "ipad",
+   "at": 1475,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Túi đồThú cưngViệcTất cả 32Trang sức 1Y phục 1Vải ",
+   "cover": "div.kpnote in #coopfz",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795591839228.png",
+   "dev": "ipad",
+   "at": 1481,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Sắc45Tài51Tâm cơ28Đức8Danh34Sủng4",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795592270233.png",
+   "dev": "ipad",
+   "at": 1912,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Bạc0Sức100/100",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795592276615.png",
+   "dev": "ipad",
+   "at": 1919,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tâm trạngBình thản0",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795592282997.png",
+   "dev": "ipad",
+   "at": 1925,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Tin báo: 1 tin mới",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795592289396.png",
+   "dev": "ipad",
+   "at": 1932,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Túi đồThú cưngViệcTất cả 35Trang sức 2Y phục 1Vải ",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795592295807.png",
+   "dev": "ipad",
+   "at": 1938,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "#dawn",
+   "label": "Chăm conChăm conNhờ thái giám tìm thú nuôiⓘTốn1 kh",
+   "cover": "div.kne.kne-beat in #dawn",
+   "shot": "/home/user/wt/rt-out/shots-coop-rt-flight2-coop1e-guest-k1/dead-ipad-1795592302204.png",
+   "dev": "ipad",
+   "at": 1944,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 2,
+    "w": 1,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Phương Tĩnh Thù"
+   }
+  }
+ ],
+ "saves": [],
+ "buoi": 29,
+ "steps": 3412,
+ "status": [],
+ "_snapAt": 1795592381580,
+ "trace": [
+  [
+   1133,
+   ".dlg «Tuần mới» «Lui»"
+  ],
+  [
+   1143,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   1144,
+   ".dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»"
+  ],
+  [
+   1151,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Tai mắt0»"
+  ],
+  [
+   1151,
+   ".dlg «Tai mắt» «Lui»"
+  ],
+  [
+   1152,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Sẵn sàng»"
+  ],
+  [
+   1154,
+   "DEAD Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ"
+  ],
+  [
+   1155,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   1155,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   1163,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   1163,
+   ".dlg «Sai cung nữ thân tín mua lén ngoài cung» «Bột ngứa: ngứa, mất thể diện, Danh -5VữngTốnBạc -4»"
+  ],
+  [
+   1171,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Sẵn sàng»"
+  ],
+  [
+   1171,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   1172,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   1179,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   1180,
+   ".dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»"
+  ],
+  [
+   1187,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Sẵn sàng»"
+  ],
+  [
+   1188,
+   ".dlg «Một ánh mắt» «Giữ bài thơ, đáp lạiRất vữngTốnkhôngĐượcngười ấy t»"
+  ],
+  [
+   1195,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Sẵn sàng»"
+  ],
+  [
+   1196,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   1196,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   1204,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   1204,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   1205,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1208,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   1210,
+   ".dlg «Kính sự phòng» «Tranh sủngHiểmTốnkhôngĐượcdựa vào ân sủng; tài ngh»"
+  ],
+  [
+   1211,
+   "#kg82 «Trước khi ra tay»"
+  ],
+  [
+   1212,
+   "#kg82 «Trước khi ra tay»"
+  ],
+  [
+   1213,
+   "#kg82 «Trước khi ra tay»"
+  ],
+  [
+   1214,
+   "#kg82 «Trước khi ra tay»"
+  ],
+  [
+   1216,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   1218,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   1230,
+   "DEAD Sắc45Tài51Tâm cơ28Đức16Danh33Sủng14"
+  ],
+  [
+   1237,
+   "DEAD Bạc6Sức100/100"
+  ],
+  [
+   1243,
+   "DEAD trời trong mát"
+  ],
+  [
+   1250,
+   "DEAD Quẻ Thượng thượng (Giao thiệp)"
+  ],
+  [
+   1256,
+   "DEAD Tâm trạngBình thản+2"
+  ],
+  [
+   1262,
+   "DEAD Tin báo: 13 tin mới"
+  ],
+  [
+   1269,
+   "DEAD Túi đồThú cưngViệcTất cả 24Trang sức 1Y phục 1Vải "
+  ],
+  [
+   1269,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1270,
+   ".dlg «Kỳ nguyệt sự» «Báo sớm, nói đã sạch kỳRất vữngTốnkhôngĐượcthẻ bài»"
+  ],
+  [
+   1271,
+   ".dlg «Phụ tuyến · Thư đệ đệ nhỏ: xin quà đồ chơi · Lời n» «Khéo từ chốiRất vữngTốnkhôngĐượcdưỡng sức, giữ sức»"
+  ],
+  [
+   1271,
+   ".dlg «Lễ Phật đản» «Lui»"
+  ],
+  [
+   1373,
+   ".kmov «Nhận»"
+  ],
+  [
+   1374,
+   ".kmov «Nhận»"
+  ],
+  [
+   1374,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   1375,
+   ".dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»"
+  ],
+  [
+   1382,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   1383,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   1390,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Sẵn sàng»"
+  ],
+  [
+   1391,
+   ".dlg «Có người đến» «Từ chốiRất vữngTốnkhôngĐượccó thêm bạcMấtngười ấy »"
+  ],
+  [
+   1398,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Sẵn sàng»"
+  ],
+  [
+   1399,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   1399,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   1407,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   1407,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   1414,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   1415,
+   ".dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»"
+  ],
+  [
+   1422,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Sẵn sàng»"
+  ],
+  [
+   1423,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   1424,
+   ".dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»"
+  ],
+  [
+   1431,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   1431,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   1438,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Sẵn sàng»"
+  ],
+  [
+   1439,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   1442,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   1443,
+   ".dlg «Kính sự phòng» «Tranh sủngHiểmTốnkhôngĐượcdựa vào ân sủng; tài ngh»"
+  ],
+  [
+   1443,
+   "#kg82 «Trước khi ra tay»"
+  ],
+  [
+   1443,
+   "#kg82 «Trước khi ra tay»"
+  ],
+  [
+   1443,
+   "#kg82 «Trước khi ra tay»"
+  ],
+  [
+   1444,
+   "#kg82 «Trước khi ra tay»"
+  ],
+  [
+   1444,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   1445,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   1446,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1456,
+   "DEAD Sắc45Tài51Tâm cơ28Đức12Danh34Sủng9"
+  ],
+  [
+   1462,
+   "DEAD Bạc82Sức100/100"
+  ],
+  [
+   1469,
+   "DEAD Quẻ Thượng (Giao thiệp)"
+  ],
+  [
+   1475,
+   "DEAD Tin báo: 14 tin mới"
+  ],
+  [
+   1481,
+   "DEAD Túi đồThú cưngViệcTất cả 32Trang sức 1Y phục 1Vải "
+  ],
+  [
+   1482,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1482,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   1482,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1483,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1483,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1483,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1483,
+   ".dlg «Lui»"
+  ],
+  [
+   1484,
+   "#kmrew «ThườngVải bôngMay áo: áo lụa thêu hoa nhỏ (Y phục,»"
+  ],
+  [
+   1485,
+   ".dlg «Lui»"
+  ],
+  [
+   1485,
+   "#kmrew «Thường»"
+  ],
+  [
+   1486,
+   ".dlg «Lui»"
+  ],
+  [
+   1487,
+   "#kmrew «Thường»"
+  ],
+  [
+   1487,
+   ".dlg «Lui»"
+  ],
+  [
+   1488,
+   "#kmrew «Thường»"
+  ],
+  [
+   1488,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1488,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1488,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1489,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1489,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1489,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1489,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1490,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1490,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1490,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1490,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1491,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1491,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1491,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1491,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1492,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1492,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1492,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1492,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1493,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1493,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1493,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1493,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1494,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1494,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1494,
+   ".dlg «Ghi chú»"
+  ],
+  [
+   1495,
+   "#kmrew «Nhận»"
+  ],
+  [
+   1495,
+   "#kmrew «ThườngNến mỡ dêThắp học đêm: buổi tối luyện cầm kỳ»"
+  ],
+  [
+   1496,
+   ".dlg «Bổng lộc tháng tư» «Chu toàn lễ nghĩaRất vữngTốnBạc -4Đượcgiữ thể diện»"
+  ],
+  [
+   1497,
+   ".dlg «Cung nữ thân tín» «Dặn Ỷ Thúy chỉ viết chuyện vặtRất vữngTốnBạc -30Đư»"
+  ],
+  [
+   1497,
+   ".dlg «Thỉnh bình an mạch» «Lui»"
+  ],
+  [
+   1499,
+   ".dlg «Phụ tuyến · Tân quân lập uy · Chương 1 · Hồi 1/2» «Khuyên ngài nhẫn nại chờ thờiRất vữngTốnkhôngĐượcb»"
+  ],
+  [
+   1499,
+   ".dlg «Y phục dự Tết Đoan ngọ» «Sai người mua trâm đồng mai hoa (Vàng) ở Nội vụ ph»"
+  ],
+  [
+   1500,
+   ".dlg «Tết Đoan ngọ · Đặt cược» «Không cược, chỉ xemRất vữngTốnkhôngĐượckhôngGợi ýk»"
+  ],
+  [
+   1500,
+   ".dlg «Tết Đoan ngọ · Chuyện bên lề hội» «Gọi cung nhân mang tấm gỗ lótTốnĐức -2ĐượcHoàng hậ»"
+  ],
+  [
+   1506,
+   "DEAD Trang sau"
+  ],
+  [
+   1692,
+   ".dlg «Tuần mới» «Lui»"
+  ],
+  [
+   1693,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   1694,
+   ".dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»"
+  ],
+  [
+   1701,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Sẵn sàng»"
+  ],
+  [
+   1702,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   1702,
+   ".dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»"
+  ],
+  [
+   1710,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   1710,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   1718,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   1718,
+   ".dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»"
+  ],
+  [
+   1726,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   1726,
+   ".dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»"
+  ],
+  [
+   1733,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Sẵn sàng»"
+  ],
+  [
+   1734,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   1735,
+   ".dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»"
+  ],
+  [
+   1742,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   1743,
+   ".dlg «Sai cung nữ thân tín mua lén ngoài cung» «Bột ngứa: ngứa, mất thể diện, Danh -5VữngTốnBạc -4»"
+  ],
+  [
+   1750,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   1750,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   1758,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Tâm trạngBình thản+9»"
+  ],
+  [
+   1758,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   1759,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Buôn bánBuôn bánNhờ thái giám mua đồⓘĐượcxem hàng·»"
+  ],
+  [
+   1759,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Về phòng»"
+  ],
+  [
+   1759,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Sắc45Tài51Tâm cơ28Đức12Danh34Sủng9»"
+  ],
+  [
+   1760,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   1760,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   1767,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   1768,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   1775,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   1775,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   1785,
+   ".dlg «Nhờ thái giám mua đồ» «Dù giấy dầuTốnBạc -15ĐượcTạp vật·Che mưa tuyết khi»"
+  ],
+  [
+   1785,
+   ".kmov «Nhận»"
+  ],
+  [
+   1786,
+   ".kmov «Nhận»"
+  ],
+  [
+   1793,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   1794,
+   ".dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»"
+  ],
+  [
+   1802,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   1802,
+   ".dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»"
+  ],
+  [
+   1809,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Sẵn sàng»"
+  ],
+  [
+   1810,
+   ".dlg «Kẻ hầu xin» «Từ chốiRất vữngTốnkhôngĐượccó thêm bạcMấtngười ấy »"
+  ],
+  [
+   1818,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   1818,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   1826,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Buôn bánBuôn bánSai cung nữ thân tín mua lén ngoài»"
+  ],
+  [
+   1826,
+   ".dlg «Sai cung nữ thân tín mua lén ngoài cung» «Lui»"
+  ],
+  [
+   1833,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   1834,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   1841,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   1841,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   1849,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Y dượcY dượcHối lộ người ở Thái y việnVữngTốn1 khắ»"
+  ],
+  [
+   1849,
+   ".dlg «Hối lộ người ở Thái y viện» «Lui»"
+  ],
+  [
+   1856,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Thú cưng»"
+  ],
+  [
+   1857,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Ân tình (đêm)0»"
+  ],
+  [
+   1857,
+   ".dlg «Ân tình (đêm)» «Lui»"
+  ],
+  [
+   1858,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Lịch tháng»"
+  ],
+  [
+   1858,
+   ".dlg «Lịch tháng» «ngày 17»"
+  ],
+  [
+   1858,
+   ".dlg «Lịch tháng» «mồng 5: Tết Đoan ngọ»"
+  ],
+  [
+   1858,
+   ".dlg «Lịch tháng» «ngày 18»"
+  ],
+  [
+   1859,
+   ".dlg «Lịch tháng» «ngày 17»"
+  ],
+  [
+   1859,
+   ".dlg «Lịch tháng» «mồng 1: Lĩnh bổng lộc · Nội vụ phủ phát đồ»"
+  ],
+  [
+   1859,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   1859,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   1860,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   1860,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   1860,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   1860,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   1861,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   1861,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   1861,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   1861,
+   ".dlg «Lịch tháng» «Bỏ hẹn»"
+  ],
+  [
+   1862,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   1862,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   1862,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   1862,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   1863,
+   ".dlg «Lịch tháng» «Bỏ hẹn»"
+  ],
+  [
+   1863,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   1863,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   1863,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   1864,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   1864,
+   ".dlg «Lịch tháng» «Bỏ hẹn»"
+  ],
+  [
+   1864,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   1865,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   1865,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   1865,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   1865,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   1866,
+   ".dlg «Lịch tháng» «Bỏ hẹn»"
+  ],
+  [
+   1866,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   1866,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   1866,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   1867,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   1867,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   1868,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Sẵn sàng»"
+  ],
+  [
+   1868,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Về phòng»"
+  ],
+  [
+   1868,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Hôm nay mặt mộc»"
+  ],
+  [
+   1869,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Tin báo: 17 tin mới»"
+  ],
+  [
+   1874,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   1877,
+   "DEAD Ta biết rồi"
+  ],
+  [
+   1877,
+   ".dlg «Kính sự phòng» «Tranh sủngHiểmTốnkhôngĐượcdựa vào ân sủng; tài ngh»"
+  ],
+  [
+   1877,
+   "#kg82 «Trước khi ra tay»"
+  ],
+  [
+   1878,
+   "#kg82 «Trước khi ra tay»"
+  ],
+  [
+   1878,
+   "#kg82 «Trước khi ra tay»"
+  ],
+  [
+   1878,
+   "#kg82 «Trước khi ra tay»"
+  ],
+  [
+   1879,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   1879,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   1895,
+   "DEAD Xem tinTốnkhôngĐượckhôngGhi chúchọn rồi xem kết qu"
+  ],
+  [
+   1912,
+   "DEAD Sắc45Tài51Tâm cơ28Đức8Danh34Sủng4"
+  ],
+  [
+   1919,
+   "DEAD Bạc0Sức100/100"
+  ],
+  [
+   1925,
+   "DEAD Tâm trạngBình thản0"
+  ],
+  [
+   1932,
+   "DEAD Tin báo: 1 tin mới"
+  ],
+  [
+   1938,
+   "DEAD Túi đồThú cưngViệcTất cả 35Trang sức 2Y phục 1Vải "
+  ],
+  [
+   1944,
+   "DEAD Chăm conChăm conNhờ thái giám tìm thú nuôiⓘTốn1 kh"
+  ],
+  [
+   1945,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   1945,
+   ".dlg «Phụ tuyến · Tâm nguyện Thái y (1/3): Sách thuốc th» «Nhận lờiVữngTốnkhôngĐượcbản thân khá lên (chút ít)»"
+  ],
+  [
+   1946,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   1985,
+   ".kmov «Nhận»"
+  ],
+  [
+   1985,
+   ".kmov «Nhận»"
+  ],
+  [
+   1985,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Cung nữ thân tín tam đẳngỶ Thúy»"
+  ],
+  [
+   1985,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   1986,
+   ".kfoc «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   1986,
+   ".kfoc «Quay lại»"
+  ],
+  [
+   1988,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Sẵn sàng»"
+  ],
+  [
+   1988,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Tin báo: 1 tin mới»"
+  ],
+  [
+   1989,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Tâm trạngBình thản0»"
+  ],
+  [
+   1989,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   1990,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Thú cưng»"
+  ],
+  [
+   1990,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   1990,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Lịch tháng»"
+  ],
+  [
+   1991,
+   ".dlg «Lịch tháng» «ngày 13»"
+  ],
+  [
+   1991,
+   ".dlg «Lịch tháng» «ngày 21»"
+  ],
+  [
+   1991,
+   ".dlg «Lịch tháng» «ngày 24: Nguyệt tín»"
+  ],
+  [
+   1991,
+   ".dlg «Lịch tháng» «ngày 12»"
+  ],
+  [
+   1992,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   1992,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   1992,
+   ".dlg «Lịch tháng» «ngày 15»"
+  ],
+  [
+   1992,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   1993,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   1993,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   1993,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   1993,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   1993,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   1994,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   1994,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   1994,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   1994,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   1995,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   1995,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   1995,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   1995,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   1996,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   1996,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   1996,
+   ".dlg «Lịch tháng» «Bỏ hẹn»"
+  ],
+  [
+   1996,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   1997,
+   ".dlg «Lịch tháng» «Bỏ hẹn»"
+  ],
+  [
+   1997,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   1997,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   1997,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   1998,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   1998,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   1998,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   1998,
+   ".dlg «Lịch tháng» «Bỏ hẹn»"
+  ],
+  [
+   1999,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   1999,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   1999,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   1999,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   2000,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   2000,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   2000,
+   ".dlg «Lịch tháng» «Bỏ hẹn»"
+  ],
+  [
+   2000,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   2001,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   2001,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   2001,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   2001,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   2002,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   2002,
+   ".dlg «Lịch tháng» «Ghi vào sổ»"
+  ],
+  [
+   2002,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   2002,
+   ".dlg «Lịch tháng» «Luyện đàn»"
+  ],
+  [
+   2003,
+   ".dlg «Lịch tháng» «Lễ Phật»"
+  ],
+  [
+   2003,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   2003,
+   ".dlg «Lịch tháng» «Đến thăm Hoàng hậu»"
+  ],
+  [
+   2003,
+   ".dlg «Lịch tháng» «Bỏ hẹn»"
+  ],
+  [
+   2004,
+   ".dlg «Lịch tháng» «Bỏ hẹn»"
+  ],
+  [
+   2004,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   2005,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Túi đồ»"
+  ],
+  [
+   2005,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Y phục 1»"
+  ],
+  [
+   2006,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Có thaiRất thấp»"
+  ],
+  [
+   2006,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Bạc-35Sức100/100»"
+  ],
+  [
+   2006,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Y phục 1»"
+  ],
+  [
+   2007,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Tài nghệ»"
+  ],
+  [
+   2007,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Hoàng tự»"
+  ],
+  [
+   2007,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Xét phẩm: thiếu 3»"
+  ],
+  [
+   2007,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Hôn sự»"
+  ],
+  [
+   2008,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «2Cung nhân»"
+  ],
+  [
+   2008,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Con của ta»"
+  ],
+  [
+   2008,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   2009,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Trưởng Tôn Thanh Từ: Đang làm việc»"
+  ],
+  [
+   2009,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Kế vị»"
+  ],
+  [
+   2009,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Giao tình»"
+  ],
+  [
+   2010,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «ve kêu râm ran»"
+  ],
+  [
+   2010,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Tư trang»"
+  ],
+  [
+   2010,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Cài tóc: Trâm đồng mai hoa»"
+  ],
+  [
+   2011,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Y phục: Áo the thêu lan»"
+  ],
+  [
+   2011,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Tâm trạngBình thản0»"
+  ],
+  [
+   2011,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   2012,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Mệnh truyện»"
+  ],
+  [
+   2012,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Tâm nguyện»"
+  ],
+  [
+   2013,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Hậu cung»"
+  ],
+  [
+   2013,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Chí tôn»"
+  ],
+  [
+   2014,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Mệnh truyện»"
+  ],
+  [
+   2014,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Bạc-35Sức100/100»"
+  ],
+  [
+   2014,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   2014,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Bổng lộcsau 2 tuần»"
+  ],
+  [
+   2015,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   2015,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Lật thẻRất thấp»"
+  ],
+  [
+   2015,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Quẻ Hạ hạ (Hung)»"
+  ],
+  [
+   2015,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Thư từ»"
+  ],
+  [
+   2016,
+   "#kchatp «Gửi»"
+  ],
+  [
+   2016,
+   "#kchatp «Gửi»"
+  ],
+  [
+   2016,
+   "#kchatp «Gửi»"
+  ],
+  [
+   2016,
+   "#kchatp «Gửi»"
+  ],
+  [
+   2017,
+   "#kchatp «Lui»"
+  ],
+  [
+   2017,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Người được sai đi (có mới)»"
+  ],
+  [
+   2018,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Tài nghệ»"
+  ],
+  [
+   2018,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Chọn chính mình»"
+  ],
+  [
+   2018,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Tâm trạngBình thản0»"
+  ],
+  [
+   2019,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   2020,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Tin báo»"
+  ],
+  [
+   2020,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Có thaiRất thấp»"
+  ],
+  [
+   2020,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Thư từ»"
+  ],
+  [
+   2020,
+   "#kchatp «Lui»"
+  ],
+  [
+   2021,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Xét phẩm: thiếu 3»"
+  ],
+  [
+   2022,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Tai mắt0»"
+  ],
+  [
+   2022,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Mục tiêu chương (có mới)»"
+  ],
+  [
+   2022,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Có thaiRất thấp»"
+  ],
+  [
+   2022,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Có thaiRất thấp»"
+  ],
+  [
+   2023,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Tứ đức 8/9»"
+  ],
+  [
+   2023,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Ân tình (đêm)0»"
+  ],
+  [
+   2023,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «ve kêu râm ran»"
+  ],
+  [
+   2023,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «ve kêu râm ran»"
+  ],
+  [
+   2024,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Giao thiệpGiao thiệpTự họcⓘTốn2 khắc·Sức -15Đượcti»"
+  ],
+  [
+   2024,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Trưởng Tôn Thanh Từ: Đã sẵn sàng»"
+  ],
+  [
+   2024,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Tin báo»"
+  ],
+  [
+   2025,
+   "page «Cảnh Phúc cung · Dưỡng Xuân hiên · Ở đây còn 3 ngư» «Hành sự»"
+  ],
+  [
+   2025,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   2025,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   2026,
+   ".kfoc «Nghe ngóng chung · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   2026,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   2026,
+   ".kfoc «Sai đi dò la · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   2026,
+   ".kfoc «Giao thiệp 3/3»"
+  ],
+  [
+   2027,
+   ".kfoc «Giao việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   2027,
+   ".kfoc «Giao thiệp 3/3»"
+  ],
+  [
+   2027,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   2027,
+   ".kfoc «Giao thiệp 3/3»"
+  ],
+  [
+   2028,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   2028,
+   ".kfoc «Giao việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   2028,
+   ".kfoc «Giao thiệp 3/3»"
+  ],
+  [
+   2028,
+   ".kfoc «Giao thiệp 3/3»"
+  ],
+  [
+   2029,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   2029,
+   ".kfoc «Giao thiệp 3/3»"
+  ],
+  [
+   2029,
+   ".kfoc «Giao việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   2029,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   2030,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   2030,
+   ".kfoc «Sai đi dò la · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   2030,
+   ".kfoc «Sai đi dò la · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   2030,
+   ".kfoc «Giao thiệp 3/3»"
+  ],
+  [
+   2031,
+   ".kfoc «Giao việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   2031,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   2031,
+   ".kfoc «Sai đi dò la · Có cơ · Tốn 1 khắc»"
+  ],
+  [
+   2031,
+   ".kfoc «Mưu kế 1/1»"
+  ],
+  [
+   2032,
+   ".kfoc «Giao thiệp 3/3»"
+  ],
+  [
+   2032,
+   ".kfoc «Trò chuyện với cung nữ · Tốn 1 khắc»"
+  ],
+  [
+   2032,
+   ".kfoc «Lui»"
+  ],
+  [
+   2033,
+   ".dlg «Tin báo» «Để sauTốnkhôngĐượckhông»"
+  ],
+  [
+   2034,
+   ".dlg «<span data-k61skip=\"1\"><b class=\"kname\" style=\"--r» «Lui»"
+  ]
+ ],
+ "_ckAt": 1795592227466,
+ "_ckB": 28
+}
