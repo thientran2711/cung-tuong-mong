@@ -141,3 +141,29 @@ Not an engine clash: LIVE 1f0a491a (flight-modal-deadlock) fixed the DATA — j6
 SHOTS (scratch only, LOOKED 3×): dead all-bạc card at bạc 2, Sức 1 — open + forced, Fold + iPad: kit VIỆC frame, both roads greyed «Bạc -60», kit ✕ top right, no overflow.
 Law check: 2 OK (one altCost function for every swapped road) · 3 OK (floor kept; leave costs nothing) · 4 OK · 7 OK · 9 OK (kit ✕ only) · 11 OK (scan + plant + dead-card scan) · 14 OK (one rule, jdeadcard gone).
 Note for LC14: replace hardlock-choice-r2 c8a2bb3e with r3 87e622fb (contains LIVE 9f72524b).
+
+## REVIEW r3 — PASS (BIG reviewer, opus, session_01N1tNP5U1GkSm12gVTAofGW; depth per Foreman B child; START_CTX ≈4 %, finished ≈15 %)
+PRIORITY #1 CHECK ('hardlock jdeadcard kitNoLock'): OD 0 | ledger 0 | claims 0 | main jdeadcard.js (LIVE 9f72524b, now deleted by r3) | review/* review/hardlock-choice-r2 c8a2bb3e (r2 rule reused) | archive 0. Nothing rebuilt.
+**LAND READY review/hardlock-choice-r3 87e622fb438125bc9c908abcd5604cbaab149e59 FOR MAIN 139 / LC14 (BIG; rules)** — LIVE origin/main 9f72524b (re-fetched at verdict) is an ancestor of 87e622fb → merged-on-LIVE = head; no -rv branch needed. Replaces hardlock-choice-r2 c8a2bb3e in LC14.
+
+### Checks
+1. ONE rule (law 11/14): `git grep -E "jdeadcard|deadCardIs|deadCardOff|mclose\">Lui"` over the whole tree (index.html/handover excluded) → only comments + the hook-85 old-sha fallback; no caller. `git grep "opts\.every("` dev/build → 0 (no private all-greyed guard left); the only close-word table is j3 KIT_CLOSE_W. jnolock is assembled last (outermost showModal/chooseM). OK.
+2. Law 2/3/4: the short bạc is priced only by altCost(short, S.rank) (jstory BAL.bacTuan/BAL.altK); Danh via BAL.nolock.of (= BAL.j68c step ratio); no typed number; one-core-guard PASS. Each swapped road = its own bạc price converted by the same function, so the roads keep their data's relative values. «Lui» costs nothing and gains nothing = the card's leave (same as every kit ✕), not a cost-only road. OK.
+3. Law 9 kit: «Lui» is pushed as the card's cancel option and drawn by kitModalCloser as the kit ✕ (shots); jdeadcard's hand-made `<button class="main" id="mclose">` is gone (an improvement). OK.
+4. Law 6c / no zero-choice card: dead card closes via closeModal (same as ✕), logged once in window.__deadCards; hardlock-scan HARD LOCKS 0, dead-card scan n 0. OK.
+5. Law 7: words «Lui», « (thiếu bạc, lấy công sức bù)», no digits/%. OK. Nit (not blocking): when the rest is paid in Danh the tag still says «công sức».
+6. Co-op: coop-e2e both seat orders 142/142 on a local Worker. OK.
+
+### Gates (reviewer runs; LIVE = base, so head = merged)
+| gate | head 87e622fb (= merged on LIVE 9f72524b) |
+|---|---|
+| `node dev/test/hardlock-choice.js` Fold 755x1000 + iPad 1180x820 (incl. rebuilt LC14 fixture (a0)(a)) | `HARDLOCK-CHOICE ALL PASS` (36 ok, 0 page errors) |
+| MUTATE B: altCost → flat `ceil(short/5)` | `HARDLOCK-CHOICE FAIL (4)` ((b) Sức -7 ≠ altCost -16; (h)) ✔ |
+| MUTATE A: old path back (jnolock leave removed + LIVE jdeadcard.js re-assembled) | `HARDLOCK-CHOICE FAIL (6)` ((d)(e)(g) no «Lui» road) + `DEAD-CARD FAIL 2` (part3 lui null) ✔ |
+| `node dev/test/dead-card.js <url>` | `DEAD-CARD PASS` (n 0 / 349 built; part2 1/4 + 1/4; part3 open + forced «Lui», closes, bạc 2 kept) |
+| `node dev/tools/hardlock-scan.js --turns 40 --md` | `HARDLOCK-SCAN PASS · 905 choice cards · HARD LOCKS 0 · not drawn 15 (dead 0) · plant guarded · page errors 0` |
+| one-core-guard / undef-scan | PASS / PASS (305 names) |
+| `node dev/test/coop-e2e.js <out> http://127.0.0.1:8787` (wrangler dev) Fold host / `COOP_SWAP=1` iPad host | `142/142 passed` / `142/142 passed` (first runs, no flake) |
+| `bash dev/tools/quickcheck.sh` ALONE | `QUICKCHECK PASS · old save ok · render 228/243, tab 551/510, buổi 1336/2419 ms, tasks>200ms 25/28 · core gates PASS (hooks 8, incl. 85 dead-card)` |
+coop/worker not touched → its npm test not needed. SHOTS (scratch only, deleted; LOOKED 3×): serv-022 at old all-bạc price, 14 short — Fold + iPad: roads open «Bạc -26 · Sức -16 / -7 / -24», tag wraps, no overflow, no cut text; «Lui» card (purse 0) — Fold + iPad: roads greyed with price, kit ✕ top right, no extra button. (Test-only: header Bạc/Sức not re-rendered after the test sets S.bac — fixture artifact, not game.)
+Law check: 2 OK · 3 OK · 4 OK · 6c OK · 7 OK (nit) · 9 OK · 11 OK · 14 OK.
