@@ -14,7 +14,7 @@
      UNGUARDED   anything else → FAIL. */
 const fs=require('fs'),path=require('path');const DIR=__dirname;const V=process.argv.includes('-v');
 /* a side-line card id / its builder (jdlgs families: j72 q72o, j68 e68c / e68<id> E68, j7 J7 / EVI ev ids / j7c, kỳ ngộ KY, j70 P70, j71c FV7, jworldc worldStart, PEND builders, DLGS) */
-const SL=/q72|e68|E68|j7c|J7I|J7SEEDS|kyngo|KY\.|j70|P70|compCard|jworldc|worldStart|j71c|FV7|EVI\b|evFire|PEND|DLGS/;
+const SL=/evRelease|approaches\(|q72|e68|E68|j7c|J7I|J7SEEDS|kyngo|KY\.|j70|P70|compCard|jworldc|worldStart|j71c|FV7|EVI\b|evFire|PEND|DLGS/;
 /* drives the game clock (a card of any family can fire on its own) */
 const TURN=/nextBuoi|#next|\(["']next["']\)|Sang buổi|Sang ngày mới|endTurn|endWeek|inpage[0-9]|measure\//;
 const G=new RegExp(/q72Offer|q72o|e68c|j7c|kyngo|j70|compCard|jworldc|showModal|Sang buổi/.source+'|'+SL.source+'|'+TURN.source);
