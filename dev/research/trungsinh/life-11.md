@@ -1,0 +1,35 @@
+# Life 11 (TS-P3, game "Kiếp 1" in a fresh browser) — IN PROGRESS draft
+Player seat TS-P3, style EMPEROR'S FAVOURITE. Template file from the lead was not on the branch when I started, so this uses the fallback outline from the task.
+
+## Origin / start
+- Name: Hàn Ngọc Oanh, 16 y/o, daughter of a potter (Hàn Tử Lâm, "thợ gốm"); mother = Âu Dương Quỳnh Như (chính thất). Starts as **Cung nữ thường** at the embroidery workshop (Xưởng thêu). Reroll costs 1 "điểm luân hồi"; "Tự chọn diện mạo" (choose looks) exists.
+- Start stats: Dung mạo 22, Trí tuệ 16, Tài nghệ 10, Hoạt ngôn 13, Thiện 25, Ác 22, May mắn 12, Sức khỏe 94; Công trạng/Uy danh/Ân điển 0. Bạc 10.
+- Opening cards: "Một đời mới" (family card) → "Ngày tiến cung" → reward card (Thanh Bố outfit + 2 achievements "Cánh cửa son", "Một đường kim" each +1 điểm luân hồi).
+
+## Core loop (observed)
+- One screen "Cuộc đời": 8 monthly activities (Lễ nghi, Đọc sách, Tài nghệ, Đối đáp, Y quan, Nhận việc, Lập danh, Dâng công), **5 actions per month** (counter 5/5); button "+1 THÁNG" ends the month. Each action gives small stat gains (e.g. Tài nghệ +2..5, Công trạng +3 with a cap "(giới hạn)"), sometimes a side loss. Dâng công → Ân điển +1. Y quan costs 15 bạc, restores Sức khỏe. Stats cap at 100 within ~3 years.
+- Journal ("Nhật ký tháng") logs every action + event per month.
+- Bottom tabs: Cuộc đời / Hoàng cung (map) / Túi đồ / Nhân duyên. Top: hourglass (pending rewards), bạc, music. Side buttons: Thủ công (embroidery), Cửa tiệm (shop). Status chip: "Đố kỵ N" (envy) climbs from rumours/rank.
+- Hoàng cung map: 13 places (Thừa Thiên, Liên Hoa, Vọng Nguyệt, Ngọc Lan, Phượng Nghi = locked "Giới hạn" by rank; Ngự hoa viên, Thủy Tạ, Tàng Thư, Thái Y viện, Thượng Phục, Chu Tước, Ngự Thiện open). "THỂ LỰC" 5 stamina stars; "Ghé thăm · 1 thể lực" meets the NPCs standing there (Làm quen / Trò chuyện / Tặng quà, shows age, rank, relation word "Quen biết/Thù địch" and Thiện cảm number).
+
+## Event cards (types)
+1. **Choice cards** with 2–3 options; each option shows the governing stat and "Thuận lợi N%" (percent shown to player!). Same choice can go either way ("Cùng một lựa chọn có thể dẫn đến kết quả khác nhau ở mỗi lần gặp"). A result card follows with stat deltas (Công trạng/Uy danh/Đố kỵ/Thiện cảm/Bạc/Sức khỏe).
+   - Examples seen: Chén trà bị tráo; Chén trà nghiêng (3 options, 71% option still failed → Bạc −5, Đố kỵ +2); Đối thủ cần người giúp (help → Thù địch −3, Thiện +1); Đèn lồng rơi giữa yến; Ngựa hoảng trước cửa viện; Nét thêu còn thiếu (ask experienced helper → Công trạng +3, Thiện cảm +4); Hộp phấn được biếu; Thư từ cố hương (send 15 bạc home → next letter says family worse, Sức khỏe −5); Mật thư dưới gối; Lễ phục bị cắt chỉ (report as-is → culprit blames her back, Đố kỵ +10); Khói sau cửa kho; Tiếng gỗ nứt trên cầu; Đêm gió lùa; Đổi ca giữa giông; Phần việc không đều; Lời đồn sau rèm; Chiếc trâm ở bậc thềm (hand to superior / find owner / keep it).
+2. **Pure result cards** (no choice): Lụa hỏng phải đền (−bạc −1 tài nghệ, repeats every ~month), Phấn hương có độc (−Dung mạo −Sức khỏe, repeats), Bài luyện bị phá, Lời gièm bên rèm (−Hoạt ngôn −Uy danh −Ân điển), Thái y nhận ra vị thuốc bị đổi (survived poisoning).
+3. **Recurring antagonist extortion**: "Kẻ trên gây khó dễ" — Tu nghi (later Phúc Hoàng Quý Phi) Bạch Uyển Thanh demands bạc (30→37→27…) / an item; options "Nhẫn nhịn · Giao" or "Không giao". Thiện cảm with her goes −11 → −16 and stays hostile for years. Another: Nữ quan Thượng Quan Vân Hoan / Thanh Hoàng Quý Phi Lâm Linh San "hắt nước" first-meeting card (Sức khỏe −4, Uy danh −3, bad first impression) — the same first-meeting card repeats with each new senior NPC (name/rank swapped).
+4. **Calendar events**: Lễ hội thời trang cung đình (every T6 of each year): dress-up mini-game — theme + required colour on ≥1 piece + total luxury must be under/over a given range (e.g. "Dưới 130", "Trên 120", "Từ 110 đến 140", "Dưới 50"); player borrows 5 outfits + 5 jewels (own items too); eligibility ticks ✓/✕; then a long Emperor "xướng danh" ceremony (flowers + bạc prizes: Cúc trắng 10 / Hoa nhài 20 / dâm bụt 30 … Á khôi đệ nhị/nhất, **Hoa khôi** gets the emperor's night: "Hoàng đế… mời Thẩm Nguyệt Cầm đến tẩm điện"). "Skip 50 bạc" button on the ceremony. Tiệc đầu xuân (Mùng một tháng Giêng each year): pick outfit → fireworks scene → greetings → lucky-draw "Lộc đầu xuân" (bạc or a "Quý giá" item e.g. Phong Niên, Lưu Ly Nguyệt Ảnh). 
+5. **Reign change**: Năm 2 T9: "Tân đế đăng cơ" — Hoàng đế Triệu Hạo Nguyên (old) dies of sudden illness; Triệu Thiên Cảnh, 25, takes the throne; card says she must meet/talk with the new emperor.
+6. **Maid exam "Kỳ khảo hạch cung nữ"** (every 2 years, countdown "Còn N tháng"): memory-pair card game "Ghi nhớ ngự vật", 3 rounds (8/10/12 cards, 4/5/6 mistakes allowed), pass if total >50; failing keeps rank ("vẫn được dự vòng tiếp theo" after running out of mistakes) — failed three times with my naive flip strategy (31, 29, 29).
+7. **"Một lần đặc tuyển"** (Y7 T7, age ~22): the palace opens a selection for maids with enough Công trạng: "Xin dự thi họa" → DRAWING exam. A canvas with a small reference line-drawing (Mai đón xuân etc., "Đề n/10"); player traces with mouse/touch; score = Giống mẫu ×80% + Tài nghệ (max 18) + Trí tuệ (max 2); 85–100 Bảo lâm, 70–84 Ngự nữ, 50–69 Thải nữ, <50 fail. I scored 97 → **Bảo lâm (chánh lục phẩm)**: cards "Phụ mẫu tiễn nhập cung" (dowry chest), "Chiếu chỉ sắc phong" (decree, outfit Tử Đằng Sương Mỏng), "Kết quả tuyển tú" score breakdown (Khớp hình/Độ hoàn thiện/Bố cục %), achievements (Từ áo vải đến gấm hoa, Một bước Bảo lâm, Nét bút như thần: +1 điểm luân hồi each). Home then shows "Đại khảo thăng phẩm · Còn 24 tháng".
+8. **Emperor interactions (after becoming a consort)**: "Hoàng đế lật thẻ bài" (Nhận lời thị tẩm / Cáo bệnh xin khất) → outfit screen "Y phục thị tẩm" (quality tier word Thường/Tinh xảo/Quý giá; jewelry tab) → "Một đêm ân ái trôi qua, kết quả…" → result card (e.g. "Một đêm bình thường… Lần này không có tin thai", shows Thiện cảm 0 → 0). "Triệu kiến · Một khúc cổ cầm": rhythm game (30 s, 19 notes, ★ rating); my autopilot missed all (0/100) → emperor "Tiếng đàn rối loạn khiến trẫm không vui" Thiện cảm hoàng đế −6.
+9. **Đại khảo nội đình** (every 2 years, promotion): "Muốn lên Tài nhân, nàng phải đủ ba chỉ số rồi vượt bài họa" — drawing again, need ≥70; got 99 → **Tài nhân**, new outfit Ngọc Lan Bảo Lâm, achievement "Đường mây mở lối".
+
+## Mini-games seen
+Memory pairs (maid exam), dress-up with colour/luxury constraints (festival, new-year feast, night dress), drawing trace exam (selection + promotion), rhythm qin (emperor summons).
+
+## Meta
+- Luân hồi points (shown in the hourglass): +1 per achievement; natural end +1; forced reincarnation / failed selection gives none. Reroll identity = 1 point.
+- Account/progress is saved in browser localStorage (survives reload).
+- Pacing: roughly 12 months of real play ≈ 8–10 real minutes with my driver. Maid → Bảo lâm took 78 months; Bảo lâm → Tài nhân 24 months.
+
+(continues…)
