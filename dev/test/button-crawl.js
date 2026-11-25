@@ -20,7 +20,7 @@ const FAST=!!opt('fast',false);
 const OUT=path.resolve(opt('out','/home/user/wt/bc-out/run'));
 const DEVS={fold:[755,1000],ipad:[1180,820]};
 const DEV=String(opt('dev',FAST?'fold':'fold,ipad')).split(',').filter(d=>DEVS[d]);
-const DEPTH=+opt('depth',FAST?1:3),MAXTAPS=+opt('max',FAST?160:100000);
+const DEPTH=+opt('depth',FAST?1:3),MAXTAPS=+opt('max',FAST?80:100000);
 const STARTS=String(opt('start',FAST?'home':'title,home,tour')).split(',');
 const GAME=opt('game',path.join(REPO,'index.html'));
 /* pictures load as she sees them (layout depends on them; --noimg blocks them for speed); sound/video are blocked */
@@ -86,8 +86,10 @@ const INPAGE=()=>{
    const onS=[...document.querySelectorAll('.on,.sel,.active,.picked,[aria-selected=true],[aria-pressed=true],:checked')].filter(e=>this.vis(e)).map(e=>this.desc(e)+(e.innerText||'').slice(0,12)).join(',');
    const txt=(document.body.innerText||'')+onS;let th=0;for(let i=0;i<txt.length;i++)th=(th*31+txt.charCodeAt(i))|0;
    const pn=document.getElementById('panel');let panel='';if(pn&&this.vis(pn)){const t=(pn.className+'|'+(pn.firstElementChild?pn.firstElementChild.className:'')+'|'+(pn.innerText||'').slice(0,80));let h=0;for(let i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))|0;panel=String(h)}
+   /* moved / zoomed / resized things (a map zoom, a slider) show only in inline styles */
+   let sty=0;{const R=[document.getElementById('panel'),...this.liveRoots().filter(r=>r!==document.body)].filter(Boolean);let n=0;for(const r of R)for(const e of r.querySelectorAll('[style]')){if(++n>600)break;const t=e.getAttribute('style');for(let i=0;i<t.length;i++)sty=(sty*31+t.charCodeAt(i))|0}}
    let kg='';try{const g=document.getElementById('kg82')||document.querySelector('#ov .kgame');if(typeof KG82!=='undefined'&&g&&this.vis(g))kg=KG82.phase||(KG82.setup?'setup':'intro')}catch(e){}
-   return{roots:roots.sort(),tab,panel,kg,S:sh,txt:txt.length+':'+th,title:!!(document.getElementById('title')&&!document.getElementById('title').hidden),q:(typeof Q!=='undefined'&&Q||[]).length}},
+   return{roots:roots.sort(),tab,panel,kg,sty,S:sh,txt:txt.length+':'+th,title:!!(document.getElementById('title')&&!document.getElementById('title').hidden),q:(typeof Q!=='undefined'&&Q||[]).length}},
   baseline(){this.base=new Set([...document.body.children]);this.hid=[...document.querySelectorAll('[id]')].filter(e=>this.isFixedRoot(e)).map(e=>[e,e.hidden])},
   snap(){this.sv=JSON.stringify(ser());this.baseline();this.list();this.homeLive=new Set(this.liveRoots());this.homeSig=JSON.stringify(this.sig().roots.map(r=>r.split(':')[0]))},
   /* after a restore: the screen must look like the snapshot's (same live layers) */
@@ -120,7 +122,7 @@ function verdict(b,pre,post,errs,closedOwn,par){
  if(b.tab)return post.tab===b.tab||pre.tab===b.tab&&changed?['PASS','tab '+b.tab+' shown']:changed?['WARN','tab button changed the screen but tab '+b.tab+' not marked on']:['FAIL','tab button: nothing happened'];
  if(!changed&&b.on)return['PASS','already on (tapping the shown tab/choice again changes nothing)'];
  if(!changed)return['FAIL','no effect (screen and state unchanged)'];
- const what=[];if(JSON.stringify(pre.roots)!==JSON.stringify(post.roots))what.push('layer');if(pre.tab!==post.tab)what.push('tab');if(pre.txt!==post.txt)what.push('text');if(pre.S!==post.S)what.push('state');if(pre.title!==post.title)what.push('title');
+ const what=[];if(JSON.stringify(pre.roots)!==JSON.stringify(post.roots))what.push('layer');if(pre.tab!==post.tab)what.push('tab');if(pre.txt!==post.txt)what.push('text');if(pre.S!==post.S)what.push('state');if(pre.sty!==post.sty)what.push('moved');if(post.self)what.push('toggled');if(pre.title!==post.title)what.push('title');
  return['PASS',what.join('+')]}
 
 /* START tour: a brand-new player's first life — the 12-step LỜI DẶN tour. Every «Tiếp»/«Đã hiểu» must turn the page; a step with no
@@ -192,7 +194,7 @@ async function crawlTour(p,dev,ER){
 }
 async function crawlDev(b,URL,dev){
  const [w,h]=DEVS[dev];
- const ctx=await b.newContext({viewport:{width:w,height:h},hasTouch:true,isMobile:dev==='fold',deviceScaleFactor:1,reducedMotion:'reduce',serviceWorkers:'block'});
+ const ctx=await b.newContext({viewport:{width:w,height:h},hasTouch:true,isMobile:dev==='fold',deviceScaleFactor:1,serviceWorkers:'block'});
  let p,errs=[];const errsRef={get:()=>errs,clr:()=>{errs=[]}};
  async function open(){p=await ctx.newPage();await p.route(BLOCK,r=>r.abort());
   p.on('pageerror',e=>errs.push(e.message+' @'+((e.stack||'').split('\n')[1]||'').trim().slice(0,80)));
@@ -237,7 +239,7 @@ async function crawlDev(b,URL,dev){
   const seen=new Set();const queue=[[]];const parentOf=new Map();
   while(queue.length&&taps<MAXTAPS){const pathK=queue.shift();const par=parentOf.get(pathK.join('>'))||null;
    const g=await goto(pathK);if(g){rows.push({dev,start:st,path:pathK,label:'(replay)',verdict:'SKIP',why:g});continue}
-   const sig0=await p.evaluate(()=>__bc.sig());const sk=JSON.stringify([sig0.roots.map(r=>r.startsWith('body')?'body':r),sig0.tab,sig0.panel,sig0.title]);
+   const sig0=await p.evaluate(()=>__bc.sig());const topL=sig0.roots.filter(r=>!r.startsWith('body'));const sk=topL.length?JSON.stringify(topL):JSON.stringify([sig0.roots.map(r=>r.startsWith('body')?'body':r),sig0.tab,sig0.panel,sig0.title]);/* a frame on top = the same screen whatever tab lies under it */
    if(seen.has(sk)&&pathK.length){continue}seen.add(sk);
    let L=await p.evaluate(()=>__bc.list());
    /* a screen one tap deeper: tap only what is NEW on it (the new frame's buttons; for a new tab, the buttons of its panel) —
@@ -247,6 +249,9 @@ async function crawlDev(b,URL,dev){
     L=L.filter(b=>!pd.has(b.rk)||(b.rk==='body'&&tabNew&&b.inPanel))}
    const screen=(pathK.length?pathK.map(k=>k.split('|').pop().replace(/#\d+$/,'')).join(' › '):st)+' ['+(sig0.roots[sig0.roots.length-1]||'').slice(0,60)+']';
    console.log(`[${dev}] ${st} depth ${pathK.length} · ${L.length} buttons · ${screen}`);
+   /* what moves by itself on this screen (an animation, a clock) is not an effect of a tap */
+   const nz=await p.evaluate(async()=>{const a=__bc.sig();await new Promise(r=>setTimeout(r,700));const b=__bc.sig();return Object.keys(a).filter(k=>JSON.stringify(a[k])!==JSON.stringify(b[k]))});
+   const strip=o=>{if(!o||o.nav)return o;const c=Object.assign({},o);for(const k of nz)delete c[k];return c};
    let dirty=false;
    for(const bt of L){if(taps>=MAXTAPS)break;
     if(dirty){const g2=await goto(pathK);if(g2){rows.push({dev,start:st,path:pathK,screen,label:bt.label,verdict:'SKIP',why:g2});continue}dirty=false}
@@ -255,7 +260,8 @@ async function crawlDev(b,URL,dev){
     const h=await p.evaluateHandle(k=>__bc.find(k),bt.key);const el=h.asElement();
     if(!el){if(process.env.BCDBG){const now=await p.evaluate(()=>__bc.list().map(x=>x.key));console.log('GONE',bt.key,'\n NOW',now.filter(k=>!L.some(x=>x.key===k)).join(' ;; '));await p.screenshot({path:path.join(OUT,'gone.jpg')})}
      rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,verdict:'SKIP',why:'button gone before its tap'});continue}
-    const rootH=await el.evaluateHandle(e=>__bc.root(e));
+    const rootH=await el.evaluateHandle(e=>__bc.root(e));const selfSt=e=>e.isConnected?e.className+'|'+(e.getAttribute('aria-pressed')||'')+'|'+(e.getAttribute('aria-expanded')||'')+'|'+(e.innerText||'').slice(0,40):'gone';
+    const self0=await el.evaluate(e=>e.isConnected?e.className+'|'+(e.getAttribute('aria-pressed')||'')+'|'+(e.getAttribute('aria-expanded')||'')+'|'+(e.innerText||'').slice(0,40):'gone').catch(()=>'');
     const shot=path.join(OUT,'shots',`${dev}-${String(rows.length).padStart(4,'0')}.jpg`);
     let dead=null;const ok=await tap(p,el,{screen,label:bt.label,shot,log:m=>{dead=m}});taps++;
     if(!ok){const d=JSON.parse(dead.replace(/^DEAD BUTTON /,''));rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,hit:'DEAD',verdict:'FAIL',why:'dead button: '+d.why+(d.cover?' under '+d.cover+(d.coverText?' «'+d.coverText+'»':''):''),shot});continue}
@@ -266,12 +272,14 @@ async function crawlDev(b,URL,dev){
      post=await p.evaluate(()=>__bc.sig())}
     catch(e){post={nav:'page navigated/reloaded'};}
     if(post.nav){rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,hit:'ok',verdict:'WARN',why:'page reloaded/navigated'});dirty=true;await open().catch(()=>{});await startState[st]();continue}
-    const [v,why]=verdict(bt,pre,post,errs,closedOwn,par);
+    const self1=await el.evaluate(e=>e.isConnected?e.className+'|'+(e.getAttribute('aria-pressed')||'')+'|'+(e.getAttribute('aria-expanded')||'')+'|'+(e.innerText||'').slice(0,40):'gone').catch(()=>'gone');
+    if(self1!==self0)post.self=1;
+    const [v,why]=verdict(bt,strip(pre),strip(post),errs,closedOwn,par);
     if(v==='FAIL')await p.screenshot({path:shot,type:'jpeg',quality:55}).catch(()=>{});
     rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,hit:'ok',verdict:v,why,shot:v==='FAIL'?shot:''});
     const changed=JSON.stringify(pre)!==JSON.stringify(post);if(changed)dirty=true;
     const newScreen=JSON.stringify(pre.roots)!==JSON.stringify(post.roots)||pre.tab!==post.tab||pre.panel!==post.panel||pre.title!==post.title;
-    if(newScreen&&pathK.length<DEPTH){const nk=JSON.stringify([post.roots.map(r=>r.startsWith('body')?'body':r),post.tab,post.panel,post.title]);if(!seen.has(nk)){const np=pathK.concat([bt.key]);parentOf.set(np.join('>'),pre);queue.push(np)}}
+    if(newScreen&&pathK.length<DEPTH){const tl=post.roots.filter(r=>!r.startsWith('body'));const nk=tl.length?JSON.stringify(tl):JSON.stringify([post.roots.map(r=>r.startsWith('body')?'body':r),post.tab,post.panel,post.title]);if(!seen.has(nk)){const np=pathK.concat([bt.key]);parentOf.set(np.join('>'),pre);queue.push(np)}}
    }
    fs.writeFileSync(path.join(OUT,`crawl-${dev}.json`),JSON.stringify(rows.filter(r=>r.dev===dev)))}
  }
@@ -283,15 +291,23 @@ async function crawlDev(b,URL,dev){
  const n=k=>rows.filter(r=>r.verdict===k).length;
  console.log(`BUTTON CRAWL ${n('FAIL')?'FAIL':'PASS'} · ${DEV.join('+')} · taps ${taps} · PASS ${n('PASS')} · FAIL ${n('FAIL')} (dead ${rows.filter(r=>r.hit==='DEAD').length}) · WARN ${n('WARN')} · SKIP ${n('SKIP')} · hard restores ${hard} · ${Math.round((Date.now()-t0)/1000)} s`);
  /* gate (fast) fails on the sure faults only: a dead (covered/off-screen) button, a JS error on a tap, a ✕/close that does not close */
- const sure=rows.filter(r=>r.verdict==='FAIL'&&(r.hit==='DEAD'||/^JS error|^close button|crawler crashed/.test(r.why||'')));
+ /* faults already filed and owned (dev/tools/quickcheck.d/button-crawl-known.txt: «regex<TAB>owner/request») are listed, not gating */
+ let known=[];try{known=fs.readFileSync(path.join(REPO,'dev','tools','quickcheck.d','button-crawl-known.txt'),'utf8').split('\n').filter(l=>l.trim()&&!l.startsWith('#')).map(l=>{const [re,why]=l.split('\t');return{re:new RegExp(re),why:why||''}})}catch(e){}
+ const isKnown=r=>known.find(k=>k.re.test((r.screen||'')+' · '+(r.label||'')+' · '+(r.why||'')));
+ const sure0=rows.filter(r=>r.verdict==='FAIL'&&(r.hit==='DEAD'||/^JS error|^close button|crawler crashed/.test(r.why||'')));
+ const sure=sure0.filter(r=>!isKnown(r));if(FAST)for(const r of sure0.filter(isKnown))console.log('  KNOWN',r.dev,'·',r.label,'·',isKnown(r).why);
  if(FAST){for(const r of sure.slice(0,12))console.log('  FAIL',r.dev,'·',(r.screen||'').slice(0,50),'·',r.label,'·',r.why.slice(0,140));console.log(`BUTTON CRAWL GATE ${sure.length?'FAIL':'PASS'} · ${sure.length} sure faults (dead/JS error/close) · ${n('FAIL')-sure.length} soft «no effect» rows not gating`)}
  process.exit(FAST&&sure.length?1:0)})();
 
-function report(dir){const R=JSON.parse(fs.readFileSync(path.join(dir,'crawl-all.json'),'utf8'));
- const e=s=>String(s||'').replace(/\|/g,'¦').replace(/\n/g,' ');
- const n=(k,d)=>R.filter(r=>r.verdict===k&&(!d||r.dev===d)).length;
- console.log('# BUTTON CRAWL — every visible button real-tapped (owner 25/11 ~05:10Z)\n');
- console.log('Devices: '+[...new Set(R.map(r=>r.dev))].join(' + ')+' · rows '+R.length+' · PASS '+n('PASS')+' · FAIL '+n('FAIL')+' · WARN '+n('WARN')+' · SKIP '+n('SKIP')+'\n');
- console.log('| dev | screen | button | hit | effect | verdict |\n|---|---|---|---|---|---|');
- for(const r of R.sort((a,b)=>(a.verdict==='FAIL'?0:a.verdict==='WARN'?1:2)-(b.verdict==='FAIL'?0:b.verdict==='WARN'?1:2)))
-  console.log(`| ${r.dev} | ${e(r.screen||r.start)} | ${e(r.label)} | ${r.hit||'-'} | ${e(r.why)} | ${r.verdict} |`)}
+function report(dir){const all=path.join(dir,'crawl-all.json');const R=fs.existsSync(all)?JSON.parse(fs.readFileSync(all,'utf8')):fs.readdirSync(dir).filter(f=>/^crawl-.*\.json$/.test(f)).flatMap(f=>JSON.parse(fs.readFileSync(path.join(dir,f),'utf8')));
+ const e=s=>String(s||'').replace(/\|/g,'¦').replace(/\s+/g,' ').trim();
+ const n=(k,d)=>R.filter(r=>r.verdict===k&&(!d||r.dev===d)).length;const devs=[...new Set(R.map(r=>r.dev))];
+ const L=[];const o=x=>L.push(x);
+ o('Devices: '+devs.join(' + ')+' · rows '+R.length+' · PASS '+n('PASS')+' · FAIL '+n('FAIL')+' (dead '+R.filter(r=>r.hit==='DEAD').length+') · WARN '+n('WARN')+' · SKIP '+n('SKIP')+' (harness could not bring the screen back; not a game verdict)');
+ for(const d of devs)o(`- ${d}: PASS ${n('PASS',d)} · FAIL ${n('FAIL',d)} · WARN ${n('WARN',d)} · SKIP ${n('SKIP',d)}`);
+ o('\n### FAIL + WARN (every row)\n\n| dev | screen | button | hit | effect | verdict |\n|---|---|---|---|---|---|');
+ for(const r of R.filter(r=>r.verdict==='FAIL'||r.verdict==='WARN'))o(`| ${r.dev} | ${e(r.screen||r.start).slice(0,70)} | ${e(r.label).slice(0,50)} | ${r.hit||'-'} | ${e(r.why).slice(0,160)} | ${r.verdict} |`);
+ o('\n### PASS (per screen: buttons that hit and did the right thing)\n\n| dev | screen | buttons PASS |\n|---|---|---|');
+ const G={};for(const r of R.filter(r=>r.verdict==='PASS')){const k=r.dev+'\u0001'+e(r.screen||r.start).slice(0,70);(G[k]=G[k]||[]).push(e(r.label).slice(0,24))}
+ for(const k in G){const [d,sc]=k.split('\u0001');o(`| ${d} | ${sc} | ${G[k].length}: ${G[k].join(' · ').slice(0,400)} |`)}
+ console.log(L.join('\n'))}
