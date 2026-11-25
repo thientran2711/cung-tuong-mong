@@ -23,7 +23,8 @@ const DEV=String(opt('dev',FAST?'fold':'fold,ipad')).split(',').filter(d=>DEVS[d
 const DEPTH=+opt('depth',FAST?1:3),MAXTAPS=+opt('max',FAST?400:100000);
 const STARTS=String(opt('start',FAST?'title,home':'title,home,tour')).split(',');
 const GAME=opt('game',path.join(REPO,'index.html'));
-const BLOCK=/\.(webp|png|jpe?g|gif|mp3|ogg|m4a|mp4|webm)(\?|$)/i;
+/* pictures load as she sees them (layout depends on them; --noimg blocks them for speed); sound/video are blocked */
+const BLOCK=opt('noimg',false)?/\.(webp|png|jpe?g|gif|mp3|ogg|m4a|mp4|webm)(\?|$)/i:/\.(mp3|ogg|m4a|mp4|webm)(\?|$)/i;
 const NOISE=/Failed to load resource|net::ERR_|Fetch API cannot load|ERR_FAILED|ERR_ABORTED/;
 if(opt('report',false))return report(path.resolve(opt('report')));
 fs.mkdirSync(path.join(OUT,'shots'),{recursive:true});
@@ -58,20 +59,23 @@ const INPAGE=()=>{
     if(!ok||!this.vis(e))continue;
     if(e.disabled||e.getAttribute('aria-disabled')==='true')continue;
     /* a pointer child of a button is the button */
-    const up=e.parentElement&&e.parentElement.closest(sel);if(up&&up!==e&&this.vis(up))continue;
+    /* a pointer child of a real button is that button (a big clickable container such as #panel is not a button: its buttons count one by one) */
+    const up=e.parentElement&&e.parentElement.closest('button,[role=button],a[href],summary');if(up&&up!==e&&this.vis(up))continue;
+    {const r=e.getBoundingClientRect();if(!e.matches('button,[role=button],a[href],input,select,summary')&&r.width*r.height>innerWidth*innerHeight*.35)continue}
     if(seen.has(e))continue;seen.add(e);out.push(e)}
    return out},
   liveRoots(){const roots=new Set(this.cands().map(e=>this.root(e)));for(const f of this.fixed)if(this.root(f)===f)roots.add(f);return [...roots].filter(r=>this.live(r))},
   /* the buttons on screen now: in a live layer (a button behind an open dialog is not on screen) */
-  list(){const lr=new Set(this.liveRoots());const L=[];const cnt={};
+  list(){document.querySelectorAll('[data-bc]').forEach(e=>e.removeAttribute('data-bc'));const lr=new Set(this.liveRoots());const L=[];const cnt={};
    for(const e of this.cands()){const rt=this.root(e);if(!lr.has(rt))continue;
-    const key=this.desc(rt)+'|'+e.tagName.toLowerCase()+(e.id?'#'+e.id:'')+'|'+this.label(e);cnt[key]=(cnt[key]||0)+1;
-    e.setAttribute('data-bc',key+'#'+cnt[key]);L.push({key:key+'#'+cnt[key],label:this.label(e),el:this.desc(e),layer:this.desc(rt),tab:e.getAttribute('data-tab')||'',on:e.matches('.on,.sel,.active,[aria-selected=true],[aria-pressed=true]'),inPanel:!!e.closest('#panel,#stage,.stage'),rk:rt===document.body?'body':this.rootKey(rt),x:e.matches('.kit-x')||/^(✕|×|x)$/i.test(this.label(e))})}
+    const rd=rt===document.body?'body':rt.tagName.toLowerCase()+(rt.id?'#'+rt.id:(typeof rt.className==='string'&&rt.className.trim()?'.'+rt.className.trim().split(/\s+/)[0]:''));
+    const key=rd+'|'+e.tagName.toLowerCase()+(e.id?'#'+e.id:'')+'|'+this.label(e);cnt[key]=(cnt[key]||0)+1;
+    e.setAttribute('data-bc',key+'#'+cnt[key]);L.push({key:key+'#'+cnt[key],label:this.label(e),el:this.desc(e),layer:rd,tab:e.getAttribute('data-tab')||'',on:e.matches('.on,.sel,.active,[aria-selected=true],[aria-pressed=true]'),inPanel:!!e.closest('#panel,#stage,.stage'),rk:rt===document.body?'body':this.rootKey(rt),x:e.matches('.kit-x')||/^(✕|×|x)$/i.test(this.label(e))})}
    return L},
   /* a loading / scene veil the player waits for (not a button layer) */
   busy(){return [...document.querySelectorAll('#klife,#kload,#kroul,#kroulw,#dawn,.kload')].some(e=>this.vis(e))},
   /* the same button after a restore: exact key, else the same layer/element with the label's numbers and «(có mới)» ignored */
-  find(key){const A=[...document.querySelectorAll('[data-bc]')];const ex=A.find(e=>e.getAttribute('data-bc')===key);if(ex)return ex;
+  find(key){const A=[...document.querySelectorAll('[data-bc]')].filter(e=>this.vis(e));const ex=A.find(e=>e.getAttribute('data-bc')===key);if(ex)return ex;
    const norm=k=>k.replace(/#\d+$/,'').replace(/\(có mới\)/g,'').replace(/[\d.,/]+/g,'9').replace(/\s+/g,' ').trim();const nk=norm(key),n=+(key.match(/#(\d+)$/)||[0,1])[1];
    const M=A.filter(e=>norm(e.getAttribute('data-bc'))===nk);return M[n-1]||M[0]||null},
   rootKey(r){const h=r.querySelector('h1,h2,h3,.kt,.ttl,.title,header');return this.desc(r)+':'+((h&&h.innerText)||r.innerText||'').replace(/\s+/g,' ').trim().slice(0,40)},
@@ -81,9 +85,13 @@ const INPAGE=()=>{
    /* whole page text + which things are marked on/selected (a filter tab, a picked card) */
    const onS=[...document.querySelectorAll('.on,.sel,.active,.picked,[aria-selected=true],[aria-pressed=true],:checked')].filter(e=>this.vis(e)).map(e=>this.desc(e)+(e.innerText||'').slice(0,12)).join(',');
    const txt=(document.body.innerText||'')+onS;let th=0;for(let i=0;i<txt.length;i++)th=(th*31+txt.charCodeAt(i))|0;
-   return{roots:roots.sort(),tab,S:sh,txt:txt.length+':'+th,title:!!(document.getElementById('title')&&!document.getElementById('title').hidden),q:(typeof Q!=='undefined'&&Q||[]).length}},
+   const pn=document.getElementById('panel');let panel='';if(pn&&this.vis(pn)){const t=(pn.className+'|'+(pn.firstElementChild?pn.firstElementChild.className:'')+'|'+(pn.innerText||'').slice(0,80));let h=0;for(let i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))|0;panel=String(h)}
+   let kg='';try{if(typeof KG82!=='undefined'&&document.getElementById('kg82')&&this.vis(document.getElementById('kg82')))kg=KG82.phase||(KG82.setup?'setup':'')}catch(e){}
+   return{roots:roots.sort(),tab,panel,kg,S:sh,txt:txt.length+':'+th,title:!!(document.getElementById('title')&&!document.getElementById('title').hidden),q:(typeof Q!=='undefined'&&Q||[]).length}},
   baseline(){this.base=new Set([...document.body.children]);this.hid=[...document.querySelectorAll('[id]')].filter(e=>this.isFixedRoot(e)).map(e=>[e,e.hidden])},
-  snap(){this.sv=JSON.stringify(ser());this.baseline()},
+  snap(){this.sv=JSON.stringify(ser());this.baseline();this.list();this.homeLive=new Set(this.liveRoots());this.homeSig=JSON.stringify(this.sig().roots.map(r=>r.split(':')[0]))},
+  /* after a restore: the screen must look like the snapshot's (same live layers) */
+  isHome(){this.list();return JSON.stringify(this.sig().roots.map(r=>r.split(':')[0]))===this.homeSig},
   /* harness restore (setup, not a tap): state back to the snapshot, extra layers gone */
   restore(withTitle){try{Q.length=0}catch(e){}
    for(const c of [...document.body.children])if(!this.base.has(c)&&c.tagName!=='SCRIPT')c.remove();
@@ -93,17 +101,22 @@ const INPAGE=()=>{
    if(this.sv){deser(JSON.parse(this.sv));try{if(S)S.mg=null}catch(e){}}
    try{tab='act';K3SH.home=true}catch(e){}
    document.getElementById('modal').hidden=true;
-   const T=document.getElementById('title');if(T)T.hidden=!withTitle;if(withTitle&&window.showTitle)showTitle();if(typeof S!=='undefined'&&S){render();try{k3Home()}catch(e){}}window.scrollTo(0,0)}
+   const T=document.getElementById('title');if(T)T.hidden=!withTitle;if(withTitle&&window.showTitle)showTitle();if(typeof S!=='undefined'&&S){render();try{k3Home()}catch(e){}}window.scrollTo(0,0);
+   /* any other frame still showing (one the game re-uses, not removed above) is put away */
+   if(!withTitle&&this.homeLive){this.list();for(const r of this.liveRoots())if(!this.homeLive.has(r)&&r!==document.body){if(this.base.has(r)||r.id)r.hidden=true;else r.remove()}}}
  }};
 
 /* ---------- node side ---------- */
 async function settle(p,ms=8000){const t=Date.now();while(Date.now()-t<ms){const b=await p.evaluate(()=>__bc.busy()).catch(()=>false);if(!b)return Date.now()-t;await p.waitForTimeout(250)}return -1}
-const rows=[];let taps=0;
-function verdict(b,pre,post,errs,closedOwn){
+const rows=[];let taps=0,hard=0;
+function verdict(b,pre,post,errs,closedOwn,par){
  if(errs.length)return['FAIL','JS error: '+errs[0].slice(0,120)];
  const changed=JSON.stringify(pre)!==JSON.stringify(post);
  const closeLike=b.x||/^(Đóng|Thôi|Bỏ qua|Quay lại|Trở về|Về|Hủy|Huỷ|Để sau|Xong|Đã hiểu|Biết rồi|Lui)$/i.test(b.label);
- if(closeLike)return closedOwn?['PASS','closed its layer']:(changed?['FAIL','close button did not close its layer (something else changed)']:['FAIL','close button: nothing happened']);
+ const backTo=par&&JSON.stringify(post.roots)===JSON.stringify(par.roots);
+ /* KIT §13.9: the ✕ «Quay lại» of a mini-game frame gives up = the caller's own lose RESULT; it must never start the board / open the next screen */
+ if(closeLike&&!closedOwn&&pre.kg!==''&&post.kg==='result')return['PASS','gave up → its lose result (KIT §13.9)'];
+ if(closeLike)return closedOwn?['PASS','closed its layer']:backTo?['PASS','back to the screen before']:(changed?['FAIL','close button did not close its layer (something else changed)']:['FAIL','close button: nothing happened']);
  if(b.tab)return post.tab===b.tab||pre.tab===b.tab&&changed?['PASS','tab '+b.tab+' shown']:changed?['WARN','tab button changed the screen but tab '+b.tab+' not marked on']:['FAIL','tab button: nothing happened'];
  if(!changed&&b.on)return['PASS','already on (tapping the shown tab/choice again changes nothing)'];
  if(!changed)return['FAIL','no effect (screen and state unchanged)'];
@@ -123,7 +136,8 @@ async function crawlTour(p,dev,ER){
    let L=await p.evaluate(()=>__bc.list());
    /* a screen one tap deeper: tap only what is NEW on it (the new frame's buttons; for a new tab, the buttons of its panel) —
       the buttons it shares with the screen it came from were tapped there already */
-   if(par){const pd=new Set(par.roots.map(r=>r.startsWith('body')?'body':r));const tabNew=par.tab!==sig0.tab;
+   if(par){const pd=new Set(par.roots.map(r=>r.startsWith('body')?'body':r));const tabNew=par.tab!==sig0.tab||par.panel!==sig0.panel;
+    if(process.env.BCDBG)console.log('FILTER',JSON.stringify({pd:[...pd],tabNew,pp:par.panel,sp:sig0.panel,sample:L.slice(0,40).map(b=>[b.label.slice(0,12),b.rk.slice(0,30),b.inPanel])}));
     L=L.filter(b=>!pd.has(b.rk)||(b.rk==='body'&&tabNew&&b.inPanel))}const roots=await p.evaluate(()=>__bc.sig().roots);
    const atHome=async()=>p.evaluate(()=>{const m=document.getElementById('modal'),T=document.getElementById('title'),n=document.getElementById('next');
     return m.hidden&&T.hidden&&!(typeof Q!=='undefined'&&Q||[]).length&&(typeof S!=='undefined'&&!!S)&&!!n&&__bc.vis(n)&&![...document.querySelectorAll('#kroul,#ov,.kmov,#kprevov,#klife,#kload')].some(e=>__bc.vis(e))});
@@ -196,29 +210,40 @@ async function crawlDev(b,URL,dev){
   /* the first-life LỜI DẶN tour is crawled on its own (START tour); here it counts as already seen */
   try{REC.tour='done';REC.asked=1;saveRec()}catch(e){}
   for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}try{S.tutTour=1;coachOff&&coachOff()}catch(e){}Q.length=0;document.getElementById('modal').hidden=true;
-  document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());render();__bc.snap()})};
+  document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());render()});
+  /* the life-start veils (roulette, «Sửa soạn nhập cung») can come a moment later: wait for them, take them down, then snapshot */
+  await p.waitForTimeout(2500);await p.evaluate(()=>{document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());Q.length=0;document.getElementById('modal').hidden=true;render();__bc.snap()})};
  for(const st of STARTS){if(st==='tour'){await crawlTour(p,dev,errsRef);continue}if(!startState[st])continue;
   await startState[st]();await p.waitForTimeout(600);
   const withTitle=st==='title';
   const goto=async(pathK)=>{ /* restore + replay a path of real taps */
    if(p.isClosed()||!(await p.evaluate(()=>!!window.__bc).catch(()=>false))){await open();await startState[st]()}
-   await p.evaluate(t=>__bc.restore(t),withTitle);await p.waitForTimeout(150);await settle(p);
+   if(withTitle){await p.reload({waitUntil:'domcontentloaded',timeout:180000});await p.waitForFunction(()=>typeof showTitle==='function',null,{timeout:180000});await p.waitForTimeout(1200);await p.evaluate(INPAGE);await startState.title()}
+   else{await p.evaluate(t=>__bc.restore(t),withTitle);await p.waitForTimeout(150);await settle(p);
+    if(!(await p.evaluate(()=>__bc.isHome()))){ /* soft restore left a frame up: reload the page and load the same snapshot (harness) */
+     const sv=await p.evaluate(()=>__bc.sv);hard++;
+     await p.reload({waitUntil:'domcontentloaded',timeout:180000});await p.waitForFunction(()=>typeof deser==='function',null,{timeout:180000});await p.waitForTimeout(1200);await p.evaluate(INPAGE);
+     await p.evaluate(sv=>{try{REC.tour='done';REC.asked=1;saveRec()}catch(e){}document.getElementById('title').hidden=true;document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());
+      deser(JSON.parse(sv));try{S.tutTour=1}catch(e){}Q.length=0;document.getElementById('modal').hidden=true;render();try{k3Home()}catch(e){}},sv);
+     await p.waitForTimeout(2500);await p.evaluate(sv=>{document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());Q.length=0;document.getElementById('modal').hidden=true;render();__bc.sv=sv;__bc.snap();__bc.sv=sv},sv)}}
+   await p.waitForTimeout(150);await settle(p);
    /* back to the room the way she does it: tap «Về phòng» when the restore left a panel open */
    if(!withTitle&&await p.evaluate(()=>{const e=document.getElementById('k3room');return !!e&&__bc.vis(e)}))await tap(p,'#k3room',{log:()=>{}});
    for(const k of pathK){await p.evaluate(()=>__bc.list());const h=await p.evaluateHandle(k=>__bc.find(k),k);const el=h.asElement();
     const fsh=path.join(OUT,'shots',`${dev}-replay-${rows.length}.jpg`);
     if(!el){await p.screenshot({path:fsh,type:'jpeg',quality:50}).catch(()=>{});const vis=await p.evaluate(()=>__bc.list().map(x=>x.label).slice(0,12).join(' ; '));return 'path button gone: '+k+' · on screen: '+vis+' · '+fsh}
-    let dm='';const ok=await tap(p,el,{screen:dev,label:k,shot:fsh,log:m=>{dm=m}});if(!ok)return 'path button not tappable: '+k+' '+dm;await p.waitForTimeout(350);await settle(p)}
+    let dm='';const ok=await tap(p,el,{screen:dev,label:k,shot:fsh,log:m=>{dm=m}});if(!ok)return 'path button not tappable: '+k+' '+dm;await p.waitForTimeout(700);await settle(p)}
    return ''};
   const seen=new Set();const queue=[[]];const parentOf=new Map();
   while(queue.length&&taps<MAXTAPS){const pathK=queue.shift();const par=parentOf.get(pathK.join('>'))||null;
    const g=await goto(pathK);if(g){rows.push({dev,start:st,path:pathK,label:'(replay)',verdict:'SKIP',why:g});continue}
-   const sig0=await p.evaluate(()=>__bc.sig());const sk=JSON.stringify([sig0.roots,sig0.tab,sig0.title]);
+   const sig0=await p.evaluate(()=>__bc.sig());const sk=JSON.stringify([sig0.roots.map(r=>r.startsWith('body')?'body':r),sig0.tab,sig0.panel,sig0.title]);
    if(seen.has(sk)&&pathK.length){continue}seen.add(sk);
    let L=await p.evaluate(()=>__bc.list());
    /* a screen one tap deeper: tap only what is NEW on it (the new frame's buttons; for a new tab, the buttons of its panel) —
       the buttons it shares with the screen it came from were tapped there already */
-   if(par){const pd=new Set(par.roots.map(r=>r.startsWith('body')?'body':r));const tabNew=par.tab!==sig0.tab;
+   if(par){const pd=new Set(par.roots.map(r=>r.startsWith('body')?'body':r));const tabNew=par.tab!==sig0.tab||par.panel!==sig0.panel;
+    if(process.env.BCDBG)console.log('FILTER',JSON.stringify({pd:[...pd],tabNew,pp:par.panel,sp:sig0.panel,sample:L.slice(0,40).map(b=>[b.label.slice(0,12),b.rk.slice(0,30),b.inPanel])}));
     L=L.filter(b=>!pd.has(b.rk)||(b.rk==='body'&&tabNew&&b.inPanel))}
    const screen=(pathK.length?pathK.map(k=>k.split('|').pop().replace(/#\d+$/,'')).join(' › '):st)+' ['+(sig0.roots[sig0.roots.length-1]||'').slice(0,60)+']';
    console.log(`[${dev}] ${st} depth ${pathK.length} · ${L.length} buttons · ${screen}`);
@@ -241,12 +266,12 @@ async function crawlDev(b,URL,dev){
      post=await p.evaluate(()=>__bc.sig())}
     catch(e){post={nav:'page navigated/reloaded'};}
     if(post.nav){rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,hit:'ok',verdict:'WARN',why:'page reloaded/navigated'});dirty=true;await open().catch(()=>{});await startState[st]();continue}
-    const [v,why]=verdict(bt,pre,post,errs,closedOwn);
+    const [v,why]=verdict(bt,pre,post,errs,closedOwn,par);
     if(v==='FAIL')await p.screenshot({path:shot,type:'jpeg',quality:55}).catch(()=>{});
     rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,hit:'ok',verdict:v,why,shot:v==='FAIL'?shot:''});
     const changed=JSON.stringify(pre)!==JSON.stringify(post);if(changed)dirty=true;
-    const newScreen=JSON.stringify(pre.roots)!==JSON.stringify(post.roots)||pre.tab!==post.tab||pre.title!==post.title;
-    if(newScreen&&pathK.length+1<=DEPTH-0&&pathK.length<DEPTH){const nk=JSON.stringify([post.roots,post.tab,post.title]);if(!seen.has(nk)){const np=pathK.concat([bt.key]);parentOf.set(np.join('>'),pre);queue.push(np)}}
+    const newScreen=JSON.stringify(pre.roots)!==JSON.stringify(post.roots)||pre.tab!==post.tab||pre.panel!==post.panel||pre.title!==post.title;
+    if(newScreen&&pathK.length<DEPTH){const nk=JSON.stringify([post.roots.map(r=>r.startsWith('body')?'body':r),post.tab,post.panel,post.title]);if(!seen.has(nk)){const np=pathK.concat([bt.key]);parentOf.set(np.join('>'),pre);queue.push(np)}}
    }
    fs.writeFileSync(path.join(OUT,`crawl-${dev}.json`),JSON.stringify(rows.filter(r=>r.dev===dev)))}
  }
@@ -256,7 +281,7 @@ async function crawlDev(b,URL,dev){
  await Promise.all(DEV.map(d=>crawlDev(b,URL,d).catch(e=>{console.log('CRAWL CRASH',d,e.message);rows.push({dev:d,label:'(crawler)',verdict:'FAIL',why:'crawler crashed: '+e.message.slice(0,120)})})));
  await b.close();fs.writeFileSync(path.join(OUT,'crawl-all.json'),JSON.stringify(rows));
  const n=k=>rows.filter(r=>r.verdict===k).length;
- console.log(`BUTTON CRAWL ${n('FAIL')?'FAIL':'PASS'} · ${DEV.join('+')} · taps ${taps} · PASS ${n('PASS')} · FAIL ${n('FAIL')} (dead ${rows.filter(r=>r.hit==='DEAD').length}) · WARN ${n('WARN')} · SKIP ${n('SKIP')} · ${Math.round((Date.now()-t0)/1000)} s`);
+ console.log(`BUTTON CRAWL ${n('FAIL')?'FAIL':'PASS'} · ${DEV.join('+')} · taps ${taps} · PASS ${n('PASS')} · FAIL ${n('FAIL')} (dead ${rows.filter(r=>r.hit==='DEAD').length}) · WARN ${n('WARN')} · SKIP ${n('SKIP')} · hard restores ${hard} · ${Math.round((Date.now()-t0)/1000)} s`);
  /* gate (fast) fails on the sure faults only: a dead (covered/off-screen) button, a JS error on a tap, a ✕/close that does not close */
  const hard=rows.filter(r=>r.verdict==='FAIL'&&(r.hit==='DEAD'||/^JS error|^close button|crawler crashed/.test(r.why||'')));
  if(FAST){for(const r of hard.slice(0,12))console.log('  FAIL',r.dev,'·',(r.screen||'').slice(0,50),'·',r.label,'·',r.why.slice(0,140));console.log(`BUTTON CRAWL GATE ${hard.length?'FAIL':'PASS'} · ${hard.length} sure faults (dead/JS error/close) · ${n('FAIL')-hard.length} soft «no effect» rows not gating`)}
