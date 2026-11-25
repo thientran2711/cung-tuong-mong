@@ -41,6 +41,7 @@ Object.assign(BAL,{ration:{on:true,
 const LX_KD="Son phấn";
 const LX_N={may:["Than liễu","Thanh đại","Họa mi đại","Loa tử đại"],son:["Son sáp","Son hoa hồng","Son điểm giáng","Son thiên chu cống"],
  ma:["Yên chi giấy","Yên chi bánh","Yên chi hoa hồng","Yên chi tiến cống"],mat:["Phấn gạo","Phấn hoa lài","Phấn ngọc trâm","Phấn trân châu ngự"]};
+const LX_ROADS="mua gấp ở Nội vụ phủ, hàng rong, mượn phi tần khi đến chơi, xin Hoàng hậu hay Thái hậu";/* where a missing box comes from: ONE line (mirror note + greyed sets) */
 const LX_PART={may:"kẻ mày",son:"tô son",ma:"đánh má",mat:"phấn mắt"};
 /* law C (OD 17/11 08:25Z C): a box costs at least BAL.ration.buyK of the buyer's bổng — high ranks pay as much of their purse as low ranks */
 function lxPrice(p,t){const B=BAL.ration;const f=B.price[Math.max(0,Math.min(3,t|0))];if(!p||p.out)return f;const r=Math.max(0,Math.min(7,(typeof rkOf==="function"?rkOf(p):p.rank)|0));return Math.max(f,Math.ceil(BAL.pay[r]*B.buyK))}
@@ -115,15 +116,18 @@ function lxSit(p,rec){try{if(!lxOn()||!rec)return null;lxCapRec(p,rec);const R=l
 function lxNpcCap(v,rec){try{return lxOn()&&v&&v!==S&&!v.coop?lxCapRec(v,rec):rec}catch(e){return rec}}
 /* ---------- the mirror: only the colours she owns (kitSwatches rows filtered), what is missing, mua gấp ---------- */
 function lxColRows(rows){if(!lxOn())return rows;const own={};for(const part of BAL.ration.parts)own[part]=lxBoxes(S,part);
- return rows.map(r=>{if(/^pre-/.test(r.k)){const it=r.items.filter(i=>{const x=TOIL_PRE.find(y=>y[0]===i.k);return x&&BAL.ration.parts.every(part=>own[part].some(e=>e.c===x[4][part]))});return it.length?Object.assign({},r,{items:it}):null}
+ /* makeup-set (owner OD 25/11 ~23:20Z): EVERY preset set stays on the mirror as a block; a set needing a colour she has no box of is greyed with what is missing (never dropped) */
+ return rows.map(r=>{if(/^pre-/.test(r.k)){let n=0;const it=r.items.map(i=>{const x=TOIL_PRE.find(y=>y[0]===i.k);if(!x)return i;const miss=BAL.ration.parts.filter(part=>!own[part].some(e=>e.c===x[4][part]));if(!miss.length)return i;n++;
+   return Object.assign({},i,{off:true,why:`thiếu ${miss.map(part=>toilColE(part,x[4][part])[1].toLowerCase()).join(", ")}`})});
+   return Object.assign({},r,{items:it},n?{note:`Bộ mờ là thiếu hộp đúng màu (chạm để xem thiếu gì). Đường kiếm: ${LX_ROADS}.`}:{})}
   const L=own[r.k];if(!L)return r;const it=r.items.filter(i=>L.some(e=>e.c===i.k)).map(i=>{const E=L.filter(e=>e.c===i.k);const u=E.reduce((a,e)=>a+e.u,0);return Object.assign({},i,{name:`${i.name} · ${E.map(e=>IT[e.k].n).filter((x,j,a)=>a.indexOf(x)===j).join(", ")}, còn ${u} lần dùng`})});
   return it.length?Object.assign({},r,{items:it}):null}).filter(Boolean)}
 function lxColPick(col){if(!lxOn()){delete col.no;return col}const M=lxMiss(S);if(M.length)col.no=M.slice().sort();else delete col.no;for(const part of BAL.ration.parts){const L=lxBoxes(S,part);if(L.length&&!L.some(e=>e.c===col[part]))col[part]=L.slice().sort((a,b)=>b.u-a.u)[0].c}
- if(col.want==="diem"&&!lxColRows([{k:"pre-diem",items:TOIL_PRE.filter(x=>x[2]==="diem").map(x=>({k:x[0]}))}]).length)delete col.want;return col}
+ if(col.want==="diem"&&!(lxColRows([{k:"pre-diem",items:TOIL_PRE.filter(x=>x[2]==="diem").map(x=>({k:x[0]}))}])[0]||{items:[]}).items.some(i=>!i.off))delete col.want;return col}
 function lxRushCost(){const B=BAL.ration;return lxMiss(S).length*Math.ceil(lxPrice(S,lxTierOf(S))*B.rush)}
 function lxMirrorNote(){if(!lxOn())return"";const M=lxMiss(S),n=lxCount(S),cap=BAL.ration.cap[n];
  const R=[["Son phấn",n?`${n} trong ${BAL.ration.parts.length} thứ còn dùng được`:"không còn hộp nào"]];
- if(M.length)R.push(["Thiếu",M.map(x=>TOIL_COL[x].label).join(", "),"r"],["Dung nhan",cap==="moc"?`chỉ để ${toilMkW("moc")}`:`đẹp nhất ${TOIL_MK[cap]}`,"r"],["Đường kiếm",`mua gấp ở Nội vụ phủ, hàng rong, mượn phi tần khi đến chơi, xin Hoàng hậu hay Thái hậu`,"n"]);
+ if(M.length)R.push(["Thiếu",M.map(x=>TOIL_COL[x].label).join(", "),"r"],["Dung nhan",cap==="moc"?`chỉ để ${toilMkW("moc")}`:`đẹp nhất ${TOIL_MK[cap]}`,"r"],["Đường kiếm",LX_ROADS,"n"]);
  return `<div class="kgr">${kitRows(R)}</div>`}
 function lxRushBtn(){if(!lxOn()||!lxMiss(S).length)return"";const c=lxRushCost(),ok=(S.bac||0)>=c;
  return `<button class="${kg82Btn(true)}" id="lxrush"${ok?"":" disabled"}>Mua gấp son phấn còn thiếu<small>Bạc -${c}${ok?"":" · không đủ bạc"}</small></button>`}
