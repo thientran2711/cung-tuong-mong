@@ -1698,3 +1698,4 @@ BIG rv sideline-dlg r4 (opus; land -3-r1 as one item) | review/sideline-dlg-3-r*
 | TRUNGSINH-STORY lead 2 | review/trungsinh-story | MAIN 136 | session_01V1ZZH2S38RtoBxn9Q5brH4 | RUNNING | 2026-11-25T08:04Z |
 | F M-FIX-2 (result card «Đã hiểu» hidden after skip family + repeated «còn N lần dùng» hint covering rows; successor of M-FIX-1) | review/m-fix-2; briefs/F-mfix2-2511.md; reports/m-fix-2.md | FOREMAN F #7 | session_01UV1SziaCBht1boyH9gnBYq | RUNNING | 25/11 08:10Z |
 | F HARNESS FIXER #2 (ROLE A successor of session_01UV1SzhZEs2semzyzA7vwtt; handover end of dev/PROGRESS_robot-realtap.md on review/robot-realtap 2aad6849) | review/robot-realtap | FOREMAN F #7 | session_01UV1SzgfHUNkcvKL9Rn8Bz9 | RUNNING | 25/11 08:13Z |
+| F flight2-s8 life (slot 8 thd_tho bold 372282412 ipad, harness 1a29f470; reuses s5 seat) | dev/handover/robot/flight2-s8.* | FOREMAN F #8 | session_01UV1SzjctgUqhWfuo3XVo2r | RUNNING | 2026-11-25T08:37Z |
