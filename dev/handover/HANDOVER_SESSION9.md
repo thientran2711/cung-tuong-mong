@@ -3386,3 +3386,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (06:50Z) SELSCENE-18 LAND READY 9ee4f5bc BIG (co-op sid unique, sid-unique.js) → NEW BIG rv opus session_01V1ZZH1uRsuJLYqG34jcUBM (merge on ee37ab5f → «BIG PASS <sha>»). PARKING #14 yêu phi road (via 134).
 - (06:52Z) DELEGATE-NOMG-2 LAND READY 71e150b4 (70ae8c73 + LIVE merge + n3 ask-someone family no mini-game) → rv 22tLFisY reviews 71e150b4 → LC13 lands it instead of its own 70ae8c73 merge.
 - (07:10Z) OWNER: trungsinh robot research brought nothing on story/endings → TRUNGSINH-STORY = session_01V1ZZGzGFi21WiTptDmEZ45 (opus, child of 134, reports to 135).
+- (06:53Z) via 134: TRUNGSINH-STORY session_01V1ZZGzGFi21WiTptDmEZ45 (opus, reports to 135): ≥5 lives on trungsinhgame.com → dev/research/TRUNGSINH_STORY.md + 8-line VN summary → show sếp when READY (OD ~07:10Z).
