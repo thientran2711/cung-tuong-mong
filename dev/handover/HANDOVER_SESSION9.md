@@ -3215,3 +3215,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (00:07Z) RV minigame-fix BIG PASS 0506605b (kit F.intro matches kgReady; no :has; all tests PASS) → LC12 stacks after dayq; rv confirms step sha. Nit .kfoc-intro z-index twice → KK24 later.
 - (00:08Z) rv minigame: kgReady family (39 kinds) hides Chạm/Được behind «!» vs owner 24/11 item 6 → MAIN reads item 6 as covering it (essentials up front, extras behind «!» per 21/11) → MINIGAME-FIX follow-up review/minigame-fix-2 (Chạm + Được open rows from how/BAL, all 39 + 7). Not blocking 0506605b.
 - (00:09Z) LC12 FULL FLIGHT STACK GREEN review/lc12-stack 8c7b4068 (1–7; quickcheck PASS tasks 15/15, coop 142/142, one-world 4/4; flight-ui perf no regression). Steps 2/4 need KIT OK r3 (KK24) → LC12 asked Variant C (no 2/4: onecore → sfx → flight-ui → offline → dayq → minigame). Step 9 viecnho = 89ef52f9.
+- (00:12Z) RV day-queue «merge OK» on 8c7b4068 (files identical to 7c819a37) → LC12 stack 1–7 fully cleared except KIT OK for 2/4.
