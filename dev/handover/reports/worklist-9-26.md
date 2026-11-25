@@ -186,3 +186,20 @@ PRIORITY #1 CHECK: W3/W4 handovers above + review-temper-outburst note A + revie
 
 ### Status
 - «SẴN SÀNG KIỂM review/net-ghen 6d7d2da9» sent to D. Next: wave 2 on review/net-ghen-2.
+
+### (2) LAW 11 wave 2 — STARTED on review/net-ghen-2 a83049aa (on net-ghen 6d7d2da9), NOT ready
+- relshow-scan.py: new class LOY = thiện cảm applied on the same line straight to servant loyalty (loyAdd / .loyal, no affAdd/relAdd) → the trust wrapper never runs → shown == applied (34 sites).
+- Proven: servants draw nết from the same BAL.net.F pool, so affAdd's trust factor (j28:47, any holder ≠ her, rise only) DOES hit servants/men when the apply is affAdd/relAdd → those sites need pvQuy too.
+- 18 affAdd-only sites wired `${pvQuy(holder,n,"<label>")}` by script (holder + amount taken from the affAdd on the same line): j9:129/131, j42:184, jagacts3:129/131/135/139, jemoact:339/429, jworld:136/151, jworld2:45/46/57/67/214. Site rebuilt; relshow-rt PASS; probe: affAdd vs aaNum range 0 misses over all consorts, 0 page errors.
+| aff | WIRED | HER | NEG | LOY | RAW |
+|---|---|---|---|---|---|
+| before (6d7d2da9) | 6 | 9 | 129 | — | 253 |
+| a83049aa | 24 | 9 | 129 | 34 | 201 |
+- Work list by kind: reports/nt-w5/raw-list.md — aff:relAdd 25 (wire: relAdd(S,v,n) raises v's thiện cảm via affAdd → pvQuy(v,n)); aff:loyal-mixed 35 (line has both loyalty and affAdd: split per number); aff:apply-elsewhere 141 (apply on another line / function, many are false hits: labels «Dưới ${balAb(BAL.loy.warn)}», local vars of unknown sign like balSg(af), servant loyalty helpers) — read each site; oán rest 24 (W4 list).
+- Still to do for wave 2 (D order 1 verbatim in D's message): the rest above; RV2 NB2 «result cards must list what was really gained» (jstaff elderTalkGain card: thiện cảm +1 + news line not under ĐƯỢC) + scan every result card; my NB-a/NB-b (above). Gates: net-build, one-core, coop-e2e, quickcheck alone, two-way-oldsave, real taps Fold+iPad (iPad as TOUCH).
+- Tools: reports/nt-w5/drv.js + c.sh + adv.sh = command-file real-tap driver over realtap.js (copy realtap.js from review/robot-realtap next to it; `IPT=1 node drv.js ipad <dir> tt`, then `./c.sh ipad "tap ^Hậu cung$" "dump" "shot x" "read <expr>"`; ROOT is hard-coded /home/user/wt/ng).
+
+### HANDOVER (W5 rolls: START_CTX ~5 % + 25 %) — open for the successor
+1. Worktree: git worktree add … review/net-ghen-2 (sparse as PREAMBLE). Continue wave 2 from reports/nt-w5/raw-list.md; after each batch: bash dev/site/build_site.sh; node dev/test/relshow-rt.js <abs index.html>; python3 dev/test/relshow-scan.py.
+2. Then NB2 result cards + NB-a/NB-b, then all gates, then SSK review/net-ghen-2.
+3. review/net-ghen 6d7d2da9 is SSK (sent to D 25/11 ~12:10Z).
