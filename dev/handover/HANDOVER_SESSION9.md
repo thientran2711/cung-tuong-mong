@@ -3651,3 +3651,7 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - 21:23Z: SELSCENE-19 LAND READY bb308363 (review/selection-scene-r19 = 8505ecdf + LIVE 351122ba; selxCalm removed → kitNoDanger; coop-e2e 142/142×2, quickcheck ×5 PASS, selx gates PASS). kit-faces-opts «lines14 opts6» flake pre-existing on LIVE too → KK31. AFTER FLIGHT: MAIN LOOKS Fold+iPad pair, then LC17 queue after B fix-7.
 - 21:25Z: ROLE B #7: LIVE 351122ba home+title d2 Fold+iPad 1569 real taps = 0 new faults, 0 play-stoppers. Open: K-KDTX-BAND «Mục tiêu/Thiên mệnh» tabs dead under head-art on Fold (kit keeper; ✕ works). Crawler fix review/button-crawl-fix-9 66ddcddd (test only).
 - 21:32Z: MAIN LOOKED SELSCENE-19 pair s19r3-pair-thaihau.jpg (Fold+iPad): card + 4 options fully visible, no red wash, nothing cut → LOOK OK; GO to LC17 after B fix-7 (after flight). SELSCENE-19 idle.
+- 21:34Z WAKE. LOAD: main running 1 (go-live wait on sếp) | B free 0 | C free 0 | D free 0 | moved: none (flight hold). LIVE 351122ba.
+  - New LAND READY (B, after flight): review/coop-week-wait-rv 8e654ee0 (BIG co-op rv PASS); review/robot-coop-fix-6-rv 833cd64f (rv 6kBPZT2V PASS; = f5b96b7f + LIVE 351122ba). → LC17 after-flight queue.
+  - D rolled → FOREMAN D depth 6 session_01D3E3NYnSQvNs2RbpkGRrhr. E → child4 session_01DgYSWoH3ibXqgiFQYPcvyK.
+  - F #15: 5 whole lives with NO promotion (s9b: 593 offers seen, 54 taken, rank 0 for 11 y) → systemic balance bug, owner-bug lane AFTER flight (already in queue «no promotion in a whole life»). F asks LIFE RUNNER s9c (sonnet) after flight.
