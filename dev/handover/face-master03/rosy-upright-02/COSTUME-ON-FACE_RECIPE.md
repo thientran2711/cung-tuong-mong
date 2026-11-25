@@ -8,3 +8,6 @@ Exact text sent: COSTUME-ON-FACE_KK07-R06_as-run.txt (9294 chars).
 
 ## Variant with M09 style (owner 25/11: "lấy thêm cái cô M09 để làm ảnh mẫu, màu da, phong cách vẽ … Vẫn giữ cái mặt này") → jUIwWm8LD0
 refs [image jUIwiGBLD0, style eIyOFEidqL]; line 1 = "GENERATION MODE: Create one entirely new image. IMAGE 1 = the approved character (close-up): keep exactly her face, never its head size or caption. The style image (M09) sets skin color, line work, brushwork and painting finish. Body nine heads tall: small head, long legs."; rest identical to the as-run file. Face b*/a* 1.17 (vs 0.96 without M09) — slightly warmer; costume softer/pastel, less red, cloud shoulders smaller.
+
+## Owner prompt FACE-REUSE-ALLURING-AGE16-DUAL-VISUAL-ROSY-06 (25/11, run verbatim) → dtNm4CnXSL
+refs [image jUIwiGBLD0 (= owner's left image, full-res original), image YMSDsAaWeC (owner's right "preferred" portrait, uploaded)]; gpt-2-6 2k auto. Cheek b/a 0.94, a* 12.7 (img1 0.96/11.4, img2 1.09/11.5). Result ≈ image 1 almost unchanged (same hair, pins, pose, framing); only slightly rosier cheeks/lips; image 2's painting look barely transferred.
