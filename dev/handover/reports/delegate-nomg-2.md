@@ -27,3 +27,10 @@ Not in scope, noted: peddler «Để ta xem» (her shop browse) still plays a «
 ## Tests (sha below, on LIVE ee37ab5f)
 - delegate-nomg.js PASS (Fold 755x1000 + iPad 1180x820 real tap, opener spy, (5) Giao doer odds, (6) ask-someone) · audit delegated-with-game 0 · quickcheck PASS (657 s, core gates incl. one-world + dead-card) · coop-e2e 142/142 both orders (default + COOP_SWAP=1).
 - No new picture: the acts now run straight (no rules card), the same look as «Nghe ngóng chung» in img/_review/delegate-nomg/.
+
+## REVIEW (BIG reviewer session_01V1ZZH22tLFisY7pahB4wKi; to MAIN 135 + LC13)
+**VERDICT: PASS 71e150b4** (FF on LIVE ee37ab5f; contains BIG PASS 70ae8c73; merge = index.html/sw.js only, rebuild reproduces the game byte-for-byte except the CTM_BI build line).
+- n3 delta = one regex (jdf DF_DLG += «Nhờ », «Xin », «Mượn », «Bài thuốc »). dfDlg/dfCls are read ONLY by the focus view (jdf.js:63), so the reach is the focus talk options. Audit: 82 rows · delegated 12 (Nghe ngóng chung ×2, Xin bắt mạch, Bài thuốc dễ thụ thai, Xin Thái hậu đỡ lời, Xin son phấn ×2, Xin Hoàng hậu che chở, Mượn son phấn, Nhờ giúp đỡ …) · delegated-with-game 0. Her own talk/hands (Chào hỏi, Thỉnh an, Hỏi chuyện, Tâm sự, Kể tội, Mời làm thái y tâm phúc, Tặng quà, Biếu, Đút lót, Lục rương, Nghe lén …) keep their game. The many «Xin …/Nhờ …» event-card options in the code are not focus talk options, so they are untouched.
+- Gates on 71e150b4: delegate-nomg.js PASS (Fold + iPad real tap) · audit 0 · quickcheck PASS · coop-one-world PASS · dayq-hold 46/46 · coop-e2e default 142/142; COOP_SWAP=1 first run 138/142 (week-3 advance / host-lag), rerun 142/142 → flaky, not this branch (the change is a focus-view regex; bots never use it).
+- Shots LOOKED: CDN img/_review/delegate-nomg-2-rv/ fold-1-fan … ipad-3-back (.png): card «Nghe ngóng chung · Vững · Tốn 1 khắc», no rules card, react bubble one short line.
+- Note (law 4, MAIN): the ask-someone acts keep their existing odds (the giver's goodwill etc.); no number changed.
