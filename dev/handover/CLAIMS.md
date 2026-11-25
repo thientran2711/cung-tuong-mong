@@ -1675,7 +1675,7 @@ sangbuoi-held-fix (jdayq dqWait silent exit, whole family) | review/sangbuoi-hel
 | CO-NGU-TITLES (owner 25/11 ~07:40Z: literary cổ trang names/titles whole game) | review/co-ngu-titles | MAIN 134→135 | session_01V1ZZH4mHp8bC9LZg8ZFKx6 | LAND READY dbd77388 (P1 3424724f) | 25/11 07:09Z |
 | F M-FIX-1 (robot findings M1–M5: skip family law, Sang ngày mới cue, Nhận thân phận 2 taps, BẠI on Rất vững, thị tẩm fold, Bạc drain; opus) | review/m-fix-1; briefs/F-mfix-2511.md; reports/m-fix-1.md | FOREMAN F #7 | session_01UV1SzhdHwgvZYvZKWSJpki | RUNNING | 25/11 07:40Z |
 | TEMPER-OUTBURST (temper-design (f) #1+#2+#3+#7) | review/temper-outburst | FOREMAN D ROOT | session_01D3E3NZEbGABqJK79fgHJ5q | RUNNING | 2026-11-25T07:23Z |
-| TEMPER-PERCEPTION (temper-design (f) #4 + #5 Option A + #6) | review/temper-perception | FOREMAN D ROOT | session_01D3E3NXiL5b2gpJr54JfiQN | RUNNING | 2026-11-25T07:23Z |
+| TEMPER-PERCEPTION (temper-design (f) #4 + #5 Option A + #6) | review/temper-perception | FOREMAN D ROOT | session_01D3E3NXHBzCXzeBgy8pfZyB (T2b; T2 NXiL5b2g rolled) | RUNNING | 2026-11-25T07:23Z |
 | WORKLIST #9 + #26 (state + build) | review/net-thresholds, review/talk-others-people | FOREMAN D ROOT | session_01D3E3NYFRLosstH2Jpw3nQP (W2; W NbRg56gb rolled) | RUNNING | 2026-11-25T07:23Z |
 | ROBOT AUDIT D + reruns of D's invalid lives | reports/robot-audit-D.md | FOREMAN D ROOT | session_01D3E3NZM1yXd1hK7K488mpj | RUNNING | 2026-11-25T07:23Z |
 | RERUN E solo cnv_ban (19) | robot/rerun-cnv-cnv_ban | FOREMAN D ROOT | session_01D3E3NYS8WzxRCCsyM2wEAk | RUNNING | 2026-11-25T07:23Z |
