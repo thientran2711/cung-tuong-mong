@@ -78,7 +78,7 @@ function ageText(life) { return life && life.age != null ? 'age ' + life.age + (
 
 function fromJson(file, j, out) {
   const round = path.relative(process.cwd(), file);
-  const push = (lifeName, rec, life, extra) => { const v = verdict(rec, life), mq = mgQuitOf(rec, life); out.push({ mgQuit: mq.n + mq.giveUp, mgQuitLB: mq.lowerBound, file: round, life: lifeName, end: endText(life), age: ageText(life), valid: v.valid, why: v.why, cls: v.end.k, note: v.end.note || v.end.why || '', sig: [lifeName, endText(life), life && life.years, life && life.age, rec.t && rec.t.total, rec.job && rec.job.seed].join('|'), ...extra }) };
+  const push = (lifeName, rec, life, extra) => { const v = verdict(rec, life), mq = mgQuitOf(rec, life); const of = Array.isArray(rec.offers) ? rec.offers : []; out.push({ mgQuit: mq.n + mq.giveUp, mgQuitLB: mq.lowerBound, offers: of.length, offPicked: of.filter(o => o.picked).length, file: round, life: lifeName, end: endText(life), age: ageText(life), valid: v.valid, why: v.why, cls: v.end.k, note: v.end.note || v.end.why || '', sig: [lifeName, endText(life), life && life.years, life && life.age, rec.t && rec.t.total, rec.job && rec.job.seed].join('|'), ...extra }) };
   if (Array.isArray(j) && j.length && j[0] && (j[0].job || j[0].life && j[0].bugs)) { for (const r of j) push((r.job && r.job.id) || '?', r, r.life || r.res); return true }
   if (j && Array.isArray(j.pairs)) {
     for (const p of j.pairs) { const ls = p.lives || []; if (!ls.length) out.push({ file: round, life: (p.job && p.job.id) || 'pair?', end: '—', age: '', valid: false, why: ['co-op pair with no finished life' + (p.partial ? ' (partial)' : '')], cls: 'none', note: '', sig: round + (p.job && p.job.id) });
@@ -148,13 +148,14 @@ function counts(lives) {
   const u = lives.filter(r => !r.dup), c = { total: u.length, valid: 0, invalid: 0, reasons: {} };
   for (const r of u) { if (r.valid) c.valid++; else { c.invalid++; for (const w of r.why) { const k = w.replace(/ \(.*$/, '').replace(/«.*»/, '«…»').replace(/ with \d+ options/, ''); c.reasons[k] = (c.reasons[k] || 0) + 1 } } }
   c.byEnd = {}; for (const r of u) c.byEnd[r.cls] = (c.byEnd[r.cls] || 0) + 1;
+  c.offers = u.reduce((a, r) => a + (r.offers || 0), 0); c.offPicked = u.reduce((a, r) => a + (r.offPicked || 0), 0); /* OFFER LOG (harness ≥ 95718760+): promotion / selection options seen vs taken */
   c.mgQuitLives = u.filter(r => r.mgQuit > 0).length; c.mgQuit = u.reduce((a, r) => a + (r.mgQuit || 0), 0);
   return c;
 }
-function countsLine(c) { return 'COUNTS: lives ' + c.total + ' · VALID ' + c.valid + ' · INVALID ' + c.invalid + ' · ends ' + Object.entries(c.byEnd).map(([k, v]) => k + ' ' + v).join(' / ') + ' · why ' + Object.entries(c.reasons).sort((a, b) => b[1] - a[1]).map(([k, v]) => k + ' ' + v).join(' / ') + ' · mgQuit ' + (c.mgQuit || 0) + ' in ' + (c.mgQuitLives || 0) + ' lives (mini-games quit, not played; life verdict unchanged)' }
+function countsLine(c) { return 'COUNTS: lives ' + c.total + ' · VALID ' + c.valid + ' · INVALID ' + c.invalid + ' · ends ' + Object.entries(c.byEnd).map(([k, v]) => k + ' ' + v).join(' / ') + ' · why ' + Object.entries(c.reasons).sort((a, b) => b[1] - a[1]).map(([k, v]) => k + ' ' + v).join(' / ') + ' · mgQuit ' + (c.mgQuit || 0) + ' in ' + (c.mgQuitLives || 0) + ' lives (mini-games quit, not played; life verdict unchanged)' + (c.offers ? ' · offers ' + c.offers + ' seen / ' + c.offPicked + ' picked (thăng/tiến cử/phong/khảo/tuyển)' : '') }
 function mdTable(lives) {
   const esc = s => String(s).replace(/\|/g, '/');
-  return ['| round | life | end | valid? | why |', '|---|---|---|---|---|'].concat(lives.map(r => '| ' + esc(r.file.replace(/^dev\/handover\/robot\//, '')) + ' | ' + esc(r.life) + ' | ' + esc(r.end.slice(0, 80)) + (r.age ? ' (' + r.age + ')' : '') + ' | ' + (r.dup ? 'dup' : r.valid ? 'VALID' : 'INVALID') + ' | ' + esc(r.dup ? 'same life as ' + r.dup.replace(/^dev\/handover\/robot\//, '') : (r.why.join('; ') || r.note) + (r.mgQuit ? ' · mg quit ' + r.mgQuit + (r.mgQuitLB ? '+' : '') + ', not played' : '')) + ' |')).join('\n');
+  return ['| round | life | end | valid? | why |', '|---|---|---|---|---|'].concat(lives.map(r => '| ' + esc(r.file.replace(/^dev\/handover\/robot\//, '')) + ' | ' + esc(r.life) + ' | ' + esc(r.end.slice(0, 80)) + (r.age ? ' (' + r.age + ')' : '') + ' | ' + (r.dup ? 'dup' : r.valid ? 'VALID' : 'INVALID') + ' | ' + esc(r.dup ? 'same life as ' + r.dup.replace(/^dev\/handover\/robot\//, '') : (r.why.join('; ') || r.note) + (r.mgQuit ? ' · mg quit ' + r.mgQuit + (r.mgQuitLB ? '+' : '') + ', not played' : '') + (r.offers ? ' · offers ' + r.offers + '/' + r.offPicked + ' picked' : '')) + ' |')).join('\n');
 }
 
 module.exports = { audit, verdict, endClass, counts, countsLine, mdTable, EXIT_IDS };
