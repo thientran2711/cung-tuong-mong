@@ -26,7 +26,7 @@ const CASES=[
  {k:'leave',type:'leave',tone:'fest',go:`over('Xuất cung','Ngươi rời cung theo lệ.','Xuất cung',true)`,btn:'Chuyển kiếp',after:'newlife'},
  {k:'throne',type:'throne',tone:'fest',go:`over('Hoàng thái hậu','Con ngươi lên ngôi.','Lên ngôi Thái hậu',true)`,btn:'Chuyển kiếp',after:'newlife'},
  {k:'grand',type:'grand',tone:'fest',go:`(()=>{BAL.ge.after='stay';const s=geS();s.st=['o','o','o','o'];s.r1=0;const r0=window.roll;window.roll=()=>true;try{geResolve(0,true)}finally{window.roll=r0}showModal()})()`,btn:'Tạ ơn',after:'closed'},
- {k:'grand-exit',type:'grand',tone:'fest',go:`(()=>{BAL.ge.after='close';const s=geS();s.st=['o','o','o','o'];s.r1=0;geResolve(0,true);showModal();chooseM(0)})()`,btn:'Chuyển kiếp',after:'newlife',title:'Kiếp này'},
+ {k:'grand-exit',type:'grand',tone:'fest',go:`(()=>{BAL.ge.after='close';const s=geS();s.st=['o','o','o','o'];s.r1=0;geResolve(0,true);showModal();chooseM(0)})()`,btn:'Chuyển kiếp',after:'newlife',title:'@kend'},/* co-ngu-titles: the life end card's title = its poetic name (jend endName; for an Đại kết cục exit = the catalogue title) */
  {k:'fail',type:'fail',tone:'mourn',go:`(()=>{S.ge=null;const s=geS();s.st[0]='f';geAnswer(1,1,false);showModal()})()`,btn:'Tiếp tục',after:'closed'},
  {k:'fate',type:'fate',tone:'fest',go:`(()=>{showModal();geBoardPanel()})()`,btn:null,after:'closed'},
  {k:'rare',type:'rare',tone:'fest',go:`(()=>{const id='nc_vuong',a=ARC67[id];const bid=(a.p[3]||[])[0];S.st.M={a:id,cur:bid,hist:[],used:[],i:3,r97:{ok:1,c:1},chap:1,sc:0,seq:[],act:{},kind:'m'};r97Take('m',bid);
@@ -76,7 +76,7 @@ const CASES=[
     chk(`${N}: flower centred on the frame's top edge`,R.fl&&Math.abs(R.fl.l+R.fl.w/2-cx)<3&&R.fl.t<R.d.t&&R.fl.b>R.d.t&&R.fl.t>=-1,{fl:R.fl,d:R.d});
     chk(`${N}: drapes hang on the left / right edges`,R.dl&&R.dr&&R.dl.l<R.d.l&&R.dl.r>R.d.l&&R.dr.r>R.d.r&&R.dr.l<R.d.r&&R.dl.h>R.d.h*.6,{dl:R.dl,dr:R.dr,d:R.d});}
    else chk(`${N}: no art → no overlay piece, kes-miss`,R.miss&&!R.fl&&!R.dl,R);
-   if(C.title)chk(`${N}: title «${C.title}»`,R.title.includes(C.title),R.title);
+   if(C.title){const T=C.title==='@kend'?await p.evaluate(()=>S.kend||''):C.title;chk(`${N}: title «${T}»`,!!T&&R.title.includes(T)&&!/Kiếp này/.test(R.title),R.title)}
    chk(`${N}: no horizontal overflow`,!R.ov);
    if(OUT){await p.waitForTimeout(900);await p.screenshot({path:path.join(OUT,`${tag}-${C.k}.png`)})}
    /* the button */
@@ -91,7 +91,7 @@ const CASES=[
    chk(`${N}: no page errors`,!errs.length,errs.slice(0,4));
    await ctx.close()}}
  /* law 11 family: every ending of one device in the same kit frame size (and the same kit header / footer-button height, which the KIT size system takes from the figure column for every dialog — KIT_REQUESTS ending-screens-land) = the same left figure slot (size + place in the frame) */
- const G={};FIGS.filter(f=>f[2]&&f[3]).forEach(f=>{const k=f[0].split(' ')[0]+' '+f[1]+' header '+f[7]+' footer '+f[8];(G[k]=G[k]||[]).push(f)});
+ const G={};FIGS.filter(f=>f[2]&&f[3]).forEach(f=>{const k=f[0].split(' ')[0]+' '+f[1]+' (KIT 56.21: one slot per frame size, whatever the header / footer)';(G[k]=G[k]||[]).push(f)});
  for(const k in G){const L=G[k],r=L[0];chk(`${k}: every ending shows the same kit figure slot (${L.length} endings, ${r[3]} @${r[4]},${r[5]})`,L.every(f=>f[3]===r[3]&&Math.abs(f[4]-r[4])<=2&&Math.abs(f[5]-r[5])<=2),L)}
  console.log('figure table [case, ksz, kit live frame, figure slot (.kszfig), fig top in frame, fig left in frame, frame, header h, footer h]');FIGS.forEach(f=>console.log(JSON.stringify(f)));
  await b.close();const nb=ok.filter(x=>!x[1]).length;console.log(`ending-screens: ${ok.length-nb}/${ok.length} pass${NOART?' (no art)':''}`);process.exit(nb?1:0)})();

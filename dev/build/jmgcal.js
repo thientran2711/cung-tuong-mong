@@ -69,7 +69,7 @@ function run(kind,seq){const K=KG82_KIND[kind],ds=C().d.slice(),n=ds.length,raws
   const d=kg82Open({art:"Thử tay",title:`${K.n} · hồi ${i+1}/${n}`,how:K.how,round:"Hồi",roundV:`${i+1}/${n}`,pic:kg82Pic(kind)});if(!d)return;
   /* owner 20/11 ~04:45Z (KIT §13.9): the kit ✕ «Quay lại» on every screen of a kind → the kind list; a kind left before its last round is NOT saved
      (raws stay local, recSet only at round n — unchanged); asked once while a board is live */
-  KG82.back=()=>pick();KG82.backAsk=[`Bỏ dở môn ${K.n}: các hồi đã chơi của môn này không được ghi.`,"Trở lại danh sách các môn, chọn môn khác."];
+  KG82.back=()=>pick();
   const box=kg82Box();box.innerHTML=`<h4 class="kpst">Thử tay · ${K.n}</h4>`+kg82Rows([["Môn",`${K.n} · ${K.t}`,"t"],["Hồi",`${i+1}/${n}`,"t"],["Độ khó",mgDiffTxt(t,kind),"n"]])+
    `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button></div>`;
   kgReady(box,{kind});/* KIT §13.7 rules screen; mgcal numbers unchanged (rounds, gaps) */

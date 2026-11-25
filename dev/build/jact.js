@@ -31,7 +31,7 @@ function adSrv(){try{return !!(S&&(S.out||(S.srv&&!S.srv.risen)||(typeof isSrv==
 function adMaidCards(){if(!S||S.out||!S.maid)return[];const A=[];let O=[];try{O=talkOpts({kind:"maid"})||[]}catch(e){return A}
  const sp=O.find(a=>a&&a.n==="Sai đi dò la"),ng=O.find(a=>a&&a.n==="Nghe ngóng chung");
  if(sp)A.push({n:"Sai cung nữ đi dò la",t:`Sai ${S.maid.name} đi dò la một phi tần (chọn người khi sai đi).`,k:typeof ptK==="function"?ptK("spy",2):2,c:{},o:sp.o==null?100:sp.o,dom:sp.dom||"Mưu kế",x:sp.x||"",lock:!!sp.lock,adT:sp.t,why:sp.why,adOpen:sp.open,ad:1});
- if(ng)A.push({n:"Nghe ngóng chung",t:`${S.maid.name} đi một vòng nghe ngóng chuyện trong cung.`,k:typeof ptK==="function"?ptK("listen",1):1,c:{},o:100,dom:"Giao thiệp",x:ng.x||"",adRun:ng.run,ad:1});
+ if(ng)A.push({n:"Nghe ngóng chung",t:`${S.maid.name} đi một vòng nghe ngóng chuyện trong cung.`,k:typeof ptK==="function"?ptK("listen",1):1,c:{},o:ng.o==null?100:ng.o,dom:"Giao thiệp",x:ng.x||"",why:ng.why,adRun:ng.run,ad:1});
  return A}
 /* the Tài nghệ charity as a Hành sự card (danh-p1, owner P1 16/11: "shared Hành sự door"): the same act (j85 charityFx), the same
    monthly lock (S.charM); khắc spent by the card path above, like the maid cards */
