@@ -7,3 +7,4 @@ Roll at ctx >= ~31 %, ceiling 60 %. Main push only on MAIN GO + gates/QC PASS + 
 - Queue (MAIN 145): SANGBUOI r4 head 3762da08 (merged LIVE 351122ba; only index/sw rebuilt) after BIG rv 13YzNeAK PASS → D coop-rebirth-stuck (sha via MAIN) → B robot-coop-fix-7-r2-rv f2216a70. LIVE ≤21:00Z; nothing new after ~21:15Z.
 - Tools: worktrees /home/user/wt/ho (handover reports, sparse) + /home/user/wt/st (stack, sparse); stack2.sh/holog.sh/u8srv.py copied to scratch.
 - ~20:0xZ pre-QC on SANGBUOI r4 3762da08 (FF on LIVE; diff = j6/jbal2/jdayq/jnf + its tests + quickcheck.js + index/sw): QUICKCHECK PASS 220 s (open ok, old save ok, perf buổi 1962/1455 ok). Waiting BIG rv PASS + sếp's words.
+- 19:59Z LC16 fwd: SELSCENE-19 LAND READY 8505ecdf (review/selection-scene-r19; on 08e7d79f + co-ngu 449b058d; one jksize pick rule; KK31 law-9 read PENDING; needs merge onto 351122ba j11). After-flight, needs MAIN GO — parked.
