@@ -284,3 +284,14 @@ FAIL reasons:
 1. Crawler crash: crawlTour() (button-crawl.js ~line 141) has the «screen one tap deeper» filter `if(par){…sig0…}` pasted from the crawl loop (line 247); `par`/`sig0` are not defined there → ReferenceError, the whole iPad crawl is lost (the tour step breaks on any device that reaches it). Remove the block from crawlTour (or pass the values), rerun fold+ipad.
 2. Two incompatible files at ONE path: this branch's dev/test/realtap.js exports {tap, hitInfo}; the shared lib on review/robot-realtap and review/test-path-fix exports {make, PROBE}. Whichever lands second breaks the other (button-crawl: `tap is not a function` → quickcheck hook 90 red at every go-live; or toilette/hoa-dien/overlay break). Use the ONE shared lib (`RT.make(page,…).tap(target,{screen,label})`) and drop the local copy (laws 9/11: one shared part, no private copy).
 3. Crawl findings for Foreman F (not blocking this branch): Fold — top-bar stat chip «Sắc 40 Tài 43 …» no effect; «Gieo quẻ» (and after «Gieo lại») no effect; Thiết lập «Sổ đổi mới mã» no effect; «Giữ sổ trên mây» = CORS console.error on ctm-coop…/api/vault/new from localhost (likely local-origin only).
+
+## REVIEW button-crawl-fix-2 (BIG REVIEWER #2 session_01UV1SzhBrzCVc4CVbM2dCsJ, 11/25/2026) — PASS 3b7e15cb (review/button-crawl-fix-2-r = fa466d90 merged onto LIVE 9f72524b, index.html/sw.js rebuilt)
+PRIORITY #1 CHECK: OD 25/11 ~05:10Z real taps + flight2 save BGMQ 1998 empty «Tâm trạng» | main: serM/deserQ j3, kitPanel j79, jqsave serQ index pairing | review/*: realtap.js = robot-realtap 78af2325 byte-identical (shared lib, no private copy) | claims Foreman F #8.
+Branch base was a6b4d573 (not LIVE) → merged on LIVE 9f72524b; only conflicts index.html/sw.js (rebuilt by build_site.sh).
+| check | Fold 755x1000 | iPad 1180x820 |
+|---|---|---|
+| look-dedupe.js (real taps) | 8/8 PASS: seal tap opens «Tâm trạng · Ngươi» with body; 20× same + «Đã biết về» 2× → 1 card per title; look-ups not saved; ONE ✕ tap closes (Q 0); kit notice saved with spec + body back; poisoned save 2001 entries → [«Kỳ ngộ»]; 0 errors | 8/8 PASS |
+| queue order probe (A notice, look, kit B, C, choice D fn-opts, E) | serQ → [A, Kit B(kit), C, E]; deserQ → same order, kit B body back (old index pairing fixed) | — |
+| quickcheck 3b7e15cb vs LIVE | PASS · core gates · hooks 9 (incl. 92-look-dedupe) · old save ok · perf in noise | |
+Code read: dedupe splice can hit the SHOWN Q[0], but every look-up opener (j79 kitPanel front + showModal, kitModal front + showModal, jevb kitModal) puts the new copy at the front and repaints → queue and screen stay in step. kqEnc drops functions/onClose/opts, people as ids (rcpP/emoByKey), 24k cap. Laws 4/7/9: no new UI; kit cards rebuilt from their own spec.
+Note for landing: dev/test/realtap.js is add/add with review/test-path-fix-3-r (3567b906 version) — keep the NEWER (78af2325 here, or 1a29f470 harness when it lands); same API.
