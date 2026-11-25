@@ -18,17 +18,19 @@ const [, , URL0, OUT0, ...KV] = process.argv;
 if (!URL0 || !OUT0) { console.error('usage: node dev/test/robot-rt-coop.js <url> <out-dir> [host=fold] [guest=ipad] [kiep=1] [tag=..] ...'); process.exit(2) }
 const A = Object.fromEntries(KV.map(s => s.split('=')));
 /* STATIC SELF-TEST first (robot-lint.js: node --check + undeclared names outside page code); a FAIL never starts a life (lint=0 skips) */
-if (A.lint !== '0') { const LR = require('./robot-lint.js').run(require('./robot-lint.js').DEFAULT); if (!LR.ok) { console.error('HARNESS LINT FAIL — no life started:\n' + LR.rep.join('\n')); process.exit(2) } }
+if (A.lint !== '0') { const LR = require('./robot-lint.js').run(require('./robot-lint.js').DEFAULT); if (LR.warn) console.log('HARNESS LINT WARN: ' + LR.warn); if (!LR.ok) { console.error('HARNESS LINT FAIL — no life started:\n' + LR.rep.join('\n')); process.exit(2) } }
 const TAG = A.tag || 'p' + (A.seed || 1) + '-' + new Date().toISOString().slice(0, 16).replace(/[-:T]/g, '');
 const KIEP = +A.kiep || 1, OUT = path.resolve(OUT0); fs.mkdirSync(OUT, { recursive: true });
 const VPS = { fold: { width: 755, height: 1000 }, ipad: { width: 1180, height: 820 } };
 const run = { tag: TAG, url: URL0, harness: 'realtap', args: A, at: new Date().toISOString() };
 const pair = { job: { id: 'coop-rt-' + TAG, kiep: KIEP, seed: +A.seed || 1 }, lives: [], partial: true, bugs: [] };
-let code = null;
+const RESUME = A.resume === '1'; let code = A.room || null; /* resume=1 room=<CODE>: same pair, same profiles/ckpts, each seat «Cùng hảo hữu → Trở lại phòng» (A-COOP #2 coop1i patch) */
 const flush = () => { fs.writeFileSync(path.join(OUT, 'coop-rt-' + TAG + '.json'), JSON.stringify({ run, pairs: [pair] }, null, 1));
   fs.writeFileSync(path.join(OUT, 'coop-rt-' + TAG + '.md'), ['# co-op real-tap room ' + TAG + ' (code ' + code + ')', '', '| seat | dev | kiếp | extra | ending | age | buổi | dead buttons | stuck | bugs | exit pick |', '|---|---|---|---|---|---|---|---|---|---|---|']
     .concat(pair.lives.map(l => '| ' + l.seat + ' | ' + l.dev + ' | ' + l.kiep + ' | ' + (l.extra ? 'yes' : '') + ' | ' + (l.life ? l.life.id + (l.life.fate ? ' — ' + l.life.fate : '') : '') + ' | ' + ((l.life && l.life.age) || '') + ' | ' + l.buoi + ' | ' + l.dead.length + ' | ' + l.harness.stuck + ' | ' + l.bugs.length + ' | ' + (l.exitPick ? l.exitPick.label + (l.exitPick.only ? ' (only option)' : '') : '—') + ' |')).join('\n')) };
 
+/* resume=1: both seats reopen the SAME room like a person: title → «Cùng hảo hữu» → «Trở lại phòng»; never «Chơi một mình» / Chọn sổ / Mời hảo hữu */
+const resumePre = (sc, b) => { if (process.env.RTV) console.log('RESUMEPRE', sc.layer, '«' + sc.title + '»', b.map(x => x.t.slice(0, 22)).join(' | ').slice(0, 200)); const f = re => b.find(x => re.test(x.t)); const back = f(/^(trở lại phòng|vào lại phòng)/i); if (back) return back; if (/mời hảo hữu|đợi hảo hữu/i.test(sc.title || '')) return 'wait'; const c = f(/^cùng hảo hữu/i); if (c) return c; if (f(/chơi một mình|bắt đầu kiếp mới|chọn sổ/i)) return 'wait'; return null };
 /* pre-start choices (title → room) per seat; return a button, 'wait', or null (= the seat player's own start prefs) */
 function hostPre(st) { return (sc, b) => {
   if (!code) { const m = sc.b.map(x => x.t).join(' | ').match(/Chép mã\s*([A-Z0-9]{4})(?![A-Za-z0-9])/); const c = sc.code || (m && m[1]); if (c) { code = c; console.log('ROOM CODE', code) } }
@@ -58,7 +60,7 @@ async function seatLoop(ctx, who, dev, other) {
   for (;;) {
     k++; const extra = k > KIEP;
     const s = Seat({ url: URL0, out: OUT, dev, bot: A.bot, seed: (+A.seed || 1) * 10 + (who === 'host' ? 1 : 2) + k * 100, life: 'coop-rt-' + TAG + '-' + who + '-k' + k,
-      origin: A[who + 'Origin'], road: A[who + 'Road'], stuckMin: A.stuckMin, slice: A.slice, noBoot: k > 1, coop: true, roomCode: () => code, coopLink: { me: LINK[who], other: LINK[who === 'host' ? 'guest' : 'host'] }, pre: k === 1 ? (who === 'host' ? hostPre(st) : guestPre(st)) : null });
+      origin: A[who + 'Origin'], road: A[who + 'Road'], stuckMin: A.stuckMin, slice: A.slice, resume: RESUME && k === 1, noBoot: k > 1, coop: true, roomCode: () => code, coopLink: { me: LINK[who], other: LINK[who === 'host' ? 'guest' : 'host'] }, pre: (k === 1 && !RESUME) ? (who === 'host' ? hostPre(st) : guestPre(st)) : (k === 1 && RESUME ? resumePre : null) });
     try { await s.play(p) } catch (e) { s.R.bugs.push({ type: 'harness', msg: 'runner error: ' + String(e.message).split('\n')[0], n: 1 }); s.R.life = s.R.life || { id: 'HARNESS', type: 'harness' }; s.save() }
     pair.lives.push({ seat: who, dev, kiep: k, extra, room: code, life: s.R.life, harness: s.R.harness, exitPick: s.R.exitPick, bugs: s.R.bugs, dead: s.R.dead, buoi: s.R.buoi, saves: s.R.saves });
     flush(); console.log('SEAT LIFE DONE', who, 'k' + k, s.R.life && s.R.life.id);

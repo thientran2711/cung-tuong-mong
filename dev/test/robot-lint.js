@@ -10,7 +10,8 @@
    robot-rt.js / robot-rt-coop.js run it at start-up and refuse to play a life on a FAIL (lint=0 skips). */
 'use strict';
 const fs = require('fs'), path = require('path'), { execFileSync } = require('child_process');
-const { Linter } = require('eslint');
+/* The eslint package lives in /opt/node-tools on these containers; where it is missing the scope check is SKIPPED with a WARN (node --check still runs) — BIG #7 nit 17:10Z */
+let Linter = null; try { ({ Linter } = require('eslint')) } catch (e) { Linter = null }
 const HERE = __dirname;
 const DEFAULT = ['robot-rt.js', 'robot-rt-coop.js', 'realtap.js', 'robot-save-replay.js', 'robot-lint.js'].map(f => path.join(HERE, f)).filter(f => fs.existsSync(f));
 const NODE_GLOBALS = ['require', 'module', 'exports', 'process', 'console', 'Buffer', '__dirname', '__filename', 'global', 'globalThis',
@@ -21,6 +22,7 @@ const PAGE_CALL = /^(evaluate|evaluateHandle|waitForFunction|addInitScript|\$eva
 function lintFile(file) {
   const out = [];
   try { execFileSync(process.execPath, ['--check', file], { stdio: 'pipe' }) } catch (e) { out.push({ line: 0, msg: 'node --check: ' + String(e.stderr || e.message).split('\n').filter(Boolean).slice(0, 4).join(' | ') }); return out }
+  if (!Linter) return out;
   const code = fs.readFileSync(file, 'utf8').replace(/^#!.*/, '');
   const linter = new Linter();
   const pageNames = new Set();
@@ -50,13 +52,14 @@ function lintFile(file) {
 
 function run(files) { let bad = 0; const rep = [];
   for (const f of files) { const r = lintFile(f); bad += r.length; for (const x of r) rep.push(path.basename(f) + ':' + x.line + ' ' + x.msg) }
-  return { ok: bad === 0, n: bad, rep, files: files.map(f => path.basename(f)) } }
+  return { ok: bad === 0, n: bad, rep, files: files.map(f => path.basename(f)), warn: Linter ? null : 'eslint not found — undeclared-identifier check skipped, node --check only' } }
 
 module.exports = { run, lintFile, DEFAULT };
 
 if (require.main === module) {
   const files = process.argv.slice(2).length ? process.argv.slice(2).map(f => path.resolve(f)) : DEFAULT;
   const r = run(files);
+  if (r.warn) console.log('WARN ' + r.warn);
   for (const l of r.rep) console.log('FAIL ' + l);
   console.log((r.ok ? 'LINT OK ' : 'LINT FAIL ') + r.n + ' finding(s) in ' + r.files.join(', '));
   process.exit(r.ok ? 0 : 1);
