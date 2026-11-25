@@ -58,13 +58,14 @@ const CB={mk,tapText,until,STEP};
 const DCL={waitUntil:'domcontentloaded'};const ON=n=>!process.env.ONLY||process.env.ONLY.split(',').includes(String(n));
 const D=o=>o.p.evaluate(()=>{const c=window.COOPW||{};const bS=c.base&&c.base.W&&c.base.W.S;const rd=bS&&typeof bS.turn==='number'?bS:null;/* the room's merged date (CW.base.W.S), read directly: the same on a bare build */return {w:COOP.state.week,my:typeof S==='object'&&S?S.turn*3+S.tuan:null,
   date:typeof S==='object'&&S?[S.year,S.month,S.tuan,S.turn].join('/'):null,room:rd?[rd.year,rd.month,rd.tuan,rd.turn].join('/'):null,
-  roomN:rd?rd.turn*3+rd.tuan:null,dead:!!(typeof S==='object'&&S&&S.dead),inLife:!!c.inLife,life:c.life||0,b:typeof S==='object'&&S?S.buoi||0:null,fix:c.calFix||0}}).catch(e=>({err:e.message}));
+  roomN:rd?rd.turn*3+rd.tuan:null,dead:!!(typeof S==='object'&&S&&S.dead),inLife:!!c.inLife,life:c.life||0,b:typeof S==='object'&&S?S.buoi||0:null,fix:c.calFix||0,pend:!!(c.pend||c.sent===COOP.state.week)}}).catch(e=>({err:e.message}));
 /* a player clears what is on top of her (kit layers, then an open dialog: the bot's own answer) without starting acts */
 async function clr(o){if(await CLR.tap(o).catch(()=>'')==='x')return;if(await o.p.evaluate(()=>!document.getElementById('modal').hidden).catch(()=>false))await step(o)}
 async function step(o){try{return await CLR.first(o,CB.STEP)}catch(e){return 'err'}}
 /* both seats play (a player's taps: coop-bot STEP + the shared coop-clear) until fn(A,B) holds */
 async function play(A,B,fn,ms){const t0=Date.now();while(Date.now()-t0<ms){await step(A);await step(B);if(await fn())return true;await sleep(150)}return false}
-const alive=async o=>{const d=await D(o);return d.my!=null&&!d.dead&&!d.inLife&&await o.p.evaluate(()=>document.getElementById('title').hidden&&!document.querySelector('#kroul')).catch(()=>false)};
+/* alive = in the room's live week: not dead, not choosing a life, her week end not out (a seat whose night already ran waits for the merge with its date +1: legal) */
+const alive=async o=>{const d=await D(o);return d.my!=null&&!d.dead&&!d.inLife&&!d.pend&&await o.p.evaluate(()=>document.getElementById('title').hidden&&!document.querySelector('#kroul')).catch(()=>false)};
 /* kill a seat the way the robot round did: its own date moved first (the shape of the case), then a death (j3 die) */
 const kill=(o,how)=>o.p.evaluate(how=>{if(how==='tuan'){if(S.tuan<2)S.tuan++;else{S.turn++;S.month=S.month%12+1;S.tuan=0}}else if(how==='turn')S.turn++;die('Thử: lịch đi trước')},how);
 async function rebirthCase(A,B,X,tag,how){
@@ -103,12 +104,12 @@ async function rebirthCase(A,B,X,tag,how){
     (the person-dialog queue keeps copies), the guest ends hers → the room steps → the host's seat steps too, at once (a look-up panel never
     holds the room's step), no tap on his side */
  if(ON(5)){const LAST=await A.p.evaluate(()=>typeof B4L==='number'?B4L:2);
-  ok(await play(A,B,async()=>{const a=await D(A),c=await D(B);return await alive(A)&&await alive(B)&&a.w===c.w&&a.b===c.b&&a.b<LAST},120000),'5: both live in one day buổi');
+  ok(await play(A,B,async()=>{const a=await D(A),c=await D(B);return await alive(A)&&await alive(B)&&a.w===c.w&&a.b===c.b&&a.b<LAST&&a.my===a.roomN&&c.my===c.roomN},120000),'5: both live in one day buổi');for(const o of [A,B])await o.p.evaluate(()=>{try{Object.assign(BAL.coopTm,{buoiMs:600000});COOPW.tm.reset()}catch(e){}});/* a long buổi clock: no forced end (jcooptimer) races the taps, as coop-night does */
   for(let i=0;i<6;i++){await CLR.tap(A).catch(()=>'');await CLR.tap(B).catch(()=>'');await sleep(200)}
-  const a0=await D(A);const nx=o=>o.p.evaluate(()=>{if(COOPW.bend)return true;/* already ended this buổi (the clock / an earlier tap): counts as pressed */const n=document.getElementById('next');if(!n||n.disabled||!document.getElementById('modal').hidden)return false;n.click();return true});
-  let hp=false;for(let i=0;i<20&&!hp;i++){hp=await nx(A);if(!hp){await clr(A);await sleep(300)}}ok(hp,'5: host presses Hết buổi',a0);await sleep(800);
+  const a0=await D(A);const nx=o=>o.p.evaluate(()=>{const n=document.getElementById('next');if(!n||n.disabled||!document.getElementById('modal').hidden)return false;n.click();return true});
+  let hp=false;for(let i=0;i<40&&!hp;i++){hp=await nx(A);if(!hp){await clr(A);await sleep(300)}}ok(hp,'5: host presses Hết buổi',a0);await sleep(800);
   ok(await A.p.evaluate(()=>{for(let i=0;i<3;i++)emoBox(emoKey(S));return !document.getElementById('modal').hidden&&Q.length>=1}),'5: host has «Tâm trạng · Ngươi» open (queued '+await A.p.evaluate(()=>Q.length)+')');
-  let pr=false;for(let i=0;i<20&&!pr;i++){pr=await nx(B);if(!pr){await clr(B);await sleep(300)}}ok(pr,'5: guest presses Hết buổi',pr?undefined:[await B.p.evaluate(()=>{const n=document.getElementById('next');return {t:n&&n.textContent,dis:n&&n.disabled,modal:!document.getElementById('modal').hidden&&(document.getElementById('mt')||{}).textContent,Q:Q.length,b:S.buoi,tr:COOPW.tr.slice(-4)}}),await A.p.evaluate(()=>({Q:Q.length,b:S.buoi,tr:COOPW.tr.slice(-4)}))]);
+  let pr=false;for(let i=0;i<40&&!pr;i++){pr=await nx(B);if(!pr){await clr(B);await sleep(300)}}ok(pr,'5: guest presses Hết buổi',pr?undefined:[await B.p.evaluate(()=>{const n=document.getElementById('next');return {t:n&&n.textContent,dis:n&&n.disabled,modal:!document.getElementById('modal').hidden&&(document.getElementById('mt')||{}).textContent,Q:Q.length,b:S.buoi,tr:COOPW.tr.slice(-4)}}),await A.p.evaluate(()=>({Q:Q.length,b:S.buoi,tr:COOPW.tr.slice(-4)}))]);
   ok(await CB.until(B,b=>(S.buoi||0)===b+1,a0.b,20000),'5: the room steps (guest in the next buổi)');
   const st=await CB.until(A,b=>(S.buoi||0)===b+1&&!COOPW.pendBuoi,a0.b,15000);const a1=await D(A),b1=await D(B);
   ok(st&&a1.b===b1.b,'5: the host steps with the room by himself (no split)',[a1.b,b1.b,await A.p.evaluate(()=>({pb:!!COOPW.pendBuoi,Q:Q.length,tr:COOPW.tr.slice(-5)}))]);
@@ -116,18 +117,18 @@ async function rebirthCase(A,B,X,tag,how){
   let hp2=false;for(let i=0;i<30&&!hp2;i++){hp2=await nx(A);if(!hp2){await clr(A);await sleep(300)}}const a2=await D(A);ok(hp2,'5: host presses Hết buổi again (his dialogs answered)',await A.p.evaluate(()=>({Q:Q.length,tr:COOPW.tr.slice(-3)})));await sleep(800);
   await A.p.evaluate(()=>{window.__c5=0;pushModal({t:'Việc thử',h:'<p>Một việc cần ngươi tự quyết.</p>',opts:[{n:'Nhận',fx:{},x:'',go:()=>{window.__c5=1}},{n:'Thôi',fx:{},x:'',go:()=>{window.__c5=2}}]});showModal()});
   pr=false;for(let i=0;i<20&&!pr;i++){pr=await nx(B);if(!pr){await clr(B);await sleep(300)}}
-  await CB.until(B,b=>(S.buoi||0)===b+1,a2.b,20000);await sleep(2500);
+  ok(pr,'5: guest presses Hết buổi again');ok(await CB.until(B,b=>(S.buoi||0)===b+1,a2.b,30000),'5: the room steps again (guest in the next buổi)',await D(B));await sleep(2500);
   ok((await D(A)).b===a2.b&&await A.p.evaluate(()=>!!COOPW.pendBuoi),'5: a real choice open still holds his step (pendBuoi)',await D(A));
   await A.p.evaluate(()=>{const b=[...document.querySelectorAll('#modal .opts button')].find(x=>/^Nhận/.test(x.textContent.trim()));if(b)b.click()});
   ok(await CB.until(A,b=>(S.buoi||0)===b+1,a2.b,15000)&&await A.p.evaluate(()=>window.__c5===1),'5: he answers → his step runs, the choice ran once')}
  /* 6 CAUSE 5 r2 (U3b room 6ZB2 on d16c5300: both seats had «Tin báo» open, host «onBuoi 3.2 me 3.1 Q1» parked): a panel that only TELLS
     (the «Tin báo» notice panel she opened, no choice) is carried over the room's step: his seat steps with the room and the panel is still
     on his screen after it (nothing she was reading is lost) */
- if(ON(6)){const LAST=await A.p.evaluate(()=>typeof B4L==='number'?B4L:2);const nx=o=>o.p.evaluate(()=>{if(COOPW.bend)return true;/* already ended this buổi (the clock / an earlier tap): counts as pressed */const n=document.getElementById('next');if(!n||n.disabled||!document.getElementById('modal').hidden)return false;n.click();return true});
-  ok(await play(A,B,async()=>{const a=await D(A),c=await D(B);return await alive(A)&&await alive(B)&&a.w===c.w&&a.b===c.b&&a.b<LAST},120000),'6: both live in one day buổi');
-  let hp=false;for(let i=0;i<30&&!hp;i++){hp=await nx(A);if(!hp){await clr(A);await sleep(300)}}const a0=await D(A);ok(hp,'6: host presses Hết buổi',a0);await sleep(800);
+ if(ON(6)){const LAST=await A.p.evaluate(()=>typeof B4L==='number'?B4L:2);const nx=o=>o.p.evaluate(()=>{const n=document.getElementById('next');if(!n||n.disabled||!document.getElementById('modal').hidden)return false;n.click();return true});
+  ok(await play(A,B,async()=>{const a=await D(A),c=await D(B);return await alive(A)&&await alive(B)&&a.w===c.w&&a.b===c.b&&a.b<LAST&&a.my===a.roomN&&c.my===c.roomN},120000),'6: both live in one day buổi');for(const o of [A,B])await o.p.evaluate(()=>{try{Object.assign(BAL.coopTm,{buoiMs:600000});COOPW.tm.reset()}catch(e){}});/* a long buổi clock: no forced end (jcooptimer) races the taps, as coop-night does */
+  let hp=false;for(let i=0;i<40&&!hp;i++){hp=await nx(A);if(!hp){await clr(A);await sleep(300)}}const a0=await D(A);ok(hp,'6: host presses Hết buổi',a0);await sleep(800);
   ok(await A.p.evaluate(()=>{kitNotice({id:'t6',line:'Tin thử ca 6',text:'Một tin để đọc, không có gì phải chọn.'});kitNoticeOpen('t6');return !document.getElementById('modal').hidden&&Q.length===1&&/Tin báo/.test((document.getElementById('mt')||{}).textContent||'')}),'6: host has «Tin báo» open (a notice, no choice)');
-  let pr=false;for(let i=0;i<30&&!pr;i++){pr=await nx(B);if(!pr){await clr(B);await sleep(300)}}ok(pr,'6: guest presses Hết buổi');
+  let pr=false;for(let i=0;i<40&&!pr;i++){pr=await nx(B);if(!pr){await clr(B);await sleep(300)}}ok(pr,'6: guest presses Hết buổi');
   ok(await CB.until(B,b=>(S.buoi||0)===b+1,a0.b,20000),'6: the room steps (guest in the next buổi)');
   const st=await CB.until(A,b=>(S.buoi||0)===b+1&&!COOPW.pendBuoi,a0.b,15000);const a1=await D(A),b1=await D(B);
   ok(st&&a1.b===b1.b,'6: the host steps with the room (no split)',[a1.b,b1.b,await A.p.evaluate(()=>({pb:!!COOPW.pendBuoi,Q:Q.length,tr:COOPW.tr.slice(-4)}))]);
