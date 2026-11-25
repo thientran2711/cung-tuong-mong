@@ -10,7 +10,7 @@
    Shots (looked at, not in git): <out>/<vp>-R1.png … R4.png
    usage: node dev/test/dayq-order.js <baseURL> <path> <outDir>   e.g. http://127.0.0.1:8765 dev/index.html /home/user/wt/dayq/shots/after */
 const {chromium}=require('./lib/dlgs-off').pw('tap');const fs=require('fs');const [,,BASE,PATH,OUT]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
-const VP=[[755,1000,2],[1180,820,2]];const i0=x=>!x;
+const VP=[[755,1000,2],[1180,820,2]].filter(v=>!process.env.VPONLY||process.env.VPONLY===v[0]+'x'+v[1]);const i0=x=>!x;
 const NEWLIFE=`(function(){localStorage.removeItem('hclh-opt');SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){window.__forceOrigin='thd';window.__nlInner=1;start();window.__nlInner=0;if(!(typeof isSrv==='function'&&isSrv()))break}
  quiet=false;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;['kroul','kload','kpodov'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});const d=document.getElementById('dawn');if(d){d.hidden=true;d.className='dawn';d.innerHTML=''}document.body.classList.remove('kbk-open');render();return S.name})()`;
 const realHid=`(el=>Object.getOwnPropertyDescriptor(HTMLElement.prototype,'hidden').get.call(el))`;
@@ -38,14 +38,14 @@ const realHid=`(el=>Object.getOwnPropertyDescriptor(HTMLElement.prototype,'hidde
   const steps=[];let r2=null;
   for(let i=0;i<30;i++){await sleep(1300);
    const st=await p.evaluate(`(()=>{const d=document.getElementById('dawn');const M=document.getElementById('modal');const on=!!(d&&!d.hidden&&(d.classList.contains('on')||d.classList.contains('kne-day')));
-     return{wk:wk(),buoi:S.buoi,dawn:on,kne:!!(d&&d.classList.contains('kne-day')),book:!!document.querySelector('#dawn .kbk'),modalShown:!${realHid}(M),top:String(Q[0]&&Q[0].t||'').slice(0,40),
-     km:[...document.querySelectorAll('.kmov:not(.km-out)')].map(e=>e.className.slice(0,40)),end:!!(d&&d.querySelector(':scope > .kmend')),kmend:!!document.querySelector('.kmov:not(.km-out) .kmend,.kmov:not(.km-out) .krevok'),dbg:(()=>{try{return [KMQ.length,kmBusy?1:0,window.DQ?DQ.want:'-',used,BAL.time.khac,S.mg?1:0,kmFree()?1:0,Q.length].join(',')}catch(e){return String(e)}})()}})()`);
+     return{wk:wk(),buoi:S.buoi,dawn:on,kne:!!(d&&d.classList.contains('kne-day')),book:!!document.querySelector('#dawn .kbk'),modalShown:!${realHid}(M)||!!(window.DF&&DF.encM&&DF.F&&document.querySelector('.kfoc')),top:String(Q[0]&&Q[0].t||'').slice(0,40),
+     km:[...document.querySelectorAll('.kmov:not(.km-out)')].map(e=>e.className.slice(0,40)),end:!!(d&&d.querySelector(':scope > .kmend')),kmend:!!document.querySelector('.kmov:not(.km-out) .kmend,.kmov:not(.km-out) .krevok'),dbg:(()=>{try{return [KMQ.length,kmBusy?1:0,window.DQ?DQ.want:'-',used,BAL.time.khac,S.mg?1:0,kmFree()?1:0,Q.length,(()=>{try{const a=dqActEl();return a?(a.id||a.className||'el').slice(0,30):'-'}catch(e){return 'x'}})(),window.DQ?JSON.stringify(DQ.stat):'',(window.DF&&DF.F?'F':'')+(window.DF&&DF.encM?'E':'')+(()=>{const f=document.querySelector('.kfoc');return f&&f.getBoundingClientRect().width>0?'V':''})()].join(',')}catch(e){return String(e)}})()}})()`);
    steps.push(st);if(!r2&&st.wk!==r1.wk)r2=st;
    if(st.modalShown&&st.dawn)bad('card painted over the '+(st.book?'book':'title card')+': '+st.top);if(st.book&&st.km.length)bad('motion scene over the book: '+st.km[0]);
    if(st.book&&!st.km.length)break;
    if(st.km.length){const hit=await p.evaluate(()=>{const B=[...document.querySelectorAll('.kmov:not(.km-out) button')].filter(b=>!b.disabled&&b.getBoundingClientRect().width>0);const b=B[B.length-1];if(b){b.click();return 1}return 0});if(!hit)await p.mouse.click(vp[0]/2,vp[1]/2);continue}
    if(st.dawn){if(st.end)await p.click('#dawn > .kmend',{force:true}).catch(()=>{});else await p.mouse.click(vp[0]/2,vp[1]/2);continue}
-   if(st.modalShown){await p.evaluate(()=>{const m=Q[0];if(!m)return;if(m.opts&&m.opts.length){/* the LAST open option (a decline: no mini-game) */let i=-1;for(let j=m.opts.length-1;j>=0;j--){const o=m.opts[j];if(!o.off&&!(o.fx&&o.fx.bac&&S.bac+o.fx.bac<0)){i=j;break}}chooseM(i<0?0:i)}else closeModal()});continue}
+   if(st.modalShown){await p.evaluate(()=>{const m=Q[0];if(!m)return;const enc=!!(window.DF&&DF.encM===m&&DF.F);setTimeout(()=>{try{if(enc&&DF.F&&!DF.encM){DF.F.destroy();dfClosed(DF.tk)}}catch(e){}},0);if(m.opts&&m.opts.length){/* the LAST open option (a decline: no mini-game) */let i=-1;for(let j=m.opts.length-1;j>=0;j--){const o=m.opts[j];if(!o.off&&!(o.fx&&o.fx.bac&&S.bac+o.fx.bac<0)){i=j;break}}chooseM(i<0?0:i)}else closeModal()});continue}
    if(await p.evaluate(()=>{const ov=document.getElementById('ov');if(ov&&!ov.hidden){const k=document.querySelector('#kg82skip')||document.querySelector('#mgskip')||document.querySelector('#mgok');if(k){k.click();return 1}}return 0}))continue;
    if(st.wk===r1.wk)await p.evaluate(()=>{try{render()}catch(e){}})}
   r.steps=steps.map(s=>`[${s.dbg}] ${s.wk}/${s.buoi}${s.dawn?(s.book?' BOOK':' CARD'):''}${s.modalShown?' modal:'+s.top:''}${s.km.length?' km:'+s.km[0]:''}`);

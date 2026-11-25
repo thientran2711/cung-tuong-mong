@@ -4,6 +4,7 @@
    Now each bot's clear() calls  require('./lib/coop-clear.js').first(o, <its own page step>)  and only its own extra steps stay inline.
    Order (a player always meets them on top of the game first):
      1. the Luân hồi roulette of a new life: «Bỏ qua» (#kroul .krskip)                                   (night-balance-bundle / coop-thin-g-f1)
+     1b. a podium (#kpodov): its «Tiếp» .kpod-next — the room's cards wait behind it (review/day-queue-2, owner 24/11 ~22:02Z)   (DAYQ-4)
      2. a manual kit scene (night-end «Nhận» #kneov, reward box, person reveal): its own close [data-km-close]; the kit ITEM REVEAL (jfx kitGain)
         closes only on its «Nhận» .krevok (no [data-km-close] marker yet, KIT_REQUESTS) — a player taps it (rv night-ledger-coop-r2)
         — skipped while window.__noclose is set (cn-force probe keeps the scene open on purpose)          (rv night-balance-bundle 735606d8)
@@ -20,6 +21,9 @@
    Count: window.__kfocN = taps of 3 + 4 (coop-room-faces prints it). */
 const TAP0=()=>{const vis=x=>!!x&&x.offsetParent!==null&&!x.disabled;
  const rs=document.querySelector('#kroul .krskip');if(rs&&rs.offsetParent!==null){rs.click();return'x'}
+ /* 1b. a podium on screen (j90 kitPodiumShow: her contest's «Hội phối đồ» / mini-game dais): its «Tiếp» (.kpod-next), as a player does —
+    since review/day-queue-2 (owner 24/11 ~22:02Z) the cards of the room wait while she is on the dais, so a bot that never taps it holds the room night for ever */
+ const kp=document.querySelector('#kpodov .kpod-next');if(kp&&kp.offsetParent!==null&&!kp.disabled){kp.click();return'x'}
  if(!window.__noclose){const kc=[...document.querySelectorAll('.kmov [data-km-close],.kmov .krevok')].find(x=>vis(x)&&x.getClientRects().length);if(kc){kc.click();return'x'}}
  const kf=[...document.querySelectorAll('.kfoc-next')].find(x=>x.offsetParent!==null);if(kf){window.__kfocN=(window.__kfocN||0)+1;kf.click();return'x'}
  const q=typeof Q!=='undefined'&&Q[0];const kb=q&&q.dfSeen?[...document.querySelectorAll('.kfoc-b:not(.kfoc-off)')].find(x=>x.offsetParent!==null&&/^m\d+$/.test(x.dataset.id||'')):null;
