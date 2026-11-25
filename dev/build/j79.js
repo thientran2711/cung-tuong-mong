@@ -3,7 +3,8 @@
    Workers pass DATA only: kitPanel({...}) / kitFacts([...]) / kitRows([...]) / kitChip(...) / kitPersonLine(p) / kitIntel / kitEvidence / kitThreat / kitOdds.
    Every legacy modal (Q.push({t,h,opts,who})) is converted here automatically: kit header + seal, subject portrait only when it is a person,
    run-on text split into one fact per row (face + rank title + name), deltas as green/red chips, one button style. No random room art. */
-const KP_SEAL={rule:"LUẬT",info:"ĐIỀU",news:"TIN",notice:"BÁO",choice:"VIỆC",result:"KẾT QUẢ",night:"ĐÊM",end:"KIẾP",intel:"MẬT BÁO",threat:"CẢNH GIÁC",evidence:"CHỨNG CỨ",person:"NGƯỜI",reward:"BAN THƯỞNG"};
+/* seal words (co-ngu-seals, owner 25/11 ~07:40Z cổ ngữ pass; MAIN 136 subset: function first, a seal must still read at a glance) */
+const KP_SEAL={rule:"CUNG QUY",info:"ĐIỀU",news:"PHONG THANH",notice:"BÁO",choice:"VIỆC",result:"KẾT QUẢ",night:"CANH KHUYA",end:"KIẾP",intel:"MẬT BÁO",threat:"HIỂM HỌA",evidence:"VẬT CHỨNG",person:"NGƯỜI",reward:"ÂN THƯỞNG"};
 const kpPlain=h=>String(h==null?"":h).replace(/<[^>]+>/g,"").replace(/&nbsp;/g," ").replace(/\s+/g," ").trim();
 const kpEsc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const kpN=n=>(n>0?"+":n<0?"−":"")+Math.abs(Math.round(n*100)/100);

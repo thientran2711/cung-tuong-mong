@@ -3,7 +3,7 @@ usage: python3 dev/test/kit-size3-compose.py <blkdir> <itemdir> <tag> <outdir> <
 import sys,os,json,textwrap
 from PIL import Image,ImageDraw,ImageFont
 D,ID,TAG,OUT,MJ=sys.argv[1:6];M=json.load(open(MJ))['after']
-NAME={'news':'TIN','rule':'LUẬT','notice':'BÁO','choice':'VIỆC','result':'KẾT QUẢ','info':'ĐIỀU','night':'ĐÊM','intel':'MẬT BÁO','evidence':'CHỨNG CỨ','reward':'BAN THƯỞNG','week':'TUẦN','threat':'CẢNH GIÁC','person':'NGƯỜI','end':'KIẾP'}
+NAME={'news':'PHONG THANH','rule':'CUNG QUY','notice':'BÁO','choice':'VIỆC','result':'KẾT QUẢ','info':'ĐIỀU','night':'CANH KHUYA','intel':'MẬT BÁO','evidence':'VẬT CHỨNG','reward':'ÂN THƯỞNG','week':'TUẦN','threat':'HIỂM HỌA','person':'NGƯỜI','end':'KIẾP'}
 try:F=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',30);f2=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',22)
 except Exception:F=f2=ImageFont.load_default()
 BG=(243,232,212);MAXH=2000;HEAD=110;GAP=24
