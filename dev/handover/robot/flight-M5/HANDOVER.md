@@ -1,0 +1,27 @@
+# flight-M5 HANDOVER (robot life M5, SOLO, SEED=105, profile random, Fold 755x1000) — written at ctx ~41 %
+READ FIRST on this branch: dev/rules/START_CORE.md + dev/rules/START_WORKER.md; dev/handover/briefs/F-flight-robot.md; dev/handover/briefs/ROBOT-PLAYER-REVIEW.md; the LAST FOUR rows of dev/OWNER_DECISIONS.md verbatim (real taps; one life = until death/real ending, no cap; no voluntary exit road unless it is the ONLY option (then it is a real ending); mini-games must be PLAYED (Sẵn sàng real tap, skilled mg-bots logic with real taps/drags, Bỏ qua only ~10 %)).
+Report to the CURRENT MAIN (last known MAIN CHÍNH 141 = session_01V1ZZH16HCco55nyV4XdPdw; newer MAIN may exist — ask the foreman/parent). Never push main; no PRs; English in repo files.
+
+## The three rollover lines (copy verbatim into every takeover prompt)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+(M5 START_CTX ≈ 3 %; this session's lineage depth limit is reached, so the COORDINATOR opens the successor.)
+
+## State of the life (at handover)
+- Life: Nam Cung Ngưng Sương (origin dtq), rank 1, age 20, game month 27 (turn 27, year 3), PREGNANT, one life in slot 1. Played on LIVE origin/main 0756a05b (later main may exist; keep 0756a05b unless the foreman says otherwise — serving root /home/user/wt/m5 = checkout of origin/main).
+- Speed: ~5 buổi/min → ~1 game year per 40–60 min. Expect ≥ 25 game years to death.
+- Driver = this folder: bot.js + lib.js (Playwright; REAL touchscreen taps after elementFromPoint hit-check; state only READ; actions only through taps/drags/wheel). Skilled mini-game player inside bot.js (playMG: reads KG82.peek(), taps/drags at board coordinates; 10 % «Bỏ qua»). True reload once per in-game year, soft-lock auto-unstick by true reload after 90 s with nothing tappable, hourly progress.log, 15-min localStorage dump (out/ls-dump.json).
+- RESTORE THE SAVE in a new container: `cd /home/user/wt/m5-run && cp <this folder>/bot.js <this folder>/lib.js . && gunzip -c save-latest.json.gz > save.json && LSIMPORT=/home/user/wt/m5-run/save.json WAIT=250 V=1 node bot.js` (run as a HARNESS-TRACKED background Bash with run_in_background, timeout 7200000; it ends every 2 h → relaunch the same command WITHOUT LSIMPORT; the profile dir keeps the life). The import only restores the handed-over localStorage (setup); play continues through the title «Tiếp tục kiếp này» button. Needs: git worktree of origin/main at /home/user/wt/m5 (sparse), /home/user/wt/m5-run (scratch). First load shows the 'Lần đầu nhập cung' picture preload (minutes through the proxy) — normal.
+- If the new container has NO save-latest (older than 15 min) the last dump is within 15 min of the handover; accept the rollback (log it).
+- Containers get recycled (up 0 min happened twice): a detached `( … &)` process DIES; only run_in_background tasks survive; on every wake check `pgrep -f "node bot.js"`.
+
+## Findings so far (details: findings-running.md; shots are in the OLD container only, not in git)
+1. SOFT-LOCK ×3+ (repro stable): Hành sự → «Mưu kế» → card «Hối lộ Kính sự phòng» (and «Lối riêng» cards) with ONE thân tín (Ngân Linh) → VIỆC modal «Chọn người theo hầu» shows only the Tâm trạng panel/portrait, no picker, no buttons, no ✕. True reload clears it (state kept).
+2. UI: odds chip «Rất vững» at the centre of single-option event cards steals centre taps (opens 'Thang cơ duyên' legend; legend covers the card). Bot stuck 3×15 min.
+3. SAVE-DRIFT at true reload: loaded save ~3 buổi older than live (turn15/0/2 → 14/2/3; Bạc 11→1). Autosave is not per action.
+4. Hộp gấm «Chạm để mở» = tap-anywhere scene (no button). Event dialog with unaffordable (greyed) options and a hidden free option needs a scroll («Kéo xuống») — fine for a player, needed a wheel gesture in the bot.
+5. DEAD BUTTON candidates are mostly false positives (cards covered by legend/popovers); real ones are logged in out/issues.log with '(6 consecutive snaps)'.
+## TODO until the end
+- Keep playing the SAME life to death / real ending; every hour append a line to progress.log; at the end write dev/handover/robot/flight-M5.md (age/rank at end, ending name, buổi count, every DEAD BUTTON / wrong-effect / stuck / error with repro) + the ROBOT-PLAYER-REVIEW files (moments + review with 10-area scores, top 3 loved/hated) under dev/handover/robot/review/, push to the handover branch, send MAIN a 3-line summary.
+- Moments log (feel lines) not yet written by hand: write them from the screenshots (every 20 buổi: out/shots/*buoi*.png in the old container; new container will produce its own).
