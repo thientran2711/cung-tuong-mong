@@ -62,11 +62,11 @@ function leaveTold(){try{if(COOP.state.status==="open")COOP.send("say",{text:BYE
  /* the say goes out through COOP's ordered send queue: close the socket after it */
  return new Promise(r=>setTimeout(()=>{leaveRoom();r()},350))}
 function lifeMenu(){const c=room();const fr=friendTxt();
- return `<div class="kpmenu n4" data-coop-life="1"><button class="kbtn k1" data-tgo="game">Trở lại cuộc chơi<small>Phòng ${esc(c)}${fr?" · Hảo hữu: "+esc(fr):""}</small></button>`+
+ return `<div class="kpmenu n4" data-coop-life="1"><button class="kbtn k1" data-tgo="game">Trở lại cuộc chơi<small>Ám hiệu ${esc(c)}${fr?" · Hảo hữu: "+esc(fr):""}</small></button>`+
   `<button class="kbtn alt" data-tgo="leave">Rời phòng<small>Báo hảo hữu, giữ phòng để trở lại</small></button><button class="kbtn alt" data-tgo="past">Sổ luân hồi</button><button class="kbtn alt" data-tgo="opt">Thiết lập</button></div>`}
 let ASK=false;
 function askLeave(after,no){if(ASK)return;ASK=true;
- try{kitConfirm({title:"Rời phòng?",lines:["Hảo hữu được báo ngươi đã rời phòng; hậu cung dừng lại chờ ngươi.","Phòng vẫn giữ trong sổ: Cùng hảo hữu, Trở lại phòng là chơi tiếp đúng chỗ cũ."],yes:"Rời phòng",
+ try{kitConfirm({title:"Rời phòng?",lines:["Hảo hữu được báo ngươi đã rời phòng; hậu cung dừng lại chờ ngươi.","Phòng vẫn giữ trong danh sách: Cùng hảo hữu, Trở lại phòng là chơi tiếp đúng chỗ cũ."],yes:"Rời phòng",
   onYes:()=>{ASK=false;leaveTold().then(()=>{try{if(typeof after==="function")after();else showTitle()}catch(e){console.error(e)}})},onNo:()=>{ASK=false;try{if(typeof no==="function")no()}catch(e){}}})}catch(e){ASK=false;console.error(e)}}
 window.CTM_ROOM_LIFE={menu:lifeMenu,ask:()=>askLeave(),askThen:askLeave,leave:leaveTold};
 /* menu list (kit: .kslot section = h4.kpst + kitRows + .kslot-a .kbtn, the same parts as the solo sổ in j74) */
