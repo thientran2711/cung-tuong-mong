@@ -3282,3 +3282,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (03:16Z) VISITOR-FIX LAND READY SMALL visitor-fix-r9 98a29b65 (on 42af6315; «một vị Thường tại», «Một vị Phi tâu xin…») → SMALL rv by 1BBdQ7Qp with fresh shots. KIT REQUEST icon-row wrap gap (Sổ ghi iPad) → KK25.
 - (03:18Z) rv 1BBdQ7Qp rolled (ctx 40 %) → SMALL rv r9 = session_01V1ZZH1W8A4mF78b6Hg87vU (sonnet); 1BBdQ7Qp archive attempted.
 - (03:25Z) KK25 KIT READY kit-icon-row 7332bf70 → B kit rv.
+- (03:28Z) RV makeup-fit LAND READY dd200174 (makeup-fit-r6 on 5d4f722f; JSON == CDN, bad 0, quickcheck PASS, shots looked) → GO to LC13 after visitor, full gate set (tier BIG only for generated jhd.js). Archive MAKEUP-FIT + its rv after LIVE.
