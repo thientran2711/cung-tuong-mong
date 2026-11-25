@@ -63,3 +63,7 @@ const o0=optHTML;
 optHTML=function(){let h=o0.apply(this,arguments);const row=`<div class="kctl"><span class="kctl-l">${CTM_WAIT.notesName}<small>${BI()?`mã ${esc(BI().s)} · ${stamp(BI().t)}`:"những điều mới từng lần"}</small></span><span class="kctl-c"><button type="button" class="kbtn alt" data-tgo="notes">Xem</button></span></div>`;
  return h.replace(/<\/div>\s*$/,row+"</div>")};
 }catch(e){console.error(e)}})();
+
+/* KIT §101 ICON ROW (VISITOR-FIX KIT REQUEST, owner iPad Sổ ghi): a note row that starts with a small portrait (.md.xs: Sổ ghi `.logs > div`, Tuần lục `p`) — the portrait FLOATS left, the text wraps beside it and then tight under it (no big gap under the icon: the inline icon made the first line 34 px tall), and `text-wrap:pretty` stops the one-word last line. ONE rule for the whole family; no per-screen CSS. */
+(function(){try{const s=document.createElement("style");s.id="kit-iconrow";s.textContent=`:is(.logs > div,p):has(> .md.xs:first-child){display:flow-root;text-wrap:pretty}
+:is(.logs > div,p) > .md.xs:first-child{float:left;margin:1px 8px 2px 0}`;document.head.appendChild(s)}catch(e){console.error("kit-iconrow",e)}})();
