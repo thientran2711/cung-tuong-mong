@@ -1,5 +1,6 @@
 # BRIEF D-FACE-ROSY-UPRIGHT-02-MASS — 445 face portraits, owner prompts RESTORED-UPRIGHT-02 (DRAFT; launch only on owner's batch go)
 PRIORITY #1 CHECK: OD 0 hits ("RESTORED-UPRIGHT") | main none | review/* none | claims none (face-master03 rows done/archived) — redo of face-master03 with the owner's own edited prompts (zip Face_Prompts_Rosy_Skin_Upright, copied to dev/handover/face-master03/rosy-upright-02/ by D8 f515f608).
+NOTE (ROOT D 05:55Z): owner is still changing the package — n01 added (Alluring 95, total 450; n02 pending), and she tested her Alluring-16 portrait as STYLE MASTER instead of UPf76Ptwny (rosy-upright-02/COSTUME-ON-FACE_RECIPE.md). At launch: re-read Job_Manifest counts + the style ref she picks; the numbers/ref below are from 04:30Z.
 OWNER GO (verbatim): <fill when given>
 
 PACKAGE (read in full first): face-master03/rosy-upright-02/README.txt + Runner_Instructions.txt (owner's words — follow exactly); prompts Prompts/*.txt (30 = 6 families × ages 16/26/39/51/63, all < 10 000 chars → paste WHOLE, UNCHANGED, no cut, no rename); jobs Assignments/<Family>_Jobs.json (Alluring 90, Cold 75, Dignified 60, Gentle 70, Proud 75, Sharp 75 = 445).
