@@ -20,8 +20,10 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
   const f=[];
   /* A */
   await p.evaluate(()=>{KIT_FOC.motion=null;document.documentElement.classList.add('kf-still')});
-  const clr=()=>p.evaluate(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true});await p.waitForTimeout(1500);await clr();/* test boot leaves a «Tin trong cung» card queued: not part of this check */
-  const o=await p.evaluate(OPEN);if(o!=='ok')f.push('no stage figure ('+o+')');else{await p.waitForTimeout(700);
+  const clr=()=>p.evaluate(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;try{kmReset()}catch(e){}document.querySelectorAll('.kmov').forEach(e=>e.remove());try{kitCoachOff()}catch(e){}try{kitTipOff()}catch(e){}});/* this part opens kitFocus directly (no DF.F), so the day queue does not hold scenes for it: queued boot scenes (.kmov/.kmbox, j93), cards and ma ma tips are cleared before each probe (real play: jdayq dqActEl holds them; see frame-tap-scan.js for the real path) */await p.waitForTimeout(1500);await clr();/* test boot leaves a «Tin trong cung» card queued: not part of this check */
+  const o=await p.evaluate(OPEN);if(o!=='ok')f.push('no stage figure ('+o+')');else{
+   /* as in real play (jdfv dfTap sets DF.F + DF.play before the rules card): the day queue (jdayq dqActEl) now holds every card / scene for this activity */
+   await p.evaluate(()=>{try{DF.F=window.__F;DF.play={skip(){},destroy(){}}}catch(e){}});await clr();await p.waitForTimeout(700);
    await clr();
    const hit=await p.evaluate(async()=>{const F=window.__F;let went=0;F.play({skip:{n:'Bỏ qua',sub:'kết quả thường',onSkip(){}},onBack(){}});
     const c=F.intro({title:'Chạm dấu',rows:[['Việc','Hỏi han sức khỏe','t'],['Chạm','Dấu trôi lên: chạm dấu ✓ xanh (lời hợp ý), tránh dấu ✗ đỏ (lời hỏng).','t'],['Được','Chạm đúng nhiều dấu ✓ thì thành; chạm nhầm dấu ✗ thì mất điểm.','t']],go:'Sẵn sàng',sub:'bắt đầu chơi',onGo:()=>{went++}});
@@ -32,7 +34,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
    try{await p.screenshot({path:OUT+'/sansang-'+wh+'.png'})}catch(x){}
    await p.touchscreen.tap(hit.x,hit.y);for(let k=0;k<10&&!hit.realTapWent;k++){await p.waitForTimeout(300);hit.realTapWent=await p.evaluate(()=>window.__went())}
    console.log(wh,'A',JSON.stringify(hit));if(!hit.ok)f.push('A «Sẵn sàng» covered by .'+hit.top);if(!hit.realTapWent)f.push('A real tap did not start the game');hit.scan.forEach(s=>{if(s!=='ok')f.push('A scan '+s)});
-   await p.evaluate(()=>{try{window.__F.endPlay()}catch(e){}try{window.__F.close()}catch(e){}})}
+   await p.evaluate(()=>{try{DF.play=null;DF.F=null}catch(e){}try{window.__F.endPlay()}catch(e){}try{window.__F.close()}catch(e){}})}
   /* B: music on (the player turned sound on), first gesture done */
   await p.evaluate(()=>{OPT.snd=true;OPT.mute=false;OPT.mus=.5;auUnlock();auTick()});await p.waitForTimeout(3000);
   const st=()=>p.evaluate(()=>{const a=AU.cur;return a?{name:AU.curName,paused:a.paused,dead:!!a.dead,t:+a.currentTime.toFixed(2)}:{none:1}});
