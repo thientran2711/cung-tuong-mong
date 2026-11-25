@@ -1643,3 +1643,4 @@ robot-coop-fix-3-r5 | review/robot-coop-fix-3-r5 | session_01N1tNP4UEeF8FP1nPXeq
 robot-coop cause 4 FIXER #11 | review/robot-coop-fix-6 | session_01N1tNP4yz3pny7cTfWVcenS | RUNNING | 25/11 05:28Z | B
 robot-audit-B | reports/robot-audit-B.md | session_01N1tNP6LeHufTpecYEKWFN3 | RUNNING | 25/11 05:28Z | B
 kit reviewer B (kit-mg-realtap 45c9a58b, tntile r5) | review/kit-mg-realtap, review/kit-tntile | B | session_01N1tNP55mYsEDU11uxM1JTQ | RUNNING | 25/11 05:44Z |
+| FLIGHT FIXER #2 (opus, successor of session_01UV1Szh5s5kJv1XUm846FEX — archived at rollover): «one j61 key = one person» co-op family — rebirth sid/kseq (9d568f1b) + per-seat x-keys for shared world people → stable world-id keys + migration | review/flight-sid-rebirth | F | session_01UV1Szgxyb88t71d1W8FQxi | RUNNING | 25/11 06:00Z |
