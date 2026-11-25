@@ -57,3 +57,37 @@ Other gates (head of the branch): coop-e2e local Worker SWAP=0 **142/142**, SWAP
 - LAND: the client part rides the normal land; the Worker part needs `wrangler deploy` in coop/worker (either order is safe, §2).
 - If R7DR-like rows come back AFTER this lands, the remaining cause is a page that really stops running (the «page froze» family): the friend reading «đang vắng» is then TRUE; the stuck dump of that seat will fail to capture (page.evaluate hangs) exactly as in R7DR. The fix makes that seat rejoin by itself as soon as its page runs again.
 - Runner ask: capture the absent seat's `COOP.state` + its socket log (or note «page did not answer») in every presence stuck dump.
+
+## REVIEW (B BIG co-op rv session_01N1tNP2N8xkKLq6Len7PMr9, depth 5, START_CTX ~3 %)
+PRIORITY #1 CHECK ('coop-presence-reload'): OD 0 (OD:L153 live presence only) | ledger 0 | claims: fixer 6ZctXUw4 + this rv | main 0 | review/* 1 (this branch) | archive 0 → reused the fixer's test + report.
+
+**Land form.** 5399c31f sits on review/robot-coop-stack-u3 512cfee6 (= fix-6 c4163a93, FAILed in review, + fix-5-r1, neither on main). Merging it would land that stack too. So the land candidate is **review/coop-presence-reload-rv** = LIVE origin/main 17dfa64d + the presence commits only (b45bd29a, d0248264, af8f8797, 99af634b source part, report), cherry-picked (one conflict: coop/worker/package.json test list = main's list + presence.test.mjs; range.test belongs to the stack) + rebuilt + one rv fix. Worker index.js on main == on the stack, so the Worker diff is exactly the fixer's.
+**LIVE Worker** ctm-coop (Cloudflare, modified 11/24 15:22Z) = main's Worker (has coop-stable bury, no fix-2 clamp: no sucCap/clampW in the bundle) → `wrangler deploy` from this branch changes only the presence code.
+
+**Regression found + fixed (rv commit a23efd71).** On LIVE base, coop-e2e SWAP=0 (local Worker): fix head 141/144 ×2 (week 3 after rebirth: host «Sẵn sàng» never advanced, guest «Chờ hảo hữu…» bended 3.2), base 142/142 ×2. Cause: the answers to the 30 s / 5 s `who` carry buổi / bended; each answer with a newer buổi than the last presence fired a «presence» game event (nCheck / lockNext / night timer bv / soonEnd) at a random moment base never had. Fix: the Worker marks the who answer `who:1`; the client fires no event for a who answer whose seats / ended / week equal what it holds (still runs selfCheck; a real change — the stale «đang vắng» it heals — is applied and told). After: SWAP=0 142/142 ×2, SWAP=1 142/142. Worker unit gains «who answer is marked who:1» (MUTATE: fails without it). Fixer reviewed a23efd71: no objection.
+
+**Checks.**
+1. ONE presence rule (law 11): every presence reader (jcooplobby peerWord / FZT freeze, jcooptimer frSt «đang vắng» chip, jcoopworld frozen(), jsfx) reads COOP.state seats / peerOnline written only by jcoop set(); Worker online = socks() in seatsView/presenceSoon only. No second path.
+2. No storm / no new room: rejoin = connect(st.room) only (never create()); `gone` → one reconnect per buried socket (the new join is not buried); own-seat-away ≤ once / 15 s; CLOSED-socket check ≤ once / 10 s tick and only while status open. Test rejoin taps this room's «Trở lại phòng» only.
+3. Deploy window: old client + new Worker = base + buried-socket writes now get «gone» + 4003 → old client reconnects (better); MUTATE run (old client, new Worker): R1–R6 natural ok, R7/R8 FAIL as base. New client + old Worker (compat run): R1–R6 ok, R7 FAIL (needs Worker `who`) = base, R8 cascades from R7 → not worse than base. Either order safe; **recommend Worker first** (it alone already helps every cached old client; the client then lands onto a Worker that answers who).
+4. Save/snap: save-rt-coop 6 ok / 5 FAIL **identical** on LIVE base and on the fix (the 5 = savert fixes not landed). jcoop/Worker diff touches no save/snap code (a buried socket's snap now hears «gone» instead of silent drop).
+5. Asymmetric shape (Foreman B, U3b WQ55: guest reads host away, host reads guest in, both sockets open): the guest asks `who` every ~10 s while away → the room's view (host online) differs → applied → heals in ≤ ~10 s; if instead the Worker had buried the host's socket, the host's next write / 30 s `who` hears «gone» → rejoins → guest gets the presence. = rows R7 / R8 shapes.
+Note (pre-existing family, not blocking): wake() / focus / online and the new tick all reconnect on readyState 2 (CLOSING); if that happens inside the ~RTT window between a 4001 «replaced» close frame and its onclose, the replaced device takes the seat back once. Base already has it on focus/wake; follow-up idea: treat CLOSING as «wait one tick».
+
+**Gates (paste of results; logs in rv scratch).** Local Worker = `wrangler dev` of each tree (base = LIVE 17dfa64d coop/worker).
+| gate | LIVE base 17dfa64d | bare head 5399c31f | rv head pre-fix f962c7d2 | rv head a23efd71 (final) |
+|---|---|---|---|---|
+| Worker `npm test` | presence.test crashes (no psNext) = FAIL | ALL OK | ALL OK | ALL OK (+ who:1 row; MUTATE FAIL) |
+| coop-presence-reload Fold-host | R1–R6 26/26 ok; R7/R8 **FAIL** 4 of 9 | **PASS 35/35** | **PASS 35/35** | **PASS 35/35** |
+| coop-presence-reload iPad-host (SWAP=1) | — | (fixer 35/35) | **PASS 35/35** | **PASS 35/35** |
+| MUTATE old client + new Worker | — | — | FAIL 5/32 (R7, R8 + R2 card noise) | — |
+| compat new client + old Worker | — | — | FAIL 5/32 (R7 + cascade, R2 card noise) = base | — |
+| LONG: both-seat reload then 20 buổi, Fold+iPad | — | — | PASS 10/10, 0 false «đang vắng», shots b5/b20 both devices looked 3× (normal play, no freeze screen) | — |
+| coop-e2e SWAP=0 | 142/142 ×2 | — | **141/144 ×2** (regression) | **142/142 ×2** |
+| coop-e2e SWAP=1 | 142/142 | — | 139/142 + 142/142 | **142/142** |
+| save-rt-coop | 6 ok / 5 FAIL | — | 6 ok / 5 FAIL (identical) | (no save code changed) |
+| quickcheck ALONE | — | — | — | open ok · **old save loads + plays a buổi ok** · core gate G4 button-crawl FAIL «Ô lưu · Lui» = **identical on LIVE base** (pre-existing, jslots, not this diff) · perf step NOT finished (my 15-min timeout cut it; client diff is network-only) |
+R2 «card noise» = a «Hoàng thượng ban thưởng» card the presence test's clear() does not answer (both seats online throughout; seen on old-client runs only; not presence).
+Cloudflare test Worker: not needed (fixer's ctm-coop-prtest already deleted: absent from the account's script list).
+
+**VERDICT: PASS → LAND READY review/coop-presence-reload-rv a23efd71c0d7d9a4858533318e3ea6e5f5018e22** (BIG; co-op; on LIVE 17dfa64d → fast-forward + this report commit; NEEDS WORKER DEPLOY: `cd coop/worker && npx wrangler deploy` — **Worker first**, then the client; either order is safe). Laws touched: 11 (one presence rule) ok; 1/6b n/a; no UI / kit / wording change.
