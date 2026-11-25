@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"4fae357a+","t":"2026-11-25T23:32Z","c":"Cổng cung khi nhập cung nay là tranh vẽ thật (cổng chính, kiệu hoa, cổng bên cung nữ, hành lang Càn Thanh); các trò nhỏ không còn hình vẽ t…","b":"b5c7745aaef2","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
+window.CTM_BI={"s":"549098d6+","t":"2026-11-25T23:33Z","c":"Cột thông tin bên phải trên iPad nay gọn như trên điện thoại.","b":"904371166c33","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -45649,7 +45649,17 @@ if(typeof renderStage==="function"){const r1=renderStage;renderStage=function(){
 /* review/stage-side: the side column's width comes from the stage width only (never from its content), so it is the same narrow column
    on every screen and every render: 24 % of the stage, 132–172 px */
 function k3RW(st){/* one column width for every host: from the PAGE width (the map leather spans the spread on iPad = 2 pages) */let W=st.clientWidth;try{if((st.classList.contains("mapv")||st.classList.contains("kplfs"))&&kitView().pages===2)W=W/2}catch(e){}/* reviewer stage-pets-r1: the full-screen place painting spans the spread too (33.10) → same column as her room / the map (139 px at 1180, was 172) */if(!W)return;/* owner 17/11 06:45Z: the column is NARROWER, fits its content (the widest line is ~135 px) → ONE width KIT_RCOLW (140 px) on every screen; only a tiny stage shrinks it */const v=Math.round(Math.max(132,Math.min(140,W*.25)))+"px";if(st.style.getPropertyValue("--kgrw")!==v)st.style.setProperty("--kgrw",v)}
-function k3Gut(){const st=$$("stage");if(!st)return;const W=st.clientWidth;if(!W)return;k3RW(st);
+/* KIT 56.30 SIDE COLUMN SCALES WITH THE STAGE HEIGHT (owner 25/11 ~23:27Z iPad bug, review/ipad-size): the column rows (Ân sủng, Nguy hiểm chung,
+   Xét phẩm, the court counters) keep the SAME share of the stage height as on the Fold (stage 749 px tall, rows 44 px):
+   row = KIT_RCOL.row x stage height / KIT_RCOL.refH, between KIT_RCOL.min and KIT_RCOL.row. Fold / iPad portrait = 44 px (unchanged),
+   iPad landscape (stage ~575-600 px) = 34-35 px. Font stays the kit size (.75rem); only the row height shrinks. One rule for every stage. */
+const KIT_RCOL={row:44,refH:749,min:30};window.KIT_RCOL=KIT_RCOL;
+/* the same factor (--kss = row / 44) sizes the other stage overlays of the family (law 11): the left rail buttons (#krail .krailb), the
+   «ở đây N người» count chip and the «+N» page chips — they all kept Fold pixels on the shorter iPad stage (share 1.25x the Fold share) */
+function k3RowH(st){const H=st.clientHeight;if(!H)return;const r=Math.round(Math.max(KIT_RCOL.min,Math.min(KIT_RCOL.row,KIT_RCOL.row*H/KIT_RCOL.refH))),v=r+"px",k=(r/KIT_RCOL.row).toFixed(3);
+ if(st.style.getPropertyValue("--k3rowh")!==v)st.style.setProperty("--k3rowh",v);if(st.style.getPropertyValue("--kss")!==k)st.style.setProperty("--kss",k)}
+window.k3RowH=k3RowH;
+function k3Gut(){const st=$$("stage");if(!st)return;const W=st.clientWidth;if(!W)return;k3RW(st);k3RowH(st);
  const g=Math.round(Math.max(W<520?96:116,Math.min(190,W*.2)));st.classList.toggle("k3n",g<116);const L=$$("kshL"),R=$$("kshR");
  st.style.setProperty("--kgw",g+"px");st.style.setProperty("--k3stw",W+"px");
  /* KIT 33: an EMPTY plaque column (no plaques, zero height) reserves no gutter — the floor belongs to the people */
@@ -45769,7 +45779,12 @@ html body .kshR{position:absolute;top:8px;right:8px;width:var(--kgrw,150px);min-
 .ksh .kas .kasfold{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;align-items:baseline;width:100%;cursor:pointer;font-family:var(--display);font-size:.7rem;color:var(--gold);letter-spacing:.03em;border-bottom:1px solid var(--k-hair,#e6d3ac);margin-bottom:1px}
 /* kitGroupFold (stage right column): closed row like "Ân sủng ›"; open = header + the person cards stacked in place */
 .ksh .kgf.kgfopen{padding:3px 4px 4px}.ksh .kgf-t{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;align-items:baseline;width:100%;cursor:pointer;font-family:var(--display);font-size:.7rem;color:var(--gold);letter-spacing:.03em;border-bottom:1px solid var(--k-hair,#e6d3ac);margin-bottom:3px;padding:1px 2px}
-.kgfbtns{display:flex;gap:6px;flex:none}.kgfbtns .kgfbtn.krailb{flex:1 1 0;width:auto;min-width:0;padding:2px}
+.kgfbtns{display:flex;gap:6px;flex:none}.stage .kshR .kgfbtns .kgfbtn.krailb{height:var(--k3rowh,44px);min-height:0}
+/* KIT 56.30 stage overlay family (review/ipad-size): rail buttons = the row height; the count / page chips scale by --kss (1 on Fold) */
+html body .stage>.krail .krailb,html body .stage .krail:not(.khud) .krailb{width:var(--k3rowh,44px);height:var(--k3rowh,44px);min-width:0;min-height:0}
+html body .stage .krail{gap:calc(6px*var(--kss,1))}
+html body .stage .kchip.j59more{font-size:calc(1.05rem*var(--kss,1));padding:calc(3px*var(--kss,1)) calc(9px*var(--kss,1)) calc(3px*var(--kss,1)) calc(6px*var(--kss,1))}html body .stage .kchip.j59more .j59ico{height:calc(1.7rem*var(--kss,1))}
+html body .stage .kchip.j59hchip{font-size:calc(1rem*var(--kss,1))}html body .stage .kchip.j59hchip .j59ico{height:calc(1.5rem*var(--kss,1))}.kgfbtns .kgfbtn.krailb{flex:1 1 0;width:auto;min-width:0;padding:2px}
 .ksh .kgf-l{display:flex;flex-direction:column;gap:3px}.ksh .kgf-l .k3c{flex:none;box-shadow:none;border-color:var(--k-hair,#e6d3ac)}
 .kshR>.kgf,.kshR>.kgfbtns,.kshR>.kas,.kshR>.k3py{flex:none}
 
@@ -93058,7 +93073,10 @@ function lay(){try{const st=$("stage");if(!st)return;let nm=$("kpname"),en=$("kp
  if(name){if(!nm){nm=document.createElement("div");nm.id="kpname";nm.className="kpname";st.appendChild(nm)}
   /* owner 18/11 ~20:55Z: plain TEXT on the scene picture, no plaque / frame, not fixed-width; (owner 21/11 overwrites this: the big PALACE on line 1 (top), her smaller HALL on line 2 below) */
   const parts=name.split(/\s*·\s*/).filter(Boolean).slice(0,2),hh=parts.map(x=>`<span>${esc(x)}</span>`).join("");if(nm.__h!==hh){nm.innerHTML=hh;nm.__h=hh}nm.hidden=false;
-  const h=Math.ceil(nm.getBoundingClientRect().height)+6;st.style.setProperty("--kpnh",h+"px");st.classList.add("kpn")}
+  const h=Math.ceil(nm.getBoundingClientRect().height)+6;st.style.setProperty("--kpnh",h+"px");st.classList.add("kpn");
+  /* review/ipad-size (owner 25/11 iPad shot: the 2nd name line under the court counters): the name is measured again whenever its size changes
+     (web font arriving, a new place, a resize), so the right column always starts BELOW the place name */
+  if(!nm.__ro&&window.ResizeObserver){nm.__ro=new ResizeObserver(()=>{try{const s2=$("stage");if(!s2||nm.hidden)return;const h2=Math.ceil(nm.getBoundingClientRect().height)+6;if(h2>6&&s2.style.getPropertyValue("--kpnh")!==h2+"px")s2.style.setProperty("--kpnh",h2+"px")}catch(e){}});nm.__ro.observe(nm)}}
  else{if(nm)nm.hidden=true;st.style.setProperty("--kpnh","0px");st.classList.remove("kpn")}
  /* (3) entry line chip, top of the stage */
  if(line){if(!en){en=document.createElement("div");en.id="kpent";en.className="kmnote kmslot";en.setAttribute("role","status")}
@@ -98928,7 +98946,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b5c7745aaef2";window.CTM_BUILD=BUILD;
+const BUILD="904371166c33";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
