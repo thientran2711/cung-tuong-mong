@@ -25,7 +25,7 @@ Would I play another life? Yes, as a core gamer I want to see where the climb le
 1. «Tin báo» dialog without visible close, Fold, Tư trang tab, year 3 tháng sáu (stuck-1; fixed in harness by scrolling; GAME question open). Files: flight2-s1d-stuck1-files/ (a08f94fa).
 2. Fold right icon column covers the «Ân sủng» panel + clips «Tích Cẩn viên» title (m003).
 3. Figure name labels overlap (every screenshot).
-4. Rank word mismatch: «Đáp dụng/Đáp ứng» vs «Cung nữ tam đẳng» on the same screen; Trình Linh Lung «Hoàng quý phi» → «Quý nhân … được tấn phong».
+4. Rank word mismatch: «Đáp ứng» vs «Cung nữ tam đẳng» on the same screen; Trình Linh Lung «Hoàng quý phi» → «Quý nhân … được tấn phong».
 5. Save size grows ≈ +2.4k chars/buổi in the first 400 buổi (963k at buổi 400): will hit the ≈5.2M localStorage quota (save-quota family, known).
 6. Harness: resume from a ckpt written before the ending replays the end (my void run). Needs a rule «if ckpt older than status done, do not resume».
 
