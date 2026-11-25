@@ -307,14 +307,18 @@ function k61Announce(text){try{if(!S||!S.known||!text)return false;const t=Strin
 /* name-mask (LUẬT SỬA CẢ NHÓM): EVERY log line (= Nhật ký, result sentences, toasts) passes the one kit mask once: a person she has not met by name
    never prints as a raw name ("Hà Thục Lan sang cung ngươi thăm hỏi" -> "Một vị Tần chưa quen biết sang cung ngươi thăm hỏi"); announcements first */
 (function(){const l0=log;log=function(h){try{k61Announce(h);if(typeof h==="string"&&S&&S.known)h=k61Scrub(h,true,"",h,true)}catch(e){}return l0.call(this,h)}})();
-const K61PLACE=/^\s+(?:cung|điện|viện|hiên|các|phủ|uyển)(?![a-zà-ỹ])(?!\s+(?:kính|nghênh|tiễn|phụng|thuận|chúc|nhận|định|quyết|ngươi|vị|nàng|người|ta))/i;/* fix-7: the name is the first part of a place name */
+let K61PL=null;function k61Places(){if(K61PL)return K61PL;const L=new Set();const add=n=>{if(typeof n==="string"&&/ (?:cung|điện|viện|hiên|các|phủ|uyển)$/i.test(n))L.add(n.toLowerCase())};
+ try{Object.keys(((typeof BAL!=="undefined"&&BAL.banCung)||{}).danh||{}).forEach(add)}catch(e){}try{if(typeof PLNAME!=="undefined")Object.values(PLNAME).forEach(v=>add(v&&v[0]))}catch(e){}
+ try{if(typeof PALN!=="undefined")PALN.forEach(add)}catch(e){}try{if(typeof HOMEN!=="undefined")add(HOMEN)}catch(e){}try{if(typeof places==="function")places().forEach(x=>add(x&&x.n))}catch(e){}
+ return K61PL=[...L]}/* fix-7 r2 (BIG REVIEWER #5): the words are kept ONLY inside a REAL place name of the game (banCung + PLNAME + map), never before any place word («… các cung nữ», «… phủ đầu», «… điện hạ» stay masked) */
+function k61InPlace(str,off,len){const s=String(str).toLowerCase();for(const P of k61Places()){let i=s.indexOf(P);while(i>=0){if(i<=off&&off+len<=i+P.length)return true;i=s.indexOf(P,i+1)}}return false}
 const K61SENT=/^\s+(?!thiện cảm|oán|ghen|Ân|quý |→|·|[-+−\d])[a-zà-ỹ]{2,}/;/* a lowercase word follows the name = the name is a sentence subject */
 function k61Scrub(s,lead,prev,ann,plain,post){const rx=k61Table();if(!rx||!s)return s;rx.lastIndex=0;if(!rx.test(s))return s;rx.lastIndex=0;
  return s.replace(rx,(m,ti,nm,off,str)=>{const k=K61MAP[nm];if(!k)return m;const e=k61Ent(k);if(!e||k61Named(e))return m;
   if(ann&&k61Announce(ann))return m;
   /* button-crawl-fix-7 (robot s10 «Hà cô cô ở Tổng quản thái giám ??? cung»): words that are a PLACE (a palace / hall named like an unknown person,
      «Vĩnh Thọ cung» vs a servant «… Vĩnh Thọ») are never masked — same rule as the map labels (K61SKIP), now for prose too */
-  if(K61PLACE.test(str.slice(off+m.length)||post||""))return m;
+  if(k61InPlace(str+(post||""),off,m.length))return m;
   const before=(ti?"":(prev||""))+str.slice(0,off);let d=k61Mask(e,before,plain||K61SENT.test(str.slice(off+m.length)||post||""));/* owner 24/11 ~21:58Z: «???» never as the SUBJECT of a sentence — «Một vị Phi tâu xin …»; the «???» tag stays on a name tag / chip (nothing but a stat or a separator follows) */
   /* idempotent (review/coop-main-faults): a mask that holds the name itself (a friend named "Hảo hữu" → "Hảo hữu của ta") is already
      in place when the text around the name reads the mask; masking it again grew the line forever and hung the page (the two DOM observers, this one

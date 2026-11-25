@@ -12,8 +12,13 @@ function serve(file){const root=path.dirname(path.resolve(file)),idx=path.basena
   const e=k61All().find(x=>!k61Named(x)&&k61Kind(x)==='tq')||k61All().find(x=>!k61Named(x));const n0=e.name;const rows=[];
   for(const P of places){const stem=P.replace(/ \S+$/,'');e.name='Trần '+stem;K61VER++;K61RX=null;
    const a=k61Scrub(`Hà cô cô ở ${P} chờ ngươi.`,true,'',null,false);const c=k61Scrub(`Trần ${stem} sang thăm ngươi.`,true,'',null,true);const d=k61Scrub(`Ngươi gặp Trần ${stem} cung kính dâng trà.`,true,'',null,true);
-   rows.push({P,place:a.includes(P),masked:!c.includes(stem),masked2:!d.includes(stem),a,c,d})}
+   /* r2 (BIG REVIEWER #5): a place word that does NOT make a real place name with the stem must NOT unmask the person */
+   const PL=new Set(places.map(x=>x.toLowerCase()));const extra=[[`Trần ${stem} các cung nữ đều sợ.`,'các'],[`Ngươi thấy ${stem} các phi tần đứng hầu.`,'các'],[`Tin rằng Trần ${stem} phủ đầu ngươi.`,'phủ'],[`Trần ${stem} điện hạ cho gọi.`,'điện']].filter(([t,w])=>!PL.has((stem+' '+w).toLowerCase()))
+    /* a bare stem counts only when the mask hides it on its own (a one-word stem like «Đông» is not a name variant: nothing to leak) */
+    .filter(([t])=>/Trần /.test(t)||!k61Scrub(`Ngươi thấy ${stem} sang thăm.`,true,'',null,true).includes(stem));
+   const leak=extra.map(([t])=>k61Scrub(t,true,'',null,true)).filter(x=>x.includes(stem));
+   rows.push({P,place:a.includes(P),masked:!c.includes(stem),masked2:!d.includes(stem),masked3:!leak.length,n3:extra.length,a,c,d,leak})}
   e.name=n0;K61VER++;K61RX=null;return rows});
- let fails=0;console.log('| place | place kept | person still masked | «cung kính» still masked |');console.log('|---|---|---|---|');
- for(const r of R){const ok=r.place&&r.masked&&r.masked2;if(!ok)fails++;console.log(`| ${r.P} | ${r.place?'yes':'NO: '+r.a} | ${r.masked?'yes':'NO: '+r.c} | ${r.masked2?'yes':'NO: '+r.d} |`)}
+ let fails=0;console.log('| place | place kept | person still masked | «cung kính» still masked | «các/phủ đầu/điện hạ» still masked |');console.log('|---|---|---|---|---|');
+ for(const r of R){const ok=r.place&&r.masked&&r.masked2&&r.masked3;if(!ok)fails++;console.log(`| ${r.P} | ${r.place?'yes':'NO: '+r.a} | ${r.masked?'yes':'NO: '+r.c} | ${r.masked2?'yes':'NO: '+r.d} | ${r.masked3?'yes ('+r.n3+')':'NO: '+r.leak.join(' / ')} |`)}
  console.log(fails?`NAME-PLACE FAIL ${fails}/${R.length}`:`NAME-PLACE PASS ${R.length}/${R.length}`);await b.close();process.exit(fails?1:0)})();
