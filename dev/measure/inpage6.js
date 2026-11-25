@@ -16,6 +16,9 @@ function note(k,d){window.__acts[k]=(window.__acts[k]||0)+1;(window.__ring=windo
 function rvBtns(i){const ck=S.turn+'_'+S.tuan+'_'+(S.buoi||0)+'_'+used+'_'+S.suc+'_'+S.bac+'_'+rivals.length+'_'+i+'_'+(rivals[i]&&rivals[i].id);window.__rvc=window.__rvc||{};if(window.__rvc.k!==S.turn+'_'+S.tuan)window.__rvc={k:S.turn+'_'+S.tuan};if(window.__rvc[ck])return window.__rvc[ck];return window.__rvc[ck]=rvBtns0(i)}
 function rvBtns0(i){const v=rivals[i];const d=document.createElement('div');d.innerHTML=rvButtons(v,i);return [...d.querySelectorAll('button[data-r]')].filter(b=>!b.disabled).map(b=>b.dataset.a)}
 function modalStep(sens){
+  /* robot10 E-FIX-2 (E round 1 TIMEOUT «Bỏ cuộc?» opts [] over a MƯU game): leaving a live mini-game with the kit ✕ asks the kit confirm «Bỏ cuộc?»
+     (j82 kg82Ask → j79 kitConfirm on #modal); press its yes button = the game's own lose path (0/10), as she would — the dialog has no Q opts */
+  {const y=document.querySelector('#modal:not([hidden]) [data-kcf-yes]');if(y&&!y.disabled&&y.isConnected){y.click();try{note('kcfYes',(y.textContent||'').trim())}catch(e){}return true}}
   {const k=q('#kg82ok');const ovOn=q('#ov')&&!q('#ov').hidden;/* kit-close (KIT 32.10) hides the result's close-only button behind ✕: press it while the result shows */if(k&&(k.offsetParent!==null||(k.isConnected&&ovOn))){k.click();return true}const sk=q('#kg82skip');if(sk&&sk.offsetParent!==null){sk.click();return true}}
   if(!q('#ov').hidden){const ok=q('#mgok')||q('#kg92ok');if(ok){ok.click();return true}const sk=q('#mgskip');if(sk&&!sk.hidden){sk.click();return true}if(window.__ovX){const kx=q('#ov .kit-x');if(kx&&kx.offsetParent!==null){kx.click();return true}}/* robot10: a game with no Xong / Bỏ qua — leave it with the kit ✕ as she would */return true}
   if(Q.length){
@@ -38,7 +41,9 @@ function cardOK(a){return !a.done&&!S.dead&&canPay(a)&&!a.lock&&(typeof j76win==
 function placeOK(p){return p.k!=="home"&&S.place!==p.k&&!S.confined&&!S.out&&can(travel(S.place,p.k)+1)&&(typeof accessOf!=="function"||accessOf(S,p.k).ok)}
 function talkCands(){const out=[];if(!S.visit||S.visit.talked===true)return out;const tk=S.visit.tk||{};
   curPeople().forEach((p,pi)=>{if(tk[pi])return;talkOpts(p).forEach((a,oi)=>{if(!canPay(a)||a.lock)return;const c=a.act?2:1;if(!can(c))return;out.push({p,pi,a,oi})})});return out}
-function lessonCands(){return ARTS.filter(a=>S.arts[a.k]<5&&S.bac>=(typeof tchFee==="function"?tchFee(a.k):5+S.arts[a.k]*5)&&can(2)&&!S.mg)}
+/* robot10 E-FIX-2 r3 (E round 1 TIMEOUT «lc out:1» R1 + «tgk» R4, ring = lesson ×400): an art at 100 points below level 5 (crsPts) is refused by j2 lesson()
+   (artPts>=100) — the same gate the game uses; and the lesson option now carries an L so a refused pick is banned after 3 like every other one */
+function lessonCands(){return ARTS.filter(a=>S.arts[a.k]<5&&(typeof artPts!=="function"||artPts(S,a.k)<100)&&S.bac>=(typeof tchFee==="function"?tchFee(a.k):5+S.arts[a.k]*5)&&can(2)&&!S.mg)}
 function fire(f){f()}
 // ---- RANDOM
 function randomStep(){
@@ -102,7 +107,7 @@ function sensibleStep(){
   deck.forEach((a,i)=>{if(!cardOK(a))return;const c=cardCost(a);opts.push({L:"c"+a.n,s:scoreAct(a,N,c),f:()=>{note("card",a.n);act(i)}})});
   if(!HS)talkCands().forEach(t=>{const s=talkScore(t,N);opts.push({L:"t"+t.pi+t.a.n,s,f:()=>{note("talk",t.a.n);popIdx=t.pi;talk(t.oi)}})});
   const L=lessonCands().filter(a=>S.suc>=45&&S.bac>=(typeof tchFee==="function"?tchFee(a.k):5+S.arts[a.k]*5)+20).sort((a,b)=>S.arts[a.k]-S.arts[b.k]);
-  if(!HS&&L.length){const x=L[0];opts.push({s:2.0+(S.sung>=40?.5:0)-(S.suc<55?1.5:0),f:()=>{note("lesson");if(S.bac>=150&&!S.master)hireMaster();lesson(x.k)}})}
+  if(!HS&&L.length){const x=L[0];opts.push({L:"l"+x.k,s:2.0+(S.sung>=40?.5:0)-(S.suc<55?1.5:0),f:()=>{note("lesson");if(S.bac>=150&&!S.master)hireMaster();lesson(x.k)}})}
   /* diff-remeasure: free self-study in the Tài nghệ tab (act-dedupe w1 moved the Hành sự "Tự học X" card there); off with window.__noSelf */
   if(!HS&&!window.__noSelf&&typeof lessonMode==="function"&&!S.mg&&can(2)&&S.suc>=60){const A=ARTS.filter(a=>S.arts[a.k]<5).sort((a,b)=>S.arts[a.k]-S.arts[b.k]);if(A.length)opts.push({L:"self",s:1.3-(S.suc<70?.5:0),f:()=>{note("selfStudy");lessonMode(A[0].k,"self")}})}
   /* diff-remeasure: free Tứ đức self-study (Tài nghệ tab, j85 lessonVir "self"; exam rows read two virtues, BAL.ex.wVir); off with window.__noSelf */
@@ -122,8 +127,12 @@ function sensibleStep(){
   try{if(window.__xOpts)for(const o of window.__xOpts(N))opts.push(o)}catch(e){}/* danh-p1 intn.js: Tài nghệ options */
   const tk=S.turn+'_'+S.tuan+'_'+(S.buoi||0)+'_'+used+'_'+S.place;if(window.__btk!==tk){window.__btk=tk;window.__ban={}}
   try{if(window.__persOpts)window.__persOpts(opts,N)}catch(e){}/* robot10 personality: add / boost options */
+  /* E-FIX-6 (R8 lazy TIMEOUT «Dò la: Thôi» ×400): an option with no L label (spyQueen, lesson, every note("…") act) was never banned, so a bot that
+     picks an act and then declines its own card (lazy takes «Thôi» on the road card) or that the game refuses chose it again for ever in one buổi.
+     Every option gets a label from its note key (after __persOpts, which reads !o.L); the same 3-per-buổi ban as the labelled ones; window.__selfLoop counts it */
+  opts.forEach(o=>{if(!o.L){const m=/note\("([^"]+)"/.exec(String(o.f));o.L="n:"+(m?m[1]:String(o.f).slice(0,40))}});
   const op2=opts.filter(o=>!o.L||(window.__ban[o.L]||0)<3);op2.sort((a,b)=>b.s-a.s);
-  if(op2.length&&op2[0].s>(window.__minS==null?0.35:window.__minS)){if(op2[0].L)window.__ban[op2[0].L]=(window.__ban[op2[0].L]||0)+1;op2[0].f();return}
+  if(op2.length&&op2[0].s>(window.__minS==null?0.35:window.__minS)){if(op2[0].L){const n=window.__ban[op2[0].L]=(window.__ban[op2[0].L]||0)+1;if(n===3&&op2[0].L.startsWith("n:")){const k=op2[0].L.slice(2)+(Q[0]?" ("+strip(Q[0].t||Q[0].title||"").slice(0,40)+")":"");window.__selfLoop=window.__selfLoop||{};window.__selfLoop[k]=(window.__selfLoop[k]||0)+1}}op2[0].f();return}
   window.__buoi++;if(used<=1)window.__idle++;nextBuoi()}
 window.__bot={step:(mode,n)=>{
   for(let i=0;i<n;i++){if(window.__vtPump)window.__vtPump(5);/* run_rep.js virtual clock (vclock.js): game timers advance 5 ms per bot step */window.__iter++;window.__lifeIter++;
@@ -137,7 +146,7 @@ window.__bot={step:(mode,n)=>{
     try{if(modalStep(mode==="sens"))continue;
     if(S.dead)continue;
     if(mode==="rand")randomStep();else sensibleStep()}catch(e){window.__res.push({ex:JSON.parse(JSON.stringify(window.__exN||{})),origin:S.origin.k,rank:S.rank,maxRank:Math.max(window.__maxRank,S.rank),turns:S.turn,years:+(S.turn/12).toFixed(2),title:"CRASH",fate:"CRASH: "+String(e.message).slice(0,80)+" @"+(String(e.stack).split("\n")[1]||"").trim().slice(0,60),hhTurn:window.__hhTurn});window.__maxRank=0;window.__lifeIter=0;window.__hhTurn=null;window.__sucTrace=[];window.__acts={};Q=[];try{start()}catch(e2){}}}
-  return window.__res.length},extra:()=>({logc:window.__logc,bad:window.__bad.slice(0,30),badN:window.__bad.length,saveFail:window.__saveFail.slice(0,10),idle:window.__idle,buoi:window.__buoi})};
+  return window.__res.length},extra:()=>({logc:window.__logc,bad:window.__bad.slice(0,30),badN:window.__bad.length,saveFail:window.__saveFail.slice(0,10),selfLoop:window.__selfLoop||{},idle:window.__idle,buoi:window.__buoi})};
 })();
 /* sensible bot uses the j70 "Phòng bị" orders like a real player: a taster while pregnant, a guard on the palace, a record-keeper when there are hands (once a tuần; orders cost silver monthly as for anyone) */
 (function(){if(typeof ords70!=="function")return;let lastK="";const st0=window.__bot.step;window.__bot.step=function(mode,n){try{if(mode==="sens"&&!window.__noGuard&&S&&!S.dead&&!S.srv){const k=S.turn+"_"+S.tuan;if(k!==lastK){lastK=k;const L=ords70();

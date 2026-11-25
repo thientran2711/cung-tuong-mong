@@ -7,6 +7,9 @@
    (+ s.ro, same keys). Toward a man / servant the key is relKey (man "m<n>", servant "s<sid>", else the j61 person key kOf61). */
 const relRv=p=>p===S||!!(p&&p.rl&&p.sid==null&&p.id!=null);
 const relMan=p=>!!(p&&typeof p.id==="string"&&/^m\d+$/.test(p.id));
+/* robot10 E-FIX-5: a MAN to draw / name — the numbered men (relMan, whose relation keys stay as they are) AND the road men a thân phận road adds to
+   S.men (jrd_bd «mbd_*», jrd_pt «mpt_*»: the hòa-thân sứ thần). They were drawn as servants (srkName → SRK[«Sứ thần»] undefined: TypeError). */
+const relManP=p=>relMan(p)||!!(p&&typeof p.id==="string"&&/^m[a-z]+_/.test(p.id)&&typeof S==="object"&&S&&Array.isArray(S.men)&&S.men.includes(p));
 function relMS(p){return !!p&&typeof p==="object"&&!relRv(p)}
 function relCourt(p){try{const C=S&&S.court;if(!C)return false;for(const k in C)if(C[k]===p)return true}catch(e){}return false}
 function relKey(p){if(!p)return"";if(p===S)return"me";if(relRv(p))return p.id;if(p.sid!=null)return"s"+p.sid;if(relMan(p))return p.id;return typeof kOf61==="function"?kOf61(p):""}

@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"34ed061c+","t":"2026-11-25T23:13Z","c":"E85r: jbal2 blank line between the leave and net blocks (dev/build delta vs LIVE = reviewed 8d93c027 vs 178cac37, line for line); site rebu…","b":"cc3e1d80e26f","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
+window.CTM_BI={"s":"c39c3eba+","t":"2026-11-25T23:14Z","c":"save-growth (b): BAL.ration.npc.use 3 -> 4 (NPC son phấn spend = issue + bought/bestowed boxes; stock stays ~5 boxes instead of piling up);…","b":"5591628dbdf3","h":[{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -3891,6 +3891,9 @@ window.TONE_POOL=Object.assign(window.TONE_POOL||{},{askLead:ASK_LEAD,askOk:ASK_
    (+ s.ro, same keys). Toward a man / servant the key is relKey (man "m<n>", servant "s<sid>", else the j61 person key kOf61). */
 const relRv=p=>p===S||!!(p&&p.rl&&p.sid==null&&p.id!=null);
 const relMan=p=>!!(p&&typeof p.id==="string"&&/^m\d+$/.test(p.id));
+/* robot10 E-FIX-5: a MAN to draw / name — the numbered men (relMan, whose relation keys stay as they are) AND the road men a thân phận road adds to
+   S.men (jrd_bd «mbd_*», jrd_pt «mpt_*»: the hòa-thân sứ thần). They were drawn as servants (srkName → SRK[«Sứ thần»] undefined: TypeError). */
+const relManP=p=>relMan(p)||!!(p&&typeof p.id==="string"&&/^m[a-z]+_/.test(p.id)&&typeof S==="object"&&S&&Array.isArray(S.men)&&S.men.includes(p));
 function relMS(p){return !!p&&typeof p==="object"&&!relRv(p)}
 function relCourt(p){try{const C=S&&S.court;if(!C)return false;for(const k in C)if(C[k]===p)return true}catch(e){}return false}
 function relKey(p){if(!p)return"";if(p===S)return"me";if(relRv(p))return p.id;if(p.sid!=null)return"s"+p.sid;if(relMan(p))return p.id;return typeof kOf61==="function"?kOf61(p):""}
@@ -52577,7 +52580,7 @@ function rel3(face,rank,name,col,mid,right,extra){
 window.kitRel3=rel3;
 const fcol=f=>(f&&f.col)||"#7a5530";
 /* who is who in a relation label: the player "ta", the Empress by title, the Emperor / Thái hậu by title, others by their short name */
-const whoL=p=>p===S?"ta":p==="emp"?"Hoàng thượng":p==="th"?"Thái hậu":p&&p.queen?"Hoàng hậu":p&&relMS(p)&&relMSName(p)?relMSName(p):relMan(p)?p.name.split(" ").slice(-2).join(" "):shortN(p.name);
+const whoL=p=>p===S?"ta":p==="emp"?"Hoàng thượng":p==="th"?"Thái hậu":p&&p.queen?"Hoàng hậu":p&&relMS(p)&&relMSName(p)?relMSName(p):relManP(p)?p.name.split(" ").slice(-2).join(" "):shortN(p.name);
 const capL=s=>s==="ta"?"Ta":s;
 /* KIT §49.3 relPerson(k): ONE helper — the person object, the face drawn from THAT object, the name, the rank, the colour. Strangers
    (not met: knows(v) false — the same test that writes "Ta chưa gặp …") get the shared grey silhouette (kitStrangerOf, j61), the name stays. */
@@ -52586,7 +52589,7 @@ function relPerson(k){
  if(k==="emp"){const f=pEmp();return{k,p:"emp",f,name:"Hoàng thượng",rank:"",col:fcol(f),pid:"emp"}}
  if(k==="th"){const f=pTH();return{k,p:"th",f,name:"Thái hậu",rank:"",col:fcol(f),pid:"th"}}
  if(typeof k==="string"){const o=relMSOf(k);if(!o)return null;const f=relMSFace(o),pid=typeof kOf61==="function"?kOf61(o):k;
-  const nm=relMSName(o);return relMan(o)?{k,p:o,f,name:nm||o.name.split(" ").slice(-2).join(" "),rank:o.role,col:f.col||"#6a8aa0",met:relMSMet(o),pid}:{k,p:o,f,name:nm||shortN(o.name),rank:relSrvRank(o),col:fcol(f),met:relMSMet(o),pid}}
+  const nm=relMSName(o);return relManP(o)?{k,p:o,f,name:nm||o.name.split(" ").slice(-2).join(" "),rank:o.role,col:f.col||"#6a8aa0",met:relMSMet(o),pid}:{k,p:o,f,name:nm||shortN(o.name),rank:relSrvRank(o),col:fcol(f),met:relMSMet(o),pid}}
  const v=(rivals||[]).find(x=>String(x.id)===String(k));if(!v)return null;const met=typeof isKnown61==="function"?isKnown61(v):knows(v);const f=met?pv(v):kitStrangerOf(v);
  return{k:v.id,p:v,f,name:v.name,rank:rkName(v),col:met?fcol(f):"#8a8a8a",met,pid:typeof kOf61==="function"?kOf61(v):String(v.id)}}
 window.relPerson=relPerson;
@@ -52601,7 +52604,7 @@ function relMSName(o){try{if(S.known&&typeof k61Named==="function"&&!k61Named(o)
 function relMSMet(o){try{if(S.known&&typeof k61St==="function")return k61St(o)>=1}catch(e){}return true}
 window.relMSMet=relMSMet;
 function relCourtK(o){for(const c in (S.court||{}))if(S.court[c]===o)return c;return null}
-function relMSFace(o){if(relMan(o))return pMan(o);if(o===S.maid)return pMaid();const c=relCourtK(o);if(c)return c==="ty"?pDoc():{src:courtSrc(c,o),ini:"Hoạn",col:"#8a8aa0"};return pServ(o)}
+function relMSFace(o){if(relManP(o))return pMan(o);if(o===S.maid)return pMaid();const c=relCourtK(o);if(c)return c==="ty"?pDoc():{src:courtSrc(c,o),ini:"Hoạn",col:"#8a8aa0"};return pServ(o)}
 function relSrvRank(o){if(o===S.maid)return kitMaidTitle();if(relCourtK(o))return o.n||"";const w=ownerOf(o);const r=o.role==="maid"?"Cung nữ":"Thái giám";
  return w===S?r:S.thO&&w===S.thO?`${typeof srkName==="function"?srkName(o):r} · Thái hậu`:w?`${r} · cung ${w.name}`:r}
 function relMenL(){try{menInit()}catch(e){}return (S.men||[]).filter(m=>m.alive&&menMet(m))}
@@ -52611,7 +52614,7 @@ function relSrvL(){const L=[];const add=o=>{if(o&&!L.includes(o))L.push(o)};add(
    N/M, selected highlight), grouped Ta · Chí tôn · Phi tần, labels = the name only. The panel shows ONE pair under the heading
    "Quan hệ giữa X và Y": X | the rows both ways | Y, then "Đã biết về X". Y defaults to Ta (her own relation with X); when X = Ta, Y
    defaults to the first person of strip 2. Never a hidden counterpart. PG.rel ↔ relSel (an outside link that sets relSel still works). */
-const relGrp=k=>k==="me"?"Ta":k==="emp"||k==="th"?"Chí tôn":typeof k!=="string"?"Phi tần":/^m\d+$/.test(k)?"Nam nhân":"Cung nhân";
+const relGrp=k=>k==="me"?"Ta":k==="emp"||k==="th"?"Chí tôn":typeof k!=="string"?"Phi tần":/^m\d+$/.test(k)||relManP(relMSOf(k))/* E-FIX-5: a road man (jrd_bd/jrd_pt sứ thần) is a man */?"Nam nhân":"Cung nhân";
 const relSeps=L=>L.map((x,i)=>Object.assign({},x,{sep:i&&relGrp(L[i-1].k)===relGrp(x.k)?"":relGrp(x.k)}));
 function relItems(){const ms=(typeof isSrv==="function"&&isSrv())?[]:relMenL().concat(relSrvL()).map(o=>({k:relKey(o)})).filter(x=>x.k);
  return relSeps([{k:"me"},{k:"emp"}].concat(S.thDead?[]:[{k:"th"}],liveRivals(true).map(v=>({k:v.id})),ms))}
@@ -56007,7 +56010,7 @@ function kitRelRows(p,snap){const R=[];if(!p)return R;const sj=kitRelSubj(p),ob=
      Thiện cảm + Oán; HER OWN servants (S.maid, ownerOf(p)===S) also «Ta tin cậy» (kit-relrows-ms1word, OD:L352 «only ONE word Thiện cảm; drop Lòng»: no «Lòng» row — p.loyal is not shown beside Thiện cảm); not met yet → «chưa rõ».
      Guarded: on a build without relMS / relMSAll (before rel-men-servants lands) the old loyal branch below still runs. */
   const isMS=typeof relMS==="function"&&typeof relMSAll==="function"&&relMS(p)&&((typeof relMan==="function"&&relMan(p))||relMSAll().includes(p));
-  if(isMS){const man=typeof relMan==="function"&&relMan(p);
+  if(isMS){const man=typeof relManP==="function"?relManP(p):typeof relMan==="function"&&relMan(p);
    const met=typeof relMSMet!=="function"||relMSMet(p);
    if(!met){R.push({dir:"them",label:`${sj} → ta: thiện cảm`,w:"Thiện cảm",sj,ob,now:null,d:null,kind:"good",unk:"chưa rõ"});return R}
    const o=s.ms&&s.ms[kitRelMsKey(p)]||null;
@@ -99206,7 +99209,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="cc3e1d80e26f";window.CTM_BUILD=BUILD;
+const BUILD="5591628dbdf3";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
