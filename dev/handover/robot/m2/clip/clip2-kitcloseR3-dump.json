@@ -1,0 +1,184 @@
+{
+ "fold": {
+  "errs": [],
+  "notices": {
+   "open": true,
+   "k3right": [
+    2112,
+    714,
+    "clip"
+   ],
+   "dlg": [
+    102,
+    898
+   ],
+   "opts": [
+    {
+     "n": "Để ta xem TỐ",
+     "cover": "",
+     "y": 793,
+     "h": 104,
+     "hit": true,
+     "cx": 494,
+     "cy": 845
+    },
+    {
+     "n": "Để sau TỐN k",
+     "cover": "DIV.modal#modal",
+     "y": 903,
+     "h": 104,
+     "hit": false,
+     "cx": 494,
+     "cy": 955
+    }
+   ],
+   "scrollers": [
+    "opts kpopts k3btns kbackrow k3:222/112"
+   ],
+   "vh": 1000,
+   "tapDeSau": "NOT REACHABLE (hit=false)"
+  },
+  "phutuyen": {
+   "open": true,
+   "k3right": null,
+   "dlg": [
+    213,
+    787
+   ],
+   "opts": [
+    {
+     "n": "Theo Hoàng t",
+     "cover": "",
+     "y": 540,
+     "h": 132,
+     "hit": true,
+     "cx": 378,
+     "cy": 606
+    },
+    {
+     "n": "Theo Thái hậ",
+     "cover": "",
+     "y": 680,
+     "h": 132,
+     "hit": true,
+     "cx": 378,
+     "cy": 746
+    },
+    {
+     "n": "Theo Tể tướn",
+     "cover": "DIV.modal#modal",
+     "y": 820,
+     "h": 132,
+     "hit": false,
+     "cx": 378,
+     "cy": 886
+    },
+    {
+     "n": "Đứng ngoài, ",
+     "cover": "DIV.modal#modal",
+     "y": 960,
+     "h": 132,
+     "hit": false,
+     "cx": 378,
+     "cy": 999
+    }
+   ],
+   "scrollers": [
+    "opts kpopts k3rows:552/212"
+   ],
+   "vh": 1000,
+   "firstHitOpt": "Theo Hoàng t"
+  }
+ },
+ "ipad": {
+  "errs": [],
+  "notices": {
+   "open": true,
+   "k3right": [
+    1317,
+    492,
+    "clip"
+   ],
+   "dlg": [
+    123,
+    697
+   ],
+   "opts": [
+    {
+     "n": "Để ta xem TỐ",
+     "cover": "",
+     "y": 592,
+     "h": 132,
+     "hit": true,
+     "cx": 554,
+     "cy": 658
+    },
+    {
+     "n": "Để sau TỐN k",
+     "cover": "",
+     "y": 592,
+     "h": 132,
+     "hit": true,
+     "cx": 858,
+     "cy": 658
+    }
+   ],
+   "scrollers": [
+    "opts kpopts k3btns kbackrow k3:140/112"
+   ],
+   "vh": 820,
+   "tapDeSau": "tapped at 858,658 -> modal open after: true title=Bộ sưu tập"
+  },
+  "phutuyen": {
+   "open": true,
+   "k3right": null,
+   "dlg": [
+    123,
+    697
+   ],
+   "opts": [
+    {
+     "n": "Theo Hoàng t",
+     "cover": "",
+     "y": 450,
+     "h": 132,
+     "hit": true,
+     "cx": 590,
+     "cy": 516
+    },
+    {
+     "n": "Theo Thái hậ",
+     "cover": "",
+     "y": 590,
+     "h": 132,
+     "hit": true,
+     "cx": 590,
+     "cy": 656
+    },
+    {
+     "n": "Theo Tể tướn",
+     "cover": "DIV.modal#modal",
+     "y": 730,
+     "h": 132,
+     "hit": false,
+     "cx": 590,
+     "cy": 796
+    },
+    {
+     "n": "Đứng ngoài, ",
+     "cover": "DIV.modal#modal",
+     "y": 870,
+     "h": 132,
+     "hit": false,
+     "cx": 590,
+     "cy": 819
+    }
+   ],
+   "scrollers": [
+    "opts kpopts k3rows:552/212"
+   ],
+   "vh": 820,
+   "firstHitOpt": "Theo Hoàng t"
+  }
+ }
+}
