@@ -107,7 +107,7 @@ function k61Kind(e){if(!S||!e)return"";if((rivals||[]).includes(e))return"consor
  if((S.men||[]).includes(e))return"man";if(e.isMin)return"off";if(allKids().some(([k])=>k===e))return"kid";
  if(e.role==="maid"||(rivals||[]).some(v=>v.maid===e)||e===S.maid)return(e.age||BAL.ageMin)>=BAL.ageBand[1]||e.old?"mama":"maid";if(e.role==="eunuch"||e.role==="eun")return"eun";return"other"}
 function k61Desc(e){const k=k61Kind(e);
- if(k==="consort"){if(e.out)return"một vị phế phi";if(e.queen)return"Hoàng hậu";return`một vị phi tần áo bậc ${RANKS[e.rank].n}`}
+ if(k==="consort"){if(e.out)return"một vị phế phi";if(e.queen)return"Hoàng hậu";return`một vị ${RANKS[e.rank].n}`}/* owner 22:14Z: the rank title she sees — «một vị Thường tại», never «chưa quen biết» / «áo bậc» */
  if(k==="emp")return"một nam nhân áo vàng";if(k==="th")return"một quý phụ mặc phượng bào";if(k==="tq")return"một vị thái giám áo bậc Tổng quản";
  if(k==="eun")return"một vị thái giám";if(k==="phys")return"một vị thái y";if(k==="maid")return"một vị cung nữ";if(k==="mama")return"một vị ma ma";if(k==="off")return"một vị quan";
  if(k==="kid")return e.sex==="m"?"một hoàng tử":"một công chúa";
@@ -222,7 +222,7 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-k61]");if(
 function k61Hide(fn,st){const L0=liveRivals;liveRivals=function(q){return L0(q).filter(v=>k61St(v)>=st)};try{return fn()}finally{liveRivals=L0}}
 function k61Unknown(st){return (rivals||[]).filter(v=>v.alive&&!v.out&&k61St(v)<(st||2))}
 (function(){const r0=relHTML;relHTML=function(){if(!S||!S.known)return r0.apply(this,arguments);const h=k61Hide(()=>r0.apply(this,arguments),3);const n=k61Unknown(3).length;
- return h+(n?`<p class="past">Còn ${n} phi tần ngươi chưa gặp mặt: chưa xem được quan hệ. Gặp mặt trò chuyện, hỏi người hầu hoặc dò la để biết.</p>`:"")}})();
+ return h+(n?`<p class="past">Còn ${n} phi tần chưa gặp mặt: chưa xem được quan hệ. Gặp mặt trò chuyện, hỏi người hầu hoặc dò la để biết.</p>`:"")}})();
 (function(){if(typeof facHTML!=="function")return;const f0=facHTML;facHTML=function(){if(!S||!S.known)return f0.apply(this,arguments);return k61Hide(()=>f0.apply(this,arguments),2)}})();
 /* ---- ways she gets to know people ---- */
 /* someone speaking to her in an event (a dialog she must answer) */
@@ -318,10 +318,11 @@ function k61Announce(text){try{if(!S||!S.known||!text)return false;const t=Strin
 /* name-mask (LUẬT SỬA CẢ NHÓM): EVERY log line (= Nhật ký, result sentences, toasts) passes the one kit mask once: a person she has not met by name
    never prints as a raw name ("Hà Thục Lan sang cung ngươi thăm hỏi" -> "Một vị Tần chưa quen biết sang cung ngươi thăm hỏi"); announcements first */
 (function(){const l0=log;log=function(h){try{k61Announce(h);if(typeof h==="string"&&S&&S.known)h=k61Scrub(h,true,"",h,true)}catch(e){}return l0.call(this,h)}})();
-function k61Scrub(s,lead,prev,ann,plain){const rx=k61Table();if(!rx||!s)return s;rx.lastIndex=0;if(!rx.test(s))return s;rx.lastIndex=0;
+const K61SENT=/^\s+(?!thiện cảm|oán|ghen|Ân|quý |→|·|[-+−\d])[a-zà-ỹ]{2,}/;/* a lowercase word follows the name = the name is a sentence subject */
+function k61Scrub(s,lead,prev,ann,plain,post){const rx=k61Table();if(!rx||!s)return s;rx.lastIndex=0;if(!rx.test(s))return s;rx.lastIndex=0;
  return s.replace(rx,(m,ti,nm,off,str)=>{const k=K61MAP[nm];if(!k)return m;const e=k61Ent(k);if(!e||k61Named(e))return m;
   if(ann&&k61Announce(ann))return m;
-  const before=(ti?"":(prev||""))+str.slice(0,off);let d=k61Mask(e,before,plain);
+  const before=(ti?"":(prev||""))+str.slice(0,off);let d=k61Mask(e,before,plain||K61SENT.test(str.slice(off+m.length)||post||""));/* owner 24/11 ~21:58Z: «???» never as the SUBJECT of a sentence — «Một vị Phi tâu xin …»; the «???» tag stays on a name tag / chip (nothing but a stat or a separator follows) */
   /* idempotent (review/coop-main-faults): a mask that holds the name itself (a friend named "Hảo hữu" → "Hảo hữu của ta") is already
      in place when the text around the name reads the mask; masking it again grew the line forever and hung the page (the two DOM observers, this one
      and j84's, kept answering each other) */
@@ -331,8 +332,8 @@ function k61PrevText(n){let x=n;for(let i=0;i<6&&x;i++){let p=x.previousSibling;
 /* the title-screen pages (Chọn sổ, Sổ luân hồi, Thiết lập: .kpt-mount) and every .kslot card show OTHER lives (a saved sổ, a co-op room, the cloud copy): their names are real, never masked by the knowledge of the life now loaded (owner 17/11 "Kiếp Đáp ứng Hạ Thị vệ ???": a slot's own name matched a palace person the loaded life does not know yet) */
 const K61SKIP="[data-k61skip],.kpt-mount,.kslot,.mspot .mlab,.mtile>b";/* Dư đồ place names (map spots + tiles): a place called like an unknown servant ("Vĩnh Thọ") must never read "Thái giám ???" (map-portrait-r2) */
 function k61Node(n){if(n.nodeType===3){const t=n.nodeValue;if(!t||t.length<4)return;const p=n.parentNode;if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT)$/.test(p.nodeName))return;if(p.closest&&p.closest(K61SKIP))return;/* co-op chat Thư từ (KIT §76): real players' names are shown as they are */
-  const pv=k61PrevText(n);const lead=!pv.trim()||/[.!?:]\s*$/.test(pv);const blk=p.closest&&p.closest(".kft,.kitem,.logs > div,p,li,.rt,.spkt,.krv,.tag,figcaption");
-  const s=k61Scrub(t,lead,pv,blk?blk.textContent:t);if(s!==t)n.nodeValue=s;return}
+  const pv=k61PrevText(n);let lead=!pv.trim()||/[.!?:]\s*$/.test(pv);/* sentence start after a short chip / icon / button label in the same row (owner 24/11: «Một vị Phi tâu xin …», never «một vị …» at the start of a line) */if(!lead){let q=n.previousSibling;while(q&&q.nodeType===3&&!q.nodeValue.trim())q=q.previousSibling;if(!q&&p&&p.nodeName!=="P"&&p!==(p.closest&&p.closest(".krow,.kitem,li,.logs > div"))){q=p.previousSibling;while(q&&q.nodeType===3&&!q.nodeValue.trim())q=q.previousSibling}if(q&&q.nodeType===1&&(q.textContent||"").trim().length<=24&&!/[\p{L}]{3,}\s+[\p{L}]{3,}\s+[\p{L}]{3,}/u.test(q.textContent||"")){let o=q.previousSibling,solo=true;while(o){if(o.nodeType===3&&/[\p{L}]/u.test(o.nodeValue)){solo=false;break}o=o.previousSibling}if(solo)lead=true}}let nx=n.nextSibling;if(!nx&&p.nextSibling)nx=p.nextSibling;/* a bold name / chip ends its own element: the sentence continues in the next text node */const post=nx&&nx.nodeType===3?nx.nodeValue:"";const blk=p.closest&&p.closest(".kft,.kitem,.logs > div,p,li,.rt,.spkt,.krv,.tag,figcaption");
+  const s=k61Scrub(t,lead,pv,blk?blk.textContent:t,false,post);if(s!==t)n.nodeValue=s;return}
  if(n.nodeType!==1||/^(SCRIPT|STYLE|TEXTAREA|INPUT)$/.test(n.nodeName)||(n.closest&&n.closest(K61SKIP)))return;
  for(const a of ["title","aria-label"]){const v=n.getAttribute&&n.getAttribute(a);if(v){const s=k61Scrub(v,true);if(s!==v)n.setAttribute(a,s)}}
  const w=document.createTreeWalker(n,NodeFilter.SHOW_TEXT|NodeFilter.SHOW_ELEMENT);let c;const L=[];while((c=w.nextNode()))L.push(c);for(const x of L){if(x.nodeType===3)k61Node(x);else for(const a of ["title","aria-label"]){const v=x.getAttribute(a);if(v){const s=k61Scrub(v,true);if(s!==v)x.setAttribute(a,s)}}}}

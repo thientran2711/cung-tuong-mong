@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)","b":"514d8659d0eb","h":[{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"}]};
+window.CTM_BI={"s":"aace3769+","t":"2026-11-25T06:53Z","c":"SELSCENE-18: report — co-op 12/12, sid family fix, LIVE 0756a05b merged, quickcheck PASS, LAND READY","b":"7067125bd8db","h":[{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -3108,7 +3108,7 @@ const MAID_NO={
 const GREET_COME={
 "Ân cần":["tiến lại, mỉm cười niềm nở, cúi chào ngươi","tiến lại thật nhanh, nhún mình chào ngươi, ánh mắt ân cần","tiến lại, hỏi han ngươi một câu rồi mới cúi chào","vội vàng tiến lại, tay đưa ra như muốn đỡ ngươi","tiến lại, cúi chào ngươi, giọng nhỏ nhẹ như gió xuân","tiến lại, chào ngươi bằng nụ cười hiền","tiến lại, vừa cúi chào vừa hỏi ngươi đi đường có mệt","tiến lại gần, nét mặt đầy quan tâm, cúi chào ngươi","tiến lại, cúi chào ngươi thật đúng lễ, thật ấm áp","tiến lại, dịu dàng chào ngươi"],
 "Lạnh lùng":["tiến lại, khẽ gật đầu chào ngươi, không cười","tiến lại, cúi chào đúng lễ nghi, chẳng nói thêm","tiến lại, chỉ nói một tiếng chào ngắn gọn","tiến lại, mắt nhìn thẳng, chào ngươi rất nhạt","tiến lại, cúi chào ngươi như làm một việc phải làm","tiến lại, cúi đầu một cái rồi đứng im","tiến lại, giọng bình bình: “Chào.”","tiến lại, chào ngươi bằng vẻ mặt lạnh như băng","tiến lại, cúi chào, khoảng cách giữ rất xa","tiến lại, hơi nghiêng người, chào xong là lùi lại"],
-"Nóng nảy":["sải bước tiến lại, chào ngươi to đến nỗi ai cũng nghe","hăm hở tiến lại, chắp tay chào ngươi vội vã","tiến lại ngay, chưa kịp đứng vững đã cúi chào ngươi","bước nhanh tiến lại, giọng hơi cao: “Chào ngươi!”","tiến lại, cúi chào ngươi qua loa rồi hỏi ngay một câu","hùng hổ tiến lại, mà vẫn cúi chào ngươi đủ lễ","tiến lại, cúi chào ngươi, mắt sáng quắc","vội vã tiến lại, hơi thở còn dồn dập, cúi chào ngươi","tiến lại, vỗ tay một cái rồi cúi chào ngươi","tiến lại, cúi chào ngươi như sợ chậm một khắc"],
+"Nóng nảy":["sải bước tiến lại, chào ngươi to đến nỗi ai cũng nghe","hăm hở tiến lại, chắp tay chào ngươi vội vã","tiến lại ngay, chưa kịp đứng vững đã cúi chào ngươi","bước nhanh tiến lại, giọng hơi cao: “Thỉnh an!”","tiến lại, cúi chào ngươi qua loa rồi hỏi ngay một câu","hùng hổ tiến lại, mà vẫn cúi chào ngươi đủ lễ","tiến lại, cúi chào ngươi, mắt sáng quắc","vội vã tiến lại, hơi thở còn dồn dập, cúi chào ngươi","tiến lại, vỗ tay một cái rồi cúi chào ngươi","tiến lại, cúi chào ngươi như sợ chậm một khắc"],
 "Điềm tĩnh":["thong thả tiến lại, cúi chào ngươi","tiến lại từng bước chậm rãi, chào ngươi bằng giọng điềm đạm","tiến lại, mỉm cười nhẹ, cúi chào ngươi","bước đến nhẹ nhàng, cúi chào ngươi không chút vội vàng","tiến lại, thần sắc ung dung, chào ngươi đúng lễ","tiến lại, ánh mắt tĩnh lặng, cúi chào ngươi","tiến lại, nói khẽ: “Xin chào,” rồi chờ ngươi đáp","tiến lại, cúi chào ngươi, tà áo không hề động","tiến lại, chào ngươi bằng một cái cúi đầu nhẹ nhàng","tiến lại, dáng vẻ thản nhiên, cúi chào ngươi"],
 "Nhiều chuyện":["tíu tít tiến lại, chào ngươi rồi hỏi ngay đủ thứ chuyện","tiến lại, vừa cúi chào vừa liếc ngươi từ đầu đến chân","tiến lại, cười xởi lởi, chào ngươi rồi bắt chuyện ngay","tiến lại gần, hạ giọng chào ngươi như sắp kể chuyện gì","tiến lại, cúi chào, chưa dứt đã hỏi ngươi ở cung nào","tiến lại, chào ngươi, mắt tò mò nhìn khắp người","tiến lại, miệng đã chào mà mắt còn dò xét","tiến lại, cười tươi, bảo đã nghe đồn về ngươi từ lâu","tiến lại, cúi chào ngươi rồi ghé tai thì thầm","tiến lại, chào ngươi bằng một tràng lời thăm hỏi"],
 "Kín đáo":["lặng lẽ tiến lại, khẽ cúi chào ngươi","tiến lại, ánh mắt dè dặt, chào ngươi rất khẽ","tiến lại, nhìn quanh một lượt rồi mới chào ngươi","tiến lại, cúi chào, chẳng để lộ ý gì trên nét mặt","tiến lại, chào ngươi nhẹ như hơi thở","tiến lại, cúi đầu, giữ im lặng một lúc mới nói chào","tiến lại, mỉm cười nửa miệng, chào ngươi","tiến lại, khẽ gật, chào xong lùi ngay một bước","tiến lại, giọng thấp: “Xin chào.”","tiến lại, cúi chào ngươi, đôi mắt giấu kín"],
@@ -28674,7 +28674,7 @@ function k61Kind(e){if(!S||!e)return"";if((rivals||[]).includes(e))return"consor
  if((S.men||[]).includes(e))return"man";if(e.isMin)return"off";if(allKids().some(([k])=>k===e))return"kid";
  if(e.role==="maid"||(rivals||[]).some(v=>v.maid===e)||e===S.maid)return(e.age||BAL.ageMin)>=BAL.ageBand[1]||e.old?"mama":"maid";if(e.role==="eunuch"||e.role==="eun")return"eun";return"other"}
 function k61Desc(e){const k=k61Kind(e);
- if(k==="consort"){if(e.out)return"một vị phế phi";if(e.queen)return"Hoàng hậu";return`một vị phi tần áo bậc ${RANKS[e.rank].n}`}
+ if(k==="consort"){if(e.out)return"một vị phế phi";if(e.queen)return"Hoàng hậu";return`một vị ${RANKS[e.rank].n}`}/* owner 22:14Z: the rank title she sees — «một vị Thường tại», never «chưa quen biết» / «áo bậc» */
  if(k==="emp")return"một nam nhân áo vàng";if(k==="th")return"một quý phụ mặc phượng bào";if(k==="tq")return"một vị thái giám áo bậc Tổng quản";
  if(k==="eun")return"một vị thái giám";if(k==="phys")return"một vị thái y";if(k==="maid")return"một vị cung nữ";if(k==="mama")return"một vị ma ma";if(k==="off")return"một vị quan";
  if(k==="kid")return e.sex==="m"?"một hoàng tử":"một công chúa";
@@ -28789,7 +28789,7 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-k61]");if(
 function k61Hide(fn,st){const L0=liveRivals;liveRivals=function(q){return L0(q).filter(v=>k61St(v)>=st)};try{return fn()}finally{liveRivals=L0}}
 function k61Unknown(st){return (rivals||[]).filter(v=>v.alive&&!v.out&&k61St(v)<(st||2))}
 (function(){const r0=relHTML;relHTML=function(){if(!S||!S.known)return r0.apply(this,arguments);const h=k61Hide(()=>r0.apply(this,arguments),3);const n=k61Unknown(3).length;
- return h+(n?`<p class="past">Còn ${n} phi tần ngươi chưa gặp mặt: chưa xem được quan hệ. Gặp mặt trò chuyện, hỏi người hầu hoặc dò la để biết.</p>`:"")}})();
+ return h+(n?`<p class="past">Còn ${n} phi tần chưa gặp mặt: chưa xem được quan hệ. Gặp mặt trò chuyện, hỏi người hầu hoặc dò la để biết.</p>`:"")}})();
 (function(){if(typeof facHTML!=="function")return;const f0=facHTML;facHTML=function(){if(!S||!S.known)return f0.apply(this,arguments);return k61Hide(()=>f0.apply(this,arguments),2)}})();
 /* ---- ways she gets to know people ---- */
 /* someone speaking to her in an event (a dialog she must answer) */
@@ -28885,10 +28885,11 @@ function k61Announce(text){try{if(!S||!S.known||!text)return false;const t=Strin
 /* name-mask (LUẬT SỬA CẢ NHÓM): EVERY log line (= Nhật ký, result sentences, toasts) passes the one kit mask once: a person she has not met by name
    never prints as a raw name ("Hà Thục Lan sang cung ngươi thăm hỏi" -> "Một vị Tần chưa quen biết sang cung ngươi thăm hỏi"); announcements first */
 (function(){const l0=log;log=function(h){try{k61Announce(h);if(typeof h==="string"&&S&&S.known)h=k61Scrub(h,true,"",h,true)}catch(e){}return l0.call(this,h)}})();
-function k61Scrub(s,lead,prev,ann,plain){const rx=k61Table();if(!rx||!s)return s;rx.lastIndex=0;if(!rx.test(s))return s;rx.lastIndex=0;
+const K61SENT=/^\s+(?!thiện cảm|oán|ghen|Ân|quý |→|·|[-+−\d])[a-zà-ỹ]{2,}/;/* a lowercase word follows the name = the name is a sentence subject */
+function k61Scrub(s,lead,prev,ann,plain,post){const rx=k61Table();if(!rx||!s)return s;rx.lastIndex=0;if(!rx.test(s))return s;rx.lastIndex=0;
  return s.replace(rx,(m,ti,nm,off,str)=>{const k=K61MAP[nm];if(!k)return m;const e=k61Ent(k);if(!e||k61Named(e))return m;
   if(ann&&k61Announce(ann))return m;
-  const before=(ti?"":(prev||""))+str.slice(0,off);let d=k61Mask(e,before,plain);
+  const before=(ti?"":(prev||""))+str.slice(0,off);let d=k61Mask(e,before,plain||K61SENT.test(str.slice(off+m.length)||post||""));/* owner 24/11 ~21:58Z: «???» never as the SUBJECT of a sentence — «Một vị Phi tâu xin …»; the «???» tag stays on a name tag / chip (nothing but a stat or a separator follows) */
   /* idempotent (review/coop-main-faults): a mask that holds the name itself (a friend named "Hảo hữu" → "Hảo hữu của ta") is already
      in place when the text around the name reads the mask; masking it again grew the line forever and hung the page (the two DOM observers, this one
      and j84's, kept answering each other) */
@@ -28898,8 +28899,8 @@ function k61PrevText(n){let x=n;for(let i=0;i<6&&x;i++){let p=x.previousSibling;
 /* the title-screen pages (Chọn sổ, Sổ luân hồi, Thiết lập: .kpt-mount) and every .kslot card show OTHER lives (a saved sổ, a co-op room, the cloud copy): their names are real, never masked by the knowledge of the life now loaded (owner 17/11 "Kiếp Đáp ứng Hạ Thị vệ ???": a slot's own name matched a palace person the loaded life does not know yet) */
 const K61SKIP="[data-k61skip],.kpt-mount,.kslot,.mspot .mlab,.mtile>b";/* Dư đồ place names (map spots + tiles): a place called like an unknown servant ("Vĩnh Thọ") must never read "Thái giám ???" (map-portrait-r2) */
 function k61Node(n){if(n.nodeType===3){const t=n.nodeValue;if(!t||t.length<4)return;const p=n.parentNode;if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT)$/.test(p.nodeName))return;if(p.closest&&p.closest(K61SKIP))return;/* co-op chat Thư từ (KIT §76): real players' names are shown as they are */
-  const pv=k61PrevText(n);const lead=!pv.trim()||/[.!?:]\s*$/.test(pv);const blk=p.closest&&p.closest(".kft,.kitem,.logs > div,p,li,.rt,.spkt,.krv,.tag,figcaption");
-  const s=k61Scrub(t,lead,pv,blk?blk.textContent:t);if(s!==t)n.nodeValue=s;return}
+  const pv=k61PrevText(n);let lead=!pv.trim()||/[.!?:]\s*$/.test(pv);/* sentence start after a short chip / icon / button label in the same row (owner 24/11: «Một vị Phi tâu xin …», never «một vị …» at the start of a line) */if(!lead){let q=n.previousSibling;while(q&&q.nodeType===3&&!q.nodeValue.trim())q=q.previousSibling;if(!q&&p&&p.nodeName!=="P"&&p!==(p.closest&&p.closest(".krow,.kitem,li,.logs > div"))){q=p.previousSibling;while(q&&q.nodeType===3&&!q.nodeValue.trim())q=q.previousSibling}if(q&&q.nodeType===1&&(q.textContent||"").trim().length<=24&&!/[\p{L}]{3,}\s+[\p{L}]{3,}\s+[\p{L}]{3,}/u.test(q.textContent||"")){let o=q.previousSibling,solo=true;while(o){if(o.nodeType===3&&/[\p{L}]/u.test(o.nodeValue)){solo=false;break}o=o.previousSibling}if(solo)lead=true}}let nx=n.nextSibling;if(!nx&&p.nextSibling)nx=p.nextSibling;/* a bold name / chip ends its own element: the sentence continues in the next text node */const post=nx&&nx.nodeType===3?nx.nodeValue:"";const blk=p.closest&&p.closest(".kft,.kitem,.logs > div,p,li,.rt,.spkt,.krv,.tag,figcaption");
+  const s=k61Scrub(t,lead,pv,blk?blk.textContent:t,false,post);if(s!==t)n.nodeValue=s;return}
  if(n.nodeType!==1||/^(SCRIPT|STYLE|TEXTAREA|INPUT)$/.test(n.nodeName)||(n.closest&&n.closest(K61SKIP)))return;
  for(const a of ["title","aria-label"]){const v=n.getAttribute&&n.getAttribute(a);if(v){const s=k61Scrub(v,true);if(s!==v)n.setAttribute(a,s)}}
  const w=document.createTreeWalker(n,NodeFilter.SHOW_TEXT|NodeFilter.SHOW_ELEMENT);let c;const L=[];while((c=w.nextNode()))L.push(c);for(const x of L){if(x.nodeType===3)k61Node(x);else for(const a of ["title","aria-label"]){const v=x.getAttribute(a);if(v){const s=k61Scrub(v,true);if(s!==v)x.setAttribute(a,s)}}}}
@@ -36118,7 +36119,7 @@ try{const wk0=wkSummary;wkSummary=function(){const s=S.wkSnap;const r=wk0.apply(
   window.__nrWk=r}}catch(e){console.error(e)}return r}}catch(e){}
 /* week card markup: j79 dawn() draws wkSummary() (groups above) through kitFacts; no markup here */
 /* Nhật ký: no lone choice labels */
-const rp0=renderPanel;renderPanel=function(){const r=rp0.apply(this,arguments);try{const P=document.getElementById("panel");if(P&&P.dataset.tab==="log")P.querySelectorAll(".logs > div:not([data-nrh])").forEach(d=>{if(LONE.test(T(d.textContent))){d.remove();return}if(d.dataset.nrk)return;d.dataset.nrk=1;const h=d.innerHTML,t=kitNames(h);if(t!==h)d.innerHTML=t})}catch(e){}return r};
+const rp0=renderPanel;renderPanel=function(){const r=rp0.apply(this,arguments);try{const P=document.getElementById("panel");if(P&&P.dataset.tab==="log")P.querySelectorAll(".logs > div:not([data-nrh])").forEach(d=>{if(LONE.test(T(d.textContent))){d.remove();return}if(d.dataset.nrk)return;d.dataset.nrk=1;let h=d.innerHTML;/* r9 review fix: a Sổ ghi line stored with the raw name (world-gen, before she knew anyone) is scrubbed here too — an unmet person who is the SUBJECT of the sentence reads «Một vị <phẩm> tâu xin …», never the «Quý phi ???» chip (owner 24/11 ~21:58Z) */try{if(S&&S.known&&typeof k61Scrub==="function"){const h1=k61Scrub(h,true,"",d.textContent,false);if(h1)h=h1}}catch(e){}const t=kitNames(h);if(t!==h)d.innerHTML=t;/* sentence start: the line opens on «một vị <phẩm> …» after the leading chip / date */const w=document.createTreeWalker(d,NodeFilter.SHOW_TEXT);let n;while((n=w.nextNode())){if(!n.nodeValue.trim()||n.parentNode.closest(".krv,.ld"))continue;if(/^\s*một vị /.test(n.nodeValue))n.nodeValue=n.nodeValue.replace("một vị ","Một vị ");break}})}catch(e){}return r};
 })();
 /* ===== j65c: one place per job — Việc list drops acts that live in their own tab (owner 11/14) =====
    Luyện cầm kỳ thi họa -> Tài nghệ tab · Dạy hoàng tử/công chúa học chữ, Đưa con đến thỉnh an -> Con cái tab · Thưởng cung nữ -> Kẻ hầu tab */
@@ -52426,7 +52427,7 @@ function relPair(X,Y){const p=X.p,o=Y.p,rv=p!==S&&p!=="emp"&&p!=="th"&&!relMS(p)
   `<div class="kr3r krbox">${relRows(X,Y)}${note}${btn?`<div class="kr3act pcb">${btn}</div>`:""}</div>${known}</div>`}
 window.hcRelHTML=hcRelHTML;
 relHTML=function(){if(!S)return"";if(S.known&&typeof k61Hide==="function"){const h=k61Hide(()=>hcRelHTML(),3);const n=typeof k61Unknown==="function"?k61Unknown(3).length:0;
-  return h+(n?`<p class="past">Còn ${n} phi tần ngươi chưa gặp mặt: chưa xem được quan hệ. Gặp mặt trò chuyện, hỏi người hầu hoặc dò la để biết.</p>`:"")}return hcRelHTML()};
+  return h+(n?`<p class="past">Còn ${n} phi tần chưa gặp mặt: chưa xem được quan hệ. Gặp mặt trò chuyện, hỏi người hầu hoặc dò la để biết.</p>`:"")}return hcRelHTML()};
 
 /* ---------- 1. tabs ---------- */
 function mkTab(k,l,s,before){const T0=$("tabs");if(!T0||T0.querySelector(`[data-tab="${k}"]`))return;const b=document.createElement("button");b.dataset.tab=k;b.dataset.s=s;b.setAttribute("role","tab");b.textContent=l;b.dataset.l0=l;b.dataset.s0=s;
@@ -64679,7 +64680,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§62",title:"kitNi
    S.neMorn = {d: the night's day (wk), tier} is set by the night card for a mặn nồng (warm) or lạnh nhạt (cold) night. When the day has
    moved on (endTurn: the next tuần = the next day of play), ONE morning beat:
    warm → Kính sự phòng's chief eunuch records the night in the book, the maids gossip: Danh +BAL.nightEnd.after.warmDanh.
-   cold → the other consorts already know: one of them mocks her (a consort she knows is named, else "một vị phi tần ngươi chưa quen",
+   cold → the other consorts already know: one of them mocks her (a consort she knows is named, else "một vị phi tần",
    stranger rule), Danh BAL.nightEnd.after.coldDanh; she answers with the reaction buttons of the toilette reactions (jtoil):
    Nhẫn nhịn (Đức +1, Danh −1: seen as weak) · Cười trừ (nothing) · Đáp lại (Sức −2; BAL.toil.replyWin % Danh +BAL.toil.replyDanh, else she is resented more).
    Bots / no UI: the Danh change only (sims = game). Old saves: no field → nothing. */
@@ -84202,6 +84203,12 @@ const gmReplyCard=rcpReg("gmReply",(v,prov,G,h1,h2)=>{let opts;if(prov){try{opts
  const at0=agTick;agTick=function(){try{gmTick()}catch(e){}return at0.apply(this,arguments)};
  const w0=agWatch;agWatch=function(){const r=w0.apply(this,arguments);try{gmWatch()}catch(e){}return r};
 })();
+/* a visitor card never opens on the grey loading stand-in (owner 22:08Z, MAIN 132 / LC13 visitor-scene): her full figure is preloaded first (≤ 4 s), then the card shows — every «Có người đến» card with a consort on it, high or low rank */
+(function(){const s0=showModal;showModal=function(){const m=Q[0];
+ try{if(m&&m.t==="Có người đến"&&m.who&&m.who.w&&m.who.w[0]==="r"&&m.__fcW==null&&typeof kitFigOf==="function"){const v=RV(m.who.w[1]);if(v){visitSeen(v);const src=kitFigOf(v);
+   if(src&&!/unknown-fig/.test(src)){const im=new Image();m.__fcW=1;let done=false;const go=()=>{if(done)return;done=true;m.__fcW=2;try{if(typeof renderStage==="function")renderStage()}catch(e){}/* her stage token is now the real figure, not the stand-in */try{showModal()}catch(e){}};im.onload=go;im.onerror=go;im.src=src;
+    if(im.complete){done=true;m.__fcW=2;try{if(typeof renderStage==="function")renderStage()}catch(e){}}else{setTimeout(go,4000);return undefined}}}}}catch(e){}
+ if(m&&m.__fcW===1)return undefined;return s0.apply(this,arguments)}})();
 Object.assign(window,{visitSeen,visitArrive,visitArriveK,grSay,grSelf,grAddr,greetName,grRank,grUniq,gmTick,gmWatch,gmOpts,GM});
 /* ================= jagday: AG-ALL core — every NPC draws a DAY PLAN and every group plays its player's act list =================
    Owner OD 17/11 ~13:20Z (L1588: each GROUP of NPCs gets the WHOLE option set the player of that group has, same buttons, same formulas,
@@ -99190,7 +99197,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="514d8659d0eb";window.CTM_BUILD=BUILD;
+const BUILD="7067125bd8db";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
