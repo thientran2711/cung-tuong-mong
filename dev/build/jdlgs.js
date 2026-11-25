@@ -117,4 +117,7 @@ if(typeof goTo==="function"){const g0=goTo;goTo=function(k){let pre=null;try{con
  const r=g0.apply(this,arguments);try{const z=pre&&j70();if(z)for(const p of z.pl)if(p.pend==="seen"&&!pre.has(p.id))p.dlgSelf=1}catch(e){}return r}}
 /* j70 plots (51 routes + THIN P6 composed): her people saw a TELL of a plot aimed at her (pid "j70", stage "seen"); L = her cung nữ who saw it. Unit id "j70:<route id>". */
 DLGS.R.push({test:m=>m.pid==="j70"&&m.pp&&m.pp.s==="seen",fn:m=>{const p=P70(m.pp.id);if(!p||pt70(p)!==S||!S.maid||p.dlgSelf)return null;return dlgsMk(dlgsJ70Id(p),{},t=>t,null)}});
+/* one scene at a time (review r3): a game kit motion scene (reward chest, edict, stipend … kmPush) waits while a side-line scene plays (kmPump retries every 250 ms);
+   before, a «Phẩm phục» chest could open over the dialogue. The other way round, jdayq holds the card (so its scene) while a motion scene is on screen. */
+(function(){if(typeof kmFree!=="function")return;const f0=kmFree;kmFree=function(){if(DLGS.playing)return false;return f0.apply(this,arguments)};window.kmFree=kmFree})();
 try{window.DLGS=DLGS;window.dlgsResolve=dlgsResolve;window.dlgsPlay=dlgsPlay;window.dlgsGet=dlgsGet;window.dlgsMk=dlgsMk}catch(e){}

@@ -128,6 +128,9 @@ let fail=0,pass=0;const ok=(c,m)=>{if(c)pass++;else fail++;if(!c||process.env.V)
     await g.evaluate(()=>document.querySelector('.kscn').click());await g.waitForTimeout(i===o.n-1?900:350)}
    /* F4: the fade-out is ~0.7 s; a loaded box / slow phone can run past the fixed 900 ms — wait for the scene to end (the jdlgs watchdog caps it at BAL.dlgs.wd.close) before judging */
    await g.waitForFunction(()=>!DLGS.playing&&!document.querySelector('.kscn'),null,{timeout:8000}).catch(()=>{});
+   /* LIVE jdayq: a game kit motion scene that came up meanwhile (the test's own rank set-up → «Phẩm phục» reward chest #kmrew, an edict «Tiếp theo»; a loaded box) is an ACTIVITY that holds the card until she ends it (by design) — end it as if she finished it, then judge the card */
+   await g.evaluate(()=>{const k=[...document.querySelectorAll('.kmov,#kmrew')].filter(e=>!e.closest('.kscn'));if(!k.length)return;k.forEach(e=>e.remove());try{kmBusy=false;KMQ.length=0}catch(e){}}).catch(()=>{});
+   await g.waitForFunction(()=>!$('modal').hidden||!Q.length,null,{timeout:3000}).catch(()=>{});
    const e=await g.evaluate(()=>{const M=$("modal");return{q:Q.map(x=>x.pid||x.t).slice(0,4),scene:!!document.querySelector('.kscn'),modal:!M.hidden,t:Q[0]&&Q[0].t,dlg:!!(Q[0]&&Q[0].dlg&&Q[0].dlg.done),opts:M.querySelectorAll('.opt').length,playing:DLGS.playing}});
    /* a fail: how long the scene stays (ms until DLGS.playing clears, ≤15 s) and the layer's fade-out state — tells a slow fade from a stuck one */
    if(e.playing||e.scene){const t0=Date.now();e.anim=await g.evaluate(()=>{const L=document.querySelector('.kscn');return L?L.getAnimations().map(a=>a.playState+":"+Math.round(a.currentTime)):null});
