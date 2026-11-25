@@ -25,3 +25,16 @@ Laws touched: 4 (no new number), 7 (no wording change), 11 (family scan below), 
 (5) Quickcheck ALONE on 734ce2f9 vs live 502c48c9: QUICKCHECK PASS 219 s, open 2021 ms, old save ok, perf new/live: render 238/240, tab 505/510, buổi 1282/1420, tasks>200ms 25/25; core gates PASS.
 (6) Law 11: kitHideOut guard is on b.classList «kbare» (every bare card, one function); listener de-dup is per image for every picture dialog (the 8 kinds measured).
 Shots 755x1000 + 1180x820 of the fest dialog looked 3× (identical main/head). VERDICT: KIT OK r2.
+
+## REVIEW r3 (small kit reviewer SEAT 1, 25/11) — review/kit-fitfast-r3 8ae8561be606ea9e05e6eb6f4df983443a414f21 — KIT OK
+PRIORITY #1 CHECK: brief b-kit-0145-batch.md | r2 734ce2f9 KIT OK | head merge-base = newest origin/main 502c48c9 (bare head == merged head).
+Laws: 4 (no number), 7 (no wording), 9/10/11 (sizes unchanged, family measured below), 12 (Fold+iPad), 14 (one doc nit below).
+(1) Diff r2→r3: jksize.js debounce (kszLoadBurst3), KIT §98.20, dev/test/kit-bare-grid.js, built files.
+(2) kit-bare-grid.js: head 755x1000 + 1180x820 (and 412x1058, 390x844) ALL PASS; origin/main 502c48c9 FAIL both sizes («kitBareNarrow does not exist»). Note: it fails on main only on the missing function; the width invariant itself was never forced to fail (author says the real card floor is ~11.9 em) → a safety-net test, accepted.
+(3) Fest repick counts, own copy of kit-fitfast-prof.js (ONLY=fest, EQUIV probe off, +kszLiveRepick3 wrapped), 3 runs each, Fold / iPad: main kszLiveRepick3 22-24 / 22-24, kszLivePick3 19-20 / 18; r2 55-78 / 36-43 repick, 49-53 / 34-38 pick; r3 50-55 / 30-36 repick, 47-51 / 31-37 pick. kitFrameApplyLive3 r2 147-154 / 99-114 → r3 143-154 / 94-112. So r2→r3 is a small drop (~10-25 % repick, 0-10 % pick), NOT «93 → 20-31 / iPad 25 → 18 / Fold 36 → 26» as KIT §98.20 states (not reproducible on this box; CDN picture timing differs). Total pick time: main ~1.8 s, r2 ~0.5 s, r3 ~0.5 s (the real gain is r2's hinted pick). No regression. NIT for KK25: soften the §98.20 numbers to what is reproducible.
+(4) Frame sizes r2 vs r3: settled rect snapshot (dialog + k3body/k3right/k3ev/kszfig/opts/cards/#mb) of many/choice/two/night/fest, Fold + iPad, 2 runs each: every hash that appears in both is identical (fest Fold XL 5786d017 ×4, fest iPad XL d581583a r2.1/r3.1/r3.2; r2.2 iPad fest efd4b00a = the known r2 transient); other differences are random event content (card count), same tier letters.
+(5) Shots 755x1000 + 1180x820 fest of r3 looked 3×: frame/XL layout fine; iPad strip picture shows a broken-image icon = CDN not reachable from this sandbox, identical on r2.
+(6) Other tests on head: ksz-late-tap-real missed 0 of 6; kit-opt-title-wrap 1180 PASS (bad=0); kit-ton-row PASS 14.
+(7) Built files: build_site.sh on head → only window.CTM_BI line differs, sw.js identical (shell 57c41b8b39ee).
+(8) Quickcheck ALONE: first run FAIL perf buoiMs 3734/1488 (a leftover timed-out copy of quickcheck overlapped = noise); rerun --runs 5 alone: QUICKCHECK PASS 400 s, open 2024 ms, old save ok, render 267/297, tab 588/539, buổi 1737/1755, tasks>200ms 25/23, core gates PASS.
+(9) Law 11: the debounce sits in kszLiveLay3's body-picture listener = every live-frame dialog; 5 kinds + fest measured (4). VERDICT: KIT OK r3 (replaces r2 if it lands first).
