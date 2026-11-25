@@ -1812,3 +1812,7 @@ B INVESTIGATOR coop page freeze (guest JS hang at .kfoc, U3c Q4XY; + F s6d famil
 | #22 THIN P8 EXPRESS land check/re-merge (thin-p8-r1 c69d6ec9; opus; MAIN 146 22:30Z; briefs/b-thin-p8-land-express.md) | review/thin-p8-r2 | B ROOT 2 | session_01N1tNP6VU7S24E2m8sfegeD | RUNNING | 25/11 22:17Z |
 | B AFTER-FLIGHT co-op lands EXPRESS re-merge+rv on LIVE 5e013076 (presence-reload dad08c51 → fix-3-r5 3e761843 → week-wait 8e654ee0; opus BIG co-op; briefs/b-coop-lands-on-live-express.md) | review/*-land | B ROOT 2 | session_01N1tNP4KCumgKvW8Xj9RH8W | RUNNING | 25/11 22:33Z |
 | REVIEW c3-farshot 49d7de45 (SMALL sonnet; reports/C3-FARSHOT-r1.md) | review/c3-farshot | FOREMAN C ROOT 3 | session_01PEhRbvrqFY7tXWkmrnJhCD | RUNNING | 25/11 22:33Z |
+| #11 LAW-1 EXPRESS re-merge + land (law1-audit-r1 b01cc880 + law1-maid-away-r1 854c1fc1 on LIVE 5e013076; opus BIG; MAIN 146 22:30Z; briefs/b-law1-land-express.md) | review/law1-audit-r2 / law1-land | B ROOT 2 | (opening) | RUNNING | 25/11 22:17Z |
+| #19 coop-thin-g EXPRESS re-merge (r3 PASS on LIVE 5e013076; opus BIG co-op; MAIN 146 22:30Z; briefs/b-coop-thin-g-land-express.md) | review/coop-thin-g-r4 | B ROOT 2 | (opening) | RUNNING | 25/11 22:17Z |
+| #22 THIN P8 EXPRESS land check/re-merge (thin-p8-r1 c69d6ec9; opus; MAIN 146 22:30Z; briefs/b-thin-p8-land-express.md) | review/thin-p8-r2 | B ROOT 2 | (opening) | RUNNING | 25/11 22:17Z |
+| F BIG REVIEW s3e-display-fix 290b3bf6 (opus) | review/s3e-display-fix | FOREMAN F #16 | (opening) | RUNNING | 2026-11-25T22:35Z |
