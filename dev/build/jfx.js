@@ -307,13 +307,13 @@ function kfLocked(el,e){const now=Date.now();if(now-kfLastNo<350)return;kfLastNo
 (function(){let down=null;
  const onDown=e=>{if(e.button>0)return;const t=e.target;if(!t||!t.closest)return;
   /* locked: the event target can be the disabled button itself (Chrome, Safari pointer events) */
-  const lk=t.closest('button:disabled,.kdis,[aria-disabled="true"]');if(lk&&lk.closest(KF_TAP)){kfLocked(lk,e);return}
+  const lk=t.closest('button:disabled,.kdis,[aria-disabled="true"]');if(lk&&lk.closest(".khand"))return;/* KIT §101: a locked hand card lifts and shows its why on the plate (jkhand) */if(lk&&lk.closest(KF_TAP)){kfLocked(lk,e);return}
   const el=kfTapOf(t);if(!el||kfDis(el))return;if(el.matches(KF_FIG))return;down=el;el.classList.add("kfdown");if(!kfStill())kfRipple(el,e)};
  const onUp=()=>{const el=down;down=null;if(!el)return;el.classList.remove("kfdown");if(kfStill()||!el.isConnected||!el.animate||el.classList.contains("tok"))return;
   try{el.animate([{scale:".96"},{scale:"1.025",offset:.55},{scale:"1"}],{duration:240,easing:"ease-out"})}catch(x){}};
  document.addEventListener("pointerdown",onDown,{capture:true,passive:true});document.addEventListener("pointerup",onUp,{capture:true,passive:true});document.addEventListener("pointercancel",onUp,{capture:true,passive:true});
  /* browsers that swallow pointer events on disabled buttons still deliver the click/touch to the parent: hit-test the locked buttons there */
- document.addEventListener("click",e=>{const t=e.target;if(!t||!t.querySelectorAll||t.closest(KF_TAP))return;for(const b of t.querySelectorAll('button:disabled')){const r=b.getBoundingClientRect();if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom){kfLocked(b,e);break}}},true)})();
+ document.addEventListener("click",e=>{const t=e.target;if(!t||!t.querySelectorAll||t.closest(KF_TAP)||t.closest(".khand"))return;for(const b of t.querySelectorAll('button:disabled')){const r=b.getBoundingClientRect();if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom){kfLocked(b,e);break}}},true)})();
 /* sliding underline under the selected tab (main tabs, person-card tabs, sub-tabs) */
 /* tab-underline (C39): ONLY the main nav gets the sliding line. Chip rows (.pctabs/.kcattabs, scroll sideways) and .ksub rows mark the selected chip themselves (filled chip / inset underline), so a JS-positioned line drawn over a scrolling row went stale and struck through the chips */
 const KF_TABS=[["#tabs",'[data-tab][aria-selected="true"]']];const KF_TPOS={};

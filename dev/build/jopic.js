@@ -306,7 +306,7 @@ function kitOptCut(b){const R=b.getBoundingClientRect();const bd=b.querySelector
    (1) Nothing changed since the last pick (list width, the cards, their classes, text and heights under the picked tier) → keep the pick, touch nothing.
    (2) A real re-pick keeps the scroll position of the list and its scrolling ancestors. */
 function kitOptTierSig(g,bs){return Math.round(g.clientWidth)+"|"+(g.dataset.kol||"")+(g.dataset.kot||"")+"|"+bs.map(b=>b.className+":"+b.textContent.length+":"+Math.round(b.getBoundingClientRect().height)).join(",")}
-function kitOptTier(g){try{const bs=kitOptCards(g);if(!bs.length||g.__kotBusy)return;if(g.__kotSig&&g.dataset.kot&&g.__kotSig===kitOptTierSig(g,bs)){g.style.setProperty("--k3c",g.dataset.kol);/* kszBtnGridLive3 rewrote --k3c from its own width rule: the picked layout wins (OD 21/11 ~04:00Z #49b, iPad 2 columns) */return g.dataset.kol+g.dataset.kot}
+function kitOptTier(g){try{if(g.classList.contains("khand"))return;/* KIT §101: a hand of cards (jkhand) lays itself out */const bs=kitOptCards(g);if(!bs.length||g.__kotBusy)return;if(g.__kotSig&&g.dataset.kot&&g.__kotSig===kitOptTierSig(g,bs)){g.style.setProperty("--k3c",g.dataset.kol);/* kszBtnGridLive3 rewrote --k3c from its own width rule: the picked layout wins (OD 21/11 ~04:00Z #49b, iPad 2 columns) */return g.dataset.kol+g.dataset.kot}
  const SC=[];for(let e=g;e&&e.nodeType===1;e=e.parentElement)if(e.scrollTop>0)SC.push([e,e.scrollTop]);
  g.__kotBusy=1;const T=KIT_OPT.tiers;
  bs.forEach(b=>{const m=b.querySelector(".kobang");if(m&&m.parentElement!==b)b.appendChild(m)});/* the "!" is always the card's own corner child (a picture-less hide-out card had it inside the title) */
