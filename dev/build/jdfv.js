@@ -31,7 +31,9 @@ const DF_RULE={
  words:["Chạm dấu","Dấu trôi lên: chạm dấu ✓ xanh (lời hợp ý), tránh dấu ✗ đỏ (lời hỏng).","Chạm đúng nhiều dấu ✓ thì thành; chạm nhầm dấu ✗ thì mất điểm."],
  stare:["Giữ ngón tay","Giữ ngón tay để thanh áp lực nằm trong dải xanh; nàng đẩy lại nên buông và giữ cho khéo.","Ở trong dải xanh càng lâu càng thành."]};
 function dfUnplay(F){try{if(F.playing)F.endPlay()}catch(e){}}
-function dfLast(){try{const t=document.getElementById("rtoast");return t&&t.classList.contains("on")?t.innerText.trim().split("\n")[0]:""}catch(e){return""}}
+function dfLast(){try{const t=document.getElementById("rtoast");const tt=t&&t.classList.contains("on")?t.innerText.trim().split("\n")[0]:"";if(tt)return tt;
+ /* DELEGATE-NOMG: an act with no result toast (a run act: «Nghe ngóng chung» → «<tên> đi nghe ngóng, về khắc N.») says its own short line, the one the pop-up note shows (popMsg) */
+ if(typeof popMsg==="string"&&popMsg){/* only the act's OWN first line: popMsg can carry other news after <br> / <span class="past"> (BIG rv delegate-nomg) */const d=document.createElement("div");d.innerHTML=String(popMsg).split(/<br\s*\/?>|<span class="past"/i)[0];return d.textContent.replace(/\s+/g," ").trim()}return""}catch(e){return""}}
 /* the focus holds the PERSON (DF.p), never a frozen index: S.visit.people can shift while it is up (co-op refreshHere unshifts the Emperor,
    people leave); her index is looked up at every use, and if she is gone the focus closes (rv duodo-focus 43bc4ba2 #1) */
 function dfSame(a,b){return !!a&&!!b&&(a===b||(!!a.ref&&a.ref===b.ref)||(!a.ref&&!b.ref&&a.kind===b.kind&&a.name===b.name))}
@@ -47,7 +49,7 @@ function dfFind(i,id){for(const g of dfActs(i)||[])for(const a of g.acts)if(a.id
 function dfTap(id){const F=DF.F;if(!F||S.dead||Q.length||DF.play)return;const i=dfHere();if(i<0)return;const a=dfFind(i,id);if(!a||a.off)return;
  /* run = the act on HER index at the moment it lands (the game takes seconds; the list may shift meanwhile) */
  const run=res=>{const j=dfHere();if(j<0)return;dfRun(j,id,res);dfAfter(a,res)};
- if(a.cls==="D"){run();return}
+ if(a.cls==="D"||a.cls==="E"){run();return}/* E = delegated (jdf dfDlg, owner OD 25/11 ~04:12Z): the one she sends does it, no game: plain odds */
  const layer=dfPlay(F,()=>{if(DF.play)DF.play.skip()},()=>{const h=DF.play;DF.play=null;if(h)h.destroy()});if(!layer){run();return}
  const go=()=>{DF.play=dfGame(a.eng,{box:layer,fig:dfFigBox(F,layer),rank:typeof rkOf==="function"?rkOf(S):S.rank,at:/Ngáng chân/.test(a.n)?"feet":null,hud:o=>dfHud(F,o),
   onDone:res=>{DF.play=null;dfUnplay(F);run(res)}});

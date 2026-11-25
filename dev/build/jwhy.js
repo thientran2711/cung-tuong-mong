@@ -74,9 +74,13 @@ function spyPick(refund,ag){const m=ag||whyMaidInit(S.maid),L=spyList();const cu
  A[i]={n:"Sai đi dò la",dom:"Mưu kế",o:spyO(S,t,m),x:`nhắm: ${spyWho(t)} (chạm để đổi) · biết 2 điều thật về nàng · chứng cứ ${balSg(BAL.eff.j78.evN)}`,/* previews: j78maidSpy */l:{maid:-5},risk:`nàng đoán ra: ${typeof pvOan==="function"?pvOan(t,BAL.eff.j78.j78maidFail):`oán ta ${balSg(BAL.eff.j78.j78maidFail)}`}`,
   why:()=>spyFactors(S,t,m),act:1,open:()=>spyPick(2)};
  /* (2) "Nghe ngóng chung": no target, 1 khắc, one true piece of palace news; who it is about is weighted by real causes */
- A.splice(i+1,0,{n:"Nghe ngóng chung",o:100,x:`${m.name} đi nghe ngóng: biết 1 điều thật trong cung (về kẻ gây chuyện hoặc người ${m.name} quen)${eyes(S)>=3?" · Tai mắt nhiều: thêm 1 điều":""}`,
-  run:()=>{const r=spyNews(m);return r}});return A}})();
+ A.splice(i+1,0,{n:"Nghe ngóng chung",o:spyO(S,null,m),why:()=>spyFactors(S,null,m),x:`${m.name} đi nghe ngóng: biết 1 điều thật trong cung (về kẻ gây chuyện hoặc người ${m.name} quen)${eyes(S)>=3?" · Tai mắt nhiều: thêm 1 điều":""}`,
+  run:()=>spyListen(m)});return A}})();
 function spyNewsW(v,m){return 1+Math.max(0,danger(v,S))/15+(whyKnows(m,v)?3:0)+((v.sung||0)>=50?1:0)+(v.preg?1:0)+((S.met&&S.met[v.id]!=null)?0:.5)}
+/* DELEGATE-NOMG (owner OD 25/11 ~04:12Z): «Nghe ngóng chung» is done by the one she sends, never by her: NO mini-game; the doer's own ability decides it —
+   the same no-target dò la odds every sent agent has (spyRoll(S,null,m): her eyes / tâm cơ / tài + «phải sai đi» + the doer's thiện cảm, nết, bậc; BAL.spy*),
+   shown on the card as the ladder word (spyO). A miss = a round with nothing worth reporting (time spent, nothing else lost). */
+function spyListen(m){spyListen.ok=false;if(!m)return"";if(!aRoll(spyRoll(S,null,m)))return`${m.name} đi nghe ngóng một vòng, chưa nghe được chuyện gì đáng bẩm.`;spyListen.ok=true;return spyNews(m)}
 function spyNews(m){const L=spyList();if(!L.length)return`${m.name} đi một vòng, trong cung yên ắng.`;const W=L.map(v=>spyNewsW(v,m));let r=Math.random()*W.reduce((a,b)=>a+b,0),i=0;while(r>W[i]&&i<L.length-1){r-=W[i];i++}
  const v=L[i];const n=eyes(S)>=3?2:1;let f="";try{f=typeof intelLearn==="function"?intelLearn(v,n,{by:m.name,how:"Nghe ngóng"}):""}catch(e){}
  const why=whyKnows(m,v)?`${m.name} quen người ${whyPal(v)}`:danger(v,S)>=netTh(v,"act")?"nàng đang có chuyện với ngươi":(v.sung||0)>=50?"nàng đang được sủng, ai cũng bàn":"chuyện nghe được ngoài hành lang";

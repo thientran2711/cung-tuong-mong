@@ -280,7 +280,7 @@ function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.c
    The rank-name painter (jaudit kitRankNamePaint) titles a bare name inside a copied chip one frame later; with the copies in the signature that edit
    made the next kaNorm pass rebuild every copy (bare again), the painter titled them again, … — ~1900 DOM edits / 600 ms, the option list re-laid out
    every frame and its scroll snapped back to the top (pgin, rcpacc, empnight, …). */
-function kitOptSig(b,kb){try{const c=kb.cloneNode(true);c.querySelectorAll(".kdup,.kfill,.kobang").forEach(e=>e.remove());return c.innerHTML+"|"+b.className}catch(e){return kb.innerHTML+"|"+b.className}}
+function kitOptSig(b,kb){try{const c=kb.cloneNode(true);c.querySelectorAll(".kdup,.kfill,.kobang").forEach(e=>e.remove());return c.innerHTML+"|"+(typeof kfCls==="function"?kfCls(b):b.className)}catch(e){return kb.innerHTML+"|"+(typeof kfCls==="function"?kfCls(b):b.className)}}/* kfCls: the press class is not a change (button-crawl-fix-4) */
 window.kitOptFinal=kitOptFinal;
 (function(){const k0=kpOptArt;kpOptArt=function(b){const r=k0.apply(this,arguments);try{kitOptCompactRows(b);kitOptFinal(b);kitOptUnify(b)}catch(e){}return r};window.kpOptArt=kpOptArt})();
 /* KIT §6.2d — TWO OPTION LAYOUTS (1 long row per line / 2-column grid), phone AND iPad, and ONE SIZE PER BUTTON TIER (owner 18/11 ~16:05Z + 16:15Z).
@@ -305,7 +305,7 @@ function kitOptCut(b){const R=b.getBoundingClientRect();const bd=b.querySelector
    (2 columns S first) shrink the list for a moment and the browser clamps the scroll owner's scrollTop, so the player's scroll snapped back to the top.
    (1) Nothing changed since the last pick (list width, the cards, their classes, text and heights under the picked tier) → keep the pick, touch nothing.
    (2) A real re-pick keeps the scroll position of the list and its scrolling ancestors. */
-function kitOptTierSig(g,bs){return Math.round(g.clientWidth)+"|"+(g.dataset.kol||"")+(g.dataset.kot||"")+"|"+bs.map(b=>b.className+":"+b.textContent.length+":"+Math.round(b.getBoundingClientRect().height)).join(",")}
+function kitOptTierSig(g,bs){return Math.round(g.clientWidth)+"|"+(g.dataset.kol||"")+(g.dataset.kot||"")+"|"+bs.map(b=>(typeof kfCls==="function"?kfCls(b):b.className)+":"+b.textContent.length+":"+b.offsetHeight)/* layout height: the press scale (.kfdown) is not a size change (button-crawl-fix-4) */.join(",")}
 function kitOptTier(g){try{const bs=kitOptCards(g);if(!bs.length||g.__kotBusy)return;if(g.__kotSig&&g.dataset.kot&&g.__kotSig===kitOptTierSig(g,bs)){g.style.setProperty("--k3c",g.dataset.kol);/* kszBtnGridLive3 rewrote --k3c from its own width rule: the picked layout wins (OD 21/11 ~04:00Z #49b, iPad 2 columns) */return g.dataset.kol+g.dataset.kot}
  const SC=[];for(let e=g;e&&e.nodeType===1;e=e.parentElement)if(e.scrollTop>0)SC.push([e,e.scrollTop]);
  g.__kotBusy=1;const T=KIT_OPT.tiers;

@@ -77,6 +77,8 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Tiền của người chơi (cửa hàng) | "Ta có N bạc" | Ngươi có N bạc |
 | Kẻ hầu được sai đi làm việc | Người chạy việc: <tên> (chạm: "Khi ngươi sai người dò la, đưa thư, mua đồ…, người này đi; chọn theo Lòng và tài"); nút "Đổi ›" | Sai đi: <tên> |
 | Ngày đầu cuộc | Thân phận kiếp này · Nhận thân phận · Nhập cung | — |
+| Tên kết cục (thẻ cuối kiếp, owner 25/11 ~07:40Z «Một kiếp phù sinh») | một tên cổ trang riêng cho từng lối kết, đứng làm tiêu đề thẻ: «Thanh đăng cổ Phật», «Lồng son mở cửa», «Ba thước lụa trắng», «Hoa rụng lúc kết trái»…; dòng sự việc ("Xuất cung", "Khó sinh, băng huyết mà chết") vẫn ở dưới cho rõ. MỘT bảng: `KIT_END.names` + `endName()` (jend.js) — thẻ cuối kiếp, chữ mực khi chết, Sổ luân hồi, dòng Phúc duyên đều đọc ở đó; kiểm: `node dev/test/co-ngu-titles/scan.js` | "Kiếp này" làm tiêu đề, "Chết là hết.", "Sống trong cung", "Chết vì" |
+| Lời khép thẻ cuối kiếp | sống: «Phù sinh nhược mộng, một kiếp đã khép lại.» · chết: «Hương tàn khói lạnh, người đã đi xa.» + «Kiếp sau bắt đầu lại từ đầu…» (`KIT_END.names.close`) | "Kiếp này khép lại.", "Chết là hết." |
 | Chơi chung (sếp 15/11) | Cùng hảo hữu · Mời hảo hữu · hảo hữu (người chơi cùng) · Ám hiệu · Nhập ám hiệu | Chơi cùng bạn, Mời bạn, bạn, tri kỷ, Mã phòng |
 | Sổ tóm tắt tuần | Tuần lục | Sổ tuần |
 | Đồ đang đeo | Bên mình | Đang mang |
