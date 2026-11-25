@@ -144,6 +144,13 @@ async function rebirthCase(A,B,X,tag,how){
  const LASTB=await A.p.evaluate(()=>typeof B4L==='number'?B4L:2);
  const sameDay=async t=>{const r=await play(A,B,async()=>{const a=await D(A),c=await D(B);return await alive(A)&&await alive(B)&&a.w===c.w&&a.b===c.b&&a.b<LASTB&&a.my===a.roomN&&c.my===c.roomN},120000);ok(r,t+': both live in one day buổi');
   for(const o of [A,B])await o.p.evaluate(()=>{try{Object.assign(BAL.coopTm,{buoiMs:600000});COOPW.tm.reset()}catch(e){}});for(let i=0;i<6;i++){await CLR.tap(A).catch(()=>'');await CLR.tap(B).catch(()=>'');await sleep(200)}return r};
+ /* a FRESH buổi for the clock rows: neither seat has ended it yet (the bots' own taps in play() may have pressed «Hết buổi»): a seat
+    that already ended gets the other seat's press, the room steps, until both stand in one buổi with nothing ended */
+ const fresh=async t=>{for(let i=0;i<4;i++){const ea=await A.p.evaluate(()=>!!COOPW.bend),eb=await B.p.evaluate(()=>!!COOPW.bend);
+   if(!ea&&!eb){const a=await D(A),c=await D(B);if(a.b===c.b&&a.b<LASTB&&a.w===c.w)return ok(true,t+': a fresh buổi (nothing ended on either seat)');}
+   const b0=(await D(A)).b;if(ea&&!eb)await press(B);else if(eb&&!ea)await press(A);else if(!ea&&!eb){await press(A);await press(B)}
+   await CB.until(A,b=>(S.buoi||0)!==b&&!COOPW.bend,b0,20000);await CB.until(B,()=>!COOPW.bend&&!COOPW.pendBuoi,null,20000);
+   if((await D(A)).b>=LASTB&&!await sameDay(t+' (again)'))break}return ok(false,t+': a fresh buổi (nothing ended on either seat)')};
  /* open her look-up panel «Tâm trạng · Ngươi» 3× (the person-dialog copies) + a «Tin báo» notice on seat o */
  const openBoth=(o,id)=>o.p.evaluate(id=>{for(let i=0;i<3;i++)emoBox(emoKey(S));kitNotice({id,line:'Tin thử '+id,text:'Một tin để đọc, không có gì phải chọn.'});kitNoticeOpen(id);return Q.map(x=>x.t)},id);
  const backQ=o=>o.p.evaluate(()=>({look:Q.filter(x=>x&&x.t==='Tâm trạng · Ngươi').length,tin:Q.filter(x=>x&&x.t==='Tin báo').length,shown:!document.getElementById('modal').hidden,pb:!!COOPW.pendBuoi,b:S.buoi,Q:Q.map(x=>x.t).slice(0,5),tr:COOPW.tr.slice(-4)}));
@@ -156,19 +163,19 @@ async function rebirthCase(A,B,X,tag,how){
   ok(st,'7: the guest steps with the room by herself (no split)',r);ok(r.look===1&&r.tin===1&&r.shown,'7: her look-up panel and notice are shown again after the step',r)}
  /* 8 the CLOCK's forced end (CW.nightEnd, jnight / jcooptimer) on the HOST with a notice + look-up panel open: the same carry — his buổi
     ends (bend), the panels stay; the guest ends → both step, his panels shown again */
- if(ON(8)&&await sameDay('8')){const a0=await D(A);const q=await openBoth(A,'t8');
+ if(ON(8)&&await sameDay('8')&&await fresh('8')){const a0=await D(A);const q=await openBoth(A,'t8');
   const r1=await A.p.evaluate(()=>{const k=COOPW.nightEnd();return {k,bend:!!COOPW.bend,b:S.buoi,Q:Q.map(x=>x.t)}});
   ok(r1.k!==''&&r1.bend,'8: the clock ends his buổi with a notice + look-up panel open (not held)',[q,r1]);ok(r1.Q.includes('Tin báo')&&r1.Q.includes('Tâm trạng · Ngươi'),'8: his panels are still there after the clock end',r1);
   ok(await press(B),'8: guest presses Hết buổi');const st=await CB.until(A,b=>(S.buoi||0)===b+1&&!COOPW.pendBuoi,a0.b,20000);const r=await backQ(A),c=await D(B);
   ok(st&&r.b===c.b,'8: both seats step (no split)',[r,c.b]);ok(r.look===1&&r.tin===1&&r.shown,'8: his panels are shown again after the step',r)}
  /* 9 the clock on the GUEST: same rule on her seat */
- if(ON(9)&&await sameDay('9')){const b0=await D(B);const q=await openBoth(B,'t9');
+ if(ON(9)&&await sameDay('9')&&await fresh('9')){const b0=await D(B);const q=await openBoth(B,'t9');
   const r1=await B.p.evaluate(()=>{const k=COOPW.nightEnd();return {k,bend:!!COOPW.bend,b:S.buoi,Q:Q.map(x=>x.t)}});
   ok(r1.k!==''&&r1.bend,'9: the clock ends her buổi with a notice + look-up panel open (not held)',[q,r1]);
   ok(await press(A),'9: host presses Hết buổi');const st=await CB.until(B,b=>(S.buoi||0)===b+1&&!COOPW.pendBuoi,b0.b,20000);const r=await backQ(B),a=await D(A);
   ok(st&&r.b===a.b,'9: both seats step (no split)',[r,a.b]);ok(r.look===1&&r.tin===1&&r.shown,'9: her panels are shown again after the step',r)}
  /* 10 the ONE classifier (COOPW.qKind) on the REAL panel producers (law 11 table, run time) + a real choice still holds the clock end */
- if(ON(10)&&await sameDay('10')){const T=await A.p.evaluate(()=>{const out=[];const keep=Q.splice(0);const M=document.getElementById('modal');
+ if(ON(10)&&await sameDay('10')&&await fresh('10')){const T=await A.p.evaluate(()=>{const out=[];const keep=Q.splice(0);const M=document.getElementById('modal');
    const one=(name,want,f)=>{const n0=Q.length;let err='';try{f()}catch(e){err=e.message}const x=Q.find((y,i)=>i>=0&&!keep.includes(y));out.push({name,want,got:x?COOPW.qKind(x):'(none'+(err?': '+err.slice(0,40):'')+')'});Q.splice(0)};
    const f=rivals.find(v=>v.alive&&!v.out&&!v.coop)||rivals[0];
    one('Tin báo notice (kitNoticeOpen)','tell',()=>{kitNotice({id:'t10',line:'Tin thử',text:'Một tin.'});kitNoticeOpen('t10')});
@@ -189,7 +196,7 @@ async function rebirthCase(A,B,X,tag,how){
    try{petAdd(S,Object.keys(PET)[0],'thử')}catch(e){}try{shelfSeed(S)}catch(e){}
    one('care list with a pet (shelfCareOpen)','hold',()=>shelfCareOpen());
    one('pet care (petcOpen 0)','hold',()=>petcOpen(0));
-   one('shelf with pieces (shelfSeed + shelfOpen)','hold',()=>shelfOpen(S));
+   one('shelf with pieces (shelfSeed + shelfOpen)','hold',()=>{if(!shelfView(S).groups.some(g=>g.items.length))throw new Error('no piece seeded');shelfOpen(S)});
    S.pets=JSON.parse(pets0)||undefined;if(S.pets===undefined)delete S.pets;try{const z=shelfOf(S),o=JSON.parse(sh0);for(const k in z)delete z[k];Object.assign(z,o)}catch(e){}
    one('body button panel (kitModal html pbtn)','hold',()=>kitModal({kind:'info',title:'Thử',html:pbtn('data-x="1"','Làm')}));
    one('ending (cls end)','hold',()=>pushModal({t:'Kiếp này',cls:'end',h:'<p>x</p>'}));
