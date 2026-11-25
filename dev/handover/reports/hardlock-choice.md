@@ -167,3 +167,35 @@ PRIORITY #1 CHECK ('hardlock jdeadcard kitNoLock'): OD 0 | ledger 0 | claims 0 |
 | `bash dev/tools/quickcheck.sh` ALONE | `QUICKCHECK PASS · old save ok · render 228/243, tab 551/510, buổi 1336/2419 ms, tasks>200ms 25/28 · core gates PASS (hooks 8, incl. 85 dead-card)` |
 coop/worker not touched → its npm test not needed. SHOTS (scratch only, deleted; LOOKED 3×): serv-022 at old all-bạc price, 14 short — Fold + iPad: roads open «Bạc -26 · Sức -16 / -7 / -24», tag wraps, no overflow, no cut text; «Lui» card (purse 0) — Fold + iPad: roads greyed with price, kit ✕ top right, no extra button. (Test-only: header Bạc/Sức not re-rendered after the test sets S.bac — fixture artifact, not game.)
 Law check: 2 OK · 3 OK · 4 OK · 6c OK · 7 OK (nit) · 9 OK · 11 OK · 14 OK.
+
+## r4 — B FIXER «hardlock-choice-r4» (opus) session_01N1tNP5EhLGrd9fRXSh5UKk (depth 3; START_CTX ≈3 %) — SẴN SÀNG KIỂM review/hardlock-choice-r4 9f2522d29562f148b1f73d0c3791a08e72a32ec3 (BIG delta)
+PRIORITY #1 CHECK ('hardlock jdeadcard choose-guard'): reuse review/hardlock-choice-r3 87e622fb (BIG PASS, «## REVIEW r3») + F flight-choose-guard ff0f723f (LC15 step 11, review/lc14-chooseguard-on-cnv 3eed1dc7) — nothing new built.
+Order (MAIN 140, FOREMAN_B_STATUS 25/11 ~12:45Z): r3 deletes jdeadcard.js but choose-guard changed it → port into jnolock, union dead-card.js, rebase on the LC15 stack top.
+### What changed (delta over r3)
+- Base: review/lc15-temperfix-on-bcstack2 23e5b84f (LC15 stack top; contains d3b99724, 3eed1dc7 choose-guard, LIVE 9f72524b) + merge of r3 87e622fb. Conflicts: jdeadcard.js (modify/delete → stays DELETED), dead-card.js (union), quickcheck README (both lines kept, 85 = r3 text), index.html/sw.js (rebuilt).
+- dev/build/jnolock.js — the ONE rule took choose-guard's two jdeadcard changes:
+  1. deadCardOff `c.lock||c.tsDis` + `c.need.some(!ok)` → kitLockWhy returns «time» (jts tsDis) / «need» (jtsb unmet Cần row); so kitTakeable / kitNoLock see them (model pass).
+  2. deadCardIs «DOM truth» (every visible `#modal .opts button[data-m]` disabled = dead) → kitDomDead(); the showModal wrapper checks it AFTER the draw; if dead and no cancel / gift-back / leave yet → m.__nlDom=1, kitNoLock(m) again (kitTakeable = false for all but the leave) → the same «Lui» leave (kit ✕, card's cancel road) → redraw. __nlDom is cleared at the next draw and kept for the pick (chooseM wrapper), so the «Lui» pick closes. kitNoLock stays the only decision point; no #mr button.
+- dev/test/dead-card.js UNION: part 3 = r3 (3a Sức swap / 3b «Lui» open + forced); parts 4 + 5 = choose-guard (out-of-card pick refused; temper lock keeps a payable road); NEW part 6 (tsDis + unmet need → «Lui» from the model pass, not __nlDom) and part 7 (model blinded, DOM greyed → «Lui» via __nlDom, ✕ closes). Old part 3 of choose-guard (#mclose of jdeadcard) dropped = old path.
+### Gates (commands + outputs, on 9f2522d2)
+| gate | result |
+|---|---|
+| `node dev/test/hardlock-choice.js` (Fold 755x1000 + iPad 1180x820) | `HARDLOCK-CHOICE ALL PASS` (0 page errors) |
+| `node dev/test/dead-card.js http://127.0.0.1:8123/index.html` | `DEAD-CARD PASS` — scan n 0 / 336 built; part2 1/4 + 1/4; part3 a open 2 paid 2, open+forced «Lui» ✕ closes bạc 2; part4 err "" Q 1 bad 3; part5 open 1/2; part6 why time,need «Lui» dom false; part7 «Lui» dom true open 0/2 closes |
+| MUTATE A: old path back (jnolock leave removed + LC15 jdeadcard.js re-assembled) | `DEAD-CARD FAIL 4` (part3 open/forced lui null, part6, part7) ✔ |
+| MUTATE B: tsDis / unmet need dropped from kitLockWhy | `DEAD-CARD FAIL 1` (part6 why ",", «Lui» only via dom) ✔ |
+| MUTATE C: DOM truth dropped | `DEAD-CARD FAIL 1` (part7 no «Lui», card stays) ✔ |
+| `node dev/tools/hardlock-scan.js --turns 40 --md` | `HARDLOCK-SCAN PASS · 905 choice cards … HARD LOCKS 0 · not drawn 14 (dead 0) · page errors 0` |
+| choose-guard's own tests = dead-card parts 4 + 5 (its only test change, ed82787b..3eed1dc7) | PASS (above) |
+| `node dev/test/one-core-guard.js` | `PASS: one core (no second value, no typed core text, no new inline rule number)` |
+| `python3 dev/build/assemble.py && node dev/test/undef-scan.js` | `PASS: no unguarded undefined identifier (309 names checked)` |
+| `node dev/test/coop-e2e.js <out> http://127.0.0.1:8787` (local wrangler dev) Fold host / `COOP_SWAP=1` iPad host | `142/142 passed` / `142/142 passed` |
+| `bash dev/tools/quickcheck.sh HEAD` ALONE (LIVE origin/main 9f72524b) | `QUICKCHECK FAIL · CORE GATES FAIL · G4 90-button-crawl` — open 1752 ms · **old save ok** · perf new/live render 235/231, tab 596/601, buổi 1390/1072 ms, tasks>200ms 25/26. The ONE fault: `FAIL fold · Ô lưu [div#modal.modal.kptitle] · Lui · close button did not close its layer (something else changed)` |
+| same crawler on the BASE `23e5b84f` (LC15 stack top, no r4) vs r4, `node dev/test/button-crawl.js --fast` | base: the SAME single FAIL (Ô lưu · Lui) / r4: the same single FAIL → **pre-existing on the LC15 stack, not from r4** (title «Ô lưu» save-slot dialog, not a choice card). FOR LC15 / F button-crawl owner. |
+| `node dev/test/temper-outburst.js <url> <out> 755x1000@2,1180x820@2` (stack top's own test, jemoact eaLockWhy) | `PASS` (hot/stale/timid/jfeel/npc/cap/old ok, errs 0, dead 0) |
+| Shots Fold 755x1000@2 + iPad 1180x820@2 (script in this report's fixer scratch; real card «Việc · Kẻ hầu» 2×bạc −60, purse 2) | altCost card: «Đường A/B (thiếu bạc, lấy công sức bù) TỐN Bạc −2 · Sức −20», both open, no ✕ (Fold + iPad) · «Lui» card (Sức 1, Danh 0): both roads [off] «Bạc −60», kit ✕ in the header (= the «Lui» leave), Fold + iPad. Looked at all four. Shots not in git (OD:L203); HUD in the shot shows the pre-set purse (test sets S directly, no re-render) — not a game bug. |
+### Notes for the BIG delta rv
+- Delta to judge = `git diff 87e622fb 9f2522d2 -- dev/build/jnolock.js dev/test/dead-card.js` (rest = LC15 stack content + rebuilt index/sw).
+- Law 2/3: unchanged from r3 (swap rule, floor); r4 only adds two hold-backs (tsDis, need) and the DOM backstop, all ending in the same step-3 «Lui».
+- DOM backstop redraws once (s0 again) only when no leave exists yet; the second pass finds the leave → no loop.
+- Handover: done (no rollover; ctx well under START+25 %).
