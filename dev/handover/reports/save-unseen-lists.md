@@ -98,3 +98,49 @@ Head **review/save-unseen-lists 606457d09582233d8ff4b83638c5b9e606f13a94** (push
 4. coop-e2e SWAP=0 + SWAP=1 on the local Worker (`cd coop/worker && npm install && npx wrangler dev --local --port 8799`; `node dev/test/coop-e2e.js <out> http://127.0.0.1:8799`, `COOP_SWAP=1 …`); save-rt-coop (`git show origin/review/robot-coop-savert:dev/test/save-rt-coop.js` = 71c538df) on head AND LIVE (rows identical); spread-e2e; save size (`JSON.stringify(ser()).length` vs LIVE; new ra per card ≈ 0.1–3 KB); `bash dev/tools/quickcheck.sh` ALONE last (old save).
 5. Fill «Tests» here, then FOREMAN_B_STATUS END line «SẴN SÀNG KIỂM review/save-unseen-lists <sha> (BIG; save; covers save-year-rollback + unseen lists + code cards + new-life save)» + send_message Foreman B.
 Setup notes: sparse worktree `git worktree add --no-checkout /home/user/wt/sul -B review/save-unseen-lists origin/review/save-unseen-lists` + `sparse-checkout set --no-cone '/*' '!/dev/shots/' '!/dev/owner-shots/' '!/dev/figwork/'` + checkout + `bash dev/site/hooks/install.sh`; build `python3 dev/build/assemble.py && bash dev/site/build_site.sh`. One flip case ≈ 1–2 min.
+
+## r3 (B FIXER save-unseen-lists r3, session_01N1tNP5rythg4fywKyPfyTV, depth 4) — TEST GATE DONE → SẴN SÀNG KIỂM
+PRIORITY #1 CHECK ('save-unseen-lists'): OD 0 | ledger 0 | claims 6vieKxfA + 3E3aTTZk (predecessors, this seat) | main 0 | review/* review/save-unseen-lists 606457d0 + save-year-rollback-rv 509fd6c9 | archive 0 → continued, nothing redone.
+START_CTX ≈ 5 % (used_tokens read 0; own estimate); end ≈ 25 %. Coordinator: Foreman B child 4 session_01N1tNP4bL26RKz4S6K5DgXY (replaces child 3).
+Head **review/save-unseen-lists 7e01f0f54acbfa5ac4e32e049f738ff84f559577** (pushed). LIVE dbae89eb ⊂ head; LC16 stack top 772d05f2 (review/lc16-twoway-on-mfix3) ⊂ head.
+
+### Commits this round (on 606457d0)
+| commit | what |
+|---|---|
+| 51a726ba | merge LC15 top 45b10432 (hardlock4-on-kroul); only index/sw conflicted → rebuilt |
+| 239a4c66 | **FIX (found by the flip set, iPad year-0s-s1)**: «Kẻ hầu ăn bớt» (eitPil) was LOST after a reload — the confidant maid has no id/sid, so rcpEnc wrote a COPY of her into ra; on load the copy was a stranger (eitIsMaid false, rcpFail «threw … reading '1'»). j3: rcpP carries her as «maid» / «maid:<rival id>», one decoder rcpByKey shared by rcpDec AND kqDec (kit cards, same family); any other person with no key is never copied (rcpPerson → rcpEnc throws → the card stays a counted code card). Test: flip case remakes every waiting rk card TWICE and asserts S (JSON), notice box and Q do not move; MUTATE rk2 (a remade card pays Bạc +1) |
+| 5842f7c3 | test setup: save-boundary-reload newLife counts the figure pictures as ready — j52 nlBegin waits ≤2.5 s for pictures the test aborts → under CPU load S was not set when start() returned (TypeError S.name; LIVE hits it too). Game code unchanged |
+| be0ed9b8 | merge LC16 stack top 772d05f2 (LIVE dbae89eb + kit pack-4 + m-fix-3-r6 + two-way-oldsave-night); only index/sw conflicted → rebuilt; j3 / j2 auto-merged (rcp code intact) |
+| 7e01f0f5 | quickcheck G4 92 look-dedupe test setup: «Nhận thân phận» as a player (nlAccept(false), as save-boundary-reload newLife) before it clears Q — it threw the identity card away while NLP was open (impossible in play), so the nl mark brought the card back after its save → load. PASS on head + LIVE; game code unchanged (a j52 «card in Q» variant was tried and rejected: the slot write carrying nl happens in start() before the card is queued → nl-card FAIL) |
+| bd077b00 | **FIX (found by the remake ×2 check, iPad month-0s-s2)**: «Có người bán tin» (knSell) remade in a later buổi drew a NEW voice line and wrote S.vmem (save changed, card text could change after reload). jvoice kLine (ONE line picker, whole family): during a remake (RCPRE) it returns the last line drawn for that key and writes nothing. Probe: head l0=l1=l2, vmem same; LIVE new line + vmem moved. Test: HUD not compared while kitStatFx still counts a change in at capture (0 ms; S/sổ compared as always) |
+No BAL change (law 4), no player-visible word (law 7), no UI / kit part.
+
+### Generator side effects (brief: «never run twice on rebuild»)
+Every rk card waiting at the flip is remade twice in-page (rcpMk ×2) and S + NT.list + Q must stay byte-identical: 30 flip runs on the final head, 2–8 rk cards each → **no side effect** in all; before bd077b00 1 run caught knSell (vmem) → fixed; MUTATE rk2 (remake pays Bạc) → caught («stipCard moved bac») + DRIFT after reload. The reload itself (one remake on load) is also covered: same numbers after reload in every flip case.
+
+### Tests on bd077b00 (= final code; 7e01f0f5 adds only the look-dedupe test setup + build line) (commands run in /home/user/wt/sul; pages: index.html = head, bare.html = `git show origin/main:index.html` (LIVE dbae89eb), syr.html = 6d2f5a03 index.html)
+| check | command | result |
+|---|---|---|
+| flip set Fold 755x1000 | `SUL_ONLY=flip SUL_FCS=1,2 node dev/test/save-unseen-lists.js index.html fold 1` | **PASS 8/8** (month/year × 0/3 s × seeds 1,2; 1–13 cards each, every card back, same numbers, Lễ nghĩa after reload Bạc −2 = card) |
+| flip set iPad 1180x820 | same, `ipadAir` | **PASS 8/8** |
+| flip LIVE dbae89eb | `SUL_ONLY=flip SUL_FCS=2 SUL_FCW=3000 … bare.html fold 1` | FAIL 2/2 (LOST cards + DRIFT) ✔ must FAIL |
+| flip 6d2f5a03 | same, `syr.html` | FAIL 2/2 (LOST cards) ✔ |
+| MUTATE rk (no remake) | `SUL_MUTATE=rk SUL_ONLY=flip SUL_FCS=2 SUL_FCW=3000 … index.html fold 1` | FAIL 2/2 ✔ |
+| MUTATE rk2 (remake pays) | `SUL_MUTATE=rk2 …` | FAIL 2/2 ✔ |
+| other rows Fold | `SUL_ONLY=tinbao,held,nl-0s,nl-card,nl-death,nl-4s,drift … index.html fold 1` | **PASS 7/7** |
+| other rows iPad | same, `ipadAir` | **PASS 7/7** |
+| rows LIVE | `SUL_ONLY=tinbao,held,nl-0s,drift … bare.html fold 1` | FAIL 4/4 (20/5 → lost, held lost, slot empty, 16 moments sổ ≠ screen) ✔ |
+| MUTATE nt / evh / nl | `SUL_MUTATE=nt SUL_ONLY=tinbao` · `=evh SUL_ONLY=held` · `=nl SUL_ONLY=nl-0s,nl-death` | FAIL 1/1 · 1/1 · 2/2 ✔ |
+| save-boundary-reload Fold | `node dev/test/save-boundary-reload.js index.html bare.html fold 1,2` | **PASS 12/12** |
+| save-boundary-reload iPad | same, `ipadAir` | **PASS 12/12** |
+| scans | `node dev/measure/unseen-lists-scan.js` · `time-advance-save-scan.js` | PASS (33 lists, 23 unseen-kind) · PASS (10 paths, 9 gates) |
+| coop-e2e SWAP=0 (local Worker `npx wrangler dev --local --port 8799`) | `node dev/test/coop-e2e.js <out> http://127.0.0.1:8799` | **142/142** |
+| coop-e2e SWAP=1 | `COOP_SWAP=1 …` | 141/144 once («buổi 3:2 advanced for both» / «week after rebirth advances» = the known week-end stuck family, FOREMAN_B 14:38Z) → 2 reruns **142/142, 142/142** |
+| save-rt-coop (71c538df) | `node save-rt-coop.js dev/index.html` vs LIVE dev/index.html (assembled from dbae89eb) | rows IDENTICAL 11/11 (6 ok; the 5 FAILs are LIVE's own = robot-coop-savert not landed) |
+| spread-e2e | `SPREAD_BOT=1 node dev/test/spread-e2e.js http://127.0.0.1:8811 index.html bare.html` | FAIL 8 = only «modal hidden with N cards» rows (pre-existing bot-mode kind, same as save-year-rollback r2); no page error anywhere; old save loads + plays; **C: save while data cards wait → same cards after reload, shown later 2/2** |
+| save size (robot M4 sổ, deser → ser) | /home/user/wt/sul-scr/size.js | LIVE dbae89eb 984,261 chars → head 984,269 (+8; nt 2); 20 notices ≈ +3 KB (r1); one rk card ra ≤ RCP_MAX 4,000 chars (seen 20–600) |
+| quickcheck ALONE (old save) | `bash dev/tools/quickcheck.sh` | old save from LIVE loads + plays a buổi ✔, open 2189 ms, perf median new/live render 298/259 · tab 551/579 · buổi 1636/1322 ms · tasks>200 ms 27/27 (QUICKCHECK PASS part); CORE GATES: only G4 90-button-crawl FAIL = the pre-existing «Ô lưu · Lui» fault (LC15/LC16, fixed by review/robot-coop-fix-7-r2, not on the stack) + a crawler crash at its 600 s budget. G4 92 look-dedupe: FAILed on bd077b00 (setup threw away the identity card without «Nhận thân phận» → nl brought it back) → test setup fixed in 7e01f0f5 → PASS (head + LIVE) |
+Not a test of this branch: LIVE spread-e2e run hung to its 40-min timeout (EXIT 124) — LIVE only, recorded for the reviewer.
+
+### Gain vs risk
+GAIN — every card she has not answered (data AND code: stipend + Lễ nghĩa cost card, Nội vụ phủ skim, Danh hiệu mới, Y phục dự Tết, Tết side stories, Nghe đồn, Kẻ hầu ăn bớt, morning card, world events, Có người đến, Có người bán tin) survives a true reload at the month/year flip; unread «Tin báo», held events and the identity card survive; a new life is in its slot at once; remaking a card never pays, takes or writes anything twice. RISKS: (1) a card generator added later that carries a keyless person → rcpEnc refuses it (stays an unsaved code card, counted by the scan census) — possible, small, visible in the flip test line «code cards with no generator»; (2) kLine during a remake returns the last line of its key — if two cards of the same key wait at once the second may show the first's wording after a reload — rare, cosmetic, no number; (3) co-op SWAP=1 week-end stuck 1/3 runs = pre-existing family, not this diff (rows unrelated to save; 2 clean reruns). → **Được lớn hơn.**
