@@ -2195,3 +2195,5 @@ BAL.net.heat={ghenK:.45,affK:.6};
    wdHideCatch / wdHideDue = «Giấu đi, im lặng» (j92, a lost ngự tứ kept secret): % it comes out when it falls due; due in [0] + R([1]) tuần. */
 Object.assign(BAL.tw.g,{fakeX:{catch:3,catchDoc:1.5,noRec:4,recWk:6,swap:[30,.5,4],exitO:40,exitTam:3,exitDoc:20,exitSung:3,exitDanh:6,npcExit:.3}});
 BAL.eff.j92.wdHideCatch=45;BAL.eff.j92.wdHideDue=[2,5];/* due = wk() + [0] + R([1]) tuần */
+/* KIT music (KK18 §96): an event track holds this long before the base track returns */
+BAL.kmus={holdMs:6000};
