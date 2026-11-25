@@ -114,3 +114,17 @@ helpers missing: none · rows with no effect 0 · not judged 0 · page errors 0
 - Gates on 97d6ba10 (own build committed): temper-perception.js REAL TAPS Fold 755x1000@2 + iPad 1180x820@2 8/8 both, 0 errors (shots looked at, kit only) · temper-outburst.js Fold + iPad PASS (hot/stale/timid/jfeel/npc/cap/old, dead 0) · temper-equal 36 rows fail 0, 330 cells ok · temper-signs 17/0 · temper-moodsrc 11/0 · temper-judged exit 0 · one-core guard/text/bind PASS · coop-e2e 142/142 · quickcheck ALONE PASS (open 2113 ms, old save ok, buổi 1777/1456, core gates PASS).
 
 ## SẴN SÀNG KIỂM review/temper-perception-rv 97d6ba10 (round 3)
+
+## T2c — B2 INTERIM on review/temper-perception-rv 97d6ba10, 25/11 13:25Z (real-tap lives, none finished yet; NOT conclusive)
+Arms: main 4a8c627b · on (BAL.tp.moodK = gây sự kinds) · off (BAL.tp.moodM=0). Executed-act counters (runAct) and years only count since the 12:40Z restart.
+| arm | lives (done) | buổi | NPC hostile gate calls | pass | pass % | passes owed to mood | gây sự deeds (tpDeed) | pass / buổi | deeds / buổi |
+|---|---|---|---|---|---|---|---|---|---|
+| main (main) | 2 (0) | 199 | 1685 | 819 | 48.6 | 0 | 0 | 4.116 | 0.000 |
+| off (off) | 1 (0) | 79 | 1910 | 557 | 29.2 | 0 | 22 | 7.051 | 0.278 |
+| on (on) | 1 (0) | 71 | 2097 | 795 | 37.9 | 35 | 18 | 11.197 | 0.254 |
+main years 1 executed NPC harm acts (runAct) by kind {"frame":1} per year {"frame":1}
+off years 0 executed NPC harm acts (runAct) by kind {} per year {}
+on years 0 executed NPC harm acts (runAct) by kind {} per year {}
+main byKind [calls,pass,mood] {"provoke":[1109,423,0],"frame":[357,267,0],"spy":[8,1,0],"plant":[123,118,0],"bribe":[78,7,0],"rumor":[10,3,0]}
+off byKind [calls,pass,mood] {"provoke":[720,211,0],"spy":[29,7,0],"frame":[466,83,0],"bribe":[402,29,0],"rumor":[292,226,0],"plant":[1,1,0]}
+on byKind [calls,pass,mood] {"provoke":[677,276,24],"frame":[585,148,0],"rumor":[312,283,11],"bribe":[495,67,0],"spy":[18,11,0],"plant":[10,10,0]}
