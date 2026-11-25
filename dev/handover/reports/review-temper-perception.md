@@ -122,3 +122,16 @@ B2 code ✓: BAL.tp.moodK = provoke/vent/humil/gossip/rumor; tpMoodM(a,kind) 0 f
 ### Open
 B2 only: T2c's final run on 97d6ba10 (3 finished lives per arm main / on / off, real-tap robot-rt, counters: gate pass % by kind, passes owed to mood, executed NPC harm acts per year by kind, gây sự deeds) — T2c ETA ~5–6 h from 12:40Z. PASS 97d6ba10 when NPC harm deeds/year are not noticeably up on vs off; else FAIL → T1d / D tune.
 Shots in scratch only, deleted; no CDN review folder used.
+
+### ROUND 3 — T2c «dead closes» check (RV3b, 25/11 ~17:10Z): NOT a regression of this branch
+T2c interim 3 reported robot-rt «close button has no effect» on the rv html (on-1 10, off-1 42; main lives 0) and on-1 stuck at buổi 124–126 («Kính sự phòng báo tin», «Bị châm chọc», a Tâm trạng panel). Reproduced BY HAND from T2c's stuck save (reports/tp-stuck/on-1-save-buoi125.json), file:// dev/index.html of 97d6ba10 vs origin/main 9f72524b, Fold 755x1000, real mouse taps (title → «Chơi một mình» → «Tiếp tục kiếp này» → the top dialog's buttons), 3 runs per build:
+| step | rv 97d6ba10 (×3) | main 9f72524b (×3) |
+|---|---|---|
+| load → top dialog | «Kính sự phòng báo tin», 1 choice «Tắm gội chờ giá»; Q holds 3 queued «Tâm trạng · …» panels | same |
+| tap «Tắm gội chờ giá» | → «Chuẩn bị thị tẩm» | same |
+| tap first choice | → «Đêm thị tẩm» (klifewait, no buttons ~1 s) → choices | same |
+| night choices | → modal closes; Q still holds 4 «Tâm trạng · …» panels (+ Gia quý phi) | same |
+| «Tâm trạng · Hoàng hậu …» opened on top, real tap ✕ | closes, next dialog shows | same |
+One earlier rv run saw no button on «Kính sự phòng báo tin» with a 1.2 s wait; with 2.5 s waits all 3 rv runs match main → timing, not code. Verdict: the stall / dead-close pattern is identical on main from the same state → pre-existing (harness taps seals while a dialog is up, so look-up panels pile up in Q), not caused by temper-perception / temper-outburst-fix. The 0 on main lives = different life paths (Tâm trạng mentions in the last 400 steps: off-1 40 vs 4 each elsewhere). Logged as N7 (pre-existing, for D to route: stale «Tâm trạng» panels left in Q while the modal is hidden; robot-rt seal taps during dialogs).
+Page error «Cannot read properties of undefined (reading 'off')» (on-1 step 701, once): the branch's only new `.off` reads are jtperc tpTrK `BAL.trong.off` (static, jtrong.js:15) → cannot be undefined; source is one of the older `.off` sites (j54/jspread/jht/jgrey/…). N8: T2c to say whether it also appears on main lives.
+Status unchanged: everything green except B2 (final table pending).
