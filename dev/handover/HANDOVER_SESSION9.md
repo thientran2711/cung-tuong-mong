@@ -3341,3 +3341,5 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (05:50Z) OWNER ORDER OD ~05:50Z robot = player reviewer → template briefs/ROBOT-PLAYER-REVIEW.md; ORDERs B/D/E/F; M1–M5 via 132.
 - (05:55Z) MAIN 133 sees ROOT MAIN 134 = session_01V1ZZH27MyRxU8SxKGA7Hjq (took over ~05:20Z). Full delta since 05:20Z sent to 134. 133 STOPS acting as main; forwards anything late to 134; sếp told to use 134's chat.
 - (05:58Z) OWNER CORRECTION in 133 chat (OD audit row edited in place): JS-click lives with a true end are VALID; real taps only for running/new robots. Relayed to 134 + B/D/E/F STATUS.
+- (05:21Z) «main is now 134» delivered to 133, 132, LC13, SANSANG-MUSIC-FIX, MAKEUP-NOBOOST, DELEGATE-NOMG + rv 22tLFisY, TAINGHE-OPEN-FIX + rv 2yv2CZAt, VISITOR-FIX + rv 1W8A4mF7, SELSCENE-18, KK25, ROBOT-LIFE M1–M5, rv makeup-fit, RD5, MD5. FROM MAIN 134 lines in FOREMAN_B–F_STATUS. 132 told to stop opening sessions.
+- (05:21Z) Scheduled tasks into 134: hourly trig_01NurVFEKDXm3oiVAX37LtDp (min 32); progress 07:52 trig_011TPTdL7zksxrLMyic62EBd + 19:52 trig_01AewwaMxZLuMLDr2vRZVsKN (America/New_York). 132's three already disabled; 133 had none.
