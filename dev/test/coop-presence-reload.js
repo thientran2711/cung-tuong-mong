@@ -24,7 +24,6 @@ const CO=()=>{const c=window.COOP;if(!c||!c.state)return{};const s=c.state;retur
   key:(s.week||0)+':'+((typeof S!=='undefined'&&S&&S.buoi)||0),world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.base),bend:!!(window.COOPW&&(COOPW.bend||COOPW.pend))}};
 async function mkCtx(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'});
  await serve(ctx);await ctx.addInitScript(u=>{window.COOP_URL=u;window.__bot={pre:1}},WURL);await ctx.addInitScript('window.__co='+CO.toString());
- await ctx.addInitScript(()=>{document.addEventListener('DOMContentLoaded',()=>{const s=document.createElement('style');s.textContent='#kcfl,.kcfl{display:none!important}';document.head.appendChild(s)})});
  /* socket log: every WebSocket this page opens, its close code, and every presence / room frame (seats online) it hears */
  await ctx.addInitScript(()=>{const W0=window.WebSocket,t0=Date.now();window.__wsLog=[];window.WebSocket=function(u,p){const w=p===undefined?new W0(u):new W0(u,p);const L=window.__wsLog;const i=L.length;L.push([Date.now()-t0,'new',window.__wsStack?String(new Error().stack).split('\n').slice(2,9).map(x=>x.trim().replace(/\(.*?index.html[^:]*:/,'(:')).join(' < '):'']);
    w.addEventListener('open',()=>L.push([Date.now()-t0,'open',i]));w.addEventListener('close',e=>L.push([Date.now()-t0,'close',i,e.code]));
@@ -48,7 +47,7 @@ const CLEAR1=()=>{const c=__co();if(typeof S!=='undefined'&&S&&S.mg){try{S.mg=nu
 async function clear(o){for(let i=0;i<25;i++){const s=await require('./lib/coop-clear.js').first(o,CLEAR1).catch(()=>'');if(s!=='x'&&s!=='mg')return s;await sleep(200)}}
 async function press(o){for(let t=0;t<80;t++){await clear(o);const r=await o.p.evaluate(()=>{if(__co().bend)return'end';const b=document.getElementById('next');if(!b||b.disabled||b.offsetParent===null)return'';b.click();return'pressed'}).catch(()=>'');if(r)return r;await sleep(250)}return''}
 const co=o=>o.p.evaluate(()=>__co()).catch(e=>({err:e.message}));
-const dbg=o=>o.p.evaluate(()=>({co:__co(),ws:(window.__wsLog||[]).slice(-14),tr:window.COOPW&&COOPW.tr?COOPW.tr.slice(-8):null})).catch(e=>({err:e.message}));
+const dbg=async o=>{const r=await o.p.evaluate(()=>({co:__co(),ws:(window.__wsLog||[]).slice(-14),tr:window.COOPW&&COOPW.tr?COOPW.tr.slice(-8):null})).catch(e=>({err:e.message}));r.scr=await o.p.evaluate(require('./lib/coop-clear.js').SCR).catch(e=>e.message);return r};
 /* both seats: status open + the friend online, for `ms` */
 async function bothOnline(A,B,ms){const t0=Date.now();while(Date.now()-t0<ms){const a=await co(A),c=await co(B);if(a.st==='open'&&c.st==='open'&&a.peer&&c.peer)return Date.now()-t0;await clear(A);await clear(B);await sleep(300)}return -1}
 /* one buổi for both: each presses, the room key moves on both */
