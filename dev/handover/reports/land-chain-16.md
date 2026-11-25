@@ -34,3 +34,18 @@ Roll at ctx >= ~30 %, ceiling 60 %. Main push only on MAIN GO + gates/QC PASS + 
 - 351122ba music: kit-music ALL PASS, coop-e2e 142/142 ×2; QC alone running.
 - 19:32Z MAIN 145 queue: music 351122ba → SANGBUOI r4 (session_01V1ZZH4huuzV9rxXCRCtHSW, after BIG rv 13YzNeAK PASS) → D coop-rebirth-stuck (sha via MAIN) → B robot-coop-fix-7-r2-rv f2216a70; nothing after ~21:15Z; after flight: temper-perception c56c1856, selscene r19+co-ngu, save-unseen-lists, KK31 708056a9, pass-not-landed-2511.md. Tell r4 when music LIVE.
 - 19:3xZ 351122ba QC alone: open/old save/perf ok (buổi 1481/1690); core: known crawl + look-dedupe 4 + FIX-6 2 (all LIVE flakes). FF push main 08e7d79f → 351122ba. **LIVE = 351122ba · ROLLBACK 08e7d79f.**
+- 19:4xZ told SANGBUOI r4 (session_01V1ZZH4huuzV9rxXCRCtHSW) to merge LIVE 351122ba (j11 music chooser changed) and post LAND READY to MAIN 145 + lander.
+
+## HANDOVER TO LC17 (LC16 rolls: ctx 29.5 % ≈ START 5 % + 25 %)
+### STATE
+LIVE = 351122ba. Chain today: dbae89eb → 17dfa64d (F m-fix-3-r6 + two-way test) → 08e7d79f (kit pack-4 B-KIT-OK line 8e591b3a + 5e3732c9 test) → 351122ba (kit-music-r1). ROLLBACK one step = push 08e7d79f to main (only on sếp's bug + MAIN says). Coordinator = MAIN CHÍNH 145 session_01V1ZZGzUrV4o1JLUwHSreTc.
+GO-LIVE WORDS: sếp wrote «cho phép đưa lên live» in LC16 chat (~16:0xZ); LC16 used them for its 3 pushes on MAIN's standing orders. LC17 needs her words in ITS OWN chat (rule) — MAIN 145 asks her; until then do not push.
+### TOOLS
+Scratch copies: stack2.sh / holog.sh from dev/handover/reports/lc15-tools/ (set SP + session line). Stack by hand when stack2 reports SOURCE CONFLICT. Worktrees /home/user/wt/st, st2, st3, lv (may be gone in a new container). Push FF by hand: check main == expected, `git merge-base --is-ancestor`, flock push, log ROLLBACK.
+Test notes: two-way-oldsave needs file:// or http URLs; kit-tag-collide arg 2 = sizes, never exits 1; delayed-risk*.js need a URL (u8srv.py). Run QC ALONE (parallel load breaks perf + dialog-fixed spyPick width).
+KNOWN LIVE FLAKES (not blockers, MAIN 145): crawl «Ô lưu · Lui»; look-dedupe (FAIL 2–5 on LIVE alone too); next-dead FIX-6 (dbae89eb + 17dfa64d both PASS/FAIL mix); tag-collide 1 overlap thd «Trăng soi rèm ngọc»; dialog-fixed Fold spyPick L 538/560 only under load; coop host «Sẵn sàng» after guest rebirth (D T3).
+### NEXT QUEUE (MAIN 145 19:32Z; flight: LIVE ≤21:00Z, nothing new after ~21:15Z until sếp boarded)
+1. SANGBUOI r4 (session_01V1ZZH4huuzV9rxXCRCtHSW; was 78af179d on 08e7d79f; told to merge 351122ba) after BIG rv 13YzNeAK PASS → stack, its gates + coop ×2 + QC.
+2. D coop-rebirth-stuck (RV-CRS PASS; sha in FOREMAN_D_STATUS / MAIN relays).
+3. B robot-coop-fix-7-r2-rv f2216a70.
+After flight: D temper-perception c56c1856; SELSCENE r19 2075b0f4 (HELD: jksize kszLivePick3_0 conflict kit-fitfast vs pack-4 → SELSCENE-19 re-merges LIVE with one pick rule, KK reads hunk, LAND READY) + co-ngu; B save-unseen-lists; KK31 708056a9 (kszTextFirst3 + j7c fix; 7603d689 got KIT FAIL); reports/pass-not-landed-2511.md. Old D/E chain (save-growth → dfu → law1 → palace → nc-fix-4 → net-thresholds + talk-others → sansang) per LC15.
