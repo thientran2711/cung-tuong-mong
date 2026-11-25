@@ -34,3 +34,4 @@ No rule value or behaviour changed: gates = LIVE BAL/netTh reads, text = branch 
 |---|---|---|---|---|
 | review/d-followups-1-rv | 563d336b | ef247cd3 | index.html/sw.js + assemble.py module-list union | promo-build 48/48, servant-trust 80/80 ×2, net-build 189, svt-scan 67/0, coop-hh-decu 25/25 ×2, one-core ×4, oldsave ok, npcmind ERRS [], coop-e2e 142/142, quickcheck PASS |
 | review/law1-gifts-rv | e3e3382b (68f9fb63 r1) | VOID (LIVE moved to 4da55ce8; redo) | index.html/sw.js only | law1-gifts ×2, net-build 189, one-core ×4, oldsave ok, npcmind ERRS [], coop-e2e 142/142, quickcheck PASS |
+| all 4 (dfu / law1 / palace / nc4) | 563d336b / 68f9fb63 / 93be6058 / 5fbd683d | cc4fed89 / 99faeb2b / 9849ca5f / 5f23c140 on LIVE ca5af050 | generated files + assemble.py union only | full set on 49f17d4d; light set (own + sansang + one-core + quickcheck) on 0756a05b; rebuild + one-core on ca5af050 |
