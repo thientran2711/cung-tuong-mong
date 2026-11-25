@@ -1647,3 +1647,4 @@ kit reviewer B (kit-mg-realtap 45c9a58b, tntile r5) | review/kit-mg-realtap, rev
 | E TEMPER DESIGN proposal (opus, no code; briefs/E-temper-design.md; ORDER MAIN 134 05:50Z) | reports/temper-design.md | FOREMAN E (root) | session_01DgYSWnFZtiJHWn3wS87v5n | READY (FOR MAIN 134) | 25/11 05:56Z → 06:01Z |
 F flight2 life runners slots 1-6 + co-op pair (realtap harness 58013849) | dev/handover/robot/flight2-* | Foreman F #6 children (A-SOLO slot1, B-SOLO slot2, A-COOP pair, 4 new sonnet slots 3-6) | RUNNING | 25/11 05:54Z | F
 | F TEST-PATH FIXER (sonnet; ORDER FROM MAIN 134 06:00Z): toilette.js #kg82 .toilw timeout · toil-overlay mefig hidden · hoa-dien hang (charset-less local server) | review/test-path-fix | session_01UV1SzkVw1zgZ7LyG1xUtdE | RUNNING | 25/11 06:08Z | F
+B co-op RERUN U1 (real taps, robot-audit-B RERUN LIST) | dev/handover/robot/coop-rerun-U1-* | B | session_01N1tNP2F2Lg3DaJ7NAAGZfq | RUNNING | 25/11 06:15Z |
