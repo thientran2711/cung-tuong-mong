@@ -14,3 +14,15 @@ Results:
 - node dev/test/coop-e2e.js (live Worker, merged head): 142/142 passed.
 - Old save: quickcheck "old save ok".
 VERDICT: PASS (with the pre-existing dialog-fixed #54 flake noted) — kit-optinfo-r1 fc2a24492a0e96b4613630300a5ed6989b1c457f.
+
+## REVIEW r2 (25/11, sonnet reviewer SEAT 2a, Foreman B) — review/kit-optinfo-r2 a6ca99943e283791af85ddc35ffde281dce8a6c7
+PRIORITY #1 CHECK ('kitOptInfo|optinfo'): OD 0 | main 0 | review/* kit-optinfo-r1 fc2a2449 (r1 PASS above, reused) | claims: KK25 only.
+START_CTX ~8%. Laws touched: 9 (one kit part kitOptInfo, only caller = the «!» capture handler), 11 (whole «!» group; knumpop is a separate kit part, untouched), 14 (KIT §6.2b not changed; NOTE pre-existing on main: KIT.md has TWO «### 6.2b FINAL OPTION CARD» headings, lines 835/837 = law 14 double version, not from this branch → for KK25), 7/6c n/a.
+- Head = r1 fc2a2449 + main 502c48c9 (main is an ancestor). Built files: bash dev/site/build_site.sh → only the CTM_BI build line differs (fresh).
+- optinfo-rows (Fold 755x1000 + iPad 1180x820): MAIN 502c48c9 = FAIL («Thử hàng gập | Đưa lót tay…: missing Kèm,Bại,Mất», 2 cards); r1 bare fc2a2449 = ALL PASS (10 cards); r2 head = ALL PASS (12 cards); r2 SEED=1/2/3 = ALL PASS (4/11/9 cards). No args: crashes on missing url (required arg by design, same as r1).
+- opt-card-scan (SEED=1, Fold+iPad, main vs r2): 46 lines each, 2 differ (dress 2S cut 669↔587, fest MOVED↔fixed) — flaky on MAIN too (4 repeated runs: main and r2 both flip) = harness noise, not the branch.
+- Shots (Fold + iPad, looked 3×: card, «!» overlay on main and r2): r2 overlay shows frame, title + odds meter on the title row, Tốn + Gợi ý; no longer dimmed like main's disabled clone; no page errors.
+- Law 11: one caller of kitOptInfo (jopic.js click delegate); a really disabled/kdis card keeps disabled look + hidden rows by design.
+- Merged onto NEWEST main 345eb929 (sfx-instant): source merges clean, only built sw.js conflicts (rebuild regenerates); rebuilt → optinfo-rows ALL PASS (10 cards).
+- bash dev/tools/quickcheck.sh --runs 5 (alone, r2 head): QUICKCHECK PASS · 303 s · open 1764 ms · old save ok · perf render 218/219, tab 435/400, buổi 1075/999 · core gates PASS.
+VERDICT: KIT OK a6ca99943e283791af85ddc35ffde281dce8a6c7 review/kit-optinfo-r2
