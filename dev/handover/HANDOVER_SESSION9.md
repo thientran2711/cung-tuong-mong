@@ -3675,3 +3675,4 @@ LOAD: main running 1 (owner bugs/UI/go-live only) | B free ? | C free ? | D free
 - 22:48Z took over from 146. Scheduled tasks: hourly :32 trig_01GdRjoocTXG2vkJCm9dDYBn, 07:52 NY trig_01NSQrPSM3S2yarZR2bTBkAX, 19:52 NY trig_01Fpcpu5BVCnEepe4UZcK1j7, LANDING PACK 02:35Z trig_019uMFSaBVRbT916PznLUUo5. «main is now 147» sent to KK33, NHV-BUILD, ART-NHV, PROMO-ROOT, OB-KIEP, OB-NGOAICUNG, OB-PHU, LC17, M2b, M3, M5b, ROLE B #7.
 - ~23:10Z OWNER news-gating rule (OD row, k10 shot) → added to OB-NGOAICUNG event-gating job (same family).
 - k8 thread-colour minigame bug (OD ~23:05Z) → new worker MG-COLOR session_01V1ZZH2DGfoPbL4T6E66aiz (review/mg-color, whole minigame colour/art family + «?» hint bar).
+- ~23:15Z OWNER bug: entry gate «Cổng cung» is the code fallback (art slots never painted) → OD row + new worker ART-SLOTS session_01V1ZZH1rDdwKX5ADfoP5pSQ (paint 4 gates + doors; whole family of kitPhNote/code stand-ins; review/art-slots).
