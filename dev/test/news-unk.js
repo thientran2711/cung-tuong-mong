@@ -1,6 +1,6 @@
 /* review/news-unk-fix (E-S7 bug 25/11, LAW 11 FIX THE WHOLE GROUP): a raw «???» name placeholder must NEVER print in PROSE — «Tin báo» news,
    rumours, logs, Tuần lục, notices, result lines, dialogue text. «???» is allowed ONLY as the name on a person card / stage label / name chip
-   (.kname .kti .krname .kptag .ktag .kpname .kprank .kname2 .kan). An unknown person in prose reads «một vị <tước>» (the j61 k61Mask plain wording
+   (.kname .kti .krname .kptag .ktag .kpname .kprank .kname2 .kan .knr/.knr-n/.krn = the kitNameRank plate). An unknown person in prose reads «một vị <tước>» (the j61 k61Mask plain wording
    through kitNoUnk) — no new mask. Root cause: jnotice plain() stripped tags AFTER kitNoUnk, so the protected chip «<b class="kname">Đáp ứng ???</b>»
    became the bare words «Đáp ứng ???» (Tin báo rows, tin-bao text, kitKnow lines).
    Parts (one table, exit 1 on any hit):
@@ -22,7 +22,7 @@ const B=path.join(ROOT,'dev/build');const src={};for(const f of fs.readdirSync(B
  rep('S-info',`tag-strip sites ${n}; with a mask on the line ${masked}; others ${un.length} (their text reaches the screen only through log()/showModal()/kitNotice()/render(), which all run kitNoUnk; the live scan L proves it)`)}
 /* ---- shared in-page helpers ---- */
 const HELP=`(function(){
- window.__nu={hits:[],seen:{}};const NAME=".kname,.kti,.krname,.kptag,.ktag,.kpname,.kprank,.kname2,.kan";
+ window.__nu={hits:[],seen:{}};const NAME=".kname,.kti,.krname,.kptag,.ktag,.kpname,.kprank,.kname2,.kan,.knr,.knr-n,.krn";
  const strip=x=>{const d=document.createElement("div");d.innerHTML=String(x==null?"":x);d.querySelectorAll(NAME).forEach(e=>e.remove());return d.textContent.replace(/\\s+/g," ").trim()};
  window.__nuAdd=(surf,txt)=>{if(String(txt).indexOf("???")<0)return;const k=surf+"|"+String(txt).slice(0,90);if(__nu.seen[k])return;__nu.seen[k]=1;__nu.hits.push({surf,txt:strip(txt).slice(0,150)})};
  window.__nuDom=(surf,root)=>{try{if(!root||!root.getClientRects().length)return;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){if(n.nodeValue.indexOf("???")<0)continue;const e=n.parentElement;if(!e||e.closest(NAME))continue;const cs=getComputedStyle(e);if(cs.display==="none"||cs.visibility==="hidden")continue;__nuAdd(surf+" <"+e.tagName+"."+String(e.className).slice(0,30)+" < "+(e.parentElement?e.parentElement.tagName+"."+String(e.parentElement.className).slice(0,30):"")+">",(e.closest("li,p,div,button")||e).textContent)}}catch(x){}};
