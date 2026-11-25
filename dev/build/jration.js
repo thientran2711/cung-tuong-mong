@@ -156,7 +156,8 @@ function lxBegCard(p,kind){const B=BAL.ration.beg,hh=kind==="hh",M=lxMiss(p);con
    const f=hh?{hh:B.fail}:{th:B.fail};if(p===S)apply(f);else ap(p,f);return `${nm} cho là ${lxNm(p)} không biết giữ phận. ${nm} ${B.fail}.`}}}
 function lxStealOdds(p,v){return cl((typeof oPlant==="function"&&v.maid?oPlant(p,v):30)+BAL.ration.steal.add,5,95)}
 function lxStealCard(p,v){const M=lxMiss(p);const L=BAL.ration.parts.map(part=>lxLend(v,part)).filter(Boolean);const od=lxStealOdds(p,v);const ST=BAL.ration.steal;
- return{n:"Lấy trộm son phấn",o:od,act:1,lock:!L.length,t:"rương nàng không có son phấn",x:`${word(od)} · thành: lấy một hộp son phấn của nàng · hỏng: bị bắt, Danh ${ST.danh}, Đức ${ST.duc}, nàng oán ${balSg(ST.oan)}, Nội vụ phủ khất bổng ${ST.cut} tháng`,
+ return{n:"Lấy trộm son phấn",o:od,act:1,lock:!L.length,t:"rương nàng không có son phấn",x:`${word(od)} · thành: lấy một hộp son phấn của nàng · hỏng: bị bắt, Danh ${ST.danh}, Đức ${ST.duc}, nàng ${pvOan(v,ST.oan,"oán")},
+ Nội vụ phủ khất bổng ${ST.cut} tháng`,
   run:()=>{if(!L.length)return"";const e=L.find(x=>M.includes(lxOf(x.k).part))||L[0];if(roll(od)){const g=lxGive(v,p,e,"all");if(p!==S)lxFix(p);
     if(v===S)lxStolenNote(p,g);else try{newsAdd(v,"lx",`${rkName(v)} ${v.name} mất một hộp son phấn trong rương`,false)}catch(x){}return p===S?`Ngươi lấy được ${lxName(g)} trong rương ${v.name}.`:`${p.name} lấy được ${lxName(g)} trong rương ${lxNm(v)}`}
    lxCaught(p,v);return p===S?`<span class="r">Ngươi bị bắt quả tang lục rương ${v.name}.</span> Danh ${ST.danh}, Đức ${ST.duc}.`:`${p.name} bị bắt quả tang lục rương ${lxNm(v)}`}}}
