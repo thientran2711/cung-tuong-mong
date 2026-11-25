@@ -1,1 +1,1 @@
-Thẻ việc theo mùa không còn hiện lệch mùa sau khi tải lại sổ.
+Bảng tra cứu (Tâm trạng, Đã biết về…) không còn hiện chồng nhiều bản; sau mỗi môn có nút bước tiếp; ghi chú «còn N lần dùng» gộp gọn.

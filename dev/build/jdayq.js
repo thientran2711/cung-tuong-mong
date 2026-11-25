@@ -109,4 +109,16 @@ function dqInstall(){
 (function(){if(typeof kmOnReset==="function")kmOnReset(()=>{const arm=!!DQ.mt;DQ.want=null;DQ.newsHold=0;clearTimeout(DQ.t);clearTimeout(DQ.mt);DQ.t=DQ.mt=0;if(arm)try{dqArmModal()}catch(e){}})})();
 /* installed after every load-time wrapper and after the setTimeout(0) ones (jagent, jk4, jksize …): the outermost layer */
 setTimeout(()=>setTimeout(()=>{try{dqInstall()}catch(e){console.error("dayq install",e)}},0),0);
+/* m-fix-1 item 2 (robot M4 25/11 05:52Z + 05:58Z: «Sang ngày mới» greyed with NO cue while a card waited held behind a person view (kfoc) / away
+   from her room; a newcomer saw a dead button). j6 render() disables #next while Q holds a card; when that card is HELD here (gate (c) / the book:
+   nothing on screen shows it), the button SAYS WHY with the one waiting-words table (CTM_WAIT.dqHeld) in the same wrapping look as the co-op wait
+   (#next.kcwait, jcoopworld lockNext); the normal label comes back at the next render once the card is shown. Solo only (dqUi), like the hold. */
+function dqNextCue(){try{const n=document.getElementById("next");if(!n)return;const M=document.getElementById("modal");
+ const held=dqUi()&&n.disabled&&!S.mg&&Q.length>0&&(!M||dqHidden(M));const t=window.CTM_WAIT&&CTM_WAIT.dqHeld;
+ if(held&&t){if(!n.dataset.dqCue){n.dataset.dqCue="1";if(!n.style.maxWidth&&n.offsetWidth)n.style.maxWidth=n.offsetWidth+"px";n.classList.add("kcwait")}if(n.textContent!==t)n.textContent=t;n.title=t}
+ else if(n.dataset.dqCue){delete n.dataset.dqCue;n.style.maxWidth="";n.classList.remove("kcwait");n.removeAttribute("title");if(n.textContent===t)n.textContent=(S&&(S.buoi||0)>=(typeof B4L==="number"?B4L:2))?"Sang ngày mới":"Sang buổi"}}catch(e){}}
+setTimeout(()=>setTimeout(()=>{try{if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);dqNextCue();return r}}
+ setInterval(dqNextCue,700)/* the hold releases on a close that may not render */;
+ try{const n=document.getElementById("next");if(n)new MutationObserver(()=>dqNextCue()).observe(n,{childList:true,characterData:true,subtree:true,attributes:true,attributeFilter:["disabled"]})}catch(e){}/* an inner render (a wrapper's saved r0) rewrites the label: put the cue back at once, no flicker; idempotent (no write when equal) */}catch(e){console.error("dayq cue",e)}},0),0);
+window.dqNextCue=dqNextCue;
 window.DQ=DQ;

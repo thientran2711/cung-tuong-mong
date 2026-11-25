@@ -134,7 +134,7 @@ BAL.linkRange={rl:[-100,100],ro:[0,100]};
    and mark "quá hạn mức" when wearing the piece would take her over it (coordinator 15/11 design "xa xỉ value vs her rank allowance", after the
    owner's 23:05Z dress-contest ruling; the older 08:10Z ruling hid the allowance — set false to hide it again, the row keeps "món này N · Bên mình N → M").
    Reviewer r1 (coordinator ruling 15/11): owner rule 08:10Z wins -> false (no allowance, no "quá hạn mức"). */
-Object.assign(BAL,{itd:{allow:false}});
+Object.assign(BAL,{itd:{allow:false,useGroups:4/* m-fix-2: most «N lọ còn U lần dùng» lines in one item note (jitd kitUseNote) */}});
 
 /* per-person dislikes (jdis, review/pcard-dislikes): n = how many each person has [min,max]; aff = her thiện cảm lost after a wrong gift; sung = Emperor's Sủng lost;
    refuse = chance (0-100) a wrong gift is refused and stays in the chest (then refAff / refSung are lost instead); talk = chance a talk reveals one;
@@ -1742,7 +1742,10 @@ Object.assign(BAL.ag.why,{
    care = the share (0..1) of a care game's gain a won quick roll gives (pet care, watering): half of a good play, never more.
    Outcome table (a quick result never beats a good own play): lessons won = tiến bộ một phần, lost = 0 · works / crafts = never a product ·
    makeup won = the middle tier (Đoan trang, BAL.toil.tier[0]), lost = Vụng về · care won = BAL.skip.care of the gain, lost = 0. */
-Object.assign(BAL,{skip:{od:40,raw:5,care:.5}});
+/* cap = the highest play mark ANY quick / skip / "Để tài nghệ quyết định" / not-played round may count as (m-fix-1, owner OD 18/11 ~05:55Z
+   "a quick result never beats a good own play"; robot M4 25/11: an exam skip gave 10/10 Xuất sắc while a skilled own play gave 5/10): the middle
+   word Khá (BAL.mgTier.word[1]), like makeup's middle tier — a good own play (Giỏi, word[2], and up) always beats it. Read through kitSkipCap (j79). */
+Object.assign(BAL,{skip:{od:40,raw:5,care:.5,cap:5}});
 /* FACE REVEAL motion (owner 18/11 ~06:20Z, KIT §79 jreveal.js): ms = the grey veil clears from the face outward; lite = Gọn / reduced motion short fade;
    win = how long after a face is learned every place that first draws it (frame, avatar, stage figure) still plays its one reveal */
 Object.assign(BAL,{faceReveal:{ms:Math.round(1000*BAL.pace),lite:350,win:8000}});
