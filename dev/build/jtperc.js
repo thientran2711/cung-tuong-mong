@@ -17,7 +17,7 @@
       kindK = O holds kind memories of X (jmem, last kindWk tuần): harsh losses ×(1 − forgive), ×(1 − forgiveV) when O trọng Nhân or Nghĩa;
       labels: O saw ≥ tagN outbursts and ≥ tagN kind deeds → «good» (losses ×goodK, kind deeds ×goodKind); outbursts + ≥ tagN harms and few
       kind deeds → «evil» (losses ×evilK, Oán +evilOan each). The label shows on O's person card, «Tính nết» row, as a kit tap-word;
-      reasonK = O knows the reason (O close to X, an open feud oán ≥ pubOan, or O knows the cause of X's mood, jmoodknow) ×reason, else ×noReason.
+      reasonK = O knows the reason (O close to X, an open feud = oán ≥ her own «thù» level netTh(X,"thu"), or O knows the cause of X's mood, jmoodknow) ×reason, else ×noReason.
       Who it lands on: a consort's / her own thiện cảm (affAdd); Hoàng hậu → her S.hh; Thái hậu → th; Hoàng thượng → Sủng ×empK.
       Gate stats (th, hh, Sủng) lose at most cap per doer per 12 months to this rule (design (e) G1) and at most hiCap per deed.
    4. HER REASON GATE (design (d) OPTION A, OD 25/11 ~08:05Z): her gây sự cards (Khiêu khích, Trút giận, Hạ nhục) pass the SAME motive gate as the
@@ -37,7 +37,7 @@ Object.assign(BAL,{tp:{on:1,
  /* the deeds that count as an outburst / as a harm for the labels */
  harm:["danh","khac","humil","ke","gaysu","soat","noi","nghi","quo","okho"],
  hear:.5,friend:1.5,foe:.5,approve:1,kindWk:24,forgive:.5,forgiveV:.7,forgiveTr:["Nhân","Nghĩa"],
- tagN:3,goodK:.5,goodKind:1.2,evilK:1.5,evilOan:3,reason:.6,noReason:1.3,pubOan:40,
+ tagN:3,goodK:.5,goodKind:1.2,evilK:1.5,evilOan:3,reason:.6,noReason:1.3,
  tellUp:30,tellHost:30,empK:.5,hiCap:2,cap:{th:6,hh:8,sung:4},capWk:36,max:12,days:3,keep:40,
  /* motive gate (j95 motiveOK, every doer): a heavy angry / jealous mood adds moodM to the motive (feeling level ≥ moodLv) */
  moodM:10,moodLv:2,moodG:["gian","ghen"],
@@ -88,10 +88,10 @@ function tpTrK(O,tags,harsh,why){const B=BAL.trong,P=BAL.tp;if(!tags)return 1;le
  if(a)why.push("trọng "+trongOf(O).filter(v=>tags[v]<0).join(", "));
  if(harsh){if(b&&!a)return{ap:b*P.approve};return Math.max(0,1+a*B.off-b*B.up)}
  return Math.max(0,1+b*B.up-a*B.off)}
-function tpRelK(O,V){try{if(!V||!tpCons(V)||O==="th"||O===S.emp)return 1;if(aff(O,V)>=netTh(O,"than"))return BAL.tp.friend;if(oan(O,V)>=30)return-BAL.tp.foe}catch(e){}return 1}
+function tpRelK(O,V){try{if(!V||!tpCons(V)||O==="th"||O===S.emp)return 1;if(aff(O,V)>=netTh(O,"than"))return BAL.tp.friend;if(oan(O,V)>=netTh(O,"thu"))return-BAL.tp.foe}catch(e){}return 1}
 function tpKind(O,X){try{if(typeof memList!=="function")return 0;const n=wk(),W=BAL.tp.kindWk;return memList(O==="th"?"th":O,X).filter(m=>m.s>0&&n-(m.w||0)<=W).reduce((s,m)=>s+(m.n||1),0)}catch(e){return 0}}
 function tpCloseTo(O,X){try{if(O==="th"||O===S.emp||X===S.emp)return false;return aff(O,X)>=netTh(O,"than")}catch(e){return false}}
-function tpReason(O,X,V){try{if(tpCloseTo(O,X))return true;if(V&&tpCons(V)&&tpCons(X)&&oan(X,V)>=BAL.tp.pubOan)return true;
+function tpReason(O,X,V){try{if(tpCloseTo(O,X))return true;if(V&&tpCons(V)&&tpCons(X)&&oan(X,V)>=netTh(X,"thu"))return true;
  const c=typeof moodCauseKnownBy==="function"?moodCauseKnownBy(O==="th"?S.thO:O,X):null;return !!c}catch(e){return false}}
 function tpMark(O,X){const T=tpS(),k=tpK(O)+"|"+tpK(X);return T.m[k]=T.m[k]||{o:[],k:[],h:[]}}
 function tpLab(O,X){const T=tpS(),M=T.m[tpK(O)+"|"+tpK(X)];if(!M)return"";const P=BAL.tp,n=wk(),W=P.kindWk*2;
