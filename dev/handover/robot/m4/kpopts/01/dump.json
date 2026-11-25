@@ -1,11 +1,11 @@
 {
- "buoi": 33,
- "hud": "Bạch Nghê Thường Thường tại 19 tuổi Kiếp thứ nhất Tháng mười · thượng tuần · năm thứ nhất | Buổi trưa",
+ "buoi": 4,
+ "hud": "Bạch Nghê Thường Quý nhân 20 tuổi Kiếp thứ nhất Tháng mười · thượng tuần · năm thứ hai | Buổi chiều",
  "build": "0756a05b",
- "at": "2026-11-25T07:13:09.291Z",
+ "at": "2026-11-25T10:45:43.607Z",
  "dump": {
-  "title": "Bổng lộc tháng chín",
-  "bad": 2,
+  "title": "Chọn người theo hầu",
+  "bad": 1,
   "frameBottom": 898,
   "dlgClass": "dlg kpsc kpanel kszf ksz3 kszlive",
   "dlgStyle": "--kdpw: 178px;",
@@ -30,15 +30,15 @@
    ],
    "opts": [
     342,
-    471,
+    440,
     304,
-    414
+    445
    ],
    "kpopts": [
     342,
-    471,
+    440,
     304,
-    414
+    445
    ],
    "k3right": [
     342,
@@ -61,39 +61,33 @@
   },
   "kpoptsScroll": [
    0,
-   897,
-   414
+   595,
+   445
   ],
   "cards": [
    [
     342,
-    471,
-    304,
-    166
-   ],
-   [
-    342,
-    643,
+    440,
     304,
     140
    ],
    [
     342,
-    789,
+    586,
     304,
-    198
+    140
    ],
    [
     342,
-    993,
+    732,
     304,
-    181
+    140
    ],
    [
     342,
-    1180,
+    878,
     304,
-    181
+    151
    ]
   ],
   "vp": [
