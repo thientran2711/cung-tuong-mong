@@ -3284,3 +3284,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (03:25Z) KK25 KIT READY kit-icon-row 7332bf70 → B kit rv.
 - (03:28Z) RV makeup-fit LAND READY dd200174 (makeup-fit-r6 on 5d4f722f; JSON == CDN, bad 0, quickcheck PASS, shots looked) → GO to LC13 after visitor, full gate set (tier BIG only for generated jhd.js). Archive MAKEUP-FIT + its rv after LIVE.
 - (03:30Z) LIVE d6b6fd6f (flight-ui: Tin báo kit rows + «một vị …») 02:18Z; ROLLBACK 345eb929. Queue after chain: visitor 7dbfe98a → makeup dd200174 → visitor-r9 (after rv).
+- (03:34Z) BIG rv 4LZXJs8b FAIL selection-scene b7651fad (co-op only: 4/4 runs red — hidden-modal tsgiftpick card, #next stuck, seatresync guest start, j61 s1 key dup; perf/day line GREEN median 61). → SELSCENE-16 fix; cross-linked with TAINGHE-OPEN-FIX (hidden #modal family). rv rolled → MAIN opens successor BIG rv on next SSK. Not in LC13 queue (no land).
