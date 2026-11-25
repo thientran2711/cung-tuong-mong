@@ -6,6 +6,7 @@ Tool: `node dev/measure/robot-audit.js <paths> --only <re>` (handover branch 60a
 
 ## Counts
 
+- FLIGHT 2 round (flight2-*, real-tap harness robot-rt.js, audit 25/11 08:45Z): lives 1 · VALID 1 · INVALID 0 · flight2-s5d (cnv/cnv_mat, quiet, Fold, harness 63f87747) — Xuất cung at age 25 y7 «mở tiệm nhỏ ở kinh thành»: VALID, game-imposed — the last bot tap was «Xin ở lại» (non-exit) at the age-out dialog, then the game ended the life with Xuất cung (exitPick null is correct: the bot never picked the exit). Script fix: robot-audit.js now reads the robot-rt one-life-per-file format (was skipped as «no lives») and uses the last real tap to tell bot exit from game-imposed exit.
 - FLIGHT round (flight-*: A-SOLO, A-COOP, B-SOLO, B-COOP): lives 49 · VALID 0 · INVALID 49 · ends exit 34 / death 6 / none 8 / imposed 1 · why JS-click harness 49 / bot-chosen exit road «…» 34 / harness error 7 / wall cap 1  (+ A-SOLO 2 lives from reports/flight-robot.md, both CAP45 → INVALID; A-SOLO JSON was not pushed)
 - F ROBOT-10 co-op units (coop-*, U4…U21 + pairs): lives 568 · VALID 0 · INVALID 568 · ends exit 512 / death 54 / none 2 · why JS-click harness 566 / bot-chosen exit road «…» 512 / co-op pair with no finished life 2
 - WHOLE dev/handover/robot (all foremen, for B/D/E/MAIN): lives 1568 · VALID 0 · INVALID 1568 · ends none 387 / death 434 / exit 678 / imposed 65 / grand 4 · why JS-click harness 1566 / bot-chosen exit road «…» 678 / wall cap 273 / stuck / timeout 72 / harness error 40 / co-op pair with no finished life 2

@@ -9,6 +9,7 @@
      · robot10 solo array  [ {job,life:{id,type,fate,...},harness?,exitPick?,...}, ... ]  (robot10.js, flight-*, nc/pf/thd/cnv/bd)
      · co-op               { run, pairs:[ {job,lives:[{seat,kiep,life,...}],partial?,harness?} ] }      (coop runner)
      · lives list          [ {seat,kiep,id|life,...} ]                                                (flight-A-coop-repro/guest-cold)
+     · robot-rt solo       { job, harness:{kind:'realtap'}, life, exitPick, bugs }  one life per file (flight2-*, robot-rt.js)
      · markdown life tables (only when no same-stem .json exists): header with a «life» column and an «ending|result|end» column.
    A LIFE IS VALID ONLY IF ALL THREE HOLD
      (1) REAL TAPS: the record carries harness {realtap:true, jsClicks:0} (written by dev/test/realtap.js harness,
@@ -30,6 +31,8 @@ const fs = require('fs'), path = require('path');
 const EXIT_IDS = ['Xuất gia', 'Dâng biểu xuất gia', 'Xuất cung về quê', 'Phế làm thứ dân', 'Một đời an nhiên',
   'Cao chạy xa bay', 'Xuất giá', 'Được ban hôn', 'Vào vương phủ', 'Thành thân'];
 // game-imposed: j42:303 «Xuất cung tuổi N» (Nội vụ phủ age-out, no choice), Ma ma, Bị đuổi khỏi cung, Lãnh cung, Thái phi, ...
+// exit-road option labels as the robot-rt harness blacklists them (EXIT_RE in dev/test/robot-rt.js)
+const EXIT_TAP_RE = /xuất gia|xuất cung|về quê|thứ dân|bỏ cuộc|kiếp mới|luân hồi|an nhiên|giả chết|cao chạy|xuất giá|thành thân|vương phủ|ban hôn/i;
 const NOEND_TYPES = { cap: 'wall cap (no ending)', stuck: 'stuck / timeout (abandoned)', softlock: 'soft-lock (abandoned)',
   crash: 'crash (abandoned)', harness: 'harness error (no life)', '?': 'no ending recorded' };
 const NOEND_IDS = { CAP: 'cap', TIMEOUT: 'stuck', SOFTLOCK: 'softlock', CRASH: 'crash', HARNESS: 'harness' };
@@ -56,7 +59,7 @@ function verdict(rec, life) {
   const real = !!(h && h.realtap === true && +h.jsClicks === 0);
   if (!real) why.push(h ? 'harness not real-tap (realtap=' + h.realtap + ', jsClicks=' + h.jsClicks + ')' : 'JS-click harness (pre-25/11, no realtap proof)');
   if (e.k === 'none') why.push(e.why);
-  if (e.k === 'exit') { if (xp && (xp.only === true || +xp.n === 1)) e.note = 'exit was the only option (real ending)'; else why.push('bot-chosen ' + e.why + (xp ? ' with ' + xp.n + ' options' : ' (no proof it was the only option)')); }
+  if (e.k === 'exit') { if (xp && (xp.only === true || +xp.n === 1)) e.note = 'exit was the only option (real ending)'; else if (!xp && rec.lastTap) e.note = 'game-imposed: last bot tap was a non-exit option «' + rec.lastTap.slice(0, 40) + '»'; else why.push('bot-chosen ' + e.why + (xp ? ' with ' + xp.n + ' options' : ' (no proof it was the only option)')); }
   if (h && h.cap && e.k === 'none') why.push('harness had a cap (' + h.cap + ')');
   return { valid: why.length === 0, why, end: e };
 }
@@ -75,6 +78,11 @@ function fromJson(file, j, out) {
       for (const l of ls) push(((p.job && p.job.id) || 'pair') + ' ' + (l.seat || '?') + ' k' + (l.kiep != null ? l.kiep : '?') + (l.tp ? ' ' + l.tp.origin + '/' + l.tp.road : ''), { harness: l.harness || p.harness || j.run && j.run.harness, exitPick: l.exitPick }, l.life, { seat: l.seat }) }
     return true
   }
+  /* robot-rt.js solo (review/robot-realtap): ONE life per file { job:{id,...}, harness:{kind:'realtap',...}, life, exitPick, bugs, ... } */
+  if (j && !Array.isArray(j) && j.job && j.harness && 'life' in j) { if (j.life && j.life.type === 'slice') return true /* self-test slice, not a life */; const tr = Array.isArray(j.trace) ? j.trace.filter(t => Array.isArray(t) && typeof t[1] === 'string' && !/^DEAD /.test(t[1])) : []; const last = tr.length ? tr[tr.length - 1][1] : null; const lab = last ? (last.match(/«([^»]*)»\s*$/) || [])[1] || last : null;
+    /* the last real tap before over(): if it was NOT an exit-road option, the exit ending was imposed by the game (e.g. «Xin ở lại» failed at the age-out) */
+    const rec = Object.assign({}, j); if (!j.exitPick && lab && !EXIT_TAP_RE.test(lab)) rec.lastTap = lab;
+    push(j.job.id || '?', rec, j.life || { id: '?', type: '?' }); return true }
   if (Array.isArray(j) && j.length && j[0] && j[0].seat && j[0].kiep != null) { for (const l of j) push('seat ' + l.seat + ' k' + l.kiep, l, l.life || { id: l.id, age: l.age, year: l.year, type: l.die ? 'death' : '' }); return true }
   return false
 }
