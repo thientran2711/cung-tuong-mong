@@ -1696,3 +1696,4 @@ sangbuoi-held-fix (jdayq dqWait silent exit, whole family) | review/sangbuoi-hel
 BIG rv sideline-dlg r4 (opus; land -3-r1 as one item) | review/sideline-dlg-3-r* | B | session_01N1tNP6Wg2mFj3et8dLjA7c | RUNNING | 25/11 08:00Z |
 | F BIG REVIEWER #2 (successor of session_01UV1SziXSk67Zy3DMXHsCrJ; queue test-path-fix-3 101dc29b → crawl-fix-1-r2 → m-fix-1 → harness) | review/*-r | FOREMAN F #7 | session_01UV1SzhBrzCVc4CVbM2dCsJ | RUNNING | 25/11 08:01Z |
 | TRUNGSINH-STORY lead 2 | review/trungsinh-story | MAIN 136 | session_01V1ZZH2S38RtoBxn9Q5brH4 | RUNNING | 2026-11-25T08:04Z |
+| F M-FIX-2 (result card «Đã hiểu» hidden after skip family + repeated «còn N lần dùng» hint covering rows; successor of M-FIX-1) | review/m-fix-2; briefs/F-mfix2-2511.md; reports/m-fix-2.md | FOREMAN F #7 | (opening) | RUNNING | 25/11 08:10Z |
