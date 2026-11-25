@@ -1,0 +1,204 @@
+09:52:00 TAP 378,961 mend | Ta biết rồi
+09:52:01 TAP 378,961 mend | Ta biết rồi
+09:52:01 TAP 539,357 close x | ✕
+09:52:11 TAP 378,961 mend | Tiếp theo
+09:52:13 TAP 725,28 close x | ✕
+09:52:13 TAP 584,332 close x | ✕
+09:52:14 TAP 524,539 option (opt offset) | Chỉ chỗ đứng thích hợp rồi đi TỐN Hoàng hậu → ta: 
+09:52:14 TAP 524,638 option (opt offset) | Bỏ bạc mua thêm than TỐN Bạc -20 ĐƯỢC qua mùa rét 
+09:52:15 TAP 524,787 option (opt offset) | Tâu xin Nội vụ phủ cấp than thêm TỐN Hoàng hậu → t
+09:52:16 TAP 524,553 option (opt offset) | Vào thi (tự chơi phần thi) TỐN Sức -6 ĐƯỢC đoạt gi
+09:52:16 TAP 148,863 minigame ready (play) | Sẵn sàng từ lúc này mới tính giờ
+09:52:17 MINIGAME board play start
+09:52:17 mg state pk=null moves=0 idle=0
+09:52:25 mg state pk=null moves=4 idle=59
+09:52:33 mg state pk=null moves=9 idle=103
+09:52:41 mg idle diag {"title":"TÀI NGHỆ\nThêu: Tiết Đông chí · Nhớ mẫu thêu\n10/10\n✕","btn":["✕||kit-x"]}
+09:52:41 mg state pk=null moves=14 idle=150
+09:52:49 mg state pk=null moves=20 idle=190
+09:52:56 MINIGAME board play end moves=27 idle=213 ms=39184
+09:52:56 TAP 378,965 continue | Tiếp
+09:52:56 TAP 700,220 close x | ✕
+09:52:57 TAP 378,668 continue | Nhận
+09:52:57 TAP 378,652 continue | Nhận
+09:52:58 TAP 378,723 continue | Nhận
+09:52:58 TAP 539,384 close x | ✕
+09:52:59 TAP 539,384 close x | ✕
+09:52:59 BUG UX-OPTION-CENTRE tap at the centre of option "Đeo ngay TỐN không ĐƯỢC không !" hits the odds chip (opens Thang cơ duyên legend) instead of choosing
+09:52:59 TAP 305,654 option (offset from odds chip) | Đeo ngay TỐN không ĐƯỢC không !
+09:53:00 TAP 475,670 option (opt offset) | Tài nghệ hội thi TỐN không ĐƯỢC Hội thi: thêm 2 ph
+09:53:00 TAP 305,654 option (offset from odds chip) | Đeo ngay TỐN không ĐƯỢC không !
+09:53:01 TAP 475,501 option (opt offset) | Thêm Danh TỐN không ĐƯỢC Danh +1
+09:53:01 TAP 378,420 dismiss result toast (tap catcher)
+09:53:02 TAP 378,420 dismiss result toast (tap catcher)
+09:53:02 TAP 85,936 open Hành sự tab | Hành sự
+09:53:03 TAP 378,839 act card | Giao thiệp Trò chuyện với cung nữ Ngồi nghe Cung n
+09:53:03 TAP 378,420 dismiss result toast (tap catcher)
+09:53:04 TAP 378,420 dismiss result toast (tap catcher)
+09:53:04 SWIPE 378 600 420
+09:53:05 SWIPE 378 600 420
+09:53:06 SWIPE 378 600 420
+09:53:06 SWIPE 378 600 420
+09:53:07 SWIPE 378 600 420
+09:53:08 SWIPE 378 600 420
+09:53:09 TAP 709,956 Sang buổi/ngày mới | Sang buổi
+09:53:09 TAP 85,936 open Hành sự tab | Hành sự
+09:53:10 TAP 378,587 act card | Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn
+09:53:10 TAP 378,420 dismiss result toast (tap catcher)
+09:53:11 TAP 378,420 dismiss result toast (tap catcher)
+09:53:11 SWIPE 378 600 420
+09:53:12 SWIPE 378 600 420
+09:53:13 SWIPE 378 600 420
+09:53:14 SWIPE 378 600 420
+09:53:14 SWIPE 378 600 420
+09:53:15 SWIPE 378 600 420
+09:53:16 TAP 709,956 Sang buổi/ngày mới | Sang buổi
+09:53:17 TAP 85,936 open Hành sự tab | Hành sự
+09:53:17 TAP 378,340 act card | Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ tron
+09:53:18 TAP 378,420 dismiss result toast (tap catcher)
+09:53:18 TAP 378,420 dismiss result toast (tap catcher)
+09:53:18 SWIPE 378 600 420
+09:53:19 SWIPE 378 600 420
+09:53:20 SWIPE 378 600 420
+09:53:21 SWIPE 378 600 420
+09:53:22 SWIPE 378 600 420
+09:53:22 SWIPE 378 600 420
+09:53:23 TAP 709,956 Sang buổi/ngày mới | Sang buổi
+09:53:24 TAP 85,936 open Hành sự tab | Hành sự
+09:53:24 TAP 378,340 act card | Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ tron
+09:53:25 TAP 378,420 dismiss result toast (tap catcher)
+09:53:25 TAP 378,420 dismiss result toast (tap catcher)
+09:53:26 SWIPE 378 600 420
+09:53:26 SWIPE 378 600 420
+09:53:27 SWIPE 378 600 420
+09:53:28 SWIPE 378 600 420
+09:53:29 SWIPE 378 600 420
+09:53:29 SWIPE 378 600 420
+09:53:30 TAP 709,956 Sang buổi/ngày mới | Sang ngày mới
+09:53:31 TAP 378,961 mend | Chuẩn bị thị tẩm
+09:53:32 TAP 483,673 option (offset from odds chip) | tạm Giữ chân Hoàng thượng Có cơ TỐN khôn
+09:53:32 TAP 378,961 mend | Chuẩn bị thị tẩm
+09:53:33 TAP 539,409 close x | ✕
+09:53:33 TAP 524,776 option (opt offset) | Cáo bệnh Rất vững TỐN không ĐƯỢC dưỡng sức, nghỉ t
+09:53:43 TAP 378,961 mend | Tiếp theo
+09:53:44 TAP 725,28 close x | ✕
+09:53:44 TAP 539,374 close x | ✕
+09:53:45 TAP 584,318 close x | ✕
+09:53:45 TAP 378,420 dismiss result toast (tap catcher)
+09:53:46 TAP 378,420 dismiss result toast (tap catcher)
+09:53:46 TAP 85,936 open Hành sự tab | Hành sự
+09:53:47 TAP 378,839 act card | Giao thiệp Trò chuyện với cung nữ Ngồi nghe Cung n
+09:53:47 SWIPE 378 600 420
+09:53:48 SWIPE 378 600 420
+09:53:49 SWIPE 378 600 420
+09:53:50 SWIPE 378 600 420
+09:53:51 SWIPE 378 600 420
+09:53:51 SWIPE 378 600 420
+09:53:52 TAP 709,956 Sang buổi/ngày mới | Sang buổi
+09:53:53 TAP 85,936 open Hành sự tab | Hành sự
+09:53:53 TAP 378,587 act card | Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn
+09:53:54 SWIPE 378 600 420
+09:53:55 SWIPE 378 600 420
+09:53:56 SWIPE 378 600 420
+09:53:56 SWIPE 378 600 420
+09:53:57 SWIPE 378 600 420
+09:53:58 SWIPE 378 600 420
+09:53:59 TAP 709,956 Sang buổi/ngày mới | Sang buổi
+09:53:59 TAP 85,936 open Hành sự tab | Hành sự
+09:54:00 TAP 378,340 act card | Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ tron
+09:54:00 TAP 378,420 dismiss result toast (tap catcher)
+09:54:01 TAP 378,420 dismiss result toast (tap catcher)
+09:54:01 SWIPE 378 600 420
+09:54:02 SWIPE 378 600 420
+09:54:03 SWIPE 378 600 420
+09:54:03 SWIPE 378 600 420
+09:54:04 SWIPE 378 600 420
+09:54:05 SWIPE 378 600 420
+09:54:06 TAP 709,956 Sang buổi/ngày mới | Sang buổi
+09:54:06 TAP 85,936 open Hành sự tab | Hành sự
+09:54:07 TAP 378,340 act card | Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ tron
+09:54:08 TAP 378,420 dismiss result toast (tap catcher)
+09:54:08 TAP 378,420 dismiss result toast (tap catcher)
+09:54:08 SWIPE 378 600 420
+09:54:09 SWIPE 378 600 420
+09:54:10 SWIPE 378 600 420
+09:54:11 SWIPE 378 600 420
+09:54:11 SWIPE 378 600 420
+09:54:12 SWIPE 378 600 420
+09:54:13 TAP 709,956 Sang buổi/ngày mới | Sang ngày mới
+09:54:14 TAP 524,798 option (opt offset) | Báo sớm, nói đã sạch kỳ Rất vững TỐN không ĐƯỢC th
+09:54:15 TAP 378,961 mend | Chuẩn bị thị tẩm
+09:54:17 TAP 483,661 option (opt offset) | tạm Giữ chân Hoàng thượng Có cơ TỐN không ĐƯỢC dựa
+09:54:18 TAP 378,961 mend | Chuẩn bị thị tẩm
+09:54:18 TAP 378,961 mend | Chuẩn bị thị tẩm
+09:54:18 BUG UX-OPTION-CENTRE tap at the centre of option "Cáo bệnh Rất vững TỐN không ĐƯỢC dưỡng s" hits the odds chip (opens Thang cơ duyên legend) instead of choosing
+09:54:18 TAP 524,776 option (offset from odds chip) | Cáo bệnh Rất vững TỐN không ĐƯỢC dưỡng s
+09:54:20 YEAR 4 age 23 TRUE RELOAD #2
+09:54:28 TAP 378,776 title solo | Chơi một mình Tiếp tục: Thường tại Triệu Vân Thườn
+09:54:28 TAP 350,742 title continue life | Tiếp tục kiếp này
+09:54:29 YEAR 3 age 22 TRUE RELOAD #3
+09:54:37 TAP 378,776 title solo | Chơi một mình Tiếp tục: Thường tại Triệu Vân Thườn
+09:54:37 TAP 350,742 title continue life | Tiếp tục kiếp này
+09:54:38 TAP 85,936 open Hành sự tab | Hành sự
+09:54:39 TAP 378,792 act card | Học tập · Tài nghệ Học tập · Tài nghệ Đọc sách giả
+09:54:40 SWIPE 378 600 420
+09:54:40 SWIPE 378 600 420
+09:54:41 SWIPE 378 600 420
+09:54:42 SWIPE 378 600 420
+09:54:43 SWIPE 378 600 420
+09:54:44 SWIPE 378 600 420
+09:54:44 TAP 709,956 Sang buổi/ngày mới | Sang ngày mới
+09:54:54 TAP 378,961 mend | Tiếp theo
+09:54:55 TAP 725,28 close x | ✕
+09:54:55 TAP 539,374 close x | ✕
+09:54:56 TAP 501,556 option (offset from odds chip) | Không mua TỐN không ĐƯỢC không !
+09:54:57 TAP 501,591 option (opt offset) | Từ chối khéo Rất vững TỐN không ĐƯỢC không !
+09:54:58 TAP 524,700 option (opt offset) | Đem tới Nội vụ phủ xin ghi sổ TỐN Hoàng hậu → ta: 
+09:54:58 TAP 413,670 continue (opt offset) | Tiếp tục Rất vững TỐN không ĐƯỢC không đổi gì thêm
+09:54:59 TAP 378,420 dismiss result toast (tap catcher)
+09:54:59 TAP 378,420 dismiss result toast (tap catcher)
+09:54:59 TAP 85,936 open Hành sự tab | Hành sự
+09:55:00 TAP 378,839 act card | Giao thiệp Trò chuyện với cung nữ Ngồi nghe Cung n
+09:55:01 SWIPE 378 600 420
+09:55:02 SWIPE 378 600 420
+09:55:03 SWIPE 378 600 420
+09:55:03 SWIPE 378 600 420
+09:55:04 SWIPE 378 600 420
+09:55:05 SWIPE 378 600 420
+09:55:06 TAP 709,956 Sang buổi/ngày mới | Sang buổi
+09:55:07 TAP 723,191 close x | ✕
+09:55:07 TAP 723,191 close x | ✕
+09:55:08 TAP 684,49 held news badge | !
+09:55:08 SWIPE 378 500 650
+09:55:09 TAP 538,748 option (opt offset) | Để sau
+09:55:09 TAP 378,420 dismiss result toast (tap catcher)
+09:55:10 TAP 378,420 dismiss result toast (tap catcher)
+09:55:10 TAP 85,936 open Hành sự tab | Hành sự
+09:55:11 TAP 378,589 act card | Học tập · Tài nghệ Đọc sách giải khuây Mở một cuốn
+09:55:12 TAP 378,420 dismiss result toast (tap catcher)
+09:55:12 TAP 378,420 dismiss result toast (tap catcher)
+09:55:12 SWIPE 378 600 420
+09:55:13 SWIPE 378 600 420
+09:55:14 SWIPE 378 600 420
+09:55:15 SWIPE 378 600 420
+09:55:15 SWIPE 378 600 420
+09:55:16 SWIPE 378 600 420
+09:55:17 TAP 709,956 Sang buổi/ngày mới | Sang buổi
+09:55:18 TAP 85,936 open Hành sự tab | Hành sự
+09:55:18 TAP 378,340 act card | Nghỉ ngơi Nghỉ ngơi một lát Rất vững Nằm nghỉ tron
+09:55:19 TAP 378,420 dismiss result toast (tap catcher)
+09:55:19 TAP 378,420 dismiss result toast (tap catcher)
+09:55:20 SWIPE 378 600 420
+09:55:21 SWIPE 378 600 420
+09:55:21 SWIPE 378 600 420
+09:55:22 SWIPE 378 600 420
+09:55:23 SWIPE 378 600 420
+09:55:24 SWIPE 378 600 420
+09:55:24 TAP 709,956 Sang buổi/ngày mới | Sang buổi
+09:55:25 YEAR 3 age 22 TRUE RELOAD (mid-year, after save) #4
+09:55:33 TAP 378,776 title solo | Chơi một mình Tiếp tục: Thường tại Triệu Vân Thườn
+09:55:33 TAP 350,742 title continue life | Tiếp tục kiếp này
+09:55:34 TAP 85,936 open Hành sự tab | Hành sự
+09:55:35 TAP 378,850 act card | Học tập · Tài nghệ Học tập · Tài nghệ Đọc sách giả
+09:55:36 SWIPE 378 600 420
+09:55:36 SWIPE 378 600 420
