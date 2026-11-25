@@ -51,3 +51,23 @@ Files: dev/build/j74.js, dev/build/jslots.js, dev/build/jcooplobby.js, dev/test/
 - Run: `python3 dev/build/assemble.py && node dev/test/coop-title-leave.js http://127.0.0.1:8791` (env COOP_SWAP=1 iPad hosts; CTL_SOLO=0 skips the solo part; CTL_ROOT=<main worktree> serves another build = bare FAIL proof; CTL_OUT=<dir> shots). ~6–8 min per run.
 - Gates done: coop-title-leave main 45/112 FAIL → fix 82/82 (SWAP0, SWAP1, on fix-6) + solo 30/30; coop-e2e SWAP0 142/142 (1 run 141/144 rebirth-calendar, rerun 142/142) SWAP1 142/142 (`node dev/test/coop-e2e.js <outdir> http://127.0.0.1:8791`); coop-cal-rebirth 51/51 (fix-6 test, on fix-6 + fix-7); keymove 12/12; quickcheck PASS.
 - Worktrees deleted; nothing local left.
+
+## REVIEW (B BIG co-op rv, opus, session_01N1tNP2DEvrn63HHg5eMcAz; START_CTX ≈2 % own estimate) — PASS
+PRIORITY #1 CHECK ('robot-coop-fix-7'): OD 0 | ledger 0 | claims B fixer 65tXs361 (archived → Foreman B successor) | main jslots.js:55 (source) | review/* robot-coop-fix-7 only | archive 0.
+Reviewed 879ca1c0 (game code = 4a62e4d9; 879ca1c0 is docs-only). Review head **review/robot-coop-fix-7-rv d470d5bc** (parent 879ca1c0, ancestor LIVE 9f72524b = LIVE now → fast-forward, no merge needed).
+- Root cause, own read: confirmed. (1) jslots ☰ wrapper called leaveRoom() in a room; (2) j74 home card ✕/Esc/tap-out = closeModal with #title up = 0 buttons, also SOLO. Family (law 11): every leaveRoom/COOP.leave caller listed (jslots solo-sổ capture kept — safe; jcooplobby back() pick/wait/join = lobby, before a life; freeze «Về màn đầu» now confirmed; new «Rời phòng»). Every showTitle path ends in a menu (bareCheck guard). Co-op save() never writes a solo slot (jcoopworld:1105), so dropping the ☰ leave loses nothing. S is undefined on first boot → lifeBehind false → no ✕ on first open (checked).
+- Laws: 1 both seats get the same menu / confirm / freeze panel (SWAP0+SWAP1); 2–3 leave still possible both ways (menu + freeze), ✕ = stay; 4 no numbers; 7 wording — FIXED by rv: «Phòng <code>» → «Ám hiệu <code>» (VANPHONG: Mã phòng forbidden, code = Ám hiệu), «giữ trong sổ» → «giữ trong danh sách» (sổ = save slot), freeze row «Hảo hữu: đang vắng» → «đã rời phòng» under the «Hảo hữu đã rời phòng» title; 9 kit only: kitModal home card (same .kpmenu n4 as the solo menu), kitConfirm KIT 83.9 (kdanger + ✕), kit ✕ 32.10, #coopfz freeze panel — no new CSS, consistency scan of title menus / confirms / freeze panels OK; 10 sizes = existing kit tiers; 12 Fold 755x1000 + iPad 1180x820 real shots of menu, confirm, freeze panel (both SWAPs), looked 3×: no cut text, no overflow.
+- Tests (local Worker coop/worker of the branch, wrangler dev --local :8791):
+  | test | LIVE 9f72524b | fix-7 4a62e4d9 | rv d470d5bc |
+  |---|---|---|---|
+  | coop-title-leave.js (co-op + solo, Fold host) | **45 ok / 59 FAIL** (bare FAIL) | 110/110 | — |
+  | coop-title-leave.js COOP_SWAP=1 (iPad host) | — | — | 110/110 |
+  | MUTATE: old ☰ leaveRoom wrapper put back | — | 53/84, 31 FAIL (C1/C3…) → test not vacuous | — |
+  | coop-e2e SWAP0 | — | — | 142/142 |
+  | coop-e2e SWAP1 | — | — | 141/144 («week after rebirth advances» = known fix-6 cause 4 noise) → rerun 142/142 |
+  | coop-keymove-unit | — | — | 12/12 |
+  | quickcheck (old save, perf, core gates) | — | — | PASS (open 2109 ms, render 294/313, buổi 1555/2059) |
+  Worker unchanged (no coop/worker diff) → no Worker deploy.
+- fix-6: independent. Sources merge clean onto fix-6 c4163a93; only index.html / sw.js / assemble.py conflict (build files). **Can land ALONE, before fix-6** (URGENT: SOLO bare #title is on LIVE). Whoever lands second: take main's assemble.py list + the branch's files, rebuild index.html/sw.js, rerun coop-title-leave + coop-cal-rebirth on the merged head.
+- Note (not blocking, pre-existing helper): the menu small line shows «Hảo hữu: chưa chọn thân phận» early in a room (jslots friendTxt).
+VERDICT: LAND READY review/robot-coop-fix-7-rv d470d5bc FOR MAIN 136 / LC14 (no Worker deploy).
