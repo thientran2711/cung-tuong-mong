@@ -134,7 +134,7 @@ BAL.linkRange={rl:[-100,100],ro:[0,100]};
    and mark "quá hạn mức" when wearing the piece would take her over it (coordinator 15/11 design "xa xỉ value vs her rank allowance", after the
    owner's 23:05Z dress-contest ruling; the older 08:10Z ruling hid the allowance — set false to hide it again, the row keeps "món này N · Bên mình N → M").
    Reviewer r1 (coordinator ruling 15/11): owner rule 08:10Z wins -> false (no allowance, no "quá hạn mức"). */
-Object.assign(BAL,{itd:{allow:false}});
+Object.assign(BAL,{itd:{allow:false,useGroups:4/* m-fix-2: most «N lọ còn U lần dùng» lines in one item note (jitd kitUseNote) */}});
 
 /* per-person dislikes (jdis, review/pcard-dislikes): n = how many each person has [min,max]; aff = her thiện cảm lost after a wrong gift; sung = Emperor's Sủng lost;
    refuse = chance (0-100) a wrong gift is refused and stays in the chest (then refAff / refSung are lost instead); talk = chance a talk reveals one;
