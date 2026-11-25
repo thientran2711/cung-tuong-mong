@@ -39,3 +39,13 @@ A = TdJrglOVNR (135 cr) · B = nVgbjVGYQD (135) · OUT A→B = DoPL73ypcl (940) 
 Prompt = Thái hậu giận recipe (THACT1_tools B_gian/out_gian/loop_gian), only the group text swapped (young emperor, topknot + small gold crown piece, royal-yellow dragon robe, one hand on the cracked teacup; "exactly two hands", disc same size/colour).
 LOOKED at A, B and 8-frame sheets of OUT and LOOP: same face and disc throughout, exactly two hands, cup stays in hand, disc stays round/red, flat green, no shards; B leans out modestly. Not yet done: chroma cut, disc-scale spec (THACT5 apply.py), BACK.
 CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/c3-seals/ : emp-gian-A.png, emp-gian-B.png, emp-gian-out-sheet.png, emp-gian-loop-sheet.png, emp-gian-out.mp4, emp-gian-loop.mp4
+
+## Pilot seal finished (0 cr): cut + THACT5 disc scale + BACK
+cut.sh out/loop; BACK = ffmpeg-reversed OUT cut with cut.sh back; meas_raw.py + apply.py (spec 1.00/1.12/1.12, BACK end 1.00). meas_after: rest 1.001, peak 1.121, loop 1.120, back_end 1.001, max dev from spec 0.003, centre drift 0.2 px, border alpha 0. Looked at the 5-frame sheet: clean edge, two hands, same disc.
+CDN review: https://ctm-img.victoria-tntt.workers.dev/img/_review/c3-seals/final/ : emp-act-gian.webp (LOOP) · -out · -back · emo-emp-act-gian.webp (160 px still) · emp-act-gian-sheet.png. Naming for live: img/kit/emo-anim/emp-act-gian{,-out,-back}.webp + img/kit/emo-emp-act-gian.webp (same as th-act-*).
+Note: Emperor's raw disc r 95.7 px (spec rest 74) → apply.py rescales; same tools for every group.
+
+## Wiring (0 cr) — branch review/c3-seals (from origin/main 5e013076)
+dev/build/jemoseal.js: roleSet now thaihau th-, emp emp-, heir tt-, eunuch tg-, guard tv-, official qu-, physician ty-, man nn-, royal vg-, consort pt-, cold pt-, maid cy-, mama cl-, prince ht-, princess cc-; setExtra {queen hh- (consort rank 7), kidM bt-, kidF bg-}; KES_SETRE includes every prefix. dev/build/jemo.js emoArtSet picks queen/kid splits before roleSet. Strict by CDN index: a prefix is used per key only when img/kit/emo-<prefix><key>.webp is on the CDN, so NOTHING changes in the game until sets are uploaded. Built (build_site.sh ok), smoke in Chromium 755x1000: no page errors, roles 15, regex ok.
+Assumption: old = role «mama», young = role «maid» (personRoleRank already makes an old maid a mama) → "old cung nữ + old ma ma" = cl-, "young cung nữ + young ma ma" = cy-.
+NOT yet: Fold/iPad shots (need live sets), small review. Spend still frozen for the batch.
