@@ -15,14 +15,25 @@
    the stage. Hooks: kitKnown(p) = face revealed (>=1), kitKnownName(p) = name known (>=2); unknown names show "???".
    Old saves: everyone present on load is fully known (3). */
 let K61NEW=false,K61VER=0;const KREG={},K61SRC={};
-function k61S(){if(!S)return null;if(!S.known){if(K61NEW)return null;S.known={};S.nkn={};k61All().forEach(e=>{S.known[kOf61(e)]=3});S.kRids=rivals.map(v=>v.id);K61VER++}return S.known}
+function k61S(){if(!S)return null;if(S.known&&!S.kwm){S.kwm=1;k61WMig()}if(!S.known){if(K61NEW)return null;S.known={};S.nkn={};k61All().forEach(e=>{S.known[kOf61(e)]=3});S.kRids=rivals.map(v=>v.id);K61VER++}return S.known}
 /* STAGE/LIST DESCRIPTORS ({kind,name,ini,col,info[,ref,sid]} from curPeople/homePeople, never real entities): resolve to the real person (ref, else her maid), never register the
    descriptor itself (review/emo-seal-vanish: kOf61 gave the maid descriptor a fresh key at level 0, so after one tap on its mood seal it became a "stranger" and its seal vanished).
    undefined = not a descriptor; null = descriptor with no known person (treated as known, as before); else the person. */
 function k61StageDesc(e){return e&&typeof e==="object"&&e.kind&&e.ini!=null&&e.info!=null&&e.id==null?(e.ref||(e.kind==="maid"&&S&&S.maid)||null):undefined}
 function kOf61(e){if(!e||!S)return"";{const d=k61StageDesc(e);if(d===null)return"";if(d)e=d}if(e===S)return"me";if(e===S.emp)return"emp";if(S.thO&&e===S.thO)return"th";let k;
- if((rivals||[]).includes(e))k="r"+e.id;else if(e.coop&&e.id!=null)k="r"+e.id/* coop-guest-names: the friend's stand-in while her entry is out of rivals (k61CoopFr) = her rivals key */;else if(e.sid!=null)k="s"+e.sid;else{if(!e.kk)e.kk="x"+(S.kseq=(S.kseq||0)+1);k=e.kk}
+ if((rivals||[]).includes(e))k="r"+e.id;else if(e.coop&&e.id!=null)k="r"+e.id/* coop-guest-names: the friend's stand-in while her entry is out of rivals (k61CoopFr) = her rivals key */;else if(e.sid!=null)k="s"+e.sid;else if(k=k61WKey(e)){if(typeof e.kk==="string"&&S.known&&S.known[k]==null&&S.known[e.kk]!=null)S.known[k]=S.known[e.kk]/* old save: what she knew under the old «x<n>» key */}else{if(!e.kk)e.kk="x"+(S.kseq=(S.kseq||0)+1);k=e.kk}
  if(k61GuestOwn(e))k="g"+k;else if(k61HostCopy(e))k="h"+k;KREG[k]=e;return k}
+/* flight-sid-rebirth (b) (law 6b, one j61 key = one person): a WORLD person (shared by both seats of a co-op room) is keyed from a stable
+   world identity, never from the per-seat counter S.kseq: each seat issued «x<n>» lazily from its own counter, so the two seats could give two
+   different world men the same «x34» and the world merge carried both (coop-sync-r review, after week 3 / rejoin, both seats).
+   Palace men «n<id>» (S.men id, j22/jmen/j96), court officers «o<office>» (S.court), the five house heads «t<i>» (S.trieu.H, CLANS order) and
+   the censor «tns» (S.trieu.ns), an NPC consort's child «c<name>» (names are one per person for life, jname/nmReg). «x<n>» stays only for her
+   own people and passing records. Old saves: the level she knew under the old «x<n>» (e.kk) is copied once to the new key (kOf61 + k61WMig). */
+function k61WKey(e){try{if(!e||typeof e!=="object"||!S||e.coop)return"";if(e.id!=null&&(S.men||[]).includes(e))return"n"+e.id;
+  for(const c in (S.court||{}))if(S.court[c]===e)return"o"+c;
+  const T=S.trieu;if(T){if(T.ns===e)return"tns";if(T.H)for(const c in T.H)if(T.H[c]===e){const i=typeof CLANS!=="undefined"?CLANS.indexOf(c):-1;return"t"+(i>=0?i:c)}}
+  if(e.name&&"fond" in e)for(const v of rivals||[])if(v&&!v.coop&&(v.kids||[]).includes(e))return"c"+e.name}catch(x){}return""}
+function k61WMig(){try{if(!S||!S.known)return;for(const e of k61All())if(e&&typeof e.kk==="string")kOf61(e);const T=S.trieu;if(T&&T.ns)kOf61(T.ns)}catch(e){console.error("k61WMig",e)}}
 /* coop-guest-names (law 6b, OD:L165 per PERSON): the two seats issue their own "x<n>" keys (S.kseq) and servant ids (sidN), so a person of the
    GUEST player (her maid, servants, children, home family — on her seat, and their copies on the friend entry of the host's seat) could share a
    key with a world / host person ("x1" = both players' maids): one S.known slot, one KREG slot → the mask read the other person's title over a
@@ -88,7 +99,7 @@ function kitKnownName(p){try{const e=k61PortEnt(p);return e?k61Named(e):true}cat
    never "Quý phi ???, Tần ???" (owner 16/11 'Phi ???'; reign-road fix). Used by Triều cục, sổ thị tẩm, thiên điện, ứng viên, quà, tư tình... */
 function kitNameList(L,fmt,none){const f=fmt||(v=>v.name),K=[],U=[];for(const v of L||[])(kitKnownName(v)?K:U).push(v);const A=K.map(f);if(U.length){const T=[...new Set(U.map(v=>{try{return k61MaskT(v)}catch(e){return"phi tần"}}))];const t=T.length===1?T[0]:"người trong cung";A.push(U.length===1?`${K.length?"thêm ":""}một vị ${t}`:`${K.length?"thêm ":""}${U.length} vị ${t}`)}return A.join(", ")||none||""}
 const K61STN=["Người lạ","Thấy mặt","Biết tên","Quen biết"];
-function k61PortEnt(p){if(!p)return null;{const d=k61StageDesc(p);if(d!==undefined)return d===S?null:d}if(p.kk)return k61Ent(p.kk);if(p.src&&K61SRC[p.src])return k61Ent(K61SRC[p.src]);if(p.__kp&&typeof p.__kp==="object")return p.__kp===S?null:p.__kp;
+function k61PortEnt(p){if(!p)return null;{const d=k61StageDesc(p);if(d!==undefined)return d===S?null:d}if(p.kk){if(k61WKey(p))return p/* a world person itself: her own e.kk is no longer her key */;return k61Ent(p.kk)}if(p.src&&K61SRC[p.src])return k61Ent(K61SRC[p.src]);if(p.__kp&&typeof p.__kp==="object")return p.__kp===S?null:p.__kp;
  if(S&&(p===S.emp||p===S.thO||(rivals||[]).includes(p)))return p;return null}
 /* what she can see: the dress tells rank and role, nothing more */
 function k61Kind(e){if(!S||!e)return"";if((rivals||[]).includes(e))return"consort";if(e===S.emp)return"emp";if(S.thO&&e===S.thO)return"th";
@@ -307,10 +318,18 @@ function k61Announce(text){try{if(!S||!S.known||!text)return false;const t=Strin
 /* name-mask (LUẬT SỬA CẢ NHÓM): EVERY log line (= Nhật ký, result sentences, toasts) passes the one kit mask once: a person she has not met by name
    never prints as a raw name ("Hà Thục Lan sang cung ngươi thăm hỏi" -> "Một vị Tần chưa quen biết sang cung ngươi thăm hỏi"); announcements first */
 (function(){const l0=log;log=function(h){try{k61Announce(h);if(typeof h==="string"&&S&&S.known)h=k61Scrub(h,true,"",h,true)}catch(e){}return l0.call(this,h)}})();
+let K61PL=null;function k61Places(){if(K61PL)return K61PL;const L=new Set();const add=n=>{if(typeof n==="string"&&/ (?:cung|điện|viện|hiên|các|phủ|uyển)$/i.test(n))L.add(n.toLowerCase())};
+ try{Object.keys(((typeof BAL!=="undefined"&&BAL.banCung)||{}).danh||{}).forEach(add)}catch(e){}try{if(typeof PLNAME!=="undefined")Object.values(PLNAME).forEach(v=>add(v&&v[0]))}catch(e){}
+ try{if(typeof PALN!=="undefined")PALN.forEach(add)}catch(e){}try{if(typeof HOMEN!=="undefined")add(HOMEN)}catch(e){}try{if(typeof places==="function")places().forEach(x=>add(x&&x.n))}catch(e){}
+ return K61PL=[...L]}/* fix-7 r2 (BIG REVIEWER #5): the words are kept ONLY inside a REAL place name of the game (banCung + PLNAME + map), never before any place word («… các cung nữ», «… phủ đầu», «… điện hạ» stay masked) */
+function k61InPlace(str,off,len){const s=String(str).toLowerCase();for(const P of k61Places()){let i=s.indexOf(P);while(i>=0){if(i<=off&&off+len<=i+P.length)return true;i=s.indexOf(P,i+1)}}return false}
 const K61SENT=/^\s+(?!thiện cảm|oán|ghen|Ân|quý |→|·|[-+−\d])[a-zà-ỹ]{2,}/;/* a lowercase word follows the name = the name is a sentence subject */
 function k61Scrub(s,lead,prev,ann,plain,post){const rx=k61Table();if(!rx||!s)return s;rx.lastIndex=0;if(!rx.test(s))return s;rx.lastIndex=0;
  return s.replace(rx,(m,ti,nm,off,str)=>{const k=K61MAP[nm];if(!k)return m;const e=k61Ent(k);if(!e||k61Named(e))return m;
   if(ann&&k61Announce(ann))return m;
+  /* button-crawl-fix-7 (robot s10 «Hà cô cô ở Tổng quản thái giám ??? cung»): words that are a PLACE (a palace / hall named like an unknown person,
+     «Vĩnh Thọ cung» vs a servant «… Vĩnh Thọ») are never masked — same rule as the map labels (K61SKIP), now for prose too */
+  if(k61InPlace(str+(post||""),off,m.length))return m;
   const before=(ti?"":(prev||""))+str.slice(0,off);let d=k61Mask(e,before,plain||K61SENT.test(str.slice(off+m.length)||post||""));/* owner 24/11 ~21:58Z: «???» never as the SUBJECT of a sentence — «Một vị Phi tâu xin …»; the «???» tag stays on a name tag / chip (nothing but a stat or a separator follows) */
   /* idempotent (review/coop-main-faults): a mask that holds the name itself (a friend named "Hảo hữu" → "Hảo hữu của ta") is already
      in place when the text around the name reads the mask; masking it again grew the line forever and hung the page (the two DOM observers, this one

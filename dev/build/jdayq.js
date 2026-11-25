@@ -71,7 +71,13 @@ function dqPoll(){return BAL.dayq.poll}
 function dqActEl(){try{const ov=document.getElementById("ov");if(ov&&!dqHidden(ov))return ov;
   /* the podium a card opens for ITSELF (j90 wiring 2, «podium first, then the panel»: Q[0].__podDone) is part of that card, not an activity over it */
   const own=Q[0]&&Q[0].__podDone;const k=document.querySelector(own?".kmov:not(.km-out),#kmrew,[id^=\"kroul\"],.kroul-ov":".kmov:not(.km-out),#kmrew,#kpodov,[id^=\"kroul\"],.kroul-ov");if(k)return k;
-  const D=window.DF;if(D&&D.F&&(D.play||(DQ.fo&&D.tk===DQ.fo))){const f=document.querySelector(".kfoc");return f||document.body}}catch(e){}return null}
+  /* button-crawl-fix-5 (F #10 25/11 11:01Z, robot s6d: «Sang ngày mới» greyed, Q = 12 cards, NOTHING on screen): the person view is an activity
+     only while it is ON SCREEN. A tap on another tab parks it (jdfv dfTabLayers: .kfoc hidden, DF.F kept) — she is no longer inside it, so the
+     waiting card shows on the tab she is on; a view whose layer is gone (no .kfoc) holds nothing either (it used to return document.body = held for ever) */
+  const D=window.DF;if(D&&D.F&&(D.play||(DQ.fo&&D.tk===DQ.fo))){const f=document.querySelector(".kfoc");if(f&&dqShown(f))return f;
+   if(D.play&&!f&&(typeof tab==="undefined"||tab==="act"))return document.body/* an on-figure game drawn on the stage itself */;return null}}catch(e){}return null}
+function dqShown(el){try{if(!el||!el.isConnected||dqHidden(el))return false;for(let e=el;e&&e!==document.body;e=e.parentElement)if(e.hidden)return false;
+  const cs=getComputedStyle(el);if(cs.display==="none"||cs.visibility==="hidden")return false;const r=el.getBoundingClientRect();return r.width>0&&r.height>0}catch(e){return false}}
 /* the call comes from her own tap INSIDE the activity (a card / panel she opens there) */
 function dqInside(a){try{const ev=window.event;if(!ev||!/click|pointer|touch|key|mouse/.test(ev.type))return false;const t=ev.target;return !!(t&&t.nodeType===1&&(a===document.body||a.contains(t)))}catch(e){return false}}
 /* the top card is the one already playing in the jdfv stage scene (its own repeated showModal) */
@@ -119,4 +125,50 @@ function dqInstall(){
 (function(){if(typeof kmOnReset==="function")kmOnReset(()=>{const arm=!!DQ.mt;DQ.want=null;DQ.newsHold=0;clearTimeout(DQ.t);clearTimeout(DQ.mt);DQ.t=DQ.mt=0;if(arm)try{dqArmModal()}catch(e){}})})();
 /* installed after every load-time wrapper and after the setTimeout(0) ones (jagent, jk4, jksize …): the outermost layer */
 setTimeout(()=>setTimeout(()=>{try{dqInstall()}catch(e){console.error("dayq install",e)}},0),0);
+/* m-fix-1 item 2 (robot M4 25/11 05:52Z + 05:58Z: «Sang ngày mới» greyed with NO cue while a card waited held behind a person view (kfoc) / away
+   from her room; a newcomer saw a dead button). j6 render() disables #next while Q holds a card; when that card is HELD here (gate (c) / the book:
+   nothing on screen shows it), the button SAYS WHY with the one waiting-words table (CTM_WAIT.dqHeld) in the same wrapping look as the co-op wait
+   (#next.kcwait, jcoopworld lockNext); the normal label comes back at the next render once the card is shown. Solo only (dqUi), like the hold. */
+function dqNextCue(){try{const n=document.getElementById("next");if(!n)return;const M=document.getElementById("modal");
+ const held=dqUi()&&n.disabled&&!S.mg&&Q.length>0&&(!M||dqHidden(M));const W=window.CTM_WAIT||{};const t=held&&W.dqRoom&&typeof dqRoomWait==='function'&&dqRoomWait()?W.dqRoom:W.dqHeld;/* button-crawl-fix-6 (A) */
+ if(held&&t){if(!n.dataset.dqCue){n.dataset.dqCue="1";if(!n.style.maxWidth&&n.offsetWidth)n.style.maxWidth=n.offsetWidth+"px";n.classList.add("kcwait")}if(n.textContent!==t)n.textContent=t;n.title=t}
+ else if(n.dataset.dqCue){delete n.dataset.dqCue;n.style.maxWidth="";n.classList.remove("kcwait");n.removeAttribute("title");if(n.textContent===W.dqHeld||n.textContent===W.dqRoom)n.textContent=(S&&(S.buoi||0)>=(typeof B4L==="number"?B4L:2))?"Sang ngày mới":"Sang buổi"}}catch(e){}}
+setTimeout(()=>setTimeout(()=>{try{if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);dqNextCue();return r}}
+ setInterval(dqNextCue,700)/* the hold releases on a close that may not render */;
+ try{const n=document.getElementById("next");if(n)new MutationObserver(()=>dqNextCue()).observe(n,{childList:true,characterData:true,subtree:true,attributes:true,attributeFilter:["disabled"]})}catch(e){}/* an inner render (a wrapper's saved r0) rewrites the label: put the cue back at once, no flicker; idempotent (no write when equal) */}catch(e){console.error("dayq cue",e)}},0),0);
+window.dqNextCue=dqNextCue;
+/* button-crawl-fix-5 SAFETY NET (F #10: «never a disabled #next with nothing on screen»): a card waiting in Q while #modal is hidden, no mini-game /
+   motion scene / person view / new-day host / title on screen, for BAL.dayq.wake ms → the waiting card is shown (showModal: every module's own gate
+   still runs, so a card a gate holds on purpose stays held). Solo only (dqUi; a co-op room paces Q with its own gates). Paint only: no S key, no draw. */
+function dqFreeScreen(){try{if(dqActEl()||dqDawn()||(typeof S!=="undefined"&&S&&S.mg))return false;
+  for(const sel of [".kfoc","#ov","#title","#kload","#kpodov","#kmrew",".kmov:not(.km-out)",".kroul-ov","[id^=\"kroul\"]","#ktut .ktut-card"]){const e=document.querySelector(sel);if(e&&dqShown(e))return false}return true}catch(e){return false}}
+function dqWake(){try{const M=document.getElementById("modal");const m=Q[0];
+  if(!dqUi()||!Q.length||!M||!dqHidden(M)||!dqFreeScreen()){DQ.wk=null;return}
+  const now=Date.now(),W=(BAL.dayq&&BAL.dayq.wake)||2000;if(!DQ.wk||DQ.wk.m!==m){DQ.wk={m,at:now,n:0};return}
+  if(now-DQ.wk.at<W*(1+DQ.wk.n))return;DQ.wk.n++;DQ.stat.woke=(DQ.stat.woke||0)+1;showModal()}catch(e){console.error("dayq wake",e)}}
+setTimeout(()=>setTimeout(()=>{try{setInterval(dqWake,700)}catch(e){}},0),0);
+window.dqWake=dqWake;
 window.DQ=DQ;
+/* button-crawl-fix-6 (F #12 25/11 12:53Z; BIG REVIEWER #4 bc-stack-review.md @3b8ed32e; robot s4d no-clock loops y8/y11, handover 37cfc029):
+   «Sang buổi / Sang ngày mới» greyed while NOTHING on screen shows what it waits for — two more members of the fix-5 family:
+   (A) a visitor / person scene («Có người đến», jdfv encounter: Q[0].dfSeen, DF.encM === Q[0]) plays only in HER ROOM; a tap on another tab parks it
+       (dfTabLayers hides .kfoc) and the turn waits on it for ever while she is on Dư đồ / a place page (s4d: «Tích Cần viện», 150 taps, Q = 1).
+       → the button says so (CTM_WAIT.dqRoom) and ONE tap on it takes her back to her room, where the scene goes on (same as tapping «Hành sự»).
+   (B) a STALE S.mg (a lesson / mini-game record with no mini-game screen: #ov hidden, no on-figure game) → the button stays greyed with no cue.
+       → the safety net reopens it the way loading a save does (resumeMG; jk4 clears S.mg when no game opens), after BAL.dayq.wake ms, solo only;
+       a tap on the greyed button does the same at once.
+   Paint / navigation only: no random draw, no new S key; co-op rooms untouched (dqUi). */
+function dqRoomWait(){try{const m=Q[0],D=window.DF;return dqUi()&&!!m&&typeof tab!=="undefined"&&tab!=="act"&&!!(m.dfSeen&&D&&D.encM===m&&D.F)}catch(e){return false}}
+function dqMgStale(){try{if(!dqUi()||!S.mg)return false;const ov=document.getElementById("ov");if(ov&&!dqHidden(ov))return false;if(window.DF&&DF.play)return false;
+  const M=document.getElementById("modal");if(M&&!dqHidden(M))return false;if(dqDawn())return false;
+  for(const sel of [".kmov:not(.km-out)","#kmrew","#kpodov",".kroul-ov","[id^=\"kroul\"]","#title","#kload"]){const e=document.querySelector(sel);if(e&&dqShown(e))return false}return true}catch(e){return false}}
+function dqBring(){try{if(dqRoomWait()){DQ.stat.room=(DQ.stat.room||0)+1;tab="act";render();return true}
+  if(dqMgStale()){DQ.stat.mgStale=(DQ.stat.mgStale||0)+1;const k=S.mg&&S.mg.k;try{resumeMG()}catch(e){console.error("dayq mg",e)}try{const ov=document.getElementById("ov");if(S.mg&&ov&&dqHidden(ov)){console.warn("dayq: stale mini-game record cleared",k);S.mg=null}}catch(e){}render();return true}
+  const M=document.getElementById("modal");if(dqUi()&&Q.length&&M&&dqHidden(M)&&dqFreeScreen()){showModal();return true}}catch(e){console.error("dayq bring",e)}return false}
+/* a disabled button gets no click: the tap is read on pointerup (like jact's grey cards); only when the turn cannot run (greyed, or a card / S.mg left
+   while the button was not re-rendered — robot s4d LIVE: enabled «Sang buổi», Q = 1, 150 taps with no effect) */
+document.addEventListener("pointerup",e=>{try{const n=e.target&&e.target.closest&&e.target.closest("#next");if(!n||!dqUi()||!(n.disabled||Q.length||S.mg))return;dqBring()}catch(x){}},true);
+(function(){const t0=setInterval(()=>{try{if(!DQ.mgw){if(dqMgStale())DQ.mgw={at:Date.now(),k:S.mg};return}if(!dqMgStale()||S.mg!==DQ.mgw.k){DQ.mgw=null;return}
+  if(Date.now()-DQ.mgw.at>=((BAL.dayq&&BAL.dayq.wake)||2000)){DQ.mgw=null;dqBring()}}catch(e){}},700)})();
+/* the cue: (A) says where the waiting person is (CTM_WAIT.dqRoom, in dqNextCue above); the m-fix-1 cue (dqHeld) stays for every other held card */
+window.dqBring=dqBring;

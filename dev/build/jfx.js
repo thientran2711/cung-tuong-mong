@@ -299,6 +299,12 @@ function kfRipple(el,e){const r=el.getBoundingClientRect();if(!r.width||r.width*
  const box=document.createElement("div");box.className="kfrip";box.style.cssText=`left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px;border-radius:${cs.borderRadius}`;
  const d=Math.hypot(Math.max(e.clientX-r.left,r.right-e.clientX),Math.max(e.clientY-r.top,r.bottom-e.clientY))*2;const i=document.createElement("i");i.style.cssText=`left:${e.clientX-r.left-d/2}px;top:${e.clientY-r.top-d/2}px;width:${d}px;height:${d}px`;
  box.appendChild(i);document.body.appendChild(box);setTimeout(()=>box.remove(),620)}
+/* kfCls(el): the element's classes WITHOUT the transient press class .kfdown (button-crawl-fix-4, owner OD 25/11 ~05:10Z «nút nào cũng work»).
+   Every «did this card change?» signature reads kfCls, never className: the press itself (finger / mouse DOWN adds .kfdown, plus a ripple node
+   in body) must never look like a changed card — it re-built the option rows UNDER the finger (kitOptFinal), the pointer-down target left the
+   page and the browser dropped the click (mouse; iOS Safari drops it on touch too). */
+function kfCls(el){return String(el&&el.className||"").replace(/(^|\s)kfdown(?=\s|$)/g,"").trim()}
+window.kfCls=kfCls;
 let kfLastNo=0;
 function kfLocked(el,e){const now=Date.now();if(now-kfLastNo<350)return;kfLastNo=now;try{if(kfOn())vib("lock")}catch(x){}KFX.log.push("lock");
  if(!kfStill()&&el.animate)try{el.animate([{translate:"0 0"},{translate:"-4px 0"},{translate:"4px 0"},{translate:"-3px 0"},{translate:"2px 0"},{translate:"0 0"}],{duration:300,easing:"ease-out"})}catch(x){}
