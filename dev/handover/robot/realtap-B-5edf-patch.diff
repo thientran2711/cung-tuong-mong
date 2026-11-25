@@ -1,6 +1,6 @@
 diff -ruN a/dev/test/realtap.js b/dev/test/realtap.js
 --- a/dev/test/realtap.js	2026-11-25 20:29:45.228610425 +0000
-+++ b/dev/test/realtap.js	2026-11-25 22:29:27.346719864 +0000
++++ b/dev/test/realtap.js	2026-11-25 22:49:07.830441733 +0000
 @@ -12,7 +12,7 @@
  const path = require('path');
  
@@ -37,16 +37,19 @@ diff -ruN a/dev/test/realtap.js b/dev/test/realtap.js
      if (!cover && t) { const c = t.closest('[id]'); cover = (t.tagName.toLowerCase() + (t.id ? '#' + t.id : '') + (typeof t.className === 'string' && t.className ? '.' + t.className.trim().split(/\s+/).slice(0, 2).join('.') : '') + (c && c !== t ? ' in #' + c.id : '')).slice(0, 80) }
    }
    const off = r.bottom < 0 || r.top > H || r.right < 0 || r.left > W;
-@@ -50,37 +54,44 @@
+@@ -50,37 +54,46 @@
      return target;
    }
    /* bring the element into the viewport like a person: scroll the page / its scroller with the wheel (no DOM calls) */
 -  async function scrollTo(h) {
 +  async function scrollTo(h, info = {}) {
++    let top0 = null;
      for (let i = 0; i < 8; i++) {
 -      const p = await h.evaluate(PROBE).catch(() => ({ gone: true }));
+-      if (p.gone || p.zero || p.ok || !p.off && p.cover !== 'outside viewport') return p;
 +      const p = await h.evaluate(PROBE, info.avoid || null).catch(() => ({ gone: true }));
-       if (p.gone || p.zero || p.ok || !p.off && p.cover !== 'outside viewport') return p;
++      if (p.gone || p.zero || p.ok || !p.off && !p.clip && p.cover !== 'outside viewport') return p; /* U1c #15: a card clipped by its own scroller (NBBC «Để sau» y 783 inside #mb ch 514) is NOT done — wheel its scroller */
++      if (i === 0) top0 = p.top;
        const vh = (page.viewportSize() || { height: 800 }).height;
        const dy = p.top > vh ? Math.min(p.top - vh * 0.5, vh * 0.8) : p.bottom < 0 ? Math.max(p.bottom - vh * 0.5, -vh * 0.8) : (p.top > vh / 2 ? vh * 0.4 : -vh * 0.4);
 -      const box = await h.evaluate(e => { let s = e.parentElement; while (s && s !== document.body) { const cs = getComputedStyle(s); if (/(auto|scroll)/.test(cs.overflowY) && s.scrollHeight > s.clientHeight) { const r = s.getBoundingClientRect(); return { x: r.left + r.width / 2, y: Math.max(r.top + 10, Math.min(r.bottom - 10, innerHeight / 2)) } } s = s.parentElement } return null }).catch(() => null);
@@ -58,8 +61,8 @@ diff -ruN a/dev/test/realtap.js b/dev/test/realtap.js
 -    return h.evaluate(PROBE).catch(() => ({ gone: true }));
 +    let pe = await h.evaluate(PROBE, info.avoid || null).catch(() => ({ gone: true }));
 +    /* U1c #12 (7HVJ «Để sau» at y 2046, viewport 1000: no wheel-scrollable ancestor moves it): a person with a keyboard Tabs to the button = focus() scrolls EVERY ancestor box so it shows. Used only after the wheel failed; logged as a kit reach row (the option sits where no touch scroll reaches it) */
-+    if (!pe.ok && !pe.gone && !pe.zero && !pe.disabled && (pe.off || pe.cover === 'outside viewport')) {
-+      const vh2 = (page.viewportSize() || { height: 800 }).height; (st.reachRows = st.reachRows || []).push({ screen: (info.screen || '').slice(0, 60), label: (info.label || pe.lab || '').slice(0, 40), top: Math.round(pe.top), vh: vh2 }); if (st.reachRows.length > 40) st.reachRows.shift(); st.reachFocus = (st.reachFocus || 0) + 1;
++    if (!pe.ok && !pe.gone && !pe.zero && !pe.disabled && (pe.off || pe.clip || pe.cover === 'outside viewport')) {
++      const vh2 = (page.viewportSize() || { height: 800 }).height; (st.reachRows = st.reachRows || []).push({ screen: (info.screen || '').slice(0, 60), label: (info.label || pe.lab || '').slice(0, 40), top: Math.round(pe.top), top0: top0 == null ? null : Math.round(top0), vh: vh2, wheelMoved: top0 != null && Math.abs(pe.top - top0) > 4, clip: !!pe.clip, sc: pe.sc || null }); /* wheelMoved false = no touch scroll moved it: a finger could not reach it either (game/kit bug evidence) */ if (st.reachRows.length > 40) st.reachRows.shift(); st.reachFocus = (st.reachFocus || 0) + 1;
 +      await h.evaluate(e => { try { e.focus({ preventScroll: false }) } catch (x) {} if (e.getBoundingClientRect().top > innerHeight || e.getBoundingClientRect().bottom < 0) e.scrollIntoView({ block: 'center' }) }).catch(() => {}); await page.waitForTimeout(400);
 +      pe = await h.evaluate(PROBE, info.avoid || null).catch(() => ({ gone: true })) }
 +    return pe;
@@ -92,7 +95,7 @@ diff -ruN a/dev/test/realtap.js b/dev/test/realtap.js
      return true;
    }
    async function dead(info, p) {
-@@ -89,6 +100,6 @@
+@@ -89,6 +102,6 @@
      const d = { k: 'DEAD BUTTON', screen: info.screen || '?', label: info.label || (p && p.lab) || '?', cover: p && (p.gone ? 'element gone' : p.zero ? 'zero size' : p.cover) || '?', shot, dev: opt.dev };
      st.deadList.push(d); log(d); return false;
    }
@@ -102,7 +105,7 @@ diff -ruN a/dev/test/realtap.js b/dev/test/realtap.js
  module.exports = { make, PROBE };
 diff -ruN a/dev/test/robot-rt-coop.js b/dev/test/robot-rt-coop.js
 --- a/dev/test/robot-rt-coop.js	2026-11-25 20:29:45.242367139 +0000
-+++ b/dev/test/robot-rt-coop.js	2026-11-25 22:29:27.358220925 +0000
++++ b/dev/test/robot-rt-coop.js	2026-11-25 22:49:07.834081726 +0000
 @@ -51,14 +51,27 @@
  
  async function seatLoop(ctx, who, dev, other) {
@@ -150,7 +153,7 @@ diff -ruN a/dev/test/robot-rt-coop.js b/dev/test/robot-rt-coop.js
    const hDev = A.host || 'fold', gDev = A.guest || 'ipad';
 diff -ruN a/dev/test/robot-rt.js b/dev/test/robot-rt.js
 --- a/dev/test/robot-rt.js	2026-11-25 20:29:45.236862331 +0000
-+++ b/dev/test/robot-rt.js	2026-11-25 22:29:27.348462636 +0000
++++ b/dev/test/robot-rt.js	2026-11-25 22:49:07.832533224 +0000
 @@ -40,6 +40,7 @@
  /* RESUME (container restart): <out>/<life>.ckpt.json holds R + the game's localStorage save + rng state; resume=1 continues the SAME life */
  const CKPT = path.join(OUT, LIFE + '.ckpt.json'); let ck = null;
@@ -174,7 +177,7 @@ diff -ruN a/dev/test/robot-rt.js b/dev/test/robot-rt.js
        const svf = await dumpStuck('stuck-' + R.harness.stuck); const sv = !!svf; /* evidence FIRST, then the unstick ladder */
 +      const dm = await p.evaluate(() => { const o = { ls: {}, g: {} }; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); o.ls[k] = localStorage.getItem(k) } } catch (e) {}
 +        const t = (n, f) => { try { o.g[n] = f() } catch (e) { o.g[n] = 'ERR ' + e.message } };
-+        t('COOPW.tr', () => (typeof COOPW !== 'undefined' && COOPW.tr || []).slice(-60)); t('COOPW.on', () => COOPW.on); t('COOP.state', () => typeof COOP !== 'undefined' ? COOP.state : null); t('COOP.status', () => COOP.state.status); t('S.buoi', () => S.buoi); t('S.week', () => S.week); t('CW.rbuoi', () => CW.rbuoi); t('CW.rweek', () => CW.rweek); t('PG', () => PG); t('topLayerBtns', () => { const root = document.querySelector('#modal,.dlg,#ktut,#coopfz') || document.body; return [...root.querySelectorAll('button,[role=button]')].slice(0, 40).map(b => { const r = b.getBoundingClientRect(), x = r.left + r.width / 2, y = Math.min(Math.max(r.top + r.height / 2, 1), innerHeight - 1), t = document.elementFromPoint(Math.min(Math.max(x, 1), innerWidth - 1), y), cn = e => e ? (e.tagName.toLowerCase() + (e.id ? '#' + e.id : '') + (typeof e.className === 'string' && e.className ? '.' + e.className.trim().split(/\s+/).slice(0, 3).join('.') : '')) : null; let sc = null; for (let e = b.parentElement; e && e !== document.body; e = e.parentElement) { const cs = getComputedStyle(e); if (/(auto|scroll|hidden|clip)/.test(cs.overflowY) && e.scrollHeight > e.clientHeight + 2) { sc = { c: cn(e), top: Math.round(e.scrollTop), sh: e.scrollHeight, ch: e.clientHeight, oy: cs.overflowY }; break } } return { t: (b.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 40), cls: cn(b), r: [Math.round(r.left), Math.round(r.top), Math.round(r.width), Math.round(r.height)], hit: cn(t), self: t === b || b.contains(t), sc } }) }); t('topLayerHtml', () => ((document.querySelector('#modal .modal,#modal,.dlg') || document.body).outerHTML || '').replace(/data:[^"')]{60,}/g, 'data:…').slice(0, 7000)); t('titleVisible', () => { const e = document.querySelector('#title'); return !!(e && e.getClientRects().length) }); return JSON.stringify(o) }).catch(() => null);
++        t('COOPW.tr', () => (typeof COOPW !== 'undefined' && COOPW.tr || []).slice(-60)); t('COOPW.on', () => COOPW.on); t('COOP.state', () => typeof COOP !== 'undefined' ? COOP.state : null); t('COOP.status', () => COOP.state.status); t('S.buoi', () => S.buoi); t('S.week', () => S.week); t('CW.rbuoi', () => CW.rbuoi); t('CW.rweek', () => CW.rweek); t('PG', () => PG); t('topLayerBtns', () => { const root = document.querySelector('#modal,.dlg,#ktut,#coopfz') || document.body; return [...root.querySelectorAll('button,[role=button]')].slice(0, 40).map(b => { const r = b.getBoundingClientRect(), x = r.left + r.width / 2, y = Math.min(Math.max(r.top + r.height / 2, 1), innerHeight - 1), t = document.elementFromPoint(Math.min(Math.max(x, 1), innerWidth - 1), y), cn = e => e ? (e.tagName.toLowerCase() + (e.id ? '#' + e.id : '') + (typeof e.className === 'string' && e.className ? '.' + e.className.trim().split(/\s+/).slice(0, 3).join('.') : '')) : null; let sc = null; const chain = []; for (let e = b.parentElement; e && e !== document.body; e = e.parentElement) { const cs = getComputedStyle(e), q = e.getBoundingClientRect(); if (/(auto|scroll|hidden|clip)/.test(cs.overflowY) && e.scrollHeight > e.clientHeight + 2) { const o = { c: cn(e), top: Math.round(e.scrollTop), sh: e.scrollHeight, ch: e.clientHeight, oy: cs.overflowY, r: [Math.round(q.top), Math.round(q.bottom)], pos: cs.position }; if (!sc) sc = o; chain.push(o) } } /* U1c #15: EVERY clipping/scrolling ancestor (not only the nearest) — tells a finger-reachable option (some auto/scroll ancestor can move it) from a clipped-for-good one (only hidden/clip ancestors) */ return { t: (b.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 40), cls: cn(b), r: [Math.round(r.left), Math.round(r.top), Math.round(r.width), Math.round(r.height)], hit: cn(t), self: t === b || b.contains(t), sc, chain } }) }); t('topLayerHtml', () => ((document.querySelector('#modal .modal,#modal,.dlg') || document.body).outerHTML || '').replace(/data:[^"')]{60,}/g, 'data:…').slice(0, 7000)); t('titleVisible', () => { const e = document.querySelector('#title'); return !!(e && e.getClientRects().length) }); return JSON.stringify(o) }).catch(() => null);
 +      if (dm) fs.writeFileSync(path.join(SHOTS, 'stuck-' + R.harness.stuck + '-dump.json'), dm);
 +      try { fs.writeFileSync(path.join(SHOTS, 'stuck-' + R.harness.stuck + '-trace.json'), JSON.stringify({ trace: (R.trace || []).slice(-60), dead: (R.dead || []).slice(-6).map(d => ({ screen: d.screen, label: d.label, cover: d.cover, at: d.at })), reach: rt.stats().reachRows || null, steps: R.steps, at: sec() })) } catch (x) {} /* U1c #13: what the harness did in the last taps before the stuck (the notice «Tin báo» dump shows the option rects but not whether a tap was tried) */
        bug('stuck', 'no progress ' + Math.round(STUCK_MS / 60e3) + ' min on ' + sc.layer + ' «' + sc.title + '»', { shot, save: sv ? svf : null, S: sc.S, buttons: sc.b.map(b => b.t).slice(0, 12) });
