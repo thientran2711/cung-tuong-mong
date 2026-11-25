@@ -92,8 +92,13 @@ def numKey(tail):
   m=re.match(r'[+−-]?\$\{(?:balSg|balAb)\(([A-Za-z_.0-9\[\]]+)\)\}',tail) or re.match(r'[+−-]\$\{([A-Za-z_.0-9\[\]]+)\}',tail)
   return m.group(1) if m else None
 import json
-try:BALJ=json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'relshow-bal.json')))
-except Exception:BALJ={}
+# W10: without the BAL dump every balSg(BAL.x) fall reads as sign 0 and lands in RAW (W9 saw «RAW 29» = 29 falls, all < 0).
+# So the dump is required and must be newer than the built game: build it with
+#   python3 dev/build/assemble.py && node dev/test/relshow-bal.js $PWD/dev/index.html dev/test/relshow-bal.json
+_BJ=os.path.join(os.path.dirname(os.path.abspath(__file__)),'relshow-bal.json');_IX=os.path.join(R,'..','index.html')
+if not os.path.exists(_BJ) or (os.path.exists(_IX) and os.path.getmtime(_BJ)<os.path.getmtime(_IX)):
+  sys.exit('relshow-scan: dev/test/relshow-bal.json missing or older than dev/index.html — run: node dev/test/relshow-bal.js $PWD/dev/index.html dev/test/relshow-bal.json')
+BALJ=json.load(open(_BJ))
 def SIGN(path):
   # sign of a bare BAL path (relshow-bal.json = JSON.stringify(BAL) of the built game); 0 when unknown
   if not path.startswith('BAL.'):return 0
