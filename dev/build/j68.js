@@ -173,6 +173,14 @@ function evHoldRe(){if(!EVHOLD.length)return 0;const keep=[];let n=0;
   if(c){if(h.m.opt)c.opt=1;keep.push({m:c,at:h.at,K:h.K});n++}else evDropInfo(h.m)}
  EVHOLD=keep;return n}
 (function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{evHoldRe()}catch(x){console.error(x)}return r}})();
+/* save-unseen-lists (MAIN 140 25/11 ~13:10Z «anything the player has not seen yet must survive save/load (and co-op snap)», LAW 11): the held
+   optional cards are cards she has NOT seen yet; they were page memory only, so a reload dropped them. ser() now writes them (top-level evh: the
+   card in its sổ form — the same serQ rules as Q: pid / generator / data card / notice; a card that runs code and has no generator cannot be
+   written and is left out, as in Q), at most E68S.hold rows. A load with nothing held in memory (slot «Tiếp tục», co-op seat restore) makes them
+   again from that data against the loaded world (deserQ); a rebuild in place keeps evHoldRe above. Old saves (no evh): nothing held, as before. */
+function evSer1(m){try{const q0=Q;Q=[m];try{return (serQ()||[])[0]||null}finally{Q=q0}}catch(e){return null}}
+(function(){const s0=ser;ser=function(){const d=s0.apply(this,arguments);try{if(d&&typeof d==="object"&&EVHOLD.length)d.evh=EVHOLD.slice(0,E68S.hold).map(h=>{const e=evSer1(h.m);return e?{e,at:h.at,K:h.K,opt:h.m.opt?1:0}:null}).filter(Boolean)}catch(x){console.error("evh ser",x)}return d}})();
+(function(){const d0=deser;deser=function(d){const n0=EVHOLD.length;const r=d0.apply(this,arguments);try{if(!n0&&!EVHOLD.length&&d&&Array.isArray(d.evh))for(const h of d.evh.slice(0,E68S.hold)){let c=null;try{c=deserQ([h.e])[0]||null}catch(x){c=null}if(c){if(h.opt)c.opt=1;EVHOLD.push({m:c,at:h.at,K:h.K})}}}catch(x){console.error("evh deser",x)}return r}})();
 
 (function(){const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{evRelease()}catch(x){console.error(x)}return r}})();
 (function(){const t0=typeof tdPop==="function"?tdPop:null;if(!t0)return;tdPop=function(){const n=Q.length;const r=t0.apply(this,arguments);if(Q.length>n)Q[Q.length-1].opt=1;return r}})();

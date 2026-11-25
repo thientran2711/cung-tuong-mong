@@ -3,8 +3,11 @@
    Math.random for the whole of start() (faces drawn from a second stream of the same seed, so late-loading art does not
    shift the rolls), plus a snapshot of the faces the first showing picked. Every way into a new life (any slot,
    "Kiếp mới", "Chuyển kiếp", a reload mid-creation) realises that same roll; a fresh roll is made only when the player
-   presses "Nhận thân phận". Until then nothing is saved to the slot. "Đổi thân phận" costs PD_COST Phúc duyên and
-   stores a new roll the same way.
+   presses "Nhận thân phận". "Đổi thân phận" costs PD_COST Phúc duyên and stores a new roll the same way.
+   Saving (save-unseen-lists, MAIN 140 25/11 ~13:35Z «every life start + every advance writes the save at once»): the new life is written to the
+   slot AT ONCE when it is rolled, with the mark nl {seed} while the identity card is open; «Tiếp tục kiếp này» on such a sổ opens the same card
+   again (same roll, Đổi thân phận still possible). «Nhận thân phận» writes the slot at once (jqSaveNow) without the mark. A sổ whose mark no longer
+   matches the stored roll (another slot rolled since) loads as an accepted life.
    Phúc duyên ("ctm-phucduyen") is earned by milestones and survives death; it buys rerolls only, no power in a life. */
 const NL_KEY="ctm-nextlife",PD_KEY="ctm-phucduyen",PD_COST=100;
 /* measured (sensible bot, 41 lives): median ~82, mean ~98, quartiles ~37/152; random bot ~7. Festivals pay once per year
@@ -22,8 +25,10 @@ let NLP=null,NLR=null;
 /* face pickers use their own stream while a life is being rolled */
 (function(){const wrap=f=>function(){if(!NLR)return f.apply(this,arguments);const pr=Math.random;Math.random=NLR.face;try{return f.apply(this,arguments)}finally{Math.random=pr}};
  if(typeof drawF==="function")drawF=wrap(drawF);if(typeof figPick==="function")figPick=wrap(figPick);if(typeof faceFor==="function")faceFor=wrap(faceFor)})();
-/* nothing is written to a slot while the identity card is open */
-(function(){const s0=save;save=function(){if(NLP&&Array.isArray(Q)&&Q.some(m=>m&&m.nl))return;/* save-year-rollback: hold only while the card is really in the queue (a card dropped from Q some other way never stops every save of the life) */return s0.apply(this,arguments)}})();
+/* the slot holds the new life from its first moment; the open identity card rides as the mark nl (a solo life only: a co-op life is the room's) */
+(function(){const s0=ser;ser=function(){const d=s0.apply(this,arguments);try{if(d&&NLP&&S&&!S.dead&&!S.coopRoom&&!(window.COOPW&&COOPW.on))d.nl={seed:NLP.seed}}catch(e){}return d}})();
+(function(){const d0=deser;deser=function(d){const r=d0.apply(this,arguments);try{if(d&&!(window.COOPW&&COOPW.on)){const g=d.nl&&store.get(NL_KEY);
+ if(g&&g.seed===d.nl.seed){NLP={seed:g.seed};if(g.re)S.nlRe=g.re;Q=Q.filter(m=>!m.nl);Q.unshift(nlCardM())}else{NLP=null;if(d.nl){if(!S.pdw)S.pdw=pdBase();if(S.pdLife==null)S.pdLife=0}}}}catch(e){console.error("nl load",e)}return r}})();
 const NL_FK=["fc","fk","fid","face","hue","fv"];
 function nlHolders(){if(!S)return[];const H=[S,S.maid,S.emp,S.thO];const C=S.court||{};Object.keys(C).sort().forEach(k=>H.push(C[k]));(rivals||[]).forEach(v=>H.push(v));
  try{if(typeof allServ==="function")allServ().forEach(x=>H.push(x))}catch(e){}(S.men||[]).forEach(m=>H.push(m));(S.kids||[]).forEach(k=>H.push(k));(rivals||[]).forEach(v=>(v.kids||[]).forEach(k=>H.push(k)));
@@ -48,11 +53,13 @@ function nlCardHTML(){const o=S.origin,pts=pdGet(),ok=pts>=PD_COST,srv=typeof is
  <p class="past">Thân phận này đã định sẵn: tải lại trang, chọn ô khác hay bấm Kiếp mới vẫn ra đúng thân phận này. Phúc duyên đang có: <b>${pts}</b>.</p>
  <div class="opts nlopts"><button class="opt" data-nl="ok">Nhận thân phận<small>tốn: không · thành: bắt đầu kiếp này</small></button>
  <button class="opt" data-nl="re" ${ok?"":"disabled"}>Đổi thân phận (−${PD_COST} Phúc duyên)${ok?`<small>tốn: Phúc duyên -${PD_COST} · thành: thân phận mới (cũng định sẵn)</small>`:`<small data-kp="1">Cần ${PD_COST} Phúc duyên, đang có ${pts}</small>`}</button></div>`}
-function nlCard(){Q=Q.filter(m=>!m.nl);Q.unshift({nl:1,t:"Thân phận kiếp này",cls:"nlcard",faces:[[pMe(),S.name]],h:nlCardHTML(),opts:[],onClose:()=>nlAccept(true)});showModal();
+function nlCardM(){return {nl:1,t:"Thân phận kiếp này",cls:"nlcard",faces:[[pMe(),S.name]],h:nlCardHTML(),opts:[],onClose:()=>nlAccept(true)}}
+function nlCard(){Q=Q.filter(m=>!m.nl);Q.unshift(nlCardM());showModal();
  try{const d=store.get(NL_KEY);if(d&&NLP&&d.seed===NLP.seed)nlFaces(d)}catch(e){}}
 function nlAccept(viaClose){if(!NLP)return;try{const d=store.get(NL_KEY);if(d&&d.seed===NLP.seed)nlFaces(d)}catch(e){}
  NLP=null;nlNew();S.pdw=pdBase();S.pdLife=0;if(S.nlRe)log(`Đã đổi thân phận ${S.nlRe} lần (−${S.nlRe*PD_COST} Phúc duyên).`);
- if(!viaClose){Q=Q.filter(m=>!m.nl);showModal();render()}}
+ if(!viaClose){Q=Q.filter(m=>!m.nl);showModal();render()}
+ try{Q=Q.filter(m=>!m.nl);if(typeof jqSaveNow==="function")jqSaveNow();else save()}catch(e){}}/* the accepted life is in the slot at once (0 s reload → «Tiếp tục kiếp này»), without the mark */
 function nlReroll(){if(!NLP)return;const pts=pdGet();if(pts<PD_COST)return;const re=(S&&S.nlRe||0)+1;pdSet(pts-PD_COST);const d={seed:nlSeed(),at:Date.now(),re};store.set(NL_KEY,d);NLP={seed:d.seed};nlRun(d);S.nlRe=re;nlFaces(d);nlCard()}
 $("modal").addEventListener("click",e=>{const b=e.target.closest("button[data-nl]");if(!b||b.disabled)return;e.stopPropagation();if(b.dataset.nl==="ok")nlAccept(false);else if(b.dataset.nl==="re")nlReroll()});
 

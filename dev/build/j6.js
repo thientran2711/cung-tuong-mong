@@ -73,7 +73,8 @@ function deser(d){trMigrate(d);rivals=d.R;rid=d.rid;S=d.S;S.origin=originByKey(d
  tab=d.tab||"act";used=d.used||0;popIdx=null;popMsg="";
  const vk=S.visit&&S.visit.k;if(d.v<3||!vk||vk==="home"||placeOf(vk).k!==vk||!Array.isArray(S.visit.people)){S.visit={k:"home",people:homePeople(),talked:false};S.place="home"}else S.place=vk;
  if(d.v<3)S.mg=null;if(d.v<5){used=0;S.buoi=0}try{srvLad6()}catch(e){console.error(e)}/* maid-ladder-6: 5-rung save → 6 rungs (j14) */normAll();Q=deserQ(d.P||[])}
-function save(){if(!S||quiet)return;try{if(S.dead)localStorage.removeItem(SK(SLOT));else localStorage.setItem(SK(SLOT),JSON.stringify(ser()));localStorage.setItem("hclh-slot",String(SLOT))}catch(e){}}
+let SAVE_N=0;/* save-unseen-lists: counts the writes that really reached the slot (a wrapper that holds or drops a save never moves it: jqsave marks a buổi as written only when this moved) */
+function save(){if(!S||quiet)return;try{if(S.dead)localStorage.removeItem(SK(SLOT));else{localStorage.setItem(SK(SLOT),JSON.stringify(ser()));SAVE_N++}localStorage.setItem("hclh-slot",String(SLOT))}catch(e){}}
 function loadSlot(n){try{const d=JSON.parse(localStorage.getItem(SK(n))||"null");if(d&&d.v===2)d.P=[];/* v2: no pending choices; v2/v3 get items, stat blocks, records via normAll */
  return d&&d.v>=2&&d.v<=6?d:null}catch(e){return null}}
 function showTitle(){const T=$("title");const L=[1,2,3].map(n=>{const d=loadSlot(n);

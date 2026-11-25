@@ -20,7 +20,13 @@
    Tai mắt news (jagknow tinBaoOn), the flip note (j93 kitFlipNote), the «CẤM» place line (j42 srvToast). Errands («cung nữ về báo tin») call
    kitNotice directly. NOT notices (own owner rulings, unchanged): the act result card #rtoast (jksize: routine acts keep the small result card),
    the tutorial coach kitTip, the co-op clock #kctm/#kctmf (status, 16/11 ruling).
-   State: in memory only (the list of this session); S.closeSeen keeps the closing chip once per buổi. Old saves: nothing new stored. */
+   State: NT.list rides in the sổ (save-unseen-lists, MAIN 140 25/11 ~13:10Z «anything the player has not seen yet must survive save/load (and
+   co-op snap)»): ser() writes it as the top-level field nt (one compact row per notice, text left out when it equals the line; at most
+   BAL.noticeMax rows, the same cap as the box), deser() puts it back — the slot, the co-op seat snap (CW.snap = ser()) and every other ser/deser
+   round trip carry it. A notice's action (go) is code: it is written as g:1 and made again on load from its id (ntGo: errand / Tai mắt / receiver /
+   parallel-time lands + orders); an action of an id no rule knows is kept as it was when the notice is still in memory (co-op round trips), else
+   the notice comes back without its button (still readable). The list belongs to ONE life (lifeStore: a new life / a loaded slot / the title start
+   empty). S.closeSeen keeps the closing chip once per buổi. Old saves (no nt): the list starts empty, as before. */
 (function(){try{
 const NT=window.NT={list:[],seq:0,chips:0,shown:[],log:[]};
 const $=id=>document.getElementById(id);
@@ -185,6 +191,21 @@ function kitKnowFlush(){try{if(KB.t){clearTimeout(KB.t);KB.t=0}const L=[...KB.m.
 function kitKnowMany(list){try{for(const x of list||[])kitKnow(x);return kitKnowFlush()}catch(e){console.error("kitKnowMany",e);return null}}
 try{const l0=log;log=window.log=function(h){return l0.call(this,kitNoUnk(h))}}catch(e){}
 setTimeout(()=>{try{const sm=showModal;showModal=window.showModal=function(){try{const m=typeof Q!=="undefined"?Q[0]:null;if(m){if(typeof m.h==="string")m.h=kitNoUnk(m.h)}}catch(e){}return sm.apply(this,arguments)}}catch(e){}},0);
+/* ---------- the list in the sổ (save-unseen-lists) ---------- */
+function ntGo(id){id=String(id||"");try{
+ if(id.indexOf("errand:")===0&&typeof errOpen==="function")return ()=>errOpen();
+ if(id.indexOf("tb:")===0)return ()=>{try{tinBaoSeen(id.slice(3))}catch(e){}goDuDo()};
+ if(id.indexOf("rcv:")===0&&typeof rcvOpen==="function")return ()=>rcvOpen(id);
+ if(id.indexOf("pt:back:")===0&&typeof ptOpenTin==="function")return ptOpenTin;
+ if(id.indexOf("pt:ord:")===0&&typeof ptOrdQ==="function"){const oid=id.slice(7);return ()=>{const x=ptOrdQ().find(z=>String(z.id)===oid);if(x&&typeof ptOrdOpen==="function")setTimeout(()=>ptOrdOpen(x),0)}}}catch(e){}return null}
+function ntSer(){return NT.list.slice(0,cap()).map(x=>{const o={id:x.id,line:x.line};if(x.text&&x.text!==x.line)o.text=x.text;if(x.items&&x.items.length)o.items=x.items;
+ if(x.pic)o.pic=x.pic;if(x.kind)o.kind=x.kind;if(x.sticky)o.sticky=1;if(x.seen)o.seen=1;if(typeof x.go==="function"){o.g=1;if(x.goLabel)o.goLabel=x.goLabel}if(x.t)o.t=x.t;return o})}
+function ntDeser(L){const old=new Map(NT.list.map(x=>[x.id,x]));NT.list=L.filter(o=>o&&o.id!=null&&o.line).slice(0,cap()).map(o=>{const p=old.get(String(o.id));
+ return {id:String(o.id),line:String(o.line),text:String(o.text||o.line),items:Array.isArray(o.items)?o.items.map(String):null,pic:o.pic||"",kind:o.kind||"",sticky:!!o.sticky,seen:!!o.seen,
+  go:o.g?((p&&typeof p.go==="function"?p.go:null)||ntGo(o.id)):null,goLabel:o.goLabel||"",t:+o.t||0}});NT.pend=null;const c=$("kntchip");if(c)chipHide(c)}
+try{if(typeof lifeStore==="function")lifeStore("NT.list notices (Tin báo) of that life",()=>{NT.list=[];NT.pend=null;KB.m.clear()})}catch(e){}
+try{const s0=ser;ser=function(){const d=s0.apply(this,arguments);try{if(d&&typeof d==="object")d.nt=ntSer()}catch(e){console.error("nt ser",e)}return d}}catch(e){}
+try{const d0=deser;deser=function(d){const r=d0.apply(this,arguments);try{if(d&&Array.isArray(d.nt))ntDeser(d.nt)}catch(e){console.error("nt deser",e)}return r}}catch(e){}
 Object.assign(window,{kitNotice,kitNoticeDrop,kitNoticeSeen,kitNoticeList,kitNoticeOpen,kitNoticeBox:boxPaint,kitKnow,kitKnowFlush,kitKnowMany});
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§42.3",title:"kitKnow · «Ta biết thêm N điều» (one kitNotice kind know; same chip, box and Tin báo panel as §42.2)",
  html:()=>`<div class="kitpg-row" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><span class="ktbt" style="position:static;transform:none;white-space:nowrap"><i class="khap" style="margin:0">!</i><span>Ta biết thêm 3 điều</span></span><button type="button" class="btn" onclick="kitKnowMany([{key:'a',text:'Ngươi biết tên: đó là Lệ tần Mai thị.'},{key:'b',text:'Ngươi đã thấy mặt một phi tần áo bậc Tần; chưa biết tên.'},{key:'c',text:'Quý phi Đào Cẩm Tâm nay được tấn phong Hoàng quý phi.'}]);kitNoticeOpen()">Mở khung Tin báo</button></div>`})}catch(e){}
