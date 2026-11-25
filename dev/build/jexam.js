@@ -211,7 +211,7 @@ function exRun(P,e,done){e.pend={raws:[]};const raws=e.pend.raws;let i=0;const n
   const exRows=[["Giám khảo",exExTxt(P),"t"],["Môn thi",`${i+1}/${n}: ${K.n} · ${K.t}`,"t"],["Độ khó",mgDiffTxt(KG82.tier,k),"n"],["Mức đỗ",`${exBarTxt(P)}, tính cả ${n} môn cùng Tứ đức và tài nghệ`,"n"]];/* mg-intro-2: Độ khó + Mức đỗ shown, the rest behind the kit «!» */
   box.innerHTML=kgBangRows(`Khảo hạch ${P.srv?"lên":"tấn phong"} ${P.rk}`,exRows,[exRows[2],exRows[3]])+
    `<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu thi</button>${kitQuick({id:"kg82skip",n:"Để tài nghệ quyết định",sub:`môn này tính ${SK}/10, như người cùng bậc`})}</div>`;
-  kgReady(box,{kind:k,ev:"sys:thi-tam"});/* KIT §13.7 */
+  kgReady(box,{kind:k,win:"thi",ev:"sys:thi-tam"});/* KIT §13.7 */
   $("kg82go").onclick=()=>kg82Play(k,raw=>after(raw,false));$("kg82skip").onclick=()=>after(SK,true)};
  const after=(raw,sk)=>{raws.push(raw);i++;const last=i>=n;try{save()}catch(x){}
   kg82ShowRes(kg82Rows([[`Môn ${i}`,`${raw}/10 · ${kg82Word(raw)}${sk?" (để tài nghệ quyết định)":""}`,"t"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">${last?"Xem kết quả":"Môn kế tiếp"}</button></div>`,raw>=5);
