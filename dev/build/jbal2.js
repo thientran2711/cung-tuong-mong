@@ -2202,3 +2202,20 @@ Object.assign(BAL.tw.g,{fakeX:{catch:3,catchDoc:1.5,noRec:4,recWk:6,swap:[30,.5,
 BAL.eff.j92.wdHideCatch=45;BAL.eff.j92.wdHideDue=[2,5];/* due = wk() + [0] + R([1]) tuần */
 /* KIT music (KK18 §96): an event track holds this long before the base track returns */
 BAL.kmus={holdMs:6000};
+/* NGỰ HOA VIÊN AREAS (owner OD 24/11 ~15:40Z: second Dư đồ level, areas + head-counts, enter ONE area; plan dev/AREA_PLAN.md on review/ring-design-3; build jnhv.js, NHV-BUILD 25/11).
+   vuon = the areas in garden-map order: acts = purposes from the j95 record (rule 1), net = nết pull for a plain walk (rule 3), x = crop of the stand-in garden painting
+   for the area scene, hs = hotspot box on the garden map picture, cap = the one short line under the area row. near = overflow neighbours (rule 6); route = the Emperor's
+   walk one area per khắc (rule 4); grpMax = groups per area, SAME on every device (MAIN 127 FAIL 1: who stands where comes from game state, never from the screen); span = person
+   units per area (a master 1, a follower folU); art = painted pictures once ART-NHV delivers (CDN paths, null = stand-in «tạm»). Look/motion numbers = the reviewed ring4 mock. */
+BAL.area={on:1,
+ vuon:[{k:"ngudao",n:"Ngự đạo",acts:["stroll","attend","escort","seekemp","ag_flaunt","ag_cx2:court","ag_cx2:show","ag_cx2:flat"],net:["Kiêu ngạo","Tham vọng"],x:.52,hs:{x:.27,y:.3,w:.17,h:.13},cap:"lối chính trước Khâm An điện"},
+  {k:"vuonhoa",n:"Vườn hoa",acts:["paint","walk","ag_effort","ag_cx3:talkPraise","ag_cx3:talkGossip","sell","play"],net:["Ân cần","Nhiều chuyện","Ham vui"],x:.12,hs:{x:.07,y:.45,w:.17,h:.13},cap:"khóm mẫu đơn, hiên Giáng Tuyết"},
+  {k:"thuyta",n:"Thủy tạ",acts:["music","poem","ag_cx3:qin","ag_cx3:talkHealth"],net:["Điềm tĩnh","Khiêm nhường","Ham học"],x:1,hs:{x:.47,y:.44,w:.17,h:.13},cap:"đình bên hồ sen"},
+  {k:"dinhco",n:"Đình cờ",acts:["ag_cx3:pmPlay","ag_cx3:pmDuel","wager"],net:["Nóng nảy","Thực tế"],x:.72,hs:{x:.49,y:.14,w:.17,h:.13},cap:"đình tròn có bàn cờ đá"},
+  {k:"nonbo",n:"Non bộ",acts:["tryst","spy","scheme","ambush","ag_cx3:talkSecret","changed"],net:["Kín đáo","Xảo quyệt","Thù dai"],x:0,hs:{x:.09,y:.14,w:.17,h:.13},cap:"hòn non bộ khuất sau tùng bách"}],
+ near:{ngudao:["vuonhoa","thuyta"],vuonhoa:["ngudao","thuyta"],thuyta:["dinhco","vuonhoa"],dinhco:["thuyta","nonbo"],nonbo:["dinhco","vuonhoa"]},
+ /* hs: kept inside x .07–.66, y .14–.57 of the stand-in painting: the Fold leather shows the map's left ~70 % beside the kit right column and the area rows cover its lower part */
+ route:["ngudao","vuonhoa","thuyta","dinhco"],bold:{sac:75},grpMax:2,span:4.2,folU:.7,extraName:"Lối đi",extraHs:{x:.3,y:.5,w:.15,h:.12},moveKh:0,
+ fol:["follow","ag_follow"],folEmp:["attend","escort","guard"],
+ art:{map:null,area:{}},
+ feet:.9,figH:.5,folS:.66,folGap:.05,zoom:{kv1:1,kv2:1.45},enterMs:560,walkMs:700,stepK:1.12,stepY:.045,spot:{kv1:.24,kv2:.3},band:{kv1:150,kv2:230}};
