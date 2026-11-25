@@ -1693,3 +1693,4 @@ sangbuoi-held-fix (jdayq dqWait silent exit, whole family) | review/sangbuoi-hel
 | NEWS-UNK-FIX («???» in prose, whole family) | review/news-unk-fix | MAIN 136 | session_01V1ZZH3S1Qc4vphvFKAkMjL | RUNNING | 2026-11-25T07:38Z |
 | REVIEW temper-outburst 394e6ea6 (BIG) | reports/review-temper-outburst.md | FOREMAN D ROOT | session_01D3E3Nb7G3pi5N3uqUqqmAn | RUNNING | 2026-11-25T07:56Z |
 | TEMPER G4 robot arms on realtap + review fixes | review/temper-outburst | FOREMAN D ROOT | session_01D3E3NaH1eX32YRAhiQCYnb (T1b) | RUNNING | 2026-11-25T07:56Z |
+BIG rv sideline-dlg r4 (opus; land -3-r1 as one item) | review/sideline-dlg-3-r* | B | session_01N1tNP6Wg2mFj3et8dLjA7c | RUNNING | 25/11 08:00Z |
