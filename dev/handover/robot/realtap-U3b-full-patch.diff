@@ -1,0 +1,44 @@
+diff --git a/dev/test/robot-rt-coop.js b/dev/test/robot-rt-coop.js
+index 28240c64..811ba68c 100644
+--- a/dev/test/robot-rt-coop.js
++++ b/dev/test/robot-rt-coop.js
+@@ -67,11 +67,12 @@ async function seatLoop(ctx, who, dev, other) {
+ }
+ 
+ (async () => {
+-  const br = await chromium.launch();
++  const br = await chromium.launch(process.env.COOP_URL ? { args: ['--disable-web-security', '--disable-features=PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults'] } : {});
+   const mk = dev => br.newContext({ viewport: VPS[dev], deviceScaleFactor: 1, hasTouch: dev !== 'ipad', isMobile: dev !== 'ipad', serviceWorkers: 'block' });
+   const H = { done: false }, G = { done: false };
+   const hDev = A.host || 'fold', gDev = A.guest || 'ipad';
+   const [hc, gc] = await Promise.all([mk(hDev), mk(gDev)]);
++  if (process.env.COOP_URL) for (const c of [hc, gc]) await c.addInitScript(u => { window.COOP_URL = u }, process.env.COOP_URL);
+   await Promise.all([
+     seatLoop(hc, 'host', hDev, G).then(() => { H.done = true }),
+     seatLoop(gc, 'guest', gDev, H).then(() => { G.done = true })]);
+diff --git a/dev/test/robot-rt.js b/dev/test/robot-rt.js
+index 7439db3a..91880212 100644
+--- a/dev/test/robot-rt.js
++++ b/dev/test/robot-rt.js
+@@ -118,6 +118,10 @@ async function play(p) {
+     /* stuck: no clock progress for STUCK_MS → bug + shot + save, unstick, SAME life continues */
+     if (started && Date.now() - lastProg > STUCK_MS) { R.harness.stuck++; const shot = path.join(SHOTS, 'stuck-' + R.harness.stuck + '.png'); await p.screenshot({ path: shot }).catch(() => {});
+       const sv = await p.evaluate(() => { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (/save/.test(k)) return localStorage.getItem(k) } return null }).catch(() => null); const svf = path.join(SHOTS, 'stuck-' + R.harness.stuck + '-save.json'); if (sv) fs.writeFileSync(svf, sv);
++      const dm = await p.evaluate(() => { const o = { ls: {}, g: {} }; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); o.ls[k] = localStorage.getItem(k) } } catch (e) {}
++        const t = (n, f) => { try { o.g[n] = f() } catch (e) { o.g[n] = 'ERR ' + e.message } };
++        t('COOPW.tr', () => (typeof COOPW !== 'undefined' && COOPW.tr || []).slice(-60)); t('COOPW.on', () => COOPW.on); t('COOP.state', () => typeof COOP !== 'undefined' ? COOP.state : null); t('COOP.status', () => COOP.state.status); t('S.buoi', () => S.buoi); t('S.week', () => S.week); t('CW.rbuoi', () => CW.rbuoi); t('CW.rweek', () => CW.rweek); t('PG', () => PG); t('titleVisible', () => { const e = document.querySelector('#title'); return !!(e && e.offsetParent) }); return JSON.stringify(o) }).catch(() => null);
++      if (dm) fs.writeFileSync(path.join(SHOTS, 'stuck-' + R.harness.stuck + '-dump.json'), dm);
+       bug('stuck', 'no progress ' + Math.round(STUCK_MS / 60e3) + ' min on ' + sc.layer + ' «' + sc.title + '»', { shot, save: sv ? svf : null, S: sc.S, buttons: sc.b.map(b => b.t).slice(0, 12) });
+       await unstick(p, rt, sc, 3); lastProg = Date.now(); continue }
+     /* a layer with nothing to tap (loading / scene / gate): wait like a person, then tap the middle of the screen */
+@@ -200,8 +204,8 @@ async function play(p) {
+ /* unstick ladder (all real input): 1 Escape key · 2 tap the top layer ✕ / any close · 3 reload + continue the same save from the title */
+ async function unstick(p, rt, sc, lvl) {
+   R.harness.unstick.push({ at: sec(), lvl, layer: sc.layer, title: sc.title });
+-  await p.keyboard.press('Escape').catch(() => {}); await p.waitForTimeout(500);
+-  if (lvl >= 2) { const i = sc.b.findIndex(b => b.x || CLOSE_RE.test(b.t)); if (i >= 0) { await p.evaluate(SCAN).catch(() => {}); const h = await p.evaluateHandle(i => window.__rtBtns[i], i); await rt.tap(h, { screen: sc.layer, label: 'unstick ✕' }) } }
++  await p.waitForTimeout(500); /* U3 no-Esc patch: a keyboard key is not a real tap (owner rule); close with a hit-checked tap on ✕/Lui only */
++  if (lvl >= 1) { const i = sc.b.findIndex(b => b.x || CLOSE_RE.test(b.t)); if (i >= 0) { await p.evaluate(SCAN).catch(() => {}); const h = await p.evaluateHandle(i => window.__rtBtns[i], i); await rt.tap(h, { screen: sc.layer, label: 'unstick ✕' }) } }
+   if (lvl >= 3) {
+     await p.reload({ waitUntil: 'load' }).catch(() => {}); await p.waitForFunction(() => typeof start === 'function', null, { timeout: 0 }).catch(() => {});
+     await p.evaluate(() => { if (!window.__rtOver) { window.__rtOver = 1; const o0 = over; over = function (h, t, fate, alive) { try { if (!S.dead) window.__rtEnd = { id: String(h), fate: String(fate || '').replace(/<[^>]+>/g, ''), alive: !!alive, age: S.age, year: S.year, rank: S.rank } } catch (e) {} return o0.apply(this, arguments) } } }).catch(() => {});
