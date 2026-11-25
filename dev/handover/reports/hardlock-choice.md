@@ -88,3 +88,25 @@ Base: r1 ea9cfd51 + merge newest origin/main d6b6fd6f (LIVE; only built index.ht
 | `node dev/test/coop-e2e.js` (Fold host) / `COOP_SWAP=1` (iPad host) | | | `142/142 passed` / `142/142 passed` |
 | `bash dev/tools/quickcheck.sh` ALONE | | | `QUICKCHECK PASS · 231 s · open 1937 ms · old save ok · perf (median of 3, new/live): render 262/263 ms, tab 488/549 ms, buổi 1656/1488 ms, tasks>200ms 23/26 · core gates PASS · total 627 s` |
 Head test lines (Fold, iPad same): «(b) the rest (74 bạc) paid as Sức -20 = own 0 + altCost -20» · «(g) … no swapped road open, only «Thôi»; Sức stays 13» · «(h) Sức 40 → road open, Sức -32 = own -12 + altCost -20; she keeps Sức 8 ≥ 1» · «(i) Sức 14, Danh 30 → the rest in Danh ({"suc":-13,"danh":-8}); Sức 1 ≥ 1, Danh 22» · 0 page errors.
+
+## REVIEW r2 — PASS (BIG reviewer Seat E, b-coop-0045; session_01N1tNP3inDSatM7LPmx51yi)
+PRIORITY #1 CHECK: same as r1 (altCost / BAL.bacTuan / BAL.altK reused; nothing rebuilt).
+**LAND READY hardlock-choice-r2 c8a2bb3e11a22149cb4d779b6c476d9d365cf710 FOR MAIN 131 / LC13** (branch review/hardlock-choice-r2 = b7ea3141 + final merge of LIVE origin/main 49f17d4d, index.html/sw.js conflict only → rebuilt; ancestor check: origin/main 49f17d4d ⊂ c8a2bb3e). Stale review/hardlock-choice-r1 (cd064c5c, an older merge of mine) — ignore; the remote refused my delete.
+### r1 FAIL rows
+1. FIXED — kitBacSub(c,short): room = S[k] − keep − the road's own cost; kitFloorOk drops a swapped road whose whole fx takes Sức < 1 / Danh < 0. Test (g): 2×{bac:-60,suc:-12}, purse 0, Sức 13 → only «Thôi», Sức stays 13; (h) Sức 40 → Sức −32 (own −12 + altCost −20), keeps 8; (i) Sức 14, Danh 30 → {suc:−13, danh:−8}, Sức 1, Danh 22. LIVE fails (g)(h)(i).
+2. FIXED — BAL.nolock.per gone; the short bạc is priced by altCost(short,S.rank,floor 1) (OD:L582 «at her rank», one rule, altK.sucMax cap); Danh only for the Sức she cannot spare, at the j68c Sức:Danh step ratio (BAL.nolock.of, derived). one-core-guard PASS.
+3. FIXED — header comment says what the code does.
+4. Content note kept in the report (writer pass for j68c-serv-022 / sea-023 non-bạc stance) — not blocking.
+### Reviewer small fix (pushed on the r2 branch, c8a2bb3e)
+LIVE 49f17d4d brought jdayq (solo new-day order) which holds back every card when `!window.__bot` → the scan drew NOTHING (`not drawn 904`, so «HARD LOCKS 0» meant nothing). dev/tools/hardlock-scan.js __hlJudge now sets __bot=1 while judging (restored after). After: `not drawn 0`.
+### Gates (reviewer runs, outputs)
+| gate | LIVE 49f17d4d | bare b7ea3141 | merged c8a2bb3e (and earlier merges 2b68/3a32/4232) |
+|---|---|---|---|
+| hardlock-choice.js Fold+iPad | `HARDLOCK-CHOICE FAIL (18)` | `ALL PASS` (36 ok) | `ALL PASS` (every merge) |
+| hardlock-scan.js --turns 40 (fixed scan) | `FAIL · 905 · HARD LOCKS 2 · not drawn 0 · PLANT LOCKED` | (LIVE 2b68: FAIL 2 / merged PASS 0) | `PASS · 904 · HARD LOCKS 0 · not drawn 0 · plant guarded · page errors 0` |
+| one-core-guard / undef-scan | – | – | PASS / PASS (305 names) |
+| coop-e2e Fold host / COOP_SWAP=1 iPad host | – | – | 142/142 · 142/142 |
+| quickcheck.sh ALONE | – | – | `QUICKCHECK PASS · old save ok · render 186/205, tab 483/472, buổi 989/1137, tasks>200ms 22/20 · core gates PASS` |
+| viecnho-fix.test.js (main's new Việc nhờ, merge 4232) | – | – | ALL OK |
+Law check: 1 OK · 2 OK (one altCost function for every swapped road; Tốn row shows the real cost before she picks) · 3 OK (never below floor; «Thôi» costs nothing, gains nothing = a leave) · 4 OK · 6 content note (row 4) · 7 OK · 9 OK · 11 OK (scan + plant, fixed for jdayq) · 13 OK.
+Non-blocking: the scan's «N buổi steps» part catches 0 cards from 40 turns on LIVE and head alike (jdayq era) — the static + builder parts carry the coverage; scan keeper may revisit.
