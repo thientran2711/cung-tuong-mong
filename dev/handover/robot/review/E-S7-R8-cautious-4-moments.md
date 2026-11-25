@@ -1,0 +1,256 @@
+# Moments — E-S7 R8-cautious-4 (bd/bd_hen, cautious, fold 755x1000, seed 3251832491)
+Runner notes (from the shots m-look-320 and end.png): 
+- year 3 Lãnh cung · page «Trường Môn viện» · BORED/FRUSTRATED · a moonlit courtyard with two figures and a dog, nothing to do; the harness logged 53 «150 taps without a clock step» loops here; the robot spent most of 711 buổi in cold-palace screens
+- year 3 · «Sang ngày mới» · ODD · [game] softlock: tapped, the buổi does not turn, no dialog on screen (queue Q=1 «Tin trong cung buổi này»)
+- end · screen «Kiếp này» · ODD · the ending card is covered by a white ribbon and an ink smear; the middle of the text («… thành điên dại, sống nốt quãng đời … cung.») is hidden behind the art; the header says «Công chúa Ba Tư hòa thân» yet max rank «Quý nhân»
+- DELIGHTED: none seen; the cold-palace art is strong (night courtyard, lantern, fallen leaves)
+
+## Harness moment log (auto)
+Format: game date · screen · feeling · what happened · shot (relative to the out dir). Lines written by the harness; the runner adds its own feelings from the shots (ROBOT-PLAYER-REVIEW.md §A).
+
+- year 3 · turn 30 · tuần 2 · buổi 2 · rank 0 · #klife «» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-311-1.png
+- year 3 · turn 30 · tuần 2 · buổi 2 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc67Tài36Tâm cơ24Đức14Danh3 | Bạc26Sức100/100 | Buổi chiều, còn 4 khắc | Lãnh cung | gió heo may | Quẻ Thượng (Con cái) · shots-R8-cautious-4/m-new-311-2.png
+- year 3 · turn 30 · tuần 2 · buổi 2 · rank 0 · #modal «chiều · còn» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-311-3.png
+- year 3 · turn 30 · tuần 2 · buổi 2 · rank 0 · .dlg «chiều · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-311-4.png
+- year 3 · turn 30 · tuần 2 · buổi 3 · rank 0 · .kmov «» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-312-5.png
+- year 3 · turn 30 · tuần 2 · buổi 3 · rank 0 · .kmov · FRUSTRATED · dead button «?» covered by img.kfr · shots-R8-cautious-4/dead-fold-1795607678533.png
+- year 3 · turn 30 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Quý nhân Thiệu Tịnh Nghi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-312-6.png
+- year 3 · turn 30 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Thường tại Tưởng Phù Dung» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-312-7.png
+- year 3 · turn 30 · tuần 2 · buổi 3 · rank 0 · .dlg «Tin trong cung buổi này» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-312-8.png
+- year 3 · turn 31 · tuần 0 · buổi 0 · rank 0 · .kne «» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-312-9.png
+- year 3 · turn 31 · tuần 0 · buổi 0 · rank 0 · #dawn «» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-R8-cautious-4/m-new-313-10.png
+- year 3 · turn 31 · tuần 0 · buổi 0 · rank 0 · #kmrew «» · NEW SCREEN · first time on this screen; buttons: Thường | Thường | Thường | ThườngVải thô (hàng kém)Hàng | ThườngYên chi giấyHộp phấn m | ThườngNến mỡ dêThắp học đêm: | Nhận · shots-R8-cautious-4/m-new-313-11.png
+- year 3 · turn 31 · tuần 0 · buổi 0 · rank 0 · .dlg «» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-313-12.png
+- year 3 · turn 31 · tuần 0 · buổi 0 · rank 0 · .kbk «Tổng lược» · NEW SCREEN · first time on this screen; buttons: Trang sau | Lui · shots-R8-cautious-4/m-new-313-13.png
+- year 3 · turn 31 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng bảy» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-313-14.png
+- year 3 · turn 31 · tuần 0 · buổi 1 · rank 0 · .dlg «Sắc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-314-15.png
+- year 3 · turn 31 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Ta» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-316-16.png
+- year 3 · turn 31 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Tin trong cung buổi này) · shots-R8-cautious-4/loop-26.png
+- year 3 · turn 31 · tuần 1 · buổi 0 · rank 0 · .dlg «Đồ cũ trở về» · NEW SCREEN · first time on this screen; buttons: Chưa đủ bạc, hẹn lần sauRất  · shots-R8-cautious-4/m-new-317-17.png
+- year 3 · turn 31 · tuần 1 · buổi 0 · rank 0 · #kievcatch «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc67Tài36Tâm cơ24Đức14Danh3 | Bạc33Sức100/100 | Buổi sáng, còn 4 khắc | Lãnh cung | gió heo may | Quẻ Thượng (Danh) · shots-R8-cautious-4/m-new-317-18.png
+- year 3 · turn 31 · tuần 1 · buổi 0 · rank 0 · .dlg «Thái hậu bệnh nặng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-317-19.png
+- year 3 · turn 31 · tuần 1 · buổi 0 · rank 0 · .dlg «Bạc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-317-20.png
+- year 3 · turn 31 · tuần 1 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-cautious-4/m-look-320.png
+- year 3 · turn 31 · tuần 1 · buổi 3 · rank 0 · .dlg «Tâm trạng · Đáp ứng Lục Nhu Gia» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-320-21.png
+- year 3 · turn 31 · tuần 1 · buổi 3 · rank 0 · .dlg «Tâm trạng · Tần Chung Mạn Ca» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-320-22.png
+- year 3 · turn 31 · tuần 1 · buổi 3 · rank 0 · .dlg «Tâm trạng · Hiền tần Hách Thần Hi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-320-23.png
+- year 3 · turn 31 · tuần 2 · buổi 2 · rank 0 · .dlg «Quẻ Hạ · Giao thiệp» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-R8-cautious-4/m-new-323-24.png
+- year 3 · turn 31 · tuần 2 · buổi 2 · rank 0 · .dlg «Gieo lại quẻ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-323-25.png
+- year 3 · turn 31 · tuần 2 · buổi 3 · rank 0 · #modal «Tin trong cung buổi này» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-324-26.png
+- year 3 · turn 32 · tuần 0 · buổi 0 · rank 0 · .dlg «Quẻ Thượng · Sức khỏe» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-R8-cautious-4/m-new-325-27.png
+- year 3 · turn 32 · tuần 0 · buổi 2 · rank 0 · .mapsc «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc67Tài36Tâm cơ24Đức14Danh4 | Bạc20Sức94/100 | Buổi chiều, còn 4 khắc | Lãnh cung | gió heo may | Quẻ Thượng (Con cái) · shots-R8-cautious-4/m-new-327-28.png
+- year 3 · turn 32 · tuần 0 · buổi 3 · rank 0 · .dlg «Quẻ Thượng · Con cái» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-328-29.png
+- year 3 · turn 32 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Tần Thạch Chỉ Nhược» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-328-30.png
+- year 3 · turn 32 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 9 copies of «Tâm trạng · Tần Thạch Chỉ Nhược» (each close pops one; looks like a dead ✕) · -
+- year 3 · turn 32 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 6 copies of «Tâm trạng · Tần Thạch Chỉ Nhược» (each close pops one; looks like a dead ✕) · -
+- year 3 · turn 32 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 13 copies of «Tâm trạng · Hiền tần Hách Thần Hi» (each close pops one; looks like a dead ✕) · -
+- year 3 · turn 32 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Phi Bạch Chiêu Nghi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-328-31.png
+- year 3 · turn 32 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 3 copies of «Tâm trạng · Hiền tần Hách Thần Hi» (each close pops one; looks like a dead ✕) · -
+- year 3 · turn 32 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Thường tại Cao Tuyết Kiến» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-328-32.png
+- year 3 · turn 32 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Quý nhân Chung Mạn Ca» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-328-33.png
+- year 3 · turn 32 · tuần 1 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=6: Chương 4 · Lời thề trước lửa thánh / Tin chờ người sai đi / Tin chờ người sai đi / Tin báo / Đã biết về Phế phi Thẩm Chỉ Lan / Tin trong cung buổi này) · shots-R8-cautious-4/loop-28.png
+- year 3 · turn 32 · tuần 1 · buổi 3 · rank 0 · .dlg «Tin báo» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-332-34.png
+- year 3 · turn 32 · tuần 1 · buổi 3 · rank 0 · .dlg «Đã biết về Phế phi Thẩm Chỉ Lan» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-332-35.png
+- year 3 · turn 32 · tuần 2 · buổi 3 · rank 0 · .kmov · FRUSTRATED · dead button «?» covered by zero size · shots-R8-cautious-4/dead-fold-1795608079380.png
+- year 3 · turn 32 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Quý nhân Tưởng Phù Dung» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-336-36.png
+- year 3 · turn 32 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 2 copies of «Tâm trạng · Quý nhân Tưởng Phù Dung» (each close pops one; looks like a dead ✕) · -
+- year 3 · turn 33 · tuần 0 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-cautious-4/m-look-340.png
+- year 3 · turn 33 · tuần 0 · buổi 3 · rank 0 · .dlg «Tin chờ người sai đi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-340-37.png
+- year 3 · turn 33 · tuần 1 · buổi 2 · rank 0 · .dlg «Lịch tháng» · NEW SCREEN · first time on this screen; buttons: Lui | Tháng trước | Tháng sau | mồng 1: Lĩnh bổng lộc (lãnh | mồng 2: Nguyệt tín | mồng 3: Nguyệt tín | mồng 4: Nguyệt tín | mồng 5: Nguyệt tín · shots-R8-cautious-4/m-new-343-38.png
+- year 3 · turn 33 · tuần 2 · buổi 0 · rank 0 · .dlg «Việc khó xử» · NEW SCREEN · first time on this screen; buttons: Tự thêu trăm chữ ThọTùy duyê | Lễ mọn cho phải phépRất vững · shots-R8-cautious-4/m-new-345-39.png
+- year 3 · turn 33 · tuần 2 · buổi 0 · rank 0 · .dlg «Cấm cung giới nghiêm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-345-40.png
+- year 3 · turn 33 · tuần 2 · buổi 0 · rank 0 · .dlg «Đại án vu cổ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-345-41.png
+- year 3 · turn 33 · tuần 2 · buổi 2 · rank 0 · .dlg «Quẻ Trung · Mưu kế» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-347-42.png
+- year 3 · turn 34 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng chín» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-349-43.png
+- year 3 · turn 34 · tuần 1 · buổi 0 · rank 0 · .dlg «Đại lễ tế Giao» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-353-44.png
+- year 3 · turn 34 · tuần 2 · buổi 0 · rank 0 · .dlg «Đại hàn, tuyết lớn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-357-45.png
+- year 3 · turn 34 · tuần 2 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-cautious-4/m-look-360.png
+- year 3 · turn 34 · tuần 2 · buổi 3 · rank 0 · .kfoc «» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-360-46.png
+- year 3 · turn 35 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng mười» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-361-47.png
+- year 3 · turn 35 · tuần 0 · buổi 0 · rank 0 · .dlg «Lời nhận xét» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-361-48.png
+- year 3 · turn 35 · tuần 0 · buổi 3 · rank 0 · .dlg «tối · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-364-49.png
+- year 3 · turn 35 · tuần 1 · buổi 0 · rank 0 · .dlg «Án mất trộm ngự khố» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-365-50.png
+- year 3 · turn 35 · tuần 1 · buổi 1 · rank 0 · .dlg «Dưỡng Hòa điện» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-366-51.png
+- year 3 · turn 35 · tuần 1 · buổi 3 · rank 0 · .dlg «Tâm trạng · Thường tại Thiệu Tịnh Nghi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-368-52.png
+- year 3 · turn 35 · tuần 2 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng mười một» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-369-53.png
+- year 4 · turn 36 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng chạp» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-373-54.png
+- year 4 · turn 36 · tuần 0 · buổi 0 · rank 0 · .dlg «Lãnh cung» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-373-55.png
+- year 4 · turn 36 · tuần 1 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-cautious-4/m-look-380.png
+- year 4 · turn 36 · tuần 2 · buổi 0 · rank 0 · .dlg «Tỉnh thân» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-381-56.png
+- year 4 · turn 36 · tuần 2 · buổi 3 · rank 0 · .dlg «Quẻ Trung · Sủng» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-R8-cautious-4/m-new-384-57.png
+- year 4 · turn 37 · tuần 0 · buổi 2 · rank 0 · #modal «Tâm trạng · Ta» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-387-58.png
+- year 4 · turn 37 · tuần 1 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng giêng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-389-59.png
+- year 4 · turn 37 · tuần 1 · buổi 1 · rank 0 · .dlg «Quẻ Hạ · Sủng» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-R8-cautious-4/m-new-390-60.png
+- year 4 · turn 37 · tuần 1 · buổi 3 · rank 0 · .dlg «Tâm trạng · Quý nhân Cao Tuyết Kiến» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-392-61.png
+- year 4 · turn 37 · tuần 1 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 5 copies of «Tâm trạng · Tần Thạch Chỉ Nhược» (each close pops one; looks like a dead ✕) · -
+- year 4 · turn 38 · tuần 0 · buổi 0 · rank 0 · #kxcatch «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc67Tài36Tâm cơ25Đức14Danh0 | Bạc22Sức94/100 | Buổi sáng, còn 4 khắc | Lãnh cung | trời quang | Quẻ Hạ hạ (Hung) · shots-R8-cautious-4/m-new-397-62.png
+- year 4 · turn 38 · tuần 0 · buổi 1 · rank 0 · .dlg «Quẻ Hạ hạ · Hung» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-R8-cautious-4/m-new-398-63.png
+- year 4 · turn 38 · tuần 0 · buổi 1 · rank 0 · #modal «Gieo lại quẻ» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-398-64.png
+- year 4 · turn 38 · tuần 0 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-cautious-4/m-look-400.png
+- year 4 · turn 38 · tuần 1 · buổi 0 · rank 0 · .dlg «Khoa thi Đình» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-401-65.png
+- year 4 · turn 39 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng hai» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-409-66.png
+- year 4 · turn 39 · tuần 1 · buổi 0 · rank 0 · .dlg «Lễ Phật đản» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-413-67.png
+- year 4 · turn 39 · tuần 1 · buổi 3 · rank 0 · .dlg «Quẻ Trung · Sức khỏe» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-R8-cautious-4/m-new-416-68.png
+- year 4 · turn 39 · tuần 1 · buổi 3 · rank 0 · .dlg «Tâm trạng · Trinh phi Chân Diệu Âm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-416-69.png
+- year 4 · turn 39 · tuần 1 · buổi 3 · rank 0 · .dlg «Tâm trạng · Thường tại Chung Mạn Ca» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-416-70.png
+- year 4 · turn 39 · tuần 2 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng ba» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-417-71.png
+- year 4 · turn 39 · tuần 2 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-cautious-4/m-look-420.png
+- year 4 · turn 40 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng tư» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-421-72.png
+- year 4 · turn 41 · tuần 1 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng năm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-437-73.png
+- year 4 · turn 41 · tuần 1 · buổi 3 · rank 0 · page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-cautious-4/m-look-440.png
+- year 4 · turn 41 · tuần 2 · buổi 0 · rank 0 · .dlg «Chương 4 · Lời thề trước lửa thánh» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh | Đi làm: Giữ Sức, chờ dịp xin · shots-R8-cautious-4/m-new-441-74.png
+- year 4 · turn 42 · tuần 1 · buổi 0 · rank 0 · .dlg «Rời lãnh cung» · NEW SCREEN · first time on this screen; buttons: Tạ ơn · shots-R8-cautious-4/m-new-449-75.png
+- year 4 · turn 42 · tuần 1 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng sáu» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-449-76.png
+- year 4 · turn 42 · tuần 1 · buổi 0 · rank 0 · .dlg «Sứ đoàn vào triều» · NEW SCREEN · first time on this screen; buttons: Đứng xem rồi vềTốnkhôngĐượck · shots-R8-cautious-4/m-new-449-77.png
+- year 4 · turn 42 · tuần 1 · buổi 0 · rank 0 · page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc67Tài36Tâm cơ25Đức14Danh3 | Bạc30Sức100/100 | Buổi sáng, còn 4 khắc | Chưa điểm trang | gió heo may | Quẻ Hạ hạ (Sức khỏe) · shots-R8-cautious-4/m-new-449-78.png
+- year 4 · turn 42 · tuần 1 · buổi 0 · rank 0 · .dlg «Bổng lộc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-449-79.png
+- year 4 · turn 42 · tuần 1 · buổi 1 · rank 0 · .dlg «Có người đến» · NEW SCREEN · first time on this screen; buttons: NhịnRất vữngTốnkhôngĐượcđược | Đáp trả sắc sảoRất vữngTốnkh · shots-R8-cautious-4/m-new-449-80.png
+- year 4 · turn 42 · tuần 1 · buổi 3 · rank 0 · .dlg «Kính sự phòng» · NEW SCREEN · first time on this screen; buttons: Lui | Tranh sủngKhó lườngTốnkhôngĐ | Chặn ngự giáKhó lườngTốnkhôn · shots-R8-cautious-4/m-new-452-81.png
+- year 4 · turn 42 · tuần 1 · buổi 3 · rank 0 · #kg82 «» · NEW SCREEN · first time on this screen; buttons: Quay lại | Sẵn sàngtừ lúc này mới tính | Hướng dẫnchơi thử một hồi dễ | Bỏ quagiữ nguyên Khó lường · shots-R8-cautious-4/m-new-452-82.png
+- year 4 · turn 42 · tuần 2 · buổi 0 · rank 0 · .dlg «Lập Hoàng hậu mới» · NEW SCREEN · first time on this screen; buttons: Đến Càn Ninh cung chúc mừngT | Giữ khoảng cáchTốnkhôngĐượck · shots-R8-cautious-4/m-new-453-83.png
+- year 4 · turn 42 · tuần 2 · buổi 0 · rank 0 · .dlg «Đại xá thiên hạ» · NEW SCREEN · first time on this screen; buttons: Tặng bạc để nàng ta về quêTố | Viết thư dặn người quen đón | Kể nàng ta nghe chuyện cũ rồ | Chỉ vẫy tay chào từ xaTốnkhô · shots-R8-cautious-4/m-new-453-84.png
+- year 4 · turn 42 · tuần 2 · buổi 0 · rank 0 · .dlg «Tai mắt» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-453-85.png
+- year 4 · turn 42 · tuần 2 · buổi 3 · rank 0 · - · FRUSTRATED · [stuck] no-clock loop: 150 taps without a clock step on page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» · shots-R8-cautious-4/loop-40.png
+- year 4 · turn 42 · tuần 2 · buổi 3 · rank 0 · #modal «Kính sự phòng» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-456-86.png
+- year 4 · turn 42 · tuần 2 · buổi 3 · rank 0 · .dlg «Kính sự phòng báo tin» · NEW SCREEN · first time on this screen; buttons: Tắm gội chờ giáRất vữngTốnkh · shots-R8-cautious-4/m-new-456-87.png
+- year 4 · turn 42 · tuần 2 · buổi 3 · rank 0 · #modal «Chuẩn bị thị tẩm» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-456-88.png
+- year 4 · turn 42 · tuần 2 · buổi 3 · rank 0 · .dlg «Chuẩn bị thị tẩm» · NEW SCREEN · first time on this screen; buttons: Tắm cánh hoa, xông hươngRất | Điểm trang lộng lẫyRất vữngT | Đeo trang sức đẹp nhấtRất vữ | Tập trước VũCó cơTốnSức -5Đư | Để mộc, nghỉ ngơiRất vữngTốn · shots-R8-cautious-4/m-new-456-89.png
+- year 4 · turn 42 · tuần 2 · buổi 3 · rank 0 · #modal «Đêm thị tẩm» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-456-90.png
+- year 4 · turn 42 · tuần 2 · buổi 3 · rank 0 · .dlg «Đêm thị tẩm» · NEW SCREEN · first time on this screen; buttons: Bàn thơ văn, cầm kỳCó cơTốnk | Bàn chuyện thiên hạRất vữngT | Rót rượu, nũng nịuTùy duyênT | Lặng lẽ xoa vai, nghe ngài k · shots-R8-cautious-4/m-new-456-91.png
+- year 4 · turn 43 · tuần 0 · buổi 0 · rank 0 · #modal «Bổng lộc tháng bảy» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-457-92.png
+- year 4 · turn 43 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng bảy · Lễ nghĩa» · NEW SCREEN · first time on this screen; buttons: Chu toàn lễ nghĩaRất vữngTốn | Bớt lễ nghĩaRất vữngTốnkhông · shots-R8-cautious-4/m-new-457-93.png
+- year 4 · turn 43 · tuần 0 · buổi 0 · rank 0 · .dlg «Lễ tấn phong Thường tại Thẩm Chỉ Lan» · NEW SCREEN · first time on this screen; buttons: Đến chúc mừngTốnSức -5Đượcth | Gửi lễ mừngTốnBạc -15Đượcthi | Không đếnTốnkhôngĐượcSức +3K · shots-R8-cautious-4/m-new-457-94.png
+- year 4 · turn 43 · tuần 0 · buổi 0 · rank 0 · .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1» · NEW SCREEN · first time on this screen; buttons: Theo Hoàng thượngRất vữngTốn | Theo Thái hậuRất vữngTốnkhôn | Theo Tể tướng Vu Quý NgọcRất | Đứng ngoài, giữ mìnhRất vững · shots-R8-cautious-4/m-new-457-95.png
+- year 4 · turn 43 · tuần 0 · buổi 0 · rank 0 · .dlg «Tết Trung thu · Lời mời: Thi vẽ tranh “Nguyệt hạ”» · NEW SCREEN · first time on this screen; buttons: Ghi tên dự thi vẽMong manhTố | Không dựRất vữngTốnkhôngĐược · shots-R8-cautious-4/m-new-457-96.png
+- year 4 · turn 43 · tuần 0 · buổi 0 · rank 0 · .dlg «Kính sự phòng ghi sổ» · NEW SCREEN · first time on this screen; buttons: Tiếp tụcRất vữngTốnkhôngĐược · shots-R8-cautious-4/m-new-457-97.png
+- year 4 · turn 43 · tuần 0 · buổi 0 · rank 0 · .dlg «Danh hiệu mới» · NEW SCREEN · first time on this screen; buttons: Đeo ngayTốnkhôngĐượckhôngGhi | Để sauTốnkhôngĐượckhông · shots-R8-cautious-4/m-new-457-98.png
+- year 4 · turn 43 · tuần 0 · buổi 0 · rank 0 · #modal «Đeo «Trăng soi rèm ngọc»» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-457-99.png
+- year 4 · turn 43 · tuần 0 · buổi 0 · rank 0 · .dlg «Đeo «Trăng soi rèm ngọc»» · NEW SCREEN · first time on this screen; buttons: Thêm SủngTốnkhôngĐượcSủng +1 | Sủng dễ lênTốnkhôngĐượcSủng | Để sau · shots-R8-cautious-4/m-new-457-100.png
+- year 4 · turn 43 · tuần 0 · buổi 1 · rank 0 · - · FRUSTRATED · [stuck] no-clock loop: 150 taps without a clock step on page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 3 ngườ» · shots-R8-cautious-4/loop-41.png
+- year 4 · turn 43 · tuần 0 · buổi 1 · rank 0 · - · ODD · [game] softlock: «Sang buổi» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Có người đến) · shots-R8-cautious-4/loop-41.png
+- year 4 · turn 43 · tuần 0 · buổi 2 · rank 0 · #modal «Bị châm chọc» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-458-101.png
+- year 4 · turn 43 · tuần 0 · buổi 2 · rank 0 · .dlg «Bị châm chọc» · NEW SCREEN · first time on this screen; buttons: Tiếp tụcRất vữngTốnkhôngĐược · shots-R8-cautious-4/m-new-459-102.png
+- year 4 · turn 43 · tuần 0 · buổi 3 · rank 0 · page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-cautious-4/m-look-460.png
+- year 4 · turn 43 · tuần 0 · buổi 3 · rank 0 · .dlg «Kỳ nguyệt sự» · NEW SCREEN · first time on this screen; buttons: Báo đúng ngàyRất vữngTốnkhôn | Báo lùi vài hômTùy duyênTốnk | Báo sớm, nói đã sạch kỳRất v | Giấu, không báoRất vữngTốnkh · shots-R8-cautious-4/m-new-460-103.png
+- year 4 · turn 43 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Tĩnh quý phi Khổng Ngưng Hoa» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-460-104.png
+- year 4 · turn 43 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Thường tại Hách Thần Hi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-460-105.png
+- year 4 · turn 43 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Ý phi Thạch Chỉ Nhược» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-460-106.png
+- year 4 · turn 43 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Tần Bạch Chiêu Nghi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-460-107.png
+- year 4 · turn 43 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] dialog queue holds 3 copies of «Tâm trạng · Tĩnh quý phi Khổng Ngưng Hoa» (each close pops one; looks like a dead ✕) · -
+- year 4 · turn 43 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Tần Tưởng Phù Dung» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-460-108.png
+- year 4 · turn 43 · tuần 1 · buổi 1 · rank 0 · .dlg «trưa · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-462-109.png
+- year 4 · turn 43 · tuần 2 · buổi 0 · rank 0 · .dlg «Tiết Vạn thọ · Lời mời: Thi làm bánh thọ đào» · NEW SCREEN · first time on this screen; buttons: Ghi tên dự thi bếp núcMong m | Không dựRất vữngTốnkhôngĐược · shots-R8-cautious-4/m-new-465-110.png
+- year 4 · turn 43 · tuần 2 · buổi 0 · rank 0 · .dlg «Tết Trung thu · Thi vẽ tranh “Nguyệt hạ”» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-465-111.png
+- year 4 · turn 43 · tuần 2 · buổi 0 · rank 0 · .dlg «sáng · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-465-112.png
+- year 4 · turn 43 · tuần 2 · buổi 1 · rank 0 · .dlg «Có người bán tin» · NEW SCREEN · first time on this screen; buttons: Mua tinTốnBạc -45·1 khắcĐược | Không muaTốnkhôngĐượckhôngGh · shots-R8-cautious-4/m-new-465-113.png
+- year 4 · turn 43 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=2: Tin báo / Tin trong cung buổi này) · shots-R8-cautious-4/loop-43.png
+- year 4 · turn 43 · tuần 2 · buổi 0 · rank 0 · .dlg «Tiết Vạn thọ · Thi làm bánh thọ đào» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-470-114.png
+- year 4 · turn 43 · tuần 2 · buổi 0 · rank 0 · .dlg «Tết Trùng cửu · Lời mời: Thi thêu túi thù du» · NEW SCREEN · first time on this screen; buttons: Ghi tên dự thi thêuMong manh | Không dựRất vữngTốnkhôngĐược · shots-R8-cautious-4/m-new-470-115.png
+- year 4 · turn 43 · tuần 2 · buổi 0 · rank 0 · .dlg «Điềm báo» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-470-116.png
+- year 4 · turn 43 · tuần 2 · buổi 3 · rank 0 · .dlg «Chọn người theo hầu» · NEW SCREEN · first time on this screen; buttons: Lui | Cung nữ thân tín tam đẳngDiê | Đi một mìnhTốnkhôngĐượcviệc  · shots-R8-cautious-4/m-new-473-117.png
+- year 4 · turn 43 · tuần 2 · buổi 3 · rank 0 · .dlg «Khải Tường cung» · NEW SCREEN · first time on this screen; buttons: Lui | Bái kiến Phi rồi vàoTốn3 khắ | Vào thẳng, không bái kiếnTốn · shots-R8-cautious-4/m-new-473-118.png
+- year 4 · turn 43 · tuần 2 · buổi 3 · rank 0 · #modal «Kỳ ngộ» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-473-119.png
+- year 4 · turn 43 · tuần 2 · buổi 3 · rank 0 · .dlg «Kỳ ngộ» · NEW SCREEN · first time on this screen; buttons: Hỏi chuyện trong cung chủ nà | Dặn nàng ta cẩn thận rồi đi  · shots-R8-cautious-4/m-new-473-120.png
+- year 4 · turn 43 · tuần 2 · buổi 3 · rank 0 · #modal «Bị giật y phục giữa đường» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-473-121.png
+- year 4 · turn 43 · tuần 2 · buổi 3 · rank 0 · .dlg «Bị giật y phục giữa đường» · NEW SCREEN · first time on this screen; buttons: Lót tay Nội vụ phủ cấp ngayT | Sai Cung nữ thân tín tam đẳn | Viết thư xin nhà gửi áoVữngT | Đợi Nội vụ phủTốnkhôngĐược2  · shots-R8-cautious-4/m-new-473-122.png
+- year 4 · turn 43 · tuần 2 · buổi 3 · rank 0 · page «Khải Tường cung · Sùng Đức điện · Ở đây còn 8 ngườ» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc67Tài36Tâm cơ23Đức14Danh0 | Bạc69Sức99/100 | Buổi tối, còn 1 khắc | Hôm nay mặt mộc | gió heo may | Quẻ Hạ (Sức khỏe) · shots-R8-cautious-4/m-new-473-123.png
+- year 4 · turn 43 · tuần 2 · buổi 3 · rank 0 · - · FRUSTRATED · [stuck] no-clock loop: 150 taps without a clock step on page «Khải Tường cung · Sùng Đức điện · Ở đây còn 8 ngườ» · shots-R8-cautious-4/loop-44.png
+- year 4 · turn 44 · tuần 0 · buổi 0 · rank 0 · .dlg «Tâm trạng · Đáp ứng Hách Thần Hi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-474-124.png
+- year 4 · turn 44 · tuần 0 · buổi 3 · rank 0 · #modal «Kỳ nguyệt sự» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-477-125.png
+- year 4 · turn 44 · tuần 1 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng tám» · NEW SCREEN · first time on this screen; buttons: Chu toàn lễ nghĩaRất vữngTốn | Bớt lễ nghĩaRất vữngTốnkhông · shots-R8-cautious-4/m-new-478-126.png
+- year 4 · turn 44 · tuần 1 · buổi 0 · rank 0 · .dlg «Lễ tấn phong Thường tại Trương Tiểu Mãn» · NEW SCREEN · first time on this screen; buttons: Đến chúc mừngTốnSức -5Đượcth | Không đếnTốnkhôngĐượcSức +3K · shots-R8-cautious-4/m-new-478-127.png
+- year 4 · turn 44 · tuần 1 · buổi 0 · rank 0 · .dlg «Đại lễ sắc lập Thái tử» · NEW SCREEN · first time on this screen; buttons: Đứng xem lễTốnkhôngĐượckhông · shots-R8-cautious-4/m-new-478-128.png
+- year 4 · turn 44 · tuần 1 · buổi 0 · rank 0 · .dlg «Thỉnh bình an mạch» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-478-129.png
+- year 4 · turn 44 · tuần 1 · buổi 0 · rank 0 · #modal «Phụ tuyến · Tân quân lập uy · Chương 4 · Hồi 1/2» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-478-130.png
+- year 4 · turn 44 · tuần 1 · buổi 0 · rank 0 · #modal «Sau vụ mưu hại» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-478-131.png
+- year 4 · turn 44 · tuần 1 · buổi 0 · rank 0 · .dlg «Sau vụ mưu hại» · NEW SCREEN · first time on this screen; buttons: Tra xét đến cùngTùy duyênTốn | Nuốt giận, đợi thờiRất vữngT · shots-R8-cautious-4/m-new-478-132.png
+- year 4 · turn 44 · tuần 1 · buổi 0 · rank 0 · .dlg «Tết Trùng cửu · Thi thêu túi thù du» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-478-133.png
+- year 4 · turn 44 · tuần 1 · buổi 1 · rank 0 · #modal «Có người đến» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-478-134.png
+- year 4 · turn 44 · tuần 1 · buổi 2 · rank 0 · page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-cautious-4/m-look-480.png
+- year 4 · turn 44 · tuần 2 · buổi 0 · rank 0 · page «Thừa Minh cung · Thanh Dật trai · Không gặp ai.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc67Tài36Tâm cơ29Đức15Danh1 | Bạc39Sức100/100 | Buổi sáng, còn 4 khắc | Chưa điểm trang | trời thu trong | Quẻ Thượng (Sức khỏe) · shots-R8-cautious-4/m-new-482-135.png
+- year 4 · turn 44 · tuần 2 · buổi 0 · rank 0 · .dlg «Xét phẩm cuối tháng · Thường tại» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-482-136.png
+- year 4 · turn 45 · tuần 0 · buổi 0 · rank 0 · .dlg «Hội phối đồ: báo đề» · NEW SCREEN · first time on this screen; buttons: Xem thêm | Đã hiểu, sẽ chuẩn bịTốnkhông · shots-R8-cautious-4/m-new-486-137.png
+- year 4 · turn 45 · tuần 0 · buổi 0 · rank 0 · #kpinfo «» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-486-138.png
+- year 4 · turn 45 · tuần 0 · buổi 0 · rank 0 · .dlg «Phụ tuyến · Thay ngài thăm một vị quan già · Lời n» · NEW SCREEN · first time on this screen; buttons: Nhận lờiTùy duyênTốnkhôngĐượ | Khéo từ chốiRất vữngTốnSủng  · shots-R8-cautious-4/m-new-486-139.png
+- year 4 · turn 45 · tuần 0 · buổi 0 · rank 0 · .dlg «Đồ thất lạc» · NEW SCREEN · first time on this screen; buttons: Lui | ThườngVáy sa xanh ngọc · shots-R8-cautious-4/m-new-486-140.png
+- year 4 · turn 45 · tuần 1 · buổi 0 · rank 0 · .dlg «Thánh thọ Thái hậu · Lời mời: Thi điều hương an th» · NEW SCREEN · first time on this screen; buttons: Ghi tên dự thi điều hươngMon | Không dựRất vữngTốnkhôngĐược · shots-R8-cautious-4/m-new-490-141.png
+- year 4 · turn 45 · tuần 1 · buổi 0 · rank 0 · .dlg «Tin mua được» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-490-142.png
+- year 4 · turn 45 · tuần 1 · buổi 0 · rank 0 · .dlg «Có thai: Rất thấp» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-490-143.png
+- year 4 · turn 45 · tuần 1 · buổi 2 · rank 0 · .dlg «Ân thưởng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-492-144.png
+- year 4 · turn 45 · tuần 1 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=8: Tin báo / Tin báo / Tin báo / Công · Nữ công: các lối / Đức / Tin báo) · shots-R8-cautious-4/loop-45.png
+- year 4 · turn 44 · tuần 0 · buổi 0 · rank 0 · #modal «Đồ cũ trở về» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-495-145.png
+- year 4 · turn 44 · tuần 0 · buổi 0 · rank 0 · page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 1 ngườ» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc67Tài36Tâm cơ23Đức17Danh0 | Bạc94Sức99/99 | Buổi sáng, còn 4 khắc | Phong hàn · nhẹ | Chưa điểm trang | nắng vàng · shots-R8-cautious-4/m-new-495-146.png
+- year 4 · turn 43 · tuần 2 · buổi 3 · rank 0 · #klife «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-cautious-4/m-look-500.png
+- year 4 · turn 44 · tuần 0 · buổi 1 · rank 0 · #modal «Có người bán tin» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-501-147.png
+- year 4 · turn 44 · tuần 1 · buổi 0 · rank 0 · .dlg «Cung nữ thân tín» · NEW SCREEN · first time on this screen; buttons: Để Cung Chính ti tra hỏiRất | Đứng ra bảo lãnh cho nàng ta · shots-R8-cautious-4/m-new-505-148.png
+- year 4 · turn 44 · tuần 1 · buổi 0 · rank 0 · .dlg «Đèn nến trong cung» · NEW SCREEN · first time on this screen; buttons: Dặn giữ đèn nến cẩn thậnRất | Cất đồ quý sang chỗ khácRất | Bỏ quaTốnkhôngĐượckhông · shots-R8-cautious-4/m-new-505-149.png
+- year 4 · turn 44 · tuần 0 · buổi 1 · rank 0 · #modal «Tin báo» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-513-150.png
+- year 4 · turn 44 · tuần 0 · buổi 2 · rank 0 · #modal «Có người tìm đến» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-516-151.png
+- year 4 · turn 44 · tuần 0 · buổi 2 · rank 0 · .dlg «Có người tìm đến» · NEW SCREEN · first time on this screen; buttons: Tiếp chuyệnTốn1 khắcĐượccùng | Không tiếpTốnkhôngĐượcThường · shots-R8-cautious-4/m-new-517-152.png
+- year 4 · turn 44 · tuần 1 · buổi 0 · rank 0 · .dlg «Bị tố bày biện xa xỉ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-519-153.png
+- year 4 · turn 44 · tuần 1 · buổi 1 · rank 0 · page «Thừa Minh cung · Thanh Dật trai · Ở đây còn 1 ngườ» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-cautious-4/m-look-520.png
+- year 4 · turn 44 · tuần 1 · buổi 1 · rank 0 · .dlg «Lật thẻ: Rất thấp» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-520-154.png
+- year 4 · turn 44 · tuần 1 · buổi 3 · rank 0 · .dlg «Gió lạnh, đường trơn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-522-155.png
+- year 4 · turn 44 · tuần 2 · buổi 0 · rank 0 · .dlg «Phụ tuyến · Lo áo bông cho quân biên ải · Lời nhờ » · NEW SCREEN · first time on this screen; buttons: Nhận lờiTùy duyênTốnkhôngĐượ | Khéo từ chốiRất vữngTốnkhông · shots-R8-cautious-4/m-new-523-156.png
+- year 4 · turn 44 · tuần 2 · buổi 1 · rank 0 · .dlg «Ta bắt gặp» · NEW SCREEN · first time on this screen; buttons: Nghe lénCó cơTốn1 khắcĐượcbi | Thôi, lui về cungTốn0 khắc đ | Mặc kệTốnkhôngĐượckhôngGhi c · shots-R8-cautious-4/m-new-524-157.png
+- year 4 · turn 45 · tuần 1 · buổi 0 · rank 0 · .dlg «Thánh thọ Thái hậu · Thi múa “Trường xuân”» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-531-158.png
+- year 4 · turn 45 · tuần 1 · buổi 0 · rank 0 · .dlg «Hội phối đồ · Cổ phong» · NEW SCREEN · first time on this screen; buttons: Tự tay phối đồTốnSức -5Đượcđ | Cáo bệnh, không dựTốnDanh -1 · shots-R8-cautious-4/m-new-531-159.png
+- year 4 · turn 45 · tuần 2 · buổi 2 · rank 0 · .dlg «Lật thẻ: Không có» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-537-160.png
+- year 4 · turn 45 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=2: Quý tộc kén rể · kén dâu / Tin trong cung buổi này) · shots-R8-cautious-4/loop-47.png
+- year 4 · turn 45 · tuần 0 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-cautious-4/m-look-540.png
+- year 4 · turn 45 · tuần 0 · buổi 0 · rank 0 · #modal «Lễ tấn phong Thường tại Lôi Ôn Nguyệt Quế» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-540-161.png
+- year 4 · turn 45 · tuần 0 · buổi 0 · rank 0 · .dlg «Lễ tấn phong Thường tại Lôi Ôn Nguyệt Quế» · NEW SCREEN · first time on this screen; buttons: Đến chúc mừngTốnSức -5Đượcth | Gửi lễ mừngTốnBạc -15Đượcthi | Không đếnTốnkhôngĐượcSức +3K · shots-R8-cautious-4/m-new-540-162.png
+- year 4 · turn 45 · tuần 0 · buổi 0 · rank 0 · #modal «Thỉnh bình an mạch» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-540-163.png
+- year 4 · turn 45 · tuần 0 · buổi 0 · rank 0 · .dlg «Thánh thọ Thái hậu · Lời mời: Thi hát chúc thọ Thá» · NEW SCREEN · first time on this screen; buttons: Ghi tên dự thi hátMong manhT | Không dựRất vữngTốnkhôngĐược · shots-R8-cautious-4/m-new-540-164.png
+- year 4 · turn 45 · tuần 0 · buổi 0 · rank 0 · page «Ngọc Thanh các · Ở đây còn 1 người.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc67Tài36Tâm cơ23Đức18Danh4 | Bạc57Sức95/100 | Buổi sáng, còn 4 khắc | Chưa điểm trang | tuyết dày | Quẻ Thượng (Sức khỏe) · shots-R8-cautious-4/m-new-540-165.png
+- year 4 · turn 45 · tuần 1 · buổi 3 · rank 0 · .dlg «Tâm trạng · Thường tại Trương Tiểu Mãn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-547-166.png
+- year 4 · turn 45 · tuần 2 · buổi 0 · rank 0 · .dlg «Quẻ Hạ · Danh» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-R8-cautious-4/m-new-548-167.png
+- year 4 · turn 46 · tuần 2 · buổi 0 · rank 0 · .dlg «Phụ tuyến · May áo bông cho cung nhân già · Lời nh» · NEW SCREEN · first time on this screen; buttons: Nhận lờiCó cơTốnkhôngĐượcđượ | Khéo từ chốiRất vữngTốnkhông · shots-R8-cautious-4/m-new-552-168.png
+- year 4 · turn 46 · tuần 2 · buổi 0 · rank 0 · .dlg «Tâm bệnh · nhẹ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-552-169.png
+- year 4 · turn 46 · tuần 2 · buổi 3 · rank 0 · .dlg «Danh hiệu» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh · shots-R8-cautious-4/m-new-555-170.png
+- year 4 · turn 47 · tuần 0 · buổi 0 · rank 0 · .dlg «Bị thu hiệu ban» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-556-171.png
+- year 4 · turn 47 · tuần 0 · buổi 0 · rank 0 · .dlg «Nội vụ phủ thu đồ» · NEW SCREEN · first time on this screen; buttons: ThườngÁo lụa thêu hoa nhỏ | Tuân chỉ · shots-R8-cautious-4/m-new-556-172.png
+- year 4 · turn 47 · tuần 1 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-cautious-4/m-look-560.png
+- year 4 · turn 47 · tuần 1 · buổi 0 · rank 0 · .dlg «Chương 4 sắp hết hạn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-560-173.png
+- year 4 · turn 48 · tuần 0 · buổi 0 · rank 0 · .dlg «Chương 4 khép lại» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-568-174.png
+- year 4 · turn 48 · tuần 0 · buổi 0 · rank 0 · .dlg «Chương 5: Chiếc nhẫn trong tay áo» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-568-175.png
+- year 4 · turn 48 · tuần 0 · buổi 0 · rank 0 · .dlg «Tâm bệnh · nặng» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-568-176.png
+- year 4 · turn 48 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Quý nhân Bạch Chiêu Nghi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-571-177.png
+- year 4 · turn 48 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Hiền thường tại Hách Thần Hi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-571-178.png
+- year 4 · turn 48 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Quý nhân Trương Tiểu Mãn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-571-179.png
+- year 4 · turn 48 · tuần 1 · buổi 2 · rank 0 · .dlg «Chương 5 · Chiếc nhẫn trong tay áo» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/35 | Thiên mệnh | Đi làm: Giữ Sức, chờ dịp xin · shots-R8-cautious-4/m-new-574-180.png
+- year 4 · turn 48 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=11: Tin báo / Lịch tháng / Chương 5 · Chiếc nhẫn trong tay áo / Nhờ thái giám tìm thú nuôi / Tin chờ người sai đi / Tin chờ người sai đi) · shots-R8-cautious-4/loop-51.png
+- year 5 · turn 49 · tuần 0 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-cautious-4/m-look-580.png
+- year 5 · turn 49 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Thường tại Tào Nhạn Hồi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-583-181.png
+- year 5 · turn 49 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Quý nhân Lôi Ôn Nguyệt Quế» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-583-182.png
+- year 5 · turn 49 · tuần 2 · buổi 0 · rank 0 · .dlg «Quốc tang» · NEW SCREEN · first time on this screen; buttons: Quỳ túc trực, tụng kinhTốnSứ | Thắp nén hương rồi luiTốnkhô · shots-R8-cautious-4/m-new-588-183.png
+- year 5 · turn 50 · tuần 0 · buổi 0 · rank 0 · .dlg «Hạn hán, mất mùa» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-592-184.png
+- year 5 · turn 50 · tuần 0 · buổi 2 · rank 0 · .dlg «Quẻ Hạ · Sức khỏe» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-R8-cautious-4/m-new-594-185.png
+- year 5 · turn 50 · tuần 2 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-cautious-4/m-look-600.png
+- year 5 · turn 50 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=10: Tin báo / Tin chờ người sai đi / Tin chờ người sai đi / Tin báo / Tin báo / Tin chờ người sai đi) · shots-R8-cautious-4/loop-53.png
+- year 5 · turn 51 · tuần 0 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=13: Tin chờ người sai đi / Tin báo / Cầm / Chương 5 · Chiếc nhẫn trong tay áo / Tin chờ người sai đi / Tin báo) · shots-R8-cautious-4/loop-54.png
+- year 5 · turn 51 · tuần 1 · buổi 3 · rank 0 · .dlg «Tâm trạng · Tần Trương Tiểu Mãn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-611-186.png
+- year 5 · turn 52 · tuần 0 · buổi 0 · rank 0 · .dlg «Ôn dịch» · NEW SCREEN · first time on this screen; buttons: Đóng cửa cung, xông ngảiTốnB | Vẫn đi lại như thườngTốnkhôn · shots-R8-cautious-4/m-new-616-187.png
+- year 5 · turn 52 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Quý nhân Lục Diêu Tiểu Hoàn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-619-188.png
+- year 5 · turn 52 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Gia quý nhân Thiệu Tịnh Nghi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-619-189.png
+- year 5 · turn 52 · tuần 1 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-cautious-4/m-look-620.png
+- year 5 · turn 53 · tuần 0 · buổi 0 · rank 0 · .dlg «Ý chỉ tiết kiệm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-628-190.png
+- year 5 · turn 53 · tuần 0 · buổi 0 · rank 0 · .dlg «Hỏa hoạn lớn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-628-191.png
+- year 5 · turn 54 · tuần 0 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-cautious-4/m-look-640.png
+- year 5 · turn 54 · tuần 1 · buổi 3 · rank 0 · .dlg «Đã biết về Tĩnh quý phi Khổng Ngưng Hoa» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-647-192.png
+- year 5 · turn 54 · tuần 1 · buổi 3 · rank 0 · .dlg «Công · Nữ công: các lối» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-647-193.png
+- year 5 · turn 54 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=10: Vũ: các lối / Tin báo / Tin báo / Tin báo / Tin báo / Tin báo) · shots-R8-cautious-4/loop-60.png
+- year 5 · turn 55 · tuần 2 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-cautious-4/m-look-660.png
+- year 5 · turn 55 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Uyển quý nhân Thẩm Chỉ Lan» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-663-194.png
+- year 5 · turn 56 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Thường tại Bạch Chiêu Nghi» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-667-195.png
+- year 5 · turn 56 · tuần 0 · buổi 3 · rank 0 · .dlg «Tâm trạng · Tần Lôi Ôn Nguyệt Quế» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-667-196.png
+- year 5 · turn 57 · tuần 1 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-cautious-4/m-look-680.png
+- year 5 · turn 57 · tuần 1 · buổi 0 · rank 0 · .dlg «Yến đầy tháng hoàng tử» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-680-197.png
+- year 5 · turn 57 · tuần 2 · buổi 3 · rank 0 · .dlg «Tâm trạng · Huệ phi Lưu Ngọc Khê» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-687-198.png
+- year 5 · turn 58 · tuần 0 · buổi 3 · rank 0 · .dlg «Quẻ Thượng thượng · Con cái» · NEW SCREEN · first time on this screen; buttons: Lui | Gieo lạiTốnBạc -10·1 khắcĐượ · shots-R8-cautious-4/m-new-691-199.png
+- year 5 · turn 58 · tuần 1 · buổi 3 · rank 0 · #modal «Quẻ Hạ · Sủng» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-695-200.png
+- year 5 · turn 58 · tuần 2 · buổi 2 · rank 0 · #modal «Chương 5 · Chiếc nhẫn trong tay áo» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-cautious-4/m-new-698-201.png
+- year 5 · turn 59 · tuần 0 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-cautious-4/m-look-700.png
+- year 5 · turn 59 · tuần 1 · buổi 3 · rank 0 · .dlg «Đã biết về Phế phi Khổng Ngưng Hoa» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-cautious-4/m-new-707-202.png
+- year 5 · turn 59 · tuần 2 · buổi 3 · rank 0 · - · ODD · [game] softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=2: Chương 5 · Chiếc nhẫn trong tay áo / Tin trong cung buổi này) · shots-R8-cautious-4/loop-72.png
+- year 5 · turn 60 · tuần 2 · buổi 0 · rank 0 · ending · EVENT · life over: Lãnh cung — Phát điên trong lãnh cung · age 22 · buổi 711 · bugs 41 · stuck 9 · dead buttons 18 · shots-R8-cautious-4/end.png
