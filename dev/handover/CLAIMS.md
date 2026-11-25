@@ -1726,3 +1726,4 @@ rv temper-perception r2 | review/temper-perception-rv | session_01D3E3NaXCgiiLt5
 HARDLOCK-CHOICE-R3 (unify hardlock-choice with LIVE jdeadcard, one rule) | review/hardlock-choice-r3 | session_01N1tNP4cyVoeLHp6YVozQ5r (FOREMAN B) | RUNNING | 2026-11-25T11:05Z
 d-robot-bugs (robot-found game bugs ×5) | review/d-robot-bugs | session_01D3E3NZRWbpM7zyLv8pxisZ | RUNNING | 2026-11-25T11:06Z (Foreman D)
 talk-others-people r2 | review/talk-others-people-rv | PASS 25a9a9cc | LAND READY (after dfu) | 2026-11-25T11:34Z (Foreman D)
+PCPORT-RK (f.rk non-string, whole family readers+writers) | review/pcport-rk | session_01N1tNP63faDcCU7EogpnFDG (FOREMAN B) | RUNNING | 2026-11-25T11:38Z
