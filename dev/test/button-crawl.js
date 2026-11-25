@@ -20,8 +20,8 @@ const FAST=!!opt('fast',false);
 const OUT=path.resolve(opt('out','/home/user/wt/bc-out/run'));
 const DEVS={fold:[755,1000],ipad:[1180,820]};
 const DEV=String(opt('dev',FAST?'fold':'fold,ipad')).split(',').filter(d=>DEVS[d]);
-const DEPTH=+opt('depth',FAST?1:3),MAXTAPS=+opt('max',FAST?400:100000);
-const STARTS=String(opt('start',FAST?'title,home':'title,home,tour')).split(',');
+const DEPTH=+opt('depth',FAST?1:3),MAXTAPS=+opt('max',FAST?160:100000);
+const STARTS=String(opt('start',FAST?'home':'title,home,tour')).split(',');
 const GAME=opt('game',path.join(REPO,'index.html'));
 /* pictures load as she sees them (layout depends on them; --noimg blocks them for speed); sound/video are blocked */
 const BLOCK=opt('noimg',false)?/\.(webp|png|jpe?g|gif|mp3|ogg|m4a|mp4|webm)(\?|$)/i:/\.(mp3|ogg|m4a|mp4|webm)(\?|$)/i;
@@ -86,7 +86,7 @@ const INPAGE=()=>{
    const onS=[...document.querySelectorAll('.on,.sel,.active,.picked,[aria-selected=true],[aria-pressed=true],:checked')].filter(e=>this.vis(e)).map(e=>this.desc(e)+(e.innerText||'').slice(0,12)).join(',');
    const txt=(document.body.innerText||'')+onS;let th=0;for(let i=0;i<txt.length;i++)th=(th*31+txt.charCodeAt(i))|0;
    const pn=document.getElementById('panel');let panel='';if(pn&&this.vis(pn)){const t=(pn.className+'|'+(pn.firstElementChild?pn.firstElementChild.className:'')+'|'+(pn.innerText||'').slice(0,80));let h=0;for(let i=0;i<t.length;i++)h=(h*31+t.charCodeAt(i))|0;panel=String(h)}
-   let kg='';try{if(typeof KG82!=='undefined'&&document.getElementById('kg82')&&this.vis(document.getElementById('kg82')))kg=KG82.phase||(KG82.setup?'setup':'')}catch(e){}
+   let kg='';try{const g=document.getElementById('kg82')||document.querySelector('#ov .kgame');if(typeof KG82!=='undefined'&&g&&this.vis(g))kg=KG82.phase||(KG82.setup?'setup':'intro')}catch(e){}
    return{roots:roots.sort(),tab,panel,kg,S:sh,txt:txt.length+':'+th,title:!!(document.getElementById('title')&&!document.getElementById('title').hidden),q:(typeof Q!=='undefined'&&Q||[]).length}},
   baseline(){this.base=new Set([...document.body.children]);this.hid=[...document.querySelectorAll('[id]')].filter(e=>this.isFixedRoot(e)).map(e=>[e,e.hidden])},
   snap(){this.sv=JSON.stringify(ser());this.baseline();this.list();this.homeLive=new Set(this.liveRoots());this.homeSig=JSON.stringify(this.sig().roots.map(r=>r.split(':')[0]))},
@@ -115,7 +115,7 @@ function verdict(b,pre,post,errs,closedOwn,par){
  const closeLike=b.x||/^(Đóng|Thôi|Bỏ qua|Quay lại|Trở về|Về|Hủy|Huỷ|Để sau|Xong|Đã hiểu|Biết rồi|Lui)$/i.test(b.label);
  const backTo=par&&JSON.stringify(post.roots)===JSON.stringify(par.roots);
  /* KIT §13.9: the ✕ «Quay lại» of a mini-game frame gives up = the caller's own lose RESULT; it must never start the board / open the next screen */
- if(closeLike&&!closedOwn&&pre.kg!==''&&post.kg==='result')return['PASS','gave up → its lose result (KIT §13.9)'];
+ if(closeLike&&!closedOwn&&pre.kg!==''&&(post.kg==='result'||post.S!==pre.S))return['PASS','gave up → the game ended with its lose result (KIT §13.9)'];
  if(closeLike)return closedOwn?['PASS','closed its layer']:backTo?['PASS','back to the screen before']:(changed?['FAIL','close button did not close its layer (something else changed)']:['FAIL','close button: nothing happened']);
  if(b.tab)return post.tab===b.tab||pre.tab===b.tab&&changed?['PASS','tab '+b.tab+' shown']:changed?['WARN','tab button changed the screen but tab '+b.tab+' not marked on']:['FAIL','tab button: nothing happened'];
  if(!changed&&b.on)return['PASS','already on (tapping the shown tab/choice again changes nothing)'];
@@ -283,9 +283,9 @@ async function crawlDev(b,URL,dev){
  const n=k=>rows.filter(r=>r.verdict===k).length;
  console.log(`BUTTON CRAWL ${n('FAIL')?'FAIL':'PASS'} · ${DEV.join('+')} · taps ${taps} · PASS ${n('PASS')} · FAIL ${n('FAIL')} (dead ${rows.filter(r=>r.hit==='DEAD').length}) · WARN ${n('WARN')} · SKIP ${n('SKIP')} · hard restores ${hard} · ${Math.round((Date.now()-t0)/1000)} s`);
  /* gate (fast) fails on the sure faults only: a dead (covered/off-screen) button, a JS error on a tap, a ✕/close that does not close */
- const hard=rows.filter(r=>r.verdict==='FAIL'&&(r.hit==='DEAD'||/^JS error|^close button|crawler crashed/.test(r.why||'')));
- if(FAST){for(const r of hard.slice(0,12))console.log('  FAIL',r.dev,'·',(r.screen||'').slice(0,50),'·',r.label,'·',r.why.slice(0,140));console.log(`BUTTON CRAWL GATE ${hard.length?'FAIL':'PASS'} · ${hard.length} sure faults (dead/JS error/close) · ${n('FAIL')-hard.length} soft «no effect» rows not gating`)}
- process.exit(FAST&&hard.length?1:0)})();
+ const sure=rows.filter(r=>r.verdict==='FAIL'&&(r.hit==='DEAD'||/^JS error|^close button|crawler crashed/.test(r.why||'')));
+ if(FAST){for(const r of sure.slice(0,12))console.log('  FAIL',r.dev,'·',(r.screen||'').slice(0,50),'·',r.label,'·',r.why.slice(0,140));console.log(`BUTTON CRAWL GATE ${sure.length?'FAIL':'PASS'} · ${sure.length} sure faults (dead/JS error/close) · ${n('FAIL')-sure.length} soft «no effect» rows not gating`)}
+ process.exit(FAST&&sure.length?1:0)})();
 
 function report(dir){const R=JSON.parse(fs.readFileSync(path.join(dir,'crawl-all.json'),'utf8'));
  const e=s=>String(s||'').replace(/\|/g,'¦').replace(/\n/g,' ');

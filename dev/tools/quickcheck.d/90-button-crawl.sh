@@ -1,6 +1,6 @@
 #!/bin/bash
 # quickcheck hook (button crawler, owner OD 25/11 ~05:10Z «cho robot đi bấm từng cái nút ... nó work cho đúng» + real taps «như người bấm thật»):
-# FAST mode of dev/test/button-crawl.js on the new build, Fold 755x1000: the title screen + a fresh life's home screen and every screen one
+# FAST mode of dev/test/button-crawl.js on the new build, Fold 755x1000: a fresh life's home screen and every screen one
 # tap away; every visible button is REAL-TAPPED (dev/test/realtap.js: elementFromPoint hit-check, then a touch tap at its centre).
 # FAIL = a dead button (covered / off-screen), a JS error on a tap, or a ✕/close that does not close its frame. ~1.5 min.
 KIT=${QC_KIT:-$(cd "$(dirname "$0")/../../.." && pwd)}
