@@ -210,3 +210,6 @@ function hireMaster(){if(S.bac<BAL.bacFee.master||S.master||S.dead)return;apply(
 /* what a won night is worth, in numbers: a full thị tẩm (Sủng, Ân tình, a chance of a child and of a gift); the cost to the rival on a red 'kèm' line */
 function stealX(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}const M=BAL.steal.m[road?"road":"feign"];const w=M&&M.win&&Object.keys(M.win).length?` · ${fmt(M.win)}`:"";return `${sgRange(nightG(0),nightG(10))} · Ân tình +${nightA(0)} đến +${nightA(5)}${w}${S.preg?"":` · thai: ${chanceW(c)}`} · có thể được thưởng · kèm: ${stealKem(v,road?"road":"feign")}`}
 function stealKem(v,mode){const B=BAL.steal,M=(B.m&&B.m[mode==="road"?"road":"feign"])||{};const rel=M.rel==null?B.rel:M.rel,gh=M.ghen==null?B.ghen:M.ghen;const h=BAL.relOan.hurt;let o=Math.round(rel*h);try{o=Math.round(rel*h*persF(v,"slight",1))}catch(e){}return `${v.name} ghen +${gh}, quý ngươi -${rel}, oán ngươi +${o}${M.hh?`, Hoàng hậu quý ngươi -${M.hh}`:""}`}
+/* save-unseen-lists (review r2 of save-year-rollback, item 4; same family as j6 «Tiếp tục» / j42 srvInit): start() sets quiet=true while it builds the
+   life and false at its end; a throw in any step between left quiet on = no save for the whole life. quiet is always released when start returns. */
+{const s0=start;start=function(){try{return s0.apply(this,arguments)}finally{quiet=false}}}
