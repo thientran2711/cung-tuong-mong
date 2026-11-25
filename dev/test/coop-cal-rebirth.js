@@ -10,6 +10,7 @@
      2 GUEST dies inside the month roll (S.turn++, +3) → same
      3 HOST dies after his tuần step (date +1)       → same (the host's new life too)
      4 GUEST reload with a snapshot ahead of the room → her week is the room's date (the snapshot is not restored)
+     6 CAUSE 5 r2: a «Tin báo» notice panel open (nothing to choose) is carried over the room's step, never holds it
      5 CAUSE 5 (buổi split): his own look-up panel («Tâm trạng · Ngươi», 3 queued copies) never holds the room's buổi step; a real choice still does
    env ONLY=1,5 runs only those cases (debug). */
 const {chromium}=require('playwright');const path=require('path');
@@ -119,5 +120,17 @@ async function rebirthCase(A,B,X,tag,how){
   ok((await D(A)).b===a2.b&&await A.p.evaluate(()=>!!COOPW.pendBuoi),'5: a real choice open still holds his step (pendBuoi)',await D(A));
   await A.p.evaluate(()=>{const b=[...document.querySelectorAll('#modal .opts button')].find(x=>/^Nhận/.test(x.textContent.trim()));if(b)b.click()});
   ok(await CB.until(A,b=>(S.buoi||0)===b+1,a2.b,15000)&&await A.p.evaluate(()=>window.__c5===1),'5: he answers → his step runs, the choice ran once')}
+ /* 6 CAUSE 5 r2 (U3b room 6ZB2 on d16c5300: both seats had «Tin báo» open, host «onBuoi 3.2 me 3.1 Q1» parked): a panel that only TELLS
+    (the «Tin báo» notice panel she opened, no choice) is carried over the room's step: his seat steps with the room and the panel is still
+    on his screen after it (nothing she was reading is lost) */
+ if(ON(6)){const LAST=await A.p.evaluate(()=>typeof B4L==='number'?B4L:2);const nx=o=>o.p.evaluate(()=>{const n=document.getElementById('next');if(!n||n.disabled||!document.getElementById('modal').hidden)return false;n.click();return true});
+  ok(await play(A,B,async()=>{const a=await D(A),c=await D(B);return await alive(A)&&await alive(B)&&a.w===c.w&&a.b===c.b&&a.b<LAST},120000),'6: both live in one day buổi');
+  let hp=false;for(let i=0;i<30&&!hp;i++){hp=await nx(A);if(!hp){await clr(A);await sleep(300)}}const a0=await D(A);ok(hp,'6: host presses Hết buổi',a0);await sleep(800);
+  ok(await A.p.evaluate(()=>{kitNotice({id:'t6',line:'Tin thử ca 6',text:'Một tin để đọc, không có gì phải chọn.'});kitNoticeOpen('t6');return !document.getElementById('modal').hidden&&Q.length===1&&/Tin báo/.test((document.getElementById('mt')||{}).textContent||'')}),'6: host has «Tin báo» open (a notice, no choice)');
+  let pr=false;for(let i=0;i<30&&!pr;i++){pr=await nx(B);if(!pr){await clr(B);await sleep(300)}}ok(pr,'6: guest presses Hết buổi');
+  ok(await CB.until(B,b=>(S.buoi||0)===b+1,a0.b,20000),'6: the room steps (guest in the next buổi)');
+  const st=await CB.until(A,b=>(S.buoi||0)===b+1&&!COOPW.pendBuoi,a0.b,15000);const a1=await D(A),b1=await D(B);
+  ok(st&&a1.b===b1.b,'6: the host steps with the room (no split)',[a1.b,b1.b,await A.p.evaluate(()=>({pb:!!COOPW.pendBuoi,Q:Q.length,tr:COOPW.tr.slice(-4)}))]);
+  ok(await A.p.evaluate(()=>Q.some(x=>x&&x.t==='Tin báo')),'6: the «Tin báo» panel is still there after the step (carried, not lost)')}
  const errs=[...A.errs.map(e=>'A '+e),...B.errs.map(e=>'B '+e)].filter(e=>!/WebSocket|net::|ERR_/.test(e));ok(!errs.length,'no page errors',errs.slice(0,4));
  const bad=res.filter(r=>!r[0]).length;console.log(`\nCOOP-CAL-REBIRTH ${bad?'FAIL':'PASS'} ${res.length-bad}/${res.length}`);await b.close();process.exit(bad?1:0)})().catch(e=>{console.error(e);process.exit(2)});

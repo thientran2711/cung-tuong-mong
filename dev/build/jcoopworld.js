@@ -426,13 +426,20 @@ CW.keepFriendPos=keepFriendPos;CW.refreshHere=()=>refreshHere();
    emptied it. A look-up panel never holds the room: at the step it is closed (one tap opens it again), as the merged week already drops
    every non-card panel (fromCanon keepQ). Real choices, news and mini games still hold the step (pendBuoi) as before. */
 const isLook=x=>!!(x&&x.kit&&x.kit.look);CW.isLook=isLook;
-function dropLook(why){if(!Q.length||!Q.every(isLook))return false;const n=Q.length;Q.length=0;try{const M=$("modal");if(M)M.hidden=true}catch(e){}T("drop look "+n+" "+why);CW.lookDrop=(CW.lookDrop||0)+n;return true}
+function dropLook(why){const n0=Q.length;if(!n0||!Q.some(isLook))return !n0;for(let i=Q.length-1;i>=0;i--)if(isLook(Q[i]))Q.splice(i,1);const n=n0-Q.length;try{const M=$("modal");if(M&&!Q.length)M.hidden=true;else if(n0!==Q.length&&typeof showModal==="function")showModal()}catch(e){}T("drop look "+n+" "+why);CW.lookDrop=(CW.lookDrop||0)+n;return !Q.length}
 CW.dropLook=dropLook;
+/* a queued panel with nothing to choose: no options (old opts or kit opts), no card pid (a choice card), not an ending */
+const passive=x=>!!x&&!isLook(x)&&!x.pid&&!(Array.isArray(x.opts)&&x.opts.length)&&!(x.kit&&Array.isArray(x.kit.opts)&&x.kit.opts.length)&&x.cls!=="end";CW.passiveQ=passive;
 function onBuoi(m){T("onBuoi "+m.week+"."+m.buoi+" me "+wk()+"."+(S&&S.buoi)+" Q"+Q.length+(S&&S.mg?" mg":""));if(!CW.on||!S||eW())return;CW.bend=false;CW.wantB=null;drainAg();
  if(!S.mg&&m.week===wk()&&(S.buoi||0)===m.buoi-1)dropLook("buoi");
+ /* CAUSE 5 r2 (U3b room 6ZB2 on d16c5300: both seats had «Tin báo» open, host «onBuoi 3.2 me 3.1 Q1» parked for ever): a panel that only
+    TELLS (no choice to make: no options, no card pid — a notice, news, a result) is carried over the step: it stays on her screen, the
+    step runs under it. Only a real choice (or a mini game) holds the room's step (pendBuoi), as before. */
+ let carry=null;if(!S.mg&&Q.length&&m.week===wk()&&(S.buoi||0)===m.buoi-1&&Q.every(passive)){carry=Q.splice(0);try{const M=$("modal");if(M)M.hidden=true}catch(e){}T("carry "+carry.length)}
  /* the room moved on: if a dialog is still open, step as soon as it is closed */
  if((Q.length||S.mg)&&m.week===wk()&&(S.buoi||0)===m.buoi-1){CW.pendBuoi=m;lockNext();return}CW.pendBuoi=null;
  if(m.week===wk()&&(S.buoi||0)===m.buoi-1&&!S.dead){CW.allow=true;try{nextBuoi()}finally{CW.allow=false}}
+ if(carry&&carry.length){Q.unshift(...carry);CW.carried=(CW.carried||0)+carry.length;try{showModal()}catch(e){console.error(e)}}
  /* the room is further on (came back after both steps, or a pendBuoi older than the room): next step at once */
  if(!S.dead&&typeof CW.rbuoi==="number"&&CW.rweek===wk()&&CW.rbuoi>(S.buoi||0)&&(S.buoi||0)===m.buoi)setTimeout(()=>{if(CW.on&&S&&CW.rweek===wk()&&CW.rbuoi>(S.buoi||0))onBuoi({week:wk(),buoi:(S.buoi||0)+1})},0);
  if(host())sendWhere();else if(CW.lastWhere)applyWhere(CW.lastWhere);sendPos();lockNext()}
@@ -832,7 +839,7 @@ COOP.on("act",onAct);COOP.on("res",onRes);COOP.on("actr",onActr);
 /* the week's end goes out once her dialogs are read: checked after each render / presence change (event-driven) */
 /* my acts on her not yet acknowledged (10 s at most: she may have dropped; the freeze covers that) */
 function resWait(){const n=Date.now();for(const id in CW.rpend)if(n-CW.rpend[id]>10000)delete CW.rpend[id];return Object.keys(CW.rpend).length>0}
-let tryT=0;function tryEnd(){tryT=0;if(CW.on&&CW.pend&&resWait()){tryT=setTimeout(tryEnd,400);return}if(CW.on&&CW.pendBuoi&&S&&!S.mg&&(!Q.length||dropLook("pend"))){onBuoi(CW.pendBuoi);return}
+let tryT=0;function tryEnd(){tryT=0;if(CW.on&&CW.pend&&resWait()){tryT=setTimeout(tryEnd,400);return}if(CW.on&&CW.pendBuoi&&S&&!S.mg&&(!Q.length||dropLook("pend")||Q.every(passive))){onBuoi(CW.pendBuoi);return}
  if(CW.on&&CW.wantB&&S){if(CW.wantB!==bkey()||S.dead||CW.bend||CW.pend||nReady())CW.wantB=null;else if(!Q.length&&!S.mg&&!needWhere()&&!waiting()&&!frozen()&&CW.base){T("wantB go "+CW.wantB);CW.wantB=null;nextBuoi();return}}nCheck();if(CW.on&&S&&CW.pend&&!Q.length&&!S.mg&&!S.dead&&!frozen())sendEnd()}
 function soonEnd(){if(CW.on&&(CW.pend||CW.pendBuoi||CW.wantB||CW.ngoW===wk()||CW.nrdy===wk())&&!tryT)tryT=setTimeout(tryEnd,0)}
 
