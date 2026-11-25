@@ -32,6 +32,15 @@ function dqUi(){try{return !window.__bot&&!(window.COOPW&&COOPW.on)&&typeof S!==
    random draw, no room message — the card stays in Q, so the room's own gates (Q.length / S.mg) already wait for it. It runs in a co-op room too
    (DAYQ-3: the room showed her v9 bug on both seats); gates (a) day turn and (b) book / news order stay solo (dqUi). Bots: off. */
 function dqUiC(){try{return !window.__bot&&typeof S!=="undefined"&&!!S&&!S.dead}catch(e){return false}}
+/* review/coop-night-live (LIVE coop-night FAIL, Foreman B 25/11): in a co-op room gate (c) holds a card ONLY while her own buổi is still open.
+   Once the ROOM waits on her seat — her week end is pending (CW.pend, after her night), a held buổi step (pendBuoi), she pressed Sẵn sàng
+   (bend / night-ready), or the room clock ran out on her buổi (jcooptimer overdue) — a card held behind an activity is painted as before
+   DAYQ-3: the room's own bounds (her reading, autoRead of a one-road card, nightAfk's carry) need it on her screen, and the room's gates
+   (sendEnd / nextBuoi / forceNight: !Q.length) wait on it. Without this an activity with no clock of its own (the «Phối đồ» board, kg82,
+   «không giới hạn») left open on one seat held that seat's cards hidden for ever: her week end never went, the partner sat on «Chờ hảo hữu…».
+   Solo: unchanged (dqRoomOwes is false outside a room). */
+function dqRoomOwes(){try{const c=window.COOPW;if(!c||!c.on)return false;return !!(c.pend||c.pendBuoi||c.bend||(c.nReady&&c.nReady())||(c.tm&&c.tm.od&&c.tm.od()))}catch(e){return false}}
+function dqHoldC(){return dqUiC()&&!dqRoomOwes()}
 function dqForced(){const c=window.COOPW;return !!(c&&(c.on||c.allow||c.allowN))}
 /* the REAL hidden state of an element (jspread lets game code read #modal as open during a buổi change) */
 const DQ_HID=Object.getOwnPropertyDescriptor(HTMLElement.prototype,"hidden");
@@ -79,7 +88,7 @@ function dqInside(a){try{const ev=window.event;if(!ev||!/click|pointer|touch|key
 function dqPlaying(){try{const D=window.DF;return !!(D&&Q[0]&&Q[0].dfSeen&&D.encM===Q[0]&&D.F)}catch(e){return false}}
 function dqActBlocks(){if(dqPlaying())return false;const a=dqActEl();return !!a&&!dqInside(a)}
 /* (c) an activity opened in the same tap as a card that was already painted (spend → card → mini-game): take the card back, unchosen */
-function dqPull(){try{if(!dqUiC()||!Q.length||DQ.user||!dqActEl())return;const D=window.DF,m=Q[0];let n=0;
+function dqPull(){try{if(!dqHoldC()||!Q.length||DQ.user||!dqActEl())return;const D=window.DF,m=Q[0];let n=0;
   if(D&&D.F&&D.encM===m&&m&&m.dfSeen&&!D.play){const F=D.F;m.dfSeen=0;D.encM=null;try{F.destroy()}catch(e){try{F.close()}catch(x){}}try{dfClosed(D.tk)}catch(e){}n=1}
   const M=$("modal");if(M&&!dqHidden(M)){DQ_HID.set.call(M,true);n=1}
   if(n){DQ.stat.pulled++;dqArmModal()}}catch(e){console.error("dayq pull",e)}}
@@ -109,7 +118,7 @@ function dqWait(){if(DQ.t)return;const tick=()=>{DQ.t=0;try{const w=DQ.want;if(!
   if(dqOldPending()){dqPaintQ();DQ.t=setTimeout(tick,dqPoll());return}DQ.want=null;if(Q.length||S.mg){DQ.stat.dropped++;try{render()}catch(e){}dqPaintQ();return}DQ.stat.ran++;nextBuoi()}catch(e){console.error("dayq wait",e)}};
  DQ.t=setTimeout(tick,dqPoll())}
 /* (b) a card held while the new-day host is up is painted once it closes */
-function dqArmModal(){if(DQ.mt)return;const tick=DQ.mtf=()=>{clearTimeout(DQ.mt);DQ.mt=0;try{if(!dqUiC())return;if((dqUi()&&dqDawn())||dqActBlocks()){DQ.mt=setTimeout(tick,dqPoll());return}
+function dqArmModal(){if(DQ.mt)return;const tick=DQ.mtf=()=>{clearTimeout(DQ.mt);DQ.mt=0;try{if(!dqUiC())return;if((dqUi()&&dqDawn())||(dqHoldC()&&dqActBlocks())){DQ.mt=setTimeout(tick,dqPoll());return}
   if(dqUi())dqNewsFirst();const M=$("modal");if(Q.length&&M&&dqHidden(M))showModal();
   /* SANGBUOI-HELD (Robot M4: DQ.mt 0, dropped 0, cards hidden until a tab tap): the tick was ONE-SHOT — when an inner showModal gate swallowed
      this paint nothing re-armed. While the queue is still unpainted, look again (bounded: BAL.dayq.rearm looks; any paint / empty Q resets) */
@@ -125,7 +134,7 @@ function dqInstall(){
     guard: a click dispatched while her tap is still running (a nested .click()) is dropped — one tap = one turn */
  try{const n=$("next");if(n){const o=n.onclick;let tapIn=0;n.onclick=function(e){if(tapIn){DQ.stat.tapRe++;return}tapIn=1;try{return o?o.call(this,e):nextBuoi()}finally{tapIn=0}}}}catch(e){console.error("dayq next",e)}
  /* (b) outermost showModal: nothing painted over the title card / book */
- const sm=showModal;showModal=function(){if(dqUiC()&&Q.length&&!DQ.user&&!(dqUi()&&dqDawn())&&dqActBlocks()){DQ.stat.actHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}
+ const sm=showModal;showModal=function(){if(dqHoldC()&&Q.length&&!DQ.user&&!(dqUi()&&dqDawn())&&dqActBlocks()){DQ.stat.actHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}
   if(dqUi()&&Q.length&&dqDawn()&&!DQ.user){DQ.stat.modalHeld++;try{const M=$("modal");if(M&&!dqHidden(M))DQ_HID.set.call(M,true)}catch(e){}dqArmModal();return}const r=sm.apply(this,arguments);try{if(dqUi()&&!Q.length)setTimeout(dqNextSync,0)}catch(e){}return r};window.showModal=showModal;
  /* an info panel she opens herself (kitModal inside a tap / key event: a person / item / term, e.g. inside the book) is shown at once, over the book;
     a kitModal posted by the game (no user event) waits like any card */
@@ -139,11 +148,12 @@ function dqInstall(){
  if(typeof dfOpen==="function"){const fo=dfOpen;dfOpen=function(){const r=fo.apply(this,arguments);try{DQ.fo=window.DF&&DF.tk||null}catch(e){}return r};window.dfOpen=dfOpen}
  /* (c) an activity appears (mini-game screen shown, a scene / podium / roulette / person view added): a card painted in the same tap is taken back */
  try{/* the activity is gone (scene / podium / mini-game screen closed): the held card is painted AT ONCE, not at the next poll (DAYQ-3) */
-  const mo=new MutationObserver(()=>{if(!Q.length)return;dqPull();try{if(DQ.mt&&DQ.mtf&&dqUiC()&&!dqActEl()&&!(dqUi()&&dqDawn()))DQ.mtf()}catch(e){}});mo.observe(document.body,{childList:true});const ov=document.getElementById("ov");if(ov)mo.observe(ov,{attributes:true,attributeFilter:["hidden"]})}catch(e){console.error("dayq observe",e)}}
+  const mo=new MutationObserver(()=>{if(!Q.length)return;dqPull();try{if(DQ.mt&&DQ.mtf&&dqUiC()&&(!dqHoldC()||!dqActEl())&&!(dqUi()&&dqDawn()))DQ.mtf()}catch(e){}});mo.observe(document.body,{childList:true});const ov=document.getElementById("ov");if(ov)mo.observe(ov,{attributes:true,attributeFilter:["hidden"]})}catch(e){console.error("dayq observe",e)}}
 /* (b) the new day's motion scenes (stipend chest, rewards …) wait until «Tin trong cung» is closed */
 (function(){if(typeof kmFree!=="function")return;const kf=kmFree;kmFree=function(){if(!kf.apply(this,arguments))return false;
  /* (c) a new motion scene waits while a mini-game screen or an on-figure game is open (a scene on screen is already one at a time: kmBusy;
     a scene from her own act in the person view shows there as before) */
+ /* (kit scenes never gate the room's week: sendEnd / nextBuoi wait on Q and S.mg only, so this hold stays as DAYQ-3 in a room too — review/coop-night-live) */
  try{if(dqUiC()){const ov=document.getElementById("ov");if((ov&&!dqHidden(ov))||(window.DF&&DF.play)){DQ.stat.actKm++;return false}
   /* a scene posted inside a tap waits one pump (kmPump retries in 250 ms): the tap may be opening an activity (her «Điểm trang» tap spends the
      khắc first, then opens the mirror) — a scene of the khắc never starts before / under that screen */

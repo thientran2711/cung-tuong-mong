@@ -71,16 +71,17 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
 const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');return {nf:typeof nfDebug==='function'?nfDebug():null,Q:Q.map(x=>x&&(x.pid||x.t)),modal:m&&!m.hidden?(document.getElementById('mt')||{}).textContent:null,
   mg:!!S.mg,ngoW:COOPW.ngoW,nrdy:COOPW.nrdy,ngo:COOPW.ngo,wk:COOP.state.week,pend:COOPW.pend,sent:COOPW.sent,allowN:COOPW.allowN,buoi:S.buoi,used:typeof used!=='undefined'?used:null,
   ld:S.ledger?{wk:S.ledger.wk,p:S.ledger.p,st:S.ledger.st}:null,ldG:S.ldG,cyHold:COOPW.cyHold,kmov:[...document.querySelectorAll('.kmov')].filter(x=>!x.classList.contains('km-out')).map(x=>x.id||x.className).slice(0,4),
-  dawn:!!(document.getElementById('dawn')&&document.getElementById('dawn').classList.contains('on')),tr:(COOPW.tr||[]).slice(-12),cf:{busy:window.cfBusy&&cfBusy(),age:window.cfAge&&cfAge(),dbg:(window.__cfdbg||[]).slice(-12),kmov:[...document.querySelectorAll('.kmov')].map(x=>x.className.slice(0,60)+':'+(x.getAttribute('aria-label')||'')),gains:(window.KFX&&KFX.gains||[]).slice(-4),inv:(S.inv||[]).slice(-3).map(x=>x&&[x.k,x.n||x.name,x.src||x.from,x.wk])},nw:S.nightWhy&&{wk:S.nightWhy.wk,pick:S.nightWhy.pick},day:typeof day==='function'&&day()}}catch(e){return e.message}}).catch(e=>e.message);
+  dawn:!!(document.getElementById('dawn')&&document.getElementById('dawn').classList.contains('on')),tr:(COOPW.tr||[]).slice(-12),cf:{busy:window.cfBusy&&cfBusy(),age:window.cfAge&&cfAge(),dbg:(window.__cfdbg||[]).slice(-12),kmov:[...document.querySelectorAll('.kmov')].map(x=>x.className.slice(0,60)+':'+(x.getAttribute('aria-label')||'')),gains:(window.KFX&&KFX.gains||[]).slice(-4),inv:(S.inv||[]).slice(-3).map(x=>x&&[x.k,x.n||x.name,x.src||x.from,x.wk])},nw:S.nightWhy&&{wk:S.nightWhy.wk,pick:S.nightWhy.pick},day:typeof day==='function'&&day(),DQ:window.DQ&&{st:DQ.stat,mt:!!DQ.mt,want:DQ.want,user:DQ.user},cyH:COOPW.cyHer&&COOPW.cyHer(),rp:Object.keys(COOPW.rpend||{}),cs:[COOP.state.status,COOP.state.peerOnline,!!COOPW.hold,JSON.stringify(COOP.state.ended||{})],pb:COOPW.pendBuoi,wb:COOPW.wantB}}catch(e){return e.message}}).catch(e=>e.message);
  /* both press through the day buổi until both are at tối */
  async function toNight(tag){if(process.env.ONLY&&!process.env.ONLY.split(',').includes(tag))return false;/* debug: ONLY=4,5 runs just those cases */for(let g=0;g<6;g++){const a=await D(A),c=await D(B);if(a.b>=LAST&&c.b>=LAST&&a.w===c.w)return true;
    const k=await A.p.evaluate(()=>COOPW.tm.myKey());await setTm(A,{buoiMs:120000});await reset(A);await clear(A);await clear(B);await press(A);await press(B);
    await bothPast(A,B,k,30000);for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}}
-  const a=await D(A),c=await D(B);return ok(a.b>=LAST&&c.b>=LAST,tag+': both at buổi tối',[a,c])||(a.b>=LAST&&c.b>=LAST)}
+  const a=await D(A),c=await D(B);if(!(a.b>=LAST&&c.b>=LAST))console.log('DUMP toNight '+tag,JSON.stringify([await A.p.evaluate(require('./lib/coop-clear.js').SCR).catch(e=>e.message),await B.p.evaluate(require('./lib/coop-clear.js').SCR).catch(e=>e.message),await A.p.evaluate(()=>window.DQ&&DQ.stat).catch(()=>null),await B.p.evaluate(()=>window.DQ&&DQ.stat).catch(()=>null)]));return ok(a.b>=LAST&&c.b>=LAST,tag+': both at buổi tối',[a,c])||(a.b>=LAST&&c.b>=LAST)}
  /* wait for the merged week on both, then compare */
  async function merged(tag,w0,ms=60000){const t0=Date.now();while(Date.now()-t0<ms){await clear(A);await clear(B);
    const a=await D(A),c=await D(B);if(a.w>w0&&c.w>w0&&!a.pend&&!c.pend)break;await sleep(400)}
-  await sleep(800);const a=await D(A),c=await D(B);if(!(a.w===w0+1&&c.w===w0+1))console.log('DUMP '+tag,JSON.stringify([await DUMP(A),await DUMP(B)]));ok(a.w===w0+1&&c.w===w0+1,tag+': both in the next week (exactly one step)',[w0,a.w,c.w]);
+  await sleep(800);const a=await D(A),c=await D(B);if(!(a.w===w0+1&&c.w===w0+1)){console.log('DUMP '+tag,JSON.stringify([await DUMP(A),await DUMP(B),await A.p.evaluate(require('./lib/coop-clear.js').SCR).catch(e=>e.message),await B.p.evaluate(require('./lib/coop-clear.js').SCR).catch(e=>e.message)]));
+   /* debug: is it only a missing re-check? poke each seat's week-end check once and look again (not counted) */for(const o of [A,B])await o.p.evaluate(()=>{try{COOPW.soonEnd()}catch(e){}});await sleep(4000);console.log('POKE '+tag,JSON.stringify([await D(A),await D(B)].map(x=>[x.w,x.pend,x.sent])))}ok(a.w===w0+1&&c.w===w0+1,tag+': both in the next week (exactly one step)',[w0,a.w,c.w]);
   ok(a.date===c.date&&a.b===c.b&&a.b===0,tag+': same date, both at buổi sáng',[a.date,c.date,a.b,c.b])}
  /* one seat ready at tối: it must stay in tối, the other untouched */
  async function readyOnly(X,Y,tag){const x0=await D(X),y0=await D(Y);
@@ -226,6 +227,35 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
   const k=await leaveBack(A,B,'8 host',()=>sleep(12000));
   const ms=await bothPast(A,B,k,40000);ok(ms>=0,'8: the clock ends after her return and both step',[await Ok(A),await Ok(B)]);
   await setTm(A,{buoiMs:120000});await reset(A)}
+ /* 10 (robot-coop-fix-4, robot10-coop week-end stuck): the host COMMITS the night (go out, the guest runs hers and sends `end`) while his own night
+    waits on a dialog; then his seat re-sends its life (sendMe: a new life / rejoin) — that reset cleared his run flag but kept the commit, so his
+    next Sẵn sàng could never commit again: both #next locked at buổi 3 for ever. Now the reset clears the commit too (and nCheck: his commit = his go). */
+ if(await toNight('10')){const w0=(await D(A)).w;await clear(A);await clear(B);ok(await isRd(B)||await press(B),'10: guest presses at tối');await sleep(3000);
+  ok(await until(A,w=>COOPW.nfr===w,w0,30000),'10: the host has her ready');
+  await A.p.evaluate(()=>{pushModal({t:'Biến cố đêm',h:'<p>Có tiếng động ngoài hiên.</p>',opts:[{n:'Ra xem',fx:{},x:'',go:()=>{}}]});showModal();render();COOPW.nightReady()});
+  ok(await A.p.evaluate(w=>COOPW.ngo===w,w0),'10: the host committed the night (go out), his own night waits on the dialog');
+  for(let i=0;i<20&&!(await A.p.evaluate(()=>!!(COOP.state.ended&&COOP.state.ended.b)));i++){await clear(B);await sleep(1000)}
+  console.log('10: guest end out =',await A.p.evaluate(()=>!!(COOP.state.ended&&COOP.state.ended.b)));
+  const a1=await D(A);ok(a1.w===w0&&a1.b===LAST&&a1.Q===1,'10: the host still in tối behind his dialog',a1);
+  await A.p.evaluate(()=>{COOPW.sendMe(JSON.parse(JSON.stringify(COOPW.base.P[COOPW.seat])))});await sleep(1500);
+  await A.p.evaluate(()=>{const b=[...document.querySelectorAll('#modal .opts button')].find(x=>/Ra xem/.test(x.textContent));if(b)b.click()});await sleep(1000);
+  await clear(A);ok(await isRd(A)||await press(A),'10: host presses again after the re-send');await merged('10',w0)}
+ /* 11 (robot-coop-fix-4, same family): the night gate and thin E's asks are keyed by week only; a NEW room (no reload) starts at week 0 again, so
+    the old room's commit / ready / ask would hit the same week of the new room. The room's start (begin) clears them when the room changes and
+    keeps them on a reconnect to the same room. Simulated: the seat's last room is named OLD1 with a commit / ask at this very week, then the
+    room's start fires (as a new room's would) → cleared; the same start with the room unchanged → kept. */
+ if(await toNight('11')){const w0=(await D(A)).w;await clear(A);await clear(B);
+  const same=await A.p.evaluate(w=>{COOPW.nfr=w-1;COOP.emit('start',{you:COOP.state.you});return COOPW.nfr===w-1},w0);ok(same,'11: same room start keeps the night gate');
+  const a=await A.p.evaluate(w=>{COOPW.nRoom='OLD1';COOPW.ngo=w;COOPW.nfr=w;COOP.emit('start',{you:COOP.state.you});return {ngo:COOPW.ngo,nfr:COOPW.nfr,room:COOPW.nRoom===COOP.state.room}},w0);
+  ok(a.ngo===-1&&a.nfr===-1&&a.room,'11: host, new room: the old commit / her old ready are cleared',a);
+  /* r1 reviewer (law 11): the host's thin E copies keyed by week / week:buổi (her stored ready E.rd, her owed step E.owe, her night E.nk, her Kỳ nguyệt ask E.cyA) */
+  const e=await A.p.evaluate(w=>{const E=COOPW.thin.E;COOPW.nRoom='OLD1';E.rd.b={w:COOP.state.week||0,b:S.buoi||0,at:Date.now()};E.owe={old:1};E.nk=w;E.cyA=7;COOP.emit('start',{you:COOP.state.you});return {rd:!!E.rd.b,owe:E.owe,nk:E.nk===undefined?null:E.nk,cyA:E.cyA===undefined?null:E.cyA}},w0);
+  ok(!e.rd&&e.owe===null&&e.nk===null&&e.cyA===null,'11: host, new room: her old stored ready / owed step / night / cycle ask are cleared',e);
+  const g=await B.p.evaluate(()=>{const E=COOPW.thin.E,k=(COOP.state.week||0)+':'+(S.buoi||0);COOPW.nRoom='OLD1';E.mine=k;COOP.emit('start',{you:COOP.state.you});return {mine:E.mine,room:COOPW.nRoom===COOP.state.room}});
+  ok(g.mine===''&&g.room,'11: guest, new room: her old ask is cleared',g);
+  for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
+  ok(await isRd(B)||await press(B),'11: guest presses');ok(await isRd(A)||await press(A),'11: host presses');await merged('11',w0)}
+ for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
  /* 9 at tối: the guest leaves after pressing, comes back; the host (still connected) recovers and the night goes for both */
  {await toNight('9');const w0=(await D(A)).w;await clear(B);await press(B);await sleep(1500);await leaveBack(B,A,'9 guest at tối');
   for(let i=0;i<3;i++){await clear(B);await sleep(300)}const c=await D(B);if(c.b>=LAST&&!c.ready){await clear(B);await press(B)}

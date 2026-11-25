@@ -4,6 +4,8 @@
    Two Playwright clients in one room (host Fold 755x1000 + guest iPad 1180x820; swap=1: iPad hosts), on EACH seat:
      A2 j5 mini-game (openMG) × S4 a queued card · A2 × S1 a visitor (gmCard, stage scene route) · A3 kit «Nhận» scene × S4 · A4 her own person view × S1 ·
      A1 her «Điểm trang» tap (the card arrives inside the tap's spend) × S1.
+   R (review/coop-night-live): the «Phối đồ» board (no clock) on each seat: the card waits while her buổi is open, is shown once the room clock
+   ran out on her buổi, and the week still merges with the board left open.
    Then one merged week on both seats (the room still turns), 0 page errors.
    usage: python3 dev/build/assemble.py && node dev/test/dayq-hold-coop.js [workerURL] [swap=0] */
 const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
@@ -73,6 +75,25 @@ async function runCase(o,A,Sx){const p=o.p;const r={seat:o.name,A,S:Sx,bad:[]};c
  for(const o of [Ho,G]){await o.p.evaluate(H);ok(await o.p.evaluate(()=>!!(window.COOPW&&COOPW.on)),o.name+': in the co-op world (COOPW.on)');
   for(const [A,Sx] of CASES){const r=await runCase(o,A,Sx);if(r.skip){console.log('skip '+o.name+' '+A+'×'+Sx+' '+r.skip);continue}
    ok(!r.bad.length,o.name+' '+A+'×'+Sx+': nothing painted inside the activity, shown after',r.bad.length?{bad:r.bad,src:r.src,after:r.after}:{src:r.src})}}
+ /* R (review/coop-night-live, LIVE coop-night FAIL 25/11): an activity with NO clock of its own (the «Phối đồ» board, jts tsDressGame / kg82,
+    «không giới hạn») open on one seat. While her buổi is open a card still waits behind it (v9, gate (c)); once the ROOM waits on her seat
+    (the room clock ran out on her buổi: jcooptimer overdue; same for her week end pending / Sẵn sàng) the held card is shown so the room's own
+    bounds (her reading it, autoRead, nightAfk) work — before the fix it stayed hidden in Q for ever and the room's gates (!Q.length) never
+    closed: her week end never went, the partner sat on «Chờ hảo hữu…». Then the room still turns one week. */
+ for(const X of [Ho,G]){const tag=X.name+' R (no-clock board)';for(let i=0;i<3;i++){await clear(Ho);await clear(G)}
+  await Ho.p.evaluate(()=>{Object.assign(BAL.coopTm,{buoiMs:600000});COOPW.tm.reset()});await sleep(800);
+  /* her buổi must be OPEN for the first check (week() may leave a seat on Sẵn sàng): finish that buổi for both first */
+  const free=o=>o.p.evaluate(()=>!COOPW.bend&&!COOPW.pend&&!COOPW.pendBuoi&&!(COOPW.nReady&&COOPW.nReady())&&!(COOPW.tm.od&&COOPW.tm.od()));
+  for(let t0=Date.now();Date.now()-t0<60000&&!(await free(X)&&await free(X===Ho?G:Ho));){await press(Ho,3000);await press(G,3000);for(let i=0;i<3;i++){await clear(Ho);await clear(G);await sleep(400)}}
+  const op=await X.p.evaluate(()=>{window.__dz=0;try{tsDressGame(Object.keys(TS_THEME)[0],()=>{window.__dz=1})}catch(e){return e.message}return __T.ovOpen()});
+  if(op!==true){console.log('skip '+tag+' board n/a',op);continue}
+  await X.p.evaluate(()=>__T.src('S4'));await sleep(1500);
+  ok(await X.p.evaluate(()=>__T.ovOpen()&&!__T.card()),tag+': her buổi open → the card waits behind the board (v9 in a room)');
+  await Ho.p.evaluate(()=>{Object.assign(BAL.coopTm,{buoiMs:6000,pauseCapMs:2000});COOPW.tm.reset()});
+  const sh=await until(X,()=>__T.ovOpen()&&__T.card(),null,40000);
+  ok(sh,tag+': the room clock ran out on her buổi → the held card is shown over the board',sh?undefined:await X.p.evaluate(()=>({Q:Q.map(m=>m.t),od:COOPW.tm.od&&COOPW.tm.od(),due:COOPW.tm.due(),pend:COOPW.pend,bend:COOPW.bend,st:window.DQ&&DQ.stat})));
+  await X.p.evaluate(()=>__T.answer());await Ho.p.evaluate(()=>{Object.assign(BAL.coopTm,{buoiMs:600000});COOPW.tm.reset()});
+  await week(Ho,G,tag);await X.p.evaluate(()=>{try{kg82Close()}catch(e){}render()})}
  await week(Ho,G,'after the cases');
  for(const o of [Ho,G])ok(!o.errs.length,o.name+': 0 page errors',o.errs.slice(0,5));
  const f=res.filter(x=>!x[0]).length;console.log(f?`dayq-hold-coop: FAIL ${f}/${res.length}`:`dayq-hold-coop: PASS ${res.length}/${res.length}`);await b.close();process.exit(f?1:0)})();
