@@ -32,3 +32,10 @@ Emotions per set = the 21 act keys of Thái hậu: vui, lo, giận, tình tứ, 
 - Sets 6/7/8/16 (Thái tử, Hoàng tử lớn, Công chúa lớn, Vương gia) are thin groups: default = keep SEPARATE (owner: «mọi nhóm giữ như cũ»). Merging Thái tử+Hoàng tử+Vương gia would save 90 300 cr.
 - Pilot first (EXPRESS: pilot then batch): ONE seal (set 5 Hoàng thượng, giận) = 2 150 cr, measured against the table, shown to Foreman C, then batch per group.
 - Spend > 3 000 cr waits for Foreman C's OK (confirmed with MAIN). No generation done yet.
+
+## PILOT — Hoàng thượng giận (25/11 ~22:25Z) · 2 150 cr measured (135+135+940+940), 1 try, no redo
+Ref = live emo-m-gian (young man) upscaled 640 → Magnific upload CqW6AJdEEy. gpt-2-6 1:1 2k.
+A = TdJrglOVNR (135 cr) · B = nVgbjVGYQD (135) · OUT A→B = DoPL73ypcl (940) · LOOP B→B = JNuoaKwOq4 (940) · Seedance 2.0 Fast 4 s 1:1 720p no sound. BACK = reversed OUT (0 cr, not yet cut).
+Prompt = Thái hậu giận recipe (THACT1_tools B_gian/out_gian/loop_gian), only the group text swapped (young emperor, topknot + small gold crown piece, royal-yellow dragon robe, one hand on the cracked teacup; "exactly two hands", disc same size/colour).
+LOOKED at A, B and 8-frame sheets of OUT and LOOP: same face and disc throughout, exactly two hands, cup stays in hand, disc stays round/red, flat green, no shards; B leans out modestly. Not yet done: chroma cut, disc-scale spec (THACT5 apply.py), BACK.
+CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/c3-seals/ : emp-gian-A.png, emp-gian-B.png, emp-gian-out-sheet.png, emp-gian-loop-sheet.png, emp-gian-out.mp4, emp-gian-loop.mp4
