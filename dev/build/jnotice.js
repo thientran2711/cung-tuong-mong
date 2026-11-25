@@ -64,7 +64,7 @@ function kitSay(x){if(typeof x!=="string"||!x)return x;let s=x.replace(/\s+/g," 
  /* «a: b: c» chain → the first colon stays, later ones in the same sentence become commas */
  /* «X trở về: X nghe ngóng được …» — the part after the colon names the same subject again → that part alone */
  s=s.split(/(?<=[.!?])\s+/).map(q=>{const i=q.indexOf(": ");if(i<0)return q;const w=q.slice(0,i).split(" ").slice(0,2).join(" ");return w.length>3&&/^[A-ZÀ-Ỹ]/.test(w)&&q.slice(i+2).indexOf(w+" ")===0?q.slice(i+2):q}).join(" ");
- s=s.split(/(?<=[.!?])\s+/).map(q=>{let n=0;return q.replace(/: (Một|Nàng|Ngươi|Ta|Hắn|Y)?(?=\s|$)?/g,(m,w)=>++n===1?m:", "+(w?w.toLowerCase():""))}).join(" ");
+ s=s.split(/(?<=[.!?])\s+/).map(q=>{let n=0;return q.replace(/: (Một|Nàng|Ngươi|Ta|Hắn|Y)?(?=\s|$)?/g,(m,w,i)=>{const pre=q.slice(0,i);if((pre.match(/\(/g)||[]).length>(pre.match(/\)/g)||[]).length)return m;/* a colon inside «(…)» is not part of the chain */return ++n===1?m:", "+(w?w.toLowerCase():"")})}).join(" ");
  return s}
 window.kitSay=kitSay;
 function kitNotice(spec){try{if(spec==null)return null;if(typeof spec!=="object")spec={line:String(spec)};if(spec.line)spec.line=kitSay(kitNoUnk(spec.line));if(spec.text)spec.text=kitSay(kitNoUnk(spec.text));if(Array.isArray(spec.items))spec.items=spec.items.map(x=>kitSay(kitNoUnk(x)));
