@@ -1,0 +1,3 @@
+NOTE 05:26 mini-game «Tuyển chọn · Nấu ăn»: the intro «Bỏ qua» (skip) yields «10/10 · Xuất sắc» (game text: «kết quả xuất sắc, như người cùng bậc») — skip = best score for free (equal-value / hard-as-she-climbs law?). Robot uses Bỏ qua for every mini-game (cannot solve them by real taps).
+05:44 harness: NO-EFFECT was my picker tapping the .kpopts container, not a game bug (fixed).
+06:03 harness NO-EFFECT x2 was my picker (ADV /^Nhận/ matched the .kpopts container) – NOT a game bug; real tap on the option card works (modal closed after 1 tap).

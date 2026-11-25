@@ -1,0 +1,10 @@
+# M4 moments (persona cautious planner; Fold 755x1000; seed 104; Cháu gái Thái hậu → Quý nhân Bạch Nghê Thường)
+- 05:19 title/roulette · OK · roulette took ~6 taps (Chơi một mình → Bắt đầu kiếp mới → Tiếp → wheel card → Nhận thân phận ×2): ODD: «Nhận thân phận» must be tapped twice (once on the wheel result, once on the card) — CONFUSED a newcomer.
+- 05:26 Tuyển chọn Nấu ăn · ODD · mini-game intro «Bỏ qua» = 10/10 Xuất sắc for free; a player would always skip (law 2/5). shot shots/00007-unknown.png (old run)
+- 05:31 Hành sự · ODD · «Nghỉ ngơi một lát» (odds Rất vững) shows toast «BẠI … ta không được gì, cũng không mất gì» — a Rất vững rest that «fails» feels wrong.
+- 05:37 Kính sự phòng cinematic · CONFUSED · full-screen card grid with only «Chạm để bỏ qua» text, no button — tap-anywhere; my harness needed a blind tap. Also «Mâm thưởng · Chạm để mở» same (not a button element → not discoverable by DOM, ok for real player).
+05:46 Phụ tuyến Mời trà modal: «Nhận lời» tapped 4x with no visible change for ~4 s then modal gone (slow/laggy accept? could not repro; FRUSTRATED-maybe). shots/00004-s.png
+05:52 Hành sự · CONFUSED · button «Sang ngày mới» greyed (disabled) with no explanation while «Về phòng» (top-left, small) was the needed tap — she was away from her room; a newcomer sees a dead end button. shot shots/00002-s.png
+05:58 guided overlay «Tiếp ▸ / ✕» (kfoc) appears over the room and keeps «Sang ngày mới» disabled; no obvious cue to the player (CONFUSED)
+06:22 Đêm thị tẩm modal: option list scrolls («Kéo xuống»); the best-odds option sat below the fold and its hit-box (y 951) reported hit by elementFromPoint though outside the modal frame; needs a scroll (harness now scrolls). A new player sees only 3 of 4 options. Moment: ODD/CONFUSED.
+06:24 Bạc fell 160→1 within ~2.5 months of play on a cautious bot (Mời thái y / Hối lộ / thưởng cung nữ spends); harness now keeps Bạc ≥60 before paid actions. Moment: FRUSTRATED-maybe (no income visible: Bổng lộc 'sau N tuần').
