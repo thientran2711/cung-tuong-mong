@@ -100,6 +100,16 @@ const SCAN = () => {
     S: S0, end: !!window.__rtEnd };
 };
 
+  const GUARD_SEL = 'button,[role=button],a,input,select,textarea,[data-tab],.kcard[data-i],#rtoast,.kkem,.kalog';
+  const bareTapOn = async (p, x, y) => {
+    const ok = await p.evaluate(([x, y, sel]) => { if (!window.__rtG) { window.__rtG = 1; window.__rtBareN = 0; const f = e => { if (!(window.__rtBare > Date.now())) return; const t = e.target && e.target.closest && e.target.closest(sel); if (!t) return; e.preventDefault(); e.stopImmediatePropagation(); if (/^(pointerdown|touchstart|mousedown)$/.test(e.type)) { window.__rtBareN++; window.__rtBareHit = String(t.innerText || t.className || '').replace(/\s+/g, ' ').slice(0, 50) } }; for (const k of ['pointerdown', 'pointerup', 'touchstart', 'touchend', 'mousedown', 'mouseup', 'click']) window.addEventListener(k, f, { capture: true, passive: false }) }
+      const t = document.elementFromPoint(x, y); if (!t || t.closest(sel)) return false; window.__rtBare = Date.now() + 700; return true }, [x, y, GUARD_SEL]).catch(() => false);
+    if (!ok) return false;
+    if (DEV === 'ipad') await p.mouse.click(x, y); else await p.touchscreen.tap(x, y);
+    R.harness.areaTaps = (R.harness.areaTaps || 0) + 1; (R.trace = R.trace || []).push([sec(), 'AREA ' + Math.round(x) + ',' + Math.round(y)]); if (R.trace.length > 400) R.trace.splice(0, R.trace.length - 400);
+    const g = await p.evaluate(() => { const n = window.__rtBareN || 0, h = window.__rtBareHit; window.__rtBareN = 0; window.__rtBareHit = null; return { n, h } }).catch(() => ({ n: 0 }));
+    if (g.n) { R.harness.bareBlocked = (R.harness.bareBlocked || 0) + g.n; bug('harness', 'area tap would have landed on a button (it appeared under the point) — blocked: «' + g.h + '»') }
+    return true };
 async function play(p) {
   p.on('pageerror', e => { const b = bug('js', 'page error: ' + e.message.split('\n')[0].slice(0, 160)); if (b && !b.stack) b.stack = String(e.stack || '').split('\n').slice(0, 6).map(l => l.trim().slice(0, 200)) }); /* the stack frames (file:line) go with the bug: s7 «reading 'off'» had none */
   p.on('crash', () => { R._crashed = true; R.harness.crashes = (R.harness.crashes || 0) + 1; const os = require('os'); bug('crash', 'tab crashed (Page crashed) at buổi ' + R.buoi, { freeMB: Math.round(os.freemem() / 1048576), totalMB: Math.round(os.totalmem() / 1048576), load: os.loadavg()[0] }) });
@@ -109,16 +119,7 @@ async function play(p) {
      (the age card after a long no-hit loop of thousands of area taps) took the tap on its first option, an exit road. Now the check and a guard are
      set in one step; until the tap lands, a capture listener cancels any pointer / touch / click whose target is a button (logged [harness]); every
      area tap is traced («AREA x,y»); realtap taps clear the guard first. */
-  const GUARD_SEL = 'button,[role=button],a,input,select,textarea,[data-tab],.kcard[data-i],#rtoast,.kkem,.kalog';
-  const bareTap = async (x, y) => {
-    const ok = await p.evaluate(([x, y, sel]) => { if (!window.__rtG) { window.__rtG = 1; window.__rtBareN = 0; const f = e => { if (!(window.__rtBare > Date.now())) return; const t = e.target && e.target.closest && e.target.closest(sel); if (!t) return; e.preventDefault(); e.stopImmediatePropagation(); if (/^(pointerdown|touchstart|mousedown)$/.test(e.type)) { window.__rtBareN++; window.__rtBareHit = String(t.innerText || t.className || '').replace(/\s+/g, ' ').slice(0, 50) } }; for (const k of ['pointerdown', 'pointerup', 'touchstart', 'touchend', 'mousedown', 'mouseup', 'click']) window.addEventListener(k, f, { capture: true, passive: false }) }
-      const t = document.elementFromPoint(x, y); if (!t || t.closest(sel)) return false; window.__rtBare = Date.now() + 700; return true }, [x, y, GUARD_SEL]).catch(() => false);
-    if (!ok) return false;
-    if (DEV === 'ipad') await p.mouse.click(x, y); else await p.touchscreen.tap(x, y);
-    R.harness.areaTaps = (R.harness.areaTaps || 0) + 1; (R.trace = R.trace || []).push([sec(), 'AREA ' + Math.round(x) + ',' + Math.round(y)]); if (R.trace.length > 400) R.trace.splice(0, R.trace.length - 400);
-    const g = await p.evaluate(() => { const n = window.__rtBareN || 0, h = window.__rtBareHit; window.__rtBareN = 0; window.__rtBareHit = null; return { n, h } }).catch(() => ({ n: 0 }));
-    if (g.n) { R.harness.bareBlocked = (R.harness.bareBlocked || 0) + g.n; bug('harness', 'area tap would have landed on a button (it appeared under the point) — blocked: «' + g.h + '»') }
-    return true };
+  const bareTap = (x, y) => bareTapOn(p, x, y); /* Seat-level helper: unstick() (outside play) uses it too — s2d ReferenceError on 64d62d9b */
   { const tap0 = rt.tap.bind(rt); rt.tap = async (h, o) => { await p.evaluate(() => { window.__rtBare = 0 }).catch(() => {}); return tap0(h, o) } }
   let lastS = null;
   /* stuck evidence: every save / slot / co-op key of localStorage + the co-op state (CW / room) + S summary → <shots>/<tag>-dump.json + -save.json */
@@ -368,7 +369,7 @@ async function unstick(p, rt, sc, lvl, fromPeer) {
     if (i < 0 && lvl >= 2) { const ok = s1.b.map((b, k) => k).filter(k => { const b = s1.b[k]; return b.hit && !EXIT_RE.test(b.t) && !LEAVE_RE.test(b.t) && !NAV_RE.test(b.t) }); if (ok.length) i = ok[Math.floor(rnd() * ok.length)] }
     if (i >= 0) { const h = await p.evaluateHandle(i => window.__rtBtns[i], i); await rt.tap(h, { screen: s1.layer, label: 'unstick ' + (s1.b[i].t || '✕').slice(0, 30) }) }
     else if (lvl >= 2 && s1.layer !== 'page' && s1.lr) { /* tap-out: bare space outside the top layer, like a person tapping beside a popup */ const vw = p.viewportSize(); const r = s1.lr; const pts = [[8, 8], [vw.width - 8, 8], [8, vw.height / 2], [vw.width - 8, vw.height / 2]].filter(([x, y]) => x < r.x || x > r.x + r.w || y < r.y || y > r.y + r.h);
-      for (const [x, y] of pts) { const bare = await bareTap(x, y); if (!bare) continue; break } }
+      for (const [x, y] of pts) { const bare = await bareTapOn(p, x, y); if (!bare) continue; break } }
     await p.waitForTimeout(500) }
   if (lvl >= 3) {
     /* CO-OP: a room re-pairs only if BOTH seats reopen «Cùng hảo hữu → Trở lại phòng» (A-COOP coop1h by hand, F #10 11:09Z) → ask the friend seat to rejoin too */
