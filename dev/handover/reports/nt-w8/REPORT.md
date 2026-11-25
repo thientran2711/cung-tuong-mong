@@ -39,7 +39,7 @@ c) Múa trong yến tiệc LOSE: Sủng −3 not on the card (the card's before 
 | relshow-scan --fail-raw | RAW 0 (oán 103, aff 412) |
 | relshow-rt | PASS |
 | net-build | 203/203 PASS |
-| coop-e2e | branch 141/144: FAIL «fold #next enabled», «buổi 3:1 advanced for both», «week after rebirth advances»; origin/main 142/142 PASS → re-run on branch was started (see HANDOVER) |
+| coop-e2e | branch 141/144: FAIL «fold #next enabled», «buổi 3:1 advanced for both», «week after rebirth advances»; origin/main 142/142 PASS; branch RE-RUN = same FAILs («fold #next enabled», «buổi 2:1 advanced for both», «week 3: fold advanced») → REAL, BLOCKING |
 | quickcheck ALONE, two-way-oldsave | NOT RUN |
 | real taps Fold 755x1000 + iPad 1180x820 touch | STARTED only: Fold Hậu cung → Hoàng hậu → Hại nhỏ → Tung tin đồn card seen (Thành Danh nàng −8 · tin cậy thái giám +3; Bại 1 chứng cứ, thiện cảm −5, oán +1 đến +6; Kèm phát giác 2 chứng cứ, thiện cảm −10, oán +3 đến +13) and its Tự ra tay / Giao cho người làm dialog; stopped at the «Kiếp này chưa trọn» warning. Nothing on iPad yet. |
 Tools: rt/drv.js (W5 driver, ROOT → this worktree), rt/realtap.js (copied from review/robot-realtap), rt/c.sh (RTD = dir).
@@ -47,7 +47,7 @@ Setup used `read` JS (new life, rank 3, knows everyone, overlays removed) — th
 
 ## HANDOVER (W8 rolls at START_CTX + 25 %) — next seat, review/net-ghen-2 (see git log for the sha)
 1. Fresh sparse worktree of review/net-ghen-2; `bash dev/site/build_site.sh`, `python3 dev/build/assemble.py`.
-2. coop-e2e on the branch: if the 3 co-op advance FAILs repeat (main passes 142/142), bisect W5→W8 commits (git log b80010e5.. and earlier net-ghen commits) — likely a co-op «Sẵn sàng»/buổi path touched by the relAdd / card changes; fix before anything else.
+2. BLOCKER: coop-e2e on the branch fails 3 co-op advance checks twice (fold «Sẵn sàng» stays enabled / buổi + week do not advance for both); main passes 142/142. Bisect W5→W8 commits (git log b80010e5.. and earlier net-ghen commits) — likely a co-op «Sẵn sàng»/buổi path touched by the relAdd / card changes; fix before anything else.
 3. Re-run `node dev/handover/reports/nt-w8/rc-scan.js file://<abs index.html> out.jsonl dau,hau` (~45 min) + `python3 rc-sum.py out.jsonl`: consort ev must be 0; then decide residual a) (kit row for a servant who leaves) with the foreman (KIT FIRST: new row word = kit request).
 4. quickcheck ALONE (dev/tools/quickcheck.sh), two-way-oldsave (old = origin/main index.html), real taps Fold + iPad (IPT=1) on: Tát, Phạt quỳ, Ngáng chân, Bỏ phấn lạ, Tung tin đồn (Bày mưu + Ra tay ngay), Ban thưởng, Hại nhỏ, a gift, Hỏi han sức khỏe, elder Hỏi chuyện + Biếu (new rows), court Biếu; shown range must bracket the applied change; look at every shot. Re-check W5's «Danh ngươi −5» on a rumor fail.
 5. Then report + «SẴN SÀNG KIỂM review/net-ghen-2 <sha>» to Foreman D.
