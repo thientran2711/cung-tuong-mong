@@ -45,3 +45,6 @@ Diff b9865381..89ef52f9 = j63.js (kaWhyStat no title/filler, stat rows «<stat> 
 - N1/N2 fixed. Runs: viecnho-fix.test ALL OK · viecnho-scan CLEAN · viecnho-map 31 places ALL OK · name-mask-scan PASS 0 hits (0 page errors) · quickcheck PASS 235 s (old save ok, render 256/264, tab 465/585, buổi 1642/1642) · coop-e2e 142/142.
 - Open for main/owner only (not blocking): N4 portrait-narrowing trade-off vs OD 18/11 (law 16).
 ~92% xong / ~88% chơi được.
+
+## Re-check merge review/viecnho-fix-r2 518aef869b41072e18ef00cf2f1eaa5be40bbabb → **BIG PASS 518aef86**
+= flight-ui 9878230b + PASSed 89ef52f9; 89ef52f9 is an ancestor. Conflicts j61 kitNameList (one helper, «một vị <tước>», no «chưa quen biết») + j63 kaWhyWho resolved correctly; diff vs flight-ui = only viecnho's own changes. Runs on this sha: viecnho-fix ALL OK · viecnho-scan CLEAN · viecnho-map 26 ALL OK · duodo-focus-view ALL OK · know-notice fold+ipadAir 0 bad · name-mask-scan PASS 0 hits · quickcheck PASS 227 s (old save ok) · coop-e2e 142/142. Real BẠI/THÀNH rows unchanged («Sủng −5 · một vị Tần: thiện cảm −5 · Kèm một vị Phi: oán +14»).
