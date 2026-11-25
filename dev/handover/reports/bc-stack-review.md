@@ -123,3 +123,15 @@ Same setup as #5 (robot-rt 34314d23 + addInitScript: 72 notices + one go-notice,
 - jsClicks 0, exitPick none, deadButtons 0. New code: only page.mouse.wheel / reads; reload ≤2 per dialog; RT_TEST_TINBAO hook is env-gated (self-test only). #kload: «Vào cung ngay» after ~20 s on the load panel (never «Thỉnh tiếp» loop) — read, not run.
 - Nit (not blocking): the no-hit rule fires after ≥20 s on any dialog whose buttons are present but none hit; a slow scene showing its buttons later (≥20 s) would get one false [game] row + reload (life stays valid).
 VERDICT: PASS 34314d23 — runners may switch.
+
+## BIG REVIEWER #6 — 25/11 ~16:50Z: HARNESS review/robot-realtap 64d62d9b (exit-road gap, bareTap guard) — PASS
+PRIORITY #1 CHECK ('bareTap|bareBlocked|exit-road gap|xuất giá|AREA trace'): F #13 order 16:19Z | review/robot-realtap 34314d23..64d62d9b (robot-rt.js only) | FOREMAN D HARNESS GAP 14:27Z/14:31Z.
+- Code: every area tap goes through bareTap — the «bare?» check and a 700 ms guard are set in ONE evaluate; a window capture listener (pointer/touch/mouse/click) cancels any event whose target is a button / [role=button] / .kcard / tab while the guard is on (game options are <button class="opt">: covered); realtap taps clear the guard first. Trace «AREA x,y», endings keep the last card's options + last 12 taps. No .click()/dispatchEvent added.
+- FORCED RACE (probe, scratch only): addInitScript hooks window.__rtBare — the instant the harness arms a bare tap, a full-screen <button class="opt"> «Xuất cung về quê» mounts under the point (removed after 1.2 s; listeners record any event that reaches it). Setup: Tin báo 72 + go-notice (no-hit phase = area taps), LIVE dbae89eb, Fold seed 41 + iPad seed 78. Result both devices: 0 events reached the exit button, [harness] «area tap would have landed on a button … blocked: «Xuất cung về quê»», bareBlocked 2 each, exitPick none, jsClicks 0, deadButtons 0, stuck 0 (areaTaps 62 / 67 traced).
+VERDICT: PASS 64d62d9b.
+
+## BIG REVIEWER #6 — 25/11 ~16:50Z: review/two-way-oldsave-night 9c14b7fa (TEST ONLY, dev/test/two-way-oldsave.js) — PASS
+- Diff: kitRoulette resolved at once in the test page (lc15 555eaa4d pattern), wait for S and no #kroul; the week loop answers Q like ledger.js (nfch → «Thôi», else first option not Cáo bệnh / Tiến cử / Thôi) instead of wiping Q; loud fail «turn stuck» when fewer than WK/2 weeks pass. Game code untouched.
+- Run on LIVE dbae89eb (old = new = its index.html), 40 weeks ×2: turn 8 → 48, ok true, 0 page errors, rival talk list builds.
+- Branch sits on 9f72524b, not on LIVE dbae89eb: not a fast-forward — merge is clean (git merge-tree), test file only → land by merge, no rebuild.
+VERDICT: PASS 9c14b7fa.
