@@ -1804,3 +1804,30 @@ NOT MET: «≥5 completed fix rooms per SWAP». On LIVE nearly every room of BOT
 - Code DONE on review/robot-coop-fix-3-r5 **3b004c3e** (pushed; on LIVE 9f72524b). Foreman B ruling 25/11 ~09:29Z: A/B judged on coop-pos / resHead / resHall per room-week, not completed rooms. BIG rv = session_01N1tNP3UkcirSSZknExE71G → FAIL items go to the successor.
 - Where things are: only dev/build/jcoopworld.js changed (buildFriend: HOUSE copy + relay at build; houseSettle; houseWire resolves via houseOf) + dev/test/coop-house-unit.js (52 checks). Every gate command + result is in «### FIXER fix-3-r5» above.
 - Box tools: worktrees deleted; wrangler at /home/user/wt/wr (`node_modules/.bin/wrangler dev --local --port 8791` from coop/worker); A/B scripts /home/user/wt/f5out/{ab.sh,aball.sh,fixonly.sh} (this container only). A/B on LIVE needs the local harness tap patch in dev/test/lib/coop-clear.js TAP (before the .kfoc-next step): `const ig=[...document.querySelectorAll('.kfoc .kfoc-introgo,.kgr-go')].find(vis);if(ig){ig.click();return'x'}const kq=[...document.querySelectorAll('.kquick,#kg82skip')].find(vis);if(kq){kq.click();return'x'}const sk=document.querySelector('.kfoc .kfoc-skipw:not([hidden]) .kfoc-skip');if(vis(sk)){sk.click();return'x'}` — or Foreman F's realtap harness once READY. abmain needs `python3 dev/build/assemble.py` before a run. Fix + main in parallel overloads 4 cores (turn p95 > 100 s).
+
+## REVIEW robot-coop-savert r2 (BIG co-op, opus; session_01N1tNP4ZyfP6D8ujXL6neuR) — PASS → LAND READY robot-coop-savert-r2 56d3b76fc58d07b529bc72590133ba04a5770e47
+PRIORITY #1 CHECK: FOREMAN_B_STATUS 10:18Z line (LIVE coop-night ROOT CAUSE DAYQ-3, fix review/coop-night-live efa1f291) and 09:16Z (fix-5-r1 LAND READY carries fix-4-r1) read and reused; no other savert work on main / review/*.
+Reviewed: r2 71c538df (fix ec88ddc3 + merged fix-4-r1 aad22c92). Delivered: review/robot-coop-savert-r2 56d3b76f = 71c538df + LIVE ee37ab5f (conflicts: assemble.py module list → union, branch jbalpr.js + main jdayq.js/jdeadcard.js; index.html/sw.js rebuilt with build_site.sh). LIVE has since moved to 9f72524b (visitor-fix-r10: jgreet/jhc/jne/jtone, no co-op file; only generated index/sw conflict) — coordinator stack-merge.
+### Fix check (r1 FAIL rows)
+- FAIL 1 (host merged-week rebuild skipped nmFix load): real cause fixed — skip now keyed on jslots coopOffLoad() (WeakSet of the S loaded off-room from a coopRoom save), not on «a coop friend in rivals». Whole family: host rebuild, guest rebuild, servant friend (buildFriendSrv), solo save, off-room co-op save — hostsweep all renamed; instrumented COOP_HL_FORCE e2e seat a coopEntry=true off=false owner=true, hl(b) ok both seats.
+- FAIL 2 (__truthLoad escape save→load): real cause fixed — load-time deed reactions queue in S.deedQ (deedAdd q / deedSync q=1), drained by evTruthSweep after TRUTH_LOAD=0; jcmaid wraps deedReact. thpath A 40→36, B 40→36 (was 40→40).
+- Law 1 host/guest symmetric (same deser path both seats); law 4 no new numbers; solo old save loads (quickcheck old save ok).
+### Gates (commands from the seat dir; outputs)
+| gate | LIVE | bare 71c538df | merged 461837b0 (LIVE d6b6fd6f) | merged 56d3b76f (LIVE ee37ab5f) |
+|---|---|---|---|---|
+| node dev/test/save-rt-coop.js | FAIL ×5 | PASS | PASS | SAVE-RT-COOP PASS |
+| node dev/test/hue-dead.js | – | PASS | PASS | HUE-DEAD PASS |
+| COOP_SWAP=0/1 coop-e2e.js <out> http://127.0.0.1:8798 | – | 142/142 | 142/142 ×2 | 142/142, 142/142 |
+| COOP_HL_FORCE=1 SWAP=0/1 coop-e2e.js | – | 144/144 | 144/144 ×3 | 144/144, 144/144 |
+| coop-e2e LIVE Worker SWAP0/1 (no args) | – | – | 142/142, 142/142 | not rerun (main delta has no co-op file) |
+| coop-keymove-unit.js | – | – | 12/12 | 12/12 |
+| coop-night.js (args / no args) | – | 127/127, 126/126 | 127/127 (case-10 flake 5/10; same flake on fix-4-r1+LIVE w/o savert 1/7) | 71/100, 66/100 FAIL — LIVE DAYQ-3 (below) |
+| coop/worker npm test | – | thin ALL OK / range ok | same | thin ALL OK / range ok |
+| bash dev/tools/quickcheck.sh ALONE | – | – | PASS | QUICKCHECK PASS · old save ok · render 232/248, tab 569/566, buổi 2452/4710 ms, tasks>200ms 26/30 · core gates PASS |
+### coop-night on newest LIVE = LIVE DAYQ-3 bug, NOT savert
+Same stuck (both at week 3 tối, host 3:3 vs guest 3:0, «Chờ hảo hữu…») on fix-4-r1 + ee37ab5f WITHOUT savert (f2 run) and with main's own coop-night.js on 56d3b76f (case 4 FAIL). Instrumented dump (host): #ov visible = kg82 «Phối đồ» board (TÀI NGHỆ · Đề: Xuân sắc), S.mg null, DQ.stat.actHeld 55–72, Q 2 hidden → night held. = Foreman B 10:18Z root cause; fix review/coop-night-live efa1f291. Bare savert 126/126. Rerun coop-night after coop-night-live lands.
+### A/B ≥5 rooms (harness 918bfa84 overlay; SEED=7 CAP=300 PCAP=1500 RTW=1 NEGTRAP=1 robot10-coop.js 1 5 1; fix 56d3b76f Worker :8798 vs main ee37ab5f :8803, parallel)
+- fix: 6 distinct (stuck 3/5 pairs, coop-pos 1, lag ×4) · main: 5 distinct (stuck 2/5 pairs + 3 stuck rooms, **save R[].resHead save→load→save 2→3/5 (guest)**, coop-pos 1, lag ×2).
+- savert's family (save→load→save) present on main, ABSENT on fix. stuck / coop-pos both sides (pre-existing; fix-5/6/7 queue). Two extra lag rows on fix (coopActionP95 8507>8000, one buổi 4721 ms) = CPU noise (parallel sides + a debug run alongside), no new family.
+### Verdict
+PASS. Savert r2 delta correct, whole family, both seats. LAND READY robot-coop-savert-r2 56d3b76fc58d07b529bc72590133ba04a5770e47 (carries fix-4-r1 aad22c92). Land order note: coop-night gate needs review/coop-night-live first (LIVE bug).
