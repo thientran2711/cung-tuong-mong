@@ -35,7 +35,7 @@ Object.assign(BAL,{ration:{on:true,
  borrow:{base:25,aff:2,ghen:10,whim:20,fail:-2,spare:2,trait:{"Ân cần":15,"Khiêm nhường":10,"Kín đáo":0,"Xảo quyệt":-5,"Tham vọng":-10,"Kiêu ngạo":-15}},
  beg:{hh:15,th:10,stat:2,fail:-3,cd:2},/* xin Hoàng hậu / Thái hậu: base + stat/2 (jveil xin road); fail costs favour; once per cd months */
  steal:{danh:-4,duc:-2,oan:10,cut:1,add:10},/* caught stealing: Danh, Đức, the victim's oán, bổng khất 1 month; odds = plant odds + add */
- npc:{use:3,buy:50},/* NPC month: lượt spent per part; chance to buy when out (borrow / beg / steal / ask her = day-plan choices, jagacts4); (her «Chia» answer: jrcv RCVK.rougeBorrow, the asker quý BAL.rcv.help.af) */
+ npc:{use:4,buy:50},/* NPC month: lượt spent per part (save-growth (b): 3 = exactly the issue n×uses÷parts, so every bought / bestowed box piled up for good; 4 = the issue plus what she buys when out, the stock stays small);  chance to buy when out (borrow / beg / steal / ask her = day-plan choices, jagacts4); (her «Chia» answer: jrcv RCVK.rougeBorrow, the asker quý BAL.rcv.help.af) */
  allergy:{rel:2,chiW:[.3,.45,.25],nguaW:[.2,.45,.35]},/* a tainted box at the sitting → the ONE rash system (jrash rashGive: timed, picture, Thái y): severity weights for pha chì / bột ngứa; the first use of a clean box rolls RASH.cos like any son phấn; rel = her oán toward the one who tainted it */
  tribute:{ch:{promo:60,son:60,contest:35,birthday:50,sinhthan:50,night:5},ghen:3}}});
 const LX_KD="Son phấn";
@@ -99,7 +99,7 @@ function lxCapRec(p,rec){if(!lxOn()||!rec||!rec.makeup)return rec;const n=lxCoun
 function lxSpend(p,rec,col){const B=BAL.ration,out={used:[],gone:[],taint:null};if(!lxOn()||!rec||!rec.makeup)return out;const mk=toilMk(rec);
  const u0=B.use[mk]||0;if(!u0)return out;const per=u0+(col&&col.want==="diem"?B.bold:0);
  for(const part of B.parts){const L=lxBoxes(p,part);if(!L.length)continue;const c=col&&col[part];const e=L.find(x=>x.c===c)||L.slice().sort((a,b)=>a.u-b.u)[0];
-  const fresh=e.u>=B.uses[lxOf(e.k).t];const n=Math.min(per,e.u);e.u-=n;out.used.push({part,e,n});if(e.t==="ngua"||e.t==="chi")out.taint=e;else if(fresh&&!out.cos&&typeof RASH==="object"&&roll(RASH.cos))out.cos=e;if(e.u<=0){p.inv.splice(p.inv.indexOf(e),1);out.gone.push(e)}}
+  const fresh=e.u>=B.uses[lxOf(e.k).t];const n=Math.min(per,e.u);e.u-=n;out.used.push({part,e,n});if(e.t==="ngua"||e.t==="chi")out.taint=e;else if(fresh&&!out.cos&&typeof RASH==="object"&&roll(RASH.cos))out.cos=e;if(e.u<=0){typeof ilUsedUp==="function"&&ilUsedUp(e,p);p.inv.splice(p.inv.indexOf(e),1);out.gone.push(e)}}
  if(out.taint||out.cos)out.rash=lxAllergy(p,out.taint||out.cos,!out.taint);return out}
 /* review fix 3: ONE allergy system — the rash of jrash (rashGive: timed, its picture, Thái y / thảo mộc card, Sắc by severity). A pha chì box also hurts its user
    through taintHit (j8, the same as every lead-tainted item); bột ngứa only through the rash; an ordinary new box: RASH.cos, severity 1 ("son phấn không hợp") */
@@ -133,7 +133,7 @@ function lxRush(){const c=lxRushCost();if(!lxOn()||(S.bac||0)<c)return;const M=l
 function lxLend(v,part){const L=lxBoxes(v,part);if(!L.length)return null;const tot=L.reduce((a,e)=>a+e.u,0);return tot>=BAL.ration.borrow.spare?L.slice().sort((a,b)=>b.u-a.u)[0]:null}
 function lxBorrowOdds(v,p){p=p||S;const B=BAL.ration.borrow;let o=B.base+Math.round(aff(v,p)/B.aff)-Math.round((v.ghen||0)/B.ghen);for(const t of traitsOf(v))o+=B.trait[t]||0;
  o+=Math.round((lxHash(`${v.id}:${toilWk()}`)%(2*B.whim+1))-B.whim);return cl(o,5,95)}
-function lxGive(from,to,e,how){const r=lxOf(e.k);const n=typeof how==="number"?Math.max(1,Math.min(e.u,how)):how==="half"?Math.max(1,Math.ceil(e.u/2)):e.u;e.u-=n;if(e.u<=0)from.inv.splice(from.inv.indexOf(e),1);
+function lxGive(from,to,e,how){const r=lxOf(e.k);const n=typeof how==="number"?Math.max(1,Math.min(e.u,how)):how==="half"?Math.max(1,Math.ceil(e.u/2)):e.u;e.u-=n;if(e.u<=0){/* E-FIX-3: the whole rest went to the other one (g below): this box is empty, used up */typeof ilUsedUp==="function"&&ilUsedUp(e,from);from.inv.splice(from.inv.indexOf(e),1)}
  const g={k:e.k,c:e.c,u:n,from:how==="steal"?"steal":"borrow",d:S.turn};if(from!==S)g.giver=from.name;if(e.t){g.t=e.t;g.by=e.by}to.inv=to.inv||[];to.inv.push(g);return g}
 /* ONE builder per road (role-parity part 2, law 1 + law 4): her talk cards (rival visit / Hoàng hậu, Thái hậu / a rival's chest) and an NPC
    consort's day-plan options cx4:rougeBorrow / rougeBeg / rougeSteal (jagacts4) — the SAME odds function of the doer, the same gain and loss.
@@ -170,7 +170,7 @@ function lxCaught(a,v){const ST=BAL.ration.steal;ap(a,{danh:ST.danh});if(typeof 
 function lxNpcOk(v){return !!v&&v!==S&&!v.coop&&v.alive!==false&&!v.out&&!(typeof mlGuest==="function"&&mlGuest())}
 /* the past month's sittings (BAL.ration.npc.use lượt per part), spent before the new issue */
 function lxNpcSpend(v){if(!lxNpcOk(v))return;const N=BAL.ration.npc;
- for(const part of BAL.ration.parts){let left=N.use;for(const e of lxBoxes(v,part).sort((a,b)=>a.u-b.u)){const n=Math.min(left,e.u);e.u-=n;left-=n;if(e.u<=0)v.inv.splice(v.inv.indexOf(e),1);if(!left)break}}}
+ for(const part of BAL.ration.parts){let left=N.use;for(const e of lxBoxes(v,part).sort((a,b)=>a.u-b.u)){const n=Math.min(left,e.u);e.u-=n;left-=n;if(e.u<=0){typeof ilUsedUp==="function"&&ilUsedUp(e,v);v.inv.splice(v.inv.indexOf(e),1)}if(!left)break}}}
 /* after the issue: a part still missing → buy at her own rank's price (law C). Borrow / ask her / beg / steal are no longer monthly dice:
    they are the NPC's own day-plan choices with the player's odds (jagacts4 cx4:rouge*, role-parity part 2, canon overwrite). */
 function lxNpcMonth(v){if(!lxNpcOk(v))return;const N=BAL.ration.npc;

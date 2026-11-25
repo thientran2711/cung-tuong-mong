@@ -17,7 +17,7 @@ const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+
    saved=await p.evaluate(()=>{SLOT=2;document.getElementById('title').hidden=true;for(let i=0;i<20;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(S.origin.k!=='cnv')break}
     Q.length=0;S.rank=4;S.inv.push({k:'tramngoc',w:1},{k:'nhansam'},{k:'tranhco',from:'th'});try{petAdd(S,'meo','Hoàng thượng ban','emp');petAdd(S,'kylan','Thái hậu ban','th')}catch(e){}
     S.kids=S.kids||[];S.kids.push({name:'Hoàng tử Thử',sex:'m',bt:1,alive:true,hp:50,tal:30,fond:20});
-    for(let i=0;i<2;i++){try{nextBuoi()}catch(e){}Q.length=0}quiet=false;try{save()}catch(e){}const k=SK(2);try{localStorage.setItem(k,JSON.stringify(ser()))}catch(e){}return{k,raw:localStorage.getItem(k),name:S.name,pets:(S.pets||[]).map(P=>P.t)}});
+    for(let i=0;i<2;i++){try{nextBuoi()}catch(e){}Q.length=0}quiet=false;try{save()}catch(e){}const k=SK(2);try{localStorage.setItem(k,JSON.stringify(ser()))}catch(e){}return{k,raw:(window.slotGet?slotGet(k):localStorage.getItem(k)),name:S.name,pets:(S.pets||[]).map(P=>P.t)}});
    ok(!errs.length,'OLD build: no page errors',errs.slice(0,3));errs.length=0}
   console.log('saved',saved.k,(saved.raw||'').length,saved.pets);HTML=path.join(ROOT,'dev/index.html');await boot();
   const r=await p.evaluate(()=>{const d=loadSlot(2);if(!d)return{err:'no save'};SLOT=2;quiet=true;deser(d);quiet=false;document.getElementById('title').hidden=true;try{deal()}catch(e){}Q.length=0;render();
