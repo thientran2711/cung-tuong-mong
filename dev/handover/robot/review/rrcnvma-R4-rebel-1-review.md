@@ -14,3 +14,6 @@ Từ Cẩm Thư, cung nữ nhị đẳng of Phi Yến Thục Ý (Phi), road cnv_
 ## 3. BUGS → fast lane
 1. «Tin báo» 71-item pile / stuck verdicts (family already fixed in newer harness; confirm on game side).
 2. End screenshot taken on loading screen (harness).
+
+## 4. Validity note (after D's ruling: age 25 = j42 cnvAge ASK card, BAL.srvAge {ask:25,out:30})
+The ending is the age-25 card, not the forced age-30 exit. The harness `exitPick` is null (it records a tap only when the blacklisted exit is the ONLY option) and the 400-entry trace ends before the card, so the final card options cannot be proven from the result. In j42.js:439-440 the card lists «Ở lại làm ma ma» only if `hi`, else «Xin chủ giữ lại» only if S.tin ≥ BAL.srvx.keepTin; a rebel maid with low tin and no `hi` may have been offered only «Xuất cung» (→ then a real only-option exit) or the harness may have tapped it via a label outside EXIT_RE. UNPROVEN → mark this life «VALID-UNPROVEN»; the resume ckpt/save at the age-25 card can be replayed if D wants proof. Finding either way: when a cnv_ma maid with low tin reaches 25, check whether the card has any sibling option.
