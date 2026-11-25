@@ -44,3 +44,8 @@ All cases after: «!» tap hit, pop closes on the next tap, card ✕ real-tap cl
 - mfix2-resbtn.js + mfix2-usenote.js: Fold + iPad as tables above.
 KIT.md updated in place (§13.9 ✕ line, §55 exam line, kpPop paragraph). No new CSS look, no new kit part (kit rule changed inside the kit parts jk4 / j79 / jitd). Wording cổ trang, no %.
 Not done: the s5d save itself (asked session_01UV1SzjctgUqhWfuo3XVo2r to push it; reproduced with a synthetic 40-bottle chest instead).
+
+## Item 2 — confirmed on the real s5d save (handover c5aeb79a)
+dev/handover/robot/flight2-s5d-stuck1-save.json: S.inv holds 34 × aldau0 (Dầu chải tóc, u=6) → LIVE note = 34 × «còn 6 lần dùng» (matches flight2-s5d-stuck1-shot.png).
+«State-dependent» (fine at buổi ~750) = fewer bottles in the chest by then (used / sold / keep cap), same root cause.
+m-fix-2 build with that chest: «… · tặng, bán được · mỗi lọ còn 6 lần dùng» (one line).
