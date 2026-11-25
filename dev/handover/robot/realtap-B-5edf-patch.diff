@@ -105,8 +105,8 @@ diff -ruN a/dev/test/realtap.js b/dev/test/realtap.js
  module.exports = { make, PROBE };
 diff -ruN a/dev/test/robot-rt-coop.js b/dev/test/robot-rt-coop.js
 --- a/dev/test/robot-rt-coop.js	2026-11-25 23:30:30.071817801 +0000
-+++ b/dev/test/robot-rt-coop.js	2026-11-25 23:30:30.077114775 +0000
-@@ -51,14 +51,42 @@
++++ b/dev/test/robot-rt-coop.js	2026-11-25 23:44:35.656385204 +0000
+@@ -51,14 +51,43 @@
  
  async function seatLoop(ctx, who, dev, other) {
    const p = await ctx.newPage(); const st = {}; let k = 0;
@@ -126,6 +126,7 @@ diff -ruN a/dev/test/robot-rt-coop.js b/dev/test/robot-rt-coop.js
 +    const rss = () => { try { return require('child_process').execSync("ps -eo rss,pcpu,args | grep -E 'type=renderer|type=gpu' | grep -v grep | awk '{printf \"%dMB %s%% %s\\n\", $1/1024, $2, substr($0, index($0,\"--type=\"), 30)}'", { timeout: 5000 }).toString() } catch (e) { return 'ps err ' + e.message } };
 +    const memT = setInterval(async () => { const h = cdp ? await Promise.race([cdp.send('Runtime.getHeapUsage').catch(e => 'err'), new Promise(r => setTimeout(() => r('TO'), 5000))]) : null; capW('mem buoi ' + s.R.buoi + ' steps ' + s.R.steps + ' heap ' + JSON.stringify(h && h.usedSize ? Math.round(h.usedSize / 1e6) + '/' + Math.round(h.totalSize / 1e6) + 'MB' : h) + ' | ' + rss().replace(/\n/g, ' ; ')) }, 60e3);
 +    const grab = async tag => { if (!cdp) return capW(tag + ' no cdp'); capW(tag + ' START rss: ' + rss().replace(/\n/g, ' ; '));
++      try { const ls = await Promise.race([cdp.send('Runtime.evaluate', { expression: "JSON.stringify(Object.fromEntries(Object.keys(localStorage).filter(k=>/ctm-coop/.test(k)).map(k=>[k,String(localStorage[k]).slice(0,400)])))", returnByValue: true }).catch(e => ({ err: e.message })), new Promise(r => setTimeout(() => r('TO'), 10000))]); capW(tag + ' LS ' + (ls && ls.result ? ls.result.value : JSON.stringify(ls))) } catch (x) { capW(tag + ' LS err ' + x.message) }
 +      try { await Promise.race([cdp.send('Debugger.enable'), new Promise(r => setTimeout(r, 20000))]); const pz = new Promise(r => cdp.once('Debugger.paused', r)); await cdp.send('Debugger.pause').catch(e => capW('pause err ' + e.message));
 +        const e = await Promise.race([pz, new Promise(r => setTimeout(() => r(null), 30000))]); if (!e) return capW(tag + ' PAUSE TIMED OUT (no JS frame reachable: not a JS loop, or renderer wedged)');
 +        capW(tag + ' PAUSED reason=' + e.reason + '\n' + e.callFrames.slice(0, 40).map(f => '   at ' + (f.functionName || '(anon)') + ' L' + (f.location.lineNumber + 1) + ':' + (f.location.columnNumber + 1) + ' s' + f.location.scriptId).join('\n'));
@@ -150,7 +151,7 @@ diff -ruN a/dev/test/robot-rt-coop.js b/dev/test/robot-rt-coop.js
      if (k >= KIEP && other.done) break;
      if (k >= KIEP && !extra && other.done) break;
      if (k >= KIEP + 20) break; /* safety net: 20 extra lives while the friend is still in the same life = runaway */
-@@ -66,10 +94,14 @@
+@@ -66,10 +95,14 @@
    return p;
  }
  
