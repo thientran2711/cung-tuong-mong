@@ -308,3 +308,19 @@ Without an action notice the same list shows the kit ✕ (Lui) top-right, hittab
 Wanted (kit keeper only, law 9/10): in a notice / info panel with options, the notice list (the section body) is the scroll area and the option row stays
 in view (like the event frame: two scroll areas, buttons fixed), or the ✕ stays on a panel whose options are only «go / later». Not ours: the list's
 wording (5 of 12 lines one template sentence, s9) → MAIN. Probe: /home/user/wt/probe4/tb.js on the ROLE B #4 box (138 notices, go on each).
+## KK27 25/11 — still open from the KK26 list (not built)
+- K3 status boxes («Xét phẩm», «Nguy hiểm chung» …, `#hud2 .khc .hc`, j79.js:1229 `min-height:0;padding:1px 0`): the tappable row is ~17 px tall (kit row >= 44 px, §A). Fix = the K3 row gets the kit row height, K3 right column re-measured on Fold + iPad (rows are adjacent, so a hit-area trick is not enough). Scan: dev/test/kit-row-tap-size.js (ALL=1 lists the rows; must be shown on the screen that has the K3 boxes).
+- iPad 1180x820 Hành sự stage: two figure name labels overlap at the left edge (name-label collision, every stage) — needs a stage-label collision rule in the stage kit.
+- One-option card «Tắm gội chờ giá» (E-S1, Kính sự phòng báo tin): add a ONE-option card to kit-opt-meter-tap (tap anywhere chooses except the «!»).
+- «Tin báo / Đã xem hết» long list on iPad: ✕ in view with the real E state (§56.22 header ✕ covers option-less panels; verify with the real list).
+
+## KK28 25/11 — DONE on review/kit-opts-pack-3 (base review/kit-opts-pack-2 2815c46d)
+- DONE (MAIN 138 order 1) Fold 4-6 options: step-down §56.24 switched ON, stacked NL/NM/NS frames get the full screen height + strip step (KIT 56.27). 12 of the 14 Fold frames that scrolled now show every card without scroll; 2 long-text frames (j70def, j7c) still scroll 40 / 9 px WITH the «Kéo xuống» cue. «First finger drag right after a Fold modal opens scrolls 0»: NOT reproduced (kit-opts-touchdrag: every case scrolls).
+- DONE (order 2) K3 side-column rows `.ksh .k3r` + `#hud2 .khc .hc` = kit row height 44 px (KIT 56.28). NOT changed: the top-bar status chips (Buổi / Chưa điểm trang / Quẻ, 18 px, `.k3tt`) — chips in the top bar, not rows; if she wants a bigger tap target there, it is a top-bar redesign (KIT REQUEST for a foreman/owner decision).
+- DONE (order 3) stage name-label collision rule `kitTagCollide` (KIT 33.10). The overlap was not reproducible with real people (0 pairs in 66+ states), so it is a guard, tested with a forced collision. If D sees it again: send the state (place, people, plate) to the kit keeper.
+- DONE (order 4) «Tắm gội chờ giá» one-option card: the card was LOCKED by the game rule (emperor already elsewhere) and showed no reason, a tap did nothing -> reason row + lock pop (KIT 56.29, whole group = every `lk` option).
+- DONE (order 5, verification) «Tin báo / Đã xem hết» long list on iPad: see report (kit-close-reach NT=1).
+
+
+## 25/11 KK29 — DONE (review/kit-opts-pack-4): «not a danger» flag for selection-day cards (SELSCENE-18 asked via MAIN 140)
+Flag name: **`nodanger:1`** on the queue card (`Q.push({…,pid:"selxD3",nodanger:1})`) or on a kit panel spec (`kitPanel({…,nodanger:1})`). Also silent without a flag: pids starting `selx` / `kc2Sel` (`KIT_NODANGER_PRE`, j11) and every act picker in `KIT_ACT_PIDS`. One function `kitNoDanger(card)` decides the red wash (`kitAlarm`), the heartbeat and the tension music. KIT §93.9; scan table `dev/test/kit-alarm-scan.js`.
