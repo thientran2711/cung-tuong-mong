@@ -873,7 +873,7 @@ COOP.on("act",onAct);COOP.on("res",onRes);COOP.on("actr",onActr);
 /* the week's end goes out once her dialogs are read: checked after each render / presence change (event-driven) */
 /* my acts on her not yet acknowledged (10 s at most: she may have dropped; the freeze covers that) */
 function resWait(){const n=Date.now();for(const id in CW.rpend)if(n-CW.rpend[id]>10000)delete CW.rpend[id];return Object.keys(CW.rpend).length>0}
-let tryT=0;function tryEnd(){tryT=0;if(CW.on&&CW.pend&&resWait()){tryT=setTimeout(tryEnd,400);return}if(CW.on&&CW.pendBuoi&&S&&!S.mg&&Q.every(passive)){onBuoi(CW.pendBuoi);return}
+let tryT=0;function tryEnd(){tryT=0;if(CW.on&&CW.pend&&resWait()){tryT=setTimeout(tryEnd,400);return}if(CW.on&&CW.pendBuoi&&S&&!S.mg&&Q.every(passive)){onBuoi(CW.pendBuoi);if(!CW.pendBuoi)soonEnd()/* review/coop-night-live-rv: the held step may land on a seat whose week end is pending (CW.pend): look again, else her end waited for the next render (coop-night case 5 [5,5,5], host pend + Q empty, «Chờ hảo hữu…» on both). Only when the step consumed it: onBuoi returns early (eW / !S) keeping pendBuoi — no setTimeout(0) loop (fixer dE81jb4Q review) */;return}
  if(CW.on&&CW.wantB&&S){if(CW.wantB!==bkey()||S.dead||CW.bend||CW.pend||nReady())CW.wantB=null;else if(!S.mg&&Q.every(passive)&&!needWhere()&&!waiting()&&!frozen()&&CW.base){T("wantB go "+CW.wantB);CW.wantB=null;stepQ("want",nextBuoi);return}}nCheck();if(CW.on&&S&&CW.pend&&!Q.length&&!S.mg&&!S.dead&&!frozen())sendEnd()}
 function soonEnd(){if(CW.on&&(CW.pend||CW.pendBuoi||CW.wantB||CW.ngoW===wk()||CW.nrdy===wk())&&!tryT)tryT=setTimeout(tryEnd,0)}
 
