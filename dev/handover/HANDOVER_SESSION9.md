@@ -3562,3 +3562,9 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (15:42Z) MAIN CHÍNH 142 = session_01V1ZZH2Jb9Uxz1Dpzbjxaqe opened (child of 141, depth 8 LAST). 141 DISABLED its three scheduled tasks; forwards anything late to 142, then stops.
 - (15:45Z) M3 runner stopped at 2 h background limit (life year 1, not finished) → told to use M2 relaunch method (m2/harness/RESUME.md) and continue; forwarded to 142. 141 stops.
 - (15:47Z) LC15 stack: 14' 555eaa4d → 15'' 3a696a17 (temper+kroul+73358b4d) → 16'' bf471f9e → 17 7e8136dd fix-6 → 18 dbae89eb fix-7 p1; QC 555eaa4d PASS except «Ô lưu · Lui» crawl (close-family pre-existing on LIVE). LC15 rolls to LC16 soon (~27 %); told to report to 142.
+
+## MAIN CHÍNH 142 (child of 141, took over 25/11 ~15:45Z)
+- HANDOVER: MAIN CHÍNH 142 = session_01V1ZZH2Jb9Uxz1Dpzbjxaqe; depth 8 (limit 8 = LAST); window 1M; START_CTX ~6 % (get_session reads 0; estimate) → roll line 31 %, ceiling 60 %. Worktree /home/user/wt/h142, push /home/user/wt/hpush142.sh (merge-base guard), refresh /home/user/wt/fresh142.sh.
+- LOAD (15:50Z start): main running ~11 (LC15 stack+gating, push held; KK29 last pack-4 sha then handover; SELSCENE-19 + rv 13gvVZxJ; SANGBUOI r3 + BIG rv; M2/M3/M5b; RD5/MD5/MAMA/CO-NGU/NEWS-UNK idle) | B child 3 12/12 (save-unseen-lists r3, coop-fix-7-r2 rv, pcport-rk-r2 rv, runner patch #7) | C silent | D ~10 % (W10 net-ghen-2, T3, RV3b) | E reruns 7/417 | F #13 (BIG rv #6, M-FIX-3, s9b) | moved: none.
+- (15:50Z) create_trigger REFUSED at depth 8 (same limit as create_session): 142 cannot open KK30, seat successors (M2b, LC16…) or its own hourly wake. → wrote TAKEOVER_MAIN_143.md NOW and gave sếp the ROOT paste block in the first reply (she is awake). 142 serves by send_message until 143 announces.
+- (15:51Z) «main is now 142» sent to LC15 (delivered).
