@@ -41,7 +41,7 @@
 | Composed death sentence | head «Sức khỏe suy kiệt sau lần bị hãm hại.» + text of the last harm card | the end card tells WHAT killed her in story words |
 | Harm chain «Sóng ngầm sau cửa son» | an accusation card with 2 options (evidence Trí / wait Hoạt, ~45–60 %); failure → «Chén trà sau lời gièm» (−18 HP) next month | the late-life killer; fires even for a maid who never met the Emperor |
 | «Khép lại một kiếp» pre-card | small modal +1 point before the end card | reward first, then the sad card |
-| Healer action button | the «Y quan» monthly action never registered for this maid (0 journal lines) — only the paid healer event card healed | (driver limit or maid restriction; P4b life 17 saw the same) |
+| Healer action costs silver | the monthly action «Y quan» = «Mời y quan · −15 bạc: Sức khỏe +3» (journal) — 15 bạc for +3 HP, while one harm card costs −18 HP; healing can never outpace the late harm chain on a maid's income | death is an economy as much as luck |
 
 ### Pacing
 101 months ≈ 38 real min. 7 calm years (HP ~80), then a 14-month collapse. Events every month; 1 in 3 is a forced loss card.
