@@ -1786,3 +1786,4 @@ kit-text-first KIT review (sonnet, B kit rv seat 5) | review/kit-text-first | se
 save-unseen-lists r4 (opus fixer) | review/save-unseen-lists | session_01N1tNP2LHbhSc8CKS2GvBiM | RUNNING | 2026-11-25 20:16Z (Foreman B child 4)
 fix-7 r3 (fix7-r2 × SANGBUOI r4 guest ☰ menu empty) | review/robot-coop-fix-7-r3 | session_01N1tNP3VDtpUy2jB8w7jbKc | RUNNING | 2026-11-25 20:43Z (Foreman B child 4)
 B co-op RERUN U3b-2 (successor of U3b 6EaANiCT) | dev/handover/robot/coop-rerun-U3b2-* | B | session_01N1tNP2HWuJXKRafMwdgWGn | RUNNING | 25/11 20:50Z |
+B runner stack u4 (LIVE 351122ba + coop-week-wait-rv 8e654ee0 + coop-presence-reload-rv dad08c51 + fix-3-r5-rv 3e761843) | review/robot-coop-stack-u4 | B | session_01N1tNP655QXzbUJ8NFUBooo (U1c) | RUNNING | 25/11 22:05Z |
