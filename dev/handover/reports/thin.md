@@ -1955,3 +1955,38 @@ Rooms still stick on LIVE families on both sides (held Q / week-end / coop-night
 6b real people (one house, one answer on both seats, save = palFix fixed point) ✔ · 11 family scan ✔ · 1 two-way (same rule host + guest, plants on both seats) ✔ · 4 one core (no number added) ✔ · 7/9/10 no player text / UI touched ✔ · 12 devices: robot pairs + e2e on Fold 755x1000 + iPad 1180x820, both seats ✔ · no shots in git, no CDN folder.
 ### NEW FINDING for Foreman B (LIVE, not this branch)
 LIVE 17dfa64d: quickcheck core gate G4 90-button-crawl FAILs alone — «fold · Ô lưu [#modal.kptitle] · Lui · close button did not close its layer» (save-slot dialog from the title). Blocks every quickcheck PASS on LIVE until fixed. Also: coop-pos relay-lag at a week's first buổi (2 hits / 172 weeks) — low, park unless it grows.
+
+## REVIEW robot-coop-fix-6 r2 (BIG co-op, opus; session_01N1tNP6kBPZT2V6sqFFkLDF; depth 3) — PASS → LAND READY review/robot-coop-fix-6-rv 833cd64fec993d142cca3434ac3bb0ae18c93f87
+PRIORITY #1 CHECK ('robot-coop-fix-6 qKind stepQ'): OD 0 | ledger 0 | claims this seat + fixer r2 4sTtF2bB | main 0 | review/* fix-6, rvprobe 387da75c, coop-night-live(-rv) (tryEnd overlap, below).
+Reviewed SSK f5b96b7f (game 5d97d15e). Delivered review/robot-coop-fix-6-rv 833cd64f = f5b96b7f + LIVE 17dfa64d (d26b82b5; assemble.py list conflict → union: main + jbalpr.js) + LIVE 351122ba (no co-op file in the delta; index.html/sw.js rebuilt). origin/main ⊂ it → fast-forward.
+**DEPLOY NOTE:** the branch carries robot-coop-fix-5 + fix-4-r1 + fix-2-r3 (not on LIVE yet): coop/worker changes (merge.js, ranges.gen.js, range/merge tests, package.json) → deploy the branch Worker with it.
+### r1 FAIL items — all fixed
+1 look-up panels carried + shown again (copies kept once) · 2 CW.nightEnd uses the same carry (stepQ) · 3 qKind reads «has a choice» positively (nlCard opts:[] → hold; shop / pet care / shelf with buttons → hold; unknown → hold) · 4 test rows added (shown again, guest side, other order, clock host/guest, run-time table). ONE classifier qKind + ONE carry stepQ on onBuoi / tryEnd (pendBuoi + kept press) / nightEnd; dropLook deleted. Scan `node dev/test/coop-qkind-scan.js` = 542 producers (look 3 · tell 227 · hold 242 · run 27 · pass 43).
+### Gates on the merged head (local branch Worker :8797)
+| gate | result |
+|---|---|
+| rv probe `ONLY=7,8,9 node dev/test/zz-f6probe.js` (rvprobe 387da75c) | PASS 15/15 (d26b82b5 and 833cd64f) |
+| coop-cal-rebirth 1–4 (rebirth) | FAIL without `window.__bot` (reborn seat inLife: life card queued, #modal held hidden = LIVE jdayq gate (c) dqUiC in co-op = DAYQ-3 → review/coop-night-live); with `__bot=1` (gate c off): 1–3 PASS 35-row run, 4 PASS 11/11. Bare branch: fixer 80/80, rv r1 run 51/51. |
+| coop-cal-rebirth 5–10 (`__bot=1`, 833cd64f) | 49/51 in one run (case 6 started at buổi 2 after case 5 → its «+1» row; seats equal, no split) → ONLY=6 alone PASS 14/14 |
+| coop-e2e SWAP 0 | 142/142 (d26b82b5) · 142/142 (833cd64f) |
+| coop-e2e SWAP 1 | 137/144 once (buổi 2:2 not advanced, both «Sẵn sàng», bend false; cascade) → rerun 142/142 (known SWAP-1 one-off noise) |
+| coop-keymove-unit | 12/12 |
+| coop/worker npm test | thin ALL OK · range ok |
+| quickcheck.sh ALONE | QUICKCHECK PASS · old save ok · render 292/274 · tab 598/759 · buổi 1840/1506 · tasks 27/28; core gate G4 mk-layer-scan «sha has no dev/art/mkfit» = my sparse worktree excludes dev/art (env), not code |
+| coop-night | not rerun: LIVE alone fails the same set (DAYQ-3), fixer's merged run = same set as main; rerun after coop-night-live lands |
+| A/B target metric | fixer's merged-vs-main table accepted (coop-pos 0.20/0.16, resHead 0.04/0.06, resHall 0/0 per room-week; stuck rows = old bot not closing «Kiếp này» on LIVE, both sides); not rerun (time) |
+### tryEnd overlap with coop-night-live-rv 217cbed8 (Foreman B question)
+fix-6's tryEnd keeps the SAME `onBuoi(CW.pendBuoi);return` (no soonEnd/sendEnd after it) as base 556c0f57 — not introduced by fix-6. Union = one line (fix-6's `Q.every(passive)` condition + the 217cbed8 soonEnd after onBuoi). Whichever lands second reruns coop-night + coop-cal-rebirth on the union.
+### Foreman B probe rows
+| row | verdict |
+|---|---|
+| 1 WY4C «err seatold undefined» + #ktut night hold | «err seatold undefined» = the Worker's seatold error reply with no msg (jcoopworld:1239 handles it: seatBase reset), not a JS throw. #ktut night hold: not reproduced here — OPEN (fix-6 does not touch it) |
+| 2 KHRN «Tin báo» buổi hold | covered: Tin báo = tell, carried by stepQ (probe 7/8, cal 6/7/8/9) — PASS on the code path |
+| 3 8RZP «err seatresync undefined» buổi split, Tin báo open | seatresync = Worker reply (jcoopworld:1240, full copy re-sent); split with Tin báo = covered by stepQ — PASS on the code path |
+| 4 BPK3 week-2 «wantB 2:3» deadlock surviving reload | host on #coopfz → frozen() blocks the guest's kept press by design; not a panel — not reproduced, OPEN (not worse: fix-6 only widens wantB to tell panels) |
+| 5 UTX8 cause-3 night 2 after reload | not reproduced — OPEN (fix-5 family; fix-6 does not touch reload / night commit) |
+| 6 7UGM Tin báo with «Để ta xem / Để sau» | qKind hold (opts) by design; step runs after her tap; off-view option = harness wheel bug (U1b patch #10) per Foreman B |
+### Laws
+1 two-way: same code both seats, host + guest rows both orders — OK · 4 one core: no numbers — OK · 6c nothing lost (carried + shown again) — OK · 7/9/10/12 no player text, no UI — OK · 11 one classifier + one carry over all Q-gated seat steps + 542-producer scan — OK · 14 drop path deleted in place — OK · solo untouched (CW.on) — OK.
+### Verdict
+PASS. LAND READY review/robot-coop-fix-6-rv 833cd64fec993d142cca3434ac3bb0ae18c93f87 (BIG co-op; carries fix-5 / fix-4-r1 / fix-2-r3 + Worker). Land coop-night-live too (DAYQ-3) — co-op rebirth needs it on LIVE.
