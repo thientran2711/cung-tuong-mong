@@ -44,3 +44,29 @@ Prompt = old ev_data scene rewritten as CLOSE shot + HEAD/BR from prompt.py + ne
 | ev-yen-tiec | xS80diEjfW | 80 | PASS (two ladies from behind; tiny Emperor in yellow at the back, correct) |
 Spent 240 credits. NOTE: simulate_cost says 80 credits per 1k picture NOW (PROGRESS_event said 40) → batch estimate: 11 remaining tier-1 × 80 = 880 (+~30% retries ≈ 1,150). Tier 2 (11) would add 880.
 Review: https://ctm-img.victoria-tntt.workers.dev/img/_review/c3-farshot/ev-thang-tran.webp?v=1 (also ev-trieu-chinh, ev-yen-tiec). Files ~250–290 KB at q82 → final upload recompressed ≤250 KB. Live swap NOT done (waits Foreman C GO).
+
+## Step 3 — BATCH (Foreman C GO 25/11 ~22:23Z: 11 tier-1 + 6 face acts; tier 2 KEEP)
+All 17 + pilot 3 = 20 pictures drawn, each looked at on old|new sheets (and hands cropped for tha-loi, thi-tham): no visible faces, people large, hands hidden or plausible, no dragon motif except the Emperor (hoang-de-vui), only the Emperor in yellow. gpt-2-6 3:4 1k, ref cplQijT0eP, folder ba4aecfe, 80 cr each, no rejects/retries.
+| key | creation | verdict |
+|---|---|---|
+| ev-cung-nu-2 | ov3wiaq829 | PASS |
+| ev-cung-nhan | mEAy2F7hJQ | PASS |
+| ev-fest-dongchi | huGPAq8vqL | PASS |
+| ev-fest-lapbat | TdJr7tvVNR | PASS |
+| ev-fest-nguyentieu | u503cLuQLD | PASS |
+| ev-fest-vulan | Syaev2SUb8 | PASS |
+| ev-fest-phoenix | ov3wiJi829 | PASS |
+| ev-fest-vantho | bxpGDc45Y2 | PASS (Emperor tiny yellow on throne, ok) |
+| ev-hoang-de-vui | 1lBWXD1r4r | PASS |
+| ev-canh-phong | ksXYdeT16B | PASS |
+| act-thi-tai-nu | LwtVItBswO | PASS |
+| act-nhin-loi-mia | 9ZbhbEANYZ | PASS (backs, fan) |
+| act-tha-loi | p84s47Wehw | PASS (clasped hands, fingers plausible; weakest, re-roll if Foreman C dislikes) |
+| act-xi-xao-xa-xi | VXOxO7CMMU | PASS |
+| act-xem-so-nguyet-su | BhiUiiboQR | PASS |
+| act-lam-tho-v2 | N25v5kT6D9 | PASS |
+| act-thi-tham | nVgbg7kYQD | PASS (fans hide faces) |
+Pilot: ev-thang-tran LwtVBN0swO, ev-trieu-chinh 1lBWp4tr4r, ev-yen-tiec xS80diEjfW.
+Credits: 20 × 80 = 1,600 total (pilot 240 + batch 1,360).
+Review folder (all 20, ≤250 KB webp, same names as live keys): https://ctm-img.victoria-tntt.workers.dev/img/_review/c3-farshot/<key>.webp?v=2
+NOTE: act-lam-tho-v2 etc. keep live key names → swap = overwrite img/<key>.webp after backing old to img/_backup/ (waiting Foreman C GO).
