@@ -3682,3 +3682,4 @@ LOAD: main running 1 (owner bugs/UI/go-live only) | B free ? | C free ? | D free
 - ~23:00Z LC17 rolled → LANDER LC18 = session_01V1ZZH4fCwydG8UT9j6GXGb (sếp writes «cho phép đưa lên live» in LC18's chat). LIVE 5e013076 · ROLLBACK 3762da08.
 - ~23:27Z OWNER bug k15 iPad right column giant → OD row + new worker IPAD-SIZE session_01V1ZZH4uDKAnttReZaR3tgc (whole-UI iPad/Fold ratio audit, kit-level fix, review/ipad-size). Landing pack must include it.
 - ~23:30Z OWNER bug iPad no sound → OD row + new worker AUDIO-IPAD session_01V1ZZH3QtT6t8M55834NWei (review/audio-ipad; online+offline). Add to landing pack.
+- ~23:33Z OWNER bug overstay at Đức Thọ (cấm túc but stage not moved; Hoàng hậu arrival while with her; no warning) → OD row + PLACE-RULES session_01V1ZZH3XzLLpDVWarrvHjvA (review/place-rules). ~23:36Z Tin báo wording mess (k16) → OD row + TINBAO-WORDS session_01V1ZZGzyXQPJnfNTevFpcDb (review/tinbao-words). Both in landing pack.
