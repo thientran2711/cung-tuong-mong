@@ -67,8 +67,10 @@ async function seatLoop(ctx, who, dev, other) {
 }
 
 (async () => {
-  const br = await chromium.launch();
-  const mk = dev => br.newContext({ viewport: VPS[dev], deviceScaleFactor: 1, hasTouch: dev !== 'ipad', isMobile: dev !== 'ipad', serviceWorkers: 'block' });
+  /* one cached browser profile per seat (pictures fetched once; see robot-rt.js) */
+  const ctxs = [];
+  const mk = async dev => { const c = await chromium.launchPersistentContext(path.join(OUT, 'profile-coop-' + TAG + '-' + dev), { viewport: VPS[dev], deviceScaleFactor: 1, hasTouch: dev !== 'ipad', isMobile: dev !== 'ipad', serviceWorkers: 'block' }); ctxs.push(c); return c };
+  const br = { close: () => Promise.all(ctxs.map(c => c.close())) };
   const H = { done: false }, G = { done: false };
   const hDev = A.host || 'fold', gDev = A.guest || 'ipad';
   const [hc, gc] = await Promise.all([mk(hDev), mk(gDev)]);

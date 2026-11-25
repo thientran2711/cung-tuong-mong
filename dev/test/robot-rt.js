@@ -59,7 +59,7 @@ const SCAN = () => {
   /* visible clip of an element: viewport ∩ every overflow ancestor */
   const clip = e => { let r = e.getBoundingClientRect(), x0 = Math.max(0, r.left), y0 = Math.max(0, r.top), x1 = Math.min(W, r.right), y1 = Math.min(H, r.bottom); let s = e.parentElement; while (s && s !== document.body) { const cs = getComputedStyle(s); if (/(auto|scroll|hidden|clip)/.test(cs.overflow + cs.overflowX + cs.overflowY)) { const q = s.getBoundingClientRect(); x0 = Math.max(x0, q.left); y0 = Math.max(y0, q.top); x1 = Math.min(x1, q.right); y1 = Math.min(y1, q.bottom) } s = s.parentElement } return { x0, y0, x1, y1, full: x0 <= r.left + 1 && y0 <= r.top + 1 && x1 >= r.right - 1 && y1 >= r.bottom - 1, any: x1 - x0 > 4 && y1 - y0 > 4 } };
   const all = [...document.querySelectorAll('button,[role=button],[data-tab],.kcard[data-i],input[type=text],input:not([type])')].filter(vis).filter(e => !e.parentElement.closest('button,[role=button]'));
-  const probe = e => { const c = clip(e); if (!c.any) return { hit: false, clipped: true }; const pts = [[.5, .5], [.5, .3], [.5, .7], [.25, .5], [.75, .5]]; let cover = null; for (const [fx, fy] of pts) { const x = c.x0 + (c.x1 - c.x0) * fx, y = c.y0 + (c.y1 - c.y0) * fy; const t = document.elementFromPoint(x, y); if (t && (t === e || e.contains(t))) return { hit: true }; if (!cover) cover = t } return { hit: false, full: c.full, cover: cover && (cover.tagName.toLowerCase() + (cover.id ? '#' + cover.id : '') + (typeof cover.className === 'string' && cover.className ? '.' + cover.className.trim().split(/\s+/).slice(0, 2).join('.') : '')), foreign: cover && !cover.contains(e) && layerOf(cover) !== layerOf(e) && !cover.closest('#kpop,.kpop,#kxcatch,#ktut,#title,#kload,#dawn,.kne') } };
+  const probe = e => { const c = clip(e); if (!c.any) return { hit: false, clipped: true }; const pts = [[.14, .5], [.5, .5], [.3, .5], [.86, .5], [.5, .3], [.5, .7]]; let cover = null; for (const [fx, fy] of pts) { const x = c.x0 + (c.x1 - c.x0) * fx, y = c.y0 + (c.y1 - c.y0) * fy; const t = document.elementFromPoint(x, y); if (t && (t === e || e.contains(t))) { const inner = t.closest('button,[role=button],a,[data-tip],[data-help],[data-leg],[data-kzoom],.kaart,.kodds,.kchip,[class*=odds],[class*=legend]'); if (inner && inner !== e && e.contains(inner)) continue; return { hit: true } } if (!cover) cover = t } return { hit: false, full: c.full, cover: cover && (cover.tagName.toLowerCase() + (cover.id ? '#' + cover.id : '') + (typeof cover.className === 'string' && cover.className ? '.' + cover.className.trim().split(/\s+/).slice(0, 2).join('.') : '')), foreign: cover && !cover.contains(e) && layerOf(cover) !== layerOf(e) && !cover.closest('#kpop,.kpop,#kxcatch,#ktut,#title,#kload,#dawn,.kne') } };
   const txt = e => (e.getAttribute('aria-label') || e.textContent || '').replace(/\s+/g, ' ').trim();
   const inLay = e => lay === document.body ? layerOf(e) === document.body : lay.contains(e);
   let btns = all.filter(inLay).map(e => ({ e, p: probe(e) }));
@@ -75,6 +75,7 @@ const SCAN = () => {
     b: btns.map((x, i) => ({ i, t: txt(x.e).slice(0, 90), id: x.e.id || '', c: String(x.e.className || '').slice(0, 40), d: Object.keys(x.e.dataset).join(','), inp: x.e.tagName === 'INPUT', hole: gate && !tut.contains(x.e), hit: x.p.hit, deadSuspect: !x.p.hit && x.p.full && x.p.foreign ? x.p.cover : null, x: /kit-x|kclose/.test(x.e.className) || /^(✕|×)$/.test(txt(x.e)) })),
     lr: (() => { const r = (lay === document.body ? document.documentElement : lay).getBoundingClientRect(); return { x: Math.max(0, r.left), y: Math.max(0, r.top), w: Math.min(W, r.right) - Math.max(0, r.left), h: Math.min(H, r.bottom) - Math.max(0, r.top) } })(),
     code: !(S0 && S0.name && !S0.dead) ? ((document.body.innerText || '').match(/Ám hiệu\s*:?\s*([A-Z0-9]{4})(?![A-Za-z0-9])/) || [])[1] || null : null,
+    scr: lay === document.body ? null : (() => { for (const el of [lay, ...lay.querySelectorAll('*')]) { if (el.scrollHeight > el.clientHeight + 8 && /(auto|scroll)/.test(getComputedStyle(el).overflowY)) { const r = el.getBoundingClientRect(); if (r.height < 40) continue; return { x: r.left + r.width / 2, y: r.top + r.height / 2, left: Math.round(el.scrollHeight - el.clientHeight - el.scrollTop) } } } return null })(),
     S: S0, end: !!window.__rtEnd };
 };
 
@@ -83,6 +84,12 @@ async function play(p) {
   p.on('crash', () => bug('crash', 'tab crashed'));
   const rt = RT.make(p, { dev: DEV, shots: SHOTS, ignoreCover: /kpop|kxcatch|ktut|#title|#kload|#dawn|kne/, touch: DEV !== 'ipad', log: d => { (R.trace = R.trace || []).push([sec(), d.k === 'tap' ? (d.screen || '') + ' «' + d.label + '»' : 'DEAD ' + d.label]); if (R.trace.length > 400) R.trace.shift(); if (process.env.RTV) console.log('TAP', d.screen, '«' + d.label + '»'); if (d.k === 'DEAD BUTTON') { R.dead.push({ ...d, at: sec(), S: lastS }); console.log('DEAD BUTTON', d.screen, '«' + d.label + '»', 'cover', d.cover) } } });
   let lastS = null;
+  /* stuck evidence: every save / slot / co-op key of localStorage + the co-op state (CW / room) + S summary → <shots>/<tag>-dump.json + -save.json */
+  const dumpStuck = async tag => { try { const d = await p.evaluate(() => { const ls = {}; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (/hclh|save|slot|ctm|coop|room/i.test(k)) ls[k] = localStorage.getItem(k) }
+      const safe = o => { try { const seen = new WeakSet(); return JSON.parse(JSON.stringify(o, (k, v) => { if (typeof v === 'function') return undefined; if (v && typeof v === 'object') { if (seen.has(v)) return '[cycle]'; seen.add(v) } return v })) } catch (e) { return 'unserialisable: ' + e.message } };
+      let S1 = null; try { S1 = { name: S.name, year: S.year, turn: S.turn, tuan: S.tuan, buoi: S.buoi, dead: S.dead, rank: S.rank, place: S.place } } catch (e) {}
+      return { at: new Date().toISOString(), url: location.href, ls, S: S1, coop: { CW: safe(window.CW || null), room: safe(window.CTM_ROOMS && window.CTM_ROOMS.cur ? window.CTM_ROOMS.cur : null), seat: safe(window.COOP || window.CO || null) }, Q: (typeof Q !== 'undefined' && Q) ? Q.length : null } });
+      const f = path.join(SHOTS, tag + '-dump.json'); fs.writeFileSync(f, JSON.stringify(d)); const sk = Object.keys(d.ls).find(k => /save/i.test(k)); if (sk) fs.writeFileSync(path.join(SHOTS, tag + '-save.json'), d.ls[sk]); (R.dumps = R.dumps || []).push(f); return f } catch (e) { return null } };
   const boot = async () => {
     if (!C.noBoot) await p.goto(URL0, { waitUntil: 'load', timeout: 0 });
     await p.waitForFunction(() => typeof start === 'function' && typeof over === 'function', null, { timeout: 0 });
@@ -98,7 +105,7 @@ async function play(p) {
 
   await p.evaluate(() => { window.__rtEnd = null }).catch(() => {});
   const actsPerBuoi = { sens: 2, rand: 3, cautious: 1, bold: 3, quiet: 0 }[BOT] ?? 2;
-  let idle = 0, noFx = new Map(), deadSeen = new Set(), acts = 0, lastKey = '', lastProg = Date.now(), repeat = new Map(), sameScr = 0, lastSig = '', started = false, cpAt = 0, statusAt = Date.now();
+  let preT = Date.now(), idle = 0, noClose = new Set(), noFx = new Map(), deadSeen = new Set(), acts = 0, lastKey = '', lastProg = Date.now(), repeat = new Map(), sameScr = 0, lastSig = '', started = false, cpAt = 0, statusAt = Date.now();
   const clockKey = s => s ? [s.y, s.t, s.w, s.b].join('.') : 'none';
 
   for (;;) {
@@ -111,13 +118,15 @@ async function play(p) {
     const key = clockKey(sc.S);
     if (key !== lastKey) { if (lastKey && sc.S) { R.buoi++; acts = 0; repeat.clear() } lastKey = key; lastProg = Date.now();
       if (R.buoi - cpAt >= CP) { cpAt = R.buoi; const sz = await p.evaluate(() => { let m = 0, k0 = ''; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (/save/.test(k)) { const n = (localStorage.getItem(k) || '').length; if (n > m) { m = n; k0 = k } } } return { k: k0, n: m } }).catch(() => null); if (sz) { R.saves.push({ buoi: R.buoi, year: sc.S && sc.S.y, chars: sz.n, key: sz.k }); console.log('CP buổi', R.buoi, 'year', sc.S && sc.S.y, 'save', sz.n, 'chars') } } }
-    if (started && (Date.now() - (R._ckAt || 0) > 600e3 || R.buoi - (R._ckB || 0) >= CP)) { R._ckAt = Date.now(); R._ckB = R.buoi; const ls = await p.evaluate(() => { const o = {}; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (/^hclh|save|slot/i.test(k)) o[k] = localStorage.getItem(k) } return o }).catch(() => null); if (ls) { try { fs.writeFileSync(CKPT + '.tmp', JSON.stringify({ at: new Date().toISOString(), rs, R, ls })); fs.renameSync(CKPT + '.tmp', CKPT) } catch (e) {} } save() }
+    if (started && (Date.now() - (R._ckAt || 0) > 180e3 || R.buoi - (R._ckB || 0) >= 5)) { R._ckAt = Date.now(); R._ckB = R.buoi; const ls = await p.evaluate(() => { const o = {}; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (/^hclh|save|slot/i.test(k)) o[k] = localStorage.getItem(k) } return o }).catch(() => null); if (ls) { try { fs.writeFileSync(CKPT + '.tmp', JSON.stringify({ at: new Date().toISOString(), rs, R, ls })); fs.renameSync(CKPT + '.tmp', CKPT) } catch (e) {} } save() }
     if (SLICE && R.buoi >= SLICE) { R.sliced = true; break }
     if (Date.now() - statusAt > 3600e3) { statusAt = Date.now(); const l = 'STATUS ' + LIFE + ' · buổi ' + R.buoi + ' · year ' + (sc.S && sc.S.y) + ' · rank ' + (sc.S && sc.S.rank) + ' · bugs ' + R.bugs.length + ' · stuck ' + R.harness.stuck + ' · dead buttons ' + R.dead.length; R.status.push(l); console.log(l); save() }
     if (Date.now() - (R._snapAt || 0) > 60e3) { R._snapAt = Date.now(); await p.screenshot({ path: path.join(SHOTS, 'now.png') }).catch(() => {}); if (process.env.RTV) console.log('NOW', sc.layer, '«' + sc.title + '»', 'hit', sc.b.filter(x => x.hit).length, 'idle', idle, 'buổi', R.buoi, 'areaTaps', R.harness.areaTaps || 0) }
+    /* not in the life yet (title / resume splash / loading) for 5 min = stuck too: bug, reload, go again (a resume re-opens its save) */
+    if (!started && Date.now() - preT > 300e3) { preT = Date.now(); R.harness.stuck++; const shot = path.join(SHOTS, 'prestart-stuck-' + R.harness.stuck + '.png'); await p.screenshot({ path: shot }).catch(() => {}); const dmp = await dumpStuck('prestart-stuck-' + R.harness.stuck); bug('stuck', 'life not (re)opened within 5 min on ' + sc.layer + ' «' + sc.title + '»', { shot, dump: dmp, buttons: sc.b.map(x => x.t).slice(0, 8) }); await p.reload({ waitUntil: 'load' }).catch(() => {}); await boot().catch(() => {}); continue }
     /* stuck: no clock progress for STUCK_MS → bug + shot + save, unstick, SAME life continues */
     if (started && Date.now() - lastProg > STUCK_MS) { R.harness.stuck++; const shot = path.join(SHOTS, 'stuck-' + R.harness.stuck + '.png'); await p.screenshot({ path: shot }).catch(() => {});
-      const sv = await p.evaluate(() => { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (/save/.test(k)) return localStorage.getItem(k) } return null }).catch(() => null); const svf = path.join(SHOTS, 'stuck-' + R.harness.stuck + '-save.json'); if (sv) fs.writeFileSync(svf, sv);
+      const svf = await dumpStuck('stuck-' + R.harness.stuck); const sv = !!svf; /* evidence FIRST, then the unstick ladder */
       bug('stuck', 'no progress ' + Math.round(STUCK_MS / 60e3) + ' min on ' + sc.layer + ' «' + sc.title + '»', { shot, save: sv ? svf : null, S: sc.S, buttons: sc.b.map(b => b.t).slice(0, 12) });
       await unstick(p, rt, sc, 3); lastProg = Date.now(); continue }
     /* a layer with nothing to tap (loading / scene / gate): wait like a person, then tap the middle of the screen */
@@ -132,9 +141,11 @@ async function play(p) {
     if (sameScr > 25) { await unstick(p, rt, sc, sameScr > 60 ? 2 : 1); sameScr = 0; continue }
     const ch = choose(sc, started);
     if (!ch) { await p.waitForTimeout(400); continue }
+    if (ch.scroll) { await p.mouse.move(ch.scroll.x, ch.scroll.y); await p.mouse.wheel(0, Math.min(400, ch.scroll.left + 20)); await p.waitForTimeout(400); R.harness.scrolls = (R.harness.scrolls || 0) + 1; continue }
+    if (ch.noclose) { const shot = path.join(SHOTS, 'noclose-' + Date.now() + '.png'); await p.screenshot({ path: shot }).catch(() => {}); bug('game', 'dialog scrolled to the end has no close / next button: ' + sc.layer + ' «' + sc.title + '»', { shot, buttons: sc.b.map(x => x.t).slice(0, 8) }); continue }
     if (ch.exit) { R.exitPick = { label: ch.t, n: ch.n, only: ch.only, at: sec(), S: sc.S }; console.log('EXIT ROAD', ch.only ? '(only option — real ending)' : '', '«' + ch.t + '»') }
     const h = await p.evaluateHandle(i => window.__rtBtns[i], ch.i);
-    const ok = await rt.tap(h, { screen: sc.layer + (sc.title ? ' «' + sc.title + '»' : ''), label: ch.t.slice(0, 50), wait: 1500, confirm: async () => { const s3 = await p.evaluate(SCAN); return s3.layer === sc.layer && s3.title === sc.title } });
+    const ok = await rt.tap(h, { screen: sc.layer + (sc.title ? ' «' + sc.title + '»' : ''), label: ch.t.slice(0, 50), wait: started ? 1500 : 8000, confirm: async () => { const s3 = await p.evaluate(SCAN); return s3.layer === sc.layer && s3.title === sc.title } });
     const rk = sig + '#' + ch.t; repeat.set(rk, (repeat.get(rk) || 0) + (ok ? 1 : 5));
     /* a close (✕ / Lui) tapped for real 3× and the same dialog is still there = button with no effect → bug + shot */
     if (ok && (ch.x || CLOSE_RE.test(ch.t)) && sc.layer !== 'page') { await p.waitForTimeout(600); const s4 = await p.evaluate(SCAN).catch(() => null); if (s4 && s4.layer === sc.layer && s4.title === sc.title && sc.title) { const k = 'nx|' + sc.layer + '|' + sc.title; noFx.set(k, (noFx.get(k) || 0) + 1); if (noFx.get(k) === 3) { const shot = path.join(SHOTS, 'noeffect-' + Date.now() + '.png'); await p.screenshot({ path: shot }).catch(() => {}); R.dead.push({ k: 'NO EFFECT', screen: sc.layer + ' «' + sc.title + '»', label: ch.t, cover: 'tapped 3× for real, dialog stays', shot, at: sec(), S: sc.S }); bug('dead', 'close button has no effect: ' + sc.layer + ' «' + sc.title + '» «' + ch.t + '»', { shot }) } } }
@@ -143,12 +154,12 @@ async function play(p) {
     await p.waitForTimeout(ok ? 220 : 400);
 
     function choose(sc, started) {
-      const hb = sc.b.filter(x => x.hit && !LEAVE_RE.test(x.t) && !(started && /^(cfz|coop)$/.test(x.d))); let b = hb.filter(x => (repeat.get(sig + '#' + x.t) || 0) < 4);
+      const hb = sc.b.filter(x => x.hit && !LEAVE_RE.test(x.t) && !(started && /^(cfz|coop)$/.test(x.d))); let b = started ? hb.filter(x => (repeat.get(sig + '#' + x.t) || 0) < 4) : hb; /* before the life opens: keep retrying the start / continue button */
       if (!b.length) b = hb;
       const isExit = x => EXIT_RE.test(x.t) && !(!started && /kiếp mới/i.test(x.t) && sc.layer !== 'page');
       /* back on the title after the life started (room dropped / reload): co-op seat rejoins its room or waits; solo continues its sổ */
       if (started && b.some(x => /^chơi một mình/i.test(x.t))) { const back = b.find(x => /trở lại phòng|vào lại phòng|về phòng/i.test(x.t)); if (back) return back; if (C.pre || C.coop) { R.titleBack = (R.titleBack || 0) + 1; return null } }
-      if (!started && ck) { for (const re of [/^chơi một mình/i, /tiếp tục|chơi tiếp/i, /^bỏ qua$/i, /^tiếp$/i]) { const f = b.find(x => re.test(x.t)); if (f) return f } if (b.some(x => /bắt đầu kiếp mới/i.test(x.t))) return null }
+      if (!started && ck) { for (const re of [/tiếp tục kiếp này|tiếp tục kiếp|chơi tiếp/i, /^chơi một mình/i, /^tiếp tục/i, /^bỏ qua$/i, /^tiếp$/i]) { const f = b.find(x => re.test(x.t) && !/kiếp mới|bắt đầu/i.test(x.t)); if (f) return f } return null /* resume: only continue the saved life — never «Kiếp mới» / «Bắt đầu kiếp mới»; wait for the right button */ }
       if (!started && C.pre) { const r = C.pre(sc, b); if (r === 'wait') return null; if (r) return r }
       if (!started) { /* title → solo → new life in slot 1 → skip roulette → accept identity */
         const pref = [/chơi một mình/i, /^bắt đầu kiếp mới$/i, /bỏ qua/i, /nhận thân phận/i, /^(vào cung|bắt đầu|nhập cung)/i];
@@ -163,8 +174,11 @@ async function play(p) {
       const exits = opts.filter(isExit);
       const isPage = sc.layer === 'page' || sc.b.some(x => x.id === 'next');
       if (!isPage) {
-        const main = nonExit.filter(x => !LOW_RE.test(x.t));
+        const main = nonExit.filter(x => !LOW_RE.test(x.t) && !/^kéo xuống/i.test(x.t));
         if (main.length) return score(main);
+        /* a long dialog (Tin báo …): its ✕ / Đóng / «Đã xem hết» may sit below — scroll its own scroller like a person */
+        if (!b.some(close) && sc.scr && sc.scr.left > 4) return { scroll: sc.scr };
+        if (!b.some(close) && !nonExit.some(x => !/^kéo xuống/i.test(x.t)) && sc.scr && sc.scr.left <= 4 && !noClose.has(sc.layer + sc.title)) { noClose.add(sc.layer + sc.title); return { noclose: true } }
         const cl = b.find(close); if (cl) return cl; /* ✕ / Lui before help / empty-label icons (portrait re-opens the same dialog) */
         if (nonExit.length) return score(nonExit);
         if (exits.length) { const e = score(exits); return { ...e, exit: true, n: opts.length, only: true } }
@@ -213,7 +227,7 @@ function save() { const f = path.join(OUT, LIFE + '.json'); fs.writeFileSync(f, 
     '| ' + LIFE + ' | ' + (R.life ? R.life.id + (R.life.fate ? ' — ' + R.life.fate : '') : 'running') + ' | ' + (R.life && R.life.age || '') + ' | ' + R.buoi + ' | ' + (R.harness.taps || '') + ' | ' + R.dead.length + ' | ' + R.harness.stuck + ' | ' + R.bugs.length + ' | ' + (R.exitPick ? R.exitPick.label + (R.exitPick.only ? ' (only option)' : '') : '—') + ' |', '',
     '## Dead buttons', ''].concat(R.dead.slice(0, 100).map(d => '- ' + d.screen + ' «' + d.label + '» covered by ' + d.cover + (d.shot ? ' · ' + path.basename(d.shot) : ''))).concat(['', '## Bugs', ''], R.bugs.map(b => '- [' + b.type + '] ×' + b.n + ' ' + b.msg)).join('\n')) }
 
-return { R, play, save, get life() { return LIFE } };
+return { R, play, save, SCAN, get life() { return LIFE } };
 }
 
 module.exports = { Seat, EXIT_RE };
@@ -228,9 +242,11 @@ const STUCK_MS = (+A.stuckMin || 15) * 60e3, SLICE = +A.slice || 0, CP = +A.cp |
 const OUT = path.resolve(OUT0), SHOTS = path.join(OUT, 'shots-' + LIFE); fs.mkdirSync(SHOTS, { recursive: true });
 const seat = Seat({ url: URL0, out: OUT0, dev: DEV, bot: A.bot, seed: A.seed, life: A.life, origin: A.origin, road: A.road, stuckMin: A.stuckMin, slice: A.slice, cp: A.cp, resume: A.resume === "1" });
 (async () => {
-  const br = await chromium.launch();
-  const ctx = await br.newContext({ viewport: VP, deviceScaleFactor: 1, hasTouch: DEV !== 'ipad', isMobile: DEV !== 'ipad', serviceWorkers: 'block' });
-  const p = await ctx.newPage();
+  /* one browser profile per life (<out>/profile-<life>): pictures / music are fetched once and stay cached across restarts and resume
+     (a fresh profile re-downloads everything behind «Lần đầu nhập cung», which the CDN throttles (429) when many robots start together) */
+  const ctx = await chromium.launchPersistentContext(path.join(path.resolve(OUT0), 'profile-' + LIFE), { viewport: VP, deviceScaleFactor: 1, hasTouch: DEV !== 'ipad', isMobile: DEV !== 'ipad', serviceWorkers: 'block' });
+  const br = { close: () => ctx.close() };
+  const p = ctx.pages()[0] || await ctx.newPage();
   try { await seat.play(p) } catch (e) { seat.R.bugs.push({ type: 'harness', msg: 'runner error: ' + String(e.message).split('\n')[0], n: 1 }); seat.R.life = seat.R.life || { id: 'HARNESS', type: 'harness' }; seat.save(); console.error(e); process.exitCode = 1 }
   await br.close();
 })();
