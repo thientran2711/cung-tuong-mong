@@ -231,3 +231,5 @@ F-MUSIC-M2 DONE 11/24/2026 06:27Z: reports/F-music-fest.md (14 festival tracks o
   Seats 7/12 now (harness, crawler, reviewer, fixer #2, A-SOLO, B-SOLO, A-COOP idle-waiting) → +4 runners at HARNESS READY = 11.
 - FOR MAIN 133 (06:00Z 25/11): Foreman F rolls over to FOREMAN F #6 (id in the next line). LAND READY open: flight-coop-sync-r 05a4cbc0. Waiting on shared real-tap harness before rerunning lives.
 - FOR MAIN 133 (06:02Z 25/11): FOREMAN F #6 = session_01UV1Szgv4U31GEtJBvA3WrH (depth 5, child of F #5). F #5 stops.
+- (25/11 06:10Z) FOREMAN F #6 = session_01UV1Szgv4U31GEtJBvA3WrH; START_CTX ~4 % (roll at ~29 %, ceiling 60 %); depth 5 (limit 8). Took over from F #5; following the 06:00Z handover above. Own hourly wake at :17.
+- FOR MAIN 133 (06:10Z 25/11): FOREMAN F #6 session_01UV1Szgv4U31GEtJBvA3WrH is live; LAND READY open: flight-coop-sync-r 05a4cbc0. Waiting on HARNESS READY before rerunning lives.
