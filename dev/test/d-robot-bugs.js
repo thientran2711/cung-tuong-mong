@@ -32,5 +32,21 @@ const root=path.join(__dirname,'..','..');let bad=0;const ok=(n,c,x)=>{if(!c)bad
   const c=await p.evaluate(()=>{const M=document.getElementById('modal');return{ink:!!document.querySelector('.kmov.km-inkov:not(.km-out)'),vis:getComputedStyle(M).visibility,hid:M.hidden}});
   ok(wh+' #5 after the ink the ending card shows',!c.ink&&c.vis==='visible'&&!c.hid,c);
   await p.screenshot({path:`${process.env.OUT||'/tmp'}/drb-${wh}-card.png`});
+  /* #4 ✕ / Lui on «Tin chờ người sai đi» and «Tâm trạng · X» when a forced card (night flip choice nfch) is put in FRONT after the dialog was drawn: ✕ must close THE DIALOG (not answer the hidden choice) */
+  await p.evaluate(()=>{try{kmReset()}catch(e){}['buoitr','klife','curtain'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});document.querySelectorAll('.kmov,[id^="kroul"],.kroul-ov').forEach(e=>e.remove());S.dead=false;Q.length=0;document.getElementById('modal').hidden=true});
+  const NF=()=>({t:"Kính sự phòng",pid:"nfch",h:"<p>x</p>",opts:[{n:"Tranh sủng",fx:{}},{n:"Chặn ngự giá",fx:{}}]});
+  const scen={
+   look:()=>{Q.length=0;Q.push(NF());kitModal({kind:"info",look:1,title:"Tâm trạng · Thử",sub:"chưa rõ",subject:S,sections:[{h:"",rows:[["Tâm trạng","bình thản"]]}]});Q.unshift(Q.splice(Q.findIndex(m=>m.pid==="nfch"),1)[0])},
+   tin:()=>{Q.length=0;S.away=[{id:"e1-0",by:"me",who:"mm:me",nm:"Tiểu cung nữ",k:"spy",lbl:"đi dò la",t0:0,due:0,back:1,read:0,rep:{t:"Tiểu cung nữ về",ok:null,L:["Nghe được vài lời."],d:[]}}];kitStatusIcon.refresh();kitStatusIcon.open("tin");const T=Q.filter(m=>m.t==='Tin chờ người sai đi');Q.length=0;T.forEach(m=>Q.push(m));showModal();Q.unshift(NF())}};
+  for(const k of Object.keys(scen)){const src=scen[k].toString();
+   await p.evaluate(`(()=>{const NF=${NF.toString()};(${src})()})()`);
+   try{await p.waitForFunction(()=>!document.getElementById('modal').hidden,null,{timeout:8000})}catch(e){}await p.waitForTimeout(500);
+   const r=await p.evaluate(()=>{const M=document.getElementById('modal');const x=[...M.querySelectorAll('.kit-x')].filter(e=>e.getClientRects().length)[0];return{title:(M.querySelector('.kptitle')||{}).textContent,x:x?JSON.stringify(x.getBoundingClientRect()):null,q:Q.map(m=>m.t)}});
+   if(!r.x){ok(wh+' #4 '+k+' has a ✕',false,r);continue}
+   const bb=JSON.parse(r.x);await p.mouse.click(bb.x+bb.width/2,bb.y+bb.height/2);await p.waitForTimeout(700);
+   const a=await p.evaluate(()=>{const M=document.getElementById('modal');return{title:(M.querySelector('.kptitle')||{}).textContent,q:Q.map(m=>m.t+'|'+(m.pid||''))}});
+   ok(wh+' #4 '+k+': ✕ closes the dialog, the forced card is NOT answered',a.q.length===1&&a.q[0]==='Kính sự phòng|nfch'&&a.title!==r.title,{before:r,after:a});
+   await p.screenshot({path:`${process.env.OUT||'/tmp'}/drb-${wh}-x-${k}.png`});
+   await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true})}
   ok(wh+' no page errors',errs.length===0,errs);await ctx.close()}
  await b.close();srv.close();console.log(bad?'FAIL':'ALL PASS');process.exit(bad?1:0)})();
