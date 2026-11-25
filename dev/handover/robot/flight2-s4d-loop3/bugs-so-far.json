@@ -1,0 +1,74 @@
+[
+ {
+  "k": "stuck|no-clock loop: 150 taps without a clock step on page «Tích Cần viện · Ở đây còn 9 người.»",
+  "type": "stuck",
+  "msg": "no-clock loop: 150 taps without a clock step on page «Tích Cần viện · Ở đây còn 9 người.»",
+  "n": 2,
+  "at": 69,
+  "shot": "/home/user/wt/s4/out/shots-flight2-s4d-cnv_mat-cautious/loop-1.png",
+  "dump": "/home/user/wt/s4/out/shots-flight2-s4d-cnv_mat-cautious/loop-1-dump.json",
+  "S": {
+   "dead": false,
+   "y": 8,
+   "t": 93,
+   "w": 1,
+   "b": 2,
+   "age": 26,
+   "rank": 0,
+   "name": "Quách Thần Hi"
+  },
+  "buttons": [
+   "Ô lưu",
+   "Xem bản thân",
+   "Sắc80Tài69Tâm cơ27Đức100Danh94Chủ tin22",
+   "Bạc3Sức100/100",
+   "Tin báo: 2 tin mới",
+   "Buổi chiều, còn 4 khắc",
+   "chiều âm u",
+   "Tâm trạngBình thản0",
+   "Về phòng",
+   "Hiền phi cứu đóiTrinh phiĐộc Cô Mặc Lan",
+   "Lịch tháng",
+   "Mục tiêu chương (có mới)"
+  ],
+  "trace": [
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang buổi»",
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang buổi»",
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang buổi»",
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang buổi»",
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang buổi»",
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang buổi»",
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang buổi»",
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang buổi»",
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang buổi»",
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang buổi»",
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang buổi»",
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang buổi»",
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang buổi»",
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang buổi»",
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang buổi»",
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang buổi»",
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang buổi»",
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang buổi»",
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang buổi»",
+   "page «Tích Cần viện · Ở đây còn 9 người.» «Sang buổi»"
+  ],
+  "next": {
+   "dis": false,
+   "q": 1,
+   "mg": false,
+   "qt": [
+    "Có người đến"
+   ],
+   "t": "Sang buổi"
+  }
+ },
+ {
+  "k": "game|NO EFFECT: info layer #kpop stays open after 3 real taps on it",
+  "type": "game",
+  "msg": "NO EFFECT: info layer #kpop stays open after 3 real taps on it",
+  "n": 1,
+  "at": 741,
+  "shot": "/home/user/wt/s4/out/shots-flight2-s4d-cnv_mat-cautious/info-noeffect-1795610247707.png"
+ }
+]
