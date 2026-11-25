@@ -1,7 +1,7 @@
 /* review/emotion-acts (jemoact; owner OD 16/11 13:08Z, 13:25Z B, 13:50Z s17 (3)): emotion act cards, outbursts, hỏi tội, extreme mood, locks.
    usage: node dev/test/emotion-acts.js <build url> <outdir> [WxH@dpr,...]
    cases: gian (her deck at a low angry mood: Đập đồ + Mắng cung nữ cards), vui (Đàn hát tự thưởng), scold (Mắng cung nữ: pick the maid), scoldlive (the pick follows the CURRENT maids after one is dismissed),
-          out (a hot-tempered her bursts out: kit event frame, only "Tiếp tục"), gen (a generous her in high joy hands out silver),
+          out (a hot-tempered her bursts out: kit event frame with the temper options — dev/test/temper-outburst.js taps them), gen (a generous her in high joy hands out silver),
           hoi (a higher-rank mistress comes to hỏi tội: 3 answers), hit (a lower-rank consort scolded her maid: 2 answers),
           ext (3 tuần of deep sorrow → Tâm bệnh), lock (hot + furious: "Nhịn" greyed, reason in its line), oldsave (a save without S.ea).
    Checks per case: no page error, no horizontal page overflow, dialog content inside its panel; the case's own expectation (ok). */

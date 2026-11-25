@@ -18,7 +18,8 @@
    3. FORCED OUTBURSTS: past the outburst line (hers and NPCs alike: the signed bar past out.v AND the matching dominant feeling, owner OD 17/11 ~18:33Z (1)) a weekly chance (by temper) that the feeling bursts
       out; the reaction is drawn from the reactions her / his PERSONALITY allows (timid: never phạm thượng, never beats anyone; hot-
       tempered: may smash, scold, beat, phạm thượng) weighted by temper; positive ones too (a generous person in high joy hands out
-      silver). Hers shows as a kit event frame with only "Tiếp tục" (what happened + its real numbers). A maid of a palace whose mistress
+      silver). Hers shows as a kit event frame with the options her temper allows (TEMPER-OUTBURST, OD 25/11 ~05:45Z (1): up to
+      BAL.ea.pick.n, equal value, no hold-back; she must pick one; an NPC consort picks from the same list). A maid of a palace whose mistress
       outranks the doer → that mistress comes to hỏi tội the next tuần (a daily event with real choices, each with gain and loss); two-way:
       a lower-rank consort who beats HER maid → she may go hỏi tội.
    Co-op: S.ea is a personal key of S; NPC (world) changes only on the host (COOPW.seat "a") or single player. ====================== */
@@ -379,10 +380,16 @@ function eaOpts(p,fk,g,T0){/* T0: a temper given by the measure (dev/measure/tem
  for(const r of R_)if(r.who==="c"&&r.g===g){let w=0;try{w=Math.max(0,r.w(T))}catch(e){}push(r,w)}
  L.sort((a,b)=>b.w-a.w);return L.slice(0,pk.n).map(x=>Object.assign({},x.r,{pv:1,w0:x.w}))}
 /* the option row of her choice: gains → thành, losses → kèm (kit kaRows routes them to Được / Tốn / Mất / Kèm), real numbers */
-function eaOptX(p,r){const P=eaPx(p,r),vv=BAL.ea.pick.vent;const up=!(S.mood&&S.mood.v>0);const gs=(up?[`tâm trạng +${vv}`]:[]).concat(P.G.map(x=>/−$/.test(x[0])?`${x[0]}${x[1]}`:`${x[0]} +${x[1]}`));
- const ls=(up?[]:[`lòng vui lắng xuống (tâm trạng −${vv})`]).concat(P.L.filter(x=>x[1]).map(x=>`${x[0]} −${x[1]}`));const pm=P.L.find(x=>x[0]==="cấm túc");if(pm)ls.push(`có thể bị cấm túc (${word(pm[4])})`);
- return`thành: ${gs.join(", ")||"không"}${ls.length?` · kèm: ${ls.join(", ")}`:""}`}
-window.eaOpts=eaOpts;window.eaPx=eaPx;window.eaOptX=eaOptX;window.eaCapAdd=eaCapAdd;
+/* her own stats of an option (Bạc, Sức, Danh, Đức, Sủng, Tài) → the option's fx (the kit draws Tốn / Được / Mất from it, j3 chooseM applies it, then
+   go runs the reaction with fxPaid so nothing is paid twice); the rest (vent, others' feelings, the cấm túc roll) → x */
+const EA_OWN={"Bạc":"bac","Sức":"suc","Danh":"danh","Đức":"duc","Sủng":"sung","Tài":"tai"};
+function eaOptFx(p,r){const P=eaPx(p,r),o={};for(const x of P.G)if(EA_OWN[x[0]]&&x[1])o[EA_OWN[x[0]]]=(o[EA_OWN[x[0]]]||0)+x[1];for(const x of P.L)if(EA_OWN[x[0]]&&x[1])o[EA_OWN[x[0]]]=(o[EA_OWN[x[0]]]||0)-x[1];
+ if(o.bac&&o.bac<0)o.bac=-Math.min(-o.bac,Math.max(0,S.bac||0));return o}
+function eaOptX(p,r){const P=eaPx(p,r),vv=BAL.ea.pick.vent;const up=!(S.mood&&S.mood.v>0);
+ const gs=(up?["giải tỏa tâm trạng"]:[]).concat(P.G.filter(x=>!EA_OWN[x[0]]).map(x=>/−$/.test(x[0])?`${x[0]}${x[1]}`:`${x[0]} +${x[1]}`));
+ const ls=(up?[]:["lòng vui lắng xuống"]).concat(P.L.filter(x=>x[1]&&!EA_OWN[x[0]]).map(x=>`${x[0]} −${x[1]}`));const pm=P.L.find(x=>x[0]==="cấm túc");if(pm)ls.push(`có thể bị cấm túc (${word(pm[4])})`);
+ return[gs.length?`thành: ${gs.join(", ")}`:"",ls.length?`kèm: ${ls.join(", ")}`:""].filter(Boolean).join(" · ")}
+window.eaOpts=eaOpts;window.eaPx=eaPx;window.eaOptX=eaOptX;window.eaOptFx=eaOptFx;window.eaCapAdd=eaCapAdd;
 function eaPick(p,g){const T=eaTemper(p),kd=eaKind(p);/* TEMPER-OUTBURST law 1: a consort picks from the SAME option list as hers (temper weight, near-best) */if(kd==="c"){const O=eaOpts(p,null,g);if(!O.length)return null;const i=npwPick(O.map((r,j)=>j),j=>O[j].w0,{all:1});return i==null?null:{r:O[i],T}}
  const L=R_.filter(r=>r.who===kd&&r.g===g&&r.ok(p,T));if(!L.length)return null;const w=L.map(r=>Math.max(0,r.w(T)));/* NPC-PURPOSE G3: the reaction her temper ranks highest, near-best (never a weight-blind draw) */const i=npwPick(L.map((r,j)=>j),j=>w[j],{all:1});return i==null?null:{r:L[i],T}}
 window.eaPick=eaPick;
@@ -391,7 +398,7 @@ window.eaPick=eaPick;
 function eaDo(p,r){const F=BAL.ea.fx[r.k]||{vent:BAL.ea.ventDef},me=p===S,res=[];let h="",target=null;const add=(t)=>res.push(t);
  /* the outburst spends the feeling: her bar moves toward calm (down from joy, up from a low mood); TEMPER-OUTBURST: an option of the choice (r.pv) vents BAL.ea.pick.vent, the same for all */
  const VV=r.pv?BAL.ea.pick.vent:F.vent;const vent=()=>{if(me){const d=ventMe((S.mood&&S.mood.v>0?-1:1)*VV,lc1(r.n));if(d)add(`tâm trạng ${sgn(d)}`)}else ventNpc(p,VV)};
- const pay=(o)=>{if(me){apply(o)}else ap(p,o);for(const k in o){const lb=EA_LB[k]||(typeof NAMES!=="undefined"&&NAMES[k]);if(o[k]&&lb)add(me?`${lb} ${sgn(o[k])}`:eaN(p,lb,o[k]))}};
+ const pay=(o)=>{if(me){if(!r.fxPaid)apply(o)}else ap(p,o);/* TEMPER-OUTBURST: her option row's fx already paid her own stats (j3 chooseM applies fx, then go) */for(const k in o){const lb=EA_LB[k]||(typeof NAMES!=="undefined"&&NAMES[k]);if(o[k]&&lb)add(me?`${lb} ${sgn(o[k])}`:eaN(p,lb,o[k]))}};
  const ml=maidOf(p);const M=ml.length?eaVictim(ml):null;
  switch(r.k){
  case"dapdo":pay({bac:-Math.min(F.bac,me?S.bac:(p.bac||0)),danh:-F.danh});h=me?"Cơn giận dồn nén mấy hôm bỗng trào lên. Ngươi hất tay, chén trà, bình hoa vỡ tan dưới đất; cung nhân sợ hãi quỳ rạp thu dọn.":`${Nm(p)} nổi giận đập vỡ đồ trong cung.`;break;
@@ -508,15 +515,15 @@ function eaHitMe(p,k,o){try{o=o||{};cnt(EA_N.hitMe,k);const F=BAL.ea.fx[k]||{};c
    options of eaOpts (up to BAL.ea.pick.n, no hold-back); each row shows its real gain and loss (eaOptX) and runs the reaction when tapped.
    run(r) = the reaction runner (jemoact eaDo, or jfeel feelDo for its acts); done(r, o) = after it ran (jfeel: the act face + counters).
    bot / no UI: she picks like an NPC (temper weight, near-best). */
-function eaMeChoose(O,why,o){o=o||{};const run=o.run||eaDo;const go1=(r)=>{let out=null;try{out=run(S,r)}catch(e){console.error("eaMeChoose",e)}
-  if(!out){for(const x of O){if(x===r)continue;try{out=run(S,x)}catch(e){}if(out){r=x;break}}}if(!out)return null;cnt(EA_N.out,r.k);cnt(EA_N.outT,eaTemper(S).k+":"+(o.g||r.g));
+function eaMeChoose(O,why,o){o=o||{};const run=o.run||eaDo;const go1=(r,only)=>{let out=null;try{out=run(S,r)}catch(e){console.error("eaMeChoose",e)}
+  if(!out&&!only){for(const x of O){if(x.k===r.k)continue;try{out=run(S,x)}catch(e){}if(out){r=x;break}}}if(!out)return null;cnt(EA_N.out,r.k);cnt(EA_N.outT,eaTemper(S).k+":"+(o.g||r.g));
   log(`${r.n}: ${out.h}${out.res.length?` (${out.res.join(", ")})`:""}`);try{if(o.done)o.done(r,out)}catch(e){}return out};
  if(!O||!O.length)return false;
  if(window.__bot||typeof Q==="undefined"){const i=npwPick(O.map((r,j)=>j),j=>O[j].w0,{all:1});return !!go1(O[i==null?0:i])}
  EA_N.choice=(EA_N.choice||0)+1;
  Q.push({ev:1,eaOut:1,t:o.t||"Lòng không giữ được",emoSeal:{k:o.seal||O[0].g,who:"me"},art:`img/act-${O[0].art||"trut-gian-h"}.webp`,
   h:`<p>Vì ${why} quá nên lòng không giữ được, ngươi phải trút ra một cách.</p><p class="past">Chọn một trong ${O.length} cách; muốn tránh thì nên giữ lòng bình thản từ sớm.</p>`,
-  opts:O.map(r=>({n:r.n,risk:"an toàn",hint:"giải tỏa tâm trạng",x:eaOptX(S,r),fx:{},go:()=>{go1(r)}}))});return true}
+  opts:O.map(r=>{const fx=eaOptFx(S,r);return{n:r.n,x:eaOptX(S,r),fx,go:()=>{const r2=Object.assign({},r,{fxPaid:1});if(!go1(r2,1)){/* the reaction could not run (its target is gone): her fx back, another option runs */const u={};for(const k in fx)u[k]=-fx[k];apply(u);go1(r)}}}})});return true}
 window.eaMeChoose=eaMeChoose;
 function eaMeOut(g){const O=eaOpts(S,null,g);if(!O.length)return false;
  const why={gian:"giận",buon:"buồn",so:"lo âu",ghen:EMO_GHEN.toLowerCase(),vui:"vui"}[g];return eaMeChoose(O,why,{g,seal:g})}

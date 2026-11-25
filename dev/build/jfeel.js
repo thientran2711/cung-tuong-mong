@@ -247,8 +247,8 @@ function feelLine(p,good){const L=p===S?(BAL.ea.out.v||45):((BAL.ea.npc&&BAL.ea.
 function feelActDur(k){const A=fB().act,now=mkNow();let d=A.kh[k];if(d==null)d=A.def;if(d==="buoi"){const KH=J95.KH;return KH-(now%KH)}return d}
 /* the gains / losses of the new reactions (the old ones: jemoact eaDo) */
 function feelDo(p,r){const me=p===S,F=fB().act.fx[r.k];if(!F)return window.eaDo(p,r);const res=[];let h="",target=null;const add=t=>res.push(t);
- if(F.use){const b=window.EA_REACT.find(x=>x.k===F.use&&x.who==="c");if(!b)return null;return window.eaDo(p,Object.assign({},b,{k:F.use,n:r.n,pv:r.pv}))}
- const pay=o=>{if(me)apply(o);else ap(p,o);for(const k in o){const lb={danh:"Danh",tai:"Tài",sung:"Sủng",bac:"Bạc",suc:"Sức"}[k];if(o[k]&&lb)add(me?`${lb} ${o[k]>0?"+":"−"}${Math.abs(o[k])}`:"")}};
+ if(F.use){const b=window.EA_REACT.find(x=>x.k===F.use&&x.who==="c");if(!b)return null;return window.eaDo(p,Object.assign({},b,{k:F.use,n:r.n,pv:r.pv,fxPaid:r.fxPaid}))}
+ const pay=o=>{if(me){if(!r.fxPaid)apply(o)}else ap(p,o);/* TEMPER-OUTBURST: her option fx already paid it */for(const k in o){const lb={danh:"Danh",tai:"Tài",sung:"Sủng",bac:"Bạc",suc:"Sức"}[k];if(o[k]&&lb)add(me?`${lb} ${o[k]>0?"+":"−"}${Math.abs(o[k])}`:"")}};
  const Nm2=x=>x===S.emp?"Hoàng thượng":emoName(x);
  switch(r.k){
  case"tron":pay({danh:-F.danh});h=me?"Lòng sợ hãi chưa yên, ngươi đóng cửa tẩm cung, cả buổi không dám bước ra.":`${emoName(p)} đóng cửa trốn trong phòng cả buổi.`;break;
