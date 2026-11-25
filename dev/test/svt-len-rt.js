@@ -18,7 +18,7 @@ const fail = [], note = [];
 (async () => {
   const b = await chromium.launch(); const ctx = await b.newContext(VP); const p = await ctx.newPage();
   const errs = []; p.on('pageerror', e => errs.push(e.message.split('\n')[0].slice(0, 160)));
-  const rt = RT.make(p, { dev: DEV, shots: OUT, touch: DEV !== 'ipad', ignoreCover: /kpop|kxcatch|ktut|#dawn|kne/ });
+  const rt = RT.make(p, { dev: DEV, shots: OUT, touch: DEV !== 'ipad', ignoreCover: /kpop|kxcatch|ktut|#dawn|kne/, log: process.env.RTV ? (x => console.log('RT', JSON.stringify(x))) : undefined });
   const shot = n => p.screenshot({ path: path.join(OUT, DEV + '-' + n + '.png') });
   const ck = JSON.parse(fs.readFileSync(CK, 'utf8'));
   await p.goto(URL0, { waitUntil: 'load', timeout: 0 });
@@ -47,7 +47,9 @@ const fail = [], note = [];
   let sub = await btn(/^Cung nhân$/);
   if (!sub) { const g = await btn(/^Hậu cung$/); if (!g || !(await rt.tap(g, { screen: 'tabs', label: 'Hậu cung' }))) { fail.push('tab «Hậu cung» dead/missing'); await shot('tabs'); return done(b) } await p.waitForTimeout(700); sub = await btn(/^Cung nhân$/) }
   const onStaff = () => p.evaluate(() => [...document.querySelectorAll('#panel .psep')].some(e => /Cung khác/.test(e.textContent)));
-  if (!(await onStaff()) && (!sub || !(await rt.tap(sub, { screen: 'tabs', label: 'Cung nhân' })))) { fail.push('tab «Cung nhân» dead/missing'); await shot('tabs'); return done(b) }
+  /* the panel re-renders under a live handle (realtap «gone»): find the sub-tab again right before each try (W3) */
+  let subOk = await onStaff(); for (let i = 0; i < 3 && !subOk; i++) { sub = await btn(/^Cung nhân$/); if (sub && (await rt.tap(sub, { screen: 'tabs', label: 'Cung nhân' }))) { await p.waitForTimeout(600); subOk = await onStaff() } else await p.waitForTimeout(500) }
+  if (!subOk) { fail.push('tab «Cung nhân» dead/missing'); await shot('tabs'); return done(b) }
   await p.waitForTimeout(800);
   /* faces of the «Cung khác» group (another house's servants): tap them one by one until one she has met (the stranger gate) */
   const pis = await p.evaluate(() => { const g = [...document.querySelectorAll('#panel .pgrp')]; const i = g.findIndex(x => /Cung khác/.test((x.querySelector('.psep') || {}).textContent || '')); return i < 0 ? [] : g.slice(i).flatMap(x => [...x.querySelectorAll('.pface')].map(f => f.dataset.pi)) });
@@ -56,7 +58,9 @@ const fail = [], note = [];
   /* review N1: the Thái hậu's household named women = others' people → their card has the #26 «Hỏi chuyện» + «Hỏi lén» (data-elder hoi2 / hoi3), no plain elder talk */
   const thhCheck = async () => { const tp = await p.evaluate(() => { const g = [...document.querySelectorAll('#panel .pgrp')]; const i = g.findIndex(x => /Cung Thái hậu/.test((x.querySelector('.psep') || {}).textContent || '')); return i < 0 ? [] : [...g[i].querySelectorAll('.pface')].map(f => f.dataset.pi) });
     if (!tp.length) { note.push('no «Cung Thái hậu» group in this save'); return }
-    for (let g = 0; g < 80 && !tp.includes(await cur()); g++) if (!(await next())) { fail.push('«›» dead (Thái hậu)'); return }
+    /* page like a person: «›» until the strip ends (the last arrow greys out / stops), then «‹» back */
+    const prev = async () => { const ok = await rt.tap('#panel .pstrip .parr:first-of-type', { screen: 'staff', label: '‹' }); await p.waitForTimeout(450); return ok };
+    let dir = next; for (let g = 0; g < 80 && !tp.includes(await cur()); g++) { const c0 = await cur(); const ok = await dir(); if (!ok || (await cur()) === c0) { if (dir === prev) { fail.push('«‹ ›» could not reach the Thái hậu group'); return } dir = prev } }
     if (!tp.includes(await cur())) { fail.push('could not reach a Thái hậu card'); return }
     const c = await p.evaluate(() => { const T = e => e ? e.textContent.replace(/\s+/g, ' ').trim() : null; return { h2: T(document.querySelector('#panel [data-elder="hoi2"]')), h3: T(document.querySelector('#panel [data-elder="hoi3"]')), old: document.querySelectorAll('#panel [data-elder="hoi"]').length } });
     await shot('thh-card'); note.push('Thái hậu card: «' + c.h2 + '» + «' + c.h3 + '» · plain elder talk ' + c.old);
