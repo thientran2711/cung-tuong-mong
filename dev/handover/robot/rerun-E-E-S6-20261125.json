@@ -1,0 +1,571 @@
+[
+ {
+  "job": {
+   "id": "R6-lazy-1",
+   "origin": "pf",
+   "road": "pt_tang",
+   "bot": "sens",
+   "seed": 2176113731,
+   "dev": "ipad",
+   "url": "http://localhost:8731/index.html"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "93812531",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 0,
+   "cap": null,
+   "stuck": 2,
+   "unstick": 149,
+   "slice": null,
+   "areaTaps": 717,
+   "infoTaps": 336,
+   "dlgClose": 298,
+   "scrolls": 3954,
+   "taps0": 0,
+   "resumed": [
+    {
+     "at": "2026-11-25T11:54:04.122Z",
+     "buoi": 102,
+     "from": "2026-11-25T11:52:34.747Z"
+    }
+   ],
+   "dlgScroll": 1,
+   "taps": 4647
+  },
+  "life": {
+   "id": "Lãnh cung",
+   "type": "end",
+   "fate": "Phát điên trong lãnh cung",
+   "death": false,
+   "age": 25,
+   "year": 6,
+   "rank": 0,
+   "text": "Ngươi u uất thành điên dại, sống nốt quãng đời trong lãnh cung.",
+   "exitPick": {
+    "label": "Bỏ cuộc",
+    "n": 1,
+    "only": true,
+    "at": 3359,
+    "S": {
+     "dead": false,
+     "y": 1,
+     "t": 6,
+     "w": 2,
+     "b": 3,
+     "age": 20,
+     "rank": 0,
+     "name": "Triệu Cẩm Sắt"
+    }
+   }
+  },
+  "exitPick": {
+   "label": "Bỏ cuộc",
+   "n": 1,
+   "only": true,
+   "at": 3359,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 6,
+    "w": 2,
+    "b": 3,
+    "age": 20,
+    "rank": 0,
+    "name": "Triệu Cẩm Sắt"
+   }
+  },
+  "bugs": [
+   {
+    "k": "stuck|no progress 15 min on .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1»",
+    "type": "stuck",
+    "msg": "no progress 15 min on .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1»",
+    "n": 2,
+    "at": 1864,
+    "shot": "/home/user/wt/out/run/shots-R6-lazy-1/stuck-1.png",
+    "save": "/home/user/wt/out/run/shots-R6-lazy-1/stuck-1-dump.json",
+    "S": {
+     "dead": false,
+     "y": 1,
+     "t": 5,
+     "w": 1,
+     "b": 0,
+     "age": 20,
+     "rank": 0,
+     "name": "Triệu Cẩm Sắt"
+    },
+    "buttons": [
+     "",
+     "",
+     "",
+     "",
+     "Theo Hoàng thượngRất vữngTốnkhôngĐượcbệ hạ để mắt hơn, Hoàng thượng tin ta hơnGợi ýbệ hạ đ",
+     "Theo Thái hậuRất vữngTốnkhôngĐượcThái hậu hài lòng, Thái hậu che chở ta, nhà Tể tướng và p",
+     "Theo Tể tướng Hách Cửu TưRất vữngTốnkhôngĐượccó thêm bạc, nhà Tể tướng hậu thuẫn ta bằng b",
+     "Đứng ngoài, giữ mìnhRất vữngTốnkhôngĐượcđược tiếng hiền đức (chút ít), không phe nào nợ ta"
+    ]
+   },
+   {
+    "k": "game|dialog queue holds 3 copies of «Tâm trạng · Tần Tào Diệu Âm» (each close pops one; looks like a dead ✕)",
+    "type": "game",
+    "msg": "dialog queue holds 3 copies of «Tâm trạng · Tần Tào Diệu Âm» (each close pops one; looks like a dead ✕)",
+    "n": 1,
+    "at": 63,
+    "S": {
+     "dead": false,
+     "y": 1,
+     "t": 7,
+     "w": 2,
+     "b": 3,
+     "age": 20,
+     "rank": 0,
+     "name": "Triệu Cẩm Sắt"
+    }
+   },
+   {
+    "k": "game|dialog queue holds 6 copies of «Tâm trạng · Tần Tưởng Tinh Diêu» (each close pops one; looks like a dead ✕)",
+    "type": "game",
+    "msg": "dialog queue holds 6 copies of «Tâm trạng · Tần Tưởng Tinh Diêu» (each close pops one; looks like a dead ✕)",
+    "n": 1,
+    "at": 75,
+    "S": {
+     "dead": false,
+     "y": 1,
+     "t": 7,
+     "w": 2,
+     "b": 3,
+     "age": 20,
+     "rank": 0,
+     "name": "Triệu Cẩm Sắt"
+    }
+   },
+   {
+    "k": "game|dialog queue holds 5 copies of «Tâm trạng · Đức phi Tống Sương Hoa» (each close pops one; looks like a dead ✕)",
+    "type": "game",
+    "msg": "dialog queue holds 5 copies of «Tâm trạng · Đức phi Tống Sương Hoa» (each close pops one; looks like a dead ✕)",
+    "n": 1,
+    "at": 97,
+    "S": {
+     "dead": false,
+     "y": 1,
+     "t": 7,
+     "w": 2,
+     "b": 3,
+     "age": 20,
+     "rank": 0,
+     "name": "Triệu Cẩm Sắt"
+    }
+   }
+  ],
+  "dead": [],
+  "buoi": 731,
+  "steps": 22369,
+  "status": [
+   "STATUS R6-lazy-1 · buổi 417 · year 3 · rank 0 · bugs 4 · stuck 2 · dead buttons 0",
+   "STATUS R6-lazy-1 · buổi 635 · year 5 · rank 0 · bugs 4 · stuck 2 · dead buttons 0"
+  ],
+  "offers": [
+   {
+    "buoi": 124,
+    "y": 1,
+    "rank": 0,
+    "screen": ".dlg «Đại hàn, tuyết lớn»",
+    "label": "Chịu rét cho quaTốnSức -8Đượcgiữ lại 20 lượng bạcKèmnhiễm ph",
+    "picked": true
+   },
+   {
+    "buoi": 143,
+    "y": 2,
+    "rank": 0,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Lan Tâm hầu thayRất vữngTố",
+    "picked": false
+   },
+   {
+    "buoi": 147,
+    "y": 2,
+    "rank": 0,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Lan Tâm hầu thayRất vữngTố",
+    "picked": false
+   },
+   {
+    "buoi": 155,
+    "y": 2,
+    "rank": 0,
+    "screen": ".dlg «Kính sự phòng báo tin»",
+    "label": "Tiến cử Cung nữ thân tín tam đẳng Lan Tâm hầu thayRất vữngTố",
+    "picked": false
+   },
+   {
+    "buoi": 208,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 210,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 218,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 219,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 224,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 225,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 228,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 229,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 234,
+    "y": 2,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 296,
+    "y": 3,
+    "rank": 0,
+    "screen": ".dlg «Lịch tháng»",
+    "label": "mồng 1: Tuyển tú: tú nữ mới vào cung: Lĩnh bổng lộc (lãnh cu",
+    "picked": false
+   },
+   {
+    "buoi": 299,
+    "y": 3,
+    "rank": 0,
+    "screen": ".dlg «Lịch tháng»",
+    "label": "mồng 1: Tuyển tú: tú nữ mới vào cung: Lĩnh bổng lộc (lãnh cu",
+    "picked": false
+   },
+   {
+    "buoi": 356,
+    "y": 3,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": true
+   },
+   {
+    "buoi": 357,
+    "y": 3,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 358,
+    "y": 3,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 359,
+    "y": 3,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 374,
+    "y": 3,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 375,
+    "y": 3,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 378,
+    "y": 3,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 379,
+    "y": 3,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 388,
+    "y": 3,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 504,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 509,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 510,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 512,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 513,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 514,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 516,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 517,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 524,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 525,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 526,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 527,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 528,
+    "y": 4,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 650,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 651,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 652,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 653,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 654,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 655,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 657,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 658,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 660,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 672,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 673,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   },
+   {
+    "buoi": 674,
+    "y": 5,
+    "rank": 0,
+    "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+    "label": "lá phong rơi",
+    "picked": false
+   }
+  ],
+  "t": {
+   "total": 8807272
+  },
+  "unstickNote": "2 stuck episodes (~900 s and ~1000 s) on .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1» (story text, no option button; GAME bug lane iPad), recovered by level-3 unstick",
+  "unit": "E-S6",
+  "row": "R6·lazy·1:2176113731",
+  "game": "origin/main 17835565",
+  "audit": "VALID"
+ }
+]
