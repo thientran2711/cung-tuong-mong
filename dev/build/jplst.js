@@ -22,8 +22,9 @@ function kitLineToast(text){try{if(!text)return null;try{const md=document.getEl
  el.addEventListener("click",()=>el.remove());clearTimeout(kitLineToast.t);kitLineToast.t=setTimeout(()=>{el.classList.add("out");setTimeout(()=>{if(el.classList.contains("out"))el.remove()},500)},window.__toastKeep?60000:BAL.entryToastMs);return el}catch(e){return null}}
 window.kitLineToast=window.kitLineToast||kitLineToast;
 /* the left rail's real right edge in stage px → --krw (the title's max-width follows it; a long title wraps instead of running under the chip); no rail → the old 80 px */
-function railW(st){try{const rl=$("krail"),R=st.getBoundingClientRect();let w=80;if(rl&&rl.getClientRects().length){const q=rl.getBoundingClientRect();if(q.width>0)w=Math.max(80,Math.ceil(q.right-R.left)+8)}
- if(railW.v!==w){railW.v=w;st.style.setProperty("--krw",w+"px")}}catch(e){}}
+function railW(st){try{const rl=$("krail"),R=st.getBoundingClientRect();let w=80;if(rl&&rl.getClientRects().length){const q=rl.getBoundingClientRect();if(q.width>0)w=Math.max(80,Math.ceil((rl.offsetParent===st?rl.offsetLeft+rl.offsetWidth:q.right-R.left))+8)}/* layout edge, not the animated rect: a rail that is still sliding in / scaling on a place's first frame no longer gives a transient wide w (title squeezed to a sliver) */
+ if(railW.v!==w){railW.v=w;st.style.setProperty("--krw",w+"px")}
+ if(!railW.q){railW.q=1;requestAnimationFrame(()=>{railW.q=0;try{const r2=$("krail");if(r2&&r2.getClientRects().length){const w2=Math.max(80,Math.ceil(r2.offsetParent===st?r2.offsetLeft+r2.offsetWidth:r2.getBoundingClientRect().right-st.getBoundingClientRect().left)+8);if(w2!==railW.v){railW.v=w2;st.style.setProperty("--krw",w2+"px")}}}catch(e){}})}}catch(e){}}
 function lay(){try{const st=$("stage");if(!st)return;let nm=$("kpname"),en=$("kpent");
  const t=$("sc-t"),live=!!t&&!!S&&!S.dead&&onStage()&&st.getBoundingClientRect().height>40;
  const name=live?((t.querySelector(".rt1")||{}).textContent||"").trim():"";

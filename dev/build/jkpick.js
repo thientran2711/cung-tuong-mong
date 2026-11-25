@@ -13,7 +13,7 @@
 (function(){try{
 const KIT_PLAQUE=window.KIT_PLAQUE=window.KIT_PLAQUE||{
  dropMs:700,stagger:80,swayS:[3.4,4.6],swayDeg:1.3,liftMs:200,liftDy:-8,liftScale:1.05,closeMs:170,
- w:{kv1:152,kv2:200},h:{kv1:62,kv2:56},pic:{kv1:40,kv2:48},cord:{rail:18,gap:10,gapS:6},hS:50,gx:8,max:6,railAt:.40,railMin:.18,railLap:.34,slimW:140,minW:128,post:8,tabH:34,pen2:1500,penS:4000,obst:'#kshR,#kshL,.kshR,.kshL,.krail,.krailb,#kpname,.kchip,.tok .tag,.kscn-tag,#tomap',
+ w:{kv1:152,kv2:200},h:{kv1:62,kv2:56},pic:{kv1:40,kv2:48},cord:{rail:18,gap:10,gapS:6},hS:50,gx:8,max:6,railAt:.40,railMin:.18,railLap:.34,slimW:140,minW:128,post:8,tabH:34,railPad:52,rows0:1,pen2:1500,penS:4000,obst:'#kshR,#kshL,.kshR,.kshL,.krail,.krailb,#kpname,.kchip,.tok .tag,.kscn-tag,#tomap',
  motion:null /* test hook: true = ignore reduced motion */};
 const kv=()=>document.documentElement.classList.contains("kv2")?"kv2":"kv1";
 const still=()=>{if(KIT_PLAQUE.motion===true)return false;try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)||document.documentElement.classList.contains("kf-still")}catch(e){}return false};
@@ -24,7 +24,7 @@ function btn(a,i){return typeof kitFocus!=="undefined"&&kitFocus.btn?kitFocus.bt
 /* anchor of a stage figure inside the host (host px) */
 function rect(el,host){host=host||document.getElementById("stage")||document.body;const h=host.getBoundingClientRect(),r=el.getBoundingClientRect();return {x:r.left-h.left,y:r.top-h.top,w:r.width,h:r.height}}
 /* the kit parts of the stage that a plaque band must never cover, as rects in host px (visible, not inside the picker, not a whole-stage container) */
-function obstacles(host){const K=KIT_PLAQUE,h=host.getBoundingClientRect(),out=[];try{host.querySelectorAll(K.obst).forEach(e=>{if(e.closest(".kpk")||e.hidden||getComputedStyle(e).visibility==="hidden")return;const r=e.getBoundingClientRect();if(r.width<6||r.height<6||r.width*r.height>.55*h.width*h.height)return;out.push({x:r.left-h.left,y:r.top-h.top,w:r.width,h:r.height})})}catch(e){}return out}
+function obstacles(host,raw){const K=KIT_PLAQUE,h=host.getBoundingClientRect(),out=[];try{host.querySelectorAll(K.obst).forEach(e=>{if(e.closest(".kpk")||e.hidden||getComputedStyle(e).visibility==="hidden")return;const r=e.getBoundingClientRect();if(r.width<6||r.height<6||r.width*r.height>.55*h.width*h.height)return;out.push({x:r.left-h.left,y:r.top-h.top,w:r.width,h:r.height+(!raw&&e.classList.contains("krail")?K.railPad:0),n:(e.id||e.className||"").toString().slice(0,30)+"|"+(e.textContent||"").trim().slice(0,12)})})}catch(e){}return out}
 function open(o){if(CUR)CUR.destroy();o=o||{};const host=o.host||document.getElementById("stage")||document.body,m=kv(),K=KIT_PLAQUE;
  const P={o,host,m,anims:[],open:true,up:null};CUR=P;
  const gs=o.groups&&o.groups.length?o.groups:[{k:"",n:"",acts:o.acts||[]}];P.groups=gs;P.group=o.group||gs[0].k;
@@ -40,13 +40,13 @@ function geo(P){const K=KIT_PLAQUE,m=P.m,hr=P.host.getBoundingClientRect(),A=P.o
  const fit=s=>{let free=s==="r"?W-(A.x+A.w)-8:A.x-8,minRail=A.y+A.h*K.railMin;const maxB=H-6;
   /* last resort on a narrow phone: the band may lap the outer 35 % of her BODY (never her face: the rail then starts below the shoulders) */
   let lap=0;if(free<K.w[m]*.9&&!(P.o.noLap)){lap=Math.round(A.w*.35);free+=lap;minRail=Math.max(minRail,A.y+A.h*K.railLap)}
-  const mk=(cols,comp)=>{let cw=cols===2?Math.min(K.w[m],Math.floor((free-post-10-K.gx)/2)):Math.min(K.w[m],free-post-6);cw=Math.max(cols===2?K.minW:104,cw);
-   const hh=comp?K.hS:K.h[m],gg=comp?K.cord.gapS:K.cord.gap,bw=cols*cw+(cols-1)*K.gx,x0=s==="r"?A.x+A.w+6-lap:A.x-6-bw-post-4+lap,rows=Math.ceil(n/cols),tot=K.cord.rail+rows*hh+(rows-1)*gg;return {cols,cw,bw,x0,rows,tot,hh,gg,comp:!!comp,pen:(cols===2?K.pen2:0)+(comp?K.penS:0)}};
-  const V=[mk(1)];if(n>3&&free>=2*K.minW+post+10+K.gx)V.push(mk(2));V.push(mk(1,1));if(n>3&&free>=2*K.minW+post+10+K.gx)V.push(mk(2,1));
+  const mk=(cols,comp,narrow)=>{let cw=cols===2?Math.min(K.w[m],Math.floor((free-post-10-K.gx)/2)):Math.min(K.w[m],free-post-6);cw=Math.max(cols===2?K.minW:120,cw);const full=cw;if(narrow&&narrow<cw)cw=narrow;
+   const hh=comp?K.hS:K.h[m],gg=comp?K.cord.gapS:K.cord.gap,bw=cols*cw+(cols-1)*K.gx,x0=s==="r"?A.x+A.w+6-lap:A.x-6-bw-post-4+lap,rows=Math.ceil(n/cols),tot=K.cord.rail+rows*hh+(rows-1)*gg;return {cols,cw,bw,x0,rows,tot,hh,gg,comp:!!comp,pen:(cols===2?K.pen2:0)+(comp?K.penS:0)+(full-cw)*(cols*K.rows0||1)*30}};
+  const V=[mk(1)];if(n>3&&free>=2*K.minW+post+10+K.gx)V.push(mk(2));V.push(mk(1,1));if(n>3&&free>=2*K.minW+post+10+K.gx)V.push(mk(2,1));[168,150,134].forEach(w=>{V.push(mk(1,0,w));V.push(mk(1,1,w))});
   let best=null;V.forEach(C=>{const want=A.y+A.h*K.railAt,lo=Math.max(minRail,2+tabsEst),hi=maxB-C.tot,T=[Math.max(minRail,Math.min(want,hi))];for(let t=lo;t<=hi;t+=6)T.push(t);
    const bx0=s==="r"?C.x0:C.x0-post-4,bx1=s==="r"?C.x0+C.bw+post+4:C.x0+C.bw;
    T.forEach(top=>{const over=Math.max(0,top+C.tot-maxB),y0=top-tabsEst,hard=ovl(bx0,y0,bx1,top+C.tot,ob),soft=ovl(bx0,y0,bx1,top+C.tot,av);
-    const cost=hard*100+soft+over*C.bw*200+C.pen+Math.abs(top-want)*.05*C.bw;if(!best||cost<best.cost)best=Object.assign({cost,hard,soft,over,top},C)})});
+    const cost=hard*1000+soft+over*C.bw*200+C.pen+Math.abs(top-want)*.05*C.bw;if(!best||cost<best.cost)best=Object.assign({cost,hard,soft,over,top},C)})});
   return Object.assign({s,free,ov:best.hard+best.soft,lap},best)};
  let side=P.o.side&&P.o.side!=="auto"?P.o.side:null,F;
  if(side)F=fit(side);else{const r=fit("r"),l=fit("l");F=r.cost!==l.cost?(r.cost<l.cost?r:l):(r.free>=l.free?r:l)}
@@ -63,11 +63,12 @@ function build(P,swap){const K=KIT_PLAQUE,G=geo(P),el=P.el,m=P.m;P.G=G;P.up=null
  /* tabs (kit .pctabs/.pct) above the rail when more than one group */
  if(P.groups.length>1){const t=document.createElement("div");t.className="kpk-tabs pctabs";t.innerHTML=P.groups.map(g=>`<button type="button" class="pct${g.k===P.group?" on":""}" data-k="${esc(g.k)}">${esc(g.n||"Việc")}</button>`).join("");
   t.style.cssText=`left:${G.x0}px;top:0;width:${G.bandW}px;visibility:hidden`;t.__fit=1;t.addEventListener("click",e=>{const b=e.target.closest(".pct");if(!b)return;e.stopPropagation();P.setGroup(b.dataset.k)});el.appendChild(t);
-  /* the tab row may wrap to 2 lines in a narrow band: it grows UPWARD from the rail (measured), never onto the plaques */
+  /* ONE row: a label that does not fit its tab steps down (kpk-ts1, kpk-ts2); never a second row, never cut */
+  for(const c of ["kpk-ts1","kpk-ts2","kpk-ts3"]){if(![...t.querySelectorAll(".pct")].some(x=>x.scrollWidth>x.clientWidth+1||x.scrollHeight>x.clientHeight+1))break;t.classList.add(c)}
   const th=Math.ceil(t.getBoundingClientRect().height);t.style.top=Math.max(2,G.railY-th-8)+"px";t.style.visibility=""}
  G.acts.forEach((a,i)=>{const c=i%G.cols,r=(i/G.cols)|0,n=document.createElement("div");n.className="kpk-n";n.dataset.id=a.id;
   const kc=r?G.gap:K.cord.rail,x=G.x0+c*(G.cw+K.gx),y=G.railY+K.cord.rail+r*(G.h+G.gap);
-  n.style.cssText=`left:${x}px;top:${y}px;width:${G.cw}px;height:${G.h}px;--kc:${kc}px;--kph:${G.h}px;--kpp:${K.pic[m]}px;--sd:${(K.swayDeg*(1-.12*r)).toFixed(2)}deg;--ss:${(K.swayS[0]+(K.swayS[1]-K.swayS[0])*((i*37%10)/10)).toFixed(2)}s;--sdl:${(-(i*.9+c*1.3)).toFixed(2)}s`;
+  n.__x=x;n.style.cssText=`left:${x}px;top:${y}px;width:${G.cw}px;height:${G.h}px;--kc:${kc}px;--kph:${G.h}px;--kpp:${K.pic[m]}px;--sd:${(K.swayDeg*(1-.12*r)).toFixed(2)}deg;--ss:${(K.swayS[0]+(K.swayS[1]-K.swayS[0])*((i*37%10)/10)).toFixed(2)}s;--sdl:${(-(i*.9+c*1.3)).toFixed(2)}s`;
   n.innerHTML=`<i class="kpk-cord"></i>`+btn(a,i);if(G.cw<K.slimW)n.classList.add("kpk-slim");/* narrow side: no picture, the whole name gets the room (OD:L177 names never cut) */const b=n.querySelector(".kfoc-b");b.classList.add("kpk-b");b.dataset.id=a.id;b.setAttribute("aria-pressed","false");
   b.addEventListener("click",ev=>{ev.stopPropagation();tap(P,a,n,b)});el.appendChild(n);
   /* fall-in from the rail: transform + opacity only, staggered top → bottom, settles with a damped swing */
@@ -75,16 +76,19 @@ function build(P,swap){const K=KIT_PLAQUE,G=geo(P),el=P.el,m=P.m;P.G=G;P.up=null
    const an=n.animate([{opacity:0,transform:`translateY(${dy}px) rotate(${s*9}deg)`},{opacity:1,transform:`translateY(5px) rotate(${-s*6}deg)`,offset:.46},{transform:`translateY(-2px) rotate(${s*3.2}deg)`,offset:.68},{transform:`translateY(0) rotate(${-s*1.4}deg)`,offset:.84},{opacity:1,transform:"none"}],{duration:K.dropMs,delay:(swap?0:60)+i*K.stagger,easing:"cubic-bezier(.3,.7,.4,1)",fill:"backwards"});
    P.anims.push(an);an.onfinish=()=>{n.classList.remove("kpk-drop");const j=P.anims.indexOf(an);if(j>=0)P.anims.splice(j,1)}}
   });
- fitNames(P)}
+ fitNames(P);try{document.fonts&&document.fonts.ready.then(()=>{if(P.open&&CUR===P)fitNames(P)})}catch(e){}/* a late web font changes the name widths */}
 /* a closed plaque shows its name in 2 lines at most (owner 24/11, Fold): too long with the picture -> the whole band goes slim (no picture), still too long -> a slightly smaller name; the lifted plaque shows the whole name */
-function fitNames(P){const el=P.el;el.classList.remove("kpk-slimall","kpk-tight");const over=()=>[...el.querySelectorAll(".kpk-n:not(.kpk-up) .kfoc-t b")].some(b=>b.scrollHeight>b.clientHeight+1);
- if(!over())return;el.classList.add("kpk-slimall");if(!over())return;el.classList.add("kpk-tight")}
+function fitNames(P){const el=P.el;el.classList.remove("kpk-slimall","kpk-tight","kpk-three");const over=()=>[...el.querySelectorAll(".kpk-n:not(.kpk-up) .kfoc-t b")].some(b=>b.scrollHeight>b.clientHeight+1);
+ if(!over())return;el.classList.add("kpk-slimall");if(!over())return;el.classList.add("kpk-tight");if(!over())return;el.classList.add("kpk-three")}
 function tap(P,a,n,b){if(!P.open)return;if(P.up===n){if(a.off){try{P.o.onOff&&P.o.onOff(a,P)}catch(e){}return}
   b.dispatchEvent(new CustomEvent("kpkpick",{bubbles:true,detail:{id:a.id,act:a}}));try{P.o.onPick&&P.o.onPick(a.id,a,P)}catch(e){}return}
  lift(P,a.id)}
+/* RING-DESIGN-5: a lifted plaque grows with its small line: «Vững · Tốn 1 khắc» stays on ONE line, so the plaque widens (towards the outer side, inside the stage) instead of growing a 4th text line */
+function widen(P,n){const G=P.G,sm=n.querySelector(".kfoc-t small"),t=n.querySelector(".kfoc-t");n.classList.remove("kpk-wrap","kpk-sm");n.style.width=G.cw+"px";n.style.left=n.__x+"px";if(!sm||!t)return;let need=Math.ceil(sm.scrollWidth-t.clientWidth);if(need<=0)return;
+ const room=(G.side==="r"?G.W-2-(n.__x+G.cw):n.__x-2)-10/* the lift scales the plaque a little */,add=Math.min(need,Math.max(0,room));if(add>0){n.style.width=(G.cw+add)+"px";if(G.side==="l")n.style.left=(n.__x-add)+"px"}if(need>add){/* still too long for the room: the small line steps down once, then (last resort) wraps */n.classList.add("kpk-sm");need=Math.ceil(sm.scrollWidth-(t.clientWidth+add));if(need>0)n.classList.add("kpk-wrap")}return;n.style.width=(G.cw+add)+"px";if(G.side==="l")n.style.left=(n.__x-add)+"px"}
 function lift(P,id){const K=KIT_PLAQUE,n=P.el.querySelector(`.kpk-n[data-id="${CSS.escape(String(id))}"]`);if(!n)return;
- if(P.up&&P.up!==n){const u=P.up;u.classList.remove("kpk-up");u.querySelector(".kpk-b").setAttribute("aria-pressed","false");if(!still()&&u.animate)u.animate([{transform:`translateY(${K.liftDy}px) scale(${K.liftScale})`},{transform:"none"}],{duration:K.liftMs-40,easing:"ease-out"})}
- P.up=n;n.classList.add("kpk-up");n.querySelector(".kpk-b").setAttribute("aria-pressed","true");
+ if(P.up&&P.up!==n){const u=P.up;u.classList.remove("kpk-up","kpk-wrap","kpk-sm");u.style.width=P.G.cw+"px";u.style.left=u.__x+"px";u.querySelector(".kpk-b").setAttribute("aria-pressed","false");if(!still()&&u.animate)u.animate([{transform:`translateY(${K.liftDy}px) scale(${K.liftScale})`},{transform:"none"}],{duration:K.liftMs-40,easing:"ease-out"})}
+ P.up=n;n.classList.add("kpk-up");widen(P,n);n.querySelector(".kpk-b").setAttribute("aria-pressed","true");
  if(!still()&&n.animate){const a=n.animate([{transform:"none"},{transform:`translateY(${K.liftDy}px) scale(${K.liftScale})`}],{duration:K.liftMs,easing:"cubic-bezier(.3,.8,.4,1)",fill:"forwards"});P.anims.push(a)}else n.style.transform=`translateY(${K.liftDy}px) scale(${K.liftScale})`}
 function close(P){if(!P||!P.open)return;P.open=false;document.removeEventListener("pointerdown",P.away,true);const K=KIT_PLAQUE,N=[...P.el.querySelectorAll(".kpk-n,.kpk-tabs,.kpk-rail,.kpk-post")];
  if(!still()&&N[0]&&N[0].animate){N.forEach(x=>x.animate([{opacity:1},{opacity:0}],{duration:K.closeMs,fill:"forwards"}));setTimeout(()=>destroy(P,true),K.closeMs+20)}else destroy(P,true)}
@@ -113,7 +117,7 @@ const css=document.createElement("style");css.id="kpk-css";css.textContent=`
 .kpk-post{position:absolute;border-radius:4px 4px 2px 2px;border:1px solid var(--kpk-line);box-sizing:border-box;background:var(--kpk-img),linear-gradient(90deg,var(--kpk-w3),var(--kpk-w2) 45%,var(--kpk-w1) 55%,var(--kpk-w3));box-shadow:2px 3px 5px rgba(0,0,0,.35);pointer-events:none}
 .kpk-post::before{content:"";position:absolute;left:50%;top:-5px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e7c27a,#a8782f 70%);border:1px solid var(--kpk-line);box-sizing:border-box}
 .kpk-rail{position:absolute;height:8px;border-radius:4px;border:1px solid var(--kpk-line);box-sizing:border-box;background:var(--kpk-img),linear-gradient(var(--kpk-w1),var(--kpk-w2) 55%,var(--kpk-w3));box-shadow:0 3px 5px rgba(0,0,0,.35);pointer-events:none}
-.kpk-tabs{position:absolute;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:0;margin:0}.kpk-tabs .pct{height:${KIT_PLAQUE.tabH}px;white-space:nowrap}
+.kpk .kpk-tabs.pctabs{position:absolute;display:flex;flex-wrap:nowrap;justify-content:center;gap:4px;padding:0;margin:0}.kpk .kpk-tabs .pct{flex:1 1 auto;min-width:0;height:${KIT_PLAQUE.tabH}px;white-space:normal;line-height:1.05;padding:0 7px;display:flex;align-items:center;justify-content:center;text-align:center}/* ONE row on every device (RING-DESIGN-5): the label wraps INSIDE its tab, then steps down in size; a tab is never cut */.kpk .kpk-tabs.kpk-ts1 .pct{font-size:.7rem;padding:0 5px}.kpk .kpk-tabs.kpk-ts2 .pct{font-size:.62rem;padding:0 3px}.kpk .kpk-tabs.kpk-ts3 .pct{font-size:.56rem;padding:0 2px}
 .kpk-n{position:absolute;transform-origin:50% calc(-1 * var(--kc,12px));will-change:transform;contain:layout style;animation:kpk-sw var(--ss,4s) ease-in-out var(--sdl,0s) infinite alternate}
 .kpk-n.kpk-up{animation-play-state:paused;z-index:3}
 @keyframes kpk-sw{from{rotate:calc(var(--sd,1.2deg)*-1)}to{rotate:var(--sd,1.2deg)}}
@@ -127,11 +131,11 @@ const css=document.createElement("style");css.id="kpk-css";css.textContent=`
 .kpk .kfoc-b.kpk-b .kfoc-pic{border:1.5px solid var(--kpk-line);box-sizing:border-box;border-radius:6px;margin-left:3px}
 .kpk .kfoc-b.kpk-b.kfoc-hasi{padding-right:20px}.kpk .kfoc-b.kpk-b .kfoc-i{top:-9px;right:-7px}/* the «!» badge sits on the corner, never on the title */
 .kpk-n.kpk-slim .kfoc-b.kpk-b .kfoc-pic{display:none}.kpk-n.kpk-slim .kfoc-b.kpk-b{padding-left:9px}
-.kpk .kfoc-b.kpk-b .kfoc-t b{-webkit-line-clamp:2;max-height:2.3em;font-size:.8rem}.kpk.kpk-tight .kfoc-b.kpk-b .kfoc-t b{font-size:.72rem;letter-spacing:0}.kpk.kpk-slimall .kpk-n .kfoc-pic{display:none}.kpk.kpk-slimall .kpk-n .kfoc-b.kpk-b{padding-left:9px}
+.kpk .kfoc-b.kpk-b .kfoc-t b{-webkit-line-clamp:2;max-height:2.3em;font-size:.8rem}.kpk.kpk-tight .kfoc-b.kpk-b .kfoc-t b{font-size:.72rem;letter-spacing:0}.kpk.kpk-three .kfoc-b.kpk-b .kfoc-t b{-webkit-line-clamp:3;max-height:3.4em}/* last resort on an edge person: 3 lines, a name is never cut (OD:L177) */.kpk.kpk-slimall .kpk-n .kfoc-pic{display:none}.kpk.kpk-slimall .kpk-n .kfoc-b.kpk-b{padding-left:9px}
 .kpk .kfoc-b.kpk-b .kfoc-t b{color:var(--kpk-ink);text-shadow:0 1px 0 var(--kpk-hi);letter-spacing:.1px}
 .kpk .kfoc-b.kpk-b .kfoc-t small{display:none!important;visibility:hidden;position:absolute;opacity:0;pointer-events:none;color:#3d2410;text-shadow:0 1px 0 var(--kpk-hi);font-weight:600}
 .kpk-n.kpk-up .kfoc-b.kpk-b .kfoc-t small{display:block!important;visibility:visible;position:static;opacity:1}
-.kpk-n.kpk-up{height:auto!important;min-height:var(--kph,58px)}.kpk-n.kpk-up .kfoc-b.kpk-b{height:auto;min-height:var(--kph,58px);padding-top:5px;padding-bottom:5px}.kpk-n.kpk-up .kfoc-t b{-webkit-line-clamp:unset;max-height:none}.kpk-n.kpk-up .kfoc-t small{max-height:none}
+.kpk-n.kpk-up{height:auto!important;min-height:var(--kph,58px)}.kpk-n.kpk-up .kfoc-b.kpk-b{height:auto;min-height:var(--kph,58px);padding-top:5px;padding-bottom:5px}.kpk-n.kpk-up .kfoc-t b{-webkit-line-clamp:unset;max-height:none}.kpk-n.kpk-up .kfoc-t small{max-height:none;white-space:nowrap}.kpk-n.kpk-up.kpk-sm .kfoc-t small{font-size:.66rem}.kpk-n.kpk-up.kpk-wrap .kfoc-t small{white-space:normal}/* the small line stays on ONE line; the lifted plaque widens for it (kpkWiden) */
 .kpk-n.kpk-up .kfoc-b.kpk-b{box-shadow:inset 0 1.5px 0 var(--kpk-hi),inset 0 -2px 0 rgba(70,40,12,.45),0 8px 14px rgba(0,0,0,.45),0 0 0 2px #f1d79a}
 .kpk .kfoc-b.kpk-b.kfoc-off{filter:grayscale(.6);opacity:1}
 .kpk .kfoc-b.kpk-b:focus-visible{outline:2px solid #fff3c4;outline-offset:2px}
