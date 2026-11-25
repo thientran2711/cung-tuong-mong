@@ -60,7 +60,8 @@ function dqPoll(){return BAL.dayq.poll}
 /* (c) she is inside an activity: the root element of it (null = free). Mini-game screen, kit motion scene ON SCREEN (a queued one is not an
    activity yet), podium, roulette, the jdfv person view she opened herself or its on-figure game (an encounter scene opened by a card is the card) */
 function dqActEl(){try{const ov=document.getElementById("ov");if(ov&&!dqHidden(ov))return ov;
-  const k=document.querySelector(".kmov:not(.km-out),#kmrew,#kpodov,[id^=\"kroul\"],.kroul-ov");if(k)return k;
+  /* the podium a card opens for ITSELF (j90 wiring 2, «podium first, then the panel»: Q[0].__podDone) is part of that card, not an activity over it */
+  const own=Q[0]&&Q[0].__podDone;const k=document.querySelector(own?".kmov:not(.km-out),#kmrew,[id^=\"kroul\"],.kroul-ov":".kmov:not(.km-out),#kmrew,#kpodov,[id^=\"kroul\"],.kroul-ov");if(k)return k;
   const D=window.DF;if(D&&D.F&&(D.play||(DQ.fo&&D.tk===DQ.fo))){const f=document.querySelector(".kfoc");return f||document.body}}catch(e){}return null}
 /* the call comes from her own tap INSIDE the activity (a card / panel she opens there) */
 function dqInside(a){try{const ev=window.event;if(!ev||!/click|pointer|touch|key|mouse/.test(ev.type))return false;const t=ev.target;return !!(t&&t.nodeType===1&&(a===document.body||a.contains(t)))}catch(e){return false}}
