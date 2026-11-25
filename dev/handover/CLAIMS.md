@@ -1741,3 +1741,4 @@ FIX-7 RE-MERGE (one title guard) + PCPORT-RK extras on LC stack | review/robot-c
 CO-OP RERUN runner U1b (successor of U1) | stack review/robot-coop-stack-u3 512cfee6 | session_01N1tNP33JueFVZyZyM7LWb6 (FOREMAN B) | RUNNING | 2026-11-25T12:31Z
 SAVE-YEAR-ROLLBACK r2 FIXER (successor) | review/save-year-rollback 876415e3 | session_01N1tNP3KgfZcq6zobMQRpTF (FOREMAN B) | RUNNING | 2026-11-25T12:37Z
 HARDLOCK-CHOICE-R4 FIXER (port choose-guard into jnolock) | review/hardlock-choice-r4 | session_01N1tNP5EhLGrd9fRXSh5UKk (FOREMAN B) | RUNNING | 2026-11-25T12:43Z
+net-ghen wave 2 cont. (NB-b relAdd order, NB-a, NB2 cards, gates) | review/net-ghen-2 | W7 (opening, successor of W6 session_01D3E3NYpxDHwQEUeCUDPFsN) | RUNNING | 2026-11-25T12:50Z (Foreman D depth 2)
