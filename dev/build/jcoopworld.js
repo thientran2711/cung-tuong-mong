@@ -255,7 +255,26 @@ function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
  if(S.foe&&!rivals.some(v=>v.name===S.foe)){const v=pick(liveRivals(false).filter(x=>!isF(x)));if(v)S.foe=v.name}
  if(wasSrv&&typeof srvInit==="function"){S.srv=null;quiet=true;try{withoutFriend(()=>srvInit())}catch(e){console.error(e)}quiet=false}
  S.place="home";S.visit={k:"home",people:homePeople(),talked:false};
- try{if(typeof sidN!=="undefined")sidN=Math.max(sidN,...allServ().map(s=>+s.sid||0).filter(n=>n<900),0)}catch(e){}}
+ try{if(typeof sidN!=="undefined")sidN=Math.max(sidN,...allServ().map(s=>+s.sid||0).filter(n=>n<900),0)}catch(e){}
+ try{lifeRekey()}catch(e){console.error("lifeRekey",e)}}
+/* flight-sid-rebirth (law 6b, one key = one person): a new life is built from a fresh seeded run (j52 nlRun: sidN = 0, a fresh S with
+   S.kseq 0), then joins the room's world, which still holds the people of the old lives with their servant ids (s<sid>) and «x<n>» keys
+   (world men, court …). Her new household (maid, servants, children, home family) reused s1, s2 … and the next new world person reused x1 …
+   → two people on one j61 key (coop-e2e host rebirth: s1 «Tố Cầm» / «Tiểu Đào», x33 two men). After the join: both counters continue past
+   every id the world holds, and her own new people that collide get fresh ids. */
+function lifeRekey(){const mine=new Set([S.maid].concat(S.staff||[],S.kids||[],(S.kc&&S.kc.fam)||[]).filter(e=>e&&typeof e==="object"));
+ /* review (flight-sid-rebirth-r): the new life's j61 levels (k61InitNew: her own household known) were written under the OLD keys before this
+    join (jcoopworld's start / nlRun wrappers run attach after j61's): move them with the id, else her own maid / servant read «Người lạ» and the
+    old-world person on the old key read «Quen biết» */
+ const mv=[];const kOf=e=>{try{return typeof kOf61==="function"?kOf61(e):""}catch(x){return""}};
+ const wSv=new Map();for(const e of allServ())if(e&&e.sid!=null&&!mine.has(e)&&+e.sid<900)wSv.set(+e.sid,e);
+ if(typeof sidN!=="undefined"){sidN=Math.max(sidN,...wSv.keys(),0);for(const e of mine)if(e.sid!=null&&wSv.has(+e.sid)){T("rekey s"+e.sid);const k0=kOf(e);e.sid=++sidN;mv.push([e,k0])}}
+ const all=typeof k61All==="function"?k61All():[];const kk=new Set();let mx=0;
+ for(const e of all){if(!e||mine.has(e)||typeof e.kk!=="string")continue;kk.add(e.kk);const n=+e.kk.slice(1);if(n>mx)mx=n}
+ S.kseq=Math.max(S.kseq||0,mx);for(const e of mine)if(typeof e.kk==="string"&&kk.has(e.kk)){T("rekey "+e.kk);const k0=kOf(e);e.kk="x"+(S.kseq=S.kseq+1);mv.push([e,k0])}
+ for(const [e,k0] of mv){const k1=kOf(e);if(!k0||!k1||k0===k1)continue;for(const M of [S.known,S.nkn])if(M&&typeof M==="object"&&k0 in M){M[k1]=M[k0];delete M[k0]}try{if(KREG[k0]===e)delete KREG[k0]}catch(x){}}
+ if(mv.length&&typeof K61VER!=="undefined")try{K61VER++}catch(x){}}
+CW.lifeRekey=()=>lifeRekey();/* test hook (dev/test/sid-rekey-known.js) */
 CW.attach=()=>{const C=CW.dying||CW.base;if(C)attach(C)};
 /* jcoopthin (thin guest, part A) reads the world split and the friend-entry builders from here: one source */
 CW.X={W_KEYS,HOST_ONLY,CM_P,MEN_P,REFF,STAT,mapMe,buildFriend,buildFriendSrv,friendSrv,myBlob,pullFriend,pushFriend,isF,J};
@@ -965,6 +984,10 @@ function nCheck(){if(!CW.on||!S)return;const w=wk();
  if(host()&&CW.ngo===w&&CW.ngoW!==w&&CW.sent!==w&&nAtNight()){T("ngo self "+w);CW.ngoW=w}/* robot-coop-fix-4: the host's own commit IS his go (one rule for every path that clears ngoW) */
  if(host()&&CW.ngo!==w&&nAtNight()&&((CW.nrdy===w&&(CW.nfr===w||nOtherGone()))||CW.nforce===w||nOtherEnded()))nGoNow();
  if(!host()&&CW.ngoW!==w&&nAtNight()&&nOtherEnded()&&COOP.state.week===w)CW.ngoW=w;   /* the host's end is out: it committed */
+ /* flight-coop-sync (A-COOP room SX8M wk80): the host's own gate follows its commit. A new life on the host (rebirth at the week end, sendMe) resets
+    nrdy / ngoW but its commit CW.ngo stays this week, so the line above the guest's never re-opens it and nGoNow is done: the host sat in
+    buổi tối on «Chờ hảo hữu…» for ever while the guest had already ended (both seats stuck, no button). Committed = her night may run. */
+ if(host()&&CW.ngo===w&&CW.ngoW!==w&&nAtNight())CW.ngoW=w;
  if(CW.ngoW!==w||CW.pend||CW.sent===w||!nAtNight()||S.dead||S.mg||frozen()||!CW.base||needWhere()||CW.inLife)return;
  /* coop-week-wait (law 11, robot-coop-fix-6's ONE carry rule): the committed night is a Q-gated seat step like the room's buổi step / the clock's end:
     a panel that only tells is carried over it (stepQ), a real choice holds it and is SHOWN (heldShow); before, any queued panel held it, hidden or not */
