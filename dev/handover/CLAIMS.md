@@ -1739,3 +1739,4 @@ KIT-OPTS-PACK-4 (KIT BUG #4/#5/#6 rest, selection kitAlarm flag, jdfv BAL) | rev
 temper-perception fixer on call + G4 robot arms (successor of T1c session_01D3E3NZWzjwimRSPrEyRAM8) | review/temper-perception-rv + review/temper-g4 | session_01D3E3NXumQR7Z39e1j3Djxm (T1d) | RUNNING | 2026-11-25T12:28Z (Foreman D depth 2)
 FIX-7 RE-MERGE (one title guard) + PCPORT-RK extras on LC stack | review/robot-coop-fix-7-r2 + review/pcport-rk-r2 | session_01N1tNP6y9kB42WChcgr4i6o (FOREMAN B) | RUNNING | 2026-11-25T12:30Z
 CO-OP RERUN runner U1b (successor of U1) | stack review/robot-coop-stack-u3 512cfee6 | session_01N1tNP33JueFVZyZyM7LWb6 (FOREMAN B) | RUNNING | 2026-11-25T12:31Z
+SAVE-YEAR-ROLLBACK r2 FIXER (successor) | review/save-year-rollback 876415e3 | session_01N1tNP3KgfZcq6zobMQRpTF (FOREMAN B) | RUNNING | 2026-11-25T12:37Z
