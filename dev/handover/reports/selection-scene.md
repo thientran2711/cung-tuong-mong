@@ -267,3 +267,27 @@ Real-player check (real roulette, real taps, 30d9d044, Fold 755x1000 + iPad 1180
 1. **Red danger pulse on every selection-day card** — j93.js:315 fires kitAlarm() (.kmalarm, z 8900, inset rgba(194,59,34,.62), 1.7 s × BAL.pace 1.75, 2 cycles) once for every card with a pid; every day card has pid "selxD" (+ kc2Sel) → the pulse is up on almost every card of the 3 days (layer dump on Dưỡng Tú viện, Tiền sảnh, Đông sở, Đêm, Ngày thứ hai, Sân chờ, Điện tuyển, Thái hậu). LIVE has no selection days (pulse only on real event cards) → this branch. Shot: CDN img/_review/selection-scene/s18-tint.jpg. Fix: keep these cards out of kitAlarm (skip list is a kit part → kit keeper via MAIN, or a per-card flag); law 11 scan of every non-danger pid that fires it.
 2. **F3 → required**: selx-flow fix (roulette closed like a spin; no CSS hide of .dawn/#kroul; FAIL when a card with opts is not visible instead of chooseM), re-shoot.
 Re-review scope after the fix: selx tests + real-tap day-2 pair Fold + iPad + quickcheck (co-op untouched by a visual-only fix). F1 / F2 stay for MAIN.
+
+## SELSCENE-19 merge — session_01V1ZZH1gwnq8CYeYJgyTQS2 (MAIN CHÍNH 140 session_01V1ZZH2mX8zALmjaRN5SQvL, cc LC15); 25/11 → **MERGED READY df156a4c** (review/selection-scene-r19)
+PRIORITY #1 CHECK: OD 0 | ledger 0 | claims 0 | main 0 | review/* 0 | archive 0 (prio1 "k61NewKey sidMine") | review/selection-scene 29f3b99f + stack top review/lc15-temperfix-on-bcstack2 23e5b84f (F flight-sid-rebirth 2b0fc217 inside).
+### Merge (base 23e5b84f + 29f3b99f → 3a210286; LAW 14 / 11: one rule per family, the stack's as base)
+- j61 kOf61: stack's k61WKey (world people n/o/t/tns/c) + k61WMig kept; the remaining «x<n>» keys (her own people, passing records) now come from selection-scene's k61NewKey (above every held key, guest namespace x<n>b, never a KREG key) instead of the bare S.kseq++ — one keyer.
+- jcoopworld: ONE join rule lifeRekey() (stack) with sidMine folded in: S.npool in her own set, own-vs-own clashes, sidN ≥ sidTop(), af / lover / bullyBy links follow, CW.sidFix log, «x<n>» rekey via k61NewKey. S.known / S.nkn move by old→new kOf61 key (covers s / gs / x). sidMine deleted; sid-unique test calls COOPW.lifeRekey.
+- jopic kitOptTierSig: stack's (kfCls + offsetHeight) + selection-scene's KOT_MEMO / kitOptMemoKey. index.html / sw.js rebuilt (assemble.py + build_site.sh).
+### Fixes found by the gates
+- 703fad03 (law 11, co-ngu-titles family): «Ban hoa» (selection-scene's over heading) had no poetic end name → scan FAIL + selx-rules expected the old «Kiếp này» title. KIT_END.names «Ban hoa» → **«Hoa ban hồi hương»** (wording proposal — MAIN / sếp may change it); selx-rules reads the title from endName. co-ngu-titles scan PASS.
+- df156a4c (harness, pre-existing): selx-flow iPad FAIL «card with choices not visible» day 2 «Thái hậu» 3/5 on the merge AND 2/3 on pre-merge 29f3b99f: the test's kc2Sel shortcut (Q.shift + selxSelDo, skipping chooseM) never called showModal, so #modal kept the Điện tuyển buttons while Q[0] was the next card. Shortcut now shows the next card; FAIL dump richer. iPad 3/3 PASS after.
+### Gates (df156a4c; sid/k61/selx-days/map/wire/dead-card on 3a210286 — later commits touch only the end-name table + tests)
+| gate | result |
+|---|---|
+| sid-unique | PASS |
+| sid-rekey-known | PASS |
+| k61-key-life / k61-wkey-oldsave | ALL PASS / PASS |
+| co-ngu-titles scan | PASS (64 callers) |
+| selx-rules / wire / days / days2 / map | ALL PASS ×5 |
+| selx-flow Fold + iPad @2 | PASS, 0 page errors, no danger pulse (kmalarm 0) both, text leaks = kit stage tags only |
+| dead-card | PASS |
+| coop-e2e A / B (COOP_SWAP), LIVE relay, sequential | 142/142 · 142/142 |
+| quickcheck --runs 5 --cpu 4 vs LIVE 9f72524b | PASS 481 s · open 2003 ms · old save ok · render 261/277 · tab 446/491 · buổi 1497/1429 · tasks>200 38/34 (day lives 38,39,29,39,27) |
+Day-2 pair Fold 755x1000 + iPad 1180x820 («Sân chờ», Ngày thứ hai — Điện tuyển): CDN img/_review/selection-scene/s19-pair.jpg — no red wash. Note: shots from selx-flow (scene taps + modal button clicks), not the realtap.js lib.
+### NEXT: BIG delta review of review/selection-scene-r19 df156a4c (MAIN opens the reviewer). Worktree /home/user/wt/s19 kept until the verdict.
