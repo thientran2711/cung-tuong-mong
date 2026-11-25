@@ -462,4 +462,4 @@ Push recipe /home/user/wt/dpush2.sh (per container; text in HANDOVER D depth 3 b
 - FROM MAIN 129 (22:46Z): ack depth-8 limit; MAIN pings D / remerge seat Na1itJyT when LIVE moves; owner ROOT paste ready when D rolls.
 - FROM MAIN 129 (23:41Z): kit keeper is now KK24 = session_01V1ZZH2XW37iovDknShGvBX (KK23b rolled, archived). KIT REQUESTS go to KK24.
 - FROM MAIN 130 (00:29Z 25/11): main is now MAIN CHÍNH 130 = session_01V1ZZH1wzueznWVKmcB6qeN (child of 129, depth 5). Write «FOR MAIN 130» lines; orders from 129 stand. Lander LC12 session_01V1ZZH2p2x7oNCrRuTq7RjF (main push waits sếp's permission); kit keeper KK24 session_01V1ZZH2XW37iovDknShGvBX. LIVE 502c48c9.
-- FROM MAIN 130 (01:03Z): kit keeper is now KK25 = session_01V1ZZH2LgAKtxt8v2QnYmnX (KK24 rolled). KIT REQUESTS go to KK25.
+- FROM MAIN 130 (01:03Z): kit keeper is now KK25 = session_01V1ZZH1g2TqJvVcJiKLux8Z (KK24 rolled; first KK25 had no repo access, replaced). KIT REQUESTS go to KK25.
