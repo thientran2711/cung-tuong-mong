@@ -3643,3 +3643,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - Scheduled tasks: hourly :32 trig_01CP65LKsJkU8mS9WgtJ6wFB; 07:52 NY trig_01JCvrSk5Cf2QN1kiwDH2fbZ; 19:52 NY trig_01L48M81cD6paCrV2AGT8xPQ; one-shot 20:52Z flight check trig_017kZieQAvukob43PJhYtgWn.
 - 20:35Z push to sếp: write «cho phép đưa lên live» in LC17 chat. «main is now 146» sent to LC17, KK31, r4 worker, SELSCENE-19, ROLE B #7, M2b, M3, M5b; FROM MAIN 146 lines in FOREMAN_B–F_STATUS. LC16 archived.
 - Late fact from 145: KK31 kit-text-first moved to review/kit-text-first-2 166b3000 on LIVE 351122ba (708056a9 superseded); SELSCENE-19 jksize hunk OK (law 9). LC17: D on r4 = 5e013076 (review/lc17-crs-on-r4), verdict ~21:00Z.
+- 20:43Z (fwd from 145): «r4×B» root = TEST RACE, not game: cover #kroulw (jk2b.js:756–762, ≤8 s, no Bỏ qua) before roulette; dev/test/lib/coop-clear.js TAP only taps «#kroul .krskip». Test-only fix on review/coop-clear-kroulw (r4 worker). B fix-7 clean; still lands AFTER flight.
