@@ -65,7 +65,7 @@ html body .dlg.kpanel.kpdlg{box-sizing:border-box;width:var(--kpw);min-width:0;m
 .kpdlg .kpdt .ktut-do{color:var(--gold);font-weight:600}
 /* KIT 56.15: the buttons sit at the bottom of the RIGHT column only (over its free corner), so the figure column runs from the name tag to the frame's bottom edge; the right column keeps --kpbh free under its text */
 .kpdlg{position:relative}.kpdlg>.kpdb{padding-bottom:12px}.kpdlg .kpdr{padding-bottom:var(--kpbh,0px)}
-.kpdlg>.kpopts{position:absolute;right:14px;bottom:12px;left:auto;display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;padding:0;margin:0;min-height:0;max-width:calc(100% - var(--kpdcw,38%) - 40px)}
+.kpdlg>.kpopts{position:absolute;z-index:2;right:14px;bottom:12px;left:auto;display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;padding:0;margin:0;min-height:0;max-width:calc(100% - var(--kpdcw,38%) - 40px)}
 .kpdlg>.kpopts .kbtn{min-height:40px;padding:6px 16px;font-size:.86rem}
 /* kv3:.kv1 */:where(.kv1) .kpdlg>.kpdb{grid-template-columns:var(--kpdcw,clamp(84px,32%,140px)) minmax(0,1fr);gap:9px;padding:8px 10px 2px}:where(.kv1) .kpdlg .kpdt{font-size:.84rem}:where(.kv1) .kpdlg>.kpopts{right:10px;bottom:10px}
 `;document.head.appendChild(st)})();
