@@ -1,26 +1,24 @@
 {
- "buoi": 14,
- "hud": "Bạch Nghê Thường Quý nhân 21 tuổi Kiếp thứ nhất Tháng hai · thượng tuần · năm thứ ba | Buổi chiều",
+ "buoi": 9,
+ "hud": "Bạch Nghê Thường Quý nhân 21 tuổi Kiếp thứ nhất Tháng ba · thượng tuần · năm thứ ba | Buổi tối",
  "build": "0756a05b",
- "at": "2026-11-25T11:51:27.424Z",
+ "at": "2026-11-25T12:23:09.710Z",
  "dump": {
-  "title": "Yến đầy tháng hoàng tử",
-  "bad": 1,
-  "frameBottom": 898,
-  "dlgClass": "dlg kpsc kpanel kszf ksz3 kszlive",
-  "dlgStyle": "--kdpw: 175px;",
+  "title": "Y phục dự Tiết Thanh minh",
+  "bad": 3,
+  "frameBottom": 787,
+  "dlgClass": "dlg kpsc kpanel kdtx kszf ksz3 kszlive",
+  "dlgStyle": "--kdpw: 163px;",
   "modalClass": "modal",
   "ksz": [
-   "dlg kpsc kpanel kszf ksz3 kszlive",
-   "kszfig",
-   "kszfs"
+   "dlg kpsc kpanel kdtx kszf ksz3 kszlive"
   ],
   "rects": {
    "dlg": [
-    97,
-    102,
-    562,
-    796
+    143,
+    213,
+    470,
+    574
    ],
    "modal": [
     0,
@@ -29,64 +27,70 @@
     1000
    ],
    "opts": [
-    342,
-    420,
-    304,
-    465
+    288,
+    450,
+    312,
+    734
    ],
    "kpopts": [
-    342,
-    420,
-    304,
-    465
+    288,
+    450,
+    312,
+    734
    ],
    "k3right": [
-    342,
-    171,
-    304,
-    714
+    288,
+    282,
+    312,
+    901
    ],
    "mb": [
-    98,
-    161,
-    560,
-    736
+    144,
+    272,
+    468,
+    514
    ],
    "body": [
-    98,
-    161,
-    560,
-    736
+    144,
+    272,
+    468,
+    923
    ]
   },
   "kpoptsScroll": [
    0,
-   584,
-   465
+   734,
+   734
   ],
   "cards": [
    [
-    342,
-    420,
-    304,
+    288,
+    450,
+    312,
     140
    ],
    [
-    342,
-    566,
-    304,
+    288,
+    596,
+    312,
+    150
+   ],
+   [
+    288,
+    751,
+    312,
     140
    ],
    [
-    342,
-    712,
-    304,
+    288,
+    897,
+    312,
     140
    ],
    [
-    342,
-    858,
-    304,
+    288,
+    1043,
+    312,
     140
    ]
   ],

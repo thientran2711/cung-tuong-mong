@@ -39,3 +39,10 @@ KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/03/ title=Tỉnh th
 KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/04/ title=Bổng lộc tháng giêng bad=2
 KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/05/ title=Yến đầy tháng hoàng tử bad=1
 KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/06/ title=Lời cảnh báo bad=3
+12:16 4th silence (Tháng hai trung tuần năm 3) after tapping «Sang gặp Đáp ứng Hoa Trầm Bích giải bày» then modal «Điềm báo» (✕ only); my tab-bar fix did NOT cure it → added WATCHDOG (logs loop step if one iteration >60 s).
+KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/01/ title=Kỳ nguyệt sự bad=1
+KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/02/ title=Tiết Thanh minh · Lời mời: Thi hát khúc xuân bad=2
+KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/03/ title=Chọn người theo hầu bad=1
+KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/04/ title=Bổng lộc tháng hai bad=3
+KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/05/ title=Y phục dự Tiết Thanh minh bad=3
+KPOPTS-CAPTURE /home/user/wt/h4/dev/handover/robot/m4/kpopts/06/ title=Yến đầy tháng hoàng tử bad=1

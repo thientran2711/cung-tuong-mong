@@ -1,14 +1,14 @@
 {
- "buoi": 10,
- "hud": "Bạch Nghê Thường Quý nhân 21 tuổi Kiếp thứ nhất Tháng giêng · hạ tuần · năm thứ ba | Buổi chiều",
+ "buoi": 4,
+ "hud": "Bạch Nghê Thường Quý nhân 21 tuổi Kiếp thứ nhất Tháng hai · hạ tuần · năm thứ ba | Buổi trưa",
  "build": "0756a05b",
- "at": "2026-11-25T11:49:14.235Z",
+ "at": "2026-11-25T12:19:43.371Z",
  "dump": {
-  "title": "Tỉnh thân",
+  "title": "Chọn người theo hầu",
   "bad": 1,
   "frameBottom": 898,
   "dlgClass": "dlg kpsc kpanel kszf ksz3 kszlive",
-  "dlgStyle": "--kdpw: 175px;",
+  "dlgStyle": "--kdpw: 178px;",
   "modalClass": "modal",
   "ksz": [
    "dlg kpsc kpanel kszf ksz3 kszlive",
@@ -61,7 +61,7 @@
   },
   "kpoptsScroll": [
    0,
-   662,
+   595,
    445
   ],
   "cards": [
@@ -69,25 +69,25 @@
     342,
     440,
     304,
-    195
+    140
    ],
    [
     342,
-    640,
-    304,
-    163
-   ],
-   [
-    342,
-    809,
+    586,
     304,
     140
    ],
    [
     342,
-    955,
+    732,
     304,
     140
+   ],
+   [
+    342,
+    878,
+    304,
+    151
    ]
   ],
   "vp": [
