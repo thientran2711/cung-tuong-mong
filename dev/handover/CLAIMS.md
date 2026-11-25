@@ -1735,3 +1735,4 @@ rv temper-perception r3 | review/temper-perception-rv | RV3b (opening, successor
 robot-coop-fix-6 r2 FIXER (cause 5 one carry rule) | review/robot-coop-fix-6 | session_01N1tNP4sTtF2bBoDXbsGoD2 (FOREMAN B) | RUNNING | 2026-11-25T12:08Z
 net-ghen wave 2 (LAW11 thiện cảm/oán rest + NB2 cards + NB-a/NB-b) | review/net-ghen-2 | session_01D3E3NYpxDHwQEUeCUDPFsN (W6, successor of W5 session_01D3E3NX8Jh4APbxeSvZnnBd) | RUNNING | 2026-11-25T12:15Z (Foreman D depth 2)
 rv temper-perception r3 | review/temper-perception-rv | session_01D3E3NYPeSt6UMJaxqBPTqC (RV3b, successor of RV3 session_01D3E3NaXCgiiLt5mmGzecJp) | RUNNING | 2026-11-25T12:15Z (Foreman D depth 2)
+KIT-OPTS-PACK-4 (KIT BUG #4/#5/#6 rest, selection kitAlarm flag, jdfv BAL) | review/kit-opts-pack-4 | session_01V1ZZH27qVBbztWBnjkybU3 | RUNNING | 2026-11-25T12:14Z (MAIN 140)
