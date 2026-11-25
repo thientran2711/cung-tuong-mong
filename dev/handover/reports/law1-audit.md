@@ -187,3 +187,20 @@ LIVE moved four times during the run; each newest origin/main merged into review
 LIVE since moved 22f1e491 → 8eceeef9 kit-titleplate → 284e0d08 kit-noprewarn → 502c48c9 kit-mapgo: all UI-only kit lands (jmapc / jmgcal / jsgame / jtoil / KIT.md + their tests) → per MAIN 125 rule: **self-merge at land OK (UI-only gap 22f1e491→502c48c9)**.
 
 **LAND READY law1-audit-r1 b01cc88076b4bc4f30cd093489c2e555fca6dd95 FOR MAIN 124 (re-merge on 15b5e1ff, newest merged 22f1e491)**
+
+## EXPRESS LAND r2 (B EXPRESS worker session_01N1tNP4vdt3GHRthmSgNowF, opus, 25/11)
+PRIORITY #1 CHECK ('law1-audit|law1-maid-away|wdNpcRedeem|misHome'): OD 0 | ledger 0 | claims 8 | main 5 | review/* 4 | archive 0 → reuse review/law1-audit-r1 b01cc880 + review/law1-maid-away-r1 854c1fc1 (both reviewer-PASS 24/11).
+- (1) Content check vs LIVE 5e013076: wdNpcPawn / wdNpcRedeem / maid-mis-away.js / srvMisHome four-acts gate = 0 hits on main → BOTH still missing (not LANDED).
+- (2) They touch the same files (j42 srvTalk, role-parity.test OPEN_MAX, role-parity-open.json) → ONE union branch **review/law1-land 52263f496c4063544868ca4e6cf465a96d12e61c** = LIVE 5e013076 + merge b01cc880 + merge 854c1fc1 + site build (fast-forward of LIVE).
+- Conflicts: index.html/sw.js → LIVE's, then rebuilt. j42 srvTalk → maid-away's ONE rule (srvMisHome = NPC maid's asMisHome: the four «to the master» acts only at home; away only «Hầu bên cạnh chủ»; master as Hoàng hậu = same card «mis»); this replaces the audit's beside-only line (law 14, one rule, no two versions). The function body is byte-identical to 854c1fc1. OPEN_MAX = 7 (audit already closed maid:beside + 5 «Cầm cố» rows; maid-away's 12 is superseded); role-parity-open.json = the audit's (7 rows). LIVE behaviour kept: rest of j42 = LIVE (cnv BAL keys etc.).
+- (3) Gates on 52263f49 (index.html built from this tree):
+  - law1-audit.test.js 13/13 PASS (dev/index.html and index.html)
+  - maid-mis-away.js PASS (dev + index.html; incl. master = Hoàng hậu home/away, real stage card)
+  - role-parity.test.js index.html → ALL PASS (open ≤ 7: 7; no new gap; families no new GAP row)
+  - role-parity-scan --fam → rows 22 · GAP 4 (3 D gift rows + parked B co-op ration; unchanged)
+  - one-core-guard PASS fails 0 (no --allow-grow) · undef-scan PASS (310 names)
+  - coop-e2e against a LOCAL Worker (wrangler dev of this tree's coop/worker, 127.0.0.1): SWAP=0 143/143 · SWAP=1 143/143
+  - quickcheck ALONE: old save ok (loads + plays a buổi, 0 errors), open 2184 ms, perf new/live render 237/231 ms, buổi 1505/4107 ms; core gates: only G4 button-crawl «fold · Ô lưu [#modal.kptitle] · Lui · close did not close» = the KNOWN pre-existing LIVE fault (cured by fix-7 r3), not from this branch. Every other core gate PASS.
+  - Shots (outside git, /home/user/wt/law1-tools/shots, looked 3×): maid life, her master's card at home vs away, Fold 755x1000 + iPad 1180x820. Home: tabs Hầu hạ/Ban thưởng/Giao thiệp with the four acts; away: only «Hầu bên cạnh chủ» + «Xin chủ cho đi hầu cung khác». Kit option cards only, odds in words, no %, no cut text, no overflow. Pre-existing (not this branch): the portrait pendant tassel covers the «Hoa tai» slot label in the jewellery grid on both devices → FOR MAIN 146 / kit.
+- (4) NOT-FIXED rows of the law-1 audit (not small / not inside these files → FOR MAIN 146): (a) D: Quà tặng «Có sở thích / sở ghét» for her / servants / men / Thái hậu; (b) D: «Quà trúng sở ghét → mất thiện cảm» for every giver/recipient (NPC → her none); (c) D: NPCs learn others' likes; (d) B parked: co-op ration borrow/steal never targets the friend (needs a cross-seat item-ledger protocol; jagacts4 p4Lender/p4StealT x.coop skip). Also OPEN in other lanes: per-nết thresholds (D), promotion routes (D, waits sếp), selection 12 tú nữ (MAIN SELSCENE-4), leaving ladder for NPCs (E64b).
+**SSK review/law1-land 52263f496c4063544868ca4e6cf465a96d12e61c**
