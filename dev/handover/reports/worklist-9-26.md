@@ -124,3 +124,45 @@ REVIEWER'S OWN ROBOT CHECK (the C10 736-week summary is not in the repo; nt-run 
 NPC→her is NOT made worse (D's question): her oán tail and her danger tail both fall, the danger middle (≥30: 65 % → 61 %) stays — NPCs still threaten her (ghen-driven), they just stop carrying saturated grudges. proud÷gentle not re-measured here (W3: 2.13).
 Gates (reviewer, 96c2859e): net-build PASS · one-core PASS · two-way-oldsave main save → new build loads, 0 errors (its week driver does not advance: turn 0→0, harness; the robot ran 526 weeks on this build with 0 page errors) · quickcheck PASS (render 283/298, buổi 2004/4422, tasks>200ms 25/31, core gates PASS) · coop-e2e 142/142 (a first run 141/144: the same live-Worker flake seen on two other branches today, count varies → worth a harness ticket).
 Notes: (1) her own grudges now cool faster too → fewer «cớ: oán» reasons for her gây sự once temper-perception (Option A gate) lands — intended by law 1, watch it in T2's mood-rate numbers. (2) Raw nt json not kept; summaries regenerated with dev/measure/nt-sum.js.
+
+## SEAT W4 (session_01D3E3NYQa21C7i6ghmbEahF, 25/11 ~10:26Z–) — review/net-ghen
+PRIORITY #1 CHECK: this file W3 HANDOVER + review-temper-outburst.md note A | main j28.js:38/46/47, j8.js:472, j1.js:226, jaudit.js §5 pvOan/pvQuy (REUSED) | review/net-thresholds 96c2859e (base) | claims none.
+
+### (1) GHEN SATURATION — cause + fix (BAL only), branch review/net-ghen 6d7d2da9
+- Cause (new nt-in ledger: every ghenUp rise toward HER by cause and by causer): 46 % of all ghen rises toward her were CAUSED BY ANOTHER CONSORT (ghenUp(t,n,why,X): j28 provoke/flaunt, j8 stealWin, jtwoway, jagacts3 dance, jgift walk, jinv luxury, jvisit, jagmaid) — v.ghen is jealousy OF HER, so X's deeds piled onto her (law 6 wrong target). Fade = flat −1/turn (−3 thân); her own v.pg −1 flat, no thân relief (law 1 gap).
+- Fix: j1 ghenUp — by = another consort (not a co-op seat) → oán toward that consort × BAL.net.ghenOanK .5 + the Chạnh lòng feeling at her (= the rule jshelf already used for NPC↔NPC; jshelf now reads the same key, its npcOanK removed). j28 ghenCool = ONE cooling rule for every holder (NPC v.ghen and her v.pg): (BAL.net.ghenCool.fade[not thân, thân] + ghen × k) ÷ persF ghen, at least 1; k = .03.
+| build (nt-run sens, 3 slots × 900 s ALONE) | weeks | ghen p50/p90 | NPC→her band-3 | NPC→NPC band-3 | all band-3 | proud÷gentle | NPC→her top ghen/oán/−aff |
+|---|---|---|---|---|---|---|---|
+| before = c10 (net-thresholds 96c2859e) | 459 | 99/100 | 43/509 = 8.4 % | 67/197 = 34.0 % | 110/706 = 15.6 % | 2.09 | 85/2/13 % |
+| after k .03 | 726 | 25/96 | 69/608 = 11.3 % | 90/281 = 32.0 % | 159/889 = 17.9 % | 2.32 | 70/4/26 % |
+- Note for D: on the c10 base NPC→her band-3 was ALREADY ≤ 30 % (8.4 %); the 83–85 % «ghen top driver» was a saturated term, not band-3. After the fix ghen lives (p50 25) and the targets hold (≤ 30 %, ≥ 2). NPC→NPC band-3 stays ~32–34 % (oanCool territory, not ghen). Tables: reports/nt-w4/sum*.md, norm*.md; slot.sh there.
+- Many «read hang / bot step hang» parts in every slot (harness, same as W2/W3 saw).
+
+### (2) LAW 11 family «shown == applied» — wave 1 (oán) done, thiện cảm = wave 2 open
+- The gap is ONLY oán (oanAdd ×persF slight, NPC holder, rise) and thiện cảm (affAdd ×persF trust, NPC holder, rise). ghen (ghenN) / tin have no hidden factor.
+- REUSED the existing shared preview jaudit §5 (pvOan / pvQuy = the SAME factor as the wrappers; honest range while her knowledge of the holder's nết is partial). Changes: label arg (pvOan(t,n,lab) / pvQuy), no target → any-person range (new pvOanAny(n,lab) rewrite + pvQuyAny, shared aaAnyRange); aaMulRange: an unknown nết ranges over its OWN group only (cards read «+3 đến +13», were «+4 đến +41»).
+- Scan: dev/test/relshow-scan.py (needs dev/test/relshow-bal.json: node dev/test/relshow-bal.js <abs dev/index.html> dev/test/relshow-bal.json — not in git). Runtime proof: dev/test/relshow-rt.js (every consort × 4 amounts: shown range brackets applied, oán 40/40, thiện cảm 40/40; ghen rule checks; text builders no error) PASS.
+| kind | WIRED | HER | NEG | NOFAC | RAW |
+|---|---|---|---|---|---|
+| oán before (96c2859e) | 13 | 0 | 13 | 0 | 74 |
+| oán after (6d7d2da9) | 63 | 0 | 13 | 0 | 25 |
+| thiện cảm before = after | 5→6 | 9 | 129 | 0 | 253 |
+| ghen / tin | — | — | — | 94 | 0 |
+- oán RAW left (25): log rewriters «thù −n → oán ngươi +n» (j25:76, j63:18/44, jint:23, jk2b:218 — n comes from an older text, holder unknown), static act outcome lists (jtsb:93 AOUT, j17:92), faction lines (j10:190/192, j14:34), j2:212 stealKem (already ×slight, exact), j25:10, j55:183/214, j95b:221, jration:159, jkc:212, jgreet:133 (her holder), kit sample pages (jkitpage, jkrel), jpet (a fall). List: python3 dev/test/relshow-scan.py --list.
+- thiện cảm wave 2 (253 RAW sites, many servant «thiện cảm» via msAffAdd which the trust wrapper also scales) NOT done — needs a seat of its own: same pattern `${pvQuy(holder,n,"<words>")}`.
+
+### Gates on 6d7d2da9
+| gate | result |
+|---|---|
+| net-build | 203/203 PASS |
+| one-core guard / bind / text / text-rule | PASS ×4 |
+| relshow-rt (new) | PASS |
+| two-way-oldsave main → new (file://, 40 wk) | ok, 0 errors — NOTE: turn stays 0 in this harness on main→main too (endTurn loop does not move S.turn); harness, not branch |
+| coop-e2e | 142/142 |
+| quickcheck | PASS (render 248/261, tab 640/506, buổi 1520/1704 ms, tasks>200 25/24, core gates PASS) |
+| real taps Fold + iPad | NOT DONE — my touch script (reports/nt-w4/rt2.js, lib/device openHost) does not get past the title menu (taps on «Chơi một mình» do not register in the rot host); needs review/robot-realtap's realtap.js (W3 note) |
+
+### HANDOVER (W4 rolls: ceiling) — open for the successor
+1. Real taps Fold 755x1000 + iPad 1180x820 on review/net-ghen: open a consort's card → an option showing «… oán ngươi +a đến +b» (e.g. Tố giác / Uy hiếp / apHostOpts) → tap, check the line in the log and the real oán change; use review/robot-realtap realtap.js from a scratch copy.
+2. Then SẴN SÀNG KIỂM for (1) ghen + (2) wave 1.
+3. Law 11 wave 2 (thiện cảm, 253 sites) + the 25 oán rest: D's call whether it is a new item.

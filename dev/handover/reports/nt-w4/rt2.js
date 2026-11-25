@@ -1,0 +1,11 @@
+const {chromium}=require('playwright');const D=require('/home/user/wt/ghen/dev/test/lib/device.js');const [,,DEV,OUT,STEPS]=process.argv;
+(async()=>{const srv=await D.serveRoot('/home/user/wt/ghen');const b=await chromium.launch();const ctx=await D.newDeviceContext(b,DEV);const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
+ const f=await D.openHost(p,srv.url);await f.evaluate(()=>localStorage.clear());await p.reload();const g=await D.openHost(p,srv.url);await p.waitForTimeout(3000);
+ const tap=async s=>{try{const r=await g.evaluate(t=>{const e=[...document.querySelectorAll('button,[role=button],.tab,a,.pc,.card')].filter(e=>e.offsetParent&&e.textContent.includes(t))[0];if(!e)return null;e.scrollIntoView({block:'center'});const b=e.getBoundingClientRect();return[b.x+b.width/2,b.y+b.height/2,innerWidth,innerHeight]},s);if(!r)return 'NO '+s;
+ const fb=await p.evaluate(()=>{const f=document.getElementById('krotf');const b=f.getBoundingClientRect();return[b.x,b.y,b.width,b.height]});const sx=fb[2]/r[2],sy=fb[3]/r[3];
+ await p.touchscreen.tap(fb[0]+r[0]*sx,fb[1]+r[1]*sy);await p.waitForTimeout(1500);return 'tapped '+s}catch(e){return 'ERR '+s+' '+e.message.slice(0,80)}};
+ const log=[];log.push(await tap('Bắt đầu kiếp mới'));await p.waitForTimeout(3000);
+ for(const s of (STEPS||'').split('|').filter(Boolean))log.push(await tap(s));
+ const vis=await g.evaluate(()=>[...document.querySelectorAll('button,[role=button],.tab')].filter(e=>e.offsetParent).map(e=>e.textContent.trim().replace(/\s+/g,' ').slice(0,26)).filter(Boolean).slice(0,70).join(' ¦ '));
+ const oan=await g.evaluate(()=>(document.body.innerText.match(/[^\n]{0,50}oán[^\n]{0,30}/g)||[]).slice(0,8));
+ await p.screenshot({path:OUT});console.log(log.join('\n'));console.log('VIS',vis);console.log('OAN',JSON.stringify(oan));console.log('errs',errs.length,errs.slice(0,3));await b.close();srv.close()})().catch(e=>{console.error(e.message);process.exit(1)});
