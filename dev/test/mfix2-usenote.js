@@ -4,11 +4,12 @@ const {chromium}=require('playwright');const RT=require('./realtap.js');
 const dev=process.argv[2]||'fold';const port=process.argv[3]||'8792';const vp=dev==='fold'?{width:755,height:1000}:{width:1180,height:820};
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:vp,deviceScaleFactor:1,hasTouch:dev==='fold'});const p=await ctx.newPage();
 const errs=[];p.on('pageerror',e=>errs.push(e.message));
-await p.goto('http://localhost:'+port+'/index.html');await p.waitForTimeout(3000);
+await p.goto('http://localhost:'+port+'/index.html',{waitUntil:'domcontentloaded'});
 const rt=RT.make(p,{dev});
-for(const t of ['Chơi một mình','Bắt đầu kiếp mới']){const h=await p.waitForSelector(`button:has-text("${t}"):visible`,{timeout:15000}).catch(()=>null);if(h)await rt.tap(h,{label:t});await p.waitForTimeout(2000)}
-async function upBtn(re){return p.evaluate(s=>{const R=new RegExp(s);for(const e of document.querySelectorAll('button')){const r=e.getBoundingClientRect();if(!(r.width>0))continue;const t=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);if(t&&(t===e||e.contains(t))&&R.test(e.textContent.replace(/\s+/g,' ').trim()))return {x:r.left+r.width/2,y:r.top+r.height/2}}return null},re)}
-for(let i=0;i<40;i++){if(await upBtn('^Hành sự'))break;const c=await upBtn('^(Tiếp|Bỏ qua|Nhận thân phận|Vào cung|Theo ma ma|Đã hiểu|Tiếp theo)');if(c){if(dev==='fold')await p.touchscreen.tap(c.x,c.y);else await p.mouse.click(c.x,c.y)}await p.waitForTimeout(1500)}
+/* setup by state (m-fix-2-r): the title walk was label-bound (m-fix-1 renamed the roulette button) and passed silently when stuck */
+await p.waitForFunction(()=>typeof start==='function'&&typeof kg82Open==='function',null,{timeout:180000});await p.waitForTimeout(1500);
+await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;new MutationObserver(()=>document.querySelectorAll('.kroul,#kroul,#kload').forEach(e=>e.remove())).observe(document.body,{childList:true,subtree:true});start()});
+for(let i=0;i<10;i++){await p.waitForTimeout(600);await p.evaluate(()=>{Q.length=0;document.querySelectorAll('#klife,.kmov,#kroul,#kload').forEach(e=>e.remove());const m=document.getElementById('modal');if(m)m.hidden=true;try{render()}catch(e){}})}
 const cases=await p.evaluate(()=>{const out=[];
  const dau=Object.keys(IT).filter(k=>typeof alOf==="function"&&alOf(k)&&alOf(k).kind==="dau");
  const lx=Object.keys(IT).filter(k=>typeof lxOf==="function"&&lxOf(k));
@@ -33,4 +34,8 @@ for(const [kind,k,mk] of [['dau',cases.dau[0],'40same'],['dau',cases.dau[0],'mix
  const xok=await rt.tap('#kidfl [data-kidx]',{label:'✕ item card'});await p.waitForTimeout(400);
  const gone=await p.evaluate(()=>!document.getElementById('kidfl'));
  res.push({kind,mk,...r,xTap:xok,closed:gone});}
-for(const r of res)console.log(JSON.stringify(r));console.log('ERRS',errs.length,errs.slice(0,3).join(' | '));await b.close()})();
+for(const r of res)console.log(JSON.stringify(r));console.log('ERRS',errs.length,errs.slice(0,3).join(' | '));
+const F=[];const cap=await p.evaluate(()=>BAL.itd.useGroups);if(res.length<5)F.push('only '+res.length+'/5 cases ran (item keys '+JSON.stringify(cases)+')');
+for(const r of res){const id=r.kind+' '+r.mk;if(!r.glTap)F.push(id+': real tap on «!» Ghi chú did not land');if(!r.pop)F.push(id+': no pop-up');else{if(r.pop.lines>cap+2)F.push(id+': '+r.pop.lines+' «lần dùng» lines (max '+(cap+2)+')');if(r.pop.frac>0.5)F.push(id+': pop-up '+r.pop.frac+' of the screen')}
+ if(!r.popClosed)F.push(id+': pop-up did not close on a tap');if(!(r.xTap&&r.closed))F.push(id+': item card ✕ real tap did not close')}
+if(errs.length)F.push('page errors '+errs.length);for(const x of F)console.log('FAIL '+x);console.log(F.length?'MFIX2-USENOTE FAIL '+F.length:'MFIX2-USENOTE PASS');await b.close();process.exitCode=F.length?1:0})();

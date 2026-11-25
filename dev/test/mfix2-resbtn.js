@@ -5,10 +5,11 @@ const dev=process.argv[2]||'fold';const port=process.argv[3]||'8792';const vp=de
 const LABELS=['Đã hiểu','Xong','Môn kế tiếp','Xem kết quả','Thử môn khác','Dừng ở đây'];
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:vp,deviceScaleFactor:1,hasTouch:dev==='fold'});const p=await ctx.newPage();
 const errs=[];p.on('pageerror',e=>errs.push(e.message));
-await p.goto('http://localhost:'+port+'/index.html');await p.waitForTimeout(3000);const rt=RT.make(p,{dev});
-for(const t of ['Chơi một mình','Bắt đầu kiếp mới']){const h=await p.waitForSelector(`button:has-text("${t}"):visible`,{timeout:15000}).catch(()=>null);if(h)await rt.tap(h,{label:t});await p.waitForTimeout(2000)}
-async function upBtn(re){return p.evaluate(s=>{const R=new RegExp(s);for(const e of document.querySelectorAll('button')){const r=e.getBoundingClientRect();if(!(r.width>0))continue;const t=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);if(t&&(t===e||e.contains(t))&&R.test(e.textContent.replace(/\s+/g,' ').trim()))return {x:r.left+r.width/2,y:r.top+r.height/2}}return null},re)}
-for(let i=0;i<60;i++){if(await upBtn('^Hành sự'))break;if(await p.$('#kg82skip')){await rt.tap('#kg82skip');await p.waitForTimeout(2500);continue}if(await p.evaluate(()=>!!document.querySelector('#kg82box-res:not([hidden])')&&!!document.querySelector('#kg82 .kit-x'))){await rt.tap('#kg82 .kit-x');await p.waitForTimeout(2000);continue}const c=await upBtn('^(Tiếp|Bỏ qua|Nhận thân phận|Vào cung|Vào điện|Dâng |Theo ma ma|Đã hiểu|Tiếp theo)');let cc=c;if(!cc)cc=await p.evaluate(()=>{for(const e of document.querySelectorAll('.kprevov button,.kmov button,#modal button')){const r=e.getBoundingClientRect();if(!(r.width>0))continue;const t=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);if(t&&(t===e||e.contains(t)))return {x:r.left+r.width/2,y:r.top+r.height/2,l:e.textContent.trim().slice(0,20)}}return null});if(cc){if(cc.l)console.error('fallback tap',cc.l);if(dev==='fold')await p.touchscreen.tap(cc.x,cc.y);else await p.mouse.click(cc.x,cc.y)}await p.waitForTimeout(1500)}
+await p.goto('http://localhost:'+port+'/index.html',{waitUntil:'domcontentloaded'});const rt=RT.make(p,{dev});
+/* setup by state (m-fix-2-r): the title walk was label-bound (m-fix-1 renamed the roulette button) and passed silently when stuck */
+await p.waitForFunction(()=>typeof start==='function'&&typeof kg82Open==='function',null,{timeout:180000});await p.waitForTimeout(1500);
+await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;new MutationObserver(()=>document.querySelectorAll('.kroul,#kroul,#kload').forEach(e=>e.remove())).observe(document.body,{childList:true,subtree:true});start()});
+for(let i=0;i<10;i++){await p.waitForTimeout(600);await p.evaluate(()=>{Q.length=0;document.querySelectorAll('#klife,.kmov,#kroul,#kload').forEach(e=>e.remove());const m=document.getElementById('modal');if(m)m.hidden=true;try{render()}catch(e){}})}
 const out=[];
 for(const lab of LABELS)for(const how of ['button','x']){
  await p.evaluate(lab=>{window.__done=0;kg82Open({art:"Thử",title:"Kết quả",how:"",round:"Môn",roundV:"1/2"});kg82ShowRes(kg82Rows([["Màn chơi","5/10 · Khá","t"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">${lab}</button></div>`,true);document.getElementById('kg82ok').onclick=()=>{kg82Close();window.__done=1}},lab);
@@ -17,4 +18,7 @@ for(const lab of LABELS)for(const how of ['button','x']){
  const ok=how==='button'?(st.shown?await rt.tap('#kg82ok',{label:lab}):false):await rt.tap('#kg82 .kit-x',{label:'✕'});await p.waitForTimeout(600);
  const done=await p.evaluate(()=>window.__done===1);out.push({lab,how,...st,tap:ok,movedOn:done});
  await p.evaluate(()=>{try{kg82Close()}catch(e){}});await p.waitForTimeout(300)}
-for(const o of out)console.log(JSON.stringify(o));console.log('ERRS',errs.length,errs.slice(0,2).join(' | '));await b.close()})();
+for(const o of out)console.log(JSON.stringify(o));console.log('ERRS',errs.length,errs.slice(0,2).join(' | '));
+const F=[];const plain=l=>/^(Đã hiểu|Xong)$/.test(l);for(const o of out){if(plain(o.lab)&&o.shown)F.push(o.lab+': plain close word shown (OD:L1352)');if(!plain(o.lab)&&!o.shown)F.push(o.lab+': step button hidden');
+ if(o.how==='button'&&!plain(o.lab)&&!(o.tap&&o.movedOn))F.push(o.lab+': real tap on the step button did not move on');if(o.how==='x'&&!(o.tap&&o.movedOn))F.push(o.lab+': ✕ real tap did not move on')}
+if(errs.length)F.push('page errors '+errs.length);for(const x of F)console.log('FAIL '+x);console.log(F.length?'MFIX2-RESBTN FAIL '+F.length:'MFIX2-RESBTN PASS');await b.close();process.exitCode=F.length?1:0})();
