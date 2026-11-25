@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"9025e088+","t":"2026-11-25T08:41Z","c":"Khi bấm vào một người, hình người đó giữ đúng cỡ và chỗ đứng như trên sân khấu.","b":"12420f5eed06","h":[{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"}]};
+window.CTM_BI={"s":"b7c9aa59+","t":"2026-11-25T08:42Z","c":"Màn đầu không còn trống trơn khi bấm ✕; tải lâu có nút «Vào cung ngay»; kiếp đầu không còn ghi «Kiếp thứ hai».","b":"21512cd66cc8","h":[{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"},{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -5501,7 +5501,7 @@ const LACK={musk:t=>!t.preg||t.hidden?"nàng không có thai (ngươi biết)":"
 (function(){const kp=kitParse;kitParse=function(str){str=String(str||"").replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ngươi +${n}`).replace(/thân -(\d+)/g,"quý ngươi -$1").replace(/thân \+(\d+)/g,"quý ngươi +$1").replace(/\bngay: /g,"được ngay: ");return kp(str)}})();
 (function(){const k0=kcls;kcls=function(t){const s=String(t).replace(/<[^>]+>/g,"");if(/thiện cảm\s*-|quý ngươi\s*-|lòng\s*-|Sủng\s*-|Danh\s*-|Đức\s*-|oán ngươi \+|ghen \+/i.test(s)&&!/\bnàng\b.*-/.test(s.replace(/oán ngươi.*/,"")))return"r";return k0(t)}})();
 /* dialog options: a face beside every named person */
-(function(){const s0=showModal;showModal=function(){s0.apply(this,arguments);const M=$("modal");if(M.hidden)return;M.querySelectorAll(".opt").forEach(b=>{if(b.querySelector(".md"))return;const tx=b.firstChild&&b.firstChild.textContent||"";const v=rivals.find(r=>tx.includes(r.name));const f=v?pv(v):/Hoàng thượng/.test(tx)?pEmp():/Thái hậu/.test(tx)?pTH():null;if(f)b.insertAdjacentHTML("afterbegin",mdH(f,"xs"))})}})();
+(function(){const s0=showModal;showModal=function(){s0.apply(this,arguments);const M=$("modal");if(M.hidden)return;M.querySelectorAll(".opt").forEach(b=>{if(b.querySelector(".md"))return;const tx=b.firstChild&&b.firstChild.textContent||"";if(typeof S==="undefined"||!S||!Array.isArray(rivals))return;/* title / no life yet (fresh profile, after a death + reload): nobody to put a face on (robot M1 #1) */const v=rivals.find(r=>tx.includes(r.name));const f=v?pv(v):/Hoàng thượng/.test(tx)?pEmp():/Thái hậu/.test(tx)?pTH():null;if(f)b.insertAdjacentHTML("afterbegin",mdH(f,"xs"))})}})();
 /* the ghen of a rival is hidden until she knows her */
 (function(){const rc=rvCard;rvCard=function(v,i){let h=rc.apply(this,arguments);if(!knows(v))h=h.replace(/<div class="pgh">[\s\S]*?<\/div><\/div>/,`<div class="pgh"><span>Ghen: <span class="ef n">chưa rõ</span></span></div>`);return h}})();
 /* her portrait in the death dialog is labelled by her name and rank */
@@ -10040,6 +10040,19 @@ const t0=showTitle;showTitle=function(){const was=T.hidden;park();const r=t0.app
 window.showTitle=showTitle;
 const m=$("menu");if(m){const m0=m.onclick;m.onclick=function(){PG="home";return m0&&m0.apply(this,arguments)}}
 new MutationObserver(()=>{if(T.hidden&&(HM||SM))dropAll()}).observe(T,{attributes:true,attributeFilter:["hidden"]});
+/* TITLE NEVER BLANK (robot M1 #2, soft-lock; owner law: every way to reach the title shows its buttons). The home / Chọn sổ panels ARE the title's
+   buttons (#title .tbox is never shown): when the title is up and nothing is on #modal (the home ✕ / Esc / tap outside closed it, a reload landed on
+   a dead life, a fresh profile, a panel closed by another module…) the title was only cover art with 0 tappable elements — only a reload recovered.
+   ONE guard: title up + #modal hidden + empty queue + no loading cover / roulette ⇒ ☰ opened over a live life (✕ = back to it, same path as «Tiếp tục»),
+   otherwise the home panel again. Runs after every closeModal and, as a watchdog, on every #modal / #title visibility change. */
+const tgBlank=()=>{const M=$("modal");return !T.hidden&&(!M||M.hidden)&&!Q.length&&!document.querySelector("#kload,#klife,#kroul")};
+function tgFix(){try{if(!tgBlank())return false;
+  if(typeof S!=="undefined"&&S&&!S.dead&&lastSlot()&&resumeGame())return true;
+  PG="home";go("home",false);return true}catch(e){console.error("title guard",e);return false}}
+let tgT=0;function tgSoon(ms){if(tgT)clearTimeout(tgT);tgT=setTimeout(()=>{tgT=0;tgFix()},ms==null?350:ms)}
+try{new MutationObserver(()=>{if(tgBlank())tgSoon(350)}).observe($("modal"),{attributes:true,attributeFilter:["hidden","class"]});
+ new MutationObserver(()=>{if(!T.hidden)tgSoon(350)}).observe(T,{attributes:true,attributeFilter:["hidden"]})}catch(e){console.error(e)}
+{const cm0=window.closeModal;if(typeof cm0==="function"){window.closeModal=closeModal=function(){const r=cm0.apply(this,arguments);tgSoon(0);return r}}}
 /* after every module has loaded (the kit panel, j79, wraps showModal later in the bundle): wrap outermost, then first paint */
 setTimeout(()=>{try{
  ["wireOpt","wireXio","pdTitle"].forEach(wrapPark);
@@ -52880,6 +52893,7 @@ const STANDALONE=(window.matchMedia&&matchMedia("(display-mode: standalone)").ma
    a kit notice asks where she will play (add to Home Screen = download once, in the app; or play in the browser = download there, once more later).
    Her choice is remembered (localStorage 'ctm-ios-browser'). Android / desktop / the installed app: unchanged. */
 const IOSB=IOS&&!STANDALONE,CHOICE="ctm-ios-browser";
+const KLOAD_STALL=20000;/* ms of no finished file before the loading cover offers «Vào cung ngay» */
 let askMode="ask";
 const chosen=()=>{try{return localStorage.getItem(CHOICE)==="1"}catch(e){return false}};
 const hasSave=()=>{try{for(let n=1;n<=3;n++)if(localStorage.getItem("hclh-save-v2-"+n))return true}catch(e){}return false};
@@ -52914,8 +52928,11 @@ function paint(msg){if(!el)return;if(KLOAD.phase==="ask"){paintAsk();return}
  /* kit-progress-run: the bar is built once and updated in place; the notes are rewritten only when their text changes */
  if(b.querySelector(".kprog")&&b.dataset.kpn!==undefined){kitProgressSet(b,po);if(b.dataset.kpn!==notes){b.dataset.kpn=notes;b.querySelectorAll(":scope > .kpnote").forEach(e=>e.remove());b.insertAdjacentHTML("beforeend",notes)}}
  else{KPMAX.core=0;/* a (re)built cover = a new load: forward-only starts again */b.dataset.kpn=notes;b.innerHTML=kitProgress(po)+notes}
- const stuck=KLOAD.err&&KLOAD.phase!=="done";
- o.innerHTML=stuck?`<button class="kbtn alt" data-kl="go">Vào cung ngay</button>${navigator.onLine!==false?`<button class="kbtn" data-kl="retry">Thỉnh tiếp</button>`:""}`:"";}
+ /* TITLE NEVER BLANK (robot M1 #2 / M3: a first screen of cover art + bar and no button for ≥9 min): a download that STALLS without raising an error (a hung
+    request, a captive network) left no button at all. After KLOAD_STALL ms with no file finished, «Vào cung ngay» shows too (no «Thỉnh tiếp»: the pool is still running). */
+ const stall=!KLOAD.err&&KLOAD.phase==="core"&&KLOAD.lastAt&&Date.now()-KLOAD.lastAt>KLOAD_STALL;
+ const stuck=(KLOAD.err||stall)&&KLOAD.phase!=="done";
+ o.innerHTML=stuck?`<button class="kbtn alt" data-kl="go">Vào cung ngay</button>${KLOAD.err&&navigator.onLine!==false?`<button class="kbtn" data-kl="retry">Thỉnh tiếp</button>`:""}`:"";}
 function close(){if(!el)return;const e=el;el=null;e.classList.add("out");setTimeout(()=>e.remove(),500);enterCb.splice(0).forEach(f=>{try{f()}catch(x){}})}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kl]");if(!b)return;e.stopPropagation();
  const kl=b.dataset.kl;
@@ -52931,7 +52948,7 @@ async function getOne(c,f,grp){const g=KLOAD[grp];let got=0;const k0=keyOf(f);FL
  for(let t=0;t<4;t++){try{
    const k=keyOf(f),r=await (CDNB&&k.startsWith(CDNB)?fetch(k+"&ctmload=1",{cache:"no-cache",mode:"cors",credentials:"omit"}):fetch(k,{headers:{"x-ctm-load":"1"},cache:"no-cache"}));if(!r.ok){const x=new Error("http "+r.status);if(grp==="all"&&(r.status===404||r.status===403||r.status===410))x.dead=true;throw x}
    await c.put(keyOf(f),r);  /* the browser streams it into the cache; no page script per chunk (keeps the game smooth) */
-   g.have+=f[2]-got;g.left--;g.files++;if(grp==="all")ALL.got=(ALL.got||0)+1;/* test hook: files «Tải hết» itself brought */oaSeen(f);tick(grp);return true}
+   KLOAD.lastAt=Date.now();g.have+=f[2]-got;g.left--;g.files++;if(grp==="all")ALL.got=(ALL.got||0)+1;/* test hook: files «Tải hết» itself brought */oaSeen(f);tick(grp);return true}
   catch(e){g.have-=got;got=0;if(e&&e.name==="QuotaExceededError"){setErr(grp,"quota");throw e}
    if(e&&e.dead){setErr(grp,"dead");throw e}
    if(navigator.onLine===false){setErr(grp,"offline");throw e}
@@ -52985,7 +53002,7 @@ async function moveCdn(c){if(!CDNB)return;/* entry-blank-r3: a whole-cache walk 
   await c.delete(q)}KLOAD.moved=n}catch(e){}}
 
 async function runCore(){if(!coreList.length){KLOAD.phase="done";close();startBg();return}
- KLOAD.phase="core";screen();paint();
+ KLOAD.phase="core";KLOAD.lastAt=Date.now();screen();paint();const stT=setInterval(()=>{if(!el||KLOAD.phase!=="core"){clearInterval(stT);return}paint()},4000);/* the stall check above runs on a timer too: no file finishing = no tick */
  try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{})}catch(e){}
  try{await pool(coreList,6,"core");coreList=[];KLOAD.phase="done";paint("Đã thỉnh đủ · mời nhập cung");setTimeout(()=>{close();startBg()},700)}
  catch(e){await new Promise(ok=>setTimeout(ok,300));await refresh("core");
@@ -71936,7 +71953,9 @@ function geResolve(r2,force){const s=geS();if(!s||s.done)return null;if(r2!=null
 window.geResolve=geResolve;
 /* the whole answer in one call (bots, tests): r1, r2 indexes; force = true/false skips the roll */
 window.geAnswer=(r1,r2,force)=>{const s=geS();if(!s||s.done)return null;s.r1=r1;return geResolve(r2,force)};
-function geLifeNo(){try{return (typeof lifeLog==="function"?lifeLog().length:0)+1}catch(e){return 1}}
+/* the number of the life she is living / has just lived (the one source of the «Kiếp thứ …» chip, KCT, GE results). A life is written to lifeLog the moment it ends (j32 over → record),
+   so once S.dead the log ALREADY holds this life: count it, do not add one more (robot M1 #9: the first life showed «Kiếp thứ hai» on its ending screen). */
+function geLifeNo(){try{const n=typeof lifeLog==="function"?lifeLog().length:0;return n+(typeof S!=="undefined"&&S&&S.dead&&n>0?0:1)}catch(e){return 1}}
 /* ---------- reward / loss ---------- */
 const STATK=["danh","sung","bac","mat","duc","tai","tamco","sac","th","hh","maid","suc"];
 function geRank(n){if(!n||(typeof isSrv67==="function"&&isSrv67()))return"";const top=RANKS.length-2;const r0=S.rank;
@@ -94893,7 +94912,7 @@ const KCT={kc_tuyen:["Trâm hoa ngự ban","Qua kỳ tuyển tú, được giữ
 function kctStore(){const g=store.get("ctm-kct");return g&&typeof g==="object"&&g.t?g:{t:{}}}
 (function(){try{if(typeof DH_CAT!=="object")return;BAL.dh.T=BAL.dh.T||{};for(const k in KCT){const d=KCT[k];DH_CAT[k]={n:d[0],g:"kc",how:()=>{const r=kctStore().t[k];return `${d[1]}${r&&r.first?` · kiếp ${r.first.life}`:""}`}};
   BAL.dh.T[k]={n:[1],b:/^kc_R/.test(k)?BAL.kcg.title.rare:BAL.kcg.title.tier,ch:[]}}}catch(e){console.error("kct",e)}})();
-function kctGive(k){try{if(!KCT[k]||!S)return;const g=kctStore();const life=(typeof geLifeNo==="function"?geLifeNo():typeof lifeLog==="function"?lifeLog().length+1:1);/* geLifeNo lives inside jge's closure: same count here */const e=g.t[k]||(g.t[k]={lives:[],first:{life,who:S.name}});if(!e.lives.includes(life))e.lives.push(life);store.set("ctm-kct",g);
+function kctGive(k){try{if(!KCT[k]||!S)return;const g=kctStore();const life=(window.geK&&typeof geK.lifeNo==="function"?geK.lifeNo():typeof lifeLog==="function"?lifeLog().length+1:1);/* geK.lifeNo = jge geLifeNo (it lives in jge's closure): the one count */const e=g.t[k]||(g.t[k]={lives:[],first:{life,who:S.name}});if(!e.lives.includes(life))e.lives.push(life);store.set("ctm-kct",g);
   S.dh=S.dh||{};if(!S.dh[k]||S.dh[k].i==null||S.dh[k].i<0){if(typeof dhInc==="function")dhInc(S,k,1);else S.dh[k]={n:1,i:0,at:[""]}}log(`<b class="g">Danh hiệu mới: «${KCT[k][0]}».</b>`)}catch(e){console.error("kct",e)}}
 (function(){const e0=kcEnter;kcEnter=function(rank){const r=e0.apply(this,arguments);try{if(S.kc&&S.kc.inPal){kctGive("kc_tuyen");if(S.rank>=BAL.kcg.title.quyRank)kctGive("kc_quy")}}catch(e){}return r}})();
 (function(){const e0=kcEnd;kcEnd=function(id){try{const m=/^kcR(\d)$/.exec(id||"");if(m)kctGive("kc_R"+m[1])}catch(e){}return e0.apply(this,arguments)}})();
@@ -98351,7 +98370,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="12420f5eed06";window.CTM_BUILD=BUILD;
+const BUILD="21512cd66cc8";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

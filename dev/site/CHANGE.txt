@@ -1,1 +1,1 @@
-Khi bấm vào một người, hình người đó giữ đúng cỡ và chỗ đứng như trên sân khấu.
+Màn đầu không còn trống trơn khi bấm ✕; tải lâu có nút «Vào cung ngay»; kiếp đầu không còn ghi «Kiếp thứ hai».
