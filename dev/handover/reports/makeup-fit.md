@@ -30,3 +30,16 @@ START_CTX ~4 % (estimate; get_session read 0). Finished at ~22 %, no rollover ne
 https://ctm-img.victoria-tntt.workers.dev/img/_review/makeup-fit/index.html (game Fold + iPad before/after, all looks before/after, 5 after-sheets). Wipe with the verdict.
 
 ~95 % xong / ~95 % chơi được (makeup placement)
+
+## REVIEW (reviewer, 25/11)
+PRIORITY #1 CHECK: reused dev/test/anchor-table.py, dev/art/mkfit/hdanchor.py, fit2511/repro.js, dev/tools/tier.js + quickcheck.sh, hoa-dien/makeup-theme/makeup-places/toil-draw tests.
+**PASS dd200174** (= review/makeup-fit e4d2d3e3 merged onto origin/main 5d4f722f as review/makeup-fit-r6; clean merge, ancestor = current main).
+- Tier: BIG by script (only because the generated dev/build/jhd.js HD_ANCHOR block is "logic unsure"; everything else SMALL data/tools). Content is data + generated table, so the touched-part tests + quickcheck + shots were run; the full-suite list (game-feel, kit-conform, tab-pairs, phone-bars, perf) NOT run — owner-bug fast lane, no UI/code change.
+- Repo JSON == CDN: 99 img/mk-fit/*.json + img/toil-fit2.json byte-identical to live CDN (md5.json repo-only).
+- anchor-table.py: pictures 7208 bad 0. hdanchor.py --check: rows 7208, skipped 0 -> OK.
+- quickcheck: core gates PASS, time-spill PASS, open 0 errors, old save loads + plays a buổi (Dư Thục Hoa). First perf step died with a browser-closed harness error (box load); re-run of quickcheck.js PASS (perf median render 292 ms, buổi 1592 ms).
+- Tests: hoa-dien Fold + iPad ALL OK; toil-draw PASS 10; makeup-theme errs []; makeup-places errs [].
+- Looked (shots in scratch, not CDN): Fold 755x1000 (c15 t3 a18, Diêm dúa/vụng + face crops) and iPad 1180x820 (c05 t3 a18 face + full stage): lips on the painted lips, brows/lids on the painted features, blush on the cheeks inside the face outline. No cut text/overflow on the stage.
+- Not checked: every one of the 16 656 pictures by eye (worker also did not; mesh checks only).
+Wipe img/_review/makeup-fit/ with LAND (python3 dev/site/cdn_sync.py --wipe-review makeup-fit) — I did not upload shots.
+~100 % xong review / ~95 % chơi được
