@@ -12,6 +12,19 @@
   "modalClass": "modal",
   "ksz": [
    "dlg kpsc kpanel kszf ksz3 kszlive",
+ "buoi": 54,
+ "hud": "Bạch Nghê Thường Thường tại 19 tuổi Kiếp thứ nhất Tháng mười một · hạ tuần · năm thứ nhất | Buổi chiều",
+ "build": "0756a05b",
+ "at": "2026-11-25T07:26:57.352Z",
+ "dump": {
+  "title": "Sau vụ mưu hại",
+  "bad": 2,
+  "frameBottom": 898,
+  "dlgClass": "dlg kpsc kpanel kdtx kszf ksz3 kszlive",
+  "dlgStyle": "--kdpw: 175px;",
+  "modalClass": "modal",
+  "ksz": [
+   "dlg kpsc kpanel kdtx kszf ksz3 kszlive",
    "kszfig",
    "kszfs"
   ],
@@ -39,6 +52,15 @@
     374,
     304,
     511
+    833,
+    304,
+    112
+   ],
+   "kpopts": [
+    342,
+    833,
+    304,
+    112
    ],
    "k3right": [
     342,
@@ -63,11 +85,14 @@
    0,
    635,
    511
+   286,
+   112
   ],
   "cards": [
    [
     342,
     374,
+    833,
     304,
     140
    ],
@@ -88,6 +113,9 @@
     835,
     304,
     168
+    979,
+    304,
+    140
    ]
   ],
   "vp": [

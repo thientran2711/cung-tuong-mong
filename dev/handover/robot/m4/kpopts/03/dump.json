@@ -9,6 +9,16 @@
   "frameBottom": 898,
   "dlgClass": "dlg kpsc kpanel kszf ksz3 kszlive",
   "dlgStyle": "--kdpw: 170px;",
+ "buoi": 51,
+ "hud": "Bạch Nghê Thường Thường tại 19 tuổi Kiếp thứ nhất Tháng mười một · trung tuần · năm thứ nhất | Buổi tối",
+ "build": "0756a05b",
+ "at": "2026-11-25T07:25:01.441Z",
+ "dump": {
+  "title": "Tin đồn",
+  "bad": 1,
+  "frameBottom": 898,
+  "dlgClass": "dlg kpsc kpanel kszf ksz3 kszlive",
+  "dlgStyle": "--kdpw: 175px;",
   "modalClass": "modal",
   "ksz": [
    "dlg kpsc kpanel kszf ksz3 kszlive",
@@ -39,6 +49,15 @@
     384,
     304,
     501
+    440,
+    304,
+    445
+   ],
+   "kpopts": [
+    342,
+    440,
+    304,
+    445
    ],
    "k3right": [
     342,
@@ -63,11 +82,26 @@
    0,
    677,
    501
+   683,
+   445
   ],
   "cards": [
    [
     342,
     384,
+    440,
+    304,
+    140
+   ],
+   [
+    342,
+    586,
+    304,
+    184
+   ],
+   [
+    342,
+    775,
     304,
     167
    ],
@@ -88,6 +122,9 @@
     871,
     304,
     184
+    949,
+    304,
+    167
    ]
   ],
   "vp": [
