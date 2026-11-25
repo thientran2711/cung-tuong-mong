@@ -78,3 +78,30 @@ Successor does, in this order (all on 876415e3, sparse worktree, LIVE 9f72524b o
 6. `bash dev/tools/quickcheck.sh` ALONE (nothing else running) → QUICKCHECK PASS.
 7. Fill «Tests (final)» here, then FOREMAN_B_STATUS line «SẴN SÀNG KIỂM review/save-year-rollback <sha>» FOR FOREMAN B (+ FOR MAIN 140).
 Open questions for the reviewer (not blocking): the trade in «Fix» (a reload inside the short wait loses an unseen / just-opened code card instead of the whole step). save-growth: source merges clean, rebuild index/sw after whichever lands second.
+
+## r2 — B FIXER SAVE-YEAR-ROLLBACK r2 (opus) session_01N1tNP3KgfZcq6zobMQRpTF → FOREMAN B (child 3 session_01N1tNP5G9e73inPtyBReKnD)
+PRIORITY #1 CHECK ('save-year-rollback'): reuse review/save-year-rollback 876415e3 (predecessor 37vyD6Uh) — nothing new built; OD 0 | claims = own row | main 0 | review/* = this branch only.
+depth 3 · START_CTX ≈ 3 % (used_tokens read 0; own estimate). LIVE origin/main 9f72524b = unchanged (⊂ head) → no re-merge needed.
+Branch **review/save-year-rollback 6d2f5a03410ed22c44e824878c2ead2ea5066f85** = 876415e3 + test-only commit (no game code change since 876415e3; index.html/sw.js rebuilt = build stamp only).
+
+### Test-only changes in r2 (no dev/build change)
+| file | change | why |
+|---|---|---|
+| dev/test/save-boundary-reload.js | oldsave case checks that the NEW build loads exactly what the OLD build wrote (its sổ), and prints when the OLD build had held its own last save | iPad run: OLD (LIVE) build's save() was itself held by the bug (sổ 1.3.1.0 while its screen showed 1.3.1.1) → the case compared against the old SCREEN and FAILed although the new build loaded the old sổ exactly. Now PASS ×3 (iPad ×2 shows «OLD build held its save», Fold none). |
+| dev/test/spread-e2e.js | (1) a `clr()` step closes old-buổi scenes (kit motion / Nhận / dawn host / roulette / mini-game #ov) like save-boundary-reload before each nextBuoi; (2) «time did not move» is now a FAIL; (3) `modal hidden` is not flagged while jdayq legitimately holds a card under a scene; (4) a card that stays in Q after 3 answers is dropped; (5) `SPREAD_BOT=1` sets window.__bot (jdayq / night holds built after this test; jspread / jqsave / save() never read __bot) | on LIVE AND fix the old harness never moved time (turn 0/0/0 on every viewport: jdayq «ONE NEW-DAY ORDER» held the bare nextBuoi() behind the new-life kit scene) → it «tested» nothing; test C had no waiting card. Also needs a server that sends charset=utf-8 (python http.server mis-decodes dev/index.html → «start is not defined»). |
+
+### Tests (final, r2, all on 876415e3 code)
+| check | LIVE 9f72524b | fix |
+|---|---|---|
+| time-advance-save-scan | FAIL 5 | PASS (10 paths, 8 gates) |
+| save-boundary-reload Fold 755x1000 (12 cases incl. day-0s / month-0s / year-0s, robot-y3, newlife, oldsave) | FAIL 7/11 (day, month, year s1, year s2, month-0s, year-0s, robot-y3) | **PASS 12/12** |
+| save-boundary-reload iPad 1180x820 | FAIL 7/11 (same 7) | **PASS 12/12** (11/12 first run: oldsave = test flaw above; oldsave rerun PASS ×2) |
+| MUTATE A: jspread hold restored (fix build, one line) | — | FAIL 4/6 (day, month, year, robot-y3) → test catches it |
+| MUTATE B: jqsave old gate (hold across the step) | — | FAIL month-0s (stipend lost at 0 s) → test catches it |
+| coop-e2e SWAP0 (local Worker: wrangler dev --local) | — | 142/142 |
+| coop-e2e SWAP1 (iPad hosts) | — | 142/142 |
+| spread-e2e (SPREAD_BOT=1, 6 viewports + old save + C) | FAIL 8 = «modal hidden with N cards» rows only (pre-existing, bot mode) | FAIL 8 = the SAME row kind only; **C PASS on substance**: save while data cards wait → after reload the same cards wait («Việc nhờ@5») and are all shown later (1/1; LIVE 2/2); old save loads + plays, no page error anywhere |
+| save-rt-coop (71c538df test) | 5 FAIL rows | the SAME 5 FAIL rows (pool-name sweep ×2, Sức ceiling ×2, law 6a ledger — all owned by review/robot-coop-savert) → no regression |
+| quickcheck ALONE | — | QUICKCHECK PASS · old save ok · core gates PASS (perf new/live median: render 258/246 ms, buổi 1317/1480 ms) |
+Reload-at-once (0 s) and after-delay both covered: *-0s cases reload the instant the date flips; day / month / year / robot-y3 reload after every card is closed (seconds later).
+Open for the reviewer (unchanged): the trade in «Fix» (a reload inside the ≤ 2-buổi wait loses one unseen / just-opened code card instead of the whole step). save-growth e573b9b8: source merges clean; whichever lands second rebuilds index/sw.
