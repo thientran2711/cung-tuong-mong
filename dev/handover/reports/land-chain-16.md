@@ -32,3 +32,5 @@ Roll at ctx >= ~30 %, ceiling 60 %. Main push only on MAIN GO + gates/QC PASS + 
 - 19:0xZ 08e7d79f: scroll-scan Fold 41 frames FAIL 0 (LIVE 17dfa64d FAIL 1 → no regression); QC PASS part (open, old save, perf ok); core gates: crawl «Ô lưu · Lui» known + dialog-fixed FAIL 1 (Fold spyPick L w 538 vs 560) under parallel load → dialog-fixed ALONE on 08e7d79f ×2 «all pass» = load flake.
 - ~19:14Z FF push main 17dfa64d → 08e7d79f (kit pack-4 B-KIT-OK line, MAIN 144/145 standing order). **LIVE = 08e7d79f · ROLLBACK 17dfa64d.**
 - 351122ba music: kit-music ALL PASS, coop-e2e 142/142 ×2; QC alone running.
+- 19:32Z MAIN 145 queue: music 351122ba → SANGBUOI r4 (session_01V1ZZH4huuzV9rxXCRCtHSW, after BIG rv 13YzNeAK PASS) → D coop-rebirth-stuck (sha via MAIN) → B robot-coop-fix-7-r2-rv f2216a70; nothing after ~21:15Z; after flight: temper-perception c56c1856, selscene r19+co-ngu, save-unseen-lists, KK31 708056a9, pass-not-landed-2511.md. Tell r4 when music LIVE.
+- 19:3xZ 351122ba QC alone: open/old save/perf ok (buổi 1481/1690); core: known crawl + look-dedupe 4 + FIX-6 2 (all LIVE flakes). FF push main 08e7d79f → 351122ba. **LIVE = 351122ba · ROLLBACK 08e7d79f.**
