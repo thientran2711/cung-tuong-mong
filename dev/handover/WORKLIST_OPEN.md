@@ -28,3 +28,4 @@ Written by MAIN CHÍNH 116, 24/11 ~10:10Z after sếp's new rulings (OD 24/11 ~0
 | 24 | «Vòng người» figure ring + drama signals — DESIGN MOCK for sếp (no build until she picks) | RING-DESIGN | MOCK READY for sếp |
 | 25 | GAME FEEL / event animation design study (card draw, rings for items/events, entrances) — mocks for sếp | MOTION-DESIGN | MOCK READY for sếp |
 | 26 | Relationship effects of talking to others' people (servant refuses / talks → suspicion, trust, leaks) + greeting etiquette | D | ordered 07:58Z |
+- (25/11 01:10Z, MAIN 130 20:00 report) No item LIVE since last report (LIVE still 502c48c9; lander LC13 waits sếp's permission). Nothing struck; count stays 28 (incl. owner-bug items 24/11 evening).
