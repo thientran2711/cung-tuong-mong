@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)","b":"343c19615a14","h":[{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"},{"s":"0bc95692+","t":"2026-11-24T04:44Z","c":"Khung vừa chữ: màn kết cục và hộp thoại"}]};
+window.CTM_BI={"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…","b":"245488ac1ec6","h":[{"s":"6b931401+","t":"2026-11-25T03:10Z","c":"flight-modal-deadlock: dead-card net + regression test (law 11)"},{"s":"7dbfe98a+","t":"2026-11-25T01:45Z","c":"visitor-fix r8 merge fix (reviewer): restore «Còn N phi tần ngươi chưa gặp mặt» in j61 hc relation hint — the r8 merge lost a6f7715a's owne…"},{"s":"5d4f722f+","t":"2026-11-24T17:53Z","c":"Tiếng động vang ngay khi chạm, không còn trễ."},{"s":"4514d0f9+","t":"2026-11-24T13:09Z","c":"kit-mapgo: map labels never overlap, tap goes to its own place"},{"s":"40bcd59f+","t":"2026-11-24T08:54Z","c":"kit-noprewarn: mini-game back without pre-warning"},{"s":"f1ce093a","t":"2026-11-24T17:02Z","c":"kit-titleplate: title plate never cuts its name"},{"s":"40760996+","t":"2026-11-24T06:01Z","c":"kit-toilring: dress picker ring from the kit"},{"s":"c46a17f2+","t":"2026-11-24T04:45Z","c":"kit-mgboardof: mini-game board frame from the kit"},{"s":"8ac751ed+","t":"2026-11-24T06:05Z","c":"kit-sqopt: square option cards from the kit"},{"s":"71ad3988","t":"2026-11-24T13:14Z","c":"net-build-rv rv r2: last relation gates on netTh (j97 phe/allies + 4 rare-road «thân với ngươi» bars, j99succ allies, jrd_ch/jrd_cnv; BAL b…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1646,10 +1646,13 @@ function showModal(){const M=$("modal");if(!Q.length){M.hidden=true;return}const
   $("mr").innerHTML=m.opts?"":`<button class="main" id="mclose">${m.btn||"Đã rõ"}</button>`;
   kitFix(M);M.hidden=false;const f=M.querySelector(".opt:not(:disabled),#mclose");if(f)f.focus({preventScroll:true})}
 function closeModal(){const m=Q.shift();if(m&&m.onClose){if(m.nl&&window.renderHold)renderHold(m.onClose,m,[],false);else m.onClose()}if(!S.dead||Q.length)showModal();if(m&&m.entI&&!m.onClose&&Q.length&&!S.dead)return;if(Q.length&&!S.dead&&window.renderSoon)renderSoon();else render()}/* an origin story panel (jentry/joi entI: text + picture, no effect, no onClose) followed by another card: the board did not change, no redraw *//* the life card (m.nl): its nlAccept chain renders once, here (jrbatch); another card follows: the board under it is drawn at the end of this task (jrbatch renderSoon) */
-function chooseM(i){const m=Q[0];if(!m||!m.opts)return;const c=m.opts[i];if(c.off||c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)return;Q.shift();
+function chooseM(i){const m=Q[0];if(!m||!m.opts)return;const c=m.opts[i];if(!c){chooseBad(i,m);return}if(c.off||c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)return;Q.shift();
   const b0=snapReal(),s0=S.logSeq||0;
   /* ODDS CAP: a formerly-sure CHANCE option (cap = its khắc) rolls at the cap; a failure is the one soft failure (j63 oddsSoft), its go never runs */
   if(c.cap!=null&&!roll(BAL.odds.hi)){if(c.cap&&can(c.cap))spend(c.cap);oddsSoft("",c.fx)}else{apply(c.fx||{});if(c.go)c.go()}try{logChoice(m,c,b0,s0)}catch(e){console.error(e)}showModal();if(Q.length&&!S.dead&&window.renderSoon)renderSoon();else render()}/* a card follows (result, next event): the board under it at the end of this task (jrbatch renderSoon) */
+/* flight-choose-guard (arm B co-op H77P host «Cannot read properties of undefined (reading 'off')»): a pick whose index is not on the
+   card in front (a stale / relayed / scripted index, a findIndex −1) is refused, the card stays; logged with its caller for the robots. */
+function chooseBad(i,m){try{(window.__badPick=window.__badPick||[]).push({i,t:m&&m.t||"",pid:m&&m.pid||"",n:m&&m.opts?m.opts.length:0,st:String(new Error().stack||"").split("\n").slice(2,7).join(" < ")});console.warn("chooseM: no option",i,"on",m&&(m.pid||m.t))}catch(e){}}
 /* the log keeps one line per choice: "<event>: <choice> → <what really happened>" (owner 11/15: bare "Mặc kệ." lines with no context).
    The lines the choice's own effects wrote are folded into it, and the real changes of her numbers are added (before → after). */
 function logChoice(m,c,b0,s0){const n=Math.max(0,Math.min((S.logSeq||0)-s0,S.logs.length));const L=S.logs.splice(0,n).reverse().map(x=>String(x).replace(/^<span class="ld">[^<]*<\/span>/,"").trim()).filter(Boolean);S.logSeq=s0;
@@ -81028,16 +81031,19 @@ window.eaWeek=eaWeek;
    button (disabled, as when bạc is short), no new part. NPCs already pick by trait (persW) and feeling (jemo emoMul). */
 const EA_HOLD=/^(Nhịn|Nhẫn nhịn|Nhịn cho êm|Nhịn lời mỉa mai|Im lặng|Im lặng ghi nhớ|Làm ngơ|Lờ đi|Cúi đầu nhận lỗi|Cúi đầu tránh đi|Cúi đầu đi qua như người lạ)$/;
 const EA_HIT=/^(Đáp trả|Cãi lại|Mắng thẳng mặt|Đối chất|Vặn lại)/;
-function eaLockWhy(c,m){try{if(!eaOn()||!c||!m||!m.opts)return"";if(c.eaLock)return m.opts.some(o=>o!==c&&!o.eaLock)?c.eaLock:"";const n=String(c.n||"").replace(/<[^>]+>/g,"").trim();const M=eaMine();if(!M.b)return"";const T=eaTemper(S);
+/* flight-choose-guard (law 11): an answer counts as open only when NO greying rule closes it (bạc short, kitOff, lock, lk(), tsDis, unmet need),
+   else her temper could grey the last open road (arm B co-op H77P: every option of a «Kẻ hầu» card greyed with bạc 117) */
+function eaFree(o){try{if(!o)return false;if(o.fx&&o.fx.bac&&S.bac+o.fx.bac<0)return false;if(o.off||o.lock||o.tsDis)return false;if(o.need&&o.need.some(n=>n&&!n.ok))return false;if(typeof o.lk==="function"&&o.lk())return false;return true}catch(e){return false}}
+function eaLockWhy(c,m){try{if(!eaOn()||!c||!m||!m.opts)return"";if(c.eaLock)return m.opts.some(o=>o&&o!==c&&!o.eaLock&&eaFree(o))?c.eaLock:"";const n=String(c.n||"").replace(/<[^>]+>/g,"").trim();const M=eaMine();if(!M.b)return"";const T=eaTemper(S);
   /* another answer she can really take (bạc enough) of the wanted kind must stay open: never a dead end (bot r3: "Làm ngơ" greyed while
      the only other answer cost bạc she lacked → stuck) */
-  const usable=o=>o&&o!==c&&!(o.fx&&o.fx.bac&&S.bac+o.fx.bac<0);const nmO=o=>String(o.n||"").replace(/<[^>]+>/g,"").trim();
+  const usable=o=>o&&o!==c&&eaFree(o);const nmO=o=>String(o.n||"").replace(/<[^>]+>/g,"").trim();
   if(T.k==="hot"&&M.g==="gian"&&M.hv&&S.mood.v<=-E().out.v&&EA_HOLD.test(n)&&m.opts.some(o=>usable(o)&&EA_HIT.test(nmO(o))))return`ngươi đang ${M.b.name.toLowerCase()}, tính nóng, không nhịn nổi`;
   if(T.k==="timid"&&M.i<=-2&&M.g&&M.hv&&EA_HIT.test(n)&&m.opts.some(o=>usable(o)&&!EA_HIT.test(nmO(o))))return`ngươi đang ${M.b.name.toLowerCase()}, tính nhút nhát, không dám`;}catch(e){}return""}
 window.eaLockWhy=eaLockWhy;
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const m=Q[0];if(m&&m.opts)document.querySelectorAll("#modal .opts > button.opt[data-m]").forEach(b=>{const c=m.opts[+b.dataset.m];const why=eaLockWhy(c,m);if(!why)return;
   b.disabled=true;const sm=b.querySelector("small");if(sm)sm.textContent="Cần: "+why;if(!c.__eaN){c.__eaN=1;cnt(EA_N,"lock")}})}catch(e){}return r}})();
-(function(){if(typeof chooseM!=="function")return;const c0=chooseM;chooseM=function(i){try{const m=Q[0];if(m&&m.opts&&eaLockWhy(m.opts[i],m)){/* the button is disabled; a script call (bots) takes the answer her temper allows */const j=m.opts.findIndex(o=>o&&!eaLockWhy(o,m)&&!(o.fx&&o.fx.bac&&S.bac+o.fx.bac<0));if(j<0||j===i)return;arguments[0]=i=j}}catch(e){}return c0.apply(this,arguments)}})();
+(function(){if(typeof chooseM!=="function")return;const c0=chooseM;chooseM=function(i){try{const m=Q[0];if(m&&m.opts&&eaLockWhy(m.opts[i],m)){/* the button is disabled; a script call (bots) takes the answer her temper allows */const j=m.opts.findIndex(o=>o&&!eaLockWhy(o,m)&&eaFree(o));if(j<0||j===i)return;arguments[0]=i=j}}catch(e){}return c0.apply(this,arguments)}})();
 window.eaDo=eaDo;window.eaKeyOf=eaKeyOf;window.eaSay=eaSay;window.eaExtNpc=eaExtNpc;window.eaPeople=eaPeople;window.eaNpcWeek=eaNpcWeek;
 window.eaStat=function(){return JSON.parse(JSON.stringify(EA_N))};
 })();
@@ -83074,7 +83080,7 @@ const TM={t0:0,id:null,stop(){if(this.id){clearInterval(this.id);this.id=null}th
   this.id=setInterval(()=>{try{const x=X();if(!x||x.me!==undefined){this.stop();return}const left=E-(Date.now()-this.t0);
    const el=document.querySelector("#mb .kchips.kctm");if(el&&typeof kitCoopClock==="function")el.outerHTML=kitCoopClock({left:Math.max(0,left),len:E});   /* the kit text pass drops the wrapper id: find the chip row itself */
    if(left<=0){this.stop();const i=Q.findIndex(m=>m&&m.pid==="nfch");
-    if(i===0&&!$("modal").hidden){const j=Q[0].opts.findIndex(c=>c.n==="Thôi");chooseM(j)}else{if(i>=0)Q.splice(i,1);mine(null);try{showModal();render()}catch(e){}}}}catch(e){console.error(e)}},250)}};
+    const j=i===0&&!$("modal").hidden?Q[0].opts.findIndex(c=>c&&c.n==="Thôi"):-1;/* flight-choose-guard: never chooseM(−1) */if(j>=0)chooseM(j);else{if(i>=0)Q.splice(i,1);mine(null);try{showModal();render()}catch(e){}}}}catch(e){console.error(e)}},250)}};
 if(typeof showModal==="function"){const sm0=showModal;showModal=function(){
  /* the scene just closed and the choice is due: it goes up first (showChoice puts it at the front), never a card queued meanwhile
     (a reward, a person met) in the ≤250 ms before step's next tick (owner OD 16/11 22:45Z: the choice right after the scene) */
@@ -96311,10 +96317,13 @@ window.DQ=DQ;
    (arm A co-op 9B2G wk35: j68c-sea-023 at bạc 2; solo too). Authors keep a road she can take (law 2; gates: dev/test/j68seeds_validate.py,
    dev/test/dead-card.js scans every buildable card at bạc 0). This is the last guard for a card the scan cannot build: the kit close button
    (#mr .main, the kit close word «Lui», KIT_CLOSE_W) appears and the card passes with no effect; logged in window.__deadCards for the robots. */
-function deadCardOff(c){if(!c)return true;if(c.off)return true;if(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)return true;if(c.lock)return true;
+function deadCardOff(c){if(!c)return true;if(c.off)return true;if(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)return true;if(c.lock||c.tsDis)return true;if(c.need&&c.need.some(n=>n&&!n.ok))return true;
  if(typeof c.lk==="function"){try{if(c.lk())return true}catch(e){}}return false}
 function deadCardIs(m){if(!m||!Array.isArray(m.opts)||!m.opts.length)return false;if(m.opts.some(c=>c&&c.kgx))return false;
- const ci=typeof kitCancelIx==="function"?kitCancelIx(m):-1;if(ci>=0)return false;return m.opts.every(deadCardOff)}
+ const ci=typeof kitCancelIx==="function"?kitCancelIx(m):-1;if(ci>=0)return false;if(m.opts.every(deadCardOff))return true;
+ /* flight-choose-guard (law 11): the screen is the truth — a wrapper greys options in the DOM only (jemoact temper lock, jts tsDis, jtsb need):
+    every visible option button of this card disabled = dead too (a custom picker that hides its .opt buttons is not judged here) */
+ try{const B=[...document.querySelectorAll("#modal .opts button[data-m]")].filter(b=>!b.hidden&&b.getClientRects().length);return B.length>0&&B.every(b=>b.disabled)}catch(e){return false}}
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{
  const M=$("modal"),m=Q[0],mr=$("mr");if(!M||M.hidden||!mr||mr.querySelector("#mclose")||!deadCardIs(m))return r;
  mr.innerHTML=`<button class="main" id="mclose">Lui</button>`;if(typeof kitFix==="function")kitFix(mr);
@@ -98232,7 +98241,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="343c19615a14";window.CTM_BUILD=BUILD;
+const BUILD="245488ac1ec6";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

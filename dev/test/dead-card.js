@@ -2,7 +2,7 @@
    and no cancel exists (no ✕ / Esc / tap-out) = deadlock? Builds every PEND builder (E68 templates incl. composed j68c via pp, j7 EV via pp, other PEND via {})
    at bạc 0 and ranks 0/3/6, and counts cards whose every option is greyed (c.off / poor bạc / lk() / lock).
    Part 2: j68c-sea-023 / j68c-serv-022 at bạc 2 keep ≥1 option she can press; Part 3: the jdeadcard net — a synthetic all-greyed card shows
-   the kit «Lui» button, pressing it closes the card (no soft-lock). Exit 1 on any failure.
+   the kit «Lui» button, pressing it closes the card (no soft-lock). Part 4: an out-of-card pick (99 / −1 / undefined) is refused without a page error; Part 5: a temper lock never greys the last road she can pay. Exit 1 on any failure.
    Parts 2/3 open the card as a player tap would (DQ.user, jdayq day-queue 25/11: otherwise a fresh life's dawn / activity holds the card unpainted).
    usage: node dev/test/dead-card.js <page url> [out.json]   (serve the repo root, e.g. python3 -m http.server) */
 const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT]=process.argv;
@@ -34,4 +34,13 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT]=
  const P3=await p.evaluate(()=>{const SM=()=>{const D=typeof DQ!=='undefined'?DQ:null;if(D)D.user=(D.user||0)+1;try{showModal()}finally{if(D)D.user--}};S.bac=2;Q.length=0;Q.push({t:'Thử',h:'<p>thử</p>',opts:[{n:'Trả bạc',fx:{bac:-60}},{n:'Trả bạc nữa',fx:{bac:-60}}]});SM();
   const c=document.getElementById('mclose');const r={lui:c?c.textContent:null,net:(window.__deadCards||[]).length};if(c)c.click();r.after=Q.length;r.hidden=document.getElementById('modal').hidden;return r});
  console.log('part3',JSON.stringify(P3));if(P3.lui!=='Lui'||P3.after!==0)fail++;
+ /* Part 4 (flight-choose-guard): a pick whose index is not on the card (stale / relayed / findIndex −1) is refused, the card stays, no page error */
+ const P4=await p.evaluate(()=>{const SM=()=>{const D=typeof DQ!=='undefined'?DQ:null;if(D)D.user=(D.user||0)+1;try{showModal()}finally{if(D)D.user--}};S.bac=500;Q.length=0;Q.push({t:'Thử chọn',h:'<p>thử</p>',opts:[{n:'Một',fx:{}},{n:'Hai',fx:{}}]});SM();
+  let err='';for(const i of [99,-1,undefined]){try{chooseM(i)}catch(e){err+=e.message+';'}}const r={err,Q:Q.length,bad:(window.__badPick||[]).length};Q.length=0;SM();return r});
+ console.log('part4',JSON.stringify(P4));if(P4.err||P4.Q!==1||P4.bad<3)fail++;
+ /* Part 5 (flight-choose-guard, law 11): her temper lock (jemoact eaLock) never greys the last option she can really take: a card of one bạc
+    road she cannot pay + one temper-locked road keeps the temper road open (before: both greyed = dead card, arm B H77P shape) */
+ const P5=await p.evaluate(()=>{const SM=()=>{const D=typeof DQ!=='undefined'?DQ:null;if(D)D.user=(D.user||0)+1;try{showModal()}finally{if(D)D.user--}};S.bac=2;Q.length=0;Q.push({t:'Thử tính khí',h:'<p>thử</p>',opts:[{n:'Trả bạc',fx:{bac:-60}},{n:'Nhịn',fx:{},eaLock:'tính nóng'}]});SM();
+  const B=[...document.querySelectorAll('#modal .opts button[data-m]')];const r={open:B.filter(b=>!b.disabled).length+'/'+B.length,lui:!!document.getElementById('mclose')};Q.length=0;SM();return r});
+ console.log('part5',JSON.stringify(P5));if(/^0\//.test(P5.open)&&!P5.lui)fail++;
  if(OUT)fs.writeFileSync(OUT,JSON.stringify(Object.assign(R,{P2,P3}),null,1));console.log(fail?'DEAD-CARD FAIL '+fail:'DEAD-CARD PASS');await b.close();process.exit(fail?1:0)})();
