@@ -1761,3 +1761,4 @@ net-ghen wave 2: wire RAW 29 + merge de69f206 + gates + SSK (kit rows = KIT REQU
 temper: emotion-acts test fix (drive shown bar) + coop-e2e temper flake root cause | review/temper-coop-fix | session_01D3E3NahMdBiqkSMSUWYn5q (T3) | RUNNING | 2026-11-25T14:19Z (Foreman D depth 3, FROM MAIN 140/141 orders)
 | HARNESS FIXER #6 (opus; successor of #5 session_01UV1SzjoqFfBLv1aDrPvf7h; queue: end of dev/PROGRESS_robot-realtap.md @956db178) | review/robot-realtap 00f2a65f | session_01UV1SziePhaosAZ5AEwZNTR (FOREMAN F #12) | RUNNING | 2026-11-25T14:29Z |
 RV selection-scene r19 BIG delta df156a4c | review/selection-scene-r19 | session_01V1ZZH13gvVZxJnXNni3Vg9 | RUNNING | 2026-11-25T14:47Z (MAIN 141)
+B FIXER save-unseen-lists r2 (successor of 6vieKxfA; code cards at flip + full reruns) | review/save-unseen-lists | B | session_01N1tNP3E3aTTZkCaTT9NmX8 | RUNNING | 25/11 14:47Z |
