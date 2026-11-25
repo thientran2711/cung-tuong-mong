@@ -3328,3 +3328,4 @@ SẴN SÀNG KIỂM huong-cue-2 fffd3f59
 - (04:51Z) SANSANG-MUSIC-FIX LAND READY c70cfd17 SMALL (132 LOOKED pair, GO to LC13 TOP); 133 confirmed GO; order = first ready of 4da55ce8 / c70cfd17 lands first. 2nd branch (Lời dặn dead + tèo sfx) owed.
 - (04:52Z) LIVE 4da55ce8 (flight-modal-deadlock-r) 04:50Z; ROLLBACK 49f17d4d. Told sếp. sansang c70cfd17 merging on 4da55ce8 (GO given). SANSANG worker started review/sansang-music-fix-2 (Lời dặn dead ✕/Đã hiểu + tèo sfx + hoa-dien hang).
 - (04:55Z) SELSCENE-17 rolled (ctx 25 %), not LAND READY; review/selection-scene @ 97fb86b2. Asked 132 to open SELSCENE-18 (opus). MAIN ruling (d): do not change allServ(); fix sidN locally to count S.thO.staff, whole id-issuing family. Archive SELSCENE-17 after 18 acks.
+- (04:54Z) SELSCENE-18 = session_01V1ZZH1WL4tMnAwdaNDf6YP (opus, opened by 132 for 133). SELSCENE-17 archived. BIG rv delegate-nomg 22tLFisY waiting worker's new sha.
