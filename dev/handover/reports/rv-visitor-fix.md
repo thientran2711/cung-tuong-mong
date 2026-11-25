@@ -1,3 +1,11 @@
+# BIG REVIEW visitor-fix — MERGE r8: BIG PASS 42af6315 (review/visitor-fix-r8-rv = worker merge 814d272f + reviewer merge fix)
+
+814d272f = review/viecnho-fix-r2 518aef86 + visitor-fix-2 0b4e1e65 (on BIG-PASSED a6f7715a). Ancestors OK: origin/main 502c48c9, 518aef86, a6f7715a.
+Merge check (every line a6f7715a added to j61/j63 vs 502c48c9, kept/lost scan): all kept EXCEPT j61:214 hc relation hint, which went back to «Còn N phi tần ngươi chưa quen biết» (owner 22:14Z: never «chưa quen biết») → reviewer fix 42af6315 restores «chưa gặp mặt». j63 stranger-line search (a6f7715a regex) is replaced by flight-ui's kaWhyWho, which no longer reads stranger log lines — fine. kitNoUnk/«???» tag handling = flight-ui (tags keep «???», prose «một vị …», OD:L673).
+0b4e1e65 (SMALL, worker): know notices in narration — «Ngươi gặp <một vị …>.», «<Title> xưng danh với ngươi.» — OK (closes advisory 3 for the toast voice).
+Tests on 42af6315: quickcheck PASS (old save ok, core gates PASS) · coop-e2e 142/142 · visitor-scene Fold + iPad PASS · greet-stranger PASS · know-notice bad 0 · name-mask-scan PASS 0 hits · viecnho-fix.test ALL OK · viecnho-map.test 28 places ALL OK.
+Shots (Fold | iPad): img/_review/visitor-fix/r8-pair-hi.jpg (Quý phi giá đáo, face + name), r8-pair-unnamed.jpg (toast «Ta gặp một vị phi tần áo bậc Thường tại.»; line «Tần thiếp thỉnh an tiểu chủ.»).
+
 # BIG REVIEW review/visitor-fix — FINAL VERDICT: BIG PASS a6f7715a (review/visitor-fix-r6 = worker fe9eb3a9 + reviewer small fixes R6 f4b8254c + R7 a6f7715a)
 
 R7 (a6f7715a, asked by MAIN 129): a visitor who comes to HER door to ask for an audience knows whose palace it is — npcLearn(v,S) on the door arrival; grLine drops «nàng chưa biết tên ngươi» when G.arr; the «Xưng danh đáp lễ / Khẽ gật đầu» name-reply options are not offered after a door arrival. Now: «Tần thiếp Quý nhân <tên> xin cầu kiến.» … «Ngươi khẽ nâng tay: “Miễn lễ.”»; equals «Hai bên chào nhau theo lễ.»
