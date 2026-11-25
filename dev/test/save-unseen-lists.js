@@ -167,8 +167,40 @@ async function drift(b,dev,url,seed){const one=wait=>play(b,dev,url,seed,async(p
  const z=await one(0),f=await one(4000);
  return{pass:z.pass&&f.pass,line:`moments sổ ≠ screen: ${z.mis+f.mis} · reload 0 s ${z.a&&z.a.v===z.s.v&&z.a.hud===z.s.hud?'same':'DRIFT '+(z.a&&z.a.v)} · reload 4 s ${f.a&&f.a.v===f.s.v&&f.a.hud===f.s.hud?'same':'DRIFT '+(f.a&&f.a.v)} (${f.s.v})`+(z.L.concat(f.L).length?'\n    '+z.L.concat(f.L).slice(0,6).join('\n    '):'')+(z.pe.concat(f.pe).length?' · pageerror '+z.pe.concat(f.pe)[0]:'')}}
 
+/* ---------- family (save-unseen-lists r4, brief GATE «one true reload at an ordinary buổi with each family card pending, both devices») ----------
+   A seeded life plays to an ordinary buổi (no flip); every code-card family a step can make that r4 put in a generator is made by its own generator
+   from the live world (as the step makes it), the step's at-once write (jqSaveNow) reaches the slot, the first card is on screen (shot), then a TRUE
+   reload → «Tiếp tục kiếp này»: every card must be back (same titles, same number of choices) and the first one shows (shot). Families whose world
+   state is not there in this life (a contest / a festival / a faction / a plant) are listed «not in this world» (their remake is covered by
+   save-residue-probe). env SUL_SHOT=<dir> writes the shots. */
+const FAMJS=`(()=>{const R=liveRivals(true).filter(v=>v&&v.alive&&!v.out);const v=R[0],v2=R[1]||R[0];const sv=(S.staff||[]).find(x=>x&&x.sid!=null)||S.maid;const out=[];
+ const mk=(n,f)=>{let m=null,e='';try{m=f()}catch(x){e=String(x&&x.message||x).slice(0,60)}if(m&&!Q.includes(m))Q.push(m);out.push({n,t:m?String(m.t||''):'',rk:m&&m.rk||'',o:m&&m.opts?m.opts.length:0,e})};
+ /* a generator that lives inside its module's closure: called through the registry as its registered wrapper does (rk + ra) */
+ const K=(k,...a)=>{const m=QRC[k].apply(null,a);if(m&&m.opts&&m.opts.length){m.rk=k;m.ra=rcpEnc(a)}return m};
+ mk('tsWarn',()=>tsWarnCard(v));mk('tsLeMe',()=>tsLeMeCard(Math.min(7,(S.rank||0)+1),[v,v2],[{who:v,text:kitName(v)+' chúc theo lễ.'}],[]));mk('tsLeNpc',()=>tsLeNpcCard(v,3,'lễ',true));
+ mk('tsSummon',()=>tsSummonMe('dan'));mk('tsDressAnn',()=>tsDressAnnCard('thanh',S.month%12+1));mk('tsDress',()=>tsDressCard('thanh',S.month,S.year));
+ mk('eaHitMine',()=>K('eaHitMine',v,S.maid));mk('eaHoi',()=>K('eaHoi',v));mk('eaMe',()=>{const O=eaOpts(S,null,'gian');return O.length?K('eaMe',O.map(r=>[r.k,r.g,r.w0]),'giận','','gian','gian',''):null});
+ S.pregUnk=S.pregUnk||1;mk('thNausea',()=>K('thNausea'));mk('svMarket',()=>svMarketCard(sv,Object.keys(IT).find(k=>itm(k).il)));
+ mk('banCung',()=>bcCard(S.pal!=null?S.pal:0));
+ mk('j95Caught',()=>j95CaughtCard(v,{a:'v'+v.id,kind:'meet',spot:'ngự hoa viên',k:'vuon',kh:[0],key:'t'},'see','thì thầm trao đồ với tay chân'));mk('j95Bribe',()=>j95BribeCard(v,20));
+ mk('spLeave',()=>spLeaveCard(sv));mk('slapNpc',()=>K('slapNpc',v,'tat',null,2));mk('lkNpc',()=>K('lkNpc',v,Object.keys(LK_ACT)[0],null,1));
+ mk('toilPop',()=>toilPopCard({k:'th-scold',host:'th',n:-3,name:'Thái hậu',line:'áo trái mùa: Thái hậu thiện cảm -3',say:'Áo này không hợp mùa.',ctx:{}},''));
+ mk('facAsk',()=>{const l=R.find(x=>facOf(x));return l?facAskCard(l,'cùng chung kẻ thù'):null});mk('dcAsk',()=>dcAskCard(v));
+ mk('shelfWither',()=>{const z=shelfOf(S);const g=z&&z.g&&Object.keys(z.g)[0];return g!=null?shelfWitherCard(g):null});
+ mk('j34Between',()=>typeof ct==='function'&&ct()?j34BetweenCard():null);
+ return out})()`;
+const LISTJS=`(()=>[...Q,...(typeof SP13!=='undefined'?SP13.L.map(x=>x.m):[]),...(typeof EVHOLD!=='undefined'?EVHOLD.map(h=>h.m):[])].filter(m=>m&&m.rk).map(m=>m.rk+'|'+String(m.t||'').replace(/<[^>]+>/g,'')+'|'+(m.opts?m.opts.length:0)).sort())()`;
+async function family(b,dev,url,seed){return play(b,dev,url,seed,async(p,open,pe)=>{await open();
+ const k0=await p.evaluate(async()=>{__sbr.newLife();const sl=t=>new Promise(r=>setTimeout(r,t));for(let i=0;i<3;i++){const k=__sbr.key();used=BAL.time.khac;const n=document.getElementById('next');n.disabled=false;n.click();await __sbr.after(k)}await __sbr.settle();return __sbr.key()});
+ const made=await p.evaluate(FAMJS);const w=await p.evaluate(()=>{Q.splice(0,Q.length,...Q.filter(m=>m&&m.rk));const n0=SAVE_N;jqSaveNow();showModal();return{wrote:SAVE_N!==n0,key:__sbr.key(),saved:__sbr.saved()}});
+ const L0=await p.evaluate(LISTJS);const SH=process.env.SUL_SHOT;if(SH){await p.waitForTimeout(600);await p.screenshot({path:`${SH}/family-${dev}-before.png`})}
+ const t=await reloadTitle(p,open);let L1=[],key='';if(t.cont){await cont(p);L1=await p.evaluate(LISTJS);key=await p.evaluate(()=>{try{showModal()}catch(e){}return __sbr.key()});if(SH){await p.waitForTimeout(600);await p.screenshot({path:`${SH}/family-${dev}-after.png`})}}
+ const miss=L0.filter((x,i)=>L1.filter(y=>y===x).length<L0.filter(y=>y===x).length);const ok=made.filter(m=>m.rk),no=made.filter(m=>!m.rk);
+ const pass=w.wrote&&t.cont&&key===w.key&&ok.length>=15&&!miss.length&&L1.length===L0.length&&!pe.length;
+ return{pass,line:`ordinary buổi ${k0} · ${ok.length} families made (${ok.map(m=>m.rk+' «'+m.t.slice(0,22)+'» ×'+m.o).join(', ')}) · not in this world: ${no.map(m=>m.n+(m.e?' ('+m.e+')':'')).join(', ')||'none'}
+    at-once write ${w.wrote?'reached the slot':'NOT written'} (${w.saved}) · reload → ${t.cont?'«Tiếp tục» '+key:'NO «Tiếp tục»'} · cards before ${L0.length} after ${L1.length}${miss.length?' · LOST '+miss.join(' ; '):' · every card back'}${pe.length?' · pageerror '+pe[0]:''}`}})}
 (async()=>{const srv=await D.serveRoot();const b=await chromium.launch();const url=srv.url+PAGE;let fail=0,n=0;const seed=+SEED;
- const C=[['tinbao',tinbao],['held',held],['nl-0s',(b,d,u,s)=>nl0(b,d,u,s,false)],['nl-card',nlCardCase],['nl-death',(b,d,u,s)=>nl0(b,d,u,s,true)],['nl-4s',nl4],['drift',drift]];
+ const C=[['tinbao',tinbao],['held',held],['nl-0s',(b,d,u,s)=>nl0(b,d,u,s,false)],['nl-card',nlCardCase],['nl-death',(b,d,u,s)=>nl0(b,d,u,s,true)],['nl-4s',nl4],['drift',drift],['family',family]];
  const FCF=(process.env.SUL_FC||'month,year').split(','),FCW=(process.env.SUL_FCW||'0,3000').split(',').map(Number),FCS=(process.env.SUL_FCS||'1,2').split(',').map(Number);
  for(const f of FCF)for(const w of FCW)for(const s of FCS)C.push([`flip-${f}-${w/1000}s-s${s}`,(b,d,u)=>flipcards(b,d,u,s,f,w)]);
  for(const dev of DEVS.split(','))for(const [name,fn] of C){if(!want(name)&&!(ONLY.includes('flip')&&name.startsWith('flip-')))continue;let r;try{r=await fn(b,dev,url,seed)}catch(e){r={pass:false,line:'ERROR '+String(e&&e.message||e).slice(0,200)}}
