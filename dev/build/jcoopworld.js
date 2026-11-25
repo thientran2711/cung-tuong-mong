@@ -263,11 +263,18 @@ function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
    → two people on one j61 key (coop-e2e host rebirth: s1 «Tố Cầm» / «Tiểu Đào», x33 two men). After the join: both counters continue past
    every id the world holds, and her own new people that collide get fresh ids. */
 function lifeRekey(){const mine=new Set([S.maid].concat(S.staff||[],S.kids||[],(S.kc&&S.kc.fam)||[]).filter(e=>e&&typeof e==="object"));
+ /* review (flight-sid-rebirth-r): the new life's j61 levels (k61InitNew: her own household known) were written under the OLD keys before this
+    join (jcoopworld's start / nlRun wrappers run attach after j61's): move them with the id, else her own maid / servant read «Người lạ» and the
+    old-world person on the old key read «Quen biết» */
+ const mv=[];const kOf=e=>{try{return typeof kOf61==="function"?kOf61(e):""}catch(x){return""}};
  const wSv=new Map();for(const e of allServ())if(e&&e.sid!=null&&!mine.has(e)&&+e.sid<900)wSv.set(+e.sid,e);
- if(typeof sidN!=="undefined"){sidN=Math.max(sidN,...wSv.keys(),0);for(const e of mine)if(e.sid!=null&&wSv.has(+e.sid)){T("rekey s"+e.sid);e.sid=++sidN}}
+ if(typeof sidN!=="undefined"){sidN=Math.max(sidN,...wSv.keys(),0);for(const e of mine)if(e.sid!=null&&wSv.has(+e.sid)){T("rekey s"+e.sid);const k0=kOf(e);e.sid=++sidN;mv.push([e,k0])}}
  const all=typeof k61All==="function"?k61All():[];const kk=new Set();let mx=0;
  for(const e of all){if(!e||mine.has(e)||typeof e.kk!=="string")continue;kk.add(e.kk);const n=+e.kk.slice(1);if(n>mx)mx=n}
- S.kseq=Math.max(S.kseq||0,mx);for(const e of mine)if(typeof e.kk==="string"&&kk.has(e.kk)){T("rekey "+e.kk);e.kk="x"+(S.kseq=S.kseq+1)}}
+ S.kseq=Math.max(S.kseq||0,mx);for(const e of mine)if(typeof e.kk==="string"&&kk.has(e.kk)){T("rekey "+e.kk);const k0=kOf(e);e.kk="x"+(S.kseq=S.kseq+1);mv.push([e,k0])}
+ for(const [e,k0] of mv){const k1=kOf(e);if(!k0||!k1||k0===k1)continue;for(const M of [S.known,S.nkn])if(M&&typeof M==="object"&&k0 in M){M[k1]=M[k0];delete M[k0]}try{if(KREG[k0]===e)delete KREG[k0]}catch(x){}}
+ if(mv.length&&typeof K61VER!=="undefined")try{K61VER++}catch(x){}}
+CW.lifeRekey=()=>lifeRekey();/* test hook (dev/test/sid-rekey-known.js) */
 CW.attach=()=>{const C=CW.dying||CW.base;if(C)attach(C)};
 /* jcoopthin (thin guest, part A) reads the world split and the friend-entry builders from here: one source */
 CW.X={W_KEYS,HOST_ONLY,CM_P,MEN_P,REFF,STAT,mapMe,buildFriend,buildFriendSrv,friendSrv,myBlob,pullFriend,pushFriend,isF,J};
